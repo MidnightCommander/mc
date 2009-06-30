@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-14 19:43+0000\n"
+"POT-Creation-Date: 2009-06-30 19:39+0200\n"
 "PO-Revision-Date: 2006-08-16 16:20+0400\n"
 "Last-Translator: Phan Vĩnh Thịnh <teppi82@gmail.com>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
@@ -55,8 +55,15 @@ msgstr " Tập tin %s quá lớn "
 msgid "Macro recursion is too deep"
 msgstr "Đệ qui của macro quá sâu"
 
-msgid "&Dismiss"
-msgstr "Đó&ng"
+msgid "Search"
+msgstr "Tìm"
+
+#, c-format
+msgid " %d items found, %d bookmarks added "
+msgstr " tìm thấy %d mục, đã thêm %d đánh dấu (bookmark) "
+
+msgid " Search string not found "
+msgstr " Không tìm thấy chuỗi tìm kiếm "
 
 msgid "Warning"
 msgstr "Cảnh báo"
@@ -115,9 +122,6 @@ msgstr "&Ghi chèn"
 msgid " Cannot save file. "
 msgstr " Không thể ghi nhớ tập tin. "
 
-msgid "Cancel"
-msgstr "Hủy bỏ"
-
 msgid " Delete macro "
 msgstr " Xóa macro "
 
@@ -161,88 +165,43 @@ msgstr ""
 msgid "C&ontinue"
 msgstr "&Tiếp tục"
 
+msgid "Syntax file edit"
+msgstr "Soạn thảo tập tin cú pháp"
+
+msgid " Which syntax file you want to edit? "
+msgstr " Soạn thảo tập tin cú pháp nào? "
+
+msgid "&User"
+msgstr "&Người dùng"
+
+msgid "&System Wide"
+msgstr "&Hệ thống"
+
+msgid " Menu edit "
+msgstr " Soạn thảo tập tin trình đơn "
+
+msgid " Which menu file do you want to edit? "
+msgstr " Soạn thảo tập tin trình đơn nào? "
+
+msgid "&Local"
+msgstr "&Nội bộ máy"
+
 msgid " Load "
 msgstr " Nạp "
 
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " Khối quá lớn, có thể bạn sẽ không hủy bỏ được bước này. "
 
-msgid "O&ne"
-msgstr "&Một"
-
-msgid "A&ll"
-msgstr "&Tất cả"
-
-msgid "&Skip"
-msgstr "&Bỏ qua"
-
-msgid "&Replace"
-msgstr "&Thay thế"
-
-msgid " Replace with: "
-msgstr " Thay thế bằng: "
-
-msgid " Confirm replace "
-msgstr " Phê chuẩn thay thế "
-
-msgid "scanf &Expression"
-msgstr "biểu thức &Scanf"
-
-msgid "replace &All"
-msgstr "&Thay thế tất cả"
-
 #, fuzzy
-msgid "pro&Mpt on replace"
-msgstr "&Hỏi trước khi thay"
-
-msgid "&Backwards"
-msgstr "&Tìm ngược lại"
-
-msgid "&Regular expression"
-msgstr "&Biểu thức chính quy"
-
-msgid "&Whole words only"
-msgstr "&Chỉ những từ đầy đủ"
-
-msgid "case &Sensitive"
-msgstr "có tính &Kiểu chữ"
-
-msgid " Enter replacement argument order eg. 3,2,1,4 "
-msgstr " Hãy nhập thứ tự của tham số thay thế, ví dụ 3,2,1,4 "
-
-msgid " Enter replacement string:"
-msgstr " Nhập chuỗi thay thế:"
-
-msgid " Enter search string:"
-msgstr " Nhập chuỗi tìm kiếm:"
+msgid "Replace"
+msgstr "&Thay thế"
 
 msgid " Replace "
 msgstr " Thay thế "
 
-msgid "Search"
-msgstr "Tìm"
-
-msgid ""
-" Invalid regular expression, or scanf expression with too many conversions "
-msgstr ""
-" Biểu thức chính quy không đúng, hoặc biểu thức scanf có quá nhiều biến đổi "
-
-msgid " Error in replacement format string. "
-msgstr " Lỗi trong định dạng chuỗi thay thế. "
-
-msgid " Replacement too long. "
-msgstr " Chuỗi thay thế quá dài. "
-
 #, c-format
 msgid " %ld replacements made. "
 msgstr " %ld thay thế được thực hiện. "
-
-msgid " Search string not found "
-msgstr " Không tìm thấy chuỗi tìm kiếm "
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " tìm thấy %d mục, đã thêm %d đánh dấu (bookmark) "
 
 msgid "Quit"
 msgstr "Thoát"
@@ -356,6 +315,52 @@ msgstr " Nhấn phím bất kỳ: "
 msgid " Execute Macro "
 msgstr "Thực hiện Macro "
 
+#, fuzzy
+msgid "pro&Mpt on replace"
+msgstr "&Hỏi trước khi thay"
+
+msgid "replace &All"
+msgstr "&Thay thế tất cả"
+
+msgid "All charsets"
+msgstr ""
+
+msgid "&Backwards"
+msgstr "&Tìm ngược lại"
+
+msgid "case &Sensitive"
+msgstr "có tính &Kiểu chữ"
+
+msgid " Enter replacement string:"
+msgstr " Nhập chuỗi thay thế:"
+
+msgid " Enter search string:"
+msgstr " Nhập chuỗi tìm kiếm:"
+
+msgid "Cancel"
+msgstr "Hủy bỏ"
+
+msgid "O&ne"
+msgstr "&Một"
+
+msgid "A&ll"
+msgstr "&Tất cả"
+
+msgid "&Skip"
+msgstr "&Bỏ qua"
+
+msgid "&Replace"
+msgstr "&Thay thế"
+
+msgid " Replace with: "
+msgstr " Thay thế bằng: "
+
+msgid " Confirm replace "
+msgstr " Phê chuẩn thay thế "
+
+msgid "&Dismiss"
+msgstr "Đó&ng"
+
 msgid " Emacs key: "
 msgstr "Phím Emacs: "
 
@@ -431,32 +436,79 @@ msgstr "&Tập tin mới           C-x k"
 msgid "Copy to &file...     "
 msgstr "S&ao chép vào tập tin...    "
 
-msgid "&Toggle Mark       F3"
+#, fuzzy
+msgid "&Toggle mark                 F3"
 msgstr "&Bật/tắt bôi đen           F3"
 
-msgid "&Mark Columns    S-F3"
+#, fuzzy
+msgid "Mar&k columns              S-F3"
 msgstr "Bôi đen &cột             S-F3"
 
-msgid "Toggle &ins/overw Ins"
+#, fuzzy
+msgid "Toggle &ins/overw           Ins"
 msgstr "Chế độ chèn/&thay thế     Ins"
 
-msgid "&Copy              F5"
-msgstr "&Sao chép                  F5"
+#, fuzzy
+msgid "&Copy                        F5"
+msgstr "sao &Chép               F5"
 
-msgid "&Move              F6"
+#, fuzzy
+msgid "&Move                        F6"
 msgstr "&Di chuyển                 F6"
 
-msgid "&Delete            F8"
-msgstr "&Xóa                       F8"
+#, fuzzy
+msgid "&Delete                      F8"
+msgstr "xó&A                    F8"
 
-msgid "&Undo             C-u"
+#, fuzzy
+msgid "C&opy to clipfile         C-Ins"
+msgstr "S&ao chép vào tập tin...    "
+
+#, fuzzy
+msgid "C&ut to clipfile          S-Del"
+msgstr "&Chuyển tới dòng...             M-l"
+
+msgid "&Paste from clipfile      S-Ins"
+msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "&Bật/tắt bôi đen           F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "&Tập tin mới             C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "&Sắp xếp...                      M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "T&hư điện tử...                     "
+
+#, fuzzy
+msgid "&Undo                       C-u"
 msgstr "&Hủy bước                 C-u"
 
-msgid "&Beginning     C-PgUp"
+#, fuzzy
+msgid "&Beginning               C-PgUp"
 msgstr "Đầ&u tập tin           C-PgUp"
 
-msgid "&End           C-PgDn"
+#, fuzzy
+msgid "&End                     C-PgDn"
 msgstr "Cuố&i tập tin          C-PgDn"
+
+#, fuzzy
+msgid "C&opy to clipfile           M-w"
+msgstr "&Chuyển tới dòng...             M-l"
+
+#, fuzzy
+msgid "C&ut to clipfile            C-w"
+msgstr "&Chuyển tới dòng...             M-l"
+
+msgid "&Paste from clipfile        C-y"
+msgstr ""
 
 msgid "&Search...         F7"
 msgstr "Tìm &kiếm...               F7"
@@ -470,8 +522,25 @@ msgstr "Th&ay thế...               F4"
 msgid "&Go to line...            M-l"
 msgstr "&Chuyển tới dòng...             M-l"
 
+#, fuzzy
+msgid "Toggle li&ne state        M-n"
+msgstr "&Bật/tắt bôi đen           F3"
+
 msgid "Go to matching &bracket   M-b"
 msgstr "Chuyển &tới dấu ngoặc tạo cặp    M-b"
+
+msgid "Find declaration      A-Enter"
+msgstr ""
+
+msgid "Back from declaration     M--"
+msgstr ""
+
+msgid "Forward to declaration    M-+"
+msgstr ""
+
+#, fuzzy
+msgid "Encod&ing...             C-t"
+msgstr "&Sắp xếp...                      M-t"
 
 msgid "Insert &literal...       C-q"
 msgstr "Chèn &văn bản thuần túy...       C-q"
@@ -530,8 +599,17 @@ msgstr "&Tạo phím tắt..."
 msgid "Syntax &Highlighting..."
 msgstr "&Chiếu sáng cú pháp..."
 
-msgid "Save setu&p..."
-msgstr "&Ghi nhớ cấu hình..."
+#, fuzzy
+msgid "S&yntax file"
+msgstr "Soạn thảo tập tin cú pháp"
+
+#, fuzzy
+msgid "&Menu file"
+msgstr "soạ&N thảo tập tin trình đơn"
+
+#, fuzzy
+msgid "Save setu&p"
+msgstr "&Ghi nhớ cấu hình"
 
 msgid " File "
 msgstr " Tập tin "
@@ -571,6 +649,10 @@ msgstr "Vị trí chuyển dòng: "
 
 msgid "Tab spacing: "
 msgstr "Độ rộng tab: "
+
+#, fuzzy
+msgid "Pers&istent selection"
+msgstr "Chọn ngược lạ&I        M-*"
 
 msgid "Synta&x highlighting"
 msgstr "&Chiếu sáng cú pháp"
@@ -806,6 +888,10 @@ msgstr " hỏi lại trước khi &Xóa "
 
 msgid " Confirmation "
 msgstr " Hỏi xác nhận "
+
+#, fuzzy
+msgid "UTF-8 output"
+msgstr "Đầu ra 8 bit đầy đủ"
 
 msgid "Full 8 bits output"
 msgstr "Đầu ra 8 bit đầy đủ"
@@ -1047,8 +1133,16 @@ msgstr " Đầu lọc "
 msgid " Set expression for filtering filenames"
 msgstr " Đặt biểu thức để lọc tên tập tin (nhấn F1 để xem trợ giúp)"
 
-msgid "  Malformed regular expression  "
-msgstr "  Biểu thức chính quy không đúng  "
+msgid "&Using shell patterns"
+msgstr "&Sử dụng mẫu (pattern) của shell"
+
+#, fuzzy
+msgid "&Case sensitive"
+msgstr "tính đến kiể&U chữ"
+
+#, fuzzy
+msgid "&Files only"
+msgstr "&Chỉ theo kích thước"
 
 msgid " Select "
 msgstr " Chọn "
@@ -1061,27 +1155,6 @@ msgstr "Soạn thảo phần mở rộng tập tin"
 
 msgid " Which extension file you want to edit? "
 msgstr " Soạn thảo phần mở rộng tập tin nào? "
-
-msgid "&User"
-msgstr "&Người dùng"
-
-msgid "&System Wide"
-msgstr "&Hệ thống"
-
-msgid " Menu edit "
-msgstr " Soạn thảo tập tin trình đơn "
-
-msgid " Which menu file do you want to edit? "
-msgstr " Soạn thảo tập tin trình đơn nào? "
-
-msgid "&Local"
-msgstr "&Nội bộ máy"
-
-msgid "Syntax file edit"
-msgstr "Soạn thảo tập tin cú pháp"
-
-msgid " Which syntax file you want to edit? "
-msgstr " Soạn thảo tập tin cú pháp nào? "
 
 msgid " Compare directories "
 msgstr " So sánh thư mục "
@@ -1100,12 +1173,6 @@ msgstr "&Theo từng byte"
 
 msgid " Both panels should be in the listing mode to use this command "
 msgstr "Để thực hiện câu lệnh này cả hai bảng phải ở trong chế độ danh sách "
-
-msgid " The command history is empty "
-msgstr " Lịch sử dòng lệnh rỗng "
-
-msgid " Command history "
-msgstr " Lịch sử dòng lệnh "
 
 msgid ""
 " Not an xterm or Linux console; \n"
@@ -1284,9 +1351,6 @@ msgstr " Di chuyển "
 
 msgid " Delete "
 msgstr " Xóa "
-
-msgid " Invalid target mask "
-msgstr " Dấu hiệu đích đến không đúng "
 
 msgid " Cannot make the hardlink "
 msgstr " Không thể tạo liên kết cứng "
@@ -1563,6 +1627,10 @@ msgstr ""
 " Không thể xóa thư mục \"%s\" \n"
 " %s "
 
+#, fuzzy
+msgid "Directory scanning"
+msgstr " Đường dẫn tới thư mục"
+
 msgid "1Copy"
 msgstr "1Sao chép"
 
@@ -1722,9 +1790,6 @@ msgstr "đi theo &Liên kết"
 msgid "to:"
 msgstr "vào:"
 
-msgid "&Using shell patterns"
-msgstr "&Sử dụng mẫu (pattern) của shell"
-
 msgid "&Background"
 msgstr "Trong nền sa&u"
 
@@ -1734,10 +1799,8 @@ msgstr "liên kết &Bền vững"
 msgid "&Dive into subdir if exists"
 msgstr "&Vào thư mục con, nếu có"
 
-#, c-format
-msgid ""
-"Invalid source pattern `%s' \n"
-" %s "
+#, fuzzy, c-format
+msgid "Invalid source pattern `%s'"
 msgstr ""
 "Mẫu không đúng `%s' \n"
 " %s "
@@ -1766,6 +1829,22 @@ msgstr "X&em - F3"
 msgid "&Edit - F4"
 msgstr "&Soạn thảo - F4"
 
+#, c-format
+msgid "Found: %ld"
+msgstr ""
+
+#, fuzzy
+msgid " Malformed regular expression "
+msgstr "  Biểu thức chính quy không đúng  "
+
+#, fuzzy
+msgid "Cas&e sensitive"
+msgstr "tính đến kiể&U chữ"
+
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "tính đến kiể&U chữ"
+
 #, fuzzy
 msgid "&Find recursively"
 msgstr "Tìm kiếm toàn bộ (đệ qu&y)"
@@ -1773,20 +1852,32 @@ msgstr "Tìm kiếm toàn bộ (đệ qu&y)"
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "Start at:"
-msgstr "Bắt đầu từ:"
+msgid "&All charsets"
+msgstr ""
 
-msgid "Filename:"
-msgstr "Tên tập tin:"
+msgid "All cha&rsets"
+msgstr ""
 
-msgid "Content: "
-msgstr "Nội dung: "
+#, fuzzy
+msgid "Re&gular expression"
+msgstr "&Biểu thức chính quy"
 
 msgid "&Tree"
 msgstr "&Cây thư mục"
 
 msgid "Find File"
 msgstr "Tìm tập tin"
+
+#, fuzzy
+msgid "Content:"
+msgstr "Nội dung: "
+
+#, fuzzy
+msgid "File name:"
+msgstr "Tên tập tin:"
+
+msgid "Start at:"
+msgstr "Bắt đầu từ:"
 
 #, c-format
 msgid "Grepping in %s"
@@ -2150,6 +2241,9 @@ msgstr "t&Hứ tự sắp xếp..."
 msgid "&Filter..."
 msgstr "&Lọc tập tin..."
 
+msgid "&Encoding...    C-t"
+msgstr ""
+
 msgid "&Network link..."
 msgstr "&Kết nối mạng..."
 
@@ -2164,9 +2258,6 @@ msgstr "kết nối SM&B..."
 
 msgid "&Rescan         C-r"
 msgstr "&Quét lại        C-r"
-
-msgid "&User menu          F2"
-msgstr "&Trình đơn người dùng   F2"
 
 msgid "&View               F3"
 msgstr "&Xem                    F3"
@@ -2225,6 +2316,9 @@ msgstr "Chọn ngược lạ&I        M-*"
 msgid "e&Xit              F10"
 msgstr "Th&Oát                 F10"
 
+msgid "&User menu          F2"
+msgstr "&Trình đơn người dùng   F2"
+
 msgid "&Directory tree"
 msgstr "cây thư &Mục"
 
@@ -2246,8 +2340,9 @@ msgstr "bản&G ngoài                  C-x !"
 msgid "show directory s&Izes"
 msgstr "&Hiển thị kích thước thư mục"
 
-msgid "command &History"
-msgstr "&Lịch sử câu lệnh"
+#, fuzzy
+msgid "Command &history      M-h"
+msgstr " Lịch sử dòng lệnh "
 
 msgid "di&Rectory hotlist    C-\\"
 msgstr "Thư mục thường dùng &*         C-\\"
@@ -2269,12 +2364,6 @@ msgstr "soạn thảo tập tin phần mở &Rộng"
 
 msgid "Edit &menu file"
 msgstr "soạ&N thảo tập tin trình đơn"
-
-msgid "Edit edi&tor menu file"
-msgstr "sửa trình đơn của trình s&Oạn thảo"
-
-msgid "Edit &syntax file"
-msgstr "sửa tập tin cú &Pháp"
 
 msgid "&Configuration..."
 msgstr "&Cấu hình..."
@@ -2338,6 +2427,22 @@ msgstr "Trđơn "
 msgid "The TERM environment variable is unset!\n"
 msgstr "Biến môi trườn TERM chưa được xác định!\n"
 
+msgid "&Fix it"
+msgstr ""
+
+msgid "don't ask again"
+msgstr ""
+
+msgid ""
+"Chosen display charset (Settings->Display bits)\n"
+"or source codeset (in mcedit ctrl-t) \n"
+"does not match one set via locale. \n"
+"Set correct codeset manually or press <<Fix it>> \n"
+"to set locale default.\n"
+"\n"
+"Or set 'don't ask again' and press <<Skip>>"
+msgstr ""
+
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
@@ -2360,6 +2465,7 @@ msgstr ""
 "Xin hãy gửi bất kỳ báo cáo lỗi bug nào (gồm cả kết quả của lệnh\n"
 "`mc -V') tới mc-devel@gnome.org\n"
 
+#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2371,16 +2477,8 @@ msgid ""
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
 "   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked\n"
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
 msgstr ""
 "--colors TỪ_KHÓA={VĂN BẢN},{NỀN}\n"
 "\n"
@@ -2402,6 +2500,18 @@ msgstr ""
 "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
 "   brightcyan, lightgray, và white\n"
 "\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
 
 msgid "Displays this help message"
 msgstr "Hiển thị thông báo trợ giúp này"
@@ -2462,6 +2572,10 @@ msgstr "Xem tập tin"
 
 msgid "Edits one file"
 msgstr "Soạn thảo tập tin"
+
+#, fuzzy, c-format
+msgid "Cannot create %s directory"
+msgstr "Không thay đổi được thư mục"
 
 msgid "safe de&Lete"
 msgstr "Xóa một cách &An toàn"
@@ -2679,20 +2793,34 @@ msgstr "Chuyển"
 msgid "Mkdir"
 msgstr "Tạotm "
 
-msgid " Choose input codepage "
+msgid " Not implemented yet "
+msgstr ""
+
+msgid " Num of replace tokens not equal to num of found tokens "
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Invalid token number %d "
+msgstr " Dấu hiệu đích đến không đúng "
+
+msgid "Normal"
+msgstr ""
+
+msgid "&Regular expression"
+msgstr "&Biểu thức chính quy"
+
+msgid "Hexadecimal"
+msgstr ""
+
+msgid "Wildcard search"
+msgstr ""
+
+#, fuzzy
+msgid "Choose codepage"
 msgstr " Chọn bảng mã dữ liệu vào "
 
 msgid "-  < No translation >"
 msgstr "-  < Không có dịch >"
-
-msgid ""
-"To use this feature select your codepage in\n"
-"Setup / Display Bits dialog!\n"
-"Do not forget to save options."
-msgstr ""
-"Để sử dụng tính năng này, hãy chọn bảng mã trong\n"
-"trình đơn Cấu hình / hộp thoại Bit hiển thị!\n"
-"Đừng quên ghi nhớ lại cấu hình."
 
 #, c-format
 msgid ""
@@ -2732,6 +2860,10 @@ msgid "with terminfo database"
 msgstr "với cơ sở dữ liệu terminfo"
 
 msgid "Using the ncurses library"
+msgstr "Dùng thư viện ncurses"
+
+#, fuzzy
+msgid "Using the ncursesw library"
 msgstr "Dùng thư viện ncurses"
 
 msgid "With optional subshell support"
@@ -2854,11 +2986,19 @@ msgstr " Không tìm thấy mục thích hợp trong %s"
 msgid " User menu "
 msgstr " Trình đơn người dùng "
 
-msgid "%b %e %H:%M"
+#, fuzzy
+msgid "%b %d %H:%M"
 msgstr "%b %e %H:%M"
+
+#, fuzzy
+msgid "%b %d %Y"
+msgstr "%b %e  %Y"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -2955,24 +3095,16 @@ msgstr ""
 " Không thể lưu tập tin. \n"
 " %s "
 
-msgid "Invalid hex search expression"
-msgstr "Biểu thức tìm kiếm hex không đúng"
-
-msgid " Invalid regular expression "
-msgstr " Biểu thức chính quy không đúng"
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" The current line number is %d.\n"
+" The current line number is %lu.\n"
 " Enter the new line number:"
 msgstr ""
 " Số thứ tự dòng hiện thời %d.\n"
 " Hãy nhập số thứ tự dòng muốn chuyển đến:"
 
-#, c-format
-msgid ""
-" The current address is 0x%lx.\n"
-" Enter the new address:"
+#, fuzzy
+msgid " The current address is 0x%08"
 msgstr ""
 " Địa chỉ hiện thời - 0x%lx.\n"
 " Hãy nhập địa chỉ mới:"
@@ -2984,26 +3116,11 @@ msgstr " Đi tới địa chỉ "
 msgid " Invalid address "
 msgstr " Mật khẩu không đúng "
 
-msgid " Enter regexp:"
-msgstr " Nhập biểu thức chính quy:"
-
 msgid "ButtonBar|Help"
 msgstr "Trợ giúp"
 
 msgid "ButtonBar|Quit"
 msgstr "Thoát"
-
-msgid "ButtonBar|Ascii"
-msgstr "Ascii"
-
-msgid "ButtonBar|Hex"
-msgstr "Hex"
-
-msgid "ButtonBar|Goto"
-msgstr "Đi tới"
-
-msgid "ButtonBar|Line"
-msgstr "Dòng"
 
 msgid "ButtonBar|View"
 msgstr "Xem"
@@ -3013,33 +3130,6 @@ msgstr "Sửa"
 
 msgid "ButtonBar|Save"
 msgstr "Lưu"
-
-msgid "ButtonBar|UnWrap"
-msgstr "Bỏ chuyển dòng"
-
-msgid "ButtonBar|Wrap"
-msgstr "Chuyển dòng"
-
-msgid "ButtonBar|RxSrch"
-msgstr "Tìm rx"
-
-msgid "ButtonBar|HxSrch"
-msgstr "Tìm hx"
-
-msgid "ButtonBar|Search"
-msgstr "Tìm kiếm"
-
-msgid "ButtonBar|Raw"
-msgstr "Thô"
-
-msgid "ButtonBar|Parse"
-msgstr "Phân tích"
-
-msgid "ButtonBar|Unform"
-msgstr "Bỏ định dạng"
-
-msgid "ButtonBar|Format"
-msgstr "Định dạng"
 
 msgid " History "
 msgstr " Lịch sử"
@@ -3618,6 +3708,106 @@ msgstr "Lỗi nội bộ:"
 
 msgid "Changes to file lost"
 msgstr "Thay đổi tới tập tin bị mất"
+
+#~ msgid "scanf &Expression"
+#~ msgstr "biểu thức &Scanf"
+
+#~ msgid "&Whole words only"
+#~ msgstr "&Chỉ những từ đầy đủ"
+
+#~ msgid " Enter replacement argument order eg. 3,2,1,4 "
+#~ msgstr " Hãy nhập thứ tự của tham số thay thế, ví dụ 3,2,1,4 "
+
+#~ msgid ""
+#~ " Invalid regular expression, or scanf expression with too many "
+#~ "conversions "
+#~ msgstr ""
+#~ " Biểu thức chính quy không đúng, hoặc biểu thức scanf có quá nhiều biến "
+#~ "đổi "
+
+#~ msgid " Error in replacement format string. "
+#~ msgstr " Lỗi trong định dạng chuỗi thay thế. "
+
+#~ msgid " Replacement too long. "
+#~ msgstr " Chuỗi thay thế quá dài. "
+
+#~ msgid "&Copy              F5"
+#~ msgstr "&Sao chép                  F5"
+
+#~ msgid "&Delete            F8"
+#~ msgstr "&Xóa                       F8"
+
+#~ msgid "Save setu&p..."
+#~ msgstr "&Ghi nhớ cấu hình..."
+
+#~ msgid " The command history is empty "
+#~ msgstr " Lịch sử dòng lệnh rỗng "
+
+#~ msgid "command &History"
+#~ msgstr "&Lịch sử câu lệnh"
+
+#~ msgid "Edit edi&tor menu file"
+#~ msgstr "sửa trình đơn của trình s&Oạn thảo"
+
+#~ msgid "Edit &syntax file"
+#~ msgstr "sửa tập tin cú &Pháp"
+
+#~ msgid ""
+#~ "To use this feature select your codepage in\n"
+#~ "Setup / Display Bits dialog!\n"
+#~ "Do not forget to save options."
+#~ msgstr ""
+#~ "Để sử dụng tính năng này, hãy chọn bảng mã trong\n"
+#~ "trình đơn Cấu hình / hộp thoại Bit hiển thị!\n"
+#~ "Đừng quên ghi nhớ lại cấu hình."
+
+#~ msgid "Invalid hex search expression"
+#~ msgstr "Biểu thức tìm kiếm hex không đúng"
+
+#~ msgid " Invalid regular expression "
+#~ msgstr " Biểu thức chính quy không đúng"
+
+#~ msgid " Enter regexp:"
+#~ msgstr " Nhập biểu thức chính quy:"
+
+#~ msgid "ButtonBar|Ascii"
+#~ msgstr "Ascii"
+
+#~ msgid "ButtonBar|Hex"
+#~ msgstr "Hex"
+
+#~ msgid "ButtonBar|Goto"
+#~ msgstr "Đi tới"
+
+#~ msgid "ButtonBar|Line"
+#~ msgstr "Dòng"
+
+#~ msgid "ButtonBar|UnWrap"
+#~ msgstr "Bỏ chuyển dòng"
+
+#~ msgid "ButtonBar|Wrap"
+#~ msgstr "Chuyển dòng"
+
+#~ msgid "ButtonBar|RxSrch"
+#~ msgstr "Tìm rx"
+
+#~ msgid "ButtonBar|HxSrch"
+#~ msgstr "Tìm hx"
+
+#~ msgid "ButtonBar|Search"
+#~ msgstr "Tìm kiếm"
+
+#~ msgid "ButtonBar|Raw"
+#~ msgstr "Thô"
+
+#~ msgid "ButtonBar|Parse"
+#~ msgstr "Phân tích"
+
+#~ msgid "ButtonBar|Unform"
+#~ msgstr "Bỏ định dạng"
+
+#~ msgid "ButtonBar|Format"
+#~ msgstr "Định dạng"
 
 #~ msgid "Using included S-Lang library"
 #~ msgstr "Sử dụng thư việc S-Lang bao gồm"

@@ -7,10 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-14 19:43+0000\n"
+"POT-Creation-Date: 2009-06-30 19:38+0200\n"
 "PO-Revision-Date: 2001-05-25 13:35+0200\n"
 "Last-Translator: mari susperregi <mari@elhuyar.com>\n"
-"Language-Team: Euskara\n"
+"Language-Team: Euskara <debian-l10n-basque@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -56,8 +56,15 @@ msgstr " Fitxategia handiegia da: "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-msgid "&Dismiss"
-msgstr "&Itxi"
+msgid "Search"
+msgstr "Bilatu"
+
+#, c-format
+msgid " %d items found, %d bookmarks added "
+msgstr "%d aurkikuntza egin dira, %d laster-marka gehituta "
+
+msgid " Search string not found "
+msgstr " Bilatutako katea ez da aurkitu "
 
 msgid "Warning"
 msgstr "Abisua"
@@ -118,9 +125,6 @@ msgstr "Gainidatzi"
 msgid " Cannot save file. "
 msgstr " Errorea fitxategia gordetzen saiatzean. "
 
-msgid "Cancel"
-msgstr "Utzi"
-
 msgid " Delete macro "
 msgstr " Ezabatu makroa "
 
@@ -165,89 +169,45 @@ msgstr ""
 msgid "C&ontinue"
 msgstr "Jarraitu"
 
+#, fuzzy
+msgid "Syntax file edit"
+msgstr "Editatu &menu-fitxategia"
+
+#, fuzzy
+msgid " Which syntax file you want to edit? "
+msgstr "Zer luzapen-fitxategi nahi duzu editatu? "
+
+msgid "&User"
+msgstr "&Erabiltzailea"
+
+msgid "&System Wide"
+msgstr "&Sistema guztientzat"
+
+msgid " Menu edit "
+msgstr "Edizioa menua "
+
+msgid " Which menu file do you want to edit? "
+msgstr "Menuko zer fitxategi editatuko duzu ? "
+
+msgid "&Local"
+msgstr "&Lokala"
+
 msgid " Load "
 msgstr " Kargatu "
 
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " Blokea handia da, ezingo duzu ekintza hau desegin. "
 
-msgid "O&ne"
-msgstr "Ba&t"
-
-msgid "A&ll"
-msgstr "&Guztia"
-
-msgid "&Skip"
-msgstr "&Saltatu"
-
-msgid "&Replace"
+#, fuzzy
+msgid "Replace"
 msgstr "&Ordeztu"
-
-msgid " Replace with: "
-msgstr " Ordeztu honekin: "
-
-msgid " Confirm replace "
-msgstr " Berretsi ordeztea "
-
-msgid "scanf &Expression"
-msgstr "scanf &Adierazpena"
-
-msgid "replace &All"
-msgstr "&Ordeztu guztiak"
-
-msgid "pro&Mpt on replace"
-msgstr "&galdetu ordeztean"
-
-msgid "&Backwards"
-msgstr "&Atzera"
-
-msgid "&Regular expression"
-msgstr "&Adierazpen erregularra"
-
-msgid "&Whole words only"
-msgstr "&Hitz osoak bakarrik"
-
-msgid "case &Sensitive"
-msgstr "&maiuskulak eta minuskulak bereizten ditu"
-
-msgid " Enter replacement argument order eg. 3,2,1,4 "
-msgstr " Sartu ordezko argumentuaren ordena, adib.3,2,1,4 "
-
-msgid " Enter replacement string:"
-msgstr "Sartu ordezko katea:"
-
-msgid " Enter search string:"
-msgstr "Sartu bilaketa-katea:"
 
 msgid " Replace "
 msgstr "Ordeztu "
 
-msgid "Search"
-msgstr "Bilatu"
-
-msgid ""
-" Invalid regular expression, or scanf expression with too many conversions "
-msgstr ""
-"Baliogabeko adierazpen erregularra, edo scanf adierazpena bihurketa "
-"gehiegirekin "
-
-msgid " Error in replacement format string. "
-msgstr "Errorea formatu-katea ordeztean."
-
-#, fuzzy
-msgid " Replacement too long. "
-msgstr "Sartu ordezko katea:"
-
 #, c-format
 msgid " %ld replacements made. "
 msgstr " %ld ordezpen eginda."
-
-msgid " Search string not found "
-msgstr " Bilatutako katea ez da aurkitu "
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr "%d aurkikuntza egin dira, %d laster-marka gehituta "
 
 msgid "Quit"
 msgstr "Irten"
@@ -366,6 +326,51 @@ msgstr " Sakatu tekla bat: "
 msgid " Execute Macro "
 msgstr " Exekutatu makroa "
 
+msgid "pro&Mpt on replace"
+msgstr "&galdetu ordeztean"
+
+msgid "replace &All"
+msgstr "&Ordeztu guztiak"
+
+msgid "All charsets"
+msgstr ""
+
+msgid "&Backwards"
+msgstr "&Atzera"
+
+msgid "case &Sensitive"
+msgstr "&maiuskulak eta minuskulak bereizten ditu"
+
+msgid " Enter replacement string:"
+msgstr "Sartu ordezko katea:"
+
+msgid " Enter search string:"
+msgstr "Sartu bilaketa-katea:"
+
+msgid "Cancel"
+msgstr "Utzi"
+
+msgid "O&ne"
+msgstr "Ba&t"
+
+msgid "A&ll"
+msgstr "&Guztia"
+
+msgid "&Skip"
+msgstr "&Saltatu"
+
+msgid "&Replace"
+msgstr "&Ordeztu"
+
+msgid " Replace with: "
+msgstr " Ordeztu honekin: "
+
+msgid " Confirm replace "
+msgstr " Berretsi ordeztea "
+
+msgid "&Dismiss"
+msgstr "&Itxi"
+
 msgid " Emacs key: "
 msgstr " Emacs tekla: "
 
@@ -438,32 +443,79 @@ msgstr "&Berria         C-x k"
 msgid "Copy to &file...     "
 msgstr "Kopiatu &fitxategira...    "
 
-msgid "&Toggle Mark       F3"
+#, fuzzy
+msgid "&Toggle mark                 F3"
 msgstr "&Txandakatu marka  F3"
 
-msgid "&Mark Columns    S-F3"
+#, fuzzy
+msgid "Mar&k columns              S-F3"
 msgstr "&Markatu zutabeak S-F3"
 
-msgid "Toggle &ins/overw Ins"
+#, fuzzy
+msgid "Toggle &ins/overw           Ins"
 msgstr "txandakatu &Txertatu/gainidatzi  Ins"
 
-msgid "&Copy              F5"
-msgstr "&Kopiatu           F5"
+#, fuzzy
+msgid "&Copy                        F5"
+msgstr "&Kopiatu                         F5"
 
-msgid "&Move              F6"
+#, fuzzy
+msgid "&Move                        F6"
 msgstr "&Lekuz aldatu      F6"
 
-msgid "&Delete            F8"
-msgstr "&Ezabatu           F8"
+#, fuzzy
+msgid "&Delete                      F8"
+msgstr "Ezabat&u                         F8"
 
-msgid "&Undo             C-u"
+#, fuzzy
+msgid "C&opy to clipfile         C-Ins"
+msgstr "Kopiatu &fitxategira...    "
+
+#, fuzzy
+msgid "C&ut to clipfile          S-Del"
+msgstr "&Joan lerro honetara...           M-l"
+
+msgid "&Paste from clipfile      S-Ins"
+msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "&Txandakatu marka  F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "&Berria           C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "&Ordenatu...                M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "&Posta...                   "
+
+#, fuzzy
+msgid "&Undo                       C-u"
 msgstr "De&segin          C-u"
 
-msgid "&Beginning     C-PgUp"
+#, fuzzy
+msgid "&Beginning               C-PgUp"
 msgstr "&Hasiera       C-PgUp"
 
-msgid "&End           C-PgDn"
+#, fuzzy
+msgid "&End                     C-PgDn"
 msgstr "&Amaiera       C-PgDn"
+
+#, fuzzy
+msgid "C&opy to clipfile           M-w"
+msgstr "&Joan lerro honetara...           M-l"
+
+#, fuzzy
+msgid "C&ut to clipfile            C-w"
+msgstr "&Joan lerro honetara...           M-l"
+
+msgid "&Paste from clipfile        C-y"
+msgstr ""
 
 msgid "&Search...         F7"
 msgstr "&Bilatu...        F7"
@@ -477,8 +529,25 @@ msgstr "&Ordeztu...       F4"
 msgid "&Go to line...            M-l"
 msgstr "&Joan lerro honetara...           M-l"
 
+#, fuzzy
+msgid "Toggle li&ne state        M-n"
+msgstr "&Txandakatu marka  F3"
+
 msgid "Go to matching &bracket   M-b"
 msgstr "joan dagokion &kortxetera M-b"
+
+msgid "Find declaration      A-Enter"
+msgstr ""
+
+msgid "Back from declaration     M--"
+msgstr ""
+
+msgid "Forward to declaration    M-+"
+msgstr ""
+
+#, fuzzy
+msgid "Encod&ing...             C-t"
+msgstr "&Ordenatu...                M-t"
 
 msgid "Insert &literal...       C-q"
 msgstr "Txertatu &literala...      C-q"
@@ -540,7 +609,15 @@ msgid "Syntax &Highlighting..."
 msgstr "sinta&xia nabarmentzen"
 
 #, fuzzy
-msgid "Save setu&p..."
+msgid "S&yntax file"
+msgstr "Editatu &menu-fitxategia"
+
+#, fuzzy
+msgid "&Menu file"
+msgstr "Editatu &menu-fitxategia"
+
+#, fuzzy
+msgid "Save setu&p"
 msgstr "&Gorde konfigurazioa"
 
 msgid " File "
@@ -582,6 +659,10 @@ msgstr "Itzulbira-lerroaren luzera : "
 
 msgid "Tab spacing: "
 msgstr "Tabulazio-tartea : "
+
+#, fuzzy
+msgid "Pers&istent selection"
+msgstr "alderantzikatu &hautapena       M-*"
 
 msgid "Synta&x highlighting"
 msgstr "sinta&xia nabarmentzen"
@@ -818,6 +899,10 @@ msgstr "berretsi e&zabatu "
 
 msgid " Confirmation "
 msgstr "Berrespena "
+
+#, fuzzy
+msgid "UTF-8 output"
+msgstr "8 biteko irteera"
 
 msgid "Full 8 bits output"
 msgstr "8 biteko irteera"
@@ -1063,8 +1148,16 @@ msgstr "Iragazkia "
 msgid " Set expression for filtering filenames"
 msgstr "Konfiguratu fitxategi-izenak iragazteko adierazpenak"
 
-msgid "  Malformed regular expression  "
-msgstr " Adierazpen erregular gaizki osatuta  "
+msgid "&Using shell patterns"
+msgstr "&Shell-ereduak erabiltzen"
+
+#, fuzzy
+msgid "&Case sensitive"
+msgstr "maiuskulak eta minuskulak bereizten ditu"
+
+#, fuzzy
+msgid "&Files only"
+msgstr "&Tamaina bakarrik"
 
 msgid " Select "
 msgstr "Hautatu "
@@ -1076,29 +1169,6 @@ msgid "Extension file edit"
 msgstr "Editatu luzapen-fitxategia"
 
 msgid " Which extension file you want to edit? "
-msgstr "Zer luzapen-fitxategi nahi duzu editatu? "
-
-msgid "&User"
-msgstr "&Erabiltzailea"
-
-msgid "&System Wide"
-msgstr "&Sistema guztientzat"
-
-msgid " Menu edit "
-msgstr "Edizioa menua "
-
-msgid " Which menu file do you want to edit? "
-msgstr "Menuko zer fitxategi editatuko duzu ? "
-
-msgid "&Local"
-msgstr "&Lokala"
-
-#, fuzzy
-msgid "Syntax file edit"
-msgstr "Editatu &menu-fitxategia"
-
-#, fuzzy
-msgid " Which syntax file you want to edit? "
 msgstr "Zer luzapen-fitxategi nahi duzu editatu? "
 
 msgid " Compare directories "
@@ -1120,12 +1190,6 @@ msgid " Both panels should be in the listing mode to use this command "
 msgstr ""
 " Bi panelek zerrendatzea ikuspegi-moduan egon behar dute komando hau "
 "erabiltzeko"
-
-msgid " The command history is empty "
-msgstr "Komando-historia hutsik dago "
-
-msgid " Command history "
-msgstr "Komando-historia "
 
 msgid ""
 " Not an xterm or Linux console; \n"
@@ -1304,9 +1368,6 @@ msgstr "Lekuz aldatu "
 
 msgid " Delete "
 msgstr "Ezabatu "
-
-msgid " Invalid target mask "
-msgstr "Baliogabeko helburu-maskara "
 
 msgid " Cannot make the hardlink "
 msgstr "Ezin izan da esteka sortu "
@@ -1582,6 +1643,10 @@ msgstr ""
 "Ezin da \"%s\" direktorioa kendu\n"
 " %s "
 
+#, fuzzy
+msgid "Directory scanning"
+msgstr "Direktorioaren bide-izena"
+
 msgid "1Copy"
 msgstr "1Kopiatu"
 
@@ -1740,9 +1805,6 @@ msgstr "jarraitu &estekei"
 msgid "to:"
 msgstr "hona:"
 
-msgid "&Using shell patterns"
-msgstr "&Shell-ereduak erabiltzen"
-
 msgid "&Background"
 msgstr "&Atzeko planoa"
 
@@ -1752,10 +1814,8 @@ msgstr "Esteka sinboliko egon&korrak"
 msgid "&Dive into subdir if exists"
 msgstr "&Azpidirektorioetan sartu, lehendik badaude "
 
-#, c-format
-msgid ""
-"Invalid source pattern `%s' \n"
-" %s "
+#, fuzzy, c-format
+msgid "Invalid source pattern `%s'"
 msgstr ""
 "Baliogabeko `%s' iturburu-eredua\n"
 " %s "
@@ -1784,26 +1844,54 @@ msgstr "&Ikusi - F3"
 msgid "&Edit - F4"
 msgstr "&Edizioa - F4"
 
+#, c-format
+msgid "Found: %ld"
+msgstr ""
+
+#, fuzzy
+msgid " Malformed regular expression "
+msgstr " Adierazpen erregular gaizki osatuta  "
+
+#, fuzzy
+msgid "Cas&e sensitive"
+msgstr "maiuskulak eta minuskulak bereizten ditu"
+
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "maiuskulak eta minuskulak bereizten ditu"
+
 msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "Start at:"
-msgstr "Hemen hasi:"
+msgid "&All charsets"
+msgstr ""
 
-msgid "Filename:"
-msgstr "Fitxategi-izena:"
+msgid "All cha&rsets"
+msgstr ""
 
-msgid "Content: "
-msgstr "Edukia: "
+#, fuzzy
+msgid "Re&gular expression"
+msgstr "&Adierazpen erregularra"
 
 msgid "&Tree"
 msgstr "Zu&haitza"
 
 msgid "Find File"
 msgstr "Bilatu fitxategia"
+
+#, fuzzy
+msgid "Content:"
+msgstr "Edukia: "
+
+#, fuzzy
+msgid "File name:"
+msgstr "Fitxategi-izena:"
+
+msgid "Start at:"
+msgstr "Hemen hasi:"
 
 #, c-format
 msgid "Grepping in %s"
@@ -2170,6 +2258,9 @@ msgstr "&Ordenazioa..."
 msgid "&Filter..."
 msgstr "I&ragazkia..."
 
+msgid "&Encoding...    C-t"
+msgstr ""
+
 msgid "&Network link..."
 msgstr "&Sareko esteka..."
 
@@ -2185,9 +2276,6 @@ msgstr "S&MB esteka..."
 
 msgid "&Rescan         C-r"
 msgstr "&Berreskaneatu        C-r"
-
-msgid "&User menu          F2"
-msgstr "&Erabiltzaile-menua              F2"
 
 msgid "&View               F3"
 msgstr "&Ikus                            F3"
@@ -2246,6 +2334,9 @@ msgstr "alderantzikatu &hautapena       M-*"
 msgid "e&Xit              F10"
 msgstr "irte&n                          F10"
 
+msgid "&User menu          F2"
+msgstr "&Erabiltzaile-menua              F2"
+
 msgid "&Directory tree"
 msgstr "&Direktorio-zuhaitza"
 
@@ -2267,8 +2358,9 @@ msgstr "&kanpoko panela                    C-x !"
 msgid "show directory s&Izes"
 msgstr "erakutsi direktorio-tama&inak"
 
-msgid "command &History"
-msgstr "komandoen &historia"
+#, fuzzy
+msgid "Command &history      M-h"
+msgstr "Komando-historia "
 
 msgid "di&Rectory hotlist    C-\\"
 msgstr "&gogokoen direktorioa                C-\\"
@@ -2289,13 +2381,6 @@ msgid "Edit &extension file"
 msgstr "Editatu &luzapen-fitxategia"
 
 msgid "Edit &menu file"
-msgstr "Editatu &menu-fitxategia"
-
-msgid "Edit edi&tor menu file"
-msgstr "Editatu menu &editorea"
-
-#, fuzzy
-msgid "Edit &syntax file"
 msgstr "Editatu &menu-fitxategia"
 
 msgid "&Configuration..."
@@ -2360,6 +2445,22 @@ msgstr "Menua"
 msgid "The TERM environment variable is unset!\n"
 msgstr "TERM ingurune-aldagaia ez dago konfiguratuta!\n"
 
+msgid "&Fix it"
+msgstr ""
+
+msgid "don't ask again"
+msgstr ""
+
+msgid ""
+"Chosen display charset (Settings->Display bits)\n"
+"or source codeset (in mcedit ctrl-t) \n"
+"does not match one set via locale. \n"
+"Set correct codeset manually or press <<Fix it>> \n"
+"to set locale default.\n"
+"\n"
+"Or set 'don't ask again' and press <<Skip>>"
+msgstr ""
+
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNUren %s Midnight Commander-a\n"
@@ -2394,16 +2495,8 @@ msgid ""
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
 "   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked\n"
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
 msgstr ""
 "--colors GAKO-HITZA=AURREKO PLANOA,ATZEKO PLANOA\n"
 "\n"
@@ -2423,6 +2516,18 @@ msgstr ""
 "   horia, urdina, urdin argia, magenta, magenta argia, cyana,\n"
 "   cyan argia, gris argia eta zuria\n"
 "\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
 
 msgid "Displays this help message"
 msgstr "Laguntza-mezu hau bistaratzen du"
@@ -2486,6 +2591,10 @@ msgstr "Fitxategi-ikustailea fitxategian abiarazten du"
 
 msgid "Edits one file"
 msgstr "Fitxategi bat editatzen du"
+
+#, fuzzy, c-format
+msgid "Cannot create %s directory"
+msgstr "Ezin izan da direktorioz aldatu"
 
 msgid "safe de&Lete"
 msgstr "&ezabatze segurua"
@@ -2707,20 +2816,35 @@ msgstr "RenMov"
 msgid "Mkdir"
 msgstr "Mkdir"
 
-msgid " Choose input codepage "
+msgid " Not implemented yet "
+msgstr ""
+
+msgid " Num of replace tokens not equal to num of found tokens "
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Invalid token number %d "
+msgstr "Baliogabeko helburu-maskara "
+
+#, fuzzy
+msgid "Normal"
+msgstr "Formateatu"
+
+msgid "&Regular expression"
+msgstr "&Adierazpen erregularra"
+
+msgid "Hexadecimal"
+msgstr ""
+
+msgid "Wildcard search"
+msgstr ""
+
+#, fuzzy
+msgid "Choose codepage"
 msgstr " Aukeratu sarrerako kode-orria "
 
 msgid "-  < No translation >"
 msgstr "-  < Ez dago itzulpenik >"
-
-msgid ""
-"To use this feature select your codepage in\n"
-"Setup / Display Bits dialog!\n"
-"Do not forget to save options."
-msgstr ""
-"Eginbide hori erabiltzeko, aukeratu kode-orria\n"
-"Konfiguratu / Bistaratu bitak elkarrizketa-koadroan!\n"
-"Gogoratu aukerak gordetzeaz."
 
 #, c-format
 msgid ""
@@ -2757,6 +2881,10 @@ msgid "with terminfo database"
 msgstr "terminfo datu-basearekin "
 
 msgid "Using the ncurses library"
+msgstr "ncurses liburutegia erabiltzen"
+
+#, fuzzy
+msgid "Using the ncursesw library"
 msgstr "ncurses liburutegia erabiltzen"
 
 msgid "With optional subshell support"
@@ -2880,11 +3008,19 @@ msgstr " Ez da sarrera egokirik aurkitu %s(e)n "
 msgid " User menu "
 msgstr " Erabiltzaile-menua "
 
-msgid "%b %e %H:%M"
+#, fuzzy
+msgid "%b %d %H:%M"
 msgstr "%b %e %H:%M"
+
+#, fuzzy
+msgid "%b %d %Y"
+msgstr "%Y %b %e"
 
 msgid "%b %e  %Y"
 msgstr "%Y %b %e"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
@@ -2979,24 +3115,16 @@ msgid ""
 " %s "
 msgstr " Errorea fitxategia gordetzen saiatzean. "
 
-msgid "Invalid hex search expression"
-msgstr "Baliogabeko bilaketa-adierazpen hamaseitarra"
-
-msgid " Invalid regular expression "
-msgstr " Baliogabeko adierazpen erregularra "
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" The current line number is %d.\n"
+" The current line number is %lu.\n"
 " Enter the new line number:"
 msgstr ""
 " Uneko lerro-zenbakia %d da.\n"
 " Sartu lerro-zenbaki berria:"
 
-#, c-format
-msgid ""
-" The current address is 0x%lx.\n"
-" Enter the new address:"
+#, fuzzy
+msgid " The current address is 0x%08"
 msgstr ""
 " Uneko helbidea 0x%lx da.\n"
 " Sartu helbide berria:"
@@ -3008,25 +3136,10 @@ msgstr " Joan helbidera "
 msgid " Invalid address "
 msgstr " Baliogabeko pasahitza "
 
-msgid " Enter regexp:"
-msgstr " Sartu regexp:"
-
 msgid "ButtonBar|Help"
 msgstr ""
 
 msgid "ButtonBar|Quit"
-msgstr ""
-
-msgid "ButtonBar|Ascii"
-msgstr ""
-
-msgid "ButtonBar|Hex"
-msgstr ""
-
-msgid "ButtonBar|Goto"
-msgstr ""
-
-msgid "ButtonBar|Line"
 msgstr ""
 
 msgid "ButtonBar|View"
@@ -3036,33 +3149,6 @@ msgid "ButtonBar|Edit"
 msgstr ""
 
 msgid "ButtonBar|Save"
-msgstr ""
-
-msgid "ButtonBar|UnWrap"
-msgstr ""
-
-msgid "ButtonBar|Wrap"
-msgstr ""
-
-msgid "ButtonBar|RxSrch"
-msgstr ""
-
-msgid "ButtonBar|HxSrch"
-msgstr ""
-
-msgid "ButtonBar|Search"
-msgstr ""
-
-msgid "ButtonBar|Raw"
-msgstr ""
-
-msgid "ButtonBar|Parse"
-msgstr ""
-
-msgid "ButtonBar|Unform"
-msgstr ""
-
-msgid "ButtonBar|Format"
 msgstr ""
 
 msgid " History "
@@ -3644,6 +3730,70 @@ msgstr "Barne-errorea:"
 msgid "Changes to file lost"
 msgstr "Fitxategiko aldaketak galdu egin dira"
 
+#~ msgid "scanf &Expression"
+#~ msgstr "scanf &Adierazpena"
+
+#~ msgid "&Whole words only"
+#~ msgstr "&Hitz osoak bakarrik"
+
+#~ msgid " Enter replacement argument order eg. 3,2,1,4 "
+#~ msgstr " Sartu ordezko argumentuaren ordena, adib.3,2,1,4 "
+
+#~ msgid ""
+#~ " Invalid regular expression, or scanf expression with too many "
+#~ "conversions "
+#~ msgstr ""
+#~ "Baliogabeko adierazpen erregularra, edo scanf adierazpena bihurketa "
+#~ "gehiegirekin "
+
+#~ msgid " Error in replacement format string. "
+#~ msgstr "Errorea formatu-katea ordeztean."
+
+#, fuzzy
+#~ msgid " Replacement too long. "
+#~ msgstr "Sartu ordezko katea:"
+
+#~ msgid "&Copy              F5"
+#~ msgstr "&Kopiatu           F5"
+
+#~ msgid "&Delete            F8"
+#~ msgstr "&Ezabatu           F8"
+
+#, fuzzy
+#~ msgid "Save setu&p..."
+#~ msgstr "&Gorde konfigurazioa"
+
+#~ msgid " The command history is empty "
+#~ msgstr "Komando-historia hutsik dago "
+
+#~ msgid "command &History"
+#~ msgstr "komandoen &historia"
+
+#~ msgid "Edit edi&tor menu file"
+#~ msgstr "Editatu menu &editorea"
+
+#, fuzzy
+#~ msgid "Edit &syntax file"
+#~ msgstr "Editatu &menu-fitxategia"
+
+#~ msgid ""
+#~ "To use this feature select your codepage in\n"
+#~ "Setup / Display Bits dialog!\n"
+#~ "Do not forget to save options."
+#~ msgstr ""
+#~ "Eginbide hori erabiltzeko, aukeratu kode-orria\n"
+#~ "Konfiguratu / Bistaratu bitak elkarrizketa-koadroan!\n"
+#~ "Gogoratu aukerak gordetzeaz."
+
+#~ msgid "Invalid hex search expression"
+#~ msgstr "Baliogabeko bilaketa-adierazpen hamaseitarra"
+
+#~ msgid " Invalid regular expression "
+#~ msgstr " Baliogabeko adierazpen erregularra "
+
+#~ msgid " Enter regexp:"
+#~ msgstr " Sartu regexp:"
+
 #~ msgid "Using included S-Lang library"
 #~ msgstr "S-Lang liburutegia erabiltzen"
 
@@ -3767,9 +3917,6 @@ msgstr "Fitxategiko aldaketak galdu egin dira"
 
 #~ msgid "Unform"
 #~ msgstr "Formarik gabe"
-
-#~ msgid "Format"
-#~ msgstr "Formateatu"
 
 #~ msgid "User menu available only in mcedit invoked from mc"
 #~ msgstr "Erabiltzaile-menua mcedit-en bakarrik erabilgarri, mc-k deitua "

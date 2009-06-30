@@ -7,10 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-14 19:43+0000\n"
+"POT-Creation-Date: 2009-06-30 19:39+0200\n"
 "PO-Revision-Date: 2001-11-06 05:50+0200\n"
 "Last-Translator: Nilgün Belma Bugüner <nilgun@fide.org>\n"
-"Language-Team: Turkish <gnu-tr-u12a@lists.sourceforge.net>\n"
+"Language-Team: Turkish <debian-l10n-turkish@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-9\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -57,8 +57,15 @@ msgstr " Dosya çok fazla büyük: "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-msgid "&Dismiss"
-msgstr "&Býrak"
+msgid "Search"
+msgstr "Ara"
+
+#, c-format
+msgid " %d items found, %d bookmarks added "
+msgstr " %d bulma gerçekleþti, %d yer imi eklendi "
+
+msgid " Search string not found "
+msgstr " Aranan metin bulunamadý "
 
 msgid "Warning"
 msgstr "Uyarý"
@@ -119,9 +126,6 @@ msgstr "Üstüne yaz"
 msgid " Cannot save file. "
 msgstr " Dosyayý kaydederken hata oluþtu. "
 
-msgid "Cancel"
-msgstr "Vazgeç"
-
 msgid " Delete macro "
 msgstr " Makroyu sil "
 
@@ -166,87 +170,45 @@ msgstr ""
 msgid "C&ontinue"
 msgstr "Devam et"
 
+#, fuzzy
+msgid "Syntax file edit"
+msgstr "Men&ü dosyasýný düzenle"
+
+#, fuzzy
+msgid " Which syntax file you want to edit? "
+msgstr " Hangi uzantý dosyasý düzenlenecek? "
+
+msgid "&User"
+msgstr "&Kullanýcý"
+
+msgid "&System Wide"
+msgstr "&Sistem çapýnda"
+
+msgid " Menu edit "
+msgstr " Menu Düzenleme "
+
+msgid " Which menu file do you want to edit? "
+msgstr " Düzenlenecek menü hangisi? "
+
+msgid "&Local"
+msgstr "Yere&l"
+
 msgid " Load "
 msgstr " Yükle "
 
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " Blok çok büyük, bu eylem geri alýnamayabilir. "
 
-msgid "O&ne"
-msgstr "&Biri"
-
-msgid "A&ll"
-msgstr "&Tümü"
-
-msgid "&Skip"
-msgstr "&Atla"
-
-msgid "&Replace"
+#, fuzzy
+msgid "Replace"
 msgstr "&Yerleþtir"
-
-msgid " Replace with: "
-msgstr " Bununla deðiþtir: "
-
-msgid " Confirm replace "
-msgstr " Yer deðiþikliðini onaylat "
-
-msgid "scanf &Expression"
-msgstr "scanf &Deyimi"
-
-msgid "replace &All"
-msgstr "&Tümünün yerini deðiþtir"
-
-msgid "pro&Mpt on replace"
-msgstr "Yerleþtirirken &Sor"
-
-msgid "&Backwards"
-msgstr "&Geriye doðru"
-
-msgid "&Regular expression"
-msgstr "&Düzenli ifade"
-
-msgid "&Whole words only"
-msgstr "&Sadece tam kelimeler"
-
-msgid "case &Sensitive"
-msgstr "Harf büyüklüðüne &Duyarlý"
-
-msgid " Enter replacement argument order eg. 3,2,1,4 "
-msgstr "Yerdeðiþtirme sýrasýný girin (örn: 3,2,1,4) "
-
-msgid " Enter replacement string:"
-msgstr " Yerleþtirilecek metni verin:"
-
-msgid " Enter search string:"
-msgstr " Aranacak metni girin:"
 
 msgid " Replace "
 msgstr " Deðiþtir"
 
-msgid "Search"
-msgstr "Ara"
-
-msgid ""
-" Invalid regular expression, or scanf expression with too many conversions "
-msgstr " Deðiþtirmelerin çoðunda scanf deyimi ya da düzenli ifade geçersiz "
-
-msgid " Error in replacement format string. "
-msgstr " Yerleþtirme biçimi dizgesinde hata. "
-
-#, fuzzy
-msgid " Replacement too long. "
-msgstr " Yerleþtirilecek metni verin:"
-
 #, c-format
 msgid " %ld replacements made. "
 msgstr " %ld yerleþtirme yapýldý. "
-
-msgid " Search string not found "
-msgstr " Aranan metin bulunamadý "
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " %d bulma gerçekleþti, %d yer imi eklendi "
 
 msgid "Quit"
 msgstr "Çýk"
@@ -365,6 +327,51 @@ msgstr " Bir tuþa basýnýz: "
 msgid " Execute Macro "
 msgstr " Macro'yu çalýþtýr "
 
+msgid "pro&Mpt on replace"
+msgstr "Yerleþtirirken &Sor"
+
+msgid "replace &All"
+msgstr "&Tümünün yerini deðiþtir"
+
+msgid "All charsets"
+msgstr ""
+
+msgid "&Backwards"
+msgstr "&Geriye doðru"
+
+msgid "case &Sensitive"
+msgstr "Harf büyüklüðüne &Duyarlý"
+
+msgid " Enter replacement string:"
+msgstr " Yerleþtirilecek metni verin:"
+
+msgid " Enter search string:"
+msgstr " Aranacak metni girin:"
+
+msgid "Cancel"
+msgstr "Vazgeç"
+
+msgid "O&ne"
+msgstr "&Biri"
+
+msgid "A&ll"
+msgstr "&Tümü"
+
+msgid "&Skip"
+msgstr "&Atla"
+
+msgid "&Replace"
+msgstr "&Yerleþtir"
+
+msgid " Replace with: "
+msgstr " Bununla deðiþtir: "
+
+msgid " Confirm replace "
+msgstr " Yer deðiþikliðini onaylat "
+
+msgid "&Dismiss"
+msgstr "&Býrak"
+
 msgid " Emacs key: "
 msgstr " Emacs tuþu: "
 
@@ -437,32 +444,79 @@ msgstr "&Yeni           C-x k"
 msgid "Copy to &file...     "
 msgstr "&Dosyaya kopyala...  "
 
-msgid "&Toggle Mark       F3"
+#, fuzzy
+msgid "&Toggle mark                 F3"
 msgstr "&Seçim             F3"
 
-msgid "&Mark Columns    S-F3"
+#, fuzzy
+msgid "Mar&k columns              S-F3"
 msgstr "Sütunlarý &Seç   S-F3"
 
-msgid "Toggle &ins/overw Ins"
+#, fuzzy
+msgid "Toggle &ins/overw           Ins"
 msgstr "&Ins/Owr          Ins"
 
-msgid "&Copy              F5"
-msgstr "&Kopyala         F5"
+#, fuzzy
+msgid "&Copy                        F5"
+msgstr "Dosya/Dizini &Kopyala         F5"
 
-msgid "&Move              F6"
+#, fuzzy
+msgid "&Move                        F6"
 msgstr "&Taþý              F6"
 
-msgid "&Delete            F8"
-msgstr "&Sil               F8"
+#, fuzzy
+msgid "&Delete                      F8"
+msgstr "Dosya / Dizini Si&L           F8"
 
-msgid "&Undo             C-u"
+#, fuzzy
+msgid "C&opy to clipfile         C-Ins"
+msgstr "&Dosyaya kopyala...  "
+
+#, fuzzy
+msgid "C&ut to clipfile          S-Del"
+msgstr "&Satýra git...           M-l"
+
+msgid "&Paste from clipfile      S-Ins"
+msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "&Seçim             F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "&Yeni             C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "sýra&La...               M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "&Posta...                   "
+
+#, fuzzy
+msgid "&Undo                       C-u"
 msgstr "&Geri al          C-u"
 
-msgid "&Beginning     C-PgUp"
+#, fuzzy
+msgid "&Beginning               C-PgUp"
 msgstr "&Baþlangýca    C-PgUp"
 
-msgid "&End           C-PgDn"
+#, fuzzy
+msgid "&End                     C-PgDn"
 msgstr "&Sona          C-PgDn"
+
+#, fuzzy
+msgid "C&opy to clipfile           M-w"
+msgstr "&Satýra git...           M-l"
+
+#, fuzzy
+msgid "C&ut to clipfile            C-w"
+msgstr "&Satýra git...           M-l"
+
+msgid "&Paste from clipfile        C-y"
+msgstr ""
 
 msgid "&Search...         F7"
 msgstr "&Ara...            F7"
@@ -476,8 +530,25 @@ msgstr "&Yerleþtir...      F4"
 msgid "&Go to line...            M-l"
 msgstr "&Satýra git...           M-l"
 
+#, fuzzy
+msgid "Toggle li&ne state        M-n"
+msgstr "&Seçim             F3"
+
 msgid "Go to matching &bracket   M-b"
 msgstr "Eþleþen &Paranteze Git   M-b"
+
+msgid "Find declaration      A-Enter"
+msgstr ""
+
+msgid "Back from declaration     M--"
+msgstr ""
+
+msgid "Forward to declaration    M-+"
+msgstr ""
+
+#, fuzzy
+msgid "Encod&ing...             C-t"
+msgstr "sýra&La...               M-t"
 
 msgid "Insert &literal...       C-q"
 msgstr "&Harfi içer...           C-q"
@@ -539,7 +610,15 @@ msgid "Syntax &Highlighting..."
 msgstr "&Sözdizimi aydýnlatma"
 
 #, fuzzy
-msgid "Save setu&p..."
+msgid "S&yntax file"
+msgstr "Men&ü dosyasýný düzenle"
+
+#, fuzzy
+msgid "&Menu file"
+msgstr "Men&ü dosyasýný düzenle"
+
+#, fuzzy
+msgid "Save setu&p"
 msgstr "Ayarlarý &Kaydet"
 
 msgid " File "
@@ -581,6 +660,10 @@ msgstr "satýr sarmalama uzunluðu: "
 
 msgid "Tab spacing: "
 msgstr "Sekme uzunluðu: "
+
+#, fuzzy
+msgid "Pers&istent selection"
+msgstr "Seçimi Tersine Çe&vir        M-*"
 
 msgid "Synta&x highlighting"
 msgstr "&Sözdizimi aydýnlatma"
@@ -817,6 +900,10 @@ msgstr " sil&me onayý iste "
 
 msgid " Confirmation "
 msgstr " Onaylama "
+
+#, fuzzy
+msgid "UTF-8 output"
+msgstr "Tam 8-bitlik çýktý"
 
 msgid "Full 8 bits output"
 msgstr "Tam 8-bitlik çýktý"
@@ -1060,8 +1147,16 @@ msgstr " Süzgeç "
 msgid " Set expression for filtering filenames"
 msgstr " Dosya isimlerini süzmede kullanýlacak ifadeyi belirtin"
 
-msgid "  Malformed regular expression  "
-msgstr " Düzenli ifade yanlýþ  "
+msgid "&Using shell patterns"
+msgstr "&Kabuk masklarýný kullanarak"
+
+#, fuzzy
+msgid "&Case sensitive"
+msgstr "&Harf büyüklüðüne duyarlý"
+
+#, fuzzy
+msgid "&Files only"
+msgstr "&Sadece uzunluk"
 
 msgid " Select "
 msgstr " Seç "
@@ -1073,29 +1168,6 @@ msgid "Extension file edit"
 msgstr "Uzantý dosyasý düzenleme"
 
 msgid " Which extension file you want to edit? "
-msgstr " Hangi uzantý dosyasý düzenlenecek? "
-
-msgid "&User"
-msgstr "&Kullanýcý"
-
-msgid "&System Wide"
-msgstr "&Sistem çapýnda"
-
-msgid " Menu edit "
-msgstr " Menu Düzenleme "
-
-msgid " Which menu file do you want to edit? "
-msgstr " Düzenlenecek menü hangisi? "
-
-msgid "&Local"
-msgstr "Yere&l"
-
-#, fuzzy
-msgid "Syntax file edit"
-msgstr "Men&ü dosyasýný düzenle"
-
-#, fuzzy
-msgid " Which syntax file you want to edit? "
 msgstr " Hangi uzantý dosyasý düzenlenecek? "
 
 msgid " Compare directories "
@@ -1115,12 +1187,6 @@ msgstr "&Titiz"
 
 msgid " Both panels should be in the listing mode to use this command "
 msgstr "Bu komutu kullanmak için her iki panelde liste görünümünde olmalý"
-
-msgid " The command history is empty "
-msgstr " Komut geçmiþi boþ "
-
-msgid " Command history "
-msgstr " Komut Geçmiþi "
 
 msgid ""
 " Not an xterm or Linux console; \n"
@@ -1298,9 +1364,6 @@ msgstr " Taþýma "
 
 msgid " Delete "
 msgstr " Sil "
-
-msgid " Invalid target mask "
-msgstr " Geçersiz hedef maský "
 
 msgid " Cannot make the hardlink "
 msgstr " Sabit bað oluþturulamadý "
@@ -1576,6 +1639,10 @@ msgstr ""
 "\"%s\" dizini silinemiyor \n"
 " %s "
 
+#, fuzzy
+msgid "Directory scanning"
+msgstr "Dizin yolu"
+
 msgid "1Copy"
 msgstr "1Kopyala"
 
@@ -1734,9 +1801,6 @@ msgstr "&Baðlarý izle"
 msgid "to:"
 msgstr "buraya:"
 
-msgid "&Using shell patterns"
-msgstr "&Kabuk masklarýný kullanarak"
-
 msgid "&Background"
 msgstr "A&rtalan"
 
@@ -1746,10 +1810,8 @@ msgstr "Kararlý &Sembolik Baðlar"
 msgid "&Dive into subdir if exists"
 msgstr "Varsa altdizine &Dal"
 
-#, c-format
-msgid ""
-"Invalid source pattern `%s' \n"
-" %s "
+#, fuzzy, c-format
+msgid "Invalid source pattern `%s'"
 msgstr ""
 "Geçersiz kaynak maský `%s' \n"
 " %s"
@@ -1778,26 +1840,54 @@ msgstr "&Görüntüle - F3"
 msgid "&Edit - F4"
 msgstr "Düz&enle - F4"
 
+#, c-format
+msgid "Found: %ld"
+msgstr ""
+
+#, fuzzy
+msgid " Malformed regular expression "
+msgstr " Düzenli ifade yanlýþ  "
+
+#, fuzzy
+msgid "Cas&e sensitive"
+msgstr "&Harf büyüklüðüne duyarlý"
+
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "&Harf büyüklüðüne duyarlý"
+
 msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "Start at:"
-msgstr "Baþlangýç:"
+msgid "&All charsets"
+msgstr ""
 
-msgid "Filename:"
-msgstr "Dosyaismi:"
+msgid "All cha&rsets"
+msgstr ""
 
-msgid "Content: "
-msgstr "Ýçerik: "
+#, fuzzy
+msgid "Re&gular expression"
+msgstr "&Düzenli ifade"
 
 msgid "&Tree"
 msgstr "&Aðaç"
 
 msgid "Find File"
 msgstr "Dosyayý bul"
+
+#, fuzzy
+msgid "Content:"
+msgstr "Ýçerik: "
+
+#, fuzzy
+msgid "File name:"
+msgstr "Dosyaismi:"
+
+msgid "Start at:"
+msgstr "Baþlangýç:"
 
 #, c-format
 msgid "Grepping in %s"
@@ -2162,6 +2252,9 @@ msgstr "&Sýralama türü..."
 msgid "&Filter..."
 msgstr "&Süzgeç..."
 
+msgid "&Encoding...    C-t"
+msgstr ""
+
 msgid "&Network link..."
 msgstr "&Að baðý..."
 
@@ -2177,9 +2270,6 @@ msgstr "S&MB baðý..."
 
 msgid "&Rescan         C-r"
 msgstr "Taz&ele            C-r"
-
-msgid "&User menu          F2"
-msgstr "K&ullanýcý menüsü             F2"
 
 msgid "&View               F3"
 msgstr "&Görünüm                      F3"
@@ -2238,6 +2328,9 @@ msgstr "Seçimi Tersine Çe&vir        M-*"
 msgid "e&Xit              F10"
 msgstr "&Çýkýþ            F10"
 
+msgid "&User menu          F2"
+msgstr "K&ullanýcý menüsü             F2"
+
 msgid "&Directory tree"
 msgstr "&Dizin aðacý"
 
@@ -2259,8 +2352,9 @@ msgstr "Dýþarýda&n panelle          C-x !"
 msgid "show directory s&Izes"
 msgstr "diz&in boyutlarýný göster"
 
-msgid "command &History"
-msgstr "komut &Geçmiþi"
+#, fuzzy
+msgid "Command &history      M-h"
+msgstr " Komut Geçmiþi "
 
 msgid "di&Rectory hotlist    C-\\"
 msgstr "Di&zin Geçmiþi               C-\\"
@@ -2281,13 +2375,6 @@ msgid "Edit &extension file"
 msgstr "Dosya &Uzantýlarýný düzenle"
 
 msgid "Edit &menu file"
-msgstr "Men&ü dosyasýný düzenle"
-
-msgid "Edit edi&tor menu file"
-msgstr "Menü d&üzenleyici düzenleme"
-
-#, fuzzy
-msgid "Edit &syntax file"
 msgstr "Men&ü dosyasýný düzenle"
 
 msgid "&Configuration..."
@@ -2353,6 +2440,22 @@ msgstr "KMenü"
 msgid "The TERM environment variable is unset!\n"
 msgstr "TERM çevre deðiþkeni atanmamýþ!\n"
 
+msgid "&Fix it"
+msgstr ""
+
+msgid "don't ask again"
+msgstr ""
+
+msgid ""
+"Chosen display charset (Settings->Display bits)\n"
+"or source codeset (in mcedit ctrl-t) \n"
+"does not match one set via locale. \n"
+"Set correct codeset manually or press <<Fix it>> \n"
+"to set locale default.\n"
+"\n"
+"Or set 'don't ask again' and press <<Skip>>"
+msgstr ""
+
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
@@ -2387,16 +2490,8 @@ msgid ""
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
 "   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked\n"
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
 msgstr ""
 "--colors ANAHTAR-KELÝME={ÖN},{ARKA}\n"
 "\n"
@@ -2416,6 +2511,18 @@ msgstr ""
 "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
 "   brightcyan, lightgray and white\n"
 "\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
 
 msgid "Displays this help message"
 msgstr "Bu yardým iletisini gösterir"
@@ -2478,6 +2585,10 @@ msgstr "Bir dosyayý dosya göstericide açar"
 
 msgid "Edits one file"
 msgstr "Dosya düzenler"
+
+#, fuzzy, c-format
+msgid "Cannot create %s directory"
+msgstr "Dizin deðiþtirilemedi"
 
 msgid "safe de&Lete"
 msgstr "güvenilir si&lme"
@@ -2697,21 +2808,35 @@ msgstr "Taþý"
 msgid "Mkdir"
 msgstr "DizinAç"
 
-msgid " Choose input codepage "
+msgid " Not implemented yet "
+msgstr ""
+
+msgid " Num of replace tokens not equal to num of found tokens "
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Invalid token number %d "
+msgstr " Geçersiz hedef maský "
+
+#, fuzzy
+msgid "Normal"
+msgstr "Biçim"
+
+msgid "&Regular expression"
+msgstr "&Düzenli ifade"
+
+msgid "Hexadecimal"
+msgstr ""
+
+msgid "Wildcard search"
+msgstr ""
+
+#, fuzzy
+msgid "Choose codepage"
 msgstr " Girdi karakter kümesini seçin "
 
 msgid "-  < No translation >"
 msgstr "-  < Çeviri yok >"
-
-msgid ""
-"To use this feature select your codepage in\n"
-"Setup / Display Bits dialog!\n"
-"Do not forget to save options."
-msgstr ""
-"Bu özelliði kullanmak için\n"
-"Seçenekler - > Bitleri Göster penceresinde\n"
-"kendi karakter kümenizi seçiniz.\n"
-"Ayarlarý kaydetmeyi de unutmayýnýz."
 
 #, c-format
 msgid ""
@@ -2748,6 +2873,10 @@ msgid "with terminfo database"
 msgstr "terminfo veritabaný ile"
 
 msgid "Using the ncurses library"
+msgstr "ncurses kitaplýðý kullanýlarak"
+
+#, fuzzy
+msgid "Using the ncursesw library"
 msgstr "ncurses kitaplýðý kullanýlarak"
 
 msgid "With optional subshell support"
@@ -2870,11 +2999,19 @@ msgstr " %s içinde tahsis edilebilir bir girdi yok"
 msgid " User menu "
 msgstr " Kullanýcý menüsü "
 
-msgid "%b %e %H:%M"
+#, fuzzy
+msgid "%b %d %H:%M"
 msgstr "%e %b %H:%M"
+
+#, fuzzy
+msgid "%b %d %Y"
+msgstr "%e %b  %Y"
 
 msgid "%b %e  %Y"
 msgstr "%e %b  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%e %b %H:%M"
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
@@ -2969,24 +3106,16 @@ msgid ""
 " %s "
 msgstr " Dosyayý kaydederken hata oluþtu. "
 
-msgid "Invalid hex search expression"
-msgstr "Onaltýlýk arama ifadesi geçersiz "
-
-msgid " Invalid regular expression "
-msgstr " Düzenli ifade geçersiz "
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" The current line number is %d.\n"
+" The current line number is %lu.\n"
 " Enter the new line number:"
 msgstr ""
 " Þimdiki satýr numarasý %d.\n"
 " Yeni satýr numarasýný verin:"
 
-#, c-format
-msgid ""
-" The current address is 0x%lx.\n"
-" Enter the new address:"
+#, fuzzy
+msgid " The current address is 0x%08"
 msgstr ""
 " Þimdiki adres 0x%lx.\n"
 " Yeni adresi verin:"
@@ -2998,25 +3127,10 @@ msgstr " Adrese Git "
 msgid " Invalid address "
 msgstr " Yanlýþ parola "
 
-msgid " Enter regexp:"
-msgstr " Düzenli ifadeyi girin:"
-
 msgid "ButtonBar|Help"
 msgstr ""
 
 msgid "ButtonBar|Quit"
-msgstr ""
-
-msgid "ButtonBar|Ascii"
-msgstr ""
-
-msgid "ButtonBar|Hex"
-msgstr ""
-
-msgid "ButtonBar|Goto"
-msgstr ""
-
-msgid "ButtonBar|Line"
 msgstr ""
 
 msgid "ButtonBar|View"
@@ -3026,33 +3140,6 @@ msgid "ButtonBar|Edit"
 msgstr ""
 
 msgid "ButtonBar|Save"
-msgstr ""
-
-msgid "ButtonBar|UnWrap"
-msgstr ""
-
-msgid "ButtonBar|Wrap"
-msgstr ""
-
-msgid "ButtonBar|RxSrch"
-msgstr ""
-
-msgid "ButtonBar|HxSrch"
-msgstr ""
-
-msgid "ButtonBar|Search"
-msgstr ""
-
-msgid "ButtonBar|Raw"
-msgstr ""
-
-msgid "ButtonBar|Parse"
-msgstr ""
-
-msgid "ButtonBar|Unform"
-msgstr ""
-
-msgid "ButtonBar|Format"
 msgstr ""
 
 msgid " History "
@@ -3635,6 +3722,69 @@ msgstr "Ýç hata:"
 msgid "Changes to file lost"
 msgstr "Deðiþiklikler kayýp"
 
+#~ msgid "scanf &Expression"
+#~ msgstr "scanf &Deyimi"
+
+#~ msgid "&Whole words only"
+#~ msgstr "&Sadece tam kelimeler"
+
+#~ msgid " Enter replacement argument order eg. 3,2,1,4 "
+#~ msgstr "Yerdeðiþtirme sýrasýný girin (örn: 3,2,1,4) "
+
+#~ msgid ""
+#~ " Invalid regular expression, or scanf expression with too many "
+#~ "conversions "
+#~ msgstr " Deðiþtirmelerin çoðunda scanf deyimi ya da düzenli ifade geçersiz "
+
+#~ msgid " Error in replacement format string. "
+#~ msgstr " Yerleþtirme biçimi dizgesinde hata. "
+
+#, fuzzy
+#~ msgid " Replacement too long. "
+#~ msgstr " Yerleþtirilecek metni verin:"
+
+#~ msgid "&Copy              F5"
+#~ msgstr "&Kopyala         F5"
+
+#~ msgid "&Delete            F8"
+#~ msgstr "&Sil               F8"
+
+#, fuzzy
+#~ msgid "Save setu&p..."
+#~ msgstr "Ayarlarý &Kaydet"
+
+#~ msgid " The command history is empty "
+#~ msgstr " Komut geçmiþi boþ "
+
+#~ msgid "command &History"
+#~ msgstr "komut &Geçmiþi"
+
+#~ msgid "Edit edi&tor menu file"
+#~ msgstr "Menü d&üzenleyici düzenleme"
+
+#, fuzzy
+#~ msgid "Edit &syntax file"
+#~ msgstr "Men&ü dosyasýný düzenle"
+
+#~ msgid ""
+#~ "To use this feature select your codepage in\n"
+#~ "Setup / Display Bits dialog!\n"
+#~ "Do not forget to save options."
+#~ msgstr ""
+#~ "Bu özelliði kullanmak için\n"
+#~ "Seçenekler - > Bitleri Göster penceresinde\n"
+#~ "kendi karakter kümenizi seçiniz.\n"
+#~ "Ayarlarý kaydetmeyi de unutmayýnýz."
+
+#~ msgid "Invalid hex search expression"
+#~ msgstr "Onaltýlýk arama ifadesi geçersiz "
+
+#~ msgid " Invalid regular expression "
+#~ msgstr " Düzenli ifade geçersiz "
+
+#~ msgid " Enter regexp:"
+#~ msgstr " Düzenli ifadeyi girin:"
+
 #~ msgid "Using included S-Lang library"
 #~ msgstr "Paket içindeki S-lang kitaplýðý kullanýlarak"
 
@@ -3758,9 +3908,6 @@ msgstr "Deðiþiklikler kayýp"
 
 #~ msgid "Unform"
 #~ msgstr "BiçKald"
-
-#~ msgid "Format"
-#~ msgstr "Biçim"
 
 #~ msgid "User menu available only in mcedit invoked from mc"
 #~ msgstr "Kullanýcý menüsü sadece mc ile çaðrýlan mcedit içinde kullanýþlýdýr"

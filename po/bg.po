@@ -2,10 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.55\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-14 19:43+0000\n"
+"POT-Creation-Date: 2009-06-30 19:38+0200\n"
 "PO-Revision-Date: 2002-06-24 02:15+0300\n"
 "Last-Translator: Todor Buyukliev <adrez@mail.bg>\n"
-"Language-Team: Bulgarian <dict@linux.zonebg.com>\n"
+"Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -52,8 +52,15 @@ msgstr " Файлът е прекалено голям: "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-msgid "&Dismiss"
-msgstr "Затвори"
+msgid "Search"
+msgstr "Търси"
+
+#, c-format
+msgid " %d items found, %d bookmarks added "
+msgstr " %d намирания, %d отметки добавени"
+
+msgid " Search string not found "
+msgstr " Търсеният низ не е намерен "
 
 msgid "Warning"
 msgstr "Внимание"
@@ -114,9 +121,6 @@ msgstr "Презапиши"
 msgid " Cannot save file. "
 msgstr " Грешка при запазване на файла. "
 
-msgid "Cancel"
-msgstr "Отказ"
-
 msgid " Delete macro "
 msgstr " Изтрий макрос "
 
@@ -161,6 +165,27 @@ msgstr ""
 msgid "C&ontinue"
 msgstr "Продължи"
 
+msgid "Syntax file edit"
+msgstr "Редактирай файл със синтаксис"
+
+msgid " Which syntax file you want to edit? "
+msgstr " Кой файл със синтаксис искате да редактирате? "
+
+msgid "&User"
+msgstr "Потребителски"
+
+msgid "&System Wide"
+msgstr "Системен"
+
+msgid " Menu edit "
+msgstr "Редактирай меню"
+
+msgid " Which menu file do you want to edit? "
+msgstr " Кой меню-файл ще редактирате? "
+
+msgid "&Local"
+msgstr "Локален"
+
 msgid " Load "
 msgstr " Зареди "
 
@@ -168,82 +193,16 @@ msgid " Block is large, you may not be able to undo this action. "
 msgstr ""
 " Блокът е голям. Възможно е това действие да не може да бъде отменено. "
 
-msgid "O&ne"
-msgstr "Един"
-
-msgid "A&ll"
-msgstr "Всички"
-
-msgid "&Skip"
-msgstr "Пропусни"
-
-msgid "&Replace"
+#, fuzzy
+msgid "Replace"
 msgstr "Замести"
-
-msgid " Replace with: "
-msgstr " Замести с:"
-
-msgid " Confirm replace "
-msgstr " Потвърдете замяната "
-
-msgid "scanf &Expression"
-msgstr "scanf израз"
-
-msgid "replace &All"
-msgstr "Замести всички"
-
-msgid "pro&Mpt on replace"
-msgstr "Питай при замяна"
-
-msgid "&Backwards"
-msgstr "Назад"
-
-msgid "&Regular expression"
-msgstr "Регулярен израз"
-
-msgid "&Whole words only"
-msgstr "Само цели думи"
-
-msgid "case &Sensitive"
-msgstr "Различавай главни/малки"
-
-msgid " Enter replacement argument order eg. 3,2,1,4 "
-msgstr " Ред на заместващите аргументи, напр. 3,2,1,4 "
-
-msgid " Enter replacement string:"
-msgstr " Въведете заместващия низ:"
-
-msgid " Enter search string:"
-msgstr " Въведете търсения низ:"
 
 msgid " Replace "
 msgstr " Замяна "
 
-msgid "Search"
-msgstr "Търси"
-
-msgid ""
-" Invalid regular expression, or scanf expression with too many conversions "
-msgstr ""
-" Невалиден регулярен израз или scanf израз с прекалено много превръщания "
-
-msgid " Error in replacement format string. "
-msgstr "Грешка във формата на заместващия низ. "
-
-#, fuzzy
-msgid " Replacement too long. "
-msgstr " Въведете заместващия низ:"
-
 #, c-format
 msgid " %ld replacements made. "
 msgstr " %ld замени направени. "
-
-msgid " Search string not found "
-msgstr " Търсеният низ не е намерен "
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " %d намирания, %d отметки добавени"
 
 msgid "Quit"
 msgstr "Изход"
@@ -362,6 +321,51 @@ msgstr " Натиснете клавиш: "
 msgid " Execute Macro "
 msgstr " Изпълни Макрос "
 
+msgid "pro&Mpt on replace"
+msgstr "Питай при замяна"
+
+msgid "replace &All"
+msgstr "Замести всички"
+
+msgid "All charsets"
+msgstr ""
+
+msgid "&Backwards"
+msgstr "Назад"
+
+msgid "case &Sensitive"
+msgstr "Различавай главни/малки"
+
+msgid " Enter replacement string:"
+msgstr " Въведете заместващия низ:"
+
+msgid " Enter search string:"
+msgstr " Въведете търсения низ:"
+
+msgid "Cancel"
+msgstr "Отказ"
+
+msgid "O&ne"
+msgstr "Един"
+
+msgid "A&ll"
+msgstr "Всички"
+
+msgid "&Skip"
+msgstr "Пропусни"
+
+msgid "&Replace"
+msgstr "Замести"
+
+msgid " Replace with: "
+msgstr " Замести с:"
+
+msgid " Confirm replace "
+msgstr " Потвърдете замяната "
+
+msgid "&Dismiss"
+msgstr "Затвори"
+
 msgid " Emacs key: "
 msgstr " Emacs клавиш: "
 
@@ -434,32 +438,79 @@ msgstr "Нов            C-x k"
 msgid "Copy to &file...     "
 msgstr "Копирай във файл...  "
 
-msgid "&Toggle Mark       F3"
+#, fuzzy
+msgid "&Toggle mark                 F3"
 msgstr "Маркирай            F3"
 
-msgid "&Mark Columns    S-F3"
+#, fuzzy
+msgid "Mar&k columns              S-F3"
 msgstr "Маркирай колони   S-F3"
 
-msgid "Toggle &ins/overw Ins"
+#, fuzzy
+msgid "Toggle &ins/overw           Ins"
 msgstr "Вмъкване/презапис  Ins"
 
-msgid "&Copy              F5"
-msgstr "Копирай             F5"
+#, fuzzy
+msgid "&Copy                        F5"
+msgstr "Копирай                   F5"
 
-msgid "&Move              F6"
+#, fuzzy
+msgid "&Move                        F6"
 msgstr "Премести            F6"
 
-msgid "&Delete            F8"
-msgstr "Изтрий              F8"
+#, fuzzy
+msgid "&Delete                      F8"
+msgstr "Изтрий                    F8"
 
-msgid "&Undo             C-u"
+#, fuzzy
+msgid "C&opy to clipfile         C-Ins"
+msgstr "Копирай във файл...  "
+
+#, fuzzy
+msgid "C&ut to clipfile          S-Del"
+msgstr "Отиди на ред...            M-l"
+
+msgid "&Paste from clipfile      S-Ins"
+msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "Маркирай            F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "Нов                C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "Сортирай...                M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "Пусни по пощата...            "
+
+#, fuzzy
+msgid "&Undo                       C-u"
 msgstr "Отмени действие    C-u"
 
-msgid "&Beginning     C-PgUp"
+#, fuzzy
+msgid "&Beginning               C-PgUp"
 msgstr "Начало          C-PgUp"
 
-msgid "&End           C-PgDn"
+#, fuzzy
+msgid "&End                     C-PgDn"
 msgstr "Край            C-PgDn"
+
+#, fuzzy
+msgid "C&opy to clipfile           M-w"
+msgstr "Отиди на ред...            M-l"
+
+#, fuzzy
+msgid "C&ut to clipfile            C-w"
+msgstr "Отиди на ред...            M-l"
+
+msgid "&Paste from clipfile        C-y"
+msgstr ""
 
 msgid "&Search...         F7"
 msgstr "Търси...          F7"
@@ -473,8 +524,25 @@ msgstr "Замести...        F4"
 msgid "&Go to line...            M-l"
 msgstr "Отиди на ред...            M-l"
 
+#, fuzzy
+msgid "Toggle li&ne state        M-n"
+msgstr "Маркирай            F3"
+
 msgid "Go to matching &bracket   M-b"
 msgstr "При съответстващата скоба  M-b"
+
+msgid "Find declaration      A-Enter"
+msgstr ""
+
+msgid "Back from declaration     M--"
+msgstr ""
+
+msgid "Forward to declaration    M-+"
+msgstr ""
+
+#, fuzzy
+msgid "Encod&ing...             C-t"
+msgstr "Сортирай...                M-t"
 
 msgid "Insert &literal...       C-q"
 msgstr "Вмъкни символ              C-q"
@@ -536,7 +604,15 @@ msgid "Syntax &Highlighting..."
 msgstr "Осветяване на синтаксиса"
 
 #, fuzzy
-msgid "Save setu&p..."
+msgid "S&yntax file"
+msgstr "Редактирай файл със синтаксис"
+
+#, fuzzy
+msgid "&Menu file"
+msgstr "Редактирай меню-файл"
+
+#, fuzzy
+msgid "Save setu&p"
 msgstr "Запази настройките"
 
 msgid " File "
@@ -578,6 +654,10 @@ msgstr "Дължина на ред : "
 
 msgid "Tab spacing: "
 msgstr "Размер на tab-овете: "
+
+#, fuzzy
+msgid "Pers&istent selection"
+msgstr "Обърни маркирането       M-*"
 
 msgid "Synta&x highlighting"
 msgstr "Осветяване на синтаксиса"
@@ -814,6 +894,10 @@ msgstr " Потвърждавай изтриване "
 
 msgid " Confirmation "
 msgstr " Потвърждение "
+
+#, fuzzy
+msgid "UTF-8 output"
+msgstr "Показвай 8 бита"
 
 msgid "Full 8 bits output"
 msgstr "Показвай 8 бита"
@@ -1057,8 +1141,16 @@ msgstr " Филтър "
 msgid " Set expression for filtering filenames"
 msgstr " Укажете израз за филтриране на имена"
 
-msgid "  Malformed regular expression  "
-msgstr "  Грешен регулярен израз  "
+msgid "&Using shell patterns"
+msgstr "Mетасимволи на обвивката"
+
+#, fuzzy
+msgid "&Case sensitive"
+msgstr "Различавай главни/малки"
+
+#, fuzzy
+msgid "&Files only"
+msgstr "Само размерите"
 
 msgid " Select "
 msgstr " Маркирай "
@@ -1071,27 +1163,6 @@ msgstr "Редактирай файл с разширения"
 
 msgid " Which extension file you want to edit? "
 msgstr " Кой файл с разширения искате да редактирате? "
-
-msgid "&User"
-msgstr "Потребителски"
-
-msgid "&System Wide"
-msgstr "Системен"
-
-msgid " Menu edit "
-msgstr "Редактирай меню"
-
-msgid " Which menu file do you want to edit? "
-msgstr " Кой меню-файл ще редактирате? "
-
-msgid "&Local"
-msgstr "Локален"
-
-msgid "Syntax file edit"
-msgstr "Редактирай файл със синтаксис"
-
-msgid " Which syntax file you want to edit? "
-msgstr " Кой файл със синтаксис искате да редактирате? "
 
 msgid " Compare directories "
 msgstr " Сравни директории "
@@ -1111,12 +1182,6 @@ msgstr "Пълен"
 msgid " Both panels should be in the listing mode to use this command "
 msgstr ""
 " Двата панела трябва да са в режим на списък, за да използвате тази команда "
-
-msgid " The command history is empty "
-msgstr " Командната история е празна "
-
-msgid " Command history "
-msgstr " Командна история "
 
 msgid ""
 " Not an xterm or Linux console; \n"
@@ -1295,9 +1360,6 @@ msgstr " Преместване "
 
 msgid " Delete "
 msgstr " Изтриване "
-
-msgid " Invalid target mask "
-msgstr " Невалидна маска на назначението "
 
 msgid " Cannot make the hardlink "
 msgstr " Не мога да създам твърдата връзка "
@@ -1573,6 +1635,10 @@ msgstr ""
 " Не може да се изтрие директорията \"%s\" \n"
 " %s "
 
+#, fuzzy
+msgid "Directory scanning"
+msgstr "Път"
+
 msgid "1Copy"
 msgstr "1Копирай"
 
@@ -1731,9 +1797,6 @@ msgstr "следвай връзките"
 msgid "to:"
 msgstr "в:"
 
-msgid "&Using shell patterns"
-msgstr "Mетасимволи на обвивката"
-
 msgid "&Background"
 msgstr "Във фон"
 
@@ -1743,10 +1806,8 @@ msgstr "Стабилни връзки"
 msgid "&Dive into subdir if exists"
 msgstr "В поддиректория, ако съществува"
 
-#, c-format
-msgid ""
-"Invalid source pattern `%s' \n"
-" %s "
+#, fuzzy, c-format
+msgid "Invalid source pattern `%s'"
 msgstr ""
 "Невалидна маска на източника `%s` \n"
 " %s "
@@ -1775,26 +1836,54 @@ msgstr "Покажи - F3"
 msgid "&Edit - F4"
 msgstr "Редактирай - F4"
 
+#, c-format
+msgid "Found: %ld"
+msgstr ""
+
+#, fuzzy
+msgid " Malformed regular expression "
+msgstr "  Грешен регулярен израз  "
+
+#, fuzzy
+msgid "Cas&e sensitive"
+msgstr "Различавай главни/малки"
+
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "Различавай главни/малки"
+
 msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "Start at:"
-msgstr "Започни от:"
+msgid "&All charsets"
+msgstr ""
 
-msgid "Filename:"
-msgstr "Име на файл:"
+msgid "All cha&rsets"
+msgstr ""
 
-msgid "Content: "
-msgstr "Съдържание: "
+#, fuzzy
+msgid "Re&gular expression"
+msgstr "Регулярен израз"
 
 msgid "&Tree"
 msgstr "Дърво"
 
 msgid "Find File"
 msgstr "Търси файл"
+
+#, fuzzy
+msgid "Content:"
+msgstr "Съдържание: "
+
+#, fuzzy
+msgid "File name:"
+msgstr "Име на файл:"
+
+msgid "Start at:"
+msgstr "Започни от:"
 
 #, c-format
 msgid "Grepping in %s"
@@ -2159,6 +2248,9 @@ msgstr "Ред на сортиране..."
 msgid "&Filter..."
 msgstr "Филтър..."
 
+msgid "&Encoding...    C-t"
+msgstr ""
+
 msgid "&Network link..."
 msgstr "Мрежова връзка..."
 
@@ -2174,9 +2266,6 @@ msgstr "SMB връзка..."
 
 msgid "&Rescan         C-r"
 msgstr "Опресни           C-r"
-
-msgid "&User menu          F2"
-msgstr "Потребителско меню        F2"
 
 msgid "&View               F3"
 msgstr "Покажи                    F3"
@@ -2235,6 +2324,9 @@ msgstr "Обърни маркирането       M-*"
 msgid "e&Xit              F10"
 msgstr "Изход                    F10"
 
+msgid "&User menu          F2"
+msgstr "Потребителско меню        F2"
+
 msgid "&Directory tree"
 msgstr "Дърво на директориите"
 
@@ -2256,8 +2348,9 @@ msgstr "Команда в панел         C-x !"
 msgid "show directory s&Izes"
 msgstr "Покажи размера на директориите"
 
-msgid "command &History"
-msgstr "Командна история"
+#, fuzzy
+msgid "Command &history      M-h"
+msgstr " Командна история "
 
 msgid "di&Rectory hotlist    C-\\"
 msgstr "Горещи директории       C-\\"
@@ -2279,12 +2372,6 @@ msgstr "Редактирай файл с разширения"
 
 msgid "Edit &menu file"
 msgstr "Редактирай меню-файл"
-
-msgid "Edit edi&tor menu file"
-msgstr "Меню на редактора"
-
-msgid "Edit &syntax file"
-msgstr "Редактирай файл със синтаксис"
 
 msgid "&Configuration..."
 msgstr "Конфигурация..."
@@ -2348,6 +2435,22 @@ msgstr "Меню"
 msgid "The TERM environment variable is unset!\n"
 msgstr "Променливата TERM не е установена!\n"
 
+msgid "&Fix it"
+msgstr ""
+
+msgid "don't ask again"
+msgstr ""
+
+msgid ""
+"Chosen display charset (Settings->Display bits)\n"
+"or source codeset (in mcedit ctrl-t) \n"
+"does not match one set via locale. \n"
+"Set correct codeset manually or press <<Fix it>> \n"
+"to set locale default.\n"
+"\n"
+"Or set 'don't ask again' and press <<Skip>>"
+msgstr ""
+
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
@@ -2382,16 +2485,8 @@ msgid ""
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
 "   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked\n"
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
 msgstr ""
 "--colors КЛЮЧ={ПРЕД},{ФОН}\n"
 "\n"
@@ -2411,6 +2506,18 @@ msgstr ""
 "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
 "   brightcyan, lightgray and white\n"
 "\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
 
 msgid "Displays this help message"
 msgstr "Показва това помощно съобщение"
@@ -2473,6 +2580,10 @@ msgstr "Показва файл"
 
 msgid "Edits one file"
 msgstr "Редактира файл"
+
+#, fuzzy, c-format
+msgid "Cannot create %s directory"
+msgstr "Не може да се смени директорията"
 
 msgid "safe de&Lete"
 msgstr "Безопасно триене"
@@ -2692,20 +2803,35 @@ msgstr "Мести"
 msgid "Mkdir"
 msgstr "НовДир"
 
-msgid " Choose input codepage "
+msgid " Not implemented yet "
+msgstr ""
+
+msgid " Num of replace tokens not equal to num of found tokens "
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Invalid token number %d "
+msgstr " Невалидна маска на назначението "
+
+#, fuzzy
+msgid "Normal"
+msgstr "Формат"
+
+msgid "&Regular expression"
+msgstr "Регулярен израз"
+
+msgid "Hexadecimal"
+msgstr ""
+
+msgid "Wildcard search"
+msgstr ""
+
+#, fuzzy
+msgid "Choose codepage"
 msgstr " Изберете входна кодова страница "
 
 msgid "-  < No translation >"
 msgstr "-  < Няма превод >"
-
-msgid ""
-"To use this feature select your codepage in\n"
-"Setup / Display Bits dialog!\n"
-"Do not forget to save options."
-msgstr ""
-"За да използвате тази възможност, изберете\n"
-"кодовата си страница в диалога Опции/Екран...!\n"
-"Не забравяйте да запазите настройките!"
 
 #, c-format
 msgid ""
@@ -2742,6 +2868,10 @@ msgid "with terminfo database"
 msgstr "с terminfo база данни"
 
 msgid "Using the ncurses library"
+msgstr "С библиотеката ncurses"
+
+#, fuzzy
+msgid "Using the ncursesw library"
 msgstr "С библиотеката ncurses"
 
 msgid "With optional subshell support"
@@ -2864,11 +2994,19 @@ msgstr " Не са открити подходящи елементи в %s "
 msgid " User menu "
 msgstr " Поребителско меню "
 
-msgid "%b %e %H:%M"
+#, fuzzy
+msgid "%b %d %H:%M"
 msgstr "%b %e %H:%M"
+
+#, fuzzy
+msgid "%b %d %Y"
+msgstr "%b %e  %Y"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
@@ -2963,24 +3101,16 @@ msgid ""
 " %s "
 msgstr " Грешка при запазване на файла. "
 
-msgid "Invalid hex search expression"
-msgstr "Невалиден шестнадесетичен израз "
-
-msgid " Invalid regular expression "
-msgstr " Невалиден регулярен израз "
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" The current line number is %d.\n"
+" The current line number is %lu.\n"
 " Enter the new line number:"
 msgstr ""
 " Текущият ред е %d.\n"
 " Въведете нов номер на ред:"
 
-#, c-format
-msgid ""
-" The current address is 0x%lx.\n"
-" Enter the new address:"
+#, fuzzy
+msgid " The current address is 0x%08"
 msgstr ""
 " Текущият адрес е 0x%lx.\n"
 " Въвдете нов адрес:"
@@ -2992,25 +3122,10 @@ msgstr " Отиди на адрес "
 msgid " Invalid address "
 msgstr " Невалидна парола "
 
-msgid " Enter regexp:"
-msgstr " Въведете регулярен израз:"
-
 msgid "ButtonBar|Help"
 msgstr ""
 
 msgid "ButtonBar|Quit"
-msgstr ""
-
-msgid "ButtonBar|Ascii"
-msgstr ""
-
-msgid "ButtonBar|Hex"
-msgstr ""
-
-msgid "ButtonBar|Goto"
-msgstr ""
-
-msgid "ButtonBar|Line"
 msgstr ""
 
 msgid "ButtonBar|View"
@@ -3020,33 +3135,6 @@ msgid "ButtonBar|Edit"
 msgstr ""
 
 msgid "ButtonBar|Save"
-msgstr ""
-
-msgid "ButtonBar|UnWrap"
-msgstr ""
-
-msgid "ButtonBar|Wrap"
-msgstr ""
-
-msgid "ButtonBar|RxSrch"
-msgstr ""
-
-msgid "ButtonBar|HxSrch"
-msgstr ""
-
-msgid "ButtonBar|Search"
-msgstr ""
-
-msgid "ButtonBar|Raw"
-msgstr ""
-
-msgid "ButtonBar|Parse"
-msgstr ""
-
-msgid "ButtonBar|Unform"
-msgstr ""
-
-msgid "ButtonBar|Format"
 msgstr ""
 
 msgid " History "
@@ -3628,6 +3716,68 @@ msgstr "Вътрешна грешка:"
 msgid "Changes to file lost"
 msgstr "Промените във файла изгубени"
 
+#~ msgid "scanf &Expression"
+#~ msgstr "scanf израз"
+
+#~ msgid "&Whole words only"
+#~ msgstr "Само цели думи"
+
+#~ msgid " Enter replacement argument order eg. 3,2,1,4 "
+#~ msgstr " Ред на заместващите аргументи, напр. 3,2,1,4 "
+
+#~ msgid ""
+#~ " Invalid regular expression, or scanf expression with too many "
+#~ "conversions "
+#~ msgstr ""
+#~ " Невалиден регулярен израз или scanf израз с прекалено много превръщания "
+
+#~ msgid " Error in replacement format string. "
+#~ msgstr "Грешка във формата на заместващия низ. "
+
+#, fuzzy
+#~ msgid " Replacement too long. "
+#~ msgstr " Въведете заместващия низ:"
+
+#~ msgid "&Copy              F5"
+#~ msgstr "Копирай             F5"
+
+#~ msgid "&Delete            F8"
+#~ msgstr "Изтрий              F8"
+
+#, fuzzy
+#~ msgid "Save setu&p..."
+#~ msgstr "Запази настройките"
+
+#~ msgid " The command history is empty "
+#~ msgstr " Командната история е празна "
+
+#~ msgid "command &History"
+#~ msgstr "Командна история"
+
+#~ msgid "Edit edi&tor menu file"
+#~ msgstr "Меню на редактора"
+
+#~ msgid "Edit &syntax file"
+#~ msgstr "Редактирай файл със синтаксис"
+
+#~ msgid ""
+#~ "To use this feature select your codepage in\n"
+#~ "Setup / Display Bits dialog!\n"
+#~ "Do not forget to save options."
+#~ msgstr ""
+#~ "За да използвате тази възможност, изберете\n"
+#~ "кодовата си страница в диалога Опции/Екран...!\n"
+#~ "Не забравяйте да запазите настройките!"
+
+#~ msgid "Invalid hex search expression"
+#~ msgstr "Невалиден шестнадесетичен израз "
+
+#~ msgid " Invalid regular expression "
+#~ msgstr " Невалиден регулярен израз "
+
+#~ msgid " Enter regexp:"
+#~ msgstr " Въведете регулярен израз:"
+
 #~ msgid "Using included S-Lang library"
 #~ msgstr "С вградена S-Lang библиотека"
 
@@ -3751,9 +3901,6 @@ msgstr "Промените във файла изгубени"
 
 #~ msgid "Unform"
 #~ msgstr "НеФрмт"
-
-#~ msgid "Format"
-#~ msgstr "Формат"
 
 #~ msgid "User menu available only in mcedit invoked from mc"
 #~ msgstr "Потребителско меню има само в mcedit, извикан от mc"

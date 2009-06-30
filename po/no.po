@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-14 19:43+0000\n"
+"POT-Creation-Date: 2009-06-30 19:38+0200\n"
 "PO-Revision-Date: 2002-10-22 14:28+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -54,8 +54,15 @@ msgstr " Filen er for stor: "
 msgid "Macro recursion is too deep"
 msgstr "For dyp rekursjon i makro"
 
-msgid "&Dismiss"
-msgstr "Forkast"
+msgid "Search"
+msgstr "Søk"
+
+#, c-format
+msgid " %d items found, %d bookmarks added "
+msgstr "%d funn gjort, %d bokmerker lagt til"
+
+msgid " Search string not found "
+msgstr " Søkestrengen ikke funnet "
 
 msgid "Warning"
 msgstr "Advarsel"
@@ -115,9 +122,6 @@ msgstr "Overskriv"
 msgid " Cannot save file. "
 msgstr " Feil under lagring av fil. "
 
-msgid "Cancel"
-msgstr "Avbryt"
-
 msgid " Delete macro "
 msgstr " Slett makro "
 
@@ -162,88 +166,43 @@ msgstr ""
 msgid "C&ontinue"
 msgstr "Fortsett"
 
+msgid "Syntax file edit"
+msgstr "Redigering av syntaksfil"
+
+msgid " Which syntax file you want to edit? "
+msgstr " Hvilken syntaksfil vil du redigere? "
+
+msgid "&User"
+msgstr "&Bruker"
+
+msgid "&System Wide"
+msgstr "&System"
+
+msgid " Menu edit "
+msgstr " Menyredigering "
+
+msgid " Which menu file do you want to edit? "
+msgstr " Hvilken menyfil vil du redigere? "
+
+msgid "&Local"
+msgstr "&Lokal"
+
 msgid " Load "
 msgstr " Last "
 
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " Blokken er for stor, du kan kanskje ikke angre denne handlingen. "
 
-msgid "O&ne"
-msgstr "e&N"
-
-msgid "A&ll"
-msgstr "A&lle"
-
-msgid "&Skip"
-msgstr "&Hopp over"
-
-msgid "&Replace"
+#, fuzzy
+msgid "Replace"
 msgstr "E&rstatt"
-
-msgid " Replace with: "
-msgstr " Erstatt med: "
-
-msgid " Confirm replace "
-msgstr " Bekreft erstatt "
-
-msgid "scanf &Expression"
-msgstr "scanf uttrykk"
-
-msgid "replace &All"
-msgstr "erstatt alle"
-
-msgid "pro&Mpt on replace"
-msgstr "spør ved erstatning"
-
-msgid "&Backwards"
-msgstr "Bakover"
-
-msgid "&Regular expression"
-msgstr "Vanlig uttrykk"
-
-msgid "&Whole words only"
-msgstr "Kun hele ord"
-
-msgid "case &Sensitive"
-msgstr "skill mellom &store/små tegn"
-
-msgid " Enter replacement argument order eg. 3,2,1,4 "
-msgstr " Skriv inn argumentrekkefølge f.eks. 3,2,1,4 "
-
-msgid " Enter replacement string:"
-msgstr " Skriv inn erstatningsstreng:"
-
-msgid " Enter search string:"
-msgstr " Skriv inn søkestreng:"
 
 msgid " Replace "
 msgstr " Erstatt "
 
-msgid "Search"
-msgstr "Søk"
-
-msgid ""
-" Invalid regular expression, or scanf expression with too many conversions "
-msgstr ""
-" Ugyldig vanlig uttrykk, eller scanf uttrykk med for mange omsettinger "
-
-msgid " Error in replacement format string. "
-msgstr " Feil i erstatningsstrengen for format. "
-
-#, fuzzy
-msgid " Replacement too long. "
-msgstr " Skriv inn erstatningsstreng:"
-
 #, c-format
 msgid " %ld replacements made. "
 msgstr " %ld erstatninger utført. "
-
-msgid " Search string not found "
-msgstr " Søkestrengen ikke funnet "
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr "%d funn gjort, %d bokmerker lagt til"
 
 msgid "Quit"
 msgstr "Slutt"
@@ -361,6 +320,51 @@ msgstr " Trykk en tast: "
 msgid " Execute Macro "
 msgstr " Kjør makro "
 
+msgid "pro&Mpt on replace"
+msgstr "spør ved erstatning"
+
+msgid "replace &All"
+msgstr "erstatt alle"
+
+msgid "All charsets"
+msgstr ""
+
+msgid "&Backwards"
+msgstr "Bakover"
+
+msgid "case &Sensitive"
+msgstr "skill mellom &store/små tegn"
+
+msgid " Enter replacement string:"
+msgstr " Skriv inn erstatningsstreng:"
+
+msgid " Enter search string:"
+msgstr " Skriv inn søkestreng:"
+
+msgid "Cancel"
+msgstr "Avbryt"
+
+msgid "O&ne"
+msgstr "e&N"
+
+msgid "A&ll"
+msgstr "A&lle"
+
+msgid "&Skip"
+msgstr "&Hopp over"
+
+msgid "&Replace"
+msgstr "E&rstatt"
+
+msgid " Replace with: "
+msgstr " Erstatt med: "
+
+msgid " Confirm replace "
+msgstr " Bekreft erstatt "
+
+msgid "&Dismiss"
+msgstr "Forkast"
+
 msgid " Emacs key: "
 msgstr " Emacs-tast: "
 
@@ -433,32 +437,79 @@ msgstr "&Ny             C-x k"
 msgid "Copy to &file...     "
 msgstr "kopier til &Fil...   "
 
-msgid "&Toggle Mark       F3"
+#, fuzzy
+msgid "&Toggle mark                 F3"
 msgstr "slå av/på merking  F3"
 
-msgid "&Mark Columns    S-F3"
+#, fuzzy
+msgid "Mar&k columns              S-F3"
 msgstr "&Merk kolonner   S-F3"
 
-msgid "Toggle &ins/overw Ins"
+#, fuzzy
+msgid "Toggle &ins/overw           Ins"
 msgstr "slå av/på sett inn/overskriv Ins"
 
-msgid "&Copy              F5"
+#, fuzzy
+msgid "&Copy                        F5"
 msgstr "Kopier             F5"
 
-msgid "&Move              F6"
+#, fuzzy
+msgid "&Move                        F6"
 msgstr "Flytt              F6"
 
-msgid "&Delete            F8"
+#, fuzzy
+msgid "&Delete                      F8"
 msgstr "Slett              F8"
 
-msgid "&Undo             C-u"
+#, fuzzy
+msgid "C&opy to clipfile         C-Ins"
+msgstr "kopier til &Fil...   "
+
+#, fuzzy
+msgid "C&ut to clipfile          S-Del"
+msgstr "Gå til linje...          M-l"
+
+msgid "&Paste from clipfile      S-Ins"
+msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "slå av/på merking  F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "&Ny               C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "Sor&ter...               M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "Send...                     "
+
+#, fuzzy
+msgid "&Undo                       C-u"
 msgstr "Angre             C-u"
 
-msgid "&Beginning     C-PgUp"
+#, fuzzy
+msgid "&Beginning               C-PgUp"
 msgstr "&Begynnelsen   C-PgUp"
 
-msgid "&End           C-PgDn"
+#, fuzzy
+msgid "&End                     C-PgDn"
 msgstr "Slutt          C-PgDn"
+
+#, fuzzy
+msgid "C&opy to clipfile           M-w"
+msgstr "Gå til linje...          M-l"
+
+#, fuzzy
+msgid "C&ut to clipfile            C-w"
+msgstr "Gå til linje...          M-l"
+
+msgid "&Paste from clipfile        C-y"
+msgstr ""
 
 msgid "&Search...         F7"
 msgstr "Søk...             F7"
@@ -472,8 +523,25 @@ msgstr "Erstatt...         F4"
 msgid "&Go to line...            M-l"
 msgstr "Gå til linje...          M-l"
 
+#, fuzzy
+msgid "Toggle li&ne state        M-n"
+msgstr "slå av/på merking  F3"
+
 msgid "Go to matching &bracket   M-b"
 msgstr "gå til passende &Klamme  M-b"
+
+msgid "Find declaration      A-Enter"
+msgstr ""
+
+msgid "Back from declaration     M--"
+msgstr ""
+
+msgid "Forward to declaration    M-+"
+msgstr ""
+
+#, fuzzy
+msgid "Encod&ing...             C-t"
+msgstr "Sor&ter...               M-t"
 
 msgid "Insert &literal...       C-q"
 msgstr "sett inn &Literal...     C-q"
@@ -535,7 +603,15 @@ msgid "Syntax &Highlighting..."
 msgstr "syntaksutheving"
 
 #, fuzzy
-msgid "Save setu&p..."
+msgid "S&yntax file"
+msgstr "Redigering av syntaksfil"
+
+#, fuzzy
+msgid "&Menu file"
+msgstr "Menyfilredigering"
+
+#, fuzzy
+msgid "Save setu&p"
 msgstr "Lagre oppsett"
 
 msgid " File "
@@ -577,6 +653,10 @@ msgstr "Linjelengde for ordbryting : "
 
 msgid "Tab spacing: "
 msgstr "Tabulatormellomrom : "
+
+#, fuzzy
+msgid "Pers&istent selection"
+msgstr "reverser valg      M-*"
 
 msgid "Synta&x highlighting"
 msgstr "syntaksutheving"
@@ -813,6 +893,10 @@ msgstr " bekreft &slett "
 
 msgid " Confirmation "
 msgstr " Bekreftelse "
+
+#, fuzzy
+msgid "UTF-8 output"
+msgstr "Full 8-bits utskrift"
 
 msgid "Full 8 bits output"
 msgstr "Full 8-bits utskrift"
@@ -1056,8 +1140,16 @@ msgstr " Filter "
 msgid " Set expression for filtering filenames"
 msgstr " Sett uttrykk for filtrering av filnavn"
 
-msgid "  Malformed regular expression  "
-msgstr "  Malformert vanlig uttrykk  "
+msgid "&Using shell patterns"
+msgstr "bruker skallmønstre"
+
+#, fuzzy
+msgid "&Case sensitive"
+msgstr "skill mellom s&tore/små tegn"
+
+#, fuzzy
+msgid "&Files only"
+msgstr "Bare &Størrelse"
 
 msgid " Select "
 msgstr " Velg "
@@ -1070,27 +1162,6 @@ msgstr "Rediger utvidelsesfil"
 
 msgid " Which extension file you want to edit? "
 msgstr " Hvilken utvidelsesfil vil du redigere? "
-
-msgid "&User"
-msgstr "&Bruker"
-
-msgid "&System Wide"
-msgstr "&System"
-
-msgid " Menu edit "
-msgstr " Menyredigering "
-
-msgid " Which menu file do you want to edit? "
-msgstr " Hvilken menyfil vil du redigere? "
-
-msgid "&Local"
-msgstr "&Lokal"
-
-msgid "Syntax file edit"
-msgstr "Redigering av syntaksfil"
-
-msgid " Which syntax file you want to edit? "
-msgstr " Hvilken syntaksfil vil du redigere? "
 
 msgid " Compare directories "
 msgstr " Sammenlign kataloger "
@@ -1111,12 +1182,6 @@ msgid " Both panels should be in the listing mode to use this command "
 msgstr ""
 " Begge panelene bør være i visningsmodus for liste for å bruke denne "
 "kommandoen "
-
-msgid " The command history is empty "
-msgstr " Kommandohistorikken er tom "
-
-msgid " Command history "
-msgstr " Kommandohistorikk "
 
 msgid ""
 " Not an xterm or Linux console; \n"
@@ -1294,9 +1359,6 @@ msgstr " Flytt "
 
 msgid " Delete "
 msgstr " Slett "
-
-msgid " Invalid target mask "
-msgstr " Ugyldig målmaske "
 
 msgid " Cannot make the hardlink "
 msgstr " Kunne ikke lage den faste lenken "
@@ -1572,6 +1634,10 @@ msgstr ""
 " Kan ikke fjerne katalogen \"%s\" \n"
 " %s "
 
+#, fuzzy
+msgid "Directory scanning"
+msgstr "Katalogsti"
+
 msgid "1Copy"
 msgstr "1Kopier"
 
@@ -1730,9 +1796,6 @@ msgstr "følg lenker"
 msgid "to:"
 msgstr "til:"
 
-msgid "&Using shell patterns"
-msgstr "bruker skallmønstre"
-
 msgid "&Background"
 msgstr "Bakgrunn"
 
@@ -1742,10 +1805,8 @@ msgstr "Stabile symlenker"
 msgid "&Dive into subdir if exists"
 msgstr "Gå inn ned underkatalog hvis den eksisterer"
 
-#, c-format
-msgid ""
-"Invalid source pattern `%s' \n"
-" %s "
+#, fuzzy, c-format
+msgid "Invalid source pattern `%s'"
 msgstr ""
 "Ugyldig kildemønster `%s' \n"
 " %s "
@@ -1774,26 +1835,54 @@ msgstr "Se på - F3"
 msgid "&Edit - F4"
 msgstr "Rediger - F4"
 
+#, c-format
+msgid "Found: %ld"
+msgstr ""
+
+#, fuzzy
+msgid " Malformed regular expression "
+msgstr "  Malformert vanlig uttrykk  "
+
+#, fuzzy
+msgid "Cas&e sensitive"
+msgstr "skill mellom s&tore/små tegn"
+
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "skill mellom s&tore/små tegn"
+
 msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "Start at:"
-msgstr "Start ved:"
+msgid "&All charsets"
+msgstr ""
 
-msgid "Filename:"
-msgstr "Filnavn:"
+msgid "All cha&rsets"
+msgstr ""
 
-msgid "Content: "
-msgstr "Innhold: "
+#, fuzzy
+msgid "Re&gular expression"
+msgstr "Vanlig uttrykk"
 
 msgid "&Tree"
 msgstr "Tre"
 
 msgid "Find File"
 msgstr "Finn fil"
+
+#, fuzzy
+msgid "Content:"
+msgstr "Innhold: "
+
+#, fuzzy
+msgid "File name:"
+msgstr "Filnavn:"
+
+msgid "Start at:"
+msgstr "Start ved:"
 
 #, c-format
 msgid "Grepping in %s"
@@ -2158,6 +2247,9 @@ msgstr "&Sorteringsrekkefølge..."
 msgid "&Filter..."
 msgstr "&Filter..."
 
+msgid "&Encoding...    C-t"
+msgstr ""
+
 msgid "&Network link..."
 msgstr "&Nettverkskobling..."
 
@@ -2172,9 +2264,6 @@ msgstr "SM&B-kobling..."
 
 msgid "&Rescan         C-r"
 msgstr "Gjenles         C-r"
-
-msgid "&User menu          F2"
-msgstr "Br&ukermeny         F2"
 
 msgid "&View               F3"
 msgstr "&Vis                F3"
@@ -2233,6 +2322,9 @@ msgstr "reverser valg      M-*"
 msgid "e&Xit              F10"
 msgstr "avslutt            F10"
 
+msgid "&User menu          F2"
+msgstr "Br&ukermeny         F2"
+
 msgid "&Directory tree"
 msgstr "Katalogtre"
 
@@ -2254,8 +2346,9 @@ msgstr "eksternt panel  C-x !"
 msgid "show directory s&Izes"
 msgstr "vis katalogstørrelser"
 
-msgid "command &History"
-msgstr "kommandohistorikk"
+#, fuzzy
+msgid "Command &history      M-h"
+msgstr " Kommandohistorikk "
 
 msgid "di&Rectory hotlist    C-\\"
 msgstr "kataloghurtigliste    C-\\"
@@ -2277,12 +2370,6 @@ msgstr "Redigering av utvidelsesfil"
 
 msgid "Edit &menu file"
 msgstr "Menyfilredigering"
-
-msgid "Edit edi&tor menu file"
-msgstr "Redigering av menyedi&Tor"
-
-msgid "Edit &syntax file"
-msgstr "Redigering av &syntaksfil"
 
 msgid "&Configuration..."
 msgstr "Konfigurasjon..."
@@ -2346,6 +2433,22 @@ msgstr "Meny"
 msgid "The TERM environment variable is unset!\n"
 msgstr "TERM miljøvariabelen er ikke satt!\n"
 
+msgid "&Fix it"
+msgstr ""
+
+msgid "don't ask again"
+msgstr ""
+
+msgid ""
+"Chosen display charset (Settings->Display bits)\n"
+"or source codeset (in mcedit ctrl-t) \n"
+"does not match one set via locale. \n"
+"Set correct codeset manually or press <<Fix it>> \n"
+"to set locale default.\n"
+"\n"
+"Or set 'don't ask again' and press <<Skip>>"
+msgstr ""
+
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
@@ -2380,16 +2483,8 @@ msgid ""
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
 "   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked\n"
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
 msgstr ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2409,6 +2504,18 @@ msgstr ""
 "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
 "   brightcyan, lightgray and white\n"
 "\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
 
 msgid "Displays this help message"
 msgstr "Viser denne hjelpeteksten"
@@ -2470,6 +2577,10 @@ msgstr "Starter filvisning for en fil"
 
 msgid "Edits one file"
 msgstr "Redigerer en fil"
+
+#, fuzzy, c-format
+msgid "Cannot create %s directory"
+msgstr " Kunne ikke skifte katalog"
 
 msgid "safe de&Lete"
 msgstr "trygg sletting"
@@ -2689,20 +2800,35 @@ msgstr "RenMov"
 msgid "Mkdir"
 msgstr "Mkdir"
 
-msgid " Choose input codepage "
+msgid " Not implemented yet "
+msgstr ""
+
+msgid " Num of replace tokens not equal to num of found tokens "
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Invalid token number %d "
+msgstr " Ugyldig målmaske "
+
+#, fuzzy
+msgid "Normal"
+msgstr "Format"
+
+msgid "&Regular expression"
+msgstr "Vanlig uttrykk"
+
+msgid "Hexadecimal"
+msgstr ""
+
+msgid "Wildcard search"
+msgstr ""
+
+#, fuzzy
+msgid "Choose codepage"
 msgstr " Velg koding for inndata "
 
 msgid "-  < No translation >"
 msgstr "- < Ingen oversettelse >"
-
-msgid ""
-"To use this feature select your codepage in\n"
-"Setup / Display Bits dialog!\n"
-"Do not forget to save options."
-msgstr ""
-"For å bruke denne funksjonen velger du koding i\n"
-"dialogen, Oppsett / Visning i biter\n"
-"Ikke glem å lagre oppsettet."
 
 #, c-format
 msgid ""
@@ -2739,6 +2865,10 @@ msgid "with terminfo database"
 msgstr "med terminfo-database"
 
 msgid "Using the ncurses library"
+msgstr "Bruker ncurses biblioteket"
+
+#, fuzzy
+msgid "Using the ncursesw library"
 msgstr "Bruker ncurses biblioteket"
 
 msgid "With optional subshell support"
@@ -2861,11 +2991,19 @@ msgstr " Ingen passende oppføringer funnet i %s "
 msgid " User menu "
 msgstr " Brukermeny "
 
-msgid "%b %e %H:%M"
+#, fuzzy
+msgid "%b %d %H:%M"
 msgstr "%b %e %H:%M"
+
+#, fuzzy
+msgid "%b %d %Y"
+msgstr "%b %e %Y"
 
 msgid "%b %e  %Y"
 msgstr "%b %e %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
@@ -2956,24 +3094,16 @@ msgid ""
 " %s "
 msgstr " Feil under lagring av fil. "
 
-msgid "Invalid hex search expression"
-msgstr "Ugyldig vanlig søkeuttrykk"
-
-msgid " Invalid regular expression "
-msgstr " Ugyldig vanlig uttrykk "
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" The current line number is %d.\n"
+" The current line number is %lu.\n"
 " Enter the new line number:"
 msgstr ""
 " Det nåværende linjenummeret er %d.\n"
 " Skriv inn det nye linjenummeret:"
 
-#, c-format
-msgid ""
-" The current address is 0x%lx.\n"
-" Enter the new address:"
+#, fuzzy
+msgid " The current address is 0x%08"
 msgstr ""
 " Det nåværende adressen er 0x%lx.\n"
 " Skriv inn den nye adressen:"
@@ -2985,25 +3115,10 @@ msgstr " Gå til adresse "
 msgid " Invalid address "
 msgstr " Ugyldig passord "
 
-msgid " Enter regexp:"
-msgstr " Skriv inn vanlig uttrykk:"
-
 msgid "ButtonBar|Help"
 msgstr ""
 
 msgid "ButtonBar|Quit"
-msgstr ""
-
-msgid "ButtonBar|Ascii"
-msgstr ""
-
-msgid "ButtonBar|Hex"
-msgstr ""
-
-msgid "ButtonBar|Goto"
-msgstr ""
-
-msgid "ButtonBar|Line"
 msgstr ""
 
 msgid "ButtonBar|View"
@@ -3013,33 +3128,6 @@ msgid "ButtonBar|Edit"
 msgstr ""
 
 msgid "ButtonBar|Save"
-msgstr ""
-
-msgid "ButtonBar|UnWrap"
-msgstr ""
-
-msgid "ButtonBar|Wrap"
-msgstr ""
-
-msgid "ButtonBar|RxSrch"
-msgstr ""
-
-msgid "ButtonBar|HxSrch"
-msgstr ""
-
-msgid "ButtonBar|Search"
-msgstr ""
-
-msgid "ButtonBar|Raw"
-msgstr ""
-
-msgid "ButtonBar|Parse"
-msgstr ""
-
-msgid "ButtonBar|Unform"
-msgstr ""
-
-msgid "ButtonBar|Format"
 msgstr ""
 
 msgid " History "
@@ -3621,6 +3709,68 @@ msgstr "Intern feil:"
 msgid "Changes to file lost"
 msgstr "Endringer i filen tapt"
 
+#~ msgid "scanf &Expression"
+#~ msgstr "scanf uttrykk"
+
+#~ msgid "&Whole words only"
+#~ msgstr "Kun hele ord"
+
+#~ msgid " Enter replacement argument order eg. 3,2,1,4 "
+#~ msgstr " Skriv inn argumentrekkefølge f.eks. 3,2,1,4 "
+
+#~ msgid ""
+#~ " Invalid regular expression, or scanf expression with too many "
+#~ "conversions "
+#~ msgstr ""
+#~ " Ugyldig vanlig uttrykk, eller scanf uttrykk med for mange omsettinger "
+
+#~ msgid " Error in replacement format string. "
+#~ msgstr " Feil i erstatningsstrengen for format. "
+
+#, fuzzy
+#~ msgid " Replacement too long. "
+#~ msgstr " Skriv inn erstatningsstreng:"
+
+#~ msgid "&Copy              F5"
+#~ msgstr "Kopier             F5"
+
+#~ msgid "&Delete            F8"
+#~ msgstr "Slett              F8"
+
+#, fuzzy
+#~ msgid "Save setu&p..."
+#~ msgstr "Lagre oppsett"
+
+#~ msgid " The command history is empty "
+#~ msgstr " Kommandohistorikken er tom "
+
+#~ msgid "command &History"
+#~ msgstr "kommandohistorikk"
+
+#~ msgid "Edit edi&tor menu file"
+#~ msgstr "Redigering av menyedi&Tor"
+
+#~ msgid "Edit &syntax file"
+#~ msgstr "Redigering av &syntaksfil"
+
+#~ msgid ""
+#~ "To use this feature select your codepage in\n"
+#~ "Setup / Display Bits dialog!\n"
+#~ "Do not forget to save options."
+#~ msgstr ""
+#~ "For å bruke denne funksjonen velger du koding i\n"
+#~ "dialogen, Oppsett / Visning i biter\n"
+#~ "Ikke glem å lagre oppsettet."
+
+#~ msgid "Invalid hex search expression"
+#~ msgstr "Ugyldig vanlig søkeuttrykk"
+
+#~ msgid " Invalid regular expression "
+#~ msgstr " Ugyldig vanlig uttrykk "
+
+#~ msgid " Enter regexp:"
+#~ msgstr " Skriv inn vanlig uttrykk:"
+
 #~ msgid "Using included S-Lang library"
 #~ msgstr "Bruker eget S-lang bibliotek"
 
@@ -3744,9 +3894,6 @@ msgstr "Endringer i filen tapt"
 
 #~ msgid "Unform"
 #~ msgstr "Fjern format"
-
-#~ msgid "Format"
-#~ msgstr "Format"
 
 #~ msgid "User menu available only in mcedit invoked from mc"
 #~ msgstr "Brukermenyen er kun tilgjengelig i mcedit hvis startet fra mc"

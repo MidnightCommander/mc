@@ -11,10 +11,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-14 19:43+0000\n"
+"POT-Creation-Date: 2009-06-30 19:38+0200\n"
 "PO-Revision-Date: 2008-06-05 17:36+0100\n"
 "Last-Translator: Anna Talianova <anickat1@gmail.com>\n"
-"Language-Team: Czech <cs@li.org>\n"
+"Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -59,8 +59,15 @@ msgstr " Soubor %s je pøíli¹ velký "
 msgid "Macro recursion is too deep"
 msgstr "Rekurze maker je pøíli¹ hluboká"
 
-msgid "&Dismiss"
-msgstr "&Odmítnout"
+msgid "Search"
+msgstr "Hledat"
+
+#, c-format
+msgid " %d items found, %d bookmarks added "
+msgstr " nalezeno: %d, pøidáno zálo¾ek: %d "
+
+msgid " Search string not found "
+msgstr " Hledaný text nenalezen "
 
 msgid "Warning"
 msgstr "Varování"
@@ -119,9 +126,6 @@ msgstr "&Pøepsat"
 msgid " Cannot save file. "
 msgstr " Chyba pøi zápisu do souboru. "
 
-msgid "Cancel"
-msgstr "Zru¹it"
-
 msgid " Delete macro "
 msgstr " Smazat makro "
 
@@ -165,86 +169,43 @@ msgstr ""
 msgid "C&ontinue"
 msgstr "P&okraèovat"
 
+msgid "Syntax file edit"
+msgstr "Úpravy souboru se syntaxí"
+
+msgid " Which syntax file you want to edit? "
+msgstr " Který soubor se syntaxí chcete upravit? "
+
+msgid "&User"
+msgstr "&U¾ivatel"
+
+msgid "&System Wide"
+msgstr "&Systémový"
+
+msgid " Menu edit "
+msgstr " Úpravy menu "
+
+msgid " Which menu file do you want to edit? "
+msgstr " Který soubor menu chcete upravit? "
+
+msgid "&Local"
+msgstr "&Lokální"
+
 msgid " Load "
 msgstr " Naèíst "
 
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " Blok je pøíli¹ velký, návrat o krok zpìt nebude fungovat. "
 
-msgid "O&ne"
-msgstr "&Jeden"
-
-msgid "A&ll"
-msgstr "&V¹echny"
-
-msgid "&Skip"
-msgstr "&Pøeskoèit"
-
-msgid "&Replace"
+#, fuzzy
+msgid "Replace"
 msgstr "&Nahradit"
-
-msgid " Replace with: "
-msgstr " Nahradit textem: "
-
-msgid " Confirm replace "
-msgstr " Potvrdit náhradu "
-
-msgid "scanf &Expression"
-msgstr "výraz pro &Scanf"
-
-msgid "replace &All"
-msgstr "Nahradit &V¹e"
-
-msgid "pro&Mpt on replace"
-msgstr "&Dotaz na nahrazení"
-
-msgid "&Backwards"
-msgstr "&Pozpátku"
-
-msgid "&Regular expression"
-msgstr "&Regulární výraz"
-
-msgid "&Whole words only"
-msgstr "Pouze &Celá slova"
-
-msgid "case &Sensitive"
-msgstr "v¹ímat si velikos&Ti písmen"
-
-msgid " Enter replacement argument order eg. 3,2,1,4 "
-msgstr " Zadejte poøadí argumentù (napø. 3,2,1,4) "
-
-msgid " Enter replacement string:"
-msgstr " Zadejte náhradní text:"
-
-msgid " Enter search string:"
-msgstr " Zadejte hledaný text:"
 
 msgid " Replace "
 msgstr " Nahradit "
 
-msgid "Search"
-msgstr "Hledat"
-
-msgid ""
-" Invalid regular expression, or scanf expression with too many conversions "
-msgstr " ©patný regulární výraz, nebo scanf výraz s pøíli¹ mnoha pøevody "
-
-msgid " Error in replacement format string. "
-msgstr " Chyba ve formátu nahrazovaného textu. "
-
-msgid " Replacement too long. "
-msgstr " Náhradní text je pøíli¹ dlouhý. "
-
 #, c-format
 msgid " %ld replacements made. "
 msgstr " Provedeno %ld nahrazení. "
-
-msgid " Search string not found "
-msgstr " Hledaný text nenalezen "
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " nalezeno: %d, pøidáno zálo¾ek: %d "
 
 msgid "Quit"
 msgstr "Konec"
@@ -357,6 +318,51 @@ msgstr " Stisknìte libovolnou klávesu: "
 msgid " Execute Macro "
 msgstr " Spustit makro "
 
+msgid "pro&Mpt on replace"
+msgstr "&Dotaz na nahrazení"
+
+msgid "replace &All"
+msgstr "Nahradit &V¹e"
+
+msgid "All charsets"
+msgstr ""
+
+msgid "&Backwards"
+msgstr "&Pozpátku"
+
+msgid "case &Sensitive"
+msgstr "v¹ímat si velikos&Ti písmen"
+
+msgid " Enter replacement string:"
+msgstr " Zadejte náhradní text:"
+
+msgid " Enter search string:"
+msgstr " Zadejte hledaný text:"
+
+msgid "Cancel"
+msgstr "Zru¹it"
+
+msgid "O&ne"
+msgstr "&Jeden"
+
+msgid "A&ll"
+msgstr "&V¹echny"
+
+msgid "&Skip"
+msgstr "&Pøeskoèit"
+
+msgid "&Replace"
+msgstr "&Nahradit"
+
+msgid " Replace with: "
+msgstr " Nahradit textem: "
+
+msgid " Confirm replace "
+msgstr " Potvrdit náhradu "
+
+msgid "&Dismiss"
+msgstr "&Odmítnout"
+
 msgid " Emacs key: "
 msgstr " Emacsová klávesa: "
 
@@ -433,32 +439,79 @@ msgstr "&Nový           C-x k"
 msgid "Copy to &file...     "
 msgstr "Zkopírovat do &Souboru... C-f"
 
-msgid "&Toggle Mark       F3"
+#, fuzzy
+msgid "&Toggle mark                 F3"
 msgstr "&Pøehodit znaèky     F3"
 
-msgid "&Mark Columns    S-F3"
+#, fuzzy
+msgid "Mar&k columns              S-F3"
 msgstr "z&Naèit sloupcovì  S-F3"
 
-msgid "Toggle &ins/overw Ins"
+#, fuzzy
+msgid "Toggle &ins/overw           Ins"
 msgstr "&Vkládání/Pøepis    Ins"
 
-msgid "&Copy              F5"
-msgstr "k&Opírovat           F5"
+#, fuzzy
+msgid "&Copy                        F5"
+msgstr "&Kopírovat               F5"
 
-msgid "&Move              F6"
+#, fuzzy
+msgid "&Move                        F6"
 msgstr "pø&Esunout           F6"
 
-msgid "&Delete            F8"
-msgstr "&Smazat              F8"
+#, fuzzy
+msgid "&Delete                      F8"
+msgstr "s&Mazat                  F8"
 
-msgid "&Undo             C-u"
+#, fuzzy
+msgid "C&opy to clipfile         C-Ins"
+msgstr "Zkopírovat do &Souboru... C-f"
+
+#, fuzzy
+msgid "C&ut to clipfile          S-Del"
+msgstr "&Jít na øádku...              M-l"
+
+msgid "&Paste from clipfile      S-Ins"
+msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "&Pøehodit znaèky     F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "&Nový                      C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "&Setøídit                     M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "od&Eslat...                         "
+
+#, fuzzy
+msgid "&Undo                       C-u"
 msgstr "&Akce zpìt          C-u"
 
-msgid "&Beginning     C-PgUp"
+#, fuzzy
+msgid "&Beginning               C-PgUp"
 msgstr "na &Zaèátek      C-PgUp"
 
-msgid "&End           C-PgDn"
+#, fuzzy
+msgid "&End                     C-PgDn"
 msgstr "na &Konec        C-PgDn"
+
+#, fuzzy
+msgid "C&opy to clipfile           M-w"
+msgstr "&Jít na øádku...              M-l"
+
+#, fuzzy
+msgid "C&ut to clipfile            C-w"
+msgstr "&Jít na øádku...              M-l"
+
+msgid "&Paste from clipfile        C-y"
+msgstr ""
 
 msgid "&Search...         F7"
 msgstr "&Hledat...         F7"
@@ -473,8 +526,25 @@ msgstr "&Nahradit...       F4"
 msgid "&Go to line...            M-l"
 msgstr "&Jít na øádku...              M-l"
 
+#, fuzzy
+msgid "Toggle li&ne state        M-n"
+msgstr "&Pøehodit znaèky     F3"
+
 msgid "Go to matching &bracket   M-b"
 msgstr "jít na &Párovou závorku       M-b"
+
+msgid "Find declaration      A-Enter"
+msgstr ""
+
+msgid "Back from declaration     M--"
+msgstr ""
+
+msgid "Forward to declaration    M-+"
+msgstr ""
+
+#, fuzzy
+msgid "Encod&ing...             C-t"
+msgstr "&Setøídit                     M-t"
 
 msgid "Insert &literal...       C-q"
 msgstr "vlo¾it &Znak...               C-q"
@@ -534,8 +604,17 @@ msgstr "uèení &Kláves..."
 msgid "Syntax &Highlighting..."
 msgstr "zvýraznìní synta&Xe..."
 
-msgid "Save setu&p..."
-msgstr "ulo¾it na&Stavení..."
+#, fuzzy
+msgid "S&yntax file"
+msgstr "Úpravy souboru se syntaxí"
+
+#, fuzzy
+msgid "&Menu file"
+msgstr "upravit u¾ivatelské &Menu"
+
+#, fuzzy
+msgid "Save setu&p"
+msgstr "ulo¾it na&Stavení"
 
 msgid " File "
 msgstr " Soubor "
@@ -575,6 +654,10 @@ msgstr "©íøka øádku pro zlom: "
 
 msgid "Tab spacing: "
 msgstr "Velikost tabelátoru: "
+
+#, fuzzy
+msgid "Pers&istent selection"
+msgstr "prohodi&T oznaèení      M-*"
 
 msgid "Synta&x highlighting"
 msgstr "zvýraznìní synta&Xe"
@@ -814,6 +897,10 @@ msgstr " potvrzovat &Mazání "
 
 msgid " Confirmation "
 msgstr " Potvrzování "
+
+#, fuzzy
+msgid "UTF-8 output"
+msgstr "Výstup plných 8 bitù"
 
 msgid "Full 8 bits output"
 msgstr "Výstup plných 8 bitù"
@@ -1061,8 +1148,16 @@ msgstr " Filtr "
 msgid " Set expression for filtering filenames"
 msgstr " Zadejte masku pro filtrování názvù souborù"
 
-msgid "  Malformed regular expression  "
-msgstr "  Chybnì zadaný regulární výraz  "
+msgid "&Using shell patterns"
+msgstr "&Význam vzorù jako v shellu"
+
+#, fuzzy
+msgid "&Case sensitive"
+msgstr "v¹ímat si velikos&Ti písmen"
+
+#, fuzzy
+msgid "&Files only"
+msgstr "&Pouze velikost"
 
 msgid " Select "
 msgstr " Výbìr "
@@ -1075,27 +1170,6 @@ msgstr "Upravit akce k pøíponám"
 
 msgid " Which extension file you want to edit? "
 msgstr " Který soubor s pøíponami chcete upravit? "
-
-msgid "&User"
-msgstr "&U¾ivatel"
-
-msgid "&System Wide"
-msgstr "&Systémový"
-
-msgid " Menu edit "
-msgstr " Úpravy menu "
-
-msgid " Which menu file do you want to edit? "
-msgstr " Který soubor menu chcete upravit? "
-
-msgid "&Local"
-msgstr "&Lokální"
-
-msgid "Syntax file edit"
-msgstr "Úpravy souboru se syntaxí"
-
-msgid " Which syntax file you want to edit? "
-msgstr " Který soubor se syntaxí chcete upravit? "
 
 msgid " Compare directories "
 msgstr " Porovnat adresáøe "
@@ -1115,12 +1189,6 @@ msgstr "&Dùkladná"
 msgid " Both panels should be in the listing mode to use this command "
 msgstr ""
 " Pokud chcete pou¾ít tento pøíkaz, oba panely musí zobrazovat seznam souborù "
-
-msgid " The command history is empty "
-msgstr " Historie pøíkazù je prázdná "
-
-msgid " Command history "
-msgstr " Historie pøíkazù "
 
 msgid ""
 " Not an xterm or Linux console; \n"
@@ -1300,9 +1368,6 @@ msgstr " Pøesun "
 
 msgid " Delete "
 msgstr " Smazat "
-
-msgid " Invalid target mask "
-msgstr " Chybná maska cíle "
 
 msgid " Cannot make the hardlink "
 msgstr " Nelze vytvoøit pøímý odkaz "
@@ -1578,6 +1643,10 @@ msgstr ""
 " Nelze smazat adresáø \"%s\" \n"
 " %s "
 
+#, fuzzy
+msgid "Directory scanning"
+msgstr "Cesta k adresáøi"
+
 msgid "1Copy"
 msgstr "1Kopírovat"
 
@@ -1736,9 +1805,6 @@ msgstr "nás&Ledovat odkazy"
 msgid "to:"
 msgstr "na:"
 
-msgid "&Using shell patterns"
-msgstr "&Význam vzorù jako v shellu"
-
 msgid "&Background"
 msgstr "&Na pozadí"
 
@@ -1748,10 +1814,8 @@ msgstr "&Stabilní symlinky"
 msgid "&Dive into subdir if exists"
 msgstr "&Ponoøit se do existujících adresáøù"
 
-#, c-format
-msgid ""
-"Invalid source pattern `%s' \n"
-" %s "
+#, fuzzy, c-format
+msgid "Invalid source pattern `%s'"
 msgstr ""
 "Chybný vzor zdroje `%s' \n"
 " %s "
@@ -1781,6 +1845,22 @@ msgstr "&Vidìt - F3"
 msgid "&Edit - F4"
 msgstr "&Uprav - F4"
 
+#, c-format
+msgid "Found: %ld"
+msgstr ""
+
+#, fuzzy
+msgid " Malformed regular expression "
+msgstr "  Chybnì zadaný regulární výraz  "
+
+#, fuzzy
+msgid "Cas&e sensitive"
+msgstr "v¹ímat si velikos&Ti písmen"
+
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "v¹ímat si velikos&Ti písmen"
+
 #, fuzzy
 msgid "&Find recursively"
 msgstr "najít re&Kurzivnì"
@@ -1788,20 +1868,32 @@ msgstr "najít re&Kurzivnì"
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "Start at:"
-msgstr "Zaèít v:"
+msgid "&All charsets"
+msgstr ""
 
-msgid "Filename:"
-msgstr "Jméno souboru:"
+msgid "All cha&rsets"
+msgstr ""
 
-msgid "Content: "
-msgstr "Obsah: "
+#, fuzzy
+msgid "Re&gular expression"
+msgstr "&Regulární výraz"
 
 msgid "&Tree"
 msgstr "&Strom"
 
 msgid "Find File"
 msgstr "Najít soubor"
+
+#, fuzzy
+msgid "Content:"
+msgstr "Obsah: "
+
+#, fuzzy
+msgid "File name:"
+msgstr "Jméno souboru:"
+
+msgid "Start at:"
+msgstr "Zaèít v:"
 
 #, c-format
 msgid "Grepping in %s"
@@ -2165,6 +2257,9 @@ msgstr "&Poøadí..."
 msgid "&Filter..."
 msgstr "&Filtr..."
 
+msgid "&Encoding...    C-t"
+msgstr ""
+
 msgid "&Network link..."
 msgstr "sí»ové spoje&Ní..."
 
@@ -2179,9 +2274,6 @@ msgstr "SM&B spojení..."
 
 msgid "&Rescan         C-r"
 msgstr "&Znovu naèíst         C-r"
-
-msgid "&User menu          F2"
-msgstr "&U¾ivatelské menu        F2"
 
 msgid "&View               F3"
 msgstr "proh&Lédnout             F3"
@@ -2240,6 +2332,9 @@ msgstr "prohodi&T oznaèení      M-*"
 msgid "e&Xit              F10"
 msgstr "kon&Ec                  F10"
 
+msgid "&User menu          F2"
+msgstr "&U¾ivatelské menu        F2"
+
 msgid "&Directory tree"
 msgstr "strom a&Dresáøù"
 
@@ -2261,8 +2356,9 @@ msgstr "e&Xterní panelizace           C-x !"
 msgid "show directory s&Izes"
 msgstr "ukázat velikost&I adresáøù"
 
-msgid "command &History"
-msgstr "&Historie pøíkazù"
+#, fuzzy
+msgid "Command &history      M-h"
+msgstr " Historie pøíkazù "
 
 msgid "di&Rectory hotlist    C-\\"
 msgstr "&Rychlý pøístup k adresáøùm     C-\\"
@@ -2284,12 +2380,6 @@ msgstr "upravit akc&E k pøíponám"
 
 msgid "Edit &menu file"
 msgstr "upravit u¾ivatelské &Menu"
-
-msgid "Edit edi&tor menu file"
-msgstr "upravit &Soubor s menu"
-
-msgid "Edit &syntax file"
-msgstr "upravit so&Ubor se syntaxí"
 
 msgid "&Configuration..."
 msgstr "kon&Figurace..."
@@ -2353,6 +2443,22 @@ msgstr "MenuU¾"
 msgid "The TERM environment variable is unset!\n"
 msgstr "Promìnná prostøedí TERM není nastavena!\n"
 
+msgid "&Fix it"
+msgstr ""
+
+msgid "don't ask again"
+msgstr ""
+
+msgid ""
+"Chosen display charset (Settings->Display bits)\n"
+"or source codeset (in mcedit ctrl-t) \n"
+"does not match one set via locale. \n"
+"Set correct codeset manually or press <<Fix it>> \n"
+"to set locale default.\n"
+"\n"
+"Or set 'don't ask again' and press <<Skip>>"
+msgstr ""
+
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
@@ -2376,6 +2482,7 @@ msgstr ""
 "prosím na mc-devel@gnome.org (anglicky), pøipomínky\n"
 "k pøekladu zasílejte prosím na adresu cs@li.org (èesky).\n"
 
+#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2387,16 +2494,8 @@ msgid ""
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
 "   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked\n"
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
 msgstr ""
 "--barvy KLÍÈ={POPØEDÍ},{POZADÍ}\n"
 "\n"
@@ -2418,6 +2517,18 @@ msgstr ""
 "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
 "   brightcyan, lightgray and white\n"
 "\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
 
 msgid "Displays this help message"
 msgstr "Zobrazí tuto nápovìdu"
@@ -2479,6 +2590,10 @@ msgstr "Odstartuje jako prohlí¾eè souboru"
 
 msgid "Edits one file"
 msgstr "Zaène editovat jeden soubor"
+
+#, fuzzy, c-format
+msgid "Cannot create %s directory"
+msgstr "Není mo¾né zmìnit adresáø"
 
 msgid "safe de&Lete"
 msgstr "&Bezpeèné mazání"
@@ -2702,20 +2817,34 @@ msgstr "Pøesun"
 msgid "Mkdir"
 msgstr "NovýAdr"
 
-msgid " Choose input codepage "
+msgid " Not implemented yet "
+msgstr ""
+
+msgid " Num of replace tokens not equal to num of found tokens "
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Invalid token number %d "
+msgstr " Chybná maska cíle "
+
+msgid "Normal"
+msgstr ""
+
+msgid "&Regular expression"
+msgstr "&Regulární výraz"
+
+msgid "Hexadecimal"
+msgstr ""
+
+msgid "Wildcard search"
+msgstr ""
+
+#, fuzzy
+msgid "Choose codepage"
 msgstr " Zvolte vstupní kódovou stránku "
 
 msgid "-  < No translation >"
 msgstr "- < Bez pøevodu >"
-
-msgid ""
-"To use this feature select your codepage in\n"
-"Setup / Display Bits dialog!\n"
-"Do not forget to save options."
-msgstr ""
-"Chcete-li tuto mo¾nost vyu¾ít, nastavte v dialogu\n"
-"Nastavení / Zobrazení bitù kódovou stránku!\n"
-"Nezapomeòte ulo¾it nastavení."
 
 #, c-format
 msgid ""
@@ -2755,6 +2884,10 @@ msgid "with terminfo database"
 msgstr "s databází terminfo"
 
 msgid "Using the ncurses library"
+msgstr "Pou¾ívá se knihovna ncurses"
+
+#, fuzzy
+msgid "Using the ncursesw library"
 msgstr "Pou¾ívá se knihovna ncurses"
 
 msgid "With optional subshell support"
@@ -2879,11 +3012,19 @@ msgstr " V %s nejsou odpovídající polo¾ky "
 msgid " User menu "
 msgstr " U¾ivatelské menu "
 
-msgid "%b %e %H:%M"
+#, fuzzy
+msgid "%b %d %H:%M"
 msgstr "%e.%b %H:%M"
+
+#, fuzzy
+msgid "%b %d %Y"
+msgstr "%e.%b  %Y"
 
 msgid "%b %e  %Y"
 msgstr "%e.%b  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%e.%b %H:%M"
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -2978,24 +3119,16 @@ msgstr ""
 " Nemohu ulo¾it soubor: \n"
 " %s "
 
-msgid "Invalid hex search expression"
-msgstr "©patnì zadaný vyhledávací hex výraz"
-
-msgid " Invalid regular expression "
-msgstr " ©patnì zadaný regulární výraz "
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" The current line number is %d.\n"
+" The current line number is %lu.\n"
 " Enter the new line number:"
 msgstr ""
 " Aktuální èíslo øádku je %d.\n"
 " Zadejte nové èíslo øádku:"
 
-#, c-format
-msgid ""
-" The current address is 0x%lx.\n"
-" Enter the new address:"
+#, fuzzy
+msgid " The current address is 0x%08"
 msgstr ""
 " Aktuální adresa je 0x%lx.\n"
 " Zadejte novou adresu:"
@@ -3007,26 +3140,11 @@ msgstr " Jít na adresu "
 msgid " Invalid address "
 msgstr " Chybné heslo "
 
-msgid " Enter regexp:"
-msgstr " Zadejte regulární výraz:"
-
 msgid "ButtonBar|Help"
 msgstr "TlaèítkováLi¹ta|Pomoc"
 
 msgid "ButtonBar|Quit"
 msgstr "TlaèítkováLi¹ta|Konec"
-
-msgid "ButtonBar|Ascii"
-msgstr "TlaèítkováLi¹ta|Ascii"
-
-msgid "ButtonBar|Hex"
-msgstr "TlaèítkováLi¹ta|Hex"
-
-msgid "ButtonBar|Goto"
-msgstr "TlaèítkováLi¹ta|JdiNa"
-
-msgid "ButtonBar|Line"
-msgstr "TlaèítkováLi¹ta|Øádek"
 
 msgid "ButtonBar|View"
 msgstr "TlaèítkováLi¹ta|Zobraz"
@@ -3036,33 +3154,6 @@ msgstr "TlaèítkováLi¹ta|Edituj"
 
 msgid "ButtonBar|Save"
 msgstr "TlaèítkováLi¹ta|Ulo¾"
-
-msgid "ButtonBar|UnWrap"
-msgstr "TlaèítkováLi¹ta|Nezal."
-
-msgid "ButtonBar|Wrap"
-msgstr "TlaèítkováLi¹ta|Zalam."
-
-msgid "ButtonBar|RxSrch"
-msgstr "TlaèítkováLi¹ta|RxHled"
-
-msgid "ButtonBar|HxSrch"
-msgstr "TlaèítkováLi¹ta|HxHled"
-
-msgid "ButtonBar|Search"
-msgstr "TlaèítkováLi¹ta|Hledej"
-
-msgid "ButtonBar|Raw"
-msgstr "TlaèítkováLi¹ta|Hrubì"
-
-msgid "ButtonBar|Parse"
-msgstr "TlaèítkováLi¹ta|Rozeb."
-
-msgid "ButtonBar|Unform"
-msgstr "TlaèítkováLi¹ta|Odform."
-
-msgid "ButtonBar|Format"
-msgstr "TlaèítkováLi¹ta|Formát."
 
 msgid " History "
 msgstr " Historie "
@@ -3641,6 +3732,104 @@ msgstr "Interní chyba:"
 
 msgid "Changes to file lost"
 msgstr "Zmìny souboru byly ztraceny"
+
+#~ msgid "scanf &Expression"
+#~ msgstr "výraz pro &Scanf"
+
+#~ msgid "&Whole words only"
+#~ msgstr "Pouze &Celá slova"
+
+#~ msgid " Enter replacement argument order eg. 3,2,1,4 "
+#~ msgstr " Zadejte poøadí argumentù (napø. 3,2,1,4) "
+
+#~ msgid ""
+#~ " Invalid regular expression, or scanf expression with too many "
+#~ "conversions "
+#~ msgstr " ©patný regulární výraz, nebo scanf výraz s pøíli¹ mnoha pøevody "
+
+#~ msgid " Error in replacement format string. "
+#~ msgstr " Chyba ve formátu nahrazovaného textu. "
+
+#~ msgid " Replacement too long. "
+#~ msgstr " Náhradní text je pøíli¹ dlouhý. "
+
+#~ msgid "&Copy              F5"
+#~ msgstr "k&Opírovat           F5"
+
+#~ msgid "&Delete            F8"
+#~ msgstr "&Smazat              F8"
+
+#~ msgid "Save setu&p..."
+#~ msgstr "ulo¾it na&Stavení..."
+
+#~ msgid " The command history is empty "
+#~ msgstr " Historie pøíkazù je prázdná "
+
+#~ msgid "command &History"
+#~ msgstr "&Historie pøíkazù"
+
+#~ msgid "Edit edi&tor menu file"
+#~ msgstr "upravit &Soubor s menu"
+
+#~ msgid "Edit &syntax file"
+#~ msgstr "upravit so&Ubor se syntaxí"
+
+#~ msgid ""
+#~ "To use this feature select your codepage in\n"
+#~ "Setup / Display Bits dialog!\n"
+#~ "Do not forget to save options."
+#~ msgstr ""
+#~ "Chcete-li tuto mo¾nost vyu¾ít, nastavte v dialogu\n"
+#~ "Nastavení / Zobrazení bitù kódovou stránku!\n"
+#~ "Nezapomeòte ulo¾it nastavení."
+
+#~ msgid "Invalid hex search expression"
+#~ msgstr "©patnì zadaný vyhledávací hex výraz"
+
+#~ msgid " Invalid regular expression "
+#~ msgstr " ©patnì zadaný regulární výraz "
+
+#~ msgid " Enter regexp:"
+#~ msgstr " Zadejte regulární výraz:"
+
+#~ msgid "ButtonBar|Ascii"
+#~ msgstr "TlaèítkováLi¹ta|Ascii"
+
+#~ msgid "ButtonBar|Hex"
+#~ msgstr "TlaèítkováLi¹ta|Hex"
+
+#~ msgid "ButtonBar|Goto"
+#~ msgstr "TlaèítkováLi¹ta|JdiNa"
+
+#~ msgid "ButtonBar|Line"
+#~ msgstr "TlaèítkováLi¹ta|Øádek"
+
+#~ msgid "ButtonBar|UnWrap"
+#~ msgstr "TlaèítkováLi¹ta|Nezal."
+
+#~ msgid "ButtonBar|Wrap"
+#~ msgstr "TlaèítkováLi¹ta|Zalam."
+
+#~ msgid "ButtonBar|RxSrch"
+#~ msgstr "TlaèítkováLi¹ta|RxHled"
+
+#~ msgid "ButtonBar|HxSrch"
+#~ msgstr "TlaèítkováLi¹ta|HxHled"
+
+#~ msgid "ButtonBar|Search"
+#~ msgstr "TlaèítkováLi¹ta|Hledej"
+
+#~ msgid "ButtonBar|Raw"
+#~ msgstr "TlaèítkováLi¹ta|Hrubì"
+
+#~ msgid "ButtonBar|Parse"
+#~ msgstr "TlaèítkováLi¹ta|Rozeb."
+
+#~ msgid "ButtonBar|Unform"
+#~ msgstr "TlaèítkováLi¹ta|Odform."
+
+#~ msgid "ButtonBar|Format"
+#~ msgstr "TlaèítkováLi¹ta|Formát."
 
 #~ msgid "Using included S-Lang library"
 #~ msgstr "Pou¾ívá se pøilo¾ená knihovna S-Lang"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-14 19:43+0000\n"
+"POT-Creation-Date: 2009-06-30 19:39+0200\n"
 "PO-Revision-Date: 1999-03-18 23:11+0100\n"
 "Last-Translator: Lorint Hendschel <LorintHendschel@skynet.be>\n"
 "Language-Team: walon <linux-wa@chanae.alphanet.ch>\n"
@@ -62,8 +62,15 @@ msgstr " Li fitchî est trop grand: "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-msgid "&Dismiss"
-msgstr "&Rinoncî"
+msgid "Search"
+msgstr "Cweri"
+
+#, c-format
+msgid " %d items found, %d bookmarks added "
+msgstr ""
+
+msgid " Search string not found "
+msgstr " Dji n' a nén trové li tchinne ki dji cachîve après "
 
 msgid "Warning"
 msgstr "Advertixhmint"
@@ -125,9 +132,6 @@ msgstr "Sipotchî"
 msgid " Cannot save file. "
 msgstr " Åk n' a nén stî come dji sayîve di schaper li fitchî. "
 
-msgid "Cancel"
-msgstr "Rinoncî"
-
 msgid " Delete macro "
 msgstr " Disfacer macro "
 
@@ -172,89 +176,45 @@ msgstr ""
 msgid "C&ontinue"
 msgstr "Continouwer"
 
+#, fuzzy
+msgid "Syntax file edit"
+msgstr " Tcherdjî fitchî emantchaedje "
+
+#, fuzzy
+msgid " Which syntax file you want to edit? "
+msgstr " Kénès cawetes di fitchîs voloz-ve aspougnî? "
+
+msgid "&User"
+msgstr "&Ûzeu"
+
+msgid "&System Wide"
+msgstr "&Tot avå li Sistinme"
+
+msgid " Menu edit "
+msgstr " Aspougnî menu "
+
+msgid " Which menu file do you want to edit? "
+msgstr " Ké fitchî menu voloz-ve aspougnî? "
+
+msgid "&Local"
+msgstr "&Locå"
+
 msgid " Load "
 msgstr " Tcherdjî "
 
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " Li blok est lådje; s' il astcheut, vos n' såroz disfé cist bezogne. "
 
-msgid "O&ne"
-msgstr "&onk"
-
-msgid "A&ll"
-msgstr "&Tertos"
-
-msgid "&Skip"
-msgstr "&Passer"
-
-msgid "&Replace"
+#, fuzzy
+msgid "Replace"
 msgstr "&Mete el Plaece"
-
-msgid " Replace with: "
-msgstr " Mete çouchal el plaece: "
-
-msgid " Confirm replace "
-msgstr " Racertiner li discandje "
-
-msgid "scanf &Expression"
-msgstr "scanf sol &Ratoûrneure"
-
-msgid "replace &All"
-msgstr "mete el plaece tot &costé"
-
-msgid "pro&Mpt on replace"
-msgstr "&Dimander cwè divant do discandjî"
-
-msgid "&Backwards"
-msgstr "È&n erî"
-
-msgid "&Regular expression"
-msgstr "Erûle&ye Ratoûrneure"
-
-msgid "&Whole words only"
-msgstr "Rén &ki des mots etirs"
-
-msgid "case &Sensitive"
-msgstr "Grandès <> ptitès letes"
-
-msgid " Enter replacement argument order eg. 3,2,1,4 "
-msgstr " Dinez l' ôrde des årgumints di discandje, metans: 3, 2, 1, 4 "
-
-msgid " Enter replacement string:"
-msgstr " Dinez li tchinne pol discandje:"
-
-msgid " Enter search string:"
-msgstr " Dinez li tchinne a cweri après:"
 
 msgid " Replace "
 msgstr " Mete el plaece "
 
-msgid "Search"
-msgstr "Cweri"
-
-msgid ""
-" Invalid regular expression, or scanf expression with too many conversions "
-msgstr ""
-"Erûleye ratoûrneure nén valåbe ou ratoûrneure scanf avou trop di "
-"conviertixhmints "
-
-msgid " Error in replacement format string. "
-msgstr " Li tchinne di discandje est må fwaite "
-
-#, fuzzy
-msgid " Replacement too long. "
-msgstr " Dinez li tchinne pol discandje:"
-
 #, c-format
 msgid " %ld replacements made. "
 msgstr " %ld discandjes di fwaites. "
-
-msgid " Search string not found "
-msgstr " Dji n' a nén trové li tchinne ki dji cachîve après "
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr ""
 
 msgid "Quit"
 msgstr "Cwiter"
@@ -375,6 +335,51 @@ msgstr " Tchôkî tot l' minme li kéne tape: "
 msgid " Execute Macro "
 msgstr " Enonder Macro "
 
+msgid "pro&Mpt on replace"
+msgstr "&Dimander cwè divant do discandjî"
+
+msgid "replace &All"
+msgstr "mete el plaece tot &costé"
+
+msgid "All charsets"
+msgstr ""
+
+msgid "&Backwards"
+msgstr "È&n erî"
+
+msgid "case &Sensitive"
+msgstr "Grandès <> ptitès letes"
+
+msgid " Enter replacement string:"
+msgstr " Dinez li tchinne pol discandje:"
+
+msgid " Enter search string:"
+msgstr " Dinez li tchinne a cweri après:"
+
+msgid "Cancel"
+msgstr "Rinoncî"
+
+msgid "O&ne"
+msgstr "&onk"
+
+msgid "A&ll"
+msgstr "&Tertos"
+
+msgid "&Skip"
+msgstr "&Passer"
+
+msgid "&Replace"
+msgstr "&Mete el Plaece"
+
+msgid " Replace with: "
+msgstr " Mete çouchal el plaece: "
+
+msgid " Confirm replace "
+msgstr " Racertiner li discandje "
+
+msgid "&Dismiss"
+msgstr "&Rinoncî"
+
 msgid " Emacs key: "
 msgstr " Tape di Emacs: "
 
@@ -447,32 +452,79 @@ msgstr "&Novea               C-x k"
 msgid "Copy to &file...     "
 msgstr "copyî dins &Fitchî...     "
 
-msgid "&Toggle Mark       F3"
+#, fuzzy
+msgid "&Toggle mark                 F3"
 msgstr "&Discandjî Marke        F3"
 
-msgid "&Mark Columns    S-F3"
+#, fuzzy
+msgid "Mar&k columns              S-F3"
 msgstr "&Marker Colones       S-F3"
 
-msgid "Toggle &ins/overw Ins"
+#, fuzzy
+msgid "Toggle &ins/overw           Ins"
 msgstr "st&itchî/spotchî       Ins"
 
-msgid "&Copy              F5"
-msgstr "&Copyî                  F5"
+#, fuzzy
+msgid "&Copy                        F5"
+msgstr "&Copyî               F5"
 
-msgid "&Move              F6"
+#, fuzzy
+msgid "&Move                        F6"
 msgstr "&Bodjî                  F6"
 
-msgid "&Delete            F8"
-msgstr "&Disfacer               F8"
+#, fuzzy
+msgid "&Delete                      F8"
+msgstr "&Disfacer             F8"
 
-msgid "&Undo             C-u"
+#, fuzzy
+msgid "C&opy to clipfile         C-Ins"
+msgstr "copyî dins &Fitchî...     "
+
+#, fuzzy
+msgid "C&ut to clipfile          S-Del"
+msgstr "&Potchî al roye...                  M-l"
+
+msgid "&Paste from clipfile      S-Ins"
+msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "&Discandjî Marke        F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "&Novea                 C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "re&Lire...                          M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "e&Mîler...                             "
+
+#, fuzzy
+msgid "&Undo                       C-u"
 msgstr "Di&sfé                 C-u"
 
-msgid "&Beginning     C-PgUp"
+#, fuzzy
+msgid "&Beginning               C-PgUp"
 msgstr "Co&pete             C-PgUp"
 
-msgid "&End           C-PgDn"
+#, fuzzy
+msgid "&End                     C-PgDn"
 msgstr "&Valeye             C-PgDn"
+
+#, fuzzy
+msgid "C&opy to clipfile           M-w"
+msgstr "&Potchî al roye...                  M-l"
+
+#, fuzzy
+msgid "C&ut to clipfile            C-w"
+msgstr "&Potchî al roye...                  M-l"
+
+msgid "&Paste from clipfile        C-y"
+msgstr ""
 
 msgid "&Search...         F7"
 msgstr "C&weri...               F7"
@@ -486,8 +538,25 @@ msgstr "Discand&jî...           F4"
 msgid "&Go to line...            M-l"
 msgstr "&Potchî al roye...                  M-l"
 
+#, fuzzy
+msgid "Toggle li&ne state        M-n"
+msgstr "&Discandjî Marke        F3"
+
 msgid "Go to matching &bracket   M-b"
 msgstr ""
+
+msgid "Find declaration      A-Enter"
+msgstr ""
+
+msgid "Back from declaration     M--"
+msgstr ""
+
+msgid "Forward to declaration    M-+"
+msgstr ""
+
+#, fuzzy
+msgid "Encod&ing...             C-t"
+msgstr "re&Lire...                          M-t"
 
 msgid "Insert &literal...       C-q"
 msgstr "sititchî &Literål...                C-q"
@@ -549,7 +618,15 @@ msgid "Syntax &Highlighting..."
 msgstr "mete e &valeur l' emantchaedje"
 
 #, fuzzy
-msgid "Save setu&p..."
+msgid "S&yntax file"
+msgstr " Tcherdjî fitchî emantchaedje "
+
+#, fuzzy
+msgid "&Menu file"
+msgstr "&Drovî fitchî..."
+
+#, fuzzy
+msgid "Save setu&p"
 msgstr "&Schaper l' apontiaedje"
 
 msgid " File "
@@ -592,6 +669,10 @@ msgstr "Longueu del roye wice k' i fåt côper les mots : "
 
 msgid "Tab spacing: "
 msgstr "Espåçmint del tabulåcion : "
+
+#, fuzzy
+msgid "Pers&istent selection"
+msgstr "reverse selec&Tion M-*"
 
 msgid "Synta&x highlighting"
 msgstr "mete e &valeur l' emantchaedje"
@@ -828,6 +909,11 @@ msgstr " racertiner ki vos voloz bén &disfacer åk "
 
 msgid " Confirmation "
 msgstr " Racertinaedje "
+
+# Full?
+#, fuzzy
+msgid "UTF-8 output"
+msgstr "Sôrteye 8 bits"
 
 # Full?
 msgid "Full 8 bits output"
@@ -1075,8 +1161,16 @@ msgstr " Passete "
 msgid " Set expression for filtering filenames"
 msgstr " Diner ene ratoûrneure po passer les nos di fitchîs"
 
-msgid "  Malformed regular expression  "
-msgstr " Erûleye ratoûrneure må adjinçneye "
+msgid "&Using shell patterns"
+msgstr "Dji m' &sieve des modeles do shell"
+
+#, fuzzy
+msgid "&Case sensitive"
+msgstr "grandès <> ptitès letes"
+
+#, fuzzy
+msgid "&Files only"
+msgstr "Rén ki li &Grandeu"
 
 msgid " Select "
 msgstr " Tchwezi "
@@ -1088,29 +1182,6 @@ msgid "Extension file edit"
 msgstr "Aspougnî les cawetes di fitchîs"
 
 msgid " Which extension file you want to edit? "
-msgstr " Kénès cawetes di fitchîs voloz-ve aspougnî? "
-
-msgid "&User"
-msgstr "&Ûzeu"
-
-msgid "&System Wide"
-msgstr "&Tot avå li Sistinme"
-
-msgid " Menu edit "
-msgstr " Aspougnî menu "
-
-msgid " Which menu file do you want to edit? "
-msgstr " Ké fitchî menu voloz-ve aspougnî? "
-
-msgid "&Local"
-msgstr "&Locå"
-
-#, fuzzy
-msgid "Syntax file edit"
-msgstr " Tcherdjî fitchî emantchaedje "
-
-#, fuzzy
-msgid " Which syntax file you want to edit? "
 msgstr " Kénès cawetes di fitchîs voloz-ve aspougnî? "
 
 msgid " Compare directories "
@@ -1132,12 +1203,6 @@ msgid " Both panels should be in the listing mode to use this command "
 msgstr ""
 " Les deus paneas dvèt esse veyous a môde di djîvêye por vos savu eployî "
 "cisse comande "
-
-msgid " The command history is empty "
-msgstr " I gn a rén e l' istwere des cmandes "
-
-msgid " Command history "
-msgstr " Istwere des cmandes "
 
 msgid ""
 " Not an xterm or Linux console; \n"
@@ -1313,10 +1378,6 @@ msgstr " Bodjî "
 
 msgid " Delete "
 msgstr " Disfacer "
-
-# Mask = umask (modele di cogne di fitchî?)??
-msgid " Invalid target mask "
-msgstr " Li masse såme n' est nén valåbe "
 
 msgid " Cannot make the hardlink "
 msgstr " Dji n' a savu fé li deur loyén "
@@ -1595,6 +1656,10 @@ msgstr ""
 " Dji n' sai waester li ridant «%s» \n"
 " %s "
 
+#, fuzzy
+msgid "Directory scanning"
+msgstr "Tchimin viè li ridant"
+
 msgid "1Copy"
 msgstr "1Copyî"
 
@@ -1753,9 +1818,6 @@ msgstr "shure les &Loyéns"
 msgid "to:"
 msgstr "a:"
 
-msgid "&Using shell patterns"
-msgstr "Dji m' &sieve des modeles do shell"
-
 msgid "&Background"
 msgstr "&Fond"
 
@@ -1765,10 +1827,8 @@ msgstr "&Stocaesse loyéns simbolikes"
 msgid "&Dive into subdir if exists"
 msgstr "&Plonker ezès ridants efants, s' i gn a"
 
-#, c-format
-msgid ""
-"Invalid source pattern `%s' \n"
-" %s "
+#, fuzzy, c-format
+msgid "Invalid source pattern `%s'"
 msgstr ""
 "Li modele soûrdant n' est nén valåbe «%s» \n"
 " %s "
@@ -1797,26 +1857,54 @@ msgstr "&Loukî - F3"
 msgid "&Edit - F4"
 msgstr "&Aspougnî - F4"
 
+#, c-format
+msgid "Found: %ld"
+msgstr ""
+
+#, fuzzy
+msgid " Malformed regular expression "
+msgstr " Erûleye ratoûrneure må adjinçneye "
+
+#, fuzzy
+msgid "Cas&e sensitive"
+msgstr "grandès <> ptitès letes"
+
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "grandès <> ptitès letes"
+
 msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "Start at:"
-msgstr "Ataker a:"
+msgid "&All charsets"
+msgstr ""
 
-msgid "Filename:"
-msgstr "No do fitchî:"
+msgid "All cha&rsets"
+msgstr ""
 
-msgid "Content: "
-msgstr "Ådvins:"
+#, fuzzy
+msgid "Re&gular expression"
+msgstr "Erûle&ye Ratoûrneure"
 
 msgid "&Tree"
 msgstr "Å&be"
 
 msgid "Find File"
 msgstr "Trover Fitchî"
+
+#, fuzzy
+msgid "Content:"
+msgstr "Ådvins:"
+
+#, fuzzy
+msgid "File name:"
+msgstr "No do fitchî:"
+
+msgid "Start at:"
+msgstr "Ataker a:"
 
 #, c-format
 msgid "Grepping in %s"
@@ -2187,6 +2275,9 @@ msgstr "Ôrde po &Relire..."
 msgid "&Filter..."
 msgstr "&Passete..."
 
+msgid "&Encoding...    C-t"
+msgstr ""
+
 msgid "&Network link..."
 msgstr "&Loyén Rantoele???"
 
@@ -2202,9 +2293,6 @@ msgstr "Loyén SM&B..."
 
 msgid "&Rescan         C-r"
 msgstr "&Rilére         C-r"
-
-msgid "&User menu          F2"
-msgstr "Menu di l' &Ûzeu         F2"
 
 msgid "&View               F3"
 msgstr "&Vey                    F3"
@@ -2263,6 +2351,9 @@ msgstr "reverse selec&Tion M-*"
 msgid "e&Xit              F10"
 msgstr "moussî &Foû             F10"
 
+msgid "&User menu          F2"
+msgstr "Menu di l' &Ûzeu         F2"
+
 msgid "&Directory tree"
 msgstr "&Brantches do ridant"
 
@@ -2284,8 +2375,9 @@ msgstr ""
 msgid "show directory s&Izes"
 msgstr "mostrer grandeu des r&Idants"
 
-msgid "command &History"
-msgstr "ist&were des cmandes"
+#, fuzzy
+msgid "Command &history      M-h"
+msgstr " Istwere des cmandes "
 
 msgid "di&Rectory hotlist    C-\\"
 msgstr "djîvêye rascoûrti des &Ridants    C-\\"
@@ -2307,14 +2399,6 @@ msgstr ""
 
 msgid "Edit &menu file"
 msgstr ""
-
-#, fuzzy
-msgid "Edit edi&tor menu file"
-msgstr "Aspougnî fitchî menu"
-
-#, fuzzy
-msgid "Edit &syntax file"
-msgstr " Tcherdjî fitchî emantchaedje "
 
 msgid "&Configuration..."
 msgstr "&Apontiaedje..."
@@ -2374,6 +2458,22 @@ msgstr "Menu"
 msgid "The TERM environment variable is unset!\n"
 msgstr "Li variåve d' evironmint TERM n' est nén metowe!\n"
 
+msgid "&Fix it"
+msgstr ""
+
+msgid "don't ask again"
+msgstr ""
+
+msgid ""
+"Chosen display charset (Settings->Display bits)\n"
+"or source codeset (in mcedit ctrl-t) \n"
+"does not match one set via locale. \n"
+"Set correct codeset manually or press <<Fix it>> \n"
+"to set locale default.\n"
+"\n"
+"Or set 'don't ask again' and press <<Skip>>"
+msgstr ""
+
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
@@ -2404,7 +2504,11 @@ msgid ""
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
 "   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
+msgstr ""
+
+msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 "   File types:   directory, executable, link, stalelink, device, special, "
 "core\n"
@@ -2477,6 +2581,10 @@ msgstr "Enonder li håyneu di fitchî so on fitchî"
 
 msgid "Edits one file"
 msgstr "Aspougne on fitchî"
+
+#, fuzzy, c-format
+msgid "Cannot create %s directory"
+msgstr "Dji n' sai candjî di ridant"
 
 msgid "safe de&Lete"
 msgstr "disf&Acer a såvrité"
@@ -2696,16 +2804,33 @@ msgstr "RenMov"
 msgid "Mkdir"
 msgstr "Mkdir"
 
-msgid " Choose input codepage "
+msgid " Not implemented yet "
+msgstr ""
+
+msgid " Num of replace tokens not equal to num of found tokens "
+msgstr ""
+
+# Mask = umask (modele di cogne di fitchî?)??
+#, fuzzy, c-format
+msgid " Invalid token number %d "
+msgstr " Li masse såme n' est nén valåbe "
+
+msgid "Normal"
+msgstr ""
+
+msgid "&Regular expression"
+msgstr "Erûle&ye Ratoûrneure"
+
+msgid "Hexadecimal"
+msgstr ""
+
+msgid "Wildcard search"
+msgstr ""
+
+msgid "Choose codepage"
 msgstr ""
 
 msgid "-  < No translation >"
-msgstr ""
-
-msgid ""
-"To use this feature select your codepage in\n"
-"Setup / Display Bits dialog!\n"
-"Do not forget to save options."
 msgstr ""
 
 #, c-format
@@ -2742,6 +2867,10 @@ msgstr ""
 
 #, fuzzy
 msgid "Using the ncurses library"
+msgstr "li lîvreye ncurses"
+
+#, fuzzy
+msgid "Using the ncursesw library"
 msgstr "li lîvreye ncurses"
 
 msgid "With optional subshell support"
@@ -2866,11 +2995,19 @@ msgstr ""
 msgid " User menu "
 msgstr " Menu di l' ûzeu "
 
-msgid "%b %e %H:%M"
+#, fuzzy
+msgid "%b %d %H:%M"
 msgstr "%b %e %H:%M"
+
+#, fuzzy
+msgid "%b %d %Y"
+msgstr "%b %e  %Y"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
@@ -2965,25 +3102,16 @@ msgid ""
 " %s "
 msgstr " Åk n' a nén stî come dji sayîve di schaper li fitchî. "
 
-#, fuzzy
-msgid "Invalid hex search expression"
-msgstr " Voste erûleye ratoûrneure n' est nén valåbe "
-
-msgid " Invalid regular expression "
-msgstr " Voste erûleye ratoûrneure n' est nén valåbe "
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" The current line number is %d.\n"
+" The current line number is %lu.\n"
 " Enter the new line number:"
 msgstr ""
 " Li roye do moumint a li limerô %d.\n"
 " Intrez li novea limerô del roye:"
 
-#, c-format
-msgid ""
-" The current address is 0x%lx.\n"
-" Enter the new address:"
+#, fuzzy
+msgid " The current address is 0x%08"
 msgstr ""
 " L' adresse do moumint est 0x%lx.\n"
 " Intrez li novele adresse:"
@@ -2996,25 +3124,10 @@ msgstr " Potchî al Adresse "
 msgid " Invalid address "
 msgstr " Li masse såme n' est nén valåbe "
 
-msgid " Enter regexp:"
-msgstr " Intrez l' erûleye ratoûrneure:"
-
 msgid "ButtonBar|Help"
 msgstr ""
 
 msgid "ButtonBar|Quit"
-msgstr ""
-
-msgid "ButtonBar|Ascii"
-msgstr ""
-
-msgid "ButtonBar|Hex"
-msgstr ""
-
-msgid "ButtonBar|Goto"
-msgstr ""
-
-msgid "ButtonBar|Line"
 msgstr ""
 
 msgid "ButtonBar|View"
@@ -3024,33 +3137,6 @@ msgid "ButtonBar|Edit"
 msgstr ""
 
 msgid "ButtonBar|Save"
-msgstr ""
-
-msgid "ButtonBar|UnWrap"
-msgstr ""
-
-msgid "ButtonBar|Wrap"
-msgstr ""
-
-msgid "ButtonBar|RxSrch"
-msgstr ""
-
-msgid "ButtonBar|HxSrch"
-msgstr ""
-
-msgid "ButtonBar|Search"
-msgstr ""
-
-msgid "ButtonBar|Raw"
-msgstr ""
-
-msgid "ButtonBar|Parse"
-msgstr ""
-
-msgid "ButtonBar|Unform"
-msgstr ""
-
-msgid "ButtonBar|Format"
 msgstr ""
 
 msgid " History "
@@ -3602,6 +3688,63 @@ msgstr "Divintrinne aroke:"
 
 msgid "Changes to file lost"
 msgstr "Les candjmints do fitchî ont stî pierdous"
+
+#~ msgid "scanf &Expression"
+#~ msgstr "scanf sol &Ratoûrneure"
+
+#~ msgid "&Whole words only"
+#~ msgstr "Rén &ki des mots etirs"
+
+#~ msgid " Enter replacement argument order eg. 3,2,1,4 "
+#~ msgstr " Dinez l' ôrde des årgumints di discandje, metans: 3, 2, 1, 4 "
+
+#~ msgid ""
+#~ " Invalid regular expression, or scanf expression with too many "
+#~ "conversions "
+#~ msgstr ""
+#~ "Erûleye ratoûrneure nén valåbe ou ratoûrneure scanf avou trop di "
+#~ "conviertixhmints "
+
+#~ msgid " Error in replacement format string. "
+#~ msgstr " Li tchinne di discandje est må fwaite "
+
+#, fuzzy
+#~ msgid " Replacement too long. "
+#~ msgstr " Dinez li tchinne pol discandje:"
+
+#~ msgid "&Copy              F5"
+#~ msgstr "&Copyî                  F5"
+
+#~ msgid "&Delete            F8"
+#~ msgstr "&Disfacer               F8"
+
+#, fuzzy
+#~ msgid "Save setu&p..."
+#~ msgstr "&Schaper l' apontiaedje"
+
+#~ msgid " The command history is empty "
+#~ msgstr " I gn a rén e l' istwere des cmandes "
+
+#~ msgid "command &History"
+#~ msgstr "ist&were des cmandes"
+
+#, fuzzy
+#~ msgid "Edit edi&tor menu file"
+#~ msgstr "Aspougnî fitchî menu"
+
+#, fuzzy
+#~ msgid "Edit &syntax file"
+#~ msgstr " Tcherdjî fitchî emantchaedje "
+
+#, fuzzy
+#~ msgid "Invalid hex search expression"
+#~ msgstr " Voste erûleye ratoûrneure n' est nén valåbe "
+
+#~ msgid " Invalid regular expression "
+#~ msgstr " Voste erûleye ratoûrneure n' est nén valåbe "
+
+#~ msgid " Enter regexp:"
+#~ msgstr " Intrez l' erûleye ratoûrneure:"
 
 #, fuzzy
 #~ msgid "Using included S-Lang library"

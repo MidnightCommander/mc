@@ -2,10 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-14 19:43+0000\n"
+"POT-Creation-Date: 2009-06-30 19:38+0200\n"
 "PO-Revision-Date: 2002-08-25 16:15GMT+2\n"
 "Last-Translator: Vital Khilko <dojlid@mova.org>\n"
-"Language-Team: belarusian <i18n@mova.org>\n"
+"Language-Team: <debian-l10n-belarusian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -52,8 +52,15 @@ msgstr " Вельмі вялікі файл: "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-msgid "&Dismiss"
-msgstr "&Зачыніць"
+msgid "Search"
+msgstr "Пошук"
+
+#, c-format
+msgid " %d items found, %d bookmarks added "
+msgstr " %d адшукана, %d закладак дадана "
+
+msgid " Search string not found "
+msgstr "Радок пошуку не адшуканы "
 
 msgid "Warning"
 msgstr "Папярэджаньне"
@@ -113,9 +120,6 @@ msgstr "Перапісаць"
 msgid " Cannot save file. "
 msgstr " Памылка пры захаваньні файлу "
 
-msgid "Cancel"
-msgstr "Адмена"
-
 msgid " Delete macro "
 msgstr " Выдаліць макрас "
 
@@ -160,87 +164,45 @@ msgstr ""
 msgid "C&ontinue"
 msgstr "Працягнуць"
 
+#, fuzzy
+msgid "Syntax file edit"
+msgstr "Рэдагаваньне файлу пашырэньняў"
+
+#, fuzzy
+msgid " Which syntax file you want to edit? "
+msgstr " Які файл пашырэньняў Вы жадаеце рэдагаваць? "
+
+msgid "&User"
+msgstr "&Карыстальніку"
+
+msgid "&System Wide"
+msgstr "&Агульнасыстэмны"
+
+msgid " Menu edit "
+msgstr " Праўка файлу мэню "
+
+msgid " Which menu file do you want to edit? "
+msgstr " Які файл мэню Вы жадаеце рэдагаваць? "
+
+msgid "&Local"
+msgstr "&Лякальны"
+
 msgid " Load "
 msgstr " Загрузіць "
 
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " Блёк завялікі, у вас мажліва не атрымаецца адкаціць гэтую апэрацыю "
 
-msgid "O&ne"
-msgstr "&Адзін"
-
-msgid "A&ll"
-msgstr "&Усе"
-
-msgid "&Skip"
-msgstr "П&рапусьціць"
-
-msgid "&Replace"
+#, fuzzy
+msgid "Replace"
 msgstr "&Замяніць"
-
-msgid " Replace with: "
-msgstr " Замяніць на: "
-
-msgid " Confirm replace "
-msgstr " Падцьвердзіць замену "
-
-msgid "scanf &Expression"
-msgstr "выраз &scanf"
-
-msgid "replace &All"
-msgstr "Замяніць &Усе"
-
-msgid "pro&Mpt on replace"
-msgstr "Падцьвердзіць &замену"
-
-msgid "&Backwards"
-msgstr "&Назад"
-
-msgid "&Regular expression"
-msgstr "&Сталы выраз"
-
-msgid "&Whole words only"
-msgstr "Толькі поўныя &словы"
-
-msgid "case &Sensitive"
-msgstr "Улік рэ&гістру"
-
-msgid " Enter replacement argument order eg. 3,2,1,4 "
-msgstr " Увядзіце парадак аргумэнтаў замены, напр. 3,2,1,4 "
-
-msgid " Enter replacement string:"
-msgstr " Увядзіце тэкст для замены: "
-
-msgid " Enter search string:"
-msgstr " Увядзіце радок для пошуку"
 
 msgid " Replace "
 msgstr " Замяніць "
 
-msgid "Search"
-msgstr "Пошук"
-
-msgid ""
-" Invalid regular expression, or scanf expression with too many conversions "
-msgstr " Памылковы сталы выраз ці ў scanf-фармаце шмат пераўтварэньняў"
-
-msgid " Error in replacement format string. "
-msgstr " Памылка ў фармаце радку замены "
-
-#, fuzzy
-msgid " Replacement too long. "
-msgstr " Увядзіце тэкст для замены: "
-
 #, c-format
 msgid " %ld replacements made. "
 msgstr " Зьдейсьнена падстановак: %ld "
-
-msgid " Search string not found "
-msgstr "Радок пошуку не адшуканы "
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " %d адшукана, %d закладак дадана "
 
 msgid "Quit"
 msgstr "Выхад"
@@ -358,6 +320,51 @@ msgstr " Націсьніце любую клявішу: "
 msgid " Execute Macro "
 msgstr " Выканаць макрас "
 
+msgid "pro&Mpt on replace"
+msgstr "Падцьвердзіць &замену"
+
+msgid "replace &All"
+msgstr "Замяніць &Усе"
+
+msgid "All charsets"
+msgstr ""
+
+msgid "&Backwards"
+msgstr "&Назад"
+
+msgid "case &Sensitive"
+msgstr "Улік рэ&гістру"
+
+msgid " Enter replacement string:"
+msgstr " Увядзіце тэкст для замены: "
+
+msgid " Enter search string:"
+msgstr " Увядзіце радок для пошуку"
+
+msgid "Cancel"
+msgstr "Адмена"
+
+msgid "O&ne"
+msgstr "&Адзін"
+
+msgid "A&ll"
+msgstr "&Усе"
+
+msgid "&Skip"
+msgstr "П&рапусьціць"
+
+msgid "&Replace"
+msgstr "&Замяніць"
+
+msgid " Replace with: "
+msgstr " Замяніць на: "
+
+msgid " Confirm replace "
+msgstr " Падцьвердзіць замену "
+
+msgid "&Dismiss"
+msgstr "&Зачыніць"
+
 msgid " Emacs key: "
 msgstr " Клявіша Emacs: "
 
@@ -430,32 +437,79 @@ msgstr "&Новы файл         C-x k"
 msgid "Copy to &file...     "
 msgstr "&Капіяваць у файл..."
 
-msgid "&Toggle Mark       F3"
+#, fuzzy
+msgid "&Toggle mark                 F3"
 msgstr "&Выдаленьне блёку        F3"
 
-msgid "&Mark Columns    S-F3"
+#, fuzzy
+msgid "Mar&k columns              S-F3"
 msgstr "Вылучыць &слупкі     S-F3"
 
-msgid "Toggle &ins/overw Ins"
+#, fuzzy
+msgid "Toggle &ins/overw           Ins"
 msgstr "&Рэжым устаўкі/замены  Ins"
 
-msgid "&Copy              F5"
-msgstr "&Капіяваць блёк        F5"
+#, fuzzy
+msgid "&Copy                        F5"
+msgstr "&Капіяваньне         F5"
 
-msgid "&Move              F6"
+#, fuzzy
+msgid "&Move                        F6"
 msgstr "&Перамясьціць блёк       F6"
 
-msgid "&Delete            F8"
-msgstr "&Выдаліць блёк           F8"
+#, fuzzy
+msgid "&Delete                      F8"
+msgstr "&Выдаленьне          F8"
 
-msgid "&Undo             C-u"
+#, fuzzy
+msgid "C&opy to clipfile         C-Ins"
+msgstr "&Капіяваць у файл..."
+
+#, fuzzy
+msgid "C&ut to clipfile          S-Del"
+msgstr "&Перайсьці да радку           M-l"
+
+msgid "&Paste from clipfile      S-Ins"
+msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "&Выдаленьне блёку        F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "&Новы файл           C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "&Сартаваньне                 M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "&Электроная пошта..."
+
+#, fuzzy
+msgid "&Undo                       C-u"
 msgstr "&Адкат апэрацыі        C-u"
 
-msgid "&Beginning     C-PgUp"
+#, fuzzy
+msgid "&Beginning               C-PgUp"
 msgstr "&Пачатак файлу       C-PgUp"
 
-msgid "&End           C-PgDn"
+#, fuzzy
+msgid "&End                     C-PgDn"
 msgstr "Канец &файлу        C-PgDn"
+
+#, fuzzy
+msgid "C&opy to clipfile           M-w"
+msgstr "&Перайсьці да радку           M-l"
+
+#, fuzzy
+msgid "C&ut to clipfile            C-w"
+msgstr "&Перайсьці да радку           M-l"
+
+msgid "&Paste from clipfile        C-y"
+msgstr ""
 
 msgid "&Search...         F7"
 msgstr "&Пошук...          F7"
@@ -469,8 +523,25 @@ msgstr "&Замена...         F4"
 msgid "&Go to line...            M-l"
 msgstr "&Перайсьці да радку           M-l"
 
+#, fuzzy
+msgid "Toggle li&ne state        M-n"
+msgstr "&Выдаленьне блёку        F3"
+
 msgid "Go to matching &bracket   M-b"
 msgstr "перайсьці да парнай &дужкі    M-b"
+
+msgid "Find declaration      A-Enter"
+msgstr ""
+
+msgid "Back from declaration     M--"
+msgstr ""
+
+msgid "Forward to declaration    M-+"
+msgstr ""
+
+#, fuzzy
+msgid "Encod&ing...             C-t"
+msgstr "&Сартаваньне                 M-t"
 
 msgid "Insert &literal...       C-q"
 msgstr "Уставіць &літэрал...        C-q"
@@ -532,7 +603,15 @@ msgid "Syntax &Highlighting..."
 msgstr "Вылучэньне &колерам сынтаксысу"
 
 #, fuzzy
-msgid "Save setu&p..."
+msgid "S&yntax file"
+msgstr "Рэдагаваньне файлу пашырэньняў"
+
+#, fuzzy
+msgid "&Menu file"
+msgstr "Файл мэн&ю"
+
+#, fuzzy
+msgid "Save setu&p"
 msgstr "&Захаваць наладку"
 
 msgid " File "
@@ -574,6 +653,10 @@ msgstr "Пазыцыя пераносу радкоў :"
 
 msgid "Tab spacing: "
 msgstr "Крок табуляцыі : "
+
+#, fuzzy
+msgid "Pers&istent selection"
+msgstr "Інвэр&таваць адзнаку *"
 
 msgid "Synta&x highlighting"
 msgstr "Вылучэньне &колерам сынтаксысу"
@@ -810,6 +893,10 @@ msgstr " падцьверджаньне &Выдаленьня"
 
 msgid " Confirmation "
 msgstr " Запыт падцьверджаньня "
+
+#, fuzzy
+msgid "UTF-8 output"
+msgstr "Поўны 8-бітны вывад"
 
 msgid "Full 8 bits output"
 msgstr "Поўны 8-бітны вывад"
@@ -1053,8 +1140,16 @@ msgstr " Фільтар "
 msgid " Set expression for filtering filenames"
 msgstr " Задайце выраз для адбору ймёнаў файлаў"
 
-msgid "  Malformed regular expression  "
-msgstr "  Сталы выраз сфармаваны памылкова"
+msgid "&Using shell patterns"
+msgstr "&Мэтасымбалі shell"
+
+#, fuzzy
+msgid "&Case sensitive"
+msgstr "Улік рэ&гістру"
+
+#, fuzzy
+msgid "&Files only"
+msgstr "Па &памеру"
 
 msgid " Select "
 msgstr " Выбраць "
@@ -1066,29 +1161,6 @@ msgid "Extension file edit"
 msgstr " Рэдагаваньне файлу пашырэньняў "
 
 msgid " Which extension file you want to edit? "
-msgstr " Які файл пашырэньняў Вы жадаеце рэдагаваць? "
-
-msgid "&User"
-msgstr "&Карыстальніку"
-
-msgid "&System Wide"
-msgstr "&Агульнасыстэмны"
-
-msgid " Menu edit "
-msgstr " Праўка файлу мэню "
-
-msgid " Which menu file do you want to edit? "
-msgstr " Які файл мэню Вы жадаеце рэдагаваць? "
-
-msgid "&Local"
-msgstr "&Лякальны"
-
-#, fuzzy
-msgid "Syntax file edit"
-msgstr "Рэдагаваньне файлу пашырэньняў"
-
-#, fuzzy
-msgid " Which syntax file you want to edit? "
 msgstr " Які файл пашырэньняў Вы жадаеце рэдагаваць? "
 
 msgid " Compare directories "
@@ -1109,12 +1181,6 @@ msgstr "Па&байтны"
 msgid " Both panels should be in the listing mode to use this command "
 msgstr ""
 " Для выкананьня гэтае каманды абедзьве панэлі павінны быць у рэжыме сьпісу"
-
-msgid " The command history is empty "
-msgstr " Гісторыя каманднага радку пустая "
-
-msgid " Command history "
-msgstr " Гісторыя каманднага радку "
 
 msgid ""
 " Not an xterm or Linux console; \n"
@@ -1292,9 +1358,6 @@ msgstr " Перамяшчэньне "
 
 msgid " Delete "
 msgstr " Выдаленьне "
-
-msgid " Invalid target mask "
-msgstr " Памылковы шаблён мэты "
 
 msgid " Cannot make the hardlink "
 msgstr " Немагчыма стварыць жорскую спасылку "
@@ -1571,6 +1634,10 @@ msgstr ""
 " Немагчыма выдаліць каталёг \"%s\" \n"
 " %s "
 
+#, fuzzy
+msgid "Directory scanning"
+msgstr " Шлях да каталёгу"
+
 msgid "1Copy"
 msgstr "1Капіяваць"
 
@@ -1729,9 +1796,6 @@ msgstr "Сачыць за &Спасылкамі."
 msgid "to:"
 msgstr "у:"
 
-msgid "&Using shell patterns"
-msgstr "&Мэтасымбалі shell"
-
 msgid "&Background"
 msgstr "У т&ле"
 
@@ -1741,10 +1805,8 @@ msgstr "&Захоўваць сымбалічныя спасылкі"
 msgid "&Dive into subdir if exists"
 msgstr "У &нутро каталёгу, калі ёсьць"
 
-#, c-format
-msgid ""
-"Invalid source pattern `%s' \n"
-" %s "
+#, fuzzy, c-format
+msgid "Invalid source pattern `%s'"
 msgstr ""
 "Памылковы узор `%s' \n"
 " %s "
@@ -1773,26 +1835,54 @@ msgstr "Пра&гляд - F3"
 msgid "&Edit - F4"
 msgstr "&Праўка - F4"
 
+#, c-format
+msgid "Found: %ld"
+msgstr ""
+
+#, fuzzy
+msgid " Malformed regular expression "
+msgstr "  Сталы выраз сфармаваны памылкова"
+
+#, fuzzy
+msgid "Cas&e sensitive"
+msgstr "Улік рэ&гістру"
+
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "Улік рэ&гістру"
+
 msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "Start at:"
-msgstr "  Стартаваць ад:"
+msgid "&All charsets"
+msgstr ""
 
-msgid "Filename:"
-msgstr "  Шаблён імя"
+msgid "All cha&rsets"
+msgstr ""
 
-msgid "Content: "
-msgstr "Утрымлівае тэкст"
+#, fuzzy
+msgid "Re&gular expression"
+msgstr "&Сталы выраз"
 
 msgid "&Tree"
 msgstr "Д&рэва"
 
 msgid "Find File"
 msgstr " Пошук файлу "
+
+#, fuzzy
+msgid "Content:"
+msgstr "Утрымлівае тэкст"
+
+#, fuzzy
+msgid "File name:"
+msgstr "  Шаблён імя"
+
+msgid "Start at:"
+msgstr "  Стартаваць ад:"
 
 #, c-format
 msgid "Grepping in %s"
@@ -2157,6 +2247,9 @@ msgstr "Парадак &сартаваньня"
 msgid "&Filter..."
 msgstr "&Фільтар"
 
+msgid "&Encoding...    C-t"
+msgstr ""
+
 msgid "&Network link..."
 msgstr "Се&ткавае злучэньне..."
 
@@ -2171,9 +2264,6 @@ msgstr "SM&B сувязь..."
 
 msgid "&Rescan         C-r"
 msgstr "&Перасканаваць       C-r"
-
-msgid "&User menu          F2"
-msgstr "&Мэню карыстальніку  F2"
 
 msgid "&View               F3"
 msgstr "Прагляд фа&йлу       F3"
@@ -2232,6 +2322,9 @@ msgstr "Інвэр&таваць адзнаку *"
 msgid "e&Xit              F10"
 msgstr "Вы&хад               F10"
 
+msgid "&User menu          F2"
+msgstr "&Мэню карыстальніку  F2"
+
 msgid "&Directory tree"
 msgstr "&Дрэва каталёгаў"
 
@@ -2253,8 +2346,9 @@ msgstr "&Крытэр панэлізацыі   C-x !"
 msgid "show directory s&Izes"
 msgstr "Па&меры каталёгаў"
 
-msgid "command &History"
-msgstr "&Гісторыя камандаў"
+#, fuzzy
+msgid "Command &history      M-h"
+msgstr " Гісторыя каманднага радку "
 
 msgid "di&Rectory hotlist    C-\\"
 msgstr "Сьпіс ката&лёгаў      C-\\"
@@ -2276,12 +2370,6 @@ msgstr "Файл па&шырэньняў"
 
 msgid "Edit &menu file"
 msgstr "Файл мэн&ю"
-
-msgid "Edit edi&tor menu file"
-msgstr "П&раўка  файлу мэню"
-
-msgid "Edit &syntax file"
-msgstr "Рэдагаваньне файлу &пашырэньняў"
 
 msgid "&Configuration..."
 msgstr "&Канфігурацыя"
@@ -2345,6 +2433,22 @@ msgstr "Мэню"
 msgid "The TERM environment variable is unset!\n"
 msgstr "Пераменная асяродку TERM ня вызначана!\n"
 
+msgid "&Fix it"
+msgstr ""
+
+msgid "don't ask again"
+msgstr ""
+
+msgid ""
+"Chosen display charset (Settings->Display bits)\n"
+"or source codeset (in mcedit ctrl-t) \n"
+"does not match one set via locale. \n"
+"Set correct codeset manually or press <<Fix it>> \n"
+"to set locale default.\n"
+"\n"
+"Or set 'don't ask again' and press <<Skip>>"
+msgstr ""
+
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
@@ -2379,7 +2483,11 @@ msgid ""
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
 "   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
+msgstr ""
+
+msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 "   File types:   directory, executable, link, stalelink, device, special, "
 "core\n"
@@ -2452,6 +2560,10 @@ msgstr "Запускае праграму прагляду для файлу"
 
 msgid "Edits one file"
 msgstr "Рэдагуе адзін файл"
+
+#, fuzzy, c-format
+msgid "Cannot create %s directory"
+msgstr "Немагчыма зьмяніць каталёг"
 
 msgid "safe de&Lete"
 msgstr "Бясьпечнае вы&даленьне"
@@ -2671,21 +2783,35 @@ msgstr "Перанс"
 msgid "Mkdir"
 msgstr "НвКтляг"
 
-msgid " Choose input codepage "
+msgid " Not implemented yet "
+msgstr ""
+
+msgid " Num of replace tokens not equal to num of found tokens "
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Invalid token number %d "
+msgstr " Памылковы шаблён мэты "
+
+#, fuzzy
+msgid "Normal"
+msgstr "Фармат"
+
+msgid "&Regular expression"
+msgstr "&Сталы выраз"
+
+msgid "Hexadecimal"
+msgstr ""
+
+msgid "Wildcard search"
+msgstr ""
+
+#, fuzzy
+msgid "Choose codepage"
 msgstr " Выбраць табліцу сымбаляў вываду"
 
 msgid "-  < No translation >"
 msgstr "-  < Не перакладзена >"
-
-msgid ""
-"To use this feature select your codepage in\n"
-"Setup / Display Bits dialog!\n"
-"Do not forget to save options."
-msgstr ""
-"Каб выкарыстаць гэтую магчымасьць,\n"
-"выбярыце вашую табліцу сымбаляў у\n"
-"Наладка / Біты сымбаляў!\n"
-"Ня забудзьцеся захаваць зьмены."
 
 #, c-format
 msgid ""
@@ -2722,6 +2848,10 @@ msgid "with terminfo database"
 msgstr "з базай дадзеных terminfo"
 
 msgid "Using the ncurses library"
+msgstr "Выкарыстоўваць бібліятэку ncurses"
+
+#, fuzzy
+msgid "Using the ncursesw library"
 msgstr "Выкарыстоўваць бібліятэку ncurses"
 
 msgid "With optional subshell support"
@@ -2845,11 +2975,19 @@ msgstr " Ня адшукана запісаў, што адпавядаюць, у
 msgid " User menu "
 msgstr " Мэню карыстальніку "
 
-msgid "%b %e %H:%M"
+#, fuzzy
+msgid "%b %d %H:%M"
 msgstr "%b %e %H:%M"
+
+#, fuzzy
+msgid "%b %d %Y"
+msgstr "%b %e  %Y"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
@@ -2944,24 +3082,16 @@ msgid ""
 " %s "
 msgstr " Памылка пры захаваньні файлу "
 
-msgid "Invalid hex search expression"
-msgstr " Памылковы выраз пошуку"
-
-msgid " Invalid regular expression "
-msgstr " Памылковы сталы выраз "
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" The current line number is %d.\n"
+" The current line number is %lu.\n"
 " Enter the new line number:"
 msgstr ""
 " Нумар бягучага радку %d.\n"
 " Увядзіце нумар новага радку:"
 
-#, c-format
-msgid ""
-" The current address is 0x%lx.\n"
-" Enter the new address:"
+#, fuzzy
+msgid " The current address is 0x%08"
 msgstr ""
 " Бягучая адрэса - 0x%lx.\n"
 " Увядзіце новую адрэсу:"
@@ -2973,25 +3103,10 @@ msgstr " Перайсьці на адрэсу "
 msgid " Invalid address "
 msgstr " Памылковы пароль "
 
-msgid " Enter regexp:"
-msgstr " Увядзіце сталы выраз:"
-
 msgid "ButtonBar|Help"
 msgstr ""
 
 msgid "ButtonBar|Quit"
-msgstr ""
-
-msgid "ButtonBar|Ascii"
-msgstr ""
-
-msgid "ButtonBar|Hex"
-msgstr ""
-
-msgid "ButtonBar|Goto"
-msgstr ""
-
-msgid "ButtonBar|Line"
 msgstr ""
 
 msgid "ButtonBar|View"
@@ -3001,33 +3116,6 @@ msgid "ButtonBar|Edit"
 msgstr ""
 
 msgid "ButtonBar|Save"
-msgstr ""
-
-msgid "ButtonBar|UnWrap"
-msgstr ""
-
-msgid "ButtonBar|Wrap"
-msgstr ""
-
-msgid "ButtonBar|RxSrch"
-msgstr ""
-
-msgid "ButtonBar|HxSrch"
-msgstr ""
-
-msgid "ButtonBar|Search"
-msgstr ""
-
-msgid "ButtonBar|Raw"
-msgstr ""
-
-msgid "ButtonBar|Parse"
-msgstr ""
-
-msgid "ButtonBar|Unform"
-msgstr ""
-
-msgid "ButtonBar|Format"
 msgstr ""
 
 msgid " History "
@@ -3609,6 +3697,68 @@ msgstr " Нутраная памылка:"
 msgid "Changes to file lost"
 msgstr "Зьмены для файлу страчаны"
 
+#~ msgid "scanf &Expression"
+#~ msgstr "выраз &scanf"
+
+#~ msgid "&Whole words only"
+#~ msgstr "Толькі поўныя &словы"
+
+#~ msgid " Enter replacement argument order eg. 3,2,1,4 "
+#~ msgstr " Увядзіце парадак аргумэнтаў замены, напр. 3,2,1,4 "
+
+#~ msgid ""
+#~ " Invalid regular expression, or scanf expression with too many "
+#~ "conversions "
+#~ msgstr " Памылковы сталы выраз ці ў scanf-фармаце шмат пераўтварэньняў"
+
+#~ msgid " Error in replacement format string. "
+#~ msgstr " Памылка ў фармаце радку замены "
+
+#, fuzzy
+#~ msgid " Replacement too long. "
+#~ msgstr " Увядзіце тэкст для замены: "
+
+#~ msgid "&Copy              F5"
+#~ msgstr "&Капіяваць блёк        F5"
+
+#~ msgid "&Delete            F8"
+#~ msgstr "&Выдаліць блёк           F8"
+
+#, fuzzy
+#~ msgid "Save setu&p..."
+#~ msgstr "&Захаваць наладку"
+
+#~ msgid " The command history is empty "
+#~ msgstr " Гісторыя каманднага радку пустая "
+
+#~ msgid "command &History"
+#~ msgstr "&Гісторыя камандаў"
+
+#~ msgid "Edit edi&tor menu file"
+#~ msgstr "П&раўка  файлу мэню"
+
+#~ msgid "Edit &syntax file"
+#~ msgstr "Рэдагаваньне файлу &пашырэньняў"
+
+#~ msgid ""
+#~ "To use this feature select your codepage in\n"
+#~ "Setup / Display Bits dialog!\n"
+#~ "Do not forget to save options."
+#~ msgstr ""
+#~ "Каб выкарыстаць гэтую магчымасьць,\n"
+#~ "выбярыце вашую табліцу сымбаляў у\n"
+#~ "Наладка / Біты сымбаляў!\n"
+#~ "Ня забудзьцеся захаваць зьмены."
+
+#~ msgid "Invalid hex search expression"
+#~ msgstr " Памылковы выраз пошуку"
+
+#~ msgid " Invalid regular expression "
+#~ msgstr " Памылковы сталы выраз "
+
+#~ msgid " Enter regexp:"
+#~ msgstr " Увядзіце сталы выраз:"
+
 #~ msgid "Using included S-Lang library"
 #~ msgstr "Выкарыстаньне бібліятэкі S-Lang"
 
@@ -3732,9 +3882,6 @@ msgstr "Зьмены для файлу страчаны"
 
 #~ msgid "Unform"
 #~ msgstr "НеФармт"
-
-#~ msgid "Format"
-#~ msgstr "Фармат"
 
 #~ msgid "User menu available only in mcedit invoked from mc"
 #~ msgstr "Мэню карыстальніку даступнае толькі ў mcedit, які запушчаны з mc"

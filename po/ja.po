@@ -7,10 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc CVS-20011220\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-14 19:43+0000\n"
+"POT-Creation-Date: 2009-06-30 19:38+0200\n"
 "PO-Revision-Date: 2001-12-20 18:33+0900\n"
 "Last-Translator: Akira TAGOH <tagoh@gnome.gr.jp>\n"
-"Language-Team: Japanese <translation@gnome.gr.jp>\n"
+"Language-Team: Japanese <debian-japanese@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=euc-jp\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -56,8 +56,15 @@ msgstr "ファイルが大きすぎます: "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-msgid "&Dismiss"
-msgstr "消去(&D)"
+msgid "Search"
+msgstr "検索"
+
+#, c-format
+msgid " %d items found, %d bookmarks added "
+msgstr " %d 個発見し， %d 個のブックマークを追加しました "
+
+msgid " Search string not found "
+msgstr " 検索文字列が見付かりません "
 
 msgid "Warning"
 msgstr "警告"
@@ -118,9 +125,6 @@ msgstr "上書き"
 msgid " Cannot save file. "
 msgstr "ファイルの保存時にエラーが発生しました"
 
-msgid "Cancel"
-msgstr "キャンセル"
-
 msgid " Delete macro "
 msgstr " マクロを削除 "
 
@@ -165,87 +169,45 @@ msgstr ""
 msgid "C&ontinue"
 msgstr "継続"
 
+#, fuzzy
+msgid "Syntax file edit"
+msgstr "メニューファイル編集(&M)"
+
+#, fuzzy
+msgid " Which syntax file you want to edit? "
+msgstr " どの拡張ファイルを編集しますか? "
+
+msgid "&User"
+msgstr "ユーザ(&U)"
+
+msgid "&System Wide"
+msgstr "システム全体(&S)"
+
+msgid " Menu edit "
+msgstr " メニューの編集 "
+
+msgid " Which menu file do you want to edit? "
+msgstr " どのメニューファイルを編集しますか? "
+
+msgid "&Local"
+msgstr "ローカル(&L)"
+
 msgid " Load "
 msgstr " 読み込み "
 
 msgid " Block is large, you may not be able to undo this action. "
 msgstr "大きなブロックです。この操作はやり直せないかもしれません"
 
-msgid "O&ne"
-msgstr "一つ(&N)"
-
-msgid "A&ll"
-msgstr "全部(&L)"
-
-msgid "&Skip"
-msgstr "スキップ(&S)"
-
-msgid "&Replace"
+#, fuzzy
+msgid "Replace"
 msgstr "置換(&R)"
-
-msgid " Replace with: "
-msgstr " 置き換える文字列: "
-
-msgid " Confirm replace "
-msgstr " 確認置換 "
-
-msgid "scanf &Expression"
-msgstr "scanf 形式(&E)"
-
-msgid "replace &All"
-msgstr "全て置き換える(&A)"
-
-msgid "pro&Mpt on replace"
-msgstr "置換時にプロンプト(&O)"
-
-msgid "&Backwards"
-msgstr "後方(&B)"
-
-msgid "&Regular expression"
-msgstr "正規表現(&R)"
-
-msgid "&Whole words only"
-msgstr "単語のみ(&W)"
-
-msgid "case &Sensitive"
-msgstr "大文字・小文字を区別(&S)"
-
-msgid " Enter replacement argument order eg. 3,2,1,4 "
-msgstr "置換の引数の順番を入力してください (例) 3,2,1,4 "
-
-msgid " Enter replacement string:"
-msgstr "置換文字列を入力してください:"
-
-msgid " Enter search string:"
-msgstr "検索文字列を入力してください:"
 
 msgid " Replace "
 msgstr " 置換 "
 
-msgid "Search"
-msgstr "検索"
-
-msgid ""
-" Invalid regular expression, or scanf expression with too many conversions "
-msgstr "おかしな正規表現、あるいは scanf 形式です。変換が多すぎます "
-
-msgid " Error in replacement format string. "
-msgstr "置換形式文字列にエラー"
-
-#, fuzzy
-msgid " Replacement too long. "
-msgstr "置換文字列を入力してください:"
-
 #, c-format
 msgid " %ld replacements made. "
 msgstr "%ld 個置換しました"
-
-msgid " Search string not found "
-msgstr " 検索文字列が見付かりません "
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " %d 個発見し， %d 個のブックマークを追加しました "
 
 msgid "Quit"
 msgstr "終了"
@@ -364,6 +326,51 @@ msgstr " キーを押してください: "
 msgid " Execute Macro "
 msgstr " マクロを実行 "
 
+msgid "pro&Mpt on replace"
+msgstr "置換時にプロンプト(&O)"
+
+msgid "replace &All"
+msgstr "全て置き換える(&A)"
+
+msgid "All charsets"
+msgstr ""
+
+msgid "&Backwards"
+msgstr "後方(&B)"
+
+msgid "case &Sensitive"
+msgstr "大文字・小文字を区別(&S)"
+
+msgid " Enter replacement string:"
+msgstr "置換文字列を入力してください:"
+
+msgid " Enter search string:"
+msgstr "検索文字列を入力してください:"
+
+msgid "Cancel"
+msgstr "キャンセル"
+
+msgid "O&ne"
+msgstr "一つ(&N)"
+
+msgid "A&ll"
+msgstr "全部(&L)"
+
+msgid "&Skip"
+msgstr "スキップ(&S)"
+
+msgid "&Replace"
+msgstr "置換(&R)"
+
+msgid " Replace with: "
+msgstr " 置き換える文字列: "
+
+msgid " Confirm replace "
+msgstr " 確認置換 "
+
+msgid "&Dismiss"
+msgstr "消去(&D)"
+
 msgid " Emacs key: "
 msgstr " Emacsキー: "
 
@@ -436,32 +443,79 @@ msgstr "新規(&N)              C-x k"
 msgid "Copy to &file...     "
 msgstr "ファイルへコピー(&F)...    "
 
-msgid "&Toggle Mark       F3"
+#, fuzzy
+msgid "&Toggle mark                 F3"
 msgstr "マークを切替え(&T)       F3"
 
-msgid "&Mark Columns    S-F3"
+#, fuzzy
+msgid "Mar&k columns              S-F3"
 msgstr "列にマーク(&M)         S-F3"
 
-msgid "Toggle &ins/overw Ins"
+#, fuzzy
+msgid "Toggle &ins/overw           Ins"
 msgstr "挿入・上書きを切替え(&I) Ins"
 
-msgid "&Copy              F5"
-msgstr "コピー(&C)               F5"
+#, fuzzy
+msgid "&Copy                        F5"
+msgstr "コピー(&C)                        F5"
 
-msgid "&Move              F6"
+#, fuzzy
+msgid "&Move                        F6"
 msgstr "移動(&M)                 F6"
 
-msgid "&Delete            F8"
-msgstr "削除(&D)                 F8"
+#, fuzzy
+msgid "&Delete                      F8"
+msgstr "削除(&D)                          F8"
 
-msgid "&Undo             C-u"
+#, fuzzy
+msgid "C&opy to clipfile         C-Ins"
+msgstr "ファイルへコピー(&F)...    "
+
+#, fuzzy
+msgid "C&ut to clipfile          S-Del"
+msgstr "行移動(&G)...              M-l"
+
+msgid "&Paste from clipfile      S-Ins"
+msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "マークを切替え(&T)       F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "新規作成(&N)            C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "並べ替え(&T)               M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "メイル(&M)...                 "
+
+#, fuzzy
+msgid "&Undo                       C-u"
 msgstr "やりなおし(&U)          C-u"
 
-msgid "&Beginning     C-PgUp"
+#, fuzzy
+msgid "&Beginning               C-PgUp"
 msgstr "先頭(&B)             C-PgUp"
 
-msgid "&End           C-PgDn"
+#, fuzzy
+msgid "&End                     C-PgDn"
 msgstr "末尾(&E)             C-PgDn"
+
+#, fuzzy
+msgid "C&opy to clipfile           M-w"
+msgstr "行移動(&G)...              M-l"
+
+#, fuzzy
+msgid "C&ut to clipfile            C-w"
+msgstr "行移動(&G)...              M-l"
+
+msgid "&Paste from clipfile        C-y"
+msgstr ""
 
 msgid "&Search...         F7"
 msgstr "検索(&S)...              F7"
@@ -475,8 +529,25 @@ msgstr "置換(&R)...              F4"
 msgid "&Go to line...            M-l"
 msgstr "行移動(&G)...              M-l"
 
+#, fuzzy
+msgid "Toggle li&ne state        M-n"
+msgstr "マークを切替え(&T)       F3"
+
 msgid "Go to matching &bracket   M-b"
 msgstr "対の括弧へ移動             M-b"
+
+msgid "Find declaration      A-Enter"
+msgstr ""
+
+msgid "Back from declaration     M--"
+msgstr ""
+
+msgid "Forward to declaration    M-+"
+msgstr ""
+
+#, fuzzy
+msgid "Encod&ing...             C-t"
+msgstr "並べ替え(&T)               M-t"
 
 msgid "Insert &literal...       C-q"
 msgstr "文字を挿入(&L)...          C-q"
@@ -538,7 +609,15 @@ msgid "Syntax &Highlighting..."
 msgstr "文法ハイライト(&S)"
 
 #, fuzzy
-msgid "Save setu&p..."
+msgid "S&yntax file"
+msgstr "メニューファイル編集(&M)"
+
+#, fuzzy
+msgid "&Menu file"
+msgstr "メニューファイル編集(&M)"
+
+#, fuzzy
+msgid "Save setu&p"
 msgstr "設定保存(&S)"
 
 msgid " File "
@@ -580,6 +659,10 @@ msgstr "折り返しする行の長さ : "
 
 msgid "Tab spacing: "
 msgstr "タブの空白数 : "
+
+#, fuzzy
+msgid "Pers&istent selection"
+msgstr "選択反転(&N)                     M-*"
 
 msgid "Synta&x highlighting"
 msgstr "文法ハイライト(&S)"
@@ -816,6 +899,10 @@ msgstr " 削除を確認(&D) "
 
 msgid " Confirmation "
 msgstr " 確認 "
+
+#, fuzzy
+msgid "UTF-8 output"
+msgstr "8 ビット出力"
 
 msgid "Full 8 bits output"
 msgstr "8 ビット出力"
@@ -1059,8 +1146,16 @@ msgstr " フィルタ "
 msgid " Set expression for filtering filenames"
 msgstr " ファイル名のフィルタの形式を設定"
 
-msgid "  Malformed regular expression  "
-msgstr "  おかしな正規表現です  "
+msgid "&Using shell patterns"
+msgstr "シェルパターンを使用(&U)"
+
+#, fuzzy
+msgid "&Case sensitive"
+msgstr "大文字・小文字を区別(&t)"
+
+#, fuzzy
+msgid "&Files only"
+msgstr "大きさのみ(&S)"
 
 msgid " Select "
 msgstr " 選択 "
@@ -1072,29 +1167,6 @@ msgid "Extension file edit"
 msgstr "拡張ファイルの編集"
 
 msgid " Which extension file you want to edit? "
-msgstr " どの拡張ファイルを編集しますか? "
-
-msgid "&User"
-msgstr "ユーザ(&U)"
-
-msgid "&System Wide"
-msgstr "システム全体(&S)"
-
-msgid " Menu edit "
-msgstr " メニューの編集 "
-
-msgid " Which menu file do you want to edit? "
-msgstr " どのメニューファイルを編集しますか? "
-
-msgid "&Local"
-msgstr "ローカル(&L)"
-
-#, fuzzy
-msgid "Syntax file edit"
-msgstr "メニューファイル編集(&M)"
-
-#, fuzzy
-msgid " Which syntax file you want to edit? "
 msgstr " どの拡張ファイルを編集しますか? "
 
 msgid " Compare directories "
@@ -1115,12 +1187,6 @@ msgstr "通しで(&T)"
 msgid " Both panels should be in the listing mode to use this command "
 msgstr ""
 " このコマンドを使うには,両パネルとも一覧表示モードでなければなりません "
-
-msgid " The command history is empty "
-msgstr " コマンドの履歴は空です "
-
-msgid " Command history "
-msgstr " コマンドの履歴 "
 
 msgid ""
 " Not an xterm or Linux console; \n"
@@ -1299,9 +1365,6 @@ msgstr " 移動 "
 
 msgid " Delete "
 msgstr " 削除 "
-
-msgid " Invalid target mask "
-msgstr " 不正なターゲットマスクです "
 
 msgid " Cannot make the hardlink "
 msgstr " ハードリンクを作成できません "
@@ -1577,6 +1640,10 @@ msgstr ""
 " ディレクトリ \"%s\" を削除できません\n"
 " %s "
 
+#, fuzzy
+msgid "Directory scanning"
+msgstr "ディレクトリパス"
+
 msgid "1Copy"
 msgstr "1Copy"
 
@@ -1735,9 +1802,6 @@ msgstr "リンクをたどる(&L)"
 msgid "to:"
 msgstr "to:"
 
-msgid "&Using shell patterns"
-msgstr "シェルパターンを使用(&U)"
-
 msgid "&Background"
 msgstr "バックグラウンド(&B)"
 
@@ -1747,10 +1811,8 @@ msgstr "安定シンボリックリンク(&S)"
 msgid "&Dive into subdir if exists"
 msgstr "サブディレクトリが存在すれば入る(&D)"
 
-#, c-format
-msgid ""
-"Invalid source pattern `%s' \n"
-" %s "
+#, fuzzy, c-format
+msgid "Invalid source pattern `%s'"
 msgstr ""
 "不正な元パターン `%s' \n"
 " %s "
@@ -1779,26 +1841,54 @@ msgstr "表示(&V) - F3"
 msgid "&Edit - F4"
 msgstr "編集(&E) - F4"
 
+#, c-format
+msgid "Found: %ld"
+msgstr ""
+
+#, fuzzy
+msgid " Malformed regular expression "
+msgstr "  おかしな正規表現です  "
+
+#, fuzzy
+msgid "Cas&e sensitive"
+msgstr "大文字・小文字を区別(&t)"
+
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "大文字・小文字を区別(&t)"
+
 msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "Start at:"
-msgstr "開始場所:"
+msgid "&All charsets"
+msgstr ""
 
-msgid "Filename:"
-msgstr "ファイル名:"
+msgid "All cha&rsets"
+msgstr ""
 
-msgid "Content: "
-msgstr "内容:"
+#, fuzzy
+msgid "Re&gular expression"
+msgstr "正規表現(&R)"
 
 msgid "&Tree"
 msgstr "ツリー(&T)"
 
 msgid "Find File"
 msgstr "ファイル検索"
+
+#, fuzzy
+msgid "Content:"
+msgstr "内容:"
+
+#, fuzzy
+msgid "File name:"
+msgstr "ファイル名:"
+
+msgid "Start at:"
+msgstr "開始場所:"
 
 #, c-format
 msgid "Grepping in %s"
@@ -2163,6 +2253,9 @@ msgstr "整列順(&S)..."
 msgid "&Filter..."
 msgstr "フィルタ(&F)..."
 
+msgid "&Encoding...    C-t"
+msgstr ""
+
 msgid "&Network link..."
 msgstr "ネットワークリンク(&N)..."
 
@@ -2178,9 +2271,6 @@ msgstr "SMBリンク(&B)..."
 
 msgid "&Rescan         C-r"
 msgstr "再スキャン(&R)     C-r"
-
-msgid "&User menu          F2"
-msgstr "ユーザメニュー(&U)                F2"
 
 msgid "&View               F3"
 msgstr "表示(&V)                          F3"
@@ -2239,6 +2329,9 @@ msgstr "選択反転(&N)                     M-*"
 msgid "e&Xit              F10"
 msgstr "終了(&X)                         F10"
 
+msgid "&User menu          F2"
+msgstr "ユーザメニュー(&U)                F2"
+
 msgid "&Directory tree"
 msgstr "ディレクトリツリー(&D)"
 
@@ -2260,8 +2353,9 @@ msgstr "外部パネル(&X)               C-x !"
 msgid "show directory s&Izes"
 msgstr "ディレクトリサイズ表示(&I)"
 
-msgid "command &History"
-msgstr "コマンド履歴(&H)"
+#, fuzzy
+msgid "Command &history      M-h"
+msgstr " コマンドの履歴 "
 
 msgid "di&Rectory hotlist    C-\\"
 msgstr "ディレクトリホットリスト(&R) C-\\"
@@ -2282,13 +2376,6 @@ msgid "Edit &extension file"
 msgstr "拡張ファイルを編集(&E)"
 
 msgid "Edit &menu file"
-msgstr "メニューファイル編集(&M)"
-
-msgid "Edit edi&tor menu file"
-msgstr "メニューエディタで編集(&T)"
-
-#, fuzzy
-msgid "Edit &syntax file"
 msgstr "メニューファイル編集(&M)"
 
 msgid "&Configuration..."
@@ -2353,6 +2440,22 @@ msgstr "メニュ"
 msgid "The TERM environment variable is unset!\n"
 msgstr "環境変数 TERM がセットされていません\n"
 
+msgid "&Fix it"
+msgstr ""
+
+msgid "don't ask again"
+msgstr ""
+
+msgid ""
+"Chosen display charset (Settings->Display bits)\n"
+"or source codeset (in mcedit ctrl-t) \n"
+"does not match one set via locale. \n"
+"Set correct codeset manually or press <<Fix it>> \n"
+"to set locale default.\n"
+"\n"
+"Or set 'don't ask again' and press <<Skip>>"
+msgstr ""
+
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
@@ -2387,16 +2490,8 @@ msgid ""
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
 "   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked\n"
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
 msgstr ""
 "--colors キーワード={FORE},{BACK}\n"
 "\n"
@@ -2416,6 +2511,18 @@ msgstr ""
 "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
 "   brightcyan, lightgray and white\n"
 "\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
 
 msgid "Displays this help message"
 msgstr "このヘルプメッセージを表示"
@@ -2478,6 +2585,10 @@ msgstr "ファイルビューアを起動"
 
 msgid "Edits one file"
 msgstr "ファイルを編集"
+
+#, fuzzy, c-format
+msgid "Cannot create %s directory"
+msgstr "ディレクトリを変更できません"
 
 msgid "safe de&Lete"
 msgstr "安全な削除処理(&L)"
@@ -2697,20 +2808,35 @@ msgstr "RenMov"
 msgid "Mkdir"
 msgstr "MkDir"
 
-msgid " Choose input codepage "
+msgid " Not implemented yet "
+msgstr ""
+
+msgid " Num of replace tokens not equal to num of found tokens "
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Invalid token number %d "
+msgstr " 不正なターゲットマスクです "
+
+#, fuzzy
+msgid "Normal"
+msgstr "Format"
+
+msgid "&Regular expression"
+msgstr "正規表現(&R)"
+
+msgid "Hexadecimal"
+msgstr ""
+
+msgid "Wildcard search"
+msgstr ""
+
+#, fuzzy
+msgid "Choose codepage"
 msgstr " 入力コードページを選択 "
 
 msgid "-  < No translation >"
 msgstr "-  < 翻訳がありません >"
-
-msgid ""
-"To use this feature select your codepage in\n"
-"Setup / Display Bits dialog!\n"
-"Do not forget to save options."
-msgstr ""
-"この機能を使うために 設定 / 表示ビット数\n"
-"ダイアログでコードページを選択してください\n"
-"オプションを保存するのを忘れずに"
 
 #, c-format
 msgid ""
@@ -2747,6 +2873,10 @@ msgid "with terminfo database"
 msgstr "terminfoデータベースを使用"
 
 msgid "Using the ncurses library"
+msgstr "ncursesライブラリを使用"
+
+#, fuzzy
+msgid "Using the ncursesw library"
 msgstr "ncursesライブラリを使用"
 
 msgid "With optional subshell support"
@@ -2869,11 +2999,19 @@ msgstr " %s に特定のエントリーは見つかりませんでした "
 msgid " User menu "
 msgstr " ユーザー・メニュー "
 
-msgid "%b %e %H:%M"
+#, fuzzy
+msgid "%b %d %H:%M"
 msgstr "%b %e %H:%M"
+
+#, fuzzy
+msgid "%b %d %Y"
+msgstr "%b %e  %Y"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
@@ -2968,24 +3106,16 @@ msgid ""
 " %s "
 msgstr "ファイルの保存時にエラーが発生しました"
 
-msgid "Invalid hex search expression"
-msgstr "無効な16進正規表現です"
-
-msgid " Invalid regular expression "
-msgstr " 不正な正規表現です "
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" The current line number is %d.\n"
+" The current line number is %lu.\n"
 " Enter the new line number:"
 msgstr ""
 " 現在の行番号は %d です.\n"
 " 新しい行番号を入力してください:"
 
-#, c-format
-msgid ""
-" The current address is 0x%lx.\n"
-" Enter the new address:"
+#, fuzzy
+msgid " The current address is 0x%08"
 msgstr ""
 " 現在のアドレスは0x%lxです.\n"
 " 新しいアドレスを入力してください:"
@@ -2997,25 +3127,10 @@ msgstr " アドレス移動 "
 msgid " Invalid address "
 msgstr " 間違ったパスワード "
 
-msgid " Enter regexp:"
-msgstr " 正規表現を入力してください:"
-
 msgid "ButtonBar|Help"
 msgstr ""
 
 msgid "ButtonBar|Quit"
-msgstr ""
-
-msgid "ButtonBar|Ascii"
-msgstr ""
-
-msgid "ButtonBar|Hex"
-msgstr ""
-
-msgid "ButtonBar|Goto"
-msgstr ""
-
-msgid "ButtonBar|Line"
 msgstr ""
 
 msgid "ButtonBar|View"
@@ -3025,33 +3140,6 @@ msgid "ButtonBar|Edit"
 msgstr ""
 
 msgid "ButtonBar|Save"
-msgstr ""
-
-msgid "ButtonBar|UnWrap"
-msgstr ""
-
-msgid "ButtonBar|Wrap"
-msgstr ""
-
-msgid "ButtonBar|RxSrch"
-msgstr ""
-
-msgid "ButtonBar|HxSrch"
-msgstr ""
-
-msgid "ButtonBar|Search"
-msgstr ""
-
-msgid "ButtonBar|Raw"
-msgstr ""
-
-msgid "ButtonBar|Parse"
-msgstr ""
-
-msgid "ButtonBar|Unform"
-msgstr ""
-
-msgid "ButtonBar|Format"
 msgstr ""
 
 msgid " History "
@@ -3626,6 +3714,68 @@ msgstr "内部エラー:"
 msgid "Changes to file lost"
 msgstr "紛失したファイルに変更します"
 
+#~ msgid "scanf &Expression"
+#~ msgstr "scanf 形式(&E)"
+
+#~ msgid "&Whole words only"
+#~ msgstr "単語のみ(&W)"
+
+#~ msgid " Enter replacement argument order eg. 3,2,1,4 "
+#~ msgstr "置換の引数の順番を入力してください (例) 3,2,1,4 "
+
+#~ msgid ""
+#~ " Invalid regular expression, or scanf expression with too many "
+#~ "conversions "
+#~ msgstr "おかしな正規表現、あるいは scanf 形式です。変換が多すぎます "
+
+#~ msgid " Error in replacement format string. "
+#~ msgstr "置換形式文字列にエラー"
+
+#, fuzzy
+#~ msgid " Replacement too long. "
+#~ msgstr "置換文字列を入力してください:"
+
+#~ msgid "&Copy              F5"
+#~ msgstr "コピー(&C)               F5"
+
+#~ msgid "&Delete            F8"
+#~ msgstr "削除(&D)                 F8"
+
+#, fuzzy
+#~ msgid "Save setu&p..."
+#~ msgstr "設定保存(&S)"
+
+#~ msgid " The command history is empty "
+#~ msgstr " コマンドの履歴は空です "
+
+#~ msgid "command &History"
+#~ msgstr "コマンド履歴(&H)"
+
+#~ msgid "Edit edi&tor menu file"
+#~ msgstr "メニューエディタで編集(&T)"
+
+#, fuzzy
+#~ msgid "Edit &syntax file"
+#~ msgstr "メニューファイル編集(&M)"
+
+#~ msgid ""
+#~ "To use this feature select your codepage in\n"
+#~ "Setup / Display Bits dialog!\n"
+#~ "Do not forget to save options."
+#~ msgstr ""
+#~ "この機能を使うために 設定 / 表示ビット数\n"
+#~ "ダイアログでコードページを選択してください\n"
+#~ "オプションを保存するのを忘れずに"
+
+#~ msgid "Invalid hex search expression"
+#~ msgstr "無効な16進正規表現です"
+
+#~ msgid " Invalid regular expression "
+#~ msgstr " 不正な正規表現です "
+
+#~ msgid " Enter regexp:"
+#~ msgstr " 正規表現を入力してください:"
+
 #~ msgid "Using included S-Lang library"
 #~ msgstr "内蔵の S-Langライブラリを使用"
 
@@ -3749,9 +3899,6 @@ msgstr "紛失したファイルに変更します"
 
 #~ msgid "Unform"
 #~ msgstr "Unform"
-
-#~ msgid "Format"
-#~ msgstr "Format"
 
 #~ msgid "User menu available only in mcedit invoked from mc"
 #~ msgstr "mc から呼び出される mcedit でだけ利用可能なユーザメニューです"

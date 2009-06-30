@@ -6,10 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-14 19:43+0000\n"
+"POT-Creation-Date: 2009-06-30 19:38+0200\n"
 "PO-Revision-Date: 2001-11-20 15:15+0200\n"
 "Last-Translator: Artis Trops <hornet@navigators.lv>\n"
-"Language-Team: Latvian <hornet@navigators.lv>\n"
+"Language-Team: Latvian <locale@laka.lv>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-13\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -55,8 +55,15 @@ msgstr " Fails ir par lielu: "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-msgid "&Dismiss"
-msgstr "&Atcelt"
+msgid "Search"
+msgstr "Meklçt"
+
+#, c-format
+msgid " %d items found, %d bookmarks added "
+msgstr " %d meklçjumi izdarît, %d grâmatzîmes pievienotas"
+
+msgid " Search string not found "
+msgstr " Meklçjamâ rinda nav atrasta "
 
 msgid "Warning"
 msgstr "Brîdinâjums"
@@ -117,9 +124,6 @@ msgstr "Pârrakstît"
 msgid " Cannot save file. "
 msgstr " Kïûda mçìinot saglabât failu. "
 
-msgid "Cancel"
-msgstr "Atsaukt"
-
 msgid " Delete macro "
 msgstr " Dzçst makro "
 
@@ -164,89 +168,45 @@ msgstr ""
 msgid "C&ontinue"
 msgstr "Turpinât"
 
+#, fuzzy
+msgid "Syntax file edit"
+msgstr "&Izvçlnes faila rediìçðana"
+
+#, fuzzy
+msgid " Which syntax file you want to edit? "
+msgstr " Kuru paplaðinâjuma failu jûs vçlaties rediìçt? "
+
+msgid "&User"
+msgstr "&Lietotâjs"
+
+msgid "&System Wide"
+msgstr "&Sistçmas Mçroga"
+
+msgid " Menu edit "
+msgstr " Izvçlòu rediìçðana "
+
+msgid " Which menu file do you want to edit? "
+msgstr " Kuru izvçlnes failu jûs rediìçsiet ? "
+
+msgid "&Local"
+msgstr "&Vietçji"
+
 msgid " Load "
 msgstr " Ielâdçt "
 
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " Bloks ir liels, jûs iespçjams nevarçsiet atsaukt ðo darbîbu. "
 
-msgid "O&ne"
-msgstr "vie&Ns"
-
-msgid "A&ll"
-msgstr "vi&Si"
-
-msgid "&Skip"
-msgstr "&Izlaist"
-
-msgid "&Replace"
+#, fuzzy
+msgid "Replace"
 msgstr "&Aizvietot"
-
-msgid " Replace with: "
-msgstr " Aizvietot ar: "
-
-msgid " Confirm replace "
-msgstr " Apstirpinât aizvietoðanu "
-
-msgid "scanf &Expression"
-msgstr "scan&F izteiksme"
-
-msgid "replace &All"
-msgstr "aizvietot vi&Sus"
-
-msgid "pro&Mpt on replace"
-msgstr "jau&Tât pie aizvietoðanas"
-
-msgid "&Backwards"
-msgstr "at&Pakaï"
-
-msgid "&Regular expression"
-msgstr "&Regulâra izteiksme"
-
-msgid "&Whole words only"
-msgstr "&Tikai veselus vârdus"
-
-msgid "case &Sensitive"
-msgstr "lielo/mazo burtu &Jûtigs"
-
-msgid " Enter replacement argument order eg. 3,2,1,4 "
-msgstr " Ievadi aizvietojamâ argumenta secîbu, piem., 3,2,1,4 "
-
-msgid " Enter replacement string:"
-msgstr " Ievadiet aizvietotâjvirkni:"
-
-msgid " Enter search string:"
-msgstr " Ievadiet meklçjamo virkni:"
 
 msgid " Replace "
 msgstr " Aizvietot "
 
-msgid "Search"
-msgstr "Meklçt"
-
-msgid ""
-" Invalid regular expression, or scanf expression with too many conversions "
-msgstr ""
-" Nepareiza regulârâ izteiksme vai scanf izteiksme ar pârâk daudzâm "
-"konversijâm "
-
-msgid " Error in replacement format string. "
-msgstr " Kïûda aizstâðanas formâta rinâ. "
-
-#, fuzzy
-msgid " Replacement too long. "
-msgstr " Ievadiet aizvietotâjvirkni:"
-
 #, c-format
 msgid " %ld replacements made. "
 msgstr " %ld aizstâðanas reþîms. "
-
-msgid " Search string not found "
-msgstr " Meklçjamâ rinda nav atrasta "
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " %d meklçjumi izdarît, %d grâmatzîmes pievienotas"
 
 msgid "Quit"
 msgstr "Iziet"
@@ -365,6 +325,51 @@ msgstr " Spiest jebkuru taustiòu: "
 msgid " Execute Macro "
 msgstr " Palaist Makro "
 
+msgid "pro&Mpt on replace"
+msgstr "jau&Tât pie aizvietoðanas"
+
+msgid "replace &All"
+msgstr "aizvietot vi&Sus"
+
+msgid "All charsets"
+msgstr ""
+
+msgid "&Backwards"
+msgstr "at&Pakaï"
+
+msgid "case &Sensitive"
+msgstr "lielo/mazo burtu &Jûtigs"
+
+msgid " Enter replacement string:"
+msgstr " Ievadiet aizvietotâjvirkni:"
+
+msgid " Enter search string:"
+msgstr " Ievadiet meklçjamo virkni:"
+
+msgid "Cancel"
+msgstr "Atsaukt"
+
+msgid "O&ne"
+msgstr "vie&Ns"
+
+msgid "A&ll"
+msgstr "vi&Si"
+
+msgid "&Skip"
+msgstr "&Izlaist"
+
+msgid "&Replace"
+msgstr "&Aizvietot"
+
+msgid " Replace with: "
+msgstr " Aizvietot ar: "
+
+msgid " Confirm replace "
+msgstr " Apstirpinât aizvietoðanu "
+
+msgid "&Dismiss"
+msgstr "&Atcelt"
+
 msgid " Emacs key: "
 msgstr "Emacs taustiòð: "
 
@@ -437,32 +442,79 @@ msgstr "&Jauns          C-x k"
 msgid "Copy to &file...     "
 msgstr "kopçt uz &Failu...   "
 
-msgid "&Toggle Mark       F3"
+#, fuzzy
+msgid "&Toggle mark                 F3"
 msgstr "&Ieslçgt Iezîmçðanau       F3"
 
-msgid "&Mark Columns    S-F3"
+#, fuzzy
+msgid "Mar&k columns              S-F3"
 msgstr "&Iezîmçt Kolonnas    S-F3"
 
-msgid "Toggle &ins/overw Ins"
+#, fuzzy
+msgid "Toggle &ins/overw           Ins"
 msgstr "slçgt &Iev/pârr"
 
-msgid "&Copy              F5"
-msgstr "&Kopçt             F5"
+#, fuzzy
+msgid "&Copy                        F5"
+msgstr "&Kopçt               F5"
 
-msgid "&Move              F6"
+#, fuzzy
+msgid "&Move                        F6"
 msgstr "p&Ârvietot         F6"
 
-msgid "&Delete            F8"
+#, fuzzy
+msgid "&Delete                      F8"
 msgstr "&Dzçst             F8"
 
-msgid "&Undo             C-u"
+#, fuzzy
+msgid "C&opy to clipfile         C-Ins"
+msgstr "kopçt uz &Failu...   "
+
+#, fuzzy
+msgid "C&ut to clipfile          S-Del"
+msgstr "&Iet uz lîniju...            M-l"
+
+msgid "&Paste from clipfile      S-Ins"
+msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "&Ieslçgt Iezîmçðanau       F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "&Jauns            C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "kârto&T...                 M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "&Pasts..."
+
+#, fuzzy
+msgid "&Undo                       C-u"
 msgstr "&Atsaukt          C-u"
 
-msgid "&Beginning     C-PgUp"
+#, fuzzy
+msgid "&Beginning               C-PgUp"
 msgstr "&Sâkums        C-PgUp"
 
-msgid "&End           C-PgDn"
+#, fuzzy
+msgid "&End                     C-PgDn"
 msgstr "&Beigas        C-PgDn"
+
+#, fuzzy
+msgid "C&opy to clipfile           M-w"
+msgstr "&Iet uz lîniju...            M-l"
+
+#, fuzzy
+msgid "C&ut to clipfile            C-w"
+msgstr "&Iet uz lîniju...            M-l"
+
+msgid "&Paste from clipfile        C-y"
+msgstr ""
 
 msgid "&Search...         F7"
 msgstr "&Meklçt...         F7"
@@ -476,8 +528,25 @@ msgstr "&Aizvietot...      F4"
 msgid "&Go to line...            M-l"
 msgstr "&Iet uz lîniju...            M-l"
 
+#, fuzzy
+msgid "Toggle li&ne state        M-n"
+msgstr "&Ieslçgt Iezîmçðanau       F3"
+
 msgid "Go to matching &bracket   M-b"
 msgstr "iet uz atbilstoðo ie&Kavu M-b"
+
+msgid "Find declaration      A-Enter"
+msgstr ""
+
+msgid "Back from declaration     M--"
+msgstr ""
+
+msgid "Forward to declaration    M-+"
+msgstr ""
+
+#, fuzzy
+msgid "Encod&ing...             C-t"
+msgstr "kârto&T...                 M-t"
 
 msgid "Insert &literal...       C-q"
 msgstr "ievietot &Burtu...       C-q"
@@ -539,7 +608,15 @@ msgid "Syntax &Highlighting..."
 msgstr "sinta&Kses izgaismoðana"
 
 #, fuzzy
-msgid "Save setu&p..."
+msgid "S&yntax file"
+msgstr "&Izvçlnes faila rediìçðana"
+
+#, fuzzy
+msgid "&Menu file"
+msgstr "&Izvçlnes faila rediìçðana"
+
+#, fuzzy
+msgid "Save setu&p"
 msgstr "&Saglabât uzstâdîjumus"
 
 msgid " File "
@@ -581,6 +658,10 @@ msgstr "Vârdu iekïauðanas lînijas garums: "
 
 msgid "Tab spacing: "
 msgstr "Tab atstarpes : "
+
+#, fuzzy
+msgid "Pers&istent selection"
+msgstr "pretçji izvçlç&Tajam M-*"
 
 msgid "Synta&x highlighting"
 msgstr "sinta&Kses izgaismoðana"
@@ -817,6 +898,10 @@ msgstr " apstiprinât i&Zdzçðanu "
 
 msgid " Confirmation "
 msgstr " Apstiprinâðana "
+
+#, fuzzy
+msgid "UTF-8 output"
+msgstr "Pilna 8 bitu izvade"
 
 msgid "Full 8 bits output"
 msgstr "Pilna 8 bitu izvade"
@@ -1061,8 +1146,16 @@ msgstr " Filtrs "
 msgid " Set expression for filtering filenames"
 msgstr " Iestatît izteiksmi failu nosaukumu filtrçðanai"
 
-msgid "  Malformed regular expression  "
-msgstr "  Nepareizi veidota regulâra izteiksme  "
+msgid "&Using shell patterns"
+msgstr "&Lietoj"
+
+#, fuzzy
+msgid "&Case sensitive"
+msgstr "lielo/ma&zo burtu jûtîgs"
+
+#, fuzzy
+msgid "&Files only"
+msgstr "&Tikai izmçrs"
 
 msgid " Select "
 msgstr " Atlasît "
@@ -1074,29 +1167,6 @@ msgid "Extension file edit"
 msgstr "Paplaðinâjuma faila rediìçðana"
 
 msgid " Which extension file you want to edit? "
-msgstr " Kuru paplaðinâjuma failu jûs vçlaties rediìçt? "
-
-msgid "&User"
-msgstr "&Lietotâjs"
-
-msgid "&System Wide"
-msgstr "&Sistçmas Mçroga"
-
-msgid " Menu edit "
-msgstr " Izvçlòu rediìçðana "
-
-msgid " Which menu file do you want to edit? "
-msgstr " Kuru izvçlnes failu jûs rediìçsiet ? "
-
-msgid "&Local"
-msgstr "&Vietçji"
-
-#, fuzzy
-msgid "Syntax file edit"
-msgstr "&Izvçlnes faila rediìçðana"
-
-#, fuzzy
-msgid " Which syntax file you want to edit? "
 msgstr " Kuru paplaðinâjuma failu jûs vçlaties rediìçt? "
 
 msgid " Compare directories "
@@ -1116,12 +1186,6 @@ msgstr "&Pamatîgi"
 
 msgid " Both panels should be in the listing mode to use this command "
 msgstr " Abiem paneïiem jâbût saraksta skata reþîmâ, lai lietotu ðo komandu "
-
-msgid " The command history is empty "
-msgstr " Komandu vçsture ir tukða "
-
-msgid " Command history "
-msgstr " Komandu vçsture "
 
 msgid ""
 " Not an xterm or Linux console; \n"
@@ -1300,9 +1364,6 @@ msgstr " Pârvietot "
 
 msgid " Delete "
 msgstr " Dzçst "
-
-msgid " Invalid target mask "
-msgstr " Nepareiza mçría maska "
 
 msgid " Cannot make the hardlink "
 msgstr " Nevarçja izveidot cietsaiti "
@@ -1578,6 +1639,10 @@ msgstr ""
 " Nevar izdzçst direktoriju \"%s\" \n"
 " %s "
 
+#, fuzzy
+msgid "Directory scanning"
+msgstr "Direktorija ceïð"
+
 msgid "1Copy"
 msgstr "1Kopçt"
 
@@ -1736,9 +1801,6 @@ msgstr "sekot &Saitçm"
 msgid "to:"
 msgstr "uz:"
 
-msgid "&Using shell patterns"
-msgstr "&Lietoj"
-
 msgid "&Background"
 msgstr "&Fonâ"
 
@@ -1748,10 +1810,8 @@ msgstr "&Stabilas Simbolsaites"
 msgid "&Dive into subdir if exists"
 msgstr "&Ieiet apakðdirektorijâ, ja tâds eksistç"
 
-#, c-format
-msgid ""
-"Invalid source pattern `%s' \n"
-" %s "
+#, fuzzy, c-format
+msgid "Invalid source pattern `%s'"
 msgstr ""
 "Nepareizs koda raksts `%s' \n"
 " %s "
@@ -1780,26 +1840,54 @@ msgstr "&Skatît - F3"
 msgid "&Edit - F4"
 msgstr "&Rediìçt - F4"
 
+#, c-format
+msgid "Found: %ld"
+msgstr ""
+
+#, fuzzy
+msgid " Malformed regular expression "
+msgstr "  Nepareizi veidota regulâra izteiksme  "
+
+#, fuzzy
+msgid "Cas&e sensitive"
+msgstr "lielo/ma&zo burtu jûtîgs"
+
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "lielo/ma&zo burtu jûtîgs"
+
 msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "Start at:"
-msgstr "Sâknçt iekð:"
+msgid "&All charsets"
+msgstr ""
 
-msgid "Filename:"
-msgstr "Faila nosaukums:"
+msgid "All cha&rsets"
+msgstr ""
 
-msgid "Content: "
-msgstr "SAturs"
+#, fuzzy
+msgid "Re&gular expression"
+msgstr "&Regulâra izteiksme"
 
 msgid "&Tree"
 msgstr "&Koks"
 
 msgid "Find File"
 msgstr "Atrast Failu"
+
+#, fuzzy
+msgid "Content:"
+msgstr "SAturs"
+
+#, fuzzy
+msgid "File name:"
+msgstr "Faila nosaukums:"
+
+msgid "Start at:"
+msgstr "Sâknçt iekð:"
 
 #, c-format
 msgid "Grepping in %s"
@@ -2167,6 +2255,9 @@ msgstr "&Kârtotâ secîbâ..."
 msgid "&Filter..."
 msgstr "&Filtrs..."
 
+msgid "&Encoding...    C-t"
+msgstr ""
+
 msgid "&Network link..."
 msgstr "&Tîkla saite..."
 
@@ -2182,9 +2273,6 @@ msgstr "SM&B saite..."
 
 msgid "&Rescan         C-r"
 msgstr "&Pârskançt         C-r"
-
-msgid "&User menu          F2"
-msgstr "&Lietotâja izvçlne          F2"
 
 msgid "&View               F3"
 msgstr "Ska&tît               F3"
@@ -2243,6 +2331,9 @@ msgstr "pretçji izvçlç&Tajam M-*"
 msgid "e&Xit              F10"
 msgstr "i&Ziet              F10"
 
+msgid "&User menu          F2"
+msgstr "&Lietotâja izvçlne          F2"
+
 msgid "&Directory tree"
 msgstr "&Direktoriju koks"
 
@@ -2264,8 +2355,9 @@ msgstr "e&Xternal panelize    C-x !"
 msgid "show directory s&Izes"
 msgstr "parâdît direktoriju l&ielumus"
 
-msgid "command &History"
-msgstr "komandu &Vçsture"
+#, fuzzy
+msgid "Command &history      M-h"
+msgstr " Komandu vçsture "
 
 msgid "di&Rectory hotlist    C-\\"
 msgstr "di&Rektoriju karstais saraksts    C-\\"
@@ -2286,13 +2378,6 @@ msgid "Edit &extension file"
 msgstr "&Paplaðinâjumu faila rediìçðana"
 
 msgid "Edit &menu file"
-msgstr "&Izvçlnes faila rediìçðana"
-
-msgid "Edit edi&tor menu file"
-msgstr "Izvçlòu re&Daktora rediìçðana"
-
-#, fuzzy
-msgid "Edit &syntax file"
 msgstr "&Izvçlnes faila rediìçðana"
 
 msgid "&Configuration..."
@@ -2358,6 +2443,22 @@ msgstr "Izvçlne"
 msgid "The TERM environment variable is unset!\n"
 msgstr "TERM mainîgais nav ieslçgts!\n"
 
+msgid "&Fix it"
+msgstr ""
+
+msgid "don't ask again"
+msgstr ""
+
+msgid ""
+"Chosen display charset (Settings->Display bits)\n"
+"or source codeset (in mcedit ctrl-t) \n"
+"does not match one set via locale. \n"
+"Set correct codeset manually or press <<Fix it>> \n"
+"to set locale default.\n"
+"\n"
+"Or set 'don't ask again' and press <<Skip>>"
+msgstr ""
+
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Pusnakts Komandieris %s\n"
@@ -2392,16 +2493,8 @@ msgid ""
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
 "   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked\n"
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
 msgstr ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2421,6 +2514,18 @@ msgstr ""
 "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
 "   brightcyan, lightgray and white\n"
 "\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
 
 msgid "Displays this help message"
 msgstr "Pârâda ðo palîdzîbas paziòojumu"
@@ -2483,6 +2588,10 @@ msgstr "Palaiþ failam failu skatîtâju"
 
 msgid "Edits one file"
 msgstr "Rediìç vienu failu"
+
+#, fuzzy, c-format
+msgid "Cannot create %s directory"
+msgstr "Nevar nomainît direktoriju"
 
 msgid "safe de&Lete"
 msgstr "droða i&Zdzçðana"
@@ -2704,20 +2813,35 @@ msgstr "PârsPârv"
 msgid "Mkdir"
 msgstr "Izvdir"
 
-msgid " Choose input codepage "
+msgid " Not implemented yet "
+msgstr ""
+
+msgid " Num of replace tokens not equal to num of found tokens "
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Invalid token number %d "
+msgstr " Nepareiza mçría maska "
+
+#, fuzzy
+msgid "Normal"
+msgstr "Formatçt"
+
+msgid "&Regular expression"
+msgstr "&Regulâra izteiksme"
+
+msgid "Hexadecimal"
+msgstr ""
+
+msgid "Wildcard search"
+msgstr ""
+
+#, fuzzy
+msgid "Choose codepage"
 msgstr " Izvçlies ievades kodu tabulu "
 
 msgid "-  < No translation >"
 msgstr "-  < Nav tulkojuma >"
-
-msgid ""
-"To use this feature select your codepage in\n"
-"Setup / Display Bits dialog!\n"
-"Do not forget to save options."
-msgstr ""
-"Lai lietotu ðo iespçju, izvçlies kodu tabulu\n"
-"iekð Uzstâdîjumi / Displeja Biti izvçlnes!\n"
-"Neaizmirst saglabât uzstâdîjumus."
 
 #, c-format
 msgid ""
@@ -2754,6 +2878,10 @@ msgid "with terminfo database"
 msgstr "ar terminfo datubâzi"
 
 msgid "Using the ncurses library"
+msgstr "Lietoju ncurses bibliotçku"
+
+#, fuzzy
+msgid "Using the ncursesw library"
 msgstr "Lietoju ncurses bibliotçku"
 
 msgid "With optional subshell support"
@@ -2876,11 +3004,19 @@ msgstr " Neviens atbilstoðs ieraksts netika atrasts iekð %s "
 msgid " User menu "
 msgstr " Lietotâja izvçlne "
 
-msgid "%b %e %H:%M"
+#, fuzzy
+msgid "%b %d %H:%M"
 msgstr "%b %e %H:%M"
+
+#, fuzzy
+msgid "%b %d %Y"
+msgstr "%b %e  %Y"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
@@ -2975,24 +3111,16 @@ msgid ""
 " %s "
 msgstr " Kïûda mçìinot saglabât failu. "
 
-msgid "Invalid hex search expression"
-msgstr " Nepareiza meklçjamâ hex izteiksme "
-
-msgid " Invalid regular expression "
-msgstr " Nepareiza regulârâ izteiksme "
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" The current line number is %d.\n"
+" The current line number is %lu.\n"
 " Enter the new line number:"
 msgstr ""
 " Paðreizçjai lînijas nummurs ir %d.\n"
 " Ievadi jaunu lînijas numuru:"
 
-#, c-format
-msgid ""
-" The current address is 0x%lx.\n"
-" Enter the new address:"
+#, fuzzy
+msgid " The current address is 0x%08"
 msgstr ""
 " Paðreizçjâ adrese ir 0x%lx.\n"
 " Ievadi jaunu adresi:"
@@ -3004,25 +3132,10 @@ msgstr " Iet uz adresi "
 msgid " Invalid address "
 msgstr " Nepareiza parole "
 
-msgid " Enter regexp:"
-msgstr " Ievadi regexp:"
-
 msgid "ButtonBar|Help"
 msgstr ""
 
 msgid "ButtonBar|Quit"
-msgstr ""
-
-msgid "ButtonBar|Ascii"
-msgstr ""
-
-msgid "ButtonBar|Hex"
-msgstr ""
-
-msgid "ButtonBar|Goto"
-msgstr ""
-
-msgid "ButtonBar|Line"
 msgstr ""
 
 msgid "ButtonBar|View"
@@ -3032,33 +3145,6 @@ msgid "ButtonBar|Edit"
 msgstr ""
 
 msgid "ButtonBar|Save"
-msgstr ""
-
-msgid "ButtonBar|UnWrap"
-msgstr ""
-
-msgid "ButtonBar|Wrap"
-msgstr ""
-
-msgid "ButtonBar|RxSrch"
-msgstr ""
-
-msgid "ButtonBar|HxSrch"
-msgstr ""
-
-msgid "ButtonBar|Search"
-msgstr ""
-
-msgid "ButtonBar|Raw"
-msgstr ""
-
-msgid "ButtonBar|Parse"
-msgstr ""
-
-msgid "ButtonBar|Unform"
-msgstr ""
-
-msgid "ButtonBar|Format"
 msgstr ""
 
 msgid " History "
@@ -3641,6 +3727,70 @@ msgstr "Iekðçjâ kïûda:"
 msgid "Changes to file lost"
 msgstr "Izmaiòas failâ pazuduðas"
 
+#~ msgid "scanf &Expression"
+#~ msgstr "scan&F izteiksme"
+
+#~ msgid "&Whole words only"
+#~ msgstr "&Tikai veselus vârdus"
+
+#~ msgid " Enter replacement argument order eg. 3,2,1,4 "
+#~ msgstr " Ievadi aizvietojamâ argumenta secîbu, piem., 3,2,1,4 "
+
+#~ msgid ""
+#~ " Invalid regular expression, or scanf expression with too many "
+#~ "conversions "
+#~ msgstr ""
+#~ " Nepareiza regulârâ izteiksme vai scanf izteiksme ar pârâk daudzâm "
+#~ "konversijâm "
+
+#~ msgid " Error in replacement format string. "
+#~ msgstr " Kïûda aizstâðanas formâta rinâ. "
+
+#, fuzzy
+#~ msgid " Replacement too long. "
+#~ msgstr " Ievadiet aizvietotâjvirkni:"
+
+#~ msgid "&Copy              F5"
+#~ msgstr "&Kopçt             F5"
+
+#~ msgid "&Delete            F8"
+#~ msgstr "&Dzçst             F8"
+
+#, fuzzy
+#~ msgid "Save setu&p..."
+#~ msgstr "&Saglabât uzstâdîjumus"
+
+#~ msgid " The command history is empty "
+#~ msgstr " Komandu vçsture ir tukða "
+
+#~ msgid "command &History"
+#~ msgstr "komandu &Vçsture"
+
+#~ msgid "Edit edi&tor menu file"
+#~ msgstr "Izvçlòu re&Daktora rediìçðana"
+
+#, fuzzy
+#~ msgid "Edit &syntax file"
+#~ msgstr "&Izvçlnes faila rediìçðana"
+
+#~ msgid ""
+#~ "To use this feature select your codepage in\n"
+#~ "Setup / Display Bits dialog!\n"
+#~ "Do not forget to save options."
+#~ msgstr ""
+#~ "Lai lietotu ðo iespçju, izvçlies kodu tabulu\n"
+#~ "iekð Uzstâdîjumi / Displeja Biti izvçlnes!\n"
+#~ "Neaizmirst saglabât uzstâdîjumus."
+
+#~ msgid "Invalid hex search expression"
+#~ msgstr " Nepareiza meklçjamâ hex izteiksme "
+
+#~ msgid " Invalid regular expression "
+#~ msgstr " Nepareiza regulârâ izteiksme "
+
+#~ msgid " Enter regexp:"
+#~ msgstr " Ievadi regexp:"
+
 #~ msgid "Using included S-Lang library"
 #~ msgstr "Lietoju iekïauto S-Lang bibliotçku"
 
@@ -3764,9 +3914,6 @@ msgstr "Izmaiòas failâ pazuduðas"
 
 #~ msgid "Unform"
 #~ msgstr "Atform"
-
-#~ msgid "Format"
-#~ msgstr "Formatçt"
 
 #~ msgid "User menu available only in mcedit invoked from mc"
 #~ msgstr "Lietotâja izvçlne pieejama tikai mcedit, kurð palaists no mc"

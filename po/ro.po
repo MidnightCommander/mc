@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-14 19:43+0000\n"
+"POT-Creation-Date: 2009-06-30 19:38+0200\n"
 "PO-Revision-Date: 2003-01-31 00:11+0200\n"
 "Last-Translator: Miºu Moldovan <dumol@go.ro>\n"
-"Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
+"Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -57,8 +57,15 @@ msgstr " Fiºierul este prea mare: "
 msgid "Macro recursion is too deep"
 msgstr "Recursivitatea macro este prea mare"
 
-msgid "&Dismiss"
-msgstr "&Închide"
+msgid "Search"
+msgstr "Cautã"
+
+#, c-format
+msgid " %d items found, %d bookmarks added "
+msgstr " %d cãutãri efectuate, %d semne de carte adãugate "
+
+msgid " Search string not found "
+msgstr " ªirul cãutat nu a fost gãsit "
 
 msgid "Warning"
 msgstr "Atenþie"
@@ -118,9 +125,6 @@ msgstr "Suprascrie"
 msgid " Cannot save file. "
 msgstr " Eroare la salvarea fiºierului. "
 
-msgid "Cancel"
-msgstr "Renunþã"
-
 msgid " Delete macro "
 msgstr " ªterge combinaþia "
 
@@ -165,88 +169,43 @@ msgstr ""
 msgid "C&ontinue"
 msgstr "Continuã"
 
+msgid "Syntax file edit"
+msgstr "editare fiºier sintaxã"
+
+msgid " Which syntax file you want to edit? "
+msgstr " Care fiºier de sintaxã doriþi sã îl editaþi? "
+
+msgid "&User"
+msgstr "&Utilizator"
+
+msgid "&System Wide"
+msgstr "Pentru tot &Sistemul"
+
+msgid " Menu edit "
+msgstr " Editare Meniuri "
+
+msgid " Which menu file do you want to edit? "
+msgstr " Care fiºier de meniuri doriþi sã îl editaþi? "
+
+msgid "&Local"
+msgstr "&Local"
+
 msgid " Load "
 msgstr " Încarcã "
 
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " Blocul este mare, s-ar putea sã nu puteþi anula aceastã acþiune. "
 
-msgid "O&ne"
-msgstr "u&Nul"
-
-msgid "A&ll"
-msgstr "&Toate"
-
-msgid "&Skip"
-msgstr "&Sar"
-
-msgid "&Replace"
+#, fuzzy
+msgid "Replace"
 msgstr "&Înlocuieºte"
-
-msgid " Replace with: "
-msgstr " Înlocuieºte cu: "
-
-msgid " Confirm replace "
-msgstr " Confirmã înlocuirea"
-
-msgid "scanf &Expression"
-msgstr "expresie &Scanf "
-
-msgid "replace &All"
-msgstr "înlocuieºte &Tot"
-
-msgid "pro&Mpt on replace"
-msgstr "con&Firmã înlocuirea "
-
-msgid "&Backwards"
-msgstr "în sens &Invers "
-
-msgid "&Regular expression"
-msgstr "&Expresie regularã "
-
-msgid "&Whole words only"
-msgstr "&Doar cuvinte întregi "
-
-msgid "case &Sensitive"
-msgstr "nu ignora &Majusculele"
-
-msgid " Enter replacement argument order eg. 3,2,1,4 "
-msgstr " Introduceþi ordinea de înlocuire (ex: 3,2,1,4):"
-
-msgid " Enter replacement string:"
-msgstr " Introduceþi ºirul de înlocuire:"
-
-msgid " Enter search string:"
-msgstr " Introduceþi ºirul cãutat:"
 
 msgid " Replace "
 msgstr " Înlocuieºte "
 
-msgid "Search"
-msgstr "Cautã"
-
-msgid ""
-" Invalid regular expression, or scanf expression with too many conversions "
-msgstr ""
-" Expresie regularã invalidã, sau expresie scanf cu prea multe conversii "
-
-msgid " Error in replacement format string. "
-msgstr " Eroare în formatul ºirului de înlocuire. "
-
-#, fuzzy
-msgid " Replacement too long. "
-msgstr " Introduceþi ºirul de înlocuire:"
-
 #, c-format
 msgid " %ld replacements made. "
 msgstr " %ld înlocuiri efectuate. "
-
-msgid " Search string not found "
-msgstr " ªirul cãutat nu a fost gãsit "
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " %d cãutãri efectuate, %d semne de carte adãugate "
 
 msgid "Quit"
 msgstr "Ieºi"
@@ -364,6 +323,51 @@ msgstr " Apãsaþi o tastã: "
 msgid " Execute Macro "
 msgstr " Executã Combinaþia "
 
+msgid "pro&Mpt on replace"
+msgstr "con&Firmã înlocuirea "
+
+msgid "replace &All"
+msgstr "înlocuieºte &Tot"
+
+msgid "All charsets"
+msgstr ""
+
+msgid "&Backwards"
+msgstr "în sens &Invers "
+
+msgid "case &Sensitive"
+msgstr "nu ignora &Majusculele"
+
+msgid " Enter replacement string:"
+msgstr " Introduceþi ºirul de înlocuire:"
+
+msgid " Enter search string:"
+msgstr " Introduceþi ºirul cãutat:"
+
+msgid "Cancel"
+msgstr "Renunþã"
+
+msgid "O&ne"
+msgstr "u&Nul"
+
+msgid "A&ll"
+msgstr "&Toate"
+
+msgid "&Skip"
+msgstr "&Sar"
+
+msgid "&Replace"
+msgstr "&Înlocuieºte"
+
+msgid " Replace with: "
+msgstr " Înlocuieºte cu: "
+
+msgid " Confirm replace "
+msgstr " Confirmã înlocuirea"
+
+msgid "&Dismiss"
+msgstr "&Închide"
+
 msgid " Emacs key: "
 msgstr " Tasta Emacs: "
 
@@ -436,32 +440,79 @@ msgstr "&Nou                C-x k"
 msgid "Copy to &file...     "
 msgstr "copiazã în &Fiºier...    "
 
-msgid "&Toggle Mark       F3"
+#, fuzzy
+msgid "&Toggle mark                 F3"
 msgstr "in&Verseazã selecþia    F3"
 
-msgid "&Mark Columns    S-F3"
+#, fuzzy
+msgid "Mar&k columns              S-F3"
 msgstr "se&Lecteazã coloanele S-F3"
 
-msgid "Toggle &ins/overw Ins"
+#, fuzzy
+msgid "Toggle &ins/overw           Ins"
 msgstr "&Inserare/suprascriere Ins"
 
-msgid "&Copy              F5"
+#, fuzzy
+msgid "&Copy                        F5"
 msgstr "&Copiazã                F5"
 
-msgid "&Move              F6"
+#, fuzzy
+msgid "&Move                        F6"
 msgstr "&Mutã                   F6"
 
-msgid "&Delete            F8"
+#, fuzzy
+msgid "&Delete                      F8"
 msgstr "ºter&Ge                 F8"
 
-msgid "&Undo             C-u"
+#, fuzzy
+msgid "C&opy to clipfile         C-Ins"
+msgstr "copiazã în &Fiºier...    "
+
+#, fuzzy
+msgid "C&ut to clipfile          S-Del"
+msgstr "&Du-te la linia...               M-l"
+
+msgid "&Paste from clipfile      S-Ins"
+msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "in&Verseazã selecþia    F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "&Nou                  C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "Sor&teazã...                     M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "&Poºta...                           "
+
+#, fuzzy
+msgid "&Undo                       C-u"
 msgstr "&Anuleazã              C-u"
 
-msgid "&Beginning     C-PgUp"
+#, fuzzy
+msgid "&Beginning               C-PgUp"
 msgstr "începu&T            C-PgUp"
 
-msgid "&End           C-PgDn"
+#, fuzzy
+msgid "&End                     C-PgDn"
 msgstr "&Sfârºit            C-PgDn"
+
+#, fuzzy
+msgid "C&opy to clipfile           M-w"
+msgstr "&Du-te la linia...               M-l"
+
+#, fuzzy
+msgid "C&ut to clipfile            C-w"
+msgstr "&Du-te la linia...               M-l"
+
+msgid "&Paste from clipfile        C-y"
+msgstr ""
 
 msgid "&Search...         F7"
 msgstr "&Cautã...          F7"
@@ -475,8 +526,25 @@ msgstr "în&Locuieºte...    F4"
 msgid "&Go to line...            M-l"
 msgstr "&Du-te la linia...               M-l"
 
+#, fuzzy
+msgid "Toggle li&ne state        M-n"
+msgstr "in&Verseazã selecþia    F3"
+
 msgid "Go to matching &bracket   M-b"
 msgstr "d&U-te la paranteza pereche      M-b"
+
+msgid "Find declaration      A-Enter"
+msgstr ""
+
+msgid "Back from declaration     M--"
+msgstr ""
+
+msgid "Forward to declaration    M-+"
+msgstr ""
+
+#, fuzzy
+msgid "Encod&ing...             C-t"
+msgstr "Sor&teazã...                     M-t"
 
 msgid "Insert &literal...       C-q"
 msgstr "insereazã un &Literal...         C-q"
@@ -538,7 +606,15 @@ msgid "Syntax &Highlighting..."
 msgstr "&Evidenþiere sintaxã"
 
 #, fuzzy
-msgid "Save setu&p..."
+msgid "S&yntax file"
+msgstr "editare fiºier sintaxã"
+
+#, fuzzy
+msgid "&Menu file"
+msgstr "editare fiºier &Meniuri"
+
+#, fuzzy
+msgid "Save setu&p"
 msgstr "&Salveazã setãrile"
 
 msgid " File "
@@ -580,6 +656,10 @@ msgstr "Lungimea max. a liniei: "
 
 msgid "Tab spacing: "
 msgstr "Mãrimea tab-ului: "
+
+#, fuzzy
+msgid "Pers&istent selection"
+msgstr "inverseazã selec&Þia    M-*"
 
 msgid "Synta&x highlighting"
 msgstr "&Evidenþiere sintaxã"
@@ -815,6 +895,10 @@ msgstr " confirmã º&Tergerea "
 
 msgid " Confirmation "
 msgstr " Confirmare "
+
+#, fuzzy
+msgid "UTF-8 output"
+msgstr "Ieºire pe 8 biþi"
 
 msgid "Full 8 bits output"
 msgstr "Ieºire pe 8 biþi"
@@ -1057,8 +1141,16 @@ msgstr " Filtru "
 msgid " Set expression for filtering filenames"
 msgstr " Introduceþi expresia pentru filtrarea numelor fiºierelor"
 
-msgid "  Malformed regular expression  "
-msgstr " Expresie regularã greºitã "
+msgid "&Using shell patterns"
+msgstr "&Utilizez \"shell patterns\""
+
+#, fuzzy
+msgid "&Case sensitive"
+msgstr "nu ignora &Majusculele "
+
+#, fuzzy
+msgid "&Files only"
+msgstr "&Doar mãrime"
 
 msgid " Select "
 msgstr " Selecteazã "
@@ -1071,27 +1163,6 @@ msgstr "Editeazã fiºierul de extensii"
 
 msgid " Which extension file you want to edit? "
 msgstr " Care fiºier de extensii doriþi sã îl editaþi? "
-
-msgid "&User"
-msgstr "&Utilizator"
-
-msgid "&System Wide"
-msgstr "Pentru tot &Sistemul"
-
-msgid " Menu edit "
-msgstr " Editare Meniuri "
-
-msgid " Which menu file do you want to edit? "
-msgstr " Care fiºier de meniuri doriþi sã îl editaþi? "
-
-msgid "&Local"
-msgstr "&Local"
-
-msgid "Syntax file edit"
-msgstr "editare fiºier sintaxã"
-
-msgid " Which syntax file you want to edit? "
-msgstr " Care fiºier de sintaxã doriþi sã îl editaþi? "
 
 msgid " Compare directories "
 msgstr " Compar directoarele "
@@ -1110,12 +1181,6 @@ msgstr "&Completã"
 
 msgid " Both panels should be in the listing mode to use this command "
 msgstr "Ambele panouri ar trebui sã fie în mod listã pentru aceastã comandã "
-
-msgid " The command history is empty "
-msgstr " Istoricul comenzilor este gol "
-
-msgid " Command history "
-msgstr " Istoricul comenzilor "
 
 msgid ""
 " Not an xterm or Linux console; \n"
@@ -1292,9 +1357,6 @@ msgstr " Mutã "
 
 msgid " Delete "
 msgstr " ªterge "
-
-msgid " Invalid target mask "
-msgstr " Masca þintei e invalidã "
 
 msgid " Cannot make the hardlink "
 msgstr " Nu pot crea legãtura realã "
@@ -1570,6 +1632,10 @@ msgstr ""
 " Nu pot ºterge directorul \"%s\" \n"
 " %s "
 
+#, fuzzy
+msgid "Directory scanning"
+msgstr "Calea directorului"
+
 msgid "1Copy"
 msgstr "1Copiazã"
 
@@ -1728,9 +1794,6 @@ msgstr "urmez &Legãturile"
 msgid "to:"
 msgstr "cãtre:"
 
-msgid "&Using shell patterns"
-msgstr "&Utilizez \"shell patterns\""
-
 msgid "&Background"
 msgstr "&Fundal"
 
@@ -1740,10 +1803,8 @@ msgstr "Legãturi simbolice &Stabile"
 msgid "&Dive into subdir if exists"
 msgstr "&Intru în subdirector dacã existã"
 
-#, c-format
-msgid ""
-"Invalid source pattern `%s' \n"
-" %s "
+#, fuzzy, c-format
+msgid "Invalid source pattern `%s'"
 msgstr ""
 " Model de sursã invalid \"%s\" \n"
 " %s "
@@ -1772,26 +1833,54 @@ msgstr "&Vizualizare - F3"
 msgid "&Edit - F4"
 msgstr "&Editare - F4"
 
+#, c-format
+msgid "Found: %ld"
+msgstr ""
+
+#, fuzzy
+msgid " Malformed regular expression "
+msgstr " Expresie regularã greºitã "
+
+#, fuzzy
+msgid "Cas&e sensitive"
+msgstr "nu ignora &Majusculele "
+
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "nu ignora &Majusculele "
+
 msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "Start at:"
-msgstr "Încep la:"
+msgid "&All charsets"
+msgstr ""
 
-msgid "Filename:"
-msgstr "Nume fiºier:"
+msgid "All cha&rsets"
+msgstr ""
 
-msgid "Content: "
-msgstr "Conþinut: "
+#, fuzzy
+msgid "Re&gular expression"
+msgstr "&Expresie regularã "
 
 msgid "&Tree"
 msgstr "&Arbore"
 
 msgid "Find File"
 msgstr "Caut fiºier"
+
+#, fuzzy
+msgid "Content:"
+msgstr "Conþinut: "
+
+#, fuzzy
+msgid "File name:"
+msgstr "Nume fiºier:"
+
+msgid "Start at:"
+msgstr "Încep la:"
 
 #, c-format
 msgid "Grepping in %s"
@@ -2155,6 +2244,9 @@ msgstr "&Ordinea sortãrii..."
 msgid "&Filter..."
 msgstr "&Filtru..."
 
+msgid "&Encoding...    C-t"
+msgstr ""
+
 msgid "&Network link..."
 msgstr "l&Egãturã reþea..."
 
@@ -2169,9 +2261,6 @@ msgstr "legãturã SM&B..."
 
 msgid "&Rescan         C-r"
 msgstr "&Re-scaneazã        C-r"
-
-msgid "&User menu          F2"
-msgstr "meniu &Utilizator       F2"
 
 msgid "&View               F3"
 msgstr "&Vizualizare            F3"
@@ -2230,6 +2319,9 @@ msgstr "inverseazã selec&Þia    M-*"
 msgid "e&Xit              F10"
 msgstr "&Ieºire                 F10"
 
+msgid "&User menu          F2"
+msgstr "meniu &Utilizator       F2"
+
 msgid "&Directory tree"
 msgstr "arbore de &Directoare"
 
@@ -2251,8 +2343,9 @@ msgstr "panelare e&Xterioarã              C-x !"
 msgid "show directory s&Izes"
 msgstr "afi&ªeazã mãrimea directoarelor"
 
-msgid "command &History"
-msgstr "&Istoricul comenzilor "
+#, fuzzy
+msgid "Command &history      M-h"
+msgstr " Istoricul comenzilor "
 
 msgid "di&Rectory hotlist    C-\\"
 msgstr "lista rapidã de di&Rectoare       C-\\"
@@ -2274,12 +2367,6 @@ msgstr "editare fiºier &Extensii"
 
 msgid "Edit &menu file"
 msgstr "editare fiºier &Meniuri"
-
-msgid "Edit edi&tor menu file"
-msgstr "editare meniuri edi&Tor"
-
-msgid "Edit &syntax file"
-msgstr "editare fiºier &Sintaxã"
 
 msgid "&Configuration..."
 msgstr "&Configurare..."
@@ -2344,6 +2431,22 @@ msgstr "Meniu"
 msgid "The TERM environment variable is unset!\n"
 msgstr "Variabila de mediu TERM nu este setatã!\n"
 
+msgid "&Fix it"
+msgstr ""
+
+msgid "don't ask again"
+msgstr ""
+
+msgid ""
+"Chosen display charset (Settings->Display bits)\n"
+"or source codeset (in mcedit ctrl-t) \n"
+"does not match one set via locale. \n"
+"Set correct codeset manually or press <<Fix it>> \n"
+"to set locale default.\n"
+"\n"
+"Or set 'don't ask again' and press <<Skip>>"
+msgstr ""
+
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
@@ -2379,16 +2482,8 @@ msgid ""
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
 "   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked\n"
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
 msgstr ""
 "--colors CHEIE={FAÞÃ},{FUNDAL}\n"
 "\n"
@@ -2408,6 +2503,18 @@ msgstr ""
 "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
 "   brightcyan, lightgray and white\n"
 "\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
 
 msgid "Displays this help message"
 msgstr "Afiºeazã un mesaj de ajutor"
@@ -2468,6 +2575,10 @@ msgstr "Lanseazã vizualizatorul de fiºiere pe un fiºier"
 
 msgid "Edits one file"
 msgstr "Editeazã un fiºier"
+
+#, fuzzy, c-format
+msgid "Cannot create %s directory"
+msgstr "Nu pot deschide directorul %s"
 
 msgid "safe de&Lete"
 msgstr "ºter&Ge în siguranþã"
@@ -2687,20 +2798,35 @@ msgstr "RedMut"
 msgid "Mkdir"
 msgstr "DirNou"
 
-msgid " Choose input codepage "
+msgid " Not implemented yet "
+msgstr ""
+
+msgid " Num of replace tokens not equal to num of found tokens "
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Invalid token number %d "
+msgstr " Masca þintei e invalidã "
+
+#, fuzzy
+msgid "Normal"
+msgstr "Format"
+
+msgid "&Regular expression"
+msgstr "&Expresie regularã "
+
+msgid "Hexadecimal"
+msgstr ""
+
+msgid "Wildcard search"
+msgstr ""
+
+#, fuzzy
+msgid "Choose codepage"
 msgstr " Alegeþi codul de intrare "
 
 msgid "-  < No translation >"
 msgstr "-  < Fãrã translatare >"
-
-msgid ""
-"To use this feature select your codepage in\n"
-"Setup / Display Bits dialog!\n"
-"Do not forget to save options."
-msgstr ""
-"Pentru a utiliza aceastã facilitate selectaþi codul\n"
-"de paginã în Opþiuni / Biþi de afiºare!\n"
-"Nu uitaþi sã salvaþi opþiunile."
 
 #, c-format
 msgid ""
@@ -2737,6 +2863,10 @@ msgid "with terminfo database"
 msgstr "cu baza de date terminfo"
 
 msgid "Using the ncurses library"
+msgstr "Utilizând biblioteca ncurses"
+
+#, fuzzy
+msgid "Using the ncursesw library"
 msgstr "Utilizând biblioteca ncurses"
 
 msgid "With optional subshell support"
@@ -2859,11 +2989,19 @@ msgstr " Nu au fost gãsite intrãri adecvate în %s "
 msgid " User menu "
 msgstr " Meniu utilizator "
 
-msgid "%b %e %H:%M"
+#, fuzzy
+msgid "%b %d %H:%M"
 msgstr "%b %e %H:%M"
+
+#, fuzzy
+msgid "%b %d %Y"
+msgstr "%b %e  %Y"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -2954,24 +3092,16 @@ msgid ""
 " %s "
 msgstr " Eroare la salvarea fiºierului. "
 
-msgid "Invalid hex search expression"
-msgstr "Expresie regularã invalidã la cãutare"
-
-msgid " Invalid regular expression "
-msgstr " Expresie regularã invalidã "
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" The current line number is %d.\n"
+" The current line number is %lu.\n"
 " Enter the new line number:"
 msgstr ""
 " Numãrul de linie curent este %d.\n"
 " Introduceþi noul numãr de linie:"
 
-#, c-format
-msgid ""
-" The current address is 0x%lx.\n"
-" Enter the new address:"
+#, fuzzy
+msgid " The current address is 0x%08"
 msgstr ""
 " Adresa curentã este 0x%lx.\n"
 " Introduceþi noua adresã:"
@@ -2983,25 +3113,10 @@ msgstr " Du-te la Adresa "
 msgid " Invalid address "
 msgstr " Parolã invalidã "
 
-msgid " Enter regexp:"
-msgstr " Introduceþi expresia regularã:"
-
 msgid "ButtonBar|Help"
 msgstr ""
 
 msgid "ButtonBar|Quit"
-msgstr ""
-
-msgid "ButtonBar|Ascii"
-msgstr ""
-
-msgid "ButtonBar|Hex"
-msgstr ""
-
-msgid "ButtonBar|Goto"
-msgstr ""
-
-msgid "ButtonBar|Line"
 msgstr ""
 
 msgid "ButtonBar|View"
@@ -3011,33 +3126,6 @@ msgid "ButtonBar|Edit"
 msgstr ""
 
 msgid "ButtonBar|Save"
-msgstr ""
-
-msgid "ButtonBar|UnWrap"
-msgstr ""
-
-msgid "ButtonBar|Wrap"
-msgstr ""
-
-msgid "ButtonBar|RxSrch"
-msgstr ""
-
-msgid "ButtonBar|HxSrch"
-msgstr ""
-
-msgid "ButtonBar|Search"
-msgstr ""
-
-msgid "ButtonBar|Raw"
-msgstr ""
-
-msgid "ButtonBar|Parse"
-msgstr ""
-
-msgid "ButtonBar|Unform"
-msgstr ""
-
-msgid "ButtonBar|Format"
 msgstr ""
 
 msgid " History "
@@ -3618,6 +3706,68 @@ msgstr "Eroare internã:"
 msgid "Changes to file lost"
 msgstr "S-au pierdut schimbãrile efectuate în fiºier"
 
+#~ msgid "scanf &Expression"
+#~ msgstr "expresie &Scanf "
+
+#~ msgid "&Whole words only"
+#~ msgstr "&Doar cuvinte întregi "
+
+#~ msgid " Enter replacement argument order eg. 3,2,1,4 "
+#~ msgstr " Introduceþi ordinea de înlocuire (ex: 3,2,1,4):"
+
+#~ msgid ""
+#~ " Invalid regular expression, or scanf expression with too many "
+#~ "conversions "
+#~ msgstr ""
+#~ " Expresie regularã invalidã, sau expresie scanf cu prea multe conversii "
+
+#~ msgid " Error in replacement format string. "
+#~ msgstr " Eroare în formatul ºirului de înlocuire. "
+
+#, fuzzy
+#~ msgid " Replacement too long. "
+#~ msgstr " Introduceþi ºirul de înlocuire:"
+
+#~ msgid "&Copy              F5"
+#~ msgstr "&Copiazã                F5"
+
+#~ msgid "&Delete            F8"
+#~ msgstr "ºter&Ge                 F8"
+
+#, fuzzy
+#~ msgid "Save setu&p..."
+#~ msgstr "&Salveazã setãrile"
+
+#~ msgid " The command history is empty "
+#~ msgstr " Istoricul comenzilor este gol "
+
+#~ msgid "command &History"
+#~ msgstr "&Istoricul comenzilor "
+
+#~ msgid "Edit edi&tor menu file"
+#~ msgstr "editare meniuri edi&Tor"
+
+#~ msgid "Edit &syntax file"
+#~ msgstr "editare fiºier &Sintaxã"
+
+#~ msgid ""
+#~ "To use this feature select your codepage in\n"
+#~ "Setup / Display Bits dialog!\n"
+#~ "Do not forget to save options."
+#~ msgstr ""
+#~ "Pentru a utiliza aceastã facilitate selectaþi codul\n"
+#~ "de paginã în Opþiuni / Biþi de afiºare!\n"
+#~ "Nu uitaþi sã salvaþi opþiunile."
+
+#~ msgid "Invalid hex search expression"
+#~ msgstr "Expresie regularã invalidã la cãutare"
+
+#~ msgid " Invalid regular expression "
+#~ msgstr " Expresie regularã invalidã "
+
+#~ msgid " Enter regexp:"
+#~ msgstr " Introduceþi expresia regularã:"
+
 #~ msgid "Using included S-Lang library"
 #~ msgstr "Utilizând biblioteca S-lang inclusã"
 
@@ -3741,9 +3891,6 @@ msgstr "S-au pierdut schimbãrile efectuate în fiºier"
 
 #~ msgid "Unform"
 #~ msgstr "Neform"
-
-#~ msgid "Format"
-#~ msgstr "Format"
 
 #~ msgid "User menu available only in mcedit invoked from mc"
 #~ msgstr ""

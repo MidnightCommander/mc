@@ -5,10 +5,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0-pre3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-14 19:43+0000\n"
+"POT-Creation-Date: 2009-06-30 19:38+0200\n"
 "PO-Revision-Date: 2003-01-22 17:31+0900\n"
 "Last-Translator: Nam SungHyun <namsh@kldp.org>\n"
-"Language-Team: Korean <gnome-kr-translation@lists.sourceforge.net>\n"
+"Language-Team: Korean <debian-l10n-korean@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=euc-kr\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -53,8 +53,15 @@ msgstr " 파일 크기가 너무 큼: "
 msgid "Macro recursion is too deep"
 msgstr "매크로가 너무 많이 반복되어 불려졌습니다"
 
-msgid "&Dismiss"
-msgstr "취소(&D)"
+msgid "Search"
+msgstr "찾기"
+
+#, c-format
+msgid " %d items found, %d bookmarks added "
+msgstr " %d이(가) 찾아짐, %d 책갈피 더함 "
+
+msgid " Search string not found "
+msgstr " 글월을 찾을 수 없군요 "
 
 msgid "Warning"
 msgstr "경고"
@@ -114,9 +121,6 @@ msgstr "겹쳐쓰기"
 msgid " Cannot save file. "
 msgstr " 파일을 저장할 수 없습니다. "
 
-msgid "Cancel"
-msgstr "취소"
-
 msgid " Delete macro "
 msgstr " 매크로 지우기 "
 
@@ -161,87 +165,43 @@ msgstr ""
 msgid "C&ontinue"
 msgstr "계속"
 
+msgid "Syntax file edit"
+msgstr "문법 파일 수정(&M)"
+
+msgid " Which syntax file you want to edit? "
+msgstr " 수정하기를 원하는 문법 파일은? "
+
+msgid "&User"
+msgstr "사용자(&U)"
+
+msgid "&System Wide"
+msgstr "체계 전체(&S)"
+
+msgid " Menu edit "
+msgstr " 메뉴 편집 "
+
+msgid " Which menu file do you want to edit? "
+msgstr " 어떤 메뉴 파일을 편집하고 싶으세요? "
+
+msgid "&Local"
+msgstr "로컬(&L)"
+
 msgid " Load "
 msgstr " 불러오기 "
 
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " 구역이 너무 커서 나중에 무를 수 없습니다. "
 
-msgid "O&ne"
-msgstr "하나(&n)"
-
-msgid "A&ll"
-msgstr "모두(&l)"
-
-msgid "&Skip"
-msgstr "건너뜀(&S)"
-
-msgid "&Replace"
+#, fuzzy
+msgid "Replace"
 msgstr "바꿈(&R)"
-
-msgid " Replace with: "
-msgstr " ...로 바꿈: "
-
-msgid " Confirm replace "
-msgstr " 바꾸기 확인 "
-
-msgid "scanf &Expression"
-msgstr "scanf 표현(&E)"
-
-msgid "replace &All"
-msgstr "모두 바꿈(&A)"
-
-msgid "pro&Mpt on replace"
-msgstr "바꿀 때마다 물어봄(&O)"
-
-msgid "&Backwards"
-msgstr "뒤로(&B)"
-
-msgid "&Regular expression"
-msgstr "정규표현식(&R)"
-
-msgid "&Whole words only"
-msgstr "단어 단위로(&W)"
-
-msgid "case &Sensitive"
-msgstr "대소문자 구분(&S)"
-
-msgid " Enter replacement argument order eg. 3,2,1,4 "
-msgstr " 인자 순서 입력 (가령: 3,2,1,4): "
-
-msgid " Enter replacement string:"
-msgstr " 바꿀 글월 입력:"
-
-msgid " Enter search string:"
-msgstr " 찾을 글월 입력:"
 
 msgid " Replace "
 msgstr " 바꿈 "
 
-msgid "Search"
-msgstr "찾기"
-
-msgid ""
-" Invalid regular expression, or scanf expression with too many conversions "
-msgstr " 이상한 정규표현식 혹은 너무 많이 바꿔야 하는 scanf 표현 "
-
-msgid " Error in replacement format string. "
-msgstr " 바꿀 형식 문자열 에러. "
-
-#, fuzzy
-msgid " Replacement too long. "
-msgstr " 바꿀 글월 입력:"
-
 #, c-format
 msgid " %ld replacements made. "
 msgstr " %ld 개가 바뀌었습니다. "
-
-msgid " Search string not found "
-msgstr " 글월을 찾을 수 없군요 "
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " %d이(가) 찾아짐, %d 책갈피 더함 "
 
 msgid "Quit"
 msgstr "끝내기"
@@ -359,6 +319,51 @@ msgstr " 아무 글쇠나 누르십시오: "
 msgid " Execute Macro "
 msgstr " 매크로 실행 "
 
+msgid "pro&Mpt on replace"
+msgstr "바꿀 때마다 물어봄(&O)"
+
+msgid "replace &All"
+msgstr "모두 바꿈(&A)"
+
+msgid "All charsets"
+msgstr ""
+
+msgid "&Backwards"
+msgstr "뒤로(&B)"
+
+msgid "case &Sensitive"
+msgstr "대소문자 구분(&S)"
+
+msgid " Enter replacement string:"
+msgstr " 바꿀 글월 입력:"
+
+msgid " Enter search string:"
+msgstr " 찾을 글월 입력:"
+
+msgid "Cancel"
+msgstr "취소"
+
+msgid "O&ne"
+msgstr "하나(&n)"
+
+msgid "A&ll"
+msgstr "모두(&l)"
+
+msgid "&Skip"
+msgstr "건너뜀(&S)"
+
+msgid "&Replace"
+msgstr "바꿈(&R)"
+
+msgid " Replace with: "
+msgstr " ...로 바꿈: "
+
+msgid " Confirm replace "
+msgstr " 바꾸기 확인 "
+
+msgid "&Dismiss"
+msgstr "취소(&D)"
+
 msgid " Emacs key: "
 msgstr " Emacs 글쇠: "
 
@@ -431,32 +436,79 @@ msgstr "새 파일(&N)             C-x l"
 msgid "Copy to &file...     "
 msgstr "파일로 복사(&f)...           "
 
-msgid "&Toggle Mark       F3"
+#, fuzzy
+msgid "&Toggle mark                 F3"
 msgstr "마크 토글(&T)              F3"
 
-msgid "&Mark Columns    S-F3"
+#, fuzzy
+msgid "Mar&k columns              S-F3"
 msgstr "컬럼 마크(&M)            S-F3"
 
-msgid "Toggle &ins/overw Ins"
+#, fuzzy
+msgid "Toggle &ins/overw           Ins"
 msgstr "삽입/겹침 토글(&i)        Ins"
 
-msgid "&Copy              F5"
+#, fuzzy
+msgid "&Copy                        F5"
 msgstr "복사(&C)                   F5"
 
-msgid "&Move              F6"
+#, fuzzy
+msgid "&Move                        F6"
 msgstr "이동(&M)                   F6"
 
-msgid "&Delete            F8"
+#, fuzzy
+msgid "&Delete                      F8"
 msgstr "지우기(&D)                 F8"
 
-msgid "&Undo             C-u"
+#, fuzzy
+msgid "C&opy to clipfile         C-Ins"
+msgstr "파일로 복사(&f)...           "
+
+#, fuzzy
+msgid "C&ut to clipfile          S-Del"
+msgstr "라인 찾아가기(&G)...      M-l"
+
+msgid "&Paste from clipfile      S-Ins"
+msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "마크 토글(&T)              F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "새 파일(&N)               C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "정렬(&t)                  M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "전자우편(&M)...              "
+
+#, fuzzy
+msgid "&Undo                       C-u"
 msgstr "취소(&U)                  C-u"
 
-msgid "&Beginning     C-PgUp"
+#, fuzzy
+msgid "&Beginning               C-PgUp"
 msgstr "파일 처음(&B)          C-PgUp"
 
-msgid "&End           C-PgDn"
+#, fuzzy
+msgid "&End                     C-PgDn"
 msgstr "파일 끝(&E)            C-PgDn"
+
+#, fuzzy
+msgid "C&opy to clipfile           M-w"
+msgstr "라인 찾아가기(&G)...      M-l"
+
+#, fuzzy
+msgid "C&ut to clipfile            C-w"
+msgstr "라인 찾아가기(&G)...      M-l"
+
+msgid "&Paste from clipfile        C-y"
+msgstr ""
 
 msgid "&Search...         F7"
 msgstr "찾기(&S)...                F7"
@@ -470,8 +522,25 @@ msgstr "바꾸기(&R)...              F4"
 msgid "&Go to line...            M-l"
 msgstr "라인 찾아가기(&G)...      M-l"
 
+#, fuzzy
+msgid "Toggle li&ne state        M-n"
+msgstr "마크 토글(&T)              F3"
+
 msgid "Go to matching &bracket   M-b"
 msgstr "맞는 bracket으로 가기(&b) M-b"
+
+msgid "Find declaration      A-Enter"
+msgstr ""
+
+msgid "Back from declaration     M--"
+msgstr ""
+
+msgid "Forward to declaration    M-+"
+msgstr ""
+
+#, fuzzy
+msgid "Encod&ing...             C-t"
+msgstr "정렬(&t)                  M-t"
 
 msgid "Insert &literal...       C-q"
 msgstr "Literal 입력(&l)          C-q"
@@ -533,7 +602,15 @@ msgid "Syntax &Highlighting..."
 msgstr " 하이라이트... "
 
 #, fuzzy
-msgid "Save setu&p..."
+msgid "S&yntax file"
+msgstr "문법 파일 수정(&M)"
+
+#, fuzzy
+msgid "&Menu file"
+msgstr "메뉴 파일 편집(&m)"
+
+#, fuzzy
+msgid "Save setu&p"
 msgstr "환경 저장(&S)"
 
 msgid " File "
@@ -575,6 +652,10 @@ msgstr ""
 
 msgid "Tab spacing: "
 msgstr "탭 간격: "
+
+#, fuzzy
+msgid "Pers&istent selection"
+msgstr "선택반전(&T)              M-*"
 
 msgid "Synta&x highlighting"
 msgstr ""
@@ -810,6 +891,10 @@ msgstr " 지우기 확인(&D) "
 
 msgid " Confirmation "
 msgstr " 확인 "
+
+#, fuzzy
+msgid "UTF-8 output"
+msgstr "8 bits 출력"
 
 msgid "Full 8 bits output"
 msgstr "8 bits 출력"
@@ -1052,8 +1137,16 @@ msgstr " 필터 "
 msgid " Set expression for filtering filenames"
 msgstr " 필터링할 파일명 설정 "
 
-msgid "  Malformed regular expression  "
-msgstr "  이해할 수 없는 정규표현식  "
+msgid "&Using shell patterns"
+msgstr "명령해석기 패턴 사용(&U)"
+
+#, fuzzy
+msgid "&Case sensitive"
+msgstr "대소문자 구분(&t)"
+
+#, fuzzy
+msgid "&Files only"
+msgstr "크기로만(&S)"
 
 msgid " Select "
 msgstr " 선택 "
@@ -1066,27 +1159,6 @@ msgstr "Extension 파일 수정"
 
 msgid " Which extension file you want to edit? "
 msgstr " 수정하기를 원하는 extension 파일은? "
-
-msgid "&User"
-msgstr "사용자(&U)"
-
-msgid "&System Wide"
-msgstr "체계 전체(&S)"
-
-msgid " Menu edit "
-msgstr " 메뉴 편집 "
-
-msgid " Which menu file do you want to edit? "
-msgstr " 어떤 메뉴 파일을 편집하고 싶으세요? "
-
-msgid "&Local"
-msgstr "로컬(&L)"
-
-msgid "Syntax file edit"
-msgstr "문법 파일 수정(&M)"
-
-msgid " Which syntax file you want to edit? "
-msgstr " 수정하기를 원하는 문법 파일은? "
 
 msgid " Compare directories "
 msgstr " 디렉토리 비교 "
@@ -1105,12 +1177,6 @@ msgstr "자세히(&T)"
 
 msgid " Both panels should be in the listing mode to use this command "
 msgstr " 이 명령을 사용하려면 양쪽 패널이 모두 보여야 합니다 "
-
-msgid " The command history is empty "
-msgstr " 명령 히스토리가 비었습니다 "
-
-msgid " Command history "
-msgstr " 명령 히스토리 "
 
 msgid ""
 " Not an xterm or Linux console; \n"
@@ -1287,9 +1353,6 @@ msgstr " 이동 "
 
 msgid " Delete "
 msgstr " 지우기 "
-
-msgid " Invalid target mask "
-msgstr " Invalid target mask "
 
 msgid " Cannot make the hardlink "
 msgstr " 하드링크를 만들 수 없습니다 "
@@ -1565,6 +1628,10 @@ msgstr ""
 " \"%s\" 디렉토리을 지울 수 없습니다 \n"
 " %s "
 
+#, fuzzy
+msgid "Directory scanning"
+msgstr "디렉토리 경로"
+
 msgid "1Copy"
 msgstr "1Copy"
 
@@ -1723,9 +1790,6 @@ msgstr "링크 따르기(&L)"
 msgid "to:"
 msgstr "대상:"
 
-msgid "&Using shell patterns"
-msgstr "명령해석기 패턴 사용(&U)"
-
 msgid "&Background"
 msgstr "&Background"
 
@@ -1735,10 +1799,8 @@ msgstr "&Stable 심볼릭링크"
 msgid "&Dive into subdir if exists"
 msgstr "같은 디렉토리 존재시 그 밑으로(&D)"
 
-#, c-format
-msgid ""
-"Invalid source pattern `%s' \n"
-" %s "
+#, fuzzy, c-format
+msgid "Invalid source pattern `%s'"
 msgstr ""
 "원본 패턴 `%s'이(가) 잘못되었습니다 \n"
 " %s "
@@ -1767,26 +1829,54 @@ msgstr "보기(&V) - F3"
 msgid "&Edit - F4"
 msgstr "편집(&E) - F4"
 
+#, c-format
+msgid "Found: %ld"
+msgstr ""
+
+#, fuzzy
+msgid " Malformed regular expression "
+msgstr "  이해할 수 없는 정규표현식  "
+
+#, fuzzy
+msgid "Cas&e sensitive"
+msgstr "대소문자 구분(&t)"
+
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "대소문자 구분(&t)"
+
 msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "Start at:"
-msgstr "시작위치:"
+msgid "&All charsets"
+msgstr ""
 
-msgid "Filename:"
-msgstr "파일명:"
+msgid "All cha&rsets"
+msgstr ""
 
-msgid "Content: "
-msgstr "내용: "
+#, fuzzy
+msgid "Re&gular expression"
+msgstr "정규표현식(&R)"
 
 msgid "&Tree"
 msgstr "나무꼴(&T)"
 
 msgid "Find File"
 msgstr "파일 찾기"
+
+#, fuzzy
+msgid "Content:"
+msgstr "내용: "
+
+#, fuzzy
+msgid "File name:"
+msgstr "파일명:"
+
+msgid "Start at:"
+msgstr "시작위치:"
 
 #, c-format
 msgid "Grepping in %s"
@@ -2150,6 +2240,9 @@ msgstr "정렬 순서(&S)..."
 msgid "&Filter..."
 msgstr "필터(&F)..."
 
+msgid "&Encoding...    C-t"
+msgstr ""
+
 msgid "&Network link..."
 msgstr "네트워크 연결(&N)..."
 
@@ -2164,9 +2257,6 @@ msgstr "SMB 연결(&B)..."
 
 msgid "&Rescan         C-r"
 msgstr "다시 읽기(&R)            C-r"
-
-msgid "&User menu          F2"
-msgstr "사용자 메뉴(&U)            F2"
 
 msgid "&View               F3"
 msgstr "보기(&V)                   F3"
@@ -2225,6 +2315,9 @@ msgstr "선택반전(&T)              M-*"
 msgid "e&Xit              F10"
 msgstr "끝내기(&X)                F10"
 
+msgid "&User menu          F2"
+msgstr "사용자 메뉴(&U)            F2"
+
 msgid "&Directory tree"
 msgstr "디렉토리 나무꼴(&D)"
 
@@ -2246,8 +2339,9 @@ msgstr "외부명령 패널화하기(&X)  C-x !"
 msgid "show directory s&Izes"
 msgstr "디렉토리 크기 보기(&I)"
 
-msgid "command &History"
-msgstr "명령 히스토리(&H)"
+#, fuzzy
+msgid "Command &history      M-h"
+msgstr " 명령 히스토리 "
 
 msgid "di&Rectory hotlist    C-\\"
 msgstr "디렉토리 단축목록(&R)        C-\\"
@@ -2269,12 +2363,6 @@ msgstr "Extension 파일 편집(&e)"
 
 msgid "Edit &menu file"
 msgstr "메뉴 파일 편집(&m)"
-
-msgid "Edit edi&tor menu file"
-msgstr "편집기 메뉴 파일 편집(&t)"
-
-msgid "Edit &syntax file"
-msgstr "구문 파일 편집(&s) "
 
 msgid "&Configuration..."
 msgstr "환경설정(&C)..."
@@ -2338,6 +2426,22 @@ msgstr "메뉴"
 msgid "The TERM environment variable is unset!\n"
 msgstr "TERM 환경변수가 설정되어있지 않습니다!\n"
 
+msgid "&Fix it"
+msgstr ""
+
+msgid "don't ask again"
+msgstr ""
+
+msgid ""
+"Chosen display charset (Settings->Display bits)\n"
+"or source codeset (in mcedit ctrl-t) \n"
+"does not match one set via locale. \n"
+"Set correct codeset manually or press <<Fix it>> \n"
+"to set locale default.\n"
+"\n"
+"Or set 'don't ask again' and press <<Skip>>"
+msgstr ""
+
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
@@ -2372,16 +2476,8 @@ msgid ""
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
 "   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked\n"
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
 msgstr ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2401,6 +2497,18 @@ msgstr ""
 "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
 "   brightcyan, lightgray and white\n"
 "\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
 
 msgid "Displays this help message"
 msgstr "이 도움말 보여주기"
@@ -2461,6 +2569,10 @@ msgstr "파일에 대해 파일 보기 실행"
 
 msgid "Edits one file"
 msgstr "한 파일 편집"
+
+#, fuzzy, c-format
+msgid "Cannot create %s directory"
+msgstr "디렉토리을 바꿀 수 없습니다"
 
 msgid "safe de&Lete"
 msgstr "안전한 지우기(&L)"
@@ -2679,20 +2791,35 @@ msgstr "RenMov"
 msgid "Mkdir"
 msgstr "Mkdir"
 
-msgid " Choose input codepage "
+msgid " Not implemented yet "
+msgstr ""
+
+msgid " Num of replace tokens not equal to num of found tokens "
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Invalid token number %d "
+msgstr " Invalid target mask "
+
+#, fuzzy
+msgid "Normal"
+msgstr "Format"
+
+msgid "&Regular expression"
+msgstr "정규표현식(&R)"
+
+msgid "Hexadecimal"
+msgstr ""
+
+msgid "Wildcard search"
+msgstr ""
+
+#, fuzzy
+msgid "Choose codepage"
 msgstr " 입력 코드페이지 선택 "
 
 msgid "-  < No translation >"
 msgstr "-  < 변환 안함 >"
-
-msgid ""
-"To use this feature select your codepage in\n"
-"Setup / Display Bits dialog!\n"
-"Do not forget to save options."
-msgstr ""
-"이 기능을 사용하려면 선택항목 / 출력비트\n"
-"대화상자에서 코드페이지를 선택하세요!\n"
-"옵션 저장하는 거 잊지마세요."
 
 #, c-format
 msgid ""
@@ -2729,6 +2856,10 @@ msgid "with terminfo database"
 msgstr "terminfo 데이타베이스 사용"
 
 msgid "Using the ncurses library"
+msgstr "ncurses 라이브러리 사용"
+
+#, fuzzy
+msgid "Using the ncursesw library"
 msgstr "ncurses 라이브러리 사용"
 
 msgid "With optional subshell support"
@@ -2851,11 +2982,19 @@ msgstr " %s에서 적당한 항목을 찾을 수 없습니다 "
 msgid " User menu "
 msgstr " 사용자 메뉴 "
 
-msgid "%b %e %H:%M"
+#, fuzzy
+msgid "%b %d %H:%M"
 msgstr "%b %e %H:%M"
+
+#, fuzzy
+msgid "%b %d %Y"
+msgstr "%b %e  %Y"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -2946,24 +3085,16 @@ msgid ""
 " %s "
 msgstr " 파일을 저장할 수 없습니다. "
 
-msgid "Invalid hex search expression"
-msgstr " 알 수 없는 hex 찾기 표현식 "
-
-msgid " Invalid regular expression "
-msgstr " 알 수 없는 정규 표현식 "
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" The current line number is %d.\n"
+" The current line number is %lu.\n"
 " Enter the new line number:"
 msgstr ""
 " 현재 줄 번호는 %d입니다.\n"
 " 새로운 줄 번호을 입력:"
 
-#, c-format
-msgid ""
-" The current address is 0x%lx.\n"
-" Enter the new address:"
+#, fuzzy
+msgid " The current address is 0x%08"
 msgstr ""
 " 현재 주소는 0x%lx입니다.\n"
 " 새로운 주소 입력:"
@@ -2975,25 +3106,10 @@ msgstr " 주소 찾기 "
 msgid " Invalid address "
 msgstr " 틀린 비밀번호 "
 
-msgid " Enter regexp:"
-msgstr " 정규표현식 입력:"
-
 msgid "ButtonBar|Help"
 msgstr ""
 
 msgid "ButtonBar|Quit"
-msgstr ""
-
-msgid "ButtonBar|Ascii"
-msgstr ""
-
-msgid "ButtonBar|Hex"
-msgstr ""
-
-msgid "ButtonBar|Goto"
-msgstr ""
-
-msgid "ButtonBar|Line"
 msgstr ""
 
 msgid "ButtonBar|View"
@@ -3003,33 +3119,6 @@ msgid "ButtonBar|Edit"
 msgstr ""
 
 msgid "ButtonBar|Save"
-msgstr ""
-
-msgid "ButtonBar|UnWrap"
-msgstr ""
-
-msgid "ButtonBar|Wrap"
-msgstr ""
-
-msgid "ButtonBar|RxSrch"
-msgstr ""
-
-msgid "ButtonBar|HxSrch"
-msgstr ""
-
-msgid "ButtonBar|Search"
-msgstr ""
-
-msgid "ButtonBar|Raw"
-msgstr ""
-
-msgid "ButtonBar|Parse"
-msgstr ""
-
-msgid "ButtonBar|Unform"
-msgstr ""
-
-msgid "ButtonBar|Format"
 msgstr ""
 
 msgid " History "
@@ -3607,6 +3696,67 @@ msgstr "내부 오류:"
 msgid "Changes to file lost"
 msgstr "수정 내용 잃어버림"
 
+#~ msgid "scanf &Expression"
+#~ msgstr "scanf 표현(&E)"
+
+#~ msgid "&Whole words only"
+#~ msgstr "단어 단위로(&W)"
+
+#~ msgid " Enter replacement argument order eg. 3,2,1,4 "
+#~ msgstr " 인자 순서 입력 (가령: 3,2,1,4): "
+
+#~ msgid ""
+#~ " Invalid regular expression, or scanf expression with too many "
+#~ "conversions "
+#~ msgstr " 이상한 정규표현식 혹은 너무 많이 바꿔야 하는 scanf 표현 "
+
+#~ msgid " Error in replacement format string. "
+#~ msgstr " 바꿀 형식 문자열 에러. "
+
+#, fuzzy
+#~ msgid " Replacement too long. "
+#~ msgstr " 바꿀 글월 입력:"
+
+#~ msgid "&Copy              F5"
+#~ msgstr "복사(&C)                   F5"
+
+#~ msgid "&Delete            F8"
+#~ msgstr "지우기(&D)                 F8"
+
+#, fuzzy
+#~ msgid "Save setu&p..."
+#~ msgstr "환경 저장(&S)"
+
+#~ msgid " The command history is empty "
+#~ msgstr " 명령 히스토리가 비었습니다 "
+
+#~ msgid "command &History"
+#~ msgstr "명령 히스토리(&H)"
+
+#~ msgid "Edit edi&tor menu file"
+#~ msgstr "편집기 메뉴 파일 편집(&t)"
+
+#~ msgid "Edit &syntax file"
+#~ msgstr "구문 파일 편집(&s) "
+
+#~ msgid ""
+#~ "To use this feature select your codepage in\n"
+#~ "Setup / Display Bits dialog!\n"
+#~ "Do not forget to save options."
+#~ msgstr ""
+#~ "이 기능을 사용하려면 선택항목 / 출력비트\n"
+#~ "대화상자에서 코드페이지를 선택하세요!\n"
+#~ "옵션 저장하는 거 잊지마세요."
+
+#~ msgid "Invalid hex search expression"
+#~ msgstr " 알 수 없는 hex 찾기 표현식 "
+
+#~ msgid " Invalid regular expression "
+#~ msgstr " 알 수 없는 정규 표현식 "
+
+#~ msgid " Enter regexp:"
+#~ msgstr " 정규표현식 입력:"
+
 #~ msgid "Using included S-Lang library"
 #~ msgstr "내장된 S-Lang 라이브러리 사용"
 
@@ -3730,9 +3880,6 @@ msgstr "수정 내용 잃어버림"
 
 #~ msgid "Unform"
 #~ msgstr "Unform"
-
-#~ msgid "Format"
-#~ msgstr "Format"
 
 #~ msgid "User menu available only in mcedit invoked from mc"
 #~ msgstr "사용자 메뉴는 mcedit이 mc에 의해 불려진 경우에만 사용가능합니다"

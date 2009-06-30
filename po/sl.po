@@ -5,10 +5,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-14 19:43+0000\n"
+"POT-Creation-Date: 2009-06-30 19:39+0200\n"
 "PO-Revision-Date: 2000-06-22 00:00+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
-"Language-Team: Slovenian <sl@li.org>\n"
+"Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -54,8 +54,15 @@ msgstr " Datoteka je prevelika: "
 msgid "Macro recursion is too deep"
 msgstr "Rekurzija makra je pregloboka"
 
-msgid "&Dismiss"
-msgstr "&Opusti"
+msgid "Search"
+msgstr "Iskanje"
+
+#, c-format
+msgid " %d items found, %d bookmarks added "
+msgstr " %d najdb, %d dodanih zaznamkov"
+
+msgid " Search string not found "
+msgstr " Iskan niz ni bil najden "
 
 msgid "Warning"
 msgstr "Opozorilo"
@@ -115,9 +122,6 @@ msgstr "Prepiši"
 msgid " Cannot save file. "
 msgstr " Ne morem shraniti datoteke. "
 
-msgid "Cancel"
-msgstr "Prekliči"
-
 msgid " Delete macro "
 msgstr " Zbriši makro "
 
@@ -162,88 +166,43 @@ msgstr ""
 msgid "C&ontinue"
 msgstr "Nadaljuj"
 
+msgid "Syntax file edit"
+msgstr "Urejanje datoteke s sintakso"
+
+msgid " Which syntax file you want to edit? "
+msgstr " Katero datoteko s sintakso želite urejati? "
+
+msgid "&User"
+msgstr "&Uporabnik"
+
+msgid "&System Wide"
+msgstr "&Sistemsko"
+
+msgid " Menu edit "
+msgstr " Urejanje menujev"
+
+msgid " Which menu file do you want to edit? "
+msgstr " Katero menujsko datoteko želite urejati? "
+
+msgid "&Local"
+msgstr "&Krajevno"
+
 msgid " Load "
 msgstr " Naloži "
 
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " Blok je velik, tega dejanja ne bo mogoče razveljaviti. "
 
-msgid "O&ne"
-msgstr "&Eno"
-
-msgid "A&ll"
-msgstr "&Vse"
-
-msgid "&Skip"
-msgstr "Pre&skoči"
-
-msgid "&Replace"
+#, fuzzy
+msgid "Replace"
 msgstr "&Zamenjaj"
-
-msgid " Replace with: "
-msgstr " Zamenjaj z: "
-
-msgid " Confirm replace "
-msgstr " Potrdi zamenjavo"
-
-msgid "scanf &Expression"
-msgstr "scanf &Izraz"
-
-msgid "replace &All"
-msgstr "zamenjaj &Vse"
-
-msgid "pro&Mpt on replace"
-msgstr "p&Otrdimo ob zamenjavi"
-
-msgid "&Backwards"
-msgstr "&Nazaj"
-
-msgid "&Regular expression"
-msgstr "&Regularni izraz"
-
-msgid "&Whole words only"
-msgstr "&Le cele besede"
-
-msgid "case &Sensitive"
-msgstr "ra&Zlikuj velike in male črke"
-
-msgid " Enter replacement argument order eg. 3,2,1,4 "
-msgstr " Vnesite vrstni red zamenjave argumentov npr. 3,2,1,4"
-
-msgid " Enter replacement string:"
-msgstr " Vnesite nadomestni niz:"
-
-msgid " Enter search string:"
-msgstr " Vnesite niz za iskanje:"
 
 msgid " Replace "
 msgstr " Zamenjaj "
 
-msgid "Search"
-msgstr "Iskanje"
-
-msgid ""
-" Invalid regular expression, or scanf expression with too many conversions "
-msgstr ""
-" Neveljaven regularni izraz, ali scanf izraz s prevelikim številom pretvorb "
-
-msgid " Error in replacement format string. "
-msgstr " Napaka v zamenjalnem formatnem nizu. "
-
-#, fuzzy
-msgid " Replacement too long. "
-msgstr " Vnesite nadomestni niz:"
-
 #, c-format
 msgid " %ld replacements made. "
 msgstr " storjenih je bilo %ld zamenjav. "
-
-msgid " Search string not found "
-msgstr " Iskan niz ni bil najden "
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " %d najdb, %d dodanih zaznamkov"
 
 msgid "Quit"
 msgstr "Končaj"
@@ -362,6 +321,51 @@ msgstr " Pritisni tipko: "
 msgid " Execute Macro "
 msgstr " Izvedi makro "
 
+msgid "pro&Mpt on replace"
+msgstr "p&Otrdimo ob zamenjavi"
+
+msgid "replace &All"
+msgstr "zamenjaj &Vse"
+
+msgid "All charsets"
+msgstr ""
+
+msgid "&Backwards"
+msgstr "&Nazaj"
+
+msgid "case &Sensitive"
+msgstr "ra&Zlikuj velike in male črke"
+
+msgid " Enter replacement string:"
+msgstr " Vnesite nadomestni niz:"
+
+msgid " Enter search string:"
+msgstr " Vnesite niz za iskanje:"
+
+msgid "Cancel"
+msgstr "Prekliči"
+
+msgid "O&ne"
+msgstr "&Eno"
+
+msgid "A&ll"
+msgstr "&Vse"
+
+msgid "&Skip"
+msgstr "Pre&skoči"
+
+msgid "&Replace"
+msgstr "&Zamenjaj"
+
+msgid " Replace with: "
+msgstr " Zamenjaj z: "
+
+msgid " Confirm replace "
+msgstr " Potrdi zamenjavo"
+
+msgid "&Dismiss"
+msgstr "&Opusti"
+
 msgid " Emacs key: "
 msgstr " Emacs ključ: "
 
@@ -435,32 +439,79 @@ msgstr "&Novo           C-x k"
 msgid "Copy to &file...     "
 msgstr "Kopiraj v &datoteko..."
 
-msgid "&Toggle Mark       F3"
+#, fuzzy
+msgid "&Toggle mark                 F3"
 msgstr "&Preklopi označbo  F3"
 
-msgid "&Mark Columns    S-F3"
+#, fuzzy
+msgid "Mar&k columns              S-F3"
 msgstr "&Označi stolpce  S-F3"
 
-msgid "Toggle &ins/overw Ins"
+#, fuzzy
+msgid "Toggle &ins/overw           Ins"
 msgstr "Preklopi način &pisanja "
 
-msgid "&Copy              F5"
-msgstr "&Kopiraj           F5"
+#, fuzzy
+msgid "&Copy                        F5"
+msgstr "&Kopiraj            F5"
 
-msgid "&Move              F6"
+#, fuzzy
+msgid "&Move                        F6"
 msgstr "&Prestavi          F6"
 
-msgid "&Delete            F8"
-msgstr "&Zbriši            F8"
+#, fuzzy
+msgid "&Delete                      F8"
+msgstr "&Zbriši             F8"
 
-msgid "&Undo             C-u"
+#, fuzzy
+msgid "C&opy to clipfile         C-Ins"
+msgstr "Kopiraj v &datoteko..."
+
+#, fuzzy
+msgid "C&ut to clipfile          S-Del"
+msgstr "&Pojdi v vrstico...       M-l"
+
+msgid "&Paste from clipfile      S-Ins"
+msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "&Preklopi označbo  F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "&Nova             C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "Sor&tiraj...             M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "&Pošlji...                    "
+
+#, fuzzy
+msgid "&Undo                       C-u"
 msgstr "&Razveljavi       C-u"
 
-msgid "&Beginning     C-PgUp"
+#, fuzzy
+msgid "&Beginning               C-PgUp"
 msgstr "&Začetek       C-PgUp"
 
-msgid "&End           C-PgDn"
+#, fuzzy
+msgid "&End                     C-PgDn"
 msgstr "&Konec         C-PgDn"
+
+#, fuzzy
+msgid "C&opy to clipfile           M-w"
+msgstr "&Pojdi v vrstico...       M-l"
+
+#, fuzzy
+msgid "C&ut to clipfile            C-w"
+msgstr "&Pojdi v vrstico...       M-l"
+
+msgid "&Paste from clipfile        C-y"
+msgstr ""
 
 msgid "&Search...         F7"
 msgstr "&Iskanje...        F7"
@@ -474,8 +525,25 @@ msgstr "&Zamenjaj...       F4"
 msgid "&Go to line...            M-l"
 msgstr "&Pojdi v vrstico...       M-l"
 
+#, fuzzy
+msgid "Toggle li&ne state        M-n"
+msgstr "&Preklopi označbo  F3"
+
 msgid "Go to matching &bracket   M-b"
 msgstr "Pojdi na &zaklepaj        M-b"
+
+msgid "Find declaration      A-Enter"
+msgstr ""
+
+msgid "Back from declaration     M--"
+msgstr ""
+
+msgid "Forward to declaration    M-+"
+msgstr ""
+
+#, fuzzy
+msgid "Encod&ing...             C-t"
+msgstr "Sor&tiraj...             M-t"
 
 msgid "Insert &literal...       C-q"
 msgstr "Vstavi &dobesedno...     C-q"
@@ -537,7 +605,15 @@ msgid "Syntax &Highlighting..."
 msgstr "Osvetlitev &sintakse"
 
 #, fuzzy
-msgid "Save setu&p..."
+msgid "S&yntax file"
+msgstr "Urejanje datoteke s sintakso"
+
+#, fuzzy
+msgid "&Menu file"
+msgstr "Uredi &menujsko datoteko"
+
+#, fuzzy
+msgid "Save setu&p"
 msgstr "&Shrani nastavitve"
 
 msgid " File "
@@ -579,6 +655,10 @@ msgstr "Dolžina vrstice za lom: "
 
 msgid "Tab spacing: "
 msgstr "Velikost tabulatorja: "
+
+#, fuzzy
+msgid "Pers&istent selection"
+msgstr "obrni iz&Biro      M-*"
 
 msgid "Synta&x highlighting"
 msgstr "Osvetlitev &sintakse"
@@ -814,6 +894,10 @@ msgstr " potrdi &Brisanje"
 
 msgid " Confirmation "
 msgstr " Potrditev"
+
+#, fuzzy
+msgid "UTF-8 output"
+msgstr "Polni 8 bitni izhod"
 
 msgid "Full 8 bits output"
 msgstr "Polni 8 bitni izhod"
@@ -1056,8 +1140,16 @@ msgstr " Filter "
 msgid " Set expression for filtering filenames"
 msgstr " Nastavi izraz za filtriranje imen datotek"
 
-msgid "  Malformed regular expression  "
-msgstr "  Napačno formuliran regularni izraz  "
+msgid "&Using shell patterns"
+msgstr "&Uporabi vzorce lupine"
+
+#, fuzzy
+msgid "&Case sensitive"
+msgstr "razlikuj velike in male črke"
+
+#, fuzzy
+msgid "&Files only"
+msgstr "Le &Velikost"
 
 msgid " Select "
 msgstr " Izberi "
@@ -1070,27 +1162,6 @@ msgstr "Uredi datoteko s priponami"
 
 msgid " Which extension file you want to edit? "
 msgstr " Katero datoteko s priponami želite urejati? "
-
-msgid "&User"
-msgstr "&Uporabnik"
-
-msgid "&System Wide"
-msgstr "&Sistemsko"
-
-msgid " Menu edit "
-msgstr " Urejanje menujev"
-
-msgid " Which menu file do you want to edit? "
-msgstr " Katero menujsko datoteko želite urejati? "
-
-msgid "&Local"
-msgstr "&Krajevno"
-
-msgid "Syntax file edit"
-msgstr "Urejanje datoteke s sintakso"
-
-msgid " Which syntax file you want to edit? "
-msgstr " Katero datoteko s sintakso želite urejati? "
 
 msgid " Compare directories "
 msgstr " Primerjaj imenike "
@@ -1109,12 +1180,6 @@ msgstr "&Popolno"
 
 msgid " Both panels should be in the listing mode to use this command "
 msgstr "Za uporabo tega ukaza morata biti oba pulta v seznamskem načinu "
-
-msgid " The command history is empty "
-msgstr " Zgodovina ukazov je prazna "
-
-msgid " Command history "
-msgstr " Zgodovina ukazov"
 
 msgid ""
 " Not an xterm or Linux console; \n"
@@ -1291,9 +1356,6 @@ msgstr " Prestavi "
 
 msgid " Delete "
 msgstr " Zbriši "
-
-msgid " Invalid target mask "
-msgstr " Napačna maska cilja "
 
 msgid " Cannot make the hardlink "
 msgstr " Ne morem ustvariti močne povezave "
@@ -1570,6 +1632,10 @@ msgstr ""
 " Ne morem odstraniti imenika \"%s\" \n"
 " %s "
 
+#, fuzzy
+msgid "Directory scanning"
+msgstr "Pot imenika"
+
 msgid "1Copy"
 msgstr "1Kopiraj"
 
@@ -1728,9 +1794,6 @@ msgstr "sledi &Povezavam"
 msgid "to:"
 msgstr "v:"
 
-msgid "&Using shell patterns"
-msgstr "&Uporabi vzorce lupine"
-
 msgid "&Background"
 msgstr "&Ozadje"
 
@@ -1740,10 +1803,8 @@ msgstr "&Stabilne simbolične povezave"
 msgid "&Dive into subdir if exists"
 msgstr "&Potopi se v podimenik, če obstaja"
 
-#, c-format
-msgid ""
-"Invalid source pattern `%s' \n"
-" %s "
+#, fuzzy, c-format
+msgid "Invalid source pattern `%s'"
 msgstr ""
 "Neveljaven vzorec izvora `%s' \n"
 " %s "
@@ -1772,26 +1833,54 @@ msgstr "&Pogled - F3"
 msgid "&Edit - F4"
 msgstr "&Uredi - F4"
 
+#, c-format
+msgid "Found: %ld"
+msgstr ""
+
+#, fuzzy
+msgid " Malformed regular expression "
+msgstr "  Napačno formuliran regularni izraz  "
+
+#, fuzzy
+msgid "Cas&e sensitive"
+msgstr "razlikuj velike in male črke"
+
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "razlikuj velike in male črke"
+
 msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "Start at:"
-msgstr "Začni pri:"
+msgid "&All charsets"
+msgstr ""
 
-msgid "Filename:"
-msgstr "Ime datoteke:"
+msgid "All cha&rsets"
+msgstr ""
 
-msgid "Content: "
-msgstr "Vsebina: "
+#, fuzzy
+msgid "Re&gular expression"
+msgstr "&Regularni izraz"
 
 msgid "&Tree"
 msgstr "&Drevo"
 
 msgid "Find File"
 msgstr "Poišči datoteko"
+
+#, fuzzy
+msgid "Content:"
+msgstr "Vsebina: "
+
+#, fuzzy
+msgid "File name:"
+msgstr "Ime datoteke:"
+
+msgid "Start at:"
+msgstr "Začni pri:"
 
 #, c-format
 msgid "Grepping in %s"
@@ -2157,6 +2246,9 @@ msgstr "&Vrstni red..."
 msgid "&Filter..."
 msgstr "&Filter..."
 
+msgid "&Encoding...    C-t"
+msgstr ""
+
 msgid "&Network link..."
 msgstr "&Mrežna povezava..."
 
@@ -2171,9 +2263,6 @@ msgstr "SM&B povezava..."
 
 msgid "&Rescan         C-r"
 msgstr "&Osveži         C-r"
-
-msgid "&User menu          F2"
-msgstr "&Uporabnikov menu   F2"
 
 msgid "&View               F3"
 msgstr "&Pogled             F3"
@@ -2232,6 +2321,9 @@ msgstr "obrni iz&Biro      M-*"
 msgid "e&Xit              F10"
 msgstr "&Izhod             F10"
 
+msgid "&User menu          F2"
+msgstr "&Uporabnikov menu   F2"
+
 msgid "&Directory tree"
 msgstr "&Drevo imenikov"
 
@@ -2253,8 +2345,9 @@ msgstr "&V pult od zunaj      C-x !"
 msgid "show directory s&Izes"
 msgstr "kaži velikosti &Imenikov"
 
-msgid "command &History"
-msgstr "zgodovina &Ukazov"
+#, fuzzy
+msgid "Command &history      M-h"
+msgstr " Zgodovina ukazov"
 
 msgid "di&Rectory hotlist    C-\\"
 msgstr "v&Roč seznam imenikov  C-\\"
@@ -2276,12 +2369,6 @@ msgstr "Uredi &priponsko datoteko"
 
 msgid "Edit &menu file"
 msgstr "Uredi &menujsko datoteko"
-
-msgid "Edit edi&tor menu file"
-msgstr "Uredi menujsko datoteko urejavalnika"
-
-msgid "Edit &syntax file"
-msgstr "Uredi &sintaksno datoteko"
 
 msgid "&Configuration..."
 msgstr "&Nastavitve..."
@@ -2345,6 +2432,22 @@ msgstr "Menu"
 msgid "The TERM environment variable is unset!\n"
 msgstr "TERM okoljska spremenljivka ni nastavljena!\n"
 
+msgid "&Fix it"
+msgstr ""
+
+msgid "don't ask again"
+msgstr ""
+
+msgid ""
+"Chosen display charset (Settings->Display bits)\n"
+"or source codeset (in mcedit ctrl-t) \n"
+"does not match one set via locale. \n"
+"Set correct codeset manually or press <<Fix it>> \n"
+"to set locale default.\n"
+"\n"
+"Or set 'don't ask again' and press <<Skip>>"
+msgstr ""
+
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "Polnočni poveljnik GNU %s\n"
@@ -2379,16 +2482,8 @@ msgid ""
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
 "   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked\n"
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
 msgstr ""
 "--colors KLJUČNABESEDA={SPREDAJ},{ZADAJ}\n"
 "\n"
@@ -2408,6 +2503,18 @@ msgstr ""
 "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
 "   brightcyan, lightgray and white\n"
 "\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
 
 msgid "Displays this help message"
 msgstr "Pokaže to sporočilo s pomočjo"
@@ -2468,6 +2575,10 @@ msgstr "Zažene pogled datoteke"
 
 msgid "Edits one file"
 msgstr "Urejuje eno datoteko"
+
+#, fuzzy, c-format
+msgid "Cannot create %s directory"
+msgstr "Ne morem spremeniti imenika"
 
 msgid "safe de&Lete"
 msgstr "varni i&zbris"
@@ -2687,20 +2798,35 @@ msgstr "RenMov"
 msgid "Mkdir"
 msgstr "Mkdir"
 
-msgid " Choose input codepage "
+msgid " Not implemented yet "
+msgstr ""
+
+msgid " Num of replace tokens not equal to num of found tokens "
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Invalid token number %d "
+msgstr " Napačna maska cilja "
+
+#, fuzzy
+msgid "Normal"
+msgstr "Oblikuj izpis"
+
+msgid "&Regular expression"
+msgstr "&Regularni izraz"
+
+msgid "Hexadecimal"
+msgstr ""
+
+msgid "Wildcard search"
+msgstr ""
+
+#, fuzzy
+msgid "Choose codepage"
 msgstr " Izberite vhodni nabor znakov"
 
 msgid "-  < No translation >"
 msgstr "- < Brez prevoda >"
-
-msgid ""
-"To use this feature select your codepage in\n"
-"Setup / Display Bits dialog!\n"
-"Do not forget to save options."
-msgstr ""
-"Za uporabo te možnosti izberite vaš nabor znakov\n"
-"v dialogu \"Nastavitve / Kaži bite\"!\n"
-"Ne pozabite shraniti nastavitev."
 
 #, c-format
 msgid ""
@@ -2737,6 +2863,10 @@ msgid "with terminfo database"
 msgstr "z zbirko podatkov terminfo"
 
 msgid "Using the ncurses library"
+msgstr "Uporabljam knjižnico ncurses"
+
+#, fuzzy
+msgid "Using the ncursesw library"
 msgstr "Uporabljam knjižnico ncurses"
 
 msgid "With optional subshell support"
@@ -2859,11 +2989,19 @@ msgstr " Ustrezni vpisi v %s niso bili najdeni "
 msgid " User menu "
 msgstr " Uporabnikov menu "
 
-msgid "%b %e %H:%M"
+#, fuzzy
+msgid "%b %d %H:%M"
 msgstr "%b %e %H:%M"
+
+#, fuzzy
+msgid "%b %d %Y"
+msgstr "%b %e  %Y"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -2954,24 +3092,16 @@ msgid ""
 " %s "
 msgstr " Ne morem shraniti datoteke. "
 
-msgid "Invalid hex search expression"
-msgstr "Neveljaven šestnajstiški iskalni izraz"
-
-msgid " Invalid regular expression "
-msgstr " Neveljaven regularni izraz"
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" The current line number is %d.\n"
+" The current line number is %lu.\n"
 " Enter the new line number:"
 msgstr ""
 " Številka trenutne vrstice je %d.\n"
 " Vpišite novo številko vrstice:"
 
-#, c-format
-msgid ""
-" The current address is 0x%lx.\n"
-" Enter the new address:"
+#, fuzzy
+msgid " The current address is 0x%08"
 msgstr ""
 " Trenutni naslov je 0x%lx.\n"
 " Vpišite nov naslov:"
@@ -2983,25 +3113,10 @@ msgstr " Pojdi na naslov"
 msgid " Invalid address "
 msgstr " Neveljavno geslo "
 
-msgid " Enter regexp:"
-msgstr " Vnesite regularen izraz:"
-
 msgid "ButtonBar|Help"
 msgstr ""
 
 msgid "ButtonBar|Quit"
-msgstr ""
-
-msgid "ButtonBar|Ascii"
-msgstr ""
-
-msgid "ButtonBar|Hex"
-msgstr ""
-
-msgid "ButtonBar|Goto"
-msgstr ""
-
-msgid "ButtonBar|Line"
 msgstr ""
 
 msgid "ButtonBar|View"
@@ -3011,33 +3126,6 @@ msgid "ButtonBar|Edit"
 msgstr ""
 
 msgid "ButtonBar|Save"
-msgstr ""
-
-msgid "ButtonBar|UnWrap"
-msgstr ""
-
-msgid "ButtonBar|Wrap"
-msgstr ""
-
-msgid "ButtonBar|RxSrch"
-msgstr ""
-
-msgid "ButtonBar|HxSrch"
-msgstr ""
-
-msgid "ButtonBar|Search"
-msgstr ""
-
-msgid "ButtonBar|Raw"
-msgstr ""
-
-msgid "ButtonBar|Parse"
-msgstr ""
-
-msgid "ButtonBar|Unform"
-msgstr ""
-
-msgid "ButtonBar|Format"
 msgstr ""
 
 msgid " History "
@@ -3620,6 +3708,69 @@ msgstr "Interna napaka:"
 msgid "Changes to file lost"
 msgstr "Spremembe v datoteki izgubljene"
 
+#~ msgid "scanf &Expression"
+#~ msgstr "scanf &Izraz"
+
+#~ msgid "&Whole words only"
+#~ msgstr "&Le cele besede"
+
+#~ msgid " Enter replacement argument order eg. 3,2,1,4 "
+#~ msgstr " Vnesite vrstni red zamenjave argumentov npr. 3,2,1,4"
+
+#~ msgid ""
+#~ " Invalid regular expression, or scanf expression with too many "
+#~ "conversions "
+#~ msgstr ""
+#~ " Neveljaven regularni izraz, ali scanf izraz s prevelikim številom "
+#~ "pretvorb "
+
+#~ msgid " Error in replacement format string. "
+#~ msgstr " Napaka v zamenjalnem formatnem nizu. "
+
+#, fuzzy
+#~ msgid " Replacement too long. "
+#~ msgstr " Vnesite nadomestni niz:"
+
+#~ msgid "&Copy              F5"
+#~ msgstr "&Kopiraj           F5"
+
+#~ msgid "&Delete            F8"
+#~ msgstr "&Zbriši            F8"
+
+#, fuzzy
+#~ msgid "Save setu&p..."
+#~ msgstr "&Shrani nastavitve"
+
+#~ msgid " The command history is empty "
+#~ msgstr " Zgodovina ukazov je prazna "
+
+#~ msgid "command &History"
+#~ msgstr "zgodovina &Ukazov"
+
+#~ msgid "Edit edi&tor menu file"
+#~ msgstr "Uredi menujsko datoteko urejavalnika"
+
+#~ msgid "Edit &syntax file"
+#~ msgstr "Uredi &sintaksno datoteko"
+
+#~ msgid ""
+#~ "To use this feature select your codepage in\n"
+#~ "Setup / Display Bits dialog!\n"
+#~ "Do not forget to save options."
+#~ msgstr ""
+#~ "Za uporabo te možnosti izberite vaš nabor znakov\n"
+#~ "v dialogu \"Nastavitve / Kaži bite\"!\n"
+#~ "Ne pozabite shraniti nastavitev."
+
+#~ msgid "Invalid hex search expression"
+#~ msgstr "Neveljaven šestnajstiški iskalni izraz"
+
+#~ msgid " Invalid regular expression "
+#~ msgstr " Neveljaven regularni izraz"
+
+#~ msgid " Enter regexp:"
+#~ msgstr " Vnesite regularen izraz:"
+
 #~ msgid "Using included S-Lang library"
 #~ msgstr "Uporabljam vključeno knjižnico S-Lang"
 
@@ -3743,9 +3894,6 @@ msgstr "Spremembe v datoteki izgubljene"
 
 #~ msgid "Unform"
 #~ msgstr "Neformatirano"
-
-#~ msgid "Format"
-#~ msgstr "Oblikuj izpis"
 
 #~ msgid "User menu available only in mcedit invoked from mc"
 #~ msgstr "Uporabnikov menu je dostopen le kadar je mcedit pognan iz mc-ja"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-14 19:43+0000\n"
+"POT-Creation-Date: 2009-06-30 19:38+0200\n"
 "PO-Revision-Date: 2003-03-04 21:16+0100\n"
 "Last-Translator: Sanlig Badral <badral@chinggis.com>\n"
 "Language-Team: Mongolian <mn@li.org>\n"
@@ -59,8 +59,15 @@ msgstr " Маш том файл: "
 msgid "Macro recursion is too deep"
 msgstr "Макрогийн рекурс хэт гүн байна"
 
-msgid "&Dismiss"
-msgstr "&Хаах"
+msgid "Search"
+msgstr "Хайх"
+
+#, c-format
+msgid " %d items found, %d bookmarks added "
+msgstr " %d н хайлт дуусч, %d н хавчуулага нэмэгдэв "
+
+msgid " Search string not found "
+msgstr " Хайсан г алга байна "
 
 msgid "Warning"
 msgstr "Анхааруулга"
@@ -120,9 +127,6 @@ msgstr "Дарж бичих"
 msgid " Cannot save file. "
 msgstr " Файлыг хадгалж чадсангүй "
 
-msgid "Cancel"
-msgstr "Болих"
-
 msgid " Delete macro "
 msgstr " Макрог устгах "
 
@@ -167,88 +171,43 @@ msgstr ""
 msgid "C&ontinue"
 msgstr "үргэлжлэх"
 
+msgid "Syntax file edit"
+msgstr "Файлын синтаксийг засварлах"
+
+msgid " Which syntax file you want to edit? "
+msgstr " Ямар файл синтаксийг засварлахыг хүсч байна вэ? "
+
+msgid "&User"
+msgstr "&Хэрэглэгч"
+
+msgid "&System Wide"
+msgstr "&Систем"
+
+msgid " Menu edit "
+msgstr " Файл засварлагч Цэс "
+
+msgid " Which menu file do you want to edit? "
+msgstr " Ямар файл цэсийг засварлахыг хүсч байна вэ? "
+
+msgid "&Local"
+msgstr "&Локал"
+
 msgid " Load "
 msgstr " Ачаалах "
 
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " Блок том байна, та саяын йлдэлийг буцаахад биелэхгүй байж болох юм. "
 
-msgid "O&ne"
-msgstr "&Нэг"
-
-msgid "A&ll"
-msgstr "&Бүгд"
-
-msgid "&Skip"
-msgstr "&Алгасах"
-
-msgid "&Replace"
+#, fuzzy
+msgid "Replace"
 msgstr "&Солих"
-
-msgid " Replace with: "
-msgstr " Цуг солих: "
-
-msgid " Confirm replace "
-msgstr " Солихыг баталгаажуулах "
-
-msgid "scanf &Expression"
-msgstr "Бичиглэл &scanf"
-
-msgid "replace &All"
-msgstr "Бүгдийг &солих"
-
-msgid "pro&Mpt on replace"
-msgstr "Солилцоог &бататгах"
-
-msgid "&Backwards"
-msgstr "&Буцах"
-
-msgid "&Regular expression"
-msgstr "&Тогтмол илэрхийлэл"
-
-msgid "&Whole words only"
-msgstr "Зөвхөн &бүтэн үгнүүд"
-
-msgid "case &Sensitive"
-msgstr "Учет ре&гистра"
-
-msgid " Enter replacement argument order eg. 3,2,1,4 "
-msgstr " Солигдох утгуудын дарааллыг оруул, жишээ нь. 3,2,1,4 "
-
-msgid " Enter replacement string:"
-msgstr " Солигдох текстийг оруул: "
-
-msgid " Enter search string:"
-msgstr " Хайх үгээ оруул:"
 
 msgid " Replace "
 msgstr " Солих "
 
-msgid "Search"
-msgstr "Хайх"
-
-#, fuzzy
-msgid ""
-" Invalid regular expression, or scanf expression with too many conversions "
-msgstr " Буруу тогтмол илэрхийлэл эсвэл scanf-илэрхийлэлд олон хөрвүүэл байна"
-
-msgid " Error in replacement format string. "
-msgstr " Солигдох текстийн хэлбэр алдаатай байна. "
-
-#, fuzzy
-msgid " Replacement too long. "
-msgstr " Солигдох текстийг оруул: "
-
 #, c-format
 msgid " %ld replacements made. "
 msgstr " %ld нь солигдсон байна"
-
-msgid " Search string not found "
-msgstr " Хайсан г алга байна "
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " %d н хайлт дуусч, %d н хавчуулага нэмэгдэв "
 
 msgid "Quit"
 msgstr "Гарах"
@@ -368,6 +327,51 @@ msgstr " Дурын товч дарна уу: "
 msgid " Execute Macro "
 msgstr " Макрог гүйцэтгэх "
 
+msgid "pro&Mpt on replace"
+msgstr "Солилцоог &бататгах"
+
+msgid "replace &All"
+msgstr "Бүгдийг &солих"
+
+msgid "All charsets"
+msgstr ""
+
+msgid "&Backwards"
+msgstr "&Буцах"
+
+msgid "case &Sensitive"
+msgstr "Учет ре&гистра"
+
+msgid " Enter replacement string:"
+msgstr " Солигдох текстийг оруул: "
+
+msgid " Enter search string:"
+msgstr " Хайх үгээ оруул:"
+
+msgid "Cancel"
+msgstr "Болих"
+
+msgid "O&ne"
+msgstr "&Нэг"
+
+msgid "A&ll"
+msgstr "&Бүгд"
+
+msgid "&Skip"
+msgstr "&Алгасах"
+
+msgid "&Replace"
+msgstr "&Солих"
+
+msgid " Replace with: "
+msgstr " Цуг солих: "
+
+msgid " Confirm replace "
+msgstr " Солихыг баталгаажуулах "
+
+msgid "&Dismiss"
+msgstr "&Хаах"
+
 msgid " Emacs key: "
 msgstr " Emacs-ийн товчлуурууд: "
 
@@ -440,32 +444,79 @@ msgstr "&Шинэ файл         C-x k"
 msgid "Copy to &file...     "
 msgstr "Файл руу &хуулах..."
 
-msgid "&Toggle Mark       F3"
+#, fuzzy
+msgid "&Toggle mark                 F3"
 msgstr "Блокыг &тэмдэглэх          F3"
 
-msgid "&Mark Columns    S-F3"
+#, fuzzy
+msgid "Mar&k columns              S-F3"
 msgstr "Багануудыг &ялгах     S-F3"
 
-msgid "Toggle &ins/overw Ins"
+#, fuzzy
+msgid "Toggle &ins/overw           Ins"
 msgstr "&Оруул/соли горим Ins"
 
-msgid "&Copy              F5"
-msgstr "Блокыг &хуулах        F5"
+#, fuzzy
+msgid "&Copy                        F5"
+msgstr "&Хуулах           F5"
 
-msgid "&Move              F6"
+#, fuzzy
+msgid "&Move                        F6"
 msgstr "Блокыг &зөөх       F6"
 
-msgid "&Delete            F8"
-msgstr "Блокыг &устгах           F8"
+#, fuzzy
+msgid "&Delete                      F8"
+msgstr "&Устгах           F8"
 
-msgid "&Undo             C-u"
+#, fuzzy
+msgid "C&opy to clipfile         C-Ins"
+msgstr "Файл руу &хуулах..."
+
+#, fuzzy
+msgid "C&ut to clipfile          S-Del"
+msgstr "&Мөр луу очих...        M-l"
+
+msgid "&Paste from clipfile      S-Ins"
+msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "Блокыг &тэмдэглэх          F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "&Шинэ файл           C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "&Эрэмбэлэлт...              M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "&Шуудан..."
+
+#, fuzzy
+msgid "&Undo                       C-u"
 msgstr "&Буцаах                C-u"
 
-msgid "&Beginning     C-PgUp"
+#, fuzzy
+msgid "&Beginning               C-PgUp"
 msgstr "Файлын &эхлэлд очих       C-PgUp"
 
-msgid "&End           C-PgDn"
+#, fuzzy
+msgid "&End                     C-PgDn"
 msgstr "Файлын &төгсгөл        C-PgDn"
+
+#, fuzzy
+msgid "C&opy to clipfile           M-w"
+msgstr "&Мөр луу очих...        M-l"
+
+#, fuzzy
+msgid "C&ut to clipfile            C-w"
+msgstr "&Мөр луу очих...        M-l"
+
+msgid "&Paste from clipfile        C-y"
+msgstr ""
 
 msgid "&Search...         F7"
 msgstr "&Хайх...          F7"
@@ -479,8 +530,25 @@ msgstr "&Солих...         F4"
 msgid "&Go to line...            M-l"
 msgstr "&Мөр луу очих...        M-l"
 
+#, fuzzy
+msgid "Toggle li&ne state        M-n"
+msgstr "Блокыг &тэмдэглэх          F3"
+
 msgid "Go to matching &bracket   M-b"
 msgstr "Хос &хаалтууд руу очих    M-b"
+
+msgid "Find declaration      A-Enter"
+msgstr ""
+
+msgid "Back from declaration     M--"
+msgstr ""
+
+msgid "Forward to declaration    M-+"
+msgstr ""
+
+#, fuzzy
+msgid "Encod&ing...             C-t"
+msgstr "&Эрэмбэлэлт...              M-t"
 
 msgid "Insert &literal...       C-q"
 msgstr "&Литерал оруулах...        C-q"
@@ -542,7 +610,15 @@ msgid "Syntax &Highlighting..."
 msgstr "&өгүүлбэрзүйг өнгөөр тодотгох"
 
 #, fuzzy
-msgid "Save setu&p..."
+msgid "S&yntax file"
+msgstr "Файлын синтаксийг засварлах"
+
+#, fuzzy
+msgid "&Menu file"
+msgstr "Файл &цэс"
+
+#, fuzzy
+msgid "Save setu&p"
 msgstr "&Тохиргоо хадгалах"
 
 msgid " File "
@@ -584,6 +660,10 @@ msgstr "Таслагдах мөрийн урт:"
 
 msgid "Tab spacing: "
 msgstr "Таб зогсолт: "
+
+#, fuzzy
+msgid "Pers&istent selection"
+msgstr "Тэмдэглэгдсэнг &эсрэгээр болгох  М *"
 
 msgid "Synta&x highlighting"
 msgstr "&өгүүлбэрзүйг өнгөөр тодотгох"
@@ -819,6 +899,10 @@ msgstr " Баталгаажуулж &устгах "
 
 msgid " Confirmation "
 msgstr " Баталгаажуулалт "
+
+#, fuzzy
+msgid "UTF-8 output"
+msgstr "Гүйцэт 8-бит гаралт"
 
 msgid "Full 8 bits output"
 msgstr "Гүйцэт 8-бит гаралт"
@@ -1061,8 +1145,16 @@ msgstr " Шүүлтүүр "
 msgid " Set expression for filtering filenames"
 msgstr " Шүүж буй файлын нэрүүдийн илэрхийлэлийг өгнө үү "
 
-msgid "  Malformed regular expression  "
-msgstr "  Тогтмол илэрхийлэл буруу тэмдэглэгдсэн байна  "
+msgid "&Using shell patterns"
+msgstr "&Метатэмдэгт shell г хэрэглэх"
+
+#, fuzzy
+msgid "&Case sensitive"
+msgstr "Учет ре&гистра"
+
+#, fuzzy
+msgid "&Files only"
+msgstr "Зөвхөн &хэмжээ"
 
 msgid " Select "
 msgstr " Сонгох "
@@ -1075,27 +1167,6 @@ msgstr " Засварлагдах файлын өргөтгөл "
 
 msgid " Which extension file you want to edit? "
 msgstr " Ямар өргөтөлтэй файлыг засварлахыг хүсч байна вэ? "
-
-msgid "&User"
-msgstr "&Хэрэглэгч"
-
-msgid "&System Wide"
-msgstr "&Систем"
-
-msgid " Menu edit "
-msgstr " Файл засварлагч Цэс "
-
-msgid " Which menu file do you want to edit? "
-msgstr " Ямар файл цэсийг засварлахыг хүсч байна вэ? "
-
-msgid "&Local"
-msgstr "&Локал"
-
-msgid "Syntax file edit"
-msgstr "Файлын синтаксийг засварлах"
-
-msgid " Which syntax file you want to edit? "
-msgstr " Ямар файл синтаксийг засварлахыг хүсч байна вэ? "
 
 msgid " Compare directories "
 msgstr " Хавтасуудыг харьцуулах "
@@ -1114,12 +1185,6 @@ msgstr "&Хагас байтын"
 
 msgid " Both panels should be in the listing mode to use this command "
 msgstr "Энэ коммандыг 2 панелийг жагсаалтын горимд оруулахад хэрэглэнэ "
-
-msgid " The command history is empty "
-msgstr " Командын бүртгэл хоосон байна "
-
-msgid " Command history "
-msgstr " Командын бүртгэл "
 
 msgid ""
 " Not an xterm or Linux console; \n"
@@ -1296,9 +1361,6 @@ msgstr " Зөөх "
 
 msgid " Delete "
 msgstr " Устгах "
-
-msgid " Invalid target mask "
-msgstr " Алдаатай шаблон маск "
 
 msgid " Cannot make the hardlink "
 msgstr " Хард холбоосыг үүсгэж чадсангүй "
@@ -1574,6 +1636,10 @@ msgstr ""
 " \"%s\" лавлахыг устгаж чадахгүй \n"
 " %s "
 
+#, fuzzy
+msgid "Directory scanning"
+msgstr " Лавлахын зам"
+
 msgid "1Copy"
 msgstr "1Хуулах"
 
@@ -1733,9 +1799,6 @@ msgstr "&Холбоосуудыг дагах"
 msgid "to:"
 msgstr "руу:"
 
-msgid "&Using shell patterns"
-msgstr "&Метатэмдэгт shell г хэрэглэх"
-
 msgid "&Background"
 msgstr " &Ар тал"
 
@@ -1745,10 +1808,8 @@ msgstr "&Тэмдэгт холбоосыг хадгалах"
 msgid "&Dive into subdir if exists"
 msgstr "&Хавтас дотор үүссэн бол"
 
-#, c-format
-msgid ""
-"Invalid source pattern `%s' \n"
-" %s "
+#, fuzzy, c-format
+msgid "Invalid source pattern `%s'"
 msgstr ""
 "Буруу жишээ \"%s\" \n"
 " %s "
@@ -1777,26 +1838,54 @@ msgstr "&Харах - F3"
 msgid "&Edit - F4"
 msgstr "&Засах - F4"
 
+#, c-format
+msgid "Found: %ld"
+msgstr ""
+
+#, fuzzy
+msgid " Malformed regular expression "
+msgstr "  Тогтмол илэрхийлэл буруу тэмдэглэгдсэн байна  "
+
+#, fuzzy
+msgid "Cas&e sensitive"
+msgstr "Учет ре&гистра"
+
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "Учет ре&гистра"
+
 msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "Start at:"
-msgstr "Эхлэх цэг:"
+msgid "&All charsets"
+msgstr ""
 
-msgid "Filename:"
-msgstr "Файл нэр:"
+msgid "All cha&rsets"
+msgstr ""
 
-msgid "Content: "
-msgstr "Агуулга:"
+#, fuzzy
+msgid "Re&gular expression"
+msgstr "&Тогтмол илэрхийлэл"
 
 msgid "&Tree"
 msgstr "&Мод"
 
 msgid "Find File"
 msgstr "Файл хайх"
+
+#, fuzzy
+msgid "Content:"
+msgstr "Агуулга:"
+
+#, fuzzy
+msgid "File name:"
+msgstr "Файл нэр:"
+
+msgid "Start at:"
+msgstr "Эхлэх цэг:"
 
 #, c-format
 msgid "Grepping in %s"
@@ -2161,6 +2250,9 @@ msgstr "Эрэмбэлэх &дараалал..."
 msgid "&Filter..."
 msgstr "&Шүүлт..."
 
+msgid "&Encoding...    C-t"
+msgstr ""
+
 msgid "&Network link..."
 msgstr "&Сүлжээний холбоос..."
 
@@ -2175,9 +2267,6 @@ msgstr "SM&B-холбоос..."
 
 msgid "&Rescan         C-r"
 msgstr "&Дахин харах         C-r"
-
-msgid "&User menu          F2"
-msgstr "&Хэрэглэгчийн цэс     F2"
 
 msgid "&View               F3"
 msgstr "&Харах        F3"
@@ -2236,6 +2325,9 @@ msgstr "Тэмдэглэгдсэнг &эсрэгээр болгох  М *"
 msgid "e&Xit              F10"
 msgstr "Га&рах              F10"
 
+msgid "&User menu          F2"
+msgstr "&Хэрэглэгчийн цэс     F2"
+
 msgid "&Directory tree"
 msgstr "&Хавтас мод"
 
@@ -2257,8 +2349,9 @@ msgstr "&Гадаад панел хийх  C-x !"
 msgid "show directory s&Izes"
 msgstr "&Хавтасны хэмжээг харуулах"
 
-msgid "command &History"
-msgstr "&Командын бүртгэл"
+#, fuzzy
+msgid "Command &history      M-h"
+msgstr " Командын бүртгэл "
 
 msgid "di&Rectory hotlist    C-\\"
 msgstr "&Хавтасны лавлах  C-\\"
@@ -2280,12 +2373,6 @@ msgstr "Файлын &өргөтгөл"
 
 msgid "Edit &menu file"
 msgstr "Файл &цэс"
-
-msgid "Edit edi&tor menu file"
-msgstr "Цэс &засварлагч файлыг засах"
-
-msgid "Edit &syntax file"
-msgstr "&Файл синтакс засварлах"
 
 msgid "&Configuration..."
 msgstr "&Тохиргоо..."
@@ -2348,6 +2435,22 @@ msgstr "Цэс"
 msgid "The TERM environment variable is unset!\n"
 msgstr "TERM хувьсагч утга аваагүй байна!\n"
 
+msgid "&Fix it"
+msgstr ""
+
+msgid "don't ask again"
+msgstr ""
+
+msgid ""
+"Chosen display charset (Settings->Display bits)\n"
+"or source codeset (in mcedit ctrl-t) \n"
+"does not match one set via locale. \n"
+"Set correct codeset manually or press <<Fix it>> \n"
+"to set locale default.\n"
+"\n"
+"Or set 'don't ask again' and press <<Skip>>"
+msgstr ""
+
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander, хувилбар %s\n"
@@ -2382,16 +2485,8 @@ msgid ""
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
 "   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked\n"
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
 msgstr ""
 "--colors {ТҮЛХҮҮР ҮГ}={ТЕКСТ},{ФОН}\n"
 "\n"
@@ -2411,6 +2506,18 @@ msgstr ""
 "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
 "   brightcyan, lightgray, white\n"
 "\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
 
 msgid "Displays this help message"
 msgstr "Уг тусламжын захиаг харуулах"
@@ -2471,6 +2578,10 @@ msgstr "Файл харагчыг ажиллуулах"
 
 msgid "Edits one file"
 msgstr "Нэг файл засах"
+
+#, fuzzy, c-format
+msgid "Cannot create %s directory"
+msgstr "Хавтас руу шилжиж чадсангүй"
 
 msgid "safe de&Lete"
 msgstr "Аваарын &устгалт"
@@ -2689,20 +2800,35 @@ msgstr "Зөөх"
 msgid "Mkdir"
 msgstr "ШинэХавт"
 
-msgid " Choose input codepage "
+msgid " Not implemented yet "
+msgstr ""
+
+msgid " Num of replace tokens not equal to num of found tokens "
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Invalid token number %d "
+msgstr " Алдаатай шаблон маск "
+
+#, fuzzy
+msgid "Normal"
+msgstr "Формат"
+
+msgid "&Regular expression"
+msgstr "&Тогтмол илэрхийлэл"
+
+msgid "Hexadecimal"
+msgstr ""
+
+msgid "Wildcard search"
+msgstr ""
+
+#, fuzzy
+msgid "Choose codepage"
 msgstr " Оролтын кодлогч хуудасаа сонгоно уу "
 
 msgid "-  < No translation >"
 msgstr "-  < Хөрвүүлэгдэхгүй >"
-
-msgid ""
-"To use this feature select your codepage in\n"
-"Setup / Display Bits dialog!\n"
-"Do not forget to save options."
-msgstr ""
-"Дараа үүнийг хэрэглэхдээ өөрийн кодлогч хуудасны \n"
-"цэснээс \"Тохиргоо / Бит цонхыг дүрслэх\" гэж сонгоорой...!\n"
-"Хадгалагдах тохиргоог бүү мартаарай."
 
 #, c-format
 msgid ""
@@ -2739,6 +2865,10 @@ msgid "with terminfo database"
 msgstr " terminfo баазын хамт"
 
 msgid "Using the ncurses library"
+msgstr " ncurses санг хэрэглэх"
+
+#, fuzzy
+msgid "Using the ncursesw library"
 msgstr " ncurses санг хэрэглэх"
 
 msgid "With optional subshell support"
@@ -2861,11 +2991,19 @@ msgstr " Тохирох бичлэг олдсонгүй %s"
 msgid " User menu "
 msgstr " Хэрэглэгчийн цэс "
 
-msgid "%b %e %H:%M"
+#, fuzzy
+msgid "%b %d %H:%M"
 msgstr "%b %e %H:%M"
+
+#, fuzzy
+msgid "%b %d %Y"
+msgstr "%b %e  %Y"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -2956,24 +3094,16 @@ msgid ""
 " %s "
 msgstr " Файлыг хадгалж чадсангүй "
 
-msgid "Invalid hex search expression"
-msgstr "Хайхад боломжгүй илэрхийлэл байна"
-
-msgid " Invalid regular expression "
-msgstr " Буруу тогтмол илэрхийлэл "
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" The current line number is %d.\n"
+" The current line number is %lu.\n"
 " Enter the new line number:"
 msgstr ""
 " Одоогийн мөрийн дугаар %d.\n"
 " Шинэ мөрийн дугаараа оруул:"
 
-#, c-format
-msgid ""
-" The current address is 0x%lx.\n"
-" Enter the new address:"
+#, fuzzy
+msgid " The current address is 0x%08"
 msgstr ""
 " Одоогийн хаяг - 0x%lx.\n"
 " Шинэ хаягаа оруул:"
@@ -2985,25 +3115,10 @@ msgstr " Хаяг руу очих "
 msgid " Invalid address "
 msgstr " Буруу нууц үг "
 
-msgid " Enter regexp:"
-msgstr " Тогмол илэрхийлэлээ оруул:"
-
 msgid "ButtonBar|Help"
 msgstr ""
 
 msgid "ButtonBar|Quit"
-msgstr ""
-
-msgid "ButtonBar|Ascii"
-msgstr ""
-
-msgid "ButtonBar|Hex"
-msgstr ""
-
-msgid "ButtonBar|Goto"
-msgstr ""
-
-msgid "ButtonBar|Line"
 msgstr ""
 
 msgid "ButtonBar|View"
@@ -3013,33 +3128,6 @@ msgid "ButtonBar|Edit"
 msgstr ""
 
 msgid "ButtonBar|Save"
-msgstr ""
-
-msgid "ButtonBar|UnWrap"
-msgstr ""
-
-msgid "ButtonBar|Wrap"
-msgstr ""
-
-msgid "ButtonBar|RxSrch"
-msgstr ""
-
-msgid "ButtonBar|HxSrch"
-msgstr ""
-
-msgid "ButtonBar|Search"
-msgstr ""
-
-msgid "ButtonBar|Raw"
-msgstr ""
-
-msgid "ButtonBar|Parse"
-msgstr ""
-
-msgid "ButtonBar|Unform"
-msgstr ""
-
-msgid "ButtonBar|Format"
 msgstr ""
 
 msgid " History "
@@ -3622,6 +3710,69 @@ msgstr "Дотоод алдаа:"
 msgid "Changes to file lost"
 msgstr "Файлын өөрчлөлт алга байна"
 
+#~ msgid "scanf &Expression"
+#~ msgstr "Бичиглэл &scanf"
+
+#~ msgid "&Whole words only"
+#~ msgstr "Зөвхөн &бүтэн үгнүүд"
+
+#~ msgid " Enter replacement argument order eg. 3,2,1,4 "
+#~ msgstr " Солигдох утгуудын дарааллыг оруул, жишээ нь. 3,2,1,4 "
+
+#, fuzzy
+#~ msgid ""
+#~ " Invalid regular expression, or scanf expression with too many "
+#~ "conversions "
+#~ msgstr ""
+#~ " Буруу тогтмол илэрхийлэл эсвэл scanf-илэрхийлэлд олон хөрвүүэл байна"
+
+#~ msgid " Error in replacement format string. "
+#~ msgstr " Солигдох текстийн хэлбэр алдаатай байна. "
+
+#, fuzzy
+#~ msgid " Replacement too long. "
+#~ msgstr " Солигдох текстийг оруул: "
+
+#~ msgid "&Copy              F5"
+#~ msgstr "Блокыг &хуулах        F5"
+
+#~ msgid "&Delete            F8"
+#~ msgstr "Блокыг &устгах           F8"
+
+#, fuzzy
+#~ msgid "Save setu&p..."
+#~ msgstr "&Тохиргоо хадгалах"
+
+#~ msgid " The command history is empty "
+#~ msgstr " Командын бүртгэл хоосон байна "
+
+#~ msgid "command &History"
+#~ msgstr "&Командын бүртгэл"
+
+#~ msgid "Edit edi&tor menu file"
+#~ msgstr "Цэс &засварлагч файлыг засах"
+
+#~ msgid "Edit &syntax file"
+#~ msgstr "&Файл синтакс засварлах"
+
+#~ msgid ""
+#~ "To use this feature select your codepage in\n"
+#~ "Setup / Display Bits dialog!\n"
+#~ "Do not forget to save options."
+#~ msgstr ""
+#~ "Дараа үүнийг хэрэглэхдээ өөрийн кодлогч хуудасны \n"
+#~ "цэснээс \"Тохиргоо / Бит цонхыг дүрслэх\" гэж сонгоорой...!\n"
+#~ "Хадгалагдах тохиргоог бүү мартаарай."
+
+#~ msgid "Invalid hex search expression"
+#~ msgstr "Хайхад боломжгүй илэрхийлэл байна"
+
+#~ msgid " Invalid regular expression "
+#~ msgstr " Буруу тогтмол илэрхийлэл "
+
+#~ msgid " Enter regexp:"
+#~ msgstr " Тогмол илэрхийлэлээ оруул:"
+
 #~ msgid "Using included S-Lang library"
 #~ msgstr " S-Lang санг агуулсаныг хэрэглэх"
 
@@ -3745,9 +3896,6 @@ msgstr "Файлын өөрчлөлт алга байна"
 
 #~ msgid "Unform"
 #~ msgstr "ФормБус"
-
-#~ msgid "Format"
-#~ msgstr "Формат"
 
 #~ msgid "User menu available only in mcedit invoked from mc"
 #~ msgstr "Хэрэглэгчийн цэс нь зөвхөн mc гээс дуудагдсан mcedit д боломжтой"

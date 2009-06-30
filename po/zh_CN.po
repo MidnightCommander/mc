@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-14 19:43+0000\n"
+"POT-Creation-Date: 2009-06-30 19:39+0200\n"
 "PO-Revision-Date: 2002-01-29 22:05+0800\n"
 "Last-Translator: Wang Jian <lark@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -55,8 +55,15 @@ msgstr " 文件太大："
 msgid "Macro recursion is too deep"
 msgstr ""
 
-msgid "&Dismiss"
-msgstr "取消(&D)"
+msgid "Search"
+msgstr "搜索"
+
+#, c-format
+msgid " %d items found, %d bookmarks added "
+msgstr " 找到 %d 匹配项，添加了 %d 个书签 "
+
+msgid " Search string not found "
+msgstr " 没有找到要搜索的字符串 "
 
 msgid "Warning"
 msgstr "警告"
@@ -117,9 +124,6 @@ msgstr "覆盖"
 msgid " Cannot save file. "
 msgstr " 保存文件时发生错误。"
 
-msgid "Cancel"
-msgstr "取消"
-
 msgid " Delete macro "
 msgstr " 删除宏 "
 
@@ -164,87 +168,45 @@ msgstr ""
 msgid "C&ontinue"
 msgstr "继续"
 
+#, fuzzy
+msgid "Syntax file edit"
+msgstr "菜单文件编辑(&M)"
+
+#, fuzzy
+msgid " Which syntax file you want to edit? "
+msgstr " 您要编辑哪个扩展文件？ "
+
+msgid "&User"
+msgstr "用户(&U)"
+
+msgid "&System Wide"
+msgstr "系统范围(&S)"
+
+msgid " Menu edit "
+msgstr " 菜单编辑 "
+
+msgid " Which menu file do you want to edit? "
+msgstr " 您要编辑哪个菜单文件？ "
+
+msgid "&Local"
+msgstr "本地(&L)"
+
 msgid " Load "
 msgstr " 加载 "
 
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " 块过大，您可能无法撤消这个动作。"
 
-msgid "O&ne"
-msgstr "一个(&N)"
-
-msgid "A&ll"
-msgstr "全部(&L)"
-
-msgid "&Skip"
-msgstr "跳过(&S)"
-
-msgid "&Replace"
+#, fuzzy
+msgid "Replace"
 msgstr "替换(&R)"
-
-msgid " Replace with: "
-msgstr " 替换为："
-
-msgid " Confirm replace "
-msgstr " 确认替换 "
-
-msgid "scanf &Expression"
-msgstr "scanf 表达式(&E)"
-
-msgid "replace &All"
-msgstr "全部替换(&A)"
-
-msgid "pro&Mpt on replace"
-msgstr "替换时提示(&O)"
-
-msgid "&Backwards"
-msgstr "向上(&B)"
-
-msgid "&Regular expression"
-msgstr "正则表达式(&R)"
-
-msgid "&Whole words only"
-msgstr "仅整词(&W)"
-
-msgid "case &Sensitive"
-msgstr "大小写敏感(&S)"
-
-msgid " Enter replacement argument order eg. 3,2,1,4 "
-msgstr " 输入替换参数的顺序，例如 3,2,1,4 "
-
-msgid " Enter replacement string:"
-msgstr " 输入替换字符串："
-
-msgid " Enter search string:"
-msgstr " 输入查找字符串："
 
 msgid " Replace "
 msgstr " 替换 "
 
-msgid "Search"
-msgstr "搜索"
-
-msgid ""
-" Invalid regular expression, or scanf expression with too many conversions "
-msgstr " 无效的正则表达式，或者有太多转换符的 scanf 表达式 "
-
-msgid " Error in replacement format string. "
-msgstr " 在替换格式串中有错误。"
-
-#, fuzzy
-msgid " Replacement too long. "
-msgstr " 输入替换字符串："
-
 #, c-format
 msgid " %ld replacements made. "
 msgstr " 替换了 %ld 处。"
-
-msgid " Search string not found "
-msgstr " 没有找到要搜索的字符串 "
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " 找到 %d 匹配项，添加了 %d 个书签 "
 
 msgid "Quit"
 msgstr "退出"
@@ -362,6 +324,51 @@ msgstr " 按下任意键："
 msgid " Execute Macro "
 msgstr " 执行宏 "
 
+msgid "pro&Mpt on replace"
+msgstr "替换时提示(&O)"
+
+msgid "replace &All"
+msgstr "全部替换(&A)"
+
+msgid "All charsets"
+msgstr ""
+
+msgid "&Backwards"
+msgstr "向上(&B)"
+
+msgid "case &Sensitive"
+msgstr "大小写敏感(&S)"
+
+msgid " Enter replacement string:"
+msgstr " 输入替换字符串："
+
+msgid " Enter search string:"
+msgstr " 输入查找字符串："
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "O&ne"
+msgstr "一个(&N)"
+
+msgid "A&ll"
+msgstr "全部(&L)"
+
+msgid "&Skip"
+msgstr "跳过(&S)"
+
+msgid "&Replace"
+msgstr "替换(&R)"
+
+msgid " Replace with: "
+msgstr " 替换为："
+
+msgid " Confirm replace "
+msgstr " 确认替换 "
+
+msgid "&Dismiss"
+msgstr "取消(&D)"
+
 msgid " Emacs key: "
 msgstr " Emacs 键："
 
@@ -434,32 +441,79 @@ msgstr "新建(&N)        C-x k"
 msgid "Copy to &file...     "
 msgstr "复制到文件(&F)...    "
 
-msgid "&Toggle Mark       F3"
+#, fuzzy
+msgid "&Toggle mark                 F3"
 msgstr "翻转标记(&T)       F3"
 
-msgid "&Mark Columns    S-F3"
+#, fuzzy
+msgid "Mar&k columns              S-F3"
 msgstr "标记列(&M)       S-F3"
 
-msgid "Toggle &ins/overw Ins"
+#, fuzzy
+msgid "Toggle &ins/overw           Ins"
 msgstr "翻转插入/覆盖(&I) Ins"
 
-msgid "&Copy              F5"
-msgstr "复制(&C)           F5"
+#, fuzzy
+msgid "&Copy                        F5"
+msgstr "复制(&C)              F5"
 
-msgid "&Move              F6"
+#, fuzzy
+msgid "&Move                        F6"
 msgstr "移动(&M)           F6"
 
-msgid "&Delete            F8"
-msgstr "删除(&D)           F8"
+#, fuzzy
+msgid "&Delete                      F8"
+msgstr "删除(&D)              F8"
 
-msgid "&Undo             C-u"
+#, fuzzy
+msgid "C&opy to clipfile         C-Ins"
+msgstr "复制到文件(&F)...    "
+
+#, fuzzy
+msgid "C&ut to clipfile          S-Del"
+msgstr "转到行(&G)...           M-l"
+
+msgid "&Paste from clipfile      S-Ins"
+msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "翻转标记(&T)       F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "新建(&N)         C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "排序(&T)...             M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "邮寄(&M)...                 "
+
+#, fuzzy
+msgid "&Undo                       C-u"
 msgstr "撤消(&U)          C-u"
 
-msgid "&Beginning     C-PgUp"
+#, fuzzy
+msgid "&Beginning               C-PgUp"
 msgstr "开始(&B)       C-PgUp"
 
-msgid "&End           C-PgDn"
+#, fuzzy
+msgid "&End                     C-PgDn"
 msgstr "结尾(&E)       C-PgDn"
+
+#, fuzzy
+msgid "C&opy to clipfile           M-w"
+msgstr "转到行(&G)...           M-l"
+
+#, fuzzy
+msgid "C&ut to clipfile            C-w"
+msgstr "转到行(&G)...           M-l"
+
+msgid "&Paste from clipfile        C-y"
+msgstr ""
 
 msgid "&Search...         F7"
 msgstr "查找(&S)...        F7"
@@ -473,8 +527,25 @@ msgstr "替换(&R)...        F4"
 msgid "&Go to line...            M-l"
 msgstr "转到行(&G)...           M-l"
 
+#, fuzzy
+msgid "Toggle li&ne state        M-n"
+msgstr "翻转标记(&T)       F3"
+
 msgid "Go to matching &bracket   M-b"
 msgstr "转到对应的括号(&B)      M-b"
+
+msgid "Find declaration      A-Enter"
+msgstr ""
+
+msgid "Back from declaration     M--"
+msgstr ""
+
+msgid "Forward to declaration    M-+"
+msgstr ""
+
+#, fuzzy
+msgid "Encod&ing...             C-t"
+msgstr "排序(&T)...             M-t"
 
 msgid "Insert &literal...       C-q"
 msgstr "字面插入(&L)...         C-q"
@@ -536,7 +607,15 @@ msgid "Syntax &Highlighting..."
 msgstr "语法突出显示(&X)"
 
 #, fuzzy
-msgid "Save setu&p..."
+msgid "S&yntax file"
+msgstr "菜单文件编辑(&M)"
+
+#, fuzzy
+msgid "&Menu file"
+msgstr "菜单文件编辑(&M)"
+
+#, fuzzy
+msgid "Save setu&p"
 msgstr "保存设置(&S)"
 
 msgid " File "
@@ -578,6 +657,10 @@ msgstr "换行位置："
 
 msgid "Tab spacing: "
 msgstr "制表位间距："
+
+#, fuzzy
+msgid "Pers&istent selection"
+msgstr "反转选择(&T)         M-*"
 
 msgid "Synta&x highlighting"
 msgstr "语法突出显示(&X)"
@@ -812,6 +895,10 @@ msgstr " 删除时确认(&D) "
 
 msgid " Confirmation "
 msgstr " 确认 "
+
+#, fuzzy
+msgid "UTF-8 output"
+msgstr "8 位输出"
 
 msgid "Full 8 bits output"
 msgstr "8 位输出"
@@ -1055,8 +1142,16 @@ msgstr " 过滤 "
 msgid " Set expression for filtering filenames"
 msgstr " 设置过滤文件名的表达式 "
 
-msgid "  Malformed regular expression  "
-msgstr "  不正确的正则表达式 "
+msgid "&Using shell patterns"
+msgstr "使用 shell 模式(&U)"
+
+#, fuzzy
+msgid "&Case sensitive"
+msgstr "大小写敏感(&T)"
+
+#, fuzzy
+msgid "&Files only"
+msgstr "仅大小(&S)"
 
 msgid " Select "
 msgstr " 选择 "
@@ -1068,29 +1163,6 @@ msgid "Extension file edit"
 msgstr "扩展文件编辑"
 
 msgid " Which extension file you want to edit? "
-msgstr " 您要编辑哪个扩展文件？ "
-
-msgid "&User"
-msgstr "用户(&U)"
-
-msgid "&System Wide"
-msgstr "系统范围(&S)"
-
-msgid " Menu edit "
-msgstr " 菜单编辑 "
-
-msgid " Which menu file do you want to edit? "
-msgstr " 您要编辑哪个菜单文件？ "
-
-msgid "&Local"
-msgstr "本地(&L)"
-
-#, fuzzy
-msgid "Syntax file edit"
-msgstr "菜单文件编辑(&M)"
-
-#, fuzzy
-msgid " Which syntax file you want to edit? "
 msgstr " 您要编辑哪个扩展文件？ "
 
 msgid " Compare directories "
@@ -1110,12 +1182,6 @@ msgstr "仔细(&T)"
 
 msgid " Both panels should be in the listing mode to use this command "
 msgstr " 要使用该命令，两个面板必需都是列表视图模式 "
-
-msgid " The command history is empty "
-msgstr " 命令历史是空的 "
-
-msgid " Command history "
-msgstr " 命令历史 "
 
 msgid ""
 " Not an xterm or Linux console; \n"
@@ -1290,9 +1356,6 @@ msgstr " 移动 "
 
 msgid " Delete "
 msgstr " 删除 "
-
-msgid " Invalid target mask "
-msgstr " 无效的目标掩码 "
 
 msgid " Cannot make the hardlink "
 msgstr " 无法创建硬链接 "
@@ -1568,6 +1631,10 @@ msgstr ""
 " 无法删除目录“%s” \n"
 " %s "
 
+#, fuzzy
+msgid "Directory scanning"
+msgstr "目录路径"
+
 msgid "1Copy"
 msgstr "1复制"
 
@@ -1726,9 +1793,6 @@ msgstr "跟随链接(&L)"
 msgid "to:"
 msgstr "至："
 
-msgid "&Using shell patterns"
-msgstr "使用 shell 模式(&U)"
-
 msgid "&Background"
 msgstr "后台(&B)"
 
@@ -1738,10 +1802,8 @@ msgstr "稳定符号链接(&S)"
 msgid "&Dive into subdir if exists"
 msgstr "如果有子目录则进入(&D)"
 
-#, c-format
-msgid ""
-"Invalid source pattern `%s' \n"
-" %s "
+#, fuzzy, c-format
+msgid "Invalid source pattern `%s'"
 msgstr ""
 "无效的源模式“%s”\n"
 " %s "
@@ -1770,26 +1832,54 @@ msgstr "查看(&V) - F3"
 msgid "&Edit - F4"
 msgstr "编辑(&E) - F4"
 
+#, c-format
+msgid "Found: %ld"
+msgstr ""
+
+#, fuzzy
+msgid " Malformed regular expression "
+msgstr "  不正确的正则表达式 "
+
+#, fuzzy
+msgid "Cas&e sensitive"
+msgstr "大小写敏感(&T)"
+
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "大小写敏感(&T)"
+
 msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "Start at:"
-msgstr "开始于："
+msgid "&All charsets"
+msgstr ""
 
-msgid "Filename:"
-msgstr "文件名："
+msgid "All cha&rsets"
+msgstr ""
 
-msgid "Content: "
-msgstr "内容："
+#, fuzzy
+msgid "Re&gular expression"
+msgstr "正则表达式(&R)"
 
 msgid "&Tree"
 msgstr "树(&T)"
 
 msgid "Find File"
 msgstr "搜索文件"
+
+#, fuzzy
+msgid "Content:"
+msgstr "内容："
+
+#, fuzzy
+msgid "File name:"
+msgstr "文件名："
+
+msgid "Start at:"
+msgstr "开始于："
 
 #, c-format
 msgid "Grepping in %s"
@@ -2145,6 +2235,9 @@ msgstr "排序(&S)..."
 msgid "&Filter..."
 msgstr "过滤(&F)..."
 
+msgid "&Encoding...    C-t"
+msgstr ""
+
 msgid "&Network link..."
 msgstr "网络链接(&N)..."
 
@@ -2160,9 +2253,6 @@ msgstr "SMB 链接(&B)..."
 
 msgid "&Rescan         C-r"
 msgstr "重新扫描(&R)   C-r"
-
-msgid "&User menu          F2"
-msgstr "用户菜单(&U)          F2"
 
 msgid "&View               F3"
 msgstr "查看(&V)              F3"
@@ -2221,6 +2311,9 @@ msgstr "反转选择(&T)         M-*"
 msgid "e&Xit              F10"
 msgstr "退出(&X)             F10"
 
+msgid "&User menu          F2"
+msgstr "用户菜单(&U)          F2"
+
 msgid "&Directory tree"
 msgstr "目录树(&D)"
 
@@ -2242,8 +2335,9 @@ msgstr ""
 msgid "show directory s&Izes"
 msgstr "显示目录大小(&I)"
 
-msgid "command &History"
-msgstr "命令历史(&H)"
+#, fuzzy
+msgid "Command &history      M-h"
+msgstr " 命令历史 "
 
 msgid "di&Rectory hotlist    C-\\"
 msgstr ""
@@ -2264,13 +2358,6 @@ msgid "Edit &extension file"
 msgstr "扩展文件编辑(&E)"
 
 msgid "Edit &menu file"
-msgstr "菜单文件编辑(&M)"
-
-msgid "Edit edi&tor menu file"
-msgstr "菜单编辑器编辑(&T)"
-
-#, fuzzy
-msgid "Edit &syntax file"
 msgstr "菜单文件编辑(&M)"
 
 msgid "&Configuration..."
@@ -2334,6 +2421,22 @@ msgstr "菜单"
 msgid "The TERM environment variable is unset!\n"
 msgstr "没有设置 TERM 环境变量！\n"
 
+msgid "&Fix it"
+msgstr ""
+
+msgid "don't ask again"
+msgstr ""
+
+msgid ""
+"Chosen display charset (Settings->Display bits)\n"
+"or source codeset (in mcedit ctrl-t) \n"
+"does not match one set via locale. \n"
+"Set correct codeset manually or press <<Fix it>> \n"
+"to set locale default.\n"
+"\n"
+"Or set 'don't ask again' and press <<Skip>>"
+msgstr ""
+
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
@@ -2368,16 +2471,8 @@ msgid ""
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
 "   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked\n"
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
 msgstr ""
 "--colors KEYWORDS={FORE},{BACK}\n"
 "\n"
@@ -2397,6 +2492,18 @@ msgstr ""
 "  yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
 "  brightcyan, lightgray and white\n"
 "\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
 
 msgid "Displays this help message"
 msgstr "显示该帮助信息"
@@ -2459,6 +2566,10 @@ msgstr "在文件上使用文件查看器"
 
 msgid "Edits one file"
 msgstr "编辑一个文件"
+
+#, fuzzy, c-format
+msgid "Cannot create %s directory"
+msgstr "无法改变目录"
 
 msgid "safe de&Lete"
 msgstr "安全删除(&L)"
@@ -2678,20 +2789,35 @@ msgstr "重命名"
 msgid "Mkdir"
 msgstr "建目录"
 
-msgid " Choose input codepage "
+msgid " Not implemented yet "
+msgstr ""
+
+msgid " Num of replace tokens not equal to num of found tokens "
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Invalid token number %d "
+msgstr " 无效的目标掩码 "
+
+#, fuzzy
+msgid "Normal"
+msgstr "格式化"
+
+msgid "&Regular expression"
+msgstr "正则表达式(&R)"
+
+msgid "Hexadecimal"
+msgstr ""
+
+msgid "Wildcard search"
+msgstr ""
+
+#, fuzzy
+msgid "Choose codepage"
 msgstr " 选择输入代码页"
 
 msgid "-  < No translation >"
 msgstr "-  < 没有翻译 >"
-
-msgid ""
-"To use this feature select your codepage in\n"
-"Setup / Display Bits dialog!\n"
-"Do not forget to save options."
-msgstr ""
-"要使用该特性，在设置/显示位对话中选择您的\n"
-"代码页！\n"
-"不要忘记保存选项。"
 
 #, c-format
 msgid ""
@@ -2728,6 +2854,10 @@ msgid "with terminfo database"
 msgstr "terminfo 数据库"
 
 msgid "Using the ncurses library"
+msgstr "使用 ncurses 库"
+
+#, fuzzy
+msgid "Using the ncursesw library"
 msgstr "使用 ncurses 库"
 
 msgid "With optional subshell support"
@@ -2850,11 +2980,19 @@ msgstr " 在 %s 没有找到相应的项 "
 msgid " User menu "
 msgstr " 用户菜单 "
 
-msgid "%b %e %H:%M"
+#, fuzzy
+msgid "%b %d %H:%M"
 msgstr "%b %e %H:%M"
+
+#, fuzzy
+msgid "%b %d %Y"
+msgstr "%b %e %Y"
 
 msgid "%b %e  %Y"
 msgstr "%b %e %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
@@ -2949,24 +3087,16 @@ msgid ""
 " %s "
 msgstr " 保存文件时发生错误。"
 
-msgid "Invalid hex search expression"
-msgstr "无效的代码搜索表达式"
-
-msgid " Invalid regular expression "
-msgstr " 无效的正则表达式 "
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" The current line number is %d.\n"
+" The current line number is %lu.\n"
 " Enter the new line number:"
 msgstr ""
 " 当前行号是 %d。\n"
 " 输入新行号："
 
-#, c-format
-msgid ""
-" The current address is 0x%lx.\n"
-" Enter the new address:"
+#, fuzzy
+msgid " The current address is 0x%08"
 msgstr ""
 " 当前地址是 0x%lx。\n"
 " 输入新地址："
@@ -2978,25 +3108,10 @@ msgstr " 跳到地址 "
 msgid " Invalid address "
 msgstr " 无效的口令 "
 
-msgid " Enter regexp:"
-msgstr " 输入正则表达式："
-
 msgid "ButtonBar|Help"
 msgstr ""
 
 msgid "ButtonBar|Quit"
-msgstr ""
-
-msgid "ButtonBar|Ascii"
-msgstr ""
-
-msgid "ButtonBar|Hex"
-msgstr ""
-
-msgid "ButtonBar|Goto"
-msgstr ""
-
-msgid "ButtonBar|Line"
 msgstr ""
 
 msgid "ButtonBar|View"
@@ -3006,33 +3121,6 @@ msgid "ButtonBar|Edit"
 msgstr ""
 
 msgid "ButtonBar|Save"
-msgstr ""
-
-msgid "ButtonBar|UnWrap"
-msgstr ""
-
-msgid "ButtonBar|Wrap"
-msgstr ""
-
-msgid "ButtonBar|RxSrch"
-msgstr ""
-
-msgid "ButtonBar|HxSrch"
-msgstr ""
-
-msgid "ButtonBar|Search"
-msgstr ""
-
-msgid "ButtonBar|Raw"
-msgstr ""
-
-msgid "ButtonBar|Parse"
-msgstr ""
-
-msgid "ButtonBar|Unform"
-msgstr ""
-
-msgid "ButtonBar|Format"
 msgstr ""
 
 msgid " History "
@@ -3614,6 +3702,68 @@ msgstr "内部错误："
 msgid "Changes to file lost"
 msgstr "对文件的修改被丢失"
 
+#~ msgid "scanf &Expression"
+#~ msgstr "scanf 表达式(&E)"
+
+#~ msgid "&Whole words only"
+#~ msgstr "仅整词(&W)"
+
+#~ msgid " Enter replacement argument order eg. 3,2,1,4 "
+#~ msgstr " 输入替换参数的顺序，例如 3,2,1,4 "
+
+#~ msgid ""
+#~ " Invalid regular expression, or scanf expression with too many "
+#~ "conversions "
+#~ msgstr " 无效的正则表达式，或者有太多转换符的 scanf 表达式 "
+
+#~ msgid " Error in replacement format string. "
+#~ msgstr " 在替换格式串中有错误。"
+
+#, fuzzy
+#~ msgid " Replacement too long. "
+#~ msgstr " 输入替换字符串："
+
+#~ msgid "&Copy              F5"
+#~ msgstr "复制(&C)           F5"
+
+#~ msgid "&Delete            F8"
+#~ msgstr "删除(&D)           F8"
+
+#, fuzzy
+#~ msgid "Save setu&p..."
+#~ msgstr "保存设置(&S)"
+
+#~ msgid " The command history is empty "
+#~ msgstr " 命令历史是空的 "
+
+#~ msgid "command &History"
+#~ msgstr "命令历史(&H)"
+
+#~ msgid "Edit edi&tor menu file"
+#~ msgstr "菜单编辑器编辑(&T)"
+
+#, fuzzy
+#~ msgid "Edit &syntax file"
+#~ msgstr "菜单文件编辑(&M)"
+
+#~ msgid ""
+#~ "To use this feature select your codepage in\n"
+#~ "Setup / Display Bits dialog!\n"
+#~ "Do not forget to save options."
+#~ msgstr ""
+#~ "要使用该特性，在设置/显示位对话中选择您的\n"
+#~ "代码页！\n"
+#~ "不要忘记保存选项。"
+
+#~ msgid "Invalid hex search expression"
+#~ msgstr "无效的代码搜索表达式"
+
+#~ msgid " Invalid regular expression "
+#~ msgstr " 无效的正则表达式 "
+
+#~ msgid " Enter regexp:"
+#~ msgstr " 输入正则表达式："
+
 #~ msgid "Using included S-Lang library"
 #~ msgstr "使用自带的 S-Lang 库"
 
@@ -3714,9 +3864,6 @@ msgstr "对文件的修改被丢失"
 
 #~ msgid "Unform"
 #~ msgstr "非格式化"
-
-#~ msgid "Format"
-#~ msgstr "格式化"
 
 #~ msgid "User menu available only in mcedit invoked from mc"
 #~ msgstr "用户菜单仅在从 mc 中启动的 mcedit 中才有"

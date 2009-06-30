@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc-4.5.36\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-14 19:43+0000\n"
+"POT-Creation-Date: 2009-06-30 19:38+0200\n"
 "PO-Revision-Date: 2000-10-27 15:37-03:00\n"
 "Last-Translator: E. A. Tacão <tacao@conectiva.com.br>\n"
 "Language-Team: pt_BR <ldp-br@bazar.conectiva.com.br>\n"
@@ -59,8 +59,15 @@ msgstr " Arquivo grande demais: "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-msgid "&Dismiss"
-msgstr "&Dispensar"
+msgid "Search"
+msgstr "Procurar"
+
+#, c-format
+msgid " %d items found, %d bookmarks added "
+msgstr " %d buscas encontradas, %d favoritos adicionados"
+
+msgid " Search string not found "
+msgstr " Expressão de procura não encontrada"
 
 msgid "Warning"
 msgstr "Aviso"
@@ -122,9 +129,6 @@ msgstr "Sobrescrever"
 msgid " Cannot save file. "
 msgstr " Erro ao tentar gravar arquivo. "
 
-msgid "Cancel"
-msgstr "Cancelar"
-
 msgid " Delete macro "
 msgstr " Apagar macro "
 
@@ -169,87 +173,47 @@ msgstr ""
 msgid "C&ontinue"
 msgstr "Continuar"
 
+#, fuzzy
+msgid "Syntax file edit"
+msgstr "Editar &Menu de arquivo"
+
+#, fuzzy
+msgid " Which syntax file you want to edit? "
+msgstr " Que extensão de arquivo você quer editar? "
+
+msgid "&User"
+msgstr "&Usuário"
+
+msgid "&System Wide"
+msgstr "&Todo o sistema"
+
+#
+msgid " Menu edit "
+msgstr " Editar menu"
+
+#
+msgid " Which menu file do you want to edit? "
+msgstr " Que arquivo de menu quer editar? "
+
+msgid "&Local"
+msgstr "&Local"
+
 msgid " Load "
 msgstr " Carregar "
 
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " Bloco é muito grande, talvez esta ação não possa ser desfeita"
 
-msgid "O&ne"
-msgstr "U&M"
-
-msgid "A&ll"
-msgstr " Tod&os "
-
-msgid "&Skip"
-msgstr "&Ignorar"
-
-msgid "&Replace"
+#, fuzzy
+msgid "Replace"
 msgstr "&Substituir"
-
-msgid " Replace with: "
-msgstr " Substituir com: "
-
-msgid " Confirm replace "
-msgstr " Confirme substituição "
-
-msgid "scanf &Expression"
-msgstr "&Expressão do scanf"
-
-msgid "replace &All"
-msgstr "Substituir &Todos"
-
-msgid "pro&Mpt on replace"
-msgstr "&Perguntar antes de sobrescrever"
-
-msgid "&Backwards"
-msgstr "&Para trás"
-
-msgid "&Regular expression"
-msgstr "E&xpressão Regular"
-
-msgid "&Whole words only"
-msgstr "&Somente palavras inteiras"
-
-msgid "case &Sensitive"
-msgstr "Sensível à &Caixa Alta ou Baixa"
-
-msgid " Enter replacement argument order eg. 3,2,1,4 "
-msgstr " Digite a ordem dos argumentos de substituição ex. 3,2,1,4"
-
-msgid " Enter replacement string:"
-msgstr "Digite a expressão de substituição:"
-
-msgid " Enter search string:"
-msgstr "Digite a expressão a ser pesquisada:"
 
 msgid " Replace "
 msgstr " Substituir "
 
-msgid "Search"
-msgstr "Procurar"
-
-msgid ""
-" Invalid regular expression, or scanf expression with too many conversions "
-msgstr "Expressão Regular inválida, ou expreesão scanf com muitas conversões"
-
-msgid " Error in replacement format string. "
-msgstr " Erro na expressão de substituição "
-
-#, fuzzy
-msgid " Replacement too long. "
-msgstr "Digite a expressão de substituição:"
-
 #, c-format
 msgid " %ld replacements made. "
 msgstr " %ld substituições feitas "
-
-msgid " Search string not found "
-msgstr " Expressão de procura não encontrada"
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " %d buscas encontradas, %d favoritos adicionados"
 
 msgid "Quit"
 msgstr "Sair"
@@ -370,6 +334,51 @@ msgstr " Pressione qualquer tecla: "
 msgid " Execute Macro "
 msgstr " Executar Macro "
 
+msgid "pro&Mpt on replace"
+msgstr "&Perguntar antes de sobrescrever"
+
+msgid "replace &All"
+msgstr "Substituir &Todos"
+
+msgid "All charsets"
+msgstr ""
+
+msgid "&Backwards"
+msgstr "&Para trás"
+
+msgid "case &Sensitive"
+msgstr "Sensível à &Caixa Alta ou Baixa"
+
+msgid " Enter replacement string:"
+msgstr "Digite a expressão de substituição:"
+
+msgid " Enter search string:"
+msgstr "Digite a expressão a ser pesquisada:"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "O&ne"
+msgstr "U&M"
+
+msgid "A&ll"
+msgstr " Tod&os "
+
+msgid "&Skip"
+msgstr "&Ignorar"
+
+msgid "&Replace"
+msgstr "&Substituir"
+
+msgid " Replace with: "
+msgstr " Substituir com: "
+
+msgid " Confirm replace "
+msgstr " Confirme substituição "
+
+msgid "&Dismiss"
+msgstr "&Dispensar"
+
 msgid " Emacs key: "
 msgstr " Tecla do Emacs: "
 
@@ -444,32 +453,79 @@ msgstr "&Novo          C-x k"
 msgid "Copy to &file...     "
 msgstr "copiar para &Arquivo..."
 
-msgid "&Toggle Mark       F3"
+#, fuzzy
+msgid "&Toggle mark                 F3"
 msgstr "&Alternar Marca   F3"
 
-msgid "&Mark Columns    S-F3"
+#, fuzzy
+msgid "Mar&k columns              S-F3"
 msgstr "&Marcar Colunas S-F3"
 
-msgid "Toggle &ins/overw Ins"
+#, fuzzy
+msgid "Toggle &ins/overw           Ins"
 msgstr "Alternar &Inserir/sobrescrever Ins"
 
-msgid "&Copy              F5"
-msgstr "&Copiar           F5"
+#, fuzzy
+msgid "&Copy                        F5"
+msgstr "&Copiar            F5"
 
-msgid "&Move              F6"
+#, fuzzy
+msgid "&Move                        F6"
 msgstr "&Mover            F6"
 
-msgid "&Delete            F8"
-msgstr "&Apagar           F8"
+#, fuzzy
+msgid "&Delete                      F8"
+msgstr "&Apagar            F8"
 
-msgid "&Undo             C-u"
+#, fuzzy
+msgid "C&opy to clipfile         C-Ins"
+msgstr "copiar para &Arquivo..."
+
+#, fuzzy
+msgid "C&ut to clipfile          S-Del"
+msgstr "Ir para a linha...      M-l"
+
+msgid "&Paste from clipfile      S-Ins"
+msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "&Alternar Marca   F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "&Novo            C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "orde&Nar                M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "&Correio...                "
+
+#, fuzzy
+msgid "&Undo                       C-u"
 msgstr "&Desfazer        C-u"
 
-msgid "&Beginning     C-PgUp"
+#, fuzzy
+msgid "&Beginning               C-PgUp"
 msgstr "&Início       C-PgUp"
 
-msgid "&End           C-PgDn"
+#, fuzzy
+msgid "&End                     C-PgDn"
 msgstr "&Final        C-PgDn"
+
+#, fuzzy
+msgid "C&opy to clipfile           M-w"
+msgstr "Ir para a linha...      M-l"
+
+#, fuzzy
+msgid "C&ut to clipfile            C-w"
+msgstr "Ir para a linha...      M-l"
+
+msgid "&Paste from clipfile        C-y"
+msgstr ""
 
 msgid "&Search...         F7"
 msgstr "&Procurar         F7"
@@ -483,8 +539,25 @@ msgstr "&Substituir       F4"
 msgid "&Go to line...            M-l"
 msgstr "Ir para a linha...      M-l"
 
+#, fuzzy
+msgid "Toggle li&ne state        M-n"
+msgstr "&Alternar Marca   F3"
+
 msgid "Go to matching &bracket   M-b"
 msgstr "ir para o Colchete correspondente   M-b"
+
+msgid "Find declaration      A-Enter"
+msgstr ""
+
+msgid "Back from declaration     M--"
+msgstr ""
+
+msgid "Forward to declaration    M-+"
+msgstr ""
+
+#, fuzzy
+msgid "Encod&ing...             C-t"
+msgstr "orde&Nar                M-t"
 
 msgid "Insert &literal...       C-q"
 msgstr "inserir &Literal...     C-q"
@@ -547,7 +620,15 @@ msgid "Syntax &Highlighting..."
 msgstr "Ressaltar sinta&xe"
 
 #, fuzzy
-msgid "Save setu&p..."
+msgid "S&yntax file"
+msgstr "Editar &Menu de arquivo"
+
+#, fuzzy
+msgid "&Menu file"
+msgstr "Editar &Menu de arquivo"
+
+#, fuzzy
+msgid "Save setu&p"
 msgstr "&Gravar configuração"
 
 msgid " File "
@@ -589,6 +670,10 @@ msgstr "Tamanho da linha: "
 
 msgid "Tab spacing: "
 msgstr "Tabulação : "
+
+#, fuzzy
+msgid "Pers&istent selection"
+msgstr "Seleçã&O reversa  M-*"
 
 msgid "Synta&x highlighting"
 msgstr "Ressaltar sinta&xe"
@@ -825,6 +910,10 @@ msgstr " confirmar &Exclusão "
 
 msgid " Confirmation "
 msgstr " Confirmação "
+
+#, fuzzy
+msgid "UTF-8 output"
+msgstr " Saída completa de 8 bits "
 
 msgid "Full 8 bits output"
 msgstr " Saída completa de 8 bits "
@@ -1074,8 +1163,16 @@ msgstr " Filtro "
 msgid " Set expression for filtering filenames"
 msgstr " Informe expressão para os filtros"
 
-msgid "  Malformed regular expression  "
-msgstr " Expressão regular incorreta "
+msgid "&Using shell patterns"
+msgstr "&Usando máscaras de ambiente de trabalho"
+
+#, fuzzy
+msgid "&Case sensitive"
+msgstr "sensível à &caixa (minúsc/maiusc)"
+
+#, fuzzy
+msgid "&Files only"
+msgstr "Apenas &tamanho"
 
 msgid " Select "
 msgstr " Selecionar "
@@ -1087,31 +1184,6 @@ msgid "Extension file edit"
 msgstr "Editar extensão de arquivos"
 
 msgid " Which extension file you want to edit? "
-msgstr " Que extensão de arquivo você quer editar? "
-
-msgid "&User"
-msgstr "&Usuário"
-
-msgid "&System Wide"
-msgstr "&Todo o sistema"
-
-#
-msgid " Menu edit "
-msgstr " Editar menu"
-
-#
-msgid " Which menu file do you want to edit? "
-msgstr " Que arquivo de menu quer editar? "
-
-msgid "&Local"
-msgstr "&Local"
-
-#, fuzzy
-msgid "Syntax file edit"
-msgstr "Editar &Menu de arquivo"
-
-#, fuzzy
-msgid " Which syntax file you want to edit? "
 msgstr " Que extensão de arquivo você quer editar? "
 
 msgid " Compare directories "
@@ -1132,12 +1204,6 @@ msgstr "&Através"
 msgid " Both panels should be in the listing mode to use this command "
 msgstr ""
 " Ambos os painéis devem estar no modo de lista para se usar este comando. "
-
-msgid " The command history is empty "
-msgstr " O histórico de comandos está vazio   "
-
-msgid " Command history "
-msgstr " Histórico de comandos "
 
 msgid ""
 " Not an xterm or Linux console; \n"
@@ -1317,9 +1383,6 @@ msgstr " Mover "
 
 msgid " Delete "
 msgstr " Apagar "
-
-msgid " Invalid target mask "
-msgstr " Máscara de destino inválida "
 
 msgid " Cannot make the hardlink "
 msgstr " Impossível fazer a ligação (direta) "
@@ -1596,6 +1659,10 @@ msgstr ""
 " Impossível remover diretório \"%s\" \n"
 " %s "
 
+#, fuzzy
+msgid "Directory scanning"
+msgstr "Caminho do diretório"
+
 msgid "1Copy"
 msgstr "1Copiar"
 
@@ -1754,9 +1821,6 @@ msgstr "seguir &Ligações"
 msgid "to:"
 msgstr "para:"
 
-msgid "&Using shell patterns"
-msgstr "&Usando máscaras de ambiente de trabalho"
-
 msgid "&Background"
 msgstr "&Segundo plano"
 
@@ -1766,10 +1830,8 @@ msgstr "Ligação simbólica &Estável"
 msgid "&Dive into subdir if exists"
 msgstr "Descer nos sub&diretórios, se existirem"
 
-#, c-format
-msgid ""
-"Invalid source pattern `%s' \n"
-" %s "
+#, fuzzy, c-format
+msgid "Invalid source pattern `%s'"
 msgstr ""
 "Padrão de origem inválido `%s' \n"
 " %s "
@@ -1798,26 +1860,54 @@ msgstr "&Ver - F3"
 msgid "&Edit - F4"
 msgstr "&Editar - F4"
 
+#, c-format
+msgid "Found: %ld"
+msgstr ""
+
+#, fuzzy
+msgid " Malformed regular expression "
+msgstr " Expressão regular incorreta "
+
+#, fuzzy
+msgid "Cas&e sensitive"
+msgstr "sensível à &caixa (minúsc/maiusc)"
+
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "sensível à &caixa (minúsc/maiusc)"
+
 msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "Start at:"
-msgstr "Iniciar em:"
+msgid "&All charsets"
+msgstr ""
 
-msgid "Filename:"
-msgstr "Nome do arquivo:"
+msgid "All cha&rsets"
+msgstr ""
 
-msgid "Content: "
-msgstr "Conteúdo:"
+#, fuzzy
+msgid "Re&gular expression"
+msgstr "E&xpressão Regular"
 
 msgid "&Tree"
 msgstr "&Árvore"
 
 msgid "Find File"
 msgstr "Procurar arquivo"
+
+#, fuzzy
+msgid "Content:"
+msgstr "Conteúdo:"
+
+#, fuzzy
+msgid "File name:"
+msgstr "Nome do arquivo:"
+
+msgid "Start at:"
+msgstr "Iniciar em:"
 
 #, c-format
 msgid "Grepping in %s"
@@ -2182,6 +2272,9 @@ msgstr "&Ordem..."
 msgid "&Filter..."
 msgstr "&Filtro..."
 
+msgid "&Encoding...    C-t"
+msgstr ""
+
 msgid "&Network link..."
 msgstr "Ligação de &Rede..."
 
@@ -2197,9 +2290,6 @@ msgstr "Ligação SM&B..."
 
 msgid "&Rescan         C-r"
 msgstr "&Atualizar     C-r"
-
-msgid "&User menu          F2"
-msgstr "Menu de &Usuário   F2"
 
 msgid "&View               F3"
 msgstr "&Visão             F3"
@@ -2258,6 +2348,9 @@ msgstr "Seleçã&O reversa  M-*"
 msgid "e&Xit              F10"
 msgstr "S&Air             F10"
 
+msgid "&User menu          F2"
+msgstr "Menu de &Usuário   F2"
+
 msgid "&Directory tree"
 msgstr "Arvore de &Diretórios"
 
@@ -2279,8 +2372,9 @@ msgstr "Painéis e&xternos    c-x !"
 msgid "show directory s&Izes"
 msgstr "Mostrar taman&Hos dos diretórios"
 
-msgid "command &History"
-msgstr "&Histórico de comandos"
+#, fuzzy
+msgid "Command &history      M-h"
+msgstr " Histórico de comandos "
 
 msgid "di&Rectory hotlist    C-\\"
 msgstr "Lista de di&retórios C-\\"
@@ -2301,14 +2395,6 @@ msgid "Edit &extension file"
 msgstr "Editar &extensões de arquivo"
 
 msgid "Edit &menu file"
-msgstr "Editar &Menu de arquivo"
-
-#
-msgid "Edit edi&tor menu file"
-msgstr "Editar Edi&tor de Menu"
-
-#, fuzzy
-msgid "Edit &syntax file"
 msgstr "Editar &Menu de arquivo"
 
 msgid "&Configuration..."
@@ -2373,6 +2459,22 @@ msgstr "Menu"
 msgid "The TERM environment variable is unset!\n"
 msgstr "A variável de ambiente TERM não foi definida!\n"
 
+msgid "&Fix it"
+msgstr ""
+
+msgid "don't ask again"
+msgstr ""
+
+msgid ""
+"Chosen display charset (Settings->Display bits)\n"
+"or source codeset (in mcedit ctrl-t) \n"
+"does not match one set via locale. \n"
+"Set correct codeset manually or press <<Fix it>> \n"
+"to set locale default.\n"
+"\n"
+"Or set 'don't ask again' and press <<Skip>>"
+msgstr ""
+
 #, fuzzy, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander"
@@ -2409,16 +2511,8 @@ msgid ""
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
 "   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked\n"
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
 msgstr ""
 "--colors PAL-CHAVE={FRENTE},{FUNDO}\n"
 "\n"
@@ -2438,6 +2532,18 @@ msgstr ""
 "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
 "   brightcyan, lightgray and white\n"
 "\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
 
 msgid "Displays this help message"
 msgstr "Mostra esse texto de ajuda"
@@ -2500,6 +2606,10 @@ msgstr "Lança o visualizador de arquivos"
 
 msgid "Edits one file"
 msgstr "Edita um arquivo"
+
+#, fuzzy, c-format
+msgid "Cannot create %s directory"
+msgstr " Impossível mudar de diretório"
 
 msgid "safe de&Lete"
 msgstr "E&Liminação segura"
@@ -2721,16 +2831,33 @@ msgstr "RenMov"
 msgid "Mkdir"
 msgstr "Mkdir"
 
-msgid " Choose input codepage "
+msgid " Not implemented yet "
+msgstr ""
+
+msgid " Num of replace tokens not equal to num of found tokens "
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Invalid token number %d "
+msgstr " Máscara de destino inválida "
+
+#, fuzzy
+msgid "Normal"
+msgstr "Formatar"
+
+msgid "&Regular expression"
+msgstr "E&xpressão Regular"
+
+msgid "Hexadecimal"
+msgstr ""
+
+msgid "Wildcard search"
+msgstr ""
+
+msgid "Choose codepage"
 msgstr ""
 
 msgid "-  < No translation >"
-msgstr ""
-
-msgid ""
-"To use this feature select your codepage in\n"
-"Setup / Display Bits dialog!\n"
-"Do not forget to save options."
 msgstr ""
 
 #, c-format
@@ -2768,6 +2895,10 @@ msgstr ""
 
 #, fuzzy
 msgid "Using the ncurses library"
+msgstr "a biblioteca ncurses"
+
+#, fuzzy
+msgid "Using the ncursesw library"
 msgstr "a biblioteca ncurses"
 
 #
@@ -2903,11 +3034,19 @@ msgstr " Nenhuma entrada apropriada encontrada em %s "
 msgid " User menu "
 msgstr " Menu de usuário "
 
-msgid "%b %e %H:%M"
+#, fuzzy
+msgid "%b %d %H:%M"
 msgstr "%b %e %H:%M"
+
+#, fuzzy
+msgid "%b %d %Y"
+msgstr "%b %e  %Y"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
@@ -3002,25 +3141,16 @@ msgid ""
 " %s "
 msgstr " Erro ao tentar gravar arquivo. "
 
-#, fuzzy
-msgid "Invalid hex search expression"
-msgstr " Expressão regular inválida"
-
-msgid " Invalid regular expression "
-msgstr " Expressão regular inválida"
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" The current line number is %d.\n"
+" The current line number is %lu.\n"
 " Enter the new line number:"
 msgstr ""
 " O número de linha atual é %d.\n"
 " Informe o número da nova linha:"
 
-#, c-format
-msgid ""
-" The current address is 0x%lx.\n"
-" Enter the new address:"
+#, fuzzy
+msgid " The current address is 0x%08"
 msgstr ""
 " O endereço atual é 0x%lx.\n"
 " Informe o novo endereço:"
@@ -3032,25 +3162,10 @@ msgstr " Ir Para o endereço "
 msgid " Invalid address "
 msgstr " Senha inválida "
 
-msgid " Enter regexp:"
-msgstr " Informar regexp:"
-
 msgid "ButtonBar|Help"
 msgstr ""
 
 msgid "ButtonBar|Quit"
-msgstr ""
-
-msgid "ButtonBar|Ascii"
-msgstr ""
-
-msgid "ButtonBar|Hex"
-msgstr ""
-
-msgid "ButtonBar|Goto"
-msgstr ""
-
-msgid "ButtonBar|Line"
 msgstr ""
 
 msgid "ButtonBar|View"
@@ -3060,33 +3175,6 @@ msgid "ButtonBar|Edit"
 msgstr ""
 
 msgid "ButtonBar|Save"
-msgstr ""
-
-msgid "ButtonBar|UnWrap"
-msgstr ""
-
-msgid "ButtonBar|Wrap"
-msgstr ""
-
-msgid "ButtonBar|RxSrch"
-msgstr ""
-
-msgid "ButtonBar|HxSrch"
-msgstr ""
-
-msgid "ButtonBar|Search"
-msgstr ""
-
-msgid "ButtonBar|Raw"
-msgstr ""
-
-msgid "ButtonBar|Parse"
-msgstr ""
-
-msgid "ButtonBar|Unform"
-msgstr ""
-
-msgid "ButtonBar|Format"
 msgstr ""
 
 msgid " History "
@@ -3673,6 +3761,62 @@ msgstr "Erro interno:"
 msgid "Changes to file lost"
 msgstr "Alterações no arquivo perdidas"
 
+#~ msgid "scanf &Expression"
+#~ msgstr "&Expressão do scanf"
+
+#~ msgid "&Whole words only"
+#~ msgstr "&Somente palavras inteiras"
+
+#~ msgid " Enter replacement argument order eg. 3,2,1,4 "
+#~ msgstr " Digite a ordem dos argumentos de substituição ex. 3,2,1,4"
+
+#~ msgid ""
+#~ " Invalid regular expression, or scanf expression with too many "
+#~ "conversions "
+#~ msgstr ""
+#~ "Expressão Regular inválida, ou expreesão scanf com muitas conversões"
+
+#~ msgid " Error in replacement format string. "
+#~ msgstr " Erro na expressão de substituição "
+
+#, fuzzy
+#~ msgid " Replacement too long. "
+#~ msgstr "Digite a expressão de substituição:"
+
+#~ msgid "&Copy              F5"
+#~ msgstr "&Copiar           F5"
+
+#~ msgid "&Delete            F8"
+#~ msgstr "&Apagar           F8"
+
+#, fuzzy
+#~ msgid "Save setu&p..."
+#~ msgstr "&Gravar configuração"
+
+#~ msgid " The command history is empty "
+#~ msgstr " O histórico de comandos está vazio   "
+
+#~ msgid "command &History"
+#~ msgstr "&Histórico de comandos"
+
+#
+#~ msgid "Edit edi&tor menu file"
+#~ msgstr "Editar Edi&tor de Menu"
+
+#, fuzzy
+#~ msgid "Edit &syntax file"
+#~ msgstr "Editar &Menu de arquivo"
+
+#, fuzzy
+#~ msgid "Invalid hex search expression"
+#~ msgstr " Expressão regular inválida"
+
+#~ msgid " Invalid regular expression "
+#~ msgstr " Expressão regular inválida"
+
+#~ msgid " Enter regexp:"
+#~ msgstr " Informar regexp:"
+
 #, fuzzy
 #~ msgid "Using included S-Lang library"
 #~ msgstr "Biblioteca S-lang com "
@@ -3797,9 +3941,6 @@ msgstr "Alterações no arquivo perdidas"
 
 #~ msgid "Unform"
 #~ msgstr "Deformar"
-
-#~ msgid "Format"
-#~ msgstr "Formatar"
 
 #, fuzzy
 #~ msgid "User menu available only in mcedit invoked from mc"

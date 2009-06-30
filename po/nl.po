@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-14 19:43+0000\n"
+"POT-Creation-Date: 2009-06-30 19:38+0200\n"
 "PO-Revision-Date: 2009-02-13\n"
 "Last-Translator: Marcel Pol <mpol@gmx.net>\n"
-"Language-Team: \n"
+"Language-Team: Dutch <debian-l10n-dutch@lists.debian.org\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -57,8 +57,15 @@ msgstr " Bestand %s is te groot "
 msgid "Macro recursion is too deep"
 msgstr "Macro-recursie gaat te diep"
 
-msgid "&Dismiss"
-msgstr "&Verwerp"
+msgid "Search"
+msgstr "Zoeken"
+
+#, c-format
+msgid " %d items found, %d bookmarks added "
+msgstr " %d gevonden, %d bladwijzers toegevoegd "
+
+msgid " Search string not found "
+msgstr " Zoekstring niet gevonden "
 
 msgid "Warning"
 msgstr "Waarschuwing"
@@ -117,9 +124,6 @@ msgstr "&Overschrijven"
 msgid " Cannot save file. "
 msgstr " Fout bij opslaan bestand. "
 
-msgid "Cancel"
-msgstr "Annuleren"
-
 msgid " Delete macro "
 msgstr " Macro verwijderen "
 
@@ -163,87 +167,43 @@ msgstr ""
 msgid "C&ontinue"
 msgstr "D&oorgaan"
 
+msgid "Syntax file edit"
+msgstr "Uitbreidingsbestand bewerken"
+
+msgid " Which syntax file you want to edit? "
+msgstr " Welk uitbreidingsbestand wilt u bewerken? "
+
+msgid "&User"
+msgstr "Gebruiker"
+
+msgid "&System Wide"
+msgstr "&Systeembreed"
+
+msgid " Menu edit "
+msgstr "Menubestand bewerken"
+
+msgid " Which menu file do you want to edit? "
+msgstr " Welk menubestand wilt u bewerken? "
+
+msgid "&Local"
+msgstr "&Lokaal"
+
 msgid " Load "
 msgstr " Laden "
 
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " Groot blok, wellicht kunt u deze actie niet ongedaan maken. "
 
-msgid "O&ne"
-msgstr "Ee&n"
-
-msgid "A&ll"
-msgstr "A&lle"
-
-msgid "&Skip"
-msgstr "Over&slaan"
-
-msgid "&Replace"
+#, fuzzy
+msgid "Replace"
 msgstr "Ve&rvangen"
-
-msgid " Replace with: "
-msgstr " Vervangen door: "
-
-msgid " Confirm replace "
-msgstr " Vervanging bevestigen "
-
-msgid "scanf &Expression"
-msgstr "'scanf'-&Expressie"
-
-msgid "replace &All"
-msgstr "Vervang &Alles"
-
-msgid "pro&Mpt on replace"
-msgstr "&Vraag bij vervanging"
-
-msgid "&Backwards"
-msgstr "&Terug"
-
-msgid "&Regular expression"
-msgstr "&Reguliere expressie"
-
-msgid "&Whole words only"
-msgstr "Alleen hele &Woorden"
-
-msgid "case &Sensitive"
-msgstr "&Hoofd/Kleine-letters"
-
-msgid " Enter replacement argument order eg. 3,2,1,4 "
-msgstr " Geef vervanging argumentenvolgorde, bijv. 3,2,1,4 "
-
-msgid " Enter replacement string:"
-msgstr " Geef de vervangende string:"
-
-msgid " Enter search string:"
-msgstr " Geef de zoekstring:"
 
 msgid " Replace "
 msgstr " Vervangen "
 
-msgid "Search"
-msgstr "Zoeken"
-
-msgid ""
-" Invalid regular expression, or scanf expression with too many conversions "
-msgstr ""
-" Ongeldige reguliere expressie, of 'scanf'-expressie met teveel conversies "
-
-msgid " Error in replacement format string. "
-msgstr " Fout in vervangings-formatstring "
-
-msgid " Replacement too long. "
-msgstr " Vervangende string te lang. "
-
 #, c-format
 msgid " %ld replacements made. "
 msgstr " %ld vervangingen doorgevoerd. "
-
-msgid " Search string not found "
-msgstr " Zoekstring niet gevonden "
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " %d gevonden, %d bladwijzers toegevoegd "
 
 msgid "Quit"
 msgstr "Afsltn"
@@ -356,6 +316,51 @@ msgstr " Druk een toets: "
 msgid " Execute Macro "
 msgstr " Macro uitvoeren "
 
+msgid "pro&Mpt on replace"
+msgstr "&Vraag bij vervanging"
+
+msgid "replace &All"
+msgstr "Vervang &Alles"
+
+msgid "All charsets"
+msgstr ""
+
+msgid "&Backwards"
+msgstr "&Terug"
+
+msgid "case &Sensitive"
+msgstr "&Hoofd/Kleine-letters"
+
+msgid " Enter replacement string:"
+msgstr " Geef de vervangende string:"
+
+msgid " Enter search string:"
+msgstr " Geef de zoekstring:"
+
+msgid "Cancel"
+msgstr "Annuleren"
+
+msgid "O&ne"
+msgstr "Ee&n"
+
+msgid "A&ll"
+msgstr "A&lle"
+
+msgid "&Skip"
+msgstr "Over&slaan"
+
+msgid "&Replace"
+msgstr "Ve&rvangen"
+
+msgid " Replace with: "
+msgstr " Vervangen door: "
+
+msgid " Confirm replace "
+msgstr " Vervanging bevestigen "
+
+msgid "&Dismiss"
+msgstr "&Verwerp"
+
 msgid " Emacs key: "
 msgstr " Emacs-toets: "
 
@@ -431,32 +436,79 @@ msgstr "&Nieuw            C-x k"
 msgid "Copy to &file...     "
 msgstr "Kopiëer naar bestand... "
 
-msgid "&Toggle Mark       F3"
+#, fuzzy
+msgid "&Toggle mark                 F3"
 msgstr "Markering aan/ui&t  F3"
 
-msgid "&Mark Columns    S-F3"
+#, fuzzy
+msgid "Mar&k columns              S-F3"
 msgstr "&Markeer kolommen.   S-F3"
 
-msgid "Toggle &ins/overw Ins"
+#, fuzzy
+msgid "Toggle &ins/overw           Ins"
 msgstr "&Inv aan/uit  Ins"
 
-msgid "&Copy              F5"
-msgstr "Kopiëren          F5"
+#, fuzzy
+msgid "&Copy                        F5"
+msgstr "&Kopiëren               F5"
 
-msgid "&Move              F6"
+#, fuzzy
+msgid "&Move                        F6"
 msgstr "Ver&plaatsen        F6"
 
-msgid "&Delete            F8"
-msgstr "&Verwijderen           F8"
+#, fuzzy
+msgid "&Delete                      F8"
+msgstr "&Verwijderen            F8"
 
-msgid "&Undo             C-u"
+#, fuzzy
+msgid "C&opy to clipfile         C-Ins"
+msgstr "Kopiëer naar bestand... "
+
+#, fuzzy
+msgid "C&ut to clipfile          S-Del"
+msgstr "&Ga naar regel...        M-l"
+
+msgid "&Paste from clipfile      S-Ins"
+msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "Markering aan/ui&t  F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "&Nieuw              C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "Sor&teren               M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "&Mail...                    "
+
+#, fuzzy
+msgid "&Undo                       C-u"
 msgstr "Maak &ongedaan      C-u"
 
-msgid "&Beginning     C-PgUp"
+#, fuzzy
+msgid "&Beginning               C-PgUp"
 msgstr "&Begin         C-PgUp"
 
-msgid "&End           C-PgDn"
+#, fuzzy
+msgid "&End                     C-PgDn"
 msgstr "&Eind          C-PgDn"
+
+#, fuzzy
+msgid "C&opy to clipfile           M-w"
+msgstr "&Ga naar regel...        M-l"
+
+#, fuzzy
+msgid "C&ut to clipfile            C-w"
+msgstr "&Ga naar regel...        M-l"
+
+msgid "&Paste from clipfile        C-y"
+msgstr ""
 
 msgid "&Search...         F7"
 msgstr "&Zoeken...         F7"
@@ -470,8 +522,25 @@ msgstr "Ve&rvangen...       F4"
 msgid "&Go to line...            M-l"
 msgstr "&Ga naar regel...        M-l"
 
+#, fuzzy
+msgid "Toggle li&ne state        M-n"
+msgstr "Markering aan/ui&t  F3"
+
 msgid "Go to matching &bracket   M-b"
 msgstr "Ga naar corresponderend &Haakje    M-b"
+
+msgid "Find declaration      A-Enter"
+msgstr ""
+
+msgid "Back from declaration     M--"
+msgstr ""
+
+msgid "Forward to declaration    M-+"
+msgstr ""
+
+#, fuzzy
+msgid "Encod&ing...             C-t"
+msgstr "Sor&teren               M-t"
 
 msgid "Insert &literal...       C-q"
 msgstr "&Letterlijk invoegen...     C-q"
@@ -530,8 +599,17 @@ msgstr "&Leer toetsen..."
 msgid "Syntax &Highlighting..."
 msgstr "Synta&X Kleuring..."
 
-msgid "Save setu&p..."
-msgstr "Instellingen &Opslaan..."
+#, fuzzy
+msgid "S&yntax file"
+msgstr "Uitbreidingsbestand bewerken"
+
+#, fuzzy
+msgid "&Menu file"
+msgstr "&Bewerk menubestand               "
+
+#, fuzzy
+msgid "Save setu&p"
+msgstr "Instellingen &Opslaan"
 
 msgid " File "
 msgstr " Bestand "
@@ -571,6 +649,10 @@ msgstr "Regellengte voor afbreking: "
 
 msgid "Tab spacing: "
 msgstr "Tabgrootte: "
+
+#, fuzzy
+msgid "Pers&istent selection"
+msgstr "S&Electie omkeren      M-*"
 
 msgid "Synta&x highlighting"
 msgstr "Synta&X kleuring"
@@ -805,6 +887,10 @@ msgstr " Bevestig verwij&Deren "
 
 msgid " Confirmation "
 msgstr " Bevestiging "
+
+#, fuzzy
+msgid "UTF-8 output"
+msgstr "Volledige &8-bit uitvoer"
 
 msgid "Full 8 bits output"
 msgstr "Volledige &8-bit uitvoer"
@@ -1046,8 +1132,16 @@ msgstr " Filter "
 msgid " Set expression for filtering filenames"
 msgstr " Zet expressie voor het filteren van bestandsnamen"
 
-msgid "  Malformed regular expression  "
-msgstr " Incorrecte reguliere expressie  "
+msgid "&Using shell patterns"
+msgstr "Shell Patroon gebr&Uiken"
+
+#, fuzzy
+msgid "&Case sensitive"
+msgstr "Hoofd-/kleine le&tters"
+
+#, fuzzy
+msgid "&Files only"
+msgstr "Alleen &Grootte"
 
 msgid " Select "
 msgstr " Selectie "
@@ -1059,27 +1153,6 @@ msgid "Extension file edit"
 msgstr "Bewerken uitbreidingsbestand"
 
 msgid " Which extension file you want to edit? "
-msgstr " Welk uitbreidingsbestand wilt u bewerken? "
-
-msgid "&User"
-msgstr "Gebruiker"
-
-msgid "&System Wide"
-msgstr "&Systeembreed"
-
-msgid " Menu edit "
-msgstr "Menubestand bewerken"
-
-msgid " Which menu file do you want to edit? "
-msgstr " Welk menubestand wilt u bewerken? "
-
-msgid "&Local"
-msgstr "&Lokaal"
-
-msgid "Syntax file edit"
-msgstr "Uitbreidingsbestand bewerken"
-
-msgid " Which syntax file you want to edit? "
 msgstr " Welk uitbreidingsbestand wilt u bewerken? "
 
 msgid " Compare directories "
@@ -1101,12 +1174,6 @@ msgid " Both panels should be in the listing mode to use this command "
 msgstr ""
 " Beide vensters moeten zich in lijstweergave-modus bevinden voor deze "
 "opdracht"
-
-msgid " The command history is empty "
-msgstr " De opdrachtengeschiedenis is leeg "
-
-msgid " Command history "
-msgstr " Opdrachtengeschiedenis "
 
 msgid ""
 " Not an xterm or Linux console; \n"
@@ -1284,9 +1351,6 @@ msgstr " Verplaatsen "
 
 msgid " Delete "
 msgstr " Verwijderen "
-
-msgid " Invalid target mask "
-msgstr " Ongeldig doelmasker "
 
 msgid " Cannot make the hardlink "
 msgstr " Harde link maken mislukt "
@@ -1563,6 +1627,10 @@ msgstr ""
 " Verwijderen van map \"%s\" mislukt \n"
 " %s "
 
+#, fuzzy
+msgid "Directory scanning"
+msgstr "Directory-pad"
+
 msgid "1Copy"
 msgstr "1Kopiëren"
 
@@ -1721,9 +1789,6 @@ msgstr "&Links volgen"
 msgid "to:"
 msgstr "naar:"
 
-msgid "&Using shell patterns"
-msgstr "Shell Patroon gebr&Uiken"
-
 msgid "&Background"
 msgstr "Achter&Grond"
 
@@ -1733,10 +1798,8 @@ msgstr "&Stabiele symbolische links"
 msgid "&Dive into subdir if exists"
 msgstr "Ga naar sub&Map, als deze bestaat"
 
-#, c-format
-msgid ""
-"Invalid source pattern `%s' \n"
-" %s "
+#, fuzzy, c-format
+msgid "Invalid source pattern `%s'"
 msgstr ""
 "Ongeldig bronpatroon `%s' \n"
 " %s "
@@ -1765,26 +1828,54 @@ msgstr "Weerga&Ve - F3"
 msgid "&Edit - F4"
 msgstr "Bew&Erken -F4"
 
+#, c-format
+msgid "Found: %ld"
+msgstr ""
+
+#, fuzzy
+msgid " Malformed regular expression "
+msgstr " Incorrecte reguliere expressie  "
+
+#, fuzzy
+msgid "Cas&e sensitive"
+msgstr "Hoofd-/kleine le&tters"
+
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "Hoofd-/kleine le&tters"
+
 msgid "&Find recursively"
 msgstr "&Vind recursief"
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "Start at:"
-msgstr "Beginnen bij:"
+msgid "&All charsets"
+msgstr ""
 
-msgid "Filename:"
-msgstr "Bestandsnaam:"
+msgid "All cha&rsets"
+msgstr ""
 
-msgid "Content: "
-msgstr "Inhoud:"
+#, fuzzy
+msgid "Re&gular expression"
+msgstr "&Reguliere expressie"
 
 msgid "&Tree"
 msgstr "&Boom"
 
 msgid "Find File"
 msgstr "Bestand zoeken"
+
+#, fuzzy
+msgid "Content:"
+msgstr "Inhoud:"
+
+#, fuzzy
+msgid "File name:"
+msgstr "Bestandsnaam:"
+
+msgid "Start at:"
+msgstr "Beginnen bij:"
 
 #, c-format
 msgid "Grepping in %s"
@@ -2149,6 +2240,9 @@ msgstr "&Sorteervolgorde...     "
 msgid "&Filter..."
 msgstr "&Filter...              "
 
+msgid "&Encoding...    C-t"
+msgstr ""
+
 msgid "&Network link..."
 msgstr "&Netwerkverbinding..."
 
@@ -2163,9 +2257,6 @@ msgstr "SM&B-Verbinding..."
 
 msgid "&Rescan         C-r"
 msgstr "&Opnieuw lezen       C-r"
-
-msgid "&User menu          F2"
-msgstr "&Gebruikersmenu         F2"
 
 msgid "&View               F3"
 msgstr "&Weergave               F3"
@@ -2224,6 +2315,9 @@ msgstr "S&Electie omkeren      M-*"
 msgid "e&Xit              F10"
 msgstr "&Afsluiten             F10"
 
+msgid "&User menu          F2"
+msgstr "&Gebruikersmenu         F2"
+
 msgid "&Directory tree"
 msgstr "&Mappenhiërarchie                 "
 
@@ -2245,8 +2339,9 @@ msgstr "E&Xtern schikken             C-x !"
 msgid "show directory s&Izes"
 msgstr "Toon map&Groottes                 "
 
-msgid "command &History"
-msgstr "&Opdrachthistorie                 "
+#, fuzzy
+msgid "Command &history      M-h"
+msgstr " Opdrachtengeschiedenis "
 
 msgid "di&Rectory hotlist    C-\\"
 msgstr "Mappen &Snellijst              C-\\"
@@ -2268,12 +2363,6 @@ msgstr "Bewerk &Extensie                  "
 
 msgid "Edit &menu file"
 msgstr "&Bewerk menubestand               "
-
-msgid "Edit edi&tor menu file"
-msgstr "Bewerk men&Ubestand v/d editor    "
-
-msgid "Edit &syntax file"
-msgstr "Bewerk s&Yntaxbestand             "
 
 msgid "&Configuration..."
 msgstr "&Configuratie...     "
@@ -2336,6 +2425,22 @@ msgstr "Menu"
 msgid "The TERM environment variable is unset!\n"
 msgstr "De TERM omgevingsvariabele is niet gezet!\n"
 
+msgid "&Fix it"
+msgstr ""
+
+msgid "don't ask again"
+msgstr ""
+
+msgid ""
+"Chosen display charset (Settings->Display bits)\n"
+"or source codeset (in mcedit ctrl-t) \n"
+"does not match one set via locale. \n"
+"Set correct codeset manually or press <<Fix it>> \n"
+"to set locale default.\n"
+"\n"
+"Or set 'don't ask again' and press <<Skip>>"
+msgstr ""
+
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander  %s\n"
@@ -2358,6 +2463,7 @@ msgstr ""
 "Stuur bugreports (met de uitvoer van 'mc -V')\n"
 "naar mc-devel@gnome.org\n"
 
+#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2369,16 +2475,8 @@ msgid ""
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
 "   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked\n"
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
 msgstr ""
 "--colors KEYWORD={VOOR},{ACHTER}\n"
 "\n"
@@ -2402,6 +2500,18 @@ msgstr ""
 "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
 "   brightcyan, lightgray and white\n"
 "\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
 
 msgid "Displays this help message"
 msgstr "Toont deze helptekst"
@@ -2462,6 +2572,10 @@ msgstr "Start de bestandviewer voor een bestand"
 
 msgid "Edits one file"
 msgstr "Bewerkt een bestand"
+
+#, fuzzy, c-format
+msgid "Cannot create %s directory"
+msgstr "Veranderen van map mislukt"
 
 msgid "safe de&Lete"
 msgstr "&Veilig verwijderen"
@@ -2681,21 +2795,35 @@ msgstr "Vrplts"
 msgid "Mkdir"
 msgstr "Mk map"
 
-msgid " Choose input codepage "
+msgid " Not implemented yet "
+msgstr ""
+
+msgid " Num of replace tokens not equal to num of found tokens "
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Invalid token number %d "
+msgstr " Ongeldig doelmasker "
+
+#, fuzzy
+msgid "Normal"
+msgstr "Format"
+
+msgid "&Regular expression"
+msgstr "&Reguliere expressie"
+
+msgid "Hexadecimal"
+msgstr ""
+
+msgid "Wildcard search"
+msgstr ""
+
+#, fuzzy
+msgid "Choose codepage"
 msgstr " Kies invoerkarakterset"
 
 msgid "-  < No translation >"
 msgstr "- < Geen vertaling >"
-
-msgid ""
-"To use this feature select your codepage in\n"
-"Setup / Display Bits dialog!\n"
-"Do not forget to save options."
-msgstr ""
-"Om gebruik te maken van deze mogelijkheid moet\n"
-"je je karakterset instellen in:\n"
-"Opties / Weergavebits...\n"
-"Vergeet je instellingen niet op te slaan."
 
 #, c-format
 msgid ""
@@ -2735,6 +2863,10 @@ msgid "with terminfo database"
 msgstr "met terminfo database"
 
 msgid "Using the ncurses library"
+msgstr "De ncurses-bibliotheek"
+
+#, fuzzy
+msgid "Using the ncursesw library"
 msgstr "De ncurses-bibliotheek"
 
 msgid "With optional subshell support"
@@ -2858,11 +2990,19 @@ msgstr "Geen passende items gevonden in %s "
 msgid " User menu "
 msgstr " Gebruikersmenu "
 
-msgid "%b %e %H:%M"
+#, fuzzy
+msgid "%b %d %H:%M"
 msgstr "%b %e %H:%M"
+
+#, fuzzy
+msgid "%b %d %Y"
+msgstr "%b %e  %Y"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -2957,24 +3097,16 @@ msgstr ""
 " Kan bestand niet opslaan: \n"
 " %s "
 
-msgid "Invalid hex search expression"
-msgstr "Ongeldige hexadecimale zoekterm"
-
-msgid " Invalid regular expression "
-msgstr " Ongeldige reguliere expressie "
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" The current line number is %d.\n"
+" The current line number is %lu.\n"
 " Enter the new line number:"
 msgstr ""
 " Het huidige regelnummer is  %d.\n"
 " Geef het nieuwe regelnummer:"
 
-#, c-format
-msgid ""
-" The current address is 0x%lx.\n"
-" Enter the new address:"
+#, fuzzy
+msgid " The current address is 0x%08"
 msgstr ""
 " Het huidige adres is  0x%lx.\n"
 " Geef het nieuwe adres:"
@@ -2985,26 +3117,11 @@ msgstr " Ga naar adres "
 msgid " Invalid address "
 msgstr " Ongeldig adres "
 
-msgid " Enter regexp:"
-msgstr " Geef reguliere expressie:"
-
 msgid "ButtonBar|Help"
 msgstr "Help"
 
 msgid "ButtonBar|Quit"
 msgstr "Afsltn"
-
-msgid "ButtonBar|Ascii"
-msgstr "Ascii"
-
-msgid "ButtonBar|Hex"
-msgstr "Hex"
-
-msgid "ButtonBar|Goto"
-msgstr "GaNaar"
-
-msgid "ButtonBar|Line"
-msgstr "Regel"
 
 msgid "ButtonBar|View"
 msgstr "Bekijk"
@@ -3014,33 +3131,6 @@ msgstr "Bewerk"
 
 msgid "ButtonBar|Save"
 msgstr "Opsln"
-
-msgid "ButtonBar|UnWrap"
-msgstr "GnOmsl"
-
-msgid "ButtonBar|Wrap"
-msgstr "RglOms"
-
-msgid "ButtonBar|RxSrch"
-msgstr "RxZoek"
-
-msgid "ButtonBar|HxSrch"
-msgstr "HxZoek"
-
-msgid "ButtonBar|Search"
-msgstr "Zoek"
-
-msgid "ButtonBar|Raw"
-msgstr "Rauw"
-
-msgid "ButtonBar|Parse"
-msgstr "Parse"
-
-msgid "ButtonBar|Unform"
-msgstr "Ongfrm"
-
-msgid "ButtonBar|Format"
-msgstr "Format"
 
 msgid " History "
 msgstr " Opdrachthistorie "
@@ -3619,6 +3709,107 @@ msgstr "Interne fout:"
 msgid "Changes to file lost"
 msgstr "Wijzigingen zijn verloren"
 
+#~ msgid "scanf &Expression"
+#~ msgstr "'scanf'-&Expressie"
+
+#~ msgid "&Whole words only"
+#~ msgstr "Alleen hele &Woorden"
+
+#~ msgid " Enter replacement argument order eg. 3,2,1,4 "
+#~ msgstr " Geef vervanging argumentenvolgorde, bijv. 3,2,1,4 "
+
+#~ msgid ""
+#~ " Invalid regular expression, or scanf expression with too many "
+#~ "conversions "
+#~ msgstr ""
+#~ " Ongeldige reguliere expressie, of 'scanf'-expressie met teveel "
+#~ "conversies "
+
+#~ msgid " Error in replacement format string. "
+#~ msgstr " Fout in vervangings-formatstring "
+
+#~ msgid " Replacement too long. "
+#~ msgstr " Vervangende string te lang. "
+
+#~ msgid "&Copy              F5"
+#~ msgstr "Kopiëren          F5"
+
+#~ msgid "&Delete            F8"
+#~ msgstr "&Verwijderen           F8"
+
+#~ msgid "Save setu&p..."
+#~ msgstr "Instellingen &Opslaan..."
+
+#~ msgid " The command history is empty "
+#~ msgstr " De opdrachtengeschiedenis is leeg "
+
+#~ msgid "command &History"
+#~ msgstr "&Opdrachthistorie                 "
+
+#~ msgid "Edit edi&tor menu file"
+#~ msgstr "Bewerk men&Ubestand v/d editor    "
+
+#~ msgid "Edit &syntax file"
+#~ msgstr "Bewerk s&Yntaxbestand             "
+
+#~ msgid ""
+#~ "To use this feature select your codepage in\n"
+#~ "Setup / Display Bits dialog!\n"
+#~ "Do not forget to save options."
+#~ msgstr ""
+#~ "Om gebruik te maken van deze mogelijkheid moet\n"
+#~ "je je karakterset instellen in:\n"
+#~ "Opties / Weergavebits...\n"
+#~ "Vergeet je instellingen niet op te slaan."
+
+#~ msgid "Invalid hex search expression"
+#~ msgstr "Ongeldige hexadecimale zoekterm"
+
+#~ msgid " Invalid regular expression "
+#~ msgstr " Ongeldige reguliere expressie "
+
+#~ msgid " Enter regexp:"
+#~ msgstr " Geef reguliere expressie:"
+
+#~ msgid "ButtonBar|Ascii"
+#~ msgstr "Ascii"
+
+#~ msgid "ButtonBar|Hex"
+#~ msgstr "Hex"
+
+#~ msgid "ButtonBar|Goto"
+#~ msgstr "GaNaar"
+
+#~ msgid "ButtonBar|Line"
+#~ msgstr "Regel"
+
+#~ msgid "ButtonBar|UnWrap"
+#~ msgstr "GnOmsl"
+
+#~ msgid "ButtonBar|Wrap"
+#~ msgstr "RglOms"
+
+#~ msgid "ButtonBar|RxSrch"
+#~ msgstr "RxZoek"
+
+#~ msgid "ButtonBar|HxSrch"
+#~ msgstr "HxZoek"
+
+#~ msgid "ButtonBar|Search"
+#~ msgstr "Zoek"
+
+#~ msgid "ButtonBar|Raw"
+#~ msgstr "Rauw"
+
+#~ msgid "ButtonBar|Parse"
+#~ msgstr "Parse"
+
+#~ msgid "ButtonBar|Unform"
+#~ msgstr "Ongfrm"
+
+#~ msgid "ButtonBar|Format"
+#~ msgstr "Format"
+
 #~ msgid "Using included S-Lang library"
 #~ msgstr "Bijgesloten S-Lang bibliotheek zal gebruikt worden."
 
@@ -3742,9 +3933,6 @@ msgstr "Wijzigingen zijn verloren"
 
 #~ msgid "Unform"
 #~ msgstr "DeFrmt"
-
-#~ msgid "Format"
-#~ msgstr "Format"
 
 #~ msgid "User menu available only in mcedit invoked from mc"
 #~ msgstr "Gebruikersmenu alleen beschikbaar in mcedit vanuit mc"

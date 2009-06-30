@@ -7,10 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-14 19:43+0000\n"
+"POT-Creation-Date: 2009-06-30 19:38+0200\n"
 "PO-Revision-Date: 2001-09-29 17:41+0200\n"
 "Last-Translator: Softcatalà <tradgnome@softcatala.org>\n"
-"Language-Team: Catalan <info@softcatala.org>\n"
+"Language-Team: <debian-l10n-catalan@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -56,8 +56,15 @@ msgstr " El fitxer és massa gran: "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-msgid "&Dismiss"
-msgstr "&Ignora"
+msgid "Search"
+msgstr "Cerca"
+
+#, c-format
+msgid " %d items found, %d bookmarks added "
+msgstr "S'han trobat %d resultats, s'han afegit %d marcadors"
+
+msgid " Search string not found "
+msgstr " No s'ha trobat la cadena "
 
 msgid "Warning"
 msgstr "Avís"
@@ -118,9 +125,6 @@ msgstr "Sobreescriu"
 msgid " Cannot save file. "
 msgstr " S'ha produït un error en intentar desar el fitxer. "
 
-msgid "Cancel"
-msgstr "Cancel·la"
-
 msgid " Delete macro "
 msgstr " Suprimeix la macro "
 
@@ -165,88 +169,45 @@ msgstr ""
 msgid "C&ontinue"
 msgstr "Continua"
 
+#, fuzzy
+msgid "Syntax file edit"
+msgstr "edita el fitxer de &Menús"
+
+#, fuzzy
+msgid " Which syntax file you want to edit? "
+msgstr " Quin fitxer d'extensions voleu editar? "
+
+msgid "&User"
+msgstr "El d'&Usuari"
+
+msgid "&System Wide"
+msgstr "El de tot el &Sistema"
+
+msgid " Menu edit "
+msgstr " Edició del menú "
+
+msgid " Which menu file do you want to edit? "
+msgstr " Quin fitxer de menú voleu editar? "
+
+msgid "&Local"
+msgstr "&Local"
+
 msgid " Load "
 msgstr " Carrega "
 
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " El bloc és gran, potser no podreu desfer aquesta acció "
 
-msgid "O&ne"
-msgstr "u&N"
-
-msgid "A&ll"
-msgstr "&Tots"
-
-msgid "&Skip"
-msgstr "&Salta"
-
-msgid "&Replace"
+#, fuzzy
+msgid "Replace"
 msgstr "&Reemplaça"
-
-msgid " Replace with: "
-msgstr " Reemplaça amb: "
-
-msgid " Confirm replace "
-msgstr " Confirma el reemplaçament "
-
-msgid "scanf &Expression"
-msgstr "&Expressió de Scanf"
-
-msgid "replace &All"
-msgstr "reemplaça'ls &Tots"
-
-msgid "pro&Mpt on replace"
-msgstr "Preg&Unta en reemplaçar"
-
-msgid "&Backwards"
-msgstr "Cap &Enrere"
-
-msgid "&Regular expression"
-msgstr "Expressió &Habitual"
-
-msgid "&Whole words only"
-msgstr "Només paraules com&Pletes"
-
-msgid "case &Sensitive"
-msgstr "Sensible a &Majúscules/Minúscules"
-
-msgid " Enter replacement argument order eg. 3,2,1,4 "
-msgstr " Introduïu l'ordre dels arguments per reemplaçar, p.ex. 3,2,1,4 "
-
-msgid " Enter replacement string:"
-msgstr " Introduïu la cadena per reemplaçar:"
-
-msgid " Enter search string:"
-msgstr " Introduïu la cadena de cerca:"
 
 msgid " Replace "
 msgstr " Reemplaça "
 
-msgid "Search"
-msgstr "Cerca"
-
-msgid ""
-" Invalid regular expression, or scanf expression with too many conversions "
-msgstr ""
-" Expressió habitual no vàlida, o expressió scanf amb massa conversions "
-
-msgid " Error in replacement format string. "
-msgstr " S'ha produït un error al format de la cadena reemplaçant. "
-
-#, fuzzy
-msgid " Replacement too long. "
-msgstr " Introduïu la cadena per reemplaçar:"
-
 #, c-format
 msgid " %ld replacements made. "
 msgstr " S'han fet %ld reemplaçaments. "
-
-msgid " Search string not found "
-msgstr " No s'ha trobat la cadena "
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr "S'han trobat %d resultats, s'han afegit %d marcadors"
 
 msgid "Quit"
 msgstr "Surt"
@@ -365,6 +326,51 @@ msgstr " Premeu una tecla: "
 msgid " Execute Macro "
 msgstr " Executa la macro "
 
+msgid "pro&Mpt on replace"
+msgstr "Preg&Unta en reemplaçar"
+
+msgid "replace &All"
+msgstr "reemplaça'ls &Tots"
+
+msgid "All charsets"
+msgstr ""
+
+msgid "&Backwards"
+msgstr "Cap &Enrere"
+
+msgid "case &Sensitive"
+msgstr "Sensible a &Majúscules/Minúscules"
+
+msgid " Enter replacement string:"
+msgstr " Introduïu la cadena per reemplaçar:"
+
+msgid " Enter search string:"
+msgstr " Introduïu la cadena de cerca:"
+
+msgid "Cancel"
+msgstr "Cancel·la"
+
+msgid "O&ne"
+msgstr "u&N"
+
+msgid "A&ll"
+msgstr "&Tots"
+
+msgid "&Skip"
+msgstr "&Salta"
+
+msgid "&Replace"
+msgstr "&Reemplaça"
+
+msgid " Replace with: "
+msgstr " Reemplaça amb: "
+
+msgid " Confirm replace "
+msgstr " Confirma el reemplaçament "
+
+msgid "&Dismiss"
+msgstr "&Ignora"
+
 msgid " Emacs key: "
 msgstr " Tecla d'Emacs: "
 
@@ -437,32 +443,79 @@ msgstr "&Nou                C-x k"
 msgid "Copy to &file...     "
 msgstr "copia al &Fitxer...      "
 
-msgid "&Toggle Mark       F3"
+#, fuzzy
+msgid "&Toggle mark                 F3"
 msgstr "&Canvia inici/fi de marcador    F3"
 
-msgid "&Mark Columns    S-F3"
+#, fuzzy
+msgid "Mar&k columns              S-F3"
 msgstr "&Marca les columnes     S-F3"
 
-msgid "Toggle &ins/overw Ins"
+#, fuzzy
+msgid "Toggle &ins/overw           Ins"
 msgstr "Canvia entre &Insereix/sobreescriu Ins"
 
-msgid "&Copy              F5"
-msgstr "&Copia                F5"
+#, fuzzy
+msgid "&Copy                        F5"
+msgstr "&Copia                      F5"
 
-msgid "&Move              F6"
+#, fuzzy
+msgid "&Move                        F6"
 msgstr "&Mou                 F6"
 
-msgid "&Delete            F8"
-msgstr "&Suprimeix              F8"
+#, fuzzy
+msgid "&Delete                      F8"
+msgstr "sup&Rimeix                  F8"
 
-msgid "&Undo             C-u"
+#, fuzzy
+msgid "C&opy to clipfile         C-Ins"
+msgstr "copia al &Fitxer...      "
+
+#, fuzzy
+msgid "C&ut to clipfile          S-Del"
+msgstr "&Vés a la línia...          M-l"
+
+msgid "&Paste from clipfile      S-Ins"
+msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "&Canvia inici/fi de marcador    F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "&Nou                  C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "&Ordena...                 M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "envia per co&Rreu...          "
+
+#, fuzzy
+msgid "&Undo                       C-u"
 msgstr "&Desfés               C-u"
 
-msgid "&Beginning     C-PgUp"
+#, fuzzy
+msgid "&Beginning               C-PgUp"
 msgstr "&Principi         C-RePàg"
 
-msgid "&End           C-PgDn"
+#, fuzzy
+msgid "&End                     C-PgDn"
 msgstr "&Final            C-AvPàg"
+
+#, fuzzy
+msgid "C&opy to clipfile           M-w"
+msgstr "&Vés a la línia...          M-l"
+
+#, fuzzy
+msgid "C&ut to clipfile            C-w"
+msgstr "&Vés a la línia...          M-l"
+
+msgid "&Paste from clipfile        C-y"
+msgstr ""
 
 msgid "&Search...         F7"
 msgstr "&Cerca...             F7"
@@ -476,8 +529,25 @@ msgstr "&Reemplaça...            F4"
 msgid "&Go to line...            M-l"
 msgstr "&Vés a la línia...          M-l"
 
+#, fuzzy
+msgid "Toggle li&ne state        M-n"
+msgstr "&Canvia inici/fi de marcador    F3"
+
 msgid "Go to matching &bracket   M-b"
 msgstr "ves al &Claudàtor coincident  M-b"
+
+msgid "Find declaration      A-Enter"
+msgstr ""
+
+msgid "Back from declaration     M--"
+msgstr ""
+
+msgid "Forward to declaration    M-+"
+msgstr ""
+
+#, fuzzy
+msgid "Encod&ing...             C-t"
+msgstr "&Ordena...                 M-t"
 
 msgid "Insert &literal...       C-q"
 msgstr "insereix &Literal...         C-q"
@@ -539,7 +609,15 @@ msgid "Syntax &Highlighting..."
 msgstr "Ressaltament de la sinta&Xi"
 
 #, fuzzy
-msgid "Save setu&p..."
+msgid "S&yntax file"
+msgstr "edita el fitxer de &Menús"
+
+#, fuzzy
+msgid "&Menu file"
+msgstr "edita el fitxer de &Menús"
+
+#, fuzzy
+msgid "Save setu&p"
 msgstr "&Desa la configuració"
 
 # Açò s'agraeix!  iv
@@ -582,6 +660,10 @@ msgstr "Longitud de línia per a l'ajustament: "
 
 msgid "Tab spacing: "
 msgstr "Mida del tabulador: "
+
+#, fuzzy
+msgid "Pers&istent selection"
+msgstr "&Inverteix la selecció        M-*"
 
 msgid "Synta&x highlighting"
 msgstr "Ressaltament de la sinta&Xi"
@@ -818,6 +900,10 @@ msgstr " confirma la &Supressió "
 
 msgid " Confirmation "
 msgstr " Confirmació "
+
+#, fuzzy
+msgid "UTF-8 output"
+msgstr "Mostra una sortida de 8 bits purs"
 
 msgid "Full 8 bits output"
 msgstr "Mostra una sortida de 8 bits purs"
@@ -1061,8 +1147,16 @@ msgstr " Filtra "
 msgid " Set expression for filtering filenames"
 msgstr " Introduïu una expressió per filtrar els noms de fitxer"
 
-msgid "  Malformed regular expression  "
-msgstr "  L'expressió habitual no és correcta  "
+msgid "&Using shell patterns"
+msgstr "amb patrons d'&Intèrpret"
+
+#, fuzzy
+msgid "&Case sensitive"
+msgstr "distingeix entre majú&Scules/minúscules"
+
+#, fuzzy
+msgid "&Files only"
+msgstr "només &Mida"
 
 msgid " Select "
 msgstr " Selecciona "
@@ -1074,29 +1168,6 @@ msgid "Extension file edit"
 msgstr "Edita el fitxer d'extensions"
 
 msgid " Which extension file you want to edit? "
-msgstr " Quin fitxer d'extensions voleu editar? "
-
-msgid "&User"
-msgstr "El d'&Usuari"
-
-msgid "&System Wide"
-msgstr "El de tot el &Sistema"
-
-msgid " Menu edit "
-msgstr " Edició del menú "
-
-msgid " Which menu file do you want to edit? "
-msgstr " Quin fitxer de menú voleu editar? "
-
-msgid "&Local"
-msgstr "&Local"
-
-#, fuzzy
-msgid "Syntax file edit"
-msgstr "edita el fitxer de &Menús"
-
-#, fuzzy
-msgid " Which syntax file you want to edit? "
 msgstr " Quin fitxer d'extensions voleu editar? "
 
 msgid " Compare directories "
@@ -1116,12 +1187,6 @@ msgstr "&Detallat"
 
 msgid " Both panels should be in the listing mode to use this command "
 msgstr " Cal que ambdós quadres siguin en mode llistat per usar l'ordre "
-
-msgid " The command history is empty "
-msgstr " L'historial d'ordres és buit "
-
-msgid " Command history "
-msgstr " Historial d'ordres "
 
 msgid ""
 " Not an xterm or Linux console; \n"
@@ -1300,9 +1365,6 @@ msgstr " Mou "
 
 msgid " Delete "
 msgstr " Suprimeix "
-
-msgid " Invalid target mask "
-msgstr " La màscara objectiu no és vàlida "
 
 msgid " Cannot make the hardlink "
 msgstr " No s'ha pogut fer l'enllaç fort "
@@ -1579,6 +1641,10 @@ msgstr ""
 " No puc suprimir el directori \"%s\" \n"
 " %s "
 
+#, fuzzy
+msgid "Directory scanning"
+msgstr "Ruta del directori"
+
 msgid "1Copy"
 msgstr "1Copia"
 
@@ -1737,9 +1803,6 @@ msgstr "segueix els en&Llaços"
 msgid "to:"
 msgstr "cap a:"
 
-msgid "&Using shell patterns"
-msgstr "amb patrons d'&Intèrpret"
-
 msgid "&Background"
 msgstr "&Segon pla"
 
@@ -1749,10 +1812,8 @@ msgstr "enllaços simbòlics &Estables"
 msgid "&Dive into subdir if exists"
 msgstr "&Recórrer al subdirectori si existeix"
 
-#, c-format
-msgid ""
-"Invalid source pattern `%s' \n"
-" %s "
+#, fuzzy, c-format
+msgid "Invalid source pattern `%s'"
 msgstr ""
 " El patró de font `%s' no és vàlid \n"
 " %s "
@@ -1781,26 +1842,54 @@ msgstr "&Visualitza - F3"
 msgid "&Edit - F4"
 msgstr "&Edita - F4"
 
+#, c-format
+msgid "Found: %ld"
+msgstr ""
+
+#, fuzzy
+msgid " Malformed regular expression "
+msgstr "  L'expressió habitual no és correcta  "
+
+#, fuzzy
+msgid "Cas&e sensitive"
+msgstr "distingeix entre majú&Scules/minúscules"
+
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "distingeix entre majú&Scules/minúscules"
+
 msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "Start at:"
-msgstr "Comença a:"
+msgid "&All charsets"
+msgstr ""
 
-msgid "Filename:"
-msgstr "Nom del fitxer:"
+msgid "All cha&rsets"
+msgstr ""
 
-msgid "Content: "
-msgstr "Contingut:"
+#, fuzzy
+msgid "Re&gular expression"
+msgstr "Expressió &Habitual"
 
 msgid "&Tree"
 msgstr "Ar&bre"
 
 msgid "Find File"
 msgstr "Cerca Fitxer"
+
+#, fuzzy
+msgid "Content:"
+msgstr "Contingut:"
+
+#, fuzzy
+msgid "File name:"
+msgstr "Nom del fitxer:"
+
+msgid "Start at:"
+msgstr "Comença a:"
 
 # Cal veure fins a qin punt l'MC anomena els programes que fa servir, eh?  iv
 #, c-format
@@ -2168,6 +2257,9 @@ msgstr "&Ordenació..."
 msgid "&Filter..."
 msgstr "&Filtra..."
 
+msgid "&Encoding...    C-t"
+msgstr ""
+
 msgid "&Network link..."
 msgstr "enllaç per a la &Xarxa..."
 
@@ -2183,9 +2275,6 @@ msgstr "Enllaç SM&B..."
 
 msgid "&Rescan         C-r"
 msgstr "&Rellegeix      C-r"
-
-msgid "&User menu          F2"
-msgstr "menú d'&Usuari               F2"
 
 msgid "&View               F3"
 msgstr "&Visualitza                  F3"
@@ -2244,6 +2333,9 @@ msgstr "&Inverteix la selecció        M-*"
 msgid "e&Xit              F10"
 msgstr "&Surt                      F10"
 
+msgid "&User menu          F2"
+msgstr "menú d'&Usuari               F2"
+
 msgid "&Directory tree"
 msgstr "arbre de &Directoris"
 
@@ -2265,8 +2357,9 @@ msgstr "quadre de cerca e&Xterna   C-x !"
 msgid "show directory s&Izes"
 msgstr "mostra la mi&Da dels directoris"
 
-msgid "command &History"
-msgstr "&Historial d'ordres"
+#, fuzzy
+msgid "Command &history      M-h"
+msgstr " Historial d'ordres "
 
 msgid "di&Rectory hotlist    C-\\"
 msgstr "directoris fa&Vorits     C-\\"
@@ -2287,13 +2380,6 @@ msgid "Edit &extension file"
 msgstr "edita el fitxer d'&Extensions"
 
 msgid "Edit &menu file"
-msgstr "edita el fitxer de &Menús"
-
-msgid "Edit edi&tor menu file"
-msgstr "Edició de l'edi&Tor de menús"
-
-#, fuzzy
-msgid "Edit &syntax file"
 msgstr "edita el fitxer de &Menús"
 
 msgid "&Configuration..."
@@ -2358,6 +2444,22 @@ msgstr "Menú"
 msgid "The TERM environment variable is unset!\n"
 msgstr "La variable d'entorn TERM no esta definida!\n"
 
+msgid "&Fix it"
+msgstr ""
+
+msgid "don't ask again"
+msgstr ""
+
+msgid ""
+"Chosen display charset (Settings->Display bits)\n"
+"or source codeset (in mcedit ctrl-t) \n"
+"does not match one set via locale. \n"
+"Set correct codeset manually or press <<Fix it>> \n"
+"to set locale default.\n"
+"\n"
+"Or set 'don't ask again' and press <<Skip>>"
+msgstr ""
+
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
@@ -2394,16 +2496,8 @@ msgid ""
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
 "   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked\n"
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
 msgstr ""
 "--colors KEYWORD={FRONT},{FONS}\n"
 "\n"
@@ -2424,6 +2518,18 @@ msgstr ""
 "   groc, blau, blau clar, magenta, magenta clar, blau verdós,\n"
 "   blau verdós clar, gris clar i blanc\n"
 "\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
 
 msgid "Displays this help message"
 msgstr "Mostra aquest missatge d'ajuda"
@@ -2486,6 +2592,10 @@ msgstr "Executa el visualitzador de fitxers amb un fitxer"
 
 msgid "Edits one file"
 msgstr "Edita un fitxer"
+
+#, fuzzy, c-format
+msgid "Cannot create %s directory"
+msgstr "No he pogut canviar de directori"
 
 msgid "safe de&Lete"
 msgstr "&Supressió segura"
@@ -2709,21 +2819,35 @@ msgstr "RenMov"
 msgid "Mkdir"
 msgstr "FerDir"
 
-msgid " Choose input codepage "
+msgid " Not implemented yet "
+msgstr ""
+
+msgid " Num of replace tokens not equal to num of found tokens "
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Invalid token number %d "
+msgstr " La màscara objectiu no és vàlida "
+
+#, fuzzy
+msgid "Normal"
+msgstr "Formata"
+
+msgid "&Regular expression"
+msgstr "Expressió &Habitual"
+
+msgid "Hexadecimal"
+msgstr ""
+
+msgid "Wildcard search"
+msgstr ""
+
+#, fuzzy
+msgid "Choose codepage"
 msgstr " Escolliu la pàgina de codis d'entrada "
 
 msgid "-  < No translation >"
 msgstr "-  < Cap traducció >"
-
-msgid ""
-"To use this feature select your codepage in\n"
-"Setup / Display Bits dialog!\n"
-"Do not forget to save options."
-msgstr ""
-"Per utilitzar aquesta característica, seleccioneu la vostra pàgina de codis "
-"a\n"
-"Configuració / Visualitza el diàleg Bits!\n"
-"No oblideu desar les opcions."
 
 #, c-format
 msgid ""
@@ -2760,6 +2884,10 @@ msgid "with terminfo database"
 msgstr "amb la base de dades terminfo"
 
 msgid "Using the ncurses library"
+msgstr "S'està utilitzant la biblioteca ncurses"
+
+#, fuzzy
+msgid "Using the ncursesw library"
 msgstr "S'està utilitzant la biblioteca ncurses"
 
 msgid "With optional subshell support"
@@ -2883,11 +3011,19 @@ msgstr " No s'han trobat entrades apropiades a %s "
 msgid " User menu "
 msgstr " Menú d'usuari "
 
-msgid "%b %e %H:%M"
+#, fuzzy
+msgid "%b %d %H:%M"
 msgstr "%b %e %H:%M"
+
+#, fuzzy
+msgid "%b %d %Y"
+msgstr "%b %e %Y"
 
 msgid "%b %e  %Y"
 msgstr "%b %e %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
@@ -2982,24 +3118,16 @@ msgid ""
 " %s "
 msgstr " S'ha produït un error en intentar desar el fitxer. "
 
-msgid "Invalid hex search expression"
-msgstr "L'expressió de cerca hexadecimal no es vàlida"
-
-msgid " Invalid regular expression "
-msgstr " L'expressió regular no és vàlida "
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" The current line number is %d.\n"
+" The current line number is %lu.\n"
 " Enter the new line number:"
 msgstr ""
 " La línia actual és la número %d.\n"
 " Introduïu el número nou de línia:"
 
-#, c-format
-msgid ""
-" The current address is 0x%lx.\n"
-" Enter the new address:"
+#, fuzzy
+msgid " The current address is 0x%08"
 msgstr ""
 " L'adreça actual es 0x%lx.\n"
 " Introduïu la nova adreça:"
@@ -3011,25 +3139,10 @@ msgstr " Vés a l'adreça "
 msgid " Invalid address "
 msgstr " La contrasenya no és vàlida "
 
-msgid " Enter regexp:"
-msgstr " Introduïu l'expressió regular:"
-
 msgid "ButtonBar|Help"
 msgstr ""
 
 msgid "ButtonBar|Quit"
-msgstr ""
-
-msgid "ButtonBar|Ascii"
-msgstr ""
-
-msgid "ButtonBar|Hex"
-msgstr ""
-
-msgid "ButtonBar|Goto"
-msgstr ""
-
-msgid "ButtonBar|Line"
 msgstr ""
 
 msgid "ButtonBar|View"
@@ -3039,33 +3152,6 @@ msgid "ButtonBar|Edit"
 msgstr ""
 
 msgid "ButtonBar|Save"
-msgstr ""
-
-msgid "ButtonBar|UnWrap"
-msgstr ""
-
-msgid "ButtonBar|Wrap"
-msgstr ""
-
-msgid "ButtonBar|RxSrch"
-msgstr ""
-
-msgid "ButtonBar|HxSrch"
-msgstr ""
-
-msgid "ButtonBar|Search"
-msgstr ""
-
-msgid "ButtonBar|Raw"
-msgstr ""
-
-msgid "ButtonBar|Parse"
-msgstr ""
-
-msgid "ButtonBar|Unform"
-msgstr ""
-
-msgid "ButtonBar|Format"
 msgstr ""
 
 msgid " History "
@@ -3649,6 +3735,70 @@ msgstr "Error intern:"
 msgid "Changes to file lost"
 msgstr "Canvia al fitxer perdut"
 
+#~ msgid "scanf &Expression"
+#~ msgstr "&Expressió de Scanf"
+
+#~ msgid "&Whole words only"
+#~ msgstr "Només paraules com&Pletes"
+
+#~ msgid " Enter replacement argument order eg. 3,2,1,4 "
+#~ msgstr " Introduïu l'ordre dels arguments per reemplaçar, p.ex. 3,2,1,4 "
+
+#~ msgid ""
+#~ " Invalid regular expression, or scanf expression with too many "
+#~ "conversions "
+#~ msgstr ""
+#~ " Expressió habitual no vàlida, o expressió scanf amb massa conversions "
+
+#~ msgid " Error in replacement format string. "
+#~ msgstr " S'ha produït un error al format de la cadena reemplaçant. "
+
+#, fuzzy
+#~ msgid " Replacement too long. "
+#~ msgstr " Introduïu la cadena per reemplaçar:"
+
+#~ msgid "&Copy              F5"
+#~ msgstr "&Copia                F5"
+
+#~ msgid "&Delete            F8"
+#~ msgstr "&Suprimeix              F8"
+
+#, fuzzy
+#~ msgid "Save setu&p..."
+#~ msgstr "&Desa la configuració"
+
+#~ msgid " The command history is empty "
+#~ msgstr " L'historial d'ordres és buit "
+
+#~ msgid "command &History"
+#~ msgstr "&Historial d'ordres"
+
+#~ msgid "Edit edi&tor menu file"
+#~ msgstr "Edició de l'edi&Tor de menús"
+
+#, fuzzy
+#~ msgid "Edit &syntax file"
+#~ msgstr "edita el fitxer de &Menús"
+
+#~ msgid ""
+#~ "To use this feature select your codepage in\n"
+#~ "Setup / Display Bits dialog!\n"
+#~ "Do not forget to save options."
+#~ msgstr ""
+#~ "Per utilitzar aquesta característica, seleccioneu la vostra pàgina de "
+#~ "codis a\n"
+#~ "Configuració / Visualitza el diàleg Bits!\n"
+#~ "No oblideu desar les opcions."
+
+#~ msgid "Invalid hex search expression"
+#~ msgstr "L'expressió de cerca hexadecimal no es vàlida"
+
+#~ msgid " Invalid regular expression "
+#~ msgstr " L'expressió regular no és vàlida "
+
+#~ msgid " Enter regexp:"
+#~ msgstr " Introduïu l'expressió regular:"
+
 #~ msgid "Using included S-Lang library"
 #~ msgstr "S'està utilitzant la biblioteca S-Lang inclosa"
 
@@ -3772,9 +3922,6 @@ msgstr "Canvia al fitxer perdut"
 
 #~ msgid "Unform"
 #~ msgstr "NoFrmt"
-
-#~ msgid "Format"
-#~ msgstr "Formata"
 
 #~ msgid "User menu available only in mcedit invoked from mc"
 #~ msgstr ""

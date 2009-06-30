@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-14 19:43+0000\n"
+"POT-Creation-Date: 2009-06-30 19:38+0200\n"
 "PO-Revision-Date: 2005-07-22 00:47+0200\n"
 "Last-Translator: Arpad Biro <biro_arpad@yahoo.com>\n"
-"Language-Team: Hungarian\n"
+"Language-Team: Hungarian <debian-l10n-hungarian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -59,8 +59,16 @@ msgstr " A(z) \"%s\" fájl túl nagy "
 msgid "Macro recursion is too deep"
 msgstr "A makrórekurzió túl mély"
 
-msgid "&Dismiss"
-msgstr "&Tovább"
+# a gombsorban is szerepel (F7)
+msgid "Search"
+msgstr "Keresés"
+
+#, c-format
+msgid " %d items found, %d bookmarks added "
+msgstr " %d találat, %d könyvjelzõ hozzáadva. "
+
+msgid " Search string not found "
+msgstr " A keresett minta nem található "
 
 #
 msgid "Warning"
@@ -123,9 +131,6 @@ msgstr "&Felülírás"
 msgid " Cannot save file. "
 msgstr " Nem sikerült a mentés. "
 
-msgid "Cancel"
-msgstr "Mégsem"
-
 msgid " Delete macro "
 msgstr " Makró törlése "
 
@@ -169,6 +174,27 @@ msgstr ""
 msgid "C&ontinue"
 msgstr "&Tovább"
 
+msgid "Syntax file edit"
+msgstr "Szintaxisfájl szerkesztése"
+
+msgid " Which syntax file you want to edit? "
+msgstr " Melyik szintaxisfájlt kívánja szerkeszteni? "
+
+msgid "&User"
+msgstr "&Sajátomat"
+
+msgid "&System Wide"
+msgstr "&Rendszerszintût"
+
+msgid " Menu edit "
+msgstr " Menüszerkesztés "
+
+msgid " Which menu file do you want to edit? "
+msgstr " Melyik menüfájlt kívánja szerkeszteni? "
+
+msgid "&Local"
+msgstr "&Könyvtárét (helyi)"
+
 msgid " Load "
 msgstr " Betöltés "
 
@@ -178,83 +204,16 @@ msgstr ""
 " A blokk nagy mérete miatt nem biztos, hogy vissza lehet majd vonni \n"
 " ezt a mûveletet. "
 
-# replace promptban van
-msgid "O&ne"
-msgstr "&Egyet"
-
-msgid "A&ll"
-msgstr "Min&det"
-
-msgid "&Skip"
-msgstr "&Kihagyás"
-
-msgid "&Replace"
+#, fuzzy
+msgid "Replace"
 msgstr "&Csere"
-
-msgid " Replace with: "
-msgstr " Csere erre: "
-
-msgid " Confirm replace "
-msgstr " Csere megerõsítése "
-
-msgid "scanf &Expression"
-msgstr "&Scanf-kifejezés"
-
-msgid "replace &All"
-msgstr "Mindet &cserélni"
-
-msgid "pro&Mpt on replace"
-msgstr "Csere elõtt kér&dés"
-
-msgid "&Backwards"
-msgstr "&Visszafelé"
-
-msgid "&Regular expression"
-msgstr "&Reguláris kifejezés"
-
-msgid "&Whole words only"
-msgstr "Csak &teljes szót"
-
-msgid "case &Sensitive"
-msgstr "&Kis-/nagybetû számít"
-
-msgid " Enter replacement argument order eg. 3,2,1,4 "
-msgstr " Cserélendõ részminták sorrendje (például 3,2,1,4) "
-
-msgid " Enter replacement string:"
-msgstr " Csereszöveg:"
-
-msgid " Enter search string:"
-msgstr " Keresendõ minta:"
 
 msgid " Replace "
 msgstr " Csere "
 
-# a gombsorban is szerepel (F7)
-msgid "Search"
-msgstr "Keresés"
-
-msgid ""
-" Invalid regular expression, or scanf expression with too many conversions "
-msgstr ""
-" Hibás reguláris kifejezés, vagy túl sok konverzió a Scanf-kifejezésben "
-
-msgid " Error in replacement format string. "
-msgstr " Hibás a csere-formátumszöveg "
-
-msgid " Replacement too long. "
-msgstr " A csereszöveg túl hosszú. "
-
 #, c-format
 msgid " %ld replacements made. "
 msgstr " %ld csere történt. "
-
-msgid " Search string not found "
-msgstr " A keresett minta nem található "
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " %d találat, %d könyvjelzõ hozzáadva. "
 
 msgid "Quit"
 msgstr "Kilép"
@@ -369,6 +328,52 @@ msgstr " Nyomjon meg egy billentyût: "
 msgid " Execute Macro "
 msgstr " Makró futtatása "
 
+msgid "pro&Mpt on replace"
+msgstr "Csere elõtt kér&dés"
+
+msgid "replace &All"
+msgstr "Mindet &cserélni"
+
+msgid "All charsets"
+msgstr ""
+
+msgid "&Backwards"
+msgstr "&Visszafelé"
+
+msgid "case &Sensitive"
+msgstr "&Kis-/nagybetû számít"
+
+msgid " Enter replacement string:"
+msgstr " Csereszöveg:"
+
+msgid " Enter search string:"
+msgstr " Keresendõ minta:"
+
+msgid "Cancel"
+msgstr "Mégsem"
+
+# replace promptban van
+msgid "O&ne"
+msgstr "&Egyet"
+
+msgid "A&ll"
+msgstr "Min&det"
+
+msgid "&Skip"
+msgstr "&Kihagyás"
+
+msgid "&Replace"
+msgstr "&Csere"
+
+msgid " Replace with: "
+msgstr " Csere erre: "
+
+msgid " Confirm replace "
+msgstr " Csere megerõsítése "
+
+msgid "&Dismiss"
+msgstr "&Tovább"
+
 msgid " Emacs key: "
 msgstr " Emacs-billentyû: "
 
@@ -446,32 +451,79 @@ msgstr "Ú&j                  C-x k"
 msgid "Copy to &file...     "
 msgstr "B&lokk mentése...         "
 
-msgid "&Toggle Mark       F3"
+#, fuzzy
+msgid "&Toggle mark                 F3"
 msgstr "&Kijelölés           F3"
 
-msgid "&Mark Columns    S-F3"
+#, fuzzy
+msgid "Mar&k columns              S-F3"
 msgstr "&Oszlopkijelölés   S-F3"
 
-msgid "Toggle &ins/overw Ins"
+#, fuzzy
+msgid "Toggle &ins/overw           Ins"
 msgstr "&Beszúrás/átírás    Ins"
 
-msgid "&Copy              F5"
-msgstr "&Másolás             F5"
+#, fuzzy
+msgid "&Copy                        F5"
+msgstr "&Másolás                       F5"
 
-msgid "&Move              F6"
+#, fuzzy
+msgid "&Move                        F6"
 msgstr "Át&helyezés          F6"
 
-msgid "&Delete            F8"
-msgstr "&Törlés              F8"
+#, fuzzy
+msgid "&Delete                      F8"
+msgstr "&Törlés                        F8"
 
-msgid "&Undo             C-u"
+#, fuzzy
+msgid "C&opy to clipfile         C-Ins"
+msgstr "B&lokk mentése...         "
+
+#, fuzzy
+msgid "C&ut to clipfile          S-Del"
+msgstr "&Ugrás adott sorra...        M-l"
+
+msgid "&Paste from clipfile      S-Ins"
+msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "&Kijelölés           F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "Ú&j                    C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "Rendezé&s...                 M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "&E-mail...                      "
+
+#, fuzzy
+msgid "&Undo                       C-u"
 msgstr "Viss&zavonás        C-u"
 
-msgid "&Beginning     C-PgUp"
+#, fuzzy
+msgid "&Beginning               C-PgUp"
 msgstr "Szöveg &elejére  C-PgUp"
 
-msgid "&End           C-PgDn"
+#, fuzzy
+msgid "&End                     C-PgDn"
 msgstr "Szöveg &végére   C-PgDn"
+
+#, fuzzy
+msgid "C&opy to clipfile           M-w"
+msgstr "&Ugrás adott sorra...        M-l"
+
+#, fuzzy
+msgid "C&ut to clipfile            C-w"
+msgstr "&Ugrás adott sorra...        M-l"
+
+msgid "&Paste from clipfile        C-y"
+msgstr ""
 
 msgid "&Search...         F7"
 msgstr "&Keresés...         F7"
@@ -485,8 +537,25 @@ msgstr "&Csere...           F4"
 msgid "&Go to line...            M-l"
 msgstr "&Ugrás adott sorra...        M-l"
 
+#, fuzzy
+msgid "Toggle li&ne state        M-n"
+msgstr "&Kijelölés           F3"
+
 msgid "Go to matching &bracket   M-b"
 msgstr "Ugrás &zárójelpárra          M-b"
+
+msgid "Find declaration      A-Enter"
+msgstr ""
+
+msgid "Back from declaration     M--"
+msgstr ""
+
+msgid "Forward to declaration    M-+"
+msgstr ""
+
+#, fuzzy
+msgid "Encod&ing...             C-t"
+msgstr "Rendezé&s...                 M-t"
 
 msgid "Insert &literal...       C-q"
 msgstr "Karakter &beszúrása...       C-q"
@@ -548,7 +617,15 @@ msgid "Syntax &Highlighting..."
 msgstr "&Szintaktikus szövegkiemelés"
 
 #, fuzzy
-msgid "Save setu&p..."
+msgid "S&yntax file"
+msgstr "Szintaxisfájl szerkesztése"
+
+#, fuzzy
+msgid "&Menu file"
+msgstr "Me&nüfájl szerkesztése"
+
+#, fuzzy
+msgid "Save setu&p"
 msgstr "Beállítások m&entése"
 
 msgid " File "
@@ -590,6 +667,10 @@ msgstr "Sortörési pozíció: "
 
 msgid "Tab spacing: "
 msgstr "Tabulátor mérete: "
+
+#, fuzzy
+msgid "Pers&istent selection"
+msgstr "Kijelölés megfor&dítása       M-*"
 
 msgid "Synta&x highlighting"
 msgstr "&Szintaktikus szövegkiemelés"
@@ -833,6 +914,10 @@ msgstr " &Törlés elõtt "
 
 msgid " Confirmation "
 msgstr " Megerõsítés "
+
+#, fuzzy
+msgid "UTF-8 output"
+msgstr "8 bites kijelzés"
 
 msgid "Full 8 bits output"
 msgstr "8 bites kijelzés"
@@ -1086,8 +1171,17 @@ msgstr " Szûrõ "
 msgid " Set expression for filtering filenames"
 msgstr " Adja meg a fájlnevekre vonatkozó szûrõkifejezést:"
 
-msgid "  Malformed regular expression  "
-msgstr "  Hibás reguláris kifejezés  "
+# checkbox a copy/move/del dialogban (nem kell a tobbes szam)
+msgid "&Using shell patterns"
+msgstr "&Shell-minta"
+
+#, fuzzy
+msgid "&Case sensitive"
+msgstr "&Kis-/nagybetû számít"
+
+#, fuzzy
+msgid "&Files only"
+msgstr "&Méretek alapján"
 
 msgid " Select "
 msgstr " Kijelölés "
@@ -1100,27 +1194,6 @@ msgstr "Kiterjesztésfájl szerkesztése"
 
 msgid " Which extension file you want to edit? "
 msgstr " Melyik kiterjesztésfájlt kívánja szerkeszteni? "
-
-msgid "&User"
-msgstr "&Sajátomat"
-
-msgid "&System Wide"
-msgstr "&Rendszerszintût"
-
-msgid " Menu edit "
-msgstr " Menüszerkesztés "
-
-msgid " Which menu file do you want to edit? "
-msgstr " Melyik menüfájlt kívánja szerkeszteni? "
-
-msgid "&Local"
-msgstr "&Könyvtárét (helyi)"
-
-msgid "Syntax file edit"
-msgstr "Szintaxisfájl szerkesztése"
-
-msgid " Which syntax file you want to edit? "
-msgstr " Melyik szintaxisfájlt kívánja szerkeszteni? "
 
 msgid " Compare directories "
 msgstr " Könyvtárak összehasonlítása "
@@ -1139,12 +1212,6 @@ msgstr "&Alapos (tartalom)"
 
 msgid " Both panels should be in the listing mode to use this command "
 msgstr " Mindkét panelnak fájllista-módban kell lennie ehhez a mûvelethez. "
-
-msgid " The command history is empty "
-msgstr " A korábbi parancsok listája üres "
-
-msgid " Command history "
-msgstr " Korábbi parancsok "
 
 msgid ""
 " Not an xterm or Linux console; \n"
@@ -1330,9 +1397,6 @@ msgstr " Átnevezés/áthelyezés "
 
 msgid " Delete "
 msgstr " Törlés "
-
-msgid " Invalid target mask "
-msgstr " Hibás célmaszk "
 
 msgid " Cannot make the hardlink "
 msgstr " Nem sikerült létrehozni a hard linket "
@@ -1632,6 +1696,10 @@ msgstr ""
 " Nem sikerült letörölni a(z) \"%s\" könyvtárt. \n"
 " %s "
 
+#, fuzzy
+msgid "Directory scanning"
+msgstr "Könyvtár-útvonal:"
+
 msgid "1Copy"
 msgstr "1másolása"
 
@@ -1806,10 +1874,6 @@ msgstr "&Linkek követése"
 msgid "to:"
 msgstr "Cél:"
 
-# checkbox a copy/move/del dialogban (nem kell a tobbes szam)
-msgid "&Using shell patterns"
-msgstr "&Shell-minta"
-
 # A "h" shortcut kerülendõ, mert Alt+h = elõzmények
 msgid "&Background"
 msgstr "Háttér&ben"
@@ -1820,10 +1884,8 @@ msgstr "S&tabil szimbolikus linkek"
 msgid "&Dive into subdir if exists"
 msgstr "Lét&ezõ könyvtárba lemenni"
 
-#, c-format
-msgid ""
-"Invalid source pattern `%s' \n"
-" %s "
+#, fuzzy, c-format
+msgid "Invalid source pattern `%s'"
 msgstr ""
 " Hibás forrás-minta: \"%s\". \n"
 " %s "
@@ -1852,6 +1914,22 @@ msgstr "&Megtekintés - F3"
 msgid "&Edit - F4"
 msgstr "&Szerkesztés - F4"
 
+#, c-format
+msgid "Found: %ld"
+msgstr ""
+
+#, fuzzy
+msgid " Malformed regular expression "
+msgstr "  Hibás reguláris kifejezés  "
+
+#, fuzzy
+msgid "Cas&e sensitive"
+msgstr "&Kis-/nagybetû számít"
+
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "&Kis-/nagybetû számít"
+
 #, fuzzy
 msgid "&Find recursively"
 msgstr "Rek&urzív keresés"
@@ -1859,20 +1937,32 @@ msgstr "Rek&urzív keresés"
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "Start at:"
-msgstr "Kezdõkönyvtár:"
+msgid "&All charsets"
+msgstr ""
 
-msgid "Filename:"
-msgstr "Fájlnév:"
+msgid "All cha&rsets"
+msgstr ""
 
-msgid "Content: "
-msgstr "Tartalom: "
+#, fuzzy
+msgid "Re&gular expression"
+msgstr "&Reguláris kifejezés"
 
 msgid "&Tree"
 msgstr "Köny&vtárfa"
 
 msgid "Find File"
 msgstr "Fájl keresése"
+
+#, fuzzy
+msgid "Content:"
+msgstr "Tartalom: "
+
+#, fuzzy
+msgid "File name:"
+msgstr "Fájlnév:"
+
+msgid "Start at:"
+msgstr "Kezdõkönyvtár:"
 
 #, c-format
 msgid "Grepping in %s"
@@ -2242,6 +2332,9 @@ msgstr "&Rendezési mód..."
 msgid "&Filter..."
 msgstr "&Szûrõ..."
 
+msgid "&Encoding...    C-t"
+msgstr ""
+
 msgid "&Network link..."
 msgstr "&Hálózati kapcsolat..."
 
@@ -2256,9 +2349,6 @@ msgstr "SM&B-kapcsolat..."
 
 msgid "&Rescan         C-r"
 msgstr "Frissí&tés          C-r"
-
-msgid "&User menu          F2"
-msgstr "&Felhasználói menü             F2"
 
 msgid "&View               F3"
 msgstr "Megteki&ntés                   F3"
@@ -2317,6 +2407,9 @@ msgstr "Kijelölés megfor&dítása       M-*"
 msgid "e&Xit              F10"
 msgstr "&Kilépés                      F10"
 
+msgid "&User menu          F2"
+msgstr "&Felhasználói menü             F2"
+
 msgid "&Directory tree"
 msgstr "Köny&vtárfa"
 
@@ -2338,8 +2431,9 @@ msgstr "Külsõ &panel-parancs     C-x !"
 msgid "show directory s&Izes"
 msgstr "Könyvtár&méret"
 
-msgid "command &History"
-msgstr "Ko&rábbi parancsok"
+#, fuzzy
+msgid "Command &history      M-h"
+msgstr " Korábbi parancsok "
 
 msgid "di&Rectory hotlist    C-\\"
 msgstr "Könyvtár-&gyorslista       C-\\"
@@ -2361,12 +2455,6 @@ msgstr "Kiter&jesztésfájl szerkesztése"
 
 msgid "Edit &menu file"
 msgstr "Me&nüfájl szerkesztése"
-
-msgid "Edit edi&tor menu file"
-msgstr "&Szerkesztõ menüjének szerk."
-
-msgid "Edit &syntax file"
-msgstr "Sz&intaxisfájl szerkesztése"
 
 msgid "&Configuration..."
 msgstr "&Alapbeállítások..."
@@ -2431,6 +2519,22 @@ msgstr "Menü"
 msgid "The TERM environment variable is unset!\n"
 msgstr "Nincs beállítva a TERM környezeti változó.\n"
 
+msgid "&Fix it"
+msgstr ""
+
+msgid "don't ask again"
+msgstr ""
+
+msgid ""
+"Chosen display charset (Settings->Display bits)\n"
+"or source codeset (in mcedit ctrl-t) \n"
+"does not match one set via locale. \n"
+"Set correct codeset manually or press <<Fix it>> \n"
+"to set locale default.\n"
+"\n"
+"Or set 'don't ask again' and press <<Skip>>"
+msgstr ""
+
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
@@ -2453,6 +2557,7 @@ msgstr ""
 "Hibajelentéseket (az \"mc -V\" parancs kimenetét is mellékelve) a következõ\n"
 "címre lehet küldeni: mc-devel@gnome.org\n"
 
+#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2464,16 +2569,8 @@ msgid ""
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
 "   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked\n"
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
 msgstr ""
 "--colors KULCSSZÓ={ELÕTÉR},{HÁTTÉR}\n"
 "\n"
@@ -2513,6 +2610,18 @@ msgstr ""
 "   (ciánkék), brightcyan (élénk-ciánkék), lightgray (világosszürke), white\n"
 "   (fehér)\n"
 "\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
 
 msgid "Displays this help message"
 msgstr "Ennek a használati útmutatónak a megjelenítése."
@@ -2574,6 +2683,10 @@ msgstr "Fájlmegjelenítés indítása a megadott fájlon."
 
 msgid "Edits one file"
 msgstr "Fájl szerkesztése."
+
+#, fuzzy, c-format
+msgid "Cannot create %s directory"
+msgstr "Nem sikerült könyvtárt váltani"
 
 # gyakorlatilag egyaltalan nem "biztonsagosabb" az eredetinel...
 msgid "safe de&Lete"
@@ -2805,20 +2918,34 @@ msgstr "Áthely"
 msgid "Mkdir"
 msgstr "ÚjKvtr"
 
-msgid " Choose input codepage "
+msgid " Not implemented yet "
+msgstr ""
+
+msgid " Num of replace tokens not equal to num of found tokens "
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Invalid token number %d "
+msgstr " Hibás célmaszk "
+
+msgid "Normal"
+msgstr ""
+
+msgid "&Regular expression"
+msgstr "&Reguláris kifejezés"
+
+msgid "Hexadecimal"
+msgstr ""
+
+msgid "Wildcard search"
+msgstr ""
+
+#, fuzzy
+msgid "Choose codepage"
 msgstr " Válasszon beviteli kódlapot "
 
 msgid "-  < No translation >"
 msgstr "-  < Nincs konverzió >"
-
-msgid ""
-"To use this feature select your codepage in\n"
-"Setup / Display Bits dialog!\n"
-"Do not forget to save options."
-msgstr ""
-"Ahhoz, hogy ez használható legyen, válasszon kódlapot\n"
-"a \"Beállítások / Kivitel és bevitel\" ablakban.\n"
-"Ne feledkezzen meg a beállítások mentésérõl."
 
 #, c-format
 msgid ""
@@ -2858,6 +2985,10 @@ msgid "with terminfo database"
 msgstr "Terminfo adatbázissal"
 
 msgid "Using the ncurses library"
+msgstr "Az Ncurses könyvtár használata"
+
+#, fuzzy
+msgid "Using the ncursesw library"
 msgstr "Az Ncurses könyvtár használata"
 
 msgid "With optional subshell support"
@@ -2984,11 +3115,19 @@ msgstr " Nincsenek megfelelõ bejegyzések ebben: \"%s\" "
 msgid " User menu "
 msgstr " Felhasználói menü "
 
-msgid "%b %e %H:%M"
+#, fuzzy
+msgid "%b %d %H:%M"
 msgstr "%b %e %H.%M"
+
+#, fuzzy
+msgid "%b %d %Y"
+msgstr "%b %e  %Y"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H.%M"
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -3088,24 +3227,16 @@ msgstr ""
 " Nem sikerült a mentés: \n"
 " %s "
 
-msgid "Invalid hex search expression"
-msgstr "Hibás hexadecimális keresési kifejezés"
-
-msgid " Invalid regular expression "
-msgstr " Hibás reguláris kifejezés "
-
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" The current line number is %d.\n"
+" The current line number is %lu.\n"
 " Enter the new line number:"
 msgstr ""
 " Hanyadik sorra kíván ugrani?\n"
 " (Az aktuális sor: %d.)"
 
-#, c-format
-msgid ""
-" The current address is 0x%lx.\n"
-" Enter the new address:"
+#, fuzzy
+msgid " The current address is 0x%08"
 msgstr ""
 " Adja meg az új címet\n"
 " (az aktuális cím: 0x%lx):"
@@ -3117,26 +3248,11 @@ msgstr " Ugrás a megadott címre "
 msgid " Invalid address "
 msgstr " Hibás jelszó "
 
-msgid " Enter regexp:"
-msgstr " Reguláris kifejezés:"
-
 msgid "ButtonBar|Help"
 msgstr "Súgó"
 
 msgid "ButtonBar|Quit"
 msgstr "Kilép"
-
-msgid "ButtonBar|Ascii"
-msgstr "ASCII"
-
-msgid "ButtonBar|Hex"
-msgstr "Hex"
-
-msgid "ButtonBar|Goto"
-msgstr "Ugrás"
-
-msgid "ButtonBar|Line"
-msgstr "UgrSor"
 
 msgid "ButtonBar|View"
 msgstr "Megnéz"
@@ -3146,33 +3262,6 @@ msgstr "Szerk"
 
 msgid "ButtonBar|Save"
 msgstr "Mentés"
-
-msgid "ButtonBar|UnWrap"
-msgstr "NemTör"
-
-msgid "ButtonBar|Wrap"
-msgstr "SorTör"
-
-msgid "ButtonBar|RxSrch"
-msgstr "RegKer"
-
-msgid "ButtonBar|HxSrch"
-msgstr "HexKer"
-
-msgid "ButtonBar|Search"
-msgstr "Keresés"
-
-msgid "ButtonBar|Raw"
-msgstr "Nyers"
-
-msgid "ButtonBar|Parse"
-msgstr "Értelm"
-
-msgid "ButtonBar|Unform"
-msgstr "NemForm"
-
-msgid "ButtonBar|Format"
-msgstr "Formáz"
 
 msgid " History "
 msgstr " Elõzmények "
@@ -3763,6 +3852,106 @@ msgstr "Belsõ programhiba:"
 
 msgid "Changes to file lost"
 msgstr "A fájl módosításai nem lettek rögzítve."
+
+#~ msgid "scanf &Expression"
+#~ msgstr "&Scanf-kifejezés"
+
+#~ msgid "&Whole words only"
+#~ msgstr "Csak &teljes szót"
+
+#~ msgid " Enter replacement argument order eg. 3,2,1,4 "
+#~ msgstr " Cserélendõ részminták sorrendje (például 3,2,1,4) "
+
+#~ msgid ""
+#~ " Invalid regular expression, or scanf expression with too many "
+#~ "conversions "
+#~ msgstr ""
+#~ " Hibás reguláris kifejezés, vagy túl sok konverzió a Scanf-kifejezésben "
+
+#~ msgid " Error in replacement format string. "
+#~ msgstr " Hibás a csere-formátumszöveg "
+
+#~ msgid " Replacement too long. "
+#~ msgstr " A csereszöveg túl hosszú. "
+
+#~ msgid "&Copy              F5"
+#~ msgstr "&Másolás             F5"
+
+#~ msgid "&Delete            F8"
+#~ msgstr "&Törlés              F8"
+
+#, fuzzy
+#~ msgid "Save setu&p..."
+#~ msgstr "Beállítások m&entése"
+
+#~ msgid " The command history is empty "
+#~ msgstr " A korábbi parancsok listája üres "
+
+#~ msgid "command &History"
+#~ msgstr "Ko&rábbi parancsok"
+
+#~ msgid "Edit edi&tor menu file"
+#~ msgstr "&Szerkesztõ menüjének szerk."
+
+#~ msgid "Edit &syntax file"
+#~ msgstr "Sz&intaxisfájl szerkesztése"
+
+#~ msgid ""
+#~ "To use this feature select your codepage in\n"
+#~ "Setup / Display Bits dialog!\n"
+#~ "Do not forget to save options."
+#~ msgstr ""
+#~ "Ahhoz, hogy ez használható legyen, válasszon kódlapot\n"
+#~ "a \"Beállítások / Kivitel és bevitel\" ablakban.\n"
+#~ "Ne feledkezzen meg a beállítások mentésérõl."
+
+#~ msgid "Invalid hex search expression"
+#~ msgstr "Hibás hexadecimális keresési kifejezés"
+
+#~ msgid " Invalid regular expression "
+#~ msgstr " Hibás reguláris kifejezés "
+
+#~ msgid " Enter regexp:"
+#~ msgstr " Reguláris kifejezés:"
+
+#~ msgid "ButtonBar|Ascii"
+#~ msgstr "ASCII"
+
+#~ msgid "ButtonBar|Hex"
+#~ msgstr "Hex"
+
+#~ msgid "ButtonBar|Goto"
+#~ msgstr "Ugrás"
+
+#~ msgid "ButtonBar|Line"
+#~ msgstr "UgrSor"
+
+#~ msgid "ButtonBar|UnWrap"
+#~ msgstr "NemTör"
+
+#~ msgid "ButtonBar|Wrap"
+#~ msgstr "SorTör"
+
+#~ msgid "ButtonBar|RxSrch"
+#~ msgstr "RegKer"
+
+#~ msgid "ButtonBar|HxSrch"
+#~ msgstr "HexKer"
+
+#~ msgid "ButtonBar|Search"
+#~ msgstr "Keresés"
+
+#~ msgid "ButtonBar|Raw"
+#~ msgstr "Nyers"
+
+#~ msgid "ButtonBar|Parse"
+#~ msgstr "Értelm"
+
+#~ msgid "ButtonBar|Unform"
+#~ msgstr "NemForm"
+
+#~ msgid "ButtonBar|Format"
+#~ msgstr "Formáz"
 
 #~ msgid "Using included S-Lang library"
 #~ msgstr "A szoftverrel szállított S-Lang könyvtár használata"
