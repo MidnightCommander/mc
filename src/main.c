@@ -1896,25 +1896,39 @@ do_nc (void)
 static void
 OS_Setup (void)
 {
+    const char *shell_env = getenv ("SHELL");
     const char *mc_libdir;
-    shell = getenv ("SHELL");
-    if (!shell || !*shell) {
+
+    if ((shell_env == NULL) || (shell_env[0] == '\0')) {
         struct passwd *pwd;
         pwd = getpwuid (geteuid ());
         if (pwd != NULL)
            shell = g_strdup (pwd->pw_shell);
+    } else
+	shell = g_strdup (shell_env);
+
+    if ((shell == NULL) || (shell[0] == '\0')) {
+	g_free (shell);
+	shell = g_strdup ("/bin/sh");
     }
-    if (!shell || !*shell)
-	shell = "/bin/sh";
 
     /* This is the directory, where MC was installed, on Unix this is DATADIR */
     /* and can be overriden by the MC_DATADIR environment variable */
-    if ((mc_libdir = getenv ("MC_DATADIR")) != NULL) {
+    mc_libdir = getenv ("MC_DATADIR");
+    if (mc_libdir != NULL) {
 	mc_home = g_strdup (mc_libdir);
+	mc_home_alt = g_strdup (SYSCONFDIR);
     } else {
 	mc_home = g_strdup (SYSCONFDIR);
+	mc_home_alt = g_strdup (DATADIR);
     }
-    mc_home_alt = mc_libdir != NULL ? g_strdup (SYSCONFDIR) : g_strdup (DATADIR);
+
+    /* This variable is used by the subshell */
+    home_dir = getenv ("HOME");
+
+    if (!home_dir)
+	home_dir = mc_home;
+
 }
 
 static void
@@ -2270,13 +2284,6 @@ main (int argc, char *argv[])
 
     OS_Setup ();
 
-    /* This variable is used by the subshell */
-    home_dir = getenv ("HOME");
-    if (!home_dir) {
-	/* mc_home was computed by OS_Setup */
-	home_dir = mc_home;
-    }
-
     str_init_strings (NULL);
 
     vfs_init ();
@@ -2404,6 +2411,8 @@ main (int argc, char *argv[])
 
     g_free (mc_home_alt);
     g_free (mc_home);
+    g_free (shell);
+
     done_key ();
 #ifdef HAVE_CHARSET
     free_codepages_list ();
