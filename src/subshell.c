@@ -507,7 +507,7 @@ init_subshell (void)
     case FISH:
 	g_snprintf (precmd, sizeof (precmd),
 		    "function fish_prompt ; pwd>&%d;kill -STOP %%self; end\n",
-		    subshell_pipe[WRITE], subshell_pipe[WRITE]);
+		    subshell_pipe[WRITE]);
 	break;
 
     }
