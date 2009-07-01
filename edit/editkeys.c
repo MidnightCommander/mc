@@ -118,6 +118,7 @@ static const edit_key_map_type common_key_map[] = {
     { ALT ('='), CK_Load_Next_File },
     { ALT (KEY_BACKSPACE), CK_Delete_Word_Left },
     { ALT ('n'), CK_Toggle_Line_State },
+    { ALT ('_'), CK_Toggle_Tab_TWS },
 
     { XCTRL ('k'), CK_Delete_To_Line_End },
     { XCTRL ('l'), CK_Refresh },

@@ -80,6 +80,7 @@ int option_edit_right_extreme = 0;
 int option_edit_left_extreme = 0;
 int option_edit_top_extreme = 0;
 int option_edit_bottom_extreme = 0;
+int enable_show_tabs_tws = 1;
 
 const char *option_whole_chars_search = "0123456789abcdefghijklmnopqrstuvwxyz_";
 char *option_backup_ext = NULL;
@@ -2868,6 +2869,11 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
     case CK_Toggle_Syntax:
 	if ((option_syntax_highlighting ^= 1) == 1)
 	    edit_load_syntax (edit, NULL, option_syntax_type);
+	edit->force |= REDRAW_PAGE;
+	break;
+
+    case CK_Toggle_Tab_TWS:
+	enable_show_tabs_tws ^= 1;
 	edit->force |= REDRAW_PAGE;
 	break;
 

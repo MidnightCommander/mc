@@ -132,6 +132,8 @@ typedef enum {
 } edit_current_file_t;
 
 extern const char VERTICAL_MAGIC[5];
+/* if enable_show_tabs_tws ==1 then use visible_tab visible_tws */
+extern int enable_show_tabs_tws;
 int edit_drop_hotkey_menu (WEdit *e, int key);
 void edit_menu_cmd (WEdit *e);
 struct WMenu *edit_create_menu (void);

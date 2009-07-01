@@ -442,7 +442,8 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 		case '\t':
 		    i = TAB_SIZE - ((int) col % TAB_SIZE);
 		    col += i;
-		    if (use_colors && visible_tabs) {
+		    if (use_colors &&
+		       ((visible_tabs || (visible_tws && q >= tws)) && enable_show_tabs_tws)) {
 			if (p->style & MOD_MARKED)
 			    c = (p->style);
 			else
@@ -471,7 +472,7 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 			    p->style = c;
 			    p++;
 			}
-		    } else if (use_colors && visible_tws && q >= tws) {
+		    } else if (use_colors && visible_tws && q >= tws && enable_show_tabs_tws) {
 			p->ch = '.';
 			p->style |= MOD_WHITESPACE;
 			c = p->style & ~MOD_CURSOR;
@@ -493,7 +494,7 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 		    }
 		    break;
 		case ' ':
-		    if (use_colors && visible_tws && q >= tws) {
+		    if (use_colors && visible_tws && q >= tws && enable_show_tabs_tws) {
 			p->ch = '.';
 			p->style |= MOD_WHITESPACE;
 			p++;
