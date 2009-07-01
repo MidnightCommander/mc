@@ -149,6 +149,8 @@ get_codepage_index (const char *id)
     int i;
     if (strcmp (id, OTHER_8BIT) == 0)
 	return -1;
+    if (codepages == NULL)
+	return -1;
     for (i = 0; codepages[i].id; ++i)
 	if (strcmp (id, codepages[i].id) == 0)
 	    return i;
