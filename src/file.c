@@ -774,11 +774,13 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *_d, int toplevel,
     struct dirent *next;
     struct stat buf, cbuf;
     DIR *reading;
-    char *path, *mdpath, *dest_file, *dest_dir;
+    char *dest_dir = NULL;
     FileProgressStatus return_status = FILE_CONT;
     struct utimbuf utb;
     struct link *lp;
     char *d;
+
+    d = strutils_shell_unescape (_d);
 
     /* First get the mode of the source dir */
   retry_src_stat:
@@ -787,17 +789,16 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *_d, int toplevel,
 	    file_error (_(" Cannot stat source directory \"%s\" \n %s "), s);
 	if (return_status == FILE_RETRY)
 	    goto retry_src_stat;
-	return return_status;
+	goto ret_fast;
     }
 
     if (is_in_linklist (dest_dirs, s, &cbuf)) {
 	/* Don't copy a directory we created before (we don't want to copy 
 	   infinitely if a directory is copied into itself) */
 	/* FIXME: should there be an error message and FILE_SKIP? - Norbert */
-	return FILE_CONT;
+	return_status = FILE_CONT;
+	goto ret_fast;
     }
-
-    d = strutils_shell_unescape (_d);
 
 /* Hmm, hardlink to directory??? - Norbert */
 /* FIXME: In this step we should do something
@@ -806,8 +807,7 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *_d, int toplevel,
     if (ctx->preserve && cbuf.st_nlink > 1
 	&& check_hardlinks (s, d, &cbuf) == 1) {
 	/* We have made a hardlink - no more processing is necessary */
-	g_free(d);
-	return return_status;
+	goto ret_fast;
     }
 
     if (!S_ISDIR (cbuf.st_mode)) {
@@ -815,16 +815,15 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *_d, int toplevel,
 	    file_error (_(" Source \"%s\" is not a directory \n %s "), s);
 	if (return_status == FILE_RETRY)
 	    goto retry_src_stat;
-	g_free(d);
-	return return_status;
+	goto ret_fast;
     }
 
     if (is_in_linklist (parent_dirs, s, &cbuf)) {
 	/* we found a cyclic symbolic link */
 	message (D_ERROR, MSG_ERROR,
 		    _(" Cannot copy cyclic symbolic link \n `%s' "), s);
-	g_free(d);
-	return FILE_SKIP;
+	return_status = FILE_SKIP;
+	goto ret_fast;
     }
 
     lp = g_new (struct link, 1);
@@ -838,15 +837,14 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *_d, int toplevel,
     /* Now, check if the dest dir exists, if not, create it. */
     if (mc_stat (d, &buf)) {
 	/* Here the dir doesn't exist : make it ! */
-
 	if (move_over) {
 	    if (mc_rename (s, d) == 0) {
-		g_free (parent_dirs);
-		g_free(d);
-		return FILE_CONT;
+		return_status = FILE_CONT;
+		goto ret;
 	    }
 	}
-	dest_dir = g_strdup (d);
+	dest_dir = d;
+	d = NULL;
     } else {
 	/*
 	 * If the destination directory exists, we want to copy the whole
@@ -861,15 +859,14 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *_d, int toplevel,
 		_(" Destination \"%s\" must be a directory \n %s "), d);
 	    if (return_status == FILE_RETRY)
 		goto retry_dst_stat;
-	    g_free (parent_dirs);
-	    g_free(d);
-	    return return_status;
+	    goto ret;
 	}
 	/* Dive into subdir if exists */
 	if (toplevel && ctx->dive_into_subdirs) {
 	    dest_dir = concat_dir_and_file (d, x_basename (s));
 	} else {
-	    dest_dir = g_strdup (d);
+	    dest_dir = d;
+	    d = NULL;
 	    goto dont_mkdir;
 	}
     }
@@ -899,13 +896,14 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *_d, int toplevel,
 
   dont_mkdir:
     /* open the source dir for reading */
-    if ((reading = mc_opendir (s)) == 0) {
+    reading = mc_opendir (s);
+    if (reading == NULL)
 	goto ret;
-    }
 
     while ((next = mc_readdir (reading)) && return_status != FILE_ABORT) {
+	char *path;
 	/*
-	 * Now, we don't want '.' and '..' to be created / copied at any time 
+	 * Now, we don't want '.' and '..' to be created / copied at any time
 	 */
 	if (!strcmp (next->d_name, "."))
 	    continue;
@@ -917,6 +915,8 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *_d, int toplevel,
 
 	(*ctx->stat_func) (path, &buf);
 	if (S_ISDIR (buf.st_mode)) {
+	    char *mdpath;
+
 	    mdpath = concat_dir_and_file (dest_dir, next->d_name);
 	    /*
 	     * From here, we just intend to recursively copy subdirs, not
@@ -928,6 +928,8 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *_d, int toplevel,
 				parent_dirs, progress_count, progress_bytes);
 	    g_free (mdpath);
 	} else {
+	    char *dest_file;
+
 	    dest_file = concat_dir_and_file (dest_dir, x_basename (path));
 	    return_status = copy_file_file (ctx, path, dest_file, 1,
 					    progress_count, progress_bytes, 0);
@@ -936,11 +938,12 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *_d, int toplevel,
 	if (delete && return_status == FILE_CONT) {
 	    if (ctx->erase_at_end) {
 		static struct link *tail;
-		lp = g_malloc (sizeof (struct link) + strlen (path));
-		strcpy (lp->name, path);
+		size_t len = strlen (path);
+		lp = g_malloc (sizeof (struct link) + len);
+		strncpy (lp->name, path, len + 1);
 		lp->st_mode = buf.st_mode;
-		lp->next = 0;
-		if (erase_list) {
+		lp->next = NULL;
+		if (erase_list != NULL) {
 		    tail->next = lp;
 		    tail = lp;
 		} else
@@ -971,7 +974,8 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *_d, int toplevel,
   ret:
     g_free (dest_dir);
     g_free (parent_dirs);
-    g_free(d);
+  ret_fast:
+    g_free (d);
     return return_status;
 }
 
