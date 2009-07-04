@@ -67,6 +67,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/mcview
 %{_bindir}/mcmfmt
 %attr(4755, vcsa, tty) %{_libexecdir}/mc/cons.saver
+%{_libexecdir}/mc/mc*sh
 %{_mandir}/man1/*
 %lang(es) %{_mandir}/es/man1/mc.1*
 %lang(hu) %{_mandir}/hu/man1/mc.1*
@@ -92,6 +93,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libexecdir}/mc
 
 %changelog
+* Sat Jul 04 2009 Yury V. Zaytsev <yury@shurup.com>
+- Fix the issue when wrappers were left unpackaged
+
 * Thu May 21 2009 Slava Zanko <slavazanko@gmail.com>
 - Fix install patches: use %{_sysconfdir}/mc directory
 
