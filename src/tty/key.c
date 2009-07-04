@@ -54,46 +54,133 @@
 #endif
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
-#    include "../src/tty/x11conn.h"
+#include "../src/tty/x11conn.h"
 #endif
 
 #ifdef __linux__
-#    if defined(__GLIBC__) && (__GLIBC__ < 2)
-#        include <linux/termios.h>	/* TIOCLINUX */
-#    elif defined HAVE_TERMIOS_H
-#        include <termios.h>
-#    endif
-#    include <sys/ioctl.h>
+#if defined(__GLIBC__) && (__GLIBC__ < 2)
+#   include <linux/termios.h>	/* TIOCLINUX */
+#elif defined HAVE_TERMIOS_H
+#   include <termios.h>
+#endif
+#include <sys/ioctl.h>
 #endif				/* __linux__ */
 
 #ifdef __CYGWIN__
-#    include <termios.h>
-#    include <sys/ioctl.h>
-#endif                         /* __CYGWIN__ */
+#include <termios.h>
+#include <sys/ioctl.h>
+#endif				/* __CYGWIN__ */
 
 #ifdef __QNXNTO__
-#	include <dlfcn.h>
-#	include <Ph.h>
-#	include <sys/dcmd_chr.h>
-#endif
+#include <dlfcn.h>
+#include <Ph.h>
+#include <sys/dcmd_chr.h>
+#endif				/* __QNXNTO__ */
 
-#define GET_TIME(tv)    (gettimeofday(&tv, (struct timezone *)NULL))
-#define DIF_TIME(t1,t2) ((t2.tv_sec -t1.tv_sec) *1000+ \
-			 (t2.tv_usec-t1.tv_usec)/1000)
-
-/* Linux console keyboard modifiers */
-#define SHIFT_PRESSED		(1 << 0)
-#define ALTR_PRESSED		(1 << 1)
-#define CONTROL_PRESSED		(1 << 2)
-#define ALTL_PRESSED		(1 << 3)
+/*** global variables **************************************************/
 
 int mou_auto_repeat = 100;
 int double_click_speed = 250;
 int old_esc_mode = 0;
-/* timeout for old_esc_mode in usec */
-static int keyboard_key_timeout = 1000000;	/* settable via env */
-
 int use_8th_bit_as_meta = 0;
+
+/* This table is a mapping between names and the constants we use 
+ * We use this to allow users to define alternate definitions for 
+ * certain keys that may be missing from the terminal database 
+ */
+key_code_name_t key_name_conv_tab [] = {
+/* KEY_F(0) is not here, since we are mapping it to f10, so there is no reason 
+   to define f0 as well. Also, it makes Learn keys a bunch of problems :( */
+    { KEY_F(1),      "f1",         N_("Function key 1") },
+    { KEY_F(2),      "f2",         N_("Function key 2") },
+    { KEY_F(3),      "f3",         N_("Function key 3") },
+    { KEY_F(4),      "f4",         N_("Function key 4") },
+    { KEY_F(5),      "f5",         N_("Function key 5") },
+    { KEY_F(6),      "f6",         N_("Function key 6") },
+    { KEY_F(7),      "f7",         N_("Function key 7") },
+    { KEY_F(8),      "f8",         N_("Function key 8") },
+    { KEY_F(9),      "f9",         N_("Function key 9") },
+    { KEY_F(10),     "f10",        N_("Function key 10") },
+    { KEY_F(11),     "f11",        N_("Function key 11") },
+    { KEY_F(12),     "f12",        N_("Function key 12") },
+    { KEY_F(13),     "f13",        N_("Function key 13") },
+    { KEY_F(14),     "f14",        N_("Function key 14") },
+    { KEY_F(15),     "f15",        N_("Function key 15") },
+    { KEY_F(16),     "f16",        N_("Function key 16") },
+    { KEY_F(17),     "f17",        N_("Function key 17") },
+    { KEY_F(18),     "f18",        N_("Function key 18") },
+    { KEY_F(19),     "f19",        N_("Function key 19") },
+    { KEY_F(20),     "f20",        N_("Function key 20") },
+    { KEY_BACKSPACE, "bs",         N_("Backspace key") },
+    { KEY_END,       "end",        N_("End key") },
+    { KEY_UP,        "up",         N_("Up arrow key") },
+    { KEY_DOWN,      "down",       N_("Down arrow key") },
+    { KEY_LEFT,      "left",       N_("Left arrow key") },
+    { KEY_RIGHT,     "right",      N_("Right arrow key") },
+    { KEY_HOME,      "home",       N_("Home key") },
+    { KEY_NPAGE,     "pgdn",       N_("Page Down key") },
+    { KEY_PPAGE,     "pgup",       N_("Page Up key") },
+    { KEY_IC,        "ins",        N_("Insert key") },
+    { KEY_DC,        "delete",     N_("Delete key") },
+    { ALT('\t'),     "complete",   N_("Completion/M-tab") },
+    { KEY_KP_ADD,    "kpplus",     N_("+ on keypad") },
+    { KEY_KP_SUBTRACT,"kpminus",   N_("- on keypad") },
+    { KEY_KP_MULTIPLY,"kpasterix", N_("* on keypad") },
+
+/* From here on, these won't be shown in Learn keys (no space) */
+    { KEY_LEFT,      "kpleft",     N_("Left arrow keypad") },
+    { KEY_RIGHT,     "kpright",    N_("Right arrow keypad") },
+    { KEY_UP,        "kpup",       N_("Up arrow keypad") },
+    { KEY_DOWN,      "kpdown",     N_("Down arrow keypad") },
+    { KEY_HOME,      "kphome",     N_("Home on keypad") },
+    { KEY_END,       "kpend",      N_("End on keypad") },
+    { KEY_NPAGE,     "kpnpage",    N_("Page Down keypad") },
+    { KEY_PPAGE,     "kpppage",    N_("Page Up keypad") },
+    { KEY_IC,        "kpinsert",   N_("Insert on keypad") },
+    { KEY_DC,        "kpdelete",   N_("Delete on keypad") },
+    { (int) '\n',    "kpenter",    N_("Enter on keypad") },
+    { (int) '\n',    "enter",      N_("Enter on keypad") },
+    { (int) '\t',    "tab",        N_("Tab on keypad") },
+    { (int) ' ',     "space",      N_("Space on keypad") },
+    { (int) '/',     "kpslash",    N_("Slash on keypad") },
+    { (int) '#',     "kpnumlock",  N_("NumLock on keypad") },
+
+/* Alternative label */
+    { KEY_BACKSPACE, "backspace",  N_("Backspace key") },
+    { KEY_IC,        "insert",     N_("Insert key") },
+    { KEY_KP_ADD,    "plus",       N_("+ on keypad") },
+    { KEY_KP_SUBTRACT,"minus",     N_("- on keypad") },
+    { KEY_KP_MULTIPLY,"asterix",   N_("* on keypad") },
+
+/* meta keys */
+    { KEY_M_CTRL,    "control",    N_("Ctrl") },
+    { KEY_M_CTRL,    "ctrl",       N_("Ctrl") },
+    { KEY_M_ALT,     "alt",        N_("Alt") },
+    { KEY_M_ALT,     "ralt",       N_("Alt") },
+    { KEY_M_ALT,     "meta",       N_("Alt") },
+    { KEY_M_SHIFT,   "shift",      N_("Shift") },
+
+    { 0, 0, 0 }
+};
+
+
+/*** file scope macro definitions **************************************/
+
+#define GET_TIME(tv)		(gettimeofday(&tv, (struct timezone *) NULL))
+#define DIF_TIME(t1, t2)	((t2.tv_sec  - t1.tv_sec) * 1000 + (t2.tv_usec - t1.tv_usec)/1000)
+
+/* The maximum sequence length (32 + null terminator) */
+#define SEQ_BUFFER_LEN 33
+
+/*** file scope type declarations **************************************/
+
+/* Linux console keyboard modifiers */
+typedef enum {
+    SHIFT_PRESSED	= (1 << 0),
+    ALTR_PRESSED	= (1 << 1),
+    CONTROL_PRESSED	= (1 << 2),
+    ALTL_PRESSED	= (1 << 3)
+} mod_pressed_t;
 
 typedef struct key_def {
     char ch;			/* Holds the matching char code */
@@ -105,13 +192,11 @@ typedef struct key_def {
 				   Escape */
 } key_def;
 
-/* This holds all the key definitions */
-static key_def *keys = NULL;
-
-static int input_fd;
-static int disabled_channels = 0; /* Disable channels checking */
-static int xgetch_second (void);
-static int get_modifier (void);
+typedef const struct {
+    int code;
+    const char *seq;
+    int action;
+} key_define_t;
 
 /* File descriptor monitoring add/remove routines */
 typedef struct SelectList {
@@ -122,192 +207,18 @@ typedef struct SelectList {
 } SelectList;
 
 #ifdef __QNXNTO__
-    typedef int (*ph_dv_f) (void *, void *);
-    typedef int (*ph_ov_f) (void *);
-    typedef int (*ph_pqc_f) (unsigned short, PhCursorInfo_t *);
-    ph_dv_f ph_attach;
-    ph_ov_f ph_input_group;
-    ph_pqc_f ph_query_cursor;
+typedef int (*ph_dv_f) (void *, void *);
+typedef int (*ph_ov_f) (void *);
+typedef int (*ph_pqc_f) (unsigned short, PhCursorInfo_t *);
 #endif
 
-static SelectList *select_list = NULL;
+/*** file scope variables **********************************************/
 
-void add_select_channel (int fd, select_fn callback, void *info)
-{
-    SelectList *new;
-
-    new = g_new (SelectList, 1);
-    new->fd = fd;
-    new->callback = callback;
-    new->info = info;
-    new->next = select_list;
-    select_list = new;
-}
-
-void delete_select_channel (int fd)
-{
-    SelectList *p = select_list;
-    SelectList *p_prev = NULL;
-    SelectList *p_next;
-
-    while (p) {
-	if (p->fd == fd) {
-	    p_next = p->next;
-
-	    if (p_prev)
-		p_prev->next = p_next;
-	    else
-		select_list = p_next;
-
-	    g_free (p);
-	    p = p_next;
-	    continue;
-	}
-
-	p_prev = p;
-	p = p->next;
-    }
-}
-
-inline static int add_selects (fd_set *select_set)
-{
-    SelectList *p;
-    int        top_fd = 0;
-
-    if (disabled_channels)
-	return 0;
-
-    for (p = select_list; p; p = p->next) {
-	FD_SET (p->fd, select_set);
-	if (p->fd > top_fd)
-	    top_fd = p->fd;
-    }
-    return top_fd;
-}
-
-static void check_selects (fd_set *select_set)
-{
-    SelectList *p;
-    gboolean retry;
-
-    if (disabled_channels)
-	return;
-
-    do {
-	retry = FALSE;
-	for (p = select_list; p; p = p->next)
-	    if (FD_ISSET (p->fd, select_set)) {
-		FD_CLR (p->fd, select_set);
-		(*p->callback)(p->fd, p->info);
-		retry = TRUE;
-		break;
-	    }
-    } while (retry);
-}
-
-void channels_up (void)
-{
-    if (!disabled_channels)
-	fputs ("Error: channels_up called with disabled_channels = 0\n",
-	       stderr);
-    disabled_channels--;
-}
-
-void channels_down (void)
-{
-    disabled_channels++;
-}
-
-gboolean
-is_abort_char (int c)
-{
-    return (c == XCTRL('c') || c == XCTRL('g') || c == ESC_CHAR ||
-	    c  == KEY_F(10));
-}
-
-/*
- * Common handler for standard movement keys in a text area.  Provided
- * functions are called with the "data" argument.  backfn and forfn also
- * get an argument indicating how many lines to scroll. Return MSG_HANDLED
- * if the key was handled, MSG_NOT_HANDLED otherwise.
- */
-cb_ret_t
-check_movement_keys (int key, int page_size, void *data, move_fn backfn,
-		     move_fn forfn, move_fn topfn, move_fn bottomfn)
-{
-    switch (key) {
-    case KEY_UP:
-    case XCTRL ('p'):
-	(*backfn) (data, 1);
-	break;
-
-    case KEY_DOWN:
-    case XCTRL ('n'):
-	(*forfn) (data, 1);
-	break;
-
-    case KEY_PPAGE:
-    case ALT ('v'):
-	(*backfn) (data, page_size - 1);
-	break;
-
-    case KEY_NPAGE:
-    case XCTRL ('v'):
-	(*forfn) (data, page_size - 1);
-	break;
-
-    case KEY_HOME:
-    case KEY_M_CTRL | KEY_HOME:
-    case KEY_M_CTRL | KEY_PPAGE:
-    case KEY_A1:
-    case ALT ('<'):
-	(*topfn) (data, 0);
-	break;
-
-    case KEY_END:
-    case KEY_M_CTRL | KEY_END:
-    case KEY_M_CTRL | KEY_NPAGE:
-    case KEY_C1:
-    case ALT ('>'):
-	(*bottomfn) (data, 0);
-	break;
-
-    case 'b':
-    case KEY_BACKSPACE:
-	(*backfn) (data, page_size - 1);
-	break;
-
-    case ' ':
-	(*forfn) (data, page_size - 1);
-	break;
-
-    case 'u':
-	(*backfn) (data, page_size / 2);
-	break;
-
-    case 'd':
-	(*forfn) (data, page_size / 2);
-	break;
-
-    case 'g':
-	(*topfn) (data, 0);
-	break;
-
-    case 'G':
-	(*bottomfn) (data, 0);
-	break;
-
-    default:
-	return MSG_NOT_HANDLED;
-    }
-    return MSG_HANDLED;
-}
-
-typedef const struct {
-    int code;
-    const char *seq;
-    int action;
-} key_define_t;
+static key_define_t mc_default_keys [] = {
+    { ESC_CHAR, ESC_STR, MCKEY_ESCAPE },
+    { ESC_CHAR, ESC_STR ESC_STR, MCKEY_NOACTION },
+    { 0, NULL, MCKEY_NOACTION },
+};
 
 /* Broken terminfo and termcap databases on xterminals */
 static key_define_t xterm_key_defines [] = {
@@ -465,7 +376,7 @@ static key_define_t xterm_key_defines [] = {
     { '/',                     ESC_STR "Oo",  MCKEY_NOACTION },
     { '\n',                    ESC_STR "OM",  MCKEY_NOACTION },
 
-    { 0, 0, MCKEY_NOACTION },
+    { 0, NULL, MCKEY_NOACTION },
 };
 
 /* qansi-m terminals have a much more key combinatios,
@@ -540,240 +451,170 @@ static key_define_t qansi_key_defines[] =
     {0, NULL, MCKEY_NOACTION},
 };
 
-static key_define_t mc_default_keys [] = {
-    { ESC_CHAR,	ESC_STR, MCKEY_ESCAPE },
-    { ESC_CHAR, ESC_STR ESC_STR, MCKEY_NOACTION },
-    { 0, NULL, MCKEY_NOACTION },
-};
+/* timeout for old_esc_mode in usec */
+static int keyboard_key_timeout = 1000000;	/* settable via env */
 
+static int input_fd;
+static int disabled_channels = 0; /* Disable channels checking */
 
-/* This table is a mapping between names and the constants we use 
- * We use this to allow users to define alternate definitions for 
- * certain keys that may be missing from the terminal database 
- */
-key_code_name_t key_name_conv_tab [] = {
-/* KEY_F(0) is not here, since we are mapping it to f10, so there is no reason 
-   to define f0 as well. Also, it makes Learn keys a bunch of problems :( */
-    { KEY_F(1),      "f1",         N_("Function key 1") },
-    { KEY_F(2),      "f2",         N_("Function key 2") },
-    { KEY_F(3),      "f3",         N_("Function key 3") },
-    { KEY_F(4),      "f4",         N_("Function key 4") },
-    { KEY_F(5),      "f5",         N_("Function key 5") },
-    { KEY_F(6),      "f6",         N_("Function key 6") },
-    { KEY_F(7),      "f7",         N_("Function key 7") },
-    { KEY_F(8),      "f8",         N_("Function key 8") },
-    { KEY_F(9),      "f9",         N_("Function key 9") },
-    { KEY_F(10),     "f10",        N_("Function key 10") },
-    { KEY_F(11),     "f11",        N_("Function key 11") },
-    { KEY_F(12),     "f12",        N_("Function key 12") },
-    { KEY_F(13),     "f13",        N_("Function key 13") },
-    { KEY_F(14),     "f14",        N_("Function key 14") },
-    { KEY_F(15),     "f15",        N_("Function key 15") },
-    { KEY_F(16),     "f16",        N_("Function key 16") },
-    { KEY_F(17),     "f17",        N_("Function key 17") },
-    { KEY_F(18),     "f18",        N_("Function key 18") },
-    { KEY_F(19),     "f19",        N_("Function key 19") },
-    { KEY_F(20),     "f20",        N_("Function key 20") },
-    { KEY_BACKSPACE, "bs",         N_("Backspace key") },
-    { KEY_END,       "end",        N_("End key") },
-    { KEY_UP,        "up",         N_("Up arrow key") },
-    { KEY_DOWN,      "down",       N_("Down arrow key") },
-    { KEY_LEFT,      "left",       N_("Left arrow key") },
-    { KEY_RIGHT,     "right",      N_("Right arrow key") },
-    { KEY_HOME,      "home",       N_("Home key") },
-    { KEY_NPAGE,     "pgdn",       N_("Page Down key") },
-    { KEY_PPAGE,     "pgup",       N_("Page Up key") },
-    { KEY_IC,        "ins",        N_("Insert key") },
-    { KEY_DC,        "delete",     N_("Delete key") },
-    { ALT('\t'),     "complete",   N_("Completion/M-tab") },
-    { KEY_KP_ADD,    "kpplus",     N_("+ on keypad") },
-    { KEY_KP_SUBTRACT,"kpminus",   N_("- on keypad") },
-    { KEY_KP_MULTIPLY,"kpasterix", N_("* on keypad") },
+static SelectList *select_list = NULL;
 
-/* From here on, these won't be shown in Learn keys (no space) */
-    { KEY_LEFT,      "kpleft",     N_("Left arrow keypad") },
-    { KEY_RIGHT,     "kpright",    N_("Right arrow keypad") },
-    { KEY_UP,        "kpup",       N_("Up arrow keypad") },
-    { KEY_DOWN,      "kpdown",     N_("Down arrow keypad") },
-    { KEY_HOME,      "kphome",     N_("Home on keypad") },
-    { KEY_END,       "kpend",      N_("End on keypad") },
-    { KEY_NPAGE,     "kpnpage",    N_("Page Down keypad") },
-    { KEY_PPAGE,     "kpppage",    N_("Page Up keypad") },
-    { KEY_IC,        "kpinsert",   N_("Insert on keypad") },
-    { KEY_DC,        "kpdelete",   N_("Delete on keypad") },
-    { (int) '\n',    "kpenter",    N_("Enter on keypad") },
-    { (int) '\n',    "enter",      N_("Enter on keypad") },
-    { (int) '\t',    "tab",        N_("Tab on keypad") },
-    { (int) ' ',     "space",      N_("Space on keypad") },
-    { (int) '/',     "kpslash",    N_("Slash on keypad") },
-    { (int) '#',     "kpnumlock",  N_("NumLock on keypad") },
+static int seq_buffer [SEQ_BUFFER_LEN];
+static int *seq_append = NULL;
 
-/* Alternative label */
-    { KEY_BACKSPACE, "backspace",  N_("Backspace key") },
-    { KEY_IC,        "insert",     N_("Insert key") },
-    { KEY_KP_ADD,    "plus",       N_("+ on keypad") },
-    { KEY_KP_SUBTRACT,"minus",     N_("- on keypad") },
-    { KEY_KP_MULTIPLY,"asterix",   N_("* on keypad") },
+static int *pending_keys = NULL;
 
-/* meta keys */
-    { KEY_M_CTRL,    "control",    N_("Ctrl") },
-    { KEY_M_CTRL,    "ctrl",       N_("Ctrl") },
-    { KEY_M_ALT,     "alt",        N_("Alt") },
-    { KEY_M_ALT,     "ralt",       N_("Alt") },
-    { KEY_M_ALT,     "meta",       N_("Alt") },
-    { KEY_M_SHIFT,   "shift",      N_("Shift") },
+#ifdef __QNXNTO__
+ph_dv_f ph_attach;
+ph_ov_f ph_input_group;
+ph_pqc_f ph_query_cursor;
+#endif
 
-    { 0, 0, 0 }
-};
+#ifdef HAVE_TEXTMODE_X11_SUPPORT
+static Display *x11_display;
+static Window x11_window;
+#endif				/* HAVE_TEXTMODE_X11_SUPPORT */
 
-int
-lookup_keyname (char *keyname)
+/*** file scope functions **********************************************/
+
+inline static int
+add_selects (fd_set *select_set)
 {
-    int i;
+    int top_fd = 0;
 
-    if (keyname[0] == '\0')
-        return 0;
-    if (keyname[1] == '\0')
-        return (int) keyname[0];
+    if (disabled_channels == 0) {
+	SelectList *p;
 
-    for (i = 0; key_name_conv_tab [i].code; i++)
-        if (str_casecmp (key_name_conv_tab [i].name, keyname) == 0)
-            return key_name_conv_tab [i].code;
-
-    return 0;
-}
-
-
-/* Return the code associated with the symbolic name keyname */
-int
-lookup_key (char *keyname)
-{
-    int k = -1;
-    char **keys;
-    guint keys_count = -1;
-    int key = 0;
-    int i = 0;
-
-    if (keyname == NULL)
-        return 0;
-
-    keys = g_strsplit (keyname, " ", -1);
-    keys_count = g_strv_length (keys);
-    for (i = keys_count - 1; i >= 0; i--) {
-        if (keys[i] !=NULL && keys[i][0] != 0) {
-            key = lookup_keyname (keys[i]);
-            if (key & KEY_M_CTRL) {
-                if (k < 256)
-                    k = XCTRL(k);
-                else
-                    k |= key;
-            } else {
-                if (k == -1)
-                    k = key;
-                else
-                    k |= key;
-            }
-        }
+	for (p = select_list; p != NULL; p = p->next) {
+	    FD_SET (p->fd, select_set);
+	    if (p->fd > top_fd)
+		top_fd = p->fd;
+	}
     }
-    if (k == -1)
-        return 0;
 
-    return k;
+    return top_fd;
 }
-
 
 static void
-define_sequences (key_define_t *kd)
+check_selects (fd_set *select_set)
+{
+    if (disabled_channels == 0) {
+	gboolean retry;
+
+	do {
+	    SelectList *p;
+
+	    retry = FALSE;
+	    for (p = select_list; p; p = p->next)
+		if (FD_ISSET (p->fd, select_set)) {
+		    FD_CLR (p->fd, select_set);
+		    (*p->callback)(p->fd, p->info);
+		    retry = TRUE;
+		    break;
+		}
+	} while (retry);
+    }
+}
+
+/* If set timeout is set, then we wait 0.1 seconds, else, we block */
+static void
+try_channels (int set_timeout)
+{
+    struct timeval timeout;
+    static fd_set select_set;
+    struct timeval *timeptr;
+    int v;
+    int maxfdp;
+
+    while (1) {
+	FD_ZERO (&select_set);
+	FD_SET  (input_fd, &select_set);	/* Add stdin */
+	maxfdp = max (add_selects (&select_set), input_fd);
+
+	if (set_timeout) {
+	    timeout.tv_sec = 0;
+	    timeout.tv_usec = 100000;
+	    timeptr = &timeout;
+	} else
+	    timeptr = 0;
+
+	v = select (maxfdp + 1, &select_set, NULL, NULL, timeptr);
+	if (v > 0) {
+	    check_selects (&select_set);
+	    if (FD_ISSET (input_fd, &select_set))
+		return;
+	}
+    }
+}
+
+static key_def *
+create_sequence (const char *seq, int code, int action)
+{
+    key_def *base, *p, *attach;
+
+    for (base = attach = NULL; *seq; seq++) {
+	p = g_new (key_def, 1);
+	if (base == NULL)
+	    base = p;
+	if (attach != NULL)
+	    attach->child = p;
+
+	p->ch   = *seq;
+	p->code = code;
+	p->child = p->next = NULL;
+	if (seq[1] == '\0')
+	    p->action = action;
+	else
+	    p->action = MCKEY_NOACTION;
+	attach = p;
+    }
+    return base;
+}
+
+static void
+define_sequences (const key_define_t *kd)
 {
     int i;
 
     for (i = 0; kd[i].code != 0; i++)
-	define_sequence(kd[i].code, kd[i].seq, kd[i].action);
+	define_sequence (kd[i].code, kd[i].seq, kd[i].action);
 }
-
-#ifdef HAVE_TEXTMODE_X11_SUPPORT
-
-static Display *x11_display;
-static Window x11_window;
 
 static void
 init_key_x11 (void)
 {
-    if (!getenv ("DISPLAY"))
-	return;
-
-    x11_display = mc_XOpenDisplay (0);
-
-    if (x11_display)
-	x11_window = DefaultRootWindow (x11_display);
-}
-#endif				/* HAVE_TEXTMODE_X11_SUPPORT */
-
-
-/* This has to be called before init_slang or whatever routine
-   calls any define_sequence */
-void
-init_key (void)
-{
-    const char *term = getenv ("TERM");
-    char *kt = getenv ("KEYBOARD_KEY_TIMEOUT_US");
-    if (kt != NULL)
-	keyboard_key_timeout = atoi (kt);
-
-    /* This has to be the first define_sequence */
-    /* So, we can assume that the first keys member has ESC */
-    define_sequences (mc_default_keys);
-
-    /* Terminfo on irix does not have some keys */
-    if (xterm_flag
-	|| (term != NULL
-	    && (strncmp (term, "iris-ansi", 9) == 0
-		|| strncmp (term, "xterm", 5) == 0
-		|| strncmp (term, "rxvt", 4) == 0
-		|| strcmp (term, "screen") == 0)))
-	define_sequences (xterm_key_defines);
-
-    /* load some additional keys (e.g. direct Alt-? support) */
-    load_xtra_key_defines ();
-
-#ifdef __QNX__
-    if (term && strncmp (term, "qnx", 3) == 0) {
-	/* Modify the default value of use_8th_bit_as_meta: we would
-	 * like to provide a working mc for a newbie who knows nothing
-	 * about [Options|Display bits|Full 8 bits input]...
-	 *
-	 * Don't use 'meta'-bit, when we are dealing with a
-	 * 'qnx*'-type terminal: clear the default value!
-	 * These terminal types use 0xFF as an escape character,
-	 * so use_8th_bit_as_meta==1 must not be enabled!
-	 *
-	 * [mc-4.1.21+,slint.c/getch(): the DEC_8BIT_HACK stuff
-	 * is not used now (doesn't even depend on use_8th_bit_as_meta
-	 * as in mc-3.1.2)...GREAT!...no additional code is required!]
-	 */
-	use_8th_bit_as_meta = 0;
-    }
-#endif				/* __QNX__ */
-
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
-    init_key_x11 ();
-#endif				/* HAVE_TEXTMODE_X11_SUPPORT */
+    if (getenv ("DISPLAY") != NULL) {
+	x11_display = mc_XOpenDisplay (0);
 
-    /* Load the qansi-m key definitions
-       if we are running under the qansi-m terminal */
-    if (term != NULL && (strncmp (term, "qansi-m", 7) == 0)) {
-	define_sequences (qansi_key_defines);
+	if (x11_display != NULL)
+	    x11_window = DefaultRootWindow (x11_display);
     }
+#endif				/* HAVE_TEXTMODE_X11_SUPPORT */
 }
 
-/* This has to be called after SLang_init_tty/slint_init */
-void init_key_input_fd (void)
+/* Workaround for System V Curses vt100 bug */
+static int
+getch_with_delay (void)
 {
-#ifdef HAVE_SLANG
-    input_fd = SLang_TT_Read_FD;
-#endif
-}
+    int c;
 
+    /* This routine could be used on systems without mouse support,
+       so we need to do the select check :-( */
+    while (1) {
+	if (pending_keys == NULL)
+	    try_channels (0);
+
+	/* Try to get a character */
+	c = get_key_code (0);
+	if (c != -1)
+	    break;
+	/* Failed -> wait 0.1 secs and try again */
+	try_channels (1);
+    }
+    /* Success -> return the character */
+    return c;
+}
 
 static void
 xmouse_get_event (Gpm_Event *ev)
@@ -781,7 +622,7 @@ xmouse_get_event (Gpm_Event *ev)
     int btn;
     static struct timeval tv1 = { 0, 0 }; /* Force first click as single */
     static struct timeval tv2;
-    static int clicks;
+    static int clicks = 0;
     static int last_btn = 0;
 
     /* Decode Xterm mouse information to a GPM style event */
@@ -850,729 +691,6 @@ xmouse_get_event (Gpm_Event *ev)
     ev->y = tty_lowlevel_getch () - 32;
 }
 
-static key_def *create_sequence (const char *seq, int code, int action)
-{
-    key_def *base, *p, *attach;
-
-    for (base = attach = NULL; *seq; seq++) {
-	p = g_new (key_def, 1);
-	if (!base) base = p;
-	if (attach) attach->child = p;
-
-	p->ch   = *seq;
-	p->code = code;
-	p->child = p->next = NULL;
-	if (!seq[1])
-	    p->action = action;
-	else
-	    p->action = MCKEY_NOACTION;
-	attach = p;
-    }
-    return base;
-}
-
-/* The maximum sequence length (32 + null terminator) */
-#define SEQ_BUFFER_LEN 33
-static int seq_buffer [SEQ_BUFFER_LEN];
-static int *seq_append = 0;
-
-static int push_char (int c)
-{
-    if (!seq_append)
-	seq_append = seq_buffer;
-
-    if (seq_append == &(seq_buffer [SEQ_BUFFER_LEN-2]))
-	return 0;
-    *(seq_append++) = c;
-    *seq_append = 0;
-    return 1;
-}
-
-/*
- * Return 1 on success, 0 on error.
- * An error happens if SEQ is a beginning of an existing longer sequence.
- */
-int define_sequence (int code, const char *seq, int action)
-{
-    key_def *base;
-
-    if (strlen (seq) > SEQ_BUFFER_LEN-1)
-	return 0;
-
-    for (base = keys; (base != 0) && *seq; ) {
-	if (*seq == base->ch) {
-	    if (base->child == 0) {
-		if (*(seq+1)) {
-		    base->child = create_sequence (seq+1, code, action);
-		    return 1;
-		} else {
-		    /* The sequence matches an existing one.  */
-		    base->code = code;
-		    base->action = action;
-		    return 1;
-		}
-	    } else {
-		base = base->child;
-		seq++;
-	    }
-	} else {
-	    if (base->next)
-		base = base->next;
-	    else {
-		base->next = create_sequence (seq, code, action);
-		return 1;
-	    }
-	}
-    }
-
-    if (!*seq) {
-	/* Attempt to redefine a sequence with a shorter sequence.  */
-	return 0;
-    }
-
-    keys = create_sequence (seq, code, action);
-    return 1;
-}
-
-static int *pending_keys;
-
-/* Apply corrections for the keycode generated in get_key_code() */
-static int
-correct_key_code (int code)
-{
-    unsigned int c = code & ~KEY_M_MASK;	/* code without modifier */
-    unsigned int mod = code & KEY_M_MASK;	/* modifier */
-    #ifdef __QNXNTO__
-       unsigned int qmod;                       /* bunch of the QNX console
-						   modifiers needs unchanged */
-    #endif /* __QNXNTO__ */
-
-    /*
-     * Add key modifiers directly from X11 or OS.
-     * Ordinary characters only get modifiers from sequences.
-     */
-    if (c < 32 || c >= 256) {
-	mod |= get_modifier ();
-    }
-
-    /* This is needed if the newline is reported as carriage return */
-    if (c == '\r')
-	c = '\n';
-
-    /* This is reported to be useful on AIX */
-    if (c == KEY_SCANCEL)
-	c = '\t';
-
-    /* Convert Shift+Tab and Ctrl+Tab to Back Tab */
-    if ((c == '\t') && (mod & (KEY_M_SHIFT | KEY_M_CTRL))) {
-	c = KEY_BTAB;
-	mod = 0;
-    }
-
-    /* F0 is the same as F10 for out purposes */
-    if (c == KEY_F (0))
-	c = KEY_F (10);
-
-    /*
-     * We are not interested if Ctrl was pressed when entering control
-     * characters, so assume that it was.  When checking for such keys,
-     * XCTRL macro should be used.  In some cases, we are interested,
-     * e.g. to distinguish Ctrl-Enter from Enter.
-     */
-    if (c < 32 && c != ESC_CHAR && c != '\t' && c != '\n') {
-	mod |= KEY_M_CTRL;
-    }
-
-#ifdef __QNXNTO__
-    qmod=get_modifier();
-
-    if ((c == 127) && (mod==0)) /* Add Ctrl/Alt/Shift-BackSpace */
-    {
-	mod |= get_modifier();
-	c = KEY_BACKSPACE;
-    }
-
-    if ((c=='0') && (mod==0)) /* Add Shift-Insert on key pad */
-    {
-	if ((qmod & KEY_M_SHIFT) == KEY_M_SHIFT)
-	{
-	   mod = KEY_M_SHIFT;
-	   c = KEY_IC;
-	}
-    }
-
-    if ((c=='.') && (mod==0)) /* Add Shift-Del on key pad */
-    {
-	if ((qmod & KEY_M_SHIFT) == KEY_M_SHIFT)
-	{
-	   mod = KEY_M_SHIFT;
-	   c = KEY_DC;
-	}
-    }
-#endif /* __QNXNTO__ */
-
-    /* Unrecognized 0177 is delete (preserve Ctrl) */
-    if (c == 0177) {
-	c = KEY_BACKSPACE;
-    }
-
-    /* Unrecognized Ctrl-d is delete */
-    if (c == (31 & 'd')) {
-	c = KEY_DC;
-	mod &= ~KEY_M_CTRL;
-    }
-
-    /* Unrecognized Ctrl-h is backspace */
-    if (c == (31 & 'h')) {
-	c = KEY_BACKSPACE;
-	mod &= ~KEY_M_CTRL;
-    }
-
-    /* Shift+BackSpace is backspace */
-    if (c == KEY_BACKSPACE && (mod & KEY_M_SHIFT)) {
-	mod &= ~KEY_M_SHIFT;
-    }
-
-    /* Convert Shift+Fn to F(n+10) */
-    if (c >= KEY_F (1) && c <= KEY_F (10) && (mod & KEY_M_SHIFT)) {
-	c += 10;
-    }
-
-    /* Remove Shift information from function keys */
-    if (c >= KEY_F (1) && c <= KEY_F (20)) {
-	mod &= ~KEY_M_SHIFT;
-    }
-
-    if (!alternate_plus_minus)
-	switch (c) {
-	case KEY_KP_ADD:
-	    c = '+';
-	    break;
-	case KEY_KP_SUBTRACT:
-	    c = '-';
-	    break;
-	case KEY_KP_MULTIPLY:
-	    c = '*';
-	    break;
-	}
-
-    return (mod | c);
-}
-
-int get_key_code (int no_delay)
-{
-    int c;
-    static key_def *this = NULL, *parent;
-    static struct timeval esctime = { -1, -1 };
-    static int lastnodelay = -1;
-
-    if (no_delay != lastnodelay) {
-	this = NULL;
-	lastnodelay = no_delay;
-    }
-
- pend_send:
-    if (pending_keys) {
-	int d = *pending_keys++;
- check_pend:
-	if (!*pending_keys) {
-	    pending_keys = 0;
-	    seq_append = 0;
-	}
-	if (d == ESC_CHAR && pending_keys) {
-	    d = ALT(*pending_keys++);
-	    goto check_pend;
-	}
-	if ((d > 127 && d < 256) && use_8th_bit_as_meta)
-	    d = ALT(d & 0x7f);
-	this = NULL;
-	return correct_key_code (d);
-    }
-
- nodelay_try_again:
-    if (no_delay) {
-	tty_nodelay (TRUE);
-    }
-    c = tty_lowlevel_getch ();
-#if (defined(USE_NCURSES) || defined(USE_NCURSESW)) && defined(KEY_RESIZE)
-    if (c == KEY_RESIZE)
-	goto nodelay_try_again;
-#endif
-    if (no_delay) {
-	tty_nodelay (FALSE);
-	if (c == -1) {
-	    if (this != NULL && parent != NULL &&
-		parent->action == MCKEY_ESCAPE && old_esc_mode) {
-		struct timeval current, timeout;
-
-		if (esctime.tv_sec == -1)
-		    return -1;
-		GET_TIME (current);
-		timeout.tv_sec = keyboard_key_timeout / 1000000 + esctime.tv_sec;
-		timeout.tv_usec = keyboard_key_timeout % 1000000 + esctime.tv_usec;
-		if (timeout.tv_usec > 1000000) {
-		    timeout.tv_usec -= 1000000;
-		    timeout.tv_sec++;
-		}
-		if (current.tv_sec < timeout.tv_sec)
-		    return -1;
-		if (current.tv_sec == timeout.tv_sec &&
-		    current.tv_usec < timeout.tv_usec)
-		    return -1;
-		this = NULL;
-		pending_keys = seq_append = NULL;
-		return ESC_CHAR;
-	    }
-	    return -1;
-	}
-    } else if (c == -1) {
-	/* Maybe we got an incomplete match.
-	   This we do only in delay mode, since otherwise
-	   tty_lowlevel_getch can return -1 at any time. */
-	if (seq_append) {
-	    pending_keys = seq_buffer;
-	    goto pend_send;
-	}
-	this = NULL;
-	return -1;
-    }
-
-    /* Search the key on the root */
-    if (!no_delay || this == NULL) {
-	this = keys;
-	parent = NULL;
-
-	if ((c > 127 && c < 256) && use_8th_bit_as_meta) {
-	    c &= 0x7f;
-
-	    /* The first sequence defined starts with esc */
-	    parent = keys;
-	    this = keys->child;
-	}
-    }
-    while (this) {
-	if (c == this->ch) {
-	    if (this->child) {
-		if (!push_char (c)) {
-		    pending_keys = seq_buffer;
-		    goto pend_send;
-		}
-		parent = this;
-		this = this->child;
-		if (parent->action == MCKEY_ESCAPE && old_esc_mode) {
-		    if (no_delay) {
-			GET_TIME (esctime);
-			if (this == NULL) {
-			    /* Shouldn't happen */
-			    fputs ("Internal error\n", stderr);
-			    exit (1);
-			}
-			goto nodelay_try_again;
-		    }
-		    esctime.tv_sec = -1;
-		    c = xgetch_second ();
-		    if (c == -1) {
-			pending_keys = seq_append = NULL;
-			this = NULL;
-			return ESC_CHAR;
-		    }
-		} else {
-		    if (no_delay)
-			goto nodelay_try_again;
-		    c = tty_lowlevel_getch ();
-		}
-	    } else {
-		/* We got a complete match, return and reset search */
-		int code;
-
-		pending_keys = seq_append = NULL;
-		code = this->code;
-		this = NULL;
-		return correct_key_code (code);
-	    }
-	} else {
-	    if (this->next)
-		this = this->next;
-	    else {
-		if (parent != NULL && parent->action == MCKEY_ESCAPE) {
-
-		    /* Convert escape-digits to F-keys */
-		    if (g_ascii_isdigit(c))
-			c = KEY_F (c - '0');
-		    else if (c == ' ')
-			c = ESC_CHAR;
-		    else
-			c = ALT(c);
-
-		    pending_keys = seq_append = NULL;
-		    this = NULL;
-		    return correct_key_code (c);
-		}
-		/* Did not find a match or {c} was changed in the if above,
-		   so we have to return everything we had skipped
-		 */
-		push_char (c);
-		pending_keys = seq_buffer;
-		goto pend_send;
-	    }
-	}
-    }
-    this = NULL;
-    return correct_key_code (c);
-}
-
-/* Return the code associated with the symbolic name keyname */
-int lookup_key (char *keyname)
-{
-    int i;
-
-    for (i = 0; key_name_conv_tab [i].code; i++){
-	if (str_casecmp (key_name_conv_tab [i].name, keyname))
-	    continue;
-	return key_name_conv_tab [i].code;
-    }
-    return 0;
-}
-/* If set timeout is set, then we wait 0.1 seconds, else, we block */
-static void
-try_channels (int set_timeout)
-{
-    struct timeval timeout;
-    static fd_set select_set;
-    struct timeval *timeptr;
-    int v;
-    int maxfdp;
-
-    while (1) {
-	FD_ZERO (&select_set);
-	FD_SET  (input_fd, &select_set);	/* Add stdin */
-	maxfdp = max (add_selects (&select_set), input_fd);
-
-	if (set_timeout) {
-	    timeout.tv_sec = 0;
-	    timeout.tv_usec = 100000;
-	    timeptr = &timeout;
-	} else
-	    timeptr = 0;
-
-	v = select (maxfdp + 1, &select_set, NULL, NULL, timeptr);
-	if (v > 0) {
-	    check_selects (&select_set);
-	    if (FD_ISSET (input_fd, &select_set))
-		return;
-	}
-    }
-}
-
-/* Workaround for System V Curses vt100 bug */
-static int getch_with_delay (void)
-{
-    int c;
-
-    /* This routine could be used on systems without mouse support,
-       so we need to do the select check :-( */
-    while (1) {
-	if (!pending_keys)
-	    try_channels (0);
-
-	/* Try to get a character */
-	c = get_key_code (0);
-	if (c != -1)
-	    break;
-	/* Failed -> wait 0.1 secs and try again */
-	try_channels (1);
-    }
-    /* Success -> return the character */
-    return c;
-}
-
-/* Returns a character read from stdin with appropriate interpretation */
-/* Also takes care of generated mouse events */
-/* Returns EV_MOUSE if it is a mouse event */
-/* Returns EV_NONE  if non-blocking or interrupt set and nothing was done */
-int
-tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
-{
-    int c;
-    static int flag;		/* Return value from select */
-#ifdef HAVE_LIBGPM
-    static struct Gpm_Event ev;	/* Mouse event */
-#endif
-    struct timeval timeout;
-    struct timeval *time_addr = NULL;
-    static int dirty = 3;
-
-    if ((dirty == 3) || is_idle ()) {
-	tty_refresh ();
-	dirty = 1;
-    } else
-	dirty++;
-
-    vfs_timeout_handler ();
-
-    /* Ok, we use (event->x < 0) to signal that the event does not contain
-       a suitable position for the mouse, so we can't use show_mouse_pointer
-       on it.
-     */
-    if (event->x > 0) {
-	show_mouse_pointer (event->x, event->y);
-	if (!redo_event)
-	    event->x = -1;
-    }
-
-    /* Repeat if using mouse */
-    while (mouse_enabled && !pending_keys) {
-	int maxfdp;
-	fd_set select_set;
-
-	FD_ZERO (&select_set);
-	FD_SET (input_fd, &select_set);
-	maxfdp = max (add_selects (&select_set), input_fd);
-
-#ifdef HAVE_LIBGPM
-	if (use_mouse_p == MOUSE_GPM) {
-	    if (gpm_fd < 0) {
-		/* Connection to gpm broken, possibly gpm has died */
-		mouse_enabled = 0;
-		use_mouse_p = MOUSE_NONE;
-		break;
-	    } else {
-		FD_SET (gpm_fd, &select_set);
-		maxfdp = max (maxfdp, gpm_fd);
-	    }
-	}
-#endif
-
-	if (redo_event) {
-	    timeout.tv_usec = mou_auto_repeat * 1000;
-	    timeout.tv_sec = 0;
-
-	    time_addr = &timeout;
-	} else {
-	    int seconds;
-
-	    if ((seconds = vfs_timeouts ())) {
-		/* the timeout could be improved and actually be
-		 * the number of seconds until the next vfs entry
-		 * timeouts in the stamp list.
-		 */
-
-		timeout.tv_sec = seconds;
-		timeout.tv_usec = 0;
-		time_addr = &timeout;
-	    } else
-		time_addr = NULL;
-	}
-
-	if (!block || winch_flag) {
-	    time_addr = &timeout;
-	    timeout.tv_sec = 0;
-	    timeout.tv_usec = 0;
-	}
-	tty_enable_interrupt_key ();
-	flag = select (maxfdp + 1, &select_set, NULL, NULL, time_addr);
-	tty_disable_interrupt_key ();
-
-	/* select timed out: it could be for any of the following reasons:
-	 * redo_event -> it was because of the MOU_REPEAT handler
-	 * !block     -> we did not block in the select call
-	 * else       -> 10 second timeout to check the vfs status.
-	 */
-	if (flag == 0) {
-	    if (redo_event)
-		return EV_MOUSE;
-	    if (!block || winch_flag)
-		return EV_NONE;
-	    vfs_timeout_handler ();
-	}
-	if (flag == -1 && errno == EINTR)
-	    return EV_NONE;
-
-	check_selects (&select_set);
-
-	if (FD_ISSET (input_fd, &select_set))
-	    break;
-#ifdef HAVE_LIBGPM
-	if (use_mouse_p == MOUSE_GPM && gpm_fd > 0
-	    && FD_ISSET (gpm_fd, &select_set)) {
-	    Gpm_GetEvent (&ev);
-	    Gpm_FitEvent (&ev);
-	    *event = ev;
-	    return EV_MOUSE;
-	}
-#endif				/* !HAVE_LIBGPM */
-    }
-#ifndef HAVE_SLANG
-    flag = is_wintouched (stdscr);
-    untouchwin (stdscr);
-#endif				/* !HAVE_SLANG */
-    c = block ? getch_with_delay () : get_key_code (1);
-
-#ifndef HAVE_SLANG
-    if (flag)
-	tty_touch_screen ();
-#endif				/* !HAVE_SLANG */
-
-    if (c == MCKEY_MOUSE
-#ifdef KEY_MOUSE
-	|| c == KEY_MOUSE
-#endif				/* KEY_MOUSE */
-	) {
-	/* Mouse event */
-	xmouse_get_event (event);
-	if (event->type)
-	    return EV_MOUSE;
-	else
-	    return EV_NONE;
-    }
-
-    return c;
-}
-
-/* Returns a key press, mouse events are discarded */
-int
-tty_getch ()
-{
-    Gpm_Event ev;
-    int       key;
-
-    ev.x = -1;
-    while ((key = tty_get_event (&ev, FALSE, TRUE)) == EV_NONE)
-	;
-    return key;
-}
-
-static int xgetch_second (void)
-{
-    fd_set Read_FD_Set;
-    int c;
-    struct timeval timeout;
-
-    timeout.tv_sec = keyboard_key_timeout / 1000000;
-    timeout.tv_usec = keyboard_key_timeout % 1000000;
-    tty_nodelay (TRUE);
-    FD_ZERO (&Read_FD_Set);
-    FD_SET (input_fd, &Read_FD_Set);
-    select (input_fd + 1, &Read_FD_Set, NULL, NULL, &timeout);
-    c = tty_lowlevel_getch ();
-    tty_nodelay (FALSE);
-    return c;
-}
-
-static void
-learn_store_key (char *buffer, char **p, int c)
-{
-    if (*p - buffer > 253)
-	return;
-    if (c == ESC_CHAR) {
-	*(*p)++ = '\\';
-	*(*p)++ = 'e';
-    } else if (c < ' ') {
-	*(*p)++ = '^';
-	*(*p)++ = c + 'a' - 1;
-    } else if (c == '^') {
-	*(*p)++ = '^';
-	*(*p)++ = '^';
-    } else
-	*(*p)++ = (char) c;
-}
-
-char *learn_key (void)
-{
-/* LEARN_TIMEOUT in usec */
-#define LEARN_TIMEOUT 200000
-
-    fd_set Read_FD_Set;
-    struct timeval endtime;
-    struct timeval timeout;
-    int c;
-    char buffer [256];
-    char *p = buffer;
-
-    tty_keypad (FALSE); /* disable intepreting keys by ncurses */
-    c = tty_lowlevel_getch ();
-    while (c == -1)
-	c = tty_lowlevel_getch (); /* Sanity check, should be unnecessary */
-    learn_store_key (buffer, &p, c);
-    GET_TIME (endtime);
-    endtime.tv_usec += LEARN_TIMEOUT;
-    if (endtime.tv_usec > 1000000) {
-	endtime.tv_usec -= 1000000;
-	endtime.tv_sec++;
-    }
-    tty_nodelay (TRUE);
-    for (;;) {
-	while ((c = tty_lowlevel_getch ()) == -1) {
-	    GET_TIME (timeout);
-	    timeout.tv_usec = endtime.tv_usec - timeout.tv_usec;
-	    if (timeout.tv_usec < 0)
-		timeout.tv_sec++;
-	    timeout.tv_sec = endtime.tv_sec - timeout.tv_sec;
-	    if (timeout.tv_sec >= 0 && timeout.tv_usec > 0) {
-		FD_ZERO (&Read_FD_Set);
-		FD_SET (input_fd, &Read_FD_Set);
-		select (input_fd + 1, &Read_FD_Set, NULL, NULL, &timeout);
-	    } else
-		break;
-	}
-	if (c == -1)
-	    break;
-	learn_store_key (buffer, &p, c);
-    }
-    tty_keypad (TRUE);
-    tty_nodelay (FALSE);
-    *p = 0;
-    return g_strdup (buffer);
-}
-
-/* xterm and linux console only: set keypad to numeric or application
-   mode. Only in application keypad mode it's possible to distinguish
-   the '+' key and the '+' on the keypad ('*' and '-' ditto)*/
-void
-numeric_keypad_mode (void)
-{
-    if (console_flag || xterm_flag) {
-	fputs ("\033>", stdout);
-	fflush (stdout);
-    }
-}
-
-void
-application_keypad_mode (void)
-{
-    if (console_flag || xterm_flag) {
-	fputs ("\033=", stdout);
-	fflush (stdout);
-    }
-}
-
-
-/*
- * Check if we are idle, i.e. there are no pending keyboard or mouse
- * events.  Return 1 is idle, 0 is there are pending events.
- */
-int
-is_idle (void)
-{
-    int maxfdp;
-    fd_set select_set;
-    struct timeval timeout;
-
-    FD_ZERO (&select_set);
-    FD_SET (input_fd, &select_set);
-    maxfdp = input_fd;
-#ifdef HAVE_LIBGPM
-    if (use_mouse_p == MOUSE_GPM && mouse_enabled && gpm_fd > 0) {
-	FD_SET (gpm_fd, &select_set);
-	maxfdp = max (maxfdp, gpm_fd);
-    }
-#endif
-    timeout.tv_sec = 0;
-    timeout.tv_usec = 0;
-    return (select (maxfdp + 1, &select_set, 0, 0, &timeout) <= 0);
-}
-
-
 /*
  * Get modifier state (shift, alt, ctrl) for the last key pressed.
  * We are assuming that the state didn't change since the key press.
@@ -1592,14 +710,14 @@ get_modifier (void)
 #endif				/* __QNXNTO__ */
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
-    if (x11_window) {
+    if (x11_window != NULL) {
 	Window root, child;
 	int root_x, root_y;
 	int win_x, win_y;
 	unsigned int mask;
 
 	mc_XQueryPointer (x11_display, x11_window, &root, &child, &root_x,
-		       &root_y, &win_x, &win_y, &mask);
+					    &root_y, &win_x, &win_y, &mask);
 
 	if (mask & ShiftMask)
 	    result |= KEY_M_SHIFT;
@@ -1679,25 +797,267 @@ get_modifier (void)
     return result;
 }
 
-static void k_dispose (key_def *k)
+static gboolean
+push_char (int c)
 {
-    if (!k)
-	return;
-    k_dispose (k->child);
-    k_dispose (k->next);
-    g_free (k);
+    gboolean ret = FALSE;
+
+    if (seq_append == NULL)
+	seq_append = seq_buffer;
+
+    if (seq_append != &(seq_buffer [SEQ_BUFFER_LEN - 2])) {
+	*(seq_append++) = c;
+	*seq_append = 0;
+	ret = TRUE;
+    }
+
+    return ret;
 }
 
-static void s_dispose (SelectList *sel)
+/* Apply corrections for the keycode generated in get_key_code() */
+static int
+correct_key_code (int code)
 {
-    if (!sel)
-	return;
+    unsigned int c = code & ~KEY_M_MASK;	/* code without modifier */
+    unsigned int mod = code & KEY_M_MASK;	/* modifier */
+    #ifdef __QNXNTO__
+       unsigned int qmod;                       /* bunch of the QNX console
+						   modifiers needs unchanged */
+    #endif /* __QNXNTO__ */
 
-    s_dispose (sel->next);
-    g_free (sel);
+    /*
+     * Add key modifiers directly from X11 or OS.
+     * Ordinary characters only get modifiers from sequences.
+     */
+    if (c < 32 || c >= 256) {
+	mod |= get_modifier ();
+    }
+
+    /* This is needed if the newline is reported as carriage return */
+    if (c == '\r')
+	c = '\n';
+
+    /* This is reported to be useful on AIX */
+    if (c == KEY_SCANCEL)
+	c = '\t';
+
+    /* Convert Shift+Tab and Ctrl+Tab to Back Tab */
+    if ((c == '\t') && (mod & (KEY_M_SHIFT | KEY_M_CTRL))) {
+	c = KEY_BTAB;
+	mod = 0;
+    }
+
+    /* F0 is the same as F10 for out purposes */
+    if (c == KEY_F (0))
+	c = KEY_F (10);
+
+    /*
+     * We are not interested if Ctrl was pressed when entering control
+     * characters, so assume that it was.  When checking for such keys,
+     * XCTRL macro should be used.  In some cases, we are interested,
+     * e.g. to distinguish Ctrl-Enter from Enter.
+     */
+    if (c < 32 && c != ESC_CHAR && c != '\t' && c != '\n') {
+	mod |= KEY_M_CTRL;
+    }
+
+#ifdef __QNXNTO__
+    qmod = get_modifier ();
+
+    if ((c == 127) && (mod == 0)) /* Add Ctrl/Alt/Shift-BackSpace */
+    {
+	mod |= get_modifier();
+	c = KEY_BACKSPACE;
+    }
+
+    if ((c == '0') && (mod == 0)) /* Add Shift-Insert on key pad */
+    {
+	if ((qmod & KEY_M_SHIFT) == KEY_M_SHIFT)
+	{
+	   mod = KEY_M_SHIFT;
+	   c = KEY_IC;
+	}
+    }
+
+    if ((c == '.') && (mod == 0)) /* Add Shift-Del on key pad */
+    {
+	if ((qmod & KEY_M_SHIFT) == KEY_M_SHIFT)
+	{
+	   mod = KEY_M_SHIFT;
+	   c = KEY_DC;
+	}
+    }
+#endif /* __QNXNTO__ */
+
+    /* Unrecognized 0177 is delete (preserve Ctrl) */
+    if (c == 0177) {
+	c = KEY_BACKSPACE;
+    }
+
+    /* Unrecognized Ctrl-d is delete */
+    if (c == (31 & 'd')) {
+	c = KEY_DC;
+	mod &= ~KEY_M_CTRL;
+    }
+
+    /* Unrecognized Ctrl-h is backspace */
+    if (c == (31 & 'h')) {
+	c = KEY_BACKSPACE;
+	mod &= ~KEY_M_CTRL;
+    }
+
+    /* Shift+BackSpace is backspace */
+    if (c == KEY_BACKSPACE && (mod & KEY_M_SHIFT)) {
+	mod &= ~KEY_M_SHIFT;
+    }
+
+    /* Convert Shift+Fn to F(n+10) */
+    if (c >= KEY_F (1) && c <= KEY_F (10) && (mod & KEY_M_SHIFT)) {
+	c += 10;
+    }
+
+    /* Remove Shift information from function keys */
+    if (c >= KEY_F (1) && c <= KEY_F (20)) {
+	mod &= ~KEY_M_SHIFT;
+    }
+
+    if (!alternate_plus_minus)
+	switch (c) {
+	case KEY_KP_ADD:
+	    c = '+';
+	    break;
+	case KEY_KP_SUBTRACT:
+	    c = '-';
+	    break;
+	case KEY_KP_MULTIPLY:
+	    c = '*';
+	    break;
+	}
+
+    return (mod | c);
 }
 
-void done_key ()
+static int
+xgetch_second (void)
+{
+    fd_set Read_FD_Set;
+    int c;
+    struct timeval timeout;
+
+    timeout.tv_sec = keyboard_key_timeout / 1000000;
+    timeout.tv_usec = keyboard_key_timeout % 1000000;
+    tty_nodelay (TRUE);
+    FD_ZERO (&Read_FD_Set);
+    FD_SET (input_fd, &Read_FD_Set);
+    select (input_fd + 1, &Read_FD_Set, NULL, NULL, &timeout);
+    c = tty_lowlevel_getch ();
+    tty_nodelay (FALSE);
+    return c;
+}
+
+static void
+learn_store_key (char *buffer, char **p, int c)
+{
+    if (*p - buffer > 253)
+	return;
+    if (c == ESC_CHAR) {
+	*(*p)++ = '\\';
+	*(*p)++ = 'e';
+    } else if (c < ' ') {
+	*(*p)++ = '^';
+	*(*p)++ = c + 'a' - 1;
+    } else if (c == '^') {
+	*(*p)++ = '^';
+	*(*p)++ = '^';
+    } else
+	*(*p)++ = (char) c;
+}
+
+static void
+k_dispose (key_def *k)
+{
+    if (k != NULL) {
+	k_dispose (k->child);
+	k_dispose (k->next);
+	g_free (k);
+    }
+}
+
+static void
+s_dispose (SelectList *sel)
+{
+    if (sel != NULL) {
+	s_dispose (sel->next);
+	g_free (sel);
+    }
+}
+
+/*** public functions **************************************************/
+
+/* This has to be called before init_slang or whatever routine
+   calls any define_sequence */
+void
+init_key (void)
+{
+    const char *term = getenv ("TERM");
+    const char *kt = getenv ("KEYBOARD_KEY_TIMEOUT_US");
+    if (kt != NULL)
+	keyboard_key_timeout = atoi (kt);
+
+    /* This has to be the first define_sequence */
+    /* So, we can assume that the first keys member has ESC */
+    define_sequences (mc_default_keys);
+
+    /* Terminfo on irix does not have some keys */
+    if (xterm_flag
+	|| (term != NULL
+	    && (strncmp (term, "iris-ansi", 9) == 0
+		|| strncmp (term, "xterm", 5) == 0
+		|| strncmp (term, "rxvt", 4) == 0
+		|| strcmp (term, "screen") == 0)))
+	define_sequences (xterm_key_defines);
+
+    /* load some additional keys (e.g. direct Alt-? support) */
+    load_xtra_key_defines ();
+
+#ifdef __QNX__
+    if ((term != NULL) && (strncmp (term, "qnx", 3) == 0)) {
+	/* Modify the default value of use_8th_bit_as_meta: we would
+	 * like to provide a working mc for a newbie who knows nothing
+	 * about [Options|Display bits|Full 8 bits input]...
+	 *
+	 * Don't use 'meta'-bit, when we are dealing with a
+	 * 'qnx*'-type terminal: clear the default value!
+	 * These terminal types use 0xFF as an escape character,
+	 * so use_8th_bit_as_meta==1 must not be enabled!
+	 *
+	 * [mc-4.1.21+,slint.c/getch(): the DEC_8BIT_HACK stuff
+	 * is not used now (doesn't even depend on use_8th_bit_as_meta
+	 * as in mc-3.1.2)...GREAT!...no additional code is required!]
+	 */
+	use_8th_bit_as_meta = 0;
+    }
+#endif				/* __QNX__ */
+
+    init_key_x11 ();
+
+    /* Load the qansi-m key definitions
+       if we are running under the qansi-m terminal */
+    if (term != NULL && (strncmp (term, "qansi-m", 7) == 0))
+	define_sequences (qansi_key_defines);
+}
+
+/* This has to be called after SLang_init_tty/slint_init */
+void
+init_key_input_fd (void)
+{
+#ifdef HAVE_SLANG
+    input_fd = SLang_TT_Read_FD;
+#endif
+}
+
+void
+done_key (void)
 {
     k_dispose (keys);
     s_dispose (select_list);
@@ -1706,4 +1066,656 @@ void done_key ()
     if (x11_display)
 	mc_XCloseDisplay (x11_display);
 #endif
+}
+
+void
+add_select_channel (int fd, select_fn callback, void *info)
+{
+    SelectList *new;
+
+    new = g_new (SelectList, 1);
+    new->fd = fd;
+    new->callback = callback;
+    new->info = info;
+    new->next = select_list;
+    select_list = new;
+}
+
+void
+delete_select_channel (int fd)
+{
+    SelectList *p = select_list;
+    SelectList *p_prev = NULL;
+    SelectList *p_next;
+
+    while (p != NULL)
+	if (p->fd == fd) {
+	    p_next = p->next;
+
+	    if (p_prev != NULL)
+		p_prev->next = p_next;
+	    else
+		select_list = p_next;
+
+	    g_free (p);
+	    p = p_next;
+	} else {
+	    p_prev = p;
+	    p = p->next;
+	}
+}
+
+void
+channels_up (void)
+{
+    if (disabled_channels == 0)
+	fputs ("Error: channels_up called with disabled_channels = 0\n",
+	       stderr);
+    disabled_channels--;
+}
+
+void
+channels_down (void)
+{
+    disabled_channels++;
+}
+
+/*
+ * Common handler for standard movement keys in a text area.  Provided
+ * functions are called with the "data" argument.  backfn and forfn also
+ * get an argument indicating how many lines to scroll. Return MSG_HANDLED
+ * if the key was handled, MSG_NOT_HANDLED otherwise.
+ */
+cb_ret_t
+check_movement_keys (int key, int page_size, void *data, move_fn backfn,
+		     move_fn forfn, move_fn topfn, move_fn bottomfn)
+{
+    switch (key) {
+    case KEY_UP:
+    case XCTRL ('p'):
+	(*backfn) (data, 1);
+	break;
+
+    case KEY_DOWN:
+    case XCTRL ('n'):
+	(*forfn) (data, 1);
+	break;
+
+    case KEY_PPAGE:
+    case ALT ('v'):
+	(*backfn) (data, page_size - 1);
+	break;
+
+    case KEY_NPAGE:
+    case XCTRL ('v'):
+	(*forfn) (data, page_size - 1);
+	break;
+
+    case KEY_HOME:
+    case KEY_M_CTRL | KEY_HOME:
+    case KEY_M_CTRL | KEY_PPAGE:
+    case KEY_A1:
+    case ALT ('<'):
+	(*topfn) (data, 0);
+	break;
+
+    case KEY_END:
+    case KEY_M_CTRL | KEY_END:
+    case KEY_M_CTRL | KEY_NPAGE:
+    case KEY_C1:
+    case ALT ('>'):
+	(*bottomfn) (data, 0);
+	break;
+
+    case 'b':
+    case KEY_BACKSPACE:
+	(*backfn) (data, page_size - 1);
+	break;
+
+    case ' ':
+	(*forfn) (data, page_size - 1);
+	break;
+
+    case 'u':
+	(*backfn) (data, page_size / 2);
+	break;
+
+    case 'd':
+	(*forfn) (data, page_size / 2);
+	break;
+
+    case 'g':
+	(*topfn) (data, 0);
+	break;
+
+    case 'G':
+	(*bottomfn) (data, 0);
+	break;
+
+    default:
+	return MSG_NOT_HANDLED;
+    }
+    return MSG_HANDLED;
+}
+
+int
+lookup_keyname (char *keyname)
+{
+    int i;
+
+    if (keyname[0] == '\0')
+        return 0;
+    if (keyname[1] == '\0')
+        return (int) keyname[0];
+
+    for (i = 0; key_name_conv_tab [i].code; i++)
+        if (str_casecmp (key_name_conv_tab [i].name, keyname) == 0)
+            return key_name_conv_tab [i].code;
+
+    return 0;
+}
+
+/* Return the code associated with the symbolic name keyname */
+int
+lookup_key (char *keyname)
+{
+    int k = -1;
+    char **keys;
+    guint keys_count = -1;
+    int key = 0;
+    int i = 0;
+
+    if (keyname == NULL)
+        return 0;
+
+    keys = g_strsplit (keyname, " ", -1);
+    keys_count = g_strv_length (keys);
+    for (i = keys_count - 1; i >= 0; i--) {
+        if (keys[i] !=NULL && keys[i][0] != 0) {
+            key = lookup_keyname (keys[i]);
+            if (key & KEY_M_CTRL) {
+                if (k < 256)
+                    k = XCTRL(k);
+                else
+                    k |= key;
+            } else {
+                if (k == -1)
+                    k = key;
+                else
+                    k |= key;
+            }
+        }
+    }
+    if (k == -1)
+        return 0;
+
+    return k;
+}
+
+/*
+ * Return TRUE on success, FALSE on error.
+ * An error happens if SEQ is a beginning of an existing longer sequence.
+ */
+gboolean
+define_sequence (int code, const char *seq, int action)
+{
+    key_def *base;
+
+    if (strlen (seq) > SEQ_BUFFER_LEN - 1)
+	return FALSE;
+
+    for (base = keys; (base != NULL) && (*seq != '\0'); )
+	if (*seq == base->ch) {
+	    if (base->child == 0) {
+		if (*(seq + 1) != '\0')
+		    base->child = create_sequence (seq + 1, code, action);
+		else {
+		    /* The sequence matches an existing one.  */
+		    base->code = code;
+		    base->action = action;
+		}
+		return 1;
+	    }
+
+	    base = base->child;
+	    seq++;
+	} else {
+	    if (base->next)
+		base = base->next;
+	    else {
+		base->next = create_sequence (seq, code, action);
+		return TRUE;
+	    }
+	}
+
+    if (*seq == '\0') {
+	/* Attempt to redefine a sequence with a shorter sequence.  */
+	return FALSE;
+    }
+
+    keys = create_sequence (seq, code, action);
+    return TRUE;
+}
+
+/*
+ * Check if we are idle, i.e. there are no pending keyboard or mouse
+ * events.  Return 1 is idle, 0 is there are pending events.
+ */
+gboolean
+is_idle (void)
+{
+    int maxfdp;
+    fd_set select_set;
+    struct timeval timeout;
+
+    FD_ZERO (&select_set);
+    FD_SET (input_fd, &select_set);
+    maxfdp = input_fd;
+#ifdef HAVE_LIBGPM
+    if (mouse_enabled && (use_mouse_p == MOUSE_GPM) && (gpm_fd > 0)) {
+	FD_SET (gpm_fd, &select_set);
+	maxfdp = max (maxfdp, gpm_fd);
+    }
+#endif
+    timeout.tv_sec = 0;
+    timeout.tv_usec = 0;
+    return (select (maxfdp + 1, &select_set, 0, 0, &timeout) <= 0);
+}
+
+int
+get_key_code (int no_delay)
+{
+    int c;
+    static key_def *this = NULL, *parent;
+    static struct timeval esctime = { -1, -1 };
+    static int lastnodelay = -1;
+
+    if (no_delay != lastnodelay) {
+	this = NULL;
+	lastnodelay = no_delay;
+    }
+
+ pend_send:
+    if (pending_keys != NULL) {
+	int d = *pending_keys++;
+ check_pend:
+	if (*pending_keys == 0) {
+	    pending_keys = NULL;
+	    seq_append = NULL;
+	}
+	if ((d == ESC_CHAR) && (pending_keys != NULL)) {
+	    d = ALT (*pending_keys++);
+	    goto check_pend;
+	}
+	if ((d > 127 && d < 256) && use_8th_bit_as_meta)
+	    d = ALT(d & 0x7f);
+	this = NULL;
+	return correct_key_code (d);
+    }
+
+ nodelay_try_again:
+    if (no_delay)
+	tty_nodelay (TRUE);
+
+    c = tty_lowlevel_getch ();
+#if (defined(USE_NCURSES) || defined(USE_NCURSESW)) && defined(KEY_RESIZE)
+    if (c == KEY_RESIZE)
+	goto nodelay_try_again;
+#endif
+    if (no_delay) {
+	tty_nodelay (FALSE);
+	if (c == -1) {
+	    if (this != NULL && parent != NULL &&
+		parent->action == MCKEY_ESCAPE && old_esc_mode) {
+		struct timeval current, timeout;
+
+		if (esctime.tv_sec == -1)
+		    return -1;
+		GET_TIME (current);
+		timeout.tv_sec = keyboard_key_timeout / 1000000 + esctime.tv_sec;
+		timeout.tv_usec = keyboard_key_timeout % 1000000 + esctime.tv_usec;
+		if (timeout.tv_usec > 1000000) {
+		    timeout.tv_usec -= 1000000;
+		    timeout.tv_sec++;
+		}
+		if (current.tv_sec < timeout.tv_sec)
+		    return -1;
+		if (current.tv_sec == timeout.tv_sec &&
+		    current.tv_usec < timeout.tv_usec)
+		    return -1;
+		this = NULL;
+		pending_keys = seq_append = NULL;
+		return ESC_CHAR;
+	    }
+	    return -1;
+	}
+    } else if (c == -1) {
+	/* Maybe we got an incomplete match.
+	   This we do only in delay mode, since otherwise
+	   tty_lowlevel_getch can return -1 at any time. */
+	if (seq_append != NULL) {
+	    pending_keys = seq_buffer;
+	    goto pend_send;
+	}
+	this = NULL;
+	return -1;
+    }
+
+    /* Search the key on the root */
+    if (!no_delay || this == NULL) {
+	this = keys;
+	parent = NULL;
+
+	if ((c > 127 && c < 256) && use_8th_bit_as_meta) {
+	    c &= 0x7f;
+
+	    /* The first sequence defined starts with esc */
+	    parent = keys;
+	    this = keys->child;
+	}
+    }
+    while (this != NULL) {
+	if (c == this->ch) {
+	    if (this->child) {
+		if (!push_char (c)) {
+		    pending_keys = seq_buffer;
+		    goto pend_send;
+		}
+		parent = this;
+		this = this->child;
+		if (parent->action == MCKEY_ESCAPE && old_esc_mode) {
+		    if (no_delay) {
+			GET_TIME (esctime);
+			if (this == NULL) {
+			    /* Shouldn't happen */
+			    fputs ("Internal error\n", stderr);
+			    exit (1);
+			}
+			goto nodelay_try_again;
+		    }
+		    esctime.tv_sec = -1;
+		    c = xgetch_second ();
+		    if (c == -1) {
+			pending_keys = seq_append = NULL;
+			this = NULL;
+			return ESC_CHAR;
+		    }
+		} else {
+		    if (no_delay)
+			goto nodelay_try_again;
+		    c = tty_lowlevel_getch ();
+		}
+	    } else {
+		/* We got a complete match, return and reset search */
+		int code;
+
+		pending_keys = seq_append = NULL;
+		code = this->code;
+		this = NULL;
+		return correct_key_code (code);
+	    }
+	} else {
+	    if (this->next != NULL)
+		this = this->next;
+	    else {
+		if ((parent != NULL) && (parent->action == MCKEY_ESCAPE)) {
+		    /* Convert escape-digits to F-keys */
+		    if (g_ascii_isdigit(c))
+			c = KEY_F (c - '0');
+		    else if (c == ' ')
+			c = ESC_CHAR;
+		    else
+			c = ALT (c);
+
+		    pending_keys = seq_append = NULL;
+		    this = NULL;
+		    return correct_key_code (c);
+		}
+		/* Did not find a match or {c} was changed in the if above,
+		   so we have to return everything we had skipped
+		 */
+		push_char (c);
+		pending_keys = seq_buffer;
+		goto pend_send;
+	    }
+	}
+    }
+    this = NULL;
+    return correct_key_code (c);
+}
+
+/* Return the code associated with the symbolic name keyname */
+int
+lookup_key (char *keyname)
+{
+    int i;
+
+    for (i = 0; key_name_conv_tab [i].code; i++)
+	if (str_casecmp (key_name_conv_tab [i].name, keyname) == 0)
+	    return key_name_conv_tab [i].code;
+
+    return 0;
+}
+
+/* Returns a character read from stdin with appropriate interpretation */
+/* Also takes care of generated mouse events */
+/* Returns EV_MOUSE if it is a mouse event */
+/* Returns EV_NONE  if non-blocking or interrupt set and nothing was done */
+int
+tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
+{
+    int c;
+    static int flag;		/* Return value from select */
+#ifdef HAVE_LIBGPM
+    static struct Gpm_Event ev;	/* Mouse event */
+#endif
+    struct timeval timeout;
+    struct timeval *time_addr = NULL;
+    static int dirty = 3;
+
+    if ((dirty == 3) || is_idle ()) {
+	tty_refresh ();
+	dirty = 1;
+    } else
+	dirty++;
+
+    vfs_timeout_handler ();
+
+    /* Ok, we use (event->x < 0) to signal that the event does not contain
+       a suitable position for the mouse, so we can't use show_mouse_pointer
+       on it.
+     */
+    if (event->x > 0) {
+	show_mouse_pointer (event->x, event->y);
+	if (!redo_event)
+	    event->x = -1;
+    }
+
+    /* Repeat if using mouse */
+    while (mouse_enabled && (pending_keys == NULL)) {
+	int maxfdp;
+	fd_set select_set;
+
+	FD_ZERO (&select_set);
+	FD_SET (input_fd, &select_set);
+	maxfdp = max (add_selects (&select_set), input_fd);
+
+#ifdef HAVE_LIBGPM
+	if (use_mouse_p == MOUSE_GPM) {
+	    if (gpm_fd < 0) {
+		/* Connection to gpm broken, possibly gpm has died */
+		mouse_enabled = 0;
+		use_mouse_p = MOUSE_NONE;
+		break;
+	    } else {
+		FD_SET (gpm_fd, &select_set);
+		maxfdp = max (maxfdp, gpm_fd);
+	    }
+	}
+#endif
+
+	if (redo_event) {
+	    timeout.tv_usec = mou_auto_repeat * 1000;
+	    timeout.tv_sec = 0;
+
+	    time_addr = &timeout;
+	} else {
+	    int seconds;
+
+	    if ((seconds = vfs_timeouts ())) {
+		/* the timeout could be improved and actually be
+		 * the number of seconds until the next vfs entry
+		 * timeouts in the stamp list.
+		 */
+
+		timeout.tv_sec = seconds;
+		timeout.tv_usec = 0;
+		time_addr = &timeout;
+	    } else
+		time_addr = NULL;
+	}
+
+	if (!block || winch_flag) {
+	    time_addr = &timeout;
+	    timeout.tv_sec = 0;
+	    timeout.tv_usec = 0;
+	}
+	tty_enable_interrupt_key ();
+	flag = select (maxfdp + 1, &select_set, NULL, NULL, time_addr);
+	tty_disable_interrupt_key ();
+
+	/* select timed out: it could be for any of the following reasons:
+	 * redo_event -> it was because of the MOU_REPEAT handler
+	 * !block     -> we did not block in the select call
+	 * else       -> 10 second timeout to check the vfs status.
+	 */
+	if (flag == 0) {
+	    if (redo_event)
+		return EV_MOUSE;
+	    if (!block || winch_flag)
+		return EV_NONE;
+	    vfs_timeout_handler ();
+	}
+	if (flag == -1 && errno == EINTR)
+	    return EV_NONE;
+
+	check_selects (&select_set);
+
+	if (FD_ISSET (input_fd, &select_set))
+	    break;
+#ifdef HAVE_LIBGPM
+	if (use_mouse_p == MOUSE_GPM && gpm_fd > 0 && FD_ISSET (gpm_fd, &select_set)) {
+	    Gpm_GetEvent (&ev);
+	    Gpm_FitEvent (&ev);
+	    *event = ev;
+	    return EV_MOUSE;
+	}
+#endif				/* !HAVE_LIBGPM */
+    }
+#ifndef HAVE_SLANG
+    flag = is_wintouched (stdscr);
+    untouchwin (stdscr);
+#endif				/* !HAVE_SLANG */
+    c = block ? getch_with_delay () : get_key_code (1);
+
+#ifndef HAVE_SLANG
+    if (flag)
+	tty_touch_screen ();
+#endif				/* !HAVE_SLANG */
+
+    if (c == MCKEY_MOUSE
+#ifdef KEY_MOUSE
+	|| c == KEY_MOUSE
+#endif				/* KEY_MOUSE */
+	) {
+	/* Mouse event */
+	xmouse_get_event (event);
+	return (event->type != 0) ? EV_MOUSE : EV_NONE;
+    }
+
+    return c;
+}
+
+/* Returns a key press, mouse events are discarded */
+int
+tty_getch (void)
+{
+    Gpm_Event ev;
+    int key;
+
+    ev.x = -1;
+    while ((key = tty_get_event (&ev, FALSE, TRUE)) == EV_NONE)
+	;
+    return key;
+}
+
+char *
+learn_key (void)
+{
+/* LEARN_TIMEOUT in usec */
+#define LEARN_TIMEOUT 200000
+
+    fd_set Read_FD_Set;
+    struct timeval endtime;
+    struct timeval timeout;
+    int c;
+    char buffer [256];
+    char *p = buffer;
+
+    tty_keypad (FALSE); /* disable intepreting keys by ncurses */
+    c = tty_lowlevel_getch ();
+    while (c == -1)
+	c = tty_lowlevel_getch (); /* Sanity check, should be unnecessary */
+    learn_store_key (buffer, &p, c);
+    GET_TIME (endtime);
+    endtime.tv_usec += LEARN_TIMEOUT;
+    if (endtime.tv_usec > 1000000) {
+	endtime.tv_usec -= 1000000;
+	endtime.tv_sec++;
+    }
+    tty_nodelay (TRUE);
+    for (;;) {
+	while ((c = tty_lowlevel_getch ()) == -1) {
+	    GET_TIME (timeout);
+	    timeout.tv_usec = endtime.tv_usec - timeout.tv_usec;
+	    if (timeout.tv_usec < 0)
+		timeout.tv_sec++;
+	    timeout.tv_sec = endtime.tv_sec - timeout.tv_sec;
+	    if (timeout.tv_sec >= 0 && timeout.tv_usec > 0) {
+		FD_ZERO (&Read_FD_Set);
+		FD_SET (input_fd, &Read_FD_Set);
+		select (input_fd + 1, &Read_FD_Set, NULL, NULL, &timeout);
+	    } else
+		break;
+	}
+	if (c == -1)
+	    break;
+	learn_store_key (buffer, &p, c);
+    }
+    tty_keypad (TRUE);
+    tty_nodelay (FALSE);
+    *p = '\0';
+    return g_strdup (buffer);
+#undef LEARN_TIMEOUT
+}
+
+/* xterm and linux console only: set keypad to numeric or application
+   mode. Only in application keypad mode it's possible to distinguish
+   the '+' key and the '+' on the keypad ('*' and '-' ditto)*/
+void
+numeric_keypad_mode (void)
+{
+    if (console_flag || xterm_flag) {
+	fputs ("\033>", stdout);
+	fflush (stdout);
+    }
+}
+
+void
+application_keypad_mode (void)
+{
+    if (console_flag || xterm_flag) {
+	fputs ("\033=", stdout);
+	fflush (stdout);
+    }
 }

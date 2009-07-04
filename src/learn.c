@@ -102,29 +102,26 @@ _("Please press the %s\n"
 	/* Esc hides the dialog and do not allow definitions of
 	 * regular characters
 	 */
-	int seq_ok;
+	gboolean seq_ok = FALSE;
 
 	if (*seq && strcmp (seq, "\\e") && strcmp (seq, "\\e\\e")
 	    && strcmp (seq, "^m" ) && strcmp (seq, "^i" )
             && (seq [1] || (*seq < ' ' || *seq > '~'))){
-	    
+
 	    learnchanged = 1;
 	    learnkeys [action - B_USER].sequence = seq;
 	    seq = convert_controls (seq);
 	    seq_ok = define_sequence (key_name_conv_tab [action - B_USER].code,
 				      seq, MCKEY_NOACTION);
-	} else {
-	    seq_ok = 0;
 	}
 
-	if (!seq_ok) {
+	if (!seq_ok)
 	    message (D_NORMAL, _(" Cannot accept this key "),
 		_(" You have entered \"%s\""), seq);
-	}
-	
-    	g_free (seq);
+
+	g_free (seq);
     }
-    
+
     dlg_run_done (d);
     destroy_dlg (d);
     dlg_select_widget (learnkeys [action - B_USER].button);
