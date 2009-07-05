@@ -44,7 +44,7 @@
 #include "edit-impl.h"
 #include "editlock.h"
 #include "edit-widget.h"
-#include "editcmddef.h"
+#include "../src/cmddef.h"
 #include "usermap.h"
 
 #include "../src/tty/color.h"	/* EDITOR_NORMAL_COLOR */
@@ -720,6 +720,13 @@ edit_purge_widget (WEdit *edit)
     edit->macro_i = -1;		/* not recording a macro */
 }
 
+static void
+edit_set_keymap (WEdit *edit)
+{
+    edit->user_map = (global_key_map_t *) editor_keymap->data;
+}
+
+
 #define space_width 1
 
 /*
@@ -829,7 +836,7 @@ edit_init (WEdit *edit, int lines, int columns, const char *filename,
 	edit_move_to_line (edit, line - 1);
     }
 
-    edit_load_user_map(edit);
+    edit_set_keymap (edit);
 
     return edit;
 }

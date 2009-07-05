@@ -48,6 +48,7 @@
 #include "menu.h"		/* menubar_visible declaration */
 #include "cmd.h"
 #include "file.h"		/* safe_delete */
+#include "keybind.h"		/* lookup_action */
 
 #ifdef USE_VFS
 #include "../vfs/gc.h"
@@ -76,6 +77,7 @@ extern int num_history_items_recorded;
 char *profile_name;		/* .mc/ini */
 char *global_profile_name;	/* mc.lib */
 char *panels_profile_name;	/* .mc/panels.ini */
+char *global_keymap_name;	/* GLOBAL_KEYMAP_FILE */
 
 char *setup_color_string;
 char *term_color_string;
@@ -595,10 +597,15 @@ load_setup (void)
     /* mc.lib is common for all users, but has priority lower than
        ~/.mc/ini.  FIXME: it's only used for keys and treestore now */
     global_profile_name = concat_dir_and_file (mc_home, "mc.lib");
-
     if (!exist_file(global_profile_name)) {
 	g_free (global_profile_name);
 	global_profile_name = concat_dir_and_file (mc_home_alt, "mc.lib");
+    }
+
+    global_keymap_name = concat_dir_and_file (mc_home, GLOBAL_KEYMAP_FILE);
+    if (!exist_file(global_keymap_name)) {
+	g_free (global_keymap_name);
+	global_keymap_name = concat_dir_and_file (mc_home_alt, GLOBAL_KEYMAP_FILE);
     }
     panels_profile_name = concat_dir_and_file (home_dir, PANELS_PROFILE_NAME);
 
@@ -701,6 +708,7 @@ load_anon_passwd ()
 
 void done_setup (void)
 {
+    g_free (global_keymap_name);
     g_free (profile_name);
     g_free (global_profile_name);
     g_free(color_terminal_string);
@@ -783,5 +791,73 @@ void load_key_defs (void)
     }
     load_keys_from_section ("general", mc_main_config);
     load_keys_from_section (getenv ("TERM"), mc_main_config);
+
+}
+
+static void
+load_keymap_from_section (const char *section_name, GArray *keymap, mc_config_t *cfg)
+{
+    gchar **profile_keys, **keys;
+    gchar **values, **curr_values;
+    char *valcopy, *value;
+    int  action;
+    gsize len, values_len;
+
+    if (!section_name)
+	return;
+
+    profile_keys = keys = mc_config_get_keys (cfg, section_name, &len);
+
+    while (*profile_keys) {
+	curr_values = values = mc_config_get_string_list (cfg, section_name, *profile_keys, &values_len);
+	action = lookup_action (*profile_keys);
+	if (action>0) {
+	    if (curr_values){
+	        while (*curr_values){
+	            valcopy = convert_controls (*curr_values);
+	            keybind_cmd_bind (keymap, valcopy, action);
+	            g_free (valcopy);
+	            curr_values++;
+	        }
+	    } else {
+	        value = mc_config_get_string (cfg, section_name, *profile_keys, "");
+	        valcopy = convert_controls (value);
+	        //define_sequence (key_code, valcopy, MCKEY_NOACTION);
+	        g_free (valcopy);
+	        g_free(value);
+	    }
+	}
+	profile_keys++;
+	if (values)
+	    g_strfreev(values);
+    }
+    g_strfreev(keys);
+}
+
+void
+load_keymap_defs (void)
+{
+    /*
+     * Load keymap from GLOBAL_KEYMAP_FILE before ~/.mc/keymap, so that the user
+     * definitions override global settings.
+     */
+    mc_config_t *mc_global_keymap;
+
+    mc_global_keymap = mc_config_init(global_keymap_name);
+    if (mc_global_keymap != NULL)
+    {
+        editor_keymap = g_array_new(TRUE, FALSE, sizeof(global_key_map_t));
+        load_keymap_from_section ("editor", editor_keymap, mc_global_keymap);
+
+        main_keymap = g_array_new(TRUE, FALSE, sizeof(global_key_map_t));
+        load_keymap_from_section ("main", main_keymap, mc_global_keymap);
+
+        main_x_keymap = g_array_new(TRUE, FALSE, sizeof(global_key_map_t));
+        load_keymap_from_section ("main:xmap", main_x_keymap, mc_global_keymap);
+
+        screen_keymap = g_array_new(TRUE, FALSE, sizeof(global_key_map_t));
+        load_keymap_from_section ("panel", screen_keymap, mc_global_keymap);
+        mc_config_deinit(mc_global_keymap);
+    }
 
 }

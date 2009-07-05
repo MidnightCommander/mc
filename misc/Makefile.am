@@ -14,6 +14,7 @@ LIBFILES_CONST = \
 	edit.spell.rc \
 	mc.lib \
 	filehighlight.ini \
+	mc.keymap \
 	mc.menu
 
 

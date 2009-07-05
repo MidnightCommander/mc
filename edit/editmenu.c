@@ -54,6 +54,9 @@
 #include "../src/main.h"	/* drop_menus */
 #include "../src/learn.h"	/* learn_keys */
 
+#include "edit-widget.h"
+#include "../src/cmddef.h"
+
 static void
 menu_cmd (int command)
 {

@@ -10,6 +10,8 @@
 #include "../src/search/search.h"		/* mc_search_t */
 
 #include "edit-impl.h"
+#include "../src/keybind.h"
+
 
 #define MAX_MACRO_LENGTH 1024
 #define N_LINE_CACHES 32
@@ -31,11 +33,6 @@ struct syntax_rule {
     unsigned char _context;
     unsigned char border;
 };
-
-typedef struct edit_key_map_type {
-    long key;
-    long command;
-} edit_key_map_type;
 
 struct WEdit {
     Widget widget;
@@ -132,9 +129,9 @@ struct WEdit {
     struct macro macro[MAX_MACRO_LENGTH];
 
     /* user map stuff */
-    const edit_key_map_type *user_map;
-    const edit_key_map_type *ext_map;
     GIConv converter;
+    const global_key_map_t *user_map;
+    const global_key_map_t *ext_map;
 
     /* line break */
     LineBreaks lb;

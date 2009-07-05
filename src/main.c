@@ -77,6 +77,7 @@
 #include "widget.h"
 #include "command.h"
 #include "wtools.h"
+#include "cmddef.h"
 
 #include "../vfs/vfs.h"		/* vfs_translate_url() */
 
@@ -99,6 +100,8 @@
 #ifdef USE_VFS
 #include "../vfs/gc.h"
 #endif
+
+#include "keybind.h"		/* type global_key_map_t */
 
 /* When the modes are active, left_panel, right_panel and tree_panel */
 /* Point to a proper data structure.  You should check with the functions */
@@ -301,6 +304,151 @@ mc_main_error_quark (void)
   return g_quark_from_static_string (PACKAGE);
 }
 
+GArray *editor_keymap = NULL;
+GArray *main_keymap = NULL;
+GArray *main_x_keymap = NULL;
+GArray *screen_keymap = NULL;
+
+const global_key_map_t *main_map;
+const global_key_map_t *main_x_map;
+
+static const global_key_map_t default_main_map[] = {
+    {KEY_F (19), CK_MenuLastSelectedCmd},
+    {KEY_F (20), CK_QuietQuitCmd},
+    {XCTRL ('@'), CK_SingleDirsizeCmd},
+    /* Copy useful information to the command line */
+    {ALT ('a'), CK_CopyCurrentPathname},
+    {ALT ('A'), CK_CopyOtherPathname},
+    {ALT ('c'), CK_QuickCdCmd},
+    /* To access the directory hotlist */
+    {XCTRL ('\\'), CK_QuickChdirCmd},
+    /* Suspend */
+    {XCTRL ('z'), CK_SuspendCmd},
+    /* The filtered view command */
+    {ALT ('!'), CK_FilteredViewCmd},
+    /* Find file */
+    {ALT ('?'), CK_FindCmd},
+    /* Panel refresh */
+    {XCTRL ('r'), CK_RereadCmd},
+    /* Toggle listing between long, user defined and full formats */
+    {ALT ('t'), CK_ToggleListingCmd},
+    /* Swap panels */
+    {XCTRL ('u'), CK_SwapCmd},
+    /* View output */
+    {XCTRL ('o'), CK_ViewOtherCmd},
+    {XCTRL ('x'), CK_StartExtCmd},
+    { 0, 0 }
+};
+
+static const global_key_map_t default_main_x_map[] = {
+    {XCTRL ('c'), CK_QuitCmd},
+    {'d', CK_CompareDirsCmd},
+#ifdef USE_VFS
+    {'a', CK_ReselectVfs},
+#endif				/* USE_VFS */
+    {'p', CK_CopyCurrentPathname},
+    {XCTRL ('p'), CK_CopyOtherPathname},
+    {'t', CK_CopyCurrentTagged},
+    {XCTRL ('t'), CK_CopyCurrentReadlink},
+    {'c', CK_ChmodCmd},
+    {'o', CK_ChownCmd},
+    {'r', CK_CopyCurrentReadlink},
+    {XCTRL ('r'), CK_CopyOtherReadlink},
+    {'l', CK_LinkCmd},
+    {'s', CK_SymlinkCmd},
+    {XCTRL ('s'), CK_EditSymlinkCmd},
+    {'i', CK_InfoCmd},
+    {'q', CK_QuickViewCmd},
+    {'h', CK_AddHotlist},
+    {'!', CK_ExternalPanelize},
+#ifdef WITH_BACKGROUND
+    {'j', CK_JobsCmd},
+#endif				/* WITH_BACKGROUND */
+    {0, 0}
+};
+
+static void
+reload_panelized (WPanel *panel)
+{
+    int i, j;
+    dir_list *list = &panel->dir;
+
+    if (panel != current_panel)
+	mc_chdir (panel->cwd);
+
+    for (i = 0, j = 0; i < panel->count; i++) {
+	if (list->list[i].f.marked) {
+	    /* Unmark the file in advance. In case the following mc_lstat
+	     * fails we are done, else we have to mark the file again
+	     * (Note: do_file_mark depends on a valid "list->list [i].buf").
+	     * IMO that's the best way to update the panel's summary status
+	     * -- Norbert
+	     */
+	    do_file_mark (panel, i, 0);
+	}
+	if (mc_lstat (list->list[i].fname, &list->list[i].st)) {
+	    g_free (list->list[i].fname);
+	    continue;
+	}
+	if (list->list[i].f.marked)
+	    do_file_mark (panel, i, 1);
+	if (j != i)
+	    list->list[j] = list->list[i];
+	j++;
+    }
+    if (j == 0)
+	panel->count = set_zero_dir (list);
+    else
+	panel->count = j;
+
+    if (panel != current_panel)
+	mc_chdir (current_panel->cwd);
+}
+
+static void
+update_one_panel_widget (WPanel *panel, int force_update,
+			 const char *current_file)
+{
+    int free_pointer;
+    char *my_current_file = NULL;
+
+    if (force_update & UP_RELOAD) {
+	panel->is_panelized = 0;
+	mc_setctl (panel->cwd, VFS_SETCTL_FLUSH, 0);
+	memset (&(panel->dir_stat), 0, sizeof (panel->dir_stat));
+    }
+
+    /* If current_file == -1 (an invalid pointer) then preserve selection */
+    if (current_file == UP_KEEPSEL) {
+	free_pointer = 1;
+	my_current_file = g_strdup (panel->dir.list[panel->selected].fname);
+	current_file = my_current_file;
+    } else
+	free_pointer = 0;
+
+    if (panel->is_panelized)
+	reload_panelized (panel);
+    else
+	panel_reload (panel);
+
+    try_to_select (panel, current_file);
+    panel->dirty = 1;
+
+    if (free_pointer)
+	g_free (my_current_file);
+}
+
+static void
+update_one_panel (int which, int force_update, const char *current_file)
+{
+    WPanel *panel;
+
+    if (get_display_type (which) != view_listing)
+	return;
+
+    panel = (WPanel *) get_panel_widget (which);
+    update_one_panel_widget (panel, force_update, current_file);
+}
 
 /* Save current stat of directories to avoid reloading the panels */
 /* when no modifications have taken place */
@@ -1093,33 +1241,6 @@ init_labels (void)
     buttonbar_set_label (midnight_dlg, 10, _("Quit"), quit_cmd);
 }
 
-static const key_map ctl_x_map[] = {
-    {XCTRL ('c'), quit_cmd},
-    {'d', compare_dirs_cmd},
-#ifdef USE_VFS
-    {'a', reselect_vfs},
-#endif				/* USE_VFS */
-    {'p', copy_current_pathname},
-    {XCTRL ('p'), copy_other_pathname},
-    {'t', copy_current_tagged},
-    {XCTRL ('t'), copy_other_tagged},
-    {'c', chmod_cmd},
-    {'o', chown_cmd},
-    {'r', copy_current_readlink},
-    {XCTRL ('r'), copy_other_readlink},
-    {'l', link_cmd},
-    {'s', symlink_cmd},
-    {XCTRL ('s'), edit_symlink_cmd},
-    {'i', info_cmd_no_menu},
-    {'q', quick_cmd_no_menu},
-    {'h', add2hotlist_cmd},
-    {'!', external_panelize},
-#ifdef WITH_BACKGROUND
-    {'j', jobs_cmd},
-#endif				/* WITH_BACKGROUND */
-    {0, 0}
-};
-
 static int ctl_x_map_enabled = 0;
 
 static void
@@ -1133,54 +1254,95 @@ nothing (void)
 {
 }
 
-static const key_map default_map[] = {
-    {KEY_F (19), menu_last_selected_cmd},
-    {KEY_F (20), quiet_quit_cmd},
-
-    {XCTRL ('@'), smart_dirsize_cmd},
-
-    /* Copy useful information to the command line */
-    {ALT ('a'), copy_current_pathname},
-    {ALT ('A'), copy_other_pathname},
-
-    {ALT ('c'), quick_cd_cmd},
-
-    /* To access the directory hotlist */
-    {XCTRL ('\\'), quick_chdir_cmd},
-
-    /* Suspend */
-    {XCTRL ('z'), suspend_cmd},
-
-    /* The filtered view command */
-    {ALT ('!'), filtered_view_cmd},
-
-    /* Find file */
-    {ALT ('?'), find_cmd},
-
-    /* Panel refresh */
-    {XCTRL ('r'), reread_cmd},
-
-    /* Toggle listing between long, user defined and full formats */
-    {ALT ('t'), toggle_listing_cmd},
-
-    /* Swap panels */
-    {XCTRL ('u'), swap_cmd},
-
-    /* View output */
-    {XCTRL ('o'), view_other_cmd},
-
-    /* Control-X keybindings */
-    {XCTRL ('x'), ctl_x_cmd},
-
-    /* Show/hide hidden files */
-    {ALT ('.'), toggle_show_hidden},
-
-    /* Trap dlg's exit commands */
-    {ESC_CHAR, nothing},
-    {XCTRL ('c'), nothing},
-    {XCTRL ('g'), nothing},
-    {0, 0},
-};
+void
+execute_cmd(int command)
+{
+    switch (command) {
+    case CK_MenuLastSelectedCmd:
+        menu_last_selected_cmd ();
+        break;
+    case CK_QuietQuitCmd:
+        quiet_quit_cmd ();
+        break;
+    case CK_SingleDirsizeCmd:
+        single_dirsize_cmd ();
+        break;
+    case CK_CopyCurrentPathname:
+        copy_current_pathname ();
+        break;
+    case CK_CopyOtherPathname:
+        copy_other_pathname ();
+        break;
+    case CK_QuickCdCmd:
+        quick_cd_cmd ();
+        break;
+    case CK_QuickChdirCmd:
+        quick_chdir_cmd ();
+        break;
+    case CK_SuspendCmd:
+        suspend_cmd ();
+        break;
+    case CK_FilteredViewCmd:
+        filtered_view_cmd ();
+        break;
+    case CK_FindCmd:
+        find_cmd ();
+        break;
+    case CK_RereadCmd:
+        reread_cmd ();
+        break;
+    case CK_ToggleListingCmd:
+        toggle_listing_cmd ();
+        break;
+    case CK_SwapCmd:
+        swap_cmd ();
+        break;
+    case CK_ViewOtherCmd:
+        view_other_cmd ();
+        break;
+    case CK_QuitCmd:
+        break;
+    case CK_CompareDirsCmd:
+        break;
+    case CK_ReselectVfs:
+        break;
+    case CK_CopyCurrentTagged:
+        copy_current_tagged ();
+        break;
+    case CK_CopyOtherTarget:
+        copy_other_tagged ();
+        break;
+    case CK_CopyCurrentReadlink:
+        copy_current_readlink ();
+        break;
+    case CK_CopyOthertReadlink:
+        copy_other_readlink ();
+        break;
+    case CK_ChmodCmd:
+        break;
+    case CK_ChownCmd:
+        break;
+    case CK_LinkCmd:
+        break;
+    case CK_SymlinkCmd:
+        break;
+    case CK_EditSymlinkCmd:
+        break;
+    case CK_InfoCmd:
+        break;
+    case CK_QuickViewCmd:
+        break;
+    case CK_AddHotlist:
+        break;
+    case CK_ExternalPanelize:
+        break;
+    case CK_JobsCmd:
+        break;
+    case CK_StartExtCmd:
+        ctl_x_cmd ();
+        break;
+    }
+}
 
 static void
 setup_pre (void)
@@ -1400,9 +1562,9 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
     case DLG_KEY:
 	if (ctl_x_map_enabled) {
 	    ctl_x_map_enabled = 0;
-	    for (i = 0; ctl_x_map[i].key_code; i++)
-		if (parm == ctl_x_map[i].key_code) {
-		    (*ctl_x_map[i].fn) ();
+	    for (i = 0; main_x_map[i].key; i++)
+		if (parm == main_x_map[i].key) {
+		    execute_cmd (main_x_map[i].command);
 		    return MSG_HANDLED;
 		}
 	}
@@ -1502,15 +1664,15 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	}
 	if (ctl_x_map_enabled) {
 	    ctl_x_map_enabled = 0;
-	    for (i = 0; ctl_x_map[i].key_code; i++)
-		if (parm == ctl_x_map[i].key_code) {
-		    (*ctl_x_map[i].fn) ();
+	    for (i = 0; main_x_map[i].key; i++)
+		if (parm == main_x_map[i].key) {
+		    execute_cmd (main_x_map[i].command);
 		    return MSG_HANDLED;
 		}
 	} else {
-	    for (i = 0; default_map[i].key_code; i++) {
-		if (parm == default_map[i].key_code) {
-		    (*default_map[i].fn) ();
+	    for (i = 0; main_map[i].key; i++) {
+		if (parm == main_map[i].key) {
+		    execute_cmd (main_map[i].command);
 		    return MSG_HANDLED;
 		}
 	    }
@@ -1689,6 +1851,15 @@ do_nc (void)
 
     /* start check display_codepage and source_codepage */
     check_codeset();
+    main_map = default_main_map;
+
+   if (main_keymap && main_keymap->len > 0)
+       main_map = (global_key_map_t *) main_keymap->data;
+
+    main_x_map = default_main_x_map;
+
+   if (main_x_keymap && main_x_keymap->len > 0)
+       main_x_map = (global_key_map_t *) main_x_keymap->data;
 
     /* Check if we were invoked as an editor or file viewer */
     if (!mc_maybe_editor_or_viewer ()) {
@@ -2003,6 +2174,8 @@ main (int argc, char *argv[])
 
     /* Removing this from the X code let's us type C-c */
     load_key_defs ();
+
+    load_keymap_defs ();
 
     /* Also done after init_subshell, to save any shell init file messages */
     if (console_flag)

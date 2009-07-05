@@ -1,0 +1,44 @@
+[editor]
+XStore = ctrl g
+XPaste = ctrl v
+XCut = ctrl x
+Delete-Line = ctrl y
+
+[main]
+FindCmd = alt f7
+ViewOtherCmd = ctrl o
+
+[panel:xmap]
+
+
+[panel]
+PanelStartSearch = ctrl s
+PanelMarkFile = ins
+PanelMoveDown = down
+PanelMoveUp = up
+PanelMoveLeft = left
+PanelMoveRight = right
+PanelPrevPage = pgup
+PanelNextPage = pgdn
+PanelDoEnter = enter
+PanelChdirOtherPanel = alt o
+PanelChdirToReadlink = alt l
+PanelViewSimple = shift F3
+PanelEditNew = F14
+PanelCopyLocal = F15
+PanelRenameLocal = F16
+PanelDeleteLocal = F18
+PanelReverseSelection = alt *
+PanelSelect = plus
+PanelUnselect = minus
+PanelCtrlNextPage = ctrl pgdn
+PanelCtrlPrevPage = ctrl pgup
+PanelDirectoryHistoryList = alt h
+PanelDirectoryHistoryNext = alt u
+PanelDirectoryHistoryPrev = alt y
+PanelGotoBottomFile = alt j
+PanelGotoMiddleFile = alt r
+PanelSyncOtherPanel = alt i
+PanelGotoTopFile = alt g
+PanelSetPanelEncoding = ctrl t
+
