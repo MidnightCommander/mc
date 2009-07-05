@@ -64,7 +64,7 @@
 #include "../edit/edit-impl.h"
 #include "../edit/edit.h"
 #include "../edit/editlock.h"
-#include "../edit/editcmddef.h"
+#include "../src/cmddef.h"
 #include "../edit/edit-widget.h"
 #include "../edit/editcmd_dialogs.h"
 #include "../edit/etags.h"

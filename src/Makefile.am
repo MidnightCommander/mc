@@ -71,6 +71,7 @@ SRCS =	args.c args.h achown.c achown.h background.c background.h	\
 	user.h util.c util.h utilunix.c vfsdummy.h 			\
 	widget.c widget.h wtools.c wtools.h unixcompat.h		\
 	ecs.h ecs.c							\
+	keybind.c keybind.h cmddef.h					\
 	strutil.h strutil.c strutilascii.c strutil8bit.c strutilutf8.c	\
 	search/search.h strescape.c strescape.h
 
