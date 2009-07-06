@@ -12,7 +12,7 @@ AC_DEFUN([MC_VERSION],[
         ${srcdir}/maint/version.sh ${srcdir}
     fi
     if test -f ${srcdir}/version.h; then
-        VERSION=$(cat ${srcdir}/version.h| grep '^#define MC_CURRENT_VERSION'| sed -r 's/.*"(.*)"$/\1/')
+        VERSION=$(grep '^#define MC_CURRENT_VERSION' ${srcdir}/version.h | sed 's/.*"\(.*\)"$/\1/')
     else
         VERSION="unknown"
     fi
