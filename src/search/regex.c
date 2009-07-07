@@ -233,7 +233,7 @@ static mc_search__found_cond_t
 mc_search__regex_found_cond_one (mc_search_t * mc_search, mc_search_regex_t * regex,
                                  GString * search_str)
 {
-#if GLIB_CHECK_VERSION (2, 14, 0)
+#ifdef SEARCH_TYPE_GLIB
     GError *error = NULL;
 
     if (!g_regex_match_full
@@ -250,14 +250,14 @@ mc_search__regex_found_cond_one (mc_search_t * mc_search, mc_search_regex_t * re
         return COND__NOT_FOUND;
     }
     mc_search->num_rezults = g_match_info_get_match_count (mc_search->regex_match_info);
-#else
+#else /* SEARCH_TYPE_GLIB */
     mc_search->num_rezults = pcre_exec (regex, mc_search->regex_match_info,
                                         search_str->str, search_str->len, 0, 0, mc_search->iovector,
                                         MC_SEARCH__NUM_REPLACE_ARGS);
     if (mc_search->num_rezults < 0) {
         return COND__NOT_FOUND;
     }
-#endif /* GLIB_CHECK_VERSION (2, 14, 0) */
+#endif /* SEARCH_TYPE_GLIB */
     return COND__FOUND_OK;
 
 }
@@ -329,12 +329,12 @@ mc_search_regex__get_token_by_num (const mc_search_t * mc_search, gsize index)
 {
     int fnd_start = 0, fnd_end = 0;
 
-#if GLIB_CHECK_VERSION (2, 14, 0)
+#ifdef SEARCH_TYPE_GLIB
     g_match_info_fetch_pos (mc_search->regex_match_info, index, &fnd_start, &fnd_end);
-#else /* GLIB_CHECK_VERSION (2, 14, 0) */
+#else /* SEARCH_TYPE_GLIB */
     fnd_start = mc_search->iovector[index * 2 + 0];
     fnd_end = mc_search->iovector[index * 2 + 1];
-#endif /* GLIB_CHECK_VERSION (2, 14, 0) */
+#endif /* SEARCH_TYPE_GLIB */
 
     if (fnd_end - fnd_start == 0)
         return NULL;
@@ -476,12 +476,12 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * mc_sea
                                        mc_search_cond_t * mc_search_cond)
 {
     GString *tmp = NULL;
-#if GLIB_CHECK_VERSION (2, 14, 0)
+#ifdef SEARCH_TYPE_GLIB
     GError *error = NULL;
-#else
+#else /* SEARCH_TYPE_GLIB */
     const char *error;
     int erroffset;
-#endif
+#endif /* SEARCH_TYPE_GLIB */
 
     if (!mc_search->is_case_sentitive) {
         tmp = g_string_new_len (mc_search_cond->str->str, mc_search_cond->str->len);
@@ -489,7 +489,7 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * mc_sea
         mc_search_cond->str = mc_search__cond_struct_new_regex_ci_str (charset, tmp->str, tmp->len);
         g_string_free (tmp, TRUE);
     }
-#if GLIB_CHECK_VERSION (2, 14, 0)
+#ifdef SEARCH_TYPE_GLIB
     mc_search_cond->regex_handle =
         g_regex_new (mc_search_cond->str->str, G_REGEX_OPTIMIZE | G_REGEX_RAW | G_REGEX_DOTALL, 0,
                      &error);
@@ -500,7 +500,7 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * mc_sea
         g_error_free (error);
         return;
     }
-#else /* GLIB_CHECK_VERSION (2, 14, 0) */
+#else /* SEARCH_TYPE_GLIB */
     mc_search_cond->regex_handle =
         pcre_compile (mc_search_cond->str->str, PCRE_EXTRA, &error, &erroffset, NULL);
     if (mc_search_cond->regex_handle == NULL) {
@@ -518,7 +518,7 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * mc_sea
             return;
         }
     }
-#endif /* GLIB_CHECK_VERSION (2, 14, 0) */
+#endif /* SEARCH_TYPE_GLIB */
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -563,12 +563,12 @@ mc_search__run_regex (mc_search_t * mc_search, const void *user_data,
 
         switch (mc_search__regex_found_cond (mc_search, mc_search->regex_buffer)) {
         case COND__FOUND_OK:
-#if GLIB_CHECK_VERSION (2, 14, 0)
+#ifdef SEARCH_TYPE_GLIB
             g_match_info_fetch_pos (mc_search->regex_match_info, 0, &start_pos, &end_pos);
-#else /* GLIB_CHECK_VERSION (2, 14, 0) */
+#else /* SEARCH_TYPE_GLIB */
             start_pos = mc_search->iovector[0];
             end_pos = mc_search->iovector[1];
-#endif /* GLIB_CHECK_VERSION (2, 14, 0) */
+#endif /* SEARCH_TYPE_GLIB */
             if (found_len)
                 *found_len = end_pos - start_pos;
             mc_search->normal_offset = start_buffer + start_pos;

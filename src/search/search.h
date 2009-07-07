@@ -5,7 +5,7 @@
 
 #include "../src/global.h"      /* <glib.h> */
 
-#if ! GLIB_CHECK_VERSION (2, 14, 0)
+#ifdef SEARCH_TYPE_PCRE
 #	include <pcre.h>
 #endif
 
@@ -15,8 +15,8 @@ typedef int (*mc_search_fn) (const void *user_data, gsize char_offset);
 
 #define MC_SEARCH__NUM_REPLACE_ARGS 64
 
-#if GLIB_CHECK_VERSION (2, 14, 0)
-#define mc_search_matchinfo_t GMatchInfo
+#ifdef SEARCH_TYPE_GLIB
+#	define mc_search_matchinfo_t GMatchInfo
 #else
 #	define mc_search_matchinfo_t pcre_extra
 #endif
@@ -74,9 +74,9 @@ typedef struct mc_search_struct {
     int num_rezults;
     mc_search_matchinfo_t *regex_match_info;
     GString *regex_buffer;
-#if ! GLIB_CHECK_VERSION (2, 14, 0)
+#ifdef SEARCH_TYPE_PCRE
     int iovector[MC_SEARCH__NUM_REPLACE_ARGS * 2];
-#endif                          /* ! GLIB_CHECK_VERSION (2, 14, 0) */
+#endif                          /* SEARCH_TYPE_PCRE */
 
 /* private data */
 
