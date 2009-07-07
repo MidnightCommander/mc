@@ -96,12 +96,12 @@ mc_search__cond_struct_free (mc_search_cond_t * mc_search_cond)
     g_string_free (mc_search_cond->str, TRUE);
     g_free (mc_search_cond->charset);
 
-#if GLIB_CHECK_VERSION (2, 14, 0)
+#ifdef SEARCH_TYPE_GLIB
     if (mc_search_cond->regex_handle)
         g_regex_unref (mc_search_cond->regex_handle);
-#else /* GLIB_CHECK_VERSION (2, 14, 0) */
+#else /* SEARCH_TYPE_GLIB */
     g_free (mc_search_cond->regex_handle);
-#endif /* GLIB_CHECK_VERSION (2, 14, 0) */
+#endif /* SEARCH_TYPE_GLIB */
 
     g_free (mc_search_cond);
 }
@@ -160,12 +160,12 @@ mc_search_free (mc_search_t * mc_search)
     if (mc_search->conditions)
         mc_search__conditions_free (mc_search->conditions);
 
-#if GLIB_CHECK_VERSION (2, 14, 0)
+#ifdef SEARCH_TYPE_GLIB
     if (mc_search->regex_match_info)
         g_match_info_free (mc_search->regex_match_info);
-#else /* GLIB_CHECK_VERSION (2, 14, 0) */
+#else /* SEARCH_TYPE_GLIB */
     g_free (mc_search->regex_match_info);
-#endif /* GLIB_CHECK_VERSION (2, 14, 0) */
+#endif /* SEARCH_TYPE_GLIB */
 
     if (mc_search->regex_buffer != NULL)
         g_string_free (mc_search->regex_buffer, TRUE);
@@ -235,12 +235,12 @@ mc_search_run (mc_search_t * mc_search, const void *user_data,
         mc_search->error_str = g_strdup (_(STR_E_UNKNOWN_TYPE));
         return FALSE;
     }
-#if GLIB_CHECK_VERSION (2, 14, 0)
+#ifdef SEARCH_TYPE_GLIB
     if (mc_search->regex_match_info) {
         g_match_info_free (mc_search->regex_match_info);
         mc_search->regex_match_info = NULL;
     }
-#endif /* GLIB_CHECK_VERSION (2, 14, 0) */
+#endif /* SEARCH_TYPE_GLIB */
 
     mc_search->error = MC_SEARCH_E_OK;
     g_free (mc_search->error_str);
@@ -386,14 +386,14 @@ mc_search_getstart_rezult_by_num (mc_search_t * mc_search, int index)
         return 0;
     if (mc_search->search_type == MC_SEARCH_T_NORMAL)
         return 0;
-#if GLIB_CHECK_VERSION (2, 14, 0)
+#ifdef SEARCH_TYPE_GLIB
     gint start_pos;
     gint end_pos;
     g_match_info_fetch_pos (mc_search->regex_match_info, index, &start_pos, &end_pos);
     return (int) start_pos;
-#else /* GLIB_CHECK_VERSION (2, 14, 0) */
+#else /* SEARCH_TYPE_GLIB */
     return mc_search->iovector[index * 2];
-#endif /* GLIB_CHECK_VERSION (2, 14, 0) */
+#endif /* SEARCH_TYPE_GLIB */
 
 }
 
@@ -406,14 +406,14 @@ mc_search_getend_rezult_by_num (mc_search_t * mc_search, int index)
         return 0;
     if (mc_search->search_type == MC_SEARCH_T_NORMAL)
         return 0;
-#if GLIB_CHECK_VERSION (2, 14, 0)
+#ifdef SEARCH_TYPE_GLIB
     gint start_pos;
     gint end_pos;
     g_match_info_fetch_pos (mc_search->regex_match_info, index, &start_pos, &end_pos);
     return (int) end_pos;
-#else /* GLIB_CHECK_VERSION (2, 14, 0) */
+#else /* SEARCH_TYPE_GLIB */
     return mc_search->iovector[index * 2 + 1];
-#endif /* GLIB_CHECK_VERSION (2, 14, 0) */
+#endif /* SEARCH_TYPE_GLIB */
 
 }
 

@@ -3,7 +3,7 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
-#if GLIB_CHECK_VERSION (2, 14, 0)
+#ifdef SEARCH_TYPE_GLIB
 #define mc_search_regex_t GRegex
 #else
 #define mc_search_regex_t pcre
