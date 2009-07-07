@@ -52,21 +52,26 @@ load_codepages_list (void)
     int result = -1;
     FILE *f;
     char *fname;
-    char buf[256];
-    extern char *mc_home;
-    extern char *mc_home_alt;
-    extern int display_codepage;
+    char buf[BUF_MEDIUM];
     char *default_codepage = NULL;
 
     fname = concat_dir_and_file (mc_home, CHARSETS_INDEX);
     if (!(f = fopen (fname, "r"))) {
+	fprintf (stderr, _("Warning: file %s not found\n"), fname);
 	g_free (fname);
+
 	fname = concat_dir_and_file (mc_home_alt, CHARSETS_INDEX);
 	if (!(f = fopen (fname, "r"))) {
 	    fprintf (stderr, _("Warning: file %s not found\n"), fname);
+	    g_free (fname);
+
+	    /* file is not found, add defaullt codepage */
+	    n_codepages = 1;
+	    codepages = g_new0 (struct codepage_desc, n_codepages + 1);
+	    codepages[0].id = g_strdup ("ASCII");
+	    codepages[0].name = g_strdup (_("7-bit ASCII"));
+	    return n_codepages;
 	}
-	g_free (fname);
-	return -1;
     }
     g_free (fname);
 
@@ -80,7 +85,7 @@ load_codepages_list (void)
     for (n_codepages = 0; fgets (buf, sizeof buf, f);) {
 	/* split string into id and cpname */
 	char *p = buf;
-	int buflen = strlen (buf);
+	size_t buflen = strlen (buf);
 
 	if (*p == '\n' || *p == '\0' || *p == '#')
 	    continue;
@@ -92,24 +97,21 @@ load_codepages_list (void)
 	if (*p == '\0')
 	    goto fail;
 
-	*p++ = 0;
-
-	while (*p == '\t' || *p == ' ')
-	    ++p;
+	*p++ = '\0';
+	g_strstrip (p);
 	if (*p == '\0')
 	    goto fail;
 
-	if (strcmp (buf, "default") == 0) {
+	if (strcmp (buf, "default") == 0)
 	    default_codepage = g_strdup (p);
-	    continue;
+	else {
+	    codepages[n_codepages].id = g_strdup (buf);
+	    codepages[n_codepages].name = g_strdup (p);
+	    ++n_codepages;
 	}
-
-	codepages[n_codepages].id = g_strdup (buf);
-	codepages[n_codepages].name = g_strdup (p);
-	++n_codepages;
     }
 
-    if (default_codepage) {
+    if (default_codepage != NULL) {
 	display_codepage = get_codepage_index (default_codepage);
 	g_free (default_codepage);
     }
