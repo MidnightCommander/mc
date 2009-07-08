@@ -30,9 +30,6 @@
 #include "../../src/tty/color.h"		/* colors and attributes */
 #include "../../src/tty/color-internal.h"
 
-gboolean disable_colors = FALSE;
-gboolean force_colors = FALSE;	/* unused with NCurses */
-
 struct color_table_s const color_table [] = {
     { "black",         COLOR_BLACK   },
     { "gray",          COLOR_BLACK   | A_BOLD },

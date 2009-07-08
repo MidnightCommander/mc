@@ -39,14 +39,15 @@
 int attr_pairs [MAX_PAIRS];
 
 void
-tty_init_colors (void)
+tty_init_colors (gboolean disable, gboolean force)
 {
-    if (has_colors () && !disable_colors)
-	use_colors = TRUE;
+    (void) force;
 
-    if (use_colors) {
+    if (has_colors () && !disable) {
 	const size_t map_len = color_map_len ();
         size_t i;
+
+	use_colors = TRUE;
 
 	start_color ();
 	use_default_colors ();
@@ -67,19 +68,12 @@ tty_init_colors (void)
 	    if (color_map [i].name != NULL) {
 		mc_init_pair (i + 1, color_map_fg (i), color_map_bg (i));
 		/*
-	         * ncurses doesn't remember bold attribute in the color pairs,
-	         * so we should keep track of it in a separate array.
-	         */
+		 * ncurses doesn't remember bold attribute in the color pairs,
+		 * so we should keep track of it in a separate array.
+		 */
 		attr_pairs [i + 1] = color_map [i].fg & A_BOLD;
 	    }
     }
-}
-
-void
-tty_disable_colors (gboolean disable, gboolean force)
-{
-    disable_colors = disable;
-    (void) force_colors;
 }
 
 /* Functions necessary to implement syntax highlighting  */

@@ -80,10 +80,9 @@
 #define ERROR_HOT_NORMAL   IF_COLOR (39, 0)
 #define ERROR_HOT_FOCUS    IF_COLOR (40, 0)
 
-void tty_init_colors (void);
+void tty_init_colors (gboolean disable, gboolean force);
 void tty_colors_done (void);
 gboolean tty_use_colors (void);
-void tty_disable_colors (gboolean disable, gboolean force);
 int tty_try_alloc_color_pair (const char *fg, const char *bg);
 void tty_setcolor (int color);
 void tty_lowlevel_setcolor (int color);

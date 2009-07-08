@@ -16,8 +16,6 @@
 #   include "../../src/tty/tty-ncurses.h"
 #endif			/* HAVE_SLANG */
 
-extern gboolean disable_colors;
-extern gboolean force_colors;	/* for S-Lang only */
 extern gboolean use_colors;
 
 struct color_table_s {

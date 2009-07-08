@@ -273,6 +273,11 @@ static char *last_wd_string = NULL;
 /* Set to 1 to suppress printing the last directory */
 static int print_last_revert = 0;
 
+/* Set to force black and white display at program startup */
+static gboolean disable_colors = FALSE;
+/* Force colors, only used by Slang */
+static gboolean force_colors = FALSE;
+
 /* colors specified on the command line: they override any other setting */
 char *command_line_colors = NULL;
 
@@ -2057,12 +2062,9 @@ process_args (poptContext ctx, int c, const char *option_arg)
 	tty_set_ugly_line_drawing (TRUE);
 	break;
 
-    case 'b':
-	tty_disable_colors (TRUE, FALSE);
-	break;
-
     case 'c':
-	tty_disable_colors (FALSE, TRUE);
+	disable_colors = FALSE;
+	force_colors = TRUE;	/* for S-Lang only */
 	break;
 
     case 'f':
@@ -2130,7 +2132,7 @@ static const struct poptOption argument_table[] = {
      N_("Use stickchars to draw"), NULL},
 
     /* color options */
-    {"nocolor", 'b', POPT_ARG_NONE, {NULL}, 'b',
+    {"nocolor", 'b', POPT_ARG_NONE, {&disable_colors}, 0,
      N_("Requests to run in black and white"), NULL},
     {"color", 'c', POPT_ARG_NONE, {NULL}, 'c',
      N_("Request to run in color mode"), NULL},
@@ -2328,7 +2330,7 @@ main (int argc, char *argv[])
 
     tty_init_curses ();
 
-    tty_init_colors ();
+    tty_init_colors (disable_colors, force_colors);
 
     dlg_set_default_colors ();
 

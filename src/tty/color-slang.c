@@ -39,20 +39,20 @@
 #include "../../src/setup.h"	/* color_terminal_string */
 
 static int
-has_colors (void)
+has_colors (gboolean disable, gboolean force)
 {
-    const char *terminal = getenv ("TERM");
-    char *cts = color_terminal_string;
-    char *s;
-    size_t i;
-
-    if (force_colors)
-       SLtt_Use_Ansi_Colors = 1;
-    if (getenv ("COLORTERM") != NULL)
+    if (force || (getenv ("COLORTERM") != NULL))
 	SLtt_Use_Ansi_Colors = 1;
 
     /* We want to allow overwriding */
-    if (!disable_colors) {
+    if (!disable) {
+	const char *terminal = getenv ("TERM");
+	const size_t len = strlen (terminal);
+
+	char *cts = color_terminal_string;
+	char *s;
+	size_t i;
+
 	/* check color_terminal_string */
 	while (*cts != '\0') {
 	    while (*cts == ' ' || *cts == '\t')
@@ -65,7 +65,7 @@ has_colors (void)
 		i++;
 	    }
 
-	    if (i != 0 && i == strlen (terminal) && strncmp (s, terminal, i) == 0)
+	    if ((i != 0) && (i == len) && (strncmp (s, terminal, i) == 0))
 		SLtt_Use_Ansi_Colors = 1;
 
 	    if (*cts == ',')
@@ -74,8 +74,8 @@ has_colors (void)
     }
 
     /* Setup emulated colors */
-    if (SLtt_Use_Ansi_Colors) {
-        if (tty_use_colors ()) {
+    if (SLtt_Use_Ansi_Colors != 0) {
+        if (!disable) {
 	    mc_init_pair (A_REVERSE, "black", "white");
 	    mc_init_pair (A_BOLD, "white", "black");
 	} else {
@@ -86,23 +86,22 @@ has_colors (void)
     } else {
 	SLtt_set_mono (A_BOLD,    NULL, SLTT_BOLD_MASK);
 	SLtt_set_mono (A_REVERSE, NULL, SLTT_REV_MASK);
-	SLtt_set_mono (A_BOLD|A_REVERSE, NULL, SLTT_BOLD_MASK | SLTT_REV_MASK);
+	SLtt_set_mono (A_BOLD | A_REVERSE, NULL, SLTT_BOLD_MASK | SLTT_REV_MASK);
     }
 
     return SLtt_Use_Ansi_Colors;
 }
 
 void
-tty_init_colors (void)
+tty_init_colors (gboolean disable, gboolean force)
 {
     /* FIXME: if S-Lang is used, has_colors() must be called regardless
        of whether we are interested in its result */
-    if (has_colors () && !disable_colors)
-	use_colors = TRUE;
-
-    if (use_colors) {
+    if (has_colors (disable, force) && !disable) {
 	const size_t map_len = color_map_len ();
 	size_t i;
+
+	use_colors = TRUE;
 
 	configure_colors ();
 
@@ -119,13 +118,6 @@ tty_init_colors (void)
 	    if (color_map [i].name != NULL)
 		mc_init_pair (i + 1, color_map_fg(i), color_map_bg(i));
     }
-}
-
-void
-tty_disable_colors (gboolean disable, gboolean force)
-{
-    disable_colors = disable;
-    force_colors = force;
 }
 
 /* Functions necessary to implement syntax highlighting  */
