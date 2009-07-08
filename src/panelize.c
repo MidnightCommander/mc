@@ -314,7 +314,11 @@ void load_panelize (void)
 {
     gchar	**profile_keys, **keys;
     gsize len;
-    
+    GIConv conv;
+    GString *buffer;
+
+    conv = str_crt_conv_from ("UTF-8");
+
     profile_keys = keys = mc_config_get_keys (mc_main_config, panelize_section,&len);
     
     add2panelize (g_strdup (_("Other command")), g_strdup (""));
@@ -325,15 +329,28 @@ void load_panelize (void)
 	add2panelize (g_strdup (_("Find SUID and SGID programs")), g_strdup ("find . \\( \\( -perm -04000 -a -perm +011 \\) -o \\( -perm -02000 -a -perm +01 \\) \\) -print"));
 	return;
     }
-    
+
     while (*profile_keys){
+
+        if (utf8_display || conv == INVALID_CONV){
+            buffer = g_string_new (*profile_keys);
+        } else {
+            buffer = g_string_new ("");
+            if (str_convert (conv, *profile_keys, buffer) == ESTR_FAILURE)
+            {
+                g_string_free(buffer, TRUE);
+                buffer = g_string_new (*profile_keys);
+            }
+        }
+
 	add2panelize (
-		g_strdup (*profile_keys),
+		g_string_free(buffer, FALSE),
 		mc_config_get_string(mc_main_config,panelize_section,*profile_keys,"")
 	);
 	profile_keys++;
     }
     g_strfreev(keys);
+    str_close_conv (conv);
 }
 
 void save_panelize (void)

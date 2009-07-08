@@ -22,7 +22,11 @@
 #include "global.h"
 
 #include "mcconfig.h"
+#include "../src/strutil.h"
+
 /*** global variables **************************************************/
+
+extern int utf8_display;
 
 /*** file scope macro definitions **************************************/
 
@@ -38,10 +42,35 @@ void
 mc_config_set_string (mc_config_t * mc_config, const gchar * group,
 		      const gchar * param, const gchar * value)
 {
+    GIConv conv;
+    GString *buffer;
+
     if (!mc_config || !group || !param || !value)
 	return;
 
-    g_key_file_set_string (mc_config->handle, group, param, value);
+    if (utf8_display)
+    {
+        buffer = g_string_new(value);
+    }
+    else
+    {
+        conv = str_crt_conv_to ("UTF-8");
+        if (conv == INVALID_CONV)
+            return;
+
+        buffer = g_string_new ("");
+
+        if (str_convert (conv, value, buffer) == ESTR_FAILURE)
+        {
+            g_string_free(buffer, TRUE);
+            buffer = g_string_new(value);
+        }
+
+        str_close_conv (conv);
+    }
+
+    g_key_file_set_string (mc_config->handle, group, param, buffer->str);
+    g_string_free(buffer, TRUE);
 }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
