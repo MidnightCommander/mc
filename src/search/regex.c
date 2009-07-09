@@ -252,7 +252,7 @@ mc_search__regex_found_cond_one (mc_search_t * mc_search, mc_search_regex_t * re
     mc_search->num_rezults = g_match_info_get_match_count (mc_search->regex_match_info);
 #else /* SEARCH_TYPE_GLIB */
     mc_search->num_rezults = pcre_exec (regex, mc_search->regex_match_info,
-                                        search_str->str, search_str->len, 0, 0, mc_search->iovector,
+                                        search_str->str, search_str->len - 1, 0, 0, mc_search->iovector,
                                         MC_SEARCH__NUM_REPLACE_ARGS);
     if (mc_search->num_rezults < 0) {
         return COND__NOT_FOUND;
@@ -527,7 +527,7 @@ gboolean
 mc_search__run_regex (mc_search_t * mc_search, const void *user_data,
                       gsize start_search, gsize end_search, gsize * found_len)
 {
-    gsize current_pos, start_buffer;
+    gsize current_pos, virtual_pos;
     int current_chr = 0;
     gint start_pos;
     gint end_pos;
@@ -537,30 +537,33 @@ mc_search__run_regex (mc_search_t * mc_search, const void *user_data,
 
     mc_search->regex_buffer = g_string_new ("");
 
-    current_pos = start_search;
-    while (current_pos <= end_search) {
+    virtual_pos = current_pos = start_search;
+    while (virtual_pos <= end_search) {
         g_string_set_size (mc_search->regex_buffer, 0);
-        start_buffer = current_pos;
+        mc_search->start_buffer = current_pos;
 
         while (1) {
             current_chr = mc_search__get_char (mc_search, user_data, current_pos);
-            if (current_chr == -1)
+            if (current_chr == MC_SEARCH_CB_ABORT)
                 break;
+
+            current_pos++;
+
+            if (current_chr == MC_SEARCH_CB_SKIP)
+                continue;
+
+            virtual_pos++;
 
             g_string_append_c (mc_search->regex_buffer, (char) current_chr);
 
-            current_pos++;
 
             if (current_chr == 0 || (char) current_chr == '\n')
                 break;
 
-            if (current_pos > end_search)
+            if (virtual_pos > end_search)
                 break;
 
         }
-        if (current_chr == -1)
-            break;
-
         switch (mc_search__regex_found_cond (mc_search, mc_search->regex_buffer)) {
         case COND__FOUND_OK:
 #ifdef SEARCH_TYPE_GLIB
@@ -571,7 +574,7 @@ mc_search__run_regex (mc_search_t * mc_search, const void *user_data,
 #endif /* SEARCH_TYPE_GLIB */
             if (found_len)
                 *found_len = end_pos - start_pos;
-            mc_search->normal_offset = start_buffer + start_pos;
+            mc_search->normal_offset = mc_search->start_buffer + start_pos;
             return TRUE;
             break;
         case COND__NOT_ALL_FOUND:
@@ -582,6 +585,17 @@ mc_search__run_regex (mc_search_t * mc_search, const void *user_data,
             return FALSE;
             break;
         }
+        if (mc_search->update_fn != NULL) {
+            if ((mc_search->update_fn) (user_data, current_pos) == MC_SEARCH_CB_SKIP) {
+                g_string_free (mc_search->regex_buffer, TRUE);
+                mc_search->regex_buffer = NULL;
+                mc_search->error = MC_SEARCH_E_NOTFOUND;
+                mc_search->error_str = NULL;
+                return FALSE;
+            }
+        }
+        if (current_chr == MC_SEARCH_CB_ABORT)
+            break;
     }
     g_string_free (mc_search->regex_buffer, TRUE);
     mc_search->regex_buffer = NULL;
@@ -599,7 +613,7 @@ mc_search_regex_prepare_replace_str (mc_search_t * mc_search, GString * replace_
 
     int num_replace_tokens, index;
     gsize loop;
-    gsize len;
+    gsize len = 0;
     gchar *prev_str;
     replace_transform_type_t replace_flags = REPLACE_T_NO_TRANSFORM;
 

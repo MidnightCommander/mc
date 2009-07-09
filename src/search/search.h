@@ -39,6 +39,11 @@ typedef enum {
     MC_SEARCH_T_GLOB
 } mc_search_type_t;
 
+typedef enum {
+    MC_SEARCH_CB_ABORT = -1,
+    MC_SEARCH_CB_SKIP = -2
+} mc_search_cbret_t;
+
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
@@ -61,6 +66,9 @@ typedef struct mc_search_struct {
     /* function, used for getting data. NULL if not used */
     mc_search_fn search_fn;
 
+    /* function, used for updatin current search status. NULL if not used */
+    mc_search_fn update_fn;
+
     /* type of search */
     mc_search_type_t search_type;
 
@@ -70,6 +78,7 @@ typedef struct mc_search_struct {
     /* some data for normal */
     gsize normal_offset;
 
+    gsize start_buffer;
     /* some data for regexp */
     int num_rezults;
     mc_search_matchinfo_t *regex_match_info;
@@ -109,7 +118,7 @@ void mc_search_free (mc_search_t * mc_search);
 gboolean mc_search_prepare (mc_search_t * mc_search);
 
 gboolean mc_search_run (mc_search_t * mc_search, const void *user_data, gsize start_search,
-                        gsize end_search, gsize * founded_len);
+                        gsize end_search, gsize * found_len);
 
 gboolean mc_search_is_type_avail (mc_search_type_t);
 
