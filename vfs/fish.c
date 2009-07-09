@@ -1135,6 +1135,18 @@ fish_fill_names (struct vfs_class *me, fill_names_f func)
     }
 }
 
+static void *
+fish_open (struct vfs_class *me, const char *file, int flags, int mode)
+{
+    /*
+      sorry, i've places hack here
+      cause fish don't able to open files with O_EXCL flag
+    */
+    flags &= ~O_EXCL;
+    return vfs_s_open (me, file, flags, mode);
+}
+
+
 void
 init_fish (void)
 {
@@ -1157,6 +1169,7 @@ init_fish (void)
     vfs_fish_ops.fill_names = fish_fill_names;
     vfs_fish_ops.chmod = fish_chmod;
     vfs_fish_ops.chown = fish_chown;
+    vfs_fish_ops.open = fish_open;
     vfs_fish_ops.symlink = fish_symlink;
     vfs_fish_ops.link = fish_link;
     vfs_fish_ops.unlink = fish_unlink;
