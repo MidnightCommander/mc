@@ -7,15 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-<<<<<<< HEAD:po/sk.po
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
 "POT-Creation-Date: 2009-07-09 17:07+0300\n"
 "PO-Revision-Date: 2009-07-27 17:18+0100\n"
-=======
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-30 19:39+0200\n"
-"PO-Revision-Date: 2009-03-10 19:42+0100\n"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/sk.po
 "Last-Translator: Ivan Masár <helix84@centrum.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -199,14 +193,8 @@ msgstr " Nahrať "
 msgid " Block is large, you may not be able to undo this action. "
 msgstr "Blok je príliš veľký, možno nebude možné stornovať túto akciu. "
 
-<<<<<<< HEAD:po/sk.po
 msgid "Replace"
 msgstr "Nahradiť"
-=======
-#, fuzzy
-msgid "Replace"
-msgstr "&Nahradiť"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/sk.po
 
 msgid " Replace "
 msgstr " Nahradiť "
@@ -333,11 +321,7 @@ msgid "replace &All"
 msgstr "nahradiť vš&Etko"
 
 msgid "All charsets"
-<<<<<<< HEAD:po/sk.po
 msgstr "Všetky znakové sady"
-=======
-msgstr ""
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/sk.po
 
 msgid "&Backwards"
 msgstr "&Späť"
@@ -450,7 +434,6 @@ msgstr "&Nový           C-x k"
 msgid "Copy to &file...     "
 msgstr "kopírovať do &Súboru... "
 
-<<<<<<< HEAD:po/sk.po
 msgid "&Toggle mark                 F3"
 msgstr "&Prepnúť označenie           F3"
 
@@ -507,81 +490,6 @@ msgstr "&Vystrihnúť do ústrižku     C-w"
 
 msgid "&Paste from clipfile        C-y"
 msgstr "&Vložiť z ústrižku          C-y"
-=======
-#, fuzzy
-msgid "&Toggle mark                 F3"
-msgstr "&Prepnúť označenie  F3"
-
-#, fuzzy
-msgid "Mar&k columns              S-F3"
-msgstr "&Označiť stĺpce   S-F3"
-
-#, fuzzy
-msgid "Toggle &ins/overw           Ins"
-msgstr "Prepnúť &Ins/over  Ins"
-
-#, fuzzy
-msgid "&Copy                        F5"
-msgstr "&Kopírovať                F5"
-
-#, fuzzy
-msgid "&Move                        F6"
-msgstr "p&Resnúť            F6"
-
-#, fuzzy
-msgid "&Delete                      F8"
-msgstr "z&Mazať                   F8"
-
-#, fuzzy
-msgid "C&opy to clipfile         C-Ins"
-msgstr "kopírovať do &Súboru... "
-
-#, fuzzy
-msgid "C&ut to clipfile          S-Del"
-msgstr "&Choď na riadok...           M-1"
-
-msgid "&Paste from clipfile      S-Ins"
-msgstr ""
-
-#, fuzzy
-msgid "Toggle bookmar&k               "
-msgstr "&Prepnúť označenie  F3"
-
-#, fuzzy
-msgid "&Next bookmark                 "
-msgstr "&Nový                 C-n"
-
-#, fuzzy
-msgid "Pre&v bookmark                 "
-msgstr "&Usporiadať...               M-t"
-
-#, fuzzy
-msgid "&Flush bookmark                "
-msgstr "&Pošta...                    "
-
-#, fuzzy
-msgid "&Undo                       C-u"
-msgstr "o&Bnoviť           C-u"
-
-#, fuzzy
-msgid "&Beginning               C-PgUp"
-msgstr "z&Ačiatok       C-PgUp"
-
-#, fuzzy
-msgid "&End                     C-PgDn"
-msgstr "ko&Niec         C-PgDn"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/sk.po
-
-#, fuzzy
-msgid "C&opy to clipfile           M-w"
-msgstr "&Choď na riadok...           M-1"
-
-#, fuzzy
-msgid "C&ut to clipfile            C-w"
-msgstr "&Choď na riadok...           M-1"
-
-msgid "&Paste from clipfile        C-y"
-msgstr ""
 
 msgid "&Search...         F7"
 msgstr "&Hľadať...           F7"
@@ -595,20 +503,13 @@ msgstr "&Nahradiť...         F4"
 msgid "&Go to line...            M-l"
 msgstr "&Choď na riadok...           M-1"
 
-<<<<<<< HEAD:po/sk.po
 msgid "Toggle li&ne state        M-n"
 msgstr "&Prepnúť stav riadka      M-n"
-=======
-#, fuzzy
-msgid "Toggle li&ne state        M-n"
-msgstr "&Prepnúť označenie  F3"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/sk.po
 
 msgid "Go to matching &bracket   M-b"
 msgstr "choď na odpovedajúcu %zátvorku  M-b"
 
 msgid "Find declaration      A-Enter"
-<<<<<<< HEAD:po/sk.po
 msgstr "Nájsť deklaráciu      A-Enter"
 
 msgid "Back from declaration     M--"
@@ -619,19 +520,6 @@ msgstr "Vpred na deklaráciu       M-+"
 
 msgid "Encod&ing...             C-t"
 msgstr "kódovan&Ie...            C-t"
-=======
-msgstr ""
-
-msgid "Back from declaration     M--"
-msgstr ""
-
-msgid "Forward to declaration    M-+"
-msgstr ""
-
-#, fuzzy
-msgid "Encod&ing...             C-t"
-msgstr "&Usporiadať...               M-t"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/sk.po
 
 msgid "Insert &literal...       C-q"
 msgstr "v&Ložiť Znak...              C-q"
@@ -690,24 +578,12 @@ msgstr "Uč&Enie kláves..."
 msgid "Syntax &Highlighting..."
 msgstr "Zvýraznenie s&Yntaxe..."
 
-<<<<<<< HEAD:po/sk.po
 msgid "S&yntax file"
 msgstr "súbor so s&Yntaxou"
 
 msgid "&Menu file"
 msgstr "súbor s &Menu"
 
-=======
-#, fuzzy
-msgid "S&yntax file"
-msgstr "Upraviť súbor so syntaxou"
-
-#, fuzzy
-msgid "&Menu file"
-msgstr "Upraviť súborové me&nu"
-
-#, fuzzy
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/sk.po
 msgid "Save setu&p"
 msgstr "&Uložiť nastavenie"
 
@@ -750,14 +626,8 @@ msgstr "Zalamovanie od dĺžky riadka: "
 msgid "Tab spacing: "
 msgstr "Rozostupy tabulátora: "
 
-<<<<<<< HEAD:po/sk.po
 msgid "Pers&istent selection"
 msgstr "&Trvalý výber"
-=======
-#, fuzzy
-msgid "Pers&istent selection"
-msgstr "prevrátiť označen&Ie    M-*"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/sk.po
 
 msgid "Synta&x highlighting"
 msgstr "zvýraznenie s&Yntaxe"
@@ -999,14 +869,8 @@ msgstr " potvrdiť z&Mazanie "
 msgid " Confirmation "
 msgstr " Potvrdenie "
 
-<<<<<<< HEAD:po/sk.po
 msgid "UTF-8 output"
 msgstr "Výstup v UTF-8"
-=======
-#, fuzzy
-msgid "UTF-8 output"
-msgstr "Plný 8 bitový výstup"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/sk.po
 
 msgid "Full 8 bits output"
 msgstr "Plný 8-bitový výstup"
@@ -1254,21 +1118,11 @@ msgstr " Nastaviť výraz pre filtrovanie mien súborov"
 msgid "&Using shell patterns"
 msgstr "po&Užiť shell vzory"
 
-<<<<<<< HEAD:po/sk.po
 msgid "&Case sensitive"
 msgstr "&Rozlišovať veľkosť"
 
 msgid "&Files only"
 msgstr "&Iba súbory"
-=======
-#, fuzzy
-msgid "&Case sensitive"
-msgstr "&Citlivý na veľkosť"
-
-#, fuzzy
-msgid "&Files only"
-msgstr "&Iba veľkosť"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/sk.po
 
 msgid " Select "
 msgstr " Vyber "
@@ -1748,14 +1602,8 @@ msgstr ""
 " Nepodarilo sa odstrániť adresár \"%s\" \n"
 " %s "
 
-<<<<<<< HEAD:po/sk.po
 msgid "Directory scanning"
 msgstr "Prehľadávanie adresára"
-=======
-#, fuzzy
-msgid "Directory scanning"
-msgstr "Cesta k adresáru"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/sk.po
 
 msgid "1Copy"
 msgstr "1Skopírovať"
@@ -1924,17 +1772,9 @@ msgstr "&Stále Sym. odkazy"
 msgid "&Dive into subdir if exists"
 msgstr "&Vnoriť sa do existujúceho podadr."
 
-<<<<<<< HEAD:po/sk.po
 #, c-format
 msgid "Invalid source pattern `%s'"
 msgstr "Neplatný zdrojový vzor `%s'"
-=======
-#, fuzzy, c-format
-msgid "Invalid source pattern `%s'"
-msgstr ""
-"Neplatný zdrojový vzor `%s' \n"
-" %s "
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/sk.po
 
 msgid "&Suspend"
 msgstr "z&Astaviť"
@@ -1962,7 +1802,6 @@ msgstr "&Editácia - F4"
 
 #, c-format
 msgid "Found: %ld"
-<<<<<<< HEAD:po/sk.po
 msgstr "Nájdené: %ld"
 
 msgid " Malformed regular expression "
@@ -1973,21 +1812,6 @@ msgstr "Rozlišovať v&eľkosť"
 
 msgid "Case sens&itive"
 msgstr "Rozl&išovať veľkosť"
-=======
-msgstr ""
-
-#, fuzzy
-msgid " Malformed regular expression "
-msgstr " Chybne vytvorený regulárny výraz "
-
-#, fuzzy
-msgid "Cas&e sensitive"
-msgstr "&Citlivý na veľkosť"
-
-#, fuzzy
-msgid "Case sens&itive"
-msgstr "&Citlivý na veľkosť"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/sk.po
 
 msgid "&Find recursively"
 msgstr "&Hľadať rekurzívne"
@@ -1996,7 +1820,6 @@ msgid "S&kip hidden"
 msgstr "Pres&kočiť skryté"
 
 msgid "&All charsets"
-<<<<<<< HEAD:po/sk.po
 msgstr "Všetky zn&akové sady"
 
 msgid "All cha&rsets"
@@ -2004,16 +1827,6 @@ msgstr "Všetky &znakové sady"
 
 msgid "Re&gular expression"
 msgstr "Re&gulárny výraz"
-=======
-msgstr ""
-
-msgid "All cha&rsets"
-msgstr ""
-
-#, fuzzy
-msgid "Re&gular expression"
-msgstr "&Regulárny výraz"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/sk.po
 
 msgid "&Tree"
 msgstr "&Strom"
@@ -2021,21 +1834,11 @@ msgstr "&Strom"
 msgid "Find File"
 msgstr "Nájsť súbor"
 
-<<<<<<< HEAD:po/sk.po
 msgid "Content:"
 msgstr "Obsah:"
 
 msgid "File name:"
 msgstr "Názov súboru:"
-=======
-#, fuzzy
-msgid "Content:"
-msgstr "Obsah: "
-
-#, fuzzy
-msgid "File name:"
-msgstr "Meno súboru:"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/sk.po
 
 msgid "Start at:"
 msgstr "Začať na:"
@@ -2404,11 +2207,7 @@ msgid "&Filter..."
 msgstr "fi&Lter..."
 
 msgid "&Encoding...    C-t"
-<<<<<<< HEAD:po/sk.po
 msgstr "Kódovani&e...   C-t"
-=======
-msgstr ""
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/sk.po
 
 msgid "&Network link..."
 msgstr "si&Eťové pripojenie..."
@@ -2506,14 +2305,8 @@ msgstr "v&Onkajšia panelizácia  C-x !"
 msgid "show directory s&Izes"
 msgstr "ukázať veľkosť a&Dresárov"
 
-<<<<<<< HEAD:po/sk.po
 msgid "Command &history      M-h"
 msgstr "&História príkazov    M-h"
-=======
-#, fuzzy
-msgid "Command &history      M-h"
-msgstr " História príkazov "
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/sk.po
 
 msgid "di&Rectory hotlist    C-\\"
 msgstr "&Adresárový hotlist      C-\\"
@@ -2599,17 +2392,10 @@ msgid "The TERM environment variable is unset!\n"
 msgstr "Premenlivé prostredie TERM je vymazané!\n"
 
 msgid "&Fix it"
-<<<<<<< HEAD:po/sk.po
 msgstr "&Opraviť"
 
 msgid "don't ask again"
 msgstr "znova sa nepýtať"
-=======
-msgstr ""
-
-msgid "don't ask again"
-msgstr ""
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/sk.po
 
 msgid ""
 "Chosen display charset (Settings->Display bits)\n"
@@ -2620,7 +2406,6 @@ msgid ""
 "\n"
 "Or set 'don't ask again' and press <<Skip>>"
 msgstr ""
-<<<<<<< HEAD:po/sk.po
 "Zvolená zobrazovacia znaková sada (Nastavenia->Zobrazené bity)\n"
 "alebo zdrojová kódová sada (v mcedit ctrl-t) \n"
 "sa nezhoduje s tou, ktorá je nastavená prostredníctvom locale.\n"
@@ -2628,8 +2413,6 @@ msgstr ""
 "predvolenú hodnotu locale stlačením <<Opraviť>>.\n"
 "\n"
 "Alebo označte 'znova sa nepýtať' a stlačte <<Preskočiť>>"
-=======
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/sk.po
 
 #, c-format
 msgid "GNU Midnight Commander %s\n"
@@ -2653,7 +2436,6 @@ msgstr ""
 "Správy o chybách posielajte (vrátane výpisu `mc -V')\n"
 "na adresu mc-devel@gnome.org\n"
 
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2699,18 +2481,6 @@ msgstr ""
 "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
 "   brightcyan, lightgray and white\n"
 "\n"
-
-msgid ""
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-msgstr ""
 
 msgid "Displays this help message"
 msgstr "Zobrazí tento pomocný odkaz"
@@ -2772,15 +2542,9 @@ msgstr "Spúšťa prehliadač súborov na súbore"
 msgid "Edits one file"
 msgstr "Upraví jeden súbor"
 
-<<<<<<< HEAD:po/sk.po
 #, c-format
 msgid "Cannot create %s directory"
 msgstr "Nepodarilo sa vytvoriť adresár %s"
-=======
-#, fuzzy, c-format
-msgid "Cannot create %s directory"
-msgstr "Nemohol som zmeniť adresár"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/sk.po
 
 msgid "safe de&Lete"
 msgstr "bezpečn&É mazanie"
@@ -3002,7 +2766,6 @@ msgid "Mkdir"
 msgstr "Vytvoriť adr."
 
 msgid " Not implemented yet "
-<<<<<<< HEAD:po/sk.po
 msgstr " Zatiaľ neimplementované"
 
 msgid " Num of replace tokens not equal to num of found tokens "
@@ -3014,26 +2777,11 @@ msgstr " Neplatné číslo tokenu %d "
 
 msgid "Normal"
 msgstr "Normálny"
-=======
-msgstr ""
-
-msgid " Num of replace tokens not equal to num of found tokens "
-msgstr ""
-
-#, fuzzy, c-format
-msgid " Invalid token number %d "
-msgstr " Neplatná maska cieľa "
-
-#, fuzzy
-msgid "Normal"
-msgstr "Formát"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/sk.po
 
 msgid "&Regular expression"
 msgstr "&Regulárny výraz"
 
 msgid "Hexadecimal"
-<<<<<<< HEAD:po/sk.po
 msgstr "Hexadecimálne"
 
 msgid "Wildcard search"
@@ -3041,16 +2789,6 @@ msgstr "Vyhľadávanie pomocou zástupných znakov"
 
 msgid "Choose codepage"
 msgstr "Zvoľte kódovú stránku"
-=======
-msgstr ""
-
-msgid "Wildcard search"
-msgstr ""
-
-#, fuzzy
-msgid "Choose codepage"
-msgstr " Vyberte vstupnú znakovú sadu"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/sk.po
 
 msgid "-  < No translation >"
 msgstr "-  < Žiadny preklad >"
@@ -3095,14 +2833,8 @@ msgstr "s databázou terminfo"
 msgid "Using the ncurses library"
 msgstr "Použiť knižnicu ncurses"
 
-<<<<<<< HEAD:po/sk.po
 msgid "Using the ncursesw library"
 msgstr "Pomocou knižnice ncursesw"
-=======
-#, fuzzy
-msgid "Using the ncursesw library"
-msgstr "Použiť knižnicu ncurses"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/sk.po
 
 msgid "With optional subshell support"
 msgstr "S nepovinnou podporou subshellu"
@@ -3224,21 +2956,11 @@ msgstr " Nenájdené žiadne zodpovedajúce položky v %s "
 msgid " User menu "
 msgstr " Používateľské menu "
 
-<<<<<<< HEAD:po/sk.po
 msgid "%b %d %H:%M"
 msgstr "%b %e %H:%M"
 
 msgid "%b %d %Y"
 msgstr "%b %e %Y"
-=======
-#, fuzzy
-msgid "%b %d %H:%M"
-msgstr "%b %e %H:%M"
-
-#, fuzzy
-msgid "%b %d %Y"
-msgstr "%b %e  %Y"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/sk.po
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
@@ -3339,11 +3061,7 @@ msgstr ""
 " Nebolo možné uložiť súbor: \n"
 " %s "
 
-<<<<<<< HEAD:po/sk.po
 #, c-format
-=======
-#, fuzzy, c-format
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/sk.po
 msgid ""
 " The current line number is %lu.\n"
 " Enter the new line number:"
@@ -3351,16 +3069,8 @@ msgstr ""
 " Aktuálne číslo riadka je %lu.\n"
 " Zadajte nové číslo riadka:"
 
-<<<<<<< HEAD:po/sk.po
 msgid " The current address is 0x%08"
 msgstr " Momentálna adresa je 0x%08"
-=======
-#, fuzzy
-msgid " The current address is 0x%08"
-msgstr ""
-" Momentálna adresa je 0x%lx.\n"
-" Zadajte novú adresu:"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/sk.po
 
 msgid " Goto Address "
 msgstr " Ísť na adresu "
@@ -3368,12 +3078,9 @@ msgstr " Ísť na adresu "
 msgid " Invalid address "
 msgstr " Neplatná adresa"
 
-<<<<<<< HEAD:po/sk.po
 msgid "Seeking to search result"
 msgstr "Presúva sa na pozíciu výsledku vyhľadávania"
 
-=======
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/sk.po
 msgid "ButtonBar|Help"
 msgstr "ButtonBar|Pomoc"
 
@@ -3968,25 +3675,14 @@ msgstr "Zmeny súboru stratené"
 
 #~ msgid "scanf &Expression"
 #~ msgstr "&Výraz pre scanf"
-<<<<<<< HEAD:po/sk.po
 #~ msgid "&Whole words only"
 #~ msgstr "&Iba celé slová"
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr " Zadajte poradie nahradenia argumentov, napr. 3,2,1,4"
-=======
-
-#~ msgid "&Whole words only"
-#~ msgstr "&Iba celé slová"
-
-#~ msgid " Enter replacement argument order eg. 3,2,1,4 "
-#~ msgstr " Zadajte poradie nahradenia argumentov, napr. 3,2,1,4"
-
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/sk.po
 #~ msgid ""
 #~ " Invalid regular expression, or scanf expression with too many "
 #~ "conversions "
 #~ msgstr " Nesprávny výraz, alebo scanf výraz s mnohými zmenami "
-<<<<<<< HEAD:po/sk.po
 #~ msgid " Error in replacement format string. "
 #~ msgstr " Chyba vo formáte nahradzovaného reťazca. "
 #~ msgid " Replacement too long. "
@@ -4005,36 +3701,6 @@ msgstr "Zmeny súboru stratené"
 #~ msgstr "Editor používateľského menu"
 #~ msgid "Edit &syntax file"
 #~ msgstr "Upraviť súbor so &Syntaxou"
-=======
-
-#~ msgid " Error in replacement format string. "
-#~ msgstr " Chyba vo formáte nahradzovaného reťazca. "
-
-#~ msgid " Replacement too long. "
-#~ msgstr " Reťazec pre nahradenie je príliš dlhý."
-
-#~ msgid "&Copy              F5"
-#~ msgstr "&Kopírovať          F5"
-
-#~ msgid "&Delete            F8"
-#~ msgstr "&Zmazať             F8"
-
-#~ msgid "Save setu&p..."
-#~ msgstr "&Uložiť nastavenie..."
-
-#~ msgid " The command history is empty "
-#~ msgstr " História príkazov je prázdna "
-
-#~ msgid "command &History"
-#~ msgstr "história príka&Zov"
-
-#~ msgid "Edit edi&tor menu file"
-#~ msgstr "Editor používateľského menu"
-
-#~ msgid "Edit &syntax file"
-#~ msgstr "Upraviť súbor so &Syntaxou"
-
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/sk.po
 #~ msgid ""
 #~ "To use this feature select your codepage in\n"
 #~ "Setup / Display Bits dialog!\n"
@@ -4043,7 +3709,6 @@ msgstr "Zmeny súboru stratené"
 #~ "Pre túto funkciu vyberte znakovú sadu\n"
 #~ "v Nastavenie / Zobrazené bity!\n"
 #~ "A nezabudnite nastavenie uložiť."
-<<<<<<< HEAD:po/sk.po
 #~ msgid "Invalid hex search expression"
 #~ msgstr "Neplatný hexadecimány vyhľadávací výraz"
 #~ msgid " Invalid regular expression "
@@ -4076,57 +3741,6 @@ msgstr "Zmeny súboru stratené"
 #~ msgstr "ButtonBar|Neform"
 #~ msgid "ButtonBar|Format"
 #~ msgstr "ButtonBar|Formát"
-=======
-
-#~ msgid "Invalid hex search expression"
-#~ msgstr "Neplatný hexadecimány vyhľadávací výraz"
-
-#~ msgid " Invalid regular expression "
-#~ msgstr " Neplatný regulárny výraz "
-
-#~ msgid " Enter regexp:"
-#~ msgstr " Zadajte regexp:"
-
-#~ msgid "ButtonBar|Ascii"
-#~ msgstr "ButtonBar|Ascii"
-
-#~ msgid "ButtonBar|Hex"
-#~ msgstr "ButtonBar|Hex"
-
-#~ msgid "ButtonBar|Goto"
-#~ msgstr "ButtonBar|ÍsťNa"
-
-#~ msgid "ButtonBar|Line"
-#~ msgstr "ButtonBar|Riadok"
-
-#~ msgid "ButtonBar|UnWrap"
-#~ msgstr "ButtonBar|Nezal."
-
-#~ msgid "ButtonBar|Wrap"
-#~ msgstr "ButtonBar|Zalam"
-
-#~ msgid "ButtonBar|RxSrch"
-#~ msgstr "ButtonBar|RegHľ"
-
-#~ msgid "ButtonBar|HxSrch"
-#~ msgstr "ButtonBar|HexHľ"
-
-#~ msgid "ButtonBar|Search"
-#~ msgstr "ButtonBar|Hľad"
-
-#~ msgid "ButtonBar|Raw"
-#~ msgstr "ButtonBar|Nespr"
-
-#~ msgid "ButtonBar|Parse"
-#~ msgstr "ButtonBar|Analy"
-
-#~ msgid "ButtonBar|Unform"
-#~ msgstr "ButtonBar|Neform"
-
-#~ msgid "ButtonBar|Format"
-#~ msgstr "ButtonBar|Formát"
-
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/sk.po
 #~ msgid "Using included S-Lang library"
 #~ msgstr "Použiť vloženú S-lang knižnicu"
 #~ msgid "with termcap database"
@@ -4211,10 +3825,6 @@ msgstr "Zmeny súboru stratené"
 #~ msgstr "HxSrch"
 #~ msgid "Raw"
 #~ msgstr "Prvotný"
-<<<<<<< HEAD:po/sk.po
-=======
-
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/sk.po
 #~ msgid "User menu available only in mcedit invoked from mc"
 #~ msgstr "Používateľské menu k dispozícii iba v mcedit spustenom z mc"
 #~ msgid " Error while looking up IP address "

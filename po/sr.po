@@ -1,372 +1,372 @@
 # Serbian translation of GNU MC
 # Copyright (C) 2003 Free Software Foundation, Inc.
 # This file is distributed under the same license as the mc package.
-# Strahinya Radich (БваРеШъР АРФШы) <mr99164@alas.matf.bg.ac.yu>, 2003.
+# Strahinya Radich (РЎС‚СЂР°С…РёСљР° Р Р°РґРёС›) <mr99164@alas.matf.bg.ac.yu>, 2003.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-30 19:39+0200\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-07-09 17:07+0300\n"
 "PO-Revision-Date: 2003-09-20 18:50+0200\n"
-"Last-Translator: Strahinya Radich (БваРеШъР АРФШы) <mr99164@alas.matf.bg.ac."
+"Last-Translator: Strahinya Radich (РЎС‚СЂР°С…РёСљР° Р Р°РґРёС›) <mr99164@alas.matf.bg.ac."
 "yu>\n"
-"Language-Team: Serbian (баЯбЪШ) <sr@li.org>\n"
+"Language-Team: Serbian (СЃСЂРїСЃРєРё) <sr@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-5\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #, fuzzy
 msgid " Choose syntax highlighting "
-msgstr "ёбвШ&жРъХ бШЭвРЪбХ"
+msgstr "РСЃС‚Рё&С†Р°СљРµ СЃРёРЅС‚Р°РєСЃРµ"
 
 #, fuzzy
 msgid "< Auto >"
-msgstr " ѕ ЯаЮУаРЬг"
+msgstr " Рћ РїСЂРѕРіСЂР°РјСѓ"
 
 msgid "< Reload Current Syntax >"
 msgstr ""
 
 #, fuzzy, c-format
 msgid " Cannot open %s for reading "
-msgstr " ЅХ ЬЮУг ФР ЮвТЮаШЬ жХТ ЧР зШвРъХ: "
+msgstr " РќРµ РјРѕРіСѓ РґР° РѕС‚РІРѕСЂРёРј С†РµРІ Р·Р° С‡РёС‚Р°СљРµ: "
 
 msgid "Error"
-msgstr "іаХиЪР"
+msgstr "Р“СЂРµС€РєР°"
 
 #, fuzzy, c-format
 msgid " Error reading from pipe: %s "
-msgstr " іаХиЪР ЯаШ зШвРъг бР жХТШ: "
+msgstr " Р“СЂРµС€РєР° РїСЂРё С‡РёС‚Р°СљСѓ СЃР° С†РµРІРё: "
 
 #, fuzzy, c-format
 msgid " Cannot open pipe for reading: %s "
-msgstr " ЅХ ЬЮУг ФР ЮвТЮаШЬ жХТ ЧР зШвРъХ: "
+msgstr " РќРµ РјРѕРіСѓ РґР° РѕС‚РІРѕСЂРёРј С†РµРІ Р·Р° С‡РёС‚Р°СљРµ: "
 
 #, fuzzy, c-format
 msgid " Cannot get size/permissions for %s "
-msgstr " ЅХ ЬЮУг ФР бРЧЭРЬ ТХЫШзШЭг Ш ФЮЧТЮЫХ ЧР ФРвЮвХЪг: "
+msgstr " РќРµ РјРѕРіСѓ РґР° СЃР°Р·РЅР°Рј РІРµР»РёС‡РёРЅСѓ Рё РґРѕР·РІРѕР»Рµ Р·Р° РґР°С‚РѕС‚РµРєСѓ: "
 
 #, fuzzy, c-format
 msgid " %s is not a regular file "
-msgstr " ЅХ ЬЮУг ФР ЯаХУЫХФРЬ: ФРвЮвХЪР ЭШшХ ЮСШзЭР "
+msgstr " РќРµ РјРѕРіСѓ РґР° РїСЂРµРіР»РµРґР°Рј: РґР°С‚РѕС‚РµРєР° РЅРёСРµ РѕР±РёС‡РЅР° "
 
 #, fuzzy, c-format
 msgid " File %s is too large "
-msgstr " ґРвЮвХЪР шХ ЯаХТХЫШЪР: "
+msgstr " Р”Р°С‚РѕС‚РµРєР° СРµ РїСЂРµРІРµР»РёРєР°: "
 
 msgid "Macro recursion is too deep"
-msgstr "ЅШТЮ аХЪгаЧШшХ ЬРЪаЮР шХ ЯаХТШбЮЪ"
+msgstr "РќРёРІРѕ СЂРµРєСѓСЂР·РёСРµ РјР°РєСЂРѕР° СРµ РїСЂРµРІРёСЃРѕРє"
 
 msgid "Search"
-msgstr "ВаРЦШ"
+msgstr "РўСЂР°Р¶Рё"
 
 #, c-format
 msgid " %d items found, %d bookmarks added "
-msgstr " ЅРтХЭЮ %d, ФЮФРЭЮ %d ЮСХЫХЦШТРзР "
+msgstr " РќР°С’РµРЅРѕ %d, РґРѕРґР°РЅРѕ %d РѕР±РµР»РµР¶РёРІР°С‡Р° "
 
 msgid " Search string not found "
-msgstr " ВаРЦХЭР ЭШбЪР ЭШшХ ЭРтХЭР "
+msgstr " РўСЂР°Р¶РµРЅР° РЅРёСЃРєР° РЅРёСРµ РЅР°С’РµРЅР° "
 
 msgid "Warning"
-msgstr "ГЯЮЧЮаХъХ"
+msgstr "РЈРїРѕР·РѕСЂРµСљРµ"
 
 msgid " File has hard-links. Detach before saving? "
 msgstr ""
 
 msgid "&Yes"
-msgstr "&ґР"
+msgstr "&Р”Р°"
 
 msgid "&No"
-msgstr "&ЅХ"
+msgstr "&РќРµ"
 
 msgid "&Cancel"
-msgstr "&їЮЭШивШ"
+msgstr "&РџРѕРЅРёС€С‚Рё"
 
 msgid "The file has been modified in the meantime. Save anyway?"
 msgstr ""
 
 msgid " Error writing to pipe: "
-msgstr " іаХиЪР ЯаШ гЯШбг г жХТ: "
+msgstr " Р“СЂРµС€РєР° РїСЂРё СѓРїРёСЃСѓ Сѓ С†РµРІ: "
 
 msgid " Cannot open pipe for writing: "
-msgstr " ЅХ ЬЮУг ФР ЮвТЮаШЬ жХТ ЧР гЯШб: "
+msgstr " РќРµ РјРѕРіСѓ РґР° РѕС‚РІРѕСЂРёРј С†РµРІ Р·Р° СѓРїРёСЃ: "
 
 msgid "Quick save "
-msgstr "±аЧЮ згТРъХ "
+msgstr "Р‘СЂР·Рѕ С‡СѓРІР°СљРµ "
 
 msgid "Safe save "
-msgstr "±ХЧСХФЭЮ згТРъХ "
+msgstr "Р‘РµР·Р±РµРґРЅРѕ С‡СѓРІР°СљРµ "
 
 msgid "Do backups -->"
-msgstr "їаРТШ аХЧХаТг -->"
+msgstr "РџСЂР°РІРё СЂРµР·РµСЂРІСѓ -->"
 
 msgid "&OK"
-msgstr "&Г аХФг"
+msgstr "&РЈ СЂРµРґСѓ"
 
 msgid "Extension:"
-msgstr "ІабвР:"
+msgstr "Р’СЂСЃС‚Р°:"
 
 msgid " Edit Save Mode "
-msgstr " АХЦШЬ згТРъР "
+msgstr " Р РµР¶РёРј С‡СѓРІР°СљР° "
 
 msgid " Save As "
-msgstr " БРзгТРш ЪРЮ "
+msgstr " РЎР°С‡СѓРІР°С РєР°Рѕ "
 
 msgid " Enter file name: "
-msgstr " ГЭХбШвХ ЭРЧШТ ФРвЮвХЪХ: "
+msgstr " РЈРЅРµСЃРёС‚Рµ РЅР°Р·РёРІ РґР°С‚РѕС‚РµРєРµ: "
 
 msgid " A file already exists with this name. "
-msgstr " ґРвЮвХЪР ЯЮФ вШЬ ЭРЧШТЮЬ ТХы ЯЮбвЮшШ. "
+msgstr " Р”Р°С‚РѕС‚РµРєР° РїРѕРґ С‚РёРј РЅР°Р·РёРІРѕРј РІРµС› РїРѕСЃС‚РѕСРё. "
 
 #, fuzzy
 msgid "&Overwrite"
-msgstr "їаХЯШиШ"
+msgstr "РџСЂРµРїРёС€Рё"
 
 msgid " Cannot save file. "
-msgstr " ЅХ ЬЮУг ФР бРзгТРЬ ФРвЮвХЪг. "
+msgstr " РќРµ РјРѕРіСѓ РґР° СЃР°С‡СѓРІР°Рј РґР°С‚РѕС‚РµРєСѓ. "
 
 msgid " Delete macro "
-msgstr " ±аШбРъХ ЬРЪаЮР "
+msgstr " Р‘СЂРёСЃР°СљРµ РјР°РєСЂРѕР° "
 
 msgid " Cannot open temp file "
-msgstr " ЅХ ЬЮУг ФР ЮвТЮаШЬ ЯаШТаХЬХЭг ФРвЮвХЪг "
+msgstr " РќРµ РјРѕРіСѓ РґР° РѕС‚РІРѕСЂРёРј РїСЂРёРІСЂРµРјРµРЅСѓ РґР°С‚РѕС‚РµРєСѓ "
 
 msgid " Cannot open macro file "
-msgstr " ЅХ ЬЮУг ФР ЮвТЮаШЬ ФРвЮвХЪг ЬРЪаЮР "
+msgstr " РќРµ РјРѕРіСѓ РґР° РѕС‚РІРѕСЂРёРј РґР°С‚РѕС‚РµРєСѓ РјР°РєСЂРѕР° "
 
 msgid " Cannot overwrite macro file "
-msgstr " ЅХ ЬЮУг ФР ЯаХЯШиХЬ ФРвЮвХЪг ЬРЪаЮР "
+msgstr " РќРµ РјРѕРіСѓ РґР° РїСЂРµРїРёС€РµРј РґР°С‚РѕС‚РµРєСѓ РјР°РєСЂРѕР° "
 
 msgid " Save macro "
-msgstr " ЗгТРъХ ЬРЪаЮР "
+msgstr " Р§СѓРІР°СљРµ РјР°РєСЂРѕР° "
 
 msgid " Press the macro's new hotkey: "
-msgstr " їаШвШбЭШвХ ЭЮТг ЯаХзШжг ЬРЪаЮР: "
+msgstr " РџСЂРёС‚РёСЃРЅРёС‚Рµ РЅРѕРІСѓ РїСЂРµС‡РёС†Сѓ РјР°РєСЂРѕР°: "
 
 msgid " Press macro hotkey: "
-msgstr " їаШвШбЭШвХ ЯаХзШжг ЬРЪаЮР: "
+msgstr " РџСЂРёС‚РёСЃРЅРёС‚Рµ РїСЂРµС‡РёС†Сѓ РјР°РєСЂРѕР°: "
 
 msgid " Load macro "
-msgstr " ГзШвРТРъХ ЬРЪаЮР "
+msgstr " РЈС‡РёС‚Р°РІР°СљРµ РјР°РєСЂРѕР° "
 
 msgid " Confirm save file? : "
-msgstr " їЮвТаФР згТРъР ФРвЮвХЪХ? : "
+msgstr " РџРѕС‚РІСЂРґР° С‡СѓРІР°СљР° РґР°С‚РѕС‚РµРєРµ? : "
 
 msgid " Save file "
-msgstr " ЗгТРъХ ФРвЮвХЪХ "
+msgstr " Р§СѓРІР°СљРµ РґР°С‚РѕС‚РµРєРµ "
 
 msgid "&Save"
-msgstr "бР&ЗгТРш"
+msgstr "СЃР°&Р§СѓРІР°С"
 
 msgid ""
 " Current text was modified without a file save. \n"
 " Continue discards these changes. "
 msgstr ""
-" їЮбвЮшХыШ вХЪбв шХ ШЧЬХъХЭ Р ЭШшХ бРзгТРЭ.\n"
-" ґгУЬХ `ЭРбвРТШ' ЮФСРжгшХ ЮТХ ШЧЬХЭХ. "
+" РџРѕСЃС‚РѕСРµС›Рё С‚РµРєСЃС‚ СРµ РёР·РјРµСљРµРЅ Р° РЅРёСРµ СЃР°С‡СѓРІР°РЅ.\n"
+" Р”СѓРіРјРµ `РЅР°СЃС‚Р°РІРё' РѕРґР±Р°С†СѓСРµ РѕРІРµ РёР·РјРµРЅРµ. "
 
 #, fuzzy
 msgid "C&ontinue"
-msgstr "ЅРбвРТШ"
+msgstr "РќР°СЃС‚Р°РІРё"
 
 msgid "Syntax file edit"
-msgstr "ГаХтШТРъХ бШЭвРЪбЭХ ФРвЮвХЪХ"
+msgstr "РЈСЂРµС’РёРІР°СљРµ СЃРёРЅС‚Р°РєСЃРЅРµ РґР°С‚РѕС‚РµРєРµ"
 
 msgid " Which syntax file you want to edit? "
-msgstr " єЮшг бШЭвРЪбЭг ФРвЮвХЪг ЦХЫШвХ ФР гаХФШвХ?"
+msgstr " РљРѕССѓ СЃРёРЅС‚Р°РєСЃРЅСѓ РґР°С‚РѕС‚РµРєСѓ Р¶РµР»РёС‚Рµ РґР° СѓСЂРµРґРёС‚Рµ?"
 
 msgid "&User"
-msgstr "&єЮаШбЭШзЪг"
+msgstr "&РљРѕСЂРёСЃРЅРёС‡РєСѓ"
 
 msgid "&System Wide"
-msgstr "&БШбвХЬбЪг"
+msgstr "&РЎРёСЃС‚РµРјСЃРєСѓ"
 
 msgid " Menu edit "
-msgstr " ГаХтШТРъХ ЬХЭШшР "
+msgstr " РЈСЂРµС’РёРІР°СљРµ РјРµРЅРёСР° "
 
 msgid " Which menu file do you want to edit? "
-msgstr " єЮшг ФРвЮвХЪг ЬХЭШшР ЦХЫШвХ ФР гаХФШвХ? "
+msgstr " РљРѕССѓ РґР°С‚РѕС‚РµРєСѓ РјРµРЅРёСР° Р¶РµР»РёС‚Рµ РґР° СѓСЂРµРґРёС‚Рµ? "
 
 msgid "&Local"
-msgstr "&»ЮЪРЫЭг"
+msgstr "&Р›РѕРєР°Р»РЅСѓ"
 
 msgid " Load "
-msgstr " ГзШвРш "
+msgstr " РЈС‡РёС‚Р°С "
 
 msgid " Block is large, you may not be able to undo this action. "
-msgstr " ±ЫЮЪ шХ ТХЫШЪШ, ЬЮЦФР ЭХыХвХ ЬЮыШ ФР ЮЯЮЧЮТХвХ ЮТг аРФъг. "
+msgstr " Р‘Р»РѕРє СРµ РІРµР»РёРєРё, РјРѕР¶РґР° РЅРµС›РµС‚Рµ РјРѕС›Рё РґР° РѕРїРѕР·РѕРІРµС‚Рµ РѕРІСѓ СЂР°РґСљСѓ. "
 
 #, fuzzy
 msgid "Replace"
-msgstr "·Р&ЬХЭШ"
+msgstr "Р—Р°&РјРµРЅРё"
 
 msgid " Replace "
-msgstr " ·РЬХЭР "
+msgstr " Р—Р°РјРµРЅР° "
 
 #, c-format
 msgid " %ld replacements made. "
-msgstr " ёЧТаиХЭЮ %ld ЧРЬХЭР. "
+msgstr " РР·РІСЂС€РµРЅРѕ %ld Р·Р°РјРµРЅР°. "
 
 msgid "Quit"
-msgstr "·РТаиШ"
+msgstr "Р—Р°РІСЂС€Рё"
 
 msgid " File was modified, Save with exit? "
-msgstr " ґРвЮвХЪР шХ ШЧЬХъХЭР, ФР бРзгТРЬ ЯаШ ШЧЫРЧг? "
+msgstr " Р”Р°С‚РѕС‚РµРєР° СРµ РёР·РјРµСљРµРЅР°, РґР° СЃР°С‡СѓРІР°Рј РїСЂРё РёР·Р»Р°Р·Сѓ? "
 
 #, fuzzy
 msgid "&Cancel quit"
-msgstr "їЮЭШивШ ЧРТаиХвРЪ"
+msgstr "РџРѕРЅРёС€С‚Рё Р·Р°РІСЂС€РµС‚Р°Рє"
 
 #, fuzzy
 msgid " Error "
-msgstr "іаХиЪР"
+msgstr "Р“СЂРµС€РєР°"
 
 msgid " This function is not implemented. "
 msgstr ""
 
 msgid " Copy to clipboard "
-msgstr " єЮЯШаРш г ЯаШеТРвЭШЪ "
+msgstr " РљРѕРїРёСЂР°С Сѓ РїСЂРёС…РІР°С‚РЅРёРє "
 
 msgid " Unable to save to file. "
-msgstr " ЅХ ЬЮУг ФР бРзгТРЬ ФРвЮвХЪг. "
+msgstr " РќРµ РјРѕРіСѓ РґР° СЃР°С‡СѓРІР°Рј РґР°С‚РѕС‚РµРєСѓ. "
 
 msgid " Cut to clipboard "
-msgstr " ёбХжШ г ЯаШеТРвЭШЪ "
+msgstr " РСЃРµС†Рё Сѓ РїСЂРёС…РІР°С‚РЅРёРє "
 
 msgid " Goto line "
-msgstr " ёФШ ЭР аХФ "
+msgstr " РРґРё РЅР° СЂРµРґ "
 
 msgid " Enter line: "
-msgstr " ГЭХбШвХ СаЮш аХФР: "
+msgstr " РЈРЅРµСЃРёС‚Рµ Р±СЂРѕС СЂРµРґР°: "
 
 msgid " Save Block "
-msgstr " БРзгТРш СЫЮЪ "
+msgstr " РЎР°С‡СѓРІР°С Р±Р»РѕРє "
 
 msgid " Insert File "
-msgstr " ГЬХвЭШ ФРвЮвХЪг "
+msgstr " РЈРјРµС‚РЅРё РґР°С‚РѕС‚РµРєСѓ "
 
 msgid " Cannot insert file. "
-msgstr " ЅХ ЬЮУг ФР гЬХвЭХЬ ФРвЮвХЪг. "
+msgstr " РќРµ РјРѕРіСѓ РґР° СѓРјРµС‚РЅРµРј РґР°С‚РѕС‚РµРєСѓ. "
 
 msgid " Sort block "
-msgstr " їЮаХтРш СЫЮЪ "
+msgstr " РџРѕСЂРµС’Р°С Р±Р»РѕРє "
 
 msgid " You must first highlight a block of text. "
-msgstr " їаТЮ ЬЮаРвХ ФР ЮЧЭРзШвХ СЫЮЪ вХЪбвР. "
+msgstr " РџСЂРІРѕ РјРѕСЂР°С‚Рµ РґР° РѕР·РЅР°С‡РёС‚Рµ Р±Р»РѕРє С‚РµРєСЃС‚Р°. "
 
 msgid " Run Sort "
-msgstr " АХтРш "
+msgstr " Р РµС’Р°С "
 
 msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr " ГЭХбШвХ ШЧСЮаХ аХтРъР (ТШФШ гЯгвбвТЮ) аРЧФТЮшХЭХ СХЫШЭРЬР: "
+msgstr " РЈРЅРµСЃРёС‚Рµ РёР·Р±РѕСЂРµ СЂРµС’Р°СљР° (РІРёРґРё СѓРїСѓС‚СЃС‚РІРѕ) СЂР°Р·РґРІРѕСРµРЅРµ Р±РµР»РёРЅР°РјР°: "
 
 msgid " Sort "
-msgstr " АХтРш "
+msgstr " Р РµС’Р°С "
 
 msgid " Cannot execute sort command "
-msgstr " ЅХ ЬЮУг ФР ШЧТаиШЬ ЭРаХФСг аХтРъР "
+msgstr " РќРµ РјРѕРіСѓ РґР° РёР·РІСЂС€РёРј РЅР°СЂРµРґР±Сѓ СЂРµС’Р°СљР° "
 
 msgid " Sort returned non-zero: "
-msgstr " АХтРъХ ЭШшХ гбЯХиЭЮ ЧРТаиХЭЮ: "
+msgstr " Р РµС’Р°СљРµ РЅРёСРµ СѓСЃРїРµС€РЅРѕ Р·Р°РІСЂС€РµРЅРѕ: "
 
 msgid "Paste output of external command"
-msgstr "·РЫХЯШ ШЧЫРЧ бЯЮщРиъХ ЭРаХФСХ"
+msgstr "Р—Р°Р»РµРїРё РёР·Р»Р°Р· СЃРїРѕС™Р°С€СљРµ РЅР°СЂРµРґР±Рµ"
 
 msgid "Enter shell command(s):"
-msgstr "ГЭХбШвХ ЭРаХФСХ щгбЪХ:"
+msgstr "РЈРЅРµСЃРёС‚Рµ РЅР°СЂРµРґР±Рµ С™СѓСЃРєРµ:"
 
 msgid "External command"
-msgstr "БЯЮщРиъР ЭРаХФСР"
+msgstr "РЎРїРѕС™Р°С€СљР° РЅР°СЂРµРґР±Р°"
 
 msgid "Cannot execute command"
-msgstr "ЅХ ЬЮУг ФР ШЧТаиШЬ ЭРаХФСг"
+msgstr "РќРµ РјРѕРіСѓ РґР° РёР·РІСЂС€РёРј РЅР°СЂРµРґР±Сѓ"
 
 msgid "Error creating script:"
-msgstr "іаХиЪР ЯаШ бвТРаРъг бЯШбР:"
+msgstr "Р“СЂРµС€РєР° РїСЂРё СЃС‚РІР°СЂР°СљСѓ СЃРїРёСЃР°:"
 
 msgid "Error reading script:"
-msgstr "іаХиЪР ЯаШ зШвРъг бЯШбР:"
+msgstr "Р“СЂРµС€РєР° РїСЂРё С‡РёС‚Р°СљСѓ СЃРїРёСЃР°:"
 
 msgid "Error closing script:"
-msgstr "іаХиЪР ЯаШ ЧРвТРаРъг бЯШбР:"
+msgstr "Р“СЂРµС€РєР° РїСЂРё Р·Р°С‚РІР°СЂР°СљСѓ СЃРїРёСЃР°:"
 
 msgid "Script created:"
-msgstr "БЯШб шХ бвТЮаХЭ:"
+msgstr "РЎРїРёСЃ СРµ СЃС‚РІРѕСЂРµРЅ:"
 
 msgid "Process block"
-msgstr "ѕСаРФШ СЫЮЪ"
+msgstr "РћР±СЂР°РґРё Р±Р»РѕРє"
 
 msgid " Mail "
-msgstr " їЮивР "
+msgstr " РџРѕС€С‚Р° "
 
 msgid " Copies to"
-msgstr " єЮЯШшХ "
+msgstr " РљРѕРїРёСРµ "
 
 msgid " Subject"
-msgstr " ВХЬР "
+msgstr " РўРµРјР° "
 
 msgid " To"
-msgstr " єЮЬХ"
+msgstr " РљРѕРјРµ"
 
 msgid " mail -s <subject> -c <cc> <to>"
-msgstr " mail -s <вХЬР> -c <ЪЮЯШшХ> <ЪЮЬХ>"
+msgstr " mail -s <С‚РµРјР°> -c <РєРѕРїРёСРµ> <РєРѕРјРµ>"
 
 msgid " Insert Literal "
-msgstr " ГСРжШ ЫШвХаРЫ "
+msgstr " РЈР±Р°С†Рё Р»РёС‚РµСЂР°Р» "
 
 msgid " Press any key: "
-msgstr " їаШвШбЭШвХ СШЫЮ ЪЮшШ вРбвХа: "
+msgstr " РџСЂРёС‚РёСЃРЅРёС‚Рµ Р±РёР»Рѕ РєРѕСРё С‚Р°СЃС‚РµСЂ: "
 
 msgid " Execute Macro "
-msgstr " ёЧТаиШ ЬРЪаЮ "
+msgstr " РР·РІСЂС€Рё РјР°РєСЂРѕ "
 
 msgid "pro&Mpt on replace"
-msgstr "Я&ѕвТаФР ЧРЬХЭХ"
+msgstr "Рї&РћС‚РІСЂРґР° Р·Р°РјРµРЅРµ"
 
 msgid "replace &All"
-msgstr "ЧРЬХЭШ &БТХ"
+msgstr "Р·Р°РјРµРЅРё &РЎРІРµ"
 
 msgid "All charsets"
 msgstr ""
 
 msgid "&Backwards"
-msgstr "ГЭР&ЧРФ"
+msgstr "РЈРЅР°&Р·Р°Рґ"
 
 msgid "case &Sensitive"
-msgstr "аРЧЫ. &ІХЫ./ЬРЫР бЫЮТР"
+msgstr "СЂР°Р·Р». &Р’РµР»./РјР°Р»Р° СЃР»РѕРІР°"
 
 msgid " Enter replacement string:"
-msgstr " ГЭХбШвХ ЭШбЪг ЧРЬХЭХ:"
+msgstr " РЈРЅРµСЃРёС‚Рµ РЅРёСЃРєСѓ Р·Р°РјРµРЅРµ:"
 
 msgid " Enter search string:"
-msgstr " ГЭХбШвХ ЭШбЪг ЯаХваРУХ:"
+msgstr " РЈРЅРµСЃРёС‚Рµ РЅРёСЃРєСѓ РїСЂРµС‚СЂР°РіРµ:"
 
 msgid "Cancel"
-msgstr "їЮЭШивШ"
+msgstr "РџРѕРЅРёС€С‚Рё"
 
 msgid "O&ne"
-msgstr "ЁХФР&Э"
+msgstr "Р€РµРґР°&РЅ"
 
 msgid "A&ll"
-msgstr "Б&ТХ"
+msgstr "РЎ&РІРµ"
 
 msgid "&Skip"
-msgstr "їаХ&бЪЮзШ"
+msgstr "РџСЂРµ&СЃРєРѕС‡Рё"
 
 msgid "&Replace"
-msgstr "·Р&ЬХЭШ"
+msgstr "Р—Р°&РјРµРЅРё"
 
 msgid " Replace with: "
-msgstr " ·РЬХЭШ бР: "
+msgstr " Р—Р°РјРµРЅРё СЃР°: "
 
 msgid " Confirm replace "
-msgstr " їЮвТаФР ЧРЬХЭХ "
+msgstr " РџРѕС‚РІСЂРґР° Р·Р°РјРµРЅРµ "
 
 msgid "&Dismiss"
-msgstr "&ѕвЯгбвШ"
+msgstr "&РћС‚РїСѓСЃС‚Рё"
 
 msgid " Emacs key: "
-msgstr " їаХзШжР µЬРЪбР: "
+msgstr " РџСЂРµС‡РёС†Р° Р•РјР°РєСЃР°: "
 
 #, c-format
 msgid ""
@@ -374,21 +374,21 @@ msgid ""
 "User: %s\n"
 "Process ID: %d"
 msgstr ""
-"ґРвЮвХЪг `%s' ТХы гаХтгшХ\n"
-"ЪЮаШбЭШЪ: %s\n"
-"ё± ЯаЮжХбР: %d"
+"Р”Р°С‚РѕС‚РµРєСѓ `%s' РІРµС› СѓСЂРµС’СѓСРµ\n"
+"РєРѕСЂРёСЃРЅРёРє: %s\n"
+"РР‘ РїСЂРѕС†РµСЃР°: %d"
 
 msgid "File locked"
-msgstr "ґРвЮвХЪР шХ ЧРЪщгзРЭР"
+msgstr "Р”Р°С‚РѕС‚РµРєР° СРµ Р·Р°РєС™СѓС‡Р°РЅР°"
 
 msgid "&Grab lock"
-msgstr "&·РгЧЬШ ЪРвРЭРж"
+msgstr "&Р—Р°СѓР·РјРё РєР°С‚Р°РЅР°С†"
 
 msgid "&Ignore lock"
-msgstr "·&РЭХЬРаШ ЪРвРЭРж"
+msgstr "Р—&Р°РЅРµРјР°СЂРё РєР°С‚Р°РЅР°С†"
 
 msgid " About "
-msgstr " ѕ ЯаЮУаРЬг"
+msgstr " Рћ РїСЂРѕРіСЂР°РјСѓ"
 
 msgid ""
 "\n"
@@ -402,136 +402,136 @@ msgstr ""
 "\n"
 "                    Cooledit  v3.11.5\n"
 "\n"
-" °гвЮабЪР ЯаРТР (C) 1996 ·РФгЦСШЭР ЧР бЫЮСЮФЭШ бЮдвТХа\n"
+" РђСѓС‚РѕСЂСЃРєР° РїСЂР°РІР° (C) 1996 Р—Р°РґСѓР¶Р±РёРЅР° Р·Р° СЃР»РѕР±РѕРґРЅРё СЃРѕС„С‚РІРµСЂ\n"
 "\n"
-"     їаШшРвХщбЪШ ЯаХЬР ЪЮаШбЭШЪг гаХтШТРз вХЪбвР ЭРЯШбРЭ\n"
-"                  ЧР їЮЭЮыЭЮУ ЭРаХФЭШЪР.\n"
+"     РџСЂРёСР°С‚РµС™СЃРєРё РїСЂРµРјР° РєРѕСЂРёСЃРЅРёРєСѓ СѓСЂРµС’РёРІР°С‡ С‚РµРєСЃС‚Р° РЅР°РїРёСЃР°РЅ\n"
+"                  Р·Р° РџРѕРЅРѕС›РЅРѕРі РЅР°СЂРµРґРЅРёРєР°.\n"
 
 msgid "&Open file..."
-msgstr "&ѕвТЮаШ ФРвЮвХЪг..."
+msgstr "&РћС‚РІРѕСЂРё РґР°С‚РѕС‚РµРєСѓ..."
 
 msgid "&New              C-n"
-msgstr "&ЅЮТЮ                   C-n"
+msgstr "&РќРѕРІРѕ                   C-n"
 
 msgid "&Save              F2"
-msgstr "&БРзгТРш                 F2"
+msgstr "&РЎР°С‡СѓРІР°С                 F2"
 
 msgid "Save &as...       F12"
-msgstr "БРзгТРш &ЪРЮ...         F12"
+msgstr "РЎР°С‡СѓРІР°С &РєР°Рѕ...         F12"
 
 msgid "&Insert file...   F15"
-msgstr "&ГСРжШ ФРвЮвХЪг...      F15"
+msgstr "&РЈР±Р°С†Рё РґР°С‚РѕС‚РµРєСѓ...      F15"
 
 msgid "Copy to &file...  C-f"
-msgstr "єЮЯШаРш г &ФРвЮвХЪг...  C-f"
+msgstr "РљРѕРїРёСЂР°С Сѓ &РґР°С‚РѕС‚РµРєСѓ...  C-f"
 
 msgid "&User menu...     F11"
-msgstr "єЮаШбЭШзЪШ &ЬХЭШ...     F11"
+msgstr "РљРѕСЂРёСЃРЅРёС‡РєРё &РјРµРЅРё...     F11"
 
 msgid "A&bout...            "
-msgstr "&ѕ ЯаЮУаРЬг...             "
+msgstr "&Рћ РїСЂРѕРіСЂР°РјСѓ...             "
 
 msgid "&Quit             F10"
-msgstr "&·РТаиШ                 F10"
+msgstr "&Р—Р°РІСЂС€Рё                 F10"
 
 msgid "&New            C-x k"
-msgstr "&ЅЮТЮ                   C-x k"
+msgstr "&РќРѕРІРѕ                   C-x k"
 
 msgid "Copy to &file...     "
-msgstr "єЮЯШаРш г &ФРвЮвХЪг...       "
+msgstr "РљРѕРїРёСЂР°С Сѓ &РґР°С‚РѕС‚РµРєСѓ...       "
 
 #, fuzzy
 msgid "&Toggle mark                 F3"
-msgstr "&БЬХЭШ ЮЧЭРЪг            F3"
+msgstr "&РЎРјРµРЅРё РѕР·РЅР°РєСѓ            F3"
 
 #, fuzzy
 msgid "Mar&k columns              S-F3"
-msgstr "&ѕЧЭРзШ ЪЮЫЮЭХ           S-F3"
+msgstr "&РћР·РЅР°С‡Рё РєРѕР»РѕРЅРµ           S-F3"
 
 #, fuzzy
 msgid "Toggle &ins/overw           Ins"
-msgstr "БЬХЭШ &гСРж./ЯаХЯШб.    Ins"
+msgstr "РЎРјРµРЅРё &СѓР±Р°С†./РїСЂРµРїРёСЃ.    Ins"
 
 #, fuzzy
 msgid "&Copy                        F5"
-msgstr "&єЮЯШаРш                F5"
+msgstr "&РљРѕРїРёСЂР°С                F5"
 
 #, fuzzy
 msgid "&Move                        F6"
-msgstr "&їаХЬХбвШ                  F6"
+msgstr "&РџСЂРµРјРµСЃС‚Рё                  F6"
 
 #, fuzzy
 msgid "&Delete                      F8"
-msgstr "&ѕСаШиШ                 F8"
+msgstr "&РћР±СЂРёС€Рё                 F8"
 
 #, fuzzy
 msgid "C&opy to clipfile         C-Ins"
-msgstr "єЮЯШаРш г &ФРвЮвХЪг...       "
+msgstr "РљРѕРїРёСЂР°С Сѓ &РґР°С‚РѕС‚РµРєСѓ...       "
 
 #, fuzzy
 msgid "C&ut to clipfile          S-Del"
-msgstr "&ёФШ ЭР аХФ...               M-l"
+msgstr "&РРґРё РЅР° СЂРµРґ...               M-l"
 
 msgid "&Paste from clipfile      S-Ins"
 msgstr ""
 
 #, fuzzy
 msgid "Toggle bookmar&k               "
-msgstr "&БЬХЭШ ЮЧЭРЪг            F3"
+msgstr "&РЎРјРµРЅРё РѕР·РЅР°РєСѓ            F3"
 
 #, fuzzy
 msgid "&Next bookmark                 "
-msgstr "&ЅЮТЮ                   C-n"
+msgstr "&РќРѕРІРѕ                   C-n"
 
 #, fuzzy
 msgid "Pre&v bookmark                 "
-msgstr "їЮаХ&тРш...                     M-t"
+msgstr "РџРѕСЂРµ&С’Р°С...                     M-t"
 
 #, fuzzy
 msgid "&Flush bookmark                "
-msgstr "їЮ&ивР...                          "
+msgstr "РџРѕ&С€С‚Р°...                          "
 
 #, fuzzy
 msgid "&Undo                       C-u"
-msgstr "&ѕЯЮЧЮТШ                  C-u"
+msgstr "&РћРїРѕР·РѕРІРё                  C-u"
 
 #, fuzzy
 msgid "&Beginning               C-PgUp"
-msgstr "&їЮзХвРЪ               C-PgUp"
+msgstr "&РџРѕС‡РµС‚Р°Рє               C-PgUp"
 
 #, fuzzy
 msgid "&End                     C-PgDn"
-msgstr "&єаРш                  C-PgDn"
+msgstr "&РљСЂР°С                  C-PgDn"
 
 #, fuzzy
 msgid "C&opy to clipfile           M-w"
-msgstr "&ёФШ ЭР аХФ...               M-l"
+msgstr "&РРґРё РЅР° СЂРµРґ...               M-l"
 
 #, fuzzy
 msgid "C&ut to clipfile            C-w"
-msgstr "&ёФШ ЭР аХФ...               M-l"
+msgstr "&РРґРё РЅР° СЂРµРґ...               M-l"
 
 msgid "&Paste from clipfile        C-y"
 msgstr ""
 
 msgid "&Search...         F7"
-msgstr "&ВаРЦШ                     F7"
+msgstr "&РўСЂР°Р¶Рё                     F7"
 
 msgid "Search &again     F17"
-msgstr "ВаР&ЦШ ЯЮЭЮТЮ             F17"
+msgstr "РўСЂР°&Р¶Рё РїРѕРЅРѕРІРѕ             F17"
 
 msgid "&Replace...        F4"
-msgstr "&·РЬХЭШ...                 F4"
+msgstr "&Р—Р°РјРµРЅРё...                 F4"
 
 msgid "&Go to line...            M-l"
-msgstr "&ёФШ ЭР аХФ...               M-l"
+msgstr "&РРґРё РЅР° СЂРµРґ...               M-l"
 
 #, fuzzy
 msgid "Toggle li&ne state        M-n"
-msgstr "&БЬХЭШ ЮЧЭРЪг            F3"
+msgstr "&РЎРјРµРЅРё РѕР·РЅР°РєСѓ            F3"
 
 msgid "Go to matching &bracket   M-b"
-msgstr "ёФШ ЭР ЮФУЮТРаРшгыг &ЧРУаРФг    M-b"
+msgstr "РРґРё РЅР° РѕРґРіРѕРІР°СЂР°ССѓС›Сѓ &Р·Р°РіСЂР°РґСѓ    M-b"
 
 msgid "Find declaration      A-Enter"
 msgstr ""
@@ -544,191 +544,197 @@ msgstr ""
 
 #, fuzzy
 msgid "Encod&ing...             C-t"
-msgstr "їЮаХ&тРш...                     M-t"
+msgstr "РџРѕСЂРµ&С’Р°С...                     M-t"
 
 msgid "Insert &literal...       C-q"
-msgstr "ГСРжШ &ЫШвХаРЫ...               C-q"
+msgstr "РЈР±Р°С†Рё &Р»РёС‚РµСЂР°Р»...               C-q"
 
 msgid "&Refresh screen          C-l"
-msgstr "&ѕбТХЦШ ХЪаРЭ                   C-l"
+msgstr "&РћСЃРІРµР¶Рё РµРєСЂР°РЅ                   C-l"
 
 msgid "&Start record macro      C-r"
-msgstr "&їЮзЭШ бЭШЬРъХ ЬРЪаЮР           C-r"
+msgstr "&РџРѕС‡РЅРё СЃРЅРёРјР°СљРµ РјР°РєСЂРѕР°           C-r"
 
 msgid "&Finish record macro...  C-r"
-msgstr "&·РТаиШ бЭШЬРъХ ЬРЪаЮР...       C-r"
+msgstr "&Р—Р°РІСЂС€Рё СЃРЅРёРјР°СљРµ РјР°РєСЂРѕР°...       C-r"
 
 msgid "&Execute macro...   C-a, KEY"
-msgstr "&ёЧТаиШ ЬРЪаЮ...           C-a, KEY"
+msgstr "&РР·РІСЂС€Рё РјР°РєСЂРѕ...           C-a, KEY"
 
 msgid "Delete macr&o...            "
-msgstr "ѕСаШиШ ЬРЪа&Ю...                   "
+msgstr "РћР±СЂРёС€Рё РјР°РєСЂ&Рѕ...                   "
 
 msgid "Insert &date/time           "
-msgstr "ГСРжШ &ФРвгЬ Ш ТаХЬХ               "
+msgstr "РЈР±Р°С†Рё &РґР°С‚СѓРј Рё РІСЂРµРјРµ               "
 
 msgid "Format p&aragraph        M-p"
-msgstr "ДЮаЬРвШаРш Я&Рбгб               M-p"
+msgstr "Р¤РѕСЂРјР°С‚РёСЂР°С Рї&Р°СЃСѓСЃ               M-p"
 
 msgid "'ispell' s&pell check    C-p"
-msgstr "їаЮТХаШ &ЯаРТЮЯШб `ispell'-ЮЬ C-p"
+msgstr "РџСЂРѕРІРµСЂРё &РїСЂР°РІРѕРїРёСЃ `ispell'-РѕРј C-p"
 
 msgid "Sor&t...                 M-t"
-msgstr "їЮаХ&тРш...                     M-t"
+msgstr "РџРѕСЂРµ&С’Р°С...                     M-t"
 
 msgid "Paste o&utput of...      M-u"
-msgstr "·РЫХЯШ &ШЧЫРЧ ЭРаХФСХ...        M-u"
+msgstr "Р—Р°Р»РµРїРё &РёР·Р»Р°Р· РЅР°СЂРµРґР±Рµ...        M-u"
 
 msgid "E&xternal Formatter      F19"
-msgstr "БЯЮ&щРиъШ дЮаЬРвХа              F19"
+msgstr "РЎРїРѕ&С™Р°С€СљРё С„РѕСЂРјР°С‚РµСЂ              F19"
 
 msgid "&Mail...                    "
-msgstr "їЮ&ивР...                          "
+msgstr "РџРѕ&С€С‚Р°...                          "
 
 msgid "&Execute macro... C-x e, KEY"
-msgstr "&ёЧТаиШ ЬРЪаЮ...         C-x e, KEY"
+msgstr "&РР·РІСЂС€Рё РјР°РєСЂРѕ...         C-x e, KEY"
 
 msgid "'ispell' s&pell check    M-$"
-msgstr "їаЮТХаШ &ЯаРТЮЯШб `ispell'-ЮЬ M-$"
+msgstr "РџСЂРѕРІРµСЂРё &РїСЂР°РІРѕРїРёСЃ `ispell'-РѕРј M-$"
 
 msgid "&General...  "
-msgstr "&ѕЯивХ...  "
+msgstr "&РћРїС€С‚Рµ...  "
 
 msgid "&Save mode..."
-msgstr "&АХЦШЬ згТРъР..."
+msgstr "&Р РµР¶РёРј С‡СѓРІР°СљР°..."
 
 #, fuzzy
 msgid "Learn &Keys..."
-msgstr "ЅРгзШ &вРбвХаХ..."
+msgstr "РќР°СѓС‡Рё &С‚Р°СЃС‚РµСЂРµ..."
 
 #, fuzzy
 msgid "Syntax &Highlighting..."
-msgstr "ёбвШ&жРъХ бШЭвРЪбХ"
+msgstr "РСЃС‚Рё&С†Р°СљРµ СЃРёРЅС‚Р°РєСЃРµ"
 
 #, fuzzy
 msgid "S&yntax file"
-msgstr "ГаХтШТРъХ бШЭвРЪбЭХ ФРвЮвХЪХ"
+msgstr "РЈСЂРµС’РёРІР°СљРµ СЃРёРЅС‚Р°РєСЃРЅРµ РґР°С‚РѕС‚РµРєРµ"
 
 #, fuzzy
 msgid "&Menu file"
-msgstr "ГаХФШ ФРвЮвХЪг &ЬХЭШшР"
+msgstr "РЈСЂРµРґРё РґР°С‚РѕС‚РµРєСѓ &РјРµРЅРёСР°"
 
 #, fuzzy
 msgid "Save setu&p"
-msgstr "&БРзгТРш ЯЮФХиРТРъР"
+msgstr "&РЎР°С‡СѓРІР°С РїРѕРґРµС€Р°РІР°СљР°"
 
 msgid " File "
-msgstr " ґРвЮвХЪР "
+msgstr " Р”Р°С‚РѕС‚РµРєР° "
 
 msgid " Edit "
-msgstr " ГаХтШТРъХ "
+msgstr " РЈСЂРµС’РёРІР°СљРµ "
 
 msgid " Sear/Repl "
-msgstr " їаХваРЦШ/ЧРЬХЭШ "
+msgstr " РџСЂРµС‚СЂР°Р¶Рё/Р·Р°РјРµРЅРё "
 
 msgid " Command "
-msgstr " ЅРаХФСР "
+msgstr " РќР°СЂРµРґР±Р° "
 
 msgid " Options "
-msgstr " ёЧСЮаШ "
+msgstr " РР·Р±РѕСЂРё "
 
 msgid "Intuitive"
-msgstr "ёЭвгШвШТЭЮ"
+msgstr "РРЅС‚СѓРёС‚РёРІРЅРѕ"
 
 msgid "Emacs"
-msgstr "µЬРЪб"
+msgstr "Р•РјР°РєСЃ"
 
 #, fuzzy
 msgid "User-defined"
-msgstr "&єЮаШбЭШзЪШ ЧРФРЭЮ:"
+msgstr "&РљРѕСЂРёСЃРЅРёС‡РєРё Р·Р°РґР°РЅРѕ:"
 
 msgid "None"
-msgstr "ЅШивР"
+msgstr "РќРёС€С‚Р°"
 
 msgid "Dynamic paragraphing"
-msgstr "ґШЭРЬШзЭШ ЯРбгбШ"
+msgstr "Р”РёРЅР°РјРёС‡РЅРё РїР°СЃСѓСЃРё"
 
 msgid "Type writer wrap"
-msgstr "°гвЮЬРвбЪШ ЯаХЫЮЬ"
+msgstr "РђСѓС‚РѕРјР°С‚СЃРєРё РїСЂРµР»РѕРј"
 
 msgid "Word wrap line length: "
-msgstr "їаХЫЮЬ аХФР ЭР ФгЦШЭШ: "
+msgstr "РџСЂРµР»РѕРј СЂРµРґР° РЅР° РґСѓР¶РёРЅРё: "
 
 msgid "Tab spacing: "
-msgstr "АРЧЬРЪ вРСгЫРвЮаР: "
+msgstr "Р Р°Р·РјР°Рє С‚Р°Р±СѓР»Р°С‚РѕСЂР°: "
 
 #, fuzzy
 msgid "Pers&istent selection"
-msgstr "ЮСаЭШ ШЧ&±Юа           M-*"
+msgstr "РѕР±СЂРЅРё РёР·&Р‘РѕСЂ           M-*"
 
 msgid "Synta&x highlighting"
-msgstr "ёбвШ&жРъХ бШЭвРЪбХ"
+msgstr "РСЃС‚Рё&С†Р°СљРµ СЃРёРЅС‚Р°РєСЃРµ"
+
+msgid "Visible tabs"
+msgstr ""
+
+msgid "Visible trailing spaces"
+msgstr ""
 
 msgid "Save file &position"
-msgstr "ЗгТРъХ вХЪгыХ &ЯЮЧШжШшХ"
+msgstr "Р§СѓРІР°СљРµ С‚РµРєСѓС›Рµ &РїРѕР·РёС†РёСРµ"
 
 msgid "Confir&m before saving"
-msgstr "їЮвТаФР &згТРъР"
+msgstr "РџРѕС‚РІСЂРґР° &С‡СѓРІР°СљР°"
 
 msgid "Fill tabs with &spaces"
-msgstr "їЮЯгЭШ вРСгЫРвЮ&аХ аРЧЬРжШЬР"
+msgstr "РџРѕРїСѓРЅРё С‚Р°Р±СѓР»Р°С‚Рѕ&СЂРµ СЂР°Р·РјР°С†РёРјР°"
 
 msgid "&Return does autoindent"
-msgstr "ВРбвХа `&Return' ЭХ гТЫРзШ"
+msgstr "РўР°СЃС‚РµСЂ `&Return' РЅРµ СѓРІР»Р°С‡Рё"
 
 msgid "&Backspace through tabs"
-msgstr "ВРбвХаЮЬ `&Backsp' ЪаЮЧ вРСгЫ."
+msgstr "РўР°СЃС‚РµСЂРѕРј `&Backsp' РєСЂРѕР· С‚Р°Р±СѓР»."
 
 msgid "&Fake half tabs"
-msgstr "&»РЦЭР ЯЮЫгвРСгЫРжШшР"
+msgstr "&Р›Р°Р¶РЅР° РїРѕР»СѓС‚Р°Р±СѓР»Р°С†РёСР°"
 
 msgid "Wrap mode"
-msgstr "їаХЫЮЬ аХФЮТР"
+msgstr "РџСЂРµР»РѕРј СЂРµРґРѕРІР°"
 
 msgid "Key emulation"
-msgstr "ёЬШвРжШшР ЯаХзШжР"
+msgstr "РРјРёС‚Р°С†РёСР° РїСЂРµС‡РёС†Р°"
 
 msgid " Editor options "
-msgstr " ёЧСЮаШ гаХтШТРзР "
+msgstr " РР·Р±РѕСЂРё СѓСЂРµС’РёРІР°С‡Р° "
 
 msgid "Help"
-msgstr "їЮЬЮы"
+msgstr "РџРѕРјРѕС›"
 
 msgid "Save"
-msgstr "БРзгТРш"
+msgstr "РЎР°С‡СѓРІР°С"
 
 msgid "Mark"
-msgstr "ѕЧЭРзШ"
+msgstr "РћР·РЅР°С‡Рё"
 
 msgid "Replac"
-msgstr "·РЬХЭШ"
+msgstr "Р—Р°РјРµРЅРё"
 
 msgid "Copy"
-msgstr "єЮЯШаш"
+msgstr "РљРѕРїРёСЂС"
 
 msgid "Move"
-msgstr "їаЬбвШ"
+msgstr "РџСЂРјСЃС‚Рё"
 
 msgid "Delete"
-msgstr "ѕСаШиШ"
+msgstr "РћР±СЂРёС€Рё"
 
 msgid "PullDn"
-msgstr "їРФјЭШ"
+msgstr "РџР°РґРњРЅРё"
 
 msgid " Load syntax file "
-msgstr " ГзШвРш ФРвЮвХЪг бШЭвРЪбХ "
+msgstr " РЈС‡РёС‚Р°С РґР°С‚РѕС‚РµРєСѓ СЃРёРЅС‚Р°РєСЃРµ "
 
 #, c-format
 msgid ""
 " Cannot open file %s \n"
 " %s "
 msgstr ""
-" ЅХ ЬЮУг ФР ЮвТЮаШЬ ФРвЮвХЪг `%s' \n"
+" РќРµ РјРѕРіСѓ РґР° РѕС‚РІРѕСЂРёРј РґР°С‚РѕС‚РµРєСѓ `%s' \n"
 " %s "
 
 #, c-format
 msgid " Error in file %s on line %d "
-msgstr " іаХиЪР г ФРвЮвХжШ `%s' ЭР аХФг %d "
+msgstr " Р“СЂРµС€РєР° Сѓ РґР°С‚РѕС‚РµС†Рё `%s' РЅР° СЂРµРґСѓ %d "
 
 #, c-format
 msgid "bind: Wrong argument number, bind <key> <command>"
@@ -748,7 +754,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid "bind: Unknown command: `%s'"
-msgstr " їаЮЬХЭР ТЫРбЭШЪР "
+msgstr " РџСЂРѕРјРµРЅР° РІР»Р°СЃРЅРёРєР° "
 
 #, c-format
 msgid "%s: Syntax: %s <n> <command> <label>"
@@ -756,7 +762,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid "%s: Unknown command: `%s'"
-msgstr " їаЮЬХЭР ТЫРбЭШЪР "
+msgstr " РџСЂРѕРјРµРЅР° РІР»Р°СЃРЅРёРєР° "
 
 #, c-format
 msgid "%s: fn should be 1-10"
@@ -768,7 +774,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid "%s:%d: unknown command `%s'"
-msgstr " їаЮЬХЭР ТЫРбЭШЪР "
+msgstr " РџСЂРѕРјРµРЅР° РІР»Р°СЃРЅРёРєР° "
 
 #, c-format
 msgid "%s:%d: %s"
@@ -776,48 +782,48 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid "%s not found!"
-msgstr "ГЯЮЧЮаХъХ: ФРвЮвХЪР %s ЭШшХ ЭРтХЭР\n"
+msgstr "РЈРїРѕР·РѕСЂРµСљРµ: РґР°С‚РѕС‚РµРєР° %s РЅРёСРµ РЅР°С’РµРЅР°\n"
 
 msgid "&Set"
-msgstr "&їЮбвРТШ"
+msgstr "&РџРѕСЃС‚Р°РІРё"
 
 msgid "S&kip"
-msgstr "їаХб&ЪЮзШ"
+msgstr "РџСЂРµСЃ&РєРѕС‡Рё"
 
 msgid "Set &all"
-msgstr "їЮбвРТШ &бТХ"
+msgstr "РџРѕСЃС‚Р°РІРё &СЃРІРµ"
 
 msgid "owner"
-msgstr "ТЫРбЭШЪ"
+msgstr "РІР»Р°СЃРЅРёРє"
 
 msgid "group"
-msgstr "УагЯР"
+msgstr "РіСЂСѓРїР°"
 
 msgid "other"
-msgstr "ФагУШ"
+msgstr "РґСЂСѓРіРё"
 
 msgid "On"
-msgstr "·Р"
+msgstr "Р—Р°"
 
 msgid "Flag"
-msgstr "ѕЧЭРЪР"
+msgstr "РћР·РЅР°РєР°"
 
 msgid "Mode"
-msgstr "АХЦШЬ"
+msgstr "Р РµР¶РёРј"
 
 #, c-format
 msgid "%6d of %d"
-msgstr "%6d ЮФ %d"
+msgstr "%6d РѕРґ %d"
 
 msgid " Chown advanced command "
-msgstr " ЅРЯаХФЭР ЯаЮЬХЭР ТЫРбЭШЪР "
+msgstr " РќР°РїСЂРµРґРЅР° РїСЂРѕРјРµРЅР° РІР»Р°СЃРЅРёРєР° "
 
 #, c-format
 msgid ""
 " Cannot chmod \"%s\" \n"
 " %s "
 msgstr ""
-" ЅХ ЬЮУг ФР ЯаЮЬХЭШЬ ФЮЧТЮЫХ `%s'\n"
+" РќРµ РјРѕРіСѓ РґР° РїСЂРѕРјРµРЅРёРј РґРѕР·РІРѕР»Рµ `%s'\n"
 " %s "
 
 #, c-format
@@ -825,507 +831,510 @@ msgid ""
 " Cannot chown \"%s\" \n"
 " %s "
 msgstr ""
-" ЅХ ЬЮУг ФР ЯаЮЬХЭШЬ ТЫРбЭШЪР `%s' \n"
+" РќРµ РјРѕРіСѓ РґР° РїСЂРѕРјРµРЅРёРј РІР»Р°СЃРЅРёРєР° `%s' \n"
 " %s "
 
 msgid " Background process error "
-msgstr " іаХиЪР ЯЮЧРФШЭбЪЮУ ЯаЮжХбР "
+msgstr " Р“СЂРµС€РєР° РїРѕР·Р°РґРёРЅСЃРєРѕРі РїСЂРѕС†РµСЃР° "
 
 msgid " Unknown error in child "
-msgstr " ЅХЯЮЧЭРвР УаХиЪР г ФХвХвг "
+msgstr " РќРµРїРѕР·РЅР°С‚Р° РіСЂРµС€РєР° Сѓ РґРµС‚РµС‚Сѓ "
 
 msgid " Child died unexpectedly "
-msgstr " ґХвХ шХ ШЧЭХЭРФЭЮ ЧРТаиШЫЮ аРФ "
+msgstr " Р”РµС‚Рµ СРµ РёР·РЅРµРЅР°РґРЅРѕ Р·Р°РІСЂС€РёР»Рѕ СЂР°Рґ "
 
 msgid " Background protocol error "
-msgstr " іаХиЪР ЯЮЧРФШЭбЪЮУ ЯаЮвЮЪЮЫР "
+msgstr " Р“СЂРµС€РєР° РїРѕР·Р°РґРёРЅСЃРєРѕРі РїСЂРѕС‚РѕРєРѕР»Р° "
 
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
 msgstr ""
-" їЮЧРФШЭбЪШ ЯаЮжХб ЭРЬ шХ ЯЮбЫРЮ ЧРевХТ ЧР ТШиХ РаУгЬХЭРвР\n"
-" ЭХУЮ ивЮ ЬЮЦХЬЮ ФР ЮСаРФШЬЮ. \n"
+" РџРѕР·Р°РґРёРЅСЃРєРё РїСЂРѕС†РµСЃ РЅР°Рј СРµ РїРѕСЃР»Р°Рѕ Р·Р°С…С‚РµРІ Р·Р° РІРёС€Рµ Р°СЂРіСѓРјРµРЅР°С‚Р°\n"
+" РЅРµРіРѕ С€С‚Рѕ РјРѕР¶РµРјРѕ РґР° РѕР±СЂР°РґРёРјРѕ. \n"
 
 msgid "&Full file list"
-msgstr "&їгЭ бЯШбРЪ ФРвЮвХЪР"
+msgstr "&РџСѓРЅ СЃРїРёСЃР°Рє РґР°С‚РѕС‚РµРєР°"
 
 msgid "&Brief file list"
-msgstr "&єаРвРЪ бЯШбРЪ ФРвЮвХЪР"
+msgstr "&РљСЂР°С‚Р°Рє СЃРїРёСЃР°Рє РґР°С‚РѕС‚РµРєР°"
 
 msgid "&Long file list"
-msgstr "&ґгУРзРЪ бЯШбРЪ ФРвЮвХЪР"
+msgstr "&Р”СѓРіР°С‡Р°Рє СЃРїРёСЃР°Рє РґР°С‚РѕС‚РµРєР°"
 
 msgid "&User defined:"
-msgstr "&єЮаШбЭШзЪШ ЧРФРЭЮ:"
+msgstr "&РљРѕСЂРёСЃРЅРёС‡РєРё Р·Р°РґР°РЅРѕ:"
 
 msgid "Listing mode"
-msgstr "АХЦШЬ бЯШбЪР"
+msgstr "Р РµР¶РёРј СЃРїРёСЃРєР°"
 
 msgid "user &Mini status"
-msgstr "ЪЮаШбЭШзЪЮ &јШЭШ бвРъХ"
+msgstr "РєРѕСЂРёСЃРЅРёС‡РєРѕ &РњРёРЅРё СЃС‚Р°СљРµ"
 
 msgid "&Reverse"
-msgstr "&ѕСаЭШ"
+msgstr "&РћР±СЂРЅРё"
 
 msgid "case sensi&tive"
-msgstr "аРЧЫШЪг&ш ТХЫШЪР Ш ЬРЫР бЫЮТР"
+msgstr "СЂР°Р·Р»РёРєСѓ&С РІРµР»РёРєР° Рё РјР°Р»Р° СЃР»РѕРІР°"
 
 msgid "Sort order"
-msgstr "їЮаХФРЪ аХтРъР"
+msgstr "РџРѕСЂРµРґР°Рє СЂРµС’Р°СљР°"
 
 msgid "Executable first"
 msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
-msgstr "СаЧШ б&їШбРЪ ФШаХЪвЮаШшгЬР  C-\\"
+msgstr "Р±СЂР·Рё СЃ&РџРёСЃР°Рє РґРёСЂРµРєС‚РѕСЂРёССѓРјР°  C-\\"
 
 msgid " confirm &Exit "
-msgstr " ЯЮвТаФР &ёЧЫРЧР "
+msgstr " РїРѕС‚РІСЂРґР° &РР·Р»Р°Р·Р° "
 
 msgid " confirm e&Xecute "
-msgstr " ЯЮвТаФР Ш&·ТаиРТРъР "
+msgstr " РїРѕС‚РІСЂРґР° Рё&Р—РІСЂС€Р°РІР°СљР° "
 
 msgid " confirm o&Verwrite "
-msgstr " ЯЮвТаФР &їаХЯШбШТРъР "
+msgstr " РїРѕС‚РІСЂРґР° &РџСЂРµРїРёСЃРёРІР°СљР° "
 
 msgid " confirm &Delete "
-msgstr " ЯЮвТаФР &±аШбРъР "
+msgstr " РїРѕС‚РІСЂРґР° &Р‘СЂРёСЃР°СљР° "
 
 msgid " Confirmation "
-msgstr " їЮвТаФХ "
+msgstr " РџРѕС‚РІСЂРґРµ "
 
 #, fuzzy
 msgid "UTF-8 output"
-msgstr "їгЭ ЮбЬЮСШвЭШ ШЧЫРЧ"
+msgstr "РџСѓРЅ РѕСЃРјРѕР±РёС‚РЅРё РёР·Р»Р°Р·"
 
 msgid "Full 8 bits output"
-msgstr "їгЭ ЮбЬЮСШвЭШ ШЧЫРЧ"
+msgstr "РџСѓРЅ РѕСЃРјРѕР±РёС‚РЅРё РёР·Р»Р°Р·"
 
 msgid "ISO 8859-1"
-msgstr "ШЧЮ 8859-1"
+msgstr "РёР·Рѕ 8859-1"
 
 msgid "7 bits"
-msgstr "7 СШвР"
+msgstr "7 Р±РёС‚Р°"
 
 msgid "F&ull 8 bits input"
-msgstr "ї&гЭ ЮбЬЮСШвЭШ гЫРЧ"
+msgstr "Рџ&СѓРЅ РѕСЃРјРѕР±РёС‚РЅРё СѓР»Р°Р·"
 
 msgid " Display bits "
-msgstr " ±ШвЮТР г ЯаШЪРЧг "
+msgstr " Р‘РёС‚РѕРІР° Сѓ РїСЂРёРєР°Р·Сѓ "
 
 msgid "Other 8 bit"
-msgstr "ґагУa, ЮбЬЮСШвЭa"
+msgstr "Р”СЂСѓРіa, РѕСЃРјРѕР±РёС‚РЅa"
 
 msgid "Input / display codepage:"
-msgstr "єЮФЭР бваРЭР гЫРЧР Ш ЯаШЪРЧР:"
+msgstr "РљРѕРґРЅР° СЃС‚СЂР°РЅР° СѓР»Р°Р·Р° Рё РїСЂРёРєР°Р·Р°:"
 
 msgid "&Select"
-msgstr "&ёЧРСХаШ"
+msgstr "&РР·Р°Р±РµСЂРё"
 
 #, fuzzy
 msgid "Use passive mode over pro&xy"
-msgstr "єЮаШбвШ &ЯРбШТЭШ аХЦШЬ"
+msgstr "РљРѕСЂРёСЃС‚Рё &РїР°СЃРёРІРЅРё СЂРµР¶РёРј"
 
 msgid "Use &passive mode"
-msgstr "єЮаШбвШ &ЯРбШТЭШ аХЦШЬ"
+msgstr "РљРѕСЂРёСЃС‚Рё &РїР°СЃРёРІРЅРё СЂРµР¶РёРј"
 
 msgid "&Use ~/.netrc"
-msgstr "&єЮаШбвШ ~/.netrc"
+msgstr "&РљРѕСЂРёСЃС‚Рё ~/.netrc"
 
 msgid "&Always use ftp proxy"
-msgstr "&ГТХЪ ЪЮаШбвШ ЯЮбаХФЭШЪР ЧР ftp"
+msgstr "&РЈРІРµРє РєРѕСЂРёСЃС‚Рё РїРѕСЃСЂРµРґРЅРёРєР° Р·Р° ftp"
 
 msgid "sec"
-msgstr "бХЪ"
+msgstr "СЃРµРє"
 
 msgid "ftpfs directory cache timeout:"
-msgstr "ШбвХЪЫЮ ТаХЬХ ЧР ЮбвРТг ФШа. ftpfs-Р:"
+msgstr "РёСЃС‚РµРєР»Рѕ РІСЂРµРјРµ Р·Р° РѕСЃС‚Р°РІСѓ РґРёСЂ. ftpfs-Р°:"
 
 msgid "ftp anonymous password:"
-msgstr "РЭЮЭШЬЭР ЫЮЧШЭЪР ЧР ftp:"
+msgstr "Р°РЅРѕРЅРёРјРЅР° Р»РѕР·РёРЅРєР° Р·Р° ftp:"
 
 msgid "Timeout for freeing VFSs:"
-msgstr "ЗХЪРъХ ЮбЫЮСРтРъР ІБґ-ЮТР:"
+msgstr "Р§РµРєР°СљРµ РѕСЃР»РѕР±Р°С’Р°СљР° Р’РЎР”-РѕРІР°:"
 
 msgid " Virtual File System Setting "
-msgstr " їЮФХиРТРъХ ТШавгРЫЭЮУ бШбвХЬР ФРвЮвХЪР "
+msgstr " РџРѕРґРµС€Р°РІР°СљРµ РІРёСЂС‚СѓР°Р»РЅРѕРі СЃРёСЃС‚РµРјР° РґР°С‚РѕС‚РµРєР° "
 
 msgid "Quick cd"
-msgstr "±аЧР ЯаЮЬ.ФШа."
+msgstr "Р‘СЂР·Р° РїСЂРѕРј.РґРёСЂ."
 
 msgid "cd"
-msgstr "ЯаЮЬ.ФШа."
+msgstr "РїСЂРѕРј.РґРёСЂ."
 
 msgid "Symbolic link filename:"
-msgstr "ґРвЮвХЪР бШЬСЮЫШзЪХ ТХЧХ:"
+msgstr "Р”Р°С‚РѕС‚РµРєР° СЃРёРјР±РѕР»РёС‡РєРµ РІРµР·Рµ:"
 
 msgid "Existing filename (filename symlink will point to):"
-msgstr "їЮбвЮшХыР ФРвЮвХЪР (ЭР ЪЮшг ыХ гЯгыШТРвШ ТХЧР):"
+msgstr "РџРѕСЃС‚РѕСРµС›Р° РґР°С‚РѕС‚РµРєР° (РЅР° РєРѕССѓ С›Рµ СѓРїСѓС›РёРІР°С‚Рё РІРµР·Р°):"
 
 msgid "Symbolic link"
-msgstr "БШЬСЮЫШзЪР ТХЧР"
+msgstr "РЎРёРјР±РѕР»РёС‡РєР° РІРµР·Р°"
 
 msgid "Running "
-msgstr "їЮЪаХЭгвЮ "
+msgstr "РџРѕРєСЂРµРЅСѓС‚Рѕ "
 
 msgid "Stopped"
-msgstr "·РгбвРТщХЭЮ "
+msgstr "Р—Р°СѓСЃС‚Р°РІС™РµРЅРѕ "
 
 msgid "&Stop"
-msgstr "&·РгбвРТШ"
+msgstr "&Р—Р°СѓСЃС‚Р°РІРё"
 
 msgid "&Resume"
-msgstr "&ЅРбвРТШ"
+msgstr "&РќР°СЃС‚Р°РІРё"
 
 msgid "&Kill"
-msgstr "&ГСШш"
+msgstr "&РЈР±РёС"
 
 msgid "Background Jobs"
-msgstr "їЮЧРФШЭбЪШ ЯЮбЫЮТШ"
+msgstr "РџРѕР·Р°РґРёРЅСЃРєРё РїРѕСЃР»РѕРІРё"
 
 msgid "Domain:"
-msgstr "ґЮЬХЭ:"
+msgstr "Р”РѕРјРµРЅ:"
 
 msgid "Username:"
-msgstr "єЮаШбЭ. ШЬХ:"
+msgstr "РљРѕСЂРёСЃРЅ. РёРјРµ:"
 
 msgid "Password:"
-msgstr "»ЮЧШЭЪР:"
+msgstr "Р›РѕР·РёРЅРєР°:"
 
 #, c-format
 msgid "Password for \\\\%s\\%s"
-msgstr "»ЮЧШЭЪР ЧР \\\\%s\\%s"
+msgstr "Р›РѕР·РёРЅРєР° Р·Р° \\\\%s\\%s"
 
 #, c-format
 msgid "Warning: file %s not found\n"
-msgstr "ГЯЮЧЮаХъХ: ФРвЮвХЪР %s ЭШшХ ЭРтХЭР\n"
+msgstr "РЈРїРѕР·РѕСЂРµСљРµ: РґР°С‚РѕС‚РµРєР° %s РЅРёСРµ РЅР°С’РµРЅР°\n"
+
+msgid "7-bit ASCII"
+msgstr ""
 
 #, c-format
 msgid "Cannot translate from %s to %s"
-msgstr "ЅХ ЬЮУг ФР ЯаХТХФХЬ ШЧ %s г %s"
+msgstr "РќРµ РјРѕРіСѓ РґР° РїСЂРµРІРµРґРµРј РёР· %s Сѓ %s"
 
 msgid "execute/search by others"
-msgstr "ШЧТа./ЯаХва. ЧР ЮбвРЫХ"
+msgstr "РёР·РІСЂ./РїСЂРµС‚СЂ. Р·Р° РѕСЃС‚Р°Р»Рµ"
 
 msgid "write by others"
-msgstr "гЯШб ЧР ЮбвРЫХ"
+msgstr "СѓРїРёСЃ Р·Р° РѕСЃС‚Р°Р»Рµ"
 
 msgid "read by others"
-msgstr "зШвРъХ ЧР ЮбвРЫХ"
+msgstr "С‡РёС‚Р°СљРµ Р·Р° РѕСЃС‚Р°Р»Рµ"
 
 msgid "execute/search by group"
-msgstr "ШЧТа./ЯаХва. ЧР УагЯг"
+msgstr "РёР·РІСЂ./РїСЂРµС‚СЂ. Р·Р° РіСЂСѓРїСѓ"
 
 msgid "write by group"
-msgstr "гЯШб ЧР УагЯг"
+msgstr "СѓРїРёСЃ Р·Р° РіСЂСѓРїСѓ"
 
 msgid "read by group"
-msgstr "зШвРъХ ЧР УагЯг"
+msgstr "С‡РёС‚Р°СљРµ Р·Р° РіСЂСѓРїСѓ"
 
 msgid "execute/search by owner"
-msgstr "ШЧТа./ЯаХва. ЧР ТЫРбЭШЪР"
+msgstr "РёР·РІСЂ./РїСЂРµС‚СЂ. Р·Р° РІР»Р°СЃРЅРёРєР°"
 
 msgid "write by owner"
-msgstr "гЯШб ЧР ТЫРбЭШЪР"
+msgstr "СѓРїРёСЃ Р·Р° РІР»Р°СЃРЅРёРєР°"
 
 msgid "read by owner"
-msgstr "зШвРъХ ЧР ТЫРбЭШЪР"
+msgstr "С‡РёС‚Р°СљРµ Р·Р° РІР»Р°СЃРЅРёРєР°"
 
 msgid "sticky bit"
-msgstr "ЫХЯщШТШ СШв"
+msgstr "Р»РµРїС™РёРІРё Р±РёС‚"
 
 msgid "set group ID on execution"
-msgstr "ЯЮбвРТШ ё± УагЯХ ЯаШ ШЧТ."
+msgstr "РїРѕСЃС‚Р°РІРё РР‘ РіСЂСѓРїРµ РїСЂРё РёР·РІ."
 
 msgid "set user ID on execution"
-msgstr "ЯЮбвРТШ ё± ЪЮаШб. ЯаШ ШЧТ."
+msgstr "РїРѕСЃС‚Р°РІРё РР‘ РєРѕСЂРёСЃ. РїСЂРё РёР·РІ."
 
 msgid "C&lear marked"
-msgstr "ѕ&зШбвШ ЮЧЭРзХЭХ"
+msgstr "Рћ&С‡РёСЃС‚Рё РѕР·РЅР°С‡РµРЅРµ"
 
 msgid "S&et marked"
-msgstr "ї&ЮбвРТШ ЮЧЭРзХЭХ"
+msgstr "Рџ&РѕСЃС‚Р°РІРё РѕР·РЅР°С‡РµРЅРµ"
 
 msgid "&Marked all"
-msgstr "&БТХ ЮЧЭРзХЭХ"
+msgstr "&РЎРІРµ РѕР·РЅР°С‡РµРЅРµ"
 
 msgid "Name"
-msgstr "ЅРЧШТ"
+msgstr "РќР°Р·РёРІ"
 
 msgid "Permissions (Octal)"
-msgstr "ґЮЧТЮЫХ (ЮЪвРЫЭЮ)"
+msgstr "Р”РѕР·РІРѕР»Рµ (РѕРєС‚Р°Р»РЅРѕ)"
 
 msgid "Owner name"
-msgstr "ёЬХ ТЫРбЭШЪР"
+msgstr "РРјРµ РІР»Р°СЃРЅРёРєР°"
 
 msgid "Group name"
-msgstr "ЅРЧШТ УагЯХ"
+msgstr "РќР°Р·РёРІ РіСЂСѓРїРµ"
 
 msgid "Use SPACE to change"
-msgstr "АРЧЬРЪЭШжР ЧР ШЧЬХЭг"
+msgstr "Р Р°Р·РјР°РєРЅРёС†Р° Р·Р° РёР·РјРµРЅСѓ"
 
 msgid "an option, ARROW KEYS"
-msgstr "ШЧСЮаР, бваХЫШжХ ЧР"
+msgstr "РёР·Р±РѕСЂР°, СЃС‚СЂРµР»РёС†Рµ Р·Р°"
 
 msgid "to move between options"
-msgstr "ЪаХвРъХ ЯЮ ШЧСЮаШЬР"
+msgstr "РєСЂРµС‚Р°СљРµ РїРѕ РёР·Р±РѕСЂРёРјР°"
 
 msgid "and T or INS to mark"
-msgstr "Р T ШЫШ INS ЧР ЮЧЭРзРТРъХ"
+msgstr "Р° T РёР»Рё INS Р·Р° РѕР·РЅР°С‡Р°РІР°СљРµ"
 
 msgid " Permission "
-msgstr " ґЮЧТЮЫР "
+msgstr " Р”РѕР·РІРѕР»Р° "
 
 msgid "Chmod command"
-msgstr "їаЮЬХЭР ФЮЧТЮЫР"
+msgstr "РџСЂРѕРјРµРЅР° РґРѕР·РІРѕР»Р°"
 
 msgid "Set &users"
-msgstr "їЮбвРТШ &ЪЮаШбЭШЪХ"
+msgstr "РџРѕСЃС‚Р°РІРё &РєРѕСЂРёСЃРЅРёРєРµ"
 
 msgid "Set &groups"
-msgstr "їЮбвРТШ &УагЯХ"
+msgstr "РџРѕСЃС‚Р°РІРё &РіСЂСѓРїРµ"
 
 msgid " Name "
-msgstr " ЅРЧШТ "
+msgstr " РќР°Р·РёРІ "
 
 msgid " Owner name "
-msgstr " ёЬХ ТЫРбЭШЪР "
+msgstr " РРјРµ РІР»Р°СЃРЅРёРєР° "
 
 msgid " Group name "
-msgstr " ЅРЧШТ УагЯХ "
+msgstr " РќР°Р·РёРІ РіСЂСѓРїРµ "
 
 msgid " Size "
-msgstr " ІХЫШзШЭР "
+msgstr " Р’РµР»РёС‡РёРЅР° "
 
 msgid " User name "
-msgstr " ёЬХ ЪЮаШбЭШЪР "
+msgstr " РРјРµ РєРѕСЂРёСЃРЅРёРєР° "
 
 msgid " Chown command "
-msgstr " їаЮЬХЭР ТЫРбЭШЪР "
+msgstr " РџСЂРѕРјРµРЅР° РІР»Р°СЃРЅРёРєР° "
 
 msgid "<Unknown user>"
-msgstr "<ЅХЯЮЧЭРв ЪЮаШбЭШЪ>"
+msgstr "<РќРµРїРѕР·РЅР°С‚ РєРѕСЂРёСЃРЅРёРє>"
 
 msgid "<Unknown group>"
-msgstr "<ЅХЯЮЧЭРвР УагЯР>"
+msgstr "<РќРµРїРѕР·РЅР°С‚Р° РіСЂСѓРїР°>"
 
 msgid "Files tagged, want to cd?"
-msgstr "ґРвЮвХЪХ ЮЧЭРзХЭХ, ФР ЯаЮЬ.ФШа.?"
+msgstr "Р”Р°С‚РѕС‚РµРєРµ РѕР·РЅР°С‡РµРЅРµ, РґР° РїСЂРѕРј.РґРёСЂ.?"
 
 msgid "Cannot change directory"
-msgstr "ЅХ ЬЮУг ФР ЯаЮЬХЭШЬ ФШаХЪвЮаШшгЬ"
+msgstr "РќРµ РјРѕРіСѓ РґР° РїСЂРѕРјРµРЅРёРј РґРёСЂРµРєС‚РѕСЂРёССѓРј"
 
 msgid " View file "
-msgstr " їаХУЫХФРш ФРвЮвХЪг "
+msgstr " РџСЂРµРіР»РµРґР°С РґР°С‚РѕС‚РµРєСѓ "
 
 msgid " Filename:"
-msgstr " ґРвЮвХЪР: "
+msgstr " Р”Р°С‚РѕС‚РµРєР°: "
 
 msgid " Filtered view "
-msgstr " ДШЫваШаРЭШ ЯаШЪРЧ "
+msgstr " Р¤РёР»С‚СЂРёСЂР°РЅРё РїСЂРёРєР°Р· "
 
 msgid " Filter command and arguments:"
-msgstr " ЅРаХФСР Ш РаУгЬХЭвШ дШЫвХаР: "
+msgstr " РќР°СЂРµРґР±Р° Рё Р°СЂРіСѓРјРµРЅС‚Рё С„РёР»С‚РµСЂР°: "
 
 msgid "Create a new Directory"
-msgstr "БвТЮаШ ЭЮТШ ФШаХЪвЮаШшгЬ"
+msgstr "РЎС‚РІРѕСЂРё РЅРѕРІРё РґРёСЂРµРєС‚РѕСЂРёССѓРј"
 
 msgid " Enter directory name:"
-msgstr " ГЭХбШвХ ЭРЧШТ ФШаХЪвЮаШшгЬР:"
+msgstr " РЈРЅРµСЃРёС‚Рµ РЅР°Р·РёРІ РґРёСЂРµРєС‚РѕСЂРёССѓРјР°:"
 
 msgid " Filter "
-msgstr " ДШЫвРа "
+msgstr " Р¤РёР»С‚Р°СЂ "
 
 msgid " Set expression for filtering filenames"
-msgstr " їЮбвРТШ ШЧаРЧ ЧР дШЫваШаРъХ ФРвЮвХЪР"
+msgstr " РџРѕСЃС‚Р°РІРё РёР·СЂР°Р· Р·Р° С„РёР»С‚СЂРёСЂР°СљРµ РґР°С‚РѕС‚РµРєР°"
 
 msgid "&Using shell patterns"
-msgstr "&єЮаШбвШ ЮСаРбжХ щгбЪХ"
+msgstr "&РљРѕСЂРёСЃС‚Рё РѕР±СЂР°СЃС†Рµ С™СѓСЃРєРµ"
 
 #, fuzzy
 msgid "&Case sensitive"
-msgstr "аРЧЫШЪг&ш ТХЫШЪР Ш ЬРЫР бЫЮТР"
+msgstr "СЂР°Р·Р»РёРєСѓ&С РІРµР»РёРєР° Рё РјР°Р»Р° СЃР»РѕРІР°"
 
 #, fuzzy
 msgid "&Files only"
-msgstr "&БРЬЮ ТХЫШзШЭР"
+msgstr "&РЎР°РјРѕ РІРµР»РёС‡РёРЅР°"
 
 msgid " Select "
-msgstr " ёЧРСХаШ "
+msgstr " РР·Р°Р±РµСЂРё "
 
 msgid " Unselect "
-msgstr " ѕФШЧРСХаШ "
+msgstr " РћРґРёР·Р°Р±РµСЂРё "
 
 msgid "Extension file edit"
-msgstr "ГаХтШТРъХ ФРвЮвХЪХ бР ТабвРЬР"
+msgstr "РЈСЂРµС’РёРІР°СљРµ РґР°С‚РѕС‚РµРєРµ СЃР° РІСЂСЃС‚Р°РјР°"
 
 msgid " Which extension file you want to edit? "
-msgstr " єЮшг ФРвЮвХЪг бР ТабвРЬР ЦХЫШвХ ФР гаХФШвХ? "
+msgstr " РљРѕССѓ РґР°С‚РѕС‚РµРєСѓ СЃР° РІСЂСЃС‚Р°РјР° Р¶РµР»РёС‚Рµ РґР° СѓСЂРµРґРёС‚Рµ? "
 
 msgid " Compare directories "
-msgstr " ГЯЮаХФШ ФШаХЪвЮаШшгЬХ "
+msgstr " РЈРїРѕСЂРµРґРё РґРёСЂРµРєС‚РѕСЂРёССѓРјРµ "
 
 msgid " Select compare method: "
-msgstr " ёЧРСХаШвХ ЭРзШЭ ЯЮаХтХъР: "
+msgstr " РР·Р°Р±РµСЂРёС‚Рµ РЅР°С‡РёРЅ РїРѕСЂРµС’РµСљР°: "
 
 msgid "&Quick"
-msgstr "&±аЧ"
+msgstr "&Р‘СЂР·"
 
 msgid "&Size only"
-msgstr "&БРЬЮ ТХЫШзШЭР"
+msgstr "&РЎР°РјРѕ РІРµР»РёС‡РёРЅР°"
 
 msgid "&Thorough"
-msgstr "&ВХЬХщРЭ"
+msgstr "&РўРµРјРµС™Р°РЅ"
 
 msgid " Both panels should be in the listing mode to use this command "
-msgstr " ѕСР ЮЪЭР СШ ваХСРЫЮ ФР бг г аХЦШЬг бЯШбЪР ЧР гЯЮваХСг ЮТХ ЭРаХФСХ "
+msgstr " РћР±Р° РѕРєРЅР° Р±Рё С‚СЂРµР±Р°Р»Рѕ РґР° СЃСѓ Сѓ СЂРµР¶РёРјСѓ СЃРїРёСЃРєР° Р·Р° СѓРїРѕС‚СЂРµР±Сѓ РѕРІРµ РЅР°СЂРµРґР±Рµ "
 
 msgid ""
 " Not an xterm or Linux console; \n"
 " the panels cannot be toggled. "
 msgstr ""
-" ѕТЮ ЭШшХ ёЪб вХаЬШЭРЫ ШЫШ ЪЮЭЧЮЫР; \n"
-" ЮЪЭР бХ ЭХ ЬЮУг бЬХъШТРвШ. "
+" РћРІРѕ РЅРёСРµ РРєСЃ С‚РµСЂРјРёРЅР°Р» РёР»Рё РєРѕРЅР·РѕР»Р°; \n"
+" РѕРєРЅР° СЃРµ РЅРµ РјРѕРіСѓ СЃРјРµСљРёРІР°С‚Рё. "
 
 #, c-format
 msgid "Link %s to:"
-msgstr "їЮТХЦШ %s бР:"
+msgstr "РџРѕРІРµР¶Рё %s СЃР°:"
 
 msgid " Link "
-msgstr " їЮТХЦШ "
+msgstr " РџРѕРІРµР¶Рё "
 
 #, c-format
 msgid " link: %s "
-msgstr " ТХЧР: %s "
+msgstr " РІРµР·Р°: %s "
 
 #, c-format
 msgid " symlink: %s "
-msgstr " бШЬТХЧР: %s "
+msgstr " СЃРёРјРІРµР·Р°: %s "
 
 #, c-format
 msgid " Symlink `%s' points to: "
-msgstr " БШЬТХЧР `%s' гЯгыгшХ ЭР: "
+msgstr " РЎРёРјРІРµР·Р° `%s' СѓРїСѓС›СѓСРµ РЅР°: "
 
 msgid " Edit symlink "
-msgstr " ГаХФШ бШЬТХЧг "
+msgstr " РЈСЂРµРґРё СЃРёРјРІРµР·Сѓ "
 
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
-msgstr " гаХтШТРъХ бШЬТХЧХ; ЭХ ЬЮУг ФР гЪЫЮЭШЬ %s: %s "
+msgstr " СѓСЂРµС’РёРІР°СљРµ СЃРёРјРІРµР·Рµ; РЅРµ РјРѕРіСѓ РґР° СѓРєР»РѕРЅРёРј %s: %s "
 
 #, c-format
 msgid " edit symlink: %s "
-msgstr " гаХтШТРъХ бШЬТХЧХ: %s "
+msgstr " СѓСЂРµС’РёРІР°СљРµ СЃРёРјРІРµР·Рµ: %s "
 
 #, c-format
 msgid "`%s' is not a symbolic link"
-msgstr "`%s' ЭШшХ бШЬСЮЫШзЪР ТХЧР"
+msgstr "`%s' РЅРёСРµ СЃРёРјР±РѕР»РёС‡РєР° РІРµР·Р°"
 
 #, c-format
 msgid " Cannot chdir to %s "
-msgstr " ЅХ ЬЮУг ФР ЯЮбвРТШЬ ФШа. ЭР %s "
+msgstr " РќРµ РјРѕРіСѓ РґР° РїРѕСЃС‚Р°РІРёРј РґРёСЂ. РЅР° %s "
 
 msgid " Enter machine name (F1 for details): "
-msgstr " ГЭХбШвХ ЭРЧШТ ЬРиШЭХ (F1 ЧР ФХвРщХ): "
+msgstr " РЈРЅРµСЃРёС‚Рµ РЅР°Р·РёРІ РјР°С€РёРЅРµ (F1 Р·Р° РґРµС‚Р°С™Рµ): "
 
 msgid " Link to a remote machine "
-msgstr " їЮТХЧШТРъХ бР гФРщХЭЮЬ ЬРиШЭЮЬ "
+msgstr " РџРѕРІРµР·РёРІР°СљРµ СЃР° СѓРґР°С™РµРЅРѕРј РјР°С€РёРЅРѕРј "
 
 msgid " FTP to machine "
-msgstr " FTP ЭР ЬРиШЭг "
+msgstr " FTP РЅР° РјР°С€РёРЅСѓ "
 
 msgid " Shell link to machine "
-msgstr " їЮТХЧШТРъХ щгбЪХ бР ЬРиШЭЮЬ "
+msgstr " РџРѕРІРµР·РёРІР°СљРµ С™СѓСЃРєРµ СЃР° РјР°С€РёРЅРѕРј "
 
 msgid " SMB link to machine "
-msgstr " ІХЧР SMB-ЮЬ бР ЬРиШЭЮЬ "
+msgstr " Р’РµР·Р° SMB-РѕРј СЃР° РјР°С€РёРЅРѕРј "
 
 msgid " Undelete files on an ext2 file system "
-msgstr " ѕФЮСаШиШ ФРвЮвХЪХ ЭР бШбвХЬг ФРвЮвХЪР ext2 "
+msgstr " РћРґРѕР±СЂРёС€Рё РґР°С‚РѕС‚РµРєРµ РЅР° СЃРёСЃС‚РµРјСѓ РґР°С‚РѕС‚РµРєР° ext2 "
 
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
 msgstr ""
-" ГЭХбШвХ гаХтРш (СХЧ /dev/) ЧР ЮФЮСаШбРъХ\n"
-"   ФРвЮвХЪР ЭР: (F1 ЧР ФХвРщХ)"
+" РЈРЅРµСЃРёС‚Рµ СѓСЂРµС’Р°С (Р±РµР· /dev/) Р·Р° РѕРґРѕР±СЂРёСЃР°СљРµ\n"
+"   РґР°С‚РѕС‚РµРєР° РЅР°: (F1 Р·Р° РґРµС‚Р°С™Рµ)"
 
 msgid " Setup "
-msgstr " їЮФХиРТРъР "
+msgstr " РџРѕРґРµС€Р°РІР°СљР° "
 
 #, fuzzy, c-format
 msgid " Setup saved to ~/%s"
-msgstr " їЮФХиРТРъР бг бРзгТРЭР г ~/"
+msgstr " РџРѕРґРµС€Р°РІР°СљР° СЃСѓ СЃР°С‡СѓРІР°РЅР° Сѓ ~/"
 
 #, c-format
 msgid ""
 " Cannot chdir to \"%s\" \n"
 " %s "
 msgstr ""
-" ЅХ ЬЮУг ФР ЯЮбвРТШЬ ФШа. ЭР `%s' \n"
+" РќРµ РјРѕРіСѓ РґР° РїРѕСЃС‚Р°РІРёРј РґРёСЂ. РЅР° `%s' \n"
 " %s "
 
 msgid " Cannot execute commands on non-local filesystems"
-msgstr " ЅХ ЬЮУг ФР ШЧТаиРТРЬ ЭРаХФСХ ЭР ЭХ-ЫЮЪ. бШбвХЬШЬР ФРвoвХЪР"
+msgstr " РќРµ РјРѕРіСѓ РґР° РёР·РІСЂС€Р°РІР°Рј РЅР°СЂРµРґР±Рµ РЅР° РЅРµ-Р»РѕРє. СЃРёСЃС‚РµРјРёРјР° РґР°С‚oС‚РµРєР°"
 
 msgid " The shell is already running a command "
-msgstr " ©гбЪР ТХы ШЧТаиРТР ЭРаХФСг "
+msgstr " Р‰СѓСЃРєР° РІРµС› РёР·РІСЂС€Р°РІР° РЅР°СЂРµРґР±Сѓ "
 
 msgid "&Unsorted"
-msgstr "Ѕ&ХбаХтХЭЮ"
+msgstr "Рќ&РµСЃСЂРµС’РµРЅРѕ"
 
 msgid "&Name"
-msgstr "&ЅРЧШТ"
+msgstr "&РќР°Р·РёРІ"
 
 msgid "&Extension"
-msgstr "&ІабвР"
+msgstr "&Р’СЂСЃС‚Р°"
 
 msgid "&Modify time"
-msgstr "ґРвгЬ &ШЧЬХЭХ"
+msgstr "Р”Р°С‚СѓРј &РёР·РјРµРЅРµ"
 
 msgid "&Access time"
-msgstr "ґРвгЬ &ЯаШбвгЯР"
+msgstr "Р”Р°С‚СѓРј &РїСЂРёСЃС‚СѓРїР°"
 
 msgid "C&Hange time"
-msgstr "ґРвгЬ &ЯаЮЬХЭХ"
+msgstr "Р”Р°С‚СѓРј &РїСЂРѕРјРµРЅРµ"
 
 msgid "&Size"
-msgstr "&ІХЫШзШЭР"
+msgstr "&Р’РµР»РёС‡РёРЅР°"
 
 msgid "&Inode"
-msgstr "&ёзТЮа"
+msgstr "&РС‡РІРѕСЂ"
 
 msgid "Cannot read directory contents"
-msgstr "ЅХ ЬЮУг ФР гзШвРЬ бРФаЦРш ФШаХЪвЮаШшгЬР"
+msgstr "РќРµ РјРѕРіСѓ РґР° СѓС‡РёС‚Р°Рј СЃР°РґСЂР¶Р°С РґРёСЂРµРєС‚РѕСЂРёССѓРјР°"
 
 #, c-format
 msgid "Press any key to continue..."
-msgstr "їаШвШбЭШвХ СШЫЮ ЪЮшШ вРбвХа ЧР ЭРбвРТРЪ..."
+msgstr "РџСЂРёС‚РёСЃРЅРёС‚Рµ Р±РёР»Рѕ РєРѕСРё С‚Р°СЃС‚РµСЂ Р·Р° РЅР°СЃС‚Р°РІР°Рє..."
 
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
-msgstr "ГЭХбШвХ `exit' ФР СШбвХ бХ ТаРвШЫШ г їЮЭЮыЭЮУ ЭРаХФЭШЪР"
+msgstr "РЈРЅРµСЃРёС‚Рµ `exit' РґР° Р±РёСЃС‚Рµ СЃРµ РІСЂР°С‚РёР»Рё Сѓ РџРѕРЅРѕС›РЅРѕРі РЅР°СЂРµРґРЅРёРєР°"
 
 #, c-format
 msgid " Cannot fetch a local copy of %s "
-msgstr " ЅХ ЬЮУг ФР ФЮСРТШЬ ЫЮЪРЫЭШ ЯаШЬХаРЪ %s "
+msgstr " РќРµ РјРѕРіСѓ РґР° РґРѕР±Р°РІРёРј Р»РѕРєР°Р»РЅРё РїСЂРёРјРµСЂР°Рє %s "
 
 #, c-format
 msgid ""
 " Cannot create temporary command file \n"
 " %s "
 msgstr ""
-" ЅХ ЬЮУг ФР бвТЮаШЬ ЯаШТаХЬХЭг ФРвЮвХЪг ЭРаХФСШ \n"
+" РќРµ РјРѕРіСѓ РґР° СЃС‚РІРѕСЂРёРј РїСЂРёРІСЂРµРјРµРЅСѓ РґР°С‚РѕС‚РµРєСѓ РЅР°СЂРµРґР±Рё \n"
 " %s "
 
 msgid " Parameter "
-msgstr " їРаРЬХвРа "
+msgstr " РџР°СЂР°РјРµС‚Р°СЂ "
 
 #, fuzzy, c-format
 msgid " %s%s file error"
-msgstr " УаХиЪР ФРвЮвХЪХ "
+msgstr " РіСЂРµС€РєР° РґР°С‚РѕС‚РµРєРµ "
 
 #, fuzzy, c-format
 msgid ""
@@ -1333,14 +1342,14 @@ msgid ""
 "the installation failed.  Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
-"ґРвЮвХЪР mc.ext шХ ШЧЬХъХЭР г ТХаЧШшШ 3.0.\n"
-"ёЧУЫХФР ФР ШЭбвРЫРжШшР ЭШшХ гбЯХЫР.\n"
-"јЮЫШЬ ФР ЯаХгЧЬХвХ бТХЦ ЯаШЬХаРЪ ШЧ\n"
-"ЯРЪХвР їЮЭЮыЭЮУ ЭРаХФЭШЪР."
+"Р”Р°С‚РѕС‚РµРєР° mc.ext СРµ РёР·РјРµСљРµРЅР° Сѓ РІРµСЂР·РёСРё 3.0.\n"
+"РР·РіР»РµРґР° РґР° РёРЅСЃС‚Р°Р»Р°С†РёСР° РЅРёСРµ СѓСЃРїРµР»Р°.\n"
+"РњРѕР»РёРј РґР° РїСЂРµСѓР·РјРµС‚Рµ СЃРІРµР¶ РїСЂРёРјРµСЂР°Рє РёР·\n"
+"РїР°РєРµС‚Р° РџРѕРЅРѕС›РЅРѕРі РЅР°СЂРµРґРЅРёРєР°."
 
 #, fuzzy, c-format
 msgid " ~/%s file error "
-msgstr " УаХиЪР ФРвЮвХЪХ "
+msgstr " РіСЂРµС€РєР° РґР°С‚РѕС‚РµРєРµ "
 
 #, c-format
 msgid ""
@@ -1350,23 +1359,23 @@ msgid ""
 msgstr ""
 
 msgid " Copy "
-msgstr " єЮЯШаРш "
+msgstr " РљРѕРїРёСЂР°С "
 
 msgid " Move "
-msgstr " їаХЬХбвШ "
+msgstr " РџСЂРµРјРµСЃС‚Рё "
 
 msgid " Delete "
-msgstr " ѕСаШиШ "
+msgstr " РћР±СЂРёС€Рё "
 
 msgid " Cannot make the hardlink "
-msgstr " ЅХ ЬЮУг ФР ЭРЯаРТШЬ вТаФг ТХЧг "
+msgstr " РќРµ РјРѕРіСѓ РґР° РЅР°РїСЂР°РІРёРј С‚РІСЂРґСѓ РІРµР·Сѓ "
 
 #, c-format
 msgid ""
 " Cannot read source link \"%s\" \n"
 " %s "
 msgstr ""
-" ЅХ ЬЮУг ФР зШвРЬ ШЧТЮаЭг ТХЧг `%s' \n"
+" РќРµ РјРѕРіСѓ РґР° С‡РёС‚Р°Рј РёР·РІРѕСЂРЅСѓ РІРµР·Сѓ `%s' \n"
 " %s "
 
 msgid ""
@@ -1374,27 +1383,27 @@ msgid ""
 "\n"
 " Option Stable Symlinks will be disabled "
 msgstr ""
-" ЅХ ЬЮУг ФР ЯаРТШЬ бвРСШЫЭХ бШЬТХЧХ ЯаХЪЮ ЭХ-ЫЮЪ. бШбвХЬР ФРвЮвХЪР: \n"
+" РќРµ РјРѕРіСѓ РґР° РїСЂР°РІРёРј СЃС‚Р°Р±РёР»РЅРµ СЃРёРјРІРµР·Рµ РїСЂРµРєРѕ РЅРµ-Р»РѕРє. СЃРёСЃС‚РµРјР° РґР°С‚РѕС‚РµРєР°: \n"
 "\n"
-" ёЧСЮа `БвРСШЫЭХ бШЬТХЧХ' ыХ СШвШ ШбЪщгзХЭ "
+" РР·Р±РѕСЂ `РЎС‚Р°Р±РёР»РЅРµ СЃРёРјРІРµР·Рµ' С›Рµ Р±РёС‚Рё РёСЃРєС™СѓС‡РµРЅ "
 
 #, c-format
 msgid ""
 " Cannot create target symlink \"%s\" \n"
 " %s "
 msgstr ""
-" ЅХ ЬЮУг ФР бвТЮаШЬ ЮФаХФШиЭг бШЬТХЧг `%s' \n"
+" РќРµ РјРѕРіСѓ РґР° СЃС‚РІРѕСЂРёРј РѕРґСЂРµРґРёС€РЅСѓ СЃРёРјРІРµР·Сѓ `%s' \n"
 " %s "
 
 msgid "&Abort"
-msgstr "&їаХЪШЭШ"
+msgstr "&РџСЂРµРєРёРЅРё"
 
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
 " %s "
 msgstr ""
-" ЅХ ЬЮУг ФР ЯаХЯШиХЬ ФШаХЪвЮаШшгЬ `%s' \n"
+" РќРµ РјРѕРіСѓ РґР° РїСЂРµРїРёС€РµРј РґРёСЂРµРєС‚РѕСЂРёССѓРј `%s' \n"
 " %s "
 
 #, c-format
@@ -1402,7 +1411,7 @@ msgid ""
 " Cannot stat source file \"%s\" \n"
 " %s "
 msgstr ""
-" ЅХ ЬЮУг ФР ШЧТаиШЬ `stat' ЭР ШЧТЮаЭЮш ФРвЮвХжШ `%s' \n"
+" РќРµ РјРѕРіСѓ РґР° РёР·РІСЂС€РёРј `stat' РЅР° РёР·РІРѕСЂРЅРѕС РґР°С‚РѕС‚РµС†Рё `%s' \n"
 " %s "
 
 #, fuzzy, c-format
@@ -1411,14 +1420,14 @@ msgid ""
 " and \n"
 " `%s' \n"
 " are the same file "
-msgstr " `%s' Ш `%s' бг ШбвЮТХвЭШ "
+msgstr " `%s' Рё `%s' СЃСѓ РёСЃС‚РѕРІРµС‚РЅРё "
 
 #, c-format
 msgid ""
 " Cannot create special file \"%s\" \n"
 " %s "
 msgstr ""
-" ЅХ ЬЮУг ФР бвТЮаШЬ ЯЮбХСЭг ФРвЮвХЪг `%s' \n"
+" РќРµ РјРѕРіСѓ РґР° СЃС‚РІРѕСЂРёРј РїРѕСЃРµР±РЅСѓ РґР°С‚РѕС‚РµРєСѓ `%s' \n"
 " %s "
 
 #, c-format
@@ -1426,7 +1435,7 @@ msgid ""
 " Cannot chown target file \"%s\" \n"
 " %s "
 msgstr ""
-" ЅХ ЬЮУг ФР ЯаЮЬХЭШЬ ТЫРбЭШЪР ЮФаХФШиЭЮш ФРвЮвХжШ `%s' \n"
+" РќРµ РјРѕРіСѓ РґР° РїСЂРѕРјРµРЅРёРј РІР»Р°СЃРЅРёРєР° РѕРґСЂРµРґРёС€РЅРѕС РґР°С‚РѕС‚РµС†Рё `%s' \n"
 " %s "
 
 #, c-format
@@ -1434,7 +1443,7 @@ msgid ""
 " Cannot chmod target file \"%s\" \n"
 " %s "
 msgstr ""
-" ЅХ ЬЮУг ФР ЯаЮЬХЭШЬ ФЮЧТЮЫХ ЮФаХФШиЭЮш ФРвЮвХжШ `%s' \n"
+" РќРµ РјРѕРіСѓ РґР° РїСЂРѕРјРµРЅРёРј РґРѕР·РІРѕР»Рµ РѕРґСЂРµРґРёС€РЅРѕС РґР°С‚РѕС‚РµС†Рё `%s' \n"
 " %s "
 
 #, c-format
@@ -1442,18 +1451,18 @@ msgid ""
 " Cannot open source file \"%s\" \n"
 " %s "
 msgstr ""
-" ЅХ ЬЮУг ФР ЮвТЮаШЬ ФРвЮвХЪг `%s' \n"
+" РќРµ РјРѕРіСѓ РґР° РѕС‚РІРѕСЂРёРј РґР°С‚РѕС‚РµРєСѓ `%s' \n"
 " %s "
 
 msgid " Reget failed, about to overwrite file "
-msgstr " їЮЭЮТЭЮ ЯаХгЧШЬРъХ ЭШшХ гбЯХЫЮ, ЯаХЯШбРыг ФРвЮвХЪг "
+msgstr " РџРѕРЅРѕРІРЅРѕ РїСЂРµСѓР·РёРјР°СљРµ РЅРёСРµ СѓСЃРїРµР»Рѕ, РїСЂРµРїРёСЃР°С›Сѓ РґР°С‚РѕС‚РµРєСѓ "
 
 #, c-format
 msgid ""
 " Cannot fstat source file \"%s\" \n"
 " %s "
 msgstr ""
-" ЅХ ЬЮУг ФР ШЧТаиШЬ `fstat' ЭР ШЧТЮаЭЮш ФРвЮвХжШ `%s' \n"
+" РќРµ РјРѕРіСѓ РґР° РёР·РІСЂС€РёРј `fstat' РЅР° РёР·РІРѕСЂРЅРѕС РґР°С‚РѕС‚РµС†Рё `%s' \n"
 " %s "
 
 #, c-format
@@ -1461,7 +1470,7 @@ msgid ""
 " Cannot create target file \"%s\" \n"
 " %s "
 msgstr ""
-" ЅХ ЬЮУг ФР бвТЮаШЬ ЮФаХФШиЭг ФРвЮвХЪг `%s' \n"
+" РќРµ РјРѕРіСѓ РґР° СЃС‚РІРѕСЂРёРј РѕРґСЂРµРґРёС€РЅСѓ РґР°С‚РѕС‚РµРєСѓ `%s' \n"
 " %s "
 
 #, c-format
@@ -1469,7 +1478,7 @@ msgid ""
 " Cannot fstat target file \"%s\" \n"
 " %s "
 msgstr ""
-" ЅХ ЬЮУг ФР ШЧТаиШЬ fstat ЭР ЮФаХФШиЭЮш ФРвЮвХжШ `%s' \n"
+" РќРµ РјРѕРіСѓ РґР° РёР·РІСЂС€РёРј fstat РЅР° РѕРґСЂРµРґРёС€РЅРѕС РґР°С‚РѕС‚РµС†Рё `%s' \n"
 " %s "
 
 #, c-format
@@ -1477,7 +1486,7 @@ msgid ""
 " Cannot read source file \"%s\" \n"
 " %s "
 msgstr ""
-" ЅХ ЬЮУг ФР зШвРЬ ЮФаХФШиЭг ФРвЮвХЪг `%s' \n"
+" РќРµ РјРѕРіСѓ РґР° С‡РёС‚Р°Рј РѕРґСЂРµРґРёС€РЅСѓ РґР°С‚РѕС‚РµРєСѓ `%s' \n"
 " %s "
 
 #, c-format
@@ -1485,18 +1494,18 @@ msgid ""
 " Cannot write target file \"%s\" \n"
 " %s "
 msgstr ""
-" ЅХ ЬЮУг ФР ЯШиХЬ г ЮФаХФШиЭг ФРвЮвХЪг `%s' \n"
+" РќРµ РјРѕРіСѓ РґР° РїРёС€РµРј Сѓ РѕРґСЂРµРґРёС€РЅСѓ РґР°С‚РѕС‚РµРєСѓ `%s' \n"
 " %s "
 
 msgid "(stalled)"
-msgstr "(ЧРбвЮш)"
+msgstr "(Р·Р°СЃС‚РѕС)"
 
 #, c-format
 msgid ""
 " Cannot close source file \"%s\" \n"
 " %s "
 msgstr ""
-" ЅХ ЬЮУг ФР ЧРвТЮаШЬ ШЧТЮаЭг ФРвЮвХЪг `%s' \n"
+" РќРµ РјРѕРіСѓ РґР° Р·Р°С‚РІРѕСЂРёРј РёР·РІРѕСЂРЅСѓ РґР°С‚РѕС‚РµРєСѓ `%s' \n"
 " %s "
 
 #, c-format
@@ -1504,24 +1513,24 @@ msgid ""
 " Cannot close target file \"%s\" \n"
 " %s "
 msgstr ""
-" ЅХ ЬЮУг ФР ЧРвТЮаШЬ ЮФаХФШиЭг ФРвЮвХЪг `%s' \n"
+" РќРµ РјРѕРіСѓ РґР° Р·Р°С‚РІРѕСЂРёРј РѕРґСЂРµРґРёС€РЅСѓ РґР°С‚РѕС‚РµРєСѓ `%s' \n"
 " %s "
 
 msgid "Incomplete file was retrieved. Keep it?"
-msgstr "ґРвЮвХЪР ЭШшХ г ЯЮвЯгЭЮбвШ ЯаХгЧХвР. ґР шХ ЧРФаЦШЬ?"
+msgstr "Р”Р°С‚РѕС‚РµРєР° РЅРёСРµ Сѓ РїРѕС‚РїСѓРЅРѕСЃС‚Рё РїСЂРµСѓР·РµС‚Р°. Р”Р° СРµ Р·Р°РґСЂР¶РёРј?"
 
 msgid "&Delete"
-msgstr "&ѕСаШиШ"
+msgstr "&РћР±СЂРёС€Рё"
 
 msgid "&Keep"
-msgstr "&·РФаЦШ"
+msgstr "&Р—Р°РґСЂР¶Рё"
 
 #, c-format
 msgid ""
 " Cannot stat source directory \"%s\" \n"
 " %s "
 msgstr ""
-" ЅХ ЬЮУг ФР ШЧТаиШЬ stat ЭР ШЧТЮаЭЮЬ ФШаХЪвЮаШшгЬг `%s' \n"
+" РќРµ РјРѕРіСѓ РґР° РёР·РІСЂС€РёРј stat РЅР° РёР·РІРѕСЂРЅРѕРј РґРёСЂРµРєС‚РѕСЂРёССѓРјСѓ `%s' \n"
 " %s "
 
 #, c-format
@@ -1529,7 +1538,7 @@ msgid ""
 " Source \"%s\" is not a directory \n"
 " %s "
 msgstr ""
-" ёЧТЮаЭШ ФШаХЪвЮаШшгЬ `%s' ЭШшХ ФШаХЪвЮаШшгЬ \n"
+" РР·РІРѕСЂРЅРё РґРёСЂРµРєС‚РѕСЂРёССѓРј `%s' РЅРёСРµ РґРёСЂРµРєС‚РѕСЂРёССѓРј \n"
 " %s "
 
 #, c-format
@@ -1537,7 +1546,7 @@ msgid ""
 " Cannot copy cyclic symbolic link \n"
 " `%s' "
 msgstr ""
-" ЅХ ЬЮУг ФР ЪЮЯШаРЬ жШЪЫШзЭг бШЬСЮЫШзЪг ТХЧг \n"
+" РќРµ РјРѕРіСѓ РґР° РєРѕРїРёСЂР°Рј С†РёРєР»РёС‡РЅСѓ СЃРёРјР±РѕР»РёС‡РєСѓ РІРµР·Сѓ \n"
 " `%s' "
 
 #, c-format
@@ -1545,7 +1554,7 @@ msgid ""
 " Destination \"%s\" must be a directory \n"
 " %s "
 msgstr ""
-" ѕФаХФШивХ `%s' ЬЮаР ФР СгФХ ФШаХЪвЮаШшгЬ \n"
+" РћРґСЂРµРґРёС€С‚Рµ `%s' РјРѕСЂР° РґР° Р±СѓРґРµ РґРёСЂРµРєС‚РѕСЂРёССѓРј \n"
 " %s "
 
 #, c-format
@@ -1553,7 +1562,7 @@ msgid ""
 " Cannot create target directory \"%s\" \n"
 " %s "
 msgstr ""
-" ЅХ ЬЮУг ФР бвТЮаШЬ ЮФаХФШиЭШ ФШаХЪвЮаШшгЬ `%s' \n"
+" РќРµ РјРѕРіСѓ РґР° СЃС‚РІРѕСЂРёРј РѕРґСЂРµРґРёС€РЅРё РґРёСЂРµРєС‚РѕСЂРёССѓРј `%s' \n"
 " %s "
 
 #, c-format
@@ -1561,7 +1570,7 @@ msgid ""
 " Cannot chown target directory \"%s\" \n"
 " %s "
 msgstr ""
-" ЅХ ЬЮУг ФР ЯаЮЬХЭШЬ ТЫРбЭШЪР ЮФаХФШиЭЮЬ ФШаХЪвЮаШшгЬг `%s' \n"
+" РќРµ РјРѕРіСѓ РґР° РїСЂРѕРјРµРЅРёРј РІР»Р°СЃРЅРёРєР° РѕРґСЂРµРґРёС€РЅРѕРј РґРёСЂРµРєС‚РѕСЂРёССѓРјСѓ `%s' \n"
 " %s "
 
 #, c-format
@@ -1569,19 +1578,19 @@ msgid ""
 " Cannot stat file \"%s\" \n"
 " %s "
 msgstr ""
-" ЅХ ЬЮУг ФР ШЧТаиШЬ stat ЭР ФРвЮвХжШ `%s' \n"
+" РќРµ РјРѕРіСѓ РґР° РёР·РІСЂС€РёРј stat РЅР° РґР°С‚РѕС‚РµС†Рё `%s' \n"
 " %s "
 
 #, c-format
 msgid " Cannot overwrite directory `%s' "
-msgstr " ЅХ ЬЮУг ФР ЯаХЯШиХЬ ФШаХЪвЮаШшгЬ `%s' "
+msgstr " РќРµ РјРѕРіСѓ РґР° РїСЂРµРїРёС€РµРј РґРёСЂРµРєС‚РѕСЂРёССѓРј `%s' "
 
 #, c-format
 msgid ""
 " Cannot move file \"%s\" to \"%s\" \n"
 " %s "
 msgstr ""
-" ЅХ ЬЮУг ФР ЯаХЬХбвШЬ ФРвЮвХЪг `%s' г `%s' \n"
+" РќРµ РјРѕРіСѓ РґР° РїСЂРµРјРµСЃС‚РёРј РґР°С‚РѕС‚РµРєСѓ `%s' Сѓ `%s' \n"
 " %s "
 
 #, c-format
@@ -1589,7 +1598,7 @@ msgid ""
 " Cannot remove file \"%s\" \n"
 " %s "
 msgstr ""
-" ЅХ ЬЮУг ФР гЪЫЮЭШЬ ФРвЮвХЪг `%s' \n"
+" РќРµ РјРѕРіСѓ РґР° СѓРєР»РѕРЅРёРј РґР°С‚РѕС‚РµРєСѓ `%s' \n"
 " %s "
 
 #, fuzzy, c-format
@@ -1598,22 +1607,22 @@ msgid ""
 " and \n"
 " `%s' \n"
 " are the same directory "
-msgstr " `%s' Ш `%s' бг ШбвЮТХвЭШ ФШаХЪвЮаШшгЬШ "
+msgstr " `%s' Рё `%s' СЃСѓ РёСЃС‚РѕРІРµС‚РЅРё РґРёСЂРµРєС‚РѕСЂРёССѓРјРё "
 
 #, c-format
 msgid " Cannot overwrite directory \"%s\" %s "
-msgstr " ЅХ ЬЮУг ФР ЯаХЯШиХЬ ФШаХЪвЮаШшгЬ `%s' %s "
+msgstr " РќРµ РјРѕРіСѓ РґР° РїСЂРµРїРёС€РµРј РґРёСЂРµРєС‚РѕСЂРёССѓРј `%s' %s "
 
 #, c-format
 msgid " Cannot overwrite file \"%s\" %s "
-msgstr " ЅХ ЬЮУг ФР ЯаХЯШиХЬ ФРвЮвХЪг `%s' %s "
+msgstr " РќРµ РјРѕРіСѓ РґР° РїСЂРµРїРёС€РµРј РґР°С‚РѕС‚РµРєСѓ `%s' %s "
 
 #, c-format
 msgid ""
 " Cannot move directory \"%s\" to \"%s\" \n"
 " %s "
 msgstr ""
-" ЅХ ЬЮУг ФР ЯаХЬХбвШЬ ФШаХЪвЮаШшгЬ `%s' г `%s' \n"
+" РќРµ РјРѕРіСѓ РґР° РїСЂРµРјРµСЃС‚РёРј РґРёСЂРµРєС‚РѕСЂРёССѓРј `%s' Сѓ `%s' \n"
 " %s "
 
 #, c-format
@@ -1621,7 +1630,7 @@ msgid ""
 " Cannot delete file \"%s\" \n"
 " %s "
 msgstr ""
-" ЅХ ЬЮУг ФР ЮСаШиХЬ ФРвЮвХЪг `%s' \n"
+" РќРµ РјРѕРіСѓ РґР° РѕР±СЂРёС€РµРј РґР°С‚РѕС‚РµРєСѓ `%s' \n"
 " %s "
 
 #, c-format
@@ -1629,21 +1638,21 @@ msgid ""
 " Cannot remove directory \"%s\" \n"
 " %s "
 msgstr ""
-" ЅХ ЬЮУг ФР гЪЫЮЭШЬ ФШаХЪвЮаШшгЬ `%s' \n"
+" РќРµ РјРѕРіСѓ РґР° СѓРєР»РѕРЅРёРј РґРёСЂРµРєС‚РѕСЂРёССѓРј `%s' \n"
 " %s "
 
 #, fuzzy
 msgid "Directory scanning"
-msgstr "їгвРъР ФШаХЪвЮаШшгЬР"
+msgstr "РџСѓС‚Р°СљР° РґРёСЂРµРєС‚РѕСЂРёССѓРјР°"
 
 msgid "1Copy"
-msgstr "1єЮЯШаРш"
+msgstr "1РљРѕРїРёСЂР°С"
 
 msgid "1Move"
-msgstr "1їаХЬХбвШ"
+msgstr "1РџСЂРµРјРµСЃС‚Рё"
 
 msgid "1Delete"
-msgstr "1ѕСаШиШ"
+msgstr "1РћР±СЂРёС€Рё"
 
 #, no-c-format
 msgid "%o %f \"%s\"%m"
@@ -1654,34 +1663,34 @@ msgid "%o %d %f%m"
 msgstr "%o %d %f%m"
 
 msgid "file"
-msgstr "ФРвЮвХЪг"
+msgstr "РґР°С‚РѕС‚РµРєСѓ"
 
 msgid "files"
-msgstr "ФРвЮвХЪР"
+msgstr "РґР°С‚РѕС‚РµРєР°"
 
 msgid "directory"
-msgstr "ФШаХЪвЮаШшгЬ"
+msgstr "РґРёСЂРµРєС‚РѕСЂРёССѓРј"
 
 msgid "directories"
-msgstr "ФШаХЪвЮаШшгЬР"
+msgstr "РґРёСЂРµРєС‚РѕСЂРёССѓРјР°"
 
 msgid "files/directories"
-msgstr "ФРвЮвХЪР/ФШаХЪвЮаШшгЬР"
+msgstr "РґР°С‚РѕС‚РµРєР°/РґРёСЂРµРєС‚РѕСЂРёССѓРјР°"
 
 msgid " with source mask:"
-msgstr " гЧ ШЧТЮаЭг ЬРбЪг:"
+msgstr " СѓР· РёР·РІРѕСЂРЅСѓ РјР°СЃРєСѓ:"
 
 msgid " to:"
-msgstr " г:"
+msgstr " Сѓ:"
 
 msgid " Cannot operate on \"..\"! "
-msgstr " ЅХ ЬЮУг ФР аРФШЬ бР `..'! "
+msgstr " РќРµ РјРѕРіСѓ РґР° СЂР°РґРёРј СЃР° `..'! "
 
 msgid " Sorry, I could not put the job in background "
-msgstr " ёЧТШЭШвХ, РЫШ ЭШбРЬ ЬЮУРЮ ФР ЯЮиРщХЬ ЯЮбРЮ г ЯЮЧРФШЭг "
+msgstr " РР·РІРёРЅРёС‚Рµ, Р°Р»Рё РЅРёСЃР°Рј РјРѕРіР°Рѕ РґР° РїРѕС€Р°С™РµРј РїРѕСЃР°Рѕ Сѓ РїРѕР·Р°РґРёРЅСѓ "
 
 msgid "&Retry"
-msgstr "ї&аЮСРш ЯЮЭЮТЮ"
+msgstr "Рџ&СЂРѕР±Р°С РїРѕРЅРѕРІРѕ"
 
 msgid ""
 "\n"
@@ -1689,8 +1698,8 @@ msgid ""
 "   Delete it recursively? "
 msgstr ""
 "\n"
-"   ґШаХЪвЮаШшгЬ ЭШшХ ЯаРЧРЭ.   \n"
-"   ¶ХЫШвХ ЫШ ФР УР аХЪгаЧШТЭЮ ЮСаШиХЬ? "
+"   Р”РёСЂРµРєС‚РѕСЂРёССѓРј РЅРёСРµ РїСЂР°Р·Р°РЅ.   \n"
+"   Р–РµР»РёС‚Рµ Р»Рё РґР° РіР° СЂРµРєСѓСЂР·РёРІРЅРѕ РѕР±СЂРёС€РµРј? "
 
 msgid ""
 "\n"
@@ -1698,142 +1707,142 @@ msgid ""
 "   Delete it recursively? "
 msgstr ""
 "\n"
-"   їЮЧРФШЭбЪШ ЯаЮжХб: ґШаХЪвЮаШшгЬ ЭШшХ ЯаРЧРЭ \n"
-"   ¶ХЫШвХ ЫШ ФР УР аХЪгаЧШТЭЮ ЮСаШиХЬ? "
+"   РџРѕР·Р°РґРёРЅСЃРєРё РїСЂРѕС†РµСЃ: Р”РёСЂРµРєС‚РѕСЂРёССѓРј РЅРёСРµ РїСЂР°Р·Р°РЅ \n"
+"   Р–РµР»РёС‚Рµ Р»Рё РґР° РіР° СЂРµРєСѓСЂР·РёРІРЅРѕ РѕР±СЂРёС€РµРј? "
 
 msgid " Delete: "
-msgstr " ѕСаШиШ: "
+msgstr " РћР±СЂРёС€Рё: "
 
 msgid "Non&e"
-msgstr "&ЅШивР"
+msgstr "&РќРёС€С‚Р°"
 
 # Estimated time of arrival
-# їаЮжХъХЭЮ ТаХЬХ ФЮЫРбЪР
+# РџСЂРѕС†РµСљРµРЅРѕ РІСЂРµРјРµ РґРѕР»Р°СЃРєР°
 #, c-format
 msgid "ETA %d:%02d.%02d"
-msgstr "їІґ %d:%02d.%02d"
+msgstr "РџР’Р” %d:%02d.%02d"
 
 #, c-format
 msgid "%.2f MB/s"
-msgstr "%.2f ј±/б"
+msgstr "%.2f РњР‘/СЃ"
 
 #, c-format
 msgid "%.2f KB/s"
-msgstr "%.2f є±/б"
+msgstr "%.2f РљР‘/СЃ"
 
 #, c-format
 msgid "%ld B/s"
-msgstr "%ld ±/б"
+msgstr "%ld Р‘/СЃ"
 
 msgid "File"
-msgstr "ґРвЮвХЪР"
+msgstr "Р”Р°С‚РѕС‚РµРєР°"
 
 msgid "Count"
-msgstr "±аЮш"
+msgstr "Р‘СЂРѕС"
 
 msgid "Bytes"
-msgstr "±РшвЮТР"
+msgstr "Р‘Р°СС‚РѕРІР°"
 
 msgid "Source"
-msgstr "ёЧТЮа"
+msgstr "РР·РІРѕСЂ"
 
 msgid "Target"
-msgstr "ѕФаХФШивХ"
+msgstr "РћРґСЂРµРґРёС€С‚Рµ"
 
 msgid "Deleting"
-msgstr "±аШиХЬ"
+msgstr "Р‘СЂРёС€РµРј"
 
 #, c-format
 msgid "Target file \"%s\" already exists!"
-msgstr "ѕФаХФШиЭР ФРвЮвХЪР `%s' ТХы ЯЮбвЮшШ!"
+msgstr "РћРґСЂРµРґРёС€РЅР° РґР°С‚РѕС‚РµРєР° `%s' РІРµС› РїРѕСЃС‚РѕСРё!"
 
 msgid "If &size differs"
-msgstr "°ЪЮ шХ &ТХЫШзШЭР аРЧЫШзШвР"
+msgstr "РђРєРѕ СРµ &РІРµР»РёС‡РёРЅР° СЂР°Р·Р»РёС‡РёС‚Р°"
 
 msgid "&Update"
-msgstr "&°ЦгаШаРш"
+msgstr "&РђР¶СѓСЂРёСЂР°С"
 
 msgid "Overwrite all targets?"
-msgstr "¶ХЫШвХ ЫШ ФР ЯаХЯШиХЬ бТР ЮФаХФШивР?"
+msgstr "Р–РµР»РёС‚Рµ Р»Рё РґР° РїСЂРµРїРёС€РµРј СЃРІР° РѕРґСЂРµРґРёС€С‚Р°?"
 
 msgid "&Reget"
-msgstr "&їЮЭЮТЮ ЯаХгЧЬШ"
+msgstr "&РџРѕРЅРѕРІРѕ РїСЂРµСѓР·РјРё"
 
 msgid "A&ppend"
-msgstr "&ЅРФЮТХЦШ"
+msgstr "&РќР°РґРѕРІРµР¶Рё"
 
 msgid "Overwrite this target?"
-msgstr "¶ХЫШвХ ЫШ ФР ЯаХЯШиХЬ ЮТЮ ЮФаХФШивХ?"
+msgstr "Р–РµР»РёС‚Рµ Р»Рё РґР° РїСЂРµРїРёС€РµРј РѕРІРѕ РѕРґСЂРµРґРёС€С‚Рµ?"
 
 #, fuzzy, c-format
 msgid "Target date: %s, size %llu"
-msgstr "ґРвгЬ ЮФаХФШивР: %s, ТХЫШзШЭР %llu"
+msgstr "Р”Р°С‚СѓРј РѕРґСЂРµРґРёС€С‚Р°: %s, РІРµР»РёС‡РёРЅР° %llu"
 
 #, fuzzy, c-format
 msgid "Source date: %s, size %llu"
-msgstr "ґРвгЬ ШЧТЮаР: %s, ТХЫШзШЭР %llu"
+msgstr "Р”Р°С‚СѓРј РёР·РІРѕСЂР°: %s, РІРµР»РёС‡РёРЅР° %llu"
 
 #, fuzzy, c-format
 msgid "Target date: %s, size %u"
-msgstr "ґРвгЬ ЮФаХФШивР: %s, ТХЫШзШЭР %u"
+msgstr "Р”Р°С‚СѓРј РѕРґСЂРµРґРёС€С‚Р°: %s, РІРµР»РёС‡РёРЅР° %u"
 
 #, fuzzy, c-format
 msgid "Source date: %s, size %u"
-msgstr "ґРвгЬ ШЧТЮаР: %s, ТХЫШзШЭР %u"
+msgstr "Р”Р°С‚СѓРј РёР·РІРѕСЂР°: %s, РІРµР»РёС‡РёРЅР° %u"
 
 msgid " File exists "
-msgstr " ґРвЮвХЪР ЯЮбвЮшШ "
+msgstr " Р”Р°С‚РѕС‚РµРєР° РїРѕСЃС‚РѕСРё "
 
 msgid " Background process: File exists "
-msgstr " їЮЧРФШЭбЪШ ЯаЮжХб: ФРвЮвХЪР ЯЮбвЮшШ "
+msgstr " РџРѕР·Р°РґРёРЅСЃРєРё РїСЂРѕС†РµСЃ: РґР°С‚РѕС‚РµРєР° РїРѕСЃС‚РѕСРё "
 
 msgid "preserve &Attributes"
-msgstr "ЮзгТРш &°ваШСгвХ"
+msgstr "РѕС‡СѓРІР°С &РђС‚СЂРёР±СѓС‚Рµ"
 
 msgid "follow &Links"
-msgstr "ЯаРвШ &ІХЧХ"
+msgstr "РїСЂР°С‚Рё &Р’РµР·Рµ"
 
 msgid "to:"
-msgstr "г:"
+msgstr "Сѓ:"
 
 msgid "&Background"
-msgstr "&їЮЧРФШЭР"
+msgstr "&РџРѕР·Р°РґРёРЅР°"
 
 msgid "&Stable Symlinks"
-msgstr "&БвРСШЫЭХ бШЬТХЧХ"
+msgstr "&РЎС‚Р°Р±РёР»РЅРµ СЃРёРјРІРµР·Рµ"
 
 msgid "&Dive into subdir if exists"
-msgstr "&·РаЮЭШ г ЯЮФФШаХЪвЮаШшгЬХ"
+msgstr "&Р—Р°СЂРѕРЅРё Сѓ РїРѕРґРґРёСЂРµРєС‚РѕСЂРёССѓРјРµ"
 
 #, fuzzy, c-format
 msgid "Invalid source pattern `%s'"
 msgstr ""
-"ЅХШбЯаРТРЭ ШЧТЮаЭШ ЮСаРЧРж `%s' \n"
+"РќРµРёСЃРїСЂР°РІР°РЅ РёР·РІРѕСЂРЅРё РѕР±СЂР°Р·Р°С† `%s' \n"
 " %s "
 
 msgid "&Suspend"
-msgstr "&ѕСгбвРТШ"
+msgstr "&РћР±СѓСЃС‚Р°РІРё"
 
 msgid "Con&tinue"
-msgstr "&ЅРбвРТШ"
+msgstr "&РќР°СЃС‚Р°РІРё"
 
 msgid "&Chdir"
-msgstr "&їаЮЬ.ФШа."
+msgstr "&РџСЂРѕРј.РґРёСЂ."
 
 msgid "&Again"
-msgstr "&їЮЭЮТЮ"
+msgstr "&РџРѕРЅРѕРІРѕ"
 
 msgid "&Quit"
-msgstr "&·РТаиШ"
+msgstr "&Р—Р°РІСЂС€Рё"
 
 msgid "Pane&lize"
-msgstr "їаХвТЮаШ &г ЮЪЭЮ"
+msgstr "РџСЂРµС‚РІРѕСЂРё &Сѓ РѕРєРЅРѕ"
 
 msgid "&View - F3"
-msgstr "&їаХУЫХФРш - F3"
+msgstr "&РџСЂРµРіР»РµРґР°С - F3"
 
 msgid "&Edit - F4"
-msgstr "&ГаХФШ - F4"
+msgstr "&РЈСЂРµРґРё - F4"
 
 #, c-format
 msgid "Found: %ld"
@@ -1841,15 +1850,15 @@ msgstr ""
 
 #, fuzzy
 msgid " Malformed regular expression "
-msgstr " ЅХШбЯаРТЭШ аХУгЫРаЭШ ШЧаРЧ "
+msgstr " РќРµРёСЃРїСЂР°РІРЅРё СЂРµРіСѓР»Р°СЂРЅРё РёР·СЂР°Р· "
 
 #, fuzzy
 msgid "Cas&e sensitive"
-msgstr "аРЧЫШЪг&ш ТХЫШЪР Ш ЬРЫР бЫЮТР"
+msgstr "СЂР°Р·Р»РёРєСѓ&С РІРµР»РёРєР° Рё РјР°Р»Р° СЃР»РѕРІР°"
 
 #, fuzzy
 msgid "Case sens&itive"
-msgstr "аРЧЫШЪг&ш ТХЫШЪР Ш ЬРЫР бЫЮТР"
+msgstr "СЂР°Р·Р»РёРєСѓ&С РІРµР»РёРєР° Рё РјР°Р»Р° СЃР»РѕРІР°"
 
 msgid "&Find recursively"
 msgstr ""
@@ -1865,133 +1874,133 @@ msgstr ""
 
 #, fuzzy
 msgid "Re&gular expression"
-msgstr "&АХУгЫРаЭШ ШЧаРЧ"
+msgstr "&Р РµРіСѓР»Р°СЂРЅРё РёР·СЂР°Р·"
 
 msgid "&Tree"
-msgstr "&БвРСЫЮ"
+msgstr "&РЎС‚Р°Р±Р»Рѕ"
 
 msgid "Find File"
-msgstr "ЅРтШ ФРвЮвХЪг"
+msgstr "РќР°С’Рё РґР°С‚РѕС‚РµРєСѓ"
 
 #, fuzzy
 msgid "Content:"
-msgstr "БРФаЦРш: "
+msgstr "РЎР°РґСЂР¶Р°С: "
 
 #, fuzzy
 msgid "File name:"
-msgstr "ґРвЮвХЪР:"
+msgstr "Р”Р°С‚РѕС‚РµРєР°:"
 
 msgid "Start at:"
-msgstr "їЮзЭШ ЮФ:"
+msgstr "РџРѕС‡РЅРё РѕРґ:"
 
 #, c-format
 msgid "Grepping in %s"
-msgstr "ВаРЦШЬ вХЪбв г %s"
+msgstr "РўСЂР°Р¶РёРј С‚РµРєСЃС‚ Сѓ %s"
 
 msgid "Finished"
-msgstr "іЮвЮТЮ"
+msgstr "Р“РѕС‚РѕРІРѕ"
 
 #, c-format
 msgid "Searching %s"
-msgstr "ВаРЦШЬ %s"
+msgstr "РўСЂР°Р¶РёРј %s"
 
 msgid "Searching"
-msgstr "ВаРЦШЬ"
+msgstr "РўСЂР°Р¶РёРј"
 
 msgid " Help file format error\n"
-msgstr " іаХиЪР г дЮаЬРвг ФРвЮвХЪХ ЯЮЬЮыШ\n"
+msgstr " Р“СЂРµС€РєР° Сѓ С„РѕСЂРјР°С‚Сѓ РґР°С‚РѕС‚РµРєРµ РїРѕРјРѕС›Рё\n"
 
 msgid " Internal bug: Double start of link area "
-msgstr " ГЭгваРиъР УаХиЪР: ґТЮбвагЪШ ЯЮзХвРЪ ЮСЫРбвШ ТХЧХ "
+msgstr " РЈРЅСѓС‚СЂР°С€СљР° РіСЂРµС€РєР°: Р”РІРѕСЃС‚СЂСѓРєРё РїРѕС‡РµС‚Р°Рє РѕР±Р»Р°СЃС‚Рё РІРµР·Рµ "
 
 #, c-format
 msgid " Cannot find node %s in help file "
-msgstr " ЅХ ЬЮУг ФР ЭРтХЬ зТЮа %s г ФРвЮвХжШ ЯЮЬЮыШ "
+msgstr " РќРµ РјРѕРіСѓ РґР° РЅР°С’РµРј С‡РІРѕСЂ %s Сѓ РґР°С‚РѕС‚РµС†Рё РїРѕРјРѕС›Рё "
 
 msgid "Index"
-msgstr "ёЭФХЪб"
+msgstr "РРЅРґРµРєСЃ"
 
 msgid "Prev"
-msgstr "їаХве"
+msgstr "РџСЂРµС‚С…"
 
 msgid "&Move"
-msgstr "&їаХЬХбвШ"
+msgstr "&РџСЂРµРјРµСЃС‚Рё"
 
 msgid "&Remove"
-msgstr "&ГЪЫЮЭШ"
+msgstr "&РЈРєР»РѕРЅРё"
 
 msgid "&Append"
-msgstr "&ЅРФЮТХЦШ"
+msgstr "&РќР°РґРѕРІРµР¶Рё"
 
 msgid "&Insert"
-msgstr "Г&ЬХвЭШ"
+msgstr "РЈ&РјРµС‚РЅРё"
 
 msgid "New &Entry"
-msgstr "ЅЮТР &бвРТЪР"
+msgstr "РќРѕРІР° &СЃС‚Р°РІРєР°"
 
 msgid "New &Group"
-msgstr "ЅЮТР &УагЯР"
+msgstr "РќРѕРІР° &РіСЂСѓРїР°"
 
 msgid "&Up"
-msgstr "&іЮаХ"
+msgstr "&Р“РѕСЂРµ"
 
 msgid "&Add current"
-msgstr "&ґЮФРш вХЪгыХ"
+msgstr "&Р”РѕРґР°С С‚РµРєСѓС›Рµ"
 
 msgid "&Refresh"
-msgstr "&ѕбТХЦШ"
+msgstr "&РћСЃРІРµР¶Рё"
 
 # Virtual file system
-# ІШавгРЫЭШ бШбвХЬ ФРвЮвХЪР
+# Р’РёСЂС‚СѓР°Р»РЅРё СЃРёСЃС‚РµРј РґР°С‚РѕС‚РµРєР°
 msgid "Fr&ee VFSs now"
-msgstr "&ѕбЫЮСЮФШ ІБґ бРФР"
+msgstr "&РћСЃР»РѕР±РѕРґРё Р’РЎР” СЃР°РґР°"
 
 msgid "Change &To"
-msgstr "ї&аЮЬХЭШ г"
+msgstr "Рџ&СЂРѕРјРµРЅРё Сѓ"
 
 msgid "Subgroup - press ENTER to see list"
-msgstr "їЮФУагЯР - ЯаШвШбЭШвХ `ENTER' ЧР бЯШбРЪ"
+msgstr "РџРѕРґРіСЂСѓРїР° - РїСЂРёС‚РёСЃРЅРёС‚Рµ `ENTER' Р·Р° СЃРїРёСЃР°Рє"
 
 msgid "Active VFS directories"
-msgstr "°ЪвШТЭШ ФШаХЪвЮаШшгЬШ ІБґ"
+msgstr "РђРєС‚РёРІРЅРё РґРёСЂРµРєС‚РѕСЂРёССѓРјРё Р’РЎР”"
 
 msgid "Directory hotlist"
-msgstr "±аЧШ бЯШбРЪ ФШаХЪвЮаШшгЬР"
+msgstr "Р‘СЂР·Рё СЃРїРёСЃР°Рє РґРёСЂРµРєС‚РѕСЂРёССѓРјР°"
 
 msgid " Directory path "
-msgstr " їгвРъР ФШаХЪвЮаШшгЬР "
+msgstr " РџСѓС‚Р°СљР° РґРёСЂРµРєС‚РѕСЂРёССѓРјР° "
 
 msgid " Directory label "
-msgstr " ЅРвЯШб ФШаХЪвЮаШшгЬР "
+msgstr " РќР°С‚РїРёСЃ РґРёСЂРµРєС‚РѕСЂРёССѓРјР° "
 
 #, c-format
 msgid "Moving %s"
-msgstr "їаХЬХивРЬ %s"
+msgstr "РџСЂРµРјРµС€С‚Р°Рј %s"
 
 msgid "New hotlist entry"
-msgstr "ЅЮТР бвРТЪР СаЧЮУ бЯШбЪР"
+msgstr "РќРѕРІР° СЃС‚Р°РІРєР° Р±СЂР·РѕРі СЃРїРёСЃРєР°"
 
 msgid "Directory label"
-msgstr "ЅРвЯШб ФШаХЪвЮаШшгЬР"
+msgstr "РќР°С‚РїРёСЃ РґРёСЂРµРєС‚РѕСЂРёССѓРјР°"
 
 msgid "Directory path"
-msgstr "їгвРъР ФШаХЪвЮаШшгЬР"
+msgstr "РџСѓС‚Р°СљР° РґРёСЂРµРєС‚РѕСЂРёССѓРјР°"
 
 msgid " New hotlist group "
-msgstr " ЅЮТР УагЯР СаЧЮУ бЯШбЪР "
+msgstr " РќРѕРІР° РіСЂСѓРїР° Р±СЂР·РѕРі СЃРїРёСЃРєР° "
 
 msgid "Name of new group"
-msgstr "ЅРЧШТ ЭЮТХ УагЯХ"
+msgstr "РќР°Р·РёРІ РЅРѕРІРµ РіСЂСѓРїРµ"
 
 #, c-format
 msgid "Label for \"%s\":"
-msgstr "ЅРвЯШб ЧР `%s':"
+msgstr "РќР°С‚РїРёСЃ Р·Р° `%s':"
 
 msgid " Add to hotlist "
-msgstr " ґЮФРш г СаЧШ бЯШбРЪ "
+msgstr " Р”РѕРґР°С Сѓ Р±СЂР·Рё СЃРїРёСЃР°Рє "
 
 msgid " Remove: "
-msgstr "ГЪЫЮЭШ: "
+msgstr "РЈРєР»РѕРЅРё: "
 
 msgid ""
 "\n"
@@ -2004,69 +2013,69 @@ msgid ""
 " Remove it?"
 msgstr ""
 "\n"
-" іагЯР ЭШшХ ЯаРЧЭР.\n"
-" ¶ХЫШвХ ЫШ ФР шХ гЪЫЮЭШЬ?"
+" Р“СЂСѓРїР° РЅРёСРµ РїСЂР°Р·РЅР°.\n"
+" Р–РµР»РёС‚Рµ Р»Рё РґР° СРµ СѓРєР»РѕРЅРёРј?"
 
 msgid " Top level group "
-msgstr " ІаеЮТЭР УагЯР "
+msgstr " Р’СЂС…РѕРІРЅР° РіСЂСѓРїР° "
 
 msgid " Hotlist Load "
-msgstr " ГзШвРш СаЧШ бЯШбРЪ "
+msgstr " РЈС‡РёС‚Р°С Р±СЂР·Рё СЃРїРёСЃР°Рє "
 
 #, fuzzy, c-format
 msgid ""
 "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
-msgstr ", ТРиХ бвРаХ бвРТЪХ СаЧЮУ бЯШбЪР ЭШбг ЮСаШбРЭХ"
+msgstr ", РІР°С€Рµ СЃС‚Р°СЂРµ СЃС‚Р°РІРєРµ Р±СЂР·РѕРі СЃРїРёСЃРєР° РЅРёСЃСѓ РѕР±СЂРёСЃР°РЅРµ"
 
 #, c-format
 msgid "Midnight Commander %s"
-msgstr "їЮЭЮыЭШ ЭРаХФЭШЪ %s"
+msgstr "РџРѕРЅРѕС›РЅРё РЅР°СЂРµРґРЅРёРє %s"
 
 #, c-format
 msgid "File:       %s"
-msgstr "ґРвЮвХЪР:        %s"
+msgstr "Р”Р°С‚РѕС‚РµРєР°:        %s"
 
 #, c-format
 msgid "Free nodes: %d (%d%%) of %d"
-msgstr "БЫЮС. зТЮаЮТР:   %d (%d%%) ЮФ %d"
+msgstr "РЎР»РѕР±. С‡РІРѕСЂРѕРІР°:   %d (%d%%) РѕРґ %d"
 
 msgid "No node information"
-msgstr "ЅХЬР ЯЮФРвРЪР Ю зТЮаЮТШЬР"
+msgstr "РќРµРјР° РїРѕРґР°С‚Р°РєР° Рѕ С‡РІРѕСЂРѕРІРёРјР°"
 
 #, c-format
 msgid "Free space: %s (%d%%) of %s"
-msgstr "БЫЮС. ЯаЮбвЮаР:  %s (%d%%) ЮФ %s"
+msgstr "РЎР»РѕР±. РїСЂРѕСЃС‚РѕСЂР°:  %s (%d%%) РѕРґ %s"
 
 msgid "No space information"
-msgstr "ЅХЬР ЯЮФРвРЪР Ю ЯаЮбвЮаг"
+msgstr "РќРµРјР° РїРѕРґР°С‚Р°РєР° Рѕ РїСЂРѕСЃС‚РѕСЂСѓ"
 
 #, c-format
 msgid "Type:      %s "
-msgstr "ІабвР:           %s "
+msgstr "Р’СЂСЃС‚Р°:           %s "
 
 msgid "non-local vfs"
-msgstr "ЭХ-ЫЮЪРЫЭШ ТбФ"
+msgstr "РЅРµ-Р»РѕРєР°Р»РЅРё РІСЃРґ"
 
 #, c-format
 msgid "Device:    %s"
-msgstr "ГаХтРш:          %s"
+msgstr "РЈСЂРµС’Р°С:          %s"
 
 #, c-format
 msgid "Filesystem: %s"
-msgstr "БШбвХЬ ФРвЮв.:   %s"
+msgstr "РЎРёСЃС‚РµРј РґР°С‚РѕС‚.:   %s"
 
 #, c-format
 msgid "Accessed:  %s"
-msgstr "їЮбЫ. ЯаШбвгЯ:   %s"
+msgstr "РџРѕСЃР». РїСЂРёСЃС‚СѓРї:   %s"
 
 #, c-format
 msgid "Modified:  %s"
-msgstr "ґРвгЬ ШЧЬХЭХ:    %s"
+msgstr "Р”Р°С‚СѓРј РёР·РјРµРЅРµ:    %s"
 
 #. TRANSLATORS: "Status changed", like in the stat(2) man page
 #, fuzzy, c-format
 msgid "Status:    %s"
-msgstr "БвТЮаХЭЮ:        %s"
+msgstr "РЎС‚РІРѕСЂРµРЅРѕ:        %s"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -2074,89 +2083,89 @@ msgstr ""
 
 #, c-format
 msgid "Size:      %s"
-msgstr "ІХЫШзШЭР:        %s"
+msgstr "Р’РµР»РёС‡РёРЅР°:        %s"
 
 #, fuzzy, c-format
 msgid " (%ld block)"
 msgid_plural " (%ld blocks)"
-msgstr[0] " (%ld СЫЮЪ)"
-msgstr[1] " (%ld СЫЮЪ)"
+msgstr[0] " (%ld Р±Р»РѕРє)"
+msgstr[1] " (%ld Р±Р»РѕРє)"
 
 #, c-format
 msgid "Owner:     %s/%s"
-msgstr "ІЫРбЭШЪ:         %s/%s"
+msgstr "Р’Р»Р°СЃРЅРёРє:         %s/%s"
 
 #, c-format
 msgid "Links:     %d"
-msgstr "ІХЧР:            %d"
+msgstr "Р’РµР·Р°:            %d"
 
 #, c-format
 msgid "Mode:      %s (%04o)"
-msgstr "ґЮЧТЮЫХ:         %s (%04o)"
+msgstr "Р”РѕР·РІРѕР»Рµ:         %s (%04o)"
 
 #, c-format
 msgid "Location:  %Xh:%Xh"
-msgstr "јХбвЮ:           %Xh:%Xh"
+msgstr "РњРµСЃС‚Рѕ:           %Xh:%Xh"
 
 msgid "File:       None"
-msgstr "ґРвЮвХЪР:        ЅШшХФЭР"
+msgstr "Р”Р°С‚РѕС‚РµРєР°:        РќРёСРµРґРЅР°"
 
 msgid "&Vertical"
-msgstr "&ГбЯаРТЭЮ"
+msgstr "&РЈСЃРїСЂР°РІРЅРѕ"
 
 msgid "&Horizontal"
-msgstr "&їЮЫЮЦХЭЮ"
+msgstr "&РџРѕР»РѕР¶РµРЅРѕ"
 
 msgid "show free sp&Ace"
 msgstr ""
 
 msgid "&Xterm window title"
-msgstr "ЭРбЫЮТ ЯаЮЧЮаР Ш&єб вХаЬШЭРЫР"
+msgstr "РЅР°СЃР»РѕРІ РїСЂРѕР·РѕСЂР° Рё&РљСЃ С‚РµСЂРјРёРЅР°Р»Р°"
 
 msgid "h&Intbar visible"
-msgstr "&АХФ бР бРТХвШЬР шХ ТШФщШТ"
+msgstr "&Р РµРґ СЃР° СЃР°РІРµС‚РёРјР° СРµ РІРёРґС™РёРІ"
 
 msgid "&Keybar visible"
-msgstr "аХФ бР &ВРбвХаШЬР шХ ТШФщШТ"
+msgstr "СЂРµРґ СЃР° &РўР°СЃС‚РµСЂРёРјР° СРµ РІРёРґС™РёРІ"
 
 msgid "command &Prompt"
-msgstr "ЭРаХФСХЭШ Ю&ґЧШТЭШЪ"
+msgstr "РЅР°СЂРµРґР±РµРЅРё Рѕ&Р”Р·РёРІРЅРёРє"
 
 msgid "show &Mini status"
-msgstr "ЯаШЪРЦШ &јШЭШ бвРъХ"
+msgstr "РїСЂРёРєР°Р¶Рё &РњРёРЅРё СЃС‚Р°СљРµ"
 
 msgid "menu&Bar visible"
-msgstr "аХФ ЬХЭШ&ЁР шХ ТШФщШТ"
+msgstr "СЂРµРґ РјРµРЅРё&Р€Р° СРµ РІРёРґС™РёРІ"
 
 msgid "&Equal split"
-msgstr "ЯЮФшХФЭРЪР ЯЮ&ґХЫР"
+msgstr "РїРѕРґСРµРґРЅР°РєР° РїРѕ&Р”РµР»Р°"
 
 msgid "pe&Rmissions"
-msgstr "ФЮ&·ТЮЫХ"
+msgstr "РґРѕ&Р—РІРѕР»Рµ"
 
 msgid "&File types"
-msgstr "&ІабвХ ФРвЮвХЪР"
+msgstr "&Р’СЂСЃС‚Рµ РґР°С‚РѕС‚РµРєР°"
 
 msgid " Panel split "
-msgstr " їЮФХЫР ЮЪЭР "
+msgstr " РџРѕРґРµР»Р° РѕРєРЅР° "
 
 msgid " Highlight... "
-msgstr " ёбвШжРъХ... "
+msgstr " РСЃС‚РёС†Р°СљРµ... "
 
 msgid " Other options "
-msgstr " ґагУШ ШЧСЮаШ "
+msgstr " Р”СЂСѓРіРё РёР·Р±РѕСЂРё "
 
 msgid "output lines"
-msgstr "аХФЮТШ ШЧЫРЧР"
+msgstr "СЂРµРґРѕРІРё РёР·Р»Р°Р·Р°"
 
 msgid "Layout"
-msgstr "АРбЯЮаХФ"
+msgstr "Р Р°СЃРїРѕСЂРµРґ"
 
 msgid "Learn keys"
-msgstr "ЅРгзШ вРбвХаХ"
+msgstr "РќР°СѓС‡Рё С‚Р°СЃС‚РµСЂРµ"
 
 msgid " Teach me a key "
-msgstr " ЅРгзШвХ ЬХ ТРиШЬ вРбвХаШЬР "
+msgstr " РќР°СѓС‡РёС‚Рµ РјРµ РІР°С€РёРј С‚Р°СЃС‚РµСЂРёРјР° "
 
 #, c-format
 msgid ""
@@ -2169,51 +2178,51 @@ msgid ""
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
 msgstr ""
-"јЮЫШЬ ФР ЯаШвШбЭХвХ вРбвХа %s\n"
-"Ш ФР бРзХЪРвХ ФР ЮТР ЯЮагЪР ЭХбвРЭХ.\n"
+"РњРѕР»РёРј РґР° РїСЂРёС‚РёСЃРЅРµС‚Рµ С‚Р°СЃС‚РµСЂ %s\n"
+"Рё РґР° СЃР°С‡РµРєР°С‚Рµ РґР° РѕРІР° РїРѕСЂСѓРєР° РЅРµСЃС‚Р°РЅРµ.\n"
 "\n"
-"ѕЭФР УР ЯЮЭЮТЮ ЯаШвШбЭШвХ Ш ТШФШвХ ФР ЫШ бХ ЯЮшРТщгшХ\n"
-"`ґР' ЯЮаХФ ъХУЮТЮУ ФгУЬХвР.\n"
+"РћРЅРґР° РіР° РїРѕРЅРѕРІРѕ РїСЂРёС‚РёСЃРЅРёС‚Рµ Рё РІРёРґРёС‚Рµ РґР° Р»Рё СЃРµ РїРѕСР°РІС™СѓСРµ\n"
+"`Р”Р°' РїРѕСЂРµРґ СљРµРіРѕРІРѕРі РґСѓРіРјРµС‚Р°.\n"
 "\n"
-"°ЪЮ ЦХЫШвХ ФР ЮФгбвРЭХвХ, ЯаШвШбЭШвХ шХФЭЮЬ вРбвХа\n"
-"`Escape' Ш бРзХЪРшвХ."
+"РђРєРѕ Р¶РµР»РёС‚Рµ РґР° РѕРґСѓСЃС‚Р°РЅРµС‚Рµ, РїСЂРёС‚РёСЃРЅРёС‚Рµ СРµРґРЅРѕРј С‚Р°СЃС‚РµСЂ\n"
+"`Escape' Рё СЃР°С‡РµРєР°СС‚Рµ."
 
 msgid " Cannot accept this key "
-msgstr " ЅХ ЬЮУг ФР ЯаШеТРвШЬ ЮТРш вРбвХа "
+msgstr " РќРµ РјРѕРіСѓ РґР° РїСЂРёС…РІР°С‚РёРј РѕРІР°С С‚Р°СЃС‚РµСЂ "
 
 #, c-format
 msgid " You have entered \"%s\""
-msgstr " їаШвШбЫШ бвХ `%s'"
+msgstr " РџСЂРёС‚РёСЃР»Рё СЃС‚Рµ `%s'"
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
-msgstr "ґР"
+msgstr "Р”Р°"
 
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
 msgstr ""
-"ёЧУЫХФР ФР бТШ ТРиШ вРбвХаШ ТХы бРФР\n"
-"ЫХЯЮ аРФХ. ВЮ шХ ЮФЫШзЭЮ."
+"РР·РіР»РµРґР° РґР° СЃРІРё РІР°С€Рё С‚Р°СЃС‚РµСЂРё РІРµС› СЃР°РґР°\n"
+"Р»РµРїРѕ СЂР°РґРµ. РўРѕ СРµ РѕРґР»РёС‡РЅРѕ."
 
 msgid "&Discard"
-msgstr "&ѕФСРжШ"
+msgstr "&РћРґР±Р°С†Рё"
 
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
 msgstr ""
-"ѕФЫШзЭЮ! ёЬРвХ ЯЮвЯгЭг вХаЬШЭРЫбЪг СРЧг!\n"
-"БТШ ТРиШ вРбвХаШ ФЮСаЮ аРФХ."
+"РћРґР»РёС‡РЅРѕ! РРјР°С‚Рµ РїРѕС‚РїСѓРЅСѓ С‚РµСЂРјРёРЅР°Р»СЃРєСѓ Р±Р°Р·Сѓ!\n"
+"РЎРІРё РІР°С€Рё С‚Р°СЃС‚РµСЂРё РґРѕР±СЂРѕ СЂР°РґРµ."
 
 msgid "Press all the keys mentioned here. After you have done it, check"
-msgstr "їаШвШбЭШвХ бТРЪШ ЮФ ЮТШе вРбвХаР. їЮивЮ бвХ вЮ гаРФШЫШ, ЯаЮТХаШвХ"
+msgstr "РџСЂРёС‚РёСЃРЅРёС‚Рµ СЃРІР°РєРё РѕРґ РѕРІРёС… С‚Р°СЃС‚РµСЂР°. РџРѕС€С‚Рѕ СЃС‚Рµ С‚Рѕ СѓСЂР°РґРёР»Рё, РїСЂРѕРІРµСЂРёС‚Рµ"
 
 msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr "ЯЮаХФ ЪЮшШе ЭХ бвЮшШ ЮЧЭРЪР `ґР'. їаШвШбЭШвХ аРЧЬРЪЭШжг ЭР"
+msgstr "РїРѕСЂРµРґ РєРѕСРёС… РЅРµ СЃС‚РѕСРё РѕР·РЅР°РєР° `Р”Р°'. РџСЂРёС‚РёСЃРЅРёС‚Рµ СЂР°Р·РјР°РєРЅРёС†Сѓ РЅР°"
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
-msgstr "ЭХФЮбвРшгыШЬР ШЫШ ЯаШв. ЬШиХЬ ЧР ЧРФРТРъХ. єаХыХ бХ ЯаХЪЮ `Tab'-Р."
+msgstr "РЅРµРґРѕСЃС‚Р°ССѓС›РёРјР° РёР»Рё РїСЂРёС‚. РјРёС€РµРј Р·Р° Р·Р°РґР°РІР°СљРµ. РљСЂРµС›Рµ СЃРµ РїСЂРµРєРѕ `Tab'-Р°."
 
 msgid ""
 " The Commander can't change to the directory that \n"
@@ -2221,200 +2230,200 @@ msgid ""
 " deleted your working directory, or given yourself \n"
 " extra access permissions with the \"su\" command? "
 msgstr ""
-" ЅРаХФЭШЪ ЭХ ЬЮЦХ ФР гтХ г ФШаХЪвЮаШшгЬ ЧР ЪЮшШ\n"
-" ЯЮФщгбЪР вТаФШ ФР бХ г ъХЬг ЭРЫРЧШвХ. јЮЦФР бвХ\n"
-" ЮСаШбРЫШ ТРи вХЪгыШ ФШаХЪвЮаШшгЬ, ШЫШ бвХ ФРЫШ\n"
-" бХСШ ЯаХиШаЮЪХ ФЮЧТЮЫХ ЯаХЪЮ ЭРаХФСХ `su'? "
+" РќР°СЂРµРґРЅРёРє РЅРµ РјРѕР¶Рµ РґР° СѓС’Рµ Сѓ РґРёСЂРµРєС‚РѕСЂРёССѓРј Р·Р° РєРѕСРё\n"
+" РїРѕРґС™СѓСЃРєР° С‚РІСЂРґРё РґР° СЃРµ Сѓ СљРµРјСѓ РЅР°Р»Р°Р·РёС‚Рµ. РњРѕР¶РґР° СЃС‚Рµ\n"
+" РѕР±СЂРёСЃР°Р»Рё РІР°С€ С‚РµРєСѓС›Рё РґРёСЂРµРєС‚РѕСЂРёССѓРј, РёР»Рё СЃС‚Рµ РґР°Р»Рё\n"
+" СЃРµР±Рё РїСЂРµС€РёСЂРѕРєРµ РґРѕР·РІРѕР»Рµ РїСЂРµРєРѕ РЅР°СЂРµРґР±Рµ `su'? "
 
 msgid " The Midnight Commander "
-msgstr " їЮЭЮыЭШ ЭРаХФЭШЪ "
+msgstr " РџРѕРЅРѕС›РЅРё РЅР°СЂРµРґРЅРёРє "
 
 msgid " Do you really want to quit the Midnight Commander? "
-msgstr " ґР ЫШ ЧРШбвХ ЦХЫШвХ ФР ЧРТаиШвХ аРФ г їЮЭЮыЭЮЬ ЭРаХФЭШЪг? "
+msgstr " Р”Р° Р»Рё Р·Р°РёСЃС‚Рµ Р¶РµР»РёС‚Рµ РґР° Р·Р°РІСЂС€РёС‚Рµ СЂР°Рґ Сѓ РџРѕРЅРѕС›РЅРѕРј РЅР°СЂРµРґРЅРёРєСѓ? "
 
 msgid "&Listing mode..."
-msgstr "&АХЦШЬ бЯШбЪР..."
+msgstr "&Р РµР¶РёРј СЃРїРёСЃРєР°..."
 
 msgid "&Quick view     C-x q"
-msgstr "&±аЧШ ЯаХУЫХФ     C-x q"
+msgstr "&Р‘СЂР·Рё РїСЂРµРіР»РµРґ     C-x q"
 
 msgid "&Info           C-x i"
-msgstr "&їЮФРжШ           C-x i"
+msgstr "&РџРѕРґР°С†Рё           C-x i"
 
 msgid "&Sort order..."
-msgstr "&їЮаХФРЪ аХтРъР..."
+msgstr "&РџРѕСЂРµРґР°Рє СЂРµС’Р°СљР°..."
 
 msgid "&Filter..."
-msgstr "&ДШЫвРа..."
+msgstr "&Р¤РёР»С‚Р°СЂ..."
 
 msgid "&Encoding...    C-t"
 msgstr ""
 
 msgid "&Network link..."
-msgstr "&јаХЦЭЮ ЯЮТХЧШТРъХ..."
+msgstr "&РњСЂРµР¶РЅРѕ РїРѕРІРµР·РёРІР°СљРµ..."
 
 msgid "FT&P link..."
-msgstr "їЮТХЧШТРъХ FT&P-ЮЬ..."
+msgstr "РџРѕРІРµР·РёРІР°СљРµ FT&P-РѕРј..."
 
 msgid "S&hell link..."
-msgstr "їЮТХЧШТРъХ &щгбЪЮЬ..."
+msgstr "РџРѕРІРµР·РёРІР°СљРµ &С™СѓСЃРєРѕРј..."
 
 msgid "SM&B link..."
-msgstr "їЮТХЧШТРъХ SM&B-ЮЬ..."
+msgstr "РџРѕРІРµР·РёРІР°СљРµ SM&B-РѕРј..."
 
 msgid "&Rescan         C-r"
-msgstr "ѕбТХ&ЦШ             C-r"
+msgstr "РћСЃРІРµ&Р¶Рё             C-r"
 
 msgid "&View               F3"
-msgstr "&їаХУЫХФРш              F3"
+msgstr "&РџСЂРµРіР»РµРґР°С              F3"
 
 msgid "Vie&w file...         "
-msgstr "їаХУЫХФРш ФР&вЮвХЪг...    "
+msgstr "РџСЂРµРіР»РµРґР°С РґР°&С‚РѕС‚РµРєСѓ...    "
 
 msgid "&Filtered view     M-!"
-msgstr "&ДШЫваШаРЭЮ ЯаХУЫХФРъХ M-!"
+msgstr "&Р¤РёР»С‚СЂРёСЂР°РЅРѕ РїСЂРµРіР»РµРґР°СљРµ M-!"
 
 msgid "&Edit               F4"
-msgstr "&ГаХФШ                  F4"
+msgstr "&РЈСЂРµРґРё                  F4"
 
 msgid "&Copy               F5"
-msgstr "&єЮЯШаРш                F5"
+msgstr "&РљРѕРїРёСЂР°С                F5"
 
 msgid "c&Hmod           C-x c"
-msgstr "ЯаЮЬХЭШ ФЮ&·ТЮЫХ     C-x c"
+msgstr "РїСЂРѕРјРµРЅРё РґРѕ&Р—РІРѕР»Рµ     C-x c"
 
 msgid "&Link            C-x l"
-msgstr "ЭРЯаРТШ &ІХЧг        C-x l"
+msgstr "РЅР°РїСЂР°РІРё &Р’РµР·Сѓ        C-x l"
 
 msgid "&SymLink         C-x s"
-msgstr "ЭРЯаРТШ &БШЬІХЧг     C-x s"
+msgstr "РЅР°РїСЂР°РІРё &РЎРёРјР’РµР·Сѓ     C-x s"
 
 msgid "edit s&Ymlink  C-x C-s"
-msgstr "гаХФШ бШ&јТХЧг     C-x C-s"
+msgstr "СѓСЂРµРґРё СЃРё&РњРІРµР·Сѓ     C-x C-s"
 
 msgid "ch&Own           C-x o"
-msgstr "ЯаЮЬХЭШ Т&»РбЭШЪР    C-x o"
+msgstr "РїСЂРѕРјРµРЅРё РІ&Р›Р°СЃРЅРёРєР°    C-x o"
 
 msgid "&Advanced chown       "
-msgstr "&ЅРЯа. ЯаЮЬХЭР ТЫРбЭШЪР   "
+msgstr "&РќР°РїСЂ. РїСЂРѕРјРµРЅР° РІР»Р°СЃРЅРёРєР°   "
 
 msgid "&Rename/Move        F6"
-msgstr "Яа&µШЬХЭгш/ЯаХЬХбвШ     F6"
+msgstr "РїСЂ&Р•РёРјРµРЅСѓС/РїСЂРµРјРµСЃС‚Рё     F6"
 
 msgid "&Mkdir              F7"
-msgstr "Э&°ЯаРТШ ФШаХЪвЮаШшгЬ   F7"
+msgstr "РЅ&РђРїСЂР°РІРё РґРёСЂРµРєС‚РѕСЂРёССѓРј   F7"
 
 msgid "&Delete             F8"
-msgstr "&ѕСаШиШ                 F8"
+msgstr "&РћР±СЂРёС€Рё                 F8"
 
 msgid "&Quick cd          M-c"
-msgstr "&±аЧР ЯаЮЬ.ФШа.        M-c"
+msgstr "&Р‘СЂР·Р° РїСЂРѕРј.РґРёСЂ.        M-c"
 
 msgid "select &Group      M-+"
-msgstr "ШЧРСХаШ &іагЯг         M-+"
+msgstr "РёР·Р°Р±РµСЂРё &Р“СЂСѓРїСѓ         M-+"
 
 msgid "u&Nselect group    M-\\"
-msgstr "Ю&ґШЧРСХаШ УагЯг       M-\\"
+msgstr "Рѕ&Р”РёР·Р°Р±РµСЂРё РіСЂСѓРїСѓ       M-\\"
 
 msgid "reverse selec&Tion M-*"
-msgstr "ЮСаЭШ ШЧ&±Юа           M-*"
+msgstr "РѕР±СЂРЅРё РёР·&Р‘РѕСЂ           M-*"
 
 msgid "e&Xit              F10"
-msgstr "Ш&·ЫРЧ                 F10"
+msgstr "Рё&Р—Р»Р°Р·                 F10"
 
 msgid "&User menu          F2"
-msgstr "&єЮаШбЭШзЪШ ЬХЭШ        F2"
+msgstr "&РљРѕСЂРёСЃРЅРёС‡РєРё РјРµРЅРё        F2"
 
 msgid "&Directory tree"
-msgstr "&БвРСЫЮ ФШаХЪвЮаШшгЬР"
+msgstr "&РЎС‚Р°Р±Р»Рѕ РґРёСЂРµРєС‚РѕСЂРёССѓРјР°"
 
 msgid "&Find file            M-?"
-msgstr "&ЅРтШ ФРвЮвХЪг              M-?"
+msgstr "&РќР°С’Рё РґР°С‚РѕС‚РµРєСѓ              M-?"
 
 msgid "s&Wap panels          C-u"
-msgstr "аРЧЬ&µЭШ ЮЪЭР               C-u"
+msgstr "СЂР°Р·Рј&Р•РЅРё РѕРєРЅР°               C-u"
 
 msgid "switch &Panels on/off C-o"
-msgstr "ШбЪщгзШ/гЪщгзШ &ѕЪЭР        C-o"
+msgstr "РёСЃРєС™СѓС‡Рё/СѓРєС™СѓС‡Рё &РћРєРЅР°        C-o"
 
 msgid "&Compare directories  C-x d"
-msgstr "г&їЮаХФШ ФШаХЪвЮаШшгЬХ     C-x d"
+msgstr "Сѓ&РџРѕСЂРµРґРё РґРёСЂРµРєС‚РѕСЂРёССѓРјРµ     C-x d"
 
 msgid "e&Xternal panelize    C-x !"
-msgstr "ЪаШвХаШ&ЁгЬ ЯЮЯгЭХ ЮЪЭР   C-x !"
+msgstr "РєСЂРёС‚РµСЂРё&Р€СѓРј РїРѕРїСѓРЅРµ РѕРєРЅР°   C-x !"
 
 msgid "show directory s&Izes"
-msgstr "ЯаШЪРЦШ ТХЫШ&ЗШЭХ ФШаХЪвЮаШшгЬР"
+msgstr "РїСЂРёРєР°Р¶Рё РІРµР»Рё&Р§РёРЅРµ РґРёСЂРµРєС‚РѕСЂРёССѓРјР°"
 
 #, fuzzy
 msgid "Command &history      M-h"
-msgstr " ёбвЮаШшР ЭРаХФСШ "
+msgstr " РСЃС‚РѕСЂРёСР° РЅР°СЂРµРґР±Рё "
 
 msgid "di&Rectory hotlist    C-\\"
-msgstr "СаЧШ б&їШбРЪ ФШаХЪвЮаШшгЬР  C-\\"
+msgstr "Р±СЂР·Рё СЃ&РџРёСЃР°Рє РґРёСЂРµРєС‚РѕСЂРёССѓРјР°  C-\\"
 
 msgid "&Active VFS list      C-x a"
-msgstr "бЯШбРЪ &°ЪвШТЭШе ІБґ      C-x a"
+msgstr "СЃРїРёСЃР°Рє &РђРєС‚РёРІРЅРёС… Р’РЎР”      C-x a"
 
 msgid "&Background jobs      C-x j"
-msgstr "&їЮЧРФШЭбЪШ ЯЮбЫЮТШ       C-x j"
+msgstr "&РџРѕР·Р°РґРёРЅСЃРєРё РїРѕСЃР»РѕРІРё       C-x j"
 
 msgid "&Undelete files (ext2fs only)"
-msgstr "&ѕФЮСаШиШ ФРвЮвХЪХ (бРЬЮ ЭР ext2fs)"
+msgstr "&РћРґРѕР±СЂРёС€Рё РґР°С‚РѕС‚РµРєРµ (СЃР°РјРѕ РЅР° ext2fs)"
 
 msgid "&Listing format edit"
-msgstr "&ГаХФШ дЮаЬРв бЯШбЪР"
+msgstr "&РЈСЂРµРґРё С„РѕСЂРјР°С‚ СЃРїРёСЃРєР°"
 
 msgid "Edit &extension file"
-msgstr "ГаХФШ ФРвЮвХЪг &ТабвР"
+msgstr "РЈСЂРµРґРё РґР°С‚РѕС‚РµРєСѓ &РІСЂСЃС‚Р°"
 
 msgid "Edit &menu file"
-msgstr "ГаХФШ ФРвЮвХЪг &ЬХЭШшР"
+msgstr "РЈСЂРµРґРё РґР°С‚РѕС‚РµРєСѓ &РјРµРЅРёСР°"
 
 msgid "&Configuration..."
-msgstr "&їЮФХиРТРъР..."
+msgstr "&РџРѕРґРµС€Р°РІР°СљР°..."
 
 msgid "&Layout..."
-msgstr "&ёЧУЫХФ..."
+msgstr "&РР·РіР»РµРґ..."
 
 msgid "c&Onfirmation..."
-msgstr "Я&ѕвТаФХ..."
+msgstr "Рї&РћС‚РІСЂРґРµ..."
 
 msgid "&Display bits..."
-msgstr "&±ШвЮТР г ЯаШЪРЧг..."
+msgstr "&Р‘РёС‚РѕРІР° Сѓ РїСЂРёРєР°Р·Сѓ..."
 
 msgid "learn &Keys..."
-msgstr "ЅРгзШ &вРбвХаХ..."
+msgstr "РќР°СѓС‡Рё &С‚Р°СЃС‚РµСЂРµ..."
 
 msgid "&Virtual FS..."
-msgstr "&ІШавгРЫЭШ Бґ..."
+msgstr "&Р’РёСЂС‚СѓР°Р»РЅРё РЎР”..."
 
 msgid "&Save setup"
-msgstr "&БРзгТРш ЯЮФХиРТРъР"
+msgstr "&РЎР°С‡СѓРІР°С РїРѕРґРµС€Р°РІР°СљР°"
 
 msgid " &Above "
-msgstr " &ёЧЭРФ "
+msgstr " &РР·РЅР°Рґ "
 
 msgid " &Left "
-msgstr " &»ХТЮ "
+msgstr " &Р›РµРІРѕ "
 
 msgid " &File "
-msgstr " &ґРвЮвХЪР "
+msgstr " &Р”Р°С‚РѕС‚РµРєР° "
 
 msgid " &Command "
-msgstr " &ЅРаХФСР "
+msgstr " &РќР°СЂРµРґР±Р° "
 
 msgid " &Options "
-msgstr " &ёЧСЮаШ "
+msgstr " &РР·Р±РѕСЂРё "
 
 msgid " &Below "
-msgstr " Ш&БЯЮФ "
+msgstr " Рё&РЎРїРѕРґ "
 
 msgid " &Right "
-msgstr " &ґХбЭЮ "
+msgstr " &Р”РµСЃРЅРѕ "
 
 msgid " Information "
-msgstr " ёЭдЮаЬРжШшХ "
+msgstr " РРЅС„РѕСЂРјР°С†РёСРµ "
 
 msgid ""
 " Using the fast reload option may not reflect the exact \n"
@@ -2422,16 +2431,16 @@ msgid ""
 " manual reload of the directory. See the man page for   \n"
 " the details.                                           "
 msgstr ""
-" БР гЪщгзХЭШЬ ШЧСЮаЮЬ ЧР СаЧЮ гзШвРТРъХ ЬЮЦФР бХ ЭХыХ    \n"
-" ЯаШЪРЧШТРвШ вРзРЭ бРФаЦРш ФШаХЪвЮаШшгЬР. ѕЭФР ыХвХ ЬЮЦФР\n"
-" ЬЮаРвШ ФР агзЭЮ ЮбТХЦРТРвХ ЯаШЪРЧ. їЮУЫХФРшвХ гЯгвбвТЮ  \n"
-" ЧР ФХвРщХ.                                              "
+" РЎР° СѓРєС™СѓС‡РµРЅРёРј РёР·Р±РѕСЂРѕРј Р·Р° Р±СЂР·Рѕ СѓС‡РёС‚Р°РІР°СљРµ РјРѕР¶РґР° СЃРµ РЅРµС›Рµ    \n"
+" РїСЂРёРєР°Р·РёРІР°С‚Рё С‚Р°С‡Р°РЅ СЃР°РґСЂР¶Р°С РґРёСЂРµРєС‚РѕСЂРёССѓРјР°. РћРЅРґР° С›РµС‚Рµ РјРѕР¶РґР°\n"
+" РјРѕСЂР°С‚Рё РґР° СЂСѓС‡РЅРѕ РѕСЃРІРµР¶Р°РІР°С‚Рµ РїСЂРёРєР°Р·. РџРѕРіР»РµРґР°СС‚Рµ СѓРїСѓС‚СЃС‚РІРѕ  \n"
+" Р·Р° РґРµС‚Р°С™Рµ.                                              "
 
 msgid "Menu"
-msgstr "јХЭШ"
+msgstr "РњРµРЅРё"
 
 msgid "The TERM environment variable is unset!\n"
-msgstr "їаЮЬХЭщШТР щгбЪХ `TERM' ЭШшХ ЯЮбвРТщХЭР!\n"
+msgstr "РџСЂРѕРјРµРЅС™РёРІР° С™СѓСЃРєРµ `TERM' РЅРёСРµ РїРѕСЃС‚Р°РІС™РµРЅР°!\n"
 
 msgid "&Fix it"
 msgstr ""
@@ -2451,16 +2460,16 @@ msgstr ""
 
 #, c-format
 msgid "GNU Midnight Commander %s\n"
-msgstr "іЅГ-ЮТ ЯЮЭЮыЭШ ЭРаХФЭШЪ %s\n"
+msgstr "Р“РќРЈ-РѕРІ РїРѕРЅРѕС›РЅРё РЅР°СЂРµРґРЅРёРє %s\n"
 
 msgid "[flags] [this_dir] [other_panel_dir]\n"
-msgstr "[ЯаХЪШФРзШ] [ЮТРш_ФШа] [ФШа_ФагУЮУ_ЮЪЭР]\n"
+msgstr "[РїСЂРµРєРёРґР°С‡Рё] [РѕРІР°С_РґРёСЂ] [РґРёСЂ_РґСЂСѓРіРѕРі_РѕРєРЅР°]\n"
 
 msgid "+number"
-msgstr "+СаЮш"
+msgstr "+Р±СЂРѕС"
 
 msgid "Set initial line number for the internal editor"
-msgstr "їЮбвРТШвХ СаЮш ЯЮзХвЭЮУ аХФР ЧР гУаРтХЭШ гаХтШТРз"
+msgstr "РџРѕСЃС‚Р°РІРёС‚Рµ Р±СЂРѕС РїРѕС‡РµС‚РЅРѕРі СЂРµРґР° Р·Р° СѓРіСЂР°С’РµРЅРё СѓСЂРµС’РёРІР°С‡"
 
 msgid ""
 "\n"
@@ -2468,8 +2477,8 @@ msgid ""
 "to mc-devel@gnome.org\n"
 msgstr ""
 "\n"
-"јЮЫШЬ ФР ЯЮиРщХвХ ЯаШшРТХ УаХиРЪР (гЪщгзШТиШ ШЧЫРЧ ЭРаХФСХ `mc -V')\n"
-"ЭР РФаХбг mc-devel@gnome.org\n"
+"РњРѕР»РёРј РґР° РїРѕС€Р°С™РµС‚Рµ РїСЂРёСР°РІРµ РіСЂРµС€Р°РєР° (СѓРєС™СѓС‡РёРІС€Рё РёР·Р»Р°Р· РЅР°СЂРµРґР±Рµ `mc -V')\n"
+"РЅР° Р°РґСЂРµСЃСѓ mc-devel@gnome.org\n"
 
 #, fuzzy
 msgid ""
@@ -2486,23 +2495,23 @@ msgid ""
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
-"--colors є©ГЗЅ° АµЗ={ёБїёБ},{їѕ·°ґ}\n"
+"--colors РљР‰РЈР§РќРђ Р Р•Р§={РРЎРџРРЎ},{РџРћР—РђР”}\n"
 "\n"
-"{ёБїёБ} Ш {їѕ·°ґ} бХ ЬЮУг ШЧЮбвРТШвШ Ш ЪЮаШбвШыХ бХ ЯЮФаРЧ. ТаХФЭЮбвШ\n"
+"{РРЎРџРРЎ} Рё {РџРћР—РђР”} СЃРµ РјРѕРіСѓ РёР·РѕСЃС‚Р°РІРёС‚Рё Рё РєРѕСЂРёСЃС‚РёС›Рµ СЃРµ РїРѕРґСЂР°Р·. РІСЂРµРґРЅРѕСЃС‚Рё\n"
 "\n"
-"єщгзЭХ аХзШ:\n"
-"   ѕЯивХ:       errors, reverse, gauge, input\n"
-"   їаШЪРЧ ФРв.: normal, selected, marked, markselect\n"
-"   ґШшРЫЮЧШ:    dnormal, dfocus, dhotnormal, dhotfocus\n"
-"   јХЭШшШ:      menu, menuhot, menusel, menuhotsel\n"
-"   їЮЬЮы:       helpnormal, helpitalic, helplink, helpslink\n"
-"   ІабвХ ФРв.:  directory, executable, link, stalelink, device, special, "
+"РљС™СѓС‡РЅРµ СЂРµС‡Рё:\n"
+"   РћРїС€С‚Рµ:       errors, reverse, gauge, input\n"
+"   РџСЂРёРєР°Р· РґР°С‚.: normal, selected, marked, markselect\n"
+"   Р”РёСР°Р»РѕР·Рё:    dnormal, dfocus, dhotnormal, dhotfocus\n"
+"   РњРµРЅРёСРё:      menu, menuhot, menusel, menuhotsel\n"
+"   РџРѕРјРѕС›:       helpnormal, helpitalic, helplink, helpslink\n"
+"   Р’СЂСЃС‚Рµ РґР°С‚.:  directory, executable, link, stalelink, device, special, "
 "core\n"
 "\n"
-"±ЮшХ:\n"
+"Р‘РѕСРµ:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
 "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray Ш white\n"
+"   brightcyan, lightgray Рё white\n"
 "\n"
 
 msgid ""
@@ -2518,286 +2527,286 @@ msgid ""
 msgstr ""
 
 msgid "Displays this help message"
-msgstr "їаШЪРЧгшХ ЮТг ЯЮагЪг ЯЮЬЮыШ"
+msgstr "РџСЂРёРєР°Р·СѓСРµ РѕРІСѓ РїРѕСЂСѓРєСѓ РїРѕРјРѕС›Рё"
 
 msgid "Displays the current version"
-msgstr "їаШЪРЧгшХ вХЪгыг ТХаЧШшг"
+msgstr "РџСЂРёРєР°Р·СѓСРµ С‚РµРєСѓС›Сѓ РІРµСЂР·РёССѓ"
 
 msgid "Forces xterm features"
-msgstr "·РевХТР ЮФЫШЪХ ёЪб вХаЬШЭРЫР"
+msgstr "Р—Р°С…С‚РµРІР° РѕРґР»РёРєРµ РРєСЃ С‚РµСЂРјРёРЅР°Р»Р°"
 
 msgid "Disable mouse support in text version"
-msgstr "ёбЪщгзШ ЯЮФаиЪг ЧР ЬШиР г вХЪбвгРЫЭЮш ТХаЧШшШ"
+msgstr "РСЃРєС™СѓС‡Рё РїРѕРґСЂС€РєСѓ Р·Р° РјРёС€Р° Сѓ С‚РµРєСЃС‚СѓР°Р»РЅРѕС РІРµСЂР·РёСРё"
 
 msgid "Tries to use termcap instead of terminfo"
-msgstr "їЮЪгиРТР ФР ЪЮаШбвШ termcap гЬХбвЮ terminfo-Р"
+msgstr "РџРѕРєСѓС€Р°РІР° РґР° РєРѕСЂРёСЃС‚Рё termcap СѓРјРµСЃС‚Рѕ terminfo-Р°"
 
 msgid "Resets soft keys on HP terminals"
-msgstr "їЮбвРТщР ЬХЪХ вРбвХаХ ЭР Еї-ЮТШЬ вХаЬШЭРЫШЬР"
+msgstr "РџРѕСЃС‚Р°РІС™Р° РјРµРєРµ С‚Р°СЃС‚РµСЂРµ РЅР° РҐРџ-РѕРІРёРј С‚РµСЂРјРёРЅР°Р»РёРјР°"
 
 msgid "To run on slow terminals"
-msgstr "їЮЪаХвРъХ ЭР бЯЮаЮЬ вХаЬШЭРЫг"
+msgstr "РџРѕРєСЂРµС‚Р°СљРµ РЅР° СЃРїРѕСЂРѕРј С‚РµСЂРјРёРЅР°Р»Сѓ"
 
 msgid "Use stickchars to draw"
-msgstr "єЮаШбвШ ЪТРЧШУаРдШзЪХ бШЬСЮЫХ ЧР жавРъХ"
+msgstr "РљРѕСЂРёСЃС‚Рё РєРІР°Р·РёРіСЂР°С„РёС‡РєРµ СЃРёРјР±РѕР»Рµ Р·Р° С†СЂС‚Р°СљРµ"
 
 msgid "Requests to run in black and white"
-msgstr "·РевХТР ЯЮЪаХвРъХ г аХЦШЬг СХЧ СЮшР"
+msgstr "Р—Р°С…С‚РµРІР° РїРѕРєСЂРµС‚Р°СљРµ Сѓ СЂРµР¶РёРјСѓ Р±РµР· Р±РѕСР°"
 
 msgid "Request to run in color mode"
-msgstr "·РевХТРъХ ЮСЮшХЭЮУ аХЦШЬР"
+msgstr "Р—Р°С…С‚РµРІР°СљРµ РѕР±РѕСРµРЅРѕРі СЂРµР¶РёРјР°"
 
 msgid "Specifies a color configuration"
-msgstr "їЮбвРТщР ЯЮФХиРТРъР СЮшР"
+msgstr "РџРѕСЃС‚Р°РІС™Р° РїРѕРґРµС€Р°РІР°СљР° Р±РѕСР°"
 
 msgid "Displays a help screen on how to change the color scheme"
-msgstr "їаШЪРЧгшХ ХЪаРЭ ЯЮЬЮыШ ЮЪЮ ЯаЮЬХЭХ иХЬХ СЮшР"
+msgstr "РџСЂРёРєР°Р·СѓСРµ РµРєСЂР°РЅ РїРѕРјРѕС›Рё РѕРєРѕ РїСЂРѕРјРµРЅРµ С€РµРјРµ Р±РѕСР°"
 
 msgid "Log ftp dialog to specified file"
-msgstr "±ХЫХЦШ бРФаЦРш ФШшРЫЮУР FTP-Р г ЧРФРЭг ФРвЮвХЪг"
+msgstr "Р‘РµР»РµР¶Рё СЃР°РґСЂР¶Р°С РґРёСР°Р»РѕРіР° FTP-Р° Сѓ Р·Р°РґР°РЅСѓ РґР°С‚РѕС‚РµРєСѓ"
 
 msgid "Set debug level"
-msgstr "їЮбвРТщРъХ ЭШТЮР ЯЮЯаРТщРъР"
+msgstr "РџРѕСЃС‚Р°РІС™Р°СљРµ РЅРёРІРѕР° РїРѕРїСЂР°РІС™Р°СљР°"
 
 msgid "Print data directory"
-msgstr "ИвРЬЯРш ФШаХЪвЮаШшгЬ бР ЯЮФРжШЬР"
+msgstr "РЁС‚Р°РјРїР°С РґРёСЂРµРєС‚РѕСЂРёССѓРј СЃР° РїРѕРґР°С†РёРјР°"
 
 msgid "Print last working directory to specified file"
-msgstr "ИвРЬЯРш ЯЮбЫХФъШ аРФЭШ ФШаХЪвЮаШшгЬ г ЧРФРЭг ФРвЮвХЪг"
+msgstr "РЁС‚Р°РјРїР°С РїРѕСЃР»РµРґСљРё СЂР°РґРЅРё РґРёСЂРµРєС‚РѕСЂРёССѓРј Сѓ Р·Р°РґР°РЅСѓ РґР°С‚РѕС‚РµРєСѓ"
 
 msgid "Enables subshell support (default)"
-msgstr "ГЪщгзгшХ ЯЮФаиЪг ЧР ЯЮФщгбЪХ (ЯЮФаРЧ.)"
+msgstr "РЈРєС™СѓС‡СѓСРµ РїРѕРґСЂС€РєСѓ Р·Р° РїРѕРґС™СѓСЃРєРµ (РїРѕРґСЂР°Р·.)"
 
 msgid "Disables subshell support"
-msgstr "ёбЪщгзгшХ ЯЮФаиЪг ЧР ЯЮФщгбЪХ"
+msgstr "РСЃРєС™СѓС‡СѓСРµ РїРѕРґСЂС€РєСѓ Р·Р° РїРѕРґС™СѓСЃРєРµ"
 
 msgid "Launches the file viewer on a file"
-msgstr "їЮЪаХыХ ЯаХУЫХФРз ФРвЮвХЪР ЭРФ ФРвЮвХЪЮЬ"
+msgstr "РџРѕРєСЂРµС›Рµ РїСЂРµРіР»РµРґР°С‡ РґР°С‚РѕС‚РµРєР° РЅР°Рґ РґР°С‚РѕС‚РµРєРѕРј"
 
 msgid "Edits one file"
-msgstr "ГаХтгшХ шХФЭг ФРвЮвХЪг"
+msgstr "РЈСЂРµС’СѓСРµ СРµРґРЅСѓ РґР°С‚РѕС‚РµРєСѓ"
 
 #, fuzzy, c-format
 msgid "Cannot create %s directory"
-msgstr "ЅХ ЬЮУг ФР ЯаЮЬХЭШЬ ФШаХЪвЮаШшгЬ"
+msgstr "РќРµ РјРѕРіСѓ РґР° РїСЂРѕРјРµРЅРёРј РґРёСЂРµРєС‚РѕСЂРёССѓРј"
 
 msgid "safe de&Lete"
-msgstr "СХЧСХФЭЮ С&АШбРъХ"
+msgstr "Р±РµР·Р±РµРґРЅРѕ Р±&Р РёСЃР°СљРµ"
 
 msgid "cd follows lin&Ks"
-msgstr "ЯаЮЬ.ФШа. ЯаРвШ &ІХЧХ"
+msgstr "РїСЂРѕРј.РґРёСЂ. РїСЂР°С‚Рё &Р’РµР·Рµ"
 
 msgid "L&ynx-like motion"
-msgstr "L&ynx-ЮЫШЪЮ ЪаХвРъХ"
+msgstr "L&ynx-РѕР»РёРєРѕ РєСЂРµС‚Р°СљРµ"
 
 msgid "rotatin&G dash"
-msgstr "аЮвШаРшгыР &ЖавР"
+msgstr "СЂРѕС‚РёСЂР°ССѓС›Р° &Р¦СЂС‚Р°"
 
 msgid "co&Mplete: show all"
-msgstr "ФЮ&їгЭР: ЯаШЪРЦШ бТХ"
+msgstr "РґРѕ&РџСѓРЅР°: РїСЂРёРєР°Р¶Рё СЃРІРµ"
 
 msgid "&Use internal view"
-msgstr "&єЮаШбвШ гУаРтХЭШ ЯаХУЫХФРз"
+msgstr "&РљРѕСЂРёСЃС‚Рё СѓРіСЂР°С’РµРЅРё РїСЂРµРіР»РµРґР°С‡"
 
 msgid "use internal ed&It"
-msgstr "ЪЮаШбвШ гУаРтХЭШ гаХт&ёТРз"
+msgstr "РєРѕСЂРёСЃС‚Рё СѓРіСЂР°С’РµРЅРё СѓСЂРµС’&РРІР°С‡"
 
 msgid "auto m&Enus"
-msgstr "РгвЮЬРвбЪШ &јХЭШшШ"
+msgstr "Р°СѓС‚РѕРјР°С‚СЃРєРё &РњРµРЅРёСРё"
 
 msgid "&Auto save setup"
-msgstr "&°гвЮЬРвбЪЮ згТРъХ ЯЮФХиРТРъР"
+msgstr "&РђСѓС‚РѕРјР°С‚СЃРєРѕ С‡СѓРІР°СљРµ РїРѕРґРµС€Р°РІР°СљР°"
 
 msgid "shell &Patterns"
-msgstr "&ѕСаРбжШ щгбЪХ"
+msgstr "&РћР±СЂР°СЃС†Рё С™СѓСЃРєРµ"
 
 msgid "Compute &Totals"
-msgstr "АРзгЭРш &ГЪгЯЭХ ЧСШаЮТХ"
+msgstr "Р Р°С‡СѓРЅР°С &РЈРєСѓРїРЅРµ Р·Р±РёСЂРѕРІРµ"
 
 msgid "&Verbose operation"
-msgstr "&±аСщШТШ аРФ"
+msgstr "&Р‘СЂР±С™РёРІРё СЂР°Рґ"
 
 msgid "Mkdir autoname"
 msgstr ""
 
 msgid "&Fast dir reload"
-msgstr "&±аЧЮ гзШвРТРъХ ФШаХЪвЮаШшгЬР"
+msgstr "&Р‘СЂР·Рѕ СѓС‡РёС‚Р°РІР°СљРµ РґРёСЂРµРєС‚РѕСЂРёССѓРјР°"
 
 msgid "mi&X all files"
-msgstr "&јХиРЭШ ЯаШЪРЧ"
+msgstr "&РњРµС€Р°РЅРё РїСЂРёРєР°Р·"
 
 msgid "&Drop down menus"
-msgstr "&їРФРшгыШ ЬХЭШшШ"
+msgstr "&РџР°РґР°ССѓС›Рё РјРµРЅРёСРё"
 
 msgid "ma&Rk moves down"
-msgstr "ЯЮбЫХ Ю&·ЭРЪХ ШФШ ФЮЫХ"
+msgstr "РїРѕСЃР»Рµ Рѕ&Р—РЅР°РєРµ РёРґРё РґРѕР»Рµ"
 
 msgid "show &Hidden files"
-msgstr "ЯаШЪРЦШ &БРЪаШТХЭХ ФРвЮвХЪХ"
+msgstr "РїСЂРёРєР°Р¶Рё &РЎР°РєСЂРёРІРµРЅРµ РґР°С‚РѕС‚РµРєРµ"
 
 msgid "show &Backup files"
-msgstr "ЯаШЪРЦШ &АХЧХаТЭХ ФРвЮвХЪХ"
+msgstr "РїСЂРёРєР°Р¶Рё &Р РµР·РµСЂРІРЅРµ РґР°С‚РѕС‚РµРєРµ"
 
 msgid "&Never"
-msgstr "&ЅШЪРФ"
+msgstr "&РќРёРєР°Рґ"
 
 msgid "on dumb &Terminals"
-msgstr "ЭР УЫгЯШЬ &ВХаЬШЭРЫШЬР"
+msgstr "РЅР° РіР»СѓРїРёРј &РўРµСЂРјРёРЅР°Р»РёРјР°"
 
 msgid "Alwa&ys"
-msgstr "&ГТХЪ"
+msgstr "&РЈРІРµРє"
 
 msgid " Panel options "
-msgstr " ёЧСЮаШ ЮЪЭР "
+msgstr " РР·Р±РѕСЂРё РѕРєРЅР° "
 
 msgid " Pause after run... "
-msgstr " їРгЧР ЯЮбЫХ ЯЮЪаХвРъР... "
+msgstr " РџР°СѓР·Р° РїРѕСЃР»Рµ РїРѕРєСЂРµС‚Р°СљР°... "
 
 msgid "Configure options"
-msgstr "їЮФХбШ ШЧСЮаХ"
+msgstr "РџРѕРґРµСЃРё РёР·Р±РѕСЂРµ"
 
 msgid "&Add new"
-msgstr "&ґЮФРш ЭЮТЮ"
+msgstr "&Р”РѕРґР°С РЅРѕРІРѕ"
 
 msgid "External panelize"
-msgstr "єаШвХаШшгЬ ЯЮЯгЭХ ЮЪЭР"
+msgstr "РљСЂРёС‚РµСЂРёССѓРј РїРѕРїСѓРЅРµ РѕРєРЅР°"
 
 msgid "Command"
-msgstr "ЅРаХФСР"
+msgstr "РќР°СЂРµРґР±Р°"
 
 msgid "Other command"
-msgstr "ґагУР ЭРаХФСР"
+msgstr "Р”СЂСѓРіР° РЅР°СЂРµРґР±Р°"
 
 msgid " Add to external panelize "
-msgstr " ґЮФРш г ЪаШвХаШшгЬХ ЯЮЯгЭХ "
+msgstr " Р”РѕРґР°С Сѓ РєСЂРёС‚РµСЂРёССѓРјРµ РїРѕРїСѓРЅРµ "
 
 msgid " Enter command label: "
-msgstr " ГЭХбШвХ ЭРвЯШб ЭРаХФСХ: "
+msgstr " РЈРЅРµСЃРёС‚Рµ РЅР°С‚РїРёСЃ РЅР°СЂРµРґР±Рµ: "
 
 msgid " Cannot run external panelize in a non-local directory "
-msgstr " ЅХ ЬЮУг ФР ШЧТаиШЬ ЪаШвХаШшгЬХ ЯЮЯгЭХ г ЭХ-ЫЮЪРЫЭШЬ ФШа. "
+msgstr " РќРµ РјРѕРіСѓ РґР° РёР·РІСЂС€РёРј РєСЂРёС‚РµСЂРёССѓРјРµ РїРѕРїСѓРЅРµ Сѓ РЅРµ-Р»РѕРєР°Р»РЅРёРј РґРёСЂ. "
 
 msgid "Find rejects after patching"
-msgstr "ЅРтШ ЮФСШшХЭХ ШбЯаРТЪХ ЯЮбЫХ ЪаЯщХъР"
+msgstr "РќР°С’Рё РѕРґР±РёСРµРЅРµ РёСЃРїСЂР°РІРєРµ РїРѕСЃР»Рµ РєСЂРїС™РµСљР°"
 
 msgid "Find *.orig after patching"
-msgstr "ЅРтШ *.orig ЯЮбЫХ ЪаЯщХъР"
+msgstr "РќР°С’Рё *.orig РїРѕСЃР»Рµ РєСЂРїС™РµСљР°"
 
 msgid "Find SUID and SGID programs"
-msgstr "ЅРтШ ЯаЮУаРЬХ бР ЯЮбвРТщХЭШЬ їєё± (SUID) Ш їіё± (SGID)"
+msgstr "РќР°С’Рё РїСЂРѕРіСЂР°РјРµ СЃР° РїРѕСЃС‚Р°РІС™РµРЅРёРј РџРљРР‘ (SUID) Рё РџР“РР‘ (SGID)"
 
 msgid "Cannot invoke command."
-msgstr "ЅХ ЬЮУг ФР ЯЮЪаХЭХЬ ЭРаХФСг."
+msgstr "РќРµ РјРѕРіСѓ РґР° РїРѕРєСЂРµРЅРµРј РЅР°СЂРµРґР±Сѓ."
 
 msgid "Pipe close failed"
-msgstr "·РвТРаРъХ жХТШ ЭШшХ гбЯХЫЮ"
+msgstr "Р—Р°С‚РІР°СЂР°СљРµ С†РµРІРё РЅРёСРµ СѓСЃРїРµР»Рѕ"
 
 msgid "missing argument"
-msgstr "ЭХФЮбвРшХ РаУгЬХЭв"
+msgstr "РЅРµРґРѕСЃС‚Р°СРµ Р°СЂРіСѓРјРµРЅС‚"
 
 msgid "unknown option"
-msgstr "ЭХЯЮЧЭРв ШЧСЮа"
+msgstr "РЅРµРїРѕР·РЅР°С‚ РёР·Р±РѕСЂ"
 
 msgid "invalid numeric value"
-msgstr "ЭХШбЯаРТЭР СаЮшХТЭР ТаХФЭЮбв"
+msgstr "РЅРµРёСЃРїСЂР°РІРЅР° Р±СЂРѕСРµРІРЅР° РІСЂРµРґРЅРѕСЃС‚"
 
 msgid "Show this help message"
-msgstr "їаШЪРЦШ ЮТг ЯЮагЪг ЯЮЬЮыШ"
+msgstr "РџСЂРёРєР°Р¶Рё РѕРІСѓ РїРѕСЂСѓРєСѓ РїРѕРјРѕС›Рё"
 
 msgid "Display brief usage message"
-msgstr "їаШЪРЦШ ЪаРвЪг ЯЮагЪг Ю гЯЮваХСШ"
+msgstr "РџСЂРёРєР°Р¶Рё РєСЂР°С‚РєСѓ РїРѕСЂСѓРєСѓ Рѕ СѓРїРѕС‚СЂРµР±Рё"
 
 msgid "ARG"
-msgstr "°Аі"
+msgstr "РђР Р“"
 
 #, c-format
 msgid "Usage:"
-msgstr "ГЯЮваХСР:"
+msgstr "РЈРїРѕС‚СЂРµР±Р°:"
 
 msgid "[dev]"
 msgstr ""
 
 msgid "UP--DIR"
-msgstr "Ѕ°ґ-ґёА"
+msgstr "РќРђР”-Р”РР "
 
 msgid "SYMLINK"
-msgstr "БёјІµ·°"
+msgstr "РЎРРњР’Р•Р—Рђ"
 
 msgid "SUB-DIR"
-msgstr "їѕґ-ґёА"
+msgstr "РџРћР”-Р”РР "
 
 msgid "Size"
-msgstr "ІХЫШзШЭР"
+msgstr "Р’РµР»РёС‡РёРЅР°"
 
 msgid "MTime"
-msgstr "ґРвёЧЬ"
+msgstr "Р”Р°С‚РР·Рј"
 
 msgid "ATime"
-msgstr "ґРвїаб"
+msgstr "Р”Р°С‚РџСЂСЃ"
 
 msgid "CTime"
-msgstr "ґРвїаЬ"
+msgstr "Р”Р°С‚РџСЂРј"
 
 msgid "Permission"
-msgstr "ґЮЧТЮЫХ"
+msgstr "Р”РѕР·РІРѕР»Рµ"
 
 msgid "Perm"
-msgstr "ґЮЧТ"
+msgstr "Р”РѕР·РІ"
 
-# ±аЮш ТХЧР
+# Р‘СЂРѕС РІРµР·Р°
 msgid "Nl"
-msgstr "±Т"
+msgstr "Р‘РІ"
 
 msgid "Inode"
-msgstr "ёзТЮа"
+msgstr "РС‡РІРѕСЂ"
 
 msgid "UID"
-msgstr "єё±"
+msgstr "РљРР‘"
 
 msgid "GID"
-msgstr "ё±і"
+msgstr "РР‘Р“"
 
 msgid "Owner"
-msgstr "ІЫРбЭШЪ"
+msgstr "Р’Р»Р°СЃРЅРёРє"
 
 msgid "Group"
-msgstr "іагЯР"
+msgstr "Р“СЂСѓРїР°"
 
 msgid "<readlink failed>"
-msgstr "<ЭХгбЯХиЭЮ зШвРъХ ТХЧХ>"
+msgstr "<РЅРµСѓСЃРїРµС€РЅРѕ С‡РёС‚Р°СљРµ РІРµР·Рµ>"
 
 #, fuzzy, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
-msgstr[0] "%s СРшвЮТР"
-msgstr[1] "%s СРшвЮТР"
+msgstr[0] "%s Р±Р°СС‚РѕРІР°"
+msgstr[1] "%s Р±Р°СС‚РѕРІР°"
 
 #, fuzzy, c-format
 msgid "%s in %d file"
 msgid_plural "%s in %d files"
-msgstr[0] "%s СРшвЮТР г %d ФРвЮвХжШ"
-msgstr[1] "%s СРшвЮТР г %d ФРвЮвХжШ"
+msgstr[0] "%s Р±Р°СС‚РѕРІР° Сѓ %d РґР°С‚РѕС‚РµС†Рё"
+msgstr[1] "%s Р±Р°СС‚РѕРІР° Сѓ %d РґР°С‚РѕС‚РµС†Рё"
 
 msgid "Unknown tag on display format: "
-msgstr "ЅХЯЮЧЭРвР ЮЧЭРЪР г дЮаЬРвг ЯаШЪРЧР: "
+msgstr "РќРµРїРѕР·РЅР°С‚Р° РѕР·РЅР°РєР° Сѓ С„РѕСЂРјР°С‚Сѓ РїСЂРёРєР°Р·Р°: "
 
 msgid "User supplied format looks invalid, reverting to default."
-msgstr "єЮаШбЭШзЪШ дЮаЬРв ЭХ ШЧУЫХФР ШбЯаРТЭЮ, ТаРыРЬ ЭР ЯЮФаРЧ."
+msgstr "РљРѕСЂРёСЃРЅРёС‡РєРё С„РѕСЂРјР°С‚ РЅРµ РёР·РіР»РµРґР° РёСЃРїСЂР°РІРЅРѕ, РІСЂР°С›Р°Рј РЅР° РїРѕРґСЂР°Р·."
 
 msgid " Do you really want to execute? "
-msgstr " ґР ЫШ ЧРШбвР ЦХЫШвХ ФР ШЧТаиШЬ? "
+msgstr " Р”Р° Р»Рё Р·Р°РёСЃС‚Р° Р¶РµР»РёС‚Рµ РґР° РёР·РІСЂС€РёРј? "
 
 msgid "View"
-msgstr "їаХУЫФ"
+msgstr "РџСЂРµРіР»Рґ"
 
 msgid "Edit"
-msgstr "ГаХФШ"
+msgstr "РЈСЂРµРґРё"
 
 msgid "RenMov"
-msgstr "їШЬїаЬ"
+msgstr "РџРёРјРџСЂРј"
 
 msgid "Mkdir"
-msgstr "ЅРЯґШа"
+msgstr "РќР°РїР”РёСЂ"
 
 msgid " Not implemented yet "
 msgstr ""
@@ -2807,14 +2816,14 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid " Invalid token number %d "
-msgstr " ЅХШбЯаРТЭР ЮФаХФШиЭР ЬРбЪР "
+msgstr " РќРµРёСЃРїСЂР°РІРЅР° РѕРґСЂРµРґРёС€РЅР° РјР°СЃРєР° "
 
 #, fuzzy
 msgid "Normal"
-msgstr "ДЮаЬРв"
+msgstr "Р¤РѕСЂРјР°С‚"
 
 msgid "&Regular expression"
-msgstr "&АХУгЫРаЭШ ШЧаРЧ"
+msgstr "&Р РµРіСѓР»Р°СЂРЅРё РёР·СЂР°Р·"
 
 msgid "Hexadecimal"
 msgstr ""
@@ -2824,174 +2833,174 @@ msgstr ""
 
 #, fuzzy
 msgid "Choose codepage"
-msgstr " ёЧРСХаШвХ ЪЮФЭг бваРЭг гЫРЧР "
+msgstr " РР·Р°Р±РµСЂРёС‚Рµ РєРѕРґРЅСѓ СЃС‚СЂР°РЅСѓ СѓР»Р°Р·Р° "
 
 msgid "-  < No translation >"
-msgstr "-  < ±ХЧ ЯаХвТРаРъР >"
+msgstr "-  < Р‘РµР· РїСЂРµС‚РІР°СЂР°СљР° >"
 
 #, c-format
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
 msgstr ""
-"ІХЫШзШЭР ХЪаРЭР %dx%d ЭШшХ ЯЮФаЦРЭР.\n"
-"їаЮТХаШвХ ЯаЮЬХЭщШТг щгбЪХ `TERM'.\n"
+"Р’РµР»РёС‡РёРЅР° РµРєСЂР°РЅР° %dx%d РЅРёСРµ РїРѕРґСЂР¶Р°РЅР°.\n"
+"РџСЂРѕРІРµСЂРёС‚Рµ РїСЂРѕРјРµРЅС™РёРІСѓ С™СѓСЃРєРµ `TERM'.\n"
 
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
-"іЅГ-ЮТ ЯЮЭЮыЭШ ЭРаХФЭШЪ шХ ТХы\n"
-"ЯЮЪаХЭгв ЭР ЮТЮЬ вХаЬШЭРЫг.\n"
-"їЮФаиЪР ЧР ЯЮФщгбЪХ ыХ СШвШ ШбЪщгзХЭР."
+"Р“РќРЈ-РѕРІ РїРѕРЅРѕС›РЅРё РЅР°СЂРµРґРЅРёРє СРµ РІРµС›\n"
+"РїРѕРєСЂРµРЅСѓС‚ РЅР° РѕРІРѕРј С‚РµСЂРјРёРЅР°Р»Сѓ.\n"
+"РџРѕРґСЂС€РєР° Р·Р° РїРѕРґС™СѓСЃРєРµ С›Рµ Р±РёС‚Рё РёСЃРєС™СѓС‡РµРЅР°."
 
 #, c-format
 msgid "Cannot open named pipe %s\n"
-msgstr "ЅХ ЬЮУг ФР ЮвТЮаШЬ ШЬХЭЮТРЭг жХТ %s\n"
+msgstr "РќРµ РјРѕРіСѓ РґР° РѕС‚РІРѕСЂРёРј РёРјРµРЅРѕРІР°РЅСѓ С†РµРІ %s\n"
 
 msgid " The shell is still active. Quit anyway? "
-msgstr " ©гбЪР шХ шЮи РЪвШТЭР. ¶ХЫШвХ ЫШ ФР ШЯРЪ ЧРТаиШЬ аРФ? "
+msgstr " Р‰СѓСЃРєР° СРµ СРѕС€ Р°РєС‚РёРІРЅР°. Р–РµР»РёС‚Рµ Р»Рё РґР° РёРїР°Рє Р·Р°РІСЂС€РёРј СЂР°Рґ? "
 
 #, c-format
 msgid "Warning: Cannot change to %s.\n"
-msgstr "ГЯЮЧЮаХъХ: ЅХ ЬЮУг ФР ШФХЬ ЭР %s.\n"
+msgstr "РЈРїРѕР·РѕСЂРµСљРµ: РќРµ РјРѕРіСѓ РґР° РёРґРµРј РЅР° %s.\n"
 
 msgid "With builtin Editor\n"
-msgstr "БР гУаРтХЭШЬ гаХтШТРзХЬ\n"
+msgstr "РЎР° СѓРіСЂР°С’РµРЅРёРј СѓСЂРµС’РёРІР°С‡РµРј\n"
 
 msgid "Using system-installed S-Lang library"
-msgstr "єЮаШбвШЬ бШбвХЬбЪг СШСЫШЮвХЪг S-Lang"
+msgstr "РљРѕСЂРёСЃС‚РёРј СЃРёСЃС‚РµРјСЃРєСѓ Р±РёР±Р»РёРѕС‚РµРєСѓ S-Lang"
 
 msgid "with terminfo database"
-msgstr "бР СРЧЮЬ terminfo"
+msgstr "СЃР° Р±Р°Р·РѕРј terminfo"
 
 msgid "Using the ncurses library"
-msgstr "єЮаШбвШЬ СШСЫШЮвХЪг ncurses"
+msgstr "РљРѕСЂРёСЃС‚РёРј Р±РёР±Р»РёРѕС‚РµРєСѓ ncurses"
 
 #, fuzzy
 msgid "Using the ncursesw library"
-msgstr "єЮаШбвШЬ СШСЫШЮвХЪг ncurses"
+msgstr "РљРѕСЂРёСЃС‚РёРј Р±РёР±Р»РёРѕС‚РµРєСѓ ncurses"
 
 msgid "With optional subshell support"
-msgstr "БР ЭХЮСРТХЧЭЮЬ ЯЮФаиЪЮЬ ЧР ЯЮФщгбЪХ"
+msgstr "РЎР° РЅРµРѕР±Р°РІРµР·РЅРѕРј РїРѕРґСЂС€РєРѕРј Р·Р° РїРѕРґС™СѓСЃРєРµ"
 
 msgid "With subshell support as default"
-msgstr "БР ЯЮФаРЧгЬХТРЭЮЬ ЯЮФаиЪЮЬ ЧР ЯЮФщгбЪХ"
+msgstr "РЎР° РїРѕРґСЂР°Р·СѓРјРµРІР°РЅРѕРј РїРѕРґСЂС€РєРѕРј Р·Р° РїРѕРґС™СѓСЃРєРµ"
 
 msgid "With support for background operations\n"
-msgstr "БР ЯЮФаиЪЮЬ ЧР ЯЮЧРФШЭбЪХ аРФъХ\n"
+msgstr "РЎР° РїРѕРґСЂС€РєРѕРј Р·Р° РїРѕР·Р°РґРёРЅСЃРєРµ СЂР°РґСљРµ\n"
 
 msgid "With mouse support on xterm and Linux console\n"
-msgstr "БР ЯЮФаиЪЮЬ ЧР ЬШиР г ёЪб вХаЬШЭРЫг Ш ЪЮЭЧЮЫШ\n"
+msgstr "РЎР° РїРѕРґСЂС€РєРѕРј Р·Р° РјРёС€Р° Сѓ РРєСЃ С‚РµСЂРјРёРЅР°Р»Сѓ Рё РєРѕРЅР·РѕР»Рё\n"
 
 msgid "With mouse support on xterm\n"
-msgstr "БР ЯЮФаиЪЮЬ ЧР ЬШиР г ёЪб вХаЬШЭРЫг\n"
+msgstr "РЎР° РїРѕРґСЂС€РєРѕРј Р·Р° РјРёС€Р° Сѓ РРєСЃ С‚РµСЂРјРёРЅР°Р»Сѓ\n"
 
 msgid "With support for X11 events\n"
-msgstr "БР ЯЮФаиЪЮЬ ЧР ФЮУРтРшХ ёЪбР 11\n"
+msgstr "РЎР° РїРѕРґСЂС€РєРѕРј Р·Р° РґРѕРіР°С’Р°СРµ РРєСЃР° 11\n"
 
 msgid "With internationalization support\n"
-msgstr "БР ЯЮФаиЪЮЬ ЧР ШЭвХаЭРжШЮЭРЫШЧРжШшг\n"
+msgstr "РЎР° РїРѕРґСЂС€РєРѕРј Р·Р° РёРЅС‚РµСЂРЅР°С†РёРѕРЅР°Р»РёР·Р°С†РёССѓ\n"
 
 msgid "With multiple codepages support\n"
-msgstr "БР ЯЮФаиЪЮЬ ЧР ТШиХ ЪЮФЭШе бваРЭР\n"
+msgstr "РЎР° РїРѕРґСЂС€РєРѕРј Р·Р° РІРёС€Рµ РєРѕРґРЅРёС… СЃС‚СЂР°РЅР°\n"
 
 #, c-format
 msgid "Virtual File System:"
-msgstr "ІШавгРЫЭШ бШбвХЬ ФРвЮвХЪР:"
+msgstr "Р’РёСЂС‚СѓР°Р»РЅРё СЃРёСЃС‚РµРј РґР°С‚РѕС‚РµРєР°:"
 
 #, c-format
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
 msgstr ""
-"ЅХ ЬЮУг ФР ЮвТЮаШЬ ФРвЮвХЪг %s ЧР гЯШб:\n"
+"РќРµ РјРѕРіСѓ РґР° РѕС‚РІРѕСЂРёРј РґР°С‚РѕС‚РµРєСѓ %s Р·Р° СѓРїРёСЃ:\n"
 "%s\n"
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
-msgstr "єЮЯШаРш ФШаХЪвЮаШшгЬ `%s' г:"
+msgstr "РљРѕРїРёСЂР°С РґРёСЂРµРєС‚РѕСЂРёССѓРј `%s' Сѓ:"
 
 #, c-format
 msgid "Move \"%s\" directory to:"
-msgstr "їаХЬХбвШ ФШаХЪвЮаШшгЬ `%s' г:"
+msgstr "РџСЂРµРјРµСЃС‚Рё РґРёСЂРµРєС‚РѕСЂРёССѓРј `%s' Сѓ:"
 
 #, c-format
 msgid ""
 " Cannot stat the destination \n"
 " %s "
 msgstr ""
-" ЅХ ЬЮУг ФР ШЧТаиШЬ `stat' ЭРФ ЮФаХФШивХЬ \n"
+" РќРµ РјРѕРіСѓ РґР° РёР·РІСЂС€РёРј `stat' РЅР°Рґ РѕРґСЂРµРґРёС€С‚РµРј \n"
 " %s "
 
 #, c-format
 msgid "  Delete %s?  "
-msgstr "  ¶ХЫШвХ ЫШ ФР ЮСаШиХЬ `%s'?  "
+msgstr "  Р–РµР»РёС‚Рµ Р»Рё РґР° РѕР±СЂРёС€РµРј `%s'?  "
 
 msgid "Static"
-msgstr "БвРвз."
+msgstr "РЎС‚Р°С‚С‡."
 
 msgid "Dynamc"
-msgstr "ґШЭЬз."
+msgstr "Р”РёРЅРјС‡."
 
 msgid "Rescan"
-msgstr "ѕбТХЦШ"
+msgstr "РћСЃРІРµР¶Рё"
 
 msgid "Forget"
-msgstr "·РСЮа."
+msgstr "Р—Р°Р±РѕСЂ."
 
 msgid "Rmdir"
-msgstr "±аґШа"
+msgstr "Р‘СЂР”РёСЂ"
 
 #, c-format
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
 msgstr ""
-"ЅХ ЬЮУг ФР ЯШиХЬ г ФРвЮвХЪг %s:\n"
+"РќРµ РјРѕРіСѓ РґР° РїРёС€РµРј Сѓ РґР°С‚РѕС‚РµРєСѓ %s:\n"
 "%s\n"
 
 msgid " Format error on file Extensions File "
-msgstr " іаХиЪР г дЮаЬРвг ФРвЮвХЪХ ґРвЮвХЪР ТабвР "
+msgstr " Р“СЂРµС€РєР° Сѓ С„РѕСЂРјР°С‚Сѓ РґР°С‚РѕС‚РµРєРµ Р”Р°С‚РѕС‚РµРєР° РІСЂСЃС‚Р° "
 
 #, c-format
 msgid " The %%var macro has no default "
-msgstr " јРЪаЮ %%var ЭХЬР ЯЮФаРЧгЬХТРЭг ТаХФЭЮбв "
+msgstr " РњР°РєСЂРѕ %%var РЅРµРјР° РїРѕРґСЂР°Р·СѓРјРµРІР°РЅСѓ РІСЂРµРґРЅРѕСЃС‚ "
 
 #, c-format
 msgid " The %%var macro has no variable "
-msgstr " јРЪаЮ %%var ЭХЬР ЯаЮЬХЭщШТг "
+msgstr " РњР°РєСЂРѕ %%var РЅРµРјР° РїСЂРѕРјРµРЅС™РёРІСѓ "
 
 msgid " Debug "
-msgstr " їЮЯаРТщРъХ "
+msgstr " РџРѕРїСЂР°РІС™Р°СљРµ "
 
 msgid " ERROR: "
-msgstr " іАµИє°: "
+msgstr " Р“Р Р•РЁРљРђ: "
 
 msgid " True:  "
-msgstr " ВРзЭЮ:    "
+msgstr " РўР°С‡РЅРѕ:    "
 
 msgid " False: "
-msgstr " їЮУаХиЭЮ: "
+msgstr " РџРѕРіСЂРµС€РЅРѕ: "
 
 msgid " Warning -- ignoring file "
-msgstr " ГЯЮЧЮаХъХ - ЧРЮСШЫРЧШЬ ФРвЮвХЪг "
+msgstr " РЈРїРѕР·РѕСЂРµСљРµ - Р·Р°РѕР±РёР»Р°Р·РёРј РґР°С‚РѕС‚РµРєСѓ "
 
 #, c-format
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
 msgstr ""
-"ґРвЮвХЪг %s ЭХ ЯЮбХФгшХ ЭШ РФЬШЭШбваРвЮа ЭШ ТШ, Р ЭШшХ ЭШ\n"
-"зШвщШТР ЧР бТХв. ЄХЭР гЯЮваХСР ЬЮЦХ ФР гУаЮЧШ ТРиг СХЧСХФЭЮбв"
+"Р”Р°С‚РѕС‚РµРєСѓ %s РЅРµ РїРѕСЃРµРґСѓСРµ РЅРё Р°РґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂ РЅРё РІРё, Р° РЅРёСРµ РЅРё\n"
+"С‡РёС‚С™РёРІР° Р·Р° СЃРІРµС‚. РЉРµРЅР° СѓРїРѕС‚СЂРµР±Р° РјРѕР¶Рµ РґР° СѓРіСЂРѕР·Рё РІР°С€Сѓ Р±РµР·Р±РµРґРЅРѕСЃС‚"
 
 #, c-format
 msgid " No suitable entries found in %s "
-msgstr " їаШЪЫРФЭХ бвРТЪХ ЭШбг ЭРтХЭХ г %s "
+msgstr " РџСЂРёРєР»Р°РґРЅРµ СЃС‚Р°РІРєРµ РЅРёСЃСѓ РЅР°С’РµРЅРµ Сѓ %s "
 
 msgid " User menu "
-msgstr " єЮаШбЭШзЪШ ЬХЭШ "
+msgstr " РљРѕСЂРёСЃРЅРёС‡РєРё РјРµРЅРё "
 
 #, fuzzy
 msgid "%b %d %H:%M"
@@ -3009,47 +3018,47 @@ msgstr "%b %e %H:%M"
 
 #, c-format
 msgid "%s is not a directory\n"
-msgstr "%s ЭШшХ ФШаХЪвЮаШшгЬ\n"
+msgstr "%s РЅРёСРµ РґРёСЂРµРєС‚РѕСЂРёССѓРј\n"
 
 #, c-format
 msgid "Directory %s is not owned by you\n"
-msgstr "ЅХ ЯЮбХФгшХвХ ФШаХЪвЮаШшгЬ %s\n"
+msgstr "РќРµ РїРѕСЃРµРґСѓСРµС‚Рµ РґРёСЂРµРєС‚РѕСЂРёССѓРј %s\n"
 
 #, c-format
 msgid "Cannot set correct permissions for directory %s\n"
-msgstr "ЅХ ЬЮУг ФР ЯЮбвРТШЬ ШбЯаРТЭХ ФЮЧТЮЫХ ЧР ФШаХЪвЮаШшгЬ %s\n"
+msgstr "РќРµ РјРѕРіСѓ РґР° РїРѕСЃС‚Р°РІРёРј РёСЃРїСЂР°РІРЅРµ РґРѕР·РІРѕР»Рµ Р·Р° РґРёСЂРµРєС‚РѕСЂРёССѓРј %s\n"
 
 #, c-format
 msgid "Cannot create temporary directory %s: %s\n"
-msgstr "ЅХ ЬЮУг ФР бвТЮаШЬ ЯаШТаХЬХЭШ ФШаХЪвЮаШшгЬ %s: %s\n"
+msgstr "РќРµ РјРѕРіСѓ РґР° СЃС‚РІРѕСЂРёРј РїСЂРёРІСЂРµРјРµРЅРё РґРёСЂРµРєС‚РѕСЂРёССѓРј %s: %s\n"
 
 #, c-format
 msgid "Temporary files will be created in %s\n"
-msgstr "їаШТаХЬХЭХ ФРвЮвХЪХ ыХ СШвШ бвТРаРЭХ г %s\n"
+msgstr "РџСЂРёРІСЂРµРјРµРЅРµ РґР°С‚РѕС‚РµРєРµ С›Рµ Р±РёС‚Рё СЃС‚РІР°СЂР°РЅРµ Сѓ %s\n"
 
 #, c-format
 msgid "Temporary files will not be created\n"
-msgstr "їаШТаХЬХЭХ ФРвЮвХЪХ ЭХыХ СШвШ бвТРаРЭХ\n"
+msgstr "РџСЂРёРІСЂРµРјРµРЅРµ РґР°С‚РѕС‚РµРєРµ РЅРµС›Рµ Р±РёС‚Рё СЃС‚РІР°СЂР°РЅРµ\n"
 
 msgid " Pipe failed "
-msgstr " ЖХТ ЭШшХ гбЯХЫР "
+msgstr " Р¦РµРІ РЅРёСРµ СѓСЃРїРµР»Р° "
 
 msgid " Dup failed "
-msgstr " їЮЧШТ `dup' ЭШшХ гбЯХЮ "
+msgstr " РџРѕР·РёРІ `dup' РЅРёСРµ СѓСЃРїРµРѕ "
 
 #, fuzzy
 msgid " Cannot spawn child process "
-msgstr " ЅХ ЬЮУг ФР бвТЮаШЬ ФХвХ-ЯаЮУаРЬ "
+msgstr " РќРµ РјРѕРіСѓ РґР° СЃС‚РІРѕСЂРёРј РґРµС‚Рµ-РїСЂРѕРіСЂР°Рј "
 
 msgid "Empty output from child filter"
-msgstr "ґХвХ-дШЫвРа ЭШшХ ШбЯШбРЫЮ ЭШивР"
+msgstr "Р”РµС‚Рµ-С„РёР»С‚Р°СЂ РЅРёСРµ РёСЃРїРёСЃР°Р»Рѕ РЅРёС€С‚Р°"
 
 #, c-format
 msgid ""
 " Cannot open \"%s\"\n"
 " %s "
 msgstr ""
-" ЅХ ЬЮУг ФР ЮвТЮаШЬ `%s'\n"
+" РќРµ РјРѕРіСѓ РґР° РѕС‚РІРѕСЂРёРј `%s'\n"
 " %s "
 
 #, c-format
@@ -3057,19 +3066,19 @@ msgid ""
 " Cannot stat \"%s\"\n"
 " %s "
 msgstr ""
-" ЅХ ЬЮУг ФР ШЧТаиШЬ `stat' ЭРФ \"%s\"\n"
+" РќРµ РјРѕРіСѓ РґР° РёР·РІСЂС€РёРј `stat' РЅР°Рґ \"%s\"\n"
 " %s "
 
 msgid " Cannot view: not a regular file "
-msgstr " ЅХ ЬЮУг ФР ЯаХУЫХФРЬ: ФРвЮвХЪР ЭШшХ ЮСШзЭР "
+msgstr " РќРµ РјРѕРіСѓ РґР° РїСЂРµРіР»РµРґР°Рј: РґР°С‚РѕС‚РµРєР° РЅРёСРµ РѕР±РёС‡РЅР° "
 
 #, c-format
 msgid "File: %s"
-msgstr "ґРвЮвХЪР: %s"
+msgstr "Р”Р°С‚РѕС‚РµРєР°: %s"
 
 #, c-format
 msgid "Offset 0x%08lx"
-msgstr "їЮЬХаРш 0x%08lx"
+msgstr "РџРѕРјРµСЂР°С 0x%08lx"
 
 #, c-format
 msgid "Line %lu Col %lu"
@@ -3077,11 +3086,11 @@ msgstr ""
 
 #, c-format
 msgid "%s bytes"
-msgstr "%s СРшвЮТР"
+msgstr "%s Р±Р°СС‚РѕРІР°"
 
 #, fuzzy, c-format
 msgid ">= %s bytes"
-msgstr "%s СРшвЮТР"
+msgstr "%s Р±Р°СС‚РѕРІР°"
 
 #, c-format
 msgid ""
@@ -3094,28 +3103,31 @@ msgstr ""
 msgid ""
 " Cannot save file: \n"
 " %s "
-msgstr " ЅХ ЬЮУг ФР бРзгТРЬ ФРвЮвХЪг. "
+msgstr " РќРµ РјРѕРіСѓ РґР° СЃР°С‡СѓРІР°Рј РґР°С‚РѕС‚РµРєСѓ. "
 
 #, fuzzy, c-format
 msgid ""
 " The current line number is %lu.\n"
 " Enter the new line number:"
 msgstr ""
-" ±аЮш вХЪгыХУ аХФР шХ %d.\n"
-" ГЭХбШвХ ЭЮТШ СаЮш аХФР:"
+" Р‘СЂРѕС С‚РµРєСѓС›РµРі СЂРµРґР° СРµ %d.\n"
+" РЈРЅРµСЃРёС‚Рµ РЅРѕРІРё Р±СЂРѕС СЂРµРґР°:"
 
 #, fuzzy
 msgid " The current address is 0x%08"
 msgstr ""
-" ВХЪгыР РФаХбР шХ 0x%lx.\n"
-" ГЭХбШвХ ЭЮТг РФаХбг:"
+" РўРµРєСѓС›Р° Р°РґСЂРµСЃР° СРµ 0x%lx.\n"
+" РЈРЅРµСЃРёС‚Рµ РЅРѕРІСѓ Р°РґСЂРµСЃСѓ:"
 
 msgid " Goto Address "
-msgstr " ёФШ ЭР РФаХбг "
+msgstr " РРґРё РЅР° Р°РґСЂРµСЃСѓ "
 
 #, fuzzy
 msgid " Invalid address "
-msgstr " ЅХШбЯаРТЭР ЫЮЧШЭЪР "
+msgstr " РќРµРёСЃРїСЂР°РІРЅР° Р»РѕР·РёРЅРєР° "
+
+msgid "Seeking to search result"
+msgstr ""
 
 msgid "ButtonBar|Help"
 msgstr ""
@@ -3133,161 +3145,161 @@ msgid "ButtonBar|Save"
 msgstr ""
 
 msgid " History "
-msgstr " ёбвЮаШшР "
+msgstr " РСЃС‚РѕСЂРёСР° "
 
 msgid "Function key 1"
-msgstr "ДгЭЪж. вРбвХа 1"
+msgstr "Р¤СѓРЅРєС†. С‚Р°СЃС‚РµСЂ 1"
 
 msgid "Function key 2"
-msgstr "ДгЭЪж. вРбвХа 2"
+msgstr "Р¤СѓРЅРєС†. С‚Р°СЃС‚РµСЂ 2"
 
 msgid "Function key 3"
-msgstr "ДгЭЪж. вРбвХа 3"
+msgstr "Р¤СѓРЅРєС†. С‚Р°СЃС‚РµСЂ 3"
 
 msgid "Function key 4"
-msgstr "ДгЭЪж. вРбвХа 4"
+msgstr "Р¤СѓРЅРєС†. С‚Р°СЃС‚РµСЂ 4"
 
 msgid "Function key 5"
-msgstr "ДгЭЪж. вРбвХа 5"
+msgstr "Р¤СѓРЅРєС†. С‚Р°СЃС‚РµСЂ 5"
 
 msgid "Function key 6"
-msgstr "ДгЭЪж. вРбвХа 6"
+msgstr "Р¤СѓРЅРєС†. С‚Р°СЃС‚РµСЂ 6"
 
 msgid "Function key 7"
-msgstr "ДгЭЪж. вРбвХа 7"
+msgstr "Р¤СѓРЅРєС†. С‚Р°СЃС‚РµСЂ 7"
 
 msgid "Function key 8"
-msgstr "ДгЭЪж. вРбвХа 8"
+msgstr "Р¤СѓРЅРєС†. С‚Р°СЃС‚РµСЂ 8"
 
 msgid "Function key 9"
-msgstr "ДгЭЪж. вРбвХа 9"
+msgstr "Р¤СѓРЅРєС†. С‚Р°СЃС‚РµСЂ 9"
 
 msgid "Function key 10"
-msgstr "ДгЭЪж. вРбвХа 10"
+msgstr "Р¤СѓРЅРєС†. С‚Р°СЃС‚РµСЂ 10"
 
 msgid "Function key 11"
-msgstr "ДгЭЪж. вРбвХа 11"
+msgstr "Р¤СѓРЅРєС†. С‚Р°СЃС‚РµСЂ 11"
 
 msgid "Function key 12"
-msgstr "ДгЭЪж. вРбвХа 12"
+msgstr "Р¤СѓРЅРєС†. С‚Р°СЃС‚РµСЂ 12"
 
 msgid "Function key 13"
-msgstr "ДгЭЪж. вРбвХа 13"
+msgstr "Р¤СѓРЅРєС†. С‚Р°СЃС‚РµСЂ 13"
 
 msgid "Function key 14"
-msgstr "ДгЭЪж. вРбвХа 14"
+msgstr "Р¤СѓРЅРєС†. С‚Р°СЃС‚РµСЂ 14"
 
 msgid "Function key 15"
-msgstr "ДгЭЪж. вРбвХа 15"
+msgstr "Р¤СѓРЅРєС†. С‚Р°СЃС‚РµСЂ 15"
 
 msgid "Function key 16"
-msgstr "ДгЭЪж. вРбвХа 16"
+msgstr "Р¤СѓРЅРєС†. С‚Р°СЃС‚РµСЂ 16"
 
 msgid "Function key 17"
-msgstr "ДгЭЪж. вРбвХа 17"
+msgstr "Р¤СѓРЅРєС†. С‚Р°СЃС‚РµСЂ 17"
 
 msgid "Function key 18"
-msgstr "ДгЭЪж. вРбвХа 18"
+msgstr "Р¤СѓРЅРєС†. С‚Р°СЃС‚РµСЂ 18"
 
 msgid "Function key 19"
-msgstr "ДгЭЪж. вРбвХа 19"
+msgstr "Р¤СѓРЅРєС†. С‚Р°СЃС‚РµСЂ 19"
 
 msgid "Function key 20"
-msgstr "ДгЭЪж. вРбвХа 20"
+msgstr "Р¤СѓРЅРєС†. С‚Р°СЃС‚РµСЂ 20"
 
 msgid "Backspace key"
-msgstr "ВРбв. `Backspace'"
+msgstr "РўР°СЃС‚. `Backspace'"
 
 msgid "End key"
-msgstr "ВРбв. `End'"
+msgstr "РўР°СЃС‚. `End'"
 
 msgid "Up arrow key"
-msgstr "БваХЫШжР ЭРУЮаХ"
+msgstr "РЎС‚СЂРµР»РёС†Р° РЅР°РіРѕСЂРµ"
 
 msgid "Down arrow key"
-msgstr "БваХЫШжР ЭРФЮЫХ"
+msgstr "РЎС‚СЂРµР»РёС†Р° РЅР°РґРѕР»Рµ"
 
 msgid "Left arrow key"
-msgstr "БваХЫШжР ЭРЫХТЮ"
+msgstr "РЎС‚СЂРµР»РёС†Р° РЅР°Р»РµРІРѕ"
 
 msgid "Right arrow key"
-msgstr "БваХЫШжР ЭРФХбЭЮ"
+msgstr "РЎС‚СЂРµР»РёС†Р° РЅР°РґРµСЃРЅРѕ"
 
 msgid "Home key"
-msgstr "ВРбв. `Home'"
+msgstr "РўР°СЃС‚. `Home'"
 
 msgid "Page Down key"
-msgstr "ВРбв. `Page Up'"
+msgstr "РўР°СЃС‚. `Page Up'"
 
 msgid "Page Up key"
-msgstr "ВРбв. `Page Down'"
+msgstr "РўР°СЃС‚. `Page Down'"
 
 msgid "Insert key"
-msgstr "ВРбв. `Insert'"
+msgstr "РўР°СЃС‚. `Insert'"
 
 msgid "Delete key"
-msgstr "ВРбв. `Delete'"
+msgstr "РўР°СЃС‚. `Delete'"
 
 msgid "Completion/M-tab"
-msgstr "ґЮЯгЭР/M-tab"
+msgstr "Р”РѕРїСѓРЅР°/M-tab"
 
 msgid "+ on keypad"
-msgstr "БШТШ +"
+msgstr "РЎРёРІРё +"
 
 msgid "- on keypad"
-msgstr "БШТШ -"
+msgstr "РЎРёРІРё -"
 
 msgid "* on keypad"
-msgstr "БШТШ *"
+msgstr "РЎРёРІРё *"
 
 msgid "Left arrow keypad"
-msgstr "БШТР бваХЫ. ЭРЫХТЮ"
+msgstr "РЎРёРІР° СЃС‚СЂРµР». РЅР°Р»РµРІРѕ"
 
 msgid "Right arrow keypad"
-msgstr "БШТР бваХЫ. ЭРФХбЭЮ"
+msgstr "РЎРёРІР° СЃС‚СЂРµР». РЅР°РґРµСЃРЅРѕ"
 
 msgid "Up arrow keypad"
-msgstr "БШТР бваХЫ. ЭРУЮаХ"
+msgstr "РЎРёРІР° СЃС‚СЂРµР». РЅР°РіРѕСЂРµ"
 
 msgid "Down arrow keypad"
-msgstr "БШТР бваХЫ. ЭРФЮЫХ"
+msgstr "РЎРёРІР° СЃС‚СЂРµР». РЅР°РґРѕР»Рµ"
 
 msgid "Home on keypad"
-msgstr "БШТШ `Home'"
+msgstr "РЎРёРІРё `Home'"
 
 msgid "End on keypad"
-msgstr "БШТШ `End'"
+msgstr "РЎРёРІРё `End'"
 
 msgid "Page Down keypad"
-msgstr "БШТШ `Page Down'"
+msgstr "РЎРёРІРё `Page Down'"
 
 msgid "Page Up keypad"
-msgstr "БШТШ `Page Up'"
+msgstr "РЎРёРІРё `Page Up'"
 
 msgid "Insert on keypad"
-msgstr "БШТШ `Insert'"
+msgstr "РЎРёРІРё `Insert'"
 
 msgid "Delete on keypad"
-msgstr "БШТШ `Delete'"
+msgstr "РЎРёРІРё `Delete'"
 
 msgid "Enter on keypad"
-msgstr "БШТШ `Enter'"
+msgstr "РЎРёРІРё `Enter'"
 
 msgid "Slash on keypad"
-msgstr "БШТШ /"
+msgstr "РЎРёРІРё /"
 
 msgid "NumLock on keypad"
-msgstr "БШТШ `NumLock'"
+msgstr "РЎРёРІРё `NumLock'"
 
 msgid "Background process:"
-msgstr "їЮЧРФШЭбЪШ ЯаЮжХб:"
+msgstr "РџРѕР·Р°РґРёРЅСЃРєРё РїСЂРѕС†РµСЃ:"
 
 #, c-format
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
 msgstr ""
-"ЅХ ЬЮУг ФР ЮвТЮаШЬ РаеШТг ТабвХ `cpio'\n"
+"РќРµ РјРѕРіСѓ РґР° РѕС‚РІРѕСЂРёРј Р°СЂС…РёРІСѓ РІСЂСЃС‚Рµ `cpio'\n"
 "%s"
 
 #, c-format
@@ -3295,7 +3307,7 @@ msgid ""
 "Premature end of cpio archive\n"
 "%s"
 msgstr ""
-"їаХаРЭШ ЧРТаиХвРЪ РаеШТХ ТабвХ `cpio'\n"
+"РџСЂРµСЂР°РЅРё Р·Р°РІСЂС€РµС‚Р°Рє Р°СЂС…РёРІРµ РІСЂСЃС‚Рµ `cpio'\n"
 "%s"
 
 #, c-format
@@ -3303,7 +3315,7 @@ msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
 msgstr ""
-"їЮЪТРаХЭЮ ЧРУЫРТщХ РаеШТХ ТабвХ `cpio' г\n"
+"РџРѕРєРІР°СЂРµРЅРѕ Р·Р°РіР»Р°РІС™Рµ Р°СЂС…РёРІРµ РІСЂСЃС‚Рµ `cpio' Сѓ\n"
 "%s"
 
 #, c-format
@@ -3313,256 +3325,256 @@ msgid ""
 "in cpio archive\n"
 "%s"
 msgstr ""
-"ЅХФЮбЫХФЭХ вТаФХ ТХЧХ\n"
+"РќРµРґРѕСЃР»РµРґРЅРµ С‚РІСЂРґРµ РІРµР·Рµ\n"
 "%s\n"
-"г РаеШТШ ТабвХ `cpio'\n"
+"Сѓ Р°СЂС…РёРІРё РІСЂСЃС‚Рµ `cpio'\n"
 "%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
-msgstr "%s бРФаЦШ ФТЮбвагЪХ бвРТЪХ! ·РЮСШЫРЧШЬ!"
+msgstr "%s СЃР°РґСЂР¶Рё РґРІРѕСЃС‚СЂСѓРєРµ СЃС‚Р°РІРєРµ! Р—Р°РѕР±РёР»Р°Р·РёРј!"
 
 #, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
 msgstr ""
-"ЅХЮзХЪШТРЭШ ЧРТаиХвРЪ ФРвЮвХЪХ\n"
+"РќРµРѕС‡РµРєРёРІР°РЅРё Р·Р°РІСЂС€РµС‚Р°Рє РґР°С‚РѕС‚РµРєРµ\n"
 "%s"
 
 #, c-format
 msgid "Directory cache expired for %s"
-msgstr "ѕбвРТР ФШаХЪвЮаШшгЬР шХ ШбвХЪЫР ЧР %s"
+msgstr "РћСЃС‚Р°РІР° РґРёСЂРµРєС‚РѕСЂРёССѓРјР° СРµ РёСЃС‚РµРєР»Р° Р·Р° %s"
 
 msgid "Starting linear transfer..."
-msgstr "їЮЪаХыХЬ ЫШЭХРаЭШ ЯаХЭЮб..."
+msgstr "РџРѕРєСЂРµС›РµРј Р»РёРЅРµР°СЂРЅРё РїСЂРµРЅРѕСЃ..."
 
 #, c-format
 msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
-msgstr "%s: %s: %s %3d%% (ЯаХЭХбХЭЮ %lu СРшвЮТР)"
+msgstr "%s: %s: %s %3d%% (РїСЂРµРЅРµСЃРµРЅРѕ %lu Р±Р°СС‚РѕРІР°)"
 
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
-msgstr "%s: %s: %s ЯаХЭХбХЭЮ %lu СРшвЮТР"
+msgstr "%s: %s: %s РїСЂРµРЅРµСЃРµРЅРѕ %lu Р±Р°СС‚РѕРІР°"
 
 msgid "Getting file"
-msgstr "ґЮСРТщРЬ ФРвЮвХЪг"
+msgstr "Р”РѕР±Р°РІС™Р°Рј РґР°С‚РѕС‚РµРєСѓ"
 
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
 msgstr ""
-"ЅХ ЬЮУг ФР ЮвТЮаШЬ РаеШТг ТабвХ `%s'\n"
+"РќРµ РјРѕРіСѓ РґР° РѕС‚РІРѕСЂРёРј Р°СЂС…РёРІСѓ РІСЂСЃС‚Рµ `%s'\n"
 "%s"
 
 msgid "Inconsistent extfs archive"
-msgstr "ЅХФЮбЫХФЭР РаеШТР extfs"
+msgstr "РќРµРґРѕСЃР»РµРґРЅР° Р°СЂС…РёРІР° extfs"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
-msgstr "fish: їаХЪШФРЬ ЯЮТХЧШТРъХ бР %s"
+msgstr "fish: РџСЂРµРєРёРґР°Рј РїРѕРІРµР·РёРІР°СљРµ СЃР° %s"
 
 msgid "fish: Waiting for initial line..."
-msgstr "fish: ЗХЪРЬ ЯЮзХвЭШ аХФ..."
+msgstr "fish: Р§РµРєР°Рј РїРѕС‡РµС‚РЅРё СЂРµРґ..."
 
 msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr "ёЧТШЭШвХ, РЫШ ЧР бРФ ЭХ ЬЮЦХЬЮ ФР бХ ЯЮТХЧгшХЬЮ гЧ ЯЮвТаФг ЫЮЧШЭЪХ."
+msgstr "РР·РІРёРЅРёС‚Рµ, Р°Р»Рё Р·Р° СЃР°Рґ РЅРµ РјРѕР¶РµРјРѕ РґР° СЃРµ РїРѕРІРµР·СѓСРµРјРѕ СѓР· РїРѕС‚РІСЂРґСѓ Р»РѕР·РёРЅРєРµ."
 
 msgid " fish: Password required for "
-msgstr " fish: ЅХЮЯеЮФЭР шХ ЫЮЧШЭЪР ЧР "
+msgstr " fish: РќРµРѕРїС…РѕРґРЅР° СРµ Р»РѕР·РёРЅРєР° Р·Р° "
 
 msgid "fish: Sending password..."
-msgstr "fish: ИРщХЬ ЫЮЧШЭЪг..."
+msgstr "fish: РЁР°С™РµРј Р»РѕР·РёРЅРєСѓ..."
 
 msgid "fish: Sending initial line..."
-msgstr "fish: ИРщХЬ ЯЮзХвЭШ аХФ..."
+msgstr "fish: РЁР°С™РµРј РїРѕС‡РµС‚РЅРё СЂРµРґ..."
 
 msgid "fish: Handshaking version..."
-msgstr "fish: їаХУЮТРаРЬ Ю ТХаЧШшШ..."
+msgstr "fish: РџСЂРµРіРѕРІР°СЂР°Рј Рѕ РІРµСЂР·РёСРё..."
 
 msgid "fish: Setting up current directory..."
-msgstr "fish: їЮбвРТщРЬ вХЪгыШ ФШаХЪвЮаШшгЬ..."
+msgstr "fish: РџРѕСЃС‚Р°РІС™Р°Рј С‚РµРєСѓС›Рё РґРёСЂРµРєС‚РѕСЂРёССѓРј..."
 
 #, c-format
 msgid "fish: Connected, home %s."
-msgstr "fish: їЮТХЧРЭ, ФЮЬ %s."
+msgstr "fish: РџРѕРІРµР·Р°РЅ, РґРѕРј %s."
 
 #, c-format
 msgid "fish: Reading directory %s..."
-msgstr "fish: ГзШвРТРЬ ФШаХЪвЮаШшгЬ %s..."
+msgstr "fish: РЈС‡РёС‚Р°РІР°Рј РґРёСЂРµРєС‚РѕСЂРёССѓРј %s..."
 
 #, c-format
 msgid "%s: done."
-msgstr "%s: УЮвЮТЮ."
+msgstr "%s: РіРѕС‚РѕРІРѕ."
 
 #, c-format
 msgid "%s: failure"
-msgstr "%s: ЭХгбЯХе"
+msgstr "%s: РЅРµСѓСЃРїРµС…"
 
 #, c-format
 msgid "fish: store %s: sending command..."
-msgstr "fish: бЪЫРФШивХъХ %s: иРщХЬ ЭРаХФСг..."
+msgstr "fish: СЃРєР»Р°РґРёС€С‚РµСљРµ %s: С€Р°С™РµРј РЅР°СЂРµРґР±Сѓ..."
 
 msgid "fish: Local read failed, sending zeros"
-msgstr "fish: »ЮЪРЫЭЮ зШвРъХ ЭШшХ гбЯХЫЮ, иРщХЬ ЭгЫХ"
+msgstr "fish: Р›РѕРєР°Р»РЅРѕ С‡РёС‚Р°СљРµ РЅРёСРµ СѓСЃРїРµР»Рѕ, С€Р°С™РµРј РЅСѓР»Рµ"
 
 #, c-format
 msgid "fish: storing %s %d (%lu)"
-msgstr "fish: бЪЫРФШивШЬ %s %d (%lu)"
+msgstr "fish: СЃРєР»Р°РґРёС€С‚РёРј %s %d (%lu)"
 
 msgid "zeros"
-msgstr "ЭгЫХ"
+msgstr "РЅСѓР»Рµ"
 
 msgid "Aborting transfer..."
-msgstr "їаХЪШФРЬ ЯаХЭЮб..."
+msgstr "РџСЂРµРєРёРґР°Рј РїСЂРµРЅРѕСЃ..."
 
 msgid "Error reported after abort."
-msgstr "їаШшРТщХЭР шХ УаХиЪР ЯЮбЫХ ЯаХЪШФР."
+msgstr "РџСЂРёСР°РІС™РµРЅР° СРµ РіСЂРµС€РєР° РїРѕСЃР»Рµ РїСЂРµРєРёРґР°."
 
 msgid "Aborted transfer would be successful."
-msgstr "їаХЪШЭгвШ ЯаХЭЮб СШ СШЮ гбЯХиРЭ."
+msgstr "РџСЂРµРєРёРЅСѓС‚Рё РїСЂРµРЅРѕСЃ Р±Рё Р±РёРѕ СѓСЃРїРµС€Р°РЅ."
 
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
-msgstr "ftpfs: їаХЪШФРЬ ЯЮТХЧШТРъХ бР %s"
+msgstr "ftpfs: РџСЂРµРєРёРґР°Рј РїРѕРІРµР·РёРІР°СљРµ СЃР° %s"
 
 msgid " FTP: Password required for "
-msgstr " FTP: ЅХЮЯеЮФЭР шХ ЫЮЧШЭЪР ЧР "
+msgstr " FTP: РќРµРѕРїС…РѕРґРЅР° СРµ Р»РѕР·РёРЅРєР° Р·Р° "
 
 msgid "ftpfs: sending login name"
-msgstr "ftpfs: иРщХЬ ЪЮаШбЭШзЪЮ ШЬХ"
+msgstr "ftpfs: С€Р°С™РµРј РєРѕСЂРёСЃРЅРёС‡РєРѕ РёРјРµ"
 
 msgid "ftpfs: sending user password"
-msgstr "ftpfs: иРщХЬ ЫЮЧШЭЪг"
+msgstr "ftpfs: С€Р°С™РµРј Р»РѕР·РёРЅРєСѓ"
 
 #, c-format
 msgid "FTP: Account required for user %s"
-msgstr "FTP: ЅХЮЯеЮФРЭ шХ ЭРЫЮУ ЧР ЪЮаШбЭШЪР %s"
+msgstr "FTP: РќРµРѕРїС…РѕРґР°РЅ СРµ РЅР°Р»РѕРі Р·Р° РєРѕСЂРёСЃРЅРёРєР° %s"
 
 msgid "Account:"
-msgstr "ЅРЫЮУ:"
+msgstr "РќР°Р»РѕРі:"
 
 msgid "ftpfs: sending user account"
-msgstr "ftpfs: иРщХЬ ЪЮаШбЭШзЪШ ЭРЫЮУ"
+msgstr "ftpfs: С€Р°С™РµРј РєРѕСЂРёСЃРЅРёС‡РєРё РЅР°Р»РѕРі"
 
 msgid "ftpfs: logged in"
-msgstr "ftpfs: ЯаШшРТШЮ бРЬ бХ"
+msgstr "ftpfs: РїСЂРёСР°РІРёРѕ СЃР°Рј СЃРµ"
 
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
-msgstr "ftpfs: ЅХгбЯХиЭР ЯаШшРТР ЪЮаШбЭШЪР %s "
+msgstr "ftpfs: РќРµСѓСЃРїРµС€РЅР° РїСЂРёСР°РІР° РєРѕСЂРёСЃРЅРёРєР° %s "
 
 msgid "ftpfs: Invalid host name."
-msgstr "ftpfs: ЅХШбЯаРТЭШ ЭРЧШТ ФЮЬРыШЭР."
+msgstr "ftpfs: РќРµРёСЃРїСЂР°РІРЅРё РЅР°Р·РёРІ РґРѕРјР°С›РёРЅР°."
 
 msgid "ftpfs: Invalid host address."
-msgstr "ftpfs: ЅХШбЯаРТЭР РФаХбР ФЮЬРыШЭР."
+msgstr "ftpfs: РќРµРёСЃРїСЂР°РІРЅР° Р°РґСЂРµСЃР° РґРѕРјР°С›РёРЅР°."
 
 #, c-format
 msgid "ftpfs: making connection to %s"
-msgstr "ftpfs: ЯЮТХЧгшХЬ бХ бР %s"
+msgstr "ftpfs: РїРѕРІРµР·СѓСРµРј СЃРµ СЃР° %s"
 
 msgid "ftpfs: connection interrupted by user"
-msgstr "ftpfs: ЯЮТХЧШТРъХ шХ ЯаХЪШЭгЮ ЪЮаШбЭШЪ"
+msgstr "ftpfs: РїРѕРІРµР·РёРІР°СљРµ СРµ РїСЂРµРєРёРЅСѓРѕ РєРѕСЂРёСЃРЅРёРє"
 
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
-msgstr "ftpfs: ЯЮТХЧШТРъХ бР бХаТХаЮЬ ЭШшХ гбЯХЫЮ: %s"
+msgstr "ftpfs: РїРѕРІРµР·РёРІР°СљРµ СЃР° СЃРµСЂРІРµСЂРѕРј РЅРёСРµ СѓСЃРїРµР»Рѕ: %s"
 
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
-msgstr "ЗХЪРЬ ЭР ЯЮЭЮТЭЮ ЯЮТХЧШТРъХ... %d (Control-C ЯЮЭШивРТР)"
+msgstr "Р§РµРєР°Рј РЅР° РїРѕРЅРѕРІРЅРѕ РїРѕРІРµР·РёРІР°СљРµ... %d (Control-C РїРѕРЅРёС€С‚Р°РІР°)"
 
 msgid "ftpfs: could not setup passive mode"
-msgstr "ftpfs: ЭШбРЬ ЬЮУРЮ ФР ЯЮФХбШЬ ЯРбШТЭШ аХЦШЬ"
+msgstr "ftpfs: РЅРёСЃР°Рј РјРѕРіР°Рѕ РґР° РїРѕРґРµСЃРёРј РїР°СЃРёРІРЅРё СЂРµР¶РёРј"
 
 msgid "ftpfs: aborting transfer."
-msgstr "ftpfs: ЯаХЪШФРЬ ЯаХЭЮб."
+msgstr "ftpfs: РїСЂРµРєРёРґР°Рј РїСЂРµРЅРѕСЃ."
 
 #, c-format
 msgid "ftpfs: abort error: %s"
-msgstr "ftpfs: УаХиЪР ЯаШ ЯаХЪШФРъг: %s"
+msgstr "ftpfs: РіСЂРµС€РєР° РїСЂРё РїСЂРµРєРёРґР°СљСѓ: %s"
 
 msgid "ftpfs: abort failed"
-msgstr "ftpfs: ЯаХЪШФРъХ ЭШшХ гбЯХЫЮ"
+msgstr "ftpfs: РїСЂРµРєРёРґР°СљРµ РЅРёСРµ СѓСЃРїРµР»Рѕ"
 
 msgid "ftpfs: CWD failed."
-msgstr "ftpfs: ЭРаХФСР `CWD' ЭШшХ гбЯХЫР."
+msgstr "ftpfs: РЅР°СЂРµРґР±Р° `CWD' РЅРёСРµ СѓСЃРїРµР»Р°."
 
 msgid "ftpfs: couldn't resolve symlink"
-msgstr "ftpfs: ЭШбРЬ ЬЮУРЮ ФР аРЧаХиШЬ бШЬТХЧг"
+msgstr "ftpfs: РЅРёСЃР°Рј РјРѕРіР°Рѕ РґР° СЂР°Р·СЂРµС€РёРј СЃРёРјРІРµР·Сѓ"
 
 msgid "Resolving symlink..."
-msgstr "АРЧаХиРТРЬ бШЬТХЧХ..."
+msgstr "Р Р°Р·СЂРµС€Р°РІР°Рј СЃРёРјРІРµР·Рµ..."
 
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
-msgstr "ftpfs: ГзШвРТРЬ ФШаХЪвЮаШшгЬ FTP-Р %s... %s%s"
+msgstr "ftpfs: РЈС‡РёС‚Р°РІР°Рј РґРёСЂРµРєС‚РѕСЂРёССѓРј FTP-Р° %s... %s%s"
 
 msgid "(strict rfc959)"
-msgstr "(бваЮУЮ ЯаХЬР rfc959)"
+msgstr "(СЃС‚СЂРѕРіРѕ РїСЂРµРјР° rfc959)"
 
 msgid "(chdir first)"
-msgstr "(ЯаТЮ ЯЮбвРТШ ФШа.)"
+msgstr "(РїСЂРІРѕ РїРѕСЃС‚Р°РІРё РґРёСЂ.)"
 
 msgid "ftpfs: failed; nowhere to fallback to"
-msgstr "ftpfs: ЭШбРЬ гбЯХЮ; ЭХЬРЬ аХиХъР"
+msgstr "ftpfs: РЅРёСЃР°Рј СѓСЃРїРµРѕ; РЅРµРјР°Рј СЂРµС€РµСљР°"
 
 #, c-format
 msgid "ftpfs: storing file %lu (%lu)"
-msgstr "ftpfs: бЪЫРФШивШЬ ФРвЮвХЪг %lu (%lu)"
+msgstr "ftpfs: СЃРєР»Р°РґРёС€С‚РёРј РґР°С‚РѕС‚РµРєСѓ %lu (%lu)"
 
 msgid ""
 "~/.netrc file has incorrect mode.\n"
 "Remove password or correct mode."
 msgstr ""
-"ґРвЮвХЪР ~/.netrc ЭХЬР ШбЯаРТЭХ ФЮЧТЮЫХ.\n"
-"ГЪЫЮЭШвХ ЫЮЧШЭЪг ШЫШ ШбЯаРТШвХ ФЮЧТЮЫХ."
+"Р”Р°С‚РѕС‚РµРєР° ~/.netrc РЅРµРјР° РёСЃРїСЂР°РІРЅРµ РґРѕР·РІРѕР»Рµ.\n"
+"РЈРєР»РѕРЅРёС‚Рµ Р»РѕР·РёРЅРєСѓ РёР»Рё РёСЃРїСЂР°РІРёС‚Рµ РґРѕР·РІРѕР»Рµ."
 
-# БШбвХЬ ФРвЮвХЪР їЮЭЮыЭЮУ ЭРаХФЭШЪР
+# РЎРёСЃС‚РµРј РґР°С‚РѕС‚РµРєР° РџРѕРЅРѕС›РЅРѕРі РЅР°СЂРµРґРЅРёРєР°
 msgid " MCFS "
-msgstr " БґїЅ "
+msgstr " РЎР”РџРќ "
 
 msgid " The server does not support this version "
-msgstr " БХаТХа ЭХ ЯЮФаЦРТР ЮТг ТХаЧШшг "
+msgstr " РЎРµСЂРІРµСЂ РЅРµ РїРѕРґСЂР¶Р°РІР° РѕРІСѓ РІРµСЂР·РёССѓ "
 
 msgid ""
 " The remote server is not running on a system port \n"
 " you need a password to log in, but the information may \n"
 " not be safe on the remote side.  Continue? \n"
 msgstr ""
-" ГФРщХЭШ бХаТХа ЭШшХ ЯЮЪаХЭгв ЭР бШбвХЬбЪЮЬ ЯЮавг. \n"
-" ЅХЮЯеЮФЭР ТРЬ шХ ЫЮЧШЭЪР ЧР ЯаШшРТг, РЫШ ЯЮФРжШ ЬЮЦФР ЭХыХ\n"
-" СШвШ СХЧСХФЭШ ЭР гФРщХЭЮш бваРЭШ. ¶ХЫШвХ ЫШ ФР ЭРбвРТШЬ? \n"
+" РЈРґР°С™РµРЅРё СЃРµСЂРІРµСЂ РЅРёСРµ РїРѕРєСЂРµРЅСѓС‚ РЅР° СЃРёСЃС‚РµРјСЃРєРѕРј РїРѕСЂС‚Сѓ. \n"
+" РќРµРѕРїС…РѕРґРЅР° РІР°Рј СРµ Р»РѕР·РёРЅРєР° Р·Р° РїСЂРёСР°РІСѓ, Р°Р»Рё РїРѕРґР°С†Рё РјРѕР¶РґР° РЅРµС›Рµ\n"
+" Р±РёС‚Рё Р±РµР·Р±РµРґРЅРё РЅР° СѓРґР°С™РµРЅРѕС СЃС‚СЂР°РЅРё. Р–РµР»РёС‚Рµ Р»Рё РґР° РЅР°СЃС‚Р°РІРёРј? \n"
 
 msgid " MCFS Password required "
-msgstr " ЅХЮЯеЮФЭР шХ ЫЮЧШЭЪР ЧР БґїЅ "
+msgstr " РќРµРѕРїС…РѕРґРЅР° СРµ Р»РѕР·РёРЅРєР° Р·Р° РЎР”РџРќ "
 
 msgid " Invalid password "
-msgstr " ЅХШбЯаРТЭР ЫЮЧШЭЪР "
+msgstr " РќРµРёСЃРїСЂР°РІРЅР° Р»РѕР·РёРЅРєР° "
 
 #, c-format
 msgid " Cannot locate hostname: %s "
-msgstr " ЅХ ЬЮУг ФР ЯаЮЭРтХЬ ФЮЬРыШЭР: %s "
+msgstr " РќРµ РјРѕРіСѓ РґР° РїСЂРѕРЅР°С’РµРј РґРѕРјР°С›РёРЅР°: %s "
 
 #, c-format
 msgid " Cannot create socket: %s "
-msgstr " ЅХ ЬЮУг ФР бвТЮаШЬ гвШзЭШжг: %s "
+msgstr " РќРµ РјРѕРіСѓ РґР° СЃС‚РІРѕСЂРёРј СѓС‚РёС‡РЅРёС†Сѓ: %s "
 
 #, c-format
 msgid " Cannot connect to server: %s "
-msgstr " ЅХ ЬЮУг ФР бХ ЯЮТХЦХЬ бР бХаТХаЮЬ: %s "
+msgstr " РќРµ РјРѕРіСѓ РґР° СЃРµ РїРѕРІРµР¶РµРј СЃР° СЃРµСЂРІРµСЂРѕРј: %s "
 
 msgid " Too many open connections "
-msgstr " їаХТШиХ ЮвТЮаХЭШе ЯЮТХЧШТРъР "
+msgstr " РџСЂРµРІРёС€Рµ РѕС‚РІРѕСЂРµРЅРёС… РїРѕРІРµР·РёРІР°СљР° "
 
 #, c-format
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
 msgstr ""
-"ГЯЮЧЮаХъХ: ЅХШбЯаРТРЭ аХФ г %s:\n"
+"РЈРїРѕР·РѕСЂРµСљРµ: РќРµРёСЃРїСЂР°РІР°РЅ СЂРµРґ Сѓ %s:\n"
 "%s\n"
 
 #, c-format
@@ -3570,7 +3582,7 @@ msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
 msgstr ""
-"ГЯЮЧЮаХъХ: ЅХШбЯаРТРЭ ЯаХЪШФРз %c г %s:\n"
+"РЈРїРѕР·РѕСЂРµСљРµ: РќРµРёСЃРїСЂР°РІР°РЅ РїСЂРµРєРёРґР°С‡ %c Сѓ %s:\n"
 "%s\n"
 
 #, c-format
@@ -3578,45 +3590,45 @@ msgid ""
 " reconnect to %s failed\n"
 " "
 msgstr ""
-" ЯЮЭЮТЭЮ ЯЮТХЧШТРъХ бР %s ЭШшХ гбЯХЫЮ\n"
+" РїРѕРЅРѕРІРЅРѕ РїРѕРІРµР·РёРІР°СљРµ СЃР° %s РЅРёСРµ СѓСЃРїРµР»Рѕ\n"
 " "
 
 msgid " Authentication failed "
-msgstr " їЮвТаФР ШбЯаРТЭЮбвШ ЭШшХ гбЯХЫР "
+msgstr " РџРѕС‚РІСЂРґР° РёСЃРїСЂР°РІРЅРѕСЃС‚Рё РЅРёСРµ СѓСЃРїРµР»Р° "
 
 #, c-format
 msgid " Error %s creating directory %s "
-msgstr " іаХиЪР %s ЯаШЫШЪЮЬ бвТРаРъР ФШаХЪвЮаШшгЬР %s "
+msgstr " Р“СЂРµС€РєР° %s РїСЂРёР»РёРєРѕРј СЃС‚РІР°СЂР°СљР° РґРёСЂРµРєС‚РѕСЂРёССѓРјР° %s "
 
 #, c-format
 msgid " Error %s removing directory %s "
-msgstr " іаХиЪР %s ЯаШЫШЪЮЬ гЪЫРъРъР ФШаХЪвЮаШшгЬР %s "
+msgstr " Р“СЂРµС€РєР° %s РїСЂРёР»РёРєРѕРј СѓРєР»Р°СљР°СљР° РґРёСЂРµРєС‚РѕСЂРёССѓРјР° %s "
 
 #, c-format
 msgid " %s opening remote file %s "
-msgstr " %s ЯаШ ЮвТРаРъг гФРщХЭХ ФРвЮвХЪХ %s "
+msgstr " %s РїСЂРё РѕС‚РІР°СЂР°СљСѓ СѓРґР°С™РµРЅРµ РґР°С‚РѕС‚РµРєРµ %s "
 
 #, c-format
 msgid " %s removing remote file %s "
-msgstr " %s ЯаШ гЪЫРъРъг гФРщХЭХ ФРвЮвХЪХ %s "
+msgstr " %s РїСЂРё СѓРєР»Р°СљР°СљСѓ СѓРґР°С™РµРЅРµ РґР°С‚РѕС‚РµРєРµ %s "
 
 #, c-format
 msgid " %s renaming files\n"
-msgstr " %s ЯаШ ЯаХШЬХЭЮТРъг ФРвЮвХЪР\n"
+msgstr " %s РїСЂРё РїСЂРµРёРјРµРЅРѕРІР°СљСѓ РґР°С‚РѕС‚РµРєР°\n"
 
 #, c-format
 msgid ""
 "Cannot open tar archive\n"
 "%s"
 msgstr ""
-"ЅХ ЬЮУг ФР ЮвТЮаШЬ РаеШТг ТабвХ `tar'\n"
+"РќРµ РјРѕРіСѓ РґР° РѕС‚РІРѕСЂРёРј Р°СЂС…РёРІСѓ РІСЂСЃС‚Рµ `tar'\n"
 "%s"
 
 msgid "Inconsistent tar archive"
-msgstr "ЅХФЮбЫХФЭР РаеШТР ТабвХ `tar'"
+msgstr "РќРµРґРѕСЃР»РµРґРЅР° Р°СЂС…РёРІР° РІСЂСЃС‚Рµ `tar'"
 
 msgid "Unexpected EOF on archive file"
-msgstr "ЅХЮзХЪШТРЭШ ЧРТаиХвРЪ ФРвЮвХЪХ г РаеШТШ"
+msgstr "РќРµРѕС‡РµРєРёРІР°РЅРё Р·Р°РІСЂС€РµС‚Р°Рє РґР°С‚РѕС‚РµРєРµ Сѓ Р°СЂС…РёРІРё"
 
 #, c-format
 msgid ""
@@ -3624,18 +3636,18 @@ msgid ""
 "%s\n"
 "doesn't look like a tar archive."
 msgstr ""
-"ЕЬЬ,...\n"
+"РҐРјРј,...\n"
 "%s\n"
-"ЭХ ЫШзШ ЭР РаеШТг ТабвХ `tar'."
+"РЅРµ Р»РёС‡Рё РЅР° Р°СЂС…РёРІСѓ РІСЂСЃС‚Рµ `tar'."
 
 msgid " undelfs: error "
-msgstr " undelfs: УаХиЪР "
+msgstr " undelfs: РіСЂРµС€РєР° "
 
 msgid " not enough memory "
-msgstr " ЭХФЮТЮщЭЮ ЬХЬЮаШшХ "
+msgstr " РЅРµРґРѕРІРѕС™РЅРѕ РјРµРјРѕСЂРёСРµ "
 
 msgid " while allocating block buffer "
-msgstr " ЯаШ РЫЮжШаРъг СЫЮЪР ЯаШеТРвЭШЪР "
+msgstr " РїСЂРё Р°Р»РѕС†РёСЂР°СљСѓ Р±Р»РѕРєР° РїСЂРёС…РІР°С‚РЅРёРєР° "
 
 #, c-format
 msgid " open_inode_scan: %d "
@@ -3643,150 +3655,150 @@ msgstr " open_inode_scan: %d "
 
 #, c-format
 msgid " while starting inode scan %d "
-msgstr " ЯаШ ЯЮзХвЪг ЯаХваРЦШТРъР ШзТЮаЮТР %d "
+msgstr " РїСЂРё РїРѕС‡РµС‚РєСѓ РїСЂРµС‚СЂР°Р¶РёРІР°СљР° РёС‡РІРѕСЂРѕРІР° %d "
 
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: гзШвРТРЬ ЯЮФРвЪХ Ю ЮСаШбРЭШЬ ШзТЮаЮТШЬР: %d ШзТЮаЮТР"
+msgstr "undelfs: СѓС‡РёС‚Р°РІР°Рј РїРѕРґР°С‚РєРµ Рѕ РѕР±СЂРёСЃР°РЅРёРј РёС‡РІРѕСЂРѕРІРёРјР°: %d РёС‡РІРѕСЂРѕРІР°"
 
 #, c-format
 msgid " while calling ext2_block_iterate %d "
-msgstr " ЯаШ ЯЮЧШТг ext2_block_iterate %d "
+msgstr " РїСЂРё РїРѕР·РёРІСѓ ext2_block_iterate %d "
 
 msgid " no more memory while reallocating array "
-msgstr " ЭХЬР ТШиХ ЬХЬЮаШшХ ЯаШ ЯЮЭЮТЭЮш РЫЮЪ. ЭШЧР "
+msgstr " РЅРµРјР° РІРёС€Рµ РјРµРјРѕСЂРёСРµ РїСЂРё РїРѕРЅРѕРІРЅРѕС Р°Р»РѕРє. РЅРёР·Р° "
 
 #, c-format
 msgid " while doing inode scan %d "
-msgstr " ЯаШ ЯаХваРЦШТРъг ШзТЮаЮТР %d "
+msgstr " РїСЂРё РїСЂРµС‚СЂР°Р¶РёРІР°СљСѓ РёС‡РІРѕСЂРѕРІР° %d "
 
 msgid " Ext2lib error "
-msgstr " іаХиЪР СШСЫШЮвХЪХ ext2lib "
+msgstr " Р“СЂРµС€РєР° Р±РёР±Р»РёРѕС‚РµРєРµ ext2lib "
 
 #, c-format
 msgid " Cannot open file %s "
-msgstr " ЅХ ЬЮУг ФР ЮвТЮаШЬ ФРвЮвХЪг %s "
+msgstr " РќРµ РјРѕРіСѓ РґР° РѕС‚РІРѕСЂРёРј РґР°С‚РѕС‚РµРєСѓ %s "
 
 msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: зШвРЬ ЬРЯг СШвЮТР ЧР ШзТЮаЮТХ..."
+msgstr "undelfs: С‡РёС‚Р°Рј РјР°РїСѓ Р±РёС‚РѕРІР° Р·Р° РёС‡РІРѕСЂРѕРІРµ..."
 
 #, c-format
 msgid ""
 " Cannot load inode bitmap from: \n"
 " %s \n"
 msgstr ""
-" ЅХ ЬЮУг ФР гзШвРЬ ЬРЯг СШвЮТР ЧР ШзТЮаЮТХ ШЧ: \n"
+" РќРµ РјРѕРіСѓ РґР° СѓС‡РёС‚Р°Рј РјР°РїСѓ Р±РёС‚РѕРІР° Р·Р° РёС‡РІРѕСЂРѕРІРµ РёР·: \n"
 " %s \n"
 
 msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: гзШвРТРЬ ЬРЯг СШвЮТР ЧР ШзТЮаЮТХ..."
+msgstr "undelfs: СѓС‡РёС‚Р°РІР°Рј РјР°РїСѓ Р±РёС‚РѕРІР° Р·Р° РёС‡РІРѕСЂРѕРІРµ..."
 
 #, c-format
 msgid ""
 " Cannot load block bitmap from: \n"
 " %s \n"
 msgstr ""
-" ЅХ ЬЮУг ФР гзШвРЬ ЬРЯг СШвЮТР ЧР СЫЮЪЮТХ ШЧ: \n"
+" РќРµ РјРѕРіСѓ РґР° СѓС‡РёС‚Р°Рј РјР°РїСѓ Р±РёС‚РѕРІР° Р·Р° Р±Р»РѕРєРѕРІРµ РёР·: \n"
 " %s \n"
 
 msgid " vfs_info is not fs! "
-msgstr " vfs_info - ЭШшХ бШбвХЬ ФРвЮвХЪР! "
+msgstr " vfs_info - РЅРёСРµ СЃРёСЃС‚РµРј РґР°С‚РѕС‚РµРєР°! "
 
 msgid " You have to chdir to extract files first "
-msgstr " јЮаРвХ ФР ЯЮбвРТШвХ ФШа. г ЪЮшШ ЦХЫШвХ ФР ШЧФТРшРвХ "
+msgstr " РњРѕСЂР°С‚Рµ РґР° РїРѕСЃС‚Р°РІРёС‚Рµ РґРёСЂ. Сѓ РєРѕСРё Р¶РµР»РёС‚Рµ РґР° РёР·РґРІР°СР°С‚Рµ "
 
 msgid " while iterating over blocks "
-msgstr " ЯаШ ШвХаРжШшШ СЫЮЪЮТР "
+msgstr " РїСЂРё РёС‚РµСЂР°С†РёСРё Р±Р»РѕРєРѕРІР° "
 
 msgid "Cannot parse:"
-msgstr "ЅХ ЬЮУг ФР аРизЫРЭШЬ:"
+msgstr "РќРµ РјРѕРіСѓ РґР° СЂР°С€С‡Р»Р°РЅРёРј:"
 
 msgid "More parsing errors will be ignored."
-msgstr "ґРщХ УаХиЪХ ыХ СШвШ ЧРЭХЬРаХЭХ."
+msgstr "Р”Р°С™Рµ РіСЂРµС€РєРµ С›Рµ Р±РёС‚Рё Р·Р°РЅРµРјР°СЂРµРЅРµ."
 
 msgid "Internal error:"
-msgstr "ГЭгваРиъР УаХиЪР:"
+msgstr "РЈРЅСѓС‚СЂР°С€СљР° РіСЂРµС€РєР°:"
 
 msgid "Changes to file lost"
-msgstr "ёЧЬХЭХ г ФРвЮвХжШ бг ШЧУгСщХЭХ"
+msgstr "РР·РјРµРЅРµ Сѓ РґР°С‚РѕС‚РµС†Рё СЃСѓ РёР·РіСѓР±С™РµРЅРµ"
 
 #~ msgid "scanf &Expression"
-#~ msgstr "ёЧа&РЧ ЧР scanf"
+#~ msgstr "РР·СЂ&Р°Р· Р·Р° scanf"
 
 #~ msgid "&Whole words only"
-#~ msgstr "БРЬЮ &жХЫХ аХзШ"
+#~ msgstr "РЎР°РјРѕ &С†РµР»Рµ СЂРµС‡Рё"
 
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
-#~ msgstr " ГЭХбШвХ аХФЮбЫХФ ЧРЬХЭХ РаУгЬХЭРвР, ЭЯа. 3,2,1,4 "
+#~ msgstr " РЈРЅРµСЃРёС‚Рµ СЂРµРґРѕСЃР»РµРґ Р·Р°РјРµРЅРµ Р°СЂРіСѓРјРµРЅР°С‚Р°, РЅРїСЂ. 3,2,1,4 "
 
 #~ msgid ""
 #~ " Invalid regular expression, or scanf expression with too many "
 #~ "conversions "
 #~ msgstr ""
-#~ " АХУгЫРаЭШ ШЧаРЧ шХ ЭХШбЯаРТРЭ ШЫШ шХ ШЧаРЧ ЧР `scanf' бР ЯаХТШиХ "
-#~ "ЯаХвТРаРъР "
+#~ " Р РµРіСѓР»Р°СЂРЅРё РёР·СЂР°Р· СРµ РЅРµРёСЃРїСЂР°РІР°РЅ РёР»Рё СРµ РёР·СЂР°Р· Р·Р° `scanf' СЃР° РїСЂРµРІРёС€Рµ "
+#~ "РїСЂРµС‚РІР°СЂР°СљР° "
 
 #~ msgid " Error in replacement format string. "
-#~ msgstr " іаХиЪР г дЮаЬРвШаРшгыЮш ЭШбжШ ЧРЬХЭХ. "
+#~ msgstr " Р“СЂРµС€РєР° Сѓ С„РѕСЂРјР°С‚РёСЂР°ССѓС›РѕС РЅРёСЃС†Рё Р·Р°РјРµРЅРµ. "
 
 #, fuzzy
 #~ msgid " Replacement too long. "
-#~ msgstr " ГЭХбШвХ ЭШбЪг ЧРЬХЭХ:"
+#~ msgstr " РЈРЅРµСЃРёС‚Рµ РЅРёСЃРєСѓ Р·Р°РјРµРЅРµ:"
 
 #~ msgid "&Copy              F5"
-#~ msgstr "&єЮЯШаРш                   F5"
+#~ msgstr "&РљРѕРїРёСЂР°С                   F5"
 
 #~ msgid "&Delete            F8"
-#~ msgstr "&ѕСаШиШ                    F8"
+#~ msgstr "&РћР±СЂРёС€Рё                    F8"
 
 #, fuzzy
 #~ msgid "Save setu&p..."
-#~ msgstr "&БРзгТРш ЯЮФХиРТРъР"
+#~ msgstr "&РЎР°С‡СѓРІР°С РїРѕРґРµС€Р°РІР°СљР°"
 
 #~ msgid " The command history is empty "
-#~ msgstr " ёбвЮаШшР ЭРаХФСШ шХ ЯаРЧЭР "
+#~ msgstr " РСЃС‚РѕСЂРёСР° РЅР°СЂРµРґР±Рё СРµ РїСЂР°Р·РЅР° "
 
 #~ msgid "command &History"
-#~ msgstr "&ёбвЮаШшР ЭРаХФСШ"
+#~ msgstr "&РСЃС‚РѕСЂРёСР° РЅР°СЂРµРґР±Рё"
 
 #~ msgid "Edit edi&tor menu file"
-#~ msgstr "ГаХФШ ФРвЮвХЪг ЬХЭШшР &гаХтШТРзР"
+#~ msgstr "РЈСЂРµРґРё РґР°С‚РѕС‚РµРєСѓ РјРµРЅРёСР° &СѓСЂРµС’РёРІР°С‡Р°"
 
 #~ msgid "Edit &syntax file"
-#~ msgstr "ГаХФШ ФРвЮвХЪг &бШЭвРЪбХ"
+#~ msgstr "РЈСЂРµРґРё РґР°С‚РѕС‚РµРєСѓ &СЃРёРЅС‚Р°РєСЃРµ"
 
 #~ msgid ""
 #~ "To use this feature select your codepage in\n"
 #~ "Setup / Display Bits dialog!\n"
 #~ "Do not forget to save options."
 #~ msgstr ""
-#~ "ґР СШбвХ ЪЮаШбвШЫШ ЮТг ЮФЫШЪг ШЧРСХаШвХ\n"
-#~ "ЪЮФЭг бваРЭг г ФШшРЫЮУг їЮФХиРТРъР / ±ШвР г\n"
-#~ "ЯаШЪРЧг! ЅХ ЧРСЮаРТШвХ ФР бРзгТРвХ ШЧСЮаХ."
+#~ "Р”Р° Р±РёСЃС‚Рµ РєРѕСЂРёСЃС‚РёР»Рё РѕРІСѓ РѕРґР»РёРєСѓ РёР·Р°Р±РµСЂРёС‚Рµ\n"
+#~ "РєРѕРґРЅСѓ СЃС‚СЂР°РЅСѓ Сѓ РґРёСР°Р»РѕРіСѓ РџРѕРґРµС€Р°РІР°СљР° / Р‘РёС‚Р° Сѓ\n"
+#~ "РїСЂРёРєР°Р·Сѓ! РќРµ Р·Р°Р±РѕСЂР°РІРёС‚Рµ РґР° СЃР°С‡СѓРІР°С‚Рµ РёР·Р±РѕСЂРµ."
 
 #~ msgid "Invalid hex search expression"
-#~ msgstr "ЅХШбЯаРТРЭ ШЧаРЧ еХЪб ЯаХваРУХ"
+#~ msgstr "РќРµРёСЃРїСЂР°РІР°РЅ РёР·СЂР°Р· С…РµРєСЃ РїСЂРµС‚СЂР°РіРµ"
 
 #~ msgid " Invalid regular expression "
-#~ msgstr " ЅХШбЯаРТРЭ аХУгЫРаЭШ ШЧаРЧ "
+#~ msgstr " РќРµРёСЃРїСЂР°РІР°РЅ СЂРµРіСѓР»Р°СЂРЅРё РёР·СЂР°Р· "
 
 #~ msgid " Enter regexp:"
-#~ msgstr " ГЭХбШвХ аХУШЧаРЧ:"
+#~ msgstr " РЈРЅРµСЃРёС‚Рµ СЂРµРіРёР·СЂР°Р·:"
 
 #~ msgid "Using included S-Lang library"
-#~ msgstr "єЮаШбвШЬ гЪщгзХЭг СШСЫШЮвХЪг S-Lang"
+#~ msgstr "РљРѕСЂРёСЃС‚РёРј СѓРєС™СѓС‡РµРЅСѓ Р±РёР±Р»РёРѕС‚РµРєСѓ S-Lang"
 
 #~ msgid "with termcap database"
-#~ msgstr "бР СРЧЮЬ termcap"
+#~ msgstr "СЃР° Р±Р°Р·РѕРј termcap"
 
 #~ msgid "&Home"
-#~ msgstr "&ґЮЬРыг"
+#~ msgstr "&Р”РѕРјР°С›Сѓ"
 
 #~ msgid "&Type"
-#~ msgstr "І&абвР"
+#~ msgstr "Р’&СЂСЃС‚Р°"
 
 #~ msgid "&Links"
-#~ msgstr "ІХ&ЧХ"
+#~ msgstr "Р’Рµ&Р·Рµ"
 
 #~ msgid "N&GID"
 #~ msgstr "N&GID"
@@ -3795,119 +3807,119 @@ msgstr "ёЧЬХЭХ г ФРвЮвХжШ бг ШЧУгСщХЭХ"
 #~ msgstr "N&UID"
 
 #~ msgid "&Owner"
-#~ msgstr "І&ЫРбЭШЪ"
+#~ msgstr "Р’&Р»Р°СЃРЅРёРє"
 
 #~ msgid "&Group"
-#~ msgstr "&іагЯР"
+#~ msgstr "&Р“СЂСѓРїР°"
 
 #~ msgid "MC was unable to write ~/"
-#~ msgstr "їЅ ЭХ ЬЮЦХ ФР ЯШиХ г ФРвЮвХЪг ~/"
+#~ msgstr "РџРќ РЅРµ РјРѕР¶Рµ РґР° РїРёС€Рµ Сѓ РґР°С‚РѕС‚РµРєСѓ ~/"
 
 #~ msgid " (%ld blocks)"
-#~ msgstr " (%ld СЫЮЪЮТР)"
+#~ msgstr " (%ld Р±Р»РѕРєРѕРІР°)"
 
 #~ msgid " Notice "
-#~ msgstr " ѕСшРТР "
+#~ msgstr " РћР±СР°РІР° "
 
 #~ msgid ""
 #~ " The Midnight Commander configuration files \n"
 #~ " are now stored in the ~/.mc directory, the \n"
 #~ " files have been moved now\n"
 #~ msgstr ""
-#~ " ґРвЮвХЪХ бР ЯЮФХиРТРъШЬР їЮЭЮыЭЮУ ЭРаХФЭШЪР \n"
-#~ " бХ бРФР бЬХивРшг г ФШаХЪвЮаШшгЬ `~/.mc';\n"
-#~ " ФРвЮвХЪХ бг бРФР ЯаХЬХивХЭХ\n"
+#~ " Р”Р°С‚РѕС‚РµРєРµ СЃР° РїРѕРґРµС€Р°РІР°СљРёРјР° РџРѕРЅРѕС›РЅРѕРі РЅР°СЂРµРґРЅРёРєР° \n"
+#~ " СЃРµ СЃР°РґР° СЃРјРµС€С‚Р°ССѓ Сѓ РґРёСЂРµРєС‚РѕСЂРёССѓРј `~/.mc';\n"
+#~ " РґР°С‚РѕС‚РµРєРµ СЃСѓ СЃР°РґР° РїСЂРµРјРµС€С‚РµРЅРµ\n"
 
 #~ msgid "%s bytes in %d files"
-#~ msgstr "%s СРшвЮТР г %d ФРвЮвХЪР"
+#~ msgstr "%s Р±Р°СС‚РѕРІР° Сѓ %d РґР°С‚РѕС‚РµРєР°"
 
 #~ msgid " Cannot open file for reading: "
-#~ msgstr " ЅХ ЬЮУг ФР ЮвТЮаШЬ ФРвЮвХЪг ЧР зШвРъХ: "
+#~ msgstr " РќРµ РјРѕРіСѓ РґР° РѕС‚РІРѕСЂРёРј РґР°С‚РѕС‚РµРєСѓ Р·Р° С‡РёС‚Р°СљРµ: "
 
 #~ msgid " Not an ordinary file: "
-#~ msgstr " ґРвЮвХЪР ЭШшХ ЮСШзЭР: "
+#~ msgstr " Р”Р°С‚РѕС‚РµРєР° РЅРёСРµ РѕР±РёС‡РЅР°: "
 
 #~ msgid "Format of the "
-#~ msgstr "ДЮаЬРв "
+#~ msgstr "Р¤РѕСЂРјР°С‚ "
 
 #~ msgid ""
 #~ " file has changed\n"
 #~ "with version 3.0. You may want either to\n"
 #~ "copy it from "
 #~ msgstr ""
-#~ " ФРвЮвХЪР шХ ШЧЬХъХЭР\n"
-#~ "г ТХаЧШшШ 3.0. ІХаЮТРвЭЮ ыХвХ ЯЮЦХЫХвШ\n"
-#~ "ФР шХ ЪЮЯШаРвХ ШЧ "
+#~ " РґР°С‚РѕС‚РµРєР° СРµ РёР·РјРµСљРµРЅР°\n"
+#~ "Сѓ РІРµСЂР·РёСРё 3.0. Р’РµСЂРѕРІР°С‚РЅРѕ С›РµС‚Рµ РїРѕР¶РµР»РµС‚Рё\n"
+#~ "РґР° СРµ РєРѕРїРёСЂР°С‚Рµ РёР· "
 
 #~ msgid ""
 #~ "mc.ext or use that\n"
 #~ "file as an example of how to write it.\n"
 #~ msgstr ""
-#~ "mc.ext ШЫШ ФР ЪЮаШбвШвХ\n"
-#~ "вг ФРвЮвХЪг ЪРЮ гЧЮа.\n"
+#~ "mc.ext РёР»Рё РґР° РєРѕСЂРёСЃС‚РёС‚Рµ\n"
+#~ "С‚Сѓ РґР°С‚РѕС‚РµРєСѓ РєР°Рѕ СѓР·РѕСЂ.\n"
 
 #~ msgid "mc.ext will be used for this moment."
-#~ msgstr "mc.ext ыХ бХ ЧР бРФР ЪЮаШбвШвШ."
+#~ msgstr "mc.ext С›Рµ СЃРµ Р·Р° СЃР°РґР° РєРѕСЂРёСЃС‚РёС‚Рё."
 
 #~ msgid " Cannot open file "
-#~ msgstr " ЅХ ЬЮУг ФР ЮвТЮаШЬ ФРвЮвХЪг "
+#~ msgstr " РќРµ РјРѕРіСѓ РґР° РѕС‚РІРѕСЂРёРј РґР°С‚РѕС‚РµРєСѓ "
 
 #~ msgid "Col %d"
-#~ msgstr "єЮЫ %d"
+#~ msgstr "РљРѕР» %d"
 
 #~ msgid "  [grow]"
-#~ msgstr "  [аРбвХ]"
+#~ msgstr "  [СЂР°СЃС‚Рµ]"
 
 #~ msgid "Ascii"
-#~ msgstr "°бЪШ"
+#~ msgstr "РђСЃРєРё"
 
 #~ msgid "Hex"
-#~ msgstr "ЕХЪб"
+#~ msgstr "РҐРµРєСЃ"
 
 #~ msgid "Goto"
-#~ msgstr "ёФШЅР"
+#~ msgstr "РРґРёРќР°"
 
 #~ msgid "Line"
-#~ msgstr "АХФ"
+#~ msgstr "Р РµРґ"
 
 #~ msgid "RxSrch"
-#~ msgstr "АУїава"
+#~ msgstr "Р РіРџСЂС‚СЂ"
 
 #~ msgid "EdHex"
-#~ msgstr "ГаЕХЪб"
+#~ msgstr "РЈСЂРҐРµРєСЃ"
 
 #~ msgid "EdText"
-#~ msgstr "ГаВЪбв"
+#~ msgstr "РЈСЂРўРєСЃС‚"
 
 #~ msgid "UnWrap"
-#~ msgstr "ѕФїаЫЬ"
+#~ msgstr "РћРґРџСЂР»Рј"
 
 #~ msgid "Wrap"
-#~ msgstr "їаХЫЮЬ"
+#~ msgstr "РџСЂРµР»РѕРј"
 
 #~ msgid "HxSrch"
-#~ msgstr "ЕЪїава"
+#~ msgstr "РҐРєРџСЂС‚СЂ"
 
 #~ msgid "Raw"
-#~ msgstr "БШаЮТЮ"
+#~ msgstr "РЎРёСЂРѕРІРѕ"
 
 #~ msgid "Parse"
-#~ msgstr "АРизЫ"
+#~ msgstr "Р Р°С€С‡Р»"
 
 #~ msgid "Unform"
-#~ msgstr "ЅХдЮаЬ"
+#~ msgstr "РќРµС„РѕСЂРј"
 
 #~ msgid " Socket source routing setup "
-#~ msgstr " їЮФХиРТРъХ гбЬХаРТРъР ШЧТЮаР гвШзЭШжХ "
+#~ msgstr " РџРѕРґРµС€Р°РІР°СљРµ СѓСЃРјРµСЂР°РІР°СљР° РёР·РІРѕСЂР° СѓС‚РёС‡РЅРёС†Рµ "
 
 #~ msgid " Enter host name to use as a source routing hop: "
-#~ msgstr " ГЭХбШвХ ЭРЧШТ ФЮЬРыШЭР ЧР бЪЮЪ гбЬХаРТРъР ШЧТЮаР: "
+#~ msgstr " РЈРЅРµСЃРёС‚Рµ РЅР°Р·РёРІ РґРѕРјР°С›РёРЅР° Р·Р° СЃРєРѕРє СѓСЃРјРµСЂР°РІР°СљР° РёР·РІРѕСЂР°: "
 
 #~ msgid " Host name "
-#~ msgstr " ЅРЧШТ ФЮЬРыШЭР "
+#~ msgstr " РќР°Р·РёРІ РґРѕРјР°С›РёРЅР° "
 
 #~ msgid " Error while looking up IP address "
-#~ msgstr " іаХиЪР ЯаШ ваРЦХъг РФаХбХ ёї "
+#~ msgstr " Р“СЂРµС€РєР° РїСЂРё С‚СЂР°Р¶РµСљСѓ Р°РґСЂРµСЃРµ РРџ "
 
 #~ msgid ""
 #~ "\n"
@@ -3920,12 +3932,12 @@ msgstr "ёЧЬХЭХ г ФРвЮвХжШ бг ШЧУгСщХЭХ"
 #~ "\n"
 #~ "\n"
 #~ "\n"
-#~ "бвЮУ ЮбТХЦРТРъР шХ ШбЯаРЦъХЭ!\n"
+#~ "СЃС‚РѕРі РѕСЃРІРµР¶Р°РІР°СљР° СРµ РёСЃРїСЂР°Р¶СљРµРЅ!\n"
 #~ "\n"
 #~ "\n"
 
 #~ msgid " No action taken "
-#~ msgstr " ЅШивР ЭШшХ гаРтХЭЮ "
+#~ msgstr " РќРёС€С‚Р° РЅРёСРµ СѓСЂР°С’РµРЅРѕ "
 
 #~ msgid " Cannot set source routing (%s)"
-#~ msgstr " ЅХ ЬЮУг ФР ЯЮбвРТШЬ ШЧТЮаЭЮ гбЬХаРТРъХ (%s)"
+#~ msgstr " РќРµ РјРѕРіСѓ РґР° РїРѕСЃС‚Р°РІРёРј РёР·РІРѕСЂРЅРѕ СѓСЃРјРµСЂР°РІР°СљРµ (%s)"

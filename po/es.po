@@ -7,13 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-<<<<<<< HEAD:po/es.po
 "POT-Creation-Date: 2009-07-25 00:37+0200\n"
 "PO-Revision-Date: 2009-07-24 21:00+0100\n"
-=======
-"POT-Creation-Date: 2009-06-30 19:38+0200\n"
-"PO-Revision-Date: 2008-06-15 19:00+0100\n"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/es.po
 "Last-Translator: David Martín <dmartina@excite.com\n"
 "Language-Team: Spanish <debian-l10n-spanish@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -197,14 +192,8 @@ msgstr " Cargar "
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " El bloque es enorme, quizás no se pueda deshacer esta acción. "
 
-<<<<<<< HEAD:po/es.po
 msgid "Replace"
 msgstr "Reemplazar"
-=======
-#, fuzzy
-msgid "Replace"
-msgstr "&Reemplazar"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/es.po
 
 msgid " Replace "
 msgstr " Reemplazar "
@@ -324,29 +313,14 @@ msgstr " Presione cualquier tecla: "
 msgid " Execute Macro "
 msgstr " Ejecutar macro "
 
-<<<<<<< HEAD:po/es.po
 msgid "All charsets"
 msgstr "en co&Dificaciones"
-=======
-msgid "pro&Mpt on replace"
-msgstr "c&Onfirmar cambios"
-
-msgid "replace &All"
-msgstr "reemplazar &Todos"
-
-msgid "All charsets"
-msgstr ""
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/es.po
 
 msgid "&Backwards"
 msgstr "&Hacia atrás"
 
 msgid "case &Sensitive"
-<<<<<<< HEAD:po/es.po
 msgstr "distinguir &May/min"
-=======
-msgstr "distinguir ma&Yúsculas"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/es.po
 
 msgid " Enter replacement string:"
 msgstr " Teclee el cambio a realizar:"
@@ -357,23 +331,12 @@ msgstr " Teclee el texto a buscar:"
 msgid "Cancel"
 msgstr "Cancelar"
 
-<<<<<<< HEAD:po/es.po
 msgid "&Skip"
 msgstr "&Saltar"
-=======
-msgid "O&ne"
-msgstr "sólo u&No"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/es.po
 
 msgid "A&ll"
 msgstr "&Todos"
 
-<<<<<<< HEAD:po/es.po
-=======
-msgid "&Skip"
-msgstr "&Saltar"
-
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/es.po
 msgid "&Replace"
 msgstr "&Reemplazar"
 
@@ -461,7 +424,6 @@ msgstr "&Nuevo                 C-x k"
 msgid "Copy to &file...     "
 msgstr "co&Piar a un archivo..."
 
-<<<<<<< HEAD:po/es.po
 msgid "&Toggle mark                 F3"
 msgstr "i&Nicio/fin de marca        F3"
 
@@ -518,81 +480,6 @@ msgstr "cor&Tar a un archivo...    C-w"
 
 msgid "&Paste from clipfile        C-y"
 msgstr "pe&Gar de un archivo...    C-y"
-=======
-#, fuzzy
-msgid "&Toggle mark                 F3"
-msgstr "i&Nicio/fin de marca        F3"
-
-#, fuzzy
-msgid "Mar&k columns              S-F3"
-msgstr "marcar c&Olumnas          S-F3"
-
-#, fuzzy
-msgid "Toggle &ins/overw           Ins"
-msgstr "activar &Inserción         Ins"
-
-#, fuzzy
-msgid "&Copy                        F5"
-msgstr "&Copiar...                     F5"
-
-#, fuzzy
-msgid "&Move                        F6"
-msgstr "&Mover                      F6"
-
-#, fuzzy
-msgid "&Delete                      F8"
-msgstr "&Borrar                        F8"
-
-#, fuzzy
-msgid "C&opy to clipfile         C-Ins"
-msgstr "co&Piar a un archivo..."
-
-#, fuzzy
-msgid "C&ut to clipfile          S-Del"
-msgstr "&Ir a la línea...                  M-l"
-
-msgid "&Paste from clipfile      S-Ins"
-msgstr ""
-
-#, fuzzy
-msgid "Toggle bookmar&k               "
-msgstr "i&Nicio/fin de marca        F3"
-
-#, fuzzy
-msgid "&Next bookmark                 "
-msgstr "&Nuevo                   C-n"
-
-#, fuzzy
-msgid "Pre&v bookmark                 "
-msgstr "&Ordenar bloque de texto...        M-t"
-
-#, fuzzy
-msgid "&Flush bookmark                "
-msgstr "&Correo... "
-
-#, fuzzy
-msgid "&Undo                       C-u"
-msgstr "&Deshacer                  C-u"
-
-#, fuzzy
-msgid "&Beginning               C-PgUp"
-msgstr "&Principio del archivo  C-RePg"
-
-#, fuzzy
-msgid "&End                     C-PgDn"
-msgstr "&Fin del archivo        C-AvPg"
-
-#, fuzzy
-msgid "C&opy to clipfile           M-w"
-msgstr "&Ir a la línea...                  M-l"
-
-#, fuzzy
-msgid "C&ut to clipfile            C-w"
-msgstr "&Ir a la línea...                  M-l"
-
-msgid "&Paste from clipfile        C-y"
-msgstr ""
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/es.po
 
 msgid "&Search...         F7"
 msgstr "&Buscar...          F7"
@@ -606,20 +493,13 @@ msgstr "&Reemplazar...      F4"
 msgid "&Go to line...            M-l"
 msgstr "&Ir a la línea...                  M-l"
 
-<<<<<<< HEAD:po/es.po
 msgid "Toggle li&ne state        M-n"
 msgstr "&Numeración de líneas              M-n"
-=======
-#, fuzzy
-msgid "Toggle li&ne state        M-n"
-msgstr "i&Nicio/fin de marca        F3"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/es.po
 
 msgid "Go to matching &bracket   M-b"
 msgstr "buscar pare&Ja del operador        M-b"
 
 msgid "Find declaration      A-Enter"
-<<<<<<< HEAD:po/es.po
 msgstr "buscar &Declaración            M-Intro"
 
 msgid "Back from declaration     M--"
@@ -630,19 +510,6 @@ msgstr "ava&Nzar a declaración             M-+"
 
 msgid "Encod&ing...             C-t"
 msgstr "&Código carácter...                C-t"
-=======
-msgstr ""
-
-msgid "Back from declaration     M--"
-msgstr ""
-
-msgid "Forward to declaration    M-+"
-msgstr ""
-
-#, fuzzy
-msgid "Encod&ing...             C-t"
-msgstr "&Ordenar bloque de texto...        M-t"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/es.po
 
 msgid "Insert &literal...       C-q"
 msgstr "insertar &Literalmente...          C-q"
@@ -701,24 +568,12 @@ msgstr "redefinir &Teclas..."
 msgid "Syntax &Highlighting..."
 msgstr "sinta&Xis coloreada..."
 
-<<<<<<< HEAD:po/es.po
 msgid "S&yntax file"
 msgstr "editar archivo de &Sintaxis"
 
 msgid "&Menu file"
 msgstr "editar archivo de me&Nú..."
 
-=======
-#, fuzzy
-msgid "S&yntax file"
-msgstr " Editar archivo de sintaxis "
-
-#, fuzzy
-msgid "&Menu file"
-msgstr "editar archivo de &Menú..."
-
-#, fuzzy
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/es.po
 msgid "Save setu&p"
 msgstr "&Guardar configuración"
 
@@ -761,14 +616,8 @@ msgstr "Ancho del párrafo auto: "
 msgid "Tab spacing: "
 msgstr "Tamaño de tabulaciones: "
 
-<<<<<<< HEAD:po/es.po
 msgid "Pers&istent selection"
 msgstr "selecció&N persistente"
-=======
-#, fuzzy
-msgid "Pers&istent selection"
-msgstr "&Invertir la selección        M-*"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/es.po
 
 msgid "Synta&x highlighting"
 msgstr "sinta&Xis coloreada"
@@ -1010,14 +859,8 @@ msgstr " confirmar e&Liminación "
 msgid " Confirmation "
 msgstr " Confirmación "
 
-<<<<<<< HEAD:po/es.po
 msgid "UTF-8 output"
 msgstr "salida UTF-8"
-=======
-#, fuzzy
-msgid "UTF-8 output"
-msgstr "mostrar &8 bits"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/es.po
 
 msgid "Full 8 bits output"
 msgstr "mostrar &8 bits"
@@ -1265,21 +1108,11 @@ msgstr " Teclee la expresión para filtrar nombres de archivo"
 msgid "&Using shell patterns"
 msgstr "&Usando patrones shell"
 
-<<<<<<< HEAD:po/es.po
 msgid "&Case sensitive"
 msgstr "distinguir ma&Yúsculas"
 
 msgid "&Files only"
 msgstr "sólo &Archivos"
-=======
-#, fuzzy
-msgid "&Case sensitive"
-msgstr "distinguir ma&Yúsculas"
-
-#, fuzzy
-msgid "&Files only"
-msgstr "sólo &Tamaño"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/es.po
 
 msgid " Select "
 msgstr " Seleccionar grupo "
@@ -1773,14 +1606,8 @@ msgstr ""
 " Imposible eliminar el directorio \"%s\" \n"
 " %s "
 
-<<<<<<< HEAD:po/es.po
 msgid "Directory scanning"
 msgstr "Analizando directorio"
-=======
-#, fuzzy
-msgid "Directory scanning"
-msgstr " Ruta:"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/es.po
 
 msgid "1Copy"
 msgstr "1Copiar"
@@ -1949,17 +1776,9 @@ msgstr "enlaces simbólicos &Estables"
 msgid "&Dive into subdir if exists"
 msgstr "copiar &Recursivamente en subdirectorios"
 
-<<<<<<< HEAD:po/es.po
 #, c-format
 msgid "Invalid source pattern `%s'"
 msgstr "Patrón fuente incorrecto \"%s\""
-=======
-#, fuzzy, c-format
-msgid "Invalid source pattern `%s'"
-msgstr ""
-" Patrón fuente incorrecto \"%s\" \n"
-" %s "
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/es.po
 
 msgid "&Suspend"
 msgstr "&Detener"
@@ -1987,7 +1806,6 @@ msgstr "&Editar - F4"
 
 #, c-format
 msgid "Found: %ld"
-<<<<<<< HEAD:po/es.po
 msgstr "Encontrado: %ld"
 
 msgid " Malformed regular expression "
@@ -1996,19 +1814,6 @@ msgstr " La expresión regular es errónea "
 msgid "Cas&e sensitive"
 msgstr "distinguir ma&Yúsculas"
 
-=======
-msgstr ""
-
-#, fuzzy
-msgid " Malformed regular expression "
-msgstr " La expresión regular es errónea "
-
-#, fuzzy
-msgid "Cas&e sensitive"
-msgstr "distinguir ma&Yúsculas"
-
-#, fuzzy
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/es.po
 msgid "Case sens&itive"
 msgstr "distinguir ma&Yúsculas"
 
@@ -2019,20 +1824,11 @@ msgid "S&kip hidden"
 msgstr "saltar &Ocultos"
 
 msgid "&All charsets"
-<<<<<<< HEAD:po/es.po
 msgstr "cualquier co&Dificación"
 
 msgid "All cha&rsets"
 msgstr "cualquier codi&Ficación"
 
-=======
-msgstr ""
-
-msgid "All cha&rsets"
-msgstr ""
-
-#, fuzzy
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/es.po
 msgid "Re&gular expression"
 msgstr "expresión &Regular"
 
@@ -2042,17 +1838,9 @@ msgstr "ár&Bol"
 msgid "Find File"
 msgstr " Buscar archivos "
 
-<<<<<<< HEAD:po/es.po
 msgid "Content:"
 msgstr "Contenido:"
 
-=======
-#, fuzzy
-msgid "Content:"
-msgstr "Contenido: "
-
-#, fuzzy
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/es.po
 msgid "File name:"
 msgstr "Archivos:"
 
@@ -2423,11 +2211,7 @@ msgid "&Filter..."
 msgstr "&Filtro..."
 
 msgid "&Encoding...    C-t"
-<<<<<<< HEAD:po/es.po
 msgstr "&Código carácter...  C-t"
-=======
-msgstr ""
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/es.po
 
 msgid "&Network link..."
 msgstr "conexión por &Red..."
@@ -2442,11 +2226,7 @@ msgid "SM&B link..."
 msgstr "conexión por &SMB..."
 
 msgid "&Rescan         C-r"
-<<<<<<< HEAD:po/es.po
 msgstr "&Actualizar          C-r"
-=======
-msgstr "actualiza&R          C-r"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/es.po
 
 msgid "&View               F3"
 msgstr "&Ver                           F3"
@@ -2506,11 +2286,7 @@ msgid "e&Xit              F10"
 msgstr "sali&R                        F10"
 
 msgid "&User menu          F2"
-<<<<<<< HEAD:po/es.po
 msgstr "me&Nú de usuario                    F2"
-=======
-msgstr "me&Nú de usuario               F2"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/es.po
 
 msgid "&Directory tree"
 msgstr "árbol de &Directorios"
@@ -2533,14 +2309,8 @@ msgstr "búsquedas e&Xternas...           C-x !"
 msgid "show directory s&Izes"
 msgstr "mostrar &Tamaños de los directorios"
 
-<<<<<<< HEAD:po/es.po
 msgid "Command &history      M-h"
 msgstr "&Historia de órdenes               M-h"
-=======
-#, fuzzy
-msgid "Command &history      M-h"
-msgstr " Historia de órdenes "
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/es.po
 
 msgid "di&Rectory hotlist    C-\\"
 msgstr "&Favoritos...                      C-\\"
@@ -2626,17 +2396,10 @@ msgid "The TERM environment variable is unset!\n"
 msgstr "¡La variable de entorno TERM está sin definir!\n"
 
 msgid "&Fix it"
-<<<<<<< HEAD:po/es.po
 msgstr "&Reparar"
 
 msgid "don't ask again"
 msgstr "no preguntar de nuevo"
-=======
-msgstr ""
-
-msgid "don't ask again"
-msgstr ""
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/es.po
 
 msgid ""
 "Chosen display charset (Settings->Display bits)\n"
@@ -2647,7 +2410,6 @@ msgid ""
 "\n"
 "Or set 'don't ask again' and press <<Skip>>"
 msgstr ""
-<<<<<<< HEAD:po/es.po
 "La codificación de caracteres en pantalla (ver\n"
 "Opciones->Juego de caracteres) o en edición (en\n"
 "mcedit, Ctrl-t) no coinciden con la localización\n"
@@ -2655,8 +2417,6 @@ msgstr ""
 "para ajustarlos a la localización.\n"
 "\n"
 "También puede elegir \"no preguntar\" y «Saltar»."
-=======
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/es.po
 
 #, c-format
 msgid "GNU Midnight Commander %s\n"
@@ -2680,7 +2440,6 @@ msgstr ""
 "Si detecta algún fallo puede comunicarlo a mc-devel@gnome.org\n"
 "incluyendo la descripción obtenida con `mc -V'.\n"
 
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2730,18 +2489,6 @@ msgstr ""
 "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
 "   brightcyan, lightgray y white\n"
 "\n"
-
-msgid ""
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-msgstr ""
 
 msgid "Displays this help message"
 msgstr "Mostrar este mensaje de ayuda"
@@ -2803,15 +2550,9 @@ msgstr "Abrir un archivo con el visor"
 msgid "Edits one file"
 msgstr "Editar un archivo"
 
-<<<<<<< HEAD:po/es.po
 #, c-format
 msgid "Cannot create %s directory"
 msgstr "Imposible crear directorio %s"
-=======
-#, fuzzy, c-format
-msgid "Cannot create %s directory"
-msgstr "Imposible cambiar de directorio"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/es.po
 
 msgid "safe de&Lete"
 msgstr "precauciones de &Borrado"
@@ -3031,7 +2772,6 @@ msgid "Mkdir"
 msgstr "Mkdir"
 
 msgid " Not implemented yet "
-<<<<<<< HEAD:po/es.po
 msgstr " No implementado todavía "
 
 msgid " Num of replace tokens not equal to num of found tokens "
@@ -3043,25 +2783,11 @@ msgstr " El elemento número %d no es válido "
 
 msgid "Normal"
 msgstr "Normal"
-=======
-msgstr ""
-
-msgid " Num of replace tokens not equal to num of found tokens "
-msgstr ""
-
-#, fuzzy, c-format
-msgid " Invalid token number %d "
-msgstr "La máscara destino es incorrecta"
-
-msgid "Normal"
-msgstr ""
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/es.po
 
 msgid "&Regular expression"
 msgstr "expresión &Regular"
 
 msgid "Hexadecimal"
-<<<<<<< HEAD:po/es.po
 msgstr "he&Xadecimal"
 
 msgid "Wildcard search"
@@ -3069,16 +2795,6 @@ msgstr "caracteres como&Dín"
 
 msgid "Choose codepage"
 msgstr "Codificación de caracteres"
-=======
-msgstr ""
-
-msgid "Wildcard search"
-msgstr ""
-
-#, fuzzy
-msgid "Choose codepage"
-msgstr " Seleccionar juego de caracteres "
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/es.po
 
 msgid "-  < No translation >"
 msgstr "-  < Sin traducción >"
@@ -3123,14 +2839,8 @@ msgstr "y terminales según terminfo"
 msgid "Using the ncurses library"
 msgstr "Utilizando la biblioteca ncurses"
 
-<<<<<<< HEAD:po/es.po
 msgid "Using the ncursesw library"
 msgstr "Utilizando la biblioteca ncursesw"
-=======
-#, fuzzy
-msgid "Using the ncursesw library"
-msgstr "Utilizando la biblioteca ncurses"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/es.po
 
 msgid "With optional subshell support"
 msgstr "Soporte subshell optativo"
@@ -3252,21 +2962,11 @@ msgstr " No se encuentran entradas apropiadas en %s "
 msgid " User menu "
 msgstr " Menú de usuario "
 
-<<<<<<< HEAD:po/es.po
 msgid "%b %d %H:%M"
 msgstr "%d %b %H:%M"
 
 msgid "%b %d %Y"
 msgstr "%d %b %Y"
-=======
-#, fuzzy
-msgid "%b %d %H:%M"
-msgstr "%e %b %H:%M"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/es.po
-
-#, fuzzy
-msgid "%b %d %Y"
-msgstr "%e %b  %Y"
 
 msgid "%b %e  %Y"
 msgstr "%e %b  %Y"
@@ -3369,11 +3069,7 @@ msgstr ""
 " Imposible guardar el archivo: \n"
 " %s "
 
-<<<<<<< HEAD:po/es.po
 #, c-format
-=======
-#, fuzzy, c-format
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/es.po
 msgid ""
 " The current line number is %lu.\n"
 " Enter the new line number:"
@@ -3393,17 +3089,26 @@ msgstr " Ir a posición "
 msgid " Invalid address "
 msgstr " Posición incorrecta "
 
-<<<<<<< HEAD:po/es.po
 msgid "Seeking to search result"
 msgstr "Avanzando al resultado de búsqueda"
 
-=======
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/es.po
 msgid "ButtonBar|Help"
 msgstr "Ayuda"
 
 msgid "ButtonBar|Quit"
 msgstr "Salir"
+
+msgid "ButtonBar|Ascii"
+msgstr "Ascii"
+
+msgid "ButtonBar|Hex"
+msgstr "Hex"
+
+msgid "ButtonBar|Goto"
+msgstr "Ir a"
+
+msgid "ButtonBar|Line"
+msgstr "Línea"
 
 msgid "ButtonBar|View"
 msgstr "Ver"
@@ -3414,7 +3119,6 @@ msgstr "Editar"
 msgid "ButtonBar|Save"
 msgstr "Guarda"
 
-<<<<<<< HEAD:po/es.po
 msgid "ButtonBar|UnWrap"
 msgstr "Desple"
 
@@ -3439,8 +3143,6 @@ msgstr "SinFor"
 msgid "ButtonBar|Format"
 msgstr "Format"
 
-=======
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/es.po
 msgid " History "
 msgstr " Historia "
 
@@ -4032,128 +3734,3 @@ msgstr "Error interno:"
 
 msgid "Changes to file lost"
 msgstr "Los cambios del archivo se han perdido"
-<<<<<<< HEAD:po/es.po
-=======
-
-#~ msgid "scanf &Expression"
-#~ msgstr "&Expresión scanf"
-
-#~ msgid "&Whole words only"
-#~ msgstr "&Sólo palabras completas"
-
-#~ msgid " Enter replacement argument order eg. 3,2,1,4 "
-#~ msgstr " Teclee el orden de los argumentos, p. ej. 3,2,1,4 "
-
-#~ msgid ""
-#~ " Invalid regular expression, or scanf expression with too many "
-#~ "conversions "
-#~ msgstr ""
-#~ " La expresión regular es inválida o la expresión scanf tiene demasiadas "
-#~ "conversiones "
-
-#~ msgid " Error in replacement format string. "
-#~ msgstr " Error en cadena de formato al reemplazar. "
-
-#~ msgid " Replacement too long. "
-#~ msgstr " Reemplazo demasiado extenso. "
-
-#~ msgid "&Copy              F5"
-#~ msgstr "&Copiar                     F5"
-
-#~ msgid "&Delete            F8"
-#~ msgstr "&Borrar                     F8"
-
-#~ msgid "Save setu&p..."
-#~ msgstr "guardar co&Nfiguración"
-
-#~ msgid " The command history is empty "
-#~ msgstr " La historia de órdenes está vacía "
-
-#~ msgid "command &History"
-#~ msgstr "&Historia de órdenes"
-
-#~ msgid "Edit edi&tor menu file"
-#~ msgstr "editar me&Nú del editor..."
-
-#~ msgid "Edit &syntax file"
-#~ msgstr "editar archivo de &Sintaxis..."
-
-#~ msgid ""
-#~ "To use this feature select your codepage in\n"
-#~ "Setup / Display Bits dialog!\n"
-#~ "Do not forget to save options."
-#~ msgstr ""
-#~ "Para disponer de esta funcionalidad indique su juego de caracteres\n"
-#~ "accediendo al menú 'Opciones/Juego de caracteres'\n"
-#~ "y después no olvide 'Guardar configuración'."
-
-#~ msgid "Invalid hex search expression"
-#~ msgstr " Expresión regular hexadecimal inválida "
-
-#~ msgid " Invalid regular expression "
-#~ msgstr " Expresión regular inválida "
-
-#~ msgid " Enter regexp:"
-#~ msgstr " Teclee la expresión regular:"
-
-#~ msgid "ButtonBar|Ascii"
-#~ msgstr "Ascii"
-
-#~ msgid "ButtonBar|Hex"
-#~ msgstr "Hex"
-
-#~ msgid "ButtonBar|Goto"
-#~ msgstr "Ir a"
-
-#~ msgid "ButtonBar|Line"
-#~ msgstr "Línea"
-
-#~ msgid "ButtonBar|UnWrap"
-#~ msgstr "Desple"
-
-#~ msgid "ButtonBar|Wrap"
-#~ msgstr "Plegar"
-
-#~ msgid "ButtonBar|RxSrch"
-#~ msgstr "BúsqRx"
-
-#~ msgid "ButtonBar|HxSrch"
-#~ msgstr "BúsqHx"
-
-#~ msgid "ButtonBar|Search"
-#~ msgstr "Buscar"
-
-#~ msgid "ButtonBar|Raw"
-#~ msgstr "Crudo"
-
-#~ msgid "ButtonBar|Parse"
-#~ msgstr "Proces"
-
-#~ msgid "ButtonBar|Unform"
-#~ msgstr "SinFor"
-
-#~ msgid "ButtonBar|Format"
-#~ msgstr "Format"
-
-#~ msgid "Using included S-Lang library"
-#~ msgstr "Utilizando la biblioteca S-Lang propia"
-
-#~ msgid "with termcap database"
-#~ msgstr "y terminales según termcap"
-
-#~ msgid "(invalid)"
-#~ msgstr "(inválido)"
-
-#~ msgid " Notice "
-#~ msgstr " Aviso "
-
-#~ msgid ""
-#~ " The Midnight Commander configuration files \n"
-#~ " are now stored in the ~/.mc directory, the \n"
-#~ " files have been moved now\n"
-#~ msgstr ""
-#~ " Los archivos de configuración del Midnight Commander \n"
-#~ " se guardan ahora en el directorio ~/.mc.\n"
-#~ "\n"
-#~ " Los archivos han sido trasladados allí.\n"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/es.po

@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-30 19:39+0200\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-07-09 17:07+0300\n"
 "PO-Revision-Date: 2000-06-22 00:00+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -663,6 +663,12 @@ msgstr "obrni iz&Biro      M-*"
 msgid "Synta&x highlighting"
 msgstr "Osvetlitev &sintakse"
 
+msgid "Visible tabs"
+msgstr ""
+
+msgid "Visible trailing spaces"
+msgstr ""
+
 msgid "Save file &position"
 msgstr " Shrani &mesto datoteke"
 
@@ -1000,6 +1006,9 @@ msgstr "Geslo za \\\\%s\\%s"
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Opozorilo: datoteka %s ni bila najdena\n"
+
+msgid "7-bit ASCII"
+msgstr ""
 
 #, c-format
 msgid "Cannot translate from %s to %s"
@@ -3112,6 +3121,9 @@ msgstr " Pojdi na naslov"
 #, fuzzy
 msgid " Invalid address "
 msgstr " Neveljavno geslo "
+
+msgid "Seeking to search result"
+msgstr ""
 
 msgid "ButtonBar|Help"
 msgstr ""

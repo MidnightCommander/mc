@@ -5,13 +5,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gmc finnish 0.01\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-30 19:38+0200\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-07-09 17:07+0300\n"
 "PO-Revision-Date: 1999-08-23 17:30+0200\n"
 "Last-Translator: Mikko Rauhala <mjr@iki.fi>\n"
 "Language-Team: Finnish <debian-l10n-finnish@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
 #, fuzzy
@@ -27,7 +27,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid " Cannot open %s for reading "
-msgstr " Tiedoston avaaminen lukua varten ep‰onnistui: "
+msgstr " Tiedoston avaaminen lukua varten ep√§onnistui: "
 
 msgid "Error"
 msgstr "Virhe"
@@ -38,7 +38,7 @@ msgstr " Virhe hakiessa tietoja tiedostosta "
 
 #, fuzzy, c-format
 msgid " Cannot open pipe for reading: %s "
-msgstr " Tiedoston avaaminen lukua varten ep‰onnistui: "
+msgstr " Tiedoston avaaminen lukua varten ep√§onnistui: "
 
 #, fuzzy, c-format
 msgid " Cannot get size/permissions for %s "
@@ -72,7 +72,7 @@ msgid " File has hard-links. Detach before saving? "
 msgstr ""
 
 msgid "&Yes"
-msgstr "&Kyll‰"
+msgstr "&Kyll√§"
 
 msgid "&No"
 msgstr "&Ei"
@@ -89,7 +89,7 @@ msgstr " Virhe hakiessa tietoja tiedostosta "
 
 #, fuzzy
 msgid " Cannot open pipe for writing: "
-msgstr " Tiedoston avaaminen lukua varten ep‰onnistui: "
+msgstr " Tiedoston avaaminen lukua varten ep√§onnistui: "
 
 msgid "Quick save "
 msgstr "Nopea tallennus "
@@ -104,19 +104,19 @@ msgid "&OK"
 msgstr "&OK"
 
 msgid "Extension:"
-msgstr "P‰‰te:"
+msgstr "P√§√§te:"
 
 msgid " Edit Save Mode "
 msgstr " Muokkaa tallennusmoodia "
 
 msgid " Save As "
-msgstr " Tallenna nimell‰ "
+msgstr " Tallenna nimell√§ "
 
 msgid " Enter file name: "
 msgstr " Anna tiedostonimi: "
 
 msgid " A file already exists with this name. "
-msgstr " T‰m‰nniminen tiedosto on jo olemassa. "
+msgstr " T√§m√§nniminen tiedosto on jo olemassa. "
 
 #, fuzzy
 msgid "&Overwrite"
@@ -129,7 +129,7 @@ msgid " Delete macro "
 msgstr " Poista makro "
 
 msgid " Cannot open temp file "
-msgstr " Virhe avattaessa v‰liaikaistiedostoa "
+msgstr " Virhe avattaessa v√§liaikaistiedostoa "
 
 msgid " Cannot open macro file "
 msgstr " Virhe avattaessa makrotiedostoa "
@@ -141,7 +141,7 @@ msgid " Save macro "
 msgstr " Tallenna makro "
 
 msgid " Press the macro's new hotkey: "
-msgstr " Paina makron uutta pikan‰pp‰int‰: "
+msgstr " Paina makron uutta pikan√§pp√§int√§: "
 
 msgid " Press macro hotkey: "
 msgstr " Paina makron pikavalintaa: "
@@ -162,8 +162,8 @@ msgid ""
 " Current text was modified without a file save. \n"
 " Continue discards these changes. "
 msgstr ""
-" Teksti‰ on muokattu ilman tallennusta.\n"
-" Jos valitset jatka, muutokset h‰vi‰v‰t."
+" Teksti√§ on muokattu ilman tallennusta.\n"
+" Jos valitset jatka, muutokset h√§vi√§v√§t."
 
 #, fuzzy
 msgid "C&ontinue"
@@ -175,13 +175,13 @@ msgstr " Lataa syntaksitiedosto "
 
 #, fuzzy
 msgid " Which syntax file you want to edit? "
-msgstr " Mit‰ laajennustiedostoa haluat muokata? "
+msgstr " Mit√§ laajennustiedostoa haluat muokata? "
 
 msgid "&User"
-msgstr "&K‰ytt‰j‰"
+msgstr "&K√§ytt√§j√§"
 
 msgid "&System Wide"
-msgstr "&J‰rjestelm‰n laajuinen"
+msgstr "&J√§rjestelm√§n laajuinen"
 
 #, fuzzy
 msgid " Menu edit "
@@ -189,7 +189,7 @@ msgstr "Valikkotiedoston muokkaus"
 
 #, fuzzy
 msgid " Which menu file do you want to edit? "
-msgstr " Mit‰ valikkotiedostoa haluat muokata? "
+msgstr " Mit√§ valikkotiedostoa haluat muokata? "
 
 msgid "&Local"
 msgstr "&Paikallinen"
@@ -198,7 +198,7 @@ msgid " Load "
 msgstr " Lataa "
 
 msgid " Block is large, you may not be able to undo this action. "
-msgstr " Valinta on suuri; et ehk‰ kykene peruuttamaan t‰t‰ toimintoa. "
+msgstr " Valinta on suuri; et ehk√§ kykene peruuttamaan t√§t√§ toimintoa. "
 
 #, fuzzy
 msgid "Replace"
@@ -229,13 +229,13 @@ msgid " This function is not implemented. "
 msgstr ""
 
 msgid " Copy to clipboard "
-msgstr " Kopioi leikepˆyd‰lle"
+msgstr " Kopioi leikep√∂yd√§lle"
 
 msgid " Unable to save to file. "
 msgstr " Ei voitu tallentaa tiedostoon. "
 
 msgid " Cut to clipboard "
-msgstr " Leikkaa leikepˆyd‰lle "
+msgstr " Leikkaa leikep√∂yd√§lle "
 
 msgid " Goto line "
 msgstr " Siirry riville "
@@ -247,25 +247,25 @@ msgid " Save Block "
 msgstr " Tallenna valinta "
 
 msgid " Insert File "
-msgstr " Liit‰ tiedosto "
+msgstr " Liit√§ tiedosto "
 
 msgid " Cannot insert file. "
-msgstr " Virhe liitett‰ess‰ tiedostoa. "
+msgstr " Virhe liitett√§ess√§ tiedostoa. "
 
 msgid " Sort block "
-msgstr " J‰rjest‰ valinta "
+msgstr " J√§rjest√§ valinta "
 
 msgid " You must first highlight a block of text. "
-msgstr " Sinun t‰ytyy ensin valita lohko teksti‰. "
+msgstr " Sinun t√§ytyy ensin valita lohko teksti√§. "
 
 msgid " Run Sort "
-msgstr " Aja sort-j‰rjest‰j‰ "
+msgstr " Aja sort-j√§rjest√§j√§ "
 
 msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr " Anna sortin valitsimet (ks. manuaalisivu) v‰lein erotettuna: "
+msgstr " Anna sortin valitsimet (ks. manuaalisivu) v√§lein erotettuna: "
 
 msgid " Sort "
-msgstr " J‰rjest‰ "
+msgstr " J√§rjest√§ "
 
 msgid " Cannot execute sort command "
 msgstr " Virhe suoritettaessa sort-komentoa "
@@ -300,7 +300,7 @@ msgstr ""
 
 #, fuzzy
 msgid "Process block"
-msgstr " K‰sittele valinta "
+msgstr " K√§sittele valinta "
 
 msgid " Mail "
 msgstr " Posti "
@@ -318,10 +318,10 @@ msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <subject> -c <cc> <to>"
 
 msgid " Insert Literal "
-msgstr " Lis‰‰ merkki "
+msgstr " Lis√§√§ merkki "
 
 msgid " Press any key: "
-msgstr " Paina jotakin n‰pp‰int‰: "
+msgstr " Paina jotakin n√§pp√§int√§: "
 
 msgid " Execute Macro "
 msgstr " Suorita makro "
@@ -373,7 +373,7 @@ msgid "&Dismiss"
 msgstr "&Kuittaa"
 
 msgid " Emacs key: "
-msgstr " Emacs-n‰pp‰in: "
+msgstr " Emacs-n√§pp√§in: "
 
 #, c-format
 msgid ""
@@ -409,7 +409,7 @@ msgstr ""
 "\n"
 "   Copyright (C) 1996 Free Software Foundation\n"
 "\n"
-"       K‰ytt‰j‰yst‰v‰llinen tekstinmuokkain\n"
+"       K√§ytt√§j√§yst√§v√§llinen tekstinmuokkain\n"
 "           Midnight Commanderia varten.\n"
 
 #, fuzzy
@@ -423,17 +423,17 @@ msgid "&Save              F2"
 msgstr "&Tallenna          F2"
 
 msgid "Save &as...       F12"
-msgstr "tallenna &Nimell‰... F12"
+msgstr "tallenna &Nimell√§... F12"
 
 msgid "&Insert file...   F15"
-msgstr "&Liit‰ tiedosto... F15"
+msgstr "&Liit√§ tiedosto... F15"
 
 msgid "Copy to &file...  C-f"
 msgstr "&Kopioi tiedostoon... C-f"
 
 #, fuzzy
 msgid "&User menu...     F11"
-msgstr "&Liit‰ tiedosto... F15"
+msgstr "&Liit√§ tiedosto... F15"
 
 msgid "A&bout...            "
 msgstr "t&Ietoja...          "
@@ -465,7 +465,7 @@ msgstr "&Kopioi            F5"
 
 #, fuzzy
 msgid "&Move                        F6"
-msgstr "&Siirr‰            F6"
+msgstr "&Siirr√§            F6"
 
 #, fuzzy
 msgid "&Delete                      F8"
@@ -492,7 +492,7 @@ msgstr "&Uusi             C-n"
 
 #, fuzzy
 msgid "Pre&v bookmark                 "
-msgstr "&J‰rjest‰...             M-t"
+msgstr "&J√§rjest√§...             M-t"
 
 #, fuzzy
 msgid "&Flush bookmark                "
@@ -551,13 +551,13 @@ msgstr ""
 
 #, fuzzy
 msgid "Encod&ing...             C-t"
-msgstr "&J‰rjest‰...             M-t"
+msgstr "&J√§rjest√§...             M-t"
 
 msgid "Insert &literal...       C-q"
-msgstr "lis‰‰ &merkki...         C-q"
+msgstr "lis√§√§ &merkki...         C-q"
 
 msgid "&Refresh screen          C-l"
-msgstr "&Virkist‰ n‰yttˆ         C-l"
+msgstr "&Virkist√§ n√§ytt√∂         C-l"
 
 msgid "&Start record macro      C-r"
 msgstr "&Aloita makron nauhoitus C-r"
@@ -572,7 +572,7 @@ msgid "Delete macr&o...            "
 msgstr "poista makr&O...            "
 
 msgid "Insert &date/time           "
-msgstr "lis‰‰ &P‰iv‰ys              "
+msgstr "lis√§√§ &P√§iv√§ys              "
 
 msgid "Format p&aragraph        M-p"
 msgstr "muotoile &Kappale        M-p"
@@ -581,7 +581,7 @@ msgid "'ispell' s&pell check    C-p"
 msgstr "'is&Pell' tarkistus       C-p"
 
 msgid "Sor&t...                 M-t"
-msgstr "&J‰rjest‰...             M-t"
+msgstr "&J√§rjest√§...             M-t"
 
 msgid "Paste o&utput of...      M-u"
 msgstr ""
@@ -600,7 +600,7 @@ msgid "'ispell' s&pell check    M-$"
 msgstr "'is&Pell' tarkistus      M-$"
 
 msgid "&General...  "
-msgstr "&Yleist‰...  "
+msgstr "&Yleist√§...  "
 
 msgid "&Save mode..."
 msgstr "&Tallennusmoodi..."
@@ -650,7 +650,7 @@ msgid "User-defined"
 msgstr "&Oma tiedostolista:"
 
 msgid "None"
-msgstr "Ei mit‰‰n"
+msgstr "Ei mit√§√§n"
 
 msgid "Dynamic paragraphing"
 msgstr "Dynaaminen kappalejako"
@@ -662,13 +662,19 @@ msgid "Word wrap line length: "
 msgstr "Sanakierron rivipituus : "
 
 msgid "Tab spacing: "
-msgstr "Tabulaattoriv‰li : "
+msgstr "Tabulaattoriv√§li : "
 
 msgid "Pers&istent selection"
 msgstr ""
 
 msgid "Synta&x highlighting"
 msgstr "syntaks&Ikorostus"
+
+msgid "Visible tabs"
+msgstr ""
+
+msgid "Visible trailing spaces"
+msgstr ""
 
 #, fuzzy
 msgid "Save file &position"
@@ -678,10 +684,10 @@ msgid "Confir&m before saving"
 msgstr "&Varmista ennen tallennusta"
 
 msgid "Fill tabs with &spaces"
-msgstr "t‰yt‰ tabit &V‰lilyˆnnein"
+msgstr "t√§yt√§ tabit &V√§lily√∂nnein"
 
 msgid "&Return does autoindent"
-msgstr "&Rivinvaihto sisent‰‰"
+msgstr "&Rivinvaihto sisent√§√§"
 
 msgid "&Backspace through tabs"
 msgstr "&Poisto tuhoaa tabit"
@@ -693,7 +699,7 @@ msgid "Wrap mode"
 msgstr "Kieromoodi"
 
 msgid "Key emulation"
-msgstr "N‰pp‰imistˆemulaatio"
+msgstr "N√§pp√§imist√∂emulaatio"
 
 msgid " Editor options "
 msgstr " Muokkaimen valinnat "
@@ -714,13 +720,13 @@ msgid "Copy"
 msgstr "Kopioi"
 
 msgid "Move"
-msgstr "Siirr‰"
+msgstr "Siirr√§"
 
 msgid "Delete"
 msgstr "Tuhoa"
 
 msgid "PullDn"
-msgstr "Ved‰ alas"
+msgstr "Ved√§ alas"
 
 msgid " Load syntax file "
 msgstr " Lataa syntaksitiedosto "
@@ -733,7 +739,7 @@ msgstr ""
 
 #, c-format
 msgid " Error in file %s on line %d "
-msgstr " Virhe tiedostossa %s rivill‰ %d "
+msgstr " Virhe tiedostossa %s rivill√§ %d "
 
 #, c-format
 msgid "bind: Wrong argument number, bind <key> <command>"
@@ -796,13 +802,13 @@ msgid "owner"
 msgstr "omistaja"
 
 msgid "group"
-msgstr "ryhm‰"
+msgstr "ryhm√§"
 
 msgid "other"
 msgstr "muut"
 
 msgid "On"
-msgstr "P‰‰ll‰"
+msgstr "P√§√§ll√§"
 
 msgid "Flag"
 msgstr "Lippo"
@@ -822,7 +828,7 @@ msgid ""
 " Cannot chmod \"%s\" \n"
 " %s "
 msgstr ""
-" chmod \"%s\" ep‰onnistui\n"
+" chmod \"%s\" ep√§onnistui\n"
 " %s "
 
 #, c-format
@@ -830,7 +836,7 @@ msgid ""
 " Cannot chown \"%s\" \n"
 " %s "
 msgstr ""
-" chown \"%s\" ep‰onnistui\n"
+" chown \"%s\" ep√§onnistui\n"
 " %s "
 
 msgid " Background process error "
@@ -848,16 +854,16 @@ msgstr " Taustaprotokollavirhe "
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
-msgstr " Taustaprosessi l‰hetti pyynnˆn koskien liian montaa parametria.\n"
+msgstr " Taustaprosessi l√§hetti pyynn√∂n koskien liian montaa parametria.\n"
 
 msgid "&Full file list"
-msgstr "&T‰ysi tiedostolista"
+msgstr "&T√§ysi tiedostolista"
 
 msgid "&Brief file list"
 msgstr "&Lyhyt tiedostolista"
 
 msgid "&Long file list"
-msgstr "&Pitk‰ tiedostolista"
+msgstr "&Pitk√§ tiedostolista"
 
 msgid "&User defined:"
 msgstr "&Oma tiedostolista:"
@@ -869,13 +875,13 @@ msgid "user &Mini status"
 msgstr "&Minitila"
 
 msgid "&Reverse"
-msgstr "&K‰‰nteinen"
+msgstr "&K√§√§nteinen"
 
 msgid "case sensi&tive"
 msgstr "&Isot/pienet eroavat"
 
 msgid "Sort order"
-msgstr "J‰rjestys"
+msgstr "J√§rjestys"
 
 msgid "Executable first"
 msgstr ""
@@ -901,10 +907,10 @@ msgstr " Varmistus "
 
 #, fuzzy
 msgid "UTF-8 output"
-msgstr "T‰ysi 8-bittinen tuloste"
+msgstr "T√§ysi 8-bittinen tuloste"
 
 msgid "Full 8 bits output"
-msgstr "T‰ysi 8-bittinen tuloste"
+msgstr "T√§ysi 8-bittinen tuloste"
 
 msgid "ISO 8859-1"
 msgstr "ISO 8859-1"
@@ -913,10 +919,10 @@ msgid "7 bits"
 msgstr "7-bittinen"
 
 msgid "F&ull 8 bits input"
-msgstr "T‰ysi &8-bittinen syˆte"
+msgstr "T√§ysi &8-bittinen sy√∂te"
 
 msgid " Display bits "
-msgstr " N‰yt‰ bitit "
+msgstr " N√§yt√§ bitit "
 
 #, fuzzy
 msgid "Other 8 bit"
@@ -941,13 +947,13 @@ msgid "&Use ~/.netrc"
 msgstr ""
 
 msgid "&Always use ftp proxy"
-msgstr "K‰yt‰ aina &ftp-proxy‰"
+msgstr "K√§yt√§ aina &ftp-proxy√§"
 
 msgid "sec"
 msgstr "sek."
 
 msgid "ftpfs directory cache timeout:"
-msgstr "ftpfs:n hakemistov‰limuistin aikaraja: "
+msgstr "ftpfs:n hakemistov√§limuistin aikaraja: "
 
 msgid "ftp anonymous password:"
 msgstr "anonyymi-ftp:n salasana:"
@@ -956,7 +962,7 @@ msgid "Timeout for freeing VFSs:"
 msgstr "Aikaraja VFS:ien vapauttamiseen:"
 
 msgid " Virtual File System Setting "
-msgstr " VFS - virtuaalitiedostoj‰rjestelm‰asetus "
+msgstr " VFS - virtuaalitiedostoj√§rjestelm√§asetus "
 
 msgid "Quick cd"
 msgstr "Pikainen hakemistonvaihto"
@@ -977,10 +983,10 @@ msgid "Running "
 msgstr "Suoritetaan "
 
 msgid "Stopped"
-msgstr "Pys‰ytetty"
+msgstr "Pys√§ytetty"
 
 msgid "&Stop"
-msgstr "&Pys‰yt‰"
+msgstr "&Pys√§yt√§"
 
 msgid "&Resume"
 msgstr "&Jatka"
@@ -989,7 +995,7 @@ msgid "&Kill"
 msgstr "&Tapa"
 
 msgid "Background Jobs"
-msgstr "Taustatyˆt"
+msgstr "Taustaty√∂t"
 
 #, fuzzy
 msgid "Domain:"
@@ -997,7 +1003,7 @@ msgstr "Komento:"
 
 #, fuzzy
 msgid "Username:"
-msgstr " K‰ytt‰j‰n nimi "
+msgstr " K√§ytt√§j√§n nimi "
 
 msgid "Password:"
 msgstr "Salasana:"
@@ -1008,6 +1014,9 @@ msgstr ""
 
 #, c-format
 msgid "Warning: file %s not found\n"
+msgstr ""
+
+msgid "7-bit ASCII"
 msgstr ""
 
 #, fuzzy, c-format
@@ -1026,13 +1035,13 @@ msgid "read by others"
 msgstr "luku muilla"
 
 msgid "execute/search by group"
-msgstr "suorits/haku ryhm‰ll‰"
+msgstr "suorits/haku ryhm√§ll√§"
 
 msgid "write by group"
-msgstr "kirjoitus ryhm‰ll‰"
+msgstr "kirjoitus ryhm√§ll√§"
 
 msgid "read by group"
-msgstr "luku ryhm‰ll‰"
+msgstr "luku ryhm√§ll√§"
 
 msgid "execute/search by owner"
 msgstr "suoritus/haku omistajalla"
@@ -1053,7 +1062,7 @@ msgid "set user ID on execution"
 msgstr "aseta UID suoritettaessa"
 
 msgid "C&lear marked"
-msgstr "&Tyhjenn‰ merkityt"
+msgstr "&Tyhjenn√§ merkityt"
 
 msgid "S&et marked"
 msgstr "&Aseta merkityt"
@@ -1071,19 +1080,19 @@ msgid "Owner name"
 msgstr "Omistajan nimi"
 
 msgid "Group name"
-msgstr "Ryhm‰n nimi"
+msgstr "Ryhm√§n nimi"
 
 msgid "Use SPACE to change"
-msgstr "V‰lilyˆnti muuttaa"
+msgstr "V√§lily√∂nti muuttaa"
 
 msgid "an option, ARROW KEYS"
-msgstr "valintaa, nuolin‰pp‰imet"
+msgstr "valintaa, nuolin√§pp√§imet"
 
 msgid "to move between options"
 msgstr "liikkuvat valinnoissa,"
 
 msgid "and T or INS to mark"
-msgstr "T/INS merkitsev‰t"
+msgstr "T/INS merkitsev√§t"
 
 msgid " Permission "
 msgstr " Oikeudet "
@@ -1092,10 +1101,10 @@ msgid "Chmod command"
 msgstr "Chmod-komento"
 
 msgid "Set &users"
-msgstr "Aseta &k‰ytt‰j‰t"
+msgstr "Aseta &k√§ytt√§j√§t"
 
 msgid "Set &groups"
-msgstr "Aseta &ryhm‰t"
+msgstr "Aseta &ryhm√§t"
 
 msgid " Name "
 msgstr " Nimi "
@@ -1104,22 +1113,22 @@ msgid " Owner name "
 msgstr " Omistajan nimi "
 
 msgid " Group name "
-msgstr " Ryhm‰n nimi "
+msgstr " Ryhm√§n nimi "
 
 msgid " Size "
 msgstr " Koko "
 
 msgid " User name "
-msgstr " K‰ytt‰j‰n nimi "
+msgstr " K√§ytt√§j√§n nimi "
 
 msgid " Chown command "
 msgstr " Chown-komento "
 
 msgid "<Unknown user>"
-msgstr "<Tuntematon k‰ytt‰j‰>"
+msgstr "<Tuntematon k√§ytt√§j√§>"
 
 msgid "<Unknown group>"
-msgstr "<Tuntematon ryhm‰>"
+msgstr "<Tuntematon ryhm√§>"
 
 msgid "Files tagged, want to cd?"
 msgstr "Tiedostot merkitty, vaihdetaanko hakemisto?"
@@ -1128,13 +1137,13 @@ msgid "Cannot change directory"
 msgstr "Ei voitu vaihtaa hakemistoa"
 
 msgid " View file "
-msgstr " N‰yt‰ tiedosto "
+msgstr " N√§yt√§ tiedosto "
 
 msgid " Filename:"
 msgstr " Tiedostonimi:"
 
 msgid " Filtered view "
-msgstr " Suodatettu n‰kym‰ "
+msgstr " Suodatettu n√§kym√§ "
 
 msgid " Filter command and arguments:"
 msgstr " Suodinkomento ja parametrit:"
@@ -1172,7 +1181,7 @@ msgid "Extension file edit"
 msgstr "Laajennustiedoston muokkaus"
 
 msgid " Which extension file you want to edit? "
-msgstr " Mit‰ laajennustiedostoa haluat muokata? "
+msgstr " Mit√§ laajennustiedostoa haluat muokata? "
 
 msgid " Compare directories "
 msgstr " Vertaa hakemistoja "
@@ -1191,7 +1200,7 @@ msgstr "&Perusteellinen"
 
 msgid " Both panels should be in the listing mode to use this command "
 msgstr ""
-" Molempien paneelien tulisi olla listausn‰kym‰ss‰ t‰t‰ komentoa k‰ytt‰‰ksesi"
+" Molempien paneelien tulisi olla listausn√§kym√§ss√§ t√§t√§ komentoa k√§ytt√§√§ksesi"
 
 msgid ""
 " Not an xterm or Linux console; \n"
@@ -1220,7 +1229,7 @@ msgid " Symlink `%s' points to: "
 msgstr " Symbolinen linkki '%s' osoittaa kohteeseen: "
 
 msgid " Edit symlink "
-msgstr " Muokkaa symbolista linkki‰ "
+msgstr " Muokkaa symbolista linkki√§ "
 
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
@@ -1228,7 +1237,7 @@ msgstr " symbolisen linkin muokkaus, ei voitu poistaa %s: %s "
 
 #, c-format
 msgid " edit symlink: %s "
-msgstr " muokkaa symbolista linkki‰: %s "
+msgstr " muokkaa symbolista linkki√§: %s "
 
 #, fuzzy, c-format
 msgid "`%s' is not a symbolic link"
@@ -1256,13 +1265,13 @@ msgid " SMB link to machine "
 msgstr " FTP koneeseen "
 
 msgid " Undelete files on an ext2 file system "
-msgstr " Palauta tuhottuja tiedostoja ext2-j‰rjestelm‰st‰ "
+msgstr " Palauta tuhottuja tiedostoja ext2-j√§rjestelm√§st√§ "
 
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
 msgstr ""
-" Anna laitetiedosto (ilman /dev/:i‰) palauttaaksesi\n"
+" Anna laitetiedosto (ilman /dev/:i√§) palauttaaksesi\n"
 "   tiedostoja: (F1 antaa ohjeen)"
 
 msgid " Setup "
@@ -1279,19 +1288,19 @@ msgid ""
 msgstr ""
 
 msgid " Cannot execute commands on non-local filesystems"
-msgstr " Ei-paikallisesta tiedostoj‰rjestelm‰st‰ ei voi suorittaa komentoja"
+msgstr " Ei-paikallisesta tiedostoj√§rjestelm√§st√§ ei voi suorittaa komentoja"
 
 msgid " The shell is already running a command "
 msgstr ""
 
 msgid "&Unsorted"
-msgstr "&J‰rjest‰m‰tˆn"
+msgstr "&J√§rjest√§m√§t√∂n"
 
 msgid "&Name"
 msgstr "&Nimi"
 
 msgid "&Extension"
-msgstr "&P‰‰te"
+msgstr "&P√§√§te"
 
 msgid "&Modify time"
 msgstr "&Muutosaika"
@@ -1329,7 +1338,7 @@ msgid ""
 " Cannot create temporary command file \n"
 " %s "
 msgstr ""
-" Ei voitu luoda v‰liaikaiskomentotiedostoa \n"
+" Ei voitu luoda v√§liaikaiskomentotiedostoa \n"
 " %s "
 
 msgid " Parameter "
@@ -1361,20 +1370,20 @@ msgid " Copy "
 msgstr " Kopioi "
 
 msgid " Move "
-msgstr " Siirr‰ "
+msgstr " Siirr√§ "
 
 msgid " Delete "
 msgstr " Tuhoa "
 
 msgid " Cannot make the hardlink "
-msgstr " Ei voitu luoda kovaa linkki‰ "
+msgstr " Ei voitu luoda kovaa linkki√§ "
 
 #, c-format
 msgid ""
 " Cannot read source link \"%s\" \n"
 " %s "
 msgstr ""
-" Ei voitu lukea l‰hdelinkki‰ \"%s\" \n"
+" Ei voitu lukea l√§hdelinkki√§ \"%s\" \n"
 " %s "
 
 msgid ""
@@ -1382,8 +1391,8 @@ msgid ""
 "\n"
 " Option Stable Symlinks will be disabled "
 msgstr ""
-" Ei voida tehd‰ vakaita symbolisia linkkej‰ ei-paikallisten\n"
-" tiedostoj‰rjestelmien v‰lille.\n"
+" Ei voida tehd√§ vakaita symbolisia linkkej√§ ei-paikallisten\n"
+" tiedostoj√§rjestelmien v√§lille.\n"
 " Valinta 'Vakaat symboliset linkit' ei vaikuta."
 
 #, c-format
@@ -1391,7 +1400,7 @@ msgid ""
 " Cannot create target symlink \"%s\" \n"
 " %s "
 msgstr ""
-" Ei voitu luoda symbolista linkki‰ \"%s\" \n"
+" Ei voitu luoda symbolista linkki√§ \"%s\" \n"
 " %s "
 
 msgid "&Abort"
@@ -1410,7 +1419,7 @@ msgid ""
 " Cannot stat source file \"%s\" \n"
 " %s "
 msgstr ""
-" Ei saada tietoja l‰hdetiedostosta \"%s\" \n"
+" Ei saada tietoja l√§hdetiedostosta \"%s\" \n"
 " %s "
 
 #, fuzzy, c-format
@@ -1796,7 +1805,7 @@ msgstr ""
 
 #, fuzzy
 msgid " Malformed regular expression "
-msgstr "  Virheellinen s‰‰nnˆllinen lauseke  "
+msgstr "  Virheellinen s√§√§nn√∂llinen lauseke  "
 
 #, fuzzy
 msgid "Cas&e sensitive"
@@ -1820,7 +1829,7 @@ msgstr ""
 
 #, fuzzy
 msgid "Re&gular expression"
-msgstr "&S‰‰nnˆllinen lauseke"
+msgstr "&S√§√§nn√∂llinen lauseke"
 
 msgid "&Tree"
 msgstr ""
@@ -1894,7 +1903,7 @@ msgstr ""
 
 #, fuzzy
 msgid "&Refresh"
-msgstr "&K‰‰nteinen"
+msgstr "&K√§√§nteinen"
 
 msgid "Fr&ee VFSs now"
 msgstr ""
@@ -2029,8 +2038,8 @@ msgstr ""
 #, fuzzy, c-format
 msgid " (%ld block)"
 msgid_plural " (%ld blocks)"
-msgstr[0] " J‰rjest‰ valinta "
-msgstr[1] " J‰rjest‰ valinta "
+msgstr[0] " J√§rjest√§ valinta "
+msgstr[1] " J√§rjest√§ valinta "
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -2192,11 +2201,11 @@ msgstr ""
 
 #, fuzzy
 msgid "S&hell link..."
-msgstr "Luo pehme‰ linkki..."
+msgstr "Luo pehme√§ linkki..."
 
 #, fuzzy
 msgid "SM&B link..."
-msgstr "Luo pehme‰ linkki..."
+msgstr "Luo pehme√§ linkki..."
 
 msgid "&Rescan         C-r"
 msgstr ""
@@ -2590,7 +2599,7 @@ msgid " Cannot run external panelize in a non-local directory "
 msgstr ""
 
 msgid "Find rejects after patching"
-msgstr "Etsi hyl‰tyt paikkauksen j‰ljilt‰"
+msgstr "Etsi hyl√§tyt paikkauksen j√§ljilt√§"
 
 msgid "Find *.orig after patching"
 msgstr ""
@@ -2609,7 +2618,7 @@ msgstr ""
 
 #, fuzzy
 msgid "unknown option"
-msgstr "<Tuntematon ryhm‰>"
+msgstr "<Tuntematon ryhm√§>"
 
 msgid "invalid numeric value"
 msgstr ""
@@ -2625,7 +2634,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid "Usage:"
-msgstr " K‰ytt‰j‰n nimi "
+msgstr " K√§ytt√§j√§n nimi "
 
 msgid "[dev]"
 msgstr ""
@@ -2673,10 +2682,10 @@ msgid "Owner"
 msgstr "Omistaja"
 
 msgid "Group"
-msgstr "Ryhm‰"
+msgstr "Ryhm√§"
 
 msgid "<readlink failed>"
-msgstr "<linkin luku ep‰onnistui>"
+msgstr "<linkin luku ep√§onnistui>"
 
 #, fuzzy, c-format
 msgid "%s byte"
@@ -2700,7 +2709,7 @@ msgid " Do you really want to execute? "
 msgstr ""
 
 msgid "View"
-msgstr "N‰yttˆ"
+msgstr "N√§ytt√∂"
 
 msgid "Edit"
 msgstr "Muokkaa"
@@ -2725,7 +2734,7 @@ msgid "Normal"
 msgstr ""
 
 msgid "&Regular expression"
-msgstr "&S‰‰nnˆllinen lauseke"
+msgstr "&S√§√§nn√∂llinen lauseke"
 
 msgid "Hexadecimal"
 msgstr ""
@@ -2773,11 +2782,11 @@ msgstr ""
 
 #, fuzzy
 msgid "Using the ncurses library"
-msgstr "Virkist‰ hakemiston‰kym‰"
+msgstr "Virkist√§ hakemiston√§kym√§"
 
 #, fuzzy
 msgid "Using the ncursesw library"
-msgstr "Virkist‰ hakemiston‰kym‰"
+msgstr "Virkist√§ hakemiston√§kym√§"
 
 msgid "With optional subshell support"
 msgstr ""
@@ -2787,7 +2796,7 @@ msgstr ""
 
 #, fuzzy
 msgid "With support for background operations\n"
-msgstr "Lista taustatˆist‰"
+msgstr "Lista taustat√∂ist√§"
 
 msgid "With mouse support on xterm and Linux console\n"
 msgstr ""
@@ -2797,7 +2806,7 @@ msgstr ""
 
 #, fuzzy
 msgid "With support for X11 events\n"
-msgstr "Lista taustatˆist‰"
+msgstr "Lista taustat√∂ist√§"
 
 msgid "With internationalization support\n"
 msgstr ""
@@ -2807,7 +2816,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid "Virtual File System:"
-msgstr " VFS - virtuaalitiedostoj‰rjestelm‰asetus "
+msgstr " VFS - virtuaalitiedostoj√§rjestelm√§asetus "
 
 #, c-format
 msgid ""
@@ -2840,7 +2849,7 @@ msgid "Dynamc"
 msgstr ""
 
 msgid "Rescan"
-msgstr "Virkist‰"
+msgstr "Virkist√§"
 
 msgid "Forget"
 msgstr ""
@@ -2916,13 +2925,13 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Cannot set correct permissions for directory %s\n"
 msgstr ""
-" Ei voitu luoda v‰liaikaiskomentotiedostoa \n"
+" Ei voitu luoda v√§liaikaiskomentotiedostoa \n"
 " %s "
 
 #, fuzzy, c-format
 msgid "Cannot create temporary directory %s: %s\n"
 msgstr ""
-" Ei voitu luoda v‰liaikaiskomentotiedostoa \n"
+" Ei voitu luoda v√§liaikaiskomentotiedostoa \n"
 " %s "
 
 #, c-format
@@ -3012,6 +3021,9 @@ msgstr " Siirry riville "
 #, fuzzy
 msgid " Invalid address "
 msgstr " Virheellinen kohdemaski "
+
+msgid "Seeking to search result"
+msgstr ""
 
 msgid "ButtonBar|Help"
 msgstr ""
@@ -3267,7 +3279,7 @@ msgstr ""
 
 #, fuzzy
 msgid "fish: Setting up current directory..."
-msgstr "Virkist‰ hakemiston‰kym‰"
+msgstr "Virkist√§ hakemiston√§kym√§"
 
 #, c-format
 msgid "fish: Connected, home %s."
@@ -3584,7 +3596,7 @@ msgstr ""
 
 #, fuzzy
 msgid "Changes to file lost"
-msgstr "&Pitk‰ tiedostolista"
+msgstr "&Pitk√§ tiedostolista"
 
 #~ msgid "scanf &Expression"
 #~ msgstr "scanf &Lauseke"
@@ -3593,13 +3605,13 @@ msgstr "&Pitk‰ tiedostolista"
 #~ msgstr "&Vain koko sanat"
 
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
-#~ msgstr " Anna korvausparametrien j‰rjestys, esim. 3,2,1,4 "
+#~ msgstr " Anna korvausparametrien j√§rjestys, esim. 3,2,1,4 "
 
 #~ msgid ""
 #~ " Invalid regular expression, or scanf expression with too many "
 #~ "conversions "
 #~ msgstr ""
-#~ " Virheellinen s‰‰nnˆllinen lauseke, tai liian monimutkainen scanf-lauseke "
+#~ " Virheellinen s√§√§nn√∂llinen lauseke, tai liian monimutkainen scanf-lauseke "
 
 #~ msgid " Error in replacement format string. "
 #~ msgstr " Virhe korvaavassa merkkijonossa. "
@@ -3609,7 +3621,7 @@ msgstr "&Pitk‰ tiedostolista"
 #~ msgstr " Anna korvaava merkkijono:"
 
 #~ msgid " The command history is empty "
-#~ msgstr " Komentohistoria on tyhj‰ "
+#~ msgstr " Komentohistoria on tyhj√§ "
 
 #, fuzzy
 #~ msgid "Edit edi&tor menu file"
@@ -3621,11 +3633,11 @@ msgstr "&Pitk‰ tiedostolista"
 
 #, fuzzy
 #~ msgid "Invalid hex search expression"
-#~ msgstr " S‰‰nnˆllinen lauseke "
+#~ msgstr " S√§√§nn√∂llinen lauseke "
 
 #, fuzzy
 #~ msgid "Using included S-Lang library"
-#~ msgstr "Virkist‰ hakemiston‰kym‰"
+#~ msgstr "Virkist√§ hakemiston√§kym√§"
 
 #~ msgid "&Home"
 #~ msgstr "&Koti"
@@ -3634,7 +3646,7 @@ msgstr "&Pitk‰ tiedostolista"
 #~ msgstr "&Tyyppi"
 
 #~ msgid "&Links"
-#~ msgstr "&Linkkej‰"
+#~ msgstr "&Linkkej√§"
 
 #~ msgid "N&GID"
 #~ msgstr "N&GID"
@@ -3646,13 +3658,13 @@ msgstr "&Pitk‰ tiedostolista"
 #~ msgstr "&Omistaja"
 
 #~ msgid "&Group"
-#~ msgstr "&Ryhm‰"
+#~ msgstr "&Ryhm√§"
 
 #~ msgid "%s bytes in %d files"
 #~ msgstr "%s tavua %d tiedostossa"
 
 #~ msgid " Cannot open file for reading: "
-#~ msgstr " Tiedoston avaaminen lukua varten ep‰onnistui: "
+#~ msgstr " Tiedoston avaaminen lukua varten ep√§onnistui: "
 
 #~ msgid " Not an ordinary file: "
 #~ msgstr " Ei tavallinen tiedosto: "
@@ -3673,26 +3685,26 @@ msgstr "&Pitk‰ tiedostolista"
 #~ "mc.ext or use that\n"
 #~ "file as an example of how to write it.\n"
 #~ msgstr ""
-#~ "mc.ext:st‰ tai k‰ytt‰‰ ko.\n"
-#~ "tiedostoa esimerkkin‰ omasi kirjoittamisessa.\n"
+#~ "mc.ext:st√§ tai k√§ytt√§√§ ko.\n"
+#~ "tiedostoa esimerkkin√§ omasi kirjoittamisessa.\n"
 
 #~ msgid "mc.ext will be used for this moment."
-#~ msgstr "mc.ext:i‰ k‰ytet‰‰n toistaiseksi."
+#~ msgstr "mc.ext:i√§ k√§ytet√§√§n toistaiseksi."
 
 #~ msgid "Col %d"
 #~ msgstr "Sarake %d"
 
 #~ msgid " Socket source routing setup "
-#~ msgstr " Pistokkeen l‰hdereititysasetukset "
+#~ msgstr " Pistokkeen l√§hdereititysasetukset "
 
 #~ msgid " Enter host name to use as a source routing hop: "
-#~ msgstr " Anna l‰hdereitityshyppyyn k‰ytett‰v‰n koneen nimi: "
+#~ msgstr " Anna l√§hdereitityshyppyyn k√§ytett√§v√§n koneen nimi: "
 
 #~ msgid " Host name "
 #~ msgstr " Koneen nimi "
 
 #~ msgid " Error while looking up IP address "
-#~ msgstr " Virhe kyselt‰ess‰ IP-osoitetta "
+#~ msgstr " Virhe kyselt√§ess√§ IP-osoitetta "
 
 #~ msgid ""
 #~ "\n"

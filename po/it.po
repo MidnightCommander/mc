@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.6.2\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-30 19:38+0200\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-07-09 17:07+0300\n"
 "PO-Revision-Date: 2008-04-07 17:25+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian <debian-l10n-italian@lists.debian.org>\n"
@@ -658,6 +658,12 @@ msgstr "Inver&ti selezione      M-*"
 msgid "Synta&x highlighting"
 msgstr "Sintassi &evidenziata"
 
+msgid "Visible tabs"
+msgstr ""
+
+msgid "Visible trailing spaces"
+msgstr ""
+
 msgid "Save file &position"
 msgstr "&Salva posizione file"
 
@@ -993,6 +999,9 @@ msgstr "Password per \\\\%s\\%s"
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Attenzione: file %s non trovato\n"
+
+msgid "7-bit ASCII"
+msgstr ""
 
 #, c-format
 msgid "Cannot translate from %s to %s"
@@ -3121,6 +3130,9 @@ msgstr " Vai all'indirizzo "
 
 msgid " Invalid address "
 msgstr " Indirizzo non valido"
+
+msgid "Seeking to search result"
+msgstr ""
 
 msgid "ButtonBar|Help"
 msgstr "Aiuto"

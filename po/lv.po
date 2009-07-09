@@ -1,22 +1,22 @@
 # mc for Latvian.
 # Copyright (C) 2000 Free Software Foundation, Inc.
-# Pçteris Kriğjânis <peterisk@apollo.lv>, 2000.
+# PÄ“teris KriÅ¡jÄnis <peterisk@apollo.lv>, 2000.
 # Artis Trops <hornet@navigators.lv>, 2000.
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-30 19:38+0200\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-07-09 17:07+0300\n"
 "PO-Revision-Date: 2001-11-20 15:15+0200\n"
 "Last-Translator: Artis Trops <hornet@navigators.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-13\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #, fuzzy
 msgid " Choose syntax highlighting "
-msgstr "sinta&Kses izgaismoğana"
+msgstr "sinta&Kses izgaismoÅ¡ana"
 
 #, fuzzy
 msgid "< Auto >"
@@ -27,26 +27,26 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid " Cannot open %s for reading "
-msgstr " Nevar atvçrt programkanâlu lasîğanai: "
+msgstr " Nevar atvÄ“rt programkanÄlu lasÄ«Å¡anai: "
 
 msgid "Error"
-msgstr "Kïûda"
+msgstr "KÄ¼Å«da"
 
 #, fuzzy, c-format
 msgid " Error reading from pipe: %s "
-msgstr " Kïûda lasot no programkanâla: "
+msgstr " KÄ¼Å«da lasot no programkanÄla: "
 
 #, fuzzy, c-format
 msgid " Cannot open pipe for reading: %s "
-msgstr " Nevar atvçrt programkanâlu lasîğanai: "
+msgstr " Nevar atvÄ“rt programkanÄlu lasÄ«Å¡anai: "
 
 #, fuzzy, c-format
 msgid " Cannot get size/permissions for %s "
-msgstr " Nevar dabût lielumu/atïauju informâciju failam: "
+msgstr " Nevar dabÅ«t lielumu/atÄ¼auju informÄciju failam: "
 
 #, fuzzy, c-format
 msgid " %s is not a regular file "
-msgstr " Nevar skatît: nav regulârs fails "
+msgstr " Nevar skatÄ«t: nav regulÄrs fails "
 
 #, fuzzy, c-format
 msgid " File %s is too large "
@@ -56,26 +56,26 @@ msgid "Macro recursion is too deep"
 msgstr ""
 
 msgid "Search"
-msgstr "Meklçt"
+msgstr "MeklÄ“t"
 
 #, c-format
 msgid " %d items found, %d bookmarks added "
-msgstr " %d meklçjumi izdarît, %d grâmatzîmes pievienotas"
+msgstr " %d meklÄ“jumi izdarÄ«t, %d grÄmatzÄ«mes pievienotas"
 
 msgid " Search string not found "
-msgstr " Meklçjamâ rinda nav atrasta "
+msgstr " MeklÄ“jamÄ rinda nav atrasta "
 
 msgid "Warning"
-msgstr "Brîdinâjums"
+msgstr "BrÄ«dinÄjums"
 
 msgid " File has hard-links. Detach before saving? "
 msgstr ""
 
 msgid "&Yes"
-msgstr "&Jâ"
+msgstr "&JÄ"
 
 msgid "&No"
-msgstr "&Nç"
+msgstr "&NÄ“"
 
 msgid "&Cancel"
 msgstr "&Atsaukt"
@@ -84,118 +84,118 @@ msgid "The file has been modified in the meantime. Save anyway?"
 msgstr ""
 
 msgid " Error writing to pipe: "
-msgstr " Kïûda rakstot programkanâlâ: "
+msgstr " KÄ¼Å«da rakstot programkanÄlÄ: "
 
 msgid " Cannot open pipe for writing: "
-msgstr " Nevar atvçrt programkanâlu ierkastîğanai: "
+msgstr " Nevar atvÄ“rt programkanÄlu ierkastÄ«Å¡anai: "
 
 msgid "Quick save "
-msgstr "Âtra saglabâğana "
+msgstr "Ä€tra saglabÄÅ¡ana "
 
 msgid "Safe save "
-msgstr "Droğa saglabâğana "
+msgstr "DroÅ¡a saglabÄÅ¡ana "
 
 msgid "Do backups -->"
-msgstr "Veikt dublçjumu -->"
+msgstr "Veikt dublÄ“jumu -->"
 
 msgid "&OK"
 msgstr "&Labi"
 
 msgid "Extension:"
-msgstr "Paplağinâjums:"
+msgstr "PaplaÅ¡inÄjums:"
 
 msgid " Edit Save Mode "
-msgstr " Rediìçt Glabâğanas Reşîmu "
+msgstr " RediÄ£Ä“t GlabÄÅ¡anas ReÅ¾Ä«mu "
 
 msgid " Save As "
-msgstr " Glabât Kâ "
+msgstr " GlabÄt KÄ "
 
 #, fuzzy
 msgid " Enter file name: "
-msgstr " Ievadîet lîniju: "
+msgstr " IevadÄ«et lÄ«niju: "
 
 msgid " A file already exists with this name. "
-msgstr " Fails ar tâdu nosaukumu jau eksistç. "
+msgstr " Fails ar tÄdu nosaukumu jau eksistÄ“. "
 
 #, fuzzy
 msgid "&Overwrite"
-msgstr "Pârrakstît"
+msgstr "PÄrrakstÄ«t"
 
 msgid " Cannot save file. "
-msgstr " Kïûda mçìinot saglabât failu. "
+msgstr " KÄ¼Å«da mÄ“Ä£inot saglabÄt failu. "
 
 msgid " Delete macro "
-msgstr " Dzçst makro "
+msgstr " DzÄ“st makro "
 
 msgid " Cannot open temp file "
-msgstr " Kïûda mçìinot atvçrt temp failu "
+msgstr " KÄ¼Å«da mÄ“Ä£inot atvÄ“rt temp failu "
 
 msgid " Cannot open macro file "
-msgstr " Kïûda mçìinot atvçrt makro failu "
+msgstr " KÄ¼Å«da mÄ“Ä£inot atvÄ“rt makro failu "
 
 msgid " Cannot overwrite macro file "
-msgstr " Kïûda mçìinot pârrakstît makro failu "
+msgstr " KÄ¼Å«da mÄ“Ä£inot pÄrrakstÄ«t makro failu "
 
 msgid " Save macro "
-msgstr " Glabât makro "
+msgstr " GlabÄt makro "
 
 msgid " Press the macro's new hotkey: "
-msgstr " Spied makro jauno karsto taustiòu: "
+msgstr " Spied makro jauno karsto taustiÅ†u: "
 
 msgid " Press macro hotkey: "
-msgstr " Spied makro karsto taustiòu: "
+msgstr " Spied makro karsto taustiÅ†u: "
 
 msgid " Load macro "
-msgstr " Ielâdçt makro "
+msgstr " IelÄdÄ“t makro "
 
 msgid " Confirm save file? : "
-msgstr " Apstiprinât faila saglabâğanu? : "
+msgstr " ApstiprinÄt faila saglabÄÅ¡anu? : "
 
 msgid " Save file "
-msgstr " Saglabât failu "
+msgstr " SaglabÄt failu "
 
 msgid "&Save"
-msgstr "&Saglabât"
+msgstr "&SaglabÄt"
 
 msgid ""
 " Current text was modified without a file save. \n"
 " Continue discards these changes. "
 msgstr ""
-" Pağreizçjais teksts tika modificçts bez faila saglabâğanas. \n"
-" Ja turpinâsiet, izmaiòs tiks atsauktas. "
+" PaÅ¡reizÄ“jais teksts tika modificÄ“ts bez faila saglabÄÅ¡anas. \n"
+" Ja turpinÄsiet, izmaiÅ†s tiks atsauktas. "
 
 #, fuzzy
 msgid "C&ontinue"
-msgstr "Turpinât"
+msgstr "TurpinÄt"
 
 #, fuzzy
 msgid "Syntax file edit"
-msgstr "&Izvçlnes faila rediìçğana"
+msgstr "&IzvÄ“lnes faila rediÄ£Ä“Å¡ana"
 
 #, fuzzy
 msgid " Which syntax file you want to edit? "
-msgstr " Kuru paplağinâjuma failu jûs vçlaties rediìçt? "
+msgstr " Kuru paplaÅ¡inÄjuma failu jÅ«s vÄ“laties rediÄ£Ä“t? "
 
 msgid "&User"
-msgstr "&Lietotâjs"
+msgstr "&LietotÄjs"
 
 msgid "&System Wide"
-msgstr "&Sistçmas Mçroga"
+msgstr "&SistÄ“mas MÄ“roga"
 
 msgid " Menu edit "
-msgstr " Izvçlòu rediìçğana "
+msgstr " IzvÄ“lÅ†u rediÄ£Ä“Å¡ana "
 
 msgid " Which menu file do you want to edit? "
-msgstr " Kuru izvçlnes failu jûs rediìçsiet ? "
+msgstr " Kuru izvÄ“lnes failu jÅ«s rediÄ£Ä“siet ? "
 
 msgid "&Local"
-msgstr "&Vietçji"
+msgstr "&VietÄ“ji"
 
 msgid " Load "
-msgstr " Ielâdçt "
+msgstr " IelÄdÄ“t "
 
 msgid " Block is large, you may not be able to undo this action. "
-msgstr " Bloks ir liels, jûs iespçjams nevarçsiet atsaukt ğo darbîbu. "
+msgstr " Bloks ir liels, jÅ«s iespÄ“jams nevarÄ“siet atsaukt Å¡o darbÄ«bu. "
 
 #, fuzzy
 msgid "Replace"
@@ -206,70 +206,70 @@ msgstr " Aizvietot "
 
 #, c-format
 msgid " %ld replacements made. "
-msgstr " %ld aizstâğanas reşîms. "
+msgstr " %ld aizstÄÅ¡anas reÅ¾Ä«ms. "
 
 msgid "Quit"
 msgstr "Iziet"
 
 msgid " File was modified, Save with exit? "
-msgstr " Fails tika mainîts, saglabât izejot?"
+msgstr " Fails tika mainÄ«ts, saglabÄt izejot?"
 
 #, fuzzy
 msgid "&Cancel quit"
-msgstr "Atcelt izieğanu"
+msgstr "Atcelt izieÅ¡anu"
 
 #, fuzzy
 msgid " Error "
-msgstr "Kïûda"
+msgstr "KÄ¼Å«da"
 
 msgid " This function is not implemented. "
 msgstr ""
 
 msgid " Copy to clipboard "
-msgstr " Kopçt uz starpliktuvi "
+msgstr " KopÄ“t uz starpliktuvi "
 
 msgid " Unable to save to file. "
-msgstr " Nevar saglabât failu. "
+msgstr " Nevar saglabÄt failu. "
 
 msgid " Cut to clipboard "
 msgstr " Aiznest uz starpliktuvi "
 
 msgid " Goto line "
-msgstr " Iet uz lîniju "
+msgstr " Iet uz lÄ«niju "
 
 msgid " Enter line: "
-msgstr " Ievadîet lîniju: "
+msgstr " IevadÄ«et lÄ«niju: "
 
 msgid " Save Block "
-msgstr " Saglabât Bloku "
+msgstr " SaglabÄt Bloku "
 
 msgid " Insert File "
 msgstr " Ievietot Failu "
 
 msgid " Cannot insert file. "
-msgstr " Kïûda mçìinot ievietot failu. "
+msgstr " KÄ¼Å«da mÄ“Ä£inot ievietot failu. "
 
 msgid " Sort block "
-msgstr " Sakârtot bloku "
+msgstr " SakÄrtot bloku "
 
 msgid " You must first highlight a block of text. "
-msgstr " Jums pa priekğu ir jâiezîmç teksta bloks. "
+msgstr " Jums pa priekÅ¡u ir jÄiezÄ«mÄ“ teksta bloks. "
 
 msgid " Run Sort "
-msgstr " Palaist Kârtoğanu "
+msgstr " Palaist KÄrtoÅ¡anu "
 
 msgid " Enter sort options (see manpage) separated by whitespace: "
 msgstr ""
-" Ievadi kârtoğanas opcijas (apskati man lapas) atdalîtas ar tukğumiem: "
+" Ievadi kÄrtoÅ¡anas opcijas (apskati man lapas) atdalÄ«tas ar tukÅ¡umiem: "
 
 msgid " Sort "
-msgstr " Kârtot "
+msgstr " KÄrtot "
 
 msgid " Cannot execute sort command "
-msgstr " Kïûda mçìinot palaist sort komandu "
+msgstr " KÄ¼Å«da mÄ“Ä£inot palaist sort komandu "
 
 msgid " Sort returned non-zero: "
-msgstr " Kârtoğana atgrieza ne-nulli: "
+msgstr " KÄrtoÅ¡ana atgrieza ne-nulli: "
 
 msgid "Paste output of external command"
 msgstr ""
@@ -284,16 +284,16 @@ msgstr "Cita omanda"
 
 #, fuzzy
 msgid "Cannot execute command"
-msgstr " Kïûda mçìinot palaist sort komandu "
+msgstr " KÄ¼Å«da mÄ“Ä£inot palaist sort komandu "
 
 msgid "Error creating script:"
-msgstr "Kïûda izveidojot skriptu:"
+msgstr "KÄ¼Å«da izveidojot skriptu:"
 
 msgid "Error reading script:"
-msgstr "Kïûda lasot skriptu:"
+msgstr "KÄ¼Å«da lasot skriptu:"
 
 msgid "Error closing script:"
-msgstr "Kïûda aizverot skriptu:"
+msgstr "KÄ¼Å«da aizverot skriptu:"
 
 msgid "Script created:"
 msgstr "Skripts izveidots:"
@@ -305,7 +305,7 @@ msgid " Mail "
 msgstr " Pasts"
 
 msgid " Copies to"
-msgstr " Kopét uz"
+msgstr " KopÃ©t uz"
 
 msgid " Subject"
 msgstr " Subjekts"
@@ -320,13 +320,13 @@ msgid " Insert Literal "
 msgstr " Ievietot Burtu "
 
 msgid " Press any key: "
-msgstr " Spiest jebkuru taustiòu: "
+msgstr " Spiest jebkuru taustiÅ†u: "
 
 msgid " Execute Macro "
 msgstr " Palaist Makro "
 
 msgid "pro&Mpt on replace"
-msgstr "jau&Tât pie aizvietoğanas"
+msgstr "jau&TÄt pie aizvietoÅ¡anas"
 
 msgid "replace &All"
 msgstr "aizvietot vi&Sus"
@@ -335,16 +335,16 @@ msgid "All charsets"
 msgstr ""
 
 msgid "&Backwards"
-msgstr "at&Pakaï"
+msgstr "at&PakaÄ¼"
 
 msgid "case &Sensitive"
-msgstr "lielo/mazo burtu &Jûtigs"
+msgstr "lielo/mazo burtu &JÅ«tigs"
 
 msgid " Enter replacement string:"
-msgstr " Ievadiet aizvietotâjvirkni:"
+msgstr " Ievadiet aizvietotÄjvirkni:"
 
 msgid " Enter search string:"
-msgstr " Ievadiet meklçjamo virkni:"
+msgstr " Ievadiet meklÄ“jamo virkni:"
 
 msgid "Cancel"
 msgstr "Atsaukt"
@@ -365,13 +365,13 @@ msgid " Replace with: "
 msgstr " Aizvietot ar: "
 
 msgid " Confirm replace "
-msgstr " Apstirpinât aizvietoğanu "
+msgstr " ApstirpinÄt aizvietoÅ¡anu "
 
 msgid "&Dismiss"
 msgstr "&Atcelt"
 
 msgid " Emacs key: "
-msgstr "Emacs taustiòğ: "
+msgstr "Emacs taustiÅ†Å¡: "
 
 #, c-format
 msgid ""
@@ -404,31 +404,31 @@ msgstr ""
 "\n"
 "                Cooledit  v3.11.5\n"
 "\n"
-" Kopçğanas tiesîbas (C) 1996 the Free Software Foundation\n"
+" KopÄ“Å¡anas tiesÄ«bas (C) 1996 the Free Software Foundation\n"
 "\n"
-"       Lietotâjam draudzîgs teksta redaktors, uzrakstîts\n"
-"           priekğ Pusnakts Komandiera.\n"
+"       LietotÄjam draudzÄ«gs teksta redaktors, uzrakstÄ«ts\n"
+"           priekÅ¡ Pusnakts Komandiera.\n"
 
 msgid "&Open file..."
-msgstr "&Atvçrt failu..."
+msgstr "&AtvÄ“rt failu..."
 
 msgid "&New              C-n"
 msgstr "&Jauns            C-n"
 
 msgid "&Save              F2"
-msgstr "&Saglabât          F2"
+msgstr "&SaglabÄt          F2"
 
 msgid "Save &as...       F12"
-msgstr "saglabât &Kâ...   F12"
+msgstr "saglabÄt &KÄ...   F12"
 
 msgid "&Insert file...   F15"
 msgstr "&Ievietot failu.. F15"
 
 msgid "Copy to &file...  C-f"
-msgstr "kopçt uz &Failu.. C-f"
+msgstr "kopÄ“t uz &Failu.. C-f"
 
 msgid "&User menu...     F11"
-msgstr "&Lietotâja izvçlne F11"
+msgstr "&LietotÄja izvÄ“lne F11"
 
 msgid "A&bout...            "
 msgstr "&Par...              "
@@ -440,46 +440,46 @@ msgid "&New            C-x k"
 msgstr "&Jauns          C-x k"
 
 msgid "Copy to &file...     "
-msgstr "kopçt uz &Failu...   "
+msgstr "kopÄ“t uz &Failu...   "
 
 #, fuzzy
 msgid "&Toggle mark                 F3"
-msgstr "&Ieslçgt Iezîmçğanau       F3"
+msgstr "&IeslÄ“gt IezÄ«mÄ“Å¡anau       F3"
 
 #, fuzzy
 msgid "Mar&k columns              S-F3"
-msgstr "&Iezîmçt Kolonnas    S-F3"
+msgstr "&IezÄ«mÄ“t Kolonnas    S-F3"
 
 #, fuzzy
 msgid "Toggle &ins/overw           Ins"
-msgstr "slçgt &Iev/pârr"
+msgstr "slÄ“gt &Iev/pÄrr"
 
 #, fuzzy
 msgid "&Copy                        F5"
-msgstr "&Kopçt               F5"
+msgstr "&KopÄ“t               F5"
 
 #, fuzzy
 msgid "&Move                        F6"
-msgstr "p&Ârvietot         F6"
+msgstr "p&Ä€rvietot         F6"
 
 #, fuzzy
 msgid "&Delete                      F8"
-msgstr "&Dzçst             F8"
+msgstr "&DzÄ“st             F8"
 
 #, fuzzy
 msgid "C&opy to clipfile         C-Ins"
-msgstr "kopçt uz &Failu...   "
+msgstr "kopÄ“t uz &Failu...   "
 
 #, fuzzy
 msgid "C&ut to clipfile          S-Del"
-msgstr "&Iet uz lîniju...            M-l"
+msgstr "&Iet uz lÄ«niju...            M-l"
 
 msgid "&Paste from clipfile      S-Ins"
 msgstr ""
 
 #, fuzzy
 msgid "Toggle bookmar&k               "
-msgstr "&Ieslçgt Iezîmçğanau       F3"
+msgstr "&IeslÄ“gt IezÄ«mÄ“Å¡anau       F3"
 
 #, fuzzy
 msgid "&Next bookmark                 "
@@ -487,7 +487,7 @@ msgstr "&Jauns            C-n"
 
 #, fuzzy
 msgid "Pre&v bookmark                 "
-msgstr "kârto&T...                 M-t"
+msgstr "kÄrto&T...                 M-t"
 
 #, fuzzy
 msgid "&Flush bookmark                "
@@ -499,7 +499,7 @@ msgstr "&Atsaukt          C-u"
 
 #, fuzzy
 msgid "&Beginning               C-PgUp"
-msgstr "&Sâkums        C-PgUp"
+msgstr "&SÄkums        C-PgUp"
 
 #, fuzzy
 msgid "&End                     C-PgDn"
@@ -507,33 +507,33 @@ msgstr "&Beigas        C-PgDn"
 
 #, fuzzy
 msgid "C&opy to clipfile           M-w"
-msgstr "&Iet uz lîniju...            M-l"
+msgstr "&Iet uz lÄ«niju...            M-l"
 
 #, fuzzy
 msgid "C&ut to clipfile            C-w"
-msgstr "&Iet uz lîniju...            M-l"
+msgstr "&Iet uz lÄ«niju...            M-l"
 
 msgid "&Paste from clipfile        C-y"
 msgstr ""
 
 msgid "&Search...         F7"
-msgstr "&Meklçt...         F7"
+msgstr "&MeklÄ“t...         F7"
 
 msgid "Search &again     F17"
-msgstr "meklçt &Vçlreiz   F17"
+msgstr "meklÄ“t &VÄ“lreiz   F17"
 
 msgid "&Replace...        F4"
 msgstr "&Aizvietot...      F4"
 
 msgid "&Go to line...            M-l"
-msgstr "&Iet uz lîniju...            M-l"
+msgstr "&Iet uz lÄ«niju...            M-l"
 
 #, fuzzy
 msgid "Toggle li&ne state        M-n"
-msgstr "&Ieslçgt Iezîmçğanau       F3"
+msgstr "&IeslÄ“gt IezÄ«mÄ“Å¡anau       F3"
 
 msgid "Go to matching &bracket   M-b"
-msgstr "iet uz atbilstoğo ie&Kavu M-b"
+msgstr "iet uz atbilstoÅ¡o ie&Kavu M-b"
 
 msgid "Find declaration      A-Enter"
 msgstr ""
@@ -546,84 +546,84 @@ msgstr ""
 
 #, fuzzy
 msgid "Encod&ing...             C-t"
-msgstr "kârto&T...                 M-t"
+msgstr "kÄrto&T...                 M-t"
 
 msgid "Insert &literal...       C-q"
 msgstr "ievietot &Burtu...       C-q"
 
 msgid "&Refresh screen          C-l"
-msgstr "&Atsvaidzinât ekrânu          C-l"
+msgstr "&AtsvaidzinÄt ekrÄnu          C-l"
 
 msgid "&Start record macro      C-r"
-msgstr "&Sâkt macro rakstîğanu      C-r"
+msgstr "&SÄkt macro rakstÄ«Å¡anu      C-r"
 
 msgid "&Finish record macro...  C-r"
-msgstr "&Pabeigt makro rakstîğanu...  C-r"
+msgstr "&Pabeigt makro rakstÄ«Å¡anu...  C-r"
 
 msgid "&Execute macro...   C-a, KEY"
 msgstr "&Palaist makro...   C-a, KEY"
 
 msgid "Delete macr&o...            "
-msgstr "dzçst makr&O...            "
+msgstr "dzÄ“st makr&O...            "
 
 msgid "Insert &date/time           "
 msgstr "ievietot &Datumu/laiku           "
 
 msgid "Format p&aragraph        M-p"
-msgstr "formatçt p&Aragrâfu        M-p"
+msgstr "formatÄ“t p&AragrÄfu        M-p"
 
 msgid "'ispell' s&pell check    C-p"
-msgstr "'ispell'&Pareizrakst. pârb. C-p"
+msgstr "'ispell'&Pareizrakst. pÄrb. C-p"
 
 msgid "Sor&t...                 M-t"
-msgstr "kârto&T...                 M-t"
+msgstr "kÄrto&T...                 M-t"
 
 msgid "Paste o&utput of...      M-u"
 msgstr ""
 
 msgid "E&xternal Formatter      F19"
-msgstr "Â&rçjais Formatçtâjs      F19"
+msgstr "Ä€&rÄ“jais FormatÄ“tÄjs      F19"
 
 msgid "&Mail...                    "
 msgstr "&Pasts..."
 
 msgid "&Execute macro... C-x e, KEY"
-msgstr "&Palaist makro... C-x e, TAUSTIÒĞ"
+msgstr "&Palaist makro... C-x e, TAUSTIÅ…Å "
 
 msgid "'ispell' s&pell check    M-$"
-msgstr "'ispell' s&Pareizrakst. pârb. M-$"
+msgstr "'ispell' s&Pareizrakst. pÄrb. M-$"
 
 msgid "&General...  "
 msgstr "&Galvenais...  "
 
 msgid "&Save mode..."
-msgstr "&Saglabât veidu..."
+msgstr "&SaglabÄt veidu..."
 
 #, fuzzy
 msgid "Learn &Keys..."
-msgstr "mâcîbu &Taustiòi..."
+msgstr "mÄcÄ«bu &TaustiÅ†i..."
 
 #, fuzzy
 msgid "Syntax &Highlighting..."
-msgstr "sinta&Kses izgaismoğana"
+msgstr "sinta&Kses izgaismoÅ¡ana"
 
 #, fuzzy
 msgid "S&yntax file"
-msgstr "&Izvçlnes faila rediìçğana"
+msgstr "&IzvÄ“lnes faila rediÄ£Ä“Å¡ana"
 
 #, fuzzy
 msgid "&Menu file"
-msgstr "&Izvçlnes faila rediìçğana"
+msgstr "&IzvÄ“lnes faila rediÄ£Ä“Å¡ana"
 
 #, fuzzy
 msgid "Save setu&p"
-msgstr "&Saglabât uzstâdîjumus"
+msgstr "&SaglabÄt uzstÄdÄ«jumus"
 
 msgid " File "
 msgstr " Fails "
 
 msgid " Edit "
-msgstr " Rediìçt "
+msgstr " RediÄ£Ä“t "
 
 msgid " Sear/Repl "
 msgstr " Mekl/Aizv "
@@ -635,49 +635,55 @@ msgid " Options "
 msgstr " Opcijas "
 
 msgid "Intuitive"
-msgstr "Intuitîvi"
+msgstr "IntuitÄ«vi"
 
 msgid "Emacs"
 msgstr "Emacs"
 
 #, fuzzy
 msgid "User-defined"
-msgstr "Li&etotâja definçts:"
+msgstr "Li&etotÄja definÄ“ts:"
 
 msgid "None"
 msgstr "Nekas"
 
 msgid "Dynamic paragraphing"
-msgstr "Dinamiska paragrâfoğana"
+msgstr "Dinamiska paragrÄfoÅ¡ana"
 
 msgid "Type writer wrap"
-msgstr "Mağînrakstîğanas iekïauğana"
+msgstr "MaÅ¡Ä«nrakstÄ«Å¡anas iekÄ¼auÅ¡ana"
 
 msgid "Word wrap line length: "
-msgstr "Vârdu iekïauğanas lînijas garums: "
+msgstr "VÄrdu iekÄ¼auÅ¡anas lÄ«nijas garums: "
 
 msgid "Tab spacing: "
 msgstr "Tab atstarpes : "
 
 #, fuzzy
 msgid "Pers&istent selection"
-msgstr "pretçji izvçlç&Tajam M-*"
+msgstr "pretÄ“ji izvÄ“lÄ“&Tajam M-*"
 
 msgid "Synta&x highlighting"
-msgstr "sinta&Kses izgaismoğana"
+msgstr "sinta&Kses izgaismoÅ¡ana"
+
+msgid "Visible tabs"
+msgstr ""
+
+msgid "Visible trailing spaces"
+msgstr ""
 
 #, fuzzy
 msgid "Save file &position"
-msgstr " Saglabât failu "
+msgstr " SaglabÄt failu "
 
 msgid "Confir&m before saving"
-msgstr "a&Pstiprinât pirms saglabâğanas"
+msgstr "a&PstiprinÄt pirms saglabÄÅ¡anas"
 
 msgid "Fill tabs with &spaces"
-msgstr "piepildît tabulâcijas ar at&Starpçm"
+msgstr "piepildÄ«t tabulÄcijas ar at&StarpÄ“m"
 
 msgid "&Return does autoindent"
-msgstr "&Enter veido autom.atkâpi"
+msgstr "&Enter veido autom.atkÄpi"
 
 msgid "&Backspace through tabs"
 msgstr ""
@@ -686,52 +692,52 @@ msgid "&Fake half tabs"
 msgstr ""
 
 msgid "Wrap mode"
-msgstr "Iekïauğanas reşîms"
+msgstr "IekÄ¼auÅ¡anas reÅ¾Ä«ms"
 
 msgid "Key emulation"
-msgstr "Taustiòu emulâcija"
+msgstr "TaustiÅ†u emulÄcija"
 
 msgid " Editor options "
 msgstr " Redaktora opcijas "
 
 msgid "Help"
-msgstr "Palîdzîba"
+msgstr "PalÄ«dzÄ«ba"
 
 msgid "Save"
-msgstr "Glabât"
+msgstr "GlabÄt"
 
 msgid "Mark"
-msgstr "Atzîmçt"
+msgstr "AtzÄ«mÄ“t"
 
 msgid "Replac"
 msgstr "Aizvietot"
 
 msgid "Copy"
-msgstr "Kopçt"
+msgstr "KopÄ“t"
 
 msgid "Move"
-msgstr "Pârvietot"
+msgstr "PÄrvietot"
 
 msgid "Delete"
-msgstr "Dzçst"
+msgstr "DzÄ“st"
 
 msgid "PullDn"
 msgstr "IzvLej"
 
 msgid " Load syntax file "
-msgstr " Ielâdçt sintakses failu "
+msgstr " IelÄdÄ“t sintakses failu "
 
 #, c-format
 msgid ""
 " Cannot open file %s \n"
 " %s "
 msgstr ""
-" Nevar atvçrt failu %s \n"
+" Nevar atvÄ“rt failu %s \n"
 " %s "
 
 #, c-format
 msgid " Error in file %s on line %d "
-msgstr " Kïûda faila %s %d rindiòâ "
+msgstr " KÄ¼Å«da faila %s %d rindiÅ†Ä "
 
 #, c-format
 msgid "bind: Wrong argument number, bind <key> <command>"
@@ -779,19 +785,19 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid "%s not found!"
-msgstr "Brîdinâjums: fails %s nav atrasts\n"
+msgstr "BrÄ«dinÄjums: fails %s nav atrasts\n"
 
 msgid "&Set"
-msgstr "&Uzstâdît"
+msgstr "&UzstÄdÄ«t"
 
 msgid "S&kip"
 msgstr "Iz&laist"
 
 msgid "Set &all"
-msgstr "Uzstâdît &visus"
+msgstr "UzstÄdÄ«t &visus"
 
 msgid "owner"
-msgstr "îpağnieks"
+msgstr "Ä«paÅ¡nieks"
 
 msgid "group"
 msgstr "grupa"
@@ -800,27 +806,27 @@ msgid "other"
 msgstr "citi"
 
 msgid "On"
-msgstr "Ieslçgts"
+msgstr "IeslÄ“gts"
 
 msgid "Flag"
 msgstr "Karogs"
 
 msgid "Mode"
-msgstr "Reşîms"
+msgstr "ReÅ¾Ä«ms"
 
 #, c-format
 msgid "%6d of %d"
 msgstr "%6d no %d"
 
 msgid " Chown advanced command "
-msgstr " Paplağinâtâ chown komanda "
+msgstr " PaplaÅ¡inÄtÄ chown komanda "
 
 #, c-format
 msgid ""
 " Cannot chmod \"%s\" \n"
 " %s "
 msgstr ""
-" Nevarçja chmod \"%s\" \n"
+" NevarÄ“ja chmod \"%s\" \n"
 " %s "
 
 #, c-format
@@ -828,54 +834,54 @@ msgid ""
 " Cannot chown \"%s\" \n"
 " %s "
 msgstr ""
-" Nevarçja chown \"%s\" \n"
+" NevarÄ“ja chown \"%s\" \n"
 " %s "
 
 msgid " Background process error "
-msgstr " Fona procesa kïûda "
+msgstr " Fona procesa kÄ¼Å«da "
 
 msgid " Unknown error in child "
-msgstr " Neatpazîta kïûda bçrnâ "
+msgstr " NeatpazÄ«ta kÄ¼Å«da bÄ“rnÄ "
 
 msgid " Child died unexpectedly "
-msgstr " Bçrnelis negaidîti nomira "
+msgstr " BÄ“rnelis negaidÄ«ti nomira "
 
 msgid " Background protocol error "
-msgstr " Fona darba kïûda "
+msgstr " Fona darba kÄ¼Å«da "
 
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
 msgstr ""
-" Fona process atsûtîja pieprasîjumu pçc vairâk argumentiem, \n"
-" kâ mçs varam norîkot. \n"
+" Fona process atsÅ«tÄ«ja pieprasÄ«jumu pÄ“c vairÄk argumentiem, \n"
+" kÄ mÄ“s varam norÄ«kot. \n"
 
 msgid "&Full file list"
 msgstr "Pi&lns failu saraksts"
 
 msgid "&Brief file list"
-msgstr "&Îss failu saraksts"
+msgstr "&Äªss failu saraksts"
 
 msgid "&Long file list"
-msgstr "&Garğs failu saraksts"
+msgstr "&GarÅ¡s failu saraksts"
 
 msgid "&User defined:"
-msgstr "Li&etotâja definçts:"
+msgstr "Li&etotÄja definÄ“ts:"
 
 msgid "Listing mode"
-msgstr "Saraksta reşîms"
+msgstr "Saraksta reÅ¾Ä«ms"
 
 msgid "user &Mini status"
-msgstr "lietotâja &Mini statuss"
+msgstr "lietotÄja &Mini statuss"
 
 msgid "&Reverse"
-msgstr "&Pretçji"
+msgstr "&PretÄ“ji"
 
 msgid "case sensi&tive"
-msgstr "lielo/ma&zo burtu jûtîgs"
+msgstr "lielo/ma&zo burtu jÅ«tÄ«gs"
 
 msgid "Sort order"
-msgstr "Kârtoğanas secîba"
+msgstr "KÄrtoÅ¡anas secÄ«ba"
 
 msgid "Executable first"
 msgstr ""
@@ -885,19 +891,19 @@ msgid " confirm di&Rectory hotlist delete "
 msgstr "di&Rektoriju karstais saraksts    C-\\"
 
 msgid " confirm &Exit "
-msgstr " apstiprinât I&Zieğanu "
+msgstr " apstiprinÄt I&ZieÅ¡anu "
 
 msgid " confirm e&Xecute "
-msgstr " apstiprinât pa&Laiğanu "
+msgstr " apstiprinÄt pa&LaiÅ¡anu "
 
 msgid " confirm o&Verwrite "
-msgstr " apstiprinât pâ&Rrakstîğanu "
+msgstr " apstiprinÄt pÄ&RrakstÄ«Å¡anu "
 
 msgid " confirm &Delete "
-msgstr " apstiprinât i&Zdzçğanu "
+msgstr " apstiprinÄt i&ZdzÄ“Å¡anu "
 
 msgid " Confirmation "
-msgstr " Apstiprinâğana "
+msgstr " ApstiprinÄÅ¡ana "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -925,39 +931,39 @@ msgid "Input / display codepage:"
 msgstr "Ievades / displeja kodu tabula:"
 
 msgid "&Select"
-msgstr "a&tlasît"
+msgstr "a&tlasÄ«t"
 
 #, fuzzy
 msgid "Use passive mode over pro&xy"
-msgstr "&Saglabât veidu..."
+msgstr "&SaglabÄt veidu..."
 
 #, fuzzy
 msgid "Use &passive mode"
-msgstr "&Saglabât veidu..."
+msgstr "&SaglabÄt veidu..."
 
 msgid "&Use ~/.netrc"
 msgstr ""
 
 msgid "&Always use ftp proxy"
-msgstr "&Vienmçr lietot ftp proxy"
+msgstr "&VienmÄ“r lietot ftp proxy"
 
 msgid "sec"
 msgstr "sek"
 
 msgid "ftpfs directory cache timeout:"
-msgstr "ftpfs direktorija keğa taimauts:"
+msgstr "ftpfs direktorija keÅ¡a taimauts:"
 
 msgid "ftp anonymous password:"
-msgstr "anonîmâ ftp parole:"
+msgstr "anonÄ«mÄ ftp parole:"
 
 msgid "Timeout for freeing VFSs:"
-msgstr "Taimauts atbrîvojot VFSas:"
+msgstr "Taimauts atbrÄ«vojot VFSas:"
 
 msgid " Virtual File System Setting "
-msgstr " Virtuâlo Failsistçmas Uzstâdîjumi "
+msgstr " VirtuÄlo FailsistÄ“mas UzstÄdÄ«jumi "
 
 msgid "Quick cd"
-msgstr "Âtrs cd"
+msgstr "Ä€trs cd"
 
 msgid "cd"
 msgstr "cd"
@@ -967,7 +973,7 @@ msgstr "Simbolsaites faila nosaukums:"
 
 msgid "Existing filename (filename symlink will point to):"
 msgstr ""
-"Eksistçjoğs faila nosaukums (faila nosaukums, uz kuru simbolsaite norâdîs):"
+"EksistÄ“joÅ¡s faila nosaukums (faila nosaukums, uz kuru simbolsaite norÄdÄ«s):"
 
 msgid "Symbolic link"
 msgstr "Simbolsaite"
@@ -976,13 +982,13 @@ msgid "Running "
 msgstr "Darbojas"
 
 msgid "Stopped"
-msgstr "Apstâdînâts"
+msgstr "ApstÄdÄ«nÄts"
 
 msgid "&Stop"
 msgstr "&Stop"
 
 msgid "&Resume"
-msgstr "&Rezumçt"
+msgstr "&RezumÄ“t"
 
 msgid "&Kill"
 msgstr "&Nokaut"
@@ -991,10 +997,10 @@ msgid "Background Jobs"
 msgstr "Fona Darbi"
 
 msgid "Domain:"
-msgstr "Domçns:"
+msgstr "DomÄ“ns:"
 
 msgid "Username:"
-msgstr "Lietotâjvârds:"
+msgstr "LietotÄjvÄrds:"
 
 msgid "Password:"
 msgstr "Parole:"
@@ -1005,134 +1011,137 @@ msgstr "\\\\%s\\%s Parole"
 
 #, c-format
 msgid "Warning: file %s not found\n"
-msgstr "Brîdinâjums: fails %s nav atrasts\n"
+msgstr "BrÄ«dinÄjums: fails %s nav atrasts\n"
+
+msgid "7-bit ASCII"
+msgstr ""
 
 #, c-format
 msgid "Cannot translate from %s to %s"
 msgstr "Nevar tulkot %s uz %s"
 
 msgid "execute/search by others"
-msgstr "palaist/meklçt citiem"
+msgstr "palaist/meklÄ“t citiem"
 
 msgid "write by others"
-msgstr "rakstît citiem"
+msgstr "rakstÄ«t citiem"
 
 msgid "read by others"
-msgstr "lasît citiem"
+msgstr "lasÄ«t citiem"
 
 msgid "execute/search by group"
-msgstr "palaist/meklçt grupai"
+msgstr "palaist/meklÄ“t grupai"
 
 msgid "write by group"
-msgstr "rakstît grupai"
+msgstr "rakstÄ«t grupai"
 
 msgid "read by group"
-msgstr "lasît grupai"
+msgstr "lasÄ«t grupai"
 
 msgid "execute/search by owner"
-msgstr "palaist/meklçt îpağniekam"
+msgstr "palaist/meklÄ“t Ä«paÅ¡niekam"
 
 msgid "write by owner"
-msgstr "rakstît îpağniekam"
+msgstr "rakstÄ«t Ä«paÅ¡niekam"
 
 msgid "read by owner"
-msgstr "lasît îpağniekam"
+msgstr "lasÄ«t Ä«paÅ¡niekam"
 
 msgid "sticky bit"
-msgstr "lipîgs"
+msgstr "lipÄ«gs"
 
 msgid "set group ID on execution"
-msgstr "uzstâd. grup. ID pie izpildes"
+msgstr "uzstÄd. grup. ID pie izpildes"
 
 msgid "set user ID on execution"
-msgstr "uzstâd. liet. ID pie izpildes"
+msgstr "uzstÄd. liet. ID pie izpildes"
 
 msgid "C&lear marked"
-msgstr "A&ttîrît izvçlçto"
+msgstr "A&ttÄ«rÄ«t izvÄ“lÄ“to"
 
 msgid "S&et marked"
-msgstr "U&zstâdît izvçlçto"
+msgstr "U&zstÄdÄ«t izvÄ“lÄ“to"
 
 msgid "&Marked all"
-msgstr "&Izvçlçti visi"
+msgstr "&IzvÄ“lÄ“ti visi"
 
 msgid "Name"
 msgstr "Nosaukums"
 
 msgid "Permissions (Octal)"
-msgstr "Atïaujas (Octal)"
+msgstr "AtÄ¼aujas (Octal)"
 
 msgid "Owner name"
-msgstr "Îpağnieka vârds"
+msgstr "ÄªpaÅ¡nieka vÄrds"
 
 msgid "Group name"
-msgstr "Grupas vârds"
+msgstr "Grupas vÄrds"
 
 msgid "Use SPACE to change"
-msgstr "Lietojiet SPACE, lai mainîtu"
+msgstr "Lietojiet SPACE, lai mainÄ«tu"
 
 msgid "an option, ARROW KEYS"
-msgstr "opcija, PULIÒU TAUSTIÒI"
+msgstr "opcija, PULIÅ…U TAUSTIÅ…I"
 
 msgid "to move between options"
-msgstr ", lai kustçtos starp opcijâm"
+msgstr ", lai kustÄ“tos starp opcijÄm"
 
 msgid "and T or INS to mark"
-msgstr "un T vai INS, lai atzîmçtu"
+msgstr "un T vai INS, lai atzÄ«mÄ“tu"
 
 msgid " Permission "
-msgstr " Atïauja "
+msgstr " AtÄ¼auja "
 
 msgid "Chmod command"
 msgstr "Komanda chmod"
 
 msgid "Set &users"
-msgstr "Uzstâdît &lietotâjus"
+msgstr "UzstÄdÄ«t &lietotÄjus"
 
 msgid "Set &groups"
-msgstr "Uzstâdît &grupas"
+msgstr "UzstÄdÄ«t &grupas"
 
 msgid " Name "
-msgstr " Vârds "
+msgstr " VÄrds "
 
 msgid " Owner name "
-msgstr " Îpağnieka vârds "
+msgstr " ÄªpaÅ¡nieka vÄrds "
 
 msgid " Group name "
-msgstr " Grupas vârds "
+msgstr " Grupas vÄrds "
 
 msgid " Size "
-msgstr " Izmçrs "
+msgstr " IzmÄ“rs "
 
 msgid " User name "
-msgstr " Lietotâja vârds "
+msgstr " LietotÄja vÄrds "
 
 msgid " Chown command "
 msgstr " Komanda chown "
 
 msgid "<Unknown user>"
-msgstr "<Nezinâms lietotâjs>"
+msgstr "<NezinÄms lietotÄjs>"
 
 msgid "<Unknown group>"
-msgstr "<Nezinâma grupa>"
+msgstr "<NezinÄma grupa>"
 
 msgid "Files tagged, want to cd?"
 msgstr "Faili tagoti, gribat cd?"
 
 msgid "Cannot change directory"
-msgstr "Nevar nomainît direktoriju"
+msgstr "Nevar nomainÄ«t direktoriju"
 
 msgid " View file "
-msgstr " Skatît failu "
+msgstr " SkatÄ«t failu "
 
 msgid " Filename:"
 msgstr " Faila Nosaukums:"
 
 msgid " Filtered view "
-msgstr " Filtrçts skatîjums "
+msgstr " FiltrÄ“ts skatÄ«jums "
 
 msgid " Filter command and arguments:"
-msgstr " Filtrçğanas komanda un argumenti:"
+msgstr " FiltrÄ“Å¡anas komanda un argumenti:"
 
 msgid "Create a new Directory"
 msgstr "Izveidot Jaunu Direktoriju"
@@ -1144,55 +1153,55 @@ msgid " Filter "
 msgstr " Filtrs "
 
 msgid " Set expression for filtering filenames"
-msgstr " Iestatît izteiksmi failu nosaukumu filtrçğanai"
+msgstr " IestatÄ«t izteiksmi failu nosaukumu filtrÄ“Å¡anai"
 
 msgid "&Using shell patterns"
 msgstr "&Lietoj"
 
 #, fuzzy
 msgid "&Case sensitive"
-msgstr "lielo/ma&zo burtu jûtîgs"
+msgstr "lielo/ma&zo burtu jÅ«tÄ«gs"
 
 #, fuzzy
 msgid "&Files only"
-msgstr "&Tikai izmçrs"
+msgstr "&Tikai izmÄ“rs"
 
 msgid " Select "
-msgstr " Atlasît "
+msgstr " AtlasÄ«t "
 
 msgid " Unselect "
-msgstr " Neatlasît "
+msgstr " NeatlasÄ«t "
 
 msgid "Extension file edit"
-msgstr "Paplağinâjuma faila rediìçğana"
+msgstr "PaplaÅ¡inÄjuma faila rediÄ£Ä“Å¡ana"
 
 msgid " Which extension file you want to edit? "
-msgstr " Kuru paplağinâjuma failu jûs vçlaties rediìçt? "
+msgstr " Kuru paplaÅ¡inÄjuma failu jÅ«s vÄ“laties rediÄ£Ä“t? "
 
 msgid " Compare directories "
-msgstr " Salîdzinât direktorijas "
+msgstr " SalÄ«dzinÄt direktorijas "
 
 msgid " Select compare method: "
-msgstr " Izvçlçties salîdzinâğanas metodi: "
+msgstr " IzvÄ“lÄ“ties salÄ«dzinÄÅ¡anas metodi: "
 
 msgid "&Quick"
-msgstr "&Âtri"
+msgstr "&Ä€tri"
 
 msgid "&Size only"
-msgstr "&Tikai izmçrs"
+msgstr "&Tikai izmÄ“rs"
 
 msgid "&Thorough"
-msgstr "&Pamatîgi"
+msgstr "&PamatÄ«gi"
 
 msgid " Both panels should be in the listing mode to use this command "
-msgstr " Abiem paneïiem jâbût saraksta skata reşîmâ, lai lietotu ğo komandu "
+msgstr " Abiem paneÄ¼iem jÄbÅ«t saraksta skata reÅ¾Ä«mÄ, lai lietotu Å¡o komandu "
 
 msgid ""
 " Not an xterm or Linux console; \n"
 " the panels cannot be toggled. "
 msgstr ""
 " Ne xterm vai Linux konsole; \n"
-" paneïi nevar tikt slçdzelçti. "
+" paneÄ¼i nevar tikt slÄ“dzelÄ“ti. "
 
 #, fuzzy, c-format
 msgid "Link %s to:"
@@ -1211,18 +1220,18 @@ msgstr " simbolsaite: %s "
 
 #, c-format
 msgid " Symlink `%s' points to: "
-msgstr " Simbolsaite '%s' norâda uz: "
+msgstr " Simbolsaite '%s' norÄda uz: "
 
 msgid " Edit symlink "
-msgstr " Rediìçt simbolsaiti "
+msgstr " RediÄ£Ä“t simbolsaiti "
 
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
-msgstr " rediìçt simbolsaiti, nevarçja izòemt %s: %s "
+msgstr " rediÄ£Ä“t simbolsaiti, nevarÄ“ja izÅ†emt %s: %s "
 
 #, c-format
 msgid " edit symlink: %s "
-msgstr " rediìçt simbolsaiti: %s "
+msgstr " rediÄ£Ä“t simbolsaiti: %s "
 
 #, c-format
 msgid "`%s' is not a symbolic link"
@@ -1230,13 +1239,13 @@ msgstr "`%s' nav simbolsaite"
 
 #, c-format
 msgid " Cannot chdir to %s "
-msgstr " nevarçja chdir uz %s "
+msgstr " nevarÄ“ja chdir uz %s "
 
 msgid " Enter machine name (F1 for details): "
-msgstr " Ievadiet datora vârdu (F1 detalizçtâk): "
+msgstr " Ievadiet datora vÄrdu (F1 detalizÄ“tÄk): "
 
 msgid " Link to a remote machine "
-msgstr " Saite uz attâlinâto mağînu "
+msgstr " Saite uz attÄlinÄto maÅ¡Ä«nu "
 
 msgid " FTP to machine "
 msgstr " FTP uz datoru "
@@ -1249,21 +1258,21 @@ msgid " SMB link to machine "
 msgstr " SMB saite uz datoru "
 
 msgid " Undelete files on an ext2 file system "
-msgstr " Atjaunot failus uz ext2 failsistçmas "
+msgstr " Atjaunot failus uz ext2 failsistÄ“mas "
 
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
 msgstr ""
-" Ievadi iekârtu (bez /dev/), no kuras\n"
-"   atjaunot failus: (F1 detalizçtâk)"
+" Ievadi iekÄrtu (bez /dev/), no kuras\n"
+"   atjaunot failus: (F1 detalizÄ“tÄk)"
 
 msgid " Setup "
-msgstr " Uzstâdîğana "
+msgstr " UzstÄdÄ«Å¡ana "
 
 #, fuzzy, c-format
 msgid " Setup saved to ~/%s"
-msgstr " Uzstâdîjumi saglabâti iekğ ~/"
+msgstr " UzstÄdÄ«jumi saglabÄti iekÅ¡ ~/"
 
 #, c-format
 msgid ""
@@ -1274,28 +1283,28 @@ msgstr ""
 " %s "
 
 msgid " Cannot execute commands on non-local filesystems"
-msgstr " Tu nevari palaist komandas uz ne-vietçjâm failsistçmâm"
+msgstr " Tu nevari palaist komandas uz ne-vietÄ“jÄm failsistÄ“mÄm"
 
 msgid " The shell is already running a command "
-msgstr " Èaulâ jau ir palaista komanda "
+msgstr " ÄŒaulÄ jau ir palaista komanda "
 
 msgid "&Unsorted"
-msgstr "&Nesakârtots"
+msgstr "&NesakÄrtots"
 
 msgid "&Name"
-msgstr "&Vârds"
+msgstr "&VÄrds"
 
 msgid "&Extension"
-msgstr "&Paplağinâjums"
+msgstr "&PaplaÅ¡inÄjums"
 
 msgid "&Modify time"
-msgstr "&Modificçğanas laiks"
+msgstr "&ModificÄ“Å¡anas laiks"
 
 msgid "&Access time"
 msgstr "&Pieejas laiks"
 
 msgid "C&Hange time"
-msgstr "&Izmainîğanas laiks"
+msgstr "&IzmainÄ«Å¡anas laiks"
 
 msgid "&Size"
 msgstr "&Lielums"
@@ -1305,26 +1314,26 @@ msgstr "&Inode"
 
 #, fuzzy
 msgid "Cannot read directory contents"
-msgstr "Nevar nomainît direktoriju"
+msgstr "Nevar nomainÄ«t direktoriju"
 
 #, c-format
 msgid "Press any key to continue..."
-msgstr "Nospied jebkuru taustiòu, lai turpinâtu..."
+msgstr "Nospied jebkuru taustiÅ†u, lai turpinÄtu..."
 
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
-msgstr "Ievadiet 'exit', lai atgrieztos Pusnakts Komandierî"
+msgstr "Ievadiet 'exit', lai atgrieztos Pusnakts KomandierÄ«"
 
 #, c-format
 msgid " Cannot fetch a local copy of %s "
-msgstr " Nevaru dabût vietçjo %s kopiju "
+msgstr " Nevaru dabÅ«t vietÄ“jo %s kopiju "
 
 #, c-format
 msgid ""
 " Cannot create temporary command file \n"
 " %s "
 msgstr ""
-" Nevar izveidot îslaicîgu komandas failu \n"
+" Nevar izveidot Ä«slaicÄ«gu komandas failu \n"
 " %s "
 
 msgid " Parameter "
@@ -1332,7 +1341,7 @@ msgstr " Parametrs "
 
 #, fuzzy, c-format
 msgid " %s%s file error"
-msgstr " faila kïûda "
+msgstr " faila kÄ¼Å«da "
 
 #, fuzzy, c-format
 msgid ""
@@ -1340,14 +1349,14 @@ msgid ""
 "the installation failed.  Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
-"fails mc.ext ir mainîjies,\n"
-"sâkot ar 3.0 versiju. Izskatâs, ka instalâcija\n"
-"neizdevâs. Lûdzu sagâdâ jaunu kopiju no\n"
+"fails mc.ext ir mainÄ«jies,\n"
+"sÄkot ar 3.0 versiju. IzskatÄs, ka instalÄcija\n"
+"neizdevÄs. LÅ«dzu sagÄdÄ jaunu kopiju no\n"
 "Midnight Commander pakotnes."
 
 #, fuzzy, c-format
 msgid " ~/%s file error "
-msgstr " faila kïûda "
+msgstr " faila kÄ¼Å«da "
 
 #, c-format
 msgid ""
@@ -1357,23 +1366,23 @@ msgid ""
 msgstr ""
 
 msgid " Copy "
-msgstr " Kopçt "
+msgstr " KopÄ“t "
 
 msgid " Move "
-msgstr " Pârvietot "
+msgstr " PÄrvietot "
 
 msgid " Delete "
-msgstr " Dzçst "
+msgstr " DzÄ“st "
 
 msgid " Cannot make the hardlink "
-msgstr " Nevarçja izveidot cietsaiti "
+msgstr " NevarÄ“ja izveidot cietsaiti "
 
 #, c-format
 msgid ""
 " Cannot read source link \"%s\" \n"
 " %s "
 msgstr ""
-" Nevarçja nolasît avota saiti \"%s\" \n"
+" NevarÄ“ja nolasÄ«t avota saiti \"%s\" \n"
 " %s "
 
 msgid ""
@@ -1381,16 +1390,16 @@ msgid ""
 "\n"
 " Option Stable Symlinks will be disabled "
 msgstr ""
-" Nevar izveidot stabilas simbolsaites starp ne-vietçjâm failsistçmâm: \n"
+" Nevar izveidot stabilas simbolsaites starp ne-vietÄ“jÄm failsistÄ“mÄm: \n"
 "\n"
-" Opciju Stabilâs Simbolsaites tiks atslçgtas "
+" Opciju StabilÄs Simbolsaites tiks atslÄ“gtas "
 
 #, c-format
 msgid ""
 " Cannot create target symlink \"%s\" \n"
 " %s "
 msgstr ""
-" Nevar izveidot mçría simbolsaiti \"%s\" \n"
+" Nevar izveidot mÄ“rÄ·a simbolsaiti \"%s\" \n"
 " %s "
 
 msgid "&Abort"
@@ -1401,7 +1410,7 @@ msgid ""
 " Cannot overwrite directory \"%s\" \n"
 " %s "
 msgstr ""
-" Nevar pârrakstît direktoriju \"%s\" \n"
+" Nevar pÄrrakstÄ«t direktoriju \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1409,7 +1418,7 @@ msgid ""
 " Cannot stat source file \"%s\" \n"
 " %s "
 msgstr ""
-" Nevar sâknçt avota failu \"%s\" \n"
+" Nevar sÄknÄ“t avota failu \"%s\" \n"
 " %s "
 
 #, fuzzy, c-format
@@ -1425,7 +1434,7 @@ msgid ""
 " Cannot create special file \"%s\" \n"
 " %s "
 msgstr ""
-" Nevar izveidot speciâlo failu \"%s\" \n"
+" Nevar izveidot speciÄlo failu \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1433,7 +1442,7 @@ msgid ""
 " Cannot chown target file \"%s\" \n"
 " %s "
 msgstr ""
-" Nevar chown mçría failu \"%s\" \n"
+" Nevar chown mÄ“rÄ·a failu \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1441,7 +1450,7 @@ msgid ""
 " Cannot chmod target file \"%s\" \n"
 " %s "
 msgstr ""
-" Nevar chmod mçría failu \"%s\" \n"
+" Nevar chmod mÄ“rÄ·a failu \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1449,11 +1458,11 @@ msgid ""
 " Cannot open source file \"%s\" \n"
 " %s "
 msgstr ""
-" Nevar atvçrt avota failu \"%s\" \n"
+" Nevar atvÄ“rt avota failu \"%s\" \n"
 " %s "
 
 msgid " Reget failed, about to overwrite file "
-msgstr " Pârdabûğana neizdevâs, tûlît pârrakstîğu failu "
+msgstr " PÄrdabÅ«Å¡ana neizdevÄs, tÅ«lÄ«t pÄrrakstÄ«Å¡u failu "
 
 #, c-format
 msgid ""
@@ -1468,7 +1477,7 @@ msgid ""
 " Cannot create target file \"%s\" \n"
 " %s "
 msgstr ""
-" Nevar izveidot mçría failu \"%s\" \n"
+" Nevar izveidot mÄ“rÄ·a failu \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1476,7 +1485,7 @@ msgid ""
 " Cannot fstat target file \"%s\" \n"
 " %s "
 msgstr ""
-" Nevar fstat mçría failu \"%s\" \n"
+" Nevar fstat mÄ“rÄ·a failu \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1484,7 +1493,7 @@ msgid ""
 " Cannot read source file \"%s\" \n"
 " %s "
 msgstr ""
-" Nevar nolasît avota failu \"%s\" \n"
+" Nevar nolasÄ«t avota failu \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1492,18 +1501,18 @@ msgid ""
 " Cannot write target file \"%s\" \n"
 " %s "
 msgstr ""
-" Nevar ierakstît mçría failu \"%s\" \n"
+" Nevar ierakstÄ«t mÄ“rÄ·a failu \"%s\" \n"
 " %s "
 
 msgid "(stalled)"
-msgstr "(staïïots)"
+msgstr "(staÄ¼Ä¼ots)"
 
 #, c-format
 msgid ""
 " Cannot close source file \"%s\" \n"
 " %s "
 msgstr ""
-" Nevar aizvçrt avota failu \"%s\" \n"
+" Nevar aizvÄ“rt avota failu \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1511,17 +1520,17 @@ msgid ""
 " Cannot close target file \"%s\" \n"
 " %s "
 msgstr ""
-" Nevar aizvçrt mçría failu \"%s\" \n"
+" Nevar aizvÄ“rt mÄ“rÄ·a failu \"%s\" \n"
 " %s "
 
 msgid "Incomplete file was retrieved. Keep it?"
-msgstr "Tika saòemts nepilns fails. Paturçt to?"
+msgstr "Tika saÅ†emts nepilns fails. PaturÄ“t to?"
 
 msgid "&Delete"
-msgstr "&Dzçst"
+msgstr "&DzÄ“st"
 
 msgid "&Keep"
-msgstr "&Paturçt"
+msgstr "&PaturÄ“t"
 
 #, c-format
 msgid ""
@@ -1544,7 +1553,7 @@ msgid ""
 " Cannot copy cyclic symbolic link \n"
 " `%s' "
 msgstr ""
-" Nevar kopçt ciklisko simbolsaiti \n"
+" Nevar kopÄ“t ciklisko simbolsaiti \n"
 " `%s' "
 
 #, c-format
@@ -1552,7 +1561,7 @@ msgid ""
 " Destination \"%s\" must be a directory \n"
 " %s "
 msgstr ""
-" Mçríim \"%s\" ir jâbût direktorijam \n"
+" MÄ“rÄ·im \"%s\" ir jÄbÅ«t direktorijam \n"
 " %s "
 
 #, c-format
@@ -1560,7 +1569,7 @@ msgid ""
 " Cannot create target directory \"%s\" \n"
 " %s "
 msgstr ""
-" Nevar izveidot mçría direktoriju \"%s\" \n"
+" Nevar izveidot mÄ“rÄ·a direktoriju \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1568,7 +1577,7 @@ msgid ""
 " Cannot chown target directory \"%s\" \n"
 " %s "
 msgstr ""
-" nevar chown mçría direktoriju \"%s\" \n"
+" nevar chown mÄ“rÄ·a direktoriju \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1576,19 +1585,19 @@ msgid ""
 " Cannot stat file \"%s\" \n"
 " %s "
 msgstr ""
-" Nevar sâknçt failu \"%s\" \n"
+" Nevar sÄknÄ“t failu \"%s\" \n"
 " %s "
 
 #, c-format
 msgid " Cannot overwrite directory `%s' "
-msgstr " Nevar pârrakstît direktoriju `%s' "
+msgstr " Nevar pÄrrakstÄ«t direktoriju `%s' "
 
 #, c-format
 msgid ""
 " Cannot move file \"%s\" to \"%s\" \n"
 " %s "
 msgstr ""
-" Nevar pârvietot failu \"%s\" to \"%s\" \n"
+" Nevar pÄrvietot failu \"%s\" to \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1596,7 +1605,7 @@ msgid ""
 " Cannot remove file \"%s\" \n"
 " %s "
 msgstr ""
-" Nevar izdzçst failu \"%s\" \n"
+" Nevar izdzÄ“st failu \"%s\" \n"
 " %s "
 
 #, fuzzy, c-format
@@ -1609,18 +1618,18 @@ msgstr " `%s' un `%s' ir tas pats direktorijs "
 
 #, c-format
 msgid " Cannot overwrite directory \"%s\" %s "
-msgstr " Nevar pârrakstît direktoriju \"%s\" %s "
+msgstr " Nevar pÄrrakstÄ«t direktoriju \"%s\" %s "
 
 #, c-format
 msgid " Cannot overwrite file \"%s\" %s "
-msgstr " Nevar pârrakstît failu \"%s\" %s "
+msgstr " Nevar pÄrrakstÄ«t failu \"%s\" %s "
 
 #, c-format
 msgid ""
 " Cannot move directory \"%s\" to \"%s\" \n"
 " %s "
 msgstr ""
-" Nevar pârvietot direktoriju \"%s\" uz \"%s\" \n"
+" Nevar pÄrvietot direktoriju \"%s\" uz \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1628,7 +1637,7 @@ msgid ""
 " Cannot delete file \"%s\" \n"
 " %s "
 msgstr ""
-" Nevar izdzçst failu \"%s\" \n"
+" Nevar izdzÄ“st failu \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1636,21 +1645,21 @@ msgid ""
 " Cannot remove directory \"%s\" \n"
 " %s "
 msgstr ""
-" Nevar izdzçst direktoriju \"%s\" \n"
+" Nevar izdzÄ“st direktoriju \"%s\" \n"
 " %s "
 
 #, fuzzy
 msgid "Directory scanning"
-msgstr "Direktorija ceïğ"
+msgstr "Direktorija ceÄ¼Å¡"
 
 msgid "1Copy"
-msgstr "1Kopçt"
+msgstr "1KopÄ“t"
 
 msgid "1Move"
-msgstr "1Pârvietot"
+msgstr "1PÄrvietot"
 
 msgid "1Delete"
-msgstr "1Izdzçst"
+msgstr "1IzdzÄ“st"
 
 #, no-c-format
 msgid "%o %f \"%s\"%m"
@@ -1682,13 +1691,13 @@ msgid " to:"
 msgstr " uz:"
 
 msgid " Cannot operate on \"..\"! "
-msgstr " Nevar operçt uz \"..\"! "
+msgstr " Nevar operÄ“t uz \"..\"! "
 
 msgid " Sorry, I could not put the job in background "
-msgstr " Atvaino, bet nevarçju darbu nosûtît fonâ "
+msgstr " Atvaino, bet nevarÄ“ju darbu nosÅ«tÄ«t fonÄ "
 
 msgid "&Retry"
-msgstr "&Vçlreiz"
+msgstr "&VÄ“lreiz"
 
 msgid ""
 "\n"
@@ -1696,8 +1705,8 @@ msgid ""
 "   Delete it recursively? "
 msgstr ""
 "\n"
-"   Direktorija nav tukğa.   \n"
-"   Dzçst to rekursîvi? "
+"   Direktorija nav tukÅ¡a.   \n"
+"   DzÄ“st to rekursÄ«vi? "
 
 msgid ""
 "\n"
@@ -1705,11 +1714,11 @@ msgid ""
 "   Delete it recursively? "
 msgstr ""
 "\n"
-"   Fona process: Direktorija nav tukğa \n"
-"   Dzçst to rekursîvi? "
+"   Fona process: Direktorija nav tukÅ¡a \n"
+"   DzÄ“st to rekursÄ«vi? "
 
 msgid " Delete: "
-msgstr " Dzçst: "
+msgstr " DzÄ“st: "
 
 msgid "Non&e"
 msgstr "n&Evienu"
@@ -1734,7 +1743,7 @@ msgid "File"
 msgstr "Fails"
 
 msgid "Count"
-msgstr "Skaitît"
+msgstr "SkaitÄ«t"
 
 msgid "Bytes"
 msgstr "Baiti"
@@ -1743,36 +1752,36 @@ msgid "Source"
 msgstr "Avots"
 
 msgid "Target"
-msgstr "Mçríis"
+msgstr "MÄ“rÄ·is"
 
 msgid "Deleting"
-msgstr "Dzçğana"
+msgstr "DzÄ“Å¡ana"
 
 #, c-format
 msgid "Target file \"%s\" already exists!"
-msgstr "Mçría fails \"%s\" jau eksistç!"
+msgstr "MÄ“rÄ·a fails \"%s\" jau eksistÄ“!"
 
 msgid "If &size differs"
-msgstr "ja i&Zmçrs atğíiras"
+msgstr "ja i&ZmÄ“rs atÅ¡Ä·iras"
 
 msgid "&Update"
-msgstr "&Atjauninât"
+msgstr "&AtjauninÄt"
 
 msgid "Overwrite all targets?"
-msgstr "Pârrakstît visus mçrïus?"
+msgstr "PÄrrakstÄ«t visus mÄ“rÄ¼us?"
 
 msgid "&Reget"
-msgstr "&Pârdabût"
+msgstr "&PÄrdabÅ«t"
 
 msgid "A&ppend"
 msgstr "pie&Vienot"
 
 msgid "Overwrite this target?"
-msgstr "Pârrakstît mçríi?"
+msgstr "PÄrrakstÄ«t mÄ“rÄ·i?"
 
 #, fuzzy, c-format
 msgid "Target date: %s, size %llu"
-msgstr "Mçría datums: %s, lielums %llu"
+msgstr "MÄ“rÄ·a datums: %s, lielums %llu"
 
 #, fuzzy, c-format
 msgid "Source date: %s, size %llu"
@@ -1780,35 +1789,35 @@ msgstr "Avota datums: %s, lielums %llu"
 
 #, fuzzy, c-format
 msgid "Target date: %s, size %u"
-msgstr "Mçría datums: %s, lielums %u"
+msgstr "MÄ“rÄ·a datums: %s, lielums %u"
 
 #, fuzzy, c-format
 msgid "Source date: %s, size %u"
 msgstr "Avota datums: %s, lielums %u"
 
 msgid " File exists "
-msgstr " Fails eksistç "
+msgstr " Fails eksistÄ“ "
 
 msgid " Background process: File exists "
-msgstr " Fona darbs: Fails eksistç "
+msgstr " Fona darbs: Fails eksistÄ“ "
 
 msgid "preserve &Attributes"
-msgstr "saglabât &Atribûtus"
+msgstr "saglabÄt &AtribÅ«tus"
 
 msgid "follow &Links"
-msgstr "sekot &Saitçm"
+msgstr "sekot &SaitÄ“m"
 
 msgid "to:"
 msgstr "uz:"
 
 msgid "&Background"
-msgstr "&Fonâ"
+msgstr "&FonÄ"
 
 msgid "&Stable Symlinks"
 msgstr "&Stabilas Simbolsaites"
 
 msgid "&Dive into subdir if exists"
-msgstr "&Ieiet apakğdirektorijâ, ja tâds eksistç"
+msgstr "&Ieiet apakÅ¡direktorijÄ, ja tÄds eksistÄ“"
 
 #, fuzzy, c-format
 msgid "Invalid source pattern `%s'"
@@ -1820,7 +1829,7 @@ msgid "&Suspend"
 msgstr "At&likt"
 
 msgid "Con&tinue"
-msgstr "Tu&rpinât"
+msgstr "Tu&rpinÄt"
 
 msgid "&Chdir"
 msgstr "&Chdir"
@@ -1832,13 +1841,13 @@ msgid "&Quit"
 msgstr "I&Ziet"
 
 msgid "Pane&lize"
-msgstr "Pa&nelçt"
+msgstr "Pa&nelÄ“t"
 
 msgid "&View - F3"
-msgstr "&Skatît - F3"
+msgstr "&SkatÄ«t - F3"
 
 msgid "&Edit - F4"
-msgstr "&Rediìçt - F4"
+msgstr "&RediÄ£Ä“t - F4"
 
 #, c-format
 msgid "Found: %ld"
@@ -1846,15 +1855,15 @@ msgstr ""
 
 #, fuzzy
 msgid " Malformed regular expression "
-msgstr "  Nepareizi veidota regulâra izteiksme  "
+msgstr "  Nepareizi veidota regulÄra izteiksme  "
 
 #, fuzzy
 msgid "Cas&e sensitive"
-msgstr "lielo/ma&zo burtu jûtîgs"
+msgstr "lielo/ma&zo burtu jÅ«tÄ«gs"
 
 #, fuzzy
 msgid "Case sens&itive"
-msgstr "lielo/ma&zo burtu jûtîgs"
+msgstr "lielo/ma&zo burtu jÅ«tÄ«gs"
 
 msgid "&Find recursively"
 msgstr ""
@@ -1870,7 +1879,7 @@ msgstr ""
 
 #, fuzzy
 msgid "Re&gular expression"
-msgstr "&Regulâra izteiksme"
+msgstr "&RegulÄra izteiksme"
 
 msgid "&Tree"
 msgstr "&Koks"
@@ -1887,31 +1896,31 @@ msgid "File name:"
 msgstr "Faila nosaukums:"
 
 msgid "Start at:"
-msgstr "Sâknçt iekğ:"
+msgstr "SÄknÄ“t iekÅ¡:"
 
 #, c-format
 msgid "Grepping in %s"
-msgstr "Grepoju iekğ %s"
+msgstr "Grepoju iekÅ¡ %s"
 
 msgid "Finished"
 msgstr "Babeigts"
 
 #, c-format
 msgid "Searching %s"
-msgstr "Meklçju %s"
+msgstr "MeklÄ“ju %s"
 
 msgid "Searching"
-msgstr "Meklçju"
+msgstr "MeklÄ“ju"
 
 msgid " Help file format error\n"
-msgstr " Palîdzîbas faila formâta kïûda\n"
+msgstr " PalÄ«dzÄ«bas faila formÄta kÄ¼Å«da\n"
 
 msgid " Internal bug: Double start of link area "
-msgstr " Iekğçja kïûda: Dubultsâknçjums saites apvidû "
+msgstr " IekÅ¡Ä“ja kÄ¼Å«da: DubultsÄknÄ“jums saites apvidÅ« "
 
 #, c-format
 msgid " Cannot find node %s in help file "
-msgstr " Nevarçja atrast mezglpunktu %s palîdzîbas failâ "
+msgstr " NevarÄ“ja atrast mezglpunktu %s palÄ«dzÄ«bas failÄ "
 
 msgid "Index"
 msgstr "Indekss"
@@ -1920,10 +1929,10 @@ msgid "Prev"
 msgstr "Iepr"
 
 msgid "&Move"
-msgstr "&Pârvietot"
+msgstr "&PÄrvietot"
 
 msgid "&Remove"
-msgstr "&Izòemt"
+msgstr "&IzÅ†emt"
 
 msgid "&Append"
 msgstr "pie&Likt"
@@ -1938,64 +1947,64 @@ msgid "New &Group"
 msgstr "Jauna &Grupa"
 
 msgid "&Up"
-msgstr "&Augğup"
+msgstr "&AugÅ¡up"
 
 msgid "&Add current"
-msgstr "&Pievienot pağreizçjo"
+msgstr "&Pievienot paÅ¡reizÄ“jo"
 
 #, fuzzy
 msgid "&Refresh"
-msgstr "&Pretçji"
+msgstr "&PretÄ“ji"
 
 msgid "Fr&ee VFSs now"
-msgstr "At&brîvot VFS tûlît"
+msgstr "At&brÄ«vot VFS tÅ«lÄ«t"
 
 msgid "Change &To"
 msgstr "Iet &Uz"
 
 msgid "Subgroup - press ENTER to see list"
-msgstr "Apakğgrupa - nospied ENTER, lai redzçtu sarakstu"
+msgstr "ApakÅ¡grupa - nospied ENTER, lai redzÄ“tu sarakstu"
 
 msgid "Active VFS directories"
-msgstr "Aktîvie VFS direktoriji"
+msgstr "AktÄ«vie VFS direktoriji"
 
 msgid "Directory hotlist"
 msgstr "Direktoriju karstais saraksts"
 
 msgid " Directory path "
-msgstr " Direktorija ceïğ "
+msgstr " Direktorija ceÄ¼Å¡ "
 
 msgid " Directory label "
 msgstr " Direktorija nosaukums "
 
 #, c-format
 msgid "Moving %s"
-msgstr "Pârvietoju %s"
+msgstr "PÄrvietoju %s"
 
 msgid "New hotlist entry"
-msgstr "Jauna karstâ saraksta ieraksts"
+msgstr "Jauna karstÄ saraksta ieraksts"
 
 msgid "Directory label"
 msgstr "Direktorija nosaukums"
 
 msgid "Directory path"
-msgstr "Direktorija ceïğ"
+msgstr "Direktorija ceÄ¼Å¡"
 
 msgid " New hotlist group "
-msgstr " Jauna karstâ saraksta grupa "
+msgstr " Jauna karstÄ saraksta grupa "
 
 msgid "Name of new group"
-msgstr "Jaunâs grupas nosaukums"
+msgstr "JaunÄs grupas nosaukums"
 
 #, c-format
 msgid "Label for \"%s\":"
-msgstr "Nosaukums priekğ \"%s\":"
+msgstr "Nosaukums priekÅ¡ \"%s\":"
 
 msgid " Add to hotlist "
 msgstr "Pievienot karstajam sarakstam"
 
 msgid " Remove: "
-msgstr " Izòemt: "
+msgstr " IzÅ†emt: "
 
 msgid ""
 "\n"
@@ -2008,19 +2017,19 @@ msgid ""
 " Remove it?"
 msgstr ""
 "\n"
-" Grupa nav tukğa.\n"
-" Izòemt to?"
+" Grupa nav tukÅ¡a.\n"
+" IzÅ†emt to?"
 
 msgid " Top level group "
-msgstr " Augğlîmeòa grupa "
+msgstr " AugÅ¡lÄ«meÅ†a grupa "
 
 msgid " Hotlist Load "
-msgstr " Karstâ Saraksta Ielâde "
+msgstr " KarstÄ Saraksta IelÄde "
 
 #, fuzzy, c-format
 msgid ""
 "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
-msgstr " fails, tavi vecie karstâ saraksta ieraksti netika izdzçsti"
+msgstr " fails, tavi vecie karstÄ saraksta ieraksti netika izdzÄ“sti"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -2032,40 +2041,40 @@ msgstr "Fails:       %s"
 
 #, c-format
 msgid "Free nodes: %d (%d%%) of %d"
-msgstr "Brîvie mezgli: %d (%d%%) no %d"
+msgstr "BrÄ«vie mezgli: %d (%d%%) no %d"
 
 msgid "No node information"
-msgstr "Nav mezglu informâcijas"
+msgstr "Nav mezglu informÄcijas"
 
 #, c-format
 msgid "Free space: %s (%d%%) of %s"
-msgstr "Brîvâ vieta: %s (%d%%) no %s"
+msgstr "BrÄ«vÄ vieta: %s (%d%%) no %s"
 
 msgid "No space information"
-msgstr "Nav vietas informâcijas"
+msgstr "Nav vietas informÄcijas"
 
 #, c-format
 msgid "Type:      %s "
 msgstr "Tips:      %s "
 
 msgid "non-local vfs"
-msgstr "ne-vietçjâ vfs"
+msgstr "ne-vietÄ“jÄ vfs"
 
 #, c-format
 msgid "Device:    %s"
-msgstr "Iekârta:    %s"
+msgstr "IekÄrta:    %s"
 
 #, c-format
 msgid "Filesystem: %s"
-msgstr "Failsistçma: %s"
+msgstr "FailsistÄ“ma: %s"
 
 #, c-format
 msgid "Accessed:  %s"
-msgstr "Apmeklçts:  %s"
+msgstr "ApmeklÄ“ts:  %s"
 
 #, c-format
 msgid "Modified:  %s"
-msgstr "Modificçts:  %s"
+msgstr "ModificÄ“ts:  %s"
 
 #. TRANSLATORS: "Status changed", like in the stat(2) man page
 #, fuzzy, c-format
@@ -2088,7 +2097,7 @@ msgstr[1] " (%ld bloks)"
 
 #, c-format
 msgid "Owner:     %s/%s"
-msgstr "Îpağnieks:     %s/%s"
+msgstr "ÄªpaÅ¡nieks:     %s/%s"
 
 #, c-format
 msgid "Links:     %d"
@@ -2096,7 +2105,7 @@ msgstr "Saites:     %d"
 
 #, c-format
 msgid "Mode:      %s (%04o)"
-msgstr "Reşîms:      %s (%04o)"
+msgstr "ReÅ¾Ä«ms:      %s (%04o)"
 
 #, c-format
 msgid "Location:  %Xh:%Xh"
@@ -2106,10 +2115,10 @@ msgid "File:       None"
 msgstr "Fails:       Nekas"
 
 msgid "&Vertical"
-msgstr "&Vertikâli"
+msgstr "&VertikÄli"
 
 msgid "&Horizontal"
-msgstr "&Horizontâli"
+msgstr "&HorizontÄli"
 
 msgid "show free sp&Ace"
 msgstr ""
@@ -2122,28 +2131,28 @@ msgid "h&Intbar visible"
 msgstr "pa&domjosla redzama"
 
 msgid "&Keybar visible"
-msgstr "&Taustiòjosla redzama"
+msgstr "&TaustiÅ†josla redzama"
 
 msgid "command &Prompt"
 msgstr "komandu ie&vade"
 
 msgid "show &Mini status"
-msgstr "râdît &Mini statusu"
+msgstr "rÄdÄ«t &Mini statusu"
 
 msgid "menu&Bar visible"
-msgstr "izvçlnes &Josla redzama"
+msgstr "izvÄ“lnes &Josla redzama"
 
 msgid "&Equal split"
-msgstr "&Vienâds sadalîjums"
+msgstr "&VienÄds sadalÄ«jums"
 
 msgid "pe&Rmissions"
-msgstr "a&tïaujas"
+msgstr "a&tÄ¼aujas"
 
 msgid "&File types"
 msgstr "&Failu tipi"
 
 msgid " Panel split "
-msgstr "Paneïu sadalîjums"
+msgstr "PaneÄ¼u sadalÄ«jums"
 
 msgid " Highlight... "
 msgstr " Izgaismot... "
@@ -2152,16 +2161,16 @@ msgid " Other options "
 msgstr " Citas opcijas"
 
 msgid "output lines"
-msgstr "izvades lînijas"
+msgstr "izvades lÄ«nijas"
 
 msgid "Layout"
-msgstr "Izkârtojums"
+msgstr "IzkÄrtojums"
 
 msgid "Learn keys"
-msgstr "Mâcîbu taustiòi"
+msgstr "MÄcÄ«bu taustiÅ†i"
 
 msgid " Teach me a key "
-msgstr " Iemâci man taustiòu "
+msgstr " IemÄci man taustiÅ†u "
 
 #, c-format
 msgid ""
@@ -2174,21 +2183,21 @@ msgid ""
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
 msgstr ""
-"Lûdzu nospied %s\n"
-"un tad gaidi lîdz ğis ziòojums pazûd.\n"
+"LÅ«dzu nospied %s\n"
+"un tad gaidi lÄ«dz Å¡is ziÅ†ojums pazÅ«d.\n"
 "\n"
-"Tad nospied to vçlreiz, lai redzçtu, vai parâdâs OK\n"
-"blakus ğai pogai.\n"
+"Tad nospied to vÄ“lreiz, lai redzÄ“tu, vai parÄdÄs OK\n"
+"blakus Å¡ai pogai.\n"
 "\n"
-"Ja tu vçlies iziet, vienreiz nospied Escape taustiòu\n"
+"Ja tu vÄ“lies iziet, vienreiz nospied Escape taustiÅ†u\n"
 "un uzgaidil."
 
 msgid " Cannot accept this key "
-msgstr " Ğis taustiòğ nav pieejams "
+msgstr " Å is taustiÅ†Å¡ nav pieejams "
 
 #, c-format
 msgid " You have entered \"%s\""
-msgstr " Jûs esat ievadîjuği \"%s\""
+msgstr " JÅ«s esat ievadÄ«juÅ¡i \"%s\""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -2198,8 +2207,8 @@ msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
 msgstr ""
-"Izskatâs, ka visi tavi taustiòi\n"
-"jau strâdâ labi. Tas ir lieliski."
+"IzskatÄs, ka visi tavi taustiÅ†i\n"
+"jau strÄdÄ labi. Tas ir lieliski."
 
 msgid "&Discard"
 msgstr "&Atsaukt"
@@ -2208,20 +2217,20 @@ msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
 msgstr ""
-"Lieliski! Jums ir pilnîga terminâïa datubâze!\n"
-"Visi jûsu taustiòi strâdâ labi."
+"Lieliski! Jums ir pilnÄ«ga terminÄÄ¼a datubÄze!\n"
+"Visi jÅ«su taustiÅ†i strÄdÄ labi."
 
 msgid "Press all the keys mentioned here. After you have done it, check"
-msgstr "Nospied visus ğeit minçtos taustiòus. Kad tas ir izdarîts, pârbaudi"
+msgstr "Nospied visus Å¡eit minÄ“tos taustiÅ†us. Kad tas ir izdarÄ«ts, pÄrbaudi"
 
 msgid "which keys are not marked with OK.  Press space on the missing"
 msgstr ""
-"kuri taustiòi nav atzîmçti kâ OK. Nospiediet atstarpes taustiòu pie "
-"trûkstoğajiem"
+"kuri taustiÅ†i nav atzÄ«mÄ“ti kÄ OK. Nospiediet atstarpes taustiÅ†u pie "
+"trÅ«kstoÅ¡ajiem"
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr ""
-"taustiòu, vai klikğíini ar peli, lai to definçtu. Kosties apkârt ar Tab."
+"taustiÅ†u, vai klikÅ¡Ä·ini ar peli, lai to definÄ“tu. Kosties apkÄrt ar Tab."
 
 msgid ""
 " The Commander can't change to the directory that \n"
@@ -2230,27 +2239,27 @@ msgid ""
 " extra access permissions with the \"su\" command? "
 msgstr ""
 "Komandieris nevar aiziet uz to direktoriju, par kuru \n"
-"zemèaula paziòo, ka tajâ atrodaties.  Iespçjams, ka esat \n"
-"izdzçsis savu darba direktoriju vai arî esat iedevis sev \n"
-"papildus pieejas atïaujas ar \"su\" komandu? "
+"zemÄaula paziÅ†o, ka tajÄ atrodaties.  IespÄ“jams, ka esat \n"
+"izdzÄ“sis savu darba direktoriju vai arÄ« esat iedevis sev \n"
+"papildus pieejas atÄ¼aujas ar \"su\" komandu? "
 
 msgid " The Midnight Commander "
 msgstr " Pusnakts Komandieris "
 
 msgid " Do you really want to quit the Midnight Commander? "
-msgstr " Vai patiesi vçlaties iziet no Pusnakts Komandiera? "
+msgstr " Vai patiesi vÄ“laties iziet no Pusnakts Komandiera? "
 
 msgid "&Listing mode..."
-msgstr "&Saraksta reşîms..."
+msgstr "&Saraksta reÅ¾Ä«ms..."
 
 msgid "&Quick view     C-x q"
-msgstr "&Âtrais skatîjums     C-x q"
+msgstr "&Ä€trais skatÄ«jums     C-x q"
 
 msgid "&Info           C-x i"
 msgstr "&Info           C-x i"
 
 msgid "&Sort order..."
-msgstr "&Kârtotâ secîbâ..."
+msgstr "&KÄrtotÄ secÄ«bÄ..."
 
 msgid "&Filter..."
 msgstr "&Filtrs..."
@@ -2259,7 +2268,7 @@ msgid "&Encoding...    C-t"
 msgstr ""
 
 msgid "&Network link..."
-msgstr "&Tîkla saite..."
+msgstr "&TÄ«kla saite..."
 
 msgid "FT&P link..."
 msgstr "FT&P saite..."
@@ -2272,22 +2281,22 @@ msgid "SM&B link..."
 msgstr "SM&B saite..."
 
 msgid "&Rescan         C-r"
-msgstr "&Pârskançt         C-r"
+msgstr "&PÄrskanÄ“t         C-r"
 
 msgid "&View               F3"
-msgstr "Ska&tît               F3"
+msgstr "Ska&tÄ«t               F3"
 
 msgid "Vie&w file...         "
-msgstr "S&katît failu...         "
+msgstr "S&katÄ«t failu...         "
 
 msgid "&Filtered view     M-!"
-msgstr "&Filtrçts skatîjums     M-!"
+msgstr "&FiltrÄ“ts skatÄ«jums     M-!"
 
 msgid "&Edit               F4"
-msgstr "&Rediìçt               F4"
+msgstr "&RediÄ£Ä“t               F4"
 
 msgid "&Copy               F5"
-msgstr "&Kopçt               F5"
+msgstr "&KopÄ“t               F5"
 
 msgid "c&Hmod           C-x c"
 msgstr "c&Hmod           C-x c"
@@ -2299,107 +2308,107 @@ msgid "&SymLink         C-x s"
 msgstr "Si&mbolSaite         C-x s"
 
 msgid "edit s&Ymlink  C-x C-s"
-msgstr "rediìçt si&mbolsait  C-x C-s"
+msgstr "rediÄ£Ä“t si&mbolsait  C-x C-s"
 
 msgid "ch&Own           C-x o"
 msgstr "ch&Own           C-x o"
 
 msgid "&Advanced chown       "
-msgstr "&Paplağinâts chown"
+msgstr "&PaplaÅ¡inÄts chown"
 
 msgid "&Rename/Move        F6"
-msgstr "Pâ&rsaukt/Pârvietot        F6"
+msgstr "PÄ&rsaukt/PÄrvietot        F6"
 
 msgid "&Mkdir              F7"
 msgstr "&Izvdir              F7"
 
 msgid "&Delete             F8"
-msgstr "&Dzçst             F8"
+msgstr "&DzÄ“st             F8"
 
 msgid "&Quick cd          M-c"
-msgstr "&Âtrs cd          M-c"
+msgstr "&Ä€trs cd          M-c"
 
 msgid "select &Group      M-+"
-msgstr "izvçlçties &Grupu      M-+"
+msgstr "izvÄ“lÄ“ties &Grupu      M-+"
 
 msgid "u&Nselect group    M-\\"
-msgstr "at&Celt izvçlçto grupu    M-\\"
+msgstr "at&Celt izvÄ“lÄ“to grupu    M-\\"
 
 msgid "reverse selec&Tion M-*"
-msgstr "pretçji izvçlç&Tajam M-*"
+msgstr "pretÄ“ji izvÄ“lÄ“&Tajam M-*"
 
 msgid "e&Xit              F10"
 msgstr "i&Ziet              F10"
 
 msgid "&User menu          F2"
-msgstr "&Lietotâja izvçlne          F2"
+msgstr "&LietotÄja izvÄ“lne          F2"
 
 msgid "&Directory tree"
 msgstr "&Direktoriju koks"
 
 msgid "&Find file            M-?"
-msgstr "&Meklçt failu            M-?"
+msgstr "&MeklÄ“t failu            M-?"
 
 msgid "s&Wap panels          C-u"
-msgstr "mai&Nît paneïus          C-u"
+msgstr "mai&NÄ«t paneÄ¼us          C-u"
 
 msgid "switch &Panels on/off C-o"
-msgstr "ieslçgt/izslçgt &Paneïus C-o"
+msgstr "ieslÄ“gt/izslÄ“gt &PaneÄ¼us C-o"
 
 msgid "&Compare directories  C-x d"
-msgstr "&Salîdzinât direktorijus  C-x d"
+msgstr "&SalÄ«dzinÄt direktorijus  C-x d"
 
 msgid "e&Xternal panelize    C-x !"
 msgstr "e&Xternal panelize    C-x !"
 
 msgid "show directory s&Izes"
-msgstr "parâdît direktoriju l&ielumus"
+msgstr "parÄdÄ«t direktoriju l&ielumus"
 
 #, fuzzy
 msgid "Command &history      M-h"
-msgstr " Komandu vçsture "
+msgstr " Komandu vÄ“sture "
 
 msgid "di&Rectory hotlist    C-\\"
 msgstr "di&Rektoriju karstais saraksts    C-\\"
 
 msgid "&Active VFS list      C-x a"
-msgstr "&Aktîvo VFS saraksts      C-x a"
+msgstr "&AktÄ«vo VFS saraksts      C-x a"
 
 msgid "&Background jobs      C-x j"
 msgstr "&Fona darbi      C-x j"
 
 msgid "&Undelete files (ext2fs only)"
-msgstr "&Atjaunot izdzçstos failus (ext2fs tikai)"
+msgstr "&Atjaunot izdzÄ“stos failus (ext2fs tikai)"
 
 msgid "&Listing format edit"
-msgstr "&Saraksta formâta rediìçğana"
+msgstr "&Saraksta formÄta rediÄ£Ä“Å¡ana"
 
 msgid "Edit &extension file"
-msgstr "&Paplağinâjumu faila rediìçğana"
+msgstr "&PaplaÅ¡inÄjumu faila rediÄ£Ä“Å¡ana"
 
 msgid "Edit &menu file"
-msgstr "&Izvçlnes faila rediìçğana"
+msgstr "&IzvÄ“lnes faila rediÄ£Ä“Å¡ana"
 
 msgid "&Configuration..."
-msgstr "&Konfigurâcija..."
+msgstr "&KonfigurÄcija..."
 
 msgid "&Layout..."
-msgstr "&Izkârtojums..."
+msgstr "&IzkÄrtojums..."
 
 msgid "c&Onfirmation..."
-msgstr "a&Pstiprinâğana..."
+msgstr "a&PstiprinÄÅ¡ana..."
 
 msgid "&Display bits..."
 msgstr "&Displeja biti..."
 
 msgid "learn &Keys..."
-msgstr "mâcîbu &Taustiòi..."
+msgstr "mÄcÄ«bu &TaustiÅ†i..."
 
 msgid "&Virtual FS..."
-msgstr "&Virtuâlâ FS..."
+msgstr "&VirtuÄlÄ FS..."
 
 msgid "&Save setup"
-msgstr "&Saglabât uzstâdîjumus"
+msgstr "&SaglabÄt uzstÄdÄ«jumus"
 
 msgid " &Above "
 msgstr " &Virs "
@@ -2423,7 +2432,7 @@ msgid " &Right "
 msgstr " &Labais "
 
 msgid " Information "
-msgstr " Informâcija "
+msgstr " InformÄcija "
 
 msgid ""
 " Using the fast reload option may not reflect the exact \n"
@@ -2431,17 +2440,17 @@ msgid ""
 " manual reload of the directory. See the man page for   \n"
 " the details.                                           "
 msgstr ""
-" Âtrâs pârlâdes opcijas lietoğana var neietekmçt konkrçtâ \n"
-" direktorija saturu. Tâdâ gadîjumâ tev pağrocîgi \n"
-" jâpârlâdç direktorijs. Detalizçtâku aprakstu meklç \n"
-"man lapâs.  \n"
+" Ä€trÄs pÄrlÄdes opcijas lietoÅ¡ana var neietekmÄ“t konkrÄ“tÄ \n"
+" direktorija saturu. TÄdÄ gadÄ«jumÄ tev paÅ¡rocÄ«gi \n"
+" jÄpÄrlÄdÄ“ direktorijs. DetalizÄ“tÄku aprakstu meklÄ“ \n"
+"man lapÄs.  \n"
 "                                        "
 
 msgid "Menu"
-msgstr "Izvçlne"
+msgstr "IzvÄ“lne"
 
 msgid "The TERM environment variable is unset!\n"
-msgstr "TERM mainîgais nav ieslçgts!\n"
+msgstr "TERM mainÄ«gais nav ieslÄ“gts!\n"
 
 msgid "&Fix it"
 msgstr ""
@@ -2464,7 +2473,7 @@ msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Pusnakts Komandieris %s\n"
 
 msgid "[flags] [this_dir] [other_panel_dir]\n"
-msgstr "[karodziòi] [ğis_dir] [cita_paneïa_dir]\n"
+msgstr "[karodziÅ†i] [Å¡is_dir] [cita_paneÄ¼a_dir]\n"
 
 msgid "+number"
 msgstr ""
@@ -2478,7 +2487,7 @@ msgid ""
 "to mc-devel@gnome.org\n"
 msgstr ""
 "\n"
-"Lûdzu sûtiet jebkâdus kïûdu paziòojumus (ieskaitot `mc -V' izvadi)\n"
+"LÅ«dzu sÅ«tiet jebkÄdus kÄ¼Å«du paziÅ†ojumus (ieskaitot `mc -V' izvadi)\n"
 "uz mc-bugs@gnome.org\n"
 
 #, fuzzy
@@ -2528,43 +2537,43 @@ msgid ""
 msgstr ""
 
 msgid "Displays this help message"
-msgstr "Pârâda ğo palîdzîbas paziòojumu"
+msgstr "PÄrÄda Å¡o palÄ«dzÄ«bas paziÅ†ojumu"
 
 msgid "Displays the current version"
-msgstr "Parâda pağreizçjo versiju"
+msgstr "ParÄda paÅ¡reizÄ“jo versiju"
 
 msgid "Forces xterm features"
-msgstr "Aktivizç xterm iespçjas"
+msgstr "AktivizÄ“ xterm iespÄ“jas"
 
 msgid "Disable mouse support in text version"
-msgstr "Atslçdz peles atbalstu teksta reşîmâ"
+msgstr "AtslÄ“dz peles atbalstu teksta reÅ¾Ä«mÄ"
 
 msgid "Tries to use termcap instead of terminfo"
-msgstr "Mçìina lietot termcap terminfo vietâ"
+msgstr "MÄ“Ä£ina lietot termcap terminfo vietÄ"
 
 msgid "Resets soft keys on HP terminals"
-msgstr "Pârslçdz mîkstos taustiòus uz HP terminâïiem"
+msgstr "PÄrslÄ“dz mÄ«kstos taustiÅ†us uz HP terminÄÄ¼iem"
 
 msgid "To run on slow terminals"
-msgstr "Lai palaistu uz lçniem terminâïiem"
+msgstr "Lai palaistu uz lÄ“niem terminÄÄ¼iem"
 
 msgid "Use stickchars to draw"
 msgstr ""
 
 msgid "Requests to run in black and white"
-msgstr "Pieprasa, lai darbotos melnbaltâ reşîmâ"
+msgstr "Pieprasa, lai darbotos melnbaltÄ reÅ¾Ä«mÄ"
 
 msgid "Request to run in color mode"
-msgstr "Pieprasîjums darboties krâsu reşîmâ"
+msgstr "PieprasÄ«jums darboties krÄsu reÅ¾Ä«mÄ"
 
 msgid "Specifies a color configuration"
-msgstr "Nosaka krâsas konfigurâciju"
+msgstr "Nosaka krÄsas konfigurÄciju"
 
 msgid "Displays a help screen on how to change the color scheme"
-msgstr "Parâda palîdzîbas ekrânu par to, kâ nomainît krâsu shçmu"
+msgstr "ParÄda palÄ«dzÄ«bas ekrÄnu par to, kÄ nomainÄ«t krÄsu shÄ“mu"
 
 msgid "Log ftp dialog to specified file"
-msgstr "Iegrâmatot ftp dialogu noteiktâ failâ"
+msgstr "IegrÄmatot ftp dialogu noteiktÄ failÄ"
 
 msgid "Set debug level"
 msgstr ""
@@ -2575,104 +2584,104 @@ msgstr "direktoriju"
 
 #, fuzzy
 msgid "Print last working directory to specified file"
-msgstr "Pie iezieğanas parâda darba direktoriju"
+msgstr "Pie iezieÅ¡anas parÄda darba direktoriju"
 
 msgid "Enables subshell support (default)"
-msgstr "Ieslçdz zemèaulas atbalstu (noklusçtais)"
+msgstr "IeslÄ“dz zemÄaulas atbalstu (noklusÄ“tais)"
 
 msgid "Disables subshell support"
-msgstr "Atslçdz zemèaulas atbalstu"
+msgstr "AtslÄ“dz zemÄaulas atbalstu"
 
 msgid "Launches the file viewer on a file"
-msgstr "Palaiş failam failu skatîtâju"
+msgstr "PalaiÅ¾ failam failu skatÄ«tÄju"
 
 msgid "Edits one file"
-msgstr "Rediìç vienu failu"
+msgstr "RediÄ£Ä“ vienu failu"
 
 #, fuzzy, c-format
 msgid "Cannot create %s directory"
-msgstr "Nevar nomainît direktoriju"
+msgstr "Nevar nomainÄ«t direktoriju"
 
 msgid "safe de&Lete"
-msgstr "droğa i&Zdzçğana"
+msgstr "droÅ¡a i&ZdzÄ“Å¡ana"
 
 msgid "cd follows lin&Ks"
-msgstr "cd seko sai&Tçm"
+msgstr "cd seko sai&TÄ“m"
 
 msgid "L&ynx-like motion"
-msgstr "L&ynx-iska pârvietoğanâs"
+msgstr "L&ynx-iska pÄrvietoÅ¡anÄs"
 
 msgid "rotatin&G dash"
-msgstr "r&Otçjoğa domu zîme"
+msgstr "r&OtÄ“joÅ¡a domu zÄ«me"
 
 msgid "co&Mplete: show all"
-msgstr "pa&Beigts: parâdît visu"
+msgstr "pa&Beigts: parÄdÄ«t visu"
 
 msgid "&Use internal view"
-msgstr "&Lietot iekğçjo skatîjumu"
+msgstr "&Lietot iekÅ¡Ä“jo skatÄ«jumu"
 
 msgid "use internal ed&It"
-msgstr "lietot iekğçjo re&Daktoru"
+msgstr "lietot iekÅ¡Ä“jo re&Daktoru"
 
 msgid "auto m&Enus"
-msgstr "auto iz&Vçlnes"
+msgstr "auto iz&VÄ“lnes"
 
 msgid "&Auto save setup"
-msgstr "&Automâtiski saglabât uzstâdîjumus"
+msgstr "&AutomÄtiski saglabÄt uzstÄdÄ«jumus"
 
 msgid "shell &Patterns"
-msgstr "èaulas &Raksti"
+msgstr "Äaulas &Raksti"
 
 msgid "Compute &Totals"
-msgstr "Sarçíinât &Kopsummas"
+msgstr "SarÄ“Ä·inÄt &Kopsummas"
 
 msgid "&Verbose operation"
-msgstr "&Vârdiskas oprerâcijâs"
+msgstr "&VÄrdiskas oprerÄcijÄs"
 
 msgid "Mkdir autoname"
 msgstr ""
 
 msgid "&Fast dir reload"
-msgstr "â&Tra direktoriju pârlâde"
+msgstr "Ä&Tra direktoriju pÄrlÄde"
 
 msgid "mi&X all files"
-msgstr "&Miksçt visus failus"
+msgstr "&MiksÄ“t visus failus"
 
 msgid "&Drop down menus"
-msgstr "&Krîtoğas izvçlnes"
+msgstr "&KrÄ«toÅ¡as izvÄ“lnes"
 
 msgid "ma&Rk moves down"
-msgstr "iezîmçtâ&Js iet lejup"
+msgstr "iezÄ«mÄ“tÄ&Js iet lejup"
 
 msgid "show &Hidden files"
-msgstr "parâdît a&Pslçptos failus"
+msgstr "parÄdÄ«t a&PslÄ“ptos failus"
 
 msgid "show &Backup files"
-msgstr "parâdît &Dublçjumkopiju failus"
+msgstr "parÄdÄ«t &DublÄ“jumkopiju failus"
 
 msgid "&Never"
 msgstr "&Nekad"
 
 msgid "on dumb &Terminals"
-msgstr "uz muïíîgiem &Terminâïiem"
+msgstr "uz muÄ¼Ä·Ä«giem &TerminÄÄ¼iem"
 
 msgid "Alwa&ys"
-msgstr "vien&Mçr"
+msgstr "vien&MÄ“r"
 
 msgid " Panel options "
-msgstr " Paneïa opcijas "
+msgstr " PaneÄ¼a opcijas "
 
 msgid " Pause after run... "
-msgstr " Pauze pçc palaiğanas "
+msgstr " Pauze pÄ“c palaiÅ¡anas "
 
 msgid "Configure options"
-msgstr "Konfigurçt opcijas"
+msgstr "KonfigurÄ“t opcijas"
 
 msgid "&Add new"
 msgstr "&Pievienot jaunu"
 
 msgid "External panelize"
-msgstr "Ârçjâ panelçğana"
+msgstr "Ä€rÄ“jÄ panelÄ“Å¡ana"
 
 msgid "Command"
 msgstr "Komanda"
@@ -2681,20 +2690,20 @@ msgid "Other command"
 msgstr "Cita omanda"
 
 msgid " Add to external panelize "
-msgstr " Pievienot ârçjai panelçğanai "
+msgstr " Pievienot ÄrÄ“jai panelÄ“Å¡anai "
 
 msgid " Enter command label: "
 msgstr " Ievadi komandas nosaukumu: "
 
 msgid " Cannot run external panelize in a non-local directory "
 msgstr ""
-" Nevar palaist ârçjo panelçğanu kamçr ielogojoes ne-vietçjâ direktorijâ "
+" Nevar palaist ÄrÄ“jo panelÄ“Å¡anu kamÄ“r ielogojoes ne-vietÄ“jÄ direktorijÄ "
 
 msgid "Find rejects after patching"
-msgstr "Atrast atraidîjumus pçc ielâpoğanas"
+msgstr "Atrast atraidÄ«jumus pÄ“c ielÄpoÅ¡anas"
 
 msgid "Find *.orig after patching"
-msgstr "Atrast *.orig pçc ielâpoğanas"
+msgstr "Atrast *.orig pÄ“c ielÄpoÅ¡anas"
 
 msgid "Find SUID and SGID programs"
 msgstr "Atrast SUID un SGID programmas"
@@ -2703,36 +2712,36 @@ msgid "Cannot invoke command."
 msgstr "Nevar palais komandu."
 
 msgid "Pipe close failed"
-msgstr "Kanâla aizvçrğana neizdevâs"
+msgstr "KanÄla aizvÄ“rÅ¡ana neizdevÄs"
 
 msgid "missing argument"
 msgstr ""
 
 #, fuzzy
 msgid "unknown option"
-msgstr "<Nezinâma grupa>"
+msgstr "<NezinÄma grupa>"
 
 msgid "invalid numeric value"
 msgstr ""
 
 msgid "Show this help message"
-msgstr "Parâdît ğo palîdzîbas ziòojumu"
+msgstr "ParÄdÄ«t Å¡o palÄ«dzÄ«bas ziÅ†ojumu"
 
 msgid "Display brief usage message"
-msgstr "Parâdît îsu lietoğanas pamâcîbu"
+msgstr "ParÄdÄ«t Ä«su lietoÅ¡anas pamÄcÄ«bu"
 
 msgid "ARG"
 msgstr ""
 
 #, fuzzy, c-format
 msgid "Usage:"
-msgstr "Lietotâjvârds:"
+msgstr "LietotÄjvÄrds:"
 
 msgid "[dev]"
 msgstr ""
 
 msgid "UP--DIR"
-msgstr "AUGĞ--DIR"
+msgstr "AUGÅ --DIR"
 
 msgid "SYMLINK"
 msgstr ""
@@ -2753,10 +2762,10 @@ msgid "CTime"
 msgstr "CLaiks"
 
 msgid "Permission"
-msgstr "Atïauja"
+msgstr "AtÄ¼auja"
 
 msgid "Perm"
-msgstr "Atï"
+msgstr "AtÄ¼"
 
 msgid "Nl"
 msgstr "Nl"
@@ -2771,13 +2780,13 @@ msgid "GID"
 msgstr "GID"
 
 msgid "Owner"
-msgstr "Îpağnieks"
+msgstr "ÄªpaÅ¡nieks"
 
 msgid "Group"
 msgstr "Grupa"
 
 msgid "<readlink failed>"
-msgstr "<lasîtsaiti neveiksme>"
+msgstr "<lasÄ«tsaiti neveiksme>"
 
 #, fuzzy, c-format
 msgid "%s byte"
@@ -2788,27 +2797,27 @@ msgstr[1] "%s baiti"
 #, fuzzy, c-format
 msgid "%s in %d file"
 msgid_plural "%s in %d files"
-msgstr[0] "%s baiti %d failâ"
-msgstr[1] "%s baiti %d failâ"
+msgstr[0] "%s baiti %d failÄ"
+msgstr[1] "%s baiti %d failÄ"
 
 msgid "Unknown tag on display format: "
-msgstr "Nezinâma zime displeja formâtâ: "
+msgstr "NezinÄma zime displeja formÄtÄ: "
 
 msgid "User supplied format looks invalid, reverting to default."
 msgstr ""
-"Lietotâja piedâvâtais formâts izskatâs nepareizs, atgrieşamies pie noklusçtâ."
+"LietotÄja piedÄvÄtais formÄts izskatÄs nepareizs, atgrieÅ¾amies pie noklusÄ“tÄ."
 
 msgid " Do you really want to execute? "
-msgstr " Vai tu patieğâm vçlies palaist? "
+msgstr " Vai tu patieÅ¡Äm vÄ“lies palaist? "
 
 msgid "View"
-msgstr "Skatît"
+msgstr "SkatÄ«t"
 
 msgid "Edit"
-msgstr "Rediìçt"
+msgstr "RediÄ£Ä“t"
 
 msgid "RenMov"
-msgstr "PârsPârv"
+msgstr "PÄrsPÄrv"
 
 msgid "Mkdir"
 msgstr "Izvdir"
@@ -2821,14 +2830,14 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid " Invalid token number %d "
-msgstr " Nepareiza mçría maska "
+msgstr " Nepareiza mÄ“rÄ·a maska "
 
 #, fuzzy
 msgid "Normal"
-msgstr "Formatçt"
+msgstr "FormatÄ“t"
 
 msgid "&Regular expression"
-msgstr "&Regulâra izteiksme"
+msgstr "&RegulÄra izteiksme"
 
 msgid "Hexadecimal"
 msgstr ""
@@ -2838,7 +2847,7 @@ msgstr ""
 
 #, fuzzy
 msgid "Choose codepage"
-msgstr " Izvçlies ievades kodu tabulu "
+msgstr " IzvÄ“lies ievades kodu tabulu "
 
 msgid "-  < No translation >"
 msgstr "-  < Nav tulkojuma >"
@@ -2848,8 +2857,8 @@ msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
 msgstr ""
-"Ekrâna izmçrs %dx%d nav atbalstîts.\n"
-"Pârbaudi TERM vides mainîgo.\n"
+"EkrÄna izmÄ“rs %dx%d nav atbalstÄ«ts.\n"
+"PÄrbaudi TERM vides mainÄ«go.\n"
 
 msgid ""
 "GNU Midnight Commander is already\n"
@@ -2859,39 +2868,39 @@ msgstr ""
 
 #, c-format
 msgid "Cannot open named pipe %s\n"
-msgstr "Nevarçja atvçrt nosaukto kanâlu %s\n"
+msgstr "NevarÄ“ja atvÄ“rt nosaukto kanÄlu %s\n"
 
 msgid " The shell is still active. Quit anyway? "
-msgstr " Èaula joprojâm aktîva. Vienalga iziet? "
+msgstr " ÄŒaula joprojÄm aktÄ«va. Vienalga iziet? "
 
 #, c-format
 msgid "Warning: Cannot change to %s.\n"
-msgstr "Brîdinâjums: Nevarçja pârmainît uz %s.\n"
+msgstr "BrÄ«dinÄjums: NevarÄ“ja pÄrmainÄ«t uz %s.\n"
 
 msgid "With builtin Editor\n"
-msgstr "Ar iebûvçto Redaktoru\n"
+msgstr "Ar iebÅ«vÄ“to Redaktoru\n"
 
 msgid "Using system-installed S-Lang library"
-msgstr "Lietoju sistçmâ uzinstalçto S-Land bibliotçku"
+msgstr "Lietoju sistÄ“mÄ uzinstalÄ“to S-Land bibliotÄ“ku"
 
 msgid "with terminfo database"
-msgstr "ar terminfo datubâzi"
+msgstr "ar terminfo datubÄzi"
 
 msgid "Using the ncurses library"
-msgstr "Lietoju ncurses bibliotçku"
+msgstr "Lietoju ncurses bibliotÄ“ku"
 
 #, fuzzy
 msgid "Using the ncursesw library"
-msgstr "Lietoju ncurses bibliotçku"
+msgstr "Lietoju ncurses bibliotÄ“ku"
 
 msgid "With optional subshell support"
-msgstr "Ar zemèaulas atbalstu pçc izvçles"
+msgstr "Ar zemÄaulas atbalstu pÄ“c izvÄ“les"
 
 msgid "With subshell support as default"
-msgstr "Ar zemèaulas atbalstu kâ noklusçto"
+msgstr "Ar zemÄaulas atbalstu kÄ noklusÄ“to"
 
 msgid "With support for background operations\n"
-msgstr "Ar atbalstu fona operâcijâm\n"
+msgstr "Ar atbalstu fona operÄcijÄm\n"
 
 msgid "With mouse support on xterm and Linux console\n"
 msgstr "Ar peles atbalstu xterm un Linux konsolei\n"
@@ -2900,45 +2909,45 @@ msgid "With mouse support on xterm\n"
 msgstr "Ar peles atbalstu xterm\n"
 
 msgid "With support for X11 events\n"
-msgstr "Ar atbalstu X11 operâcijâm\n"
+msgstr "Ar atbalstu X11 operÄcijÄm\n"
 
 msgid "With internationalization support\n"
-msgstr "ar internacionalizâcijas atbalstu\n"
+msgstr "ar internacionalizÄcijas atbalstu\n"
 
 msgid "With multiple codepages support\n"
-msgstr "Ar vairâku kodu tabulu atbalstu\n"
+msgstr "Ar vairÄku kodu tabulu atbalstu\n"
 
 #, c-format
 msgid "Virtual File System:"
-msgstr "Virtuâlâ Failsistçma:"
+msgstr "VirtuÄlÄ FailsistÄ“ma:"
 
 #, c-format
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
 msgstr ""
-"Nevarçja atvçrt failu %s, lai ierakstîtu:\n"
+"NevarÄ“ja atvÄ“rt failu %s, lai ierakstÄ«tu:\n"
 "%s\n"
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
-msgstr "Kopçt direktoriju \"%s\" uz:"
+msgstr "KopÄ“t direktoriju \"%s\" uz:"
 
 #, c-format
 msgid "Move \"%s\" directory to:"
-msgstr "Pârvietot direktoriju \"%s\" uz:"
+msgstr "PÄrvietot direktoriju \"%s\" uz:"
 
 #, c-format
 msgid ""
 " Cannot stat the destination \n"
 " %s "
 msgstr ""
-" Nevar sâknçt galamçríi \n"
+" Nevar sÄknÄ“t galamÄ“rÄ·i \n"
 " %s "
 
 #, c-format
 msgid "  Delete %s?  "
-msgstr "  Izdzçst %s?  "
+msgstr "  IzdzÄ“st %s?  "
 
 msgid "Static"
 msgstr "Statisks"
@@ -2947,7 +2956,7 @@ msgid "Dynamc"
 msgstr "Dinamisks"
 
 msgid "Rescan"
-msgstr "Pârskençt"
+msgstr "PÄrskenÄ“t"
 
 msgid "Forget"
 msgstr "Aizmirst"
@@ -2960,25 +2969,25 @@ msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
 msgstr ""
-"Nevar ierakstît failâ %s:\n"
+"Nevar ierakstÄ«t failÄ %s:\n"
 "%s\n"
 
 msgid " Format error on file Extensions File "
-msgstr " Formatçjuma kïûda Paplağinâjumu Failâ "
+msgstr " FormatÄ“juma kÄ¼Å«da PaplaÅ¡inÄjumu FailÄ "
 
 #, c-format
 msgid " The %%var macro has no default "
-msgstr " %%var makro nav noklusçtâ "
+msgstr " %%var makro nav noklusÄ“tÄ "
 
 #, c-format
 msgid " The %%var macro has no variable "
-msgstr " %%var makro nav mainîgâ "
+msgstr " %%var makro nav mainÄ«gÄ "
 
 msgid " Debug "
-msgstr " Atkïûdoğana "
+msgstr " AtkÄ¼Å«doÅ¡ana "
 
 msgid " ERROR: "
-msgstr " KÏÛDA: "
+msgstr " KÄ»ÅªDA: "
 
 msgid " True:  "
 msgstr " Patiess:  "
@@ -2987,22 +2996,22 @@ msgid " False: "
 msgstr " Nepatiess: "
 
 msgid " Warning -- ignoring file "
-msgstr " Brîdinâjums -- ignorçju failu "
+msgstr " BrÄ«dinÄjums -- ignorÄ“ju failu "
 
 #, c-format
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
 msgstr ""
-"Faila %s îpağnieks nav root vai jûs, vai arî tai ir visiem-rakstît atïauja.\n"
-"Tâ lietoğana var kompromitçt jûsu droğîbu"
+"Faila %s Ä«paÅ¡nieks nav root vai jÅ«s, vai arÄ« tai ir visiem-rakstÄ«t atÄ¼auja.\n"
+"TÄ lietoÅ¡ana var kompromitÄ“t jÅ«su droÅ¡Ä«bu"
 
 #, c-format
 msgid " No suitable entries found in %s "
-msgstr " Neviens atbilstoğs ieraksts netika atrasts iekğ %s "
+msgstr " Neviens atbilstoÅ¡s ieraksts netika atrasts iekÅ¡ %s "
 
 msgid " User menu "
-msgstr " Lietotâja izvçlne "
+msgstr " LietotÄja izvÄ“lne "
 
 #, fuzzy
 msgid "%b %d %H:%M"
@@ -3029,13 +3038,13 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Cannot set correct permissions for directory %s\n"
 msgstr ""
-" Nevar izveidot mçría direktoriju \"%s\" \n"
+" Nevar izveidot mÄ“rÄ·a direktoriju \"%s\" \n"
 " %s "
 
 #, fuzzy, c-format
 msgid "Cannot create temporary directory %s: %s\n"
 msgstr ""
-" Nevar izveidot mçría direktoriju \"%s\" \n"
+" Nevar izveidot mÄ“rÄ·a direktoriju \"%s\" \n"
 " %s "
 
 #, c-format
@@ -3047,14 +3056,14 @@ msgid "Temporary files will not be created\n"
 msgstr ""
 
 msgid " Pipe failed "
-msgstr " Kanâls neizdevâs "
+msgstr " KanÄls neizdevÄs "
 
 msgid " Dup failed "
-msgstr " Dup neizdevâs "
+msgstr " Dup neizdevÄs "
 
 #, fuzzy
 msgid " Cannot spawn child process "
-msgstr " Nevar pavairot bçrna programmu "
+msgstr " Nevar pavairot bÄ“rna programmu "
 
 msgid "Empty output from child filter"
 msgstr ""
@@ -3064,7 +3073,7 @@ msgid ""
 " Cannot open \"%s\"\n"
 " %s "
 msgstr ""
-" Nevar atvçrt \"%s\"\n"
+" Nevar atvÄ“rt \"%s\"\n"
 " %s "
 
 #, c-format
@@ -3076,7 +3085,7 @@ msgstr ""
 " %s "
 
 msgid " Cannot view: not a regular file "
-msgstr " Nevar skatît: nav regulârs fails "
+msgstr " Nevar skatÄ«t: nav regulÄrs fails "
 
 #, c-format
 msgid "File: %s"
@@ -3084,7 +3093,7 @@ msgstr "Fails: %s"
 
 #, c-format
 msgid "Offset 0x%08lx"
-msgstr "Nobîde 0x%08lx"
+msgstr "NobÄ«de 0x%08lx"
 
 #, c-format
 msgid "Line %lu Col %lu"
@@ -3109,20 +3118,20 @@ msgstr ""
 msgid ""
 " Cannot save file: \n"
 " %s "
-msgstr " Kïûda mçìinot saglabât failu. "
+msgstr " KÄ¼Å«da mÄ“Ä£inot saglabÄt failu. "
 
 #, fuzzy, c-format
 msgid ""
 " The current line number is %lu.\n"
 " Enter the new line number:"
 msgstr ""
-" Pağreizçjai lînijas nummurs ir %d.\n"
-" Ievadi jaunu lînijas numuru:"
+" PaÅ¡reizÄ“jai lÄ«nijas nummurs ir %d.\n"
+" Ievadi jaunu lÄ«nijas numuru:"
 
 #, fuzzy
 msgid " The current address is 0x%08"
 msgstr ""
-" Pağreizçjâ adrese ir 0x%lx.\n"
+" PaÅ¡reizÄ“jÄ adrese ir 0x%lx.\n"
 " Ievadi jaunu adresi:"
 
 msgid " Goto Address "
@@ -3131,6 +3140,9 @@ msgstr " Iet uz adresi "
 #, fuzzy
 msgid " Invalid address "
 msgstr " Nepareiza parole "
+
+msgid "Seeking to search result"
+msgstr ""
 
 msgid "ButtonBar|Help"
 msgstr ""
@@ -3148,151 +3160,151 @@ msgid "ButtonBar|Save"
 msgstr ""
 
 msgid " History "
-msgstr " Vçsture "
+msgstr " VÄ“sture "
 
 msgid "Function key 1"
-msgstr "Funkc. taustiòğ 1"
+msgstr "Funkc. taustiÅ†Å¡ 1"
 
 msgid "Function key 2"
-msgstr "Funkc. taustiòğ 2"
+msgstr "Funkc. taustiÅ†Å¡ 2"
 
 msgid "Function key 3"
-msgstr "Funkc. taustiòğ 3"
+msgstr "Funkc. taustiÅ†Å¡ 3"
 
 msgid "Function key 4"
-msgstr "Funkc. taustiòğ 4"
+msgstr "Funkc. taustiÅ†Å¡ 4"
 
 msgid "Function key 5"
-msgstr "Funkc. taustiòğ 5"
+msgstr "Funkc. taustiÅ†Å¡ 5"
 
 msgid "Function key 6"
-msgstr "Funkc. taustiòğ 6"
+msgstr "Funkc. taustiÅ†Å¡ 6"
 
 msgid "Function key 7"
-msgstr "Funkc. taustiòğ 7"
+msgstr "Funkc. taustiÅ†Å¡ 7"
 
 msgid "Function key 8"
-msgstr "Funkc. taustiòğ 8"
+msgstr "Funkc. taustiÅ†Å¡ 8"
 
 msgid "Function key 9"
-msgstr "Funkc. taustiòğ 9"
+msgstr "Funkc. taustiÅ†Å¡ 9"
 
 msgid "Function key 10"
-msgstr "Funkc. taustiòğ 10"
+msgstr "Funkc. taustiÅ†Å¡ 10"
 
 msgid "Function key 11"
-msgstr "Funkc. taustiòğ 11"
+msgstr "Funkc. taustiÅ†Å¡ 11"
 
 msgid "Function key 12"
-msgstr "Funkc. taustiòğ 12"
+msgstr "Funkc. taustiÅ†Å¡ 12"
 
 msgid "Function key 13"
-msgstr "Funkc. taustiòğ 13"
+msgstr "Funkc. taustiÅ†Å¡ 13"
 
 msgid "Function key 14"
-msgstr "Funkc. taustiòğ 14"
+msgstr "Funkc. taustiÅ†Å¡ 14"
 
 msgid "Function key 15"
-msgstr "Funkc. taustiòğ 15"
+msgstr "Funkc. taustiÅ†Å¡ 15"
 
 msgid "Function key 16"
-msgstr "Funkc. taustiòğ 16"
+msgstr "Funkc. taustiÅ†Å¡ 16"
 
 msgid "Function key 17"
-msgstr "Funkc. taustiòğ 17"
+msgstr "Funkc. taustiÅ†Å¡ 17"
 
 msgid "Function key 18"
-msgstr "Funkc. taustiòğ 18"
+msgstr "Funkc. taustiÅ†Å¡ 18"
 
 msgid "Function key 19"
-msgstr "Funkc. taustiòğ 19"
+msgstr "Funkc. taustiÅ†Å¡ 19"
 
 msgid "Function key 20"
-msgstr "Funkc. taustiòğ 20"
+msgstr "Funkc. taustiÅ†Å¡ 20"
 
 msgid "Backspace key"
-msgstr "Backspace taustiòğ"
+msgstr "Backspace taustiÅ†Å¡"
 
 msgid "End key"
-msgstr "End taustiòğ"
+msgstr "End taustiÅ†Å¡"
 
 msgid "Up arrow key"
-msgstr "Taustiòğ ar bûltiòu uz augğu"
+msgstr "TaustiÅ†Å¡ ar bÅ«ltiÅ†u uz augÅ¡u"
 
 msgid "Down arrow key"
-msgstr "Taustiòğ ar bûltiòu uz leju"
+msgstr "TaustiÅ†Å¡ ar bÅ«ltiÅ†u uz leju"
 
 msgid "Left arrow key"
-msgstr "Taustiòğ ar bûltiòu pa kreisi"
+msgstr "TaustiÅ†Å¡ ar bÅ«ltiÅ†u pa kreisi"
 
 msgid "Right arrow key"
-msgstr "Taustiòğ ar bûltiòu pa labi"
+msgstr "TaustiÅ†Å¡ ar bÅ«ltiÅ†u pa labi"
 
 msgid "Home key"
-msgstr "Home taustiòğ"
+msgstr "Home taustiÅ†Å¡"
 
 msgid "Page Down key"
-msgstr "Page Down taustiòğ"
+msgstr "Page Down taustiÅ†Å¡"
 
 msgid "Page Up key"
-msgstr "Page Up taustiòğ"
+msgstr "Page Up taustiÅ†Å¡"
 
 msgid "Insert key"
-msgstr "Insert taustiòğ"
+msgstr "Insert taustiÅ†Å¡"
 
 msgid "Delete key"
-msgstr "Delete taustiòğ"
+msgstr "Delete taustiÅ†Å¡"
 
 msgid "Completion/M-tab"
-msgstr "Pabeigğana/M-tab"
+msgstr "PabeigÅ¡ana/M-tab"
 
 msgid "+ on keypad"
-msgstr "+ uz klaviatûras"
+msgstr "+ uz klaviatÅ«ras"
 
 msgid "- on keypad"
-msgstr "- uz klaviatûras"
+msgstr "- uz klaviatÅ«ras"
 
 msgid "* on keypad"
-msgstr "* uz klaviatûras"
+msgstr "* uz klaviatÅ«ras"
 
 msgid "Left arrow keypad"
-msgstr "Bûltiòa pa kreisi uz klaviatûras"
+msgstr "BÅ«ltiÅ†a pa kreisi uz klaviatÅ«ras"
 
 msgid "Right arrow keypad"
-msgstr "Bûltiòa pa labi uz klaviatûras"
+msgstr "BÅ«ltiÅ†a pa labi uz klaviatÅ«ras"
 
 msgid "Up arrow keypad"
-msgstr "Bûltiòa uz augğu uz klaviatûras"
+msgstr "BÅ«ltiÅ†a uz augÅ¡u uz klaviatÅ«ras"
 
 msgid "Down arrow keypad"
-msgstr "Bûltiòa uz leju uz klaviatûras"
+msgstr "BÅ«ltiÅ†a uz leju uz klaviatÅ«ras"
 
 msgid "Home on keypad"
-msgstr "Home uz klaviatûras"
+msgstr "Home uz klaviatÅ«ras"
 
 msgid "End on keypad"
-msgstr "End uz klaviatûras"
+msgstr "End uz klaviatÅ«ras"
 
 msgid "Page Down keypad"
-msgstr "Page Down uz klaviatûras"
+msgstr "Page Down uz klaviatÅ«ras"
 
 msgid "Page Up keypad"
-msgstr "Page Up uz klaviatûras"
+msgstr "Page Up uz klaviatÅ«ras"
 
 msgid "Insert on keypad"
-msgstr "Insert uz klaviatûras"
+msgstr "Insert uz klaviatÅ«ras"
 
 msgid "Delete on keypad"
-msgstr "Delete uz klaviatûras"
+msgstr "Delete uz klaviatÅ«ras"
 
 msgid "Enter on keypad"
-msgstr "Enter uz klaviatûras"
+msgstr "Enter uz klaviatÅ«ras"
 
 msgid "Slash on keypad"
-msgstr "/ (Slash) uz klaviatûras"
+msgstr "/ (Slash) uz klaviatÅ«ras"
 
 msgid "NumLock on keypad"
-msgstr "NumLock uz klaviatûras"
+msgstr "NumLock uz klaviatÅ«ras"
 
 msgid "Background process:"
 msgstr "Fona process:"
@@ -3302,7 +3314,7 @@ msgid ""
 "Cannot open cpio archive\n"
 "%s"
 msgstr ""
-"Nevarçja atvçrt cpio arhîvu\n"
+"NevarÄ“ja atvÄ“rt cpio arhÄ«vu\n"
 "%s"
 
 #, c-format
@@ -3310,7 +3322,7 @@ msgid ""
 "Premature end of cpio archive\n"
 "%s"
 msgstr ""
-"Negaidîtas cpio arhîva beigas\n"
+"NegaidÄ«tas cpio arhÄ«va beigas\n"
 "%s"
 
 #, c-format
@@ -3318,7 +3330,7 @@ msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
 msgstr ""
-"Samaitâjusies cpio galvene iekğ\n"
+"SamaitÄjusies cpio galvene iekÅ¡\n"
 "%s"
 
 #, c-format
@@ -3330,87 +3342,87 @@ msgid ""
 msgstr ""
 "Nekonsekventas cietsaites\n"
 "%s\n"
-"iekğ cpio archîva\n"
+"iekÅ¡ cpio archÄ«va\n"
 "%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
-msgstr "%s satur dubultus ierakstus! Izlaişu!"
+msgstr "%s satur dubultus ierakstus! IzlaiÅ¾u!"
 
 #, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
 msgstr ""
-"Negaidîtas faila beigas\n"
+"NegaidÄ«tas faila beigas\n"
 "%s"
 
 #, c-format
 msgid "Directory cache expired for %s"
-msgstr "Direktorija keğs priekğ %s izbeidzâs"
+msgstr "Direktorija keÅ¡s priekÅ¡ %s izbeidzÄs"
 
 msgid "Starting linear transfer..."
-msgstr "Sâkam lineâro pârraidi..."
+msgstr "SÄkam lineÄro pÄrraidi..."
 
 #, c-format
 msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
-msgstr "%s: %s: %s %3d%% (%lu baiti pârsûtîti)"
+msgstr "%s: %s: %s %3d%% (%lu baiti pÄrsÅ«tÄ«ti)"
 
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
-msgstr "%s: %s: %s %lu baiti pârsûtîti"
+msgstr "%s: %s: %s %lu baiti pÄrsÅ«tÄ«ti"
 
 msgid "Getting file"
-msgstr "Dabûjam failu"
+msgstr "DabÅ«jam failu"
 
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
 msgstr ""
-"Nevar atvçrt %s arhîvu\n"
+"Nevar atvÄ“rt %s arhÄ«vu\n"
 "%s"
 
 msgid "Inconsistent extfs archive"
-msgstr "Nepatstâvîgs extfs arhîvs"
+msgstr "NepatstÄvÄ«gs extfs arhÄ«vs"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
 msgstr "fish: Atvienojamies no %s"
 
 msgid "fish: Waiting for initial line..."
-msgstr "fish: Gaidâm sâkotnçjo lîniju..."
+msgstr "fish: GaidÄm sÄkotnÄ“jo lÄ«niju..."
 
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr ""
-"Piedodiet, mçs patreiz nevaram veikt ar paroli autorizçtus savienojumus."
+"Piedodiet, mÄ“s patreiz nevaram veikt ar paroli autorizÄ“tus savienojumus."
 
 msgid " fish: Password required for "
-msgstr " fish: Parole pieprasîta "
+msgstr " fish: Parole pieprasÄ«ta "
 
 msgid "fish: Sending password..."
-msgstr "fish: Sûtam paroli..."
+msgstr "fish: SÅ«tam paroli..."
 
 msgid "fish: Sending initial line..."
-msgstr "fish: Sûtam sâkotnçjo lîniju..."
+msgstr "fish: SÅ«tam sÄkotnÄ“jo lÄ«niju..."
 
 msgid "fish: Handshaking version..."
-msgstr "fish: Rokspieğanas versija..."
+msgstr "fish: RokspieÅ¡anas versija..."
 
 msgid "fish: Setting up current directory..."
-msgstr "fish: Uzstâdam pağreizçjo direktoriju..."
+msgstr "fish: UzstÄdam paÅ¡reizÄ“jo direktoriju..."
 
 #, c-format
 msgid "fish: Connected, home %s."
-msgstr "fish: Savienojies, mâjas %s."
+msgstr "fish: Savienojies, mÄjas %s."
 
 #, c-format
 msgid "fish: Reading directory %s..."
-msgstr "fish: Lasâm direktoriju %s..."
+msgstr "fish: LasÄm direktoriju %s..."
 
 #, c-format
 msgid "%s: done."
-msgstr "%s: izdarîts."
+msgstr "%s: izdarÄ«ts."
 
 #, c-format
 msgid "%s: failure"
@@ -3418,58 +3430,58 @@ msgstr "%s: neveiksme"
 
 #, c-format
 msgid "fish: store %s: sending command..."
-msgstr "fish: glabâjam %s: sutâm komandu..."
+msgstr "fish: glabÄjam %s: sutÄm komandu..."
 
 msgid "fish: Local read failed, sending zeros"
-msgstr "fish: Lokâlâ lasîğana kïûdaina, sûtam nulles"
+msgstr "fish: LokÄlÄ lasÄ«Å¡ana kÄ¼Å«daina, sÅ«tam nulles"
 
 #, fuzzy, c-format
 msgid "fish: storing %s %d (%lu)"
-msgstr "fish: glabâjam %s %d (%d)"
+msgstr "fish: glabÄjam %s %d (%d)"
 
 msgid "zeros"
 msgstr "nulles"
 
 msgid "Aborting transfer..."
-msgstr "Pâtraucam pârraidîğanu..."
+msgstr "PÄtraucam pÄrraidÄ«Å¡anu..."
 
 msgid "Error reported after abort."
-msgstr "Kïûda paziòota pçc pâtraukğanas."
+msgstr "KÄ¼Å«da paziÅ†ota pÄ“c pÄtraukÅ¡anas."
 
 msgid "Aborted transfer would be successful."
-msgstr "Pâtraukâ pârraidîğana varçtu bût veiksmîga"
+msgstr "PÄtraukÄ pÄrraidÄ«Å¡ana varÄ“tu bÅ«t veiksmÄ«ga"
 
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
-msgstr "ftpfs: Atvienoğanâs no %s"
+msgstr "ftpfs: AtvienoÅ¡anÄs no %s"
 
 msgid " FTP: Password required for "
-msgstr " FTP: Parole tiek pieprasîta "
+msgstr " FTP: Parole tiek pieprasÄ«ta "
 
 msgid "ftpfs: sending login name"
-msgstr "ftpfs: sûtam pieteikumvârdu"
+msgstr "ftpfs: sÅ«tam pieteikumvÄrdu"
 
 msgid "ftpfs: sending user password"
-msgstr "ftpfs: sûtam lietotâja paroli"
+msgstr "ftpfs: sÅ«tam lietotÄja paroli"
 
 #, fuzzy, c-format
 msgid "FTP: Account required for user %s"
-msgstr " FTP: Parole tiek pieprasîta "
+msgstr " FTP: Parole tiek pieprasÄ«ta "
 
 #, fuzzy
 msgid "Account:"
-msgstr "Skaitît"
+msgstr "SkaitÄ«t"
 
 #, fuzzy
 msgid "ftpfs: sending user account"
-msgstr "ftpfs: sûtam lietotâja paroli"
+msgstr "ftpfs: sÅ«tam lietotÄja paroli"
 
 msgid "ftpfs: logged in"
-msgstr "ftpfs: pieteikğanâs veiksmîga"
+msgstr "ftpfs: pieteikÅ¡anÄs veiksmÄ«ga"
 
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
-msgstr "ftpfs: lietotâja nepareiza %s pieteikğanâs "
+msgstr "ftpfs: lietotÄja nepareiza %s pieteikÅ¡anÄs "
 
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: Nepareizs resursdatora nosaukums."
@@ -3482,31 +3494,31 @@ msgid "ftpfs: making connection to %s"
 msgstr "ftpfs: veidojam savienojumu ar %s"
 
 msgid "ftpfs: connection interrupted by user"
-msgstr "ftpfs: savienojumu pâtrauca lietotâjs"
+msgstr "ftpfs: savienojumu pÄtrauca lietotÄjs"
 
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
-msgstr "ftpfs: savienojums ar serveri neizdevâs: %s"
+msgstr "ftpfs: savienojums ar serveri neizdevÄs: %s"
 
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Gaidam atbildi... %d (Control-C lai atsauktu)"
 
 msgid "ftpfs: could not setup passive mode"
-msgstr "ftpfs: nevar uzstâdît pasîvo reşîmu"
+msgstr "ftpfs: nevar uzstÄdÄ«t pasÄ«vo reÅ¾Ä«mu"
 
 msgid "ftpfs: aborting transfer."
-msgstr "ftpfs: patraucu pârraidi."
+msgstr "ftpfs: patraucu pÄrraidi."
 
 #, c-format
 msgid "ftpfs: abort error: %s"
-msgstr "ftpfs: pâtraukğanas kïûda: %s"
+msgstr "ftpfs: pÄtraukÅ¡anas kÄ¼Å«da: %s"
 
 msgid "ftpfs: abort failed"
-msgstr "ftpfs: pâtraukğana neizdevâs"
+msgstr "ftpfs: pÄtraukÅ¡ana neizdevÄs"
 
 msgid "ftpfs: CWD failed."
-msgstr "ftpfs: CWD neizdevâs."
+msgstr "ftpfs: CWD neizdevÄs."
 
 msgid "ftpfs: couldn't resolve symlink"
 msgstr "ftpfs: nevar iet par simbolsaiti"
@@ -3525,36 +3537,36 @@ msgid "(chdir first)"
 msgstr "(chdir vispirms)"
 
 msgid "ftpfs: failed; nowhere to fallback to"
-msgstr "ftpfs: neizdevâs; nav kur atkrist"
+msgstr "ftpfs: neizdevÄs; nav kur atkrist"
 
 #, fuzzy, c-format
 msgid "ftpfs: storing file %lu (%lu)"
-msgstr "ftpfs: glabâjam failu %d (%d)"
+msgstr "ftpfs: glabÄjam failu %d (%d)"
 
 msgid ""
 "~/.netrc file has incorrect mode.\n"
 "Remove password or correct mode."
 msgstr ""
-"~/.netrc failam nav pareizs reşîms.\n"
-"Noòem paroli vai izlabo reşîmu."
+"~/.netrc failam nav pareizs reÅ¾Ä«ms.\n"
+"NoÅ†em paroli vai izlabo reÅ¾Ä«mu."
 
 msgid " MCFS "
 msgstr " MCFS "
 
 msgid " The server does not support this version "
-msgstr " Serveris neatbalsta ğo versiju "
+msgstr " Serveris neatbalsta Å¡o versiju "
 
 msgid ""
 " The remote server is not running on a system port \n"
 " you need a password to log in, but the information may \n"
 " not be safe on the remote side.  Continue? \n"
 msgstr ""
-" Attâlinâtais serveris nestrâdâ ar sistçmas portu, \n"
-" uz kuru jûms bûtu jâpiesakâs, taèu informâcija \n"
-" var nebût droğa attâlinâtajâ galâ.  Turpinât? \n"
+" AttÄlinÄtais serveris nestrÄdÄ ar sistÄ“mas portu, \n"
+" uz kuru jÅ«ms bÅ«tu jÄpiesakÄs, taÄu informÄcija \n"
+" var nebÅ«t droÅ¡a attÄlinÄtajÄ galÄ.  TurpinÄt? \n"
 
 msgid " MCFS Password required "
-msgstr " pieprasîta MCFS Parole "
+msgstr " pieprasÄ«ta MCFS Parole "
 
 msgid " Invalid password "
 msgstr " Nepareiza parole "
@@ -3572,14 +3584,14 @@ msgid " Cannot connect to server: %s "
 msgstr " Nevar savienoties ar serveri: %s "
 
 msgid " Too many open connections "
-msgstr " Par daudz atvçrtu konekciju "
+msgstr " Par daudz atvÄ“rtu konekciju "
 
 #, c-format
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
 msgstr ""
-"Brîdinâjums: Nepareiza rindiòa iekğ %s:\n"
+"BrÄ«dinÄjums: Nepareiza rindiÅ†a iekÅ¡ %s:\n"
 "%s\n"
 
 #, c-format
@@ -3587,7 +3599,7 @@ msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
 msgstr ""
-"Brîdinâjums: Nepareizs karodziòğ %c iekğ %s:\n"
+"BrÄ«dinÄjums: Nepareizs karodziÅ†Å¡ %c iekÅ¡ %s:\n"
 "%s\n"
 
 #, c-format
@@ -3595,11 +3607,11 @@ msgid ""
 " reconnect to %s failed\n"
 " "
 msgstr ""
-" neizdevâs pârslçgties uz %s\n"
+" neizdevÄs pÄrslÄ“gties uz %s\n"
 " "
 
 msgid " Authentication failed "
-msgstr " Autentificçğana neizdevâs"
+msgstr " AutentificÄ“Å¡ana neizdevÄs"
 
 #, c-format
 msgid " Error %s creating directory %s "
@@ -3611,29 +3623,29 @@ msgstr " %s izdzdir'oju %s "
 
 #, c-format
 msgid " %s opening remote file %s "
-msgstr " %s attâlinâtâs faila atvçrğana %s "
+msgstr " %s attÄlinÄtÄs faila atvÄ“rÅ¡ana %s "
 
 #, c-format
 msgid " %s removing remote file %s "
-msgstr " %s dzçğu attâlinâto failu %s "
+msgstr " %s dzÄ“Å¡u attÄlinÄto failu %s "
 
 #, c-format
 msgid " %s renaming files\n"
-msgstr " %s failu pârsaukğana\n"
+msgstr " %s failu pÄrsaukÅ¡ana\n"
 
 #, c-format
 msgid ""
 "Cannot open tar archive\n"
 "%s"
 msgstr ""
-"Nevar atvçrt tar arhîvu\n"
+"Nevar atvÄ“rt tar arhÄ«vu\n"
 "%s"
 
 msgid "Inconsistent tar archive"
-msgstr "Neatbilstîgs tar arhîvs"
+msgstr "NeatbilstÄ«gs tar arhÄ«vs"
 
 msgid "Unexpected EOF on archive file"
-msgstr "Negaidîtas arhîva faila beigas (EOF)"
+msgstr "NegaidÄ«tas arhÄ«va faila beigas (EOF)"
 
 #, c-format
 msgid ""
@@ -3643,16 +3655,16 @@ msgid ""
 msgstr ""
 "Hmm,...\n"
 "%s\n"
-"neizskatâs pçc tar arhîva."
+"neizskatÄs pÄ“c tar arhÄ«va."
 
 msgid " undelfs: error "
-msgstr " undelfs: kïûda "
+msgstr " undelfs: kÄ¼Å«da "
 
 msgid " not enough memory "
-msgstr " par maz atmiòas "
+msgstr " par maz atmiÅ†as "
 
 msgid " while allocating block buffer "
-msgstr " pieğíirot bloka buferi "
+msgstr " pieÅ¡Ä·irot bloka buferi "
 
 #, c-format
 msgid " open_inode_scan: %d "
@@ -3660,29 +3672,29 @@ msgstr " open_inode_scan: %d "
 
 #, c-format
 msgid " while starting inode scan %d "
-msgstr " sâknçjot inode skenâğanu %d "
+msgstr " sÄknÄ“jot inode skenÄÅ¡anu %d "
 
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: lâdçju izdzçsto failu informâciju %d inodes"
+msgstr "undelfs: lÄdÄ“ju izdzÄ“sto failu informÄciju %d inodes"
 
 #, c-format
 msgid " while calling ext2_block_iterate %d "
-msgstr " kamçr sauca ext2_block_iterate %d "
+msgstr " kamÄ“r sauca ext2_block_iterate %d "
 
 msgid " no more memory while reallocating array "
-msgstr " nav vairâk atmiòas kamçr pieğíir ietçrpus "
+msgstr " nav vairÄk atmiÅ†as kamÄ“r pieÅ¡Ä·ir ietÄ“rpus "
 
 #, c-format
 msgid " while doing inode scan %d "
-msgstr " veicot inode skençğanu %d "
+msgstr " veicot inode skenÄ“Å¡anu %d "
 
 msgid " Ext2lib error "
-msgstr " Ext2lib kïûda "
+msgstr " Ext2lib kÄ¼Å«da "
 
 #, c-format
 msgid " Cannot open file %s "
-msgstr " Nevar atvçrt failu %s "
+msgstr " Nevar atvÄ“rt failu %s "
 
 msgid "undelfs: reading inode bitmap..."
 msgstr "undelfs: lasu inode bitkarti..."
@@ -3692,7 +3704,7 @@ msgid ""
 " Cannot load inode bitmap from: \n"
 " %s \n"
 msgstr ""
-" Nevarçju ielâdçt inode bitkarti no: \n"
+" NevarÄ“ju ielÄdÄ“t inode bitkarti no: \n"
 " %s \n"
 
 msgid "undelfs: reading block bitmap..."
@@ -3703,102 +3715,102 @@ msgid ""
 " Cannot load block bitmap from: \n"
 " %s \n"
 msgstr ""
-" Nevarçja ielâdçt bloka bitkarti no: \n"
+" NevarÄ“ja ielÄdÄ“t bloka bitkarti no: \n"
 " %s \n"
 
 msgid " vfs_info is not fs! "
 msgstr " vfs_info nav fs! "
 
 msgid " You have to chdir to extract files first "
-msgstr " Tev papriekğu vajag chdir, lai atkompresçtu failus "
+msgstr " Tev papriekÅ¡u vajag chdir, lai atkompresÄ“tu failus "
 
 msgid " while iterating over blocks "
-msgstr " kamçr atkârto blokus"
+msgstr " kamÄ“r atkÄrto blokus"
 
 msgid "Cannot parse:"
-msgstr "Nevar izanalizçt:"
+msgstr "Nevar izanalizÄ“t:"
 
 msgid "More parsing errors will be ignored."
-msgstr "Turpmâkâs analîzes kïûdas tiks ignorçtas."
+msgstr "TurpmÄkÄs analÄ«zes kÄ¼Å«das tiks ignorÄ“tas."
 
 msgid "Internal error:"
-msgstr "Iekğçjâ kïûda:"
+msgstr "IekÅ¡Ä“jÄ kÄ¼Å«da:"
 
 msgid "Changes to file lost"
-msgstr "Izmaiòas failâ pazuduğas"
+msgstr "IzmaiÅ†as failÄ pazuduÅ¡as"
 
 #~ msgid "scanf &Expression"
 #~ msgstr "scan&F izteiksme"
 
 #~ msgid "&Whole words only"
-#~ msgstr "&Tikai veselus vârdus"
+#~ msgstr "&Tikai veselus vÄrdus"
 
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
-#~ msgstr " Ievadi aizvietojamâ argumenta secîbu, piem., 3,2,1,4 "
+#~ msgstr " Ievadi aizvietojamÄ argumenta secÄ«bu, piem., 3,2,1,4 "
 
 #~ msgid ""
 #~ " Invalid regular expression, or scanf expression with too many "
 #~ "conversions "
 #~ msgstr ""
-#~ " Nepareiza regulârâ izteiksme vai scanf izteiksme ar pârâk daudzâm "
-#~ "konversijâm "
+#~ " Nepareiza regulÄrÄ izteiksme vai scanf izteiksme ar pÄrÄk daudzÄm "
+#~ "konversijÄm "
 
 #~ msgid " Error in replacement format string. "
-#~ msgstr " Kïûda aizstâğanas formâta rinâ. "
+#~ msgstr " KÄ¼Å«da aizstÄÅ¡anas formÄta rinÄ. "
 
 #, fuzzy
 #~ msgid " Replacement too long. "
-#~ msgstr " Ievadiet aizvietotâjvirkni:"
+#~ msgstr " Ievadiet aizvietotÄjvirkni:"
 
 #~ msgid "&Copy              F5"
-#~ msgstr "&Kopçt             F5"
+#~ msgstr "&KopÄ“t             F5"
 
 #~ msgid "&Delete            F8"
-#~ msgstr "&Dzçst             F8"
+#~ msgstr "&DzÄ“st             F8"
 
 #, fuzzy
 #~ msgid "Save setu&p..."
-#~ msgstr "&Saglabât uzstâdîjumus"
+#~ msgstr "&SaglabÄt uzstÄdÄ«jumus"
 
 #~ msgid " The command history is empty "
-#~ msgstr " Komandu vçsture ir tukğa "
+#~ msgstr " Komandu vÄ“sture ir tukÅ¡a "
 
 #~ msgid "command &History"
-#~ msgstr "komandu &Vçsture"
+#~ msgstr "komandu &VÄ“sture"
 
 #~ msgid "Edit edi&tor menu file"
-#~ msgstr "Izvçlòu re&Daktora rediìçğana"
+#~ msgstr "IzvÄ“lÅ†u re&Daktora rediÄ£Ä“Å¡ana"
 
 #, fuzzy
 #~ msgid "Edit &syntax file"
-#~ msgstr "&Izvçlnes faila rediìçğana"
+#~ msgstr "&IzvÄ“lnes faila rediÄ£Ä“Å¡ana"
 
 #~ msgid ""
 #~ "To use this feature select your codepage in\n"
 #~ "Setup / Display Bits dialog!\n"
 #~ "Do not forget to save options."
 #~ msgstr ""
-#~ "Lai lietotu ğo iespçju, izvçlies kodu tabulu\n"
-#~ "iekğ Uzstâdîjumi / Displeja Biti izvçlnes!\n"
-#~ "Neaizmirst saglabât uzstâdîjumus."
+#~ "Lai lietotu Å¡o iespÄ“ju, izvÄ“lies kodu tabulu\n"
+#~ "iekÅ¡ UzstÄdÄ«jumi / Displeja Biti izvÄ“lnes!\n"
+#~ "Neaizmirst saglabÄt uzstÄdÄ«jumus."
 
 #~ msgid "Invalid hex search expression"
-#~ msgstr " Nepareiza meklçjamâ hex izteiksme "
+#~ msgstr " Nepareiza meklÄ“jamÄ hex izteiksme "
 
 #~ msgid " Invalid regular expression "
-#~ msgstr " Nepareiza regulârâ izteiksme "
+#~ msgstr " Nepareiza regulÄrÄ izteiksme "
 
 #~ msgid " Enter regexp:"
 #~ msgstr " Ievadi regexp:"
 
 #~ msgid "Using included S-Lang library"
-#~ msgstr "Lietoju iekïauto S-Lang bibliotçku"
+#~ msgstr "Lietoju iekÄ¼auto S-Lang bibliotÄ“ku"
 
 #~ msgid "with termcap database"
-#~ msgstr "ar termcap datubâzi"
+#~ msgstr "ar termcap datubÄzi"
 
 #~ msgid "&Home"
-#~ msgstr "&Mâjas"
+#~ msgstr "&MÄjas"
 
 #~ msgid "&Type"
 #~ msgstr "&Tips"
@@ -3813,62 +3825,62 @@ msgstr "Izmaiòas failâ pazuduğas"
 #~ msgstr "N&UID"
 
 #~ msgid "&Owner"
-#~ msgstr "Î&Pağnieks"
+#~ msgstr "Äª&PaÅ¡nieks"
 
 #~ msgid "&Group"
 #~ msgstr "&Grupa"
 
 #~ msgid "MC was unable to write ~/"
-#~ msgstr "MC nevarçja ierakstît ~/"
+#~ msgstr "MC nevarÄ“ja ierakstÄ«t ~/"
 
 #~ msgid " (%ld blocks)"
 #~ msgstr " (%ld bloki)"
 
 #~ msgid " Notice "
-#~ msgstr " Paziòojums "
+#~ msgstr " PaziÅ†ojums "
 
 #~ msgid ""
 #~ " The Midnight Commander configuration files \n"
 #~ " are now stored in the ~/.mc directory, the \n"
 #~ " files have been moved now\n"
 #~ msgstr ""
-#~ " Pusnakts Komandiera konfigurâcijas fails \n"
-#~ " tagad tiek glabâtas ~/.mc direktorijâ,\n"
-#~ " faili tagad ir pârvietoti\n"
+#~ " Pusnakts Komandiera konfigurÄcijas fails \n"
+#~ " tagad tiek glabÄtas ~/.mc direktorijÄ,\n"
+#~ " faili tagad ir pÄrvietoti\n"
 
 #~ msgid "%s bytes in %d files"
 #~ msgstr "%s baiti %d failos"
 
 #~ msgid " Cannot open file for reading: "
-#~ msgstr " Nevar atvçrt failu lasîğanai: "
+#~ msgstr " Nevar atvÄ“rt failu lasÄ«Å¡anai: "
 
 #~ msgid " Not an ordinary file: "
 #~ msgstr " Neparasts fails: "
 
 #~ msgid "Format of the "
-#~ msgstr "Formatçt "
+#~ msgstr "FormatÄ“t "
 
 #~ msgid ""
 #~ " file has changed\n"
 #~ "with version 3.0. You may want either to\n"
 #~ "copy it from "
 #~ msgstr ""
-#~ " ir mainîjies, sâkot\n"
-#~ "sâkot ar versiju 3.0. Tu varçtu gribçt vai nu\n"
-#~ "kopçt to no "
+#~ " ir mainÄ«jies, sÄkot\n"
+#~ "sÄkot ar versiju 3.0. Tu varÄ“tu gribÄ“t vai nu\n"
+#~ "kopÄ“t to no "
 
 #~ msgid ""
 #~ "mc.ext or use that\n"
 #~ "file as an example of how to write it.\n"
 #~ msgstr ""
 #~ "mc.ext vai lietot to\n"
-#~ "failu kâ piemçru tam, kâ to uzrakstît.\n"
+#~ "failu kÄ piemÄ“ru tam, kÄ to uzrakstÄ«t.\n"
 
 #~ msgid "mc.ext will be used for this moment."
-#~ msgstr "mc.ext tiks lietots ğim brîdim."
+#~ msgstr "mc.ext tiks lietots Å¡im brÄ«dim."
 
 #~ msgid " Cannot open file "
-#~ msgstr " Nevarçja atvçrt failu "
+#~ msgstr " NevarÄ“ja atvÄ“rt failu "
 
 #~ msgid "Col %d"
 #~ msgstr "Kol %d"
@@ -3886,7 +3898,7 @@ msgstr "Izmaiòas failâ pazuduğas"
 #~ msgstr "Ietuz"
 
 #~ msgid "Line"
-#~ msgstr "Lînija"
+#~ msgstr "LÄ«nija"
 
 #~ msgid "RxSrch"
 #~ msgstr "RxMekl"
@@ -3898,31 +3910,31 @@ msgstr "Izmaiòas failâ pazuduğas"
 #~ msgstr "ReTektu"
 
 #~ msgid "UnWrap"
-#~ msgstr "NeIekïaut"
+#~ msgstr "NeIekÄ¼aut"
 
 #~ msgid "Wrap"
-#~ msgstr "Iekïaut"
+#~ msgstr "IekÄ¼aut"
 
 #~ msgid "HxSrch"
 #~ msgstr "HxMekl"
 
 #~ msgid "Raw"
-#~ msgstr "Jçls"
+#~ msgstr "JÄ“ls"
 
 #~ msgid "Parse"
-#~ msgstr "Analizçt"
+#~ msgstr "AnalizÄ“t"
 
 #~ msgid "Unform"
 #~ msgstr "Atform"
 
 #~ msgid "User menu available only in mcedit invoked from mc"
-#~ msgstr "Lietotâja izvçlne pieejama tikai mcedit, kurğ palaists no mc"
+#~ msgstr "LietotÄja izvÄ“lne pieejama tikai mcedit, kurÅ¡ palaists no mc"
 
 #~ msgid " Host name "
 #~ msgstr " Resursdatora nosaukums "
 
 #~ msgid " Error while looking up IP address "
-#~ msgstr " Kïûda kâmçr skatoties IP adresi "
+#~ msgstr " KÄ¼Å«da kÄmÄ“r skatoties IP adresi "
 
 #~ msgid ""
 #~ "\n"
@@ -3935,28 +3947,28 @@ msgstr "Izmaiòas failâ pazuduğas"
 #~ "\n"
 #~ "\n"
 #~ "\n"
-#~ "atsvaidzinât pârpilnîbas noplûdi!\n"
+#~ "atsvaidzinÄt pÄrpilnÄ«bas noplÅ«di!\n"
 #~ "\n"
 #~ "\n"
 
 #~ msgid " Listing format edit "
-#~ msgstr " Saraksta formâta rediìçğana"
+#~ msgstr " Saraksta formÄta rediÄ£Ä“Å¡ana"
 
 #~ msgid " New mode is \"%s\" "
-#~ msgstr " Jaunais reşîms ir \"%s\" "
+#~ msgstr " Jaunais reÅ¾Ä«ms ir \"%s\" "
 
 #~ msgid "&Drive...       M-d"
-#~ msgstr "&Iekârta...       M-d"
+#~ msgstr "&IekÄrta...       M-d"
 
 #~ msgid "Use to debug the background code"
-#~ msgstr "Lietot, lai atkïûdotu fona kodu"
+#~ msgstr "Lietot, lai atkÄ¼Å«dotu fona kodu"
 
 #, fuzzy
 #~ msgid "Force subshell execution"
-#~ msgstr "uzstâd. liet. ID pie izpildes"
+#~ msgstr "uzstÄd. liet. ID pie izpildes"
 
 #~ msgid " No action taken "
-#~ msgstr " Nekâda darbîba nav veikta "
+#~ msgstr " NekÄda darbÄ«ba nav veikta "
 
 #~ msgid " Cannot set source routing (%s)"
-#~ msgstr " Nevarçja uzstâdît kodola marğrutizâciju (%s)"
+#~ msgstr " NevarÄ“ja uzstÄdÄ«t kodola marÅ¡rutizÄciju (%s)"

@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-30 19:38+0200\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-07-09 17:07+0300\n"
 "PO-Revision-Date: 2001-09-26 16:43GMT +0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
@@ -666,6 +666,12 @@ msgstr "Qrupu tə&rsçevir     M-*"
 msgid "Synta&x highlighting"
 msgstr "sinta&X seçilməsi"
 
+msgid "Visible tabs"
+msgstr ""
+
+msgid "Visible trailing spaces"
+msgstr ""
+
 #, fuzzy
 msgid "Save file &position"
 msgstr " Faylı qeyd et"
@@ -1005,6 +1011,9 @@ msgstr "\\\\%s\\%s üçün parol"
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Xəbərdarlıq: %s faylı tapılmadı\n"
+
+msgid "7-bit ASCII"
+msgstr ""
 
 #, c-format
 msgid "Cannot translate from %s to %s"
@@ -3126,6 +3135,9 @@ msgstr " Ünvana Get "
 #, fuzzy
 msgid " Invalid address "
 msgstr " Səhv verilmiş parol "
+
+msgid "Seeking to search result"
+msgstr ""
 
 msgid "ButtonBar|Help"
 msgstr ""

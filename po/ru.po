@@ -17,13 +17,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
-<<<<<<< HEAD:po/ru.po
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
 "POT-Creation-Date: 2009-06-27 13:41+0400\n"
-=======
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-30 19:39+0200\n"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/ru.po
 "PO-Revision-Date: 2005-09-09 14:37+0300\n"
 "Last-Translator: Anton S. Chumak <nightfast@yahoo.co.uk>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
@@ -74,7 +69,6 @@ msgid "Macro recursion is too deep"
 msgstr "п║п╩п╦я┬п╨п╬п╪ пЁп╩я┐п╠п╬п╨п╟я▐ я─п╣п╨я┐я─я│п╦я▐ п╪п╟п╨я─п╬я│п╬п╡"
 
 msgid "Search"
-<<<<<<< HEAD:po/ru.po
 msgstr "п÷п╬п╦я│п╨"
 
 #, c-format
@@ -83,16 +77,6 @@ msgstr " %d п╫п╟п╧п╢п╣п╫п╬, %d п╥п╟п╨п╩п╟п╢п╬п╨ п╢п╬п╠п╟п╡п╩п╣п╫п╬ "
 
 msgid " Search string not found "
 msgstr " п≤я│п╨п╬п╪п╟я▐ я│я┌я─п╬п╨п╟ п╫п╣ п╫п╟п╧п╢п╣п╫п╟ "
-=======
-msgstr "Поиск"
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " %d найдено, %d закладок добавлено "
-
-msgid " Search string not found "
-msgstr " Искомая строка не найдена "
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/ru.po
 
 msgid "Warning"
 msgstr "п÷я─п╣п╢я┐п©я─п╣п╤п╢п╣п╫п╦п╣"
@@ -149,11 +133,7 @@ msgid "&Overwrite"
 msgstr "п÷п╣&я─п╣п©п╦я│п╟я┌я▄"
 
 msgid " Cannot save file. "
-<<<<<<< HEAD:po/ru.po
 msgstr " п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ я│п╬я┘я─п╟п╫п╦я┌я▄ я└п╟п╧п╩ "
-=======
-msgstr " Невозможно сохранить файл "
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/ru.po
 
 msgid " Delete macro "
 msgstr " пёп╢п╟п╩п╦я┌я▄ п╪п╟п╨я─п╬я│ "
@@ -196,7 +176,6 @@ msgstr ""
 " п÷я─п╬п╢п╬п╩п╤п╣п╫п╦п╣ п╬п©п╣я─п╟я├п╦п╦ п©я─п╦п╡п╣п╢п╣я┌ п╨ п©п╬я┌п╣я─п╣ п╦п╥п╪п╣п╫п╣п╫п╦п╧. "
 
 msgid "C&ontinue"
-<<<<<<< HEAD:po/ru.po
 msgstr "п÷&я─п╬п╢п╬п╩п╤п╦я┌я▄"
 
 msgid "Syntax file edit"
@@ -235,47 +214,6 @@ msgstr " п≈п╟п╪п╣п╫п╦я┌я▄ "
 #, c-format
 msgid " %ld replacements made. "
 msgstr " п·я│я┐я┴п╣я│я┌п╡п╩п╣п╫п╬ п©п╬п╢я│я┌п╟п╫п╬п╡п╬п╨: %ld "
-=======
-msgstr "П&родолжить"
-
-msgid "Syntax file edit"
-msgstr "Редактирование файла синтаксиса"
-
-msgid " Which syntax file you want to edit? "
-msgstr " Какой файл синтаксиса Вы хотите редактировать? "
-
-msgid "&User"
-msgstr "&Пользовательский"
-
-msgid "&System Wide"
-msgstr "&Общесистемный"
-
-msgid " Menu edit "
-msgstr " Редактирование файла меню "
-
-msgid " Which menu file do you want to edit? "
-msgstr " Какой файл меню Вы хотите редактировать? "
-
-msgid "&Local"
-msgstr "&Местный"
-
-msgid " Load "
-msgstr " Загрузить "
-
-msgid " Block is large, you may not be able to undo this action. "
-msgstr " Блок слишком велик, вам может не удастся отменить эту операцию. "
-
-#, fuzzy
-msgid "Replace"
-msgstr "&Заменить"
-
-msgid " Replace "
-msgstr " Заменить "
-
-#, c-format
-msgid " %ld replacements made. "
-msgstr " Осуществлено подстановок: %ld "
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/ru.po
 
 msgid "Quit"
 msgstr "п▓я▀я┘п╬п╢"
@@ -433,51 +371,6 @@ msgstr " п÷п╬п╢я┌п╡п╣я─п╢п╦я┌я▄ п╥п╟п╪п╣п╫я┐ "
 msgid "&Dismiss"
 msgstr "&п≈п╟п╨я─я▀я┌я▄"
 
-msgid "pro&Mpt on replace"
-msgstr "Подтверждать &замену"
-
-msgid "replace &All"
-msgstr "Заменить &все"
-
-msgid "All charsets"
-msgstr ""
-
-msgid "&Backwards"
-msgstr "&Назад"
-
-msgid "case &Sensitive"
-msgstr "Учет ре&гистра"
-
-msgid " Enter replacement string:"
-msgstr " Введите текст для замены: "
-
-msgid " Enter search string:"
-msgstr " Введите строку для поиска:"
-
-msgid "Cancel"
-msgstr "Прервать"
-
-msgid "O&ne"
-msgstr "&Один"
-
-msgid "A&ll"
-msgstr "&Все"
-
-msgid "&Skip"
-msgstr "П&ропустить"
-
-msgid "&Replace"
-msgstr "&Заменить"
-
-msgid " Replace with: "
-msgstr " Заменить на: "
-
-msgid " Confirm replace "
-msgstr " Подтвердить замену "
-
-msgid "&Dismiss"
-msgstr "&Закрыть"
-
 msgid " Emacs key: "
 msgstr " п п╩п╟п╡п╦я┬п╟ Emacs: "
 
@@ -583,7 +476,6 @@ msgstr "п▓я│я┌п╟п╡п╦я┌я▄ п╦п╥ я└п╟п╧п╩п╟ п╨п╩п╦п©п╠п╬я─п╢п╟     S-Ins"
 msgid "Toggle bookmar&k               "
 msgstr "пёя│я┌п╟п╫п╬п╡п╦я┌я▄/я│п╫я▐я┌я▄ п╥п╟п╨п╩п╟п╢п╨я┐     "
 
-<<<<<<< HEAD:po/ru.po
 msgid "&Next bookmark                 "
 msgstr "п  я│п╩п╣п╢я┐я▌я┴п╣п╧ п╥п╟п╨п╩п╟п╢п╨п╣          "
 
@@ -610,81 +502,6 @@ msgstr "п▓я▀я─п╣п╥п╟я┌я▄ п╡ я└п╟п╧п╩ п╨п╩п╦п©п╠п╬я─п╢п╟         C-w"
 
 msgid "&Paste from clipfile        C-y"
 msgstr "п▓я│я┌п╟п╡п╦я┌я▄ п╦п╥ я└п╟п╧п╩п╟ п╨п╩п╦п©п╠п╬я─п╢п╟       C-y"
-=======
-#, fuzzy
-msgid "&Toggle mark                 F3"
-msgstr "&Выделить блок          F3"
-
-#, fuzzy
-msgid "Mar&k columns              S-F3"
-msgstr "Выделить &столбцы     S-F3"
-
-#, fuzzy
-msgid "Toggle &ins/overw           Ins"
-msgstr "&Режим вставки/замены  Ins"
-
-#, fuzzy
-msgid "&Copy                        F5"
-msgstr "&Копирование           F5"
-
-#, fuzzy
-msgid "&Move                        F6"
-msgstr "&Переместить блок       F6"
-
-#, fuzzy
-msgid "&Delete                      F8"
-msgstr "&Удаление              F8"
-
-#, fuzzy
-msgid "C&opy to clipfile         C-Ins"
-msgstr "&Копировать в файл..."
-
-#, fuzzy
-msgid "C&ut to clipfile          S-Del"
-msgstr "&Перейти к строке...        M-l"
-
-msgid "&Paste from clipfile      S-Ins"
-msgstr ""
-
-#, fuzzy
-msgid "Toggle bookmar&k               "
-msgstr "&Выделить блок          F3"
-
-#, fuzzy
-msgid "&Next bookmark                 "
-msgstr "&Новый файл           C-n"
-
-#, fuzzy
-msgid "Pre&v bookmark                 "
-msgstr "&Сортировка...              M-t"
-
-#, fuzzy
-msgid "&Flush bookmark                "
-msgstr "&Электронная почта..."
-
-#, fuzzy
-msgid "&Undo                       C-u"
-msgstr "&Отмена                C-u"
-
-#, fuzzy
-msgid "&Beginning               C-PgUp"
-msgstr "&Начало файла       C-PgUp"
-
-#, fuzzy
-msgid "&End                     C-PgDn"
-msgstr "Конец &файла        C-PgDn"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/ru.po
-
-#, fuzzy
-msgid "C&opy to clipfile           M-w"
-msgstr "&Перейти к строке...        M-l"
-
-#, fuzzy
-msgid "C&ut to clipfile            C-w"
-msgstr "&Перейти к строке...        M-l"
-
-msgid "&Paste from clipfile        C-y"
-msgstr ""
 
 msgid "&Search...         F7"
 msgstr "&п÷п╬п╦я│п╨...          F7"
@@ -701,10 +518,6 @@ msgstr "&п÷п╣я─п╣п╧я┌п╦ п╨ я│я┌я─п╬п╨п╣...             M-l"
 msgid "Toggle li&ne state        M-n"
 msgstr "п·я┌п╬п╠я─п╟п╥п╦я┌я▄/я│п╨я─я▀я┌я▄ п╫п╬п╪п╣я─п╟ я│я┌я─п╬п╨  M-n"
 
-#, fuzzy
-msgid "Toggle li&ne state        M-n"
-msgstr "&Выделить блок          F3"
-
 msgid "Go to matching &bracket   M-b"
 msgstr "п÷п╣я─п╣п╧я┌п╦ п╨ п©п╟я─п╫п╬п╧ я│п╨п╬&п╠п╨п╣         M-b"
 
@@ -719,19 +532,6 @@ msgstr "п▓п©п╣я─п╣п╢ п╨ п╬п©я─п╣п╢п╣п╩п╣п╫п╦я▌            M-+"
 
 msgid "Encod&ing...             C-t"
 msgstr "п п╬п╢п╦я─п╬п╡п╨п╟...                    п║-t"
-
-msgid "Find declaration      A-Enter"
-msgstr ""
-
-msgid "Back from declaration     M--"
-msgstr ""
-
-msgid "Forward to declaration    M-+"
-msgstr ""
-
-#, fuzzy
-msgid "Encod&ing...             C-t"
-msgstr "&Сортировка...              M-t"
 
 msgid "Insert &literal...       C-q"
 msgstr "п▓я│я┌п╟п╡п╦я┌я▄ &п╩п╦я┌п╣я─п╟п╩...             C-q"
@@ -796,22 +596,8 @@ msgstr "п═п╣п╢п╟п╨я┌п╦я─п╬п╡п╟п╫п╦п╣ я└п╟п╧п╩п╟ я│п╦п╫я┌п╟п╨я│п╦я│п╟"
 msgid "&Menu file"
 msgstr "п╓п╟п╧п╩ &п╪п╣п╫я▌"
 
-<<<<<<< HEAD:po/ru.po
 msgid "Save setu&p"
 msgstr "&п║п╬я┘я─п╟п╫п╦я┌я▄ п╫п╟я│я┌я─п╬п╧п╨п╦"
-=======
-#, fuzzy
-msgid "S&yntax file"
-msgstr "Редактирование файла синтаксиса"
-
-#, fuzzy
-msgid "&Menu file"
-msgstr "Файл &меню"
-
-#, fuzzy
-msgid "Save setu&p"
-msgstr "&Сохранить настройки"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/ru.po
 
 msgid " File "
 msgstr " п╓п╟п╧п╩ "
@@ -854,10 +640,6 @@ msgstr "п╗п╟пЁ я┌п╟п╠я┐п╩я▐я├п╦п╦: "
 
 msgid "Pers&istent selection"
 msgstr "п÷п╬я│я┌п╬я▐п╫п╫я▀п╣ п╠п╩п╬п╨п╦"
-
-#, fuzzy
-msgid "Pers&istent selection"
-msgstr "Инвер&тировать отметку  *"
 
 msgid "Synta&x highlighting"
 msgstr "&п╕п╡п╣я┌п╬п╡я▀п╢п╣п╩п╣п╫п╦п╣ я│п╦п╫я┌п╟п╨я│п╦я│п╟"
@@ -1095,10 +877,6 @@ msgstr " п≈п╟п©я─п╬я│ п©п╬п╢я┌п╡п╣я─п╤п╢п╣п╫п╦я▐ "
 
 msgid "UTF-8 output"
 msgstr "UTF-8 п╡я▀п╡п╬п╢"
-
-#, fuzzy
-msgid "UTF-8 output"
-msgstr "Полный &8-битный вывод"
 
 msgid "Full 8 bits output"
 msgstr "п÷п╬п╩п╫я▀п╧ &8-п╠п╦я┌п╫я▀п╧ п╡я▀п╡п╬п╢"
@@ -1346,21 +1124,8 @@ msgstr "&п°п╣я┌п╟я│п╦п╪п╡п╬п╩я▀ shell"
 msgid "&Case sensitive"
 msgstr "пёя┤п╣я┌ я─п╣&пЁп╦я│я┌я─п╟"
 
-<<<<<<< HEAD:po/ru.po
 msgid "&Files only"
 msgstr "п╒п╬п╩я▄п╨п╬ я└п╟п╧п╩я▀"
-=======
-msgid "&Using shell patterns"
-msgstr "&Метасимволы shell"
-
-#, fuzzy
-msgid "&Case sensitive"
-msgstr "Учет ре&гистра"
-
-#, fuzzy
-msgid "&Files only"
-msgstr "По &размеру"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/ru.po
 
 msgid " Select "
 msgstr " п·я┌п╪п╣я┌п╦я┌я▄ пЁя─я┐п©п©я┐ "
@@ -1372,11 +1137,7 @@ msgid "Extension file edit"
 msgstr " п═п╣п╢п╟п╨я┌п╦я─п╬п╡п╟п╫п╦п╣ я└п╟п╧п╩п╟ я─п╟я│я┬п╦я─п╣п╫п╦п╧ "
 
 msgid " Which extension file you want to edit? "
-<<<<<<< HEAD:po/ru.po
 msgstr " п п╟п╨п╬п╧ я└п╟п╧п╩ я─п╟я│я┬п╦я─п╣п╫п╦п╧ п▓я▀ я┘п╬я┌п╦я┌п╣ я─п╣п╢п╟п╨я┌п╦я─п╬п╡п╟я┌я▄? "
-=======
-msgstr " Какой файл расширений Вы хотите редактировать? "
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/ru.po
 
 msgid " Compare directories "
 msgstr " п║я─п╟п╡п╫п╦я┌я▄ п╨п╟я┌п╟п╩п╬пЁп╦ "
@@ -1394,11 +1155,7 @@ msgid "&Thorough"
 msgstr "п÷п╬&п╠п╟п╧я┌п╫я▀п╧"
 
 msgid " Both panels should be in the listing mode to use this command "
-<<<<<<< HEAD:po/ru.po
 msgstr "п■п╩я▐ п╡я▀п©п╬п╩п╫п╣п╫п╦я▐ я█я┌п╬п╧ п╨п╬п╪п╟п╫п╢я▀ п╬п╠п╣ п©п╟п╫п╣п╩п╦ п╢п╬п╩п╤п╫я▀ п╠я▀я┌я▄ п╡ я─п╣п╤п╦п╪п╣ я│п©п╦я│п╨п╟"
-=======
-msgstr "Для выполнения этой команды обе панели должны быть в режиме списка"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/ru.po
 
 msgid ""
 " Not an xterm or Linux console; \n"
@@ -1574,11 +1331,7 @@ msgid " Move "
 msgstr " п÷п╣я─п╣п╪п╣я┴п╣п╫п╦п╣ "
 
 msgid " Delete "
-<<<<<<< HEAD:po/ru.po
 msgstr " пёп╢п╟п╩п╣п╫п╦п╣ "
-=======
-msgstr " Удаление "
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/ru.po
 
 msgid " Cannot make the hardlink "
 msgstr " п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ я│п╬п╥п╢п╟я┌я▄ п╤п╣я│я┌п╨я┐я▌ я│я│я▀п╩п╨я┐ "
@@ -1863,14 +1616,8 @@ msgstr ""
 " п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ я┐п╢п╟п╩п╦я┌я▄ п╨п╟я┌п╟п╩п╬пЁ \"%s\" \n"
 " %s "
 
-<<<<<<< HEAD:po/ru.po
 msgid "Directory scanning"
 msgstr " п÷я┐я┌я▄ п╨ п╨п╟я┌п╟п╩п╬пЁя┐"
-=======
-#, fuzzy
-msgid "Directory scanning"
-msgstr " Путь к каталогу"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/ru.po
 
 msgid "1Copy"
 msgstr "1п п╬п©п╦я─п╬п╡п╟я┌я▄"
@@ -2029,11 +1776,7 @@ msgid "follow &Links"
 msgstr "&п═п╟п╥я▀п╪п╣п╫п╬п╡я▀п╡п╟я┌я▄ я│я│я▀п╩п╨п╦"
 
 msgid "to:"
-<<<<<<< HEAD:po/ru.po
 msgstr "п╡:"
-=======
-msgstr "в:"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/ru.po
 
 msgid "&Background"
 msgstr "п▓ &я└п╬п╫п╣"
@@ -2044,17 +1787,9 @@ msgstr "&п║п╬я┘я─п╟п╫я▐я┌я▄ я│п╦п╪п╡п╬п╩п╦я┤п╣я│п╨п╦п╣ я│я│я▀п╩п╨п╦"
 msgid "&Dive into subdir if exists"
 msgstr "&п▓п╫я┐я┌я─я▄ п╨п╟я┌п╟п╩п╬пЁп╟, п╣я│п╩п╦ п╣я│я┌я▄"
 
-<<<<<<< HEAD:po/ru.po
 #, c-format
 msgid "Invalid source pattern `%s'"
 msgstr "п²п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п╬п╠я─п╟п╥п╣я├ \"%s\""
-=======
-#, fuzzy, c-format
-msgid "Invalid source pattern `%s'"
-msgstr ""
-"Неправильный образец \"%s\" \n"
-" %s "
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/ru.po
 
 msgid "&Suspend"
 msgstr "п÷я─п╦&п╬я│я┌п╟п╫п╬п╡п╦я┌я▄"
@@ -2093,22 +1828,6 @@ msgstr "пёя┤п╣я┌ я─п╣&пЁп╦я│я┌я─п╟"
 msgid "Case sens&itive"
 msgstr "пёя┤п╣я┌ я─п╣&пЁп╦я│я┌я─п╟"
 
-#, c-format
-msgid "Found: %ld"
-msgstr ""
-
-#, fuzzy
-msgid " Malformed regular expression "
-msgstr "  Регулярное выражение сформировано неверно  "
-
-#, fuzzy
-msgid "Cas&e sensitive"
-msgstr "Учет ре&гистра"
-
-#, fuzzy
-msgid "Case sens&itive"
-msgstr "Учет ре&гистра"
-
 msgid "&Find recursively"
 msgstr "п²п╟п╧я┌п╦ я─п╣&п╨я┐я─я│п╦п╡п╫п╬"
 
@@ -2116,7 +1835,6 @@ msgid "S&kip hidden"
 msgstr "п÷я─п╬п©я┐я│п╨п╟я┌я▄ я│п╨я─&я▀я┌я▀п╣"
 
 msgid "&All charsets"
-<<<<<<< HEAD:po/ru.po
 msgstr "&п▓я│п╣ п╨п╬п╢п╦я─п╬п╡п╨п╦"
 
 msgid "All cha&rsets"
@@ -2124,16 +1842,6 @@ msgstr "п▓я│п╣ п╨п╬п╢п╦&я─п╬п╡п╨п╦"
 
 msgid "Re&gular expression"
 msgstr "&п═п╣пЁя┐п╩я▐я─п╫п╬п╣ п╡я▀я─п╟п╤п╣п╫п╦п╣"
-=======
-msgstr ""
-
-msgid "All cha&rsets"
-msgstr ""
-
-#, fuzzy
-msgid "Re&gular expression"
-msgstr "&Регулярное выражение"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/ru.po
 
 msgid "&Tree"
 msgstr "п■&п╣я─п╣п╡п╬"
@@ -2149,17 +1857,6 @@ msgstr "п╗п╟п╠п╩п╬п╫ п╦п╪п╣п╫п╦:"
 
 msgid "Start at:"
 msgstr "п·я┌ п╨п╟я┌п╟п╩п╬пЁп╟:"
-
-#, fuzzy
-msgid "Content:"
-msgstr "Содержит текст:"
-
-#, fuzzy
-msgid "File name:"
-msgstr "Шаблон имени:"
-
-msgid "Start at:"
-msgstr "От каталога:"
 
 #, c-format
 msgid "Grepping in %s"
@@ -2530,9 +2227,6 @@ msgstr "&п╓п╦п╩я▄я┌я─..."
 msgid "&Encoding...    C-t"
 msgstr "п п╬п╢п╦я─п╬п╡п╨п╟ п©п╟п╫п╣п╩п╦     C-t"
 
-msgid "&Encoding...    C-t"
-msgstr ""
-
 msgid "&Network link..."
 msgstr "п║п╣&я┌п╣п╡п╬п╣ я│п╬п╣п╢п╦п╫п╣п╫п╦п╣..."
 
@@ -2546,11 +2240,7 @@ msgid "SM&B link..."
 msgstr "SM&B-я│п╬п╣п╢п╦п╫п╣п╫п╦п╣..."
 
 msgid "&Rescan         C-r"
-<<<<<<< HEAD:po/ru.po
 msgstr "&п÷п╣я─п╣я│п╪п╬я┌я─п╣я┌я▄         C-r"
-=======
-msgstr "&Пересмотреть         C-r"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/ru.po
 
 msgid "&View               F3"
 msgstr "п÷я─п╬я│п╪п╬я┌я─ &я└п╟п╧п╩п╟        F3"
@@ -2612,9 +2302,6 @@ msgstr "п▓я▀&я┘п╬п╢                F10"
 msgid "&User menu          F2"
 msgstr "&п°п╣п╫я▌ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▐          F2"
 
-msgid "&User menu          F2"
-msgstr "&Меню пользователя     F2"
-
 msgid "&Directory tree"
 msgstr "&п■п╣я─п╣п╡п╬ п╨п╟я┌п╟п╩п╬пЁп╬п╡"
 
@@ -2636,14 +2323,8 @@ msgstr "&п я─п╦я┌п╣я─п╦п╧ п©п╟п╫п╣п╩п╦п╥п╟я├п╦п╦       C-x !"
 msgid "show directory s&Izes"
 msgstr "&п═п╟п╥п╪п╣я─я▀ п╨п╟я┌п╟п╩п╬пЁп╬п╡"
 
-<<<<<<< HEAD:po/ru.po
 msgid "Command &history      M-h"
 msgstr "&п≤я│я┌п╬я─п╦я▐ п╨п╬п╪п╟п╫п╢п╫п╬п╧ я│я┌я─п╬п╨п╦   M-h"
-=======
-#, fuzzy
-msgid "Command &history      M-h"
-msgstr " История командной строки "
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/ru.po
 
 msgid "di&Rectory hotlist    C-\\"
 msgstr "п▒я▀я│я┌я─я▀п╧ п╢п╬я│я┌я┐п© п╨ п╨п╟я┌п╟&п╩п╬пЁп╟п╪ C-\\"
@@ -2664,11 +2345,7 @@ msgid "Edit &extension file"
 msgstr "п╓п╟п╧п╩ я─п╟я│&я┬п╦я─п╣п╫п╦п╧"
 
 msgid "Edit &menu file"
-<<<<<<< HEAD:po/ru.po
 msgstr "п╓п╟п╧п╩ &п╪п╣п╫я▌"
-=======
-msgstr "Файл &меню"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/ru.po
 
 msgid "&Configuration..."
 msgstr "&п п╬п╫я└п╦пЁя┐я─п╟я├п╦я▐..."
@@ -2755,22 +2432,6 @@ msgstr ""
 "п≤п╩п╦ п©п╬п╪п╣я┌я▄я┌п╣ \"п╠п╬п╩я▄я┬п╣ п╫п╣ я│п©я─п╟я┬п╦п╡п╟я┌я▄\"\n"
 "п╦ п╫п╟п╤п╪п╦я┌п╣ <<п÷я─п╬п©я┐я│я┌п╦я┌я▄>>"
 
-msgid "&Fix it"
-msgstr ""
-
-msgid "don't ask again"
-msgstr ""
-
-msgid ""
-"Chosen display charset (Settings->Display bits)\n"
-"or source codeset (in mcedit ctrl-t) \n"
-"does not match one set via locale. \n"
-"Set correct codeset manually or press <<Fix it>> \n"
-"to set locale default.\n"
-"\n"
-"Or set 'don't ask again' and press <<Skip>>"
-msgstr ""
-
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander, п╡п╣я─я│п╦я▐ %s\n"
@@ -2793,7 +2454,6 @@ msgstr ""
 "п÷п╬п╤п╟п╩я┐п╧я│я┌п╟, п©п╬я│я▀п╩п╟п╧я┌п╣ п╩я▌п╠я▀п╣ я│п╬п╬п╠я┴п╣п╫п╦я▐ п╬п╠ п╬я┬п╦п╠п╨п╟я┘ (п╡п╨п╩я▌я┤п╟я▐ п╡я▀п╡п╬п╢ 'mc -V')\n"
 "п©п╬ п╟п╢я─п╣я│я┐ mc-devel@gnome.org\n"
 
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2807,7 +2467,6 @@ msgid ""
 "   Menus:        menu, menuhot, menusel, menuhotsel\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
-<<<<<<< HEAD:po/ru.po
 msgstr ""
 "--colors {п п⌡п╝п╖п∙п▓п·п∙ п║п⌡п·п▓п·}={п╒п∙п п║п╒},{п╓п·п²}\n"
 "\n"
@@ -2832,8 +2491,6 @@ msgid ""
 "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
 "   brightcyan, lightgray and white\n"
 "\n"
-=======
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/ru.po
 msgstr ""
 "   п║п©я─п╟п╡п╨п╟:            helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 "   п╒п╦п©я▀ я└п╟п╧п╩п╬п╡:        directory, executable, link, stalelink, device, "
@@ -2844,18 +2501,6 @@ msgstr ""
 "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
 "   brightcyan, lightgray, white\n"
 "\n"
-
-msgid ""
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-msgstr ""
 
 msgid "Displays this help message"
 msgstr "п÷п╬п╨п╟п╥п╟я┌я▄ я█я┌п╬ я│п©я─п╟п╡п╬я┤п╫п╬п╣ я│п╬п╬п╠я┴п╣п╫п╦п╣"
@@ -2920,10 +2565,6 @@ msgstr "п═п╣п╢п╟п╨я┌п╦я─п╬п╡п╟я┌я▄ я└п╟п╧п╩"
 #, c-format
 msgid "Cannot create %s directory"
 msgstr "п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ я│п╬п╥п╢п╟я┌я▄ п╨п╟я┌п╟п╩п╬пЁ \"%s\""
-
-#, fuzzy, c-format
-msgid "Cannot create %s directory"
-msgstr "Невозможно сменить каталог"
 
 msgid "safe de&Lete"
 msgstr "п▒п╣п╥п╬п©п╟я│п╫п╬п╣ &я┐п╢п╟п╩п╣п╫п╦п╣"
@@ -3145,7 +2786,6 @@ msgid "Mkdir"
 msgstr "п²п╡п я┌п╩п╬пЁ"
 
 msgid " Not implemented yet "
-<<<<<<< HEAD:po/ru.po
 msgstr " п÷п╬п╨п╟ п╫п╣ я─п╣п╟п╩п╦п╥п╬п╡п╟п╫п╬ "
 
 msgid " Num of replace tokens not equal to num of found tokens "
@@ -3173,35 +2813,6 @@ msgstr "п▓я▀п╠п╣я─п╦я┌п╣ п╨п╬п╢п╦я─п╬п╡п╨я┐"
 
 msgid "-  < No translation >"
 msgstr "-  < п▒п╣п╥ п©п╣я─п╣п╨п╬п╢п╦я─п╬п╡п╨п╦ >"
-=======
-msgstr ""
-
-msgid " Num of replace tokens not equal to num of found tokens "
-msgstr ""
-
-#, fuzzy, c-format
-msgid " Invalid token number %d "
-msgstr " Неправильный шаблон цели "
-
-msgid "Normal"
-msgstr ""
-
-msgid "&Regular expression"
-msgstr "&Регулярное выражение"
-
-msgid "Hexadecimal"
-msgstr ""
-
-msgid "Wildcard search"
-msgstr ""
-
-#, fuzzy
-msgid "Choose codepage"
-msgstr " Выберите кодировку ввода "
-
-msgid "-  < No translation >"
-msgstr "-  < Без перекодировки >"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/ru.po
 
 #, c-format
 msgid ""
@@ -3245,10 +2856,6 @@ msgstr "п║ п╠п╦п╠п╩п╦п╬я┌п╣п╨п╬п╧ ncurses"
 
 msgid "Using the ncursesw library"
 msgstr "п║ п╠п╦п╠п╩п╦п╬я┌п╣п╨п╬п╧ ncursesw"
-
-#, fuzzy
-msgid "Using the ncursesw library"
-msgstr "С библиотекой ncurses"
 
 msgid "With optional subshell support"
 msgstr "п║ п╬п©я├п╦п╬п╫п╟п╩я▄п╫п╬п╧ п©п╬п╢п╢п╣я─п╤п╨п╬п╧ п╡п╫я┐я┌я─п╣п╫п╫п╣п╧ п╨п╬п╪п╟п╫п╢п╫п╬п╧ п╬п╠п╬п╩п╬я┤п╨п╦"
@@ -3371,21 +2978,11 @@ msgstr " п²п╣ п╫п╟п╧п╢п╣п╫п╬ п©п╬п╢я┘п╬п╢я▐я┴п╦я┘ я█п╩п╣п╪п╣п╫я┌п╬п╡ п╡ %s"
 msgid " User menu "
 msgstr " п°п╣п╫я▌ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▐ "
 
-<<<<<<< HEAD:po/ru.po
 msgid "%b %d %H:%M"
 msgstr "%b %e %H:%M"
 
 msgid "%b %d %Y"
 msgstr "%b %e %Y"
-=======
-#, fuzzy
-msgid "%b %d %H:%M"
-msgstr "%b %e %H:%M"
-
-#, fuzzy
-msgid "%b %d %Y"
-msgstr "%b %e  %Y"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/ru.po
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
@@ -3486,11 +3083,7 @@ msgstr ""
 " п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ я│п╬я┘я─п╟п╫п╦я┌я▄ я└п╟п╧п╩: \n"
 " %s "
 
-<<<<<<< HEAD:po/ru.po
 #, c-format
-=======
-#, fuzzy, c-format
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/ru.po
 msgid ""
 " The current line number is %lu.\n"
 " Enter the new line number:"
@@ -3498,36 +3091,20 @@ msgstr ""
 " п²п╬п╪п╣я─ я┌п╣п╨я┐я┴п╣п╧ я│я┌я─п╬п╨п╦ %lu.\n"
 " п▓п╡п╣п╢п╦я┌п╣ п╫п╬п╪п╣я─ п╫п╬п╡п╬п╧ я│я┌я─п╬п╨п╦:"
 
-<<<<<<< HEAD:po/ru.po
 msgid " The current address is 0x%08"
 msgstr "  п╒п╣п╨я┐я┴п╦п╧ п╟п╢я─п╣я│ - 0x%08"
-=======
-#, fuzzy
-msgid " The current address is 0x%08"
-msgstr ""
-" Текущий адрес - 0x%lx.\n"
-" Введите новый адрес:"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/ru.po
 
 msgid " Goto Address "
 msgstr " п÷п╣я─п╣п╧я┌п╦ п╫п╟ п╟п╢я─п╣я│ "
 
 msgid " Invalid address "
-<<<<<<< HEAD:po/ru.po
 msgstr " п²п╣п╡п╣я─п╫я▀п╧ п╟п╢я─п╣я│ "
-=======
-msgstr " Неверный адрес "
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/ru.po
 
 msgid "ButtonBar|Help"
 msgstr "п²п╦п╤п╫я▐я▐ п©п╟п╫п╣п╩я▄|п÷п╬п╪п╬я┴"
 
 msgid "ButtonBar|Quit"
-<<<<<<< HEAD:po/ru.po
 msgstr "п²п╦п╤п╫я▐я▐ п©п╟п╫п╣п╩я▄|п▓я▀я┘п╬п╢"
-=======
-msgstr "Нижняя панель|Выход"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/ru.po
 
 msgid "ButtonBar|View"
 msgstr "п²п╦п╤п╫я▐я▐ п©п╟п╫п╣п╩я▄|п▓п╦п╢"
@@ -3536,11 +3113,7 @@ msgid "ButtonBar|Edit"
 msgstr "п²п╦п╤п╫я▐я▐ п©п╟п╫п╣п╩я▄|п÷я─п╟п╡п╨п╟"
 
 msgid "ButtonBar|Save"
-<<<<<<< HEAD:po/ru.po
 msgstr "п²п╦п╤п╫я▐я▐ п©п╟п╫п╣п╩я▄|п║п╬я┘я─п╟п╫п╦я┌я▄"
-=======
-msgstr "Нижняя панель|Сохранить"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/ru.po
 
 msgid " History "
 msgstr "п≤я│я┌п╬я─п╦я▐ п╨п╬п╪п╟п╫п╢"
@@ -4117,150 +3690,5 @@ msgid "Internal error:"
 msgstr "п▓п╫я┐я┌я─п╣п╫п╫я▐я▐ п╬я┬п╦п╠п╨п╟:"
 
 msgid "Changes to file lost"
-<<<<<<< HEAD:po/ru.po
 msgstr "п≤п╥п╪п╣п╫п╣п╫п╦я▐ п╢п╩я▐ я└п╟п╧п╩п╟ п©п╬я┌п╣я─я▐п╫я▀"
-=======
-msgstr "Изменения для файла потеряны"
-
-#~ msgid "scanf &Expression"
-#~ msgstr "Выражение &scanf"
-
-#~ msgid "&Whole words only"
-#~ msgstr "Только целые &слова"
-
-#~ msgid " Enter replacement argument order eg. 3,2,1,4 "
-#~ msgstr " Введите порядок аргументов замены, напр. 3,2,1,4 "
-
-#~ msgid ""
-#~ " Invalid regular expression, or scanf expression with too many "
-#~ "conversions "
-#~ msgstr ""
-#~ " Неверное регулярное выражение или в scanf-формате много преобразований"
-
-#~ msgid " Error in replacement format string. "
-#~ msgstr " Ошибка в формате строки замены. "
-
-#~ msgid " Replacement too long. "
-#~ msgstr " Текст для замены слишком длинный. "
-
-#~ msgid "&Copy              F5"
-#~ msgstr "&Копировать блок        F5"
-
-#~ msgid "&Delete            F8"
-#~ msgstr "&Удалить блок           F8"
-
-#~ msgid "Save setu&p..."
-#~ msgstr "Со&хранить настройки"
-
-#~ msgid " The command history is empty "
-#~ msgstr " История командной строки пуста "
-
-#~ msgid "command &History"
-#~ msgstr "&История команд"
-
-#~ msgid "Edit edi&tor menu file"
-#~ msgstr "Правка меню р&едактора"
-
-#~ msgid "Edit &syntax file"
-#~ msgstr "Фа&йл синтаксиса"
-
-#~ msgid ""
-#~ "To use this feature select your codepage in\n"
-#~ "Setup / Display Bits dialog!\n"
-#~ "Do not forget to save options."
-#~ msgstr ""
-#~ "Чтобы использовать перекодировку, установите\n"
-#~ "кодировку в меню \"Настройки / Биты символов\"...!\n"
-#~ "Не забудьте сохранить настройки."
-
-#~ msgid "Invalid hex search expression"
-#~ msgstr "Неверное выражение для поиска байтов"
-
-#~ msgid " Invalid regular expression "
-#~ msgstr " Неверное регулярное выражение "
-
-#~ msgid " Enter regexp:"
-#~ msgstr " Введите регулярное выражение:"
-
-#~ msgid "ButtonBar|Ascii"
-#~ msgstr "Нижняя панель|Ascii"
-
-#~ msgid "ButtonBar|Hex"
-#~ msgstr "Нижняя панель|Hex"
-
-#~ msgid "ButtonBar|Goto"
-#~ msgstr "Нижняя панель|Переход"
-
-#~ msgid "ButtonBar|Line"
-#~ msgstr "Нижняя панель|Строка"
-
-#~ msgid "ButtonBar|UnWrap"
-#~ msgstr "Нижняя панель|НеПеренос."
-
-#~ msgid "ButtonBar|Wrap"
-#~ msgstr "Нижняя панель|Перенос."
-
-#~ msgid "ButtonBar|RxSrch"
-#~ msgstr "Нижняя панель|RxПоиск"
-
-#~ msgid "ButtonBar|HxSrch"
-#~ msgstr "Нижняя панель|HxПоиск"
-
-#~ msgid "ButtonBar|Search"
-#~ msgstr "Нижняя панель|Поиск"
-
-#~ msgid "ButtonBar|Raw"
-#~ msgstr "Нижняя панель|Как есть"
-
-#~ msgid "ButtonBar|Parse"
-#~ msgstr "ButtonBar|Фильтр"
-
-#~ msgid "ButtonBar|Unform"
-#~ msgstr "Нижняя панель|НеФормат."
-
-#~ msgid "ButtonBar|Format"
-#~ msgstr "Нижняя панель|Формат."
-
-#~ msgid "Using included S-Lang library"
-#~ msgstr "С включенной библиотекой S-Lang"
-
-#~ msgid "with termcap database"
-#~ msgstr "с базой данных termcap"
-
-#~ msgid "&Home"
-#~ msgstr "&Персональный"
-
-#~ msgid "&Type"
-#~ msgstr "&Тип"
-
-#~ msgid "&Links"
-#~ msgstr "&Ссылки"
-
-#~ msgid "N&GID"
-#~ msgstr "N&GID"
-
-#~ msgid "N&UID"
-#~ msgstr "N&UID"
-
-#~ msgid "&Owner"
-#~ msgstr "&Владелец"
-
-#~ msgid "&Group"
-#~ msgstr "&Группа"
-
-#~ msgid "MC was unable to write ~/"
-#~ msgstr "MC не может писать в файл ~/,"
-
-#~ msgid " Notice "
-#~ msgstr " Предупреждение "
-
-#~ msgid ""
-#~ " The Midnight Commander configuration files \n"
-#~ " are now stored in the ~/.mc directory, the \n"
-#~ " files have been moved now\n"
-#~ msgstr ""
-#~ " Файлы конфигурации Midnight Commander \n"
-#~ " теперь хранятся в каталоге ~/.mc, старые \n"
-#~ " файлы сейчас туда перемещены\n"
->>>>>>> updated the po files with update.sh and set team mail address to the mail addresses used in debian for translations:po/ru.po
 

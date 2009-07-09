@@ -1,18 +1,18 @@
 # mc translation to Catalan.
 # Copyright (C) 2000 Free Software Foundation, Inc.
-# Softcatal‡ <info@softcatala.org>, 2000-2001.
+# Softcatal√† <info@softcatala.org>, 2000-2001.
 #
-# TraducciÛ per Softcatal‡ <info@softcatala.org>
+# Traducci√≥ per Softcatal√† <info@softcatala.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-30 19:38+0200\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-07-09 17:07+0300\n"
 "PO-Revision-Date: 2001-09-29 17:41+0200\n"
-"Last-Translator: Softcatal‡ <tradgnome@softcatala.org>\n"
-"Language-Team: <debian-l10n-catalan@lists.debian.org>\n"
+"Last-Translator: Softcatal√† <tradgnome@softcatala.org>\n"
+"Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #, fuzzy
@@ -31,11 +31,11 @@ msgid " Cannot open %s for reading "
 msgstr " No s'ha pogut obrir un conducte per llegir: "
 
 msgid "Error"
-msgstr "S'ha produÔt un error"
+msgstr "S'ha produ√Øt un error"
 
 #, fuzzy, c-format
 msgid " Error reading from pipe: %s "
-msgstr " S'ha produÔt un error en llegir del conducte: "
+msgstr " S'ha produ√Øt un error en llegir del conducte: "
 
 #, fuzzy, c-format
 msgid " Cannot open pipe for reading: %s "
@@ -47,11 +47,11 @@ msgstr " No puc obtenir mida/permisos del fitxer: "
 
 #, fuzzy, c-format
 msgid " %s is not a regular file "
-msgstr " No puc visualitzar-lo perquË no Ès un fitxer habitual "
+msgstr " No puc visualitzar-lo perqu√® no √©s un fitxer habitual "
 
 #, fuzzy, c-format
 msgid " File %s is too large "
-msgstr " El fitxer Ès massa gran: "
+msgstr " El fitxer √©s massa gran: "
 
 msgid "Macro recursion is too deep"
 msgstr ""
@@ -67,44 +67,44 @@ msgid " Search string not found "
 msgstr " No s'ha trobat la cadena "
 
 msgid "Warning"
-msgstr "AvÌs"
+msgstr "Av√≠s"
 
 msgid " File has hard-links. Detach before saving? "
 msgstr ""
 
 msgid "&Yes"
-msgstr "&SÌ"
+msgstr "&S√≠"
 
 msgid "&No"
 msgstr "&No"
 
-# SÌ que hi ha NLS, sÌ... I la feinada que ha costat!  iv
+# S√≠ que hi ha NLS, s√≠... I la feinada que ha costat!  iv
 msgid "&Cancel"
-msgstr "&Cancel∑la"
+msgstr "&Cancel¬∑la"
 
 msgid "The file has been modified in the meantime. Save anyway?"
 msgstr ""
 
 msgid " Error writing to pipe: "
-msgstr " S'ha produÔt un error en escriure al conducte: "
+msgstr " S'ha produ√Øt un error en escriure al conducte: "
 
 msgid " Cannot open pipe for writing: "
 msgstr " No s'ha pogut obrir el conducte per a l'escriptura: "
 
 msgid "Quick save "
-msgstr "Desat r‡pid "
+msgstr "Desat r√†pid "
 
 msgid "Safe save "
 msgstr "Desat segur "
 
 msgid "Do backups -->"
-msgstr "Fer cÚpies de seguretat -->"
+msgstr "Fer c√≤pies de seguretat -->"
 
 msgid "&OK"
 msgstr "&D'acord"
 
 msgid "Extension:"
-msgstr "ExtensiÛ:"
+msgstr "Extensi√≥:"
 
 msgid " Edit Save Mode "
 msgstr " Edita la manera de desar "
@@ -113,7 +113,7 @@ msgid " Save As "
 msgstr " Desa com a"
 
 msgid " Enter file name: "
-msgstr " IntroduÔu el nom del fitxer: "
+msgstr " Introdu√Øu el nom del fitxer: "
 
 msgid " A file already exists with this name. "
 msgstr " Ja existeix un fitxer amb aquest nom. "
@@ -123,28 +123,28 @@ msgid "&Overwrite"
 msgstr "Sobreescriu"
 
 msgid " Cannot save file. "
-msgstr " S'ha produÔt un error en intentar desar el fitxer. "
+msgstr " S'ha produ√Øt un error en intentar desar el fitxer. "
 
 msgid " Delete macro "
 msgstr " Suprimeix la macro "
 
 msgid " Cannot open temp file "
-msgstr " S'ha produÔt un error en obrir un fitxer temporal "
+msgstr " S'ha produ√Øt un error en obrir un fitxer temporal "
 
 msgid " Cannot open macro file "
-msgstr " S'ha produÔt un error en obrir el fitxer de macros "
+msgstr " S'ha produ√Øt un error en obrir el fitxer de macros "
 
 msgid " Cannot overwrite macro file "
-msgstr " S'ha produÔt un error en sobreescriure el fitxer de macros "
+msgstr " S'ha produ√Øt un error en sobreescriure el fitxer de macros "
 
 msgid " Save macro "
 msgstr " Desa la macro "
 
 msgid " Press the macro's new hotkey: "
-msgstr " Premeu la nova tecla r‡pida per a la macro: "
+msgstr " Premeu la nova tecla r√†pida per a la macro: "
 
 msgid " Press macro hotkey: "
-msgstr " Premeu la tecla r‡pida per a la macro: "
+msgstr " Premeu la tecla r√†pida per a la macro: "
 
 msgid " Load macro "
 msgstr " Carrega la macro "
@@ -162,8 +162,8 @@ msgid ""
 " Current text was modified without a file save. \n"
 " Continue discards these changes. "
 msgstr ""
-" El text actual s'ha modificat, perÚ no s'ha desat. \n"
-" 'Continua' descartar‡ aquests canvis. "
+" El text actual s'ha modificat, per√≤ no s'ha desat. \n"
+" 'Continua' descartar√† aquests canvis. "
 
 #, fuzzy
 msgid "C&ontinue"
@@ -171,7 +171,7 @@ msgstr "Continua"
 
 #, fuzzy
 msgid "Syntax file edit"
-msgstr "edita el fitxer de &Men˙s"
+msgstr "edita el fitxer de &Men√∫s"
 
 #, fuzzy
 msgid " Which syntax file you want to edit? "
@@ -184,10 +184,10 @@ msgid "&System Wide"
 msgstr "El de tot el &Sistema"
 
 msgid " Menu edit "
-msgstr " EdiciÛ del men˙ "
+msgstr " Edici√≥ del men√∫ "
 
 msgid " Which menu file do you want to edit? "
-msgstr " Quin fitxer de men˙ voleu editar? "
+msgstr " Quin fitxer de men√∫ voleu editar? "
 
 msgid "&Local"
 msgstr "&Local"
@@ -196,18 +196,18 @@ msgid " Load "
 msgstr " Carrega "
 
 msgid " Block is large, you may not be able to undo this action. "
-msgstr " El bloc Ès gran, potser no podreu desfer aquesta acciÛ "
+msgstr " El bloc √©s gran, potser no podreu desfer aquesta acci√≥ "
 
 #, fuzzy
 msgid "Replace"
-msgstr "&ReemplaÁa"
+msgstr "&Reempla√ßa"
 
 msgid " Replace "
-msgstr " ReemplaÁa "
+msgstr " Reempla√ßa "
 
 #, c-format
 msgid " %ld replacements made. "
-msgstr " S'han fet %ld reemplaÁaments. "
+msgstr " S'han fet %ld reempla√ßaments. "
 
 msgid "Quit"
 msgstr "Surt"
@@ -217,11 +217,11 @@ msgstr " El fitxer s'ha modificat. El deso en sortir? "
 
 #, fuzzy
 msgid "&Cancel quit"
-msgstr "Cancel∑la la sortida"
+msgstr "Cancel¬∑la la sortida"
 
 #, fuzzy
 msgid " Error "
-msgstr "S'ha produÔt un error"
+msgstr "S'ha produ√Øt un error"
 
 msgid " This function is not implemented. "
 msgstr ""
@@ -236,10 +236,10 @@ msgid " Cut to clipboard "
 msgstr " Talla cap el portaretalls "
 
 msgid " Goto line "
-msgstr " VÈs a la lÌnia "
+msgstr " V√©s a la l√≠nia "
 
 msgid " Enter line: "
-msgstr " IntroduÔu la lÌnia: "
+msgstr " Introdu√Øu la l√≠nia: "
 
 msgid " Save Block "
 msgstr " Desa el bloc "
@@ -248,7 +248,7 @@ msgid " Insert File "
 msgstr " Insereix el fitxer "
 
 msgid " Cannot insert file. "
-msgstr " S'ha produÔt un error en provar d'inserir el fitxer. "
+msgstr " S'ha produ√Øt un error en provar d'inserir el fitxer. "
 
 msgid " Sort block "
 msgstr " Ordena el bloc "
@@ -261,13 +261,13 @@ msgstr " Executa \"Ordenar\" "
 
 msgid " Enter sort options (see manpage) separated by whitespace: "
 msgstr ""
-" IntroduÔu les opcions per \"ordenar\" (vegeu manual) separades per espais: "
+" Introdu√Øu les opcions per \"ordenar\" (vegeu manual) separades per espais: "
 
 msgid " Sort "
 msgstr " Ordena "
 
 msgid " Cannot execute sort command "
-msgstr " S'ha produÔt un error en executar la comanda \"ordena\" "
+msgstr " S'ha produ√Øt un error en executar la comanda \"ordena\" "
 
 msgid " Sort returned non-zero: "
 msgstr " \"Ordena\" ha retornat \"non-zero\": "
@@ -277,7 +277,7 @@ msgstr ""
 
 #, fuzzy
 msgid "Enter shell command(s):"
-msgstr " IntroduÔu l'etiqueta de l'ordre: "
+msgstr " Introdu√Øu l'etiqueta de l'ordre: "
 
 #, fuzzy
 msgid "External command"
@@ -285,19 +285,19 @@ msgstr "Una altre ordre"
 
 #, fuzzy
 msgid "Cannot execute command"
-msgstr " S'ha produÔt un error en executar la comanda \"ordena\" "
+msgstr " S'ha produ√Øt un error en executar la comanda \"ordena\" "
 
 msgid "Error creating script:"
-msgstr "S'ha produÔt un error en crear la seq¸Ëncia:"
+msgstr "S'ha produ√Øt un error en crear la seq√º√®ncia:"
 
 msgid "Error reading script:"
-msgstr "S'ha produÔt un error en llegir la seq¸Ëncia:"
+msgstr "S'ha produ√Øt un error en llegir la seq√º√®ncia:"
 
 msgid "Error closing script:"
-msgstr "Error en tancar la seq¸Ëncia:"
+msgstr "Error en tancar la seq√º√®ncia:"
 
 msgid "Script created:"
-msgstr "Seq¸Ëncia creada:"
+msgstr "Seq√º√®ncia creada:"
 
 msgid "Process block"
 msgstr "Processa el bloc"
@@ -306,7 +306,7 @@ msgid " Mail "
 msgstr " Envia per correu "
 
 msgid " Copies to"
-msgstr " CÚpies per a"
+msgstr " C√≤pies per a"
 
 msgid " Subject"
 msgstr " Tema"
@@ -315,7 +315,7 @@ msgid " To"
 msgstr " Per a"
 
 msgid " mail -s <subject> -c <cc> <to>"
-msgstr " mail -s <tema> -c <cÚpies> <per a>"
+msgstr " mail -s <tema> -c <c√≤pies> <per a>"
 
 msgid " Insert Literal "
 msgstr " Inserir literal "
@@ -327,10 +327,10 @@ msgid " Execute Macro "
 msgstr " Executa la macro "
 
 msgid "pro&Mpt on replace"
-msgstr "Preg&Unta en reemplaÁar"
+msgstr "Preg&Unta en reempla√ßar"
 
 msgid "replace &All"
-msgstr "reemplaÁa'ls &Tots"
+msgstr "reempla√ßa'ls &Tots"
 
 msgid "All charsets"
 msgstr ""
@@ -339,16 +339,16 @@ msgid "&Backwards"
 msgstr "Cap &Enrere"
 
 msgid "case &Sensitive"
-msgstr "Sensible a &Maj˙scules/Min˙scules"
+msgstr "Sensible a &Maj√∫scules/Min√∫scules"
 
 msgid " Enter replacement string:"
-msgstr " IntroduÔu la cadena per reemplaÁar:"
+msgstr " Introdu√Øu la cadena per reempla√ßar:"
 
 msgid " Enter search string:"
-msgstr " IntroduÔu la cadena de cerca:"
+msgstr " Introdu√Øu la cadena de cerca:"
 
 msgid "Cancel"
-msgstr "Cancel∑la"
+msgstr "Cancel¬∑la"
 
 msgid "O&ne"
 msgstr "u&N"
@@ -360,13 +360,13 @@ msgid "&Skip"
 msgstr "&Salta"
 
 msgid "&Replace"
-msgstr "&ReemplaÁa"
+msgstr "&Reempla√ßa"
 
 msgid " Replace with: "
-msgstr " ReemplaÁa amb: "
+msgstr " Reempla√ßa amb: "
 
 msgid " Confirm replace "
-msgstr " Confirma el reemplaÁament "
+msgstr " Confirma el reempla√ßament "
 
 msgid "&Dismiss"
 msgstr "&Ignora"
@@ -407,7 +407,7 @@ msgstr ""
 "\n"
 " Copyright (C) 1996 Free Software Foundation\n"
 "\n"
-"        Un editor de text amistÛs escrit\n"
+"        Un editor de text amist√≥s escrit\n"
 "             pel Midnight Commander.\n"
 
 msgid "&Open file..."
@@ -429,10 +429,10 @@ msgid "Copy to &file...  C-f"
 msgstr "copia al &Fitxer...   C-f"
 
 msgid "&User menu...     F11"
-msgstr "Men˙ d'&usuari...     F11"
+msgstr "Men√∫ d'&usuari...     F11"
 
 msgid "A&bout...            "
-msgstr "a &PropÚsit de...        "
+msgstr "a &Prop√≤sit de...        "
 
 msgid "&Quit             F10"
 msgstr "&Surt                F10"
@@ -473,7 +473,7 @@ msgstr "copia al &Fitxer...      "
 
 #, fuzzy
 msgid "C&ut to clipfile          S-Del"
-msgstr "&VÈs a la lÌnia...          M-l"
+msgstr "&V√©s a la l√≠nia...          M-l"
 
 msgid "&Paste from clipfile      S-Ins"
 msgstr ""
@@ -496,23 +496,23 @@ msgstr "envia per co&Rreu...          "
 
 #, fuzzy
 msgid "&Undo                       C-u"
-msgstr "&DesfÈs               C-u"
+msgstr "&Desf√©s               C-u"
 
 #, fuzzy
 msgid "&Beginning               C-PgUp"
-msgstr "&Principi         C-ReP‡g"
+msgstr "&Principi         C-ReP√†g"
 
 #, fuzzy
 msgid "&End                     C-PgDn"
-msgstr "&Final            C-AvP‡g"
+msgstr "&Final            C-AvP√†g"
 
 #, fuzzy
 msgid "C&opy to clipfile           M-w"
-msgstr "&VÈs a la lÌnia...          M-l"
+msgstr "&V√©s a la l√≠nia...          M-l"
 
 #, fuzzy
 msgid "C&ut to clipfile            C-w"
-msgstr "&VÈs a la lÌnia...          M-l"
+msgstr "&V√©s a la l√≠nia...          M-l"
 
 msgid "&Paste from clipfile        C-y"
 msgstr ""
@@ -524,17 +524,17 @@ msgid "Search &again     F17"
 msgstr "cerca &de nou   F17"
 
 msgid "&Replace...        F4"
-msgstr "&ReemplaÁa...            F4"
+msgstr "&Reempla√ßa...            F4"
 
 msgid "&Go to line...            M-l"
-msgstr "&VÈs a la lÌnia...          M-l"
+msgstr "&V√©s a la l√≠nia...          M-l"
 
 #, fuzzy
 msgid "Toggle li&ne state        M-n"
 msgstr "&Canvia inici/fi de marcador    F3"
 
 msgid "Go to matching &bracket   M-b"
-msgstr "ves al &Claud‡tor coincident  M-b"
+msgstr "ves al &Claud√†tor coincident  M-b"
 
 msgid "Find declaration      A-Enter"
 msgstr ""
@@ -556,7 +556,7 @@ msgid "&Refresh screen          C-l"
 msgstr "Actualit&za la pantalla    C-l"
 
 msgid "&Start record macro      C-r"
-msgstr "ComenÁa a &enregistrar la macro    C-r"
+msgstr "Comen√ßa a &enregistrar la macro    C-r"
 
 msgid "&Finish record macro...  C-r"
 msgstr "&Finalitza l'enregistrament de la macro...  C-r"
@@ -571,7 +571,7 @@ msgid "Insert &date/time           "
 msgstr "insereix &Data/hora             "
 
 msgid "Format p&aragraph        M-p"
-msgstr "&Formateja el par‡graf          M-p"
+msgstr "&Formateja el par√†graf          M-p"
 
 msgid "'ispell' s&pell check    C-p"
 msgstr "comprova l'or&Tografia: ispell  C-p"
@@ -610,22 +610,22 @@ msgstr "Ressaltament de la sinta&Xi"
 
 #, fuzzy
 msgid "S&yntax file"
-msgstr "edita el fitxer de &Men˙s"
+msgstr "edita el fitxer de &Men√∫s"
 
 #, fuzzy
 msgid "&Menu file"
-msgstr "edita el fitxer de &Men˙s"
+msgstr "edita el fitxer de &Men√∫s"
 
 #, fuzzy
 msgid "Save setu&p"
-msgstr "&Desa la configuraciÛ"
+msgstr "&Desa la configuraci√≥"
 
-# AÁÚ s'agraeix!  iv
+# A√ß√≤ s'agraeix!  iv
 msgid " File "
 msgstr " Fitxer "
 
 msgid " Edit "
-msgstr " EdiciÛ "
+msgstr " Edici√≥ "
 
 msgid " Sear/Repl "
 msgstr " Cerca/Reempl "
@@ -637,7 +637,7 @@ msgid " Options "
 msgstr " Opcions "
 
 msgid "Intuitive"
-msgstr "IntuÔtiu"
+msgstr "Intu√Øtiu"
 
 msgid "Emacs"
 msgstr "Emacs"
@@ -650,23 +650,29 @@ msgid "None"
 msgstr "Cap"
 
 msgid "Dynamic paragraphing"
-msgstr "Par‡grafs din‡mics"
+msgstr "Par√†grafs din√†mics"
 
 msgid "Type writer wrap"
-msgstr "Ajustament de m‡quina d'escriure"
+msgstr "Ajustament de m√†quina d'escriure"
 
 msgid "Word wrap line length: "
-msgstr "Longitud de lÌnia per a l'ajustament: "
+msgstr "Longitud de l√≠nia per a l'ajustament: "
 
 msgid "Tab spacing: "
 msgstr "Mida del tabulador: "
 
 #, fuzzy
 msgid "Pers&istent selection"
-msgstr "&Inverteix la selecciÛ        M-*"
+msgstr "&Inverteix la selecci√≥        M-*"
 
 msgid "Synta&x highlighting"
 msgstr "Ressaltament de la sinta&Xi"
+
+msgid "Visible tabs"
+msgstr ""
+
+msgid "Visible trailing spaces"
+msgstr ""
 
 #, fuzzy
 msgid "Save file &position"
@@ -679,10 +685,10 @@ msgid "Fill tabs with &spaces"
 msgstr "omple els tabuladors amb e&Spais"
 
 msgid "&Return does autoindent"
-msgstr "Fes auto&Sagnat en prÈmer la tecla de retorn del carro"
+msgstr "Fes auto&Sagnat en pr√©mer la tecla de retorn del carro"
 
 msgid "&Backspace through tabs"
-msgstr "es&Borra els tabuladors amb la tecla de retrocÈs"
+msgstr "es&Borra els tabuladors amb la tecla de retroc√©s"
 
 msgid "&Fake half tabs"
 msgstr "&Simula les mitges tabulacions"
@@ -691,7 +697,7 @@ msgid "Wrap mode"
 msgstr "Mode d'ajustament"
 
 msgid "Key emulation"
-msgstr "EmulaciÛ de tecles"
+msgstr "Emulaci√≥ de tecles"
 
 msgid " Editor options "
 msgstr " Opcions de l'editor "
@@ -733,7 +739,7 @@ msgstr ""
 
 #, c-format
 msgid " Error in file %s on line %d "
-msgstr " S'ha produÔt  un error al fitxer %s, lÌnia %d "
+msgstr " S'ha produ√Øt  un error al fitxer %s, l√≠nia %d "
 
 #, c-format
 msgid "bind: Wrong argument number, bind <key> <command>"
@@ -781,7 +787,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid "%s not found!"
-msgstr "AvÌs: no s'ha trobat el fitxer %s\n"
+msgstr "Av√≠s: no s'ha trobat el fitxer %s\n"
 
 msgid "&Set"
 msgstr "&Estableix"
@@ -815,7 +821,7 @@ msgid "%6d of %d"
 msgstr "%6d de %d"
 
 msgid " Chown advanced command "
-msgstr " Ordre avanÁada de canvi de propietari "
+msgstr " Ordre avan√ßada de canvi de propietari "
 
 #, c-format
 msgid ""
@@ -834,22 +840,22 @@ msgstr ""
 " %s "
 
 msgid " Background process error "
-msgstr " S'ha produÔt un error al procÈs de fons "
+msgstr " S'ha produ√Øt un error al proc√©s de fons "
 
 msgid " Unknown error in child "
-msgstr " Error desconegut al procÈs fill "
+msgstr " Error desconegut al proc√©s fill "
 
 msgid " Child died unexpectedly "
-msgstr " El procÈs fill ha acabat inesperadament "
+msgstr " El proc√©s fill ha acabat inesperadament "
 
 msgid " Background protocol error "
-msgstr " S'ha produÔt un error de protocol al procÈs de fons "
+msgstr " S'ha produ√Øt un error de protocol al proc√©s de fons "
 
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
 msgstr ""
-" El procÈs de fons ha enviat una peticiÛ de mÈs arguments \n"
+" El proc√©s de fons ha enviat una petici√≥ de m√©s arguments \n"
 " dels que podem manejar. \n"
 
 msgid "&Full file list"
@@ -874,10 +880,10 @@ msgid "&Reverse"
 msgstr "in&Verteix"
 
 msgid "case sensi&tive"
-msgstr "distingeix entre maj˙&Scules/min˙scules"
+msgstr "distingeix entre maj√∫&Scules/min√∫scules"
 
 msgid "Sort order"
-msgstr "Ordre de classificaciÛ"
+msgstr "Ordre de classificaci√≥"
 
 msgid "Executable first"
 msgstr ""
@@ -890,16 +896,16 @@ msgid " confirm &Exit "
 msgstr " confirma la &Sortida "
 
 msgid " confirm e&Xecute "
-msgstr " confirma l'e&XecuciÛ "
+msgstr " confirma l'e&Xecuci√≥ "
 
 msgid " confirm o&Verwrite "
 msgstr " confirma la s&Obreescriptura "
 
 msgid " confirm &Delete "
-msgstr " confirma la &SupressiÛ "
+msgstr " confirma la &Supressi√≥ "
 
 msgid " Confirmation "
-msgstr " ConfirmaciÛ "
+msgstr " Confirmaci√≥ "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -918,13 +924,13 @@ msgid "F&ull 8 bits input"
 msgstr "ent&Rada de 8 bits"
 
 msgid " Display bits "
-msgstr " Bits de visualitzaciÛ "
+msgstr " Bits de visualitzaci√≥ "
 
 msgid "Other 8 bit"
 msgstr "Altres 8 bits"
 
 msgid "Input / display codepage:"
-msgstr "P‡gina de codis d'entrada / visualitzaciÛ:"
+msgstr "P√†gina de codis d'entrada / visualitzaci√≥:"
 
 msgid "&Select"
 msgstr "&Seleccioneu"
@@ -947,34 +953,34 @@ msgid "sec"
 msgstr "seg"
 
 msgid "ftpfs directory cache timeout:"
-msgstr "Temps d'espera de la memÚria cau del directori ftpfs:"
+msgstr "Temps d'espera de la mem√≤ria cau del directori ftpfs:"
 
 msgid "ftp anonymous password:"
-msgstr "Contrasenya de l'ftp anÚnim:"
+msgstr "Contrasenya de l'ftp an√≤nim:"
 
 msgid "Timeout for freeing VFSs:"
 msgstr "Temps d'espera per alliberar VFSs:"
 
 msgid " Virtual File System Setting "
-msgstr " ConfiguraciÛ dels sistemes de fitxers virtuals "
+msgstr " Configuraci√≥ dels sistemes de fitxers virtuals "
 
 msgid "Quick cd"
-msgstr "Canvi r‡pid de directori"
+msgstr "Canvi r√†pid de directori"
 
 msgid "cd"
 msgstr "cd"
 
 msgid "Symbolic link filename:"
-msgstr "Nom de fitxer de l'enllaÁ simbÚlic:"
+msgstr "Nom de fitxer de l'enlla√ß simb√≤lic:"
 
 msgid "Existing filename (filename symlink will point to):"
-msgstr "Nom del fitxer existent (nom de fitxer on apuntar‡ l'enllaÁ):"
+msgstr "Nom del fitxer existent (nom de fitxer on apuntar√† l'enlla√ß):"
 
 msgid "Symbolic link"
-msgstr "EnllaÁ simbÚlic"
+msgstr "Enlla√ß simb√≤lic"
 
 msgid "Running "
-msgstr "S'est‡ executant "
+msgstr "S'est√† executant "
 
 msgid "Stopped"
 msgstr "Aturat"
@@ -983,7 +989,7 @@ msgid "&Stop"
 msgstr "&Atura"
 
 msgid "&Resume"
-msgstr "&ReprËn"
+msgstr "&Repr√®n"
 
 msgid "&Kill"
 msgstr "A&caba"
@@ -1006,7 +1012,10 @@ msgstr "Contrasenya per a \\\\%s\\%s"
 
 #, c-format
 msgid "Warning: file %s not found\n"
-msgstr "AvÌs: no s'ha trobat el fitxer %s\n"
+msgstr "Av√≠s: no s'ha trobat el fitxer %s\n"
+
+msgid "7-bit ASCII"
+msgstr ""
 
 #, c-format
 msgid "Cannot translate from %s to %s"
@@ -1040,7 +1049,7 @@ msgid "read by owner"
 msgstr "llegeix per al propietari"
 
 msgid "sticky bit"
-msgstr "bit de permanËncia"
+msgstr "bit de perman√®ncia"
 
 msgid "set group ID on execution"
 msgstr "executa amb l'ID del grup"
@@ -1073,7 +1082,7 @@ msgid "Use SPACE to change"
 msgstr "Utilitzeu ESPAI per canviar"
 
 msgid "an option, ARROW KEYS"
-msgstr "una opciÛ, les TECLES DEL CURSOR"
+msgstr "una opci√≥, les TECLES DEL CURSOR"
 
 msgid "to move between options"
 msgstr "per moure's entre opcions"
@@ -1124,7 +1133,7 @@ msgid "Cannot change directory"
 msgstr "No he pogut canviar de directori"
 
 msgid " View file "
-msgstr " VisualitzaciÛ del fitxer "
+msgstr " Visualitzaci√≥ del fitxer "
 
 msgid " Filename:"
 msgstr " Nom del fitxer:"
@@ -1133,30 +1142,30 @@ msgid " Filtered view "
 msgstr " Vista filtrada "
 
 msgid " Filter command and arguments:"
-msgstr " IntroduÔu l'ordre de filtrat i els arguments:"
+msgstr " Introdu√Øu l'ordre de filtrat i els arguments:"
 
 msgid "Create a new Directory"
 msgstr "Crea un directori nou"
 
 msgid " Enter directory name:"
-msgstr " IntroduÔu el nom del directori:"
+msgstr " Introdu√Øu el nom del directori:"
 
 msgid " Filter "
 msgstr " Filtra "
 
 msgid " Set expression for filtering filenames"
-msgstr " IntroduÔu una expressiÛ per filtrar els noms de fitxer"
+msgstr " Introdu√Øu una expressi√≥ per filtrar els noms de fitxer"
 
 msgid "&Using shell patterns"
-msgstr "amb patrons d'&IntËrpret"
+msgstr "amb patrons d'&Int√®rpret"
 
 #, fuzzy
 msgid "&Case sensitive"
-msgstr "distingeix entre maj˙&Scules/min˙scules"
+msgstr "distingeix entre maj√∫&Scules/min√∫scules"
 
 #, fuzzy
 msgid "&Files only"
-msgstr "nomÈs &Mida"
+msgstr "nom√©s &Mida"
 
 msgid " Select "
 msgstr " Selecciona "
@@ -1174,19 +1183,19 @@ msgid " Compare directories "
 msgstr " Compara els directoris "
 
 msgid " Select compare method: "
-msgstr " Seleccioneu un mËtode de comparaciÛ: "
+msgstr " Seleccioneu un m√®tode de comparaci√≥: "
 
 msgid "&Quick"
-msgstr "&R‡pid"
+msgstr "&R√†pid"
 
 msgid "&Size only"
-msgstr "nomÈs &Mida"
+msgstr "nom√©s &Mida"
 
 msgid "&Thorough"
 msgstr "&Detallat"
 
 msgid " Both panels should be in the listing mode to use this command "
-msgstr " Cal que ambdÛs quadres siguin en mode llistat per usar l'ordre "
+msgstr " Cal que ambd√≥s quadres siguin en mode llistat per usar l'ordre "
 
 msgid ""
 " Not an xterm or Linux console; \n"
@@ -1197,57 +1206,57 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid "Link %s to:"
-msgstr " enllaÁ: %s "
+msgstr " enlla√ß: %s "
 
 msgid " Link "
-msgstr " EnllaÁ "
+msgstr " Enlla√ß "
 
 #, c-format
 msgid " link: %s "
-msgstr " enllaÁ: %s "
+msgstr " enlla√ß: %s "
 
 #, c-format
 msgid " symlink: %s "
-msgstr " enllaÁ simbÚlic: %s "
+msgstr " enlla√ß simb√≤lic: %s "
 
 #, c-format
 msgid " Symlink `%s' points to: "
-msgstr " L'enllaÁ simbÚlic `%s' apunta a: "
+msgstr " L'enlla√ß simb√≤lic `%s' apunta a: "
 
 msgid " Edit symlink "
-msgstr " Edita l'enllaÁ simbÚlic "
+msgstr " Edita l'enlla√ß simb√≤lic "
 
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
-msgstr " edita l'enllaÁ simbÚlic, no puc suprimir %s: %s "
+msgstr " edita l'enlla√ß simb√≤lic, no puc suprimir %s: %s "
 
 #, c-format
 msgid " edit symlink: %s "
-msgstr " edita l'enllaÁ simbÚlic: %s "
+msgstr " edita l'enlla√ß simb√≤lic: %s "
 
 #, c-format
 msgid "`%s' is not a symbolic link"
-msgstr "`%s' no Ès un enllaÁ simbÚlic"
+msgstr "`%s' no √©s un enlla√ß simb√≤lic"
 
 #, c-format
 msgid " Cannot chdir to %s "
 msgstr " No s'ha pogut canviar a %s "
 
 msgid " Enter machine name (F1 for details): "
-msgstr " IntroduÔu el nom de la m‡quina (F1 per a detalls): "
+msgstr " Introdu√Øu el nom de la m√†quina (F1 per a detalls): "
 
 msgid " Link to a remote machine "
-msgstr " EnllaÁa amb una m‡quina remota "
+msgstr " Enlla√ßa amb una m√†quina remota "
 
 msgid " FTP to machine "
-msgstr " Fes FTP a m‡quina "
+msgstr " Fes FTP a m√†quina "
 
 #, fuzzy
 msgid " Shell link to machine "
-msgstr " EnllaÁ SMB a m‡quina "
+msgstr " Enlla√ß SMB a m√†quina "
 
 msgid " SMB link to machine "
-msgstr " EnllaÁ SMB a m‡quina "
+msgstr " Enlla√ß SMB a m√†quina "
 
 msgid " Undelete files on an ext2 file system "
 msgstr " Recupera fitxers d'un sistema de fitxers ext2 "
@@ -1256,15 +1265,15 @@ msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
 msgstr ""
-" IntroduÔu el dispositiu (sense /dev/) d'on voleu\n"
+" Introdu√Øu el dispositiu (sense /dev/) d'on voleu\n"
 "   recuperar els fitxers: (F1 per detalls)"
 
 msgid " Setup "
-msgstr " ConfiguraciÛ "
+msgstr " Configuraci√≥ "
 
 #, fuzzy, c-format
 msgid " Setup saved to ~/%s"
-msgstr " S'ha desat la configuraciÛ a ~/"
+msgstr " S'ha desat la configuraci√≥ a ~/"
 
 #, c-format
 msgid ""
@@ -1278,7 +1287,7 @@ msgid " Cannot execute commands on non-local filesystems"
 msgstr " No podeu executar ordres a sistemes de fitxers no-locals"
 
 msgid " The shell is already running a command "
-msgstr " L'intËrpret ja esta executant una comanda "
+msgstr " L'int√®rpret ja esta executant una comanda "
 
 msgid "&Unsorted"
 msgstr "sense &Ordre"
@@ -1287,13 +1296,13 @@ msgid "&Name"
 msgstr "&Nom"
 
 msgid "&Extension"
-msgstr "&ExtensiÛ"
+msgstr "&Extensi√≥"
 
 msgid "&Modify time"
-msgstr "data de &ModificaciÛ"
+msgstr "data de &Modificaci√≥"
 
 msgid "&Access time"
-msgstr "data d'&AccÈs"
+msgstr "data d'&Acc√©s"
 
 msgid "C&Hange time"
 msgstr "data de &Canvi"
@@ -1318,7 +1327,7 @@ msgstr "Teclegeu \"exit\" per retornar al Midnight Commander"
 
 #, c-format
 msgid " Cannot fetch a local copy of %s "
-msgstr " No puc trobar una cÚpia local de %s "
+msgstr " No puc trobar una c√≤pia local de %s "
 
 #, c-format
 msgid ""
@@ -1329,11 +1338,11 @@ msgstr ""
 " %s "
 
 msgid " Parameter "
-msgstr " Par‡metre "
+msgstr " Par√†metre "
 
 #, fuzzy, c-format
 msgid " %s%s file error"
-msgstr " s'ha produÔt un error de fitxer "
+msgstr " s'ha produ√Øt un error de fitxer "
 
 #, fuzzy, c-format
 msgid ""
@@ -1342,13 +1351,13 @@ msgid ""
 "Commander package."
 msgstr ""
 "El fitxer mc.ext ha canviat\n"
-"amb la versiÛ 3.0. Sembla que la instal∑laciÛ\n"
-"ha fallat. Si us plau, agafeu una cÚpia nova del\n"
+"amb la versi√≥ 3.0. Sembla que la instal¬∑laci√≥\n"
+"ha fallat. Si us plau, agafeu una c√≤pia nova del\n"
 "paquet Midnight Commander."
 
 #, fuzzy, c-format
 msgid " ~/%s file error "
-msgstr " s'ha produÔt un error de fitxer "
+msgstr " s'ha produ√Øt un error de fitxer "
 
 #, c-format
 msgid ""
@@ -1367,14 +1376,14 @@ msgid " Delete "
 msgstr " Suprimeix "
 
 msgid " Cannot make the hardlink "
-msgstr " No s'ha pogut fer l'enllaÁ fort "
+msgstr " No s'ha pogut fer l'enlla√ß fort "
 
 #, c-format
 msgid ""
 " Cannot read source link \"%s\" \n"
 " %s "
 msgstr ""
-" No puc llegir l'enllaÁ d'origen \"%s\" \n"
+" No puc llegir l'enlla√ß d'origen \"%s\" \n"
 " %s "
 
 msgid ""
@@ -1382,17 +1391,17 @@ msgid ""
 "\n"
 " Option Stable Symlinks will be disabled "
 msgstr ""
-" No puc crear enllaÁos simbÚlics estables entre els sistemes de fitxers no "
+" No puc crear enlla√ßos simb√≤lics estables entre els sistemes de fitxers no "
 "locals: \n"
 "\n"
-" S'inhabilitar‡ l'opciÛ \"enllaÁos simbÚlics estables\" "
+" S'inhabilitar√† l'opci√≥ \"enlla√ßos simb√≤lics estables\" "
 
 #, c-format
 msgid ""
 " Cannot create target symlink \"%s\" \n"
 " %s "
 msgstr ""
-" No puc crear l'enllaÁ simbÚlic objectiu \"%s\" \n"
+" No puc crear l'enlla√ß simb√≤lic objectiu \"%s\" \n"
 " %s "
 
 msgid "&Abort"
@@ -1420,7 +1429,7 @@ msgid ""
 " and \n"
 " `%s' \n"
 " are the same file "
-msgstr " `%s' i `%s' sÛn el mateix fitxer "
+msgstr " `%s' i `%s' s√≥n el mateix fitxer "
 
 #, c-format
 msgid ""
@@ -1455,7 +1464,7 @@ msgstr ""
 " %s "
 
 msgid " Reget failed, about to overwrite file "
-msgstr " Ha fallat la represa, es sobreescriur‡ el fitxer "
+msgstr " Ha fallat la represa, es sobreescriur√† el fitxer "
 
 #, c-format
 msgid ""
@@ -1538,7 +1547,7 @@ msgid ""
 " Source \"%s\" is not a directory \n"
 " %s "
 msgstr ""
-" El directori origen \"%s\" no Ès un directori \n"
+" El directori origen \"%s\" no √©s un directori \n"
 " %s "
 
 #, c-format
@@ -1546,7 +1555,7 @@ msgid ""
 " Cannot copy cyclic symbolic link \n"
 " `%s' "
 msgstr ""
-" No puc copiar l'enllaÁ simbÚlic cÌclic \n"
+" No puc copiar l'enlla√ß simb√≤lic c√≠clic \n"
 " \"%s\" "
 
 #, c-format
@@ -1554,7 +1563,7 @@ msgid ""
 " Destination \"%s\" must be a directory \n"
 " %s "
 msgstr ""
-" Cal que el destÌ \"%s\" sigui un directori \n"
+" Cal que el dest√≠ \"%s\" sigui un directori \n"
 " %s "
 
 #, c-format
@@ -1607,7 +1616,7 @@ msgid ""
 " and \n"
 " `%s' \n"
 " are the same directory "
-msgstr " `%s' i `%s' sÛn el mateix directori "
+msgstr " `%s' i `%s' s√≥n el mateix directori "
 
 #, c-format
 msgid " Cannot overwrite directory \"%s\" %s "
@@ -1678,7 +1687,7 @@ msgid "files/directories"
 msgstr "fitxers/directoris"
 
 msgid " with source mask:"
-msgstr " amb m‡scara font:"
+msgstr " amb m√†scara font:"
 
 msgid " to:"
 msgstr " cap a:"
@@ -1698,7 +1707,7 @@ msgid ""
 "   Delete it recursively? "
 msgstr ""
 "\n"
-"   El directori no Ès buit.   \n"
+"   El directori no √©s buit.   \n"
 "   Voleu suprimir-lo recursivament? "
 
 msgid ""
@@ -1707,7 +1716,7 @@ msgid ""
 "   Delete it recursively? "
 msgstr ""
 "\n"
-"   Tasca de fons: El directori no Ès buit \n"
+"   Tasca de fons: El directori no √©s buit \n"
 "   Voleu suprimir-lo recursivament? "
 
 msgid " Delete: "
@@ -1745,14 +1754,14 @@ msgid "Source"
 msgstr "Font/Origen"
 
 msgid "Target"
-msgstr "Objectiu/DestÌ"
+msgstr "Objectiu/Dest√≠"
 
 msgid "Deleting"
 msgstr "Suprimint"
 
 #, c-format
 msgid "Target file \"%s\" already exists!"
-msgstr "El fitxer de destÌ \"%s\" ja existeix!"
+msgstr "El fitxer de dest√≠ \"%s\" ja existeix!"
 
 msgid "If &size differs"
 msgstr "si difereix la  &Mida"
@@ -1764,17 +1773,17 @@ msgid "Overwrite all targets?"
 msgstr "Voleu sobreescriure'ls tots?"
 
 msgid "&Reget"
-msgstr "reprË&N"
+msgstr "repr√®&N"
 
 msgid "A&ppend"
 msgstr "afe&Geix"
 
 msgid "Overwrite this target?"
-msgstr "Voleu sobreescriure aquest destÌ?"
+msgstr "Voleu sobreescriure aquest dest√≠?"
 
 #, fuzzy, c-format
 msgid "Target date: %s, size %llu"
-msgstr "Data del destÌ: %s, mida %llu"
+msgstr "Data del dest√≠: %s, mida %llu"
 
 #, fuzzy, c-format
 msgid "Source date: %s, size %llu"
@@ -1782,7 +1791,7 @@ msgstr "Data del font: %s, mida %llu"
 
 #, fuzzy, c-format
 msgid "Target date: %s, size %u"
-msgstr "Data del destÌ: %s, mida %u"
+msgstr "Data del dest√≠: %s, mida %u"
 
 #, fuzzy, c-format
 msgid "Source date: %s, size %u"
@@ -1798,7 +1807,7 @@ msgid "preserve &Attributes"
 msgstr "&Preserva els atributs"
 
 msgid "follow &Links"
-msgstr "segueix els en&LlaÁos"
+msgstr "segueix els en&Lla√ßos"
 
 msgid "to:"
 msgstr "cap a:"
@@ -1807,19 +1816,19 @@ msgid "&Background"
 msgstr "&Segon pla"
 
 msgid "&Stable Symlinks"
-msgstr "enllaÁos simbÚlics &Estables"
+msgstr "enlla√ßos simb√≤lics &Estables"
 
 msgid "&Dive into subdir if exists"
-msgstr "&RecÛrrer al subdirectori si existeix"
+msgstr "&Rec√≥rrer al subdirectori si existeix"
 
 #, fuzzy, c-format
 msgid "Invalid source pattern `%s'"
 msgstr ""
-" El patrÛ de font `%s' no Ès v‡lid \n"
+" El patr√≥ de font `%s' no √©s v√†lid \n"
 " %s "
 
 msgid "&Suspend"
-msgstr "&SuspËn"
+msgstr "&Susp√®n"
 
 msgid "Con&tinue"
 msgstr "&Continua"
@@ -1848,15 +1857,15 @@ msgstr ""
 
 #, fuzzy
 msgid " Malformed regular expression "
-msgstr "  L'expressiÛ habitual no Ès correcta  "
+msgstr "  L'expressi√≥ habitual no √©s correcta  "
 
 #, fuzzy
 msgid "Cas&e sensitive"
-msgstr "distingeix entre maj˙&Scules/min˙scules"
+msgstr "distingeix entre maj√∫&Scules/min√∫scules"
 
 #, fuzzy
 msgid "Case sens&itive"
-msgstr "distingeix entre maj˙&Scules/min˙scules"
+msgstr "distingeix entre maj√∫&Scules/min√∫scules"
 
 msgid "&Find recursively"
 msgstr ""
@@ -1872,7 +1881,7 @@ msgstr ""
 
 #, fuzzy
 msgid "Re&gular expression"
-msgstr "ExpressiÛ &Habitual"
+msgstr "Expressi√≥ &Habitual"
 
 msgid "&Tree"
 msgstr "Ar&bre"
@@ -1889,7 +1898,7 @@ msgid "File name:"
 msgstr "Nom del fitxer:"
 
 msgid "Start at:"
-msgstr "ComenÁa a:"
+msgstr "Comen√ßa a:"
 
 # Cal veure fins a qin punt l'MC anomena els programes que fa servir, eh?  iv
 #, c-format
@@ -1901,23 +1910,23 @@ msgstr "Finalitzat"
 
 #, c-format
 msgid "Searching %s"
-msgstr "S'est‡ cercant a %s"
+msgstr "S'est√† cercant a %s"
 
 msgid "Searching"
 msgstr "Cercant"
 
 msgid " Help file format error\n"
-msgstr " El format del fitxer d'ajuda Ès erroni\n"
+msgstr " El format del fitxer d'ajuda √©s erroni\n"
 
 msgid " Internal bug: Double start of link area "
-msgstr " S'ha produÔt un error intern: ComenÁament doble de l'‡rea d'enllaÁos "
+msgstr " S'ha produ√Øt un error intern: Comen√ßament doble de l'√†rea d'enlla√ßos "
 
 #, c-format
 msgid " Cannot find node %s in help file "
 msgstr " No es troba el node %s al fitxer d'ajuda"
 
 msgid "Index"
-msgstr "Õndex"
+msgstr "√çndex"
 
 msgid "Prev"
 msgstr "Anterior"
@@ -1973,7 +1982,7 @@ msgstr " Etiqueta del directori "
 
 #, c-format
 msgid "Moving %s"
-msgstr "S'est‡ movent %s"
+msgstr "S'est√† movent %s"
 
 msgid "New hotlist entry"
 msgstr "Nou registre als favorits"
@@ -2011,14 +2020,14 @@ msgid ""
 " Remove it?"
 msgstr ""
 "\n"
-" El grup no Ès buit.\n"
+" El grup no √©s buit.\n"
 " Voleu suprimir-lo?"
 
 msgid " Top level group "
 msgstr " Grup principal "
 
 msgid " Hotlist Load "
-msgstr " C‡rrega de favorits "
+msgstr " C√†rrega de favorits "
 
 #, fuzzy, c-format
 msgid ""
@@ -2038,14 +2047,14 @@ msgid "Free nodes: %d (%d%%) of %d"
 msgstr "Nodes lliures: %d (%d%%) of %d"
 
 msgid "No node information"
-msgstr "No hi ha informaciÛ de nodes"
+msgstr "No hi ha informaci√≥ de nodes"
 
 #, c-format
 msgid "Free space: %s (%d%%) of %s"
 msgstr "Espai lliure: %s (%d%%) of %s"
 
 msgid "No space information"
-msgstr "No hi ha informaciÛ d'espai"
+msgstr "No hi ha informaci√≥ d'espai"
 
 #, c-format
 msgid "Type:      %s "
@@ -2058,7 +2067,7 @@ msgstr "VFS no-local"
 msgid "Device:    %s"
 msgstr "Dispositiu: %s"
 
-# AixÚ queda mÈs aclaridor...  iv
+# Aix√≤ queda m√©s aclaridor...  iv
 #, c-format
 msgid "Filesystem: %s"
 msgstr "Muntat a:   %s"
@@ -2096,7 +2105,7 @@ msgstr "Propietari: %s/%s"
 
 #, c-format
 msgid "Links:     %d"
-msgstr "EnllaÁos:   %d"
+msgstr "Enlla√ßos:   %d"
 
 #, c-format
 msgid "Mode:      %s (%04o)"
@@ -2104,7 +2113,7 @@ msgstr "Mode:       %s (%04o)"
 
 #, c-format
 msgid "Location:  %Xh:%Xh"
-msgstr "UbicaciÛ:   %Xh:%Xh"
+msgstr "Ubicaci√≥:   %Xh:%Xh"
 
 msgid "File:       None"
 msgstr "Fitxer:       cap"
@@ -2129,16 +2138,16 @@ msgid "&Keybar visible"
 msgstr "Barra de &Tecles visible"
 
 msgid "command &Prompt"
-msgstr "&LÌnia d'ordres"
+msgstr "&L√≠nia d'ordres"
 
 msgid "show &Mini status"
 msgstr "mostra el &Miniestat"
 
 msgid "menu&Bar visible"
-msgstr "&Barra de men˙s visible"
+msgstr "&Barra de men√∫s visible"
 
 msgid "&Equal split"
-msgstr "divisiÛ &SimËtrica"
+msgstr "divisi√≥ &Sim√®trica"
 
 msgid "pe&Rmissions"
 msgstr "&Permisos"
@@ -2147,7 +2156,7 @@ msgid "&File types"
 msgstr "tipus de &Fitxer"
 
 msgid " Panel split "
-msgstr " DivisiÛ de quadres "
+msgstr " Divisi√≥ de quadres "
 
 msgid " Highlight... "
 msgstr " Ressalta... "
@@ -2156,10 +2165,10 @@ msgid " Other options "
 msgstr " Altres opcions "
 
 msgid "output lines"
-msgstr "lÌnies de sortida"
+msgstr "l√≠nies de sortida"
 
 msgid "Layout"
-msgstr "DisposiciÛ"
+msgstr "Disposici√≥"
 
 msgid "Learn keys"
 msgstr "Defineix tecles"
@@ -2182,7 +2191,7 @@ msgstr ""
 "i espereu fins que desaparegui aquest missatge.\n"
 "\n"
 "Aleshores, premeu-la de nou per veure si\n"
-"apareix \"D'acord\" vora el seu botÛ.\n"
+"apareix \"D'acord\" vora el seu bot√≥.\n"
 "\n"
 "Si voleu sortir, premeu un cop la tecla\n"
 "d'Escapada i espereu."
@@ -2203,7 +2212,7 @@ msgid ""
 "work fine. That's great."
 msgstr ""
 "Sembla que les tecles ja\n"
-"funcionen bÈ. AixÚ Ès perfecte."
+"funcionen b√©. Aix√≤ √©s perfecte."
 
 msgid "&Discard"
 msgstr "&Descarta"
@@ -2223,7 +2232,7 @@ msgstr ""
 "a quina tecla no hi ha la marca \"D'acord\".  Per definir-la, premeu-hi"
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
-msgstr "l'espai o feu-hi clic. Per desplaÁar-vos, utilitzeu el tabulador."
+msgstr "l'espai o feu-hi clic. Per despla√ßar-vos, utilitzeu el tabulador."
 
 msgid ""
 " The Commander can't change to the directory that \n"
@@ -2232,9 +2241,9 @@ msgid ""
 " extra access permissions with the \"su\" command? "
 msgstr ""
 " El Commander no pot canviar al directori on el sub- \n"
-" intËrpret diu que sou. Potser heu suprimit el    \n"
+" int√®rpret diu que sou. Potser heu suprimit el    \n"
 " vostre directori de treball, o heu pres uns permisos   \n"
-" d'accÈs extra amb la comanda \"su\"?                  "
+" d'acc√©s extra amb la comanda \"su\"?                  "
 
 msgid " The Midnight Commander "
 msgstr " El Midnight Commander "
@@ -2246,13 +2255,13 @@ msgid "&Listing mode..."
 msgstr "mode de &Llistat..."
 
 msgid "&Quick view     C-x q"
-msgstr "&Vista r‡pida     C-x q"
+msgstr "&Vista r√†pida     C-x q"
 
 msgid "&Info           C-x i"
-msgstr "&InformaciÛ       C-x i"
+msgstr "&Informaci√≥       C-x i"
 
 msgid "&Sort order..."
-msgstr "&OrdenaciÛ..."
+msgstr "&Ordenaci√≥..."
 
 msgid "&Filter..."
 msgstr "&Filtra..."
@@ -2261,17 +2270,17 @@ msgid "&Encoding...    C-t"
 msgstr ""
 
 msgid "&Network link..."
-msgstr "enllaÁ per a la &Xarxa..."
+msgstr "enlla√ß per a la &Xarxa..."
 
 msgid "FT&P link..."
-msgstr "enllaÁ per a F&TP..."
+msgstr "enlla√ß per a F&TP..."
 
 #, fuzzy
 msgid "S&hell link..."
-msgstr "EnllaÁ SM&B..."
+msgstr "Enlla√ß SM&B..."
 
 msgid "SM&B link..."
-msgstr "EnllaÁ SM&B..."
+msgstr "Enlla√ß SM&B..."
 
 msgid "&Rescan         C-r"
 msgstr "&Rellegeix      C-r"
@@ -2295,13 +2304,13 @@ msgid "c&Hmod           C-x c"
 msgstr "permisos (c&Hmod)        C-x c"
 
 msgid "&Link            C-x l"
-msgstr "en&LlaÁa                 C-x l"
+msgstr "en&Lla√ßa                 C-x l"
 
 msgid "&SymLink         C-x s"
-msgstr "enllaÁ &SimbÚlic          C-x s"
+msgstr "enlla√ß &Simb√≤lic          C-x s"
 
 msgid "edit s&Ymlink  C-x C-s"
-msgstr "e&Dita l'enllaÁ simbÚlic C-x C-s"
+msgstr "e&Dita l'enlla√ß simb√≤lic C-x C-s"
 
 msgid "ch&Own           C-x o"
 msgstr "canvia el propietari (ch&Own)       C-x o"
@@ -2319,7 +2328,7 @@ msgid "&Delete             F8"
 msgstr "sup&Rimeix                  F8"
 
 msgid "&Quick cd          M-c"
-msgstr "&Canvi r‡pid de directori           M-c"
+msgstr "&Canvi r√†pid de directori           M-c"
 
 msgid "select &Group      M-+"
 msgstr "selecciona el &Grup           M-+"
@@ -2328,13 +2337,13 @@ msgid "u&Nselect group    M-\\"
 msgstr "deseleccio&Na el grup         M-\\"
 
 msgid "reverse selec&Tion M-*"
-msgstr "&Inverteix la selecciÛ        M-*"
+msgstr "&Inverteix la selecci√≥        M-*"
 
 msgid "e&Xit              F10"
 msgstr "&Surt                      F10"
 
 msgid "&User menu          F2"
-msgstr "men˙ d'&Usuari               F2"
+msgstr "men√∫ d'&Usuari               F2"
 
 msgid "&Directory tree"
 msgstr "arbre de &Directoris"
@@ -2346,7 +2355,7 @@ msgid "s&Wap panels          C-u"
 msgstr "I&ntercanvia els quadres    C-u"
 
 msgid "switch &Panels on/off C-o"
-msgstr "activa/desactiva la commutaciÛ de &Quadres C-o"
+msgstr "activa/desactiva la commutaci√≥ de &Quadres C-o"
 
 msgid "&Compare directories  C-x d"
 msgstr "c&Ompara directoris     C-x d"
@@ -2380,19 +2389,19 @@ msgid "Edit &extension file"
 msgstr "edita el fitxer d'&Extensions"
 
 msgid "Edit &menu file"
-msgstr "edita el fitxer de &Men˙s"
+msgstr "edita el fitxer de &Men√∫s"
 
 msgid "&Configuration..."
-msgstr "&ConfiguraciÛ..."
+msgstr "&Configuraci√≥..."
 
 msgid "&Layout..."
 msgstr "&Format..."
 
 msgid "c&Onfirmation..."
-msgstr "con&FirmaciÛ..."
+msgstr "con&Firmaci√≥..."
 
 msgid "&Display bits..."
-msgstr "&Bits de visualitzaciÛ..."
+msgstr "&Bits de visualitzaci√≥..."
 
 msgid "learn &Keys..."
 msgstr "defineix &Tecles..."
@@ -2401,7 +2410,7 @@ msgid "&Virtual FS..."
 msgstr "Sistemes de fitxers &Virtuals..."
 
 msgid "&Save setup"
-msgstr "&Desa la configuraciÛ"
+msgstr "&Desa la configuraci√≥"
 
 msgid " &Above "
 msgstr " a dal&T "
@@ -2425,7 +2434,7 @@ msgid " &Right "
 msgstr " &Dreta "
 
 msgid " Information "
-msgstr " InformaciÛ "
+msgstr " Informaci√≥ "
 
 msgid ""
 " Using the fast reload option may not reflect the exact \n"
@@ -2433,13 +2442,13 @@ msgid ""
 " manual reload of the directory. See the man page for   \n"
 " the details.                                           "
 msgstr ""
-" Si useu l'opciÛ de rec‡rrega r‡pida potser no vegeu el \n"
-" contingut exacte dels directoris. Si Ès el cas, caldr‡ \n"
-" que feu una rec‡rrega manual del directori. Vegeu la   \n"
-" p‡gina del manual per als detalls.          "
+" Si useu l'opci√≥ de rec√†rrega r√†pida potser no vegeu el \n"
+" contingut exacte dels directoris. Si √©s el cas, caldr√† \n"
+" que feu una rec√†rrega manual del directori. Vegeu la   \n"
+" p√†gina del manual per als detalls.          "
 
 msgid "Menu"
-msgstr "Men˙"
+msgstr "Men√∫"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "La variable d'entorn TERM no esta definida!\n"
@@ -2469,7 +2478,7 @@ msgstr "[opcions] [aquest_dir] [dir_d'altre_quadre]\n"
 
 #, fuzzy
 msgid "+number"
-msgstr "N˙mero de l'inode"
+msgstr "N√∫mero de l'inode"
 
 msgid "Set initial line number for the internal editor"
 msgstr ""
@@ -2480,7 +2489,7 @@ msgid ""
 "to mc-devel@gnome.org\n"
 msgstr ""
 "\n"
-"Si us plau envieu qualsevol informaciÛ sobre errors (incloent la sortida de "
+"Si us plau envieu qualsevol informaci√≥ sobre errors (incloent la sortida de "
 "'mc -V')\n"
 "a mc-devel@gnome.org\n"
 
@@ -2501,22 +2510,22 @@ msgid ""
 msgstr ""
 "--colors KEYWORD={FRONT},{FONS}\n"
 "\n"
-"{FORE} i {BACK} es poden ometre, i s'utilitzar‡ l'opciÛ per defecte\n"
+"{FORE} i {BACK} es poden ometre, i s'utilitzar√† l'opci√≥ per defecte\n"
 "Paraules clau:\n"
 "   Global:\t            errors, invertir, marcador, entrada\n"
-"   VisualitzaciÛ de fitxers: normal, seleccionat, marcat, selecciÛ de "
+"   Visualitzaci√≥ de fitxers: normal, seleccionat, marcat, selecci√≥ de "
 "marca \n"
-"   Quadres de di‡leg:  dnormal, dfocus, dhotnormal, dhotfocus\n"
-"   Men˙s:              men˙, menuhot, menusel, menuhotsel\n"
-"   Ajuda:              ajuda normal, ajuda cursiva, ajuda enllaÁ, enllaÁ "
+"   Quadres de di√†leg:  dnormal, dfocus, dhotnormal, dhotfocus\n"
+"   Men√∫s:              men√∫, menuhot, menusel, menuhotsel\n"
+"   Ajuda:              ajuda normal, ajuda cursiva, ajuda enlla√ß, enlla√ß "
 "d'ajuda\n"
-"   Tipus de fitxers:   directori, executable, enllaÁ, dispositiu, especial, "
+"   Tipus de fitxers:   directori, executable, enlla√ß, dispositiu, especial, "
 "core\n"
 "\n"
 "Colors:\n"
-"   negre, gris, vermell, vermell clar, verd, verd clar, marrÛ,\n"
-"   groc, blau, blau clar, magenta, magenta clar, blau verdÛs,\n"
-"   blau verdÛs clar, gris clar i blanc\n"
+"   negre, gris, vermell, vermell clar, verd, verd clar, marr√≥,\n"
+"   groc, blau, blau clar, magenta, magenta clar, blau verd√≥s,\n"
+"   blau verd√≥s clar, gris clar i blanc\n"
 "\n"
 
 msgid ""
@@ -2535,13 +2544,13 @@ msgid "Displays this help message"
 msgstr "Mostra aquest missatge d'ajuda"
 
 msgid "Displays the current version"
-msgstr "Mostra la versiÛ actual"
+msgstr "Mostra la versi√≥ actual"
 
 msgid "Forces xterm features"
-msgstr "ForÁa l'˙s de caracterÌstiques d'xterm"
+msgstr "For√ßa l'√∫s de caracter√≠stiques d'xterm"
 
 msgid "Disable mouse support in text version"
-msgstr "Inhabilita el suport de ratolÌ a la versiÛ text"
+msgstr "Inhabilita el suport de ratol√≠ a la versi√≥ text"
 
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Prova d'utilitzar termcap en comptes de terminfo"
@@ -2553,7 +2562,7 @@ msgid "To run on slow terminals"
 msgstr "Per funcionar amb terminals lents"
 
 msgid "Use stickchars to draw"
-msgstr "Utilitza el car‡cters de lÌnies per fer marcs"
+msgstr "Utilitza el car√†cters de l√≠nies per fer marcs"
 
 msgid "Requests to run in black and white"
 msgstr "Demana que s'utilitzi el mode blanc i negre"
@@ -2562,7 +2571,7 @@ msgid "Request to run in color mode"
 msgstr "Demana que s'utilitzi el mode en color"
 
 msgid "Specifies a color configuration"
-msgstr "Especifica una configuraciÛ de color"
+msgstr "Especifica una configuraci√≥ de color"
 
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Mostra una ajuda de com canviar l'esquema de colors"
@@ -2582,10 +2591,10 @@ msgid "Print last working directory to specified file"
 msgstr "Imprimeix el directori de treball en sortir"
 
 msgid "Enables subshell support (default)"
-msgstr "Habilita el suport de subintËrprets (per defecte)"
+msgstr "Habilita el suport de subint√®rprets (per defecte)"
 
 msgid "Disables subshell support"
-msgstr "Inhabilita el suport de subintËrprets"
+msgstr "Inhabilita el suport de subint√®rprets"
 
 msgid "Launches the file viewer on a file"
 msgstr "Executa el visualitzador de fitxers amb un fitxer"
@@ -2598,16 +2607,16 @@ msgid "Cannot create %s directory"
 msgstr "No he pogut canviar de directori"
 
 msgid "safe de&Lete"
-msgstr "&SupressiÛ segura"
+msgstr "&Supressi√≥ segura"
 
 msgid "cd follows lin&Ks"
-msgstr "cd segueix els en&LlaÁos"
+msgstr "cd segueix els en&Lla√ßos"
 
 msgid "L&ynx-like motion"
 msgstr "moviment com a la L&ynx"
 
 msgid "rotatin&G dash"
-msgstr "&Barreta rotatÚria"
+msgstr "&Barreta rotat√≤ria"
 
 msgid "co&Mplete: show all"
 msgstr "completat: mostrar-&Ho tot"
@@ -2619,13 +2628,13 @@ msgid "use internal ed&It"
 msgstr "utilitza l'ed&Itor intern"
 
 msgid "auto m&Enus"
-msgstr "auto-&Men˙s"
+msgstr "auto-&Men√∫s"
 
 msgid "&Auto save setup"
-msgstr "Desa la configuraciÛ autom‡ticament"
+msgstr "Desa la configuraci√≥ autom√†ticament"
 
 msgid "shell &Patterns"
-msgstr "&Patrons de l'intËrpret"
+msgstr "&Patrons de l'int√®rpret"
 
 msgid "Compute &Totals"
 msgstr "calcula els &Totals"
@@ -2637,13 +2646,13 @@ msgid "Mkdir autoname"
 msgstr ""
 
 msgid "&Fast dir reload"
-msgstr "rec‡rrega &R‡pida de directoris"
+msgstr "rec√†rrega &R√†pida de directoris"
 
 msgid "mi&X all files"
 msgstr "&Barreja tots els fitxers"
 
 msgid "&Drop down menus"
-msgstr "men˙s &Desplegables"
+msgstr "men√∫s &Desplegables"
 
 msgid "ma&Rk moves down"
 msgstr "mo&U avall en marcar"
@@ -2652,7 +2661,7 @@ msgid "show &Hidden files"
 msgstr "mostra els &Fitxers ocults"
 
 msgid "show &Backup files"
-msgstr "mostra els fitxers de &CÚpies de seguretat"
+msgstr "mostra els fitxers de &C√≤pies de seguretat"
 
 msgid "&Never"
 msgstr "&Mai"
@@ -2667,10 +2676,10 @@ msgid " Panel options "
 msgstr " Opcions del quadre "
 
 msgid " Pause after run... "
-msgstr " Fes una pausa desprÈs d'executar... "
+msgstr " Fes una pausa despr√©s d'executar... "
 
 msgid "Configure options"
-msgstr "Opcions de configuraciÛ"
+msgstr "Opcions de configuraci√≥"
 
 msgid "&Add new"
 msgstr "Afegeix un &nou"
@@ -2688,7 +2697,7 @@ msgid " Add to external panelize "
 msgstr " Afegeix a un quadre de cerca externa "
 
 msgid " Enter command label: "
-msgstr " IntroduÔu l'etiqueta de l'ordre: "
+msgstr " Introdu√Øu l'etiqueta de l'ordre: "
 
 msgid " Cannot run external panelize in a non-local directory "
 msgstr ""
@@ -2696,10 +2705,10 @@ msgstr ""
 "directori no-local "
 
 msgid "Find rejects after patching"
-msgstr "Troba els fitxers rebutjats desprÈs d'apedaÁar"
+msgstr "Troba els fitxers rebutjats despr√©s d'apeda√ßar"
 
 msgid "Find *.orig after patching"
-msgstr "Cerca *.orig desprÈs d'apedaÁar"
+msgstr "Cerca *.orig despr√©s d'apeda√ßar"
 
 msgid "Find SUID and SGID programs"
 msgstr "Cerca programes SUID i SGID"
@@ -2782,7 +2791,7 @@ msgid "Group"
 msgstr "Grup"
 
 msgid "<readlink failed>"
-msgstr "<S'ha produÔt una fallida en llegir l'enllaÁ>"
+msgstr "<S'ha produ√Øt una fallida en llegir l'enlla√ß>"
 
 #, fuzzy, c-format
 msgid "%s byte"
@@ -2801,7 +2810,7 @@ msgstr "Marcador desconegut al format de pantalla: "
 
 msgid "User supplied format looks invalid, reverting to default."
 msgstr ""
-"El format facilitat per l'usuari sembla que Ès inv‡lid, s'est‡ tornant al "
+"El format facilitat per l'usuari sembla que √©s inv√†lid, s'est√† tornant al "
 "format per defecte."
 
 msgid " Do you really want to execute? "
@@ -2827,14 +2836,14 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid " Invalid token number %d "
-msgstr " La m‡scara objectiu no Ès v‡lida "
+msgstr " La m√†scara objectiu no √©s v√†lida "
 
 #, fuzzy
 msgid "Normal"
 msgstr "Formata"
 
 msgid "&Regular expression"
-msgstr "ExpressiÛ &Habitual"
+msgstr "Expressi√≥ &Habitual"
 
 msgid "Hexadecimal"
 msgstr ""
@@ -2844,10 +2853,10 @@ msgstr ""
 
 #, fuzzy
 msgid "Choose codepage"
-msgstr " Escolliu la p‡gina de codis d'entrada "
+msgstr " Escolliu la p√†gina de codis d'entrada "
 
 msgid "-  < No translation >"
-msgstr "-  < Cap traducciÛ >"
+msgstr "-  < Cap traducci√≥ >"
 
 #, c-format
 msgid ""
@@ -2868,27 +2877,27 @@ msgid "Cannot open named pipe %s\n"
 msgstr "No puc obrir el conducte designat amb %s\n"
 
 msgid " The shell is still active. Quit anyway? "
-msgstr " L'intËrpret encara Ès actiu. Voleu sortir de tota manera? "
+msgstr " L'int√®rpret encara √©s actiu. Voleu sortir de tota manera? "
 
 #, c-format
 msgid "Warning: Cannot change to %s.\n"
-msgstr "AvÌs: No s'ha pogut canviar a %s.\n"
+msgstr "Av√≠s: No s'ha pogut canviar a %s.\n"
 
 msgid "With builtin Editor\n"
 msgstr "Amb editor incorporat\n"
 
 msgid "Using system-installed S-Lang library"
-msgstr "S'est‡ utilitzant la biblioteca S-Lang instal∑lada al sistema"
+msgstr "S'est√† utilitzant la biblioteca S-Lang instal¬∑lada al sistema"
 
 msgid "with terminfo database"
 msgstr "amb la base de dades terminfo"
 
 msgid "Using the ncurses library"
-msgstr "S'est‡ utilitzant la biblioteca ncurses"
+msgstr "S'est√† utilitzant la biblioteca ncurses"
 
 #, fuzzy
 msgid "Using the ncursesw library"
-msgstr "S'est‡ utilitzant la biblioteca ncurses"
+msgstr "S'est√† utilitzant la biblioteca ncurses"
 
 msgid "With optional subshell support"
 msgstr "Amb la possibilitat opcional d'utilitzar la subshell"
@@ -2901,19 +2910,19 @@ msgstr "Amb suport per a operacions en segon pla\n"
 
 msgid "With mouse support on xterm and Linux console\n"
 msgstr ""
-"Amb possibilitat d'utilitzar el ratolÌ en l'xterm i la consola de Linux\n"
+"Amb possibilitat d'utilitzar el ratol√≠ en l'xterm i la consola de Linux\n"
 
 msgid "With mouse support on xterm\n"
-msgstr "Amb possibilitat d'utilitzar el ratolÌ en l'xterm.\n"
+msgstr "Amb possibilitat d'utilitzar el ratol√≠ en l'xterm.\n"
 
 msgid "With support for X11 events\n"
 msgstr "Amb possibilitat d'utilitzar els esdeveniments X11\n"
 
 msgid "With internationalization support\n"
-msgstr "Amb la possibilitat d'utilitzar internacionalitzaciÛ\n"
+msgstr "Amb la possibilitat d'utilitzar internacionalitzaci√≥\n"
 
 msgid "With multiple codepages support\n"
-msgstr "Amb la possibilitat d'utilitzar diverses p‡gines de codis\n"
+msgstr "Amb la possibilitat d'utilitzar diverses p√†gines de codis\n"
 
 #, c-format
 msgid "Virtual File System:"
@@ -2940,7 +2949,7 @@ msgid ""
 " Cannot stat the destination \n"
 " %s "
 msgstr ""
-" No puc estudiar el destÌ \n"
+" No puc estudiar el dest√≠ \n"
 " %s "
 
 #, c-format
@@ -2948,10 +2957,10 @@ msgid "  Delete %s?  "
 msgstr "  Suprimir %s?  "
 
 msgid "Static"
-msgstr "Est‡tic"
+msgstr "Est√†tic"
 
 msgid "Dynamc"
-msgstr "Din‡mic"
+msgstr "Din√†mic"
 
 msgid "Rescan"
 msgstr "Rellegeix"
@@ -2975,11 +2984,11 @@ msgstr " Error de format al fitxer Fitxer d'extensions "
 
 #, c-format
 msgid " The %%var macro has no default "
-msgstr " La macro %%var no tÈ cap valor predeterminat "
+msgstr " La macro %%var no t√© cap valor predeterminat "
 
 #, c-format
 msgid " The %%var macro has no variable "
-msgstr " La macro %%var no tÈ cap variable "
+msgstr " La macro %%var no t√© cap variable "
 
 msgid " Debug "
 msgstr " Depura "
@@ -2994,14 +3003,14 @@ msgid " False: "
 msgstr " Fals:  "
 
 msgid " Warning -- ignoring file "
-msgstr " AvÌs -- es descarta el fitxer "
+msgstr " Av√≠s -- es descarta el fitxer "
 
 #, c-format
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
 msgstr ""
-"El fitxer %s no pertany ni a l'arrel ni a vostË, o bÈ Ès modificable per\n"
+"El fitxer %s no pertany ni a l'arrel ni a vost√®, o b√© √©s modificable per\n"
 "qualsevol. Usar-lo podria comprometre la seguretat"
 
 #, c-format
@@ -3009,7 +3018,7 @@ msgid " No suitable entries found in %s "
 msgstr " No s'han trobat entrades apropiades a %s "
 
 msgid " User menu "
-msgstr " Men˙ d'usuari "
+msgstr " Men√∫ d'usuari "
 
 #, fuzzy
 msgid "%b %d %H:%M"
@@ -3061,7 +3070,7 @@ msgstr " Ha fallat dup() "
 
 #, fuzzy
 msgid " Cannot spawn child process "
-msgstr " No puc llanÁar el procÈs fill "
+msgstr " No puc llan√ßar el proc√©s fill "
 
 msgid "Empty output from child filter"
 msgstr ""
@@ -3083,7 +3092,7 @@ msgstr ""
 " %s "
 
 msgid " Cannot view: not a regular file "
-msgstr " No puc visualitzar-lo perquË no Ès un fitxer habitual "
+msgstr " No puc visualitzar-lo perqu√® no √©s un fitxer habitual "
 
 #, c-format
 msgid "File: %s"
@@ -3091,7 +3100,7 @@ msgstr "Fitxer: %s"
 
 #, c-format
 msgid "Offset 0x%08lx"
-msgstr "DesplaÁament 0x%08lx"
+msgstr "Despla√ßament 0x%08lx"
 
 #, c-format
 msgid "Line %lu Col %lu"
@@ -3116,28 +3125,31 @@ msgstr ""
 msgid ""
 " Cannot save file: \n"
 " %s "
-msgstr " S'ha produÔt un error en intentar desar el fitxer. "
+msgstr " S'ha produ√Øt un error en intentar desar el fitxer. "
 
 #, fuzzy, c-format
 msgid ""
 " The current line number is %lu.\n"
 " Enter the new line number:"
 msgstr ""
-" La lÌnia actual Ès la n˙mero %d.\n"
-" IntroduÔu el n˙mero nou de lÌnia:"
+" La l√≠nia actual √©s la n√∫mero %d.\n"
+" Introdu√Øu el n√∫mero nou de l√≠nia:"
 
 #, fuzzy
 msgid " The current address is 0x%08"
 msgstr ""
-" L'adreÁa actual es 0x%lx.\n"
-" IntroduÔu la nova adreÁa:"
+" L'adre√ßa actual es 0x%lx.\n"
+" Introdu√Øu la nova adre√ßa:"
 
 msgid " Goto Address "
-msgstr " VÈs a l'adreÁa "
+msgstr " V√©s a l'adre√ßa "
 
 #, fuzzy
 msgid " Invalid address "
-msgstr " La contrasenya no Ès v‡lida "
+msgstr " La contrasenya no √©s v√†lida "
+
+msgid "Seeking to search result"
+msgstr ""
 
 msgid "ButtonBar|Help"
 msgstr ""
@@ -3158,70 +3170,70 @@ msgid " History "
 msgstr " Historial "
 
 msgid "Function key 1"
-msgstr "Tecla de funciÛ 1"
+msgstr "Tecla de funci√≥ 1"
 
 msgid "Function key 2"
-msgstr "Tecla de funciÛ 2"
+msgstr "Tecla de funci√≥ 2"
 
 msgid "Function key 3"
-msgstr "Tecla de funciÛ 3"
+msgstr "Tecla de funci√≥ 3"
 
 msgid "Function key 4"
-msgstr "Tecla de funciÛ 4"
+msgstr "Tecla de funci√≥ 4"
 
 msgid "Function key 5"
-msgstr "Tecla de funciÛ 5"
+msgstr "Tecla de funci√≥ 5"
 
 msgid "Function key 6"
-msgstr "Tecla de funciÛ 6"
+msgstr "Tecla de funci√≥ 6"
 
 msgid "Function key 7"
-msgstr "Tecla de funciÛ 7"
+msgstr "Tecla de funci√≥ 7"
 
 msgid "Function key 8"
-msgstr "Tecla de funciÛ 8"
+msgstr "Tecla de funci√≥ 8"
 
 msgid "Function key 9"
-msgstr "Tecla de funciÛ 9"
+msgstr "Tecla de funci√≥ 9"
 
 msgid "Function key 10"
-msgstr "Tecla de funciÛ 10"
+msgstr "Tecla de funci√≥ 10"
 
 msgid "Function key 11"
-msgstr "Tecla de funciÛ 11"
+msgstr "Tecla de funci√≥ 11"
 
 msgid "Function key 12"
-msgstr "Tecla de funciÛ 12"
+msgstr "Tecla de funci√≥ 12"
 
 msgid "Function key 13"
-msgstr "Tecla de funciÛ 13"
+msgstr "Tecla de funci√≥ 13"
 
 msgid "Function key 14"
-msgstr "Tecla de funciÛ 14"
+msgstr "Tecla de funci√≥ 14"
 
 msgid "Function key 15"
-msgstr "Tecla de funciÛ 15"
+msgstr "Tecla de funci√≥ 15"
 
 msgid "Function key 16"
-msgstr "Tecla de funciÛ 16"
+msgstr "Tecla de funci√≥ 16"
 
 msgid "Function key 17"
-msgstr "Tecla de funciÛ 17"
+msgstr "Tecla de funci√≥ 17"
 
 msgid "Function key 18"
-msgstr "Tecla de funciÛ 18"
+msgstr "Tecla de funci√≥ 18"
 
 msgid "Function key 19"
-msgstr "Tecla de funciÛ 19"
+msgstr "Tecla de funci√≥ 19"
 
 msgid "Function key 20"
-msgstr "Tecla de funciÛ 20"
+msgstr "Tecla de funci√≥ 20"
 
 msgid "Backspace key"
-msgstr "Tecla de retrocÈs"
+msgstr "Tecla de retroc√©s"
 
 msgid "End key"
-msgstr "PosiciÛ final"
+msgstr "Posici√≥ final"
 
 msgid "Up arrow key"
 msgstr "Cursor amunt"
@@ -3236,73 +3248,73 @@ msgid "Right arrow key"
 msgstr "Cursor dreta"
 
 msgid "Home key"
-msgstr "PosiciÛ inicial"
+msgstr "Posici√≥ inicial"
 
 msgid "Page Down key"
-msgstr "AvanÁa p‡gina"
+msgstr "Avan√ßa p√†gina"
 
 msgid "Page Up key"
-msgstr "Retrocedeix p‡gina"
+msgstr "Retrocedeix p√†gina"
 
 msgid "Insert key"
-msgstr "Tecla d'inserciÛ"
+msgstr "Tecla d'inserci√≥"
 
 msgid "Delete key"
-msgstr "Tecla de supressiÛ"
+msgstr "Tecla de supressi√≥"
 
 msgid "Completion/M-tab"
 msgstr "Completa/M-tab"
 
 msgid "+ on keypad"
-msgstr "+ teclat numËric"
+msgstr "+ teclat num√®ric"
 
 msgid "- on keypad"
-msgstr "- teclat numËric"
+msgstr "- teclat num√®ric"
 
 msgid "* on keypad"
-msgstr "* teclat numËric"
+msgstr "* teclat num√®ric"
 
 msgid "Left arrow keypad"
-msgstr "Cursor esquerra teclat numËric"
+msgstr "Cursor esquerra teclat num√®ric"
 
 msgid "Right arrow keypad"
-msgstr "Cursor dreta teclat numËric"
+msgstr "Cursor dreta teclat num√®ric"
 
 msgid "Up arrow keypad"
-msgstr "Cursor amunt teclat numËric"
+msgstr "Cursor amunt teclat num√®ric"
 
 msgid "Down arrow keypad"
-msgstr "Cursor avall teclat numËric"
+msgstr "Cursor avall teclat num√®ric"
 
 msgid "Home on keypad"
-msgstr "Inici teclat numËric"
+msgstr "Inici teclat num√®ric"
 
 msgid "End on keypad"
-msgstr "Final teclat numËric"
+msgstr "Final teclat num√®ric"
 
 msgid "Page Down keypad"
-msgstr "AvanÁa p‡gina teclat numËric"
+msgstr "Avan√ßa p√†gina teclat num√®ric"
 
 msgid "Page Up keypad"
-msgstr "Retrocedeix p‡gina teclat numËric"
+msgstr "Retrocedeix p√†gina teclat num√®ric"
 
 msgid "Insert on keypad"
-msgstr "Inserir teclat numËric"
+msgstr "Inserir teclat num√®ric"
 
 msgid "Delete on keypad"
-msgstr "Suprimir teclat numËric"
+msgstr "Suprimir teclat num√®ric"
 
 msgid "Enter on keypad"
-msgstr "Tecla de retorn teclat numËric"
+msgstr "Tecla de retorn teclat num√®ric"
 
 msgid "Slash on keypad"
-msgstr "Barra teclat numËric"
+msgstr "Barra teclat num√®ric"
 
 msgid "NumLock on keypad"
-msgstr "BloqNum teclat numËric"
+msgstr "BloqNum teclat num√®ric"
 
 msgid "Background process:"
-msgstr "ProcÈs de fons:"
+msgstr "Proc√©s de fons:"
 
 #, c-format
 msgid ""
@@ -3325,7 +3337,7 @@ msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
 msgstr ""
-"S'ha trobat una capÁalera corrupta d'arxiu cpio a \n"
+"S'ha trobat una cap√ßalera corrupta d'arxiu cpio a \n"
 "%s"
 
 #, c-format
@@ -3335,29 +3347,29 @@ msgid ""
 "in cpio archive\n"
 "%s"
 msgstr ""
-"EnllaÁos inconsistents de\n"
+"Enlla√ßos inconsistents de\n"
 "%s\n"
 "a l'arxiu cpio\n"
 "%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
-msgstr "%s contÈ registres duplicats! S'estan ometent!"
+msgstr "%s cont√© registres duplicats! S'estan ometent!"
 
 #, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
 msgstr ""
-"FÌ de fitxer inesperat a\n"
+"F√≠ de fitxer inesperat a\n"
 "%s"
 
 #, c-format
 msgid "Directory cache expired for %s"
-msgstr "El directori de la memÚria cau ha caducat per %s"
+msgstr "El directori de la mem√≤ria cau ha caducat per %s"
 
 msgid "Starting linear transfer..."
-msgstr "S'est‡ iniciant la transferËncia lineal..."
+msgstr "S'est√† iniciant la transfer√®ncia lineal..."
 
 #, c-format
 msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
@@ -3368,7 +3380,7 @@ msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s: %s: %s %lu bytes transferits"
 
 msgid "Getting file"
-msgstr "S'est‡ recuperant el fitxer"
+msgstr "S'est√† recuperant el fitxer"
 
 #, c-format
 msgid ""
@@ -3379,32 +3391,32 @@ msgstr ""
 "%s"
 
 msgid "Inconsistent extfs archive"
-msgstr "L'arxiu extfs no Ès consistent"
+msgstr "L'arxiu extfs no √©s consistent"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
-msgstr "fish: S'est‡ desconnectant de %s"
+msgstr "fish: S'est√† desconnectant de %s"
 
 msgid "fish: Waiting for initial line..."
-msgstr "fish: Est‡ esperant a la lÌnia inicial..."
+msgstr "fish: Est√† esperant a la l√≠nia inicial..."
 
 msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr "Ho sento, perÚ de moment no es poden fer connexions autenticades."
+msgstr "Ho sento, per√≤ de moment no es poden fer connexions autenticades."
 
 msgid " fish: Password required for "
 msgstr " fish: Cal una contrasenya per a "
 
 msgid "fish: Sending password..."
-msgstr "fish: S'est‡ enviant la contrasenya..."
+msgstr "fish: S'est√† enviant la contrasenya..."
 
 msgid "fish: Sending initial line..."
-msgstr "fish: S'est‡ enviant la lÌnia inicial..."
+msgstr "fish: S'est√† enviant la l√≠nia inicial..."
 
 msgid "fish: Handshaking version..."
-msgstr "fish: S'est‡ intercanviant la versiÛ..."
+msgstr "fish: S'est√† intercanviant la versi√≥..."
 
 msgid "fish: Setting up current directory..."
-msgstr "fish: S'est‡ definint el directori actual..."
+msgstr "fish: S'est√† definint el directori actual..."
 
 #, c-format
 msgid "fish: Connected, home %s."
@@ -3412,7 +3424,7 @@ msgstr "fish: Connectat, directori inicial %s."
 
 #, c-format
 msgid "fish: Reading directory %s..."
-msgstr "fish: S'est‡ llegint el directori %s..."
+msgstr "fish: S'est√† llegint el directori %s..."
 
 #, c-format
 msgid "%s: done."
@@ -3424,39 +3436,39 @@ msgstr "%s: fallada"
 
 #, c-format
 msgid "fish: store %s: sending command..."
-msgstr "fish: desa %s: est‡ enviant l'ordre..."
+msgstr "fish: desa %s: est√† enviant l'ordre..."
 
 msgid "fish: Local read failed, sending zeros"
-msgstr "fish: Ha fallat la lectura local, s'est‡ enviant zeros"
+msgstr "fish: Ha fallat la lectura local, s'est√† enviant zeros"
 
 #, fuzzy, c-format
 msgid "fish: storing %s %d (%lu)"
-msgstr "fish: s'est‡ emmagatzemant %s %d (%d)"
+msgstr "fish: s'est√† emmagatzemant %s %d (%d)"
 
 msgid "zeros"
 msgstr "zeros"
 
 msgid "Aborting transfer..."
-msgstr "S'est‡ avortant la transferËncia..."
+msgstr "S'est√† avortant la transfer√®ncia..."
 
 msgid "Error reported after abort."
-msgstr "S'ha informat d'un error desprËs d'avortar."
+msgstr "S'ha informat d'un error despr√®s d'avortar."
 
 msgid "Aborted transfer would be successful."
-msgstr "La transferËncia avortada tindria Ëxit"
+msgstr "La transfer√®ncia avortada tindria √®xit"
 
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
-msgstr "ftpfs: S'est‡ desconnectant de %s"
+msgstr "ftpfs: S'est√† desconnectant de %s"
 
 msgid " FTP: Password required for "
 msgstr " FTP: Cal una contrasenya per a"
 
 msgid "ftpfs: sending login name"
-msgstr "ftpfs: s'est‡ enviant la identificaciÛ"
+msgstr "ftpfs: s'est√† enviant la identificaci√≥"
 
 msgid "ftpfs: sending user password"
-msgstr "ftpfs: s'est‡ enviant la contrasenya"
+msgstr "ftpfs: s'est√† enviant la contrasenya"
 
 #, fuzzy, c-format
 msgid "FTP: Account required for user %s"
@@ -3468,45 +3480,45 @@ msgstr "Compta"
 
 #, fuzzy
 msgid "ftpfs: sending user account"
-msgstr "ftpfs: s'est‡ enviant la contrasenya"
+msgstr "ftpfs: s'est√† enviant la contrasenya"
 
 msgid "ftpfs: logged in"
 msgstr "ftpfs: connectat"
 
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
-msgstr "ftpfs: La identificaciÛ per a l'usuari %s no Ès correcta"
+msgstr "ftpfs: La identificaci√≥ per a l'usuari %s no √©s correcta"
 
 msgid "ftpfs: Invalid host name."
-msgstr "ftpfs: El nom de l'ordinador central no Ès v‡lid."
+msgstr "ftpfs: El nom de l'ordinador central no √©s v√†lid."
 
 msgid "ftpfs: Invalid host address."
-msgstr "ftpfs: L'adreÁa de l'ordinador central no Ès v‡lida."
+msgstr "ftpfs: L'adre√ßa de l'ordinador central no √©s v√†lida."
 
 #, c-format
 msgid "ftpfs: making connection to %s"
-msgstr "ftpfs: s'est‡ connectant amb %s"
+msgstr "ftpfs: s'est√† connectant amb %s"
 
 msgid "ftpfs: connection interrupted by user"
-msgstr "ftpfs: l'usuari ha interromput la connexiÛ"
+msgstr "ftpfs: l'usuari ha interromput la connexi√≥"
 
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
-msgstr "ftpfs: ha fallat la connexiÛ amb el servidor: %s"
+msgstr "ftpfs: ha fallat la connexi√≥ amb el servidor: %s"
 
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
-msgstr "Est‡ esperant per reintentar... %d (Ctrl-C per cancel∑lar)"
+msgstr "Est√† esperant per reintentar... %d (Ctrl-C per cancel¬∑lar)"
 
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: no s'ha pogut establir el mode passiu"
 
 msgid "ftpfs: aborting transfer."
-msgstr "ftpfs: s'est‡ avortant la transferËncia."
+msgstr "ftpfs: s'est√† avortant la transfer√®ncia."
 
 #, c-format
 msgid "ftpfs: abort error: %s"
-msgstr "ftpfs: s'ha produÔt un error en avortar: %s"
+msgstr "ftpfs: s'ha produ√Øt un error en avortar: %s"
 
 msgid "ftpfs: abort failed"
 msgstr "ftpfs: ha fallat l'avortament"
@@ -3515,14 +3527,14 @@ msgid "ftpfs: CWD failed."
 msgstr "ftpfs: ha fallat la comanda CWD."
 
 msgid "ftpfs: couldn't resolve symlink"
-msgstr "ftpfs: no puc identificar l'enllaÁ simbÚlic"
+msgstr "ftpfs: no puc identificar l'enlla√ß simb√≤lic"
 
 msgid "Resolving symlink..."
-msgstr "Est‡ identificant l'enllaÁ simbÚlic..."
+msgstr "Est√† identificant l'enlla√ß simb√≤lic..."
 
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
-msgstr "ftpfs: S'est‡ llegint el directori FTP %s... %s%s"
+msgstr "ftpfs: S'est√† llegint el directori FTP %s... %s%s"
 
 msgid "(strict rfc959)"
 msgstr "(rfc959 estricte)"
@@ -3535,35 +3547,35 @@ msgstr "ftpfs: ha fallat; enlloc per retornar-hi"
 
 #, fuzzy, c-format
 msgid "ftpfs: storing file %lu (%lu)"
-msgstr "ftpfs: s'est‡ emmagatzemar el fitxer %d (%d)"
+msgstr "ftpfs: s'est√† emmagatzemar el fitxer %d (%d)"
 
 msgid ""
 "~/.netrc file has incorrect mode.\n"
 "Remove password or correct mode."
 msgstr ""
-"el fitxer ~/.netrc no tÈ els permisos adequats.\n"
+"el fitxer ~/.netrc no t√© els permisos adequats.\n"
 "Suprimiu la contrasenya o corregiu els permisos."
 
 msgid " MCFS "
 msgstr " MCFS "
 
 msgid " The server does not support this version "
-msgstr " El servidor no suporta aquesta versiÛ "
+msgstr " El servidor no suporta aquesta versi√≥ "
 
 msgid ""
 " The remote server is not running on a system port \n"
 " you need a password to log in, but the information may \n"
 " not be safe on the remote side.  Continue? \n"
 msgstr ""
-" El servidor remot no s'est‡ executant en un port del sistema. \n"
-" Necessiteu una contrasenya per entrar-hi, encara que la informaciÛ \n"
+" El servidor remot no s'est√† executant en un port del sistema. \n"
+" Necessiteu una contrasenya per entrar-hi, encara que la informaci√≥ \n"
 " podria no ser segura a la banda remota.  Voleu continuar? \n"
 
 msgid " MCFS Password required "
 msgstr " Cal una contrasenya per a MCFS "
 
 msgid " Invalid password "
-msgstr " La contrasenya no Ès v‡lida "
+msgstr " La contrasenya no √©s v√†lida "
 
 #, c-format
 msgid " Cannot locate hostname: %s "
@@ -3571,7 +3583,7 @@ msgstr " No es pot trobar el nom de l'ordinador central: %s "
 
 #, c-format
 msgid " Cannot create socket: %s "
-msgstr " No es pot crear el sÚcol: %s"
+msgstr " No es pot crear el s√≤col: %s"
 
 #, c-format
 msgid " Cannot connect to server: %s "
@@ -3585,7 +3597,7 @@ msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
 msgstr ""
-"AvÌs: lÌnia no v‡lida a %s:\n"
+"Av√≠s: l√≠nia no v√†lida a %s:\n"
 "%s\n"
 
 #, c-format
@@ -3593,7 +3605,7 @@ msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
 msgstr ""
-"AvÌs: Senyalador %c no v‡lid a %s:\n"
+"Av√≠s: Senyalador %c no v√†lid a %s:\n"
 "%s\n"
 
 #, c-format
@@ -3601,32 +3613,32 @@ msgid ""
 " reconnect to %s failed\n"
 " "
 msgstr ""
-" ha fallat la reconnexiÛ a %s\n"
+" ha fallat la reconnexi√≥ a %s\n"
 " "
 
 msgid " Authentication failed "
-msgstr " Ha fallat l'autenticaciÛ "
+msgstr " Ha fallat l'autenticaci√≥ "
 
 #, c-format
 msgid " Error %s creating directory %s "
-msgstr " %s est‡ creant el directori %s"
+msgstr " %s est√† creant el directori %s"
 
 #, c-format
 msgid " Error %s removing directory %s "
-msgstr " %s est‡ suprimint el directori %s "
+msgstr " %s est√† suprimint el directori %s "
 
 #, c-format
 msgid " %s opening remote file %s "
-msgstr " %s est‡ obrint el fitxer remot %s "
+msgstr " %s est√† obrint el fitxer remot %s "
 
 #, c-format
 msgid " %s removing remote file %s "
-msgstr " %s est‡ eliminant el fitxer remot %s "
+msgstr " %s est√† eliminant el fitxer remot %s "
 
-# No em convenÁ la forma de fer els plurals...  iv
+# No em conven√ß la forma de fer els plurals...  iv
 #, c-format
 msgid " %s renaming files\n"
-msgstr " %s est‡ reanomenant els fitxers\n"
+msgstr " %s est√† reanomenant els fitxers\n"
 
 #, c-format
 msgid ""
@@ -3637,10 +3649,10 @@ msgstr ""
 "%s"
 
 msgid "Inconsistent tar archive"
-msgstr "L'arxiu tar no Ès consistent"
+msgstr "L'arxiu tar no √©s consistent"
 
 msgid "Unexpected EOF on archive file"
-msgstr "FÌ de fitxer inesperat a l'arxiu"
+msgstr "F√≠ de fitxer inesperat a l'arxiu"
 
 #, c-format
 msgid ""
@@ -3656,10 +3668,10 @@ msgid " undelfs: error "
 msgstr " undelfs: error "
 
 msgid " not enough memory "
-msgstr " no hi ha prou memÚria "
+msgstr " no hi ha prou mem√≤ria "
 
 msgid " while allocating block buffer "
-msgstr " en col∑locar el bloc de memÚria intermËdia"
+msgstr " en col¬∑locar el bloc de mem√≤ria interm√®dia"
 
 #, c-format
 msgid " open_inode_scan: %d "
@@ -3667,19 +3679,19 @@ msgstr " obre_escaneig_inode: %d"
 
 #, c-format
 msgid " while starting inode scan %d "
-msgstr " mentre comenÁava l'escaneig del inode %d"
+msgstr " mentre comen√ßava l'escaneig del inode %d"
 
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
 msgstr ""
-"undelfs: s'est‡ carregant la informaciÛ dels fitxers esborrats %d inodes"
+"undelfs: s'est√† carregant la informaci√≥ dels fitxers esborrats %d inodes"
 
 #, c-format
 msgid " while calling ext2_block_iterate %d "
 msgstr " mentre es cridava a ext2_block_iterate %d"
 
 msgid " no more memory while reallocating array "
-msgstr " no hi ha hagut mÈs memÚria en recol∑locar la taula "
+msgstr " no hi ha hagut m√©s mem√≤ria en recol¬∑locar la taula "
 
 #, c-format
 msgid " while doing inode scan %d "
@@ -3693,7 +3705,7 @@ msgid " Cannot open file %s "
 msgstr " No s'ha pogut obrir el fitxer %s"
 
 msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: s'est‡ llegint el mapa de bits de l'inode..."
+msgstr "undelfs: s'est√† llegint el mapa de bits de l'inode..."
 
 #, c-format
 msgid ""
@@ -3704,7 +3716,7 @@ msgstr ""
 " %s \n"
 
 msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: s'est‡ llegint el mapa de bits del bloc..."
+msgstr "undelfs: s'est√† llegint el mapa de bits del bloc..."
 
 #, c-format
 msgid ""
@@ -3727,7 +3739,7 @@ msgid "Cannot parse:"
 msgstr "No s'ha pogut analitzar:"
 
 msgid "More parsing errors will be ignored."
-msgstr " Si hi han mËs errors d'interpretaciÛ, s'ignoraran. "
+msgstr " Si hi han m√®s errors d'interpretaci√≥, s'ignoraran. "
 
 msgid "Internal error:"
 msgstr "Error intern:"
@@ -3736,26 +3748,26 @@ msgid "Changes to file lost"
 msgstr "Canvia al fitxer perdut"
 
 #~ msgid "scanf &Expression"
-#~ msgstr "&ExpressiÛ de Scanf"
+#~ msgstr "&Expressi√≥ de Scanf"
 
 #~ msgid "&Whole words only"
-#~ msgstr "NomÈs paraules com&Pletes"
+#~ msgstr "Nom√©s paraules com&Pletes"
 
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
-#~ msgstr " IntroduÔu l'ordre dels arguments per reemplaÁar, p.ex. 3,2,1,4 "
+#~ msgstr " Introdu√Øu l'ordre dels arguments per reempla√ßar, p.ex. 3,2,1,4 "
 
 #~ msgid ""
 #~ " Invalid regular expression, or scanf expression with too many "
 #~ "conversions "
 #~ msgstr ""
-#~ " ExpressiÛ habitual no v‡lida, o expressiÛ scanf amb massa conversions "
+#~ " Expressi√≥ habitual no v√†lida, o expressi√≥ scanf amb massa conversions "
 
 #~ msgid " Error in replacement format string. "
-#~ msgstr " S'ha produÔt un error al format de la cadena reemplaÁant. "
+#~ msgstr " S'ha produ√Øt un error al format de la cadena reempla√ßant. "
 
 #, fuzzy
 #~ msgid " Replacement too long. "
-#~ msgstr " IntroduÔu la cadena per reemplaÁar:"
+#~ msgstr " Introdu√Øu la cadena per reempla√ßar:"
 
 #~ msgid "&Copy              F5"
 #~ msgstr "&Copia                F5"
@@ -3765,42 +3777,42 @@ msgstr "Canvia al fitxer perdut"
 
 #, fuzzy
 #~ msgid "Save setu&p..."
-#~ msgstr "&Desa la configuraciÛ"
+#~ msgstr "&Desa la configuraci√≥"
 
 #~ msgid " The command history is empty "
-#~ msgstr " L'historial d'ordres Ès buit "
+#~ msgstr " L'historial d'ordres √©s buit "
 
 #~ msgid "command &History"
 #~ msgstr "&Historial d'ordres"
 
 #~ msgid "Edit edi&tor menu file"
-#~ msgstr "EdiciÛ de l'edi&Tor de men˙s"
+#~ msgstr "Edici√≥ de l'edi&Tor de men√∫s"
 
 #, fuzzy
 #~ msgid "Edit &syntax file"
-#~ msgstr "edita el fitxer de &Men˙s"
+#~ msgstr "edita el fitxer de &Men√∫s"
 
 #~ msgid ""
 #~ "To use this feature select your codepage in\n"
 #~ "Setup / Display Bits dialog!\n"
 #~ "Do not forget to save options."
 #~ msgstr ""
-#~ "Per utilitzar aquesta caracterÌstica, seleccioneu la vostra p‡gina de "
+#~ "Per utilitzar aquesta caracter√≠stica, seleccioneu la vostra p√†gina de "
 #~ "codis a\n"
-#~ "ConfiguraciÛ / Visualitza el di‡leg Bits!\n"
+#~ "Configuraci√≥ / Visualitza el di√†leg Bits!\n"
 #~ "No oblideu desar les opcions."
 
 #~ msgid "Invalid hex search expression"
-#~ msgstr "L'expressiÛ de cerca hexadecimal no es v‡lida"
+#~ msgstr "L'expressi√≥ de cerca hexadecimal no es v√†lida"
 
 #~ msgid " Invalid regular expression "
-#~ msgstr " L'expressiÛ regular no Ès v‡lida "
+#~ msgstr " L'expressi√≥ regular no √©s v√†lida "
 
 #~ msgid " Enter regexp:"
-#~ msgstr " IntroduÔu l'expressiÛ regular:"
+#~ msgstr " Introdu√Øu l'expressi√≥ regular:"
 
 #~ msgid "Using included S-Lang library"
-#~ msgstr "S'est‡ utilitzant la biblioteca S-Lang inclosa"
+#~ msgstr "S'est√† utilitzant la biblioteca S-Lang inclosa"
 
 #~ msgid "with termcap database"
 #~ msgstr "amb la base de dades termcap"
@@ -3812,13 +3824,13 @@ msgstr "Canvia al fitxer perdut"
 #~ msgstr "&Tipus"
 
 #~ msgid "&Links"
-#~ msgstr "en&LlaÁos"
+#~ msgstr "en&Lla√ßos"
 
 #~ msgid "N&GID"
-#~ msgstr "&GID numËric"
+#~ msgstr "&GID num√®ric"
 
 #~ msgid "N&UID"
-#~ msgstr "&UID numËric"
+#~ msgstr "&UID num√®ric"
 
 #~ msgid "&Owner"
 #~ msgstr "&Propietari"
@@ -3833,14 +3845,14 @@ msgstr "Canvia al fitxer perdut"
 #~ msgstr " (%ld blocs)"
 
 #~ msgid " Notice "
-#~ msgstr " AvÌs "
+#~ msgstr " Av√≠s "
 
 #~ msgid ""
 #~ " The Midnight Commander configuration files \n"
 #~ " are now stored in the ~/.mc directory, the \n"
 #~ " files have been moved now\n"
 #~ msgstr ""
-#~ " Els fitxers de configuraciÛ de Midnight Commander \n"
+#~ " Els fitxers de configuraci√≥ de Midnight Commander \n"
 #~ " s'emmagatzemen ara al directori ~/.mc, on \n"
 #~ " s'han mogut els fitxers\n"
 
@@ -3848,10 +3860,10 @@ msgstr "Canvia al fitxer perdut"
 #~ msgstr "%s bytes en %d fitxers"
 
 #~ msgid " Cannot open file for reading: "
-#~ msgstr " S'ha produÔt una fallada en intentar obrir un fitxer per llegir: "
+#~ msgstr " S'ha produ√Øt una fallada en intentar obrir un fitxer per llegir: "
 
 #~ msgid " Not an ordinary file: "
-#~ msgstr " No Ès un fitxer ordinari: "
+#~ msgstr " No √©s un fitxer ordinari: "
 
 #~ msgid "Format of the "
 #~ msgstr "Formatatge  del "
@@ -3862,7 +3874,7 @@ msgstr "Canvia al fitxer perdut"
 #~ "copy it from "
 #~ msgstr ""
 #~ " el fitxer ha variat amb\n"
-#~ "la versiÛ 3.0.  Potser vulgueu copiar-lo\n"
+#~ "la versi√≥ 3.0.  Potser vulgueu copiar-lo\n"
 #~ "de "
 
 #~ msgid ""
@@ -3873,7 +3885,7 @@ msgstr "Canvia al fitxer perdut"
 #~ "com a exemple de com escriure'l.\n"
 
 #~ msgid "mc.ext will be used for this moment."
-#~ msgstr "mc.ext s'utilitzar‡ de moment."
+#~ msgstr "mc.ext s'utilitzar√† de moment."
 
 #~ msgid " Cannot open file "
 #~ msgstr " No puc obrir el fitxer "
@@ -3894,7 +3906,7 @@ msgstr "Canvia al fitxer perdut"
 #~ msgstr "Ves a"
 
 #~ msgid "Line"
-#~ msgstr "LÌnia"
+#~ msgstr "L√≠nia"
 
 #~ msgid "RxSrch"
 #~ msgstr "RxSrch"
@@ -3925,20 +3937,20 @@ msgstr "Canvia al fitxer perdut"
 
 #~ msgid "User menu available only in mcedit invoked from mc"
 #~ msgstr ""
-#~ "El men˙ d'usuari nomÈs est‡ disponible en el mcedit que s'activa des d'mc"
+#~ "El men√∫ d'usuari nom√©s est√† disponible en el mcedit que s'activa des d'mc"
 
-# Si tÈ a veure amb SO_DONTROUTE amb aixÚ seria suficient  iv
+# Si t√© a veure amb SO_DONTROUTE amb aix√≤ seria suficient  iv
 #~ msgid " Socket source routing setup "
-#~ msgstr " ConfiguraciÛ del camÌ origen del sÚcol "
+#~ msgstr " Configuraci√≥ del cam√≠ origen del s√≤col "
 
 #~ msgid " Enter host name to use as a source routing hop: "
-#~ msgstr " IntroduÔu l'ordinador central  que s'utilitzar‡ com a mitjancer: "
+#~ msgstr " Introdu√Øu l'ordinador central  que s'utilitzar√† com a mitjancer: "
 
 #~ msgid " Host name "
 #~ msgstr " Nom de l'ordinador central "
 
 #~ msgid " Error while looking up IP address "
-#~ msgstr " S'ha produÔt un error en cercar l'adreÁa IP "
+#~ msgstr " S'ha produ√Øt un error en cercar l'adre√ßa IP "
 
 #~ msgid ""
 #~ "\n"
@@ -3951,15 +3963,15 @@ msgstr "Canvia al fitxer perdut"
 #~ "\n"
 #~ "\n"
 #~ "\n"
-#~ "desbordament de la pila d'actualitzaciÛ!\n"
+#~ "desbordament de la pila d'actualitzaci√≥!\n"
 #~ "\n"
 #~ "\n"
 
 #~ msgid " Listing format edit "
-#~ msgstr " EdiciÛ del format de llista "
+#~ msgstr " Edici√≥ del format de llista "
 
 #~ msgid " New mode is \"%s\" "
-#~ msgstr " El nou mode Ès \"%s\" "
+#~ msgstr " El nou mode √©s \"%s\" "
 
 #~ msgid "&Drive...       M-d"
 #~ msgstr "&Unitat...     M-d"

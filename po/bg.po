@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.55\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-30 19:38+0200\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-07-09 17:07+0300\n"
 "PO-Revision-Date: 2002-06-24 02:15+0300\n"
 "Last-Translator: Todor Buyukliev <adrez@mail.bg>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -662,6 +662,12 @@ msgstr "Обърни маркирането       M-*"
 msgid "Synta&x highlighting"
 msgstr "Осветяване на синтаксиса"
 
+msgid "Visible tabs"
+msgstr ""
+
+msgid "Visible trailing spaces"
+msgstr ""
+
 #, fuzzy
 msgid "Save file &position"
 msgstr " Запази файла "
@@ -1001,6 +1007,9 @@ msgstr "Парола за \\\\%s\\%s"
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Внимание: файлът %s не е намерен\n"
+
+msgid "7-bit ASCII"
+msgstr ""
 
 #, c-format
 msgid "Cannot translate from %s to %s"
@@ -3121,6 +3130,9 @@ msgstr " Отиди на адрес "
 #, fuzzy
 msgid " Invalid address "
 msgstr " Невалидна парола "
+
+msgid "Seeking to search result"
+msgstr ""
 
 msgid "ButtonBar|Help"
 msgstr ""

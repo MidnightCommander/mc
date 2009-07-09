@@ -5,40 +5,40 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.38\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-30 19:38+0200\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-07-09 17:07+0300\n"
 "PO-Revision-Date: 1997-07-23 00:04-0400\n"
 "Last-Translator: Spiros Papadimitriou <spapadim+@cs.cmu.edu>\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-7\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #, fuzzy
 msgid " Choose syntax highlighting "
-msgstr "τονισμός σύντα&ξης"
+msgstr "Ο„ΞΏΞ½ΞΉΟƒΞΌΟΟ‚ ΟƒΟΞ½Ο„Ξ±&ΞΎΞ·Ο‚"
 
 #, fuzzy
 msgid "< Auto >"
-msgstr " Τέλος "
+msgstr " Ξ¤Ξ­Ξ»ΞΏΟ‚ "
 
 msgid "< Reload Current Syntax >"
 msgstr ""
 
 #, fuzzy, c-format
 msgid " Cannot open %s for reading "
-msgstr " ¶νοιγμα αρχείου προς ανάγνωση ανεπιτυχής: "
+msgstr " Ξ†Ξ½ΞΏΞΉΞ³ΞΌΞ± Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… Ο€ΟΞΏΟ‚ Ξ±Ξ½Ξ¬Ξ³Ξ½Ο‰ΟƒΞ· Ξ±Ξ½ΞµΟ€ΞΉΟ„Ο…Ο‡Ξ®Ο‚: "
 
 msgid "Error"
-msgstr "Σφάλμα"
+msgstr "Ξ£Ο†Ξ¬Ξ»ΞΌΞ±"
 
 #, fuzzy, c-format
 msgid " Error reading from pipe: %s "
-msgstr " Σφάλμα αποθήκευσης αρχείου. "
+msgstr " Ξ£Ο†Ξ¬Ξ»ΞΌΞ± Ξ±Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ·Ο‚ Ξ±ΟΟ‡ΞµΞ―ΞΏΟ…. "
 
 #, fuzzy, c-format
 msgid " Cannot open pipe for reading: %s "
-msgstr " ¶νοιγμα αρχείου προς ανάγνωση ανεπιτυχής: "
+msgstr " Ξ†Ξ½ΞΏΞΉΞ³ΞΌΞ± Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… Ο€ΟΞΏΟ‚ Ξ±Ξ½Ξ¬Ξ³Ξ½Ο‰ΟƒΞ· Ξ±Ξ½ΞµΟ€ΞΉΟ„Ο…Ο‡Ξ®Ο‚: "
 
 #, c-format
 msgid " Cannot get size/permissions for %s "
@@ -46,17 +46,17 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid " %s is not a regular file "
-msgstr "Δημηουργία νέου καταλόγου"
+msgstr "Ξ”Ξ·ΞΌΞ·ΞΏΟ…ΟΞ³Ξ―Ξ± Ξ½Ξ­ΞΏΟ… ΞΊΞ±Ο„Ξ±Ξ»ΟΞ³ΞΏΟ…"
 
 #, fuzzy, c-format
 msgid " File %s is too large "
-msgstr " Αρχείο πολύ μεγάλο: "
+msgstr " Ξ‘ΟΟ‡ΞµΞ―ΞΏ Ο€ΞΏΞ»Ο ΞΌΞµΞ³Ξ¬Ξ»ΞΏ: "
 
 msgid "Macro recursion is too deep"
 msgstr ""
 
 msgid "Search"
-msgstr "Αναζήτηση"
+msgstr "Ξ‘Ξ½Ξ±Ξ¶Ξ®Ο„Ξ·ΟƒΞ·"
 
 #, c-format
 msgid " %d items found, %d bookmarks added "
@@ -66,51 +66,51 @@ msgid " Search string not found "
 msgstr ""
 
 msgid "Warning"
-msgstr "Προειδοποίηση"
+msgstr "Ξ ΟΞΏΞµΞΉΞ΄ΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ·"
 
 msgid " File has hard-links. Detach before saving? "
 msgstr ""
 
 msgid "&Yes"
-msgstr "&Ναι"
+msgstr "&ΞΞ±ΞΉ"
 
 msgid "&No"
-msgstr "&Όχι"
+msgstr "&ΞΟ‡ΞΉ"
 
 msgid "&Cancel"
-msgstr "&¶κυρο"
+msgstr "&Ξ†ΞΊΟ…ΟΞΏ"
 
 msgid "The file has been modified in the meantime. Save anyway?"
 msgstr ""
 
 #, fuzzy
 msgid " Error writing to pipe: "
-msgstr " Σφάλμα αποθήκευσης αρχείου. "
+msgstr " Ξ£Ο†Ξ¬Ξ»ΞΌΞ± Ξ±Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ·Ο‚ Ξ±ΟΟ‡ΞµΞ―ΞΏΟ…. "
 
 #, fuzzy
 msgid " Cannot open pipe for writing: "
-msgstr " ¶νοιγμα αρχείου προς ανάγνωση ανεπιτυχής: "
+msgstr " Ξ†Ξ½ΞΏΞΉΞ³ΞΌΞ± Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… Ο€ΟΞΏΟ‚ Ξ±Ξ½Ξ¬Ξ³Ξ½Ο‰ΟƒΞ· Ξ±Ξ½ΞµΟ€ΞΉΟ„Ο…Ο‡Ξ®Ο‚: "
 
 msgid "Quick save "
-msgstr "Ταχεία αποθήκευση "
+msgstr "Ξ¤Ξ±Ο‡ΞµΞ―Ξ± Ξ±Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ· "
 
 msgid "Safe save "
-msgstr "Ασφαλής αποθήκευση "
+msgstr "Ξ‘ΟƒΟ†Ξ±Ξ»Ξ®Ο‚ Ξ±Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ· "
 
 msgid "Do backups -->"
 msgstr ""
 
 msgid "&OK"
-msgstr "&Εντάξει"
+msgstr "&Ξ•Ξ½Ο„Ξ¬ΞΎΞµΞΉ"
 
 msgid "Extension:"
-msgstr "Επέκταση:"
+msgstr "Ξ•Ο€Ξ­ΞΊΟ„Ξ±ΟƒΞ·:"
 
 msgid " Edit Save Mode "
 msgstr ""
 
 msgid " Save As "
-msgstr " Αποθήκευση ως "
+msgstr " Ξ‘Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ· Ο‰Ο‚ "
 
 msgid " Enter file name: "
 msgstr ""
@@ -120,40 +120,40 @@ msgstr ""
 
 #, fuzzy
 msgid "&Overwrite"
-msgstr "Επικάλυψη"
+msgstr "Ξ•Ο€ΞΉΞΊΞ¬Ξ»Ο…ΟΞ·"
 
 msgid " Cannot save file. "
-msgstr " Σφάλμα αποθήκευσης αρχείου. "
+msgstr " Ξ£Ο†Ξ¬Ξ»ΞΌΞ± Ξ±Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ·Ο‚ Ξ±ΟΟ‡ΞµΞ―ΞΏΟ…. "
 
 msgid " Delete macro "
-msgstr " Διαγραφή μακροεντολής "
+msgstr " Ξ”ΞΉΞ±Ξ³ΟΞ±Ο†Ξ® ΞΌΞ±ΞΊΟΞΏΞµΞ½Ο„ΞΏΞ»Ξ®Ο‚ "
 
 msgid " Cannot open temp file "
-msgstr " ¶νοιγμα προσωρινού αρχείου ανεπιτυχές "
+msgstr " Ξ†Ξ½ΞΏΞΉΞ³ΞΌΞ± Ο€ΟΞΏΟƒΟ‰ΟΞΉΞ½ΞΏΟ Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… Ξ±Ξ½ΞµΟ€ΞΉΟ„Ο…Ο‡Ξ­Ο‚ "
 
 msgid " Cannot open macro file "
-msgstr " ¶νοιγμα αρχείου μακροεντολών ανεπιτυχές "
+msgstr " Ξ†Ξ½ΞΏΞΉΞ³ΞΌΞ± Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΞΌΞ±ΞΊΟΞΏΞµΞ½Ο„ΞΏΞ»ΟΞ½ Ξ±Ξ½ΞµΟ€ΞΉΟ„Ο…Ο‡Ξ­Ο‚ "
 
 msgid " Cannot overwrite macro file "
 msgstr ""
 
 msgid " Save macro "
-msgstr " Αποθήκευση μακροεντολής "
+msgstr " Ξ‘Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ· ΞΌΞ±ΞΊΟΞΏΞµΞ½Ο„ΞΏΞ»Ξ®Ο‚ "
 
 msgid " Press the macro's new hotkey: "
-msgstr " Πιέστε το νέο πλήκτρο εκτέλεσης μακροεντολής: "
+msgstr " Ξ ΞΉΞ­ΟƒΟ„Ξµ Ο„ΞΏ Ξ½Ξ­ΞΏ Ο€Ξ»Ξ®ΞΊΟ„ΟΞΏ ΞµΞΊΟ„Ξ­Ξ»ΞµΟƒΞ·Ο‚ ΞΌΞ±ΞΊΟΞΏΞµΞ½Ο„ΞΏΞ»Ξ®Ο‚: "
 
 msgid " Press macro hotkey: "
-msgstr " Πιέστε πλήκτρο μακροεντολής: "
+msgstr " Ξ ΞΉΞ­ΟƒΟ„Ξµ Ο€Ξ»Ξ®ΞΊΟ„ΟΞΏ ΞΌΞ±ΞΊΟΞΏΞµΞ½Ο„ΞΏΞ»Ξ®Ο‚: "
 
 msgid " Load macro "
-msgstr " Ανάγνωση μακροεντολής "
+msgstr " Ξ‘Ξ½Ξ¬Ξ³Ξ½Ο‰ΟƒΞ· ΞΌΞ±ΞΊΟΞΏΞµΞ½Ο„ΞΏΞ»Ξ®Ο‚ "
 
 msgid " Confirm save file? : "
-msgstr " Επιβεβαίωση αποθήκευσης αρχείου; : "
+msgstr " Ξ•Ο€ΞΉΞ²ΞµΞ²Ξ±Ξ―Ο‰ΟƒΞ· Ξ±Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ·Ο‚ Ξ±ΟΟ‡ΞµΞ―ΞΏΟ…; : "
 
 msgid " Save file "
-msgstr " Αποθήκευση αρχείου "
+msgstr " Ξ‘Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ· Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… "
 
 msgid "&Save"
 msgstr ""
@@ -165,7 +165,7 @@ msgstr ""
 
 #, fuzzy
 msgid "C&ontinue"
-msgstr "Συνέχεια"
+msgstr "Ξ£Ο…Ξ½Ξ­Ο‡ΞµΞΉΞ±"
 
 msgid "Syntax file edit"
 msgstr ""
@@ -189,62 +189,62 @@ msgid "&Local"
 msgstr ""
 
 msgid " Load "
-msgstr " Ανάγνωση "
+msgstr " Ξ‘Ξ½Ξ¬Ξ³Ξ½Ο‰ΟƒΞ· "
 
 msgid " Block is large, you may not be able to undo this action. "
 msgstr ""
 
 #, fuzzy
 msgid "Replace"
-msgstr "&Αντικατάσταση"
+msgstr "&Ξ‘Ξ½Ο„ΞΉΞΊΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ·"
 
 msgid " Replace "
-msgstr " Αντικατάσταση "
+msgstr " Ξ‘Ξ½Ο„ΞΉΞΊΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ· "
 
 #, c-format
 msgid " %ld replacements made. "
-msgstr " Πραγματοποιήθηκαν %ld αντικαταστάσεις. "
+msgstr " Ξ ΟΞ±Ξ³ΞΌΞ±Ο„ΞΏΟ€ΞΏΞΉΞ®ΞΈΞ·ΞΊΞ±Ξ½ %ld Ξ±Ξ½Ο„ΞΉΞΊΞ±Ο„Ξ±ΟƒΟ„Ξ¬ΟƒΞµΞΉΟ‚. "
 
 msgid "Quit"
-msgstr "Τέλος"
+msgstr "Ξ¤Ξ­Ξ»ΞΏΟ‚"
 
 msgid " File was modified, Save with exit? "
-msgstr " Το αρχείο τροποποιήθηκε, Αποθήκευση κατά την έξοδο; "
+msgstr " Ξ¤ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ Ο„ΟΞΏΟ€ΞΏΟ€ΞΏΞΉΞ®ΞΈΞ·ΞΊΞµ, Ξ‘Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ· ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ξ­ΞΎΞΏΞ΄ΞΏ; "
 
 #, fuzzy
 msgid "&Cancel quit"
-msgstr "Ακύρωση τέλους"
+msgstr "Ξ‘ΞΊΟΟΟ‰ΟƒΞ· Ο„Ξ­Ξ»ΞΏΟ…Ο‚"
 
 #, fuzzy
 msgid " Error "
-msgstr "Σφάλμα"
+msgstr "Ξ£Ο†Ξ¬Ξ»ΞΌΞ±"
 
 msgid " This function is not implemented. "
 msgstr ""
 
 msgid " Copy to clipboard "
-msgstr " Αντιγραφή στο τεμάχιο "
+msgstr " Ξ‘Ξ½Ο„ΞΉΞ³ΟΞ±Ο†Ξ® ΟƒΟ„ΞΏ Ο„ΞµΞΌΞ¬Ο‡ΞΉΞΏ "
 
 msgid " Unable to save to file. "
-msgstr " Αποθήκευση αρχείου ανεπιτυχής. "
+msgstr " Ξ‘Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ· Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… Ξ±Ξ½ΞµΟ€ΞΉΟ„Ο…Ο‡Ξ®Ο‚. "
 
 msgid " Cut to clipboard "
-msgstr " Αποκοπή στο τεμάχιο "
+msgstr " Ξ‘Ο€ΞΏΞΊΞΏΟ€Ξ® ΟƒΟ„ΞΏ Ο„ΞµΞΌΞ¬Ο‡ΞΉΞΏ "
 
 msgid " Goto line "
-msgstr " Επίσκεψη γραμμής "
+msgstr " Ξ•Ο€Ξ―ΟƒΞΊΞµΟΞ· Ξ³ΟΞ±ΞΌΞΌΞ®Ο‚ "
 
 msgid " Enter line: "
-msgstr " Γραμμή: "
+msgstr " Ξ“ΟΞ±ΞΌΞΌΞ®: "
 
 msgid " Save Block "
 msgstr ""
 
 msgid " Insert File "
-msgstr " Παρεμβολή αρχείου "
+msgstr " Ξ Ξ±ΟΞµΞΌΞ²ΞΏΞ»Ξ® Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… "
 
 msgid " Cannot insert file. "
-msgstr " Σφάλμα κατά την παρεμβολή αρχείου. "
+msgstr " Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ο€Ξ±ΟΞµΞΌΞ²ΞΏΞ»Ξ® Ξ±ΟΟ‡ΞµΞ―ΞΏΟ…. "
 
 msgid " Sort block "
 msgstr ""
@@ -253,19 +253,19 @@ msgid " You must first highlight a block of text. "
 msgstr ""
 
 msgid " Run Sort "
-msgstr " Εκτέλεση `sort' "
+msgstr " Ξ•ΞΊΟ„Ξ­Ξ»ΞµΟƒΞ· `sort' "
 
 msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr " Ορίσματα του `sort' (δείτε τη σελίδα man) χωρισμένα με κενά: "
+msgstr " ΞΟΞ―ΟƒΞΌΞ±Ο„Ξ± Ο„ΞΏΟ… `sort' (Ξ΄ΞµΞ―Ο„Ξµ Ο„Ξ· ΟƒΞµΞ»Ξ―Ξ΄Ξ± man) Ο‡Ο‰ΟΞΉΟƒΞΌΞ­Ξ½Ξ± ΞΌΞµ ΞΊΞµΞ½Ξ¬: "
 
 msgid " Sort "
-msgstr " Ταξινόμιση"
+msgstr " Ξ¤Ξ±ΞΎΞΉΞ½ΟΞΌΞΉΟƒΞ·"
 
 msgid " Cannot execute sort command "
-msgstr " Εκτέλεση εντολής `sort' ανεπιτυχής "
+msgstr " Ξ•ΞΊΟ„Ξ­Ξ»ΞµΟƒΞ· ΞµΞ½Ο„ΞΏΞ»Ξ®Ο‚ `sort' Ξ±Ξ½ΞµΟ€ΞΉΟ„Ο…Ο‡Ξ®Ο‚ "
 
 msgid " Sort returned non-zero: "
-msgstr " Μη μηδενικός κωδικός εξόδου από την εντολή `sort': "
+msgstr " ΞΞ· ΞΌΞ·Ξ΄ΞµΞ½ΞΉΞΊΟΟ‚ ΞΊΟ‰Ξ΄ΞΉΞΊΟΟ‚ ΞµΞΎΟΞ΄ΞΏΟ… Ξ±Ο€Ο Ο„Ξ·Ξ½ ΞµΞ½Ο„ΞΏΞ»Ξ® `sort': "
 
 msgid "Paste output of external command"
 msgstr ""
@@ -278,7 +278,7 @@ msgstr ""
 
 #, fuzzy
 msgid "Cannot execute command"
-msgstr " Εκτέλεση εντολής `sort' ανεπιτυχής "
+msgstr " Ξ•ΞΊΟ„Ξ­Ξ»ΞµΟƒΞ· ΞµΞ½Ο„ΞΏΞ»Ξ®Ο‚ `sort' Ξ±Ξ½ΞµΟ€ΞΉΟ„Ο…Ο‡Ξ®Ο‚ "
 
 msgid "Error creating script:"
 msgstr ""
@@ -296,76 +296,76 @@ msgid "Process block"
 msgstr ""
 
 msgid " Mail "
-msgstr " Αλληλογραφία "
+msgstr " Ξ‘Ξ»Ξ»Ξ·Ξ»ΞΏΞ³ΟΞ±Ο†Ξ―Ξ± "
 
 msgid " Copies to"
 msgstr ""
 
 msgid " Subject"
-msgstr " Θέμα "
+msgstr " ΞΞ­ΞΌΞ± "
 
 msgid " To"
-msgstr " Προς"
+msgstr " Ξ ΟΞΏΟ‚"
 
 msgid " mail -s <subject> -c <cc> <to>"
-msgstr " mail -s <θέμα> -c <αντίγραφα> <προς>"
+msgstr " mail -s <ΞΈΞ­ΞΌΞ±> -c <Ξ±Ξ½Ο„Ξ―Ξ³ΟΞ±Ο†Ξ±> <Ο€ΟΞΏΟ‚>"
 
 msgid " Insert Literal "
 msgstr ""
 
 msgid " Press any key: "
-msgstr " Πιέστε κάποιο πλήκτρο: "
+msgstr " Ξ ΞΉΞ­ΟƒΟ„Ξµ ΞΊΞ¬Ο€ΞΏΞΉΞΏ Ο€Ξ»Ξ®ΞΊΟ„ΟΞΏ: "
 
 msgid " Execute Macro "
-msgstr " Εκτελ. μακροεντολής"
+msgstr " Ξ•ΞΊΟ„ΞµΞ». ΞΌΞ±ΞΊΟΞΏΞµΞ½Ο„ΞΏΞ»Ξ®Ο‚"
 
 msgid "pro&Mpt on replace"
 msgstr ""
 
 msgid "replace &All"
-msgstr "αντικατάσταση ό&λων"
+msgstr "Ξ±Ξ½Ο„ΞΉΞΊΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ· Ο&Ξ»Ο‰Ξ½"
 
 msgid "All charsets"
 msgstr ""
 
 msgid "&Backwards"
-msgstr "Πρός τα &πίσω"
+msgstr "Ξ ΟΟΟ‚ Ο„Ξ± &Ο€Ξ―ΟƒΟ‰"
 
 msgid "case &Sensitive"
-msgstr "κεφαλαία/πε&ζά"
+msgstr "ΞΊΞµΟ†Ξ±Ξ»Ξ±Ξ―Ξ±/Ο€Ξµ&Ξ¶Ξ¬"
 
 msgid " Enter replacement string:"
-msgstr " Εισαγωγή ακολουθίας αντικατάστασης:"
+msgstr " Ξ•ΞΉΟƒΞ±Ξ³Ο‰Ξ³Ξ® Ξ±ΞΊΞΏΞ»ΞΏΟ…ΞΈΞ―Ξ±Ο‚ Ξ±Ξ½Ο„ΞΉΞΊΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ·Ο‚:"
 
 msgid " Enter search string:"
-msgstr " Εισαγωγή ακολουθίας προς αναζήτηση:"
+msgstr " Ξ•ΞΉΟƒΞ±Ξ³Ο‰Ξ³Ξ® Ξ±ΞΊΞΏΞ»ΞΏΟ…ΞΈΞ―Ξ±Ο‚ Ο€ΟΞΏΟ‚ Ξ±Ξ½Ξ±Ξ¶Ξ®Ο„Ξ·ΟƒΞ·:"
 
 msgid "Cancel"
-msgstr "¶κυρο"
+msgstr "Ξ†ΞΊΟ…ΟΞΏ"
 
 msgid "O&ne"
-msgstr "έ&Να"
+msgstr "Ξ­&ΞΞ±"
 
 msgid "A&ll"
-msgstr "ό&Λα"
+msgstr "Ο&Ξ›Ξ±"
 
 msgid "&Skip"
-msgstr "Προ&σπέραση"
+msgstr "Ξ ΟΞΏ&ΟƒΟ€Ξ­ΟΞ±ΟƒΞ·"
 
 msgid "&Replace"
-msgstr "&Αντικατάσταση"
+msgstr "&Ξ‘Ξ½Ο„ΞΉΞΊΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ·"
 
 msgid " Replace with: "
-msgstr " Αντικατάσταση με: "
+msgstr " Ξ‘Ξ½Ο„ΞΉΞΊΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ· ΞΌΞµ: "
 
 msgid " Confirm replace "
-msgstr " Επιβεβαίωση αντικατάστασης "
+msgstr " Ξ•Ο€ΞΉΞ²ΞµΞ²Ξ±Ξ―Ο‰ΟƒΞ· Ξ±Ξ½Ο„ΞΉΞΊΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ·Ο‚ "
 
 msgid "&Dismiss"
 msgstr ""
 
 msgid " Emacs key: "
-msgstr " Πλήκτρο Emacs: "
+msgstr " Ξ Ξ»Ξ®ΞΊΟ„ΟΞΏ Emacs: "
 
 #, c-format
 msgid ""
@@ -385,7 +385,7 @@ msgstr ""
 
 #, fuzzy
 msgid " About "
-msgstr " Τέλος "
+msgstr " Ξ¤Ξ­Ξ»ΞΏΟ‚ "
 
 msgid ""
 "\n"
@@ -399,65 +399,65 @@ msgstr ""
 
 #, fuzzy
 msgid "&Open file..."
-msgstr "¶νοιγμα με..."
+msgstr "Ξ†Ξ½ΞΏΞΉΞ³ΞΌΞ± ΞΌΞµ..."
 
 msgid "&New              C-n"
-msgstr "&Νέο                    C-n"
+msgstr "&ΞΞ­ΞΏ                    C-n"
 
 msgid "&Save              F2"
-msgstr "Απο&θήκευση             F2"
+msgstr "Ξ‘Ο€ΞΏ&ΞΈΞ®ΞΊΞµΟ…ΟƒΞ·             F2"
 
 msgid "Save &as...       F12"
-msgstr "Αποθήκευση &ως...       F12"
+msgstr "Ξ‘Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ· &Ο‰Ο‚...       F12"
 
 msgid "&Insert file...   F15"
-msgstr "&Παρεμβολή αρχείου...   F15"
+msgstr "&Ξ Ξ±ΟΞµΞΌΞ²ΞΏΞ»Ξ® Ξ±ΟΟ‡ΞµΞ―ΞΏΟ…...   F15"
 
 msgid "Copy to &file...  C-f"
-msgstr "αντιγραφή σε αρ&χείο... C-f"
+msgstr "Ξ±Ξ½Ο„ΞΉΞ³ΟΞ±Ο†Ξ® ΟƒΞµ Ξ±Ο&Ο‡ΞµΞ―ΞΏ... C-f"
 
 #, fuzzy
 msgid "&User menu...     F11"
-msgstr "&Παρεμβολή αρχείου...   F15"
+msgstr "&Ξ Ξ±ΟΞµΞΌΞ²ΞΏΞ»Ξ® Ξ±ΟΟ‡ΞµΞ―ΞΏΟ…...   F15"
 
 msgid "A&bout...            "
-msgstr "Πε&ρί...                   "
+msgstr "Ξ Ξµ&ΟΞ―...                   "
 
 msgid "&Quit             F10"
-msgstr "&Τέλος                  F10"
+msgstr "&Ξ¤Ξ­Ξ»ΞΏΟ‚                  F10"
 
 msgid "&New            C-x k"
-msgstr "&Νέο                  C-x k"
+msgstr "&ΞΞ­ΞΏ                  C-x k"
 
 msgid "Copy to &file...     "
-msgstr "αντιγραφή σε αρ&χείο       "
+msgstr "Ξ±Ξ½Ο„ΞΉΞ³ΟΞ±Ο†Ξ® ΟƒΞµ Ξ±Ο&Ο‡ΞµΞ―ΞΏ       "
 
 #, fuzzy
 msgid "&Toggle mark                 F3"
-msgstr "Απο&θήκευση             F2"
+msgstr "Ξ‘Ο€ΞΏ&ΞΈΞ®ΞΊΞµΟ…ΟƒΞ·             F2"
 
 #, fuzzy
 msgid "Mar&k columns              S-F3"
-msgstr "&Νέο                    C-n"
+msgstr "&ΞΞ­ΞΏ                    C-n"
 
 msgid "Toggle &ins/overw           Ins"
 msgstr ""
 
 #, fuzzy
 msgid "&Copy                        F5"
-msgstr "Απο&θήκευση             F2"
+msgstr "Ξ‘Ο€ΞΏ&ΞΈΞ®ΞΊΞµΟ…ΟƒΞ·             F2"
 
 #, fuzzy
 msgid "&Move                        F6"
-msgstr "Απο&θήκευση             F2"
+msgstr "Ξ‘Ο€ΞΏ&ΞΈΞ®ΞΊΞµΟ…ΟƒΞ·             F2"
 
 #, fuzzy
 msgid "&Delete                      F8"
-msgstr "Απο&θήκευση             F2"
+msgstr "Ξ‘Ο€ΞΏ&ΞΈΞ®ΞΊΞµΟ…ΟƒΞ·             F2"
 
 #, fuzzy
 msgid "C&opy to clipfile         C-Ins"
-msgstr "αντιγραφή σε αρ&χείο       "
+msgstr "Ξ±Ξ½Ο„ΞΉΞ³ΟΞ±Ο†Ξ® ΟƒΞµ Ξ±Ο&Ο‡ΞµΞ―ΞΏ       "
 
 msgid "C&ut to clipfile          S-Del"
 msgstr ""
@@ -470,35 +470,35 @@ msgstr ""
 
 #, fuzzy
 msgid "&Next bookmark                 "
-msgstr "&Νέο                    C-n"
+msgstr "&ΞΞ­ΞΏ                    C-n"
 
 #, fuzzy
 msgid "Pre&v bookmark                 "
-msgstr "Απο&θήκευση             F2"
+msgstr "Ξ‘Ο€ΞΏ&ΞΈΞ®ΞΊΞµΟ…ΟƒΞ·             F2"
 
 #, fuzzy
 msgid "&Flush bookmark                "
-msgstr "Απο&θήκευση             F2"
+msgstr "Ξ‘Ο€ΞΏ&ΞΈΞ®ΞΊΞµΟ…ΟƒΞ·             F2"
 
 #, fuzzy
 msgid "&Undo                       C-u"
-msgstr "&Νέο                    C-n"
+msgstr "&ΞΞ­ΞΏ                    C-n"
 
 #, fuzzy
 msgid "&Beginning               C-PgUp"
-msgstr "&Νέο                    C-n"
+msgstr "&ΞΞ­ΞΏ                    C-n"
 
 #, fuzzy
 msgid "&End                     C-PgDn"
-msgstr "&Νέο                    C-n"
+msgstr "&ΞΞ­ΞΏ                    C-n"
 
 #, fuzzy
 msgid "C&opy to clipfile           M-w"
-msgstr "αντιγραφή σε αρ&χείο       "
+msgstr "Ξ±Ξ½Ο„ΞΉΞ³ΟΞ±Ο†Ξ® ΟƒΞµ Ξ±Ο&Ο‡ΞµΞ―ΞΏ       "
 
 #, fuzzy
 msgid "C&ut to clipfile            C-w"
-msgstr "&Νέο                    C-n"
+msgstr "&ΞΞ­ΞΏ                    C-n"
 
 msgid "&Paste from clipfile        C-y"
 msgstr ""
@@ -532,7 +532,7 @@ msgstr ""
 
 #, fuzzy
 msgid "Encod&ing...             C-t"
-msgstr "&Νέο                    C-n"
+msgstr "&ΞΞ­ΞΏ                    C-n"
 
 msgid "Insert &literal...       C-q"
 msgstr ""
@@ -590,34 +590,34 @@ msgstr ""
 
 #, fuzzy
 msgid "Syntax &Highlighting..."
-msgstr "τονισμός σύντα&ξης"
+msgstr "Ο„ΞΏΞ½ΞΉΟƒΞΌΟΟ‚ ΟƒΟΞ½Ο„Ξ±&ΞΎΞ·Ο‚"
 
 #, fuzzy
 msgid "S&yntax file"
-msgstr " Αποθήκευση αρχείου "
+msgstr " Ξ‘Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ· Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… "
 
 #, fuzzy
 msgid "&Menu file"
-msgstr "¶νοιγμα με..."
+msgstr "Ξ†Ξ½ΞΏΞΉΞ³ΞΌΞ± ΞΌΞµ..."
 
 #, fuzzy
 msgid "Save setu&p"
-msgstr " Αποθήκευση ως "
+msgstr " Ξ‘Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ· Ο‰Ο‚ "
 
 msgid " File "
-msgstr " Αρχείο "
+msgstr " Ξ‘ΟΟ‡ΞµΞ―ΞΏ "
 
 msgid " Edit "
-msgstr " Επεξεργασία "
+msgstr " Ξ•Ο€ΞµΞΎΞµΟΞ³Ξ±ΟƒΞ―Ξ± "
 
 msgid " Sear/Repl "
-msgstr " Αναζήτηση/Αντικατάσταση"
+msgstr " Ξ‘Ξ½Ξ±Ξ¶Ξ®Ο„Ξ·ΟƒΞ·/Ξ‘Ξ½Ο„ΞΉΞΊΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ·"
 
 msgid " Command "
-msgstr " Εντολή "
+msgstr " Ξ•Ξ½Ο„ΞΏΞ»Ξ® "
 
 msgid " Options "
-msgstr "Επιλογές "
+msgstr "Ξ•Ο€ΞΉΞ»ΞΏΞ³Ξ­Ο‚ "
 
 msgid "Intuitive"
 msgstr ""
@@ -629,7 +629,7 @@ msgid "User-defined"
 msgstr ""
 
 msgid "None"
-msgstr "Κανένα"
+msgstr "ΞΞ±Ξ½Ξ­Ξ½Ξ±"
 
 msgid "Dynamic paragraphing"
 msgstr ""
@@ -647,11 +647,17 @@ msgid "Pers&istent selection"
 msgstr ""
 
 msgid "Synta&x highlighting"
-msgstr "τονισμός σύντα&ξης"
+msgstr "Ο„ΞΏΞ½ΞΉΟƒΞΌΟΟ‚ ΟƒΟΞ½Ο„Ξ±&ΞΎΞ·Ο‚"
+
+msgid "Visible tabs"
+msgstr ""
+
+msgid "Visible trailing spaces"
+msgstr ""
 
 #, fuzzy
 msgid "Save file &position"
-msgstr " Αποθήκευση αρχείου "
+msgstr " Ξ‘Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ· Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… "
 
 msgid "Confir&m before saving"
 msgstr ""
@@ -672,16 +678,16 @@ msgid "Wrap mode"
 msgstr ""
 
 msgid "Key emulation"
-msgstr "Εξομοίοση πληκτρολογίου"
+msgstr "Ξ•ΞΎΞΏΞΌΞΏΞ―ΞΏΟƒΞ· Ο€Ξ»Ξ·ΞΊΟ„ΟΞΏΞ»ΞΏΞ³Ξ―ΞΏΟ…"
 
 msgid " Editor options "
-msgstr " Επιλογές επεξεργαστή "
+msgstr " Ξ•Ο€ΞΉΞ»ΞΏΞ³Ξ­Ο‚ ΞµΟ€ΞµΞΎΞµΟΞ³Ξ±ΟƒΟ„Ξ® "
 
 msgid "Help"
-msgstr "Βοήθεια"
+msgstr "Ξ’ΞΏΞ®ΞΈΞµΞΉΞ±"
 
 msgid "Save"
-msgstr "Αποθήκευση"
+msgstr "Ξ‘Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ·"
 
 msgid "Mark"
 msgstr ""
@@ -690,13 +696,13 @@ msgid "Replac"
 msgstr ""
 
 msgid "Copy"
-msgstr "Αντιγραφή"
+msgstr "Ξ‘Ξ½Ο„ΞΉΞ³ΟΞ±Ο†Ξ®"
 
 msgid "Move"
-msgstr "Μετακίνηση"
+msgstr "ΞΞµΟ„Ξ±ΞΊΞ―Ξ½Ξ·ΟƒΞ·"
 
 msgid "Delete"
-msgstr "Διαγραφή"
+msgstr "Ξ”ΞΉΞ±Ξ³ΟΞ±Ο†Ξ®"
 
 msgid "PullDn"
 msgstr ""
@@ -893,14 +899,14 @@ msgstr ""
 
 #, fuzzy
 msgid "Other 8 bit"
-msgstr "Λοιποί"
+msgstr "Ξ›ΞΏΞΉΟ€ΞΏΞ―"
 
 msgid "Input / display codepage:"
 msgstr ""
 
 #, fuzzy
 msgid "&Select"
-msgstr "Επιλογή εικονιδίου"
+msgstr "Ξ•Ο€ΞΉΞ»ΞΏΞ³Ξ® ΞµΞΉΞΊΞΏΞ½ΞΉΞ΄Ξ―ΞΏΟ…"
 
 msgid "Use passive mode over pro&xy"
 msgstr ""
@@ -964,14 +970,14 @@ msgstr ""
 
 #, fuzzy
 msgid "Domain:"
-msgstr "Εντολή:"
+msgstr "Ξ•Ξ½Ο„ΞΏΞ»Ξ®:"
 
 #, fuzzy
 msgid "Username:"
-msgstr "Χρήστης"
+msgstr "Ξ§ΟΞ®ΟƒΟ„Ξ·Ο‚"
 
 msgid "Password:"
-msgstr "Κωδικός:"
+msgstr "ΞΟ‰Ξ΄ΞΉΞΊΟΟ‚:"
 
 #, c-format
 msgid "Password for \\\\%s\\%s"
@@ -979,6 +985,9 @@ msgstr ""
 
 #, c-format
 msgid "Warning: file %s not found\n"
+msgstr ""
+
+msgid "7-bit ASCII"
 msgstr ""
 
 #, c-format
@@ -1031,7 +1040,7 @@ msgid "&Marked all"
 msgstr ""
 
 msgid "Name"
-msgstr "Όνομα"
+msgstr "ΞΞ½ΞΏΞΌΞ±"
 
 msgid "Permissions (Octal)"
 msgstr ""
@@ -1125,11 +1134,11 @@ msgstr ""
 
 #, fuzzy
 msgid "&Case sensitive"
-msgstr "κεφαλαία/πε&ζά"
+msgstr "ΞΊΞµΟ†Ξ±Ξ»Ξ±Ξ―Ξ±/Ο€Ξµ&Ξ¶Ξ¬"
 
 #, fuzzy
 msgid "&Files only"
-msgstr "Μόνο πλή&ρεις λέξεις"
+msgstr "ΞΟΞ½ΞΏ Ο€Ξ»Ξ®&ΟΞµΞΉΟ‚ Ξ»Ξ­ΞΎΞµΞΉΟ‚"
 
 msgid " Select "
 msgstr ""
@@ -1605,7 +1614,7 @@ msgid ""
 msgstr ""
 
 msgid " Delete: "
-msgstr " Διαγραφή: "
+msgstr " Ξ”ΞΉΞ±Ξ³ΟΞ±Ο†Ξ®: "
 
 msgid "Non&e"
 msgstr ""
@@ -1740,15 +1749,15 @@ msgstr ""
 
 #, fuzzy
 msgid " Malformed regular expression "
-msgstr "&Κανονική έκφραση"
+msgstr "&ΞΞ±Ξ½ΞΏΞ½ΞΉΞΊΞ® Ξ­ΞΊΟ†ΟΞ±ΟƒΞ·"
 
 #, fuzzy
 msgid "Cas&e sensitive"
-msgstr "κεφαλαία/πε&ζά"
+msgstr "ΞΊΞµΟ†Ξ±Ξ»Ξ±Ξ―Ξ±/Ο€Ξµ&Ξ¶Ξ¬"
 
 #, fuzzy
 msgid "Case sens&itive"
-msgstr "κεφαλαία/πε&ζά"
+msgstr "ΞΊΞµΟ†Ξ±Ξ»Ξ±Ξ―Ξ±/Ο€Ξµ&Ξ¶Ξ¬"
 
 msgid "&Find recursively"
 msgstr ""
@@ -1764,7 +1773,7 @@ msgstr ""
 
 #, fuzzy
 msgid "Re&gular expression"
-msgstr "&Κανονική έκφραση"
+msgstr "&ΞΞ±Ξ½ΞΏΞ½ΞΉΞΊΞ® Ξ­ΞΊΟ†ΟΞ±ΟƒΞ·"
 
 msgid "&Tree"
 msgstr ""
@@ -1777,7 +1786,7 @@ msgstr ""
 
 #, fuzzy
 msgid "File name:"
-msgstr "Χρήστης"
+msgstr "Ξ§ΟΞ®ΟƒΟ„Ξ·Ο‚"
 
 msgid "Start at:"
 msgstr ""
@@ -2323,14 +2332,14 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid "GNU Midnight Commander %s\n"
-msgstr "Η ομάδα του Midnight Commander"
+msgstr "Ξ— ΞΏΞΌΞ¬Ξ΄Ξ± Ο„ΞΏΟ… Midnight Commander"
 
 msgid "[flags] [this_dir] [other_panel_dir]\n"
 msgstr ""
 
 #, fuzzy
 msgid "+number"
-msgstr "Αριθμός Inode"
+msgstr "Ξ‘ΟΞΉΞΈΞΌΟΟ‚ Inode"
 
 msgid "Set initial line number for the internal editor"
 msgstr ""
@@ -2412,7 +2421,7 @@ msgstr ""
 
 #, fuzzy
 msgid "Print data directory"
-msgstr "Δημηουργία νέου καταλόγου"
+msgstr "Ξ”Ξ·ΞΌΞ·ΞΏΟ…ΟΞ³Ξ―Ξ± Ξ½Ξ­ΞΏΟ… ΞΊΞ±Ο„Ξ±Ξ»ΟΞ³ΞΏΟ…"
 
 msgid "Print last working directory to specified file"
 msgstr ""
@@ -2431,7 +2440,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid "Cannot create %s directory"
-msgstr "Δημηουργία νέου καταλόγου"
+msgstr "Ξ”Ξ·ΞΌΞ·ΞΏΟ…ΟΞ³Ξ―Ξ± Ξ½Ξ­ΞΏΟ… ΞΊΞ±Ο„Ξ±Ξ»ΟΞ³ΞΏΟ…"
 
 msgid "safe de&Lete"
 msgstr ""
@@ -2515,7 +2524,7 @@ msgid "External panelize"
 msgstr ""
 
 msgid "Command"
-msgstr "Εντολή"
+msgstr "Ξ•Ξ½Ο„ΞΏΞ»Ξ®"
 
 msgid "Other command"
 msgstr ""
@@ -2564,7 +2573,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid "Usage:"
-msgstr "Χρήστης"
+msgstr "Ξ§ΟΞ®ΟƒΟ„Ξ·Ο‚"
 
 msgid "[dev]"
 msgstr ""
@@ -2579,7 +2588,7 @@ msgid "SUB-DIR"
 msgstr ""
 
 msgid "Size"
-msgstr "Μέγεθος"
+msgstr "ΞΞ­Ξ³ΞµΞΈΞΏΟ‚"
 
 msgid "MTime"
 msgstr ""
@@ -2591,7 +2600,7 @@ msgid "CTime"
 msgstr ""
 
 msgid "Permission"
-msgstr "Δικαιώματα"
+msgstr "Ξ”ΞΉΞΊΞ±ΞΉΟΞΌΞ±Ο„Ξ±"
 
 msgid "Perm"
 msgstr ""
@@ -2609,10 +2618,10 @@ msgid "GID"
 msgstr ""
 
 msgid "Owner"
-msgstr "Ιδιοκτήτης"
+msgstr "Ξ™Ξ΄ΞΉΞΏΞΊΟ„Ξ®Ο„Ξ·Ο‚"
 
 msgid "Group"
-msgstr "Ομάδα"
+msgstr "ΞΞΌΞ¬Ξ΄Ξ±"
 
 msgid "<readlink failed>"
 msgstr ""
@@ -2626,8 +2635,8 @@ msgstr[1] "%s byte"
 #, fuzzy, c-format
 msgid "%s in %d file"
 msgid_plural "%s in %d files"
-msgstr[0] "%s byte se %d αρχείο"
-msgstr[1] "%s byte se %d αρχείο"
+msgstr[0] "%s byte se %d Ξ±ΟΟ‡ΞµΞ―ΞΏ"
+msgstr[1] "%s byte se %d Ξ±ΟΟ‡ΞµΞ―ΞΏ"
 
 msgid "Unknown tag on display format: "
 msgstr ""
@@ -2639,10 +2648,10 @@ msgid " Do you really want to execute? "
 msgstr ""
 
 msgid "View"
-msgstr "Προβολή"
+msgstr "Ξ ΟΞΏΞ²ΞΏΞ»Ξ®"
 
 msgid "Edit"
-msgstr "Επεξεργασία"
+msgstr "Ξ•Ο€ΞµΞΎΞµΟΞ³Ξ±ΟƒΞ―Ξ±"
 
 msgid "RenMov"
 msgstr ""
@@ -2658,13 +2667,13 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid " Invalid token number %d "
-msgstr " ¶κυρος κωδικός "
+msgstr " Ξ†ΞΊΟ…ΟΞΏΟ‚ ΞΊΟ‰Ξ΄ΞΉΞΊΟΟ‚ "
 
 msgid "Normal"
 msgstr ""
 
 msgid "&Regular expression"
-msgstr "&Κανονική έκφραση"
+msgstr "&ΞΞ±Ξ½ΞΏΞ½ΞΉΞΊΞ® Ξ­ΞΊΟ†ΟΞ±ΟƒΞ·"
 
 msgid "Hexadecimal"
 msgstr ""
@@ -2724,7 +2733,7 @@ msgstr ""
 
 #, fuzzy
 msgid "With support for background operations\n"
-msgstr "Κατάλογος εργασιών παρασκηνίου"
+msgstr "ΞΞ±Ο„Ξ¬Ξ»ΞΏΞ³ΞΏΟ‚ ΞµΟΞ³Ξ±ΟƒΞΉΟΞ½ Ο€Ξ±ΟΞ±ΟƒΞΊΞ·Ξ½Ξ―ΞΏΟ…"
 
 msgid "With mouse support on xterm and Linux console\n"
 msgstr ""
@@ -2734,7 +2743,7 @@ msgstr ""
 
 #, fuzzy
 msgid "With support for X11 events\n"
-msgstr "Κατάλογος εργασιών παρασκηνίου"
+msgstr "ΞΞ±Ο„Ξ¬Ξ»ΞΏΞ³ΞΏΟ‚ ΞµΟΞ³Ξ±ΟƒΞΉΟΞ½ Ο€Ξ±ΟΞ±ΟƒΞΊΞ·Ξ½Ξ―ΞΏΟ…"
 
 msgid "With internationalization support\n"
 msgstr ""
@@ -2844,7 +2853,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
-msgstr "Δημηουργία νέου καταλόγου"
+msgstr "Ξ”Ξ·ΞΌΞ·ΞΏΟ…ΟΞ³Ξ―Ξ± Ξ½Ξ­ΞΏΟ… ΞΊΞ±Ο„Ξ±Ξ»ΟΞ³ΞΏΟ…"
 
 #, c-format
 msgid "Directory %s is not owned by you\n"
@@ -2875,7 +2884,7 @@ msgstr ""
 #, fuzzy
 msgid " Cannot spawn child process "
 msgstr ""
-"¶νοιγμα αρχείου %s ανεπιτυχές\n"
+"Ξ†Ξ½ΞΏΞΉΞ³ΞΌΞ± Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… %s Ξ±Ξ½ΞµΟ€ΞΉΟ„Ο…Ο‡Ξ­Ο‚\n"
 "%s"
 
 msgid "Empty output from child filter"
@@ -2927,7 +2936,7 @@ msgstr ""
 msgid ""
 " Cannot save file: \n"
 " %s "
-msgstr " Σφάλμα αποθήκευσης αρχείου. "
+msgstr " Ξ£Ο†Ξ¬Ξ»ΞΌΞ± Ξ±Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ·Ο‚ Ξ±ΟΟ‡ΞµΞ―ΞΏΟ…. "
 
 #, c-format
 msgid ""
@@ -2943,7 +2952,10 @@ msgstr ""
 
 #, fuzzy
 msgid " Invalid address "
-msgstr " ¶κυρος κωδικός "
+msgstr " Ξ†ΞΊΟ…ΟΞΏΟ‚ ΞΊΟ‰Ξ΄ΞΉΞΊΟΟ‚ "
+
+msgid "Seeking to search result"
+msgstr ""
 
 msgid "ButtonBar|Help"
 msgstr ""
@@ -3115,7 +3127,7 @@ msgid ""
 "Cannot open cpio archive\n"
 "%s"
 msgstr ""
-"¶νοιγμα αρχείου %s ανεπιτυχές\n"
+"Ξ†Ξ½ΞΏΞΉΞ³ΞΌΞ± Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… %s Ξ±Ξ½ΞµΟ€ΞΉΟ„Ο…Ο‡Ξ­Ο‚\n"
 "%s"
 
 #, c-format
@@ -3136,7 +3148,7 @@ msgid ""
 "%s\n"
 "in cpio archive\n"
 "%s"
-msgstr "Χαλασμένο αρχείο tar"
+msgstr "Ξ§Ξ±Ξ»Ξ±ΟƒΞΌΞ­Ξ½ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ tar"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
@@ -3146,7 +3158,7 @@ msgstr ""
 msgid ""
 "Unexpected end of file\n"
 "%s"
-msgstr "Απρόσμενο τέλος αρχείου tar"
+msgstr "Ξ‘Ο€ΟΟΟƒΞΌΞµΞ½ΞΏ Ο„Ξ­Ξ»ΞΏΟ‚ Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… tar"
 
 #, c-format
 msgid "Directory cache expired for %s"
@@ -3154,7 +3166,7 @@ msgstr ""
 
 #, fuzzy
 msgid "Starting linear transfer..."
-msgstr "ftpfs: ακύρωση μεταφοράς."
+msgstr "ftpfs: Ξ±ΞΊΟΟΟ‰ΟƒΞ· ΞΌΞµΟ„Ξ±Ο†ΞΏΟΞ¬Ο‚."
 
 #, c-format
 msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
@@ -3166,38 +3178,38 @@ msgstr ""
 
 #, fuzzy
 msgid "Getting file"
-msgstr "Διαγραφή αρχείου: "
+msgstr "Ξ”ΞΉΞ±Ξ³ΟΞ±Ο†Ξ® Ξ±ΟΟ‡ΞµΞ―ΞΏΟ…: "
 
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
 msgstr ""
-"¶νοιγμα αρχείου %s ανεπιτυχές\n"
+"Ξ†Ξ½ΞΏΞΉΞ³ΞΌΞ± Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… %s Ξ±Ξ½ΞµΟ€ΞΉΟ„Ο…Ο‡Ξ­Ο‚\n"
 "%s"
 
 msgid "Inconsistent extfs archive"
-msgstr "Χαλασμένο αρχείο extfs"
+msgstr "Ξ§Ξ±Ξ»Ξ±ΟƒΞΌΞ­Ξ½ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ extfs"
 
 #, fuzzy, c-format
 msgid "fish: Disconnecting from %s"
-msgstr "ftpfs: Αποσύνδεση από το %s"
+msgstr "ftpfs: Ξ‘Ο€ΞΏΟƒΟΞ½Ξ΄ΞµΟƒΞ· Ξ±Ο€Ο Ο„ΞΏ %s"
 
 msgid "fish: Waiting for initial line..."
 msgstr ""
 
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr ""
-"Με συγχωρείτε, αλλά προς το παρόν συνδέσεις με χρήση κωδικού δεν "
-"υποστηρίζονται."
+"ΞΞµ ΟƒΟ…Ξ³Ο‡Ο‰ΟΞµΞ―Ο„Ξµ, Ξ±Ξ»Ξ»Ξ¬ Ο€ΟΞΏΟ‚ Ο„ΞΏ Ο€Ξ±ΟΟΞ½ ΟƒΟ…Ξ½Ξ΄Ξ­ΟƒΞµΞΉΟ‚ ΞΌΞµ Ο‡ΟΞ®ΟƒΞ· ΞΊΟ‰Ξ΄ΞΉΞΊΞΏΟ Ξ΄ΞµΞ½ "
+"Ο…Ο€ΞΏΟƒΟ„Ξ·ΟΞ―Ξ¶ΞΏΞ½Ο„Ξ±ΞΉ."
 
 #, fuzzy
 msgid " fish: Password required for "
-msgstr " FTP: Απαιτείται κωδικός για το "
+msgstr " FTP: Ξ‘Ο€Ξ±ΞΉΟ„ΞµΞ―Ο„Ξ±ΞΉ ΞΊΟ‰Ξ΄ΞΉΞΊΟΟ‚ Ξ³ΞΉΞ± Ο„ΞΏ "
 
 #, fuzzy
 msgid "fish: Sending password..."
-msgstr "ftpfs: αποστολή κωδικού χρήστη"
+msgstr "ftpfs: Ξ±Ο€ΞΏΟƒΟ„ΞΏΞ»Ξ® ΞΊΟ‰Ξ΄ΞΉΞΊΞΏΟ Ο‡ΟΞ®ΟƒΟ„Ξ·"
 
 msgid "fish: Sending initial line..."
 msgstr ""
@@ -3207,15 +3219,15 @@ msgstr ""
 
 #, fuzzy
 msgid "fish: Setting up current directory..."
-msgstr "ftpfs: Ανάγνωση καταλόγου FTP %s..."
+msgstr "ftpfs: Ξ‘Ξ½Ξ¬Ξ³Ξ½Ο‰ΟƒΞ· ΞΊΞ±Ο„Ξ±Ξ»ΟΞ³ΞΏΟ… FTP %s..."
 
 #, fuzzy, c-format
 msgid "fish: Connected, home %s."
-msgstr "ftpfs: σύνδεση με το %s ολοκληρώθηκε"
+msgstr "ftpfs: ΟƒΟΞ½Ξ΄ΞµΟƒΞ· ΞΌΞµ Ο„ΞΏ %s ΞΏΞ»ΞΏΞΊΞ»Ξ·ΟΟΞΈΞ·ΞΊΞµ"
 
 #, fuzzy, c-format
 msgid "fish: Reading directory %s..."
-msgstr "ftpfs: Ανάγνωση καταλόγου FTP %s..."
+msgstr "ftpfs: Ξ‘Ξ½Ξ¬Ξ³Ξ½Ο‰ΟƒΞ· ΞΊΞ±Ο„Ξ±Ξ»ΟΞ³ΞΏΟ… FTP %s..."
 
 #, c-format
 msgid "%s: done."
@@ -3223,7 +3235,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid "%s: failure"
-msgstr "ftpfs: αποτυχία"
+msgstr "ftpfs: Ξ±Ο€ΞΏΟ„Ο…Ο‡Ξ―Ξ±"
 
 #, c-format
 msgid "fish: store %s: sending command..."
@@ -3234,14 +3246,14 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid "fish: storing %s %d (%lu)"
-msgstr "ftpfs: αποθήκευση αρχείου %d (%d)"
+msgstr "ftpfs: Ξ±Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ· Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… %d (%d)"
 
 msgid "zeros"
 msgstr ""
 
 #, fuzzy
 msgid "Aborting transfer..."
-msgstr "ftpfs: ακύρωση μεταφοράς."
+msgstr "ftpfs: Ξ±ΞΊΟΟΟ‰ΟƒΞ· ΞΌΞµΟ„Ξ±Ο†ΞΏΟΞ¬Ο‚."
 
 msgid "Error reported after abort."
 msgstr ""
@@ -3251,71 +3263,71 @@ msgstr ""
 
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
-msgstr "ftpfs: Αποσύνδεση από το %s"
+msgstr "ftpfs: Ξ‘Ο€ΞΏΟƒΟΞ½Ξ΄ΞµΟƒΞ· Ξ±Ο€Ο Ο„ΞΏ %s"
 
 msgid " FTP: Password required for "
-msgstr " FTP: Απαιτείται κωδικός για το "
+msgstr " FTP: Ξ‘Ο€Ξ±ΞΉΟ„ΞµΞ―Ο„Ξ±ΞΉ ΞΊΟ‰Ξ΄ΞΉΞΊΟΟ‚ Ξ³ΞΉΞ± Ο„ΞΏ "
 
 msgid "ftpfs: sending login name"
-msgstr "ftpfs: αποστολή ονόματος χρήστη"
+msgstr "ftpfs: Ξ±Ο€ΞΏΟƒΟ„ΞΏΞ»Ξ® ΞΏΞ½ΟΞΌΞ±Ο„ΞΏΟ‚ Ο‡ΟΞ®ΟƒΟ„Ξ·"
 
 msgid "ftpfs: sending user password"
-msgstr "ftpfs: αποστολή κωδικού χρήστη"
+msgstr "ftpfs: Ξ±Ο€ΞΏΟƒΟ„ΞΏΞ»Ξ® ΞΊΟ‰Ξ΄ΞΉΞΊΞΏΟ Ο‡ΟΞ®ΟƒΟ„Ξ·"
 
 #, fuzzy, c-format
 msgid "FTP: Account required for user %s"
-msgstr " FTP: Απαιτείται κωδικός για το "
+msgstr " FTP: Ξ‘Ο€Ξ±ΞΉΟ„ΞµΞ―Ο„Ξ±ΞΉ ΞΊΟ‰Ξ΄ΞΉΞΊΟΟ‚ Ξ³ΞΉΞ± Ο„ΞΏ "
 
 msgid "Account:"
 msgstr ""
 
 #, fuzzy
 msgid "ftpfs: sending user account"
-msgstr "ftpfs: αποστολή κωδικού χρήστη"
+msgstr "ftpfs: Ξ±Ο€ΞΏΟƒΟ„ΞΏΞ»Ξ® ΞΊΟ‰Ξ΄ΞΉΞΊΞΏΟ Ο‡ΟΞ®ΟƒΟ„Ξ·"
 
 msgid "ftpfs: logged in"
-msgstr "ftpfs: επιτυχής είσοδος στο σύστημα"
+msgstr "ftpfs: ΞµΟ€ΞΉΟ„Ο…Ο‡Ξ®Ο‚ ΞµΞ―ΟƒΞΏΞ΄ΞΏΟ‚ ΟƒΟ„ΞΏ ΟƒΟΟƒΟ„Ξ·ΞΌΞ±"
 
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
-msgstr "ftpfs: Εσφαλμένο όνομα/κωδικός για το χρήστη %s "
+msgstr "ftpfs: Ξ•ΟƒΟ†Ξ±Ξ»ΞΌΞ­Ξ½ΞΏ ΟΞ½ΞΏΞΌΞ±/ΞΊΟ‰Ξ΄ΞΉΞΊΟΟ‚ Ξ³ΞΉΞ± Ο„ΞΏ Ο‡ΟΞ®ΟƒΟ„Ξ· %s "
 
 msgid "ftpfs: Invalid host name."
-msgstr "ftpfs: ¶κυρο όνομα συστήματος."
+msgstr "ftpfs: Ξ†ΞΊΟ…ΟΞΏ ΟΞ½ΞΏΞΌΞ± ΟƒΟ…ΟƒΟ„Ξ®ΞΌΞ±Ο„ΞΏΟ‚."
 
 msgid "ftpfs: Invalid host address."
-msgstr "ftpfs: ¶κυρη διεύθυνση συστήματος."
+msgstr "ftpfs: Ξ†ΞΊΟ…ΟΞ· Ξ΄ΞΉΞµΟΞΈΟ…Ξ½ΟƒΞ· ΟƒΟ…ΟƒΟ„Ξ®ΞΌΞ±Ο„ΞΏΟ‚."
 
 #, c-format
 msgid "ftpfs: making connection to %s"
-msgstr "ftpfs: σύνδεση με %s σε εξέλιξη"
+msgstr "ftpfs: ΟƒΟΞ½Ξ΄ΞµΟƒΞ· ΞΌΞµ %s ΟƒΞµ ΞµΞΎΞ­Ξ»ΞΉΞΎΞ·"
 
 msgid "ftpfs: connection interrupted by user"
-msgstr "ftpfs: διακοπή σύδεσης από το χρήστη"
+msgstr "ftpfs: Ξ΄ΞΉΞ±ΞΊΞΏΟ€Ξ® ΟƒΟΞ΄ΞµΟƒΞ·Ο‚ Ξ±Ο€Ο Ο„ΞΏ Ο‡ΟΞ®ΟƒΟ„Ξ·"
 
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
-msgstr "ftpfs: ανεπιτυχής σύνδεση με τον εξυπηρέτη: %s"
+msgstr "ftpfs: Ξ±Ξ½ΞµΟ€ΞΉΟ„Ο…Ο‡Ξ®Ο‚ ΟƒΟΞ½Ξ΄ΞµΟƒΞ· ΞΌΞµ Ο„ΞΏΞ½ ΞµΞΎΟ…Ο€Ξ·ΟΞ­Ο„Ξ·: %s"
 
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
-msgstr "Αναμονή επανάληψης... %d (Control-C για ακύρωση)"
+msgstr "Ξ‘Ξ½Ξ±ΞΌΞΏΞ½Ξ® ΞµΟ€Ξ±Ξ½Ξ¬Ξ»Ξ·ΟΞ·Ο‚... %d (Control-C Ξ³ΞΉΞ± Ξ±ΞΊΟΟΟ‰ΟƒΞ·)"
 
 msgid "ftpfs: could not setup passive mode"
 msgstr ""
 
 msgid "ftpfs: aborting transfer."
-msgstr "ftpfs: ακύρωση μεταφοράς."
+msgstr "ftpfs: Ξ±ΞΊΟΟΟ‰ΟƒΞ· ΞΌΞµΟ„Ξ±Ο†ΞΏΟΞ¬Ο‚."
 
 #, c-format
 msgid "ftpfs: abort error: %s"
-msgstr "ftpfs: σφάλμα ακύρωσης: %s"
+msgstr "ftpfs: ΟƒΟ†Ξ¬Ξ»ΞΌΞ± Ξ±ΞΊΟΟΟ‰ΟƒΞ·Ο‚: %s"
 
 msgid "ftpfs: abort failed"
-msgstr "ftpfs: ακύρωση ανεπιτυχής"
+msgstr "ftpfs: Ξ±ΞΊΟΟΟ‰ΟƒΞ· Ξ±Ξ½ΞµΟ€ΞΉΟ„Ο…Ο‡Ξ®Ο‚"
 
 msgid "ftpfs: CWD failed."
-msgstr "ftpfs: ανεπιτυχές CWD (αλλαγή καταλόγου)"
+msgstr "ftpfs: Ξ±Ξ½ΞµΟ€ΞΉΟ„Ο…Ο‡Ξ­Ο‚ CWD (Ξ±Ξ»Ξ»Ξ±Ξ³Ξ® ΞΊΞ±Ο„Ξ±Ξ»ΟΞ³ΞΏΟ…)"
 
 msgid "ftpfs: couldn't resolve symlink"
 msgstr ""
@@ -3325,7 +3337,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
-msgstr "ftpfs: Ανάγνωση καταλόγου FTP %s..."
+msgstr "ftpfs: Ξ‘Ξ½Ξ¬Ξ³Ξ½Ο‰ΟƒΞ· ΞΊΞ±Ο„Ξ±Ξ»ΟΞ³ΞΏΟ… FTP %s..."
 
 msgid "(strict rfc959)"
 msgstr ""
@@ -3338,20 +3350,20 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid "ftpfs: storing file %lu (%lu)"
-msgstr "ftpfs: αποθήκευση αρχείου %d (%d)"
+msgstr "ftpfs: Ξ±Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ· Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… %d (%d)"
 
 msgid ""
 "~/.netrc file has incorrect mode.\n"
 "Remove password or correct mode."
 msgstr ""
-"Τα δικαιώματα πρόσβασης του αρχείου ~/.netrc δεν είναι σωστά.\n"
-"Μη χρησιμοποιείτε κωδικό ή διορθώστε τα δικαιώματα."
+"Ξ¤Ξ± Ξ΄ΞΉΞΊΞ±ΞΉΟΞΌΞ±Ο„Ξ± Ο€ΟΟΟƒΞ²Ξ±ΟƒΞ·Ο‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ~/.netrc Ξ΄ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ ΟƒΟ‰ΟƒΟ„Ξ¬.\n"
+"ΞΞ· Ο‡ΟΞ·ΟƒΞΉΞΌΞΏΟ€ΞΏΞΉΞµΞ―Ο„Ξµ ΞΊΟ‰Ξ΄ΞΉΞΊΟ Ξ® Ξ΄ΞΉΞΏΟΞΈΟΟƒΟ„Ξµ Ο„Ξ± Ξ΄ΞΉΞΊΞ±ΞΉΟΞΌΞ±Ο„Ξ±."
 
 msgid " MCFS "
 msgstr ""
 
 msgid " The server does not support this version "
-msgstr " Ο εξυπηρέτησ δεν υποστηρίζει την παρούσα έκδοση "
+msgstr " Ξ ΞµΞΎΟ…Ο€Ξ·ΟΞ­Ο„Ξ·Οƒ Ξ΄ΞµΞ½ Ο…Ο€ΞΏΟƒΟ„Ξ·ΟΞ―Ξ¶ΞµΞΉ Ο„Ξ·Ξ½ Ο€Ξ±ΟΞΏΟΟƒΞ± Ξ­ΞΊΞ΄ΞΏΟƒΞ· "
 
 msgid ""
 " The remote server is not running on a system port \n"
@@ -3360,10 +3372,10 @@ msgid ""
 msgstr ""
 
 msgid " MCFS Password required "
-msgstr " Απαιτείται κωδικός MCFS "
+msgstr " Ξ‘Ο€Ξ±ΞΉΟ„ΞµΞ―Ο„Ξ±ΞΉ ΞΊΟ‰Ξ΄ΞΉΞΊΟΟ‚ MCFS "
 
 msgid " Invalid password "
-msgstr " ¶κυρος κωδικός "
+msgstr " Ξ†ΞΊΟ…ΟΞΏΟ‚ ΞΊΟ‰Ξ΄ΞΉΞΊΟΟ‚ "
 
 #, c-format
 msgid " Cannot locate hostname: %s "
@@ -3375,10 +3387,10 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid " Cannot connect to server: %s "
-msgstr "ftpfs: ανεπιτυχής σύνδεση με τον εξυπηρέτη: %s"
+msgstr "ftpfs: Ξ±Ξ½ΞµΟ€ΞΉΟ„Ο…Ο‡Ξ®Ο‚ ΟƒΟΞ½Ξ΄ΞµΟƒΞ· ΞΌΞµ Ο„ΞΏΞ½ ΞµΞΎΟ…Ο€Ξ·ΟΞ­Ο„Ξ·: %s"
 
 msgid " Too many open connections "
-msgstr " Υπέρβαση ορίου συνδέσεων "
+msgstr " Ξ¥Ο€Ξ­ΟΞ²Ξ±ΟƒΞ· ΞΏΟΞ―ΞΏΟ… ΟƒΟ…Ξ½Ξ΄Ξ­ΟƒΞµΟ‰Ξ½ "
 
 #, c-format
 msgid ""
@@ -3396,7 +3408,7 @@ msgstr ""
 msgid ""
 " reconnect to %s failed\n"
 " "
-msgstr "ftpfs: ανεπιτυχής σύνδεση με τον εξυπηρέτη: %s"
+msgstr "ftpfs: Ξ±Ξ½ΞµΟ€ΞΉΟ„Ο…Ο‡Ξ®Ο‚ ΟƒΟΞ½Ξ΄ΞµΟƒΞ· ΞΌΞµ Ο„ΞΏΞ½ ΞµΞΎΟ…Ο€Ξ·ΟΞ­Ο„Ξ·: %s"
 
 msgid " Authentication failed "
 msgstr ""
@@ -3415,25 +3427,25 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid " %s removing remote file %s "
-msgstr "%s byte σε %d αρχεία"
+msgstr "%s byte ΟƒΞµ %d Ξ±ΟΟ‡ΞµΞ―Ξ±"
 
 #, fuzzy, c-format
 msgid " %s renaming files\n"
-msgstr "%s byte σε %d αρχεία"
+msgstr "%s byte ΟƒΞµ %d Ξ±ΟΟ‡ΞµΞ―Ξ±"
 
 #, c-format
 msgid ""
 "Cannot open tar archive\n"
 "%s"
 msgstr ""
-"¶νοιγμα αρχείου tar ανεπιτυχές\n"
+"Ξ†Ξ½ΞΏΞΉΞ³ΞΌΞ± Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… tar Ξ±Ξ½ΞµΟ€ΞΉΟ„Ο…Ο‡Ξ­Ο‚\n"
 "%s"
 
 msgid "Inconsistent tar archive"
-msgstr "Χαλασμένο αρχείο tar"
+msgstr "Ξ§Ξ±Ξ»Ξ±ΟƒΞΌΞ­Ξ½ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ tar"
 
 msgid "Unexpected EOF on archive file"
-msgstr "Απρόσμενο τέλος αρχείου tar"
+msgstr "Ξ‘Ο€ΟΟΟƒΞΌΞµΞ½ΞΏ Ο„Ξ­Ξ»ΞΏΟ‚ Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… tar"
 
 #, c-format
 msgid ""
@@ -3441,9 +3453,9 @@ msgid ""
 "%s\n"
 "doesn't look like a tar archive."
 msgstr ""
-"Χμμ,...\n"
-"το %s\n"
-"δε μοιάζει με αρχείο tar."
+"Ξ§ΞΌΞΌ,...\n"
+"Ο„ΞΏ %s\n"
+"Ξ΄Ξµ ΞΌΞΏΞΉΞ¬Ξ¶ΞµΞΉ ΞΌΞµ Ξ±ΟΟ‡ΞµΞ―ΞΏ tar."
 
 msgid " undelfs: error "
 msgstr ""
@@ -3479,12 +3491,12 @@ msgstr ""
 
 #, fuzzy
 msgid " Ext2lib error "
-msgstr " Σφάλμα "
+msgstr " Ξ£Ο†Ξ¬Ξ»ΞΌΞ± "
 
 #, fuzzy, c-format
 msgid " Cannot open file %s "
 msgstr ""
-"¶νοιγμα αρχείου %s ανεπιτυχές\n"
+"Ξ†Ξ½ΞΏΞΉΞ³ΞΌΞ± Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… %s Ξ±Ξ½ΞµΟ€ΞΉΟ„Ο…Ο‡Ξ­Ο‚\n"
 "%s"
 
 msgid "undelfs: reading inode bitmap..."
@@ -3528,20 +3540,20 @@ msgstr ""
 
 #, fuzzy
 #~ msgid " Replacement too long. "
-#~ msgstr " Εισαγωγή ακολουθίας αντικατάστασης:"
+#~ msgstr " Ξ•ΞΉΟƒΞ±Ξ³Ο‰Ξ³Ξ® Ξ±ΞΊΞΏΞ»ΞΏΟ…ΞΈΞ―Ξ±Ο‚ Ξ±Ξ½Ο„ΞΉΞΊΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ·Ο‚:"
 
 #, fuzzy
 #~ msgid "Invalid hex search expression"
-#~ msgstr " Κανονική έκφραση "
+#~ msgstr " ΞΞ±Ξ½ΞΏΞ½ΞΉΞΊΞ® Ξ­ΞΊΟ†ΟΞ±ΟƒΞ· "
 
 #~ msgid "%s bytes in %d files"
-#~ msgstr "%s byte σε %d αρχεία"
+#~ msgstr "%s byte ΟƒΞµ %d Ξ±ΟΟ‡ΞµΞ―Ξ±"
 
 #~ msgid " Cannot open file for reading: "
-#~ msgstr " ¶νοιγμα αρχείου προς ανάγνωση ανεπιτυχής: "
+#~ msgstr " Ξ†Ξ½ΞΏΞΉΞ³ΞΌΞ± Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… Ο€ΟΞΏΟ‚ Ξ±Ξ½Ξ¬Ξ³Ξ½Ο‰ΟƒΞ· Ξ±Ξ½ΞµΟ€ΞΉΟ„Ο…Ο‡Ξ®Ο‚: "
 
 #~ msgid " Not an ordinary file: "
-#~ msgstr " Μη κανονικό αρχείο: "
+#~ msgstr " ΞΞ· ΞΊΞ±Ξ½ΞΏΞ½ΞΉΞΊΟ Ξ±ΟΟ‡ΞµΞ―ΞΏ: "
 
 #~ msgid "Col %d"
-#~ msgstr "Στήλη %d"
+#~ msgstr "Ξ£Ο„Ξ®Ξ»Ξ· %d"

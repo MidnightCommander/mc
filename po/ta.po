@@ -5,13 +5,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-30 19:39+0200\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-07-09 17:07+0300\n"
 "PO-Revision-Date: 2000-10-26 11:00 CST\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil <ubuntu-l10n-tam@lists.ubuntu.com>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=TSCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid " Choose syntax highlighting "
@@ -19,17 +19,17 @@ msgstr ""
 
 #, fuzzy
 msgid "< Auto >"
-msgstr " └№╚в "
+msgstr " рокро▒рпНро▒ро┐ "
 
 msgid "< Reload Current Syntax >"
 msgstr ""
 
 #, fuzzy, c-format
 msgid " Cannot open %s for reading "
-msgstr "з╕бЇи└ ┼б║вЇ└╛Ё╠ ╛в╚ь╕ ╙╩┬┼в°и─: "
+msgstr "роХрпЛрокрпНрокрпИ ро╡ро╛роЪро┐рокрпНрокродроЯрпНроХрпБ родро┐ро▒роХрпНроХ роорпБроЯро┐ропро╡ро┐ро▓рпНро▓рпИ: "
 
 msgid "Error"
-msgstr "└ви╞"
+msgstr "рокро┐ро┤рпИ"
 
 #, c-format
 msgid " Error reading from pipe: %s "
@@ -37,47 +37,47 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid " Cannot open pipe for reading: %s "
-msgstr "з╕бЇи└ ┼б║вЇ└╛Ё╠ ╛в╚ь╕ ╙╩┬┼в°и─: "
+msgstr "роХрпЛрокрпНрокрпИ ро╡ро╛роЪро┐рокрпНрокродроЯрпНроХрпБ родро┐ро▒роХрпНроХ роорпБроЯро┐ропро╡ро┐ро▓рпНро▓рпИ: "
 
 #, fuzzy, c-format
 msgid " Cannot get size/permissions for %s "
-msgstr " нє╛ з╕бЇ└в¤ л╟╫/л█┴╛в ╛╕┼° ╕ви╝ь╕ ╙╩┬б╨: "
+msgstr " роЗроирпНрод роХрпЛрокрпНрокро┐ройрпН роЕро│ро╡рпБ/роЕройрпБроородро┐ родроХро╡ро▓рпН роХро┐роЯрпИроХрпНроХ роорпБроЯро┐ропро╛родрпБ: "
 
 #, fuzzy, c-format
 msgid " %s is not a regular file "
-msgstr "╥╛в┬ ╙и╔┬ї ┤╔и╚Ї └и╝ь╠ї"
+msgstr "рокрпБродро┐роп роорпБройрпИропроорпН роТройро▒рпИрокрпН рокроЯрпИроХрпНроХрпБроорпН"
 
 #, fuzzy, c-format
 msgid " File %s is too large "
-msgstr " нє╛ з╕бЇ╥ ┴в╕Ї ж└├в┬╨: "
+msgstr " роЗроирпНрод роХрпЛрокрпНрокрпБ рооро┐роХрокрпН рокрпЖро░ро┐ропродрпБ: "
 
 msgid "Macro recursion is too deep"
 msgstr ""
 
 msgid "Search"
-msgstr "з╛╬"
+msgstr "родрпЗроЯрпБ"
 
 #, c-format
 msgid " %d items found, %d bookmarks added "
-msgstr " %d ╕ё╬└в╩ь╕Ї └Ё╝╔, %d ╥Є╛╕╠╚в╕√ з║ўь╕Ї└Ё╝╔ "
+msgstr " %d роХрогрпНроЯрпБрокро┐роЯро┐роХрпНроХрокрпН рокроЯрпНроЯрой, %d рокрпБродрпНродроХроХрпБро▒ро┐роХро│рпН роЪрпЗро░рпНроХрпНроХрокрпНрокроЯрпНроЯрой "
 
 msgid " Search string not found "
 msgstr ""
 
 msgid "Warning"
-msgstr "▒ю║бвьи╕"
+msgstr "роОроЪрпНроЪро╛ро┐роХрпНроХрпИ"
 
 msgid " File has hard-links. Detach before saving? "
 msgstr ""
 
 msgid "&Yes"
-msgstr "&мї"
+msgstr "&роЖроорпН"
 
 msgid "&No"
-msgstr "&н°и─"
+msgstr "&роЗро▓рпНро▓рпИ"
 
 msgid "&Cancel"
-msgstr "&├Є╨"
+msgstr "&ро░родрпНродрпБ"
 
 msgid "The file has been modified in the meantime. Save anyway?"
 msgstr ""
@@ -89,68 +89,68 @@ msgid " Cannot open pipe for writing: "
 msgstr ""
 
 msgid "Quick save "
-msgstr "┼ви├┼б╔ з║┴вЇ╥ "
+msgstr "ро╡ро┐ро░рпИро╡ро╛рой роЪрпЗрооро┐рокрпНрокрпБ "
 
 msgid "Safe save "
-msgstr "└Є╛в├┴б╔ з║┴вЇ╥ "
+msgstr "рокродрпНродро┐ро░рооро╛рой роЪрпЗрооро┐рокрпНрокрпБ "
 
 msgid "Do backups -->"
-msgstr "╕бЇ╥ ж║Ў -->"
+msgstr "роХро╛рокрпНрокрпБ роЪрпЖропрпН -->"
 
 msgid "&OK"
-msgstr "&║├в"
+msgstr "&роЪро░ро┐"
 
 msgid "Extension:"
-msgstr "┐гЁ╩Ї╥:"
+msgstr "роирпАроЯрпНроЯро┐рокрпНрокрпБ:"
 
 msgid " Edit Save Mode "
-msgstr " з║┴вЇ╥ ╙и╚и┴и┬ └╛в "
+msgstr " роЪрпЗрооро┐рокрпНрокрпБ роорпБро▒рпИроорпИропрпИ рокродро┐ "
 
 msgid " Save As "
-msgstr " з┼┌ ж└┬├в° з║┴в "
+msgstr " ро╡рпЗро▒рпБ рокрпЖропро░ро┐ро▓рпН роЪрпЗрооро┐ "
 
 msgid " Enter file name: "
 msgstr ""
 
 msgid " A file already exists with this name. "
-msgstr " нє╛ ж└┬├в° з╕бЇ╥ ┤¤┌ н╒ь╕в¤╚╨. "
+msgstr " роЗроирпНрод рокрпЖропро░ро┐ро▓рпН роХрпЛрокрпНрокрпБ роТройрпНро▒рпБ роЗро░рпБроХрпНроХро┐ройрпНро▒родрпБ. "
 
 #, fuzzy
 msgid "&Overwrite"
-msgstr "з┴° ▒╪╨"
+msgstr "роорпЗро▓рпН роОро┤рпБродрпБ"
 
 msgid " Cannot save file. "
-msgstr " з╕бЇи└ з║┴вь╠ї з└б╨ └ви╞. "
+msgstr " роХрпЛрокрпНрокрпИ роЪрпЗрооро┐роХрпНроХрпБроорпН рокрпЛродрпБ рокро┐ро┤рпИ. "
 
 msgid " Delete macro "
-msgstr " ж└╒ї-┐в├и─ ┐гь╠"
+msgstr " рокрпЖро░рпБроорпН-роиро┐ро░ро▓рпИ роирпАроХрпНроХрпБ"
 
 msgid " Cannot open temp file "
-msgstr " temp з╕бЇи└ ╛в╚ь╠ї з└б╨ └ви╞. "
+msgstr " temp роХрпЛрокрпНрокрпИ родро┐ро▒роХрпНроХрпБроорпН рокрпЛродрпБ рокро┐ро┤рпИ. "
 
 msgid " Cannot open macro file "
-msgstr " ж└╒ї-┐в├° з╕бЇи└ ╛в╚ь╠ї з└б╨ └ви╞. "
+msgstr " рокрпЖро░рпБроорпН-роиро┐ро░ро▓рпН роХрпЛрокрпНрокрпИ родро┐ро▒роХрпНроХрпБроорпН рокрпЛродрпБ рокро┐ро┤рпИ. "
 
 msgid " Cannot overwrite macro file "
-msgstr " ж└╒ї-┐в├° з╕бЇи└ з┴° ▒╪╨ї з└б╨ └ви╞. "
+msgstr " рокрпЖро░рпБроорпН-роиро┐ро░ро▓рпН роХрпЛрокрпНрокрпИ роорпЗро▓рпН роОро┤рпБродрпБроорпН рокрпЛродрпБ рокро┐ро┤рпИ. "
 
 msgid " Save macro "
-msgstr " ж└╒ї-┐в├и─ з║┴в "
+msgstr " рокрпЖро░рпБроорпН-роиро┐ро░ро▓рпИ роЪрпЗрооро┐ "
 
 msgid " Press the macro's new hotkey: "
 msgstr ""
 
 msgid " Press macro hotkey: "
-msgstr "ж└╒ ┐в├° ж┼їи┴ ┼ви║и┬ л╪Є╨: "
+msgstr "рокрпЖро░рпБ роиро┐ро░ро▓рпН ро╡рпЖроорпНроорпИ ро╡ро┐роЪрпИропрпИ роЕро┤рпБродрпНродрпБ: "
 
 msgid " Load macro "
-msgstr " ж└╒ї-┐в├и─ ▓№┌ "
+msgstr " рокрпЖро░рпБроорпН-роиро┐ро░ро▓рпИ роПро▒рпНро▒рпБ "
 
 msgid " Confirm save file? : "
-msgstr " з╕бЇ╥ з║┴вЇи└ п┌╛вЇ└╬Є╨? : "
+msgstr " роХрпЛрокрпНрокрпБ роЪрпЗрооро┐рокрпНрокрпИ роЙро▒рпБродро┐рокрпНрокроЯрпБродрпНродрпБ? : "
 
 msgid " Save file "
-msgstr " з╕бЇи└ з║┴в "
+msgstr " роХрпЛрокрпНрокрпИ роЪрпЗрооро┐ "
 
 msgid "&Save"
 msgstr ""
@@ -159,12 +159,12 @@ msgid ""
 " Current text was modified without a file save. \n"
 " Continue discards these changes. "
 msgstr ""
-" з╕бЇи└ з║┴вь╕б┴° нє╛ пи├ ┴б№╚Ї└Ё╝╨. \n"
-" ж╛б╝ўє╛б°, ┴б╚╚э╕√ ┼г║Ї└╬ї. "
+" роХрпЛрокрпНрокрпИ роЪрпЗрооро┐роХрпНроХро╛рооро▓рпН роЗроирпНрод роЙро░рпИ рооро╛ро▒рпНро▒рокрпНрокроЯрпНроЯродрпБ. \n"
+" родрпКроЯро░рпНроирпНродро╛ро▓рпН, рооро╛ро▒ро▒роЩрпНроХро│рпН ро╡рпАроЪрокрпНрокроЯрпБроорпН. "
 
 #, fuzzy
 msgid "C&ontinue"
-msgstr "ж╛б╝ўє╨ ж║°"
+msgstr "родрпКроЯро░рпНроирпНродрпБ роЪрпЖро▓рпН"
 
 msgid "Syntax file edit"
 msgstr ""
@@ -188,80 +188,80 @@ msgid "&Local"
 msgstr ""
 
 msgid " Load "
-msgstr " ▓№┌ "
+msgstr " роПро▒рпНро▒рпБ "
 
 msgid " Block is large, you may not be able to undo this action. "
-msgstr " ж╛б╠╛в ┴в╕Ї ж└├в┬╨, нє╛ ж║┬и─ ╕┼в╞ ╙╩┬б┴° н╒ь╕─бї. "
+msgstr " родрпКроХрпБродро┐ рооро┐роХрокрпН рокрпЖро░ро┐ропродрпБ, роЗроирпНрод роЪрпЖропро▓рпИ роХро╡ро┐ро┤ роорпБроЯро┐ропро╛рооро▓рпН роЗро░рпБроХрпНроХро▓ро╛роорпН. "
 
 #, fuzzy
 msgid "Replace"
-msgstr "&┴б№┌"
+msgstr "&рооро╛ро▒рпНро▒рпБ"
 
 msgid " Replace "
-msgstr " ┴б№┌ "
+msgstr " рооро╛ро▒рпНро▒рпБ "
 
 #, c-format
 msgid " %ld replacements made. "
-msgstr " %ld ┴б№╚э╕√ ж║Ў┬Ї└Ё╝╔. "
+msgstr " %ld рооро╛ро▒рпНро▒роЩрпНроХро│рпН роЪрпЖропрпНропрокрпНрокроЯрпНроЯрой. "
 
 msgid "Quit"
 msgstr ""
 
 msgid " File was modified, Save with exit? "
-msgstr " з╕бЇ╥ ┴б№╚Ї└Ё╝╨, з║┴вЄ╨ ж┼╟вз┬┌? "
+msgstr " роХрпЛрокрпНрокрпБ рооро╛ро▒рпНро▒рокрпНрокроЯрпНроЯродрпБ, роЪрпЗрооро┐родрпНродрпБ ро╡рпЖро│ро┐ропрпЗро▒рпБ? "
 
 #, fuzzy
 msgid "&Cancel quit"
-msgstr "ж┼╟вз┬№╚и╟ ├Є╨ ж║Ў"
+msgstr "ро╡рпЖро│ро┐ропрпЗро▒рпНро▒ро│рпИ ро░родрпНродрпБ роЪрпЖропрпН"
 
 #, fuzzy
 msgid " Error "
-msgstr "└ви╞"
+msgstr "рокро┐ро┤рпИ"
 
 msgid " This function is not implemented. "
 msgstr ""
 
 msgid " Copy to clipboard "
-msgstr " └в╩Ї╥Ї └─и╕ь╠ ┐╕° "
+msgstr " рокро┐роЯро┐рокрпНрокрпБрокрпН рокро▓роХрпИроХрпНроХрпБ роироХро▓рпН "
 
 msgid " Unable to save to file. "
-msgstr " з╕бЇ╥ь╠ з║┴вь╕ ╙╩┬┼в°и─. "
+msgstr " роХрпЛрокрпНрокрпБроХрпНроХрпБ роЪрпЗрооро┐роХрпНроХ роорпБроЯро┐ропро╡ро┐ро▓рпНро▓рпИ. "
 
 msgid " Cut to clipboard "
-msgstr " └в╩Ї╥Ї └─и╕ь╠ ж┼Ё╬"
+msgstr " рокро┐роЯро┐рокрпНрокрпБрокрпН рокро▓роХрпИроХрпНроХрпБ ро╡рпЖроЯрпНроЯрпБ"
 
 msgid " Goto line "
-msgstr " ┼бви║ь╠Ї з└б "
+msgstr " ро╡ро╛ро┐роЪрпИроХрпНроХрпБрокрпН рокрпЛ "
 
 msgid " Enter line: "
-msgstr " ┼бви║и┬ п√╟г╬: "
+msgstr " ро╡ро╛ро┐роЪрпИропрпИ роЙро│рпНро│рпАроЯрпБ: "
 
 msgid " Save Block "
-msgstr " ж╛б╠╛ви┬ з║┴в "
+msgstr " родрпКроХрпБродро┐ропрпИ роЪрпЗрооро┐ "
 
 msgid " Insert File "
-msgstr " з╕бЇи└ ж║╒╠ "
+msgstr " роХрпЛрокрпНрокрпИ роЪрпЖро░рпБроХрпБ "
 
 msgid " Cannot insert file. "
-msgstr " з╕бЇи└ ж║╒╠ї з└б╨ └ви╞. "
+msgstr " роХрпЛрокрпНрокрпИ роЪрпЖро░рпБроХрпБроорпН рокрпЛродрпБ рокро┐ро┤рпИ. "
 
 msgid " Sort block "
-msgstr " ж╛б╠╛ви┬ ┼бви║┬бь╠ "
+msgstr " родрпКроХрпБродро┐ропрпИ ро╡ро╛ро┐роЪрпИропро╛роХрпНроХрпБ "
 
 msgid " You must first highlight a block of text. "
-msgstr " ┐гэ╕√ ╙╛° пи├ ж╛б╠╛ви┬ з╛ў╫ ж║Ў┬ з┼ё╬ї. "
+msgstr " роирпАроЩрпНроХро│рпН роорпБродро▓рпН роЙро░рпИ родрпКроХрпБродро┐ропрпИ родрпЗро░рпНро╡рпБ роЪрпЖропрпНроп ро╡рпЗрогрпНроЯрпБроорпН. "
 
 msgid " Run Sort "
-msgstr " ┼бви║┬бь╠╛и─ н┬ь╠ "
+msgstr " ро╡ро╛ро┐роЪрпИропро╛роХрпНроХрпБродро▓рпИ роЗропроХрпНроХрпБ "
 
 msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr " ж┼ё╜ви╝ж┼╟в┬б° └в├вЄ╛ ┼бви║┬бь╠ї ┼в╒Ї└Єз╛ў╫╕и╟ п√╟г╬ (п╛┼в └ь╕Єи╛Ї └бў): "
+msgstr " ро╡рпЖрогрпНрогро┐роЯрпИро╡рпЖро│ро┐ропро╛ро▓рпН рокро┐ро░ро┐родрпНрод ро╡ро╛ро┐роЪрпИропро╛роХрпНроХрпБроорпН ро╡ро┐ро░рпБрокрпНрокродрпНродрпЗро░рпНро╡рпБроХро│рпИ роЙро│рпНро│рпАроЯрпБ (роЙродро╡ро┐ рокроХрпНроХродрпНродрпИрокрпН рокро╛ро░рпН): "
 
 msgid " Sort "
-msgstr " ┼бви║┬бь╠ "
+msgstr " ро╡ро╛ро┐роЪрпИропро╛роХрпНроХрпБ "
 
 msgid " Cannot execute sort command "
-msgstr " ┼бви║┬бь╠ї ╕Ё╝и╟и┬ н┬ь╠ї з└б╨ └ви╞ "
+msgstr " ро╡ро╛ро┐роЪрпИропро╛роХрпНроХрпБроорпН роХроЯрпНроЯро│рпИропрпИ роЗропроХрпНроХрпБроорпН рокрпЛродрпБ рокро┐ро┤рпИ "
 
 msgid " Sort returned non-zero: "
 msgstr ""
@@ -277,7 +277,7 @@ msgstr ""
 
 #, fuzzy
 msgid "Cannot execute command"
-msgstr " ┼бви║┬бь╠ї ╕Ё╝и╟и┬ н┬ь╠ї з└б╨ └ви╞ "
+msgstr " ро╡ро╛ро┐роЪрпИропро╛роХрпНроХрпБроорпН роХроЯрпНроЯро│рпИропрпИ роЗропроХрпНроХрпБроорпН рокрпЛродрпБ рокро┐ро┤рпИ "
 
 msgid "Error creating script:"
 msgstr ""
@@ -295,76 +295,76 @@ msgid "Process block"
 msgstr ""
 
 msgid " Mail "
-msgstr " ля║° "
+msgstr " роЕроЮрпНроЪро▓рпН "
 
 msgid " Copies to"
-msgstr " ┐╕╓ї н╝ї"
+msgstr " роироХро▓рпБроорпН роЗроЯроорпН"
 
 msgid " Subject"
-msgstr " ┼вД┬ї"
+msgstr " ро╡ро┐ро╖ропроорпН"
 
 msgid " To"
-msgstr " з┐бь╕в"
+msgstr " роирпЛроХрпНроХро┐"
 
 msgid " mail -s <subject> -c <cc> <to>"
-msgstr " ля║° -s <┼вД┬ї> -c <cc> <з┐бь╕в>"
+msgstr " роЕроЮрпНроЪро▓рпН -s <ро╡ро┐ро╖ропроорпН> -c <cc> <роирпЛроХрпНроХро┐>"
 
 msgid " Insert Literal "
-msgstr "┐ви─пи├ ж║╒╠ "
+msgstr "роиро┐ро▓рпИроЙро░рпИ роЪрпЖро░рпБроХрпБ "
 
 msgid " Press any key: "
-msgstr "▓╛б┼╨ ┤╒ ┼ви║и┬ л╪Є╨: "
+msgstr "роПродро╛ро╡родрпБ роТро░рпБ ро╡ро┐роЪрпИропрпИ роЕро┤рпБродрпНродрпБ: "
 
 msgid " Execute Macro "
-msgstr " ж└╒ ┐в├и─ ж║┬°└╬Є╨ "
+msgstr " рокрпЖро░рпБ роиро┐ро░ро▓рпИ роЪрпЖропро▓рпНрокроЯрпБродрпНродрпБ "
 
 msgid "pro&Mpt on replace"
-msgstr "┴б№┌їз└б╨ р&ё╬"
+msgstr "рооро╛ро▒рпНро▒рпБроорпНрокрпЛродрпБ родрпВ&рогрпНроЯрпБ"
 
 msgid "replace &All"
-msgstr "ли╔Єи╛╘ї &┴б№┌"
+msgstr "роЕройрпИродрпНродрпИропрпБроорпН &рооро╛ро▒рпНро▒рпБ"
 
 msgid "All charsets"
 msgstr ""
 
 msgid "&Backwards"
-msgstr "&└в¤з╔бь╕ї"
+msgstr "&рокро┐ройрпНройрпЛроХрпНроХроорпН"
 
 msgid "case &Sensitive"
 msgstr ""
 
 msgid " Enter replacement string:"
-msgstr " ┴б№╚° ║├Єи╛ ╤и╞┼в╬:"
+msgstr " рооро╛ро▒рпНро▒ро▓рпН роЪро░родрпНродрпИ роирпБро┤рпИро╡ро┐роЯрпБ:"
 
 msgid " Enter search string:"
-msgstr " з╛╬┼╛Ёь╠ ║├Єи╛ ╤и╞┼в╬:"
+msgstr " родрпЗроЯрпБро╡родроЯрпНроХрпНроХрпБ роЪро░родрпНродрпИ роирпБро┤рпИро╡ро┐роЯрпБ:"
 
 msgid "Cancel"
-msgstr "├Є╨"
+msgstr "ро░родрпНродрпБ"
 
 msgid "O&ne"
-msgstr "┤&¤┌"
+msgstr "роТ&ройрпНро▒рпБ"
 
 msgid "A&ll"
-msgstr "ли╔Є&╨ї"
+msgstr "роЕройрпИродрпН&родрпБроорпН"
 
 msgid "&Skip"
-msgstr "&╛┼вў"
+msgstr "&родро╡ро┐ро░рпН"
 
 msgid "&Replace"
-msgstr "&┴б№┌"
+msgstr "&рооро╛ро▒рпНро▒рпБ"
 
 msgid " Replace with: "
-msgstr " ни╛ и┼Є╨ ┴б№┌: "
+msgstr " роЗродрпИ ро╡рпИродрпНродрпБ рооро╛ро▒рпНро▒рпБ: "
 
 msgid " Confirm replace "
-msgstr " ┴б№┌╛и─ п┌╛вЇ└╬Є╨ "
+msgstr " рооро╛ро▒рпНро▒рпБродро▓рпИ роЙро▒рпБродро┐рокрпНрокроЯрпБродрпНродрпБ "
 
 msgid "&Dismiss"
 msgstr ""
 
 msgid " Emacs key: "
-msgstr "  Emacs ┼ви║:"
+msgstr "  Emacs ро╡ро┐роЪрпИ:"
 
 #, c-format
 msgid ""
@@ -383,7 +383,7 @@ msgid "&Ignore lock"
 msgstr ""
 
 msgid " About "
-msgstr " └№╚в "
+msgstr " рокро▒рпНро▒ро┐ "
 
 msgid ""
 "\n"
@@ -397,134 +397,134 @@ msgstr ""
 "\n"
 "                Cooledit  v3.11.5\n"
 "\n"
-"┐╕° ╕бЇ╥ (C) 1996 н─┼║Ї ж┴¤ж└б╒√ ┐в┌┼╔ї\n"
+"роироХро▓рпН роХро╛рокрпНрокрпБ (C) 1996 роЗро▓ро╡роЪрокрпН роорпЖройрпНрокрпКро░рпБро│рпН роиро┐ро▒рпБро╡ройроорпН\n"
 "\n"
-"    Midnight Commanderь╕б╕ ▒╪╛Ї└Ё╝ ╡ў\n"
-"        └┬╔ў з╛б╞и┴┬б╔ пи├ └╛вЇ└б¤.\n"
+"    Midnight CommanderроХрпНроХро╛роХ роОро┤рпБродрокрпНрокроЯрпНроЯ роУро░рпН\n"
+"        рокропройро░рпН родрпЛро┤роорпИропро╛рой роЙро░рпИ рокродро┐рокрпНрокро╛ройрпН.\n"
 
 #, fuzzy
 msgid "&Open file..."
-msgstr "ни╛ и┼Є╨ ╛в╚..."
+msgstr "роЗродрпИ ро╡рпИродрпНродрпБ родро┐ро▒..."
 
 msgid "&New              C-n"
-msgstr "&╥╛в┬╨            C-n"
+msgstr "&рокрпБродро┐ропродрпБ            C-n"
 
 msgid "&Save              F2"
-msgstr "&з║┴в              F2"
+msgstr "&роЪрпЗрооро┐              F2"
 
 msgid "Save &as...       F12"
-msgstr "з┼┌ &ж└┬├в° з║┴в...  F12"
+msgstr "ро╡рпЗро▒рпБ &рокрпЖропро░ро┐ро▓рпН роЪрпЗрооро┐...  F12"
 
 msgid "&Insert file...   F15"
-msgstr "&з╕бЇи└ ж║╒╠... F15"
+msgstr "&роХрпЛрокрпНрокрпИ роЪрпЖро░рпБроХрпБ... F15"
 
 msgid "Copy to &file...  C-f"
-msgstr "з╕бЇ╥ь╠ &┐╕°... C-f"
+msgstr "роХрпЛрокрпНрокрпБроХрпНроХрпБ &роироХро▓рпН... C-f"
 
 msgid "&User menu...     F11"
-msgstr "&└┬╔ў └Ё╩...       F11"
+msgstr "&рокропройро░рпН рокроЯрпНроЯро┐...       F11"
 
 msgid "A&bout...            "
-msgstr "└&№╚в...              "
+msgstr "рок&ро▒рпНро▒ро┐...              "
 
 msgid "&Quit             F10"
-msgstr "&ж┼╟вз┬┌         F10"
+msgstr "&ро╡рпЖро│ро┐ропрпЗро▒рпБ         F10"
 
 msgid "&New            C-x k"
-msgstr "&╥╛в┬╨           C-x k"
+msgstr "&рокрпБродро┐ропродрпБ           C-x k"
 
 msgid "Copy to &file...     "
-msgstr "з╕бЇ╥ь╠ &┐╕°...    "
+msgstr "роХрпЛрокрпНрокрпБроХрпНроХрпБ &роироХро▓рпН...    "
 
 #, fuzzy
 msgid "&Toggle mark                 F3"
-msgstr "╠╚в н╒┐ви─ &┴б№╚° F3"
+msgstr "роХрпБро▒ро┐ роЗро░рпБроиро┐ро▓рпИ &рооро╛ро▒рпНро▒ро▓рпН F3"
 
 #, fuzzy
 msgid "Mar&k columns              S-F3"
-msgstr "ж┐╬┼бви║╕и╟ ╠╚в┬в╬ S-F3"
+msgstr "роирпЖроЯрпБро╡ро╛ро┐роЪрпИроХро│рпИ роХрпБро▒ро┐ропро┐роЯрпБ S-F3"
 
 #, fuzzy
 msgid "Toggle &ins/overw           Ins"
-msgstr "&Ins/overw н╒┐ви─ &┴б№┌"
+msgstr "&Ins/overw роЗро░рпБроиро┐ро▓рпИ &рооро╛ро▒рпНро▒рпБ"
 
 #, fuzzy
 msgid "&Copy                        F5"
-msgstr "&┐╕°               F5"
+msgstr "&роироХро▓рпН               F5"
 
 #, fuzzy
 msgid "&Move                        F6"
-msgstr "┐&╕ў               F6"
+msgstr "рои&роХро░рпН               F6"
 
 #, fuzzy
 msgid "&Delete                      F8"
-msgstr "&┐гь╠             F8"
+msgstr "&роирпАроХрпНроХрпБ             F8"
 
 #, fuzzy
 msgid "C&opy to clipfile         C-Ins"
-msgstr "з╕бЇ╥ь╠ &┐╕°...    "
+msgstr "роХрпЛрокрпНрокрпБроХрпНроХрпБ &роироХро▓рпН...    "
 
 #, fuzzy
 msgid "C&ut to clipfile          S-Del"
-msgstr "&┼бви║ь╠Ї з└б...       M-l"
+msgstr "&ро╡ро╛ро┐роЪрпИроХрпНроХрпБрокрпН рокрпЛ...       M-l"
 
 msgid "&Paste from clipfile      S-Ins"
 msgstr ""
 
 #, fuzzy
 msgid "Toggle bookmar&k               "
-msgstr "╠╚в н╒┐ви─ &┴б№╚° F3"
+msgstr "роХрпБро▒ро┐ роЗро░рпБроиро┐ро▓рпИ &рооро╛ро▒рпНро▒ро▓рпН F3"
 
 #, fuzzy
 msgid "&Next bookmark                 "
-msgstr "&╥╛в┬╨            C-n"
+msgstr "&рокрпБродро┐ропродрпБ            C-n"
 
 #, fuzzy
 msgid "Pre&v bookmark                 "
-msgstr "┼бви║&┬бь╠...          M-t"
+msgstr "ро╡ро╛ро┐роЪрпИ&ропро╛роХрпНроХрпБ...          M-t"
 
 #, fuzzy
 msgid "&Flush bookmark                "
-msgstr "&ля║°...                  "
+msgstr "&роЕроЮрпНроЪро▓рпН...                  "
 
 #, fuzzy
 msgid "&Undo                       C-u"
-msgstr "&╕┼в·              C-u"
+msgstr "&роХро╡ро┐ро┤рпН              C-u"
 
 #, fuzzy
 msgid "&Beginning               C-PgUp"
-msgstr "&ж╛б╝э╕√      C-PgUp"
+msgstr "&родрпКроЯроЩрпНроХро│рпН      C-PgUp"
 
 #, fuzzy
 msgid "&End                     C-PgDn"
-msgstr "&╕и╝║в          C-PgDn"
+msgstr "&роХроЯрпИроЪро┐          C-PgDn"
 
 #, fuzzy
 msgid "C&opy to clipfile           M-w"
-msgstr "&┼бви║ь╠Ї з└б...       M-l"
+msgstr "&ро╡ро╛ро┐роЪрпИроХрпНроХрпБрокрпН рокрпЛ...       M-l"
 
 #, fuzzy
 msgid "C&ut to clipfile            C-w"
-msgstr "&┼бви║ь╠Ї з└б...       M-l"
+msgstr "&ро╡ро╛ро┐роЪрпИроХрпНроХрпБрокрпН рокрпЛ...       M-l"
 
 msgid "&Paste from clipfile        C-y"
 msgstr ""
 
 msgid "&Search...         F7"
-msgstr "&з╛╬...            F7"
+msgstr "&родрпЗроЯрпБ...            F7"
 
 msgid "Search &again     F17"
-msgstr "&┴┌└╩╘ї з╛╬       F17"
+msgstr "&рооро▒рпБрокроЯро┐ропрпБроорпН родрпЗроЯрпБ       F17"
 
 msgid "&Replace...        F4"
-msgstr "&┴б№┌...           F4"
+msgstr "&рооро╛ро▒рпНро▒рпБ...           F4"
 
 msgid "&Go to line...            M-l"
-msgstr "&┼бви║ь╠Ї з└б...       M-l"
+msgstr "&ро╡ро╛ро┐роЪрпИроХрпНроХрпБрокрпН рокрпЛ...       M-l"
 
 #, fuzzy
 msgid "Toggle li&ne state        M-n"
-msgstr "╠╚в н╒┐ви─ &┴б№╚° F3"
+msgstr "роХрпБро▒ро┐ роЗро░рпБроиро┐ро▓рпИ &рооро╛ро▒рпНро▒ро▓рпН F3"
 
 msgid "Go to matching &bracket   M-b"
 msgstr ""
@@ -540,13 +540,13 @@ msgstr ""
 
 #, fuzzy
 msgid "Encod&ing...             C-t"
-msgstr "┼бви║&┬бь╠...          M-t"
+msgstr "ро╡ро╛ро┐роЪрпИ&ропро╛роХрпНроХрпБ...          M-t"
 
 msgid "Insert &literal...       C-q"
-msgstr "┐ви─п╒ &ж║╒╠╛°...    C-q"
+msgstr "роиро┐ро▓рпИроЙро░рпБ &роЪрпЖро░рпБроХрпБродро▓рпН...    C-q"
 
 msgid "&Refresh screen          C-l"
-msgstr "╛ви├и┬ &╥╨ь╠            C-l"
+msgstr "родро┐ро░рпИропрпИ &рокрпБродрпБроХрпНроХрпБ            C-l"
 
 msgid "&Start record macro      C-r"
 msgstr ""
@@ -561,37 +561,37 @@ msgid "Delete macr&o...            "
 msgstr ""
 
 msgid "Insert &date/time           "
-msgstr "&╛в╕╛в/з┐├ї ж║╒╠           "
+msgstr "&родро┐роХродро┐/роирпЗро░роорпН роЪрпЖро░рпБроХрпБ           "
 
 msgid "Format p&aragraph        M-p"
-msgstr "&└Є╛в ┼╩┼ї                   M-p"
+msgstr "&рокродрпНродро┐ ро╡роЯро┐ро╡роорпН                   M-p"
 
 msgid "'ispell' s&pell check    C-p"
-msgstr "'ispell' ▒&╪Є╨ ║бв└бўЇ╥ C-p"
+msgstr "'ispell' роО&ро┤рпБродрпНродрпБ роЪро╛ро┐рокро╛ро░рпНрокрпНрокрпБ C-p"
 
 msgid "Sor&t...                 M-t"
-msgstr "┼бви║&┬бь╠...          M-t"
+msgstr "ро╡ро╛ро┐роЪрпИ&ропро╛роХрпНроХрпБ...          M-t"
 
 msgid "Paste o&utput of...      M-u"
 msgstr ""
 
 msgid "E&xternal Formatter      F19"
-msgstr "╥&╚ ┼╩чЁ╩                  F19"
+msgstr "рокрпБ&ро▒ ро╡роЯро┐ро╡рпВроЯрпНроЯро┐                  F19"
 
 msgid "&Mail...                    "
-msgstr "&ля║°...                  "
+msgstr "&роЕроЮрпНроЪро▓рпН...                  "
 
 msgid "&Execute macro... C-x e, KEY"
 msgstr ""
 
 msgid "'ispell' s&pell check    M-$"
-msgstr "'ispell' ▒&╪Є╨ ║бв└бўЇ╥  M-$"
+msgstr "'ispell' роО&ро┤рпБродрпНродрпБ роЪро╛ро┐рокро╛ро░рпНрокрпНрокрпБ  M-$"
 
 msgid "&General...  "
-msgstr "&ж└б╨┼б╔╨... "
+msgstr "&рокрпКродрпБро╡ро╛ройродрпБ... "
 
 msgid "&Save mode..."
-msgstr "з║┴вЇ╥ ╙и╚и┴..."
+msgstr "роЪрпЗрооро┐рокрпНрокрпБ роорпБро▒рпИроорпИ..."
 
 msgid "Learn &Keys..."
 msgstr ""
@@ -601,30 +601,30 @@ msgstr ""
 
 #, fuzzy
 msgid "S&yntax file"
-msgstr " з╕бЇи└ з║┴в "
+msgstr " роХрпЛрокрпНрокрпИ роЪрпЗрооро┐ "
 
 #, fuzzy
 msgid "&Menu file"
-msgstr "ни╛ и┼Є╨ ╛в╚..."
+msgstr "роЗродрпИ ро╡рпИродрпНродрпБ родро┐ро▒..."
 
 #, fuzzy
 msgid "Save setu&p"
-msgstr "з║┴вЇ╥ ╙и╚и┴..."
+msgstr "роЪрпЗрооро┐рокрпНрокрпБ роорпБро▒рпИроорпИ..."
 
 msgid " File "
-msgstr " з╕бЇ╥ "
+msgstr " роХрпЛрокрпНрокрпБ "
 
 msgid " Edit "
-msgstr " └╛вЇ╥ "
+msgstr " рокродро┐рокрпНрокрпБ "
 
 msgid " Sear/Repl "
 msgstr ""
 
 msgid " Command "
-msgstr " ╕Ё╝и╟ "
+msgstr " роХроЯрпНроЯро│рпИ "
 
 msgid " Options "
-msgstr " ┼в╒Ї└э╕√ "
+msgstr " ро╡ро┐ро░рпБрокрпНрокроЩрпНроХро│рпН "
 
 msgid "Intuitive"
 msgstr ""
@@ -656,9 +656,15 @@ msgstr ""
 msgid "Synta&x highlighting"
 msgstr ""
 
+msgid "Visible tabs"
+msgstr ""
+
+msgid "Visible trailing spaces"
+msgstr ""
+
 #, fuzzy
 msgid "Save file &position"
-msgstr " з╕бЇи└ з║┴в "
+msgstr " роХрпЛрокрпНрокрпИ роЪрпЗрооро┐ "
 
 msgid "Confir&m before saving"
 msgstr ""
@@ -688,7 +694,7 @@ msgid "Help"
 msgstr ""
 
 msgid "Save"
-msgstr "з║┴в"
+msgstr "роЪрпЗрооро┐"
 
 msgid "Mark"
 msgstr ""
@@ -697,13 +703,13 @@ msgid "Replac"
 msgstr ""
 
 msgid "Copy"
-msgstr "┐╕°"
+msgstr "роироХро▓рпН"
 
 msgid "Move"
-msgstr "┐╕ў╫"
+msgstr "роироХро░рпНро╡рпБ"
 
 msgid "Delete"
-msgstr "┐гь╠"
+msgstr "роирпАроХрпНроХрпБ"
 
 msgid "PullDn"
 msgstr ""
@@ -794,7 +800,7 @@ msgid "Flag"
 msgstr ""
 
 msgid "Mode"
-msgstr "╙и╚и┴"
+msgstr "роорпБро▒рпИроорпИ"
 
 #, c-format
 msgid "%6d of %d"
@@ -900,22 +906,22 @@ msgstr ""
 
 #, fuzzy
 msgid "Other 8 bit"
-msgstr "з┼┌"
+msgstr "ро╡рпЗро▒рпБ"
 
 msgid "Input / display codepage:"
 msgstr ""
 
 #, fuzzy
 msgid "&Select"
-msgstr "╠┌ї└╝Єи╛ з╛ўєж╛╬"
+msgstr "роХрпБро▒рпБроорпНрокроЯродрпНродрпИ родрпЗро░рпНроирпНродрпЖроЯрпБ"
 
 #, fuzzy
 msgid "Use passive mode over pro&xy"
-msgstr "з║┴вЇ╥ ╙и╚и┴..."
+msgstr "роЪрпЗрооро┐рокрпНрокрпБ роорпБро▒рпИроорпИ..."
 
 #, fuzzy
 msgid "Use &passive mode"
-msgstr "з║┴вЇ╥ ╙и╚и┴..."
+msgstr "роЪрпЗрооро┐рокрпНрокрпБ роорпБро▒рпИроорпИ..."
 
 msgid "&Use ~/.netrc"
 msgstr ""
@@ -945,10 +951,10 @@ msgid "cd"
 msgstr ""
 
 msgid "Symbolic link filename:"
-msgstr "╠╚в┬гЁ╬ ни╜Ї╥ з╕бЇ╥Їж└┬ў:"
+msgstr "роХрпБро▒ро┐ропрпАроЯрпНроЯрпБ роЗрогрпИрокрпНрокрпБ роХрпЛрокрпНрокрпБрокрпНрокрпЖропро░рпН:"
 
 msgid "Existing filename (filename symlink will point to):"
-msgstr "н╒ь╠ї з╕бЇ╥Їж└┬ў (╠╚в┬гЁ╬ ни╜Ї╥ ╕бё└вь╠ї з╕бЇ└в¤ ж└┬ў):"
+msgstr "роЗро░рпБроХрпНроХрпБроорпН роХрпЛрокрпНрокрпБрокрпНрокрпЖропро░рпН (роХрпБро▒ро┐ропрпАроЯрпНроЯрпБ роЗрогрпИрокрпНрокрпБ роХро╛рогрпНрокро┐роХрпНроХрпБроорпН роХрпЛрокрпНрокро┐ройрпН рокрпЖропро░рпН):"
 
 msgid "Symbolic link"
 msgstr ""
@@ -978,7 +984,7 @@ msgid "Username:"
 msgstr ""
 
 msgid "Password:"
-msgstr "╕╝╫юж║б°:"
+msgstr "роХроЯро╡рпБроЪрпНроЪрпКро▓рпН:"
 
 #, c-format
 msgid "Password for \\\\%s\\%s"
@@ -986,6 +992,9 @@ msgstr ""
 
 #, c-format
 msgid "Warning: file %s not found\n"
+msgstr ""
+
+msgid "7-bit ASCII"
 msgstr ""
 
 #, c-format
@@ -1038,7 +1047,7 @@ msgid "&Marked all"
 msgstr ""
 
 msgid "Name"
-msgstr "ж└┬ў"
+msgstr "рокрпЖропро░рпН"
 
 msgid "Permissions (Octal)"
 msgstr ""
@@ -1135,7 +1144,7 @@ msgstr ""
 
 #, fuzzy
 msgid "&Files only"
-msgstr "&╙╪ ┼бўи╛╕√ ┴Ё╬ї"
+msgstr "&роорпБро┤рпБ ро╡ро╛ро░рпНродрпИроХро│рпН роороЯрпНроЯрпБроорпН"
 
 msgid " Select "
 msgstr ""
@@ -1611,7 +1620,7 @@ msgid ""
 msgstr ""
 
 msgid " Delete: "
-msgstr " ┐гь╠: "
+msgstr " роирпАроХрпНроХрпБ: "
 
 msgid "Non&e"
 msgstr ""
@@ -1746,7 +1755,7 @@ msgstr ""
 
 #, fuzzy
 msgid " Malformed regular expression "
-msgstr "  л┼─Ё║╜┴б╔ regular expression  "
+msgstr "  роЕро╡ро▓роЯрпНроЪрогрооро╛рой regular expression  "
 
 msgid "Cas&e sensitive"
 msgstr ""
@@ -1768,7 +1777,7 @@ msgstr ""
 
 #, fuzzy
 msgid "Re&gular expression"
-msgstr "&║б╛б├╜ з╕би┼"
+msgstr "&роЪро╛родро╛ро░рог роХрпЛро╡рпИ"
 
 msgid "&Tree"
 msgstr ""
@@ -1781,7 +1790,7 @@ msgstr ""
 
 #, fuzzy
 msgid "File name:"
-msgstr " з╕бЇ╥ "
+msgstr " роХрпЛрокрпНрокрпБ "
 
 msgid "Start at:"
 msgstr ""
@@ -1976,8 +1985,8 @@ msgstr ""
 #, fuzzy, c-format
 msgid " (%ld block)"
 msgid_plural " (%ld blocks)"
-msgstr[0] " ж╛б╠╛ви┬ ┼бви║┬бь╠ "
-msgstr[1] " ж╛б╠╛ви┬ ┼бви║┬бь╠ "
+msgstr[0] " родрпКроХрпБродро┐ропрпИ ро╡ро╛ро┐роЪрпИропро╛роХрпНроХрпБ "
+msgstr[1] " родрпКроХрпБродро┐ропрпИ ро╡ро╛ро┐роЪрпИропро╛роХрпНроХрпБ "
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -2139,7 +2148,7 @@ msgstr ""
 
 #, fuzzy
 msgid "S&hell link..."
-msgstr "╠╚в┬гЁ╬ ни╜Ї╥..."
+msgstr "роХрпБро▒ро┐ропрпАроЯрпНроЯрпБ роЗрогрпИрокрпНрокрпБ..."
 
 msgid "SM&B link..."
 msgstr ""
@@ -2256,7 +2265,7 @@ msgid "&Configuration..."
 msgstr ""
 
 msgid "&Layout..."
-msgstr "&н╝ ли┴╫..."
+msgstr "&роЗроЯ роЕроорпИро╡рпБ..."
 
 msgid "c&Onfirmation..."
 msgstr ""
@@ -2328,14 +2337,14 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid "GNU Midnight Commander %s\n"
-msgstr "╕ы ┐√╟в├╫ ми╜┬б─ў (GNU Midnight Commander)"
+msgstr "роХройрпВ роиро│рпНро│ро┐ро░ро╡рпБ роЖрогрпИропро╛ро▓ро░рпН (GNU Midnight Commander)"
 
 msgid "[flags] [this_dir] [other_panel_dir]\n"
 msgstr ""
 
 #, fuzzy
 msgid "+number"
-msgstr "Inode ▒ё"
+msgstr "Inode роОрогрпН"
 
 msgid "Set initial line number for the internal editor"
 msgstr ""
@@ -2417,7 +2426,7 @@ msgstr ""
 
 #, fuzzy
 msgid "Print data directory"
-msgstr "╥╛в┬ ╙и╔┬ї ┤╔и╚Ї └и╝ь╠ї"
+msgstr "рокрпБродро┐роп роорпБройрпИропроорпН роТройро▒рпИрокрпН рокроЯрпИроХрпНроХрпБроорпН"
 
 msgid "Print last working directory to specified file"
 msgstr ""
@@ -2436,7 +2445,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid "Cannot create %s directory"
-msgstr "╥╛в┬ ╙и╔┬ї ┤╔и╚Ї └и╝ь╠ї"
+msgstr "рокрпБродро┐роп роорпБройрпИропроорпН роТройро▒рпИрокрпН рокроЯрпИроХрпНроХрпБроорпН"
 
 msgid "safe de&Lete"
 msgstr ""
@@ -2520,7 +2529,7 @@ msgid "External panelize"
 msgstr ""
 
 msgid "Command"
-msgstr "╕Ё╝и╟"
+msgstr "роХроЯрпНроЯро│рпИ"
 
 msgid "Other command"
 msgstr ""
@@ -2535,7 +2544,7 @@ msgid " Cannot run external panelize in a non-local directory "
 msgstr ""
 
 msgid "Find rejects after patching"
-msgstr "┼в─ь╕в┬и┼╕и╟ ┤Ё╬-з┼и─╕┘ь╠ └в├╠ ╕ё╬└в╩"
+msgstr "ро╡ро┐ро▓роХрпНроХро┐ропро╡рпИроХро│рпИ роТроЯрпНроЯрпБ-ро╡рпЗро▓рпИроХро│рпБроХрпНроХрпБ рокро┐ро░роХрпБ роХрогрпНроЯрпБрокро┐роЯро┐"
 
 msgid "Find *.orig after patching"
 msgstr ""
@@ -2584,7 +2593,7 @@ msgid "SUB-DIR"
 msgstr ""
 
 msgid "Size"
-msgstr "л╟╫"
+msgstr "роЕро│ро╡рпБ"
 
 msgid "MTime"
 msgstr ""
@@ -2596,7 +2605,7 @@ msgid "CTime"
 msgstr ""
 
 msgid "Permission"
-msgstr "л█┴╛вЄ╛°"
+msgstr "роЕройрпБроородро┐родрпНродро▓рпН"
 
 msgid "Perm"
 msgstr ""
@@ -2614,25 +2623,25 @@ msgid "GID"
 msgstr ""
 
 msgid "Owner"
-msgstr "ж║бє╛ь╕б├ў"
+msgstr "роЪрпКроирпНродроХрпНроХро╛ро░ро░рпН"
 
 msgid "Group"
-msgstr "ж╛б╠╛в"
+msgstr "родрпКроХрпБродро┐"
 
 msgid "<readlink failed>"
-msgstr "<ни╜ ┼б║вЄ╛° ж┐б╩Ї╥>"
+msgstr "<роЗрогрпИ ро╡ро╛роЪро┐родрпНродро▓рпН роирпКроЯро┐рокрпНрокрпБ>"
 
 #, fuzzy, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
-msgstr[0] "%s ╨ё╬╕√"
-msgstr[1] "%s ╨ё╬╕√"
+msgstr[0] "%s родрпБрогрпНроЯрпБроХро│рпН"
+msgstr[1] "%s родрпБрогрпНроЯрпБроХро│рпН"
 
 #, fuzzy, c-format
 msgid "%s in %d file"
 msgid_plural "%s in %d files"
-msgstr[0] "%s ╨ё╬╕√ %d з╕бЇ└в°"
-msgstr[1] "%s ╨ё╬╕√ %d з╕бЇ└в°"
+msgstr[0] "%s родрпБрогрпНроЯрпБроХро│рпН %d роХрпЛрокрпНрокро┐ро▓рпН"
+msgstr[1] "%s родрпБрогрпНроЯрпБроХро│рпН %d роХрпЛрокрпНрокро┐ро▓рпН"
 
 msgid "Unknown tag on display format: "
 msgstr ""
@@ -2644,10 +2653,10 @@ msgid " Do you really want to execute? "
 msgstr ""
 
 msgid "View"
-msgstr "╕бЁ║в"
+msgstr "роХро╛роЯрпНроЪро┐"
 
 msgid "Edit"
-msgstr "└╛вЇ╥"
+msgstr "рокродро┐рокрпНрокрпБ"
 
 msgid "RenMov"
 msgstr ""
@@ -2669,7 +2678,7 @@ msgid "Normal"
 msgstr ""
 
 msgid "&Regular expression"
-msgstr "&║б╛б├╜ з╕би┼"
+msgstr "&роЪро╛родро╛ро░рог роХрпЛро╡рпИ"
 
 msgid "Hexadecimal"
 msgstr ""
@@ -2717,11 +2726,11 @@ msgstr ""
 
 #, fuzzy
 msgid "Using the ncurses library"
-msgstr "╛Ёз└б┬ ли╝и┼ ┴┌└╩╘ї ┼╒╬"
+msgstr "родроЯрпНрокрпЛроп роЕроЯрпИро╡рпИ рооро▒рпБрокроЯро┐ропрпБроорпН ро╡ро░рпБроЯрпБ"
 
 #, fuzzy
 msgid "Using the ncursesw library"
-msgstr "╛Ёз└б┬ ли╝и┼ ┴┌└╩╘ї ┼╒╬"
+msgstr "родроЯрпНрокрпЛроп роЕроЯрпИро╡рпИ рооро▒рпБрокроЯро┐ропрпБроорпН ро╡ро░рпБроЯрпБ"
 
 msgid "With optional subshell support"
 msgstr ""
@@ -2782,7 +2791,7 @@ msgid "Dynamc"
 msgstr ""
 
 msgid "Rescan"
-msgstr "┴┌┼╒╝°"
+msgstr "рооро▒рпБро╡ро░рпБроЯро▓рпН"
 
 msgid "Forget"
 msgstr ""
@@ -2849,7 +2858,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
-msgstr "╥╛в┬ ╙и╔┬ї ┤╔и╚Ї └и╝ь╠ї"
+msgstr "рокрпБродро┐роп роорпБройрпИропроорпН роТройро▒рпИрокрпН рокроЯрпИроХрпНроХрпБроорпН"
 
 #, c-format
 msgid "Directory %s is not owned by you\n"
@@ -2857,7 +2866,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid "Cannot set correct permissions for directory %s\n"
-msgstr " нє╛ з╕бЇ└в¤ л╟╫/л█┴╛в ╛╕┼° ╕ви╝ь╕ ╙╩┬б╨: "
+msgstr " роЗроирпНрод роХрпЛрокрпНрокро┐ройрпН роЕро│ро╡рпБ/роЕройрпБроородро┐ родроХро╡ро▓рпН роХро┐роЯрпИроХрпНроХ роорпБроЯро┐ропро╛родрпБ: "
 
 #, c-format
 msgid "Cannot create temporary directory %s: %s\n"
@@ -2879,7 +2888,7 @@ msgstr ""
 
 #, fuzzy
 msgid " Cannot spawn child process "
-msgstr " з╕бЇи└ з║┴вь╠ї з└б╨ └ви╞. "
+msgstr " роХрпЛрокрпНрокрпИ роЪрпЗрооро┐роХрпНроХрпБроорпН рокрпЛродрпБ рокро┐ро┤рпИ. "
 
 msgid "Empty output from child filter"
 msgstr ""
@@ -2913,11 +2922,11 @@ msgstr ""
 
 #, c-format
 msgid "%s bytes"
-msgstr "%s ╨ё╬╕√"
+msgstr "%s родрпБрогрпНроЯрпБроХро│рпН"
 
 #, fuzzy, c-format
 msgid ">= %s bytes"
-msgstr "%s ╨ё╬╕√"
+msgstr "%s родрпБрогрпНроЯрпБроХро│рпН"
 
 #, c-format
 msgid ""
@@ -2930,7 +2939,7 @@ msgstr ""
 msgid ""
 " Cannot save file: \n"
 " %s "
-msgstr " з╕бЇи└ з║┴вь╠ї з└б╨ └ви╞. "
+msgstr " роХрпЛрокрпНрокрпИ роЪрпЗрооро┐роХрпНроХрпБроорпН рокрпЛродрпБ рокро┐ро┤рпИ. "
 
 #, c-format
 msgid ""
@@ -2945,6 +2954,9 @@ msgid " Goto Address "
 msgstr ""
 
 msgid " Invalid address "
+msgstr ""
+
+msgid "Seeking to search result"
 msgstr ""
 
 msgid "ButtonBar|Help"
@@ -3506,40 +3518,40 @@ msgid "Changes to file lost"
 msgstr ""
 
 #~ msgid "scanf &Expression"
-#~ msgstr "scanf &з╕би┼"
+#~ msgstr "scanf &роХрпЛро╡рпИ"
 
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
-#~ msgstr " ┴б╚в┬в¤ ┴б№╚° ┼бви║и┬ ╤и╞┼в╬. п╛б├╜ї: 3,2,1,4 "
+#~ msgstr " рооро╛ро▒ро┐ропро┐ройрпН рооро╛ро▒рпНро▒ро▓рпН ро╡ро╛ро┐роЪрпИропрпИ роирпБро┤рпИро╡ро┐роЯрпБ. роЙродро╛ро░рогроорпН: 3,2,1,4 "
 
 #~ msgid ""
 #~ " Invalid regular expression, or scanf expression with too many "
 #~ "conversions "
-#~ msgstr " ║б╛б├╜ з╕би┼ └ви╞┬б╔╨, л°─╨ scanf з╕би┼┬в° л╛в╕┴б╔ ┴б№╚э╕√ "
+#~ msgstr " роЪро╛родро╛ро░рог роХрпЛро╡рпИ рокро┐ро┤рпИропро╛ройродрпБ, роЕро▓рпНро▓родрпБ scanf роХрпЛро╡рпИропро┐ро▓рпН роЕродро┐роХрооро╛рой рооро╛ро▒рпНро▒роЩрпНроХро│рпН "
 
 #~ msgid " Error in replacement format string. "
-#~ msgstr " ┴б№┌ ║├Є╛в¤ ┼╩┼Є╛в° └ви╞. "
+#~ msgstr " рооро╛ро▒рпНро▒рпБ роЪро░родрпНродро┐ройрпН ро╡роЯро┐ро╡родрпНродро┐ро▓рпН рокро┐ро┤рпИ. "
 
 #, fuzzy
 #~ msgid " Replacement too long. "
-#~ msgstr " ┴б№╚° ║├Єи╛ ╤и╞┼в╬:"
+#~ msgstr " рооро╛ро▒рпНро▒ро▓рпН роЪро░родрпНродрпИ роирпБро┤рпИро╡ро┐роЯрпБ:"
 
 #, fuzzy
 #~ msgid "Invalid hex search expression"
-#~ msgstr " ║б╛б├╜ з╕би┼ "
+#~ msgstr " роЪро╛родро╛ро░рог роХрпЛро╡рпИ "
 
 #, fuzzy
 #~ msgid "Using included S-Lang library"
-#~ msgstr "╛Ёз└б┬ ли╝и┼ ┴┌└╩╘ї ┼╒╬"
+#~ msgstr "родроЯрпНрокрпЛроп роЕроЯрпИро╡рпИ рооро▒рпБрокроЯро┐ропрпБроорпН ро╡ро░рпБроЯрпБ"
 
 #~ msgid "%s bytes in %d files"
-#~ msgstr "%s ╨ё╬╕√ %d з╕бЇ╥╕╟в√"
+#~ msgstr "%s родрпБрогрпНроЯрпБроХро│рпН %d роХрпЛрокрпНрокрпБроХро│ро┐ро│рпН"
 
 #~ msgid " Not an ordinary file: "
-#~ msgstr " ║б╛б├╜ з╕бЇ╥ л°─: "
+#~ msgstr " роЪро╛родро╛ро░рог роХрпЛрокрпНрокрпБ роЕро▓рпНро▓: "
 
 #~ msgid "Col %d"
-#~ msgstr "ж┐╬┼бв %d"
+#~ msgstr "роирпЖроЯрпБро╡ро╛ро┐ %d"
 
 #, fuzzy
 #~ msgid "User menu available only in mcedit invoked from mc"
-#~ msgstr "mc'┬в° н╒є╨ ж╛б╝э╕Ї└Ё╝ mcedit'┬в° ┴Ё╬з┴ └┬╔ў └Ё╩ н╒ь╠ї"
+#~ msgstr "mc'ропро┐ро▓рпН роЗро░рпБроирпНродрпБ родрпКроЯроЩрпНроХрокрпНрокроЯрпНроЯ mcedit'ропро┐ро▓рпН роороЯрпНроЯрпБроорпЗ рокропройро░рпН рокроЯрпНроЯро┐ роЗро░рпБроХрпНроХрпБроорпН"

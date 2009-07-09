@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-30 19:39+0200\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-07-09 17:07+0300\n"
 "PO-Revision-Date: 2006-08-16 16:20+0400\n"
 "Last-Translator: Phan Vĩnh Thịnh <teppi82@gmail.com>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
@@ -657,6 +657,12 @@ msgstr "Chọn ngược lạ&I        M-*"
 msgid "Synta&x highlighting"
 msgstr "&Chiếu sáng cú pháp"
 
+msgid "Visible tabs"
+msgstr ""
+
+msgid "Visible trailing spaces"
+msgstr ""
+
 msgid "Save file &position"
 msgstr "&Ghi nhớ vị trí trong tập tin"
 
@@ -993,6 +999,9 @@ msgstr "Mật khẩu cho \\\\%s\\%s"
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Cảnh báo: không tìm thấy tập tin %s\n"
+
+msgid "7-bit ASCII"
+msgstr ""
 
 #, c-format
 msgid "Cannot translate from %s to %s"
@@ -3115,6 +3124,9 @@ msgstr " Đi tới địa chỉ "
 #, fuzzy
 msgid " Invalid address "
 msgstr " Mật khẩu không đúng "
+
+msgid "Seeking to search result"
+msgstr ""
 
 msgid "ButtonBar|Help"
 msgstr "Trợ giúp"

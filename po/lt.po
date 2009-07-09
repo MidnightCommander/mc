@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-30 19:38+0200\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-07-09 17:07+0300\n"
 "PO-Revision-Date: 2009-02-16 19:45+0300\n"
 "Last-Translator: Andrius Štikonas <stikonas@gmail.com>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -656,6 +656,12 @@ msgstr "Žymėti at&virkščiai M-*"
 msgid "Synta&x highlighting"
 msgstr "Sintak&sės ryškinimas"
 
+msgid "Visible tabs"
+msgstr ""
+
+msgid "Visible trailing spaces"
+msgstr ""
+
 msgid "Save file &position"
 msgstr "Išsaugoti &vietą faile"
 
@@ -991,6 +997,9 @@ msgstr "\\\\%s\\%s slaptažodis"
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Įspėjimas: failas %s nerasta\n"
+
+msgid "7-bit ASCII"
+msgstr ""
 
 #, c-format
 msgid "Cannot translate from %s to %s"
@@ -3110,6 +3119,9 @@ msgstr " Eiti adresu "
 
 msgid " Invalid address "
 msgstr " Neteisingas adresas "
+
+msgid "Seeking to search result"
+msgstr ""
 
 msgid "ButtonBar|Help"
 msgstr "ButtonBar|Pagalb"

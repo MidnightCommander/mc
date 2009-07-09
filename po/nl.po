@@ -8,13 +8,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-30 19:38+0200\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-07-09 17:07+0300\n"
 "PO-Revision-Date: 2009-02-13\n"
 "Last-Translator: Marcel Pol <mpol@gmx.net>\n"
-"Language-Team: Dutch <debian-l10n-dutch@lists.debian.org\n"
+"Language-Team: Dutch <debian-l10n-dutch@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
@@ -218,10 +218,10 @@ msgid " Error "
 msgstr " Fout "
 
 msgid " This function is not implemented. "
-msgstr " Deze functie is niet geïmplementeerd. "
+msgstr " Deze functie is niet geÃ¯mplementeerd. "
 
 msgid " Copy to clipboard "
-msgstr " Kopiëer naar prikbord "
+msgstr " KopiÃ«er naar prikbord "
 
 msgid " Unable to save to file. "
 msgstr " Kan niet opslaan naar bestand. "
@@ -296,7 +296,7 @@ msgid " Mail "
 msgstr " Mail "
 
 msgid " Copies to"
-msgstr " Kopiëert naar"
+msgstr " KopiÃ«ert naar"
 
 msgid " Subject"
 msgstr " Onderwerp"
@@ -419,7 +419,7 @@ msgid "&Insert file...   F15"
 msgstr "Bestand &Invoegen...F15"
 
 msgid "Copy to &file...  C-f"
-msgstr "&Kopiëer naar bestand... C-f"
+msgstr "&KopiÃ«er naar bestand... C-f"
 
 msgid "&User menu...     F11"
 msgstr "Gebr&uikersmenu       F11"
@@ -434,7 +434,7 @@ msgid "&New            C-x k"
 msgstr "&Nieuw            C-x k"
 
 msgid "Copy to &file...     "
-msgstr "Kopiëer naar bestand... "
+msgstr "KopiÃ«er naar bestand... "
 
 #, fuzzy
 msgid "&Toggle mark                 F3"
@@ -450,7 +450,7 @@ msgstr "&Inv aan/uit  Ins"
 
 #, fuzzy
 msgid "&Copy                        F5"
-msgstr "&Kopiëren               F5"
+msgstr "&KopiÃ«ren               F5"
 
 #, fuzzy
 msgid "&Move                        F6"
@@ -462,7 +462,7 @@ msgstr "&Verwijderen            F8"
 
 #, fuzzy
 msgid "C&opy to clipfile         C-Ins"
-msgstr "Kopiëer naar bestand... "
+msgstr "KopiÃ«er naar bestand... "
 
 #, fuzzy
 msgid "C&ut to clipfile          S-Del"
@@ -627,7 +627,7 @@ msgid " Options "
 msgstr " Opties "
 
 msgid "Intuitive"
-msgstr "Intuïtief"
+msgstr "IntuÃ¯tief"
 
 msgid "Emacs"
 msgstr "Emacs"
@@ -656,6 +656,12 @@ msgstr "S&Electie omkeren      M-*"
 
 msgid "Synta&x highlighting"
 msgstr "Synta&X kleuring"
+
+msgid "Visible tabs"
+msgstr ""
+
+msgid "Visible trailing spaces"
+msgstr ""
 
 msgid "Save file &position"
 msgstr "Bestand &positie opslaan"
@@ -697,7 +703,7 @@ msgid "Replac"
 msgstr "Vervng"
 
 msgid "Copy"
-msgstr "Kopiëe"
+msgstr "KopiÃ«e"
 
 msgid "Move"
 msgstr "Vrplts"
@@ -971,7 +977,7 @@ msgid "&Resume"
 msgstr "&Doorgaan"
 
 msgid "&Kill"
-msgstr "&Beëndigen"
+msgstr "&BeÃ«ndigen"
 
 msgid "Background Jobs"
 msgstr "Achtergrondtaken"
@@ -992,6 +998,9 @@ msgstr "Wachtwoord voor \\\\%s\\%s"
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Waarschuwing: bestand %s niet gevonden\n"
+
+msgid "7-bit ASCII"
+msgstr ""
 
 #, c-format
 msgid "Cannot translate from %s to %s"
@@ -1340,11 +1349,11 @@ msgid ""
 "it."
 msgstr ""
 "De opmaak van het ~/%s bestand is veranderd met versie 3.0. Je kunt het of "
-"kopiëren van %smc.ext of dat bestand gebruiken als een voorbeeld hoe het te "
+"kopiÃ«ren van %smc.ext of dat bestand gebruiken als een voorbeeld hoe het te "
 "schrijven."
 
 msgid " Copy "
-msgstr " Kopiëren "
+msgstr " KopiÃ«ren "
 
 msgid " Move "
 msgstr " Verplaatsen "
@@ -1397,7 +1406,7 @@ msgid ""
 " Cannot stat source file \"%s\" \n"
 " %s "
 msgstr ""
-" Bronbestand \"%s\" kan niet geïnspecteerd worden \n"
+" Bronbestand \"%s\" kan niet geÃ¯nspecteerd worden \n"
 " %s "
 
 #, fuzzy, c-format
@@ -1448,7 +1457,7 @@ msgid ""
 " Cannot fstat source file \"%s\" \n"
 " %s "
 msgstr ""
-" Bronbestand \"%s\" kan niet geïnspecteerd worden \n"
+" Bronbestand \"%s\" kan niet geÃ¯nspecteerd worden \n"
 " %s "
 
 #, c-format
@@ -1456,7 +1465,7 @@ msgid ""
 " Cannot create target file \"%s\" \n"
 " %s "
 msgstr ""
-" Doelbestand \"%s\" kan niet gecreëerd worden \n"
+" Doelbestand \"%s\" kan niet gecreÃ«erd worden \n"
 " %s "
 
 #, c-format
@@ -1464,7 +1473,7 @@ msgid ""
 " Cannot fstat target file \"%s\" \n"
 " %s "
 msgstr ""
-" Bronbestand \"%s\" kan niet geïnspecteerd worden \n"
+" Bronbestand \"%s\" kan niet geÃ¯nspecteerd worden \n"
 " %s "
 
 #, c-format
@@ -1516,7 +1525,7 @@ msgid ""
 " Cannot stat source directory \"%s\" \n"
 " %s "
 msgstr ""
-" Doelmap \"%s\" kan niet geïnspecteerd worden\n"
+" Doelmap \"%s\" kan niet geÃ¯nspecteerd worden\n"
 " %s "
 
 #, c-format
@@ -1532,7 +1541,7 @@ msgid ""
 " Cannot copy cyclic symbolic link \n"
 " `%s' "
 msgstr ""
-" Een cyclische symbolische link kan niet gekopiëerd worden \n"
+" Een cyclische symbolische link kan niet gekopiÃ«erd worden \n"
 " `%s' "
 
 #, c-format
@@ -1548,7 +1557,7 @@ msgid ""
 " Cannot create target directory \"%s\" \n"
 " %s "
 msgstr ""
-" Doelmap \"%s\" kan niet gecreëerd worden \n"
+" Doelmap \"%s\" kan niet gecreÃ«erd worden \n"
 " %s "
 
 #, c-format
@@ -1564,7 +1573,7 @@ msgid ""
 " Cannot stat file \"%s\" \n"
 " %s "
 msgstr ""
-" Bestand \"%s\" kan niet geïnspecteerd worden \n"
+" Bestand \"%s\" kan niet geÃ¯nspecteerd worden \n"
 " %s "
 
 #, c-format
@@ -1632,7 +1641,7 @@ msgid "Directory scanning"
 msgstr "Directory-pad"
 
 msgid "1Copy"
-msgstr "1Kopiëren"
+msgstr "1KopiÃ«ren"
 
 msgid "1Move"
 msgstr "1Verplaatsen"
@@ -1817,7 +1826,7 @@ msgid "&Again"
 msgstr "Herh&Alen"
 
 msgid "&Quit"
-msgstr "Beëindigen"
+msgstr "BeÃ«indigen"
 
 msgid "Pane&lize"
 msgstr "In venster plaaten"
@@ -2207,7 +2216,7 @@ msgid "which keys are not marked with OK.  Press space on the missing"
 msgstr "welke toetsen niet met 'OK' gemarkeerd zijn. Geef een spatie "
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
-msgstr "of klik met de muis om ze te definiëren. Navigeer met Tab."
+msgstr "of klik met de muis om ze te definiÃ«ren. Navigeer met Tab."
 
 msgid ""
 " The Commander can't change to the directory that \n"
@@ -2271,7 +2280,7 @@ msgid "&Edit               F4"
 msgstr "&Bewerken               F4"
 
 msgid "&Copy               F5"
-msgstr "&Kopiëren               F5"
+msgstr "&KopiÃ«ren               F5"
 
 msgid "c&Hmod           C-x c"
 msgstr "c&Hmod               C-x c"
@@ -2319,7 +2328,7 @@ msgid "&User menu          F2"
 msgstr "&Gebruikersmenu         F2"
 
 msgid "&Directory tree"
-msgstr "&Mappenhiërarchie                 "
+msgstr "&MappenhiÃ«rarchie                 "
 
 msgid "&Find file            M-?"
 msgstr "Bestand &Zoeken                M-?"
@@ -2857,7 +2866,7 @@ msgid "With builtin Editor\n"
 msgstr "Met ingebouwde editor\n"
 
 msgid "Using system-installed S-Lang library"
-msgstr "Door het systeem geïnstalleerd S-Lang bibliotheek zal gebruikt worden."
+msgstr "Door het systeem geÃ¯nstalleerd S-Lang bibliotheek zal gebruikt worden."
 
 msgid "with terminfo database"
 msgstr "met terminfo database"
@@ -2907,7 +2916,7 @@ msgstr ""
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
-msgstr "Kopiëer de map \"%s\" naar:"
+msgstr "KopiÃ«er de map \"%s\" naar:"
 
 #, c-format
 msgid "Move \"%s\" directory to:"
@@ -3018,7 +3027,7 @@ msgstr "Kan de rechten niet corrigeren voor de map %s\n"
 
 #, c-format
 msgid "Cannot create temporary directory %s: %s\n"
-msgstr "Tijdelijke map \"%s\" kan niet gecreëerd worden: %s\n"
+msgstr "Tijdelijke map \"%s\" kan niet gecreÃ«erd worden: %s\n"
 
 #, c-format
 msgid "Temporary files will be created in %s\n"
@@ -3116,6 +3125,9 @@ msgstr " Ga naar adres "
 
 msgid " Invalid address "
 msgstr " Ongeldig adres "
+
+msgid "Seeking to search result"
+msgstr ""
 
 msgid "ButtonBar|Help"
 msgstr "Help"
@@ -3364,7 +3376,7 @@ msgid "fish: Disconnecting from %s"
 msgstr "fish: Verbinding verbreken met %s"
 
 msgid "fish: Waiting for initial line..."
-msgstr "fish: Wachten op initiële lijn..."
+msgstr "fish: Wachten op initiÃ«le lijn..."
 
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Helaas, wachtwoordbeveiligde verbindingen niet mogelijk."
@@ -3376,7 +3388,7 @@ msgid "fish: Sending password..."
 msgstr "fish: wachtwoord wordt verstuurd..."
 
 msgid "fish: Sending initial line..."
-msgstr "fish: initiële lijn wordt verstuurd..."
+msgstr "fish: initiÃ«le lijn wordt verstuurd..."
 
 msgid "fish: Handshaking version..."
 msgstr "fish: versie handshaking..."
@@ -3547,7 +3559,7 @@ msgstr " Kan machinenaam niet vinden: %s "
 
 #, c-format
 msgid " Cannot create socket: %s "
-msgstr " Kan socket niet creëren: %s "
+msgstr " Kan socket niet creÃ«ren: %s "
 
 #, c-format
 msgid " Cannot connect to server: %s "
@@ -3732,7 +3744,7 @@ msgstr "Wijzigingen zijn verloren"
 #~ msgstr " Vervangende string te lang. "
 
 #~ msgid "&Copy              F5"
-#~ msgstr "Kopiëren          F5"
+#~ msgstr "KopiÃ«ren          F5"
 
 #~ msgid "&Delete            F8"
 #~ msgstr "&Verwijderen           F8"
@@ -3874,7 +3886,7 @@ msgstr "Wijzigingen zijn verloren"
 #~ msgstr ""
 #~ " Bestand is veranderd\n"
 #~ "met versie 3.0. U kunt het\n"
-#~ "kopiëren van "
+#~ "kopiÃ«ren van "
 
 #~ msgid ""
 #~ "mc.ext or use that\n"

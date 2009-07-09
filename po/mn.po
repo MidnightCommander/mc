@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mn\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-30 19:38+0200\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-07-09 17:07+0300\n"
 "PO-Revision-Date: 2003-03-04 21:16+0100\n"
 "Last-Translator: Sanlig Badral <badral@chinggis.com>\n"
 "Language-Team: Mongolian <mn@li.org>\n"
@@ -668,6 +668,12 @@ msgstr "Тэмдэглэгдсэнг &эсрэгээр болгох  М *"
 msgid "Synta&x highlighting"
 msgstr "&өгүүлбэрзүйг өнгөөр тодотгох"
 
+msgid "Visible tabs"
+msgstr ""
+
+msgid "Visible trailing spaces"
+msgstr ""
+
 msgid "Save file &position"
 msgstr "Файлын &байрлал руу хадгалах"
 
@@ -1005,6 +1011,9 @@ msgstr "\\\\%s\\%s ийн Нууц үг"
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Анхааруулга: файл %s алга байна\n"
+
+msgid "7-bit ASCII"
+msgstr ""
 
 #, c-format
 msgid "Cannot translate from %s to %s"
@@ -3114,6 +3123,9 @@ msgstr " Хаяг руу очих "
 #, fuzzy
 msgid " Invalid address "
 msgstr " Буруу нууц үг "
+
+msgid "Seeking to search result"
+msgstr ""
 
 msgid "ButtonBar|Help"
 msgstr ""
