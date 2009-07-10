@@ -50,7 +50,6 @@
 #include "../../src/tty/win.h"
 
 #include "../../src/background.h"	/* we_are_background */
-#include "../../src/util.h"		/* str_unconst */
 #include "../../src/strutil.h"		/* str_term_form */
 
 /*** global variables **************************************************/
@@ -523,7 +522,7 @@ tty_print_alt_char (int c)
 void
 tty_print_string (const char *s)
 {
-    SLsmg_write_string (str_unconst (str_term_form (s)));
+    SLsmg_write_string ((char *) str_term_form (s));
 }
 
 void
@@ -532,14 +531,14 @@ tty_printf (const char *fmt, ...)
     va_list args;
 
     va_start (args, fmt);
-    SLsmg_vprintf (str_unconst(fmt), args);
+    SLsmg_vprintf ((char *) fmt, args);
     va_end (args);
 }
 
 char *
 tty_tgetstr (const char *cap)
 {
-    return SLtt_tgetstr (str_unconst (cap));
+    return SLtt_tgetstr ((char *) cap);
 }
 
 void

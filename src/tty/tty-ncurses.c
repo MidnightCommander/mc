@@ -47,7 +47,6 @@
 
 #include "../../src/background.h"	/* we_are_background */
 #include "../../src/strutil.h"		/* str_term_form */
-#include "../../src/util.h"		/* str_unconst */
 
 /* include at last !!! */
 #ifdef WANT_TERM_H
@@ -307,7 +306,7 @@ char *
 tty_tgetstr (const char *cap)
 {
     char *unused = NULL;
-    return tgetstr (str_unconst (cap), &unused);
+    return tgetstr ((char *) cap, &unused);
 }
 
 void
