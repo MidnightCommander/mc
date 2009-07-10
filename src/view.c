@@ -3079,9 +3079,9 @@ view_search_update_cmd_callback(const void *user_data, gsize char_offset)
         view->update_activate += view->update_steps;
         if (verbose) {
             view_percent (view, char_offset);
-            mc_refresh ();
+            tty_refresh ();
         }
-        if (got_interrupt ())
+        if (tty_got_interrupt ())
             return MC_SEARCH_CB_ABORT;
     }
     /* may be in future return from this callback will change current position
