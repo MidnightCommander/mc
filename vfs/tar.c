@@ -616,6 +616,11 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive,
 	}
 
 	tar_fill_stat (archive, &st, header, *h_size);
+        if (S_ISDIR(st.st_mode)) {
+            entry = MEDATA->find_entry (me, parent, p, LINK_NO_FOLLOW, FL_NONE);
+            if (entry)
+                goto done;
+        }
 	inode = vfs_s_new_inode (me, archive, &st);
 
 	inode->data_offset = data_position;
