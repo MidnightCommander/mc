@@ -61,23 +61,11 @@ int mouse_close_dialog = 0;
 static void dlg_broadcast_msg_to (Dlg_head * h, widget_msg_t message,
 				  int reverse, int flags);
 
-static void
-slow_box (Dlg_head *h, int y, int x, int ys, int xs)
-{
-    tty_draw_hline (h->y + y, h->x + x, ' ', xs);
-    tty_draw_vline (h->y + y, h->x + x, ' ', ys);
-    tty_draw_vline (h->y + y, h->x + x + xs - 1, ' ', ys);
-    tty_draw_hline (h->y + y + ys - 1, h->x + x, ' ', xs);
-}
-
 /* draw box in window */
 void
 draw_box (Dlg_head *h, int y, int x, int ys, int xs)
 {
-    if (tty_is_slow ())
-	slow_box (h, y, x, ys, xs);
-    else
-	tty_draw_box (h->y + y, h->x + x, ys, xs);
+    tty_draw_box (h->y + y, h->x + x, ys, xs);
 }
 
 void

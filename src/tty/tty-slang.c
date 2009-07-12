@@ -485,7 +485,10 @@ tty_draw_vline (int y, int x, int ch, int len)
 void
 tty_draw_box (int y, int x, int rows, int cols)
 {
-    SLsmg_draw_box (y, x, rows, cols);
+    if (slow_tty)
+	tty_draw_box_slow (y, x, rows, cols);
+    else
+	SLsmg_draw_box (y, x, rows, cols);
 }
 
 void

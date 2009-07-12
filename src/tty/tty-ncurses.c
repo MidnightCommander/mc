@@ -229,21 +229,25 @@ tty_draw_vline (int y, int x, int ch, int len)
 void
 tty_draw_box (int y, int x, int rows, int cols)
 {
+    if (slow_tty) {
+	tty_draw_box_slow (y, x, rows, cols);
+    } else {
 #define waddc(_y, _x, c) move (_y, _x); addch (c)
-    waddc (y, x, ACS_ULCORNER);
-    hline (ACS_HLINE, cols - 2);
-    waddc (y + rows - 1, x, ACS_LLCORNER);
-    hline (ACS_HLINE, cols - 2);
+	waddc (y, x, ACS_ULCORNER);
+	hline (ACS_HLINE, cols - 2);
+	waddc (y + rows - 1, x, ACS_LLCORNER);
+	hline (ACS_HLINE, cols - 2);
 
-    waddc (y, x + cols - 1, ACS_URCORNER);
-    waddc (y + rows - 1, x + cols - 1, ACS_LRCORNER);
+	waddc (y, x + cols - 1, ACS_URCORNER);
+	waddc (y + rows - 1, x + cols - 1, ACS_LRCORNER);
 
-    move (y + 1, x);
-    vline (ACS_VLINE, rows - 2);
+	move (y + 1, x);
+	vline (ACS_VLINE, rows - 2);
 
-    move (y + 1, x + cols - 1);
-    vline (ACS_VLINE, rows - 2);
+	move (y + 1, x + cols - 1);
+	vline (ACS_VLINE, rows - 2);
 #undef waddc
+    }
 }
 
 void
