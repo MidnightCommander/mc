@@ -176,46 +176,105 @@ key_code_name_t key_name_conv_tab [] = {
     { KEY_F(19),     "f19",        N_("Function key 19") },
     { KEY_F(20),     "f20",        N_("Function key 20") },
     { KEY_BACKSPACE, "bs",         N_("Backspace key") },
+    { KEY_BACKSPACE, "backspace",  N_("Backspace key") },
     { KEY_END,       "end",        N_("End key") },
     { KEY_UP,        "up",         N_("Up arrow key") },
     { KEY_DOWN,      "down",       N_("Down arrow key") },
     { KEY_LEFT,      "left",       N_("Left arrow key") },
     { KEY_RIGHT,     "right",      N_("Right arrow key") },
-    { KEY_HOME,      "home",   	   N_("Home key") },
-    { KEY_NPAGE,     "pgdn",   	   N_("Page Down key") },
-    { KEY_PPAGE,     "pgup",   	   N_("Page Up key") },
+    { KEY_HOME,      "home",       N_("Home key") },
+    { KEY_NPAGE,     "pgdn",       N_("Page Down key") },
+    { KEY_PPAGE,     "pgup",       N_("Page Up key") },
+    { KEY_IC,        "ins",        N_("Insert key") },
     { KEY_IC,        "insert",     N_("Insert key") },
     { KEY_DC,        "delete",     N_("Delete key") },
     { ALT('\t'),     "complete",   N_("Completion/M-tab") },
     { KEY_KP_ADD,    "kpplus",     N_("+ on keypad") },
+    { KEY_KP_ADD,    "plus",       N_("+ on keypad") },
     { KEY_KP_SUBTRACT,"kpminus",   N_("- on keypad") },
+    { KEY_KP_SUBTRACT,"minus",     N_("- on keypad") },
     { KEY_KP_MULTIPLY,"kpasterix", N_("* on keypad") },
-/* From here on, these won't be shown in Learn keys (no space) */    
-    { KEY_LEFT,	     "kpleft",     N_("Left arrow keypad") },
+    { KEY_KP_MULTIPLY,"asterix",   N_("* on keypad") },
+
+/* From here on, these won't be shown in Learn keys (no space) */
+    { KEY_LEFT,      "kpleft",     N_("Left arrow keypad") },
     { KEY_RIGHT,     "kpright",    N_("Right arrow keypad") },
-    { KEY_UP,	     "kpup",       N_("Up arrow keypad") },
-    { KEY_DOWN,	     "kpdown",     N_("Down arrow keypad") },
-    { KEY_HOME,	     "kphome",     N_("Home on keypad") },
-    { KEY_END,	     "kpend",      N_("End on keypad") },
+    { KEY_UP,        "kpup",       N_("Up arrow keypad") },
+    { KEY_DOWN,      "kpdown",     N_("Down arrow keypad") },
+    { KEY_HOME,      "kphome",     N_("Home on keypad") },
+    { KEY_END,       "kpend",      N_("End on keypad") },
     { KEY_NPAGE,     "kpnpage",    N_("Page Down keypad") },
     { KEY_PPAGE,     "kpppage",    N_("Page Up keypad") },
     { KEY_IC,        "kpinsert",   N_("Insert on keypad") },
     { KEY_DC,        "kpdelete",   N_("Delete on keypad") },
     { (int) '\n',    "kpenter",    N_("Enter on keypad") },
+    { (int) '\n',    "enter",      N_("Enter on keypad") },
+    { (int) '\t',    "tab",        N_("Tab on keypad") },
+    { (int) ' ',     "space",      N_("Space on keypad") },
     { (int) '/',     "kpslash",    N_("Slash on keypad") },
     { (int) '#',     "kpnumlock",  N_("NumLock on keypad") },
+
+/* meta keys */
+    { KEY_M_CTRL,    "control",    N_("Ctrl") },
+    { KEY_M_CTRL,    "ctrl",       N_("Ctrl") },
+    { KEY_M_ALT,     "alt",        N_("Alt") },
+    { KEY_M_ALT,     "ralt",       N_("Alt") },
+    { KEY_M_ALT,     "meta",       N_("Alt") },
+    { KEY_M_SHIFT,   "shift",      N_("Shift") },
+
     { 0, 0, 0 }
     };
+
+
+int lookup_keyname (char *keyname)
+{
+    int i;
+
+    if (keyname[0] == '\0')
+        return 0;
+    if (keyname[1] == '\0')
+        return (int) keyname[0];
+
+    for (i = 0; key_name_conv_tab [i].code; i++)
+        if (str_casecmp (key_name_conv_tab [i].name, keyname) == 0)
+            return key_name_conv_tab [i].code;
+
+    return 0;
+}
+
 
 /* Return the code associated with the symbolic name keyname */
 int lookup_key (char *keyname)
 {
-    int i;
+    int k = -1;
+    char **keys;
+    guint keys_count = -1;
+    int key = 0;
+    int i = 0;
 
-    for (i = 0; key_name_conv_tab [i].code; i++){
-	if (str_casecmp (key_name_conv_tab [i].name, keyname))
-	    continue;
-	return key_name_conv_tab [i].code;
+    if (keyname == NULL)
+        return 0;
+
+    keys = g_strsplit (keyname, " ", -1);
+    keys_count = g_strv_length (keys);
+    for (i = keys_count - 1; i >= 0; i--) {
+        if (keys[i] !=NULL && keys[i][0] != 0) {
+            key = lookup_keyname (keys[i]);
+            if (key & KEY_M_CTRL) {
+                if (k < 256)
+                    k = XCTRL(k);
+                else
+                    k |= key;
+            } else {
+                if (k == -1)
+                    k = key;
+                else
+                    k |= key;
+            }
+        }
     }
-    return 0;
+    if (k == -1)
+        return 0;
+
+    return k;
 }
