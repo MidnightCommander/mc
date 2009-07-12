@@ -40,7 +40,7 @@
 #   define WANT_TERM_H
 #endif
 
-#include "../../src/tty/tty.h"		/* tty_is_ugly_line_drawing() */
+#include "../../src/tty/tty-internal.h"		/* slow_tty */
 #include "../../src/tty/color-ncurses.h"
 #include "../../src/tty/color-internal.h"
 #include "../../src/tty/win.h"
@@ -86,8 +86,10 @@ static const struct {
 /*** public functions **************************************************/
 
 void
-tty_init_curses (void)
+tty_init (gboolean slow, gboolean ugly_lines)
 {
+    slow_tty = slow;
+
     initscr ();
 
 #ifdef HAVE_ESCDELAY
@@ -109,16 +111,11 @@ tty_init_curses (void)
     keypad (stdscr, TRUE);
     nodelay (stdscr, FALSE);
 
-    if (tty_is_ugly_line_drawing ()) {
+    if (ugly_lines) {
 	int i;
 	for (i = 0; acs_approx[i].acscode != 0; i++)
 	    acs_map[acs_approx[i].acscode] = acs_approx[i].character;
     }
-}
-
-void
-tty_init_slang (void)
-{
 }
 
 void

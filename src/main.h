@@ -58,7 +58,6 @@ extern int navigate_with_arrows;
 extern int drop_menus;
 extern int cd_symlinks;
 extern int show_all_if_ambiguous;
-extern int slow_terminal;
 extern int update_prompt;	/* To comunicate with subshell */
 extern int safe_delete;
 extern int confirm_delete;
@@ -74,7 +73,7 @@ extern int only_leading_plus_minus;
 extern int output_starts_shell;
 extern int midnight_shutdown;
 extern char cmd_buf [512];
-extern const char *shell;
+extern char *shell;
 extern int auto_fill_mkdir_name;
 extern int skip_check_codeset;
 /* Ugly hack in order to distinguish between left and right panel in menubar */

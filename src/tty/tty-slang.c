@@ -42,7 +42,7 @@
 
 #include "../../src/global.h"
 
-#include "../../src/tty/tty.h"		/* tty_is_ugly_line_drawing() */
+#include "../../src/tty/tty-internal.h"		/* slow_tty */
 #include "../../src/tty/color-slang.h"
 #include "../../src/tty/color-internal.h"
 #include "../../src/tty/mouse.h"	/* Gpm_Event is required in key.h */
@@ -242,17 +242,10 @@ load_terminfo_keys (void)
 /*** public functions **************************************************/
 
 void
-tty_init_curses (void)
+tty_init (gboolean slow, gboolean ugly_lines)
 {
-    SLsmg_init_smg ();
-    do_enter_ca_mode ();
-    tty_keypad (TRUE);
-    tty_nodelay (FALSE);
-}
+    slow_tty = slow;
 
-void
-tty_init_slang (void)
-{
     SLtt_get_terminfo ();
 #if SLANG_VERSION >= 20000
     SLutf8_enable (-1);
@@ -278,6 +271,9 @@ tty_init_slang (void)
     /* 255 = ignore abort char; XCTRL('g') for abort char = ^g */
     SLang_init_tty (XCTRL('c'), 1, 0);
 
+    if (ugly_lines)
+	SLtt_Has_Alt_Charset = 0;
+
     /* If SLang uses fileno(stderr) for terminal input MC will hang
        if we call SLang_getkey between calls to open_error_pipe and
        close_error_pipe, e.g. when we do a growing view of an gzipped
@@ -285,8 +281,6 @@ tty_init_slang (void)
     if (SLang_TT_Read_FD == fileno (stderr))
 	SLang_TT_Read_FD = fileno (stdin);
 
-    if (tty_is_ugly_line_drawing ())
-	SLtt_Has_Alt_Charset = 0;
     if (tcgetattr (SLang_TT_Read_FD, &new_mode) == 0) {
 #ifdef VDSUSP
 	new_mode.c_cc[VDSUSP] = NULL_VALUE;	/* to ignore ^Y */
@@ -303,6 +297,11 @@ tty_init_slang (void)
 
     /* It's the small part from the previous init_key() */
     init_key_input_fd ();
+
+    SLsmg_init_smg ();
+    do_enter_ca_mode ();
+    tty_keypad (TRUE);
+    tty_nodelay (FALSE);
 }
 
 void

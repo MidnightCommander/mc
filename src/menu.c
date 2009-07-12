@@ -37,7 +37,7 @@
 #include "menu.h"
 #include "help.h"
 #include "dialog.h"
-#include "main.h"
+#include "main.h"		/* is_right */
 #include "strutil.h"
 
 int menubar_visible = 1;	/* This is the new default */
@@ -89,15 +89,15 @@ static void menubar_paint_idx (WMenu *menubar, int idx, int color)
         /* menu separator */
         tty_setcolor (SELECTED_COLOR);
 
-        if (!slow_terminal) {
+        if (!tty_is_slow ()) {
             widget_move (&menubar->widget, y, x - 1);
             tty_print_alt_char (ACS_LTEE);
         }
 
         tty_draw_hline (menubar->widget.y + y, menubar->widget.x + x,
-                        slow_terminal ? ' ' : ACS_HLINE, menubar->max_entry_len + 2);
+                        tty_is_slow () ? ' ' : ACS_HLINE, menubar->max_entry_len + 2);
 
-        if (!slow_terminal) {
+        if (!tty_is_slow ()) {
             widget_move (&menubar->widget, y, x + menubar->max_entry_len + 2);
             tty_print_alt_char (ACS_RTEE);
         }

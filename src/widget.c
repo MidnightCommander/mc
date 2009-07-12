@@ -51,7 +51,6 @@
 #include "widget.h"
 #include "../src/mcconfig/mcconfig.h"	/* for history loading and saving */
 #include "wtools.h"	/* For common_dialog_repaint() */
-#include "main.h"	/* for `slow_terminal' */
 #include "strutil.h"
 
 #define HISTORY_FILE_NAME ".mc/history"
@@ -1847,7 +1846,7 @@ listbox_drawscroll (WListbox *l)
     /* Are we at the top? */
     widget_move (&l->widget, 0, l->width);
     if (l->list == l->top)
-	tty_print_one_vline (FALSE);
+	tty_print_one_vline ();
     else
 	tty_print_char ('^');
 
@@ -1855,7 +1854,7 @@ listbox_drawscroll (WListbox *l)
     widget_move (&l->widget, max_line, l->width);
     top = listbox_cdiff (l->list, l->top);
     if ((top + l->height == l->count) || l->height >= l->count)
-	tty_print_one_vline (FALSE);
+	tty_print_one_vline ();
     else
 	tty_print_char ('v');
 
@@ -1868,7 +1867,7 @@ listbox_drawscroll (WListbox *l)
     for (i = 1; i < max_line; i++){
 	widget_move (&l->widget, i, l->width);
 	if (i != line)
-	    tty_print_one_vline (FALSE);
+	    tty_print_one_vline ();
 	else
 	    tty_print_char ('*');
     }
@@ -2301,7 +2300,7 @@ listbox_new (int y, int x, int height, int width, lcback callback)
     l->count = 0;
     l->cback = callback;
     l->allow_duplicates = 1;
-    l->scrollbar = !slow_terminal;
+    l->scrollbar = !tty_is_slow ();
     widget_want_hotkey (l->widget, 1);
 
     return l;

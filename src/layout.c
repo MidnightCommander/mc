@@ -52,6 +52,7 @@
 #include "../src/tty/color.h"
 #include "../src/tty/key.h"
 #include "../src/tty/mouse.h"
+#include "../src/tty/win.h"	/* do_enter_ca_mode() */
 
 #include "dialog.h"
 #include "widget.h"
@@ -714,15 +715,17 @@ change_screen_size (void)
     tty_reset_screen ();
 #endif
     low_level_change_screen_size ();
-    check_split ();
-#ifndef NCURSES_VERSION
+#ifdef HAVE_SLANG
     /* XSI Curses spec states that portable applications shall not invoke
      * initscr() more than once.  This kludge could be done within the scope
      * of the specification by using endwin followed by a refresh (in fact,
      * more than one curses implementation does this); it is guaranteed to work
      * only with slang.
      */
-    tty_init_curses ();
+    SLsmg_init_smg ();
+    do_enter_ca_mode ();
+    tty_keypad (TRUE);
+    tty_nodelay (FALSE);
 #endif
     setup_panels ();
 

@@ -64,7 +64,7 @@
 #include "dir.h"
 #include "panel.h"		/* Needed for current_panel and other_panel */
 #include "execute.h"
-#include "main.h"		/* slow_terminal */
+#include "main.h"		/* source_codepage */
 #include "view.h"
 #include "history.h"		/* MC_HISTORY_SHARED_SEARCH */
 #include "charsets.h"
@@ -2357,7 +2357,7 @@ view_display_hex (WView *view)
 		/* After every four bytes, print a group separator */
 		if (bytes % 4 == 3) {
 		    if (view->data_area.width >= 80 && col < width) {
-			tty_print_one_vline (slow_terminal);
+			tty_print_one_vline ();
 			col += 1;
 		    }
 		    if (col < width) {

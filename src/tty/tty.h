@@ -21,9 +21,10 @@
 
 /* {{{ Input }}} */
 
-extern void tty_init_slang (void);
-extern void tty_init_curses (void);
+extern void tty_init (gboolean slow, gboolean ugly_lines);
 extern void tty_shutdown (void);
+
+extern gboolean tty_is_slow (void);
 
 extern void tty_start_interrupt_key(void);
 extern void tty_enable_interrupt_key(void);
@@ -68,10 +69,8 @@ extern void tty_print_alt_char(int c);
 extern void tty_print_string(const char *s);
 extern void tty_printf(const char *s, ...);
 
-extern void tty_set_ugly_line_drawing (gboolean do_ugly);
-extern gboolean tty_is_ugly_line_drawing (void);
-extern void tty_print_one_vline (gboolean is_slow_term);
-extern void tty_print_one_hline (gboolean is_slow_term);
+extern void tty_print_one_vline (void);
+extern void tty_print_one_hline (void);
 extern void tty_draw_hline (int y, int x, int ch, int len);
 extern void tty_draw_vline (int y, int x, int ch, int len);
 extern void tty_draw_box (int y, int x, int rows, int cols);

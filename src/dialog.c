@@ -40,7 +40,7 @@
 #include "dialog.h"
 #include "layout.h"	/* winch_flag, change_screen_size() */
 #include "execute.h"	/* suspend_cmd() */
-#include "main.h"	/* slow_terminal */
+#include "main.h"	/* fast_refresh */
 #include "strutil.h"
 #include "setup.h"	/* mouse_close_dialog */
 
@@ -74,7 +74,7 @@ slow_box (Dlg_head *h, int y, int x, int ys, int xs)
 void
 draw_box (Dlg_head *h, int y, int x, int ys, int xs)
 {
-    if (slow_terminal)
+    if (tty_is_slow ())
 	slow_box (h, y, x, ys, xs);
     else
 	tty_draw_box (h->y + y, h->x + x, ys, xs);

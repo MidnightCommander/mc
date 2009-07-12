@@ -37,11 +37,18 @@
 #include "../../src/global.h"
 
 #include "../../src/tty/tty.h"
+#include "../../src/tty/tty-internal.h"
 
 #include "../../src/strutil.h"
 #include "../../src/background.h"	/* we_are_background */
 
 /*** global variables **************************************************/
+
+/* If true lines are drown by spaces */
+gboolean slow_tty = FALSE;
+
+/* If true use +, -, | for line drawing */
+gboolean ugly_line_drawing = FALSE;
 
 /*** file scope macro definitions **************************************/
 
@@ -50,9 +57,6 @@
 /*** file scope variables **********************************************/
 
 static volatile sig_atomic_t got_interrupt = 0;
-
-/* If true use +, -, | for line drawing */
-static gboolean force_ugly_line_drawing = FALSE;
 
 /*** file scope functions **********************************************/
 
@@ -64,6 +68,12 @@ sigintr_handler(int signo)
 }
 
 /*** public functions **************************************************/
+
+extern gboolean
+tty_is_slow (void)
+{
+    return slow_tty;
+}
 
 extern void
 tty_start_interrupt_key(void)
@@ -110,30 +120,18 @@ tty_got_interrupt(void)
 }
 
 void
-tty_set_ugly_line_drawing (gboolean do_ugly)
+tty_print_one_hline (void)
 {
-    force_ugly_line_drawing = do_ugly;
-}
-
-gboolean
-tty_is_ugly_line_drawing (void)
-{
-    return force_ugly_line_drawing;
-}
-
-void
-tty_print_one_hline (gboolean is_slow_term)
-{
-    if (is_slow_term)
+    if (slow_tty)
 	tty_print_char (' ');
     else
 	tty_print_alt_char (ACS_HLINE);
 }
 
 void
-tty_print_one_vline (gboolean is_slow_term)
+tty_print_one_vline (void)
 {
-    if (is_slow_term)
+    if (slow_tty)
 	tty_print_char (' ');
     else
 	tty_print_alt_char (ACS_VLINE);

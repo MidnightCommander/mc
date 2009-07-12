@@ -202,7 +202,10 @@ WLabel *the_hint;
 WButtonBar *the_bar;
 
 /* For slow terminals */
-int slow_terminal = 0;
+static int slow_terminal = 0;
+
+/* If true use +, -, | for line drawing */
+static int ugly_line_drawing = 0;
 
 /* Mouse type: GPM, xterm or none */
 Mouse_Type use_mouse_p = MOUSE_NONE;
@@ -295,7 +298,7 @@ static int edit_one_file_start_line = 0;
 int midnight_shutdown = 0;
 
 /* The user's shell */
-const char *shell = NULL;
+char *shell = NULL;
 
 /* mc_home: The home of MC - /etc/mc or defined by MC_DATADIR */
 char *mc_home = NULL;
@@ -1444,7 +1447,7 @@ setup_mc (void)
 
     setup_sigwinch ();
 
-    verbose = !((tty_baudrate () < 9600) || slow_terminal);
+    verbose = !((tty_baudrate () < 9600) || tty_is_slow ());
 
     init_mouse ();
 }
@@ -2058,10 +2061,6 @@ process_args (poptContext ctx, int c, const char *option_arg)
 	exit (0);
 	break;
 
-    case 'a':
-	tty_set_ugly_line_drawing (TRUE);
-	break;
-
     case 'c':
 	disable_colors = FALSE;
 	force_colors = TRUE;	/* for S-Lang only */
@@ -2128,7 +2127,7 @@ static const struct poptOption argument_table[] = {
      N_("Resets soft keys on HP terminals"), NULL},
     {"slow", 's', POPT_ARG_NONE, {&slow_terminal}, 0,
      N_("To run on slow terminals"), NULL},
-    {"stickchars", 'a', POPT_ARG_NONE, {NULL}, 'a',
+    {"stickchars", 'a', POPT_ARG_NONE, {&ugly_line_drawing}, 0,
      N_("Use stickchars to draw"), NULL},
 
     /* color options */
@@ -2300,7 +2299,7 @@ main (int argc, char *argv[])
 
     handle_args (argc, argv);
 
-    /* NOTE: This has to be called before tty_init_slang or whatever routine
+    /* NOTE: This has to be called before tty_init or whatever routine
        calls any define_sequence */
     init_key ();
 
@@ -2324,14 +2323,11 @@ main (int argc, char *argv[])
 
     /* Must be done before init_subshell, to set up the terminal size: */
     /* FIXME: Should be removed and LINES and COLS computed on subshell */
-    tty_init_slang ();
+    tty_init ((gboolean) slow_terminal, (gboolean) ugly_line_drawing);
 
     load_setup ();
 
-    tty_init_curses ();
-
     tty_init_colors (disable_colors, force_colors);
-
     dlg_set_default_colors ();
 
     /* create home directory */
