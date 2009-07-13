@@ -3261,7 +3261,9 @@ view_search_cmd (WView *view)
 
     char *defval = g_strdup (view->last_search_string != NULL ? view->last_search_string : "");
     char *exp = NULL;
+#ifdef HAVE_CHARSET
     GString *tmp;
+#endif
 
     int ttype_of_search = (int) view->search_type;
     int tall_codepages = (int) view->search_all_codepages;
@@ -3323,14 +3325,15 @@ view_search_cmd (WView *view)
     if (exp == NULL || exp[0] == '\0')
 	goto cleanup;
 
-    g_free (defval);
-    defval = NULL;
+#ifdef HAVE_CHARSET
     tmp = str_convert_to_input (exp);
 
     if (tmp)
-        defval = tmp->str;
-
-    g_string_free (tmp, FALSE);
+    {
+        g_free(exp);
+        exp = g_string_free (tmp, FALSE);
+    }
+#endif
 
     g_free (view->last_search_string);
     view->last_search_string = exp;
@@ -3339,7 +3342,7 @@ view_search_cmd (WView *view)
     if (view->search)
         mc_search_free(view->search);
 
-    view->search = mc_search_new(defval, -1);
+    view->search = mc_search_new(view->last_search_string, -1);
     if (! view->search)
         goto cleanup;
 
