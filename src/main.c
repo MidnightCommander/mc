@@ -1507,6 +1507,7 @@ static void check_codeset()
                     display_codepage = get_codepage_index ( cp_display );
                     utf8_display = str_isutf8 (_system_codepage);
                     source_codepage = display_codepage;
+                    cp_source = cp_display;
                     profile_changed = 1;
                 }
             } else {
