@@ -70,9 +70,6 @@ typedef enum {
 /* Type of the currently used mouse */
 extern Mouse_Type use_mouse_p;
 
-/* The mouse is currently: 1 - enabled, 0 - disabled */
-extern int mouse_enabled;
-
 /* String indicating that a mouse event has occured, usually "\E[M" */
 extern const char *xmouse_seq;
 
@@ -89,16 +86,6 @@ void disable_mouse (void);
 #define GPM_B_UP	(1 << 4)
 #endif
 
-#ifdef HAVE_LIBGPM
-
-/* GPM specific mouse support definitions */
 void show_mouse_pointer (int x, int y);
 
-#else
-
-/* Mouse support definitions for non-GPM mouse */
-#define show_mouse_pointer(a,b)
-
-#endif
-
-#endif
+#endif				/* MC_MOUSE_H */

@@ -11,6 +11,9 @@
 /* If true lines are shown by spaces */
 extern gboolean slow_tty;
 
+/* The mouse is currently: TRUE - enabled, FALSE - disabled */
+extern gboolean mouse_enabled;
+
 static inline void
 tty_draw_box_slow (int y, int x, int ys, int xs)
 {

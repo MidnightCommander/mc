@@ -34,22 +34,24 @@
 #include "../../src/global.h"
 
 #include "../../src/tty/tty.h"
+#include "../../src/tty/tty-internal.h"	/* mouse_enabled */
 #include "../../src/tty/mouse.h"
 #include "../../src/tty/key.h"		/* define sequence */
 
-int mouse_enabled = 0;
+gboolean mouse_enabled = FALSE;
 const char *xmouse_seq;
 
-#ifdef HAVE_LIBGPM
-void show_mouse_pointer (int x, int y)
+void
+show_mouse_pointer (int x, int y)
 {
-    if (use_mouse_p == MOUSE_GPM) {
+#ifdef HAVE_LIBGPM
+    if (use_mouse_p == MOUSE_GPM)
 	Gpm_DrawPointer (x, y, gpm_consolefd);
-    }
-}
 #endif /* HAVE_LIBGPM */
+}
 
-void init_mouse (void)
+void
+init_mouse (void)
 {
     switch (use_mouse_p) {
 #ifdef HAVE_LIBGPM
@@ -57,21 +59,24 @@ void init_mouse (void)
 	use_mouse_p = MOUSE_GPM;
 	break;
 #endif /* HAVE_LIBGPM */
+
     case MOUSE_XTERM_NORMAL_TRACKING:
     case MOUSE_XTERM_BUTTON_EVENT_TRACKING:
 	define_sequence (MCKEY_MOUSE, xmouse_seq, MCKEY_NOACTION);
 	break;
+
     default:
 	break;
     }
+
     enable_mouse ();
 }
 
-void enable_mouse (void)
+void
+enable_mouse (void)
 {
-    if (mouse_enabled) {
+    if (mouse_enabled)
 	return;
-    }
 
     switch (use_mouse_p) {
 #ifdef HAVE_LIBGPM
@@ -94,6 +99,7 @@ void enable_mouse (void)
 	}
 	break;
 #endif /* HAVE_LIBGPM */
+
     case MOUSE_XTERM_NORMAL_TRACKING:
 	/* save old highlight mouse tracking */
 	printf(ESC_STR "[?1001s");
@@ -102,8 +108,9 @@ void enable_mouse (void)
 	printf(ESC_STR "[?1000h");
 
 	fflush (stdout);
-	mouse_enabled = 1; 
+	mouse_enabled = TRUE;
 	break;
+
     case MOUSE_XTERM_BUTTON_EVENT_TRACKING:
 	/* save old highlight mouse tracking */
 	printf(ESC_STR "[?1001s");
@@ -112,20 +119,21 @@ void enable_mouse (void)
 	printf(ESC_STR "[?1002h");
 
 	fflush (stdout);
-	mouse_enabled = 1; 
+	mouse_enabled = TRUE;
 	break;
+
     default:
 	break;
     }
 }
 
-void disable_mouse (void)
+void
+disable_mouse (void)
 {
-    if (!mouse_enabled) {
+    if (!mouse_enabled)
 	return;
-    }
 
-    mouse_enabled = 0;
+    mouse_enabled = FALSE;
 
     switch (use_mouse_p) {
 #ifdef HAVE_LIBGPM

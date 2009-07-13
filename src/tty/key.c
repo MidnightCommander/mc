@@ -40,6 +40,7 @@
 #include "../../src/global.h"
 
 #include "../../src/tty/tty.h"
+#include "../../src/tty/tty-internal.h"	/* mouse_enabled */
 #include "../../src/tty/mouse.h"
 #include "../../src/tty/key.h"
 #include "../../src/tty/win.h"		/* xterm_flag */
@@ -1274,7 +1275,7 @@ define_sequence (int code, const char *seq, int action)
 		    base->code = code;
 		    base->action = action;
 		}
-		return 1;
+		return TRUE;
 	    }
 
 	    base = base->child;
@@ -1544,13 +1545,13 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
 	if (use_mouse_p == MOUSE_GPM) {
 	    if (gpm_fd < 0) {
 		/* Connection to gpm broken, possibly gpm has died */
-		mouse_enabled = 0;
+		mouse_enabled = FALSE;
 		use_mouse_p = MOUSE_NONE;
 		break;
-	    } else {
-		FD_SET (gpm_fd, &select_set);
-		maxfdp = max (maxfdp, gpm_fd);
 	    }
+	
+	    FD_SET (gpm_fd, &select_set);
+	    maxfdp = max (maxfdp, gpm_fd);
 	}
 #endif
 
@@ -1562,7 +1563,10 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
 	} else {
 	    int seconds;
 
-	    if ((seconds = vfs_timeouts ())) {
+	    seconds = vfs_timeouts ();
+	    time_addr = NULL;
+
+	    if (seconds != 0) {
 		/* the timeout could be improved and actually be
 		 * the number of seconds until the next vfs entry
 		 * timeouts in the stamp list.
@@ -1571,8 +1575,7 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
 		timeout.tv_sec = seconds;
 		timeout.tv_usec = 0;
 		time_addr = &timeout;
-	    } else
-		time_addr = NULL;
+	    }
 	}
 
 	if (!block || winch_flag) {
