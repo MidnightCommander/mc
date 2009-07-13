@@ -1457,8 +1457,8 @@ setup_dummy_mc ()
 
 static void check_codeset()
 {
-#ifdef HAVE_CHARSET
     const char *_system_codepage = NULL;
+#ifdef HAVE_CHARSET
     const char *_source_codepage = NULL;
     const char *_display_codepage = NULL;
     int profile_changed = 0;
@@ -1519,7 +1519,10 @@ static void check_codeset()
         if ( profile_changed )
             save_configure ();
     }
-#endif
+#else /* HAVE_CHARSET */
+    _system_codepage = str_detect_termencoding();
+    utf8_display = str_isutf8 (_system_codepage);
+#endif /* HAVE_CHARSET */
 }
 
 static void

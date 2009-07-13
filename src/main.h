@@ -46,11 +46,12 @@ extern int mouse_move_pages;
 #ifdef HAVE_CHARSET
 extern int source_codepage;
 extern int display_codepage;
-extern int utf8_display;
 #else
 extern int eight_bit_clean;
 extern int full_eight_bits;
 #endif /* !HAVE_CHARSET */
+
+extern int utf8_display;
 
 extern int confirm_view_dir;
 extern int fast_refresh;
