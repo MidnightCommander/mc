@@ -564,6 +564,10 @@ int mc_##name inarg \
     char *mpath = vfs_canon_and_translate (path); \
     if (mpath != NULL) { \
     vfs = vfs_get_class (mpath); \
+    if (vfs == NULL){ \
+	g_free (mpath); \
+	return -1; \
+    } \
     result = vfs->name ? (*vfs->name)callarg : -1; \
     g_free (mpath); \
     if (result == -1) \
@@ -618,6 +622,8 @@ ssize_t mc_##name inarg \
     if (handle == -1) \
 	return -1; \
     vfs = vfs_op (handle); \
+    if (vfs == NULL) \
+	 return -1; \
     result = vfs->name ? (*vfs->name)callarg : -1; \
     if (result == -1) \
 	errno = vfs->name ? ferrno (vfs) : E_NOTSUPP; \

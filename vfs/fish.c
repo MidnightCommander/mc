@@ -1045,8 +1045,31 @@ static int fish_unlink (struct vfs_class *me, const char *path)
     POSTFIX(OPT_FLUSH);
 }
 
+static int fish_exists (struct vfs_class *me, const char *path)
+{
+    int ret_code;
+
+    PREFIX
+
+    g_snprintf(buf, sizeof(buf),
+            "#ISEXISTS \"/%s\"\n"
+	    "ls -l \"/%s\" >/dev/null 2>/dev/null\n"
+	    "echo '### '$?\n",
+	    rpath, rpath);
+
+    g_free (rpath);
+
+    if ( fish_send_command(me, super, buf, OPT_FLUSH) == 0 )
+	return 1;
+
+    return 0;
+}
+
+
 static int fish_mkdir (struct vfs_class *me, const char *path, mode_t mode)
 {
+    int ret_code;
+
     PREFIX
 
     (void) mode;
@@ -1056,7 +1079,17 @@ static int fish_mkdir (struct vfs_class *me, const char *path, mode_t mode)
 	    "mkdir /%s 2>/dev/null\n"
 	    "echo '### 000'\n",
 	    rpath, rpath);
-    POSTFIX(OPT_FLUSH);
+
+    g_free (rpath);
+    ret_code = fish_send_command(me, super, buf, OPT_FLUSH);
+
+    if ( ret_code != 0 )
+	return ret_code;
+
+    if ( ! fish_exists (me, path) ){
+	ERRNOR (EACCES, -1);
+    }
+    return 0;
 }
 
 static int fish_rmdir (struct vfs_class *me, const char *path)
