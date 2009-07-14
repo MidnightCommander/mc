@@ -84,12 +84,10 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
 {
     int treplace_backwards = edit->replace_backwards;
     int treplace_case = edit->replace_case;
-    int treplace_mode = edit->replace_mode;
     int tall_codepages = edit->all_codepages;
     mc_search_type_t ttype_of_search = edit->search_type;
     int dialog_result;
     gchar **list_of_types = mc_search_get_types_strings_array();
-    const char *replace_mode_str[] = { N_("pro&Mpt on replace"), N_("replace &All") };
 
     int REPLACE_DLG_HEIGHT = REPLACE_DLG_MIN_HEIGHT + g_strv_length (list_of_types) - REPLACE_DLG_HEIGHT_SUPPLY;
 
@@ -101,10 +99,6 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
 
         {quick_button, 2, 10, 12, REPLACE_DLG_HEIGHT, N_("&OK"), 0, B_ENTER,
          0, 0, NULL, NULL, NULL},
-
-
-        {quick_radio, 33, REPLACE_DLG_WIDTH, 10, REPLACE_DLG_HEIGHT, "", 2, treplace_mode,
-         &treplace_mode, const_cast (char **, replace_mode_str), NULL, NULL, NULL},
 
 #ifdef HAVE_CHARSET
         {quick_checkbox, 33, REPLACE_DLG_WIDTH, 9, REPLACE_DLG_HEIGHT, N_("All charsets"), 0, 0,
@@ -155,7 +149,7 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
 
     if (dialog_result != B_CANCEL) {
         edit->search_type = ttype_of_search;
-        edit->replace_mode = treplace_mode;
+        edit->replace_mode = 0;
         edit->all_codepages = tall_codepages;
         edit->replace_backwards = treplace_backwards;
         edit->replace_case = treplace_case;
@@ -431,51 +425,80 @@ editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, int max_l
 
 /* --------------------------------------------------------------------------------------------- */
 
-#define CONFIRM_DLG_WIDTH 79
-#define CONFIRM_DLG_HEIGTH 6
-
 int
-editcmd_dialog_replace_prompt_show (WEdit * edit, char *replace_text, int xpos, int ypos)
+editcmd_dialog_replace_prompt_show (WEdit * edit, char *from_text, char *to_text, int xpos, int ypos)
 {
+    /* dialog sizes */
+    int dlg_height = 9;
+    int dlg_width = 8;
+
     int retval;
+    int i;
+    int btn_pos;
 
-    QuickWidget quick_widgets[] =
-    {
-	{quick_button, 63, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_ ("&Cancel"),
-	 0, B_CANCEL, 0, 0, NULL, NULL, NULL},
-	{quick_button, 50, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_ ("O&ne"),
-	 0, B_REPLACE_ONE, 0, 0, NULL, NULL, NULL},
-	{quick_button, 37, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_ ("A&ll"),
-	 0, B_REPLACE_ALL, 0, 0, NULL, NULL, NULL},
-	{quick_button, 21, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_ ("&Skip"),
-	 0, B_SKIP_REPLACE, 0, 0, NULL, NULL, NULL},
-	{quick_button, 4, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_ ("&Replace"),
-	 0, B_ENTER, 0, 0, NULL, NULL, NULL},
-	{quick_label, 2, CONFIRM_DLG_WIDTH, 2, CONFIRM_DLG_HEIGTH, 0,
-	 0, 0, 0, 0, 0, NULL, NULL},
-	 NULL_QuickWidget};
+    char *repl_from, *repl_to;
+    char tmp [BUF_MEDIUM];
 
-    GString *label_text = g_string_new (_(" Replace with: "));
+    QuickWidget quick_widgets[] = {
+	{quick_button, 44, dlg_width, 6, dlg_height, N_("&Cancel"),
+	0, B_CANCEL, 0, 0, NULL, NULL, NULL},
+	{quick_button, 29, dlg_width, 6, dlg_height, N_("&Skip"),
+	0, B_SKIP_REPLACE, 0, 0, NULL, NULL, NULL},
+	{quick_button, 21, dlg_width, 6, dlg_height, N_("A&ll"),
+	0, B_REPLACE_ALL, 0, 0, NULL, NULL, NULL},
+	{quick_button, 4, dlg_width, 6, dlg_height, N_("&Replace"),
+	0, B_ENTER, 0, 0, NULL, NULL, NULL},
+	{quick_label, 3, dlg_width, 2, dlg_height, 0,
+	0, 0, 0, 0, 0, NULL, NULL},
+	{quick_label, 2, dlg_width, 3, dlg_height, 0,
+	0, 0, 0, 0, 0, NULL, NULL},
+	{quick_label, 3, dlg_width, 4, dlg_height, 0,
+	0, 0, 0, 0, 0, NULL, NULL},
+	NULL_QuickWidget
+    };
 
-    if (replace_text && *replace_text) {
-        size_t label_len;
-	label_len = label_text->len;
-        g_string_append (label_text, replace_text);
-	g_string_append (label_text, " ?");
+#ifdef ENABLE_NLS
+	for (i = 0; i < 4; i++)
+	    quick_widgets[i].text = _(quick_widgets[i].text);
+#endif
+
+    /* calculate button positions */
+    btn_pos = 4;
+
+    for (i = 3; i > -1; i--) {
+        quick_widgets[i].relative_x = btn_pos;
+
+        btn_pos += str_term_width1 (quick_widgets[i].text) + 5;
+
+        if (i == 3) /* default button */
+            btn_pos += 2;
     }
-    quick_widgets[5].text = label_text->str;
 
-    if (xpos == -1){
-	xpos = (edit->num_widget_columns - CONFIRM_DLG_WIDTH) / 2;
-    }
+    dlg_width = btn_pos + 2;
 
-    if (ypos == -1){
+    /* correct widget coordinates */
+    for (i = 0; i <  7; i++)
+	quick_widgets[i].x_divisions = dlg_width;
+
+    g_snprintf (tmp, sizeof (tmp), " '%s'", from_text);
+    repl_from = g_strdup (str_fit_to_term (tmp, dlg_width - 7, J_LEFT));
+
+    g_snprintf (tmp, sizeof (tmp), " '%s'", to_text);
+    repl_to =  g_strdup (str_fit_to_term (tmp, dlg_width - 7, J_LEFT));
+
+    quick_widgets[4].text = repl_from;
+    quick_widgets[5].text = _(" Replace with: ");
+    quick_widgets[6].text = repl_to;
+
+    if (xpos == -1)
+	xpos = (edit->num_widget_columns - dlg_width) / 2;
+
+    if (ypos == -1)
 	ypos = edit->num_widget_lines * 2 / 3;
-    }
 
     {
 	QuickDialog Quick_input =
-	{CONFIRM_DLG_WIDTH, CONFIRM_DLG_HEIGTH, 0, 0, N_ (" Confirm replace "),
+	{dlg_width, dlg_height, 0, 0, N_ (" Confirm replace "),
 	 "[Input Line Keys]", 0 /*quick_widgets */, 0 };
 
 	Quick_input.widgets = quick_widgets;
@@ -484,12 +507,13 @@ editcmd_dialog_replace_prompt_show (WEdit * edit, char *replace_text, int xpos, 
 
 	/* Sometimes menu can hide replaced text. I don't like it */
 
-	if ((edit->curs_row >= ypos - 1) && (edit->curs_row <= ypos + CONFIRM_DLG_HEIGTH - 1))
-	    ypos -= CONFIRM_DLG_HEIGTH;
+	if ((edit->curs_row >= ypos - 1) && (edit->curs_row <= ypos + dlg_height - 1))
+	    ypos -= dlg_height;
 
 	Quick_input.ypos = ypos;
 	retval = quick_dialog (&Quick_input);
-	g_string_free (label_text, TRUE);
+	g_free (repl_from);
+	g_free (repl_to);
 	return retval;
     }
 }

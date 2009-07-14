@@ -1347,7 +1347,6 @@ edit_replace_cmd (WEdit *edit, int again)
     static char *saved2 = NULL;
     char *input1 = NULL;	/* user input from the dialog */
     char *input2 = NULL;
-    char *str_for_prompt_dialog = NULL;
     int replace_yes;
     long times_replaced = 0, last_search;
     gboolean once_found = FALSE;
@@ -1378,8 +1377,6 @@ edit_replace_cmd (WEdit *edit, int again)
 
 	g_free (disp1);
 	g_free (disp2);
-
-	str_for_prompt_dialog = g_strdup(input2);
 
 	if (input1 == NULL || *input1 == '\0') {
 	    edit->force = REDRAW_COMPLETELY;
@@ -1450,7 +1447,7 @@ edit_replace_cmd (WEdit *edit, int again)
 
 	    replace_yes = 1;
 
-	    if (edit->replace_mode==0) {
+	    if (edit->replace_mode == 0) {
 		int l;
 		l = edit->curs_row - edit->num_widget_lines / 3;
 		if (l > 0)
@@ -1464,11 +1461,10 @@ edit_replace_cmd (WEdit *edit, int again)
 
 		/*so that undo stops at each query */
 		edit_push_key_press (edit);
-
-		switch (editcmd_dialog_replace_prompt_show (edit, str_for_prompt_dialog,	/* and prompt 2/3 down */
-					     -1,
-					     -1)) {
+		/* and prompt 2/3 down */
+		switch (editcmd_dialog_replace_prompt_show (edit, input1, input2, -1, -1)) {
 		case B_ENTER:
+		    replace_yes = 1;
 		    break;
 		case B_SKIP_REPLACE:
 		    replace_yes = 0;
@@ -1476,10 +1472,9 @@ edit_replace_cmd (WEdit *edit, int again)
 		case B_REPLACE_ALL:
 		    edit->replace_mode=1;
 		    break;
-		case B_REPLACE_ONE:
-		    break;
 		case B_CANCEL:
 		    replace_yes = 0;
+		    edit->replace_mode = -1;
 		    break;
 		}
 	    }
@@ -1529,12 +1524,11 @@ edit_replace_cmd (WEdit *edit, int again)
 			      D_NORMAL, 1, _("&OK"));
 	    edit->replace_mode = -1;
 	}
-    } while (edit->replace_mode >0);
+    } while (edit->replace_mode >= 0);
 
     edit->force = REDRAW_COMPLETELY;
     edit_scroll_screen_over_cursor (edit);
   cleanup:
-    g_free (str_for_prompt_dialog);
     g_free (input1);
     g_free (input2);
 }

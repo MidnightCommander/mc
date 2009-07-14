@@ -33,6 +33,5 @@ void editcmd_dialog_completion_show (WEdit *, int, int, struct selection *, int)
 void editcmd_dialog_select_definition_show (WEdit *, char *, int, int, struct etags_hash_struct *,
                                             int);
 
-int editcmd_dialog_replace_prompt_show (WEdit *, char *, int, int);
-
+int editcmd_dialog_replace_prompt_show (WEdit *, char *, char *, int, int);
 #endif
