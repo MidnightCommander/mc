@@ -1,0 +1,268 @@
+# -------------------------------
+#
+# Erlang programming language syntax highlighting
+# for CoolEdit
+#
+# Homepage of Erlang: http://www.erlang.org
+#
+# Author: Witold Baryluk < baryluk at smp if uj edu pl >
+# Date: 07-07-2009
+#
+# -------------------------------
+#
+# Usefull links:
+# http://www.erlang.org/doc/doc-5.4.13/doc/reference_manual/part_frame.html
+# http://www.regular-expressions.info/reference.html
+# gedit: http://martin.ankerl.com/files/erlang.lang
+# joe: http://www.straatinvestments.com/~tlack/erlang/joe-editor/erlang.jsf
+# geshi: http://www.kreisquadratur.de/blog/?p=305
+# vim: http://erlang.org/pipermail/erlang-questions/2006-July/021362.html
+# kate: http://bugsfiles.kde.org/attachment.cgi?id=21155
+
+context default
+	keyword whole after yellow
+	keyword whole and brown
+	keyword whole andalso brown
+	keyword whole band brown
+	keyword whole begin yellow
+	keyword whole bnot brown
+	keyword whole bor brown
+	keyword whole bsl brown
+	keyword whole bsr brown
+	keyword whole bxor brown
+	keyword whole case yellow
+	keyword whole catch yellow
+	keyword whole cond yellow
+	keyword whole div brown
+	keyword whole end yellow
+	keyword whole fun yellow
+	keyword whole if yellow
+	keyword whole let yellow
+	keyword whole not brown
+	keyword whole of yellow
+	keyword whole or brown
+	keyword whole orelse brown
+	keyword whole query yellow
+	keyword whole receive yellow
+	keyword whole rem brown
+	keyword whole try yellow
+	keyword whole throw yellow
+	keyword whole xor brown
+
+	keyword whole when yellow
+
+	keyword whole -module brightmagenta
+	keyword whole -compile brightmagenta
+	keyword whole -behaviour brightmagenta
+	keyword whole -record brightmagenta
+	keyword whole -define brightmagenta
+	keyword whole -include brightmagenta
+	keyword whole -include_lib brightmagenta
+	keyword whole -vsn magenta
+	keyword whole -author magenta
+	keyword whole -copyright magenta
+	keyword whole -export brightmagenta
+	keyword whole -\{abcdefghijklmnoprqstuvwxyz\}\[abcdefghijklmnoprqstuvwxyzABCDEFGHIJKLMNOPRQSTVWXYZ0123456789_\] red
+
+# erlang:*
+	keyword whole abs brightgreen
+	keyword whole accept brightgreen
+	keyword whole alarm brightgreen
+	keyword whole apply brightgreen
+	keyword whole atom_to_list brightgreen
+	keyword whole binary_to_list brightgreen
+	keyword whole binary_to_term brightgreen
+	keyword whole check_process_code brightgreen
+	keyword whole concat_binary brightgreen
+	keyword whole date brightgreen
+	keyword whole delete_module brightgreen
+	keyword whole disconnect_node brightgreen
+	keyword whole element brightgreen
+	keyword whole erase brightgreen
+	keyword whole exit brightgreen
+	keyword whole float brightgreen
+	keyword whole float_to_list brightgreen
+	keyword whole garbage_collect brightgreen
+	keyword whole get brightgreen
+	keyword whole get_keys brightgreen
+	keyword whole group_leader brightgreen
+	keyword whole halt brightgreen
+	keyword whole hd brightgreen
+	keyword whole integer_to_list brightgreen
+	keyword whole is_alive brightgreen
+	keyword whole is_atom brightgreen
+	keyword whole is_binary brightgreen
+	keyword whole is_boolean brightgreen
+	keyword whole is_float brightgreen
+	keyword whole is_function brightgreen
+	keyword whole is_integer brightgreen
+	keyword whole is_list brightgreen
+	keyword whole is_number brightgreen
+	keyword whole is_pid brightgreen
+	keyword whole is_port brightgreen
+	keyword whole is_process_alive brightgreen
+	keyword whole is_record brightgreen
+	keyword whole is_reference brightgreen
+	keyword whole is_tuple brightgreen
+	keyword whole length brightgreen
+	keyword whole link brightgreen
+	keyword whole list_to_atom brightgreen
+	keyword whole list_to_binary brightgreen
+	keyword whole list_to_float brightgreen
+	keyword whole list_to_integer brightgreen
+	keyword whole list_to_pid brightgreen
+	keyword whole list_to_tuple brightgreen
+	keyword whole load_module brightgreen
+	keyword whole loaded brightgreen
+	keyword whole localtime brightgreen
+	keyword whole make_ref brightgreen
+	keyword whole module_loaded brightgreen
+	keyword whole node brightgreen
+	keyword whole nodes brightgreen
+	keyword whole now brightgreen
+	keyword whole open_port brightgreen
+	keyword whole pid_to_list brightgreen
+	keyword whole port_close brightgreen
+	keyword whole port_command brightgreen
+	keyword whole port_connect brightgreen
+	keyword whole port_control brightgreen
+	keyword whole ports brightgreen
+	keyword whole pre_loaded brightgreen
+	keyword whole process_flag brightgreen
+	keyword whole process_info brightgreen
+	keyword whole processes brightgreen
+	keyword whole purge_module brightgreen
+	keyword whole put brightgreen
+	keyword whole register brightgreen
+	keyword whole registered brightgreen
+	keyword whole round brightgreen
+	keyword whole self brightgreen
+	keyword whole setelement brightgreen
+	keyword whole size brightgreen
+	keyword whole spawn brightgreen
+	keyword whole spawn_link brightgreen
+	keyword whole spawn_opt brightgreen
+	keyword whole split_binary brightgreen
+	keyword whole statistics brightgreen
+	keyword whole term_to_binary brightgreen
+	keyword whole throw brightgreen
+	keyword whole time brightgreen
+	keyword whole tl brightgreen
+	keyword whole trunc brightgreen
+	keyword whole tuple_to_list brightgreen
+	keyword whole unlink brightgreen
+	keyword whole unregister brightgreen
+	keyword whole whereis brightgreen
+
+	keyword whole gen_server:cast brightgreen
+	keyword whole gen_server:call brightgreen
+	keyword whole gen_server:reply brightgreen
+	keyword whole gen_server:start_link brightgreen
+	keyword whole gen_server:start brightgreen
+	keyword whole io:format brightgreen
+
+	keyword whole init white
+	keyword whole handle_cast white
+	keyword whole handle_call white
+	keyword whole handle_info white
+	keyword whole handle_event white
+	keyword whole handle_sync_event white
+	keyword whole terminate white
+	keyword whole code_change white
+
+# list comprehension
+	keyword <- yellow
+# clause
+	keyword -> yellow
+# guards
+	keyword =:= brown
+	keyword == brown
+	keyword /= brown
+	keyword =/= brown
+# binary
+	keyword << brightcyan
+	keyword >> brightcyan
+# guards
+	keyword < brown
+	keyword =< brown
+	keyword >= brown
+	keyword > brown
+# ops
+	keyword - yellow
+	keyword \+ yellow
+	keyword / yellow
+	keyword \* yellow
+
+	keyword ; brightcyan
+	keyword , brightcyan
+	keyword . brightcyan
+	keyword = yellow
+	keyword % brown
+
+	keyword \+\+ yellow
+	keyword -- yellow
+	keyword ! yellow
+# TODO this does not work for $" or $', use $\" or $\' instead. ?
+	keyword $\{abcdefghijklmnoprqstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ0123456789_{}[]()(\\/`~!@#$%^&\*+-=;:'"|,./?<>\} red
+	keyword $\ red
+
+#	keyword '\\\{0123\}\{01234567\}\{01234567\}' brightgreen
+
+# TODO: integers, inegers of form Base#digits, 2#1010101
+# todo: records access via #state{} 
+
+	keyword whole ?MODULE red
+	keyword whole ?LINE red
+	keyword whole ?FILE red
+	keyword whole ?\[abcdefghijklmnoprqstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ0123456789_@\] red
+
+# gray operatory
+# cyan - moduly
+
+
+	keyword whole true red
+	keyword whole false red
+
+	keyword [ brightcyan
+	keyword || brightcyan
+	keyword | brightcyan
+	keyword ] brightcyan
+	keyword ( brightcyan
+	keyword ) brightcyan
+	keyword { cyan
+	keyword } cyan
+
+	keyword whole lists:seq gray
+	keyword whole lists:map gray
+	keyword whole lists:filter gray
+	keyword whole lists:reduce gray
+	keyword whole lists:foldl gray
+	keyword whole lists:append gray
+	keyword whole lists:nth gray
+	keyword whole behaviour_info gray
+	keyword whole dict:find gray
+	keyword whole dict:is_key gray
+	keyword whole dict:erase gray
+	keyword whole dict:new gray
+	keyword whole dict:map gray
+	keyword whole dict:store gray
+	keyword whole dict:fetch_keys gray
+	keyword whole dict:append gray
+	keyword whole dict:update gray
+
+# todo: no more than one dot in atom, and not at the end
+	keyword whole \{abcdefghijklmnoprqstuvwxyz\}\[abcdefghijklmnoprqstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ0123456789_.@\] lightgray
+	keyword whole \{_ABCDEFGHIJKLMNOPRQSTUVWXYZ\}\[abcdefghijklmnoprqstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ0123456789_@\] white
+
+context exclusive % \n brown
+	spellcheck
+
+context " " green
+	spellcheck
+	keyword ~p brightgreen
+	keyword ~n brightgreen
+	keyword ~w brightgreen
+	keyword ~~ brightgreen
+
+context ' ' red
+	spellcheck

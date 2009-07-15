@@ -17,6 +17,7 @@ SYNTAXFILES =			\
 	dos.syntax		\
 	ebuild.syntax		\
 	eiffel.syntax		\
+	erlang.syntax		\
 	f90.syntax		\
 	fortran.syntax		\
 	haskell.syntax		\

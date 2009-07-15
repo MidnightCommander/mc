@@ -193,5 +193,11 @@ include nemerle.syntax
 file ..\*\\.(hdl|vhdl|HDL|VHDL)$ VHDL\sProgram
 include vhdl.syntax
 
+file ..\*\\.erl$ Erlang\sProgram  ^(-module\\(|#!.*escript)
+include erlang.syntax
+
+file ..\*\\.hrl$ Erlang\sHeader ^-record\(
+include erlang.syntax
+
 file .\* unknown
 include unknown.syntax
