@@ -46,7 +46,7 @@ static const char ESCAPE_GLOB_CHARS[]  = "$*\\";
 /*** public functions ****************************************************************************/
 
 char *
-strutils_escape (const char *src, int src_len, const char *escaped_chars,
+strutils_escape (const char *src, gsize src_len, const char *escaped_chars,
                  gboolean escape_non_printable)
 {
     GString *ret;
@@ -60,7 +60,7 @@ strutils_escape (const char *src, int src_len, const char *escaped_chars,
 
     ret = g_string_new ("");
 
-    if (src_len == -1)
+    if (src_len == (gsize)-1)
         src_len = strlen (src);
 
     for (curr_index = 0; curr_index < src_len; curr_index++) {
@@ -96,7 +96,7 @@ strutils_escape (const char *src, int src_len, const char *escaped_chars,
 
 /* --------------------------------------------------------------------------------------------- */
 char *
-strutils_unescape (const char *src, int src_len, const char *unescaped_chars,
+strutils_unescape (const char *src, gsize src_len, const char *unescaped_chars,
                  gboolean unescape_non_printable)
 {
     GString *ret;
@@ -110,7 +110,7 @@ strutils_unescape (const char *src, int src_len, const char *unescaped_chars,
 
     ret = g_string_new ("");
 
-    if (src_len == -1)
+    if (src_len == (gsize)-1)
         src_len = strlen (src);
 
     for (curr_index = 0; curr_index < src_len-1; curr_index++) {
