@@ -40,6 +40,7 @@
 
 /* {{{ Input }}} */
 
+extern void tty_start_interrupt_key(void);
 extern void tty_enable_interrupt_key(void);
 extern void tty_disable_interrupt_key(void);
 extern gboolean tty_got_interrupt(void);
@@ -70,6 +71,7 @@ extern char *tty_tgetstr (const char *name);
 
 /* legacy interface */
 
+#define start_interrupt_key()	tty_start_interrupt_key()
 #define enable_interrupt_key()	tty_enable_interrupt_key()
 #define disable_interrupt_key()	tty_disable_interrupt_key()
 #define got_interrupt()		tty_got_interrupt()

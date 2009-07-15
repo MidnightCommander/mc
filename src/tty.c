@@ -70,15 +70,26 @@ sigintr_handler(int signo)
 /*** public functions **************************************************/
 
 extern void
+tty_start_interrupt_key(void)
+{
+    struct sigaction act;
+
+    act.sa_handler = sigintr_handler;
+    sigemptyset (&act.sa_mask);
+    act.sa_flags = SA_RESTART;
+    sigaction (SIGINT, &act, NULL);
+}
+
+extern void
 tty_enable_interrupt_key(void)
 {
     struct sigaction act;
 
-    got_interrupt = 0;
     act.sa_handler = sigintr_handler;
     sigemptyset (&act.sa_mask);
     act.sa_flags = 0;
     sigaction (SIGINT, &act, NULL);
+    got_interrupt = 0;
 }
 
 extern void

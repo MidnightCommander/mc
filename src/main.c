@@ -2306,6 +2306,9 @@ main (int argc, char *argv[])
 #ifdef HAVE_SLANG
     slang_init ();
 #endif
+
+    start_interrupt_key ();
+
     /* NOTE: This call has to be after slang_init. It's the small part from
        the previous init_key which had to be moved after the call of slang_init */
     init_key_input_fd ();
