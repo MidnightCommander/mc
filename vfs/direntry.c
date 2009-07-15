@@ -727,7 +727,7 @@ vfs_s_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
     return len;
 }
 
-static void *
+void *
 vfs_s_open (struct vfs_class *me, const char *file, int flags, int mode)
 {
     int was_changed = 0;

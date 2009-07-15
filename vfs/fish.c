@@ -1045,8 +1045,31 @@ static int fish_unlink (struct vfs_class *me, const char *path)
     POSTFIX(OPT_FLUSH);
 }
 
+static int fish_exists (struct vfs_class *me, const char *path)
+{
+    int ret_code;
+
+    PREFIX
+
+    g_snprintf(buf, sizeof(buf),
+            "#ISEXISTS \"/%s\"\n"
+	    "ls -l \"/%s\" >/dev/null 2>/dev/null\n"
+	    "echo '### '$?\n",
+	    rpath, rpath);
+
+    g_free (rpath);
+
+    if ( fish_send_command(me, super, buf, OPT_FLUSH) == 0 )
+	return 1;
+
+    return 0;
+}
+
+
 static int fish_mkdir (struct vfs_class *me, const char *path, mode_t mode)
 {
+    int ret_code;
+
     PREFIX
 
     (void) mode;
@@ -1056,7 +1079,17 @@ static int fish_mkdir (struct vfs_class *me, const char *path, mode_t mode)
 	    "mkdir /%s 2>/dev/null\n"
 	    "echo '### 000'\n",
 	    rpath, rpath);
-    POSTFIX(OPT_FLUSH);
+
+    g_free (rpath);
+    ret_code = fish_send_command(me, super, buf, OPT_FLUSH);
+
+    if ( ret_code != 0 )
+	return ret_code;
+
+    if ( ! fish_exists (me, path) ){
+	ERRNOR (EACCES, -1);
+    }
+    return 0;
 }
 
 static int fish_rmdir (struct vfs_class *me, const char *path)
@@ -1135,6 +1168,18 @@ fish_fill_names (struct vfs_class *me, fill_names_f func)
     }
 }
 
+static void *
+fish_open (struct vfs_class *me, const char *file, int flags, int mode)
+{
+    /*
+      sorry, i've places hack here
+      cause fish don't able to open files with O_EXCL flag
+    */
+    flags &= ~O_EXCL;
+    return vfs_s_open (me, file, flags, mode);
+}
+
+
 void
 init_fish (void)
 {
@@ -1157,6 +1202,7 @@ init_fish (void)
     vfs_fish_ops.fill_names = fish_fill_names;
     vfs_fish_ops.chmod = fish_chmod;
     vfs_fish_ops.chown = fish_chown;
+    vfs_fish_ops.open = fish_open;
     vfs_fish_ops.symlink = fish_symlink;
     vfs_fish_ops.link = fish_link;
     vfs_fish_ops.unlink = fish_unlink;
