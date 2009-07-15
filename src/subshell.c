@@ -137,7 +137,7 @@ static enum {
     BASH,
     TCSH,
     ZSH,
-    FISH,
+    FISH
 } subshell_type;
 
 /* Flag to indicate whether the subshell is ready for next command */
