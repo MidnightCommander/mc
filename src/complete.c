@@ -48,7 +48,7 @@
 #include "key.h"		/* XCTRL and ALT macros */
 #include "strutil.h"
 
-typedef char *CompletionFunction (char * text, int state, INPUT_COMPLETE_FLAGS flags);
+typedef char *CompletionFunction (const char * text, int state, INPUT_COMPLETE_FLAGS flags);
 
 /* #define DO_COMPLETION_DEBUG */
 #ifdef DO_COMPLETION_DEBUG
@@ -232,7 +232,7 @@ filename_completion_function (const char * text, int state, INPUT_COMPLETE_FLAGS
 /* We assume here that text[0] == '~' , if you want to call it in another way,
    you have to change the code */
 static char *
-username_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
+username_completion_function (const char *text, int state, INPUT_COMPLETE_FLAGS flags)
 {
     static struct passwd *entry;
     static size_t userlen;
@@ -270,7 +270,7 @@ extern char **environ;
 /* We assume text [0] == '$' and want to have a look at text [1], if it is
    equal to '{', so that we should append '}' at the end */
 static char *
-variable_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
+variable_completion_function (const char *text, int state, INPUT_COMPLETE_FLAGS flags)
 {
     static char **env_p;
     static int varlen, isbrace;
@@ -395,7 +395,7 @@ static void fetch_hosts (const char *filename)
 }
 
 static char *
-hostname_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
+hostname_completion_function (const char *text, int state, INPUT_COMPLETE_FLAGS flags)
 {
     static char **host_p;
     static int textstart, textlen;
@@ -587,7 +587,7 @@ match_compare (const void *a, const void *b)
    as the second. 
    In case no matches were found we return NULL. */
 static char **
-completion_matches (char *text, CompletionFunction entry_function, INPUT_COMPLETE_FLAGS flags)
+completion_matches (const char *text, CompletionFunction entry_function, INPUT_COMPLETE_FLAGS flags)
 {
     /* Number of slots in match_list. */
     int match_list_size;
@@ -762,7 +762,7 @@ try_complete (char *text, int *start, int *end, INPUT_COMPLETE_FLAGS flags)
     /* Command substitution? */
     if (p > q && p > r){
         SHOW_C_CTX("try_complete:cmd_backq_subst");
-        matches = completion_matches (str_get_next_char (p),
+        matches = completion_matches (str_cget_next_char (p),
                                       command_completion_function, 
                                       flags & (~INPUT_COMPLETE_FILENAMES));
         if (matches)
