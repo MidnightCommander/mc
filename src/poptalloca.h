@@ -24,6 +24,8 @@
 #    ifdef _MSC_VER
 #        include <malloc.h>
 #        define alloca _alloca
+#    elif __TINYC__
+#        include <stddef.h>
 #    else
 #        if HAVE_ALLOCA_H
 #            include <alloca.h>
