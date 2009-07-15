@@ -103,7 +103,7 @@ typedef struct mc_search_struct {
 } mc_search_t;
 
 typedef struct mc_search_type_str_struct {
-    char *str;
+    const char *str;
     mc_search_type_t type;
 } mc_search_type_str_t;
 

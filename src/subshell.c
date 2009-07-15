@@ -252,11 +252,11 @@ init_subshell_child (const char *pty_name)
 	    init_file = ".bashrc";
 
 	/* Make MC's special commands not show up in bash's history */
-	putenv ("HISTCONTROL=ignorespace");
+	putenv ((char*)"HISTCONTROL=ignorespace");
 
 	/* Allow alternative readline settings for MC */
 	if (access (".mc/inputrc", R_OK) == 0)
-	    putenv ("INPUTRC=.mc/inputrc");
+	    putenv ((char*)"INPUTRC=.mc/inputrc");
 
 	break;
 

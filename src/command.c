@@ -146,9 +146,10 @@ examine_cd (const char *_path)
 }
 
 /* Execute the cd command on the command line */
-void do_cd_command (char *cmd)
+void do_cd_command (char * orig_cmd)
 {
     int len;
+    const char * cmd;
 
     /* Any final whitespace should be removed here
        (to see why, try "cd fred "). */
@@ -156,13 +157,14 @@ void do_cd_command (char *cmd)
        that way, we can cd into hidden directories */
     /* FIXME: what about interpreting quoted strings like the shell.
        so one could type "cd <tab> M-a <enter>" and it would work. */
-    len = strlen (cmd) - 1;
+    len = strlen (orig_cmd) - 1;
     while (len >= 0 &&
-	   (cmd [len] == ' ' || cmd [len] == '\t' || cmd [len] == '\n')){
-	cmd [len] = 0;
+	   (orig_cmd [len] == ' ' || orig_cmd [len] == '\t' || orig_cmd [len] == '\n')){
+	orig_cmd [len] = 0;
 	len --;
     }
-    
+
+    cmd = orig_cmd;
     if (cmd [2] == 0)
 	cmd = "cd ";
 

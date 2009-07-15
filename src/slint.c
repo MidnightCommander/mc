@@ -222,9 +222,9 @@ slang_shutdown (void)
     /* Load the op capability to reset the colors to those that were
      * active when the program was started up
      */
-    op_cap = SLtt_tgetstr ("op");
+    op_cap = SLtt_tgetstr ((char*)"op");
     if (op_cap){
-	fprintf (stdout, "%s", op_cap);
+	fputs (op_cap, stdout);
 	fflush (stdout);
     }
 }
@@ -268,12 +268,12 @@ slang_reset_softkeys (void)
 void
 slang_keypad (int set)
 {
-    char *keypad_string;
+    const char *keypad_string;
     extern int reset_hp_softkeys;
     
-    keypad_string = (char *) SLtt_tgetstr (set ? "ks" : "ke");
+    keypad_string = SLtt_tgetstr ((char*)(set ? "ks" : "ke"));
     if (keypad_string)
-	SLtt_write_string (keypad_string);
+	SLtt_write_string ((char*)keypad_string);
     if (set && reset_hp_softkeys)
 	slang_reset_softkeys ();
 }

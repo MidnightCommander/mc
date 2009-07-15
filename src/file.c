@@ -1431,7 +1431,7 @@ compute_dir_size_create_ui (void)
 {
     ComputeDirSizeUI *ui;
 
-    char *b_name = N_("&Abort");
+    const char *b_name = N_("&Abort");
 
 #ifdef ENABLE_NLS
     b_name = _(b_name);

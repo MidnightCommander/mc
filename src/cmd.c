@@ -376,7 +376,7 @@ void
 mkdir_cmd (void)
 {
     char *dir, *absdir;
-    char *name = "";
+    const char *name = "";
 
     /* If 'on' then automatically fills name with current selected item name */
     if (auto_fill_mkdir_name)

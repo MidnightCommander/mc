@@ -332,7 +332,7 @@ void init_colors (void)
 	     * Hopefully, future versions of S-Lang will
 	     * document this feature.
 	     */
-	    SLtt_set_color (DEFAULT_COLOR_INDEX, NULL, "default", "default");
+	    SLtt_set_color (DEFAULT_COLOR_INDEX, NULL, (char*)"default", (char*)"default");
 #else
 	    /* Use default terminal colors */
 	    mc_init_pair (DEFAULT_COLOR_INDEX, -1, -1);
@@ -384,7 +384,7 @@ mc_init_pair (int index, CTYPE foreground, CTYPE background)
     if (!foreground)
 	foreground = "default";
 
-    SLtt_set_color (index, "", (char *) foreground, (char *) background);
+    SLtt_set_color (index, (char*)"", (char *) foreground, (char *) background);
     if (index > max_index)
 	max_index = index;
 }

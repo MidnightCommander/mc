@@ -133,7 +133,8 @@ main (int argc, char **argv)
   int console_fd, vcsa_fd, console_minor, buffer_size;
   struct stat st;
   uid_t uid, euid;
-  char *buffer, *tty_name, console_name [16], vcsa_name [16], *p, *q;
+  char *buffer, *tty_name, console_name [16], vcsa_name [16];
+  const char *p, *q;
   struct winsize winsz;
 
   close (2);
