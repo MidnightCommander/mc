@@ -2649,7 +2649,7 @@ panel_set_sort_order (WPanel *panel, sortfn *sort_order)
 void
 set_panel_encoding (WPanel *panel)
 {
-    char *encoding = NULL;
+    const char *encoding = NULL;
     char *cd_path;
 #ifdef HAVE_CHARSET
     const char *errmsg;
