@@ -882,28 +882,21 @@ get_compression_type (int fd)
 	}
     }
 
-    /* LZMA files; both LZMA_Alone and LZMA utils formats. The LZMA_Alone
-     * format is used by the LZMA_Alone tool from LZMA SDK. The LZMA utils
-     * format is the default format of LZMA utils 4.32.1 and later. */
-    if (magic[0] < 0xE1 || (magic[0] == 0xFF && magic[1] == 'L' &&
-	magic[2] == 'Z' && magic[3] == 'M')) {
-	if (mc_read (fd, (char *) magic + 4, 9) == 9) {
-	    /* LZMA utils format */
-	    if (magic[0] == 0xFF && magic[4] == 'A' && magic[5] == 0x00)
-		return COMPRESSION_LZMA;
-	    /* The LZMA_Alone format has no magic bytes, thus we
-	     * need to play a wizard. This can give false positives,
-	     * thus the detection below should be removed when
-	     * the newer LZMA utils format has got popular. */
-	    if (magic[0] < 0xE1 && magic[4] < 0x20 &&
-		((magic[10] == 0x00 && magic[11] == 0x00 &&
-		  magic[12] == 0x00) ||
-		 (magic[5] == 0xFF && magic[6] == 0xFF &&
-		  magic[7] == 0xFF && magic[8] == 0xFF &&
-		  magic[9] == 0xFF && magic[10] == 0xFF &&
-		  magic[11] == 0xFF && magic[12] == 0xFF)))
-		return COMPRESSION_LZMA;
-	}
+    /* Support for LZMA (only utils format with magic in header).
+     * This is the default format of LZMA utils 4.32.1 and later. */
+
+    if (mc_read(fd, (char *) magic+4, 1) == 1)
+    {
+        /* LZMA utils format */
+        if
+        (  magic[0] == 0xFF
+        && magic[1] == 'L'
+        && magic[2] == 'Z'
+        && magic[3] == 'M'
+        && magic[4] == 'A'
+        && magic[5] == 0x00
+        )
+            return COMPRESSION_LZMA;
     }
 
     /* XZ compression magic */
@@ -916,7 +909,7 @@ get_compression_type (int fd)
         }
     }
 
-    return 0;
+    return COMPRESSION_NONE;
 }
 
 const char *
