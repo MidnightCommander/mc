@@ -3517,7 +3517,7 @@ static void
 view_select_encoding (WView *view) 
 {
 #ifdef HAVE_CHARSET
-    char *enc = NULL;
+    const char *enc = NULL;
 
     if (!do_select_codepage ())
 	return;
