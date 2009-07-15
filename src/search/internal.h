@@ -33,10 +33,10 @@ typedef struct mc_search_cond_struct {
 
 /*** global variables defined in .c file *********************************************************/
 
-extern char STR_E_NOTFOUND[];
-extern char STR_E_UNKNOWN_TYPE[];
-extern char STR_E_RPL_NOT_EQ_TO_FOUND[];
-extern char STR_E_RPL_INVALID_TOKEN[];
+extern const char * STR_E_NOTFOUND;
+extern const char * STR_E_UNKNOWN_TYPE;
+extern const char * STR_E_RPL_NOT_EQ_TO_FOUND;
+extern const char * STR_E_RPL_INVALID_TOKEN;
 /*** declarations of public functions ************************************************************/
 
 
