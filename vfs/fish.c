@@ -453,7 +453,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 			  "LSOPT=\"-lan\";\n"
 			  "ADD=1;\n"
 		  "fi\n"
-		  "ls $LSOPT \"/%s\" 2>/dev/null | grep '^[^cbt]' | (\n"
+		  "ls $LSOPT /%s 2>/dev/null | grep '^[^cbt]' | (\n"
 			  "while read p l u g s m d y n; do\n"
 				  "if [ $ADD  = 0 ]; then\n"
 					  "echo \"P$p $u.$g\nS$s\nd$m $d $y\n:$n\n\"\n"
@@ -1052,8 +1052,8 @@ static int fish_exists (struct vfs_class *me, const char *path)
     PREFIX
 
     g_snprintf(buf, sizeof(buf),
-            "#ISEXISTS \"/%s\"\n"
-	    "ls -l \"/%s\" >/dev/null 2>/dev/null\n"
+            "#ISEXISTS /%s\n"
+	    "ls -l /%s >/dev/null 2>/dev/null\n"
 	    "echo '### '$?\n",
 	    rpath, rpath);
 
