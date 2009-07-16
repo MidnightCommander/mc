@@ -2348,7 +2348,7 @@ edit_complete_word_cmd (WEdit *edit)
     bufpos = &edit->buffers1[word_start >> S_EDIT_BUF_SIZE]
 	[word_start & M_EDIT_BUF_SIZE];
 
-    match_expr = g_strdup_printf ("(^|\\s)%.*s[^\\s\\.=\\+\\{\\}\\[\\]\\(\\)\\\\\\!\\,<>\\?\\/@#\\$%\\^&\\*\\~\\|\\\"'\\:\\;]+", word_len, bufpos);
+    match_expr = g_strdup_printf ("(^|\\s)%.*s[^\\s\\.=\\+\\{\\}\\[\\]\\(\\)\\\\\\!\\,<>\\?\\/@#\\$%%\\^&\\*\\~\\|\\\"'\\:\\;]+", word_len, bufpos);
 
     /* collect the possible completions              */
     /* start search from begin to end of file */
