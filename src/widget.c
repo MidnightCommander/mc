@@ -1004,11 +1004,12 @@ static WLEntry *listbox_select_pos (WListbox *l, WLEntry *base, int
 static inline cb_ret_t
 listbox_fwd (WListbox *l)
 {
-    if (l->current != l->list->prev){
-	listbox_select_entry (l, listbox_select_pos (l, l->list, l->pos+1));
-	return MSG_HANDLED;
-    }
-    return MSG_NOT_HANDLED;
+    if (l->current != l->list->prev)
+        listbox_select_entry (l, listbox_select_pos (l, l->list, l->pos+1));
+    else
+        listbox_select_first(l);
+
+    return MSG_HANDLED;
 }
 
 char *
@@ -1954,16 +1955,23 @@ listbox_check_hotkey (WListbox *l, int key)
     }
 }
 
-/* Used only for display updating, for avoiding line at a time scroll */
+/* Selects the last entry and scrolls the list to the bottom */
 void
-listbox_select_last (WListbox *l, int set_top)
+listbox_select_last (WListbox *l)
 {
-    if (l->list){
-	l->current = l->list->prev;
-	l->pos = l->count - 1;
-	if (set_top)
-	    l->top = l->list->prev;
-    }
+    unsigned int i;
+    l->current = l->top = l->list->prev;
+    for (i = min (l->height - 1, l->count - 1); i; i--)
+        l->top = l->top->prev;
+    l->pos = l->count - 1;
+}
+
+/* Selects the first entry and scrolls the list to the top */
+void
+listbox_select_first (WListbox *l)
+{
+    l->current = l->top = l->list;
+    l->pos = 0;
 }
 
 void
@@ -2076,11 +2084,12 @@ listbox_select_pos (WListbox *l, WLEntry *base, int pos)
 static inline cb_ret_t
 listbox_back (WListbox *l)
 {
-    if (l->pos){
-	listbox_select_entry (l, listbox_select_pos (l, l->list, l->pos-1));
-	return MSG_HANDLED;
-    }
-    return MSG_NOT_HANDLED;
+    if (l->pos)
+        listbox_select_entry (l, listbox_select_pos (l, l->list, l->pos - 1));
+    else
+        listbox_select_last(l);
+
+    return MSG_HANDLED;
 }
 
 /* Return MSG_HANDLED if we want a redraw */
@@ -2097,17 +2106,13 @@ listbox_key (WListbox *l, int key)
     case KEY_HOME:
     case KEY_A1:
     case ALT ('<'):
-	l->current = l->top = l->list;
-	l->pos = 0;
+        listbox_select_first(l);
 	return MSG_HANDLED;
 	
     case KEY_END:
     case KEY_C1:
     case ALT ('>'):
-	l->current = l->top = l->list->prev;
-	for (i = min (l->height - 1, l->count - 1); i; i--)
-	    l->top = l->top->prev;
-	l->pos = l->count - 1;
+        listbox_select_last(l);
 	return MSG_HANDLED;
 	
     case XCTRL('p'):
@@ -2130,7 +2135,7 @@ listbox_key (WListbox *l, int key)
     case KEY_PPAGE:
     case ALT('v'):
 	for (i = 0; i < l->height-1; i++)
-	    if (listbox_back (l) != MSG_NOT_HANDLED)
+    if (listbox_back (l) != MSG_NOT_HANDLED)
 		j = MSG_HANDLED;
 	return j;
     }
