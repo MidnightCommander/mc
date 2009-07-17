@@ -995,21 +995,16 @@ history_put (const char *input_name, GList *h)
 static const char *
 i18n_htitle (void)
 {
-    return _(" History ");	
+    return _(" History ");
 }
 
-static WLEntry *listbox_select_pos (WListbox *l, WLEntry *base, int
-				    pos);
-
-static inline cb_ret_t
+static void
 listbox_fwd (WListbox *l)
 {
     if (l->current != l->list->prev)
-        listbox_select_entry (l, listbox_select_pos (l, l->list, l->pos+1));
+        listbox_select_entry (l, l->current->next);
     else
-        listbox_select_first(l);
-
-    return MSG_HANDLED;
+        listbox_select_first (l);
 }
 
 char *
@@ -1018,7 +1013,7 @@ show_hist (GList *history, int widget_x, int widget_y)
     GList *hi, *z;
     size_t maxlen = str_term_width1 (i18n_htitle ()), i, count = 0;
     int x, y, w, h;
-    char *q, *r = 0;
+    char *q = NULL, *r = NULL;
     Dlg_head *query_dlg;
     WListbox *query_list;
 
@@ -1059,34 +1054,37 @@ show_hist (GList *history, int widget_x, int widget_y)
 		    i18n_htitle (), DLG_COMPACT);
     query_list = listbox_new (1, 1, h - 2, w - 2, NULL);
     add_widget (query_dlg, query_list);
-    hi = z;
+
     if (y < widget_y) {
 	/* traverse */
+	hi = z;
 	while (hi) {
-	    listbox_add_item (query_list, 0, 0, (char *) hi->data, NULL);
+	    listbox_add_item (query_list, LISTBOX_APPEND_AT_END,
+				0, (char *) hi->data, NULL);
 	    hi = g_list_next (hi);
 	}
-	while (listbox_fwd (query_list));
+	listbox_select_last (query_list);
     } else {
 	/* traverse backwards */
 	hi = g_list_last (history);
 	while (hi) {
-	    listbox_add_item (query_list, 0, 0, (char *) hi->data, NULL);
+	    listbox_add_item (query_list, LISTBOX_APPEND_AT_END,
+				0, (char *) hi->data, NULL);
 	    hi = g_list_previous (hi);
 	}
     }
-    run_dlg (query_dlg);
-    q = NULL;
-    if (query_dlg->ret_value != B_CANCEL) {
+
+    if (run_dlg (query_dlg) != B_CANCEL) {
 	listbox_get_current (query_list, &q, NULL);
-	if (q)
+	if (q != NULL)
 	    r = g_strdup (q);
     }
     destroy_dlg (query_dlg);
     return r;
 }
 
-static void do_show_hist (WInput * in)
+static void
+do_show_hist (WInput * in)
 {
     char *r;
     r = show_hist (in->history, in->widget.x, in->widget.y);
@@ -2081,15 +2079,13 @@ listbox_select_pos (WListbox *l, WLEntry *base, int pos)
     return base;
 }
 
-static inline cb_ret_t
+static void
 listbox_back (WListbox *l)
 {
-    if (l->pos)
-        listbox_select_entry (l, listbox_select_pos (l, l->list, l->pos - 1));
+    if (l->pos != 0)
+        listbox_select_entry (l, l->current->prev);
     else
-        listbox_select_last(l);
-
-    return MSG_HANDLED;
+        listbox_select_last (l);
 }
 
 /* Return MSG_HANDLED if we want a redraw */
@@ -2097,6 +2093,7 @@ static cb_ret_t
 listbox_key (WListbox *l, int key)
 {
     int i;
+
     cb_ret_t j = MSG_NOT_HANDLED;
 
     if (!l->list)
@@ -2106,20 +2103,20 @@ listbox_key (WListbox *l, int key)
     case KEY_HOME:
     case KEY_A1:
     case ALT ('<'):
-        listbox_select_first(l);
+        listbox_select_first (l);
 	return MSG_HANDLED;
-	
+
     case KEY_END:
     case KEY_C1:
     case ALT ('>'):
-        listbox_select_last(l);
+        listbox_select_last (l);
 	return MSG_HANDLED;
 	
     case XCTRL('p'):
     case KEY_UP:
 	listbox_back (l);
 	return MSG_HANDLED;
-	
+
     case XCTRL('n'):
     case KEY_DOWN:
 	listbox_fwd (l);
@@ -2127,16 +2124,20 @@ listbox_key (WListbox *l, int key)
 
     case KEY_NPAGE:
     case XCTRL('v'):
-	for (i = 0; i < l->height-1; i++)
-	    if (listbox_fwd (l) != MSG_NOT_HANDLED)
-		j = MSG_HANDLED;
+	for (i = 0; ((i < l->height - 1)
+		    && (l->current != l->list->prev)); i++) {
+	    listbox_fwd (l);
+	    j = MSG_HANDLED;
+	}
 	return j;
-	
+
     case KEY_PPAGE:
     case ALT('v'):
-	for (i = 0; i < l->height-1; i++)
-    if (listbox_back (l) != MSG_NOT_HANDLED)
-		j = MSG_HANDLED;
+	for (i = 0; ((i < l->height - 1)
+		    && (l->current != l->list)); i++) {
+	    listbox_back (l);
+	    j = MSG_HANDLED;
+	}
 	return j;
     }
     return MSG_NOT_HANDLED;
