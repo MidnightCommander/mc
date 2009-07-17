@@ -176,7 +176,6 @@ key_code_name_t key_name_conv_tab [] = {
     { KEY_F(19),     "f19",        N_("Function key 19") },
     { KEY_F(20),     "f20",        N_("Function key 20") },
     { KEY_BACKSPACE, "bs",         N_("Backspace key") },
-    { KEY_BACKSPACE, "backspace",  N_("Backspace key") },
     { KEY_END,       "end",        N_("End key") },
     { KEY_UP,        "up",         N_("Up arrow key") },
     { KEY_DOWN,      "down",       N_("Down arrow key") },
@@ -186,15 +185,11 @@ key_code_name_t key_name_conv_tab [] = {
     { KEY_NPAGE,     "pgdn",       N_("Page Down key") },
     { KEY_PPAGE,     "pgup",       N_("Page Up key") },
     { KEY_IC,        "ins",        N_("Insert key") },
-    { KEY_IC,        "insert",     N_("Insert key") },
     { KEY_DC,        "delete",     N_("Delete key") },
     { ALT('\t'),     "complete",   N_("Completion/M-tab") },
     { KEY_KP_ADD,    "kpplus",     N_("+ on keypad") },
-    { KEY_KP_ADD,    "plus",       N_("+ on keypad") },
     { KEY_KP_SUBTRACT,"kpminus",   N_("- on keypad") },
-    { KEY_KP_SUBTRACT,"minus",     N_("- on keypad") },
     { KEY_KP_MULTIPLY,"kpasterix", N_("* on keypad") },
-    { KEY_KP_MULTIPLY,"asterix",   N_("* on keypad") },
 
 /* From here on, these won't be shown in Learn keys (no space) */
     { KEY_LEFT,      "kpleft",     N_("Left arrow keypad") },
@@ -213,6 +208,13 @@ key_code_name_t key_name_conv_tab [] = {
     { (int) ' ',     "space",      N_("Space on keypad") },
     { (int) '/',     "kpslash",    N_("Slash on keypad") },
     { (int) '#',     "kpnumlock",  N_("NumLock on keypad") },
+
+/* Alternative label */
+    { KEY_BACKSPACE, "backspace",  N_("Backspace key") },
+    { KEY_IC,        "insert",     N_("Insert key") },
+    { KEY_KP_ADD,    "plus",       N_("+ on keypad") },
+    { KEY_KP_SUBTRACT,"minus",     N_("- on keypad") },
+    { KEY_KP_MULTIPLY,"asterix",   N_("* on keypad") },
 
 /* meta keys */
     { KEY_M_CTRL,    "control",    N_("Ctrl") },
