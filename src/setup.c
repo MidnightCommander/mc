@@ -494,7 +494,7 @@ setup__move_panels_config_into_separate_file(const char*profile)
 {
     mc_config_t *tmp_cfg;
     char **groups, **curr_grp;
-    char *need_grp;
+    const char *need_grp;
     gsize groups_count;
 
     if (!exist_file(profile))

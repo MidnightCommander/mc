@@ -154,7 +154,7 @@ transform_source (FileOpContext *ctx, const char *source)
 {
     char *s = g_strdup (source);
     char *q;
-    const char *fnsource = x_basename (s);
+    char *fnsource = (char*)x_basename (s);
 
     /* We remove \n from the filename since regex routines would use \n as an anchor */
     /* this is just to be allowed to maniupulate file names with \n on it */
@@ -1431,7 +1431,7 @@ compute_dir_size_create_ui (void)
 {
     ComputeDirSizeUI *ui;
 
-    char *b_name = N_("&Abort");
+    const char *b_name = N_("&Abort");
 
 #ifdef ENABLE_NLS
     b_name = _(b_name);

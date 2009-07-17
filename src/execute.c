@@ -123,7 +123,7 @@ do_execute (const char *shell, const char *command, int flags)
 
 	/* We don't care if it died, higher level takes care of this */
 #ifdef USE_VFS
-	invoke_subshell (command, VISIBLY, old_vfs_dir ? 0 : &new_dir);
+	invoke_subshell (command, VISIBLY, old_vfs_dir ? NULL : &new_dir);
 #else
 	invoke_subshell (command, VISIBLY, &new_dir);
 #endif				/* !USE_VFS */

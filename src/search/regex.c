@@ -59,8 +59,8 @@ mc_search__regex_str_append_if_special (GString * copy_to, GString * regex_str, 
 {
     char *tmp_regex_str;
     gsize spec_chr_len;
-    char **spec_chr;
-    char *special_chars[] = {
+    const char **spec_chr;
+    const char *special_chars[] = {
         "\\s", "\\S",
         "\\d", "\\D",
         "\\B", "\\B",
@@ -428,7 +428,7 @@ mc_search_regex__process_append_str (GString * dest_str, const char *from, gsize
     char *tmp_str;
     GString *tmp_string;
 
-    if (len == -1)
+    if (len == (gsize) -1)
         len = strlen (from);
 
     if (*replace_flags == REPLACE_T_NO_TRANSFORM) {

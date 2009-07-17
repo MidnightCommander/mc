@@ -137,7 +137,7 @@ static enum {
     BASH,
     TCSH,
     ZSH,
-    FISH,
+    FISH
 } subshell_type;
 
 /* Flag to indicate whether the subshell is ready for next command */
@@ -252,11 +252,11 @@ init_subshell_child (const char *pty_name)
 	    init_file = ".bashrc";
 
 	/* Make MC's special commands not show up in bash's history */
-	putenv ("HISTCONTROL=ignorespace");
+	putenv ((char*)"HISTCONTROL=ignorespace");
 
 	/* Allow alternative readline settings for MC */
 	if (access (".mc/inputrc", R_OK) == 0)
-	    putenv ("INPUTRC=.mc/inputrc");
+	    putenv ((char*)"INPUTRC=.mc/inputrc");
 
 	break;
 
@@ -507,7 +507,7 @@ init_subshell (void)
     case FISH:
 	g_snprintf (precmd, sizeof (precmd),
 		    "function fish_prompt ; pwd>&%d;kill -STOP %%self; end\n",
-		    subshell_pipe[WRITE], subshell_pipe[WRITE]);
+		    subshell_pipe[WRITE]);
 	break;
 
     }

@@ -1437,7 +1437,7 @@ edit_replace_cmd (WEdit *edit, int again)
 	/*returns negative on not found or error in pattern */
 
 	if (edit->search_start >= 0) {
-	    int i;
+	    guint i;
 
 	    edit->found_start = edit->search_start;
 	    i = edit->found_len = len;
@@ -2348,7 +2348,7 @@ edit_complete_word_cmd (WEdit *edit)
     bufpos = &edit->buffers1[word_start >> S_EDIT_BUF_SIZE]
 	[word_start & M_EDIT_BUF_SIZE];
 
-    match_expr = g_strdup_printf ("(^|\\s)%.*s[^\\s\\.=\\+\\{\\}\\[\\]\\(\\)\\\\\\!\\,<>\\?\\/@#\\$%\\^&\\*\\~\\|\\\"'\\:\\;]+", word_len, bufpos);
+    match_expr = g_strdup_printf ("(^|\\s)%.*s[^\\s\\.=\\+\\{\\}\\[\\]\\(\\)\\\\\\!\\,<>\\?\\/@#\\$%%\\^&\\*\\~\\|\\\"'\\:\\;]+", word_len, bufpos);
 
     /* collect the possible completions              */
     /* start search from begin to end of file */

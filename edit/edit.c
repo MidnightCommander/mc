@@ -1470,16 +1470,21 @@ long edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
 {
     long p, q;
     int col = 0;
-    int cw = 1;
-    gunichar utf_ch = 0;
+#ifdef HAVE_CHARSET
+	int cw = 1;
+	int utf_ch = 0;
+#endif
     if (upto) {
 	q = upto;
 	cols = -10;
     } else
 	q = edit->last_byte + 2;
-
     for (col = 0, p = current; p < q; p++) {
 	int c;
+#ifdef HAVE_CHARSET
+	cw = 1;
+	utf_ch = 0;
+#endif
 	if (cols != -10) {
 	    if (col == cols)
 		return p;
@@ -2416,8 +2421,6 @@ static const char * const shell_cmd[] = SHELL_COMMANDS_i;
 void
 edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 {
-    int i = 0;
-
     edit->force |= REDRAW_LINE;
 
     /* The next key press will unhighlight the found string, so update
@@ -2457,6 +2460,7 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 #ifdef HAVE_CHARSET
 	if ( char_for_insertion > 255 && utf8_display == 0 ) {
             unsigned char str[6 + 1];
+            size_t i = 0;
             int res = g_unichar_to_utf8 (char_for_insertion, (char *)str);
             if ( res == 0 ) {
                 str[0] = '.';

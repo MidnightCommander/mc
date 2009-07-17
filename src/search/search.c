@@ -387,10 +387,12 @@ mc_search_getstart_rezult_by_num (mc_search_t * mc_search, int index)
     if (mc_search->search_type == MC_SEARCH_T_NORMAL)
         return 0;
 #ifdef SEARCH_TYPE_GLIB
-    gint start_pos;
-    gint end_pos;
-    g_match_info_fetch_pos (mc_search->regex_match_info, index, &start_pos, &end_pos);
-    return (int) start_pos;
+    {
+        gint start_pos;
+        gint end_pos;
+        g_match_info_fetch_pos (mc_search->regex_match_info, index, &start_pos, &end_pos);
+        return (int) start_pos;
+    }
 #else /* SEARCH_TYPE_GLIB */
     return mc_search->iovector[index * 2];
 #endif /* SEARCH_TYPE_GLIB */
@@ -407,10 +409,12 @@ mc_search_getend_rezult_by_num (mc_search_t * mc_search, int index)
     if (mc_search->search_type == MC_SEARCH_T_NORMAL)
         return 0;
 #ifdef SEARCH_TYPE_GLIB
-    gint start_pos;
-    gint end_pos;
-    g_match_info_fetch_pos (mc_search->regex_match_info, index, &start_pos, &end_pos);
-    return (int) end_pos;
+    {
+        gint start_pos;
+        gint end_pos;
+        g_match_info_fetch_pos (mc_search->regex_match_info, index, &start_pos, &end_pos);
+        return (int) end_pos;
+    }
 #else /* SEARCH_TYPE_GLIB */
     return mc_search->iovector[index * 2 + 1];
 #endif /* SEARCH_TYPE_GLIB */
