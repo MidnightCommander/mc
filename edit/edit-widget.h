@@ -111,6 +111,7 @@ struct WEdit {
     unsigned long stack_size_mask;
     unsigned long stack_bottom;
     unsigned int stack_disable:1; /* If not 0, don't save events in the undo stack */
+    gboolean stack_wrapped;
 
     struct stat stat1;		/* Result of mc_fstat() on the file */
     unsigned int skip_detach_prompt:1;	/* Do not prompt whether to detach a file anymore */

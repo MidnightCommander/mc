@@ -791,6 +791,8 @@ edit_init (WEdit *edit, int lines, int columns, const char *filename,
     edit->stack_size = START_STACK_SIZE;
     edit->stack_size_mask = START_STACK_SIZE - 1;
     edit->undo_stack = g_malloc ((edit->stack_size + 10) * sizeof (long));
+    edit->stack_wrapped = FALSE;
+
     if (edit_load_file (edit)) {
 	/* edit_load_file already gives an error message */
 	if (to_free)
@@ -1072,20 +1074,18 @@ void edit_push_action (WEdit * edit, long c,...)
      * stack_bottom forward one "key press" */
     c = (edit->stack_pointer + 2) & edit->stack_size_mask;
     if ((unsigned long) c == edit->stack_bottom ||
-       (((unsigned long) c + 1) & edit->stack_size_mask) == edit->stack_bottom)
+       (((unsigned long) c + 1) & edit->stack_size_mask) == edit->stack_bottom) {
 	do {
 	    edit->stack_bottom = (edit->stack_bottom + 1) & edit->stack_size_mask;
 	} while (edit->undo_stack[edit->stack_bottom] < KEY_PRESS && edit->stack_bottom != edit->stack_pointer);
+        edit->stack_wrapped = TRUE;
+    }
 
 /*If a single key produced enough pushes to wrap all the way round then we would notice that the [stack_bottom] does not contain KEY_PRESS. The stack is then initialised: */
     if (edit->stack_pointer != edit->stack_bottom && edit->undo_stack[edit->stack_bottom] < KEY_PRESS)
 	edit->stack_bottom = edit->stack_pointer = 0;
 }
 
-/*
-   TODO: if the user undos until the stack bottom, and the stack has not wrapped,
-   then the file should be as it was when he loaded up. Then set edit->modified to 0.
- */
 static long
 pop_action (WEdit * edit)
 {
@@ -1098,6 +1098,11 @@ pop_action (WEdit * edit)
     if ((c = edit->undo_stack[sp]) >= 0) {
 /*	edit->undo_stack[sp] = '@'; */
 	edit->stack_pointer = (edit->stack_pointer - 1) & edit->stack_size_mask;
+        // if stack wasn't wraped and empty then reset modified satus
+        if (sp == edit->stack_bottom && !edit->stack_wrapped) {
+            edit->modified = 0;
+            edit->locked = edit_unlock_file (edit->filename);
+        }
 	return c;
     }
     if (sp == edit->stack_bottom) {
