@@ -40,7 +40,6 @@
 #include "../../src/tty/tty-internal.h"
 
 #include "../../src/strutil.h"
-#include "../../src/background.h"	/* we_are_background */
 
 /*** global variables **************************************************/
 
@@ -135,4 +134,13 @@ tty_print_one_vline (void)
 	tty_print_char (' ');
     else
 	tty_print_alt_char (ACS_VLINE);
+}
+
+void
+tty_draw_box_slow (int y, int x, int ys, int xs)
+{
+    tty_draw_hline (y, x, ' ', xs);
+    tty_draw_vline (y, x, ' ', ys);
+    tty_draw_vline (y, x + xs - 1, ' ', ys);
+    tty_draw_hline (y + ys - 1, x, ' ', xs);
 }

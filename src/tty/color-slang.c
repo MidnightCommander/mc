@@ -154,10 +154,10 @@ tty_try_alloc_color_pair (const char *fg, const char *bg)
     p->next = NULL;
     p->fg = fg ? g_strdup (fg) : NULL;
     p->bg = bg ? g_strdup (bg) : NULL;
-    if (fg == NULL
+    if (fg == NULL)
         /* Index in color_map array = COLOR_INDEX - 1 */
 	fg = color_map[EDITOR_NORMAL_COLOR_INDEX - 1].fg;
-    if (bg == NULL
+    if (bg == NULL)
 	bg = color_map[EDITOR_NORMAL_COLOR_INDEX - 1].bg;
     p->index = alloc_color_pair (fg, bg);
     return p->index;

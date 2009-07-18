@@ -279,7 +279,7 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
     if (option_line_state) {
         int i;
         for (i = 0; i < LINE_STATE_WIDTH; i++)
-            if (status[i] == '\0') {
+            if (status[i] == '\0')
                 status[i] = ' ';
 
         tty_setcolor (LINE_STATE_COLOR);

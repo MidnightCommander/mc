@@ -43,6 +43,7 @@
 #include "../../src/global.h"
 
 #include "../../src/tty/tty-internal.h"		/* slow_tty */
+#include "../../src/tty/tty.h"			/* tty_draw_box_slow */
 #include "../../src/tty/color-slang.h"
 #include "../../src/tty/color-internal.h"
 #include "../../src/tty/mouse.h"	/* Gpm_Event is required in key.h */

@@ -455,6 +455,9 @@ static key_define_t qansi_key_defines[] =
 /* timeout for old_esc_mode in usec */
 static int keyboard_key_timeout = 1000000;	/* settable via env */
 
+/* This holds all the key definitions */
+static key_def *keys = NULL;
+
 static int input_fd;
 static int disabled_channels = 0; /* Disable channels checking */
 
@@ -1483,19 +1486,6 @@ get_key_code (int no_delay)
     }
     this = NULL;
     return correct_key_code (c);
-}
-
-/* Return the code associated with the symbolic name keyname */
-int
-lookup_key (char *keyname)
-{
-    int i;
-
-    for (i = 0; key_name_conv_tab [i].code; i++)
-	if (str_casecmp (key_name_conv_tab [i].name, keyname) == 0)
-	    return key_name_conv_tab [i].code;
-
-    return 0;
 }
 
 /* Returns a character read from stdin with appropriate interpretation */

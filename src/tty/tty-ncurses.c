@@ -41,6 +41,7 @@
 #endif
 
 #include "../../src/tty/tty-internal.h"		/* slow_tty */
+#include "../../src/tty/tty.h"			/* tty_draw_box_slow */
 #include "../../src/tty/color-ncurses.h"
 #include "../../src/tty/color-internal.h"
 #include "../../src/tty/win.h"
@@ -316,8 +317,10 @@ tty_refresh (void)
 #ifdef WITH_BACKGROUND
     if (!we_are_background)
 #endif				/* WITH_BACKGROUND */
+    {
 	refresh ();
-    doupdate ();
+	doupdate ();
+    }
 }
 
 void
