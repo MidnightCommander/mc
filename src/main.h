@@ -6,10 +6,6 @@
 #ifndef MC_MAIN_H
 #define MC_MAIN_H
 
-#include "menu.h"
-#include "panel.h"
-#include "widget.h"
-
 /* Toggling functions */
 void toggle_fast_reload (void);
 void toggle_mix_all_files (void);
@@ -91,7 +87,6 @@ typedef struct {
 } key_map;
 
 void update_panels (int force_update, const char *current_file);
-void repaint_screen (void);
 void do_update_prompt (void);
 
 enum cd_enum {
@@ -127,6 +122,8 @@ void init_menu (void);
 char *remove_encoding_from_path (const char *);
 
 #define MC_BASE "/.mc/"
+
+struct WPanel;
 
 void directory_history_add   (struct WPanel *panel, const char *dir);
 int  do_panel_cd             (struct WPanel *panel, const char *new_dir, enum cd_enum cd_type);

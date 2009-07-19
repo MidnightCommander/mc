@@ -52,7 +52,8 @@
 #include "../src/mcconfig/mcconfig.h"	/* Load/save directories hotlist */
 #include "wtools.h"		/* QuickDialog */
 #include "panel.h"		/* current_panel */
-#include "main.h"		/* repaint_screen */
+#include "main.h"		/* update_panels() */
+#include "layout.h"		/* repaint_screen() */
 #include "hotlist.h"
 #include "command.h"		/* cmdline */
 #include "glibcompat.h"		/* g_strlcpy for glib < 2.0 */

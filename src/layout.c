@@ -575,6 +575,14 @@ clr_scr (void)
     tty_refresh ();
 }
 
+void
+repaint_screen (void)
+{
+    do_refresh ();
+    tty_touch_screen ();
+    tty_refresh ();
+}
+
 static void
 panel_do_cols (int index)
 {
@@ -737,8 +745,7 @@ change_screen_size (void)
 #endif
 
     /* Now, force the redraw */
-    do_refresh ();
-    tty_touch_screen ();
+    repaint_screen ();
 #endif				/* TIOCGWINSZ */
 #endif				/* defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4 */
 }

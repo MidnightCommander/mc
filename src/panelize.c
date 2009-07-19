@@ -44,7 +44,8 @@
 #include "../src/mcconfig/mcconfig.h"	/* Load/save directories panelize */
 #include "dir.h"
 #include "panel.h"		/* current_panel */
-#include "main.h"		/* repaint_screen */
+#include "layout.h"		/* repaint_screen() */
+#include "main.h"
 #include "panelize.h"
 #include "history.h"
 #include "strutil.h"

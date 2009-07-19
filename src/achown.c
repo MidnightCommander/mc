@@ -47,7 +47,8 @@
 #include "dir.h"
 #include "panel.h"		/* Needed for the externs */
 #include "chmod.h"
-#include "main.h"
+#include "main.h"		/* update_panels() */
+#include "layout.h"		/* repaint_screen() */
 #include "achown.h"
 
 #define BX		5

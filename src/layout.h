@@ -32,6 +32,7 @@ void set_hintbar (const char *str);
 
 /* Clear screen */
 void clr_scr (void);
+void repaint_screen (void);
 
 extern int winch_flag;
 extern int equal_split;

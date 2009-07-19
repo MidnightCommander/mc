@@ -41,6 +41,7 @@
 #include "wtools.h"	/* message() */
 #include "panel.h"	/* do_file_mark() */
 #include "main.h"	/* update_panels() */
+#include "layout.h"	/* repaint_screen() */
 #include "chmod.h"
 #include "strutil.h"
 

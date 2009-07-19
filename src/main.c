@@ -528,21 +528,6 @@ quiet_quit_cmd (void)
     quit_cmd_internal (1);
 }
 
-/*
- * Touch window and refresh window functions
- */
-
-/* This routine untouches the first line on both panels in order */
-/* to avoid the refreshing the menu bar */
-
-void
-repaint_screen (void)
-{
-    do_refresh ();
-    tty_touch_screen ();
-    tty_refresh ();
-}
-
 /* Wrapper for do_subshell_chdir, check for availability of subshell */
 void
 subshell_chdir (const char *directory)

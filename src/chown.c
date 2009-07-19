@@ -45,7 +45,8 @@
 #include "dir.h"
 #include "panel.h"		/* Needed for the externs */
 #include "chmod.h"
-#include "main.h"
+#include "main.h"		/* update_panels() */
+#include "layout.h"		/* repaint_screen() */
 #include "chown.h"
 #include "wtools.h"		/* For init_box_colors */
 
