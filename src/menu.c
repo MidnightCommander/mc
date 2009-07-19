@@ -351,6 +351,52 @@ menubar_up (WMenuBar *menubar)
     menubar_paint_idx (menubar, menu->selected, MENU_SELECTED_COLOR);
 }
 
+static void
+menubar_first (WMenuBar *menubar)
+{
+    Menu *menu = g_ptr_array_index (menubar->menu, menubar->selected);
+    menu_entry_t *entry;
+
+    if (menu->selected == 0)
+	return;
+
+    menubar_paint_idx (menubar, menu->selected, MENU_ENTRY_COLOR);
+
+    menu->selected = 0;
+
+    while (TRUE) {
+	entry = (menu_entry_t *) g_ptr_array_index (menu->entries, menu->selected);
+
+	if ((entry == NULL) || (entry->callback == NULL))
+	    menu->selected++;
+	else
+	    break;
+    }
+
+    menubar_paint_idx (menubar, menu->selected, MENU_SELECTED_COLOR);
+}
+
+static void
+menubar_last (WMenuBar *menubar)
+{
+    Menu *menu = g_ptr_array_index (menubar->menu, menubar->selected);
+    menu_entry_t *entry;
+
+    if (menu->selected == menu->entries->len - 1)
+	return;
+
+    menubar_paint_idx (menubar, menu->selected, MENU_ENTRY_COLOR);
+
+    menu->selected = menu->entries->len;
+
+    do {
+	menu->selected--;
+	entry = (menu_entry_t *) g_ptr_array_index (menu->entries, menu->selected);
+    } while ((entry == NULL) || (entry->callback == NULL));
+
+    menubar_paint_idx (menubar, menu->selected, MENU_SELECTED_COLOR);
+}
+
 static int
 menubar_handle_key (WMenuBar *menubar, int key)
 {
@@ -430,6 +476,16 @@ menubar_handle_key (WMenuBar *menubar, int key)
 	case '\n':
 	    menubar_execute (menubar, menu->selected);
 	    return 1;
+
+	case KEY_HOME:
+	case ALT ('<'):
+	    menubar_first (menubar);
+	    break;
+
+	case KEY_END:
+	case ALT ('>'):
+	    menubar_last (menubar);
+	    break;
 
 	case KEY_DOWN:
 	case XCTRL ('n'):
