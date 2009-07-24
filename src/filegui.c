@@ -912,8 +912,8 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
 		  const char *def_text, int only_one, int *do_background)
 {
     int source_easy_patterns = easy_patterns;
-    char *source_mask, *orig_mask, *dest_dir, *tmpdest;
-    char *def_text_secure, *def_text_secure2;
+    char *source_mask, *orig_mask, *dest_dir, *tmp;
+    char *def_text_secure;
     struct stat buf;
     int val;
     QuickDialog Quick_input;
@@ -921,7 +921,6 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
     g_return_val_if_fail (ctx != NULL, NULL);
 
     fmd_init_i18n (FALSE);
-
 
     /* unselect checkbox if target filesystem don't support attributes */
     ctx->op_preserve = filegui__check_attrs_on_fs(def_text);
@@ -934,11 +933,12 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
     fmd_widgets[FMCB21].result = &ctx->dive_into_subdirs;
 
     /* filter out a possible password from def_text */
-    def_text_secure = strip_password (g_strdup (def_text), 1);
+    tmp = strip_password (g_strdup (def_text), 1);
     if (source_easy_patterns)
-        def_text_secure2 = strutils_glob_escape (def_text_secure);
+        def_text_secure = strutils_glob_escape (tmp);
     else
-        def_text_secure2 = strutils_regex_escape (def_text_secure);
+        def_text_secure = strutils_regex_escape (tmp);
+    g_free (tmp);
 
     /* Create the dialog */
 
@@ -953,18 +953,19 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
     Quick_input.i18n = 1;
     Quick_input.widgets = fmd_widgets;
     fmd_widgets[FMDI0].text = text;
-    fmd_widgets[FMDI2].text = def_text_secure2;
+    fmd_widgets[FMDI2].text = def_text_secure;
     fmd_widgets[FMDI2].str_result = &dest_dir;
     fmd_widgets[FMDI1].str_result = &source_mask;
 
     *do_background = 0;
-  ask_file_mask:
 
-    if ((val = quick_dialog_skip (&Quick_input, SKIP)) == B_CANCEL) {
+  ask_file_mask:
+    val = quick_dialog_skip (&Quick_input, SKIP);
+
+    if (val == B_CANCEL) {
 	g_free (def_text_secure);
-	return 0;
+	return NULL;
     }
-    g_free (def_text_secure);
 
     if (ctx->follow_links)
 	ctx->stat_func = mc_stat;
@@ -984,8 +985,8 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
     }
 
     if (!dest_dir || !*dest_dir) {
+	g_free (def_text_secure);
 	g_free (source_mask);
-	g_free(def_text_secure2);
 	return dest_dir;
     }
 
@@ -994,9 +995,12 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
     if (ctx->search_handle == NULL) {
 	message (D_ERROR, MSG_ERROR, _("Invalid source pattern `%s'"),
 		    source_mask);
+	g_free (dest_dir);
 	g_free (source_mask);
 	goto ask_file_mask;
     }
+
+    g_free (def_text_secure);
     g_free (source_mask);
 
     ctx->search_handle->is_case_sentitive = TRUE;
@@ -1005,9 +1009,9 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
     else
         ctx->search_handle->search_type = MC_SEARCH_T_REGEX;
 
-    tmpdest = dest_dir;
-    dest_dir = tilde_expand(tmpdest);
-    g_free(tmpdest);
+    tmp = dest_dir;
+    dest_dir = tilde_expand (tmp);
+    g_free (tmp);
 
     ctx->dest_mask = strrchr (dest_dir, PATH_SEP);
     if (ctx->dest_mask == NULL)
@@ -1026,7 +1030,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
 	ctx->dest_mask = g_strdup ("\\0");
     else {
 	ctx->dest_mask = g_strdup (ctx->dest_mask);
-	*orig_mask = 0;
+	*orig_mask = '\0';
     }
     if (!*dest_dir) {
 	g_free (dest_dir);
@@ -1035,6 +1039,5 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
     if (val == B_USER)
 	*do_background = 1;
 
-    g_free(def_text_secure2);
     return dest_dir;
 }
