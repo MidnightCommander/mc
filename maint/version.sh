@@ -14,7 +14,7 @@ CURR_MC_VERSION="${PREV_MC_VERSION}"
 
 if [ -r ${VERSION_FILE} ]
   then
-    PREV_MC_VERSION=`sed -rn 's/^#define MC_CURRENT_VERSION "(.*)"$/\1/p' "${VERSION_FILE}"`
+    PREV_MC_VERSION=`sed -n 's/^#define MC_CURRENT_VERSION "\(.*\)"$/\1/p' "${VERSION_FILE}"`
     CURR_MC_VERSION="${PREV_MC_VERSION}"
 fi
 
