@@ -498,14 +498,10 @@ AC_ARG_ENABLE([charset],
 have_charset=
 charset_msg="no"
 if test "x$enable_charset" = xyes; then
-  if test "x$am_cv_func_iconv" != xyes; then
-    AC_MSG_WARN([Cannot enable charset support because iconv function is missing])    
-  else
     AC_DEFINE(HAVE_CHARSET, 1,
 	      [Define to enable charset selection and conversion])
     have_charset=yes
     charset_msg="yes"
-  fi
 fi
 
 if test "$GLIBC21" != yes; then
