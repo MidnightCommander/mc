@@ -1,4 +1,4 @@
-SUBDIRS = mcconfig search tty
+SUBDIRS = mcconfig search tty viewer
 
 AM_CFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir) $(PCRE_CFLAGS)
 

@@ -158,7 +158,6 @@ struct WView {
 				   growing buffer */
     gboolean growbuf_finished;	/* TRUE when all data has been read. */
 
-
     /* Editor modes */
     gboolean hex_mode;		/* Hexview or Hexedit */
     gboolean hexedit_mode;	/* Hexedit */
