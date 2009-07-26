@@ -26,7 +26,7 @@ int main ()
 	LIBS="$ac_save_LIBS"
     ])
 
-if test "$mc_cv_g_module_supported" = yes; then
+if test x"$mc_cv_g_module_supported" = xyes; then
     AC_DEFINE(HAVE_GMODULE, 1,
 	      [Define if gmodule functionality is supported])
 fi

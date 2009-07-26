@@ -30,7 +30,7 @@ AC_DEFUN([MC_MCSERVER_CHECKS], [
             mcserv_pam=yes], [], [$LIB_DL])
 
         dnl Check for crypt() - needed for both /etc/shadow and /etc/passwd.
-        if test -z "$mcserv_pam"; then
+        if test x"$mcserv_pam" = x; then
 
             dnl Check for pwdauth() - used on SunOS.
             AC_CHECK_FUNCS([pwdauth])

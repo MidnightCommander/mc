@@ -29,7 +29,7 @@ AC_DEFUN([MC_SLANG_PRIVATE], [
 	LIBS="$ac_save_LIBS"
     ])
 
-    if test x$mc_cv_slang_private = xyes; then
+    if test x"$mc_cv_slang_private" = xyes; then
 	AC_DEFINE(HAVE_SLANG_PRIVATE, 1,
 		  [Define if private S-Lang functions are available])
     fi

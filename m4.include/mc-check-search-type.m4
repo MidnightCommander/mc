@@ -30,7 +30,7 @@ AC_DEFUN([MC_CHECK_SEARCH_TYPE],[
 
     $PKG_CONFIG --max-version 2.14 glib-2.0
     if test $? -eq 0; then
-	if test ! x$with_search_engine = x -a x$SEARCH_TYPE = xglib; then
+	if test ! x"$with_search_engine" = x -a x"$SEARCH_TYPE" = xglib; then
 	    AC_MSG_ERROR([Selected 'glib' search engine, but you don't have glib >= 2.14])
 	fi
 	AX_PATH_LIB_PCRE
@@ -39,7 +39,7 @@ AC_DEFUN([MC_CHECK_SEARCH_TYPE],[
 	fi
 	AC_DEFINE(SEARCH_TYPE_PCRE, 1, [Define to select 'pcre' search type])
     else
-	if test x$SEARCH_TYPE = xpcre; then
+	if test x"$SEARCH_TYPE" = xpcre; then
 	    AX_PATH_LIB_PCRE
 	    if test x"${PCRE_LIBS}" = x; then
 		AC_MSG_ERROR([Your system don't have pcre library (or pcre devel stuff)])

@@ -1,6 +1,6 @@
 AC_DEFUN([AC_MC_VFS_ADDNAME],
 [
-    if test "$vfs_flags" = "" ; then
+    if test x"$vfs_flags" = "x" ; then
 	vfs_flags="$1"
     else
 	vfs_flags="$vfs_flags, $1"
@@ -39,7 +39,7 @@ AC_DEFUN([MC_WITH_VFS],
     if test "x$enable_netcode" != xno; then
 	dnl FIXME: network checks should probably be in their own macro.
 	AC_SEARCH_LIBS(socket, [xnet bsd socket inet], [have_socket=yes])
-	if test x$have_socket = xyes; then
+	if test x"$have_socket" = xyes; then
 	    AC_SEARCH_LIBS(gethostbyname, [bsd socket inet netinet])
 	    AC_CHECK_MEMBERS([struct linger.l_linger], , , [
 #include <sys/types.h>
@@ -65,7 +65,7 @@ AC_DEFUN([MC_WITH_VFS],
 AC_DEFUN([AC_MC_VFS_CHECKS],[
     AC_ARG_ENABLE([vfs],
                   [  --disable-vfs           Compile with VFS code])
-    if test "$enable_vfs" != "no" ; then
+    if test x"$enable_vfs" != x"no" ; then
 	enable_vfs="yes"
 	vfs_type="Midnight Commander Virtual Filesystem"
 	use_vfs=yes
@@ -90,5 +90,5 @@ AC_DEFUN([AC_MC_VFS_CHECKS],[
 	vfs_type="Plain OS filesystem"
     fi
 
-    AM_CONDITIONAL(ENABLE_VFS, [test "$enable_vfs" = "yes"])
+    AM_CONDITIONAL(ENABLE_VFS, [test x"$enable_vfs" = x"yes"])
 ])
