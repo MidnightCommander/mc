@@ -47,12 +47,9 @@
 
 
 Listbox *
-create_listbox_window_delta (int delta_x, int delta_y, int cols, int lines, const char *title, const char *help)
+create_listbox_window_delta (int delta_x, int delta_y, int cols, int lines,
+				const char *title, const char *help)
 {
-    int xpos, ypos, len;
-    Listbox *listbox = g_new (Listbox, 1);
-    const char *cancel_string = _("&Cancel");
-
     const int listbox_colors[4] =
     {
 	MENU_ENTRY_COLOR,
@@ -61,29 +58,30 @@ create_listbox_window_delta (int delta_x, int delta_y, int cols, int lines, cons
 	MENU_HOTSEL_COLOR,
     };
 
+    int xpos, ypos, len;
+    Listbox *listbox;
+
     /* Adjust sizes */
-    lines = (lines > LINES - 6) ? LINES - 6 : lines;
+    lines = min (lines, LINES - 6);
 
-    if (title && (cols < (len = str_term_width1 (title) + 2)))
-	cols = len;
+    if (title != NULL) {
+	len = str_term_width1 (title) + 4;
+	cols = max (cols, len);
+    }
 
-    /* no &, but 4 spaces around button for brackets and such */
-    if (cols < (len = str_term_width1 (cancel_string) + 3))
-	cols = len;
+    cols = min (cols, COLS - 6);
 
-    cols = cols > COLS - 6 ? COLS - 6 : cols;
+    /* adjust position */
     xpos = (COLS - cols + delta_x) / 2;
     ypos = (LINES - lines + delta_y) / 2 - 2;
-    /* Create components */
+
+    listbox = g_new (Listbox, 1);
+
     listbox->dlg =
-	create_dlg (ypos, xpos, lines + 6, cols + 4, listbox_colors, NULL,
+	create_dlg (ypos, xpos, lines + 4, cols + 4, listbox_colors, NULL,
 		    help, title, DLG_REVERSE);
 
     listbox->list = listbox_new (2, 2, lines, cols, NULL);
-
-    add_widget (listbox->dlg,
-		button_new (lines + 3, (cols / 2 + 2) - len / 2, B_CANCEL,
-			    NORMAL_BUTTON, cancel_string, 0));
     add_widget (listbox->dlg, listbox->list);
 
     return listbox;
