@@ -1845,7 +1845,7 @@ listbox_drawscroll (WListbox *l)
     int line;
     int i, top;
     int max_line = l->height-1;
-    
+
     /* Are we at the top? */
     widget_move (&l->widget, 0, l->width);
     if (l->list == l->top)
@@ -1866,7 +1866,7 @@ listbox_drawscroll (WListbox *l)
 	line = 1+ ((l->pos * (l->height-2)) / l->count);
     else
 	line = 0;
-    
+
     for (i = 1; i < max_line; i++){
 	widget_move (&l->widget, i, l->width);
 	if (i != line)
@@ -1875,29 +1875,22 @@ listbox_drawscroll (WListbox *l)
 	    tty_print_char ('*');
     }
 }
-    
+
 static void
-listbox_draw (WListbox *l, int focused)
+listbox_draw (WListbox *l, gboolean focused)
 {
+    const Dlg_head *h = l->widget.parent;
+    const int normalc = DLG_NORMALC (h);
+    int selc = focused ? DLG_HOT_FOCUSC (h) : DLG_FOCUSC (h);
+
     WLEntry *e;
     int i;
-    int sel_line;
-    Dlg_head *h = l->widget.parent;
-    int normalc = DLG_NORMALC (h);
-    int selc;
+    int sel_line = -1;
     const char *text; 
 
-    if (focused){
-	selc    = DLG_FOCUSC (h);
-    } else {
-	selc    = DLG_HOT_FOCUSC (h);
-    }
-    sel_line = -1;
-
-    for (e = l->top, i = 0; (i < l->height); i++){
-	
+    for (e = l->top, i = 0; (i < l->height); i++) {
 	/* Display the entry */
-	if (e == l->current && sel_line == -1){
+	if (e == l->current && sel_line == -1) {
 	    sel_line = i;
 	    tty_setcolor (selc);
 	} else
@@ -1911,7 +1904,7 @@ listbox_draw (WListbox *l, int focused)
 	    text = e->text;
 	    e = e->next;
 	}
-            tty_print_string (str_fit_to_term (text, l->width - 2, J_LEFT_FIT));
+	tty_print_string (str_fit_to_term (text, l->width - 2, J_LEFT_FIT));
     }
     l->cursor_y = sel_line;
 
@@ -2166,16 +2159,17 @@ static cb_ret_t
 listbox_callback (Widget *w, widget_msg_t msg, int parm)
 {
     WListbox *l = (WListbox *) w;
-    cb_ret_t ret_code;
-    WLEntry *e;
     Dlg_head *h = l->widget.parent;
+    WLEntry *e;
+    cb_ret_t ret_code;
 
     switch (msg) {
     case WIDGET_INIT:
 	return MSG_HANDLED;
 
     case WIDGET_HOTKEY:
-	if ((e = listbox_check_hotkey (l, parm)) != NULL) {
+	e = listbox_check_hotkey (l, parm);
+	if (e != NULL) {
 	    int action;
 
 	    listbox_select_entry (l, e);
@@ -2192,12 +2186,13 @@ listbox_callback (Widget *w, widget_msg_t msg, int parm)
 		dlg_stop (h);
 	    }
 	    return MSG_HANDLED;
-	} else
-	    return MSG_NOT_HANDLED;
+	}
+	return MSG_NOT_HANDLED;
 
     case WIDGET_KEY:
-	if ((ret_code = listbox_key (l, parm)) != MSG_NOT_HANDLED) {
-	    listbox_draw (l, 1);
+	ret_code = listbox_key (l, parm);
+	if (ret_code != MSG_NOT_HANDLED) {
+	    listbox_draw (l, TRUE);
 	    (*h->callback) (h, DLG_ACTION, l->pos);
 	}
 	return ret_code;

@@ -53,6 +53,14 @@ create_listbox_window_delta (int delta_x, int delta_y, int cols, int lines, cons
     Listbox *listbox = g_new (Listbox, 1);
     const char *cancel_string = _("&Cancel");
 
+    const int listbox_colors[4] =
+    {
+	MENU_ENTRY_COLOR,
+	MENU_SELECTED_COLOR,
+	MENU_HOT_COLOR,
+	MENU_HOTSEL_COLOR,
+    };
+
     /* Adjust sizes */
     lines = (lines > LINES - 6) ? LINES - 6 : lines;
 
@@ -68,7 +76,7 @@ create_listbox_window_delta (int delta_x, int delta_y, int cols, int lines, cons
     ypos = (LINES - lines + delta_y) / 2 - 2;
     /* Create components */
     listbox->dlg =
-	create_dlg (ypos, xpos, lines + 6, cols + 4, dialog_colors, NULL,
+	create_dlg (ypos, xpos, lines + 6, cols + 4, listbox_colors, NULL,
 		    help, title, DLG_REVERSE);
 
     listbox->list = listbox_new (2, 2, lines, cols, NULL);
