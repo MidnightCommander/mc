@@ -1852,13 +1852,13 @@ mc_maybe_editor_or_viewer (void)
 static void
 do_nc (void)
 {
-    int midnight_colors[4];
-
-    midnight_colors[0] = NORMAL_COLOR;	/* NORMALC */
-    midnight_colors[1] = REVERSE_COLOR;	/* FOCUSC */
-    midnight_colors[2] = INPUT_COLOR;	/* HOT_NORMALC */
-    midnight_colors[3] = NORMAL_COLOR;	/* HOT_FOCUSC */
-
+    const int midnight_colors[4] =
+    {
+	NORMAL_COLOR,	/* NORMALC */
+	REVERSE_COLOR,	/* FOCUSC */
+	INPUT_COLOR,	/* HOT_NORMALC */
+	NORMAL_COLOR	/* HOT_FOCUSC */
+    };
 
     midnight_dlg = create_dlg (0, 0, LINES, COLS, midnight_colors, midnight_callback,
 			       "[main]", NULL, DLG_WANT_IDLE);

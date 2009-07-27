@@ -169,7 +169,8 @@ create_dlg (int y1, int x1, int lines, int cols, const int *color_set,
 	y1 -= 2;
 
     new_d = g_new0 (Dlg_head, 1);
-    new_d->color = color_set;
+    if (color_set != NULL)
+	memmove (new_d->color, color_set, sizeof (new_d->color));
     new_d->help_ctx = help_ctx;
     new_d->callback = callback ? callback : default_dlg_callback;
     new_d->x = x1;

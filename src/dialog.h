@@ -93,7 +93,7 @@ typedef struct Dlg_head {
     /* Set by the user */
     int flags;			/* User flags */
     const char *help_ctx;	/* Name of the help entry */
-    const int *color;		/* Color set */
+    const int color[4];		/* Color set. Unused in viewer and editor */
     /*notconst*/ char *title;	/* Title of the dialog */
 
     /* Set and received by the user */
