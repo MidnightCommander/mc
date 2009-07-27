@@ -55,6 +55,9 @@
 
 #define HISTORY_FILE_NAME ".mc/history"
 
+/* number of bttons in buttonbar */
+#define BUTTONBAR_LABELS_NUM	10
+
 struct WButtonBar {
     Widget widget;
     int    visible;		/* Is it visible? */
@@ -67,7 +70,7 @@ struct WButtonBar {
 	    buttonbarfn fn_ptr;
 	} u;
 	void   *data;
-    } labels [10];
+    } labels [BUTTONBAR_LABELS_NUM];
 };
 
 static void
@@ -2441,7 +2444,7 @@ buttonbar_call (WButtonBar *bb, int i)
 static int
 buttonbat_get_button_width ()
 {
-    int result = COLS / 10;
+    int result = COLS / BUTTONBAR_LABELS_NUM;
     return (result >= 7) ? result : 7;
 }
 
@@ -2458,33 +2461,31 @@ buttonbar_callback (Widget *w, widget_msg_t msg, int parm)
 	return MSG_NOT_HANDLED;
 
     case WIDGET_HOTKEY:
-	for (i = 0; i < 10; i++) {
+	for (i = 0; i < BUTTONBAR_LABELS_NUM; i++)
 	    if (parm == KEY_F (i + 1) && buttonbar_call (bb, i))
 		return MSG_HANDLED;
-	}
 	return MSG_NOT_HANDLED;
 
     case WIDGET_DRAW:
-	if (!bb->visible)
-	    return MSG_HANDLED;
-	widget_move (&bb->widget, 0, 0);
-	tty_setcolor (DEFAULT_COLOR);
-        bb->btn_width = buttonbat_get_button_width ();
-	tty_printf ("%-*s", bb->widget.cols, "");
-        for (i = 0; i < COLS / bb->btn_width && i < 10; i++) {
-            widget_move (&bb->widget, 0, i * bb->btn_width);
+	if (bb->visible) {
+	    widget_move (&bb->widget, 0, 0);
 	    tty_setcolor (DEFAULT_COLOR);
-            tty_printf ("%2d", i + 1);
-	    tty_setcolor (SELECTED_COLOR);
-            text = (bb->labels[i].text != NULL) ? bb->labels[i].text : "";
-            tty_print_string (str_fit_to_term (text, bb->btn_width - 2, J_CENTER_LEFT));
-	    tty_setcolor (DEFAULT_COLOR);
+	    bb->btn_width = buttonbat_get_button_width ();
+	    tty_printf ("%-*s", bb->widget.cols, "");
+
+	    for (i = 0; i < COLS / bb->btn_width && i < BUTTONBAR_LABELS_NUM; i++) {
+		widget_move (&bb->widget, 0, i * bb->btn_width);
+		tty_setcolor (DEFAULT_COLOR);
+		tty_printf ("%2d", i + 1);
+		tty_setcolor (SELECTED_COLOR);
+		text = (bb->labels[i].text != NULL) ? bb->labels[i].text : "";
+		tty_print_string (str_fit_to_term (text, bb->btn_width - 2, J_CENTER_LEFT));
+	    }
 	}
-	tty_setcolor (SELECTED_COLOR);
 	return MSG_HANDLED;
 
     case WIDGET_DESTROY:
-	for (i = 0; i < 10; i++)
+	for (i = 0; i < BUTTONBAR_LABELS_NUM; i++)
 	    g_free (bb->labels[i].text);
 	return MSG_HANDLED;
 
@@ -2504,7 +2505,7 @@ buttonbar_event (Gpm_Event *event, void *data)
     if (event->y == 2)
 	return MOU_NORMAL;
     button = (event->x - 1) / bb->btn_width;
-    if (button < 10)
+    if (button < BUTTONBAR_LABELS_NUM)
 	buttonbar_call (bb, button);
     return MOU_NORMAL;
 }
@@ -2519,7 +2520,7 @@ buttonbar_new (int visible)
 		 buttonbar_callback, buttonbar_event);
     
     bb->visible = visible;
-    for (i = 0; i < 10; i++){
+    for (i = 0; i < BUTTONBAR_LABELS_NUM; i++){
 	bb->labels[i].text = NULL;
 	bb->labels[i].tag = BBFUNC_NONE;
     }
