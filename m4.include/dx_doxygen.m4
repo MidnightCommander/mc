@@ -88,7 +88,7 @@ AC_DEFUN([DX_IF_FEATURE], [ifelse(DX_FEATURE_$1, ON, [$2], [$3])])
 # Require the specified program to be found for the DX_CURRENT_FEATURE to work.
 AC_DEFUN([DX_REQUIRE_PROG], [
 AC_PATH_TOOL([$1], [$2])
-if test "$DX_FLAG_[]DX_CURRENT_FEATURE$$1" = 1; then
+if test x"$DX_FLAG_[]DX_CURRENT_FEATURE$$1" = x1; then
     AC_MSG_WARN([$2 not found - will not DX_CURRENT_DESCRIPTION])
     AC_SUBST([DX_FLAG_]DX_CURRENT_FEATURE, 0)
 fi
@@ -104,7 +104,7 @@ AC_DEFUN([DX_TEST_FEATURE], [test "$DX_FLAG_$1" = 1])
 # Verify that a required features has the right state before trying to turn on
 # the DX_CURRENT_FEATURE.
 AC_DEFUN([DX_CHECK_DEPEND], [
-test "$DX_FLAG_$1" = "$2" \
+test x"$DX_FLAG_$1" = x"$2" \
 || AC_MSG_ERROR([doxygen-DX_CURRENT_FEATURE ifelse([$2], 1,
                             requires, contradicts) doxygen-DX_CURRENT_FEATURE])
 ])
@@ -113,7 +113,7 @@ test "$DX_FLAG_$1" = "$2" \
 # ----------------------------------------------------------
 # Turn off the DX_CURRENT_FEATURE if the required feature is off.
 AC_DEFUN([DX_CLEAR_DEPEND], [
-test "$DX_FLAG_$1" = "$2" || AC_SUBST([DX_FLAG_]DX_CURRENT_FEATURE, 0)
+test x"$DX_FLAG_$1" = x"$2" || AC_SUBST([DX_FLAG_]DX_CURRENT_FEATURE, 0)
 ])
 
 # DX_FEATURE_ARG(FEATURE, DESCRIPTION,

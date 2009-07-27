@@ -21,14 +21,14 @@ AC_ARG_WITH([pcre],
             ,
             [with_pcre="yes"]
 )
-if test ".$with_pcre" = ".no" ; then
+if test x"$with_pcre" = "xno" ; then
   AC_MSG_RESULT([disabled])
   m4_ifval($2,$2)
 else
 
   AC_MSG_RESULT([(testing)])
 
-  if test ".$with_pcre" = ".yes" ; then
+  if test "x$with_pcre" = "xyes" ; then
     PCRE_CFLAGS="`pcre-config --cflags`"
     PCRE_LIBS="`pcre-config --libs`"
   else
@@ -40,7 +40,7 @@ else
 
      AC_CHECK_LIB(pcre, pcre_compile)
 
-     if test "$ac_cv_lib_pcre_pcre_compile" = "yes" ; then
+     if test x"$ac_cv_lib_pcre_pcre_compile" = x"yes" ; then
         AC_MSG_RESULT(.setting PCRE_LIBS -L$with_pcre/lib -lpcre)
 
         PCRE_LIBS=$test_PCRE_LIBS

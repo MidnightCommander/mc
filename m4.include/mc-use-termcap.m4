@@ -28,7 +28,7 @@ AC_DEFUN([MC_SLANG_TERMCAP], [
 	LIBS="$ac_save_LIBS"
     ])
 
-    if test x$mc_cv_slang_termcap = xyes; then
+    if test x"$mc_cv_slang_termcap" = xyes; then
 	MC_USE_TERMCAP
     fi
 ])

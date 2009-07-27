@@ -76,7 +76,7 @@ AC_FUNC_GETMNTENT
 # I think there is too great a chance that some non-Cray system has a
 # function named listmntent to risk the false positive.
 
-if test -z "$ac_list_mounted_fs"; then
+if test x"$ac_list_mounted_fs" = x; then
   # Cray UNICOS 9
   AC_MSG_CHECKING([for listmntent of Cray/Unicos-9])
   AC_CACHE_VAL(fu_cv_sys_mounted_cray_listmntent,
@@ -85,13 +85,13 @@ if test -z "$ac_list_mounted_fs"; then
         [#ifdef _CRAY
 yes
 #endif
-        ], [test $ac_cv_func_listmntent = yes \
+        ], [test x"$ac_cv_func_listmntent" = xyes \
 	    && fu_cv_sys_mounted_cray_listmntent=yes]
       )
     ]
   )
   AC_MSG_RESULT($fu_cv_sys_mounted_cray_listmntent)
-  if test $fu_cv_sys_mounted_cray_listmntent = yes; then
+  if test x"$fu_cv_sys_mounted_cray_listmntent" = xyes; then
     ac_list_mounted_fs=found
     AC_DEFINE(MOUNTED_LISTMNTENT, 1,
       [Define if there is a function named listmntent that can be used to
@@ -99,7 +99,7 @@ yes
   fi
 fi
 
-if test -z "$ac_list_mounted_fs"; then
+if test x"$ac_list_mounted_fs" = x; then
   # AIX.
   AC_MSG_CHECKING([for mntctl function and struct vmount])
   AC_CACHE_VAL(fu_cv_sys_mounted_vmount,
@@ -107,7 +107,7 @@ if test -z "$ac_list_mounted_fs"; then
     fu_cv_sys_mounted_vmount=yes,
     fu_cv_sys_mounted_vmount=no)])
   AC_MSG_RESULT($fu_cv_sys_mounted_vmount)
-  if test $fu_cv_sys_mounted_vmount = yes; then
+  if test x"$fu_cv_sys_mounted_vmount" = xyes; then
     ac_list_mounted_fs=found
     AC_DEFINE(MOUNTED_VMOUNT, 1,
 	[Define if there is a function named mntctl that can be used to read
@@ -116,12 +116,12 @@ if test -z "$ac_list_mounted_fs"; then
   fi
 fi
 
-if test $ac_cv_func_getmntent = yes; then
+if test x"$ac_cv_func_getmntent" = xyes; then
 
   # This system has the getmntent function.
   # Determine whether it's the one-argument variant or the two-argument one.
 
-  if test -z "$ac_list_mounted_fs"; then
+  if test x"$ac_list_mounted_fs" = x; then
     # 4.3BSD, SunOS, HP-UX, Dynix, Irix
     AC_MSG_CHECKING([for one-argument getmntent function])
     AC_CACHE_VAL(fu_cv_sys_mounted_getmntent1,
@@ -147,7 +147,7 @@ if test $ac_cv_func_getmntent = yes; then
 		    fu_cv_sys_mounted_getmntent1=yes,
 		    fu_cv_sys_mounted_getmntent1=no)])
     AC_MSG_RESULT($fu_cv_sys_mounted_getmntent1)
-    if test $fu_cv_sys_mounted_getmntent1 = yes; then
+    if test x"$fu_cv_sys_mounted_getmntent1" = xyes; then
       ac_list_mounted_fs=found
       AC_DEFINE(MOUNTED_GETMNTENT1, 1,
         [Define if there is a function named getmntent for reading the list
@@ -156,7 +156,7 @@ if test $ac_cv_func_getmntent = yes; then
     fi
   fi
 
-  if test -z "$ac_list_mounted_fs"; then
+  if test x"$ac_list_mounted_fs" = x; then
     # SVR4
     AC_MSG_CHECKING([for two-argument getmntent function])
     AC_CACHE_VAL(fu_cv_sys_mounted_getmntent2,
@@ -164,7 +164,7 @@ if test $ac_cv_func_getmntent = yes; then
       fu_cv_sys_mounted_getmntent2=yes,
       fu_cv_sys_mounted_getmntent2=no)])
     AC_MSG_RESULT($fu_cv_sys_mounted_getmntent2)
-    if test $fu_cv_sys_mounted_getmntent2 = yes; then
+    if test x"$fu_cv_sys_mounted_getmntent2" = xyes; then
       ac_list_mounted_fs=found
       AC_DEFINE(MOUNTED_GETMNTENT2, 1,
         [Define if there is a function named getmntent for reading the list of
@@ -175,7 +175,7 @@ if test $ac_cv_func_getmntent = yes; then
 
 fi
 
-if test -z "$ac_list_mounted_fs"; then
+if test x"$ac_list_mounted_fs" = x; then
   # DEC Alpha running OSF/1, and Apple Darwin 1.3.
   # powerpc-apple-darwin1.3.7 needs sys/param.h sys/ucred.h sys/fs_types.h
 
@@ -196,7 +196,7 @@ if test -z "$ac_list_mounted_fs"; then
     fu_cv_sys_mounted_getfsstat=yes,
     fu_cv_sys_mounted_getfsstat=no)])
   AC_MSG_RESULT($fu_cv_sys_mounted_getfsstat)
-  if test $fu_cv_sys_mounted_getfsstat = yes; then
+  if test x"$fu_cv_sys_mounted_getfsstat" = xyes; then
     ac_list_mounted_fs=found
     AC_DEFINE(MOUNTED_GETFSSTAT, 1,
 	      [Define if there is a function named getfsstat for reading the
@@ -204,7 +204,7 @@ if test -z "$ac_list_mounted_fs"; then
   fi
 fi
 
-if test -z "$ac_list_mounted_fs"; then
+if test x"$ac_list_mounted_fs" = x; then
   # SVR3
   AC_MSG_CHECKING([for FIXME existence of three headers])
   AC_CACHE_VAL(fu_cv_sys_mounted_fread_fstyp,
@@ -215,7 +215,7 @@ if test -z "$ac_list_mounted_fs"; then
 		fu_cv_sys_mounted_fread_fstyp=yes,
 		fu_cv_sys_mounted_fread_fstyp=no)])
   AC_MSG_RESULT($fu_cv_sys_mounted_fread_fstyp)
-  if test $fu_cv_sys_mounted_fread_fstyp = yes; then
+  if test x"$fu_cv_sys_mounted_fread_fstyp" = xyes; then
     ac_list_mounted_fs=found
     AC_DEFINE(MOUNTED_FREAD_FSTYP, 1,
       [Define if (like SVR2) there is no specific function for reading the
@@ -224,17 +224,17 @@ if test -z "$ac_list_mounted_fs"; then
   fi
 fi
 
-if test -z "$ac_list_mounted_fs"; then
+if test x"$ac_list_mounted_fs" = x; then
   # 4.4BSD and DEC OSF/1.
   AC_MSG_CHECKING([for getmntinfo function])
   AC_CACHE_VAL(fu_cv_sys_mounted_getmntinfo,
     [
-      test "$ac_cv_func_getmntinfo" = yes \
+      test x"$ac_cv_func_getmntinfo" = xyes \
 	  && fu_cv_sys_mounted_getmntinfo=yes \
 	  || fu_cv_sys_mounted_getmntinfo=no
     ])
   AC_MSG_RESULT($fu_cv_sys_mounted_getmntinfo)
-  if test $fu_cv_sys_mounted_getmntinfo = yes; then
+  if test x"$fu_cv_sys_mounted_getmntinfo" = xyes; then
     AC_MSG_CHECKING([whether getmntinfo returns statvfs structures])
     AC_CACHE_VAL(fu_cv_sys_mounted_getmntinfo2,
       [
@@ -255,7 +255,7 @@ extern int getmntinfo (struct statfs **, int);
           [fu_cv_sys_mounted_getmntinfo2=yes])
       ])
     AC_MSG_RESULT([$fu_cv_sys_mounted_getmntinfo2])
-    if test $fu_cv_sys_mounted_getmntinfo2 = no; then
+    if test x"$fu_cv_sys_mounted_getmntinfo2" = xno; then
       ac_list_mounted_fs=found
       AC_DEFINE(MOUNTED_GETMNTINFO, 1,
 	        [Define if there is a function named getmntinfo for reading the
@@ -271,7 +271,7 @@ extern int getmntinfo (struct statfs **, int);
   fi
 fi
 
-if test -z "$ac_list_mounted_fs"; then
+if test x"$ac_list_mounted_fs" = x; then
   # Ultrix
   AC_MSG_CHECKING([for getmnt function])
   AC_CACHE_VAL(fu_cv_sys_mounted_getmnt,
@@ -281,7 +281,7 @@ if test -z "$ac_list_mounted_fs"; then
 		fu_cv_sys_mounted_getmnt=yes,
 		fu_cv_sys_mounted_getmnt=no)])
   AC_MSG_RESULT($fu_cv_sys_mounted_getmnt)
-  if test $fu_cv_sys_mounted_getmnt = yes; then
+  if test x"$fu_cv_sys_mounted_getmnt" = xyes; then
     ac_list_mounted_fs=found
     AC_DEFINE(MOUNTED_GETMNT, 1,
       [Define if there is a function named getmnt for reading the list of
@@ -289,20 +289,20 @@ if test -z "$ac_list_mounted_fs"; then
   fi
 fi
 
-if test -z "$ac_list_mounted_fs"; then
+if test x"$ac_list_mounted_fs" = x; then
   # BeOS
   AC_CHECK_FUNCS(next_dev fs_stat_dev)
   AC_CHECK_HEADERS(fs_info.h)
   AC_MSG_CHECKING([for BEOS mounted file system support functions])
-  if test $ac_cv_header_fs_info_h = yes \
-      && test $ac_cv_func_next_dev = yes \
-	&& test $ac_cv_func_fs_stat_dev = yes; then
+  if test x"$ac_cv_header_fs_info_h" = xyes \
+      && test x"$ac_cv_func_next_dev" = xyes \
+	&& test x"$ac_cv_func_fs_stat_dev" = xyes; then
     fu_result=yes
   else
     fu_result=no
   fi
   AC_MSG_RESULT($fu_result)
-  if test $fu_result = yes; then
+  if test x"$fu_result" = xyes; then
     ac_list_mounted_fs=found
     AC_DEFINE(MOUNTED_FS_STAT_DEV, 1,
       [Define if there are functions named next_dev and fs_stat_dev for
@@ -310,7 +310,7 @@ if test -z "$ac_list_mounted_fs"; then
   fi
 fi
 
-if test -z "$ac_list_mounted_fs"; then
+if test x"$ac_list_mounted_fs" = x; then
   # SVR2
   AC_MSG_CHECKING([whether it is possible to resort to fread on /etc/mnttab])
   AC_CACHE_VAL(fu_cv_sys_mounted_fread,
@@ -318,7 +318,7 @@ if test -z "$ac_list_mounted_fs"; then
 		fu_cv_sys_mounted_fread=yes,
 		fu_cv_sys_mounted_fread=no)])
   AC_MSG_RESULT($fu_cv_sys_mounted_fread)
-  if test $fu_cv_sys_mounted_fread = yes; then
+  if test x"$fu_cv_sys_mounted_fread" = xyes; then
     ac_list_mounted_fs=found
     AC_DEFINE(MOUNTED_FREAD, 1,
 	      [Define if there is no specific function for reading the list of
@@ -327,13 +327,13 @@ if test -z "$ac_list_mounted_fs"; then
   fi
 fi
 
-if test -z "$ac_list_mounted_fs"; then
+if test x"$ac_list_mounted_fs" = x; then
   AC_MSG_ERROR([could not determine how to read list of mounted file systems])
   # FIXME -- no need to abort building the whole package
   # Can't build mountlist.c or anything that needs its functions
 fi
 
-AS_IF([test $ac_list_mounted_fs = found], [$1], [$2])
+AS_IF([test x"$ac_list_mounted_fs" = xfound], [$1], [$2])
 
   ])
 
@@ -359,7 +359,7 @@ AC_DEFUN([gl_FSUSAGE],
        #include <sys/param.h>
       #endif]])
   gl_FILE_SYSTEM_USAGE([gl_cv_fs_space=yes], [gl_cv_fs_space=no])
-  if test $gl_cv_fs_space = yes; then
+  if test x"$gl_cv_fs_space" = xyes; then
     AC_LIBOBJ(fsusage)
     gl_PREREQ_FSUSAGE_EXTRA
   fi
@@ -383,7 +383,7 @@ ac_fsusage_space=no
 # of a `struct statvfs' causes this test to fail (as it should) on such
 # systems.  That system is reported to work fine with STAT_STATFS4 which
 # is what it gets when this test fails.
-if test $ac_fsusage_space = no; then
+if test x"$ac_fsusage_space" = xno; then
   # SVR4
   AC_CACHE_CHECK([for statvfs function (SVR4)], fu_cv_sys_stat_statvfs,
 		 [AC_TRY_LINK([#include <sys/types.h>
@@ -403,14 +403,14 @@ call.
 			      [struct statvfs fsd; statvfs (0, &fsd);],
 			      fu_cv_sys_stat_statvfs=yes,
 			      fu_cv_sys_stat_statvfs=no)])
-  if test $fu_cv_sys_stat_statvfs = yes; then
+  if test x"$fu_cv_sys_stat_statvfs" = xyes; then
     ac_fsusage_space=yes
     AC_DEFINE(STAT_STATVFS, 1,
 	      [  Define if there is a function named statvfs.  (SVR4)])
   fi
 fi
 
-if test $ac_fsusage_space = no; then
+if test x"$ac_fsusage_space" = xno; then
   # DEC Alpha running OSF/1
   AC_MSG_CHECKING([for 3-argument statfs function (DEC OSF/1)])
   AC_CACHE_VAL(fu_cv_sys_stat_statfs3_osf1,
@@ -429,14 +429,14 @@ if test $ac_fsusage_space = no; then
   fu_cv_sys_stat_statfs3_osf1=no,
   fu_cv_sys_stat_statfs3_osf1=no)])
   AC_MSG_RESULT($fu_cv_sys_stat_statfs3_osf1)
-  if test $fu_cv_sys_stat_statfs3_osf1 = yes; then
+  if test x"$fu_cv_sys_stat_statfs3_osf1" = xyes; then
     ac_fsusage_space=yes
     AC_DEFINE(STAT_STATFS3_OSF1, 1,
 	      [   Define if  statfs takes 3 args.  (DEC Alpha running OSF/1)])
   fi
 fi
 
-if test $ac_fsusage_space = no; then
+if test x"$ac_fsusage_space" = xno; then
 # AIX
   AC_MSG_CHECKING([for two-argument statfs with statfs.bsize dnl
 member (AIX, 4.3BSD)])
@@ -462,7 +462,7 @@ member (AIX, 4.3BSD)])
   fu_cv_sys_stat_statfs2_bsize=no,
   fu_cv_sys_stat_statfs2_bsize=no)])
   AC_MSG_RESULT($fu_cv_sys_stat_statfs2_bsize)
-  if test $fu_cv_sys_stat_statfs2_bsize = yes; then
+  if test x"$fu_cv_sys_stat_statfs2_bsize" = xyes; then
     ac_fsusage_space=yes
     AC_DEFINE(STAT_STATFS2_BSIZE, 1,
 [  Define if statfs takes 2 args and struct statfs has a field named f_bsize.
@@ -470,7 +470,7 @@ member (AIX, 4.3BSD)])
   fi
 fi
 
-if test $ac_fsusage_space = no; then
+if test x"$ac_fsusage_space" = xno; then
 # SVR3
   AC_MSG_CHECKING([for four-argument statfs (AIX-3.2.5, SVR3)])
   AC_CACHE_VAL(fu_cv_sys_stat_statfs4,
@@ -486,14 +486,14 @@ if test $ac_fsusage_space = no; then
     fu_cv_sys_stat_statfs4=no,
     fu_cv_sys_stat_statfs4=no)])
   AC_MSG_RESULT($fu_cv_sys_stat_statfs4)
-  if test $fu_cv_sys_stat_statfs4 = yes; then
+  if test x"$fu_cv_sys_stat_statfs4" = xyes; then
     ac_fsusage_space=yes
     AC_DEFINE(STAT_STATFS4, 1,
 	      [  Define if statfs takes 4 args.  (SVR3, Dynix, Irix, Dolphin)])
   fi
 fi
 
-if test $ac_fsusage_space = no; then
+if test x"$ac_fsusage_space" = xno; then
 # 4.4BSD and NetBSD
   AC_MSG_CHECKING([for two-argument statfs with statfs.fsize dnl
 member (4.4BSD and NetBSD)])
@@ -516,7 +516,7 @@ member (4.4BSD and NetBSD)])
   fu_cv_sys_stat_statfs2_fsize=no,
   fu_cv_sys_stat_statfs2_fsize=no)])
   AC_MSG_RESULT($fu_cv_sys_stat_statfs2_fsize)
-  if test $fu_cv_sys_stat_statfs2_fsize = yes; then
+  if test x"$fu_cv_sys_stat_statfs2_fsize" = xyes; then
     ac_fsusage_space=yes
     AC_DEFINE(STAT_STATFS2_FSIZE, 1,
 [  Define if statfs takes 2 args and struct statfs has a field named f_fsize.
@@ -524,7 +524,7 @@ member (4.4BSD and NetBSD)])
   fi
 fi
 
-if test $ac_fsusage_space = no; then
+if test x"$ac_fsusage_space" = xno; then
   # Ultrix
   AC_MSG_CHECKING([for two-argument statfs with struct fs_data (Ultrix)])
   AC_CACHE_VAL(fu_cv_sys_stat_fs_data,
@@ -550,7 +550,7 @@ if test $ac_fsusage_space = no; then
   fu_cv_sys_stat_fs_data=no,
   fu_cv_sys_stat_fs_data=no)])
   AC_MSG_RESULT($fu_cv_sys_stat_fs_data)
-  if test $fu_cv_sys_stat_fs_data = yes; then
+  if test x"$fu_cv_sys_stat_fs_data" = xyes; then
     ac_fsusage_space=yes
     AC_DEFINE(STAT_STATFS2_FS_DATA, 1,
 [  Define if statfs takes 2 args and the second argument has
@@ -558,7 +558,7 @@ if test $ac_fsusage_space = no; then
   fi
 fi
 
-if test $ac_fsusage_space = no; then
+if test x"$ac_fsusage_space" = xno; then
   # SVR2
   AC_TRY_CPP([#include <sys/filsys.h>
     ],
@@ -568,7 +568,7 @@ if test $ac_fsusage_space = no; then
     ac_fsusage_space=yes)
 fi
 
-AS_IF([test $ac_fsusage_space = yes], [$1], [$2])
+AS_IF([test x"$ac_fsusage_space" = xyes], [$1], [$2])
 
 ])
 
@@ -590,7 +590,7 @@ choke -- this is a workaround for a Sun-specific problem
       if (c) return 0;]])],
     [fu_cv_sys_truncating_statfs=yes],
     [fu_cv_sys_truncating_statfs=no])])
-  if test $fu_cv_sys_truncating_statfs = yes; then
+  if test x"$fu_cv_sys_truncating_statfs" = xyes; then
     AC_DEFINE(STATFS_TRUNCATES_BLOCK_COUNTS, 1,
       [Define if the block counts reported by statfs may be truncated to 2GB
        and the correct values may be stored in the f_spare array.

@@ -1,13 +1,4 @@
 dnl
-dnl Common code for MC_WITH_SLANG and MC_WITH_MCSLANG
-dnl
-AC_DEFUN([_MC_WITH_XSLANG], [
-    screen_type=slang
-    AC_DEFINE(HAVE_SLANG, 1,
-          [Define to use S-Lang library for screen management])
-])
-
-dnl
 dnl Check if private functions are available for linking
 dnl
 AC_DEFUN([MC_SLANG_PRIVATE], [
@@ -38,7 +29,7 @@ AC_DEFUN([MC_SLANG_PRIVATE], [
 	LIBS="$ac_save_LIBS"
     ])
 
-    if test x$mc_cv_slang_private = xyes; then
+    if test x"$mc_cv_slang_private" = xyes; then
 	AC_DEFINE(HAVE_SLANG_PRIVATE, 1,
 		  [Define if private S-Lang functions are available])
     fi
@@ -49,46 +40,165 @@ dnl
 dnl Check if the system S-Lang library can be used.
 dnl If not, and $1 is "strict", exit, otherwise fall back to mcslang.
 dnl
-AC_DEFUN([MC_WITH_SLANG], [
-    with_screen=slang
+AC_DEFUN([MC_CHECK_SLANG_BY_PATH], [
+
+    ac_slang_inc_path=[$1]
+    ac_slang_lib_path=[$2]
+
+    if test x"$ac_slang_inc_path" != x; then
+        ac_slang_inc_path="-I"$ac_slang_inc_path
+    fi
+
+    if test x"$ac_slang_lib_path" != x; then
+        ac_slang_lib_path="-L"$ac_slang_lib_path
+    fi
+
+    saved_CFLAGS="$CFLAGS"
+    saved_CPPFLAGS="$CPPFLAGS"
+    saved_LDFLAGS="$LDFLAGS"
+
+    CFLAGS="$CFLAGS $ac_slang_inc_path $ac_slang_lib_path"
+    CPPFLAGS="$saved_CPPFLAGS $ac_slang_inc_path $ac_slang_lib_path"
 
     dnl Check the header
-    slang_h_found=
-    AC_CHECK_HEADERS([slang.h slang/slang.h],
-		     [slang_h_found=yes; break])
-    if test -z "$slang_h_found"; then
-	AC_MSG_ERROR([Slang header not found])
-    fi
+    AC_MSG_CHECKING([for slang.h])
+    AC_PREPROC_IFELSE(
+	[
+	    AC_LANG_PROGRAM([#include <slang.h>],[return 0;])
+	],
+	[
+	    AC_MSG_RESULT(yes)
+	    if test x"$ac_slang_inc_path" = x; then
+		ac_slang_inc_path="-I/usr/include"
+	    fi
+	    if test x"$ac_slang_lib_path" = x; then
+		ac_slang_lib_path="-L/usr/lib"
+	    fi
+	    found_slang=yes
+	],
+	[
+	    AC_MSG_RESULT(no)
+	    AC_MSG_CHECKING([for slang/slang.h])
+	    AC_PREPROC_IFELSE(
+		[
+		    AC_LANG_PROGRAM([#include <slang/slang.h>],[return 0;])
+		],
+		[
+		    AC_MSG_RESULT(yes)
+		    if test x"$ac_slang_inc_path" = x; then
+			ac_slang_inc_path="-I/usr/include"
+		    fi
+		    if test x"$ac_slang_lib_path" = x; then
+			ac_slang_lib_path="-L/usr/lib"
+		    fi
+		    found_slang=yes
+		],
+		[
+		    AC_MSG_RESULT(no)
+		    found_slang=no
+		    error_msg_slang="Slang header not found"
+		]
+	    )
+	],
+    )
 
     dnl Check if termcap is needed.
     dnl This check must be done before anything is linked against S-Lang.
-    if test x$with_screen = xslang; then
-	MC_SLANG_TERMCAP
-    fi
+    if test x"$found_slang" = x"yes"; then
+	CFLAGS="$saved_CFLAGS $ac_slang_inc_path $ac_slang_lib_path"
+	LDFLAGS="$saved_LDFLAGS $ac_slang_lib_path"
+	CPPFLAGS="$saved_CPPFLAGS $ac_slang_inc_path $ac_slang_lib_path"
 
+        MC_SLANG_TERMCAP
+        if test x"$mc_cv_slang_termcap"  = x"yes"; then
+	    ac_slang_lib_path="$ac_slang_lib_path -ltermcap"
+	    CFLAGS="$saved_CFLAGS $ac_slang_inc_path $ac_slang_lib_path"
+	    CPPFLAGS="$saved_CPPFLAGS $ac_slang_inc_path $ac_slang_lib_path"
+	    LDFLAGS="$saved_LDFLAGS $ac_slang_lib_path"
+        fi
+    fi
     dnl Check the library
-    if test x$with_screen = xslang; then
-	AC_CHECK_LIB([slang], [SLang_init_tty], [MCLIBS="$MCLIBS -lslang"],
-		     AC_MSG_ERROR([Slang library not found]), ["$MCLIBS"])
+    if test x"$found_slang" = x"yes"; then
+	unset ac_cv_lib_slang_SLang_init_tty
+        AC_CHECK_LIB(
+            [slang],
+            [SLang_init_tty],
+            [:],
+            [
+                found_slang=no
+                error_msg_slang="Slang library not found"
+            ]
+        )
     fi
 
     dnl Unless external S-Lang was requested, reject S-Lang with UTF-8 hacks
-    if test x$with_screen = xslang; then
-	AC_CHECK_LIB(
-	    [slang],
-	    [SLsmg_write_nwchars],
-	    [AC_MSG_ERROR([Rejecting S-Lang with UTF-8 support, it's not fully supported yet])])
+    if test x"$found_slang" = x"yes"; then
+	unset ac_cv_lib_slang_SLsmg_write_nwchars
+        AC_CHECK_LIB(
+            [slang],
+            [SLsmg_write_nwchars],
+            [
+                found_slang=no
+                error_msg_slang="Rejecting S-Lang with UTF-8 support, it's not fully supported yet"
+            ],
+            [:]
+        )
     fi
 
-    if test x$with_screen = xslang; then
-	MC_SLANG_PRIVATE
-	screen_type=slang
-	screen_msg="S-Lang library (installed on the system)"
-    else
-	AC_MSG_ERROR([S-Lang library not found])
+    if test x"$found_slang" = x"yes"; then
+        MC_SLANG_PRIVATE
+        screen_type=slang
+        screen_msg="S-Lang library (installed on the system)"
+
+        AC_DEFINE(HAVE_SLANG, 1,
+            [Define to use S-Lang library for screen management])
+
+        MCLIBS="$MCLIBS $ac_slang_inc_path $ac_slang_lib_path -lslang"
+    fi
+    CFLAGS="$saved_CFLAGS"
+    CPPFLAGS="$saved_CPPFLAGS"
+    LDFLAGS="$saved_LDFLAGS"
+])
+AC_DEFUN([MC_WITH_SLANG], [
+    with_screen=slang
+    found_slang=yes
+    error_msg_slang=""
+
+    AC_ARG_WITH([slang-includes],
+        AC_HELP_STRING([--with-slang-includes=@<:@DIR@:>@],
+            [set path to SLANG includes @<:@default=/usr/include@:>@; may sense only if --with-screen=slang]
+        ),
+        [ac_slang_inc_path="$withval"],
+        [ac_slang_inc_path=""]
+    )
+
+    AC_ARG_WITH([slang-libs],
+        AC_HELP_STRING([--with-slang-libs=@<:@DIR@:>@],
+            [set path to SLANG library @<:@default=/usr/lib@:>@; may sense only if --with-screen=slang]
+        ),
+        [ac_slang_lib_path="$withval"],
+        [ac_slang_lib_path=""]
+    )
+    echo 'checking SLANG-headers in default place ...'
+    MC_CHECK_SLANG_BY_PATH([$ac_slang_inc_path],[$ac_slang_lib_path])
+    if test x"$found_slang" = "xno"; then
+        ac_slang_inc_path="/usr/include"
+        ac_slang_lib_path="/usr/lib"
+
+        echo 'checking SLANG-headers in /usr ...'
+        MC_CHECK_SLANG_BY_PATH([$ac_slang_inc_path],[$ac_slang_lib_path])
+        if test x"$found_slang" = "xno"; then
+            ac_slang_inc_path="/usr/local/include"
+            ac_slang_lib_path="/usr/local/lib"
+
+            echo 'checking SLANG-headers in /usr/local ...'
+            MC_CHECK_SLANG_BY_PATH( $ac_slang_inc_path , $ac_slang_lib_path )
+            if test x"$found_slang" = "xno"; then
+                AC_MSG_ERROR([$error_msg_slang])
+            fi
+        fi
     fi
 
-    _MC_WITH_XSLANG
 ])
 
 dnl
@@ -106,7 +216,7 @@ AC_DEFUN([MC_WITH_NCURSES], [
     AC_SEARCH_LIBS([addwstr], [ncursesw ncurses curses], [MCLIBS="$MCLIBS $LIBS";ncursesw_found=yes],
 		   [AC_MSG_WARN([Cannot find ncurses library, that support wide characters])])
 
-    if test -z "$ncursesw_found"; then
+    if test x"$ncursesw_found" = "x"; then
     LIBS=
     AC_SEARCH_LIBS([has_colors], [ncurses curses], [MCLIBS="$MCLIBS $LIBS"],
 		   [AC_MSG_ERROR([Cannot find ncurses library])])
@@ -117,7 +227,7 @@ AC_DEFUN([MC_WITH_NCURSES], [
     AC_CHECK_HEADERS([ncursesw/curses.h ncurses/curses.h ncurses.h curses.h],
 		     [ncurses_h_found=yes; break])
 
-    if test -z "$ncurses_h_found"; then
+    if test x"$ncurses_h_found" = "x"; then
 	AC_MSG_ERROR([Cannot find ncurses header file])
     fi
 
@@ -135,7 +245,7 @@ AC_DEFUN([MC_WITH_NCURSES], [
 			[mc_cv_ncurses_escdelay=yes],
 			[mc_cv_ncurses_escdelay=no])
     ])
-    if test "$mc_cv_ncurses_escdelay" = yes; then
+    if test x"$mc_cv_ncurses_escdelay" = xyes; then
 	AC_DEFINE(HAVE_ESCDELAY, 1,
 		  [Define if ncurses has ESCDELAY variable])
     fi
@@ -164,7 +274,7 @@ AC_DEFUN([MC_WITH_NCURSESW], [
     AC_CHECK_HEADERS([ncursesw/curses.h],
 		     [ncursesw_h_found=yes; break])
 
-    if test -z "$ncursesw_h_found"; then
+    if test  x"$ncursesw_h_found" = "x"; then
 	AC_MSG_ERROR([Cannot find ncursesw header file])
     fi
 
@@ -182,7 +292,7 @@ AC_DEFUN([MC_WITH_NCURSESW], [
 			[mc_cv_ncursesw_escdelay=yes],
 			[mc_cv_ncursesw_escdelay=no])
     ])
-    if test "$mc_cv_ncursesw_escdelay" = yes; then
+    if test x"$mc_cv_ncursesw_escdelay" = xyes; then
 	AC_DEFINE(HAVE_ESCDELAY, 1,
 		  [Define if ncursesw has ESCDELAY variable])
     fi

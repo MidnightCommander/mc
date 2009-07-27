@@ -11,7 +11,7 @@ AC_DEFUN([AC_MC_VFS_MCFS],
 [
     AC_ARG_ENABLE([vfs-mcfs],
                   [  --enable-vfs-mcfs    Enable Support MCFS (mc's network filesystem)])
-    if test "$enable_vfs_mcfs" = "yes" ; then
+    if test x"$enable_vfs_mcfs" = x"yes" ; then
         AC_MC_VFS_MCFS_SET
     fi
 ])
