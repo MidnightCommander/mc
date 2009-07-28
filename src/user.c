@@ -42,7 +42,7 @@
 #include "strutil.h"
 #include "../src/search/search.h"
 
-#include "../edit/edit.h"		/* BLOCK_FILE */
+#include "../edit/edit.h"		/* WEdit, BLOCK_FILE */
 
 /* For the simple listbox manager */
 #include "dialog.h"
@@ -186,9 +186,7 @@ expand_format (WEdit *edit_widget, char c, int quote)
     if (c == '%')
 	return g_strdup ("%");
 
-    if (edit_one_file != NULL)
-	fname = str_unconst (edit_get_file_name (edit_widget));
-    else {
+    if (edit_one_file == NULL) {
 	if (g_ascii_islower ((gchar) c))
 	    panel = current_panel;
 	else {
@@ -198,6 +196,10 @@ expand_format (WEdit *edit_widget, char c, int quote)
 	}
 	fname = panel->dir.list[panel->selected].fname;
     }
+#ifdef USE_INTERNAL_EDIT
+    else
+	fname = str_unconst (edit_get_file_name (edit_widget));
+#endif
 
     if (quote)
 	quote_func = name_quote;
@@ -231,31 +233,39 @@ expand_format (WEdit *edit_widget, char c, int quote)
 	    return qstr;
 	}
     case 'i':			/* indent equal number cursor position in line */
+#ifdef USE_INTERNAL_EDIT
 	if (edit_widget)
 	    return g_strnfill (edit_get_curs_col (edit_widget), ' ');
+#endif
 	break;
     case 'y':			/* syntax type */
+#ifdef USE_INTERNAL_EDIT
 	if (edit_widget) {
 	    const char *syntax_type = edit_get_syntax_type (edit_widget);
 	    if (syntax_type != NULL)
 		return g_strdup (syntax_type);
 	}
+#endif
 	break;
     case 'k':			/* block file name */
     case 'b':			/* block file name / strip extension */  {
+#ifdef USE_INTERNAL_EDIT
 	    if (edit_widget) {
 		char *file = concat_dir_and_file (home_dir, EDIT_BLOCK_FILE);
 		fname = (*quote_func) (file, 0);
 		g_free (file);
 		return fname;
-	    } else if (c_lc == 'b') {
-		return strip_ext ((*quote_func) (fname, 0));
 	    }
+#endif
+	    if (c_lc == 'b')
+		return strip_ext ((*quote_func) (fname, 0));
 	    break;
 	}
     case 'n':			/* strip extension in editor */
+#ifdef USE_INTERNAL_EDIT
 	if (edit_widget)
 	    return strip_ext ((*quote_func) (fname, 0));
+#endif
 	break;
     case 'm':			/* menu file name */
 	if (menu)
@@ -400,7 +410,8 @@ static int test_type (WPanel *panel, char *arg)
 
 /* Calculates the truth value of the next condition starting from
    p. Returns the point after condition. */
-static char *test_condition (WEdit *edit_widget, char *p, int *condition)
+static char *
+test_condition (WEdit *edit_widget, char *p, int *condition)
 {
     WPanel *panel;
     char arg [256];
@@ -438,6 +449,7 @@ static char *test_condition (WEdit *edit_widget, char *p, int *condition)
 	    *condition = panel && mc_search (arg, panel->dir.list [panel->selected].fname, search_type);
 	    break;
 	case 'y': /* syntax pattern */
+#ifdef USE_INTERNAL_EDIT
 	    if (edit_widget) {
 		const char *syntax_type = edit_get_syntax_type (edit_widget);
 		if (syntax_type != NULL) {
@@ -445,6 +457,7 @@ static char *test_condition (WEdit *edit_widget, char *p, int *condition)
 		    *condition = panel && mc_search (arg, syntax_type, MC_SEARCH_T_NORMAL);
 		}
 	    }
+#endif
             break;
 	case 'd':
 	    p = extract_arg (p, arg, sizeof (arg));
@@ -522,7 +535,8 @@ debug_out (char *start, char *end, int cond)
 
 /* Calculates the truth value of one lineful of conditions. Returns
    the point just before the end of line. */
-static char *test_line (WEdit *edit_widget, char *p, int *result)
+static char *
+test_line (WEdit *edit_widget, char *p, int *result)
 {
     int condition;
     char operator;
@@ -740,7 +754,7 @@ user_menu_cmd (WEdit *edit_widget)
 		 _(" Cannot execute commands on non-local filesystems"));
 	return;
     }
-    
+
     menu = g_strdup (edit_widget ? EDIT_LOCAL_MENU : MC_LOCAL_MENU);
     if (!exist_file (menu) || !menu_file_own (menu)){
 	g_free (menu);
@@ -765,7 +779,7 @@ user_menu_cmd (WEdit *edit_widget)
 	menu = NULL;
 	return;
     }
-    
+
     max_cols = 0;
     selected = 0;
     menu_limit = 0;
@@ -777,7 +791,7 @@ user_menu_cmd (WEdit *edit_widget)
     for (menu_lines = col = 0; *p; str_next_char (&p)){
 	if (menu_lines >= menu_limit){
 	    char ** new_entries;
-	    
+
 	    menu_limit += MAX_ENTRIES;
 	    new_entries = g_realloc (entries, sizeof (new_entries[0]) * menu_limit);
 
@@ -839,30 +853,28 @@ user_menu_cmd (WEdit *edit_widget)
 	}
     }
 
-    if (menu_lines == 0) {
+    if (menu_lines == 0)
 	message (D_ERROR, MSG_ERROR, _(" No suitable entries found in %s "), menu);
-    } else {
+    else {
+	max_cols = min (max (max_cols, col), MAX_ENTRY_LEN);
 
-    max_cols = min (max (max_cols, col), MAX_ENTRY_LEN);
- 
-    /* Create listbox */
-    listbox = create_listbox_window (max_cols+2, menu_lines, _(" User menu "),
-				     "[Menu File Edit]");
-    /* insert all the items found */
-    for (i = 0; i < menu_lines; i++) {
-	p = entries [i];
-	LISTBOX_APPEND_TEXT (listbox, (unsigned char) p[0],
-			     extract_line (p, p + MAX_ENTRY_LEN), p
-			    );
-    }
-    /* Select the default entry */
-    listbox_select_by_number (listbox->list, selected);
-    
-    selected = run_listbox (listbox);
-    if (selected >= 0)
-	execute_menu_command (edit_widget, entries [selected]);
+	/* Create listbox */
+	listbox = create_listbox_window (max_cols+2, menu_lines, _(" User menu "),
+					    "[Menu File Edit]");
+	/* insert all the items found */
+	for (i = 0; i < menu_lines; i++) {
+	    p = entries [i];
+	    LISTBOX_APPEND_TEXT (listbox, (unsigned char) p[0],
+				extract_line (p, p + MAX_ENTRY_LEN), p);
+	}
+	/* Select the default entry */
+	listbox_select_by_number (listbox->list, selected);
 
-    do_refresh ();
+	selected = run_listbox (listbox);
+	if (selected >= 0)
+	    execute_menu_command (edit_widget, entries [selected]);
+
+	do_refresh ();
     }
 
     easy_patterns = old_patterns;
@@ -871,4 +883,3 @@ user_menu_cmd (WEdit *edit_widget)
     g_free (entries);
     g_free (data);
 }
-
