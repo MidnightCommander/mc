@@ -75,6 +75,8 @@ AC_DEFUN([MC_CHECK_SLANG_BY_PATH], [
 		ac_slang_lib_path="-L/usr/lib"
 	    fi
 	    found_slang=yes
+	    AC_DEFINE(HAVE_SLANG_H, 1,[Define to use slang.h])
+
 	],
 	[
 	    AC_MSG_RESULT(no)
@@ -92,6 +94,7 @@ AC_DEFUN([MC_CHECK_SLANG_BY_PATH], [
 			ac_slang_lib_path="-L/usr/lib"
 		    fi
 		    found_slang=yes
+		    AC_DEFINE(HAVE_SLANG_SLANG_H, 1,[Define to use slang.h])
 		],
 		[
 		    AC_MSG_RESULT(no)

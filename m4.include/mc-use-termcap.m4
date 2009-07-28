@@ -12,15 +12,17 @@ dnl
 dnl Check if the installed S-Lang library uses termcap
 dnl
 AC_DEFUN([MC_SLANG_TERMCAP], [
+    unset ac_cv_lib_termcap_tgoto
+
     AC_CACHE_CHECK([if S-Lang uses termcap], [mc_cv_slang_termcap], [
 	ac_save_LIBS="$LIBS"
 	LIBS="$LIBS -lslang"
 	AC_TRY_LINK([
-		     #ifdef HAVE_SLANG_SLANG_H
-		     #include <slang/slang.h>
-		     #else
-		     #include <slang.h>
-		     #endif
+#ifdef HAVE_SLANG_SLANG_H
+#include <slang/slang.h>
+#else
+#include <slang.h>
+#endif
 		    ],
 		    [SLtt_get_terminfo(); SLtt_tgetflag("");],
 		    [mc_cv_slang_termcap=no],
