@@ -70,7 +70,7 @@ editcmd_dialog_raw_key_query_cb (struct Dlg_head *h, dlg_msg_t msg, int parm)
 {
     switch (msg) {
     case DLG_KEY:
-        h->running = 0;
+        dlg_stop (h);
         h->ret_value = parm;
         return MSG_HANDLED;
     default:
@@ -84,96 +84,49 @@ void
 editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const char *replace_default,
                              /*@out@ */ char **search_text, /*@out@ */ char **replace_text)
 {
-    int treplace_backwards = edit->replace_backwards;
-    int tonly_in_selection = edit->only_in_selection;
-    int treplace_case = edit->replace_case;
-    int twhole_words = edit->whole_words;
-    int tall_codepages = edit->all_codepages;
-    mc_search_type_t ttype_of_search = edit->search_type;
-    int dialog_result;
-    gchar **list_of_types = mc_search_get_types_strings_array();
-
-    int REPLACE_DLG_HEIGHT = REPLACE_DLG_MIN_HEIGHT + g_strv_length (list_of_types) - REPLACE_DLG_HEIGHT_SUPPLY;
-
-    if (!*search_default)
+    if (*search_default == '\0')
         search_default = INPUT_LAST_TEXT;
 
-    QuickWidget quick_widgets[] = {
+    {
+	gchar **list_of_types = mc_search_get_types_strings_array();
+	int REPLACE_DLG_HEIGHT = REPLACE_DLG_MIN_HEIGHT + g_strv_length (list_of_types) - REPLACE_DLG_HEIGHT_SUPPLY;
 
-        {quick_button, 6, 10, 13, REPLACE_DLG_HEIGHT, N_("&Cancel"), 0, B_CANCEL,
-         0, 0, NULL, NULL, NULL},
-
-        {quick_button, 2, 10, 13, REPLACE_DLG_HEIGHT, N_("&OK"), 0, B_ENTER,
-         0, 0, NULL, NULL, NULL},
-
+	QuickWidget quick_widgets[] =
+	{
+	    /*  0 */ QUICK_BUTTON (6, 10, 13, REPLACE_DLG_HEIGHT, N_("&Cancel"), B_CANCEL, NULL),
+	    /*  1 */ QUICK_BUTTON (2, 10, 13, REPLACE_DLG_HEIGHT, N_("&OK"),     B_ENTER,  NULL),
 #ifdef HAVE_CHARSET
-        {quick_checkbox, 33, REPLACE_DLG_WIDTH, 11, REPLACE_DLG_HEIGHT, N_("&All charsets"), 0, 0,
-         &tall_codepages, 0, NULL, NULL, NULL},
+	    /*  2 */ QUICK_CHECKBOX (33, REPLACE_DLG_WIDTH, 11, REPLACE_DLG_HEIGHT, N_("All charsets"), &edit->all_codepages),
 #endif
+	    /*  3 */ QUICK_CHECKBOX (33, REPLACE_DLG_WIDTH, 10, REPLACE_DLG_HEIGHT, N_("&Whole words"), &edit->whole_words),
+	    /*  4 */ QUICK_CHECKBOX (33, REPLACE_DLG_WIDTH,  9, REPLACE_DLG_HEIGHT, N_("In se&lection"), &edit->only_in_selection),
+	    /*  5 */ QUICK_CHECKBOX (33, REPLACE_DLG_WIDTH,  8, REPLACE_DLG_HEIGHT, N_("&Backwards"), &edit->replace_backwards),
+	    /*  6 */ QUICK_CHECKBOX (33, REPLACE_DLG_WIDTH,  7, REPLACE_DLG_HEIGHT, N_("case &Sensitive"), &edit->replace_case),
+	    /*  7 */ QUICK_RADIO (3, REPLACE_DLG_WIDTH,   7, REPLACE_DLG_HEIGHT,
+				g_strv_length (list_of_types), (const char **) list_of_types, &edit->search_type),
+	    /*  8 */ QUICK_LABEL (2, REPLACE_DLG_WIDTH,   4, REPLACE_DLG_HEIGHT, N_(" Enter replacement string:")),
+	    /*  9 */ QUICK_INPUT (3, REPLACE_DLG_WIDTH,   5, REPLACE_DLG_HEIGHT,
+				replace_default, REPLACE_DLG_WIDTH - 6, 0, "replace", replace_text),
+	    /* 10 */ QUICK_LABEL (2, REPLACE_DLG_WIDTH,   2, REPLACE_DLG_HEIGHT, N_(" Enter search string:")),
+	    /* 11 */ QUICK_INPUT (3, REPLACE_DLG_WIDTH,   3, REPLACE_DLG_HEIGHT,
+				search_default, REPLACE_DLG_WIDTH - 6, 0, MC_HISTORY_SHARED_SEARCH, search_text),
+	    QUICK_END
+	};
 
-        {quick_checkbox, 33, REPLACE_DLG_WIDTH, 10, REPLACE_DLG_HEIGHT, N_("&Whole words"), 0, 0,
-         &twhole_words, 0, NULL, NULL, NULL},
+	QuickDialog Quick_input =
+	{
+	    REPLACE_DLG_WIDTH, REPLACE_DLG_HEIGHT, -1, -1, N_(" Replace "),
+	    "[Input Line Keys]", quick_widgets, FALSE
+	};
 
+	if (quick_dialog (&Quick_input) != B_CANCEL) {
+	    edit->replace_mode = 0;
+	} else {
+	    *replace_text = NULL;
+	    *search_text = NULL;
+	}
 
-        {quick_checkbox, 33, REPLACE_DLG_WIDTH, 9, REPLACE_DLG_HEIGHT, N_("In se&lection"), 0, 0,
-         &tonly_in_selection, 0, NULL, NULL, NULL},
-
-
-        {quick_checkbox, 33, REPLACE_DLG_WIDTH, 8, REPLACE_DLG_HEIGHT, N_("&Backwards"), 0, 0,
-         &treplace_backwards, 0, NULL, NULL, NULL},
-
-        {quick_checkbox, 33, REPLACE_DLG_WIDTH, 7, REPLACE_DLG_HEIGHT, N_("case &Sensitive"), 0, 0,
-         &treplace_case, 0, NULL, NULL, NULL},
-
-
-        {quick_radio, 3, REPLACE_DLG_WIDTH, 7, REPLACE_DLG_HEIGHT, "", g_strv_length (list_of_types), ttype_of_search,
-         (void *) &ttype_of_search, const_cast (char **, list_of_types), NULL, NULL, NULL},
-
-        {quick_label, 2, REPLACE_DLG_WIDTH, 4, REPLACE_DLG_HEIGHT, N_(" Enter replacement string:"),
-         0, 0, 0, 0, 0, NULL, NULL},
-
-        {quick_input, 3, REPLACE_DLG_WIDTH, 5, REPLACE_DLG_HEIGHT, replace_default, 52, 0,
-         0, replace_text, "replace", NULL, NULL},
-
-
-        {quick_label, 2, REPLACE_DLG_WIDTH, 2, REPLACE_DLG_HEIGHT, N_(" Enter search string:"), 0,
-         0, 0, 0, 0, NULL, NULL},
-
-        {quick_input, 3, REPLACE_DLG_WIDTH, 3, REPLACE_DLG_HEIGHT, search_default, 52, 0,
-         0, search_text, MC_HISTORY_SHARED_SEARCH, NULL, NULL},
-
-
-        NULL_QuickWidget
-    };
-
-
-    QuickDialog Quick_input = {
-        REPLACE_DLG_WIDTH,
-        REPLACE_DLG_HEIGHT,
-        -1,
-        0,
-        N_(" Replace "),
-        "[Input Line Keys]",
-        quick_widgets,
-        0
-    };
-
-    dialog_result = quick_dialog (&Quick_input);
-    g_strfreev (list_of_types);
-
-    if (dialog_result != B_CANCEL) {
-        edit->search_type = ttype_of_search;
-        edit->replace_mode = 0;
-        edit->only_in_selection = tonly_in_selection;
-        edit->all_codepages = tall_codepages;
-        edit->replace_backwards = treplace_backwards;
-        edit->whole_words = twhole_words;
-        edit->replace_case = treplace_case;
-        return;
-    } else {
-        *replace_text = NULL;
-        *search_text = NULL;
-        return;
+	g_strfreev (list_of_types);
     }
 }
 
@@ -182,68 +135,40 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
 void
 editcmd_dialog_search_show (WEdit * edit, char **search_text)
 {
-    int tsearch_case = edit->replace_case;
-    int tsearch_backwards = edit->replace_backwards;
-    int tall_codepages = edit->all_codepages;
-    int twhole_words = edit->whole_words;
-    int tonly_in_selection = edit->only_in_selection;
-    mc_search_type_t ttype_of_search = edit->search_type;
-    gchar **list_of_types = mc_search_get_types_strings_array();
-    int SEARCH_DLG_HEIGHT = SEARCH_DLG_MIN_HEIGHT + g_strv_length (list_of_types) -
-                            SEARCH_DLG_HEIGHT_SUPPLY;
-
-    if (!*search_text)
+    if (*search_text == '\0')
         *search_text = INPUT_LAST_TEXT;
 
-    QuickWidget quick_widgets[] = {
-        {quick_button, 6, 10, 11, SEARCH_DLG_HEIGHT, N_("&Cancel"), 0, B_CANCEL, 0,
-         0, NULL, NULL, NULL},
-        {quick_button, 2, 10, 11, SEARCH_DLG_HEIGHT, N_("&OK"), 0, B_ENTER, 0,
-         0, NULL, NULL, NULL},
+    {
+	gchar **list_of_types = mc_search_get_types_strings_array();
+	int SEARCH_DLG_HEIGHT = SEARCH_DLG_MIN_HEIGHT + g_strv_length (list_of_types) - SEARCH_DLG_HEIGHT_SUPPLY;
 
+	QuickWidget quick_widgets[] =
+	{
+	    /* 0 */ QUICK_BUTTON (6, 10, 11, SEARCH_DLG_HEIGHT, N_("&Cancel"), B_CANCEL, NULL),
+	    /* 1 */ QUICK_BUTTON (2, 10, 11, SEARCH_DLG_HEIGHT, N_("&OK"),     B_ENTER,  NULL),
 #ifdef HAVE_CHARSET
-        {quick_checkbox, 33, SEARCH_DLG_WIDTH, 9, SEARCH_DLG_HEIGHT, N_("&All charsets"), 0, 0,
-         &tall_codepages, 0, NULL, NULL, NULL},
+	    /* 2 */ QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 9, SEARCH_DLG_HEIGHT, N_("All charsets"), &edit->all_codepages),
 #endif
+	    /* 3 */ QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 8, SEARCH_DLG_HEIGHT, N_("&Whole words"), &edit->whole_words),
+	    /* 4 */ QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 7, SEARCH_DLG_HEIGHT, N_("In se&lection"), &edit->only_in_selection),
+	    /* 5 */ QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 6, SEARCH_DLG_HEIGHT, N_("&Backwards"), &edit->replace_backwards),
+	    /* 6 */ QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT, N_("case &Sensitive"), &edit->replace_case),
+	    /* 7 */ QUICK_RADIO ( 3, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT,
+				    g_strv_length (list_of_types), (const char **) list_of_types, &edit->search_type),
+	    /* 8 */ QUICK_INPUT (3, SEARCH_DLG_WIDTH, 3, SEARCH_DLG_HEIGHT,
+				    *search_text, SEARCH_DLG_WIDTH - 6, 0, MC_HISTORY_SHARED_SEARCH, search_text),
+	    /* 9 */ QUICK_LABEL (2, SEARCH_DLG_WIDTH, 2, SEARCH_DLG_HEIGHT, N_(" Enter search string:")),
+	    QUICK_END
+	};
 
-        {quick_checkbox, 33, SEARCH_DLG_WIDTH, 8, SEARCH_DLG_HEIGHT, N_("&Whole words"), 0, 0,
-         &twhole_words, 0, NULL, NULL, NULL},
+	QuickDialog Quick_input =
+	{
+	    SEARCH_DLG_WIDTH, SEARCH_DLG_HEIGHT, -1, -1, N_("Search"),
+	    "[Input Line Keys]", quick_widgets, FALSE
+	};
 
-        {quick_checkbox, 33, SEARCH_DLG_WIDTH, 7, SEARCH_DLG_HEIGHT, N_("In se&lection"), 0, 0,
-         &tonly_in_selection, 0, NULL, NULL, NULL},
-
-        {quick_checkbox, 33, SEARCH_DLG_WIDTH, 6, SEARCH_DLG_HEIGHT, N_("&Backwards"), 0, 0,
-         &tsearch_backwards, 0, NULL, NULL, NULL},
-        {quick_checkbox, 33, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT, N_("case &Sensitive"), 0, 0,
-         &tsearch_case, 0, NULL, NULL, NULL},
-
-
-        {quick_radio, 3, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT, 0, g_strv_length (list_of_types), ttype_of_search,
-         (void *) &ttype_of_search, const_cast (char **, list_of_types), NULL, NULL, NULL},
-
-        {quick_input, 3, SEARCH_DLG_WIDTH, 3, SEARCH_DLG_HEIGHT, *search_text, 52, 0, 0,
-         search_text, MC_HISTORY_SHARED_SEARCH, NULL, NULL},
-        {quick_label, 2, SEARCH_DLG_WIDTH, 2, SEARCH_DLG_HEIGHT, N_(" Enter search string:"), 0, 0,
-         0, 0, 0, NULL, NULL},
-
-        NULL_QuickWidget
-    };
-
-
-    QuickDialog Quick_input = { SEARCH_DLG_WIDTH, SEARCH_DLG_HEIGHT, -1, 0, N_("Search"),
-        "[Input Line Keys]", quick_widgets, 0
-    };
-
-
-    if (quick_dialog (&Quick_input) != B_CANCEL) {
-        edit->search_type = ttype_of_search;
-        edit->replace_backwards = tsearch_backwards;
-        edit->only_in_selection = tonly_in_selection;
-        edit->all_codepages = tall_codepages;
-        edit->whole_words = twhole_words;
-        edit->replace_case = tsearch_case;
-    } else {
-        *search_text = NULL;
+	if (quick_dialog (&Quick_input) == B_CANCEL)
+	    *search_text = NULL;
     }
 }
 
@@ -267,8 +192,7 @@ editcmd_dialog_raw_key_query (const char *heading, const char *query, int cancel
     add_widget (raw_dlg, label_new (3 - cancel, 2, query));
     if (cancel)
         add_widget (raw_dlg, button_new (4, w / 2 - 5, B_CANCEL, NORMAL_BUTTON, _("Cancel"), 0));
-    run_dlg (raw_dlg);
-    w = raw_dlg->ret_value;
+    w = run_dlg (raw_dlg);
     destroy_dlg (raw_dlg);
     if (cancel) {
         if (w == XCTRL ('g') || w == XCTRL ('c') || w == ESC_CHAR || w == B_CANCEL)
@@ -329,11 +253,8 @@ editcmd_dialog_completion_show (WEdit * edit, int max_len, int word_len,
     for (i = 0; i < num_compl; i++)
         listbox_add_item (compl_list, LISTBOX_APPEND_AT_END, 0, (char *) compl[i].text, NULL);
 
-    /* pop up the dialog */
-    run_dlg (compl_dlg);
-
-    /* apply the choosen completion */
-    if (compl_dlg->ret_value == B_ENTER) {
+    /* pop up the dialog and apply the choosen completion */
+    if (run_dlg (compl_dlg) == B_ENTER) {
         listbox_get_current (compl_list, &curr, NULL);
         if (curr)
             for (curr += word_len; *curr; curr++)
@@ -470,27 +391,21 @@ editcmd_dialog_replace_prompt_show (WEdit * edit, char *from_text, char *to_text
     char *repl_from, *repl_to;
     char tmp [BUF_MEDIUM];
 
-    QuickWidget quick_widgets[] = {
-	{quick_button, 44, dlg_width, 6, dlg_height, N_("&Cancel"),
-	0, B_CANCEL, 0, 0, NULL, NULL, NULL},
-	{quick_button, 29, dlg_width, 6, dlg_height, N_("&Skip"),
-	0, B_SKIP_REPLACE, 0, 0, NULL, NULL, NULL},
-	{quick_button, 21, dlg_width, 6, dlg_height, N_("A&ll"),
-	0, B_REPLACE_ALL, 0, 0, NULL, NULL, NULL},
-	{quick_button, 4, dlg_width, 6, dlg_height, N_("&Replace"),
-	0, B_ENTER, 0, 0, NULL, NULL, NULL},
-	{quick_label, 3, dlg_width, 2, dlg_height, 0,
-	0, 0, 0, 0, 0, NULL, NULL},
-	{quick_label, 2, dlg_width, 3, dlg_height, 0,
-	0, 0, 0, 0, 0, NULL, NULL},
-	{quick_label, 3, dlg_width, 4, dlg_height, 0,
-	0, 0, 0, 0, 0, NULL, NULL},
-	NULL_QuickWidget
+    QuickWidget quick_widgets[] =
+    {
+	/* 0 */ QUICK_BUTTON (44, dlg_width, 6, dlg_height, N_("&Cancel"),  B_CANCEL,       NULL),
+	/* 1 */ QUICK_BUTTON (29, dlg_width, 6, dlg_height, N_("&Skip"),    B_SKIP_REPLACE, NULL),
+	/* 2 */ QUICK_BUTTON (21, dlg_width, 6, dlg_height, N_("A&ll"),     B_REPLACE_ALL,  NULL),
+	/* 3 */ QUICK_BUTTON ( 4, dlg_width, 6, dlg_height, N_("&Replace"), B_ENTER,        NULL),
+	/* 4 */ QUICK_LABEL  ( 3, dlg_width, 2, dlg_height, NULL),
+	/* 5 */ QUICK_LABEL  ( 2, dlg_width, 3, dlg_height, N_(" Replace with: ")),
+	/* 6 */ QUICK_LABEL  ( 3, dlg_width, 4, dlg_height, NULL),
+	QUICK_END
     };
 
 #ifdef ENABLE_NLS
 	for (i = 0; i < 4; i++)
-	    quick_widgets[i].text = _(quick_widgets[i].text);
+	    quick_widgets[i].u.button.text = _(quick_widgets[i].u.button.text);
 #endif
 
     /* calculate button positions */
@@ -498,9 +413,7 @@ editcmd_dialog_replace_prompt_show (WEdit * edit, char *from_text, char *to_text
 
     for (i = 3; i > -1; i--) {
         quick_widgets[i].relative_x = btn_pos;
-
-        btn_pos += str_term_width1 (quick_widgets[i].text) + 5;
-
+        btn_pos += str_term_width1 (quick_widgets[i].u.button.text) + 5;
         if (i == 3) /* default button */
             btn_pos += 2;
     }
@@ -517,9 +430,8 @@ editcmd_dialog_replace_prompt_show (WEdit * edit, char *from_text, char *to_text
     g_snprintf (tmp, sizeof (tmp), " '%s'", to_text);
     repl_to =  g_strdup (str_fit_to_term (tmp, dlg_width - 7, J_LEFT));
 
-    quick_widgets[4].text = repl_from;
-    quick_widgets[5].text = _(" Replace with: ");
-    quick_widgets[6].text = repl_to;
+    quick_widgets[4].u.label.text = repl_from;
+    quick_widgets[6].u.label.text = repl_to;
 
     if (xpos == -1)
 	xpos = (edit->num_widget_columns - dlg_width) / 2;
@@ -529,22 +441,22 @@ editcmd_dialog_replace_prompt_show (WEdit * edit, char *from_text, char *to_text
 
     {
 	QuickDialog Quick_input =
-	{dlg_width, dlg_height, 0, 0, N_ (" Confirm replace "),
-	 "[Input Line Keys]", 0 /*quick_widgets */, 0 };
-
-	Quick_input.widgets = quick_widgets;
-
-	Quick_input.xpos = xpos;
+	{
+	    dlg_width, dlg_height, 0, 0, N_ (" Confirm replace "),
+	    "[Input Line Keys]", quick_widgets, FALSE
+	};
 
 	/* Sometimes menu can hide replaced text. I don't like it */
-
 	if ((edit->curs_row >= ypos - 1) && (edit->curs_row <= ypos + dlg_height - 1))
 	    ypos -= dlg_height;
 
 	Quick_input.ypos = ypos;
+	Quick_input.xpos = xpos;
+
 	retval = quick_dialog (&Quick_input);
 	g_free (repl_from);
 	g_free (repl_to);
+
 	return retval;
     }
 }

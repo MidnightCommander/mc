@@ -777,162 +777,125 @@ file_progress_real_query_replace (FileOpContext *ctx,
     }
 }
 
-#define FMDY 13
-#define	FMD_XLEN 64
-extern int fmd_xlen;
-static QuickWidget fmd_widgets[] = {
-
-#define	FMCB0  FMDC
-#define	FMCB12 0
-#define	FMCB11 1
-    /* follow symlinks and preserve Attributes must be the first */
-    {quick_checkbox, 3, 64, 8, FMDY, N_("preserve &Attributes"), 9, 0,
-     0 /* &op_preserve */ , 0, NULL, NULL, NULL},
-    {quick_checkbox, 3, 64, 7, FMDY, N_("follow &Links"), 7, 0,
-     0 /* &file_mask_op_follow_links */ , 0, NULL, NULL, NULL},
-    {quick_label, 3, 64, 5, FMDY, N_("to:"), 0, 0, 0, 0, NULL, NULL, NULL},
-    {quick_checkbox, 37, 64, 4, FMDY, N_("&Using shell patterns"), 0, 0,
-     0 /* &source_easy_patterns */ , 0, NULL, NULL, NULL},
-    {quick_input, 3, 64, 3, FMDY, "", 58,
-     0, 0, 0, "input-def", NULL, NULL},
-#define FMDI1 4
-#define FMDI2 5
-#define FMDC 3
-    {quick_input, 3, 64, 6, FMDY, "", 58, 0,
-     0, 0, "input2", NULL, NULL},
-#define FMDI0 6
-    {quick_label, 3, 64, 2, FMDY, "", 0, 0, 0, 0, NULL, NULL, NULL},
-#define	FMBRGT 7
-    {quick_button, 42, 64, 9, FMDY, N_("&Cancel"), 0, B_CANCEL, 0, 0,
-     NULL, NULL, NULL},
-#undef SKIP
-#ifdef WITH_BACKGROUND
-# define SKIP 5
-# define FMCB21 11
-# define FMCB22 10
-# define FMBLFT 9
-# define FMBMID 8
-    {quick_button, 25, 64, 9, FMDY, N_("&Background"), 0, B_USER, 0, 0,
-     NULL, NULL, NULL},
-#else				/* WITH_BACKGROUND */
-# define SKIP 4
-# define FMCB21 10
-# define FMCB22 9
-# define FMBLFT 8
-# undef  FMBMID
-#endif
-    {quick_button, 14, 64, 9, FMDY, N_("&OK"), 0, B_ENTER, 0, 0, NULL, NULL, NULL},
-    {quick_checkbox, 42, 64, 8, FMDY, N_("&Stable Symlinks"), 0, 0,
-     0 /* &file_mask_stable_symlinks */ , 0, NULL, NULL, NULL},
-    {quick_checkbox, 31, 64, 7, FMDY, N_("&Dive into subdir if exists"), 0,
-     0, 0 /* &dive_into_subdirs */ , 0, NULL, NULL, NULL},
-    NULL_QuickWidget
-};
-
-static int
+static gboolean
 is_wildcarded (char *p)
 {
     for (; *p; p++) {
 	if (*p == '*')
-	    return 1;
-	else if (*p == '\\' && p[1] >= '1' && p[1] <= '9')
-	    return 1;
+	    return TRUE;
+	if (*p == '\\' && p[1] >= '1' && p[1] <= '9')
+	    return TRUE;
     }
-    return 0;
-}
-
-void
-fmd_init_i18n (int force)
-{
-#ifdef ENABLE_NLS
-    static int initialized = FALSE;
-    register int i;
-    int len;
-
-    if (initialized && !force)
-	return;
-
-    for (i = sizeof (op_names) / sizeof (op_names[0]); i--;)
-	op_names[i] = _(op_names[i]);
-
-    i = sizeof (fmd_widgets) / sizeof (fmd_widgets[0]) - 1;
-    while (i--)
-	if (fmd_widgets[i].text[0] != '\0')
-	    fmd_widgets[i].text = _(fmd_widgets[i].text);
-
-    len = str_term_width1 (fmd_widgets[FMCB11].text)
-            + str_term_width1 (fmd_widgets[FMCB21].text) + 15;
-    fmd_xlen = max (fmd_xlen, len);
-
-    len = str_term_width1 (fmd_widgets[FMCB12].text)
-            + str_term_width1 (fmd_widgets[FMCB22].text) + 15;
-    fmd_xlen = max (fmd_xlen, len);
-
-    len = str_term_width1 (fmd_widgets[FMBRGT].text)
-            + str_term_width1 (fmd_widgets[FMBLFT].text) + 11;
-
-#ifdef FMBMID
-    len+= str_term_width1 (fmd_widgets[FMBMID].text) + 6;
-#endif
-
-    fmd_xlen = max (fmd_xlen, len + 4);
-
-    len = (fmd_xlen - (len + 6)) / 2;
-    i = fmd_widgets[FMBLFT].relative_x = len + 3;
-    i+= str_term_width1 (fmd_widgets[FMBLFT].text) + 8;
-
-#ifdef FMBMID
-    fmd_widgets[FMBMID].relative_x = i;
-    i+= str_term_width1 (fmd_widgets[FMBMID].text) + 6;
-#endif
-
-    fmd_widgets[FMBRGT].relative_x = i;
-
-#define	chkbox_xpos(i) \
-    fmd_widgets [i].relative_x = fmd_xlen - str_term_width1 (fmd_widgets [i].text) - 6
-
-    chkbox_xpos (FMCB0);
-    chkbox_xpos (FMCB21);
-    chkbox_xpos (FMCB22);
-
-    if (fmd_xlen != FMD_XLEN) {
-	i = sizeof (fmd_widgets) / sizeof (fmd_widgets[0]) - 1;
-	while (i--)
-	    fmd_widgets[i].x_divisions = fmd_xlen;
-
-	fmd_widgets[FMDI1].hotkey_pos =
-	    fmd_widgets[FMDI2].hotkey_pos = fmd_xlen - 6;
-    }
-#undef chkbox_xpos
-
-    initialized = TRUE;
-#endif				/* !ENABLE_NLS */
+    return FALSE;
 }
 
 char *
 file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
 		  const char *def_text, int only_one, int *do_background)
 {
+    const int FMDY = 13;
+    const int FMDX = 64;
+    int fmd_xlen = 0;
+
     int source_easy_patterns = easy_patterns;
+    size_t i, len;
     char *source_mask, *orig_mask, *dest_dir, *tmp;
     char *def_text_secure;
-    struct stat buf;
     int val;
-    QuickDialog Quick_input;
+
+#ifdef ENABLE_NLS
+    static gboolean i18n = FALSE;
+#endif				/* !ENABLE_NLS */
+
+    QuickWidget fmd_widgets[] =
+    {
+	/* 0 */ QUICK_BUTTON (42, 64, 10, FMDY, N_("&Cancel"), B_CANCEL, NULL),
+#ifdef WITH_BACKGROUND
+	/* 1 */ QUICK_BUTTON (25, 64, 10, FMDY, N_("&Background"), B_USER, NULL),
+#define OFFSET 0
+#else
+#define OFFSET 1
+#endif		/* WITH_BACKGROUND */
+	/*  2 - OFFSET */ QUICK_BUTTON (14, FMDX, 10, FMDY, N_("&OK"), B_ENTER, NULL),
+	/*  3 - OFFSET */ QUICK_CHECKBOX (42, FMDX, 8, FMDY, N_("&Stable Symlinks"), &ctx->stable_symlinks),
+	/*  4 - OFFSET */ QUICK_CHECKBOX (31, FMDX, 7, FMDY, N_("&Dive into subdir if exists"), &ctx->dive_into_subdirs),
+	/*  5 - OFFSET */ QUICK_CHECKBOX (3, FMDX, 8, FMDY, N_("preserve &Attributes"), &ctx->op_preserve),
+	/*  6 - OFFSET */ QUICK_CHECKBOX (3, FMDX, 7, FMDY, N_("follow &Links"), &ctx->follow_links),
+	/*  7 - OFFSET */ QUICK_INPUT (3, FMDX, 6, FMDY, "", 58, 0, "input2", &dest_dir),
+	/*  8 - OFFSET */ QUICK_LABEL (3, FMDX, 5, FMDY, N_("to:")),
+	/*  9 - OFFSET */ QUICK_CHECKBOX (37, FMDX, 4, FMDY, N_("&Using shell patterns"), &source_easy_patterns),
+	/* 10 - OFFSET */ QUICK_INPUT (3, FMDX, 3, FMDY, easy_patterns ? "*" : "^\\(.*\\)$", 58, 0, "input-def", &source_mask),
+	/* 11 - OFFSET */ QUICK_LABEL (3, FMDX, 2, FMDY, text),
+	QUICK_END
+    };
 
     g_return_val_if_fail (ctx != NULL, NULL);
 
-    fmd_init_i18n (FALSE);
+#ifdef ENABLE_NLS
+    if (!i18n) {
+	for (i = sizeof (op_names) / sizeof (op_names[0]); i--;)
+	    op_names[i] = _(op_names[i]);
+
+	i18n = TRUE;
+    }
+
+    /* buttons */
+    for (i = 0; i <= 2 - OFFSET; i++)
+	fmd_widgets[i].u.button.text = _(fmd_widgets[i].u.button.text);
+
+    /* checkboxes */
+    for (i = 3 - OFFSET; i <= 9 - OFFSET; i++)
+	if (i != 7 - OFFSET)
+	    fmd_widgets[i].u.checkbox.text = _(fmd_widgets[i].u.checkbox.text);
+#endif				/* !ENABLE_NLS */
+
+    len = str_term_width1 (fmd_widgets[6 - OFFSET].u.checkbox.text)
+	+ str_term_width1 (fmd_widgets[4 - OFFSET].u.checkbox.text) + 15;
+    fmd_xlen = max (fmd_xlen, len);
+
+    len = str_term_width1 (fmd_widgets[5 - OFFSET].u.checkbox.text)
+	+ str_term_width1 (fmd_widgets[3 - OFFSET].u.checkbox.text) + 15;
+    fmd_xlen = max (fmd_xlen, len);
+
+    /* buttons */
+    len = str_term_width1 (fmd_widgets[2 - OFFSET].u.button.text)
+	+ str_term_width1 (fmd_widgets[0].u.button.text) + 11;
+#ifdef WITH_BACKGROUND
+    len += str_term_width1 (fmd_widgets[1].u.button.text) + 6;
+#endif
+    fmd_xlen = max (fmd_xlen, len + 4);
+
+    len = (fmd_xlen - (len + 6)) / 2;
+    i = len + 3;
+    fmd_widgets[2 - OFFSET].relative_x = i;
+    i += str_term_width1 (fmd_widgets[2 - OFFSET].u.button.text) + 8;
+
+#ifdef WITH_BACKGROUND
+    fmd_widgets[1].relative_x = i;
+    i += str_term_width1 (fmd_widgets[1].u.button.text) + 6;
+#endif
+
+    fmd_widgets[0].relative_x = i;
+
+#define chkbox_xpos(i) \
+    fmd_widgets [i].relative_x = fmd_xlen - str_term_width1 (fmd_widgets [i].u.checkbox.text) - 6
+    chkbox_xpos (3 - OFFSET);
+    chkbox_xpos (4 - OFFSET);
+    chkbox_xpos (9 - OFFSET);
+#undef chkbox_xpos
+
+    if (fmd_xlen != FMDX) {
+	i = sizeof (fmd_widgets) / sizeof (fmd_widgets[0]) - 1;
+	while (i--)
+	    fmd_widgets[i].x_divisions = fmd_xlen;
+
+	/* inputs */
+	fmd_widgets[ 7 - OFFSET].u.input.len =
+	fmd_widgets[10 - OFFSET].u.input.len = fmd_xlen - 6;
+    }
 
     /* unselect checkbox if target filesystem don't support attributes */
-    ctx->op_preserve = filegui__check_attrs_on_fs(def_text);
-
-    /* Set up the result pointers */
-
-    fmd_widgets[FMCB12].result = &ctx->op_preserve;
-    fmd_widgets[FMCB11].result = &ctx->follow_links;
-    fmd_widgets[FMCB22].result = &ctx->stable_symlinks;
-    fmd_widgets[FMCB21].result = &ctx->dive_into_subdirs;
+    ctx->op_preserve = filegui__check_attrs_on_fs (def_text);
 
     /* filter out a possible password from def_text */
     tmp = strip_password (g_strdup (def_text), 1);
@@ -942,104 +905,101 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
         def_text_secure = strutils_regex_escape (tmp);
     g_free (tmp);
 
-    /* Create the dialog */
+    /* destination */
+    fmd_widgets[7 - OFFSET].u.input.text = def_text_secure;
 
     ctx->stable_symlinks = 0;
-    fmd_widgets[FMDC].result = &source_easy_patterns;
-    fmd_widgets[FMDI1].text = easy_patterns ? "*" : "^\\(.*\\)$";
-    Quick_input.xlen = fmd_xlen;
-    Quick_input.xpos = -1;
-    Quick_input.title = op_names[operation];
-    Quick_input.help = "[Mask Copy/Rename]";
-    Quick_input.ylen = FMDY;
-    Quick_input.i18n = 1;
-    Quick_input.widgets = fmd_widgets;
-    fmd_widgets[FMDI0].text = text;
-    fmd_widgets[FMDI2].text = def_text_secure;
-    fmd_widgets[FMDI2].str_result = &dest_dir;
-    fmd_widgets[FMDI1].str_result = &source_mask;
-
     *do_background = 0;
 
-  ask_file_mask:
-    val = quick_dialog_skip (&Quick_input, SKIP);
+    {
+	struct stat buf;
 
-    if (val == B_CANCEL) {
-	g_free (def_text_secure);
-	return NULL;
-    }
+	QuickDialog Quick_input =
+	{
+	    fmd_xlen, FMDY, -1, -1, op_names [operation],
+	    "[Mask Copy/Rename]", fmd_widgets, TRUE
+	};
 
-    if (ctx->follow_links)
-	ctx->stat_func = mc_stat;
-    else
-	ctx->stat_func = mc_lstat;
+     ask_file_mask:
+	val = quick_dialog_skip (&Quick_input, 4);
 
-    if (ctx->op_preserve) {
-	ctx->preserve = 1;
-	ctx->umask_kill = 0777777;
-	ctx->preserve_uidgid = (geteuid () == 0) ? 1 : 0;
-    } else {
-	int i;
-	ctx->preserve = ctx->preserve_uidgid = 0;
-	i = umask (0);
-	umask (i);
-	ctx->umask_kill = i ^ 0777777;
-    }
+	if (val == B_CANCEL) {
+	    g_free (def_text_secure);
+	    return NULL;
+	}
 
-    if (!dest_dir || !*dest_dir) {
+	if (ctx->follow_links)
+	    ctx->stat_func = mc_stat;
+	else
+	    ctx->stat_func = mc_lstat;
+
+	if (ctx->op_preserve) {
+	    ctx->preserve = 1;
+	    ctx->umask_kill = 0777777;
+	    ctx->preserve_uidgid = (geteuid () == 0) ? 1 : 0;
+	} else {
+	    int i;
+	    ctx->preserve = ctx->preserve_uidgid = 0;
+	    i = umask (0);
+	    umask (i);
+	    ctx->umask_kill = i ^ 0777777;
+	}
+
+	if (!dest_dir || !*dest_dir) {
+	    g_free (def_text_secure);
+	    g_free (source_mask);
+	    return dest_dir;
+	}
+
+	ctx->search_handle = mc_search_new(source_mask,-1);
+
+	if (ctx->search_handle == NULL) {
+	    message (D_ERROR, MSG_ERROR, _("Invalid source pattern `%s'"),
+			source_mask);
+	    g_free (dest_dir);
+	    g_free (source_mask);
+	    goto ask_file_mask;
+	}
+
 	g_free (def_text_secure);
 	g_free (source_mask);
-	return dest_dir;
+
+	ctx->search_handle->is_case_sentitive = TRUE;
+	if (source_easy_patterns)
+	    ctx->search_handle->search_type = MC_SEARCH_T_GLOB;
+	else
+	    ctx->search_handle->search_type = MC_SEARCH_T_REGEX;
+
+	tmp = dest_dir;
+	dest_dir = tilde_expand (tmp);
+	g_free (tmp);
+
+	ctx->dest_mask = strrchr (dest_dir, PATH_SEP);
+	if (ctx->dest_mask == NULL)
+	    ctx->dest_mask = dest_dir;
+	else
+	    ctx->dest_mask++;
+	orig_mask = ctx->dest_mask;
+	if (!*ctx->dest_mask
+	    || (!ctx->dive_into_subdirs && !is_wildcarded (ctx->dest_mask)
+		&& (!only_one
+		    || (!mc_stat (dest_dir, &buf) && S_ISDIR (buf.st_mode))))
+	    || (ctx->dive_into_subdirs
+		&& ((!only_one && !is_wildcarded (ctx->dest_mask))
+		    || (only_one && !mc_stat (dest_dir, &buf)
+			&& S_ISDIR (buf.st_mode)))))
+	    ctx->dest_mask = g_strdup ("\\0");
+	else {
+	    ctx->dest_mask = g_strdup (ctx->dest_mask);
+	    *orig_mask = '\0';
+	}
+	if (!*dest_dir) {
+	    g_free (dest_dir);
+	    dest_dir = g_strdup ("./");
+	}
+	if (val == B_USER)
+	    *do_background = 1;
     }
-
-    ctx->search_handle = mc_search_new(source_mask,-1);
-
-    if (ctx->search_handle == NULL) {
-	message (D_ERROR, MSG_ERROR, _("Invalid source pattern `%s'"),
-		    source_mask);
-	g_free (dest_dir);
-	g_free (source_mask);
-	goto ask_file_mask;
-    }
-
-    g_free (def_text_secure);
-    g_free (source_mask);
-
-    ctx->search_handle->is_case_sentitive = TRUE;
-    if (source_easy_patterns)
-        ctx->search_handle->search_type = MC_SEARCH_T_GLOB;
-    else
-        ctx->search_handle->search_type = MC_SEARCH_T_REGEX;
-
-    tmp = dest_dir;
-    dest_dir = tilde_expand (tmp);
-    g_free (tmp);
-
-    ctx->dest_mask = strrchr (dest_dir, PATH_SEP);
-    if (ctx->dest_mask == NULL)
-	ctx->dest_mask = dest_dir;
-    else
-	ctx->dest_mask++;
-    orig_mask = ctx->dest_mask;
-    if (!*ctx->dest_mask
-	|| (!ctx->dive_into_subdirs && !is_wildcarded (ctx->dest_mask)
-	    && (!only_one
-		|| (!mc_stat (dest_dir, &buf) && S_ISDIR (buf.st_mode))))
-	|| (ctx->dive_into_subdirs
-	    && ((!only_one && !is_wildcarded (ctx->dest_mask))
-		|| (only_one && !mc_stat (dest_dir, &buf)
-		    && S_ISDIR (buf.st_mode)))))
-	ctx->dest_mask = g_strdup ("\\0");
-    else {
-	ctx->dest_mask = g_strdup (ctx->dest_mask);
-	*orig_mask = '\0';
-    }
-    if (!*dest_dir) {
-	g_free (dest_dir);
-	dest_dir = g_strdup ("./");
-    }
-    if (val == B_USER)
-	*do_background = 1;
 
     return dest_dir;
 }
