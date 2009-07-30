@@ -19,7 +19,7 @@ AC_DEFUN([AC_REQUIRE_MVFS],
 
 AC_DEFUN([AC_MVFS_FS], [
     AC_PREPARE_MVFS
-    AC_ARG_ENABLE([mvfs-$1],[  --enable-mvfs-$1    Support for $3 (via libmvfs)])
+    AC_ARG_ENABLE([mvfs-$1],[  --enable-mvfs-$1     Support for $3 (via libmvfs)])
     if test x"$enable_mvfs_$1" = x"yes" ; then
 	AC_REQUIRE_MVFS
 	AC_DEFINE(ENABLE_MVFS_$2, 1, [$1 (via libmvfs)])

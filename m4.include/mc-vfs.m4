@@ -34,7 +34,7 @@ AC_DEFUN([MC_WITH_VFS],
     use_net_code=false
 
     AC_ARG_ENABLE([netcode],
-		[  --enable-netcode         Support for networking [[yes]]])
+		[  --enable-netcode        Support for networking [[yes]]])
 
     if test "x$enable_netcode" != xno; then
 	dnl FIXME: network checks should probably be in their own macro.

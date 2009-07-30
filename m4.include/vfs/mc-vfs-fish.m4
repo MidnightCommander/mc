@@ -2,7 +2,7 @@ dnl Enable FISH protocol (classic)
 AC_DEFUN([AC_MC_VFS_FISH],
 [
     AC_ARG_ENABLE([vfs-fish],
-                  [  --disable-vfs-fish           Support for FISH vfs [[yes]]])
+                  [  --enable-vfs-fish       Support for FISH vfs [[yes]]])
     if test "x$enable_vfs_fish" != xno; then
         enable_vfs_fish="yes"
 	AC_MC_VFS_ADDNAME([fish])

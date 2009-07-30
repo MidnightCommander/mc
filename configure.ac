@@ -5,6 +5,7 @@ dnl
 AC_INIT([GNU Midnight Commander], [], [mc-devel@gnome.org])
 AC_PREREQ(2.60)
 m4_pattern_forbid(MC_)
+AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_SRCDIR(src/main.c)
 AC_CONFIG_AUX_DIR(config)
 MC_VERSION
@@ -484,7 +485,7 @@ esac
 
 dnl Support for background operations
 AC_ARG_ENABLE([background],
-	      [  --enable-background      Support for background file operations [[yes]]])
+	      [  --enable-background     Support for background file operations [[yes]]])
 if test "x$enable_background" != xno; then
     AC_DEFINE(WITH_BACKGROUND, 1, [Define to enable background file operations])
 fi
@@ -494,7 +495,7 @@ dnl
 dnl User visible support for charset conversion.
 dnl
 AC_ARG_ENABLE([charset],
-	      [  --enable-charset         Support for charset selection and conversion [[no]]])
+	      [  --enable-charset        Support for charset selection and conversion [[no]]])
 have_charset=
 charset_msg="no"
 if test "x$enable_charset" = xyes; then

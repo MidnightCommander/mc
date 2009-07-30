@@ -10,7 +10,7 @@ AC_DEFUN([MC_MCSERVER_CHECKS], [
     dnl mcfs support
     dnl
     AC_ARG_ENABLE([mcserver],
-        [  --enable-mcserver              Support mc-specific networking file system server [[no]]],
+        [  --enable-mcserver       Support mc-specific networking file system server [[no]]],
         [if test "x$enableval" != "xno"; then
             AC_DEFINE(ENABLE_MCSERVER, 1, [Define to enable mc-specific networking file system server])
             AC_MC_VFS_ADDNAME([mcfs])
