@@ -992,8 +992,8 @@ query_callback (Dlg_head *h, dlg_msg_t msg, int parm)
                                     sl = nl;
                                 }
                                 
-				if (low > si - &e1->text[start])
-				    low = si - &e1->text[start];
+				if (low > si - &e1->text[end - start])
+				    low = si - &e1->text[end - start];
 
 				last_text = e1->text;
 				need_redraw = 2;
