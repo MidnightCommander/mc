@@ -45,9 +45,44 @@ shell_patterns=0
 	tar cf - "$Pwd" | bzip2 -f > "$tar.tar.bz2" && \
 	echo "../$tar.tar.bz2 created."
 
+5       Compress the current subdirectory (tar.p7)
+	Pwd=`basename %d /`
+	echo -n "Name of the compressed file (without extension) [$Pwd]: "
+	read tar
+        if [ "$tar"x = x ]; then tar="$Pwd"; fi
+	cd .. && \
+	tar cf - "$Pwd" | 7za a -si "$tar.tar.7z" && \
+	echo "../$tar.tar.7z created."
+
+6       Compress the current subdirectory (tar.lzma)
+	Pwd=`basename %d /`
+	echo -n "Name of the compressed file (without extension) [$Pwd]: "
+	read tar
+        if [ "$tar"x = x ]; then tar="$Pwd"; fi
+	cd .. && \
+	tar cf - "$Pwd" | lzma -f > "$tar.tar.lzma" && \
+	echo "../$tar.tar.lzma created."
+
+7       Compress the current subdirectory (tar.lz)
+	Pwd=`basename %d /`
+	echo -n "Name of the compressed file (without extension) [$Pwd]: "
+	read tar
+        if [ "$tar"x = x ]; then tar="$Pwd"; fi
+	cd .. && \
+	tar cf - "$Pwd" | lzip -f > "$tar.tar.lz" && \
+	echo "../$tar.tar.lz created."
+
+8       Compress the current subdirectory (tar.xz)
+	Pwd=`basename %d /`
+	echo -n "Name of the compressed file (without extension) [$Pwd]: "
+	read tar
+        if [ "$tar"x = x ]; then tar="$Pwd"; fi
+	cd .. && \
+	tar cf - "$Pwd" | xz -f > "$tar.tar.xz" && \
+	echo "../$tar.tar.xz created."
 = f \.c$ & t r
 + f \.c$ & t r & ! t t
-5       Compile and link current .c file
+        Compile and link current .c file
         make `basename %f .c` 2>/dev/null || cc -O -o `basename %f .c` %f
 
 + t r & ! t t
@@ -186,17 +221,33 @@ U       Uudecode marked news articles (needs work)
 	fi
 	echo "Please test the output file before deleting anything"
 
-=+ f \.tar\.gz$ | f \.tar\.z$ | f \.tgz$ | f \.tpz$ | f \.tar\.Z$| f \.tar\.bz2$ & t r
+=+ f \.tar\.gz$ | f \.tar\.z$ | f \.tgz$ | f \.tpz$ | f \.tar\.lz$ | f \.tar\.lzma$ | f \.tar\.lz$ | f \.tar\.7z$ | f \.tar\.xz$ | f \.tar\.Z$| f \.tar\.bz2$ & t r
 x       Extract the contents of a compressed tar file
-	unset EXT
-	case %f in 
-	    *.tar.bz2) EXT=tar_bz2;;
+	unset PRG
+	case %f in
+	    *.tar.bz2)
+		PRG="bunzip2 -c %f"
+		;;
+	    *.tar.gz|*.tar.z|*.tgz|*.tpz|*.tar.Z)
+		PRG="gzup -dc %f"
+		;;
+	    *.tar.lzma)
+		PRG="lzma -dc %f"
+		;;
+	    *.tar.lz)
+		PRG="lzip -dc %f"
+		;;
+	    *.tar.xz)
+		PRG="xz -dc %f"
+		;;
+	    *.tar.7z)
+		PRG="7za e -so %f"
+		;;
+	    *)
+		exit 1
+		;;
 	esac
-	if [ "$EXT" = "tar_bz2" ]; then
-	  bunzip2 -c %f | tar xvf -
-	else
-	  gzip -dc %f | tar xvf -
-	fi
+	$PRG | tar xvf -
 
 = t r
 + ! t t
