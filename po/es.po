@@ -1,14 +1,14 @@
 # Spanish locale - Midnight Commander
-# Copyright (C) 1998-2008 Free Software Foundation, Inc.
-# David Martín <dmartina@excite.com>, 1998-2008.
+# Copyright (C) 1998-2009 Free Software Foundation, Inc.
+# David Martín <dmartina@excite.com>, 1998-2009.
 # Ismael Olea <olea@hispafuentes.com>, 2000.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 4.6.2\n"
+"Project-Id-Version: 4.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-14 19:43+0000\n"
-"PO-Revision-Date: 2008-06-15 19:00+0100\n"
+"POT-Creation-Date: 2009-07-25 00:37+0200\n"
+"PO-Revision-Date: 2009-07-24 21:00+0100\n"
 "Last-Translator: David Martín <dmartina@excite.com\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -55,8 +55,15 @@ msgstr " El archivo %s es demasiado grande "
 msgid "Macro recursion is too deep"
 msgstr "La macro es demasiado recursiva"
 
-msgid "&Dismiss"
-msgstr "&Ignorar"
+msgid "Search"
+msgstr "Buscar"
+
+#, c-format
+msgid " %d items found, %d bookmarks added "
+msgstr " %d coincidencias, %d marcadores colocados "
+
+msgid " Search string not found "
+msgstr " La cadena buscada no ha sido encontrada "
 
 msgid "Warning"
 msgstr "¡ Atención !"
@@ -115,9 +122,6 @@ msgstr "s&Obrescribir"
 msgid " Cannot save file. "
 msgstr " Imposible guardar el archivo. "
 
-msgid "Cancel"
-msgstr "Cancelar"
-
 msgid " Delete macro "
 msgstr " Eliminar macro "
 
@@ -161,88 +165,42 @@ msgstr ""
 msgid "C&ontinue"
 msgstr "c&Ontinuar"
 
+msgid "Syntax file edit"
+msgstr " Editar archivo de sintaxis "
+
+msgid " Which syntax file you want to edit? "
+msgstr " ¿Qué archivo de sintaxis desea editar? "
+
+msgid "&User"
+msgstr "&Usuario"
+
+msgid "&System Wide"
+msgstr "&Sistema"
+
+msgid " Menu edit "
+msgstr " Editar archivo de menú "
+
+msgid " Which menu file do you want to edit? "
+msgstr " ¿Qué archivo de menú desea editar?"
+
+msgid "&Local"
+msgstr "&Local"
+
 msgid " Load "
 msgstr " Cargar "
 
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " El bloque es enorme, quizás no se pueda deshacer esta acción. "
 
-msgid "O&ne"
-msgstr "sólo u&No"
-
-msgid "A&ll"
-msgstr "&Todos"
-
-msgid "&Skip"
-msgstr "&Saltar"
-
-msgid "&Replace"
-msgstr "&Reemplazar"
-
-msgid " Replace with: "
-msgstr " Reemplazar con: "
-
-msgid " Confirm replace "
-msgstr " Confirmar cambios "
-
-msgid "scanf &Expression"
-msgstr "&Expresión scanf"
-
-msgid "replace &All"
-msgstr "reemplazar &Todos"
-
-msgid "pro&Mpt on replace"
-msgstr "c&Onfirmar cambios"
-
-msgid "&Backwards"
-msgstr "&Hacia atrás"
-
-msgid "&Regular expression"
-msgstr "expresión &Regular"
-
-msgid "&Whole words only"
-msgstr "&Sólo palabras completas"
-
-msgid "case &Sensitive"
-msgstr "distinguir ma&Yúsculas"
-
-msgid " Enter replacement argument order eg. 3,2,1,4 "
-msgstr " Teclee el orden de los argumentos, p. ej. 3,2,1,4 "
-
-msgid " Enter replacement string:"
-msgstr " Teclee el cambio a realizar:"
-
-msgid " Enter search string:"
-msgstr " Teclee el texto a buscar:"
+msgid "Replace"
+msgstr "Reemplazar"
 
 msgid " Replace "
 msgstr " Reemplazar "
 
-msgid "Search"
-msgstr "Buscar"
-
-msgid ""
-" Invalid regular expression, or scanf expression with too many conversions "
-msgstr ""
-" La expresión regular es inválida o la expresión scanf tiene demasiadas "
-"conversiones "
-
-msgid " Error in replacement format string. "
-msgstr " Error en cadena de formato al reemplazar. "
-
-msgid " Replacement too long. "
-msgstr " Reemplazo demasiado extenso. "
-
 #, c-format
 msgid " %ld replacements made. "
 msgstr " %ld reemplazos hechos. "
-
-msgid " Search string not found "
-msgstr " La cadena buscada no ha sido encontrada "
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " %d coincidencias, %d marcadores colocados "
 
 msgid "Quit"
 msgstr "Salir"
@@ -355,6 +313,42 @@ msgstr " Presione cualquier tecla: "
 msgid " Execute Macro "
 msgstr " Ejecutar macro "
 
+msgid "All charsets"
+msgstr "en co&Dificaciones"
+
+msgid "&Backwards"
+msgstr "&Hacia atrás"
+
+msgid "case &Sensitive"
+msgstr "distinguir &May/min"
+
+msgid " Enter replacement string:"
+msgstr " Teclee el cambio a realizar:"
+
+msgid " Enter search string:"
+msgstr " Teclee el texto a buscar:"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "&Skip"
+msgstr "&Saltar"
+
+msgid "A&ll"
+msgstr "&Todos"
+
+msgid "&Replace"
+msgstr "&Reemplazar"
+
+msgid " Replace with: "
+msgstr " Reemplazar con: "
+
+msgid " Confirm replace "
+msgstr " Confirmar cambios "
+
+msgid "&Dismiss"
+msgstr "&Ignorar"
+
 msgid " Emacs key: "
 msgstr " Tecla Emacs: "
 
@@ -430,32 +424,62 @@ msgstr "&Nuevo                 C-x k"
 msgid "Copy to &file...     "
 msgstr "co&Piar a un archivo..."
 
-msgid "&Toggle Mark       F3"
+msgid "&Toggle mark                 F3"
 msgstr "i&Nicio/fin de marca        F3"
 
-msgid "&Mark Columns    S-F3"
+msgid "Mar&k columns              S-F3"
 msgstr "marcar c&Olumnas          S-F3"
 
-msgid "Toggle &ins/overw Ins"
+msgid "Toggle &ins/overw           Ins"
 msgstr "activar &Inserción         Ins"
 
-msgid "&Copy              F5"
+msgid "&Copy                        F5"
 msgstr "&Copiar                     F5"
 
-msgid "&Move              F6"
+msgid "&Move                        F6"
 msgstr "&Mover                      F6"
 
-msgid "&Delete            F8"
+msgid "&Delete                      F8"
 msgstr "&Borrar                     F8"
 
-msgid "&Undo             C-u"
+msgid "C&opy to clipfile         C-Ins"
+msgstr "co&Piar a un archivo...  C-Ins"
+
+msgid "C&ut to clipfile          S-Del"
+msgstr "cor&Tar a un archivo...  S-Del"
+
+msgid "&Paste from clipfile      S-Ins"
+msgstr "pe&Gar de un archivo...  S-Ins"
+
+msgid "Toggle bookmar&k               "
+msgstr "poner/quitar m&Arca         F3"
+
+msgid "&Next bookmark                 "
+msgstr "&Ir a la marca siguiente      "
+
+msgid "Pre&v bookmark                 "
+msgstr "&Volver a la marca anterior   "
+
+msgid "&Flush bookmark                "
+msgstr "borra&R todas las marcas      "
+
+msgid "&Undo                       C-u"
 msgstr "&Deshacer                  C-u"
 
-msgid "&Beginning     C-PgUp"
+msgid "&Beginning               C-PgUp"
 msgstr "&Principio del archivo  C-RePg"
 
-msgid "&End           C-PgDn"
+msgid "&End                     C-PgDn"
 msgstr "&Fin del archivo        C-AvPg"
+
+msgid "C&opy to clipfile           M-w"
+msgstr "co&Piar a un archivo...    M-w"
+
+msgid "C&ut to clipfile            C-w"
+msgstr "cor&Tar a un archivo...    C-w"
+
+msgid "&Paste from clipfile        C-y"
+msgstr "pe&Gar de un archivo...    C-y"
 
 msgid "&Search...         F7"
 msgstr "&Buscar...          F7"
@@ -469,8 +493,23 @@ msgstr "&Reemplazar...      F4"
 msgid "&Go to line...            M-l"
 msgstr "&Ir a la línea...                  M-l"
 
+msgid "Toggle li&ne state        M-n"
+msgstr "&Numeración de líneas              M-n"
+
 msgid "Go to matching &bracket   M-b"
 msgstr "buscar pare&Ja del operador        M-b"
+
+msgid "Find declaration      A-Enter"
+msgstr "buscar &Declaración            M-Intro"
+
+msgid "Back from declaration     M--"
+msgstr "&Volver desde declaración          M--"
+
+msgid "Forward to declaration    M-+"
+msgstr "ava&Nzar a declaración             M-+"
+
+msgid "Encod&ing...             C-t"
+msgstr "&Código carácter...                C-t"
 
 msgid "Insert &literal...       C-q"
 msgstr "insertar &Literalmente...          C-q"
@@ -529,8 +568,14 @@ msgstr "redefinir &Teclas..."
 msgid "Syntax &Highlighting..."
 msgstr "sinta&Xis coloreada..."
 
-msgid "Save setu&p..."
-msgstr "guardar co&Nfiguración"
+msgid "S&yntax file"
+msgstr "editar archivo de &Sintaxis"
+
+msgid "&Menu file"
+msgstr "editar archivo de me&Nú..."
+
+msgid "Save setu&p"
+msgstr "&Guardar configuración"
 
 msgid " File "
 msgstr " Archivo "
@@ -571,8 +616,17 @@ msgstr "Ancho del párrafo auto: "
 msgid "Tab spacing: "
 msgstr "Tamaño de tabulaciones: "
 
+msgid "Pers&istent selection"
+msgstr "selecció&N persistente"
+
 msgid "Synta&x highlighting"
 msgstr "sinta&Xis coloreada"
+
+msgid "Visible tabs"
+msgstr "&Tabulaciones visibles"
+
+msgid "Visible trailing spaces"
+msgstr "&Espacios finales visibles"
 
 msgid "Save file &position"
 msgstr "recordar &Posiciones"
@@ -785,7 +839,7 @@ msgid "Sort order"
 msgstr " Ordenar "
 
 msgid "Executable first"
-msgstr ""
+msgstr "ejecutables primero"
 
 msgid " confirm di&Rectory hotlist delete "
 msgstr " confirmar eliminación de &Favoritos "
@@ -804,6 +858,9 @@ msgstr " confirmar e&Liminación "
 
 msgid " Confirmation "
 msgstr " Confirmación "
+
+msgid "UTF-8 output"
+msgstr "salida UTF-8"
 
 msgid "Full 8 bits output"
 msgstr "mostrar &8 bits"
@@ -905,6 +962,9 @@ msgstr " Contraseña para \\\\%s\\%s "
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Atención: no se encuentra el archivo %s\n"
+
+msgid "7-bit ASCII"
+msgstr "ASCII (7 bit)"
 
 #, c-format
 msgid "Cannot translate from %s to %s"
@@ -1045,8 +1105,14 @@ msgstr " Filtro "
 msgid " Set expression for filtering filenames"
 msgstr " Teclee la expresión para filtrar nombres de archivo"
 
-msgid "  Malformed regular expression  "
-msgstr " La expresión regular es errónea "
+msgid "&Using shell patterns"
+msgstr "&Usando patrones shell"
+
+msgid "&Case sensitive"
+msgstr "distinguir ma&Yúsculas"
+
+msgid "&Files only"
+msgstr "sólo &Archivos"
 
 msgid " Select "
 msgstr " Seleccionar grupo "
@@ -1059,27 +1125,6 @@ msgstr " Editar el archivo de extensiones "
 
 msgid " Which extension file you want to edit? "
 msgstr " ¿Qué archivo de extensión desea editar? "
-
-msgid "&User"
-msgstr "&Usuario"
-
-msgid "&System Wide"
-msgstr "&Sistema"
-
-msgid " Menu edit "
-msgstr " Editar archivo de menú "
-
-msgid " Which menu file do you want to edit? "
-msgstr " ¿Qué archivo de menú desea editar?"
-
-msgid "&Local"
-msgstr "&Local"
-
-msgid "Syntax file edit"
-msgstr " Editar archivo de sintaxis "
-
-msgid " Which syntax file you want to edit? "
-msgstr " ¿Qué archivo de sintaxis desea editar? "
 
 msgid " Compare directories "
 msgstr " Comparar directorios "
@@ -1098,12 +1143,6 @@ msgstr "&Completo"
 
 msgid " Both panels should be in the listing mode to use this command "
 msgstr " Ambos paneles deben estar en modo listado para usar esta función "
-
-msgid " The command history is empty "
-msgstr " La historia de órdenes está vacía "
-
-msgid " Command history "
-msgstr " Historia de órdenes "
 
 msgid ""
 " Not an xterm or Linux console; \n"
@@ -1284,9 +1323,6 @@ msgstr " Mover "
 msgid " Delete "
 msgstr " Borrar "
 
-msgid " Invalid target mask "
-msgstr "La máscara destino es incorrecta"
-
 msgid " Cannot make the hardlink "
 msgstr " Imposible crear el enlace "
 
@@ -1335,13 +1371,17 @@ msgstr ""
 " Imposible identificar el archivo origen \"%s\" \n"
 " %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " `%s' \n"
 " and \n"
 " `%s' \n"
 " are the same file "
-msgstr " \"%s\" y \"%s\" son el mismo archivo "
+msgstr ""
+" \"%s\" \n"
+" y \n"
+" \"%s\" \n"
+" son el mismo archivo "
 
 #, c-format
 msgid ""
@@ -1373,7 +1413,7 @@ msgid ""
 " %s "
 msgstr ""
 " Imposible abrir el archivo fuente \"%s\" \n"
-" %s"
+" %s "
 
 msgid " Reget failed, about to overwrite file "
 msgstr " Falló el reintento, se va a sobrescribir el archivo "
@@ -1400,7 +1440,7 @@ msgid ""
 " %s "
 msgstr ""
 " Imposible identificar el archivo destino \"%s\" \n"
-" %s"
+" %s "
 
 #, c-format
 msgid ""
@@ -1408,7 +1448,7 @@ msgid ""
 " %s "
 msgstr ""
 " Imposible leer el archivo origen \"%s\" \n"
-" %s"
+" %s "
 
 #, c-format
 msgid ""
@@ -1416,7 +1456,7 @@ msgid ""
 " %s "
 msgstr ""
 " Imposible escribir el archivo destino \"%s\" \n"
-" %s"
+" %s "
 
 msgid "(stalled)"
 msgstr "(bloqueado)"
@@ -1427,7 +1467,7 @@ msgid ""
 " %s "
 msgstr ""
 " Imposible cerrar el archivo origen \"%s\" \n"
-" %s"
+" %s "
 
 #, c-format
 msgid ""
@@ -1435,7 +1475,7 @@ msgid ""
 " %s "
 msgstr ""
 " Imposible cerrar el archivo destino \"%s\" \n"
-" %s"
+" %s "
 
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr "El archivo está incompleto. ¿Desea conservarlo?"
@@ -1452,7 +1492,7 @@ msgid ""
 " %s "
 msgstr ""
 " Imposible identificar el directorio de origen \"%s\" \n"
-" %s"
+" %s "
 
 #, c-format
 msgid ""
@@ -1520,15 +1560,19 @@ msgid ""
 " %s "
 msgstr ""
 " Imposible borrar el archivo \"%s\" \n"
-" %s"
+" %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " `%s' \n"
 " and \n"
 " `%s' \n"
 " are the same directory "
-msgstr " \"%s\" y \"%s\" son el mismo directorio "
+msgstr ""
+" \"%s\" \n"
+" y \n"
+" \"%s\" \n"
+" son el mismo directorio "
 
 #, c-format
 msgid " Cannot overwrite directory \"%s\" %s "
@@ -1561,6 +1605,9 @@ msgid ""
 msgstr ""
 " Imposible eliminar el directorio \"%s\" \n"
 " %s "
+
+msgid "Directory scanning"
+msgstr "Analizando directorio"
 
 msgid "1Copy"
 msgstr "1Copiar"
@@ -1720,9 +1767,6 @@ msgstr "seguir en&Laces"
 msgid "to:"
 msgstr "a:"
 
-msgid "&Using shell patterns"
-msgstr "&Usando patrones shell"
-
 msgid "&Background"
 msgstr "en 2º plan&O"
 
@@ -1733,12 +1777,8 @@ msgid "&Dive into subdir if exists"
 msgstr "copiar &Recursivamente en subdirectorios"
 
 #, c-format
-msgid ""
-"Invalid source pattern `%s' \n"
-" %s "
-msgstr ""
-" Patrón fuente incorrecto \"%s\" \n"
-" %s "
+msgid "Invalid source pattern `%s'"
+msgstr "Patrón fuente incorrecto \"%s\""
 
 msgid "&Suspend"
 msgstr "&Detener"
@@ -1764,26 +1804,48 @@ msgstr "&Ver - F3"
 msgid "&Edit - F4"
 msgstr "&Editar - F4"
 
+#, c-format
+msgid "Found: %ld"
+msgstr "Encontrado: %ld"
+
+msgid " Malformed regular expression "
+msgstr " La expresión regular es errónea "
+
+msgid "Cas&e sensitive"
+msgstr "distinguir ma&Yúsculas"
+
+msgid "Case sens&itive"
+msgstr "distinguir ma&Yúsculas"
+
 msgid "&Find recursively"
 msgstr "buscar rec&Ursivamente"
 
 msgid "S&kip hidden"
-msgstr ""
+msgstr "saltar &Ocultos"
 
-msgid "Start at:"
-msgstr "Comenzar en:"
+msgid "&All charsets"
+msgstr "cualquier co&Dificación"
 
-msgid "Filename:"
-msgstr "Archivos:"
+msgid "All cha&rsets"
+msgstr "cualquier codi&Ficación"
 
-msgid "Content: "
-msgstr "Contenido: "
+msgid "Re&gular expression"
+msgstr "expresión &Regular"
 
 msgid "&Tree"
 msgstr "ár&Bol"
 
 msgid "Find File"
 msgstr " Buscar archivos "
+
+msgid "Content:"
+msgstr "Contenido:"
+
+msgid "File name:"
+msgstr "Archivos:"
+
+msgid "Start at:"
+msgstr "Comenzar en:"
 
 #, c-format
 msgid "Grepping in %s"
@@ -2009,7 +2071,7 @@ msgid "&Horizontal"
 msgstr "&Horizontal"
 
 msgid "show free sp&Ace"
-msgstr ""
+msgstr "mostrar &Espacio libre"
 
 msgid "&Xterm window title"
 msgstr "titular las ventanas &Xterm"
@@ -2148,23 +2210,23 @@ msgstr "&Ordenar..."
 msgid "&Filter..."
 msgstr "&Filtro..."
 
+msgid "&Encoding...    C-t"
+msgstr "&Código carácter...  C-t"
+
 msgid "&Network link..."
-msgstr "&Conexión por red..."
+msgstr "conexión por &Red..."
 
 msgid "FT&P link..."
 msgstr "conexión por FT&P..."
 
 msgid "S&hell link..."
-msgstr "conexión por s&Hell..."
+msgstr "conexión por SS&H..."
 
 msgid "SM&B link..."
 msgstr "conexión por &SMB..."
 
 msgid "&Rescan         C-r"
-msgstr "actualiza&R          C-r"
-
-msgid "&User menu          F2"
-msgstr "me&Nú de usuario               F2"
+msgstr "&Actualizar          C-r"
 
 msgid "&View               F3"
 msgstr "&Ver                           F3"
@@ -2223,6 +2285,9 @@ msgstr "&Invertir la selección        M-*"
 msgid "e&Xit              F10"
 msgstr "sali&R                        F10"
 
+msgid "&User menu          F2"
+msgstr "me&Nú de usuario                    F2"
+
 msgid "&Directory tree"
 msgstr "árbol de &Directorios"
 
@@ -2244,8 +2309,8 @@ msgstr "búsquedas e&Xternas...           C-x !"
 msgid "show directory s&Izes"
 msgstr "mostrar &Tamaños de los directorios"
 
-msgid "command &History"
-msgstr "&Historia de órdenes"
+msgid "Command &history      M-h"
+msgstr "&Historia de órdenes               M-h"
 
 msgid "di&Rectory hotlist    C-\\"
 msgstr "&Favoritos...                      C-\\"
@@ -2267,12 +2332,6 @@ msgstr "&Editar el archivo de extensiones..."
 
 msgid "Edit &menu file"
 msgstr "editar archivo de &Menú..."
-
-msgid "Edit edi&tor menu file"
-msgstr "editar me&Nú del editor..."
-
-msgid "Edit &syntax file"
-msgstr "editar archivo de &Sintaxis..."
 
 msgid "&Configuration..."
 msgstr "&Configuración..."
@@ -2336,6 +2395,29 @@ msgstr "Menú"
 msgid "The TERM environment variable is unset!\n"
 msgstr "¡La variable de entorno TERM está sin definir!\n"
 
+msgid "&Fix it"
+msgstr "&Reparar"
+
+msgid "don't ask again"
+msgstr "no preguntar de nuevo"
+
+msgid ""
+"Chosen display charset (Settings->Display bits)\n"
+"or source codeset (in mcedit ctrl-t) \n"
+"does not match one set via locale. \n"
+"Set correct codeset manually or press <<Fix it>> \n"
+"to set locale default.\n"
+"\n"
+"Or set 'don't ask again' and press <<Skip>>"
+msgstr ""
+"La codificación de caracteres en pantalla (ver\n"
+"Opciones->Juego de caracteres) o en edición (en\n"
+"mcedit, Ctrl-t) no coinciden con la localización\n"
+"del sistema. Corríjalo a mano o pulse «Reparar»\n"
+"para ajustarlos a la localización.\n"
+"\n"
+"También puede elegir \"no preguntar\" y «Saltar»."
+
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
@@ -2369,16 +2451,8 @@ msgid ""
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
 "   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked\n"
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
 msgstr ""
 "--colors CONTEXTO={FRENTE},{FONDO}\n"
 "\n"
@@ -2391,7 +2465,20 @@ msgstr ""
 "errdhotnormal,\n"
 "                       errdhotfocus\n"
 "   Menús:              menu, menuhot, menusel, menuhotsel\n"
-"   Editor:             editnormal, editbold, editmarked\n"
+"   Editor:             editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
 "   Ayuda:              helpnormal, helpitalic, helpbold, helplink, "
 "helpslink\n"
 "   Tipo de archivos:   directory, executable, link, stalelink, device, "
@@ -2463,6 +2550,10 @@ msgstr "Abrir un archivo con el visor"
 msgid "Edits one file"
 msgstr "Editar un archivo"
 
+#, c-format
+msgid "Cannot create %s directory"
+msgstr "Imposible crear directorio %s"
+
 msgid "safe de&Lete"
 msgstr "precauciones de &Borrado"
 
@@ -2500,7 +2591,7 @@ msgid "&Verbose operation"
 msgstr "ope&Ración detallada"
 
 msgid "Mkdir autoname"
-msgstr ""
+msgstr "proponer nombre m&Kdir"
 
 msgid "&Fast dir reload"
 msgstr "recarga rápida de directorios"
@@ -2680,20 +2771,33 @@ msgstr "RenMov"
 msgid "Mkdir"
 msgstr "Mkdir"
 
-msgid " Choose input codepage "
-msgstr " Seleccionar juego de caracteres "
+msgid " Not implemented yet "
+msgstr " No implementado todavía "
+
+msgid " Num of replace tokens not equal to num of found tokens "
+msgstr " Número de elementos de reemplazo no coincide "
+
+#, c-format
+msgid " Invalid token number %d "
+msgstr " El elemento número %d no es válido "
+
+msgid "Normal"
+msgstr "Normal"
+
+msgid "&Regular expression"
+msgstr "expresión &Regular"
+
+msgid "Hexadecimal"
+msgstr "he&Xadecimal"
+
+msgid "Wildcard search"
+msgstr "caracteres como&Dín"
+
+msgid "Choose codepage"
+msgstr "Codificación de caracteres"
 
 msgid "-  < No translation >"
 msgstr "-  < Sin traducción >"
-
-msgid ""
-"To use this feature select your codepage in\n"
-"Setup / Display Bits dialog!\n"
-"Do not forget to save options."
-msgstr ""
-"Para disponer de esta funcionalidad indique su juego de caracteres\n"
-"accediendo al menú 'Opciones/Juego de caracteres'\n"
-"y después no olvide 'Guardar configuración'."
 
 #, c-format
 msgid ""
@@ -2734,6 +2838,9 @@ msgstr "y terminales según terminfo"
 
 msgid "Using the ncurses library"
 msgstr "Utilizando la biblioteca ncurses"
+
+msgid "Using the ncursesw library"
+msgstr "Utilizando la biblioteca ncursesw"
 
 msgid "With optional subshell support"
 msgstr "Soporte subshell optativo"
@@ -2855,11 +2962,17 @@ msgstr " No se encuentran entradas apropiadas en %s "
 msgid " User menu "
 msgstr " Menú de usuario "
 
-msgid "%b %e %H:%M"
-msgstr "%e %b %H:%M"
+msgid "%b %d %H:%M"
+msgstr "%d %b %H:%M"
+
+msgid "%b %d %Y"
+msgstr "%d %b %Y"
 
 msgid "%b %e  %Y"
 msgstr "%e %b  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%e %b %H:%M"
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -2956,24 +3069,16 @@ msgstr ""
 " Imposible guardar el archivo: \n"
 " %s "
 
-msgid "Invalid hex search expression"
-msgstr " Expresión regular hexadecimal inválida "
-
-msgid " Invalid regular expression "
-msgstr " Expresión regular inválida "
-
 #, c-format
 msgid ""
-" The current line number is %d.\n"
+" The current line number is %lu.\n"
 " Enter the new line number:"
 msgstr ""
-" La línea actual es la número %d\n"
+" La línea actual es la número %lu\n"
 " Teclee el número de línea a buscar:"
 
-#, c-format
-msgid ""
-" The current address is 0x%lx.\n"
-" Enter the new address:"
+#, fuzzy
+msgid " The current address is 0x%08"
 msgstr ""
 " La posición actual es 0x%lx.\n"
 " Teclee la posición a buscar:"
@@ -2984,8 +3089,8 @@ msgstr " Ir a posición "
 msgid " Invalid address "
 msgstr " Posición incorrecta "
 
-msgid " Enter regexp:"
-msgstr " Teclee la expresión regular:"
+msgid "Seeking to search result"
+msgstr "Avanzando al resultado de búsqueda"
 
 msgid "ButtonBar|Help"
 msgstr "Ayuda"
@@ -3019,9 +3124,6 @@ msgstr "Desple"
 
 msgid "ButtonBar|Wrap"
 msgstr "Plegar"
-
-msgid "ButtonBar|RxSrch"
-msgstr "BúsqRx"
 
 msgid "ButtonBar|HxSrch"
 msgstr "BúsqHx"
@@ -3182,11 +3284,26 @@ msgstr "Eliminar, pad"
 msgid "Enter on keypad"
 msgstr "Intro, pad"
 
+msgid "Tab on keypad"
+msgstr "Tab, pad"
+
+msgid "Space on keypad"
+msgstr "Espacio, pad"
+
 msgid "Slash on keypad"
 msgstr "Diagonal, pad"
 
 msgid "NumLock on keypad"
 msgstr "Bloquea números, pad"
+
+msgid "Ctrl"
+msgstr "Ctrl"
+
+msgid "Alt"
+msgstr "Alt"
+
+msgid "Shift"
+msgstr "Mayús"
 
 msgid "Background process:"
 msgstr "Procesos en 2º plano"
@@ -3617,25 +3734,3 @@ msgstr "Error interno:"
 
 msgid "Changes to file lost"
 msgstr "Los cambios del archivo se han perdido"
-
-#~ msgid "Using included S-Lang library"
-#~ msgstr "Utilizando la biblioteca S-Lang propia"
-
-#~ msgid "with termcap database"
-#~ msgstr "y terminales según termcap"
-
-#~ msgid "(invalid)"
-#~ msgstr "(inválido)"
-
-#~ msgid " Notice "
-#~ msgstr " Aviso "
-
-#~ msgid ""
-#~ " The Midnight Commander configuration files \n"
-#~ " are now stored in the ~/.mc directory, the \n"
-#~ " files have been moved now\n"
-#~ msgstr ""
-#~ " Los archivos de configuración del Midnight Commander \n"
-#~ " se guardan ahora en el directorio ~/.mc.\n"
-#~ "\n"
-#~ " Los archivos han sido trasladados allí.\n"
