@@ -228,6 +228,8 @@ static void fill_listbox (void)
 	switch (current->type) {
 	case HL_TYPE_GROUP:
 	    {
+		/* buff clean up */
+		g_string_truncate(buff, 0);
 		g_string_append(buff,"->");
 		g_string_append(buff,current->label);
 		if (hotlist_state.moving)
