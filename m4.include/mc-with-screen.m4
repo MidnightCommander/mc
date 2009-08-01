@@ -156,7 +156,7 @@ AC_DEFUN([MC_CHECK_SLANG_BY_PATH], [
         AC_DEFINE(HAVE_SLANG, 1,
             [Define to use S-Lang library for screen management])
 
-        MCLIBS="$MCLIBS $ac_slang_inc_path $ac_slang_lib_path -lslang"
+        MCLIBS="$MCLIBS $ac_slang_lib_path -lslang"
     fi
     CFLAGS="$saved_CFLAGS"
     CPPFLAGS="$saved_CPPFLAGS"

@@ -39,9 +39,9 @@ VFSLIB = ../vfs/libvfs-mc.a
 endif
 endif
 
-mc_LDADD = $(EDITLIB) $(SLANGLIB) $(VFSLIB) \
-	$(INTLLIBS) $(GLIB_LIBS) $(MCLIBS) $(LIBICONV) search/libsearch.la \
-	mcconfig/libmcconfig.la
+mc_LDADD = $(EDITLIB) $(VFSLIB) \
+	search/libsearch.la mcconfig/libmcconfig.la \
+	$(INTLLIBS) $(MCLIBS) $(SLANGLIB) $(LIBICONV) $(GLIB_LIBS)
 
 CHARSET_SRC = charsets.c charsets.h selcodepage.c selcodepage.h
 
