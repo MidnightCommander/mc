@@ -38,9 +38,9 @@ context default
     keyword LINGUAS brightcyan
 
     keyword whole _elibtoolize yellow
-    keyword whole check_KV yellow
     keyword whole best_version yellow
     keyword whole built_with_use yellow
+    keyword whole check_KV yellow
     keyword whole die yellow
     keyword whole diropts yellow
     keyword whole dobin yellow
@@ -64,6 +64,7 @@ context default
     keyword whole dosbin yellow
     keyword whole dosed yellow
     keyword whole dosym yellow
+    keyword whole eaclocal yellow
     keyword whole eautoconf yellow
     keyword whole eautoreconf yellow
     keyword whole eautomake yellow
@@ -110,6 +111,8 @@ context default
     keyword whole use yellow
     keyword whole use_enable yellow
     keyword whole use_with yellow
+    #cvs
+    keyword whole cvs_src_unpack yellow
     #flag-o-matic
     keyword whole append-flags yellow
     keyword whole replace-flags yellow
@@ -118,6 +121,8 @@ context default
     keyword whole git_src_unpack yellow
     #java-ant-2
     keyword whole EANT_BUILD_TARGET yellow
+    #mercurial
+    keyword whole mercurial_src_unpack yellow
     #svn
     keyword whole subversion_src_unpack yellow
 
