@@ -1338,6 +1338,9 @@ static const key_map default_map[] = {
     /* Control-X keybindings */
     {XCTRL ('x'), ctl_x_cmd},
 
+    /* Show/hide hidden files */
+    {ALT ('.'), toggle_show_hidden},
+
     /* Trap dlg's exit commands */
     {ESC_CHAR, nothing},
     {XCTRL ('c'), nothing},
