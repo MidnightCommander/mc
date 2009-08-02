@@ -6,18 +6,27 @@
 # Homepage of Erlang: http://www.erlang.org
 #
 # Author: Witold Baryluk < baryluk at smp if uj edu pl >
-# Date: 07-07-2009
+# Date: 07-07-2009, 08-02-2009
 #
 # -------------------------------
 #
 # Usefull links:
 # http://www.erlang.org/doc/doc-5.4.13/doc/reference_manual/part_frame.html
+# http://www.erlang.org/doc/reference_manual/data_types.html#2.14
 # http://www.regular-expressions.info/reference.html
 # gedit: http://martin.ankerl.com/files/erlang.lang
 # joe: http://www.straatinvestments.com/~tlack/erlang/joe-editor/erlang.jsf
 # geshi: http://www.kreisquadratur.de/blog/?p=305
 # vim: http://erlang.org/pipermail/erlang-questions/2006-July/021362.html
 # kate: http://bugsfiles.kde.org/attachment.cgi?id=21155
+#
+# entries for Syntax file:
+#
+# file ..\*\\.erl$ Erlang\sProgram (-module\\(|#!.*escript)
+# include erlang.syntax
+#
+# file ..\*\\.hrl$ Erlang\sHeader -record\\(
+# include erlang.syntax
 
 context default
 	keyword whole after yellow
@@ -237,6 +246,7 @@ context default
 	keyword whole lists:filter gray
 	keyword whole lists:reduce gray
 	keyword whole lists:foldl gray
+	keyword whole lists:foldr gray
 	keyword whole lists:append gray
 	keyword whole lists:nth gray
 	keyword whole behaviour_info gray
@@ -249,6 +259,10 @@ context default
 	keyword whole dict:fetch_keys gray
 	keyword whole dict:append gray
 	keyword whole dict:update gray
+	keyword whole dict:update_counter gray
+	keyword whole dict:fold gray
+	keyword whole dict:to_list gray
+	keyword whole dict:fetch gray
 
 # todo: no more than one dot in atom, and not at the end
 	keyword whole \{abcdefghijklmnoprqstuvwxyz\}\[abcdefghijklmnoprqstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ0123456789_.@\] lightgray
@@ -263,6 +277,23 @@ context " " green
 	keyword ~n brightgreen
 	keyword ~w brightgreen
 	keyword ~~ brightgreen
+	keyword \\" brightgreen
+	keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
+	keyword \\\{01234567\}\{01234567\} brightgreen
+	keyword \\\{01234567\} brightgreen
+	keyword \\x\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} brightgreen
+	keyword \\\\ brightgreen
+	keyword \\' brightgreen
+	keyword \\\{bdefrstv\} brightgreen
+	keyword \\^\{abcdefghijklmnoprqstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ\} brightgreen
 
 context ' ' red
-	spellcheck
+	keyword \\" brightred
+	keyword \\\{0123\}\{01234567\}\{01234567\} brightred
+	keyword \\\{01234567\}\{01234567\} brightred
+	keyword \\\{01234567\} brightred
+	keyword \\x\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} brightred
+	keyword \\\\ brightred
+	keyword \\' brightred
+	keyword \\\{bdefrstv\} brightred
+	keyword \\^\{abcdefghijklmnoprqstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ\} brightred
