@@ -15,21 +15,29 @@ context default
     #.ebuild specific commands/glo vars
     # TODO: 1. split keywords by .eclass'es
     #       2. grep all exports and place here
+    keyword whole CABAL_FEATURES brightcyan
     keyword whole DEPEND brightcyan
     keyword whole DESCRIPTION brightcyan
     keyword whole EAPI brightcyan
+    keyword whole EDARCS_REPOSITORY brightcyan
+    keyword whole EDARCS_GET_CMD brightcyan
+    keyword whole EDARCS_LOCALREPO brightcyan
+    keyword whole EGIT_BRANCH brightcyan
     keyword whole EGIT_REPO_URI brightcyan
+    keyword whole EGIT_TREE brightcyan
     keyword whole ESVN_REPO_URI brightcyan
     keyword whole EXPORT_FUNCTIONS brightcyan
     keyword whole HOMEPAGE brightcyan
     keyword whole IUSE brightcyan
     keyword whole KEYWORDS brightcyan
     keyword whole LICENSE brightcyan
+    keyword whole PATCHES brightcyan
     keyword whole PDEPEND brightcyan
     keyword whole PROVIDE brightcyan
     keyword whole RDEPEND brightcyan
     keyword whole RESTRICT brightcyan
     keyword whole S brightcyan
+    keyword whole SITEFILE brightcyan
     keyword whole SLOT brightcyan
     keyword whole SRC_URI brightcyan
     keyword whole WANT_AUTOCONF brightcyan
@@ -111,12 +119,23 @@ context default
     keyword whole use yellow
     keyword whole use_enable yellow
     keyword whole use_with yellow
+    #base
+    keyword whole base_src_unpack yellow
     #cvs
     keyword whole cvs_src_unpack yellow
+    #darcs
+    keyword whole darcs_src_unpack yellow
+    #elisp-common
+    keyword whole elisp-compile yellow
+    keyword whole elisp-install yellow
+    keyword whole elisp-site-file-install yellow
+    keyword whole elisp-site-regen yellow
     #flag-o-matic
     keyword whole append-flags yellow
+    keyword whole filter-flags yellow
     keyword whole replace-flags yellow
     keyword whole strip-flags yellow
+    keyword whole strip-unsupported-flags yellow
     #git
     keyword whole git_src_unpack yellow
     #java-ant-2
@@ -190,6 +209,7 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
     keyword whole getopts       yellow
     keyword whole if yellow
     keyword whole in yellow
+    keyword whole read yellow
     keyword whole return yellow
     keyword whole select yellow
     keyword whole shift yellow
@@ -222,12 +242,14 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
     keyword whole pod2man    cyan
     keyword whole rm         cyan
     keyword whole sed        cyan
+    keyword whole sh         cyan
     keyword whole touch      cyan
     keyword whole xmkmf      cyan
 
 # some interesting files to copy
     keyword whole ANNOUNCEMENT  white
     keyword whole AUTHORS       white
+    keyword whole BUGS          white
     keyword whole CHANGES       white
     keyword whole COPYING       white
     keyword whole COPYRIGHT     white
@@ -241,6 +263,7 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
     keyword whole README        white
     keyword whole THANKS        white
     keyword whole TODO          white
+    keyword whole VERSION       white
 
     keyword whole /dev/audio  brightblue
     keyword whole /dev/dsp    brightblue
