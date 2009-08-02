@@ -16,9 +16,10 @@ KEYWORDS=""
 
 IUSE="+background +editor ext2undel gpm +network nls samba +vfs X +slang +charset"
 
-RDEPEND=">=dev-libs/glib-2
+RDEPEND=">=dev-libs/glib-2.6:2
 	ext2undel? ( sys-fs/e2fsprogs )
 	gpm? ( sys-libs/gpm )
+	samba? ( net-fs/samba )
 	slang? ( >=sys-libs/slang-2.1.3 )
 	!slang? ( sys-libs/ncurses )
 	X? ( x11-libs/libX11
@@ -57,12 +58,8 @@ src_configure() {
 		myconf+=" --without-samba"
 	fi
 
-	if use slang; then
-		# slang is known to work better on various systems
-		myconf+=" --with-screen=slang"
-	else
-		myconf+=" --with-screen=ncurses"
-	fi
+	myconf+=" --with-screen=ncurses"
+	use slang && myconf+=" --with-screen=slang"
 
 	econf --disable-dependency-tracking \
 			$(use_enable background) \
@@ -87,6 +84,6 @@ src_install() {
 
 	# Install cons.saver setuid to actually work
 	# for more actual info see mc/src/cons.saver.c
-	fowners tty:tty /usr/libexec/mc/cons.saver
-	fperms u+s /usr/libexec/mc/cons.saver
+	fowners root:tty /usr/libexec/mc/cons.saver
+	fperms g+s /usr/libexec/mc/cons.saver
 }
