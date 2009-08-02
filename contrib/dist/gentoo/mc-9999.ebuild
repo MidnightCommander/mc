@@ -1,6 +1,6 @@
 # Copyright 1999-2009 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: Exp $
+# $Header: $
 
 EAPI=2
 inherit autotools flag-o-matic git
@@ -14,12 +14,11 @@ SLOT="0"
 
 KEYWORDS=""
 
-IUSE="-attrs +background +editor ext2undel -dnotify gpm +network nls samba +vfs X +slang +charset"
+IUSE="+background +editor ext2undel gpm +network nls samba +vfs X +slang +charset"
 
 RDEPEND=">=dev-libs/glib-2
 	ext2undel? ( sys-fs/e2fsprogs )
 	gpm? ( sys-libs/gpm )
-	samba? ( net-fs/samba )
 	slang? ( >=sys-libs/slang-2.1.3 )
 	!slang? ( sys-libs/ncurses )
 	X? ( x11-libs/libX11
@@ -32,11 +31,12 @@ DEPEND="${RDEPEND}
 	nls? ( sys-devel/gettext )
 	dev-util/pkgconfig"
 
+# needed only for SCM source tree (autopoint uses it)
+DEPEND="${DEPEND} dev-util/cvs"
+
 src_unpack() {
 	git_src_unpack
 	cd "${S}"
-	# TODO:
-	# eautoreconf ?
 	./autogen.sh
 }
 
@@ -48,17 +48,8 @@ src_configure() {
 	}
 
 	local myconf=""
+	# TODO: make sure we really need it (bundled samba?)
 	append-flags "-D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE"
-
-	use attrs && {
-		myconf+=" --enable-preserve-attrs"
-		ewarn "'Preserve Attributes' support is currently BROKEN. Use at your own risk."
-	}
-
-	use dnotify && {
-		myconf+=" --enable-dnotify"
-		ewarn "Support for dnotify is currently BROKEN. Use at your own risk."
-	}
 
 	if use samba; then
 		myconf+=" --with-samba --with-configdir=/etc/samba --with-codepagedir=/var/lib/samba/codepages"
@@ -72,9 +63,6 @@ src_configure() {
 	else
 		myconf+=" --with-screen=ncurses"
 	fi
-
-	# TODO: add it as local version in git master
-	#"$(git describe --tags)"
 
 	econf --disable-dependency-tracking \
 			$(use_enable background) \
@@ -99,6 +87,6 @@ src_install() {
 
 	# Install cons.saver setuid to actually work
 	# for more actual info see mc/src/cons.saver.c
-	fowners root:tty /usr/libexec/mc/cons.saver
+	fowners tty:tty /usr/libexec/mc/cons.saver
 	fperms u+s /usr/libexec/mc/cons.saver
 }
