@@ -1894,7 +1894,7 @@ listbox_draw (WListbox *l, gboolean focused)
 	} else
 	    tty_setcolor (normalc);
 
-	widget_move (&l->widget, i, 0);
+	widget_move (&l->widget, i, 1);
 
 	if ((i > 0 && e == l->list) || !l->list)
 	    text = "";
@@ -1906,7 +1906,7 @@ listbox_draw (WListbox *l, gboolean focused)
     }
     l->cursor_y = sel_line;
 
-    if (l->scrollbar) {
+    if (l->scrollbar && l->count > l->widget.lines) {
 	tty_setcolor (normalc);
 	listbox_drawscroll (l);
     }
