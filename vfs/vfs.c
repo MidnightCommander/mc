@@ -496,7 +496,7 @@ char *
 vfs_translate_path_n (const char *path) 
 {
     char *result;
-    
+
     result = vfs_translate_path (path);
     return (result != NULL) ? g_strdup (result) : NULL;
 }
@@ -506,7 +506,10 @@ vfs_canon_and_translate (const char *path)
 {
     char *canon;
     char *result;
-    canon = vfs_canon (path);
+    if (path == NULL)
+        canon = g_strdup ("");
+    else
+        canon = vfs_canon (path);
     result = vfs_translate_path_n (canon);
     g_free (canon);
     return result;
