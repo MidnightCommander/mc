@@ -1,1 +1,1 @@
-
+noinst_DATA = README

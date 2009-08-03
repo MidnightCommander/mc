@@ -1,0 +1,39 @@
+Hi! Currently bleeding-edge mc-9999.ebuild (git)
+hosts on repo.or.cz in overlay format:
+
+    git://repo.or.cz/slyfox-gentoo.git
+
+In order to use it you need to perform some steps:
+
+1. fetch overlay somewhere:
+  $ cd ~/portage/
+  $ git clone git://repo.or.cz/slyfox-gentoo.git
+
+2. add overlay to your PM:
+  * portage:
+      $ cat /etc/make.conf | grep PORTDIR_OVERLAY
+          PORTDIR_OVERLAY="/home/slyfox/portage/slyfox-gentoo"
+  * paludis:
+     $ cat /etc/paludis/repositories/slyfox-gentoo.conf
+           location = ${ROOT}/home/slyfox/portage/slyfox-gentoo
+           master_repository = gentoo
+           format = ebuild
+
+3. unmask unkeyworded ebuild:
+  * portage:
+      $ ACCEPT_KEYWORDS="~amd64 **" emerge -pv mc
+      or
+      $ cat /etc/portage/package.keywords | grep app-misc/mc
+          =app-misc/mc-9999 ~amd64 **
+  * paludis:
+      $ cat /etc/paludis/keywords.conf.d/mc.conf
+          =app-misc/mc-9999::slyfox-gentoo ~amd64 *
+
+4. install ebuild the way you usually do it
+
+5. update an overlay time to time:
+     $ cd ~/portage/slyfox-gentoo
+     $ git pull
+
+Bugs/feature requests/patches are welcome: http://midnight-commander.org/
+Have fun!
