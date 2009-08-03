@@ -6,9 +6,9 @@
 #
 # keyword/descNL, i.e. everything after keyword/ until new line is desc
 #
-# keyword can be: 
+# keyword can be:
 #
-#    shell (desc is, when starting with a dot, any extension (no wildcars), 
+#    shell (desc is, when starting with a dot, any extension (no wildcars),
 #          i.e. matches all the files *desc . Example: .tar matches *.tar;
 #          if it doesn't start with a dot, it matches only a file of that name)
 #
@@ -28,9 +28,9 @@
 #
 # Other lines should start with a space or tab and should be in the format:
 #
-# keyword=commandNL (with no spaces around =), where keyword should be: 
+# keyword=commandNL (with no spaces around =), where keyword should be:
 #
-#    Open (if the user presses Enter or doubleclicks it), 
+#    Open (if the user presses Enter or doubleclicks it),
 #
 #    View (F3), Edit (F4)
 #
@@ -41,7 +41,7 @@
 #
 # %% -> % character
 # %p -> name of the current file (without path, but pwd is its path)
-# %f -> name of the current file. Unlike %p, if file is located on a 
+# %f -> name of the current file. Unlike %p, if file is located on a
 #	non-local virtual filesystem, i.e. either tarfs, mcfs or ftpfs,
 #	then the file will be temporarily copied into a local directory
 #	and %f will be the full path to this local temporal file.
@@ -94,13 +94,13 @@
 #
 # Postscript	Open: ps2svga [gs -DEVICE=jpeg|zgv or something]
 # Images		asciiview
-# 
+#
 # All X Apps	[Nothing/Warning] if no DISPLAY
 # Not found	[Default/Warning]
 # Empty Output	[Default/Warning]
 # Edit:		CopyOut+EDIT+CopyIn
 # Security	Check gzip/bzip EDIT (mktemp)
-# 
+#
 # Maybe:	Open/XOpen/GOpen/KOpen/... for Console/X/GNOME/KDE/etc.
 
 
@@ -115,7 +115,7 @@ regex/\.tar\.bz$
 	# Open=%cd %p#utar
 	View=%view{ascii} bzip -dc %f 2>/dev/null | tar tvvf -
 
-regex/\.t(ar\.bz2|bz|b2)$
+regex/\.t(ar\.bz2|bz2?|b2)$
 	Open=%cd %p#utar
 	View=%view{ascii} bzip2 -dc %f 2>/dev/null | tar tvvf -
 
@@ -134,7 +134,7 @@ regex/\.tar\.F$
 	# Open=%cd %p#utar
 	View=%view{ascii} freeze -dc %f 2>/dev/null | tar tvvf -
 
-# .qpr/.qpk - QNX Neutrino package installer files 
+# .qpr/.qpk - QNX Neutrino package installer files
 regex/\.(qp[rk])$
 	Open=%cd %p#utar
 	View=%view{ascii} gzip -dc %f 2>/dev/null | tar tvvf -
@@ -257,7 +257,7 @@ shell/.c
 # Fortran
 shell/.f
 	Open=%var{EDITOR:vi} %f
-	
+
 # Header
 regex/\.(h|hpp)$
 	Open=%var{EDITOR:vi} %f
@@ -590,7 +590,7 @@ type/^([Zz][Ii][Pp])\ archive
 regex/\.([Zz][Oo][Oo])$
 	Open=%cd %p#uzoo
 	View=%view{ascii} zoo l %f
-	
+
 # gzip
 type/^gzip
 	Open=gzip -dc %f | %var{PAGER:more}
