@@ -1,14 +1,14 @@
 /* Routines invoked by a function key
    They normally operate on the current panel.
-   
+
    Copyright (C) 1994, 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004,
    2005, 2006, 2007, 2009 Free Software Foundation, Inc.
-   
+
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2 of the License, or
    (at your option) any later version.
-   
+
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -48,7 +48,7 @@
 #include "global.h"
 #include "cmd.h"		/* Our definitions */
 #include "fileopctx.h"
-#include "file.h"		/* file operation routines */ 
+#include "file.h"		/* file operation routines */
 #include "find.h"		/* do_find() */
 #include "hotlist.h"		/* hotlist_cmd() */
 #include "tree.h"		/* tree_chdir() */
@@ -75,6 +75,7 @@
 #include "history.h"
 #include "strutil.h"
 #include "../src/search/search.h"
+#include "dir.h"
 
 
 #ifndef MAP_FILE
@@ -456,7 +457,7 @@ set_panel_filter (WPanel *p)
     const char *x;
 
     x = p->filter ? p->filter : easy_patterns ? "*" : ".";
-	
+
     reg_exp = input_dialog_help (_(" Filter "),
 				 _(" Set expression for filtering filenames"),
 				 "[Filter...]", MC_HISTORY_FM_PANEL_FILTER, x);
@@ -486,7 +487,7 @@ void reread_cmd (void)
 	flag = strcmp (current_panel->cwd, other_panel->cwd) ? UP_ONLY_CURRENT : 0;
     else
 	flag = UP_ONLY_CURRENT;
-	
+
     update_panels (UP_RELOAD|flag, UP_KEEPSEL);
     repaint_screen ();
 }
@@ -615,7 +616,7 @@ edit_mc_menu_cmd (void)
 
     dir = query_dialog (
 	_(" Menu edit "),
-	_(" Which menu file do you want to edit? "), 
+	_(" Which menu file do you want to edit? "),
 	D_NORMAL, geteuid() ? 2 : 3,
 	_("&Local"), _("&User"), _("&System Wide")
     );
@@ -638,7 +639,7 @@ edit_mc_menu_cmd (void)
 	    buffer = concat_dir_and_file (home_dir, MC_HOME_MENU);
 	    check_for_default (menufile, buffer);
 	    break;
-	
+
 	case 2:
 	    buffer = concat_dir_and_file (mc_home, MC_GLOBAL_MENU);
 	    if (!exist_file(buffer)) {
@@ -747,7 +748,7 @@ compare_dir (WPanel *panel, WPanel *other, enum CompareMode mode)
     panel->marked = 0;
     panel->total = 0;
     panel->dirs_marked = 0;
-    
+
     /* Handle all files in the panel */
     for (i = 0; i < panel->count; i++){
 	file_entry *source = &panel->dir.list[i];
@@ -777,16 +778,16 @@ compare_dir (WPanel *panel, WPanel *other, enum CompareMode mode)
 		if (source->st.st_mtime < target->st.st_mtime)
 		    continue;
 	    }
-	    
+
 	    /* Newer version with different size is marked */
 	    if (source->st.st_size != target->st.st_size){
 		do_file_mark (panel, i, 1);
 		continue;
-		
+
 	    }
 	    if (mode == compare_size_only)
 		continue;
-	    
+
 	    if (mode == compare_quick){
 		/* Thorough compare off, compare only time stamps */
 		/* Mark newer version, don't mark version with the same date */
@@ -1080,14 +1081,14 @@ nice_cd (const char *text, const char *xtext, const char *help,
     if (!machine)
 	return;
 
-    to_home = 0;	/* FIXME: how to solve going to home nicely? /~/ is 
+    to_home = 0;	/* FIXME: how to solve going to home nicely? /~/ is
 			   ugly as hell and leads to problems in vfs layer */
 
     if (strncmp (prefix, machine, strlen (prefix)) == 0)
 	cd_path = g_strconcat (machine, to_home ? "/~/" : (char *) NULL, (char *) NULL);
-    else 
+    else
 	cd_path = g_strconcat (prefix, machine, to_home ? "/~/" : (char *) NULL, (char *) NULL);
-    
+
     if (do_panel_cd (MENU_PANEL, cd_path, 0))
 	directory_history_add (MENU_PANEL, (MENU_PANEL)->cwd);
     else
@@ -1151,11 +1152,35 @@ void quick_cd_cmd (void)
 
     if (p && *p) {
         char *q = g_strconcat ("cd ", p, (char *) NULL);
-        
+
         do_cd_command (q);
         g_free (q);
     }
     g_free (p);
+}
+
+
+/*!
+  \brief calculate dirs sizes
+
+  calculate dirs sizes and resort panel:
+    dirs_selected = show size for selected dirs,
+    otherwise = show size for dir under cursor:
+      dir under cursor ".." = show size for all dirs,
+      otherwise = show size for dir under cursor
+*/
+void
+smart_dirsize_cmd (void)
+{
+    WPanel *panel = current_panel;
+    file_entry *entry;
+
+    entry = &(panel->dir.list[panel->selected]);
+    if ( ( S_ISDIR (entry->st.st_mode) && ( strcmp(entry->fname, "..") == 0 ) )
+	|| panel->dirs_marked )
+	 dirsizes_cmd ();
+    else
+	 single_dirsize_cmd ();
 }
 
 void
@@ -1186,6 +1211,10 @@ single_dirsize_cmd (void)
 	send_message (&(panel->widget), WIDGET_KEY, KEY_DOWN);
 
     recalculate_panel_summary (panel);
+
+    if ( current_panel->sort_type == (sortfn *) sort_size )
+	panel_re_sort (panel);
+
     panel->dirty = 1;
 }
 
@@ -1200,7 +1229,7 @@ dirsizes_cmd (void)
 
     ui = compute_dir_size_create_ui ();
 
-    for (i = 0; i < panel->count; i++) 
+    for (i = 0; i < panel->count; i++)
 	if (S_ISDIR (panel->dir.list [i].st.st_mode)
 	    && ((panel->dirs_marked && panel->dir.list [i].f.marked)
 		|| !panel->dirs_marked)
@@ -1219,7 +1248,10 @@ dirsizes_cmd (void)
     compute_dir_size_destroy_ui (ui);
 
     recalculate_panel_summary (panel);
-    panel_re_sort (panel);
+
+    if ( current_panel->sort_type == (sortfn *) sort_size )
+	panel_re_sort (panel);
+
     panel->dirty = 1;
 }
 
@@ -1233,16 +1265,16 @@ save_setup_cmd (void)
 static void
 configure_panel_listing (WPanel *p, int view_type, int use_msformat, char *user, char *status)
 {
-    p->user_mini_status = use_msformat; 
+    p->user_mini_status = use_msformat;
     p->list_type = view_type;
-    
+
     if (view_type == list_user || use_msformat){
 	g_free (p->user_format);
 	p->user_format = user;
-    
+
 	g_free (p->user_status_format [view_type]);
 	p->user_status_format [view_type] = status;
-    
+
 	set_panel_formats (p);
     }
     else {
@@ -1339,7 +1371,7 @@ set_basic_panel_listing_to (int panel_index, int listing_mode)
     p->list_type = listing_mode;
     if (set_panel_formats (p))
 	return 0;
-	
+
     do_refresh ();
     return 1;
 }

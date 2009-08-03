@@ -1,16 +1,16 @@
 /* Main program for the Midnight Commander
    Copyright (C) 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002,
    2003, 2004, 2005, 2006, 2007, 2009 Free Software Foundation, Inc.
-   
+
    Written by: 1994, 1995, 1996, 1997 Miguel de Icaza
                1994, 1995 Janne Kukonlehto
 	       1997 Norbert Warmuth
-   
+
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2 of the License, or
    (at your option) any later version.
-   
+
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -137,7 +137,7 @@ int mark_moves_down = 1;
 /* If true, at startup the user-menu is invoked */
 int auto_menu = 0;
 
-/* If true, use + and \ keys normally and select/unselect do if M-+ / M-\ 
+/* If true, use + and \ keys normally and select/unselect do if M-+ / M-\
    and M-- and keypad + / - */
 int alternate_plus_minus = 0;
 
@@ -185,8 +185,8 @@ int navigate_with_arrows = 0;
 /* If true use +, -, | for line drawing */
 int force_ugly_line_drawing = 0;
 
-/* If true program softkeys (HP terminals only) on startup and after every 
-   command ran in the subshell to the description found in the termcap/terminfo 
+/* If true program softkeys (HP terminals only) on startup and after every
+   command ran in the subshell to the description found in the termcap/terminfo
    database */
 int reset_hp_softkeys = 0;
 
@@ -741,7 +741,7 @@ load_prompt (int fd, void *unused)
 	winput_set_origin ((WInput *) cmdline, prompt_len,
 			   COLS - prompt_len);
 
-	/* since the prompt has changed, and we are called from one of the 
+	/* since the prompt has changed, and we are called from one of the
 	 * get_event channels, the prompt updating does not take place
 	 * automatically: force a cursor update and a screen refresh
 	 */
@@ -1303,7 +1303,7 @@ static const key_map default_map[] = {
     {KEY_F (19), menu_last_selected_cmd},
     {KEY_F (20), quiet_quit_cmd},
 
-    {XCTRL ('@'), single_dirsize_cmd},
+    {XCTRL ('@'), smart_dirsize_cmd},
 
     /* Copy useful information to the command line */
     {ALT ('a'), copy_current_pathname},
@@ -1541,7 +1541,7 @@ done_mc (void)
      * We sync the profiles since the hotlist may have changed, while
      * we only change the setup data if we have the auto save feature set
      */
-    
+
     if (auto_save_setup)
 	save_setup ();		/* does also call save_hotlist */
     else {
@@ -1642,7 +1642,7 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 		    return MSG_HANDLED;
 		}
 	    } else if (!command_prompt || !cmdline->buffer[0]) {
-		/* Special treatement '+', '-', '\', '*' only when this is 
+		/* Special treatement '+', '-', '\', '*' only when this is
 		 * first char on input line
 		 */
 
