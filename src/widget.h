@@ -150,8 +150,6 @@ struct WListbox {
     WLEntry *current;		/* The current element displayed */
     int pos;			/* Cur. pos, must be kept in sync with current */
     int count;			/* Number of items in the listbox */
-    int width;
-    int height;			/* Size of the widget */
     int allow_duplicates;	/* Do we allow duplicates on the list? */
     int scrollbar;		/* Draw a scrollbar? */
     lcback cback;		/* The callback function */

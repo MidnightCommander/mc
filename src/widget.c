@@ -1842,33 +1842,31 @@ static int listbox_cdiff (WLEntry *s, WLEntry *e);
 static void
 listbox_drawscroll (WListbox *l)
 {
-    int line;
+    int line = 0;
     int i, top;
-    int max_line = l->height-1;
+    int max_line = l->widget.lines - 1;
 
     /* Are we at the top? */
-    widget_move (&l->widget, 0, l->width);
+    widget_move (&l->widget, 0, l->widget.cols);
     if (l->list == l->top)
 	tty_print_one_vline ();
     else
 	tty_print_char ('^');
 
     /* Are we at the bottom? */
-    widget_move (&l->widget, max_line, l->width);
+    widget_move (&l->widget, max_line, l->widget.cols);
     top = listbox_cdiff (l->list, l->top);
-    if ((top + l->height == l->count) || l->height >= l->count)
+    if ((top + l->widget.lines == l->count) || l->widget.lines >= l->count)
 	tty_print_one_vline ();
     else
 	tty_print_char ('v');
 
     /* Now draw the nice relative pointer */
-    if (l->count)
-	line = 1+ ((l->pos * (l->height-2)) / l->count);
-    else
-	line = 0;
+    if (l->count != 0)
+	line = 1+ ((l->pos * (l->widget.lines - 2)) / l->count);
 
     for (i = 1; i < max_line; i++){
-	widget_move (&l->widget, i, l->width);
+	widget_move (&l->widget, i, l->widget.cols);
 	if (i != line)
 	    tty_print_one_vline ();
 	else
@@ -1888,7 +1886,7 @@ listbox_draw (WListbox *l, gboolean focused)
     int sel_line = -1;
     const char *text; 
 
-    for (e = l->top, i = 0; (i < l->height); i++) {
+    for (e = l->top, i = 0; i < l->widget.lines; i++) {
 	/* Display the entry */
 	if (e == l->current && sel_line == -1) {
 	    sel_line = i;
@@ -1904,7 +1902,7 @@ listbox_draw (WListbox *l, gboolean focused)
 	    text = e->text;
 	    e = e->next;
 	}
-	tty_print_string (str_fit_to_term (text, l->width - 2, J_LEFT_FIT));
+	tty_print_string (str_fit_to_term (text, l->widget.cols - 2, J_LEFT_FIT));
     }
     l->cursor_y = sel_line;
 
@@ -2047,7 +2045,7 @@ listbox_select_entry (WListbox *l, WLEntry *dest)
 	if (e == dest){
 	    l->current = e;
 	    if (top_seen){
-		while (listbox_cdiff (l->top, l->current) >= l->height)
+		while (listbox_cdiff (l->top, l->current) >= l->widget.lines)
 		    l->top = l->top->next;
 	    } else {
 		l->top = l->current;
@@ -2232,13 +2230,13 @@ listbox_event (Gpm_Event *event, void *data)
     if (!l->list)
 	return MOU_NORMAL;
     if (event->type & (GPM_DOWN | GPM_DRAG)) {
-	if (event->x < 0 || event->x >= l->width)
+	if (event->x < 0 || event->x >= l->widget.cols)
 	    return MOU_REPEAT;
 	if (event->y < 1)
 	    for (i = -event->y; i >= 0; i--)
 		listbox_back (l);
-	else if (event->y > l->height)
-	    for (i = event->y - l->height; i > 0; i--)
+	else if (event->y > l->widget.lines)
+	    for (i = event->y - l->widget.lines; i > 0; i--)
 		listbox_fwd (l);
 	else
 	    listbox_select_entry (l,
@@ -2256,9 +2254,8 @@ listbox_event (Gpm_Event *event, void *data)
     if ((event->type & (GPM_DOUBLE | GPM_UP)) == (GPM_UP | GPM_DOUBLE)) {
 	int action;
 
-	if (event->x < 0 || event->x >= l->width)
-	    return MOU_NORMAL;
-	if (event->y < 1 || event->y > l->height)
+	if (event->x < 0 || event->x >= l->widget.cols
+	    || event->y < 1 || event->y > l->widget.lines)
 	    return MOU_NORMAL;
 
 	dlg_select_widget (l);
@@ -2285,16 +2282,14 @@ listbox_new (int y, int x, int height, int width, lcback callback)
 {
     WListbox *l = g_new (WListbox, 1);
 
+    if (height <= 0)
+	height = 1;
+
     init_widget (&l->widget, y, x, height, width,
 		 listbox_callback, listbox_event);
 
     l->list = l->top = l->current = 0;
     l->pos = 0;
-    l->width = width;
-    if (height <= 0)
-	l->height = 1;
-    else
-	l->height = height;
     l->count = 0;
     l->cback = callback;
     l->allow_duplicates = 1;
