@@ -305,6 +305,9 @@ mc_search_prepare_replace_str (mc_search_t * mc_search, GString * replace_str)
     if (mc_search == NULL)
         return g_string_new_len (replace_str->str, replace_str->len);
 
+    if (replace_str == NULL || replace_str->str == NULL || replace_str->len == 0)
+        return g_string_new ("");
+
     switch (mc_search->search_type) {
     case MC_SEARCH_T_REGEX:
         ret = mc_search_regex_prepare_replace_str (mc_search, replace_str);
