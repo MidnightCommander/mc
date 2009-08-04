@@ -39,6 +39,7 @@
 #include "../src/key.h"
 #include "../src/main.h"
 #include "../src/search/search.h"
+#include "../src/history.h"
 
 #include "../edit/etags.h"
 #include "editcmd_dialogs.h"
@@ -91,6 +92,8 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
 
     int REPLACE_DLG_HEIGHT = REPLACE_DLG_MIN_HEIGHT + g_strv_length (list_of_types) - REPLACE_DLG_HEIGHT_SUPPLY;
 
+    if (!*search_default)
+        search_default = INPUT_LAST_TEXT;
 
     QuickWidget quick_widgets[] = {
 
@@ -119,14 +122,14 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
          0, 0, 0, 0, 0, NULL, NULL},
 
         {quick_input, 3, REPLACE_DLG_WIDTH, 5, REPLACE_DLG_HEIGHT, replace_default, 52, 0,
-         0, replace_text, "edit-replace", NULL, NULL},
+         0, replace_text, "replace", NULL, NULL},
 
 
         {quick_label, 2, REPLACE_DLG_WIDTH, 2, REPLACE_DLG_HEIGHT, N_(" Enter search string:"), 0,
          0, 0, 0, 0, NULL, NULL},
 
         {quick_input, 3, REPLACE_DLG_WIDTH, 3, REPLACE_DLG_HEIGHT, search_default, 52, 0,
-         0, search_text, "edit-search", NULL, NULL},
+         0, search_text, MC_HISTORY_SHARED_SEARCH, NULL, NULL},
 
 
         NULL_QuickWidget
@@ -173,6 +176,8 @@ editcmd_dialog_search_show (WEdit * edit, char **search_text)
     gchar **list_of_types = mc_search_get_types_strings_array();
     int SEARCH_DLG_HEIGHT = SEARCH_DLG_MIN_HEIGHT + g_strv_length (list_of_types) - SEARCH_DLG_HEIGHT_SUPPLY;
 
+    if (!*search_text)
+        *search_text = INPUT_LAST_TEXT;
 
     QuickWidget quick_widgets[] = {
         {quick_button, 6, 10, 9, SEARCH_DLG_HEIGHT, N_("&Cancel"), 0, B_CANCEL, 0,
@@ -195,7 +200,7 @@ editcmd_dialog_search_show (WEdit * edit, char **search_text)
          (void *) &ttype_of_search, const_cast (char **, list_of_types), NULL, NULL, NULL},
 
         {quick_input, 3, SEARCH_DLG_WIDTH, 3, SEARCH_DLG_HEIGHT, *search_text, 52, 0, 0,
-         search_text, "edit-search", NULL, NULL},
+         search_text, MC_HISTORY_SHARED_SEARCH, NULL, NULL},
         {quick_label, 2, SEARCH_DLG_WIDTH, 2, SEARCH_DLG_HEIGHT, N_(" Enter search string:"), 0, 0,
          0, 0, 0, NULL, NULL},
 

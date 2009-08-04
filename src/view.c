@@ -65,7 +65,7 @@
 #include "execute.h"
 #include "main.h"		/* slow_terminal */
 #include "view.h"
-#include "history.h"
+#include "history.h"		/* MC_HISTORY_SHARED_SEARCH */
 #include "charsets.h"
 #include "selcodepage.h"
 #include "strutil.h"
@@ -3297,7 +3297,7 @@ view_search_cmd (WView *view)
 
 
 	{quick_input, 3, SEARCH_DLG_WIDTH, 3, SEARCH_DLG_HEIGHT, defval, 52, 0,
-	 0, &exp, N_("Search"), NULL, NULL},
+	 0, &exp, MC_HISTORY_SHARED_SEARCH, NULL, NULL},
 
 	{quick_label, 2, SEARCH_DLG_WIDTH, 2, SEARCH_DLG_HEIGHT,
 	 N_(" Enter search string:"), 0, 0,  0, 0, 0, NULL, NULL},

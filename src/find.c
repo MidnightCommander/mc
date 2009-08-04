@@ -49,6 +49,7 @@
 #include "boxes.h"
 #include "key.h"
 #include "../src/search/search.h"
+#include "history.h"		/* MC_HISTORY_SHARED_SEARCH */
 
 /* Size of the find parameters window */
 #if HAVE_CHARSET
@@ -359,18 +360,21 @@ find_parameters (char **start_dir, char **pattern, char **content)
     file_case_sens_cbox = check_new (7, 3, file_case_sens_flag, file_case_label);
     add_widget (find_dlg, file_case_sens_cbox);
 
-    in_with = input_new (6, FIND_X / 2 + 1, INPUT_COLOR, FIND_X / 2 - 4, in_contents, "content", INPUT_COMPLETE_DEFAULT);
+    in_with = input_new (6, FIND_X / 2 + 1, INPUT_COLOR, FIND_X / 2 - 4, in_contents,
+                         MC_HISTORY_SHARED_SEARCH, INPUT_COMPLETE_DEFAULT);
     add_widget (find_dlg, in_with);
     add_widget (find_dlg, label_new (5, FIND_X / 2 + 1, _("Content:")));
 
-    in_name = input_new (6, 3, INPUT_COLOR, FIND_X / 2 - 4, in_start_name, "name", INPUT_COMPLETE_DEFAULT);
+    in_name = input_new (6, 3, INPUT_COLOR, FIND_X / 2 - 4, in_start_name, "name",
+                         INPUT_COMPLETE_DEFAULT);
     add_widget (find_dlg, in_name);
     add_widget (find_dlg, label_new (5, 3, _("File name:")));
 
     add_widget (find_dlg,
 		button_new (3, FIND_X - b2 - 2, B_TREE, NORMAL_BUTTON, buts[2], 0));
 
-    in_start = input_new (3, 3, INPUT_COLOR, FIND_X - b2 - 6, in_start_dir, "start", INPUT_COMPLETE_DEFAULT);
+    in_start = input_new (3, 3, INPUT_COLOR, FIND_X - b2 - 6, in_start_dir, "start",
+                          INPUT_COMPLETE_DEFAULT);
     add_widget (find_dlg, in_start);
     add_widget (find_dlg, label_new (2, 3, _("Start at:")));
 

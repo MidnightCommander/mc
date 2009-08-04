@@ -1389,18 +1389,15 @@ edit_replace_cmd (WEdit *edit, int again)
 	g_free (saved1), saved1 = g_strdup (input1);
 	g_free (saved2), saved2 = g_strdup (input2);
 
-	if (edit->search)
-	{
+	if (edit->search) {
 	    mc_search_free(edit->search);
 	    edit->search = NULL;
 	}
     }
 
-    if (!edit->search)
-    {
+    if (!edit->search) {
 	edit->search = mc_search_new(input1, -1);
-	if (edit->search == NULL)
-	{
+	if (edit->search == NULL) {
 	    edit->search_start = edit->curs1;
 	    return;
 	}
@@ -1422,10 +1419,9 @@ edit_replace_cmd (WEdit *edit, int again)
 	gsize len = 0;
 	long new_start;
 	
-	if (! editcmd_find(edit, &len))
-	{
-	    if (!(edit->search->error == MC_SEARCH_E_OK || (once_found && edit->search->error == MC_SEARCH_E_NOTFOUND)))
-	    {
+	if (! editcmd_find(edit, &len)) {
+	    if (!(edit->search->error == MC_SEARCH_E_OK ||
+	       (once_found && edit->search->error == MC_SEARCH_E_NOTFOUND))) {
 		edit_error_dialog (_ ("Search"), edit->search->error_str);
 	    }
 	    break;
@@ -1543,15 +1539,25 @@ void edit_search_cmd (WEdit * edit, int again)
     if (!edit)
 	return;
 
-    if (edit->search != NULL)
-	search_string_dup = search_string = g_strndup(edit->search->original, edit->search->original_len);
+    if (edit->search != NULL) {
+	search_string = g_strndup(edit->search->original, edit->search->original_len);
+	search_string_dup = search_string;
+    } else {
+        GList *history;
+        history = history_get (MC_HISTORY_SHARED_SEARCH);
+        if (history != NULL && history->data != NULL) {
+            search_string_dup = search_string = (char *) g_strdup(history->data);
+            history = g_list_first (history);
+            g_list_foreach (history, (GFunc) g_free, NULL);
+            g_list_free (history);
+        }
+        edit->search_start = edit->curs1;
+    }
 
-    if (!again)
-    {
+    if (!again) {
 #ifdef HAVE_CHARSET
 	GString *tmp;
-	if (search_string && *search_string)
-	{
+	if (search_string && *search_string) {
 	    tmp = str_convert_to_display (search_string);
 
 	    g_free(search_string_dup);
@@ -1564,8 +1570,7 @@ void edit_search_cmd (WEdit * edit, int again)
 #endif /* HAVE_CHARSET */
 	editcmd_dialog_search_show (edit, &search_string);
 #ifdef HAVE_CHARSET
-	if (search_string && *search_string)
-	{
+	if (search_string && *search_string) {
 	    tmp = str_convert_to_input (search_string);
 	    if (tmp && tmp->len)
 		search_string = tmp->str;
@@ -1579,25 +1584,21 @@ void edit_search_cmd (WEdit * edit, int again)
 
 	edit_push_action (edit, KEY_PRESS + edit->start_display);
 
-	if (!search_string)
-	{
+	if (!search_string) {
 	    edit->force |= REDRAW_COMPLETELY;
 	    edit_scroll_screen_over_cursor (edit);
 	    return;
 	}
 
-	if (edit->search)
-	{
+	if (edit->search) {
 	    mc_search_free(edit->search);
 	    edit->search = NULL;
 	}
     }
 
-    if (!edit->search)
-    {
+    if (!edit->search) {
 	edit->search = mc_search_new(search_string, -1);
-	if (edit->search == NULL)
-	{
+	if (edit->search == NULL) {
 	    edit->search_start = edit->curs1;
 	    return;
 	}
@@ -1607,12 +1608,9 @@ void edit_search_cmd (WEdit * edit, int again)
 	edit->search->search_fn = edit_search_cmd_callback;
     }
 
-    if (search_create_bookmark)
-    {
+    if (search_create_bookmark) {
 	edit_search_cmd_search_create_bookmark(edit);
-    }
-    else
-    {
+    } else {
 	if (edit->found_len && edit->search_start == edit->found_start + 1 && edit->replace_backwards)
 	    edit->search_start--;
 
@@ -1620,8 +1618,7 @@ void edit_search_cmd (WEdit * edit, int again)
 	    edit->search_start++;
 
 	
-	if (editcmd_find(edit, &len))
-	{
+	if (editcmd_find(edit, &len)) {
 	    edit->found_start = edit->search_start = edit->search->normal_offset;
 	    edit->found_len = len;
 
@@ -1631,9 +1628,7 @@ void edit_search_cmd (WEdit * edit, int again)
 		edit->search_start--;
 	    else
 		edit->search_start++;
-	}
-	else
-	{
+	} else {
 	    edit->search_start = edit->curs1;
 	    if (edit->search->error_str)
 		edit_error_dialog (_ ("Search"), edit->search->error_str);

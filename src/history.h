@@ -38,4 +38,6 @@
 
 #define MC_HISTORY_HOTLIST_ADD		"mc.hotlist.add"
 
+#define MC_HISTORY_SHARED_SEARCH	"mc.shared.search"
+
 #endif
