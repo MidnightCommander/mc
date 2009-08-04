@@ -57,7 +57,6 @@
 #include <ctype.h>
 
 #include "../src/global.h"
-#include "../src/tty.h"		/* enable/disable interrupt key */
 #include "../src/wtools.h"	/* message() */
 #include "../src/main.h"	/* print_vfs_message */
 #include "utilvfs.h"
@@ -122,11 +121,11 @@ undelfs_get_path (const char *dirname, char **fsname, char **file)
                                                     -- pavel@ucw.cz */
 
     *fsname = NULL;
-    
+
     if (strncmp (dirname, "/#undel:", 8))
 	return;
-    else
-	dirname += 8;
+
+    dirname += 8;
 
     /* Since we don't allow subdirectories, it's easy to get a filename,
      * just scan backwards for a slash */

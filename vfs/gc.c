@@ -44,8 +44,6 @@
 
 #include "../src/global.h"
 
-#include "../src/tty/tty.h"	/* enable/disable interrupt key */
-
 #include "../src/wtools.h"	/* message() */
 #include "../src/main.h"	/* print_vfs_message */
 #include "../src/panel.h"	/* get_current_panel() */
