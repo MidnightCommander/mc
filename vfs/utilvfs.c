@@ -124,7 +124,21 @@ vfs_split_url (const char *path, char **host, char **user, int *port,
     }
 
     /* Check if the host comes with a port spec, if so, chop it */
-    colon = strchr (rest, ':');
+    if ('[' == *rest) {
+	colon = strchr (++rest, ']');
+	if (colon) {
+	    colon[0] = '\0';
+	    colon[1] = '\0';
+	    colon++;
+	} else {
+	    g_free (pcopy);
+	    *host = NULL;
+	    *port = 0;
+	    return NULL;
+	}
+    } else
+	colon = strchr (rest, ':');
+
     if (colon) {
 	*colon = 0;
 	if (sscanf (colon + 1, "%d", port) == 1) {

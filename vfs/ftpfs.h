@@ -21,6 +21,9 @@ extern int ftpfs_first_cd_then_ls;
 void ftpfs_init_passwd (void);
 void init_ftpfs (void);
 
+#define FTP_INET  1
+#define FTP_INET6 2
+
 #define OPT_FLUSH        1
 #define OPT_IGNORE_ERROR 2
 
