@@ -154,8 +154,8 @@ AC_CHECK_MEMBERS([struct stat.st_blksize, struct stat.st_rdev])
 AC_STRUCT_ST_BLOCKS
 
 dnl
-dnl Check availability of some functions 
-dnl 
+dnl Check availability of some functions
+dnl
 
 AC_CHECK_FUNCS([\
 	atoll \
@@ -198,7 +198,7 @@ AC_GET_FS_INFO
 
 dnl
 dnl Missing typedefs and replacements
-dnl 
+dnl
 
 AC_CHECK_SIZEOF(long)
 AC_CHECK_SIZEOF(long long)
@@ -310,7 +310,7 @@ dnl
 dnl Check for gpm mouse support (Linux only)
 dnl
 mouse_lib="xterm only"
-AC_ARG_WITH(gpm-mouse, 
+AC_ARG_WITH(gpm-mouse,
 	[  --with-gpm-mouse         Compile with gpm mouse support (Linux only)
                            [[yes if found]]])
 
@@ -419,7 +419,7 @@ AC_ARG_WITH(subshell,
 		result="optional"
 	fi
 	if test x$withval = xyes
-        then 
+        then
 		result="yes"
 	fi],
 	[dnl Default: enable the subshell support
@@ -535,7 +535,7 @@ fi
 AM_CONDITIONAL(USE_EDIT, [test -n "$use_edit"])
 AM_CONDITIONAL(USE_VFS, [test "x$use_vfs" = xyes])
 AM_CONDITIONAL(USE_VFS_NET, [test x"$use_net_code" = xtrue])
-AM_CONDITIONAL(USE_UNDEL_FS, [test -n "$use_undelfs"])
+AM_CONDITIONAL(USE_UNDEL_FS, [test -n "$enable_vfs_undelfs"])
 AM_CONDITIONAL(USE_SAMBA_FS, [test -n "$use_smbfs"])
 AM_CONDITIONAL(ENABLE_MCSERVER, [test x"$enable_mcserver" = "xyes"])
 AM_CONDITIONAL(CHARSET, [test -n "$have_charset"])
@@ -561,7 +561,7 @@ src/Makefile
 src/mcconfig/Makefile
 src/search/Makefile
 
-edit/Makefile 
+edit/Makefile
 syntax/Makefile
 
 vfs/Makefile
@@ -586,12 +586,12 @@ vfs/extfs/uarc
 vfs/extfs/uarj
 vfs/extfs/uc1541
 vfs/extfs/uha
-vfs/extfs/ulha 
+vfs/extfs/ulha
 vfs/extfs/urar
 vfs/extfs/uzip
 vfs/extfs/uzoo
 
-doc/Makefile 
+doc/Makefile
 doc/hints/Makefile
 doc/man/mc.1 doc/man/mcedit.1 doc/man/mcview.1 doc/man/mcserv.8 doc/man/Makefile
 doc/man/es/mc.1 doc/man/es/Makefile
