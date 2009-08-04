@@ -163,7 +163,25 @@ int my_system (int flags, const char *shell, const char *command)
 	if (flags & EXECUTE_AS_SHELL)
 	    execl (shell, shell, "-c", command, (char *) NULL);
 	else
-	    execlp (shell, shell, command, (char *) NULL);
+	{
+	    gchar **shell_tokens, *only_cmd;
+	    shell_tokens = g_strsplit(shell," ", 2);
+
+	    if (shell_tokens == NULL)
+	        only_cmd = shell;
+	    else
+	        only_cmd = (*shell_tokens) ? *shell_tokens: shell;
+
+	    execlp (only_cmd, shell, command, (char *) NULL);
+
+	    /*
+	      execlp will replace current process,
+	      therefore no sence in call of g_strfreev().
+	      But this keeped for estetic reason :)
+	    */
+	    g_strfreev(shell_tokens);
+
+	}
 
 	_exit (127);		/* Exec error */
     } else {
