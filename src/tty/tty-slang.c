@@ -296,6 +296,8 @@ tty_init (gboolean slow, gboolean ugly_lines)
     load_terminfo_keys ();
     SLtt_Blink_Mode = 0;
 
+    tty_start_interrupt_key ();
+
     /* It's the small part from the previous init_key() */
     init_key_input_fd ();
 

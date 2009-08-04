@@ -106,6 +106,8 @@ tty_init (gboolean slow, gboolean ugly_lines)
     ESCDELAY = 200;
 #endif /* HAVE_ESCDELAY */
 
+    tty_start_interrupt_key ();
+
     do_enter_ca_mode ();
     raw ();
     noecho ();

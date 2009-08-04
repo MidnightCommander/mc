@@ -1955,7 +1955,7 @@ listbox_select_last (WListbox *l)
 {
     unsigned int i;
     l->current = l->top = l->list->prev;
-    for (i = min (l->height - 1, l->count - 1); i; i--)
+    for (i = min (l->widget.lines, l->count) - 1; i; i--)
         l->top = l->top->prev;
     l->pos = l->count - 1;
 }
@@ -2120,7 +2120,7 @@ listbox_key (WListbox *l, int key)
 
     case KEY_NPAGE:
     case XCTRL('v'):
-	for (i = 0; ((i < l->height - 1)
+	for (i = 0; ((i < l->widget.lines - 1)
 		    && (l->current != l->list->prev)); i++) {
 	    listbox_fwd (l);
 	    j = MSG_HANDLED;
@@ -2129,7 +2129,7 @@ listbox_key (WListbox *l, int key)
 
     case KEY_PPAGE:
     case ALT('v'):
-	for (i = 0; ((i < l->height - 1)
+	for (i = 0; ((i < l->widget.lines - 1)
 		    && (l->current != l->list)); i++) {
 	    listbox_back (l);
 	    j = MSG_HANDLED;
