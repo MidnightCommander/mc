@@ -43,7 +43,6 @@
 #include "widget.h"
 #include "../src/mcconfig/mcconfig.h"	/* Save profile */
 #include "setup.h"
-#include "main.h"			/* alternate_plus_minus */
 #include "layout.h"			/* repaint_screen() */
 #include "learn.h"
 #include "wtools.h"

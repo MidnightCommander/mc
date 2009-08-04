@@ -64,7 +64,6 @@ extern int confirm_overwrite;
 extern int boot_current_is_left;
 extern int use_file_to_check_type;
 extern int vfs_use_limit;
-extern int alternate_plus_minus;
 extern int only_leading_plus_minus;
 extern int output_starts_shell;
 extern int midnight_shutdown;

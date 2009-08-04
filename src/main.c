@@ -139,10 +139,6 @@ int mark_moves_down = 1;
 /* If true, at startup the user-menu is invoked */
 int auto_menu = 0;
 
-/* If true, use + and \ keys normally and select/unselect do if M-+ / M-\
-   and M-- and keypad + / - */
-int alternate_plus_minus = 0;
-
 /* If true, then the +, - and \ keys have their special meaning only if the
  * command line is emtpy, otherwise they behave like regular letters
  */

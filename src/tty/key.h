@@ -52,6 +52,7 @@ int tty_getch (void);
 #define KEY_M_CTRL  0x4000
 #define KEY_M_MASK  0x7000
 
+extern int alternate_plus_minus;
 extern int double_click_speed;
 extern int old_esc_mode;
 extern int use_8th_bit_as_meta;

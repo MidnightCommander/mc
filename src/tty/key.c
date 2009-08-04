@@ -80,6 +80,10 @@
 
 /*** global variables **************************************************/
 
+/* If true, use + and \ keys normally and select/unselect do if M-+ / M-\.
+   and M-- and keypad + / - */
+int alternate_plus_minus = 0;
+
 int mou_auto_repeat = 100;
 int double_click_speed = 250;
 int old_esc_mode = 0;
