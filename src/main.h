@@ -12,12 +12,6 @@ void toggle_mix_all_files (void);
 void toggle_show_backup (void);
 void toggle_show_hidden (void);
 
-#define UP_OPTIMIZE 0
-#define UP_RELOAD   1
-#define UP_ONLY_CURRENT  2
-
-#define UP_KEEPSEL ((char *) -1)
-
 extern int quote;
 extern volatile int quit;
 
@@ -85,7 +79,6 @@ typedef struct {
     key_callback fn;
 } key_map;
 
-void update_panels (int force_update, const char *current_file);
 void do_update_prompt (void);
 
 enum cd_enum {

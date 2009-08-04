@@ -37,6 +37,7 @@
 #include "layout.h"
 #include "dialog.h"
 #include "wtools.h"
+#include "panel.h"		/* update_panels() */
 #include "execute.h"
 #include "../vfs/vfs.h"
 
