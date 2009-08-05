@@ -45,8 +45,8 @@ mcu7zip_rm ()
 	#first we check if we have old p7zip archive with prefix ./ in filename
 	$P7ZIP l "$1" "$2" | grep -q "0 files" && \
 	EXFNAME=*./"$2" || EXFNAME="$2"
-	$P7ZIP d "$1" "$EXFNAME" 2>&1 | grep -q E_NOTIMPL &> /dev/null && \
-	{ echo -e "Function not implemented...\n7z cannot delete from solid archive." >&2 ; exit 1 ; }
+	$P7ZIP d "$1" "$EXFNAME" 2>&1 | grep -q E_NOTIMPL > /dev/null 2>&1 && \
+	{ printf "Function not implemented...\n7z cannot delete from solid archive." >&2 ; exit 1 ; }
 }
 
 mcu7zip_rmdir ()
@@ -54,8 +54,8 @@ mcu7zip_rmdir ()
 	#first we check if we have old p7zip archive with prefix ./ in filename
 	$P7ZIP l "$1" "$2" | grep -q "0 files" && \
 	EXFNAME=*./"$2" || EXFNAME="$2"
-	$P7ZIP d "$1" "$EXFNAME"/ 2>&1 | grep -q E_NOTIMPL &> /dev/null && \
-	{ echo -e "Function not implemented...\n7z cannot delete from solid archive." >&2 ; exit 1 ; }
+	$P7ZIP d "$1" "$EXFNAME"/ 2>&1 | grep -q E_NOTIMPL > /dev/null 2>&1 && \
+	{ printf "Function not implemented...\n7z cannot delete from solid archive." >&2 ; exit 1 ; }
 }
 
 # override any locale for dates
