@@ -194,11 +194,7 @@ int edit_get_utf (WEdit * edit, long byte_index, int *char_width)
         /* Calculate UTF-8 char width */
         next_ch = g_utf8_next_char(str);
         if ( next_ch ) {
-            if ( next_ch != str ) {
-                width = next_ch - str;
-            } else {
-                width = 0;
-            }
+            width = next_ch - str;
         } else {
             ch = 0;
             width = 0;
@@ -246,11 +242,7 @@ int edit_get_prev_utf (WEdit * edit, long byte_index, int *char_width)
         /* Calculate UTF-8 char width */
         next_ch = g_utf8_next_char(str);
         if ( next_ch ) {
-            if ( next_ch != str ) {
-                width = next_ch - str;
-            } else {
-                width = 0;
-            }
+            width = next_ch - str;
         } else {
             ch = 0;
             width = 0;
@@ -2455,7 +2447,7 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
     if (char_for_insertion >= 0) {
 	if (edit->overwrite) {
 	    if (edit_get_byte (edit, edit->curs1) != '\n')
-		edit_delete (edit, 1);
+		edit_delete (edit, 0);
 	}
 #ifdef HAVE_CHARSET
 	if ( char_for_insertion > 255 && utf8_display == 0 ) {
