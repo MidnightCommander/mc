@@ -525,8 +525,7 @@ format_file (char *dest, int limit, WPanel *panel, int file_index, int width, in
 	color = NORMAL_COLOR;
 
     for (format = home; format; format = format->next){
-
-    	if (length == width)
+	if (length == width)
 	    break;
 
 	if (format->string_fn){
@@ -579,40 +578,42 @@ format_file (char *dest, int limit, WPanel *panel, int file_index, int width, in
 static void
 repaint_file (WPanel *panel, int file_index, int mv, int attr, int isstatus)
 {
-    int    second_column = 0;
-    int	   width, offset;
-    char   buffer [BUF_MEDIUM];
+    int second_column = 0;
+    int width;
+    int offset = 0;
+    char buffer [BUF_MEDIUM];
 
-    offset = 0;
-    if (!isstatus && panel->split){
+    gboolean panel_is_split = !isstatus && panel->split;
 
+    width = panel->widget.cols - 2;
+
+    if (panel_is_split) {
 	second_column = (file_index - panel->top_file) / llines (panel);
-	width = (panel->widget.cols - 2)/2 - 1;
+	width = width/2 - 1;
 
-	if (second_column){
+	if (second_column != 0) {
 	    offset = 1 + width;
-	    width = (panel->widget.cols-2) - (panel->widget.cols-2)/2 - 1;
+	    /*width = (panel->widget.cols-2) - (panel->widget.cols-2)/2 - 1;*/
+	    width = panel->widget.cols - offset - 2;
 	}
-    } else
-        width = (panel->widget.cols - 2);
+    }
 
     /* Nothing to paint */
     if (width <= 0)
 	return;
 
     if (mv){
-	if (!isstatus && panel->split){
+	if (panel_is_split)
 	    widget_move (&panel->widget,
-			 (file_index - panel->top_file) %
-			 llines (panel) + 2,
-			 (offset + 1));
-	} else
+			 (file_index - panel->top_file) % llines (panel) + 2,
+			 offset + 1);
+	else
 	    widget_move (&panel->widget, file_index - panel->top_file + 2, 1);
     }
 
     format_file (buffer, sizeof(buffer), panel, file_index, width, attr, isstatus);
 
-    if (!isstatus && panel->split){
+    if (panel_is_split) {
 	if (second_column)
 	    tty_print_char (' ');
 	else {
@@ -629,10 +630,9 @@ display_mini_info (WPanel *panel)
 
     if (panel->searching){
 	tty_setcolor (INPUT_COLOR);
-        tty_print_string ("/");
-        tty_print_string (str_fit_to_term (panel->search_buffer, 
+        tty_print_char ('/');
+        tty_print_string (str_fit_to_term (panel->search_buffer,
                 panel->widget.cols - 3, J_LEFT));
-	tty_setcolor (NORMAL_COLOR);
 	return;
     }
 
@@ -652,11 +652,11 @@ display_mini_info (WPanel *panel)
             tty_print_string (str_fit_to_term (link_target, panel->widget.cols - 5, 
                     J_LEFT_FIT));
 	} else
-            tty_print_string (str_fit_to_term (_("<readlink failed>"), 
+            tty_print_string (str_fit_to_term (_("<readlink failed>"),
                     panel->widget.cols - 2, J_LEFT));
     } else if (strcmp (panel->dir.list [panel->selected].fname, "..") == 0) {
 	/* FIXME:
-	 * while loading directory (do_load_dir() and do_reload_dir(),
+	 * while loading directory (do_load_dir() and do_reload_dir()),
 	 * the actual stat info about ".." directory isn't got;
 	 * so just don't display incorrect info about ".." directory */
 	tty_print_string (str_fit_to_term (_("UP--DIR"), panel->widget.cols - 2, J_LEFT));
@@ -1374,7 +1374,7 @@ parse_display_format (WPanel *panel, const char *format, char **error, int issta
 	    set_justify = 0;
 
 	for (i = 0; i < ELEMENTS(formats); i++){
-	    int klen = strlen (formats [i].id);
+	    size_t klen = strlen (formats [i].id);
 
 	    if (strncmp (format, formats [i].id, klen) != 0)
 		continue;
