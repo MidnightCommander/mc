@@ -1258,7 +1258,7 @@ szerverről töltöttél le, használhatod az awk parancsot az átmásolt
 fájlok neveit tartalmazó log fájl tartalmának megjelenítésére:
 .PP
 .nf
-awk '$9 ~! /incoming/ { print $9 }' < /usr/adm/xferlog
+awk '$9 ~! /incoming/ { print $9 }' < /var/log/xferlog
 .fi
 .PP
 A gyakran használt parancsokat elmentheted egy számodra egyértelmű

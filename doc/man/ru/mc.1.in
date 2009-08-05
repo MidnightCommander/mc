@@ -1429,7 +1429,7 @@ find . -type l -print
 извлечения нужных имен из файла протокола:
 .PP
 .nf
-awk '$9 ~! /incoming/ { print $9 }' < /usr/adm/xferlog
+awk '$9 ~! /incoming/ { print $9 }' < /var/log/xferlog
 .fi
 .PP
 Если вы захотите, то можете сохранить часто используемые команды

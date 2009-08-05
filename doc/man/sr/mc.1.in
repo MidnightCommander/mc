@@ -1242,7 +1242,7 @@ find . -type l -print
 издвојили назив датотеке из датотека дневника преноса:
 .PP
 .nf
-awk '$9 ~! /incoming/ { print $9 }' < /usr/adm/xferlog
+awk '$9 ~! /incoming/ { print $9 }' < /var/log/xferlog
 .fi
 .PP
 Можете и сачувати често коришћене критеријуме попуне окна под описним

@@ -1294,7 +1294,7 @@ from your FTP server, you can use this awk command to extract the file
 name from the transfer log files:
 .PP
 .nf
-awk '$9 ~! /incoming/ { print $9 }' < /usr/adm/xferlog
+awk '$9 ~! /incoming/ { print $9 }' < /var/log/xferlog
 .fi
 .PP
 You may want to save often used panelize commands under a descriptive name,

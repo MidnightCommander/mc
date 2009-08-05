@@ -1277,7 +1277,7 @@ podemos usar el comando awk para extraer el nombre del archivo
 de los archivos de registro (log) de la transferencia:
 .PP
 .nf
-awk '$9 ~! /incoming/ { print $9 }' < /usr/adm/xferlog
+awk '$9 ~! /incoming/ { print $9 }' < /var/log/xferlog
 .fi
 .PP
 Tal vez podríamos necesitar guardar los comandos utilizados frecuentemente bajo un nombre descriptivo,

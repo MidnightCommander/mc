@@ -1058,7 +1058,7 @@ serwerów ftp, możesz użyć tej komendy awk żeby wypisać nazwę pliku z
 logów transferu:
 .PP
 .nf
-awk '$9 ~! /incoming/ { print $9 }' < /usr/adm/xferlog
+awk '$9 ~! /incoming/ { print $9 }' < /var/log/xferlog
 .fi
 .PP
 Możesz zapisać sobie często używane komendy pod jakąś nazwą, po to

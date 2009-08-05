@@ -1275,7 +1275,7 @@ proprio server ftp preferito, si può usare questo comando awk per
 estrarre il nome del file dal file di log del traferimento:
 .PP
 .nf
-awk '$9 ~! /incoming/ { print $9 }' < /usr/adm/xferlog
+awk '$9 ~! /incoming/ { print $9 }' < /var/log/xferlog
 .fi
 .PP
 Se si desidera si può salvare i comandi di pannellizzazione usati più 
