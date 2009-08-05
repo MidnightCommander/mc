@@ -1,54 +1,114 @@
-# Conditional build (replace "#" with "%" to enable):
-#
-#define _with_ncurses		 1 # use ncurses
-#define _with_charset		 1 # enable code for charset conversion
-#define _with_samba		 1 # enable SMB/CIFS virtual file system
-#define _with_ext2undel		 1 # compile with ext2 undelete code
-#define _without_x		 1 # avoid dependency on X11 libraries
-
 # Note that this is NOT a relocatable package
-%define ver     @VERSION@
-%define rpmver   @RPM_VERSION@
-%define  RELEASE 1
-%define  rel     %{?CUSTOM_RELEASE} %{!?CUSTOM_RELEASE:%RELEASE}%{?dist}
+
+%if 0%{?el4}%{?el3}
+        %define _with_screen --with-screen=ncurses
+        %define _with_glib_static --with-glib-static
+        %define glib_version glib-2.12.3
+%else
+        %define _with_screen --with-screen=slang
+%endif
 
 Summary:   User-friendly text console file manager and visual shell
 Name:      mc
-Version:   %rpmver
-Release:   %rel
+Version:   @RPM_VERSION@
+Release:   1%{?dist}
 Epoch:     1
 License:   GPLv2
 Group:     System Environment/Shells
-Source0:   mc-%{ver}.tar.gz
+Source0:   %{name}-@VERSION@.tar.gz
+
+%if 0%{?el4}%{?el3}
+Source1:   http://ftp.gnome.org/pub/gnome/sources/glib/2.12/%{glib_version}.tar.bz2
+Patch0:    glib2-CVE-2008-4316.patch
+%endif
+
 URL:       http://www.midnight-commander.org/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires: glib2-devel e2fsprogs-devel slang-devel
+BuildRequires: glib2-devel e2fsprogs-devel gpm-devel
+
+%if 0%{?el5}%{?el4}%{?el3}
+BuildRequires: pcre-devel
+%endif
+
+%if 0%{?el4}%{?el3}
+BuildRequires: gettext pkgconfig >= 0.8 ncurses-devel
+%else
+BuildRequires: slang-devel
+%endif
 
 %description
-GNU Midnight Commander is a visual file manager.  It's a feature rich
+GNU Midnight Commander is a visual file manager. It's a feature rich
 full-screen text mode application that allows you to copy, move and
 delete files and whole directory trees, search for files and run
-commands in the subshell.  Internal viewer and editor are included.
-Mouse is supported under X Window System and on Linux console.  VFS
-(Virtual Filesystem) allows you to view archives and files on remote
-servers (via SAMBA, FTP or SSH).
+commands in the subshell. Internal viewer and editor are included. Mouse
+is supported on Linux console. VFS (Virtual Filesystem) allows you to
+view archives and files on remote servers (via SAMBA, FTP or SSH).
 
 %prep
-%setup -q -n mc-%{ver}
+%if 0%{?el4}%{?el3}
+
+%setup -q -T -c -a 0
+%setup -q -T -D -a 1
+
+cd %{glib_version}
+%patch0 -p1 -b .CVE-2008-4316
+
+%else
+
+%setup -q -n %{name}-@VERSION@
+
+%endif
 
 %build
+%if 0%{?el4}%{?el3}
+
+        cd %{glib_version}
+
+        RESULT_DIR=`pwd`/result
+
+        CFLAGS="%optflags -fno-strict-aliasing" \
+        ./configure \
+                --disable-gtk-doc \
+                --disable-shared \
+                --enable-static \
+                --prefix="$RESULT_DIR" \
+                --exec-prefix="$RESULT_DIR" \
+                --libdir="$RESULT_DIR/usr/%{_lib}"
+
+        make install %{?_smp_mflags}
+
+        cd ../%{name}-@VERSION@
+
+%endif
+
+%if 0%{?el4}%{?el3}
+        PKG_CONFIG_PATH="$RESULT_DIR/usr/%{_lib}/pkgconfig:$PKG_CONFIG_PATH" ; export PKG_CONFIG_PATH;
+%endif
+
 %configure \
-	--with-screen=slang \
-	 --enable-charset \
-	 --with-samba \
-	 --with-x \
-	 --with-gpm-mouse
+        %{_with_screen} \
+        %{?_with_glib_static} \
+        --enable-charset \
+        --with-samba \
+        --without-x \
+        --with-gpm-mouse \
+        --disable-doxygen-doc
+
 make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-make install DESTDIR=$RPM_BUILD_ROOT
+%if 0%{?el4}%{?el3}
+        cd %{name}-@VERSION@
+%endif
+
+make install DESTDIR="$RPM_BUILD_ROOT"
+
+%if 0%{?el4}%{?el3}
+        mv ./* ./../ && cd ./../
+        rm -rf %{name}-@VERSION@ %{glib_version}
+%endif
 
 install -d -m 755 $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 install contrib/{mc.sh,mc.csh} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
@@ -61,12 +121,12 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(-, root, root)
 
-%doc doc/FAQ COPYING doc/NEWS doc/README
+%doc doc/FAQ doc/COPYING doc/NEWS doc/README
 %{_bindir}/mc
 %{_bindir}/mcedit
 %{_bindir}/mcview
 %{_bindir}/mcmfmt
-%attr(4755, vcsa, tty) %{_libexecdir}/mc/cons.saver
+%attr(4511, vcsa, tty) %{_libexecdir}/mc/cons.saver
 %{_libexecdir}/mc/mc*sh
 %{_mandir}/man1/*
 %lang(es) %{_mandir}/es/man1/mc.1*
@@ -93,11 +153,15 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libexecdir}/mc
 
 %changelog
+* Sat Aug 01 2009 Yury V. Zaytsev <yury@shurup.com>
+- Fixed EL4 (and supposedly EL3) builds
+- Fixed some of rpmlint warnings
+
 * Sat Jul 04 2009 Yury V. Zaytsev <yury@shurup.com>
 - Fix the issue when wrappers were left unpackaged
 
 * Thu May 21 2009 Slava Zanko <slavazanko@gmail.com>
-- Fix install patches: use %{_sysconfdir}/mc directory
+- Fix install patches: use %%{_sysconfdir}/mc directory
 
 * Fri May 8 2009 Slava Zanko <slavazanko@gmail.com>
 - Review spec-file to build on the current distributions
@@ -111,7 +175,7 @@ rm -rf $RPM_BUILD_ROOT
 - Don't rely on brace expansion, it may be disabled
 
 * Mon Jan 30 2006 Pavel Roskin <proski@gnu.org>
-- Avoid using %{_prefix} where more specialized macros are available.
+- Avoid using %%{_prefix} where more specialized macros are available.
 
 * Tue Aug 02 2005 Pavel Roskin <proski@gnu.org>
 - Replace obsolete "Copyright" with "License".
@@ -147,7 +211,7 @@ rm -rf $RPM_BUILD_ROOT
 - Add _with_glib2 option.
 
 * Mon Oct 07 2002 Pavel Roskin <proski@gnu.org>
-- Remove installed mc.sh and mc.csh from %{_prefix}/share/mc/bin to
+- Remove installed mc.sh and mc.csh from %%{_prefix}/share/mc/bin to
   suppress a warning about installed but unpackaged files.
 
 * Mon Sep 30 2002 Andrew V. Samoilov <sav@bcs.zp.ua>
@@ -158,12 +222,12 @@ rm -rf $RPM_BUILD_ROOT
 - Use --with-screen instead of --with-ncurses and --with-included-slang.
 
 * Mon Sep 23 2002 Andrew V. Samoilov <sav@bcs.zp.ua>
-- Restore %config for %{_prefix}/share/mc/mc.charsets.
-- Restore %{_prefix}/share/mc/edit.spell.rc.
+- Restore %%config for %%{_prefix}/share/mc/mc.charsets.
+- Restore %%{_prefix}/share/mc/edit.spell.rc.
 
 * Sat Sep 21 2002 Pavel Roskin <proski@gnu.org>
 - Use FHS-compliant paths.
-- Drop %config from files under /usr/share - users are not supposed to
+- Drop %%config from files under /usr/share - users are not supposed to
   edit them.  Local copies under ~/.mc should be used for that.
 
 * Wed Aug 21 2002 Pavel Roskin <proski@gnu.org>
@@ -174,7 +238,7 @@ rm -rf $RPM_BUILD_ROOT
 
 * Tue Aug 20 2002 Andrew V. Samoilov <sav@bcs.zp.ua>
 - Add /usr/lib/mc/mc.charsets.
-- Add %{_mandir}/*/man1/*.
+- Add %%{_mandir}/*/man1/*.
 
 * Fri Aug 16 2002 Pavel Roskin <proski@gnu.org>
 - Remove mc.global.
@@ -193,7 +257,7 @@ rm -rf $RPM_BUILD_ROOT
 - Remove /usr/lib/mc/layout.
 
 * Sat Jun 09 2001 Pavel Roskin <proski@gnu.org>
-- Use %{_prefix} and %{_mandir}. Specify --mandir to configure.
+- Use %%{_prefix} and %%{_mandir}. Specify --mandir to configure.
 
 * Fri May 25 2001 Pavel Roskin <proski@gnu.org>
 - Change groups. Don't include locale directories. More config files.
@@ -220,11 +284,11 @@ rm -rf $RPM_BUILD_ROOT
 
 * Sat Sep 23 2000 Pavel Roskin <proski@gnu.org>
 - Include translations with mc, not gmc
-- chkconfig --del in %preun, not %postun
+- chkconfig --del in %%preun, not %%postun
 - --without-debug not needed
 - /etc/X11/wmconfig not needed
 - /etc/pam.d/mcserv shouldn't be executable
-- New files in %{prefix}/lib/mc/ - translated hints, editor files
+- New files in %%{prefix}/lib/mc/ - translated hints, editor files
 
 * Thu Sep 09 1999 Elliot Lee <sopwith@redhat.com>
 - Include .idl files in the package.
@@ -233,13 +297,13 @@ rm -rf $RPM_BUILD_ROOT
 - Added a build prereq so that rpms get built with documentation ;)
 
 * Mon Jul 12 1999 Kjartan Maraas  <kmaraas@online.no>
-- added help and locale files to %files
+- added help and locale files to %%files
 
 * Tue Jun 22 1999 Vladimir Kondratiev <vkondra@iil.intel.com>
-- added syntax files to %files
+- added syntax files to %%files
 
 * Wed May 26 1999 Cody Russell <bratsche@dfw.net>
-- chmod cons.saver at $RPM_BUILD_ROOT%{prefix}/lib rather than at
+- chmod cons.saver at $RPM_BUILD_ROOT%%{prefix}/lib rather than at
   $RPM_BUILD_ROOT/usr/lib. We can now install to somewhere other than /usr.
 
 * Sun Apr 18 1999 Gregory McLean <gregm@comstar.net>
