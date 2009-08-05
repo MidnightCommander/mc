@@ -45,6 +45,7 @@
 #include "layout.h"		/* Most layout variables are here */
 #include "wtools.h"		/* for message (...) */
 #include "cmd.h"
+#include "command.h"		/* cmdline */
 #include "setup.h"		/* For loading/saving panel options */
 #include "user.h"
 #include "../src/mcconfig/mcconfig.h"
@@ -1614,6 +1615,26 @@ mini_status_format (WPanel *panel)
 /* Panel operation commands */
 /*                          */
 
+/* Used to emulate Lynx's entering leaving a directory with the arrow keys */
+static cb_ret_t
+maybe_cd (int move_up_dir)
+{
+    if (navigate_with_arrows) {
+	if (!cmdline->buffer[0]) {
+	    if (move_up_dir) {
+		do_cd ("..", cd_exact);
+		return MSG_HANDLED;
+	    }
+	    if (S_ISDIR (selection (current_panel)->st.st_mode)
+		|| link_isdir (selection (current_panel))) {
+		do_cd (selection (current_panel)->fname, cd_exact);
+		return MSG_HANDLED;
+	    }
+	}
+    }
+    return MSG_NOT_HANDLED;
+}
+
 /* Returns the number of items in the given panel */
 static int
 ITEMS (WPanel *p)
@@ -1693,15 +1714,13 @@ move_down (WPanel *panel)
 
     unselect_item (panel);
     panel->selected++;
-
     if (panel->selected - panel->top_file == ITEMS (panel) &&
-	panel_scroll_pages){
+	panel_scroll_pages) {
 	/* Scroll window half screen */
 	panel->top_file += ITEMS (panel)/2;
 	if (panel->top_file > panel->count - ITEMS (panel))
-		panel->top_file = panel->count - ITEMS (panel);
+	    panel->top_file = panel->count - ITEMS (panel);
 	paint_dir (panel);
-	select_item (panel);
     }
     select_item (panel);
 }
@@ -1714,10 +1733,11 @@ move_up (WPanel *panel)
 
     unselect_item (panel);
     panel->selected--;
-    if (panel->selected < panel->top_file && panel_scroll_pages){
+    if (panel->selected < panel->top_file && panel_scroll_pages) {
 	/* Scroll window half screen */
 	panel->top_file -= ITEMS (panel)/2;
-	if (panel->top_file < 0) panel->top_file = 0;
+	if (panel->top_file < 0)
+	    panel->top_file = 0;
 	paint_dir (panel);
     }
     select_item (panel);

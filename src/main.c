@@ -612,26 +612,6 @@ load_prompt (int fd, void *unused)
 }
 #endif				/* HAVE_SUBSHELL_SUPPORT */
 
-/* Used to emulate Lynx's entering leaving a directory with the arrow keys */
-int
-maybe_cd (int move_up_dir)
-{
-    if (navigate_with_arrows) {
-	if (!cmdline->buffer[0]) {
-	    if (move_up_dir) {
-		do_cd ("..", cd_exact);
-		return 1;
-	    }
-	    if (S_ISDIR (selection (current_panel)->st.st_mode)
-		|| link_isdir (selection (current_panel))) {
-		do_cd (selection (current_panel)->fname, cd_exact);
-		return 1;
-	    }
-	}
-    }
-    return 0;
-}
-
 static void
 sort_cmd (void)
 {

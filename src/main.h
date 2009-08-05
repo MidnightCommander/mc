@@ -105,7 +105,6 @@ extern char *mc_home;
 extern char *mc_home_alt;
 char *get_mc_lib_dir (void);
 
-int maybe_cd (int move_up_dir);
 void do_possible_cd (const char *dir);
 
 void done_menu (void);
