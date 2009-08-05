@@ -98,6 +98,19 @@ pre_exec (void)
 }
 
 
+#ifdef HAVE_SUBSHELL_SUPPORT
+static void
+do_possible_cd (const char *new_dir)
+{
+    if (!do_cd (new_dir, cd_exact))
+	message (D_ERROR, _("Warning"),
+		 _(" The Commander can't change to the directory that \n"
+		   " the subshell claims you are in.  Perhaps you have \n"
+		   " deleted your working directory, or given yourself \n"
+		   " extra access permissions with the \"su\" command? "));
+}
+#endif				/* HAVE_SUBSHELL_SUPPORT */
+
 static void
 do_execute (const char *shell, const char *command, int flags)
 {
