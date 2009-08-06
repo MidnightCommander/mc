@@ -1,20 +1,1264 @@
-# Syntax rules for the HyperText Markup Language
+
+# html highlighting with tags in caps always. if you want everything in lowercase
+# use tr
+
+# i got upto IMG in the netscape comprehensive tags reference. thereafter will get
+# done later - paul
 
 context default
-	keyword &\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\]; brightgreen
-	keyword &#\{xX\}\[0123456789abcdefABCDEF\]; brightgreen
-	keyword &#\[0123456789\]; brightgreen
+    keyword whole &*;           brightgreen/16
 	spellcheck
 
-context <!-- --> brown
+    keyword </A>                brightcyan/17
+    keyword </ADDRESS>          brightcyan/17
+    keyword </APPLET>           brightcyan/17
+    keyword </AREA>             brightcyan/17
+    keyword </B>                brightcyan/17
+    keyword </BASE>             brightcyan/17
+    keyword </BASEFONT>         brightcyan/17
+    keyword </BIG>              brightcyan/17
+    keyword </BLOCKQUOTE>       brightcyan/17
+    keyword </BODY>             brightcyan/17
+    keyword </BR>               brightcyan/17
+    keyword </BUTTON>           brightcyan/17
+    keyword </CAPTION>          brightcyan/17
+    keyword </CENTER>           brightcyan/17
+    keyword </CITE>             brightcyan/17
+    keyword </CODE>             brightcyan/17
+    keyword </DD>               brightcyan/17
+    keyword </DIR>              brightcyan/17
+    keyword </DIV>              brightcyan/17
+    keyword </DL>               brightcyan/17
+    keyword </DT>               brightcyan/17
+    keyword </EM>               brightcyan/17
+    keyword </FONT>             brightcyan/17
+    keyword </FORM>             brightcyan/17
+    keyword </FRAME>            brightcyan/17
+    keyword </FRAMESET>         brightcyan/17
+    keyword </H1>               brightcyan/17
+    keyword </H2>               brightcyan/17
+    keyword </H3>               brightcyan/17
+    keyword </H4>               brightcyan/17
+    keyword </H5>               brightcyan/17
+    keyword </H6>               brightcyan/17
+    keyword </HEAD>             brightcyan/17
+    keyword </HR>               brightcyan/17
+    keyword </HTML>             brightcyan/17
+    keyword </I>                brightcyan/17
+    keyword </IMG>              brightcyan/17
+    keyword </PRE>              brightcyan/17
+    keyword </SMALL>            brightcyan/17
+    keyword </SCRIPT>           brightcyan/17
+    keyword </META>             brightcyan/17
+    keyword </P>                brightcyan/17
+    keyword </TABLE>            brightcyan/17
+    keyword </TD>               brightcyan/17
+    keyword </TITLE>            brightcyan/17
+    keyword </TR>               brightcyan/17
+    keyword </TT>               brightcyan/17
+    keyword </U>                brightcyan/17
+
+
+context <A >                    brightcyan/17
+    keyword =                   brightred/18
+
+    keyword "http:*"            magenta/22
+    keyword "ftp:*"             magenta/22
+    keyword "news:*"            magenta/22
+    keyword "mailto:*"          magenta/22
+    keyword "gopher:*"          magenta/22
+    keyword "telnet:*"          magenta/22
+    keyword "file:*"            magenta/22
+    keyword "javascript:*"      magenta/22
+
+    keyword "Alternate"         magenta/22
+    keyword "Stylesheet"        magenta/22
+    keyword "Start"             magenta/22
+    keyword "Next"              magenta/22
+    keyword "Prev"              magenta/22
+    keyword "Contents"          magenta/22
+    keyword "Index"             magenta/22
+    keyword "Glossary"          magenta/22
+    keyword "Copyright"         magenta/22
+    keyword "Chapter"           magenta/22
+    keyword "Section"           magenta/22
+    keyword "Subsection"        magenta/22
+    keyword "Appendix"          magenta/22
+    keyword "Help"              magenta/22
+    keyword "Bookmark"          magenta/22
+
+    keyword "_blank"            magenta/22
+    keyword "_self"             magenta/22
+    keyword "_parent"           magenta/22
+    keyword "_top"              magenta/22
+
+    keyword "*"                 cyan/5
+
+#    keyword whole charset       yellow/24
+#    keyword whole type          yellow/24
+    keyword whole name          yellow/24
+    keyword whole href          yellow/24
+#    keyword whole hreflang      yellow/24
+#    keyword whole rel           yellow/24
+#    keyword whole rev           yellow/24
+    keyword whole shape         yellow/24
+    keyword whole coords        yellow/24
+#    keyword whole tabindex      yellow/24
+#    keyword whole selected      yellow/24
+    keyword whole target        yellow/24
+    keyword whole onblur        yellow/24
+    keyword whole onclick       yellow/24
+    keyword whole ondblclick    yellow/24
+    keyword whole onfocus       yellow/24
+    keyword whole onkeydown     yellow/24
+    keyword whole onkeypress    yellow/24
+    keyword whole onkeyup       yellow/24
+    keyword whole onmousedown   yellow/24
+    keyword whole onmousemove   yellow/24
+    keyword whole onmouseout    yellow/24
+    keyword whole onmouseover   yellow/24
+    keyword whole onmouseup     yellow/24
+
+
+context <ADDRESS >              brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole dir           yellow/24
+    keyword whole title         yellow/24
+    keyword whole lang          yellow/24
+
+    keyword whole onblur        yellow/24
+    keyword whole onclick       yellow/24
+    keyword whole ondblclick    yellow/24
+    keyword whole onfocus       yellow/24
+    keyword whole onkeydown     yellow/24
+    keyword whole onkeypress    yellow/24
+    keyword whole onkeyup       yellow/24
+    keyword whole onmousedown   yellow/24
+    keyword whole onmousemove   yellow/24
+    keyword whole onmouseout    yellow/24
+    keyword whole onmouseover   yellow/24
+    keyword whole onmouseup     yellow/24
+    keyword "*"                 cyan/5
+
+context <APPLET >               brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole align         yellow/24
+    keyword whole alt           yellow/24
+    keyword whole archive       yellow/24
+    keyword whole code          yellow/24
+    keyword whole codebase      yellow/24
+    keyword whole height        yellow/24
+    keyword whole hspace        yellow/24
+    keyword whole mayscript     yellow/24
+    keyword whole name          yellow/24
+    keyword whole object        yellow/24
+    keyword whole vspace        yellow/24
+    keyword whole width         yellow/24
+
+    keyword "http:*"            magenta/22
+    keyword "ftp:*"             magenta/22
+    keyword "news:*"            magenta/22
+    keyword "mailto:*"          magenta/22
+    keyword "gopher:*"          magenta/22
+    keyword "telnet:*"          magenta/22
+    keyword "file:*"            magenta/22
+    keyword "javascript:*"      magenta/22
+    keyword "*.class"           magenta/22
+    keyword "*"                 cyan/5
+
+context <AREA >                 brightcyan/17
+    keyword =                   brightred/18
+
+#    keyword whole accesskey     yellow/24
+#    keyword whole alt           yellow/24
+    keyword whole coords        yellow/24
+    keyword whole href          yellow/24
+    keyword whole nohref        yellow/24
+    keyword whole shape         yellow/24
+#    keyword whole onfocus       yellow/24
+#    keyword whole onblur        yellow/24
+    keyword whole target        magenta/22
+    keyword "_blank"            magenta/22
+    keyword "_self"             magenta/22
+    keyword "_parent"           magenta/22
+    keyword "_top"              magenta/22
+
+    keyword "DEFAULT"           magenta/22
+    keyword "CIRCLE"            magenta/22
+    keyword "POLY"              magenta/22
+    keyword "POLYGON"           magenta/22
+    keyword "RECT"              magenta/22
+    keyword "RECTANGLE"         magenta/22
+
+    keyword "http:*"            magenta/22
+    keyword "ftp:*"             magenta/22
+    keyword "news:*"            magenta/22
+    keyword "gopher:*"          magenta/22
+    keyword "telnet:*"          magenta/22
+    keyword "*"                 cyan/5
+
+context <B >                    brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+
+    keyword whole onclick       yellow/24
+    keyword whole ondblclick    yellow/24
+    keyword whole onkeydown     yellow/24
+    keyword whole onkeypress    yellow/24
+    keyword whole onkeyup       yellow/24
+    keyword whole onmousedown   yellow/24
+    keyword whole onmousemove   yellow/24
+    keyword whole onmouseout    yellow/24
+    keyword whole onmouseover   yellow/24
+    keyword whole onmouseup     yellow/24
+    keyword "*"                 cyan/5
+
+context <BASE >                 brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole href          yellow/24
+    keyword whole target        yellow/24
+    keyword "_blank"            magenta/22
+    keyword "_self"             magenta/22
+    keyword "_parent"           magenta/22
+    keyword "_top"              magenta/22
+
+    keyword "http:*"            magenta/22
+    keyword "ftp:*"             magenta/22
+    keyword "*"                 cyan/5
+
+context <BASEFONT >             brightcyan/17
+    keyword =                   brightred/18
+    keyword "                   magenta/22
+
+    keyword whole id            yellow/24
+    keyword whole size          yellow/24
+    keyword whole color         yellow/24
+    keyword whole face          yellow/24
+    keyword "*"                 cyan/5
+
+context <BIG >                  brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+
+    keyword whole onclick       yellow/24
+    keyword whole ondblclick    yellow/24
+    keyword whole onkeydown     yellow/24
+    keyword whole onkeypress    yellow/24
+    keyword whole onkeyup       yellow/24
+    keyword whole onmousedown   yellow/24
+    keyword whole onmousemove   yellow/24
+    keyword whole onmouseout    yellow/24
+    keyword whole onmouseover   yellow/24
+    keyword whole onmouseup     yellow/24
+    keyword "*"                 cyan/5
+
+
+context <BLOCKQUOTE >           brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+
+    keyword whole onclick       yellow/24
+    keyword whole ondblclick    yellow/24
+    keyword whole onkeydown     yellow/24
+    keyword whole onkeypress    yellow/24
+    keyword whole onkeyup       yellow/24
+    keyword whole onmousedown   yellow/24
+    keyword whole onmousemove   yellow/24
+    keyword whole onmouseout    yellow/24
+    keyword whole onmouseover   yellow/24
+    keyword whole onmouseup     yellow/24
+
+    keyword whole cite          yellow/24
+    keyword "*"                 cyan/5
+
+
+context <BODY >                 brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+
+    keyword whole onclick       yellow/24
+    keyword whole ondblclick    yellow/24
+    keyword whole onkeydown     yellow/24
+    keyword whole onkeypress    yellow/24
+    keyword whole onkeyup       yellow/24
+    keyword whole onmousedown   yellow/24
+    keyword whole onmousemove   yellow/24
+    keyword whole onmouseout    yellow/24
+    keyword whole onmouseover   yellow/24
+    keyword whole onmouseup     yellow/24
+
+    keyword whole onload        yellow/24
+    keyword whole onunload      yellow/24
+
+    keyword whole alink         yellow/24
+    keyword whole background    yellow/24
+
+    keyword "*.gif"             brightred/19
+    keyword "*.jpg"             brightred/19
+    keyword "*.png"             brightred/19
+    keyword "*"                 cyan/5
+
+    keyword whole bgcolor       yellow/24
+    keyword whole link          yellow/24
+    keyword whole text          yellow/24
+    keyword whole vlink         yellow/24
+
+context <BR >                   brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+    keyword "*"                 cyan/5
+
+
+context <BUTTON >               brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+
+    keyword whole onclick       yellow/24
+    keyword whole ondblclick    yellow/24
+    keyword whole onkeydown     yellow/24
+    keyword whole onkeypress    yellow/24
+    keyword whole onkeyup       yellow/24
+    keyword whole onmousedown   yellow/24
+    keyword whole onmousemove   yellow/24
+    keyword whole onmouseout    yellow/24
+    keyword whole onmouseover   yellow/24
+    keyword whole onmouseup     yellow/24
+    keyword "*"                 cyan/5
+
+context <CAPTION >              brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+
+    keyword whole onclick       yellow/24
+    keyword whole ondblclick    yellow/24
+    keyword whole onkeydown     yellow/24
+    keyword whole onkeypress    yellow/24
+    keyword whole onkeyup       yellow/24
+    keyword whole onmousedown   yellow/24
+    keyword whole onmousemove   yellow/24
+    keyword whole onmouseout    yellow/24
+    keyword whole onmouseover   yellow/24
+    keyword whole onmouseup     yellow/24
+
+    keyword whole align         yellow/24
+    keyword whole valign        yellow/24
+    keyword whole onmouseup     yellow/24
+    keyword "*"                 cyan/5
+
+context <CENTER >               brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+
+    keyword whole onclick       yellow/24
+    keyword whole ondblclick    yellow/24
+    keyword whole onkeydown     yellow/24
+    keyword whole onkeypress    yellow/24
+    keyword whole onkeyup       yellow/24
+    keyword whole onmousedown   yellow/24
+    keyword whole onmousemove   yellow/24
+    keyword whole onmouseout    yellow/24
+    keyword whole onmouseover   yellow/24
+    keyword whole onmouseup     yellow/24
+    keyword "*"                 cyan/5
+
+
+context <CITE >                 brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+
+    keyword whole onclick       yellow/24
+    keyword whole ondblclick    yellow/24
+    keyword whole onkeydown     yellow/24
+    keyword whole onkeypress    yellow/24
+    keyword whole onkeyup       yellow/24
+    keyword whole onmousedown   yellow/24
+    keyword whole onmousemove   yellow/24
+    keyword whole onmouseout    yellow/24
+    keyword whole onmouseover   yellow/24
+    keyword whole onmouseup     yellow/24
+    keyword "*"                 cyan/5
+
+
+context <CODE >                 brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+
+    keyword whole onclick       yellow/24
+    keyword whole ondblclick    yellow/24
+    keyword whole onkeydown     yellow/24
+    keyword whole onkeypress    yellow/24
+    keyword whole onkeyup       yellow/24
+    keyword whole onmousedown   yellow/24
+    keyword whole onmousemove   yellow/24
+    keyword whole onmouseout    yellow/24
+    keyword whole onmouseover   yellow/24
+    keyword whole onmouseup     yellow/24
+    keyword "*"                 cyan/5
+
+context <DD >                   brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+
+    keyword whole onclick       yellow/24
+    keyword whole ondblclick    yellow/24
+    keyword whole onkeydown     yellow/24
+    keyword whole onkeypress    yellow/24
+    keyword whole onkeyup       yellow/24
+    keyword whole onmousedown   yellow/24
+    keyword whole onmousemove   yellow/24
+    keyword whole onmouseout    yellow/24
+    keyword whole onmouseover   yellow/24
+    keyword whole onmouseup     yellow/24
+    keyword "*"                 cyan/5
+
+context <DIR >                  brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+
+    keyword whole onclick       yellow/24
+    keyword whole ondblclick    yellow/24
+    keyword whole onkeydown     yellow/24
+    keyword whole onkeypress    yellow/24
+    keyword whole onkeyup       yellow/24
+    keyword whole onmousedown   yellow/24
+    keyword whole onmousemove   yellow/24
+    keyword whole onmouseout    yellow/24
+    keyword whole onmouseover   yellow/24
+    keyword whole onmouseup     yellow/24
+    keyword "*"                 cyan/5
+
+
+context <DIV >                  brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+
+    keyword whole onclick       yellow/24
+    keyword whole ondblclick    yellow/24
+    keyword whole onkeydown     yellow/24
+    keyword whole onkeypress    yellow/24
+    keyword whole onkeyup       yellow/24
+    keyword whole onmousedown   yellow/24
+    keyword whole onmousemove   yellow/24
+    keyword whole onmouseout    yellow/24
+    keyword whole onmouseover   yellow/24
+    keyword whole onmouseup     yellow/24
+
+    keyword whole align         yellow/24
+    keyword whole "center"      magenta/22
+    keyword whole "justify"     magenta/22
+    keyword whole "left"        magenta/22
+    keyword whole "right"       magenta/22
+    keyword "*"                 cyan/5
+
+
+context <DL >                   brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+
+    keyword whole onclick       yellow/24
+    keyword whole ondblclick    yellow/24
+    keyword whole onkeydown     yellow/24
+    keyword whole onkeypress    yellow/24
+    keyword whole onkeyup       yellow/24
+    keyword whole onmousedown   yellow/24
+    keyword whole onmousemove   yellow/24
+    keyword whole onmouseout    yellow/24
+    keyword whole onmouseover   yellow/24
+    keyword whole onmouseup     yellow/24
+    keyword "*"                 cyan/5
+
+context <DT >                   brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+
+    keyword whole onclick       yellow/24
+    keyword whole ondblclick    yellow/24
+    keyword whole onkeydown     yellow/24
+    keyword whole onkeypress    yellow/24
+    keyword whole onkeyup       yellow/24
+    keyword whole onmousedown   yellow/24
+    keyword whole onmousemove   yellow/24
+    keyword whole onmouseout    yellow/24
+    keyword whole onmouseover   yellow/24
+    keyword whole onmouseup     yellow/24
+    keyword "*"                 cyan/5
+
+context <EM >                   brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+
+    keyword whole onclick       yellow/24
+    keyword whole ondblclick    yellow/24
+    keyword whole onkeydown     yellow/24
+    keyword whole onkeypress    yellow/24
+    keyword whole onkeyup       yellow/24
+    keyword whole onmousedown   yellow/24
+    keyword whole onmousemove   yellow/24
+    keyword whole onmouseout    yellow/24
+    keyword whole onmouseover   yellow/24
+    keyword whole onmouseup     yellow/24
+    keyword "*"                 cyan/5
+
+
+context <DT >                   brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+
+    keyword whole onclick       yellow/24
+    keyword whole ondblclick    yellow/24
+    keyword whole onkeydown     yellow/24
+    keyword whole onkeypress    yellow/24
+    keyword whole onkeyup       yellow/24
+    keyword whole onmousedown   yellow/24
+    keyword whole onmousemove   yellow/24
+    keyword whole onmouseout    yellow/24
+    keyword whole onmouseover   yellow/24
+    keyword whole onmouseup     yellow/24
+    keyword "*"                 cyan/5
+
+context <FONT >                 brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+
+    keyword whole onclick       yellow/24
+    keyword whole ondblclick    yellow/24
+    keyword whole onkeydown     yellow/24
+    keyword whole onkeypress    yellow/24
+    keyword whole onkeyup       yellow/24
+    keyword whole onmousedown   yellow/24
+    keyword whole onmousemove   yellow/24
+    keyword whole onmouseout    yellow/24
+    keyword whole onmouseover   yellow/24
+    keyword whole onmouseup     yellow/24
+
+    keyword whole size          yellow/24
+    keyword whole color         yellow/24
+    keyword whole face          yellow/24
+    keyword "*"                 cyan/5
+
+context <FORM >                 brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+
+    keyword whole onclick       yellow/24
+    keyword whole ondblclick    yellow/24
+    keyword whole onkeydown     yellow/24
+    keyword whole onkeypress    yellow/24
+    keyword whole onkeyup       yellow/24
+    keyword whole onmousedown   yellow/24
+    keyword whole onmousemove   yellow/24
+    keyword whole onmouseout    yellow/24
+    keyword whole onmouseover   yellow/24
+    keyword whole onmouseup     yellow/24
+
+    keyword whole action        yellow/24
+    keyword whole enctype       yellow/24
+    keyword whole method        yellow/24
+    keyword "GET"               magenta/22
+    keyword "POST"              magenta/22
+    keyword whole onreset       yellow/24
+    keyword whole onsubmit      yellow/24
+    keyword whole target        yellow/24
+    keyword "_blank"            magenta/22
+    keyword "_self"             magenta/22
+    keyword "_parent"           magenta/22
+    keyword "_top"              magenta/22
+    keyword "*"                 cyan/5
+
+
+context <FRAME >                brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole frameborder   yellow/24
+    keyword whole marginheight  yellow/24
+    keyword whole marginwidth   yellow/24
+    keyword whole name          yellow/24
+    keyword whole noresize      yellow/24
+    keyword whole scrolling     yellow/24
+    keyword "YES"               magenta/22
+    keyword "NO"                magenta/22
+    keyword "AUTO"              magenta/22
+    keyword whole src           yellow/24
+    keyword "*"                 cyan/5
+
+
+context <FRAMESET >             brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole border        yellow/24
+    keyword whole bordercolor   yellow/24
+    keyword whole cols          yellow/24
+    keyword whole onload        yellow/24
+    keyword whole onunload      yellow/24
+    keyword whole rows          yellow/24
+
+
+context <H1 >                   brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+
+    keyword whole onclick       yellow/24
+    keyword whole ondblclick    yellow/24
+    keyword whole onkeydown     yellow/24
+    keyword whole onkeypress    yellow/24
+    keyword whole onkeyup       yellow/24
+    keyword whole onmousedown   yellow/24
+    keyword whole onmousemove   yellow/24
+    keyword whole onmouseout    yellow/24
+    keyword whole onmouseover   yellow/24
+    keyword whole onmouseup     yellow/24
+
+    keyword whole align         yellow/24
+    keyword "CENTRE"            magenta/22
+    keyword "LEFT"              magenta/22
+    keyword "RIGHT"             magenta/22
+    keyword "*"                 cyan/5
+
+
+context <H2 >                   brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+
+    keyword whole onclick       yellow/24
+    keyword whole ondblclick    yellow/24
+    keyword whole onkeydown     yellow/24
+    keyword whole onkeypress    yellow/24
+    keyword whole onkeyup       yellow/24
+    keyword whole onmousedown   yellow/24
+    keyword whole onmousemove   yellow/24
+    keyword whole onmouseout    yellow/24
+    keyword whole onmouseover   yellow/24
+    keyword whole onmouseup     yellow/24
+
+    keyword whole align         yellow/24
+    keyword "CENTRE"            magenta/22
+    keyword "LEFT"              magenta/22
+    keyword "RIGHT"             magenta/22
+    keyword "*"                 cyan/5
+
+
+context <H3 >                   brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+
+    keyword whole onclick       yellow/24
+    keyword whole ondblclick    yellow/24
+    keyword whole onkeydown     yellow/24
+    keyword whole onkeypress    yellow/24
+    keyword whole onkeyup       yellow/24
+    keyword whole onmousedown   yellow/24
+    keyword whole onmousemove   yellow/24
+    keyword whole onmouseout    yellow/24
+    keyword whole onmouseover   yellow/24
+    keyword whole onmouseup     yellow/24
+
+    keyword whole align         yellow/24
+    keyword "CENTRE"            magenta/22
+    keyword "LEFT"              magenta/22
+    keyword "RIGHT"             magenta/22
+    keyword "*"                 cyan/5
+
+
+context <H4 >                   brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+
+    keyword whole onclick       yellow/24
+    keyword whole ondblclick    yellow/24
+    keyword whole onkeydown     yellow/24
+    keyword whole onkeypress    yellow/24
+    keyword whole onkeyup       yellow/24
+    keyword whole onmousedown   yellow/24
+    keyword whole onmousemove   yellow/24
+    keyword whole onmouseout    yellow/24
+    keyword whole onmouseover   yellow/24
+    keyword whole onmouseup     yellow/24
+
+    keyword whole align         yellow/24
+    keyword "CENTRE"            magenta/22
+    keyword "LEFT"              magenta/22
+    keyword "RIGHT"             magenta/22
+    keyword "*"                 cyan/5
+
+
+context <H5 >                   brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+
+    keyword whole onclick       yellow/24
+    keyword whole ondblclick    yellow/24
+    keyword whole onkeydown     yellow/24
+    keyword whole onkeypress    yellow/24
+    keyword whole onkeyup       yellow/24
+    keyword whole onmousedown   yellow/24
+    keyword whole onmousemove   yellow/24
+    keyword whole onmouseout    yellow/24
+    keyword whole onmouseover   yellow/24
+    keyword whole onmouseup     yellow/24
+
+    keyword whole align         yellow/24
+    keyword "centre"            magenta/22
+    keyword "left"              magenta/22
+    keyword "right"             magenta/22
+    keyword "*"                 cyan/5
+
+
+context <H6 >                   brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+
+    keyword whole onclick       yellow/24
+    keyword whole ondblclick    yellow/24
+    keyword whole onkeydown     yellow/24
+    keyword whole onkeypress    yellow/24
+    keyword whole onkeyup       yellow/24
+    keyword whole onmousedown   yellow/24
+    keyword whole onmousemove   yellow/24
+    keyword whole onmouseout    yellow/24
+    keyword whole onmouseover   yellow/24
+    keyword whole onmouseup     yellow/24
+
+    keyword whole align         yellow/24
+    keyword "centre"            magenta/22
+    keyword "left"              magenta/22
+    keyword "right"             magenta/22
+    keyword "*"                 cyan/5
+
+
+context <HEAD >                 brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+    keyword "*"                 cyan/5
+
+
+context <HR >                   brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+    keyword whole color         yellow/24
+
+    keyword whole onclick       yellow/24
+    keyword whole ondblclick    yellow/24
+    keyword whole onkeydown     yellow/24
+    keyword whole onkeypress    yellow/24
+    keyword whole onkeyup       yellow/24
+    keyword whole onmousedown   yellow/24
+    keyword whole onmousemove   yellow/24
+    keyword whole onmouseout    yellow/24
+    keyword whole onmouseover   yellow/24
+    keyword whole onmouseup     yellow/24
+
+    keyword whole align         yellow/24
+    keyword "centre"            magenta/22
+    keyword "left"              magenta/22
+    keyword "right"             magenta/22
+    keyword whole align         yellow/24
+    keyword whole noshade       yellow/24
+    keyword whole size          yellow/24
+    keyword whole width         yellow/24
+    keyword "*"                 cyan/5
+
+
+context <HTML >                 brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+    keyword "*"                 cyan/5
+
+
+context <IMG >                  brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+
+    keyword whole onclick       yellow/24
+    keyword whole ondblclick    yellow/24
+    keyword whole onkeydown     yellow/24
+    keyword whole onkeypress    yellow/24
+    keyword whole onkeyup       yellow/24
+    keyword whole onmousedown   yellow/24
+    keyword whole onmousemove   yellow/24
+    keyword whole onmouseout    yellow/24
+    keyword whole onmouseover   yellow/24
+    keyword whole onmouseup     yellow/24
+
+    keyword whole alt           yellow/24
+    keyword whole border        yellow/24
+    keyword whole height        yellow/24
+    keyword whole hspace        yellow/24
+    keyword whole ismap         yellow/24
+    keyword whole src           yellow/24
+    keyword "*.gif"             brightred/19
+    keyword "*.jpg"             brightred/19
+    keyword "*.png"             brightred/19
+    keyword "*"                 cyan/5
+    keyword whole usemap        yellow/24
+    keyword whole vspace        yellow/24
+    keyword whole width         yellow/24
+    keyword "*"                 cyan/5
+
+context <I >                    brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+
+    keyword whole onclick       yellow/24
+    keyword whole ondblclick    yellow/24
+    keyword whole onkeydown     yellow/24
+    keyword whole onkeypress    yellow/24
+    keyword whole onkeyup       yellow/24
+    keyword whole onmousedown   yellow/24
+    keyword whole onmousemove   yellow/24
+    keyword whole onmouseout    yellow/24
+    keyword whole onmouseover   yellow/24
+    keyword whole onmouseup     yellow/24
+    keyword "*"                 cyan/5
+
+
+context <LINK >                 brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+
+    keyword whole onclick       yellow/24
+    keyword whole ondblclick    yellow/24
+    keyword whole onkeydown     yellow/24
+    keyword whole onkeypress    yellow/24
+    keyword whole onkeyup       yellow/24
+    keyword whole onmousedown   yellow/24
+    keyword whole onmousemove   yellow/24
+    keyword whole onmouseout    yellow/24
+    keyword whole onmouseover   yellow/24
+    keyword whole onmouseup     yellow/24
+
+    keyword whole type          yellow/24
+
+    keyword "text/css"          magenta/22
+    keyword "text/javascript"   magenta/22
+    keyword "*"                 cyan/5
+
+
+context <META >                 brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole content       yellow/24
+    keyword whole http-equiv    yellow/24
+    keyword whole name          yellow/24
+    keyword "*"                 cyan/5
+
+context <P >                    brightcyan/17
+
+
+context <TITLE >                brightcyan/17
+    keyword =                   brightred/18
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+    keyword "*"                 cyan/5
+
+context <SCRIPT >               brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole language      yellow/24
+    keyword whole src           yellow/24
+
+    keyword "JavaScript"        magenta/22
+    keyword "JavaScript1.2"     magenta/22
+    keyword "JavaScript1.1"     magenta/22
+    keyword "*"                 cyan/5
+
+context <TABLE >                brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+
+    keyword whole onclick       yellow/24
+    keyword whole ondblclick    yellow/24
+    keyword whole onkeydown     yellow/24
+    keyword whole onkeypress    yellow/24
+    keyword whole onkeyup       yellow/24
+    keyword whole onmousedown   yellow/24
+    keyword whole onmousemove   yellow/24
+    keyword whole onmouseout    yellow/24
+    keyword whole onmouseover   yellow/24
+    keyword whole onmouseup     yellow/24
+
+    keyword whole align         yellow/24
+    keyword whole bgcolor       yellow/24
+    keyword whole border        yellow/24
+    keyword whole width         yellow/24
+    keyword whole cellspacing   yellow/24
+    keyword whole cellpadding   yellow/24
+    keyword "right"             magenta/22
+    keyword "left"              magenta/22
+    keyword "*"                 cyan/5
+
+
+context <SMALL >                brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+
+    keyword whole onclick       yellow/24
+    keyword whole ondblclick    yellow/24
+    keyword whole onkeydown     yellow/24
+    keyword whole onkeypress    yellow/24
+    keyword whole onkeyup       yellow/24
+    keyword whole onmousedown   yellow/24
+    keyword whole onmousemove   yellow/24
+    keyword whole onmouseout    yellow/24
+    keyword whole onmouseover   yellow/24
+    keyword whole onmouseup     yellow/24
+    keyword "*"                 cyan/5
+
+context <TD >                   brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+
+    keyword whole onclick       yellow/24
+    keyword whole ondblclick    yellow/24
+    keyword whole onkeydown     yellow/24
+    keyword whole onkeypress    yellow/24
+    keyword whole onkeyup       yellow/24
+    keyword whole onmousedown   yellow/24
+    keyword whole onmousemove   yellow/24
+    keyword whole onmouseout    yellow/24
+    keyword whole onmouseover   yellow/24
+    keyword whole onmouseup     yellow/24
+
+    keyword whole colspan       yellow/24
+    keyword whole rowspan       yellow/24
+    keyword whole align         yellow/24
+    keyword "centre"            magenta/22
+    keyword "char"              magenta/22
+    keyword "justify"           magenta/22
+    keyword "left"              magenta/22
+    keyword "right"             magenta/22
+    keyword whole bgcolor       yellow/24
+    keyword whole valign        yellow/24
+    keyword "baseline"          magenta/22
+    keyword "bottom"            magenta/22
+    keyword "middle"            magenta/22
+    keyword "top"               magenta/22
+    keyword whole colorspan     yellow/24
+    keyword whole height        yellow/24
+    keyword whole nowrap        yellow/24
+    keyword whole rowspan       yellow/24
+    keyword whole width         yellow/24
+
+    keyword "*"                 cyan/5
+
+
+context <TR >                   brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+
+    keyword whole onclick       yellow/24
+    keyword whole ondblclick    yellow/24
+    keyword whole onkeydown     yellow/24
+    keyword whole onkeypress    yellow/24
+    keyword whole onkeyup       yellow/24
+    keyword whole onmousedown   yellow/24
+    keyword whole onmousemove   yellow/24
+    keyword whole onmouseout    yellow/24
+    keyword whole onmouseover   yellow/24
+    keyword whole onmouseup     yellow/24
+
+    keyword whole align         yellow/24
+    keyword "centre"            magenta/22
+    keyword "char"              magenta/22
+    keyword "justify"           magenta/22
+    keyword "left"              magenta/22
+    keyword "right"             magenta/22
+
+    keyword whole bgcolor       yellow/24
+    keyword whole valign        yellow/24
+    keyword "baseline"          magenta/22
+    keyword "bottom"            magenta/22
+    keyword "middle"            magenta/22
+    keyword "top"               magenta/22
+
+    keyword "*"                 cyan/5
+
+context <TT >                   brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+
+context <U >                    brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+
+context <PRE >                  brightcyan/17
+    keyword =                   brightred/18
+
+    keyword whole class         yellow/24
+    keyword whole id            yellow/24
+    keyword whole style         yellow/24
+    keyword whole title         yellow/24
+
+    keyword whole dir           yellow/24
+    keyword whole lang          yellow/24
+
+context <!-- -->                brown/22
 	spellcheck
 
 context <! > brightred/orange
 	spellcheck
 
-context </ > brightcyan
+context < >                     cyan/15
 
-context < > brightcyan
-	keyword "*" green
-	keyword '*' green
-	keyword = yellow
