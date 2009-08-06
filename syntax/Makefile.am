@@ -49,6 +49,7 @@ SYNTAXFILES =			\
 	smalltalk.syntax	\
 	slang.syntax		\
 	spec.syntax		\
+	strace.syntax 		\
 	sql.syntax		\
 	swig.syntax		\
 	syntax.syntax		\

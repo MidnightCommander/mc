@@ -1,0 +1,43 @@
+context default
+    keyword access(*)           green
+    keyword execve(*)           brightgreen
+    keyword uname(*)            brightblue
+
+    keyword open(*)             cyan
+    keyword close(*)            cyan
+
+    keyword read(*)             magenta
+    keyword select(*)           magenta
+    keyword write(*)            magenta
+
+    keyword readv(*)            brightmagenta
+    keyword writev(*)           brightmagenta
+
+    keyword fcntl64(*)          white
+    keyword fstat64(*)          white
+    keyword stat64(*)           white
+
+    keyword old_mmap(*)         red
+    keyword mmap2(*)            red
+    keyword munmap(*)           red
+
+    keyword exit_group(*)       brightred
+    keyword kill(*)             brightred
+    keyword wait4(*)            brightred
+    keyword statfs(*)           brightred
+    keyword ioctl(*)            brightred
+    keyword rt_sigaction(*)     brightred
+    keyword rt_sigprocmask(*)   brightred
+    keyword alarm(*)            brightred
+    keyword brk(*)              brightred
+
+    keyword chown32(*)          yellow
+    keyword chmod(*)            yellow
+    keyword geteuid32(*)        yellow
+    keyword getegid32(*)        yellow
+    keyword getuid32(*)         yellow
+    keyword getgid32(*)         yellow
+    keyword setresuid32(*)      yellow
+    keyword setresgid32(*)      yellow
+    keyword gettimeofday(*)     yellow
+

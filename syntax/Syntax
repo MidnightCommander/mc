@@ -202,5 +202,8 @@ include erlang.syntax
 file .\*named.conf$ Bind9\sconfiguration
 include named.syntax
 
+file .\*\\.strace$ Strace\sdebug\soutput
+include strace.syntax
+
 file .\* unknown
 include unknown.syntax
