@@ -3234,7 +3234,7 @@ do_search (WView *view)
 
     if (!isFound){
         if (view->search->error_str)
-            message (D_NORMAL, _("Search"), view->search->error_str);
+            message (D_NORMAL, _("Search"), "%s", view->search->error_str);
     }
 
     view->dirty++;

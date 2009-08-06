@@ -164,7 +164,8 @@ int my_system (int flags, const char *shell, const char *command)
 	    execl (shell, shell, "-c", command, (char *) NULL);
 	else
 	{
-	    gchar **shell_tokens, *only_cmd;
+	    gchar **shell_tokens;
+	    const gchar *only_cmd;
 	    shell_tokens = g_strsplit(shell," ", 2);
 
 	    if (shell_tokens == NULL)
