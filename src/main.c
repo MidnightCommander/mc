@@ -148,16 +148,21 @@ int pause_after_run = pause_on_dumb_terminals;
 /* It true saves the setup when quitting */
 int auto_save_setup = 1;
 
-#ifndef HAVE_CHARSET
+#ifdef HAVE_CHARSET
+/*
+ * Don't restrict the output on the screen manager level,
+ * the translation tables take care of it.
+ */
+#define full_eight_bits (1)
+#define eight_bit_clean (1)
+#else				/* HAVE_CHARSET */
 /* If true, allow characters in the range 160-255 */
 int eight_bit_clean = 1;
-
 /*
  * If true, also allow characters in the range 128-159.
  * This is reported to break on many terminals (xterm, qansi-m).
  */
 int full_eight_bits = 0;
-
 #endif				/* !HAVE_CHARSET */
 
 /*
@@ -1179,14 +1184,6 @@ static void
 setup_pre (void)
 {
     /* Call all the inits */
-#ifdef HAVE_CHARSET
-/*
- * Don't restrict the output on the screen manager level,
- * the translation tables take care of it.
- */
-#define full_eight_bits (1)
-#define eight_bit_clean (1)
-#endif				/* !HAVE_CHARSET */
 
 #ifdef HAVE_SLANG
     tty_display_8bit (full_eight_bits != 0);
@@ -1926,7 +1923,7 @@ static const struct poptOption argument_table[] = {
      N_("Forces xterm features"), NULL},
     {"nomouse", 'd', POPT_ARG_NONE, {NULL}, 'd',
      N_("Disable mouse support in text version"), NULL},
-#if defined(HAVE_SLANG)
+#ifdef HAVE_SLANG
     {"termcap", 't', 0, {&SLtt_Try_Termcap}, 0,
      N_("Tries to use termcap instead of terminfo"), NULL},
 #endif
