@@ -160,7 +160,7 @@ include lua.syntax
 file ..\*\\.([iI][dD][lL])$ CORBA\sIDL
 include idl.syntax
 
-file Don_t_match_me Mail\sfolder ^From\s
+file Don_t_match_me Mail\sfolder ^(From|Return-(P|p)ath:|From:|Date:)\s
 include mail.syntax
 
 file \.procmailrc$ Procmail\sRC\sFile ^#/usr/bin/procmail
