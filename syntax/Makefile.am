@@ -34,6 +34,7 @@ SYNTAXFILES =			\
 	mail.syntax		\
 	makefile.syntax		\
 	ml.syntax		\
+	named.syntax    	\
 	nroff.syntax		\
 	octave.syntax		\
 	pascal.syntax		\

@@ -1,0 +1,191 @@
+wholechars abcdefghijklmnopqrstuvwxyz0123456789-
+
+context default
+    keyword whole acl yellow
+    keyword whole additional-from-auth yellow
+    keyword whole additional-from-cache yellow
+    keyword whole algorithm yellow
+    keyword whole allow-notify yellow
+    keyword whole allow-query yellow
+    keyword whole allow-recursion yellow
+    keyword whole allow-transfer yellow
+    keyword whole allow-update-forwarding yellow
+    keyword whole allow-v6-synthesis yellow
+    keyword whole allow yellow
+    keyword whole also-notify yellow
+    keyword whole alt-transfer-source  yellow
+    keyword whole alt-transfer-source-v6  yellow
+    keyword whole avoid-v4-udp-ports yellow
+    keyword whole avoid-v6-udp-ports yellow
+    keyword whole auth-nxdomain yellow
+    keyword whole blackhole yellow
+    keyword whole bogus yellow
+    keyword whole cache-file yellow
+    keyword whole category yellow
+    keyword whole channel yellow
+    keyword whole check-names yellow
+    keyword whole class yellow
+    keyword whole cleaning-interval yellow
+    keyword whole controls yellow
+    keyword whole coresize yellow
+    keyword whole database yellow
+    keyword whole datasize yellow
+    keyword whole dnssec-enable yellow
+    keyword whole dnssec-lookaside yellow
+    keyword whole dnssec-must-be-secure yellow
+    keyword whole deallocate-on-exit yellow
+    keyword whole delegation-only yellow
+    keyword whole deny yellow
+    keyword whole dialup yellow
+    keyword whole directory yellow
+    keyword whole dump-file yellow
+    keyword whole edns yellow
+    keyword whole exclude yellow
+    keyword whole fake-iquery yellow
+    keyword whole fetch-glue yellow
+    keyword whole files yellow
+    keyword whole file yellow
+    keyword whole forwarders yellow
+    keyword whole forward yellow
+    keyword whole grant yellow
+    keyword whole has-old-clients yellow
+    keyword whole heartbeat-interval yellow
+    keyword whole host-statistics yellow
+    keyword whole host-statistics-max yellow
+    keyword whole inet yellow
+    keyword whole interface-interval yellow
+    keyword whole key yellow
+    keyword whole key-directory yellow
+    keyword whole keys yellow
+    keyword whole lame-ttl yellow
+    keyword whole listen-on-v6 yellow
+    keyword whole listen-on yellow
+    keyword whole logging yellow
+    keyword whole lwres yellow
+    keyword whole maintain-ixfr-base yellow
+    keyword whole masters yellow
+    keyword whole match-clients yellow
+    keyword whole match-destinations yellow
+    keyword whole match-mapped-addresses yellow
+    keyword whole match-recursive-only yellow
+    keyword whole max-cache-size yellow
+    keyword whole max-cache-ttl yellow
+    keyword whole max-ixfr-log-size yellow
+    keyword whole max-ncache-ttl yellow
+    keyword whole max-refresh-time yellow
+    keyword whole max-retry-time yellow
+    keyword whole max-transfer-idle-in yellow
+    keyword whole max-transfer-idle-out yellow
+    keyword whole max-transfer-time-in yellow
+    keyword whole max-transfer-time-out yellow
+    keyword whole memstatistics-file yellow
+    keyword whole minimal-responses yellow
+    keyword whole min-refresh-time yellow
+    keyword whole min-retry-time yellow
+    keyword whole min-roots yellow
+    keyword whole multiple-cnames yellow
+    keyword whole named-xfer yellow
+    keyword whole name yellow
+    keyword whole ndots yellow
+    keyword whole notify-source-v6 yellow
+    keyword whole notify-source yellow
+    keyword whole notify yellow
+    keyword whole options yellow
+    keyword whole pid-file yellow
+    keyword whole port yellow
+    keyword whole print-category yellow
+    keyword whole print-severity yellow
+    keyword whole print-time yellow
+    keyword whole provide-ixfr yellow
+    keyword whole pubkey yellow
+    keyword whole query-source-v6 yellow
+    keyword whole query-source yellow
+    keyword whole querylog yellow
+    keyword whole random-device yellow
+    keyword whole recursing-file yellow
+    keyword whole recursion yellow
+    keyword whole recursive-clients yellow
+    keyword whole request-ixfr yellow
+    keyword whole rfc2308-type1 yellow
+    keyword whole root-delegation-only yellow
+    keyword whole rrset-order yellow
+    keyword whole search yellow
+    keyword whole secret yellow
+    keyword whole self yellow
+    keyword whole serial-queries yellow
+    keyword whole serial-query-rate yellow
+    keyword whole server yellow
+    keyword whole server-id yellow
+    keyword whole severity yellow
+    keyword whole sig-validity-interval yellow
+    keyword whole sortlist yellow
+    keyword whole stacksize yellow
+    keyword whole statistics-file yellow
+    keyword whole statistics-interval yellow
+    keyword whole subdomain yellow
+    keyword whole support-ixfr yellow
+    keyword whole suppress-initial-notify yellow
+    keyword whole syslog yellow
+    keyword whole tcp-clients yellow
+    keyword whole tkey-dhkey yellow
+    keyword whole tkey-domain yellow
+    keyword whole tkey-gssapi-credential yellow
+    keyword whole topology yellow
+    keyword whole transfer-format yellow
+    keyword whole transfers-in yellow
+    keyword whole transfer-source-v6 yellow
+    keyword whole transfer-source yellow
+    keyword whole transfers-out yellow
+    keyword whole transfers-per-ns yellow
+    keyword whole transfers yellow
+    keyword whole treat-cr-as-space yellow
+    keyword whole trusted-keys yellow
+    keyword whole type yellow
+    keyword whole update-policy yellow
+    keyword whole use-alt-transfer-source yellow
+    keyword whole use-id-pool yellow
+    keyword whole use-ixfr yellow
+    keyword whole version yellow
+    keyword whole view yellow
+    keyword whole wildcard yellow
+    keyword whole zone-statistics yellow
+    keyword whole zone yellow
+
+    keyword whole any brightred
+    keyword whole fail brightred
+    keyword whole first brightred
+    keyword whole hint brightred
+    keyword whole ignore brightred
+    keyword whole many-answers brightred
+    keyword whole master brightred
+    keyword whole none brightred
+    keyword whole null brightred
+    keyword whole one-answer brightred
+    keyword whole only brightred
+    keyword whole response brightred
+    keyword whole slave brightred
+    keyword whole stderr brightred
+    keyword whole stub brightred
+    keyword whole warn brightred
+    keyword whole yes brightred
+    keyword whole no brightred
+
+    keyword /\* brown
+    keyword \*/ brown
+    keyword // brown
+    keyword # brown
+    keyword { brightcyan
+    keyword } brightcyan
+    keyword ; brightmagenta
+
+context exclusive /\* \*/ brown
+    spellcheck
+
+context exclusive // \n brown
+    spellcheck
+
+context exclusive # \n brown
+    spellcheck
+
+context " " green
+    spellcheck
