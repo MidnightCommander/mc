@@ -1,55 +1,61 @@
 # Adam Pribyl, based on ADA
+# modified: Andrew Borodin
 # missing
-# generate, disconnect, group, guarded, impure, inertial, linkage, literal, new, on, others, postponed, pure, register, reject, select, shared, sli, transport, unaffected, units
-
-
-#wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_.\\[]{}
-
-#ignore case?!
+# literal, on,  (something else)
 
 context default
 
+#wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_
+
 	keyword whole with	yellow
+	keyword whole select	yellow
 	keyword whole use	yellow
 	keyword whole is	yellow
 	keyword whole of	yellow
+	keyword whole length	yellow
 	keyword whole range	yellow
-	keyword whole abs	yellow
+	keyword whole left	yellow
+	keyword whole right	yellow
 	keyword whole delta	yellow
 	keyword whole return	yellow
 	keyword whole next	yellow
 	keyword whole null	yellow
-	keyword whole after	yellow
 	keyword whole array	yellow
 	keyword whole downto	yellow
 	keyword whole to	yellow
+	keyword whole foreign	yellow
 
-# prevents - keyword from interfering with comment
-	keyword --	brown
+# comment
+	keyword --	magenta
 
 # expressions
 	keyword :=	brightgreen
 	keyword .	brightgreen
 	keyword ;	brightgreen
-	keyword ..	brightgreen
 	keyword :	brightgreen
+	keyword ,	brightgreen
+	keyword '	brightgreen
+	keyword |	brightgreen
 	keyword (	brightgreen
 	keyword )	brightgreen
+	keyword [	brightgreen
+	keyword ]	brightgreen
 	keyword \+	brightgreen
 	keyword -	brightgreen
 	keyword /	brightgreen
 	keyword \*	brightgreen
 	keyword \*\*	brightgreen
 	keyword #	brightgreen
+	keyword &	brightgreen
 	keyword =>	brightgreen
+	keyword <	brightgreen
+	keyword >	brightgreen
 	keyword <=	brightgreen
 	keyword >=	brightgreen
-	keyword ,	brightgreen
-	keyword '	brightgreen
 	keyword =	brightgreen
 	keyword /=	brightgreen
 
-# operators
+# operators and functions
 	keyword whole sll	green
 	keyword whole srl	green
 	keyword whole sla	green
@@ -65,29 +71,39 @@ context default
 	keyword whole xor	green
 	keyword whole nor	green
 	keyword whole xnor	green
+	keyword whole abs	green
+	keyword whole new	green
 
-# sequential statements
-	keyword whole begin	brightred
-	keyword whole end	brightred
-	keyword whole exit	brightred
-	keyword whole for	brightred
-	keyword whole while	brightred
-	keyword whole if	brightred
-	keyword whole then	brightred
-	keyword whole else	brightred
-	keyword whole case	brightred
-	keyword whole when	brightred
-	keyword whole elsif	brightred
-	keyword whole assert	brightred
-	keyword	whole wait	brightred
-	keyword	whole open	brightred
-	keyword whole loop	brightred
-	keyword whole until	brightred
+	keyword whole begin		yellow
+	keyword whole end		yellow
+	keyword whole exit		yellow
+	keyword whole for		yellow
+	keyword whole while		yellow
+	keyword whole if		yellow
+	keyword whole then		yellow
+	keyword whole else		yellow
+	keyword whole elsif		yellow
+	keyword whole case		yellow
+	keyword whole when		yellow
+	keyword whole with		yellow
+	keyword whole select		yellow
+	keyword whole assert		yellow
+	keyword	whole wait		yellow
+	keyword	whole open		yellow
+	keyword whole loop		yellow
+	keyword whole until		yellow
+	keyword whole others		yellow
+	keyword whole all		yellow
+	keyword whole block		yellow
+	keyword whole guarded		yellow
+	keyword whole after		yellow
+	keyword whole transport		yellow
+	keyword whole inertial		yellow
+	keyword whole reject		yellow
+	keyword whole unaffected	yellow
+	keyword whole disconnect	yellow
 
-# parallel statements
-	keyword whole block	brightred
-
-# predefined types
+# types and related stuff
 	keyword whole integer	cyan
 	keyword whole natural	cyan
 	keyword whole positive	cyan
@@ -98,42 +114,68 @@ context default
 	keyword whole bit	cyan
 	keyword whole bit_vector	cyan
 	keyword whole time	cyan
+	keyword whole units	cyan
+	keyword whole std_logic	cyan
+	keyword whole std_logic_vector	cyan
+	keyword whole severity_level	cyan
+
+# boolean values
+	keyword whole true	brightred
+	keyword whole false	brightred
+# time values
+	keyword whole fs	brightred
+	keyword whole ps	brightred
+	keyword whole ns	brightred
+	keyword whole us	brightred
+	keyword whole ms	brightred
+	keyword whole sec	brightred
+	keyword whole min	brightred
+	keyword whole hr	brightred
 
 # declarations
 	keyword whole type	brightcyan
 	keyword whole subtype	brightcyan
 
-	keyword whole variable	brightcyan
-	keyword whole signal	brightcyan
-	keyword whole constant	brightcyan
-	keyword whole file	brightcyan
+	keyword whole variable	yellow
+	keyword whole shared	yellow
+	keyword whole signal	yellow
+	keyword whole constant	yellow
+	keyword whole group	yellow
+	keyword whole file	yellow
+	keyword whole register	yellow
 
-	keyword whole port	brightcyan
-	keyword whole map	brightcyan
-	keyword whole label	brightcyan
-	keyword whole record	brightcyan
-	keyword whole generic	brightcyan
-	keyword whole alias	brightcyan
-	keyword whole attribute	brightcyan
+	keyword whole port	yellow
+	keyword whole map	yellow
+	keyword whole label	yellow
+	keyword whole record	yellow
+	keyword whole generic	yellow
+	keyword whole alias	yellow
+	keyword whole attribute	yellow
 
+# ports
 	keyword whole in	white
 	keyword whole out	white
 	keyword whole inout	white
 	keyword whole buffer	white
+	keyword whole linkage	white
 	keyword whole bus	white
 
 # library units
-	keyword whole library	magenta
-	keyword whole entity	magenta
-	keyword whole architecture	magenta
-	keyword whole package	magenta
-	keyword whole body	magenta
-	keyword whole procedure	magenta
-	keyword whole function	magenta
-	keyword whole configuration	magenta
-	keyword whole component	magenta
-	keyword whole generic	magenta
-	keyword whole process	magenta
+	keyword whole library		yellow
+	keyword whole entity		yellow
+	keyword whole architecture	yellow
+	keyword whole package		yellow
+	keyword whole body		yellow
+	keyword whole procedure		yellow
+	keyword whole function		yellow
+	keyword whole pure		yellow
+	keyword whole impure		yellow
+	keyword whole configuration	yellow
+	keyword whole component		yellow
+	keyword whole generic		yellow
+	keyword whole process		yellow
+	keyword whole postponded	yellow
+	keyword whole generate		yellow
 
 # reports
 	keyword whole report	red
@@ -143,5 +185,7 @@ context default
 	keyword whole error	red
 	keyword whole failure	red
 
-context exclusive -- \n	brown
-context " "	green/green
+# comment
+context exclusive -- \n		magenta
+
+context " " green

@@ -190,7 +190,7 @@ include haskell.syntax
 file ..\*\\.(n|N)$ Nemerle\sProgram
 include nemerle.syntax
 
-file ..\*\\.(hdl|vhdl|HDL|VHDL)$ VHDL\sProgram
+file ..\*\\.(hdl|vhd|vdhl|HDL|VHD|VHDL)$ VHDL\sDevice\sDescription
 include vhdl.syntax
 
 file ..\*\\.erl$ Erlang\sProgram ^(-module\\(|#!.*escript)
