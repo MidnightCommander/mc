@@ -243,21 +243,19 @@ mc_search__toupper_case_str (const char *charset, const char *str, gsize str_len
 gchar **
 mc_search_get_types_strings_array (void)
 {
-    GString *tmp;
     gchar **ret;
+    int index;
     const mc_search_type_str_t *type_str;
     const mc_search_type_str_t *types_str = mc_search_types_list_get ();
 
-    tmp = g_string_new ("");
-    type_str = types_str;
-    while (type_str->str) {
-        if (tmp->len)
-            g_string_append (tmp, "__||__");
-        g_string_append (tmp, type_str->str);
-        type_str++;
+    ret = g_malloc0(sizeof(char**) * sizeof(types_str) );
+    if (ret == NULL)
+        return NULL;
+
+    for (index=0, type_str = types_str; type_str->str != NULL; type_str++, index++){
+        ret[index] = g_strdup(_(type_str->str));
     }
-    ret = g_strsplit (tmp->str, "__||__", -1);
-    g_string_free (tmp, TRUE);
+
     return ret;
 }
 
