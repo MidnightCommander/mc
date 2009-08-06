@@ -33,6 +33,7 @@
 
 #include <stdlib.h>
 #include <stdarg.h>
+#include <signal.h>
 
 #include "../../src/global.h"
 
@@ -323,6 +324,21 @@ tty_refresh (void)
 	refresh ();
 	doupdate ();
     }
+}
+
+void
+tty_setup_sigwinch (void (*handler) (int))
+{
+#if (NCURSES_VERSION_MAJOR >= 4) && defined (SIGWINCH)
+    struct sigaction act, oact;
+    act.sa_handler = handler;
+    sigemptyset (&act.sa_mask);
+    act.sa_flags = 0;
+#ifdef SA_RESTART
+    act.sa_flags |= SA_RESTART;
+#endif		 /* SA_RESTART */
+    sigaction (SIGWINCH, &act, &oact);
+#endif		/* SIGWINCH */
 }
 
 void

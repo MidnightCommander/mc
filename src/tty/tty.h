@@ -85,6 +85,7 @@ extern void tty_beep (void);
 #define KEY_KP_SUBTRACT	4002
 #define KEY_KP_MULTIPLY	4003
 
-void tty_refresh (void);
+extern void tty_refresh (void);
+extern void tty_setup_sigwinch (void (*handler) (int));
 
 #endif			/* MC_TTY_H */

@@ -29,7 +29,6 @@
 #include <ctype.h>
 #include <errno.h>
 #include <locale.h>
-#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -1177,21 +1176,6 @@ static const key_map default_map[] = {
 };
 
 static void
-setup_sigwinch (void)
-{
-#if (defined(HAVE_SLANG) || (NCURSES_VERSION_MAJOR >= 4)) && defined(SIGWINCH)
-    struct sigaction act, oact;
-    act.sa_handler = flag_winch;
-    sigemptyset (&act.sa_mask);
-    act.sa_flags = 0;
-#ifdef SA_RESTART
-    act.sa_flags |= SA_RESTART;
-#endif
-    sigaction (SIGWINCH, &act, &oact);
-#endif
-}
-
-static void
 setup_pre (void)
 {
     /* Call all the inits */
@@ -1268,7 +1252,7 @@ setup_mc (void)
 	add_select_channel (subshell_pty, load_prompt, 0);
 #endif				/* !HAVE_SUBSHELL_SUPPORT */
 
-    setup_sigwinch ();
+    tty_setup_sigwinch (sigwinch_handler);
 
     verbose = !((tty_baudrate () < 9600) || tty_is_slow ());
 

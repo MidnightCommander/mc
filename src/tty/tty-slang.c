@@ -37,8 +37,9 @@
 #ifdef HAVE_TERMIOS_H
 #include <termios.h>
 #endif
-#include <unistd.h>
 #include <sys/types.h>			/* size_t */
+#include <unistd.h>
+#include <signal.h>
 
 #include "../../src/global.h"
 
@@ -553,6 +554,21 @@ tty_refresh (void)
     if (!we_are_background)
 #endif				/* WITH_BACKGROUND */
 	SLsmg_refresh ();
+}
+
+void
+tty_setup_sigwinch (void (*handler) (int))
+{
+#ifdef SIGWINCH
+    struct sigaction act, oact;
+    act.sa_handler = handler;
+    sigemptyset (&act.sa_mask);
+    act.sa_flags = 0;
+#ifdef SA_RESTART
+    act.sa_flags |= SA_RESTART;
+#endif		/* SA_RESTART */
+    sigaction (SIGWINCH, &act, &oact);
+#endif		/* SIGWINCH */
 }
 
 void

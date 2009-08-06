@@ -676,7 +676,8 @@ setup_panels (void)
     update_xterm_title_path ();
 }
 
-void flag_winch (int dummy)
+void
+sigwinch_handler (int dummy)
 {
     (void) dummy;
 #if !(defined(USE_NCURSES) || defined(USE_NCURSESW))	/* don't do malloc in a signal handler */
