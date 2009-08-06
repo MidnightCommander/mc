@@ -345,7 +345,7 @@ static void help_show (Dlg_head *h, const char *paint_start)
     const char *p, *n;
     int  col, line, c, w;
     int  painting = 1;
-    int acs;			/* Flag: Alternate character set active? */
+    gboolean acs;			/* Flag: Alternate character set active? */
     int repeat_paint;
     int active_col, active_line;/* Active link position */
     static char buff[MB_LEN_MAX + 1];
@@ -353,8 +353,9 @@ static void help_show (Dlg_head *h, const char *paint_start)
     tty_setcolor (HELP_NORMAL_COLOR);
     do {
 	
-	line = col = acs = active_col = active_line = repeat_paint = 0;
-    
+	line = col = active_col = active_line = repeat_paint = 0;
+	acs = FALSE;
+
 	clear_link_areas ();
 	if (selected_item < paint_start)
 	    selected_item = NULL;
@@ -367,7 +368,7 @@ static void help_show (Dlg_head *h, const char *paint_start)
             memcpy (buff, p, n - p);
             buff[n - p] = '\0';
             c = (unsigned char) buff[0];
-                
+
 	    switch (c){
 	    case CHAR_LINK_START:
 		if (selected_item == NULL)
@@ -392,10 +393,10 @@ static void help_show (Dlg_head *h, const char *paint_start)
 		tty_setcolor (HELP_NORMAL_COLOR);
 		break;
 	    case CHAR_ALTERNATE:
-		acs = 1;
+		acs = TRUE;
 		break;
 	    case CHAR_NORMAL:
-		acs = 0;
+		acs = TRUE;
 		break;
 	    case CHAR_VERSION:
 		dlg_move (h, line+2, col+2);
@@ -425,20 +426,19 @@ static void help_show (Dlg_head *h, const char *paint_start)
 		if (col + w > HELP_WINDOW_WIDTH)
 		    continue;
 		
-		dlg_move (h, line+2, col+2);
-		if (acs){
-		    if (c == ' ' || c == '.')
-			tty_print_char (c);
-		    else
-#ifndef HAVE_SLANG
-			tty_print_char (acs_map [c]);
-#else
-			SLsmg_draw_object (h->y + line + 2, h->x + col + 2, c);
-#endif
-		} else {
+		dlg_move (h, line + 2, col + 2);
+
+		if (!acs)
 		    tty_print_string (buff);
-                }
-                col+= w;
+		else if (c == ' ' || c == '.')
+		    tty_print_char (c);
+		else
+#ifdef HAVE_SLANG
+		    tty_print_alt_char (c);
+#else
+		    tty_print_char (acs_map [c]);
+#endif
+                col += w;
 		break;
 	    }
 	}
