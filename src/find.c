@@ -295,13 +295,14 @@ find_parameters (char **start_dir, char **pattern, char **content)
 	    buts[i] = _(buts[i]);
 
 	file_case_label = _(file_case_label);
-	content_case_label = _(content_case_label);
+	file_pattern_label = _(file_pattern_label);
 	file_recurs_label = _(file_recurs_label);
 	file_skip_hidden_label = _(file_skip_hidden_label);
 	file_all_charsets_label = _(file_all_charsets_label);
-	content_all_charsets_label = _(content_all_charsets_label);
+	content_case_label = _(content_case_label);
 	content_regexp_label = _(content_regexp_label);
-	file_pattern_label = _(file_pattern_label);
+	content_first_hit_label = _(content_first_hit_label);
+	content_all_charsets_label = _(content_all_charsets_label);
     }
 #endif				/* ENABLE_NLS */
 
