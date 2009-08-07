@@ -558,8 +558,8 @@ find_add_match (const char *dir, const char *file)
  * has_newline - is there newline ?
  */
 static char *
-get_line_at (int file_fd, char *buf, int *pos, int *n_read, int buf_size,
-	     int *has_newline)
+get_line_at (int file_fd, char *buf, int buf_size, int *pos, int *n_read,
+	     gboolean *has_newline)
 {
     char *buffer = NULL;
     int buffer_size = 0;
@@ -575,7 +575,7 @@ get_line_at (int file_fd, char *buf, int *pos, int *n_read, int buf_size,
 	}
 
 	ch = buf[(*pos)++];
-	if (ch == 0) {
+	if (ch == '\0') {
 	    /* skip possible leading zero(s) */
 	    if (i == 0)
 		continue;
@@ -593,11 +593,10 @@ get_line_at (int file_fd, char *buf, int *pos, int *n_read, int buf_size,
 	buffer[i++] = ch;
     }
 
-    *has_newline = ch ? 1 : 0;
+    *has_newline = (ch != '\0');
 
-    if (buffer) {
-	buffer[i] = 0;
-    }
+    if (buffer != NULL)
+	buffer[i] = '\0';
 
     return buffer;
 }
@@ -630,20 +629,20 @@ check_find_events(Dlg_head *h)
 /*
  * search_content:
  *
- * Search the global (FIXME) regexp compiled content_pattern string in the
- * DIRECTORY/FILE.  It will add the found entries to the find listbox.
+ * Search the content_pattern string in the DIRECTORY/FILE.
+ * It will add the found entries to the find listbox.
  *
- * returns 0 if do_search should look for another file
- *         1 if do_search should exit and proceed to the event handler
+ * returns FALSE if do_search should look for another file
+ *         TRUE if do_search should exit and proceed to the event handler
  */
-static int
+static gboolean
 search_content (Dlg_head *h, const char *directory, const char *filename)
 {
     struct stat s;
     char buffer [BUF_4K];
     char *fname = NULL;
     int file_fd;
-    int ret_val = 0;
+    gboolean ret_val = FALSE;
 
     fname = concat_dir_and_file (directory, filename);
 
@@ -670,10 +669,11 @@ search_content (Dlg_head *h, const char *directory, const char *filename)
 	int line = 1;
 	int pos = 0;
 	int n_read = 0;
-	int has_newline;
+	gboolean has_newline;
 	char *p = NULL;
 	gboolean found = FALSE;
 	gsize found_len;
+	char result [BUF_MEDIUM];
 
 	if (resuming) {
 	    /* We've been previously suspended, start from the previous position */
@@ -681,15 +681,15 @@ search_content (Dlg_head *h, const char *directory, const char *filename)
 	    line = last_line;
 	    pos = last_pos;
 	}
-	while ((p = get_line_at (file_fd, buffer, &pos, &n_read, sizeof (buffer), &has_newline)) && (ret_val == 0)){
-	    if (found == FALSE){	/* Search in binary line once */
-		if (mc_search_run (search_content_handle, (const void *) p, 0, strlen (p), &found_len))
-		{
-		    char *fnd_info = g_strdup_printf ("%d:%s", line, filename);
-		    find_add_match (directory, fnd_info);
-		    g_free (fnd_info);
-		    found = TRUE;
-		}
+	while (!ret_val
+		&& (p = get_line_at (file_fd, buffer, sizeof (buffer),
+					&pos, &n_read, &has_newline)) != NULL) {
+	    if (!found		/* Search in binary line once */
+		    && mc_search_run (search_content_handle,
+					(const void *) p, 0, strlen (p), &found_len)) {
+		g_snprintf (result, sizeof (result), "%d:%s", line, filename);
+		find_add_match (directory, result);
+		found = TRUE;
 	    }
 	    g_free (p);
 
@@ -706,13 +706,13 @@ search_content (Dlg_head *h, const char *directory, const char *filename)
 		switch (res) {
 		case FIND_ABORT:
 		    stop_idle (h);
-		    ret_val = 1;
+		    ret_val = TRUE;
 		    break;
 		case FIND_SUSPEND:
 		    resuming = 1;
 		    last_line = line;
 		    last_pos = pos;
-		    ret_val = 1;
+		    ret_val = TRUE;
 		    break;
 		default:
 		    break;
