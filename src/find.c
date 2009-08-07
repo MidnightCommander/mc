@@ -693,11 +693,12 @@ search_content (Dlg_head *h, const char *directory, const char *filename)
 	    }
 	    g_free (p);
 
-	    if (has_newline) {
-		line++;
+	    if (found && content_first_hit_flag)
+		break;
 
-		if (!content_first_hit_flag)
-		    found = FALSE;
+	    if (has_newline) {
+		found = FALSE;
+		line++;
 	    }
 
 	    if ((line & 0xff) == 0) {
