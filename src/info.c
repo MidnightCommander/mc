@@ -114,7 +114,7 @@ info_show_info (struct WInfo *info)
 		    myfs_stats.nodes);
 	else
 	    addstr (_("No node information"));
-	
+
     case 15:
 	widget_move (&info->widget, 15, 3);
 	if (myfs_stats.avail > 0 || myfs_stats.total > 0){
@@ -139,20 +139,23 @@ info_show_info (struct WInfo *info)
         str_printf (buff, _("Device:    %s"), 
                 str_trunc (myfs_stats.device, info->widget.cols - i18n_adjust));
         addstr (str_term_form (buff->str));
-        g_string_set_size(buff,0);
+        g_string_set_size(buff, 0);
     case 12:
 	widget_move (&info->widget, 12, 3);
         str_printf (buff, _("Filesystem: %s"),
 		str_trunc (myfs_stats.mpoint, info->widget.cols - i18n_adjust));
         addstr (str_term_form (buff->str));
+        g_string_set_size(buff, 0);
     case 11:
 	widget_move (&info->widget, 11, 3);
         str_printf (buff, _("Accessed:  %s"), file_date (st.st_atime));
         addstr (str_term_form (buff->str));
+        g_string_set_size(buff, 0);
     case 10:
 	widget_move (&info->widget, 10, 3);
         str_printf (buff, _("Modified:  %s"), file_date (st.st_mtime));
         addstr (str_term_form (buff->str));
+        g_string_set_size(buff, 0);
     case 9:
 	widget_move (&info->widget, 9, 3);
 	/* TRANSLATORS: "Status changed", like in the stat(2) man page */
@@ -177,7 +180,7 @@ info_show_info (struct WInfo *info)
 		(long int) st.st_blocks);
 #endif
 	}
-	
+
     case 7:
 	widget_move (&info->widget, 7, 3);
 	tty_printf (_("Owner:     %s/%s"),
@@ -206,8 +209,8 @@ info_show_info (struct WInfo *info)
 				    info->widget.cols - i18n_adjust));
             addstr (str_term_form (buff->str));
 	} else
-		addstr (_("File:       None"));
-     
+	    addstr (_("File:       None"));
+
     case 2:
     case 1:
     case 0:
