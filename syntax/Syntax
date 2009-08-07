@@ -97,6 +97,9 @@ include swig.syntax
 file ..\*\\.(php|PHP)[0-9]?$ PHP\sProgram
 include php.syntax
 
+file ..\*\\.ij[xs]$ J\sFile
+include j.syntax
+
 file ..\*\\.(java|JAVA|Java|jav|groovy|GROOVY|Groovy)$ Java\sProgram
 include java.syntax
 

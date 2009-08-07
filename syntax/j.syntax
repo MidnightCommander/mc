@@ -1,0 +1,42 @@
+# J syntax highlighting
+
+context default
+
+    keyword assert. brightred
+    keyword break. brightred
+    keyword case. brightred
+    keyword catch. brightred
+    keyword catchd. brightred
+    keyword catcht. brightred
+    keyword continue. brightred
+    keyword do. brightred
+    keyword else. brightred
+    keyword elseif. brightred
+    keyword end. brightred
+    keyword fcase. brightred
+    keyword for. brightred
+    keyword for_\{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\]. brightred
+    keyword goto_\{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\]. brightred
+    keyword if. brightred
+    keyword label_\{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\]. brightred
+    keyword return. brightred
+    keyword select. brightred
+    keyword throw. brightred
+    keyword trap. brightred
+    keyword try. brightred
+    keyword while. brightred
+    keyword whilst. brightred
+
+    keyword NB. green
+
+    keyword \{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\]\[\s\]=: white
+    keyword '\{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_\s\]'\[\s\]=: white
+
+context ' ' brightcyan
+#    spellcheck
+
+context exclusive linestart NB.\s\*\s \n brightgreen
+#    spellcheck
+
+context exclusive NB. \n green
+#    spellcheck
