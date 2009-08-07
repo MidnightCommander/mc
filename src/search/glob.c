@@ -110,6 +110,33 @@ mc_search__glob_translate_to_regex (gchar * str, gsize * len)
     return buff;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+static GString *
+mc_search__translate_replace_glob_to_regex (gchar *str)
+{
+    GString *buff = g_string_new ("");
+    int cnt = '0';
+
+    while (*str) {
+	char c = *str++;
+	switch (c) {
+	case '*':
+	case '?':
+	    g_string_append_c (buff, '\\');
+	    c = ++cnt;
+	    break;
+	/* breaks copying: mc uses "\0" internally, it must not be changed */
+	/*case '\\':*/
+	case '&':
+	    g_string_append_c (buff, '\\');
+	    break;
+	}
+	g_string_append_c (buff, c);
+    }
+    return buff;
+}
+
 /*** public functions ****************************************************************************/
 
 void
@@ -141,8 +168,15 @@ mc_search__run_glob (mc_search_t * mc_search, const void *user_data,
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+
 GString *
 mc_search_glob_prepare_replace_str (mc_search_t * mc_search, GString * replace_str)
 {
-    return mc_search_regex_prepare_replace_str (mc_search, replace_str);
+    GString *repl = mc_search__translate_replace_glob_to_regex(replace_str->str);
+    GString *res = mc_search_regex_prepare_replace_str (mc_search, repl);
+    g_string_free (repl, TRUE);
+    return res;
 }
+
+/* --------------------------------------------------------------------------------------------- */
