@@ -15,7 +15,7 @@ test_iso () {
     fi
     if test -n "$CHARSET"; then
 	CHARSET=`echo "$CHARSET" | tr '[A-Z]' '[a-z]' | sed -e 's/^iso-/iso/'`
-	isoinfo -j $CHARSET -i /dev/null 2>&1 | grep "Unknown charset" >/dev/null && CHARSET=
+	isoinfo -j $CHARSET -i /dev/null 2>&1 | @AWK@ "/Iconv not yet supported|Unknown charset/" >/dev/null && CHARSET=
     fi
     if test -n "$CHARSET"; then
 	JOLIET_OPT="-j $CHARSET -J"
@@ -23,7 +23,7 @@ test_iso () {
 	JOLIET_OPT="-J"
     fi
     ISOINFO="isoinfo -R"
-    isoinfo -d -i "$1" | grep "NO Joliet" > /dev/null || ISOINFO="$ISOINFO $JOLIET_OPT"
+    isoinfo -d -i "$1" | @AWK@ "/UCS level 1|NO Joliet/" > /dev/null || ISOINFO="$ISOINFO $JOLIET_OPT"
 }
 
 mcisofs_list () {
