@@ -3146,12 +3146,13 @@ view_find (WView *view, gsize search_start, gsize *len)
     if (view->search_backwards) {
         search_end = view_get_filesize (view);
         while ((int) search_start >= 0) {
-            if (search_end - search_start > view->search->original_len && mc_search_is_fixed_search_str(view->search))
+            if (search_end > search_start + view->search->original_len && mc_search_is_fixed_search_str(view->search))
                 search_end = search_start + view->search->original_len;
 
             view_read_start (view, &view->search_onechar_info, search_start);
 
-            if ( mc_search_run(view->search, (void *) view, search_start, search_end, len))
+            if ( mc_search_run(view->search, (void *) view, search_start, search_end, len)
+                && view->search->normal_offset == search_start )
                 return TRUE;
 
             search_start--;
