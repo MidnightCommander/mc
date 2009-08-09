@@ -497,6 +497,15 @@ edit_save_as_cmd (WEdit *edit)
 		    save_lock = edit_lock_file (exp);
 	    }
 
+	    if (different_filename)
+	    {
+		/*
+		 * Allow user to write into saved (under another name) file
+		 * even if original file had r/o user permissions.
+		 */
+		edit->stat1.st_mode |= S_IWRITE;
+	    }
+
 	    rv = edit_save_file (edit, exp);
 	    switch (rv) {
 	    case 1:
