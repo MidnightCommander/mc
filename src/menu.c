@@ -391,13 +391,17 @@ menubar_callback (Widget *w, widget_msg_t msg, int parm)
 	}
 
     case WIDGET_DRAW:
-	if (menubar_visible)
+	if (menubar_visible) {
 	    menubar_draw (menubar);
-	else
-	    /* try show menu after screen resize */
-	    send_message (w, WIDGET_FOCUS, 0);
-	return MSG_HANDLED;
+	    return MSG_HANDLED;
+	}
+	/* fall through */
 
+    case WIDGET_RESIZED:
+	/* try show menu after screen resize */
+	send_message (w, WIDGET_FOCUS, 0);
+	return MSG_HANDLED;
+	
     default:
 	return default_proc (msg, parm);
     }
