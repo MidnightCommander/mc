@@ -944,8 +944,11 @@ fish_chmod (struct vfs_class *me, const char *path, int mode)
 {
     PREFIX
     g_snprintf(buf, sizeof(buf), "#CHMOD %4.4o /%s\n"
-				 "chmod %4.4o /%s 2>/dev/null\n"
-				 "echo '### 000'\n", 
+				 "if chmod %4.4o /%s 2>/dev/null; then\n"
+				    "echo '### 000'\n"
+				 "else\n"
+				    "echo '### 500'\n"
+				 "fi\n",
 	    mode & 07777, rpath,
 	    mode & 07777, rpath);
     POSTFIX(OPT_FLUSH);
@@ -978,11 +981,17 @@ static int fish_##name (struct vfs_class *me, const char *path1, const char *pat
 }
 
 FISH_OP(rename, "#RENAME /%s /%s\n"
-		"mv /%s /%s 2>/dev/null\n"
-		"echo '### 000'" )
+		"if mv /%s /%s 2>/dev/null; then\n"
+		    "echo '### 000'\n"
+		"else\n"
+		    "echo '### 500'\n"
+		"fi\n")
 FISH_OP(link,   "#LINK /%s /%s\n"
-		"ln /%s /%s 2>/dev/null\n"
-		"echo '### 000'" )
+		"if ln /%s /%s 2>/dev/null; then\n"
+		    "echo '### 000'\n"
+		"else\n"
+		    "echo '### 500'\n"
+		"fi\n")
 
 static int fish_symlink (struct vfs_class *me, const char *setto, const char *path)
 {
@@ -991,8 +1000,11 @@ static int fish_symlink (struct vfs_class *me, const char *setto, const char *pa
     qsetto = strutils_shell_escape (setto);
     g_snprintf(buf, sizeof(buf),
             "#SYMLINK %s /%s\n"
-	    "ln -s %s /%s 2>/dev/null\n"
-	    "echo '### 000'\n",
+	    "if ln -s %s /%s 2>/dev/null; then\n"
+		"echo '### 000'\n"
+	    "else\n"
+		"echo '### 500'\n"
+	    "fi\n",
 	    qsetto, rpath, qsetto, rpath);
     g_free (qsetto);
     POSTFIX(OPT_FLUSH);
@@ -1016,19 +1028,16 @@ fish_chown (struct vfs_class *me, const char *path, int owner, int group)
     {
 	PREFIX
 	g_snprintf (buf, sizeof(buf),
-    	    "#CHOWN %s /%s\n"
-	    "chown %s /%s 2>/dev/null\n"
-	    "echo '### 000'\n", 
-	    sowner, rpath,
-	    sowner, rpath);
-	fish_send_command (me, super, buf, OPT_FLUSH); 
+	    "#CHOWN %s:%s /%s\n"
+	    "if chown %s:%s /%s 2>/dev/null; then\n"
+		"echo '### 000'\n"
+	    "else\n"
+		"echo '### 500'\n"
+	    "fi\n",
+	    sowner, sgroup, rpath,
+	    sowner, sgroup, rpath);
+	fish_send_command (me, super, buf, OPT_FLUSH);
 	/* FIXME: what should we report if chgrp succeeds but chown fails? */
-	g_snprintf (buf, sizeof(buf),
-	    "#CHGRP /%s /%s\n"
-	    "chgrp %s /%s 2>/dev/null\n"
-	    "echo '### 000'\n", 
-	    sgroup, rpath,
-	    sgroup, rpath);
 	/* fish_send_command(me, super, buf, OPT_FLUSH); */
 	POSTFIX (OPT_FLUSH)
     }
@@ -1039,8 +1048,11 @@ static int fish_unlink (struct vfs_class *me, const char *path)
     PREFIX
     g_snprintf(buf, sizeof(buf),
             "#DELE /%s\n"
-	    "rm -f /%s 2>/dev/null\n"
-	    "echo '### 000'\n",
+	    "if rm -f /%s 2>/dev/null; then\n"
+		"echo '### 000'\n"
+	    "else\n"
+		"echo '### 500'\n"
+	    "fi\n",
 	    rpath, rpath);
     POSTFIX(OPT_FLUSH);
 }
@@ -1076,8 +1088,11 @@ static int fish_mkdir (struct vfs_class *me, const char *path, mode_t mode)
 
     g_snprintf(buf, sizeof(buf),
             "#MKD /%s\n"
-	    "mkdir /%s 2>/dev/null\n"
-	    "echo '### 000'\n",
+	    "if mkdir /%s 2>/dev/null; then\n"
+		"echo '### 000'\n"
+	    "else\n"
+		"echo '### 500'\n"
+	    "fi\n",
 	    rpath, rpath);
 
     g_free (rpath);
@@ -1097,8 +1112,11 @@ static int fish_rmdir (struct vfs_class *me, const char *path)
     PREFIX
     g_snprintf(buf, sizeof(buf),
             "#RMD /%s\n"
-	    "rmdir /%s 2>/dev/null\n"
-	    "echo '### 000'\n",
+	    "if rmdir /%s 2>/dev/null; then\n"
+		"echo '### 000'\n"
+	    "else\n"
+		"echo '### 500'\n"
+	    "fi\n",
 	    rpath, rpath);
     POSTFIX(OPT_FLUSH);
 }
