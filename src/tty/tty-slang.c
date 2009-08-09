@@ -74,6 +74,15 @@ extern int reset_hp_softkeys;
 #   define SA_RESTART 0
 #endif
 
+#ifndef SLTT_MAX_SCREEN_COLS
+#define SLTT_MAX_SCREEN_COLS 512
+#endif
+
+#ifndef SLTT_MAX_SCREEN_ROWS
+#define SLTT_MAX_SCREEN_ROWS 512
+#endif
+
+
 /*** file scope type declarations **************************************/
 
 /*** file scope variables **********************************************/
@@ -128,64 +137,6 @@ static const struct {
 };
 
 /*** file scope functions **********************************************/
-
-#ifndef HAVE_SLANG_PRIVATE
-    /* Private interfaces have been stripped, so we cannot use them */
-#    define SLang_getkey2() SLang_getkey ()
-#    define SLang_input_pending2(s) SLang_input_pending (s)
-#else
-static unsigned int
-SLang_getkey2 (void)
-{
-    if (SLang_Input_Buffer_Len) {
-	unsigned int ch;
-	unsigned int imax;
-
-	ch = (unsigned int) *SLang_Input_Buffer;
-	SLang_Input_Buffer_Len--;
-	imax = SLang_Input_Buffer_Len;
-
-	memmove ((char *) SLang_Input_Buffer,
-		(char *) (SLang_Input_Buffer + 1), imax);
-
-	return ch;
-     }
-
-#if SLANG_VERSION >= 10000
-    return _SLsys_getkey ();
-#else
-    return SLsys_getkey();
-#endif
-}
-
-static int
-SLang_input_pending2 (int tsecs)
-{
-    int n, i;
-    unsigned char c;
-
-    if (SLang_Input_Buffer_Len)
-	return (int) SLang_Input_Buffer_Len;
-#if SLANG_VERSION >= 10000
-    n = _SLsys_input_pending (tsecs);
-#else
-    n = SLsys_input_pending (tsecs);
-#endif
-    if (n <= 0)
-	return 0;
-
-    i = SLang_getkey2 ();
-    if (i == SLANG_GETKEY_ERROR)
-	return 0;  /* don't put crippled error codes into the input buffer */
-
-    c = (unsigned char) i;
-    SLang_ungetkey_string (&c, 1);
-
-    return n;
-}
-
-#endif				/* HAVE_SLANG_PRIVATE */
-
 
 /* HP Terminals have capabilities (pfkey, pfloc, pfx) to program function keys.
    elm 2.4pl15 invoked with the -K option utilizes these softkeys and the
@@ -249,9 +200,7 @@ tty_init (gboolean slow, gboolean ugly_lines)
     slow_tty = slow;
 
     SLtt_get_terminfo ();
-#if SLANG_VERSION >= 20000
     SLutf8_enable (-1);
-#endif
    /*
     * If the terminal in not in terminfo but begins with a well-known
     * string such as "linux" or "xterm" S-Lang will go on, but the
@@ -260,8 +209,7 @@ tty_init (gboolean slow, gboolean ugly_lines)
     * small, large and negative screen dimensions.
     */
     if ((COLS < 10) || (LINES < 5)
-	|| ((SLang_Version < 10407) && ((COLS > 255) || (LINES > 255)))
-	|| ((SLang_Version >= 10407) && ((COLS > 512) || (LINES > 512)))) {
+	|| (COLS > SLTT_MAX_SCREEN_COLS) || (LINES > SLTT_MAX_SCREEN_ROWS)) {
 	fprintf (stderr,
 		_("Screen size %dx%d is not supported.\n"
 		    "Check the TERM environment variable.\n"),
@@ -395,11 +343,10 @@ tty_lowlevel_getch (void)
 {
     int c;
 
-    if (no_slang_delay
-	&& (SLang_input_pending2 (0) == 0))
+    if (no_slang_delay && (SLang_input_pending (0) == 0))
 	return -1;
 
-    c = SLang_getkey2 ();
+    c = SLang_getkey ();
     if (c == SLANG_GETKEY_ERROR) {
 	fprintf (stderr,
 		    "SLang_getkey returned SLANG_GETKEY_ERROR\n"
