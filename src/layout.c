@@ -517,6 +517,7 @@ layout_change (void)
     done_menu ();
     init_menu ();
     menubar_arrange (the_menubar);
+    load_hint (1);
 }
 
 void layout_cmd (void)
@@ -666,13 +667,11 @@ setup_panels (void)
 			       LINES - output_lines - keybar_visible - 1,
 			       LINES - keybar_visible - 1);
     }
-    if (message_visible) {
+    if (message_visible)
 	widget_set_size (&the_hint->widget, height + start_y, 0, 1, COLS);
-	set_hintbar ("");	/* clean up the line */
-    } else
+    else
 	widget_set_size (&the_hint->widget, 0, 0, 0, 0);
 
-    load_hint (1);
     update_xterm_title_path ();
 }
 

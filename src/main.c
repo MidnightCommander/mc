@@ -1516,6 +1516,7 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	return MSG_NOT_HANDLED;
 
     case DLG_DRAW:
+	load_hint (1);
 	/* We handle the special case of the output lines */
 	if (console_flag && output_lines)
 	    show_console_contents (output_start_y,
@@ -1580,11 +1581,13 @@ load_hint (int force)
 	return;
 
     if (!message_visible) {
-	label_set_text (the_hint, 0);
+	label_set_text (the_hint, NULL);
 	return;
     }
 
-    if ((hint = get_random_hint (force))) {
+    hint = get_random_hint (force);
+
+    if (hint != NULL) {
 	if (*hint)
 	    set_hintbar (hint);
 	g_free (hint);
@@ -1604,7 +1607,6 @@ setup_panels_and_run_mc (void)
     add_widget (midnight_dlg, get_panel_widget (0));
     add_widget (midnight_dlg, get_panel_widget (1));
     add_widget (midnight_dlg, the_hint);
-    load_hint (1);
     add_widget (midnight_dlg, cmdline);
     add_widget (midnight_dlg, the_prompt);
     add_widget (midnight_dlg, the_bar);
