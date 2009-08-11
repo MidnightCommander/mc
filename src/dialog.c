@@ -169,8 +169,10 @@ create_dlg (int y1, int x1, int lines, int cols, const int *color_set,
 	y1 -= 2;
 
     new_d = g_new0 (Dlg_head, 1);
-    if (color_set != NULL)
-	memmove (new_d->color, color_set, sizeof (new_d->color));
+    if (color_set != NULL) {
+	new_d->color = g_new (int, DLG_COLOR_NUM);
+	memmove (new_d->color, color_set, sizeof (int) * DLG_COLOR_NUM);
+    }
     new_d->help_ctx = help_ctx;
     new_d->callback = callback ? callback : default_dlg_callback;
     new_d->x = x1;
@@ -802,6 +804,7 @@ destroy_dlg (Dlg_head *h)
 	g_free (h->current);
 	h->current = c;
     }
+    g_free (h->color);
     g_free (h->title);
     g_free (h);
 

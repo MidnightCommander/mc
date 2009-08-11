@@ -50,7 +50,7 @@ Listbox *
 create_listbox_window_delta (int delta_x, int delta_y, int cols, int lines,
 				const char *title, const char *help)
 {
-    const int listbox_colors[4] =
+    const int listbox_colors[DLG_COLOR_NUM] =
     {
 	MENU_ENTRY_COLOR,
 	MENU_SELECTED_COLOR,

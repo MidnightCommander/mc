@@ -26,12 +26,6 @@
 #include "../src/tty/mouse.h"
 #include "util.h" /* Hook */
 
-/* Color constants */
-#define DLG_NORMALC(h)		((h)->color[0])
-#define DLG_FOCUSC(h)		((h)->color[1])
-#define DLG_HOT_NORMALC(h)	((h)->color[2])
-#define DLG_HOT_FOCUSC(h)	((h)->color[3])
-
 /* Common return values */
 #define B_EXIT		0
 #define B_CANCEL	1
@@ -89,11 +83,18 @@ typedef enum {
 struct Dlg_head;
 typedef cb_ret_t (*dlg_cb_fn)(struct Dlg_head *h, dlg_msg_t msg, int parm);
 
+/* Dialog color constants */
+#define DLG_COLOR_NUM		4
+#define DLG_NORMALC(h)		((h)->color[0])
+#define DLG_FOCUSC(h)		((h)->color[1])
+#define DLG_HOT_NORMALC(h)	((h)->color[2])
+#define DLG_HOT_FOCUSC(h)	((h)->color[3])
+
 typedef struct Dlg_head {
     /* Set by the user */
     int flags;			/* User flags */
     const char *help_ctx;	/* Name of the help entry */
-    const int color[4];		/* Color set. Unused in viewer and editor */
+    int *color;			/* Color set. Unused in viewer and editor */
     /*notconst*/ char *title;	/* Title of the dialog */
 
     /* Set and received by the user */

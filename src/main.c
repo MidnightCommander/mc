@@ -1671,7 +1671,7 @@ mc_maybe_editor_or_viewer (void)
 static void
 do_nc (void)
 {
-    const int midnight_colors[4] =
+    const int midnight_colors[DLG_COLOR_NUM] =
     {
 	NORMAL_COLOR,	/* NORMALC */
 	REVERSE_COLOR,	/* FOCUSC */
