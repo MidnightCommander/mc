@@ -64,7 +64,6 @@
 #include "subshell.h"		/* use_subshell */
 #include "cons.saver.h"		/* console_flag */
 #include "dialog.h"		/* Widget */
-#include "view.h"		/* mcview_viewer() */
 #include "wtools.h"		/* message() */
 #include "widget.h"		/* push_history() */
 #include "main.h"		/* change_panel() */
@@ -80,6 +79,7 @@
 #include "history.h"
 #include "strutil.h"
 #include "dir.h"
+#include "../src/viewer/mcviewer.h"
 
 #ifndef MAP_FILE
 #   define MAP_FILE 0
@@ -123,25 +123,25 @@ view_file_at_line (const char *filename, int plain_view, int internal,
 	int changed_nroff_flag = 0;
 	int changed_magic_flag = 0;
 
-	altered_hex_mode = 0;
-	altered_nroff_flag = 0;
-	altered_magic_flag = 0;
-	if (default_hex_mode)
+	mcview_altered_hex_mode = 0;
+	mcview_altered_nroff_flag = 0;
+	mcview_altered_magic_flag = 0;
+	if (mcview_default_hex_mode)
 	    changed_hex_mode = 1;
-	if (default_nroff_flag)
+	if (mcview_default_nroff_flag)
 	    changed_nroff_flag = 1;
-	if (default_magic_flag)
+	if (mcview_default_magic_flag)
 	    changed_magic_flag = 1;
-	default_hex_mode = 0;
-	default_nroff_flag = 0;
-	default_magic_flag = 0;
+	mcview_default_hex_mode = 0;
+	mcview_default_nroff_flag = 0;
+	mcview_default_magic_flag = 0;
 	mcview_viewer (NULL, filename, &move_dir, start_line);
-	if (changed_hex_mode && !altered_hex_mode)
-	    default_hex_mode = 1;
-	if (changed_nroff_flag && !altered_nroff_flag)
-	    default_nroff_flag = 1;
-	if (changed_magic_flag && !altered_magic_flag)
-	    default_magic_flag = 1;
+	if (changed_hex_mode && !mcview_altered_hex_mode)
+	    mcview_default_hex_mode = 1;
+	if (changed_nroff_flag && !mcview_altered_nroff_flag)
+	    mcview_default_nroff_flag = 1;
+	if (changed_magic_flag && !mcview_altered_magic_flag)
+	    mcview_default_magic_flag = 1;
 	repaint_screen ();
 	return move_dir;
     }

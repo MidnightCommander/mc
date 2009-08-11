@@ -48,7 +48,7 @@
 #include "dialog.h"
 #include "widget.h"
 #include "wtools.h"
-#include "view.h" /* for default_* externs */
+#include "../src/viewer/mcviewer.h" /* for default_* externs */
 
 #define MAX_ENTRIES 16
 #define MAX_ENTRY_LEN 60
@@ -90,16 +90,16 @@ int check_format_view (const char *p)
     	if (*q == '{'){
     	    for (q++;*q && *q != '}';q++) {
     	    	if (!strncmp (q, "ascii", 5)) {
-    	    	    default_hex_mode = 0;
+    	    	    mcview_default_hex_mode = 0;
     	    	    q += 4;
     	    	} else if (!strncmp (q, "hex", 3)) {
-    	    	    default_hex_mode = 1;
+    	    	    mcview_default_hex_mode = 1;
     	    	    q += 2;
     	    	} else if (!strncmp (q, "nroff", 5)) {
-    	    	    default_nroff_flag = 1;
+    	    	    mcview_default_nroff_flag = 1;
     	    	    q += 4;
     	    	} else if (!strncmp (q, "unform", 6)) {
-    	    	    default_nroff_flag = 0;
+    	    	    mcview_default_nroff_flag = 0;
     	    	    q += 5;
     	    	} 
     	    }

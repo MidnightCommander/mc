@@ -36,11 +36,34 @@
  */
 
 #include <config.h>
+#include <errno.h>
+#include <fcntl.h>
 
 #include "../src/global.h"
+#include "../src/strutil.h"
+#include "../src/myslang.h"
+#include "../src/main.h"
 #include "../src/viewer/internal.h"
 
 /*** global variables ****************************************************************************/
+
+int mcview_default_hex_mode = 0;
+int mcview_default_nroff_flag = 1;
+int mcview_global_wrap_mode = 1;
+int mcview_default_magic_flag = 1;
+
+int mcview_altered_hex_mode = 0;
+int mcview_altered_magic_flag = 0;
+int mcview_altered_nroff_flag = 0;
+
+int mcview_remember_file_position = FALSE;
+
+/* Maxlimit for skipping updates */
+int mcview_max_dirt_limit = 10;
+
+/* Scrolling is done in pages or line increments */
+int mcview_mouse_move_pages = 1;
+
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -48,8 +71,325 @@
 
 /*** file scope variables ************************************************************************/
 
+
 /*** file scope functions ************************************************************************/
 
+/* --------------------------------------------------------------------------------------------- */
+
+/* Both views */
+static int
+mcview_event (mcview_t * view, Gpm_Event * event, int *result)
+{
+    screen_dimen y, x;
+
+    *result = MOU_NORMAL;
+
+    /* We are not interested in the release events */
+    if (!(event->type & (GPM_DOWN | GPM_DRAG)))
+        return 0;
+
+    /* Wheel events */
+    if ((event->buttons & GPM_B_UP) && (event->type & GPM_DOWN)) {
+        mcview_move_up (view, 2);
+        return 1;
+    }
+    if ((event->buttons & GPM_B_DOWN) && (event->type & GPM_DOWN)) {
+        mcview_move_down (view, 2);
+        return 1;
+    }
+
+    x = event->x;
+    y = event->y;
+
+    /* Scrolling left and right */
+    if (!view->text_wrap_mode) {
+        if (x < view->data_area.width * 1 / 4) {
+            mcview_move_left (view, 1);
+            goto processed;
+        } else if (x < view->data_area.width * 3 / 4) {
+            /* ignore the click */
+        } else {
+            mcview_move_right (view, 1);
+            goto processed;
+        }
+    }
+
+    /* Scrolling up and down */
+    if (y < view->data_area.top + view->data_area.height * 1 / 3) {
+        if (mcview_mouse_move_pages)
+            mcview_move_up (view, view->data_area.height / 2);
+        else
+            mcview_move_up (view, 1);
+        goto processed;
+    } else if (y < view->data_area.top + view->data_area.height * 2 / 3) {
+        /* ignore the click */
+    } else {
+        if (mcview_mouse_move_pages)
+            mcview_move_down (view, view->data_area.height / 2);
+        else
+            mcview_move_down (view, 1);
+        goto processed;
+    }
+
+    return 0;
+
+  processed:
+    *result = MOU_REPEAT;
+    return 1;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* Real view only */
+static int
+mcview_real_event (Gpm_Event * event, void *x)
+{
+    mcview_t *view = (mcview_t *) x;
+    int result;
+
+    if (mcview_event (view, event, &result))
+        mcview_update (view);
+    return result;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 /*** public functions ****************************************************************************/
+
+/* --------------------------------------------------------------------------------------------- */
+
+mcview_t *
+mcview_new (int y, int x, int cols, int lines, int is_panel)
+{
+    mcview_t *view = g_new0 (mcview_t, 1);
+    size_t i;
+
+    init_widget (&view->widget, y, x, lines, cols, mcview_callback, mcview_real_event);
+
+    view->filename = NULL;
+    view->command = NULL;
+
+    mcview_set_datasource_none (view);
+
+    view->growbuf_in_use = FALSE;
+    /* leave the other growbuf fields uninitialized */
+
+    view->hex_mode = FALSE;
+    view->hexedit_mode = FALSE;
+    view->hexview_in_text = FALSE;
+    view->text_nroff_mode = FALSE;
+    view->text_wrap_mode = FALSE;
+    view->magic_mode = FALSE;
+    view->utf8 = FALSE;
+
+    view->hexedit_lownibble = FALSE;
+    view->coord_cache = NULL;
+
+    view->dpy_frame_size = is_panel ? 1 : 0;
+    view->dpy_start = 0;
+    view->dpy_text_column = 0;
+    view->dpy_end = 0;
+    view->hex_cursor = 0;
+    view->cursor_col = 0;
+    view->cursor_row = 0;
+    view->change_list = NULL;
+    view->converter = str_cnv_from_term;
+
+    /* {status,ruler,data}_area are left uninitialized */
+
+    view->dirty = 0;
+    view->dpy_bbar_dirty = TRUE;
+    view->bytes_per_line = 1;
+
+    view->search_start = 0;
+    view->search_end = 0;
+
+    view->want_to_quit = FALSE;
+    view->marker = 0;
+    for (i = 0; i < sizeof (view->marks) / sizeof (view->marks[0]); i++)
+        view->marks[i] = 0;
+
+    view->move_dir = 0;
+    view->update_steps = 0;
+    view->update_activate = 0;
+
+    if (mcview_default_hex_mode)
+        mcview_toggle_hex_mode (view);
+    if (mcview_default_nroff_flag)
+        mcview_toggle_nroff_mode (view);
+    if (mcview_global_wrap_mode)
+        mcview_toggle_wrap_mode (view);
+    if (mcview_default_magic_flag)
+        mcview_toggle_magic_mode (view);
+
+    return view;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* Real view only */
+int
+mcview_viewer (const char *command, const char *file, int *move_dir_p, int start_line)
+{
+    gboolean succeeded;
+    mcview_t *mcview_t;
+    WButtonBar *bar;
+    Dlg_head *view_dlg;
+
+    /* Create dialog and widgets, put them on the dialog */
+    view_dlg =
+        create_dlg (0, 0, LINES, COLS, NULL, mcview_dialog_callback,
+                    "[Internal File Viewer]", NULL, DLG_WANT_TAB);
+
+    mcview_t = mcview_new (0, 0, COLS, LINES - 1, 0);
+
+    bar = buttonbar_new (1);
+
+    add_widget (view_dlg, bar);
+    add_widget (view_dlg, mcview_t);
+
+    succeeded = mcview_load (mcview_t, command, file, start_line);
+    if (succeeded) {
+        run_dlg (view_dlg);
+        if (move_dir_p)
+            *move_dir_p = mcview_t->move_dir;
+    } else {
+        if (move_dir_p)
+            *move_dir_p = 0;
+    }
+    destroy_dlg (view_dlg);
+
+    return succeeded;
+}
+
+/* {{{ Miscellaneous functions }}} */
+
+/* --------------------------------------------------------------------------------------------- */
+
+gboolean
+mcview_load (mcview_t * view, const char *command, const char *file, int start_line)
+{
+    int i, type;
+    int fd = -1;
+    char tmp[BUF_MEDIUM];
+    const char *enc;
+    char *canon_fname;
+    struct stat st;
+#ifdef HAVE_CHARSET
+    const char *cp_id;
+#endif
+    gboolean retval = FALSE;
+#ifdef HAVE_CHARSET
+    cp_id = get_codepage_id (source_codepage);
+
+    if (cp_id != NULL && str_isutf8 (cp_id) != 0)
+        view->utf8 = TRUE;
+    else
+        view->utf8 = FALSE;
+#endif
+
+    assert (view->bytes_per_line != 0);
+    mcview_done (view);
+
+    /* Set up the state */
+    mcview_set_datasource_none (view);
+    view->filename = g_strdup (file);
+    view->command = 0;
+
+    /* Clear the markers */
+    view->marker = 0;
+    for (i = 0; i < 10; i++)
+        view->marks[i] = 0;
+
+    if (!mcview_is_in_panel (view)) {
+        view->dpy_text_column = 0;
+    }
+
+    if (command && (view->magic_mode || file == NULL || file[0] == '\0')) {
+        retval = mcview_load_command_output (view, command);
+    } else if (file != NULL && file[0] != '\0') {
+        /* Open the file */
+        if ((fd = mc_open (file, O_RDONLY | O_NONBLOCK)) == -1) {
+            g_snprintf (tmp, sizeof (tmp), _(" Cannot open \"%s\"\n %s "),
+                        file, unix_error_string (errno));
+            mcview_show_error (view, tmp);
+            g_free (view->filename);
+            view->filename = NULL;
+            goto finish;
+        }
+
+        /* Make sure we are working with a regular file */
+        if (mc_fstat (fd, &st) == -1) {
+            mc_close (fd);
+            g_snprintf (tmp, sizeof (tmp), _(" Cannot stat \"%s\"\n %s "),
+                        file, unix_error_string (errno));
+            mcview_show_error (view, tmp);
+            g_free (view->filename);
+            view->filename = NULL;
+            goto finish;
+        }
+
+        if (!S_ISREG (st.st_mode)) {
+            mc_close (fd);
+            mcview_show_error (view, _(" Cannot view: not a regular file "));
+            g_free (view->filename);
+            view->filename = NULL;
+            goto finish;
+        }
+
+        if (st.st_size == 0 || mc_lseek (fd, 0, SEEK_SET) == -1) {
+            /* Must be one of those nice files that grow (/proc) */
+            mcview_set_datasource_vfs_pipe (view, fd);
+        } else {
+            type = get_compression_type (fd);
+
+            if (view->magic_mode && (type != COMPRESSION_NONE)) {
+                g_free (view->filename);
+                view->filename = g_strconcat (file, decompress_extension (type), (char *) NULL);
+            }
+            mcview_set_datasource_file (view, fd, &st);
+        }
+        retval = TRUE;
+    }
+
+  finish:
+    view->command = g_strdup (command);
+    view->dpy_start = 0;
+    view->search_start = 0;
+    view->search_end = 0;
+    view->dpy_text_column = 0;
+
+    view->converter = str_cnv_from_term;
+    /* try detect encoding from path */
+    if (view->filename != NULL) {
+        canon_fname = vfs_canon (view->filename);
+        enc = vfs_get_encoding (canon_fname);
+        if (enc != NULL) {
+            view->converter = str_crt_conv_from (enc);
+            if (view->converter == INVALID_CONV)
+                view->converter = str_cnv_from_term;
+        }
+        g_free (canon_fname);
+    }
+
+    mcview_compute_areas (view);
+    assert (view->bytes_per_line != 0);
+    if (mcview_remember_file_position && view->filename != NULL && start_line == 0) {
+        long line, col;
+
+        canon_fname = vfs_canon (view->filename);
+        load_file_position (canon_fname, &line, &col);
+        g_free (canon_fname);
+        mcview_moveto (view, mcview_offset_doz (line, 1), col);
+    } else if (start_line > 0) {
+        mcview_moveto (view, start_line - 1, 0);
+    }
+
+    view->hexedit_lownibble = FALSE;
+    view->hexview_in_text = FALSE;
+    view->change_list = NULL;
+
+    return retval;
+}
 
 /* --------------------------------------------------------------------------------------------- */

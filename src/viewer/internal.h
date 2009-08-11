@@ -14,18 +14,40 @@ typedef unsigned int screen_dimen;
 /* Offset in bytes into a file */
 typedef unsigned long offset_type;
 
+#define OFFSETTYPE_PRIX "lX"
+#define OFFSETTYPE_PRId "lu"
+
 /*** enums *************************************************************/
 
 /* data sources of the view */
 enum view_ds {
-    DS_NONE,			/* No data available */
-    DS_STDIO_PIPE,		/* Data comes from a pipe using popen/pclose */
-    DS_VFS_PIPE,		/* Data comes from a piped-in VFS file */
-    DS_FILE,			/* Data comes from a VFS file */
-    DS_STRING			/* Data comes from a string in memory */
+    DS_NONE,                    /* No data available */
+    DS_STDIO_PIPE,              /* Data comes from a pipe using popen/pclose */
+    DS_VFS_PIPE,                /* Data comes from a piped-in VFS file */
+    DS_FILE,                    /* Data comes from a VFS file */
+    DS_STRING                   /* Data comes from a string in memory */
+};
+
+
+/* Offset in bytes into a file */
+typedef enum {
+    INVALID_OFFSET = ((off_t) - 1),
+    OFFSETTYPE_MAX = (~((off_t) 0))
+} mcview_offset_t;
+
+enum ccache_type {
+    CCACHE_OFFSET,
+    CCACHE_LINECOL
 };
 
 /*** structures declarations (and typedefs of structures)***************/
+
+/* A node for building a change list on change_list */
+struct hexedit_change_node {
+    struct hexedit_change_node *next;
+    off_t offset;
+    byte value;
+};
 
 struct area {
     screen_dimen top, left;
@@ -33,92 +55,106 @@ struct area {
 };
 
 
-struct WView {
+/* A cache entry for mapping offsets into line/column pairs and vice versa.
+ * cc_offset, cc_line, and cc_column are the 0-based values of the offset,
+ * line and column of that cache entry. cc_nroff_column is the column
+ * corresponding to cc_offset in nroff mode.
+ */
+struct coord_cache_entry {
+    off_t cc_offset;
+    off_t cc_line;
+    off_t cc_column;
+    off_t cc_nroff_column;
+};
+
+
+typedef struct mcview_struct {
     Widget widget;
 
-    char *filename;		/* Name of the file */
-    char *command;		/* Command used to pipe data in */
+    char *filename;             /* Name of the file */
+    char *command;              /* Command used to pipe data in */
 
-    enum view_ds datasource;	/* Where the displayed data comes from */
+    enum view_ds datasource;    /* Where the displayed data comes from */
 
     /* stdio pipe data source */
-    FILE  *ds_stdio_pipe;	/* Output of a shell command */
+    FILE *ds_stdio_pipe;        /* Output of a shell command */
 
     /* vfs pipe data source */
-    int    ds_vfs_pipe;		/* Non-seekable vfs file descriptor */
+    int ds_vfs_pipe;            /* Non-seekable vfs file descriptor */
 
     /* vfs file data source */
-    int    ds_file_fd;		/* File with random access */
-    off_t  ds_file_filesize;	/* Size of the file */
-    off_t  ds_file_offset;	/* Offset of the currently loaded data */
-    byte  *ds_file_data;	/* Currently loaded data */
-    size_t ds_file_datalen;	/* Number of valid bytes in file_data */
-    size_t ds_file_datasize;	/* Number of allocated bytes in file_data */
+    int ds_file_fd;             /* File with random access */
+    off_t ds_file_filesize;     /* Size of the file */
+    off_t ds_file_offset;       /* Offset of the currently loaded data */
+    byte *ds_file_data;         /* Currently loaded data */
+    size_t ds_file_datalen;     /* Number of valid bytes in file_data */
+    size_t ds_file_datasize;    /* Number of allocated bytes in file_data */
 
     /* string data source */
-    byte  *ds_string_data;	/* The characters of the string */
-    size_t ds_string_len;	/* The length of the string */
+    byte *ds_string_data;       /* The characters of the string */
+    size_t ds_string_len;       /* The length of the string */
 
     /* Growing buffers information */
-    gboolean growbuf_in_use;	/* Use the growing buffers? */
-    byte   **growbuf_blockptr;	/* Pointer to the block pointers */
-    size_t   growbuf_blocks;	/* The number of blocks in *block_ptr */
-    size_t   growbuf_lastindex;	/* Number of bytes in the last page of the
-				   growing buffer */
-    gboolean growbuf_finished;	/* TRUE when all data has been read. */
+    gboolean growbuf_in_use;    /* Use the growing buffers? */
+    byte **growbuf_blockptr;    /* Pointer to the block pointers */
+    size_t growbuf_blocks;      /* The number of blocks in *block_ptr */
+    size_t growbuf_lastindex;   /* Number of bytes in the last page of the
+                                   growing buffer */
+    gboolean growbuf_finished;  /* TRUE when all data has been read. */
 
     /* Editor modes */
-    gboolean hex_mode;		/* Hexview or Hexedit */
-    gboolean hexedit_mode;	/* Hexedit */
-    gboolean hexview_in_text;	/* Is the hexview cursor in the text area? */
-    gboolean text_nroff_mode;	/* Nroff-style highlighting */
-    gboolean text_wrap_mode;	/* Wrap text lines to fit them on the screen */
-    gboolean magic_mode;	/* Preprocess the file using external programs */
+    gboolean hex_mode;          /* Hexview or Hexedit */
+    gboolean hexedit_mode;      /* Hexedit */
+    gboolean hexview_in_text;   /* Is the hexview cursor in the text area? */
+    gboolean text_nroff_mode;   /* Nroff-style highlighting */
+    gboolean text_wrap_mode;    /* Wrap text lines to fit them on the screen */
+    gboolean magic_mode;        /* Preprocess the file using external programs */
+    gboolean utf8;              /* It's multibyte file codeset */
 
     /* Additional editor state */
-    gboolean hexedit_lownibble;	/* Are we editing the last significant nibble? */
-    GArray *coord_cache;	/* Cache for mapping offsets to cursor positions */
+    gboolean hexedit_lownibble; /* Are we editing the last significant nibble? */
+    GArray *coord_cache;        /* Cache for mapping offsets to cursor positions */
 
     /* Display information */
-    screen_dimen dpy_frame_size;/* Size of the frame surrounding the real viewer */
-    offset_type dpy_start;	/* Offset of the displayed data */
-    offset_type dpy_end;	/* Offset after the displayed data */
-    offset_type dpy_text_column;/* Number of skipped columns in non-wrap
-				 * text mode */
-    offset_type hex_cursor;	/* Hexview cursor position in file */
-    screen_dimen cursor_col;	/* Cursor column */
-    screen_dimen cursor_row;	/* Cursor row */
-    struct hexedit_change_node *change_list;   /* Linked list of changes */
-    struct area status_area;	/* Where the status line is displayed */
-    struct area ruler_area;	/* Where the ruler is displayed */
-    struct area data_area;	/* Where the data is displayed */
+    screen_dimen dpy_frame_size;        /* Size of the frame surrounding the real viewer */
+    offset_type dpy_start;      /* Offset of the displayed data */
+    offset_type dpy_end;        /* Offset after the displayed data */
+    offset_type dpy_text_column;        /* Number of skipped columns in non-wrap
+                                         * text mode */
+    offset_type hex_cursor;     /* Hexview cursor position in file */
+    screen_dimen cursor_col;    /* Cursor column */
+    screen_dimen cursor_row;    /* Cursor row */
+    struct hexedit_change_node *change_list;    /* Linked list of changes */
+    struct area status_area;    /* Where the status line is displayed */
+    struct area ruler_area;     /* Where the ruler is displayed */
+    struct area data_area;      /* Where the data is displayed */
 
-    int dirty;			/* Number of skipped updates */
-    gboolean dpy_bbar_dirty;	/* Does the button bar need to be updated? */
+    int dirty;                  /* Number of skipped updates */
+    gboolean dpy_bbar_dirty;    /* Does the button bar need to be updated? */
 
     /* Mode variables */
-    int bytes_per_line;		/* Number of bytes per line in hex mode */
+    int bytes_per_line;         /* Number of bytes per line in hex mode */
 
     /* Search variables */
-    offset_type search_start;	/* First character to start searching from */
-    offset_type search_end;	/* Length of found string or 0 if none was found */
+    offset_type search_start;   /* First character to start searching from */
+    offset_type search_end;     /* Length of found string or 0 if none was found */
 
-				/* Pointer to the last search command */
-    gboolean want_to_quit;	/* Prepare for cleanup ... */
+    /* Pointer to the last search command */
+    gboolean want_to_quit;      /* Prepare for cleanup ... */
 
     /* Markers */
-    int marker;			/* mark to use */
-    offset_type marks [10];	/* 10 marks: 0..9 */
+    int marker;                 /* mark to use */
+    offset_type marks[10];      /* 10 marks: 0..9 */
 
-    int  move_dir;		/* return value from widget:
-				 * 0 do nothing
-				 * -1 view previous file
-				 * 1 view next file
-				 */
+    int move_dir;               /* return value from widget:
+                                 * 0 do nothing
+                                 * -1 view previous file
+                                 * 1 view next file
+                                 */
 
-    offset_type update_steps;	/* The number of bytes between percent
-				 * increments */
-    offset_type update_activate;/* Last point where we updated the status */
+    offset_type update_steps;   /* The number of bytes between percent
+                                 * increments */
+    offset_type update_activate;        /* Last point where we updated the status */
 
     /* converter for translation of text */
     GIConv converter;
@@ -132,10 +168,237 @@ struct WView {
     gboolean search_backwards;
 
     int search_numNeedSkipChar;
-};
+} mcview_t;
 
 /*** global variables defined in .c file *******************************/
 
 /*** declarations of public functions **********************************/
+
+/* actions_cmd.c: callbacks  */
+cb_ret_t mcview_callback (Widget *, widget_msg_t, int);
+cb_ret_t mcview_dialog_callback (Dlg_head *, dlg_msg_t, int);
+void mcview_help_cmd (void);
+void mcview_quit_cmd (mcview_t *);
+void mcview_toggle_hex_mode_cmd (mcview_t *);
+void mcview_moveto_line_cmd (mcview_t *);
+void mcview_moveto_addr_cmd (mcview_t *);
+void mcview_toggle_hexedit_mode_cmd (mcview_t *);
+void mcview_hexedit_save_changes_cmd (mcview_t *);
+void mcview_toggle_wrap_mode_cmd (mcview_t *);
+void mcview_search_cmd (mcview_t *);
+void mcview_toggle_magic_mode_cmd (mcview_t *);
+void mcview_toggle_nroff_mode_cmd (mcview_t *);
+void mcview_toggle_ruler_cmd (mcview_t *);
+
+
+/* coord_cache.c: */
+gboolean mcview_coord_cache_entry_less (const struct coord_cache_entry *,
+                                        const struct coord_cache_entry *, enum ccache_type,
+                                        gboolean);
+#ifdef MC_ENABLE_DEBUGGING_CODE
+void mcview_ccache_dump (mcview_t *);
+#endif
+
+
+/* datasource.c: */
+void mcview_set_datasource_none (mcview_t *);
+off_t mcview_get_filesize (mcview_t *);
+char *mcview_get_ptr_file (mcview_t *, off_t);
+char *mcview_get_ptr_string (mcview_t *, off_t);
+int mcview_get_utf (mcview_t *, off_t, int *);
+int mcview_get_byte_string (mcview_t *, off_t);
+int mcview_get_byte_none (mcview_t *, off_t);
+void mcview_set_byte (mcview_t *, off_t, byte);
+void mcview_file_load_data (mcview_t *, off_t);
+void mcview_close_datasource (mcview_t *);
+void mcview_set_datasource_file (mcview_t *, int, const struct stat *);
+gboolean mcview_load_command_output (mcview_t *, const char *);
+void mcview_set_datasource_vfs_pipe (mcview_t *, int);
+void mcview_set_datasource_string (mcview_t *, const char *);
+
+
+/* display.c: */
+void mcview_update (mcview_t *);
+void mcview_display (mcview_t *);
+void mcview_compute_areas (mcview_t *);
+void mcview_update_bytes_per_line (mcview_t *);
+void mcview_display_toggle_ruler (mcview_t *);
+void mcview_display_clean (mcview_t *);
+void mcview_display_ruler (mcview_t *);
+void mcview_adjust_size (Dlg_head *);
+void mcview_percent (mcview_t *, off_t);
+
+/* growbuf.c: */
+void mcview_growbuf_init (mcview_t *);
+void mcview_growbuf_free (mcview_t *);
+off_t mcview_growbuf_filesize (mcview_t *);
+void mcview_growbuf_read_until (mcview_t *, off_t);
+int mcview_get_byte_growing_buffer (mcview_t *, off_t);
+char *mcview_get_ptr_growing_buffer (mcview_t *, off_t);
+
+/* hex.c: */
+void mcview_display_hex (mcview_t *);
+gboolean mcview_hexedit_save_changes (mcview_t *);
+void mcview_toggle_hexedit_mode (mcview_t *);
+void mcview_hexedit_free_change_list (mcview_t *);
+void mcview_enqueue_change (struct hexedit_change_node **, struct hexedit_change_node *);
+
+/* lib.c: */
+void mcview_toggle_magic_mode (mcview_t *);
+void mcview_toggle_wrap_mode (mcview_t *);
+void mcview_toggle_nroff_mode (mcview_t *);
+void mcview_toggle_hex_mode (mcview_t *);
+gboolean mcview_ok_to_quit (mcview_t *);
+void mcview_done (mcview_t *);
+void mcview_select_encoding (mcview_t *);
+void mcview_show_error (mcview_t *, const char *);
+
+/* move.c */
+void mcview_move_up (mcview_t *, off_t);
+void mcview_move_down (mcview_t *, off_t);
+void mcview_move_left (mcview_t *, off_t);
+void mcview_move_right (mcview_t *, off_t);
+void mcview_scroll_to_cursor (mcview_t *);
+void mcview_moveto_top (mcview_t *);
+void mcview_moveto_bottom (mcview_t *);
+void mcview_moveto_bol (mcview_t *);
+void mcview_moveto_eol (mcview_t *);
+void mcview_moveto_offset (mcview_t *, off_t);
+void mcview_moveto (mcview_t *, off_t, off_t);
+void mcview_coord_to_offset (mcview_t *, off_t *, off_t, off_t);
+void mcview_offset_to_coord (mcview_t *, off_t *, off_t *, off_t);
+void mcview_place_cursor (mcview_t *);
+void mcview_moveto_match (mcview_t *);
+
+/* nforr.c: */
+int mcview__get_nroff_real_len (mcview_t *, off_t, off_t);
+
+/* plain.c: */
+void mcview_display_text (mcview_t *);
+
+/* search.c: */
+int mcview_search_cmd_callback (const void *user_data, gsize char_offset);
+int mcview_search_update_cmd_callback (const void *, gsize);
+void mcview_do_search (mcview_t *);
+
+
+/*** inline functions ****************************************************************************/
+
+static inline off_t
+mcview_offset_doz (off_t a, off_t b)
+{
+    return (a >= b) ? a - b : 0;
+}
+
+static inline off_t
+mcview_offset_rounddown (off_t a, off_t b)
+{
+    assert (b != 0);
+    return a - a % b;
+}
+
+/* difference or zero */
+static inline screen_dimen
+mcview_dimen_doz (screen_dimen a, screen_dimen b)
+{
+    return (a >= b) ? a - b : 0;
+}
+
+static inline screen_dimen
+mcview_dimen_min (screen_dimen a, screen_dimen b)
+{
+    return (a < b) ? a : b;
+}
+
+/* {{{ Simple Primitive Functions for mcview_t }}} */
+
+static inline gboolean
+mcview_is_in_panel (mcview_t * view)
+{
+    return (view->dpy_frame_size != 0);
+}
+
+static inline gboolean
+mcview_may_still_grow (mcview_t * view)
+{
+    return (view->growbuf_in_use && !view->growbuf_finished);
+}
+
+/* returns TRUE if the idx lies in the half-open interval
+ * [offset; offset + size), FALSE otherwise.
+ */
+static inline gboolean
+mcview_already_loaded (off_t offset, off_t idx, size_t size)
+{
+    return (offset <= idx && idx - offset < size);
+}
+
+static inline int
+mcview_get_byte_file (mcview_t * view, off_t byte_index)
+{
+    assert (view->datasource == DS_FILE);
+
+    mcview_file_load_data (view, byte_index);
+    if (mcview_already_loaded (view->ds_file_offset, byte_index, view->ds_file_datalen))
+        return view->ds_file_data[byte_index - view->ds_file_offset];
+    return -1;
+}
+
+static inline int
+mcview_get_byte (mcview_t * view, off_t offset)
+{
+    switch (view->datasource) {
+    case DS_STDIO_PIPE:
+    case DS_VFS_PIPE:
+        return mcview_get_byte_growing_buffer (view, offset);
+    case DS_FILE:
+        return mcview_get_byte_file (view, offset);
+    case DS_STRING:
+        return mcview_get_byte_string (view, offset);
+    case DS_NONE:
+        return mcview_get_byte_none (view, offset);
+    }
+    assert (!"Unknown datasource type");
+    return -1;
+}
+
+static inline int
+mcview_get_byte_indexed (mcview_t * view, off_t base, off_t ofs)
+{
+    if (base <= OFFSETTYPE_MAX - ofs)
+        return mcview_get_byte (view, base + ofs);
+    return -1;
+}
+
+static inline int
+mcview_count_backspaces (mcview_t * view, off_t offset)
+{
+    int backspaces = 0;
+    while (offset >= 2 * backspaces && mcview_get_byte (view, offset - 2 * backspaces) == '\b')
+        backspaces++;
+    return backspaces;
+}
+
+static inline gboolean
+mcview_is_nroff_sequence (mcview_t * view, off_t offset)
+{
+    int c0, c1, c2;
+
+    /* The following commands are ordered to speed up the calculation. */
+
+    c1 = mcview_get_byte_indexed (view, offset, 1);
+    if (c1 == -1 || c1 != '\b')
+        return FALSE;
+
+    c0 = mcview_get_byte_indexed (view, offset, 0);
+    if (c0 == -1 || !g_ascii_isprint (c0))
+        return FALSE;
+
+    c2 = mcview_get_byte_indexed (view, offset, 2);
+    if (c2 == -1 || !g_ascii_isprint (c2))
+        return FALSE;
+
+    return (c0 == c2 || c0 == '_' || (c0 == '+' && c2 == 'o'));
+}
 
 #endif
