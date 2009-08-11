@@ -213,8 +213,7 @@ mcview_move_right (mcview_t * view, off_t columns)
     if (view->hex_mode) {
         assert (columns == 1);
         if (view->hexview_in_text || view->hexedit_lownibble) {
-            if (mcview_get_byte_indexed (view, view->hex_cursor, 1) != -1)
-                view->hex_cursor++;
+            view->hex_cursor++;
         }
         if (!view->hexview_in_text)
             view->hexedit_lownibble = !view->hexedit_lownibble;

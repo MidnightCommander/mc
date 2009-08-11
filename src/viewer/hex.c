@@ -94,6 +94,7 @@ mcview_display_hex (mcview_t * view)
     size_t i;
     int cw = 1;
     int ch = 0;
+    gboolean read_res = TRUE;
 
     char hex_buff[10];          /* A temporary buffer for sprintf and mvwaddstr */
     int bytes;                  /* Number of bytes already printed on the line */
@@ -125,7 +126,8 @@ mcview_display_hex (mcview_t * view)
 
 #ifdef HAVE_CHARSET
             if (view->utf8) {
-                if ((ch = mcview_get_utf (view, from, &cw)) == -1)
+                ch = mcview_get_utf (view, from, &cw, &read_res);
+                if (!read_res)
                     break;
             }
 #endif
@@ -203,6 +205,8 @@ mcview_display_hex (mcview_t * view)
                 if (!view->utf8) {
                     ch = convert_from_8bit_to_utf_c ((unsigned char) ch, view->converter);
                 }
+                if (!g_unichar_isprint (ch))
+                    ch = '.';
             } else {
                 if (view->utf8) {
                     ch = convert_from_utf_to_current_c (ch, view->converter);

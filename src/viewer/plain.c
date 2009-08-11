@@ -69,6 +69,7 @@ mcview_display_text (mcview_t * view)
     off_t from;
     int cw = 1;
     int c;
+    gboolean read_res = TRUE;
     struct hexedit_change_node *curr = view->change_list;
 
     mcview_display_clean (view);
@@ -84,7 +85,8 @@ mcview_display_text (mcview_t * view)
     for (row = 0, col = 0; row < height;) {
 #ifdef HAVE_CHARSET
         if (view->utf8) {
-            if ((c = mcview_get_utf (view, from, &cw)) == -1)
+            c = mcview_get_utf (view, from, &cw, &read_res);
+            if (!read_res)
                 break;
         } else
 #endif
@@ -93,7 +95,6 @@ mcview_display_text (mcview_t * view)
                 break;
         }
         from++;
-        mc_log ("cw=%i\n", cw);
         if (cw > 1)
             from += cw - 1;
 
@@ -162,6 +163,8 @@ mcview_display_text (mcview_t * view)
                 if (!view->utf8) {
                     c = convert_from_8bit_to_utf_c ((unsigned char) c, view->converter);
                 }
+                if (!g_unichar_isprint (c))
+                    c = '.';
             } else {
                 if (view->utf8) {
                     c = convert_from_utf_to_current_c (c, view->converter);

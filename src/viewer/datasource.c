@@ -140,13 +140,15 @@ mcview_get_ptr_string (mcview_t * view, off_t byte_index)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-mcview_get_utf (mcview_t * view, off_t byte_index, int *char_width)
+mcview_get_utf (mcview_t * view, off_t byte_index, int *char_width, gboolean *result)
 {
     gchar *str = NULL;
     int res = -1;
     gunichar ch;
     gchar *next_ch = NULL;
     int width = 0;
+
+    *result = TRUE;
 
     switch (view->datasource) {
     case DS_STDIO_PIPE:
@@ -164,8 +166,9 @@ mcview_get_utf (mcview_t * view, off_t byte_index, int *char_width)
     }
 
     if (str == NULL) {
+        *result = FALSE;
         width = 0;
-        return -1;
+        return 0;
     }
 
     res = g_utf8_get_char_validated (str, -1);
@@ -178,11 +181,7 @@ mcview_get_utf (mcview_t * view, off_t byte_index, int *char_width)
         /* Calculate UTF-8 char width */
         next_ch = g_utf8_next_char (str);
         if (next_ch) {
-            if (next_ch != str) {
-                width = next_ch - str;
-            } else {
-                width = 0;
-            }
+            width = next_ch - str;
         } else {
             ch = 0;
             width = 0;
