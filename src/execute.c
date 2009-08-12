@@ -21,6 +21,7 @@
 
 #include <config.h>
 
+#include <signal.h>
 #include <sys/stat.h>
 #include <sys/time.h>
 
