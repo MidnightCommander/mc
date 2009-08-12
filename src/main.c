@@ -325,7 +325,7 @@ void
 do_update_prompt (void)
 {
     if (update_prompt) {
-	printf ("%s", subshell_prompt);
+	printf ("\r\n%s", subshell_prompt);
 	fflush (stdout);
 	update_prompt = 0;
     }
