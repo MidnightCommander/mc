@@ -83,6 +83,7 @@ typedef struct WPanel {
 } WPanel;
 
 WPanel *panel_new (const char *panel_name);
+WPanel *panel_new_with_dir (const char *panel_name, const char *dr);
 void panel_clean_dir (WPanel *panel);
 
 extern int torben_fj_mode;

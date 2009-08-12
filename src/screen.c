@@ -1105,9 +1105,20 @@ panel_format_modified (WPanel *panel)
 WPanel *
 panel_new (const char *panel_name)
 {
+    return panel_new_with_dir(panel_name, NULL);
+}
+
+/* Panel creation for specified directory */
+/* The parameter specifies the name of the panel for setup retieving */
+/* and the path of working panel directory. If path is NULL then */
+/* panel will be created for current directory */
+WPanel *
+panel_new_with_dir (const char *panel_name, const char *wpath)
+{
     WPanel *panel;
     char *section;
     int i, err;
+    char curdir[MAXPATHLEN];
 
     panel = g_new0 (WPanel, 1);
 
@@ -1117,7 +1128,12 @@ panel_new (const char *panel_name)
     /* We do not want the cursor */
     widget_want_cursor (panel->widget, 0);
 
-    mc_get_current_wd (panel->cwd, sizeof (panel->cwd) - 2);
+    if (wpath) {
+	g_strlcpy(panel->cwd, wpath, sizeof (panel->cwd));
+	mc_get_current_wd (curdir, sizeof (curdir) - 2);
+    } else
+	mc_get_current_wd (panel->cwd, sizeof (panel->cwd) - 2);
+
     strcpy (panel->lwd, ".");
 
     panel->hist_name = g_strconcat ("Dir Hist ", panel_name, (char *) NULL);
@@ -1164,11 +1180,21 @@ panel_new (const char *panel_name)
 	set_panel_formats (panel);
     }
 
+    
+    /* Because do_load_dir lists files in current directory */
+    if (wpath)
+	mc_chdir(wpath);
+
     /* Load the default format */
     panel->count =
 	do_load_dir (panel->cwd, &panel->dir, panel->sort_type,
 		     panel->reverse, panel->case_sensitive,
 		     panel->exec_first, panel->filter);
+
+    /* Restore old right path */
+    if (wpath)
+	mc_chdir(curdir);
+
     return panel;
 }
 
