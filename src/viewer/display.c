@@ -232,6 +232,8 @@ mcview_display (mcview_t * view)
     mcview_compute_areas (view);
     if (view->hex_mode) {
         mcview_display_hex (view);
+    } else if (view->text_nroff_mode) {
+        mcview_display_nroff (view);
     } else {
         mcview_display_text (view);
     }

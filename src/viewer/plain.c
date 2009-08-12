@@ -98,33 +98,6 @@ mcview_display_text (mcview_t * view)
         if (cw > 1)
             from += cw - 1;
 
-        if (view->text_nroff_mode && c == '\b') {
-            int c_prev;
-            int c_next;
-
-            if ((c_next = mcview_get_byte_indexed (view, from, 1)) != -1 && g_ascii_isprint (c_next)
-                && from >= 1
-                && (c_prev = mcview_get_byte (view, from - 1)) != -1 && g_ascii_isprint (c_prev)
-                && (c_prev == c_next || c_prev == '_' || (c_prev == '+' && c_next == 'o'))) {
-                if (col == 0) {
-                    if (row == 0) {
-                        /* We're inside an nroff character sequence at the
-                         * beginning of the screen -- just skip the
-                         * backspace and continue with the next character. */
-                        continue;
-                    }
-                    row--;
-                    col = width;
-                }
-                col--;
-                if (c_prev == '_' && (c_next != '_' || mcview_count_backspaces (view, from) == 1))
-                    tty_setcolor (VIEW_UNDERLINED_COLOR);
-                else
-                    tty_setcolor (MARKED_COLOR);
-                continue;
-            }
-        }
-
         if ((c == '\n') || (col >= width && view->text_wrap_mode)) {
             col = 0;
             row++;

@@ -32,7 +32,7 @@ enum view_ds {
 /* Offset in bytes into a file */
 typedef enum {
     INVALID_OFFSET = ((off_t) - 1),
-    OFFSETTYPE_MAX = (~((off_t) 0))
+    OFFSETTYPE_MAX = ((off_t)(1 << (sizeof (off_t) * 8 - 1) - 1))
 } mcview_offset_t;
 
 enum ccache_type {
@@ -271,6 +271,7 @@ void mcview_place_cursor (mcview_t *);
 void mcview_moveto_match (mcview_t *);
 
 /* nforr.c: */
+void mcview_display_nroff (mcview_t *);
 int mcview__get_nroff_real_len (mcview_t *, off_t, off_t);
 
 /* plain.c: */

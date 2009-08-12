@@ -48,7 +48,7 @@
 /*** global variables ****************************************************************************/
 
 int mcview_default_hex_mode = 0;
-int mcview_default_nroff_flag = 1;
+int mcview_default_nroff_flag = 0;
 int mcview_global_wrap_mode = 1;
 int mcview_default_magic_flag = 1;
 
