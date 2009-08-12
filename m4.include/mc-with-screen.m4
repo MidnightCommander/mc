@@ -102,7 +102,7 @@ AC_DEFUN([MC_CHECK_SLANG_BY_PATH], [
 #ifdef HAVE_SLANG_SLANG_H
 #include <slang/slang.h>
 #else
-#include <slang/slang.h>
+#include <slang.h>
 #endif
 int main (void)
 {
