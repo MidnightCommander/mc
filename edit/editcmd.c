@@ -2365,6 +2365,8 @@ edit_collect_completions (WEdit *edit, long start, int word_len,
     GString *temp;
     mc_search_t *srch;
 
+    long last_byte = start;
+
     srch = mc_search_new(match_expr, -1);
     if (srch == NULL)
         return 0;
@@ -2374,10 +2376,10 @@ edit_collect_completions (WEdit *edit, long start, int word_len,
     srch->search_fn = edit_search_cmd_callback;
 
     /* collect max MAX_WORD_COMPLETIONS completions */
-    start--;
-    while (*num < MAX_WORD_COMPLETIONS) {
+    start = -1;
+    while (1) {
 	/* get next match */
-	if (mc_search_run (srch, (void *) edit, start+1, edit->last_byte, &len) == FALSE)
+	if (mc_search_run (srch, (void *) edit, start+1, last_byte, &len) == FALSE)
 	    break;
 	start = srch->normal_offset;
 
@@ -2399,6 +2401,11 @@ edit_collect_completions (WEdit *edit, long start, int word_len,
 			(char *) &temp->str[word_len],
 			max (len, compl[i].len) - (gsize)word_len
 		    ) == 0) {
+		struct selection this = compl[i];
+		for (++i; i < *num; i++) {
+		    compl[i - 1] = compl[i];
+		}
+		compl[*num - 1] = this;
 		skip = 1;
 		break;		/* skip it, already added */
 	    }
@@ -2406,6 +2413,13 @@ edit_collect_completions (WEdit *edit, long start, int word_len,
 	if (skip) {
 	    g_string_free(temp, TRUE);
 	    continue;
+	}
+	if (*num == MAX_WORD_COMPLETIONS && MAX_WORD_COMPLETIONS) {
+	    g_free(compl[0].text);
+	    for (i = 1; i < *num; i++) {
+		compl[i - 1] = compl[i];
+	    }
+	    (*num)--;
 	}
 
 	compl[*num].text = temp->str;
@@ -2443,12 +2457,12 @@ edit_complete_word_cmd (WEdit *edit)
     bufpos = &edit->buffers1[word_start >> S_EDIT_BUF_SIZE]
 	[word_start & M_EDIT_BUF_SIZE];
 
-    match_expr = g_strdup_printf ("(^|\\s)%.*s[^\\s\\.=\\+\\{\\}\\[\\]\\(\\)\\\\\\!\\,<>\\?\\/@#\\$%%\\^&\\*\\~\\|\\\"'\\:\\;]+", word_len, bufpos);
+    match_expr = g_strdup_printf ("\\b%.*s[a-zA-Z_0-9]+", word_len, bufpos);
 
     /* collect the possible completions              */
     /* start search from begin to end of file */
     max_len =
-	edit_collect_completions (edit, 0, word_len, match_expr,
+	edit_collect_completions (edit, word_start, word_len, match_expr,
 				  (struct selection *) &compl, &num_compl);
 
     if (num_compl > 0) {

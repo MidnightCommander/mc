@@ -333,7 +333,7 @@ editcmd_dialog_completion_show (WEdit * edit, int max_len, int word_len,
     add_widget (compl_dlg, compl_list);
 
     /* fill the listbox with the completions */
-    for (i = 0; i < num_compl; i++)
+    for (i = num_compl - 1; i >= 0; i--) /* reverse order */
         listbox_add_item (compl_list, LISTBOX_APPEND_AT_END, 0, (char *) compl[i].text, NULL);
 
     /* pop up the dialog and apply the choosen completion */
