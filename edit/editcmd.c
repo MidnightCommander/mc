@@ -59,6 +59,7 @@
 #include "../src/charsets.h"
 #include "../src/selcodepage.h"
 #include "../src/strutil.h"	/* utf string functions */
+#include "../src/mcconfig/mcconfig.h"
 
 #include "../edit/edit-impl.h"
 #include "../edit/edit.h"
@@ -2365,11 +2366,17 @@ edit_collect_completions (WEdit *edit, long start, int word_len,
     GString *temp;
     mc_search_t *srch;
 
-    long last_byte = start;
+    long last_byte;
 
     srch = mc_search_new(match_expr, -1);
     if (srch == NULL)
         return 0;
+
+    if (mc_config_get_bool(mc_main_config, CONFIG_APP_SECTION, "editor_wordcompletion_collect_entire_file", 0)){
+        last_byte = edit->last_byte;
+    } else {
+        last_byte = start;
+    }
 
     srch->search_type = MC_SEARCH_T_REGEX;
     srch->is_case_sentitive = TRUE;
