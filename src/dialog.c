@@ -30,18 +30,23 @@
 #include <string.h>
 
 #include "global.h"
-#include "tty.h"
-#include "mouse.h"
+
+#include "../src/tty/tty.h"
+#include "../src/tty/color.h"
+#include "../src/tty/mouse.h"
+#include "../src/tty/key.h"
+
 #include "help.h"	/* interactive_display() */
-#include "key.h"	/* mi_getch() */
 #include "dialog.h"
-#include "layout.h"	/* winch_flag */
+#include "layout.h"	/* winch_flag, change_screen_size() */
 #include "execute.h"	/* suspend_cmd() */
-#include "main.h"	/* slow_terminal */
+#include "main.h"	/* fast_refresh */
 #include "strutil.h"
 #include "setup.h"	/* mouse_close_dialog */
 
-#define waddc(w,y1,x1,c) move (w->y+y1, w->x+x1); addch (c)
+/* Color styles for normal and error dialogs */
+int dialog_colors [4];
+int alarm_colors [4];
 
 /* Primitive way to check if the the current dialog is our dialog */
 /* This is needed by async routines like load_prompt */
@@ -56,75 +61,24 @@ int mouse_close_dialog = 0;
 static void dlg_broadcast_msg_to (Dlg_head * h, widget_msg_t message,
 				  int reverse, int flags);
 
-static void slow_box (Dlg_head *h, int y, int x, int ys, int xs)
-{
-    move (h->y+y, h->x+x);
-    hline (' ', xs);
-    vline (' ', ys);
-    move (h->y+y, h->x+x+xs-1);
-    vline (' ', ys);
-    move (h->y+y+ys-1, h->x+x);
-    hline (' ', xs);
-}
-
 /* draw box in window */
-void draw_box (Dlg_head *h, int y, int x, int ys, int xs)
+void
+draw_box (Dlg_head *h, int y, int x, int ys, int xs)
 {
-    if (slow_terminal){
-	slow_box (h, y, x, ys, xs);
-	return;
-    }
-
-#ifndef HAVE_SLANG
-    waddc (h, y, x, ACS_ULCORNER);
-    hline (ACS_HLINE, xs - 2);
-    waddc (h, y + ys - 1, x, ACS_LLCORNER);
-    hline (ACS_HLINE, xs - 2);
-
-    waddc (h, y, x + xs - 1, ACS_URCORNER);
-    waddc (h, y + ys - 1, x + xs - 1, ACS_LRCORNER);
-
-    move (h->y+y+1, h->x+x);
-    vline (ACS_VLINE, ys - 2);
-    move (h->y+y+1, h->x+x+xs-1);
-    vline (ACS_VLINE, ys - 2);
-#else
-    SLsmg_draw_box (h->y+y, h->x+x, ys, xs);
-#endif /* HAVE_SLANG */
+    tty_draw_box (h->y + y, h->x + x, ys, xs);
 }
 
-/* draw box in window */
-void draw_double_box (Dlg_head *h, int y, int x, int ys, int xs)
+void
+widget_erase (Widget *w)
 {
-#ifndef HAVE_SLANG
-    draw_box (h, y, x, ys, xs);
-#else
-    SLsmg_draw_double_box (h->y+y, h->x+x, ys, xs);
-#endif /* HAVE_SLANG */
+    tty_fill_region (w->y, w->x, w->lines, w->cols, ' ');
 }
 
-void widget_erase (Widget *w)
+void
+dlg_erase (Dlg_head *h)
 {
-    int x, y;
-
-    for (y = 0; y < w->lines; y++){
-	widget_move (w, y, 0);
-	for (x = 0; x < w->cols; x++)
-	    addch (' ');
-    }
-}
-
-void dlg_erase (Dlg_head *h)
-{
-    int x, y;
-    if (h == NULL)
-	return;
-    for (y = 0; y < h->lines; y++){
-	move (y+h->y, h->x);	/* FIXME: should test if ERR */
-	for (x = 0; x < h->cols; x++){
-	    addch (' ');
-	}
-    }
+    if (h != NULL)
+	tty_fill_region (h->y, h->x, h->lines, h->cols, ' ');
 }
 
 void
@@ -172,14 +126,14 @@ common_dialog_repaint (struct Dlg_head *h)
 
     space = (h->flags & DLG_COMPACT) ? 0 : 1;
 
-    attrset (DLG_NORMALC (h));
+    tty_setcolor (DLG_NORMALC (h));
     dlg_erase (h);
     draw_box (h, space, space, h->lines - 2 * space, h->cols - 2 * space);
 
     if (h->title) {
-	attrset (DLG_HOT_NORMALC (h));
+	tty_setcolor (DLG_HOT_NORMALC (h));
 	dlg_move (h, space, (h->cols - str_term_width1 (h->title)) / 2);
-	addstr (str_term_form (h->title));
+	tty_print_string (h->title);
     }
 }
 
@@ -215,7 +169,10 @@ create_dlg (int y1, int x1, int lines, int cols, const int *color_set,
 	y1 -= 2;
 
     new_d = g_new0 (Dlg_head, 1);
-    new_d->color = color_set;
+    if (color_set != NULL) {
+	new_d->color = g_new (int, DLG_COLOR_NUM);
+	memmove (new_d->color, color_set, sizeof (int) * DLG_COLOR_NUM);
+    }
     new_d->help_ctx = help_ctx;
     new_d->callback = callback ? callback : default_dlg_callback;
     new_d->x = x1;
@@ -233,6 +190,20 @@ create_dlg (int y1, int x1, int lines, int cols, const int *color_set,
     }
 
     return (new_d);
+}
+
+void
+dlg_set_default_colors (void)
+{
+    dialog_colors [0] = COLOR_NORMAL;
+    dialog_colors [1] = COLOR_FOCUS;
+    dialog_colors [2] = COLOR_HOT_NORMAL;
+    dialog_colors [3] = COLOR_HOT_FOCUS;
+
+    alarm_colors [0] = ERROR_COLOR;
+    alarm_colors [1] = REVERSE_COLOR;
+    alarm_colors [2] = ERROR_HOT_NORMAL;
+    alarm_colors [3] = ERROR_HOT_FOCUS;
 }
 
 void
@@ -502,20 +473,16 @@ dlg_one_down (Dlg_head *h)
 
 void update_cursor (Dlg_head *h)
 {
-    if (!h->current)
-         return;
-    if (h->current->options & W_WANT_CURSOR)
-	send_message (h->current, WIDGET_CURSOR, 0);
-    else {
-	Widget *p = h->current;
+    Widget *p = h->current;
 
-	do {
-	    if (p->options & W_WANT_CURSOR)
-		if ((*p->callback)(p, WIDGET_CURSOR, 0)){
-		    break;
-		}
-	    p = p->next;
-	} while (h->current != p);
+    if (p != NULL) {
+	if (p->options & W_WANT_CURSOR)
+	    send_message (p, WIDGET_CURSOR, 0);
+	else
+	    while ((p = p->next) != h->current)
+		if (p->options & W_WANT_CURSOR)
+		    if (send_message (p, WIDGET_CURSOR, 0) == MSG_HANDLED)
+			break;
     }
 }
 
@@ -536,9 +503,22 @@ void dlg_stop (Dlg_head *h)
     h->running = 0;
 }
 
-static inline void dialog_handle_key (Dlg_head *h, int d_key)
+static inline void
+dialog_handle_key (Dlg_head *h, int d_key)
 {
-    switch (d_key){
+    if (is_abort_char (d_key)) {
+	h->ret_value = B_CANCEL;
+	dlg_stop (h);
+	return;
+    }
+
+    switch (d_key) {
+    case '\n':
+    case KEY_ENTER:
+	h->ret_value = B_ENTER;
+	dlg_stop (h);
+	break;
+
     case KEY_LEFT:
     case KEY_UP:
 	dlg_one_up (h);
@@ -559,41 +539,30 @@ static inline void dialog_handle_key (Dlg_head *h, int d_key)
 	/* Fall through */
 
     case XCTRL('l'):
-#ifndef HAVE_SLANG
+#ifdef HAVE_SLANG
+	tty_touch_screen ();
+	tty_refresh ();
+#else
 	/* Use this if the refreshes fail */
 	clr_scr ();
-	do_refresh ();
-#else
-	touchwin (stdscr);
+	repaint_screen ();
 #endif /* HAVE_SLANG */
-	mc_refresh ();
-	doupdate ();
 	break;
 
-    case '\n':
-    case KEY_ENTER:
-	h->ret_value = B_ENTER;
-	h->running = 0;
-	break;
-
-    case ESC_CHAR:
-    case KEY_F (10):
-    case XCTRL ('c'):
-    case XCTRL ('g'):
-	h->ret_value = B_CANCEL;
-	dlg_stop (h);
+    default:
 	break;
     }
 }
 
-static int
+static cb_ret_t
 dlg_try_hotkey (Dlg_head *h, int d_key)
 {
     Widget *hot_cur;
-    int handled, c;
+    cb_ret_t handled;
+    int c;
 
-    if (!h->current)
-	return 0;
+    if (h->current == NULL)
+	return MSG_NOT_HANDLED;
 
     /*
      * Explanation: we don't send letter hotkeys to other widgets if
@@ -604,7 +573,7 @@ dlg_try_hotkey (Dlg_head *h, int d_key)
         /* skip ascii control characters, anything else can valid character in
          * some encoding */
 	if (d_key >= 32 && d_key < 256)
-	    return 0;
+	    return MSG_NOT_HANDLED;
     }
 
     /* If it's an alt key, send the message */
@@ -612,39 +581,37 @@ dlg_try_hotkey (Dlg_head *h, int d_key)
     if (d_key & ALT (0) && g_ascii_isalpha (c))
 	d_key = g_ascii_tolower (c);
 
-    handled = 0;
+    handled = MSG_NOT_HANDLED;
     if (h->current->options & W_WANT_HOTKEY)
-	handled = h->current->callback (h->current, WIDGET_HOTKEY, d_key);
+	handled = send_message (h->current, WIDGET_HOTKEY, d_key);
 
     /* If not used, send hotkey to other widgets */
-    if (handled)
-	return handled;
+    if (handled == MSG_HANDLED)
+	return MSG_HANDLED;
 
-    hot_cur = h->current;
+    hot_cur = h->current->next;
 
     /* send it to all widgets */
-    do {
+    while (h->current != hot_cur && handled == MSG_NOT_HANDLED) {
 	if (hot_cur->options & W_WANT_HOTKEY)
-	    handled |=
-		(*hot_cur->callback) (hot_cur, WIDGET_HOTKEY, d_key);
+	    handled = send_message (hot_cur, WIDGET_HOTKEY, d_key);
 
-	if (!handled)
+	if (handled == MSG_NOT_HANDLED)
 	    hot_cur = hot_cur->next;
-    } while (h->current != hot_cur && !handled);
+    }
 
-    if (!handled)
-	return 0;
+    if (handled == MSG_HANDLED)
+	do_select_widget (h, hot_cur, SELECT_EXACT);
 
-    do_select_widget (h, hot_cur, SELECT_EXACT);
     return handled;
 }
 
 static void
 dlg_key_event (Dlg_head *h, int d_key)
 {
-    int handled;
+    cb_ret_t handled;
 
-    if (!h->current)
+    if (h->current == NULL)
 	return;
 
     /* TAB used to cycle */
@@ -662,21 +629,20 @@ dlg_key_event (Dlg_head *h, int d_key)
     handled = (*h->callback) (h, DLG_KEY, d_key);
 
     /* next try the hotkey */
-    if (!handled)
+    if (handled == MSG_NOT_HANDLED)
 	handled = dlg_try_hotkey (h, d_key);
 
-    if (handled)
+    if (handled == MSG_HANDLED)
 	(*h->callback) (h, DLG_HOTKEY_HANDLED, 0);
-
-    /* not used - then try widget_callback */
-    if (!handled)
-	handled = h->current->callback (h->current, WIDGET_KEY, d_key);
+    else
+	/* not used - then try widget_callback */
+	handled = send_message (h->current, WIDGET_KEY, d_key);
 
     /* not used- try to use the unhandled case */
-    if (!handled)
+    if (handled == MSG_NOT_HANDLED)
 	handled = (*h->callback) (h, DLG_UNHANDLED_KEY, d_key);
 
-    if (!handled)
+    if (handled == MSG_NOT_HANDLED)
 	dialog_handle_key (h, d_key);
 
     (*h->callback) (h, DLG_POST_KEY, d_key);
@@ -764,7 +730,7 @@ void dlg_run_done (Dlg_head *h)
 void dlg_process_event (Dlg_head *h, int key, Gpm_Event *event)
 {
     if (key == EV_NONE){
-	if (got_interrupt ())
+	if (tty_got_interrupt ())
 	    key = XCTRL('g');
 	else
 	    return;
@@ -802,8 +768,8 @@ frontend_run_dlg (Dlg_head *h)
 	update_cursor (h);
 
 	/* Clear interrupt flag */
-	got_interrupt ();
-	d_key = get_event (&event, h->mouse_status == MOU_REPEAT, 1);
+	tty_got_interrupt ();
+	d_key = tty_get_event (&event, h->mouse_status == MOU_REPEAT, TRUE);
 
 	dlg_process_event (h, d_key, &event);
 
@@ -838,6 +804,7 @@ destroy_dlg (Dlg_head *h)
 	g_free (h->current);
 	h->current = c;
     }
+    g_free (h->color);
     g_free (h->title);
     g_free (h);
 

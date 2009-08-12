@@ -33,9 +33,13 @@
 #include <sys/stat.h>
 
 #include "global.h"
-#include "tty.h"
-#include "win.h"
-#include "color.h"
+
+#include "../src/tty/tty.h"
+#include "../src/tty/color.h"
+#include "../src/tty/key.h"
+
+#include "../src/search/search.h"
+
 #include "setup.h"
 #include "find.h"
 #include "strutil.h"
@@ -47,8 +51,6 @@
 #include "wtools.h"
 #include "cmd.h"		/* view_file_at_line */
 #include "boxes.h"
-#include "key.h"
-#include "../src/search/search.h"
 #include "history.h"		/* MC_HISTORY_SHARED_SEARCH */
 
 /* Size of the find parameters window */
@@ -609,7 +611,7 @@ check_find_events(Dlg_head *h)
     int c;
 
     event.x = -1;
-    c = get_event (&event, h->mouse_status == MOU_REPEAT, 0);
+    c = tty_get_event (&event, h->mouse_status == MOU_REPEAT, FALSE);
     if (c != EV_NONE) {
  	dlg_process_event (h, c, &event);
  	if (h->ret_value == B_ENTER
@@ -662,10 +664,10 @@ search_content (Dlg_head *h, const char *directory, const char *filename)
     g_snprintf (buffer, sizeof (buffer), _("Grepping in %s"), str_trunc (filename, FIND2_X_USE));
 
     status_update (buffer);
-    mc_refresh ();
+    tty_refresh ();
 
-    enable_interrupt_key ();
-    got_interrupt ();
+    tty_enable_interrupt_key ();
+    tty_got_interrupt ();
 
     {
 	int line = 1;
@@ -724,7 +726,7 @@ search_content (Dlg_head *h, const char *directory, const char *filename)
 
 	}
     }
-    disable_interrupt_key ();
+    tty_disable_interrupt_key ();
     mc_close (file_fd);
     return ret_val;
 }
@@ -777,7 +779,7 @@ do_search (struct Dlg_head *h)
 	while (!dirp){
 	    char *tmp = NULL;
 
-	    attrset (REVERSE_COLOR);
+	    tty_setcolor (REVERSE_COLOR);
 	    while (1) {
 		char *temp_dir = NULL;
 		gboolean found;
@@ -891,10 +893,10 @@ do_search (struct Dlg_head *h)
 
 	if (verbose){
 	    pos = (pos + 1) % 4;
-	    attrset (DLG_NORMALC (h));
+	    tty_setcolor (DLG_NORMALC (h));
 	    dlg_move (h, FIND2_Y - 7, FIND2_X - 4);
-	    addch (rotating_dash [pos]);
-	    mc_refresh ();
+	    tty_print_char (rotating_dash [pos]);
+	    tty_refresh ();
 	}
     } else
 	goto do_search_begin;

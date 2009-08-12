@@ -35,7 +35,11 @@
 #include <unistd.h>
 
 #include "global.h"
-#include "tty.h"
+
+#include "../src/tty/tty.h"
+#include "../src/tty/color.h"		/* tty_set_normal_attrs */
+#include "../src/tty/win.h"
+
 #include "cons.saver.h"
 
 signed char console_flag = 0;
@@ -84,9 +88,9 @@ show_console_contents_linux (int starty, unsigned char begin_line,
     /* Read the bytes and output them */
     for (i = 0; i < bytes; i++) {
 	if ((i % COLS) == 0)
-	    move (starty + (i / COLS), 0);
+	    tty_gotoyx (starty + (i / COLS), 0);
 	read (pipefd2[0], &message, 1);
-	addch (message);
+	tty_print_char (message);
     }
 
     /* Read the value of the console_flag */
@@ -332,10 +336,10 @@ show_console_contents_freebsd (int starty, unsigned char begin_line,
 	return;
 
     for (line = begin_line; line <= end_line; line++) {
-	move (starty + line - begin_line, 0);
+	tty_gotoyx (starty + line - begin_line, 0);
         for (col = 0; col < min (COLS, screen_info.mv_csz); col++) {
 	    c = screen_shot.buf[line * screen_info.mv_csz + col] & 0xFF;
-	    addch (c);
+	    tty_print_char (c);
 	}
     }
 }
@@ -367,7 +371,7 @@ void
 show_console_contents (int starty, unsigned char begin_line,
 		       unsigned char end_line)
 {
-    standend ();
+    tty_set_normal_attrs ();
 
     if (look_for_rxvt_extensions ()) {
 	show_rxvt_contents (starty, begin_line, end_line);

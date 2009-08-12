@@ -29,8 +29,8 @@
 #include <string.h>
 
 #include "global.h"
-#include "tty.h"
-#include "color.h"
+#include "../src/tty/tty.h"
+#include "../src/tty/color.h"
 #include "dir.h"
 #include "panel.h"
 #include "main.h"

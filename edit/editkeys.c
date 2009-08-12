@@ -45,8 +45,10 @@
 #include "edit-widget.h"	/* edit->macro_i */
 #include "editcmd_dialogs.h"
 #include "editcmddef.h"		/* list of commands */
-#include "../src/key.h"		/* KEY_M_SHIFT */
-#include "../src/tty.h"		/* keys */
+
+#include "../src/tty/tty.h"	/* keys */
+#include "../src/tty/key.h"	/* KEY_M_SHIFT */
+
 #include "../src/charsets.h"	/* convert_from_input_c() */
 #include "../src/main.h"	/* display_codepage */
 #include "../src/strutil.h"	/* str_isutf8 () */

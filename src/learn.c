@@ -35,15 +35,15 @@
 #include <unistd.h>
 
 #include "global.h"
-#include "tty.h"
-#include "win.h"
-#include "color.h"
+
+#include "../src/tty/tty.h"
+#include "../src/tty/key.h"
+
 #include "dialog.h"
 #include "widget.h"
 #include "../src/mcconfig/mcconfig.h"	/* Save profile */
-#include "key.h"
 #include "setup.h"
-#include "main.h"
+#include "layout.h"			/* repaint_screen() */
 #include "learn.h"
 #include "wtools.h"
 #include "strutil.h"
@@ -91,7 +91,7 @@ _("Please press the %s\n"
 "If you want to escape, press a single Escape key\n"
 "and wait as well."), 
         _(key_name_conv_tab [action - B_USER].longname));
-    mc_refresh ();
+    tty_refresh ();
     if (learnkeys [action - B_USER].sequence != NULL) {
 	g_free (learnkeys [action - B_USER].sequence);
 	learnkeys [action - B_USER].sequence = NULL;
@@ -102,29 +102,26 @@ _("Please press the %s\n"
 	/* Esc hides the dialog and do not allow definitions of
 	 * regular characters
 	 */
-	int seq_ok;
+	gboolean seq_ok = FALSE;
 
 	if (*seq && strcmp (seq, "\\e") && strcmp (seq, "\\e\\e")
 	    && strcmp (seq, "^m" ) && strcmp (seq, "^i" )
             && (seq [1] || (*seq < ' ' || *seq > '~'))){
-	    
+
 	    learnchanged = 1;
 	    learnkeys [action - B_USER].sequence = seq;
 	    seq = convert_controls (seq);
 	    seq_ok = define_sequence (key_name_conv_tab [action - B_USER].code,
 				      seq, MCKEY_NOACTION);
-	} else {
-	    seq_ok = 0;
 	}
 
-	if (!seq_ok) {
+	if (!seq_ok)
 	    message (D_NORMAL, _(" Cannot accept this key "),
 		_(" You have entered \"%s\""), seq);
-	}
-	
-    	g_free (seq);
+
+	g_free (seq);
     }
-    
+
     dlg_run_done (d);
     destroy_dlg (d);
     dlg_select_widget (learnkeys [action - B_USER].button);

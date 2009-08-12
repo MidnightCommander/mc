@@ -38,12 +38,14 @@
 
 #include "../src/global.h"
 
+#include "../src/tty/tty.h"	/* keys */
+#include "../src/tty/key.h"	/* KEY_M_* */
+
 #include "edit-impl.h"
 #include "edit-widget.h"
 #include "editcmddef.h"		/* list of commands */
 #include "usermap.h"
-#include "../src/key.h"		/* KEY_M_* */
-#include "../src/tty.h"		/* keys */
+
 #include "../src/wtools.h"
 #include "../src/widget.h"	/* buttonbar_redraw() */
 

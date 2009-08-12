@@ -28,21 +28,22 @@
 
 #include "../src/global.h"
 
-#include "edit-widget.h"
+#include "../src/tty/tty.h"
+#include "../src/tty/color.h"		/* INPUT_COLOR */
+#include "../src/tty/key.h"
+
+#include "../src/search/search.h"
 
 #include "../src/strutil.h"
-#include "../src/tty.h"
 #include "../src/widget.h"
-#include "../src/color.h"
 #include "../src/wtools.h"
 #include "../src/dialog.h"      /* do_refresh() */
-#include "../src/key.h"
 #include "../src/main.h"
-#include "../src/search/search.h"
 #include "../src/history.h"
 
+#include "../edit/edit-widget.h"
 #include "../edit/etags.h"
-#include "editcmd_dialogs.h"
+#include "../edit/editcmd_dialogs.h"
 
 
 /*** global variables **************************************************/

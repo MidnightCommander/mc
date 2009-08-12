@@ -39,18 +39,20 @@
 #include <string.h>
 
 #include "global.h"
-#include "tty.h"
-#include "color.h"
+
+#include "../src/tty/tty.h"
+#include "../src/tty/color.h"
+#include "../src/tty/mouse.h"
+#include "../src/tty/key.h"
+
 #include "wtools.h"	/* message() */
 #include "dir.h"
 #include "dialog.h"
 #include "widget.h"
 #include "panel.h"
-#include "mouse.h"
 #include "main.h"
 #include "file.h"	/* For copy_dir_dir(), move_dir_dir(), erase_dir() */
 #include "help.h"
-#include "key.h"	/* For mi_getch() */
 #include "tree.h"
 #include "treestore.h"
 #include "cmd.h"
@@ -173,23 +175,22 @@ static void tree_show_mini_info (WTree *tree, int tree_lines, int tree_cols)
     } else
 	line = tree_lines+1;
 
-    widget_move (&tree->widget, line, 1);
-    hline (' ', tree_cols);
+    tty_draw_hline (tree->widget.y + line, tree->widget.x + 1, ' ', tree_cols);
     widget_move (&tree->widget, line, 1);
 
     if (tree->searching){
 	/* Show search string */
-	attrset (TREE_NORMALC (h));
-	attrset (DLG_FOCUSC (h));
-	addch (PATH_SEP);
+	tty_setcolor (TREE_NORMALC (h));
+	tty_setcolor (DLG_FOCUSC (h));
+	tty_print_char (PATH_SEP);
 
-	addstr (str_fit_to_term (tree->search_buffer, 
+	tty_print_string (str_fit_to_term (tree->search_buffer, 
 		tree_cols - 2, J_LEFT_FIT));
-	addch (' ');
-	attrset (DLG_FOCUSC (h));
+	tty_print_char (' ');
+	tty_setcolor (DLG_FOCUSC (h));
     } else {
 	/* Show full name of selected directory */
-	addstr (str_fit_to_term (tree->selected_ptr->name, 
+	tty_print_string (str_fit_to_term (tree->selected_ptr->name, 
 		tree_cols, J_LEFT_FIT));
     }
 }
@@ -207,7 +208,7 @@ static void show_tree (WTree *tree)
     tree_lines = tlines (tree);
     tree_cols  = tree->widget.cols;
 
-    attrset (TREE_NORMALC (h));
+    tty_setcolor (TREE_NORMALC (h));
     widget_move ((Widget*)tree, y, x);
     if (tree->is_panel){
 	tree_cols  -= 2;
@@ -256,10 +257,8 @@ static void show_tree (WTree *tree)
     /* Loop for every line */
     for (i = 0; i < tree_lines; i++){
 	/* Move to the beginning of the line */
-	widget_move (&tree->widget, y+i, x);
-
-	hline (' ', tree_cols);
-	widget_move (&tree->widget, y+i, x);
+	tty_draw_hline (tree->widget.y + y + i, tree->widget.x + x,
+			' ', tree_cols);
 
 	if (!current)
 	    continue;
@@ -269,54 +268,54 @@ static void show_tree (WTree *tree)
 
 	    /* Top level directory */
 	    if (tree->active && current == tree->selected_ptr) {
-		if (!use_colors && !tree->is_panel)
-			attrset (MARKED_COLOR);
+		if (!tty_use_colors () && !tree->is_panel)
+			tty_setcolor (MARKED_COLOR);
 		else
-			attrset (SELECTED_COLOR);
+			tty_setcolor (SELECTED_COLOR);
 	    }
 
 	    /* Show full name */
-	    addstr (str_fit_to_term (current->name, tree_cols - 6, J_LEFT_FIT));
+	    tty_print_string (str_fit_to_term (current->name, tree_cols - 6, J_LEFT_FIT));
 	} else{
 	    /* Sub level directory */
 
-	    acs ();
+	    tty_set_alt_charset (TRUE);
 	    /* Output branch parts */
 	    for (j = 0; j < current->sublevel - topsublevel - 1; j++){
 		if (tree_cols - 8 - 3 * j < 9)
 		    break;
-		addch (' ');
+		tty_print_char (' ');
 		if (current->submask & (1 << (j + topsublevel + 1)))
-		    addch (ACS_VLINE);
+		    tty_print_char (ACS_VLINE);
 		else
-		    addch (' ');
-		addch (' ');
+		    tty_print_char (' ');
+		tty_print_char (' ');
 	    }
-	    addch (' '); j++;
+	    tty_print_char (' '); j++;
 	    if (!current->next || !(current->next->submask & (1 << current->sublevel)))
-		addch (ACS_LLCORNER);
+		tty_print_char (ACS_LLCORNER);
 	    else
-		addch (ACS_LTEE);
-	    addch (ACS_HLINE);
-	    noacs ();
+		tty_print_char (ACS_LTEE);
+	    tty_print_char (ACS_HLINE);
+	    tty_set_alt_charset (FALSE);
 
 	    if (tree->active && current == tree->selected_ptr) {
 		/* Selected directory -> change color */
-		if (!use_colors && !tree->is_panel)
-		    attrset (MARKED_COLOR);
+		if (!tty_use_colors () && !tree->is_panel)
+		    tty_setcolor (MARKED_COLOR);
 		else
-		    attrset (SELECTED_COLOR);
+		    tty_setcolor (SELECTED_COLOR);
 	    }
 
 	    /* Show sub-name */
-	    addch (' ');
-	    addstr (str_fit_to_term (current->subname, 
+	    tty_print_char (' ');
+	    tty_print_string (str_fit_to_term (current->subname, 
 		    tree_cols - 2 - 4 - 3 * j, J_LEFT_FIT));
 	}
-	addch (' ');
+	tty_print_char (' ');
 
 	/* Return to normal color */
-	attrset (TREE_NORMALC (h));
+	tty_setcolor (TREE_NORMALC (h));
 
 	/* Calculate the next value for current */
 	current = current->next;
@@ -964,15 +963,16 @@ tree_key (WTree *tree, int key)
 static void
 tree_frame (Dlg_head *h, WTree *tree)
 {
-    attrset (NORMAL_COLOR);
+    tty_setcolor (NORMAL_COLOR);
     widget_erase ((Widget*) tree);
-    if (tree->is_panel)
-	draw_double_box (h, tree->widget.y, tree->widget.x, tree->widget.lines,
-		         tree->widget.cols);
+    if (tree->is_panel) {
+	draw_box (h, tree->widget.y, tree->widget.x, tree->widget.lines,
+		     tree->widget.cols);
 
-    if (show_mini_info && tree->is_panel){
-	widget_move (tree, tlines (tree) + 1, 1);
-	hline (ACS_HLINE, tree->widget.cols - 2);
+	if (show_mini_info)
+	    tty_draw_hline (tree->widget.y + tlines (tree) + 1,
+			    tree->widget.x + 1,
+			    ACS_HLINE, tree->widget.cols - 2);
     }
 }
 

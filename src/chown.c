@@ -33,9 +33,10 @@
 #include <unistd.h>
 
 #include "global.h"
-#include "tty.h"
-#include "win.h"
-#include "color.h"
+
+#include "../src/tty/tty.h"
+#include "../src/tty/color.h"
+
 #include "dialog.h"
 #include "widget.h"
 #include "strutil.h"
@@ -44,7 +45,8 @@
 #include "dir.h"
 #include "panel.h"		/* Needed for the externs */
 #include "chmod.h"
-#include "main.h"
+#include "main.h"		/* update_panels() */
+#include "layout.h"		/* repaint_screen() */
 #include "chown.h"
 #include "wtools.h"		/* For init_box_colors */
 
@@ -99,30 +101,30 @@ chown_refresh (Dlg_head *h)
 {
     common_dialog_repaint (h);
 
-    attrset (COLOR_NORMAL);
+    tty_setcolor (COLOR_NORMAL);
 
     draw_box (h, UY, UX, 12, 21);
     draw_box (h, GY, GX, 12, 21);
     draw_box (h, TY, TX, 12, 19);
 
     dlg_move (h, TY + 1, TX + 1);
-    addstr (_(" Name "));
+    tty_print_string (_(" Name "));
     dlg_move (h, TY + 3, TX + 1);
-    addstr (_(" Owner name "));
+    tty_print_string (_(" Owner name "));
     dlg_move (h, TY + 5, TX + 1);
-    addstr (_(" Group name "));
+    tty_print_string (_(" Group name "));
     dlg_move (h, TY + 7, TX + 1);
-    addstr (_(" Size "));
+    tty_print_string (_(" Size "));
     dlg_move (h, TY + 9, TX + 1);
-    addstr (_(" Permission "));
+    tty_print_string (_(" Permission "));
     
-    attrset (COLOR_HOT_NORMAL);
+    tty_setcolor (COLOR_HOT_NORMAL);
     dlg_move (h, UY, UX + 1);
-    addstr (_(" User name "));
+    tty_print_string (_(" User name "));
     dlg_move (h, GY, GX + 1);
-    addstr (_(" Group name "));
+    tty_print_string (_(" Group name "));
     dlg_move (h, TY, TX + 1);
-    addstr (_(" File "));
+    tty_print_string (_(" File "));
 }
 
 static char *

@@ -37,15 +37,16 @@
 #include <unistd.h>
 
 #include "global.h"
-#include "tty.h"
-#include "color.h"
+
+#include "../src/tty/tty.h"
+#include "../src/tty/key.h"		/* XCTRL and ALT macros */
+
 #include "dialog.h"
 #include "widget.h"
 #include "wtools.h"
 #include "main.h"		/* show_all_if_ambiguous */
 #include "util.h"
 #include "../src/strescape.h"
-#include "key.h"		/* XCTRL and ALT macros */
 #include "strutil.h"
 
 typedef char *CompletionFunction (const char * text, int state, INPUT_COMPLETE_FLAGS flags);
@@ -1056,11 +1057,11 @@ complete_engine (WInput *in, int what_to_do)
 	        char * complete = in->completions [0];
 	    if (insert_text (in, complete, strlen (complete))){
 	        if (in->completions [1])
-	            beep ();
+		    tty_beep ();
 		else
 		    free_completions (in);
 	    } else
-	        beep ();
+		tty_beep ();
         }
 	if ((what_to_do & DO_QUERY) && in->completions && in->completions [1]) {
 	    int maxlen = 0, i, count = 0;
@@ -1121,7 +1122,7 @@ complete_engine (WInput *in, int what_to_do)
 		return 1;
 	}
     } else
-        beep ();
+	tty_beep ();
     return 0;
 }
 

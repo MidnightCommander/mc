@@ -13,9 +13,10 @@
 #include <fcntl.h>
 
 #include "../src/global.h"
-#include "../src/tty.h"		/* enable/disable interrupt key */
+
 #include "../src/wtools.h"	/* message() */
 #include "../src/main.h"	/* print_vfs_message */
+
 #include "utilvfs.h"
 #include "vfs.h"
 #include "local.h"

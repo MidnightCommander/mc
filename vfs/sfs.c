@@ -42,15 +42,16 @@
 #include <fcntl.h>
 
 #include "../src/global.h"
-#include "../src/tty.h"		/* enable/disable interrupt key */
+
 #include "../src/wtools.h"	/* message() */
 #include "../src/main.h"	/* print_vfs_message */
+#include "../src/execute.h"	/* EXECUTE_AS_SHELL */
+
 #include "utilvfs.h"
 #include "vfs.h"
 #include "vfs-impl.h"
 #include "gc.h"		/* vfs_stamp_create */
 #include "local.h"
-#include "../src/execute.h"	/* EXECUTE_AS_SHELL */
 
 struct cachedfile {
     char *name, *cache;

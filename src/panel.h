@@ -97,7 +97,14 @@ void panel_set_sort_order (WPanel *panel, sortfn *sort_order);
 void panel_re_sort        (WPanel *panel);
 void set_panel_encoding (WPanel *);
 
+#define UP_OPTIMIZE		0
+#define UP_RELOAD		1
+#define UP_ONLY_CURRENT		2
+
+#define UP_KEEPSEL ((char *) -1)
+
 void update_dirty_panels (void);
+void update_panels (int force_update, const char *current_file);
 void panel_update_cols (Widget *widget, int frame_size);
 int set_panel_formats (WPanel *p);
 

@@ -29,7 +29,6 @@
 #include <ctype.h>
 #include <errno.h>
 #include <locale.h>
-#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -41,21 +40,23 @@
 #include <pwd.h>
 
 #include "global.h"
-#include "tty.h"
+
+#include "../src/tty/tty.h"
+#include "../src/tty/color.h"
+#include "../src/tty/mouse.h"
+#include "../src/tty/key.h"		/* For init_key() */
+#include "../src/tty/win.h"		/* xterm_flag */
+
 #include "dir.h"
-#include "color.h"
 #include "dialog.h"
 #include "menu.h"
 #include "panel.h"
 #include "main.h"
-#include "win.h"
-#include "mouse.h"
 #include "option.h"
 #include "tree.h"
 #include "treestore.h"
 #include "cons.saver.h"
 #include "subshell.h"
-#include "key.h"		/* For init_key() and mi_getch() */
 #include "setup.h"		/* save_setup() */
 #include "../src/mcconfig/mcconfig.h"
 #include "boxes.h"		/* sort_box() */
@@ -137,10 +138,6 @@ int mark_moves_down = 1;
 /* If true, at startup the user-menu is invoked */
 int auto_menu = 0;
 
-/* If true, use + and \ keys normally and select/unselect do if M-+ / M-\
-   and M-- and keypad + / - */
-int alternate_plus_minus = 0;
-
 /* If true, then the +, - and \ keys have their special meaning only if the
  * command line is emtpy, otherwise they behave like regular letters
  */
@@ -151,16 +148,21 @@ int pause_after_run = pause_on_dumb_terminals;
 /* It true saves the setup when quitting */
 int auto_save_setup = 1;
 
-#ifndef HAVE_CHARSET
+#ifdef HAVE_CHARSET
+/*
+ * Don't restrict the output on the screen manager level,
+ * the translation tables take care of it.
+ */
+#define full_eight_bits (1)
+#define eight_bit_clean (1)
+#else				/* HAVE_CHARSET */
 /* If true, allow characters in the range 160-255 */
 int eight_bit_clean = 1;
-
 /*
  * If true, also allow characters in the range 128-159.
  * This is reported to break on many terminals (xterm, qansi-m).
  */
 int full_eight_bits = 0;
-
 #endif				/* !HAVE_CHARSET */
 
 /*
@@ -182,9 +184,6 @@ int mouse_move_pages = 1;
 /* If true: l&r arrows are used to chdir if the input line is empty */
 int navigate_with_arrows = 0;
 
-/* If true use +, -, | for line drawing */
-int force_ugly_line_drawing = 0;
-
 /* If true program softkeys (HP terminals only) on startup and after every
    command ran in the subshell to the description found in the termcap/terminfo
    database */
@@ -203,7 +202,10 @@ WLabel *the_hint;
 WButtonBar *the_bar;
 
 /* For slow terminals */
-int slow_terminal = 0;
+static int slow_terminal = 0;
+
+/* If true use +, -, | for line drawing */
+static int ugly_line_drawing = 0;
 
 /* Mouse type: GPM, xterm or none */
 Mouse_Type use_mouse_p = MOUSE_NONE;
@@ -274,8 +276,10 @@ static char *last_wd_string = NULL;
 /* Set to 1 to suppress printing the last directory */
 static int print_last_revert = 0;
 
+/* Set to force black and white display at program startup */
+static gboolean disable_colors = FALSE;
 /* Force colors, only used by Slang */
-int force_colors = 0;
+static gboolean force_colors = FALSE;
 
 /* colors specified on the command line: they override any other setting */
 char *command_line_colors = NULL;
@@ -294,7 +298,7 @@ static int edit_one_file_start_line = 0;
 int midnight_shutdown = 0;
 
 /* The user's shell */
-const char *shell = NULL;
+char *shell = NULL;
 
 /* mc_home: The home of MC - /etc/mc or defined by MC_DATADIR */
 char *mc_home = NULL;
@@ -303,133 +307,6 @@ char *mc_home = NULL;
 char *mc_home_alt = NULL;
 
 char cmd_buf[512];
-
-static void
-reload_panelized (WPanel *panel)
-{
-    int i, j;
-    dir_list *list = &panel->dir;
-
-    if (panel != current_panel)
-	mc_chdir (panel->cwd);
-
-    for (i = 0, j = 0; i < panel->count; i++) {
-	if (list->list[i].f.marked) {
-	    /* Unmark the file in advance. In case the following mc_lstat
-	     * fails we are done, else we have to mark the file again
-	     * (Note: do_file_mark depends on a valid "list->list [i].buf").
-	     * IMO that's the best way to update the panel's summary status
-	     * -- Norbert
-	     */
-	    do_file_mark (panel, i, 0);
-	}
-	if (mc_lstat (list->list[i].fname, &list->list[i].st)) {
-	    g_free (list->list[i].fname);
-	    continue;
-	}
-	if (list->list[i].f.marked)
-	    do_file_mark (panel, i, 1);
-	if (j != i)
-	    list->list[j] = list->list[i];
-	j++;
-    }
-    if (j == 0)
-	panel->count = set_zero_dir (list);
-    else
-	panel->count = j;
-
-    if (panel != current_panel)
-	mc_chdir (current_panel->cwd);
-}
-
-static void
-update_one_panel_widget (WPanel *panel, int force_update,
-			 const char *current_file)
-{
-    int free_pointer;
-    char *my_current_file = NULL;
-
-    if (force_update & UP_RELOAD) {
-	panel->is_panelized = 0;
-	mc_setctl (panel->cwd, VFS_SETCTL_FLUSH, 0);
-	memset (&(panel->dir_stat), 0, sizeof (panel->dir_stat));
-    }
-
-    /* If current_file == -1 (an invalid pointer) then preserve selection */
-    if (current_file == UP_KEEPSEL) {
-	free_pointer = 1;
-	my_current_file = g_strdup (panel->dir.list[panel->selected].fname);
-	current_file = my_current_file;
-    } else
-	free_pointer = 0;
-
-    if (panel->is_panelized)
-	reload_panelized (panel);
-    else
-	panel_reload (panel);
-
-    try_to_select (panel, current_file);
-    panel->dirty = 1;
-
-    if (free_pointer)
-	g_free (my_current_file);
-}
-
-void
-panel_clean_dir (WPanel *panel)
-{
-    int count = panel->count;
-
-    panel->count = 0;
-    panel->top_file = 0;
-    panel->selected = 0;
-    panel->marked = 0;
-    panel->dirs_marked = 0;
-    panel->total = 0;
-    panel->searching = 0;
-    panel->is_panelized = 0;
-    panel->dirty = 1;
-
-    clean_dir (&panel->dir, count);
-}
-
-static void
-update_one_panel (int which, int force_update, const char *current_file)
-{
-    WPanel *panel;
-
-    if (get_display_type (which) != view_listing)
-	return;
-
-    panel = (WPanel *) get_panel_widget (which);
-    update_one_panel_widget (panel, force_update, current_file);
-}
-
-/* This routine reloads the directory in both panels. It tries to
- * select current_file in current_panel and other_file in other_panel.
- * If current_file == -1 then it automatically sets current_file and
- * other_file to the currently selected files in the panels.
- *
- * if force_update has the UP_ONLY_CURRENT bit toggled on, then it
- * will not reload the other panel.
-*/
-void
-update_panels (int force_update, const char *current_file)
-{
-    int reload_other = !(force_update & UP_ONLY_CURRENT);
-    WPanel *panel;
-
-    update_one_panel (get_current_index (), force_update, current_file);
-    if (reload_other)
-	update_one_panel (get_other_index (), force_update, UP_KEEPSEL);
-
-    if (get_current_type () == view_listing)
-	panel = (WPanel *) get_panel_widget (get_current_index ());
-    else
-	panel = (WPanel *) get_panel_widget (get_other_index ());
-
-    mc_chdir (panel->cwd);
-}
 
 /* Save current stat of directories to avoid reloading the panels */
 /* when no modifications have taken place */
@@ -444,17 +321,6 @@ save_cwds_stat (void)
 }
 
 #ifdef HAVE_SUBSHELL_SUPPORT
-void
-do_possible_cd (const char *new_dir)
-{
-    if (!do_cd (new_dir, cd_exact))
-	message (D_ERROR, _("Warning"),
-		 _(" The Commander can't change to the directory that \n"
-		   " the subshell claims you are in.  Perhaps you have \n"
-		   " deleted your working directory, or given yourself \n"
-		   " extra access permissions with the \"su\" command? "));
-}
-
 void
 do_update_prompt (void)
 {
@@ -522,20 +388,6 @@ quiet_quit_cmd (void)
 {
     print_last_revert = 1;
     quit_cmd_internal (1);
-}
-
-/*
- * Touch window and refresh window functions
- */
-
-/* This routine untouches the first line on both panels in order */
-/* to avoid the refreshing the menu bar */
-
-void
-repaint_screen (void)
-{
-    do_refresh ();
-    mc_refresh ();
 }
 
 /* Wrapper for do_subshell_chdir, check for availability of subshell */
@@ -742,36 +594,16 @@ load_prompt (int fd, void *unused)
 			   COLS - prompt_len);
 
 	/* since the prompt has changed, and we are called from one of the
-	 * get_event channels, the prompt updating does not take place
+	 * tty_get_event channels, the prompt updating does not take place
 	 * automatically: force a cursor update and a screen refresh
 	 */
 	update_cursor (midnight_dlg);
-	mc_refresh ();
+	tty_refresh ();
     }
     update_prompt = 1;
     return 0;
 }
 #endif				/* HAVE_SUBSHELL_SUPPORT */
-
-/* Used to emulate Lynx's entering leaving a directory with the arrow keys */
-int
-maybe_cd (int move_up_dir)
-{
-    if (navigate_with_arrows) {
-	if (!cmdline->buffer[0]) {
-	    if (move_up_dir) {
-		do_cd ("..", cd_exact);
-		return 1;
-	    }
-	    if (S_ISDIR (selection (current_panel)->st.st_mode)
-		|| link_isdir (selection (current_panel))) {
-		do_cd (selection (current_panel)->fname, cd_exact);
-		return 1;
-	    }
-	}
-    }
-    return 0;
-}
 
 static void
 sort_cmd (void)
@@ -1349,37 +1181,14 @@ static const key_map default_map[] = {
 };
 
 static void
-setup_sigwinch (void)
-{
-#if (defined(HAVE_SLANG) || (NCURSES_VERSION_MAJOR >= 4)) && defined(SIGWINCH)
-    struct sigaction act, oact;
-    act.sa_handler = flag_winch;
-    sigemptyset (&act.sa_mask);
-    act.sa_flags = 0;
-#ifdef SA_RESTART
-    act.sa_flags |= SA_RESTART;
-#endif
-    sigaction (SIGWINCH, &act, &oact);
-#endif
-}
-
-static void
 setup_pre (void)
 {
     /* Call all the inits */
-#ifdef HAVE_CHARSET
-/*
- * Don't restrict the output on the screen manager level,
- * the translation tables take care of it.
- */
-#define full_eight_bits (1)
-#define eight_bit_clean (1)
-#endif				/* !HAVE_CHARSET */
 
-#ifndef HAVE_SLANG
-    meta (stdscr, eight_bit_clean);
+#ifdef HAVE_SLANG
+    tty_display_8bit (full_eight_bits != 0);
 #else
-    SLsmg_Display_Eight_Bit = full_eight_bits ? 128 : 160;
+    tty_display_8bit (eight_bit_clean != 0);
 #endif
 }
 
@@ -1440,11 +1249,10 @@ setup_mc (void)
 	add_select_channel (subshell_pty, load_prompt, 0);
 #endif				/* !HAVE_SUBSHELL_SUPPORT */
 
-    setup_sigwinch ();
+    tty_setup_sigwinch (sigwinch_handler);
 
-    if (baudrate () < 9600 || slow_terminal) {
-	verbose = 0;
-    }
+    verbose = !((tty_baudrate () < 9600) || tty_is_slow ());
+
     init_mouse ();
 }
 
@@ -1527,6 +1335,17 @@ static void check_codeset()
     _system_codepage = str_detect_termencoding();
     utf8_display = str_isutf8 (_system_codepage);
 #endif /* HAVE_CHARSET */
+}
+
+static void
+done_screen (void)
+{
+    if (!(quit & SUBSHELL_EXIT))
+	clr_scr ();
+    tty_reset_shell_mode ();
+    tty_noraw_mode ();
+    tty_keypad (FALSE);
+    tty_colors_done ();
 }
 
 static void
@@ -1697,6 +1516,7 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	return MSG_NOT_HANDLED;
 
     case DLG_DRAW:
+	load_hint (1);
 	/* We handle the special case of the output lines */
 	if (console_flag && output_lines)
 	    show_console_contents (output_start_y,
@@ -1761,11 +1581,13 @@ load_hint (int force)
 	return;
 
     if (!message_visible) {
-	label_set_text (the_hint, 0);
+	label_set_text (the_hint, NULL);
 	return;
     }
 
-    if ((hint = get_random_hint (force))) {
+    hint = get_random_hint (force);
+
+    if (hint != NULL) {
 	if (*hint)
 	    set_hintbar (hint);
 	g_free (hint);
@@ -1785,7 +1607,6 @@ setup_panels_and_run_mc (void)
     add_widget (midnight_dlg, get_panel_widget (0));
     add_widget (midnight_dlg, get_panel_widget (1));
     add_widget (midnight_dlg, the_hint);
-    load_hint (1);
     add_widget (midnight_dlg, cmdline);
     add_widget (midnight_dlg, the_prompt);
     add_widget (midnight_dlg, the_bar);
@@ -1852,13 +1673,13 @@ mc_maybe_editor_or_viewer (void)
 static void
 do_nc (void)
 {
-    int midnight_colors[4];
-
-    midnight_colors[0] = NORMAL_COLOR;	/* NORMALC */
-    midnight_colors[1] = REVERSE_COLOR;	/* FOCUSC */
-    midnight_colors[2] = INPUT_COLOR;	/* HOT_NORMALC */
-    midnight_colors[3] = NORMAL_COLOR;	/* HOT_FOCUSC */
-
+    const int midnight_colors[DLG_COLOR_NUM] =
+    {
+	NORMAL_COLOR,	/* NORMALC */
+	REVERSE_COLOR,	/* FOCUSC */
+	INPUT_COLOR,	/* HOT_NORMALC */
+	NORMAL_COLOR	/* HOT_FOCUSC */
+    };
 
     midnight_dlg = create_dlg (0, 0, LINES, COLS, midnight_colors, midnight_callback,
 			       "[main]", NULL, DLG_WANT_IDLE);
@@ -1889,25 +1710,39 @@ do_nc (void)
 static void
 OS_Setup (void)
 {
+    const char *shell_env = getenv ("SHELL");
     const char *mc_libdir;
-    shell = getenv ("SHELL");
-    if (!shell || !*shell) {
+
+    if ((shell_env == NULL) || (shell_env[0] == '\0')) {
         struct passwd *pwd;
         pwd = getpwuid (geteuid ());
         if (pwd != NULL)
            shell = g_strdup (pwd->pw_shell);
+    } else
+	shell = g_strdup (shell_env);
+
+    if ((shell == NULL) || (shell[0] == '\0')) {
+	g_free (shell);
+	shell = g_strdup ("/bin/sh");
     }
-    if (!shell || !*shell)
-	shell = "/bin/sh";
 
     /* This is the directory, where MC was installed, on Unix this is DATADIR */
     /* and can be overriden by the MC_DATADIR environment variable */
-    if ((mc_libdir = getenv ("MC_DATADIR")) != NULL) {
+    mc_libdir = getenv ("MC_DATADIR");
+    if (mc_libdir != NULL) {
 	mc_home = g_strdup (mc_libdir);
+	mc_home_alt = g_strdup (SYSCONFDIR);
     } else {
 	mc_home = g_strdup (SYSCONFDIR);
+	mc_home_alt = g_strdup (DATADIR);
     }
-    mc_home_alt = mc_libdir != NULL ? g_strdup (SYSCONFDIR) : g_strdup (DATADIR);
+
+    /* This variable is used by the subshell */
+    home_dir = getenv ("HOME");
+
+    if (!home_dir)
+	home_dir = mc_home;
+
 }
 
 static void
@@ -2033,10 +1868,8 @@ process_args (poptContext ctx, int c, const char *option_arg)
 	break;
 
     case 'c':
-	disable_colors = 0;
-#ifdef HAVE_SLANG
-	force_colors = 1;
-#endif				/* HAVE_SLANG */
+	disable_colors = FALSE;
+	force_colors = TRUE;	/* for S-Lang only */
 	break;
 
     case 'f':
@@ -2092,7 +1925,7 @@ static const struct poptOption argument_table[] = {
      N_("Forces xterm features"), NULL},
     {"nomouse", 'd', POPT_ARG_NONE, {NULL}, 'd',
      N_("Disable mouse support in text version"), NULL},
-#if defined(HAVE_SLANG)
+#ifdef HAVE_SLANG
     {"termcap", 't', 0, {&SLtt_Try_Termcap}, 0,
      N_("Tries to use termcap instead of terminfo"), NULL},
 #endif
@@ -2100,7 +1933,7 @@ static const struct poptOption argument_table[] = {
      N_("Resets soft keys on HP terminals"), NULL},
     {"slow", 's', POPT_ARG_NONE, {&slow_terminal}, 0,
      N_("To run on slow terminals"), NULL},
-    {"stickchars", 'a', 0, {&force_ugly_line_drawing}, 0,
+    {"stickchars", 'a', POPT_ARG_NONE, {&ugly_line_drawing}, 0,
      N_("Use stickchars to draw"), NULL},
 
     /* color options */
@@ -2258,13 +2091,6 @@ main (int argc, char *argv[])
 
     OS_Setup ();
 
-    /* This variable is used by the subshell */
-    home_dir = getenv ("HOME");
-    if (!home_dir) {
-	/* mc_home was computed by OS_Setup */
-	home_dir = mc_home;
-    }
-
     str_init_strings (NULL);
 
     vfs_init ();
@@ -2279,7 +2105,7 @@ main (int argc, char *argv[])
 
     handle_args (argc, argv);
 
-    /* NOTE: This has to be called before slang_init or whatever routine
+    /* NOTE: This has to be called before tty_init or whatever routine
        calls any define_sequence */
     init_key ();
 
@@ -2303,19 +2129,12 @@ main (int argc, char *argv[])
 
     /* Must be done before init_subshell, to set up the terminal size: */
     /* FIXME: Should be removed and LINES and COLS computed on subshell */
-#ifdef HAVE_SLANG
-    slang_init ();
-#endif
-
-    start_interrupt_key ();
-
-    /* NOTE: This call has to be after slang_init. It's the small part from
-       the previous init_key which had to be moved after the call of slang_init */
-    init_key_input_fd ();
+    tty_init ((gboolean) slow_terminal, (gboolean) ugly_line_drawing);
 
     load_setup ();
 
-    init_curses ();
+    tty_init_colors (disable_colors, force_colors);
+    dlg_set_default_colors ();
 
     /* create home directory */
     /* do it after the screen library initialization to show the error message */
@@ -2330,7 +2149,6 @@ main (int argc, char *argv[])
     init_xterm_support ();
 
 #ifdef HAVE_SUBSHELL_SUPPORT
-
     /* Done here to ensure that the subshell doesn't  */
     /* inherit the file descriptors opened below, etc */
     if (use_subshell)
@@ -2369,10 +2187,7 @@ main (int argc, char *argv[])
 
     flush_extension_file ();	/* does only free memory */
 
-    endwin ();
-#ifdef HAVE_SLANG
-    slang_shutdown ();
-#endif
+    tty_shutdown ();
 
     if (console_flag && !(quit & SUBSHELL_EXIT))
 	handle_console (CONSOLE_RESTORE);
@@ -2400,6 +2215,8 @@ main (int argc, char *argv[])
 
     g_free (mc_home_alt);
     g_free (mc_home);
+    g_free (shell);
+
     done_key ();
 #ifdef HAVE_CHARSET
     free_codepages_list ();

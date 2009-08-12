@@ -26,9 +26,10 @@
 
 #include <stdlib.h>
 
-#include "edit-impl.h"
 #include "../src/global.h"
 #include "../src/wtools.h"
+
+#include "edit-impl.h"
 
 #define MAX_ENTRY_LEN 40
 #define LIST_LINES 14

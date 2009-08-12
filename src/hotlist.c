@@ -41,17 +41,20 @@
 #include <unistd.h>
 
 #include "global.h"
-#include "tty.h"		/* COLS */
-#include "color.h"		/* dialog_colors */
+
+#include "../src/tty/tty.h"		/* COLS */
+#include "../src/tty/color.h"
+#include "../src/tty/key.h"		/* KEY_M_CTRL */
+
 #include "dialog.h"
 #include "widget.h"
 #include "setup.h"		/* For profile_bname */
 #include "../src/mcconfig/mcconfig.h"	/* Load/save directories hotlist */
 #include "wtools.h"		/* QuickDialog */
 #include "panel.h"		/* current_panel */
-#include "main.h"		/* repaint_screen */
+#include "main.h"		/* update_panels() */
+#include "layout.h"		/* repaint_screen() */
 #include "hotlist.h"
-#include "key.h"		/* KEY_M_CTRL */
 #include "command.h"		/* cmdline */
 #include "glibcompat.h"		/* g_strlcpy for glib < 2.0 */
 #include "history.h"
@@ -163,7 +166,7 @@ static void
 hotlist_refresh (Dlg_head * dlg)
 {
     common_dialog_repaint (dlg);
-    attrset (COLOR_NORMAL);
+    tty_setcolor (COLOR_NORMAL);
     draw_box (dlg, 2, 5, dlg->lines - (hotlist_state.moving ? 6 : 10),
 	      dlg->cols - (UX * 2));
     if (!hotlist_state.moving)
@@ -484,7 +487,7 @@ hotlist_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	/* fall through */
 
     case DLG_INIT:
-	attrset (MENU_ENTRY_COLOR);
+	tty_setcolor (MENU_ENTRY_COLOR);
 	update_path_name ();
 	return MSG_HANDLED;
 
@@ -1140,7 +1143,7 @@ char *hotlist_cmd (int vfs_or_hotlist)
     init_hotlist (vfs_or_hotlist);
 
     /* display file info */
-    attrset (SELECTED_COLOR);
+    tty_setcolor (SELECTED_COLOR);
 
     hotlist_state.running = 1;
     run_dlg (hotlist_dlg);

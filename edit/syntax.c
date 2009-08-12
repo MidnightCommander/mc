@@ -51,11 +51,16 @@
 #include "edit-impl.h"
 #include "edit-widget.h"
 
-#include "../src/color.h"	/* use_colors */
-#include "../src/main.h"	/* mc_home */
-#include "../src/wtools.h"	/* message() */
-#include "../src/strutil.h"	/* utf string functions */
-#include "../src/search/search.h" /* search engine */
+#include "../src/search/search.h"	/* search engine */
+
+#include "../src/tty/color.h"
+
+#include "edit-impl.h"
+#include "edit-widget.h"
+
+#include "../src/main.h"		/* mc_home */
+#include "../src/wtools.h"		/* message() */
+#include "../src/strutil.h"		/* utf string functions */
 
 /* bytes */
 #define SYNTAX_MARKER_DENSITY 512
@@ -496,10 +501,10 @@ static void translate_rule_to_color (WEdit * edit, struct syntax_rule rule, int 
 void edit_get_syntax_color (WEdit * edit, long byte_index, int *color)
 {
     if (edit->rules && byte_index < edit->last_byte &&
-                         option_syntax_highlighting && use_colors) {
+                         option_syntax_highlighting && tty_use_colors ()) {
 	translate_rule_to_color (edit, edit_get_rule (edit, byte_index), color);
     } else {
-	*color = use_colors ? EDITOR_NORMAL_COLOR_INDEX : 0;
+	*color = tty_use_colors () ? EDITOR_NORMAL_COLOR_INDEX : 0;
     }
 }
 
@@ -663,7 +668,7 @@ this_try_alloc_color_pair (const char *fg, const char *bg)
 	    *p = '\0';
 	bg = b;
     }
-    return try_alloc_color_pair (fg, bg);
+    return tty_try_alloc_color_pair (fg, bg);
 }
 
 static char *error_file_name = 0;
@@ -1176,7 +1181,7 @@ edit_load_syntax (WEdit *edit, char ***pnames, const char *type)
 
     edit_free_syntax_rules (edit);
 
-    if (!use_colors)
+    if (!tty_use_colors ())
 	return;
 
     if (!option_syntax_highlighting && (!pnames || !*pnames))

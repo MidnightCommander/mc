@@ -10,12 +10,9 @@
 #include "widget.h"
 
 void layout_cmd (void);
-void init_curses (void);
-void done_screen (void);
 void setup_panels (void);
 void destroy_panels (void);
-void move_resize_panel (void);
-void flag_winch (int dummy);
+void sigwinch_handler (int dummy);
 void change_screen_size (void);
 void set_display_type (int num, int type);
 void swap_panels (void);
@@ -34,6 +31,7 @@ void set_hintbar (const char *str);
 
 /* Clear screen */
 void clr_scr (void);
+void repaint_screen (void);
 
 extern int winch_flag;
 extern int equal_split;

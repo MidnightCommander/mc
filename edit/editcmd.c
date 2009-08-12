@@ -46,14 +46,15 @@
 #include <fcntl.h>
 
 #include "../src/global.h"
-#include "../src/history.h"
 
-#include "../src/tty.h"		/* LINES */
+#include "../src/tty/tty.h"	/* COLS */
+#include "../src/tty/key.h"	/* XCTRL */
+
+#include "../src/history.h"
 #include "../src/widget.h"	/* listbox_new() */
 #include "../src/layout.h"	/* clr_scr() */
 #include "../src/main.h"	/* mc_home source_codepage */
 #include "../src/help.h"	/* interactive_display() */
-#include "../src/key.h"		/* XCTRL */
 #include "../src/wtools.h"	/* message() */
 #include "../src/charsets.h"
 #include "../src/selcodepage.h"
@@ -124,18 +125,17 @@ void edit_help_cmd (WEdit * edit)
 
 void edit_refresh_cmd (WEdit * edit)
 {
-#ifndef HAVE_SLANG
-    clr_scr();
-    do_refresh();
-#else
+#ifdef HAVE_SLANG
     {
 	int color;
 	edit_get_syntax_color (edit, -1, &color);
     }
-    touchwin(stdscr);
+    tty_touch_screen ();
+    tty_refresh ();
+#else
+    clr_scr();
+    repaint_screen ();
 #endif /* !HAVE_SLANG */
-    mc_refresh();
-    doupdate();
 }
 
 /*  If 0 (quick save) then  a) create/truncate <filename> file,
@@ -2372,7 +2372,7 @@ edit_complete_word_cmd (WEdit *edit)
 	    /* !!! usually only a beep is expected and when <ALT-TAB> is !!! */
 	    /* !!! pressed again the selection dialog pops up, but that  !!! */
 	    /* !!! seems to require a further internal state             !!! */
-	    /*beep (); */
+	    /*tty_beep (); */
 
 	    /* let the user select the preferred completion */
 	    editcmd_dialog_completion_show (edit, max_len, word_len,

@@ -50,12 +50,12 @@
 #endif /* HAVE_STROPTS_H */
 
 #include "global.h"
-#include "tty.h"	/* LINES */
+#include "../src/tty/tty.h"	/* LINES */
 #include "panel.h"	/* current_panel */
 #include "wtools.h"	/* query_dialog() */
 #include "main.h"	/* do_update_prompt() */
 #include "cons.saver.h"	/* handle_console() */
-#include "key.h"	/* XCTRL */
+#include "../src/tty/key.h"	/* XCTRL */
 #include "subshell.h"
 #include "strutil.h"
 
@@ -518,11 +518,11 @@ init_subshell (void)
     /* Wait until the subshell has started up and processed the command */
 
     subshell_state = RUNNING_COMMAND;
-    enable_interrupt_key ();
+    tty_enable_interrupt_key ();
     if (!feed_subshell (QUIETLY, TRUE)) {
 	use_subshell = FALSE;
     }
-    disable_interrupt_key ();
+    tty_disable_interrupt_key ();
     if (!subshell_alive)
 	use_subshell = FALSE;	/* Subshell died instantly, so don't use it */
 }
@@ -532,11 +532,11 @@ static void init_raw_mode ()
 {
     static int initialized = 0;
 
-    /* MC calls reset_shell_mode() in pre_exec() to set the real tty to its */
-    /* original settings.  However, here we need to make this tty very raw, */
-    /* so that all keyboard signals, XON/XOFF, etc. will get through to the */
-    /* pty.  So, instead of changing the code for execute(), pre_exec(),    */
-    /* etc, we just set up the modes we need here, before each command.     */
+    /* MC calls tty_reset_shell_mode() in pre_exec() to set the real tty to its */
+    /* original settings.  However, here we need to make this tty very raw,     */
+    /* so that all keyboard signals, XON/XOFF, etc. will get through to the     */
+    /* pty.  So, instead of changing the code for execute(), pre_exec(),        */
+    /* etc, we just set up the modes we need here, before each command.         */
 
     if (initialized == 0)  /* First time: initialise `raw_mode' */
     {

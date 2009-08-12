@@ -47,15 +47,17 @@
 #include <unistd.h>
 
 #include "global.h"
-#include "tty.h"		/* COLS */
-#include "win.h"
-#include "color.h"
-#include "key.h"
+
+#include "../src/tty/tty.h"
+#include "../src/tty/color.h"
+#include "../src/tty/key.h"
+#include "../src/tty/mouse.h"
+#include "../src/tty/win.h"	/* do_enter_ca_mode() */
+
 #include "dialog.h"
 #include "widget.h"
 #include "command.h"
 #include "../src/mcconfig/mcconfig.h"
-#include "mouse.h"
 #include "main-widgets.h"
 #include "main.h"
 #include "subshell.h"	/* For use_subshell and resize_subshell() */
@@ -226,7 +228,7 @@ static void update_split (void)
     old_first_panel_size = _first_panel_size;
     old_horizontal_split = _horizontal_split; 
    
-    attrset (COLOR_NORMAL);
+    tty_setcolor (COLOR_NORMAL);
     dlg_move (layout_dlg, 6, 6);
     tty_printf ("%03d", _first_panel_size);
     dlg_move (layout_dlg, 6, 18);
@@ -297,16 +299,16 @@ layout_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	old_horizontal_split = -1;
 	old_output_lines     = -1;
 
-	attrset (COLOR_HOT_NORMAL);
+	tty_setcolor (COLOR_HOT_NORMAL);
 	update_split ();
 	dlg_move (h, 6, 13);
-	addch ('=');
+	tty_print_char ('=');
 	if (console_flag){
 	    if (old_output_lines != _output_lines){
 		old_output_lines = _output_lines;
-		attrset (COLOR_NORMAL);
+		tty_setcolor (COLOR_NORMAL);
 		dlg_move (h, LAYOUT_OPTIONS_COUNT, 16 + first_width);
-		addstr (str_term_form (output_lines_label));
+		tty_print_string (output_lines_label);
 		dlg_move (h, LAYOUT_OPTIONS_COUNT, 10 + first_width);
 		tty_printf ("%02d", _output_lines);
 	    }
@@ -349,7 +351,7 @@ layout_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	if (console_flag){
 	    if (old_output_lines != _output_lines){
 		old_output_lines = _output_lines;
-		attrset (COLOR_NORMAL);
+		tty_setcolor (COLOR_NORMAL);
 		dlg_move (h, LAYOUT_OPTIONS_COUNT, 10 + first_width);
 		tty_printf ("%02d", _output_lines);
 	    }
@@ -515,6 +517,7 @@ layout_change (void)
     done_menu ();
     init_menu ();
     menubar_arrange (the_menubar);
+    load_hint (1);
 }
 
 void layout_cmd (void)
@@ -565,83 +568,20 @@ static void check_split (void)
     }
 }
 
-#ifdef HAVE_SLANG
-void
-init_curses ()
-{
-    SLsmg_init_smg ();
-    do_enter_ca_mode ();
-    init_colors ();
-    keypad (stdscr, TRUE);
-    nodelay (stdscr, FALSE);
-}
-#else
-static const struct {
-    int acscode;
-    int character;
-} acs_approx [] = {
-    { 'q',  '-' }, /* ACS_HLINE */
-    { 'x',  '|' }, /* ACS_VLINE */
-    { 'l',  '+' }, /* ACS_ULCORNER */
-    { 'k',  '+' }, /* ACS_URCORNER */
-    { 'm',  '+' }, /* ACS_LLCORNER */
-    { 'j',  '+' }, /* ACS_LRCORNER */
-    { 'a',  '#' }, /* ACS_CKBOARD */
-    { 'u',  '+' }, /* ACS_RTEE */
-    { 't',  '+' }, /* ACS_LTEE */
-    { 'w',  '+' }, /* ACS_TTEE */
-    { 'v',  '+' }, /* ACS_BTEE */
-    { 'n',  '+' }, /* ACS_PLUS */
-    { 0, 0 } };
-
-void init_curses (void)
-{
-    int i;
-    initscr();
-#ifdef HAVE_ESCDELAY
-    /*
-     * If ncurses exports the ESCDELAY variable, it should be set to
-     * a low value, or you'll experience a delay in processing escape
-     * sequences that are recognized by mc (e.g. Esc-Esc).  On the other
-     * hand, making ESCDELAY too small can result in some sequences
-     * (e.g. cursor arrows) being reported as separate keys under heavy
-     * processor load, and this can be a problem if mc hasn't learned
-     * them in the "Learn Keys" dialog.  The value is in milliseconds.
-     */
-    ESCDELAY = 200;
-#endif /* HAVE_ESCDELAY */
-    do_enter_ca_mode ();
-    mc_raw_mode ();
-    noecho ();
-    keypad (stdscr, TRUE);
-    nodelay (stdscr, FALSE);
-    init_colors ();
-    if (force_ugly_line_drawing) {
-	for (i = 0; acs_approx[i].acscode != 0; i++) {
-	    acs_map[acs_approx[i].acscode] = acs_approx[i].character;
-	}
-    }
-}
-#endif /* ! HAVE_SLANG */
-
 void
 clr_scr (void)
 {
-    standend ();
-    dlg_erase (midnight_dlg);
-    mc_refresh ();
-    doupdate ();
+    tty_set_normal_attrs ();
+    tty_fill_region (0, 0, LINES, COLS, ' ');
+    tty_refresh ();
 }
 
 void
-done_screen ()
+repaint_screen (void)
 {
-    if (!(quit & SUBSHELL_EXIT))
-	clr_scr ();
-    reset_shell_mode ();
-    mc_noraw_mode ();
-    keypad (stdscr, FALSE);
-    done_colors ();
+    do_refresh ();
+    tty_touch_screen ();
+    tty_refresh ();
 }
 
 static void
@@ -727,17 +667,16 @@ setup_panels (void)
 			       LINES - output_lines - keybar_visible - 1,
 			       LINES - keybar_visible - 1);
     }
-    if (message_visible) {
+    if (message_visible)
 	widget_set_size (&the_hint->widget, height + start_y, 0, 1, COLS);
-	set_hintbar ("");	/* clean up the line */
-    } else
+    else
 	widget_set_size (&the_hint->widget, 0, 0, 0, 0);
 
-    load_hint (1);
     update_xterm_title_path ();
 }
 
-void flag_winch (int dummy)
+void
+sigwinch_handler (int dummy)
 {
     (void) dummy;
 #if !(defined(USE_NCURSES) || defined(USE_NCURSESW))	/* don't do malloc in a signal handler */
@@ -780,19 +719,21 @@ change_screen_size (void)
 #if defined TIOCGWINSZ
 
 #ifndef NCURSES_VERSION
-    mc_noraw_mode ();
-    endwin ();
+    tty_noraw_mode ();
+    tty_reset_screen ();
 #endif
     low_level_change_screen_size ();
-    check_split ();
-#ifndef NCURSES_VERSION
+#ifdef HAVE_SLANG
     /* XSI Curses spec states that portable applications shall not invoke
      * initscr() more than once.  This kludge could be done within the scope
      * of the specification by using endwin followed by a refresh (in fact,
      * more than one curses implementation does this); it is guaranteed to work
      * only with slang.
      */
-    init_curses ();
+    SLsmg_init_smg ();
+    do_enter_ca_mode ();
+    tty_keypad (TRUE);
+    tty_nodelay (FALSE);
 #endif
     setup_panels ();
 
@@ -804,8 +745,7 @@ change_screen_size (void)
 #endif
 
     /* Now, force the redraw */
-    do_refresh ();
-    touchwin (stdscr);
+    repaint_screen ();
 #endif				/* TIOCGWINSZ */
 #endif				/* defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4 */
 }
@@ -824,7 +764,7 @@ void set_hintbar(const char *str)
 {
     label_set_text (the_hint, str);
     if (ok_to_refresh > 0)
-        refresh();
+        tty_refresh();
 }
 
 void print_vfs_message (const char *msg, ...)
@@ -847,15 +787,15 @@ void print_vfs_message (const char *msg, ...)
 	    return;
 
 	/* Preserve current cursor position */
-	getyx (stdscr, row, col);
+	tty_getyx (&row, &col);
 
-	move (0, 0);
-	attrset (NORMAL_COLOR);
-	addstr (str_fit_to_term (str, COLS - 1, J_LEFT));
+	tty_gotoyx (0, 0);
+	tty_setcolor (NORMAL_COLOR);
+	tty_print_string (str_fit_to_term (str, COLS - 1, J_LEFT));
 
 	/* Restore cursor position */
-	move(row, col);
-	mc_refresh ();
+	tty_gotoyx (row, col);
+	tty_refresh ();
 	return;
     }
 
@@ -874,10 +814,10 @@ void rotate_dash (void)
 
     if (pos >= sizeof (rotating_dash)-1)
 	pos = 0;
-    move (0, COLS-1);
-    attrset (NORMAL_COLOR);
-    addch (rotating_dash [pos]);
-    mc_refresh ();
+    tty_gotoyx (0, COLS - 1);
+    tty_setcolor (NORMAL_COLOR);
+    tty_print_char (rotating_dash [pos]);
+    tty_refresh ();
     pos++;
 }
 

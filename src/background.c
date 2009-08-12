@@ -45,11 +45,10 @@
 
 #include "global.h"
 #include "background.h"
-#include "tty.h"	/* doupdate() */
-#include "dialog.h"	/* do_refresh() */
 #include "wtools.h"
+#include "layout.h"	/* repaint_screen() */
 #include "fileopctx.h"	/* FileOpContext */
-#include "key.h"	/* add_select_channel(), delete_select_channel() */
+#include "../src/tty/key.h"	/* add_select_channel(), delete_select_channel() */
 
 enum ReturnType {
     Return_String,
@@ -347,9 +346,7 @@ background_attention (int fd, void *closure)
     for (i = 0; i < argc; i++)
 	g_free (data [i]);
 
-    do_refresh ();
-    mc_refresh ();
-    doupdate ();
+    repaint_screen ();
     return 0;
 }
 

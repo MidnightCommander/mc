@@ -23,14 +23,8 @@
 #ifndef MC_DIALOG_H
 #define MC_DIALOG_H
 
-#include "mouse.h"
+#include "../src/tty/mouse.h"
 #include "util.h" /* Hook */
-
-/* Color constants */
-#define DLG_NORMALC(h)		((h)->color[0])
-#define DLG_FOCUSC(h)		((h)->color[1])
-#define DLG_HOT_NORMALC(h)	((h)->color[2])
-#define DLG_HOT_FOCUSC(h)	((h)->color[3])
 
 /* Common return values */
 #define B_EXIT		0
@@ -89,12 +83,18 @@ typedef enum {
 struct Dlg_head;
 typedef cb_ret_t (*dlg_cb_fn)(struct Dlg_head *h, dlg_msg_t msg, int parm);
 
-typedef struct Dlg_head {
+/* Dialog color constants */
+#define DLG_COLOR_NUM		4
+#define DLG_NORMALC(h)		((h)->color[0])
+#define DLG_FOCUSC(h)		((h)->color[1])
+#define DLG_HOT_NORMALC(h)	((h)->color[2])
+#define DLG_HOT_FOCUSC(h)	((h)->color[3])
 
+typedef struct Dlg_head {
     /* Set by the user */
     int flags;			/* User flags */
     const char *help_ctx;	/* Name of the help entry */
-    const int *color;		/* Color set */
+    int *color;			/* Color set. Unused in viewer and editor */
     /*notconst*/ char *title;	/* Title of the dialog */
 
     /* Set and received by the user */
@@ -114,9 +114,11 @@ typedef struct Dlg_head {
     struct Widget *current;	/* Curently active widget */
     dlg_cb_fn callback;
     struct Dlg_head *parent;	/* Parent dialog */
-
 } Dlg_head;
 
+/* Color styles for normal and error dialogs */
+extern int dialog_colors[4];
+extern int alarm_colors[4];
 
 typedef struct Widget Widget;
 
@@ -144,9 +146,6 @@ struct Widget {
 /* draw box in window */
 void draw_box (Dlg_head *h, int y, int x, int ys, int xs);
 
-/* doubled line if possible */
-void draw_double_box (Dlg_head *h, int y, int x, int ys, int xs);
-
 /* Flags for create_dlg: */
 #define DLG_REVERSE	(1 << 5) /* Tab order is opposite to the add order */
 #define DLG_WANT_TAB	(1 << 4) /* Should the tab key be sent to the dialog? */
@@ -160,6 +159,9 @@ void draw_double_box (Dlg_head *h, int y, int x, int ys, int xs);
 Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
 		      const int *color_set, dlg_cb_fn callback,
 		      const char *help_ctx, const char *title, int flags);
+
+void dlg_set_default_colors (void);
+
 int  add_widget           (Dlg_head *dest, void *Widget);
 
 /* Runs dialog d */
@@ -191,10 +193,8 @@ cb_ret_t default_proc (widget_msg_t msg, int parm);
 /* Default paint routine for dialogs */
 void common_dialog_repaint (struct Dlg_head *h);
 
-#define widget_move(w, _y, _x) move(((Widget *)(w))->y + _y, \
-				    ((Widget *)(w))->x + _x)
-#define dlg_move(h, _y, _x) move(((Dlg_head *)(h))->y + _y, \
-				 ((Dlg_head *)(h))->x + _x)
+#define widget_move(w, _y, _x) tty_gotoyx (((Widget *)(w))->y + _y, ((Widget *)(w))->x + _x)
+#define dlg_move(h, _y, _x) tty_gotoyx (((Dlg_head *)(h))->y + _y, ((Dlg_head *)(h))->x + _x)
 
 extern Dlg_head *current_dlg;
 

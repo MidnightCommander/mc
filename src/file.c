@@ -57,10 +57,13 @@
 #include <sys/time.h>
 
 #include "global.h"
-#include "tty.h"
+
+#include "../src/tty/tty.h"
+#include "../src/tty/key.h"
+
+#include "../src/search/search.h"
+
 #include "setup.h"
-#include "color.h"
-#include "win.h"
 #include "dialog.h"
 #include "widget.h"
 #include "main.h"		/* cmd_buf */
@@ -70,7 +73,6 @@
 #include "background.h"		/* we_are_background */
 #include "../src/strescape.h"
 #include "strutil.h"
-#include "../src/search/search.h"
 
 /* Needed for current_panel, other_panel and WTree */
 #include "dir.h"
@@ -78,7 +80,6 @@
 #include "file.h"
 #include "filegui.h"
 #include "tree.h"
-#include "key.h"
 #include "../vfs/vfs-impl.h"
 
 /* }}} */
@@ -426,7 +427,7 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 	file_progress_show_target (ctx, dst_path) == FILE_ABORT)
 	return FILE_ABORT;
 
-    mc_refresh ();
+    tty_refresh ();
 
     while (mc_stat (dst_path, &sb2) == 0) {
 	if (S_ISDIR (sb2.st_mode)) {
@@ -581,7 +582,7 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 
     return_status = file_progress_show (ctx, 0, file_size);
 
-    mc_refresh ();
+    tty_refresh ();
 
     if (return_status != FILE_CONT)
 	goto ret;
@@ -681,7 +682,7 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 		return_status =
 		    file_progress_show (ctx, n_read_total + ctx->do_reget, file_size);
 	    }
-	    mc_refresh ();
+	    tty_refresh ();
 	    if (return_status != FILE_CONT)
 		goto ret;
 	}
@@ -995,7 +996,7 @@ move_file_file (FileOpContext *ctx, const char *s, const char *d,
 	|| file_progress_show_target (ctx, d) == FILE_ABORT)
 	return FILE_ABORT;
 
-    mc_refresh ();
+    tty_refresh ();
 
     while (mc_lstat (s, &src_stats) != 0) {
 	/* Source doesn't exist */
@@ -1070,7 +1071,7 @@ move_file_file (FileOpContext *ctx, const char *s, const char *d,
 	|| (return_status = file_progress_show (ctx, 0, 0)) != FILE_CONT)
 	return return_status;
 
-    mc_refresh ();
+    tty_refresh ();
 
   retry_src_remove:
     if (mc_unlink (s)) {
@@ -1106,7 +1107,7 @@ move_dir_dir (FileOpContext *ctx, const char *s, const char *d,
 	file_progress_show_target (ctx, d) == FILE_ABORT)
 	return FILE_ABORT;
 
-    mc_refresh ();
+    tty_refresh ();
 
     mc_stat (s, &sbuf);
     dstat_ok = (mc_stat (d, &dbuf) == 0);
@@ -1177,7 +1178,7 @@ move_dir_dir (FileOpContext *ctx, const char *s, const char *d,
 	|| (return_status = file_progress_show (ctx, 0, 0)) != FILE_CONT)
 	goto ret;
 
-    mc_refresh ();
+    tty_refresh ();
     if (ctx->erase_at_end) {
 	for (; erase_list && return_status != FILE_ABORT;) {
 	    if (S_ISDIR (erase_list->st_mode)) {
@@ -1216,7 +1217,7 @@ erase_file (FileOpContext *ctx, const char *s, off_t *progress_count,
 
     if (file_progress_show_deleting (ctx, s) == FILE_ABORT)
 	return FILE_ABORT;
-    mc_refresh ();
+    tty_refresh ();
 
     if (progress_count && mc_lstat (s, &buf)) {
 	/* ignore, most likely the mc_unlink fails, too */
@@ -1281,7 +1282,7 @@ recursive_erase (FileOpContext *ctx, const char *s, off_t *progress_count,
 	return return_status;
     if (file_progress_show_deleting (ctx, s) == FILE_ABORT)
 	return FILE_ABORT;
-    mc_refresh ();
+    tty_refresh ();
 
     while (my_rmdir (s)) {
 	return_status =
@@ -1333,7 +1334,7 @@ erase_dir (FileOpContext *ctx, const char *s, off_t *progress_count,
 
     if (file_progress_show_deleting (ctx, s) == FILE_ABORT)
 	return FILE_ABORT;
-    mc_refresh ();
+    tty_refresh ();
 
     /* The old way to detect a non empty directory was:
        error = my_rmdir (s);
@@ -1375,7 +1376,7 @@ erase_dir_iff_empty (FileOpContext *ctx, const char *s)
 
     if (file_progress_show_deleting (ctx, s) == FILE_ABORT)
 	return FILE_ABORT;
-    mc_refresh ();
+    tty_refresh ();
 
     if (1 != check_dir_is_empty (s))	/* not empty or error */
 	return FILE_CONT;
@@ -1482,7 +1483,7 @@ compute_dir_size_update_ui (const void *ui, const char *dirname)
     label_set_text (this->dirname, name_trunc (dirname, this->dlg->cols - 6));
 
     event.x = -1; /* Don't show the GPM cursor */
-    c = get_event (&event, 0, 0);
+    c = tty_get_event (&event, FALSE, FALSE);
     if (c == EV_NONE)
 	return FILE_CONT;
 
@@ -2109,7 +2110,7 @@ panel_operate (void *source_panel, FileOperation operation,
 		&& file_progress_show (ctx, 0, 0) == FILE_ABORT)
 		goto clean_up;
 
-	    mc_refresh ();
+	    tty_refresh ();
 	}			/* Loop for every file */
     }				/* Many entries */
   clean_up:

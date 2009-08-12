@@ -32,18 +32,20 @@
 #include <unistd.h>
 
 #include "global.h"
-#include "tty.h"
+
+#include "../src/tty/tty.h"
+#include "../src/tty/color.h"
+#include "../src/tty/mouse.h"		/* For Gpm_Event */
+#include "../src/tty/key.h"		/* XCTRL and ALT macros  */
+
 #include "dir.h"
 #include "panel.h"
-#include "color.h"
 #include "tree.h"
-#include "win.h"
 #include "ext.h"		/* regexp_command */
-#include "mouse.h"		/* For Gpm_Event */
 #include "layout.h"		/* Most layout variables are here */
 #include "wtools.h"		/* for message (...) */
 #include "cmd.h"
-#include "key.h"		/* XCTRL and ALT macros  */
+#include "command.h"		/* cmdline */
 #include "setup.h"		/* For loading/saving panel options */
 #include "user.h"
 #include "../src/mcconfig/mcconfig.h"
@@ -51,7 +53,7 @@
 #include "widget.h"
 #include "menu.h"		/* menubar_visible */
 #include "main-widgets.h"
-#include "main.h"		/* the_menubar */
+#include "main.h"
 #include "unixcompat.h"
 #include "mountlist.h"		/* my_statfs */
 #include "selcodepage.h"	/* select_charset () */
@@ -115,8 +117,8 @@ static void
 set_colors (WPanel *panel)
 {
     (void) panel;
-    standend ();
-    attrset (NORMAL_COLOR);
+    tty_set_normal_attrs ();
+    tty_setcolor (NORMAL_COLOR);
 }
 
 /* Delete format string, it is a linked list */
@@ -153,13 +155,13 @@ add_permission_string (char *dest, int width, file_entry *fe, int attr, int colo
     for(i = 0; i < width; i++){
 	if (i >= l && i < r){
             if (attr == SELECTED || attr == MARKED_SELECTED)
-                attrset (MARKED_SELECTED_COLOR);
+                tty_setcolor (MARKED_SELECTED_COLOR);
             else
-                attrset (MARKED_COLOR);
+                tty_setcolor (MARKED_COLOR);
         } else
-            attrset (color);
+            tty_setcolor (color);
 
-	addch (dest[i]);
+	tty_print_char (dest[i]);
     }
 }
 
@@ -523,8 +525,7 @@ format_file (char *dest, int limit, WPanel *panel, int file_index, int width, in
 	color = NORMAL_COLOR;
 
     for (format = home; format; format = format->next){
-
-    	if (length == width)
+	if (length == width)
 	    break;
 
 	if (format->string_fn){
@@ -550,75 +551,74 @@ format_file (char *dest, int limit, WPanel *panel, int file_index, int width, in
                     perm = 2;
             }
 
-            attrset (color);
+            tty_setcolor (color);
 
             preperad_text = (char*) str_fit_to_term(txt, len, format->just_mode);
             if (perm)
                 add_permission_string (preperad_text, format->field_len, fe,
                                        attr, color, perm - 1);
             else
-                addstr (preperad_text);
+                tty_print_string (preperad_text);
 
             length+= len;
 	} else {
             if (attr == SELECTED || attr == MARKED_SELECTED)
-                attrset (SELECTED_COLOR);
+                tty_setcolor (SELECTED_COLOR);
             else
-                attrset (NORMAL_COLOR);
-	    one_vline ();
+                tty_setcolor (NORMAL_COLOR);
+	    tty_print_one_vline ();
 	    length++;
 	}
     }
 
-    if (length < width){
-	int still = width - length;
-	while (still--)
-	    addch (' ');
-    }
+    if (length < width)
+	tty_draw_hline (-1, -1, ' ', width - length);
 }
 
 static void
 repaint_file (WPanel *panel, int file_index, int mv, int attr, int isstatus)
 {
-    int    second_column = 0;
-    int	   width, offset;
-    char   buffer [BUF_MEDIUM];
+    int second_column = 0;
+    int width;
+    int offset = 0;
+    char buffer [BUF_MEDIUM];
 
-    offset = 0;
-    if (!isstatus && panel->split){
+    gboolean panel_is_split = !isstatus && panel->split;
 
+    width = panel->widget.cols - 2;
+
+    if (panel_is_split) {
 	second_column = (file_index - panel->top_file) / llines (panel);
-	width = (panel->widget.cols - 2)/2 - 1;
+	width = width/2 - 1;
 
-	if (second_column){
+	if (second_column != 0) {
 	    offset = 1 + width;
-	    width = (panel->widget.cols-2) - (panel->widget.cols-2)/2 - 1;
+	    /*width = (panel->widget.cols-2) - (panel->widget.cols-2)/2 - 1;*/
+	    width = panel->widget.cols - offset - 2;
 	}
-    } else
-        width = (panel->widget.cols - 2);
+    }
 
     /* Nothing to paint */
     if (width <= 0)
 	return;
 
     if (mv){
-	if (!isstatus && panel->split){
+	if (panel_is_split)
 	    widget_move (&panel->widget,
-			 (file_index - panel->top_file) %
-			 llines (panel) + 2,
-			 (offset + 1));
-	} else
+			 (file_index - panel->top_file) % llines (panel) + 2,
+			 offset + 1);
+	else
 	    widget_move (&panel->widget, file_index - panel->top_file + 2, 1);
     }
 
     format_file (buffer, sizeof(buffer), panel, file_index, width, attr, isstatus);
 
-    if (!isstatus && panel->split){
+    if (panel_is_split) {
 	if (second_column)
-	    addch (' ');
+	    tty_print_char (' ');
 	else {
-	    attrset (NORMAL_COLOR);
-	    one_vline ();
+	    tty_setcolor (NORMAL_COLOR);
+	    tty_print_one_vline ();
 	}
     }
 }
@@ -629,11 +629,10 @@ display_mini_info (WPanel *panel)
     widget_move (&panel->widget, llines (panel)+3, 1);
 
     if (panel->searching){
-	attrset (INPUT_COLOR);
-        addstr ("/");
-        addstr (str_fit_to_term (panel->search_buffer, 
+	tty_setcolor (INPUT_COLOR);
+        tty_print_char ('/');
+        tty_print_string (str_fit_to_term (panel->search_buffer,
                 panel->widget.cols - 3, J_LEFT));
-	attrset (NORMAL_COLOR);
 	return;
     }
 
@@ -649,18 +648,18 @@ display_mini_info (WPanel *panel)
 	g_free (link);
 	if (len > 0){
 	    link_target[len] = 0;
-            addstr ("-> ");
-            addstr (str_fit_to_term (link_target, panel->widget.cols - 5, 
+            tty_print_string ("-> ");
+            tty_print_string (str_fit_to_term (link_target, panel->widget.cols - 5, 
                     J_LEFT_FIT));
 	} else
-            addstr (str_fit_to_term (_("<readlink failed>"), 
+            tty_print_string (str_fit_to_term (_("<readlink failed>"),
                     panel->widget.cols - 2, J_LEFT));
     } else if (strcmp (panel->dir.list [panel->selected].fname, "..") == 0) {
 	/* FIXME:
-	 * while loading directory (do_load_dir() and do_reload_dir(),
+	 * while loading directory (do_load_dir() and do_reload_dir()),
 	 * the actual stat info about ".." directory isn't got;
 	 * so just don't display incorrect info about ".." directory */
-	addstr (str_fit_to_term (_("UP--DIR"), panel->widget.cols - 2, J_LEFT));
+	tty_print_string (str_fit_to_term (_("UP--DIR"), panel->widget.cols - 2, J_LEFT));
     } else
 	/* Default behavior */
 	repaint_file (panel, panel->selected, 0, STATUS, 1);
@@ -684,7 +683,7 @@ paint_dir (WPanel *panel)
 	}
 	repaint_file (panel, i+panel->top_file, 1, color, 0);
     }
-    standend ();
+    tty_set_normal_attrs ();
 }
 
 static void
@@ -729,7 +728,7 @@ display_total_marked_size (WPanel *panel, int y, int x, gboolean size_only)
      * y == panel->widget.lines - 1 for panel bottom frame
      */
     widget_move (&panel->widget, y, x);
-    attrset (MARKED_COLOR);
+    tty_setcolor (MARKED_COLOR);
     tty_printf (" %s ", buf);
 }
 
@@ -738,16 +737,10 @@ mini_info_separator (WPanel *panel)
 {
     const int y = llines (panel) + 2;
 
-    standend ();
-    widget_move (&panel->widget, y, 1);
-    attrset (NORMAL_COLOR);
-#ifdef HAVE_SLANG
-    hline (ACS_HLINE, panel->widget.cols - 2);
-#else
-    hline ((slow_terminal ? '-' : ACS_HLINE) | NORMAL_COLOR,
-	   panel->widget.cols - 2);
-#endif				/* !HAVE_SLANG */
-
+    tty_setcolor (NORMAL_COLOR);
+    tty_draw_hline (panel->widget.y + y, panel->widget.x + 1,
+		    tty_is_slow () ? '-' : ACS_HLINE,
+		    panel->widget.cols - 2);
     /* Status displays total marked size.
      * Centered in panel, full format. */
     display_total_marked_size (panel, y, -1, FALSE);
@@ -787,22 +780,20 @@ show_free_space (WPanel *panel)
 				(int)(100 * (double)myfs_stats.avail / myfs_stats.total) : 0);
 	widget_move (&panel->widget, panel->widget.lines - 1,
 				     panel->widget.cols - 2 - (int) strlen (tmp));
-	attrset (NORMAL_COLOR);
-	addstr (tmp);
+	tty_setcolor (NORMAL_COLOR);
+	tty_print_string (tmp);
     }
 }
 
 static void
 show_dir (WPanel *panel)
 {
-    int len;
-
     set_colors (panel);
-    draw_double_box (panel->widget.parent,
-		     panel->widget.y, panel->widget.x,
-		     panel->widget.lines, panel->widget.cols);
+    draw_box (panel->widget.parent,
+		 panel->widget.y, panel->widget.x,
+		 panel->widget.lines, panel->widget.cols);
 
-    if (show_mini_info) {
+    if (show_mini_info && !tty_is_slow ()) {
 	widget_move (&panel->widget, llines (panel) + 2, 0);
 	tty_print_alt_char (ACS_LTEE);
 	widget_move (&panel->widget, llines (panel) + 2,
@@ -811,21 +802,21 @@ show_dir (WPanel *panel)
     }
 
     if (panel->active)
-	attrset (REVERSE_COLOR);
+	tty_setcolor (REVERSE_COLOR);
 
     widget_move (&panel->widget, 0, 3);
 
-    addch (' ');
-    len = min (max (panel->widget.cols - 9, 0), panel->widget.cols); 
-    addstr (str_term_trim (strip_home_and_password (panel->cwd), len));
-    addch (' ');
+    tty_printf (" %s ",
+		str_term_trim (strip_home_and_password (panel->cwd),
+				min (max (panel->widget.cols - 9, 0),
+					panel->widget.cols)));
 
     widget_move (&panel->widget, 0, 1);
-    addstr ("<");
+    tty_print_string ("<");
     widget_move (&panel->widget, 0, panel->widget.cols - 2);
-    addstr (">");
+    tty_print_string (">");
     widget_move (&panel->widget, 0, panel->widget.cols - 3);
-    addstr ("v");
+    tty_print_string ("v");
 
     if (!show_mini_info) {
 	if (panel->marked == 0) {
@@ -835,9 +826,9 @@ show_dir (WPanel *panel)
 
 		g_snprintf (buffer, sizeof (buffer), " %s ",
 			    size_trunc_sep (panel->dir.list [panel->selected].st.st_size));
-		attrset (NORMAL_COLOR);
+		tty_setcolor (NORMAL_COLOR);
 		widget_move (&panel->widget, panel->widget.lines - 1, 2);
-		addstr (buffer);
+		tty_print_string (buffer);
 	    }
 	} else {
 	    /* Show total size of marked files
@@ -849,7 +840,7 @@ show_dir (WPanel *panel)
     show_free_space (panel);
 
     if (panel->active)
-	standend ();
+	tty_set_normal_attrs ();
 }
 
 /* To be used only by long_frame and full_frame to adjust top_file */
@@ -1053,6 +1044,24 @@ panel_save_name (WPanel *panel)
 	return  g_strconcat ("Temporal:", panel->panel_name, (char *) NULL);
 }
 
+void
+panel_clean_dir (WPanel *panel)
+{
+    int count = panel->count;
+
+    panel->count = 0;
+    panel->top_file = 0;
+    panel->selected = 0;
+    panel->marked = 0;
+    panel->dirs_marked = 0;
+    panel->total = 0;
+    panel->searching = 0;
+    panel->is_panelized = 0;
+    panel->dirty = 1;
+
+    clean_dir (&panel->dir, count);
+}
+
 static void
 panel_destroy (WPanel *p)
 {
@@ -1205,10 +1214,9 @@ panel_reload (WPanel *panel)
 static void
 paint_frame (WPanel *panel)
 {
-    int  header_len;
-    int  side, width;
-
+    int side, width;
     char *txt = NULL;
+
     if (!panel->split)
 	adjust_top_file (panel);
 
@@ -1221,8 +1229,8 @@ paint_frame (WPanel *panel)
 	format_e *format;
 
 	if (side){
-	    attrset (NORMAL_COLOR);
-	    one_vline ();
+	    tty_setcolor (NORMAL_COLOR);
+	    tty_print_one_vline ();
 	    width = panel->widget.cols - panel->widget.cols/2 - 1;
 	} else if (panel->split)
 	    width = panel->widget.cols/2 - 3;
@@ -1237,24 +1245,20 @@ paint_frame (WPanel *panel)
                     txt = g_strdup (format->title);
                 }
 
-		header_len = strlen (txt);
-		if (header_len > format->field_len)
-		    header_len = format->field_len;
-
-                attrset (MARKED_COLOR);
-                addstr (str_fit_to_term (txt, format->field_len, J_CENTER_LEFT));
+                tty_setcolor (MARKED_COLOR);
+                tty_print_string (str_fit_to_term (format->title, format->field_len,
+                                                    J_CENTER_LEFT));
                 g_free(txt);
                 width -= format->field_len;
 	    } else {
-		attrset (NORMAL_COLOR);
-		one_vline ();
-		width --;
-		continue;
+		tty_setcolor (NORMAL_COLOR);
+		tty_print_one_vline ();
+		width--;
 	    }
 	}
 
 	if (width > 0)
-	    tty_printf ("%*s", width, "");
+	    tty_draw_hline (-1, -1, ' ', width);
     }
 }
 
@@ -1370,7 +1374,7 @@ parse_display_format (WPanel *panel, const char *format, char **error, int issta
 	    set_justify = 0;
 
 	for (i = 0; i < ELEMENTS(formats); i++){
-	    int klen = strlen (formats [i].id);
+	    size_t klen = strlen (formats [i].id);
 
 	    if (strncmp (format, formats [i].id, klen) != 0)
 		continue;
@@ -1611,6 +1615,26 @@ mini_status_format (WPanel *panel)
 /* Panel operation commands */
 /*                          */
 
+/* Used to emulate Lynx's entering leaving a directory with the arrow keys */
+static cb_ret_t
+maybe_cd (int move_up_dir)
+{
+    if (navigate_with_arrows) {
+	if (!cmdline->buffer[0]) {
+	    if (move_up_dir) {
+		do_cd ("..", cd_exact);
+		return MSG_HANDLED;
+	    }
+	    if (S_ISDIR (selection (current_panel)->st.st_mode)
+		|| link_isdir (selection (current_panel))) {
+		do_cd (selection (current_panel)->fname, cd_exact);
+		return MSG_HANDLED;
+	    }
+	}
+    }
+    return MSG_NOT_HANDLED;
+}
+
 /* Returns the number of items in the given panel */
 static int
 ITEMS (WPanel *p)
@@ -1690,15 +1714,13 @@ move_down (WPanel *panel)
 
     unselect_item (panel);
     panel->selected++;
-
     if (panel->selected - panel->top_file == ITEMS (panel) &&
-	panel_scroll_pages){
+	panel_scroll_pages) {
 	/* Scroll window half screen */
 	panel->top_file += ITEMS (panel)/2;
 	if (panel->top_file > panel->count - ITEMS (panel))
-		panel->top_file = panel->count - ITEMS (panel);
+	    panel->top_file = panel->count - ITEMS (panel);
 	paint_dir (panel);
-	select_item (panel);
     }
     select_item (panel);
 }
@@ -1711,10 +1733,11 @@ move_up (WPanel *panel)
 
     unselect_item (panel);
     panel->selected--;
-    if (panel->selected < panel->top_file && panel_scroll_pages){
+    if (panel->selected < panel->top_file && panel_scroll_pages) {
 	/* Scroll window half screen */
 	panel->top_file -= ITEMS (panel)/2;
-	if (panel->top_file < 0) panel->top_file = 0;
+	if (panel->top_file < 0)
+	    panel->top_file = 0;
 	paint_dir (panel);
     }
     select_item (panel);
@@ -2091,7 +2114,7 @@ start_search (WPanel *panel)
         panel->search_char[0] = '\0';
         panel->search_chpoint = 0;
 	display_mini_info (panel);
-	mc_refresh ();
+	tty_refresh ();
     }
 }
 
@@ -2686,4 +2709,113 @@ set_panel_encoding (WPanel *panel)
             message (D_ERROR, MSG_ERROR, _(" Cannot chdir to %s "), cd_path);
         g_free (cd_path);
     }
+}
+
+static void
+reload_panelized (WPanel *panel)
+{
+    int i, j;
+    dir_list *list = &panel->dir;
+
+    if (panel != current_panel)
+	mc_chdir (panel->cwd);
+
+    for (i = 0, j = 0; i < panel->count; i++) {
+	if (list->list[i].f.marked) {
+	    /* Unmark the file in advance. In case the following mc_lstat
+	     * fails we are done, else we have to mark the file again
+	     * (Note: do_file_mark depends on a valid "list->list [i].buf").
+	     * IMO that's the best way to update the panel's summary status
+	     * -- Norbert
+	     */
+	    do_file_mark (panel, i, 0);
+	}
+	if (mc_lstat (list->list[i].fname, &list->list[i].st)) {
+	    g_free (list->list[i].fname);
+	    continue;
+	}
+	if (list->list[i].f.marked)
+	    do_file_mark (panel, i, 1);
+	if (j != i)
+	    list->list[j] = list->list[i];
+	j++;
+    }
+    if (j == 0)
+	panel->count = set_zero_dir (list);
+    else
+	panel->count = j;
+
+    if (panel != current_panel)
+	mc_chdir (current_panel->cwd);
+}
+
+static void
+update_one_panel_widget (WPanel *panel, int force_update,
+			 const char *current_file)
+{
+    int free_pointer;
+    char *my_current_file = NULL;
+
+    if (force_update & UP_RELOAD) {
+	panel->is_panelized = 0;
+	mc_setctl (panel->cwd, VFS_SETCTL_FLUSH, 0);
+	memset (&(panel->dir_stat), 0, sizeof (panel->dir_stat));
+    }
+
+    /* If current_file == -1 (an invalid pointer) then preserve selection */
+    if (current_file == UP_KEEPSEL) {
+	free_pointer = 1;
+	my_current_file = g_strdup (panel->dir.list[panel->selected].fname);
+	current_file = my_current_file;
+    } else
+	free_pointer = 0;
+
+    if (panel->is_panelized)
+	reload_panelized (panel);
+    else
+	panel_reload (panel);
+
+    try_to_select (panel, current_file);
+    panel->dirty = 1;
+
+    if (free_pointer)
+	g_free (my_current_file);
+}
+
+static void
+update_one_panel (int which, int force_update, const char *current_file)
+{
+    WPanel *panel;
+
+    if (get_display_type (which) != view_listing)
+	return;
+
+    panel = (WPanel *) get_panel_widget (which);
+    update_one_panel_widget (panel, force_update, current_file);
+}
+
+/* This routine reloads the directory in both panels. It tries to
+ * select current_file in current_panel and other_file in other_panel.
+ * If current_file == -1 then it automatically sets current_file and
+ * other_file to the currently selected files in the panels.
+ *
+ * if force_update has the UP_ONLY_CURRENT bit toggled on, then it
+ * will not reload the other panel.
+*/
+void
+update_panels (int force_update, const char *current_file)
+{
+    int reload_other = !(force_update & UP_ONLY_CURRENT);
+    WPanel *panel;
+
+    update_one_panel (get_current_index (), force_update, current_file);
+    if (reload_other)
+	update_one_panel (get_other_index (), force_update, UP_KEEPSEL);
+
+    if (get_current_type () == view_listing)
+	panel = (WPanel *) get_panel_widget (get_current_index ());
+    else
+	panel = (WPanel *) get_panel_widget (get_other_index ());
+
+    mc_chdir (panel->cwd);
 }

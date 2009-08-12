@@ -33,7 +33,7 @@
 #include <string.h>
 
 #include "global.h"		/* home_dir */
-#include "tty.h"
+#include "../src/tty/tty.h"
 #include "widget.h"		/* WInput */
 #include "command.h"
 #include "wtools.h"		/* message () */
@@ -43,7 +43,7 @@
 #include "user.h"		/* expand_format */
 #include "subshell.h"		/* SUBSHELL_EXIT */
 #include "tree.h"		/* for tree_chdir */
-#include "color.h"		/* DEFAULT_COLOR */
+#include "../src/tty/color.h"		/* DEFAULT_COLOR */
 #include "execute.h"		/* shell_execute */
 #include "../src/strescape.h"
 

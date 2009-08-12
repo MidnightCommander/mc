@@ -34,19 +34,21 @@
 #include <grp.h>
 
 #include "global.h"
-#include "tty.h"
-#include "win.h"
-#include "color.h"
+
+#include "../src/tty/tty.h"
+#include "../src/tty/key.h"		/* XCTRL and ALT macros */
+#include "../src/tty/color.h"
+
 #include "dialog.h"
 #include "widget.h"
 #include "wtools.h"		/* For init_box_colors() */
-#include "key.h"		/* XCTRL and ALT macros */
 #include "strutil.h"
 
 #include "dir.h"
 #include "panel.h"		/* Needed for the externs */
 #include "chmod.h"
-#include "main.h"
+#include "main.h"		/* update_panels() */
+#include "layout.h"		/* repaint_screen() */
 #include "achown.h"
 
 #define BX		5
@@ -184,39 +186,39 @@ static void print_flags (void)
 {
     int i;
 
-    attrset (COLOR_NORMAL);
+    tty_setcolor (COLOR_NORMAL);
 
     for (i = 0; i < 3; i++){
 	dlg_move (ch_dlg, BY+1, 9+i);
-	addch (ch_flags [i]);
+	tty_print_char (ch_flags [i]);
     }
     
     for (i = 0; i < 3; i++){
 	dlg_move (ch_dlg, BY + 1, 17 + i);
-	addch (ch_flags [i+3]);
+	tty_print_char (ch_flags [i+3]);
     }
     
     for (i = 0; i < 3; i++){
 	dlg_move (ch_dlg, BY + 1, 25 + i);
-	addch (ch_flags [i+6]);
+	tty_print_char (ch_flags [i+6]);
     }
 
     update_permissions ();
 
     for (i = 0; i < 15; i++){
 	dlg_move (ch_dlg, BY+1, 35+i);
-	addch (ch_flags[9]);
+	tty_print_char (ch_flags[9]);
     }
     for (i = 0; i < 15; i++){
 	dlg_move (ch_dlg, BY + 1, 53 + i);
-	addch (ch_flags[10]);
+	tty_print_char (ch_flags[10]);
     }
 }
 
 static void update_mode (Dlg_head * h)
 {
     print_flags ();
-    attrset (COLOR_NORMAL);
+    tty_setcolor (COLOR_NORMAL);
     dlg_move (h, BY + 2, 9);
     tty_printf ("%12o", get_mode ());
     send_message (h->current, WIDGET_FOCUS, 0);
@@ -342,26 +344,26 @@ static void chown_refresh (void)
 {
     common_dialog_repaint (ch_dlg);
 
-    attrset (COLOR_NORMAL);
+    tty_setcolor (COLOR_NORMAL);
 
     dlg_move (ch_dlg, BY - 1, 8);
-    addstr (_("owner"));
+    tty_print_string (_("owner"));
     dlg_move (ch_dlg, BY - 1, 16);
-    addstr (_("group"));
+    tty_print_string (_("group"));
     dlg_move (ch_dlg, BY - 1, 24);
-    addstr (_("other"));
+    tty_print_string (_("other"));
     
     dlg_move (ch_dlg, BY - 1, 35);
-    addstr (_("owner"));
+    tty_print_string (_("owner"));
     dlg_move (ch_dlg, BY - 1, 53);
-    addstr (_("group"));
+    tty_print_string (_("group"));
     
     dlg_move (ch_dlg, 3, 4);
-    addstr (_("On"));
+    tty_print_string (_("On"));
     dlg_move (ch_dlg, BY + 1, 4);
-    addstr (_("Flag"));
+    tty_print_string (_("Flag"));
     dlg_move (ch_dlg, BY + 2, 4);
-    addstr (_("Mode"));
+    tty_print_string (_("Mode"));
 
     if (!single_set){
 	dlg_move (ch_dlg, 3, 54);
@@ -376,11 +378,11 @@ static void chown_refresh (void)
 static void chown_info_update (void)
 {
     /* display file info */
-    attrset (COLOR_NORMAL);
+    tty_setcolor (COLOR_NORMAL);
     
     /* name && mode */
     dlg_move (ch_dlg, 3, 8);
-    addstr (str_fit_to_term (fname, 45, J_LEFT_FIT));
+    tty_print_string (str_fit_to_term (fname, 45, J_LEFT_FIT));
     dlg_move (ch_dlg, BY + 2, 9);
     tty_printf ("%12o", get_mode ());
     

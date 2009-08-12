@@ -45,13 +45,14 @@
 
 #define MAX_LINE_LEN 1024
 
-#include "../src/color.h"	/* EDITOR_NORMAL_COLOR */
-#include "../src/tty.h"		/* attrset() */
-#include "../src/widget.h"	/* buttonbar_redraw() */
-#include "../src/key.h"		/* is_idle() */
+#include "../src/tty/tty.h"		/* tty_printf() */
+#include "../src/tty/color.h"
+#include "../src/tty/key.h"		/* is_idle() */
+
+#include "../src/widget.h"		/* buttonbar_redraw() */
 #include "../src/charsets.h"
-#include "../src/strutil.h"	/* utf string functions */
-#include "../src/main.h"	/* source_codepage */
+#include "../src/strutil.h"		/* utf string functions */
+#include "../src/main.h"		/* source_codepage */
 
 /* Text styles */
 #define MOD_ABNORMAL		(1 << 8)
@@ -196,10 +197,10 @@ edit_status (WEdit *edit)
     }
 
     widget_move (edit, 0, 0);
-    attrset (SELECTED_COLOR);
+    tty_setcolor (SELECTED_COLOR);
     printwstr (fname, fname_len + gap);
     printwstr (status, w - (fname_len + gap));
-    attrset (EDITOR_NORMAL_COLOR);
+    tty_setcolor (EDITOR_NORMAL_COLOR);
 
     g_free (status);
 }
@@ -252,16 +253,7 @@ void edit_scroll_screen_over_cursor (WEdit * edit)
     edit_update_curs_row (edit);
 }
 
-#define set_color(font)    attrset (font)
-
 #define edit_move(x,y) widget_move(edit, y, x);
-
-/* Set colorpair by index, don't interpret S-Lang "emulated attributes" */
-#ifdef HAVE_SLANG
-#define lowlevel_set_color(x) SLsmg_set_color(x & 0x7F)
-#else
-#define lowlevel_set_color(x) attrset(MY_COLOR_PAIR(color))
-#endif
 
 struct line_s {
     unsigned int ch;
@@ -279,20 +271,20 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
     int y = row + EDIT_TEXT_VERTICAL_OFFSET;
     int cols_to_skip = abs (x);
     unsigned char str[6 + 1];
-    set_color (EDITOR_NORMAL_COLOR);
-    edit_move (x1, y);
-    hline (' ', end_col + 1 - EDIT_TEXT_HORIZONTAL_OFFSET - x1);
+
+    tty_setcolor (EDITOR_NORMAL_COLOR);
+    tty_draw_hline (edit->widget.y + y, edit->widget.x + x1,
+		    ' ', end_col + 1 - EDIT_TEXT_HORIZONTAL_OFFSET - x1);
 
     if (option_line_state) {
         int i;
-        for (i = 0; i < LINE_STATE_WIDTH; i++) {
-            if ( status[i] == '\0' ) {
+        for (i = 0; i < LINE_STATE_WIDTH; i++)
+            if (status[i] == '\0')
                 status[i] = ' ';
-            }
-        }
-        set_color (LINE_STATE_COLOR);
+
+        tty_setcolor (LINE_STATE_COLOR);
         edit_move (x1 + FONT_OFFSET_X - option_line_state_width, y + FONT_OFFSET_Y);
-        addstr (status);
+        tty_print_string (status);
     }
 
     edit_move (x1 + FONT_OFFSET_X, y + FONT_OFFSET_Y);
@@ -321,23 +313,23 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
 	if (style & MOD_WHITESPACE) {
 	    if (style & MOD_MARKED) {
 		textchar = ' ';
-		set_color (EDITOR_MARKED_COLOR);
+		tty_setcolor (EDITOR_MARKED_COLOR);
 	    } else {
 #if 0
 		if (color != EDITOR_NORMAL_COLOR) {
 		    textchar = ' ';
-		    lowlevel_set_color (color);
+		    tty_lowlevel_setcolor (color);
 		} else
 #endif
-		    set_color (EDITOR_WHITESPACE_COLOR);
+		    tty_setcolor (EDITOR_WHITESPACE_COLOR);
 	    }
 	} else {
 	    if (style & MOD_BOLD) {
-		set_color (EDITOR_BOLD_COLOR);
+		tty_setcolor (EDITOR_BOLD_COLOR);
 	    } else if (style & MOD_MARKED) {
-		set_color (EDITOR_MARKED_COLOR);
+		tty_setcolor (EDITOR_MARKED_COLOR);
 	    } else {
-		lowlevel_set_color (color);
+		tty_lowlevel_setcolor (color);
 	    }
 	}
 	if ( textchar > 255 ) {
@@ -348,9 +340,9 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
             } else {
                 str[res] = '\0';
             }
-            addstr ((char *)str);
+            tty_print_string ((char *) str);
         } else {
-            addch(textchar);
+            tty_print_char (textchar);
         }
 	p++;
     }
@@ -399,7 +391,7 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 
 	if (row <= edit->total_lines - edit->start_line) {
 		long tws = 0;
-	    if (use_colors && visible_tws) {
+	    if (tty_use_colors () && visible_tws) {
 		tws = edit_eol (edit, b);
 		while (tws > b && ((c = edit_get_byte (edit, tws - 1)) == ' '
 				   || c == '\t'))
@@ -443,10 +435,10 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 		case '\t':
 		    i = TAB_SIZE - ((int) col % TAB_SIZE);
 		    col += i;
-		    if (use_colors &&
+		    if (tty_use_colors() &&
 		       ((visible_tabs || (visible_tws && q >= tws)) && enable_show_tabs_tws)) {
 			if (p->style & MOD_MARKED)
-			    c = (p->style);
+			    c = p->style;
 			else
 			    c = p->style | MOD_WHITESPACE;
 			if (i > 2) {
@@ -473,7 +465,7 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 			    p->style = c;
 			    p++;
 			}
-		    } else if (use_colors && visible_tws && q >= tws && enable_show_tabs_tws) {
+		    } else if (tty_use_colors() && visible_tws && q >= tws && enable_show_tabs_tws) {
 			p->ch = '.';
 			p->style |= MOD_WHITESPACE;
 			c = p->style & ~MOD_CURSOR;
@@ -495,7 +487,7 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 		    }
 		    break;
 		case ' ':
-		    if (use_colors && visible_tws && q >= tws && enable_show_tabs_tws) {
+		    if (tty_use_colors() && visible_tws && q >= tws && enable_show_tabs_tws) {
 			p->ch = '.';
 			p->style |= MOD_WHITESPACE;
 			p++;

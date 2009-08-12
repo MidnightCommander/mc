@@ -48,22 +48,23 @@
 #include <unistd.h>
 
 #include "global.h"
-#include "tty.h"
+
+#include "../src/tty/tty.h"
+#include "../src/tty/color.h"
+#include "../src/tty/key.h"
+#include "../src/tty/mouse.h"
+
 #include "cmd.h"		/* For view_other_cmd */
 #include "dialog.h"		/* Needed by widget.h */
 #include "widget.h"		/* Needed for buttonbar_new */
-#include "color.h"
-#include "mouse.h"
 #include "help.h"
-#include "key.h"		/* For mi_getch() */
 #include "layout.h"
 #include "setup.h"
 #include "wtools.h"		/* For query_set_sel() */
 #include "dir.h"
 #include "panel.h"		/* Needed for current_panel and other_panel */
-#include "win.h"
 #include "execute.h"
-#include "main.h"		/* slow_terminal */
+#include "main.h"		/* source_codepage */
 #include "view.h"
 #include "history.h"		/* MC_HISTORY_SHARED_SEARCH */
 #include "charsets.h"
@@ -2128,14 +2129,12 @@ view_display_status (WView *view)
     const char *file_label, *file_name;
     screen_dimen file_label_width;
     int i;
-    char *tmp;
 
     if (height < 1)
 	return;
 
     tty_setcolor (SELECTED_COLOR);
-    widget_move (view, top, left);
-    hline (' ', width);
+    tty_draw_hline (view->widget.y + top, view->widget.x + left, ' ', width);
 
     file_label = _("File: %s");
     file_label_width = str_term_width1 (file_label) - 2;
@@ -2144,13 +2143,11 @@ view_display_status (WView *view)
 	: "";
 
     if (width < file_label_width + 6)
-	addstr (str_fit_to_term (file_name, width, J_LEFT_FIT));
+	tty_print_string (str_fit_to_term (file_name, width, J_LEFT_FIT));
     else {
 	i = (width > 22 ? 22 : width) - file_label_width;
-        
-        tmp = g_strdup_printf (file_label, str_fit_to_term (file_name, i, J_LEFT_FIT));
-        addstr (tmp);
-        g_free (tmp);
+        tty_printf (file_label, str_fit_to_term (file_name, i, J_LEFT_FIT));
+
 	if (width > 46) {
 	    widget_move (view, top, left + 24);
 	    /* FIXME: the format strings need to be changed when offset_type changes */
@@ -2197,9 +2194,9 @@ view_display_clean (WView *view)
     tty_setcolor (NORMAL_COLOR);
     widget_erase ((Widget *) view);
     if (view->dpy_frame_size != 0) {
-	draw_double_box (view->widget.parent, view->widget.y,
-			 view->widget.x, view->widget.lines,
-			 view->widget.cols);
+	draw_box (view->widget.parent, view->widget.y,
+		    view->widget.x, view->widget.lines,
+		    view->widget.cols);
     }
 }
 
@@ -2254,7 +2251,7 @@ view_display_ruler (WView *view)
 	    }
 	}
     }
-    attrset (NORMAL_COLOR);
+    tty_setcolor (NORMAL_COLOR);
 }
 
 static void
@@ -2280,7 +2277,7 @@ view_display_hex (WView *view)
     struct hexedit_change_node *curr = view->change_list;
     size_t i;
 
-    char hex_buff[10];	/* A temporary buffer for sprintf and mvwaddstr */
+    char hex_buff[10];	/* A temporary buffer for sprintf */
     int bytes;		/* Number of bytes already printed on the line */
 
     view_display_clean (view);
@@ -2299,9 +2296,8 @@ view_display_hex (WView *view)
 	widget_move (view, top + row, left);
 	tty_setcolor (MARKED_COLOR);
 	for (i = 0; col < width && hex_buff[i] != '\0'; i++) {
-             addch (hex_buff[i]);
-/*		tty_print_char(hex_buff[i]);*/
-		col += 1;
+	    tty_print_char (hex_buff[i]);
+	    col++;
 	}
 	tty_setcolor (NORMAL_COLOR);
 
@@ -2440,29 +2436,26 @@ view_display_text (WView * view)
         /* real detection of new line */
         if (info.next >= line_act->end) {
             line_nxt = view_get_next_line (view, line_act);
-            if (line_nxt == NULL) break;
-            
+            if (line_nxt == NULL)
+		break;
             if (view->text_wrap_mode || (line_act->number != line_nxt->number)){
                 row++;
                 col = line_nxt->left;
             }
             line_act = line_nxt;
-            
-			continue;
-		    }
-        
+	    continue;
+	}
+
         view_read_continue (view, &info);
         if (view_read_test_nroff_back (view, &info)) {
-            int c;
-
             w = str_term_width1 (info.chi1);
-            col-= w;
+            col -= w;
             if (col >= view->dpy_text_column
-                 && col + w - view->dpy_text_column <= width) { 
-                
-                widget_move (view, top + row, left + (col - view->dpy_text_column));
-                for (c = 0; c < w; c++) addch (' ');
-		}
+                && col + w - view->dpy_text_column <= width)
+		tty_draw_hline (view->widget.y + top + row,
+				view->widget.x + left + (col - view->dpy_text_column),
+				' ', w);
+
             if (cmp (info.chi1, "_") && (!cmp (info.cnxt, "_") || !cmp (info.chi2, "\b")))
 		    tty_setcolor (VIEW_UNDERLINED_COLOR);
 		else
@@ -2492,9 +2485,9 @@ view_display_text (WView * view)
 
             if (!str_iscombiningmark (info.cnxt)) {
                 if (str_isprint (info.cact)) {
-                    addstr (str_term_form (info.cact));
+                    tty_print_string (info.cact);
                 } else {
-                    addch ('.');
+                    tty_print_char ('.');
 	}
             } else {
                 GString *comb = g_string_new ("");
@@ -2507,7 +2500,7 @@ view_display_text (WView * view)
                     view_read_continue (view, &info);
                     g_string_append(comb,info.cact);
                 }
-                addstr (str_term_form (comb->str));
+                tty_print_string (comb->str);
                 g_string_free (comb, TRUE);
             }
 	} else {
@@ -3086,9 +3079,9 @@ view_search_update_cmd_callback(const void *user_data, gsize char_offset)
         view->update_activate += view->update_steps;
         if (verbose) {
             view_percent (view, char_offset);
-            mc_refresh ();
+            tty_refresh ();
         }
-        if (got_interrupt ())
+        if (tty_got_interrupt ())
             return MC_SEARCH_CB_ABORT;
     }
     /* may be in future return from this callback will change current position
@@ -3176,7 +3169,7 @@ do_search (WView *view)
 
     if (verbose) {
         d = create_message (D_NORMAL, _("Search"), _("Searching %s"), view->last_search_string);
-        mc_refresh ();
+        tty_refresh ();
     }
 
     /*for avoid infinite search loop we need to increase or decrease start offset of search */
@@ -3199,7 +3192,7 @@ do_search (WView *view)
     search_update_steps (view);
     view->update_activate = 0;
 
-    enable_interrupt_key ();
+    tty_enable_interrupt_key ();
 
     do
     {
@@ -3224,7 +3217,7 @@ do_search (WView *view)
                 dlg_run_done (d);
                 destroy_dlg (d);
                 d = create_message (D_NORMAL, _("Search"), _("Seeking to search result"));
-                mc_refresh ();
+                tty_refresh ();
             }
 
             view_moveto_match (view);
@@ -3241,8 +3234,8 @@ do_search (WView *view)
     view->dirty++;
     view_update (view);
 
+    tty_disable_interrupt_key ();
 
-    disable_interrupt_key ();
     if (verbose) {
         dlg_run_done (d);
         destroy_dlg (d);

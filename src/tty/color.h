@@ -6,36 +6,23 @@
 #ifndef MC_COLOR_H
 #define MC_COLOR_H
 
-extern int use_colors;
-extern int disable_colors;
+#include "../../src/global.h"		/* glib.h */
 
-extern int attr_pairs [];
 #ifdef HAVE_SLANG
-#   define MY_COLOR_PAIR(x) COLOR_PAIR(x)
+#   include "../../src/tty/color-slang.h"
 #else
-#   define MY_COLOR_PAIR(x) (COLOR_PAIR(x) | attr_pairs [x])
+#   include "../../src/tty/color-ncurses.h"
 #endif
 
-#define IF_COLOR(co,bw) (use_colors ? MY_COLOR_PAIR(co) : bw)
-
 /* Beware! When using Slang with color, not all the indexes are free.
-   See myslang.h (A_*) */
+   See color-slang.h (A_*) */
 #define NORMAL_COLOR          IF_COLOR (1, 0)
 #define SELECTED_COLOR        IF_COLOR (2, A_REVERSE)
 #define MARKED_COLOR          IF_COLOR (3, A_BOLD)
-
-#ifdef HAVE_SLANG
-#define MARKED_SELECTED_COLOR IF_COLOR (4, (SLtt_Use_Ansi_Colors ? A_BOLD_REVERSE : A_REVERSE | A_BOLD))
-#else
-#define MARKED_SELECTED_COLOR IF_COLOR (4, A_REVERSE | A_BOLD)
-#endif
-
+/* MARKED_SELECTED_COLOR is screen library specific */
 #define ERROR_COLOR           IF_COLOR (5, A_BOLD)
 #define MENU_ENTRY_COLOR      IF_COLOR (6, A_REVERSE)
 #define REVERSE_COLOR         IF_COLOR (7, A_REVERSE)
-
-extern int dialog_colors[4];
-extern int alarm_colors[4];
 
 /* Dialog colors */
 #define COLOR_NORMAL       IF_COLOR (8, A_REVERSE)
@@ -93,15 +80,12 @@ extern int alarm_colors[4];
 #define ERROR_HOT_NORMAL   IF_COLOR (39, 0)
 #define ERROR_HOT_FOCUS    IF_COLOR (40, 0)
 
-#ifdef HAVE_SLANG
-#   define CTYPE const char *
-#else
-#   define CTYPE int
-#endif
+void tty_init_colors (gboolean disable, gboolean force);
+void tty_colors_done (void);
+gboolean tty_use_colors (void);
+int tty_try_alloc_color_pair (const char *fg, const char *bg);
+void tty_setcolor (int color);
+void tty_lowlevel_setcolor (int color);
+void tty_set_normal_attrs (void);
 
-void init_colors (void);
-void done_colors (void);
-void mc_init_pair (int index, CTYPE foreground, CTYPE background);
-int try_alloc_color_pair (const char *fg, const char *bg);
-
-#endif
+#endif				/* MC_COLOR_H */

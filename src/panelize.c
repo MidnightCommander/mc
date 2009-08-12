@@ -34,9 +34,9 @@
 #include <unistd.h>
 
 #include "global.h"
-#include "tty.h"		/* attrset() */
-#include "win.h"
-#include "color.h"
+
+#include "../src/tty/color.h"
+
 #include "dialog.h"
 #include "widget.h"
 #include "wtools.h"		/* For common_dialog_repaint() */
@@ -44,7 +44,8 @@
 #include "../src/mcconfig/mcconfig.h"	/* Load/save directories panelize */
 #include "dir.h"
 #include "panel.h"		/* current_panel */
-#include "main.h"		/* repaint_screen */
+#include "layout.h"		/* repaint_screen() */
+#include "main.h"
 #include "panelize.h"
 #include "history.h"
 #include "strutil.h"
@@ -103,14 +104,14 @@ panelize_callback (Dlg_head *h, dlg_msg_t msg, int parm)
     switch (msg) {
     case DLG_DRAW:
 	common_dialog_repaint (h);
-	attrset (COLOR_NORMAL);
+	tty_setcolor (COLOR_NORMAL);
 	draw_box (h, UY, UX, h->lines - 10, h->cols - 10);
 	return MSG_HANDLED;
 
     case DLG_POST_KEY:
 	/* fall */
     case DLG_INIT:
-	attrset (MENU_ENTRY_COLOR);
+	tty_setcolor (MENU_ENTRY_COLOR);
 	update_command ();
 	return MSG_HANDLED;
 
@@ -278,7 +279,7 @@ external_panelize (void)
     init_panelize ();
     
     /* display file info */
-    attrset (SELECTED_COLOR);
+    tty_setcolor (SELECTED_COLOR);
 
     run_dlg (panelize_dlg);
 

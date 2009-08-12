@@ -41,18 +41,22 @@
 #include <sys/types.h>
 
 #include "global.h"
-#include "tty.h"
-#include "color.h"
-#include "mouse.h"
+
+#include "../src/tty/tty.h"
+#include "../src/tty/color.h"
+#include "../src/tty/mouse.h"
+#include "../src/tty/key.h"	/* XCTRL and ALT macros  */
+
 #include "dialog.h"
 #include "widget.h"
-#include "key.h"	/* XCTRL and ALT macros  */
 #include "../src/mcconfig/mcconfig.h"	/* for history loading and saving */
 #include "wtools.h"	/* For common_dialog_repaint() */
-#include "main.h"	/* for `slow_terminal' */
 #include "strutil.h"
 
 #define HISTORY_FILE_NAME ".mc/history"
+
+/* number of bttons in buttonbar */
+#define BUTTONBAR_LABELS_NUM	10
 
 struct WButtonBar {
     Widget widget;
@@ -66,7 +70,7 @@ struct WButtonBar {
 	    buttonbarfn fn_ptr;
 	} u;
 	void   *data;
-    } labels [10];
+    } labels [BUTTONBAR_LABELS_NUM];
 };
 
 static void
@@ -74,7 +78,7 @@ widget_selectcolor (Widget *w, gboolean focused, gboolean hotkey)
 {
     Dlg_head *h = w->parent;
 
-    attrset (hotkey
+    tty_setcolor (hotkey
 	? (focused
 	    ? DLG_HOT_FOCUSC (h)
 	    : DLG_HOT_NORMALC (h))
@@ -132,16 +136,16 @@ static void
 draw_hotkey (Widget *w, const struct hotkey_t hotkey, gboolean focused)
 {
     widget_selectcolor (w, focused, FALSE);
-    addstr (str_term_form (hotkey.start));
+    tty_print_string (hotkey.start);
 
     if (hotkey.hotkey != NULL) {
 	widget_selectcolor (w, focused, TRUE);
-	addstr (str_term_form (hotkey.hotkey));
+	tty_print_string (hotkey.hotkey);
 	widget_selectcolor (w, focused, FALSE);
     }
 
     if (hotkey.end != NULL)
-	addstr (str_term_form (hotkey.end));
+	tty_print_string (hotkey.end);
 }
 
 static int button_event (Gpm_Event *event, void *);
@@ -227,13 +231,13 @@ button_callback (Widget *w, widget_msg_t msg, int parm)
 
 	switch (b->flags) {
 	case DEFPUSH_BUTTON:
-                addstr ("[< ");
+                tty_print_string ("[< ");
 	    break;
 	case NORMAL_BUTTON:
-                addstr ("[ ");
+                tty_print_string ("[ ");
 	    break;
 	case NARROW_BUTTON:
-                addstr ("[");
+                tty_print_string ("[");
 	    break;
 	case HIDDEN_BUTTON:
 	default:
@@ -244,13 +248,13 @@ button_callback (Widget *w, widget_msg_t msg, int parm)
 
         switch (b->flags) {
             case DEFPUSH_BUTTON:
-                addstr (" >]");
+                tty_print_string (" >]");
                 break;
             case NORMAL_BUTTON:
-                addstr (" ]");
+                tty_print_string (" ]");
                 break;
             case NARROW_BUTTON:
-                addstr ("]");
+                tty_print_string ("]");
                 break;
 	}
 	return MSG_HANDLED;
@@ -418,7 +422,7 @@ radio_callback (Widget *w, widget_msg_t msg, int parm)
 	    const gboolean focused = (i == r->pos && msg == WIDGET_FOCUS);
 	    widget_selectcolor (w, focused, FALSE);
 	    widget_move (&r->widget, i, 0);
-	    addstr ((r->sel == i) ? "(*) " : "( ) ");
+	    tty_print_string ((r->sel == i) ? "(*) " : "( ) ");
 	    draw_hotkey (w, r->texts[i], focused);
 	}
 	return MSG_HANDLED;
@@ -524,7 +528,7 @@ check_callback (Widget *w, widget_msg_t msg, int parm)
     case WIDGET_DRAW:
 	widget_selectcolor (w, msg == WIDGET_FOCUS, FALSE);
 	widget_move (&c->widget, 0, 0);
-	addstr ((c->state & C_BOOL) ? "[x] " : "[ ] ");
+	tty_print_string ((c->state & C_BOOL) ? "[x] " : "[ ] ");
 	draw_hotkey (w, c->text, msg == WIDGET_FOCUS);
 	return MSG_HANDLED;
 
@@ -598,9 +602,9 @@ label_callback (Widget *w, widget_msg_t msg, int parm)
 		return MSG_HANDLED;
 
 	    if (l->transparent)
-		attrset (DEFAULT_COLOR);
+		tty_setcolor (DEFAULT_COLOR);
 	    else
-		attrset (DLG_NORMALC (h));
+		tty_setcolor (DLG_NORMALC (h));
 
             for (;;) {
 		q = strchr (p, '\n');
@@ -610,7 +614,7 @@ label_callback (Widget *w, widget_msg_t msg, int parm)
 		}
 		
 		widget_move (&l->widget, y, 0);
-                addstr (str_fit_to_term (p, l->widget.cols, J_LEFT));
+                tty_print_string (str_fit_to_term (p, l->widget.cols, J_LEFT));
 
                 if (q == NULL)
 		    break;
@@ -698,7 +702,7 @@ gauge_callback (Widget *w, widget_msg_t msg, int parm)
 
     if (msg == WIDGET_DRAW){
 	widget_move (&g->widget, 0, 0);
-	attrset (DLG_NORMALC (h));
+	tty_setcolor (DLG_NORMALC (h));
 	if (!g->shown)
 	    tty_printf ("%*s", gauge_len, "");
 	else {
@@ -717,10 +721,10 @@ gauge_callback (Widget *w, widget_msg_t msg, int parm)
 	    }
 	    percentage = (200 * done / total + 1) / 2;
 	    columns = (2 * (gauge_len - 7) * done / total + 1) / 2;
-	    addch ('[');
-	    attrset (GAUGE_COLOR);
+	    tty_print_char ('[');
+	    tty_setcolor (GAUGE_COLOR);
 	    tty_printf ("%*s", (int) columns, "");
-	    attrset (DLG_NORMALC (h));
+	    tty_setcolor (DLG_NORMALC (h));
 	    tty_printf ("%*s] %3d%%", (int)(gauge_len - 7 - columns), "", (int) percentage);
 	}
 	return MSG_HANDLED;
@@ -791,15 +795,15 @@ static void draw_history_button (WInput * in)
     {
 	Dlg_head *h;
 	h = in->widget.parent;
-	attrset (NORMAL_COLOR);
-	addstr ("[ ]");
-	/* Too distracting: attrset (MARKED_COLOR); */
+	tty_setcolor (NORMAL_COLOR);
+	tty_print_string ("[ ]");
+	/* Too distracting: tty_setcolor (MARKED_COLOR); */
         widget_move (&in->widget, 0, in->field_width - HISTORY_BUTTON_WIDTH + 1);
-	addch (c);
+	tty_print_char (c);
     }
 #else
-    attrset (MARKED_COLOR);
-    addch (c);
+    tty_setcolor (MARKED_COLOR);
+    tty_print_char (c);
 #endif
 }
 
@@ -843,18 +847,18 @@ update_input (WInput *in, int clear_first)
     if (has_history)
 	draw_history_button (in);
 
-    attrset (in->color);
+    tty_setcolor (in->color);
     
     widget_move (&in->widget, 0, 0);
     
     if (!in->is_password) {
-        addstr (str_term_substring (in->buffer, in->term_first_shown, 
+        tty_print_string (str_term_substring (in->buffer, in->term_first_shown, 
                 in->field_width - has_history));
     } else {
         cp = in->buffer;
         for (i = -in->term_first_shown; i < in->field_width - has_history; i++){
             if (i >= 0) {
-                addch ((cp[0] != '\0') ? '*' : ' ');
+                tty_print_char ((cp[0] != '\0') ? '*' : ' ');
             }
             if (cp[0] != '\0') str_cnext_char (&cp);
         }
@@ -1714,7 +1718,7 @@ input_callback (Widget *w, widget_msg_t msg, int parm)
     case WIDGET_KEY:
 	if (parm == XCTRL ('q')) {
 	    quote = 1;
-	    v = handle_char (in, ascii_alpha_to_cntrl (mi_getch ()));
+	    v = handle_char (in, ascii_alpha_to_cntrl (tty_getch ()));
 	    quote = 0;
 	    return v;
 	}
@@ -1838,68 +1842,59 @@ static int listbox_cdiff (WLEntry *s, WLEntry *e);
 static void
 listbox_drawscroll (WListbox *l)
 {
-    int line;
+    int line = 0;
     int i, top;
-    int max_line = l->height-1;
-    
+    int max_line = l->widget.lines - 1;
+
     /* Are we at the top? */
-    widget_move (&l->widget, 0, l->width);
+    widget_move (&l->widget, 0, l->widget.cols);
     if (l->list == l->top)
-	one_vline ();
+	tty_print_one_vline ();
     else
-	addch ('^');
+	tty_print_char ('^');
 
     /* Are we at the bottom? */
-    widget_move (&l->widget, max_line, l->width);
+    widget_move (&l->widget, max_line, l->widget.cols);
     top = listbox_cdiff (l->list, l->top);
-    if ((top + l->height == l->count) || l->height >= l->count)
-	one_vline ();
+    if ((top + l->widget.lines == l->count) || l->widget.lines >= l->count)
+	tty_print_one_vline ();
     else
-	addch ('v');
+	tty_print_char ('v');
 
     /* Now draw the nice relative pointer */
-    if (l->count)
-	line = 1+ ((l->pos * (l->height-2)) / l->count);
-    else
-	line = 0;
-    
+    if (l->count != 0)
+	line = 1+ ((l->pos * (l->widget.lines - 2)) / l->count);
+
     for (i = 1; i < max_line; i++){
-	widget_move (&l->widget, i, l->width);
+	widget_move (&l->widget, i, l->widget.cols);
 	if (i != line)
-	    one_vline ();
+	    tty_print_one_vline ();
 	else
-	    addch ('*');
+	    tty_print_char ('*');
     }
 }
-    
+
 static void
-listbox_draw (WListbox *l, int focused)
+listbox_draw (WListbox *l, gboolean focused)
 {
+    const Dlg_head *h = l->widget.parent;
+    const int normalc = DLG_NORMALC (h);
+    int selc = focused ? DLG_HOT_FOCUSC (h) : DLG_FOCUSC (h);
+
     WLEntry *e;
     int i;
-    int sel_line;
-    Dlg_head *h = l->widget.parent;
-    int normalc = DLG_NORMALC (h);
-    int selc;
+    int sel_line = -1;
     const char *text; 
 
-    if (focused){
-	selc    = DLG_FOCUSC (h);
-    } else {
-	selc    = DLG_HOT_FOCUSC (h);
-    }
-    sel_line = -1;
-
-    for (e = l->top, i = 0; (i < l->height); i++){
-	
+    for (e = l->top, i = 0; i < l->widget.lines; i++) {
 	/* Display the entry */
-	if (e == l->current && sel_line == -1){
+	if (e == l->current && sel_line == -1) {
 	    sel_line = i;
-	    attrset (selc);
+	    tty_setcolor (selc);
 	} else
-	    attrset (normalc);
+	    tty_setcolor (normalc);
 
-	widget_move (&l->widget, i, 0);
+	widget_move (&l->widget, i, 1);
 
 	if ((i > 0 && e == l->list) || !l->list)
 	    text = "";
@@ -1907,13 +1902,14 @@ listbox_draw (WListbox *l, int focused)
 	    text = e->text;
 	    e = e->next;
 	}
-            addstr (str_fit_to_term (text, l->width - 2, J_LEFT_FIT));
+	tty_print_string (str_fit_to_term (text, l->widget.cols - 2, J_LEFT_FIT));
     }
     l->cursor_y = sel_line;
-    if (!l->scrollbar)
-	return;
-    attrset (normalc);
-    listbox_drawscroll (l);
+
+    if (l->scrollbar && l->count > l->widget.lines) {
+	tty_setcolor (normalc);
+	listbox_drawscroll (l);
+    }
 }
 
 /* Returns the number of items between s and e,
@@ -1959,7 +1955,7 @@ listbox_select_last (WListbox *l)
 {
     unsigned int i;
     l->current = l->top = l->list->prev;
-    for (i = min (l->height - 1, l->count - 1); i; i--)
+    for (i = min (l->widget.lines, l->count) - 1; i; i--)
         l->top = l->top->prev;
     l->pos = l->count - 1;
 }
@@ -2049,7 +2045,7 @@ listbox_select_entry (WListbox *l, WLEntry *dest)
 	if (e == dest){
 	    l->current = e;
 	    if (top_seen){
-		while (listbox_cdiff (l->top, l->current) >= l->height)
+		while (listbox_cdiff (l->top, l->current) >= l->widget.lines)
 		    l->top = l->top->next;
 	    } else {
 		l->top = l->current;
@@ -2124,7 +2120,7 @@ listbox_key (WListbox *l, int key)
 
     case KEY_NPAGE:
     case XCTRL('v'):
-	for (i = 0; ((i < l->height - 1)
+	for (i = 0; ((i < l->widget.lines - 1)
 		    && (l->current != l->list->prev)); i++) {
 	    listbox_fwd (l);
 	    j = MSG_HANDLED;
@@ -2133,7 +2129,7 @@ listbox_key (WListbox *l, int key)
 
     case KEY_PPAGE:
     case ALT('v'):
-	for (i = 0; ((i < l->height - 1)
+	for (i = 0; ((i < l->widget.lines - 1)
 		    && (l->current != l->list)); i++) {
 	    listbox_back (l);
 	    j = MSG_HANDLED;
@@ -2161,16 +2157,17 @@ static cb_ret_t
 listbox_callback (Widget *w, widget_msg_t msg, int parm)
 {
     WListbox *l = (WListbox *) w;
-    cb_ret_t ret_code;
-    WLEntry *e;
     Dlg_head *h = l->widget.parent;
+    WLEntry *e;
+    cb_ret_t ret_code;
 
     switch (msg) {
     case WIDGET_INIT:
 	return MSG_HANDLED;
 
     case WIDGET_HOTKEY:
-	if ((e = listbox_check_hotkey (l, parm)) != NULL) {
+	e = listbox_check_hotkey (l, parm);
+	if (e != NULL) {
 	    int action;
 
 	    listbox_select_entry (l, e);
@@ -2187,12 +2184,13 @@ listbox_callback (Widget *w, widget_msg_t msg, int parm)
 		dlg_stop (h);
 	    }
 	    return MSG_HANDLED;
-	} else
-	    return MSG_NOT_HANDLED;
+	}
+	return MSG_NOT_HANDLED;
 
     case WIDGET_KEY:
-	if ((ret_code = listbox_key (l, parm)) != MSG_NOT_HANDLED) {
-	    listbox_draw (l, 1);
+	ret_code = listbox_key (l, parm);
+	if (ret_code != MSG_NOT_HANDLED) {
+	    listbox_draw (l, TRUE);
 	    (*h->callback) (h, DLG_ACTION, l->pos);
 	}
 	return ret_code;
@@ -2232,13 +2230,13 @@ listbox_event (Gpm_Event *event, void *data)
     if (!l->list)
 	return MOU_NORMAL;
     if (event->type & (GPM_DOWN | GPM_DRAG)) {
-	if (event->x < 0 || event->x >= l->width)
+	if (event->x < 0 || event->x >= l->widget.cols)
 	    return MOU_REPEAT;
 	if (event->y < 1)
 	    for (i = -event->y; i >= 0; i--)
 		listbox_back (l);
-	else if (event->y > l->height)
-	    for (i = event->y - l->height; i > 0; i--)
+	else if (event->y > l->widget.lines)
+	    for (i = event->y - l->widget.lines; i > 0; i--)
 		listbox_fwd (l);
 	else
 	    listbox_select_entry (l,
@@ -2248,7 +2246,7 @@ listbox_event (Gpm_Event *event, void *data)
 	/* We need to refresh ourselves since the dialog manager doesn't */
 	/* know about this event */
 	listbox_callback (w, WIDGET_DRAW, 0);
-	mc_refresh ();
+	tty_refresh ();
 	return MOU_REPEAT;
     }
 
@@ -2256,9 +2254,8 @@ listbox_event (Gpm_Event *event, void *data)
     if ((event->type & (GPM_DOUBLE | GPM_UP)) == (GPM_UP | GPM_DOUBLE)) {
 	int action;
 
-	if (event->x < 0 || event->x >= l->width)
-	    return MOU_NORMAL;
-	if (event->y < 1 || event->y > l->height)
+	if (event->x < 0 || event->x >= l->widget.cols
+	    || event->y < 1 || event->y > l->widget.lines)
 	    return MOU_NORMAL;
 
 	dlg_select_widget (l);
@@ -2285,20 +2282,18 @@ listbox_new (int y, int x, int height, int width, lcback callback)
 {
     WListbox *l = g_new (WListbox, 1);
 
+    if (height <= 0)
+	height = 1;
+
     init_widget (&l->widget, y, x, height, width,
 		 listbox_callback, listbox_event);
 
     l->list = l->top = l->current = 0;
     l->pos = 0;
-    l->width = width;
-    if (height <= 0)
-	l->height = 1;
-    else
-	l->height = height;
     l->count = 0;
     l->cback = callback;
     l->allow_duplicates = 1;
-    l->scrollbar = slow_terminal ? 0 : 1;
+    l->scrollbar = !tty_is_slow ();
     widget_want_hotkey (l->widget, 1);
 
     return l;
@@ -2439,7 +2434,7 @@ buttonbar_call (WButtonBar *bb, int i)
 static int
 buttonbat_get_button_width ()
 {
-    int result = COLS / 10;
+    int result = COLS / BUTTONBAR_LABELS_NUM;
     return (result >= 7) ? result : 7;
 }
 
@@ -2456,33 +2451,31 @@ buttonbar_callback (Widget *w, widget_msg_t msg, int parm)
 	return MSG_NOT_HANDLED;
 
     case WIDGET_HOTKEY:
-	for (i = 0; i < 10; i++) {
+	for (i = 0; i < BUTTONBAR_LABELS_NUM; i++)
 	    if (parm == KEY_F (i + 1) && buttonbar_call (bb, i))
 		return MSG_HANDLED;
-	}
 	return MSG_NOT_HANDLED;
 
     case WIDGET_DRAW:
-	if (!bb->visible)
-	    return MSG_HANDLED;
-	widget_move (&bb->widget, 0, 0);
-	attrset (DEFAULT_COLOR);
-        bb->btn_width = buttonbat_get_button_width ();
-	tty_printf ("%-*s", bb->widget.cols, "");
-        for (i = 0; i < COLS / bb->btn_width && i < 10; i++) {
-            widget_move (&bb->widget, 0, i * bb->btn_width);
-	    attrset (DEFAULT_COLOR);
-            tty_printf ("%2d", i + 1);
-	    attrset (SELECTED_COLOR);
-            text = (bb->labels[i].text != NULL) ? bb->labels[i].text : "";
-            addstr (str_fit_to_term (text, bb->btn_width - 2, J_CENTER_LEFT));
-	    attrset (DEFAULT_COLOR);
+	if (bb->visible) {
+	    widget_move (&bb->widget, 0, 0);
+	    tty_setcolor (DEFAULT_COLOR);
+	    bb->btn_width = buttonbat_get_button_width ();
+	    tty_printf ("%-*s", bb->widget.cols, "");
+
+	    for (i = 0; i < COLS / bb->btn_width && i < BUTTONBAR_LABELS_NUM; i++) {
+		widget_move (&bb->widget, 0, i * bb->btn_width);
+		tty_setcolor (DEFAULT_COLOR);
+		tty_printf ("%2d", i + 1);
+		tty_setcolor (SELECTED_COLOR);
+		text = (bb->labels[i].text != NULL) ? bb->labels[i].text : "";
+		tty_print_string (str_fit_to_term (text, bb->btn_width - 2, J_CENTER_LEFT));
+	    }
 	}
-	attrset (SELECTED_COLOR);
 	return MSG_HANDLED;
 
     case WIDGET_DESTROY:
-	for (i = 0; i < 10; i++)
+	for (i = 0; i < BUTTONBAR_LABELS_NUM; i++)
 	    g_free (bb->labels[i].text);
 	return MSG_HANDLED;
 
@@ -2502,7 +2495,7 @@ buttonbar_event (Gpm_Event *event, void *data)
     if (event->y == 2)
 	return MOU_NORMAL;
     button = (event->x - 1) / bb->btn_width;
-    if (button < 10)
+    if (button < BUTTONBAR_LABELS_NUM)
 	buttonbar_call (bb, button);
     return MOU_NORMAL;
 }
@@ -2517,7 +2510,7 @@ buttonbar_new (int visible)
 		 buttonbar_callback, buttonbar_event);
     
     bb->visible = visible;
-    for (i = 0; i < 10; i++){
+    for (i = 0; i < BUTTONBAR_LABELS_NUM; i++){
 	bb->labels[i].text = NULL;
 	bb->labels[i].tag = BBFUNC_NONE;
     }
@@ -2618,15 +2611,15 @@ groupbox_callback (Widget *w, widget_msg_t msg, int parm)
 	return MSG_NOT_HANDLED;
 
     case WIDGET_DRAW:
-	attrset (COLOR_NORMAL);
+	tty_setcolor (COLOR_NORMAL);
 	draw_box (g->widget.parent, g->widget.y - g->widget.parent->y,
 		  g->widget.x - g->widget.parent->x, g->widget.lines,
 		  g->widget.cols);
 
-	attrset (COLOR_HOT_NORMAL);
+	tty_setcolor (COLOR_HOT_NORMAL);
 	dlg_move (g->widget.parent, g->widget.y - g->widget.parent->y,
 		  g->widget.x - g->widget.parent->x + 1);
-	addstr (str_term_form (g->title));
+	tty_print_string (g->title);
 	return MSG_HANDLED;
 
     case WIDGET_DESTROY:

@@ -46,14 +46,15 @@
 #include <sys/wait.h>
 
 #include "../src/global.h"
-#include "../src/tty.h"		/* enable/disable interrupt key */
+
 #include "../src/wtools.h"	/* message() */
 #include "../src/main.h"	/* print_vfs_message */
-#include "utilvfs.h"
 #include "../src/execute.h"	/* For shell_execute */
+
+#include "utilvfs.h"
 #include "vfs.h"
 #include "vfs-impl.h"
-#include "gc.h"		/* vfs_rmstamp */
+#include "gc.h"			/* vfs_rmstamp */
 
 #undef ERRNOR
 #define ERRNOR(x,y) do { my_errno = x; return y; } while(0)

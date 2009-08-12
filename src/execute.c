@@ -26,15 +26,18 @@
 #include <sys/time.h>
 
 #include "global.h"
-#include "tty.h"
-#include "win.h"
-#include "key.h"
+
+#include "../src/tty/tty.h"
+#include "../src/tty/key.h"
+#include "../src/tty/win.h"
+
 #include "main.h"
 #include "cons.saver.h"
 #include "subshell.h"
 #include "layout.h"
 #include "dialog.h"
 #include "wtools.h"
+#include "panel.h"		/* update_panels() */
 #include "execute.h"
 #include "../vfs/vfs.h"
 
@@ -45,11 +48,11 @@ edition_post_exec (void)
     do_enter_ca_mode ();
 
     /* FIXME: Missing on slang endwin? */
-    reset_prog_mode ();
-    flushinp ();
+    tty_reset_prog_mode ();
+    tty_flush_input ();
 
-    keypad (stdscr, TRUE);
-    mc_raw_mode ();
+    tty_keypad (TRUE);
+    tty_raw_mode ();
     channels_up ();
     enable_mouse ();
     if (alternate_plus_minus)
@@ -70,9 +73,9 @@ edition_pre_exec (void)
     channels_down ();
     disable_mouse ();
 
-    reset_shell_mode ();
-    keypad (stdscr, FALSE);
-    endwin ();
+    tty_reset_shell_mode ();
+    tty_keypad (FALSE);
+    tty_reset_screen ();
 
     numeric_keypad_mode ();
 
@@ -94,6 +97,19 @@ pre_exec (void)
     edition_pre_exec ();
 }
 
+
+#ifdef HAVE_SUBSHELL_SUPPORT
+static void
+do_possible_cd (const char *new_dir)
+{
+    if (!do_cd (new_dir, cd_exact))
+	message (D_ERROR, _("Warning"),
+		 _(" The Commander can't change to the directory that \n"
+		   " the subshell claims you are in.  Perhaps you have \n"
+		   " deleted your working directory, or given yourself \n"
+		   " extra access permissions with the \"su\" command? "));
+}
+#endif				/* HAVE_SUBSHELL_SUPPORT */
 
 static void
 do_execute (const char *shell, const char *command, int flags)
@@ -142,7 +158,7 @@ do_execute (const char *shell, const char *command, int flags)
 	    ) {
 	    printf (_("Press any key to continue..."));
 	    fflush (stdout);
-	    mc_raw_mode ();
+	    tty_raw_mode ();
 	    get_key_code (0);
 	    printf ("\r\n");
 	    fflush (stdout);
@@ -229,15 +245,15 @@ toggle_panels (void)
 	numeric_keypad_mode ();
 #ifndef HAVE_SLANG
     /* With slang we don't want any of this, since there
-     * is no mc_raw_mode supported
+     * is no raw_mode supported
      */
-    reset_shell_mode ();
-    noecho ();
+    tty_reset_shell_mode ();
 #endif				/* !HAVE_SLANG */
-    keypad (stdscr, FALSE);
-    endwin ();
+    tty_noecho ();
+    tty_keypad (FALSE);
+    tty_reset_screen ();
     do_exit_ca_mode ();
-    mc_raw_mode ();
+    tty_raw_mode ();
     if (console_flag)
 	handle_console (CONSOLE_RESTORE);
 
@@ -263,8 +279,8 @@ toggle_panels (void)
 
     do_enter_ca_mode ();
 
-    reset_prog_mode ();
-    keypad (stdscr, TRUE);
+    tty_reset_prog_mode ();
+    tty_keypad (TRUE);
 
     /* Prevent screen flash when user did 'exit' or 'logout' within
        subshell */
@@ -290,7 +306,7 @@ toggle_panels (void)
 
     update_panels (UP_OPTIMIZE, UP_KEEPSEL);
     update_xterm_title_path ();
-    do_refresh ();
+    repaint_screen ();
 }
 
 

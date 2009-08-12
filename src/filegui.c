@@ -73,9 +73,13 @@
 #include <unistd.h>
 
 #include "global.h"
+
+#include "../src/tty/key.h"		/* tty_get_event */
+
+#include "../src/search/search.h"
+
 #include "setup.h"		/* verbose */
 #include "dialog.h"		/* do_refresh() */
-#include "color.h"		/* dialog_colors */
 #include "widget.h"		/* WLabel */
 #include "main-widgets.h"
 #include "main.h"		/* the_hint */
@@ -83,10 +87,8 @@
 #include "panel.h"		/* current_panel */
 #include "fileopctx.h"		/* FILE_CONT */
 #include "filegui.h"
-#include "key.h"		/* get_event */
-#include "util.h"               /* strip_password() */
+#include "util.h"		/* strip_password() */
 #include "strutil.h"
-#include "../src/search/search.h"
 #include "../src/strescape.h"
 
 /* }}} */
@@ -195,7 +197,7 @@ check_progress_buttons (FileOpContext *ctx)
     ui = ctx->ui;
 
     event.x = -1;		/* Don't show the GPM cursor */
-    c = get_event (&event, 0, 0);
+    c = tty_get_event (&event, FALSE, FALSE);
     if (c == EV_NONE)
 	return FILE_CONT;
 

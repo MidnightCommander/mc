@@ -38,7 +38,7 @@
 #include <config.h>
 
 #include <stdio.h>
-#include <stdlib.h>	/* For atol() */
+#include <stdlib.h>		/* For atol() */
 #include <stdarg.h>
 #include <string.h>
 #include <errno.h>
@@ -51,13 +51,13 @@
 #include <dirent.h>
 
 #include "../src/global.h"
-#include "../src/tty.h"		/* enable/disable interrupt key */
+
 #include "../src/wtools.h"	/* message() */
 #include "../src/main.h"	/* print_vfs_message */
 #include "../src/strutil.h"
+
 #include "utilvfs.h"
 #include "gc.h"
-
 #include "vfs.h"
 #ifdef USE_NETCODE
 #   include "tcputil.h"

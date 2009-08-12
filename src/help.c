@@ -52,11 +52,12 @@
 #include <sys/stat.h>
 
 #include "global.h"
-#include "tty.h"
-#include "color.h"
-#include "win.h"
-#include "mouse.h"
-#include "key.h"		/* For mi_getch() */
+
+#include "../src/tty/tty.h"
+#include "../src/tty/color.h"
+#include "../src/tty/mouse.h"
+#include "../src/tty/key.h"
+
 #include "help.h"
 #include "dialog.h"		/* For Dlg_head */
 #include "widget.h"		/* For Widget */
@@ -349,7 +350,7 @@ static void help_show (Dlg_head *h, const char *paint_start)
     int active_col, active_line;/* Active link position */
     static char buff[MB_LEN_MAX + 1];
 
-    attrset (HELP_NORMAL_COLOR);
+    tty_setcolor (HELP_NORMAL_COLOR);
     do {
 	
 	line = col = acs = active_col = active_line = repeat_paint = 0;
@@ -372,14 +373,14 @@ static void help_show (Dlg_head *h, const char *paint_start)
 		if (selected_item == NULL)
 		    selected_item = p;
 		if (p == selected_item){
-		    attrset (HELP_SLINK_COLOR);
+		    tty_setcolor (HELP_SLINK_COLOR);
 
 		    /* Store the coordinates of the link */
 		    active_col = col + 2;
 		    active_line = line + 2;
 		}
 		else
-		    attrset (HELP_LINK_COLOR);
+		    tty_setcolor (HELP_LINK_COLOR);
 		start_link_area (col, line, p);
 		break;
 	    case CHAR_LINK_POINTER:
@@ -388,7 +389,7 @@ static void help_show (Dlg_head *h, const char *paint_start)
 		break;
 	    case CHAR_LINK_END:
 		painting = 1;
-		attrset (HELP_NORMAL_COLOR);
+		tty_setcolor (HELP_NORMAL_COLOR);
 		break;
 	    case CHAR_ALTERNATE:
 		acs = 1;
@@ -398,17 +399,17 @@ static void help_show (Dlg_head *h, const char *paint_start)
 		break;
 	    case CHAR_VERSION:
 		dlg_move (h, line+2, col+2);
-		addstr (VERSION);
+		tty_print_string (VERSION);
 		col += str_term_width1 (VERSION);
 		break;
 	    case CHAR_FONT_BOLD:
-		attrset (HELP_BOLD_COLOR);
+		tty_setcolor (HELP_BOLD_COLOR);
 		break;
 	    case CHAR_FONT_ITALIC:
-		attrset (HELP_ITALIC_COLOR);
+		tty_setcolor (HELP_ITALIC_COLOR);
 		break;
 	    case CHAR_FONT_NORMAL:
-		attrset (HELP_NORMAL_COLOR);
+		tty_setcolor (HELP_NORMAL_COLOR);
 		break;
 	    case '\n':
 		line++;
@@ -427,15 +428,15 @@ static void help_show (Dlg_head *h, const char *paint_start)
 		dlg_move (h, line+2, col+2);
 		if (acs){
 		    if (c == ' ' || c == '.')
-			addch (c);
+			tty_print_char (c);
 		    else
 #ifndef HAVE_SLANG
-			addch (acs_map [c]);
+			tty_print_char (acs_map [c]);
 #else
 			SLsmg_draw_object (h->y + line + 2, h->x + col + 2, c);
 #endif
 		} else {
-		    addstr (buff);
+		    tty_print_string (buff);
                 }
                 col+= w;
 		break;
@@ -443,7 +444,7 @@ static void help_show (Dlg_head *h, const char *paint_start)
 	}
 	last_shown = p;
 	end_of_node = line < help_lines;
-	attrset (HELP_NORMAL_COLOR);
+	tty_setcolor (HELP_NORMAL_COLOR);
 	if (selected_item >= last_shown){
 	    if (link_area != NULL){
 		selected_item = link_area->link_name;

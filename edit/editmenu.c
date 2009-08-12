@@ -37,22 +37,22 @@
 #include <ctype.h>
 #include <errno.h>
 #include <sys/stat.h>
-
 #include <stdlib.h>
 
 #include "../src/global.h"
 
 #include "edit-impl.h"
-#include "../src/cmd.h"
-#include "../src/wtools.h"	/* query_dialog() */
-#include "../src/menu.h"	/* menu_entry */
-#include "../src/tty.h"		/* KEY_F */
-#include "../src/key.h"		/* XCTRL */
-#include "../src/main.h"	/* drop_menus */
-#include "../src/learn.h"	/* learn_keys */
-
 #include "edit-widget.h"
 #include "editcmddef.h"
+
+#include "../src/tty/tty.h"	/* KEY_F */
+#include "../src/tty/key.h"	/* XCTRL */
+
+#include "../src/cmd.h"		/* save_setup_cmd() */
+#include "../src/wtools.h"	/* query_dialog() */
+#include "../src/menu.h"	/* menu_entry */
+#include "../src/main.h"	/* drop_menus */
+#include "../src/learn.h"	/* learn_keys */
 
 static void
 menu_cmd (int command)

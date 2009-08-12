@@ -37,7 +37,7 @@
 
 #include "global.h"
 #include "tty.h"
-#include "win.h"
+#include "key.h"
 #include "color.h"
 #include "dialog.h"
 #include "widget.h"
@@ -47,6 +47,7 @@
 #include "dir.h"
 #include "panel.h"		/* Needed for the externs */
 #include "file.h"
+#include "layout.h"		/* repaint_screen() */
 #include "main.h"
 #include "listmode.h"
 

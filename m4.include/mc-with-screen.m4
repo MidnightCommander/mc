@@ -1,42 +1,4 @@
 dnl
-dnl Check if private functions are available for linking
-dnl
-AC_DEFUN([MC_SLANG_PRIVATE], [
-    AC_CACHE_CHECK([if S-Lang exports private functions],
-		[mc_cv_slang_private], [
-	ac_save_LIBS="$LIBS"
-	LIBS="$LIBS -lslang"
-	AC_TRY_LINK([
-		     #ifdef HAVE_SLANG_SLANG_H
-		     #include <slang/slang.h>
-		     #else
-		     #include <slang.h>
-		     #endif
-		     #if SLANG_VERSION >= 10000
-		     extern unsigned int SLsys_getkey (void);
-		     #else
-		     extern unsigned int _SLsys_getkey (void);
-		     #endif
-		    ], [
-		     #if SLANG_VERSION >= 10000
-		     _SLsys_getkey ();
-		     #else
-		     SLsys_getkey ();
-		     #endif
-		    ],
-		    [mc_cv_slang_private=yes],
-		    [mc_cv_slang_private=no])
-	LIBS="$ac_save_LIBS"
-    ])
-
-    if test x"$mc_cv_slang_private" = xyes; then
-	AC_DEFINE(HAVE_SLANG_PRIVATE, 1,
-		  [Define if private S-Lang functions are available])
-    fi
-])
-
-
-dnl
 dnl Check if the system S-Lang library can be used.
 dnl If not, and $1 is "strict", exit, otherwise fall back to mcslang.
 dnl
@@ -129,9 +91,37 @@ AC_DEFUN([MC_CHECK_SLANG_BY_PATH], [
             [:],
             [
                 found_slang=no
-                error_msg_slang="Slang library not found"
+                error_msg_slang="S-lang library not found"
             ]
         )
+    fi
+    dnl check if S-Lang have version 2.0 or newer
+    if test x"$found_slang" = x"yes"; then
+        AC_MSG_CHECKING([for S-Lang version 2.0 or newer])
+        AC_TRY_RUN([
+#ifdef HAVE_SLANG_SLANG_H
+#include <slang/slang.h>
+#else
+#include <slang/slang.h>
+#endif
+int main (void)
+{
+#if SLANG_VERSION >= 20000
+    return 0;
+#else
+    return 1;
+#endif
+}
+],
+	    [mc_slang_is_valid_version=yes],
+	    [mc_slang_is_valid_version=no],
+	    [mc_slang_is_valid_version=no]
+	)
+	if test x$mc_slang_is_valid_version = xno; then
+            found_slang=no
+            error_msg_slang="S-Lang library version 2.0 or newer not found"
+	fi
+	AC_MSG_RESULT($mc_slang_is_valid_version)
     fi
 
     dnl Unless external S-Lang was requested, reject S-Lang with UTF-8 hacks
@@ -149,7 +139,6 @@ AC_DEFUN([MC_CHECK_SLANG_BY_PATH], [
     fi
 
     if test x"$found_slang" = x"yes"; then
-        MC_SLANG_PRIVATE
         screen_type=slang
         screen_msg="S-Lang library (installed on the system)"
 
@@ -162,6 +151,10 @@ AC_DEFUN([MC_CHECK_SLANG_BY_PATH], [
     CPPFLAGS="$saved_CPPFLAGS"
     LDFLAGS="$saved_LDFLAGS"
 ])
+
+dnl
+dnl Use the slang library.
+dnl
 AC_DEFUN([MC_WITH_SLANG], [
     with_screen=slang
     found_slang=yes
@@ -258,10 +251,10 @@ AC_DEFUN([MC_WITH_NCURSES], [
 ])
 
 dnl
-dnl Use the ncurses library.  It can only be requested explicitly,
+dnl Use the ncursesw library.  It can only be requested explicitly,
 dnl so just fail if anything goes wrong.
 dnl
-dnl If ncurses exports the ESCDELAY variable it should be set to 0
+dnl If ncursesw exports the ESCDELAY variable it should be set to 0
 dnl or you'll have to press Esc three times to dismiss a dialog box.
 dnl
 

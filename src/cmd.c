@@ -46,6 +46,13 @@
 #include <sys/time.h>
 
 #include "global.h"
+
+#include "../src/tty/tty.h"		/* LINES */
+#include "../src/tty/key.h"		/* ALT() macro */
+#include "../src/tty/win.h"		/* do_enter_ca_mode() */
+
+#include "../src/search/search.h"
+
 #include "cmd.h"		/* Our definitions */
 #include "fileopctx.h"
 #include "file.h"		/* file operation routines */
@@ -54,13 +61,10 @@
 #include "tree.h"		/* tree_chdir() */
 #include "subshell.h"		/* use_subshell */
 #include "cons.saver.h"		/* console_flag */
-#include "tty.h"		/* LINES */
 #include "dialog.h"		/* Widget */
 #include "view.h"		/* mc_internal_viewer() */
 #include "wtools.h"		/* message() */
 #include "widget.h"		/* push_history() */
-#include "key.h"		/* application_keypad_mode() */
-#include "win.h"		/* do_enter_ca_mode() */
 #include "main.h"		/* change_panel() */
 #include "panel.h"		/* current_panel */
 #include "help.h"		/* interactive_display() */
@@ -74,9 +78,7 @@
 #include "execute.h"		/* toggle_panels() */
 #include "history.h"
 #include "strutil.h"
-#include "../src/search/search.h"
 #include "dir.h"
-
 
 #ifndef MAP_FILE
 #   define MAP_FILE 0
@@ -209,8 +211,6 @@ static int scan_for_file (WPanel *panel, int idx, int direction)
 static void
 do_view_cmd (int normal)
 {
-    int dir, file_idx;
-
     /* Directories are viewed by changing to them */
     if (S_ISDIR (selection (current_panel)->st.st_mode)
 	|| link_isdir (selection (current_panel))) {
@@ -223,21 +223,19 @@ do_view_cmd (int normal)
 	}
 	if (!do_cd (selection (current_panel)->fname, cd_exact))
 	    message (D_ERROR, MSG_ERROR, _("Cannot change directory"));
-
-	repaint_screen();
-	return;
-    }
-
-    file_idx = current_panel->selected;
-    while (1) {
+    } else {
+	int dir, file_idx;
 	char *filename;
 
-	filename = current_panel->dir.list[file_idx].fname;
+	file_idx = current_panel->selected;
+	while (1) {
+	    filename = current_panel->dir.list[file_idx].fname;
 
-	dir = view_file (filename, normal, use_internal_view);
-	if (dir == 0)
-	    break;
-	file_idx = scan_for_file (current_panel, file_idx, dir);
+	    dir = view_file (filename, normal, use_internal_view);
+	    if (dir == 0)
+		break;
+	    file_idx = scan_for_file (current_panel, file_idx, dir);
+	}
     }
 
     repaint_screen();
@@ -291,24 +289,24 @@ filtered_view_cmd (void)
     g_free (command);
 }
 
-void do_edit_at_line (const char *what, int start_line)
+void
+do_edit_at_line (const char *what, int start_line)
 {
     static const char *editor = NULL;
 
 #ifdef USE_INTERNAL_EDIT
-    if (use_internal_edit){
+    if (use_internal_edit)
 	edit_file (what, start_line);
-	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
-	repaint_screen ();
-	return;
-    }
+    else
 #endif /* USE_INTERNAL_EDIT */
-    if (!editor){
-	editor = getenv ("EDITOR");
-	if (!editor)
-	    editor = get_default_editor ();
+    {
+	if (editor == NULL) {
+	    editor = getenv ("EDITOR");
+	    if (editor == NULL)
+		editor = get_default_editor ();
+	}
+	execute_with_vfs_arg (editor, what);
     }
-    execute_with_vfs_arg (editor, what);
     update_panels (UP_OPTIMIZE, UP_KEEPSEL);
     repaint_screen ();
 }
@@ -845,7 +843,6 @@ history_cmd (void)
 void swap_cmd (void)
 {
     swap_panels ();
-    touchwin (stdscr);
     repaint_screen ();
 }
 

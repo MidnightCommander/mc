@@ -25,9 +25,9 @@
 #include <stdio.h>
 
 #include "global.h"
-#include "tty.h"
-#include "mouse.h"		/* Gpm_Event */
-#include "color.h"
+#include "../src/tty/tty.h"
+#include "../src/tty/mouse.h"		/* Gpm_Event */
+#include "../src/tty/color.h"
 #include "dialog.h"
 #include "info.h"
 #include "dir.h"		/* required by panel */
@@ -35,7 +35,7 @@
 #include "main.h"		/* other_panel, current_panel definitions */
 #include "util.h"		/* size_trunc_len */
 #include "layout.h"
-#include "key.h"		/* is_idle() */
+#include "../src/tty/key.h"		/* is_idle() */
 #include "mountlist.h"
 #include "unixcompat.h"
 #include "strutil.h"
@@ -55,11 +55,11 @@ static struct my_statfs myfs_stats;
 
 static void info_box (Dlg_head *h, struct WInfo *info)
 {
-    standend ();
-    attrset (NORMAL_COLOR);
+    tty_set_normal_attrs ();
+    tty_setcolor (NORMAL_COLOR);
     widget_erase (&info->widget);
-    draw_double_box (h, info->widget.y,  info->widget.x,
-	             info->widget.lines, info->widget.cols);
+    draw_box (h, info->widget.y,  info->widget.x,
+	         info->widget.lines, info->widget.cols);
 }
 
 static void
@@ -74,12 +74,12 @@ info_show_info (struct WInfo *info)
 	return;
 
     info_box (info->widget.parent, info);
-    attrset (MARKED_COLOR);
+    tty_setcolor (MARKED_COLOR);
     widget_move (&info->widget, 1, 3);
     tty_printf (_("Midnight Commander %s"), VERSION);
-    attrset (NORMAL_COLOR);
-    widget_move (&info->widget, 2, 1);
-    hline (ACS_HLINE|NORMAL_COLOR, info->widget.cols-2);
+    tty_setcolor (NORMAL_COLOR);
+    tty_draw_hline (info->widget.y + 2, info->widget.x + 1,
+		    ACS_HLINE, info->widget.cols - 2);
     if (get_current_type () != view_listing)
 	return;
 
@@ -113,7 +113,7 @@ info_show_info (struct WInfo *info)
 		    ? 100 * myfs_stats.nfree / myfs_stats.nodes : 0,
 		    myfs_stats.nodes);
 	else
-	    addstr (_("No node information"));
+	    tty_print_string (_("No node information"));
 
     case 15:
 	widget_move (&info->widget, 15, 3);
@@ -125,7 +125,7 @@ info_show_info (struct WInfo *info)
 		    (int)(100 * (double)myfs_stats.avail / myfs_stats.total) : 0,
 		    buffer2);
 	} else
-	    addstr (_("No space information"));
+	    tty_print_string (_("No space information"));
 
     case 14:
 	widget_move (&info->widget, 14, 3);
@@ -138,28 +138,30 @@ info_show_info (struct WInfo *info)
 	widget_move (&info->widget, 13, 3);
         str_printf (buff, _("Device:    %s"), 
                 str_trunc (myfs_stats.device, info->widget.cols - i18n_adjust));
-        addstr (str_term_form (buff->str));
+        tty_print_string (buff->str);
         g_string_set_size(buff, 0);
     case 12:
 	widget_move (&info->widget, 12, 3);
         str_printf (buff, _("Filesystem: %s"),
 		str_trunc (myfs_stats.mpoint, info->widget.cols - i18n_adjust));
-        addstr (str_term_form (buff->str));
+        tty_print_string (buff->str);
         g_string_set_size(buff, 0);
     case 11:
 	widget_move (&info->widget, 11, 3);
         str_printf (buff, _("Accessed:  %s"), file_date (st.st_atime));
-        addstr (str_term_form (buff->str));
+        tty_print_string (buff->str);
         g_string_set_size(buff, 0);
     case 10:
 	widget_move (&info->widget, 10, 3);
         str_printf (buff, _("Modified:  %s"), file_date (st.st_mtime));
-        addstr (str_term_form (buff->str));
+        tty_print_string (buff->str);
         g_string_set_size(buff, 0);
     case 9:
 	widget_move (&info->widget, 9, 3);
 	/* TRANSLATORS: "Status changed", like in the stat(2) man page */
-	printw (_("Status:    %s"), file_date (st.st_ctime));
+        str_printf (buff, _("Status:    %s"), file_date (st.st_ctime));
+        tty_print_string (buff->str);
+        g_string_set_size(buff, 0);
 
     case 8:
 	widget_move (&info->widget, 8, 3);
@@ -207,9 +209,9 @@ info_show_info (struct WInfo *info)
             str_printf (buff, file_label, 
             str_trunc (current_panel->dir.list [current_panel->selected].fname,
 				    info->widget.cols - i18n_adjust));
-            addstr (str_term_form (buff->str));
+            tty_print_string (buff->str);
 	} else
-	    addstr (_("File:       None"));
+	    tty_print_string (_("File:       None"));
 
     case 2:
     case 1:

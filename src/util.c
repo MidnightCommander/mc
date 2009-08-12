@@ -41,15 +41,18 @@
 #include <unistd.h>
 
 #include "global.h"
+
+#include "../src/tty/win.h"		/* xterm_flag */
+
+#include "../src/search/search.h"
+
 #include "main.h"		/* mc_home */
 #include "cmd.h"		/* guess_message_value */
 #include "mountlist.h"
-#include "win.h"		/* xterm_flag */
 #include "timefmt.h"
 #include "strutil.h"
 #include "fileopctx.h"
 #include "file.h"		/* copy_file_file() */
-#include "../src/search/search.h"
 
 #ifdef HAVE_CHARSET
 #include "charsets.h"
