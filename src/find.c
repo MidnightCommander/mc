@@ -608,6 +608,7 @@ check_find_events(Dlg_head *h)
     Gpm_Event event;
     int c;
 
+    event.x = -1;
     c = get_event (&event, h->mouse_status == MOU_REPEAT, 0);
     if (c != EV_NONE) {
  	dlg_process_event (h, c, &event);
