@@ -655,17 +655,17 @@ ftpfs_get_proxy_host_and_port (const char *proxy, char **host, int *port)
 static int
 ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super)
 {
-    struct   sockaddr_in server_address;
-    struct   hostent *hp;
-    int      my_socket;
-    char     *host;
-    int      port = SUP.port;
-    int      free_host = 0;
+    struct addrinfo hints, *res, *curr_res;
+    int      my_socket = 0;
+    char     *host = NULL;
+    char     *port = NULL;
+    int      tmp_port;
+    int      e;
 
     (void) me;
     
     /* Use a proxy host? */
-    host = SUP.host;
+    host = g_strdup(SUP.host);
 
     if (!host || !*host){
 	print_vfs_message (_("ftpfs: Invalid host name."));
@@ -674,60 +674,80 @@ ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super)
     }
 
     /* Hosts to connect to that start with a ! should use proxy */
+    tmp_port = SUP.port;
+
     if (SUP.proxy){
-	ftpfs_get_proxy_host_and_port (ftpfs_proxy_host, &host, &port);
-	free_host = 1;
+	ftpfs_get_proxy_host_and_port (ftpfs_proxy_host, &host, &tmp_port);
+    }
+
+    port = g_strdup_printf("%hu", (unsigned short) tmp_port);
+    if (port == NULL) {
+	g_free (host);
+	ftpfs_errno = errno;
+	return -1;
     }
 
     tty_enable_interrupt_key(); /* clear the interrupt flag */
 
-    /* Get host address */
-    memset ((char *) &server_address, 0, sizeof (server_address));
-    server_address.sin_family = AF_INET;
-    server_address.sin_addr.s_addr = inet_addr (host);
-    if (server_address.sin_addr.s_addr == INADDR_NONE) {
-	hp = gethostbyname (host);
-	if (hp == NULL){
-	    tty_disable_interrupt_key ();
-	    print_vfs_message (_("ftpfs: Invalid host address."));
-	    ftpfs_errno = EINVAL;
-	    if (free_host)
-		g_free (host);
+    memset (&hints, 0, sizeof (struct addrinfo));
+    hints.ai_socktype = SOCK_STREAM;
+    hints.ai_flags = AI_ADDRCONFIG;
+
+
+    e = getaddrinfo (host, port, &hints, &res);
+    g_free (port);
+    port = NULL;
+
+    if ( e != 0 ) {
+	tty_disable_interrupt_key ();
+	print_vfs_message (_("ftpfs: %s"), gai_strerror (e));
+	g_free (host);
+	ftpfs_errno = EINVAL;
+	return -1;
+    }
+
+    for (curr_res = res; curr_res != NULL; curr_res = curr_res->ai_next) {
+
+	my_socket = socket (curr_res->ai_family, curr_res->ai_socktype, curr_res->ai_protocol);
+
+	if (my_socket < 0) {
+
+	    if (curr_res->ai_next != NULL)
+		continue;
+
+	    tty_disable_interrupt_key();
+	    print_vfs_message (_("ftpfs: %s"), unix_error_string (errno));
+	    g_free (host);
+	    freeaddrinfo (res);
+	    ftpfs_errno = errno;
 	    return -1;
 	}
-	server_address.sin_family = hp->h_addrtype;
 
-	/* We copy only 4 bytes, we cannot trust hp->h_length, as it comes from the DNS */
-	memcpy ((char *) &server_address.sin_addr, (char *) hp->h_addr, 4);
-    }
-
-    server_address.sin_port = htons (port);
-
-    /* Connect */
-    if ((my_socket = socket (AF_INET, SOCK_STREAM, 0)) < 0) {
-	tty_disable_interrupt_key ();
-	ftpfs_errno = errno;
-        if (free_host)
-	    g_free (host);
-	return -1;
-    }
-    
-    print_vfs_message (_("ftpfs: making connection to %s"), host);
-    if (free_host)
+	print_vfs_message (_("ftpfs: making connection to %s"), host);
 	g_free (host);
+	host = NULL;
 
-    if (connect (my_socket, (struct sockaddr *) &server_address,
-	     sizeof (server_address)) < 0){
+	if ( connect (my_socket, curr_res->ai_addr, curr_res->ai_addrlen) >= 0 )
+	    break;
+
 	ftpfs_errno = errno;
-	if (errno == EINTR && tty_got_interrupt ())
-	    print_vfs_message (_("ftpfs: connection interrupted by user"));
-	else
-	    print_vfs_message (_("ftpfs: connection to server failed: %s"),
-				   unix_error_string(errno));
-	tty_disable_interrupt_key ();
 	close (my_socket);
+
+	if (errno == EINTR && tty_got_interrupt ()) {
+	    print_vfs_message (_("ftpfs: connection interrupted by user"));
+	} else if (res->ai_next == NULL) {
+	    print_vfs_message (_("ftpfs: connection to server failed: %s"),
+				unix_error_string (errno));
+	} else {
+	    continue;
+	}
+
+	freeaddrinfo (res);
+	tty_disable_interrupt_key ();
 	return -1;
     }
+
+    freeaddrinfo (res);
     tty_disable_interrupt_key ();
     return my_socket;
 }
@@ -877,84 +897,174 @@ ftpfs_get_current_directory (struct vfs_class *me, struct vfs_s_super *super)
     
 /* Setup Passive ftp connection, we use it for source routed connections */
 static int
-ftpfs_setup_passive (struct vfs_class *me, struct vfs_s_super *super, int my_socket, struct sockaddr_in *sa)
+ftpfs_setup_passive (struct vfs_class *me, struct vfs_s_super *super,
+	int my_socket, struct sockaddr_storage *sa, socklen_t *salen)
 {
-    int xa, xb, xc, xd, xe, xf;
-    char n [6];
     char *c;
-    
-    if (ftpfs_command (me, super, WAIT_REPLY | WANT_STRING, "PASV") != COMPLETE)
+
+    if (ftpfs_command (me, super, WAIT_REPLY | WANT_STRING, "EPSV") == COMPLETE) {
+	int port;
+	/* (|||<port>|) */
+	c = strchr (reply_str, '|');
+	if (c == NULL)
+	    return 0;
+	if(strlen(c) > 3)
+	    c+=3;
+	else
+	    return 0;
+
+	port = atoi (c);
+	if (port < 0 || port > 65535)
+	    return 0;
+	port = htons (port);
+
+	switch (sa->ss_family) {
+	case AF_INET:
+	    ((struct sockaddr_in *)sa)->sin_port = port;
+	break;
+	case AF_INET6:
+	    ((struct sockaddr_in6 *)sa)->sin6_port = port;
+	break;
+	default:
+	    print_vfs_message (_("ftpfs: invalid address family"));
+	    ERRNOR (EINVAL, -1);
+	}
+    } else if (sa->ss_family == AF_INET) {
+	int xa, xb, xc, xd, xe, xf;
+	char n [6];
+
+	if (ftpfs_command (me, super, WAIT_REPLY | WANT_STRING, "PASV") != COMPLETE)
+	    return 0;
+
+	/* Parse remote parameters */
+	for (c = reply_str + 4; (*c) && (!isdigit ((unsigned char) *c)); c++);
+
+	if (!*c)
+	    return 0;
+	if (!isdigit ((unsigned char) *c))
+	    return 0;
+	if (sscanf (c, "%d,%d,%d,%d,%d,%d", &xa, &xb, &xc, &xd, &xe, &xf) != 6)
+	    return 0;
+
+	n [0] = (unsigned char) xa;
+	n [1] = (unsigned char) xb;
+	n [2] = (unsigned char) xc;
+	n [3] = (unsigned char) xd;
+	n [4] = (unsigned char) xe;
+	n [5] = (unsigned char) xf;
+
+	memcpy (&(((struct sockaddr_in *)sa)->sin_addr.s_addr), (void *)n, 4);
+	memcpy (&(((struct sockaddr_in *)sa)->sin_port), (void *)&n[4], 2);
+    } else
 	return 0;
 
-    /* Parse remote parameters */
-    for (c = reply_str + 4; (*c) && (!isdigit ((unsigned char) *c)); c++)
-	;
-    if (!*c)
+    if (connect (my_socket, (struct sockaddr *) sa, *salen ) < 0)
 	return 0;
-    if (!isdigit ((unsigned char) *c))
-	return 0;
-    if (sscanf (c, "%d,%d,%d,%d,%d,%d", &xa, &xb, &xc, &xd, &xe, &xf) != 6)
-	return 0;
-    n [0] = (unsigned char) xa;
-    n [1] = (unsigned char) xb;
-    n [2] = (unsigned char) xc;
-    n [3] = (unsigned char) xd;
-    n [4] = (unsigned char) xe;
-    n [5] = (unsigned char) xf;
 
-    memcpy (&(sa->sin_addr.s_addr), (void *)n, 4);
-    memcpy (&(sa->sin_port), (void *)&n[4], 2);
-    if (connect (my_socket, (struct sockaddr *) sa, sizeof (struct sockaddr_in)) < 0)
-	return 0;
     return 1;
 }
 
 static int
 ftpfs_initconn (struct vfs_class *me, struct vfs_s_super *super)
 {
-    struct sockaddr_in data_addr;
-    int data;
-    socklen_t len = sizeof(data_addr);
-    struct protoent *pe;
+    struct sockaddr_storage data_addr;
+    socklen_t data_addrlen;
+    int data_sock;
 
-    pe = getprotobyname ("tcp");
-    if (pe == NULL)
-	ERRNOR (EIO, -1);
 again:
-    if (getsockname (SUP.sock, (struct sockaddr *) &data_addr, &len) == -1)
-	ERRNOR (EIO, -1);
-    data_addr.sin_port = 0;
-    
-    data = socket (AF_INET, SOCK_STREAM, pe->p_proto);
-    if (data < 0)
-	ERRNOR (EIO, -1);
+    memset (&data_addr, 0, sizeof (struct sockaddr_storage));
+    data_addrlen = sizeof (struct sockaddr_storage);
+
+    if (getpeername (SUP.sock, (struct sockaddr *) &data_addr, &data_addrlen) == -1)
+	return -1;
+
+    switch (data_addr.ss_family) {
+    case AF_INET:
+	((struct sockaddr_in *)&data_addr)->sin_port = 0;
+    break;
+    case AF_INET6:
+	((struct sockaddr_in6 *)&data_addr)->sin6_port = 0;
+    break;
+    default:
+	print_vfs_message (_("ftpfs: invalid address family"));
+	ERRNOR(EINVAL, -1);
+    }
+
+    data_sock = socket (data_addr.ss_family, SOCK_STREAM, IPPROTO_TCP);
+    if (data_sock < 0) {
+	if (SUP.use_passive_connection) {
+	    print_vfs_message (_("ftpfs: could not setup passive mode: %s"), unix_error_string (errno));
+	    SUP.use_passive_connection = 0;
+	    goto again;
+	}
+
+	print_vfs_message (_("ftpfs: could not create socket: %s"), unix_error_string (errno));
+	return -1;
+    }
 
     if (SUP.use_passive_connection) {
-	if (ftpfs_setup_passive (me, super, data, &data_addr))
-	    return data;
+
+	if (ftpfs_setup_passive (me, super, data_sock, &data_addr, &data_addrlen))
+	    return data_sock;
 
 	SUP.use_passive_connection = 0;
 	print_vfs_message (_("ftpfs: could not setup passive mode"));
 
-	/* data or data_addr may be damaged by ftpfs_setup_passive */
-	close (data);
+	close (data_sock);
 	goto again;
     }
 
     /* If passive setup fails, fallback to active connections */
     /* Active FTP connection */
-    if ((bind (data, (struct sockaddr *)&data_addr, len) == 0) &&
-	(getsockname (data, (struct sockaddr *) &data_addr, &len) == 0) && 
-	(listen (data, 1) == 0))
-    {
-	unsigned char *a = (unsigned char *)&data_addr.sin_addr;
-	unsigned char *p = (unsigned char *)&data_addr.sin_port;
+    if ((bind (data_sock, (struct sockaddr *)&data_addr, data_addrlen) == 0) &&
+      (getsockname (data_sock, (struct sockaddr *)&data_addr, &data_addrlen) == 0) && 
+      (listen (data_sock, 1) == 0)) {
+	unsigned short int port;
+	char *addr;
+	unsigned int af;
+
+	switch (data_addr.ss_family) {
+	case AF_INET: 
+	    af = FTP_INET;
+	    port = ((struct sockaddr_in *)&data_addr)->sin_port;
+	break;
+	case AF_INET6: 
+	    af = FTP_INET6;
+	    port = ((struct sockaddr_in6 *)&data_addr)->sin6_port;
+	break;
+	default:
+	    print_vfs_message (_("ftpfs: invalid address family"));
+	    ERRNOR (EINVAL, -1);
+	}
+
+	port = ntohs (port);
+
+	addr = malloc (NI_MAXHOST);
+	if (addr == NULL)
+	    ERRNOR (ENOMEM, -1);
+
+	if (getnameinfo ((struct sockaddr *)&data_addr, data_addrlen, addr, NI_MAXHOST, NULL, 0, NI_NUMERICHOST) != 0) {
+	    g_free (addr);
+	    ERRNOR (EIO, -1);
+	}
+
+	if (ftpfs_command (me, super, WAIT_REPLY, "EPRT |%u|%s|%hu|", af, addr, port) == COMPLETE) {
+	    g_free (addr);
+	    return data_sock;
+	}
+	g_free (addr);
+
+	if (FTP_INET == af) {
+	    unsigned char *a = (unsigned char *)&((struct sockaddr_in *)&data_addr)->sin_addr;
+	    unsigned char *p = (unsigned char *)&port;
 	
-	if (ftpfs_command (me, super, WAIT_REPLY, "PORT %d,%d,%d,%d,%d,%d", a[0], a[1], 
-		     a[2], a[3], p[0], p[1]) == COMPLETE)
-	    return data;
+	if (ftpfs_command (me, super, WAIT_REPLY, 
+			    "PORT %u,%u,%u,%u,%u,%u", a[0], a[1], a[2], a[3],
+			    p[0], p[1]) == COMPLETE)
+	  return data_sock;
+	}
     }
-    close (data);
+    close (data_sock);
     ftpfs_errno = EIO;
     return -1;
 }
@@ -963,7 +1073,7 @@ static int
 ftpfs_open_data_connection (struct vfs_class *me, struct vfs_s_super *super, const char *cmd,
 		      const char *remote, int isbinary, int reget)
 {
-    struct sockaddr_in from;
+    struct sockaddr_storage from;
     int s, j, data;
     socklen_t fromlen = sizeof(from);
     
