@@ -76,9 +76,9 @@ typedef struct mc_search_struct {
 /* public output data */
 
     /* some data for normal */
-    gsize normal_offset;
+    off_t normal_offset;
 
-    gsize start_buffer;
+    off_t start_buffer;
     /* some data for regexp */
     int num_rezults;
     mc_search_matchinfo_t *regex_match_info;
