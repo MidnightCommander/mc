@@ -789,7 +789,7 @@ mc_readdir (DIR *dirp)
          * structures, holding dirent size. But we don't use it in libc infrastructure.
          * TODO: to make simpler homemade dirent-alike structure.
          */
-        mc_readdir_result = (struct dirent *)malloc(sizeof(struct dirent *) + NAME_MAX + 1);
+        mc_readdir_result = (struct dirent *)malloc(sizeof(struct dirent) + NAME_MAX + 1);
     }
 
     if (!dirp) {
