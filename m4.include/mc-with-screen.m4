@@ -91,9 +91,37 @@ AC_DEFUN([MC_CHECK_SLANG_BY_PATH], [
             [:],
             [
                 found_slang=no
-                error_msg_slang="Slang library not found"
+                error_msg_slang="S-lang library not found"
             ]
         )
+    fi
+    dnl check if S-Lang have version 2.0 or newer
+    if test x"$found_slang" = x"yes"; then
+        AC_MSG_CHECKING([for S-Lang version 2.0 or newer])
+        AC_TRY_RUN([
+#ifdef HAVE_SLANG_SLANG_H
+#include <slang/slang.h>
+#else
+#include <slang/slang.h>
+#endif
+int main (void)
+{
+#if SLANG_VERSION >= 20000
+    return 0;
+#else
+    return 1;
+#endif
+}
+],
+	    [mc_slang_is_valid_version=yes],
+	    [mc_slang_is_valid_version=no],
+	    [mc_slang_is_valid_version=no]
+	)
+	if test x$mc_slang_is_valid_version = xno; then
+            found_slang=no
+            error_msg_slang="S-Lang library version 2.0 or newer not found"
+	fi
+	AC_MSG_RESULT($mc_slang_is_valid_version)
     fi
 
     dnl Unless external S-Lang was requested, reject S-Lang with UTF-8 hacks
