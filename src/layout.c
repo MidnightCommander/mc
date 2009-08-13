@@ -119,6 +119,7 @@ int output_start_y = 0;
 static struct {
     int    type;
     Widget *widget;
+    char *last_saved_dir;  /* last view_list working directory */
 } panels [MAX_VIEWS];
 
 /* These variables are used to avoid updating the information unless */
@@ -895,7 +896,7 @@ void set_display_type (int num, int type)
     
     switch (type){
     case view_listing:
-	new_widget = (Widget *) panel_new (get_nth_panel_name (num));
+	new_widget = restore_into_right_dir_panel(num, old_widget);
 	break;
 	
     case view_info:
@@ -919,6 +920,12 @@ void set_display_type (int num, int type)
 	view_load ((WView *) new_widget, 0, file_name, 0);
 	break;
     }
+
+    if (type != view_listing)
+	/* Must save dir, for restoring after change type to */
+	/* view_listing */
+	save_panel_dir(num);
+
     panels [num].type = type;
     panels [num].widget = (Widget *) new_widget;
     
@@ -1090,3 +1097,32 @@ int get_other_type (void)
 	return panels [0].type;
 }
 
+/* Save current list_view widget directory into panel */
+void save_panel_dir(int index)
+{
+    if (get_display_type(index) == view_listing) {
+	WPanel *w = (WPanel *) get_panel_widget(index);
+	char *widget_work_dir = w->cwd;
+
+	g_free(panels [index].last_saved_dir);  /* last path no needed */
+        /* Because path can be nonlocal */
+	panels [index].last_saved_dir = vfs_translate_url(widget_work_dir);
+    }
+}
+
+/* Save current list_view widget directory into panel */
+Widget *restore_into_right_dir_panel(int index, Widget *from_widget)
+{
+    Widget *new_widget = 0;
+    const char *saved_dir = panels [index].last_saved_dir;
+    gboolean last_was_panel = (from_widget &&
+				get_display_type(index) != view_listing);
+    const char *p_name = get_nth_panel_name (index);
+
+    if (last_was_panel) {
+	new_widget = (Widget *) panel_new_with_dir (p_name, saved_dir);
+    } else
+	new_widget = (Widget *) panel_new (p_name);
+
+    return new_widget;
+}
