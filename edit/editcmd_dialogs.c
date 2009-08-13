@@ -40,6 +40,7 @@
 #include "../src/dialog.h"      /* do_refresh() */
 #include "../src/main.h"
 #include "../src/history.h"
+#include "../src/charsets.h"
 
 #include "../edit/edit-widget.h"
 #include "../edit/etags.h"
@@ -339,9 +340,29 @@ editcmd_dialog_completion_show (WEdit * edit, int max_len, int word_len,
     /* pop up the dialog and apply the choosen completion */
     if (run_dlg (compl_dlg) == B_ENTER) {
         listbox_get_current (compl_list, &curr, NULL);
-        if (curr)
+        if (curr) {
+#ifdef HAVE_CHARSET
+	    GString *temp, *temp2;
+	    temp = g_string_new("");
+	    for (curr += word_len; *curr; curr++)
+		g_string_append_c(temp, *curr);
+
+	    temp2 = str_convert_to_input (temp->str);
+
+	    if (temp2 && temp2->len){
+		g_string_free(temp, TRUE);
+		temp = temp2;
+	    }
+	    else
+		g_string_free(temp2, TRUE);
+	    for (curr = temp->str; *curr; curr++)
+		edit_insert (edit, *curr);
+	    g_string_free(temp, TRUE);
+#else
             for (curr += word_len; *curr; curr++)
                 edit_insert (edit, *curr);
+#endif
+        }
     }
 
     /* destroy dialog before return */

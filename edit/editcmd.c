@@ -2428,10 +2428,22 @@ edit_collect_completions (WEdit *edit, long start, int word_len,
 	    }
 	    (*num)--;
 	}
+#ifdef HAVE_CHARSET
+	{
+	    GString *recoded;
+	    recoded = str_convert_to_display (temp->str);
 
+	    if (recoded && recoded->len){
+		g_string_free(temp,TRUE);
+		temp = recoded;
+	    } else
+		g_string_free(recoded , TRUE);
+	}
+#endif
 	compl[*num].text = temp->str;
 	compl[*num].len = temp->len;
 	(*num)++;
+	start += len;
 	g_string_free(temp, FALSE);
 
 	/* note the maximal length needed for the completion dialog */
@@ -2464,7 +2476,8 @@ edit_complete_word_cmd (WEdit *edit)
     bufpos = &edit->buffers1[word_start >> S_EDIT_BUF_SIZE]
 	[word_start & M_EDIT_BUF_SIZE];
 
-    match_expr = g_strdup_printf ("\\b%.*s[a-zA-Z_0-9]+", word_len, bufpos);
+    /* match_expr = g_strdup_printf ("\\b%.*s[a-zA-Z_0-9]+", word_len, bufpos); */
+    match_expr = g_strdup_printf ("(^|\\s+|\\b)%.*s[^\\s\\.=\\+\\[\\]\\(\\)\\,\\;\\:\\\"\\'\\-\\?\\/\\|\\\\\\{\\}\\*\\&\\^\\%%\\$#@\\!]+", word_len, bufpos);
 
     /* collect the possible completions              */
     /* start search from begin to end of file */
