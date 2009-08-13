@@ -472,6 +472,25 @@ tty_print_alt_char (int c)
 }
 
 void
+tty_print_anychar (int c)
+{
+    unsigned char str[6 + 1];
+
+    if ( c > 255 ) {
+        int res = g_unichar_to_utf8 (c, (char *)str);
+        if ( res == 0 ) {
+            str[0] = '.';
+            str[1] = '\0';
+        } else {
+            str[res] = '\0';
+        }
+        SLsmg_write_string ((char *) str_term_form (str));
+    } else {
+        SLsmg_write_char ((SLwchar_Type) ((unsigned int) c));
+    }
+}
+
+void
 tty_print_string (const char *s)
 {
     SLsmg_write_string ((char *) str_term_form (s));

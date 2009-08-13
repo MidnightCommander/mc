@@ -44,16 +44,16 @@ unsigned char convert_from_utf_to_current (const char *str);
  * param input_char, gunichar
  * return char in needle codepage (by global int source_codepage)
 */
-unsigned char convert_from_utf_to_current_c (const int input_char);
+unsigned char convert_from_utf_to_current_c (const int input_char, GIConv conv);
 /*
  * Converter from selected codepage 8-bit
- * param char input_char
+ * param char input_char, GIConv converter
  * return int utf char
 */
-int convert_from_8bit_to_utf_c (const char input_char);
+int convert_from_8bit_to_utf_c (const char input_char, GIConv conv);
 /*
  * Converter from display codepage 8-bit to utf-8
- * param char input_char
+ * param char input_char, GIConv converter
  * return int utf char
 */
 int convert_from_8bit_to_utf_c2 (const char input_char);

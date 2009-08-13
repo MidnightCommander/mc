@@ -2393,11 +2393,21 @@ void
 edit_select_codepage_cmd (WEdit *edit)
 {
 #ifdef HAVE_CHARSET
+    const char *cp_id = NULL;
     if (do_select_codepage ()) {
-	const char *cp_id;
-
 	cp_id = get_codepage_id (source_codepage >= 0 ?
 				    source_codepage : display_codepage);
+
+        if (cp_id != NULL) {
+            GIConv conv;
+            conv = str_crt_conv_from (cp_id);
+            if (conv != INVALID_CONV) {
+                if (edit->converter != str_cnv_from_term)
+                    str_close_conv (edit->converter);
+                edit->converter = conv;
+            }
+        }
+
 
 	if (cp_id != NULL)
 	    edit->utf8 = str_isutf8 (cp_id);

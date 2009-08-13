@@ -1313,7 +1313,6 @@ static void check_codeset()
         _system_codepage = str_detect_termencoding();
         _source_codepage = get_codepage_id (source_codepage);
         _display_codepage = get_codepage_id (display_codepage);
-
         if ( (strcmp (_system_codepage, _display_codepage)) ||
              (strcmp (_system_codepage, _source_codepage)) ) {
             if (quick_dialog (&ecs) == B_ENTER){
@@ -1327,6 +1326,8 @@ static void check_codeset()
                     source_codepage = display_codepage;
                     cp_source = cp_display;
                     profile_changed = 1;
+                } else {
+                    utf8_display = str_isutf8 (_system_codepage);
                 }
             } else {
                 if ( skip_check_codeset ) {

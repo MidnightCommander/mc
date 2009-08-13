@@ -285,19 +285,9 @@ edit_load_file_fast (WEdit *edit, const char *filename)
 {
     long buf, buf2;
     int file = -1;
-#ifdef HAVE_CHARSET
-    const char *cp_id;
-#endif
-
     edit->curs2 = edit->last_byte;
     buf2 = edit->curs2 >> S_EDIT_BUF_SIZE;
     edit->utf8 = 0;
-#ifdef HAVE_CHARSET
-    cp_id = get_codepage_id (source_codepage);
-
-    if (cp_id != NULL)
-        edit->utf8 = str_isutf8 (cp_id);
-#endif
     if ((file = mc_open (filename, O_RDONLY | O_BINARY)) == -1) {
 	GString *errmsg = g_string_new(NULL);
 	g_string_sprintf(errmsg, _(" Cannot open %s for reading "), filename);
@@ -723,6 +713,26 @@ edit_init (WEdit *edit, int lines, int columns, const char *filename,
 	    g_free (edit);
 	return 0;
     }
+    edit->utf8 = 0;
+    edit->converter = str_cnv_from_term;
+#ifdef HAVE_CHARSET
+    const char *cp_id = NULL;
+    cp_id = get_codepage_id (source_codepage >= 0 ?
+                            source_codepage : display_codepage);
+
+    if (cp_id != NULL) {
+        GIConv conv;
+        conv = str_crt_conv_from (cp_id);
+        if (conv != INVALID_CONV) {
+            if (edit->converter != str_cnv_from_term)
+                str_close_conv (edit->converter);
+            edit->converter = conv;
+        }
+    }
+    if (cp_id != NULL)
+        edit->utf8 = str_isutf8 (cp_id);
+#endif
+
     edit->loading_done = 1;
     edit->modified = 0;
     edit->locked = 0;
@@ -1092,7 +1102,9 @@ edit_insert (WEdit *edit, int c)
 void
 edit_insert_over (WEdit * edit)
 {
-    for (int i = 0; i < edit->over_col; i++ ) {
+    int i;
+
+    for ( i = 0; i < edit->over_col; i++ ) {
         edit_insert (edit, ' ');
     }
     edit->over_col = 0;

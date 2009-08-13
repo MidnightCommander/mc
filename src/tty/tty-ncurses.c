@@ -6,6 +6,7 @@
 
    Written by:
    Andrew Borodin <aborodin@vmail.ru>, 2009.
+   Ilia Maslakov <il.smind@gmail.com>, 2009.
 
    This file is part of the Midnight Commander.
 
@@ -282,6 +283,25 @@ void
 tty_print_char (int c)
 {
     addch (c);
+}
+
+void
+tty_print_anychar (int c)
+{
+    unsigned char str[6 + 1];
+
+    if ( c > 255 ) {
+        int res = g_unichar_to_utf8 (c, (char *)str);
+        if ( res == 0 ) {
+            str[0] = '.';
+            str[1] = '\0';
+        } else {
+            str[res] = '\0';
+        }
+        addstr (str_term_form (s));
+    } else {
+        addch (c);
+    }
 }
 
 void

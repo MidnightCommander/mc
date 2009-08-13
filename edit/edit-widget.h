@@ -132,6 +132,7 @@ struct WEdit {
     /* user map stuff */
     const edit_key_map_type *user_map;
     const edit_key_map_type *ext_map;
+    GIConv converter;
 
     int extmod;
 

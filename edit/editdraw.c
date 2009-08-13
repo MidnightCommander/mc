@@ -332,18 +332,7 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
 		tty_lowlevel_setcolor (color);
 	    }
 	}
-	if ( textchar > 255 ) {
-            int res = g_unichar_to_utf8 (textchar, (char *)str);
-            if ( res == 0 ) {
-                str[0] = '.';
-                str[1] = '\0';
-            } else {
-                str[res] = '\0';
-            }
-            tty_print_string ((char *) str);
-        } else {
-            tty_print_char (textchar);
-        }
+	tty_print_anychar (textchar);
 	p++;
     }
 }
@@ -497,11 +486,11 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 #ifdef HAVE_CHARSET
 		    if ( utf8_display ) {
 		        if ( !edit->utf8 ) {
-		            c = convert_from_8bit_to_utf_c ((unsigned char) c);
+		            c = convert_from_8bit_to_utf_c ((unsigned char) c, edit->converter);
 		        }
 		    } else {
 		        if ( edit->utf8 ) {
-		            c = convert_from_utf_to_current_c (c);
+		            c = convert_from_utf_to_current_c (c, edit->converter);
 		        } else {
 #endif
 		            c = convert_to_display_c (c);

@@ -351,14 +351,12 @@ convert_from_utf_to_current (const char *str)
 }
 
 unsigned char
-convert_from_utf_to_current_c (const int input_char)
+convert_from_utf_to_current_c (const int input_char, GIConv conv)
 {
     unsigned char str[6 + 1];
     unsigned char buf_ch[6 + 1];
     unsigned char ch = '.';
-    const char *cp_from;
 
-    GIConv conv;
     int res = 0;
 
     res = g_unichar_to_utf8 (input_char, (char *)str);
@@ -367,59 +365,44 @@ convert_from_utf_to_current_c (const int input_char)
     }
     str[res] = '\0';
 
-    cp_from =  get_codepage_id ( source_codepage );
-    conv = str_crt_conv_from ( cp_from );
-
-    if (conv != INVALID_CONV) {
-        switch (str_translate_char (conv, (char *)str, -1, (char *)buf_ch, sizeof(buf_ch))) {
-        case ESTR_SUCCESS:
-            ch = buf_ch[0];
-            break;
-        case ESTR_PROBLEM:
-        case ESTR_FAILURE:
-            ch = '.';
-            break;
-        }
-        str_close_conv (conv);
+    switch (str_translate_char (conv, (char *)str, -1, (char *)buf_ch, sizeof(buf_ch))) {
+    case ESTR_SUCCESS:
+        ch = buf_ch[0];
+        break;
+    case ESTR_PROBLEM:
+    case ESTR_FAILURE:
+        ch = '.';
+        break;
     }
     return ch;
 }
 
 int
-convert_from_8bit_to_utf_c (const char input_char)
+convert_from_8bit_to_utf_c (const char input_char, GIConv conv)
 {
     unsigned char str[2];
     unsigned char buf_ch[6 + 1];
     int ch = '.';
     int res = 0;
-    GIConv conv;
-    const char *cp_from;
 
     str[0] = (unsigned char) input_char;
     str[1] = '\0';
 
-    cp_from = get_codepage_id ( source_codepage );
-    conv = str_crt_conv_from (cp_from);
-
-    if (conv != INVALID_CONV) {
-        switch (str_translate_char (conv, (char *)str, -1, (char *)buf_ch, sizeof(buf_ch))) {
-        case ESTR_SUCCESS:
-            res = g_utf8_get_char_validated ((char *)buf_ch, -1);
-            if ( res < 0 ) {
-                ch = buf_ch[0];
-            } else {
-                ch = res;
-            }
-            break;
-        case ESTR_PROBLEM:
-        case ESTR_FAILURE:
-            ch = '.';
-            break;
+    switch (str_translate_char (conv, (char *)str, -1, (char *)buf_ch, sizeof(buf_ch))) {
+    case ESTR_SUCCESS:
+        res = g_utf8_get_char_validated ((char *)buf_ch, -1);
+        if ( res < 0 ) {
+            ch = buf_ch[0];
+        } else {
+            ch = res;
         }
-        str_close_conv (conv);
+        break;
+    case ESTR_PROBLEM:
+    case ESTR_FAILURE:
+        ch = '.';
+        break;
     }
     return ch;
-
 }
 
 int
