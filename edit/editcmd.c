@@ -953,7 +953,7 @@ int eval_marks (WEdit * edit, long *start_mark, long *end_mark)
 	} else {
 	    *start_mark = min (edit->mark1, edit->curs1);
 	    *end_mark = max (edit->mark1, edit->curs1);
-	    edit->column2 = edit->curs_col;
+	    edit->column2 = edit->curs_col + edit->over_col;
 	}
 	return 0;
     } else {

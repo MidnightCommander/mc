@@ -235,7 +235,7 @@ void edit_scroll_screen_over_cursor (WEdit * edit)
 	l_extreme = (l_extreme * (edit->num_widget_columns - 1)) / n;
 	r_extreme = (r_extreme * (edit->num_widget_columns - 1)) / n;
     }
-    p = edit_get_col (edit);
+    p = edit_get_col (edit) + edit->over_col;
     edit_update_curs_row (edit);
     outby = p + edit->start_col - edit->num_widget_columns + 1 + (r_extreme + edit->found_len);
     if (outby > 0)
@@ -429,8 +429,6 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 		switch (c) {
 		case '\n':
 		    col = (end_col + utf8lag) - edit->start_col + 1;	/* quit */
-		    p->ch = ' ';
-		    p++;
 		    break;
 		case '\t':
 		    i = TAB_SIZE - ((int) col % TAB_SIZE);

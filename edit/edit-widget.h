@@ -75,6 +75,7 @@ struct WEdit {
     long max_column;		/* The maximum cursor position ever reached used to calc hori scroll bar */
     long curs_row;		/* row position of cursor on the screen */
     long curs_col;		/* column position on screen */
+    long over_col;		/* pos after '\n' */
     int force;			/* how much of the screen do we redraw? */
     unsigned int overwrite:1;	/* Overwrite on type mode (as opposed to insert) */
     unsigned int modified:1;	/* File has been modified and needs saving */
