@@ -1118,7 +1118,7 @@ panel_new_with_dir (const char *panel_name, const char *wpath)
     WPanel *panel;
     char *section;
     int i, err;
-    char curdir[MAXPATHLEN];
+    char curdir[MC_MAXPATHLEN];
 
     panel = g_new0 (WPanel, 1);
 
