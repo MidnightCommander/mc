@@ -58,6 +58,12 @@
 #include "charsets.h"
 #endif
 
+/*In order to use everywhere the same setup 
+  for the locale we use defines               */
+#define FMTYEAR 		_("%b %e  %Y")
+#define FMTTIME			_("%b %e %H:%M")
+
+
 int easy_patterns = 1;
 
 extern void str_replace(char *s, char from, char to)
@@ -623,9 +629,9 @@ i18n_checktimelength (void)
 	char buf [MB_LEN_MAX * MAX_I18NTIMELENGTH + 1];
 	size_t a, b;
 
-	strftime (buf, sizeof(buf) - 1, _("%b %d %H:%M"), lt);
+	strftime (buf, sizeof(buf) - 1, FMTTIME, lt);
 	a = str_term_width1 (buf);
-	strftime (buf, sizeof(buf) - 1, _("%b %d %Y"), lt);
+	strftime (buf, sizeof(buf) - 1, FMTYEAR, lt);
 	b = str_term_width1 (buf);
 
 	length = max (a, b);
@@ -648,14 +654,6 @@ file_date (time_t when)
     static const char *fmtyear, *fmttime;
     const char *fmt;
 
-    if (!i18n){
-	/* strftime() format string for old dates */
-	fmtyear = _("%b %e  %Y");
-	/* strftime() format string for recent dates */
-	fmttime = _("%b %e %H:%M");
-        i18n = 1;
-    }
-
     if (current_time > when + 6L * 30L * 24L * 60L * 60L /* Old. */
 	|| current_time < when - 60L * 60L) /* In the future. */
 	/* The file is fairly old or in the future.
@@ -665,9 +663,9 @@ file_date (time_t when)
 	   to allow for NFS server/client clock disagreement.
 	   Show the year instead of the time of day.  */
 
-	fmt = fmtyear;
+	fmt = FMTYEAR;
     else
-	fmt = fmttime;
+	fmt = FMTTIME;
 
     FMT_LOCALTIME(timebuf, sizeof (timebuf), fmt, when);
 
