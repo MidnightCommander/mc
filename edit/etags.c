@@ -46,7 +46,7 @@
 
 static gboolean parse_define(char *buf, char **long_name, char **short_name, long *line)
 {
-    enum {in_longname, in_shortname, in_line, finish} def_state = in_longname;
+    enum {in_longname, in_shortname, in_shortname_first_char, in_line, finish} def_state = in_longname;
 
     static char longdef[LONG_DEF_LEN];
     static char shortdef[SHORT_DEF_LEN];
@@ -69,7 +69,7 @@ static gboolean parse_define(char *buf, char **long_name, char **short_name, lon
                 }
             }
             break;
-        case in_shortname:
+        case in_shortname_first_char:
             if ( isdigit(c) ) {
                 nshort = 0;
                 buf--;
@@ -79,11 +79,23 @@ static gboolean parse_define(char *buf, char **long_name, char **short_name, lon
             } else {
                 if ( nshort < SHORT_DEF_LEN - 1 ) {
                     shortdef[nshort++] = c;
+                    def_state = in_shortname;
+                }
+            }
+            break;
+        case in_shortname:
+            if ( c == 0x01 ) {
+                def_state = in_line;
+            } else if ( c == '\n' ) {
+                def_state = finish;
+            } else {
+                if ( nshort < SHORT_DEF_LEN - 1 ) {
+                    shortdef[nshort++] = c;
                 }
             }
             break;
         case in_line:
-            if ( c == ',' ) {
+            if ( c == ',' || c == '\n') {
                 def_state = finish;
             } else if ( isdigit(c) ) {
                 if ( nline < LINE_DEF_LEN - 1 ) {
