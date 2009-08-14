@@ -136,6 +136,7 @@ void edit_refresh_cmd (WEdit * edit)
     clr_scr();
     repaint_screen ();
 #endif /* !HAVE_SLANG */
+    tty_keypad (TRUE);
 }
 
 /*  If 0 (quick save) then  a) create/truncate <filename> file,
