@@ -1614,6 +1614,12 @@ Panel Options, Pause after run and Other Options.
 .PP
 .B Panel Options
 .PP
+.I Use SI size units.
+If this option is set, Midnight Commander will use SI units (powers of 1000)
+when displaying any byte sizes. The suffixes (k, m ...) are shown in lowercase.
+If unset (default), Midnight Commander will use binary units (powers of 1024)
+and the suffixes are shown in upper case (K, M ...)
+.PP
 .I Show Backup Files.
 If enabled, the Midnight Commander will show files ending with a tilde.
 Otherwise, they won't be shown (like GNU's ls option -B).

@@ -45,6 +45,13 @@ int show_backups = 1;
 /* If false then directories are shown separately from files */
 int mix_all_files = 0;
 
+/*
+ * If true, SI units (1000 based) will be used for
+ * larger units (kilobyte, megabyte, ...).
+ * If false binary units (1024 based) will be used.
+ */
+int kilobyte_si = 0;
+
 /* Reverse flag */
 static int reverse = 1;
 

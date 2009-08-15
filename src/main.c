@@ -883,6 +883,13 @@ toggle_show_hidden (void)
     update_panels (UP_RELOAD, UP_KEEPSEL);
 }
 
+void
+toggle_kilobyte_si (void)
+{
+    kilobyte_si = !kilobyte_si;
+    update_panels (UP_RELOAD, UP_KEEPSEL);
+}
+
 /*
  * Just a hack for allowing url-like pathnames to be accepted from the
  * command line.

@@ -11,6 +11,7 @@ void toggle_fast_reload (void);
 void toggle_mix_all_files (void);
 void toggle_show_backup (void);
 void toggle_show_hidden (void);
+void toggle_kilobyte_si (void);
 
 extern int quote;
 extern volatile int quit;

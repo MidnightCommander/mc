@@ -78,12 +78,13 @@ static struct {
    {N_("ma&Rk moves down"),   &mark_moves_down,   TOGGLE_VARIABLE,       0 },
    {N_("show &Hidden files"), &show_dot_files,    toggle_show_hidden,    0 },
    {N_("show &Backup files"), &show_backups,      toggle_show_backup,    0 },
+   {N_("Use SI si&ze units"), &kilobyte_si,       toggle_kilobyte_si,    0 },
    { 0, 0, 0, 0 }
 };
 
 /* Make sure this corresponds to the check_options structure */
 #define OTHER_OPTIONS 13
-#define PANEL_OPTIONS 6
+#define PANEL_OPTIONS 7
 
 static WRadio *pause_radio;
 

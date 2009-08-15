@@ -148,6 +148,7 @@ static const struct {
     int  *opt_addr;
 } int_options [] = {
     { "show_backups", &show_backups },
+    { "kilobyte_si", &kilobyte_si },
     { "show_dot_files", &show_dot_files },
     { "verbose", &verbose },
     { "mark_moves_down", &mark_moves_down },

@@ -53,6 +53,7 @@
 #include "strutil.h"
 #include "fileopctx.h"
 #include "file.h"		/* copy_file_file() */
+#include "dir.h"
 
 #ifdef HAVE_CHARSET
 #include "charsets.h"
@@ -271,11 +272,11 @@ size_trunc (double size)
     const char *xtra = "";
     
     if (size > 999999999L){
-	divisor = 1024;
-	xtra = "K";
+	divisor = kilobyte_si?1000:1024;
+	xtra = kilobyte_si?"k":"K";
 	if (size/divisor > 999999999L){
-	    divisor = 1024*1024;
-	    xtra = "M";
+	    divisor = kilobyte_si?(1000*1000):(1024*1024);
+	    xtra = kilobyte_si?"m":"M";
 	}
     }
     g_snprintf (x, sizeof (x), "%.0f%s", (size/divisor), xtra);
@@ -327,11 +328,28 @@ size_trunc_len (char *buffer, int len, off_t size, int units)
 	 1000000000};
     static const char * const suffix [] =
 	{"", "K", "M", "G", "T", "P", "E", "Z", "Y", NULL};
+    static const char * const suffix_lc [] =
+	{"", "k", "m", "g", "t", "p", "e", "z", "y", NULL};
     int j = 0;
+    int size_remain;
 
     /* Don't print more than 9 digits - use suffix.  */
     if (len == 0 || len > 9)
 	len = 9;
+
+    /*
+     * recalculate from 1024 base to 1000 base if units>0
+     * We can't just multiply by 1024 - that might cause overflow
+     * if off_t type is too small
+     */
+    if (units && kilobyte_si) {
+     for (j = 0; j < units; j++) {
+      size_remain=((size % 125)*1024)/1000; /* size mod 125, recalculated */
+      size = size / 125; /* 128/125 = 1024/1000 */
+      size = size * 128; /* This will convert size from multiple of 1024 to multiple of 1000 */
+      size += size_remain; /* Re-add remainder lost by division/multiplication */
+     }
+    }
 
     for (j = units; suffix [j] != NULL; j++) {
 	if (size == 0) {
@@ -343,17 +361,21 @@ size_trunc_len (char *buffer, int len, off_t size, int units)
 
 	    /* Use "~K" or just "K" if len is 1.  Use "B" for bytes.  */
 	    g_snprintf (buffer, len + 1, (len > 1) ? "~%s" : "%s",
-			(j > 1) ? suffix[j - 1] : "B");
+			(j > 1) ? (kilobyte_si ? suffix_lc[j - 1] : suffix[j - 1]) : "B");
 	    break;
 	}
 
 	if (size < power10 [len - (j > 0)]) {
-	    g_snprintf (buffer, len + 1, "%lu%s", (unsigned long) size, suffix[j]);
+	    g_snprintf (buffer, len + 1, "%lu%s", (unsigned long) size, kilobyte_si ? suffix_lc[j] : suffix[j]);
 	    break;
 	}
 
-	/* Powers of 1024, with rounding.  */
-	size = (size + 512) >> 10;
+	/* Powers of 1000 or 1024, with rounding.  */
+	if (kilobyte_si) {
+	    size = (size + 500) / 1000;
+	} else {
+	    size = (size + 512) >> 10;
+	}
     }
 }
 
