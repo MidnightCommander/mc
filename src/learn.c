@@ -91,7 +91,7 @@ _("Please press the %s\n"
 "If you want to escape, press a single Escape key\n"
 "and wait as well."), 
         _(key_name_conv_tab [action - B_USER].longname));
-    tty_refresh ();
+    mc_refresh ();
     if (learnkeys [action - B_USER].sequence != NULL) {
 	g_free (learnkeys [action - B_USER].sequence);
 	learnkeys [action - B_USER].sequence = NULL;

@@ -94,20 +94,37 @@ create_listbox_window (int cols, int lines, const char *title, const char *help)
 }
 
 /* Returns the number of the item selected */
-int run_listbox (Listbox *l)
+int
+run_listbox (Listbox *l)
 {
-    int val;
-    
-    run_dlg (l->dlg);
-    if (l->dlg->ret_value == B_CANCEL)
-	val = -1;
-    else
+    int val = -1;
+
+    if (run_dlg (l->dlg) != B_CANCEL)
 	val = l->list->pos;
     destroy_dlg (l->dlg);
     g_free (l);
     return val;
 }
 
+/* default query callback, used to reposition query */
+static cb_ret_t
+default_query_callback (Dlg_head *h, dlg_msg_t msg, int parm)
+{
+    switch (msg) {
+    case DLG_RESIZE:
+    {
+	int xpos = COLS / 2 - h->cols / 2;
+	int ypos = LINES / 3 - (h->lines - 3) / 2;
+
+	/* set position */
+	dlg_set_position (h, ypos, xpos, ypos + h->lines, xpos + h->cols);
+    }
+	return MSG_HANDLED;
+
+    default:
+	return default_dlg_callback (h, msg, parm);
+    }
+}
 
 static Dlg_head *last_query_dlg;
 
@@ -124,16 +141,10 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
     int win_len = 0;
     int i;
     int result = -1;
-    int xpos, ypos;
     int cols, lines;
     char *cur_name;
-    static const int *query_colors;
-
-    /* set dialog colors */
-    if (flags & D_ERROR)
-	query_colors = alarm_colors;
-    else
-	query_colors = dialog_colors;
+    const int *query_colors = (flags & D_ERROR) ?
+				alarm_colors : dialog_colors;
 
     if (header == MSG_ERROR)
 	header = _("Error");
@@ -153,18 +164,18 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
     str_msg_term_size (text, &lines, &cols);
     cols = 6 + max (win_len, max (str_term_width1 (header), cols));
     lines += 4 + (count > 0 ? 2 : 0);
-    xpos = COLS / 2 - cols / 2;
-    ypos = LINES / 3 - (lines - 3) / 2;
 
     /* prepare dialog */
     query_dlg =
-	create_dlg (ypos, xpos, lines, cols, query_colors, NULL,
+	create_dlg (0, 0, lines, cols, query_colors, default_query_callback,
 		    "[QueryBox]", header, DLG_NONE);
 
     if (count > 0) {
 	cols = (cols - win_len - 2) / 2 + 2;
 	va_start (ap, count);
 	for (i = 0; i < count; i++) {
+	    int xpos;
+
 	    cur_name = va_arg (ap, char *);
 	    xpos = str_term_width1 (cur_name) + 6;
 	    if (strchr (cur_name, '&') != NULL)
@@ -182,12 +193,14 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
 
 	add_widget (query_dlg, label_new (2, 3, text));
 
+	/* do resize before running and selecting any widget */
+	default_query_callback (query_dlg, DLG_RESIZE, 0);
+
 	if (defbutton)
 	    dlg_select_widget (defbutton);
 
 	/* run dialog and make result */
-	run_dlg (query_dlg);
-	switch (query_dlg->ret_value) {
+	switch (run_dlg (query_dlg)) {
 	case B_CANCEL:
 	    break;
 	default:
@@ -223,6 +236,10 @@ do_create_message (int flags, const char *title, const char *text)
     p = g_strconcat ("\n", text, "\n", (char *) NULL);
     query_dialog (title, p, flags, 0);
     d = last_query_dlg;
+
+    /* do resize before initing and running */
+    default_query_callback (d, DLG_RESIZE, 0);
+
     init_dlg (d);
     g_free (p);
 

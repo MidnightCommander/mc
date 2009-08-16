@@ -38,7 +38,7 @@
 
 #include "help.h"	/* interactive_display() */
 #include "dialog.h"
-#include "layout.h"	/* winch_flag, change_screen_size() */
+#include "layout.h"
 #include "execute.h"	/* suspend_cmd() */
 #include "main.h"	/* fast_refresh */
 #include "strutil.h"
@@ -116,19 +116,123 @@ common_dialog_repaint (struct Dlg_head *h)
     }
 }
 
+/* this function allows to set dialog position */
+void
+dlg_set_position (Dlg_head *h, int y1, int x1, int y2, int x2)
+{
+    /* save old positions, will be used to reposition childs */
+    int ox, oy, oc, ol;
+    int shift_x, shift_y, scale_x, scale_y;
+
+    /* save old positions, will be used to reposition childs */
+    ox = h->x;
+    oy = h->y;
+    oc = h->cols;
+    ol = h->lines;
+
+    h->x = x1;
+    h->y = y1;
+    h->lines = y2 - y1;
+    h->cols = x2 - x1;
+
+    /* values by which controls should be moved */
+    shift_x = h->x - ox;
+    shift_y = h->y - oy;
+    scale_x = h->cols - oc;
+    scale_y = h->lines - ol;
+
+    if (h->current == NULL)
+	return;
+
+    if ((shift_x != 0) || (shift_y != 0) || (scale_x != 0) || (scale_y != 0)) {
+	Widget *c = h->current;
+
+	do {
+	    /* there are, mainly, 2 generally possible
+	       situations:
+
+	       1. control sticks to one side - it
+	       should be moved
+
+	       2. control sticks to two sides of
+	       one direction - it should be sized */
+
+	    int x = c->x;
+	    int y = c->y;
+	    int cols = c->cols;
+	    int lines = c->lines;
+
+	    if ((c->pos_flags & WPOS_KEEP_LEFT) && (c->pos_flags & WPOS_KEEP_RIGHT)) {
+		x += shift_x;
+		cols += scale_x;
+	    } else if (c->pos_flags & WPOS_KEEP_LEFT)
+		x += shift_x;
+	    else if (c->pos_flags & WPOS_KEEP_RIGHT)
+		x += shift_x + scale_x;
+
+	    if ((c->pos_flags & WPOS_KEEP_TOP) && (c->pos_flags & WPOS_KEEP_BOTTOM)) {
+		y += shift_y;
+		lines += scale_y;
+	    } else if (c->pos_flags & WPOS_KEEP_TOP)
+		y += shift_y;
+	    else if (c->pos_flags & WPOS_KEEP_BOTTOM)
+		y += shift_y + scale_y;
+
+	    widget_set_size (c, y, x, lines, cols);
+
+	    c = c->next;
+	} while (h->current != c);
+    }
+}
+
+/* this function sets only size, leaving positioning to automatic methods */
+void
+dlg_set_size (Dlg_head *h, int lines, int cols)
+{
+    int x = h->x;
+    int y = h->y;
+
+    if (h->flags & DLG_CENTER) {
+        y = (LINES - lines) / 2;
+        x = (COLS - cols) / 2;
+    }
+
+    if ((h->flags & DLG_TRYUP) && (y > 3))
+        y -= 2;
+
+    dlg_set_position (h, y, x, y + lines, x + cols);
+}
+
 /* Default dialog callback */
 cb_ret_t default_dlg_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 {
     (void) parm;
 
-    if (msg == DLG_DRAW && h->color) {
-	common_dialog_repaint (h);
-	return MSG_HANDLED;
-    }
-    if (msg == DLG_IDLE){
+    switch (msg) {
+    case DLG_DRAW:
+	if (h->color != NULL) {
+	    common_dialog_repaint (h);
+	    return MSG_HANDLED;
+	}
+	return MSG_NOT_HANDLED;
+
+    case DLG_IDLE:
 	dlg_broadcast_msg_to (h, WIDGET_IDLE, 0, W_WANT_IDLE);
 	return MSG_HANDLED;
+
+    case DLG_RESIZE:
+	/* this is default resizing mechanism */
+	/* the main idea of this code is to resize dialog
+	  according to flags (if any of flags require automatic
+	  resizing, like DLG_CENTER, end after that reposition
+	  controls in dialog according to flags of widget) */
+	dlg_set_size (h, h->lines, h->cols);
+	return MSG_HANDLED;
+
+    default:
+	break;
     }
+
     return MSG_NOT_HANDLED;
 }
 
@@ -139,14 +243,6 @@ create_dlg (int y1, int x1, int lines, int cols, const int *color_set,
 {
     Dlg_head *new_d;
 
-    if (flags & DLG_CENTER) {
-	y1 = (LINES - lines) / 2;
-	x1 = (COLS - cols) / 2;
-    }
-
-    if ((flags & DLG_TRYUP) && (y1 > 3))
-	y1 -= 2;
-
     new_d = g_new0 (Dlg_head, 1);
     if (color_set != NULL) {
 	new_d->color = g_new (int, DLG_COLOR_NUM);
@@ -156,9 +252,10 @@ create_dlg (int y1, int x1, int lines, int cols, const int *color_set,
     new_d->callback = callback ? callback : default_dlg_callback;
     new_d->x = x1;
     new_d->y = y1;
-    new_d->cols = cols;
-    new_d->lines = lines;
     new_d->flags = flags;
+    new_d->data = NULL;
+
+    dlg_set_size (new_d, lines, cols);
 
     /* Strip existing spaces, add one space before and after the title */
     if (title) {
@@ -199,7 +296,7 @@ set_idle_proc (Dlg_head *d, int enable)
  * from the bottom, make the widget current.  Return widget number.
  */
 int
-add_widget (Dlg_head *h, void *w)
+add_widget_autopos (Dlg_head *h, void *w, widget_pos_flags_t pos_flags)
 {
     Widget *widget = (Widget *) w;
 
@@ -211,6 +308,7 @@ add_widget (Dlg_head *h, void *w)
     widget->y += h->y;
     widget->parent = h;
     widget->dlg_id = h->count++;
+    widget->pos_flags = pos_flags;
 
     if (h->current) {
 	widget->next = h->current;
@@ -226,6 +324,13 @@ add_widget (Dlg_head *h, void *w)
 	h->current = widget;
 
     return widget->dlg_id;
+}
+
+/* wrapper to simply add lefttop positioned controls */
+int
+add_widget (Dlg_head *h, void *w)
+{
+    add_widget_autopos (h, w, WPOS_KEEP_LEFT | WPOS_KEEP_TOP);
 }
 
 enum {
@@ -520,7 +625,7 @@ dialog_handle_key (Dlg_head *h, int d_key)
     case XCTRL('l'):
 #ifdef HAVE_SLANG
 	tty_touch_screen ();
-	tty_refresh ();
+	mc_refresh ();
 #else
 	/* Use this if the refreshes fail */
 	clr_scr ();

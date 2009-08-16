@@ -47,7 +47,6 @@
 #include "../../src/tty/color-internal.h"
 #include "../../src/tty/win.h"
 
-#include "../../src/background.h"	/* we_are_background */
 #include "../../src/strutil.h"		/* str_term_form */
 
 /* include at last !!! */
@@ -317,13 +316,8 @@ tty_tgetstr (const char *cap)
 void
 tty_refresh (void)
 {
-#ifdef WITH_BACKGROUND
-    if (!we_are_background)
-#endif				/* WITH_BACKGROUND */
-    {
-	refresh ();
-	doupdate ();
-    }
+    refresh ();
+    doupdate ();
 }
 
 void

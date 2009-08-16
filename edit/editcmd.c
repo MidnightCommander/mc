@@ -47,7 +47,7 @@
 
 #include "../src/global.h"
 
-#include "../src/tty/tty.h"	/* COLS */
+#include "../src/tty/tty.h"
 #include "../src/tty/key.h"	/* XCTRL */
 
 #include "../src/history.h"
@@ -123,17 +123,17 @@ void edit_help_cmd (WEdit * edit)
     edit->force |= REDRAW_COMPLETELY;
 }
 
-void edit_refresh_cmd (WEdit * edit)
+void
+edit_refresh_cmd (WEdit * edit)
 {
 #ifdef HAVE_SLANG
-    {
-	int color;
-	edit_get_syntax_color (edit, -1, &color);
-    }
+    int color;
+
+    edit_get_syntax_color (edit, -1, &color);
     tty_touch_screen ();
-    tty_refresh ();
+    mc_refresh ();
 #else
-    clr_scr();
+    clr_scr ();
     repaint_screen ();
 #endif /* !HAVE_SLANG */
     tty_keypad (TRUE);

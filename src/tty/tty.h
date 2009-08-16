@@ -45,7 +45,6 @@ extern void tty_nodelay (gboolean set);
 extern int tty_baudrate (void);
 
 extern int tty_lowlevel_getch (void);
-extern int tty_getch (void);
 
 /* {{{ Output }}} */
 

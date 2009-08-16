@@ -46,7 +46,7 @@
 #include "../../src/tty/win.h"		/* xterm_flag */
 
 #include "../../src/main.h"
-#include "../../src/layout.h"		/* winch_flag */
+#include "../../src/layout.h"		/* winch_flag, mc_refresh() */
 #include "../../src/cons.saver.h"
 #include "../../src/strutil.h"		/* str_casecmp */
 
@@ -1509,7 +1509,7 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
     static int dirty = 3;
 
     if ((dirty == 3) || is_idle ()) {
-	tty_refresh ();
+	mc_refresh ();
 	dirty = 1;
     } else
 	dirty++;

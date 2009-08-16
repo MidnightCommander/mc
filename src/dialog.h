@@ -112,6 +112,7 @@ typedef struct Dlg_head {
     /* Internal variables */
     int count;			/* Number of widgets */
     struct Widget *current;	/* Curently active widget */
+    void *data;			/* data can be passed to dialog */
     dlg_cb_fn callback;
     struct Dlg_head *parent;	/* Parent dialog */
 } Dlg_head;
@@ -125,17 +126,32 @@ typedef struct Widget Widget;
 /* Widget callback */
 typedef cb_ret_t (*callback_fn) (Widget *widget, widget_msg_t msg, int parm);
 
+/* widget options */
+typedef enum {
+    W_WANT_HOTKEY	= (1 << 1),
+    W_WANT_CURSOR	= (1 << 2),
+    W_WANT_IDLE		= (1 << 3),
+    W_IS_INPUT		= (1 << 4)
+} widget_options_t;
+
+/* Flags for widget repositioning on dialog resize */
+typedef enum {
+    WPOS_KEEP_LEFT	= (1 << 0), /* keep widget distance to left border of dialog */
+    WPOS_KEEP_RIGHT	= (1 << 1), /* keep widget distance to right border of dialog */
+    WPOS_KEEP_TOP	= (1 << 2), /* keep widget distance to top border of dialog */
+    WPOS_KEEP_BOTTOM	= (1 << 3), /* keep widget distance to bottom border of dialog */
+    WPOS_KEEP_HORZ	= WPOS_KEEP_LEFT | WPOS_KEEP_RIGHT,
+    WPOS_KEEP_VERT	= WPOS_KEEP_TOP | WPOS_KEEP_BOTTOM,
+    WPOS_KEEP_ALL	= WPOS_KEEP_HORZ | WPOS_KEEP_VERT
+} widget_pos_flags_t;
+
 /* Every Widget must have this as its first element */
 struct Widget {
     int x, y;
     int cols, lines;
-
-#define  W_WANT_HOTKEY		(1 << 1)
-#define  W_WANT_CURSOR		(1 << 2)
-#define  W_WANT_IDLE		(1 << 3)
-#define  W_IS_INPUT		(1 << 4)
-    int options;
-    int dlg_id;			/* Number of the widget, starting with 0 */
+    widget_options_t options;
+    widget_pos_flags_t pos_flags;	/* repositioning flags */
+    int dlg_id;				/* Number of the widget, starting with 0 */
     struct Widget *next;
     struct Widget *prev;
     callback_fn callback;
@@ -162,7 +178,14 @@ Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
 
 void dlg_set_default_colors (void);
 
-int  add_widget           (Dlg_head *dest, void *Widget);
+int add_widget_autopos (Dlg_head *dest, void *w, widget_pos_flags_t pos_flags);
+int add_widget         (Dlg_head *dest, void *w);
+
+/* sets size of dialog, leaving positioning to automatic mehtods
+   according to dialog flags */ 
+void dlg_set_size (Dlg_head *h, int lines, int cols);
+/* this function allows to set dialog position */
+void dlg_set_position (Dlg_head *h, int y1, int x1, int y2, int x2);
 
 /* Runs dialog d */
 int run_dlg               (Dlg_head *d);

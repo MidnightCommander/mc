@@ -124,21 +124,22 @@ static struct _hotlist_but {
     int ret_cmd, flags, y, x;
     const char *text;
     int   type;
+    widget_pos_flags_t pos_flags;
 } hotlist_but[] = {
-    { B_MOVE, NORMAL_BUTTON,         1,   42, N_("&Move"),       LIST_HOTLIST},
-    { B_REMOVE, NORMAL_BUTTON,       1,   30, N_("&Remove"),     LIST_HOTLIST},
-    { B_APPEND, NORMAL_BUTTON,       1,   15, N_("&Append"),     LIST_MOVELIST},
-    { B_INSERT, NORMAL_BUTTON,       1,    0, N_("&Insert"),     LIST_MOVELIST},
-    { B_NEW_ENTRY, NORMAL_BUTTON,    1,   15, N_("New &Entry"),  LIST_HOTLIST},
-    { B_NEW_GROUP, NORMAL_BUTTON,    1,    0, N_("New &Group"),  LIST_HOTLIST},
-    { B_CANCEL, NORMAL_BUTTON,       0,   53, N_("&Cancel"),     LIST_HOTLIST|LIST_VFSLIST|LIST_MOVELIST},
-    { B_UP_GROUP, NORMAL_BUTTON,     0,   42, N_("&Up"),         LIST_HOTLIST|LIST_MOVELIST},
-    { B_ADD_CURRENT, NORMAL_BUTTON,  0,   20, N_("&Add current"), LIST_HOTLIST},
+    { B_MOVE, NORMAL_BUTTON,         1,   42, N_("&Move"),       LIST_HOTLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
+    { B_REMOVE, NORMAL_BUTTON,       1,   30, N_("&Remove"),     LIST_HOTLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
+    { B_APPEND, NORMAL_BUTTON,       1,   15, N_("&Append"),     LIST_MOVELIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
+    { B_INSERT, NORMAL_BUTTON,       1,    0, N_("&Insert"),     LIST_MOVELIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
+    { B_NEW_ENTRY, NORMAL_BUTTON,    1,   15, N_("New &Entry"),  LIST_HOTLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
+    { B_NEW_GROUP, NORMAL_BUTTON,    1,    0, N_("New &Group"),  LIST_HOTLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
+    { B_CANCEL, NORMAL_BUTTON,       0,   53, N_("&Cancel"),     LIST_HOTLIST | LIST_VFSLIST|LIST_MOVELIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
+    { B_UP_GROUP, NORMAL_BUTTON,     0,   42, N_("&Up"),         LIST_HOTLIST | LIST_MOVELIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
+    { B_ADD_CURRENT, NORMAL_BUTTON,  0,   20, N_("&Add current"), LIST_HOTLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
 #ifdef	USE_VFS
-    { B_REFRESH_VFS, NORMAL_BUTTON,  0,   43, N_("&Refresh"),    LIST_VFSLIST},
-    { B_FREE_ALL_VFS, NORMAL_BUTTON, 0,   20, N_("Fr&ee VFSs now"), LIST_VFSLIST},
+    { B_REFRESH_VFS, NORMAL_BUTTON,  0,   43, N_("&Refresh"),    LIST_VFSLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
+    { B_FREE_ALL_VFS, NORMAL_BUTTON, 0,   20, N_("Fr&ee VFSs now"), LIST_VFSLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
 #endif
-    { B_ENTER, DEFPUSH_BUTTON,       0,    0, N_("Change &To"),  LIST_HOTLIST|LIST_VFSLIST|LIST_MOVELIST},
+    { B_ENTER, DEFPUSH_BUTTON,       0,    0, N_("Change &To"),  LIST_HOTLIST | LIST_VFSLIST | LIST_MOVELIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM }
 };
 
 /* Directory hotlist */
@@ -491,6 +492,11 @@ hotlist_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	update_path_name ();
 	return MSG_HANDLED;
 
+    case DLG_RESIZE:
+	/* simply call dlg_set_size() with new size */
+	dlg_set_size (h, LINES - 2, COLS - 6);
+	return MSG_HANDLED;
+
     default:
 	return default_dlg_callback (h, msg, parm);
     }
@@ -634,13 +640,14 @@ init_hotlist (int list_type)
 
     for (i = 0; i < BUTTONS; i++) {
 	if (hotlist_but[i].type & list_type)
-	    add_widget (hotlist_dlg,
+	    add_widget_autopos (hotlist_dlg,
 			button_new (BY + hotlist_but[i].y,
 				    BX + hotlist_but[i].x,
 				    hotlist_but[i].ret_cmd,
 				    hotlist_but[i].flags,
 				    hotlist_but[i].text,
-				    hotlist_button_callback));
+				    hotlist_button_callback),
+			hotlist_but[i].pos_flags);
     }
 
     /* We add the labels. 
@@ -648,11 +655,12 @@ init_hotlist (int list_type)
      *    pname_group will hold name of current group
      */
     pname = label_new (UY - 11 + LINES, UX + 2, "");
-    add_widget (hotlist_dlg, pname);
+    add_widget_autopos (hotlist_dlg, pname, WPOS_KEEP_BOTTOM | WPOS_KEEP_LEFT);
     if (!hotlist_state.moving) {
-	add_widget (hotlist_dlg,
+	add_widget_autopos (hotlist_dlg,
 		    label_new (UY - 12 + LINES, UX + 1,
-			       _(" Directory path ")));
+			       _(" Directory path ")),
+		    WPOS_KEEP_BOTTOM | WPOS_KEEP_LEFT);
 
 	/* This one holds the displayed pathname */
 	pname_group = label_new (UY, UX + 1, _(" Directory label "));
@@ -672,7 +680,7 @@ init_hotlist (int list_type)
 #endif				/* !USE_VFS */
 	fill_listbox ();
 
-    add_widget (hotlist_dlg, l_hotlist);
+    add_widget_autopos (hotlist_dlg, l_hotlist, WPOS_KEEP_ALL);
     /* add listbox to the dialogs */
 }
 

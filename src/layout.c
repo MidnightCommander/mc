@@ -64,6 +64,7 @@
 #include "tree.h"
 #include "menu.h"
 #include "strutil.h"
+#include "background.h"         /* we_are_background */
 
 /* Needed for the extern declarations of integer parameters */
 #include "dir.h"
@@ -585,6 +586,22 @@ repaint_screen (void)
     tty_refresh ();
 }
 
+void
+mc_refresh (void)
+{
+#ifdef WITH_BACKGROUND
+    if (we_are_background)
+	return;
+#endif				/* WITH_BACKGROUND */
+    if (winch_flag == 0)
+	tty_refresh ();
+    else {
+	/* if winch was caugth, we should do not only redraw screen, but
+	    reposition/resize all */
+	change_screen_size ();
+    }
+}
+
 static void
 panel_do_cols (int index)
 {
@@ -645,10 +662,8 @@ setup_panels (void)
 
     if (command_prompt) {
 	widget_set_size (&cmdline->widget, LINES - 1 - keybar_visible,
-			 promptl, 1,
-			 COLS - promptl - (keybar_visible ? 0 : 1));
-	winput_set_origin (cmdline, promptl,
-			   COLS - promptl - (keybar_visible ? 0 : 1));
+			 promptl, 1, COLS - promptl);
+	winput_set_origin (cmdline, promptl, COLS - promptl);
 	widget_set_size (&the_prompt->widget, LINES - 1 - keybar_visible,
 			 0, 1, promptl);
     } else {
@@ -715,6 +730,8 @@ low_level_change_screen_size (void)
 void
 change_screen_size (void)
 {
+    Dlg_head *d;
+
     winch_flag = 0;
 #if defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4
 #if defined TIOCGWINSZ
@@ -738,8 +755,12 @@ change_screen_size (void)
 #endif
     setup_panels ();
 
-    /* Inform currently running dialog */
-    (*current_dlg->callback) (current_dlg, DLG_RESIZE, 0);
+    /* Inform all running dialogs */
+    d = current_dlg;
+    while (d != NULL) {
+	(*d->callback) (d, DLG_RESIZE, 0);
+	d = d->parent;
+    }
 
 #ifdef RESIZABLE_MENUBAR
     menubar_arrange (the_menubar);
@@ -765,7 +786,7 @@ void set_hintbar(const char *str)
 {
     label_set_text (the_hint, str);
     if (ok_to_refresh > 0)
-        tty_refresh();
+        mc_refresh();
 }
 
 void print_vfs_message (const char *msg, ...)
@@ -796,7 +817,7 @@ void print_vfs_message (const char *msg, ...)
 
 	/* Restore cursor position */
 	tty_gotoyx (row, col);
-	tty_refresh ();
+	mc_refresh ();
 	return;
     }
 
@@ -818,7 +839,7 @@ void rotate_dash (void)
     tty_gotoyx (0, COLS - 1);
     tty_setcolor (NORMAL_COLOR);
     tty_print_char (rotating_dash [pos]);
-    tty_refresh ();
+    mc_refresh ();
     pos++;
 }
 

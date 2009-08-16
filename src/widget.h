@@ -92,7 +92,9 @@ typedef struct WGauge {
 
 GList *history_get (const char *input_name);
 void history_put (const char *input_name, GList *h);
-char *show_hist (GList *history, int widget_y, int widget_x);
+/* for repositioning of history dialog we should pass widget to this
+ * function, as position of history dialog depends on widget's position */
+char *show_hist (GList *history, Widget *widget);
 
 typedef struct {
     Widget widget;
