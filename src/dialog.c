@@ -97,27 +97,6 @@ init_widget (Widget *w, int y, int x, int lines, int cols,
     w->options = W_WANT_CURSOR;
 }
 
-/* Default callback for widgets */
-cb_ret_t
-default_proc (widget_msg_t msg, int parm)
-{
-    (void) parm;
-
-    switch (msg) {
-    case WIDGET_INIT:
-    case WIDGET_FOCUS:
-    case WIDGET_UNFOCUS:
-    case WIDGET_DRAW:
-    case WIDGET_DESTROY:
-    case WIDGET_CURSOR:
-    case WIDGET_IDLE:
-	return MSG_HANDLED;
-
-    default:
-	return MSG_NOT_HANDLED;
-    }
-}
-
 /* Clean the dialog area, draw the frame and the title */
 void
 common_dialog_repaint (struct Dlg_head *h)

@@ -148,6 +148,28 @@ draw_hotkey (Widget *w, const struct hotkey_t hotkey, gboolean focused)
 	tty_print_string (hotkey.end);
 }
 
+
+/* Default callback for widgets */
+cb_ret_t
+default_proc (widget_msg_t msg, int parm)
+{
+    (void) parm;
+
+    switch (msg) {
+    case WIDGET_INIT:
+    case WIDGET_FOCUS:
+    case WIDGET_UNFOCUS:
+    case WIDGET_DRAW:
+    case WIDGET_DESTROY:
+    case WIDGET_CURSOR:
+    case WIDGET_IDLE:
+	return MSG_HANDLED;
+
+    default:
+	return MSG_NOT_HANDLED;
+    }
+}
+
 static int button_event (Gpm_Event *event, void *);
 
 int quote = 0;

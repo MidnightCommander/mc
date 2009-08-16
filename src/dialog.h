@@ -177,7 +177,7 @@ void set_idle_proc        (Dlg_head *d, int enable);
 void dlg_redraw           (Dlg_head *h);
 void destroy_dlg          (Dlg_head *h);
 
-void widget_set_size      (Widget *widget, int x1, int y1, int x2, int y2);
+void widget_set_size      (Widget *widget, int y, int x, int lines, int cols);
 
 void dlg_broadcast_msg    (Dlg_head *h, widget_msg_t message, int reverse);
 
@@ -186,9 +186,6 @@ void init_widget (Widget *w, int y, int x, int lines, int cols,
 
 /* Default callback for dialogs */
 cb_ret_t default_dlg_callback (Dlg_head *h, dlg_msg_t msg, int parm);
-
-/* Default callback for widgets */
-cb_ret_t default_proc (widget_msg_t msg, int parm);
 
 /* Default paint routine for dialogs */
 void common_dialog_repaint (struct Dlg_head *h);

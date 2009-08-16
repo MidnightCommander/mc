@@ -65,6 +65,7 @@ What to do with this?
 /* \todo Fix: Namespace pollution: horrible */
 
 #include <config.h>
+#include <stdlib.h>		/* atoi() */
 #include <sys/types.h>          /* POSIX-required by sys/socket.h and netdb.h */
 #include <netdb.h>		/* struct hostent */
 #include <sys/socket.h>		/* AF_INET */
@@ -1039,7 +1040,7 @@ again:
 
 	port = ntohs (port);
 
-	addr = malloc (NI_MAXHOST);
+	addr = g_malloc (NI_MAXHOST);
 	if (addr == NULL)
 	    ERRNOR (ENOMEM, -1);
 

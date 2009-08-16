@@ -162,6 +162,9 @@ typedef struct WGroupbox {
 } WGroupbox;
 
 
+/* Default callback for widgets */
+cb_ret_t default_proc (widget_msg_t msg, int parm);
+
 /* Constructors */
 WButton *button_new   (int y, int x, int action, int flags, const char *text,
 		      bcback callback);
