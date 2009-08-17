@@ -51,7 +51,6 @@
 #include "../../src/tty/key.h"		/* define_sequence */
 #include "../../src/tty/win.h"
 
-#include "../../src/background.h"	/* we_are_background */
 #include "../../src/strutil.h"		/* str_term_form */
 
 /*** global variables **************************************************/
@@ -497,10 +496,7 @@ tty_tgetstr (const char *cap)
 void
 tty_refresh (void)
 {
-#ifdef WITH_BACKGROUND
-    if (!we_are_background)
-#endif				/* WITH_BACKGROUND */
-	SLsmg_refresh ();
+    SLsmg_refresh ();
 }
 
 void

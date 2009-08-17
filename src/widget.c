@@ -148,6 +148,28 @@ draw_hotkey (Widget *w, const struct hotkey_t hotkey, gboolean focused)
 	tty_print_string (hotkey.end);
 }
 
+
+/* Default callback for widgets */
+cb_ret_t
+default_proc (widget_msg_t msg, int parm)
+{
+    (void) parm;
+
+    switch (msg) {
+    case WIDGET_INIT:
+    case WIDGET_FOCUS:
+    case WIDGET_UNFOCUS:
+    case WIDGET_DRAW:
+    case WIDGET_DESTROY:
+    case WIDGET_CURSOR:
+    case WIDGET_IDLE:
+	return MSG_HANDLED;
+
+    default:
+	return MSG_NOT_HANDLED;
+    }
+}
+
 static int button_event (Gpm_Event *event, void *);
 
 int quote = 0;
@@ -1011,55 +1033,111 @@ listbox_fwd (WListbox *l)
         listbox_select_first (l);
 }
 
+typedef struct {
+    Widget *widget;
+    int count;
+    size_t maxlen;
+} dlg_hist_data;
+
+static cb_ret_t
+dlg_hist_reposition (Dlg_head *dlg_head)
+{
+    dlg_hist_data *data;
+    int x = 0, y, he, wi;
+
+    /* guard checks */
+    if ((dlg_head == NULL)
+	|| (dlg_head->data == NULL))
+	return MSG_NOT_HANDLED;
+
+    data = (dlg_hist_data *) dlg_head->data;
+
+    y = data->widget->y;
+    he = data->count + 2;
+
+    if (he <= y || y > (LINES - 6)) {
+        he = min (he, y - 1);
+        y -= he;
+    } else {
+        y++;
+        he = min (he, LINES - y);
+    }
+
+    if (data->widget->x > 2)
+        x = data->widget->x - 2;
+
+    wi = data->maxlen + 4;
+
+    if ((wi + x) > COLS) {
+        wi = min (wi, COLS);
+        x = COLS - wi;
+    }
+
+    dlg_set_position (dlg_head, y, x, y + he, x + wi);
+
+    return MSG_HANDLED;
+}
+
+static cb_ret_t
+dlg_hist_callback (Dlg_head *h, dlg_msg_t msg, int parm)
+{
+    switch (msg) {
+    case DLG_RESIZE:
+	return dlg_hist_reposition (h);
+
+    default:
+	return default_dlg_callback (h, msg, parm);
+    }
+}
+
 char *
-show_hist (GList *history, int widget_x, int widget_y)
+show_hist (GList *history, Widget *widget)
 {
     GList *hi, *z;
-    size_t maxlen = str_term_width1 (i18n_htitle ()), i, count = 0;
-    int x, y, w, h;
-    char *q = NULL, *r = NULL;
+    size_t maxlen, i, count = 0; 
+    char *q, *r = NULL; 
     Dlg_head *query_dlg;
     WListbox *query_list;
+    dlg_hist_data hist_data;
 
-    z = history;
-    if (!z)
+    if (history == NULL)
 	return NULL;
+
+    maxlen = str_term_width1 (i18n_htitle ());
 
     z = g_list_first (history);
     hi = z;
     while (hi) {
-        if ((i = str_term_width1 ((char *) hi->data)) > maxlen)
-	    maxlen = i;
+	i = str_term_width1 ((char *) hi->data);
+	maxlen = max (maxlen, i);
 	count++;
 	hi = g_list_next (hi);
     }
 
-    y = widget_y;
-    h = count + 2;
-    if (h <= y || y > LINES - 6) {
-	h = min (h, y - 1);
-	y -= h;
-    } else {
-	y++;
-	h = min (h, LINES - y);
-    }
-
-    if (widget_x > 2)
-	x = widget_x - 2;
-    else
-	x = 0;
-    if ((w = maxlen + 4) + x > COLS) {
-	w = min (w, COLS);
-	x = COLS - w;
-    }
+    hist_data.maxlen = maxlen;
+    hist_data.widget = widget;
+    hist_data.count = count;
 
     query_dlg =
-	create_dlg (y, x, h, w, dialog_colors, NULL, "[History-query]",
-		    i18n_htitle (), DLG_COMPACT);
-    query_list = listbox_new (1, 1, h - 2, w - 2, NULL);
-    add_widget (query_dlg, query_list);
+	create_dlg (0, 0, 4, 4, dialog_colors, dlg_hist_callback,
+			"[History-query]", i18n_htitle (), DLG_COMPACT);
+    query_dlg->data = &hist_data;
 
-    if (y < widget_y) {
+    query_list = listbox_new (1, 1, 2, 2, NULL);
+
+    /* this call makes list stick to all sides of dialog, effectively make
+       it be resized with dialog */
+    add_widget_autopos (query_dlg, query_list, WPOS_KEEP_ALL);
+
+    /* to avoid diplicating of (calculating sizes in two places)
+       code, call dlg_hist_callback function here, to set dialog and
+       controls positions.
+       The main idea - create 4x4 dialog and add 2x2 list in
+       center of it, and let dialog function resize it to needed
+       size. */
+    dlg_hist_callback (query_dlg, DLG_RESIZE, 0);
+
+    if (query_dlg->y < widget->y) {
 	/* traverse */
 	hi = z;
 	while (hi) {
@@ -1088,10 +1166,10 @@ show_hist (GList *history, int widget_x, int widget_y)
 }
 
 static void
-do_show_hist (WInput * in)
+do_show_hist (WInput *in)
 {
     char *r;
-    r = show_hist (in->history, in->widget.x, in->widget.y);
+    r = show_hist (in->history, &in->widget);
     if (r) {
 	assign_text (in, r);
 	g_free (r);
@@ -2210,6 +2288,9 @@ listbox_callback (Widget *w, widget_msg_t msg, int parm)
 	listbox_destroy (l);
 	return MSG_HANDLED;
 
+    case WIDGET_RESIZED:
+	return MSG_HANDLED;
+
     default:
 	return default_proc (msg, parm);
     }
@@ -2246,7 +2327,7 @@ listbox_event (Gpm_Event *event, void *data)
 	/* We need to refresh ourselves since the dialog manager doesn't */
 	/* know about this event */
 	listbox_callback (w, WIDGET_DRAW, 0);
-	tty_refresh ();
+	mc_refresh ();
 	return MOU_REPEAT;
     }
 

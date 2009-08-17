@@ -3079,7 +3079,7 @@ view_search_update_cmd_callback(const void *user_data, gsize char_offset)
         view->update_activate += view->update_steps;
         if (verbose) {
             view_percent (view, char_offset);
-            tty_refresh ();
+            mc_refresh ();
         }
         if (tty_got_interrupt ())
             return MC_SEARCH_CB_ABORT;
@@ -3169,7 +3169,7 @@ do_search (WView *view)
 
     if (verbose) {
         d = create_message (D_NORMAL, _("Search"), _("Searching %s"), view->last_search_string);
-        tty_refresh ();
+        mc_refresh ();
     }
 
     /*for avoid infinite search loop we need to increase or decrease start offset of search */
@@ -3217,7 +3217,7 @@ do_search (WView *view)
                 dlg_run_done (d);
                 destroy_dlg (d);
                 d = create_message (D_NORMAL, _("Search"), _("Seeking to search result"));
-                tty_refresh ();
+                mc_refresh ();
             }
 
             view_moveto_match (view);

@@ -553,7 +553,7 @@ directory_history_list (WPanel *panel)
     if (!panel->dir_history)
 	return;
 
-    s = show_hist (panel->dir_history, panel->widget.x, panel->widget.y);
+    s = show_hist (panel->dir_history, &panel->widget);
 
     if (!s)
 	return;
@@ -598,7 +598,7 @@ load_prompt (int fd, void *unused)
 	 * automatically: force a cursor update and a screen refresh
 	 */
 	update_cursor (midnight_dlg);
-	tty_refresh ();
+	mc_refresh ();
     }
     update_prompt = 1;
     return 0;

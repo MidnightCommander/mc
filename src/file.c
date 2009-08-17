@@ -427,7 +427,7 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 	file_progress_show_target (ctx, dst_path) == FILE_ABORT)
 	return FILE_ABORT;
 
-    tty_refresh ();
+    mc_refresh ();
 
     while (mc_stat (dst_path, &sb2) == 0) {
 	if (S_ISDIR (sb2.st_mode)) {
@@ -582,7 +582,7 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 
     return_status = file_progress_show (ctx, 0, file_size);
 
-    tty_refresh ();
+    mc_refresh ();
 
     if (return_status != FILE_CONT)
 	goto ret;
@@ -682,7 +682,7 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 		return_status =
 		    file_progress_show (ctx, n_read_total + ctx->do_reget, file_size);
 	    }
-	    tty_refresh ();
+	    mc_refresh ();
 	    if (return_status != FILE_CONT)
 		goto ret;
 	}
@@ -996,7 +996,7 @@ move_file_file (FileOpContext *ctx, const char *s, const char *d,
 	|| file_progress_show_target (ctx, d) == FILE_ABORT)
 	return FILE_ABORT;
 
-    tty_refresh ();
+    mc_refresh ();
 
     while (mc_lstat (s, &src_stats) != 0) {
 	/* Source doesn't exist */
@@ -1071,7 +1071,7 @@ move_file_file (FileOpContext *ctx, const char *s, const char *d,
 	|| (return_status = file_progress_show (ctx, 0, 0)) != FILE_CONT)
 	return return_status;
 
-    tty_refresh ();
+    mc_refresh ();
 
   retry_src_remove:
     if (mc_unlink (s)) {
@@ -1107,7 +1107,7 @@ move_dir_dir (FileOpContext *ctx, const char *s, const char *d,
 	file_progress_show_target (ctx, d) == FILE_ABORT)
 	return FILE_ABORT;
 
-    tty_refresh ();
+    mc_refresh ();
 
     mc_stat (s, &sbuf);
     dstat_ok = (mc_stat (d, &dbuf) == 0);
@@ -1178,7 +1178,7 @@ move_dir_dir (FileOpContext *ctx, const char *s, const char *d,
 	|| (return_status = file_progress_show (ctx, 0, 0)) != FILE_CONT)
 	goto ret;
 
-    tty_refresh ();
+    mc_refresh ();
     if (ctx->erase_at_end) {
 	for (; erase_list && return_status != FILE_ABORT;) {
 	    if (S_ISDIR (erase_list->st_mode)) {
@@ -1217,7 +1217,7 @@ erase_file (FileOpContext *ctx, const char *s, off_t *progress_count,
 
     if (file_progress_show_deleting (ctx, s) == FILE_ABORT)
 	return FILE_ABORT;
-    tty_refresh ();
+    mc_refresh ();
 
     if (progress_count && mc_lstat (s, &buf)) {
 	/* ignore, most likely the mc_unlink fails, too */
@@ -1282,7 +1282,7 @@ recursive_erase (FileOpContext *ctx, const char *s, off_t *progress_count,
 	return return_status;
     if (file_progress_show_deleting (ctx, s) == FILE_ABORT)
 	return FILE_ABORT;
-    tty_refresh ();
+    mc_refresh ();
 
     while (my_rmdir (s)) {
 	return_status =
@@ -1334,7 +1334,7 @@ erase_dir (FileOpContext *ctx, const char *s, off_t *progress_count,
 
     if (file_progress_show_deleting (ctx, s) == FILE_ABORT)
 	return FILE_ABORT;
-    tty_refresh ();
+    mc_refresh ();
 
     /* The old way to detect a non empty directory was:
        error = my_rmdir (s);
@@ -1376,7 +1376,7 @@ erase_dir_iff_empty (FileOpContext *ctx, const char *s)
 
     if (file_progress_show_deleting (ctx, s) == FILE_ABORT)
 	return FILE_ABORT;
-    tty_refresh ();
+    mc_refresh ();
 
     if (1 != check_dir_is_empty (s))	/* not empty or error */
 	return FILE_CONT;
@@ -2110,7 +2110,7 @@ panel_operate (void *source_panel, FileOperation operation,
 		&& file_progress_show (ctx, 0, 0) == FILE_ABORT)
 		goto clean_up;
 
-	    tty_refresh ();
+	    mc_refresh ();
 	}			/* Loop for every file */
     }				/* Many entries */
   clean_up:

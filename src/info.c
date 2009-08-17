@@ -29,6 +29,7 @@
 #include "../src/tty/mouse.h"		/* Gpm_Event */
 #include "../src/tty/color.h"
 #include "dialog.h"
+#include "widget.h"		/* default_proc*/
 #include "info.h"
 #include "dir.h"		/* required by panel */
 #include "panel.h"		/* for the panel structure */

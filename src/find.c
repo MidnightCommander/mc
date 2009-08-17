@@ -52,6 +52,7 @@
 #include "cmd.h"		/* view_file_at_line */
 #include "boxes.h"
 #include "history.h"		/* MC_HISTORY_SHARED_SEARCH */
+#include "layout.h"		/* mc_refresh() */
 
 /* Size of the find parameters window */
 #if HAVE_CHARSET
@@ -664,7 +665,7 @@ search_content (Dlg_head *h, const char *directory, const char *filename)
     g_snprintf (buffer, sizeof (buffer), _("Grepping in %s"), str_trunc (filename, FIND2_X_USE));
 
     status_update (buffer);
-    tty_refresh ();
+    mc_refresh ();
 
     tty_enable_interrupt_key ();
     tty_got_interrupt ();
@@ -896,7 +897,7 @@ do_search (struct Dlg_head *h)
 	    tty_setcolor (DLG_NORMALC (h));
 	    dlg_move (h, FIND2_Y - 7, FIND2_X - 4);
 	    tty_print_char (rotating_dash [pos]);
-	    tty_refresh ();
+	    mc_refresh ();
 	}
     } else
 	goto do_search_begin;

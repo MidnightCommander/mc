@@ -37,6 +37,7 @@
 #include "menu.h"
 #include "help.h"
 #include "dialog.h"
+#include "widget.h"
 #include "main.h"		/* is_right */
 #include "strutil.h"
 
