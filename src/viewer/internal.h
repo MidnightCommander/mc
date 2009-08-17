@@ -216,6 +216,8 @@ gboolean mcview_load_command_output (mcview_t *, const char *);
 void mcview_set_datasource_vfs_pipe (mcview_t *, int);
 void mcview_set_datasource_string (mcview_t *, const char *);
 
+/* dialog.c: */
+gboolean mcview_dialog_search (mcview_t *);
 
 /* display.c: */
 void mcview_update (mcview_t *);
