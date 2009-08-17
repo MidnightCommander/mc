@@ -1560,7 +1560,7 @@ void edit_update_curs_row (WEdit * edit)
 
 void edit_update_curs_col (WEdit * edit)
 {
-    edit->curs_col = edit_move_forward3(edit, edit_bol(edit, edit->curs1), 0, edit->curs1) + option_line_state_width;
+    edit->curs_col = edit_move_forward3(edit, edit_bol(edit, edit->curs1), 0, edit->curs1);
 }
 
 int

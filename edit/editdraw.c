@@ -215,6 +215,9 @@ void edit_scroll_screen_over_cursor (WEdit * edit)
     if (edit->num_widget_lines <= 0 || edit->num_widget_columns <= 0)
 	return;
 
+    edit->num_widget_columns -= EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
+    edit->num_widget_lines -= EDIT_TEXT_VERTICAL_OFFSET - 1;
+
     r_extreme = EDIT_RIGHT_EXTREME;
     l_extreme = EDIT_LEFT_EXTREME;
     b_extreme = EDIT_BOTTOM_EXTREME;
@@ -251,6 +254,9 @@ void edit_scroll_screen_over_cursor (WEdit * edit)
     if (outby > 0)
 	edit_scroll_upward (edit, outby);
     edit_update_curs_row (edit);
+
+    edit->num_widget_lines += EDIT_TEXT_VERTICAL_OFFSET - 1;
+    edit->num_widget_columns += EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
 }
 
 #define edit_move(x,y) widget_move(edit, y, x);
@@ -266,7 +272,7 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
 {
     struct line_s *p;
 
-    int x = start_col_real + EDIT_TEXT_HORIZONTAL_OFFSET;
+    int x = start_col_real;
     int x1 = start_col + EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
     int y = row + EDIT_TEXT_VERTICAL_OFFSET;
     int cols_to_skip = abs (x);
@@ -274,7 +280,7 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
 
     tty_setcolor (EDITOR_NORMAL_COLOR);
     tty_draw_hline (edit->widget.y + y, edit->widget.x + x1,
-		    ' ', end_col + 1 - EDIT_TEXT_HORIZONTAL_OFFSET - x1);
+		    ' ', end_col + 1 - start_col);
 
     if (option_line_state) {
         int i;
@@ -356,6 +362,11 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
     int utf8lag = 0;
     unsigned int cur_line = 0;
     char line_stat[LINE_STATE_WIDTH + 1];
+
+    if (row > edit->num_widget_lines - EDIT_TEXT_VERTICAL_OFFSET) {
+         return;
+    }
+    end_col -= EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
 
     edit_get_syntax_color (edit, b - 1, &color);
     q = edit_move_forward3 (edit, b, start_col - edit->start_col, 0);

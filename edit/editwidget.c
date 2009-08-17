@@ -102,7 +102,7 @@ edit_event (WEdit * edit, Gpm_Event * event, int *result)
             edit->prev_col = event->x;
         }
     } else {
-        edit->prev_col = event->x - edit->start_col - 1 - option_line_state_width;
+        edit->prev_col = event->x - edit->start_col - 1;
     }
 
     if (--event->y > (edit->curs_row + 1))
@@ -370,7 +370,8 @@ edit_callback (Widget *w, widget_msg_t msg, int parm)
 
     case WIDGET_CURSOR:
 	widget_move (&e->widget, e->curs_row + EDIT_TEXT_VERTICAL_OFFSET,
-		     e->curs_col + e->start_col + e->over_col);
+		     e->curs_col + e->start_col + e->over_col +
+		     EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width);
 	return MSG_HANDLED;
 
     case WIDGET_DESTROY:
