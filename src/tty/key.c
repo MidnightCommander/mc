@@ -1500,7 +1500,7 @@ int
 tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
 {
     int c;
-    static int flag;		/* Return value from select */
+    static int flag = 0;	/* Return value from select */
 #ifdef HAVE_LIBGPM
     static struct Gpm_Event ev;	/* Mouse event */
 #endif
@@ -1527,7 +1527,7 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
     }
 
     /* Repeat if using mouse */
-    while (mouse_enabled && (pending_keys == NULL)) {
+    while (pending_keys == NULL) {
 	int maxfdp;
 	fd_set select_set;
 
@@ -1536,7 +1536,7 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
 	maxfdp = max (add_selects (&select_set), input_fd);
 
 #ifdef HAVE_LIBGPM
-	if (use_mouse_p == MOUSE_GPM) {
+	if (mouse_enabled && (use_mouse_p == MOUSE_GPM)) {
 	    if (gpm_fd < 0) {
 		/* Connection to gpm broken, possibly gpm has died */
 		mouse_enabled = FALSE;
@@ -1577,6 +1577,7 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
 	    timeout.tv_sec = 0;
 	    timeout.tv_usec = 0;
 	}
+
 	tty_enable_interrupt_key ();
 	flag = select (maxfdp + 1, &select_set, NULL, NULL, time_addr);
 	tty_disable_interrupt_key ();
@@ -1601,7 +1602,8 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
 	if (FD_ISSET (input_fd, &select_set))
 	    break;
 #ifdef HAVE_LIBGPM
-	if (use_mouse_p == MOUSE_GPM && gpm_fd > 0 && FD_ISSET (gpm_fd, &select_set)) {
+	if (mouse_enabled && use_mouse_p == MOUSE_GPM
+	    && gpm_fd > 0 && FD_ISSET (gpm_fd, &select_set)) {
 	    Gpm_GetEvent (&ev);
 	    Gpm_FitEvent (&ev);
 	    *event = ev;
@@ -1609,6 +1611,7 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
 	}
 #endif				/* !HAVE_LIBGPM */
     }
+
 #ifndef HAVE_SLANG
     flag = is_wintouched (stdscr);
     untouchwin (stdscr);
@@ -1616,15 +1619,15 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
     c = block ? getch_with_delay () : get_key_code (1);
 
 #ifndef HAVE_SLANG
-    if (flag)
+    if (flag > 0)
 	tty_touch_screen ();
 #endif				/* !HAVE_SLANG */
 
-    if (c == MCKEY_MOUSE
+    if (mouse_enabled && (c == MCKEY_MOUSE
 #ifdef KEY_MOUSE
-	|| c == KEY_MOUSE
+			    || c == KEY_MOUSE
 #endif				/* KEY_MOUSE */
-	) {
+	)) {
 	/* Mouse event */
 	xmouse_get_event (event);
 	return (event->type != 0) ? EV_MOUSE : EV_NONE;
