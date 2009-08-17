@@ -91,14 +91,18 @@ edit_event (WEdit * edit, Gpm_Event * event, int *result)
     if (event->type & (GPM_DOWN | GPM_UP))
 	edit_push_key_press (edit);
 
-    long line_len = edit_move_forward3 (edit, edit_bol (edit, edit->curs1), 0,
-                                        edit_eol(edit, edit->curs1));
-    if ( event->x > line_len ) {
-        edit->over_col = event->x - line_len;
-        edit->prev_col = line_len;
+    if (option_cursor_beyond_eol) {
+        long line_len = edit_move_forward3 (edit, edit_bol (edit, edit->curs1), 0,
+                                            edit_eol(edit, edit->curs1));
+        if ( event->x > line_len ) {
+            edit->over_col = event->x - line_len;
+            edit->prev_col = line_len;
+        } else {
+            edit->over_col = 0;
+            edit->prev_col = event->x;
+        }
     } else {
-        edit->over_col = 0;
-        edit->prev_col = event->x;
+        edit->prev_col = event->x - edit->start_col - 1 - option_line_state_width;
     }
 
     if (--event->y > (edit->curs_row + 1))

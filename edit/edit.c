@@ -78,6 +78,7 @@ int option_save_mode = EDIT_QUICK_SAVE;
 int option_save_position = 1;
 int option_max_undo = 32768;
 int option_persistent_selections = 1;
+int option_cursor_beyond_eol = 1;
 int option_line_state = 0;
 int option_line_state_width = 0;
 
@@ -1627,16 +1628,31 @@ edit_move_to_prev_col (WEdit * edit, long p)
 
     edit_cursor_move (edit, edit_move_forward3 (edit, p, prev + edit->over_col, 0) - edit->curs1);
 
-    long line_len = edit_move_forward3 (edit, edit_bol (edit, edit->curs1), 0, edit_eol(edit, edit->curs1));
+    if (option_cursor_beyond_eol) {
+        long line_len = edit_move_forward3 (edit, edit_bol (edit, edit->curs1), 0, edit_eol(edit, edit->curs1));
 
-    if (line_len < prev + edit->over_col) {
-        edit->over_col = prev + over - line_len;
-        edit->prev_col = line_len;
-        edit->curs_col = line_len;
+        if (line_len < prev + edit->over_col) {
+            edit->over_col = prev + over - line_len;
+            edit->prev_col = line_len;
+            edit->curs_col = line_len;
+        } else {
+            edit->curs_col = prev + over;
+            edit->prev_col = edit->curs_col;
+            edit->over_col = 0;
+        }
     } else {
-        edit->curs_col = prev + over;
-        edit->prev_col = edit->curs_col;
-        edit->over_col = 0;
+        if (is_in_indent (edit) && option_fake_half_tabs) {
+            edit_update_curs_col (edit);
+            if (space_width)
+            if (edit->curs_col % (HALF_TAB_SIZE * space_width)) {
+                int q = edit->curs_col;
+                edit->curs_col -= (edit->curs_col % (HALF_TAB_SIZE * space_width));
+                p = edit_bol (edit, edit->curs1);
+                edit_cursor_move (edit, edit_move_forward3 (edit, p, edit->curs_col, 0) - edit->curs1);
+                if (!left_of_four_spaces (edit))
+                    edit_cursor_move (edit, edit_move_forward3 (edit, p, q, 0) - edit->curs1);
+            }
+        }
     }
 }
 
@@ -2013,7 +2029,7 @@ static void edit_right_char_move_cmd (WEdit * edit)
     } else {
         c = edit_get_byte (edit, edit->curs1);
     }
-    if (c == '\n') {
+    if (option_cursor_beyond_eol && c == '\n') {
         edit->over_col++;
     } else {
         edit_cursor_move (edit, cw);
@@ -2028,7 +2044,7 @@ static void edit_left_char_move_cmd (WEdit * edit)
         if ( cw < 1 )
             cw = 1;
     }
-    if (edit->over_col > 0) {
+    if (option_cursor_beyond_eol && edit->over_col > 0) {
         edit->over_col--;
     } else {
         edit_cursor_move (edit, -cw);
@@ -2477,7 +2493,7 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	    if (edit_get_byte (edit, edit->curs1) != '\n')
 		edit_delete (edit, 0);
 	}
-        if ( edit->over_col > 0 )
+        if ( option_cursor_beyond_eol && edit->over_col > 0 )
             edit_insert_over (edit);
 #ifdef HAVE_CHARSET
 	if ( char_for_insertion > 255 && utf8_display == 0 ) {
@@ -2568,7 +2584,7 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
                 break;
             }
         }
-        if ( edit->over_col > 0 ) {
+        if ( option_cursor_beyond_eol && edit->over_col > 0 ) {
             edit->over_col--;
             break;
         }
@@ -2598,7 +2614,7 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
             }
         }
 
-        if ( edit->over_col > 0 )
+        if ( option_cursor_beyond_eol && edit->over_col > 0 )
             edit_insert_over (edit);
 
 	if (option_fake_half_tabs) {
@@ -2661,7 +2677,7 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
     case CK_Left_Highlight:
 	if (option_fake_half_tabs) {
 	    if (is_in_indent (edit) && right_of_four_spaces (edit)) {
-	        if ( edit->over_col > 0)
+	        if ( option_cursor_beyond_eol && edit->over_col > 0)
 	            edit->over_col--;
 	        else
 		    edit_cursor_move (edit, -HALF_TAB_SIZE);
@@ -2749,7 +2765,8 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
         if ( edit->mark1 != edit->mark2 && !option_persistent_selections ) {
             edit_move_block_to_right (edit);
         } else {
-            edit_insert_over (edit);
+            if ( option_cursor_beyond_eol )
+                edit_insert_over (edit);
             edit_tab_cmd (edit);
             if (option_auto_para_formatting) {
                 format_paragraph (edit, 0);
@@ -2868,7 +2885,7 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	edit_cut_to_X_buf_cmd (edit);
 	break;
     case CK_XPaste:
-        if ( edit->over_col > 0 )
+        if ( option_cursor_beyond_eol && edit->over_col > 0 )
             edit_insert_over (edit);
 	edit_paste_from_X_buf_cmd (edit);
 	break;

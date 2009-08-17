@@ -51,6 +51,7 @@ extern int option_return_does_auto_indent;
 extern int option_backspace_through_tabs;
 extern int option_fake_half_tabs;
 extern int option_persistent_selections;
+extern int option_cursor_beyond_eol;
 extern int option_line_state;
 extern int option_save_mode;
 extern int option_save_position;
