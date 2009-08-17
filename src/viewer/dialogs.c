@@ -74,6 +74,7 @@ mcview_dialog_search (mcview_t * view)
     int tall_codepages = (int) view->search_all_codepages;
     int tsearch_case = (int) view->search_case;
     int tsearch_backwards = (int) view->search_backwards;
+    int qd_result;
 
     gchar **list_of_types = mc_search_get_types_strings_array ();
     int SEARCH_DLG_HEIGHT =
@@ -121,8 +122,10 @@ mcview_dialog_search (mcview_t * view)
 
     convert_to_display (defval);
 
+    qd_result = quick_dialog (&Quick_input);
+    g_strfreev (list_of_types);
 
-    if (quick_dialog (&Quick_input) == B_CANCEL) {
+    if (qd_result == B_CANCEL) {
         g_free (exp);
         g_free (defval);
         return FALSE;
