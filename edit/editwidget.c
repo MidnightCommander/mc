@@ -91,7 +91,19 @@ edit_event (WEdit * edit, Gpm_Event * event, int *result)
     if (event->type & (GPM_DOWN | GPM_UP))
 	edit_push_key_press (edit);
 
-    edit->prev_col = event->x - edit->start_col - 1 - option_line_state_width;
+    if (option_cursor_beyond_eol) {
+        long line_len = edit_move_forward3 (edit, edit_bol (edit, edit->curs1), 0,
+                                            edit_eol(edit, edit->curs1));
+        if ( event->x > line_len ) {
+            edit->over_col = event->x - line_len;
+            edit->prev_col = line_len;
+        } else {
+            edit->over_col = 0;
+            edit->prev_col = event->x;
+        }
+    } else {
+        edit->prev_col = event->x - edit->start_col - 1 - option_line_state_width;
+    }
 
     if (--event->y > (edit->curs_row + 1))
 	edit_move_down (edit, event->y - (edit->curs_row + 1), 0);
@@ -358,7 +370,7 @@ edit_callback (Widget *w, widget_msg_t msg, int parm)
 
     case WIDGET_CURSOR:
 	widget_move (&e->widget, e->curs_row + EDIT_TEXT_VERTICAL_OFFSET,
-		     e->curs_col + e->start_col);
+		     e->curs_col + e->start_col + e->over_col);
 	return MSG_HANDLED;
 
     case WIDGET_DESTROY:
