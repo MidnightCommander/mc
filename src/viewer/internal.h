@@ -32,8 +32,9 @@ enum view_ds {
 /* Offset in bytes into a file */
 typedef enum {
     INVALID_OFFSET = ((off_t) - 1),
-    OFFSETTYPE_MAX = ((off_t)(1 << (sizeof (off_t) * 8 - 1) - 1))
-} mcview_offset_t;
+    OFFSETTYPE_MAX = ((off_t) (1 << (sizeof (off_t) * 8 - 1) - 1))
+}
+mcview_offset_t;
 
 enum ccache_type {
     CCACHE_OFFSET,

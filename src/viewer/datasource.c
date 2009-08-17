@@ -140,7 +140,7 @@ mcview_get_ptr_string (mcview_t * view, off_t byte_index)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-mcview_get_utf (mcview_t * view, off_t byte_index, int *char_width, gboolean *result)
+mcview_get_utf (mcview_t * view, off_t byte_index, int *char_width, gboolean * result)
 {
     gchar *str = NULL;
     int res = -1;

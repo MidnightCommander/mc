@@ -128,9 +128,9 @@ mcview_search_cmd_callback (const void *user_data, gsize char_offset)
     }
 #if 0                           /* AB:FIXME */
     if (view_read_test_nroff_back (view, &view->search_onechar_info)) {
-        if (cmp (view->search_onechar_info.chi1, "_") &&
-            (!cmp (view->search_onechar_info.cnxt, "_")
-             || !cmp (view->search_onechar_info.chi2, "\b"))
+        if (cmp (view->search_onechar_info.chi1, "_") && (!cmp (view->search_onechar_info.cnxt, "_")
+                                                          || !cmp (view->search_onechar_info.chi2,
+                                                                   "\b"))
             )
             view->search_numNeedSkipChar = 2;
         else
