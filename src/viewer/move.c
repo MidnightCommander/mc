@@ -386,9 +386,13 @@ mcview_offset_to_coord (mcview_t * view, off_t * ret_line, off_t * ret_column, o
 
     coord.cc_offset = offset;
     mcview_ccache_lookup (view, &coord, CCACHE_LINECOL);
-    *ret_line = coord.cc_line;
-    *ret_column = (view->text_nroff_mode)
-        ? coord.cc_nroff_column : coord.cc_column;
+
+    if (ret_line)
+        *ret_line = coord.cc_line;
+
+    if (ret_column)
+        *ret_column = (view->text_nroff_mode)
+            ? coord.cc_nroff_column : coord.cc_column;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -409,12 +413,25 @@ mcview_place_cursor (mcview_t * view)
 /* --------------------------------------------------------------------------------------------- */
 
 /* we have set view->search_start and view->search_end and must set 
- * view->dpy_text_column, view->first_showed_line and view->dpy_start
- * try to displaye maximum of match */
+ * view->dpy_text_column and view->dpy_start
+ * try to display maximum of match */
 void
 mcview_moveto_match (mcview_t * view)
 {
-    /* AB:FIXME */
+    off_t search_line, offset;
+
+    mcview_offset_to_coord (view, &search_line, NULL, view->search_start);
+    mcview_coord_to_offset (view, &offset, search_line, 0);
+
+    if (view->hex_mode) {
+        view->hex_cursor = offset;
+        view->dpy_start = offset - offset % view->bytes_per_line;
+    } else {
+        view->dpy_start = offset;
+    }
+
+    mcview_scroll_to_cursor (view);
+    view->dirty++;
 }
 
 /* --------------------------------------------------------------------------------------------- */

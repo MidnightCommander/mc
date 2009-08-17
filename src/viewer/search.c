@@ -74,7 +74,6 @@ mcview_search_update_steps (mcview_t * view)
 static gboolean
 mcview_find (mcview_t * view, gsize search_start, gsize * len)
 {
-#if 0                           /* AB:FIXME */
     gsize search_end;
 
     view->search_numNeedSkipChar = 0;
@@ -82,13 +81,12 @@ mcview_find (mcview_t * view, gsize search_start, gsize * len)
     if (view->search_backwards) {
         search_end = mcview_get_filesize (view);
         while ((int) search_start >= 0) {
-            if (search_end - search_start > view->search->original_len
+            if (search_end > search_start + view->search->original_len
                 && mc_search_is_fixed_search_str (view->search))
                 search_end = search_start + view->search->original_len;
 
-            view_read_start (view, &view->search_onechar_info, search_start);
-
-            if (mc_search_run (view->search, (void *) view, search_start, search_end, len))
+            if (mc_search_run (view->search, (void *) view, search_start, search_end, len)
+                && view->search->normal_offset == search_start)
                 return TRUE;
 
             search_start--;
@@ -96,10 +94,8 @@ mcview_find (mcview_t * view, gsize search_start, gsize * len)
         view->search->error_str = g_strdup (_(" Search string not found "));
         return FALSE;
     }
-    view_read_start (view, &view->search_onechar_info, search_start);
     return mc_search_run (view->search, (void *) view, search_start, mcview_get_filesize (view),
                           len);
-#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -207,7 +203,7 @@ mcview_do_search (mcview_t * view)
 
     do {
         if (mcview_find (view, search_start, &match_len)) {
-            view->search_start = view->search->normal_offset +
+            view->search_start = view->search->normal_offset + 1 +
                 mcview__get_nroff_real_len (view,
                                             view->search->start_buffer,
                                             view->search->normal_offset -
