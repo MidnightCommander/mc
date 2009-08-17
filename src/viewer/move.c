@@ -54,7 +54,7 @@
 #include <config.h>
 
 #include "../src/global.h"
-#include "../src/myslang.h"
+#include "../src/tty/tty.h"
 #include "../src/viewer/internal.h"
 
 /*** global variables ****************************************************************************/

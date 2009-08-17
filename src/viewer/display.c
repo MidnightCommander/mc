@@ -38,10 +38,9 @@
 #include <config.h>
 
 #include "../src/global.h"
-#include "../src/myslang.h"
-#include "../src/color.h"
-#include "../src/tty.h"
-#include "../src/key.h"
+#include "../src/tty/color.h"
+#include "../src/tty/tty.h"
+#include "../src/tty/key.h"
 #include "../src/strutil.h"
 #include "../src/viewer/internal.h"
 #include "../src/viewer/mcviewer.h"
@@ -136,19 +135,19 @@ mcview_display_status (mcview_t * view)
 
     tty_setcolor (SELECTED_COLOR);
     widget_move (view, top, left);
-    hline (' ', width);
+    tty_draw_hline (top, left, ' ', width);
 
     file_label = _("File: %s");
     file_label_width = str_term_width1 (file_label) - 2;
     file_name = view->filename ? view->filename : view->command ? view->command : "";
 
     if (width < file_label_width + 6)
-        addstr (str_fit_to_term (file_name, width, J_LEFT_FIT));
+        tty_print_string (str_fit_to_term (file_name, width, J_LEFT_FIT));
     else {
         i = (width > 22 ? 22 : width) - file_label_width;
 
         tmp = g_strdup_printf (file_label, str_fit_to_term (file_name, i, J_LEFT_FIT));
-        addstr (tmp);
+        tty_print_string (tmp);
         g_free (tmp);
         if (width > 46) {
             widget_move (view, top, left + 24);
@@ -339,8 +338,9 @@ mcview_display_clean (mcview_t * view)
     tty_setcolor (NORMAL_COLOR);
     widget_erase ((Widget *) view);
     if (view->dpy_frame_size != 0) {
-        draw_double_box (view->widget.parent, view->widget.y,
-                         view->widget.x, view->widget.lines, view->widget.cols);
+        tty_draw_box (view->widget.y, view->widget.x, view->widget.lines, view->widget.cols);
+/*        draw_double_box (view->widget.parent, view->widget.y,
+                         view->widget.x, view->widget.lines, view->widget.cols);*/
     }
 }
 
@@ -380,7 +380,7 @@ mcview_display_ruler (mcview_t * view)
             }
         }
     }
-    attrset (NORMAL_COLOR);
+    tty_setcolor (NORMAL_COLOR);
 }
 
 /* --------------------------------------------------------------------------------------------- */

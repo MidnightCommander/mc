@@ -41,8 +41,8 @@
 #include <fcntl.h>
 
 #include "../src/global.h"
-#include "../src/tty.h"
-#include "../src/color.h"
+#include "../src/tty/tty.h"
+#include "../src/tty/color.h"
 #include "../src/main.h"
 #include "../src/wtools.h"
 #include "../src/charsets.h"
@@ -116,7 +116,7 @@ mcview_display_hex (mcview_t * view)
         widget_move (view, top + row, left);
         tty_setcolor (MARKED_COLOR);
         for (i = 0; col < width && hex_buff[i] != '\0'; i++) {
-            addch (hex_buff[i]);
+            tty_print_char (hex_buff[i]);
 /*		tty_print_char(hex_buff[i]);*/
             col += 1;
         }

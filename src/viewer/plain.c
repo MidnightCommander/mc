@@ -38,10 +38,10 @@
 #include <config.h>
 
 #include "../src/global.h"
-#include "../src/myslang.h"
 #include "../src/main.h"
-#include "../src/color.h"
 #include "../src/charsets.h"
+#include "../src/tty/tty.h"
+#include "../src/tty/color.h"
 #include "../src/viewer/internal.h"
 
 /*** global variables ****************************************************************************/

@@ -41,8 +41,8 @@
 
 #include "../src/global.h"
 #include "../src/strutil.h"
-#include "../src/myslang.h"
 #include "../src/main.h"
+#include "../src/tty/tty.h"
 #include "../src/viewer/internal.h"
 
 /*** global variables ****************************************************************************/

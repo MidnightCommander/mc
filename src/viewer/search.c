@@ -40,7 +40,7 @@
 #include "../src/global.h"
 #include "../src/setup.h"
 #include "../src/wtools.h"
-#include "../src/tty.h"
+#include "../src/tty/tty.h"
 #include "../src/viewer/internal.h"
 
 /*** global variables ****************************************************************************/
@@ -158,9 +158,9 @@ mcview_search_update_cmd_callback (const void *user_data, gsize char_offset)
         view->update_activate += view->update_steps;
         if (verbose) {
             mcview_percent (view, char_offset);
-            mc_refresh ();
+            tty_refresh ();
         }
-        if (got_interrupt ())
+        if (tty_got_interrupt ())
             return MC_SEARCH_CB_ABORT;
     }
     /* may be in future return from this callback will change current position
@@ -183,7 +183,7 @@ mcview_do_search (mcview_t * view)
 
     if (verbose) {
         d = create_message (D_NORMAL, _("Search"), _("Searching %s"), view->last_search_string);
-        mc_refresh ();
+        tty_refresh ();
     }
 
     /*for avoid infinite search loop we need to increase or decrease start offset of search */
@@ -203,7 +203,7 @@ mcview_do_search (mcview_t * view)
     mcview_search_update_steps (view);
     view->update_activate = 0;
 
-    enable_interrupt_key ();
+    tty_enable_interrupt_key ();
 
     do {
         if (mcview_find (view, search_start, &match_len)) {
@@ -227,7 +227,7 @@ mcview_do_search (mcview_t * view)
                 dlg_run_done (d);
                 destroy_dlg (d);
                 d = create_message (D_NORMAL, _("Search"), _("Seeking to search result"));
-                mc_refresh ();
+                tty_refresh ();
             }
 
             mcview_moveto_match (view);
@@ -245,7 +245,7 @@ mcview_do_search (mcview_t * view)
     mcview_update (view);
 
 
-    disable_interrupt_key ();
+    tty_disable_interrupt_key ();
     if (verbose) {
         dlg_run_done (d);
         destroy_dlg (d);
