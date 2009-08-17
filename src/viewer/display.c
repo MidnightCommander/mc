@@ -82,10 +82,10 @@ mcview_labels (mcview_t * view)
     buttonbar_set_label (h, 1, Q_ ("ButtonBar|Help"), mcview_help_cmd);
 
     mcview_my_define (h, 10, Q_ ("ButtonBar|Quit"), mcview_quit_cmd, view);
-    text = view->hex_mode ? "ButtonBar|Ascii" : "ButtonBar|Hex";
-    mcview_my_define (h, 4, Q_ (text), mcview_toggle_hex_mode_cmd, view);
-    text = view->hex_mode ? "ButtonBar|Goto" : "ButtonBar|Line";
-    mcview_my_define (h, 5, Q_ (text),
+    text = view->hex_mode ? Q_ ("ButtonBar|Ascii") : Q_ ("ButtonBar|Hex");
+    mcview_my_define (h, 4, text, mcview_toggle_hex_mode_cmd, view);
+    text = view->hex_mode ? Q_ ("ButtonBar|Goto") : Q_ ("ButtonBar|Line");
+    mcview_my_define (h, 5, text,
                       view->hex_mode ? mcview_moveto_addr_cmd : mcview_moveto_line_cmd, view);
 
     if (view->hex_mode) {
@@ -98,19 +98,19 @@ mcview_labels (mcview_t * view)
         }
         mcview_my_define (h, 6, Q_ ("ButtonBar|Save"), mcview_hexedit_save_changes_cmd, view);
     } else {
-        text = view->text_wrap_mode ? "ButtonBar|UnWrap" : "ButtonBar|Wrap";
-        mcview_my_define (h, 2, Q_ (text), mcview_toggle_wrap_mode_cmd, view);
+        text = view->text_wrap_mode ? Q_ ("ButtonBar|UnWrap") : Q_ ("ButtonBar|Wrap");
+        mcview_my_define (h, 2, text, mcview_toggle_wrap_mode_cmd, view);
     }
 
-    text = view->hex_mode ? "ButtonBar|HxSrch" : "ButtonBar|Search";
-    mcview_my_define (h, 7, Q_ (text), mcview_search_cmd, view);
-    text = view->magic_mode ? "ButtonBar|Raw" : "ButtonBar|Parse";
-    mcview_my_define (h, 8, Q_ (text), mcview_toggle_magic_mode_cmd, view);
+    text = view->hex_mode ? Q_ ("ButtonBar|HxSrch") : Q_ ("ButtonBar|Search");
+    mcview_my_define (h, 7, text, mcview_search_cmd, view);
+    text = view->magic_mode ? Q_ ("ButtonBar|Raw") : Q_ ("ButtonBar|Parse");
+    mcview_my_define (h, 8, text, mcview_toggle_magic_mode_cmd, view);
 
     /* don't override the key to access the main menu */
     if (!mcview_is_in_panel (view)) {
-        text = view->text_nroff_mode ? "ButtonBar|Unform" : "ButtonBar|Format";
-        mcview_my_define (h, 9, Q_ (text), mcview_toggle_nroff_mode_cmd, view);
+        text = view->text_nroff_mode ? Q_ ("ButtonBar|Unform") : Q_ ("ButtonBar|Format");
+        mcview_my_define (h, 9, text, mcview_toggle_nroff_mode_cmd, view);
         mcview_my_define (h, 3, Q_ ("ButtonBar|Quit"), mcview_quit_cmd, view);
     }
 }
