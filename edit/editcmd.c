@@ -489,6 +489,8 @@ edit_save_as_cmd (WEdit *edit)
 			g_free (exp);
 			return 0;
 		    }
+		} else {
+		    edit->stat1.st_mode |= S_IWUSR;
 		}
 		save_lock = edit_lock_file (exp);
 	    } else {
