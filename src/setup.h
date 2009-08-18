@@ -32,6 +32,7 @@ extern int startup_right_mode;
 extern int verbose;
 
 extern int mouse_close_dialog;
+extern int reverse_files_only;
 
 #define PROFILE_NAME     ".mc/ini"
 #define HOTLIST_FILENAME ".mc/hotlist"

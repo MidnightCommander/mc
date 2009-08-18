@@ -3177,6 +3177,13 @@ don't need to quote those characters in the middle of the command line.
 On the other hand, you cannot use them to change selection when the
 command line is not empty.
 .TP
+.I reverse_files_only
+Allow revert selection of files only. This variable is on by default.
+If on, the reverse selection is applied to files only, not to directories.
+The selection of directories is untouched. If off, the reverse
+selection is applied to files as well to directories: all unselected
+items become selected, and vice versa.
+.TP
 .I panel_scroll_pages
 If set (the default), panel will scroll by half the display when the
 cursor reaches the end or the beginning of the panel, otherwise it

@@ -236,6 +236,7 @@ static const struct {
     { "horizontal_split",   &horizontal_split },
     { "mcview_remember_file_position", &mcview_remember_file_position },
     { "auto_fill_mkdir_name", &auto_fill_mkdir_name },
+    { "reverse_files_only", &reverse_files_only },
     { 0, 0 }
 };
 
