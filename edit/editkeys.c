@@ -122,6 +122,10 @@ static const edit_key_map_type common_key_map[] = {
     { ALT (KEY_BACKSPACE), CK_Delete_Word_Left },
     { ALT ('n'), CK_Toggle_Line_State },
     { ALT ('_'), CK_Toggle_Tab_TWS },
+    { ALT ('k'), CK_Toggle_Bookmark },
+    { ALT ('i'), CK_Prev_Bookmark },
+    { ALT ('j'), CK_Next_Bookmark },
+    { ALT ('o'), CK_Flush_Bookmarks },
 
     { XCTRL ('k'), CK_Delete_To_Line_End },
     { XCTRL ('l'), CK_Refresh },

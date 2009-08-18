@@ -361,11 +361,18 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
     int i;
     int utf8lag = 0;
     unsigned int cur_line = 0;
+    int book_mark = 0;
     char line_stat[LINE_STATE_WIDTH + 1];
 
     if (row > edit->num_widget_lines - EDIT_TEXT_VERTICAL_OFFSET) {
          return;
     }
+    if (book_mark_query_color(edit, edit->start_line + row, BOOK_MARK_COLOR)) {
+        book_mark = BOOK_MARK_COLOR;
+    } else if (book_mark_query_color(edit, edit->start_line + row, BOOK_MARK_FOUND_COLOR)) {
+        book_mark = BOOK_MARK_FOUND_COLOR;
+    }
+
     end_col -= EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
 
     edit_get_syntax_color (edit, b - 1, &color);
@@ -383,6 +390,9 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
         } else {
             memset(line_stat, ' ', LINE_STATE_WIDTH);
             line_stat[LINE_STATE_WIDTH] = '\0';
+        }
+        if (book_mark_query_color (edit, cur_line, BOOK_MARK_COLOR)){
+            g_snprintf (line_stat, 2, "*");
         }
     }
 
@@ -424,6 +434,12 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 		    c = edit_get_utf (edit, q, &cw);
 		}
                 /* we don't use bg for mc - fg contains both */
+                if (book_mark) {
+                    p->style |= book_mark << 16;
+                } else {
+                    edit_get_syntax_color (edit, q, &color);
+                    p->style |= color << 16;
+                }
 		edit_get_syntax_color (edit, q, &color);
 		p->style |= color << 16;
 		switch (c) {
