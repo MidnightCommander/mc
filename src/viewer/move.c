@@ -418,10 +418,13 @@ mcview_place_cursor (mcview_t * view)
 void
 mcview_moveto_match (mcview_t * view)
 {
-    off_t search_line, offset;
+    off_t search_line, search_col, offset;
 
-    mcview_offset_to_coord (view, &search_line, NULL, view->search_start);
-    mcview_coord_to_offset (view, &offset, search_line, 0);
+    mcview_offset_to_coord (view, &search_line, &search_col, view->search_start);
+    if (!view->hex_mode)
+        search_col = 0;
+
+    mcview_coord_to_offset (view, &offset, search_line, search_col);
 
     if (view->hex_mode) {
         view->hex_cursor = offset;

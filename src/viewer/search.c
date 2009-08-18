@@ -203,11 +203,14 @@ mcview_do_search (mcview_t * view)
 
     do {
         if (mcview_find (view, search_start, &match_len)) {
-            view->search_start = view->search->normal_offset + 1 +
+            view->search_start = view->search->normal_offset +
                 mcview__get_nroff_real_len (view,
                                             view->search->start_buffer,
                                             view->search->normal_offset -
                                             view->search->start_buffer);
+
+            if (!view->hex_mode)
+                view->search_start ++;
 
             view->search_end = view->search_start + match_len +
                 mcview__get_nroff_real_len (view, view->search_start, match_len + 1);
