@@ -358,6 +358,7 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
     int cw;
     unsigned int c;
     int color;
+    int abn_style;
     int i;
     int utf8lag = 0;
     unsigned int cur_line = 0;
@@ -372,6 +373,11 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
     } else if (book_mark_query_color(edit, edit->start_line + row, BOOK_MARK_FOUND_COLOR)) {
         book_mark = BOOK_MARK_FOUND_COLOR;
     }
+
+    if (book_mark)
+        abn_style = book_mark << 16;
+    else
+        abn_style = MOD_ABNORMAL;
 
     end_col -= EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
 
@@ -440,8 +446,6 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
                     edit_get_syntax_color (edit, q, &color);
                     p->style |= color << 16;
                 }
-		edit_get_syntax_color (edit, q, &color);
-		p->style |= color << 16;
 		switch (c) {
 		case '\n':
 		    col = (end_col + utf8lag) - edit->start_col + 1;	/* quit */
@@ -453,6 +457,8 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 		       ((visible_tabs || (visible_tws && q >= tws)) && enable_show_tabs_tws)) {
 			if (p->style & MOD_MARKED)
 			    c = p->style;
+			else if (book_mark)
+			    c |= book_mark << 16;
 			else
 			    c = p->style | MOD_WHITESPACE;
 			if (i > 2) {
@@ -528,20 +534,20 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 		    /* Caret notation for control characters */
 		    if (c < 32) {
 			p->ch = '^';
-			p->style = MOD_ABNORMAL;
+			p->style = abn_style;
 			p++;
 			p->ch = c + 0x40;
-			p->style = MOD_ABNORMAL;
+			p->style = abn_style;
 			p++;
 			col += 2;
 			break;
 		    }
 		    if (c == 127) {
 			p->ch = '^';
-			p->style = MOD_ABNORMAL;
+			p->style = abn_style;
 			p++;
 			p->ch = '?';
-			p->style = MOD_ABNORMAL;
+			p->style = abn_style;
 			p++;
 			col += 2;
 			break;
@@ -556,7 +562,7 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 			        p++;
 			} else {
 			        p->ch = '.';
-			        p->style = MOD_ABNORMAL;
+			        p->style = abn_style;
 			        p++;
 			}
 		    } else {
@@ -565,7 +571,7 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 			    p++;
 			} else {
 			    p->ch = '.';
-			    p->style = MOD_ABNORMAL;
+			    p->style = abn_style;
 			    p++;
 			}
 		    }
