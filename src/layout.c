@@ -121,7 +121,11 @@ static struct {
     int    type;
     Widget *widget;
     char *last_saved_dir;  /* last view_list working directory */
-} panels [MAX_VIEWS];
+} panels [MAX_VIEWS] = {
+    /* init MAX_VIEWS items */
+    { view_listing, NULL, NULL },
+    { view_listing, NULL, NULL }
+};
 
 /* These variables are used to avoid updating the information unless */
 /* we need it */
@@ -1112,10 +1116,14 @@ int get_other_type (void)
 }
 
 /* Save current list_view widget directory into panel */
-void save_panel_dir(int index)
+void
+save_panel_dir (int index)
 {
-    if (get_display_type(index) == view_listing) {
-	WPanel *w = (WPanel *) get_panel_widget(index);
+    int type = get_display_type (index);
+    Widget *widget = get_panel_widget (index);
+
+    if ((type == view_listing) && (widget != NULL)) {
+	WPanel *w = (WPanel *) widget;
 	char *widget_work_dir = w->cwd;
 
 	g_free(panels [index].last_saved_dir);  /* last path no needed */
