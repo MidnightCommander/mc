@@ -111,6 +111,9 @@ copy=xterm
 [terminal:xterm-color]
 copy=xterm
 
+[terminal:xterm-256color]
+copy=xterm
+
 [terminal:ibmpc3]
 f11=\\e[Y
 f12=\\e[Z
