@@ -121,7 +121,11 @@ static struct {
     int    type;
     Widget *widget;
     char *last_saved_dir;  /* last view_list working directory */
-} panels [MAX_VIEWS];
+} panels [MAX_VIEWS] = {
+    /* init MAX_VIEWS items */
+    { view_listing, NULL, NULL },
+    { view_listing, NULL, NULL }
+};
 
 /* These variables are used to avoid updating the information unless */
 /* we need it */
@@ -868,36 +872,32 @@ const char *get_nth_panel_name (int num)
 /* Set the num-th panel to the view type: type */
 /* This routine also keeps at least one WPanel object in the screen */
 /* since a lot of routines depend on the current_panel variable */
-void set_display_type (int num, int type)
+void
+set_display_type (int num, int type)
 {
-    int x, y, cols, lines;
-    int    the_other;		/* Index to the other panel */
-    const char   *file_name = NULL;	/* For Quick view */
-    Widget *new_widget, *old_widget;
-    WPanel  *the_other_panel;
+    int x = 0, y = 0, cols = 0, lines = 0;
+    int the_other = 0;		/* Index to the other panel */
+    const char *file_name = NULL;	/* For Quick view */
+    Widget *new_widget = NULL, *old_widget = NULL;
+    WPanel *the_other_panel = NULL;
 
-    x = y = cols = lines = 0;
-    old_widget = 0;
     if (num >= MAX_VIEWS){
 	fprintf (stderr, "Cannot allocate more that %d views\n", MAX_VIEWS);
 	abort ();
     }
-
     /* Check that we will have a WPanel * at least */
-    the_other = 0;
     if (type != view_listing){
 	the_other = num == 0 ? 1 : 0;
 
 	if (panels [the_other].type != view_listing)
 	    return;
-
     }
-    
+
     /* Get rid of it */
     if (panels [num].widget){
 	Widget *w = panels [num].widget;
 	WPanel *panel = (WPanel *) panels [num].widget;
-	
+
 	x = w->x;
 	y = w->y;
 	cols  = w->cols;
@@ -913,8 +913,6 @@ void set_display_type (int num, int type)
 	}
     }
 
-    new_widget = 0;
-    
     switch (type){
     case view_listing:
 	new_widget = restore_into_right_dir_panel(num, old_widget);
@@ -922,7 +920,6 @@ void set_display_type (int num, int type)
 	
     case view_info:
 	new_widget = (Widget *) info_new ();
-	
 	break;
 
     case view_tree:
@@ -948,11 +945,11 @@ void set_display_type (int num, int type)
 	save_panel_dir(num);
 
     panels [num].type = type;
-    panels [num].widget = (Widget *) new_widget;
-    
+    panels [num].widget = new_widget;
+
     /* We set the same size the old widget had */
-    widget_set_size ((Widget *) new_widget, y, x, lines, cols);
-    
+    widget_set_size (new_widget, y, x, lines, cols);
+
     /* We use replace to keep the circular list of the dialog in the */
     /* same state.  Maybe we could just kill it and then replace it  */
     if (midnight_dlg && old_widget){
@@ -1119,10 +1116,14 @@ int get_other_type (void)
 }
 
 /* Save current list_view widget directory into panel */
-void save_panel_dir(int index)
+void
+save_panel_dir (int index)
 {
-    if (get_display_type(index) == view_listing) {
-	WPanel *w = (WPanel *) get_panel_widget(index);
+    int type = get_display_type (index);
+    Widget *widget = get_panel_widget (index);
+
+    if ((type == view_listing) && (widget != NULL)) {
+	WPanel *w = (WPanel *) widget;
 	char *widget_work_dir = w->cwd;
 
 	g_free(panels [index].last_saved_dir);  /* last path no needed */
