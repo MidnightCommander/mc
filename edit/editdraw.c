@@ -386,9 +386,6 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
     start_col_real = (col =
 		      (int) edit_move_forward3 (edit, b, 0,
 						q)) + edit->start_col;
-    c1 = min (edit->column1, edit->column2);
-    c2 = max (edit->column1, edit->column2);
-
     if ( option_line_state ) {
         cur_line = edit->start_line + row;
         if ( cur_line <= edit->total_lines ) {
@@ -423,6 +420,8 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 		    if (column_highlighting) {
 			int x;
 			x = edit_move_forward3 (edit, b, 0, q);
+			c1 = min (edit->column1, edit->column2);
+			c2 = max (edit->column1, edit->column2);
 			if (x >= c1 && x < c2)
 			    p->style |= MOD_MARKED;
 		    } else
