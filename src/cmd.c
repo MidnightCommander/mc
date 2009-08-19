@@ -53,6 +53,8 @@
 
 #include "../src/search/search.h"
 
+#include "../src/mcconfig/mcconfig.h"
+
 #include "cmd.h"		/* Our definitions */
 #include "fileopctx.h"
 #include "file.h"		/* file operation routines */
@@ -73,8 +75,7 @@
 #include "layout.h"		/* get_current_type() */
 #include "ext.h"		/* regex_command() */
 #include "boxes.h"		/* cd_dialog() */
-#include "setup.h"		/* save_setup() */
-#include "../src/mcconfig/mcconfig.h"
+#include "setup.h"
 #include "execute.h"		/* toggle_panels() */
 #include "history.h"
 #include "strutil.h"
@@ -96,6 +97,9 @@ int use_internal_edit = 1;
 
 /* Automatically fills name with current selected item name on mkdir */
 int auto_fill_mkdir_name = 1;
+
+/* if set, only selection of files is inverted */
+int reverse_files_only = 1;
 
 /* selection flags */
 typedef enum {
@@ -494,9 +498,13 @@ void
 reverse_selection_cmd (void)
 {
     int i;
+    file_entry *file;
 
-    for (i = 0; i < current_panel->count; i++)
-	do_file_mark (current_panel, i, !current_panel->dir.list [i].f.marked);
+    for (i = 0; i < current_panel->count; i++) {
+	file = &current_panel->dir.list [i];
+	if ((reverse_files_only == 0) || !S_ISDIR (file->st.st_mode))
+	    do_file_mark (current_panel, i, !file->f.marked);
+    }
 }
 
 static void
