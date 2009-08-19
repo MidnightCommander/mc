@@ -1653,6 +1653,7 @@ edit_move_to_prev_col (WEdit * edit, long p)
             edit->over_col = 0;
         }
     } else {
+        edit->over_col = 0;
         if (is_in_indent (edit) && option_fake_half_tabs) {
             edit_update_curs_col (edit);
             if (space_width)
