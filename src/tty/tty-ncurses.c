@@ -298,7 +298,7 @@ tty_print_anychar (int c)
         } else {
             str[res] = '\0';
         }
-        addstr (str_term_form (s));
+        addstr (str_term_form (str));
     } else {
         addch (c);
     }
