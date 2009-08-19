@@ -1288,24 +1288,46 @@ int edit_block_delete_cmd (WEdit * edit)
 static gboolean
 editcmd_find (WEdit *edit, gsize *len)
 {
-    gsize search_start = edit->search_start;
-    gsize search_end;
+    off_t search_start = edit->search_start;
+    off_t search_end;
+    long start_mark = 0;
+    long end_mark = edit->last_byte;
+    int mark_res = 0;
+
+    if (edit->only_in_selection) {
+        mark_res = eval_marks(edit, &start_mark, &end_mark);
+        if (mark_res != 0) {
+            edit->search->error = MC_SEARCH_E_NOTFOUND;
+            edit->search->error_str = g_strdup(_(" Search string not found "));
+            return FALSE;
+        }
+        if (edit->replace_backwards) {
+            if (search_start > end_mark || search_start <= start_mark) {
+                search_start = end_mark;
+            }
+        } else {
+            if (search_start < start_mark || search_start >= end_mark) {
+                search_start = start_mark;
+            }
+        }
+    }
 
     if (edit->replace_backwards) {
-	search_end = edit->last_byte;
-	while ((int) search_start >= 0) {
-	    if (search_end > search_start + edit->search->original_len && mc_search_is_fixed_search_str(edit->search))
-		search_end = search_start + edit->search->original_len;
-	    if ( mc_search_run(edit->search, (void *) edit, search_start, search_end, len)
-		&& edit->search->normal_offset == search_start )
-	    {
-		return TRUE;
-	    }
-	    search_start--;
-	}
-	edit->search->error_str = g_strdup(_(" Search string not found "));
+        search_end = end_mark;
+        while ((int) search_start >= start_mark) {
+            if (search_end > search_start + edit->search->original_len
+                && mc_search_is_fixed_search_str(edit->search)) {
+                search_end = search_start + edit->search->original_len;
+            }
+            if (mc_search_run(edit->search, (void *) edit, search_start, search_end, len)
+                && edit->search->normal_offset == search_start ) {
+                return TRUE;
+            }
+            search_start--;
+        }
+        edit->search->error_str = g_strdup(_(" Search string not found "));
     } else {
-	return mc_search_run(edit->search, (void *) edit, edit->search_start, edit->last_byte, len);
+        return mc_search_run(edit->search, (void *) edit, search_start, end_mark, len);
     }
     return FALSE;
 }
