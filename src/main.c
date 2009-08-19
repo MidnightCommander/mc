@@ -1219,6 +1219,7 @@ init_xterm_support (void)
     }
 
     if (force_xterm || strncmp (termvalue, "xterm", 5) == 0
+	|| strncmp (termvalue, "konsole", 7) == 0
 	|| strncmp (termvalue, "rxvt", 4) == 0
 	|| strcmp (termvalue, "Eterm") == 0
 	|| strcmp (termvalue, "dtterm") == 0) {
