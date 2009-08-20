@@ -556,8 +556,6 @@ file_progress_show_deleting (FileOpContext *ctx, const char *s)
     return check_progress_buttons (ctx);
 }
 
-#define X_TRUNC 52
-
 /*
  * FIXME: probably it is better to replace this with quick dialog machinery,
  * but actually I'm not familiar with it and have not much time :(
@@ -568,28 +566,31 @@ static struct {
     int ypos, xpos;
     int value;			/* 0 for labels */
 } rd_widgets[] = {
-    {
-    N_("Target file \"%s\" already exists!"), 3, 4, 0}, {
-    N_("&Abort"), BY + 3, 25, REPLACE_ABORT}, {
-    N_("If &size differs"), BY + 1, 28, REPLACE_SIZE}, {
-    N_("Non&e"), BY, 47, REPLACE_NEVER}, {
-    N_("&Update"), BY, 36, REPLACE_UPDATE}, {
-    N_("A&ll"), BY, 28, REPLACE_ALWAYS}, {
-    N_("Overwrite all targets?"), BY, 4, 0}, {
-    N_("&Reget"), BY - 1, 28, REPLACE_REGET}, {
-    N_("A&ppend"), BY - 2, 45, REPLACE_APPEND}, {
-    N_("&No"), BY - 2, 37, REPLACE_NO}, {
-    N_("&Yes"), BY - 2, 28, REPLACE_YES}, {
-    N_("Overwrite this target?"), BY - 2, 4, 0}, {
+    /*  0 */ { N_("Target file already exists:\n%s"), 3, 4, 0 },
 #if (defined(_FILE_OFFSET_BITS) && _FILE_OFFSET_BITS == 64) || (defined _LARGE_FILES && _LARGE_FILES)
-    N_("Target date: %s, size %llu"), 6, 4, 0}, {
-    N_("Source date: %s, size %llu"), 5, 4, 0}
+    /*  1 */ { N_("Source date: %s, size %llu"), 6, 4, 0 },
+    /*  2 */ { N_("Target date: %s, size %llu"), 7, 4, 0 },
 #else
-    N_("Target date: %s, size %u"), 6, 4, 0}, {
-    N_("Source date: %s, size %u"), 5, 4, 0}
+    /*  1 */ { N_("Source date: %s, size %u"), 6, 4, 0 },
+    /*  2 */ { N_("Target date: %s, size %u"), 7, 4, 0 },
 #endif
+    /*  3 */ { N_("&Abort"), 14, 25, REPLACE_ABORT },
+    /*  4 */ { N_("If &size differs"), 12, 28, REPLACE_SIZE },
+    /*  5 */ { N_("Non&e"), 11, 47, REPLACE_NEVER },
+    /*  6 */ { N_("&Update"), 11, 36, REPLACE_UPDATE },
+    /*  7 */ { N_("A&ll"), 11, 28, REPLACE_ALWAYS },
+    /*  8 */ { N_("Overwrite all targets?"), 11, 4, 0 },
+    /*  9 */ { N_("&Reget"), 10, 28, REPLACE_REGET },
+    /* 10 */ { N_("A&ppend"), 9, 45, REPLACE_APPEND },
+    /* 11 */ { N_("&No"), 9, 37, REPLACE_NO },
+    /* 12 */ { N_("&Yes"), 9, 28, REPLACE_YES },
+    /* 13 */ { N_("Overwrite this target?"), 9, 4, 0 }
 };
 
+
+static void
+init_replace (FileOpContext *ctx, enum OperationMode mode)
+{
 #define ADD_RD_BUTTON(i)\
 	add_widget (ui->replace_dlg,\
 		button_new (rd_widgets [i].ypos, rd_widgets [i].xpos, rd_widgets [i].value,\
@@ -600,105 +601,104 @@ static struct {
 	add_widget (ui->replace_dlg,\
 		label_new (rd_widgets [i].ypos, rd_widgets [i].xpos, buffer))
 
-static void
-init_replace (FileOpContext *ctx, enum OperationMode mode)
-{
-    FileOpContextUI *ui;
+    /* dialog sizes */
+    const int rd_ylen = 17;
+    int rd_xlen = 60;
+
+    FileOpContextUI *ui = ctx->ui;
+
     char buffer[BUF_SMALL];
     const char *title;
-    static int rd_xlen = 60, rd_trunc = X_TRUNC;
-
-#ifdef ENABLE_NLS
-    static int i18n_flag;
-    if (!i18n_flag) {
-	int l1, l2, l, row;
-	register int i = sizeof (rd_widgets) / sizeof (rd_widgets[0]);
-	while (i--)
-	    rd_widgets[i].text = _(rd_widgets[i].text);
-
-	/*
-	 * longest of "Overwrite..." labels
-	 * (assume "Target date..." are short enough)
-	 */
-        l1 = max (str_term_width1 (rd_widgets[6].text),
-                  str_term_width1 (rd_widgets[11].text));
-
-	/* longest of button rows */
-	i = sizeof (rd_widgets) / sizeof (rd_widgets[0]);
-	for (row = l = l2 = 0; i--;) {
-	    if (rd_widgets[i].value != 0) {
-		if (row != rd_widgets[i].ypos) {
-		    row = rd_widgets[i].ypos;
-		    l2 = max (l2, l);
-		    l = 0;
-		}
-                l+= str_term_width1 (rd_widgets[i].text) + 4;
-	    }
-	}
-	l2 = max (l2, l);	/* last row */
-	rd_xlen = max (rd_xlen, l1 + l2 + 8);
-	rd_trunc = rd_xlen - 6;
-
-	/* Now place buttons */
-	l1 += 5;		/* start of first button in the row */
-	i = sizeof (rd_widgets) / sizeof (rd_widgets[0]);
-
-	for (l = l1, row = 0; --i > 1;) {
-	    if (rd_widgets[i].value != 0) {
-		if (row != rd_widgets[i].ypos) {
-		    row = rd_widgets[i].ypos;
-		    l = l1;
-		}
-		rd_widgets[i].xpos = l;
-                l+= str_term_width1 (rd_widgets[i].text) + 4;
-	    }
-	}
-	/* Abort button is centered */
-	rd_widgets[1].xpos =
-            (rd_xlen - str_term_width1 (rd_widgets[1].text) - 3) / 2;
-    }
-#endif				/* ENABLE_NLS */
-
-    ui = ctx->ui;
 
     if (mode == Foreground)
 	title = _(" File exists ");
     else
 	title = _(" Background process: File exists ");
 
+    {
+	const int num = sizeof (rd_widgets) / sizeof (rd_widgets[0]);
+	int i, l1, l2, l, row;
+
+#ifdef ENABLE_NLS
+	for (i = 0; i < num; i++)
+	    rd_widgets[i].text = _(rd_widgets[i].text);
+#endif				/* ENABLE_NLS */
+
+	/*
+	 * longest of "Overwrite..." labels
+	 * (assume "Target date..." are short enough)
+	 */
+	l1 = max (str_term_width1 (rd_widgets[8].text),
+		  str_term_width1 (rd_widgets[13].text));
+
+	/* longest of button rows */
+	i = num;
+	for (row = l = l2 = 0; i--;)
+	    if (rd_widgets[i].value != 0) {
+		if (row != rd_widgets[i].ypos) {
+		    row = rd_widgets[i].ypos;
+		    l2 = max (l2, l);
+		    l = 0;
+		}
+                l += str_term_width1 (rd_widgets[i].text) + 4;
+	    }
+
+	l2 = max (l2, l);	/* last row */
+	rd_xlen = max (rd_xlen, l1 + l2 + 8);
+	rd_xlen = max (rd_xlen, str_term_width1 (title) + 2);
+
+	/* Now place buttons */
+	l1 += 5;		/* start of first button in the row */
+	i = num;
+	for (l = l1, row = 0; --i > 1;)
+	    if (rd_widgets[i].value != 0) {
+		if (row != rd_widgets[i].ypos) {
+		    row = rd_widgets[i].ypos;
+		    l = l1;
+		}
+		rd_widgets[i].xpos = l;
+                l += str_term_width1 (rd_widgets[i].text) + 4;
+	    }
+
+	/* Abort button is centered */
+	rd_widgets[3].xpos =
+            (rd_xlen - str_term_width1 (rd_widgets[3].text) - 3) / 2;
+    }
+
     /* FIXME - missing help node */
     ui->replace_dlg =
-	create_dlg (0, 0, 16, rd_xlen, alarm_colors, NULL, "[Replace]",
+	create_dlg (0, 0, rd_ylen, rd_xlen, alarm_colors, NULL, "[Replace]",
 		    title, DLG_CENTER | DLG_REVERSE);
 
-
     ADD_RD_LABEL (ui, 0,
-		  str_trunc (ui->replace_filename,
-                             rd_trunc - str_term_width1 (rd_widgets[0].text)), 0);
-    ADD_RD_BUTTON (1);
+		  str_trunc (strip_home_and_password (ui->replace_filename),
+				rd_xlen - 8), 0);
+    ADD_RD_LABEL (ui, 1, file_date (ui->s_stat->st_mtime),
+		  (off_t) ui->s_stat->st_size);
+    ADD_RD_LABEL (ui, 2, file_date (ui->d_stat->st_mtime),
+		  (off_t) ui->d_stat->st_size);
 
-    ADD_RD_BUTTON (2);
     ADD_RD_BUTTON (3);
     ADD_RD_BUTTON (4);
     ADD_RD_BUTTON (5);
-    ADD_RD_LABEL (ui, 6, 0, 0);
+    ADD_RD_BUTTON (6);
+    ADD_RD_BUTTON (7);
+    ADD_RD_LABEL (ui, 8, 0, 0);
 
     /* "this target..." widgets */
     if (!S_ISDIR (ui->d_stat->st_mode)) {
 	if ((ctx->operation == OP_COPY) && (ui->d_stat->st_size != 0)
 	    && (ui->s_stat->st_size > ui->d_stat->st_size))
-	    ADD_RD_BUTTON (7);	/* reget */
+	    ADD_RD_BUTTON (9); /* reget */
 
-	ADD_RD_BUTTON (8);	/* Overwrite all targets? */
+	ADD_RD_BUTTON (10);
     }
-    ADD_RD_BUTTON (9);
-    ADD_RD_BUTTON (10);
-    ADD_RD_LABEL (ui, 11, 0, 0);
+    ADD_RD_BUTTON (11);
+    ADD_RD_BUTTON (12);
+    ADD_RD_LABEL (ui, 13, 0, 0);
 
-    ADD_RD_LABEL (ui, 12, file_date (ui->d_stat->st_mtime),
-		  (off_t) ui->d_stat->st_size);
-    ADD_RD_LABEL (ui, 13, file_date (ui->s_stat->st_mtime),
-		  (off_t) ui->s_stat->st_size);
+#undef ADD_RD_LABEL
+#undef ADD_RD_BUTTON
 }
 
 void
@@ -707,12 +707,9 @@ file_progress_set_stalled_label (FileOpContext *ctx, const char *stalled_msg)
     FileOpContextUI *ui;
 
     g_return_if_fail (ctx != NULL);
-
-    if (ctx->ui == NULL)
-	return;
+    g_return_if_fail (ctx->ui != NULL);
 
     ui = ctx->ui;
-
     label_set_text (ui->stalled_label, stalled_msg);
 }
 
@@ -733,12 +730,13 @@ file_progress_real_query_replace (FileOpContext *ctx,
 	ui->replace_filename = destname;
 	ui->s_stat = _s_stat;
 	ui->d_stat = _d_stat;
+
 	init_replace (ctx, mode);
-	run_dlg (ui->replace_dlg);
-	ui->replace_result = ui->replace_dlg->ret_value;
+	ui->replace_result = run_dlg (ui->replace_dlg);
+	destroy_dlg (ui->replace_dlg);
+
 	if (ui->replace_result == B_CANCEL)
 	    ui->replace_result = REPLACE_ABORT;
-	destroy_dlg (ui->replace_dlg);
     }
 
     switch (ui->replace_result) {
