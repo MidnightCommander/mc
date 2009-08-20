@@ -54,10 +54,11 @@
 #include "../src/tty/mouse.h"
 #include "../src/tty/win.h"	/* do_enter_ca_mode() */
 
+#include "../src/mcconfig/mcconfig.h"
+
 #include "dialog.h"
 #include "widget.h"
 #include "command.h"
-#include "../src/mcconfig/mcconfig.h"
 #include "main-widgets.h"
 #include "main.h"
 #include "subshell.h"	/* For use_subshell and resize_subshell() */
@@ -65,7 +66,6 @@
 #include "menu.h"
 #include "strutil.h"
 #include "background.h"         /* we_are_background */
-
 /* Needed for the extern declarations of integer parameters */
 #include "dir.h"
 #include "panel.h"		/* The Panel widget */
@@ -73,8 +73,8 @@
 #include "layout.h"
 #include "info.h"		/* The Info widget */
 #include "view.h"		/* The view widget */
-
 #include "setup.h"		/* For save_setup() */
+#include "../vfs/vfs.h"		/* For vfs_translate_url() */
 
 /* Controls the display of the rotating dash on the verbose mode */
 int nice_rotating_dash = 1;

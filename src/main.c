@@ -37,7 +37,7 @@
 #include <sys/stat.h>
 #include <sys/wait.h>
 #include <unistd.h>
-#include <pwd.h>
+#include <pwd.h>		/* for username in xterm title */
 
 #include "global.h"
 
@@ -46,6 +46,8 @@
 #include "../src/tty/mouse.h"
 #include "../src/tty/key.h"		/* For init_key() */
 #include "../src/tty/win.h"		/* xterm_flag */
+
+#include "../src/mcconfig/mcconfig.h"
 
 #include "dir.h"
 #include "dialog.h"
@@ -58,7 +60,6 @@
 #include "cons.saver.h"
 #include "subshell.h"
 #include "setup.h"		/* save_setup() */
-#include "../src/mcconfig/mcconfig.h"
 #include "boxes.h"		/* sort_box() */
 #include "layout.h"
 #include "cmd.h"		/* Normal commands */
@@ -69,12 +70,12 @@
 #include "execute.h"
 #include "ext.h"		/* For flush_extension_file() */
 #include "strutil.h"
-#include <pwd.h>		/* for username in xterm title */
-
 /* Listbox for the command history feature */
 #include "widget.h"
 #include "command.h"
 #include "wtools.h"
+
+#include "../vfs/vfs.h"		/* vfs_translate_url() */
 
 #include "chmod.h"
 #include "chown.h"

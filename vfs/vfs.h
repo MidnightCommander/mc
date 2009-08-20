@@ -32,6 +32,8 @@ const char *vfs_get_encoding (const char *path);
 /* canonize and translate path, return new string */
 char *vfs_canon_and_translate (const char *path);
 
+char *vfs_translate_url (const char *url);
+
 /* Only the routines outside of the VFS module need the emulation macros */
 
 int mc_open (const char *filename, int flags, ...);

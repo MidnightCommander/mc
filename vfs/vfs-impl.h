@@ -133,7 +133,6 @@ char *vfs_path (const char *path);
 int vfs_file_class_flags (const char *filename);
 
 void vfs_fill_names (fill_names_f);
-char *vfs_translate_url (const char *);
 
 /* vfs/direntry.c: */
 void *vfs_s_open (struct vfs_class *, const char *, int, int);
