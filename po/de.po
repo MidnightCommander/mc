@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: mc 4.6.x\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-14 19:43+0000\n"
-"PO-Revision-Date: 2009-01-25 17:50-0000\n"
-"Last-Translator: Patrick Winnertz <winnie@der-winnie.de>\n"
+"PO-Revision-Date: 2009-08-19 23:00+0100\n"
+"Last-Translator: Patrick Winnertz <winnie@debian.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
@@ -171,8 +171,7 @@ msgid " Load "
 msgstr "Laden"
 
 msgid " Block is large, you may not be able to undo this action. "
-msgstr ""
-" Großer Block, eventuell kann diese Aktion nicht rückgängig gemacht werden. "
+msgstr " Großer Block, eventuell kann diese Aktion nicht rückgängig gemacht werden. "
 
 msgid "O&ne"
 msgstr "ei&Ne"
@@ -228,11 +227,8 @@ msgstr " Ersetzen "
 msgid "Search"
 msgstr "Suchen"
 
-msgid ""
-" Invalid regular expression, or scanf expression with too many conversions "
-msgstr ""
-" Ungültiger regulärer Ausdruck oder scanf-Ausdruck mit zu vielen "
-"Konvertierungen "
+msgid " Invalid regular expression, or scanf expression with too many conversions "
+msgstr " Ungültiger regulärer Ausdruck oder scanf-Ausdruck mit zu vielen Konvertierungen "
 
 msgid " Error in replacement format string. "
 msgstr " Fehler in der Format-Zeichenkette der Ersetzungen "
@@ -793,7 +789,7 @@ msgid "Sort order"
 msgstr "Sortierung"
 
 msgid "Executable first"
-msgstr ""
+msgstr "Ausführbare Dateien zuerst"
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1187,9 +1183,9 @@ msgstr ""
 msgid " Setup "
 msgstr " Einstellungen "
 
-#, fuzzy, c-format
+#, c-format
 msgid " Setup saved to ~/%s"
-msgstr " Einstellungen in ~/ gespeichert"
+msgstr " Einstellungen in ~/%s gespeichert"
 
 #, c-format
 msgid ""
@@ -1260,10 +1256,7 @@ msgid " %s%s file error"
 msgstr " Fehler in der Datei %s%s "
 
 #, c-format
-msgid ""
-"The format of the %smc.ext file has changed with version 3.0.  It seems that "
-"the installation failed.  Please fetch a fresh copy from the Midnight "
-"Commander package."
+msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
 msgstr ""
 "Das Dateiformat der Datei »%smc.ext« hat sich in Version 3.0 geändert.\n"
 "Bitte aktualisieren Sie die Datei."
@@ -1273,13 +1266,8 @@ msgid " ~/%s file error "
 msgstr " Fehler in Datei »~/%s« "
 
 #, c-format
-msgid ""
-"The format of the ~/%s file has changed with version 3.0.  You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write "
-"it."
-msgstr ""
-"Das Dateiformat von »~/%s« hat sich mit Version 3.0 geändert.  Eine "
-"Beispieldatei im neuen Format ist %smc.ext."
+msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
+msgstr "Das Dateiformat von »~/%s« hat sich mit Version 3.0 geändert.  Eine Beispieldatei im neuen Format ist %smc.ext."
 
 msgid " Copy "
 msgstr " Kopieren "
@@ -1309,8 +1297,7 @@ msgid ""
 "\n"
 " Option Stable Symlinks will be disabled "
 msgstr ""
-" Kann keine stabilen symbolischen Links auf nicht-lokalen Dateisystemen "
-"anlegen: \n"
+" Kann keine stabilen symbolischen Links auf nicht-lokalen Dateisystemen anlegen: \n"
 "\n"
 " Einstellung Stabile Symbolische Links wird deaktiviert "
 
@@ -1341,13 +1328,17 @@ msgstr ""
 " Kann Quelldatei \"%s\" nicht untersuchen \n"
 " %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " `%s' \n"
 " and \n"
 " `%s' \n"
 " are the same file "
-msgstr " `%s' und `%s' sind die gleichen Dateien "
+msgstr ""
+" `%s' \n"
+"und \n"
+"`%s' \n"
+" sind die gleichen Dateien "
 
 #, c-format
 msgid ""
@@ -1528,13 +1519,17 @@ msgstr ""
 " Kann Datei \"%s\" nicht löschen \n"
 " %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " `%s' \n"
 " and \n"
 " `%s' \n"
 " are the same directory "
-msgstr " `%s' und `%s' sind das gleiche Verzeichnis "
+msgstr ""
+" `%s' \n"
+"und \n"
+"`%s' \n"
+" sind das gleiche Verzeichnis "
 
 #, c-format
 msgid " Cannot overwrite directory \"%s\" %s "
@@ -1921,11 +1916,8 @@ msgid " Hotlist Load "
 msgstr " Hotlist laden "
 
 #, c-format
-msgid ""
-"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
-msgstr ""
-"MC konnte ~/%s nicht schreiben, die alten Hotlist-Einträge wurden nicht "
-"gelöscht"
+msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr "MC konnte ~/%s nicht schreiben, die alten Hotlist-Einträge wurden nicht gelöscht"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -1973,9 +1965,9 @@ msgid "Modified:  %s"
 msgstr "Geändert:  %s"
 
 #. TRANSLATORS: "Status changed", like in the stat(2) man page
-#, fuzzy, c-format
+#, c-format
 msgid "Status:    %s"
-msgstr "Erzeugt:   %s"
+msgstr "Status:   %s"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -2017,7 +2009,7 @@ msgid "&Horizontal"
 msgstr "&Horizontal"
 
 msgid "show free sp&Ace"
-msgstr ""
+msgstr "Freien Pl&Atz zeigen"
 
 msgid "&Xterm window title"
 msgstr "&Xterm Fenstertitel"
@@ -2115,17 +2107,13 @@ msgstr ""
 "Alle Tasten arbeiten vernünftig"
 
 msgid "Press all the keys mentioned here. After you have done it, check"
-msgstr ""
-"Drücken Sie alle angegebenen Tasten. Wenn Sie das getan haben, überprüfen "
-"Sie,"
+msgstr "Drücken Sie die gegebenen Tasten. Danach überprüfen Sie,"
 
 msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr ""
-"welche Tasten nicht mit OK markiert sind.  Drücken Sie die Leertaste bei den "
-"Fehlenden"
+msgstr "welche nicht erkannt worden sind. Drücken Sie die Leertaste"
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
-msgstr "Tasten oder arbeiten Sie mit der Maus, um sie zu definieren. "
+msgstr "oder arbeiten Sie mit der Maus, um sie zu definieren. "
 
 msgid ""
 " The Commander can't change to the directory that \n"
@@ -2380,8 +2368,7 @@ msgid ""
 "   Menus:        menu, menuhot, menusel, menuhotsel\n"
 "   Editor:       editnormal, editbold, editmarked\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
+"   File types:   directory, executable, link, stalelink, device, special, core\n"
 "\n"
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -2402,8 +2389,7 @@ msgstr ""
 "   Menüs:         menu, menuhot, menusel, menuhotsel\n"
 "   Editor:        editnormal, editbold, editmarked\n"
 "   Hilfe:         helpnormal, helpitalic, helplink, helpslink\n"
-"   Dateitypen:    directory, executable, link, stalelink, device, special, "
-"core\n"
+"   Dateitypen:    directory, executable, link, stalelink, device, special, core\n"
 "\n"
 "Farben:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -2855,8 +2841,7 @@ msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
 msgstr ""
-"Die Datei %s gehört weder root noch Ihnen oder sie kann von jedem "
-"beschrieben werden.\n"
+"Die Datei %s gehört weder root noch Ihnen oder sie kann von jedem beschrieben werden.\n"
 "Sie zu benutzen, kann Ihre Sicherheit gefährden"
 
 #, c-format
@@ -3627,9 +3612,3 @@ msgstr "Interner Fehler:"
 
 msgid "Changes to file lost"
 msgstr "Änderungen an Datei verlorengegangen"
-
-#~ msgid "Using included S-Lang library"
-#~ msgstr "Verwende integrierte S-Lang-Bibliothek"
-
-#~ msgid "with termcap database"
-#~ msgstr "mit termcap-Datenbank"
