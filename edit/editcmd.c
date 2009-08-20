@@ -1209,8 +1209,8 @@ edit_delete_column_of_text (WEdit * edit)
     c = edit_move_forward3 (edit, edit_bol (edit, m1), 0, m1);
     d = edit_move_forward3 (edit, edit_bol (edit, m2), 0, m2);
 
-    b = min (c, d);
-    c = max (c, d);
+    b = max(min (c, d), min (edit->column1, edit->column2));
+    c = max (c, d + edit->over_col);
 
     while (n--) {
 	r = edit_bol (edit, edit->curs1);
