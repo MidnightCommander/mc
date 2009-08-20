@@ -718,7 +718,7 @@ get_modifier (void)
 #endif				/* __QNXNTO__ */
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
-    if (x11_window != NULL) {
+    if (x11_window != 0) {
 	Window root, child;
 	int root_x, root_y;
 	int win_x, win_y;

@@ -330,7 +330,7 @@ add_widget_autopos (Dlg_head *h, void *w, widget_pos_flags_t pos_flags)
 int
 add_widget (Dlg_head *h, void *w)
 {
-    add_widget_autopos (h, w, WPOS_KEEP_LEFT | WPOS_KEEP_TOP);
+    return add_widget_autopos (h, w, WPOS_KEEP_LEFT | WPOS_KEEP_TOP);
 }
 
 enum {
