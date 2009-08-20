@@ -168,6 +168,7 @@ mcview_new (int y, int x, int cols, int lines, int is_panel)
 
     view->filename = NULL;
     view->command = NULL;
+    view->search_nroff_seq = NULL;
 
     mcview_set_datasource_none (view);
 

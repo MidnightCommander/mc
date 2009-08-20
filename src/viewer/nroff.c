@@ -186,10 +186,127 @@ mcview_display_nroff (mcview_t * view)
     view->dpy_end = from;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 int
 mcview__get_nroff_real_len (mcview_t * view, off_t start, off_t length)
 {
-    return 0;                   /* AB:FIXME */
+    mcview_nroff_t *nroff;
+    int ret = 0;
+    off_t i = 0;
+
+    nroff = mcview_nroff_seq_new_num (view, start);
+    if (nroff == NULL)
+        return 0;
+
+    while (i<length)
+    {
+        if (nroff->type != NROFF_TYPE_NONE)
+        {
+            ret+=2;
+        }
+        i++;
+        mcview_nroff_seq_next (nroff);
+    }
+
+    mcview_nroff_seq_free (&nroff);
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+mcview_nroff_t *
+mcview_nroff_seq_new_num (mcview_t * view, off_t index)
+{
+    mcview_nroff_t *nroff;
+
+    nroff = g_malloc0 (sizeof (mcview_nroff_t));
+    if (nroff == NULL)
+        return NULL;
+    nroff->index = index;
+    nroff->view = view;
+    mcview_nroff_seq_info (nroff);
+    return nroff;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+mcview_nroff_t *
+mcview_nroff_seq_new (mcview_t * view)
+{
+    return mcview_nroff_seq_new_num (view, (off_t) 0);
+
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+mcview_nroff_seq_free (mcview_nroff_t ** nroff)
+{
+    if (nroff == NULL || *nroff == NULL)
+        return;
+    g_free (*nroff);
+    nroff = NULL;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+nroff_type_t
+mcview_nroff_seq_info (mcview_nroff_t * nroff)
+{
+    int next, next2;
+
+    if (nroff == NULL)
+        return NROFF_TYPE_NONE;
+    nroff->type = NROFF_TYPE_NONE;
+
+    nroff->current_char = mcview_get_byte (nroff->view, nroff->index);
+    if (nroff->current_char == -1 || !g_ascii_isprint (nroff->current_char))    /* FIXME: utf-8 and g_ascii_isprint */
+        return nroff->type;
+
+    nroff->char_width = 1;
+
+    next = mcview_get_byte (nroff->view, nroff->index + 1);
+    if (next == -1 || next != '\b')
+        return nroff->type;
+
+    next2 = mcview_get_byte (nroff->view, nroff->index + 2);
+
+    if (next2 == -1 || !g_ascii_isprint (next2))        /* FIXME: utf-8 and g_ascii_isprint */
+        return nroff->type;
+
+    if (nroff->current_char == '_' && next2 == '_') {
+        nroff->type = (nroff->prev_type == NROFF_TYPE_BOLD)
+            ? NROFF_TYPE_BOLD : NROFF_TYPE_UNDERLINE;
+
+    } else if (nroff->current_char == next2) {
+        nroff->type = NROFF_TYPE_BOLD;
+    } else if (nroff->current_char == '_') {
+        nroff->current_char = next2;
+        nroff->type = NROFF_TYPE_UNDERLINE;
+    } else if (nroff->current_char == '+' && next2 == 'o') {
+        /* ??? */
+    }
+
+    return nroff->type;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+int
+mcview_nroff_seq_next (mcview_nroff_t * nroff)
+{
+    if (nroff == NULL)
+        return -1;
+
+    nroff->prev_type = nroff->type;
+
+    nroff->index += nroff->char_width;
+
+    if (nroff->prev_type != NROFF_TYPE_NONE)
+        nroff->index += 2;
+    mcview_nroff_seq_info (nroff);
+    return nroff->current_char;
 }
 
 /* --------------------------------------------------------------------------------------------- */

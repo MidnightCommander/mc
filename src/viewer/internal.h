@@ -32,7 +32,7 @@ enum view_ds {
 /* Offset in bytes into a file */
 typedef enum {
     INVALID_OFFSET = ((off_t) - 1),
-    OFFSETTYPE_MAX = ((off_t) (1 << (sizeof (off_t) * 8 - 1) - 1))
+    OFFSETTYPE_MAX = ((off_t) 1 << (sizeof (off_t) * 8 - 1) - 1)
 }
 mcview_offset_t;
 
@@ -40,6 +40,12 @@ enum ccache_type {
     CCACHE_OFFSET,
     CCACHE_LINECOL
 };
+
+typedef enum {
+    NROFF_TYPE_NONE = 0,
+    NROFF_TYPE_BOLD = 1,
+    NROFF_TYPE_UNDERLINE = 2
+} nroff_type_t;
 
 /*** structures declarations (and typedefs of structures)***************/
 
@@ -68,6 +74,7 @@ struct coord_cache_entry {
     off_t cc_nroff_column;
 };
 
+struct mcview_nroff_struct;
 
 typedef struct mcview_struct {
     Widget widget;
@@ -167,9 +174,19 @@ typedef struct mcview_struct {
     gboolean search_all_codepages;
     gboolean search_case;
     gboolean search_backwards;
+    struct mcview_nroff_struct *search_nroff_seq;
 
     int search_numNeedSkipChar;
 } mcview_t;
+
+typedef struct mcview_nroff_struct{
+    mcview_t *view;
+    off_t index;
+    int char_width;
+    int current_char;
+    nroff_type_t type;
+    nroff_type_t prev_type;
+} mcview_nroff_t;
 
 /*** global variables defined in .c file *******************************/
 
@@ -273,9 +290,15 @@ void mcview_offset_to_coord (mcview_t *, off_t *, off_t *, off_t);
 void mcview_place_cursor (mcview_t *);
 void mcview_moveto_match (mcview_t *);
 
-/* nforr.c: */
+/* nroff.c: */
 void mcview_display_nroff (mcview_t *);
 int mcview__get_nroff_real_len (mcview_t *, off_t, off_t);
+
+mcview_nroff_t *mcview_nroff_seq_new_num (mcview_t * view, off_t);
+mcview_nroff_t *mcview_nroff_seq_new (mcview_t * view);
+void mcview_nroff_seq_free (mcview_nroff_t **);
+nroff_type_t mcview_nroff_seq_info (mcview_nroff_t *);
+int mcview_nroff_seq_next (mcview_nroff_t *);
 
 /* plain.c: */
 void mcview_display_text (mcview_t *);

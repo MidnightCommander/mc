@@ -155,10 +155,14 @@ mcview_dialog_search (mcview_t * view)
     view->last_search_string = exp;
     exp = NULL;
 
+    if (view->search_nroff_seq)
+        mcview_nroff_seq_free (&(view->search_nroff_seq));
+
     if (view->search)
         mc_search_free (view->search);
 
     view->search = mc_search_new (view->last_search_string, -1);
+    view->search_nroff_seq = mcview_nroff_seq_new (view);
     if (!view->search) {
         g_free (exp);
         g_free (defval);

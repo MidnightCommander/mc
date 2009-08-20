@@ -81,6 +81,9 @@ mcview_find (mcview_t * view, gsize search_start, gsize * len)
     if (view->search_backwards) {
         search_end = mcview_get_filesize (view);
         while ((int) search_start >= 0) {
+            view->search_nroff_seq->index = search_start;
+            mcview_nroff_seq_info (view->search_nroff_seq);
+
             if (search_end > search_start + view->search->original_len
                 && mc_search_is_fixed_search_str (view->search))
                 search_end = search_start + view->search->original_len;
@@ -94,6 +97,9 @@ mcview_find (mcview_t * view, gsize search_start, gsize * len)
         view->search->error_str = g_strdup (_(" Search string not found "));
         return FALSE;
     }
+    view->search_nroff_seq->index = search_start;
+    mcview_nroff_seq_info (view->search_nroff_seq);
+
     return mc_search_run (view->search, (void *) view, search_start, mcview_get_filesize (view),
                           len);
 }
@@ -110,35 +116,30 @@ mcview_search_cmd_callback (const void *user_data, gsize char_offset)
     int byte;
     mcview_t *view = (mcview_t *) user_data;
 
-    byte = mcview_get_byte (view, char_offset);
-    if (byte == -1)
-        return MC_SEARCH_CB_ABORT;
     /*    view_read_continue (view, &view->search_onechar_info); *//* AB:FIXME */
+    if (!view->text_nroff_mode)
+    {
+        byte = mcview_get_byte (view, char_offset);
+        if (byte == -1)
+            return MC_SEARCH_CB_ABORT;
+
+        return byte;
+    }
 
     if (view->search_numNeedSkipChar) {
         view->search_numNeedSkipChar--;
-        if (view->search_numNeedSkipChar) {
-            return byte;
-        }
         return MC_SEARCH_CB_SKIP;
     }
-#if 0                           /* AB:FIXME */
-    if (view_read_test_nroff_back (view, &view->search_onechar_info)) {
-        if (cmp (view->search_onechar_info.chi1, "_") && (!cmp (view->search_onechar_info.cnxt, "_")
-                                                          || !cmp (view->search_onechar_info.chi2,
-                                                                   "\b"))
-            )
-            view->search_numNeedSkipChar = 2;
-        else
-            view->search_numNeedSkipChar = 1;
 
-        return MC_SEARCH_CB_SKIP;
-    }
-    if (byte == '_' && *view->search_onechar_info.cnxt == 0x8) {
-        view->search_numNeedSkipChar = 1;
-        return MC_SEARCH_CB_SKIP;
-    }
-#endif
+    byte = view->search_nroff_seq->current_char;
+
+    if (byte == -1)
+        return MC_SEARCH_CB_ABORT;
+
+    mcview_nroff_seq_next (view->search_nroff_seq);
+
+    if (view->search_nroff_seq->type != NROFF_TYPE_NONE)
+        view->search_numNeedSkipChar = 2;
 
     return byte;
 }
@@ -213,7 +214,7 @@ mcview_do_search (mcview_t * view)
                 view->search_start ++;
 
             view->search_end = view->search_start + match_len +
-                mcview__get_nroff_real_len (view, view->search_start, match_len + 1);
+                mcview__get_nroff_real_len (view, view->search_start-1, match_len);
 
             if (view->hex_mode) {
                 view->hex_cursor = view->search_start;
