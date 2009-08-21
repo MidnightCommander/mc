@@ -1,16 +1,16 @@
 .\"TOPICS "Topics:"
-.TH MC 1 "August 2009" "MC Version 4.7.0-pre1" "GNU Midnight Commander"
+.TH MC 1 "August 2009" "MC Version 4.7.0\-pre1" "GNU Midnight Commander"
 .\"SKIP_SECTION"
 .SH "NAME"
-mc \- Visual shell for Unix-like systems.
+mc \- Visual shell for Unix\-like systems.
 .\"SKIP_SECTION"
 .SH "USAGE"
 .B mc
-[\-abcCdfhPstuUVx] [\-l log] [dir1 [dir2]] [-e [file]] [-v file]
+[\-abcCdfhPstuUVx] [\-l log] [dir1 [dir2]] [\-e [file]] [\-v file]
 .\"NODE "DESCRIPTION"
 .SH "DESCRIPTION"
 GNU Midnight Commander is a directory browser/file manager for
-Unix-like operating systems.
+Unix\-like operating systems.
 .\"NODE "OPTIONS"
 .\".\"DONT_SPLIT"
 .SH "OPTIONS"
@@ -45,7 +45,7 @@ startup.  See also
 .BR "mcedit (1)" .
 .TP
 .I \-f, \-\-datadir
-Display the compiled-in search paths for Midnight Commander files.
+Display the compiled\-in search paths for Midnight Commander files.
 .TP
 .I \-k, \-\-resetsoft
 Reset softkeys to their default from the termcap/terminfo
@@ -95,7 +95,7 @@ Start the internal viewer to view the specified file.  See also
 Display the version of the program.
 .TP
 .I \-x, \-\-xterm
-Force xterm mode.  Used when running on xterm-capable terminals (two
+Force xterm mode.  Used when running on xterm\-capable terminals (two
 screen modes, and able to send mouse escape sequences).
 .PP
 If specified, the first path name is the directory to show in the
@@ -160,7 +160,7 @@ When you left click on a file in the directory panels, that file is
 selected; if you click with the right button, the file is marked (or
 unmarked, depending on the previous state).
 .PP
-Double-clicking on a file will try to execute the command if it is
+Double\-clicking on a file will try to execute the command if it is
 an executable program; and if the
 .\"LINK2"
 extension file
@@ -205,17 +205,17 @@ Some commands in the Midnight Commander involve the use of the
 (sometimes labeled ALT or even Compose) keys. In this manual we will
 use the following abbreviations:
 .TP
-.B C-<chr>
+.B C\-<chr>
 means hold the Control key while typing the character <chr>.
-Thus C-f would be: hold the Control key and type f.
+Thus C\-f would be: hold the Control key and type f.
 .TP
-.B Alt-<chr>
+.B Alt\-<chr>
 means hold the Meta or Alt key down while typing <chr>.
 If there is no Meta or Alt key, type
 .IR ESC , 
 release it, then type the character <chr>.
 .TP
-.B S-<chr>
+.B S\-<chr>
 means hold the Shift key down while typing <chr>.
 .PP
 All input lines in the Midnight Commander use an approximation to
@@ -274,79 +274,79 @@ extensions file
 .\"Extension File Edit"
 then the corresponding command is executed.
 .TP
-.B C-l
+.B C\-l
 repaint all the information in the Midnight Commander.
 .TP
-.B C-x c
+.B C\-x c
 run the
 .\"LINK2"
 Chmod
 .\"Chmod"
 command on a file or on the tagged files.
 .TP 
-.B C-x o
+.B C\-x o
 run the
 .\"LINK2"
 Chown
 .\"Chown"
 command on the current file or on the tagged files.
 .TP
-.B C-x l
+.B C\-x l
 run the link command.
 .TP
-.B C-x s
+.B C\-x s
 run the symbolic link command.
 .TP
-.B C-x i
+.B C\-x i
 set the other panel display mode to information.
 .TP
-.B C-x q
+.B C\-x q
 set the other panel display mode to quick view.
 .TP
-.B C-x !
+.B C\-x !
 execute the
 .\"LINK2"
 External panelize
 .\"External panelize"
 command.
 .TP
-.B C-x h
+.B C\-x h
 run the
 .\"LINK2"
 add directory to hotlist
 .\"Hotlist"
 command.
 .TP
-.B Alt-!
+.B Alt\-!
 executes the Filtered view command, described in the
 .\"LINK2"
 view command\&.
 .\"Internal File Viewer"
 .TP
-.B Alt-?
+.B Alt\-?
 executes the
 .\"LINK2"
 Find file
 .\"Find File"
 command.
 .TP
-.B Alt-c
+.B Alt\-c
 pops up the
 .\"LINK2"
 quick cd
 .\"Quick cd"
 dialog.
 .TP
-.B C-o
+.B C\-o
 when the program is being run in the Linux or FreeBSD console or under
 an xterm, it will show you the output of the previous command.  When ran
 on the Linux console, the Midnight Commander uses an external program
 (cons.saver) to handle saving and restoring of information on the
 screen.
 .PP
-When the subshell support is compiled in, you can type C-o at any time
+When the subshell support is compiled in, you can type C\-o at any time
 and you will be taken back to the Midnight Commander main screen, to
-return to your application just type C-o.  If you have an application
+return to your application just type C\-o.  If you have an application
 suspended by using this trick, you won't be able to execute other
 programs from the Midnight Commander until you terminate the suspended
 application.
@@ -359,7 +359,7 @@ look at the section on
 Left and Right Menus\&.
 .\"Left and Right Menus"
 .TP
-.B Tab, C-i
+.B Tab, C\-i
 change the current panel. The old other panel becomes the new current
 panel and the old current panel becomes the new other panel. The
 selection bar moves from the old current panel to the new current
@@ -369,38 +369,38 @@ panel.
 to tag files you may use the Insert key (the kich1 terminfo sequence). 
 To untag files, just retag a tagged file.
 .TP
-.B C-t
-to change charset of panel you may use C-t (Control-t).
+.B C\-t
+to change charset of panel you may use C\-t (Control\-t).
 Recoding is made from selected codepage into system codepage. To
 cancel the recoding you may select "directory up" (..) in active panel.
 To cancel the charsets in all directories, select "No translation " in 
 the dialog of encodings.
 .TP
-.B Alt-g, Alt-r, Alt-j
+.B Alt\-g, Alt\-r, Alt\-j
 used to select the top file in a panel, the middle file and the bottom one,
 respectively.
 .TP
-.B C-s, Alt-s
+.B C\-s, Alt\-s
 start a filename search in the directory listing. When the search is
 active, the user input will be added to the search string instead of
 the command line. If the
-.I Show mini-status
-option is enabled the search string is shown on the mini-status
+.I Show mini\-status
+option is enabled the search string is shown on the mini\-status
 line. When typing, the selection bar will move to the next file
 starting with the typed letters. The
 .I backspace
 or
 .I DEL
-keys can be used to correct typing mistakes. If C-s is pressed
+keys can be used to correct typing mistakes. If C\-s is pressed
 again, the next match is searched for.
 .TP
-.B Alt-t
+.B Alt\-t
 toggle the current display listing to show the next display listing
 mode.
 With this it is possible to quickly switch to brief listing, long
 listing, user defined listing mode, and back to the default.
 .TP
-.B C-\\\\ (control-backslash)
+.B C\-\\\\ (control\-backslash)
 show the
 .\"LINK2"
 directory hotlist
@@ -432,50 +432,50 @@ is off, the case will be ignored.
 use the "\\" key to unselect a group of files. This is the opposite of
 the Plus key.
 .TP
-.B up-key, C-p
+.B up\-key, C\-p
 move the selection bar to the previous entry in the panel.
 .TP
-.B down-key, C-n
+.B down\-key, C\-n
 move the selection bar to the next entry in the panel.
 .TP
-.B home, a1, Alt-<
+.B home, a1, Alt\-<
 move the selection bar to the first entry in the panel.
 .TP
-.B end, c1, Alt->
+.B end, c1, Alt\->
 move the selection bar to the last entry in the panel.
 .TP
-.B next-page, C-v
+.B next\-page, C\-v
 move the selection bar one page down.
 .TP
-.B prev-page, Alt-v
+.B prev\-page, Alt\-v
 move the selection bar one page up.
 .TP
-.B Alt-o
+.B Alt\-o
 If the currently selected file is a directory, load that directory on
 the other panel and moves the selection to the next file.
 .TP
-.B Alt-i
+.B Alt\-i
 make the current directory of the current panel also the current
 directory of the other panel.  Put the other panel to the listing mode
 if needed.  If the current panel is panelized, the other panel doesn't
 become panelized.
 .TP
-.B C-PageUp, C-PageDown
+.B C\-PageUp, C\-PageDown
 only when supported by the terminal: change to ".." and to the currently
 selected directory respectively.
 .TP
-.B Alt-y
+.B Alt\-y
 moves to the previous directory in the history, equivalent to clicking
 the
 .I <
 with the mouse.
 .TP
-.B Alt-u
+.B Alt\-u
 moves to the next directory in the history, equivalent to clicking the
 .I >
 with the mouse.
 .TP
-.B Alt-Shift-h, Alt-H
+.B Alt\-Shift\-h, Alt\-H
 displays the directory history, equivalent to depressing the 'v' with
 the mouse.
 .\"NODE "  Shell Command Line"
@@ -483,42 +483,42 @@ the mouse.
 This section lists keys which are useful to avoid excessive typing when
 entering shell commands.
 .TP
-.B Alt-Enter
+.B Alt\-Enter
 copy the currently selected file name to the command line.
 .TP
-.B C-Enter
-same a Alt-Enter.  May not work on remote systems and some terminals.
+.B C\-Enter
+same a Alt\-Enter.  May not work on remote systems and some terminals.
 .TP
-.B C-Shift-Enter
+.B C\-Shift\-Enter
 copy the full path name of the currently selected file to the command
 line.  May not work on remote systems and some terminals.
 .TP
-.B Alt-Tab
+.B Alt\-Tab
 does the filename, command, variable, username and hostname
 .\"LINK2"
 completion
 .\"Completion"
 for you.
 .TP
-.B C-x t, C-x C-t
+.B C\-x t, C\-x C\-t
 copy the tagged files (or if there are no tagged files, the selected
-file) of the current panel (C-x t) or of the other panel (C-x C-t) to
+file) of the current panel (C\-x t) or of the other panel (C\-x C\-t) to
 the command line.
 .TP
-.B C-x p, C-x C-p
+.B C\-x p, C\-x C\-p
 the first key sequence copies the current path name to the command
 line, and the second one copies the unselected panel's path name to
 the command line.
 .TP
-.B C-q
+.B C\-q
 the quote command can be used to insert characters that are otherwise
 interpreted by the Midnight Commander (like the '+' symbol)
 .TP
-.B Alt-p, Alt-n
-use these keys to browse through the command history. Alt-p takes you
-to the last entry, Alt-n takes you to the next one.
+.B Alt\-p, Alt\-n
+use these keys to browse through the command history. Alt\-p takes you
+to the last entry, Alt\-n takes you to the next one.
 .TP
-.B Alt-h
+.B Alt\-h
 displays the history for the current input line.
 .\"NODE "  General Movement Keys"
 .SH "  General Movement Keys"
@@ -529,16 +529,16 @@ keys. Each of them also accepts some keys of its own.
 Other parts of the Midnight Commander use some of the same movement
 keys, so this section may be of use for those parts too.
 .TP
-.B Up, C-p
+.B Up, C\-p
 moves one line backward.
 .TP
-.B Down, C-n
+.B Down, C\-n
 moves one line forward.
 .TP
-.B Prev Page, Page Up, Alt-v
+.B Prev Page, Page Up, Alt\-v
 moves one page up.
 .TP
-.B Next Page, Page Down, C-v
+.B Next Page, Page Down, C\-v
 moves one page down.
 .TP
 .B Home, A1
@@ -550,7 +550,7 @@ move to the end.
 The help viewer and the file viewer accept the following keys in
 addition the to ones mentioned above:
 .TP
-.B b, C-b, C-h, Backspace, Delete
+.B b, C\-b, C\-h, Backspace, Delete
 moves one page up.
 .TP
 .B Space bar
@@ -569,54 +569,54 @@ command line
 .\"Shell Command Line"
 and for the query dialogs in the program) accept these keys:
 .TP
-.B C-a
+.B C\-a
 puts the cursor at the beginning of line.
 .TP
-.B C-e
+.B C\-e
 puts the cursor at the end of the line.
 .TP
-.B C-b, move-left
+.B C\-b, move\-left
 move the cursor one position left.
 .TP
-.B C-f, move-right
+.B C\-f, move\-right
 move the cursor one position right.
 .TP
-.B Alt-f
+.B Alt\-f
 moves one word forward.
 .TP
-.B Alt-b
+.B Alt\-b
 moves one word backward.
 .TP
-.B C-h, backspace
+.B C\-h, backspace
 delete the previous character.
 .TP
-.B C-d, Delete
+.B C\-d, Delete
 delete the character in the point (over the cursor).
 .TP
-.B C-@
+.B C\-@
 sets the mark for cutting.
 .TP
-.B C-w
+.B C\-w
 copies the text between the cursor and the mark to a kill buffer and
 removes the text from the input line.
 .TP
-.B Alt-w
+.B Alt\-w
 copies the text between the cursor and the mark to a kill buffer.
 .TP
-.B C-y
+.B C\-y
 yanks back the contents of the kill buffer.
 .TP
-.B C-k
+.B C\-k
 kills the text from the cursor to the end of the line.
 .TP
-.B Alt-p, Alt-n
-Use these keys to browse through the command history. Alt-p takes you
-to the last entry, Alt-n takes you to the next one.
+.B Alt\-p, Alt\-n
+Use these keys to browse through the command history. Alt\-p takes you
+to the last entry, Alt\-n takes you to the next one.
 .TP
-.B Alt-C-h, Alt-Backspace
+.B Alt\-C\-h, Alt\-Backspace
 delete one word backward.
 .TP
-.B Alt-Tab
+.B Alt\-Tab
 does the filename, command, variable, username and hostname
 .\"LINK2"
 completion
@@ -685,7 +685,7 @@ the modification time.
 The brief view shows only the file name and it has two columns
 (therefore showing twice as many files as other views). The long view
 is similar to the output of
-.B "ls -l"
+.B "ls \-l"
 command. The long view takes the whole screen width.
 .PP
 If you choose the "User" display format, then you have to specify
@@ -712,11 +712,11 @@ displays the file size.
 is an alternative form of the
 .B size
 format. It displays the size of the files and for directories it just
-shows SUB-DIR or UP--DIR.
+shows SUB\-DIR or UP\-\-DIR.
 .TP
 .B type
 displays a one character wide type field.  This character is similar to
-what is displayed by ls with the -F flag -
+what is displayed by ls with the \-F flag \-
 .B *
 for executable files,
 .B /
@@ -725,7 +725,7 @@ for directories,
 for links,
 .B =
 for sockets,
-.B -
+.B \-
 for character devices,
 .B +
 for block devices,
@@ -785,7 +785,7 @@ To force one field to a fixed size (a size specifier), you just add
 followed by the number of characters you want the field to have.  If the
 number is followed by the symbol
 .BR + ,
-then the size specifies the minimal field size - if the program finds
+then the size specifies the minimal field size \- if the program finds
 out that there is more space on the screen, it will then expand that
 field.
 .PP
@@ -862,7 +862,7 @@ External panelize
 for more information).
 .\"NODE "  File Menu"
 .SH "  File Menu"
-The Midnight Commander uses the F1 - F10 keys as keyboard shortcuts
+The Midnight Commander uses the F1 \- F10 keys as keyboard shortcuts
 for commands appearing in the file menu.  The escape sequences for the
 function keys are terminfo capabilities kf1 trough kf10.  On terminals
 without function key support, you can achieve the same functionality by
@@ -873,7 +873,7 @@ The File menu has the following commands (keyboard shortcuts in parentheses):
 .PP
 .B Help (F1)
 .PP
-Invokes the built-in hypertext help viewer. Inside the
+Invokes the built\-in hypertext help viewer. Inside the
 .\"LINK2"
 help viewer\&,
 .\"Contents"
@@ -891,7 +891,7 @@ user menu\&.
 The user menu provides an easy way to provide users with a menu and
 add extra features to the Midnight Commander.
 .PP
-.B View (F3, Shift-F3)
+.B View (F3, Shift\-F3)
 .PP
 View the currently selected file. By default this invokes the
 .\"LINK2"
@@ -906,11 +906,11 @@ is undefined, the
 .B PAGER
 environment variable is tried.  If
 .B PAGER
-is also undefined, the "view" command is invoked.  If you use Shift-F3
+is also undefined, the "view" command is invoked.  If you use Shift\-F3
 instead, the viewer will be invoked without doing any formatting or
 preprocessing to the file.
 .PP
-.B Filtered View (Alt-!)
+.B Filtered View (Alt\-!)
 .PP
 This command prompts for a command
 and its arguments (the argument defaults to the currently selected
@@ -919,7 +919,7 @@ viewer.
 .PP
 .B Edit (F4, F14)
 .PP
-Press F4 to edit the highlighted file.  Press F14 (usually Shift-F4)
+Press F4 to edit the highlighted file.  Press F14 (usually Shift\-F4)
 to start the editor with a new, empty file.
 Currently they invoke the
 .B vi
@@ -936,8 +936,8 @@ if the use_internal_edit option is on.
 Press F5 to pop up an input dialog to copy the currently selected file (or
 the tagged files, if there is at least one file tagged) to the
 directory/filename you specify in the input dialog.  The destination 
-defaults to the directory in the non-selected panel. During this
-process, you can press C-c or ESC to abort the operation. For details
+defaults to the directory in the non\-selected panel. During this
+process, you can press C\-c or ESC to abort the operation. For details
 about source mask (which will be usually either * or ^\\(.*\\)$ depending
 on setting of Use shell patterns) and possible wildcards in the destination
 see
@@ -945,23 +945,23 @@ see
 Mask copy/rename\&.
 .\"Mask Copy/Rename"
 .PP
-F15 (usually Shift-F5) is similar, but defaults to the directory in the
+F15 (usually Shift\-F5) is similar, but defaults to the directory in the
 selected panel. It always operates on the selected file, regardless of
 any tagged files.
 .PP
 On some systems, it is possible to do the copy in the background by
-clicking on the background button (or pressing Alt-b in the dialog
+clicking on the background button (or pressing Alt\-b in the dialog
 box).  The
 .\"LINK2"
 Background Jobs
 .\"Background jobs"
 is used to control the background process.
 .PP
-.B Link (C-x l)
+.B Link (C\-x l)
 .PP
 Create a hard link to the current file.
 .PP
-.B SymLink (C-x s)
+.B SymLink (C\-x s)
 .PP
 Create a symbolic link to the current file. To those of you who don't
 know what links are: creating a link to a file is a bit like copying
@@ -979,10 +979,10 @@ you don't even want to know.
 A symbolic link is a reference to the name of the original file. If
 the original file is deleted the symbolic link is useless. It is quite
 easy to notice that the files represent the same image. The Midnight
-Commander shows an "@"-sign in front of the file name if it is a
+Commander shows an "@"\-sign in front of the file name if it is a
 symbolic link to somewhere (except to directory, where it shows a tilde (~)).
-The original file which the link points to is shown on mini-status line if the
-.I "Show mini-status"
+The original file which the link points to is shown on mini\-status line if the
+.I "Show mini\-status"
 option is enabled. Use symbolic links when you want to avoid the
 confusion that can be caused by hard links.
 .PP
@@ -991,15 +991,15 @@ confusion that can be caused by hard links.
 Press F6 to pop up an input dialog to copy the currently selected file (or
 the tagged files, if there is at least one file tagged) to the
 directory/filename you specify in the input dialog.  The destination 
-defaults to the directory in the non-selected panel. For more details
+defaults to the directory in the non\-selected panel. For more details
 look at Copy (F5) operation above, most of the things are quite similar.
 .PP
-F16 (usually Shift-F6) is similar, but defaults to the directory in the
+F16 (usually Shift\-F6) is similar, but defaults to the directory in the
 selected panel. It always operates on the selected file, regardless of
 any tagged files.
 .PP
 On some systems, it is possible to do the copy in the background by
-clicking on the background button (or pressing Alt-b in the dialog
+clicking on the background button (or pressing Alt\-b in the dialog
 box).  The
 .\"LINK2"
 Background Jobs
@@ -1013,10 +1013,10 @@ Pop up an input dialog and creates the directory specified.
 .B Delete (F8)
 .PP
 Delete the currently selected file or the tagged files in the
-currently selected panel. During the process, you can press C-c or
+currently selected panel. During the process, you can press C\-c or
 ESC to abort the operation.
 .PP
-.B Quick cd (Alt-c)
+.B Quick cd (Alt\-c)
 Use the
 .\"LINK2"
 quick cd
@@ -1051,10 +1051,10 @@ Used to unselect a group of files. This is the opposite of the
 .I "Select group"
 command.
 .PP
-.B Quit (F10, Shift-F10)
+.B Quit (F10, Shift\-F10)
 .PP
-Terminate the Midnight Commander.  Shift-F10 is used when you want to
-quit and you are using the shell wrapper.  Shift-F10 will not take you
+Terminate the Midnight Commander.  Shift\-F10 is used when you want to
+quit and you are using the shell wrapper.  Shift\-F10 will not take you
 to the last directory you visited with the Midnight Commander, instead
 it will stay at the directory where you started the Midnight Commander.
 .\"NODE "    Quick cd"
@@ -1090,22 +1090,22 @@ The "Swap panels" command swaps the contents of the two directory panels.
 The "Panels on/off" command shows the output of the last shell command.
 This works only on xterm and on Linux and FreeBSD console.
 .PP
-The Compare directories (C-x d) command compares the directory
+The Compare directories (C\-x d) command compares the directory
 panels with each other. You can then use the Copy (F5) command to make
 the panels identical. There are three compare methods. The quick method
 compares only file size and file date. The thorough method makes a
-full byte-by-byte compare. The thorough method is not available if the
-machine does not support the mmap(2) system call.  The size-only
+full byte\-by\-byte compare. The thorough method is not available if the
+machine does not support the mmap(2) system call.  The size\-only
 compare method just compares the file sizes and does not check the
 contents or the date times, it just checks the file size.
 .PP
 The Command history command shows a list of typed commands. The
 selected command is copied to the command line. The command history
-can also be accessed by typing Alt-p or Alt-n.
+can also be accessed by typing Alt\-p or Alt\-n.
 .PP
 The
 .\"LINK2"
-Directory hotlist (C-\\)
+Directory hotlist (C\-\\)
 .\"Hotlist"
 command makes changing of the current directory to often used directories
 faster.
@@ -1141,7 +1141,7 @@ from the Left or Right menu.
 To get rid of long delays the Midnight Commander creates the tree
 figure by scanning only a small subset of all the directories. If the
 directory which you want to see is missing, move to its parent
-directory and press C-r (or F2).
+directory and press C\-r (or F2).
 .PP
 You can use the following keys:
 .PP
@@ -1156,7 +1156,7 @@ directory in the current panel. In the tree view, changes to this
 directory in the other panel and stays in tree view mode in the
 current panel.
 .PP
-.B C-r, F2 (Rescan).
+.B C\-r, F2 (Rescan).
 Rescan this directory. Use this when the tree figure is out of date:
 it is missing subdirectories or shows some subdirectories which don't
 exist any more.
@@ -1191,17 +1191,17 @@ Make a new directory below this directory.
 .B F8 (Delete).
 Delete this directory from the file system.
 .PP
-.B C-s, Alt-s.
+.B C\-s, Alt\-s.
 Search the next directory matching the search string. If there is
 no such directory these keys will move one line down.
 .PP
-.B C-h, Backspace.
+.B C\-h, Backspace.
 Delete the last character of the search string.
 .PP
 .B Any other character.
 Add the character to the search string and move to the next directory
 which starts with these characters. In the tree view you must first
-activate the search mode by pressing C-s. The search string is shown
+activate the search mode by pressing C\-s. The search string is shown
 in the mini status line.
 .PP
 The following actions are available only in the directory tree. They
@@ -1213,7 +1213,7 @@ Invoke the help viewer and show this section.
 .B Esc, F10.
 Exit the directory tree. Do not change the directory.
 .PP
-The mouse is supported. A double-click behaves like Enter. See
+The mouse is supported. A double\-click behaves like Enter. See
 also the section on
 .\"LINK2"
 mouse support\&.
@@ -1243,12 +1243,12 @@ file. The Again button will ask for the parameters for a new
 search. The Quit button quits the search operation. The Panelize
 button will place the found files to the current directory panel so
 that you can do additional operations on them (view, copy, move,
-delete and so on). After panelizing you can press C-r to return to the
+delete and so on). After panelizing you can press C\-r to return to the
 normal file listing.
 .PP
 It is possible to have a list of directories that the Find File command
 should skip during the search (for example, you may want to avoid
-searches on a CD-ROM or on a NFS directory that is mounted across a slow
+searches on a CD\-ROM or on a NFS directory that is mounted across a slow
 link).
 .PP
 Directories to be skipped should be set on the variable
@@ -1282,7 +1282,7 @@ symbolic links in the current directory, you can use external
 panelization to run the following command:
 .PP
 .nf
-find . -type l -print
+find . \-type l \-print
 .fi
 .PP
 Upon command completion, the directory contents of the panel will no
@@ -1309,7 +1309,7 @@ in the directory hotlist.  The Midnight Commander will change to the
 directory corresponding to the selected label.  From the hotlist dialog,
 you can remove already created label/directory pairs and add new ones.
 To add new directories quickly, you can use the Add to hotlist command
-(C-x h), which adds the current directory into the directory hotlist,
+(C\-x h), which adds the current directory into the directory hotlist,
 asking just for the label for the directory.
 .PP
 This makes cd to often used directories faster. You may consider using the
@@ -1390,7 +1390,7 @@ should be:
 .I Include
 (to add rules from the common section).
 .I command
-is any one-line shell command, with the simple
+is any one\-line shell command, with the simple
 .\"LINK2"
 macro substitution\&.
 .\"Macro Substitution"
@@ -1413,9 +1413,9 @@ here.
 The user menu is a menu of useful actions that can be customized by
 the user. When you access the user menu, the
 file .mc.menu from the current directory is used if it exists,
-but only if it is owned by user or root and is not world-writable.
+but only if it is owned by user or root and is not world\-writable.
 If no such file found, ~/.mc/menu is tried in the same way,
-and otherwise mc uses the default system-wide menu
+and otherwise mc uses the default system\-wide menu
 @prefix@/share/mc/mc.menu.
 .PP
 The format of the menu file is very simple. Lines that start with
@@ -1437,30 +1437,30 @@ Here is a sample mc.menu file:
 .PP
 .nf
 A	Dump the currently selected file
-	od -c %f
+	od \-c %f
 
 B	Edit a bug report and send it to root
-	I=`mktemp ${MC_TMPDIR:-/tmp}/mail.XXXXXX` || exit 1
+	I=`mktemp ${MC_TMPDIR:\-/tmp}/mail.XXXXXX` || exit 1
 	vi $I
-	mail -s "Midnight Commander bug" root < $I
-	rm -f $I
+	mail \-s "Midnight Commander bug" root < $I
+	rm \-f $I
 
 M	Read mail
-	emacs -f rmail
+	emacs \-f rmail
 
 N	Read Usenet news
-	emacs -f gnus
+	emacs \-f gnus
 
 H	Call the info hypertext browser
 	info
 
 J	Copy current directory to other panel recursively
-	tar cf - . | (cd %D && tar xvpf -)
+	tar cf \- . | (cd %D && tar xvpf \-)
 
 K	Make a release of the current subdirectory
-	echo -n "Name of distribution file: "
+	echo \-n "Name of distribution file: "
 	read tar
-	ln -s %d `dirname %d`/$tar
+	ln \-s %d `dirname %d`/$tar
 	cd ..
 	tar cvhf ${tar}.tar $tar
 
@@ -1476,11 +1476,11 @@ start from the first column with a '=' character. If the condition is
 true, the menu entry will be the default entry.
 .PP
 .nf
-Condition syntax: 	= <sub-cond>
-  or:			= <sub-cond> | <sub-cond> ...
-  or:			= <sub-cond> & <sub-cond> ...
+Condition syntax: 	= <sub\-cond>
+  or:			= <sub\-cond> | <sub\-cond> ...
+  or:			= <sub\-cond> & <sub\-cond> ...
 
-Sub-condition is one of following:
+Sub\-condition is one of following:
 
   y <pattern>		syntax of current file matching pattern?
 			(for edit menu only)
@@ -1491,7 +1491,7 @@ Sub-condition is one of following:
   t <type>		current file of type?
   T <type>		other file of type?
   x <filename>		is it executable filename?
-  ! <sub-cond>		negate the result of sub-condition
+  ! <sub\-cond>		negate the result of sub\-condition
 .fi
 .PP
 Pattern is a normal shell pattern or a regular expression, according
@@ -1535,8 +1535,8 @@ Here is a sample of the use of conditions:
 .PP
 .nf
 = f *.tar.gz | f *.tgz & t n
-L	List the contents of a compressed tar-archive
-	gzip -cd %f | tar xvf -
+L	List the contents of a compressed tar\-archive
+	gzip \-cd %f | tar xvf \-
 .fi
 .PP
 .B Addition Conditions
@@ -1622,11 +1622,11 @@ and the suffixes are shown in upper case (K, M ...)
 .PP
 .I Show Backup Files.
 If enabled, the Midnight Commander will show files ending with a tilde.
-Otherwise, they won't be shown (like GNU's ls option -B).
+Otherwise, they won't be shown (like GNU's ls option \-B).
 .PP
 .I Show Hidden Files.
 If enabled, the Midnight Commander will show all files that start with
-a dot (like ls -a).
+a dot (like ls \-a).
 .PP
 .I Mark moves down.
 If enabled, the selection bar will move down when you mark a file (with
@@ -1648,12 +1648,12 @@ are shown at the beginning of the listing, and other files below.
 .I Fast directory reload.
 If this option is enabled, the Midnight Commander will use a trick to
 determine if the directory contents have changed.  The trick is to reload
-the directory only if the i-node of the directory has changed; this means
+the directory only if the i\-node of the directory has changed; this means
 that reloads only happen when files are created or deleted.  If what
-changes is the i-node for a file in the directory (file size changes,
+changes is the i\-node for a file in the directory (file size changes,
 mode or owner changes, etc) the display is not updated.  In these cases,
 if you have the option on, you have to rescan the directory manually
-(with C-r).
+(with C\-r).
 .PP
 .B Pause after run
 .PP
@@ -1664,7 +1664,7 @@ possible settings for this variable:
 .I Never.
 Means that you do not want to see the output of your command.  If you
 are using the Linux or FreeBSD console or an xterm, you will be able to
-see the output of the command by typing C-o.
+see the output of the command by typing C\-o.
 .PP
 .I On dumb terminals.
 You will get the pause message on terminals that are not capable of
@@ -1693,7 +1693,7 @@ of some speed. This option has no effect, if
 is disabled.
 .PP
 .I Shell Patterns.
-By default the Select, Unselect and Filter commands will use shell-like
+By default the Select, Unselect and Filter commands will use shell\-like
 regular expressions. The following conversions are performed to achieve
 this: the '*' is replaced by '.*' (zero or more characters); the '?'
 is replaced by '.' (exactly one character) and '.' by the literal
@@ -1707,10 +1707,10 @@ configurable options of the Midnight Commander are saved in the
 .PP
 .I Auto menus.
 If this option is enabled, the user menu will be invoked at startup.
-Useful for building menus for non-unixers.
+Useful for building menus for non\-unixers.
 .PP
 .I Use internal editor.
-If this option is enabled, the built-in file editor is used to edit
+If this option is enabled, the built\-in file editor is used to edit
 files. If the option is disabled, the editor specified in the
 .B EDITOR
 environment variable is used.
@@ -1722,7 +1722,7 @@ internal file editor\&.
 .\"Internal File Editor"
 .PP
 .I Use internal viewer.
-If this option is enabled, the built-in file viewer is used to view
+If this option is enabled, the built\-in file viewer is used to view
 files. If the option is disabled, the pager specified in the
 .B PAGER
 environment variable is used.
@@ -1739,11 +1739,11 @@ By default the Midnight Commander pops up all possible
 completions
 .\"Completion"
 if the completion is ambiguous only when you press
-.B Alt-Tab
+.B Alt\-Tab
 for the second time.  For the first time, it just completes as much as
 possible and beeps in the case of ambiguity.  Enable this option if you
 want to see all possible completions even after pressing
-.B Alt-Tab
+.B Alt\-Tab
 the first time.
 .PP
 .I Rotating dash.
@@ -1751,7 +1751,7 @@ If this option is enabled, the
 Midnight Commander shows a rotating dash in the upper right corner
 as a work in progress indicator.
 .PP
-.I Lynx-like motion.
+.I Lynx\-like motion.
 If this option is enabled,
 you may use the arrows keys to automatically chdir if the
 current selection is a subdirectory and the shell command
@@ -1806,7 +1806,7 @@ according to their file type (e.g. directory, core file, executable,
 and so on).
 .PP
 If the
-.I Show Mini-Status
+.I Show Mini\-Status
 option is enabled, one line of status information about the currently
 selected item is shown at the bottom of the panels.
 .PP
@@ -1824,9 +1824,9 @@ enter and quitting the program.
 .\"NODE "    Display bits"
 .SH "    Display bits"
 This is used to configure the range of visible characters on the
-screen.  This setting may be 7-bits if your terminal/curses supports
-only seven output bits, ISO-8859-1 displays all the characters in the
-ISO-8859-1 map and full 8 bits is for those terminals that can display
+screen.  This setting may be 7\-bits if your terminal/curses supports
+only seven output bits, ISO\-8859\-1 displays all the characters in the
+ISO\-8859\-1 map and full 8 bits is for those terminals that can display
 full 8 bit characters.
 .\"NODE "    Learn keys"
 .SH "    Learn keys"
@@ -1887,7 +1887,7 @@ in a temporary location and then access the uncompressed file as a
 regular tar file.
 .PP
 Now, since we all love to browse files and tar files all over the disk,
-it's common that you will leave a tar file and the re-enter it later.
+it's common that you will leave a tar file and the re\-enter it later.
 Since decompression is slow, the Midnight Commander will cache the
 information in memory for a limited time.  When the timeout expires, all
 the resources associated with the file system are released.  The default
@@ -1902,8 +1902,8 @@ several options.
 .PP
 .I ftp anonymous password
 is the password used when you login as "anonymous".  Some sites require
-a valid e-mail address.  On the other hand, you probably don't want to
-give your real e-mail address to untrusted sites, especially if you are
+a valid e\-mail address.  On the other hand, you probably don't want to
+give your real e\-mail address to untrusted sites, especially if you are
 not using spam filtering.
 .PP
 ftpfs keeps the directory listing it fetches from a FTP server in a cache. 
@@ -1948,8 +1948,8 @@ firewalls.
 .SH "    Save Setup"
 At startup the Midnight Commander will try to load initialization
 information from the ~/.mc/ini file. If this file doesn't exist, it will
-load the information from the system-wide configuration file, located in
-@prefix@/share/mc/mc.ini. If the system-wide configuration file doesn't
+load the information from the system\-wide configuration file, located in
+@prefix@/share/mc/mc.ini. If the system\-wide configuration file doesn't
 exist, MC uses the default settings.
 .PP
 The
@@ -2014,8 +2014,8 @@ For example, ~guest is the home directory for the user guest, while
 .PP
 .I Previous directory.
 You can jump to the directory you were previously by using the special
-directory name '-' like this:
-.B cd -
+directory name '\-' like this:
+.B cd \-
 .PP
 .I CDPATH directories.
 If the directory specified to the
@@ -2161,7 +2161,7 @@ special keyboard maps in the ~/.mc/inputrc file.
 users may specify startup commands in the ~/.mc/tcshrc file.
 .PP
 When the subshell code is used, you can suspend applications at any
-time with the sequence C-o and jump back to the Midnight Commander, if
+time with the sequence C\-o and jump back to the Midnight Commander, if
 you interrupt an application, you will not be able to run other
 external commands until you quit the application you interrupted.
 .PP
@@ -2177,9 +2177,9 @@ section has more information on how you can control the subshell code.
 .\"NODE "Chmod"
 .SH "Chmod"
 The Chmod window is used to change the attribute bits in a group of
-files and directories.  It can be invoked with the C-x c key combination.
+files and directories.  It can be invoked with the C\-x c key combination.
 .PP
-The Chmod window has two parts -
+The Chmod window has two parts \-
 .I Permissions
 and
 .IR File .
@@ -2230,7 +2230,7 @@ cancel the Chmod command
 .\"NODE "Chown"
 .SH "Chown"
 The Chown command is used to change the owner/group of a file. The hot
-key for this command is C-x o.
+key for this command is C\-x o.
 .\"NODE "Advanced Chown"
 .SH "Advanced Chown"
 The Advanced Chown command is the
@@ -2278,7 +2278,7 @@ operation by pressing the Abort button.
 The recursive delete dialog is shown when you try to delete a directory
 which is not empty.  Press the Yes button to delete the directory
 recursively, the No button to skip the directory, the All button to
-delete all the directories and the None button to skip all the non-empty
+delete all the directories and the None button to skip all the non\-empty
 directories.  You can abort the whole operation by pressing the Abort
 button.  If you selected the Yes or All button you will be asked for a
 confirmation.  Type "yes" only if you are really sure you want to do the
@@ -2439,16 +2439,16 @@ the quotes.  Each number matches one byte.  You can mix quoted text
 with constants like this:
 .PP
 .nf
-"String" -1 0xBB 012 "more text"
+"String" \-1 0xBB 012 "more text"
 .fi
 .PP
-Note that 012 is an octal number.  -1 is converted to 0xFF.
+Note that 012 is an octal number.  \-1 is converted to 0xFF.
 .PP
 Here is a listing of the actions associated with each key that the
 Midnight Commander handles in the internal file viewer.
 .PP
 .B F1
-Invoke the built-in hypertext help viewer.
+Invoke the built\-in hypertext help viewer.
 .PP
 .B F2
 Toggle the wrap mode.
@@ -2469,11 +2469,11 @@ Reverse regular expression search.
 .B F7
 Normal search / hex mode search.
 .PP
-.B C-s, F17, n.
+.B C\-s, F17, n.
 Start normal search if there was no previous search expression else
 find next match.
 .PP
-.B C-r.
+.B C\-r.
 Start reverse search if there was no previous search expression else
 find next match.
 .PP
@@ -2492,26 +2492,26 @@ different colors. Also, on button label is the other mode than current.
 .B F10, Esc.
 Exit the internal file viewer.
 .PP
-.B next-page, space, C-v.
+.B next\-page, space, C\-v.
 Scroll one page forward.
 .PP
-.B prev-page, Alt-v, C-b, backspace.
+.B prev\-page, Alt\-v, C\-b, backspace.
 Scroll one page backward.
 .PP
-.B down-key
+.B down\-key
 Scroll one line forward.
 .PP
-.B up-key
+.B up\-key
 Scroll one line backward.
 .PP
-.B C-l
+.B C\-l
 Refresh the screen.
 .PP
-.B C-o
+.B C\-o
 Switch to the subshell and show the command screen.
 .PP
 .B !
-Like C-o, but run a new shell if the subshell is not running.
+Like C\-o, but run a new shell if the subshell is not running.
 .PP
 .B "[n] m"
 Set the mark n.
@@ -2519,13 +2519,13 @@ Set the mark n.
 .B "[n] r"
 Jump to the mark n.
 .PP
-.B C-f
+.B C\-f
 Jump to the next file.
 .PP
-.B C-b
+.B C\-b
 Jump to the previous file.
 .PP
-.B Alt-r
+.B Alt\-r
 Toggle the ruler.
 .PP
 It's possible to instruct the file viewer how to display a file, look
@@ -2535,7 +2535,7 @@ Extension File Edit section
 .\"Extension File Edit"
 .\"NODE "Internal File Editor"
 .SH "Internal File Editor"
-The internal file editor is a full-featured full screen editor.  It can
+The internal file editor is a full\-featured full screen editor.  It can
 edit files up to 64 megabytes.  It is possible to edit binary files. 
 The internal file editor is invoked using
 .B F4
@@ -2544,40 +2544,40 @@ if the
 option is set in the initialization file.
 .PP
 The features it presently supports are: block copy, move, delete, cut,
-paste; key for key undo; pull-down menus; file insertion; macro
-commands; regular expression search and replace; shift-arrow text highlighting
-(if supported by the terminal); insert-overwrite toggle; word wrap;
+paste; key for key undo; pull\-down menus; file insertion; macro
+commands; regular expression search and replace; shift\-arrow text highlighting
+(if supported by the terminal); insert\-overwrite toggle; word wrap;
 autoindent; tunable tab size; syntax highlighting for various file
 types; and an option to pipe text blocks through shell commands like
 indent and ispell.
 .PP
 The editor is very easy to use and requires no tutoring. To see what
-keys do what, just consult the appropriate pull-down menu. Other keys
+keys do what, just consult the appropriate pull\-down menu. Other keys
 are: Shift movement keys do text highlighting.
-.B Ctrl-Ins
+.B Ctrl\-Ins
 copies to the file
 .B cooledit.clip
 and
-.B Shift-Ins
+.B Shift\-Ins
 pastes from cooledit.clip.
-.B Shift-Del
+.B Shift\-Del
 cuts to
 .BR cooledit.clip ,
 and
-.B Ctrl-Del
+.B Ctrl\-Del
 deletes highlighted text. Mouse highlighting also works, and you
 can override the mouse as usual by holding down the shift key
 while dragging the mouse to let normal terminal mouse highlighting
 work.
 .PP
 To define a macro, press
-.B Ctrl-R
+.B Ctrl\-R
 and then type out the key
 strokes you want to be executed. Press
-.B Ctrl-R
+.B Ctrl\-R
 again when finished. You can then assign the macro to any key you
 like by pressing that key. The macro is executed when you press
-.B Ctrl-A
+.B Ctrl\-A
 and then the assigned key. The macro is also executed if
 you press Meta, Ctrl, or Esc and the assigned key, provided that the
 key is not used for any other function. Once defined, the macro
@@ -2598,7 +2598,7 @@ which is copied to
 .B .mc/cedit/edit.indent.rc
 in your home directory the first time you use it.
 .PP
-The editor also displays non-us characters (160+). When editing
+The editor also displays non\-us characters (160+). When editing
 binary files, you should set
 .B display bits
 to 7 bits in the options menu to keep the spacing clean.
@@ -2616,7 +2616,7 @@ hostname (if the text begins with
 .BR @ )
 or command (if you are on the command line in the position where you
 might type a command, possible completions then include shell reserved
-words and shell built-in commands as well) in turn.  If none of these
+words and shell built\-in commands as well) in turn.  If none of these
 matches, filename completion is attempted.
 .PP
 Filename, username, variable and hostname completion works on all input
@@ -2634,7 +2634,7 @@ the current position and you can select with the arrow keys and
 the correct entry.  You can also type the first letters in which the
 possibilities differ to move to a subset of all possibilities and
 complete as much as possible.  If you press
-.B Alt-Tab
+.B Alt\-Tab
 again, only the subset will be shown in the listbox, otherwise the first
 item which matches all the previous characters will be highlighted.  As
 soon as there is no ambiguity, dialog disappears, but you can hide it by
@@ -2646,7 +2646,7 @@ and left and right arrow keys. If
 Complete: show all
 .\"Configuration"
 is disabled, the dialog pops up only if you press
-.B Alt-Tab
+.B Alt\-Tab
 for the second time, for the first time MC just beeps.
 .\"NODE "Virtual File System"
 .SH "Virtual File System"
@@ -2693,13 +2693,13 @@ item in the menu or directly change your current directory using the
 .I cd
 command to a path name that looks like this:
 .PP
-.I /#ftp:[!][user[:pass]@]machine[:port][remote-dir]
+.I /#ftp:[!][user[:pass]@]machine[:port][remote\-dir]
 .PP
 The
 .IR user ,
 .I port
 and
-.I remote-dir
+.I remote\-dir
 elements are optional.  If you specify the
 .I user
 element, the Midnight Commander will login to the remote machine as that
@@ -2719,9 +2719,9 @@ Examples:
 .PP
 .nf
     /#ftp:ftp.nuclecu.unam.mx/linux/local
-    /#ftp:tsx-11.mit.edu/pub/linux/packages
+    /#ftp:tsx\-11.mit.edu/pub/linux/packages
     /#ftp:!behind.firewall.edu/pub
-    /#ftp:guest@remote-host.com:40/pub
+    /#ftp:guest@remote\-host.com:40/pub
     /#ftp:miguel:xxx@server/pub
 .fi
 .PP
@@ -2732,12 +2732,12 @@ Virtual File System
 dialog box for ftpfs options.
 .\"NODE "  Tar File System"
 .SH "  Tar File System"
-The tar file system provides you with read-only access to your tar
+The tar file system provides you with read\-only access to your tar
 files and compressed tar files by using the chdir command.  To change
 your directory to a tar file, you change your current directory to the
 tar file by using the following syntax:
 .PP
-.I /filename.tar#utar/[dir-inside-tar]
+.I /filename.tar#utar/[dir\-inside\-tar]
 .PP
 The mc.ext file already provides a shortcut for tar files, this means
 that usually you just point to a tar file and press return to enter
@@ -2750,8 +2750,8 @@ section for details on how this is done.
 Examples:
 .PP
 .nf
-    mc-3.0.tar.gz#utar/mc-3.0/vfs
-    /ftp/GCC/gcc-2.7.0.tar#utar
+    mc\-3.0.tar.gz#utar/mc\-3.0/vfs
+    /ftp/GCC/gcc\-2.7.0.tar#utar
 .fi
 .PP
 The latter specifies the full path of the tar archive.
@@ -2760,19 +2760,19 @@ The latter specifies the full path of the tar archive.
 The fish file system is a network based file system that allows you to
 manipulate the files in a remote machine as if they were local. To use
 this, the other side has to either run fish server, or has to have
-bash-compatible shell.
+bash\-compatible shell.
 .PP
 To connect to a remote machine, you just need to chdir
 into a special directory which name is in the following
 format:
 .PP
-.I /#sh:[user@]machine[:options]/[remote-dir]
+.I /#sh:[user@]machine[:options]/[remote\-dir]
 .PP
 The
 .I user,
 .I options
 and
-.I remote-dir
+.I remote\-dir
 elements are optional.  If you specify the
 .I user
 element, the Midnight Commander will try to login on the remote
@@ -2780,8 +2780,8 @@ machine as that user, otherwise it will use your login name.
 .PP
 The
 .I options
-are 'C' - use compression and 'rsh' use rsh instead of ssh.  If the
-.I remote-dir
+are 'C' \- use compression and 'rsh' use rsh instead of ssh.  If the
+.I remote\-dir
 element is present, your current directory on the remote machine will be
 set to this one.
 .PP
@@ -2802,12 +2802,12 @@ server program.
 To connect to a remote machine, you just need to chdir into a special
 directory which name is in the following format:
 .PP
-.I /#mc:[user@]machine[:port][remote-dir]
+.I /#mc:[user@]machine[:port][remote\-dir]
 .PP
 The
 .I user, port
 and
-.I remote-dir
+.I remote\-dir
 elements are optional.  If you specify the
 .I user
 element then the Midnight Commander will try to logon on the remote
@@ -2818,7 +2818,7 @@ The
 element is used when the remote server is running on a special port
 (see the mcserv(8) manual page for more information about ports);
 finally, if the
-.I remote-dir
+.I remote\-dir
 element is present, your current directory on the remote machine will
 be set to this one.
 .PP
@@ -2859,13 +2859,13 @@ To actually use it, you may try to use the panel command "SMB link..."
 (accessible from the menubar) or you may directly change your current
 directory to it using the cd command to a path name that looks like this:
 .PP
-.I /#smb:[user@]machine[/service][/remote-dir]
+.I /#smb:[user@]machine[/service][/remote\-dir]
 .PP
 The
 .IR user ,
 .I service
 and
-.I remote-dir
+.I remote\-dir
 elements are optional.
 The
 .IR user ,
@@ -2889,15 +2889,15 @@ Commander in an easy way, by writing scripts.
 .PP
 Extfs filesystems can be divided into two categories:
 .PP
-1. Stand-alone filesystems, which are not associated with any existing
-file.  They represent certain system-wide data as a directory tree.
+1. Stand\-alone filesystems, which are not associated with any existing
+file.  They represent certain system\-wide data as a directory tree.
 You can invoke them by typing
 .RI ' "cd #fsname" '
 where fsname is an extfs short name (see below).  Examples of such
 filesystems include audio (list audio tracks on the CD) or apt (list of
 all Debian packages in the system).
 .PP
-For example, to list CD-Audio tracks on your CD-ROM drive, type
+For example, to list CD\-Audio tracks on your CD\-ROM drive, type
 .PP
 .nf
   cd #audio
@@ -2921,7 +2921,7 @@ For example, to list contents of a zip archive documents.zip type
 In many aspects, you could treat extfs like any other directory.  For
 instance, you can add it to the hotlist or change to it from directory
 history.  An important limitation is that you cannot invoke shell
-commands inside extfs, just like any other non-local VFS.
+commands inside extfs, just like any other non\-local VFS.
 .PP
 Common extfs scripts included with Midnight Commander are:
 .TP
@@ -2960,7 +2960,7 @@ browsing of lslR listings as found on many FTPs
 .RI ( "cd filename#lslR" ).
 .TP
 .B mailfs
-mbox-style mailbox files support
+mbox\-style mailbox files support
 .RI ( "cd mailbox#mailfs" ).
 .TP
 .B patchfs
@@ -3001,12 +3001,12 @@ section.  Here is an example entry for Debian packages:
 The Midnight Commander will try to detect if your terminal supports
 color using the terminal database and your terminal name.  Sometimes
 it gets confused, so you may force color mode or disable color mode
-using the -c and -b flag respectively.
+using the \-c and \-b flag respectively.
 .PP
 If the program is compiled with the Slang screen manager instead of
 ncurses, it will also check the variable
 .B COLORTERM,
-if it is set, it has the same effect as the -c flag.
+if it is set, it has the same effect as the \-c flag.
 .PP
 You may specify terminals that always force color mode
 by adding the
@@ -3018,7 +3018,7 @@ supports color.  Example:
 .nf
 [Colors]
 color_terminals=linux,xterm
-color_terminals=terminal-name1,terminal-name2...
+color_terminals=terminal\-name1,terminal\-name2...
 .fi
 .PP
 The program can be compiled with both ncurses and slang, ncurses does
@@ -3105,7 +3105,7 @@ to a directory;
 .I stalelink
 is used for stale symbolic links;
 .I device
-- character and block devices;
+\- character and block devices;
 .I special
 is used for special files, such as pipes and sockets;
 .I core
@@ -3171,7 +3171,7 @@ will act as a prefix key for one second, and if no extra keys have
 arrived, then the ESC key is interpreted as a cancel key (ESC ESC).
 .TP
 .I only_leading_plus_minus
-Allow special treatment for '+', '-', '*' in the command line (select,
+Allow special treatment for '+', '\-', '*' in the command line (select,
 unselect, reverse selection) only if the command line is empty.  You
 don't need to quote those characters in the middle of the command line.
 On the other hand, you cannot use them to change selection when the
@@ -3191,7 +3191,7 @@ will just scroll a file at a time.
 .TP
 .I show_output_starts_shell
 This variable only works if you are not using the subshell support.
-When you use the C-o keystroke to go back to the user screen, if this
+When you use the C\-o keystroke to go back to the user screen, if this
 one is set, you will get a fresh shell.  Otherwise, pressing any key
 will bring you back to the Midnight Commander.
 .TP
@@ -3230,16 +3230,16 @@ The Midnight Commander provides a way to fix your system terminal
 database without requiring root privileges.  The Midnight Commander
 searches in the system initialization file (the mc.lib file located in
 the Midnight Commander library directory) and in the ~/.mc/ini file for
-the section "terminal:your-terminal-name" and then for the section
+the section "terminal:your\-terminal\-name" and then for the section
 "terminal:general", each line of the section contains a key symbol that
 you want to define, followed by an equal sign and the definition for the
 key.  You can use the special \\e form to represent the escape character
-and the ^x to represent the control-x character.
+and the ^x to represent the control\-x character.
 .PP
 The possible key symbols are:
 .PP
 .nf
-f0 to f20     Function keys f0-f20
+f0 to f20     Function keys f0\-f20
 bs            backspace
 home          home key
 end           end key
@@ -3273,13 +3273,13 @@ For example:
 
 .PP
 This means that ctrl+alt+left send \\e[[1;6D esc sequence
-and mc interprets "\\e[[1;6D" as C-A-Left.
+and mc interprets "\\e[[1;6D" as C\-A\-Left.
 
 .PP
 The
 .I complete
 key symbol represents the escape sequences used to invoke the completion
-process, this is invoked with Alt-tab, but you can define other keys to do
+process, this is invoked with Alt\-tab, but you can define other keys to do
 the same work (on those keyboard with tons of nice and unused keys
 everywhere).
 .SH ""
@@ -3295,7 +3295,7 @@ The help file for the program.
 .PP
 .I @prefix@/share/mc/mc.ext
 .IP
-The default system-wide extensions file.
+The default system\-wide extensions file.
 .PP
 .I ~/.mc/bindings
 .IP
@@ -3304,7 +3304,7 @@ file.  They override the contents of the system wide files if present.
 .PP
 .I @prefix@/share/mc/mc.ini
 .IP
-The default system-wide setup for the Midnight Commander, used only if
+The default system\-wide setup for the Midnight Commander, used only if
 the user doesn't have his own ~/.mc/ini file.
 .PP
 .I @prefix@/share/mc/mc.lib
@@ -3319,7 +3319,7 @@ are loaded from mc.lib.
 .I ~/.mc/ini
 .IP
 User's own setup. If this file is present then the setup is loaded
-from here instead of the system-wide startup file.
+from here instead of the system\-wide startup file.
 .PP
 .I @prefix@/share/mc/mc.hint
 .IP
@@ -3327,12 +3327,12 @@ This file contains the hints displayed by the program.
 .PP
 .I @prefix@/share/mc/mc.menu
 .IP
-This file contains the default system-wide applications menu.
+This file contains the default system\-wide applications menu.
 .PP
 .I ~/.mc/menu
 .IP
 User's own application menu. If this file is present it is used instead
-of the system-wide applications menu.
+of the system\-wide applications menu.
 .PP
 .I ~/.mc/Tree
 .IP
@@ -3340,12 +3340,12 @@ The directory list for the directory tree and tree view features.
 .PP
 .I ./.mc.menu
 .IP
-Local user-defined menu. If this file is present, it is used instead of
-the home or system-wide applications menu.
+Local user\-defined menu. If this file is present, it is used instead of
+the home or system\-wide applications menu.
 .\"SKIP_SECTION"
 .SH "LICENSE"
 This program is distributed under the terms of the GNU General Public
-License as published by the Free Software Foundation. See the built-in
+License as published by the Free Software Foundation. See the built\-in
 help for details on the License and the lack of warranty.
 .\"NODE "AVAILABILITY"
 .SH "AVAILABILITY"
@@ -3358,7 +3358,7 @@ tcsh(1), zsh(1).
 .PP
 .nf
 The Midnight Commander page on the World Wide Web:
-	http://www.midnight-commander.org/
+	http://www.midnight\-commander.org/
 .fi
 .\"NODE "AUTHORS"
 .SH "AUTHORS"
@@ -3370,10 +3370,10 @@ See the file TODO in the distribution for information on what remains to
 be done.
 .PP
 If you want to report a problem with the program, please send mail to
-this address: mc-devel@gnome.org.
+this address: mc\-devel@gnome.org.
 .PP
 Provide a detailed description of the bug, the version of the program
 you are running
-.RI ( "mc -V"
+.RI ( "mc \-V"
 displays this information), the operating system you are running the
 program on.  If the program crashes, we would appreciate a stack trace.
