@@ -1938,19 +1938,19 @@ msgstr "Переписать этот файл?"
 
 #, c-format
 msgid "Target date: %s, size %llu"
-msgstr "Дата модификации приемника: %s, размер %llu"
+msgstr "Приёмник: дата модификации: %s, размер: %llu"
 
 #, c-format
 msgid "Source date: %s, size %llu"
-msgstr "Дата модификации источника: %s, размер %llu"
+msgstr "Источник: дата модификации: %s, размер: %llu"
 
 #, c-format
 msgid "Target date: %s, size %u"
-msgstr "Дата модификации приемника: %s, размер %u"
+msgstr "Приёмник: дата модификации: %s, размер: %u"
 
 #, c-format
 msgid "Source date: %s, size %u"
-msgstr "Дата модификации источника: %s, размер %u"
+msgstr "Источник: дата модификации: %s, размер: %u"
 
 msgid " File exists "
 msgstr " Файл существует "
