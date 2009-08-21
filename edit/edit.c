@@ -1653,6 +1653,7 @@ edit_move_to_prev_col (WEdit * edit, long p)
             edit->over_col = 0;
         }
     } else {
+        edit->over_col = 0;
         if (is_in_indent (edit) && option_fake_half_tabs) {
             edit_update_curs_col (edit);
             if (space_width)
@@ -2655,6 +2656,7 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	edit_delete_to_line_begin (edit);
 	break;
     case CK_Enter:
+        edit->over_col = 0;
 	if (option_auto_para_formatting) {
 	    edit_double_newline (edit);
 	    if (option_return_does_auto_indent)
@@ -2881,12 +2883,16 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	break;
 
     case CK_Copy:
+        if ( option_cursor_beyond_eol && edit->over_col > 0 )
+            edit_insert_over (edit);
 	edit_block_copy_cmd (edit);
 	break;
     case CK_Remove:
 	edit_block_delete_cmd (edit);
 	break;
     case CK_Move:
+        if ( option_cursor_beyond_eol && edit->over_col > 0 )
+            edit_insert_over (edit);
 	edit_block_move_cmd (edit);
 	break;
 

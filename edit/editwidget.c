@@ -95,14 +95,14 @@ edit_event (WEdit * edit, Gpm_Event * event, int *result)
         long line_len = edit_move_forward3 (edit, edit_bol (edit, edit->curs1), 0,
                                             edit_eol(edit, edit->curs1));
         if ( event->x > line_len ) {
-            edit->over_col = event->x - line_len;
+            edit->over_col = event->x - line_len  - option_line_state_width - 1;
             edit->prev_col = line_len;
         } else {
             edit->over_col = 0;
-            edit->prev_col = event->x;
+            edit->prev_col = event->x - option_line_state_width - 1;
         }
     } else {
-        edit->prev_col = event->x - edit->start_col - 1;
+        edit->prev_col = event->x - edit->start_col - option_line_state_width - 1;
     }
 
     if (--event->y > (edit->curs_row + 1))
