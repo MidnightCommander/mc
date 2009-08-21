@@ -68,6 +68,7 @@ mc_search__normal_translate_to_regex (gchar * str, gsize * len)
         case ')':
         case '^':
         case '-':
+        case '|':
             g_string_append_c (buff, '\\');
             g_string_append_c (buff, str[loop]);
             loop++;
