@@ -2,11 +2,11 @@
 .TH MC 1 "January 2003" "MC Version 4.6.0" "GNU Midnight Commander"
 .\"SKIP_SECTION"
 .SH NAZWA
-mc - wizualny interpetator poleceń dla systemów Unixopodobnych
+mc \- wizualny interpetator poleceń dla systemów Unixopodobnych
 .\"SKIP_SECTION"
 .SH UŻYTKOWANIE
 .B mc
-[-abcCdfPstuUVx] [-l log] [kat1 [kat2]] [-v plik]
+[\-abcCdfPstuUVx] [\-l log] [kat1 [kat2]] [\-v plik]
 .\"NODE "DESCRIPTION"
 .SH OPIS
 Midnight Commander jest przeszukiwarką katalogów/menedżerem plików dla systemów
@@ -19,7 +19,7 @@ Unixopodobnych
 Wyłącza używanie symboli graficznych przy rysowaniu ramek.
 .TP
 .I \-b
-Wymusza wyświetlanie czarno-białe.
+Wymusza wyświetlanie czarno\-białe.
 .TP
 .I \-c
 Wymusza wyświetlanie w kolorze, zobacz sekcję
@@ -44,7 +44,7 @@ plików.
 Resetuje "miękkie" klawisze do ich standardowych funkcji z termcap/terminfo.
 Użyteczne tylko przy terminalach HP, kiedy klawisze funkcyjne nie działają.
 .TP
-.I -l plik
+.I \-l plik
 Zachowuje logi z serwerów ftp do pliku
 .IR plik .
 .TP
@@ -60,19 +60,19 @@ użytkownicy basha i zsh:
 
 mc ()
 {
-        MC=$HOME/tmp/mc$$-"$RANDOM"
-        @prefix@/bin/mc -P "$@" > "$MC"
+        MC=$HOME/tmp/mc$$\-"$RANDOM"
+        @prefix@/bin/mc \-P "$@" > "$MC"
         cd "`cat $MC`"
         rm "$MC"
         unset MC;
 }
 
 użytkownicy tcsh:
-alias mc 'setenv MC `@prefix@/bin/mc -P \!*`; cd $MC; unsetenv MC'
+alias mc 'setenv MC `@prefix@/bin/mc \-P \!*`; cd $MC; unsetenv MC'
 .fi
 Wiem, że ta funkcja mogłaby być krótsza dla basha i zsh, ale małe cudzysłowy
 nie zaakceptowały by zawieszenia programu kombinacją
-.BR C-z .
+.BR C\-z .
 .TP
 .I \-s
 Włącza tryb powolnego terminala, w którym program nie będzie rysował zbyt
@@ -143,10 +143,10 @@ serwerem
 .PP
 Kiedy klikniesz lewym przyciskiem na panel z katalogami, plik zostanie
 wybrany jako aktywny; jeśli klikniesz prawym przyciskiem zostanie on
-zaznaczony [lub odznaczony - w zależności od jego aktualnego stanu -
+zaznaczony [lub odznaczony \- w zależności od jego aktualnego stanu \-
 działanie podobne do klawisza
 .B Insert
-- przyp. tłumacza].
+\- przyp. tłumacza].
 .PP
 Podwójne kliknięcie w plik spowoduje wykonanie pliku, jeśli jest on wykonywalny,
 a jeśli rozszerzenie pliku jest rozpoznawane przez Midnight Commander'a i dostępny
@@ -178,13 +178,13 @@ Niektóre komendy Midnight Commandera wywołuje się kombinacją klawiszy
 .I Meta
 (opisywanego ALT lub nawet Compose). W tym manualu (pliku pomocy) będziemy
 używać następujących kombinacji:
-C-<klawisz> - znaczy: trzymając klawisz Control naciśnij
-<klawisz>. Więc C-f będzie oznaczać: trzymając Control, naciśnij f.
+C\-<klawisz> \- znaczy: trzymając klawisz Control naciśnij
+<klawisz>. Więc C\-f będzie oznaczać: trzymając Control, naciśnij f.
 .PP
-M-<klawisz> - znaczy, że trzymając klawisz Meta lub alt naciskamy <klawisz>.
+M\-<klawisz> \- znaczy, że trzymając klawisz Meta lub alt naciskamy <klawisz>.
 Jeśli na twojej klawiaturze nie ma ani klawisza Alt ani Meta, naciśnij ESC, puść
 go i wtedy naciśnij <klawisz> [skutek ten sam, acz jednak użycie trochę
-mniej przyjemne i bardziej skomlikowane - przyp. tłumacza].
+mniej przyjemne i bardziej skomlikowane \- przyp. tłumacza].
 .PP
 Wszystkie linie wprowadzające Midnight Commandera używają w przybliżeniu tych
 samych przypisań klawiszy co wersja GNU edytora Emacs.
@@ -233,44 +233,44 @@ linia wyboru jest na pliku wykonywalnym jest on wykonywany. I wreszcie jeśli
 rozszerzenie pliku zgadza się z obługiwanym przez programy zewnętrzne, które
 są obsługiwane prze Midnight Commandera, są one wywoływane z owym programem.
 .PP
-.BR C-l .
+.BR C\-l .
 Od nowa rysuje wszystkie informacje okna Midnight Commandera.
 .PP
-.BR "C-x c" .
+.BR "C\-x c" .
 Uruchamia komendę Chmod dla aktualnego pliku lub zaznaczonych plików.
 .PP
-.BR "C-x o" .
+.BR "C\-x o" .
 Uruchamia komendę Chown dla aktualnego pliku lub zaznaczonych plików.
 .PP
-.BR "C-x l" .
+.BR "C\-x l" .
 Uruchamia komendę dowiązywania.
 .PP
-.BR "C-x s" .
+.BR "C\-x s" .
 Uruchamia komendę miękkiego dowiązywania.
 .PP
-.BR "C-x i" .
+.BR "C\-x i" .
 Zmienia aktywny panel.
 .PP
-.BR "C-x q" .
+.BR "C\-x q" .
 Przełacza nieaktywny panel w tryb "quick view".
 .PP
-.BR "C-x !" .
+.BR "C\-x !" .
 Wykonuje komendę z zewnętrznego panelu.
 .PP
-.BR "C-x h" .
+.BR "C\-x h" .
 Uruchamia komendę dodawania katalogów do hotlisty.
 .PP
-.BR M-! .
+.BR M\-! .
 Uruchamia komendę filtrowanego podglądu, opisanego w sekcji
 .IR Podgląd .
 .PP
-.BR M-? .
+.BR M\-? .
 Uruchamia komendę szukania pliku.
 .PP
-.BR M-c .
+.BR M\-c .
 Włącza okno dialogowe quick cd (szybkiej zmiany katalogów)
 .PP
-.BR C-o .
+.BR C\-o .
 Jeśli program jest uruchamiany na konsoli typu Linux lub FreeBSD lub też
 na konsoli xterm, pokaże wyjście ostatnio wykonywanego programu. Jeśli
 uruchomiono Midnight Commandera na konsoli type Linux, MC używa
@@ -278,9 +278,9 @@ zewnętrznego programu (cons.saver) w celu zachowywyania i odzyskiwania
 informacji na ekranie komputera.
 .PP
 Jeśli użycie trybu powłoki w tle jest wkompilowane, możesz nacisnąć
-C-o w dowolnej chwili i zostataniesz przeniesiony z powrotem bezpośrednio
+C\-o w dowolnej chwili i zostataniesz przeniesiony z powrotem bezpośrednio
 do głównego okna Midnight Commandera, żeby powrócić do wykonywania aplikacji
-po prostu naciśnij znów C-o. Jeśli masz zawieszoną aplikację właśnie przez
+po prostu naciśnij znów C\-o. Jeśli masz zawieszoną aplikację właśnie przez
 użycie tego triku, nie będziesz mógł "odpalać" innych programów spod Midnight
 Commandera dopóki nie zamkniesz zawieszonego programu.
 .PP
@@ -294,51 +294,51 @@ Sekcja opisuje klawisze, które operują na panelu katalogów. Jeśli chcesz
 wiedzieć jak zmienić panele zobacz sekcję
 .IR "Lewe i prawe menu" .
 .PP
-.BR Tab ", " C-i .
+.BR Tab ", " C\-i .
 Zmienia aktywny panel. Stary panel staje się w tym momencie aktywnym panelem,
 a aktywny staje się starym. Linia wyboru zmienia swoje położenia do aktywnego
 panelu.
 .PP
-.BR Insert ", " C-t .
-DEPRECATED! Do zaznaczania plików możesz używać klawisza Insert lub C-t. Żeby odznaczyć plik
+.BR Insert ", " C\-t .
+DEPRECATED! Do zaznaczania plików możesz używać klawisza Insert lub C\-t. Żeby odznaczyć plik
 po prostu zaznacz jakiś już zaznaczony.
 .TP
 .B Insert
 to tag files you may use the Insert key (the kich1 terminfo sequence). 
 To untag files, just retag a tagged file.
 .TP
-.B C-t
-to change charset of panel you may use C-t (Control-t).
+.B C\-t
+to change charset of panel you may use C\-t (Control\-t).
 Recoding is made from selected codepage into system codepage. To
 cancel the recoding you may select "directory up" (..) in active panel.
 To cancel the charsets in all directories, select "No translation " in 
 the dialog of encodings.
 .PP
-.BR M-g ", " M-r ", " M-j .
+.BR M\-g ", " M\-r ", " M\-j .
 Używane do wybierania najwyższego, środkowego i najniższego pliku w panelu.
 .PP
-.BR C-s ", " M-s .
+.BR C\-s ", " M\-s .
 Uruchamia szukanie pliku w katalogu na podstawie jego nazwy. Kiedy szukanie
 jest aktywne, każde naciśnięcie klawisza doda jeden znak do poszukiwania
 zamiast wypisania go linii poleceń. Jeśli opcja
-.I "Show mini-status"
-jest włączona, szukany ciąg znaków pojawia się w linii mini-statusu. Kiedy
+.I "Show mini\-status"
+jest włączona, szukany ciąg znaków pojawia się w linii mini\-statusu. Kiedy
 wpisujemy znak, linia wyboru przemieszcza się do następnego pliku zaczynającego
 się od podanych liter. Klawisze
 .I backspace
 lub
 .I del
-mogą być używane do poprawiania błędów. Jeśli C-s zostanie naciśnięte ponownie,
+mogą być używane do poprawiania błędów. Jeśli C\-s zostanie naciśnięte ponownie,
 Midnight Commander rozpoczyna szukanie następnego pliku
 zaczynającego się od podanych znaków.
 .PP
-.BR M-t .
+.BR M\-t .
 Przełącza tryb wyświetlania do następnego możliwego. Używając tej opcji
 łatwo jest przejść szybko z długiego do krótkiego trybu wyświetlania
 jak również do tego zdefiniowanego przez użytkownika.
 .PP
-.B C-\\\\
-(control-backslash).
+.B C\-\\\\
+(control\-backslash).
 Pokazuje hotlistę katalogów i zmienia katalog do wybranego przez użytkownika.
 .PP
 .B +
@@ -358,45 +358,45 @@ jest wyłączona, sposób zaznaczania plików jest zgodny z ustawieniami
 Używaj znaków "\\" do odznaczania grupy plików. Jest to przeciwieństwo klawisza
 plus.
 .PP
-.BR "strzałka do góry" ", " C-p .
+.BR "strzałka do góry" ", " C\-p .
 Przenosi linię wyboru do poprzedniej pozycji w panelu.
 .PP
-.BR "strzałka do dołu" ", " C-n .
+.BR "strzałka do dołu" ", " C\-n .
 Przenosi linię wyboru do następnej pozycji w panelu.
 .PP
-.BR home ", " a1 ", " M-< .
+.BR home ", " a1 ", " M\-< .
 Przenosi linię wyboru do pierwszej pozycji w panelu.
 .PP
-.BR end ", " c1 ", " M-> .
+.BR end ", " c1 ", " M\-> .
 Przenosi linię wyboru do ostatniej pozycji w panelu.
 .PP
-.BR PageDown ", " C-v .
+.BR PageDown ", " C\-v .
 Przenosi linię wyboru jedną stronę do dołu.
 .PP
-.BR PageUp ", " M-v .
+.BR PageUp ", " M\-v .
 Przenosi linię wyboru jedną stronę do góry.
 .PP
-.BR M-o .
+.BR M\-o .
 Jeśli drugi panel jest zwykłym panelem wyświetlającym i w aktywnym panelu
 stoisz na katalogu, drugi panel będzie
 pokazywać zawartość
-akutalnego katalogu (tak jak w Emacsie kombinacja C-o). Jeśli nie stoisz
+akutalnego katalogu (tak jak w Emacsie kombinacja C\-o). Jeśli nie stoisz
 na katalogu zawartością drugiego katalogu stanie się katalog o jedno piętro
 wyższy od aktualnego.
 .PP
-.BR C-PageUp ", " C-PageDown .
+.BR C\-PageUp ", " C\-PageDown .
 Działa tylko na konsoli typu Linux: wykonuje przejście do katalogu ".." lub
 do aktualnie wybranego, w zależności od kombinacji.
 .PP
-.BR M-y .
+.BR M\-y .
 Przenosi do poprzedniego katalogu w historii, podobne do kliknięcia myszką.
-'<'.
+\&'<'.
 .PP
-.BR M-u .
+.BR M\-u .
 Przechodzi do następnego katalogu w historii, podobne do kliknięcie myszką
 w '>'.
 .PP
-.BR M-S-h ", " M-H .
+.BR M\-S\-h ", " M\-H .
 Wyświetla historię katalogów, podobne działanie do kliknięcia myszką 'v'.
 .PP
 .\"NODE "  Shell Command Line"
@@ -404,33 +404,33 @@ Wyświetla historię katalogów, podobne działanie do kliknięcia myszką 'v'.
 Ta sekcja opisuje klawisze, które są użyteczne do efektywniejszego
 wpisywania podczas podawania komend powłoki.
 .PP
-.BR M-Enter .
+.BR M\-Enter .
 Kopiuje nazwę aktualniego wybranego pliku do linii poleceń.
 .PP
-.BR C-Enter .
-To samo co M-Enter, działa tylko na konsoli typu Linux.
+.BR C\-Enter .
+To samo co M\-Enter, działa tylko na konsoli typu Linux.
 .PP
-.BR M-Tab .
+.BR M\-Tab .
 Wykonuje dokończenie nazw plików, komend, zmiennych, użytkowników, nazw hostów
 za Ciebie.
 .PP
-.BR "C-x t" ", " "C-x C-t" .
-Kopiuje nazwy zaznaczonych plików (lub jeśli nie ma zaznaczonych - aktywnego)
-w aktywnym (C-x t) lub nieaktywnym panelu (C-x C-t) do linii poleceń.
+.BR "C\-x t" ", " "C\-x C\-t" .
+Kopiuje nazwy zaznaczonych plików (lub jeśli nie ma zaznaczonych \- aktywnego)
+w aktywnym (C\-x t) lub nieaktywnym panelu (C\-x C\-t) do linii poleceń.
 .PP
-.BR "C-x p" ", " "C-x C-p" .
+.BR "C\-x p" ", " "C\-x C\-p" .
 Pierwsza kombinacja kopiuje pełną ścieżkę z aktywnego, a druga z nieaktywnego
 panelu.
 .PP
-.BR C-q .
+.BR C\-q .
 Komenda 'quote' (cytuj) może być używana do wpisywania do wiersza poleceń znaków, które
 normalnie przechwytywane są przez Commandera (tak jak znak '+').
 .PP
-.BR M-p ", " M-n .
-Używaj tych klawiszy, żeby przeglądać historię komend. M-p wyświetla poprzednią,
-a M-n następną komendę.
+.BR M\-p ", " M\-n .
+Używaj tych klawiszy, żeby przeglądać historię komend. M\-p wyświetla poprzednią,
+a M\-n następną komendę.
 .PP
-.BR M-h .
+.BR M\-h .
 Wyświetla historię aktualnej linii poleceń.
 .PP
 .\"NODE "  General Movement Keys"
@@ -442,16 +442,16 @@ Każde z nich z resztą traktują je jako swoje własne.
 Niektóre partie Midnight Commandera również używają tych klawiszy,
 więc niniejsza sekcja może być użyteczna również dla tych partii.
 .PP
-.BR "strzałka w górę" ", " C-p .
+.BR "strzałka w górę" ", " C\-p .
 Przechodzi jedną linię wstecz.
 .PP
-.BR "strzałka w dół" ", " C-n .
+.BR "strzałka w dół" ", " C\-n .
 Przechodzi jedną linię naprzód.
 .PP
-.BR "Page Up" ", " M-v .
+.BR "Page Up" ", " M\-v .
 Przechodzi jedną stronę wstecz.
 .PP
-.BR "Next Page" ", " "Page Down" ", " C-v .
+.BR "Next Page" ", " "Page Down" ", " C\-v .
 Przechodzi jedną stronę naprzód.
 .PP
 .BR Home ", " A1 .
@@ -463,7 +463,7 @@ Przechodzi na koniec.
 Przeglądarka pomocy i podgląd plików akceptują następujące klawisze
 (poza tymi opisanymi powyżej).
 .PP
-.BR b ", " C-b ", " C-h ", " Backspace ", " Delete .
+.BR b ", " C\-b ", " C\-h ", " Backspace ", " Delete .
 Przechodzi jedną stronę wstecz.
 .PP
 .BR "klawisz spacji" .
@@ -480,54 +480,54 @@ Przechodzi do początku lub do końca.
 Linie wejściowe (te używane w linii komend i w oknach dialogowych), akceptują
 następujące klawisze:
 .PP
-.BR C-a .
+.BR C\-a .
 umieszcza kursor na początku linii.
 .PP
-.BR C-e .
+.BR C\-e .
 umieszcza kursor na końcu linii.
 .PP
-.BR C-b ", " move-left .
+.BR C\-b ", " move\-left .
 przenosi kursor o jedną pozycję w lewo.
 .PP
-.BR C-f ", " move-right .
+.BR C\-f ", " move\-right .
 przenosi kursor o jedną pozycję w prawo.
 .PP
-.BR M-f .
+.BR M\-f .
 przesuwa kursor o jedno słowo naprzód.
 .PP
-.BR M-b .
+.BR M\-b .
 przesuwa kursor o jedno słowo wstecz.
 .PP
-.BR C-h ", " backspace .
+.BR C\-h ", " backspace .
 kasuje poprzedni znak.
 .PP
-.BR C-d ", " Delete .
+.BR C\-d ", " Delete .
 kasuje znak w miejscu kursora (nad nim).
 .PP
-.BR C-@ .
+.BR C\-@ .
 wstawia zaznaczenie do kasowanie (patrz następne pozycje).
 .PP
-.BR C-w .
+.BR C\-w .
 kopiuje tekst spomiędzy kursora i zaznaczenia do bufora i usuwa go z linii
 poleceń.
 .PP
-.BR M-w .
-to samo co C-w tylko, że nie usuwa tekstu z linii.
+.BR M\-w .
+to samo co C\-w tylko, że nie usuwa tekstu z linii.
 .PP
-.BR C-y .
+.BR C\-y .
 wstawia spowrotem zawartość wyciętego bufora.
 .PP
-.BR C-k .
+.BR C\-k .
 wycina tekst od kursora do końca linii.
 .PP
-.BR M-p ", " M-n .
-Używaj tych klawiszy, żeby przeglądać historię komend. M-p wyświetla poprzednią,
-a M-n następną.
+.BR M\-p ", " M\-n .
+Używaj tych klawiszy, żeby przeglądać historię komend. M\-p wyświetla poprzednią,
+a M\-n następną.
 .PP
-.BR M-C-h ", " M-Backspace .
+.BR M\-C\-h ", " M\-Backspace .
 kasuje jedno słowo wstecz (poprzednie).
 .PP
-.BR M-Tab .
+.BR M\-Tab .
 Wykonuje dokończenie nazw plików, komend, zmiennych, użytkowników, nazw hostów
 za Ciebie.
 .PP
@@ -568,7 +568,7 @@ Tryb "Full" pokazuje nazwę, rozmiar i czas modyfikacji pliku.
 Tryb "Brief" pokazuje tylko nazwę pliku i ma dwie kolumny (dzięki temu
 może pokazywać nawet dwa razy więcej niż inne tryby). Tryb "Long" jest
 podobny do wyniku polecenia
-.BR "ls -l" .
+.BR "ls \-l" .
 Zabiera on szerokość całego ekranu.
 .PP
 Jeśli wybierzesz tryb "user" (użytkownika), będziesz mógł wybrać własny
@@ -594,11 +594,11 @@ wyświetla wielkość pliku.
 jest alternatywą dla format
 .BR size .
 Wyświetla rozmiar plików, a dla katalogów po prostu wyświetla tekst
-"SUB-DIR" lub "UP--DIR".
+"SUB\-DIR" lub "UP\-\-DIR".
 .TP
 .B type
 wyświetla jednoznakowy opis typu pliku. Ten znak jest taki sam co ten
-wyświetlany prze komendę ls z flagą -F. Wyświetlana jest gwiazdka
+wyświetlany prze komendę ls z flagą \-F. Wyświetlana jest gwiazdka
 dla plików wykonywalnych,
 ukośnik dla katalogów, małpa (@) dla dowiązań, znak równości dla gniazd,
 minus dla urządzeń niestniejących, znak plus dla urządzeń istniejących,
@@ -638,7 +638,7 @@ właściciel pliku.
 grupa pliku.
 .TP
 .B inode
-numer i-węzła pliku.
+numer i\-węzła pliku.
 .PP
 Możesz również używać następujących znaków dla zmiany wyświetlania:
 .TP
@@ -692,7 +692,7 @@ podglądu.
 .SH "    Porządek sortowania (Sort order...)"
 Istnieje osiem porządków sortowania. Przez: nazwę, rozszerzenie,
 datę modyfikacje, datę odczytu, datę zmiany, rozmiar,
-numeru i-węzła i niesortowane. Porządek sortowanie możesz wybrać w oknie
+numeru i\-węzła i niesortowane. Porządek sortowanie możesz wybrać w oknie
 dialogowym porządku sortowania. Możliwe jest również wybranie porządku
 wstecznego (od tyłu).
 .PP
@@ -715,8 +715,8 @@ zewnętrznego, wszystkie informacje zostaną przywrócone do prawdziwego stanu.
 .\"NODE "  File Menu"
 .SH "Menu plików (File menu)"
 .PP
-Midnight Commander używa klawiszy F1 - F10 jako skrótów klawiszowych do komend
-występujących w menu plików. Na terminalach bez funkcji klawiszowych (F1 - F10)
+Midnight Commander używa klawiszy F1 \- F10 jako skrótów klawiszowych do komend
+występujących w menu plików. Na terminalach bez funkcji klawiszowych (F1 \- F10)
 można używać kombinacji klawisza Escape i numeru ( odpowiednio 1 dla F1,
 2 dla F2 itd. )
 .PP
@@ -737,7 +737,7 @@ Wywołuje menu użytkownika. Menu użytkownika jest łatwym w użyciu narzędzie
 służącym do obsługi zewnętrznych programów i dodatkowych opcji Midnight
 Commandera.
 .PP
-.B Podgląd (F3, Shift-F3)
+.B Podgląd (F3, Shift\-F3)
 .PP
 Włącza podgląd aktualnie wybranego pliku. Standardowowo wywoływany jest
 wbudowany podgląd plików, ale jeśli opcja "Use internal view" jest wyłączona,
@@ -747,11 +747,11 @@ Jeśli jednak zmienna
 .B PAGER
 nie została jeszcze zdefiniowana, wywoływana jest komenda "view". Jeśli użyjesz
 kombinacji klawiszy
-.BR Shift-F3 ,
+.BR Shift\-F3 ,
 pogląd zostanie wywołany bez jakiegokolwiek
 formatownia pliku.
 .PP
-.B Filtrowany podgląd (M-!)
+.B Filtrowany podgląd (M\-!)
 .PP
 Ta kombinacja klawiszy oczekuje na komendę i jej argument (argumentem standardowo
 jest wybrany aktualnie plik), całe wyjście programu przekierowywane jest do pliku,
@@ -770,21 +770,21 @@ Włącza okno dialogowe, w którym standardowo znajduje się ścieżka do
 katalogu w
 nieaktywnym panelu, po czym kopiuje aktualny plik (lub wybrane
 jeśli wybrano jakiekolwiek) do katalogu, który wybraliśmy w oknie dialogowym.
-Podczas procesu kopiowania możesz go w każdej chwili przerwać wciskając C-c lub
+Podczas procesu kopiowania możesz go w każdej chwili przerwać wciskając C\-c lub
 Esc. Żeby dowiedzieć się czegoś więcej na temat jokerów w ścieżce źródłowej
 (którymi najczęściej będą * lub ^\\(.*\\)$) i innych możliwych określeń w
 katalogu docelowym zobacz kategorię
 .B "Maski kopiowania/przenoszenia"
 .PP
 Na niektórych systemach możliwe jest kopiowanie w tle, robi się to klikając
-na przycisk backgorund (lub naciskając kombinację M-b w oknie dialogowym).
+na przycisk backgorund (lub naciskając kombinację M\-b w oknie dialogowym).
 Background Jobs jest używane do kontrolowania prac w tle.
 .PP
-.B Link (C-x l)
+.B Link (C\-x l)
 .PP
 Tworzy sztywne dowiązanie do aktualnego pliku.
 .PP
-.B SymLink (C-x s)
+.B SymLink (C\-x s)
 .PP
 Tworzy symboliczne dowiązanie do aktualnego pliku. Dla tych, którzy nie wiedzą
 co to jest dowiązanie: tworzenie dowiązania do pliku jest tak jak kopiowanie
@@ -808,8 +808,8 @@ zauważyć,
 pokazuje znak "@" przed nazwą pliku jeśli jest dowiązaniem
 symbolicznym do innych
 (poza katalogami, przed którymi pokazuje tyldę (~)). Oryginalny plik wskazywany
-przez dowiązanie jest pokazywany w linii mini-statusu, jeśli opcja
-.I "Show mini-status"
+przez dowiązanie jest pokazywany w linii mini\-statusu, jeśli opcja
+.I "Show mini\-status"
 jest włączona. Używaj dowiązań symbolicznych, jeśli chcesz unikąć problemów z
 rozpoznawaniem twardych dowiązań.
 .PP
@@ -818,13 +818,13 @@ rozpoznawaniem twardych dowiązań.
 Włącza okno dialogowe, gdzie standardowo wpisana jest nazwa katalogu w
 nieaktywnym panelu, i przenosi aktualnie wybrany plik (lub zaznaczone jeśli
 choć jeden jest zaznaczony) do katalogu wpisanego w oknie dialogowym. Podczas
-procesu przenoszenia możesz użyć kombinacji klawiszy C-c lub ESC, żeby przerwać
+procesu przenoszenia możesz użyć kombinacji klawiszy C\-c lub ESC, żeby przerwać
 operację. Po więcej szczegółów zobacz operację
 .B Kopiuj
 opisaną powyżej. Większość rzeczy jest całkiem podobna.
 .PP
 Na niektórych systemach możliwe jest przenoszenie w tle, robi się to klikając
-na przycisk background (lub naciskając kombinację M-b w oknie dialogowym).
+na przycisk background (lub naciskając kombinację M\-b w oknie dialogowym).
 Background Jobs jest używane do kontrolowania prac w tle.
 .PP
 .B "Utwórz katalog (F7)"
@@ -834,8 +834,8 @@ Włącza menu dialogowe i zakłada katalog o podanej nazwie
 .B Kasuj (F8)
 .PP
 Kasuje aktualnie wybrany lub zaznaczone pliki w aktywnym panelu. Podczas
-procesu możesz nacisnąć C-C lub Esc żeby przerwać operację. [skasowane pliki
-nie będą jednak odzyskane - przyp. tłumacza].
+procesu możesz nacisnąć C\-C lub Esc żeby przerwać operację. [skasowane pliki
+nie będą jednak odzyskane \- przyp. tłumacza].
 .PP
 .B Zaznacz grupę (+)
 .PP
@@ -853,15 +853,15 @@ zewnętrznych (zobacz ed (1)).
 Używane do odznaczania grupy plików. Jest przeciwieństwem komendy
 .IR "Zaznacz pliki" .
 .PP
-.B Wyjdź (F10, Shift-F10)
+.B Wyjdź (F10, Shift\-F10)
 .PP
-Zamyka Midnight Commandera. Shift-F10 jest używany jeśli używasz
-"wrappera" powłoki. Shift-F10 nie przeniesie cię do katalogu, w którym
+Zamyka Midnight Commandera. Shift\-F10 jest używany jeśli używasz
+"wrappera" powłoki. Shift\-F10 nie przeniesie cię do katalogu, w którym
 byłeś ostatnio w Midnight Commanderze, zamiast tego przejdzie do katalogu,
 z którego uruchomiłeś program.
 .PP
 .\"NODE "    Quick cd"
-.SH "    Szybka zmiana katalogów (Quick cd) M-c"
+.SH "    Szybka zmiana katalogów (Quick cd) M\-c"
 Ta komenda jest bardzo użyteczna, jeśli masz już pełną linię poleceń, a
 chcesz przejść do innego katalogu. Uruchamia ona małe okno dialogowe,
 w którym podajesz to co po normalnej komendzie
@@ -879,20 +879,20 @@ Komenda "Find file" szuka pliku spełniającego podane warunki, natomiast komend
 Komenda "Panels on/off" pokazuje wyjście ostatniej komendy interpetatora
 poleceń. Działa ona tylko na terminalach typu Linux lub FreeBSD.
 .PP
-Komenda porównywania katalogów (Compare directories) (C-x d) porównuje
+Komenda porównywania katalogów (Compare directories) (C\-x d) porównuje
 zawartości panelu katalogowego z drugim. Możesz potem użyc Kopiuj (F5)
 żeby stworzyć dwa dokładnie identyczne panele. Metoda "quick" porównuje
 tylko i wyłącznie rozmiary plików i ich daty. Metoda "thorough" porównuje
 pliki bajt po bajcie. Ta metoda działa tylko wtedy kiedy komputer obsługuje
-wywołanie mmap(2). Metoda "size-only" zwraca uwagę tylko na rozmiar plików.
+wywołanie mmap(2). Metoda "size\-only" zwraca uwagę tylko na rozmiar plików.
 Nie ma dla niej żadnego znaczenia czy plik ma inną datę lub zawartość, liczy
 się tylko rozmiar.
 .PP
 Komenda historii komend (Command history) pokazuje listę wpisanych komend.
 Ta, którą wybierzesz, jest kopiowana do linii poleceń. Do historii komend
-można mieć dostęp również przy użyciu kombinacji M-p lub M-n.
+można mieć dostęp również przy użyciu kombinacji M\-p lub M\-n.
 .PP
-Komenda hotlisty katalogów (Directory hotlist) (C-\\) pozwala na zmienianie
+Komenda hotlisty katalogów (Directory hotlist) (C\-\\) pozwala na zmienianie
 katalogów do tych najczęściej używanych dużo szybciej.
 .PP
 Komenda panelu zewnętrznego (External panelize) pozwala na wykonywania programów
@@ -916,7 +916,7 @@ dostępna z menu komend. Inną metodą jest wybranie drzewa z menu "lewego" bąd
 .PP
 Żeby nie mieć zbyt dużych opóźnień Midnight Commander skanuje tylko małą
 ilość katalogów (tę potrzebną w danej chwili). Jeśli jakiegoś katalogu nie
-widać przejdź do jego katalogu nadrzędnego i naciśnij C-r (lub F2).
+widać przejdź do jego katalogu nadrzędnego i naciśnij C\-r (lub F2).
 .PP
 Możesz używać następujących klawiszy:
 .PP
@@ -927,7 +927,7 @@ W drzewie katalogów, wychodzi z trybu drzewa i przechodzi znów do trybu
 zwykłego panelu. W podglądzie drzewa zmienia katalog w drugim panelu i zostaje
 w trybie podglądu drzewa w panelu aktywnym.
 .PP
-.BR C-r ", " F2 " (Rescan)."
+.BR C\-r ", " F2 " (Rescan)."
 Odświeża aktualny katalog. Używane jeśli drzewo nie jest już aktualne. Nie
 pokazuje katalogów, które już istnieją lub pokazuje te, których już nie ma.
 .PP
@@ -964,18 +964,18 @@ Tworzy nowy katalog poniżej aktualnego.
 (Delete).
 Kasuje katalog z systemu plików.
 .PP
-.BR C-s ", " M-s .
+.BR C\-s ", " M\-s .
 Szuka natępnego katalogu spełniającego podane warunki szukania. Jeśli taki
 nie istnieje te klawisze spowodują przemieszczenie się o jedną linię w dół.
 .PP
-.BR C-h ", " Backspace .
+.BR C\-h ", " Backspace .
 Kasuje ostatni znak w ciągu znaków do poszukiwania.
 .PP
 .BR "Jakikolwiek inny klawisz" .
 Dodaje klawisz do ciągu znaków do szukania i przenosi do najbliższego
 katalogu, którego nazwa zaczyna się od tych znaków. W podglądzie drzewa musisz
-najpierw uaktywnić szukanie naciskając C-s. Ciąg szukający jest pokazywany
-w linii mini-statusu.
+najpierw uaktywnić szukanie naciskając C\-s. Ciąg szukający jest pokazywany
+w linii mini\-statusu.
 .PP
 Następujące klawisze są dostępne tylko w drzewie katalogów. Nie działają one
 w poglądzie katalogów.
@@ -1012,7 +1012,7 @@ Again zapyta się o nowe parametry do szukania (rozpocznie proces od nowa).
 Przycisk Quit kończy przeszukiwanie. Przycisk Panelize umieści znalezione
 pliki w aktywnym panelu katalogowym tak, że będziesz mógł wykonywać na nich
 standardowe czynności (podgląd, kopiowanie, przenoszenie, kasowanie itp.).
-Po spanelizowaniu wystarczy naciśnąć C-r żeby powrócić do normalnego trybu.
+Po spanelizowaniu wystarczy naciśnąć C\-r żeby powrócić do normalnego trybu.
 .PP
 Możliwe jest posiadanie listy katalogów, których szukanie plików nie
 powinno uwzględniać (na przykład możesz chcieć ominąć przeszukiwanie CDROMu
@@ -1047,7 +1047,7 @@ wszystkie dowiązania w aktywnym katalogu, możesz użyć panelu zewnętrznego
 i następującej komendy:
 .PP
 .nf
-find . -type l -print
+find . \-type l \-print
 .fi
 Zanim komenda zakończy działanie, zawartość katalogów nie będzie już dłużej
 zawartością aktualnego katalogu, ale wszystkie pliki będą symbolicznymi
@@ -1072,7 +1072,7 @@ tę komendę z listy i nie musisz już wpisywać jej ponownie.
 Hotlista katalogów pokazuje nazwy katalogów wprowadzonych do hotlisty.
 Midnight Commander zmieni miejsce do tego, które wskazuje nazwa katalogu.
 Z hotlisty możesz wyrzucać już dodane pozycje par nazw/wskazań i dodawać nowe.
-Dla dodawania możesz wykorzystać kombinację (C-x h), która dodaje
+Dla dodawania możesz wykorzystać kombinację (C\-x h), która dodaje
 ścieżkę
 aktualnego katalogu do hotlisty. Użytkownik musi tylko podać pod jaką
 nazwą ma być ten katalog widoczny.
@@ -1157,7 +1157,7 @@ w sposób dowolny, przez użytkownika. Kiedy tylko próbujesz coś zrobić
 przy użyciu tego menu, ładowany jest plik .mc.menu z aktualnego katalogu, ale
 tylko wtedy kiedy jest on w posiadaniu użytkownika lub roota i mamy do niego
 prawa zapisu. Jeśli takiego nie ma próbuje się z plikiem ~/.mc/menu z tymi
-samymi założeniami, jeśli jego też nie ma - używa się standardowego pliku
+samymi założeniami, jeśli jego też nie ma \- używa się standardowego pliku
 systemowego, który znajduje się w @prefix@/share/mc/mc.menu.
 .PP
 Format pliku z menu użytkownika jest bardzo prosty. Linie zaczynające się
@@ -1177,22 +1177,22 @@ To jest przykładowy plik mc.menu:
 .PP
 .nf
 A	Wyrzuć aktualny plik.
-	od -c %f
+	od \-c %f
 
 B	Stwórz raport o błędzie i wyślij do roota.
-	I=`mktemp ${MC_TMPDIR:-/tmp}/mail.XXXXXX` || exit 1
+	I=`mktemp ${MC_TMPDIR:\-/tmp}/mail.XXXXXX` || exit 1
 	vi $I
-	mail -s "Błąd Midnight Commandera" root < $I
-	rm -f $I
+	mail \-s "Błąd Midnight Commandera" root < $I
+	rm \-f $I
 
 M	Przeczytaj pocztę.
-	emacs -f rmail
+	emacs \-f rmail
 
 N	Przeczytaj grupę dyskucyjną.
-	emacs -f gnus
+	emacs \-f gnus
 
 J	Skopiuj rekursywnie cały aktualny katalog.
-	tar cf - . | (cd %D && tar xvpf -)
+	tar cf \- . | (cd %D && tar xvpf \-)
 
 = f *.tar.gz | f *.tgz & t n
 X       Zdekompresuj skompresowany plik tar.
@@ -1249,7 +1249,7 @@ nie ma.
 Jeśli warunek rozpoczyna się od '=?' zamiast '=' droga przechodzenia
 przez warunki będzie pokazywana
 za każdym razem kiedy warunek będzie obliczany [przydatne do wyszukiwania błędów
-- przyp. tłumacza].
+\- przyp. tłumacza].
 .PP
 Warunki są obliczane od lewej do prawej. Oznacza to, że
 .nf
@@ -1265,7 +1265,7 @@ To jest prosty przykład zastosowania tych warunków:
 .nf
 = f *.tar.gz | f *.tgz & t n
 L	Listuje zawartość skompresowanego archiwum tar
-	gzip -cd %f | tar xvf -
+	gzip \-cd %f | tar xvf \-
 .fi
 .PP
 .B Warunki dodania
@@ -1276,7 +1276,7 @@ dołączona do menu. Jeśli nie jest prawdziwy, nie będzie ona w nim zawarty.
 .PP
 Możesz łączyć ze sobą standardowe i dodane warunki zaczynając warunek od
 kombinacji
-'+=' lub '=+' (lub '+=?' lub '=+?' jeśli chcesz zobaczyć trasę błędów).
+\&'+=' lub '=+' (lub '+=?' lub '=+?' jeśli chcesz zobaczyć trasę błędów).
 Jeśli chcesz użyć różnych warunków, dodanego i standardowego,
 możesz poprzedzić wpis menu dwoma wierszami warunkowymi. Jednym zaczynającym
 się od znaku '+', a drugim od '='.
@@ -1333,11 +1333,11 @@ inne opcje (Other Options).
 .PP
 .I Show Backup Files.
 Standardowo Midnight Commander nie wyświetla plików kończących się znakiem
-'~' (tak jak komenda ls -B w wersji GNU).
+\&'~' (tak jak komenda ls \-B w wersji GNU).
 .PP
 .I Show Hidden Files.
 Standardowo Midnight Commander wyświetla wszystkie pliki zaczynające się
-od kropki (tak jak ls -a).
+od kropki (tak jak ls \-a).
 .PP
 .I Mark moves down.
 Standardowo kiedy zaznaczasz plik (zarówno przy klawisze Insert)
@@ -1358,11 +1358,11 @@ początku a pozostałe pliki dopiero za nimi.
 .I Fast directory reload.
 Standardowo ta opcja jest wyłączona. Jeśli ją włączysz Midnight Commander
 będzie używał triku do sprawdzenia czy zawartość katalogu się zmieniła.
-Trik polega na tym, że sprawdza się i-węzeł katalogu i jeśli się on zmienił
+Trik polega na tym, że sprawdza się i\-węzeł katalogu i jeśli się on zmienił
 to katalog jest ładowany na nowo. Oznacza to przeładowywanie zawartości panelu
 tylko wtedy, kiedy tworzysz lub kasujesz pliki. Jeśli robisz inne zmiany
 (rozmiaru, właściciela, uprawnień, grupy itp.) będziesz musiał ręcznie przeładować
-widok (np. używając kombinacji klawiszy C-r).
+widok (np. używając kombinacji klawiszy C\-r).
 .PP
 .B Zatrzymaj po uruchomieniu
 .PP
@@ -1373,7 +1373,7 @@ dla tej zmiennej:
 .I Nigdy (Never)
 Oznacza, że nie chcesz widzieć wyjścia twojej komendy. Jeśli używasz
 termianala typu Linux lub FreeBSD czy też xterm, będziesz mógł jednak
-zobaczyć jej wyjście naciskając C-o.
+zobaczyć jej wyjście naciskając C\-o.
 .IP
 .I "On dumb terminals"
 Będziesz miał pauzę po uruchomieniu na terminalach, które nie są w stanie
@@ -1436,10 +1436,10 @@ Zobacz sekcję Wbudowany podgląd plików.
 .I Dokańczanie: pokaż wszystkie (Complete: show all).
 Standardowo Midnight Commander pokazuje wszystkie możliwe dokończenia
 jeśli jest ich więcej, kiedy naciśniesz drugi raz klawisz
-.BR M-Tab ,
+.BR M\-Tab ,
 za pierwszym razem, po prostu dokańcza to na ile można i wydaje krótki
 dźwięk. Jeśli chcesz widzieć wszystkie możliwości po pierwszym naciśnięciu
-.B M-Tab
+.B M\-Tab
 włącz tę opcję.
 .PP
 .I Obrotowy myślnik (Rotating dash).
@@ -1447,7 +1447,7 @@ Jeśli ta opcja jest włączona, Midnight Commander będzie pokazywał obracają
 się myślnik w lewym górnym rogu, jeśli będzie akurat w trakcie wykonywania
 jakiegoś procesu.
 .PP
-.I Lynx-like motion.
+.I Lynx\-like motion.
 Jeśli ta opcja jest włączona, możesz używać strzałek przemieszczenia
 żeby automatycznie zmieniać katalog jeśli aktualnie wybrany katalog jest
 podkatalogiem, a linia poleceń jest pusta. Standardowo ta opcja jest wyłączona.
@@ -1494,7 +1494,7 @@ Jeśli podświetlanie jest włączone, pliki są kolorowane w zależnośći od s
 typu (np. katalogi, pliki typu core, wykonywalne, ...).
 .PP
 Jeśli opcja
-.I Show Mini-Status
+.I Show Mini\-Status
 jest włączona, jeden wiersz informacji statusowych na temat aktualnie
 wybranej rzeczy w panelu, będzie pokazany na dole panelu.
 .PP
@@ -1507,9 +1507,9 @@ wychodzenia z programu.
 .\"NODE "    Display bits"
 .SH "    Wyświetlanie znaków (Display bits)"
 Używane do konfigurowania zakresu znaków widocznych potem na ekranie.
-To ustawienie może być 7-bitowe jeśli twój terminal obsługuje tylko
-siedmiobitowe wyjście, ISO-8859-1 wyświetla wszystkie znaki z mapy
-ISO-8859-1 a pełny 8 bitowy przeznaczony jest dla tych terminali, które radzą
+To ustawienie może być 7\-bitowe jeśli twój terminal obsługuje tylko
+siedmiobitowe wyjście, ISO\-8859\-1 wyświetla wszystkie znaki z mapy
+ISO\-8859\-1 a pełny 8 bitowy przeznaczony jest dla tych terminali, które radzą
 sobie z wyświetlaniem znaków ośmiobitowych.
 .PP
 Zobacz sekcję
@@ -1518,7 +1518,7 @@ po więcej szczegółów na temat ich używania w Midnight Commanderze.
 .PP
 .\"NODE "    Learn keys"
 .SH "    Nauka klawiszy (Learn keys)"
-W tym oknie możesz przetestować czy twoje klawisz F1-F20, Home, End itp.
+W tym oknie możesz przetestować czy twoje klawisz F1\-F20, Home, End itp.
 pracują poprawnie na twoim terminalu. Często nie działają tak, ponieważ
 bazy danych terminali są poniszczone.
 .PP
@@ -1642,8 +1642,8 @@ kiedy ~/guest jest katalogiem guest w twoim katalogu domowym.
 .PP
 .I Poprzedni katalog (Previous directory)
 Możesz przeskakiwać do katalogu, w którym byłeś poprzednio, używając specjalnej
-nazwy katalogu '-' tak jak:
-.B cd -
+nazwy katalogu '\-' tak jak:
+.B cd \-
 .PP
 .I katalogi CDPATH
 Jeśli katalog wybrany do przejścia nie jest w naszym aktualnym katalogu, to
@@ -1763,7 +1763,7 @@ Użytkownicy
 mogą wstawiać komendy startowe do pliku ~/.mc/tcshrc.
 .PP
 Jeśli kod powłoki w tle jest użyty, możesz zawiesić aplikację w dowolnej chwili
-po prostu naciskając kombinację C-o i przeskakując spowrotem do Midnight
+po prostu naciskając kombinację C\-o i przeskakując spowrotem do Midnight
 Commandera, jeśli zawiesisz jakąś aplikację nie będziesz mógł używać innych
 zewnętrznych komend zanim nie wyjdziesz z aplikacji, którą przerwałeś.
 .PP
@@ -1776,9 +1776,9 @@ kontrolować powłokę w tle.
 .\"NODE "Chmod"
 .SH "Chmod"
 Okno Chmod jest używane do zmieniania atrybutów grupy plików lub katalogów.
-Może być ono wywołane kombinacją C-x c.
+Może być ono wywołane kombinacją C\-x c.
 .PP
-Okno Chmod ma dwie części -
+Okno Chmod ma dwie części \-
 .I Uprawnienia (Permissions)
 i
 .I Plik (File)
@@ -1831,7 +1831,7 @@ unieważnia komendę chmod.
 .\"NODE "Chown"
 .SH "Chown"
 Komenda chown jest używana do zmiany właściela/grupy pliku. Skrótem
-klawiszowym jest kombinacja C-x o.
+klawiszowym jest kombinacja C\-x o.
 .PP
 .\"NODE "Advanced Chown"
 .SH "Zaawansowane chown (Advanced Chown)"
@@ -1920,7 +1920,7 @@ używana jest aktualna wartość zmiennej umask.
 .B "Use shell patterns on"
 .PP
 Jeśli opcja obsługi wzorców powłoki jest włączona, możesz używać znaków '*' i
-'?' w maskach źródłowych. Działają one tak jak w powłoce. W masce docelowej możesz
+\&'?' w maskach źródłowych. Działają one tak jak w powłoce. W masce docelowej możesz
 używać tylko '*' i '\\<cyfra>'. Pierwsza maska '*' w nazwie docelowej
 odnosi sie do pierwszej gwiazdki w masce źródłowej, druga do drugiej itd.
 Joker '\\1' odnosi się do pierwszego jokera w masce źródłowej, '\\2' odnosi
@@ -1958,12 +1958,12 @@ Załóżmy, że chemy zamienić miejscami nazwę i rozszerzenia, tak, że plik
 .B "Konwersje nazwy (Case Conversions)"
 .PP
 Możesz również zmieniać nazwy plików. Jeśli użyjesz '\\u' lub
-'\\l' w masce docelowej, następny znak będzie przekonwertowany na
+\&'\\l' w masce docelowej, następny znak będzie przekonwertowany na
 duży lub mały, zależnie od podanej opcji.
 .PP
 Jeśli użyjesz '\\U' lub '\\L' w masce docelowej, następne znaki będą
 zmieniane na małe lub duże (zależnie od opcji), aż do napotkania znaku
-'\\E' lub następnych '\\U', '\\L' bądź też końca linii.
+\&'\\E' lub następnych '\\U', '\\L' bądź też końca linii.
 .PP
 Konwersje '\\u' i '\\l' mają wyższy priorytet niż '\\U' i '\\L'.
 .PP
@@ -2026,11 +2026,11 @@ Wsteczne wyszukiwanie wyrażenia.
 .B F7
 Normalne wyszukiwanie\wyszukiwanie w trybie hex.
 .PP
-.BR C-s .
+.BR C\-s .
 Zaczyna normalne szukanie jeśli nie było żadnego wcześniej, w przeciwnym
 razie szuka następnego wystąpienia.
 .PP
-.BR C-r .
+.BR C\-r .
 Zaczyna szukanie wsteczne jeśli jeszcze żadnego nie było, w przeciwnym
 razie szuka następnego wystąpienia.
 .PP
@@ -2054,10 +2054,10 @@ wskazuje co innego niż jest aktualnie (patrz wyżej).
 .BR F10 ", " Esc .
 Wychodzi z wbudowanego podglądu.
 .PP
-.BR "Page Down" ", " space ", " C-v .
+.BR "Page Down" ", " space ", " C\-v .
 Przewija jedną stronę naprzód.
 .PP
-.BR "Page Up" ", " M-v ", " C-b ", " backspace .
+.BR "Page Up" ", " M\-v ", " C\-b ", " backspace .
 Przewija jedną stronę wstecz.
 .PP
 .BR "strzałka w dół" .
@@ -2066,19 +2066,19 @@ Przewija jedną linię naprzód.
 .BR "strzałka w górę" .
 Przewija jedną linię wstecz.
 .PP
-.BR C-l .
+.BR C\-l .
 Odświeża ekran.
 .PP
 .BR ! .
 Włącza powłokę w aktualnym katalogu roboczym.
 .PP
-.BR C-f .
+.BR C\-f .
 Przeskakuje do następnego pliku.
 .PP
-.BR C-b .
+.BR C\-b .
 Przeskakuje do poprzedniego pliku.
 .PP
-.BR M-r .
+.BR M\-r .
 Przełącza linijkę.
 .PP
 Możliwe jest poinstruowanie podglądu pliku jak ma wyświetlać plik, zobacz
@@ -2086,7 +2086,7 @@ sekcję Edycja pliku rozszerzeń.
 .\"NODE "Internal File Editor"
 .SH "Wbudowany edytor plików"
 Wbudowany edytor plików ma większość funkcji posiadanych przez inne
-edytory pełno-ekranowe. Jest wywoływany po naciśnięciu klawisza
+edytory pełno\-ekranowe. Jest wywoływany po naciśnięciu klawisza
 .B F4
 o ile opcja
 .I use_internal_edit
@@ -2098,37 +2098,37 @@ wycinanie i wklejanie bloków;
 .IR "klawisz dla klawisza undo" ;
 rozciągane menu; wklejanie plików; definiowanie makr; szukanie i
 zastępowanie wyrażeń regularnych; strzałki z Shiftem zaznaczające teksty
-w stylu MSW-MAC (tylko dla konsoli typu Linux); przełączanie trybu
-wstawiania-zastępowania; opcja pozwalająca na "przerzucenie" bloku tekstu
+w stylu MSW\-MAC (tylko dla konsoli typu Linux); przełączanie trybu
+wstawiania\-zastępowania; opcja pozwalająca na "przerzucenie" bloku tekstu
 przez komendę powłoki jak na przykład indent.
 .PP
 Edytor jest bardzo prosty w użyciu i nie wymaga żadnego przygotowania. Aby
 zobaczyć jakie są klawisze po prostu obejrzyj odpowiednie menu
 rozwijalne. Inne klawisze to: przemieszczanie z Shiftem zaznaczające tekst.
-.B Ctrl-Ins
+.B Ctrl\-Ins
 kopiuje do pliku
 .B cooledit.clip
 a
-.B Shift-Ins
+.B Shift\-Ins
 wkleja z pliku cooledit.clip.
-.B Shift-Del
+.B Shift\-Del
 Wycina do
 .BR cooledit.clip ,
 a
-.B Ctrl-Del
+.B Ctrl\-Del
 kasuje zaznaczony tekst. Klawisze dokończenia również dają Enter z
 automatycznym wcięciem. Podświetlanie myszą również działa,
 i możesz je przesłonić i spowodować normalne zaznaczanie tekstu (takie jak
 obsługuje terminal) po prostu trzymając klawisz Shift.
 .PP
 Aby zdefiniować makro, naciśnij
-.B Ctrl-R
+.B Ctrl\-R
 i potem naciśnij klawisze, które chcesz aby były wykonywane. Naciśnij
 ponownie
-.B Ctrl-R
+.B Ctrl\-R
 kiedy skończysz. Możesz również przyporządkować makro do dowolnego klawisza
 jaki chcesz naciskając ten klawisz. Makro jest wykonywane kiedy naciśniesz
-.B Ctrl-A
+.B Ctrl\-A
 i przyporządkowany klawisz. Makro jest wykonywane również jeśli naciśniesz
 klawisz Meta, Ctrl, lub Esc i wybrany klawisz, jednak tylko jeśli ten
 klawisz nie jest używane przez inne funkcje. Raz zdefiniowane, makro
@@ -2145,7 +2145,7 @@ w twoim katalogu domowym zawierający poniższe:
 .PP
 .nf
 #!/bin/sh
-/usr/bin/indent -kr -pcs $HOME/.mc/cedit/cooledit.block >& /dev/null
+/usr/bin/indent \-kr \-pcs $HOME/.mc/cedit/cooledit.block >& /dev/null
 cat /dev/null > $HOME/.mc/cedit/cooledit.error
 .fi
 .PP
@@ -2186,7 +2186,7 @@ a potem naciskając klawisz
 na właściwej pozycji. Możesz także nacisnąć pierwsze litery, którymi różnią
 się możliwości aby odrzucić tak dużą część dokończeń jak to tylko możliwe.
 Jeśli naciśniesz znowu
-.BR M-Tab ,
+.BR M\-Tab ,
 pokazane zostaną tylko te pozycje, które zaczynają się od kolejnych
 podanych liter. Kiedy nie maja już więcej możliwości, okno znika, ale
 możesz je wcześniej schować używając klawiszy anulujących:
@@ -2195,7 +2195,7 @@ możesz je wcześniej schować używając klawiszy anulujących:
 oraz strzałek w lewo i prawo. Jeśli
 Complete: show all
 jest wyłączone, okno z listą włącza się dopiero wtedy, kiedy naciskasz
-.B M-Tab
+.B M\-Tab
 po raz drugi. Za pierwszym razem MC wydaje tylko krótki dźwięk.
 .PP
 .\"NODE "Virtual File System"
@@ -2248,9 +2248,9 @@ Przykłady:
 .PP
 .nf
     /#ftp:ftp.nuclecu.unam.mx/linux/local
-    /#ftp:tsx-11.mit.edu/pub/linux/packages
+    /#ftp:tsx\-11.mit.edu/pub/linux/packages
     /#ftp:!behind.firewall.edu/pub
-    /#ftp:guest@remote-host.com:40/pub
+    /#ftp:guest@remote\-host.com:40/pub
     /#ftp:miguel:xxx@server/pub
 .fi
 .PP
@@ -2271,25 +2271,25 @@ bez kropek w nazwie są widoczne bezpośrednio.
 .PP
 Jeśli używasz systemu ftpfs będąc za routerem filtrującym, który nie
 pozwala ci na używanie standardowej metody otwierania plików, możesz
-chcieć wymusić na programie używanie trybu passive-open. Aby tego używać
+chcieć wymusić na programie używanie trybu passive\-open. Aby tego używać
 ustaw opcję ftpfs_use_passive_connections w pliku inicjującym.
 .PP
 Midnight Commander przechowuje listę katalogów w buforze podręcznym. Czas wyrzucania
 bufora jest ustawiany w oknie dialogowym Wirtualnego Systemu Plików. To ma
 śmieszną właściwość taką, że nawet kiedy wystąpią jakieś zmiany w katalogu, nie
 będą one pokazane w strukturze katalogów, dopóki nie wymusisz tego przy
-użyciu kombinacji C-r. To jest dobre rozwiązanie (jeśli myślisz, że to jest
+użyciu kombinacji C\-r. To jest dobre rozwiązanie (jeśli myślisz, że to jest
 bug, to pomyśl o pracy na zdalnych systemach położonych po drugiej stronie
 Atlantyku przy użyciu ftpfs :) ).
 .PP
 .\"NODE "  Tar File System"
 .SH "  System plików tar (Tar File System)"
-System plików tar pozwala na dostęp w trybie tylko-do-odczytu do plików typu
+System plików tar pozwala na dostęp w trybie tylko\-do\-odczytu do plików typu
 tar i do skompresowanych plików typu tar, za pomocą komendy chdir. Aby
 zmienić katalog na plik tar, możesz zmienić aktualny katalog używając
 następującej konstrukcji:
 .PP
-.I /nazwa_pliku.tar:utar/[katalogu-wewnątrza-archiwum]
+.I /nazwa_pliku.tar:utar/[katalogu\-wewnątrza\-archiwum]
 .PP
 Plik mc.ext pozwala już na tworzenie skrótów do plików tar, oznacza to, że
 możesz wybrać jakiś plik tar i nacisnąć enter aby do niego wejść, zobacz
@@ -2299,8 +2299,8 @@ zostało to pomyślane.
 Przykłady
 .PP
 .nf
-    mc-3.0.tar.gz#utar/mc-3.0/vfs
-    /ftp/GCC/gcc-2.7.0.tar#utar
+    mc\-3.0.tar.gz#utar/mc\-3.0/vfs
+    /ftp/GCC/gcc\-2.7.0.tar#utar
 .fi
 .PP
 Późniejszy podaje pełną ścieżkę archiwum tar.
@@ -2316,7 +2316,7 @@ Aby połączyć się z obcą maszyną, musisz tylko zmienić katalog do
 specjalnego katalogu, którego nazwa jest w następującym formacie:
 .PP
 .nf
-/#sh:[użytkownik@]komputer[:opcje];/[zdalny-katalog];</em>
+/#sh:[użytkownik@]komputer[:opcje];/[zdalny\-katalog];</em>
 .fi
 Elementy
 .IR użytkownik ,
@@ -2330,8 +2330,8 @@ użytkownik w przeciwnym razie użyty zostanie twój login.
 .PP
 Jako
 .I opcja
-może wystąpić 'C' - włącza kompresje i 'rsh' - włącza rsh zamist ssh. Jeśli
-.I zdalny-katalog
+może wystąpić 'C' \- włącza kompresje i 'rsh' \- włącza rsh zamist ssh. Jeśli
+.I zdalny\-katalog
 istnieje, twój aktualny katalog na zdalnym komputerze będzie ustawiony
 na niego.
 .PP
@@ -2410,15 +2410,15 @@ basha musisz tylko ustawić w pliku inputrc ( /etc/inputrc lub ~/.inputrc)
 następujące wartości:
 .PP
 .nf
-set meta-flag on
-set convert-meta off
-set output-meta on
+set meta\-flag on
+set convert\-meta off
+set output\-meta on
 .fi
 .PP
 w pliku /etc/sysconfig/i18n:
 .PP
 .nf
-SYSFONT=lat2u-16
+SYSFONT=lat2u\-16
 SYSFONTACM=iso02
 .fi
 .PP
@@ -2440,25 +2440,25 @@ Teraz wystarczy już tylko włączyć odpowiednie opcje w menu opcji (klawisz
 F9). W menu opcji wybieramy
 .I Display bits
 i włączamy opcje 
-.I ISO 8859-1
+.I ISO 8859\-1
 oraz
 .IR "Full 8 bits input" .
 Potem zapisujemy konfigurację w opcje | Save setup.
 .PP
-I gotowe - polskie literki działają również w podglądzie i wbudowanym
+I gotowe \- polskie literki działają również w podglądzie i wbudowanym
 edytorze plików.
 .PP
 .\"NODE "Colors"
 .SH Kolory
 Midnight Commander próbuje sprawdzić czy twój terminal obsługuje
 kolory używając bazy danych terminali. Czasami jest to zmieniane
-przez różne flagi startowe, np. możesz wymusić wyświetlanie czarno-białe
-lub kolorowe startując z opcją odpowiednio -b i -c.
+przez różne flagi startowe, np. możesz wymusić wyświetlanie czarno\-białe
+lub kolorowe startując z opcją odpowiednio \-b i \-c.
 .PP
 Jeśli program jest skompilowany z menedżerem ekranu Slang zamiast ncurses,
 sprawdzi on również wartość zmiennej
 .BR COLORTERM .
-Jeśli jest ustawiona, ma takie samo znaczenie jak opcja -c.
+Jeśli jest ustawiona, ma takie samo znaczenie jak opcja \-c.
 .PP
 Możesz wybrać terminale, które zawsze żądają wyświetlania w kolorze,
 poprzez dodanie ich do pozycji
@@ -2470,7 +2470,7 @@ odkrycia typu twojego terminala. Na przykład
 color_terminals=linux,xterm
 .fi
 .nf
-color_terminals=terminal-name1,terminal-name2...
+color_terminals=terminal\-name1,terminal\-name2...
 .fi
 .PP
 Program może być skompilowany zarówno z bibliotekami slang jak i ncurses.
@@ -2506,7 +2506,7 @@ Kolory pomocy: helpnormal, helpitalic, helpbold, helplink,
 helpslink; Kolory podglądu: viewunderline; Specjalne tryby podświetlenia:
 executable, directory, link, device, special.
 [nie tłumaczyłem nazw z racji tego, że trzeba je stosować w ich angielskim
-brzmieniu - jeśli jesteś aż tak zaawansowany, użyj słownika].
+brzmieniu \- jeśli jesteś aż tak zaawansowany, użyj słownika].
 .PP
 Okna dialogowe mogą mieć następujące kolory:
 .I dnormal
@@ -2641,11 +2641,11 @@ będzie on zinterpretowany jako klawisz anulowania (tak jak ESC ESC).
 .PP
 .I only_leading_plus_minus
 .IP
-zmienia znaczenia znaków '+', '-', '*' w linii komend (wybór, odznaczenie,
+zmienia znaczenia znaków '+', '\-', '*' w linii komend (wybór, odznaczenie,
 odwrócenie zaznaczenia). Standardowo działają one tylko wtedy kiedy linia
 poleceń jest pusta. Jeśli coś jest w niej już napisane, znaki te są traktowane
 jako normalne. Jest to przydatne gdyż najczęściej w trakcie pisania nie chcemy
-zmieniać zaznaczenia. Jednak czasami ... - wystarczy przestawić tę opcję
+zmieniać zaznaczenia. Jednak czasami ... \- wystarczy przestawić tę opcję
 i klawisze te będą zawsze działać.
 .I panel_scroll_pages
 .IP
@@ -2656,19 +2656,19 @@ przewijanie będzie się odbywać linia po linii.
 .I show_output_starts_shell
 .IP
 Ta opcja pracuje jeśli nie używasz obsługi powłoki w tle. Kiedy
-użyjesz kombinacji klawiszy C-o i ta opcja jest włączona, będziesz
+użyjesz kombinacji klawiszy C\-o i ta opcja jest włączona, będziesz
 miał nową powłokę. Jeśli nie, dowolny klawisz przywróci znów Midnight
-Commandera (C-o działa jak podgląd).
+Commandera (C\-o działa jak podgląd).
 .PP
 .I show_all_if_ambiguous.
 .IP
 Standardowo Midnight Commander pokazuje wszystkie możliwe dokończenia
 jeśli jest ich więcej i naciśnięto kombinację
-.B M-Tab
+.B M\-Tab
 po raz drugi, za pierwszym razem dokończone zostanie tylko tyle ile jest to
 możliwe i jeśli będzie więcej możliwości słychać będzie krótkie bipnięcie.
 Jeśli chcesz widzieć wszystkie możliwe dokończenia już po pierwszym naciśnięciu
-.BR M-Tab ,
+.BR M\-Tab ,
 zmień tę opcję na 1.
 .PP
 .I torben_fj_mode
@@ -2716,16 +2716,16 @@ zawartość wybranego katalogu.
 Midnight Commander pozwala ci na naprawienie bazy danych terminali bez
 posiadania uprawnień roota. Midnight Commander szuka w pliku startowym
 (mc.lib położonego w katalogach z bibliotekami Midnight Commandera) lub w
-pliku ~/.mc/ini sekcji "terminal:nazwa-twojego-terminala" i potem sekcji
+pliku ~/.mc/ini sekcji "terminal:nazwa\-twojego\-terminala" i potem sekcji
 "terminal:general", każda linia sekcji zawiera symbol klawisza, który
 chcesz zdefiniować, zaczynające się do znaku równości i definicji klawisza.
 Możesz użyć kombinacji \\E aby reprezentować znak escape i ^x aby
-reprezentować znak Control-x.
+reprezentować znak Control\-x.
 .PP
 Możliwymi klawiszami symboli są:
 .PP
 .nf
-f0 do f20     Klawisze funkcyjne f0-f20
+f0 do f20     Klawisze funkcyjne f0\-f20
 bs            backspace
 home          klawisz home
 end           klawisz end
@@ -2750,7 +2750,7 @@ insert=\\E[Op
 Symbol klawisza
 .I complete
 reprezentuje sekwencję wyjścia używaną do wywoływania procesu dokańczania,
-jest to wywoływane kombinacją M-tab, ale możesz zdefiniować inne klawisze
+jest to wywoływane kombinacją M\-tab, ale możesz zdefiniować inne klawisze
 do wykonywania tych samych funkcji (na tych klawiaturach z toną fajnych i
 zupełnie bezużytecznych klawiszy).
 .PP
@@ -2808,8 +2808,8 @@ zamiast pliku globalnego.
 Lista katalogów drzewa katalogów i podglądu drzewa. Jedna linia jest jednym
 wejściem. Linie zaczynające się od ukośnika są pełnymi nazwami katalogów.
 Linie zaczynające się od numeru mają tyle znaków ile poprzedni katalog.
-Jeśli chcesz możesz stworzyć plik używając komendy "find / -type d
--print | sort > ~/.mc/tree". Normalnie nie ma sensu tego czynić, gdyż
+Jeśli chcesz możesz stworzyć plik używając komendy "find / \-type d
+\-print | sort > ~/.mc/tree". Normalnie nie ma sensu tego czynić, gdyż
 Midnight Commander robi to sam za ciebie.
 .PP
 \&./.mc.menu
@@ -2834,7 +2834,7 @@ tcsh(1), zsh(1).
 .PP
 .nf
 Strona Midnight Commander w sieci World Wide Web:
-	http://www.midnight-commander.org/
+	http://www.midnight\-commander.org/
 .fi
 .PP
 .\"NODE "AUTHORS"
@@ -2850,7 +2850,7 @@ Mauricio Plaza (mok@roxanne.nuclecu.unam.mx), Paul Sheer
 of this package;
 Alessandro Rubini (rubini@ipvvis.unipv.it) has been especially helpful
 debugging and enhancing the program's mouse support, John Davis
-(davis@space.mit.edu) also made his S-Lang library available to us
+(davis@space.mit.edu) also made his S\-Lang library available to us
 under the GPL and answered my questions about it, and the following
 people have contributed code and many bug fixes (in alphabetical
 order):
@@ -2858,18 +2858,18 @@ order):
 Adam Tla/lka (atlka@sunrise.pg.gda.pl),
 alex@bcs.zp.ua (Alex I. Tkachenko), Antonio Palama,
 DOS port (palama@posso.dm.unipi.it), Erwin van Eijk
-(wabbit@corner.iaf.nl), Gerd Knorr (kraxel@cs.tu-berlin.de),
-Jean-Daniel Luiset (luiset@cih.hcuge.ch), Jon Stevens
+(wabbit@corner.iaf.nl), Gerd Knorr (kraxel@cs.tu\-berlin.de),
+Jean\-Daniel Luiset (luiset@cih.hcuge.ch), Jon Stevens
 (root@dolphin.csudh.edu), Juan Francisco Grigera, Win32 port
-(j-grigera@usa.net), Juan Jose Ciarlante (jjciarla@raiz.uncu.edu.ar),
+(j\-grigera@usa.net), Juan Jose Ciarlante (jjciarla@raiz.uncu.edu.ar),
 Ilya Rybkin (rybkin@rouge.phys.lsu.edu), Marcelo Roccasalva
 (mfroccas@raiz.uncu.edu.ar), Massimo Fontanelli (MC8737@mclink.it),
 Pavel Roskin (pavel_roskin@geocities.com),
 Sergey Ya. Korshunoff (root@seyko.msk.su), Thomas Pundt
-(pundtt@math.uni-muenster.de), Timur Bakeyev
+(pundtt@math.uni\-muenster.de), Timur Bakeyev
 (timur@goff.comtat.kazan.su), Tomasz Cholewo
 (tjchol01@mecca.spd.louisville.edu), Torben Fjerdingstad
-(torben.fjerdingstad@uni-c.dk), Vadim Sinolitis (vvs@nsrd.npi.msu.su)
+(torben.fjerdingstad@uni\-c.dk), Vadim Sinolitis (vvs@nsrd.npi.msu.su)
 and Wim Osterholt (wim@djo.wtm.tudelft.nl).
 .PP
 .\"NODE "BUGS"
@@ -2878,10 +2878,10 @@ W pliku TODO dystrybucji znajdziesz informacje na temat tego, co
 pozostało jeszcze do zrobienia.
 .PP
 Jeśli chcesz zgłosić kłopoty z programem [błędy w nim],
-wyślij e-mail [po angielsku], na adres mc-devel@gnome.org.
+wyślij e\-mail [po angielsku], na adres mc\-devel@gnome.org.
 .PP
 Do zgłoszenia błędu dołącz opis problemu, versję programu, którego używasz
-(wyświetla ją mc -V), system operacyjny, na którym pracujesz i jeśli program
+(wyświetla ją mc \-V), system operacyjny, na którym pracujesz i jeśli program
 się wykłada, chcielibyśmy dostać ślad stosu.
 .SH TŁUMACZENIE
 Maciej Wojciechowski    wojciech@staszic.waw.pl

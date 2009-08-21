@@ -1,4 +1,4 @@
-.TH MCEDIT 1 "August 2009" "MC Version 4.7.0-pre1" "GNU Midnight Commander"
+.TH MCEDIT 1 "August 2009" "MC Version 4.7.0\-pre1" "GNU Midnight Commander"
 .SH NAME
 mcedit \- Internal file editor of GNU Midnight Commander.
 .SH USAGE
@@ -42,49 +42,49 @@ section in mc(1) for more information.
 Disable mouse support.
 .TP
 .I "\-f"
-Display the compiled-in search path for GNU Midnight Commander data
+Display the compiled\-in search path for GNU Midnight Commander data
 files.
 .TP
 .I "\-t"
 Force using termcap database instead of terminfo.  This option is only
-applicable if GNU Midnight Commander was compiled with S-Lang library
+applicable if GNU Midnight Commander was compiled with S\-Lang library
 with terminfo support.
 .TP
 .I "\-V"
 Display the version of the program.
 .TP
 .I "\-x"
-Force xterm mode.  Used when running on xterm-capable terminals (two
+Force xterm mode.  Used when running on xterm\-capable terminals (two
 screen modes, and able to send mouse escape sequences).
 .SH FEATURES
-The internal file editor is a full-featured full screen editor.  It can
+The internal file editor is a full\-featured full screen editor.  It can
 edit files up to 64 megabytes.  It is possible to edit binary files. 
 The features it presently supports are: block copy, move, delete, cut,
-paste; key for key undo; pull-down menus; file insertion; macro
+paste; key for key undo; pull\-down menus; file insertion; macro
 commands; regular expression search and replace (and our own
-scanf-printf search and replace); shift-arrow text highlighting (if
-supported by the terminal); insert-overwrite toggle; word wrap;
+scanf\-printf search and replace); shift\-arrow text highlighting (if
+supported by the terminal); insert\-overwrite toggle; word wrap;
 autoindent; tunable tab size; syntax highlighting for various file
 types; and an option to pipe text blocks through shell commands like
 indent and ispell.
 .SH KEYS
 The editor is easy to use and can be used without learning.  The
-pull-down menu is invoked by pressing F9.  You can learn other keys from
+pull\-down menu is invoked by pressing F9.  You can learn other keys from
 the menu and from the button bar labels.
 .PP
 In addition to that, Shift combined with arrows does text highlighting
 (if supported by the terminal):
-.B Ctrl-Ins
+.B Ctrl\-Ins
 copies to the file
 .BR ~/.mc/cedit/cooledit.clip ,
-.B Shift-Ins
+.B Shift\-Ins
 pastes from
 .BR ~/.mc/cedit/cooledit.clip ,
-.B Shift-Del
+.B Shift\-Del
 cuts to
 .BR ~/.mc/cedit/cooledit.clip ,
 and
-.B Ctrl-Del
+.B Ctrl\-Del
 deletes highlighted text.  Mouse highlighting also works on some
 terminals.  To use the standard mouse support provided by your terminal,
 hold the Shift key.  Please note that the mouse support in the terminal
@@ -92,19 +92,19 @@ doesn't share the clipboard with
 .BR mcedit .
 .PP
 The completion key (usually
-.B "Meta-Tab"
+.B "Meta\-Tab"
 or
 .BR "Escape Tab" )
 completes the word under the cursor using the words used earlier in the
 file.
 .PP
 To define a macro, press
-.B Ctrl-R
+.B Ctrl\-R
 and then type out the keys you want to be executed.  Press
-.B Ctrl-R
+.B Ctrl\-R
 again when finished.  You can then assign the macro to any key you like
 by pressing that key.  The macro is executed when you press
-.B Ctrl-A
+.B Ctrl\-A
 and then the assigned key.  The macro is also executed if you press
 Meta, Ctrl, or Esc and the assigned key, provided that the key is not
 used for any other function.  The macro commands are stored in the file
@@ -125,7 +125,7 @@ file called
 will be created for you from the default template.  Feel free to edit it
 if you need.
 .PP
-.B C-p
+.B C\-p
 will run ispell on a block of text in a similar way.  The script file
 will be called
 .BR ~/.mc/cedit/edit.spell.rc .
@@ -139,19 +139,19 @@ menu.
 .B mcedit
 can be used to navigation through code with tags files created by etags
 or ctags commands. If there is no file TAGS code navigation would not work.
-In example, in case of exuberant-ctags for C language command will be:
+In example, in case of exuberant\-ctags for C language command will be:
 .PP
-ctags -e --language-force=C -R ./
+ctags \-e \-\-language\-force=C \-R ./
 .PP
-.B Meta-Enter 
+.B Meta\-Enter 
 show list box to select item under cursor (cusor should stand at end of
 word).
 .PP
-.B Meta-Minus 
-where minus is symbol "-" go to previous function in navigation list (like a browser
+.B Meta\-Minus 
+where minus is symbol "\-" go to previous function in navigation list (like a browser
 Back).
 .PP
-.B Meta-Equal
+.B Meta\-Equal
 where equal is symbol "=" go to next function in navigation list (like a browser
 Forward).
 .PP
@@ -161,7 +161,7 @@ supports syntax highlighting.  This means that keywords and contexts
 (like C comments, string constants, etc) are highlighted in different
 colors.  The following section explains the format of the file
 .BR ~/.mc/cedit/Syntax .
-If this file is missing, system-wide
+If this file is missing, system\-wide
 .B @prefix@/share/mc/syntax/Syntax
 is used.
 The file
@@ -452,14 +452,14 @@ symbol for add extension to name of backup files. Default "~".
 .TP
 .I editor_line_state
 show state line of editor now it show number of file line (in future it
-can show things like folding, breakpoints, etc.). M-n toglle this option.
+can show things like folding, breakpoints, etc.). M\-n toglle this option.
 .TP
 .I editor_visible_spaces
 Toggle show visible trailing spaces (TWS), if editor_visible_spaces=1 TWS
 showed as '.'
 .TP
 .I editor_visible_tabs
-Toggle show visible tabs, if editor_visible_tabs=1 tabs showed as '<---->'
+Toggle show visible tabs, if editor_visible_tabs=1 tabs showed as '<\-\-\-\->'
 .TP
 .I editor_persistent_selections
 Do not remove block selection after moving the cursor.
@@ -483,7 +483,7 @@ to be described
 save file position on exit.
 .TP
 .I source_codepage
-symbol representation of codepage name for file (i.e. CP1251, ~ - default).
+symbol representation of codepage name for file (i.e. CP1251, ~ \- default).
 .SH MISCELLANEOUS
 You can use scanf search and replace to search and replace a C format
 string.  First take a look at the
@@ -518,7 +518,7 @@ matches the number given, which is not always a real match. Scanf also
 treats whitespace as being elastic.  Note that the scanf format %[ is
 very useful for scanning strings, and whitespace.
 .PP
-The editor also displays non-us characters (160+).  When editing
+The editor also displays non\-us characters (160+).  When editing
 binary files, you should set
 .B display bits
 to 7 bits in the Midnight Commander options menu to keep the spacing
@@ -530,7 +530,7 @@ The help file for the program.
 .PP
 .I @prefix@/share/mc/mc.ini
 .IP
-The default system-wide setup for GNU Midnight Commander, used only if
+The default system\-wide setup for GNU Midnight Commander, used only if
 the user's own ~/.mc/ini file is missing.
 .PP
 .I @prefix@/share/mc/mc.lib
@@ -540,13 +540,13 @@ affect all users, whether they have ~/.mc/ini or not.
 .PP
 .I @prefix@/share/mc/syntax/*
 .IP
-The default system-wide syntax files for mcedit, used only if
+The default system\-wide syntax files for mcedit, used only if
 the corresponding user's own ~/.mc/cedit/ file is missing.
 .PP
 .I $HOME/.mc/ini
 .IP
 User's own setup.  If this file is present then the setup is loaded
-from here instead of the system-wide setup file.
+from here instead of the system\-wide setup file.
 .PP
 .I $HOME/.mc/cedit/
 .IP
@@ -554,16 +554,16 @@ User's own directory where block commands are processed and saved and
 user's own syntax files are located.
 .SH LICENSE
 This program is distributed under the terms of the GNU General Public
-License as published by the Free Software Foundation.  See the built-in
+License as published by the Free Software Foundation.  See the built\-in
 help of the Midnight Commander for details on the License and the lack
 of warranty.
 .SH AVAILABILITY
 The latest version of this program can be found at
-http://midnight-commander.org/.
+http://midnight\-commander.org/.
 .SH SEE ALSO
 cooledit(1), mc(1), gpm(1), terminfo(1), scanf(3).
 .SH AUTHORS
 Paul Sheer (psheer@obsidian.co.za) is the original author of
 the Midnight Commander's internal editor.
 .SH BUGS
-Bugs should be reported to mc-devel@gnome.org
+Bugs should be reported to mc\-devel@gnome.org
