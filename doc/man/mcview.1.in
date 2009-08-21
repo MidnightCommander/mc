@@ -1,9 +1,9 @@
-.TH MCVIEW 1 "August 2009" "MC Version 4.7.0-pre1" "GNU Midnight Commander"
+.TH MCVIEW 1 "August 2009" "MC Version 4.7.0\-pre1" "GNU Midnight Commander"
 .SH NAME
 mcview \- Internal file viewer of GNU Midnight Commander.
 .SH USAGE
 .B mcview
-[-bcCdfhstVx?] file
+[\-bcCdfhstVx?] file
 .SH DESCRIPTION
 .LP
 mcview is a link to
@@ -32,10 +32,10 @@ section in mc(1) for more information.
 Disable mouse support.
 .TP
 .I "\-f"
-Display the compiled-in search paths for Midnight Commander files.
+Display the compiled\-in search paths for Midnight Commander files.
 .TP
 .I "\-t"
-Used only if the code was compiled with S-Lang and terminfo: it makes
+Used only if the code was compiled with S\-Lang and terminfo: it makes
 the Midnight Commander use the value of the
 .B TERMCAP
 variable for the terminal information instead of the information on
@@ -45,7 +45,7 @@ the system wide terminal database
 Displays the version of the program.
 .TP
 .I "\-x"
-Forces xterm mode.  Used when running on xterm-capable terminals (two
+Forces xterm mode.  Used when running on xterm\-capable terminals (two
 screen modes, and able to send mouse escape sequences).
 .PP
 .SH COLORS
@@ -67,7 +67,7 @@ The help file for the program.
 .PP
 .I @prefix@/share/mc/mc.ini
 .IP
-The default system-wide setup for GNU Midnight Commander, used only if
+The default system\-wide setup for GNU Midnight Commander, used only if
 the user's own ~/.mc/ini file is missing.
 .PP
 .I @prefix@/share/mc/mc.lib
@@ -78,11 +78,11 @@ affect all users, whether they have ~/.mc/ini or not.
 .I $HOME/.mc/ini
 .IP
 User's own setup.  If this file is present, the setup is loaded from
-here instead of the system-wide startup file.
+here instead of the system\-wide startup file.
 .PP
 .SH LICENSE
 This program is distributed under the terms of the GNU General Public
-License as published by the Free Software Foundation.  See the built-in
+License as published by the Free Software Foundation.  See the built\-in
 help of the Midnight Commander for details on the License and the lack
 of warranty.
 .SH AVAILABILITY
@@ -92,4 +92,4 @@ ftp://ftp.gnu.org/gnu/mc/.
 mc(1), mcedit(1)
 .PP
 .SH BUGS
-Bugs should be reported to mc-devel@gnome.org
+Bugs should be reported to mc\-devel@gnome.org
