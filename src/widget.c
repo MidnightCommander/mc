@@ -2509,7 +2509,7 @@ buttonbar_callback (Widget *w, widget_msg_t msg, int parm)
 {
     WButtonBar *bb = (WButtonBar *) w;
     int i;
-    char *text;
+    const char *text;
 
     switch (msg) {
     case WIDGET_FOCUS:
