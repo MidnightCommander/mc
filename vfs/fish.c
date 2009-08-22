@@ -1061,8 +1061,6 @@ static int fish_unlink (struct vfs_class *me, const char *path)
 
 static int fish_exists (struct vfs_class *me, const char *path)
 {
-    int ret_code;
-
     PREFIX
 
     g_snprintf(buf, sizeof(buf),
