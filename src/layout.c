@@ -676,7 +676,7 @@ setup_panels (void)
 	widget_set_size (&the_prompt->widget, LINES, COLS, 0, 0);
     }
 
-    widget_set_size ((Widget *) the_bar, LINES - 1, 0, keybar_visible, COLS);
+    widget_set_size (&the_bar->widget, LINES - 1, 0, keybar_visible, COLS);
     buttonbar_set_visible (the_bar, keybar_visible);
 
     /* Output window */

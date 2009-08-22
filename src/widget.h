@@ -158,6 +158,27 @@ struct WListbox {
     int cursor_x, cursor_y;	/* Cache the values */
 };
 
+/* number of bttons in buttonbar */
+#define BUTTONBAR_LABELS_NUM	10
+
+typedef void (*voidfn)(void);
+typedef void (*buttonbarfn)(void *);
+
+typedef struct WButtonBar {
+    Widget widget;
+    int visible;		/* Is it visible? */
+    int btn_width;		/* width of one button */
+    struct {
+	char   *text;
+	enum { BBFUNC_NONE, BBFUNC_VOID, BBFUNC_PTR } tag;
+	union {
+	    voidfn fn_void;
+	    buttonbarfn fn_ptr;
+	} u;
+	void   *data;
+    } labels [BUTTONBAR_LABELS_NUM];
+} WButtonBar;
+
 typedef struct WGroupbox {
     Widget widget;
     char *title;
@@ -176,6 +197,7 @@ WInput  *input_new    (int y, int x, int color, int len, const char *text, const
 WLabel  *label_new    (int y, int x, const char *text);
 WGauge  *gauge_new    (int y, int x, int shown, int max, int current);
 WListbox *listbox_new (int y, int x, int height, int width, lcback callback);
+WButtonBar *buttonbar_new (int visible);
 WGroupbox *groupbox_new (int y, int x, int height, int width, const char *title);
 
 /* Input lines */
@@ -229,16 +251,7 @@ enum append_pos {
 char *listbox_add_item (WListbox *l, enum append_pos pos, int
 			hotkey, const char *text, void *data);
 
-/* Hintbar routines */
 
-/* Buttonbar */
-
-typedef void (*voidfn)(void);
-typedef void (*buttonbarfn)(void *);
-
-typedef struct WButtonBar WButtonBar;
-
-WButtonBar *buttonbar_new (int visible);
 WButtonBar *find_buttonbar (Dlg_head *h);
 void buttonbar_clear_label (Dlg_head *, int idx);
 void buttonbar_set_label (Dlg_head *, int index, const char *text, voidfn);

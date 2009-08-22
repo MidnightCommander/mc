@@ -55,24 +55,6 @@
 
 #define HISTORY_FILE_NAME ".mc/history"
 
-/* number of bttons in buttonbar */
-#define BUTTONBAR_LABELS_NUM	10
-
-struct WButtonBar {
-    Widget widget;
-    int    visible;		/* Is it visible? */
-    int btn_width;              /* width of one button */
-    struct {
-	char   *text;
-	enum { BBFUNC_NONE, BBFUNC_VOID, BBFUNC_PTR } tag;
-	union {
-	    voidfn fn_void;
-	    buttonbarfn fn_ptr;
-	} u;
-	void   *data;
-    } labels [BUTTONBAR_LABELS_NUM];
-};
-
 static void
 widget_selectcolor (Widget *w, gboolean focused, gboolean hotkey)
 {
@@ -2584,12 +2566,14 @@ buttonbar_event (Gpm_Event *event, void *data)
 WButtonBar *
 buttonbar_new (int visible)
 {
+    WButtonBar *bb;
     int i;
-    WButtonBar *bb = g_new (WButtonBar, 1);
 
-    init_widget (&bb->widget, LINES-1, 0, 1, COLS,
+    bb = g_new0 (WButtonBar, 1);
+
+    init_widget (&bb->widget, LINES - 1, 0, 1, COLS,
 		 buttonbar_callback, buttonbar_event);
-    
+    bb->widget.pos_flags = WPOS_KEEP_HORZ | WPOS_KEEP_BOTTOM;
     bb->visible = visible;
     for (i = 0; i < BUTTONBAR_LABELS_NUM; i++){
 	bb->labels[i].text = NULL;
