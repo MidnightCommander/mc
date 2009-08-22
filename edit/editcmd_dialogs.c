@@ -135,40 +135,78 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
 void
 editcmd_dialog_search_show (WEdit * edit, char **search_text)
 {
+    int dialog_result;
+    int i;
+    int btn_pos, dlg_width;
     if (*search_text == '\0')
         *search_text = INPUT_LAST_TEXT;
-
     {
 	gchar **list_of_types = mc_search_get_types_strings_array();
 	int SEARCH_DLG_HEIGHT = SEARCH_DLG_MIN_HEIGHT + g_strv_length (list_of_types) - SEARCH_DLG_HEIGHT_SUPPLY;
-
 	QuickWidget quick_widgets[] =
 	{
-	    /* 0 */ QUICK_BUTTON (6, 10, 11, SEARCH_DLG_HEIGHT, N_("&Cancel"), B_CANCEL, NULL),
-	    /* 1 */ QUICK_BUTTON (2, 10, 11, SEARCH_DLG_HEIGHT, N_("&OK"),     B_ENTER,  NULL),
+	    /* 0 */
+	    QUICK_BUTTON (6, 10, 11, SEARCH_DLG_HEIGHT, N_("&Cancel"), B_CANCEL, NULL),
+	    /* 1 */
+	    QUICK_BUTTON (4, 10, 11, SEARCH_DLG_HEIGHT, N_("&Find all"), B_USER, NULL),
+	    /* 2 */
+	    QUICK_BUTTON (2, 10, 11, SEARCH_DLG_HEIGHT, N_("&OK"),     B_ENTER,  NULL),
 #ifdef HAVE_CHARSET
-	    /* 2 */ QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 9, SEARCH_DLG_HEIGHT, N_("All charsets"), &edit->all_codepages),
+	    /* 3 */
+	    QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 9, SEARCH_DLG_HEIGHT, N_("All charsets"), &edit->all_codepages),
 #endif
-	    /* 3 */ QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 8, SEARCH_DLG_HEIGHT, N_("&Whole words"), &edit->whole_words),
-	    /* 4 */ QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 7, SEARCH_DLG_HEIGHT, N_("In se&lection"), &edit->only_in_selection),
-	    /* 5 */ QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 6, SEARCH_DLG_HEIGHT, N_("&Backwards"), &edit->replace_backwards),
-	    /* 6 */ QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT, N_("case &Sensitive"), &edit->replace_case),
-	    /* 7 */ QUICK_RADIO ( 3, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT,
+	    /* 4 */
+	    QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 8, SEARCH_DLG_HEIGHT, N_("&Whole words"), &edit->whole_words),
+	    /* 5 */
+	    QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 7, SEARCH_DLG_HEIGHT, N_("In se&lection"), &edit->only_in_selection),
+	    /* 6 */
+	    QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 6, SEARCH_DLG_HEIGHT, N_("&Backwards"), &edit->replace_backwards),
+	    /* 7 */
+	    QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT, N_("case &Sensitive"), &edit->replace_case),
+	    /* 8 */
+	    QUICK_RADIO ( 3, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT,
 				    g_strv_length (list_of_types), (const char **) list_of_types, &edit->search_type),
-	    /* 8 */ QUICK_INPUT (3, SEARCH_DLG_WIDTH, 3, SEARCH_DLG_HEIGHT,
+	    /* 9 */
+	    QUICK_INPUT (3, SEARCH_DLG_WIDTH, 3, SEARCH_DLG_HEIGHT,
 				    *search_text, SEARCH_DLG_WIDTH - 6, 0, MC_HISTORY_SHARED_SEARCH, search_text),
-	    /* 9 */ QUICK_LABEL (2, SEARCH_DLG_WIDTH, 2, SEARCH_DLG_HEIGHT, N_(" Enter search string:")),
+	    /* 10 */
+	    QUICK_LABEL (2, SEARCH_DLG_WIDTH, 2, SEARCH_DLG_HEIGHT, N_(" Enter search string:")),
 	    QUICK_END
 	};
+
+#ifdef ENABLE_NLS
+	for (i = 0; i < 3; i++)
+	    quick_widgets[i].u.button.text = _(quick_widgets[i].u.button.text);
+#endif
+
+    /* calculate button positions */
+    btn_pos = 7;
+
+    for (i = 2; i > -1; i--) {
+        quick_widgets[i].relative_x = btn_pos;
+        btn_pos += str_term_width1 (quick_widgets[i].u.button.text) + 7;
+        if (i == 2) /* default button */
+            btn_pos += 2;
+    }
+
+    dlg_width = btn_pos + 2;
+
+    /* correct widget coordinates */
+    for (i = 0; i <  10; i++)
+	quick_widgets[i].x_divisions = dlg_width;
+
 
 	QuickDialog Quick_input =
 	{
 	    SEARCH_DLG_WIDTH, SEARCH_DLG_HEIGHT, -1, -1, N_("Search"),
 	    "[Input Line Keys]", quick_widgets, FALSE
 	};
+	dialog_result = quick_dialog (&Quick_input);
 
-	if (quick_dialog (&Quick_input) == B_CANCEL)
+	if (dialog_result == B_CANCEL)
 	    *search_text = NULL;
+        if (dialog_result == B_USER)
+            search_create_bookmark = 1;
     }
 }
 

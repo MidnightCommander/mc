@@ -71,7 +71,7 @@
 /* globals: */
 
 /* search and replace: */
-static int search_create_bookmark = 0;
+int search_create_bookmark = 0;
 /* static int search_in_all_charsets = 0; */
 
 /* queries on a save */
@@ -89,10 +89,14 @@ edit_search_cmd_search_create_bookmark(WEdit * edit)
     long q = 0;
     gsize len = 0;
 
+    search_create_bookmark = 0;
+    book_mark_flush (edit, -1);
+
     for (;;) {
 	if (!mc_search_run(edit->search, (void *) edit, q, edit->last_byte, &len))
 	    break;
-	
+	if (found == 0)
+	    edit->search_start = edit->search->normal_offset;
 	found++;
 	l += edit_count_lines (edit, q, edit->search->normal_offset);
 	if (l != l_last) {
@@ -103,11 +107,11 @@ edit_search_cmd_search_create_bookmark(WEdit * edit)
 	q = edit->search->normal_offset + 1;
     }
 
-    if (found) {
-/* in response to number of bookmarks added because of string being found %d times */
-	message (D_NORMAL, _("Search"), _(" %d items found, %d bookmarks added "), found, books);
-    } else {
+    if (found == 0) {
 	edit_error_dialog (_ ("Search"), _ (" Search string not found "));
+    } else {
+	edit_cursor_move (edit, edit->search_start - edit->curs1);
+	edit_scroll_screen_over_cursor (edit);
     }
 }
 
