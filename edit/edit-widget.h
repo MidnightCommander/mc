@@ -63,6 +63,7 @@ struct WEdit {
     int replace_backwards;
     int replace_case;
     int only_in_selection;
+    int whole_words;
     int all_codepages;
 
     long search_start;		/* First character to start searching from */

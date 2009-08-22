@@ -51,11 +51,11 @@
 /*** file scope macro definitions **************************************/
 
 #define SEARCH_DLG_WIDTH 58
-#define SEARCH_DLG_MIN_HEIGHT 12
+#define SEARCH_DLG_MIN_HEIGHT 13
 #define SEARCH_DLG_HEIGHT_SUPPLY 3
 
 #define REPLACE_DLG_WIDTH 58
-#define REPLACE_DLG_MIN_HEIGHT 16
+#define REPLACE_DLG_MIN_HEIGHT 17
 #define REPLACE_DLG_HEIGHT_SUPPLY 5
 
 /*** file scope type declarations **************************************/
@@ -87,6 +87,7 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
     int treplace_backwards = edit->replace_backwards;
     int tonly_in_selection = edit->only_in_selection;
     int treplace_case = edit->replace_case;
+    int twhole_words = edit->whole_words;
     int tall_codepages = edit->all_codepages;
     mc_search_type_t ttype_of_search = edit->search_type;
     int dialog_result;
@@ -99,16 +100,20 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
 
     QuickWidget quick_widgets[] = {
 
-        {quick_button, 6, 10, 12, REPLACE_DLG_HEIGHT, N_("&Cancel"), 0, B_CANCEL,
+        {quick_button, 6, 10, 13, REPLACE_DLG_HEIGHT, N_("&Cancel"), 0, B_CANCEL,
          0, 0, NULL, NULL, NULL},
 
-        {quick_button, 2, 10, 12, REPLACE_DLG_HEIGHT, N_("&OK"), 0, B_ENTER,
+        {quick_button, 2, 10, 13, REPLACE_DLG_HEIGHT, N_("&OK"), 0, B_ENTER,
          0, 0, NULL, NULL, NULL},
 
 #ifdef HAVE_CHARSET
-        {quick_checkbox, 33, REPLACE_DLG_WIDTH, 10, REPLACE_DLG_HEIGHT, N_("&All charsets"), 0, 0,
+        {quick_checkbox, 33, REPLACE_DLG_WIDTH, 11, REPLACE_DLG_HEIGHT, N_("&All charsets"), 0, 0,
          &tall_codepages, 0, NULL, NULL, NULL},
 #endif
+
+        {quick_checkbox, 33, REPLACE_DLG_WIDTH, 10, REPLACE_DLG_HEIGHT, N_("Whole &words"), 0, 0,
+         &twhole_words, 0, NULL, NULL, NULL},
+
 
         {quick_checkbox, 33, REPLACE_DLG_WIDTH, 9, REPLACE_DLG_HEIGHT, N_("In se&lection"), 0, 0,
          &tonly_in_selection, 0, NULL, NULL, NULL},
@@ -162,6 +167,7 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
         edit->only_in_selection = tonly_in_selection;
         edit->all_codepages = tall_codepages;
         edit->replace_backwards = treplace_backwards;
+        edit->whole_words = twhole_words;
         edit->replace_case = treplace_case;
         return;
     } else {
@@ -179,6 +185,7 @@ editcmd_dialog_search_show (WEdit * edit, char **search_text)
     int tsearch_case = edit->replace_case;
     int tsearch_backwards = edit->replace_backwards;
     int tall_codepages = edit->all_codepages;
+    int twhole_words = edit->whole_words;
     int tonly_in_selection = edit->only_in_selection;
     mc_search_type_t ttype_of_search = edit->search_type;
     gchar **list_of_types = mc_search_get_types_strings_array();
@@ -189,15 +196,19 @@ editcmd_dialog_search_show (WEdit * edit, char **search_text)
         *search_text = INPUT_LAST_TEXT;
 
     QuickWidget quick_widgets[] = {
-        {quick_button, 6, 10, 10, SEARCH_DLG_HEIGHT, N_("&Cancel"), 0, B_CANCEL, 0,
+        {quick_button, 6, 10, 11, SEARCH_DLG_HEIGHT, N_("&Cancel"), 0, B_CANCEL, 0,
          0, NULL, NULL, NULL},
-        {quick_button, 2, 10, 10, SEARCH_DLG_HEIGHT, N_("&OK"), 0, B_ENTER, 0,
+        {quick_button, 2, 10, 11, SEARCH_DLG_HEIGHT, N_("&OK"), 0, B_ENTER, 0,
          0, NULL, NULL, NULL},
 
 #ifdef HAVE_CHARSET
-        {quick_checkbox, 33, SEARCH_DLG_WIDTH, 8, SEARCH_DLG_HEIGHT, N_("&All charsets"), 0, 0,
+        {quick_checkbox, 33, SEARCH_DLG_WIDTH, 9, SEARCH_DLG_HEIGHT, N_("&All charsets"), 0, 0,
          &tall_codepages, 0, NULL, NULL, NULL},
 #endif
+
+        {quick_checkbox, 33, SEARCH_DLG_WIDTH, 8, SEARCH_DLG_HEIGHT, N_("Whole &words"), 0, 0,
+         &twhole_words, 0, NULL, NULL, NULL},
+
         {quick_checkbox, 33, SEARCH_DLG_WIDTH, 7, SEARCH_DLG_HEIGHT, N_("In se&lection"), 0, 0,
          &tonly_in_selection, 0, NULL, NULL, NULL},
 
@@ -229,6 +240,7 @@ editcmd_dialog_search_show (WEdit * edit, char **search_text)
         edit->replace_backwards = tsearch_backwards;
         edit->only_in_selection = tonly_in_selection;
         edit->all_codepages = tall_codepages;
+        edit->whole_words = twhole_words;
         edit->replace_case = tsearch_case;
     } else {
         *search_text = NULL;

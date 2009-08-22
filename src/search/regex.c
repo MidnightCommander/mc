@@ -63,7 +63,7 @@ mc_search__regex_str_append_if_special (GString * copy_to, GString * regex_str, 
     const char *special_chars[] = {
         "\\s", "\\S",
         "\\d", "\\D",
-        "\\B", "\\B",
+        "\\b", "\\B",
         "\\w", "\\W",
         "\\t", "\\n",
         "\\r", "\\f",

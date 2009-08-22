@@ -60,6 +60,9 @@ typedef struct mc_search_struct {
     /* search only once.  Is this for replace? */
     gboolean is_once_only;
 
+    /* search only whole words (from begin to end). Used only with NORMAL search type */
+    gboolean whole_words;
+
     /* search entire string (from begin to end). Used only with GLOB search type */
     gboolean is_entire_line;
 
