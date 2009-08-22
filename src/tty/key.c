@@ -197,7 +197,7 @@ typedef struct key_def {
 				   Escape */
 } key_def;
 
-typedef const struct {
+typedef struct {
     int code;
     const char *seq;
     int action;

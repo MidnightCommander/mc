@@ -23,7 +23,7 @@ struct color_table_s {
     int  value;
 };
 
-extern const struct color_table_s const color_table [];
+extern const struct color_table_s color_table [];
 
 #ifdef HAVE_SLANG
 #   define CTYPE const char *

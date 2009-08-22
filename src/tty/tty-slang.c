@@ -474,10 +474,10 @@ tty_print_alt_char (int c)
 void
 tty_print_anychar (int c)
 {
-    unsigned char str[6 + 1];
+    char str[6 + 1];
 
     if ( c > 255 ) {
-        int res = g_unichar_to_utf8 (c, (char *)str);
+        int res = g_unichar_to_utf8 (c, str);
         if ( res == 0 ) {
             str[0] = '.';
             str[1] = '\0';
