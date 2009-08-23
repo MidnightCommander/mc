@@ -276,7 +276,6 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
     int x1 = start_col + EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
     int y = row + EDIT_TEXT_VERTICAL_OFFSET;
     int cols_to_skip = abs (x);
-    unsigned char str[6 + 1];
 
     tty_setcolor (EDITOR_NORMAL_COLOR);
     tty_draw_hline (edit->widget.y + y, edit->widget.x + x1,
