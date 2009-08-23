@@ -1233,6 +1233,9 @@ means you have to escape characters with a special meaning to egrep with "\\",
 e.g. if you search for "strcmp (" you will have to input "strcmp \\("
 (without the double quotes).
 .PP
+Option \"Whole words\" Allow select only those files containing matches that
+form whole words. Like grep -w
+.PP
 You can start the search by pressing the OK button.
 During the search you can stop from the Stop button and continue from
 the Start button.
