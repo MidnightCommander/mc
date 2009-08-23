@@ -90,18 +90,14 @@ static void menubar_paint_idx (WMenu *menubar, int idx, int color)
         /* menu separator */
         tty_setcolor (MENU_ENTRY_COLOR);
 
-        if (!tty_is_slow ()) {
-            widget_move (&menubar->widget, y, x - 1);
-            tty_print_alt_char (ACS_LTEE);
-        }
+        widget_move (&menubar->widget, y, x - 1);
+        tty_print_alt_char (ACS_LTEE);
 
         tty_draw_hline (menubar->widget.y + y, menubar->widget.x + x,
-                        tty_is_slow () ? ' ' : ACS_HLINE, menubar->max_entry_len + 2);
+                        ACS_HLINE, menubar->max_entry_len + 2);
 
-        if (!tty_is_slow ()) {
-            widget_move (&menubar->widget, y, x + menubar->max_entry_len + 2);
-            tty_print_alt_char (ACS_RTEE);
-        }
+        widget_move (&menubar->widget, y, x + menubar->max_entry_len + 2);
+        tty_print_alt_char (ACS_RTEE);
     } else {
         /* menu text */
         tty_setcolor (color);

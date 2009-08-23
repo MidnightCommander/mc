@@ -216,8 +216,12 @@ tty_getyx (int *py, int *px)
 void
 tty_draw_hline (int y, int x, int ch, int len)
 {
+    if (ch == ACS_HLINE && slow_tty) {
+        ch = ugly_frm_thinhoriz;
+    }
+
     if ((y >= 0) && (x >= 0))
-	move (y, x);
+        move (y, x);
     hline (ch, len);
 }
 
@@ -289,6 +293,14 @@ void
 tty_print_anychar (int c)
 {
     unsigned char str[6 + 1];
+
+    if (c == ACS_RTEE && (ugly_line_drawing || slow_tty)) {
+        c = ugly_frm_rightmiddle;
+    }
+
+    if (c == ACS_LTEE && (ugly_line_drawing || slow_tty)) {
+        c = ugly_frm_leftmiddle;
+    }
 
     if ( c > 255 ) {
         int res = g_unichar_to_utf8 (c, (char *)str);

@@ -257,8 +257,7 @@ static void show_tree (WTree *tree)
     /* Loop for every line */
     for (i = 0; i < tree_lines; i++){
 	/* Move to the beginning of the line */
-	tty_draw_hline (tree->widget.y + y + i, tree->widget.x + x,
-			' ', tree_cols);
+	tty_draw_hline (tree->widget.y + y + i, tree->widget.x + x, ' ', tree_cols);
 
 	if (!current)
 	    continue;

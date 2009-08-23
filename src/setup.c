@@ -34,6 +34,7 @@
 #include "../src/tty/key.h"
 #include "../src/tty/mouse.h"		/* To make view.h happy */
 
+#include "args.h"
 #include "dir.h"
 #include "panel.h"
 #include "main.h"
@@ -581,12 +582,29 @@ setup_init (void)
     return profile;
 }
 
+int
+setup_srt_to_char (char* str)
+{
+    int res = -1;
+
+    if (!str)
+        return (int) ' ';
+    res = g_utf8_get_char_validated (str, -1);
+
+    if ( res < 0 ) {
+        return (int) *str;
+    } else {
+        return res;
+    }
+}
+
 void
 load_setup (void)
 {
     char *profile;
     int    i;
     char *buffer;
+    char *frm_val = NULL;
 
     profile = setup_init ();
 
@@ -680,6 +698,49 @@ load_setup (void)
     if ( get_codepage_id( display_codepage ) )
         utf8_display = str_isutf8 (get_codepage_id( display_codepage ));
 #endif /* HAVE_CHARSET */
+
+    if (!mc_args__ugly_line_drawing) {
+        frm_val = mc_config_get_string(mc_main_config, "Frames", "horiz", " ");
+        ugly_frm_horiz = setup_srt_to_char (frm_val);
+        g_free (frm_val);
+
+        frm_val = mc_config_get_string(mc_main_config, "Frames", "vert", " ");
+        ugly_frm_vert = setup_srt_to_char (frm_val);
+        g_free (frm_val);
+
+        frm_val = mc_config_get_string(mc_main_config, "Frames", "lefttop", " ");
+        ugly_frm_lefttop = setup_srt_to_char (frm_val);
+        g_free (frm_val);
+
+        frm_val = mc_config_get_string(mc_main_config, "Frames", "righttop", " ");
+        ugly_frm_righttop = setup_srt_to_char (frm_val);
+        g_free (frm_val);
+
+        frm_val = mc_config_get_string(mc_main_config, "Frames", "leftbottom", " ");
+        ugly_frm_leftbottom = setup_srt_to_char (frm_val);
+        g_free (frm_val);
+
+        frm_val = mc_config_get_string(mc_main_config, "Frames", "rightbottom", " ");
+        ugly_frm_rightbottom = setup_srt_to_char (frm_val);
+        g_free (frm_val);
+
+        frm_val = mc_config_get_string(mc_main_config, "Frames", "thinvert", " ");
+        ugly_frm_thinvert = setup_srt_to_char (frm_val);
+        g_free (frm_val);
+
+        frm_val = mc_config_get_string(mc_main_config, "Frames", "thinhoriz", "-");
+        ugly_frm_thinhoriz = setup_srt_to_char (frm_val);
+        g_free (frm_val);
+
+        frm_val = mc_config_get_string(mc_main_config, "Frames", "rightmiddle", " ");
+        ugly_frm_rightmiddle = setup_srt_to_char (frm_val);
+        g_free (frm_val);
+
+        frm_val = mc_config_get_string(mc_main_config, "Frames", "leftmiddle", " ");
+        ugly_frm_leftmiddle = setup_srt_to_char (frm_val);
+        g_free (frm_val);
+    }
+
 }
 
 #if defined(USE_VFS) && defined (USE_NETCODE)
