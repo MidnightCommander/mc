@@ -1439,6 +1439,7 @@ edit_replace_cmd (WEdit *edit, int again)
 	edit->search->search_type = edit->search_type;
 	edit->search->is_all_charsets = edit->all_codepages;
 	edit->search->is_case_sentitive = edit->replace_case;
+	edit->search->whole_words = edit->whole_words;
 	edit->search->search_fn = edit_search_cmd_callback;
     }
 
@@ -1640,6 +1641,7 @@ void edit_search_cmd (WEdit * edit, int again)
 	edit->search->search_type = edit->search_type;
 	edit->search->is_all_charsets = edit->all_codepages;
 	edit->search->is_case_sentitive = edit->replace_case;
+	edit->search->whole_words = edit->whole_words;
 	edit->search->search_fn = edit_search_cmd_callback;
     }
 

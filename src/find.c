@@ -97,6 +97,7 @@ static WCheck *skip_hidden_cbox;
 static WCheck *content_case_sens_cbox;		/* "case sensitive" checkbox */
 static WCheck *content_regexp_cbox;		/* "find regular expression" checkbox */
 static WCheck *content_first_hit_cbox;		/* "First hit" checkbox" */
+static WCheck *content_whole_words_cbox;	/* "whole words" checkbox */
 #ifdef HAVE_CHARSET
 static WCheck *file_all_charsets_cbox;
 static WCheck *content_all_charsets_cbox;
@@ -165,6 +166,7 @@ static gboolean content_regexp_flag = FALSE;
 static gboolean content_all_charsets_flag = FALSE;
 static gboolean content_case_sens_flag = TRUE;
 static gboolean content_first_hit_flag = FALSE;
+static gboolean content_whole_words = FALSE;
 
 static inline char *
 add_to_list (const char *text, void *data)
@@ -285,6 +287,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
     const char *content_case_label = N_("Case sens&itive");
     const char *content_regexp_label = N_("Re&gular expression");
     const char *content_first_hit_label = N_("Fir&st hit");
+    const char *content_whole_words_label = N_("Whole &words");
     const char *content_all_charsets_label = N_("All cha&rsets");
 
     const char *buts[] = { N_("&OK"), N_("&Cancel"), N_("&Tree") };
@@ -305,6 +308,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
 	content_case_label = _(content_case_label);
 	content_regexp_label = _(content_regexp_label);
 	content_first_hit_label = _(content_first_hit_label);
+	content_whole_words_label = _(content_whole_words_label);
 	content_all_charsets_label = _(content_all_charsets_label);
     }
 #endif				/* ENABLE_NLS */
@@ -332,10 +336,13 @@ find_parameters (char **start_dir, char **pattern, char **content)
 		button_new (FIND_Y - 3, FIND_X/4 - b0/2, B_ENTER, DEFPUSH_BUTTON, buts[0], 0));
 
 #ifdef HAVE_CHARSET
-    content_all_charsets_cbox = check_new (10, FIND_X / 2 + 1,
+    content_all_charsets_cbox = check_new (11, FIND_X / 2 + 1,
 		content_all_charsets_flag, content_all_charsets_label);
     add_widget (find_dlg, content_all_charsets_cbox);
 #endif
+
+    content_whole_words_cbox = check_new (10, FIND_X / 2 + 1, content_whole_words, content_whole_words_label);
+    add_widget (find_dlg, content_whole_words_cbox);
 
     content_first_hit_cbox = check_new (9, FIND_X / 2 + 1, content_first_hit_flag, content_first_hit_label);
     add_widget (find_dlg, content_first_hit_cbox);
@@ -398,6 +405,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
 	content_case_sens_flag = content_case_sens_cbox->state & C_BOOL;
 	content_regexp_flag = content_regexp_cbox->state & C_BOOL;
 	content_first_hit_flag = content_first_hit_cbox->state & C_BOOL;
+	content_whole_words = content_whole_words_cbox->state & C_BOOL;
 	file_pattern_flag = file_pattern_cbox->state & C_BOOL;
 	file_case_sens_flag = file_case_sens_cbox->state & C_BOOL;
 	find_recurs_flag = recursively_cbox->state & C_BOOL;
@@ -432,6 +440,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
 	content_case_sens_flag = content_case_sens_cbox->state & C_BOOL;
 	content_regexp_flag = content_regexp_cbox->state & C_BOOL;
 	content_first_hit_flag = content_first_hit_cbox->state & C_BOOL;
+	content_whole_words = content_whole_words_cbox->state & C_BOOL;
 	find_recurs_flag = recursively_cbox->state & C_BOOL;
 	file_pattern_flag = file_pattern_cbox->state & C_BOOL;
 	file_case_sens_flag = file_case_sens_cbox->state & C_BOOL;
@@ -756,10 +765,10 @@ do_search (struct Dlg_head *h)
     }
 
     search_content_handle = mc_search_new(content_pattern, -1);
-    if (search_content_handle)
-    {
+    if (search_content_handle) {
         search_content_handle->search_type = (content_regexp_flag) ? MC_SEARCH_T_REGEX : MC_SEARCH_T_NORMAL;
         search_content_handle->is_case_sentitive = content_case_sens_flag;
+        search_content_handle->whole_words = content_whole_words;
         search_content_handle->is_all_charsets = content_all_charsets_flag;
     }
     search_file_handle = mc_search_new(find_pattern, -1);

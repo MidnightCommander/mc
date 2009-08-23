@@ -92,6 +92,10 @@ mc_search__cond_struct_new_init_normal (const char *charset, mc_search_t * mc_se
         mc_search__normal_translate_to_regex (mc_search_cond->str->str, &mc_search_cond->len);
 
     g_string_free (mc_search_cond->str, TRUE);
+    if (mc_search->whole_words) {
+        g_string_prepend (tmp, "\\b");
+        g_string_append (tmp, "\\b");
+    }
     mc_search_cond->str = tmp;
 
     mc_search__cond_struct_new_init_regex (charset, mc_search, mc_search_cond);
