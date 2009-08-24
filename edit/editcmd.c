@@ -1310,8 +1310,10 @@ editcmd_find (WEdit *edit, gsize *len)
                 search_start = start_mark;
             }
         }
+    } else {
+        if (edit->replace_backwards)
+            end_mark = max(1, edit->curs1) - 1;
     }
-
     if (edit->replace_backwards) {
         search_end = end_mark;
         while ((int) search_start >= start_mark) {
@@ -1658,7 +1660,7 @@ void edit_search_cmd (WEdit * edit, int again)
 	if (editcmd_find(edit, &len)) {
 	    edit->found_start = edit->search_start = edit->search->normal_offset;
 	    edit->found_len = len;
-
+	    edit->over_col = 0;
 	    edit_cursor_move (edit, edit->search_start - edit->curs1);
 	    edit_scroll_screen_over_cursor (edit);
 	    if (edit->replace_backwards)
