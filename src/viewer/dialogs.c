@@ -40,6 +40,7 @@
 #include "../src/global.h"
 #include "../src/wtools.h"
 #include "../src/viewer/internal.h"
+#include "../src/charsets.h"
 
 /*** global variables ****************************************************************************/
 
@@ -59,7 +60,7 @@ gboolean
 mcview_dialog_search (mcview_t * view)
 {
     enum {
-        SEARCH_DLG_MIN_HEIGHT = 10,
+        SEARCH_DLG_MIN_HEIGHT = 11,
         SEARCH_DLG_HEIGHT_SUPPLY = 3,
         SEARCH_DLG_WIDTH = 58
     };
@@ -73,6 +74,7 @@ mcview_dialog_search (mcview_t * view)
     int ttype_of_search = (int) view->search_type;
     int tall_codepages = (int) view->search_all_codepages;
     int tsearch_case = (int) view->search_case;
+    int twhole_words = (int) view->whole_words;
     int tsearch_backwards = (int) view->search_backwards;
     int qd_result;
 
@@ -89,10 +91,13 @@ mcview_dialog_search (mcview_t * view)
          0, 0, NULL, NULL, NULL},
 
 #ifdef HAVE_CHARSET
-        {quick_checkbox, SEARCH_DLG_WIDTH / 2 + 3, SEARCH_DLG_WIDTH, 6, SEARCH_DLG_HEIGHT,
+        {quick_checkbox, SEARCH_DLG_WIDTH / 2 + 3, SEARCH_DLG_WIDTH, 7, SEARCH_DLG_HEIGHT,
          N_("All charsets"), 0, 0,
          &tall_codepages, 0, NULL, NULL, NULL},
 #endif
+
+        {quick_checkbox, SEARCH_DLG_WIDTH / 2 + 3, SEARCH_DLG_WIDTH, 6, SEARCH_DLG_HEIGHT,
+         N_("&Whole words"), 0, 0, &twhole_words, 0, NULL, NULL, NULL},
 
         {quick_checkbox, SEARCH_DLG_WIDTH / 2 + 3, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT,
          N_("&Backwards"), 0, 0, &tsearch_backwards, 0, NULL, NULL, NULL},
@@ -136,6 +141,7 @@ mcview_dialog_search (mcview_t * view)
 
     view->search_all_codepages = (gboolean) tall_codepages;
     view->search_case = (gboolean) tsearch_case;
+    view->whole_words = (gboolean) twhole_words;
 
     if (exp == NULL || exp[0] == '\0') {
         g_free (exp);
@@ -174,6 +180,7 @@ mcview_dialog_search (mcview_t * view)
     view->search->is_case_sentitive = view->search_case;
     view->search->search_fn = mcview_search_cmd_callback;
     view->search->update_fn = mcview_search_update_cmd_callback;
+    view->search->whole_words = view->whole_words;
 
     g_free (exp);
     g_free (defval);

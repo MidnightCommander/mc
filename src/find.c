@@ -287,7 +287,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
     const char *content_case_label = N_("Case sens&itive");
     const char *content_regexp_label = N_("Re&gular expression");
     const char *content_first_hit_label = N_("Fir&st hit");
-    const char *content_whole_words_label = N_("Whole &words");
+    const char *content_whole_words_label = N_("&Whole words");
     const char *content_all_charsets_label = N_("All cha&rsets");
 
     const char *buts[] = { N_("&OK"), N_("&Cancel"), N_("&Tree") };

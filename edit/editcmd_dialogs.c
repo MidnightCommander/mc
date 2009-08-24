@@ -111,7 +111,7 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
          &tall_codepages, 0, NULL, NULL, NULL},
 #endif
 
-        {quick_checkbox, 33, REPLACE_DLG_WIDTH, 10, REPLACE_DLG_HEIGHT, N_("Whole &words"), 0, 0,
+        {quick_checkbox, 33, REPLACE_DLG_WIDTH, 10, REPLACE_DLG_HEIGHT, N_("&Whole words"), 0, 0,
          &twhole_words, 0, NULL, NULL, NULL},
 
 
@@ -206,7 +206,7 @@ editcmd_dialog_search_show (WEdit * edit, char **search_text)
          &tall_codepages, 0, NULL, NULL, NULL},
 #endif
 
-        {quick_checkbox, 33, SEARCH_DLG_WIDTH, 8, SEARCH_DLG_HEIGHT, N_("Whole &words"), 0, 0,
+        {quick_checkbox, 33, SEARCH_DLG_WIDTH, 8, SEARCH_DLG_HEIGHT, N_("&Whole words"), 0, 0,
          &twhole_words, 0, NULL, NULL, NULL},
 
         {quick_checkbox, 33, SEARCH_DLG_WIDTH, 7, SEARCH_DLG_HEIGHT, N_("In se&lection"), 0, 0,

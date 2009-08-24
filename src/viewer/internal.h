@@ -172,6 +172,7 @@ typedef struct mcview_struct {
     gchar *last_search_string;
     mc_search_type_t search_type;
     gboolean search_all_codepages;
+    gboolean whole_words;
     gboolean search_case;
     gboolean search_backwards;
     struct mcview_nroff_struct *search_nroff_seq;
