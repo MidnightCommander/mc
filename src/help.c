@@ -585,15 +585,21 @@ static void prev_node_cmd (void *vp)
     history_ptr--;
     if (history_ptr < 0)
 	history_ptr = HISTORY_SIZE-1;
-    
+
     help_callback (h, DLG_DRAW, 0);
 }
 
 static cb_ret_t
 md_callback (Widget *w, widget_msg_t msg, int parm)
 {
-    (void) w;
-    return default_proc (msg, parm);
+    switch (msg) {
+    case WIDGET_RESIZED:
+	w->lines = help_lines;
+	return MSG_HANDLED;
+
+    default:
+	return default_proc (msg, parm);
+    }
 }
 
 static Widget *
@@ -642,7 +648,7 @@ help_handle_key (struct Dlg_head *h, int c)
     case KEY_LEFT:
 	prev_node_cmd (h);
 	break;
-	
+
     case '\n':
     case KEY_RIGHT:
 	/* follow link */
@@ -656,7 +662,7 @@ help_handle_key (struct Dlg_head *h, int c)
 	    history_ptr--;
 	    if (history_ptr < 0)
 		history_ptr = HISTORY_SIZE-1;
-	    
+
 	    currentpoint = history [history_ptr].page;
 	    selected_item   = history [history_ptr].link;
 #endif
@@ -668,7 +674,7 @@ help_handle_key (struct Dlg_head *h, int c)
 	}
 	selected_item = NULL;
 	break;
-	
+
     case KEY_DOWN:
     case '\t':
 	new_item = select_next_link (selected_item);
@@ -685,7 +691,7 @@ help_handle_key (struct Dlg_head *h, int c)
 	else
 	    selected_item = NULL;
 	break;
-	
+
     case KEY_UP:
     case ALT ('\t'):
 	/* select previous link */
@@ -702,7 +708,7 @@ help_handle_key (struct Dlg_head *h, int c)
 	    }
 	}
 	break;
-	
+
     case 'n':
 	/* Next node */
 	new_item = currentpoint;
@@ -718,7 +724,7 @@ help_handle_key (struct Dlg_head *h, int c)
 	    }
 	}
 	break;
-	
+
     case 'p':
 	/* Previous node */
 	new_item = currentpoint;
@@ -732,11 +738,11 @@ help_handle_key (struct Dlg_head *h, int c)
 	currentpoint = new_item + 2;
 	selected_item = NULL;
 	break;
-	
+
     case 'c':
 	help_index_cmd (h);
 	break;
-	
+
     case ESC_CHAR:
     case XCTRL('g'):
 	dlg_stop (h);
@@ -744,16 +750,24 @@ help_handle_key (struct Dlg_head *h, int c)
 
     default:
 	return MSG_NOT_HANDLED;
-	    
     }
     help_callback (h, DLG_DRAW, 0);
     return MSG_HANDLED;
 }
 
 static cb_ret_t
-help_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
+help_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 {
+    WButtonBar *bb;
+
     switch (msg) {
+    case DLG_RESIZE:
+	help_lines = min (LINES - 4, max (2 * LINES / 3, 18));
+	dlg_set_size (h, help_lines + 4, HELP_WINDOW_WIDTH + 4);
+	bb = find_buttonbar (h);
+	widget_set_size (&bb->widget, LINES - 1, 0, 1, COLS);
+	return MSG_HANDLED;
+
     case DLG_DRAW:
 	common_dialog_repaint (h);
 	help_show (h, currentpoint);
@@ -826,7 +840,7 @@ interactive_display (const char *filename, const char *node)
     translate_file (filedata);
 
     g_free (filedata);
-    
+
     if (!data)
 	return;
 
@@ -862,8 +876,8 @@ interactive_display (const char *filename, const char *node)
     }
 
     help_bar = buttonbar_new (1);
-    ((Widget *) help_bar)->y -= whelp->y;
-    ((Widget *) help_bar)->x -= whelp->x;
+    help_bar->widget.y -= whelp->y;
+    help_bar->widget.x -= whelp->x;
 
     md = mousedispatch_new (1, 1, help_lines, HELP_WINDOW_WIDTH - 2);
 
