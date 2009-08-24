@@ -11,11 +11,11 @@ typedef unsigned char byte;
 /* A width or height on the screen */
 typedef unsigned int screen_dimen;
 
-/* Offset in bytes into a file */
-typedef unsigned long offset_type;
-
 #define OFFSETTYPE_PRIX "lX"
 #define OFFSETTYPE_PRId "lu"
+
+extern const off_t INVALID_OFFSET;
+extern const off_t OFFSETTYPE_MAX;
 
 /*** enums *************************************************************/
 
@@ -28,13 +28,6 @@ enum view_ds {
     DS_STRING                   /* Data comes from a string in memory */
 };
 
-
-/* Offset in bytes into a file */
-typedef enum {
-    INVALID_OFFSET = ((off_t) - 1),
-    OFFSETTYPE_MAX = ((off_t) 1 << (sizeof (off_t) * 8 - 1) - 1)
-}
-mcview_offset_t;
 
 enum ccache_type {
     CCACHE_OFFSET,
@@ -125,11 +118,11 @@ typedef struct mcview_struct {
 
     /* Display information */
     screen_dimen dpy_frame_size;        /* Size of the frame surrounding the real viewer */
-    offset_type dpy_start;      /* Offset of the displayed data */
-    offset_type dpy_end;        /* Offset after the displayed data */
-    offset_type dpy_text_column;        /* Number of skipped columns in non-wrap
-                                         * text mode */
-    offset_type hex_cursor;     /* Hexview cursor position in file */
+    off_t dpy_start;            /* Offset of the displayed data */
+    off_t dpy_end;              /* Offset after the displayed data */
+    off_t dpy_text_column;      /* Number of skipped columns in non-wrap
+                                 * text mode */
+    off_t hex_cursor;           /* Hexview cursor position in file */
     screen_dimen cursor_col;    /* Cursor column */
     screen_dimen cursor_row;    /* Cursor row */
     struct hexedit_change_node *change_list;    /* Linked list of changes */
@@ -144,15 +137,15 @@ typedef struct mcview_struct {
     int bytes_per_line;         /* Number of bytes per line in hex mode */
 
     /* Search variables */
-    offset_type search_start;   /* First character to start searching from */
-    offset_type search_end;     /* Length of found string or 0 if none was found */
+    off_t search_start;         /* First character to start searching from */
+    off_t search_end;           /* Length of found string or 0 if none was found */
 
     /* Pointer to the last search command */
     gboolean want_to_quit;      /* Prepare for cleanup ... */
 
     /* Markers */
     int marker;                 /* mark to use */
-    offset_type marks[10];      /* 10 marks: 0..9 */
+    off_t marks[10];            /* 10 marks: 0..9 */
 
     int move_dir;               /* return value from widget:
                                  * 0 do nothing
@@ -160,9 +153,9 @@ typedef struct mcview_struct {
                                  * 1 view next file
                                  */
 
-    offset_type update_steps;   /* The number of bytes between percent
+    off_t update_steps;         /* The number of bytes between percent
                                  * increments */
-    offset_type update_activate;        /* Last point where we updated the status */
+    off_t update_activate;      /* Last point where we updated the status */
 
     /* converter for translation of text */
     GIConv converter;
@@ -180,7 +173,7 @@ typedef struct mcview_struct {
     int search_numNeedSkipChar;
 } mcview_t;
 
-typedef struct mcview_nroff_struct{
+typedef struct mcview_nroff_struct {
     mcview_t *view;
     off_t index;
     int char_width;
@@ -217,6 +210,9 @@ gboolean mcview_coord_cache_entry_less (const struct coord_cache_entry *,
 #ifdef MC_ENABLE_DEBUGGING_CODE
 void mcview_ccache_dump (mcview_t *);
 #endif
+
+void
+  mcview_ccache_lookup (mcview_t *, struct coord_cache_entry *, enum ccache_type);
 
 
 /* datasource.c: */

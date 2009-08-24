@@ -39,7 +39,7 @@
 
 #include "../src/global.h"
 #include "../src/wtools.h"
-#include "../src/viewer/internal.h"
+#include "internal.h"
 #include "../src/charsets.h"
 
 /*** global variables ****************************************************************************/

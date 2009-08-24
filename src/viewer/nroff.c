@@ -42,7 +42,7 @@
 #include "../src/charsets.h"
 #include "../src/tty/tty.h"
 #include "../src/tty/color.h"
-#include "../src/viewer/internal.h"
+#include "internal.h"
 
 
 /*** global variables ****************************************************************************/
@@ -199,11 +199,9 @@ mcview__get_nroff_real_len (mcview_t * view, off_t start, off_t length)
     if (nroff == NULL)
         return 0;
 
-    while (i<length)
-    {
-        if (nroff->type != NROFF_TYPE_NONE)
-        {
-            ret+=2;
+    while (i < length) {
+        if (nroff->type != NROFF_TYPE_NONE) {
+            ret += 2;
         }
         i++;
         mcview_nroff_seq_next (nroff);

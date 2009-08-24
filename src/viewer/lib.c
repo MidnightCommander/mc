@@ -41,11 +41,16 @@
 #include "../src/wtools.h"
 #include "../src/strutil.h"
 #include "../src/main.h"
+#include "../src/charsets.h"
 #include "../src/selcodepage.h"
-#include "../src/viewer/internal.h"
+#include "internal.h"
 #include "../src/viewer/mcviewer.h"
 
 /*** global variables ****************************************************************************/
+
+#define OFF_T_BITWIDTH (int) (sizeof (off_t) * 8 - 1)
+const off_t INVALID_OFFSET = ((off_t) - 1);
+const off_t OFFSETTYPE_MAX = ((off_t) 1 << (OFF_T_BITWIDTH - 1)) - 1;
 
 /*** file scope macro definitions ****************************************************************/
 

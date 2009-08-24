@@ -40,7 +40,7 @@
 
 #include "../src/global.h"
 #include "../src/wtools.h"
-#include "../src/viewer/internal.h"
+#include "internal.h"
 
 /* Block size for reading files in parts */
 #define VIEW_PAGE_SIZE		((size_t) 8192)

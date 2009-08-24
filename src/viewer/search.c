@@ -41,7 +41,7 @@
 #include "../src/setup.h"
 #include "../src/wtools.h"
 #include "../src/tty/tty.h"
-#include "../src/viewer/internal.h"
+#include "internal.h"
 
 /*** global variables ****************************************************************************/
 
@@ -117,8 +117,7 @@ mcview_search_cmd_callback (const void *user_data, gsize char_offset)
     mcview_t *view = (mcview_t *) user_data;
 
     /*    view_read_continue (view, &view->search_onechar_info); *//* AB:FIXME */
-    if (!view->text_nroff_mode)
-    {
+    if (!view->text_nroff_mode) {
         byte = mcview_get_byte (view, char_offset);
         if (byte == -1)
             return MC_SEARCH_CB_ABORT;
@@ -211,10 +210,10 @@ mcview_do_search (mcview_t * view)
                                             view->search->start_buffer);
 
             if (!view->hex_mode)
-                view->search_start ++;
+                view->search_start++;
 
             view->search_end = view->search_start + match_len +
-                mcview__get_nroff_real_len (view, view->search_start-1, match_len);
+                mcview__get_nroff_real_len (view, view->search_start - 1, match_len);
 
             if (view->hex_mode) {
                 view->hex_cursor = view->search_start;

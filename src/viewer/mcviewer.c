@@ -42,8 +42,10 @@
 #include "../src/global.h"
 #include "../src/strutil.h"
 #include "../src/main.h"
+#include "../src/charsets.h"
 #include "../src/tty/tty.h"
-#include "../src/viewer/internal.h"
+#include "internal.h"
+#include "../src/viewer/mcviewer.h"
 
 /*** global variables ****************************************************************************/
 

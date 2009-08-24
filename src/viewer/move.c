@@ -55,7 +55,7 @@
 
 #include "../src/global.h"
 #include "../src/tty/tty.h"
-#include "../src/viewer/internal.h"
+#include "internal.h"
 
 /*** global variables ****************************************************************************/
 

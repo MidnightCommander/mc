@@ -52,7 +52,7 @@
 #include <config.h>
 
 #include "../src/global.h"
-#include "../src/viewer/internal.h"
+#include "internal.h"
 
 #define VIEW_COORD_CACHE_GRANUL	1024
 

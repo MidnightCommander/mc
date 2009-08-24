@@ -46,7 +46,7 @@
 #include "../src/main.h"
 #include "../src/wtools.h"
 #include "../src/charsets.h"
-#include "../src/viewer/internal.h"
+#include "internal.h"
 
 /*** global variables ****************************************************************************/
 

@@ -60,7 +60,7 @@
 #include "../src/cmd.h"
 #include "../src/execute.h"
 #include "../src/help.h"
-#include "../src/viewer/internal.h"
+#include "internal.h"
 #include "../src/viewer/mcviewer.h"
 
 /*** global variables ****************************************************************************/
@@ -517,9 +517,9 @@ mcview_moveto_line_cmd (mcview_t * view)
 
     mcview_offset_to_coord (view, &line, &col, view->dpy_start);
 
-    g_snprintf (prompt_format, sizeof (prompt_format), 
+    g_snprintf (prompt_format, sizeof (prompt_format),
                 _(" The current address is %s.\n"
-                  " Enter the new address:"), "0x%08"OFFSETTYPE_PRIX"");
+                  " Enter the new address:"), "0x%08" OFFSETTYPE_PRIX "");
     g_snprintf (prompt, sizeof (prompt), prompt_format, view->hex_cursor);
     answer = input_dialog (_(" Goto line "), prompt, MC_HISTORY_VIEW_GOTO_LINE, "");
     if (answer != NULL && answer[0] != '\0') {
@@ -542,7 +542,8 @@ mcview_moveto_addr_cmd (mcview_t * view)
     off_t addr;
 
     g_snprintf (prompt, sizeof (prompt),
-                _(" The current address is 0x%lx.\n" " Enter the new address:"), view->hex_cursor);
+                _(" The current address is 0x%lx.\n" " Enter the new address:"),
+                (long unsigned int) view->hex_cursor);
     line = input_dialog (_(" Goto Address "), prompt, MC_HISTORY_VIEW_GOTO_ADDR, "");
     if (line != NULL) {
         if (*line != '\0') {
