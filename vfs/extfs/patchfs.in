@@ -17,7 +17,7 @@ my $lzma = 'lzma';
 my $xz   = 'xz';
 my $bzip = 'bzip2';
 my $gzip = 'gzip';
-my $fileutil = 'file';
+my $fileutil = 'file -b';
 
 # date parsing requires Date::Parse from TimeDate module
 my $parsedates = eval 'require Date::Parse';
@@ -74,13 +74,13 @@ sub myin
     my ($qfname)=(quotemeta $_[0]);
 
     $_=`$fileutil $qfname`;
-    if (/lzma/) {
+    if (/^'*lzma/) {
 	return "$lzma -dc $qfname";
-    } elsif (/xz/) {
+    } elsif (/^'*xz/) {
 	return "$xz -dc $qfname";
-    } elsif (/bzip/) {
+    } elsif (/^'*bzip/) {
 	return "$bzip -dc $qfname";
-    } elsif (/gzip/) {
+    } elsif (/^'*gzip/) {
 	return "$gzip -dc $qfname";
     } else {
 	return "cat $qfname";
@@ -94,13 +94,13 @@ sub myout
     my ($sep) = $append ? '>>' : '>';
 
     $_=`$fileutil $qfname`;
-    if (/lzma/) {
+    if (/^'*lzma/) {
 	return "$lzma -c $sep $qfname";
-    } elsif (/xz/) {
+    } elsif (/^'*xz/) {
 	return "$xz -c $sep $qfname";
-    } elsif (/bzip/) {
+    } elsif (/^'*bzip/) {
 	return "$bzip -c $sep $qfname";
-    } elsif (/gzip/) {
+    } elsif (/^'*gzip/) {
 	return "$gzip -c $sep $qfname";
     } else {
 	return "cat $sep $qfname";
