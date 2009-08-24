@@ -512,14 +512,15 @@ mcview_toggle_hex_mode_cmd (mcview_t * view)
 void
 mcview_moveto_line_cmd (mcview_t * view)
 {
-    char *answer, *answer_end, prompt[BUF_SMALL];
+    char *answer, *answer_end, prompt_format[BUF_SMALL], prompt[BUF_SMALL];
     off_t line, col;
 
     mcview_offset_to_coord (view, &line, &col, view->dpy_start);
 
-    g_snprintf (prompt, sizeof (prompt),
-                _(" The current line number is %d.\n"
-                  " Enter the new line number:"), (int) (line + 1));
+    g_snprintf (prompt_format, sizeof (prompt_format), 
+                _(" The current address is %s.\n"
+                  " Enter the new address:"), "0x%08"OFFSETTYPE_PRIX"");
+    g_snprintf (prompt, sizeof (prompt), prompt_format, view->hex_cursor);
     answer = input_dialog (_(" Goto line "), prompt, MC_HISTORY_VIEW_GOTO_LINE, "");
     if (answer != NULL && answer[0] != '\0') {
         errno = 0;
