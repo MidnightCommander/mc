@@ -512,15 +512,14 @@ mcview_toggle_hex_mode_cmd (mcview_t * view)
 void
 mcview_moveto_line_cmd (mcview_t * view)
 {
-    char *answer, *answer_end, prompt_format[BUF_SMALL], prompt[BUF_SMALL];
+    char *answer, *answer_end, prompt[BUF_SMALL];
     off_t line, col;
 
     mcview_offset_to_coord (view, &line, &col, view->dpy_start);
 
-    g_snprintf (prompt_format, sizeof (prompt_format),
-                _(" The current address is %s.\n"
-                  " Enter the new address:"), "0x%08" OFFSETTYPE_PRIX "");
-    g_snprintf (prompt, sizeof (prompt), prompt_format, view->hex_cursor);
+    g_snprintf (prompt, sizeof (prompt),
+                _(" The current line number is %lld.\n"
+                  " Enter the new line number:"), (line + 1), "");
     answer = input_dialog (_(" Goto line "), prompt, MC_HISTORY_VIEW_GOTO_LINE, "");
     if (answer != NULL && answer[0] != '\0') {
         errno = 0;
@@ -538,12 +537,13 @@ mcview_moveto_line_cmd (mcview_t * view)
 void
 mcview_moveto_addr_cmd (mcview_t * view)
 {
-    char *line, *error, prompt[BUF_SMALL];
+    char *line, *error, prompt[BUF_SMALL], prompt_format[BUF_SMALL];
     off_t addr;
 
-    g_snprintf (prompt, sizeof (prompt),
-                _(" The current address is 0x%lx.\n" " Enter the new address:"),
-                (long unsigned int) view->hex_cursor);
+    g_snprintf (prompt_format, sizeof (prompt_format),
+                _(" The current address is %s.\n"
+                  " Enter the new address:"), "0x%08" OFFSETTYPE_PRIX "");
+    g_snprintf (prompt, sizeof (prompt), prompt_format, view->hex_cursor);
     line = input_dialog (_(" Goto Address "), prompt, MC_HISTORY_VIEW_GOTO_ADDR, "");
     if (line != NULL) {
         if (*line != '\0') {
