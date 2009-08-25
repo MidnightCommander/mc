@@ -70,6 +70,8 @@ mcview_display_nroff (mcview_t * view)
     off_t from;
     int cw = 1;
     int c;
+    int c_prev = 0;
+    int c_next = 0;
     gboolean read_res = TRUE;
     struct hexedit_change_node *curr = view->change_list;
 
@@ -100,8 +102,6 @@ mcview_display_nroff (mcview_t * view)
             from += cw - 1;
 
         if (c == '\b') {
-            int c_prev;
-            int c_next;
             if (from > 1) {
                 c_prev = mcview_get_byte (view, from - 2);
                 c_next = mcview_get_byte (view, from);
