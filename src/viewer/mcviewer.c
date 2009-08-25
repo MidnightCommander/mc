@@ -45,7 +45,7 @@
 #include "../src/charsets.h"
 #include "../src/tty/tty.h"
 #include "internal.h"
-#include "../src/viewer/mcviewer.h"
+#include "mcviewer.h"
 
 /*** global variables ****************************************************************************/
 

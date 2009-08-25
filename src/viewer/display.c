@@ -43,7 +43,7 @@
 #include "../src/tty/key.h"
 #include "../src/strutil.h"
 #include "internal.h"
-#include "../src/viewer/mcviewer.h"
+#include "mcviewer.h"
 
 /*** global variables ****************************************************************************/
 

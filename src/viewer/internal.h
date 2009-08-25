@@ -313,6 +313,6 @@ void mcview_do_search (mcview_t *);
 
 /*** inline functions ****************************************************************************/
 
-#include "../src/viewer/inlines.h"
+#include "inlines.h"
 
 #endif
