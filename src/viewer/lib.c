@@ -37,6 +37,8 @@
 
 #include <config.h>
 
+#include <limits.h>
+
 #include "../src/global.h"
 #include "../src/wtools.h"
 #include "../src/strutil.h"
@@ -48,8 +50,8 @@
 
 /*** global variables ****************************************************************************/
 
-#define OFF_T_BITWIDTH (int) (sizeof (off_t) * 8 - 1)
-const off_t INVALID_OFFSET = ((off_t) - 1);
+#define OFF_T_BITWIDTH (unsigned int) (sizeof (off_t) * CHAR_BIT - 1)
+const off_t INVALID_OFFSET = (off_t) -1;
 const off_t OFFSETTYPE_MAX = ((off_t) 1 << (OFF_T_BITWIDTH - 1)) - 1;
 
 /*** file scope macro definitions ****************************************************************/

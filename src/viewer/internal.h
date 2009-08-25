@@ -1,6 +1,11 @@
 #ifndef MC_VIEWER_INTERNAL_H
 #define MC_VIEWER_INTERNAL_H
 
+#include <stdlib.h>
+#include <sys/types.h>
+
+#include "../src/global.h"
+
 #include "../src/widget.h"
 #include "../src/search/search.h"
 
