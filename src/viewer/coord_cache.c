@@ -52,6 +52,7 @@
 #include <config.h>
 
 #include "../src/global.h"
+#include "../src/tty/tty.h"
 #include "internal.h"
 
 #define VIEW_COORD_CACHE_GRANUL	1024
@@ -217,6 +218,8 @@ mcview_ccache_lookup (mcview_t * view, struct coord_cache_entry *coord,
 
     sorter = (lookup_what == CCACHE_OFFSET) ? CCACHE_LINECOL : CCACHE_OFFSET;
 
+    tty_enable_interrupt_key ();
+
   retry:
     /* find the two neighbor entries in the cache */
     cache = &(g_array_index (view->coord_cache, struct coord_cache_entry, 0));
@@ -307,8 +310,12 @@ mcview_ccache_lookup (mcview_t * view, struct coord_cache_entry *coord,
 
     if (i + 1 == view->coord_cache->len && entry.cc_offset != cache[i].cc_offset) {
         g_array_append_val (view->coord_cache, entry);
-        goto retry;
+
+        if (!tty_got_interrupt ())
+            goto retry;
     }
+
+    tty_disable_interrupt_key ();
 
     if (lookup_what == CCACHE_OFFSET) {
         coord->cc_offset = current.cc_offset;
