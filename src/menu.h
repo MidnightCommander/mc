@@ -45,13 +45,13 @@ void menu_entry_free (menu_entry_t *me);
 typedef struct Menu {
     int start_x;		/* position relative to menubar start */
     struct hotkey_t text;
-    GPtrArray *entries;
+    GList *entries;
     size_t max_entry_len;
     unsigned int selected;	/* pointer to current menu entry */
     char *help_node;
 } Menu;
 
-Menu *create_menu (const char *name, GPtrArray *entries,
+Menu *create_menu (const char *name, GList *entries,
 		    const char *help_node);
 
 void destroy_menu (Menu *menu);
@@ -64,13 +64,13 @@ typedef struct WMenuBar {
 
     gboolean is_active;		/* If the menubar is in use */
     gboolean is_dropped;	/* If the menubar has dropped */
-    GPtrArray *menu;		/* The actual menus */
+    GList *menu;		/* The actual menus */
     unsigned int selected;	/* Selected menu on the top bar */
     int previous_widget;	/* Selected widget ID before activating menu */
 } WMenuBar;
 
-WMenuBar *menubar_new (int y, int x, int cols, GPtrArray *menu);
-void menubar_set_menu (WMenuBar *menubar, GPtrArray *menu);
+WMenuBar *menubar_new (int y, int x, int cols, GList *menu);
+void menubar_set_menu (WMenuBar *menubar, GList *menu);
 void menubar_add_menu (WMenuBar *menubar, Menu *menu);
 void menubar_arrange (WMenuBar *menubar);
 

@@ -666,162 +666,162 @@ listmode_cmd (void)
 #endif				/* LISTMODE_EDITOR */
 
 /* NOTICE: hotkeys specified here are overriden in menubar_paint_idx (alex) */
-static GPtrArray *
+static GList *
 create_left_menu (void)
 {
-    GPtrArray *entries = g_ptr_array_new ();
+    GList *entries = NULL;
 
-    g_ptr_array_add (entries, menu_entry_create (_("&Listing mode..."),       listing_cmd));
-    g_ptr_array_add (entries, menu_entry_create (_("&Quick view     C-x q"),  quick_view_cmd));
-    g_ptr_array_add (entries, menu_entry_create (_("&Info           C-x i" ), info_cmd));
-    g_ptr_array_add (entries, menu_entry_create (_("&Tree"),                  tree_cmd));
-    g_ptr_array_add (entries, menu_separator_create ());
-    g_ptr_array_add (entries, menu_entry_create (_("&Sort order..."),         sort_cmd));
-    g_ptr_array_add (entries, menu_separator_create ());
-    g_ptr_array_add (entries, menu_entry_create (_("&Filter..."),             filter_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Listing mode..."),       listing_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Quick view     C-x q"),  quick_view_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Info           C-x i" ), info_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Tree"),                  tree_cmd));
+    entries = g_list_append (entries, menu_separator_create ());
+    entries = g_list_append (entries, menu_entry_create (_("&Sort order..."),         sort_cmd));
+    entries = g_list_append (entries, menu_separator_create ());
+    entries = g_list_append (entries, menu_entry_create (_("&Filter..."),             filter_cmd));
 #ifdef HAVE_CHARSET
-    g_ptr_array_add (entries, menu_separator_create ());
-    g_ptr_array_add (entries, menu_entry_create (_("&Encoding...    M-e"),    encoding_cmd));
+    entries = g_list_append (entries, menu_separator_create ());
+    entries = g_list_append (entries, menu_entry_create (_("&Encoding...    M-e"),    encoding_cmd));
 #endif
 #ifdef USE_NETCODE
-    g_ptr_array_add (entries, menu_separator_create ());
+    entries = g_list_append (entries, menu_separator_create ());
 #ifdef ENABLE_VFS_MCFS
-    g_ptr_array_add (entries, menu_entry_create (_("&Network link..."),       netlink_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Network link..."),       netlink_cmd));
 #endif
-    g_ptr_array_add (entries, menu_entry_create (_("FT&P link..."),           ftplink_cmd));
-    g_ptr_array_add (entries, menu_entry_create (_("S&hell link..."),         fishlink_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("FT&P link..."),           ftplink_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("S&hell link..."),         fishlink_cmd));
 #ifdef WITH_SMBFS
-    g_ptr_array_add (entries, menu_entry_create (_("SM&B link..."),           smblink_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("SM&B link..."),           smblink_cmd));
 #endif
 #endif
-    g_ptr_array_add (entries, menu_separator_create ());
-    g_ptr_array_add (entries, menu_entry_create (_("&Rescan         C-r"),    reread_cmd));
+    entries = g_list_append (entries, menu_separator_create ());
+    entries = g_list_append (entries, menu_entry_create (_("&Rescan         C-r"),    reread_cmd));
 
     return entries;
 }
 
-static GPtrArray *
+static GList *
 create_right_menu (void)
 {
-    GPtrArray *entries = g_ptr_array_new ();
+    GList *entries = NULL;
 
-    g_ptr_array_add (entries, menu_entry_create (_("&Listing mode..."),       listing_cmd));
-    g_ptr_array_add (entries, menu_entry_create (_("&Quick view     C-x q"),  quick_view_cmd));
-    g_ptr_array_add (entries, menu_entry_create (_("&Info           C-x i" ), info_cmd));
-    g_ptr_array_add (entries, menu_entry_create (_("&Tree"),                  tree_cmd));
-    g_ptr_array_add (entries, menu_separator_create ());
-    g_ptr_array_add (entries, menu_entry_create (_("&Sort order..."),         sort_cmd));
-    g_ptr_array_add (entries, menu_separator_create ());
-    g_ptr_array_add (entries, menu_entry_create (_("&Filter..."),             filter_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Listing mode..."),       listing_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Quick view     C-x q"),  quick_view_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Info           C-x i" ), info_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Tree"),                  tree_cmd));
+    entries = g_list_append (entries, menu_separator_create ());
+    entries = g_list_append (entries, menu_entry_create (_("&Sort order..."),         sort_cmd));
+    entries = g_list_append (entries, menu_separator_create ());
+    entries = g_list_append (entries, menu_entry_create (_("&Filter..."),             filter_cmd));
 #ifdef HAVE_CHARSET
-    g_ptr_array_add (entries, menu_separator_create ());
-    g_ptr_array_add (entries, menu_entry_create (_("&Encoding...    M-e"),    encoding_cmd));
+    entries = g_list_append (entries, menu_separator_create ());
+    entries = g_list_append (entries, menu_entry_create (_("&Encoding...    M-e"),    encoding_cmd));
 #endif
 #ifdef USE_NETCODE
-    g_ptr_array_add (entries, menu_separator_create ());
+    entries = g_list_append (entries, menu_separator_create ());
 #ifdef ENABLE_VFS_MCFS
-    g_ptr_array_add (entries, menu_entry_create (_("&Network link..."),       netlink_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Network link..."),       netlink_cmd));
 #endif
-    g_ptr_array_add (entries, menu_entry_create (_("FT&P link..."),           ftplink_cmd));
-    g_ptr_array_add (entries, menu_entry_create (_("S&hell link..."),         fishlink_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("FT&P link..."),           ftplink_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("S&hell link..."),         fishlink_cmd));
 #ifdef WITH_SMBFS
-    g_ptr_array_add (entries, menu_entry_create (_("SM&B link..."),           smblink_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("SM&B link..."),           smblink_cmd));
 #endif
 #endif
-    g_ptr_array_add (entries, menu_separator_create ());
-    g_ptr_array_add (entries, menu_entry_create (_("&Rescan         C-r"),    reread_cmd));
+    entries = g_list_append (entries, menu_separator_create ());
+    entries = g_list_append (entries, menu_entry_create (_("&Rescan         C-r"),    reread_cmd));
 
     return entries;
 }
 
-static GPtrArray *
+static GList *
 create_file_menu (void)
 {
-    GPtrArray *entries = g_ptr_array_new ();
+    GList *entries = NULL;
 
-    g_ptr_array_add (entries, menu_entry_create (_("&View               F3"),  view_cmd));
-    g_ptr_array_add (entries, menu_entry_create (_("Vie&w file...         "),  view_file_cmd));
-    g_ptr_array_add (entries, menu_entry_create (_("&Filtered view     M-!"),  filtered_view_cmd));
-    g_ptr_array_add (entries, menu_entry_create (_("&Edit               F4"),  edit_cmd));
-    g_ptr_array_add (entries, menu_entry_create (_("&Copy               F5"),  copy_cmd));
-    g_ptr_array_add (entries, menu_entry_create (_("c&Hmod           C-x c"),  chmod_cmd));
-    g_ptr_array_add (entries, menu_entry_create (_("&Link            C-x l"),  link_cmd));
-    g_ptr_array_add (entries, menu_entry_create (_("&SymLink         C-x s"),  symlink_cmd));
-    g_ptr_array_add (entries, menu_entry_create (_("edit s&Ymlink  C-x C-s"),  edit_symlink_cmd));
-    g_ptr_array_add (entries, menu_entry_create (_("ch&Own           C-x o"),  chown_cmd));
-    g_ptr_array_add (entries, menu_entry_create (_("&Advanced chown       "),  chown_advanced_cmd));
-    g_ptr_array_add (entries, menu_entry_create (_("&Rename/Move        F6"),  ren_cmd));
-    g_ptr_array_add (entries, menu_entry_create (_("&Mkdir              F7"),  mkdir_cmd));
-    g_ptr_array_add (entries, menu_entry_create (_("&Delete             F8"),  delete_cmd));
-    g_ptr_array_add (entries, menu_entry_create (_("&Quick cd          M-c"),  quick_cd_cmd));
-    g_ptr_array_add (entries, menu_separator_create ());
-    g_ptr_array_add (entries, menu_entry_create (_("select &Group      M-+"),  select_cmd));
-    g_ptr_array_add (entries, menu_entry_create (_("u&Nselect group    M-\\"), unselect_cmd));
-    g_ptr_array_add (entries, menu_entry_create (_("reverse selec&Tion M-*"),  reverse_selection_cmd));
-    g_ptr_array_add (entries, menu_separator_create ());
-    g_ptr_array_add (entries, menu_entry_create (_("e&Xit              F10"),  quit_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&View               F3"),  view_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("Vie&w file...         "),  view_file_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Filtered view     M-!"),  filtered_view_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Edit               F4"),  edit_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Copy               F5"),  copy_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("c&Hmod           C-x c"),  chmod_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Link            C-x l"),  link_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&SymLink         C-x s"),  symlink_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("edit s&Ymlink  C-x C-s"),  edit_symlink_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("ch&Own           C-x o"),  chown_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Advanced chown       "),  chown_advanced_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Rename/Move        F6"),  ren_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Mkdir              F7"),  mkdir_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Delete             F8"),  delete_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Quick cd          M-c"),  quick_cd_cmd));
+    entries = g_list_append (entries, menu_separator_create ());
+    entries = g_list_append (entries, menu_entry_create (_("select &Group      M-+"),  select_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("u&Nselect group    M-\\"), unselect_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("reverse selec&Tion M-*"),  reverse_selection_cmd));
+    entries = g_list_append (entries, menu_separator_create ());
+    entries = g_list_append (entries, menu_entry_create (_("e&Xit              F10"),  quit_cmd));
 
     return entries;
 }
 
-static GPtrArray *
+static GList *
 create_command_menu (void)
 {
     /* I know, I'm lazy, but the tree widget when it's not running
      * as a panel still has some problems, I have not yet finished
      * the WTree widget port, sorry.
      */
-    GPtrArray *entries = g_ptr_array_new ();
+    GList *entries = NULL;
 
-    g_ptr_array_add (entries, menu_entry_create (_("&User menu          F2"),        user_file_menu_cmd));
-    g_ptr_array_add (entries, menu_entry_create (_("&Directory tree"),               treebox_cmd));
-    g_ptr_array_add (entries, menu_entry_create (_("&Find file            M-?"),     find_cmd));
-    g_ptr_array_add (entries, menu_entry_create (_("s&Wap panels          C-u"),     swap_cmd));
-    g_ptr_array_add (entries, menu_entry_create (_("switch &Panels on/off C-o"),     view_other_cmd));
-    g_ptr_array_add (entries, menu_entry_create (_("&Compare directories  C-x d"),   compare_dirs_cmd));
-    g_ptr_array_add (entries, menu_entry_create (_("e&Xternal panelize    C-x !"),   external_panelize));
-    g_ptr_array_add (entries, menu_entry_create (_("show directory s&Izes"),         dirsizes_cmd));
-    g_ptr_array_add (entries, menu_separator_create ());
-    g_ptr_array_add (entries, menu_entry_create (_("command &History"),              history_cmd));
-    g_ptr_array_add (entries, menu_entry_create (_("di&Rectory hotlist    C-\\"),    quick_chdir_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&User menu          F2"),        user_file_menu_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Directory tree"),               treebox_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Find file            M-?"),     find_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("s&Wap panels          C-u"),     swap_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("switch &Panels on/off C-o"),     view_other_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Compare directories  C-x d"),   compare_dirs_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("e&Xternal panelize    C-x !"),   external_panelize));
+    entries = g_list_append (entries, menu_entry_create (_("show directory s&Izes"),         dirsizes_cmd));
+    entries = g_list_append (entries, menu_separator_create ());
+    entries = g_list_append (entries, menu_entry_create (_("command &History"),              history_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("di&Rectory hotlist    C-\\"),    quick_chdir_cmd));
 #ifdef USE_VFS
-    g_ptr_array_add (entries, menu_entry_create (_("&Active VFS list      C-x a"),   reselect_vfs));
+    entries = g_list_append (entries, menu_entry_create (_("&Active VFS list      C-x a"),   reselect_vfs));
 #endif
 #ifdef WITH_BACKGROUND
-    g_ptr_array_add (entries, menu_entry_create (_("&Background jobs      C-x j"),   jobs_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Background jobs      C-x j"),   jobs_cmd));
 #endif
-    g_ptr_array_add (entries, menu_separator_create ());
+    entries = g_list_append (entries, menu_separator_create ());
 #ifdef USE_EXT2FSLIB
-    g_ptr_array_add (entries, menu_entry_create (_("&Undelete files (ext2fs only)"), undelete_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Undelete files (ext2fs only)"), undelete_cmd));
 #endif
 #ifdef LISTMODE_EDITOR
-    g_ptr_array_add (entries, menu_entry_create (_("&Listing format edit"),          listmode_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Listing format edit"),          listmode_cmd));
 #endif
 #if defined (USE_EXT2FSLIB) || defined (LISTMODE_EDITOR)
-    g_ptr_array_add (entries, menu_separator_create ());
+    entries = g_list_append (entries, menu_separator_create ());
 #endif
-    g_ptr_array_add (entries, menu_entry_create (_("Edit &extension file"),          ext_cmd));
-    g_ptr_array_add (entries, menu_entry_create (_("Edit &menu file"),               edit_mc_menu_cmd));
-    g_ptr_array_add (entries, menu_entry_create (_("Edit hi&ghlighting group file"), edit_fhl_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("Edit &extension file"),          ext_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("Edit &menu file"),               edit_mc_menu_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("Edit hi&ghlighting group file"), edit_fhl_cmd));
 
     return entries;
 }
 
-static GPtrArray *
+static GList *
 create_options_menu (void)
 {
-    GPtrArray *entries = g_ptr_array_new ();
+    GList *entries = NULL;
 
-    g_ptr_array_add (entries, menu_entry_create (_("&Configuration..."), configure_box));
-    g_ptr_array_add (entries, menu_entry_create (_("&Layout..."),        layout_cmd));
-    g_ptr_array_add (entries, menu_entry_create (_("c&Onfirmation..."),  confirm_box));
-    g_ptr_array_add (entries, menu_entry_create (_("&Display bits..."),  display_bits_box));
-    g_ptr_array_add (entries, menu_entry_create (_("learn &Keys..."),    learn_keys));
+    entries = g_list_append (entries, menu_entry_create (_("&Configuration..."), configure_box));
+    entries = g_list_append (entries, menu_entry_create (_("&Layout..."),        layout_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("c&Onfirmation..."),  confirm_box));
+    entries = g_list_append (entries, menu_entry_create (_("&Display bits..."),  display_bits_box));
+    entries = g_list_append (entries, menu_entry_create (_("learn &Keys..."),    learn_keys));
 #ifdef USE_VFS
-    g_ptr_array_add (entries, menu_entry_create (_("&Virtual FS..."),    configure_vfs));
+    entries = g_list_append (entries, menu_entry_create (_("&Virtual FS..."),    configure_vfs));
 #endif
-    g_ptr_array_add (entries, menu_separator_create ());
-    g_ptr_array_add (entries, menu_entry_create (_("&Save setup"),       save_setup_cmd));
+    entries = g_list_append (entries, menu_separator_create ());
+    entries = g_list_append (entries, menu_entry_create (_("&Save setup"),       save_setup_cmd));
 
     return entries;
 }
@@ -867,7 +867,7 @@ menu_cmd (void)
     if ((get_current_index () == 0) == (current_panel->active != 0))
 	the_menubar->selected = 0;
     else
-	the_menubar->selected = the_menubar->menu->len - 1;
+	the_menubar->selected = g_list_length (the_menubar->menu) - 1;
     menu_last_selected_cmd ();
 }
 

@@ -65,19 +65,16 @@ menu_entry_free (menu_entry_t *entry)
 }
 
 static void
-menu_arrange (Menu* menu)
+menu_arrange (Menu *menu)
 {
     if (menu != NULL) {
-	unsigned int i;
+	GList *i;
 
-	for (i = 0; i < menu->entries->len; i++) {
-	    menu_entry_t *entry;
-	    size_t len;
-
-	    entry = g_ptr_array_index (menu->entries, i);
+	for (i = menu->entries; i != NULL; i = g_list_next (i)) {
+	    menu_entry_t *entry = i->data;
 
 	    if (entry != NULL) {
-		len = (size_t) hotkey_width (entry->text);
+		const size_t len = (size_t) hotkey_width (entry->text);
 		menu->max_entry_len = max (menu->max_entry_len, len);
 	    }
 	}
@@ -85,7 +82,7 @@ menu_arrange (Menu* menu)
 }
 
 Menu *
-create_menu (const char *name, GPtrArray *entries, const char *help_node)
+create_menu (const char *name, GList *entries, const char *help_node)
 {
     Menu *menu;
 
@@ -105,8 +102,8 @@ void
 destroy_menu (Menu *menu)
 {
     release_hotkey (menu->text);
-    g_ptr_array_foreach (menu->entries, (GFunc) menu_entry_free, NULL);
-    g_ptr_array_free (menu->entries, TRUE);
+    g_list_foreach (menu->entries, (GFunc) menu_entry_free, NULL);
+    g_list_free (menu->entries);
     g_free (menu->help_node);
     g_free (menu);
 }
@@ -114,9 +111,7 @@ destroy_menu (Menu *menu)
 void
 menu_add_entry (Menu *menu, const char *name, menu_exec_fn cmd)
 {
-    if (menu->entries == NULL)
-	menu->entries = g_ptr_array_new ();
-    g_ptr_array_add (menu->entries,
+    menu->entries = g_list_append (menu->entries,
 			menu_entry_create (name, cmd));
     menu_arrange (menu);
 }
@@ -124,16 +119,14 @@ menu_add_entry (Menu *menu, const char *name, menu_exec_fn cmd)
 void
 menu_add_separator (Menu *menu)
 {
-    if (menu->entries == NULL)
-	menu->entries = g_ptr_array_new ();
-    g_ptr_array_add (menu->entries, menu_separator_create ());
+    menu->entries = g_list_append (menu->entries, menu_separator_create ());
 }
 
 static void
 menubar_paint_idx (WMenuBar *menubar, unsigned int idx, int color)
 {
-    const Menu *menu = g_ptr_array_index (menubar->menu, menubar->selected);
-    const menu_entry_t *entry = g_ptr_array_index (menu->entries, idx);
+    const Menu *menu = g_list_nth_data (menubar->menu, menubar->selected);
+    const menu_entry_t *entry = g_list_nth_data (menu->entries, idx);
     const int y = 2 + idx;
     int x = menu->start_x;
 
@@ -178,8 +171,8 @@ menubar_paint_idx (WMenuBar *menubar, unsigned int idx, int color)
 static void
 menubar_draw_drop (WMenuBar *menubar)
 {
-    const Menu *menu = g_ptr_array_index (menubar->menu, menubar->selected);
-    const unsigned int count = menu->entries->len;
+    const Menu *menu = g_list_nth_data (menubar->menu, menubar->selected);
+    const unsigned int count = g_list_length (menu->entries);
     int column = menu->start_x - 1;
     unsigned int i;
 
@@ -201,11 +194,11 @@ menubar_draw_drop (WMenuBar *menubar)
 }
 
 static void
-menubar_set_color (WMenuBar *menubar, int current, gboolean hotkey)
+menubar_set_color (WMenuBar *menubar, gboolean current, gboolean hotkey)
 {
     if (!menubar->is_active)
 	tty_setcolor (hotkey ? COLOR_HOT_FOCUS : SELECTED_COLOR);
-    else if (current == menubar->selected)
+    else if (current)
 	tty_setcolor (hotkey ? MENU_HOTSEL_COLOR : MENU_SELECTED_COLOR);
     else
 	tty_setcolor (hotkey ? MENU_HOT_COLOR : MENU_ENTRY_COLOR);
@@ -214,25 +207,26 @@ menubar_set_color (WMenuBar *menubar, int current, gboolean hotkey)
 static void
 menubar_draw (WMenuBar *menubar)
 {
-    unsigned int i;
+    GList *i;
 
     /* First draw the complete menubar */
     tty_setcolor (menubar->is_active ? MENU_ENTRY_COLOR : SELECTED_COLOR);
     tty_draw_hline (menubar->widget.y, menubar->widget.x, ' ', menubar->widget.cols);
 
     /* Now each one of the entries */
-    for (i = 0; i < menubar->menu->len; i++) {
-	Menu *menu = g_ptr_array_index (menubar->menu, i);
+    for (i = menubar->menu; i != NULL; i = g_list_next (i)) {
+	Menu *menu = i->data;
+	gboolean is_selected = (menubar->selected == g_list_position (menubar->menu, i));
 
-	menubar_set_color (menubar, i, FALSE);
+	menubar_set_color (menubar, is_selected, FALSE);
 	widget_move (&menubar->widget, 0, menu->start_x);
 
 	tty_print_string (menu->text.start);
 
 	if (menu->text.hotkey != NULL) {
-	    menubar_set_color (menubar, i, TRUE);
+	    menubar_set_color (menubar, is_selected, TRUE);
 	    tty_print_string (menu->text.hotkey);
-	    menubar_set_color (menubar, i, FALSE);
+	    menubar_set_color (menubar, is_selected, FALSE);
 	}
 
 	if (menu->text.end != NULL)
@@ -243,7 +237,7 @@ menubar_draw (WMenuBar *menubar)
 	menubar_draw_drop (menubar);
     else
 	widget_move (&menubar->widget, 0,
-			((Menu *) g_ptr_array_index (menubar->menu,
+			((Menu *) g_list_nth_data (menubar->menu,
 					menubar->selected))->start_x);
 }
 
@@ -262,7 +256,7 @@ menubar_left (WMenuBar *menubar)
 {
     menubar_remove (menubar);
     if (menubar->selected == 0)
-	menubar->selected = menubar->menu->len - 1;
+	menubar->selected = g_list_length (menubar->menu) - 1;
     else
 	menubar->selected--;
     menubar_draw (menubar);
@@ -272,7 +266,7 @@ static void
 menubar_right (WMenuBar *menubar)
 {
     menubar_remove (menubar);
-    menubar->selected = (menubar->selected + 1) % menubar->menu->len;
+    menubar->selected = (menubar->selected + 1) % g_list_length (menubar->menu);
     menubar_draw (menubar);
 }
 
@@ -299,8 +293,8 @@ menubar_drop (WMenuBar *menubar, unsigned int selected)
 static void
 menubar_execute (WMenuBar *menubar, unsigned int idx)
 {
-    const Menu *menu = g_ptr_array_index (menubar->menu, menubar->selected);
-    const menu_entry_t *entry = g_ptr_array_index (menu->entries, idx);
+    const Menu *menu = g_list_nth_data (menubar->menu, menubar->selected);
+    const menu_entry_t *entry = g_list_nth_data (menu->entries, idx);
 
     if ((entry == NULL) || (entry->callback == NULL))
 	return;
@@ -319,14 +313,15 @@ menubar_execute (WMenuBar *menubar, unsigned int idx)
 static void
 menubar_down (WMenuBar *menubar)
 {
-    Menu *menu = g_ptr_array_index (menubar->menu, menubar->selected);
+    Menu *menu = g_list_nth_data (menubar->menu, menubar->selected);
+    const unsigned int len = g_list_length (menu->entries);
     menu_entry_t *entry;
 
     menubar_paint_idx (menubar, menu->selected, MENU_ENTRY_COLOR);
 
     do {
-	menu->selected = (menu->selected + 1) % menu->entries->len;
-	entry = (menu_entry_t *) g_ptr_array_index (menu->entries, menu->selected);
+	menu->selected = (menu->selected + 1) % len;
+	entry = (menu_entry_t *) g_list_nth_data (menu->entries, menu->selected);
     } while ((entry == NULL) || (entry->callback == NULL));
 
     menubar_paint_idx (menubar, menu->selected, MENU_SELECTED_COLOR);
@@ -335,17 +330,18 @@ menubar_down (WMenuBar *menubar)
 static void
 menubar_up (WMenuBar *menubar)
 {
-    Menu *menu = g_ptr_array_index (menubar->menu, menubar->selected);
+    Menu *menu = g_list_nth_data (menubar->menu, menubar->selected);
+    const unsigned int len = g_list_length (menu->entries);
     menu_entry_t *entry;
 
     menubar_paint_idx (menubar, menu->selected, MENU_ENTRY_COLOR);
 
     do {
 	if (menu->selected == 0)
-	    menu->selected = menu->entries->len - 1;
+	    menu->selected = len - 1;
 	else
 	    menu->selected--;
-	entry = (menu_entry_t *) g_ptr_array_index (menu->entries, menu->selected);
+	entry = (menu_entry_t *) g_list_nth_data (menu->entries, menu->selected);
     } while ((entry == NULL) || (entry->callback == NULL));
 
     menubar_paint_idx (menubar, menu->selected, MENU_SELECTED_COLOR);
@@ -354,7 +350,7 @@ menubar_up (WMenuBar *menubar)
 static void
 menubar_first (WMenuBar *menubar)
 {
-    Menu *menu = g_ptr_array_index (menubar->menu, menubar->selected);
+    Menu *menu = g_list_nth_data (menubar->menu, menubar->selected);
     menu_entry_t *entry;
 
     if (menu->selected == 0)
@@ -365,7 +361,7 @@ menubar_first (WMenuBar *menubar)
     menu->selected = 0;
 
     while (TRUE) {
-	entry = (menu_entry_t *) g_ptr_array_index (menu->entries, menu->selected);
+	entry = (menu_entry_t *) g_list_nth_data (menu->entries, menu->selected);
 
 	if ((entry == NULL) || (entry->callback == NULL))
 	    menu->selected++;
@@ -379,19 +375,20 @@ menubar_first (WMenuBar *menubar)
 static void
 menubar_last (WMenuBar *menubar)
 {
-    Menu *menu = g_ptr_array_index (menubar->menu, menubar->selected);
+    Menu *menu = g_list_nth_data (menubar->menu, menubar->selected);
+    const unsigned int len = g_list_length (menu->entries);
     menu_entry_t *entry;
 
-    if (menu->selected == menu->entries->len - 1)
+    if (menu->selected == len - 1)
 	return;
 
     menubar_paint_idx (menubar, menu->selected, MENU_ENTRY_COLOR);
 
-    menu->selected = menu->entries->len;
+    menu->selected = len;
 
     do {
 	menu->selected--;
-	entry = (menu_entry_t *) g_ptr_array_index (menu->entries, menu->selected);
+	entry = (menu_entry_t *) g_list_nth_data (menu->entries, menu->selected);
     } while ((entry == NULL) || (entry->callback == NULL));
 
     menubar_paint_idx (menubar, menu->selected, MENU_SELECTED_COLOR);
@@ -414,7 +411,7 @@ menubar_handle_key (WMenuBar *menubar, int key)
     case KEY_F(1):
 	if (menubar->is_dropped)
 	    interactive_display (NULL,
-		    ((Menu *) g_ptr_array_index (menubar->menu,
+		    ((Menu *) g_list_nth_data (menubar->menu,
 					menubar->selected))->help_node);
 	else
 	    interactive_display (NULL, "[Menu Bar]");
@@ -433,15 +430,15 @@ menubar_handle_key (WMenuBar *menubar, int key)
     }
 
     if (!menubar->is_dropped) {
-	unsigned int i;
+	GList *i;
 
 	/* drop menu by hotkey */
-	for (i = 0; i < menubar->menu->len; i++) {
-	    Menu *menu = g_ptr_array_index (menubar->menu, i);
+	for (i = menubar->menu; i != NULL; i = g_list_next (i)) {
+	    Menu *menu = i->data;
 
 	    if ((menu->text.hotkey != NULL)
 		&& (key == g_ascii_tolower (menu->text.hotkey[0]))) {
-		    menubar_drop (menubar, i);
+		    menubar_drop (menubar, g_list_position (menubar->menu, i));
 		    return 1;
 	    }
 	}
@@ -455,17 +452,17 @@ menubar_handle_key (WMenuBar *menubar, int key)
     }
 
     {
-	const Menu *menu = g_ptr_array_index (menubar->menu, menubar->selected);
-	unsigned int i;
+	const Menu *menu = g_list_nth_data (menubar->menu, menubar->selected);
+	GList *i;
 
 	/* execute menu callback by hotkey */
-        for (i = 0; i < menu->entries->len; i++) {
-	    const menu_entry_t *entry = g_ptr_array_index (menu->entries, i);
+	for (i = menubar->menu; i != NULL; i = g_list_next (i)) {
+	    const menu_entry_t *entry = i->data;
 
 	    if ((entry != NULL) && (entry->callback != NULL)
 		&& (entry->text.hotkey != NULL)
 		&& (key == g_ascii_tolower (entry->text.hotkey[0]))) {
-		menubar_execute (menubar, i);
+		menubar_execute (menubar, g_list_position (menubar->menu, i));
 		return 1;
 	    }
         }
@@ -600,10 +597,11 @@ menubar_event (Gpm_Event *event, void *data)
 	else if (event->buttons & GPM_B_DOWN)
 	    menubar_right (menubar);
 	else {
+	    const unsigned int len = g_list_length (menubar->menu);
 	    int new_selection = 0;
 
-	    while ((new_selection < menubar->menu->len)
-		    && (event->x > ((Menu *) g_ptr_array_index (menubar->menu,
+	    while ((new_selection < len)
+		    && (event->x > ((Menu *) g_list_nth_data (menubar->menu,
 							new_selection))->start_x))
 		new_selection++;
 
@@ -628,13 +626,13 @@ menubar_event (Gpm_Event *event, void *data)
     /* middle click -- everywhere */
     if (((event->buttons & GPM_B_MIDDLE) != 0)
 	    && ((event->type & GPM_DOWN) != 0)) {
-	Menu *menu = (Menu *) g_ptr_array_index (menubar->menu, menubar->selected);
+	Menu *menu = (Menu *) g_list_nth_data (menubar->menu, menubar->selected);
 	menubar_execute (menubar, menu->selected);
 	return MOU_NORMAL;
     }
 
     /* the mouse operation is on the menus or it is not */
-    menu = (Menu *) g_ptr_array_index (menubar->menu, menubar->selected);
+    menu = (Menu *) g_list_nth_data (menubar->menu, menubar->selected);
     left_x = menu->start_x;
     right_x = left_x + menu->max_entry_len + 3;
     if (right_x > menubar->widget.cols) {
@@ -642,11 +640,11 @@ menubar_event (Gpm_Event *event, void *data)
 	right_x = menubar->widget.cols;
     }
 
-    bottom_y = menu->entries->len + 3;
+    bottom_y = g_list_length (menu->entries) + 3;
 
     if ((event->x >= left_x) && (event->x <= right_x) && (event->y <= bottom_y)){
 	int pos = event->y - 3;
-	const menu_entry_t *entry = g_ptr_array_index (menu->entries, pos);
+	const menu_entry_t *entry = g_list_nth_data (menu->entries, pos);
 
 	/* mouse wheel */
 	if ((event->buttons & GPM_B_UP) && (event->type & GPM_DOWN)) {
@@ -659,7 +657,7 @@ menubar_event (Gpm_Event *event, void *data)
 	}
 
 	/* ignore events above and below dropped down menu */
-	if  ((pos < 0) || (pos >= menu->entries->len))
+	if  ((pos < 0) || (pos >= bottom_y - 3))
 	    return MOU_NORMAL;
 
 	if ((entry != NULL) && (entry->callback != NULL)) {
@@ -680,7 +678,7 @@ menubar_event (Gpm_Event *event, void *data)
 }
 
 WMenuBar *
-menubar_new (int y, int x, int cols, GPtrArray *menu)
+menubar_new (int y, int x, int cols, GList *menu)
 {
     WMenuBar *menubar = g_new0 (WMenuBar, 1);
 
@@ -692,12 +690,12 @@ menubar_new (int y, int x, int cols, GPtrArray *menu)
 }
 
 void
-menubar_set_menu (WMenuBar *menubar, GPtrArray *menu)
+menubar_set_menu (WMenuBar *menubar, GList *menu)
 {
     /* delete previous menu */
     if (menubar->menu != NULL) {
-	g_ptr_array_foreach (menubar->menu, (GFunc) destroy_menu, NULL);
-	g_ptr_array_free (menubar->menu, TRUE);
+	g_list_foreach (menubar->menu, (GFunc) destroy_menu, NULL);
+	g_list_free (menubar->menu);
     }
     /* add new menu */
     menubar->is_active = FALSE;
@@ -710,11 +708,8 @@ menubar_set_menu (WMenuBar *menubar, GPtrArray *menu)
 void
 menubar_add_menu (WMenuBar *menubar, Menu *menu)
 {
-    if (menubar->menu == NULL)
-	menubar->menu = g_ptr_array_new ();
-
     if (menu != NULL)
-	g_ptr_array_add (menubar->menu, menu);
+	menubar->menu = g_list_append (menubar->menu, menu);
 
     menubar_arrange (menubar);
 }
@@ -727,17 +722,17 @@ void
 menubar_arrange (WMenuBar* menubar)
 {
     int start_x = 1;
-    unsigned int i;
+    GList *i;
     int gap;
 
-    if ((menubar->menu == NULL) || (menubar->menu->len == 0))
+    if (menubar->menu == NULL)
 	return;
 
 #ifndef RESIZABLE_MENUBAR
     gap = 3;
 
-    for (i = 0; i < menubar->menu->len; i++) {
-	Menu *menu = g_ptr_array_index (menubar->menu, i);
+    for (i = menubar->menu; i != NULL; i = g_list_next (i)) {
+	Menu *menu = i->data;
 	int len = hotkey_width (menu->text);
 
 	menu->start_x = start_x;
@@ -747,8 +742,8 @@ menubar_arrange (WMenuBar* menubar)
     gap = menubar->widget.cols - 2;
 
     /* First, calculate gap between items... */
-    for (i = 0; i < menubar->menu->len; i++) {
-	Menu *menu = g_ptr_array_index (menubar->menu, i);
+    for (i = menubar->menu; i != NULL; i = g_list_nwxt (i)) {
+	Menu *menu = i->data;
 	/* preserve length here, to be used below */
 	menu->start_x = hotkey_width (menu->text);
 	gap -= menu->start_x;
@@ -762,8 +757,8 @@ menubar_arrange (WMenuBar* menubar)
     }
 
     /* ...and now fix start positions of menubar items */
-    for (i = 0; i < menubar->menu->len; i++) {
-	Menu *menu = g_ptr_array_index (menubar->menu, i);
+    for (i = menubar->menu; i != NULL; i = g_list_nwxt (i)) {
+	Menu *menu = i->data;
 	int len = menu->start_x;
 
 	menu->start_x = start_x;
