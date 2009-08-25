@@ -94,7 +94,7 @@ mcview_display_nroff (mcview_t * view)
         } else
 #endif
         {
-            if ((c = mcview_get_byte (view, from)) == -1)
+            if (! mcview_get_byte (view, from, &c))
                 break;
         }
         from++;
@@ -103,8 +103,8 @@ mcview_display_nroff (mcview_t * view)
 
         if (c == '\b') {
             if (from > 1) {
-                c_prev = mcview_get_byte (view, from - 2);
-                c_next = mcview_get_byte (view, from);
+                mcview_get_byte (view, from - 2, &c_prev);
+                mcview_get_byte (view, from, &c_next);
             }
             if (g_ascii_isprint (c_prev) && g_ascii_isprint (c_prev)
                 && (c_prev == c_next || c_prev == '_' || (c_prev == '+' && c_next == 'o'))) {
@@ -136,7 +136,7 @@ mcview_display_nroff (mcview_t * view)
         }
 
         if (c == '\r') {
-            c = mcview_get_byte_indexed (view, from, 1);
+            mcview_get_byte_indexed (view, from, 1, &c);
             if (c == '\r' || c == '\n')
                 continue;
             col = 0;
@@ -258,19 +258,17 @@ mcview_nroff_seq_info (mcview_nroff_t * nroff)
         return NROFF_TYPE_NONE;
     nroff->type = NROFF_TYPE_NONE;
 
-    nroff->current_char = mcview_get_byte (nroff->view, nroff->index);
-    if (nroff->current_char == -1 || !g_ascii_isprint (nroff->current_char))    /* FIXME: utf-8 and g_ascii_isprint */
+    if (! mcview_get_byte (nroff->view, nroff->index, &nroff->current_char)
+        || !g_ascii_isprint (nroff->current_char))   /* FIXME: utf-8 and g_ascii_isprint */
         return nroff->type;
 
     nroff->char_width = 1;
 
-    next = mcview_get_byte (nroff->view, nroff->index + 1);
-    if (next == -1 || next != '\b')
+    if (! mcview_get_byte (nroff->view, nroff->index + 1, &next) || next != '\b')
         return nroff->type;
 
-    next2 = mcview_get_byte (nroff->view, nroff->index + 2);
-
-    if (next2 == -1 || !g_ascii_isprint (next2))        /* FIXME: utf-8 and g_ascii_isprint */
+    if (! mcview_get_byte (nroff->view, nroff->index + 2, &next2)
+        || !g_ascii_isprint (next2))   /* FIXME: utf-8 and g_ascii_isprint */
         return nroff->type;
 
     if (nroff->current_char == '_' && next2 == '_') {

@@ -91,7 +91,7 @@ mcview_display_text (mcview_t * view)
         } else
 #endif
         {
-            if ((c = mcview_get_byte (view, from)) == -1)
+            if (! mcview_get_byte (view, from, &c))
                 break;
         }
         from++;
@@ -106,7 +106,9 @@ mcview_display_text (mcview_t * view)
         }
 
         if (c == '\r') {
-            c = mcview_get_byte_indexed (view, from, 1);
+            if (! mcview_get_byte_indexed (view, from, 1, &c))
+                break;
+
             if (c == '\r' || c == '\n')
                 continue;
             col = 0;

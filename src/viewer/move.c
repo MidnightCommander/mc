@@ -154,6 +154,7 @@ mcview_move_down (mcview_t * view, off_t lines)
 
     } else if (view->text_wrap_mode) {
         off_t line, col, i;
+        int c;
 
         for (i = 0; i < lines; i++) {
             off_t new_offset, chk_line, chk_col;
@@ -165,7 +166,8 @@ mcview_move_down (mcview_t * view, off_t lines)
             /* skip to the next line if the only thing that would be
              * displayed is the newline character. */
             mcview_offset_to_coord (view, &chk_line, &chk_col, new_offset);
-            if (chk_line == line && chk_col == col && mcview_get_byte (view, new_offset) == '\n')
+            if (chk_line == line && chk_col == col && mcview_get_byte (view, new_offset, &c) == TRUE
+                && c == '\n')
                 new_offset++;
 
             view->dpy_start = new_offset;
@@ -321,7 +323,7 @@ mcview_moveto_eol (mcview_t * view)
         off_t filesize, bol;
 
         bol = mcview_offset_rounddown (view->hex_cursor, view->bytes_per_line);
-        if (mcview_get_byte_indexed (view, bol, view->bytes_per_line - 1) != -1) {
+        if (mcview_get_byte_indexed (view, bol, view->bytes_per_line - 1, NULL) == TRUE) {
             view->hex_cursor = bol + view->bytes_per_line - 1;
         } else {
             filesize = mcview_get_filesize (view);

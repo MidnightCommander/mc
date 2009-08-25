@@ -234,7 +234,7 @@ mcview_ccache_lookup (mcview_t * view, struct coord_cache_entry *coord,
     for (; current.cc_offset < limit; current = next) {
         int c, nextc;
 
-        if ((c = mcview_get_byte (view, current.cc_offset)) == -1)
+        if (! mcview_get_byte (view, current.cc_offset, &c))
             break;
 
         if (!mcview_coord_cache_entry_less (&current, coord, sorter, view->text_nroff_mode)) {
@@ -253,7 +253,7 @@ mcview_ccache_lookup (mcview_t * view, struct coord_cache_entry *coord,
 
         /* and override some of them as necessary. */
         if (c == '\r') {
-            nextc = mcview_get_byte_indexed (view, current.cc_offset, 1);
+            mcview_get_byte_indexed (view, current.cc_offset, 1, &nextc);
 
             /* Ignore '\r' if it is followed by '\r' or '\n'. If it is
              * followed by anything else, it is a Mac line ending and

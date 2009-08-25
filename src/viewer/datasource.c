@@ -193,24 +193,31 @@ mcview_get_utf (mcview_t * view, off_t byte_index, int *char_width, gboolean * r
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
-mcview_get_byte_string (mcview_t * view, off_t byte_index)
+gboolean
+mcview_get_byte_string (mcview_t * view, off_t byte_index, int *retval)
 {
     assert (view->datasource == DS_STRING);
-    if (byte_index < view->ds_string_len)
-        return view->ds_string_data[byte_index];
-    return -1;
+    if (byte_index < view->ds_string_len) {
+        if (retval)
+            *retval = view->ds_string_data[byte_index];
+        return TRUE;
+    }
+    if (retval)
+        *retval = -1;
+    return FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
-mcview_get_byte_none (mcview_t * view, off_t byte_index)
+gboolean
+mcview_get_byte_none (mcview_t * view, off_t byte_index, int *retval)
 {
     assert (view->datasource == DS_NONE);
     (void) &view;
     (void) byte_index;
-    return -1;
+    if (retval)
+        *retval = -1;
+    return FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -344,7 +351,7 @@ mcview_load_command_output (mcview_t * view, const char *command)
 
     /* First, check if filter produced any output */
     mcview_set_datasource_stdio_pipe (view, fp);
-    if (mcview_get_byte (view, 0) == -1) {
+    if (! mcview_get_byte (view, 0, NULL)) {
         mcview_close_datasource (view);
 
         /* Avoid two messages.  Message from stderr has priority.  */

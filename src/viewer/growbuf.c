@@ -165,25 +165,33 @@ mcview_growbuf_read_until (mcview_t * view, off_t ofs)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
-mcview_get_byte_growing_buffer (mcview_t * view, off_t byte_index)
+gboolean
+mcview_get_byte_growing_buffer (mcview_t * view, off_t byte_index, int *retval)
 {
+    if (retval)
+        *retval = -1;
     off_t pageno = byte_index / VIEW_PAGE_SIZE;
     off_t pageindex = byte_index % VIEW_PAGE_SIZE;
 
     assert (view->growbuf_in_use);
 
     if ((size_t) pageno != pageno)
-        return -1;
+        return FALSE;
 
     mcview_growbuf_read_until (view, byte_index + 1);
     if (view->growbuf_blocks == 0)
-        return -1;
-    if (pageno < view->growbuf_blocks - 1)
-        return view->growbuf_blockptr[pageno][pageindex];
-    if (pageno == view->growbuf_blocks - 1 && pageindex < view->growbuf_lastindex)
-        return view->growbuf_blockptr[pageno][pageindex];
-    return -1;
+        return FALSE;
+    if (pageno < view->growbuf_blocks - 1) {
+        if (retval)
+            *retval = view->growbuf_blockptr[pageno][pageindex];
+        return TRUE;
+    }
+    if (pageno == view->growbuf_blocks - 1 && pageindex < view->growbuf_lastindex) {
+        if (retval)
+            *retval = view->growbuf_blockptr[pageno][pageindex];
+        return TRUE;
+    }
+    return FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

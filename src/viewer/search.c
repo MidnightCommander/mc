@@ -118,8 +118,7 @@ mcview_search_cmd_callback (const void *user_data, gsize char_offset)
 
     /*    view_read_continue (view, &view->search_onechar_info); *//* AB:FIXME */
     if (!view->text_nroff_mode) {
-        byte = mcview_get_byte (view, char_offset);
-        if (byte == -1)
+        if (! mcview_get_byte (view, char_offset, &byte))
             return MC_SEARCH_CB_ABORT;
 
         return byte;

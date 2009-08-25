@@ -107,7 +107,7 @@ mcview_display_hex (mcview_t * view)
         curr = curr->next;
     }
 
-    for (row = 0; mcview_get_byte (view, from) != -1 && row < height; row++) {
+    for (row = 0; mcview_get_byte (view, from, NULL) == TRUE && row < height; row++) {
         col = 0;
 
         /* Print the hex offset */
@@ -131,7 +131,7 @@ mcview_display_hex (mcview_t * view)
                     break;
             }
 #endif
-            if ((c = mcview_get_byte (view, from)) == -1)
+            if (! mcview_get_byte (view, from, &c))
                 break;
 
             /* Save the cursor position for mcview_place_cursor() */

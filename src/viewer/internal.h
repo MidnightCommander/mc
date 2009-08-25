@@ -226,8 +226,8 @@ off_t mcview_get_filesize (mcview_t *);
 char *mcview_get_ptr_file (mcview_t *, off_t);
 char *mcview_get_ptr_string (mcview_t *, off_t);
 int mcview_get_utf (mcview_t *, off_t, int *, gboolean *);
-int mcview_get_byte_string (mcview_t *, off_t);
-int mcview_get_byte_none (mcview_t *, off_t);
+gboolean mcview_get_byte_string (mcview_t *, off_t, int *);
+gboolean mcview_get_byte_none (mcview_t *, off_t, int *);
 void mcview_set_byte (mcview_t *, off_t, byte);
 void mcview_file_load_data (mcview_t *, off_t);
 void mcview_close_datasource (mcview_t *);
@@ -255,7 +255,7 @@ void mcview_growbuf_init (mcview_t *);
 void mcview_growbuf_free (mcview_t *);
 off_t mcview_growbuf_filesize (mcview_t *);
 void mcview_growbuf_read_until (mcview_t *, off_t);
-int mcview_get_byte_growing_buffer (mcview_t *, off_t);
+gboolean mcview_get_byte_growing_buffer (mcview_t *, off_t, int *);
 char *mcview_get_ptr_growing_buffer (mcview_t *, off_t);
 
 /* hex.c: */

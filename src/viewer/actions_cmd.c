@@ -91,7 +91,7 @@ static cb_ret_t
 mcview_handle_editkey (mcview_t * view, int key)
 {
     struct hexedit_change_node *node;
-    byte byte_val;
+    int byte_val;
 
     /* Has there been a change at this position? */
     node = view->change_list;
@@ -114,7 +114,7 @@ mcview_handle_editkey (mcview_t * view, int key)
         if (node)
             byte_val = node->value;
         else
-            byte_val = mcview_get_byte (view, view->hex_cursor);
+            mcview_get_byte (view, view->hex_cursor, &byte_val);
 
         if (view->hexedit_lownibble) {
             byte_val = (byte_val & 0xf0) | (hexvalue);
@@ -548,7 +548,7 @@ mcview_moveto_addr_cmd (mcview_t * view)
     if (line != NULL) {
         if (*line != '\0') {
             addr = strtoul (line, &error, 0);
-            if ((*error == '\0') && mcview_get_byte (view, addr) != -1) {
+            if ((*error == '\0') && mcview_get_byte (view, addr, NULL) == TRUE) {
                 mcview_moveto_offset (view, addr);
             } else {
                 message (D_ERROR, _("Warning"), _(" Invalid address "));
