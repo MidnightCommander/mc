@@ -279,7 +279,7 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
     char *canon_fname;
     struct stat st;
 #ifdef HAVE_CHARSET
-    const char *cp_id;
+    const char *cp_id = NULL;
 #endif
     gboolean retval = FALSE;
 #ifdef HAVE_CHARSET
@@ -363,17 +363,22 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
     view->dpy_text_column = 0;
 
     view->converter = str_cnv_from_term;
-    /* try detect encoding from path */
-    if (view->filename != NULL) {
-        canon_fname = vfs_canon (view->filename);
-        enc = vfs_get_encoding (canon_fname);
-        if (enc != NULL) {
-            view->converter = str_crt_conv_from (enc);
-            if (view->converter == INVALID_CONV)
-                view->converter = str_cnv_from_term;
+#ifdef HAVE_CHARSET
+    cp_id = get_codepage_id (source_codepage >= 0 ?
+                            source_codepage : display_codepage);
+
+    if (cp_id != NULL) {
+        GIConv conv;
+        conv = str_crt_conv_from (cp_id);
+        if (conv != INVALID_CONV) {
+            if (view->converter != str_cnv_from_term)
+                str_close_conv (view->converter);
+            view->converter = conv;
         }
-        g_free (canon_fname);
     }
+    if (cp_id != NULL)
+        view->utf8 = (gboolean) str_isutf8 (cp_id);
+#endif
 
     mcview_compute_areas (view);
     assert (view->bytes_per_line != 0);

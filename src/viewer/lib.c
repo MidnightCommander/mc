@@ -208,28 +208,27 @@ void
 mcview_select_encoding (mcview_t * view)
 {
 #ifdef HAVE_CHARSET
-    const char *enc = NULL;
+    const char *cp_id = NULL;
+    if (do_select_codepage ()) {
+	cp_id = get_codepage_id (source_codepage >= 0 ?
+				    source_codepage : display_codepage);
 
-    if (!do_select_codepage ())
-        return;
-
-    enc = get_codepage_id (source_codepage);
-    if (enc != NULL) {
-        GIConv conv;
-
-        conv = str_crt_conv_from (enc);
-        if (conv != INVALID_CONV) {
-            if (view->converter != str_cnv_from_term)
-                str_close_conv (view->converter);
-            view->converter = conv;
+        if (cp_id != NULL) {
+            GIConv conv;
+            conv = str_crt_conv_from (cp_id);
+            if (conv != INVALID_CONV) {
+                if (view->converter != str_cnv_from_term)
+                    str_close_conv (view->converter);
+                view->converter = conv;
+            }
         }
-    }
-    if (enc != NULL && str_isutf8 (enc) != 0)
-        view->utf8 = TRUE;
-    else
-        view->utf8 = FALSE;
 
+	if (cp_id != NULL)
+	    view->utf8 = (gboolean) str_isutf8 (cp_id);
+    }
 #endif
+
+
 }
 
 /* --------------------------------------------------------------------------------------------- */
