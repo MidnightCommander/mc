@@ -40,7 +40,7 @@
 #include "tree.h"		/* xtree_mode */
 #include "../src/mcconfig/mcconfig.h"
 #include "setup.h"
-#include "view.h"		/* For the externs */
+#include "../src/viewer/mcviewer.h" /* For the externs */
 #include "hotlist.h"		/* load/save/done hotlist */
 #include "panelize.h"		/* load/save/done panelize */
 #include "layout.h"
@@ -177,16 +177,16 @@ static const struct {
     { "use_8th_bit_as_meta", &use_8th_bit_as_meta },
     { "confirm_view_dir", &confirm_view_dir },
     { "mouse_move_pages", &mouse_move_pages },
-    { "mouse_move_pages_viewer", &mouse_move_pages_viewer },
+    { "mouse_move_pages_viewer", &mcview_mouse_move_pages },
     { "mouse_close_dialog", &mouse_close_dialog},
     { "fast_refresh", &fast_refresh },
     { "navigate_with_arrows", &navigate_with_arrows },
     { "drop_menus", &drop_menus },
-    { "wrap_mode",  &global_wrap_mode},
+    { "wrap_mode",  &mcview_global_wrap_mode},
     { "old_esc_mode", &old_esc_mode },
     { "cd_symlinks", &cd_symlinks },
     { "show_all_if_ambiguous", &show_all_if_ambiguous },
-    { "max_dirt_limit", &max_dirt_limit },
+    { "max_dirt_limit", &mcview_max_dirt_limit },
     { "torben_fj_mode", &torben_fj_mode },
     { "use_file_to_guess_type", &use_file_to_check_type },
     { "alternate_plus_minus", &alternate_plus_minus },

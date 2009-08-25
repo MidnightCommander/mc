@@ -72,7 +72,8 @@
 #include "cons.saver.h"
 #include "layout.h"
 #include "info.h"		/* The Info widget */
-#include "view.h"		/* The view widget */
+#include "../src/viewer/mcviewer.h"     /* The view widget */
+
 #include "setup.h"		/* For save_setup() */
 #include "../vfs/vfs.h"		/* For vfs_translate_url() */
 
@@ -927,7 +928,7 @@ set_display_type (int num, int type)
 	break;
 
     case view_quick:
-	new_widget = (Widget *) view_new (0, 0, 0, 0, 1);
+	new_widget = (Widget *) mcview_new (0, 0, 0, 0, 1);
 	the_other_panel = (WPanel *) panels [the_other].widget;
 	if (the_other_panel)
 	    file_name =
@@ -935,7 +936,7 @@ set_display_type (int num, int type)
 	else
 	    file_name = "";
 	
-	view_load ((WView *) new_widget, 0, file_name, 0);
+	mcview_load ((struct mcview_struct *) new_widget, 0, file_name, 0);
 	break;
     }
 

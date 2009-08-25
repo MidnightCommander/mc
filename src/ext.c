@@ -38,12 +38,12 @@
 #include "main.h"
 #include "wtools.h"
 #include "ext.h"
-#include "view.h"
 #include "execute.h"
 #include "history.h"
 #include "cons.saver.h"
 #include "layout.h"
 #include "../src/search/search.h"
+#include "../src/viewer/mcviewer.h"
 
 /* If set, we execute the file command to check the file type */
 int use_file_to_check_type = 1;
@@ -76,8 +76,8 @@ exec_extension (const char *filename, const char *data, int *move_dir,
     int parameter_found = 0;
     char prompt[80];
     int run_view = 0;
-    int def_hex_mode = default_hex_mode, changed_hex_mode = 0;
-    int def_nroff_flag = default_nroff_flag, changed_nroff_flag = 0;
+    int def_hex_mode = mcview_default_hex_mode, changed_hex_mode = 0;
+    int def_nroff_flag = mcview_default_nroff_flag, changed_nroff_flag = 0;
     int written_nonspace = 0;
     int is_cd = 0;
     char buffer[1024];
@@ -234,26 +234,26 @@ exec_extension (const char *filename, const char *data, int *move_dir,
     }
 
     if (run_view) {
-	altered_hex_mode = 0;
-	altered_nroff_flag = 0;
-	if (def_hex_mode != default_hex_mode)
+	mcview_altered_hex_mode = 0;
+	mcview_altered_nroff_flag = 0;
+	if (def_hex_mode != mcview_default_hex_mode)
 	    changed_hex_mode = 1;
-	if (def_nroff_flag != default_nroff_flag)
+	if (def_nroff_flag != mcview_default_nroff_flag)
 	    changed_nroff_flag = 1;
 
 	/* If we've written whitespace only, then just load filename
 	 * into view
 	 */
 	if (written_nonspace) {
-	    mc_internal_viewer (cmd, filename, move_dir, start_line);
+	    mcview_viewer (cmd, filename, move_dir, start_line);
 	    unlink (file_name);
 	} else {
-	    mc_internal_viewer (NULL, filename, move_dir, start_line);
+	    mcview_viewer (NULL, filename, move_dir, start_line);
 	}
-	if (changed_hex_mode && !altered_hex_mode)
-	    default_hex_mode = def_hex_mode;
-	if (changed_nroff_flag && !altered_nroff_flag)
-	    default_nroff_flag = def_nroff_flag;
+	if (changed_hex_mode && !mcview_altered_hex_mode)
+	    mcview_default_hex_mode = def_hex_mode;
+	if (changed_nroff_flag && !mcview_altered_nroff_flag)
+	    mcview_default_nroff_flag = def_nroff_flag;
 	repaint_screen ();
     } else if (is_cd) {
 	char *q;

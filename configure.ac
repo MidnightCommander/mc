@@ -562,6 +562,7 @@ src/Makefile
 src/mcconfig/Makefile
 src/search/Makefile
 src/tty/Makefile
+src/viewer/Makefile
 
 edit/Makefile
 syntax/Makefile

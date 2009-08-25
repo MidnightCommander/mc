@@ -1,4 +1,4 @@
-SUBDIRS = mcconfig search tty
+SUBDIRS = mcconfig search tty viewer
 
 AM_CFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir) $(PCRE_CFLAGS)
 
@@ -42,9 +42,10 @@ endif
 MCCONFIGLIB = mcconfig/libmcconfig.la
 SEARCHLIB = search/libsearch.la
 TTYLIB =  tty/libmctty.la
+VIEWERLIB = viewer/libmcviewer.la
 
 mc_LDADD = $(EDITLIB) $(VFSLIB) \
-	$(MCCONFIGLIB) $(SEARCHLIB) $(TTYLIB) \
+	$(MCCONFIGLIB) $(SEARCHLIB) $(TTYLIB) $(VIEWERLIB) \
 	$(INTLLIBS) $(MCLIBS) $(SLANGLIB) $(LIBICONV) $(GLIB_LIBS)
 
 CHARSET_SRC = charsets.c charsets.h selcodepage.c selcodepage.h
@@ -66,7 +67,7 @@ SRCS =	achown.c achown.h background.c background.h boxes.c boxes.h	\
 	screen.c setup.c setup.h					\
 	subshell.c subshell.h textconf.c textconf.h			\
 	tree.c tree.h treestore.c treestore.h timefmt.h user.c		\
-	user.h util.c util.h utilunix.c view.c view.h vfsdummy.h 	\
+	user.h util.c util.h utilunix.c vfsdummy.h 			\
 	widget.c widget.h wtools.c wtools.h unixcompat.h		\
 	ecs.h ecs.c							\
 	strutil.h strutil.c strutilascii.c strutil8bit.c strutilutf8.c	\
