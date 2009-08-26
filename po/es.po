@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 4.7.0\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
 "POT-Creation-Date: 2009-08-26 17:11+0300\n"
-"PO-Revision-Date: 2009-07-24 21:00+0100\n"
+"PO-Revision-Date: 2009-08-25 21:40+0200\n"
 "Last-Translator: David Martín <dmartina@excite.com\n"
 "Language-Team: Spanish <debian-l10n-spanish@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -317,11 +317,10 @@ msgid "&All charsets"
 msgstr "cualquier co&Dificación"
 
 msgid "&Whole words"
-msgstr ""
+msgstr "palabras comple&Tas"
 
-#, fuzzy
 msgid "In se&lection"
-msgstr "selecció&N persistente"
+msgstr "sólo en se&Lección"
 
 msgid "&Backwards"
 msgstr "&Hacia atrás"
@@ -458,21 +457,17 @@ msgstr "cor&Tar a un archivo...  S-Del"
 msgid "&Paste from clipfile      S-Ins"
 msgstr "pe&Gar de un archivo...  S-Ins"
 
-#, fuzzy
 msgid "Toggle bookmar&k            M-k"
-msgstr "poner/quitar m&Arca         F3"
+msgstr "poner/quitar m&Arca        M-k"
 
-#, fuzzy
 msgid "&Next bookmark              M-j"
-msgstr "&Ir a la marca siguiente      "
+msgstr "&Ir a marca siguiente      M-j"
 
-#, fuzzy
 msgid "Pre&v bookmark              M-i"
-msgstr "&Volver a la marca anterior   "
+msgstr "&Volver a marca anterior   M-i"
 
-#, fuzzy
 msgid "&Flush bookmark             M-o"
-msgstr "borra&R todas las marcas      "
+msgstr "borra&R todas las marcas   M-o"
 
 msgid "&Undo                       C-u"
 msgstr "&Deshacer                  C-u"
@@ -640,7 +635,7 @@ msgid "Tab spacing: "
 msgstr "Tamaño de tabulaciones: "
 
 msgid "Cursor beyond end of line"
-msgstr ""
+msgstr "cursor pasa fin de &Línea"
 
 msgid "Pers&istent selection"
 msgstr "selecció&N persistente"
@@ -865,7 +860,7 @@ msgid "Sort order"
 msgstr " Ordenar "
 
 msgid "Executable first"
-msgstr "ejecutables primero"
+msgstr "&Ejecutables primero"
 
 msgid " confirm di&Rectory hotlist delete "
 msgstr " confirmar eliminación de &Favoritos "
@@ -1135,7 +1130,7 @@ msgid "&Using shell patterns"
 msgstr "&Usando patrones shell"
 
 msgid "&Case sensitive"
-msgstr "distinguir ma&Yúsculas"
+msgstr "distinguir &May/min"
 
 msgid "&Files only"
 msgstr "sólo &Archivos"
@@ -1268,7 +1263,7 @@ msgid "&Name"
 msgstr "&Nombre"
 
 msgid "&Extension"
-msgstr "&Extensión"
+msgstr "e&Xtensión"
 
 msgid "&Modify time"
 msgstr "fecha de &Modificación"
@@ -1849,22 +1844,22 @@ msgid " Malformed regular expression "
 msgstr " La expresión regular es errónea "
 
 msgid "Cas&e sensitive"
-msgstr "distinguir ma&Yúsculas"
+msgstr "distinguir &May/min"
 
 msgid "&Find recursively"
-msgstr "buscar rec&Ursivamente"
+msgstr "buscar &Recursivamente"
 
 msgid "S&kip hidden"
 msgstr "saltar &Ocultos"
 
 msgid "Case sens&itive"
-msgstr "distinguir ma&Yúsculas"
+msgstr "distinguir may/mi&N"
 
 msgid "Re&gular expression"
-msgstr "expresión &Regular"
+msgstr "e&Xpresión regular"
 
 msgid "Fir&st hit"
-msgstr ""
+msgstr "&Primera coincidencia"
 
 msgid "All cha&rsets"
 msgstr "cualquier codi&Ficación"
@@ -2638,7 +2633,7 @@ msgid "show &Backup files"
 msgstr "mostrar &Archivos de respaldo"
 
 msgid "Use SI si&ze units"
-msgstr ""
+msgstr "tama&Ños en unidades SI"
 
 msgid "&Never"
 msgstr "&Nunca"
@@ -2776,8 +2771,8 @@ msgstr[1] "%s bytes"
 #, c-format
 msgid "%s in %d file"
 msgid_plural "%s in %d files"
-msgstr[0] "%s bytes en %d archivo"
-msgstr[1] "%s bytes en %d archivos"
+msgstr[0] "%s en %d archivo"
+msgstr[1] "%s en %d archivos"
 
 msgid "Unknown tag on display format: "
 msgstr "Campo desconocido en el formato de pantalla: "
@@ -3186,21 +3181,21 @@ msgstr " Fallo en la tubería "
 msgid " Dup failed "
 msgstr " Dup falló "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " The current line number is %lld.\n"
 " Enter the new line number:"
 msgstr ""
-" La línea actual es la número %lu\n"
+" La línea actual es la número %lld\n"
 " Teclee el número de línea a buscar:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " The current address is %s.\n"
 " Enter the new address:"
 msgstr ""
-" La línea actual es la número %lu\n"
-" Teclee el número de línea a buscar:"
+" La dirección actual es %s.\n"
+" Teclee la dirección a buscar:"
 
 msgid " Goto Address "
 msgstr " Ir a posición "
@@ -3512,7 +3507,7 @@ msgstr "ftpfs: Nombre de máquina incorrecto"
 
 #, c-format
 msgid "ftpfs: %s"
-msgstr ""
+msgstr "ftpfs: %s"
 
 #, c-format
 msgid "ftpfs: making connection to %s"
@@ -3529,17 +3524,16 @@ msgstr "ftpfs: Conexión al servidor fracasó: %s"
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Esperando antes de insistir... %d (Ctrl-C para cancelar)"
 
-#, fuzzy
 msgid "ftpfs: invalid address family"
-msgstr "ftpfs: Dirección de máquina incorrecta"
+msgstr "ftpfs: Familia de direcciones incorrecta"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: Imposible aplicar el \"modo pasivo\""
+msgstr "ftpfs: Imposible aplicar el \"modo pasivo\": %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not create socket: %s"
-msgstr " Imposible crear socket: %s "
+msgstr "ftpfs: Imposible crear socket: %s"
 
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: Imposible aplicar el \"modo pasivo\""
@@ -3776,14 +3770,9 @@ msgstr "Error interno:"
 msgid "Changes to file lost"
 msgstr "Los cambios del archivo se han perdido"
 
-#~ msgid "%b %d %H:%M"
-#~ msgstr "%d %b %H:%M"
-
-#~ msgid "%b %d %Y"
-#~ msgstr "%d %b %Y"
-
-#, fuzzy
-#~ msgid " The current address is 0x%08"
+#~ msgid ""
+#~ " The current address is 0x%lx.\n"
+#~ " Enter the new address:"
 #~ msgstr ""
-#~ " La posición actual es 0x%lx.\n"
-#~ " Teclee la posición a buscar:"
+#~ " La dirección actual es 0x%lx.\n"
+#~ " Teclee la dirección a buscar:"
