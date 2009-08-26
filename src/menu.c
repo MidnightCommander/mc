@@ -411,7 +411,7 @@ menubar_callback (Widget *w, widget_msg_t msg, int parm)
 }
 
 static int
-menubar_event    (Gpm_Event *event, void *data)
+menubar_event (Gpm_Event *event, void *data)
 {
     WMenu *menubar = data;
     int was_active;
@@ -420,7 +420,7 @@ menubar_event    (Gpm_Event *event, void *data)
 
     if (!(event->type & (GPM_UP|GPM_DOWN|GPM_DRAG)))
 	return MOU_NORMAL;
-    
+
     if (!menubar->dropped){
 	menubar->previous_widget = menubar->widget.parent->current->dlg_id;
 	menubar->active = 1;
@@ -433,40 +433,45 @@ menubar_event    (Gpm_Event *event, void *data)
     if (event->y == 1 || !was_active){
 	if (event->type & GPM_UP)
 	    return MOU_NORMAL;
-    
-	new_selection = 0;
-	while (new_selection < menubar->items 
-		&& event->x > menubar->menu[new_selection]->start_x
-	)
+
+	if (event->buttons & GPM_B_UP)
+	    menubar_left (menubar);
+	else if (event->buttons & GPM_B_DOWN)
+	    menubar_right (menubar);
+	else {
+	    new_selection = 0;
+	    while (new_selection < menubar->items
+		    && event->x > menubar->menu[new_selection]->start_x)
 		new_selection++;
 
-	if (new_selection) /* Don't set the invalid value -1 */
+	    if (new_selection) /* Don't set the invalid value -1 */
 		--new_selection;
 	
-	if (!was_active){
+	    if (!was_active){
+		menubar->selected = new_selection;
+		dlg_select_widget (menubar);
+		menubar_drop_compute (menubar);
+		menubar_draw (menubar);
+		return MOU_NORMAL;
+	    }
+	
+	    menubar_remove (menubar);
+
 	    menubar->selected = new_selection;
-	    dlg_select_widget (menubar);
+
 	    menubar_drop_compute (menubar);
 	    menubar_draw (menubar);
-	    return MOU_NORMAL;
 	}
-	
-	menubar_remove (menubar);
-
-	menubar->selected = new_selection;
-
-	menubar_drop_compute (menubar);
-	menubar_draw (menubar);
 	return MOU_NORMAL;
     }
 
     if (!menubar->dropped)
 	return MOU_NORMAL;
-    
+
     /* Ignore the events on anything below the third line */
     if (event->y <= 2)
 	return MOU_NORMAL;
-    
+
     /* Else, the mouse operation is on the menus or it is not */
 	left_x = menubar->menu[menubar->selected]->start_x;
 	right_x = left_x + menubar->max_entry_len + 4;
@@ -481,6 +486,16 @@ menubar_event    (Gpm_Event *event, void *data)
     if ((event->x > left_x) && (event->x < right_x) && (event->y < bottom_y)){
 	int pos = event->y - 3;
 
+	/* mouse wheel */
+	if ((event->buttons & GPM_B_UP) && (event->type & GPM_DOWN)) {
+	    menubar_move (menubar, -1);
+	    return MOU_NORMAL;
+	}
+	if ((event->buttons & GPM_B_DOWN) && (event->type & GPM_DOWN)) {
+	    menubar_move (menubar, 1);
+	    return MOU_NORMAL;
+	}
+
 	if (!menubar->menu [menubar->selected]->entries [pos].call_back)
 	    return MOU_NORMAL;
 	
@@ -493,7 +508,7 @@ menubar_event    (Gpm_Event *event, void *data)
     } else
 	if (event->type & GPM_DOWN)
 	    menubar_finish (menubar);
-	 
+
     return MOU_NORMAL;
 }
 
