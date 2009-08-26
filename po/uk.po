@@ -3,18 +3,19 @@
 # 2002 Volodymyr M. Lisivka <lvm@mystery.lviv.net
 # 2003-2004 Andrew V. Samoilov <sav@bcs.zp.ua>
 # Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005.
+# Oleksandr Natalenko <pfactum@gmail.com>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: uk\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
 "POT-Creation-Date: 2009-08-26 17:11+0300\n"
-"PO-Revision-Date: 2005-09-10 13:28+0300\n"
-"Last-Translator: Anton Sergeevich Chumak <nightfast@yahoo.co.uk>\n"
-"Language-Team: <uk@li.org>\n"
+"PO-Revision-Date: 2009-08-25 16:27+0300\n"
+"Last-Translator: Oleksandr Natalenko <pfactum@gmail.com>\n"
+"Language-Team: Ukrainian <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.1\n"
+"X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid " Choose syntax highlighting "
@@ -70,7 +71,7 @@ msgid "Warning"
 msgstr "Попередження"
 
 msgid " File has hard-links. Detach before saving? "
-msgstr ""
+msgstr "Файл має жорстке посилання. Відкріпити перед зберіганням?"
 
 msgid "&Yes"
 msgstr "&Так"
@@ -82,7 +83,7 @@ msgid "&Cancel"
 msgstr "&Cкасувати"
 
 msgid "The file has been modified in the meantime. Save anyway?"
-msgstr ""
+msgstr "Файл було змінено під час роботи. Все рівно зберегти?"
 
 msgid " Error writing to pipe: "
 msgstr " Помилка запису у канал: "
@@ -193,9 +194,8 @@ msgstr " Завантажити "
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " Блок надто великий, ви не зможете відкотити цю дію. "
 
-#, fuzzy
 msgid "Replace"
-msgstr "&Замінити"
+msgstr "Замінити"
 
 msgid " Replace "
 msgstr " Замінити "
@@ -316,7 +316,7 @@ msgid " Execute Macro "
 msgstr " Виконати макрос "
 
 msgid "&All charsets"
-msgstr ""
+msgstr "Усі кодування"
 
 #, fuzzy
 msgid "&Whole words"
@@ -324,7 +324,7 @@ msgstr "Лише повн&i слова"
 
 #, fuzzy
 msgid "In se&lection"
-msgstr "Інвер&тувати відмітку     M-*"
+msgstr "Наполегливе виділення"
 
 msgid "&Backwards"
 msgstr "&Hазад"
@@ -434,95 +434,78 @@ msgstr "&Новий файл         C-x k"
 msgid "Copy to &file...     "
 msgstr "&Копіювати у файл..."
 
-#, fuzzy
 msgid "&Toggle mark                 F3"
-msgstr "&Перемикнути відмітку   F3"
+msgstr "Перемкнути відмітку   F3"
 
-#, fuzzy
 msgid "Mar&k columns              S-F3"
 msgstr "Відмітити &стовпці    S-F3"
 
-#, fuzzy
 msgid "Toggle &ins/overw           Ins"
 msgstr "&Режим вставки/заміни  Ins"
 
-#, fuzzy
 msgid "&Copy                        F5"
 msgstr "&Скопіювати                F5"
 
-#, fuzzy
 msgid "&Move                        F6"
-msgstr "&Перенести блок         F6"
+msgstr "&Перенести         F6"
 
-#, fuzzy
 msgid "&Delete                      F8"
 msgstr "&Видалити                  F8"
 
-#, fuzzy
 msgid "C&opy to clipfile         C-Ins"
-msgstr "&Копіювати у файл..."
+msgstr "Копіювати у файл         C-Ins"
 
-#, fuzzy
 msgid "C&ut to clipfile          S-Del"
-msgstr "&Перейти на рядок                M-l"
+msgstr "Вирізати до файлу          S-Del"
 
 msgid "&Paste from clipfile      S-Ins"
-msgstr ""
+msgstr "Вставити із файлу      S-Ins"
 
 #, fuzzy
 msgid "Toggle bookmar&k            M-k"
-msgstr "&Перемикнути відмітку   F3"
+msgstr "Перемкнути закладку               "
 
 #, fuzzy
 msgid "&Next bookmark              M-j"
-msgstr "&Новий файл           C-n"
+msgstr "Наступна закладка                 "
 
 #, fuzzy
 msgid "Pre&v bookmark              M-i"
-msgstr "&Сортувати                       M-t"
+msgstr "Попередня закладка                 "
 
 #, fuzzy
 msgid "&Flush bookmark             M-o"
-msgstr "&Відіслати поштою..."
+msgstr "Скинути закладки                "
 
-#, fuzzy
 msgid "&Undo                       C-u"
 msgstr "В&ідкат операції       C-u"
 
-#, fuzzy
 msgid "&Beginning               C-PgUp"
-msgstr "На &початок файлу   C-PgUp"
+msgstr "На &початок   C-PgUp"
 
-#, fuzzy
 msgid "&End                     C-PgDn"
-msgstr "На кінець &файлу    C-PgDn"
+msgstr "На кінець    C-PgDn"
 
-#, fuzzy
 msgid "C&opy to clipfile           M-w"
-msgstr "&Перейти на рядок                M-l"
+msgstr "Копіювати до файлу           M-w"
 
-#, fuzzy
 msgid "C&ut to clipfile            C-w"
-msgstr "&Перейти на рядок                M-l"
+msgstr "Вирізати до файлу            C-w"
 
 msgid "&Paste from clipfile        C-y"
-msgstr ""
+msgstr "Вставити з файлу        C-y"
 
-#, fuzzy
 msgid "Toggle bookmar&k               "
-msgstr "&Перемикнути відмітку   F3"
+msgstr "Перемкнути закладку               "
 
-#, fuzzy
 msgid "&Next bookmark                 "
-msgstr "&Новий файл           C-n"
+msgstr "Наступна закладка                 "
 
-#, fuzzy
 msgid "Pre&v bookmark                 "
-msgstr "&Сортувати                       M-t"
+msgstr "Попередня закладка                 "
 
-#, fuzzy
 msgid "&Flush bookmark                "
-msgstr "&Відіслати поштою..."
+msgstr "Скинути закладки                "
 
 msgid "&Search...         F7"
 msgstr "&Шукати...          F7"
@@ -536,25 +519,23 @@ msgstr "&Замінити...        F4"
 msgid "&Go to line...            M-l"
 msgstr "&Перейти на рядок                M-l"
 
-#, fuzzy
 msgid "Toggle li&ne state        M-n"
-msgstr "&Перемикнути відмітку   F3"
+msgstr "Перемкнути стан рядка        M-n"
 
 msgid "Go to matching &bracket   M-b"
 msgstr "Перейти до парної &дужки         M-b"
 
 msgid "Find declaration      A-Enter"
-msgstr ""
+msgstr "Знайти об’явлення      A-Enter"
 
 msgid "Back from declaration     M--"
-msgstr ""
+msgstr "Повернутися з об’явлення     M--"
 
 msgid "Forward to declaration    M-+"
-msgstr ""
+msgstr "Перейти до об’явлення    M-+"
 
-#, fuzzy
 msgid "Encod&ing...             C-t"
-msgstr "&Сортувати                       M-t"
+msgstr "Кодування...             C-t"
 
 msgid "Insert &literal...       C-q"
 msgstr "Вставити &літерал...             C-q"
@@ -613,17 +594,14 @@ msgstr "Вивчення к&лавіш..."
 msgid "Syntax &Highlighting..."
 msgstr "&Підсвітка синтаксису"
 
-#, fuzzy
 msgid "S&yntax file"
-msgstr "Редагувати файл синтаксису"
+msgstr "Файл синтаксису"
 
-#, fuzzy
 msgid "&Menu file"
-msgstr "Редагувати файл &меню"
+msgstr "Файл меню"
 
-#, fuzzy
 msgid "Save setu&p"
-msgstr "&Зберегти установки"
+msgstr "&Зберегти налаштування"
 
 msgid " File "
 msgstr " Файл "
@@ -667,18 +645,17 @@ msgstr "Крок табуляції : "
 msgid "Cursor beyond end of line"
 msgstr ""
 
-#, fuzzy
 msgid "Pers&istent selection"
-msgstr "Інвер&тувати відмітку     M-*"
+msgstr "Наполегливе виділення"
 
 msgid "Synta&x highlighting"
 msgstr "&Підсвітка синтаксису"
 
 msgid "Visible tabs"
-msgstr ""
+msgstr "Видима табуляція"
 
 msgid "Visible trailing spaces"
-msgstr ""
+msgstr "Видимі висячі пробіли"
 
 msgid "Save file &position"
 msgstr "Зберегти позицію в файлі"
@@ -891,11 +868,10 @@ msgid "Sort order"
 msgstr "Порядок сортування"
 
 msgid "Executable first"
-msgstr ""
+msgstr "Виконувані першими"
 
-#, fuzzy
 msgid " confirm di&Rectory hotlist delete "
-msgstr "Список ката&логів           C-\\"
+msgstr " підтверджувати видалення гарячого списку каталогів "
 
 msgid " confirm &Exit "
 msgstr " перед ви&ходом"
@@ -912,9 +888,8 @@ msgstr " перед &видаленням"
 msgid " Confirmation "
 msgstr " Запит підтвердження "
 
-#, fuzzy
 msgid "UTF-8 output"
-msgstr "Повний 8&-бітний вивід"
+msgstr "Вивід UTF-8"
 
 msgid "Full 8 bits output"
 msgstr "Повний 8&-бітний вивід"
@@ -1018,7 +993,7 @@ msgid "Warning: file %s not found\n"
 msgstr "Увага: файл %s не знайдений\n"
 
 msgid "7-bit ASCII"
-msgstr ""
+msgstr "7-бітний ASCII"
 
 #, c-format
 msgid "Cannot translate from %s to %s"
@@ -1162,13 +1137,11 @@ msgstr " Задайте вираз для відбору назв файлів"
 msgid "&Using shell patterns"
 msgstr "&Шаблон оболонки"
 
-#, fuzzy
 msgid "&Case sensitive"
-msgstr "Врахування ре&гістру"
+msgstr "Регістрозалежний"
 
-#, fuzzy
 msgid "&Files only"
-msgstr "Лише &розмір"
+msgstr "Лише файли"
 
 msgid " Select "
 msgstr " Відмітити групу "
@@ -1273,9 +1246,10 @@ msgstr ""
 msgid " Setup "
 msgstr " Установки "
 
-#, fuzzy, c-format
+# , c-format
+#, c-format
 msgid " Setup saved to ~/%s"
-msgstr " Установки збережено у ~/"
+msgstr " Налаштування збережено до ~/%s"
 
 #, c-format
 msgid ""
@@ -1435,13 +1409,18 @@ msgstr ""
 " Не вдається отримати властивості вихідного файла \"%s\" \n"
 " %s "
 
-#, fuzzy, c-format
+# , c-format
+#, c-format
 msgid ""
 " `%s' \n"
 " and \n"
 " `%s' \n"
 " are the same file "
-msgstr " \"%s\" і \"%s\" це один і той же ж файл "
+msgstr ""
+" `%s' \n"
+" та \n"
+" `%s' \n"
+" є одним і тим же файлом "
 
 #, c-format
 msgid ""
@@ -1622,13 +1601,18 @@ msgstr ""
 " Не вдається видалити файл \"%s\" \n"
 " %s "
 
-#, fuzzy, c-format
+# , c-format
+#, c-format
 msgid ""
 " `%s' \n"
 " and \n"
 " `%s' \n"
 " are the same directory "
-msgstr " \"%s\" і \"%s\" це один і той же ж каталог "
+msgstr ""
+" `%s' \n"
+" та \n"
+" `%s' \n"
+" є одним і тим же каталогом "
 
 #, c-format
 msgid " Cannot overwrite directory \"%s\" %s "
@@ -1662,9 +1646,8 @@ msgstr ""
 " Не вдається видалити каталог \"%s\" \n"
 " %s "
 
-#, fuzzy
 msgid "Directory scanning"
-msgstr "Шлях до каталога"
+msgstr "Сканування каталога"
 
 msgid "1Copy"
 msgstr "1Cкопіювати"
@@ -1833,11 +1816,10 @@ msgstr "Зберігати симв&oльні посилання"
 msgid "&Dive into subdir if exists"
 msgstr "Ус&eредину каталога, якщо є"
 
-#, fuzzy, c-format
+# , c-format
+#, c-format
 msgid "Invalid source pattern `%s'"
-msgstr ""
-"Неправильний шаблон джерела \"%s\" \n"
-" %s "
+msgstr "Неправильний шаблон джерела `%s'"
 
 msgid "&Suspend"
 msgstr "При&зупинити"
@@ -1865,28 +1847,23 @@ msgstr "&Редагувати - F4"
 
 #, c-format
 msgid "Found: %ld"
-msgstr ""
+msgstr "Знайдено: %ld"
 
-#, fuzzy
 msgid " Malformed regular expression "
-msgstr "  Регулярний вираз сформовано невірно  "
+msgstr " Регулярний вираз сформовано невірно "
 
-#, fuzzy
 msgid "Cas&e sensitive"
-msgstr "Врахування ре&гістру"
+msgstr "Регістрозалежний"
 
-#, fuzzy
 msgid "&Find recursively"
-msgstr "знайти Р&екрусивно."
+msgstr "Шукати рекурсивно"
 
 msgid "S&kip hidden"
-msgstr ""
+msgstr "Пропускати приховані"
 
-#, fuzzy
 msgid "Case sens&itive"
-msgstr "Врахування ре&гістру"
+msgstr "Регістрозалежний"
 
-#, fuzzy
 msgid "Re&gular expression"
 msgstr "Р&eгулярний вираз"
 
@@ -1894,7 +1871,7 @@ msgid "Fir&st hit"
 msgstr ""
 
 msgid "All cha&rsets"
-msgstr ""
+msgstr "Усі кодування"
 
 msgid "&Tree"
 msgstr "Д&eрево"
@@ -1902,13 +1879,11 @@ msgstr "Д&eрево"
 msgid "Find File"
 msgstr "Знайти файл"
 
-#, fuzzy
 msgid "Content:"
-msgstr "Вміст: "
+msgstr "Вміст:"
 
-#, fuzzy
 msgid "File name:"
-msgstr "Назва файлу:"
+msgstr "Ім’я файлу:"
 
 msgid "Start at:"
 msgstr "Почати з:"
@@ -2024,6 +1999,8 @@ msgid ""
 "\n"
 " Are you sure you want to remove this entry?"
 msgstr ""
+"\n"
+" Ви впевнені у видаленні цього запису?"
 
 msgid ""
 "\n"
@@ -2040,10 +2017,12 @@ msgstr " Група верхнього рівня "
 msgid " Hotlist Load "
 msgstr " Завантаження довідника "
 
-#, fuzzy, c-format
+# , c-format
+#, c-format
 msgid ""
 "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
-msgstr " ваші старі елементи списку не було видалено"
+msgstr ""
+"MC не зміг записати файл ~/%s, Ваш старий список елементів не був видалений"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -2135,7 +2114,7 @@ msgid "&Horizontal"
 msgstr "&Горизонтальне"
 
 msgid "show free sp&Ace"
-msgstr ""
+msgstr "показувати вільне місце"
 
 msgid "&Xterm window title"
 msgstr "Заголовок вікна &xterm"
@@ -2264,7 +2243,7 @@ msgid "&Filter..."
 msgstr "&Фільтр..."
 
 msgid "&Encoding...    C-t"
-msgstr ""
+msgstr "Кодування...    C-t"
 
 msgid "&Network link..."
 msgstr "Ме&режне з'єднання..."
@@ -2362,9 +2341,8 @@ msgstr "&Вивід команди на панель    C-x !"
 msgid "show directory s&Izes"
 msgstr "Показати &розміри каталогів"
 
-#, fuzzy
 msgid "Command &history      M-h"
-msgstr " Історія команд "
+msgstr "Історія команд       M-h"
 
 msgid "di&Rectory hotlist    C-\\"
 msgstr "Список ката&логів           C-\\"
@@ -2450,10 +2428,10 @@ msgid "The TERM environment variable is unset!\n"
 msgstr "Змінна середовища TERM не встановлена!\n"
 
 msgid "&Fix it"
-msgstr ""
+msgstr "Виправити"
 
 msgid "don't ask again"
-msgstr ""
+msgstr "не питати знову"
 
 msgid ""
 "Chosen display charset (Settings->Display bits)\n"
@@ -2464,6 +2442,13 @@ msgid ""
 "\n"
 "Or set 'don't ask again' and press <<Skip>>"
 msgstr ""
+"Вибране кодування відображення (Параметри->Відображення символів...)\n"
+"або кодування джерела (ctrl-t у mcedit) \n"
+"не відповідає локалі. \n"
+"Встановіть правильне кодування вручну або натисніть <<Виправити>> \n"
+"для встановлення локалі за змовчуванням.\n"
+"\n"
+"Або оберіть \"не питати знову\" та натисніть <<Пропустити>>"
 
 #, c-format
 msgid "GNU Midnight Commander %s\n"
@@ -2487,7 +2472,6 @@ msgstr ""
 "Будь ласка, відсилайте будь які повідомлення про помилки\n"
 "(включаючи вивід \"mc -V\") на адресу mc-devel@gnome.org\n"
 
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2502,24 +2486,20 @@ msgid ""
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
-"--colors КЛЮЧ={ТЕКСТ},{ТЛО}\n"
+"--colors КЛЮЧ={ТЕКСТ},{ФОН}\n"
 "\n"
-"{ТЕКСТ} і {ТЛО} можна опустити, тоді буде використано типові значення\n"
+"{ТЕКСТ} і {ФОН} можна опустити, тоді буде використано значення за "
+"змовчуванням\n"
 "\n"
 "Ключі:\n"
-"   Глобальні:    errors, reverse, gauge, input\n"
+"   Глобальні:    errors, reverse, gauge, input, viewunderline\n"
 "   Показ файлів: normal, selected, marked, markselect\n"
-"   Діалоги:      dnormal, dfocus, dhotnormal, dhotfocus\n"
+"   Діалоги:      dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                 errdhotfocus\n"
 "   Меню:         menu, menuhot, menusel, menuhotsel\n"
 "   Довідка:      helpnormal, helpitalic, helplink, helpslink\n"
-"   Типи файлів:  directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Кольори:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
+"   Редактор:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
 
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
@@ -2532,6 +2512,15 @@ msgid ""
 "   brightcyan, lightgray and white\n"
 "\n"
 msgstr ""
+"   Допомога:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   Типи файлів:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Кольори:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
 
 msgid "Displays this help message"
 msgstr "Показує це довідкове повідомлення"
@@ -2593,9 +2582,10 @@ msgstr "Запускає програму перегляду для файлу"
 msgid "Edits one file"
 msgstr "Редагує один файл"
 
-#, fuzzy, c-format
+# , c-format
+#, c-format
 msgid "Cannot create %s directory"
-msgstr "Не вдалося змінити каталог"
+msgstr "Не вдалося створити каталог %s"
 
 msgid "safe de&Lete"
 msgstr "Безпечне &видалення"
@@ -2634,7 +2624,7 @@ msgid "&Verbose operation"
 msgstr "Подроби&ці операцій"
 
 msgid "Mkdir autoname"
-msgstr ""
+msgstr "Автоіменування створення каталогів"
 
 msgid "&Fast dir reload"
 msgstr "&Швидке перевантаження каталога"
@@ -2785,16 +2775,18 @@ msgstr "Група"
 msgid "<readlink failed>"
 msgstr "<збій зчитування посилання>"
 
-#, fuzzy, c-format
+# , c-format
+#, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
 msgstr[0] "%s байт"
 msgstr[1] "%s байт"
 
-#, fuzzy, c-format
+# , c-format
+#, c-format
 msgid "%s in %d file"
 msgid_plural "%s in %d files"
-msgstr[0] "%s байт у %d файлі"
+msgstr[0] "%s у файлі %d"
 msgstr[1] "%s байт у %d файлі"
 
 msgid "Unknown tag on display format: "
@@ -2819,30 +2811,30 @@ msgid "Mkdir"
 msgstr "СтвКат"
 
 msgid " Not implemented yet "
-msgstr ""
+msgstr " Ще не реалізовано "
 
 msgid " Num of replace tokens not equal to num of found tokens "
-msgstr ""
+msgstr " Кількість знаків заміни не рівне кількості знайдених знаків"
 
-#, fuzzy, c-format
+# , c-format
+#, c-format
 msgid " Invalid token number %d "
-msgstr " Неправильний шаблон цілі "
+msgstr " Неправильний номер %d елементу "
 
 msgid "Normal"
-msgstr ""
+msgstr "Нормальний"
 
 msgid "&Regular expression"
 msgstr "Р&eгулярний вираз"
 
 msgid "Hexadecimal"
-msgstr ""
+msgstr "Шістнадцятковий"
 
 msgid "Wildcard search"
-msgstr ""
+msgstr "Пошук по шаблону"
 
-#, fuzzy
 msgid "Choose codepage"
-msgstr " Виберіть кодування тексту "
+msgstr "Виберіть кодову сторінку"
 
 msgid "-  < No translation >"
 msgstr "-  < Без перекодування >"
@@ -2879,9 +2871,8 @@ msgstr "з базою terminfo"
 msgid "Using the ncurses library"
 msgstr "Використовую бібліотеку ncurses"
 
-#, fuzzy
 msgid "Using the ncursesw library"
-msgstr "Використовую бібліотеку ncurses"
+msgstr "Використовую бібліотеку ncursesw"
 
 msgid "With optional subshell support"
 msgstr "З опціональною підтримкою підоболонки"
@@ -3208,28 +3199,29 @@ msgstr " Збій каналу "
 msgid " Dup failed "
 msgstr " Збій дублювання дескриптора "
 
+# , c-format
 #, fuzzy, c-format
 msgid ""
 " The current line number is %lld.\n"
 " Enter the new line number:"
 msgstr ""
-" Номер поточного рядка %d.\n"
+" Номер поточного рядка %lu.\n"
 " Введіть номер нового рядка:"
 
+# , c-format
 #, fuzzy, c-format
 msgid ""
 " The current address is %s.\n"
 " Enter the new address:"
 msgstr ""
-" Номер поточного рядка %d.\n"
+" Номер поточного рядка %lu.\n"
 " Введіть номер нового рядка:"
 
 msgid " Goto Address "
 msgstr " Перейти на адресу "
 
-#, fuzzy
 msgid " Invalid address "
-msgstr " Неправильний пароль "
+msgstr " Невірна адреса"
 
 msgid " Cannot spawn child process "
 msgstr " Не вдається створити процес-нащадок "
@@ -3238,7 +3230,7 @@ msgid "Empty output from child filter"
 msgstr "Фільтр-нащадок не повернув даних"
 
 msgid "All charsets"
-msgstr ""
+msgstr "Усі кодування"
 
 msgid "ButtonBar|Help"
 msgstr "Нижня панель|Допомога"
@@ -3349,7 +3341,7 @@ msgid " Cannot view: not a regular file "
 msgstr " Не вдається показати: не звичайний файл "
 
 msgid "Seeking to search result"
-msgstr ""
+msgstr "Перехід до результату пошуку"
 
 msgid " History "
 msgstr "Історія команд"
@@ -3806,19 +3798,14 @@ msgstr "Зміни у файлі втрачені"
 #~ msgid "O&ne"
 #~ msgstr "&Oдин"
 
-#, fuzzy
 #~ msgid "%b %d %H:%M"
-#~ msgstr "%b %e %H:%M"
+#~ msgstr "%b %d %H:%M"
 
-#, fuzzy
 #~ msgid "%b %d %Y"
-#~ msgstr "%b %e  %Y"
+#~ msgstr "%b %d %Y"
 
-#, fuzzy
 #~ msgid " The current address is 0x%08"
-#~ msgstr ""
-#~ " Поточна адреса - 0x%lx.\n"
-#~ " Введіть нову адресу:"
+#~ msgstr " Поточна адреса 0x%08"
 
 #~ msgid "scanf &Expression"
 #~ msgstr "Вираз &scanf"
