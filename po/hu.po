@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-07-09 17:07+0300\n"
+"POT-Creation-Date: 2009-08-26 17:11+0300\n"
 "PO-Revision-Date: 2005-07-22 00:47+0200\n"
 "Last-Translator: Arpad Biro <biro_arpad@yahoo.com>\n"
 "Language-Team: Hungarian <debian-l10n-hungarian@lists.debian.org>\n"
@@ -328,14 +328,16 @@ msgstr " Nyomjon meg egy billentyűt: "
 msgid " Execute Macro "
 msgstr " Makró futtatása "
 
-msgid "pro&Mpt on replace"
-msgstr "Csere előtt kér&dés"
-
-msgid "replace &All"
-msgstr "Mindet &cserélni"
-
-msgid "All charsets"
+msgid "&All charsets"
 msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "Csak &teljes szót"
+
+#, fuzzy
+msgid "In se&lection"
+msgstr "Kijelölés megfor&dítása       M-*"
 
 msgid "&Backwards"
 msgstr "&Visszafelé"
@@ -352,15 +354,11 @@ msgstr " Keresendő minta:"
 msgid "Cancel"
 msgstr "Mégsem"
 
-# replace promptban van
-msgid "O&ne"
-msgstr "&Egyet"
+msgid "&Skip"
+msgstr "&Kihagyás"
 
 msgid "A&ll"
 msgstr "Min&det"
-
-msgid "&Skip"
-msgstr "&Kihagyás"
 
 msgid "&Replace"
 msgstr "&Csere"
@@ -487,19 +485,19 @@ msgid "&Paste from clipfile      S-Ins"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k               "
+msgid "Toggle bookmar&k            M-k"
 msgstr "&Kijelölés           F3"
 
 #, fuzzy
-msgid "&Next bookmark                 "
+msgid "&Next bookmark              M-j"
 msgstr "Ú&j                    C-n"
 
 #, fuzzy
-msgid "Pre&v bookmark                 "
+msgid "Pre&v bookmark              M-i"
 msgstr "Rendezé&s...                 M-t"
 
 #, fuzzy
-msgid "&Flush bookmark                "
+msgid "&Flush bookmark             M-o"
 msgstr "&E-mail...                      "
 
 #, fuzzy
@@ -524,6 +522,22 @@ msgstr "&Ugrás adott sorra...        M-l"
 
 msgid "&Paste from clipfile        C-y"
 msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "&Kijelölés           F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "Ú&j                    C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "Rendezé&s...                 M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "&E-mail...                      "
 
 msgid "&Search...         F7"
 msgstr "&Keresés...         F7"
@@ -667,6 +681,9 @@ msgstr "Sortörési pozíció: "
 
 msgid "Tab spacing: "
 msgstr "Tabulátor mérete: "
+
+msgid "Cursor beyond end of line"
+msgstr ""
 
 #, fuzzy
 msgid "Pers&istent selection"
@@ -1346,6 +1363,17 @@ msgstr "&Inode"
 msgid "Cannot read directory contents"
 msgstr "Nem sikerült beolvasni a könyvtár tartalmát"
 
+msgid ""
+" The Commander can't change to the directory that \n"
+" the subshell claims you are in.  Perhaps you have \n"
+" deleted your working directory, or given yourself \n"
+" extra access permissions with the \"su\" command? "
+msgstr ""
+" A Midnight Commander nem tud belépni abba a könyvtárba, \n"
+" amelyet a háttér-shell aktuálisként jelez. Elképzelhető, \n"
+" hogy törölve lett az aktuális könyvtár, vagy hogy Ön \n"
+" módosította a jogosultságait az \"Su\" programmal. "
+
 #, c-format
 msgid "Press any key to continue..."
 msgstr "Nyomjon meg egy billentyűt..."
@@ -1936,25 +1964,25 @@ msgid "Cas&e sensitive"
 msgstr "&Kis-/nagybetű számít"
 
 #, fuzzy
-msgid "Case sens&itive"
-msgstr "&Kis-/nagybetű számít"
-
-#, fuzzy
 msgid "&Find recursively"
 msgstr "Rek&urzív keresés"
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "&All charsets"
-msgstr ""
-
-msgid "All cha&rsets"
-msgstr ""
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "&Kis-/nagybetű számít"
 
 #, fuzzy
 msgid "Re&gular expression"
 msgstr "&Reguláris kifejezés"
+
+msgid "Fir&st hit"
+msgstr ""
+
+msgid "All cha&rsets"
+msgstr ""
 
 msgid "&Tree"
 msgstr "Köny&vtárfa"
@@ -2308,17 +2336,6 @@ msgstr "melyek nem lettek \"OK\"-val megjelölve. Ezek beállításához haszná
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "a Szóközt vagy kattintson a billentyűnévre. Ugrás: \"Tab\" billentyű."
-
-msgid ""
-" The Commander can't change to the directory that \n"
-" the subshell claims you are in.  Perhaps you have \n"
-" deleted your working directory, or given yourself \n"
-" extra access permissions with the \"su\" command? "
-msgstr ""
-" A Midnight Commander nem tud belépni abba a könyvtárba, \n"
-" amelyet a háttér-shell aktuálisként jelez. Elképzelhető, \n"
-" hogy törölve lett az aktuális könyvtár, vagy hogy Ön \n"
-" módosította a jogosultságait az \"Su\" programmal. "
 
 msgid " The Midnight Commander "
 msgstr " Midnight Commander "
@@ -2756,6 +2773,9 @@ msgstr "&Rejtett fájlok mutatása"
 msgid "show &Backup files"
 msgstr "Másol&atfájlok mutatása"
 
+msgid "Use SI si&ze units"
+msgstr ""
+
 msgid "&Never"
 msgstr "So&ha"
 
@@ -2956,14 +2976,6 @@ msgstr " Válasszon beviteli kódlapot "
 msgid "-  < No translation >"
 msgstr "-  < Nincs konverzió >"
 
-#, c-format
-msgid ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-msgstr ""
-"A(z) \"%dx%d\" képernyőméret nincs támogatva.\n"
-"Ellenőrizze a TERM környezeti változót.\n"
-
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -3081,202 +3093,6 @@ msgid ""
 msgstr ""
 "Nem sikerült írni a(z) \"%s\" fájlba:\n"
 "%s\n"
-
-msgid " Format error on file Extensions File "
-msgstr " Formátumhiba a kiterjesztésfájlban "
-
-#, c-format
-msgid " The %%var macro has no default "
-msgstr " A %%var makrónak nincs alapértéke "
-
-#, c-format
-msgid " The %%var macro has no variable "
-msgstr " A %%var makrónak nincs változója "
-
-msgid " Debug "
-msgstr " Nyomkövetés "
-
-msgid " ERROR: "
-msgstr " HIBA:  "
-
-msgid " True:  "
-msgstr " Igaz:  "
-
-msgid " False: "
-msgstr " Hamis: "
-
-msgid " Warning -- ignoring file "
-msgstr " Figyelem: a fájl figyelmen kívül hagyva "
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"A(z) \"%s\" fájlnak sem a rendszergazda, sem Ön\n"
-"nem tulajdonosa, vagy pedig mások által is írható. A használata\n"
-"gyengítheti a rendszer biztonságát."
-
-#, c-format
-msgid " No suitable entries found in %s "
-msgstr " Nincsenek megfelelő bejegyzések ebben: \"%s\" "
-
-msgid " User menu "
-msgstr " Felhasználói menü "
-
-#, fuzzy
-msgid "%b %d %H:%M"
-msgstr "%b %e %H.%M"
-
-#, fuzzy
-msgid "%b %d %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H.%M"
-
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "\"%s\" nem könyvtár\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "A(z) \"%s\" könyvtárnak nem Ön a tulajdonosa\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "Nem sikerült beállítani a jogokat a(z) \"%s\" könyvtárhoz.\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr ""
-"Nem sikerült létrehozni a(z) \"%s\" ideiglenes könyvtárt:\n"
-"%s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Az ideiglenes fájlok a(z) \"%s\" könyvtárban lesznek létrehozva\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Ideiglenes fájlok nem lesznek létrehozva\n"
-
-msgid " Pipe failed "
-msgstr " Csőfájl-hiba "
-
-msgid " Dup failed "
-msgstr " Sikertelen \"dup\" "
-
-msgid " Cannot spawn child process "
-msgstr " Nem sikerült programot indítani "
-
-msgid "Empty output from child filter"
-msgstr "A szűrő kimenete üres."
-
-#, c-format
-msgid ""
-" Cannot open \"%s\"\n"
-" %s "
-msgstr ""
-" Nem sikerült megnyitni a(z) \"%s\" fájlt. \n"
-" %s "
-
-#, c-format
-msgid ""
-" Cannot stat \"%s\"\n"
-" %s "
-msgstr ""
-" Nem sikerült lekérdezni a(z) \"%s\" \n"
-" fájl adatait. \n"
-" %s "
-
-msgid " Cannot view: not a regular file "
-msgstr " Nem lehet megjeleníteni - speciális fájl. "
-
-#, c-format
-msgid "File: %s"
-msgstr "Fájl: %s"
-
-#, c-format
-msgid "Offset 0x%08lx"
-msgstr "Pozíció: 0x%08lx"
-
-#, c-format
-msgid "Line %lu Col %lu"
-msgstr "Sor %lu Oszl %lu"
-
-# szóköz: elválasztáshoz
-#, c-format
-msgid "%s bytes"
-msgstr " %s bájt"
-
-# szóköz: elválasztáshoz
-#, c-format
-msgid ">= %s bytes"
-msgstr " >= %s bájt"
-
-#, c-format
-msgid ""
-" Error while closing the file: \n"
-" %s \n"
-" Data may have been written or not. "
-msgstr ""
-" Hiba a fájl lezárásakor: \n"
-" %s \n"
-" Lehetséges, hogy az adatok nem lettek kiírva. "
-
-#, c-format
-msgid ""
-" Cannot save file: \n"
-" %s "
-msgstr ""
-" Nem sikerült a mentés: \n"
-" %s "
-
-#, fuzzy, c-format
-msgid ""
-" The current line number is %lu.\n"
-" Enter the new line number:"
-msgstr ""
-" Hanyadik sorra kíván ugrani?\n"
-" (Az aktuális sor: %d.)"
-
-#, fuzzy
-msgid " The current address is 0x%08"
-msgstr ""
-" Adja meg az új címet\n"
-" (az aktuális cím: 0x%lx):"
-
-msgid " Goto Address "
-msgstr " Ugrás a megadott címre "
-
-#, fuzzy
-msgid " Invalid address "
-msgstr " Hibás jelszó "
-
-msgid "Seeking to search result"
-msgstr ""
-
-msgid "ButtonBar|Help"
-msgstr "Súgó"
-
-msgid "ButtonBar|Quit"
-msgstr "Kilép"
-
-msgid "ButtonBar|View"
-msgstr "Megnéz"
-
-msgid "ButtonBar|Edit"
-msgstr "Szerk"
-
-msgid "ButtonBar|Save"
-msgstr "Mentés"
-
-msgid " History "
-msgstr " Előzmények "
 
 msgid "Function key 1"
 msgstr "F1  funkcióbill."
@@ -3416,11 +3232,265 @@ msgstr "\"Delete\" - numer."
 msgid "Enter on keypad"
 msgstr "\"Enter\" - numer."
 
+#, fuzzy
+msgid "Tab on keypad"
+msgstr "\"+\" - numerikus"
+
+#, fuzzy
+msgid "Space on keypad"
+msgstr "\"/\" - numerikus"
+
 msgid "Slash on keypad"
 msgstr "\"/\" - numerikus"
 
 msgid "NumLock on keypad"
 msgstr "\"Num Lock\" - num."
+
+msgid "Ctrl"
+msgstr ""
+
+msgid "Alt"
+msgstr ""
+
+msgid "Shift"
+msgstr ""
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"A(z) \"%dx%d\" képernyőméret nincs támogatva.\n"
+"Ellenőrizze a TERM környezeti változót.\n"
+
+msgid " Format error on file Extensions File "
+msgstr " Formátumhiba a kiterjesztésfájlban "
+
+#, c-format
+msgid " The %%var macro has no default "
+msgstr " A %%var makrónak nincs alapértéke "
+
+#, c-format
+msgid " The %%var macro has no variable "
+msgstr " A %%var makrónak nincs változója "
+
+msgid " Debug "
+msgstr " Nyomkövetés "
+
+msgid " ERROR: "
+msgstr " HIBA:  "
+
+msgid " True:  "
+msgstr " Igaz:  "
+
+msgid " False: "
+msgstr " Hamis: "
+
+msgid " Warning -- ignoring file "
+msgstr " Figyelem: a fájl figyelmen kívül hagyva "
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"A(z) \"%s\" fájlnak sem a rendszergazda, sem Ön\n"
+"nem tulajdonosa, vagy pedig mások által is írható. A használata\n"
+"gyengítheti a rendszer biztonságát."
+
+#, c-format
+msgid " No suitable entries found in %s "
+msgstr " Nincsenek megfelelő bejegyzések ebben: \"%s\" "
+
+msgid " User menu "
+msgstr " Felhasználói menü "
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H.%M"
+
+#, c-format
+msgid "%s is not a directory\n"
+msgstr "\"%s\" nem könyvtár\n"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr "A(z) \"%s\" könyvtárnak nem Ön a tulajdonosa\n"
+
+#, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr "Nem sikerült beállítani a jogokat a(z) \"%s\" könyvtárhoz.\n"
+
+#, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr ""
+"Nem sikerült létrehozni a(z) \"%s\" ideiglenes könyvtárt:\n"
+"%s\n"
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr "Az ideiglenes fájlok a(z) \"%s\" könyvtárban lesznek létrehozva\n"
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr "Ideiglenes fájlok nem lesznek létrehozva\n"
+
+msgid " Pipe failed "
+msgstr " Csőfájl-hiba "
+
+msgid " Dup failed "
+msgstr " Sikertelen \"dup\" "
+
+#, fuzzy, c-format
+msgid ""
+" The current line number is %lld.\n"
+" Enter the new line number:"
+msgstr ""
+" Hanyadik sorra kíván ugrani?\n"
+" (Az aktuális sor: %d.)"
+
+#, fuzzy, c-format
+msgid ""
+" The current address is %s.\n"
+" Enter the new address:"
+msgstr ""
+" Hanyadik sorra kíván ugrani?\n"
+" (Az aktuális sor: %d.)"
+
+msgid " Goto Address "
+msgstr " Ugrás a megadott címre "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " Hibás jelszó "
+
+msgid " Cannot spawn child process "
+msgstr " Nem sikerült programot indítani "
+
+msgid "Empty output from child filter"
+msgstr "A szűrő kimenete üres."
+
+msgid "All charsets"
+msgstr ""
+
+msgid "ButtonBar|Help"
+msgstr "Súgó"
+
+msgid "ButtonBar|Quit"
+msgstr "Kilép"
+
+msgid "ButtonBar|Ascii"
+msgstr "ASCII"
+
+msgid "ButtonBar|Hex"
+msgstr "Hex"
+
+msgid "ButtonBar|Goto"
+msgstr "Ugrás"
+
+msgid "ButtonBar|Line"
+msgstr "UgrSor"
+
+msgid "ButtonBar|View"
+msgstr "Megnéz"
+
+msgid "ButtonBar|Edit"
+msgstr "Szerk"
+
+msgid "ButtonBar|Save"
+msgstr "Mentés"
+
+msgid "ButtonBar|UnWrap"
+msgstr "NemTör"
+
+msgid "ButtonBar|Wrap"
+msgstr "SorTör"
+
+msgid "ButtonBar|HxSrch"
+msgstr "HexKer"
+
+msgid "ButtonBar|Search"
+msgstr "Keresés"
+
+msgid "ButtonBar|Raw"
+msgstr "Nyers"
+
+msgid "ButtonBar|Parse"
+msgstr "Értelm"
+
+msgid "ButtonBar|Unform"
+msgstr "NemForm"
+
+msgid "ButtonBar|Format"
+msgstr "Formáz"
+
+#, c-format
+msgid "File: %s"
+msgstr "Fájl: %s"
+
+#, c-format
+msgid "Offset 0x%08lx"
+msgstr "Pozíció: 0x%08lx"
+
+#, c-format
+msgid "Line %lu Col %lu"
+msgstr "Sor %lu Oszl %lu"
+
+# szóköz: elválasztáshoz
+#, c-format
+msgid "%s bytes"
+msgstr " %s bájt"
+
+# szóköz: elválasztáshoz
+#, c-format
+msgid ">= %s bytes"
+msgstr " >= %s bájt"
+
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+" Hiba a fájl lezárásakor: \n"
+" %s \n"
+" Lehetséges, hogy az adatok nem lettek kiírva. "
+
+#, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr ""
+" Nem sikerült a mentés: \n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot open \"%s\"\n"
+" %s "
+msgstr ""
+" Nem sikerült megnyitni a(z) \"%s\" fájlt. \n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot stat \"%s\"\n"
+" %s "
+msgstr ""
+" Nem sikerült lekérdezni a(z) \"%s\" \n"
+" fájl adatait. \n"
+" %s "
+
+msgid " Cannot view: not a regular file "
+msgstr " Nem lehet megjeleníteni - speciális fájl. "
+
+msgid "Seeking to search result"
+msgstr ""
+
+msgid " History "
+msgstr " Előzmények "
 
 msgid "Background process:"
 msgstr "Háttérfolyamat:"
@@ -3602,8 +3672,9 @@ msgstr "Ftpfs: nem sikerült bejelentkezni ezen a néven: %s "
 msgid "ftpfs: Invalid host name."
 msgstr "Ftpfs: hibás gépnév"
 
-msgid "ftpfs: Invalid host address."
-msgstr "Ftpfs: hibás gépnév/-cím"
+#, c-format
+msgid "ftpfs: %s"
+msgstr ""
 
 #, c-format
 msgid "ftpfs: making connection to %s"
@@ -3619,6 +3690,18 @@ msgstr "Ftpfs: nem sikerült kapcsolódni a kiszolgálóhoz: %s"
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Várakozás újabb próbához... %d  (megszakítás: \"Ctrl-C\")"
+
+#, fuzzy
+msgid "ftpfs: invalid address family"
+msgstr "Ftpfs: hibás gépnév/-cím"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not setup passive mode: %s"
+msgstr "Ftpfs: nem sikerült passzív módot beállítani"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not create socket: %s"
+msgstr " Nem sikerült az aljazat létrehozása: %s "
 
 msgid "ftpfs: could not setup passive mode"
 msgstr "Ftpfs: nem sikerült passzív módot beállítani"
@@ -3865,11 +3948,32 @@ msgstr "Belső programhiba:"
 msgid "Changes to file lost"
 msgstr "A fájl módosításai nem lettek rögzítve."
 
+#~ msgid "pro&Mpt on replace"
+#~ msgstr "Csere előtt kér&dés"
+
+#~ msgid "replace &All"
+#~ msgstr "Mindet &cserélni"
+
+# replace promptban van
+#~ msgid "O&ne"
+#~ msgstr "&Egyet"
+
+#, fuzzy
+#~ msgid "%b %d %H:%M"
+#~ msgstr "%b %e %H.%M"
+
+#, fuzzy
+#~ msgid "%b %d %Y"
+#~ msgstr "%b %e  %Y"
+
+#, fuzzy
+#~ msgid " The current address is 0x%08"
+#~ msgstr ""
+#~ " Adja meg az új címet\n"
+#~ " (az aktuális cím: 0x%lx):"
+
 #~ msgid "scanf &Expression"
 #~ msgstr "&Scanf-kifejezés"
-
-#~ msgid "&Whole words only"
-#~ msgstr "Csak &teljes szót"
 
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr " Cserélendő részminták sorrendje (például 3,2,1,4) "
@@ -3926,44 +4030,8 @@ msgstr "A fájl módosításai nem lettek rögzítve."
 #~ msgid " Enter regexp:"
 #~ msgstr " Reguláris kifejezés:"
 
-#~ msgid "ButtonBar|Ascii"
-#~ msgstr "ASCII"
-
-#~ msgid "ButtonBar|Hex"
-#~ msgstr "Hex"
-
-#~ msgid "ButtonBar|Goto"
-#~ msgstr "Ugrás"
-
-#~ msgid "ButtonBar|Line"
-#~ msgstr "UgrSor"
-
-#~ msgid "ButtonBar|UnWrap"
-#~ msgstr "NemTör"
-
-#~ msgid "ButtonBar|Wrap"
-#~ msgstr "SorTör"
-
 #~ msgid "ButtonBar|RxSrch"
 #~ msgstr "RegKer"
-
-#~ msgid "ButtonBar|HxSrch"
-#~ msgstr "HexKer"
-
-#~ msgid "ButtonBar|Search"
-#~ msgstr "Keresés"
-
-#~ msgid "ButtonBar|Raw"
-#~ msgstr "Nyers"
-
-#~ msgid "ButtonBar|Parse"
-#~ msgstr "Értelm"
-
-#~ msgid "ButtonBar|Unform"
-#~ msgstr "NemForm"
-
-#~ msgid "ButtonBar|Format"
-#~ msgstr "Formáz"
 
 #~ msgid "Using included S-Lang library"
 #~ msgstr "A szoftverrel szállított S-Lang könyvtár használata"

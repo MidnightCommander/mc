@@ -13,12 +13,11 @@
 # Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005.
 # Andrew Borodin <aborodin@vmail.ru> 2009
 # Ilia Maslakov <il.smind@gmail.com> 2009
-
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-06-27 13:41+0400\n"
+"POT-Creation-Date: 2009-08-26 17:11+0300\n"
 "PO-Revision-Date: 2005-09-09 14:37+0300\n"
 "Last-Translator: Anton S. Chumak <nightfast@yahoo.co.uk>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
@@ -326,14 +325,15 @@ msgstr " Нажмите любую клавишу: "
 msgid " Execute Macro "
 msgstr " Выполнить макрос "
 
-msgid "pro&Mpt on replace"
-msgstr "Подтверждать &замену"
+msgid "&All charsets"
+msgstr "&Все кодировки"
 
-msgid "replace &All"
-msgstr "Заменить &всё"
+msgid "&Whole words"
+msgstr ""
 
-msgid "All charsets"
-msgstr "Все кодировки"
+#, fuzzy
+msgid "In se&lection"
+msgstr "Постоянные блоки"
 
 msgid "&Backwards"
 msgstr "&Назад"
@@ -350,14 +350,11 @@ msgstr " Введите строку для поиска:"
 msgid "Cancel"
 msgstr "Прервать"
 
-msgid "O&ne"
-msgstr "&Один"
+msgid "&Skip"
+msgstr "П&ропустить"
 
 msgid "A&ll"
 msgstr "&Все"
-
-msgid "&Skip"
-msgstr "П&ропустить"
 
 msgid "&Replace"
 msgstr "&Заменить"
@@ -473,16 +470,20 @@ msgstr "Вырезать в файл клипборда       S-Del"
 msgid "&Paste from clipfile      S-Ins"
 msgstr "Вставить из файла клипборда     S-Ins"
 
-msgid "Toggle bookmar&k               "
+#, fuzzy
+msgid "Toggle bookmar&k            M-k"
 msgstr "Установить/снять закладку     "
 
-msgid "&Next bookmark                 "
+#, fuzzy
+msgid "&Next bookmark              M-j"
 msgstr "К следующей закладке          "
 
-msgid "Pre&v bookmark                 "
+#, fuzzy
+msgid "Pre&v bookmark              M-i"
 msgstr "К предыдуще закладке          "
 
-msgid "&Flush bookmark                "
+#, fuzzy
+msgid "&Flush bookmark             M-o"
 msgstr "Убрать все закладки           "
 
 msgid "&Undo                       C-u"
@@ -502,6 +503,18 @@ msgstr "Вырезать в файл клипборда         C-w"
 
 msgid "&Paste from clipfile        C-y"
 msgstr "Вставить из файла клипборда       C-y"
+
+msgid "Toggle bookmar&k               "
+msgstr "Установить/снять закладку     "
+
+msgid "&Next bookmark                 "
+msgstr "К следующей закладке          "
+
+msgid "Pre&v bookmark                 "
+msgstr "К предыдуще закладке          "
+
+msgid "&Flush bookmark                "
+msgstr "Убрать все закладки           "
 
 msgid "&Search...         F7"
 msgstr "&Поиск...          F7"
@@ -638,11 +651,20 @@ msgstr "Позиция переноса строк:"
 msgid "Tab spacing: "
 msgstr "Шаг табуляции: "
 
+msgid "Cursor beyond end of line"
+msgstr ""
+
 msgid "Pers&istent selection"
 msgstr "Постоянные блоки"
 
 msgid "Synta&x highlighting"
 msgstr "&Цветовыделение синтаксиса"
+
+msgid "Visible tabs"
+msgstr ""
+
+msgid "Visible trailing spaces"
+msgstr ""
 
 msgid "Save file &position"
 msgstr "Со&хранять позицию в файле"
@@ -979,6 +1001,9 @@ msgstr "Пароль для \\\\%s\\%s"
 msgid "Warning: file %s not found\n"
 msgstr "Предупреждение: файл %s не найден\n"
 
+msgid "7-bit ASCII"
+msgstr ""
+
 #, c-format
 msgid "Cannot translate from %s to %s"
 msgstr "Невозможно перекодировать из %s в %s"
@@ -1274,6 +1299,17 @@ msgstr "&Узел"
 
 msgid "Cannot read directory contents"
 msgstr "Невозможно прочесть содержимое каталога"
+
+msgid ""
+" The Commander can't change to the directory that \n"
+" the subshell claims you are in.  Perhaps you have \n"
+" deleted your working directory, or given yourself \n"
+" extra access permissions with the \"su\" command? "
+msgstr ""
+" MC не может перейти в каталог, который ему \n"
+" сообщил дочерний процесс интерпретатора. Может, вы \n"
+" удалили рабочий каталог или дали себе дополнительные \n"
+" привилегии доступа при помощи команды \"su\"? "
 
 #, c-format
 msgid "Press any key to continue..."
@@ -1825,23 +1861,23 @@ msgstr " Регулярное выражение сформировано нев
 msgid "Cas&e sensitive"
 msgstr "Учет ре&гистра"
 
-msgid "Case sens&itive"
-msgstr "Учет ре&гистра"
-
 msgid "&Find recursively"
 msgstr "Найти ре&курсивно"
 
 msgid "S&kip hidden"
 msgstr "Пропускать скр&ытые"
 
-msgid "&All charsets"
-msgstr "&Все кодировки"
-
-msgid "All cha&rsets"
-msgstr "Все коди&ровки"
+msgid "Case sens&itive"
+msgstr "Учет ре&гистра"
 
 msgid "Re&gular expression"
 msgstr "&Регулярное выражение"
+
+msgid "Fir&st hit"
+msgstr ""
+
+msgid "All cha&rsets"
+msgstr "Все коди&ровки"
 
 msgid "&Tree"
 msgstr "Д&ерево"
@@ -2192,17 +2228,6 @@ msgstr "какие клавиши не имеют пометки \"OK\". Для 
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "ее при помощи Tab или мышкой и нажмите пробел."
 
-msgid ""
-" The Commander can't change to the directory that \n"
-" the subshell claims you are in.  Perhaps you have \n"
-" deleted your working directory, or given yourself \n"
-" extra access permissions with the \"su\" command? "
-msgstr ""
-" MC не может перейти в каталог, который ему \n"
-" сообщил дочерний процесс интерпретатора. Может, вы \n"
-" удалили рабочий каталог или дали себе дополнительные \n"
-" привилегии доступа при помощи команды \"su\"? "
-
 msgid " The Midnight Commander "
 msgstr " Midnight Commander "
 
@@ -2475,7 +2500,8 @@ msgstr ""
 "Ключевые слова:\n"
 "   Обшие:              errors, reverse, gauge, input, viewunderline\n"
 "   Отображение файлов: normal, selected, marked, markselect\n"
-"   Диалоги:            dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"   Диалоги:            dnormal, dfocus, dhotnormal, dhotfocus, "
+"errdhotnormal,\n"
 "                       errdhotfocus\n"
 "   Меню:               menu, menuhot, menusel, menuhotsel\n"
 "   Редактор:           editnormal, editbold, editmarked, editwhitespace,\n"
@@ -2492,7 +2518,8 @@ msgid ""
 "   brightcyan, lightgray and white\n"
 "\n"
 msgstr ""
-"   Справка:            helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   Справка:            helpnormal, helpitalic, helpbold, helplink, "
+"helpslink\n"
 "   Типы файлов:        directory, executable, link, stalelink, device, "
 "special, core\n"
 "\n"
@@ -2622,6 +2649,9 @@ msgstr "Показывать скр&ытые файлы"
 
 msgid "show &Backup files"
 msgstr "Показывать ре&зервные файлы"
+
+msgid "Use SI si&ze units"
+msgstr ""
 
 msgid "&Never"
 msgstr "&Никогда"
@@ -2814,14 +2844,6 @@ msgstr "Выберите кодировку"
 msgid "-  < No translation >"
 msgstr "-  < Без перекодировки >"
 
-#, c-format
-msgid ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-msgstr ""
-"Размер экрана %dx%d не поддерживается.\n"
-"Проверьте переменную окружения TERM.\n"
-
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -2935,188 +2957,6 @@ msgid ""
 msgstr ""
 "Невозможно писать в файл %s:\n"
 "%s\n"
-
-msgid " Format error on file Extensions File "
-msgstr " Ошибка в формате файла Расширений файлов "
-
-#, c-format
-msgid " The %%var macro has no default "
-msgstr " Макрос %%var не имеет значения по умолчанию "
-
-#, c-format
-msgid " The %%var macro has no variable "
-msgstr " Макрос %%var не имеет переменной "
-
-msgid " Debug "
-msgstr " Отладка "
-
-msgid " ERROR: "
-msgstr " ОШИБКА: "
-
-msgid " True:  "
-msgstr " Истина: "
-
-msgid " False: "
-msgstr " Ложь: "
-
-msgid " Warning -- ignoring file "
-msgstr " Предупреждение - файл игнорируется "
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"Файл %s в текущем каталоге не принадлежит ни root'у, ни Вам,\n"
-"или доступен другим на запись. Использование такого файла неприемлемо\n"
-"c точки зрения безопасности."
-
-#, c-format
-msgid " No suitable entries found in %s "
-msgstr " Не найдено подходящих элементов в %s"
-
-msgid " User menu "
-msgstr " Меню пользователя "
-
-msgid "%b %d %H:%M"
-msgstr "%b %e %H:%M"
-
-msgid "%b %d %Y"
-msgstr "%b %e %Y"
-
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s не является каталогом\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "Вы не владеете каталогом %s\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "Невозможно установить правильные права доступа к каталогу %s\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr "Невозможно создать временный каталог %s: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Временные файлы будут создаваться в каталоге %s\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Временные файлы не будут создаваться\n"
-
-msgid " Pipe failed "
-msgstr " Сбой канала "
-
-msgid " Dup failed "
-msgstr " Сбой дублирования дескриптора "
-
-msgid " Cannot spawn child process "
-msgstr " Невозможно породить дочерний процесс "
-
-msgid "Empty output from child filter"
-msgstr "Дочерний фильтр не вернул данных"
-
-#, c-format
-msgid ""
-" Cannot open \"%s\"\n"
-" %s "
-msgstr ""
-" Невозможно открыть \"%s\"\n"
-" %s "
-
-#, c-format
-msgid ""
-" Cannot stat \"%s\"\n"
-" %s "
-msgstr ""
-" Невозможно получить свойства \"%s\"\n"
-" %s "
-
-msgid " Cannot view: not a regular file "
-msgstr " Просмотр невозможен: необычный файл "
-
-#, c-format
-msgid "File: %s"
-msgstr "Файл: %s"
-
-#, c-format
-msgid "Offset 0x%08lx"
-msgstr "Смещение 0x%08lx"
-
-#, c-format
-msgid "Line %lu Col %lu"
-msgstr "Строка %lu Позиция %lu"
-
-#, c-format
-msgid "%s bytes"
-msgstr "%s байт"
-
-#, c-format
-msgid ">= %s bytes"
-msgstr ">= %s байт"
-
-#, c-format
-msgid ""
-" Error while closing the file: \n"
-" %s \n"
-" Data may have been written or not. "
-msgstr ""
-"Ошибка при закрытии файла: \n"
-" %s \n"
-"Данные могли быть как записаны так и нет."
-
-#, c-format
-msgid ""
-" Cannot save file: \n"
-" %s "
-msgstr ""
-" Невозможно сохранить файл: \n"
-" %s "
-
-#, c-format
-msgid ""
-" The current line number is %lu.\n"
-" Enter the new line number:"
-msgstr ""
-" Номер текущей строки %lu.\n"
-" Введите номер новой строки:"
-
-msgid " The current address is 0x%08"
-msgstr "  Текущий адрес - 0x%08"
-
-msgid " Goto Address "
-msgstr " Перейти на адрес "
-
-msgid " Invalid address "
-msgstr " Неверный адрес "
-
-msgid "ButtonBar|Help"
-msgstr "Нижняя панель|Помощ"
-
-msgid "ButtonBar|Quit"
-msgstr "Нижняя панель|Выход"
-
-msgid "ButtonBar|View"
-msgstr "Нижняя панель|Вид"
-
-msgid "ButtonBar|Edit"
-msgstr "Нижняя панель|Правка"
-
-msgid "ButtonBar|Save"
-msgstr "Нижняя панель|Сохранить"
-
-msgid " History "
-msgstr "История команд"
 
 msgid "Function key 1"
 msgstr "Функциональная 1 "
@@ -3256,11 +3096,271 @@ msgstr "Delete on keypad"
 msgid "Enter on keypad"
 msgstr "Enter on keypad"
 
+#, fuzzy
+msgid "Tab on keypad"
+msgstr "+ доп.клавиатуры "
+
+#, fuzzy
+msgid "Space on keypad"
+msgstr "Slash on keypad"
+
 msgid "Slash on keypad"
 msgstr "Slash on keypad"
 
 msgid "NumLock on keypad"
 msgstr "NumLock on keypad"
+
+msgid "Ctrl"
+msgstr ""
+
+msgid "Alt"
+msgstr ""
+
+msgid "Shift"
+msgstr ""
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"Размер экрана %dx%d не поддерживается.\n"
+"Проверьте переменную окружения TERM.\n"
+
+msgid " Format error on file Extensions File "
+msgstr " Ошибка в формате файла Расширений файлов "
+
+#, c-format
+msgid " The %%var macro has no default "
+msgstr " Макрос %%var не имеет значения по умолчанию "
+
+#, c-format
+msgid " The %%var macro has no variable "
+msgstr " Макрос %%var не имеет переменной "
+
+msgid " Debug "
+msgstr " Отладка "
+
+msgid " ERROR: "
+msgstr " ОШИБКА: "
+
+msgid " True:  "
+msgstr " Истина: "
+
+msgid " False: "
+msgstr " Ложь: "
+
+msgid " Warning -- ignoring file "
+msgstr " Предупреждение - файл игнорируется "
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"Файл %s в текущем каталоге не принадлежит ни root'у, ни Вам,\n"
+"или доступен другим на запись. Использование такого файла неприемлемо\n"
+"c точки зрения безопасности."
+
+#, c-format
+msgid " No suitable entries found in %s "
+msgstr " Не найдено подходящих элементов в %s"
+
+msgid " User menu "
+msgstr " Меню пользователя "
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
+
+#, c-format
+msgid "%s is not a directory\n"
+msgstr "%s не является каталогом\n"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr "Вы не владеете каталогом %s\n"
+
+#, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr "Невозможно установить правильные права доступа к каталогу %s\n"
+
+#, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr "Невозможно создать временный каталог %s: %s\n"
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr "Временные файлы будут создаваться в каталоге %s\n"
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr "Временные файлы не будут создаваться\n"
+
+msgid " Pipe failed "
+msgstr " Сбой канала "
+
+msgid " Dup failed "
+msgstr " Сбой дублирования дескриптора "
+
+#, fuzzy, c-format
+msgid ""
+" The current line number is %lld.\n"
+" Enter the new line number:"
+msgstr ""
+" Номер текущей строки %lu.\n"
+" Введите номер новой строки:"
+
+#, fuzzy, c-format
+msgid ""
+" The current address is %s.\n"
+" Enter the new address:"
+msgstr ""
+" Номер текущей строки %lu.\n"
+" Введите номер новой строки:"
+
+msgid " Goto Address "
+msgstr " Перейти на адрес "
+
+msgid " Invalid address "
+msgstr " Неверный адрес "
+
+msgid " Cannot spawn child process "
+msgstr " Невозможно породить дочерний процесс "
+
+msgid "Empty output from child filter"
+msgstr "Дочерний фильтр не вернул данных"
+
+msgid "All charsets"
+msgstr "Все кодировки"
+
+msgid "ButtonBar|Help"
+msgstr "Нижняя панель|Помощ"
+
+msgid "ButtonBar|Quit"
+msgstr "Нижняя панель|Выход"
+
+#, fuzzy
+msgid "ButtonBar|Ascii"
+msgstr "Нижняя панель|Выход"
+
+#, fuzzy
+msgid "ButtonBar|Hex"
+msgstr "Нижняя панель|Помощ"
+
+#, fuzzy
+msgid "ButtonBar|Goto"
+msgstr "Нижняя панель|Выход"
+
+#, fuzzy
+msgid "ButtonBar|Line"
+msgstr "Нижняя панель|Вид"
+
+msgid "ButtonBar|View"
+msgstr "Нижняя панель|Вид"
+
+msgid "ButtonBar|Edit"
+msgstr "Нижняя панель|Правка"
+
+msgid "ButtonBar|Save"
+msgstr "Нижняя панель|Сохранить"
+
+#, fuzzy
+msgid "ButtonBar|UnWrap"
+msgstr "Нижняя панель|Помощ"
+
+#, fuzzy
+msgid "ButtonBar|Wrap"
+msgstr "Нижняя панель|Помощ"
+
+#, fuzzy
+msgid "ButtonBar|HxSrch"
+msgstr "Нижняя панель|Помощ"
+
+#, fuzzy
+msgid "ButtonBar|Search"
+msgstr "Нижняя панель|Сохранить"
+
+#, fuzzy
+msgid "ButtonBar|Raw"
+msgstr "Нижняя панель|Вид"
+
+#, fuzzy
+msgid "ButtonBar|Parse"
+msgstr "Нижняя панель|Сохранить"
+
+#, fuzzy
+msgid "ButtonBar|Unform"
+msgstr "Нижняя панель|Помощ"
+
+#, fuzzy
+msgid "ButtonBar|Format"
+msgstr "Нижняя панель|Выход"
+
+#, c-format
+msgid "File: %s"
+msgstr "Файл: %s"
+
+#, c-format
+msgid "Offset 0x%08lx"
+msgstr "Смещение 0x%08lx"
+
+#, c-format
+msgid "Line %lu Col %lu"
+msgstr "Строка %lu Позиция %lu"
+
+#, c-format
+msgid "%s bytes"
+msgstr "%s байт"
+
+#, c-format
+msgid ">= %s bytes"
+msgstr ">= %s байт"
+
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+"Ошибка при закрытии файла: \n"
+" %s \n"
+"Данные могли быть как записаны так и нет."
+
+#, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr ""
+" Невозможно сохранить файл: \n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot open \"%s\"\n"
+" %s "
+msgstr ""
+" Невозможно открыть \"%s\"\n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot stat \"%s\"\n"
+" %s "
+msgstr ""
+" Невозможно получить свойства \"%s\"\n"
+" %s "
+
+msgid " Cannot view: not a regular file "
+msgstr " Просмотр невозможен: необычный файл "
+
+msgid "Seeking to search result"
+msgstr ""
+
+msgid " History "
+msgstr "История команд"
 
 msgid "Background process:"
 msgstr "Фоновый процесс:"
@@ -3439,8 +3539,9 @@ msgstr "ftpfs: ошибка регистрации пользователя %s "
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: неверное имя системы."
 
-msgid "ftpfs: Invalid host address."
-msgstr "ftpfs: неверный адрес системы."
+#, c-format
+msgid "ftpfs: %s"
+msgstr ""
 
 #, c-format
 msgid "ftpfs: making connection to %s"
@@ -3456,6 +3557,18 @@ msgstr "ftpfs: сбой соединения с сервером: %s"
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Ожидание повтора попытки... %d (Control-C для отмены)"
+
+#, fuzzy
+msgid "ftpfs: invalid address family"
+msgstr "ftpfs: неверный адрес системы."
+
+#, fuzzy, c-format
+msgid "ftpfs: could not setup passive mode: %s"
+msgstr "ftpfs: невозможно установить пассивный режим"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not create socket: %s"
+msgstr " Невозможно создать сокет: %s "
 
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: невозможно установить пассивный режим"
@@ -3692,3 +3805,20 @@ msgstr "Внутренняя ошибка:"
 msgid "Changes to file lost"
 msgstr "Изменения для файла потеряны"
 
+#~ msgid "pro&Mpt on replace"
+#~ msgstr "Подтверждать &замену"
+
+#~ msgid "replace &All"
+#~ msgstr "Заменить &всё"
+
+#~ msgid "O&ne"
+#~ msgstr "&Один"
+
+#~ msgid "%b %d %H:%M"
+#~ msgstr "%b %e %H:%M"
+
+#~ msgid "%b %d %Y"
+#~ msgstr "%b %e %Y"
+
+#~ msgid " The current address is 0x%08"
+#~ msgstr "  Текущий адрес - 0x%08"

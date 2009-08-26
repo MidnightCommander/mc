@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-07-09 17:07+0300\n"
+"POT-Creation-Date: 2009-08-26 17:11+0300\n"
 "PO-Revision-Date: 2008-06-05 17:36+0100\n"
 "Last-Translator: Anna Talianova <anickat1@gmail.com>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
@@ -318,14 +318,16 @@ msgstr " Stiskněte libovolnou klávesu: "
 msgid " Execute Macro "
 msgstr " Spustit makro "
 
-msgid "pro&Mpt on replace"
-msgstr "&Dotaz na nahrazení"
-
-msgid "replace &All"
-msgstr "Nahradit &Vše"
-
-msgid "All charsets"
+msgid "&All charsets"
 msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "Pouze &Celá slova"
+
+#, fuzzy
+msgid "In se&lection"
+msgstr "prohodi&T označení      M-*"
 
 msgid "&Backwards"
 msgstr "&Pozpátku"
@@ -342,14 +344,11 @@ msgstr " Zadejte hledaný text:"
 msgid "Cancel"
 msgstr "Zrušit"
 
-msgid "O&ne"
-msgstr "&Jeden"
+msgid "&Skip"
+msgstr "&Přeskočit"
 
 msgid "A&ll"
 msgstr "&Všechny"
-
-msgid "&Skip"
-msgstr "&Přeskočit"
 
 msgid "&Replace"
 msgstr "&Nahradit"
@@ -475,19 +474,19 @@ msgid "&Paste from clipfile      S-Ins"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k               "
+msgid "Toggle bookmar&k            M-k"
 msgstr "&Přehodit značky     F3"
 
 #, fuzzy
-msgid "&Next bookmark                 "
+msgid "&Next bookmark              M-j"
 msgstr "&Nový                      C-n"
 
 #, fuzzy
-msgid "Pre&v bookmark                 "
+msgid "Pre&v bookmark              M-i"
 msgstr "&Setřídit                     M-t"
 
 #, fuzzy
-msgid "&Flush bookmark                "
+msgid "&Flush bookmark             M-o"
 msgstr "od&Eslat...                         "
 
 #, fuzzy
@@ -512,6 +511,22 @@ msgstr "&Jít na řádku...              M-l"
 
 msgid "&Paste from clipfile        C-y"
 msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "&Přehodit značky     F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "&Nový                      C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "&Setřídit                     M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "od&Eslat...                         "
 
 msgid "&Search...         F7"
 msgstr "&Hledat...         F7"
@@ -654,6 +669,9 @@ msgstr "Šířka řádku pro zlom: "
 
 msgid "Tab spacing: "
 msgstr "Velikost tabelátoru: "
+
+msgid "Cursor beyond end of line"
+msgstr ""
 
 #, fuzzy
 msgid "Pers&istent selection"
@@ -1317,6 +1335,17 @@ msgstr "&I-uzel"
 msgid "Cannot read directory contents"
 msgstr "Nelze číst obsah adresáře"
 
+msgid ""
+" The Commander can't change to the directory that \n"
+" the subshell claims you are in.  Perhaps you have \n"
+" deleted your working directory, or given yourself \n"
+" extra access permissions with the \"su\" command? "
+msgstr ""
+" Midnight Commander nemůže změnit adresář na ten, \n"
+" který mu oznámil podshell.  Je to pravděpodobně proto, \n"
+" že byl tento adresář smazán nebo také proto, že jste se \n"
+" do tohoto adresáře přepnuli pomocí příkazu \"su\". "
+
 #, c-format
 msgid "Press any key to continue..."
 msgstr "Stiskněte libovolnou klávesu pro pokračování..."
@@ -1867,25 +1896,25 @@ msgid "Cas&e sensitive"
 msgstr "všímat si velikos&Ti písmen"
 
 #, fuzzy
-msgid "Case sens&itive"
-msgstr "všímat si velikos&Ti písmen"
-
-#, fuzzy
 msgid "&Find recursively"
 msgstr "najít re&Kurzivně"
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "&All charsets"
-msgstr ""
-
-msgid "All cha&rsets"
-msgstr ""
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "všímat si velikos&Ti písmen"
 
 #, fuzzy
 msgid "Re&gular expression"
 msgstr "&Regulární výraz"
+
+msgid "Fir&st hit"
+msgstr ""
+
+msgid "All cha&rsets"
+msgstr ""
 
 msgid "&Tree"
 msgstr "&Strom"
@@ -2233,17 +2262,6 @@ msgstr "zkontrolujte klávesy, které nejsou označeny OK. Tam stiskněte mezern
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "nebo klikněte myší. Po položkách se pohybujte pomocí tabelátoru."
-
-msgid ""
-" The Commander can't change to the directory that \n"
-" the subshell claims you are in.  Perhaps you have \n"
-" deleted your working directory, or given yourself \n"
-" extra access permissions with the \"su\" command? "
-msgstr ""
-" Midnight Commander nemůže změnit adresář na ten, \n"
-" který mu oznámil podshell.  Je to pravděpodobně proto, \n"
-" že byl tento adresář smazán nebo také proto, že jste se \n"
-" do tohoto adresáře přepnuli pomocí příkazu \"su\". "
 
 msgid " The Midnight Commander "
 msgstr " Midnight Commander "
@@ -2661,6 +2679,9 @@ msgstr "ukázat &Skryté soubory"
 msgid "show &Backup files"
 msgstr "zobrazovat zá&Ložní soubory"
 
+msgid "Use SI si&ze units"
+msgstr ""
+
 msgid "&Never"
 msgstr "&Nikdy"
 
@@ -2855,14 +2876,6 @@ msgstr " Zvolte vstupní kódovou stránku "
 msgid "-  < No translation >"
 msgstr "- < Bez převodu >"
 
-#, c-format
-msgid ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-msgstr ""
-"Velikost obrazovky %d×%d není podporovaná.\n"
-"Prověřte nastavení proměnné prostředí TERM.\n"
-
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -2977,198 +2990,6 @@ msgid ""
 msgstr ""
 "Nelze zapisovat do souboru %s:\n"
 "%s\n"
-
-msgid " Format error on file Extensions File "
-msgstr " Chyba formátu v souboru přípon "
-
-#, c-format
-msgid " The %%var macro has no default "
-msgstr " Makro %%var nemá implicitní hodnotu "
-
-#, c-format
-msgid " The %%var macro has no variable "
-msgstr " Makro %%var nemá proměnnou "
-
-msgid " Debug "
-msgstr " Ladit "
-
-msgid " ERROR: "
-msgstr " CHYBA: "
-
-# Technický výraz "true" se nepřekládá.
-msgid " True:  "
-msgstr "True:"
-
-# Technický výraz "false" se nepřekládá.
-msgid " False: "
-msgstr "False: "
-
-msgid " Warning -- ignoring file "
-msgstr " Varování -- soubor ignorován "
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"Soubor %s není vlastněn uživatelem root nebo vámi, případně do něj mohou\n"
-"všichni zapisovat. Jeho použití by snižovalo Vaši bezpečnost"
-
-#, c-format
-msgid " No suitable entries found in %s "
-msgstr " V %s nejsou odpovídající položky "
-
-msgid " User menu "
-msgstr " Uživatelské menu "
-
-#, fuzzy
-msgid "%b %d %H:%M"
-msgstr "%e.%b %H:%M"
-
-#, fuzzy
-msgid "%b %d %Y"
-msgstr "%e.%b  %Y"
-
-msgid "%b %e  %Y"
-msgstr "%e.%b  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%e.%b %H:%M"
-
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s není adresář\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "Nejste vlastníkem adresáře %s\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "Nelze nastavit správná práva pro adresář %s\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr "Nelze vytvořit dočasný adresář %s: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Dočasné soubory se budou vytvářet v %s\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Dočasné soubory se nebudou vytvářet\n"
-
-msgid " Pipe failed "
-msgstr " pipe() selhalo "
-
-msgid " Dup failed "
-msgstr " dup() selhalo "
-
-msgid " Cannot spawn child process "
-msgstr " Nelze vytvořit proces potomka "
-
-msgid "Empty output from child filter"
-msgstr "Prázdný výstup z filtru potomka"
-
-#, c-format
-msgid ""
-" Cannot open \"%s\"\n"
-" %s "
-msgstr ""
-" Nelze otevřít \"%s\"\n"
-" %s "
-
-#, c-format
-msgid ""
-" Cannot stat \"%s\"\n"
-" %s "
-msgstr ""
-" Na \"%s\" nelze provést stat\n"
-" %s "
-
-msgid " Cannot view: not a regular file "
-msgstr " Nelze prohlížet: není to normální soubor "
-
-#, c-format
-msgid "File: %s"
-msgstr "Soubor: %s"
-
-#, c-format
-msgid "Offset 0x%08lx"
-msgstr "Posun 0x%08lx"
-
-#, c-format
-msgid "Line %lu Col %lu"
-msgstr "Řádek %lu Slp %lu"
-
-#, c-format
-msgid "%s bytes"
-msgstr "%s bajtů"
-
-#, c-format
-msgid ">= %s bytes"
-msgstr ">= %s bajtů"
-
-#, c-format
-msgid ""
-" Error while closing the file: \n"
-" %s \n"
-" Data may have been written or not. "
-msgstr ""
-" Chyba v průběhu zavírání souboru: \n"
-" %s \n"
-" Data mohou být zapsána nebo ne. "
-
-#, c-format
-msgid ""
-" Cannot save file: \n"
-" %s "
-msgstr ""
-" Nemohu uložit soubor: \n"
-" %s "
-
-#, fuzzy, c-format
-msgid ""
-" The current line number is %lu.\n"
-" Enter the new line number:"
-msgstr ""
-" Aktuální číslo řádku je %d.\n"
-" Zadejte nové číslo řádku:"
-
-#, fuzzy
-msgid " The current address is 0x%08"
-msgstr ""
-" Aktuální adresa je 0x%lx.\n"
-" Zadejte novou adresu:"
-
-msgid " Goto Address "
-msgstr " Jít na adresu "
-
-#, fuzzy
-msgid " Invalid address "
-msgstr " Chybné heslo "
-
-msgid "Seeking to search result"
-msgstr ""
-
-msgid "ButtonBar|Help"
-msgstr "TlačítkováLišta|Pomoc"
-
-msgid "ButtonBar|Quit"
-msgstr "TlačítkováLišta|Konec"
-
-msgid "ButtonBar|View"
-msgstr "TlačítkováLišta|Zobraz"
-
-msgid "ButtonBar|Edit"
-msgstr "TlačítkováLišta|Edituj"
-
-msgid "ButtonBar|Save"
-msgstr "TlačítkováLišta|Ulož"
-
-msgid " History "
-msgstr " Historie "
 
 msgid "Function key 1"
 msgstr "Funkční klávesa 1"
@@ -3308,11 +3129,261 @@ msgstr "Delete na numerické klávesnici"
 msgid "Enter on keypad"
 msgstr "Enter na numerické klávesnici"
 
+#, fuzzy
+msgid "Tab on keypad"
+msgstr "+ na numerické klávesnici"
+
+#, fuzzy
+msgid "Space on keypad"
+msgstr "Lomítko na numerické klávesnici"
+
 msgid "Slash on keypad"
 msgstr "Lomítko na numerické klávesnici"
 
 msgid "NumLock on keypad"
 msgstr "NumLock na numerické klávesnici"
+
+msgid "Ctrl"
+msgstr ""
+
+msgid "Alt"
+msgstr ""
+
+msgid "Shift"
+msgstr ""
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"Velikost obrazovky %d×%d není podporovaná.\n"
+"Prověřte nastavení proměnné prostředí TERM.\n"
+
+msgid " Format error on file Extensions File "
+msgstr " Chyba formátu v souboru přípon "
+
+#, c-format
+msgid " The %%var macro has no default "
+msgstr " Makro %%var nemá implicitní hodnotu "
+
+#, c-format
+msgid " The %%var macro has no variable "
+msgstr " Makro %%var nemá proměnnou "
+
+msgid " Debug "
+msgstr " Ladit "
+
+msgid " ERROR: "
+msgstr " CHYBA: "
+
+# Technický výraz "true" se nepřekládá.
+msgid " True:  "
+msgstr "True:"
+
+# Technický výraz "false" se nepřekládá.
+msgid " False: "
+msgstr "False: "
+
+msgid " Warning -- ignoring file "
+msgstr " Varování -- soubor ignorován "
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"Soubor %s není vlastněn uživatelem root nebo vámi, případně do něj mohou\n"
+"všichni zapisovat. Jeho použití by snižovalo Vaši bezpečnost"
+
+#, c-format
+msgid " No suitable entries found in %s "
+msgstr " V %s nejsou odpovídající položky "
+
+msgid " User menu "
+msgstr " Uživatelské menu "
+
+msgid "%b %e  %Y"
+msgstr "%e.%b  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%e.%b %H:%M"
+
+#, c-format
+msgid "%s is not a directory\n"
+msgstr "%s není adresář\n"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr "Nejste vlastníkem adresáře %s\n"
+
+#, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr "Nelze nastavit správná práva pro adresář %s\n"
+
+#, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr "Nelze vytvořit dočasný adresář %s: %s\n"
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr "Dočasné soubory se budou vytvářet v %s\n"
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr "Dočasné soubory se nebudou vytvářet\n"
+
+msgid " Pipe failed "
+msgstr " pipe() selhalo "
+
+msgid " Dup failed "
+msgstr " dup() selhalo "
+
+#, fuzzy, c-format
+msgid ""
+" The current line number is %lld.\n"
+" Enter the new line number:"
+msgstr ""
+" Aktuální číslo řádku je %d.\n"
+" Zadejte nové číslo řádku:"
+
+#, fuzzy, c-format
+msgid ""
+" The current address is %s.\n"
+" Enter the new address:"
+msgstr ""
+" Aktuální číslo řádku je %d.\n"
+" Zadejte nové číslo řádku:"
+
+msgid " Goto Address "
+msgstr " Jít na adresu "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " Chybné heslo "
+
+msgid " Cannot spawn child process "
+msgstr " Nelze vytvořit proces potomka "
+
+msgid "Empty output from child filter"
+msgstr "Prázdný výstup z filtru potomka"
+
+msgid "All charsets"
+msgstr ""
+
+msgid "ButtonBar|Help"
+msgstr "TlačítkováLišta|Pomoc"
+
+msgid "ButtonBar|Quit"
+msgstr "TlačítkováLišta|Konec"
+
+msgid "ButtonBar|Ascii"
+msgstr "TlačítkováLišta|Ascii"
+
+msgid "ButtonBar|Hex"
+msgstr "TlačítkováLišta|Hex"
+
+msgid "ButtonBar|Goto"
+msgstr "TlačítkováLišta|JdiNa"
+
+msgid "ButtonBar|Line"
+msgstr "TlačítkováLišta|Řádek"
+
+msgid "ButtonBar|View"
+msgstr "TlačítkováLišta|Zobraz"
+
+msgid "ButtonBar|Edit"
+msgstr "TlačítkováLišta|Edituj"
+
+msgid "ButtonBar|Save"
+msgstr "TlačítkováLišta|Ulož"
+
+msgid "ButtonBar|UnWrap"
+msgstr "TlačítkováLišta|Nezal."
+
+msgid "ButtonBar|Wrap"
+msgstr "TlačítkováLišta|Zalam."
+
+msgid "ButtonBar|HxSrch"
+msgstr "TlačítkováLišta|HxHled"
+
+msgid "ButtonBar|Search"
+msgstr "TlačítkováLišta|Hledej"
+
+msgid "ButtonBar|Raw"
+msgstr "TlačítkováLišta|Hrubě"
+
+msgid "ButtonBar|Parse"
+msgstr "TlačítkováLišta|Rozeb."
+
+msgid "ButtonBar|Unform"
+msgstr "TlačítkováLišta|Odform."
+
+msgid "ButtonBar|Format"
+msgstr "TlačítkováLišta|Formát."
+
+#, c-format
+msgid "File: %s"
+msgstr "Soubor: %s"
+
+#, c-format
+msgid "Offset 0x%08lx"
+msgstr "Posun 0x%08lx"
+
+#, c-format
+msgid "Line %lu Col %lu"
+msgstr "Řádek %lu Slp %lu"
+
+#, c-format
+msgid "%s bytes"
+msgstr "%s bajtů"
+
+#, c-format
+msgid ">= %s bytes"
+msgstr ">= %s bajtů"
+
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+" Chyba v průběhu zavírání souboru: \n"
+" %s \n"
+" Data mohou být zapsána nebo ne. "
+
+#, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr ""
+" Nemohu uložit soubor: \n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot open \"%s\"\n"
+" %s "
+msgstr ""
+" Nelze otevřít \"%s\"\n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot stat \"%s\"\n"
+" %s "
+msgstr ""
+" Na \"%s\" nelze provést stat\n"
+" %s "
+
+msgid " Cannot view: not a regular file "
+msgstr " Nelze prohlížet: není to normální soubor "
+
+msgid "Seeking to search result"
+msgstr ""
+
+msgid " History "
+msgstr " Historie "
 
 msgid "Background process:"
 msgstr "Procesy na pozadí:"
@@ -3491,8 +3562,9 @@ msgstr "ftpfs: Přihlášení uživatele %s selhalo "
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: Chybné jméno počítače."
 
-msgid "ftpfs: Invalid host address."
-msgstr "ftpfs: Chybná adresa počítače."
+#, c-format
+msgid "ftpfs: %s"
+msgstr ""
 
 #, c-format
 msgid "ftpfs: making connection to %s"
@@ -3508,6 +3580,18 @@ msgstr "ftpfs: připojování k serveru selhalo: %s"
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Nový pokus za... %d (Control-C zruší)"
+
+#, fuzzy
+msgid "ftpfs: invalid address family"
+msgstr "ftpfs: Chybná adresa počítače."
+
+#, fuzzy, c-format
+msgid "ftpfs: could not setup passive mode: %s"
+msgstr "ftpfs: nelze nastavit pasivní režim"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not create socket: %s"
+msgstr " Nelze vytvořit soket: %s "
 
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: nelze nastavit pasivní režim"
@@ -3745,11 +3829,31 @@ msgstr "Interní chyba:"
 msgid "Changes to file lost"
 msgstr "Změny souboru byly ztraceny"
 
+#~ msgid "pro&Mpt on replace"
+#~ msgstr "&Dotaz na nahrazení"
+
+#~ msgid "replace &All"
+#~ msgstr "Nahradit &Vše"
+
+#~ msgid "O&ne"
+#~ msgstr "&Jeden"
+
+#, fuzzy
+#~ msgid "%b %d %H:%M"
+#~ msgstr "%e.%b %H:%M"
+
+#, fuzzy
+#~ msgid "%b %d %Y"
+#~ msgstr "%e.%b  %Y"
+
+#, fuzzy
+#~ msgid " The current address is 0x%08"
+#~ msgstr ""
+#~ " Aktuální adresa je 0x%lx.\n"
+#~ " Zadejte novou adresu:"
+
 #~ msgid "scanf &Expression"
 #~ msgstr "výraz pro &Scanf"
-
-#~ msgid "&Whole words only"
-#~ msgstr "Pouze &Celá slova"
 
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr " Zadejte pořadí argumentů (např. 3,2,1,4) "
@@ -3804,44 +3908,8 @@ msgstr "Změny souboru byly ztraceny"
 #~ msgid " Enter regexp:"
 #~ msgstr " Zadejte regulární výraz:"
 
-#~ msgid "ButtonBar|Ascii"
-#~ msgstr "TlačítkováLišta|Ascii"
-
-#~ msgid "ButtonBar|Hex"
-#~ msgstr "TlačítkováLišta|Hex"
-
-#~ msgid "ButtonBar|Goto"
-#~ msgstr "TlačítkováLišta|JdiNa"
-
-#~ msgid "ButtonBar|Line"
-#~ msgstr "TlačítkováLišta|Řádek"
-
-#~ msgid "ButtonBar|UnWrap"
-#~ msgstr "TlačítkováLišta|Nezal."
-
-#~ msgid "ButtonBar|Wrap"
-#~ msgstr "TlačítkováLišta|Zalam."
-
 #~ msgid "ButtonBar|RxSrch"
 #~ msgstr "TlačítkováLišta|RxHled"
-
-#~ msgid "ButtonBar|HxSrch"
-#~ msgstr "TlačítkováLišta|HxHled"
-
-#~ msgid "ButtonBar|Search"
-#~ msgstr "TlačítkováLišta|Hledej"
-
-#~ msgid "ButtonBar|Raw"
-#~ msgstr "TlačítkováLišta|Hrubě"
-
-#~ msgid "ButtonBar|Parse"
-#~ msgstr "TlačítkováLišta|Rozeb."
-
-#~ msgid "ButtonBar|Unform"
-#~ msgstr "TlačítkováLišta|Odform."
-
-#~ msgid "ButtonBar|Format"
-#~ msgstr "TlačítkováLišta|Formát."
 
 #~ msgid "Using included S-Lang library"
 #~ msgstr "Používá se přiložená knihovna S-Lang"

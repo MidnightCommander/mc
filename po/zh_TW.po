@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-07-09 17:07+0300\n"
+"POT-Creation-Date: 2009-08-26 17:11+0300\n"
 "PO-Revision-Date: 2001-07-27 03:02+0800\n"
 "Last-Translator: Jing-Jong Shyue <shyue@sonoma.com.tw>\n"
 "Language-Team: Chinese <zh-l10n@linux.org.tw>\n"
@@ -324,14 +324,16 @@ msgstr " 按下任意鍵："
 msgid " Execute Macro "
 msgstr " 執行巨集 "
 
-msgid "pro&Mpt on replace"
-msgstr " 替換之前要先詢問 "
-
-msgid "replace &All"
-msgstr "全部替換"
-
-msgid "All charsets"
+msgid "&All charsets"
 msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr " 只匹配整個單字 "
+
+#, fuzzy
+msgid "In se&lection"
+msgstr "反向選取            M-*"
 
 msgid "&Backwards"
 msgstr " 向後 "
@@ -348,14 +350,11 @@ msgstr " 輸入要搜尋的字串： "
 msgid "Cancel"
 msgstr "取消"
 
-msgid "O&ne"
-msgstr "單一"
+msgid "&Skip"
+msgstr "跳過"
 
 msgid "A&ll"
 msgstr "全部"
-
-msgid "&Skip"
-msgstr "跳過"
 
 msgid "&Replace"
 msgstr "替換"
@@ -477,19 +476,19 @@ msgid "&Paste from clipfile      S-Ins"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k               "
+msgid "Toggle bookmar&k            M-k"
 msgstr "切換標示區域       F3"
 
 #, fuzzy
-msgid "&Next bookmark                 "
+msgid "&Next bookmark              M-j"
 msgstr "開新檔案          C-n"
 
 #, fuzzy
-msgid "Pre&v bookmark                 "
+msgid "Pre&v bookmark              M-i"
 msgstr "排序...                  M-t"
 
 #, fuzzy
-msgid "&Flush bookmark                "
+msgid "&Flush bookmark             M-o"
 msgstr "郵件                        "
 
 #, fuzzy
@@ -514,6 +513,22 @@ msgstr "跳至某行...              M-l"
 
 msgid "&Paste from clipfile        C-y"
 msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "切換標示區域       F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "開新檔案          C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "排序...                  M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "郵件                        "
 
 msgid "&Search...         F7"
 msgstr "搜尋               F7"
@@ -657,6 +672,9 @@ msgstr " 輸入每行長度： "
 
 msgid "Tab spacing: "
 msgstr "Tab 空格 : "
+
+msgid "Cursor beyond end of line"
+msgstr ""
 
 #, fuzzy
 msgid "Pers&istent selection"
@@ -1314,6 +1332,17 @@ msgstr "節點"
 msgid "Cannot read directory contents"
 msgstr "無法改變目錄"
 
+msgid ""
+" The Commander can't change to the directory that \n"
+" the subshell claims you are in.  Perhaps you have \n"
+" deleted your working directory, or given yourself \n"
+" extra access permissions with the \"su\" command? "
+msgstr ""
+" Commander 無法改變目錄到您原來 \n"
+" 所在的地方，您可能刪除了您的工作 \n"
+" 目錄，或者因為執行過 \"su\" 指令 \n"
+" 而改變了權限狀態？ "
+
 #, c-format
 msgid "Press any key to continue..."
 msgstr "按任意鍵繼續..."
@@ -1859,25 +1888,25 @@ msgstr "  變形的正規運算式  "
 msgid "Cas&e sensitive"
 msgstr "大小寫不同"
 
-#, fuzzy
-msgid "Case sens&itive"
-msgstr "大小寫不同"
-
 msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "&All charsets"
-msgstr ""
-
-msgid "All cha&rsets"
-msgstr ""
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "大小寫不同"
 
 #, fuzzy
 msgid "Re&gular expression"
 msgstr " 正規表示式 "
+
+msgid "Fir&st hit"
+msgstr ""
+
+msgid "All cha&rsets"
+msgstr ""
 
 msgid "&Tree"
 msgstr "樹狀"
@@ -2226,17 +2255,6 @@ msgstr "哪個按鍵沒有標上 \"好\"，在這些地方按一下空白鍵，�
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "用滑鼠控制來設定這些按鍵。用 Tab 鍵可以在選項之間移動。"
-
-msgid ""
-" The Commander can't change to the directory that \n"
-" the subshell claims you are in.  Perhaps you have \n"
-" deleted your working directory, or given yourself \n"
-" extra access permissions with the \"su\" command? "
-msgstr ""
-" Commander 無法改變目錄到您原來 \n"
-" 所在的地方，您可能刪除了您的工作 \n"
-" 目錄，或者因為執行過 \"su\" 指令 \n"
-" 而改變了權限狀態？ "
 
 msgid " The Midnight Commander "
 msgstr " The Midnight Commander "
@@ -2654,6 +2672,9 @@ msgstr "顯示隱藏檔"
 msgid "show &Backup files"
 msgstr "顯示備份檔"
 
+msgid "Use SI si&ze units"
+msgstr ""
+
 msgid "&Never"
 msgstr "從不"
 
@@ -2846,14 +2867,6 @@ msgstr " 選擇輸入頁碼 "
 msgid "-  < No translation >"
 msgstr "-  < 不轉換 >"
 
-#, c-format
-msgid ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-msgstr ""
-"不支援 %dx%d 的螢幕大小。\n"
-"請檢查 TERM 環境變數。\n"
-
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -2966,196 +2979,6 @@ msgid ""
 msgstr ""
 "無法寫入到檔案 %s :\n"
 "%s\n"
-
-msgid " Format error on file Extensions File "
-msgstr "現存的檔案中有格式錯誤"
-
-#, c-format
-msgid " The %%var macro has no default "
-msgstr " %%var 巨集沒有預設值 "
-
-#, c-format
-msgid " The %%var macro has no variable "
-msgstr " %%var 巨集沒有變數 "
-
-msgid " Debug "
-msgstr " 除錯 "
-
-msgid " ERROR: "
-msgstr " 錯誤： "
-
-msgid " True:  "
-msgstr " 真的：  "
-
-msgid " False: "
-msgstr " 假的：  "
-
-msgid " Warning -- ignoring file "
-msgstr " 警告 -- 忽略檔案 "
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"檔案 %s 的擁有者並不是 root 或您，或者檔案允許任何人寫入；\n"
-"使用這個檔案對您系統的安全造成危害。"
-
-#, c-format
-msgid " No suitable entries found in %s "
-msgstr "沒有在 %s 中找到符合的項目"
-
-msgid " User menu "
-msgstr " 使用者選單 "
-
-#, fuzzy
-msgid "%b %d %H:%M"
-msgstr "%b %e %H:%M"
-
-#, fuzzy
-msgid "%b %d %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
-#, fuzzy, c-format
-msgid "%s is not a directory\n"
-msgstr "建立新目錄"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr ""
-" 無法建立目標目錄 \"%s\" \n"
-" %s "
-
-#, fuzzy, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr ""
-" 無法建立目標目錄 \"%s\" \n"
-" %s "
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr ""
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr ""
-
-msgid " Pipe failed "
-msgstr " 管線失敗 "
-
-msgid " Dup failed "
-msgstr " 抄寫失敗 "
-
-#, fuzzy
-msgid " Cannot spawn child process "
-msgstr " 無法產生子程式 "
-
-msgid "Empty output from child filter"
-msgstr ""
-
-#, c-format
-msgid ""
-" Cannot open \"%s\"\n"
-" %s "
-msgstr ""
-" 無法開啟檔案 \"%s\" \n"
-" %s "
-
-#, c-format
-msgid ""
-" Cannot stat \"%s\"\n"
-" %s "
-msgstr ""
-" 無法 stat %s \n"
-" %s "
-
-msgid " Cannot view: not a regular file "
-msgstr " 無法檢視：並非一常規檔案 "
-
-#, c-format
-msgid "File: %s"
-msgstr "檔案： %s"
-
-#, c-format
-msgid "Offset 0x%08lx"
-msgstr "偏移值 0x%08lx"
-
-#, c-format
-msgid "Line %lu Col %lu"
-msgstr ""
-
-#, c-format
-msgid "%s bytes"
-msgstr "%s 位元組"
-
-#, fuzzy, c-format
-msgid ">= %s bytes"
-msgstr "%s 位元組"
-
-#, c-format
-msgid ""
-" Error while closing the file: \n"
-" %s \n"
-" Data may have been written or not. "
-msgstr ""
-
-#, fuzzy, c-format
-msgid ""
-" Cannot save file: \n"
-" %s "
-msgstr " 試著存檔時發生錯誤。 "
-
-#, fuzzy, c-format
-msgid ""
-" The current line number is %lu.\n"
-" Enter the new line number:"
-msgstr ""
-" 目前行號是 %d，\n"
-" 請輸入新行號："
-
-#, fuzzy
-msgid " The current address is 0x%08"
-msgstr ""
-" 目前行號是 0x%lx，\n"
-" 請輸入新行號："
-
-msgid " Goto Address "
-msgstr " 跳至某行 "
-
-#, fuzzy
-msgid " Invalid address "
-msgstr " 密碼無效 "
-
-msgid "Seeking to search result"
-msgstr ""
-
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Quit"
-msgstr ""
-
-msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
-msgid " History "
-msgstr " 歷史紀錄 "
 
 msgid "Function key 1"
 msgstr "功能鍵 1"
@@ -3295,11 +3118,259 @@ msgstr "數字區的 Del 鍵"
 msgid "Enter on keypad"
 msgstr "數字區的 Enter 鍵"
 
+#, fuzzy
+msgid "Tab on keypad"
+msgstr "數字區的 +"
+
+#, fuzzy
+msgid "Space on keypad"
+msgstr "數字區的 / 鍵"
+
 msgid "Slash on keypad"
 msgstr "數字區的 / 鍵"
 
 msgid "NumLock on keypad"
 msgstr "數字區的 NumLock 鍵"
+
+msgid "Ctrl"
+msgstr ""
+
+msgid "Alt"
+msgstr ""
+
+msgid "Shift"
+msgstr ""
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"不支援 %dx%d 的螢幕大小。\n"
+"請檢查 TERM 環境變數。\n"
+
+msgid " Format error on file Extensions File "
+msgstr "現存的檔案中有格式錯誤"
+
+#, c-format
+msgid " The %%var macro has no default "
+msgstr " %%var 巨集沒有預設值 "
+
+#, c-format
+msgid " The %%var macro has no variable "
+msgstr " %%var 巨集沒有變數 "
+
+msgid " Debug "
+msgstr " 除錯 "
+
+msgid " ERROR: "
+msgstr " 錯誤： "
+
+msgid " True:  "
+msgstr " 真的：  "
+
+msgid " False: "
+msgstr " 假的：  "
+
+msgid " Warning -- ignoring file "
+msgstr " 警告 -- 忽略檔案 "
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"檔案 %s 的擁有者並不是 root 或您，或者檔案允許任何人寫入；\n"
+"使用這個檔案對您系統的安全造成危害。"
+
+#, c-format
+msgid " No suitable entries found in %s "
+msgstr "沒有在 %s 中找到符合的項目"
+
+msgid " User menu "
+msgstr " 使用者選單 "
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
+
+#, fuzzy, c-format
+msgid "%s is not a directory\n"
+msgstr "建立新目錄"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr ""
+" 無法建立目標目錄 \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr ""
+" 無法建立目標目錄 \"%s\" \n"
+" %s "
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr ""
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr ""
+
+msgid " Pipe failed "
+msgstr " 管線失敗 "
+
+msgid " Dup failed "
+msgstr " 抄寫失敗 "
+
+#, fuzzy, c-format
+msgid ""
+" The current line number is %lld.\n"
+" Enter the new line number:"
+msgstr ""
+" 目前行號是 %d，\n"
+" 請輸入新行號："
+
+#, fuzzy, c-format
+msgid ""
+" The current address is %s.\n"
+" Enter the new address:"
+msgstr ""
+" 目前行號是 %d，\n"
+" 請輸入新行號："
+
+msgid " Goto Address "
+msgstr " 跳至某行 "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " 密碼無效 "
+
+#, fuzzy
+msgid " Cannot spawn child process "
+msgstr " 無法產生子程式 "
+
+msgid "Empty output from child filter"
+msgstr ""
+
+msgid "All charsets"
+msgstr ""
+
+msgid "ButtonBar|Help"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
+
+msgid "ButtonBar|Ascii"
+msgstr ""
+
+msgid "ButtonBar|Hex"
+msgstr ""
+
+msgid "ButtonBar|Goto"
+msgstr ""
+
+msgid "ButtonBar|Line"
+msgstr ""
+
+msgid "ButtonBar|View"
+msgstr ""
+
+msgid "ButtonBar|Edit"
+msgstr ""
+
+msgid "ButtonBar|Save"
+msgstr ""
+
+msgid "ButtonBar|UnWrap"
+msgstr ""
+
+msgid "ButtonBar|Wrap"
+msgstr ""
+
+msgid "ButtonBar|HxSrch"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Raw"
+msgstr ""
+
+msgid "ButtonBar|Parse"
+msgstr ""
+
+msgid "ButtonBar|Unform"
+msgstr ""
+
+msgid "ButtonBar|Format"
+msgstr ""
+
+#, c-format
+msgid "File: %s"
+msgstr "檔案： %s"
+
+#, c-format
+msgid "Offset 0x%08lx"
+msgstr "偏移值 0x%08lx"
+
+#, c-format
+msgid "Line %lu Col %lu"
+msgstr ""
+
+#, c-format
+msgid "%s bytes"
+msgstr "%s 位元組"
+
+#, fuzzy, c-format
+msgid ">= %s bytes"
+msgstr "%s 位元組"
+
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr " 試著存檔時發生錯誤。 "
+
+#, c-format
+msgid ""
+" Cannot open \"%s\"\n"
+" %s "
+msgstr ""
+" 無法開啟檔案 \"%s\" \n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot stat \"%s\"\n"
+" %s "
+msgstr ""
+" 無法 stat %s \n"
+" %s "
+
+msgid " Cannot view: not a regular file "
+msgstr " 無法檢視：並非一常規檔案 "
+
+msgid "Seeking to search result"
+msgstr ""
+
+msgid " History "
+msgstr " 歷史紀錄 "
 
 msgid "Background process:"
 msgstr "背景程序："
@@ -3480,8 +3551,9 @@ msgstr "ftpfs: 使用者 %s 登入錯誤"
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: 無效的主機名稱。"
 
-msgid "ftpfs: Invalid host address."
-msgstr "ftpfs: 無效的主機位址。"
+#, c-format
+msgid "ftpfs: %s"
+msgstr ""
 
 #, c-format
 msgid "ftpfs: making connection to %s"
@@ -3497,6 +3569,18 @@ msgstr "ftpfs: 連結到伺服器發生錯誤: %s"
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "等候重試... %d (Control-C 結束)"
+
+#, fuzzy
+msgid "ftpfs: invalid address family"
+msgstr "ftpfs: 無效的主機位址。"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not setup passive mode: %s"
+msgstr "ftpfs: 無法設定 passive mode"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not create socket: %s"
+msgstr " 無法建立插座: %s"
 
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: 無法設定 passive mode"
@@ -3733,11 +3817,31 @@ msgstr "內部錯誤:"
 msgid "Changes to file lost"
 msgstr "改變到檔案遺失"
 
+#~ msgid "pro&Mpt on replace"
+#~ msgstr " 替換之前要先詢問 "
+
+#~ msgid "replace &All"
+#~ msgstr "全部替換"
+
+#~ msgid "O&ne"
+#~ msgstr "單一"
+
+#, fuzzy
+#~ msgid "%b %d %H:%M"
+#~ msgstr "%b %e %H:%M"
+
+#, fuzzy
+#~ msgid "%b %d %Y"
+#~ msgstr "%b %e  %Y"
+
+#, fuzzy
+#~ msgid " The current address is 0x%08"
+#~ msgstr ""
+#~ " 目前行號是 0x%lx，\n"
+#~ " 請輸入新行號："
+
 #~ msgid "scanf &Expression"
 #~ msgstr " Scanf 表示式 "
-
-#~ msgid "&Whole words only"
-#~ msgstr " 只匹配整個單字 "
 
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr " 輸入參數的順序, eg. 3,2,1,4 "

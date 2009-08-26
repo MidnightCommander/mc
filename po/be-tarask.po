@@ -2,10 +2,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-07-09 17:07+0300\n"
+"POT-Creation-Date: 2009-08-26 17:11+0300\n"
 "PO-Revision-Date: 2002-08-25 16:15GMT+2\n"
 "Last-Translator: Vital Khilko <dojlid@mova.org>\n"
-"Language-Team: belarussian (tarask) <debian-l10n-belarusian@lists.debian.org>\n"
+"Language-Team: belarussian (tarask) <debian-l10n-belarusian@lists.debian."
+"org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -320,14 +321,16 @@ msgstr " Націсьніце любую клявішу: "
 msgid " Execute Macro "
 msgstr " Выканаць макрас "
 
-msgid "pro&Mpt on replace"
-msgstr "Падцьвердзіць &замену"
-
-msgid "replace &All"
-msgstr "Замяніць &Усе"
-
-msgid "All charsets"
+msgid "&All charsets"
 msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "Толькі поўныя &словы"
+
+#, fuzzy
+msgid "In se&lection"
+msgstr "Інвэр&таваць адзнаку *"
 
 msgid "&Backwards"
 msgstr "&Назад"
@@ -344,14 +347,11 @@ msgstr " Увядзіце радок для пошуку"
 msgid "Cancel"
 msgstr "Адмена"
 
-msgid "O&ne"
-msgstr "&Адзін"
+msgid "&Skip"
+msgstr "П&рапусьціць"
 
 msgid "A&ll"
 msgstr "&Усе"
-
-msgid "&Skip"
-msgstr "П&рапусьціць"
 
 msgid "&Replace"
 msgstr "&Замяніць"
@@ -473,19 +473,19 @@ msgid "&Paste from clipfile      S-Ins"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k               "
+msgid "Toggle bookmar&k            M-k"
 msgstr "&Выдаленьне блёку        F3"
 
 #, fuzzy
-msgid "&Next bookmark                 "
+msgid "&Next bookmark              M-j"
 msgstr "&Новы файл           C-n"
 
 #, fuzzy
-msgid "Pre&v bookmark                 "
+msgid "Pre&v bookmark              M-i"
 msgstr "&Сартаваньне                 M-t"
 
 #, fuzzy
-msgid "&Flush bookmark                "
+msgid "&Flush bookmark             M-o"
 msgstr "&Электроная пошта..."
 
 #, fuzzy
@@ -510,6 +510,22 @@ msgstr "&Перайсьці да радку           M-l"
 
 msgid "&Paste from clipfile        C-y"
 msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "&Выдаленьне блёку        F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "&Новы файл           C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "&Сартаваньне                 M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "&Электроная пошта..."
 
 msgid "&Search...         F7"
 msgstr "&Пошук...          F7"
@@ -653,6 +669,9 @@ msgstr "Пазыцыя пераносу радкоў :"
 
 msgid "Tab spacing: "
 msgstr "Крок табуляцыі : "
+
+msgid "Cursor beyond end of line"
+msgstr ""
 
 #, fuzzy
 msgid "Pers&istent selection"
@@ -1310,6 +1329,17 @@ msgstr "&Вузел"
 msgid "Cannot read directory contents"
 msgstr "Немагчыма зьмяніць каталёг"
 
+msgid ""
+" The Commander can't change to the directory that \n"
+" the subshell claims you are in.  Perhaps you have \n"
+" deleted your working directory, or given yourself \n"
+" extra access permissions with the \"su\" command? "
+msgstr ""
+" The Commander ня можа перайсьці ў каталёг, які яму \n"
+" паведаміў дачэрні працэс інтэрпрэтатару. Можа, вы \n"
+" выдалілі працоўны каталёг ці далі сабе дадатковыя \n"
+" прывілеі доступу пры дапамозе каманды \"su\"? "
+
 #, c-format
 msgid "Press any key to continue..."
 msgstr "Для працягу націсьніце любую клявішу..."
@@ -1856,25 +1886,25 @@ msgstr "  Сталы выраз сфармаваны памылкова"
 msgid "Cas&e sensitive"
 msgstr "Улік рэ&гістру"
 
-#, fuzzy
-msgid "Case sens&itive"
-msgstr "Улік рэ&гістру"
-
 msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "&All charsets"
-msgstr ""
-
-msgid "All cha&rsets"
-msgstr ""
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "Улік рэ&гістру"
 
 #, fuzzy
 msgid "Re&gular expression"
 msgstr "&Сталы выраз"
+
+msgid "Fir&st hit"
+msgstr ""
+
+msgid "All cha&rsets"
+msgstr ""
 
 msgid "&Tree"
 msgstr "Д&рэва"
@@ -2223,17 +2253,6 @@ msgstr "якія клявішы ня маюць адзнакі Так. Для н
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "яе пры дапамозе Tab ці мышшу й націсьніце прагал."
-
-msgid ""
-" The Commander can't change to the directory that \n"
-" the subshell claims you are in.  Perhaps you have \n"
-" deleted your working directory, or given yourself \n"
-" extra access permissions with the \"su\" command? "
-msgstr ""
-" The Commander ня можа перайсьці ў каталёг, які яму \n"
-" паведаміў дачэрні працэс інтэрпрэтатару. Можа, вы \n"
-" выдалілі працоўны каталёг ці далі сабе дадатковыя \n"
-" прывілеі доступу пры дапамозе каманды \"su\"? "
 
 msgid " The Midnight Commander "
 msgstr " Midnight Commander "
@@ -2631,6 +2650,9 @@ msgstr "Адлюстроўваць с&хаваныя файлы"
 msgid "show &Backup files"
 msgstr "Паказываць рэ&зэрвовыя файлы"
 
+msgid "Use SI si&ze units"
+msgstr ""
+
 msgid "&Never"
 msgstr "&Ніколі"
 
@@ -2822,14 +2844,6 @@ msgstr " Выбраць табліцу сымбаляў вываду"
 msgid "-  < No translation >"
 msgstr "-  < Не перакладзена >"
 
-#, c-format
-msgid ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-msgstr ""
-"Памер экрану %dx%d ня падтрымліваецца.\n"
-"Праверце пераменную асяродзьдзя TERM.\n"
-
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -2941,197 +2955,6 @@ msgid ""
 msgstr ""
 "Немагчыма пісаць у файл %s:\n"
 "%s\n"
-
-msgid " Format error on file Extensions File "
-msgstr " Памылка фармату ў файле Пашырэньняў файлаў"
-
-#, c-format
-msgid " The %%var macro has no default "
-msgstr " Макрас %%var ня мае тыповых значэньняў"
-
-#, c-format
-msgid " The %%var macro has no variable "
-msgstr " Макрас %%var ня мае пераменных"
-
-msgid " Debug "
-msgstr " Адладка "
-
-msgid " ERROR: "
-msgstr " ПАМЫЛКА: "
-
-msgid " True:  "
-msgstr " Праўда: "
-
-msgid " False: "
-msgstr " Хлусьня: "
-
-msgid " Warning -- ignoring file "
-msgstr " Папярэджаньне - файл ігнаруецца "
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"Файл %s у бягучым каталёгу ня належыць ані root'у, ані Вам,\n"
-"і даступны іншым на запіс. Выкарыстаньне такога файлу непрыймальна\n"
-"з пункту гледжаньня бясьпекі."
-
-#, c-format
-msgid " No suitable entries found in %s "
-msgstr " Ня адшукана запісаў, што адпавядаюць, у %s"
-
-msgid " User menu "
-msgstr " Мэню карыстальніку "
-
-#, fuzzy
-msgid "%b %d %H:%M"
-msgstr "%b %e %H:%M"
-
-#, fuzzy
-msgid "%b %d %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
-#, fuzzy, c-format
-msgid "%s is not a directory\n"
-msgstr "каталёг"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr ""
-" Немагчыма стварыць каталёг мэты \"%s\" \n"
-" %s "
-
-#, fuzzy, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr ""
-" Немагчыма стварыць каталёг мэты \"%s\" \n"
-" %s "
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr ""
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr ""
-
-msgid " Pipe failed "
-msgstr " Збой каналу "
-
-msgid " Dup failed "
-msgstr " Збой дубляваньня дэскрыптару "
-
-#, fuzzy
-msgid " Cannot spawn child process "
-msgstr " Немагчыма стварыць дачэрні працэс "
-
-msgid "Empty output from child filter"
-msgstr ""
-
-#, c-format
-msgid ""
-" Cannot open \"%s\"\n"
-" %s "
-msgstr ""
-" Немагчыма адчыніць \"%s\"\n"
-" %s "
-
-#, c-format
-msgid ""
-" Cannot stat \"%s\"\n"
-" %s "
-msgstr ""
-" Немагчыма атрымаць стан \"%s\"\n"
-" %s "
-
-msgid " Cannot view: not a regular file "
-msgstr " Прагляд немагчымы: нязвычайны файл "
-
-#, c-format
-msgid "File: %s"
-msgstr "Файл: %s"
-
-#, c-format
-msgid "Offset 0x%08lx"
-msgstr "Зрух 0x%08lx"
-
-#, c-format
-msgid "Line %lu Col %lu"
-msgstr ""
-
-#, c-format
-msgid "%s bytes"
-msgstr "%s байтаў"
-
-#, fuzzy, c-format
-msgid ">= %s bytes"
-msgstr "%s байтаў"
-
-#, c-format
-msgid ""
-" Error while closing the file: \n"
-" %s \n"
-" Data may have been written or not. "
-msgstr ""
-
-#, fuzzy, c-format
-msgid ""
-" Cannot save file: \n"
-" %s "
-msgstr " Памылка пры захаваньні файлу "
-
-#, fuzzy, c-format
-msgid ""
-" The current line number is %lu.\n"
-" Enter the new line number:"
-msgstr ""
-" Нумар бягучага радку %d.\n"
-" Увядзіце нумар новага радку:"
-
-#, fuzzy
-msgid " The current address is 0x%08"
-msgstr ""
-" Бягучая адрэса - 0x%lx.\n"
-" Увядзіце новую адрэсу:"
-
-msgid " Goto Address "
-msgstr " Перайсьці на адрэсу "
-
-#, fuzzy
-msgid " Invalid address "
-msgstr " Памылковы пароль "
-
-msgid "Seeking to search result"
-msgstr ""
-
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Quit"
-msgstr ""
-
-msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
-msgid " History "
-msgstr "Гісторыя камандаў"
 
 msgid "Function key 1"
 msgstr "Функцыянальная 1 "
@@ -3271,11 +3094,260 @@ msgstr "Delete на keypad'е"
 msgid "Enter on keypad"
 msgstr "Enter на keypad'е"
 
+#, fuzzy
+msgid "Tab on keypad"
+msgstr "+ на keypad'е"
+
+#, fuzzy
+msgid "Space on keypad"
+msgstr "Slash на keypad'е"
+
 msgid "Slash on keypad"
 msgstr "Slash на keypad'е"
 
 msgid "NumLock on keypad"
 msgstr "NumLock на keypad'е"
+
+msgid "Ctrl"
+msgstr ""
+
+msgid "Alt"
+msgstr ""
+
+msgid "Shift"
+msgstr ""
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"Памер экрану %dx%d ня падтрымліваецца.\n"
+"Праверце пераменную асяродзьдзя TERM.\n"
+
+msgid " Format error on file Extensions File "
+msgstr " Памылка фармату ў файле Пашырэньняў файлаў"
+
+#, c-format
+msgid " The %%var macro has no default "
+msgstr " Макрас %%var ня мае тыповых значэньняў"
+
+#, c-format
+msgid " The %%var macro has no variable "
+msgstr " Макрас %%var ня мае пераменных"
+
+msgid " Debug "
+msgstr " Адладка "
+
+msgid " ERROR: "
+msgstr " ПАМЫЛКА: "
+
+msgid " True:  "
+msgstr " Праўда: "
+
+msgid " False: "
+msgstr " Хлусьня: "
+
+msgid " Warning -- ignoring file "
+msgstr " Папярэджаньне - файл ігнаруецца "
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"Файл %s у бягучым каталёгу ня належыць ані root'у, ані Вам,\n"
+"і даступны іншым на запіс. Выкарыстаньне такога файлу непрыймальна\n"
+"з пункту гледжаньня бясьпекі."
+
+#, c-format
+msgid " No suitable entries found in %s "
+msgstr " Ня адшукана запісаў, што адпавядаюць, у %s"
+
+msgid " User menu "
+msgstr " Мэню карыстальніку "
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
+
+#, fuzzy, c-format
+msgid "%s is not a directory\n"
+msgstr "каталёг"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr ""
+" Немагчыма стварыць каталёг мэты \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr ""
+" Немагчыма стварыць каталёг мэты \"%s\" \n"
+" %s "
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr ""
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr ""
+
+msgid " Pipe failed "
+msgstr " Збой каналу "
+
+msgid " Dup failed "
+msgstr " Збой дубляваньня дэскрыптару "
+
+#, fuzzy, c-format
+msgid ""
+" The current line number is %lld.\n"
+" Enter the new line number:"
+msgstr ""
+" Нумар бягучага радку %d.\n"
+" Увядзіце нумар новага радку:"
+
+#, fuzzy, c-format
+msgid ""
+" The current address is %s.\n"
+" Enter the new address:"
+msgstr ""
+" Нумар бягучага радку %d.\n"
+" Увядзіце нумар новага радку:"
+
+msgid " Goto Address "
+msgstr " Перайсьці на адрэсу "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " Памылковы пароль "
+
+#, fuzzy
+msgid " Cannot spawn child process "
+msgstr " Немагчыма стварыць дачэрні працэс "
+
+msgid "Empty output from child filter"
+msgstr ""
+
+msgid "All charsets"
+msgstr ""
+
+msgid "ButtonBar|Help"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
+
+msgid "ButtonBar|Ascii"
+msgstr ""
+
+msgid "ButtonBar|Hex"
+msgstr ""
+
+msgid "ButtonBar|Goto"
+msgstr ""
+
+msgid "ButtonBar|Line"
+msgstr ""
+
+msgid "ButtonBar|View"
+msgstr ""
+
+msgid "ButtonBar|Edit"
+msgstr ""
+
+msgid "ButtonBar|Save"
+msgstr ""
+
+msgid "ButtonBar|UnWrap"
+msgstr ""
+
+msgid "ButtonBar|Wrap"
+msgstr ""
+
+msgid "ButtonBar|HxSrch"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Raw"
+msgstr ""
+
+msgid "ButtonBar|Parse"
+msgstr ""
+
+msgid "ButtonBar|Unform"
+msgstr ""
+
+msgid "ButtonBar|Format"
+msgstr ""
+
+#, c-format
+msgid "File: %s"
+msgstr "Файл: %s"
+
+#, c-format
+msgid "Offset 0x%08lx"
+msgstr "Зрух 0x%08lx"
+
+#, c-format
+msgid "Line %lu Col %lu"
+msgstr ""
+
+#, c-format
+msgid "%s bytes"
+msgstr "%s байтаў"
+
+#, fuzzy, c-format
+msgid ">= %s bytes"
+msgstr "%s байтаў"
+
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr " Памылка пры захаваньні файлу "
+
+#, c-format
+msgid ""
+" Cannot open \"%s\"\n"
+" %s "
+msgstr ""
+" Немагчыма адчыніць \"%s\"\n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot stat \"%s\"\n"
+" %s "
+msgstr ""
+" Немагчыма атрымаць стан \"%s\"\n"
+" %s "
+
+msgid " Cannot view: not a regular file "
+msgstr " Прагляд немагчымы: нязвычайны файл "
+
+msgid "Seeking to search result"
+msgstr ""
+
+msgid " History "
+msgstr "Гісторыя камандаў"
 
 msgid "Background process:"
 msgstr "Працэс у тле:"
@@ -3456,8 +3528,9 @@ msgstr "ftpfs: Памылка рэгістрацыі карыстальніку 
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: Памылковае ймя сыстэмы."
 
-msgid "ftpfs: Invalid host address."
-msgstr "ftpfs: Памылковая адрэса сыстэмы."
+#, c-format
+msgid "ftpfs: %s"
+msgstr ""
 
 #, c-format
 msgid "ftpfs: making connection to %s"
@@ -3473,6 +3546,18 @@ msgstr "ftpfs: збой далучэньня да паслужніку: %s"
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Чаканьне паўтору спробы... %d (Control-C для адмены)"
+
+#, fuzzy
+msgid "ftpfs: invalid address family"
+msgstr "ftpfs: Памылковая адрэса сыстэмы."
+
+#, fuzzy, c-format
+msgid "ftpfs: could not setup passive mode: %s"
+msgstr "ftpfs: немагчыма ўсталяваць пасыўны рэжым"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not create socket: %s"
+msgstr " Немагчыма стварыць сокет: %s "
 
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: немагчыма ўсталяваць пасыўны рэжым"
@@ -3709,11 +3794,31 @@ msgstr " Нутраная памылка:"
 msgid "Changes to file lost"
 msgstr "Зьмены для файлу страчаны"
 
+#~ msgid "pro&Mpt on replace"
+#~ msgstr "Падцьвердзіць &замену"
+
+#~ msgid "replace &All"
+#~ msgstr "Замяніць &Усе"
+
+#~ msgid "O&ne"
+#~ msgstr "&Адзін"
+
+#, fuzzy
+#~ msgid "%b %d %H:%M"
+#~ msgstr "%b %e %H:%M"
+
+#, fuzzy
+#~ msgid "%b %d %Y"
+#~ msgstr "%b %e  %Y"
+
+#, fuzzy
+#~ msgid " The current address is 0x%08"
+#~ msgstr ""
+#~ " Бягучая адрэса - 0x%lx.\n"
+#~ " Увядзіце новую адрэсу:"
+
 #~ msgid "scanf &Expression"
 #~ msgstr "выраз &scanf"
-
-#~ msgid "&Whole words only"
-#~ msgstr "Толькі поўныя &словы"
 
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr " Увядзіце парадак аргумэнтаў замены, напр. 3,2,1,4 "

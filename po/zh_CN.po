@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-07-09 17:07+0300\n"
+"POT-Creation-Date: 2009-08-26 17:11+0300\n"
 "PO-Revision-Date: 2002-01-29 22:05+0800\n"
 "Last-Translator: Wang Jian <lark@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -324,14 +324,16 @@ msgstr " 按下任意键："
 msgid " Execute Macro "
 msgstr " 执行宏 "
 
-msgid "pro&Mpt on replace"
-msgstr "替换时提示(&O)"
-
-msgid "replace &All"
-msgstr "全部替换(&A)"
-
-msgid "All charsets"
+msgid "&All charsets"
 msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "仅整词(&W)"
+
+#, fuzzy
+msgid "In se&lection"
+msgstr "反转选择(&T)         M-*"
 
 msgid "&Backwards"
 msgstr "向上(&B)"
@@ -348,14 +350,11 @@ msgstr " 输入查找字符串："
 msgid "Cancel"
 msgstr "取消"
 
-msgid "O&ne"
-msgstr "一个(&N)"
+msgid "&Skip"
+msgstr "跳过(&S)"
 
 msgid "A&ll"
 msgstr "全部(&L)"
-
-msgid "&Skip"
-msgstr "跳过(&S)"
 
 msgid "&Replace"
 msgstr "替换(&R)"
@@ -477,19 +476,19 @@ msgid "&Paste from clipfile      S-Ins"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k               "
+msgid "Toggle bookmar&k            M-k"
 msgstr "翻转标记(&T)       F3"
 
 #, fuzzy
-msgid "&Next bookmark                 "
+msgid "&Next bookmark              M-j"
 msgstr "新建(&N)         C-n"
 
 #, fuzzy
-msgid "Pre&v bookmark                 "
+msgid "Pre&v bookmark              M-i"
 msgstr "排序(&T)...             M-t"
 
 #, fuzzy
-msgid "&Flush bookmark                "
+msgid "&Flush bookmark             M-o"
 msgstr "邮寄(&M)...                 "
 
 #, fuzzy
@@ -514,6 +513,22 @@ msgstr "转到行(&G)...           M-l"
 
 msgid "&Paste from clipfile        C-y"
 msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "翻转标记(&T)       F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "新建(&N)         C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "排序(&T)...             M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "邮寄(&M)...                 "
 
 msgid "&Search...         F7"
 msgstr "查找(&S)...        F7"
@@ -657,6 +672,9 @@ msgstr "换行位置："
 
 msgid "Tab spacing: "
 msgstr "制表位间距："
+
+msgid "Cursor beyond end of line"
+msgstr ""
 
 #, fuzzy
 msgid "Pers&istent selection"
@@ -1312,6 +1330,16 @@ msgstr "Inode(&I)"
 msgid "Cannot read directory contents"
 msgstr "无法改变目录"
 
+msgid ""
+" The Commander can't change to the directory that \n"
+" the subshell claims you are in.  Perhaps you have \n"
+" deleted your working directory, or given yourself \n"
+" extra access permissions with the \"su\" command? "
+msgstr ""
+" Commander 无法进入 subshell 声称的您所在的目录。 \n"
+" 也许您删除了工作目录，或者通过“su”命令给您的   \n"
+" 进程额外的访问权限？"
+
 #, c-format
 msgid "Press any key to continue..."
 msgstr "按任意键继续..."
@@ -1853,25 +1881,25 @@ msgstr "  不正确的正则表达式 "
 msgid "Cas&e sensitive"
 msgstr "大小写敏感(&T)"
 
-#, fuzzy
-msgid "Case sens&itive"
-msgstr "大小写敏感(&T)"
-
 msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "&All charsets"
-msgstr ""
-
-msgid "All cha&rsets"
-msgstr ""
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "大小写敏感(&T)"
 
 #, fuzzy
 msgid "Re&gular expression"
 msgstr "正则表达式(&R)"
+
+msgid "Fir&st hit"
+msgstr ""
+
+msgid "All cha&rsets"
+msgstr ""
 
 msgid "&Tree"
 msgstr "树(&T)"
@@ -2212,16 +2240,6 @@ msgstr "哪些键没有标记上 OK。在缺少的键上按空格"
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "键，或者用鼠标点击来定义。用 Tab 来移动。"
-
-msgid ""
-" The Commander can't change to the directory that \n"
-" the subshell claims you are in.  Perhaps you have \n"
-" deleted your working directory, or given yourself \n"
-" extra access permissions with the \"su\" command? "
-msgstr ""
-" Commander 无法进入 subshell 声称的您所在的目录。 \n"
-" 也许您删除了工作目录，或者通过“su”命令给您的   \n"
-" 进程额外的访问权限？"
 
 msgid " The Midnight Commander "
 msgstr " Midnight Commander "
@@ -2637,6 +2655,9 @@ msgstr "显示隐藏文件(&H)"
 msgid "show &Backup files"
 msgstr "显示备份文件(&B)"
 
+msgid "Use SI si&ze units"
+msgstr ""
+
 msgid "&Never"
 msgstr "从不(&N)"
 
@@ -2828,14 +2849,6 @@ msgstr " 选择输入代码页"
 msgid "-  < No translation >"
 msgstr "-  < 没有翻译 >"
 
-#, c-format
-msgid ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-msgstr ""
-"不支持屏幕大小 %dx%d。\n"
-"检查 TERM 环境变量。\n"
-
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -2947,196 +2960,6 @@ msgid ""
 msgstr ""
 "无法写入 %s 文件：\n"
 "%s\n"
-
-msgid " Format error on file Extensions File "
-msgstr " 扩展文件格式错误 "
-
-#, c-format
-msgid " The %%var macro has no default "
-msgstr " %%var 宏没有默认值 "
-
-#, c-format
-msgid " The %%var macro has no variable "
-msgstr " %%var 宏没有变量 "
-
-msgid " Debug "
-msgstr "调试 "
-
-msgid " ERROR: "
-msgstr " 错误："
-
-msgid " True:  "
-msgstr " 正确："
-
-msgid " False: "
-msgstr " 错误："
-
-msgid " Warning -- ignoring file "
-msgstr " 警告 － 忽略文件 "
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"文件 %s 的拥有者不是 root 或者您，或者是全局可写。\n"
-"使用它可能会妨碍您的安全"
-
-#, c-format
-msgid " No suitable entries found in %s "
-msgstr " 在 %s 没有找到相应的项 "
-
-msgid " User menu "
-msgstr " 用户菜单 "
-
-#, fuzzy
-msgid "%b %d %H:%M"
-msgstr "%b %e %H:%M"
-
-#, fuzzy
-msgid "%b %d %Y"
-msgstr "%b %e %Y"
-
-msgid "%b %e  %Y"
-msgstr "%b %e %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
-#, fuzzy, c-format
-msgid "%s is not a directory\n"
-msgstr "目录"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr ""
-" 无法创建目标目录“%s” \n"
-" %s "
-
-#, fuzzy, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr ""
-" 无法创建目标目录“%s” \n"
-" %s "
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr ""
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr ""
-
-msgid " Pipe failed "
-msgstr " 管道失败 "
-
-msgid " Dup failed "
-msgstr " 复制失败 "
-
-#, fuzzy
-msgid " Cannot spawn child process "
-msgstr " 无法生成子程序 "
-
-msgid "Empty output from child filter"
-msgstr ""
-
-#, c-format
-msgid ""
-" Cannot open \"%s\"\n"
-" %s "
-msgstr ""
-" 无法打开“%s”\n"
-" %s "
-
-#, c-format
-msgid ""
-" Cannot stat \"%s\"\n"
-" %s "
-msgstr ""
-" 无法查看“%s”的状态\n"
-" %s "
-
-msgid " Cannot view: not a regular file "
-msgstr " 无法查看：不是常规文件 "
-
-#, c-format
-msgid "File: %s"
-msgstr "文件：%s"
-
-#, c-format
-msgid "Offset 0x%08lx"
-msgstr "偏移 0x%08lx"
-
-#, c-format
-msgid "Line %lu Col %lu"
-msgstr ""
-
-#, c-format
-msgid "%s bytes"
-msgstr "%s 字节"
-
-#, fuzzy, c-format
-msgid ">= %s bytes"
-msgstr "%s 字节"
-
-#, c-format
-msgid ""
-" Error while closing the file: \n"
-" %s \n"
-" Data may have been written or not. "
-msgstr ""
-
-#, fuzzy, c-format
-msgid ""
-" Cannot save file: \n"
-" %s "
-msgstr " 保存文件时发生错误。"
-
-#, fuzzy, c-format
-msgid ""
-" The current line number is %lu.\n"
-" Enter the new line number:"
-msgstr ""
-" 当前行号是 %d。\n"
-" 输入新行号："
-
-#, fuzzy
-msgid " The current address is 0x%08"
-msgstr ""
-" 当前地址是 0x%lx。\n"
-" 输入新地址："
-
-msgid " Goto Address "
-msgstr " 跳到地址 "
-
-#, fuzzy
-msgid " Invalid address "
-msgstr " 无效的口令 "
-
-msgid "Seeking to search result"
-msgstr ""
-
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Quit"
-msgstr ""
-
-msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
-msgid " History "
-msgstr " 历史 "
 
 msgid "Function key 1"
 msgstr "F1"
@@ -3276,11 +3099,259 @@ msgstr "小键盘上的 Delete"
 msgid "Enter on keypad"
 msgstr "小键盘上的 Enter"
 
+#, fuzzy
+msgid "Tab on keypad"
+msgstr "小键盘上的 +"
+
+#, fuzzy
+msgid "Space on keypad"
+msgstr "小键盘上的 /"
+
 msgid "Slash on keypad"
 msgstr "小键盘上的 /"
 
 msgid "NumLock on keypad"
 msgstr "小键盘上的 NumLock"
+
+msgid "Ctrl"
+msgstr ""
+
+msgid "Alt"
+msgstr ""
+
+msgid "Shift"
+msgstr ""
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"不支持屏幕大小 %dx%d。\n"
+"检查 TERM 环境变量。\n"
+
+msgid " Format error on file Extensions File "
+msgstr " 扩展文件格式错误 "
+
+#, c-format
+msgid " The %%var macro has no default "
+msgstr " %%var 宏没有默认值 "
+
+#, c-format
+msgid " The %%var macro has no variable "
+msgstr " %%var 宏没有变量 "
+
+msgid " Debug "
+msgstr "调试 "
+
+msgid " ERROR: "
+msgstr " 错误："
+
+msgid " True:  "
+msgstr " 正确："
+
+msgid " False: "
+msgstr " 错误："
+
+msgid " Warning -- ignoring file "
+msgstr " 警告 － 忽略文件 "
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"文件 %s 的拥有者不是 root 或者您，或者是全局可写。\n"
+"使用它可能会妨碍您的安全"
+
+#, c-format
+msgid " No suitable entries found in %s "
+msgstr " 在 %s 没有找到相应的项 "
+
+msgid " User menu "
+msgstr " 用户菜单 "
+
+msgid "%b %e  %Y"
+msgstr "%b %e %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
+
+#, fuzzy, c-format
+msgid "%s is not a directory\n"
+msgstr "目录"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr ""
+" 无法创建目标目录“%s” \n"
+" %s "
+
+#, fuzzy, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr ""
+" 无法创建目标目录“%s” \n"
+" %s "
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr ""
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr ""
+
+msgid " Pipe failed "
+msgstr " 管道失败 "
+
+msgid " Dup failed "
+msgstr " 复制失败 "
+
+#, fuzzy, c-format
+msgid ""
+" The current line number is %lld.\n"
+" Enter the new line number:"
+msgstr ""
+" 当前行号是 %d。\n"
+" 输入新行号："
+
+#, fuzzy, c-format
+msgid ""
+" The current address is %s.\n"
+" Enter the new address:"
+msgstr ""
+" 当前行号是 %d。\n"
+" 输入新行号："
+
+msgid " Goto Address "
+msgstr " 跳到地址 "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " 无效的口令 "
+
+#, fuzzy
+msgid " Cannot spawn child process "
+msgstr " 无法生成子程序 "
+
+msgid "Empty output from child filter"
+msgstr ""
+
+msgid "All charsets"
+msgstr ""
+
+msgid "ButtonBar|Help"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
+
+msgid "ButtonBar|Ascii"
+msgstr ""
+
+msgid "ButtonBar|Hex"
+msgstr ""
+
+msgid "ButtonBar|Goto"
+msgstr ""
+
+msgid "ButtonBar|Line"
+msgstr ""
+
+msgid "ButtonBar|View"
+msgstr ""
+
+msgid "ButtonBar|Edit"
+msgstr ""
+
+msgid "ButtonBar|Save"
+msgstr ""
+
+msgid "ButtonBar|UnWrap"
+msgstr ""
+
+msgid "ButtonBar|Wrap"
+msgstr ""
+
+msgid "ButtonBar|HxSrch"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Raw"
+msgstr ""
+
+msgid "ButtonBar|Parse"
+msgstr ""
+
+msgid "ButtonBar|Unform"
+msgstr ""
+
+msgid "ButtonBar|Format"
+msgstr ""
+
+#, c-format
+msgid "File: %s"
+msgstr "文件：%s"
+
+#, c-format
+msgid "Offset 0x%08lx"
+msgstr "偏移 0x%08lx"
+
+#, c-format
+msgid "Line %lu Col %lu"
+msgstr ""
+
+#, c-format
+msgid "%s bytes"
+msgstr "%s 字节"
+
+#, fuzzy, c-format
+msgid ">= %s bytes"
+msgstr "%s 字节"
+
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr " 保存文件时发生错误。"
+
+#, c-format
+msgid ""
+" Cannot open \"%s\"\n"
+" %s "
+msgstr ""
+" 无法打开“%s”\n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot stat \"%s\"\n"
+" %s "
+msgstr ""
+" 无法查看“%s”的状态\n"
+" %s "
+
+msgid " Cannot view: not a regular file "
+msgstr " 无法查看：不是常规文件 "
+
+msgid "Seeking to search result"
+msgstr ""
+
+msgid " History "
+msgstr " 历史 "
 
 msgid "Background process:"
 msgstr "后台进程："
@@ -3462,8 +3533,9 @@ msgstr "ftpfs：用户 %s 登录不正确"
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs：无效的主机名。"
 
-msgid "ftpfs: Invalid host address."
-msgstr "ftpfs：无效的主机地址。"
+#, c-format
+msgid "ftpfs: %s"
+msgstr ""
 
 #, c-format
 msgid "ftpfs: making connection to %s"
@@ -3479,6 +3551,18 @@ msgstr "ftpfs：连接服务器失败：%s"
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "正在等待重试... %d (Control-C 取消)"
+
+#, fuzzy
+msgid "ftpfs: invalid address family"
+msgstr "ftpfs：无效的主机地址。"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not setup passive mode: %s"
+msgstr "ftpfs：无法设置为被动模式"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not create socket: %s"
+msgstr " 无法创建套接字：%s "
 
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs：无法设置为被动模式"
@@ -3714,11 +3798,31 @@ msgstr "内部错误："
 msgid "Changes to file lost"
 msgstr "对文件的修改被丢失"
 
+#~ msgid "pro&Mpt on replace"
+#~ msgstr "替换时提示(&O)"
+
+#~ msgid "replace &All"
+#~ msgstr "全部替换(&A)"
+
+#~ msgid "O&ne"
+#~ msgstr "一个(&N)"
+
+#, fuzzy
+#~ msgid "%b %d %H:%M"
+#~ msgstr "%b %e %H:%M"
+
+#, fuzzy
+#~ msgid "%b %d %Y"
+#~ msgstr "%b %e %Y"
+
+#, fuzzy
+#~ msgid " The current address is 0x%08"
+#~ msgstr ""
+#~ " 当前地址是 0x%lx。\n"
+#~ " 输入新地址："
+
 #~ msgid "scanf &Expression"
 #~ msgstr "scanf 表达式(&E)"
-
-#~ msgid "&Whole words only"
-#~ msgstr "仅整词(&W)"
 
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr " 输入替换参数的顺序，例如 3,2,1,4 "

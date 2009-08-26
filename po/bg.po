@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.55\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-07-09 17:07+0300\n"
+"POT-Creation-Date: 2009-08-26 17:11+0300\n"
 "PO-Revision-Date: 2002-06-24 02:15+0300\n"
 "Last-Translator: Todor Buyukliev <adrez@mail.bg>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -321,14 +321,16 @@ msgstr " Натиснете клавиш: "
 msgid " Execute Macro "
 msgstr " Изпълни Макрос "
 
-msgid "pro&Mpt on replace"
-msgstr "Питай при замяна"
-
-msgid "replace &All"
-msgstr "Замести всички"
-
-msgid "All charsets"
+msgid "&All charsets"
 msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "Само цели думи"
+
+#, fuzzy
+msgid "In se&lection"
+msgstr "Обърни маркирането       M-*"
 
 msgid "&Backwards"
 msgstr "Назад"
@@ -345,14 +347,11 @@ msgstr " Въведете търсения низ:"
 msgid "Cancel"
 msgstr "Отказ"
 
-msgid "O&ne"
-msgstr "Един"
+msgid "&Skip"
+msgstr "Пропусни"
 
 msgid "A&ll"
 msgstr "Всички"
-
-msgid "&Skip"
-msgstr "Пропусни"
 
 msgid "&Replace"
 msgstr "Замести"
@@ -474,19 +473,19 @@ msgid "&Paste from clipfile      S-Ins"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k               "
+msgid "Toggle bookmar&k            M-k"
 msgstr "Маркирай            F3"
 
 #, fuzzy
-msgid "&Next bookmark                 "
+msgid "&Next bookmark              M-j"
 msgstr "Нов                C-n"
 
 #, fuzzy
-msgid "Pre&v bookmark                 "
+msgid "Pre&v bookmark              M-i"
 msgstr "Сортирай...                M-t"
 
 #, fuzzy
-msgid "&Flush bookmark                "
+msgid "&Flush bookmark             M-o"
 msgstr "Пусни по пощата...            "
 
 #, fuzzy
@@ -511,6 +510,22 @@ msgstr "Отиди на ред...            M-l"
 
 msgid "&Paste from clipfile        C-y"
 msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "Маркирай            F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "Нов                C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "Сортирай...                M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "Пусни по пощата...            "
 
 msgid "&Search...         F7"
 msgstr "Търси...          F7"
@@ -654,6 +669,9 @@ msgstr "Дължина на ред : "
 
 msgid "Tab spacing: "
 msgstr "Размер на tab-овете: "
+
+msgid "Cursor beyond end of line"
+msgstr ""
 
 #, fuzzy
 msgid "Pers&istent selection"
@@ -1312,6 +1330,17 @@ msgstr "I-възел"
 msgid "Cannot read directory contents"
 msgstr "Не може да се смени директорията"
 
+msgid ""
+" The Commander can't change to the directory that \n"
+" the subshell claims you are in.  Perhaps you have \n"
+" deleted your working directory, or given yourself \n"
+" extra access permissions with the \"su\" command? "
+msgstr ""
+" MC не може да влезе в директория, в която подобвивката\n"
+" твърди, че се намирате. Може да сте изтрили работната\n"
+" си директория, или да сте си дали допълнителни права\n"
+" за достъп с командата \"su\". "
+
 #, c-format
 msgid "Press any key to continue..."
 msgstr "Натиснете клавиш, за да продължите..."
@@ -1857,25 +1886,25 @@ msgstr "  Грешен регулярен израз  "
 msgid "Cas&e sensitive"
 msgstr "Различавай главни/малки"
 
-#, fuzzy
-msgid "Case sens&itive"
-msgstr "Различавай главни/малки"
-
 msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "&All charsets"
-msgstr ""
-
-msgid "All cha&rsets"
-msgstr ""
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "Различавай главни/малки"
 
 #, fuzzy
 msgid "Re&gular expression"
 msgstr "Регулярен израз"
+
+msgid "Fir&st hit"
+msgstr ""
+
+msgid "All cha&rsets"
+msgstr ""
 
 msgid "&Tree"
 msgstr "Дърво"
@@ -2224,17 +2253,6 @@ msgstr "проверете кои не са маркирани с OK. Натис
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "или ги щракнете с мишката, за да ги дефинирате. Движете се с Tab."
-
-msgid ""
-" The Commander can't change to the directory that \n"
-" the subshell claims you are in.  Perhaps you have \n"
-" deleted your working directory, or given yourself \n"
-" extra access permissions with the \"su\" command? "
-msgstr ""
-" MC не може да влезе в директория, в която подобвивката\n"
-" твърди, че се намирате. Може да сте изтрили работната\n"
-" си директория, или да сте си дали допълнителни права\n"
-" за достъп с командата \"su\". "
 
 msgid " The Midnight Commander "
 msgstr " The Midnight Commander "
@@ -2651,6 +2669,9 @@ msgstr "Показвай скрити файлове"
 msgid "show &Backup files"
 msgstr "Показвай архивни файлове"
 
+msgid "Use SI si&ze units"
+msgstr ""
+
 msgid "&Never"
 msgstr "Никога"
 
@@ -2842,14 +2863,6 @@ msgstr " Изберете входна кодова страница "
 msgid "-  < No translation >"
 msgstr "-  < Няма превод >"
 
-#, c-format
-msgid ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-msgstr ""
-"Размер на екрана %dx%d не е поддържан.\n"
-"Проверете променливата на средата TERM.\n"
-
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -2961,196 +2974,6 @@ msgid ""
 msgstr ""
 "Не може да се пише във файла %s:\n"
 "%s\n"
-
-msgid " Format error on file Extensions File "
-msgstr " Грешка във формата на Файла с Разширения "
-
-#, c-format
-msgid " The %%var macro has no default "
-msgstr " Макросът %%var няма значение по подразбиране "
-
-#, c-format
-msgid " The %%var macro has no variable "
-msgstr " Макросът %%var няма променлива "
-
-msgid " Debug "
-msgstr " Дебъг "
-
-msgid " ERROR: "
-msgstr " ГРЕШКА: "
-
-msgid " True:  "
-msgstr " Истина: "
-
-msgid " False: "
-msgstr " Лъжа: "
-
-msgid " Warning -- ignoring file "
-msgstr " Внимание -- игнорирам файла "
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"Файла %s не е на root или Ваш, или е достъпен за запис от всички.\n"
-"Използването му може да застраши сигурността Ви"
-
-#, c-format
-msgid " No suitable entries found in %s "
-msgstr " Не са открити подходящи елементи в %s "
-
-msgid " User menu "
-msgstr " Поребителско меню "
-
-#, fuzzy
-msgid "%b %d %H:%M"
-msgstr "%b %e %H:%M"
-
-#, fuzzy
-msgid "%b %d %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
-#, fuzzy, c-format
-msgid "%s is not a directory\n"
-msgstr "директорията"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr ""
-" Не може да се създаде директорията назначение \"%s\" \n"
-" %s "
-
-#, fuzzy, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr ""
-" Не може да се създаде директорията назначение \"%s\" \n"
-" %s "
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr ""
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr ""
-
-msgid " Pipe failed "
-msgstr " Канала пропадна "
-
-msgid " Dup failed "
-msgstr " Дублирането на дескриптора пропадна "
-
-#, fuzzy
-msgid " Cannot spawn child process "
-msgstr " Не мога дa пуснa програма-дете "
-
-msgid "Empty output from child filter"
-msgstr ""
-
-#, c-format
-msgid ""
-" Cannot open \"%s\"\n"
-" %s "
-msgstr ""
-" Не може да се отвори \"%s\"\n"
-" %s "
-
-#, c-format
-msgid ""
-" Cannot stat \"%s\"\n"
-" %s "
-msgstr ""
-" Не може да се stat-ne \"%s\"\n"
-" %s "
-
-msgid " Cannot view: not a regular file "
-msgstr " Не може да се разглежда: не е обикновен файл "
-
-#, c-format
-msgid "File: %s"
-msgstr "Файл: %s"
-
-#, c-format
-msgid "Offset 0x%08lx"
-msgstr "Отместване 0x%08lx"
-
-#, c-format
-msgid "Line %lu Col %lu"
-msgstr ""
-
-#, c-format
-msgid "%s bytes"
-msgstr "%s байта"
-
-#, fuzzy, c-format
-msgid ">= %s bytes"
-msgstr "%s байта"
-
-#, c-format
-msgid ""
-" Error while closing the file: \n"
-" %s \n"
-" Data may have been written or not. "
-msgstr ""
-
-#, fuzzy, c-format
-msgid ""
-" Cannot save file: \n"
-" %s "
-msgstr " Грешка при запазване на файла. "
-
-#, fuzzy, c-format
-msgid ""
-" The current line number is %lu.\n"
-" Enter the new line number:"
-msgstr ""
-" Текущият ред е %d.\n"
-" Въведете нов номер на ред:"
-
-#, fuzzy
-msgid " The current address is 0x%08"
-msgstr ""
-" Текущият адрес е 0x%lx.\n"
-" Въвдете нов адрес:"
-
-msgid " Goto Address "
-msgstr " Отиди на адрес "
-
-#, fuzzy
-msgid " Invalid address "
-msgstr " Невалидна парола "
-
-msgid "Seeking to search result"
-msgstr ""
-
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Quit"
-msgstr ""
-
-msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
-msgid " History "
-msgstr " История "
 
 msgid "Function key 1"
 msgstr "F1"
@@ -3290,11 +3113,259 @@ msgstr "Delete от доп. клв."
 msgid "Enter on keypad"
 msgstr "Enter от доп. клв."
 
+#, fuzzy
+msgid "Tab on keypad"
+msgstr "+ от доп. клв."
+
+#, fuzzy
+msgid "Space on keypad"
+msgstr "Накл. черта от доп. клв."
+
 msgid "Slash on keypad"
 msgstr "Накл. черта от доп. клв."
 
 msgid "NumLock on keypad"
 msgstr "NumLock от доп. клв."
+
+msgid "Ctrl"
+msgstr ""
+
+msgid "Alt"
+msgstr ""
+
+msgid "Shift"
+msgstr ""
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"Размер на екрана %dx%d не е поддържан.\n"
+"Проверете променливата на средата TERM.\n"
+
+msgid " Format error on file Extensions File "
+msgstr " Грешка във формата на Файла с Разширения "
+
+#, c-format
+msgid " The %%var macro has no default "
+msgstr " Макросът %%var няма значение по подразбиране "
+
+#, c-format
+msgid " The %%var macro has no variable "
+msgstr " Макросът %%var няма променлива "
+
+msgid " Debug "
+msgstr " Дебъг "
+
+msgid " ERROR: "
+msgstr " ГРЕШКА: "
+
+msgid " True:  "
+msgstr " Истина: "
+
+msgid " False: "
+msgstr " Лъжа: "
+
+msgid " Warning -- ignoring file "
+msgstr " Внимание -- игнорирам файла "
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"Файла %s не е на root или Ваш, или е достъпен за запис от всички.\n"
+"Използването му може да застраши сигурността Ви"
+
+#, c-format
+msgid " No suitable entries found in %s "
+msgstr " Не са открити подходящи елементи в %s "
+
+msgid " User menu "
+msgstr " Поребителско меню "
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
+
+#, fuzzy, c-format
+msgid "%s is not a directory\n"
+msgstr "директорията"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr ""
+" Не може да се създаде директорията назначение \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr ""
+" Не може да се създаде директорията назначение \"%s\" \n"
+" %s "
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr ""
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr ""
+
+msgid " Pipe failed "
+msgstr " Канала пропадна "
+
+msgid " Dup failed "
+msgstr " Дублирането на дескриптора пропадна "
+
+#, fuzzy, c-format
+msgid ""
+" The current line number is %lld.\n"
+" Enter the new line number:"
+msgstr ""
+" Текущият ред е %d.\n"
+" Въведете нов номер на ред:"
+
+#, fuzzy, c-format
+msgid ""
+" The current address is %s.\n"
+" Enter the new address:"
+msgstr ""
+" Текущият ред е %d.\n"
+" Въведете нов номер на ред:"
+
+msgid " Goto Address "
+msgstr " Отиди на адрес "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " Невалидна парола "
+
+#, fuzzy
+msgid " Cannot spawn child process "
+msgstr " Не мога дa пуснa програма-дете "
+
+msgid "Empty output from child filter"
+msgstr ""
+
+msgid "All charsets"
+msgstr ""
+
+msgid "ButtonBar|Help"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
+
+msgid "ButtonBar|Ascii"
+msgstr ""
+
+msgid "ButtonBar|Hex"
+msgstr ""
+
+msgid "ButtonBar|Goto"
+msgstr ""
+
+msgid "ButtonBar|Line"
+msgstr ""
+
+msgid "ButtonBar|View"
+msgstr ""
+
+msgid "ButtonBar|Edit"
+msgstr ""
+
+msgid "ButtonBar|Save"
+msgstr ""
+
+msgid "ButtonBar|UnWrap"
+msgstr ""
+
+msgid "ButtonBar|Wrap"
+msgstr ""
+
+msgid "ButtonBar|HxSrch"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Raw"
+msgstr ""
+
+msgid "ButtonBar|Parse"
+msgstr ""
+
+msgid "ButtonBar|Unform"
+msgstr ""
+
+msgid "ButtonBar|Format"
+msgstr ""
+
+#, c-format
+msgid "File: %s"
+msgstr "Файл: %s"
+
+#, c-format
+msgid "Offset 0x%08lx"
+msgstr "Отместване 0x%08lx"
+
+#, c-format
+msgid "Line %lu Col %lu"
+msgstr ""
+
+#, c-format
+msgid "%s bytes"
+msgstr "%s байта"
+
+#, fuzzy, c-format
+msgid ">= %s bytes"
+msgstr "%s байта"
+
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr " Грешка при запазване на файла. "
+
+#, c-format
+msgid ""
+" Cannot open \"%s\"\n"
+" %s "
+msgstr ""
+" Не може да се отвори \"%s\"\n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot stat \"%s\"\n"
+" %s "
+msgstr ""
+" Не може да се stat-ne \"%s\"\n"
+" %s "
+
+msgid " Cannot view: not a regular file "
+msgstr " Не може да се разглежда: не е обикновен файл "
+
+msgid "Seeking to search result"
+msgstr ""
+
+msgid " History "
+msgstr " История "
 
 msgid "Background process:"
 msgstr "Фонов процес:"
@@ -3475,8 +3546,9 @@ msgstr "ftpfs: Отказ на връзка за потребителя %s "
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: Невалидно име на машина"
 
-msgid "ftpfs: Invalid host address."
-msgstr "ftpfs: Невалиден адрес на машина"
+#, c-format
+msgid "ftpfs: %s"
+msgstr ""
 
 #, c-format
 msgid "ftpfs: making connection to %s"
@@ -3492,6 +3564,18 @@ msgstr "ftpfs: връзката със сървъра пропадна: %s"
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Изчакване за нов опит... %d (Control-C за отказ)"
+
+#, fuzzy
+msgid "ftpfs: invalid address family"
+msgstr "ftpfs: Невалиден адрес на машина"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not setup passive mode: %s"
+msgstr "ftpfs: не може да се установи пасивен режим"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not create socket: %s"
+msgstr " Не може да се създаде сокет: %s "
 
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: не може да се установи пасивен режим"
@@ -3728,11 +3812,31 @@ msgstr "Вътрешна грешка:"
 msgid "Changes to file lost"
 msgstr "Промените във файла изгубени"
 
+#~ msgid "pro&Mpt on replace"
+#~ msgstr "Питай при замяна"
+
+#~ msgid "replace &All"
+#~ msgstr "Замести всички"
+
+#~ msgid "O&ne"
+#~ msgstr "Един"
+
+#, fuzzy
+#~ msgid "%b %d %H:%M"
+#~ msgstr "%b %e %H:%M"
+
+#, fuzzy
+#~ msgid "%b %d %Y"
+#~ msgstr "%b %e  %Y"
+
+#, fuzzy
+#~ msgid " The current address is 0x%08"
+#~ msgstr ""
+#~ " Текущият адрес е 0x%lx.\n"
+#~ " Въвдете нов адрес:"
+
 #~ msgid "scanf &Expression"
 #~ msgstr "scanf израз"
-
-#~ msgid "&Whole words only"
-#~ msgstr "Само цели думи"
 
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr " Ред на заместващите аргументи, напр. 3,2,1,4 "

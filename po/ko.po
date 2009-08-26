@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0-pre3\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-07-09 17:07+0300\n"
+"POT-Creation-Date: 2009-08-26 17:11+0300\n"
 "PO-Revision-Date: 2003-01-22 17:31+0900\n"
 "Last-Translator: Nam SungHyun <namsh@kldp.org>\n"
 "Language-Team: Korean <debian-l10n-korean@lists.debian.org>\n"
@@ -319,14 +319,16 @@ msgstr " 아무 글쇠나 누르십시오: "
 msgid " Execute Macro "
 msgstr " 매크로 실행 "
 
-msgid "pro&Mpt on replace"
-msgstr "바꿀 때마다 물어봄(&O)"
-
-msgid "replace &All"
-msgstr "모두 바꿈(&A)"
-
-msgid "All charsets"
+msgid "&All charsets"
 msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "단어 단위로(&W)"
+
+#, fuzzy
+msgid "In se&lection"
+msgstr "선택반전(&T)              M-*"
 
 msgid "&Backwards"
 msgstr "뒤로(&B)"
@@ -343,14 +345,11 @@ msgstr " 찾을 글월 입력:"
 msgid "Cancel"
 msgstr "취소"
 
-msgid "O&ne"
-msgstr "하나(&n)"
+msgid "&Skip"
+msgstr "건너뜀(&S)"
 
 msgid "A&ll"
 msgstr "모두(&l)"
-
-msgid "&Skip"
-msgstr "건너뜀(&S)"
 
 msgid "&Replace"
 msgstr "바꿈(&R)"
@@ -472,19 +471,19 @@ msgid "&Paste from clipfile      S-Ins"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k               "
+msgid "Toggle bookmar&k            M-k"
 msgstr "마크 토글(&T)              F3"
 
 #, fuzzy
-msgid "&Next bookmark                 "
+msgid "&Next bookmark              M-j"
 msgstr "새 파일(&N)               C-n"
 
 #, fuzzy
-msgid "Pre&v bookmark                 "
+msgid "Pre&v bookmark              M-i"
 msgstr "정렬(&t)                  M-t"
 
 #, fuzzy
-msgid "&Flush bookmark                "
+msgid "&Flush bookmark             M-o"
 msgstr "전자우편(&M)...              "
 
 #, fuzzy
@@ -509,6 +508,22 @@ msgstr "라인 찾아가기(&G)...      M-l"
 
 msgid "&Paste from clipfile        C-y"
 msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "마크 토글(&T)              F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "새 파일(&N)               C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "정렬(&t)                  M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "전자우편(&M)...              "
 
 msgid "&Search...         F7"
 msgstr "찾기(&S)...                F7"
@@ -652,6 +667,9 @@ msgstr ""
 
 msgid "Tab spacing: "
 msgstr "탭 간격: "
+
+msgid "Cursor beyond end of line"
+msgstr ""
 
 #, fuzzy
 msgid "Pers&istent selection"
@@ -1305,6 +1323,17 @@ msgstr "Inode(&I)"
 msgid "Cannot read directory contents"
 msgstr "디렉토리 내용을 읽을 수 없습니다"
 
+msgid ""
+" The Commander can't change to the directory that \n"
+" the subshell claims you are in.  Perhaps you have \n"
+" deleted your working directory, or given yourself \n"
+" extra access permissions with the \"su\" command? "
+msgstr ""
+" 커맨더가 당신이 현재 수행중인 subshell에 의해 \n"
+" 그 디렉토리으로 바꿀 수 없습니다. 아마도 당신이 \n"
+" 작업 디렉토리을 지웠거나, 아니면 \"su\" 명령을\n"
+" 사용하여 특별한 액세스 권한을 가진 것 아녜요? "
+
 #, c-format
 msgid "Press any key to continue..."
 msgstr "계속하려면 아무 글쇠나 누르십시오..."
@@ -1850,25 +1879,25 @@ msgstr "  이해할 수 없는 정규표현식  "
 msgid "Cas&e sensitive"
 msgstr "대소문자 구분(&t)"
 
-#, fuzzy
-msgid "Case sens&itive"
-msgstr "대소문자 구분(&t)"
-
 msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "&All charsets"
-msgstr ""
-
-msgid "All cha&rsets"
-msgstr ""
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "대소문자 구분(&t)"
 
 #, fuzzy
 msgid "Re&gular expression"
 msgstr "정규표현식(&R)"
+
+msgid "Fir&st hit"
+msgstr ""
+
+msgid "All cha&rsets"
+msgstr ""
 
 msgid "&Tree"
 msgstr "나무꼴(&T)"
@@ -2216,17 +2245,6 @@ msgstr "지 않은 글쇠가 있는 지 확인하십시오.  그 위에서 SPACE
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "나 마우스로 클릭한 후 글쇠를 정의하십시오. 탭글쇠로 이동하십시오"
-
-msgid ""
-" The Commander can't change to the directory that \n"
-" the subshell claims you are in.  Perhaps you have \n"
-" deleted your working directory, or given yourself \n"
-" extra access permissions with the \"su\" command? "
-msgstr ""
-" 커맨더가 당신이 현재 수행중인 subshell에 의해 \n"
-" 그 디렉토리으로 바꿀 수 없습니다. 아마도 당신이 \n"
-" 작업 디렉토리을 지웠거나, 아니면 \"su\" 명령을\n"
-" 사용하여 특별한 액세스 권한을 가진 것 아녜요? "
 
 msgid " The Midnight Commander "
 msgstr " The Midnight Commander "
@@ -2640,6 +2658,9 @@ msgstr "숨은 파일 보기(&H)"
 msgid "show &Backup files"
 msgstr "여벌 파일 보기(&B)"
 
+msgid "Use SI si&ze units"
+msgstr ""
+
 msgid "&Never"
 msgstr "결코(&N)"
 
@@ -2830,14 +2851,6 @@ msgstr " 입력 코드페이지 선택 "
 msgid "-  < No translation >"
 msgstr "-  < 변환 안함 >"
 
-#, c-format
-msgid ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-msgstr ""
-"화면크기 %dx%d은(는) 지원되지 않습니다.\n"
-"TERM 환경변수를 확인해 보세요.\n"
-
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -2949,192 +2962,6 @@ msgid ""
 msgstr ""
 "%s 파일에 쓸 수 없습니다:\n"
 "%s\n"
-
-msgid " Format error on file Extensions File "
-msgstr " 확장자 파일의 형식 에러 "
-
-#, c-format
-msgid " The %%var macro has no default "
-msgstr " %%var 매크로가 기본값을 가지고 있지 않습니다 "
-
-#, c-format
-msgid " The %%var macro has no variable "
-msgstr " %%var 매크로가 변수를 가지고 있지 않습니다 "
-
-msgid " Debug "
-msgstr " 디버그 "
-
-msgid " ERROR: "
-msgstr " 오류: "
-
-msgid " True:  "
-msgstr " 사실:  "
-
-msgid " False: "
-msgstr " 거짓:  "
-
-msgid " Warning -- ignoring file "
-msgstr " 경고 -- 파일을 무시 "
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"%s 파일이 root 혹은 당신의 소유가 아니거나 누구든 쓰기 가능합니다.\n"
-"이 파일을 사용하는 것은 보안에 문제가 있습니다"
-
-#, c-format
-msgid " No suitable entries found in %s "
-msgstr " %s에서 적당한 항목을 찾을 수 없습니다 "
-
-msgid " User menu "
-msgstr " 사용자 메뉴 "
-
-#, fuzzy
-msgid "%b %d %H:%M"
-msgstr "%b %e %H:%M"
-
-#, fuzzy
-msgid "%b %d %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s은(는) 디렉토리가 아닙니다\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "디렉토리 %s은(는) 당신 소유가 아닙니다\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "%s 임시 디렉토리에 대한 맞는 퍼미션을 설정할 수 없습니다\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr "%s 임시 디렉토리를 만들 수 없습니다: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "임시 파일이 %s에 만들어질 것입니다\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "임시 파일은 만들어지지 않을 것입니다\n"
-
-msgid " Pipe failed "
-msgstr " 파이프 실패 "
-
-msgid " Dup failed "
-msgstr " 복제 실패 "
-
-#, fuzzy
-msgid " Cannot spawn child process "
-msgstr " 자식(child) 풀그림을 실행할 수 없습니다 "
-
-msgid "Empty output from child filter"
-msgstr "자식 필터에서 결과가 없습니다"
-
-#, c-format
-msgid ""
-" Cannot open \"%s\"\n"
-" %s "
-msgstr ""
-" \"%s\"을(를) 열 수 없습니다 \n"
-" %s "
-
-#, c-format
-msgid ""
-" Cannot stat \"%s\"\n"
-" %s "
-msgstr ""
-" \"%s\" 파일정보를 얻을 수 없어요\n"
-" %s "
-
-msgid " Cannot view: not a regular file "
-msgstr " 일반파일이 아니라 볼 수 없습니다 "
-
-#, c-format
-msgid "File: %s"
-msgstr "파일: %s"
-
-#, c-format
-msgid "Offset 0x%08lx"
-msgstr "옵셋 0x%08lx"
-
-#, c-format
-msgid "Line %lu Col %lu"
-msgstr ""
-
-#, c-format
-msgid "%s bytes"
-msgstr "%s 바이트"
-
-#, fuzzy, c-format
-msgid ">= %s bytes"
-msgstr "%s 바이트"
-
-#, c-format
-msgid ""
-" Error while closing the file: \n"
-" %s \n"
-" Data may have been written or not. "
-msgstr ""
-
-#, fuzzy, c-format
-msgid ""
-" Cannot save file: \n"
-" %s "
-msgstr " 파일을 저장할 수 없습니다. "
-
-#, fuzzy, c-format
-msgid ""
-" The current line number is %lu.\n"
-" Enter the new line number:"
-msgstr ""
-" 현재 줄 번호는 %d입니다.\n"
-" 새로운 줄 번호을 입력:"
-
-#, fuzzy
-msgid " The current address is 0x%08"
-msgstr ""
-" 현재 주소는 0x%lx입니다.\n"
-" 새로운 주소 입력:"
-
-msgid " Goto Address "
-msgstr " 주소 찾기 "
-
-#, fuzzy
-msgid " Invalid address "
-msgstr " 틀린 비밀번호 "
-
-msgid "Seeking to search result"
-msgstr ""
-
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Quit"
-msgstr ""
-
-msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
-msgid " History "
-msgstr " 히스토리 "
 
 msgid "Function key 1"
 msgstr "Function key 1"
@@ -3274,11 +3101,255 @@ msgstr "Delete on keypad"
 msgid "Enter on keypad"
 msgstr "Enter on keypad"
 
+#, fuzzy
+msgid "Tab on keypad"
+msgstr "+ on keypad"
+
+#, fuzzy
+msgid "Space on keypad"
+msgstr "Slash on keypad"
+
 msgid "Slash on keypad"
 msgstr "Slash on keypad"
 
 msgid "NumLock on keypad"
 msgstr "NumLock on keypad"
+
+msgid "Ctrl"
+msgstr ""
+
+msgid "Alt"
+msgstr ""
+
+msgid "Shift"
+msgstr ""
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"화면크기 %dx%d은(는) 지원되지 않습니다.\n"
+"TERM 환경변수를 확인해 보세요.\n"
+
+msgid " Format error on file Extensions File "
+msgstr " 확장자 파일의 형식 에러 "
+
+#, c-format
+msgid " The %%var macro has no default "
+msgstr " %%var 매크로가 기본값을 가지고 있지 않습니다 "
+
+#, c-format
+msgid " The %%var macro has no variable "
+msgstr " %%var 매크로가 변수를 가지고 있지 않습니다 "
+
+msgid " Debug "
+msgstr " 디버그 "
+
+msgid " ERROR: "
+msgstr " 오류: "
+
+msgid " True:  "
+msgstr " 사실:  "
+
+msgid " False: "
+msgstr " 거짓:  "
+
+msgid " Warning -- ignoring file "
+msgstr " 경고 -- 파일을 무시 "
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"%s 파일이 root 혹은 당신의 소유가 아니거나 누구든 쓰기 가능합니다.\n"
+"이 파일을 사용하는 것은 보안에 문제가 있습니다"
+
+#, c-format
+msgid " No suitable entries found in %s "
+msgstr " %s에서 적당한 항목을 찾을 수 없습니다 "
+
+msgid " User menu "
+msgstr " 사용자 메뉴 "
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
+
+#, c-format
+msgid "%s is not a directory\n"
+msgstr "%s은(는) 디렉토리가 아닙니다\n"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr "디렉토리 %s은(는) 당신 소유가 아닙니다\n"
+
+#, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr "%s 임시 디렉토리에 대한 맞는 퍼미션을 설정할 수 없습니다\n"
+
+#, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr "%s 임시 디렉토리를 만들 수 없습니다: %s\n"
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr "임시 파일이 %s에 만들어질 것입니다\n"
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr "임시 파일은 만들어지지 않을 것입니다\n"
+
+msgid " Pipe failed "
+msgstr " 파이프 실패 "
+
+msgid " Dup failed "
+msgstr " 복제 실패 "
+
+#, fuzzy, c-format
+msgid ""
+" The current line number is %lld.\n"
+" Enter the new line number:"
+msgstr ""
+" 현재 줄 번호는 %d입니다.\n"
+" 새로운 줄 번호을 입력:"
+
+#, fuzzy, c-format
+msgid ""
+" The current address is %s.\n"
+" Enter the new address:"
+msgstr ""
+" 현재 줄 번호는 %d입니다.\n"
+" 새로운 줄 번호을 입력:"
+
+msgid " Goto Address "
+msgstr " 주소 찾기 "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " 틀린 비밀번호 "
+
+#, fuzzy
+msgid " Cannot spawn child process "
+msgstr " 자식(child) 풀그림을 실행할 수 없습니다 "
+
+msgid "Empty output from child filter"
+msgstr "자식 필터에서 결과가 없습니다"
+
+msgid "All charsets"
+msgstr ""
+
+msgid "ButtonBar|Help"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
+
+msgid "ButtonBar|Ascii"
+msgstr ""
+
+msgid "ButtonBar|Hex"
+msgstr ""
+
+msgid "ButtonBar|Goto"
+msgstr ""
+
+msgid "ButtonBar|Line"
+msgstr ""
+
+msgid "ButtonBar|View"
+msgstr ""
+
+msgid "ButtonBar|Edit"
+msgstr ""
+
+msgid "ButtonBar|Save"
+msgstr ""
+
+msgid "ButtonBar|UnWrap"
+msgstr ""
+
+msgid "ButtonBar|Wrap"
+msgstr ""
+
+msgid "ButtonBar|HxSrch"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Raw"
+msgstr ""
+
+msgid "ButtonBar|Parse"
+msgstr ""
+
+msgid "ButtonBar|Unform"
+msgstr ""
+
+msgid "ButtonBar|Format"
+msgstr ""
+
+#, c-format
+msgid "File: %s"
+msgstr "파일: %s"
+
+#, c-format
+msgid "Offset 0x%08lx"
+msgstr "옵셋 0x%08lx"
+
+#, c-format
+msgid "Line %lu Col %lu"
+msgstr ""
+
+#, c-format
+msgid "%s bytes"
+msgstr "%s 바이트"
+
+#, fuzzy, c-format
+msgid ">= %s bytes"
+msgstr "%s 바이트"
+
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr " 파일을 저장할 수 없습니다. "
+
+#, c-format
+msgid ""
+" Cannot open \"%s\"\n"
+" %s "
+msgstr ""
+" \"%s\"을(를) 열 수 없습니다 \n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot stat \"%s\"\n"
+" %s "
+msgstr ""
+" \"%s\" 파일정보를 얻을 수 없어요\n"
+" %s "
+
+msgid " Cannot view: not a regular file "
+msgstr " 일반파일이 아니라 볼 수 없습니다 "
+
+msgid "Seeking to search result"
+msgstr ""
+
+msgid " History "
+msgstr " 히스토리 "
 
 msgid "Background process:"
 msgstr "Background 프로세스:"
@@ -3455,8 +3526,9 @@ msgstr "ftpfs: Login incorrect for user %s "
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: 유효하지 않은 호스트 이름."
 
-msgid "ftpfs: Invalid host address."
-msgstr "ftpfs: 유효하지 않은 호스트 주소."
+#, c-format
+msgid "ftpfs: %s"
+msgstr ""
 
 #, c-format
 msgid "ftpfs: making connection to %s"
@@ -3472,6 +3544,18 @@ msgstr "ftpfs: 서버로 연결 실패: %s"
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "재시도 기다림... %d (취소하려면 Control-C)"
+
+#, fuzzy
+msgid "ftpfs: invalid address family"
+msgstr "ftpfs: 유효하지 않은 호스트 주소."
+
+#, fuzzy, c-format
+msgid "ftpfs: could not setup passive mode: %s"
+msgstr "ftpfs: 수동 모드로 설정할 수 없습니다"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not create socket: %s"
+msgstr " 소켓을 만들 수 없음: %s "
 
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: 수동 모드로 설정할 수 없습니다"
@@ -3708,11 +3792,31 @@ msgstr "내부 오류:"
 msgid "Changes to file lost"
 msgstr "수정 내용 잃어버림"
 
+#~ msgid "pro&Mpt on replace"
+#~ msgstr "바꿀 때마다 물어봄(&O)"
+
+#~ msgid "replace &All"
+#~ msgstr "모두 바꿈(&A)"
+
+#~ msgid "O&ne"
+#~ msgstr "하나(&n)"
+
+#, fuzzy
+#~ msgid "%b %d %H:%M"
+#~ msgstr "%b %e %H:%M"
+
+#, fuzzy
+#~ msgid "%b %d %Y"
+#~ msgstr "%b %e  %Y"
+
+#, fuzzy
+#~ msgid " The current address is 0x%08"
+#~ msgstr ""
+#~ " 현재 주소는 0x%lx입니다.\n"
+#~ " 새로운 주소 입력:"
+
 #~ msgid "scanf &Expression"
 #~ msgstr "scanf 표현(&E)"
-
-#~ msgid "&Whole words only"
-#~ msgstr "단어 단위로(&W)"
 
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr " 인자 순서 입력 (가령: 3,2,1,4): "

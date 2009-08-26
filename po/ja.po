@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc CVS-20011220\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-07-09 17:07+0300\n"
+"POT-Creation-Date: 2009-08-26 17:11+0300\n"
 "PO-Revision-Date: 2001-12-20 18:33+0900\n"
 "Last-Translator: Akira TAGOH <tagoh@gnome.gr.jp>\n"
 "Language-Team: Japanese <debian-japanese@lists.debian.org>\n"
@@ -326,14 +326,16 @@ msgstr " キーを押してください: "
 msgid " Execute Macro "
 msgstr " マクロを実行 "
 
-msgid "pro&Mpt on replace"
-msgstr "置換時にプロンプト(&O)"
-
-msgid "replace &All"
-msgstr "全て置き換える(&A)"
-
-msgid "All charsets"
+msgid "&All charsets"
 msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "単語のみ(&W)"
+
+#, fuzzy
+msgid "In se&lection"
+msgstr "選択反転(&N)                     M-*"
 
 msgid "&Backwards"
 msgstr "後方(&B)"
@@ -350,14 +352,11 @@ msgstr "検索文字列を入力してください:"
 msgid "Cancel"
 msgstr "キャンセル"
 
-msgid "O&ne"
-msgstr "一つ(&N)"
+msgid "&Skip"
+msgstr "スキップ(&S)"
 
 msgid "A&ll"
 msgstr "全部(&L)"
-
-msgid "&Skip"
-msgstr "スキップ(&S)"
 
 msgid "&Replace"
 msgstr "置換(&R)"
@@ -479,19 +478,19 @@ msgid "&Paste from clipfile      S-Ins"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k               "
+msgid "Toggle bookmar&k            M-k"
 msgstr "マークを切替え(&T)       F3"
 
 #, fuzzy
-msgid "&Next bookmark                 "
+msgid "&Next bookmark              M-j"
 msgstr "新規作成(&N)            C-n"
 
 #, fuzzy
-msgid "Pre&v bookmark                 "
+msgid "Pre&v bookmark              M-i"
 msgstr "並べ替え(&T)               M-t"
 
 #, fuzzy
-msgid "&Flush bookmark                "
+msgid "&Flush bookmark             M-o"
 msgstr "メイル(&M)...                 "
 
 #, fuzzy
@@ -516,6 +515,22 @@ msgstr "行移動(&G)...              M-l"
 
 msgid "&Paste from clipfile        C-y"
 msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "マークを切替え(&T)       F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "新規作成(&N)            C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "並べ替え(&T)               M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "メイル(&M)...                 "
 
 msgid "&Search...         F7"
 msgstr "検索(&S)...              F7"
@@ -659,6 +674,9 @@ msgstr "折り返しする行の長さ : "
 
 msgid "Tab spacing: "
 msgstr "タブの空白数 : "
+
+msgid "Cursor beyond end of line"
+msgstr ""
 
 #, fuzzy
 msgid "Pers&istent selection"
@@ -1317,6 +1335,17 @@ msgstr "Iノード(&I)"
 msgid "Cannot read directory contents"
 msgstr "ディレクトリを変更できません"
 
+msgid ""
+" The Commander can't change to the directory that \n"
+" the subshell claims you are in.  Perhaps you have \n"
+" deleted your working directory, or given yourself \n"
+" extra access permissions with the \"su\" command? "
+msgstr ""
+" MC はサブシェルが要求するディレクトリへ移動でき\n"
+"ません。おそらくそのディレクトリを削除したか、\n"
+"\"su\" コマンドで特別な権限を行使したのではないで\n"
+"すか?"
+
 #, c-format
 msgid "Press any key to continue..."
 msgstr "なにかキーを押せば続行します..."
@@ -1862,25 +1891,25 @@ msgstr "  おかしな正規表現です  "
 msgid "Cas&e sensitive"
 msgstr "大文字・小文字を区別(&t)"
 
-#, fuzzy
-msgid "Case sens&itive"
-msgstr "大文字・小文字を区別(&t)"
-
 msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "&All charsets"
-msgstr ""
-
-msgid "All cha&rsets"
-msgstr ""
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "大文字・小文字を区別(&t)"
 
 #, fuzzy
 msgid "Re&gular expression"
 msgstr "正規表現(&R)"
+
+msgid "Fir&st hit"
+msgstr ""
+
+msgid "All cha&rsets"
+msgstr ""
 
 msgid "&Tree"
 msgstr "ツリー(&T)"
@@ -2229,17 +2258,6 @@ msgstr "「良」のマークのないキーをチェックします。そのキ
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "スかマウスを押してキー定義を実行してください。TABで移動できます"
-
-msgid ""
-" The Commander can't change to the directory that \n"
-" the subshell claims you are in.  Perhaps you have \n"
-" deleted your working directory, or given yourself \n"
-" extra access permissions with the \"su\" command? "
-msgstr ""
-" MC はサブシェルが要求するディレクトリへ移動でき\n"
-"ません。おそらくそのディレクトリを削除したか、\n"
-"\"su\" コマンドで特別な権限を行使したのではないで\n"
-"すか?"
 
 msgid " The Midnight Commander "
 msgstr " The Midnight Commander "
@@ -2656,6 +2674,9 @@ msgstr "隠しファイルを表示(&H)"
 msgid "show &Backup files"
 msgstr "バックアップファイルを表示(&B)"
 
+msgid "Use SI si&ze units"
+msgstr ""
+
 msgid "&Never"
 msgstr "一時停止しない(&N)"
 
@@ -2847,14 +2868,6 @@ msgstr " 入力コードページを選択 "
 msgid "-  < No translation >"
 msgstr "-  < 翻訳がありません >"
 
-#, c-format
-msgid ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-msgstr ""
-"スクリーンサイズ %dx%d はサポートされていません\n"
-"TERM環境変数の値をチェックしてください\n"
-
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -2966,196 +2979,6 @@ msgid ""
 msgstr ""
 "ファイル %s に書き込めません:\n"
 "%s\n"
-
-msgid " Format error on file Extensions File "
-msgstr "拡張子ファイル上のフォーマットエラーです"
-
-#, c-format
-msgid " The %%var macro has no default "
-msgstr " %%var マクロはデフォルトを持っていません "
-
-#, c-format
-msgid " The %%var macro has no variable "
-msgstr " %%var マクロは値を持っていません "
-
-msgid " Debug "
-msgstr " デバッグ "
-
-msgid " ERROR: "
-msgstr " エラー: "
-
-msgid " True:  "
-msgstr " 真: "
-
-msgid " False: "
-msgstr " 偽: "
-
-msgid " Warning -- ignoring file "
-msgstr " 警告 -- ファイルを無視 "
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"ファイル %s は root やあなたの所有物ではないのに誰でも書き込み\n"
-"可能です.利用するとあなたのセキュリティを侵害する恐れがあります"
-
-#, c-format
-msgid " No suitable entries found in %s "
-msgstr " %s に特定のエントリーは見つかりませんでした "
-
-msgid " User menu "
-msgstr " ユーザー・メニュー "
-
-#, fuzzy
-msgid "%b %d %H:%M"
-msgstr "%b %e %H:%M"
-
-#, fuzzy
-msgid "%b %d %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
-#, fuzzy, c-format
-msgid "%s is not a directory\n"
-msgstr "directory"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr ""
-" ターゲットディレクトリ \"%s\" を作成できません\n"
-" %s "
-
-#, fuzzy, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr ""
-" ターゲットディレクトリ \"%s\" を作成できません\n"
-" %s "
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr ""
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr ""
-
-msgid " Pipe failed "
-msgstr "pipe 失敗 "
-
-msgid " Dup failed "
-msgstr " dup 失敗 "
-
-#, fuzzy
-msgid " Cannot spawn child process "
-msgstr " 子プロセスを起動できません "
-
-msgid "Empty output from child filter"
-msgstr ""
-
-#, c-format
-msgid ""
-" Cannot open \"%s\"\n"
-" %s "
-msgstr ""
-" \"%s\" を開くことができません \n"
-" %s "
-
-#, c-format
-msgid ""
-" Cannot stat \"%s\"\n"
-" %s "
-msgstr ""
-" \"%s\" をstatできません\n"
-" %s "
-
-msgid " Cannot view: not a regular file "
-msgstr " 表示できません: 通常ファイルではありません "
-
-#, c-format
-msgid "File: %s"
-msgstr "ファイル: %s"
-
-#, c-format
-msgid "Offset 0x%08lx"
-msgstr "オフセット 0x%08lx"
-
-#, c-format
-msgid "Line %lu Col %lu"
-msgstr ""
-
-#, c-format
-msgid "%s bytes"
-msgstr "%sバイト"
-
-#, fuzzy, c-format
-msgid ">= %s bytes"
-msgstr "%sバイト"
-
-#, c-format
-msgid ""
-" Error while closing the file: \n"
-" %s \n"
-" Data may have been written or not. "
-msgstr ""
-
-#, fuzzy, c-format
-msgid ""
-" Cannot save file: \n"
-" %s "
-msgstr "ファイルの保存時にエラーが発生しました"
-
-#, fuzzy, c-format
-msgid ""
-" The current line number is %lu.\n"
-" Enter the new line number:"
-msgstr ""
-" 現在の行番号は %d です.\n"
-" 新しい行番号を入力してください:"
-
-#, fuzzy
-msgid " The current address is 0x%08"
-msgstr ""
-" 現在のアドレスは0x%lxです.\n"
-" 新しいアドレスを入力してください:"
-
-msgid " Goto Address "
-msgstr " アドレス移動 "
-
-#, fuzzy
-msgid " Invalid address "
-msgstr " 間違ったパスワード "
-
-msgid "Seeking to search result"
-msgstr ""
-
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Quit"
-msgstr ""
-
-msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
-msgid " History "
-msgstr "履歴"
 
 msgid "Function key 1"
 msgstr "Functionキー 1"
@@ -3295,11 +3118,259 @@ msgstr "10キーの Delete"
 msgid "Enter on keypad"
 msgstr "10キーの Enter"
 
+#, fuzzy
+msgid "Tab on keypad"
+msgstr "10キーの +"
+
+#, fuzzy
+msgid "Space on keypad"
+msgstr "10キーの /"
+
 msgid "Slash on keypad"
 msgstr "10キーの /"
 
 msgid "NumLock on keypad"
 msgstr "10キーの NumLock"
+
+msgid "Ctrl"
+msgstr ""
+
+msgid "Alt"
+msgstr ""
+
+msgid "Shift"
+msgstr ""
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"スクリーンサイズ %dx%d はサポートされていません\n"
+"TERM環境変数の値をチェックしてください\n"
+
+msgid " Format error on file Extensions File "
+msgstr "拡張子ファイル上のフォーマットエラーです"
+
+#, c-format
+msgid " The %%var macro has no default "
+msgstr " %%var マクロはデフォルトを持っていません "
+
+#, c-format
+msgid " The %%var macro has no variable "
+msgstr " %%var マクロは値を持っていません "
+
+msgid " Debug "
+msgstr " デバッグ "
+
+msgid " ERROR: "
+msgstr " エラー: "
+
+msgid " True:  "
+msgstr " 真: "
+
+msgid " False: "
+msgstr " 偽: "
+
+msgid " Warning -- ignoring file "
+msgstr " 警告 -- ファイルを無視 "
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"ファイル %s は root やあなたの所有物ではないのに誰でも書き込み\n"
+"可能です.利用するとあなたのセキュリティを侵害する恐れがあります"
+
+#, c-format
+msgid " No suitable entries found in %s "
+msgstr " %s に特定のエントリーは見つかりませんでした "
+
+msgid " User menu "
+msgstr " ユーザー・メニュー "
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
+
+#, fuzzy, c-format
+msgid "%s is not a directory\n"
+msgstr "directory"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr ""
+" ターゲットディレクトリ \"%s\" を作成できません\n"
+" %s "
+
+#, fuzzy, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr ""
+" ターゲットディレクトリ \"%s\" を作成できません\n"
+" %s "
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr ""
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr ""
+
+msgid " Pipe failed "
+msgstr "pipe 失敗 "
+
+msgid " Dup failed "
+msgstr " dup 失敗 "
+
+#, fuzzy, c-format
+msgid ""
+" The current line number is %lld.\n"
+" Enter the new line number:"
+msgstr ""
+" 現在の行番号は %d です.\n"
+" 新しい行番号を入力してください:"
+
+#, fuzzy, c-format
+msgid ""
+" The current address is %s.\n"
+" Enter the new address:"
+msgstr ""
+" 現在の行番号は %d です.\n"
+" 新しい行番号を入力してください:"
+
+msgid " Goto Address "
+msgstr " アドレス移動 "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " 間違ったパスワード "
+
+#, fuzzy
+msgid " Cannot spawn child process "
+msgstr " 子プロセスを起動できません "
+
+msgid "Empty output from child filter"
+msgstr ""
+
+msgid "All charsets"
+msgstr ""
+
+msgid "ButtonBar|Help"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
+
+msgid "ButtonBar|Ascii"
+msgstr ""
+
+msgid "ButtonBar|Hex"
+msgstr ""
+
+msgid "ButtonBar|Goto"
+msgstr ""
+
+msgid "ButtonBar|Line"
+msgstr ""
+
+msgid "ButtonBar|View"
+msgstr ""
+
+msgid "ButtonBar|Edit"
+msgstr ""
+
+msgid "ButtonBar|Save"
+msgstr ""
+
+msgid "ButtonBar|UnWrap"
+msgstr ""
+
+msgid "ButtonBar|Wrap"
+msgstr ""
+
+msgid "ButtonBar|HxSrch"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Raw"
+msgstr ""
+
+msgid "ButtonBar|Parse"
+msgstr ""
+
+msgid "ButtonBar|Unform"
+msgstr ""
+
+msgid "ButtonBar|Format"
+msgstr ""
+
+#, c-format
+msgid "File: %s"
+msgstr "ファイル: %s"
+
+#, c-format
+msgid "Offset 0x%08lx"
+msgstr "オフセット 0x%08lx"
+
+#, c-format
+msgid "Line %lu Col %lu"
+msgstr ""
+
+#, c-format
+msgid "%s bytes"
+msgstr "%sバイト"
+
+#, fuzzy, c-format
+msgid ">= %s bytes"
+msgstr "%sバイト"
+
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr "ファイルの保存時にエラーが発生しました"
+
+#, c-format
+msgid ""
+" Cannot open \"%s\"\n"
+" %s "
+msgstr ""
+" \"%s\" を開くことができません \n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot stat \"%s\"\n"
+" %s "
+msgstr ""
+" \"%s\" をstatできません\n"
+" %s "
+
+msgid " Cannot view: not a regular file "
+msgstr " 表示できません: 通常ファイルではありません "
+
+msgid "Seeking to search result"
+msgstr ""
+
+msgid " History "
+msgstr "履歴"
 
 msgid "Background process:"
 msgstr "バックグラウンド処理:"
@@ -3477,8 +3548,9 @@ msgstr "ftpfs: ユーザ %s のログインが失敗しました "
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: 不正なホスト名です"
 
-msgid "ftpfs: Invalid host address."
-msgstr "ftpfs: 不正なホストのアドレスです"
+#, c-format
+msgid "ftpfs: %s"
+msgstr ""
 
 #, c-format
 msgid "ftpfs: making connection to %s"
@@ -3494,6 +3566,18 @@ msgstr "ftpfs: サーバへの接続に失敗しました: %s"
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "再試行するのでお待ちください... %d (Control-C で中止)"
+
+#, fuzzy
+msgid "ftpfs: invalid address family"
+msgstr "ftpfs: 不正なホストのアドレスです"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not setup passive mode: %s"
+msgstr "ftpfs: パッシブモードに失敗しました"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not create socket: %s"
+msgstr "ソケットを作成できませんでした: %s"
 
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: パッシブモードに失敗しました"
@@ -3726,11 +3810,31 @@ msgstr "内部エラー:"
 msgid "Changes to file lost"
 msgstr "紛失したファイルに変更します"
 
+#~ msgid "pro&Mpt on replace"
+#~ msgstr "置換時にプロンプト(&O)"
+
+#~ msgid "replace &All"
+#~ msgstr "全て置き換える(&A)"
+
+#~ msgid "O&ne"
+#~ msgstr "一つ(&N)"
+
+#, fuzzy
+#~ msgid "%b %d %H:%M"
+#~ msgstr "%b %e %H:%M"
+
+#, fuzzy
+#~ msgid "%b %d %Y"
+#~ msgstr "%b %e  %Y"
+
+#, fuzzy
+#~ msgid " The current address is 0x%08"
+#~ msgstr ""
+#~ " 現在のアドレスは0x%lxです.\n"
+#~ " 新しいアドレスを入力してください:"
+
 #~ msgid "scanf &Expression"
 #~ msgstr "scanf 形式(&E)"
-
-#~ msgid "&Whole words only"
-#~ msgstr "単語のみ(&W)"
 
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr "置換の引数の順番を入力してください (例) 3,2,1,4 "

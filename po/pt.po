@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-07-09 17:07+0300\n"
+"POT-Creation-Date: 2009-08-26 17:11+0300\n"
 "PO-Revision-Date: 2002-04-25 03:55+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <debian-l10n-portuguese@lists.debian.org>\n"
@@ -323,14 +323,16 @@ msgstr " Primir qualquer tecla: "
 msgid " Execute Macro "
 msgstr " Executar Macro "
 
-msgid "pro&Mpt on replace"
-msgstr "perguntar a&o substituir"
-
-msgid "replace &All"
-msgstr "substituir &Todas"
-
-msgid "All charsets"
+msgid "&All charsets"
 msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "&Apenas palavras inteiras"
+
+#, fuzzy
+msgid "In se&lection"
+msgstr "reverter sele&cção M-*"
 
 msgid "&Backwards"
 msgstr "&Para trás"
@@ -347,14 +349,11 @@ msgstr " Introduza expressão de procura:"
 msgid "Cancel"
 msgstr "Cancelar"
 
-msgid "O&ne"
-msgstr "u&M"
+msgid "&Skip"
+msgstr "&Ignorar"
 
 msgid "A&ll"
 msgstr "To&Dos"
-
-msgid "&Skip"
-msgstr "&Ignorar"
 
 msgid "&Replace"
 msgstr "&Substituir"
@@ -476,19 +475,19 @@ msgid "&Paste from clipfile      S-Ins"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k               "
+msgid "Toggle bookmar&k            M-k"
 msgstr "al&Ternar Marca    F3"
 
 #, fuzzy
-msgid "&Next bookmark                 "
+msgid "&Next bookmark              M-j"
 msgstr "&Novo             C-n"
 
 #, fuzzy
-msgid "Pre&v bookmark                 "
+msgid "Pre&v bookmark              M-i"
 msgstr "&Ordenar...              M-t"
 
 #, fuzzy
-msgid "&Flush bookmark                "
+msgid "&Flush bookmark             M-o"
 msgstr "E-&Mail...                  "
 
 #, fuzzy
@@ -513,6 +512,22 @@ msgstr "&Ir para linha...        M-l"
 
 msgid "&Paste from clipfile        C-y"
 msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "al&Ternar Marca    F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "&Novo             C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "&Ordenar...              M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "E-&Mail...                  "
 
 msgid "&Search...         F7"
 msgstr "&Procurar...       F7"
@@ -656,6 +671,9 @@ msgstr "Tamanho de linha na quebra : "
 
 msgid "Tab spacing: "
 msgstr "Espaço do Tab : "
+
+msgid "Cursor beyond end of line"
+msgstr ""
 
 #, fuzzy
 msgid "Pers&istent selection"
@@ -1315,6 +1333,17 @@ msgstr "&Inode"
 msgid "Cannot read directory contents"
 msgstr "Incapaz de mudar de directório"
 
+msgid ""
+" The Commander can't change to the directory that \n"
+" the subshell claims you are in.  Perhaps you have \n"
+" deleted your working directory, or given yourself \n"
+" extra access permissions with the \"su\" command? "
+msgstr ""
+" O Commander não consegue ir para o directório em que \n"
+" o subterminal afirma você estar.  Talvez você tenha \n"
+" apagao o seu directório de trabalho, ou dado a si \n"
+" permissões de acesso adicionais com o comando \"su\"? "
+
 #, c-format
 msgid "Press any key to continue..."
 msgstr "Prima qualquer tecla para continuar..."
@@ -1861,25 +1890,25 @@ msgstr "  Expressão regular mal-formada  "
 msgid "Cas&e sensitive"
 msgstr "sensível à capi&talização"
 
-#, fuzzy
-msgid "Case sens&itive"
-msgstr "sensível à capi&talização"
-
 msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "&All charsets"
-msgstr ""
-
-msgid "All cha&rsets"
-msgstr ""
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "sensível à capi&talização"
 
 #, fuzzy
 msgid "Re&gular expression"
 msgstr "Expressão &regular"
+
+msgid "Fir&st hit"
+msgstr ""
+
+msgid "All cha&rsets"
+msgstr ""
 
 msgid "&Tree"
 msgstr "&Árvore"
@@ -2228,17 +2257,6 @@ msgstr "que teclas não estão marcadas com OK. Prima espaço na tecla"
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "em falta, ou clique com o rato para a definir. Navegue com Tab."
-
-msgid ""
-" The Commander can't change to the directory that \n"
-" the subshell claims you are in.  Perhaps you have \n"
-" deleted your working directory, or given yourself \n"
-" extra access permissions with the \"su\" command? "
-msgstr ""
-" O Commander não consegue ir para o directório em que \n"
-" o subterminal afirma você estar.  Talvez você tenha \n"
-" apagao o seu directório de trabalho, ou dado a si \n"
-" permissões de acesso adicionais com o comando \"su\"? "
 
 msgid " The Midnight Commander "
 msgstr " O Midnight Commander "
@@ -2656,6 +2674,9 @@ msgstr "mostrar fic&Heiros escondidos"
 msgid "show &Backup files"
 msgstr "mostrar ficheiros &Backup"
 
+msgid "Use SI si&ze units"
+msgstr ""
+
 msgid "&Never"
 msgstr "&Nunca"
 
@@ -2850,14 +2871,6 @@ msgstr " Seleccionar página de códigos "
 msgid "-  < No translation >"
 msgstr "- < Sem tradução >"
 
-#, c-format
-msgid ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-msgstr ""
-"Tamanho de ecrã %dx%d não é suportado.\n"
-"Verifique a variável de ambiente TERM.\n"
-
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -2969,196 +2982,6 @@ msgid ""
 msgstr ""
 "Incapaz de escrever para o ficheiro %s:\n"
 "%s\n"
-
-msgid " Format error on file Extensions File "
-msgstr " Erro de formato no ficheiro Ficheiro de Extensões "
-
-#, c-format
-msgid " The %%var macro has no default "
-msgstr " A macro %%var não tem nenhum defeito "
-
-#, c-format
-msgid " The %%var macro has no variable "
-msgstr " A macro %%var não tem nenhuma variável "
-
-msgid " Debug "
-msgstr " Depurar "
-
-msgid " ERROR: "
-msgstr " ERRO: "
-
-msgid " True:  "
-msgstr " Verdade:  "
-
-msgid " False: "
-msgstr " Falso: "
-
-msgid " Warning -- ignoring file "
-msgstr " Aviso -- a ignorar ficheiro "
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"O ficheiro %s não é possuido pelo root ou você ou é de escrita para todos.\n"
-"Utiliza-lo poderá comprometer a sua segurança"
-
-#, c-format
-msgid " No suitable entries found in %s "
-msgstr " Nenhumas entradas apropriadas encontradas em %s "
-
-msgid " User menu "
-msgstr " Menu utilizador "
-
-#, fuzzy
-msgid "%b %d %H:%M"
-msgstr "%b %e %H:%M"
-
-#, fuzzy
-msgid "%b %d %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
-#, fuzzy, c-format
-msgid "%s is not a directory\n"
-msgstr "directório"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr ""
-" Incapaz de criar directório alvo \"%s\" \n"
-" %s "
-
-#, fuzzy, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr ""
-" Incapaz de criar directório alvo \"%s\" \n"
-" %s "
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr ""
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr ""
-
-msgid " Pipe failed "
-msgstr " Canal falhou "
-
-msgid " Dup failed "
-msgstr " Dup falhou "
-
-#, fuzzy
-msgid " Cannot spawn child process "
-msgstr " Incapaz de lançar aplicação filha "
-
-msgid "Empty output from child filter"
-msgstr ""
-
-#, c-format
-msgid ""
-" Cannot open \"%s\"\n"
-" %s "
-msgstr ""
-" Incapaz de abrir \"%s\"\n"
-" %s "
-
-#, c-format
-msgid ""
-" Cannot stat \"%s\"\n"
-" %s "
-msgstr ""
-" Incapaz de fazer stat a \"%s\"\n"
-" %s "
-
-msgid " Cannot view: not a regular file "
-msgstr " Incapaz de ver: não é um ficheiro normal "
-
-#, c-format
-msgid "File: %s"
-msgstr "Ficheiro: %s"
-
-#, c-format
-msgid "Offset 0x%08lx"
-msgstr "Offset 0x%08lx"
-
-#, c-format
-msgid "Line %lu Col %lu"
-msgstr ""
-
-#, c-format
-msgid "%s bytes"
-msgstr "%s bytes"
-
-#, fuzzy, c-format
-msgid ">= %s bytes"
-msgstr "%s bytes"
-
-#, c-format
-msgid ""
-" Error while closing the file: \n"
-" %s \n"
-" Data may have been written or not. "
-msgstr ""
-
-#, fuzzy, c-format
-msgid ""
-" Cannot save file: \n"
-" %s "
-msgstr " Erro ao tentar gravar ficheiro. "
-
-#, fuzzy, c-format
-msgid ""
-" The current line number is %lu.\n"
-" Enter the new line number:"
-msgstr ""
-" O número de linha actual é %d.\n"
-" Introduza o novo número de linha:"
-
-#, fuzzy
-msgid " The current address is 0x%08"
-msgstr ""
-" O endereço actual é 0x%lx.\n"
-" Introduza o novo endereço:"
-
-msgid " Goto Address "
-msgstr " Ir Para Endereço "
-
-#, fuzzy
-msgid " Invalid address "
-msgstr " Senha inválida "
-
-msgid "Seeking to search result"
-msgstr ""
-
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Quit"
-msgstr ""
-
-msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
-msgid " History "
-msgstr " Histórico "
 
 msgid "Function key 1"
 msgstr "Tecla de função 1"
@@ -3298,11 +3121,259 @@ msgstr "Delete no teclado numérico"
 msgid "Enter on keypad"
 msgstr "Enter no teclado numérico"
 
+#, fuzzy
+msgid "Tab on keypad"
+msgstr "+ no teclado numérico"
+
+#, fuzzy
+msgid "Space on keypad"
+msgstr "Barra no teclado numérico"
+
 msgid "Slash on keypad"
 msgstr "Barra no teclado numérico"
 
 msgid "NumLock on keypad"
 msgstr "NumLock no teclado numérico"
+
+msgid "Ctrl"
+msgstr ""
+
+msgid "Alt"
+msgstr ""
+
+msgid "Shift"
+msgstr ""
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"Tamanho de ecrã %dx%d não é suportado.\n"
+"Verifique a variável de ambiente TERM.\n"
+
+msgid " Format error on file Extensions File "
+msgstr " Erro de formato no ficheiro Ficheiro de Extensões "
+
+#, c-format
+msgid " The %%var macro has no default "
+msgstr " A macro %%var não tem nenhum defeito "
+
+#, c-format
+msgid " The %%var macro has no variable "
+msgstr " A macro %%var não tem nenhuma variável "
+
+msgid " Debug "
+msgstr " Depurar "
+
+msgid " ERROR: "
+msgstr " ERRO: "
+
+msgid " True:  "
+msgstr " Verdade:  "
+
+msgid " False: "
+msgstr " Falso: "
+
+msgid " Warning -- ignoring file "
+msgstr " Aviso -- a ignorar ficheiro "
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"O ficheiro %s não é possuido pelo root ou você ou é de escrita para todos.\n"
+"Utiliza-lo poderá comprometer a sua segurança"
+
+#, c-format
+msgid " No suitable entries found in %s "
+msgstr " Nenhumas entradas apropriadas encontradas em %s "
+
+msgid " User menu "
+msgstr " Menu utilizador "
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
+
+#, fuzzy, c-format
+msgid "%s is not a directory\n"
+msgstr "directório"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr ""
+" Incapaz de criar directório alvo \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr ""
+" Incapaz de criar directório alvo \"%s\" \n"
+" %s "
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr ""
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr ""
+
+msgid " Pipe failed "
+msgstr " Canal falhou "
+
+msgid " Dup failed "
+msgstr " Dup falhou "
+
+#, fuzzy, c-format
+msgid ""
+" The current line number is %lld.\n"
+" Enter the new line number:"
+msgstr ""
+" O número de linha actual é %d.\n"
+" Introduza o novo número de linha:"
+
+#, fuzzy, c-format
+msgid ""
+" The current address is %s.\n"
+" Enter the new address:"
+msgstr ""
+" O número de linha actual é %d.\n"
+" Introduza o novo número de linha:"
+
+msgid " Goto Address "
+msgstr " Ir Para Endereço "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " Senha inválida "
+
+#, fuzzy
+msgid " Cannot spawn child process "
+msgstr " Incapaz de lançar aplicação filha "
+
+msgid "Empty output from child filter"
+msgstr ""
+
+msgid "All charsets"
+msgstr ""
+
+msgid "ButtonBar|Help"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
+
+msgid "ButtonBar|Ascii"
+msgstr ""
+
+msgid "ButtonBar|Hex"
+msgstr ""
+
+msgid "ButtonBar|Goto"
+msgstr ""
+
+msgid "ButtonBar|Line"
+msgstr ""
+
+msgid "ButtonBar|View"
+msgstr ""
+
+msgid "ButtonBar|Edit"
+msgstr ""
+
+msgid "ButtonBar|Save"
+msgstr ""
+
+msgid "ButtonBar|UnWrap"
+msgstr ""
+
+msgid "ButtonBar|Wrap"
+msgstr ""
+
+msgid "ButtonBar|HxSrch"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Raw"
+msgstr ""
+
+msgid "ButtonBar|Parse"
+msgstr ""
+
+msgid "ButtonBar|Unform"
+msgstr ""
+
+msgid "ButtonBar|Format"
+msgstr ""
+
+#, c-format
+msgid "File: %s"
+msgstr "Ficheiro: %s"
+
+#, c-format
+msgid "Offset 0x%08lx"
+msgstr "Offset 0x%08lx"
+
+#, c-format
+msgid "Line %lu Col %lu"
+msgstr ""
+
+#, c-format
+msgid "%s bytes"
+msgstr "%s bytes"
+
+#, fuzzy, c-format
+msgid ">= %s bytes"
+msgstr "%s bytes"
+
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr " Erro ao tentar gravar ficheiro. "
+
+#, c-format
+msgid ""
+" Cannot open \"%s\"\n"
+" %s "
+msgstr ""
+" Incapaz de abrir \"%s\"\n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot stat \"%s\"\n"
+" %s "
+msgstr ""
+" Incapaz de fazer stat a \"%s\"\n"
+" %s "
+
+msgid " Cannot view: not a regular file "
+msgstr " Incapaz de ver: não é um ficheiro normal "
+
+msgid "Seeking to search result"
+msgstr ""
+
+msgid " History "
+msgstr " Histórico "
 
 msgid "Background process:"
 msgstr "Processo de fundo:"
@@ -3483,8 +3554,9 @@ msgstr "ftpfs: Utilizador/senha incorrecto para utilizador %s "
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: Nome de servidor inválido."
 
-msgid "ftpfs: Invalid host address."
-msgstr "ftpfs: Endereço de servidor inválido."
+#, c-format
+msgid "ftpfs: %s"
+msgstr ""
 
 #, c-format
 msgid "ftpfs: making connection to %s"
@@ -3500,6 +3572,18 @@ msgstr "ftpfs: ligação ao servidor falhou: %s"
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "A aguardar nova tentativa... %d (Ctrl-C para cancelar)"
+
+#, fuzzy
+msgid "ftpfs: invalid address family"
+msgstr "ftpfs: Endereço de servidor inválido."
+
+#, fuzzy, c-format
+msgid "ftpfs: could not setup passive mode: %s"
+msgstr "ftpfs: incapaz de definir modo passivo"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not create socket: %s"
+msgstr " Incapaz de criar socket: %s "
 
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: incapaz de definir modo passivo"
@@ -3736,11 +3820,31 @@ msgstr "Erro interno:"
 msgid "Changes to file lost"
 msgstr "Modificações ao ficheiro perdidas"
 
+#~ msgid "pro&Mpt on replace"
+#~ msgstr "perguntar a&o substituir"
+
+#~ msgid "replace &All"
+#~ msgstr "substituir &Todas"
+
+#~ msgid "O&ne"
+#~ msgstr "u&M"
+
+#, fuzzy
+#~ msgid "%b %d %H:%M"
+#~ msgstr "%b %e %H:%M"
+
+#, fuzzy
+#~ msgid "%b %d %Y"
+#~ msgstr "%b %e  %Y"
+
+#, fuzzy
+#~ msgid " The current address is 0x%08"
+#~ msgstr ""
+#~ " O endereço actual é 0x%lx.\n"
+#~ " Introduza o novo endereço:"
+
 #~ msgid "scanf &Expression"
 #~ msgstr "scanf &Expressão"
-
-#~ msgid "&Whole words only"
-#~ msgstr "&Apenas palavras inteiras"
 
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr " Introduza argumentos ordem de substituição ex. 3,2,1,4 "

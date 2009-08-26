@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gmc finnish 0.01\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-07-09 17:07+0300\n"
+"POT-Creation-Date: 2009-08-26 17:11+0300\n"
 "PO-Revision-Date: 1999-08-23 17:30+0200\n"
 "Last-Translator: Mikko Rauhala <mjr@iki.fi>\n"
 "Language-Team: Finnish <debian-l10n-finnish@lists.debian.org>\n"
@@ -326,14 +326,16 @@ msgstr " Paina jotakin näppäintä: "
 msgid " Execute Macro "
 msgstr " Suorita makro "
 
-msgid "pro&Mpt on replace"
-msgstr "kysy korvatess&a"
-
-msgid "replace &All"
-msgstr "korvaa &Kaikki"
-
-msgid "All charsets"
+msgid "&All charsets"
 msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "&Vain koko sanat"
+
+#, fuzzy
+msgid "In se&lection"
+msgstr " Poista valinta"
 
 msgid "&Backwards"
 msgstr "&Takaperin"
@@ -350,15 +352,11 @@ msgstr " Anna haettava merkkijono:"
 msgid "Cancel"
 msgstr "Peruuta"
 
-#, fuzzy
-msgid "O&ne"
-msgstr "&Nimi"
+msgid "&Skip"
+msgstr "&Ohita"
 
 msgid "A&ll"
 msgstr "K&aikki"
-
-msgid "&Skip"
-msgstr "&Ohita"
 
 msgid "&Replace"
 msgstr "&Korvaa"
@@ -483,19 +481,19 @@ msgid "&Paste from clipfile      S-Ins"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k               "
+msgid "Toggle bookmar&k            M-k"
 msgstr "&Aseta merkki      F3"
 
 #, fuzzy
-msgid "&Next bookmark                 "
+msgid "&Next bookmark              M-j"
 msgstr "&Uusi             C-n"
 
 #, fuzzy
-msgid "Pre&v bookmark                 "
+msgid "Pre&v bookmark              M-i"
 msgstr "&Järjestä...             M-t"
 
 #, fuzzy
-msgid "&Flush bookmark                "
+msgid "&Flush bookmark             M-o"
 msgstr "&Postit...                  "
 
 #, fuzzy
@@ -520,6 +518,22 @@ msgstr "&Siirry riville...       M-l"
 
 msgid "&Paste from clipfile        C-y"
 msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "&Aseta merkki      F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "&Uusi             C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "&Järjestä...             M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "&Postit...                  "
 
 msgid "&Search...         F7"
 msgstr "&Etsi...           F7"
@@ -663,6 +677,9 @@ msgstr "Sanakierron rivipituus : "
 
 msgid "Tab spacing: "
 msgstr "Tabulaattoriväli : "
+
+msgid "Cursor beyond end of line"
+msgstr ""
 
 msgid "Pers&istent selection"
 msgstr ""
@@ -1321,6 +1338,13 @@ msgstr "&Inode"
 msgid "Cannot read directory contents"
 msgstr "Ei voitu vaihtaa hakemistoa"
 
+msgid ""
+" The Commander can't change to the directory that \n"
+" the subshell claims you are in.  Perhaps you have \n"
+" deleted your working directory, or given yourself \n"
+" extra access permissions with the \"su\" command? "
+msgstr ""
+
 #, c-format
 msgid "Press any key to continue..."
 msgstr ""
@@ -1811,25 +1835,25 @@ msgstr "  Virheellinen säännöllinen lauseke  "
 msgid "Cas&e sensitive"
 msgstr "&Isot/pienet eroavat"
 
-#, fuzzy
-msgid "Case sens&itive"
-msgstr "&Isot/pienet eroavat"
-
 msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "&All charsets"
-msgstr ""
-
-msgid "All cha&rsets"
-msgstr ""
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "&Isot/pienet eroavat"
 
 #, fuzzy
 msgid "Re&gular expression"
 msgstr "&Säännöllinen lauseke"
+
+msgid "Fir&st hit"
+msgstr ""
+
+msgid "All cha&rsets"
+msgstr ""
 
 msgid "&Tree"
 msgstr ""
@@ -2160,13 +2184,6 @@ msgid "which keys are not marked with OK.  Press space on the missing"
 msgstr ""
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
-msgstr ""
-
-msgid ""
-" The Commander can't change to the directory that \n"
-" the subshell claims you are in.  Perhaps you have \n"
-" deleted your working directory, or given yourself \n"
-" extra access permissions with the \"su\" command? "
 msgstr ""
 
 msgid " The Midnight Commander "
@@ -2559,6 +2576,9 @@ msgstr ""
 msgid "show &Backup files"
 msgstr ""
 
+msgid "Use SI si&ze units"
+msgstr ""
+
 msgid "&Never"
 msgstr ""
 
@@ -2748,12 +2768,6 @@ msgstr ""
 msgid "-  < No translation >"
 msgstr ""
 
-#, c-format
-msgid ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-msgstr ""
-
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -2862,187 +2876,6 @@ msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
 msgstr ""
-
-msgid " Format error on file Extensions File "
-msgstr ""
-
-#, c-format
-msgid " The %%var macro has no default "
-msgstr ""
-
-#, c-format
-msgid " The %%var macro has no variable "
-msgstr ""
-
-msgid " Debug "
-msgstr ""
-
-msgid " ERROR: "
-msgstr ""
-
-msgid " True:  "
-msgstr ""
-
-msgid " False: "
-msgstr ""
-
-msgid " Warning -- ignoring file "
-msgstr ""
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-
-#, c-format
-msgid " No suitable entries found in %s "
-msgstr ""
-
-msgid " User menu "
-msgstr ""
-
-msgid "%b %d %H:%M"
-msgstr ""
-
-msgid "%b %d %Y"
-msgstr ""
-
-msgid "%b %e  %Y"
-msgstr ""
-
-msgid "%b %e %H:%M"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s is not a directory\n"
-msgstr "Luo uusi hakemisto"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr ""
-" Ei voitu luoda väliaikaiskomentotiedostoa \n"
-" %s "
-
-#, fuzzy, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr ""
-" Ei voitu luoda väliaikaiskomentotiedostoa \n"
-" %s "
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr ""
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr ""
-
-msgid " Pipe failed "
-msgstr ""
-
-msgid " Dup failed "
-msgstr ""
-
-#, fuzzy
-msgid " Cannot spawn child process "
-msgstr " Ei voitu vaihtaa hakemistoa %s:ksi "
-
-msgid "Empty output from child filter"
-msgstr ""
-
-#, c-format
-msgid ""
-" Cannot open \"%s\"\n"
-" %s "
-msgstr ""
-
-#, fuzzy, c-format
-msgid ""
-" Cannot stat \"%s\"\n"
-" %s "
-msgstr ""
-" Ei voitu saada tietoja %s:sta \n"
-" %s "
-
-msgid " Cannot view: not a regular file "
-msgstr ""
-
-#, c-format
-msgid "File: %s"
-msgstr ""
-
-#, c-format
-msgid "Offset 0x%08lx"
-msgstr "Siirros 0x%08lx"
-
-#, c-format
-msgid "Line %lu Col %lu"
-msgstr ""
-
-#, c-format
-msgid "%s bytes"
-msgstr "%s tavua"
-
-#, fuzzy, c-format
-msgid ">= %s bytes"
-msgstr "%s tavua"
-
-#, c-format
-msgid ""
-" Error while closing the file: \n"
-" %s \n"
-" Data may have been written or not. "
-msgstr ""
-
-#, fuzzy, c-format
-msgid ""
-" Cannot save file: \n"
-" %s "
-msgstr " Virhe tallennettaessa tiedostoa. "
-
-#, c-format
-msgid ""
-" The current line number is %lu.\n"
-" Enter the new line number:"
-msgstr ""
-
-msgid " The current address is 0x%08"
-msgstr ""
-
-#, fuzzy
-msgid " Goto Address "
-msgstr " Siirry riville "
-
-#, fuzzy
-msgid " Invalid address "
-msgstr " Virheellinen kohdemaski "
-
-msgid "Seeking to search result"
-msgstr ""
-
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Quit"
-msgstr ""
-
-msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
-#, fuzzy
-msgid " History "
-msgstr " Komentohistoria "
 
 msgid "Function key 1"
 msgstr ""
@@ -3182,11 +3015,249 @@ msgstr ""
 msgid "Enter on keypad"
 msgstr ""
 
+msgid "Tab on keypad"
+msgstr ""
+
+msgid "Space on keypad"
+msgstr ""
+
 msgid "Slash on keypad"
 msgstr ""
 
 msgid "NumLock on keypad"
 msgstr ""
+
+msgid "Ctrl"
+msgstr ""
+
+msgid "Alt"
+msgstr ""
+
+msgid "Shift"
+msgstr ""
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+
+msgid " Format error on file Extensions File "
+msgstr ""
+
+#, c-format
+msgid " The %%var macro has no default "
+msgstr ""
+
+#, c-format
+msgid " The %%var macro has no variable "
+msgstr ""
+
+msgid " Debug "
+msgstr ""
+
+msgid " ERROR: "
+msgstr ""
+
+msgid " True:  "
+msgstr ""
+
+msgid " False: "
+msgstr ""
+
+msgid " Warning -- ignoring file "
+msgstr ""
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+
+#, c-format
+msgid " No suitable entries found in %s "
+msgstr ""
+
+msgid " User menu "
+msgstr ""
+
+msgid "%b %e  %Y"
+msgstr ""
+
+msgid "%b %e %H:%M"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s is not a directory\n"
+msgstr "Luo uusi hakemisto"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr ""
+" Ei voitu luoda väliaikaiskomentotiedostoa \n"
+" %s "
+
+#, fuzzy, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr ""
+" Ei voitu luoda väliaikaiskomentotiedostoa \n"
+" %s "
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr ""
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr ""
+
+msgid " Pipe failed "
+msgstr ""
+
+msgid " Dup failed "
+msgstr ""
+
+#, c-format
+msgid ""
+" The current line number is %lld.\n"
+" Enter the new line number:"
+msgstr ""
+
+#, c-format
+msgid ""
+" The current address is %s.\n"
+" Enter the new address:"
+msgstr ""
+
+#, fuzzy
+msgid " Goto Address "
+msgstr " Siirry riville "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " Virheellinen kohdemaski "
+
+#, fuzzy
+msgid " Cannot spawn child process "
+msgstr " Ei voitu vaihtaa hakemistoa %s:ksi "
+
+msgid "Empty output from child filter"
+msgstr ""
+
+msgid "All charsets"
+msgstr ""
+
+msgid "ButtonBar|Help"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
+
+msgid "ButtonBar|Ascii"
+msgstr ""
+
+msgid "ButtonBar|Hex"
+msgstr ""
+
+msgid "ButtonBar|Goto"
+msgstr ""
+
+msgid "ButtonBar|Line"
+msgstr ""
+
+msgid "ButtonBar|View"
+msgstr ""
+
+msgid "ButtonBar|Edit"
+msgstr ""
+
+msgid "ButtonBar|Save"
+msgstr ""
+
+msgid "ButtonBar|UnWrap"
+msgstr ""
+
+msgid "ButtonBar|Wrap"
+msgstr ""
+
+msgid "ButtonBar|HxSrch"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Raw"
+msgstr ""
+
+msgid "ButtonBar|Parse"
+msgstr ""
+
+msgid "ButtonBar|Unform"
+msgstr ""
+
+msgid "ButtonBar|Format"
+msgstr ""
+
+#, c-format
+msgid "File: %s"
+msgstr ""
+
+#, c-format
+msgid "Offset 0x%08lx"
+msgstr "Siirros 0x%08lx"
+
+#, c-format
+msgid "Line %lu Col %lu"
+msgstr ""
+
+#, c-format
+msgid "%s bytes"
+msgstr "%s tavua"
+
+#, fuzzy, c-format
+msgid ">= %s bytes"
+msgstr "%s tavua"
+
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr " Virhe tallennettaessa tiedostoa. "
+
+#, c-format
+msgid ""
+" Cannot open \"%s\"\n"
+" %s "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot stat \"%s\"\n"
+" %s "
+msgstr ""
+" Ei voitu saada tietoja %s:sta \n"
+" %s "
+
+msgid " Cannot view: not a regular file "
+msgstr ""
+
+msgid "Seeking to search result"
+msgstr ""
+
+#, fuzzy
+msgid " History "
+msgstr " Komentohistoria "
 
 msgid "Background process:"
 msgstr "Taustaprosessi:"
@@ -3353,7 +3424,8 @@ msgstr ""
 msgid "ftpfs: Invalid host name."
 msgstr ""
 
-msgid "ftpfs: Invalid host address."
+#, c-format
+msgid "ftpfs: %s"
 msgstr ""
 
 #, c-format
@@ -3370,6 +3442,20 @@ msgstr ""
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr ""
+
+#, fuzzy
+msgid "ftpfs: invalid address family"
+msgstr " Virheellinen kohdemaski "
+
+#, c-format
+msgid "ftpfs: could not setup passive mode: %s"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "ftpfs: could not create socket: %s"
+msgstr ""
+" Ei voitu saada tietoja %s:sta \n"
+" %s "
 
 msgid "ftpfs: could not setup passive mode"
 msgstr ""
@@ -3598,11 +3684,18 @@ msgstr ""
 msgid "Changes to file lost"
 msgstr "&Pitkä tiedostolista"
 
+#~ msgid "pro&Mpt on replace"
+#~ msgstr "kysy korvatess&a"
+
+#~ msgid "replace &All"
+#~ msgstr "korvaa &Kaikki"
+
+#, fuzzy
+#~ msgid "O&ne"
+#~ msgstr "&Nimi"
+
 #~ msgid "scanf &Expression"
 #~ msgstr "scanf &Lauseke"
-
-#~ msgid "&Whole words only"
-#~ msgstr "&Vain koko sanat"
 
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr " Anna korvausparametrien järjestys, esim. 3,2,1,4 "

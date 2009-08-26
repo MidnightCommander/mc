@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-07-09 17:07+0300\n"
+"POT-Creation-Date: 2009-08-26 17:11+0300\n"
 "PO-Revision-Date: 2009-02-13\n"
 "Last-Translator: Marcel Pol <mpol@gmx.net>\n"
 "Language-Team: Dutch <debian-l10n-dutch@lists.debian.org>\n"
@@ -316,14 +316,16 @@ msgstr " Druk een toets: "
 msgid " Execute Macro "
 msgstr " Macro uitvoeren "
 
-msgid "pro&Mpt on replace"
-msgstr "&Vraag bij vervanging"
-
-msgid "replace &All"
-msgstr "Vervang &Alles"
-
-msgid "All charsets"
+msgid "&All charsets"
 msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "Alleen hele &Woorden"
+
+#, fuzzy
+msgid "In se&lection"
+msgstr "S&Electie omkeren      M-*"
 
 msgid "&Backwards"
 msgstr "&Terug"
@@ -340,14 +342,11 @@ msgstr " Geef de zoekstring:"
 msgid "Cancel"
 msgstr "Annuleren"
 
-msgid "O&ne"
-msgstr "Ee&n"
+msgid "&Skip"
+msgstr "Over&slaan"
 
 msgid "A&ll"
 msgstr "A&lle"
-
-msgid "&Skip"
-msgstr "Over&slaan"
 
 msgid "&Replace"
 msgstr "Ve&rvangen"
@@ -472,19 +471,19 @@ msgid "&Paste from clipfile      S-Ins"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k               "
+msgid "Toggle bookmar&k            M-k"
 msgstr "Markering aan/ui&t  F3"
 
 #, fuzzy
-msgid "&Next bookmark                 "
+msgid "&Next bookmark              M-j"
 msgstr "&Nieuw              C-n"
 
 #, fuzzy
-msgid "Pre&v bookmark                 "
+msgid "Pre&v bookmark              M-i"
 msgstr "Sor&teren               M-t"
 
 #, fuzzy
-msgid "&Flush bookmark                "
+msgid "&Flush bookmark             M-o"
 msgstr "&Mail...                    "
 
 #, fuzzy
@@ -509,6 +508,22 @@ msgstr "&Ga naar regel...        M-l"
 
 msgid "&Paste from clipfile        C-y"
 msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "Markering aan/ui&t  F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "&Nieuw              C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "Sor&teren               M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "&Mail...                    "
 
 msgid "&Search...         F7"
 msgstr "&Zoeken...         F7"
@@ -649,6 +664,9 @@ msgstr "Regellengte voor afbreking: "
 
 msgid "Tab spacing: "
 msgstr "Tabgrootte: "
+
+msgid "Cursor beyond end of line"
+msgstr ""
 
 #, fuzzy
 msgid "Pers&istent selection"
@@ -1302,6 +1320,16 @@ msgstr "&Inode"
 msgid "Cannot read directory contents"
 msgstr "Kan mapinhoud niet lezen"
 
+msgid ""
+" The Commander can't change to the directory that \n"
+" the subshell claims you are in.  Perhaps you have \n"
+" deleted your working directory, or given yourself \n"
+" extra access permissions with the \"su\" command? "
+msgstr ""
+" De Commander kan niet zich niet verplaatsen naar de directorie\n"
+" waarin u zich volgens de subshell bevindt.  Heeft u de werkdirectorie \n"
+" verwijderd, of  \"su\" gebruikt? "
+
 #, c-format
 msgid "Press any key to continue..."
 msgstr "Druk een toets om verder te gaan..."
@@ -1849,25 +1877,25 @@ msgstr " Incorrecte reguliere expressie  "
 msgid "Cas&e sensitive"
 msgstr "Hoofd-/kleine le&tters"
 
-#, fuzzy
-msgid "Case sens&itive"
-msgstr "Hoofd-/kleine le&tters"
-
 msgid "&Find recursively"
 msgstr "&Vind recursief"
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "&All charsets"
-msgstr ""
-
-msgid "All cha&rsets"
-msgstr ""
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "Hoofd-/kleine le&tters"
 
 #, fuzzy
 msgid "Re&gular expression"
 msgstr "&Reguliere expressie"
+
+msgid "Fir&st hit"
+msgstr ""
+
+msgid "All cha&rsets"
+msgstr ""
 
 msgid "&Tree"
 msgstr "&Boom"
@@ -2217,16 +2245,6 @@ msgstr "welke toetsen niet met 'OK' gemarkeerd zijn. Geef een spatie "
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "of klik met de muis om ze te definiëren. Navigeer met Tab."
-
-msgid ""
-" The Commander can't change to the directory that \n"
-" the subshell claims you are in.  Perhaps you have \n"
-" deleted your working directory, or given yourself \n"
-" extra access permissions with the \"su\" command? "
-msgstr ""
-" De Commander kan niet zich niet verplaatsen naar de directorie\n"
-" waarin u zich volgens de subshell bevindt.  Heeft u de werkdirectorie \n"
-" verwijderd, of  \"su\" gebruikt? "
 
 msgid " The Midnight Commander "
 msgstr " De Midnight Commander "
@@ -2643,6 +2661,9 @@ msgstr "Toon verbor&Gen bestanden"
 msgid "show &Backup files"
 msgstr "Toon r&Eservebestanden"
 
+msgid "Use SI si&ze units"
+msgstr ""
+
 msgid "&Never"
 msgstr "&Nooit"
 
@@ -2834,14 +2855,6 @@ msgstr " Kies invoerkarakterset"
 msgid "-  < No translation >"
 msgstr "- < Geen vertaling >"
 
-#, c-format
-msgid ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-msgstr ""
-"Schermgrootte %dx%d wordt niet ondersteund.\n"
-"Controleer omgevingsvariabele TERM ( opdr: set).\n"
-
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -2956,196 +2969,6 @@ msgid ""
 msgstr ""
 "Schrijven naar bestand %s mislukt:\n"
 "%s\n"
-
-msgid " Format error on file Extensions File "
-msgstr "Formaatfout in bestandsextensies-bestand"
-
-#, c-format
-msgid " The %%var macro has no default "
-msgstr "De %%var-macro heeft geen standaard "
-
-#, c-format
-msgid " The %%var macro has no variable "
-msgstr "De %%var macro heeft geen variabele "
-
-msgid " Debug "
-msgstr " Debug "
-
-msgid " ERROR: "
-msgstr " FOUT: "
-
-msgid " True:  "
-msgstr " Waar:  "
-
-msgid " False: "
-msgstr " Onwaar: "
-
-msgid " Warning -- ignoring file "
-msgstr " Waarschuwing -- bestand wordt genegeerd "
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"Bestand %s is niet van de 'root' of van u, of is door iedereen "
-"beschrijfbaar.\n"
-"Het gebruik kan veiligheidsrisico's betekenen"
-
-#, c-format
-msgid " No suitable entries found in %s "
-msgstr "Geen passende items gevonden in %s "
-
-msgid " User menu "
-msgstr " Gebruikersmenu "
-
-#, fuzzy
-msgid "%b %d %H:%M"
-msgstr "%b %e %H:%M"
-
-#, fuzzy
-msgid "%b %d %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s is geen map\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "U bent niet de eigenaar van de map %s\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "Kan de rechten niet corrigeren voor de map %s\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr "Tijdelijke map \"%s\" kan niet gecreëerd worden: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Tijdelijke bestanden zullen in %s gemaakt worden\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Tijdelijke bestanden zullen niet aangemaakt worden\n"
-
-msgid " Pipe failed "
-msgstr " Pipe mislukt "
-
-msgid " Dup failed "
-msgstr " Dup mislukt"
-
-msgid " Cannot spawn child process "
-msgstr " Starten kindproces mislukt "
-
-msgid "Empty output from child filter"
-msgstr "Geen uitvoer van kindfilter"
-
-#, c-format
-msgid ""
-" Cannot open \"%s\"\n"
-" %s "
-msgstr ""
-" Openen van \"%s\" is niet mogelijk\n"
-" %s"
-
-#, c-format
-msgid ""
-" Cannot stat \"%s\"\n"
-" %s "
-msgstr ""
-" Inspectie van \"%s\" mislukt \n"
-" %s "
-
-msgid " Cannot view: not a regular file "
-msgstr " Bekijken niet mogelijk: geen normaal bestand "
-
-#, c-format
-msgid "File: %s"
-msgstr "Bestand: %s"
-
-#, c-format
-msgid "Offset 0x%08lx"
-msgstr "Offset 0x%08lx"
-
-#, c-format
-msgid "Line %lu Col %lu"
-msgstr "Regl %lu Kol %lu"
-
-#, c-format
-msgid "%s bytes"
-msgstr "%s bytes"
-
-#, c-format
-msgid ">= %s bytes"
-msgstr ">= %s bytes"
-
-#, c-format
-msgid ""
-" Error while closing the file: \n"
-" %s \n"
-" Data may have been written or not. "
-msgstr ""
-" Probleem met sluiten bestand: \n"
-" %s\n"
-"  Data is mogelijk niet geschreven. "
-
-#, c-format
-msgid ""
-" Cannot save file: \n"
-" %s "
-msgstr ""
-" Kan bestand niet opslaan: \n"
-" %s "
-
-#, fuzzy, c-format
-msgid ""
-" The current line number is %lu.\n"
-" Enter the new line number:"
-msgstr ""
-" Het huidige regelnummer is  %d.\n"
-" Geef het nieuwe regelnummer:"
-
-#, fuzzy
-msgid " The current address is 0x%08"
-msgstr ""
-" Het huidige adres is  0x%lx.\n"
-" Geef het nieuwe adres:"
-
-msgid " Goto Address "
-msgstr " Ga naar adres "
-
-msgid " Invalid address "
-msgstr " Ongeldig adres "
-
-msgid "Seeking to search result"
-msgstr ""
-
-msgid "ButtonBar|Help"
-msgstr "Help"
-
-msgid "ButtonBar|Quit"
-msgstr "Afsltn"
-
-msgid "ButtonBar|View"
-msgstr "Bekijk"
-
-msgid "ButtonBar|Edit"
-msgstr "Bewerk"
-
-msgid "ButtonBar|Save"
-msgstr "Opsln"
-
-msgid " History "
-msgstr " Opdrachthistorie "
 
 msgid "Function key 1"
 msgstr "Functietoets 1"
@@ -3285,11 +3108,259 @@ msgstr "Numeriek Del"
 msgid "Enter on keypad"
 msgstr "Numeriek Enter"
 
+#, fuzzy
+msgid "Tab on keypad"
+msgstr "Numeriek +"
+
+#, fuzzy
+msgid "Space on keypad"
+msgstr "Numeriek /"
+
 msgid "Slash on keypad"
 msgstr "Numeriek /"
 
 msgid "NumLock on keypad"
 msgstr "Numerisch NumLock"
+
+msgid "Ctrl"
+msgstr ""
+
+msgid "Alt"
+msgstr ""
+
+msgid "Shift"
+msgstr ""
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"Schermgrootte %dx%d wordt niet ondersteund.\n"
+"Controleer omgevingsvariabele TERM ( opdr: set).\n"
+
+msgid " Format error on file Extensions File "
+msgstr "Formaatfout in bestandsextensies-bestand"
+
+#, c-format
+msgid " The %%var macro has no default "
+msgstr "De %%var-macro heeft geen standaard "
+
+#, c-format
+msgid " The %%var macro has no variable "
+msgstr "De %%var macro heeft geen variabele "
+
+msgid " Debug "
+msgstr " Debug "
+
+msgid " ERROR: "
+msgstr " FOUT: "
+
+msgid " True:  "
+msgstr " Waar:  "
+
+msgid " False: "
+msgstr " Onwaar: "
+
+msgid " Warning -- ignoring file "
+msgstr " Waarschuwing -- bestand wordt genegeerd "
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"Bestand %s is niet van de 'root' of van u, of is door iedereen "
+"beschrijfbaar.\n"
+"Het gebruik kan veiligheidsrisico's betekenen"
+
+#, c-format
+msgid " No suitable entries found in %s "
+msgstr "Geen passende items gevonden in %s "
+
+msgid " User menu "
+msgstr " Gebruikersmenu "
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
+
+#, c-format
+msgid "%s is not a directory\n"
+msgstr "%s is geen map\n"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr "U bent niet de eigenaar van de map %s\n"
+
+#, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr "Kan de rechten niet corrigeren voor de map %s\n"
+
+#, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr "Tijdelijke map \"%s\" kan niet gecreëerd worden: %s\n"
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr "Tijdelijke bestanden zullen in %s gemaakt worden\n"
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr "Tijdelijke bestanden zullen niet aangemaakt worden\n"
+
+msgid " Pipe failed "
+msgstr " Pipe mislukt "
+
+msgid " Dup failed "
+msgstr " Dup mislukt"
+
+#, fuzzy, c-format
+msgid ""
+" The current line number is %lld.\n"
+" Enter the new line number:"
+msgstr ""
+" Het huidige regelnummer is  %d.\n"
+" Geef het nieuwe regelnummer:"
+
+#, fuzzy, c-format
+msgid ""
+" The current address is %s.\n"
+" Enter the new address:"
+msgstr ""
+" Het huidige regelnummer is  %d.\n"
+" Geef het nieuwe regelnummer:"
+
+msgid " Goto Address "
+msgstr " Ga naar adres "
+
+msgid " Invalid address "
+msgstr " Ongeldig adres "
+
+msgid " Cannot spawn child process "
+msgstr " Starten kindproces mislukt "
+
+msgid "Empty output from child filter"
+msgstr "Geen uitvoer van kindfilter"
+
+msgid "All charsets"
+msgstr ""
+
+msgid "ButtonBar|Help"
+msgstr "Help"
+
+msgid "ButtonBar|Quit"
+msgstr "Afsltn"
+
+msgid "ButtonBar|Ascii"
+msgstr "Ascii"
+
+msgid "ButtonBar|Hex"
+msgstr "Hex"
+
+msgid "ButtonBar|Goto"
+msgstr "GaNaar"
+
+msgid "ButtonBar|Line"
+msgstr "Regel"
+
+msgid "ButtonBar|View"
+msgstr "Bekijk"
+
+msgid "ButtonBar|Edit"
+msgstr "Bewerk"
+
+msgid "ButtonBar|Save"
+msgstr "Opsln"
+
+msgid "ButtonBar|UnWrap"
+msgstr "GnOmsl"
+
+msgid "ButtonBar|Wrap"
+msgstr "RglOms"
+
+msgid "ButtonBar|HxSrch"
+msgstr "HxZoek"
+
+msgid "ButtonBar|Search"
+msgstr "Zoek"
+
+msgid "ButtonBar|Raw"
+msgstr "Rauw"
+
+msgid "ButtonBar|Parse"
+msgstr "Parse"
+
+msgid "ButtonBar|Unform"
+msgstr "Ongfrm"
+
+msgid "ButtonBar|Format"
+msgstr "Format"
+
+#, c-format
+msgid "File: %s"
+msgstr "Bestand: %s"
+
+#, c-format
+msgid "Offset 0x%08lx"
+msgstr "Offset 0x%08lx"
+
+#, c-format
+msgid "Line %lu Col %lu"
+msgstr "Regl %lu Kol %lu"
+
+#, c-format
+msgid "%s bytes"
+msgstr "%s bytes"
+
+#, c-format
+msgid ">= %s bytes"
+msgstr ">= %s bytes"
+
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+" Probleem met sluiten bestand: \n"
+" %s\n"
+"  Data is mogelijk niet geschreven. "
+
+#, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr ""
+" Kan bestand niet opslaan: \n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot open \"%s\"\n"
+" %s "
+msgstr ""
+" Openen van \"%s\" is niet mogelijk\n"
+" %s"
+
+#, c-format
+msgid ""
+" Cannot stat \"%s\"\n"
+" %s "
+msgstr ""
+" Inspectie van \"%s\" mislukt \n"
+" %s "
+
+msgid " Cannot view: not a regular file "
+msgstr " Bekijken niet mogelijk: geen normaal bestand "
+
+msgid "Seeking to search result"
+msgstr ""
+
+msgid " History "
+msgstr " Opdrachthistorie "
 
 msgid "Background process:"
 msgstr "Achtergrondproces:"
@@ -3468,8 +3539,9 @@ msgstr "ftpfs: Login niet correct voor gebruiker %s "
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: Ongeldige hostnaam."
 
-msgid "ftpfs: Invalid host address."
-msgstr "ftpfs: Ongeldig hostadres."
+#, c-format
+msgid "ftpfs: %s"
+msgstr ""
 
 #, c-format
 msgid "ftpfs: making connection to %s"
@@ -3485,6 +3557,18 @@ msgstr "ftpfs: verbinding met server mislukt: %s"
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Aan het wachten op nieuwe poging... %d (Control-C om af te breken)"
+
+#, fuzzy
+msgid "ftpfs: invalid address family"
+msgstr "ftpfs: Ongeldig hostadres."
+
+#, fuzzy, c-format
+msgid "ftpfs: could not setup passive mode: %s"
+msgstr "ftpfs: instellen passieve modus mislukt"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not create socket: %s"
+msgstr " Kan socket niet creëren: %s "
 
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: instellen passieve modus mislukt"
@@ -3721,11 +3805,31 @@ msgstr "Interne fout:"
 msgid "Changes to file lost"
 msgstr "Wijzigingen zijn verloren"
 
+#~ msgid "pro&Mpt on replace"
+#~ msgstr "&Vraag bij vervanging"
+
+#~ msgid "replace &All"
+#~ msgstr "Vervang &Alles"
+
+#~ msgid "O&ne"
+#~ msgstr "Ee&n"
+
+#, fuzzy
+#~ msgid "%b %d %H:%M"
+#~ msgstr "%b %e %H:%M"
+
+#, fuzzy
+#~ msgid "%b %d %Y"
+#~ msgstr "%b %e  %Y"
+
+#, fuzzy
+#~ msgid " The current address is 0x%08"
+#~ msgstr ""
+#~ " Het huidige adres is  0x%lx.\n"
+#~ " Geef het nieuwe adres:"
+
 #~ msgid "scanf &Expression"
 #~ msgstr "'scanf'-&Expressie"
-
-#~ msgid "&Whole words only"
-#~ msgstr "Alleen hele &Woorden"
 
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr " Geef vervanging argumentenvolgorde, bijv. 3,2,1,4 "
@@ -3783,44 +3887,8 @@ msgstr "Wijzigingen zijn verloren"
 #~ msgid " Enter regexp:"
 #~ msgstr " Geef reguliere expressie:"
 
-#~ msgid "ButtonBar|Ascii"
-#~ msgstr "Ascii"
-
-#~ msgid "ButtonBar|Hex"
-#~ msgstr "Hex"
-
-#~ msgid "ButtonBar|Goto"
-#~ msgstr "GaNaar"
-
-#~ msgid "ButtonBar|Line"
-#~ msgstr "Regel"
-
-#~ msgid "ButtonBar|UnWrap"
-#~ msgstr "GnOmsl"
-
-#~ msgid "ButtonBar|Wrap"
-#~ msgstr "RglOms"
-
 #~ msgid "ButtonBar|RxSrch"
 #~ msgstr "RxZoek"
-
-#~ msgid "ButtonBar|HxSrch"
-#~ msgstr "HxZoek"
-
-#~ msgid "ButtonBar|Search"
-#~ msgstr "Zoek"
-
-#~ msgid "ButtonBar|Raw"
-#~ msgstr "Rauw"
-
-#~ msgid "ButtonBar|Parse"
-#~ msgstr "Parse"
-
-#~ msgid "ButtonBar|Unform"
-#~ msgstr "Ongfrm"
-
-#~ msgid "ButtonBar|Format"
-#~ msgstr "Format"
 
 #~ msgid "Using included S-Lang library"
 #~ msgstr "Bijgesloten S-Lang bibliotheek zal gebruikt worden."

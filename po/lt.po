@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-07-09 17:07+0300\n"
+"POT-Creation-Date: 2009-08-26 17:11+0300\n"
 "PO-Revision-Date: 2009-02-16 19:45+0300\n"
 "Last-Translator: Andrius Štikonas <stikonas@gmail.com>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -315,14 +315,16 @@ msgstr " Paspauskite bet kurį klavišą: "
 msgid " Execute Macro "
 msgstr " Įvykdyti makrokomandą "
 
-msgid "pro&Mpt on replace"
-msgstr "Praneš&ti keičiant"
-
-msgid "replace &All"
-msgstr "P&akeisti viską"
-
-msgid "All charsets"
+msgid "&All charsets"
 msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "&Tik žodžius"
+
+#, fuzzy
+msgid "In se&lection"
+msgstr "Žymėti at&virkščiai M-*"
 
 msgid "&Backwards"
 msgstr "At&bulai"
@@ -339,14 +341,11 @@ msgstr " Įveskite ieškomą eilutę:"
 msgid "Cancel"
 msgstr "Atsisakyti"
 
-msgid "O&ne"
-msgstr "Vie&nas"
+msgid "&Skip"
+msgstr "Pralei&sti"
 
 msgid "A&ll"
 msgstr "&Visi"
-
-msgid "&Skip"
-msgstr "Pralei&sti"
 
 msgid "&Replace"
 msgstr "Pa&keisti"
@@ -471,19 +470,19 @@ msgid "&Paste from clipfile      S-Ins"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k               "
+msgid "Toggle bookmar&k            M-k"
 msgstr "Keis&ti žymėjimą       F3"
 
 #, fuzzy
-msgid "&Next bookmark                 "
+msgid "&Next bookmark              M-j"
 msgstr "&Nauja                C-n"
 
 #, fuzzy
-msgid "Pre&v bookmark                 "
+msgid "Pre&v bookmark              M-i"
 msgstr "Rikiuo&ti...             M-t"
 
 #, fuzzy
-msgid "&Flush bookmark                "
+msgid "&Flush bookmark             M-o"
 msgstr "Paš&tas..."
 
 #, fuzzy
@@ -508,6 +507,22 @@ msgstr "&Eiti į eilutę...         M-l"
 
 msgid "&Paste from clipfile        C-y"
 msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "Keis&ti žymėjimą       F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "&Nauja                C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "Rikiuo&ti...             M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "Paš&tas..."
 
 msgid "&Search...         F7"
 msgstr "&Paieška...            F7"
@@ -648,6 +663,9 @@ msgstr "Laužyti eilutes ties: "
 
 msgid "Tab spacing: "
 msgstr "Tabuliacijos ilgis: "
+
+msgid "Cursor beyond end of line"
+msgstr ""
 
 #, fuzzy
 msgid "Pers&istent selection"
@@ -1299,6 +1317,16 @@ msgstr "„&Inode“"
 msgid "Cannot read directory contents"
 msgstr "Nepavyko perskaityti aplanko turinio"
 
+msgid ""
+" The Commander can't change to the directory that \n"
+" the subshell claims you are in.  Perhaps you have \n"
+" deleted your working directory, or given yourself \n"
+" extra access permissions with the \"su\" command? "
+msgstr ""
+" Nepavyko įeiti į aplanką, kurį aplinka nurodo kaip \n"
+" esamąjį. Galbūt jį ištrynėte arba naudojotės „su“ \n"
+" komanda, norėdami gauti platesnius leidimus? "
+
 #, c-format
 msgid "Press any key to continue..."
 msgstr "Paspauskite bet kurį klavišą..."
@@ -1846,25 +1874,25 @@ msgstr "  Netaisyklinga reguliari išraiška  "
 msgid "Cas&e sensitive"
 msgstr "Skir&ti ABC nuo abc"
 
-#, fuzzy
-msgid "Case sens&itive"
-msgstr "Skir&ti ABC nuo abc"
-
 msgid "&Find recursively"
 msgstr "&Rasti rekursyviai"
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "&All charsets"
-msgstr ""
-
-msgid "All cha&rsets"
-msgstr ""
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "Skir&ti ABC nuo abc"
 
 #, fuzzy
 msgid "Re&gular expression"
 msgstr "Reguliari &išraiška"
+
+msgid "Fir&st hit"
+msgstr ""
+
+msgid "All cha&rsets"
+msgstr ""
 
 msgid "&Tree"
 msgstr "&Medis"
@@ -2214,16 +2242,6 @@ msgstr "patikrinkite, kurie iš jų nepažymėti „OK“. Paspauskite jį tarpu
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "ar pele ir nurodykite jį. Naudokitės TAB perėjimui prie kitų."
-
-msgid ""
-" The Commander can't change to the directory that \n"
-" the subshell claims you are in.  Perhaps you have \n"
-" deleted your working directory, or given yourself \n"
-" extra access permissions with the \"su\" command? "
-msgstr ""
-" Nepavyko įeiti į aplanką, kurį aplinka nurodo kaip \n"
-" esamąjį. Galbūt jį ištrynėte arba naudojotės „su“ \n"
-" komanda, norėdami gauti platesnius leidimus? "
 
 msgid " The Midnight Commander "
 msgstr " Midnight Commander "
@@ -2638,6 +2656,9 @@ msgstr "Rodyti s&lepiam. failus"
 msgid "show &Backup files"
 msgstr "R&odyti ats. kopijų failus"
 
+msgid "Use SI si&ze units"
+msgstr ""
+
 msgid "&Never"
 msgstr "&Niekada"
 
@@ -2829,14 +2850,6 @@ msgstr " Parinkite įvesties koduotę "
 msgid "-  < No translation >"
 msgstr "–  < Jokio vertimo >"
 
-#, c-format
-msgid ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-msgstr ""
-"Ekrano dydis %dx%d nepalaikomas.\n"
-"Patikrinkite TERM aplinkos kintamąjį.\n"
-
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -2951,195 +2964,6 @@ msgid ""
 msgstr ""
 "Nepavyko įrašyti į failą %s:\n"
 "%s\n"
-
-msgid " Format error on file Extensions File "
-msgstr " Formato klaida failų plėtinių faile"
-
-#, c-format
-msgid " The %%var macro has no default "
-msgstr " %%var makrokomanda neturi pradmens "
-
-#, c-format
-msgid " The %%var macro has no variable "
-msgstr " %%var makrokomanda neturi kintamojo "
-
-msgid " Debug "
-msgstr " „Debug“ "
-
-msgid " ERROR: "
-msgstr " KLAIDA: "
-
-msgid " True:  "
-msgstr " Tiesa: "
-
-msgid " False: "
-msgstr " Melas: "
-
-msgid " Warning -- ignoring file "
-msgstr " Įspėjimas -- failas ignoruojamas "
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"Failas %s nepriklauso nei „root“, nei jums arba visi gali į ją rašyti.\n"
-"Jo naudojimas gali būti nesaugus"
-
-#, c-format
-msgid " No suitable entries found in %s "
-msgstr " Tinkamų įrašų „%s“ nerasta "
-
-msgid " User menu "
-msgstr " Naudotojo meniu "
-
-#, fuzzy
-msgid "%b %d %H:%M"
-msgstr "%b %e %H:%M"
-
-#, fuzzy
-msgid "%b %d %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s nėra aplankas\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "Aplankas %s jums nepriklauso\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr " Nepavyko nustatyti reikiamų teisių aplankui %s\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr "Nepavyko sukurti laikino aplanko %s: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Laikinieji failai bus talpinami aplanke %s\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Laikinieji failai nebus kuriami\n"
-
-msgid " Pipe failed "
-msgstr " Konvejeris nepavyko "
-
-msgid " Dup failed "
-msgstr " „Dup“ nepavyko "
-
-msgid " Cannot spawn child process "
-msgstr " Nepavyko sukurti vaiko "
-
-msgid "Empty output from child filter"
-msgstr "Filtras nepateikė informacijos"
-
-#, c-format
-msgid ""
-" Cannot open \"%s\"\n"
-" %s "
-msgstr ""
-" Nepavyko atverti „%s“\n"
-" %s "
-
-#, c-format
-msgid ""
-" Cannot stat \"%s\"\n"
-" %s "
-msgstr ""
-" Nepavyko sužinoti „%s“ būklės („stat“) \n"
-" %s "
-
-msgid " Cannot view: not a regular file "
-msgstr " Nepavyko parodyti: failas nėra įprastinis "
-
-#, c-format
-msgid "File: %s"
-msgstr "Failas: %s"
-
-#, c-format
-msgid "Offset 0x%08lx"
-msgstr "Poslinkis 0x%08lx"
-
-#, c-format
-msgid "Line %lu Col %lu"
-msgstr " Eil. %lu Stulp. %lu"
-
-#, c-format
-msgid "%s bytes"
-msgstr "%s baitų"
-
-#, c-format
-msgid ">= %s bytes"
-msgstr ">= %s baitų"
-
-#, c-format
-msgid ""
-" Error while closing the file: \n"
-" %s \n"
-" Data may have been written or not. "
-msgstr ""
-" Klaida uždarant failą: \n"
-" %s \n"
-" Duomenys galėjo būti neįrašyti. "
-
-#, c-format
-msgid ""
-" Cannot save file: \n"
-" %s "
-msgstr ""
-" Nepavyko įrašyti failo: \n"
-" %s "
-
-#, fuzzy, c-format
-msgid ""
-" The current line number is %lu.\n"
-" Enter the new line number:"
-msgstr ""
-" Esamos eilutės numeris: %d.\n"
-" Įveskite naują numerį:"
-
-#, fuzzy
-msgid " The current address is 0x%08"
-msgstr ""
-" Esamas adresas: 0x%lx.\n"
-" Įveskite naują adresą:"
-
-msgid " Goto Address "
-msgstr " Eiti adresu "
-
-msgid " Invalid address "
-msgstr " Neteisingas adresas "
-
-msgid "Seeking to search result"
-msgstr ""
-
-msgid "ButtonBar|Help"
-msgstr "ButtonBar|Pagalb"
-
-msgid "ButtonBar|Quit"
-msgstr "ButtonBar|Išeit"
-
-msgid "ButtonBar|View"
-msgstr "ButtonBar|Rodyt"
-
-msgid "ButtonBar|Edit"
-msgstr "ButtonBar|Keist"
-
-msgid "ButtonBar|Save"
-msgstr "ButtonBar|Įrašy"
-
-msgid " History "
-msgstr " Istorija "
 
 msgid "Function key 1"
 msgstr "Funkcinis klav. 1"
@@ -3279,11 +3103,258 @@ msgstr "Skaitm. „Delete“"
 msgid "Enter on keypad"
 msgstr "Skaitm. „Enter“"
 
+#, fuzzy
+msgid "Tab on keypad"
+msgstr "Skaitm. +"
+
+#, fuzzy
+msgid "Space on keypad"
+msgstr "Skaitm. /"
+
 msgid "Slash on keypad"
 msgstr "Skaitm. /"
 
 msgid "NumLock on keypad"
 msgstr "Skaitm. „NumLock“"
+
+msgid "Ctrl"
+msgstr ""
+
+msgid "Alt"
+msgstr ""
+
+msgid "Shift"
+msgstr ""
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"Ekrano dydis %dx%d nepalaikomas.\n"
+"Patikrinkite TERM aplinkos kintamąjį.\n"
+
+msgid " Format error on file Extensions File "
+msgstr " Formato klaida failų plėtinių faile"
+
+#, c-format
+msgid " The %%var macro has no default "
+msgstr " %%var makrokomanda neturi pradmens "
+
+#, c-format
+msgid " The %%var macro has no variable "
+msgstr " %%var makrokomanda neturi kintamojo "
+
+msgid " Debug "
+msgstr " „Debug“ "
+
+msgid " ERROR: "
+msgstr " KLAIDA: "
+
+msgid " True:  "
+msgstr " Tiesa: "
+
+msgid " False: "
+msgstr " Melas: "
+
+msgid " Warning -- ignoring file "
+msgstr " Įspėjimas -- failas ignoruojamas "
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"Failas %s nepriklauso nei „root“, nei jums arba visi gali į ją rašyti.\n"
+"Jo naudojimas gali būti nesaugus"
+
+#, c-format
+msgid " No suitable entries found in %s "
+msgstr " Tinkamų įrašų „%s“ nerasta "
+
+msgid " User menu "
+msgstr " Naudotojo meniu "
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
+
+#, c-format
+msgid "%s is not a directory\n"
+msgstr "%s nėra aplankas\n"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr "Aplankas %s jums nepriklauso\n"
+
+#, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr " Nepavyko nustatyti reikiamų teisių aplankui %s\n"
+
+#, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr "Nepavyko sukurti laikino aplanko %s: %s\n"
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr "Laikinieji failai bus talpinami aplanke %s\n"
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr "Laikinieji failai nebus kuriami\n"
+
+msgid " Pipe failed "
+msgstr " Konvejeris nepavyko "
+
+msgid " Dup failed "
+msgstr " „Dup“ nepavyko "
+
+#, fuzzy, c-format
+msgid ""
+" The current line number is %lld.\n"
+" Enter the new line number:"
+msgstr ""
+" Esamos eilutės numeris: %d.\n"
+" Įveskite naują numerį:"
+
+#, fuzzy, c-format
+msgid ""
+" The current address is %s.\n"
+" Enter the new address:"
+msgstr ""
+" Esamos eilutės numeris: %d.\n"
+" Įveskite naują numerį:"
+
+msgid " Goto Address "
+msgstr " Eiti adresu "
+
+msgid " Invalid address "
+msgstr " Neteisingas adresas "
+
+msgid " Cannot spawn child process "
+msgstr " Nepavyko sukurti vaiko "
+
+msgid "Empty output from child filter"
+msgstr "Filtras nepateikė informacijos"
+
+msgid "All charsets"
+msgstr ""
+
+msgid "ButtonBar|Help"
+msgstr "ButtonBar|Pagalb"
+
+msgid "ButtonBar|Quit"
+msgstr "ButtonBar|Išeit"
+
+msgid "ButtonBar|Ascii"
+msgstr "ButtonBar|ASCII"
+
+msgid "ButtonBar|Hex"
+msgstr "ButtonBar|Šešiol"
+
+msgid "ButtonBar|Goto"
+msgstr "ButtonBar|Eiti į"
+
+msgid "ButtonBar|Line"
+msgstr "ButtonBar|Eilutė"
+
+msgid "ButtonBar|View"
+msgstr "ButtonBar|Rodyt"
+
+msgid "ButtonBar|Edit"
+msgstr "ButtonBar|Keist"
+
+msgid "ButtonBar|Save"
+msgstr "ButtonBar|Įrašy"
+
+msgid "ButtonBar|UnWrap"
+msgstr "ButtonBar|Nelauž"
+
+msgid "ButtonBar|Wrap"
+msgstr "ButtonBar|Lauž"
+
+msgid "ButtonBar|HxSrch"
+msgstr "ButtonBar|ŠšlIeš"
+
+msgid "ButtonBar|Search"
+msgstr "ButtonBar|Ieškot"
+
+msgid "ButtonBar|Raw"
+msgstr "ButtonBar|Pradin"
+
+msgid "ButtonBar|Parse"
+msgstr "ButtonBar|Apdorot."
+
+msgid "ButtonBar|Unform"
+msgstr "ButtonBar|Išform."
+
+msgid "ButtonBar|Format"
+msgstr "ButtonBar|Formuot."
+
+#, c-format
+msgid "File: %s"
+msgstr "Failas: %s"
+
+#, c-format
+msgid "Offset 0x%08lx"
+msgstr "Poslinkis 0x%08lx"
+
+#, c-format
+msgid "Line %lu Col %lu"
+msgstr " Eil. %lu Stulp. %lu"
+
+#, c-format
+msgid "%s bytes"
+msgstr "%s baitų"
+
+#, c-format
+msgid ">= %s bytes"
+msgstr ">= %s baitų"
+
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+" Klaida uždarant failą: \n"
+" %s \n"
+" Duomenys galėjo būti neįrašyti. "
+
+#, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr ""
+" Nepavyko įrašyti failo: \n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot open \"%s\"\n"
+" %s "
+msgstr ""
+" Nepavyko atverti „%s“\n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot stat \"%s\"\n"
+" %s "
+msgstr ""
+" Nepavyko sužinoti „%s“ būklės („stat“) \n"
+" %s "
+
+msgid " Cannot view: not a regular file "
+msgstr " Nepavyko parodyti: failas nėra įprastinis "
+
+msgid "Seeking to search result"
+msgstr ""
+
+msgid " History "
+msgstr " Istorija "
 
 msgid "Background process:"
 msgstr "Foninis procesas:"
@@ -3462,8 +3533,9 @@ msgstr "ftpfs: Neteisingas naudotojo „%s“ jungimasis "
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: Neteisingas kompiuterio vardas."
 
-msgid "ftpfs: Invalid host address."
-msgstr "ftpfs: Neteisingas adresas."
+#, c-format
+msgid "ftpfs: %s"
+msgstr ""
 
 #, c-format
 msgid "ftpfs: making connection to %s"
@@ -3479,6 +3551,18 @@ msgstr "ftpfs: jungimasis į serverį nepavyko: %s"
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Laukiama... %d (Control-C nutraukti)"
+
+#, fuzzy
+msgid "ftpfs: invalid address family"
+msgstr "ftpfs: Neteisingas adresas."
+
+#, fuzzy, c-format
+msgid "ftpfs: could not setup passive mode: %s"
+msgstr "ftpfs: nepavyko nustatyti pasyvaus režimo"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not create socket: %s"
+msgstr " Nepavyko sukurti lizdo: %s "
 
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: nepavyko nustatyti pasyvaus režimo"
@@ -3715,11 +3799,31 @@ msgstr "Vidinė klaida:"
 msgid "Changes to file lost"
 msgstr "Failo pakeitimai prarasti"
 
+#~ msgid "pro&Mpt on replace"
+#~ msgstr "Praneš&ti keičiant"
+
+#~ msgid "replace &All"
+#~ msgstr "P&akeisti viską"
+
+#~ msgid "O&ne"
+#~ msgstr "Vie&nas"
+
+#, fuzzy
+#~ msgid "%b %d %H:%M"
+#~ msgstr "%b %e %H:%M"
+
+#, fuzzy
+#~ msgid "%b %d %Y"
+#~ msgstr "%b %e  %Y"
+
+#, fuzzy
+#~ msgid " The current address is 0x%08"
+#~ msgstr ""
+#~ " Esamas adresas: 0x%lx.\n"
+#~ " Įveskite naują adresą:"
+
 #~ msgid "scanf &Expression"
 #~ msgstr "„scanf“ iš&raiška"
-
-#~ msgid "&Whole words only"
-#~ msgstr "&Tik žodžius"
 
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr " Įveskite pakeitimo argumentų tvarką, pvz. 3,2,1,4 "
@@ -3776,44 +3880,8 @@ msgstr "Failo pakeitimai prarasti"
 #~ msgid " Enter regexp:"
 #~ msgstr " Įveskite reguliarą išraišką: "
 
-#~ msgid "ButtonBar|Ascii"
-#~ msgstr "ButtonBar|ASCII"
-
-#~ msgid "ButtonBar|Hex"
-#~ msgstr "ButtonBar|Šešiol"
-
-#~ msgid "ButtonBar|Goto"
-#~ msgstr "ButtonBar|Eiti į"
-
-#~ msgid "ButtonBar|Line"
-#~ msgstr "ButtonBar|Eilutė"
-
-#~ msgid "ButtonBar|UnWrap"
-#~ msgstr "ButtonBar|Nelauž"
-
-#~ msgid "ButtonBar|Wrap"
-#~ msgstr "ButtonBar|Lauž"
-
 #~ msgid "ButtonBar|RxSrch"
 #~ msgstr "ButtonBar|RegIeš"
-
-#~ msgid "ButtonBar|HxSrch"
-#~ msgstr "ButtonBar|ŠšlIeš"
-
-#~ msgid "ButtonBar|Search"
-#~ msgstr "ButtonBar|Ieškot"
-
-#~ msgid "ButtonBar|Raw"
-#~ msgstr "ButtonBar|Pradin"
-
-#~ msgid "ButtonBar|Parse"
-#~ msgstr "ButtonBar|Apdorot."
-
-#~ msgid "ButtonBar|Unform"
-#~ msgstr "ButtonBar|Išform."
-
-#~ msgid "ButtonBar|Format"
-#~ msgstr "ButtonBar|Formuot."
 
 #~ msgid "Using included S-Lang library"
 #~ msgstr "Naudoti pridėtą S-Lang biblioteką"

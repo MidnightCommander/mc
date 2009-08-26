@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-07-09 17:07+0300\n"
+"POT-Creation-Date: 2009-08-26 17:11+0300\n"
 "PO-Revision-Date: 2006-08-16 16:20+0400\n"
 "Last-Translator: Phan Vĩnh Thịnh <teppi82@gmail.com>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
@@ -315,15 +315,16 @@ msgstr " Nhấn phím bất kỳ: "
 msgid " Execute Macro "
 msgstr "Thực hiện Macro "
 
-#, fuzzy
-msgid "pro&Mpt on replace"
-msgstr "&Hỏi trước khi thay"
-
-msgid "replace &All"
-msgstr "&Thay thế tất cả"
-
-msgid "All charsets"
+msgid "&All charsets"
 msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "&Chỉ những từ đầy đủ"
+
+#, fuzzy
+msgid "In se&lection"
+msgstr "Chọn ngược lạ&I        M-*"
 
 msgid "&Backwards"
 msgstr "&Tìm ngược lại"
@@ -340,14 +341,11 @@ msgstr " Nhập chuỗi tìm kiếm:"
 msgid "Cancel"
 msgstr "Hủy bỏ"
 
-msgid "O&ne"
-msgstr "&Một"
+msgid "&Skip"
+msgstr "&Bỏ qua"
 
 msgid "A&ll"
 msgstr "&Tất cả"
-
-msgid "&Skip"
-msgstr "&Bỏ qua"
 
 msgid "&Replace"
 msgstr "&Thay thế"
@@ -472,19 +470,19 @@ msgid "&Paste from clipfile      S-Ins"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k               "
+msgid "Toggle bookmar&k            M-k"
 msgstr "&Bật/tắt bôi đen           F3"
 
 #, fuzzy
-msgid "&Next bookmark                 "
+msgid "&Next bookmark              M-j"
 msgstr "&Tập tin mới             C-n"
 
 #, fuzzy
-msgid "Pre&v bookmark                 "
+msgid "Pre&v bookmark              M-i"
 msgstr "&Sắp xếp...                      M-t"
 
 #, fuzzy
-msgid "&Flush bookmark                "
+msgid "&Flush bookmark             M-o"
 msgstr "T&hư điện tử...                     "
 
 #, fuzzy
@@ -509,6 +507,22 @@ msgstr "&Chuyển tới dòng...             M-l"
 
 msgid "&Paste from clipfile        C-y"
 msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "&Bật/tắt bôi đen           F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "&Tập tin mới             C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "&Sắp xếp...                      M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "T&hư điện tử...                     "
 
 msgid "&Search...         F7"
 msgstr "Tìm &kiếm...               F7"
@@ -649,6 +663,9 @@ msgstr "Vị trí chuyển dòng: "
 
 msgid "Tab spacing: "
 msgstr "Độ rộng tab: "
+
+msgid "Cursor beyond end of line"
+msgstr ""
 
 #, fuzzy
 msgid "Pers&istent selection"
@@ -1302,6 +1319,17 @@ msgstr "&Chỉ mục inode"
 msgid "Cannot read directory contents"
 msgstr "Không đọc được nội dung thư mục"
 
+msgid ""
+" The Commander can't change to the directory that \n"
+" the subshell claims you are in.  Perhaps you have \n"
+" deleted your working directory, or given yourself \n"
+" extra access permissions with the \"su\" command? "
+msgstr ""
+" MC không thể chuyển vào thư mục, mà tiến trình shell \n"
+" con thông báo. Rất có thể, bạn đã xóa thư mục làm việc \n"
+" hoặc thêm cho mình quyền truy cập mở rộng bằng câu \n"
+" lệnh \"su\"? "
+
 #, c-format
 msgid "Press any key to continue..."
 msgstr "Để tiếp tục nhấn phím bất kỳ..."
@@ -1851,25 +1879,25 @@ msgid "Cas&e sensitive"
 msgstr "tính đến kiể&U chữ"
 
 #, fuzzy
-msgid "Case sens&itive"
-msgstr "tính đến kiể&U chữ"
-
-#, fuzzy
 msgid "&Find recursively"
 msgstr "Tìm kiếm toàn bộ (đệ qu&y)"
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "&All charsets"
-msgstr ""
-
-msgid "All cha&rsets"
-msgstr ""
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "tính đến kiể&U chữ"
 
 #, fuzzy
 msgid "Re&gular expression"
 msgstr "&Biểu thức chính quy"
+
+msgid "Fir&st hit"
+msgstr ""
+
+msgid "All cha&rsets"
+msgstr ""
 
 msgid "&Tree"
 msgstr "&Cây thư mục"
@@ -2217,17 +2245,6 @@ msgstr ""
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "phím bị thiếu, hoặc nhấn chuột để xác định. Di chuyển bằng Tab."
-
-msgid ""
-" The Commander can't change to the directory that \n"
-" the subshell claims you are in.  Perhaps you have \n"
-" deleted your working directory, or given yourself \n"
-" extra access permissions with the \"su\" command? "
-msgstr ""
-" MC không thể chuyển vào thư mục, mà tiến trình shell \n"
-" con thông báo. Rất có thể, bạn đã xóa thư mục làm việc \n"
-" hoặc thêm cho mình quyền truy cập mở rộng bằng câu \n"
-" lệnh \"su\"? "
 
 msgid " The Midnight Commander "
 msgstr " Midnight Commander "
@@ -2643,6 +2660,9 @@ msgstr "&Hiển thị tập tin ẩn"
 msgid "show &Backup files"
 msgstr "hiển thị tập tin sao &Lưu"
 
+msgid "Use SI si&ze units"
+msgstr ""
+
 msgid "&Never"
 msgstr "&Không bao giờ"
 
@@ -2831,14 +2851,6 @@ msgstr " Chọn bảng mã dữ liệu vào "
 msgid "-  < No translation >"
 msgstr "-  < Không có dịch >"
 
-#, c-format
-msgid ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-msgstr ""
-"Kích thước màn hình %dx%d không được hỗ trợ.\n"
-"Hãy kiểm tra biến môi trường TERM.\n"
-
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -2953,198 +2965,6 @@ msgid ""
 msgstr ""
 "Không ghi nhớ được vào tập tin %s:\n"
 "%s\n"
-
-msgid " Format error on file Extensions File "
-msgstr " Lỗi định dạng tập tin \"Phần mở rộng của tập tin\" "
-
-#, c-format
-msgid " The %%var macro has no default "
-msgstr " Macro %%var không có giá trị mặc định "
-
-#, c-format
-msgid " The %%var macro has no variable "
-msgstr " Macro %%var không có giá trị biến "
-
-msgid " Debug "
-msgstr " Sửa lỗi "
-
-msgid " ERROR: "
-msgstr " LỖI: "
-
-msgid " True:  "
-msgstr " Đúng: "
-
-msgid " False: "
-msgstr " Sai: "
-
-msgid " Warning -- ignoring file "
-msgstr " Cảnh báo - tập tin bị lờ đi "
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"Tập tin %s không thuộc quyền sở hữu của root, hay của bạn,\n"
-"hoặc ai cũng có thể ghi. Sử dụng tập tin này có thể không an toàn"
-
-#, c-format
-msgid " No suitable entries found in %s "
-msgstr " Không tìm thấy mục thích hợp trong %s"
-
-msgid " User menu "
-msgstr " Trình đơn người dùng "
-
-#, fuzzy
-msgid "%b %d %H:%M"
-msgstr "%b %e %H:%M"
-
-#, fuzzy
-msgid "%b %d %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s không phải là một thư mục\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "Bạn không sở hữu thư mục %s\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "Không đặt được quyền hạn đúng cho thư mục %s\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr "Không tạo được thư mục tạm thời %s: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Tập tin tạm thời sẽ được tạo trong thư mục %s\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Tập tin tạm thời sẽ không được tạo ra\n"
-
-msgid " Pipe failed "
-msgstr " Lỗi đường ống "
-
-msgid " Dup failed "
-msgstr " Lỗi lặp lại "
-
-msgid " Cannot spawn child process "
-msgstr " Không sinh ra được tiến trình con "
-
-msgid "Empty output from child filter"
-msgstr "Bộ lọc con trả lại kết quả rỗng"
-
-#, c-format
-msgid ""
-" Cannot open \"%s\"\n"
-" %s "
-msgstr ""
-" Không mở được \"%s\"\n"
-" %s "
-
-#, c-format
-msgid ""
-" Cannot stat \"%s\"\n"
-" %s "
-msgstr ""
-" Không lấy (stat) được thuộc tính \"%s\"\n"
-" %s "
-
-msgid " Cannot view: not a regular file "
-msgstr ""
-" Không xem được vì lý do: không\n"
-" phải tập tin thông thường "
-
-#, c-format
-msgid "File: %s"
-msgstr "Tập tin: %s"
-
-#, c-format
-msgid "Offset 0x%08lx"
-msgstr "Bộ offset 0x%08lx"
-
-#, c-format
-msgid "Line %lu Col %lu"
-msgstr "Dòng %lu Cột %lu"
-
-#, c-format
-msgid "%s bytes"
-msgstr "%s byte"
-
-#, c-format
-msgid ">= %s bytes"
-msgstr ">= %s byte"
-
-#, c-format
-msgid ""
-" Error while closing the file: \n"
-" %s \n"
-" Data may have been written or not. "
-msgstr ""
-" Lỗi khi đóng tập tin: \n"
-" %s \n"
-" Dữ liệu chưa chắc đã được khi. "
-
-#, c-format
-msgid ""
-" Cannot save file: \n"
-" %s "
-msgstr ""
-" Không thể lưu tập tin. \n"
-" %s "
-
-#, fuzzy, c-format
-msgid ""
-" The current line number is %lu.\n"
-" Enter the new line number:"
-msgstr ""
-" Số thứ tự dòng hiện thời %d.\n"
-" Hãy nhập số thứ tự dòng muốn chuyển đến:"
-
-#, fuzzy
-msgid " The current address is 0x%08"
-msgstr ""
-" Địa chỉ hiện thời - 0x%lx.\n"
-" Hãy nhập địa chỉ mới:"
-
-msgid " Goto Address "
-msgstr " Đi tới địa chỉ "
-
-#, fuzzy
-msgid " Invalid address "
-msgstr " Mật khẩu không đúng "
-
-msgid "Seeking to search result"
-msgstr ""
-
-msgid "ButtonBar|Help"
-msgstr "Trợ giúp"
-
-msgid "ButtonBar|Quit"
-msgstr "Thoát"
-
-msgid "ButtonBar|View"
-msgstr "Xem"
-
-msgid "ButtonBar|Edit"
-msgstr "Sửa"
-
-msgid "ButtonBar|Save"
-msgstr "Lưu"
-
-msgid " History "
-msgstr " Lịch sử"
 
 msgid "Function key 1"
 msgstr "Phím chức năng 1"
@@ -3284,11 +3104,261 @@ msgstr "Delete trên keypad"
 msgid "Enter on keypad"
 msgstr "Enter trên keypad"
 
+#, fuzzy
+msgid "Tab on keypad"
+msgstr "+ trên phần keypad"
+
+#, fuzzy
+msgid "Space on keypad"
+msgstr "Slash trên keypad"
+
 msgid "Slash on keypad"
 msgstr "Slash trên keypad"
 
 msgid "NumLock on keypad"
 msgstr "NumLock trên keypad"
+
+msgid "Ctrl"
+msgstr ""
+
+msgid "Alt"
+msgstr ""
+
+msgid "Shift"
+msgstr ""
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"Kích thước màn hình %dx%d không được hỗ trợ.\n"
+"Hãy kiểm tra biến môi trường TERM.\n"
+
+msgid " Format error on file Extensions File "
+msgstr " Lỗi định dạng tập tin \"Phần mở rộng của tập tin\" "
+
+#, c-format
+msgid " The %%var macro has no default "
+msgstr " Macro %%var không có giá trị mặc định "
+
+#, c-format
+msgid " The %%var macro has no variable "
+msgstr " Macro %%var không có giá trị biến "
+
+msgid " Debug "
+msgstr " Sửa lỗi "
+
+msgid " ERROR: "
+msgstr " LỖI: "
+
+msgid " True:  "
+msgstr " Đúng: "
+
+msgid " False: "
+msgstr " Sai: "
+
+msgid " Warning -- ignoring file "
+msgstr " Cảnh báo - tập tin bị lờ đi "
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"Tập tin %s không thuộc quyền sở hữu của root, hay của bạn,\n"
+"hoặc ai cũng có thể ghi. Sử dụng tập tin này có thể không an toàn"
+
+#, c-format
+msgid " No suitable entries found in %s "
+msgstr " Không tìm thấy mục thích hợp trong %s"
+
+msgid " User menu "
+msgstr " Trình đơn người dùng "
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
+
+#, c-format
+msgid "%s is not a directory\n"
+msgstr "%s không phải là một thư mục\n"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr "Bạn không sở hữu thư mục %s\n"
+
+#, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr "Không đặt được quyền hạn đúng cho thư mục %s\n"
+
+#, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr "Không tạo được thư mục tạm thời %s: %s\n"
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr "Tập tin tạm thời sẽ được tạo trong thư mục %s\n"
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr "Tập tin tạm thời sẽ không được tạo ra\n"
+
+msgid " Pipe failed "
+msgstr " Lỗi đường ống "
+
+msgid " Dup failed "
+msgstr " Lỗi lặp lại "
+
+#, fuzzy, c-format
+msgid ""
+" The current line number is %lld.\n"
+" Enter the new line number:"
+msgstr ""
+" Số thứ tự dòng hiện thời %d.\n"
+" Hãy nhập số thứ tự dòng muốn chuyển đến:"
+
+#, fuzzy, c-format
+msgid ""
+" The current address is %s.\n"
+" Enter the new address:"
+msgstr ""
+" Số thứ tự dòng hiện thời %d.\n"
+" Hãy nhập số thứ tự dòng muốn chuyển đến:"
+
+msgid " Goto Address "
+msgstr " Đi tới địa chỉ "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " Mật khẩu không đúng "
+
+msgid " Cannot spawn child process "
+msgstr " Không sinh ra được tiến trình con "
+
+msgid "Empty output from child filter"
+msgstr "Bộ lọc con trả lại kết quả rỗng"
+
+msgid "All charsets"
+msgstr ""
+
+msgid "ButtonBar|Help"
+msgstr "Trợ giúp"
+
+msgid "ButtonBar|Quit"
+msgstr "Thoát"
+
+msgid "ButtonBar|Ascii"
+msgstr "Ascii"
+
+msgid "ButtonBar|Hex"
+msgstr "Hex"
+
+msgid "ButtonBar|Goto"
+msgstr "Đi tới"
+
+msgid "ButtonBar|Line"
+msgstr "Dòng"
+
+msgid "ButtonBar|View"
+msgstr "Xem"
+
+msgid "ButtonBar|Edit"
+msgstr "Sửa"
+
+msgid "ButtonBar|Save"
+msgstr "Lưu"
+
+msgid "ButtonBar|UnWrap"
+msgstr "Bỏ chuyển dòng"
+
+msgid "ButtonBar|Wrap"
+msgstr "Chuyển dòng"
+
+msgid "ButtonBar|HxSrch"
+msgstr "Tìm hx"
+
+msgid "ButtonBar|Search"
+msgstr "Tìm kiếm"
+
+msgid "ButtonBar|Raw"
+msgstr "Thô"
+
+msgid "ButtonBar|Parse"
+msgstr "Phân tích"
+
+msgid "ButtonBar|Unform"
+msgstr "Bỏ định dạng"
+
+msgid "ButtonBar|Format"
+msgstr "Định dạng"
+
+#, c-format
+msgid "File: %s"
+msgstr "Tập tin: %s"
+
+#, c-format
+msgid "Offset 0x%08lx"
+msgstr "Bộ offset 0x%08lx"
+
+#, c-format
+msgid "Line %lu Col %lu"
+msgstr "Dòng %lu Cột %lu"
+
+#, c-format
+msgid "%s bytes"
+msgstr "%s byte"
+
+#, c-format
+msgid ">= %s bytes"
+msgstr ">= %s byte"
+
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+" Lỗi khi đóng tập tin: \n"
+" %s \n"
+" Dữ liệu chưa chắc đã được khi. "
+
+#, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr ""
+" Không thể lưu tập tin. \n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot open \"%s\"\n"
+" %s "
+msgstr ""
+" Không mở được \"%s\"\n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot stat \"%s\"\n"
+" %s "
+msgstr ""
+" Không lấy (stat) được thuộc tính \"%s\"\n"
+" %s "
+
+msgid " Cannot view: not a regular file "
+msgstr ""
+" Không xem được vì lý do: không\n"
+" phải tập tin thông thường "
+
+msgid "Seeking to search result"
+msgstr ""
+
+msgid " History "
+msgstr " Lịch sử"
 
 msgid "Background process:"
 msgstr "Tiến trình nền sau:"
@@ -3467,8 +3537,9 @@ msgstr "ftpfs: lỗi đăng nhập cho người dùng %s "
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: Tên máy không đúng."
 
-msgid "ftpfs: Invalid host address."
-msgstr "ftpfs: Địa chỉ không đúng."
+#, c-format
+msgid "ftpfs: %s"
+msgstr ""
 
 #, c-format
 msgid "ftpfs: making connection to %s"
@@ -3484,6 +3555,18 @@ msgstr "ftpfs: kết nối tới máy chủ không thành công: %s"
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Chờ thử lại... %d (Control-C để hủy bỏ)"
+
+#, fuzzy
+msgid "ftpfs: invalid address family"
+msgstr "ftpfs: Địa chỉ không đúng."
+
+#, fuzzy, c-format
+msgid "ftpfs: could not setup passive mode: %s"
+msgstr "ftpfs: không đặt được chế độ bị động (passive)"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not create socket: %s"
+msgstr " Không tạo được socket: %s "
 
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: không đặt được chế độ bị động (passive)"
@@ -3721,11 +3804,32 @@ msgstr "Lỗi nội bộ:"
 msgid "Changes to file lost"
 msgstr "Thay đổi tới tập tin bị mất"
 
+#, fuzzy
+#~ msgid "pro&Mpt on replace"
+#~ msgstr "&Hỏi trước khi thay"
+
+#~ msgid "replace &All"
+#~ msgstr "&Thay thế tất cả"
+
+#~ msgid "O&ne"
+#~ msgstr "&Một"
+
+#, fuzzy
+#~ msgid "%b %d %H:%M"
+#~ msgstr "%b %e %H:%M"
+
+#, fuzzy
+#~ msgid "%b %d %Y"
+#~ msgstr "%b %e  %Y"
+
+#, fuzzy
+#~ msgid " The current address is 0x%08"
+#~ msgstr ""
+#~ " Địa chỉ hiện thời - 0x%lx.\n"
+#~ " Hãy nhập địa chỉ mới:"
+
 #~ msgid "scanf &Expression"
 #~ msgstr "biểu thức &Scanf"
-
-#~ msgid "&Whole words only"
-#~ msgstr "&Chỉ những từ đầy đủ"
 
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr " Hãy nhập thứ tự của tham số thay thế, ví dụ 3,2,1,4 "
@@ -3782,44 +3886,8 @@ msgstr "Thay đổi tới tập tin bị mất"
 #~ msgid " Enter regexp:"
 #~ msgstr " Nhập biểu thức chính quy:"
 
-#~ msgid "ButtonBar|Ascii"
-#~ msgstr "Ascii"
-
-#~ msgid "ButtonBar|Hex"
-#~ msgstr "Hex"
-
-#~ msgid "ButtonBar|Goto"
-#~ msgstr "Đi tới"
-
-#~ msgid "ButtonBar|Line"
-#~ msgstr "Dòng"
-
-#~ msgid "ButtonBar|UnWrap"
-#~ msgstr "Bỏ chuyển dòng"
-
-#~ msgid "ButtonBar|Wrap"
-#~ msgstr "Chuyển dòng"
-
 #~ msgid "ButtonBar|RxSrch"
 #~ msgstr "Tìm rx"
-
-#~ msgid "ButtonBar|HxSrch"
-#~ msgstr "Tìm hx"
-
-#~ msgid "ButtonBar|Search"
-#~ msgstr "Tìm kiếm"
-
-#~ msgid "ButtonBar|Raw"
-#~ msgstr "Thô"
-
-#~ msgid "ButtonBar|Parse"
-#~ msgstr "Phân tích"
-
-#~ msgid "ButtonBar|Unform"
-#~ msgstr "Bỏ định dạng"
-
-#~ msgid "ButtonBar|Format"
-#~ msgstr "Định dạng"
 
 #~ msgid "Using included S-Lang library"
 #~ msgstr "Sử dụng thư việc S-Lang bao gồm"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mn\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-07-09 17:07+0300\n"
+"POT-Creation-Date: 2009-08-26 17:11+0300\n"
 "PO-Revision-Date: 2003-03-04 21:16+0100\n"
 "Last-Translator: Sanlig Badral <badral@chinggis.com>\n"
 "Language-Team: Mongolian <mn@li.org>\n"
@@ -327,14 +327,16 @@ msgstr " Дурын товч дарна уу: "
 msgid " Execute Macro "
 msgstr " Макрог гүйцэтгэх "
 
-msgid "pro&Mpt on replace"
-msgstr "Солилцоог &бататгах"
-
-msgid "replace &All"
-msgstr "Бүгдийг &солих"
-
-msgid "All charsets"
+msgid "&All charsets"
 msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "Зөвхөн &бүтэн үгнүүд"
+
+#, fuzzy
+msgid "In se&lection"
+msgstr "Тэмдэглэгдсэнг &эсрэгээр болгох  М *"
 
 msgid "&Backwards"
 msgstr "&Буцах"
@@ -351,14 +353,11 @@ msgstr " Хайх үгээ оруул:"
 msgid "Cancel"
 msgstr "Болих"
 
-msgid "O&ne"
-msgstr "&Нэг"
+msgid "&Skip"
+msgstr "&Алгасах"
 
 msgid "A&ll"
 msgstr "&Бүгд"
-
-msgid "&Skip"
-msgstr "&Алгасах"
 
 msgid "&Replace"
 msgstr "&Солих"
@@ -480,19 +479,19 @@ msgid "&Paste from clipfile      S-Ins"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k               "
+msgid "Toggle bookmar&k            M-k"
 msgstr "Блокыг &тэмдэглэх          F3"
 
 #, fuzzy
-msgid "&Next bookmark                 "
+msgid "&Next bookmark              M-j"
 msgstr "&Шинэ файл           C-n"
 
 #, fuzzy
-msgid "Pre&v bookmark                 "
+msgid "Pre&v bookmark              M-i"
 msgstr "&Эрэмбэлэлт...              M-t"
 
 #, fuzzy
-msgid "&Flush bookmark                "
+msgid "&Flush bookmark             M-o"
 msgstr "&Шуудан..."
 
 #, fuzzy
@@ -517,6 +516,22 @@ msgstr "&Мөр луу очих...        M-l"
 
 msgid "&Paste from clipfile        C-y"
 msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "Блокыг &тэмдэглэх          F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "&Шинэ файл           C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "&Эрэмбэлэлт...              M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "&Шуудан..."
 
 msgid "&Search...         F7"
 msgstr "&Хайх...          F7"
@@ -660,6 +675,9 @@ msgstr "Таслагдах мөрийн урт:"
 
 msgid "Tab spacing: "
 msgstr "Таб зогсолт: "
+
+msgid "Cursor beyond end of line"
+msgstr ""
 
 #, fuzzy
 msgid "Pers&istent selection"
@@ -1313,6 +1331,16 @@ msgstr "&Зангилаа"
 msgid "Cannot read directory contents"
 msgstr "Хавтасны доторхыг уншиж чадсангүй"
 
+msgid ""
+" The Commander can't change to the directory that \n"
+" the subshell claims you are in.  Perhaps you have \n"
+" deleted your working directory, or given yourself \n"
+" extra access permissions with the \"su\" command? "
+msgstr ""
+" MC нь лавлахыг солиж чадахгүй байна \n"
+" Учир нь таны ажиллаж байгаа лавлах устгагдсан эсвэл \n"
+" \"su\" командаар өөртөө нэмэлт зөвшөөрөл өгсөн байна? "
+
 #, c-format
 msgid "Press any key to continue..."
 msgstr "Дурын товчлуур дарж үргэлжлүүл..."
@@ -1859,25 +1887,25 @@ msgstr "  Тогтмол илэрхийлэл буруу тэмдэглэгдс�
 msgid "Cas&e sensitive"
 msgstr "Учет ре&гистра"
 
-#, fuzzy
-msgid "Case sens&itive"
-msgstr "Учет ре&гистра"
-
 msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "&All charsets"
-msgstr ""
-
-msgid "All cha&rsets"
-msgstr ""
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "Учет ре&гистра"
 
 #, fuzzy
 msgid "Re&gular expression"
 msgstr "&Тогтмол илэрхийлэл"
+
+msgid "Fir&st hit"
+msgstr ""
+
+msgid "All cha&rsets"
+msgstr ""
 
 msgid "&Tree"
 msgstr "&Мод"
@@ -2227,16 +2255,6 @@ msgstr ""
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "товчлуур эсвэл хулганаар дарж үүнийг тодорхойлно. Табын хамт зөөнө."
-
-msgid ""
-" The Commander can't change to the directory that \n"
-" the subshell claims you are in.  Perhaps you have \n"
-" deleted your working directory, or given yourself \n"
-" extra access permissions with the \"su\" command? "
-msgstr ""
-" MC нь лавлахыг солиж чадахгүй байна \n"
-" Учир нь таны ажиллаж байгаа лавлах устгагдсан эсвэл \n"
-" \"su\" командаар өөртөө нэмэлт зөвшөөрөл өгсөн байна? "
 
 msgid " The Midnight Commander "
 msgstr " Midnight Commander "
@@ -2649,6 +2667,9 @@ msgstr "&Нуусан файлуудыг харуулах"
 msgid "show &Backup files"
 msgstr "&Нөөц файлуудыг харуулах"
 
+msgid "Use SI si&ze units"
+msgstr ""
+
 msgid "&Never"
 msgstr "&Хэзээч"
 
@@ -2839,14 +2860,6 @@ msgstr " Оролтын кодлогч хуудасаа сонгоно уу "
 msgid "-  < No translation >"
 msgstr "-  < Хөрвүүлэгдэхгүй >"
 
-#, c-format
-msgid ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-msgstr ""
-"Дэлгэцийн %dx%d хэмжээсийг сонгох боломжгүй байна.\n"
-"TERM хувьсагчийн утгыг шалгана уу.\n"
-
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -2958,192 +2971,6 @@ msgid ""
 msgstr ""
 " %s файл руу бичиж чадсангүй:\n"
 "%s\n"
-
-msgid " Format error on file Extensions File "
-msgstr " өргөтгөл файл дээрхи бүтцийн алдаа "
-
-#, c-format
-msgid " The %%var macro has no default "
-msgstr " %%var макро нь анхны утга биш байна "
-
-#, c-format
-msgid " The %%var macro has no variable "
-msgstr " %%var макро нь хувьсагч биш байна "
-
-msgid " Debug "
-msgstr " Дебаг "
-
-msgid " ERROR: "
-msgstr " АЛДАА: "
-
-msgid " True:  "
-msgstr " үнэн: "
-
-msgid " False: "
-msgstr " Худал: "
-
-msgid " Warning -- ignoring file "
-msgstr " Анхааруулга - файл өнгөрүүлж байна "
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"Файл %s нь таны эсвэл root ийн эзэмшил биш,\n"
-"Аюулгүй байдлын үүднээс хэрэглэдэг"
-
-#, c-format
-msgid " No suitable entries found in %s "
-msgstr " Тохирох бичлэг олдсонгүй %s"
-
-msgid " User menu "
-msgstr " Хэрэглэгчийн цэс "
-
-#, fuzzy
-msgid "%b %d %H:%M"
-msgstr "%b %e %H:%M"
-
-#, fuzzy
-msgid "%b %d %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s нь лавлах биш байна\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr " %s лавлах нь таны эзэмшил биш байна\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr " %s лавлахын зөв зөвшөөрөлийг олгож чадсангүй\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr " %s: %s түр зуурын лавлахыг үүсгэж чадсангүй\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr " Түр зуурын файлууд нь %s д үүссэн\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Түр зуурын файлууд үүссэнгүй\n"
-
-msgid " Pipe failed "
-msgstr " Урсгалд алдаа гарлаа "
-
-msgid " Dup failed "
-msgstr " Dup д алдаа гарлаа "
-
-#, fuzzy
-msgid " Cannot spawn child process "
-msgstr " Хүү процессийг солилож чадсангүй "
-
-msgid "Empty output from child filter"
-msgstr "Хүү шүүлтүүрийн гаралт хоосон байна"
-
-#, c-format
-msgid ""
-" Cannot open \"%s\"\n"
-" %s "
-msgstr ""
-" \"%s\" ийг нээж чадсангүй\n"
-" %s "
-
-#, c-format
-msgid ""
-" Cannot stat \"%s\"\n"
-" %s "
-msgstr ""
-" \"%s\" ийн төлөвийг тогтоож чадсангүй\n"
-" %s "
-
-msgid " Cannot view: not a regular file "
-msgstr " Харж чадсангүй: хэвийн бус файл "
-
-#, c-format
-msgid "File: %s"
-msgstr "Файл: %s"
-
-#, c-format
-msgid "Offset 0x%08lx"
-msgstr "Хаяг 0x%08lx"
-
-#, c-format
-msgid "Line %lu Col %lu"
-msgstr ""
-
-#, c-format
-msgid "%s bytes"
-msgstr "%s байт"
-
-#, fuzzy, c-format
-msgid ">= %s bytes"
-msgstr "%s байт"
-
-#, c-format
-msgid ""
-" Error while closing the file: \n"
-" %s \n"
-" Data may have been written or not. "
-msgstr ""
-
-#, fuzzy, c-format
-msgid ""
-" Cannot save file: \n"
-" %s "
-msgstr " Файлыг хадгалж чадсангүй "
-
-#, fuzzy, c-format
-msgid ""
-" The current line number is %lu.\n"
-" Enter the new line number:"
-msgstr ""
-" Одоогийн мөрийн дугаар %d.\n"
-" Шинэ мөрийн дугаараа оруул:"
-
-#, fuzzy
-msgid " The current address is 0x%08"
-msgstr ""
-" Одоогийн хаяг - 0x%lx.\n"
-" Шинэ хаягаа оруул:"
-
-msgid " Goto Address "
-msgstr " Хаяг руу очих "
-
-#, fuzzy
-msgid " Invalid address "
-msgstr " Буруу нууц үг "
-
-msgid "Seeking to search result"
-msgstr ""
-
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Quit"
-msgstr ""
-
-msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
-msgid " History "
-msgstr "Бүртгэл"
 
 msgid "Function key 1"
 msgstr "Функциональ товч 1 "
@@ -3283,11 +3110,255 @@ msgstr "Delete on keypad"
 msgid "Enter on keypad"
 msgstr "Enter on keypad"
 
+#, fuzzy
+msgid "Tab on keypad"
+msgstr "+ товч.дээр"
+
+#, fuzzy
+msgid "Space on keypad"
+msgstr "Slash on keypad"
+
 msgid "Slash on keypad"
 msgstr "Slash on keypad"
 
 msgid "NumLock on keypad"
 msgstr "NumLock on keypad"
+
+msgid "Ctrl"
+msgstr ""
+
+msgid "Alt"
+msgstr ""
+
+msgid "Shift"
+msgstr ""
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"Дэлгэцийн %dx%d хэмжээсийг сонгох боломжгүй байна.\n"
+"TERM хувьсагчийн утгыг шалгана уу.\n"
+
+msgid " Format error on file Extensions File "
+msgstr " өргөтгөл файл дээрхи бүтцийн алдаа "
+
+#, c-format
+msgid " The %%var macro has no default "
+msgstr " %%var макро нь анхны утга биш байна "
+
+#, c-format
+msgid " The %%var macro has no variable "
+msgstr " %%var макро нь хувьсагч биш байна "
+
+msgid " Debug "
+msgstr " Дебаг "
+
+msgid " ERROR: "
+msgstr " АЛДАА: "
+
+msgid " True:  "
+msgstr " үнэн: "
+
+msgid " False: "
+msgstr " Худал: "
+
+msgid " Warning -- ignoring file "
+msgstr " Анхааруулга - файл өнгөрүүлж байна "
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"Файл %s нь таны эсвэл root ийн эзэмшил биш,\n"
+"Аюулгүй байдлын үүднээс хэрэглэдэг"
+
+#, c-format
+msgid " No suitable entries found in %s "
+msgstr " Тохирох бичлэг олдсонгүй %s"
+
+msgid " User menu "
+msgstr " Хэрэглэгчийн цэс "
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
+
+#, c-format
+msgid "%s is not a directory\n"
+msgstr "%s нь лавлах биш байна\n"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr " %s лавлах нь таны эзэмшил биш байна\n"
+
+#, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr " %s лавлахын зөв зөвшөөрөлийг олгож чадсангүй\n"
+
+#, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr " %s: %s түр зуурын лавлахыг үүсгэж чадсангүй\n"
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr " Түр зуурын файлууд нь %s д үүссэн\n"
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr "Түр зуурын файлууд үүссэнгүй\n"
+
+msgid " Pipe failed "
+msgstr " Урсгалд алдаа гарлаа "
+
+msgid " Dup failed "
+msgstr " Dup д алдаа гарлаа "
+
+#, fuzzy, c-format
+msgid ""
+" The current line number is %lld.\n"
+" Enter the new line number:"
+msgstr ""
+" Одоогийн мөрийн дугаар %d.\n"
+" Шинэ мөрийн дугаараа оруул:"
+
+#, fuzzy, c-format
+msgid ""
+" The current address is %s.\n"
+" Enter the new address:"
+msgstr ""
+" Одоогийн мөрийн дугаар %d.\n"
+" Шинэ мөрийн дугаараа оруул:"
+
+msgid " Goto Address "
+msgstr " Хаяг руу очих "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " Буруу нууц үг "
+
+#, fuzzy
+msgid " Cannot spawn child process "
+msgstr " Хүү процессийг солилож чадсангүй "
+
+msgid "Empty output from child filter"
+msgstr "Хүү шүүлтүүрийн гаралт хоосон байна"
+
+msgid "All charsets"
+msgstr ""
+
+msgid "ButtonBar|Help"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
+
+msgid "ButtonBar|Ascii"
+msgstr ""
+
+msgid "ButtonBar|Hex"
+msgstr ""
+
+msgid "ButtonBar|Goto"
+msgstr ""
+
+msgid "ButtonBar|Line"
+msgstr ""
+
+msgid "ButtonBar|View"
+msgstr ""
+
+msgid "ButtonBar|Edit"
+msgstr ""
+
+msgid "ButtonBar|Save"
+msgstr ""
+
+msgid "ButtonBar|UnWrap"
+msgstr ""
+
+msgid "ButtonBar|Wrap"
+msgstr ""
+
+msgid "ButtonBar|HxSrch"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Raw"
+msgstr ""
+
+msgid "ButtonBar|Parse"
+msgstr ""
+
+msgid "ButtonBar|Unform"
+msgstr ""
+
+msgid "ButtonBar|Format"
+msgstr ""
+
+#, c-format
+msgid "File: %s"
+msgstr "Файл: %s"
+
+#, c-format
+msgid "Offset 0x%08lx"
+msgstr "Хаяг 0x%08lx"
+
+#, c-format
+msgid "Line %lu Col %lu"
+msgstr ""
+
+#, c-format
+msgid "%s bytes"
+msgstr "%s байт"
+
+#, fuzzy, c-format
+msgid ">= %s bytes"
+msgstr "%s байт"
+
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr " Файлыг хадгалж чадсангүй "
+
+#, c-format
+msgid ""
+" Cannot open \"%s\"\n"
+" %s "
+msgstr ""
+" \"%s\" ийг нээж чадсангүй\n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot stat \"%s\"\n"
+" %s "
+msgstr ""
+" \"%s\" ийн төлөвийг тогтоож чадсангүй\n"
+" %s "
+
+msgid " Cannot view: not a regular file "
+msgstr " Харж чадсангүй: хэвийн бус файл "
+
+msgid "Seeking to search result"
+msgstr ""
+
+msgid " History "
+msgstr "Бүртгэл"
 
 msgid "Background process:"
 msgstr "Арын процесс:"
@@ -3468,8 +3539,9 @@ msgstr "ftpfs: %s хэрэглэгчийн нэвтрэлт буруу байн�
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: буруу хост нэр."
 
-msgid "ftpfs: Invalid host address."
-msgstr "ftpfs: буруу хост хаяг."
+#, c-format
+msgid "ftpfs: %s"
+msgstr ""
 
 #, c-format
 msgid "ftpfs: making connection to %s"
@@ -3485,6 +3557,18 @@ msgstr "ftpfs: сервер руу холбогдолт амжилтгүй бо�
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Дахин оролдохыг хүлээж байна... %d (Control-C дарвал таслагдана)"
+
+#, fuzzy
+msgid "ftpfs: invalid address family"
+msgstr "ftpfs: буруу хост хаяг."
+
+#, fuzzy, c-format
+msgid "ftpfs: could not setup passive mode: %s"
+msgstr "ftpfs: пассив горимыг тохируулж чадсангүй"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not create socket: %s"
+msgstr " Сокет үүсгэж чадсангүй: %s "
 
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: пассив горимыг тохируулж чадсангүй"
@@ -3722,11 +3806,31 @@ msgstr "Дотоод алдаа:"
 msgid "Changes to file lost"
 msgstr "Файлын өөрчлөлт алга байна"
 
+#~ msgid "pro&Mpt on replace"
+#~ msgstr "Солилцоог &бататгах"
+
+#~ msgid "replace &All"
+#~ msgstr "Бүгдийг &солих"
+
+#~ msgid "O&ne"
+#~ msgstr "&Нэг"
+
+#, fuzzy
+#~ msgid "%b %d %H:%M"
+#~ msgstr "%b %e %H:%M"
+
+#, fuzzy
+#~ msgid "%b %d %Y"
+#~ msgstr "%b %e  %Y"
+
+#, fuzzy
+#~ msgid " The current address is 0x%08"
+#~ msgstr ""
+#~ " Одоогийн хаяг - 0x%lx.\n"
+#~ " Шинэ хаягаа оруул:"
+
 #~ msgid "scanf &Expression"
 #~ msgstr "Бичиглэл &scanf"
-
-#~ msgid "&Whole words only"
-#~ msgstr "Зөвхөн &бүтэн үгнүүд"
 
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr " Солигдох утгуудын дарааллыг оруул, жишээ нь. 3,2,1,4 "

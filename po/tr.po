@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-07-09 17:07+0300\n"
+"POT-Creation-Date: 2009-08-26 17:11+0300\n"
 "PO-Revision-Date: 2001-11-06 05:50+0200\n"
 "Last-Translator: Nilgün Belma Bugüner <nilgun@fide.org>\n"
 "Language-Team: Turkish <debian-l10n-turkish@lists.debian.org>\n"
@@ -327,14 +327,16 @@ msgstr " Bir tuşa basınız: "
 msgid " Execute Macro "
 msgstr " Macro'yu çalıştır "
 
-msgid "pro&Mpt on replace"
-msgstr "Yerleştirirken &Sor"
-
-msgid "replace &All"
-msgstr "&Tümünün yerini değiştir"
-
-msgid "All charsets"
+msgid "&All charsets"
 msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "&Sadece tam kelimeler"
+
+#, fuzzy
+msgid "In se&lection"
+msgstr "Seçimi Tersine Çe&vir        M-*"
 
 msgid "&Backwards"
 msgstr "&Geriye doğru"
@@ -351,14 +353,11 @@ msgstr " Aranacak metni girin:"
 msgid "Cancel"
 msgstr "Vazgeç"
 
-msgid "O&ne"
-msgstr "&Biri"
+msgid "&Skip"
+msgstr "&Atla"
 
 msgid "A&ll"
 msgstr "&Tümü"
-
-msgid "&Skip"
-msgstr "&Atla"
 
 msgid "&Replace"
 msgstr "&Yerleştir"
@@ -480,19 +479,19 @@ msgid "&Paste from clipfile      S-Ins"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k               "
+msgid "Toggle bookmar&k            M-k"
 msgstr "&Seçim             F3"
 
 #, fuzzy
-msgid "&Next bookmark                 "
+msgid "&Next bookmark              M-j"
 msgstr "&Yeni             C-n"
 
 #, fuzzy
-msgid "Pre&v bookmark                 "
+msgid "Pre&v bookmark              M-i"
 msgstr "sıra&La...               M-t"
 
 #, fuzzy
-msgid "&Flush bookmark                "
+msgid "&Flush bookmark             M-o"
 msgstr "&Posta...                   "
 
 #, fuzzy
@@ -517,6 +516,22 @@ msgstr "&Satıra git...           M-l"
 
 msgid "&Paste from clipfile        C-y"
 msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "&Seçim             F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "&Yeni             C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "sıra&La...               M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "&Posta...                   "
 
 msgid "&Search...         F7"
 msgstr "&Ara...            F7"
@@ -660,6 +675,9 @@ msgstr "satır sarmalama uzunluğu: "
 
 msgid "Tab spacing: "
 msgstr "Sekme uzunluğu: "
+
+msgid "Cursor beyond end of line"
+msgstr ""
 
 #, fuzzy
 msgid "Pers&istent selection"
@@ -1317,6 +1335,17 @@ msgstr "Düğüm &numarasına göre"
 msgid "Cannot read directory contents"
 msgstr "Dizin değiştirilemedi"
 
+msgid ""
+" The Commander can't change to the directory that \n"
+" the subshell claims you are in.  Perhaps you have \n"
+" deleted your working directory, or given yourself \n"
+" extra access permissions with the \"su\" command? "
+msgstr ""
+" Commander istediğiniz dizine geçemiyor \n"
+" Ya bu dizini sildiniz ya da \"su \" \n"
+" komutuyla kendinize fazladan haklar \n"
+" verdiniz? "
+
 #, c-format
 msgid "Press any key to continue..."
 msgstr "Bir tuşa basınız..."
@@ -1861,25 +1890,25 @@ msgstr " Düzenli ifade yanlış  "
 msgid "Cas&e sensitive"
 msgstr "&Harf büyüklüğüne duyarlı"
 
-#, fuzzy
-msgid "Case sens&itive"
-msgstr "&Harf büyüklüğüne duyarlı"
-
 msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "&All charsets"
-msgstr ""
-
-msgid "All cha&rsets"
-msgstr ""
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "&Harf büyüklüğüne duyarlı"
 
 #, fuzzy
 msgid "Re&gular expression"
 msgstr "&Düzenli ifade"
+
+msgid "Fir&st hit"
+msgstr ""
+
+msgid "All cha&rsets"
+msgstr ""
 
 msgid "&Tree"
 msgstr "&Ağaç"
@@ -2228,17 +2257,6 @@ msgstr "işaretlenmemiş tuşları kontrol edin. Tuşu atamak için boşluk"
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "tuşuna basın ya da fareyle tıklayın. Tab ile dolaşabilirsiniz."
-
-msgid ""
-" The Commander can't change to the directory that \n"
-" the subshell claims you are in.  Perhaps you have \n"
-" deleted your working directory, or given yourself \n"
-" extra access permissions with the \"su\" command? "
-msgstr ""
-" Commander istediğiniz dizine geçemiyor \n"
-" Ya bu dizini sildiniz ya da \"su \" \n"
-" komutuyla kendinize fazladan haklar \n"
-" verdiniz? "
 
 msgid " The Midnight Commander "
 msgstr " The Midnight Commander "
@@ -2656,6 +2674,9 @@ msgstr "&Gizli dosyaları göster"
 msgid "show &Backup files"
 msgstr "&Yedek dosyaları göster"
 
+msgid "Use SI si&ze units"
+msgstr ""
+
 msgid "&Never"
 msgstr "a&Sla"
 
@@ -2847,14 +2868,6 @@ msgstr " Girdi karakter kümesini seçin "
 msgid "-  < No translation >"
 msgstr "-  < Çeviri yok >"
 
-#, c-format
-msgid ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-msgstr ""
-"%dx%d ekran boyutu desteklenmiyor.\n"
-"TERM ortam değişkenini kontrol ediniz.\n"
-
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -2966,196 +2979,6 @@ msgid ""
 msgstr ""
 "%s dosyasına yazılamıyor:\n"
 "%s\n"
-
-msgid " Format error on file Extensions File "
-msgstr " Extensions File dosyasında biçim hatası"
-
-#, c-format
-msgid " The %%var macro has no default "
-msgstr " %%var makrosunun bir öntanımı yok "
-
-#, c-format
-msgid " The %%var macro has no variable "
-msgstr " %%var makrosunun bir değişkeni yok "
-
-msgid " Debug "
-msgstr " Hata ayıklama "
-
-msgid " ERROR: "
-msgstr " HATA: "
-
-msgid " True:  "
-msgstr " Doğru:  "
-
-msgid " False: "
-msgstr " Yanlış: "
-
-msgid " Warning -- ignoring file "
-msgstr " Uyarı: -- dosya yoksayılıyor "
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"%s dosyasının sahibi değiştirilemedi.\n"
-"Dosyanın kullanımı güvenliği bozabilir"
-
-#, c-format
-msgid " No suitable entries found in %s "
-msgstr " %s içinde tahsis edilebilir bir girdi yok"
-
-msgid " User menu "
-msgstr " Kullanıcı menüsü "
-
-#, fuzzy
-msgid "%b %d %H:%M"
-msgstr "%e %b %H:%M"
-
-#, fuzzy
-msgid "%b %d %Y"
-msgstr "%e %b  %Y"
-
-msgid "%b %e  %Y"
-msgstr "%e %b  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%e %b %H:%M"
-
-#, fuzzy, c-format
-msgid "%s is not a directory\n"
-msgstr "dizin:"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr ""
-" Hedef dizin \"%s\" oluşturulamıyor \n"
-" %s"
-
-#, fuzzy, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr ""
-" Hedef dizin \"%s\" oluşturulamıyor \n"
-" %s"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr ""
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr ""
-
-msgid " Pipe failed "
-msgstr " Veri yolu açılamadı "
-
-msgid " Dup failed "
-msgstr " Tekrar başarısız "
-
-#, fuzzy
-msgid " Cannot spawn child process "
-msgstr " Alt uygulama çalıştırılamadı "
-
-msgid "Empty output from child filter"
-msgstr ""
-
-#, c-format
-msgid ""
-" Cannot open \"%s\"\n"
-" %s "
-msgstr ""
-" \"%s\" açılamıyor\n"
-" %s "
-
-#, c-format
-msgid ""
-" Cannot stat \"%s\"\n"
-" %s "
-msgstr ""
-" \"%s\" durumlanamıyor\n"
-" %s "
-
-msgid " Cannot view: not a regular file "
-msgstr " Gösterilemiyor: normal bir dosya değil "
-
-#, c-format
-msgid "File: %s"
-msgstr "Dosya: %s"
-
-#, c-format
-msgid "Offset 0x%08lx"
-msgstr "Offset 0x%08lx"
-
-#, c-format
-msgid "Line %lu Col %lu"
-msgstr ""
-
-#, c-format
-msgid "%s bytes"
-msgstr "%s bayt"
-
-#, fuzzy, c-format
-msgid ">= %s bytes"
-msgstr "%s bayt"
-
-#, c-format
-msgid ""
-" Error while closing the file: \n"
-" %s \n"
-" Data may have been written or not. "
-msgstr ""
-
-#, fuzzy, c-format
-msgid ""
-" Cannot save file: \n"
-" %s "
-msgstr " Dosyayı kaydederken hata oluştu. "
-
-#, fuzzy, c-format
-msgid ""
-" The current line number is %lu.\n"
-" Enter the new line number:"
-msgstr ""
-" Şimdiki satır numarası %d.\n"
-" Yeni satır numarasını verin:"
-
-#, fuzzy
-msgid " The current address is 0x%08"
-msgstr ""
-" Şimdiki adres 0x%lx.\n"
-" Yeni adresi verin:"
-
-msgid " Goto Address "
-msgstr " Adrese Git "
-
-#, fuzzy
-msgid " Invalid address "
-msgstr " Yanlış parola "
-
-msgid "Seeking to search result"
-msgstr ""
-
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Quit"
-msgstr ""
-
-msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
-msgid " History "
-msgstr " Geçmiş "
 
 msgid "Function key 1"
 msgstr "İşlev tuşu 1"
@@ -3295,11 +3118,259 @@ msgstr "Sayılarda Del tuşu"
 msgid "Enter on keypad"
 msgstr "Sayılarda Enter tuşu"
 
+#, fuzzy
+msgid "Tab on keypad"
+msgstr "Gri +"
+
+#, fuzzy
+msgid "Space on keypad"
+msgstr "Sayılarda / tuşu"
+
 msgid "Slash on keypad"
 msgstr "Sayılarda / tuşu"
 
 msgid "NumLock on keypad"
 msgstr "Numlock tuşu"
+
+msgid "Ctrl"
+msgstr ""
+
+msgid "Alt"
+msgstr ""
+
+msgid "Shift"
+msgstr ""
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"%dx%d ekran boyutu desteklenmiyor.\n"
+"TERM ortam değişkenini kontrol ediniz.\n"
+
+msgid " Format error on file Extensions File "
+msgstr " Extensions File dosyasında biçim hatası"
+
+#, c-format
+msgid " The %%var macro has no default "
+msgstr " %%var makrosunun bir öntanımı yok "
+
+#, c-format
+msgid " The %%var macro has no variable "
+msgstr " %%var makrosunun bir değişkeni yok "
+
+msgid " Debug "
+msgstr " Hata ayıklama "
+
+msgid " ERROR: "
+msgstr " HATA: "
+
+msgid " True:  "
+msgstr " Doğru:  "
+
+msgid " False: "
+msgstr " Yanlış: "
+
+msgid " Warning -- ignoring file "
+msgstr " Uyarı: -- dosya yoksayılıyor "
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"%s dosyasının sahibi değiştirilemedi.\n"
+"Dosyanın kullanımı güvenliği bozabilir"
+
+#, c-format
+msgid " No suitable entries found in %s "
+msgstr " %s içinde tahsis edilebilir bir girdi yok"
+
+msgid " User menu "
+msgstr " Kullanıcı menüsü "
+
+msgid "%b %e  %Y"
+msgstr "%e %b  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%e %b %H:%M"
+
+#, fuzzy, c-format
+msgid "%s is not a directory\n"
+msgstr "dizin:"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr ""
+" Hedef dizin \"%s\" oluşturulamıyor \n"
+" %s"
+
+#, fuzzy, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr ""
+" Hedef dizin \"%s\" oluşturulamıyor \n"
+" %s"
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr ""
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr ""
+
+msgid " Pipe failed "
+msgstr " Veri yolu açılamadı "
+
+msgid " Dup failed "
+msgstr " Tekrar başarısız "
+
+#, fuzzy, c-format
+msgid ""
+" The current line number is %lld.\n"
+" Enter the new line number:"
+msgstr ""
+" Şimdiki satır numarası %d.\n"
+" Yeni satır numarasını verin:"
+
+#, fuzzy, c-format
+msgid ""
+" The current address is %s.\n"
+" Enter the new address:"
+msgstr ""
+" Şimdiki satır numarası %d.\n"
+" Yeni satır numarasını verin:"
+
+msgid " Goto Address "
+msgstr " Adrese Git "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " Yanlış parola "
+
+#, fuzzy
+msgid " Cannot spawn child process "
+msgstr " Alt uygulama çalıştırılamadı "
+
+msgid "Empty output from child filter"
+msgstr ""
+
+msgid "All charsets"
+msgstr ""
+
+msgid "ButtonBar|Help"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
+
+msgid "ButtonBar|Ascii"
+msgstr ""
+
+msgid "ButtonBar|Hex"
+msgstr ""
+
+msgid "ButtonBar|Goto"
+msgstr ""
+
+msgid "ButtonBar|Line"
+msgstr ""
+
+msgid "ButtonBar|View"
+msgstr ""
+
+msgid "ButtonBar|Edit"
+msgstr ""
+
+msgid "ButtonBar|Save"
+msgstr ""
+
+msgid "ButtonBar|UnWrap"
+msgstr ""
+
+msgid "ButtonBar|Wrap"
+msgstr ""
+
+msgid "ButtonBar|HxSrch"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Raw"
+msgstr ""
+
+msgid "ButtonBar|Parse"
+msgstr ""
+
+msgid "ButtonBar|Unform"
+msgstr ""
+
+msgid "ButtonBar|Format"
+msgstr ""
+
+#, c-format
+msgid "File: %s"
+msgstr "Dosya: %s"
+
+#, c-format
+msgid "Offset 0x%08lx"
+msgstr "Offset 0x%08lx"
+
+#, c-format
+msgid "Line %lu Col %lu"
+msgstr ""
+
+#, c-format
+msgid "%s bytes"
+msgstr "%s bayt"
+
+#, fuzzy, c-format
+msgid ">= %s bytes"
+msgstr "%s bayt"
+
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr " Dosyayı kaydederken hata oluştu. "
+
+#, c-format
+msgid ""
+" Cannot open \"%s\"\n"
+" %s "
+msgstr ""
+" \"%s\" açılamıyor\n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot stat \"%s\"\n"
+" %s "
+msgstr ""
+" \"%s\" durumlanamıyor\n"
+" %s "
+
+msgid " Cannot view: not a regular file "
+msgstr " Gösterilemiyor: normal bir dosya değil "
+
+msgid "Seeking to search result"
+msgstr ""
+
+msgid " History "
+msgstr " Geçmiş "
 
 msgid "Background process:"
 msgstr "Artalan işlemi:"
@@ -3481,8 +3552,9 @@ msgstr "ftpfs: kullanıcı %s için bağlantı reddedildi"
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: Makina ismi geçersiz."
 
-msgid "ftpfs: Invalid host address."
-msgstr "ftpfs: Makina adresi geçersiz."
+#, c-format
+msgid "ftpfs: %s"
+msgstr ""
 
 #, c-format
 msgid "ftpfs: making connection to %s"
@@ -3498,6 +3570,18 @@ msgstr "ftpfs: Sunucuya bağlantı başarısız: %s"
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Yinelemek için bekleniyor... %d (iptal etmek için Ctrl-C)"
+
+#, fuzzy
+msgid "ftpfs: invalid address family"
+msgstr "ftpfs: Makina adresi geçersiz."
+
+#, fuzzy, c-format
+msgid "ftpfs: could not setup passive mode: %s"
+msgstr "ftpfs: pasif kip ayarlanamadı"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not create socket: %s"
+msgstr " Soket oluşturulamadı: %s "
 
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: pasif kip ayarlanamadı"
@@ -3734,11 +3818,31 @@ msgstr "İç hata:"
 msgid "Changes to file lost"
 msgstr "Değişiklikler kayıp"
 
+#~ msgid "pro&Mpt on replace"
+#~ msgstr "Yerleştirirken &Sor"
+
+#~ msgid "replace &All"
+#~ msgstr "&Tümünün yerini değiştir"
+
+#~ msgid "O&ne"
+#~ msgstr "&Biri"
+
+#, fuzzy
+#~ msgid "%b %d %H:%M"
+#~ msgstr "%e %b %H:%M"
+
+#, fuzzy
+#~ msgid "%b %d %Y"
+#~ msgstr "%e %b  %Y"
+
+#, fuzzy
+#~ msgid " The current address is 0x%08"
+#~ msgstr ""
+#~ " Şimdiki adres 0x%lx.\n"
+#~ " Yeni adresi verin:"
+
 #~ msgid "scanf &Expression"
 #~ msgstr "scanf &Deyimi"
-
-#~ msgid "&Whole words only"
-#~ msgstr "&Sadece tam kelimeler"
 
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr "Yerdeğiştirme sırasını girin (örn: 3,2,1,4) "

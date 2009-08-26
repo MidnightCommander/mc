@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc \n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-07-09 17:07+0300\n"
+"POT-Creation-Date: 2009-08-26 17:11+0300\n"
 "PO-Revision-Date: 2000-06-22 00:00+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -321,14 +321,16 @@ msgstr " Pritisni tipko: "
 msgid " Execute Macro "
 msgstr " Izvedi makro "
 
-msgid "pro&Mpt on replace"
-msgstr "p&Otrdimo ob zamenjavi"
-
-msgid "replace &All"
-msgstr "zamenjaj &Vse"
-
-msgid "All charsets"
+msgid "&All charsets"
 msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "&Le cele besede"
+
+#, fuzzy
+msgid "In se&lection"
+msgstr "obrni iz&Biro      M-*"
 
 msgid "&Backwards"
 msgstr "&Nazaj"
@@ -345,14 +347,11 @@ msgstr " Vnesite niz za iskanje:"
 msgid "Cancel"
 msgstr "Prekliči"
 
-msgid "O&ne"
-msgstr "&Eno"
+msgid "&Skip"
+msgstr "Pre&skoči"
 
 msgid "A&ll"
 msgstr "&Vse"
-
-msgid "&Skip"
-msgstr "Pre&skoči"
 
 msgid "&Replace"
 msgstr "&Zamenjaj"
@@ -475,19 +474,19 @@ msgid "&Paste from clipfile      S-Ins"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k               "
+msgid "Toggle bookmar&k            M-k"
 msgstr "&Preklopi označbo  F3"
 
 #, fuzzy
-msgid "&Next bookmark                 "
+msgid "&Next bookmark              M-j"
 msgstr "&Nova             C-n"
 
 #, fuzzy
-msgid "Pre&v bookmark                 "
+msgid "Pre&v bookmark              M-i"
 msgstr "Sor&tiraj...             M-t"
 
 #, fuzzy
-msgid "&Flush bookmark                "
+msgid "&Flush bookmark             M-o"
 msgstr "&Pošlji...                    "
 
 #, fuzzy
@@ -512,6 +511,22 @@ msgstr "&Pojdi v vrstico...       M-l"
 
 msgid "&Paste from clipfile        C-y"
 msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "&Preklopi označbo  F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "&Nova             C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "Sor&tiraj...             M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "&Pošlji...                    "
 
 msgid "&Search...         F7"
 msgstr "&Iskanje...        F7"
@@ -655,6 +670,9 @@ msgstr "Dolžina vrstice za lom: "
 
 msgid "Tab spacing: "
 msgstr "Velikost tabulatorja: "
+
+msgid "Cursor beyond end of line"
+msgstr ""
 
 #, fuzzy
 msgid "Pers&istent selection"
@@ -1308,6 +1326,17 @@ msgstr "&Inode"
 msgid "Cannot read directory contents"
 msgstr "Ne morem prebrati vsebine imenika"
 
+msgid ""
+" The Commander can't change to the directory that \n"
+" the subshell claims you are in.  Perhaps you have \n"
+" deleted your working directory, or given yourself \n"
+" extra access permissions with the \"su\" command? "
+msgstr ""
+" Poveljnik ne more iti v imenik za katerega\n"
+" podlupina trdi, da ste v njem.  Morda ste zbrisali \n"
+" vaš delavni imenik ali pa ste si dali dodatna \n"
+" dostopna dovoljenja z ukazom \"su\"? "
+
 #, c-format
 msgid "Press any key to continue..."
 msgstr "Pritisnite katerokoli tipko za nadaljevanje..."
@@ -1854,25 +1883,25 @@ msgstr "  Napačno formuliran regularni izraz  "
 msgid "Cas&e sensitive"
 msgstr "razlikuj velike in male črke"
 
-#, fuzzy
-msgid "Case sens&itive"
-msgstr "razlikuj velike in male črke"
-
 msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "&All charsets"
-msgstr ""
-
-msgid "All cha&rsets"
-msgstr ""
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "razlikuj velike in male črke"
 
 #, fuzzy
 msgid "Re&gular expression"
 msgstr "&Regularni izraz"
+
+msgid "Fir&st hit"
+msgstr ""
+
+msgid "All cha&rsets"
+msgstr ""
 
 msgid "&Tree"
 msgstr "&Drevo"
@@ -2222,17 +2251,6 @@ msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr ""
 "manjkajoči tipki ali jo kliknite z miško, da jo definirate. Okoli se "
 "premikate s Tabulatorjem."
-
-msgid ""
-" The Commander can't change to the directory that \n"
-" the subshell claims you are in.  Perhaps you have \n"
-" deleted your working directory, or given yourself \n"
-" extra access permissions with the \"su\" command? "
-msgstr ""
-" Poveljnik ne more iti v imenik za katerega\n"
-" podlupina trdi, da ste v njem.  Morda ste zbrisali \n"
-" vaš delavni imenik ali pa ste si dali dodatna \n"
-" dostopna dovoljenja z ukazom \"su\"? "
 
 msgid " The Midnight Commander "
 msgstr " Polnočni Poveljnik"
@@ -2646,6 +2664,9 @@ msgstr "kaži skrite datoteke"
 msgid "show &Backup files"
 msgstr "kaži varnostne kopije datotek"
 
+msgid "Use SI si&ze units"
+msgstr ""
+
 msgid "&Never"
 msgstr "&Nikoli"
 
@@ -2837,14 +2858,6 @@ msgstr " Izberite vhodni nabor znakov"
 msgid "-  < No translation >"
 msgstr "- < Brez prevoda >"
 
-#, c-format
-msgid ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-msgstr ""
-"Velikost zaslona %dx%d ni podprta.\n"
-"Preverite okoljsko spremenljivko TERM.\n"
-
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -2956,192 +2969,6 @@ msgid ""
 msgstr ""
 "Ne morem pisati v datoteko %s:\n"
 "%s\n"
-
-msgid " Format error on file Extensions File "
-msgstr " Napačno formatiranje v datoteki s priponami "
-
-#, c-format
-msgid " The %%var macro has no default "
-msgstr " Makro %%var nima privzete vrednosti"
-
-#, c-format
-msgid " The %%var macro has no variable "
-msgstr " Makro %%var nima spremenljivke "
-
-msgid " Debug "
-msgstr " Razhroščevanje "
-
-msgid " ERROR: "
-msgstr " NAPAKA: "
-
-msgid " True:  "
-msgstr " Resnično: "
-
-msgid " False: "
-msgstr " Neresnično: "
-
-msgid " Warning -- ignoring file "
-msgstr " Opozorilo -- ignoriram datoteko"
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"Lastnik datoteke %s niste vi in ni pisljiva za vse.\n"
-"Njena uporaba lahko ošibi varnost sistema"
-
-#, c-format
-msgid " No suitable entries found in %s "
-msgstr " Ustrezni vpisi v %s niso bili najdeni "
-
-msgid " User menu "
-msgstr " Uporabnikov menu "
-
-#, fuzzy
-msgid "%b %d %H:%M"
-msgstr "%b %e %H:%M"
-
-#, fuzzy
-msgid "%b %d %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s ni imenik\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "Niste lastnik imenika %s\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "Ne morem nastaviti pravilnih dovoljenj za imenik %s\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr " Ne morem ustvariti začasnega imenika %s: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Začasne datoteke bodo ustvarjene v %s\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Začasne datoteke ne bodo ustvarjene\n"
-
-msgid " Pipe failed "
-msgstr " Cev neuspešna "
-
-msgid " Dup failed "
-msgstr " Podvojitev neuspešna"
-
-#, fuzzy
-msgid " Cannot spawn child process "
-msgstr " Ne morem pognati podrejenega programa "
-
-msgid "Empty output from child filter"
-msgstr "Prazen izhod iz podprograma - filtra"
-
-#, c-format
-msgid ""
-" Cannot open \"%s\"\n"
-" %s "
-msgstr ""
-" Ne morem odpreti \"%s\"\n"
-" %s "
-
-#, c-format
-msgid ""
-" Cannot stat \"%s\"\n"
-" %s "
-msgstr ""
-" Ne morem poizvedeti o stanju \"%s\"\n"
-" %s "
-
-msgid " Cannot view: not a regular file "
-msgstr " Pogled ni mogoč: ni običajna datoteka "
-
-#, c-format
-msgid "File: %s"
-msgstr "Datoteka: %s"
-
-#, c-format
-msgid "Offset 0x%08lx"
-msgstr "Offset 0x%08lx"
-
-#, c-format
-msgid "Line %lu Col %lu"
-msgstr ""
-
-#, c-format
-msgid "%s bytes"
-msgstr "%s bajtov"
-
-#, fuzzy, c-format
-msgid ">= %s bytes"
-msgstr "%s bajtov"
-
-#, c-format
-msgid ""
-" Error while closing the file: \n"
-" %s \n"
-" Data may have been written or not. "
-msgstr ""
-
-#, fuzzy, c-format
-msgid ""
-" Cannot save file: \n"
-" %s "
-msgstr " Ne morem shraniti datoteke. "
-
-#, fuzzy, c-format
-msgid ""
-" The current line number is %lu.\n"
-" Enter the new line number:"
-msgstr ""
-" Številka trenutne vrstice je %d.\n"
-" Vpišite novo številko vrstice:"
-
-#, fuzzy
-msgid " The current address is 0x%08"
-msgstr ""
-" Trenutni naslov je 0x%lx.\n"
-" Vpišite nov naslov:"
-
-msgid " Goto Address "
-msgstr " Pojdi na naslov"
-
-#, fuzzy
-msgid " Invalid address "
-msgstr " Neveljavno geslo "
-
-msgid "Seeking to search result"
-msgstr ""
-
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Quit"
-msgstr ""
-
-msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
-msgid " History "
-msgstr " Zgodovina "
 
 msgid "Function key 1"
 msgstr "Funkcijska tipka 1"
@@ -3281,11 +3108,255 @@ msgstr "Tipka Delete na številčni tipkovnici"
 msgid "Enter on keypad"
 msgstr "Enter na številčni tipkovnici"
 
+#, fuzzy
+msgid "Tab on keypad"
+msgstr "+ na številčni tipkovnici"
+
+#, fuzzy
+msgid "Space on keypad"
+msgstr "Poševnica na številčni tipkovnici"
+
 msgid "Slash on keypad"
 msgstr "Poševnica na številčni tipkovnici"
 
 msgid "NumLock on keypad"
 msgstr "NumLock na številčni tipkovnici"
+
+msgid "Ctrl"
+msgstr ""
+
+msgid "Alt"
+msgstr ""
+
+msgid "Shift"
+msgstr ""
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"Velikost zaslona %dx%d ni podprta.\n"
+"Preverite okoljsko spremenljivko TERM.\n"
+
+msgid " Format error on file Extensions File "
+msgstr " Napačno formatiranje v datoteki s priponami "
+
+#, c-format
+msgid " The %%var macro has no default "
+msgstr " Makro %%var nima privzete vrednosti"
+
+#, c-format
+msgid " The %%var macro has no variable "
+msgstr " Makro %%var nima spremenljivke "
+
+msgid " Debug "
+msgstr " Razhroščevanje "
+
+msgid " ERROR: "
+msgstr " NAPAKA: "
+
+msgid " True:  "
+msgstr " Resnično: "
+
+msgid " False: "
+msgstr " Neresnično: "
+
+msgid " Warning -- ignoring file "
+msgstr " Opozorilo -- ignoriram datoteko"
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"Lastnik datoteke %s niste vi in ni pisljiva za vse.\n"
+"Njena uporaba lahko ošibi varnost sistema"
+
+#, c-format
+msgid " No suitable entries found in %s "
+msgstr " Ustrezni vpisi v %s niso bili najdeni "
+
+msgid " User menu "
+msgstr " Uporabnikov menu "
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
+
+#, c-format
+msgid "%s is not a directory\n"
+msgstr "%s ni imenik\n"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr "Niste lastnik imenika %s\n"
+
+#, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr "Ne morem nastaviti pravilnih dovoljenj za imenik %s\n"
+
+#, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr " Ne morem ustvariti začasnega imenika %s: %s\n"
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr "Začasne datoteke bodo ustvarjene v %s\n"
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr "Začasne datoteke ne bodo ustvarjene\n"
+
+msgid " Pipe failed "
+msgstr " Cev neuspešna "
+
+msgid " Dup failed "
+msgstr " Podvojitev neuspešna"
+
+#, fuzzy, c-format
+msgid ""
+" The current line number is %lld.\n"
+" Enter the new line number:"
+msgstr ""
+" Številka trenutne vrstice je %d.\n"
+" Vpišite novo številko vrstice:"
+
+#, fuzzy, c-format
+msgid ""
+" The current address is %s.\n"
+" Enter the new address:"
+msgstr ""
+" Številka trenutne vrstice je %d.\n"
+" Vpišite novo številko vrstice:"
+
+msgid " Goto Address "
+msgstr " Pojdi na naslov"
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " Neveljavno geslo "
+
+#, fuzzy
+msgid " Cannot spawn child process "
+msgstr " Ne morem pognati podrejenega programa "
+
+msgid "Empty output from child filter"
+msgstr "Prazen izhod iz podprograma - filtra"
+
+msgid "All charsets"
+msgstr ""
+
+msgid "ButtonBar|Help"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
+
+msgid "ButtonBar|Ascii"
+msgstr ""
+
+msgid "ButtonBar|Hex"
+msgstr ""
+
+msgid "ButtonBar|Goto"
+msgstr ""
+
+msgid "ButtonBar|Line"
+msgstr ""
+
+msgid "ButtonBar|View"
+msgstr ""
+
+msgid "ButtonBar|Edit"
+msgstr ""
+
+msgid "ButtonBar|Save"
+msgstr ""
+
+msgid "ButtonBar|UnWrap"
+msgstr ""
+
+msgid "ButtonBar|Wrap"
+msgstr ""
+
+msgid "ButtonBar|HxSrch"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Raw"
+msgstr ""
+
+msgid "ButtonBar|Parse"
+msgstr ""
+
+msgid "ButtonBar|Unform"
+msgstr ""
+
+msgid "ButtonBar|Format"
+msgstr ""
+
+#, c-format
+msgid "File: %s"
+msgstr "Datoteka: %s"
+
+#, c-format
+msgid "Offset 0x%08lx"
+msgstr "Offset 0x%08lx"
+
+#, c-format
+msgid "Line %lu Col %lu"
+msgstr ""
+
+#, c-format
+msgid "%s bytes"
+msgstr "%s bajtov"
+
+#, fuzzy, c-format
+msgid ">= %s bytes"
+msgstr "%s bajtov"
+
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr " Ne morem shraniti datoteke. "
+
+#, c-format
+msgid ""
+" Cannot open \"%s\"\n"
+" %s "
+msgstr ""
+" Ne morem odpreti \"%s\"\n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot stat \"%s\"\n"
+" %s "
+msgstr ""
+" Ne morem poizvedeti o stanju \"%s\"\n"
+" %s "
+
+msgid " Cannot view: not a regular file "
+msgstr " Pogled ni mogoč: ni običajna datoteka "
+
+msgid "Seeking to search result"
+msgstr ""
+
+msgid " History "
+msgstr " Zgodovina "
 
 msgid "Background process:"
 msgstr "Proces v ozadju:"
@@ -3467,8 +3538,9 @@ msgstr "ftpfs: Napačna prijava za uporabnika %s "
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: Neveljavno ime gostitelja."
 
-msgid "ftpfs: Invalid host address."
-msgstr "ftpfs: Neveljaven naslov gostitelja."
+#, c-format
+msgid "ftpfs: %s"
+msgstr ""
 
 #, c-format
 msgid "ftpfs: making connection to %s"
@@ -3484,6 +3556,18 @@ msgstr "ftpfs: povezava do strežnika ni bila uspešna: %s"
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Čakam na nov poizkus... %d (Control-C za preklic)"
+
+#, fuzzy
+msgid "ftpfs: invalid address family"
+msgstr "ftpfs: Neveljaven naslov gostitelja."
+
+#, fuzzy, c-format
+msgid "ftpfs: could not setup passive mode: %s"
+msgstr "ftpfs: ne morem nastaviti pasivnega načina"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not create socket: %s"
+msgstr " Ne morem ustvariti vtiča: %s "
 
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: ne morem nastaviti pasivnega načina"
@@ -3720,11 +3804,31 @@ msgstr "Interna napaka:"
 msgid "Changes to file lost"
 msgstr "Spremembe v datoteki izgubljene"
 
+#~ msgid "pro&Mpt on replace"
+#~ msgstr "p&Otrdimo ob zamenjavi"
+
+#~ msgid "replace &All"
+#~ msgstr "zamenjaj &Vse"
+
+#~ msgid "O&ne"
+#~ msgstr "&Eno"
+
+#, fuzzy
+#~ msgid "%b %d %H:%M"
+#~ msgstr "%b %e %H:%M"
+
+#, fuzzy
+#~ msgid "%b %d %Y"
+#~ msgstr "%b %e  %Y"
+
+#, fuzzy
+#~ msgid " The current address is 0x%08"
+#~ msgstr ""
+#~ " Trenutni naslov je 0x%lx.\n"
+#~ " Vpišite nov naslov:"
+
 #~ msgid "scanf &Expression"
 #~ msgstr "scanf &Izraz"
-
-#~ msgid "&Whole words only"
-#~ msgstr "&Le cele besede"
 
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr " Vnesite vrstni red zamenjave argumentov npr. 3,2,1,4"

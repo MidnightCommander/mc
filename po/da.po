@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.41\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-07-09 17:07+0300\n"
+"POT-Creation-Date: 2009-08-26 17:11+0300\n"
 "PO-Revision-Date: 2001-10-20 21:37+02:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -331,14 +331,16 @@ msgstr " Tryk på en tast: "
 msgid " Execute Macro "
 msgstr " Kør makro "
 
-msgid "pro&Mpt on replace"
-msgstr "s&Pørg før erstat"
-
-msgid "replace &All"
-msgstr "&Erstat alle"
-
-msgid "All charsets"
+msgid "&All charsets"
 msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "&Kun hele ord"
+
+#, fuzzy
+msgid "In se&lection"
+msgstr "Omvendt valg      M-*"
 
 msgid "&Backwards"
 msgstr "&Baglæns"
@@ -355,14 +357,11 @@ msgstr " Indtast søgetekst:"
 msgid "Cancel"
 msgstr "Annullér"
 
-msgid "O&ne"
-msgstr "é&N"
+msgid "&Skip"
+msgstr "&Spring over"
 
 msgid "A&ll"
 msgstr "A&lle"
-
-msgid "&Skip"
-msgstr "&Spring over"
 
 msgid "&Replace"
 msgstr "&Erstat"
@@ -484,19 +483,19 @@ msgid "&Paste from clipfile      S-Ins"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k               "
+msgid "Toggle bookmar&k            M-k"
 msgstr "Slå &Mærke til/fra F3"
 
 #, fuzzy
-msgid "&Next bookmark                 "
+msgid "&Next bookmark              M-j"
 msgstr "&Ny               C-n"
 
 #, fuzzy
-msgid "Pre&v bookmark                 "
+msgid "Pre&v bookmark              M-i"
 msgstr "Sor&tér...               M-t"
 
 #, fuzzy
-msgid "&Flush bookmark                "
+msgid "&Flush bookmark             M-o"
 msgstr "&Send...                    "
 
 #, fuzzy
@@ -521,6 +520,22 @@ msgstr "&Gå til linie...         M-l"
 
 msgid "&Paste from clipfile        C-y"
 msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "Slå &Mærke til/fra F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "&Ny               C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "Sor&tér...               M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "&Send...                    "
 
 msgid "&Search...         F7"
 msgstr "&Søg...            F7"
@@ -664,6 +679,9 @@ msgstr "Indtast linielængde: "
 
 msgid "Tab spacing: "
 msgstr "Tabulatorafstand : "
+
+msgid "Cursor beyond end of line"
+msgstr ""
 
 #, fuzzy
 msgid "Pers&istent selection"
@@ -1322,6 +1340,17 @@ msgstr "&Inode"
 msgid "Cannot read directory contents"
 msgstr " Kunne ikke skifte mappe"
 
+msgid ""
+" The Commander can't change to the directory that \n"
+" the subshell claims you are in.  Perhaps you have \n"
+" deleted your working directory, or given yourself \n"
+" extra access permissions with the \"su\" command? "
+msgstr ""
+" Commander kan ikke skifte til den mappe som \n"
+" underskallen påstår at du står i. Måske har du \n"
+" slettet den aktuelle mappe eller givet dig selv \n"
+" ekstra adgangstilladelser med \"su\" kommandoen? "
+
 #, c-format
 msgid "Press any key to continue..."
 msgstr "Tryk på en tast for at fortsætte..."
@@ -1867,25 +1896,25 @@ msgstr "  Ugyldigt regulært udtryk  "
 msgid "Cas&e sensitive"
 msgstr "Forskel på store og små bogstaver"
 
-#, fuzzy
-msgid "Case sens&itive"
-msgstr "Forskel på store og små bogstaver"
-
 msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "&All charsets"
-msgstr ""
-
-msgid "All cha&rsets"
-msgstr ""
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "Forskel på store og små bogstaver"
 
 #, fuzzy
 msgid "Re&gular expression"
 msgstr "&Regulært udtryk"
+
+msgid "Fir&st hit"
+msgstr ""
+
+msgid "All cha&rsets"
+msgstr ""
 
 msgid "&Tree"
 msgstr "&Træ"
@@ -2235,17 +2264,6 @@ msgstr ""
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "tast, eller klik med musen for at definere den. Flyt med Tab."
-
-msgid ""
-" The Commander can't change to the directory that \n"
-" the subshell claims you are in.  Perhaps you have \n"
-" deleted your working directory, or given yourself \n"
-" extra access permissions with the \"su\" command? "
-msgstr ""
-" Commander kan ikke skifte til den mappe som \n"
-" underskallen påstår at du står i. Måske har du \n"
-" slettet den aktuelle mappe eller givet dig selv \n"
-" ekstra adgangstilladelser med \"su\" kommandoen? "
 
 msgid " The Midnight Commander "
 msgstr " Midnight Commander'en "
@@ -2662,6 +2680,9 @@ msgstr "vis skjulte filer"
 msgid "show &Backup files"
 msgstr "vis sikkerhedskopier"
 
+msgid "Use SI si&ze units"
+msgstr ""
+
 msgid "&Never"
 msgstr "Aldrig"
 
@@ -2853,14 +2874,6 @@ msgstr " Vælg kodning for inddata "
 msgid "-  < No translation >"
 msgstr "- < Ingen oversættelse >"
 
-#, c-format
-msgid ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-msgstr ""
-"Skærmstørrelse %dx%d er ikke understøttet.\n"
-"Tjek TERM-miljøvariabelen.\n"
-
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -2972,196 +2985,6 @@ msgid ""
 msgstr ""
 "Kan ikke skrive til %s filen::\n"
 "%s\n"
-
-msgid " Format error on file Extensions File "
-msgstr " Formatfejl på fil-udvidelses fil "
-
-#, c-format
-msgid " The %%var macro has no default "
-msgstr " %%var-makroen har ingen standardværdi "
-
-#, c-format
-msgid " The %%var macro has no variable "
-msgstr " %%var-makroen har ingen variabel "
-
-msgid " Debug "
-msgstr " Aflus "
-
-msgid " ERROR: "
-msgstr " FEJL: "
-
-msgid " True:  "
-msgstr " Sand:  "
-
-msgid " False: "
-msgstr " Falsk: "
-
-msgid " Warning -- ignoring file "
-msgstr " Advarsel -- ignorerer filen "
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"Filen %s er hverken ejet af root, dig eller globalt skrivbar.\n"
-"At bruge den kan muligvis kompromittere din sikkerhed"
-
-#, c-format
-msgid " No suitable entries found in %s "
-msgstr " Ingen passende indgange fundet i %s "
-
-msgid " User menu "
-msgstr " Brugermenu "
-
-#, fuzzy
-msgid "%b %d %H:%M"
-msgstr "%b %e %H:%M"
-
-#, fuzzy
-msgid "%b %d %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
-#, fuzzy, c-format
-msgid "%s is not a directory\n"
-msgstr "mappe"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr ""
-" Kan ikke oprette målmappen \"%s\" \n"
-" %s "
-
-#, fuzzy, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr ""
-" Kan ikke oprette målmappen \"%s\" \n"
-" %s "
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr ""
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr ""
-
-msgid " Pipe failed "
-msgstr " Pibe fejlede "
-
-msgid " Dup failed "
-msgstr " Dup fejlede "
-
-#, fuzzy
-msgid " Cannot spawn child process "
-msgstr " Kan ikke starte barneprogram "
-
-msgid "Empty output from child filter"
-msgstr ""
-
-#, c-format
-msgid ""
-" Cannot open \"%s\"\n"
-" %s "
-msgstr ""
-" Kan ikke åbne \"%s\" \n"
-" %s "
-
-#, c-format
-msgid ""
-" Cannot stat \"%s\"\n"
-" %s "
-msgstr ""
-" Kunne ikke køre stat på %s \n"
-" %s "
-
-msgid " Cannot view: not a regular file "
-msgstr " Kan ikke vise: ikke en normal fil "
-
-#, c-format
-msgid "File: %s"
-msgstr "Fil: %s"
-
-#, c-format
-msgid "Offset 0x%08lx"
-msgstr "Afstand 0x%08lx"
-
-#, c-format
-msgid "Line %lu Col %lu"
-msgstr ""
-
-#, c-format
-msgid "%s bytes"
-msgstr "%s byte"
-
-#, fuzzy, c-format
-msgid ">= %s bytes"
-msgstr "%s byte"
-
-#, c-format
-msgid ""
-" Error while closing the file: \n"
-" %s \n"
-" Data may have been written or not. "
-msgstr ""
-
-#, fuzzy, c-format
-msgid ""
-" Cannot save file: \n"
-" %s "
-msgstr " Fejl under gemning af fil. "
-
-#, fuzzy, c-format
-msgid ""
-" The current line number is %lu.\n"
-" Enter the new line number:"
-msgstr ""
-" Det aktuelle linienummer er %d.\n"
-" Indtast det nye linienummer:"
-
-#, fuzzy
-msgid " The current address is 0x%08"
-msgstr ""
-" Den aktuelle adresse er 0%lx.\n"
-" Indtast den nye adresse:"
-
-msgid " Goto Address "
-msgstr " Gå til adresse "
-
-#, fuzzy
-msgid " Invalid address "
-msgstr " Ugyldig adgangskode "
-
-msgid "Seeking to search result"
-msgstr ""
-
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Quit"
-msgstr ""
-
-msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
-msgid " History "
-msgstr " Historie "
 
 msgid "Function key 1"
 msgstr "Funktionstast 1"
@@ -3301,11 +3124,259 @@ msgstr "Slet på numerisk tastatur"
 msgid "Enter on keypad"
 msgstr "Enter på numerisk tastatur"
 
+#, fuzzy
+msgid "Tab on keypad"
+msgstr "+ på numerisk tastatur"
+
+#, fuzzy
+msgid "Space on keypad"
+msgstr "Slash på numerisk tastatur"
+
 msgid "Slash on keypad"
 msgstr "Slash på numerisk tastatur"
 
 msgid "NumLock on keypad"
 msgstr "NumLock på numerisk tastatur"
+
+msgid "Ctrl"
+msgstr ""
+
+msgid "Alt"
+msgstr ""
+
+msgid "Shift"
+msgstr ""
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"Skærmstørrelse %dx%d er ikke understøttet.\n"
+"Tjek TERM-miljøvariabelen.\n"
+
+msgid " Format error on file Extensions File "
+msgstr " Formatfejl på fil-udvidelses fil "
+
+#, c-format
+msgid " The %%var macro has no default "
+msgstr " %%var-makroen har ingen standardværdi "
+
+#, c-format
+msgid " The %%var macro has no variable "
+msgstr " %%var-makroen har ingen variabel "
+
+msgid " Debug "
+msgstr " Aflus "
+
+msgid " ERROR: "
+msgstr " FEJL: "
+
+msgid " True:  "
+msgstr " Sand:  "
+
+msgid " False: "
+msgstr " Falsk: "
+
+msgid " Warning -- ignoring file "
+msgstr " Advarsel -- ignorerer filen "
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"Filen %s er hverken ejet af root, dig eller globalt skrivbar.\n"
+"At bruge den kan muligvis kompromittere din sikkerhed"
+
+#, c-format
+msgid " No suitable entries found in %s "
+msgstr " Ingen passende indgange fundet i %s "
+
+msgid " User menu "
+msgstr " Brugermenu "
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
+
+#, fuzzy, c-format
+msgid "%s is not a directory\n"
+msgstr "mappe"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr ""
+" Kan ikke oprette målmappen \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr ""
+" Kan ikke oprette målmappen \"%s\" \n"
+" %s "
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr ""
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr ""
+
+msgid " Pipe failed "
+msgstr " Pibe fejlede "
+
+msgid " Dup failed "
+msgstr " Dup fejlede "
+
+#, fuzzy, c-format
+msgid ""
+" The current line number is %lld.\n"
+" Enter the new line number:"
+msgstr ""
+" Det aktuelle linienummer er %d.\n"
+" Indtast det nye linienummer:"
+
+#, fuzzy, c-format
+msgid ""
+" The current address is %s.\n"
+" Enter the new address:"
+msgstr ""
+" Det aktuelle linienummer er %d.\n"
+" Indtast det nye linienummer:"
+
+msgid " Goto Address "
+msgstr " Gå til adresse "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " Ugyldig adgangskode "
+
+#, fuzzy
+msgid " Cannot spawn child process "
+msgstr " Kan ikke starte barneprogram "
+
+msgid "Empty output from child filter"
+msgstr ""
+
+msgid "All charsets"
+msgstr ""
+
+msgid "ButtonBar|Help"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
+
+msgid "ButtonBar|Ascii"
+msgstr ""
+
+msgid "ButtonBar|Hex"
+msgstr ""
+
+msgid "ButtonBar|Goto"
+msgstr ""
+
+msgid "ButtonBar|Line"
+msgstr ""
+
+msgid "ButtonBar|View"
+msgstr ""
+
+msgid "ButtonBar|Edit"
+msgstr ""
+
+msgid "ButtonBar|Save"
+msgstr ""
+
+msgid "ButtonBar|UnWrap"
+msgstr ""
+
+msgid "ButtonBar|Wrap"
+msgstr ""
+
+msgid "ButtonBar|HxSrch"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Raw"
+msgstr ""
+
+msgid "ButtonBar|Parse"
+msgstr ""
+
+msgid "ButtonBar|Unform"
+msgstr ""
+
+msgid "ButtonBar|Format"
+msgstr ""
+
+#, c-format
+msgid "File: %s"
+msgstr "Fil: %s"
+
+#, c-format
+msgid "Offset 0x%08lx"
+msgstr "Afstand 0x%08lx"
+
+#, c-format
+msgid "Line %lu Col %lu"
+msgstr ""
+
+#, c-format
+msgid "%s bytes"
+msgstr "%s byte"
+
+#, fuzzy, c-format
+msgid ">= %s bytes"
+msgstr "%s byte"
+
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr " Fejl under gemning af fil. "
+
+#, c-format
+msgid ""
+" Cannot open \"%s\"\n"
+" %s "
+msgstr ""
+" Kan ikke åbne \"%s\" \n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot stat \"%s\"\n"
+" %s "
+msgstr ""
+" Kunne ikke køre stat på %s \n"
+" %s "
+
+msgid " Cannot view: not a regular file "
+msgstr " Kan ikke vise: ikke en normal fil "
+
+msgid "Seeking to search result"
+msgstr ""
+
+msgid " History "
+msgstr " Historie "
 
 msgid "Background process:"
 msgstr "Baggrundsproces:"
@@ -3485,8 +3556,9 @@ msgstr "ftpfs: Forkert login for bruger %s "
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: Ugyldig værtsnavn."
 
-msgid "ftpfs: Invalid host address."
-msgstr "ftpfs: Ugyldig værtsadresse."
+#, c-format
+msgid "ftpfs: %s"
+msgstr ""
 
 #, c-format
 msgid "ftpfs: making connection to %s"
@@ -3502,6 +3574,18 @@ msgstr "ftpfs: forbindelse til server mislykkedes: %s"
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Venter på at forsøge igen... %d (Ctrl-C annullerer)"
+
+#, fuzzy
+msgid "ftpfs: invalid address family"
+msgstr "ftpfs: Ugyldig værtsadresse."
+
+#, fuzzy, c-format
+msgid "ftpfs: could not setup passive mode: %s"
+msgstr "ftpfs: kunne ikke indstille passiv måde"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not create socket: %s"
+msgstr " Kan ikke oprette sokkel %s "
 
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: kunne ikke indstille passiv måde"
@@ -3738,11 +3822,31 @@ msgstr " Intern fejl:"
 msgid "Changes to file lost"
 msgstr "Ændringer til fil tabt"
 
+#~ msgid "pro&Mpt on replace"
+#~ msgstr "s&Pørg før erstat"
+
+#~ msgid "replace &All"
+#~ msgstr "&Erstat alle"
+
+#~ msgid "O&ne"
+#~ msgstr "é&N"
+
+#, fuzzy
+#~ msgid "%b %d %H:%M"
+#~ msgstr "%b %e %H:%M"
+
+#, fuzzy
+#~ msgid "%b %d %Y"
+#~ msgstr "%b %e  %Y"
+
+#, fuzzy
+#~ msgid " The current address is 0x%08"
+#~ msgstr ""
+#~ " Den aktuelle adresse er 0%lx.\n"
+#~ " Indtast den nye adresse:"
+
 #~ msgid "scanf &Expression"
 #~ msgstr "scanf &Udtryk"
-
-#~ msgid "&Whole words only"
-#~ msgstr "&Kun hele ord"
 
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr " Indtast argumentrækkefølge f.eks 3,2,1,4 : "

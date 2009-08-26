@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-07-09 17:07+0300\n"
+"POT-Creation-Date: 2009-08-26 17:11+0300\n"
 "PO-Revision-Date: 2001-05-25 13:35+0200\n"
 "Last-Translator: mari susperregi <mari@elhuyar.com>\n"
 "Language-Team: Euskara <debian-l10n-basque@lists.debian.org>\n"
@@ -326,14 +326,16 @@ msgstr " Sakatu tekla bat: "
 msgid " Execute Macro "
 msgstr " Exekutatu makroa "
 
-msgid "pro&Mpt on replace"
-msgstr "&galdetu ordeztean"
-
-msgid "replace &All"
-msgstr "&Ordeztu guztiak"
-
-msgid "All charsets"
+msgid "&All charsets"
 msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "&Hitz osoak bakarrik"
+
+#, fuzzy
+msgid "In se&lection"
+msgstr "alderantzikatu &hautapena       M-*"
 
 msgid "&Backwards"
 msgstr "&Atzera"
@@ -350,14 +352,11 @@ msgstr "Sartu bilaketa-katea:"
 msgid "Cancel"
 msgstr "Utzi"
 
-msgid "O&ne"
-msgstr "Ba&t"
+msgid "&Skip"
+msgstr "&Saltatu"
 
 msgid "A&ll"
 msgstr "&Guztia"
-
-msgid "&Skip"
-msgstr "&Saltatu"
 
 msgid "&Replace"
 msgstr "&Ordeztu"
@@ -479,19 +478,19 @@ msgid "&Paste from clipfile      S-Ins"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k               "
+msgid "Toggle bookmar&k            M-k"
 msgstr "&Txandakatu marka  F3"
 
 #, fuzzy
-msgid "&Next bookmark                 "
+msgid "&Next bookmark              M-j"
 msgstr "&Berria           C-n"
 
 #, fuzzy
-msgid "Pre&v bookmark                 "
+msgid "Pre&v bookmark              M-i"
 msgstr "&Ordenatu...                M-t"
 
 #, fuzzy
-msgid "&Flush bookmark                "
+msgid "&Flush bookmark             M-o"
 msgstr "&Posta...                   "
 
 #, fuzzy
@@ -516,6 +515,22 @@ msgstr "&Joan lerro honetara...           M-l"
 
 msgid "&Paste from clipfile        C-y"
 msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "&Txandakatu marka  F3"
+
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "&Berria           C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "&Ordenatu...                M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "&Posta...                   "
 
 msgid "&Search...         F7"
 msgstr "&Bilatu...        F7"
@@ -659,6 +674,9 @@ msgstr "Itzulbira-lerroaren luzera : "
 
 msgid "Tab spacing: "
 msgstr "Tabulazio-tartea : "
+
+msgid "Cursor beyond end of line"
+msgstr ""
 
 #, fuzzy
 msgid "Pers&istent selection"
@@ -1320,6 +1338,17 @@ msgstr "&Inodoa"
 msgid "Cannot read directory contents"
 msgstr "Ezin izan da direktorioz aldatu"
 
+msgid ""
+" The Commander can't change to the directory that \n"
+" the subshell claims you are in.  Perhaps you have \n"
+" deleted your working directory, or given yourself \n"
+" extra access permissions with the \"su\" command? "
+msgstr ""
+" Commander-ak ezin du subshell-ek zu zaudela dioen \n"
+"direktoriora aldatu. Beharbada oraingo direktorioa \n"
+"ezabatu duzu edo zeure buruari atzipen-baimen gehiegi \n"
+"eman dizkiozu \"su\" komandoaren bidez?"
+
 #, c-format
 msgid "Press any key to continue..."
 msgstr "Sakatu edozein tekla jarraitzeko..."
@@ -1865,25 +1894,25 @@ msgstr " Adierazpen erregular gaizki osatuta  "
 msgid "Cas&e sensitive"
 msgstr "maiuskulak eta minuskulak bereizten ditu"
 
-#, fuzzy
-msgid "Case sens&itive"
-msgstr "maiuskulak eta minuskulak bereizten ditu"
-
 msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "&All charsets"
-msgstr ""
-
-msgid "All cha&rsets"
-msgstr ""
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "maiuskulak eta minuskulak bereizten ditu"
 
 #, fuzzy
 msgid "Re&gular expression"
 msgstr "&Adierazpen erregularra"
+
+msgid "Fir&st hit"
+msgstr ""
+
+msgid "All cha&rsets"
+msgstr ""
 
 msgid "&Tree"
 msgstr "Zu&haitza"
@@ -2234,17 +2263,6 @@ msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr ""
 "tekla horietan edo egin klik saguaz definitzeko. Tabuladorearekin mugitu "
 "batetik bestera."
-
-msgid ""
-" The Commander can't change to the directory that \n"
-" the subshell claims you are in.  Perhaps you have \n"
-" deleted your working directory, or given yourself \n"
-" extra access permissions with the \"su\" command? "
-msgstr ""
-" Commander-ak ezin du subshell-ek zu zaudela dioen \n"
-"direktoriora aldatu. Beharbada oraingo direktorioa \n"
-"ezabatu duzu edo zeure buruari atzipen-baimen gehiegi \n"
-"eman dizkiozu \"su\" komandoaren bidez?"
 
 msgid " The Midnight Commander "
 msgstr "Midnight Commander-a "
@@ -2662,6 +2680,9 @@ msgstr "erakutsi &ezkutuko fitxategiak"
 msgid "show &Backup files"
 msgstr "erakutsi &babeskopiak"
 
+msgid "Use SI si&ze units"
+msgstr ""
+
 msgid "&Never"
 msgstr "&Inoiz ere ez"
 
@@ -2855,14 +2876,6 @@ msgstr " Aukeratu sarrerako kode-orria "
 msgid "-  < No translation >"
 msgstr "-  < Ez dago itzulpenik >"
 
-#, c-format
-msgid ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-msgstr ""
-"%dx%d pantaila-tamaina ez da onartzen.\n"
-"Egiaztatu TERM ingurune-aldagaia.\n"
-
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -2974,197 +2987,6 @@ msgid ""
 msgstr ""
 "Ezin da %s fitxategian idatzi:\n"
 "%s\n"
-
-msgid " Format error on file Extensions File "
-msgstr " Formatu-errorea Luzapen-fitxategian "
-
-#, c-format
-msgid " The %%var macro has no default "
-msgstr " %%var makroak ez du lehenespenik "
-
-#, c-format
-msgid " The %%var macro has no variable "
-msgstr " %%var makroak ez du aldagairik  "
-
-msgid " Debug "
-msgstr " Araztu "
-
-msgid " ERROR: "
-msgstr " ERROREA: "
-
-msgid " True:  "
-msgstr " Egia:  "
-
-msgid " False: "
-msgstr " Faltsua: "
-
-msgid " Warning -- ignoring file "
-msgstr " Abisua -- fitxategiari jaramonik ez "
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"%s fitxategia ez da ez root-arena edo zurea edo edozeinek idatz\n"
-"dezake bertan.\n"
-"Erabiltzen baduzu, zure segurtasuna arriskuan jarriko duzu"
-
-#, c-format
-msgid " No suitable entries found in %s "
-msgstr " Ez da sarrera egokirik aurkitu %s(e)n "
-
-msgid " User menu "
-msgstr " Erabiltzaile-menua "
-
-#, fuzzy
-msgid "%b %d %H:%M"
-msgstr "%b %e %H:%M"
-
-#, fuzzy
-msgid "%b %d %Y"
-msgstr "%Y %b %e"
-
-msgid "%b %e  %Y"
-msgstr "%Y %b %e"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
-#, fuzzy, c-format
-msgid "%s is not a directory\n"
-msgstr "direktorioa"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr ""
-"Ezin da \"%s\" helburu-direktorioa sortu\n"
-" %s "
-
-#, fuzzy, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr ""
-"Ezin da \"%s\" helburu-direktorioa sortu\n"
-" %s "
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr ""
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr ""
-
-msgid " Pipe failed "
-msgstr " Kanalizazioak huts egin du "
-
-msgid " Dup failed "
-msgstr " Bikoizketak huts egin du "
-
-#, fuzzy
-msgid " Cannot spawn child process "
-msgstr " Ezin da programa umea abiarazi "
-
-msgid "Empty output from child filter"
-msgstr ""
-
-#, c-format
-msgid ""
-" Cannot open \"%s\"\n"
-" %s "
-msgstr ""
-" Ezin da \"%s\" ireki\n"
-" %s "
-
-#, c-format
-msgid ""
-" Cannot stat \"%s\"\n"
-" %s "
-msgstr ""
-" Ezin da \"%s\" identifikatu\n"
-" %s "
-
-msgid " Cannot view: not a regular file "
-msgstr " Ezin da ikusi: ez da fitxategi erregularra "
-
-#, c-format
-msgid "File: %s"
-msgstr "Fitxategia: %s"
-
-#, c-format
-msgid "Offset 0x%08lx"
-msgstr "Desplazamendua 0x%08lx"
-
-#, c-format
-msgid "Line %lu Col %lu"
-msgstr ""
-
-#, c-format
-msgid "%s bytes"
-msgstr "%s byte"
-
-#, fuzzy, c-format
-msgid ">= %s bytes"
-msgstr "%s byte"
-
-#, c-format
-msgid ""
-" Error while closing the file: \n"
-" %s \n"
-" Data may have been written or not. "
-msgstr ""
-
-#, fuzzy, c-format
-msgid ""
-" Cannot save file: \n"
-" %s "
-msgstr " Errorea fitxategia gordetzen saiatzean. "
-
-#, fuzzy, c-format
-msgid ""
-" The current line number is %lu.\n"
-" Enter the new line number:"
-msgstr ""
-" Uneko lerro-zenbakia %d da.\n"
-" Sartu lerro-zenbaki berria:"
-
-#, fuzzy
-msgid " The current address is 0x%08"
-msgstr ""
-" Uneko helbidea 0x%lx da.\n"
-" Sartu helbide berria:"
-
-msgid " Goto Address "
-msgstr " Joan helbidera "
-
-#, fuzzy
-msgid " Invalid address "
-msgstr " Baliogabeko pasahitza "
-
-msgid "Seeking to search result"
-msgstr ""
-
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Quit"
-msgstr ""
-
-msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
-msgid " History "
-msgstr " Historia "
 
 msgid "Function key 1"
 msgstr "1. funtzio-tekla "
@@ -3304,11 +3126,260 @@ msgstr "Ezabatu zenbakizko teklatuan"
 msgid "Enter on keypad"
 msgstr "Sartu zenbakizko teklatuan"
 
+#, fuzzy
+msgid "Tab on keypad"
+msgstr "+ zenbakizko teklatuan"
+
+#, fuzzy
+msgid "Space on keypad"
+msgstr "Barra zenbakizko teklatuan"
+
 msgid "Slash on keypad"
 msgstr "Barra zenbakizko teklatuan"
 
 msgid "NumLock on keypad"
 msgstr "NumLock zenbakizko teklatuan"
+
+msgid "Ctrl"
+msgstr ""
+
+msgid "Alt"
+msgstr ""
+
+msgid "Shift"
+msgstr ""
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"%dx%d pantaila-tamaina ez da onartzen.\n"
+"Egiaztatu TERM ingurune-aldagaia.\n"
+
+msgid " Format error on file Extensions File "
+msgstr " Formatu-errorea Luzapen-fitxategian "
+
+#, c-format
+msgid " The %%var macro has no default "
+msgstr " %%var makroak ez du lehenespenik "
+
+#, c-format
+msgid " The %%var macro has no variable "
+msgstr " %%var makroak ez du aldagairik  "
+
+msgid " Debug "
+msgstr " Araztu "
+
+msgid " ERROR: "
+msgstr " ERROREA: "
+
+msgid " True:  "
+msgstr " Egia:  "
+
+msgid " False: "
+msgstr " Faltsua: "
+
+msgid " Warning -- ignoring file "
+msgstr " Abisua -- fitxategiari jaramonik ez "
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"%s fitxategia ez da ez root-arena edo zurea edo edozeinek idatz\n"
+"dezake bertan.\n"
+"Erabiltzen baduzu, zure segurtasuna arriskuan jarriko duzu"
+
+#, c-format
+msgid " No suitable entries found in %s "
+msgstr " Ez da sarrera egokirik aurkitu %s(e)n "
+
+msgid " User menu "
+msgstr " Erabiltzaile-menua "
+
+msgid "%b %e  %Y"
+msgstr "%Y %b %e"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
+
+#, fuzzy, c-format
+msgid "%s is not a directory\n"
+msgstr "direktorioa"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr ""
+"Ezin da \"%s\" helburu-direktorioa sortu\n"
+" %s "
+
+#, fuzzy, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr ""
+"Ezin da \"%s\" helburu-direktorioa sortu\n"
+" %s "
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr ""
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr ""
+
+msgid " Pipe failed "
+msgstr " Kanalizazioak huts egin du "
+
+msgid " Dup failed "
+msgstr " Bikoizketak huts egin du "
+
+#, fuzzy, c-format
+msgid ""
+" The current line number is %lld.\n"
+" Enter the new line number:"
+msgstr ""
+" Uneko lerro-zenbakia %d da.\n"
+" Sartu lerro-zenbaki berria:"
+
+#, fuzzy, c-format
+msgid ""
+" The current address is %s.\n"
+" Enter the new address:"
+msgstr ""
+" Uneko lerro-zenbakia %d da.\n"
+" Sartu lerro-zenbaki berria:"
+
+msgid " Goto Address "
+msgstr " Joan helbidera "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " Baliogabeko pasahitza "
+
+#, fuzzy
+msgid " Cannot spawn child process "
+msgstr " Ezin da programa umea abiarazi "
+
+msgid "Empty output from child filter"
+msgstr ""
+
+msgid "All charsets"
+msgstr ""
+
+msgid "ButtonBar|Help"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
+
+msgid "ButtonBar|Ascii"
+msgstr ""
+
+msgid "ButtonBar|Hex"
+msgstr ""
+
+msgid "ButtonBar|Goto"
+msgstr ""
+
+msgid "ButtonBar|Line"
+msgstr ""
+
+msgid "ButtonBar|View"
+msgstr ""
+
+msgid "ButtonBar|Edit"
+msgstr ""
+
+msgid "ButtonBar|Save"
+msgstr ""
+
+msgid "ButtonBar|UnWrap"
+msgstr ""
+
+msgid "ButtonBar|Wrap"
+msgstr ""
+
+msgid "ButtonBar|HxSrch"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Raw"
+msgstr ""
+
+msgid "ButtonBar|Parse"
+msgstr ""
+
+msgid "ButtonBar|Unform"
+msgstr ""
+
+msgid "ButtonBar|Format"
+msgstr ""
+
+#, c-format
+msgid "File: %s"
+msgstr "Fitxategia: %s"
+
+#, c-format
+msgid "Offset 0x%08lx"
+msgstr "Desplazamendua 0x%08lx"
+
+#, c-format
+msgid "Line %lu Col %lu"
+msgstr ""
+
+#, c-format
+msgid "%s bytes"
+msgstr "%s byte"
+
+#, fuzzy, c-format
+msgid ">= %s bytes"
+msgstr "%s byte"
+
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr " Errorea fitxategia gordetzen saiatzean. "
+
+#, c-format
+msgid ""
+" Cannot open \"%s\"\n"
+" %s "
+msgstr ""
+" Ezin da \"%s\" ireki\n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot stat \"%s\"\n"
+" %s "
+msgstr ""
+" Ezin da \"%s\" identifikatu\n"
+" %s "
+
+msgid " Cannot view: not a regular file "
+msgstr " Ezin da ikusi: ez da fitxategi erregularra "
+
+msgid "Seeking to search result"
+msgstr ""
+
+msgid " History "
+msgstr " Historia "
 
 msgid "Background process:"
 msgstr "Atzeko planoko prozesua:"
@@ -3489,8 +3560,9 @@ msgstr "ftpfs: %s erabiltzailearen erabiltzaile-izena ez da zuzena "
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: Ostalari-izen baliogabea."
 
-msgid "ftpfs: Invalid host address."
-msgstr "ftpfs: Ostalari-helbide baliogabea."
+#, c-format
+msgid "ftpfs: %s"
+msgstr ""
 
 #, c-format
 msgid "ftpfs: making connection to %s"
@@ -3506,6 +3578,18 @@ msgstr "ftpfs: zerbitzariarekiko konexioak huts egin du: %s"
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Berriro saiatzeko zain... %d (Control-C uzteko)"
+
+#, fuzzy
+msgid "ftpfs: invalid address family"
+msgstr "ftpfs: Ostalari-helbide baliogabea."
+
+#, fuzzy, c-format
+msgid "ftpfs: could not setup passive mode: %s"
+msgstr "ftpfs: ezin izan da modu pasiboa konfiguratu"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not create socket: %s"
+msgstr " Ezin da socket-a sortu: %s "
 
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: ezin izan da modu pasiboa konfiguratu"
@@ -3742,11 +3826,31 @@ msgstr "Barne-errorea:"
 msgid "Changes to file lost"
 msgstr "Fitxategiko aldaketak galdu egin dira"
 
+#~ msgid "pro&Mpt on replace"
+#~ msgstr "&galdetu ordeztean"
+
+#~ msgid "replace &All"
+#~ msgstr "&Ordeztu guztiak"
+
+#~ msgid "O&ne"
+#~ msgstr "Ba&t"
+
+#, fuzzy
+#~ msgid "%b %d %H:%M"
+#~ msgstr "%b %e %H:%M"
+
+#, fuzzy
+#~ msgid "%b %d %Y"
+#~ msgstr "%Y %b %e"
+
+#, fuzzy
+#~ msgid " The current address is 0x%08"
+#~ msgstr ""
+#~ " Uneko helbidea 0x%lx da.\n"
+#~ " Sartu helbide berria:"
+
 #~ msgid "scanf &Expression"
 #~ msgstr "scanf &Adierazpena"
-
-#~ msgid "&Whole words only"
-#~ msgstr "&Hitz osoak bakarrik"
 
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr " Sartu ordezko argumentuaren ordena, adib.3,2,1,4 "

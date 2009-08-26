@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-07-09 17:07+0300\n"
+"POT-Creation-Date: 2009-08-26 17:11+0300\n"
 "PO-Revision-Date: 2003-01-22 18:10+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <debian-l10n-swedish@lists.debian.org>\n"
@@ -332,14 +332,16 @@ msgstr " Tryck valfri tangent:"
 msgid " Execute Macro "
 msgstr " Kör makro "
 
-msgid "pro&Mpt on replace"
-msgstr "fr&Åga vid ersätt"
-
-msgid "replace &All"
-msgstr "ersätt &Alla"
-
-msgid "All charsets"
+msgid "&All charsets"
 msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "Endast &Hela ord"
+
+#, fuzzy
+msgid "In se&lection"
+msgstr "omvänt &Urval      M-*"
 
 msgid "&Backwards"
 msgstr "&Bakåt"
@@ -356,14 +358,11 @@ msgstr " Ange söksträng:"
 msgid "Cancel"
 msgstr "Avbryt"
 
-msgid "O&ne"
-msgstr "e&N"
+msgid "&Skip"
+msgstr "&Hoppa över"
 
 msgid "A&ll"
 msgstr "a&Lla"
-
-msgid "&Skip"
-msgstr "&Hoppa över"
 
 msgid "&Replace"
 msgstr "&Ersätt"
@@ -487,20 +486,20 @@ msgid "&Paste from clipfile      S-Ins"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k               "
+msgid "Toggle bookmar&k            M-k"
 msgstr "&Markera av/på      F3"
 
 # ladda låter inte så bra i sammanhanget
 #, fuzzy
-msgid "&Next bookmark                 "
+msgid "&Next bookmark              M-j"
 msgstr "&Ny               C-n"
 
 #, fuzzy
-msgid "Pre&v bookmark                 "
+msgid "Pre&v bookmark              M-i"
 msgstr "Sor&tera...                 M-t"
 
 #, fuzzy
-msgid "&Flush bookmark                "
+msgid "&Flush bookmark             M-o"
 msgstr "&Brev...                       "
 
 #, fuzzy
@@ -525,6 +524,23 @@ msgstr "&Gå till rad...             M-l"
 
 msgid "&Paste from clipfile        C-y"
 msgstr ""
+
+#, fuzzy
+msgid "Toggle bookmar&k               "
+msgstr "&Markera av/på      F3"
+
+# ladda låter inte så bra i sammanhanget
+#, fuzzy
+msgid "&Next bookmark                 "
+msgstr "&Ny               C-n"
+
+#, fuzzy
+msgid "Pre&v bookmark                 "
+msgstr "Sor&tera...                 M-t"
+
+#, fuzzy
+msgid "&Flush bookmark                "
+msgstr "&Brev...                       "
 
 msgid "&Search...         F7"
 msgstr "&Sök...             F7"
@@ -672,6 +688,9 @@ msgstr "Linjelängd vid radbrytning : "
 # får plats?
 msgid "Tab spacing: "
 msgstr "Flikstorlek: "
+
+msgid "Cursor beyond end of line"
+msgstr ""
 
 #, fuzzy
 msgid "Pers&istent selection"
@@ -1331,6 +1350,19 @@ msgstr "&Inod"
 msgid "Cannot read directory contents"
 msgstr "Kan inte läsa kataloginnehåll"
 
+# ändra inte översättningen om raderna blir längre.
+msgid ""
+" The Commander can't change to the directory that \n"
+" the subshell claims you are in.  Perhaps you have \n"
+" deleted your working directory, or given yourself \n"
+" extra access permissions with the \"su\" command? "
+msgstr ""
+" Midnight Commander kan inte byta till den katalog \n"
+" som underskalet påstår att du befinner dig i.     \n"
+" En tänkbar förklaring är att du har raderat din   \n"
+" arbetskatalog, eller gett dig själv extra         \n"
+" rättigheter mha \"su\"-kommandot?                 "
+
 #, c-format
 msgid "Press any key to continue..."
 msgstr "Tryck valfri tangent för att fortsätta..."
@@ -1884,25 +1916,25 @@ msgstr "  Felaktigt formulerat reguljärt uttryck  "
 msgid "Cas&e sensitive"
 msgstr "ski&Lj på versaler/gemener"
 
-#, fuzzy
-msgid "Case sens&itive"
-msgstr "ski&Lj på versaler/gemener"
-
 msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
 msgstr ""
 
-msgid "&All charsets"
-msgstr ""
-
-msgid "All cha&rsets"
-msgstr ""
+#, fuzzy
+msgid "Case sens&itive"
+msgstr "ski&Lj på versaler/gemener"
 
 #, fuzzy
 msgid "Re&gular expression"
 msgstr "&Reguljära uttryck"
+
+msgid "Fir&st hit"
+msgstr ""
+
+msgid "All cha&rsets"
+msgstr ""
 
 msgid "&Tree"
 msgstr "&Träd"
@@ -2252,19 +2284,6 @@ msgstr "vilka tangenter som inte markerats med OK. Tryck på mellanslag eller"
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "den saknade tangenten för att definiera den. Flytta runt med tab."
-
-# ändra inte översättningen om raderna blir längre.
-msgid ""
-" The Commander can't change to the directory that \n"
-" the subshell claims you are in.  Perhaps you have \n"
-" deleted your working directory, or given yourself \n"
-" extra access permissions with the \"su\" command? "
-msgstr ""
-" Midnight Commander kan inte byta till den katalog \n"
-" som underskalet påstår att du befinner dig i.     \n"
-" En tänkbar förklaring är att du har raderat din   \n"
-" arbetskatalog, eller gett dig själv extra         \n"
-" rättigheter mha \"su\"-kommandot?                 "
 
 msgid " The Midnight Commander "
 msgstr " Midnight Commander "
@@ -2685,6 +2704,9 @@ msgstr "visa &Gömda filer"
 msgid "show &Backup files"
 msgstr "visa &Säkerhetskopior"
 
+msgid "Use SI si&ze units"
+msgstr ""
+
 msgid "&Never"
 msgstr "al&Drig"
 
@@ -2878,14 +2900,6 @@ msgstr " Välj teckentabell för inmatning "
 msgid "-  < No translation >"
 msgstr "- < Ingen översättning >"
 
-#, c-format
-msgid ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-msgstr ""
-"Skärmstorleken %d×%d stöds inte.\n"
-"Kontrollera miljövariabeln TERM.\n"
-
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -2997,192 +3011,6 @@ msgid ""
 msgstr ""
 "Kan inte skriva till filen %s:\n"
 "%s\n"
-
-msgid " Format error on file Extensions File "
-msgstr " Felaktigt format på filen \"Extensions File\""
-
-#, c-format
-msgid " The %%var macro has no default "
-msgstr " Makrot %%var har inget standardvärde "
-
-#, c-format
-msgid " The %%var macro has no variable "
-msgstr " Makrot %%var har ingen variabel "
-
-msgid " Debug "
-msgstr " Debug "
-
-msgid " ERROR: "
-msgstr " FEL: "
-
-msgid " True:  "
-msgstr " Sant:   "
-
-msgid " False: "
-msgstr " Falskt: "
-
-msgid " Warning -- ignoring file "
-msgstr " Varning -- ignorerarar fil "
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"Fil %s ägs varken av dig eller root, eller är skrivbar för alla.\n"
-"Att använda den kan äventyra din säkerhet"
-
-#, c-format
-msgid " No suitable entries found in %s "
-msgstr "Inga lämpliga poster funna i %s "
-
-msgid " User menu "
-msgstr " Användarmeny "
-
-#, fuzzy
-msgid "%b %d %H:%M"
-msgstr "%e %b %H.%M"
-
-#, fuzzy
-msgid "%b %d %Y"
-msgstr "%e %b  %Y"
-
-msgid "%b %e  %Y"
-msgstr "%e %b  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%e %b %H.%M"
-
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s är inte en katalog\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "Katalogen %s ägs inte av dig\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "Kan inte ställa in rätt rättigheter för katalogen %s\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr "Kan inte skapa temporär katalog %s: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Temporära filer kommer att skapas i %s\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Temporära filer kommer inte att skapas\n"
-
-msgid " Pipe failed "
-msgstr " Pipe misslyckades"
-
-msgid " Dup failed "
-msgstr " Dup misslyckades"
-
-#, fuzzy
-msgid " Cannot spawn child process "
-msgstr " Kan inte skapa barnprogram "
-
-msgid "Empty output from child filter"
-msgstr "Tom utdata från barnfilter"
-
-#, c-format
-msgid ""
-" Cannot open \"%s\"\n"
-" %s "
-msgstr ""
-" Kan inte öppna \"%s\"\n"
-" %s "
-
-#, c-format
-msgid ""
-" Cannot stat \"%s\"\n"
-" %s "
-msgstr ""
-" Kan inte inhämta status om \"%s\"\n"
-" %s "
-
-msgid " Cannot view: not a regular file "
-msgstr " Kan inte visa: inte en vanlig fil "
-
-#, c-format
-msgid "File: %s"
-msgstr "Fil: %s"
-
-#, c-format
-msgid "Offset 0x%08lx"
-msgstr "Offset 0x%08lx"
-
-#, c-format
-msgid "Line %lu Col %lu"
-msgstr ""
-
-#, c-format
-msgid "%s bytes"
-msgstr "%s byte"
-
-#, fuzzy, c-format
-msgid ">= %s bytes"
-msgstr "%s byte"
-
-#, c-format
-msgid ""
-" Error while closing the file: \n"
-" %s \n"
-" Data may have been written or not. "
-msgstr ""
-
-#, fuzzy, c-format
-msgid ""
-" Cannot save file: \n"
-" %s "
-msgstr " Fel vid försök att spara fil. "
-
-#, fuzzy, c-format
-msgid ""
-" The current line number is %lu.\n"
-" Enter the new line number:"
-msgstr ""
-" Det nuvarande radnumret är %d.\n"
-" Ange det nya radnumret:"
-
-#, fuzzy
-msgid " The current address is 0x%08"
-msgstr ""
-" Den aktuella adressen är 0x%lx.\n"
-" Ange den nya adressen:"
-
-msgid " Goto Address "
-msgstr " Gå till adress "
-
-#, fuzzy
-msgid " Invalid address "
-msgstr " Ogiltigt lösenord "
-
-msgid "Seeking to search result"
-msgstr ""
-
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Quit"
-msgstr ""
-
-msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
-msgid " History "
-msgstr " Historik "
 
 msgid "Function key 1"
 msgstr "Funktionstangent 1"
@@ -3322,11 +3150,255 @@ msgstr "Delete, numeriska"
 msgid "Enter on keypad"
 msgstr "Enter, numeriska"
 
+#, fuzzy
+msgid "Tab on keypad"
+msgstr "+ på numeriska tangentbordet"
+
+#, fuzzy
+msgid "Space on keypad"
+msgstr "Snedstreck, numeriska"
+
 msgid "Slash on keypad"
 msgstr "Snedstreck, numeriska"
 
 msgid "NumLock on keypad"
 msgstr "Numlock, numeriska"
+
+msgid "Ctrl"
+msgstr ""
+
+msgid "Alt"
+msgstr ""
+
+msgid "Shift"
+msgstr ""
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"Skärmstorleken %d×%d stöds inte.\n"
+"Kontrollera miljövariabeln TERM.\n"
+
+msgid " Format error on file Extensions File "
+msgstr " Felaktigt format på filen \"Extensions File\""
+
+#, c-format
+msgid " The %%var macro has no default "
+msgstr " Makrot %%var har inget standardvärde "
+
+#, c-format
+msgid " The %%var macro has no variable "
+msgstr " Makrot %%var har ingen variabel "
+
+msgid " Debug "
+msgstr " Debug "
+
+msgid " ERROR: "
+msgstr " FEL: "
+
+msgid " True:  "
+msgstr " Sant:   "
+
+msgid " False: "
+msgstr " Falskt: "
+
+msgid " Warning -- ignoring file "
+msgstr " Varning -- ignorerarar fil "
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"Fil %s ägs varken av dig eller root, eller är skrivbar för alla.\n"
+"Att använda den kan äventyra din säkerhet"
+
+#, c-format
+msgid " No suitable entries found in %s "
+msgstr "Inga lämpliga poster funna i %s "
+
+msgid " User menu "
+msgstr " Användarmeny "
+
+msgid "%b %e  %Y"
+msgstr "%e %b  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%e %b %H.%M"
+
+#, c-format
+msgid "%s is not a directory\n"
+msgstr "%s är inte en katalog\n"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr "Katalogen %s ägs inte av dig\n"
+
+#, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr "Kan inte ställa in rätt rättigheter för katalogen %s\n"
+
+#, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr "Kan inte skapa temporär katalog %s: %s\n"
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr "Temporära filer kommer att skapas i %s\n"
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr "Temporära filer kommer inte att skapas\n"
+
+msgid " Pipe failed "
+msgstr " Pipe misslyckades"
+
+msgid " Dup failed "
+msgstr " Dup misslyckades"
+
+#, fuzzy, c-format
+msgid ""
+" The current line number is %lld.\n"
+" Enter the new line number:"
+msgstr ""
+" Det nuvarande radnumret är %d.\n"
+" Ange det nya radnumret:"
+
+#, fuzzy, c-format
+msgid ""
+" The current address is %s.\n"
+" Enter the new address:"
+msgstr ""
+" Det nuvarande radnumret är %d.\n"
+" Ange det nya radnumret:"
+
+msgid " Goto Address "
+msgstr " Gå till adress "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " Ogiltigt lösenord "
+
+#, fuzzy
+msgid " Cannot spawn child process "
+msgstr " Kan inte skapa barnprogram "
+
+msgid "Empty output from child filter"
+msgstr "Tom utdata från barnfilter"
+
+msgid "All charsets"
+msgstr ""
+
+msgid "ButtonBar|Help"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
+
+msgid "ButtonBar|Ascii"
+msgstr ""
+
+msgid "ButtonBar|Hex"
+msgstr ""
+
+msgid "ButtonBar|Goto"
+msgstr ""
+
+msgid "ButtonBar|Line"
+msgstr ""
+
+msgid "ButtonBar|View"
+msgstr ""
+
+msgid "ButtonBar|Edit"
+msgstr ""
+
+msgid "ButtonBar|Save"
+msgstr ""
+
+msgid "ButtonBar|UnWrap"
+msgstr ""
+
+msgid "ButtonBar|Wrap"
+msgstr ""
+
+msgid "ButtonBar|HxSrch"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Raw"
+msgstr ""
+
+msgid "ButtonBar|Parse"
+msgstr ""
+
+msgid "ButtonBar|Unform"
+msgstr ""
+
+msgid "ButtonBar|Format"
+msgstr ""
+
+#, c-format
+msgid "File: %s"
+msgstr "Fil: %s"
+
+#, c-format
+msgid "Offset 0x%08lx"
+msgstr "Offset 0x%08lx"
+
+#, c-format
+msgid "Line %lu Col %lu"
+msgstr ""
+
+#, c-format
+msgid "%s bytes"
+msgstr "%s byte"
+
+#, fuzzy, c-format
+msgid ">= %s bytes"
+msgstr "%s byte"
+
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr " Fel vid försök att spara fil. "
+
+#, c-format
+msgid ""
+" Cannot open \"%s\"\n"
+" %s "
+msgstr ""
+" Kan inte öppna \"%s\"\n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot stat \"%s\"\n"
+" %s "
+msgstr ""
+" Kan inte inhämta status om \"%s\"\n"
+" %s "
+
+msgid " Cannot view: not a regular file "
+msgstr " Kan inte visa: inte en vanlig fil "
+
+msgid "Seeking to search result"
+msgstr ""
+
+msgid " History "
+msgstr " Historik "
 
 msgid "Background process:"
 msgstr "Bakgrundsprocess:"
@@ -3510,8 +3582,9 @@ msgstr "ftpfs: Inloggningen felaktig för användare %s "
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: Ogiltigt värdnamn."
 
-msgid "ftpfs: Invalid host address."
-msgstr "ftpfs: Ogiltig värdadress."
+#, c-format
+msgid "ftpfs: %s"
+msgstr ""
 
 #, c-format
 msgid "ftpfs: making connection to %s"
@@ -3527,6 +3600,19 @@ msgstr "ftpfs: misslyckades att ansluta till servern: %s"
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Försöker igen... %d (Control-C för att avbryta)"
+
+#, fuzzy
+msgid "ftpfs: invalid address family"
+msgstr "ftpfs: Ogiltig värdadress."
+
+# incomplete
+#, fuzzy, c-format
+msgid "ftpfs: could not setup passive mode: %s"
+msgstr "ftpfs: kan inte sätta upp passivt läge"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not create socket: %s"
+msgstr " Kan inte skapa uttag: %s "
 
 # incomplete
 msgid "ftpfs: could not setup passive mode"
@@ -3765,11 +3851,31 @@ msgstr " Internt fel:"
 msgid "Changes to file lost"
 msgstr "Ändringar i filen förlorade"
 
+#~ msgid "pro&Mpt on replace"
+#~ msgstr "fr&Åga vid ersätt"
+
+#~ msgid "replace &All"
+#~ msgstr "ersätt &Alla"
+
+#~ msgid "O&ne"
+#~ msgstr "e&N"
+
+#, fuzzy
+#~ msgid "%b %d %H:%M"
+#~ msgstr "%e %b %H.%M"
+
+#, fuzzy
+#~ msgid "%b %d %Y"
+#~ msgstr "%e %b  %Y"
+
+#, fuzzy
+#~ msgid " The current address is 0x%08"
+#~ msgstr ""
+#~ " Den aktuella adressen är 0x%lx.\n"
+#~ " Ange den nya adressen:"
+
 #~ msgid "scanf &Expression"
 #~ msgstr "scanf &Uttryck"
-
-#~ msgid "&Whole words only"
-#~ msgstr "Endast &Hela ord"
 
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr " Ange ordning för ersättningsargument, tex 3,2,1,4 "
