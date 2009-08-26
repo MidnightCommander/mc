@@ -88,7 +88,7 @@ static void menubar_paint_idx (WMenu *menubar, int idx, int color)
 
     if (entry->text.start == NULL) {
         /* menu separator */
-        tty_setcolor (SELECTED_COLOR);
+        tty_setcolor (MENU_ENTRY_COLOR);
 
         if (!tty_is_slow ()) {
             widget_move (&menubar->widget, y, x - 1);
@@ -134,7 +134,7 @@ static inline void menubar_draw_drop (WMenu *menubar)
     if (column + menubar->max_entry_len + 4 > menubar->widget.cols)
         column = menubar->widget.cols - menubar->max_entry_len - 4;
 
-    tty_setcolor (SELECTED_COLOR);
+    tty_setcolor (MENU_ENTRY_COLOR);
     draw_box (menubar->widget.parent,
 	      menubar->widget.y + 1, menubar->widget.x + column,
 	      count + 2, menubar->max_entry_len + 4);
@@ -148,30 +148,36 @@ static inline void menubar_draw_drop (WMenu *menubar)
     menubar_paint_idx (menubar, menubar->subsel, MENU_SELECTED_COLOR);
 }
 
+static void menubar_set_color (WMenu *menubar, int current, gboolean hotkey)
+{
+    if (!menubar->active)
+	tty_setcolor (hotkey ? COLOR_HOT_FOCUS : SELECTED_COLOR);
+    else if (current == menubar->selected)
+	tty_setcolor (hotkey ? MENU_HOTSEL_COLOR : MENU_SELECTED_COLOR);
+    else
+	tty_setcolor (hotkey ? MENU_HOT_COLOR : MENU_ENTRY_COLOR);
+}
+
 static void menubar_draw (WMenu *menubar)
 {
     const int items = menubar->items;
     int   i;
 
     /* First draw the complete menubar */
-    tty_setcolor (SELECTED_COLOR);
+    tty_setcolor (menubar->active ? MENU_ENTRY_COLOR : SELECTED_COLOR);
     tty_draw_hline (menubar->widget.y, menubar->widget.x, ' ', menubar->widget.cols);
 
-    tty_setcolor (SELECTED_COLOR);
     /* Now each one of the entries */
     for (i = 0; i < items; i++){
-        tty_setcolor ((menubar->active && i == menubar->selected) ? 
-                MENU_SELECTED_COLOR : SELECTED_COLOR);
+	menubar_set_color (menubar, i, FALSE);
 	widget_move (&menubar->widget, 0, menubar->menu [i]->start_x);
 
         tty_print_string (menubar->menu[i]->text.start);
 
         if (menubar->menu[i]->text.hotkey != NULL) {
-            tty_setcolor ((menubar->active && i == menubar->selected) ? 
-                    MENU_HOTSEL_COLOR : COLOR_HOT_FOCUS);
+	    menubar_set_color (menubar, i, TRUE);
             tty_print_string (menubar->menu[i]->text.hotkey);
-            tty_setcolor ((menubar->active && i == menubar->selected) ? 
-                    MENU_SELECTED_COLOR : SELECTED_COLOR);
+	    menubar_set_color (menubar, i, FALSE);
         }
         if (menubar->menu[i]->text.end != NULL)
             tty_print_string (menubar->menu[i]->text.end);
