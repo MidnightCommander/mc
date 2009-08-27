@@ -5,7 +5,7 @@
 .\"	David H. Martín Alonso <dmartina@excite.com>
 .\"
 .\"TOPICS "Índice de Contenidos:"
-.TH MC 1 "Febrero de 2006" "MC Versión 4.6.1a" "GNU Midnight Commander"
+.TH MC 1 "Septiembre de 2009" "MC Versión 4.7.0\-pre2" "GNU Midnight Commander"
 .\"SKIP_SECTION"
 .SH "NOMBRE"
 mc \- Entorno visual para sistemas tipo Unix.
@@ -152,8 +152,8 @@ Teclas de la Línea de Entrada
 para aprender más sobre la línea de órdenes.
 .\"NODE "Mouse Support"
 .SH "Soporte de Ratón"
-Midnight Commander soporta el uso del ratón. Se activa cuando
-estamos ejecutándolo en un terminal tipo
+Se puede utilizar Midnight Commander con un ratón o mouse.  Se activa cuando
+estamos ejecutándolo en un entorno gráfico con un terminal tipo
 .B xterm(1)
 (funciona incluso si realizamos una conexión de telnet, ssh o rlogin a
 otra máquina desde el xterm) o si estamos ejecutándolo en una consola Linux
@@ -366,38 +366,40 @@ cambia el panel actual. El panel activo deja de serlo y el no activo
 pasa a ser el nuevo panel activo. La barra de selección se mueve del
 antiguo panel al nuevo, desaparece de aquel y aparece en éste.
 .TP
-.B Insertar, Ctrl\-t
-DEPRECATED! para marcar archivos (y/o directorios) como seleccionados podemos usar la tecla Insertar (Ins)
-(La secuencia kich1 de terminfo) o la combinación Ctrl\-t (Control\-t). Para deseleccionar
-archivos, basta con repetir la operación sobre los archivos y/o directorios antes marcados.
-.TP
-.B Insert
-to tag files you may use the Insert key (the kich1 terminfo sequence). 
-To untag files, just retag a tagged file.
+.B Insertar
+para marcar archivos (y/o directorios) como seleccionados podemos usar
+la tecla
+.I insertar
+(secuencia kich1 de terminfo).  Para deseleccionar,
+basta repetir la operación sobre los archivos y/o directorios antes
+marcados.
 .TP
 .B C\-t
-to change charset of panel you may use C\-t (Control\-t).
-Recoding is made from selected codepage into system codepage. To
-cancel the recoding you may select "directory up" (..) in active panel.
-To cancel the charsets in all directories, select "No translation " in 
-the dialog of encodings.
+permite mostrar nombres en el panel con otra codificación de caracteres.
+Los nombres se convierten a la codificación del sistema para mostrarlos.
+Para desactivar esta recodificación basta seleccionar la entrada (..)
+para el directorio superior.  Para cancelar las conversiones en cualquier
+directorio seleccionar
+.I «Sin traducción»
+en el diálogo de selección de código.
 .TP
 .B Alt\-g, Alt\-r, Alt\-j
 usadas para seleccionar el archivo superior en un panel, el archivo central y el inferior del
 panel, respectivamente.
 .TP
 .B Ctrl\-s, Alt\-s
-inicia la búsqueda de un archivo en la lista de directorios (panel activo). Cuando la búsqueda
-está activa las pulsaciones de teclado son añadidas a la cadena de búsqueda y no a
-la línea de órdenes. Si la opción
+inicia la búsqueda de un archivo en la lista de directorios (panel activo).  A
+partir de ese momento las teclas pulsadas se van añadiendo a la cadena en búsqueda
+y no a la línea de órdenes. Si la opción de
 .I Mostrar Mini\-estado
-está habilitada la cadena a buscar es mostrada en la línea de mini\-estado.
-Conforme tecleemos, la barra de selección se desplazará al siguiente archivo
-o directorio cuyo nombre coincida con las letras introducidas. Las teclas
+está habilitada, la cadena a buscar se podrá ver en la línea de mini\-estado.
+Conforme tecleemos, dentro del panel activo la barra de selección se desplazará
+al siguiente archivo o directorio cuyo nombre coincida con las letras
+introducidas.  Se pueden usar las teclas
 .I borrar
 o
 .I suprimir
-pueden ser utilizadas para corregir errores de escritura. Si pulsamos
+para corregir errores de escritura.  Si pulsamos
 .I Ctrl\-s
 de nuevo, se busca la siguiente coincidencia.
 .TP
@@ -413,30 +415,40 @@ Favoritos
 .\"Hotlist"
 y permite cambiar al directorio seleccionado.
 
-.B * N. de T.:
-En el teclado castellano, existe un pequeño inconveniente, dado que
-la contrabarra, no se consigue con una sola pulsación, por lo que este método
-no funciona directamente.
+.TP
+.PP
+.B * N. del T.:
+En el teclado castellano, existe un pequeño inconveniente, dado que la
+contrabarra, no se consigue con una sola pulsación, por lo que este
+método no funciona directamente.
+
 .TP
 .B + \ (más)
 usado para seleccionar (marcar) un grupo de archivos. Midnight Commander
-preguntará por una expresión regular describiendo el grupo. Cuando los
-.I Caracteres Comodín (Shell Patterns)
-están habilitados, la expresión regular es idéntica a las expresiones
-regulares en el shell (poniendo * para cero o más caracteres y ?
+ofrecerá distintas opciones.  Indicando
+.I Sólo archivos
+los directorios no se seleccionan.  Con los
+.I Caracteres Comodín
+habilitados, se pueden introducir expresiones regulares del tipo empleado en
+los patrones de nombres de la shell (poniendo * para cero o más caracteres y ?
 para uno o más caracteres). Si los
 .I Caracteres Comodín
 están deshabilitados, entonces la selección de archivos se realiza con expresiones
 regulares normales. Véase la página de manual de
 .BR "ed (1)" .
+Finalmente, si no se activa
+.I Distinguir May/min
+la selección se hará sin distinguir caracteres en mayúsculas o minúsculas.
 .TP
 .B \- (menos) o \\\\ (contrabarra)
 usaremos la tecla \- o "\\" para deseleccionar un grupo de archivos. Ésta es la operación contraria
 a la realizada por la tecla Más (+).
 
-.B * N. de T.:
-La tecla que realiza originalmente la función descrita es el menos (\-)
-ya que ésta es la utilizada en la versión originaria del programa, Comandante Norton.
+.TP
+.PP
+.B * N. del T.:
+La tecla que realiza originalmente la función descrita es el Menos (\-)
+ya que ésta es la utilizada en la aplicación originaria, Comandante Norton.
 
 .TP
 .B Arriba, Ctrl\-p
@@ -465,9 +477,30 @@ dentro del directorio del panel activo (como la tecla de Emacs
 en otro caso el otro panel es posicionado el directorio padre
 del directorio seleccionado en el panel activo.
 .TP
+.B Alt\-i
+cambiar el directorio en el panel opuesto de manera que coincida con el
+panel actual.  Si es necesario se cambiará también el panel opuesto a modo
+listado, pero si el panel actual no está en modo listado no se cambiará 
+de modo el otro.
+.TP
 .B Ctrl\-RePág, Ctrl\-AvPág
 solamente bajo la consola Linux: realiza un chdir ".." o al
 directorio actualmente seleccionado respectivamente.
+.TP
+.B Alt\-y
+cambia al anterior directorio visitado, equivale a pulsar
+.I <
+con el ratón.
+.TP
+.B Alt\-u
+cambia al siguiente directorio visitado, equivale a pulsar
+.I >
+con el ratón.
+.TP
+.B Alt\-Mayús\-h, Alt\-H
+muestra el historial de directorios visitados, equivale a pulsar la
+.I v
+con el ratón.
 .\"NODE "  Shell Command Line"
 .SH "  Línea de Órdenes del Sistema"
 Esta sección enumera las teclas útiles para evitar la excesiva escritura
@@ -979,7 +1012,7 @@ delante del nombre del archivo si es un enlace simbólico a alguna parte
 (excepto a un directorio, caso en que muestra una tilde (~)). El archivo
 original al cual apunta el enlace se muestra en la línea de estado si la
 opción
-.I "Mini status"
+.I "Mini estado"
 está habilitada. Usaremos enlaces simbólicos cuando queramos evitar la
 confusión que pueden causar los enlaces físicos.
 .PP
@@ -1022,15 +1055,21 @@ si tenemos llena la línea de órdenes y queremos hacer un cd a algún lugar.
 .PP
 .B Seleccionar Grupo (+)
 .PP
-Es usado para seleccionar (marcar) un grupo de archivos. Midnight Commander
-preguntará por una expresión regular describiendo el grupo. Cuando los
-.I Patrones del Shell
-están habilitados, la expresión regular es tal y como lo es en el shell
-(* para cero o más caracteres y ? para un carácter). Si los
-.I Patrones del Shell
-están desactivados, entonces la selección de archivos se realiza con expresiones
+Se utiliza para seleccionar (marcar) un grupo de archivos.  Midnight Commander
+ofrecerá distintas opciones.  Indicando
+.I Sólo archivos
+los directorios no se seleccionan.  Con los
+.I Caracteres Comodín
+habilitados, se pueden introducir expresiones regulares del tipo empleado en
+los patrones de nombres de la shell (poniendo * para cero o más caracteres y ?
+para uno o más caracteres).  Si los
+.I Caracteres Comodín
+están deshabilitados, entonces la selección de archivos se realiza con expresiones
 regulares normales. Véase la página de manual de
 .BR "ed (1)" .
+Finalmente, si no se activa
+.I Distinguir May/min
+la selección se hará sin distinguir caracteres en mayúsculas o minúsculas.
 .PP
 .B De\-seleccionar Grupo (\\\\)
 .PP
@@ -1217,6 +1256,10 @@ El campo de contenidos acepta expresiones regulares similares a egrep(1). Eso
 significa que tenemos caracteres de escape con significado especial para egrep con "\\",
 p.e. si buscamos "strcmp (" tendremos que introducir "strcmp \\("
 (sin las dobles comillas).
+.PP
+Con la opción \"Palabras completas\" se puede limitar la búsqueda a archivos donde
+la parte coincidente forme una palabra completa.  Esto coincide con la utilidad de la
+opción \"-w\" de grep.
 .PP
 Podemos iniciar la búsqueda pulsando el botón Aceptar.
 Durante el proceso de búsqueda podemos detenerla desde el botón Terminar.
@@ -1572,6 +1615,13 @@ Opciones de los Paneles, Pausa Después de Ejecutar y Otras Opciones.
 .PP
 .B Opciones de los paneles
 .PP
+.I Tamaños en unidades SI.
+Mostrar tamaños de archivos en bytes con unidades derivadas según el SI,
+Sistema Internacional de Unidades, o sea, en potencias de 1000.  Los prefijos
+(k, m ...) se muestran en minúsculas.  Sin esta opción los tamaños se calculan
+como valores binarios empleando múltiplos de 1024 (2 elevado a 10) y los
+prefijos aparecen como es habitual en mayúsculas (K, M ...)
+.PP
 .I Mostrar Archivos de Respaldo.
 Mostrar los archivos terminados en tilde '~'. Por defecto, Midnight
 Commander no los muestra (como la opción \-B de ls de GNU).
@@ -1581,7 +1631,7 @@ Mostrar los archivos que comiencen con un punto (como ls \-a).
 .PP
 .I Marcar y Avanzar.
 Hacer avanzar la barra de selección tras marcar un archivo (con la tecla
-Insertar).
+.BR insertar ).
 .PP
 .I Menús Desplegables.
 Mostrar el contenido de los menús desplegables inmediatamente al presionar
@@ -1753,17 +1803,28 @@ Si la opción
 .I Mostrar Mini\-Estado
 está activa se muestra, en la parte inferior de cada panel, una línea
 con información sobre el archivo seleccionado en cada momento.
+.PP
+Si se está ejecutando en X-Windows dentro de un emulador de terminal,
+Midnight Commander toma control del titulo de la ventana mostrando allí
+el nombre del directorio actual.  El título se actualiza cuando sea preciso.
+Podemos desactivar la opción de
+.I Titular las ventanas Xterm
+si el emulador de terminal empleado falla y no se muestran o actualizan
+correctamente estos textos.
 .\"NODE "    Confirmation"
 .SH "    Confirmación"
 En este menú configuramos las opciones de confirmación de eliminación de archivos,
 sobreescritura, ejecución pulsando intro y salir del programa.
 .\"NODE "    Display bits"
-.SH "    Bits de Visualización"
-Esta opción es utilizada para configurar el rango de caracteres visibles en la
-pantalla. Esta selección puede ser 7\-bits si nuestro terminal/curses soporta
-sólo siete bits de salida, ISO\-8859\-1 muestra todos los caracteres del mapa
-ISO\-8859\-1 despliegue de 8 bit para aquellos terminales que puedan
-los 8 bits en toda su extensión.
+.SH "    Juego de caracteres"
+Esta opción permite configurar el conjunto de caracteres visibles en la
+pantalla.  Éste puede ser 7\-bits si nuestro terminal/curses soporta
+sólo siete bits de salida, alguna de las tablas del estándar ISO\-8859 y
+diversas codificaciones comunes de PC con ocho bits por carácter, o UTF-8
+para Unicode.
+.PP
+Para soportar teclados con caracteres locales debemos marcar la opción de
+.IR "Aceptar entrada de 8 bits" .
 .\"NODE "    Learn keys"
 .SH "    Aprender teclas"
 Este diálogo nos permite comprobar si nuestras teclas F1\-F20, Inicio, Fin, etc. funcionan adecuadamente
@@ -2305,6 +2366,30 @@ minúsculas.
 También podemos usar '\\' como carácter de escape evitando la interpretación de todos
 estos caracteres especiales. Por ejemplo, '\\\\' es
 una contrabarra y '\\*' es un asterisco.
+.\"NODE "Select/Unselect Files"
+.SH "Seleccionar/Deseleccionar Archivos"
+El diálogo permite seleccionar o deseleccionar grupos de archivos y
+directorios. La
+.\"LINK2"
+línea de entrada
+.\"Input Line Keys"
+permite introducir una expresión regular para los nombres de los
+archivos a seleccionar/deseleccionar.
+.PP
+Indicando
+.I Sólo archivos
+los directorios no se seleccionan.  Con los
+.I Caracteres Comodín
+habilitados, se pueden introducir expresiones regulares del tipo empleado en
+los patrones de nombres de la shell (poniendo * para cero o más caracteres y ?
+para uno o más caracteres).  Si los
+.I Caracteres Comodín
+están deshabilitados, entonces la selección de archivos se realiza con expresiones
+regulares normales.  Véase la página de manual de
+.BR "ed (1)" .
+Finalmente, si no se activa
+.I Distinguir May/min
+la selección se hará sin distinguir caracteres en mayúsculas o minúsculas.
 .\"NODE "Internal File Viewer"
 .SH "Visor de Archivos Interno"
 El visor de archivos interno ofrece dos modos de presentación: ASCII y
@@ -2344,13 +2429,16 @@ Invoca el visor de ayuda de hipertexto interno.
 .PP
 .B F2
 Cambia el modo de ajuste de líneas en pantalla.
+
+.TP
 .PP
-.SM N. del T.\-
-Envuelta (Ajustada), se muestra toda la
-información de la línea en la pantalla, de modo que si ésta ocupa más del ancho
-de la pantalla aparece como si fuese otra línea aparte o bien desenvuelta (desajustada),
-truncando el contenido de la línea que sobresale de la pantalla. Este contenido
-puede ser consultado utilizando las teclas del cursor.
+.B * N. del T.:
+Envuelta (Ajustada), se muestra toda la información de la línea en la pantalla, de
+modo que si ésta ocupa más del ancho de la pantalla aparece como si fuese
+otra línea aparte o bien desenvuelta (desajustada), truncando el contenido
+de la línea que sobresale de la pantalla. Este contenido puede ser
+consultado utilizando las teclas del cursor.
+
 .PP
 .B F4
 Cambia entre el modo hexadecimal y el Ascii.
@@ -2511,9 +2599,9 @@ a 7 bits en el menú de opciones para mantener el espaciado saneado.
 .SH "Terminación"
 Permite a Midnight Commander escribir por nosotros.
 .PP
-Intenta completar el texto escrito antes de la posición actual. MC
-intenta la terminación tratando el texto como si fuera una variable
-(si el texto comienza con
+Intenta completar el texto escrito antes de la posición
+actual.  Midnight Commander intenta la terminación tratando
+el texto como si fuera una variable (si el texto comienza con
 .BR $ ),
 nombre de usuario (si el texto empieza por
 .BR ~ ),
@@ -2528,8 +2616,8 @@ la terminación con nombres de archivo.
 La terminación de nombres de archivo, usuario y máquina funciona en
 todas las líneas de entrada; la terminación de comandos es específica de
 la línea de órdenes. Si la terminación es ambigua (hay varias
-posibilidades diferentes), MC pita, y la acción siguiente depende de la
-opción
+posibilidades diferentes), Midnight Commander pita, y la acción siguiente
+depende de la opción
 .I Completar: Mostrar Todos
 en el diálogo de
 .\"LINK2"
@@ -2554,7 +2642,7 @@ Completar: Mostrar Todos
 .\"Configuration"
 está desactivado, la lista aparece cuando pulsamos
 .B Alt\-Tab
-por segunda vez; con la primera MC sólo emite un pitido.
+por segunda vez; con la primera Midnight Commander sólo emite un pitido.
 .\"NODE "Virtual File System"
 .SH "Sistemas de Archivos Virtuales (VFS)"
 Midnight Commander dispone de una capa de código de acceso al sistema
@@ -3052,9 +3140,10 @@ valor del campo clear_before_exec a 0.
 .PP
 .I confirm_view_dir
 .IP
-Al pulsar F3 en un directorio, normalmente MC entra en ese directorio. Si
-este valor está a 1, entonces MC pedirá confirmación antes de cambiar
-el directorio si tenemos archivos marcados.
+Al pulsar F3 en un directorio, normalmente Midnight Commander entra
+en ese directorio.  Si este valor está a 1, entonces el programa
+nos pedirá confirmación antes de cambiar el directorio si tenemos
+archivos marcados.
 .PP
 .I ftpfs_retry_seconds
 .IP
@@ -3112,6 +3201,12 @@ Produce un tratamiento especial para '+', '\-', '*' en la línea de órdenes (se
 deseleccionar, selección inversa) sólo si la línea de órdenes está vacía. No necesitamos
 entrecomillar estos caracteres en la línea de órdenes. Pero no podremos
 cambiar la selección cuando la línea de órdenes no esté vacía.
+.TP
+.I reverse_files_only
+Permite invertir la selección sólo sobre los archivos, sin afectar a los directorios
+seleccionados.  Esta variable está activa por defecto.  Si se desactiva, la inversión se
+aplica tanto a archivos como a directorios: se seleccionan los no seleccionados y se
+liberan los anteriormente seleccionados.
 .PP
 .I panel_scroll_pages
 .IP
@@ -3193,6 +3288,20 @@ a la tecla de insertar, hay que colocar en el archivo
 .nf
 insert=\\e[Op
 .fi
+.PP
+También se pueden usar
+.IR "secuencias avanzadas" .
+Por ejemplo:
+
+.nf
+    ctrl alt right=\\e[[1;6C
+    ctrl alt left=\\e[[1;6D
+.fi
+
+.PP
+Esto significa que Ctrl + Alt + Izquierda envía la secuencia de escape
+\\e[[1;6D y que entonces Midnight Commander debe interpretar "\\e[[1;6D"
+como Ctrl\-Alt\-Izquierda.
 .PP
 El identificador
 .I complete
@@ -3286,8 +3395,8 @@ La página web de Midnight Commander está en:
 	http://www.midnight\-commander.org/
 .fi
 .PP
-La presente documentación recoge información relativa a la versión 4.6.1
-(Enero de 2004).  Esta traducción no está completamente actualizada con
+La presente documentación recoge información relativa a la versión 4.7.0
+(Septiembre de 2009).  Esta traducción no está completamente actualizada con
 la versión original en inglés.  Para acceder a información sobre
 versiones recientes consultar la página de manual en inglés que contiene
 información más completa y actualizada.  Para ver el susodicho manual
@@ -3309,12 +3418,12 @@ mensaje a la dirección: mc\-devel@gnome.org.
 Se debe proporcionar una descripción detallada del problema, la
 versión del programa (se obtiene con
 .RI ' "mc \-V" ')
-y el sistema operativo utilizados. Si el programa revienta, sería
+y el sistema operativo utilizados.  Si el programa revienta, sería
 también útil disponer del estado de la pila.
 .\"NODE "TRANSLATION"
 .SH "TRADUCCIÓN"
-Francisco Gabriel Aroca, 1998. Reformateado y actualizado por David
-Martín, 2002\-2006.
+Francisco Gabriel Aroca, 1998.  Reformateado y actualizado por David
+Martín, 2002\-2009.
 .PP
 Midnight Commander traducido a castellano por David Martín
 <dmartina@excite.com>.
