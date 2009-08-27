@@ -506,7 +506,8 @@ menubar_event (Gpm_Event *event, void *data)
 	if (event->type & GPM_UP)
 	    menubar_execute (menubar, pos);
     } else
-	if (event->type & GPM_DOWN)
+	/* use click not wheel to close menu */
+	if ((event->type & GPM_DOWN) && !(event->buttons & (GPM_B_UP | GPM_B_DOWN)))
 	    menubar_finish (menubar);
 
     return MOU_NORMAL;
