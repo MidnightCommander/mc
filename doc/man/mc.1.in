@@ -452,7 +452,9 @@ move the selection bar one page up.
 .TP
 .B Alt\-o
 If the currently selected file is a directory, load that directory on
-the other panel and moves the selection to the next file.
+the other panel and moves the selection to the next file. If the
+currently selected file is not a directory, load the parent directory
+on the other panel and moves the selection to the next file.
 .TP
 .B Alt\-i
 make the current directory of the current panel also the current
