@@ -2,6 +2,7 @@
 #define MC_VIEWER_INTERNAL_H
 
 #include <stdlib.h>
+#include <stdio.h>
 #include <sys/types.h>
 
 #include "../src/global.h"
