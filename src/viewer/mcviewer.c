@@ -275,7 +275,6 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
     int i, type;
     int fd = -1;
     char tmp[BUF_MEDIUM];
-    const char *enc;
     char *canon_fname;
     struct stat st;
 #ifdef HAVE_CHARSET

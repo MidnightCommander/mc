@@ -519,7 +519,7 @@ mcview_moveto_line_cmd (mcview_t * view)
 
     g_snprintf (prompt, sizeof (prompt),
                 _(" The current line number is %lld.\n"
-                  " Enter the new line number:"), (line + 1), "");
+                  " Enter the new line number:"), (line + 1));
     answer = input_dialog (_(" Goto line "), prompt, MC_HISTORY_VIEW_GOTO_LINE, "");
     if (answer != NULL && answer[0] != '\0') {
         errno = 0;
