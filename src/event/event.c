@@ -110,7 +110,8 @@ mcevent_get_list (void)
     if (mcevent_hashlist == NULL)
 	return NULL;
 
-    return g_hash_table_get_keys (mcevent_hashlist);
+/*    return g_hash_table_get_keys (mcevent_hashlist);*/
+    return NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
