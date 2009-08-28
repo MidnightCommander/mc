@@ -474,11 +474,11 @@ menubar_event (Gpm_Event *event, void *data)
 
     /* Else, the mouse operation is on the menus or it is not */
 	left_x = menubar->menu[menubar->selected]->start_x;
-	right_x = left_x + menubar->max_entry_len + 4;
+	right_x = left_x + menubar->max_entry_len + 3;
 	if (right_x > menubar->widget.cols)
 	{
 		left_x = menubar->widget.cols - menubar->max_entry_len - 3;
-		right_x = menubar->widget.cols - 1;
+		right_x = menubar->widget.cols;
 	}
 
     bottom_y = (menubar->menu [menubar->selected])->count + 3;
