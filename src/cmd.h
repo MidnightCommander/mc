@@ -27,12 +27,18 @@ void filtered_view_cmd (void);
 void do_edit_at_line (const char *what, int start_line);
 void edit_cmd (void);
 void edit_cmd_new (void);
+
+gboolean mcevent__cmd_copy (struct mcevent_struct *, gpointer);
 void copy_cmd (void);
-void ren_cmd (void);
 void copy_cmd_local (void);
+
+gboolean mcevent__cmd_move (struct mcevent_struct *, gpointer);
+void ren_cmd (void);
 void ren_cmd_local (void);
+
 void delete_cmd_local (void);
 void reselect_vfs (void);
+gboolean mcevent__cmd_mkdir (struct mcevent_struct *, gpointer);
 void mkdir_cmd (void);
 void delete_cmd (void);
 void find_cmd (void);

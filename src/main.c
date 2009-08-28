@@ -41,6 +41,7 @@
 
 #include "global.h"
 
+#include "../src/event/event.h"
 #include "../src/tty/tty.h"
 #include "../src/tty/color.h"
 #include "../src/tty/mouse.h"
@@ -1193,6 +1194,7 @@ init_xterm_support (void)
     termvalue = getenv ("TERM");
     if (!termvalue || !(*termvalue)) {
 	fputs (_("The TERM environment variable is unset!\n"), stderr);
+	mcevent_deinit();
 	exit (1);
     }
 
@@ -1827,10 +1829,8 @@ mc_main__setup_by_args(int argc, char *argv[])
 #endif				/* WITH_SMBFS */
 #endif				/* USE_NETCODE */
 
-
     base = x_basename (argv[0]);
     tmp = (argc > 0)? argv[1] : NULL;
-
 
     if (!STRNCOMP (base, "mce", 3) || !STRCOMP (base, "vi")) {
 	edit_one_file = "";
@@ -1880,6 +1880,7 @@ mc_main__setup_by_args(int argc, char *argv[])
 	    view_one_file = g_strdup (tmp);
 	else {
 	    fputs ("No arguments given to the viewer\n", stderr);
+	    mcevent_deinit();
 	    exit (1);
 	}
     } else {
@@ -1891,6 +1892,22 @@ mc_main__setup_by_args(int argc, char *argv[])
 		other_dir = g_strdup (tmp);
 	}
     }
+}
+
+static void
+mcmain_init_event_callbacks()
+{
+    mcevent_add_cb(
+	    "panel.mkdir",
+	    mcevent__cmd_mkdir, NULL);
+
+    mcevent_add_cb(
+	    "panel.copy",
+	    mcevent__cmd_copy, NULL);
+
+    mcevent_add_cb(
+	    "panel.move",
+	    mcevent__cmd_move, NULL);
 
 
 }
@@ -1906,9 +1923,12 @@ main (int argc, char *argv[])
     bindtextdomain ("mc", LOCALEDIR);
     textdomain ("mc");
 
+    /* init events */
+    mcevent_init();
+    mcmain_init_event_callbacks();
+
     /* Set up temporary directory */
     mc_tmpdir ();
-
     OS_Setup ();
 
     str_init_strings (NULL);
@@ -2054,6 +2074,9 @@ main (int argc, char *argv[])
 #ifdef USE_INTERNAL_EDIT
     edit_stack_free ();
 #endif
+
+    /* deinit of event system */
+    mcevent_deinit();
 
     return 0;
 }

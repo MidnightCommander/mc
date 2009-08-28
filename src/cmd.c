@@ -55,6 +55,8 @@
 
 #include "../src/mcconfig/mcconfig.h"
 
+#include "../src/event/event.h"
+
 #include "cmd.h"		/* Our definitions */
 #include "fileopctx.h"
 #include "file.h"		/* file operation routines */
@@ -335,49 +337,61 @@ edit_cmd_new (void)
     do_edit (NULL);
 }
 
+/* Handler for "panel.copy" event */
+gboolean
+mcevent__cmd_copy (mcevent_t *event, gpointer data)
+{
+    save_cwds_stat ();
+    if (panel_operate (current_panel, OP_COPY, (int) data)) {
+	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+	repaint_screen ();
+    }
+    return TRUE;
+}
+
+/* Handler for "panel.move" event */
+gboolean
+mcevent__cmd_move (mcevent_t *event, gpointer data)
+{
+    save_cwds_stat ();
+    if (panel_operate (current_panel, OP_MOVE, (int) data)){
+	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+	repaint_screen ();
+    }
+    return TRUE;
+}
+
 /* Invoked by F5.  Copy, default to the other panel.  */
 void
 copy_cmd (void)
 {
-    save_cwds_stat ();
-    if (panel_operate (current_panel, OP_COPY, 0)) {
-	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
-	repaint_screen ();
-    }
+    /* now it wrapper for old-style event handlers */
+    mcevent_raise("panel.copy", (gpointer) 0);
 }
 
 /* Invoked by F6.  Move/rename, default to the other panel, ignore marks.  */
 void ren_cmd (void)
 {
-    save_cwds_stat ();
-    if (panel_operate (current_panel, OP_MOVE, 0)){
-	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
-	repaint_screen ();
-    }
+    /* now it wrapper for old-style event handlers */
+    mcevent_raise("panel.move", (gpointer) 0);
 }
 
 /* Invoked by F15.  Copy, default to the same panel, ignore marks.  */
 void copy_cmd_local (void)
 {
-    save_cwds_stat ();
-    if (panel_operate (current_panel, OP_COPY, 1)){
-	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
-	repaint_screen ();
-    }
+    /* now it wrapper for old-style event handlers */
+    mcevent_raise("panel.copy", (gpointer) 1);
 }
 
 /* Invoked by F16.  Move/rename, default to the same panel.  */
 void ren_cmd_local (void)
 {
-    save_cwds_stat ();
-    if (panel_operate (current_panel, OP_MOVE, 1)){
-	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
-	repaint_screen ();
-    }
+    /* now it wrapper for old-style event handlers */
+    mcevent_raise("panel.move", (gpointer) 1);
 }
 
-void
-mkdir_cmd (void)
+gboolean
+mcevent__cmd_mkdir (mcevent_t *event, gpointer data)
 {
     char *dir, *absdir;
     const char *name = "";
@@ -393,7 +407,7 @@ mkdir_cmd (void)
 			     name);
 
     if (!dir)
-	return;
+	return FALSE;
 
     if (dir[0] == '/' || dir[0] == '~')
 	absdir = g_strdup (dir);
@@ -411,6 +425,15 @@ mkdir_cmd (void)
 
     g_free (absdir);
     g_free (dir);
+
+    return TRUE;
+}
+
+void
+mkdir_cmd (void)
+{
+    /* now it wrapper for old-style event handlers */
+    mcevent_raise("panel.mkdir", NULL);
 }
 
 void delete_cmd (void)
