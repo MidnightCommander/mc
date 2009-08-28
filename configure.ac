@@ -564,6 +564,7 @@ src/mcconfig/Makefile
 src/search/Makefile
 src/tty/Makefile
 src/viewer/Makefile
+src/event/Makefile
 
 edit/Makefile
 syntax/Makefile

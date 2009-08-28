@@ -1,4 +1,4 @@
-SUBDIRS = mcconfig search tty viewer filehighlight
+SUBDIRS = mcconfig search tty viewer filehighlight event
 
 AM_CFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir) $(PCRE_CFLAGS)
 
@@ -43,10 +43,11 @@ MCCONFIGLIB = mcconfig/libmcconfig.la
 SEARCHLIB = search/libsearch.la
 TTYLIB =  tty/libmctty.la
 VIEWERLIB = viewer/libmcviewer.la
+EVENTLIB =  event/libmcevent.la
 FILEHIGHLIGHTLIB=filehighlight/libmcfilehighlight.la
 
 mc_LDADD = $(EDITLIB) $(VFSLIB) $(FILEHIGHLIGHTLIB) \
-	$(MCCONFIGLIB) $(SEARCHLIB) $(TTYLIB) $(VIEWERLIB) \
+	$(MCCONFIGLIB) $(SEARCHLIB) $(TTYLIB) $(VIEWERLIB) $(EVENTLIB)\
 	$(INTLLIBS) $(MCLIBS) $(SLANGLIB) $(LIBICONV) $(GLIB_LIBS)
 
 CHARSET_SRC = charsets.c charsets.h selcodepage.c selcodepage.h
