@@ -421,6 +421,10 @@ menubar_event (Gpm_Event *event, void *data)
     if (!(event->type & (GPM_UP|GPM_DOWN|GPM_DRAG)))
 	return MOU_NORMAL;
 
+    /* ignore wheel events if menu is inactive */
+    if (!menubar->active && (event->buttons & (GPM_B_UP | GPM_B_DOWN)))
+	return MOU_NORMAL;
+
     if (!menubar->dropped){
 	menubar->previous_widget = menubar->widget.parent->current->dlg_id;
 	menubar->active = 1;
