@@ -26,6 +26,9 @@ typedef struct mcevent_struct
 
 /*** global variables defined in .c file *********************************************************/
 
+extern GMainLoop *mcevent_mainLoop;
+extern GMainContext *mcevent_mainContext;
+
 /*** declarations of public functions ************************************************************/
 
 

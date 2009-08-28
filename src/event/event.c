@@ -36,6 +36,8 @@
 /*** file scope variables ************************************************************************/
 
 GHashTable *mcevent_hashlist = NULL;
+GMainLoop *mcevent_mainLoop = NULL;
+GMainContext *mcevent_mainContext = NULL;
 
 
 /*** file scope functions ************************************************************************/
@@ -73,6 +75,13 @@ gboolean mcevent_init(void)
     if (mcevent_hashlist == NULL)
 	return FALSE;
 
+    mcevent_mainLoop = g_main_loop_new (NULL, FALSE);
+    if (mcevent_mainLoop == NULL)
+    {
+	g_hash_table_destroy (mcevent_hashlist);
+	return FALSE;
+    }
+    mcevent_mainContext =  g_main_context_default ();
     return TRUE;
 }
 
@@ -84,7 +93,10 @@ void mcevent_deinit(void)
 	return;
 
     g_hash_table_destroy (mcevent_hashlist);
+    g_main_loop_unref (mcevent_mainLoop);
     mcevent_hashlist = NULL;
+    mcevent_mainLoop = NULL;
+    mcevent_mainContext = NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -92,6 +104,7 @@ void mcevent_deinit(void)
 void mcevent_run(void)
 {
 /* start GMainLoop */
+    g_main_loop_run (mcevent_mainLoop);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -99,7 +112,7 @@ void mcevent_run(void)
 void mcevent_stop(void)
 {
 /* stop GMainLoop */
-
+    g_main_loop_quit (mcevent_mainLoop);
 }
 
 /* --------------------------------------------------------------------------------------------- */
