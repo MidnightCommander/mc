@@ -389,13 +389,87 @@ edit_insert_stream (WEdit * edit, FILE * f)
     return i;
 }
 
-long edit_write_stream (WEdit * edit, FILE * f)
+long edit_write_stream (WEdit * edit, FILE * f, LineBreaks lb)
 {
     long i;
-    for (i = 0; i < edit->last_byte; i++)
-	if (fputc (edit_get_byte (edit, i), f) < 0)
-	    break;
-    return i;
+
+    if (lb == LB_ASIS) {
+	for (i = 0; i < edit->last_byte; i++)
+	    if (fputc (edit_get_byte (edit, i), f) < 0)
+		break;
+	return i;
+    }
+
+    /* change line breaks */
+    for (i = 0; i < edit->last_byte; i++) {
+	unsigned char c = edit_get_byte (edit, i);
+
+	if (!(c == '\n' || c == '\r')) {
+	    /* not line break */
+	    if (fputc (c, f) < 0)
+		return i;
+	} else { /* (c == '\n' || c == '\r') */
+	    unsigned char c1 = edit_get_byte (edit, i + 1); /* next char */
+
+	    switch (lb) {
+	    case LB_UNIX:	/* replace "\r\n" or '\r' to '\n' */
+		/* put one line break unconditionally */
+		if (fputc ('\n', f) < 0)
+		    return i;
+
+		i++; /* 2 chars are processed */
+
+		if (c == '\r' && c1 == '\n')
+		    /* Windows line break; go to the next char */
+		    break;
+
+		if (c == '\r' && c1 == '\r') {
+		    /* two Macintosh line breaks; put second line break */
+		    if (fputc ('\n', f) < 0)
+			return i;
+		    break;
+		}
+
+		if (fputc (c1, f) < 0)
+		    return i;
+		break;
+
+	    case LB_WIN:	/* replace '\n' or '\r' to "\r\n" */
+		/* put one line break unconditionally */
+		if (fputc ('\r', f) < 0 || fputc ('\n', f) < 0)
+		    return i;
+
+		if (c == '\r' && c1 == '\n')
+		    /* Windows line break; go to the next char */
+		    i++;
+		break;
+
+	    case LB_MAC:	/* replace "\r\n" or '\n' to '\r' */
+		/* put one line break unconditionally */
+		if (fputc ('\r', f) < 0)
+		    return i;
+
+		i++; /* 2 chars are processed */
+
+		if (c == '\r' && c1 == '\n')
+		    /* Windows line break; go to the next char */
+		    break;
+
+		if (c == '\n' && c1 == '\n') {
+		    /* two Windows line breaks; put second line break */
+		    if (fputc ('\r', f) < 0)
+			return i;
+		    break;
+		}
+
+		if (fputc (c1, f) < 0)
+		    return i;
+		break;
+	    }
+	}
+    }
+
+    return edit->last_byte;
 }
 
 #define TEMP_BUF_LEN 1024

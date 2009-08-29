@@ -149,7 +149,7 @@ edit_refresh_cmd (WEdit * edit)
 
 /* returns 0 on error, -1 on abort */
 static int
-edit_save_file (WEdit *edit, const char *filename)
+edit_save_file (WEdit *edit, const char *filename, LineBreaks lb)
 {
     char *p;
     gchar *tmp;
@@ -266,7 +266,7 @@ edit_save_file (WEdit *edit, const char *filename)
 	file = (FILE *) popen (p, "w");
 
 	if (file) {
-	    filelen = edit_write_stream (edit, file);
+	    filelen = edit_write_stream (edit, file, lb);
 #if 1
 	    pclose (file);
 #else
@@ -290,7 +290,7 @@ edit_save_file (WEdit *edit, const char *filename)
 	    goto error_save;
 	}
 	g_free (p);
-    } else {
+    } else if (lb == LB_ASIS) { /* do not change line breaks */
 	long buf;
 	buf = 0;
 	filelen = edit->last_byte;
@@ -335,6 +335,24 @@ edit_save_file (WEdit *edit, const char *filename)
 	/* Update the file information, especially the mtime. */
 	if (mc_stat (savename, &edit->stat1) == -1)
 	    goto error_save;
+    } else { /* change line breaks */
+	FILE *file;
+
+	mc_close (fd);
+
+	file = (FILE *) fopen (savename, "w");
+
+	if (file) {
+	    filelen = edit_write_stream (edit, file, lb);
+	    fclose (file);
+	} else {
+	    edit_error_dialog (_("Error"),
+				get_sys_error (
+						(_
+						(" Cannot open file for writing: "),
+						savename, " ", 0)));
+	    goto error_save;
+	}
     }
 
     if (filelen != edit->last_byte)
@@ -452,6 +470,56 @@ edit_set_filename (WEdit *edit, const char *f)
 	edit->dir = g_get_current_dir ();
 #endif
 }
+ 
+static char *
+edit_get_save_file_as (char *filename, LineBreaks *lb)
+{
+#define DLG_WIDTH 64
+#define DLG_HEIGHT 14
+
+    static char *lb_names[LB_NAMES] =
+    {
+     N_("&Do not change"),
+     N_("&Unix format (\\n)"),
+     N_("&Windows/DOS format (\\r\\n)"),
+     N_("&Macintosh format (\\r)")
+    };
+
+    static LineBreaks cur_lb = LB_ASIS;
+
+    QuickWidget quick_widgets[] =
+    {
+        {quick_button, 6, 10, DLG_HEIGHT - 3, DLG_HEIGHT,
+         N_("&Cancel"), 0, B_CANCEL, NULL, NULL, NULL},
+        {quick_button, 2, 10, DLG_HEIGHT - 3, DLG_HEIGHT,
+         N_("&OK"), 0, B_ENTER, NULL, NULL, NULL, NULL, NULL},
+        {quick_radio, 5, DLG_WIDTH, DLG_HEIGHT - 8, DLG_HEIGHT,
+         "", LB_NAMES, cur_lb, &cur_lb, lb_names, NULL, NULL, NULL},
+        {quick_label, 3, DLG_WIDTH, DLG_HEIGHT - 9, DLG_HEIGHT,
+         N_("Change line breaks to:"), 0, 0, NULL, NULL, NULL, NULL, NULL},
+        {quick_input, 3, DLG_WIDTH, DLG_HEIGHT - 11, DLG_HEIGHT,
+         filename, 58, 0, 0, &filename, "save-file-as", NULL, NULL},
+        {quick_label, 2, DLG_WIDTH, DLG_HEIGHT - 12, DLG_HEIGHT,
+         N_(" Enter file name: "), 0, 0, NULL, NULL, NULL, NULL, NULL},
+        NULL_QuickWidget
+    };
+
+    QuickDialog Quick_options =
+    {
+     DLG_WIDTH, DLG_HEIGHT, -1, -1, N_(" Save As "), "", quick_widgets, 0
+    };
+
+    if (quick_dialog (&Quick_options) != B_CANCEL)
+    {
+       *lb = cur_lb;
+       return filename;
+    }
+
+    return NULL;
+
+#undef DLG_WIDTH
+#undef DLG_HEIGHT
+}
 
 /* Here we want to warn the users of overwriting an existing file,
    but only if they have made a change to the filename */
@@ -463,9 +531,9 @@ edit_save_as_cmd (WEdit *edit)
     char *exp;
     int save_lock = 0;
     int different_filename = 0;
+    LineBreaks lb;
 
-    exp = input_expand_dialog (
-	_(" Save As "), _(" Enter file name: "),MC_HISTORY_EDIT_SAVE_AS, edit->filename);
+    exp = edit_get_save_file_as (edit->filename, &lb);
     edit_push_action (edit, KEY_PRESS + edit->start_display);
 
     if (exp) {
@@ -509,7 +577,7 @@ edit_save_as_cmd (WEdit *edit)
 		edit->stat1.st_mode |= S_IWRITE;
 	    }
 
-	    rv = edit_save_file (edit, exp);
+	    rv = edit_save_file (edit, exp, lb);
 	    switch (rv) {
 	    case 1:
 		/* Succesful, so unlock both files */
@@ -524,6 +592,8 @@ edit_save_as_cmd (WEdit *edit)
 		}
 
 		edit_set_filename (edit, exp);
+		if (lb != LB_ASIS)
+		   edit_reload(edit, exp);
 		g_free (exp);
 		edit->modified = 0;
 		edit->delete_file = 0;
@@ -765,7 +835,7 @@ edit_save_cmd (WEdit *edit)
 
     if (!edit->locked && !edit->delete_file)
 	save_lock = edit_lock_file (edit->filename);
-    res = edit_save_file (edit, edit->filename);
+    res = edit_save_file (edit, edit->filename, LB_ASIS);
 
     /* Maintain modify (not save) lock on failure */
     if ((res > 0 && edit->locked) || save_lock)
