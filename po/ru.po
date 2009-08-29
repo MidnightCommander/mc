@@ -3904,7 +3904,7 @@ msgid "Cannot create %s directory"
 msgstr "Невозможно создать каталог \"%s\""
 
 msgid "Use SI si&ze units"
-msgstr "Вывод в единицах &СИ"
+msgstr "Вывод в едини&цах СИ"
 
 msgid " Not implemented yet "
 msgstr " Пока не реализовано "
