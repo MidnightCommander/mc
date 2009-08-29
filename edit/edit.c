@@ -389,11 +389,11 @@ edit_insert_stream (WEdit * edit, FILE * f)
     return i;
 }
 
-long edit_write_stream (WEdit * edit, FILE * f, LineBreaks lb)
+long edit_write_stream (WEdit * edit, FILE * f)
 {
     long i;
 
-    if (lb == LB_ASIS) {
+    if (edit->lb == LB_ASIS) {
 	for (i = 0; i < edit->last_byte; i++)
 	    if (fputc (edit_get_byte (edit, i), f) < 0)
 		break;
@@ -411,7 +411,7 @@ long edit_write_stream (WEdit * edit, FILE * f, LineBreaks lb)
 	} else { /* (c == '\n' || c == '\r') */
 	    unsigned char c1 = edit_get_byte (edit, i + 1); /* next char */
 
-	    switch (lb) {
+	    switch (edit->lb) {
 	    case LB_UNIX:	/* replace "\r\n" or '\r' to '\n' */
 		/* put one line break unconditionally */
 		if (fputc ('\n', f) < 0)
@@ -465,6 +465,8 @@ long edit_write_stream (WEdit * edit, FILE * f, LineBreaks lb)
 		if (fputc (c1, f) < 0)
 		    return i;
 		break;
+	    case LB_ASIS:	/* default without changes */
+	        break;
 	    }
 	}
     }
@@ -670,6 +672,7 @@ edit_load_file (WEdit *edit)
 	    edit->utf8 = str_isutf8 ( codepage_id );
 #endif
     }
+    edit->lb = LB_ASIS;
     return 0;
 }
 

@@ -149,7 +149,7 @@ edit_refresh_cmd (WEdit * edit)
 
 /* returns 0 on error, -1 on abort */
 static int
-edit_save_file (WEdit *edit, const char *filename, LineBreaks lb)
+edit_save_file (WEdit *edit, const char *filename)
 {
     char *p;
     gchar *tmp;
@@ -266,7 +266,7 @@ edit_save_file (WEdit *edit, const char *filename, LineBreaks lb)
 	file = (FILE *) popen (p, "w");
 
 	if (file) {
-	    filelen = edit_write_stream (edit, file, lb);
+	    filelen = edit_write_stream (edit, file);
 #if 1
 	    pclose (file);
 #else
@@ -290,7 +290,7 @@ edit_save_file (WEdit *edit, const char *filename, LineBreaks lb)
 	    goto error_save;
 	}
 	g_free (p);
-    } else if (lb == LB_ASIS) { /* do not change line breaks */
+    } else if (edit->lb == LB_ASIS) { /* do not change line breaks */
 	long buf;
 	buf = 0;
 	filelen = edit->last_byte;
@@ -343,14 +343,14 @@ edit_save_file (WEdit *edit, const char *filename, LineBreaks lb)
 	file = (FILE *) fopen (savename, "w");
 
 	if (file) {
-	    filelen = edit_write_stream (edit, file, lb);
+	    filelen = edit_write_stream (edit, file);
 	    fclose (file);
 	} else {
-	    edit_error_dialog (_("Error"),
-				get_sys_error (
-						(_
-						(" Cannot open file for writing: "),
-						savename, " ", 0)));
+	    char *msg;
+
+	    msg = g_strdup_printf (_(" Cannot open file for writing: %s "), savename);
+	    edit_error_dialog (_("Error"), msg);
+	    g_free (msg);
 	    goto error_save;
 	}
     }
@@ -470,19 +470,21 @@ edit_set_filename (WEdit *edit, const char *f)
 	edit->dir = g_get_current_dir ();
 #endif
 }
- 
+
 static char *
-edit_get_save_file_as (char *filename, LineBreaks *lb)
+edit_get_save_file_as (WEdit *edit)
 {
 #define DLG_WIDTH 64
 #define DLG_HEIGHT 14
 
-    static char *lb_names[LB_NAMES] =
+    char *filename = edit->filename;
+
+    const char *lb_names[LB_NAMES] =
     {
-     N_("&Do not change"),
-     N_("&Unix format (\\n)"),
-     N_("&Windows/DOS format (\\r\\n)"),
-     N_("&Macintosh format (\\r)")
+        N_("&Do not change"),
+        N_("&Unix format (LF)"),
+        N_("&Windows/DOS format (CR LF)"),
+        N_("&Macintosh format (LF)")
     };
 
     static LineBreaks cur_lb = LB_ASIS;
@@ -490,17 +492,17 @@ edit_get_save_file_as (char *filename, LineBreaks *lb)
     QuickWidget quick_widgets[] =
     {
         {quick_button, 6, 10, DLG_HEIGHT - 3, DLG_HEIGHT,
-         N_("&Cancel"), 0, B_CANCEL, NULL, NULL, NULL},
+	    N_("&Cancel"), 0, B_CANCEL, NULL, NULL, NULL, NULL, NULL},
         {quick_button, 2, 10, DLG_HEIGHT - 3, DLG_HEIGHT,
-         N_("&OK"), 0, B_ENTER, NULL, NULL, NULL, NULL, NULL},
-        {quick_radio, 5, DLG_WIDTH, DLG_HEIGHT - 8, DLG_HEIGHT,
-         "", LB_NAMES, cur_lb, &cur_lb, lb_names, NULL, NULL, NULL},
+	    N_("&OK"), 0, B_ENTER,  NULL, NULL, NULL, NULL, NULL},
+        {quick_radio, 5, DLG_WIDTH, DLG_HEIGHT - 8, DLG_HEIGHT, "",
+	    LB_NAMES, cur_lb, (int *) &cur_lb, (char **) lb_names, NULL, NULL, NULL},
         {quick_label, 3, DLG_WIDTH, DLG_HEIGHT - 9, DLG_HEIGHT,
-         N_("Change line breaks to:"), 0, 0, NULL, NULL, NULL, NULL, NULL},
+	    N_("Change line breaks to:"), 0, 0, NULL, NULL, NULL, NULL, NULL},
         {quick_input, 3, DLG_WIDTH, DLG_HEIGHT - 11, DLG_HEIGHT,
-         filename, 58, 0, 0, &filename, "save-file-as", NULL, NULL},
+	    filename, 58, 0, 0, &filename, "save-file-as", NULL, NULL},
         {quick_label, 2, DLG_WIDTH, DLG_HEIGHT - 12, DLG_HEIGHT,
-         N_(" Enter file name: "), 0, 0, NULL, NULL, NULL, NULL, NULL},
+	    N_(" Enter file name: "), 0, 0, NULL, NULL, NULL, NULL, NULL},
         NULL_QuickWidget
     };
 
@@ -511,7 +513,7 @@ edit_get_save_file_as (char *filename, LineBreaks *lb)
 
     if (quick_dialog (&Quick_options) != B_CANCEL)
     {
-       *lb = cur_lb;
+       edit->lb = cur_lb;
        return filename;
     }
 
@@ -531,9 +533,8 @@ edit_save_as_cmd (WEdit *edit)
     char *exp;
     int save_lock = 0;
     int different_filename = 0;
-    LineBreaks lb;
 
-    exp = edit_get_save_file_as (edit->filename, &lb);
+    exp = edit_get_save_file_as (edit);
     edit_push_action (edit, KEY_PRESS + edit->start_display);
 
     if (exp) {
@@ -577,7 +578,7 @@ edit_save_as_cmd (WEdit *edit)
 		edit->stat1.st_mode |= S_IWRITE;
 	    }
 
-	    rv = edit_save_file (edit, exp, lb);
+	    rv = edit_save_file (edit, exp);
 	    switch (rv) {
 	    case 1:
 		/* Succesful, so unlock both files */
@@ -592,7 +593,7 @@ edit_save_as_cmd (WEdit *edit)
 		}
 
 		edit_set_filename (edit, exp);
-		if (lb != LB_ASIS)
+		if (edit->lb != LB_ASIS)
 		   edit_reload(edit, exp);
 		g_free (exp);
 		edit->modified = 0;
@@ -835,7 +836,7 @@ edit_save_cmd (WEdit *edit)
 
     if (!edit->locked && !edit->delete_file)
 	save_lock = edit_lock_file (edit->filename);
-    res = edit_save_file (edit, edit->filename, LB_ASIS);
+    res = edit_save_file (edit, edit->filename);
 
     /* Maintain modify (not save) lock on failure */
     if ((res > 0 && edit->locked) || save_lock)
@@ -2370,8 +2371,10 @@ edit_collect_completions (WEdit *edit, long start, int word_len,
 			  char *match_expr, struct selection *compl,
 			  int *num)
 {
-    int max_len = 0, i, skip;
     gsize len = 0;
+    gsize max_len = 0;
+    gsize i;
+    int skip;
     GString *temp;
     mc_search_t *srch;
 
@@ -2402,12 +2405,12 @@ edit_collect_completions (WEdit *edit, long start, int word_len,
 
 	skip = 0;
 
-	for (i = 0; i < *num; i++) {
+	for (i = 0; i < (gsize) *num; i++) {
 	    if (strncmp
 		    (
 			(char *) &compl[i].text[word_len],
 			(char *) &temp->str[word_len],
-			max (len, compl[i].len) - word_len
+			max (len, compl[i].len) - (gsize)word_len
 		    ) == 0) {
 		skip = 1;
 		break;		/* skip it, already added */
@@ -2438,7 +2441,8 @@ edit_collect_completions (WEdit *edit, long start, int word_len,
 void
 edit_complete_word_cmd (WEdit *edit)
 {
-    int word_len = 0, i, num_compl = 0, max_len;
+    int word_len = 0, num_compl = 0;
+    gsize i, max_len;
     long word_start = 0;
     unsigned char *bufpos;
     char *match_expr;
@@ -2482,7 +2486,7 @@ edit_complete_word_cmd (WEdit *edit)
 
     g_free (match_expr);
     /* release memory before return */
-    for (i = 0; i < num_compl; i++)
+    for (i = 0; i < (gsize) num_compl; i++)
 	g_free (compl[i].text);
 
 }
