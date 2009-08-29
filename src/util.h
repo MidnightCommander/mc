@@ -66,7 +66,7 @@ const char *size_trunc_sep (double size);
  * not including trailing 0. BUFFER should be at least LEN+1 long.
  *
  * Units: size units (0=bytes, 1=Kbytes, 2=Mbytes, etc.) */
-void size_trunc_len (char *buffer, int len, off_t size, int units);
+void size_trunc_len (char *buffer, unsigned int len, off_t size, int units);
 int  is_exe (mode_t mode);
 const char *string_perm (mode_t mode_bits);
 
