@@ -2522,11 +2522,17 @@ do_panel_event (Gpm_Event *event, WPanel *panel, int *redir)
 
     /* Mouse wheel events */
     if ((event->buttons & GPM_B_UP) && (event->type & GPM_DOWN)) {
-	prev_page (panel);
+	if (panel->top_file > 0)
+	    prev_page (panel);
+	else                    /* We are in first page */
+	    move_up (panel);
 	return MOU_NORMAL;
     }
     if ((event->buttons & GPM_B_DOWN) && (event->type & GPM_DOWN)) {
-	next_page (panel);
+	if (panel->top_file + lines < panel->count)
+	    next_page (panel);
+	else                    /* We are in last page */
+	    move_down (panel);
 	return MOU_NORMAL;
     }
 
