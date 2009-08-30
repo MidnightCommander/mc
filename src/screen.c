@@ -2702,10 +2702,16 @@ set_panel_encoding (WPanel *panel)
     char *cd_path;
 #ifdef HAVE_CHARSET
     const char *errmsg;
+    int offset;
     int r;
-    int width = (panel->widget.x)? panel->widget.cols : panel->widget.cols * (-1);
 
-    r = select_charset (width, 0, source_codepage, FALSE);
+    if (horizontal_split) {
+	offset = (get_current_index () != 0) ? panel->widget.lines : -panel->widget.lines;
+	r = select_charset (0, offset, source_codepage, FALSE);
+    } else {
+	offset = (get_current_index () != 0) ? panel->widget.cols : -panel->widget.cols;
+	r = select_charset (offset, 0, source_codepage, FALSE);
+    }
 
     if (r == SELECT_CHARSET_CANCEL)
 	return; /* Cancel */
