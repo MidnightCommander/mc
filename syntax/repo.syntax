@@ -1,0 +1,9 @@
+# Yum repo syntax highlighting
+#
+# Author: Andy Shevchenko <andy.shevchenko@gmail.com>
+
+context default
+
+context # \n brown
+	spellcheck
+
