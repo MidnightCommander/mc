@@ -186,7 +186,7 @@ status_update (const char *text)
     label_set_text (status_label, text);
 }
 
-static inline void
+static void
 found_num_update (void)
 {
     char buffer [BUF_TINY];

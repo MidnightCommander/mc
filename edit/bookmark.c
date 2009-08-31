@@ -49,7 +49,7 @@
    appended after each other and the last one is always the one found
    by book_mark_found() i.e. last in is the one seen */
 
-static inline struct _book_mark *double_marks (WEdit * edit, struct _book_mark *p)
+static struct _book_mark *double_marks (WEdit * edit, struct _book_mark *p)
 {
     (void) edit;
 

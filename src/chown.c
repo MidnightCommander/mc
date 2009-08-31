@@ -215,7 +215,7 @@ chown_done (void)
     repaint_screen ();
 }
 
-static inline void
+static void
 do_chown (uid_t u, gid_t g)
 {
     if (mc_chown (current_panel->dir.list [current_file].fname, u, g) == -1)

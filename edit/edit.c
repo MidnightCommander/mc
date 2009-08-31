@@ -634,7 +634,7 @@ edit_save_position (WEdit *edit)
 }
 
 /* Clean the WEdit stricture except the widget part */
-static inline void
+static void
 edit_purge_widget (WEdit *edit)
 {
     int len = sizeof (WEdit) - sizeof (Widget);
@@ -1030,7 +1030,7 @@ pop_action (WEdit * edit)
 }
 
 /* is called whenever a modification is made by one of the four routines below */
-static inline void edit_modification (WEdit * edit)
+static void edit_modification (WEdit * edit)
 {
     edit->caches_valid = 0;
     edit->screen_modified = 1;

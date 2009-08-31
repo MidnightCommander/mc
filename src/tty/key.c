@@ -485,7 +485,7 @@ static Window x11_window;
 
 /*** file scope functions **********************************************/
 
-inline static int
+static int
 add_selects (fd_set *select_set)
 {
     int top_fd = 0;

@@ -131,7 +131,7 @@ mc_defines_destroy (gpointer key, gpointer value, gpointer data)
 }
 
 /* Completely destroys the defines tree */
-static inline void
+static void
 destroy_defines (GTree **defines)
 {
     g_tree_traverse (*defines, mc_defines_destroy, G_POST_ORDER, NULL);
@@ -292,7 +292,7 @@ compare_word_to_right (WEdit *edit, long i, const char *text,
     return i;
 }
 
-static inline const char *xx_strchr (const unsigned char *s, int c)
+static const char *xx_strchr (const unsigned char *s, int c)
 {
     while (*s >= '\005' && *s != (unsigned char) c) {
 	s++;
@@ -300,7 +300,7 @@ static inline const char *xx_strchr (const unsigned char *s, int c)
     return (const char *) s;
 }
 
-static inline struct syntax_rule apply_rules_going_right (WEdit * edit, long i, struct syntax_rule rule)
+static struct syntax_rule apply_rules_going_right (WEdit * edit, long i, struct syntax_rule rule)
 {
     struct context_rule *r;
     int contextchanged = 0, c;

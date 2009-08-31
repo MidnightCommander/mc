@@ -587,7 +587,7 @@ void dlg_stop (Dlg_head *h)
     h->running = 0;
 }
 
-static inline void
+static void
 dialog_handle_key (Dlg_head *h, int d_key)
 {
     if (is_abort_char (d_key)) {
@@ -732,7 +732,7 @@ dlg_key_event (Dlg_head *h, int d_key)
     (*h->callback) (h, DLG_POST_KEY, d_key);
 }
 
-static inline int
+static int
 dlg_mouse_event (Dlg_head * h, Gpm_Event * event)
 {
     Widget *item;
@@ -826,7 +826,7 @@ void dlg_process_event (Dlg_head *h, int key, Gpm_Event *event)
 	dlg_key_event (h, key);
 }
 
-static inline void
+static void
 frontend_run_dlg (Dlg_head *h)
 {
     int d_key;

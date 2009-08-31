@@ -131,7 +131,7 @@ vfs_new_handle (struct vfs_class *vclass, void *fsinfo)
 }
 
 /** Find VFS class by file handle */
-static inline struct vfs_class *
+static struct vfs_class *
 vfs_op (int handle)
 {
     struct vfs_openfile *h;
@@ -151,7 +151,7 @@ vfs_op (int handle)
 }
 
 /** Find private file data by file handle */
-static inline void *
+static void *
 vfs_info (int handle)
 {
     struct vfs_openfile *h;
@@ -171,7 +171,7 @@ vfs_info (int handle)
 }
 
 /** Free open file data for given file handle */
-static inline void
+static void
 vfs_free_handle (int handle)
 {
     if (handle < VFS_FIRST_HANDLE ||
@@ -253,7 +253,7 @@ vfs_strip_suffix_from_filename (const char *filename)
     return p;
 }
 
-static inline int
+static int
 path_magic (const char *path)
 {
     struct stat buf;

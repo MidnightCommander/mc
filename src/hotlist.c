@@ -175,7 +175,7 @@ hotlist_refresh (Dlg_head * dlg)
 }
 
 /* If current->data is 0, then we are dealing with a VFS pathname */
-static inline void
+static void
 update_path_name (void)
 {
     const char *text = "";

@@ -177,7 +177,7 @@ string_file_name (file_entry *fe, int len)
     return buffer;
 }
 
-static inline unsigned int ilog10(dev_t n)
+static unsigned int ilog10(dev_t n)
 {
     unsigned int digits = 0;
     do {
@@ -968,7 +968,7 @@ do_select (WPanel *panel, int i)
     }
 }
 
-static inline void
+static void
 do_try_to_select (WPanel *panel, const char *name)
 {
     int i;
@@ -2374,7 +2374,7 @@ static const panel_key_map panel_keymap [] = {
     { 0, 0 }
 };
 
-static inline cb_ret_t
+static cb_ret_t
 panel_key (WPanel *panel, int key)
 {
     int i;
@@ -2521,7 +2521,7 @@ mouse_set_mark (WPanel *panel)
 	do_mark_file (panel, 0);
 }
 
-static inline int
+static int
 mark_if_marking (WPanel *panel, Gpm_Event *event)
 {
     if (event->buttons & GPM_B_RIGHT){

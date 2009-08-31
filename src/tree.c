@@ -907,7 +907,7 @@ static const tree_key_map tree_keymap [] = {
     { 0, 0 }
     };
 
-static inline cb_ret_t
+static cb_ret_t
 tree_key (WTree *tree, int key)
 {
     int i;

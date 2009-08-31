@@ -612,7 +612,7 @@ chown_advanced_done (void)
 }
 
 #if 0
-static inline void do_chown (uid_t u, gid_t g)
+static void do_chown (uid_t u, gid_t g)
 {
     chown (current_panel->dir.list[current_file].fname, u, g);
     file_mark (current_panel, current_file, 0);

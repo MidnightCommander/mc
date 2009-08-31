@@ -125,7 +125,7 @@ static void menubar_paint_idx (WMenu *menubar, int idx, int color)
     }
 }
 
-static inline void menubar_draw_drop (WMenu *menubar)
+static void menubar_draw_drop (WMenu *menubar)
 {
     const int count = menubar->menu [menubar->selected]->count;
     int column = menubar->menu [menubar->selected]->start_x - 1;
@@ -190,10 +190,10 @@ static void menubar_draw (WMenu *menubar)
 		menubar-> menu[menubar->selected]->start_x);
 }
 
-static inline void menubar_remove (WMenu *menubar)
+static void menubar_remove (WMenu *menubar)
 {
     menubar->subsel = 0;
-    if (menubar->dropped){
+    if (menubar->dropped) {
 	menubar->dropped = 0;
 	do_refresh ();
 	menubar->dropped = 1;

@@ -233,7 +233,7 @@ mcview_set_byte (mcview_t * view, off_t offset, byte b)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/*static inline*/
+/*static*/
 void
 mcview_file_load_data (mcview_t * view, off_t byte_index)
 {
