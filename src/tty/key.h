@@ -11,9 +11,14 @@
 
 #include "../../src/tty/tty.h"		/* KEY_F macro */
 
+typedef struct tty_key_event_struct {
+    int		key;
+} tty_key_event_t;
+
+
 gboolean define_sequence (int code, const char *seq, int action);
 
-void init_key (void);
+void tty_key_init (void);
 void init_key_input_fd (void);
 void done_key (void);
 

@@ -415,7 +415,7 @@ void load_qnx_key_defines (void)
 #endif /* HAVE_QNX_KEYS */
 
 
-/* called from key.c/init_key() */
+/* called from key.c/tty_key_init() */
 void load_xtra_key_defines (void)
 {
 #ifdef HAVE_QNX_KEYS

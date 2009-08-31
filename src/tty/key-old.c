@@ -43,14 +43,13 @@
 #include "../../src/tty/tty-internal.h"	/* mouse_enabled */
 #include "../../src/tty/mouse.h"
 #include "../../src/tty/key.h"
-#include "../../src/tty/key-define.h"
+#include "../../src/tty/key_define.h"
 #include "../../src/tty/win.h"		/* xterm_flag */
 
 #include "../../src/main.h"
 #include "../../src/layout.h"		/* winch_flag, mc_refresh() */
 #include "../../src/cons.saver.h"
 #include "../../src/strutil.h"		/* str_casecmp */
-#include "../../src/event/event.h"
 
 #ifdef USE_VFS
 #include "../../vfs/gc.h"
@@ -81,9 +80,6 @@
 #endif				/* __QNXNTO__ */
 
 /*** global variables **************************************************/
-
-int input_fd;
-
 
 /* If true, use + and \ keys normally and select/unselect do if M-+ / M-\.
    and M-- and keypad + / - */
@@ -225,6 +221,7 @@ static int keyboard_key_timeout = 1000000;	/* settable via env */
 /* This holds all the key definitions */
 static key_def *keys = NULL;
 
+static int input_fd;
 static int disabled_channels = 0; /* Disable channels checking */
 
 static SelectList *select_list = NULL;
@@ -762,7 +759,6 @@ s_dispose (SelectList *sel)
     }
 }
 
-
 /*** public functions **************************************************/
 
 /* This has to be called before init_slang or whatever routine
@@ -774,8 +770,6 @@ init_key (void)
     const char *kt = getenv ("KEYBOARD_KEY_TIMEOUT_US");
     if (kt != NULL)
 	keyboard_key_timeout = atoi (kt);
-
-    tty_key_gsource_init();
 
     /* This has to be the first define_sequence */
     /* So, we can assume that the first keys member has ESC */
@@ -839,7 +833,6 @@ done_key (void)
     if (x11_display)
 	mc_XCloseDisplay (x11_display);
 #endif
-    tty_key_gsource_deinit();
 }
 
 void
@@ -1265,14 +1258,6 @@ get_key_code (int no_delay)
 int
 tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
 {
-    sleep(1);
-mc_log("tty_get_event\n");
-    return EV_MOUSE;
-}
-
-int
-tty_get_event_NONUSED (struct Gpm_Event *event, gboolean redo_event, gboolean block)
-{
     int c;
     static int flag = 0;	/* Return value from select */
 #ifdef HAVE_LIBGPM
@@ -1416,8 +1401,6 @@ tty_getch (void)
 {
     Gpm_Event ev;
     int key;
-
-mc_log("tty_getch\n");
 
     ev.x = -1;
     while ((key = tty_get_event (&ev, FALSE, TRUE)) == EV_NONE)

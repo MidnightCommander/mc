@@ -246,7 +246,7 @@ tty_init (gboolean slow, gboolean ugly_lines)
 
     tty_start_interrupt_key ();
 
-    /* It's the small part from the previous init_key() */
+    /* It's the small part from the previous tty_key_init() */
     init_key_input_fd ();
 
     SLsmg_init_smg ();
