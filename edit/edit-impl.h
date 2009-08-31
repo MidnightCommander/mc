@@ -131,6 +131,15 @@ typedef enum {
     EDIT_FILE_MENU	= 2
 } edit_current_file_t;
 
+/* line breaks */
+typedef enum {
+    LB_ASIS = 0,
+    LB_UNIX,
+    LB_WIN,
+    LB_MAC
+} LineBreaks;
+#define LB_NAMES (LB_MAC + 1)
+
 extern const char VERTICAL_MAGIC[5];
 /* if enable_show_tabs_tws ==1 then use visible_tab visible_tws */
 extern int enable_show_tabs_tws;

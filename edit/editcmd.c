@@ -290,7 +290,7 @@ edit_save_file (WEdit *edit, const char *filename)
 	    goto error_save;
 	}
 	g_free (p);
-    } else {
+    } else if (edit->lb == LB_ASIS) { /* do not change line breaks */
 	long buf;
 	buf = 0;
 	filelen = edit->last_byte;
@@ -335,6 +335,24 @@ edit_save_file (WEdit *edit, const char *filename)
 	/* Update the file information, especially the mtime. */
 	if (mc_stat (savename, &edit->stat1) == -1)
 	    goto error_save;
+    } else { /* change line breaks */
+	FILE *file;
+
+	mc_close (fd);
+
+	file = (FILE *) fopen (savename, "w");
+
+	if (file) {
+	    filelen = edit_write_stream (edit, file);
+	    fclose (file);
+	} else {
+	    char *msg;
+
+	    msg = g_strdup_printf (_(" Cannot open file for writing: %s "), savename);
+	    edit_error_dialog (_("Error"), msg);
+	    g_free (msg);
+	    goto error_save;
+	}
     }
 
     if (filelen != edit->last_byte)
@@ -453,6 +471,58 @@ edit_set_filename (WEdit *edit, const char *f)
 #endif
 }
 
+static char *
+edit_get_save_file_as (WEdit *edit)
+{
+#define DLG_WIDTH 64
+#define DLG_HEIGHT 14
+
+    char *filename = edit->filename;
+
+    const char *lb_names[LB_NAMES] =
+    {
+        N_("&Do not change"),
+        N_("&Unix format (LF)"),
+        N_("&Windows/DOS format (CR LF)"),
+        N_("&Macintosh format (LF)")
+    };
+
+    static LineBreaks cur_lb = LB_ASIS;
+
+    QuickWidget quick_widgets[] =
+    {
+        {quick_button, 6, 10, DLG_HEIGHT - 3, DLG_HEIGHT,
+	    N_("&Cancel"), 0, B_CANCEL, NULL, NULL, NULL, NULL, NULL},
+        {quick_button, 2, 10, DLG_HEIGHT - 3, DLG_HEIGHT,
+	    N_("&OK"), 0, B_ENTER,  NULL, NULL, NULL, NULL, NULL},
+        {quick_radio, 5, DLG_WIDTH, DLG_HEIGHT - 8, DLG_HEIGHT, "",
+	    LB_NAMES, cur_lb, (int *) &cur_lb, (char **) lb_names, NULL, NULL, NULL},
+        {quick_label, 3, DLG_WIDTH, DLG_HEIGHT - 9, DLG_HEIGHT,
+	    N_("Change line breaks to:"), 0, 0, NULL, NULL, NULL, NULL, NULL},
+        {quick_input, 3, DLG_WIDTH, DLG_HEIGHT - 11, DLG_HEIGHT,
+	    filename, 58, 0, 0, &filename, "save-file-as", NULL, NULL},
+        {quick_label, 2, DLG_WIDTH, DLG_HEIGHT - 12, DLG_HEIGHT,
+	    N_(" Enter file name: "), 0, 0, NULL, NULL, NULL, NULL, NULL},
+        NULL_QuickWidget
+    };
+
+    QuickDialog Quick_options =
+    {
+     DLG_WIDTH, DLG_HEIGHT, -1, -1, N_(" Save As "), "", quick_widgets, 0
+    };
+
+    if (quick_dialog (&Quick_options) != B_CANCEL)
+    {
+       edit->lb = cur_lb;
+       return filename;
+    }
+
+    return NULL;
+
+#undef DLG_WIDTH
+#undef DLG_HEIGHT
+}
+
 /* Here we want to warn the users of overwriting an existing file,
    but only if they have made a change to the filename */
 /* returns 1 on success */
@@ -464,8 +534,7 @@ edit_save_as_cmd (WEdit *edit)
     int save_lock = 0;
     int different_filename = 0;
 
-    exp = input_expand_dialog (
-	_(" Save As "), _(" Enter file name: "),MC_HISTORY_EDIT_SAVE_AS, edit->filename);
+    exp = edit_get_save_file_as (edit);
     edit_push_action (edit, KEY_PRESS + edit->start_display);
 
     if (exp) {
@@ -524,6 +593,8 @@ edit_save_as_cmd (WEdit *edit)
 		}
 
 		edit_set_filename (edit, exp);
+		if (edit->lb != LB_ASIS)
+		   edit_reload(edit, exp);
 		g_free (exp);
 		edit->modified = 0;
 		edit->delete_file = 0;
@@ -2300,8 +2371,10 @@ edit_collect_completions (WEdit *edit, long start, int word_len,
 			  char *match_expr, struct selection *compl,
 			  int *num)
 {
-    int max_len = 0, i, skip;
     gsize len = 0;
+    gsize max_len = 0;
+    gsize i;
+    int skip;
     GString *temp;
     mc_search_t *srch;
 
@@ -2332,12 +2405,12 @@ edit_collect_completions (WEdit *edit, long start, int word_len,
 
 	skip = 0;
 
-	for (i = 0; i < *num; i++) {
+	for (i = 0; i < (gsize) *num; i++) {
 	    if (strncmp
 		    (
 			(char *) &compl[i].text[word_len],
 			(char *) &temp->str[word_len],
-			max (len, compl[i].len) - word_len
+			max (len, compl[i].len) - (gsize)word_len
 		    ) == 0) {
 		skip = 1;
 		break;		/* skip it, already added */
@@ -2368,7 +2441,8 @@ edit_collect_completions (WEdit *edit, long start, int word_len,
 void
 edit_complete_word_cmd (WEdit *edit)
 {
-    int word_len = 0, i, num_compl = 0, max_len;
+    int word_len = 0, num_compl = 0;
+    gsize i, max_len;
     long word_start = 0;
     unsigned char *bufpos;
     char *match_expr;
@@ -2412,7 +2486,7 @@ edit_complete_word_cmd (WEdit *edit)
 
     g_free (match_expr);
     /* release memory before return */
-    for (i = 0; i < num_compl; i++)
+    for (i = 0; i < (gsize) num_compl; i++)
 	g_free (compl[i].text);
 
 }

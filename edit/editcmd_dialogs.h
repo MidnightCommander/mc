@@ -17,7 +17,7 @@ struct etags_hash_struct;
 
 struct selection {
     gchar *text;
-    int len;
+    gsize len;
 };
 
 /*** global variables defined in .c file *********************************************************/

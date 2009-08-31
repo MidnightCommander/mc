@@ -136,6 +136,8 @@ struct WEdit {
     const edit_key_map_type *ext_map;
     GIConv converter;
 
+    /* line break */
+    LineBreaks lb;
     int extmod;
 
     char *labels[10];
