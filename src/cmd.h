@@ -7,6 +7,7 @@
 
 #ifndef MC_CMD_H
 #define MC_CMD_H
+struct mcevent_struct;
 
 void netlink_cmd (void);
 void ftplink_cmd (void);

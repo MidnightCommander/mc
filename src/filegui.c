@@ -197,6 +197,7 @@ check_progress_buttons (FileOpContext *ctx)
     ui = ctx->ui;
 
     event.x = -1;		/* Don't show the GPM cursor */
+mc_log("check_progress_buttons\n");
     c = tty_get_event (&event, FALSE, FALSE);
     if (c == EV_NONE)
 	return FILE_CONT;

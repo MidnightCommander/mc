@@ -831,9 +831,11 @@ frontend_run_dlg (Dlg_head *h)
 {
     int d_key;
     Gpm_Event event;
+mc_log("frontend_run_dlg\n");
 
     event.x = -1;
     while (h->running) {
+mc_log("frontend_run_dlg 1\n");
 	if (winch_flag)
 	    change_screen_size ();
 
@@ -848,17 +850,20 @@ frontend_run_dlg (Dlg_head *h)
 	    if (!h->running)
 		break;
 	}
+mc_log("frontend_run_dlg 2\n");
 
 	update_cursor (h);
 
 	/* Clear interrupt flag */
 	tty_got_interrupt ();
 	d_key = tty_get_event (&event, h->mouse_status == MOU_REPEAT, TRUE);
+mc_log("frontend_run_dlg 3\n");
 
 	dlg_process_event (h, d_key, &event);
 
 	if (!h->running)
 	    (*h->callback) (h, DLG_VALIDATE, 0);
+mc_log("frontend_run_dlg 4\n");
     }
 }
 
