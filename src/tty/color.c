@@ -75,14 +75,21 @@ configure_colors_string (const char *the_color_string)
     p = color_strings;
 
     while ((p != NULL) && (*p != NULL)) {
-	char **cfb; /* color, fore, back*/
+	char **cfb; /* color, fore, back */
 	/* cfb[0] - entry name
 	 * cfb[1] - fore color
-	 * cfb[20 - back color
+	 * cfb[2] - back color
 	 */
 	char *e;
 
 	cfb = g_strsplit_set (*p, "=,", 3);
+	p++;
+
+	if (cfb[0] == NULL) {
+	    g_strfreev (cfb);
+	    continue;
+	}
+
 	/* append '=' to the entry name */
 	e = g_strdup_printf ("%s=", cfb[0]);
 	g_free (cfb[0]);
@@ -102,7 +109,6 @@ configure_colors_string (const char *the_color_string)
 	    }
 
 	g_strfreev (cfb);
-	p++;
     }
 
    g_strfreev (color_strings);
