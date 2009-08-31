@@ -78,11 +78,41 @@
 static void
 mcview_continue_search_cmd (mcview_t * view)
 {
+
     if (view->last_search_string != NULL) {
         mcview_do_search (view);
     } else {
-        /* if not... then ask for an expression */
-        mcview_search_cmd (view);
+        /* find last search string in history */
+        GList *history;
+        history = history_get (MC_HISTORY_SHARED_SEARCH);
+        if (history != NULL && history->data != NULL) {
+            view->last_search_string = (gchar *) g_strdup(history->data);
+            history = g_list_first (history);
+            g_list_foreach (history, (GFunc) g_free, NULL);
+            g_list_free (history);
+
+            view->search = mc_search_new (view->last_search_string, -1);
+            view->search_nroff_seq = mcview_nroff_seq_new (view);
+
+            if (!view->search) {
+                /* if not... then ask for an expression */
+                g_free(view->last_search_string);
+                mcview_search_cmd (view);
+            } else {
+                view->search->search_type = view->search_type;
+                view->search->is_all_charsets = view->search_all_codepages;
+                view->search->is_case_sentitive = view->search_case;
+                view->search->search_fn = mcview_search_cmd_callback;
+                view->search->update_fn = mcview_search_update_cmd_callback;
+                view->search->whole_words = view->whole_words;
+
+                mcview_do_search (view);
+            }
+        } else {
+            /* if not... then ask for an expression */
+            g_free(view->last_search_string);
+            mcview_search_cmd (view);
+        }
     }
 }
 

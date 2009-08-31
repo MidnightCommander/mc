@@ -40,6 +40,7 @@
 #include "../src/global.h"
 #include "../src/wtools.h"
 #include "internal.h"
+#include "../src/history.h"
 #include "../src/charsets.h"
 
 /*** global variables ****************************************************************************/
@@ -65,7 +66,6 @@ mcview_dialog_search (mcview_t * view)
         SEARCH_DLG_WIDTH = 58
     };
 
-    char *defval = g_strdup (view->last_search_string != NULL ? view->last_search_string : "");
     char *exp = NULL;
 #ifdef HAVE_CHARSET
     GString *tmp;
@@ -111,8 +111,8 @@ mcview_dialog_search (mcview_t * view)
          (void *) &ttype_of_search, const_cast (char **, list_of_types), NULL, NULL, NULL},
 
 
-        {quick_input, 3, SEARCH_DLG_WIDTH, 3, SEARCH_DLG_HEIGHT, defval, 52, 0,
-         0, &exp, N_("Search"), NULL, NULL},
+        {quick_input, 3, SEARCH_DLG_WIDTH, 3, SEARCH_DLG_HEIGHT, INPUT_LAST_TEXT, 52, 0,
+         0, &exp, MC_HISTORY_SHARED_SEARCH, NULL, NULL},
 
         {quick_label, 2, SEARCH_DLG_WIDTH, 2, SEARCH_DLG_HEIGHT,
          N_(" Enter search string:"), 0, 0, 0, 0, 0, NULL, NULL},
@@ -125,14 +125,11 @@ mcview_dialog_search (mcview_t * view)
         "[Input Line Keys]", quick_widgets, 0
     };
 
-    convert_to_display (defval);
-
     qd_result = quick_dialog (&Quick_input);
     g_strfreev (list_of_types);
 
     if (qd_result == B_CANCEL) {
         g_free (exp);
-        g_free (defval);
         return FALSE;
     }
 
@@ -145,7 +142,6 @@ mcview_dialog_search (mcview_t * view)
 
     if (exp == NULL || exp[0] == '\0') {
         g_free (exp);
-        g_free (defval);
         return FALSE;
     }
 #ifdef HAVE_CHARSET
@@ -171,7 +167,6 @@ mcview_dialog_search (mcview_t * view)
     view->search_nroff_seq = mcview_nroff_seq_new (view);
     if (!view->search) {
         g_free (exp);
-        g_free (defval);
         return FALSE;
     }
 
@@ -183,6 +178,5 @@ mcview_dialog_search (mcview_t * view)
     view->search->whole_words = view->whole_words;
 
     g_free (exp);
-    g_free (defval);
     return TRUE;
 }
