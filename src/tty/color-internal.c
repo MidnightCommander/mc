@@ -79,29 +79,20 @@ struct colorpair color_map [] = {
     { "gauge=",      0, 0 },	/* Color of the progress bar (percentage) *//* 21 */
     { "input=",      0, 0 },
 
-    /* Per file types colors */
-    { "directory=",  0, 0 },                               /*  23 */
-    { "executable=", 0, 0 },
-    { "link=",       0, 0 },	/* symbolic link (neither stale nor link to directory) */
-    { "stalelink=",  0, 0 },	/* stale symbolic link */
-    { "device=",     0, 0 },
-    { "special=",    0, 0 },	/* sockets, fifo */
-    { "core=",       0, 0 },	/* core files */              /* 29 */
-
-    { 0,             0, 0 },	/* not usable (DEFAULT_COLOR_INDEX) *//* 30 */
+    { 0,             0, 0 },	/* not usable (DEFAULT_COLOR_INDEX) *//* 23 */
     { 0,             0, 0 },	/* unused */
     { 0,             0, 0 },	/* not usable (A_REVERSE) */
     { 0,             0, 0 },	/* not usable (A_REVERSE_BOLD) */
 
-    /* editor colors start at 34 */
-    { "editnormal=",     0, 0 },	/* normal */       /* 34 */
+    /* editor colors start at 27 */
+    { "editnormal=",     0, 0 },	/* normal */       /* 27 */
     { "editbold=",       0, 0 },	/* search->found */
     { "editmarked=",     0, 0 },	/* marked/selected */
     { "editwhitespace=", 0, 0 },	/* whitespace */
     { "editlinestate=",  0, 0 },	/* line number bar*/
 
-    /* error dialog colors start at 39 */
-    { "errdhotnormal=",  0, 0 },	/* Error dialog normal/hot */ /* 38 */
+    /* error dialog colors start at 32 */
+    { "errdhotnormal=",  0, 0 },	/* Error dialog normal/hot */ /* 32 */
     { "errdhotfocus=",   0, 0 },	/* Error dialog focused/hot */
 };
 

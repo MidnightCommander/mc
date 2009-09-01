@@ -49,6 +49,7 @@
 
 #include "../src/mcconfig/mcconfig.h"
 #include "../src/args.h"
+#include "../src/filehighlight/fhl.h"
 
 #include "dir.h"
 #include "dialog.h"
@@ -106,6 +107,8 @@
 /* The structures for the panels */
 WPanel *left_panel = NULL;
 WPanel *right_panel = NULL;
+
+mc_fhl_t *mc_filehighlight;
 
 /* The pointer to the tree */
 WTree *the_tree = NULL;
@@ -1994,10 +1997,12 @@ main (int argc, char *argv[])
 #endif				/* HAVE_SUBSHELL_SUPPORT */
 	prompt = (geteuid () == 0) ? "# " : "$ ";
 
+    mc_filehighlight = mc_fhl_new (TRUE);
     /* Program main loop */
     if (!midnight_shutdown)
 	do_nc ();
 
+    mc_fhl_free (&mc_filehighlight);
     /* Save the tree store */
     tree_store_save ();
 

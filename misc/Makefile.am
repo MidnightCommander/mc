@@ -11,6 +11,7 @@ LIBFILES_CONST = \
 	edit.indent.rc \
 	edit.spell.rc \
 	mc.lib \
+	filehighlight.ini \
 	mc.menu
 
 

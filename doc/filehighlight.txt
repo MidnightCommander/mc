@@ -1,0 +1,30 @@
+Main section [filehighlight] contain key names as highlight groups and values as color pairs
+color pair described as 'foreground;background'. 'background' may be omited.
+
+other sections describe filegroup of highlight.
+Keys in these groups:
+
+type
+    - file type. if present, all other option ignored;
+regexp
+    - regular expression. If present, 'extensions' option ignored;
+extensions
+    - list of extensions of files. Separated by ';' sign.
+
+'type' key may have values:
+
+- FILE - all files.
+  - FILE_EXE
+- DIR - all directoryes
+  - LINK_DIR
+- LINK (all links except stale link)
+  - HARDLINK
+  - SYMLINK
+- STALE_LINK
+- DEVICE (all device files)
+  - DEVICE_BLOCK
+  - DEVICE_CHAR
+- SPECIAL (all special files)
+  - SPECIAL_SOCKET
+  - SPECIAL_FIFO
+  - SPECIAL_DOOR

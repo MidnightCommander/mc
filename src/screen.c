@@ -37,6 +37,7 @@
 #include "../src/tty/color.h"
 #include "../src/tty/mouse.h"		/* For Gpm_Event */
 #include "../src/tty/key.h"		/* XCTRL and ALT macros  */
+#include "../src/filehighlight/fhl.h"
 
 #include "dir.h"
 #include "panel.h"
@@ -158,8 +159,10 @@ add_permission_string (char *dest, int width, file_entry *fe, int attr, int colo
                 tty_setcolor (MARKED_SELECTED_COLOR);
             else
                 tty_setcolor (MARKED_COLOR);
-        } else
+        } else if (color >= 0)
             tty_setcolor (color);
+	else
+            tty_lowlevel_setcolor (-color);
 
 	tty_print_char (dest[i]);
     }
@@ -470,37 +473,7 @@ file_compute_color (int attr, file_entry *fe)
 	    return (NORMAL_COLOR);
     }
 
-    /* if filetype_mode == true  */
-    if (S_ISDIR (fe->st.st_mode))
-	return (DIRECTORY_COLOR);
-    else if (S_ISLNK (fe->st.st_mode)) {
-	if (fe->f.link_to_dir)
-	    return (DIRECTORY_COLOR);
-	else if (fe->f.stale_link)
-	    return (STALE_LINK_COLOR);
-	else
-	    return (LINK_COLOR);
-    } else if (S_ISSOCK (fe->st.st_mode))
-	return (SPECIAL_COLOR);
-    else if (S_ISCHR (fe->st.st_mode))
-	return (DEVICE_COLOR);
-    else if (S_ISBLK (fe->st.st_mode))
-	return (DEVICE_COLOR);
-    else if (S_ISNAM (fe->st.st_mode))
-	return (DEVICE_COLOR);
-    else if (S_ISFIFO (fe->st.st_mode))
-	return (SPECIAL_COLOR);
-    else if (S_ISDOOR (fe->st.st_mode))
-	return (SPECIAL_COLOR);
-    else if (!S_ISREG (fe->st.st_mode))
-	return (STALE_LINK_COLOR);	/* non-regular file of unknown kind */
-    else if (is_exe (fe->st.st_mode))
-	return (EXECUTABLE_COLOR);
-    else if (fe->fname && (!strcmp (fe->fname, "core")
-			   || !strcmp (extension (fe->fname), "core")))
-	return (CORE_COLOR);
-
-    return (NORMAL_COLOR);
+    return mc_fhl_get_color (mc_filehighlight, fe);
 }
 
 /* Formats the file number file_index of panel in the buffer dest */
@@ -551,7 +524,10 @@ format_file (char *dest, int limit, WPanel *panel, int file_index, int width, in
                     perm = 2;
             }
 
-            tty_setcolor (color);
+	    if (color >= 0)
+		tty_setcolor (color);
+	    else
+		tty_lowlevel_setcolor (-color);
 
             preperad_text = (char*) str_fit_to_term(txt, len, format->just_mode);
             if (perm)
