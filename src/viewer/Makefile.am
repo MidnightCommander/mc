@@ -20,6 +20,6 @@ libmcviewer_la_SOURCES = \
 	search.c
 
 libmcviewer_la_CFLAGS=-I../ -I$(top_srcdir)/src \
-	$(GLIB_CFLAGS) \
+	$(GLIB_CFLAGS) $(PCRE_CFLAGS) \
 	-DDATADIR=\""$(pkgdatadir)/"\" -DLOCALEDIR=\""$(localedir)"\"
 
