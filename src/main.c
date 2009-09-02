@@ -48,6 +48,7 @@
 #include "../src/tty/win.h"		/* xterm_flag */
 
 #include "../src/mcconfig/mcconfig.h"
+#include "../src/args.h"
 
 #include "dir.h"
 #include "dialog.h"
@@ -96,8 +97,6 @@
 #ifdef USE_VFS
 #include "../vfs/gc.h"
 #endif
-
-#include "popt.h"
 
 /* When the modes are active, left_panel, right_panel and tree_panel */
 /* Point to a proper data structure.  You should check with the functions */
@@ -202,17 +201,8 @@ WLabel *the_hint;
 /* The button bar */
 WButtonBar *the_bar;
 
-/* For slow terminals */
-static int slow_terminal = 0;
-
-/* If true use +, -, | for line drawing */
-static int ugly_line_drawing = 0;
-
 /* Mouse type: GPM, xterm or none */
 Mouse_Type use_mouse_p = MOUSE_NONE;
-
-/* If true, assume we are running on an xterm terminal */
-static int force_xterm = 0;
 
 /* If on, default for "No" in delete operations */
 int safe_delete = 0;
@@ -272,21 +262,12 @@ static char *this_dir = NULL;
 int xtree_mode = 0;
 
 /* If set, then print to the given file the last directory we were at */
-static char *last_wd_file = NULL;
 static char *last_wd_string = NULL;
 /* Set to 1 to suppress printing the last directory */
 static int print_last_revert = 0;
 
-/* Set to force black and white display at program startup */
-static gboolean disable_colors = FALSE;
-/* Force colors, only used by Slang */
-static gboolean force_colors = FALSE;
-
-/* colors specified on the command line: they override any other setting */
-char *command_line_colors = NULL;
-
 /* File name to view if argument was supplied */
-static const char *view_one_file = NULL;
+const char *view_one_file = NULL;
 
 /* File name to edit if argument was supplied */
 const char *edit_one_file = NULL;
@@ -1215,11 +1196,11 @@ init_xterm_support (void)
     xmouse_seq = tty_tgetstr ("Km");
 
     if (strcmp (termvalue, "cygwin") == 0) {
-	force_xterm = 1;
+	mc_args__force_xterm = 1;
 	use_mouse_p = MOUSE_DISABLED;
     }
 
-    if (force_xterm || strncmp (termvalue, "xterm", 5) == 0
+    if (mc_args__force_xterm || strncmp (termvalue, "xterm", 5) == 0
 	|| strncmp (termvalue, "konsole", 7) == 0
 	|| strncmp (termvalue, "rxvt", 4) == 0
 	|| strcmp (termvalue, "Eterm") == 0
@@ -1706,7 +1687,7 @@ do_nc (void)
 	midnight_shutdown = 1;
 
 	/* destroy_dlg destroys even current_panel->cwd, so we have to save a copy :) */
-	if (last_wd_file && vfs_current_is_local ()) {
+	if (mc_args__last_wd_file && vfs_current_is_local ()) {
 	    last_wd_string = g_strdup (current_panel->cwd);
 	}
 	done_mc ();
@@ -1821,208 +1802,36 @@ init_sigchld (void)
 }
 
 static void
-print_mc_usage (poptContext ctx, FILE *stream)
+mc_main__setup_by_args(int argc, char *argv[])
 {
-    int leftColWidth;
+    const char *base;
+    char *tmp;
 
-    poptSetOtherOptionHelp (ctx,
-			    _("[flags] [this_dir] [other_panel_dir]\n"));
-
-    /* print help for options */
-    leftColWidth = poptPrintHelp (ctx, stream, 0);
-    fprintf (stream, "  %-*s   %s\n", leftColWidth, _("+number"),
-	     _("Set initial line number for the internal editor"));
-    fputs (_
-	   ("\n"
-	    "Please send any bug reports (including the output of `mc -V')\n"
-	    "to mc-devel@gnome.org\n"), stream);
-    show_version (0);
-}
-
-static void
-print_color_usage (void)
-{
-    /*
-     * FIXME: undocumented keywords: viewunderline, editnormal, editbold,
-     * and editmarked.  To preserve translations, lines should be split.
-     */
-    /* TRANSLATORS: don't translate keywords and names of colors */
-    fputs (_
-	   ("--colors KEYWORD={FORE},{BACK}\n\n"
-	    "{FORE} and {BACK} can be omitted, and the default will be used\n"
-	    "\n" "Keywords:\n"
-	    "   Global:       errors, reverse, gauge, input, viewunderline\n"
-	    "   File display: normal, selected, marked, markselect\n"
-	    "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-	    "                 errdhotfocus\n"
-	    "   Menus:        menu, menuhot, menusel, menuhotsel\n"
-	    "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-	    "                 editlinestate\n"), stdout);
-    fputs (_
-	   (
-	    "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-	    "   File types:   directory, executable, link, stalelink, device, special, core\n"
-	    "\n" "Colors:\n"
-	    "   black, gray, red, brightred, green, brightgreen, brown,\n"
-	    "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-	    "   brightcyan, lightgray and white\n\n"), stdout);
-}
-
-static void
-process_args (poptContext ctx, int c, const char *option_arg)
-{
-    switch (c) {
-    case 'V':
-	show_version (1);
-	exit (0);
-	break;
-
-    case 'c':
-	disable_colors = FALSE;
-	force_colors = TRUE;	/* for S-Lang only */
-	break;
-
-    case 'f':
-	printf ("%s (%s)\n", mc_home, mc_home_alt);
-	exit (0);
-	break;
+    if (mc_args__nomouse)
+	use_mouse_p = MOUSE_DISABLED;
 
 #ifdef USE_NETCODE
-    case 'l':
-	mc_setctl ("/#ftp:", VFS_SETCTL_LOGFILE, (void *) option_arg);
+    if (mc_args__netfs_logfile != NULL)
+    {
+	mc_setctl ("/#ftp:", VFS_SETCTL_LOGFILE, (void *) mc_args__netfs_logfile);
 #ifdef WITH_SMBFS
-	smbfs_set_debugf (option_arg);
+	smbfs_set_debugf (mc_args__netfs_logfile);
 #endif				/* WITH_SMBFS */
-	break;
+    }
 
 #ifdef WITH_SMBFS
-    case 'D':
-	smbfs_set_debug (atoi (option_arg));
-	break;
+    if (mc_args__debug_level != 0)
+    {
+	smbfs_set_debug (mc_args__debug_level);
+    }
 #endif				/* WITH_SMBFS */
 #endif				/* USE_NETCODE */
 
-    case 'd':
-	use_mouse_p = MOUSE_DISABLED;
-	break;
 
-#ifdef HAVE_SUBSHELL_SUPPORT
-    case 'u':
-	use_subshell = 0;
-	break;
-#endif				/* HAVE_SUBSHELL_SUPPORT */
-
-    case 'H':
-	print_color_usage ();
-	exit (0);
-	break;
-
-    case 'h':
-	print_mc_usage (ctx, stdout);
-	exit (0);
-    }
-}
-
-static const struct poptOption argument_table[] = {
-    /* generic options */
-    {"help", 'h', POPT_ARG_NONE, {NULL}, 'h',
-     N_("Displays this help message"), NULL},
-    {"version", 'V', POPT_ARG_NONE, {NULL}, 'V',
-     N_("Displays the current version"), NULL},
-
-    /* terminal options */
-    {"xterm", 'x', POPT_ARG_NONE, {&force_xterm}, 0,
-     N_("Forces xterm features"), NULL},
-    {"nomouse", 'd', POPT_ARG_NONE, {NULL}, 'd',
-     N_("Disable mouse support in text version"), NULL},
-#ifdef HAVE_SLANG
-    {"termcap", 't', 0, {&SLtt_Try_Termcap}, 0,
-     N_("Tries to use termcap instead of terminfo"), NULL},
-#endif
-    {"resetsoft", 'k', POPT_ARG_NONE, {&reset_hp_softkeys}, 0,
-     N_("Resets soft keys on HP terminals"), NULL},
-    {"slow", 's', POPT_ARG_NONE, {&slow_terminal}, 0,
-     N_("To run on slow terminals"), NULL},
-    {"stickchars", 'a', POPT_ARG_NONE, {&ugly_line_drawing}, 0,
-     N_("Use stickchars to draw"), NULL},
-
-    /* color options */
-    {"nocolor", 'b', POPT_ARG_NONE, {&disable_colors}, 0,
-     N_("Requests to run in black and white"), NULL},
-    {"color", 'c', POPT_ARG_NONE, {NULL}, 'c',
-     N_("Request to run in color mode"), NULL},
-    {"colors", 'C', POPT_ARG_STRING, {&command_line_colors}, 0,
-     N_("Specifies a color configuration"), NULL},
-    {"help-colors", 'H', POPT_ARG_NONE, {NULL}, 'H',
-     N_("Displays a help screen on how to change the color scheme"), NULL},
-
-    /* debug options */
-#ifdef USE_NETCODE
-    {"ftplog", 'l', POPT_ARG_STRING, {NULL}, 'l',
-     N_("Log ftp dialog to specified file"), NULL},
-#ifdef WITH_SMBFS
-    {"debuglevel", 'D', POPT_ARG_STRING, {NULL}, 'D',
-     N_("Set debug level"), NULL},
-#endif
-#endif
-
-    /* options for wrappers */
-    {"datadir", 'f', POPT_ARG_NONE, {NULL}, 'f',
-     N_("Print data directory"), NULL},
-    {"printwd", 'P', POPT_ARG_STRING, {&last_wd_file}, 0,
-     N_("Print last working directory to specified file"), NULL},
-
-    /* subshell options */
-#ifdef HAVE_SUBSHELL_SUPPORT
-    {"subshell", 'U', POPT_ARG_NONE, {&use_subshell}, 0,
-     N_("Enables subshell support (default)"), NULL},
-    {"nosubshell", 'u', POPT_ARG_NONE, {NULL}, 'u',
-     N_("Disables subshell support"), NULL},
-#endif
-
-    /* single file operations */
-    {"view", 'v', POPT_ARG_STRING, {&view_one_file}, 0,
-     N_("Launches the file viewer on a file"), NULL},
-#ifdef USE_INTERNAL_EDIT
-    {"edit", 'e', POPT_ARG_STRING, {&edit_one_file}, 0,
-     N_("Edits one file"), NULL},
-#endif
-
-    {NULL, '\0', 0, {NULL}, 0, NULL , NULL}
-};
-
-static void
-handle_args (int argc, char *argv[])
-{
-    char *tmp;
-    poptContext ctx;
-    const char *base;
-    int c;
-
-    ctx =
-	poptGetContext ("mc", argc, argv, argument_table,
-			POPT_CONTEXT_NO_EXEC);
-
-    while ((c = poptGetNextOpt (ctx)) > 0) {
-	process_args (ctx, c, poptGetOptArg (ctx));
-    }
-
-    if (c < -1) {
-	print_mc_usage (ctx, stderr);
-	fprintf (stderr, "%s: %s\n",
-		 poptBadOption (ctx, POPT_BADOPTION_NOALIAS),
-		 poptStrerror (c));
-	exit (1);
-    }
-
-    tmp = poptGetArg (ctx);
-
-    /*
-     * Check for special invocation names mcedit and mcview,
-     * if none apply then set the current directory and the other
-     * directory from the command line arguments
-     */
     base = x_basename (argv[0]);
+    tmp = (argc > 0)? argv[1] : NULL;
+
+
     if (!STRNCOMP (base, "mce", 3) || !STRCOMP (base, "vi")) {
 	edit_one_file = "";
 	if (tmp) {
@@ -2056,7 +1865,7 @@ handle_args (int argc, char *argv[])
 		if (*tmp == '+' && g_ascii_isdigit ((gchar) tmp[1])) {
 		    int start_line = atoi (tmp);
 		    if (start_line > 0) {
-			char *file = poptGetArg (ctx);
+			char *file = (argc > 1) ? argv[2] : NULL;
 			if (file) {
 			    tmp = file;
 			    edit_one_file_start_line = start_line;
@@ -2077,12 +1886,13 @@ handle_args (int argc, char *argv[])
 	/* sets the current dir and the other dir */
 	if (tmp) {
 	    this_dir = g_strdup (tmp);
-	    if ((tmp = poptGetArg (ctx)))
+	    tmp = (argc > 1) ? argv[2] : NULL;
+	    if (tmp)
 		other_dir = g_strdup (tmp);
 	}
     }
 
-    poptFreeContext (ctx);
+
 }
 
 int
@@ -2113,7 +1923,10 @@ main (int argc, char *argv[])
     SLtt_Ignore_Beep = 1;
 #endif
 
-    handle_args (argc, argv);
+    if ( !mc_args_handle (&argc, &argv, "mc"))
+	return 1;
+    mc_main__setup_by_args(argc,argv);
+
 
     /* NOTE: This has to be called before tty_init or whatever routine
        calls any define_sequence */
@@ -2139,11 +1952,11 @@ main (int argc, char *argv[])
 
     /* Must be done before init_subshell, to set up the terminal size: */
     /* FIXME: Should be removed and LINES and COLS computed on subshell */
-    tty_init ((gboolean) slow_terminal, (gboolean) ugly_line_drawing);
+    tty_init ((gboolean) mc_args__slow_terminal, (gboolean) mc_args__ugly_line_drawing);
 
     load_setup ();
 
-    tty_init_colors (disable_colors, force_colors);
+    tty_init_colors (mc_args__disable_colors, mc_args__force_colors);
     dlg_set_default_colors ();
 
     /* create home directory */
@@ -2210,10 +2023,10 @@ main (int argc, char *argv[])
 	handle_console (CONSOLE_DONE);
     putchar ('\n');		/* Hack to make shell's prompt start at left of screen */
 
-    if (last_wd_file && last_wd_string && !print_last_revert
+    if (mc_args__last_wd_file && last_wd_string && !print_last_revert
 	&& !edit_one_file && !view_one_file) {
 	int last_wd_fd =
-	    open (last_wd_file, O_WRONLY | O_CREAT | O_TRUNC | O_EXCL,
+	    open (mc_args__last_wd_file, O_WRONLY | O_CREAT | O_TRUNC | O_EXCL,
 		  S_IRUSR | S_IWUSR);
 
 	if (last_wd_fd != -1) {

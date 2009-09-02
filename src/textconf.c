@@ -113,13 +113,11 @@ static const char *const features[] = {
 };
 
 void
-show_version (int verbose)
+show_version (void)
 {
     int i;
 
     printf (_("GNU Midnight Commander %s\n"), VERSION);
-    if (!verbose)
-	return;
 
 #ifdef USE_VFS
     printf (_("Virtual File System:"));

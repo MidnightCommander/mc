@@ -38,7 +38,7 @@
 
 #include "../../src/setup.h"		/* setup_color_string, term_color_string */
 
-extern char *command_line_colors;
+char *command_line_colors = NULL;
 
 /* Set if we are actually using colors */
 gboolean use_colors = FALSE;

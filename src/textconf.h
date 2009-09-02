@@ -6,6 +6,6 @@
 #ifndef MC_TEXTCONF_H
 #define MC_TEXTCONF_H
 
-extern void show_version (int verbose);
+extern void show_version (void);
 
 #endif
