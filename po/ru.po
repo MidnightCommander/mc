@@ -16,8 +16,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-26 18:15+0000\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-09-02 23:01+0300\n"
 "PO-Revision-Date: 2009-08-26 23:37+0300\n"
 "Last-Translator: Ilia Maslakov <il.smind@gmail.com>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
@@ -67,8 +67,15 @@ msgstr " Файл %s слишком большой "
 msgid "Macro recursion is too deep"
 msgstr "Слишком глубокая рекурсия макросов"
 
-msgid "&Dismiss"
-msgstr "&Закрыть"
+msgid "Search"
+msgstr "Поиск"
+
+#, c-format
+msgid " %d items found, %d bookmarks added "
+msgstr " %d найдено, %d закладок добавлено "
+
+msgid " Search string not found "
+msgstr " Искомая строка не найдена "
 
 msgid "Warning"
 msgstr "Предупреждение"
@@ -94,6 +101,10 @@ msgstr " Ошибка записи в канал: "
 msgid " Cannot open pipe for writing: "
 msgstr " Невозможно открыть канал для записи: "
 
+#, fuzzy, c-format
+msgid " Cannot open file for writing: %s "
+msgstr " Невозможно открыть канал для записи: "
+
 msgid "Quick save "
 msgstr "Быстрое сохранение"
 
@@ -112,11 +123,26 @@ msgstr "Расширение:"
 msgid " Edit Save Mode "
 msgstr " Режим сохранения "
 
-msgid " Save As "
-msgstr " Сохранить как "
+msgid "&Do not change"
+msgstr ""
+
+msgid "&Unix format (LF)"
+msgstr ""
+
+msgid "&Windows/DOS format (CR LF)"
+msgstr ""
+
+msgid "&Macintosh format (LF)"
+msgstr ""
+
+msgid "Change line breaks to:"
+msgstr ""
 
 msgid " Enter file name: "
 msgstr " Введите имя файла: "
+
+msgid " Save As "
+msgstr " Сохранить как "
 
 msgid " A file already exists with this name. "
 msgstr " Файл с таким именем уже существует. "
@@ -126,9 +152,6 @@ msgstr "Пе&реписать"
 
 msgid " Cannot save file. "
 msgstr " Невозможно сохранить файл "
-
-msgid "Cancel"
-msgstr "Прервать"
 
 msgid " Delete macro "
 msgstr " Удалить макрос "
@@ -173,86 +196,42 @@ msgstr ""
 msgid "C&ontinue"
 msgstr "П&родолжить"
 
+msgid "Syntax file edit"
+msgstr "Редактирование файла синтаксиса"
+
+msgid " Which syntax file you want to edit? "
+msgstr " Какой файл синтаксиса Вы хотите редактировать? "
+
+msgid "&User"
+msgstr "&Пользовательский"
+
+msgid "&System Wide"
+msgstr "&Общесистемный"
+
+msgid " Menu edit "
+msgstr " Редактирование файла меню "
+
+msgid " Which menu file do you want to edit? "
+msgstr " Какой файл меню Вы хотите редактировать? "
+
+msgid "&Local"
+msgstr "&Местный"
+
 msgid " Load "
 msgstr " Загрузить "
 
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " Блок слишком велик, вам может не удастся отменить эту операцию. "
 
-msgid "O&ne"
-msgstr "&Один"
-
-msgid "A&ll"
-msgstr "&Все"
-
-msgid "&Skip"
-msgstr "П&ропустить"
-
-msgid "&Replace"
+msgid "Replace"
 msgstr "&Заменить"
-
-msgid " Replace with: "
-msgstr " Заменить на: "
-
-msgid " Confirm replace "
-msgstr " Подтвердить замену "
-
-msgid "scanf &Expression"
-msgstr "scanf &выражение"
-
-msgid "replace &All"
-msgstr "Заменить &всё"
-
-msgid "pro&Mpt on replace"
-msgstr "Подтверждать &замену"
-
-msgid "&Backwards"
-msgstr "&Назад"
-
-msgid "&Regular expression"
-msgstr "&Регулярное выражение"
-
-msgid "&Whole words only"
-msgstr "&Слово целиком"
-
-msgid "case &Sensitive"
-msgstr "Учет ре&гистра"
-
-msgid " Enter replacement argument order eg. 3,2,1,4 "
-msgstr " Последовательность замены: напр. 3,2,1,4 "
-
-msgid " Enter replacement string:"
-msgstr " Введите текст для замены: "
-
-msgid " Enter search string:"
-msgstr " Введите строку для поиска:"
 
 msgid " Replace "
 msgstr " Заменить "
 
-msgid "Search"
-msgstr "Поиск"
-
-msgid ""
-" Invalid regular expression, or scanf expression with too many conversions "
-msgstr " Ошибочное регулярное или scanf выражение "
-
-msgid " Error in replacement format string. "
-msgstr " Ошибка в формате строки замены. "
-
-msgid " Replacement too long. "
-msgstr " Строка замены слишком велика. "
-
 #, c-format
 msgid " %ld replacements made. "
 msgstr " Осуществлено подстановок: %ld "
-
-msgid " Search string not found "
-msgstr " Искомая строка не найдена "
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " %d найдено, %d закладок добавлено "
 
 msgid "Quit"
 msgstr "Выход"
@@ -365,6 +344,48 @@ msgstr " Нажмите любую клавишу: "
 msgid " Execute Macro "
 msgstr " Выполнить макрос "
 
+msgid "&All charsets"
+msgstr "&Все кодировки"
+
+msgid "&Whole words"
+msgstr "&Слово целиком"
+
+msgid "In se&lection"
+msgstr "В вы&деленном"
+
+msgid "&Backwards"
+msgstr "&Назад"
+
+msgid "case &Sensitive"
+msgstr "Учет ре&гистра"
+
+msgid " Enter replacement string:"
+msgstr " Введите текст для замены: "
+
+msgid " Enter search string:"
+msgstr " Введите строку для поиска:"
+
+msgid "Cancel"
+msgstr "Прервать"
+
+msgid "&Skip"
+msgstr "П&ропустить"
+
+msgid "A&ll"
+msgstr "&Все"
+
+msgid "&Replace"
+msgstr "&Заменить"
+
+msgid " Replace with: "
+msgstr " Заменить на: "
+
+msgid " Confirm replace "
+msgstr " Подтвердить замену "
+
+msgid "&Dismiss"
+msgstr "&Закрыть"
+
 msgid " Emacs key: "
 msgstr " Клавиша Emacs: "
 
@@ -440,32 +461,74 @@ msgstr "&Новый файл         C-x k"
 msgid "Copy to &file...     "
 msgstr "&Копировать в файл..."
 
-msgid "&Toggle Mark       F3"
-msgstr "&Вкл/выкл. режим пометки           F3"
+msgid "&Toggle mark                 F3"
+msgstr "&Переключить в режим пометки       F3"
 
-msgid "&Mark Columns    S-F3"
+msgid "Mar&k columns              S-F3"
 msgstr "Выделить &столбцы                S-F3"
 
-msgid "Toggle &ins/overw Ins"
+msgid "Toggle &ins/overw           Ins"
 msgstr "&Режим вставки/замены             Ins"
 
-msgid "&Copy              F5"
-msgstr "&Копирование           F5"
+msgid "&Copy                        F5"
+msgstr "&Копирование                       F5"
 
-msgid "&Move              F6"
-msgstr "&Сохранить             F2"
+msgid "&Move                        F6"
+msgstr "&Переместить блок                  F6"
 
-msgid "&Delete            F8"
-msgstr "&Удаление              F8"
+msgid "&Delete                      F8"
+msgstr "&Удаление                          F8"
 
-msgid "&Undo             C-u"
+msgid "C&opy to clipfile         C-Ins"
+msgstr "Копировать в файл буфера обмена C-Ins"
+
+msgid "C&ut to clipfile          S-Del"
+msgstr "Вырезать в файл буфера обмена   S-Del"
+
+msgid "&Paste from clipfile      S-Ins"
+msgstr "Вставить из файла буфера обмена S-Ins"
+
+msgid "Toggle bookmar&k            M-k"
+msgstr "&Установить/снять закладку        M-k"
+
+msgid "&Next bookmark              M-j"
+msgstr "К &следующей закладке             M-j"
+
+msgid "Pre&v bookmark              M-i"
+msgstr "К &предыдуще закладке             M-i"
+
+msgid "&Flush bookmark             M-o"
+msgstr "У&брать все закладки              M-o"
+
+msgid "&Undo                       C-u"
 msgstr "&Отмена                           C-u"
 
-msgid "&Beginning     C-PgUp"
+msgid "&Beginning               C-PgUp"
 msgstr "&Начало файла                  C-PgUp"
 
-msgid "&End           C-PgDn"
+msgid "&End                     C-PgDn"
 msgstr "Конец &файла                   C-PgDn"
+
+msgid "C&opy to clipfile           M-w"
+msgstr "&Копировать в файл буфера обмена  M-w"
+
+msgid "C&ut to clipfile            C-w"
+msgstr "&Вырезать в файл буфера обмена    C-w"
+
+msgid "&Paste from clipfile        C-y"
+msgstr "Вс&тавить из файла буфера обмена  C-y"
+
+msgid "Toggle bookmar&k               "
+msgstr "&Установить/снять закладку        M-k"
+
+msgid "&Next bookmark                 "
+msgstr "К &следующей закладке             M-j"
+
+msgid "Pre&v bookmark                 "
+msgstr "К &предыдуще закладке             M-i"
+
+msgid "&Flush bookmark                "
+msgstr "У&брать все закладки              M-o"
 
 msgid "&Search...         F7"
 msgstr "&Поиск...          F7"
@@ -479,8 +542,23 @@ msgstr "&Замена...         F4"
 msgid "&Go to line...            M-l"
 msgstr "&Перейти к строке...             M-l"
 
+msgid "Toggle li&ne state        M-n"
+msgstr "Отобразить/скрыть номера строк  M-n"
+
 msgid "Go to matching &bracket   M-b"
 msgstr "Перейти к парной ско&бке         M-b"
+
+msgid "Find declaration      A-Enter"
+msgstr "Перейти к определению       A-Enter"
+
+msgid "Back from declaration     M--"
+msgstr "Назад...                        M-+"
+
+msgid "Forward to declaration    M-+"
+msgstr "Вперед к определению            M-+"
+
+msgid "Encod&ing...             C-t"
+msgstr "Кодировка...                    С-t"
 
 msgid "Insert &literal...       C-q"
 msgstr "Вставить &литерал...             C-q"
@@ -539,7 +617,13 @@ msgstr "&Распознавание клавиш..."
 msgid "Syntax &Highlighting..."
 msgstr "&Цветовыделение синтаксиса..."
 
-msgid "Save setu&p..."
+msgid "S&yntax file"
+msgstr "Редактирование файла синтаксиса"
+
+msgid "&Menu file"
+msgstr "Файл &меню"
+
+msgid "Save setu&p"
 msgstr "&Сохранить настройки"
 
 msgid " File "
@@ -581,8 +665,20 @@ msgstr "Позиция переноса строк:"
 msgid "Tab spacing: "
 msgstr "Шаг табуляции: "
 
+msgid "Cursor beyond end of line"
+msgstr "Курсор за пределами строки"
+
+msgid "Pers&istent selection"
+msgstr "Постоянные блоки"
+
 msgid "Synta&x highlighting"
 msgstr "&Цветовыделение синтаксиса"
+
+msgid "Visible tabs"
+msgstr "Отображать табуляции"
+
+msgid "Visible trailing spaces"
+msgstr "Отображать пробелы"
 
 msgid "Save file &position"
 msgstr "Со&хранять позицию в файле"
@@ -748,6 +844,145 @@ msgstr ""
 " Невозможно изменить владельца \"%s\" \n"
 " %s "
 
+msgid "Displays the current version"
+msgstr "Показать текущую версию"
+
+msgid "Print data directory"
+msgstr "Распечатать имя каталога для данных"
+
+msgid "Print last working directory to specified file"
+msgstr "Записать последний рабочий каталог в указанный файл"
+
+msgid "Enables subshell support (default)"
+msgstr "Включить поддержку встроенной командной оболочки (по умолчанию)"
+
+msgid "Disables subshell support"
+msgstr "Отключить поддержку встроенной командной оболочки"
+
+msgid "Log ftp dialog to specified file"
+msgstr "Записывать диалог с FTP в заданный файл"
+
+msgid "Set debug level"
+msgstr "Установить уровень отладки"
+
+msgid "Launches the file viewer on a file"
+msgstr "Просматривать файл"
+
+msgid "Edits one file"
+msgstr "Редактировать файл"
+
+msgid "Forces xterm features"
+msgstr "Подразумевать свойства xterm"
+
+msgid "Disable mouse support in text version"
+msgstr "Отключить поддержку мыши в текстовой версии"
+
+msgid "Tries to use termcap instead of terminfo"
+msgstr "Пытаться использовать termcap вместо terminfo"
+
+msgid "To run on slow terminals"
+msgstr "Подразумевать медленный терминал"
+
+msgid "Use stickchars to draw"
+msgstr "Использовать псевдографику для рисования"
+
+msgid "Resets soft keys on HP terminals"
+msgstr "Сбросить программные клавиши на терминалах HP"
+
+msgid "Requests to run in black and white"
+msgstr "Принудительно установить черно-белый режим"
+
+msgid "Request to run in color mode"
+msgstr "Принудительно установить цветной режим"
+
+msgid "Specifies a color configuration"
+msgstr "Определить настройки цветов"
+
+msgid ""
+"--colors KEYWORD={FORE},{BACK}\n"
+"\n"
+"{FORE} and {BACK} can be omitted, and the default will be used\n"
+"\n"
+"Keywords:\n"
+"   Global:       errors, reverse, gauge, input, viewunderline\n"
+"   File display: normal, selected, marked, markselect\n"
+"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                 errdhotfocus\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
+msgstr ""
+"--colors {КЛЮЧЕВОЕ СЛОВО}={ТЕКСТ},{ФОН}\n"
+"\n"
+"{ТЕКСТ} и {ФОН} можно опустить, чтобы использовать значения по умолчанию\n"
+"\n"
+"Ключевые слова:\n"
+"   Обшие:              errors, reverse, gauge, input, viewunderline\n"
+"   Отображение файлов: normal, selected, marked, markselect\n"
+"   Диалоги:            dnormal, dfocus, dhotnormal, dhotfocus, "
+"errdhotnormal,\n"
+"                       errdhotfocus\n"
+"   Меню:               menu, menuhot, menusel, menuhotsel\n"
+"   Редактор:           editnormal, editbold, editmarked, editwhitespace,\n"
+"                       editlinestate\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
+"   Справка:            helpnormal, helpitalic, helpbold, helplink, "
+"helpslink\n"
+"   Типы файлов:        directory, executable, link, stalelink, device, "
+"special, core\n"
+"\n"
+"Цвета:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray, white\n"
+"\n"
+
+#, fuzzy
+msgid "Color options"
+msgstr "Параметры конфигурации"
+
+msgid "+number"
+msgstr "+число"
+
+#, fuzzy
+msgid "[this_dir] [other_panel_dir]"
+msgstr "[флаги] [этот_каталог] [каталог_другой_панели]\n"
+
+msgid "Set initial line number for the internal editor"
+msgstr "Задать начальную строку для встроенного редактора"
+
+msgid ""
+"\n"
+"Please send any bug reports (including the output of `mc -V')\n"
+"to mc-devel@gnome.org\n"
+msgstr ""
+"\n"
+"Пожалуйста, посылайте любые сообщения об ошибках (включая вывод 'mc -V')\n"
+"по адресу mc-devel@gnome.org\n"
+
+#, c-format
+msgid "GNU Midnight Commander %s\n"
+msgstr "GNU Midnight Commander, версия %s\n"
+
+#, fuzzy
+msgid "Main options"
+msgstr " Настройки панелей "
+
+#, fuzzy
+msgid "Terminal options"
+msgstr " Прочие настройки "
+
 msgid " Background process error "
 msgstr " Ошибка фонового процесса "
 
@@ -814,6 +1049,9 @@ msgstr "перед &удалением"
 
 msgid " Confirmation "
 msgstr " Запрос подтверждения "
+
+msgid "UTF-8 output"
+msgstr "UTF-8 вывод"
 
 msgid "Full 8 bits output"
 msgstr "Полный &8-битный вывод"
@@ -915,6 +1153,9 @@ msgstr "Пароль для \\\\%s\\%s"
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Предупреждение: файл %s не найден\n"
+
+msgid "7-bit ASCII"
+msgstr "7-битный ASCII"
 
 #, c-format
 msgid "Cannot translate from %s to %s"
@@ -1055,8 +1296,14 @@ msgstr " Фильтр "
 msgid " Set expression for filtering filenames"
 msgstr " Задайте выражение для выбора имен файлов:"
 
-msgid "  Malformed regular expression  "
-msgstr " Регулярное выражение сформировано неверно "
+msgid "&Using shell patterns"
+msgstr "&Метасимволы shell"
+
+msgid "&Case sensitive"
+msgstr "Учет ре&гистра"
+
+msgid "&Files only"
+msgstr "Только файлы"
 
 msgid " Select "
 msgstr " Отметить группу "
@@ -1069,27 +1316,6 @@ msgstr " Редактирование файла расширений "
 
 msgid " Which extension file you want to edit? "
 msgstr " Какой файл расширений Вы хотите редактировать? "
-
-msgid "&User"
-msgstr "&Пользовательский"
-
-msgid "&System Wide"
-msgstr "&Общесистемный"
-
-msgid " Menu edit "
-msgstr " Редактирование файла меню "
-
-msgid " Which menu file do you want to edit? "
-msgstr " Какой файл меню Вы хотите редактировать? "
-
-msgid "&Local"
-msgstr "&Местный"
-
-msgid "Syntax file edit"
-msgstr "Редактирование файла синтаксиса"
-
-msgid " Which syntax file you want to edit? "
-msgstr " Какой файл синтаксиса Вы хотите редактировать? "
 
 msgid " Compare directories "
 msgstr " Сравнить каталоги "
@@ -1108,12 +1334,6 @@ msgstr "По&байтный"
 
 msgid " Both panels should be in the listing mode to use this command "
 msgstr "Для выполнения этой команды обе панели должны быть в режиме списка"
-
-msgid " The command history is empty "
-msgstr "История командной строки пуста"
-
-msgid " Command history "
-msgstr "&История командной строки  M-h"
 
 msgid ""
 " Not an xterm or Linux console; \n"
@@ -1233,6 +1453,17 @@ msgstr "&Узел"
 msgid "Cannot read directory contents"
 msgstr "Невозможно прочесть содержимое каталога"
 
+msgid ""
+" The Commander can't change to the directory that \n"
+" the subshell claims you are in.  Perhaps you have \n"
+" deleted your working directory, or given yourself \n"
+" extra access permissions with the \"su\" command? "
+msgstr ""
+" MC не может перейти в каталог, который ему \n"
+" сообщил дочерний процесс интерпретатора. Может, вы \n"
+" удалили рабочий каталог или дали себе дополнительные \n"
+" привилегии доступа при помощи команды \"su\"? "
+
 #, c-format
 msgid "Press any key to continue..."
 msgstr "Для продолжения нажмите любую клавишу..."
@@ -1291,9 +1522,6 @@ msgstr " Перемещение "
 msgid " Delete "
 msgstr " Удаление "
 
-msgid " Invalid target mask "
-msgstr " Неверная целевая маска "
-
 msgid " Cannot make the hardlink "
 msgstr " Невозможно создать жесткую ссылку "
 
@@ -1323,6 +1551,9 @@ msgstr ""
 " Невозможно создать целевую симв. ссылку \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Прервать"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1340,7 +1571,11 @@ msgstr ""
 " %s "
 
 #, c-format
-msgid " `%s' and `%s' are the same file "
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same file "
 msgstr ""
 " `%s' \n"
 " и \n"
@@ -1527,7 +1762,11 @@ msgstr ""
 " %s "
 
 #, c-format
-msgid " `%s' and `%s' are the same directory "
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same directory "
 msgstr ""
 " `%s' \n"
 " и \n"
@@ -1565,6 +1804,9 @@ msgid ""
 msgstr ""
 " Невозможно удалить каталог \"%s\" \n"
 " %s "
+
+msgid "Directory scanning"
+msgstr " Путь к каталогу"
 
 msgid "1Copy"
 msgstr "1Копировать"
@@ -1613,9 +1855,6 @@ msgstr " Извините, сделать это в фоновом режиме 
 
 msgid "&Retry"
 msgstr "По&вторить"
-
-msgid "&Abort"
-msgstr "&Прервать"
 
 msgid ""
 "\n"
@@ -1728,9 +1967,6 @@ msgstr "&Разыменовывать ссылки"
 msgid "to:"
 msgstr "в:"
 
-msgid "&Using shell patterns"
-msgstr "&Метасимволы shell"
-
 msgid "&Background"
 msgstr "В &фоне"
 
@@ -1741,10 +1977,8 @@ msgid "&Dive into subdir if exists"
 msgstr "&Внутрь каталога, если есть"
 
 #, c-format
-msgid ""
-"Invalid source pattern `%s' \n"
-" %s "
-msgstr "Неправильный образец \"%s\" %s "
+msgid "Invalid source pattern `%s'"
+msgstr "Неправильный образец \"%s\""
 
 msgid "&Suspend"
 msgstr "При&остановить"
@@ -1770,26 +2004,48 @@ msgstr "Прос&мотр - F3"
 msgid "&Edit - F4"
 msgstr "&Правка - F4"
 
+#, c-format
+msgid "Found: %ld"
+msgstr "Найден: %ld"
+
+msgid " Malformed regular expression "
+msgstr " Регулярное выражение сформировано неверно "
+
+msgid "Cas&e sensitive"
+msgstr "Учет ре&гистра"
+
 msgid "&Find recursively"
 msgstr "Найти ре&курсивно"
 
-msgid "Ski&p hidden"
-msgstr "Про&пускать скр&ытые"
+msgid "S&kip hidden"
+msgstr "Пропускать скр&ытые"
 
-msgid "Start at:"
-msgstr "От каталога:"
+msgid "Case sens&itive"
+msgstr "Учет ре&гистра"
 
-msgid "Filename:"
-msgstr "Имя файла:"
+msgid "Re&gular expression"
+msgstr "&Регулярное выражение"
 
-msgid "Content: "
-msgstr "Содержимое: "
+msgid "Fir&st hit"
+msgstr "До &первого вхождения"
+
+msgid "All cha&rsets"
+msgstr "Все коди&ровки"
 
 msgid "&Tree"
 msgstr "Д&ерево"
 
 msgid "Find File"
 msgstr "Поиск файла"
+
+msgid "Content:"
+msgstr "Содержимое:"
+
+msgid "File name:"
+msgstr "Шаблон имени:"
+
+msgid "Start at:"
+msgstr "От каталога:"
 
 #, c-format
 msgid "Grepping in %s"
@@ -2125,17 +2381,6 @@ msgstr "какие клавиши не имеют пометки \"OK\". Для 
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "ее при помощи Tab или мышкой и нажмите пробел."
 
-msgid ""
-" The Commander can't change to the directory that \n"
-" the subshell claims you are in.  Perhaps you have \n"
-" deleted your working directory, or given yourself \n"
-" extra access permissions with the \"su\" command? "
-msgstr ""
-" MC не может перейти в каталог, который ему \n"
-" сообщил дочерний процесс интерпретатора. Может, вы \n"
-" удалили рабочий каталог или дали себе дополнительные \n"
-" привилегии доступа при помощи команды \"su\"? "
-
 msgid " The Midnight Commander "
 msgstr " Midnight Commander "
 
@@ -2157,6 +2402,9 @@ msgstr "Порядок &сортировки..."
 msgid "&Filter..."
 msgstr "&Фильтр..."
 
+msgid "&Encoding...    C-t"
+msgstr "Кодировка панели     C-t"
+
 msgid "&Network link..."
 msgstr "Се&тевое соединение..."
 
@@ -2171,9 +2419,6 @@ msgstr "SM&B-соединение..."
 
 msgid "&Rescan         C-r"
 msgstr "&Пересмотреть         C-r"
-
-msgid "&User menu          F2"
-msgstr "&Меню пользователя          F2"
 
 msgid "&View               F3"
 msgstr "Просмотр &файла        F3"
@@ -2232,6 +2477,9 @@ msgstr "Инвер&тировать отметку  *"
 msgid "e&Xit              F10"
 msgstr "Вы&ход                F10"
 
+msgid "&User menu          F2"
+msgstr "&Меню пользователя          F2"
+
 msgid "&Directory tree"
 msgstr "&Дерево каталогов"
 
@@ -2253,7 +2501,7 @@ msgstr "&Критерий панелизации       C-x !"
 msgid "show directory s&Izes"
 msgstr "&Размеры каталогов"
 
-msgid "command &History"
+msgid "Command &history      M-h"
 msgstr "&История командной строки   M-h"
 
 msgid "di&Rectory hotlist    C-\\"
@@ -2276,12 +2524,6 @@ msgstr "Файл рас&ширений"
 
 msgid "Edit &menu file"
 msgstr "Файл &меню"
-
-msgid "Edit edi&tor menu file"
-msgstr "Редактирование Файл &меню"
-
-msgid "Edit &syntax file"
-msgstr "Редактирование файла синтаксиса"
 
 msgid "&Configuration..."
 msgstr "&Конфигурация..."
@@ -2345,133 +2587,32 @@ msgstr "Меню"
 msgid "The TERM environment variable is unset!\n"
 msgstr "Переменная среды TERM не определена!\n"
 
+msgid "&Fix it"
+msgstr "&Исправить"
+
+msgid "don't ask again"
+msgstr "больше не спрашивать"
+
+msgid ""
+"Chosen display charset (Settings->Display bits)\n"
+"or source codeset (in mcedit ctrl-t) \n"
+"does not match one set via locale. \n"
+"Set correct codeset manually or press <<Fix it>> \n"
+"to set locale default.\n"
+"\n"
+"Or set 'don't ask again' and press <<Skip>>"
+msgstr ""
+"Кодировка вывода (Настройки->Биты символов)\n"
+"или кодировка источника (ctrl-t в редакторе)\n"
+"не соответствует текущей локали.\n"
+"Для автоматического разрешения проблемы \n"
+"нажмите <<Исправить>>\n"
+"Или пометьте \"больше не спрашивать\"\n"
+"и нажмите <<Пропустить>>"
+
 #, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "GNU Midnight Commander, версия %s\n"
-
-msgid "[flags] [this_dir] [other_panel_dir]\n"
-msgstr "[флаги] [этот_каталог] [каталог_другой_панели]\n"
-
-msgid "+number"
-msgstr "+число"
-
-msgid "Set initial line number for the internal editor"
-msgstr "Задать начальную строку для встроенного редактора"
-
-msgid ""
-"\n"
-"Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
-msgstr ""
-"\n"
-"Пожалуйста, посылайте любые сообщения об ошибках (включая вывод 'mc -V')\n"
-"по адресу mc-devel@gnome.org\n"
-
-msgid ""
-"--colors KEYWORD={FORE},{BACK}\n"
-"\n"
-"{FORE} and {BACK} can be omitted, and the default will be used\n"
-"\n"
-"Keywords:\n"
-"   Global:       errors, reverse, gauge, input, viewunderline\n"
-"   File display: normal, selected, marked, markselect\n"
-"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked\n"
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-msgstr ""
-"--colors {КЛЮЧЕВОЕ СЛОВО}={ТЕКСТ},{ФОН}\n"
-"\n"
-"{ТЕКСТ} и {ФОН} можно опустить, чтобы использовать значения по умолчанию\n"
-"\n"
-"Ключевые слова:\n"
-"   Обшие:              errors, reverse, gauge, input, viewunderline\n"
-"   Отображение файлов: normal, selected, marked, markselect\n"
-"   Диалоги:            dnormal, dfocus, dhotnormal, dhotfocus, "
-"errdhotnormal,\n"
-"                       errdhotfocus\n"
-"   Меню:               menu, menuhot, menusel, menuhotsel\n"
-"   Редактор:           editnormal, editbold, editmarked, editwhitespace,\n"
-"                       editlinestate\n"
-"   Справка:            helpnormal, helpitalic, helpbold, helplink, "
-"helpslink\n"
-"   Типы файлов:        directory, executable, link, stalelink, device, "
-"special, core\n"
-"\n"
-"Цвета:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-
-msgid "Displays this help message"
-msgstr "Показать это справочное сообщение"
-
-msgid "Displays the current version"
-msgstr "Показать текущую версию"
-
-msgid "Forces xterm features"
-msgstr "Подразумевать свойства xterm"
-
-msgid "Disable mouse support in text version"
-msgstr "Отключить поддержку мыши в текстовой версии"
-
-msgid "Tries to use termcap instead of terminfo"
-msgstr "Пытаться использовать termcap вместо terminfo"
-
-msgid "Resets soft keys on HP terminals"
-msgstr "Сбросить программные клавиши на терминалах HP"
-
-msgid "To run on slow terminals"
-msgstr "Подразумевать медленный терминал"
-
-msgid "Use stickchars to draw"
-msgstr "Использовать псевдографику для рисования"
-
-msgid "Requests to run in black and white"
-msgstr "Принудительно установить черно-белый режим"
-
-msgid "Request to run in color mode"
-msgstr "Принудительно установить цветной режим"
-
-msgid "Specifies a color configuration"
-msgstr "Определить настройки цветов"
-
-msgid "Displays a help screen on how to change the color scheme"
-msgstr "Показать справку, как изменить цветовую схему"
-
-msgid "Log ftp dialog to specified file"
-msgstr "Записывать диалог с FTP в заданный файл"
-
-msgid "Set debug level"
-msgstr "Установить уровень отладки"
-
-msgid "Print data directory"
-msgstr "Распечатать имя каталога для данных"
-
-msgid "Print last working directory to specified file"
-msgstr "Записать последний рабочий каталог в указанный файл"
-
-msgid "Enables subshell support (default)"
-msgstr "Включить поддержку встроенной командной оболочки (по умолчанию)"
-
-msgid "Disables subshell support"
-msgstr "Отключить поддержку встроенной командной оболочки"
-
-msgid "Launches the file viewer on a file"
-msgstr "Просматривать файл"
-
-msgid "Edits one file"
-msgstr "Редактировать файл"
+msgid "Cannot create %s directory"
+msgstr "Невозможно создать каталог \"%s\""
 
 msgid "safe de&Lete"
 msgstr "Безопасное &удаление"
@@ -2530,6 +2671,9 @@ msgstr "Показывать скр&ытые файлы"
 msgid "show &Backup files"
 msgstr "Показывать ре&зервные файлы"
 
+msgid "Use SI si&ze units"
+msgstr "Вывод в едини&цах СИ"
+
 msgid "&Never"
 msgstr "&Никогда"
 
@@ -2583,28 +2727,6 @@ msgstr "Невозможно выполнить команду."
 
 msgid "Pipe close failed"
 msgstr "Сбой закрытия канала"
-
-msgid "missing argument"
-msgstr "отсутствует аргумент"
-
-msgid "unknown option"
-msgstr "неизвестный ключ"
-
-msgid "invalid numeric value"
-msgstr "неверное числовое значение"
-
-msgid "Show this help message"
-msgstr "Показать это сообщение помощи"
-
-msgid "Display brief usage message"
-msgstr "Показать краткую инструкцию"
-
-msgid "ARG"
-msgstr "АРГ"
-
-#, c-format
-msgid "Usage:"
-msgstr "Используйте:"
 
 msgid "[dev]"
 msgstr "[dev]"
@@ -2692,25 +2814,34 @@ msgstr "Перемес"
 msgid "Mkdir"
 msgstr "НвКтлог"
 
-msgid " Choose input codepage "
-msgstr " Выберите кодировку "
+msgid " Not implemented yet "
+msgstr " Пока не реализовано "
+
+msgid " Num of replace tokens not equal to num of found tokens "
+msgstr ""
+" Количество шаблонных полей не соответствует количеству полей для замены "
+
+#, c-format
+msgid " Invalid token number %d "
+msgstr " Неправильный шаблон цели %d "
+
+msgid "Normal"
+msgstr "Обычный"
+
+msgid "&Regular expression"
+msgstr "&Регулярное выражение"
+
+msgid "Hexadecimal"
+msgstr "Шестнадцатеричный"
+
+msgid "Wildcard search"
+msgstr "По шаблону"
+
+msgid "Choose codepage"
+msgstr "Выберите кодировку"
 
 msgid "-  < No translation >"
 msgstr "-  < Без перекодировки >"
-
-msgid ""
-"To use this feature select your codepage in\n"
-"Setup / Display Bits dialog!\n"
-"Do not forget to save options."
-msgstr ""
-
-#, c-format
-msgid ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-msgstr ""
-"Размер экрана %dx%d не поддерживается.\n"
-"Проверьте переменную окружения TERM.\n"
 
 msgid ""
 "GNU Midnight Commander is already\n"
@@ -2743,6 +2874,9 @@ msgstr "с базой данных terminfo"
 
 msgid "Using the ncurses library"
 msgstr "С библиотекой ncurses"
+
+msgid "Using the ncursesw library"
+msgstr "С библиотекой ncursesw"
 
 msgid "With optional subshell support"
 msgstr "С опциональной поддержкой внутренней командной оболочки"
@@ -2822,235 +2956,6 @@ msgid ""
 msgstr ""
 "Невозможно писать в файл %s:\n"
 "%s\n"
-
-msgid " Format error on file Extensions File "
-msgstr " Ошибка в формате файла Расширений файлов "
-
-#, c-format
-msgid " The %%var macro has no default "
-msgstr " Макрос %%var не имеет значения по умолчанию "
-
-#, c-format
-msgid " The %%var macro has no variable "
-msgstr " Макрос %%var не имеет переменной "
-
-msgid " Debug "
-msgstr " Отладка "
-
-msgid " ERROR: "
-msgstr " ОШИБКА: "
-
-msgid " True:  "
-msgstr " Истина: "
-
-msgid " False: "
-msgstr " Ложь: "
-
-msgid " Warning -- ignoring file "
-msgstr " Предупреждение - файл игнорируется "
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"Файл %s в текущем каталоге не принадлежит ни root'у, ни Вам,\n"
-"или доступен другим на запись. Использование такого файла неприемлемо\n"
-"c точки зрения безопасности."
-
-#, c-format
-msgid " No suitable entries found in %s "
-msgstr " Не найдено подходящих элементов в %s"
-
-msgid " User menu "
-msgstr " Меню пользователя "
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s не является каталогом\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "Вы не владеете каталогом %s\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "Невозможно установить правильные права доступа к каталогу %s\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr "Невозможно создать временный каталог %s: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Временные файлы будут создаваться в каталоге %s\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Временные файлы не будут создаваться\n"
-
-msgid " Pipe failed "
-msgstr " Сбой канала "
-
-msgid " Dup failed "
-msgstr " Сбой дублирования дескриптора "
-
-msgid " Cannot spawn child process "
-msgstr " Невозможно породить дочерний процесс "
-
-msgid "Empty output from child filter"
-msgstr "Дочерний фильтр не вернул данных"
-
-#, c-format
-msgid ""
-" Cannot open \"%s\"\n"
-" %s "
-msgstr ""
-" Невозможно открыть \"%s\"\n"
-" %s "
-
-#, c-format
-msgid ""
-" Cannot stat \"%s\"\n"
-" %s "
-msgstr ""
-" Невозможно получить свойства \"%s\"\n"
-" %s "
-
-msgid " Cannot view: not a regular file "
-msgstr " Просмотр невозможен: необычный файл "
-
-#, c-format
-msgid "File: %s"
-msgstr "Файл: %s"
-
-#, c-format
-msgid "Offset 0x%08lx"
-msgstr "Смещение 0x%08lx"
-
-#, c-format
-msgid "Line %lu Col %lu"
-msgstr "Строка %lu Позиция %lu"
-
-#, c-format
-msgid "%s bytes"
-msgstr "%s байт"
-
-#, c-format
-msgid ">= %s bytes"
-msgstr ">= %s байт"
-
-#, c-format
-msgid ""
-" Error while closing the file: \n"
-" %s \n"
-" Data may have been written or not. "
-msgstr ""
-"Ошибка при закрытии файла: \n"
-" %s \n"
-"Данные могли быть как записаны так и нет."
-
-#, c-format
-msgid ""
-" Cannot save file: \n"
-" %s "
-msgstr ""
-" Невозможно сохранить файл: \n"
-" %s "
-
-msgid "Invalid hex search expression"
-msgstr "Неверное шеснадцетиричное значение для поиска"
-
-msgid " Invalid regular expression "
-msgstr " Регулярное выражение сформировано неверно "
-
-#, c-format
-msgid ""
-" The current line number is %d.\n"
-" Enter the new line number:"
-msgstr ""
-" Номер текущей строки %d.\n"
-" Введите номер новой строки:"
-
-#, c-format
-msgid ""
-" The current address is 0x%lx.\n"
-" Enter the new address:"
-msgstr ""
-" Текущий адрес %lx.\n"
-" Введите новый адрес:"
-
-msgid " Goto Address "
-msgstr " Перейти на адрес "
-
-msgid " Invalid address "
-msgstr " Неверный адрес "
-
-msgid " Enter regexp:"
-msgstr " Введите регулярное выражение: "
-
-msgid "ButtonBar|Help"
-msgstr "Нижняя панель|Помощь"
-
-msgid "ButtonBar|Quit"
-msgstr "Нижняя панель|Выход"
-
-msgid "ButtonBar|Ascii"
-msgstr "Нижняя панель|Ascii"
-
-msgid "ButtonBar|Hex"
-msgstr "Нижняя панель|Hex"
-
-msgid "ButtonBar|Goto"
-msgstr "Нижняя панель|Перейти"
-
-msgid "ButtonBar|Line"
-msgstr "Нижняя панель|К строке"
-
-msgid "ButtonBar|View"
-msgstr "Нижняя панель|Вид"
-
-msgid "ButtonBar|Edit"
-msgstr "Нижняя панель|Правка"
-
-msgid "ButtonBar|Save"
-msgstr "Нижняя панель|Сохранить"
-
-msgid "ButtonBar|UnWrap"
-msgstr "Нижняя панель|Разверн"
-
-msgid "ButtonBar|Wrap"
-msgstr "Нижняя панель|Сверн"
-
-msgid "ButtonBar|RxSrch"
-msgstr "Нижняя панель|Поиск"
-
-msgid "ButtonBar|HxSrch"
-msgstr "Нижняя панель|Поиск"
-
-msgid "ButtonBar|Search"
-msgstr "Нижняя панель|Поиск"
-
-msgid "ButtonBar|Raw"
-msgstr "Нижняя панель|Исходный"
-
-msgid "ButtonBar|Parse"
-msgstr "Нижняя панель|Фильтр"
-
-msgid "ButtonBar|Unform"
-msgstr "Нижняя панель|Не форм"
-
-msgid "ButtonBar|Format"
-msgstr "Нижняя панель|Формат"
-
-msgid " History "
-msgstr "История команд"
 
 msgid "Function key 1"
 msgstr "Функциональная 1 "
@@ -3190,11 +3095,257 @@ msgstr "Delete доп.клавиатуры"
 msgid "Enter on keypad"
 msgstr "Enter доп.клавиатуры"
 
+msgid "Tab on keypad"
+msgstr "Таб доп.клавиатуры"
+
+msgid "Space on keypad"
+msgstr "Пробел доп.клавиатуры"
+
 msgid "Slash on keypad"
 msgstr "Slash доп.клавиатуры"
 
 msgid "NumLock on keypad"
 msgstr "NumLock доп.клавиатуры"
+
+msgid "Ctrl"
+msgstr "Ctrl"
+
+msgid "Alt"
+msgstr "Alt"
+
+msgid "Shift"
+msgstr "Shift"
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"Размер экрана %dx%d не поддерживается.\n"
+"Проверьте переменную окружения TERM.\n"
+
+msgid " Format error on file Extensions File "
+msgstr " Ошибка в формате файла Расширений файлов "
+
+#, c-format
+msgid " The %%var macro has no default "
+msgstr " Макрос %%var не имеет значения по умолчанию "
+
+#, c-format
+msgid " The %%var macro has no variable "
+msgstr " Макрос %%var не имеет переменной "
+
+msgid " Debug "
+msgstr " Отладка "
+
+msgid " ERROR: "
+msgstr " ОШИБКА: "
+
+msgid " True:  "
+msgstr " Истина: "
+
+msgid " False: "
+msgstr " Ложь: "
+
+msgid " Warning -- ignoring file "
+msgstr " Предупреждение - файл игнорируется "
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"Файл %s в текущем каталоге не принадлежит ни root'у, ни Вам,\n"
+"или доступен другим на запись. Использование такого файла неприемлемо\n"
+"c точки зрения безопасности."
+
+#, c-format
+msgid " No suitable entries found in %s "
+msgstr " Не найдено подходящих элементов в %s"
+
+msgid " User menu "
+msgstr " Меню пользователя "
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
+
+#, c-format
+msgid "%s is not a directory\n"
+msgstr "%s не является каталогом\n"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr "Вы не владеете каталогом %s\n"
+
+#, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr "Невозможно установить правильные права доступа к каталогу %s\n"
+
+#, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr "Невозможно создать временный каталог %s: %s\n"
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr "Временные файлы будут создаваться в каталоге %s\n"
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr "Временные файлы не будут создаваться\n"
+
+msgid " Pipe failed "
+msgstr " Сбой канала "
+
+msgid " Dup failed "
+msgstr " Сбой дублирования дескриптора "
+
+#, c-format
+msgid ""
+" The current line number is %lld.\n"
+" Enter the new line number:"
+msgstr ""
+" Номер текущей строки %lld.\n"
+" Введите номер новой строки:"
+
+#, c-format
+msgid ""
+" The current address is %s.\n"
+" Enter the new address:"
+msgstr ""
+" Текущий адрес %s.\n"
+" Введите новый адрес:"
+
+msgid " Goto Address "
+msgstr " Перейти на адрес "
+
+msgid " Invalid address "
+msgstr " Неверный адрес "
+
+msgid " Cannot spawn child process "
+msgstr " Невозможно породить дочерний процесс "
+
+msgid "Empty output from child filter"
+msgstr "Дочерний фильтр не вернул данных"
+
+msgid "All charsets"
+msgstr "Все кодировки"
+
+msgid "ButtonBar|Help"
+msgstr "Нижняя панель|Помощь"
+
+msgid "ButtonBar|Quit"
+msgstr "Нижняя панель|Выход"
+
+msgid "ButtonBar|Ascii"
+msgstr "Нижняя панель|Ascii"
+
+msgid "ButtonBar|Hex"
+msgstr "Нижняя панель|Hex"
+
+msgid "ButtonBar|Goto"
+msgstr "Нижняя панель|Перейти"
+
+msgid "ButtonBar|Line"
+msgstr "Нижняя панель|К строке"
+
+msgid "ButtonBar|View"
+msgstr "Нижняя панель|Вид"
+
+msgid "ButtonBar|Edit"
+msgstr "Нижняя панель|Правка"
+
+msgid "ButtonBar|Save"
+msgstr "Нижняя панель|Сохранить"
+
+msgid "ButtonBar|UnWrap"
+msgstr "Нижняя панель|Разверн"
+
+msgid "ButtonBar|Wrap"
+msgstr "Нижняя панель|Сверн"
+
+msgid "ButtonBar|HxSrch"
+msgstr "Нижняя панель|Поиск"
+
+msgid "ButtonBar|Search"
+msgstr "Нижняя панель|Поиск"
+
+msgid "ButtonBar|Raw"
+msgstr "Нижняя панель|Исходный"
+
+msgid "ButtonBar|Parse"
+msgstr "Нижняя панель|Фильтр"
+
+msgid "ButtonBar|Unform"
+msgstr "Нижняя панель|Не форм"
+
+msgid "ButtonBar|Format"
+msgstr "Нижняя панель|Формат"
+
+#, c-format
+msgid "File: %s"
+msgstr "Файл: %s"
+
+#, c-format
+msgid "Offset 0x%08lx"
+msgstr "Смещение 0x%08lx"
+
+#, c-format
+msgid "Line %lu Col %lu"
+msgstr "Строка %lu Позиция %lu"
+
+#, c-format
+msgid "%s bytes"
+msgstr "%s байт"
+
+#, c-format
+msgid ">= %s bytes"
+msgstr ">= %s байт"
+
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+"Ошибка при закрытии файла: \n"
+" %s \n"
+"Данные могли быть как записаны так и нет."
+
+#, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr ""
+" Невозможно сохранить файл: \n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot open \"%s\"\n"
+" %s "
+msgstr ""
+" Невозможно открыть \"%s\"\n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot stat \"%s\"\n"
+" %s "
+msgstr ""
+" Невозможно получить свойства \"%s\"\n"
+" %s "
+
+msgid " Cannot view: not a regular file "
+msgstr " Просмотр невозможен: необычный файл "
+
+msgid "Seeking to search result"
+msgstr "Переход к найденому"
+
+msgid " History "
+msgstr "История команд"
 
 msgid "Background process:"
 msgstr "Фоновый процесс:"
@@ -3373,8 +3524,9 @@ msgstr "ftpfs: ошибка регистрации пользователя %s "
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: неверное имя системы."
 
-msgid "ftpfs: Invalid host address."
-msgstr "ftpfs: неверный адрес хоста."
+#, c-format
+msgid "ftpfs: %s"
+msgstr "ftpfs: %s"
 
 #, c-format
 msgid "ftpfs: making connection to %s"
@@ -3390,6 +3542,17 @@ msgstr "ftpfs: сбой соединения с сервером: %s"
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Ожидание повтора попытки... %d (Control-C для отмены)"
+
+msgid "ftpfs: invalid address family"
+msgstr "ftpfs: неверный адрес системы."
+
+#, c-format
+msgid "ftpfs: could not setup passive mode: %s"
+msgstr "ftpfs: невозможно установить пассивный режим: %s"
+
+#, c-format
+msgid "ftpfs: could not create socket: %s"
+msgstr " Невозможно создать сокет: %s "
 
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: невозможно установить пассивный режим"
@@ -3626,363 +3789,221 @@ msgstr "Внутренняя ошибка:"
 msgid "Changes to file lost"
 msgstr "Изменения для файла потеряны"
 
-msgid "Replace"
-msgstr "&Заменить"
+#~ msgid "O&ne"
+#~ msgstr "&Один"
 
-msgid "&All charsets"
-msgstr "&Все кодировки"
+#~ msgid "scanf &Expression"
+#~ msgstr "scanf &выражение"
 
-msgid "&Whole words"
-msgstr "&Слово целиком"
+#~ msgid "replace &All"
+#~ msgstr "Заменить &всё"
 
-msgid "In se&lection"
-msgstr "В вы&деленном"
+#~ msgid "pro&Mpt on replace"
+#~ msgstr "Подтверждать &замену"
 
-msgid "&Toggle mark                 F3"
-msgstr "&Переключить в режим пометки       F3"
+#~ msgid "&Whole words only"
+#~ msgstr "&Слово целиком"
 
-msgid "Mar&k columns              S-F3"
-msgstr "Выделить &столбцы                S-F3"
+#~ msgid " Enter replacement argument order eg. 3,2,1,4 "
+#~ msgstr " Последовательность замены: напр. 3,2,1,4 "
 
-msgid "Toggle &ins/overw           Ins"
-msgstr "&Режим вставки/замены             Ins"
+#~ msgid ""
+#~ " Invalid regular expression, or scanf expression with too many "
+#~ "conversions "
+#~ msgstr " Ошибочное регулярное или scanf выражение "
 
-msgid "&Copy                        F5"
-msgstr "&Копирование                       F5"
+#~ msgid " Error in replacement format string. "
+#~ msgstr " Ошибка в формате строки замены. "
 
-msgid "&Move                        F6"
-msgstr "&Переместить блок                  F6"
+#~ msgid " Replacement too long. "
+#~ msgstr " Строка замены слишком велика. "
 
-msgid "&Delete                      F8"
-msgstr "&Удаление                          F8"
-
-msgid "C&opy to clipfile         C-Ins"
-msgstr "Копировать в файл буфера обмена C-Ins"
-
-msgid "C&ut to clipfile          S-Del"
-msgstr "Вырезать в файл буфера обмена   S-Del"
-
-msgid "&Paste from clipfile      S-Ins"
-msgstr "Вставить из файла буфера обмена S-Ins"
-
-msgid "Toggle bookmar&k            M-k"
-msgstr "&Установить/снять закладку        M-k"
-
-msgid "&Next bookmark              M-j"
-msgstr "К &следующей закладке             M-j"
-
-msgid "Pre&v bookmark              M-i"
-msgstr "К &предыдуще закладке             M-i"
-
-msgid "&Flush bookmark             M-o"
-msgstr "У&брать все закладки              M-o"
-
-msgid "&Undo                       C-u"
-msgstr "&Отмена                           C-u"
-
-msgid "&Beginning               C-PgUp"
-msgstr "&Начало файла                  C-PgUp"
-
-msgid "&End                     C-PgDn"
-msgstr "Конец &файла                   C-PgDn"
-
-msgid "C&opy to clipfile           M-w"
-msgstr "&Копировать в файл буфера обмена  M-w"
-
-msgid "C&ut to clipfile            C-w"
-msgstr "&Вырезать в файл буфера обмена    C-w"
-
-msgid "&Paste from clipfile        C-y"
-msgstr "Вс&тавить из файла буфера обмена  C-y"
-
-msgid "Toggle bookmar&k               "
-msgstr "&Установить/снять закладку        M-k"
-
-msgid "&Next bookmark                 "
-msgstr "К &следующей закладке             M-j"
-
-msgid "Pre&v bookmark                 "
-msgstr "К &предыдуще закладке             M-i"
-
-msgid "&Flush bookmark                "
-msgstr "У&брать все закладки              M-o"
-
-msgid "Toggle li&ne state        M-n"
-msgstr "Отобразить/скрыть номера строк  M-n"
-
-msgid "Find declaration      A-Enter"
-msgstr "Перейти к определению       A-Enter"
-
-msgid "Back from declaration     M--"
-msgstr "Назад...                        M-+"
-
-msgid "Forward to declaration    M-+"
-msgstr "Вперед к определению            M-+"
-
-msgid "Encod&ing...             C-t"
-msgstr "Кодировка...                    С-t"
-
-msgid "S&yntax file"
-msgstr "Редактирование файла синтаксиса"
-
-msgid "&Menu file"
-msgstr "Файл &меню"
-
-msgid "Save setu&p"
-msgstr "&Сохранить настройки"
-
-msgid "Cursor beyond end of line"
-msgstr "Курсор за пределами строки"
-
-msgid "Pers&istent selection"
-msgstr "Постоянные блоки"
-
-msgid "Visible tabs"
-msgstr "Отображать табуляции"
-
-msgid "Visible trailing spaces"
-msgstr "Отображать пробелы"
-
-msgid "UTF-8 output"
-msgstr "UTF-8 вывод"
-
-msgid "7-bit ASCII"
-msgstr "7-битный ASCII"
-
-msgid "&Case sensitive"
-msgstr "Учет ре&гистра"
-
-msgid "&Files only"
-msgstr "Только файлы"
-
-msgid " Dialogs "
-msgstr " Диалоги "
-
-#, c-format
-msgid ""
-" `%s' \n"
-" and \n"
-" `%s' \n"
-" are the same file "
-msgstr ""
-" `%s' \n"
-" и \n"
-" `%s' \n"
-" один и тот же file "
-
-#, c-format
-msgid ""
-" `%s' \n"
-" and \n"
-" `%s' \n"
-" are the same directory "
-msgstr ""
-" `%s' \n"
-" и \n"
-" `%s' \n"
-" один и тот же каталог "
-
-msgid "Directory scanning"
-msgstr " Путь к каталогу"
-
-#, c-format
-msgid "Invalid source pattern `%s'"
-msgstr "Неправильный образец \"%s\""
-
-#, c-format
-msgid "Found: %ld"
-msgstr "Найден: %ld"
-
-msgid " Malformed regular expression "
-msgstr " Регулярное выражение сформировано неверно "
-
-msgid "Cas&e sensitive"
-msgstr "Учет ре&гистра"
-
-msgid "S&kip hidden"
-msgstr "Пропускать скр&ытые"
-
-msgid "Case sens&itive"
-msgstr "Учет ре&гистра"
-
-msgid "Re&gular expression"
-msgstr "&Регулярное выражение"
-
-msgid "Fir&st hit"
-msgstr "До &первого вхождения"
-
-msgid "All cha&rsets"
-msgstr "Все коди&ровки"
-
-msgid "Content:"
-msgstr "Содержимое:"
-
-msgid "File name:"
-msgstr "Шаблон имени:"
-
-msgid "&Encoding...    C-t"
-msgstr "Кодировка панели     C-t"
-
-msgid "Command &history      M-h"
-msgstr "&История командной строки   M-h"
-
-msgid "&Fix it"
-msgstr "&Исправить"
-
-msgid "don't ask again"
-msgstr "больше не спрашивать"
-
-msgid ""
-"Chosen display charset (Settings->Display bits)\n"
-"or source codeset (in mcedit ctrl-t) \n"
-"does not match one set via locale. \n"
-"Set correct codeset manually or press <<Fix it>> \n"
-"to set locale default.\n"
-"\n"
-"Or set 'don't ask again' and press <<Skip>>"
-msgstr ""
-"Кодировка вывода (Настройки->Биты символов)\n"
-"или кодировка источника (ctrl-t в редакторе)\n"
-"не соответствует текущей локали.\n"
-"Для автоматического разрешения проблемы \n"
-"нажмите <<Исправить>>\n"
-"Или пометьте \"больше не спрашивать\"\n"
-"и нажмите <<Пропустить>>"
-
-msgid ""
-"--colors KEYWORD={FORE},{BACK}\n"
-"\n"
-"{FORE} and {BACK} can be omitted, and the default will be used\n"
-"\n"
-"Keywords:\n"
-"   Global:       errors, reverse, gauge, input, viewunderline\n"
-"   File display: normal, selected, marked, markselect\n"
-"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate\n"
-msgstr ""
-"--colors {КЛЮЧЕВОЕ СЛОВО}={ТЕКСТ},{ФОН}\n"
-"\n"
-"{ТЕКСТ} и {ФОН} можно опустить, чтобы использовать значения по умолчанию\n"
-"\n"
-"Ключевые слова:\n"
-"   Обшие:              errors, reverse, gauge, input, viewunderline\n"
-"   Отображение файлов: normal, selected, marked, markselect\n"
-"   Диалоги:            dnormal, dfocus, dhotnormal, dhotfocus, "
-"errdhotnormal,\n"
-"                       errdhotfocus\n"
-"   Меню:               menu, menuhot, menusel, menuhotsel\n"
-"   Редактор:           editnormal, editbold, editmarked, editwhitespace,\n"
-"                       editlinestate\n"
-
-msgid ""
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-msgstr ""
-"   Справка:            helpnormal, helpitalic, helpbold, helplink, "
-"helpslink\n"
-"   Типы файлов:        directory, executable, link, stalelink, device, "
-"special, core\n"
-"\n"
-"Цвета:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray, white\n"
-"\n"
-
-#, c-format
-msgid "Cannot create %s directory"
-msgstr "Невозможно создать каталог \"%s\""
-
-msgid "Use SI si&ze units"
-msgstr "Вывод в едини&цах СИ"
-
-msgid " Not implemented yet "
-msgstr " Пока не реализовано "
-
-msgid " Num of replace tokens not equal to num of found tokens "
-msgstr ""
-" Количество шаблонных полей не соответствует количеству полей для замены "
-
-#, c-format
-msgid " Invalid token number %d "
-msgstr " Неправильный шаблон цели %d "
-
-msgid "Normal"
-msgstr "Обычный"
-
-msgid "Hexadecimal"
-msgstr "Шестнадцатеричный"
-
-msgid "Wildcard search"
-msgstr "По шаблону"
-
-msgid "Choose codepage"
-msgstr "Выберите кодировку"
-
-msgid "Using the ncursesw library"
-msgstr "С библиотекой ncursesw"
-
-msgid "Tab on keypad"
-msgstr "Таб доп.клавиатуры"
-
-msgid "Space on keypad"
-msgstr "Пробел доп.клавиатуры"
-
-msgid "Ctrl"
-msgstr "Ctrl"
-
-msgid "Alt"
-msgstr "Alt"
-
-msgid "Shift"
-msgstr "Shift"
-
-#, c-format
-msgid ""
-" The current line number is %lld.\n"
-" Enter the new line number:"
-msgstr ""
-" Номер текущей строки %lld.\n"
-" Введите номер новой строки:"
-
-#, c-format
-msgid ""
-" The current address is %s.\n"
-" Enter the new address:"
-msgstr ""
-" Текущий адрес %s.\n"
-" Введите новый адрес:"
-
-msgid "All charsets"
-msgstr "Все кодировки"
-
-msgid "Seeking to search result"
-msgstr "Переход к найденому"
-
-#, c-format
-msgid "ftpfs: %s"
-msgstr "ftpfs: %s"
-
-msgid "ftpfs: invalid address family"
-msgstr "ftpfs: неверный адрес системы."
-
-#, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: невозможно установить пассивный режим: %s"
-
-#, c-format
-msgid "ftpfs: could not create socket: %s"
-msgstr " Невозможно создать сокет: %s "
+#~ msgid "&Toggle Mark       F3"
+#~ msgstr "&Вкл/выкл. режим пометки           F3"
+
+#~ msgid "&Mark Columns    S-F3"
+#~ msgstr "Выделить &столбцы                S-F3"
+
+#~ msgid "Toggle &ins/overw Ins"
+#~ msgstr "&Режим вставки/замены             Ins"
+
+#~ msgid "&Copy              F5"
+#~ msgstr "&Копирование           F5"
+
+#~ msgid "&Move              F6"
+#~ msgstr "&Сохранить             F2"
+
+#~ msgid "&Delete            F8"
+#~ msgstr "&Удаление              F8"
+
+#~ msgid "&Undo             C-u"
+#~ msgstr "&Отмена                           C-u"
+
+#~ msgid "&Beginning     C-PgUp"
+#~ msgstr "&Начало файла                  C-PgUp"
+
+#~ msgid "&End           C-PgDn"
+#~ msgstr "Конец &файла                   C-PgDn"
+
+#~ msgid "Save setu&p..."
+#~ msgstr "&Сохранить настройки"
+
+#~ msgid "  Malformed regular expression  "
+#~ msgstr " Регулярное выражение сформировано неверно "
+
+#~ msgid " The command history is empty "
+#~ msgstr "История командной строки пуста"
+
+#~ msgid " Command history "
+#~ msgstr "&История командной строки  M-h"
+
+#~ msgid " Invalid target mask "
+#~ msgstr " Неверная целевая маска "
+
+#~ msgid " `%s' and `%s' are the same file "
+#~ msgstr ""
+#~ " `%s' \n"
+#~ " и \n"
+#~ " `%s' \n"
+#~ " один и тот же file "
+
+#~ msgid " `%s' and `%s' are the same directory "
+#~ msgstr ""
+#~ " `%s' \n"
+#~ " и \n"
+#~ " `%s' \n"
+#~ " один и тот же каталог "
+
+#~ msgid ""
+#~ "Invalid source pattern `%s' \n"
+#~ " %s "
+#~ msgstr "Неправильный образец \"%s\" %s "
+
+#~ msgid "Ski&p hidden"
+#~ msgstr "Про&пускать скр&ытые"
+
+#~ msgid "Filename:"
+#~ msgstr "Имя файла:"
+
+#~ msgid "Content: "
+#~ msgstr "Содержимое: "
+
+#~ msgid "command &History"
+#~ msgstr "&История командной строки   M-h"
+
+#~ msgid "Edit edi&tor menu file"
+#~ msgstr "Редактирование Файл &меню"
+
+#~ msgid "Edit &syntax file"
+#~ msgstr "Редактирование файла синтаксиса"
+
+#~ msgid ""
+#~ "--colors KEYWORD={FORE},{BACK}\n"
+#~ "\n"
+#~ "{FORE} and {BACK} can be omitted, and the default will be used\n"
+#~ "\n"
+#~ "Keywords:\n"
+#~ "   Global:       errors, reverse, gauge, input, viewunderline\n"
+#~ "   File display: normal, selected, marked, markselect\n"
+#~ "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+#~ "                 errdhotfocus\n"
+#~ "   Menus:        menu, menuhot, menusel, menuhotsel\n"
+#~ "   Editor:       editnormal, editbold, editmarked\n"
+#~ "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+#~ "   File types:   directory, executable, link, stalelink, device, special, "
+#~ "core\n"
+#~ "\n"
+#~ "Colors:\n"
+#~ "   black, gray, red, brightred, green, brightgreen, brown,\n"
+#~ "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+#~ "   brightcyan, lightgray and white\n"
+#~ "\n"
+#~ msgstr ""
+#~ "--colors {КЛЮЧЕВОЕ СЛОВО}={ТЕКСТ},{ФОН}\n"
+#~ "\n"
+#~ "{ТЕКСТ} и {ФОН} можно опустить, чтобы использовать значения по умолчанию\n"
+#~ "\n"
+#~ "Ключевые слова:\n"
+#~ "   Обшие:              errors, reverse, gauge, input, viewunderline\n"
+#~ "   Отображение файлов: normal, selected, marked, markselect\n"
+#~ "   Диалоги:            dnormal, dfocus, dhotnormal, dhotfocus, "
+#~ "errdhotnormal,\n"
+#~ "                       errdhotfocus\n"
+#~ "   Меню:               menu, menuhot, menusel, menuhotsel\n"
+#~ "   Редактор:           editnormal, editbold, editmarked, editwhitespace,\n"
+#~ "                       editlinestate\n"
+#~ "   Справка:            helpnormal, helpitalic, helpbold, helplink, "
+#~ "helpslink\n"
+#~ "   Типы файлов:        directory, executable, link, stalelink, device, "
+#~ "special, core\n"
+#~ "\n"
+#~ "Цвета:\n"
+#~ "   black, gray, red, brightred, green, brightgreen, brown,\n"
+#~ "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+#~ "   brightcyan, lightgray and white\n"
+#~ "\n"
+
+#~ msgid "Displays this help message"
+#~ msgstr "Показать это справочное сообщение"
+
+#~ msgid "Displays a help screen on how to change the color scheme"
+#~ msgstr "Показать справку, как изменить цветовую схему"
+
+#~ msgid "missing argument"
+#~ msgstr "отсутствует аргумент"
+
+#~ msgid "unknown option"
+#~ msgstr "неизвестный ключ"
+
+#~ msgid "invalid numeric value"
+#~ msgstr "неверное числовое значение"
+
+#~ msgid "Show this help message"
+#~ msgstr "Показать это сообщение помощи"
+
+#~ msgid "Display brief usage message"
+#~ msgstr "Показать краткую инструкцию"
+
+#~ msgid "ARG"
+#~ msgstr "АРГ"
+
+#~ msgid "Usage:"
+#~ msgstr "Используйте:"
+
+#~ msgid " Choose input codepage "
+#~ msgstr " Выберите кодировку "
+
+#~ msgid "Invalid hex search expression"
+#~ msgstr "Неверное шеснадцетиричное значение для поиска"
+
+#~ msgid " Invalid regular expression "
+#~ msgstr " Регулярное выражение сформировано неверно "
+
+#~ msgid ""
+#~ " The current line number is %d.\n"
+#~ " Enter the new line number:"
+#~ msgstr ""
+#~ " Номер текущей строки %d.\n"
+#~ " Введите номер новой строки:"
+
+#~ msgid ""
+#~ " The current address is 0x%lx.\n"
+#~ " Enter the new address:"
+#~ msgstr ""
+#~ " Текущий адрес %lx.\n"
+#~ " Введите новый адрес:"
+
+#~ msgid " Enter regexp:"
+#~ msgstr " Введите регулярное выражение: "
+
+#~ msgid "ButtonBar|RxSrch"
+#~ msgstr "Нижняя панель|Поиск"
+
+#~ msgid "ftpfs: Invalid host address."
+#~ msgstr "ftpfs: неверный адрес хоста."
+
+#~ msgid " Dialogs "
+#~ msgstr " Диалоги "
 
 #~ msgid "%b %d %H:%M"
 #~ msgstr "%b %e %H:%M"

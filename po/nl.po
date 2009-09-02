@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-08-26 17:11+0300\n"
+"POT-Creation-Date: 2009-09-02 23:01+0300\n"
 "PO-Revision-Date: 2009-02-13\n"
 "Last-Translator: Marcel Pol <mpol@gmx.net>\n"
 "Language-Team: Dutch <debian-l10n-dutch@lists.debian.org>\n"
@@ -91,6 +91,10 @@ msgstr " Fout bij het schrijven naar pijp: "
 msgid " Cannot open pipe for writing: "
 msgstr " Openen van pijp voor lezen mislukt: "
 
+#, fuzzy, c-format
+msgid " Cannot open file for writing: %s "
+msgstr " Openen van pijp voor lezen mislukt: "
+
 msgid "Quick save "
 msgstr "Snel opslaan "
 
@@ -109,11 +113,26 @@ msgstr "Extensie:"
 msgid " Edit Save Mode "
 msgstr " Editor Bewaarmodus "
 
-msgid " Save As "
-msgstr " Opslaan als "
+msgid "&Do not change"
+msgstr ""
+
+msgid "&Unix format (LF)"
+msgstr ""
+
+msgid "&Windows/DOS format (CR LF)"
+msgstr ""
+
+msgid "&Macintosh format (LF)"
+msgstr ""
+
+msgid "Change line breaks to:"
+msgstr ""
 
 msgid " Enter file name: "
 msgstr " Geef bestandsnaam: "
+
+msgid " Save As "
+msgstr " Opslaan als "
 
 msgid " A file already exists with this name. "
 msgstr " Er bestaat al een bestand met die naam. "
@@ -844,6 +863,145 @@ msgid ""
 msgstr ""
 " chown voor \"%s\" mislukt \n"
 " %s "
+
+msgid "Displays the current version"
+msgstr "Toon de huidige versie"
+
+msgid "Print data directory"
+msgstr "Datamap weergeven"
+
+msgid "Print last working directory to specified file"
+msgstr "Werkmap wegschrijven in bestand bij afsluiten programma"
+
+msgid "Enables subshell support (default)"
+msgstr "Zet subshell-ondersteuning aan (standaard)"
+
+msgid "Disables subshell support"
+msgstr "Schakelt subshell-ondersteuning uit"
+
+msgid "Log ftp dialog to specified file"
+msgstr "Schrijf FTP log naar aangegeven bestand"
+
+msgid "Set debug level"
+msgstr "Debugniveau instellen"
+
+msgid "Launches the file viewer on a file"
+msgstr "Start de bestandviewer voor een bestand"
+
+msgid "Edits one file"
+msgstr "Bewerkt een bestand"
+
+msgid "Forces xterm features"
+msgstr "Dwingt xterm features"
+
+msgid "Disable mouse support in text version"
+msgstr "Muisondersteuning uitschakelen in de tekstversie"
+
+msgid "Tries to use termcap instead of terminfo"
+msgstr "Probeert 'termcap' te gebruiken, in plaats van 'terminfo'"
+
+msgid "To run on slow terminals"
+msgstr "Voor langzame terminals"
+
+msgid "Use stickchars to draw"
+msgstr "Gebruik ASCII karakters om te tekenen"
+
+msgid "Resets soft keys on HP terminals"
+msgstr "Zet soft-key bij HP terminals terug"
+
+msgid "Requests to run in black and white"
+msgstr "Verzoek om in zwart/wit te werken"
+
+msgid "Request to run in color mode"
+msgstr "Vraag om de kleurenmodus te gebruiken"
+
+msgid "Specifies a color configuration"
+msgstr "Geef een kleurconfiguratie aan"
+
+#, fuzzy
+msgid ""
+"--colors KEYWORD={FORE},{BACK}\n"
+"\n"
+"{FORE} and {BACK} can be omitted, and the default will be used\n"
+"\n"
+"Keywords:\n"
+"   Global:       errors, reverse, gauge, input, viewunderline\n"
+"   File display: normal, selected, marked, markselect\n"
+"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                 errdhotfocus\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
+msgstr ""
+"--colors KEYWORD={VOOR},{ACHTER}\n"
+"\n"
+"{VOOR} en {ACHTER} kunnen worden weggelaten, en de defaultwaarde wordt\n"
+"gebruikt\n"
+"\n"
+"Sleutelwoorden:\n"
+"   Globaal:          errors, reverse, gauge, input, viewunderline\n"
+"   Bestandsweergave: normal, selected, marked, markselect\n"
+"   Dialogen:         dnormal, dfocus, dhotnormal, dhotfocus,\n"
+"                     errdhotnormal, errdhotfocus\n"
+"   Menu's:           menu, menuhot, menusel, menuhotsel\n"
+"   Editor:           editnormal, editbold, editmarked\n"
+"   Help:             helpnormal, helpitalic, helpbold, helplink,\n"
+"                     helpslink\n"
+"   Bestandstypen:    directory, executable, link, stalelink, device,\n"
+"                     special, core\n"
+"\n"
+"Kleuren:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
+
+#, fuzzy
+msgid "Color options"
+msgstr "Instellingen"
+
+msgid "+number"
+msgstr "+number"
+
+#, fuzzy
+msgid "[this_dir] [other_panel_dir]"
+msgstr "[vlaggen] [deze dir] [andere dir]\n"
+
+msgid "Set initial line number for the internal editor"
+msgstr "Regelnummer instellen om de interne editor mee te starten"
+
+msgid ""
+"\n"
+"Please send any bug reports (including the output of `mc -V')\n"
+"to mc-devel@gnome.org\n"
+msgstr ""
+"\n"
+"Stuur bugreports (met de uitvoer van 'mc -V')\n"
+"naar mc-devel@gnome.org\n"
+
+#, c-format
+msgid "GNU Midnight Commander %s\n"
+msgstr "GNU Midnight Commander  %s\n"
+
+#, fuzzy
+msgid "Main options"
+msgstr " Vensteropties "
+
+#, fuzzy
+msgid "Terminal options"
+msgstr " Overige opties "
 
 msgid " Background process error "
 msgstr " Fout in achtergrondproces "
@@ -2468,138 +2626,6 @@ msgid ""
 "Or set 'don't ask again' and press <<Skip>>"
 msgstr ""
 
-#, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "GNU Midnight Commander  %s\n"
-
-msgid "[flags] [this_dir] [other_panel_dir]\n"
-msgstr "[vlaggen] [deze dir] [andere dir]\n"
-
-msgid "+number"
-msgstr "+number"
-
-msgid "Set initial line number for the internal editor"
-msgstr "Regelnummer instellen om de interne editor mee te starten"
-
-msgid ""
-"\n"
-"Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
-msgstr ""
-"\n"
-"Stuur bugreports (met de uitvoer van 'mc -V')\n"
-"naar mc-devel@gnome.org\n"
-
-#, fuzzy
-msgid ""
-"--colors KEYWORD={FORE},{BACK}\n"
-"\n"
-"{FORE} and {BACK} can be omitted, and the default will be used\n"
-"\n"
-"Keywords:\n"
-"   Global:       errors, reverse, gauge, input, viewunderline\n"
-"   File display: normal, selected, marked, markselect\n"
-"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate\n"
-msgstr ""
-"--colors KEYWORD={VOOR},{ACHTER}\n"
-"\n"
-"{VOOR} en {ACHTER} kunnen worden weggelaten, en de defaultwaarde wordt\n"
-"gebruikt\n"
-"\n"
-"Sleutelwoorden:\n"
-"   Globaal:          errors, reverse, gauge, input, viewunderline\n"
-"   Bestandsweergave: normal, selected, marked, markselect\n"
-"   Dialogen:         dnormal, dfocus, dhotnormal, dhotfocus,\n"
-"                     errdhotnormal, errdhotfocus\n"
-"   Menu's:           menu, menuhot, menusel, menuhotsel\n"
-"   Editor:           editnormal, editbold, editmarked\n"
-"   Help:             helpnormal, helpitalic, helpbold, helplink,\n"
-"                     helpslink\n"
-"   Bestandstypen:    directory, executable, link, stalelink, device,\n"
-"                     special, core\n"
-"\n"
-"Kleuren:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-
-msgid ""
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-msgstr ""
-
-msgid "Displays this help message"
-msgstr "Toont deze helptekst"
-
-msgid "Displays the current version"
-msgstr "Toon de huidige versie"
-
-msgid "Forces xterm features"
-msgstr "Dwingt xterm features"
-
-msgid "Disable mouse support in text version"
-msgstr "Muisondersteuning uitschakelen in de tekstversie"
-
-msgid "Tries to use termcap instead of terminfo"
-msgstr "Probeert 'termcap' te gebruiken, in plaats van 'terminfo'"
-
-msgid "Resets soft keys on HP terminals"
-msgstr "Zet soft-key bij HP terminals terug"
-
-msgid "To run on slow terminals"
-msgstr "Voor langzame terminals"
-
-msgid "Use stickchars to draw"
-msgstr "Gebruik ASCII karakters om te tekenen"
-
-msgid "Requests to run in black and white"
-msgstr "Verzoek om in zwart/wit te werken"
-
-msgid "Request to run in color mode"
-msgstr "Vraag om de kleurenmodus te gebruiken"
-
-msgid "Specifies a color configuration"
-msgstr "Geef een kleurconfiguratie aan"
-
-msgid "Displays a help screen on how to change the color scheme"
-msgstr "Toont een helpscherm over het veranderen van het kleurenschema"
-
-msgid "Log ftp dialog to specified file"
-msgstr "Schrijf FTP log naar aangegeven bestand"
-
-msgid "Set debug level"
-msgstr "Debugniveau instellen"
-
-msgid "Print data directory"
-msgstr "Datamap weergeven"
-
-msgid "Print last working directory to specified file"
-msgstr "Werkmap wegschrijven in bestand bij afsluiten programma"
-
-msgid "Enables subshell support (default)"
-msgstr "Zet subshell-ondersteuning aan (standaard)"
-
-msgid "Disables subshell support"
-msgstr "Schakelt subshell-ondersteuning uit"
-
-msgid "Launches the file viewer on a file"
-msgstr "Start de bestandviewer voor een bestand"
-
-msgid "Edits one file"
-msgstr "Bewerkt een bestand"
-
 #, fuzzy, c-format
 msgid "Cannot create %s directory"
 msgstr "Veranderen van map mislukt"
@@ -2717,28 +2743,6 @@ msgstr "Opdracht oproepen mislukt."
 
 msgid "Pipe close failed"
 msgstr "Sluiten van pipe mislukt"
-
-msgid "missing argument"
-msgstr "argument mist"
-
-msgid "unknown option"
-msgstr "onbekende optie"
-
-msgid "invalid numeric value"
-msgstr "ongeldige numerieke waarde"
-
-msgid "Show this help message"
-msgstr "Toon deze helptekst"
-
-msgid "Display brief usage message"
-msgstr "Toon korte gebruiksaanwijzing"
-
-msgid "ARG"
-msgstr "ARG"
-
-#, c-format
-msgid "Usage:"
-msgstr " Gebruik:"
 
 msgid "[dev]"
 msgstr "[dev]"
@@ -3804,6 +3808,33 @@ msgstr "Interne fout:"
 
 msgid "Changes to file lost"
 msgstr "Wijzigingen zijn verloren"
+
+#~ msgid "Displays this help message"
+#~ msgstr "Toont deze helptekst"
+
+#~ msgid "Displays a help screen on how to change the color scheme"
+#~ msgstr "Toont een helpscherm over het veranderen van het kleurenschema"
+
+#~ msgid "missing argument"
+#~ msgstr "argument mist"
+
+#~ msgid "unknown option"
+#~ msgstr "onbekende optie"
+
+#~ msgid "invalid numeric value"
+#~ msgstr "ongeldige numerieke waarde"
+
+#~ msgid "Show this help message"
+#~ msgstr "Toon deze helptekst"
+
+#~ msgid "Display brief usage message"
+#~ msgstr "Toon korte gebruiksaanwijzing"
+
+#~ msgid "ARG"
+#~ msgstr "ARG"
+
+#~ msgid "Usage:"
+#~ msgstr " Gebruik:"
 
 #~ msgid "pro&Mpt on replace"
 #~ msgstr "&Vraag bij vervanging"

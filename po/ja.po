@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc CVS-20011220\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-08-26 17:11+0300\n"
+"POT-Creation-Date: 2009-09-02 23:01+0300\n"
 "PO-Revision-Date: 2001-12-20 18:33+0900\n"
 "Last-Translator: Akira TAGOH <tagoh@gnome.gr.jp>\n"
 "Language-Team: Japanese <debian-japanese@lists.debian.org>\n"
@@ -90,6 +90,10 @@ msgstr " パイプへの書き出しエラー: "
 msgid " Cannot open pipe for writing: "
 msgstr "書き込み用のパイプのオープンに失敗しました: "
 
+#, fuzzy, c-format
+msgid " Cannot open file for writing: %s "
+msgstr "書き込み用のパイプのオープンに失敗しました: "
+
 msgid "Quick save "
 msgstr "クイックセーブ "
 
@@ -108,12 +112,27 @@ msgstr "拡張子: "
 msgid " Edit Save Mode "
 msgstr "保存方法を変更 "
 
-msgid " Save As "
-msgstr " 別名で保存 "
+msgid "&Do not change"
+msgstr ""
+
+msgid "&Unix format (LF)"
+msgstr ""
+
+msgid "&Windows/DOS format (CR LF)"
+msgstr ""
+
+msgid "&Macintosh format (LF)"
+msgstr ""
+
+msgid "Change line breaks to:"
+msgstr ""
 
 #, fuzzy
 msgid " Enter file name: "
 msgstr " 行番号を入力してください: "
+
+msgid " Save As "
+msgstr " 別名で保存 "
 
 msgid " A file already exists with this name. "
 msgstr "同名のファイルが存在します"
@@ -855,6 +874,143 @@ msgid ""
 msgstr ""
 " chmod \"%s\"をchownできません \n"
 " %s "
+
+msgid "Displays the current version"
+msgstr "バージョンを表示"
+
+#, fuzzy
+msgid "Print data directory"
+msgstr "directory"
+
+#, fuzzy
+msgid "Print last working directory to specified file"
+msgstr "プログラム終了時に作業ディレクトリを表示"
+
+msgid "Enables subshell support (default)"
+msgstr "サブシェルのサポート (デフォルト)"
+
+msgid "Disables subshell support"
+msgstr "サブシェルのサポートを無効化"
+
+msgid "Log ftp dialog to specified file"
+msgstr "ftp の対話記録を指定したファイルに保存"
+
+msgid "Set debug level"
+msgstr ""
+
+msgid "Launches the file viewer on a file"
+msgstr "ファイルビューアを起動"
+
+msgid "Edits one file"
+msgstr "ファイルを編集"
+
+msgid "Forces xterm features"
+msgstr "強制的に xterm 機能を使う"
+
+msgid "Disable mouse support in text version"
+msgstr "テキスト版でのマウスのサポートを無効化"
+
+msgid "Tries to use termcap instead of terminfo"
+msgstr "terminfoの代わりにtermcapを試す"
+
+msgid "To run on slow terminals"
+msgstr "遅い端末で実行"
+
+msgid "Use stickchars to draw"
+msgstr "stickchars で描画"
+
+msgid "Resets soft keys on HP terminals"
+msgstr "HPターミナルでソフトウェアキーボードを要求"
+
+msgid "Requests to run in black and white"
+msgstr "白黒モードでの実行を要求"
+
+msgid "Request to run in color mode"
+msgstr "カラーモードでの実行を要求"
+
+msgid "Specifies a color configuration"
+msgstr "カラー設定を指定"
+
+#, fuzzy
+msgid ""
+"--colors KEYWORD={FORE},{BACK}\n"
+"\n"
+"{FORE} and {BACK} can be omitted, and the default will be used\n"
+"\n"
+"Keywords:\n"
+"   Global:       errors, reverse, gauge, input, viewunderline\n"
+"   File display: normal, selected, marked, markselect\n"
+"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                 errdhotfocus\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
+msgstr ""
+"--colors キーワード={FORE},{BACK}\n"
+"\n"
+"{FORE} と {BACK} は省略することが出来ます．そしてデフォルト値が使われるでしょ"
+"う\n"
+"\n"
+"キーワード:\n"
+"   Global:       エラー，反転，ゲージ，入力\n"
+"   File display: 通常，選択，マーク，選択マーク\n"
+"   Dialog boxes: ダイアログ全般\n"
+"   Menus:        メニュー全般\n"
+"   Help:         ヘルプ全般\n"
+"   File types:   ディレクトリ，実行属性，リンク，デバイス，特殊，core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
+
+#, fuzzy
+msgid "Color options"
+msgstr "設定オプション"
+
+msgid "+number"
+msgstr ""
+
+#, fuzzy
+msgid "[this_dir] [other_panel_dir]"
+msgstr "[flags] [this_dir] [other_panel_dir]\n"
+
+msgid "Set initial line number for the internal editor"
+msgstr ""
+
+msgid ""
+"\n"
+"Please send any bug reports (including the output of `mc -V')\n"
+"to mc-devel@gnome.org\n"
+msgstr ""
+"\n"
+"不具合報告を ('mc -V' の出力を含めて) mc-devel@gnome.org\n"
+"まで送ってください\n"
+
+#, c-format
+msgid "GNU Midnight Commander %s\n"
+msgstr "GNU Midnight Commander %s\n"
+
+#, fuzzy
+msgid "Main options"
+msgstr " パネル・オプション "
+
+#, fuzzy
+msgid "Terminal options"
+msgstr " その他のオプション "
 
 msgid " Background process error "
 msgstr " バックグラウンド処理エラー "
@@ -2483,136 +2639,6 @@ msgid ""
 "Or set 'don't ask again' and press <<Skip>>"
 msgstr ""
 
-#, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "GNU Midnight Commander %s\n"
-
-msgid "[flags] [this_dir] [other_panel_dir]\n"
-msgstr "[flags] [this_dir] [other_panel_dir]\n"
-
-msgid "+number"
-msgstr ""
-
-msgid "Set initial line number for the internal editor"
-msgstr ""
-
-msgid ""
-"\n"
-"Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
-msgstr ""
-"\n"
-"不具合報告を ('mc -V' の出力を含めて) mc-devel@gnome.org\n"
-"まで送ってください\n"
-
-#, fuzzy
-msgid ""
-"--colors KEYWORD={FORE},{BACK}\n"
-"\n"
-"{FORE} and {BACK} can be omitted, and the default will be used\n"
-"\n"
-"Keywords:\n"
-"   Global:       errors, reverse, gauge, input, viewunderline\n"
-"   File display: normal, selected, marked, markselect\n"
-"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate\n"
-msgstr ""
-"--colors キーワード={FORE},{BACK}\n"
-"\n"
-"{FORE} と {BACK} は省略することが出来ます．そしてデフォルト値が使われるでしょ"
-"う\n"
-"\n"
-"キーワード:\n"
-"   Global:       エラー，反転，ゲージ，入力\n"
-"   File display: 通常，選択，マーク，選択マーク\n"
-"   Dialog boxes: ダイアログ全般\n"
-"   Menus:        メニュー全般\n"
-"   Help:         ヘルプ全般\n"
-"   File types:   ディレクトリ，実行属性，リンク，デバイス，特殊，core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-
-msgid ""
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-msgstr ""
-
-msgid "Displays this help message"
-msgstr "このヘルプメッセージを表示"
-
-msgid "Displays the current version"
-msgstr "バージョンを表示"
-
-msgid "Forces xterm features"
-msgstr "強制的に xterm 機能を使う"
-
-msgid "Disable mouse support in text version"
-msgstr "テキスト版でのマウスのサポートを無効化"
-
-msgid "Tries to use termcap instead of terminfo"
-msgstr "terminfoの代わりにtermcapを試す"
-
-msgid "Resets soft keys on HP terminals"
-msgstr "HPターミナルでソフトウェアキーボードを要求"
-
-msgid "To run on slow terminals"
-msgstr "遅い端末で実行"
-
-msgid "Use stickchars to draw"
-msgstr "stickchars で描画"
-
-msgid "Requests to run in black and white"
-msgstr "白黒モードでの実行を要求"
-
-msgid "Request to run in color mode"
-msgstr "カラーモードでの実行を要求"
-
-msgid "Specifies a color configuration"
-msgstr "カラー設定を指定"
-
-msgid "Displays a help screen on how to change the color scheme"
-msgstr "カラースキームの変更方法を画面に表示"
-
-msgid "Log ftp dialog to specified file"
-msgstr "ftp の対話記録を指定したファイルに保存"
-
-msgid "Set debug level"
-msgstr ""
-
-#, fuzzy
-msgid "Print data directory"
-msgstr "directory"
-
-#, fuzzy
-msgid "Print last working directory to specified file"
-msgstr "プログラム終了時に作業ディレクトリを表示"
-
-msgid "Enables subshell support (default)"
-msgstr "サブシェルのサポート (デフォルト)"
-
-msgid "Disables subshell support"
-msgstr "サブシェルのサポートを無効化"
-
-msgid "Launches the file viewer on a file"
-msgstr "ファイルビューアを起動"
-
-msgid "Edits one file"
-msgstr "ファイルを編集"
-
 #, fuzzy, c-format
 msgid "Cannot create %s directory"
 msgstr "ディレクトリを変更できません"
@@ -2730,29 +2756,6 @@ msgstr "コマンドを実行できません"
 
 msgid "Pipe close failed"
 msgstr "パイプのクローズに失敗"
-
-msgid "missing argument"
-msgstr ""
-
-#, fuzzy
-msgid "unknown option"
-msgstr "<不明なグループ>"
-
-msgid "invalid numeric value"
-msgstr ""
-
-msgid "Show this help message"
-msgstr "このヘルプメッセージを表示"
-
-msgid "Display brief usage message"
-msgstr "短い使い方を表示"
-
-msgid "ARG"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Usage:"
-msgstr "ユーザ名:"
 
 msgid "[dev]"
 msgstr ""
@@ -3809,6 +3812,26 @@ msgstr "内部エラー:"
 
 msgid "Changes to file lost"
 msgstr "紛失したファイルに変更します"
+
+#~ msgid "Displays this help message"
+#~ msgstr "このヘルプメッセージを表示"
+
+#~ msgid "Displays a help screen on how to change the color scheme"
+#~ msgstr "カラースキームの変更方法を画面に表示"
+
+#, fuzzy
+#~ msgid "unknown option"
+#~ msgstr "<不明なグループ>"
+
+#~ msgid "Show this help message"
+#~ msgstr "このヘルプメッセージを表示"
+
+#~ msgid "Display brief usage message"
+#~ msgstr "短い使い方を表示"
+
+#, fuzzy
+#~ msgid "Usage:"
+#~ msgstr "ユーザ名:"
 
 #~ msgid "pro&Mpt on replace"
 #~ msgstr "置換時にプロンプト(&O)"

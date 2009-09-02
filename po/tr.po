@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-08-26 17:11+0300\n"
+"POT-Creation-Date: 2009-09-02 23:01+0300\n"
 "PO-Revision-Date: 2001-11-06 05:50+0200\n"
 "Last-Translator: Nilgün Belma Bugüner <nilgun@fide.org>\n"
 "Language-Team: Turkish <debian-l10n-turkish@lists.debian.org>\n"
@@ -91,6 +91,10 @@ msgstr " Veri yoluna yazarken hata: "
 msgid " Cannot open pipe for writing: "
 msgstr " Veri yolu yazmak için açılırken hata oluştu: "
 
+#, fuzzy, c-format
+msgid " Cannot open file for writing: %s "
+msgstr " Veri yolu yazmak için açılırken hata oluştu: "
+
 msgid "Quick save "
 msgstr "Çabuk "
 
@@ -109,12 +113,27 @@ msgstr "Uzantı:"
 msgid " Edit Save Mode "
 msgstr " Kaydetme kipini düzenle "
 
-msgid " Save As "
-msgstr " Farklı kaydet "
+msgid "&Do not change"
+msgstr ""
+
+msgid "&Unix format (LF)"
+msgstr ""
+
+msgid "&Windows/DOS format (CR LF)"
+msgstr ""
+
+msgid "&Macintosh format (LF)"
+msgstr ""
+
+msgid "Change line breaks to:"
+msgstr ""
 
 #, fuzzy
 msgid " Enter file name: "
 msgstr " Satırı girin: "
+
+msgid " Save As "
+msgstr " Farklı kaydet "
 
 msgid " A file already exists with this name. "
 msgstr " Bu isimde bir dosya zaten var. "
@@ -856,6 +875,143 @@ msgid ""
 msgstr ""
 " chown \"%s\" yapılamadı \n"
 " %s "
+
+msgid "Displays the current version"
+msgstr "Sürümü gösterir"
+
+#, fuzzy
+msgid "Print data directory"
+msgstr "dizin:"
+
+#, fuzzy
+msgid "Print last working directory to specified file"
+msgstr "Program çıkışında çalışılan dizini basar"
+
+msgid "Enables subshell support (default)"
+msgstr "Altkabuk desteğini etkinleştirir (öntanımlı)"
+
+msgid "Disables subshell support"
+msgstr "Altkabuk desteğini kapatır"
+
+msgid "Log ftp dialog to specified file"
+msgstr "ftp dialog günlüğünü belirtilen dosyaya yazar"
+
+msgid "Set debug level"
+msgstr ""
+
+msgid "Launches the file viewer on a file"
+msgstr "Bir dosyayı dosya göstericide açar"
+
+msgid "Edits one file"
+msgstr "Dosya düzenler"
+
+msgid "Forces xterm features"
+msgstr "xterm özelliklerini etkinleştirir"
+
+msgid "Disable mouse support in text version"
+msgstr "Metin sürümünde fare desteğini kapatır"
+
+msgid "Tries to use termcap instead of terminfo"
+msgstr "Terminfo yerine termcap kullanmayı dener"
+
+msgid "To run on slow terminals"
+msgstr "Yavaş terminallerde çalıştırmak"
+
+msgid "Use stickchars to draw"
+msgstr "Pencere çizgilerinde çubuk karakterleri kullanılır"
+
+msgid "Resets soft keys on HP terminals"
+msgstr "HP terminallerde soft tuşları sıfırlar"
+
+msgid "Requests to run in black and white"
+msgstr "Siyah/Beyaz olarak çalıştırma isteği"
+
+msgid "Request to run in color mode"
+msgstr "Renkli kipte çalıştırma isteği"
+
+msgid "Specifies a color configuration"
+msgstr "Bir renk yapılandırması belirtir"
+
+#, fuzzy
+msgid ""
+"--colors KEYWORD={FORE},{BACK}\n"
+"\n"
+"{FORE} and {BACK} can be omitted, and the default will be used\n"
+"\n"
+"Keywords:\n"
+"   Global:       errors, reverse, gauge, input, viewunderline\n"
+"   File display: normal, selected, marked, markselect\n"
+"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                 errdhotfocus\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
+msgstr ""
+"--colors ANAHTAR-KELİME={ÖN},{ARKA}\n"
+"\n"
+" {ÖN} ve {ARKA} verilmeyebilir, bu durumda öntanımlılar kullanılır\n"
+"\n"
+" Anahtar kelimeler\n"
+"   Genel:           errors, reverse, gauge, input\n"
+"   Dosya gösterimi: normal, selected, marked, markselect\n"
+"   Diloglar:        dnormal, dfocus, dhotnormal, dhotfocus\n"
+"   Menüler:         menu, menuhot, menusel, menuhotsel\n"
+"   Yardım:          helpnormal, helpitalic, helplink, helpslink\n"
+"   Dosya türleri:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Renkler:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
+
+#, fuzzy
+msgid "Color options"
+msgstr "Yapılandırma seçenekleri"
+
+msgid "+number"
+msgstr ""
+
+#, fuzzy
+msgid "[this_dir] [other_panel_dir]"
+msgstr "[seçenekler] [bu_dizin] [diğer_panel_dizini]\n"
+
+msgid "Set initial line number for the internal editor"
+msgstr ""
+
+msgid ""
+"\n"
+"Please send any bug reports (including the output of `mc -V')\n"
+"to mc-devel@gnome.org\n"
+msgstr ""
+"\n"
+"Lütfen, `mc -V' çıktısını da içeren bir hata raporunu\n"
+"mc-devel@gnome.org adresine gönderiniz\n"
+
+#, c-format
+msgid "GNU Midnight Commander %s\n"
+msgstr "GNU Midnight Commander %s\n"
+
+#, fuzzy
+msgid "Main options"
+msgstr " Panel seçenekleri"
+
+#, fuzzy
+msgid "Terminal options"
+msgstr " Diğer ayarlar "
 
 msgid " Background process error "
 msgstr " Artalan işlem hatası "
@@ -2483,136 +2639,6 @@ msgid ""
 "Or set 'don't ask again' and press <<Skip>>"
 msgstr ""
 
-#, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "GNU Midnight Commander %s\n"
-
-msgid "[flags] [this_dir] [other_panel_dir]\n"
-msgstr "[seçenekler] [bu_dizin] [diğer_panel_dizini]\n"
-
-msgid "+number"
-msgstr ""
-
-msgid "Set initial line number for the internal editor"
-msgstr ""
-
-msgid ""
-"\n"
-"Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
-msgstr ""
-"\n"
-"Lütfen, `mc -V' çıktısını da içeren bir hata raporunu\n"
-"mc-devel@gnome.org adresine gönderiniz\n"
-
-#, fuzzy
-msgid ""
-"--colors KEYWORD={FORE},{BACK}\n"
-"\n"
-"{FORE} and {BACK} can be omitted, and the default will be used\n"
-"\n"
-"Keywords:\n"
-"   Global:       errors, reverse, gauge, input, viewunderline\n"
-"   File display: normal, selected, marked, markselect\n"
-"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate\n"
-msgstr ""
-"--colors ANAHTAR-KELİME={ÖN},{ARKA}\n"
-"\n"
-" {ÖN} ve {ARKA} verilmeyebilir, bu durumda öntanımlılar kullanılır\n"
-"\n"
-" Anahtar kelimeler\n"
-"   Genel:           errors, reverse, gauge, input\n"
-"   Dosya gösterimi: normal, selected, marked, markselect\n"
-"   Diloglar:        dnormal, dfocus, dhotnormal, dhotfocus\n"
-"   Menüler:         menu, menuhot, menusel, menuhotsel\n"
-"   Yardım:          helpnormal, helpitalic, helplink, helpslink\n"
-"   Dosya türleri:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Renkler:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-
-msgid ""
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-msgstr ""
-
-msgid "Displays this help message"
-msgstr "Bu yardım iletisini gösterir"
-
-msgid "Displays the current version"
-msgstr "Sürümü gösterir"
-
-msgid "Forces xterm features"
-msgstr "xterm özelliklerini etkinleştirir"
-
-msgid "Disable mouse support in text version"
-msgstr "Metin sürümünde fare desteğini kapatır"
-
-msgid "Tries to use termcap instead of terminfo"
-msgstr "Terminfo yerine termcap kullanmayı dener"
-
-msgid "Resets soft keys on HP terminals"
-msgstr "HP terminallerde soft tuşları sıfırlar"
-
-msgid "To run on slow terminals"
-msgstr "Yavaş terminallerde çalıştırmak"
-
-msgid "Use stickchars to draw"
-msgstr "Pencere çizgilerinde çubuk karakterleri kullanılır"
-
-msgid "Requests to run in black and white"
-msgstr "Siyah/Beyaz olarak çalıştırma isteği"
-
-msgid "Request to run in color mode"
-msgstr "Renkli kipte çalıştırma isteği"
-
-msgid "Specifies a color configuration"
-msgstr "Bir renk yapılandırması belirtir"
-
-msgid "Displays a help screen on how to change the color scheme"
-msgstr "Renk şemasının değiştirilmesi ile ilgili yardım ekranını gösterir"
-
-msgid "Log ftp dialog to specified file"
-msgstr "ftp dialog günlüğünü belirtilen dosyaya yazar"
-
-msgid "Set debug level"
-msgstr ""
-
-#, fuzzy
-msgid "Print data directory"
-msgstr "dizin:"
-
-#, fuzzy
-msgid "Print last working directory to specified file"
-msgstr "Program çıkışında çalışılan dizini basar"
-
-msgid "Enables subshell support (default)"
-msgstr "Altkabuk desteğini etkinleştirir (öntanımlı)"
-
-msgid "Disables subshell support"
-msgstr "Altkabuk desteğini kapatır"
-
-msgid "Launches the file viewer on a file"
-msgstr "Bir dosyayı dosya göstericide açar"
-
-msgid "Edits one file"
-msgstr "Dosya düzenler"
-
 #, fuzzy, c-format
 msgid "Cannot create %s directory"
 msgstr "Dizin değiştirilemedi"
@@ -2730,29 +2756,6 @@ msgstr "komut hatırlatmaz."
 
 msgid "Pipe close failed"
 msgstr "Veri yolu kapatılamadı"
-
-msgid "missing argument"
-msgstr ""
-
-#, fuzzy
-msgid "unknown option"
-msgstr "<Bilinmeyen>"
-
-msgid "invalid numeric value"
-msgstr ""
-
-msgid "Show this help message"
-msgstr "Bu yardım iletisini göster"
-
-msgid "Display brief usage message"
-msgstr "Kısa bir kullanım iletisi gösterir"
-
-msgid "ARG"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Usage:"
-msgstr "Kullanıcı: "
 
 msgid "[dev]"
 msgstr ""
@@ -3817,6 +3820,26 @@ msgstr "İç hata:"
 
 msgid "Changes to file lost"
 msgstr "Değişiklikler kayıp"
+
+#~ msgid "Displays this help message"
+#~ msgstr "Bu yardım iletisini gösterir"
+
+#~ msgid "Displays a help screen on how to change the color scheme"
+#~ msgstr "Renk şemasının değiştirilmesi ile ilgili yardım ekranını gösterir"
+
+#, fuzzy
+#~ msgid "unknown option"
+#~ msgstr "<Bilinmeyen>"
+
+#~ msgid "Show this help message"
+#~ msgstr "Bu yardım iletisini göster"
+
+#~ msgid "Display brief usage message"
+#~ msgstr "Kısa bir kullanım iletisi gösterir"
+
+#, fuzzy
+#~ msgid "Usage:"
+#~ msgstr "Kullanıcı: "
 
 #~ msgid "pro&Mpt on replace"
 #~ msgstr "Yerleştirirken &Sor"

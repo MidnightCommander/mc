@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-08-26 17:11+0300\n"
+"POT-Creation-Date: 2009-09-02 23:01+0300\n"
 "PO-Revision-Date: 2002-08-25 16:15GMT+2\n"
 "Last-Translator: Vital Khilko <dojlid@mova.org>\n"
 "Language-Team: belarussian (tarask) <debian-l10n-belarusian@lists.debian."
@@ -87,6 +87,10 @@ msgstr " Памылка запісу ў канал: "
 msgid " Cannot open pipe for writing: "
 msgstr " Памылка адкрыцьця каналу для запісу: "
 
+#, fuzzy, c-format
+msgid " Cannot open file for writing: %s "
+msgstr " Памылка адкрыцьця каналу для запісу: "
+
 msgid "Quick save "
 msgstr "Хуткае захаваньне "
 
@@ -105,11 +109,26 @@ msgstr "Пашырэньне:"
 msgid " Edit Save Mode "
 msgstr " Рэжым захаваньня "
 
-msgid " Save As "
-msgstr " Захаваць як "
+msgid "&Do not change"
+msgstr ""
+
+msgid "&Unix format (LF)"
+msgstr ""
+
+msgid "&Windows/DOS format (CR LF)"
+msgstr ""
+
+msgid "&Macintosh format (LF)"
+msgstr ""
+
+msgid "Change line breaks to:"
+msgstr ""
 
 msgid " Enter file name: "
 msgstr " Увядзіце ймя файлу: "
+
+msgid " Save As "
+msgstr " Захаваць як "
 
 msgid " A file already exists with this name. "
 msgstr " Файл с такім імем ужо йснуе. "
@@ -850,6 +869,125 @@ msgid ""
 msgstr ""
 " Немагчыма зьмяніць уладальніка \"%s\" \n"
 " %s "
+
+msgid "Displays the current version"
+msgstr "Адлюстраваць бягучую вэрсыі"
+
+#, fuzzy
+msgid "Print data directory"
+msgstr "каталёг"
+
+#, fuzzy
+msgid "Print last working directory to specified file"
+msgstr "Друк працоўнага каталёгу пры выхадзе з праграмы"
+
+msgid "Enables subshell support (default)"
+msgstr "Уключыць падтрымку ўбудаванае каманднае абалонкі (тыпова)"
+
+msgid "Disables subshell support"
+msgstr "Адключыць падтрымку ўбудаванае каманднае абалонкі"
+
+msgid "Log ftp dialog to specified file"
+msgstr "Весьці пратакол дыялёгу з FTP у файл"
+
+msgid "Set debug level"
+msgstr ""
+
+msgid "Launches the file viewer on a file"
+msgstr "Запускае праграму прагляду для файлу"
+
+msgid "Edits one file"
+msgstr "Рэдагуе адзін файл"
+
+msgid "Forces xterm features"
+msgstr "Навязвае ўласьцівасьці xterm"
+
+msgid "Disable mouse support in text version"
+msgstr "Адключыць падтрымку мышы ў тэкставай вэрсыі"
+
+msgid "Tries to use termcap instead of terminfo"
+msgstr "Паспрабаваць выкарыстоўваць termcap замест terminfo"
+
+msgid "To run on slow terminals"
+msgstr "Запуск на павольных тэрміналах"
+
+msgid "Use stickchars to draw"
+msgstr "Псэўдаграфіка для маляваньня"
+
+msgid "Resets soft keys on HP terminals"
+msgstr "Скідае праграмныя клявішы на терміналах HP"
+
+msgid "Requests to run in black and white"
+msgstr "Запыт на запуск у монахромным рэжыме"
+
+msgid "Request to run in color mode"
+msgstr "Запыт на запуск у каляровым рэжыме"
+
+msgid "Specifies a color configuration"
+msgstr "Вызначае наладкі колераў"
+
+msgid ""
+"--colors KEYWORD={FORE},{BACK}\n"
+"\n"
+"{FORE} and {BACK} can be omitted, and the default will be used\n"
+"\n"
+"Keywords:\n"
+"   Global:       errors, reverse, gauge, input, viewunderline\n"
+"   File display: normal, selected, marked, markselect\n"
+"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                 errdhotfocus\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
+msgstr ""
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
+
+#, fuzzy
+msgid "Color options"
+msgstr "Парамэтры канфігурацыі"
+
+msgid "+number"
+msgstr ""
+
+#, fuzzy
+msgid "[this_dir] [other_panel_dir]"
+msgstr "[сьцягі] [гэты_каталёг] [каталёг_другой_панэлі]\n"
+
+msgid "Set initial line number for the internal editor"
+msgstr ""
+
+msgid ""
+"\n"
+"Please send any bug reports (including the output of `mc -V')\n"
+"to mc-devel@gnome.org\n"
+msgstr ""
+"\n"
+"Калі ласка, дасылайце любыя паведамленьні аб памылках (уключаючы вывад 'mc -"
+"V')\n"
+"на адрэсу mc-devel@gnome.org\n"
+
+#, c-format
+msgid "GNU Midnight Commander %s\n"
+msgstr "GNU Midnight Commander %s\n"
+
+#, fuzzy
+msgid "Main options"
+msgstr " Наладка панэляў "
+
+#, fuzzy
+msgid "Terminal options"
+msgstr " Іншыя наладкі "
 
 msgid " Background process error "
 msgstr " Памылка працэса ў тле "
@@ -2477,118 +2615,6 @@ msgid ""
 "Or set 'don't ask again' and press <<Skip>>"
 msgstr ""
 
-#, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "GNU Midnight Commander %s\n"
-
-msgid "[flags] [this_dir] [other_panel_dir]\n"
-msgstr "[сьцягі] [гэты_каталёг] [каталёг_другой_панэлі]\n"
-
-msgid "+number"
-msgstr ""
-
-msgid "Set initial line number for the internal editor"
-msgstr ""
-
-msgid ""
-"\n"
-"Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
-msgstr ""
-"\n"
-"Калі ласка, дасылайце любыя паведамленьні аб памылках (уключаючы вывад 'mc -"
-"V')\n"
-"на адрэсу mc-devel@gnome.org\n"
-
-msgid ""
-"--colors KEYWORD={FORE},{BACK}\n"
-"\n"
-"{FORE} and {BACK} can be omitted, and the default will be used\n"
-"\n"
-"Keywords:\n"
-"   Global:       errors, reverse, gauge, input, viewunderline\n"
-"   File display: normal, selected, marked, markselect\n"
-"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate\n"
-msgstr ""
-
-msgid ""
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-msgstr ""
-
-msgid "Displays this help message"
-msgstr "Адлюстраваць гэтае даведачнае паведамленьне"
-
-msgid "Displays the current version"
-msgstr "Адлюстраваць бягучую вэрсыі"
-
-msgid "Forces xterm features"
-msgstr "Навязвае ўласьцівасьці xterm"
-
-msgid "Disable mouse support in text version"
-msgstr "Адключыць падтрымку мышы ў тэкставай вэрсыі"
-
-msgid "Tries to use termcap instead of terminfo"
-msgstr "Паспрабаваць выкарыстоўваць termcap замест terminfo"
-
-msgid "Resets soft keys on HP terminals"
-msgstr "Скідае праграмныя клявішы на терміналах HP"
-
-msgid "To run on slow terminals"
-msgstr "Запуск на павольных тэрміналах"
-
-msgid "Use stickchars to draw"
-msgstr "Псэўдаграфіка для маляваньня"
-
-msgid "Requests to run in black and white"
-msgstr "Запыт на запуск у монахромным рэжыме"
-
-msgid "Request to run in color mode"
-msgstr "Запыт на запуск у каляровым рэжыме"
-
-msgid "Specifies a color configuration"
-msgstr "Вызначае наладкі колераў"
-
-msgid "Displays a help screen on how to change the color scheme"
-msgstr "Адлюстроўвае экран дапамог - як зьмяніць схему колераў"
-
-msgid "Log ftp dialog to specified file"
-msgstr "Весьці пратакол дыялёгу з FTP у файл"
-
-msgid "Set debug level"
-msgstr ""
-
-#, fuzzy
-msgid "Print data directory"
-msgstr "каталёг"
-
-#, fuzzy
-msgid "Print last working directory to specified file"
-msgstr "Друк працоўнага каталёгу пры выхадзе з праграмы"
-
-msgid "Enables subshell support (default)"
-msgstr "Уключыць падтрымку ўбудаванае каманднае абалонкі (тыпова)"
-
-msgid "Disables subshell support"
-msgstr "Адключыць падтрымку ўбудаванае каманднае абалонкі"
-
-msgid "Launches the file viewer on a file"
-msgstr "Запускае праграму прагляду для файлу"
-
-msgid "Edits one file"
-msgstr "Рэдагуе адзін файл"
-
 #, fuzzy, c-format
 msgid "Cannot create %s directory"
 msgstr "Немагчыма зьмяніць каталёг"
@@ -2706,29 +2732,6 @@ msgstr "Немагчыма выканаць каманду."
 
 msgid "Pipe close failed"
 msgstr "Збой закрыцьця каналу"
-
-msgid "missing argument"
-msgstr ""
-
-#, fuzzy
-msgid "unknown option"
-msgstr "<Невядомы>"
-
-msgid "invalid numeric value"
-msgstr ""
-
-msgid "Show this help message"
-msgstr "Паказаць гэтае паведамленьне "
-
-msgid "Display brief usage message"
-msgstr "Паказаць кароткую інструкцыю"
-
-msgid "ARG"
-msgstr ""
-
-#, c-format
-msgid "Usage:"
-msgstr "Выкарыстайце:"
 
 msgid "[dev]"
 msgstr ""
@@ -3793,6 +3796,25 @@ msgstr " Нутраная памылка:"
 
 msgid "Changes to file lost"
 msgstr "Зьмены для файлу страчаны"
+
+#~ msgid "Displays this help message"
+#~ msgstr "Адлюстраваць гэтае даведачнае паведамленьне"
+
+#~ msgid "Displays a help screen on how to change the color scheme"
+#~ msgstr "Адлюстроўвае экран дапамог - як зьмяніць схему колераў"
+
+#, fuzzy
+#~ msgid "unknown option"
+#~ msgstr "<Невядомы>"
+
+#~ msgid "Show this help message"
+#~ msgstr "Паказаць гэтае паведамленьне "
+
+#~ msgid "Display brief usage message"
+#~ msgstr "Паказаць кароткую інструкцыю"
+
+#~ msgid "Usage:"
+#~ msgstr "Выкарыстайце:"
 
 #~ msgid "pro&Mpt on replace"
 #~ msgstr "Падцьвердзіць &замену"

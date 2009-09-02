@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-08-26 17:11+0300\n"
+"POT-Creation-Date: 2009-09-02 23:01+0300\n"
 "PO-Revision-Date: 2001-07-27 03:02+0800\n"
 "Last-Translator: Jing-Jong Shyue <shyue@sonoma.com.tw>\n"
 "Language-Team: Chinese <zh-l10n@linux.org.tw>\n"
@@ -90,6 +90,10 @@ msgstr " 寫入管線時發生錯誤 "
 msgid " Cannot open pipe for writing: "
 msgstr " 在開啟管線用來寫入時失敗： "
 
+#, fuzzy, c-format
+msgid " Cannot open file for writing: %s "
+msgstr " 在開啟管線用來寫入時失敗： "
+
 msgid "Quick save "
 msgstr "快速存檔"
 
@@ -108,11 +112,26 @@ msgstr "擴充:"
 msgid " Edit Save Mode "
 msgstr " 改變存檔模式 "
 
-msgid " Save As "
-msgstr " 另存新檔 "
+msgid "&Do not change"
+msgstr ""
+
+msgid "&Unix format (LF)"
+msgstr ""
+
+msgid "&Windows/DOS format (CR LF)"
+msgstr ""
+
+msgid "&Macintosh format (LF)"
+msgstr ""
+
+msgid "Change line breaks to:"
+msgstr ""
 
 msgid " Enter file name: "
 msgstr " 輸入檔名： "
+
+msgid " Save As "
+msgstr " 另存新檔 "
 
 msgid " A file already exists with this name. "
 msgstr " 同名的檔案已經存在。 "
@@ -853,6 +872,144 @@ msgid ""
 msgstr ""
 " 無法 chown \"%s\" \n"
 " %s "
+
+msgid "Displays the current version"
+msgstr "顯示目前的版本"
+
+#, fuzzy
+msgid "Print data directory"
+msgstr "建立新目錄"
+
+#, fuzzy
+msgid "Print last working directory to specified file"
+msgstr "程式結束時印出當前目錄"
+
+msgid "Enables subshell support (default)"
+msgstr "支援使用次殼層 (預設值)"
+
+msgid "Disables subshell support"
+msgstr "不支援使用次殼層 (subshell)"
+
+msgid "Log ftp dialog to specified file"
+msgstr "紀錄 FTP 對話框到特定檔案"
+
+msgid "Set debug level"
+msgstr ""
+
+msgid "Launches the file viewer on a file"
+msgstr "對某個檔案執行檔案檢視程式"
+
+msgid "Edits one file"
+msgstr "編輯一個檔案"
+
+msgid "Forces xterm features"
+msgstr "強迫使用 xterm 特性"
+
+msgid "Disable mouse support in text version"
+msgstr "文字模式下不使用滑鼠支援"
+
+msgid "Tries to use termcap instead of terminfo"
+msgstr "試著使用 termcap 來代替 terminfo"
+
+msgid "To run on slow terminals"
+msgstr "於慢速的終端機上執行"
+
+msgid "Use stickchars to draw"
+msgstr "使用stickchars繪製"
+
+msgid "Resets soft keys on HP terminals"
+msgstr "在 HP 終端機上重設軟鍵 (soft keys)"
+
+msgid "Requests to run in black and white"
+msgstr "要求在黑白模式下執行"
+
+msgid "Request to run in color mode"
+msgstr "要求在彩色模式中執行"
+
+msgid "Specifies a color configuration"
+msgstr "指定一組色彩設定"
+
+#, fuzzy
+msgid ""
+"--colors KEYWORD={FORE},{BACK}\n"
+"\n"
+"{FORE} and {BACK} can be omitted, and the default will be used\n"
+"\n"
+"Keywords:\n"
+"   Global:       errors, reverse, gauge, input, viewunderline\n"
+"   File display: normal, selected, marked, markselect\n"
+"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                 errdhotfocus\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
+msgstr ""
+"--colors 關鍵字={前景},{背景}\n"
+"\n"
+"{前景} 與 {背景} 可以被省略, 且預設值會被使用\n"
+"\n"
+"關鍵字:\n"
+"   Global:       errors, reverse, gauge, input\n"
+"   File display: normal, selected, marked, markselect\n"
+"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Help:         helpnormal, helpitalic, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"顏色:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
+
+#, fuzzy
+msgid "Color options"
+msgstr "設定選項"
+
+#, fuzzy
+msgid "+number"
+msgstr "Inode 號碼"
+
+#, fuzzy
+msgid "[this_dir] [other_panel_dir]"
+msgstr "[選項標籤] [路徑] [另一個路徑]\n"
+
+msgid "Set initial line number for the internal editor"
+msgstr ""
+
+msgid ""
+"\n"
+"Please send any bug reports (including the output of `mc -V')\n"
+"to mc-devel@gnome.org\n"
+msgstr ""
+"\n"
+"請將臭蟲回報 (包含 `mc -V' 的輸出)\n"
+"給 mc-devel@gnome.org\n"
+
+#, c-format
+msgid "GNU Midnight Commander %s\n"
+msgstr "GNU Midnight Commander %s\n"
+
+#, fuzzy
+msgid "Main options"
+msgstr " 面板選項 "
+
+#, fuzzy
+msgid "Terminal options"
+msgstr " 其它選項 "
 
 msgid " Background process error "
 msgstr " 背景程序錯誤 "
@@ -2480,137 +2637,6 @@ msgid ""
 "Or set 'don't ask again' and press <<Skip>>"
 msgstr ""
 
-#, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "GNU Midnight Commander %s\n"
-
-msgid "[flags] [this_dir] [other_panel_dir]\n"
-msgstr "[選項標籤] [路徑] [另一個路徑]\n"
-
-#, fuzzy
-msgid "+number"
-msgstr "Inode 號碼"
-
-msgid "Set initial line number for the internal editor"
-msgstr ""
-
-msgid ""
-"\n"
-"Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
-msgstr ""
-"\n"
-"請將臭蟲回報 (包含 `mc -V' 的輸出)\n"
-"給 mc-devel@gnome.org\n"
-
-#, fuzzy
-msgid ""
-"--colors KEYWORD={FORE},{BACK}\n"
-"\n"
-"{FORE} and {BACK} can be omitted, and the default will be used\n"
-"\n"
-"Keywords:\n"
-"   Global:       errors, reverse, gauge, input, viewunderline\n"
-"   File display: normal, selected, marked, markselect\n"
-"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate\n"
-msgstr ""
-"--colors 關鍵字={前景},{背景}\n"
-"\n"
-"{前景} 與 {背景} 可以被省略, 且預設值會被使用\n"
-"\n"
-"關鍵字:\n"
-"   Global:       errors, reverse, gauge, input\n"
-"   File display: normal, selected, marked, markselect\n"
-"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Help:         helpnormal, helpitalic, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"顏色:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-
-msgid ""
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-msgstr ""
-
-msgid "Displays this help message"
-msgstr "顯示此說明訊息"
-
-msgid "Displays the current version"
-msgstr "顯示目前的版本"
-
-msgid "Forces xterm features"
-msgstr "強迫使用 xterm 特性"
-
-msgid "Disable mouse support in text version"
-msgstr "文字模式下不使用滑鼠支援"
-
-msgid "Tries to use termcap instead of terminfo"
-msgstr "試著使用 termcap 來代替 terminfo"
-
-msgid "Resets soft keys on HP terminals"
-msgstr "在 HP 終端機上重設軟鍵 (soft keys)"
-
-msgid "To run on slow terminals"
-msgstr "於慢速的終端機上執行"
-
-msgid "Use stickchars to draw"
-msgstr "使用stickchars繪製"
-
-msgid "Requests to run in black and white"
-msgstr "要求在黑白模式下執行"
-
-msgid "Request to run in color mode"
-msgstr "要求在彩色模式中執行"
-
-msgid "Specifies a color configuration"
-msgstr "指定一組色彩設定"
-
-msgid "Displays a help screen on how to change the color scheme"
-msgstr "顯示如何改變色彩設定的說明畫面"
-
-msgid "Log ftp dialog to specified file"
-msgstr "紀錄 FTP 對話框到特定檔案"
-
-msgid "Set debug level"
-msgstr ""
-
-#, fuzzy
-msgid "Print data directory"
-msgstr "建立新目錄"
-
-#, fuzzy
-msgid "Print last working directory to specified file"
-msgstr "程式結束時印出當前目錄"
-
-msgid "Enables subshell support (default)"
-msgstr "支援使用次殼層 (預設值)"
-
-msgid "Disables subshell support"
-msgstr "不支援使用次殼層 (subshell)"
-
-msgid "Launches the file viewer on a file"
-msgstr "對某個檔案執行檔案檢視程式"
-
-msgid "Edits one file"
-msgstr "編輯一個檔案"
-
 #, fuzzy, c-format
 msgid "Cannot create %s directory"
 msgstr "無法改變目錄"
@@ -2728,29 +2754,6 @@ msgstr "無法呼叫指令。"
 
 msgid "Pipe close failed"
 msgstr "管線關閉失敗"
-
-msgid "missing argument"
-msgstr ""
-
-#, fuzzy
-msgid "unknown option"
-msgstr "<不明的群組>"
-
-msgid "invalid numeric value"
-msgstr ""
-
-msgid "Show this help message"
-msgstr "顯示此說明訊息"
-
-msgid "Display brief usage message"
-msgstr "顯示簡單使用說明"
-
-msgid "ARG"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Usage:"
-msgstr "使用者名稱: "
 
 msgid "[dev]"
 msgstr ""
@@ -3816,6 +3819,26 @@ msgstr "內部錯誤:"
 
 msgid "Changes to file lost"
 msgstr "改變到檔案遺失"
+
+#~ msgid "Displays this help message"
+#~ msgstr "顯示此說明訊息"
+
+#~ msgid "Displays a help screen on how to change the color scheme"
+#~ msgstr "顯示如何改變色彩設定的說明畫面"
+
+#, fuzzy
+#~ msgid "unknown option"
+#~ msgstr "<不明的群組>"
+
+#~ msgid "Show this help message"
+#~ msgstr "顯示此說明訊息"
+
+#~ msgid "Display brief usage message"
+#~ msgstr "顯示簡單使用說明"
+
+#, fuzzy
+#~ msgid "Usage:"
+#~ msgstr "使用者名稱: "
 
 #~ msgid "pro&Mpt on replace"
 #~ msgstr " 替換之前要先詢問 "

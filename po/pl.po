@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-08-26 17:11+0300\n"
+"POT-Creation-Date: 2009-09-02 23:01+0300\n"
 "PO-Revision-Date: 2003-02-04 02:57+0100\n"
 "Last-Translator: Andrzej Zaborowski <balrog@zabor.org>\n"
 "Language-Team: Polish <debian-l10n-polish@lists.debian.org>\n"
@@ -93,6 +93,10 @@ msgstr " Błąd przy zapisie do potoku: "
 msgid " Cannot open pipe for writing: "
 msgstr " Otwarcie potoku do zapisu nie powiodło się: "
 
+#, fuzzy, c-format
+msgid " Cannot open file for writing: %s "
+msgstr " Otwarcie potoku do zapisu nie powiodło się: "
+
 msgid "Quick save "
 msgstr "Szybki "
 
@@ -111,11 +115,26 @@ msgstr "Rozszerzenie:"
 msgid " Edit Save Mode "
 msgstr " Modyfikacja trybu zapisu "
 
-msgid " Save As "
-msgstr " Zapisz jako "
+msgid "&Do not change"
+msgstr ""
+
+msgid "&Unix format (LF)"
+msgstr ""
+
+msgid "&Windows/DOS format (CR LF)"
+msgstr ""
+
+msgid "&Macintosh format (LF)"
+msgstr ""
+
+msgid "Change line breaks to:"
+msgstr ""
 
 msgid " Enter file name: "
 msgstr " Wprowadź nazwę pliku: "
+
+msgid " Save As "
+msgstr " Zapisz jako "
 
 msgid " A file already exists with this name. "
 msgstr " Plik o tej nazwie już istnieje. "
@@ -846,6 +865,146 @@ msgid ""
 msgstr ""
 " Nie można ustawić właściciela pliku \"%s\" \n"
 " %s "
+
+msgid "Displays the current version"
+msgstr "Wyświetla aktualną wersję"
+
+msgid "Print data directory"
+msgstr "Wyświetla ścieżkę do katalogu z danymi"
+
+msgid "Print last working directory to specified file"
+msgstr "Kończąc zapisz bieżący katalog do podanego pliku"
+
+msgid "Enables subshell support (default)"
+msgstr "Aktywuje obsługę podpowłoki (domyślne)"
+
+msgid "Disables subshell support"
+msgstr "Deaktywuje obsługę podpowłoki"
+
+msgid "Log ftp dialog to specified file"
+msgstr "Zapisuje dziennik ftp do podanego pliku"
+
+msgid "Set debug level"
+msgstr "Ustaw poziom debug"
+
+msgid "Launches the file viewer on a file"
+msgstr "Wywołuje podgląd pliku"
+
+msgid "Edits one file"
+msgstr "Modyfikuje plik"
+
+msgid "Forces xterm features"
+msgstr "Bezwzględnie aktywuje obsługę xterma"
+
+msgid "Disable mouse support in text version"
+msgstr "Deaktywuje obsługę myszy w trybie tekstowym"
+
+msgid "Tries to use termcap instead of terminfo"
+msgstr "Próbuje użyć termcap zamiast terminfo"
+
+msgid "To run on slow terminals"
+msgstr "Aby uruchomić na powolnych terminalach"
+
+msgid "Use stickchars to draw"
+msgstr "Wykorzystuje proste znaki do rysowania ramek"
+
+msgid "Resets soft keys on HP terminals"
+msgstr "Przywraca klawisze programowe na terminalach HP"
+
+msgid "Requests to run in black and white"
+msgstr "Powoduje uruchomienie w trybie czarno-białym"
+
+msgid "Request to run in color mode"
+msgstr "Powoduje uruchomienie w trybie kolorowym"
+
+msgid "Specifies a color configuration"
+msgstr "Określa konfigurację kolorów"
+
+#, fuzzy
+msgid ""
+"--colors KEYWORD={FORE},{BACK}\n"
+"\n"
+"{FORE} and {BACK} can be omitted, and the default will be used\n"
+"\n"
+"Keywords:\n"
+"   Global:       errors, reverse, gauge, input, viewunderline\n"
+"   File display: normal, selected, marked, markselect\n"
+"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                 errdhotfocus\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
+msgstr ""
+"--colors SŁOWO_KLUCZOWE={ZNAKI},{TŁO}\n"
+"\n"
+"{ZNAKI} i {TŁO} mogą zostać pominięte, zostaną wówczas użyte wartości "
+"domyślne\n"
+"\n"
+"Słowa kluczowe:\n"
+"   Globalne:            errors, reverse, gauge, input, viewunderline\n"
+"   Wyświetlanie plików: normal, selected, marked, markselect\n"
+"   Okna dialogowe:      dnormal, dfocus, dhotnormal, dhotfocus, "
+"errdhotnormal,\n"
+"                        errdhotfocus   Menu:                menu, menuhot, "
+"menusel, menuhotsel\n"
+"   Edytor:              editnormal, editbold, editmarked\n"
+"   Pomoc:               helpnormal, helpitalic, helpbold, helplink, "
+"helpslink\n"
+"   Typy plików:         directory, executable, link, stalelink, device,\n"
+"                        special, core\n"
+"\n"
+"Kolory:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray oraz white\n"
+"\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
+
+#, fuzzy
+msgid "Color options"
+msgstr "Opcje konfiguracji"
+
+msgid "+number"
+msgstr "+numer"
+
+#, fuzzy
+msgid "[this_dir] [other_panel_dir]"
+msgstr "[znaczniki] [ten_katalog] [katalog_w_drugim_panelu]\n"
+
+msgid "Set initial line number for the internal editor"
+msgstr "Początkowy numer wiersza dla wbudowanego edytora"
+
+msgid ""
+"\n"
+"Please send any bug reports (including the output of `mc -V')\n"
+"to mc-devel@gnome.org\n"
+msgstr ""
+"\n"
+"Wszelkie komunikaty o błędach (wraz z wyjściem \"mc -V\")\n"
+"wysyłaj na adres mc-devel@gnome.org\n"
+
+#, c-format
+msgid "GNU Midnight Commander %s\n"
+msgstr "GNU Midnight Commander %s\n"
+
+#, fuzzy
+msgid "Main options"
+msgstr " Opcje panelu "
+
+#, fuzzy
+msgid "Terminal options"
+msgstr " Inne opcje "
 
 msgid " Background process error "
 msgstr " Błąd procesu w tle "
@@ -2470,139 +2629,6 @@ msgid ""
 "Or set 'don't ask again' and press <<Skip>>"
 msgstr ""
 
-#, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "GNU Midnight Commander %s\n"
-
-msgid "[flags] [this_dir] [other_panel_dir]\n"
-msgstr "[znaczniki] [ten_katalog] [katalog_w_drugim_panelu]\n"
-
-msgid "+number"
-msgstr "+numer"
-
-msgid "Set initial line number for the internal editor"
-msgstr "Początkowy numer wiersza dla wbudowanego edytora"
-
-msgid ""
-"\n"
-"Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
-msgstr ""
-"\n"
-"Wszelkie komunikaty o błędach (wraz z wyjściem \"mc -V\")\n"
-"wysyłaj na adres mc-devel@gnome.org\n"
-
-#, fuzzy
-msgid ""
-"--colors KEYWORD={FORE},{BACK}\n"
-"\n"
-"{FORE} and {BACK} can be omitted, and the default will be used\n"
-"\n"
-"Keywords:\n"
-"   Global:       errors, reverse, gauge, input, viewunderline\n"
-"   File display: normal, selected, marked, markselect\n"
-"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate\n"
-msgstr ""
-"--colors SŁOWO_KLUCZOWE={ZNAKI},{TŁO}\n"
-"\n"
-"{ZNAKI} i {TŁO} mogą zostać pominięte, zostaną wówczas użyte wartości "
-"domyślne\n"
-"\n"
-"Słowa kluczowe:\n"
-"   Globalne:            errors, reverse, gauge, input, viewunderline\n"
-"   Wyświetlanie plików: normal, selected, marked, markselect\n"
-"   Okna dialogowe:      dnormal, dfocus, dhotnormal, dhotfocus, "
-"errdhotnormal,\n"
-"                        errdhotfocus   Menu:                menu, menuhot, "
-"menusel, menuhotsel\n"
-"   Edytor:              editnormal, editbold, editmarked\n"
-"   Pomoc:               helpnormal, helpitalic, helpbold, helplink, "
-"helpslink\n"
-"   Typy plików:         directory, executable, link, stalelink, device,\n"
-"                        special, core\n"
-"\n"
-"Kolory:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray oraz white\n"
-"\n"
-
-msgid ""
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-msgstr ""
-
-msgid "Displays this help message"
-msgstr "Wypisuje ten komunikat pomocy"
-
-msgid "Displays the current version"
-msgstr "Wyświetla aktualną wersję"
-
-msgid "Forces xterm features"
-msgstr "Bezwzględnie aktywuje obsługę xterma"
-
-msgid "Disable mouse support in text version"
-msgstr "Deaktywuje obsługę myszy w trybie tekstowym"
-
-msgid "Tries to use termcap instead of terminfo"
-msgstr "Próbuje użyć termcap zamiast terminfo"
-
-msgid "Resets soft keys on HP terminals"
-msgstr "Przywraca klawisze programowe na terminalach HP"
-
-msgid "To run on slow terminals"
-msgstr "Aby uruchomić na powolnych terminalach"
-
-msgid "Use stickchars to draw"
-msgstr "Wykorzystuje proste znaki do rysowania ramek"
-
-msgid "Requests to run in black and white"
-msgstr "Powoduje uruchomienie w trybie czarno-białym"
-
-msgid "Request to run in color mode"
-msgstr "Powoduje uruchomienie w trybie kolorowym"
-
-msgid "Specifies a color configuration"
-msgstr "Określa konfigurację kolorów"
-
-msgid "Displays a help screen on how to change the color scheme"
-msgstr "Wypisuje pomoc na temat zmiany schematu kolorów"
-
-msgid "Log ftp dialog to specified file"
-msgstr "Zapisuje dziennik ftp do podanego pliku"
-
-msgid "Set debug level"
-msgstr "Ustaw poziom debug"
-
-msgid "Print data directory"
-msgstr "Wyświetla ścieżkę do katalogu z danymi"
-
-msgid "Print last working directory to specified file"
-msgstr "Kończąc zapisz bieżący katalog do podanego pliku"
-
-msgid "Enables subshell support (default)"
-msgstr "Aktywuje obsługę podpowłoki (domyślne)"
-
-msgid "Disables subshell support"
-msgstr "Deaktywuje obsługę podpowłoki"
-
-msgid "Launches the file viewer on a file"
-msgstr "Wywołuje podgląd pliku"
-
-msgid "Edits one file"
-msgstr "Modyfikuje plik"
-
 #, fuzzy, c-format
 msgid "Cannot create %s directory"
 msgstr "Nie można zmienić katalogu"
@@ -2720,28 +2746,6 @@ msgstr "Nie można wykonać polecenia."
 
 msgid "Pipe close failed"
 msgstr "Zamknięcie potoku nie powiodło się"
-
-msgid "missing argument"
-msgstr "brakujący argument"
-
-msgid "unknown option"
-msgstr "nieznana opcja"
-
-msgid "invalid numeric value"
-msgstr "nieprawidłowa wartość liczbowa"
-
-msgid "Show this help message"
-msgstr "Wypisuje ten komunikat pomocy"
-
-msgid "Display brief usage message"
-msgstr "Wypisuje krótki opis użycia"
-
-msgid "ARG"
-msgstr "ARG"
-
-#, c-format
-msgid "Usage:"
-msgstr "Użycie:"
 
 msgid "[dev]"
 msgstr "[urz]"
@@ -3809,6 +3813,33 @@ msgstr "Błąd wewnętrzny:"
 
 msgid "Changes to file lost"
 msgstr "Utracono zmiany w pliku"
+
+#~ msgid "Displays this help message"
+#~ msgstr "Wypisuje ten komunikat pomocy"
+
+#~ msgid "Displays a help screen on how to change the color scheme"
+#~ msgstr "Wypisuje pomoc na temat zmiany schematu kolorów"
+
+#~ msgid "missing argument"
+#~ msgstr "brakujący argument"
+
+#~ msgid "unknown option"
+#~ msgstr "nieznana opcja"
+
+#~ msgid "invalid numeric value"
+#~ msgstr "nieprawidłowa wartość liczbowa"
+
+#~ msgid "Show this help message"
+#~ msgstr "Wypisuje ten komunikat pomocy"
+
+#~ msgid "Display brief usage message"
+#~ msgstr "Wypisuje krótki opis użycia"
+
+#~ msgid "ARG"
+#~ msgstr "ARG"
+
+#~ msgid "Usage:"
+#~ msgstr "Użycie:"
 
 #~ msgid "pro&Mpt on replace"
 #~ msgstr "Potwierdzanie"

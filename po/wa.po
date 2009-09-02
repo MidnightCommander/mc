@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-08-26 17:11+0300\n"
+"POT-Creation-Date: 2009-09-02 23:01+0300\n"
 "PO-Revision-Date: 1999-03-18 23:11+0100\n"
 "Last-Translator: Lorint Hendschel <LorintHendschel@skynet.be>\n"
 "Language-Team: walon <linux-wa@chanae.alphanet.ch>\n"
@@ -96,6 +96,10 @@ msgstr " Åk n' a nén stî come dji sayîve di scrire el bûze: "
 msgid " Cannot open pipe for writing: "
 msgstr " Dj' a fwait berwete come dji sayîve di drovî l' bûze po scrire: "
 
+#, fuzzy, c-format
+msgid " Cannot open file for writing: %s "
+msgstr " Dj' a fwait berwete come dji sayîve di drovî l' bûze po scrire: "
+
 msgid "Quick save "
 msgstr "Schaper al vole "
 
@@ -115,12 +119,27 @@ msgstr "Cawete:"
 msgid " Edit Save Mode "
 msgstr " Môde Aspougnî Schaper "
 
-msgid " Save As "
-msgstr " Schaper et rlomer "
+msgid "&Do not change"
+msgstr ""
+
+msgid "&Unix format (LF)"
+msgstr ""
+
+msgid "&Windows/DOS format (CR LF)"
+msgstr ""
+
+msgid "&Macintosh format (LF)"
+msgstr ""
+
+msgid "Change line breaks to:"
+msgstr ""
 
 #, fuzzy
 msgid " Enter file name: "
 msgstr " Diner roye: "
+
+msgid " Save As "
+msgstr " Schaper et rlomer "
 
 msgid " A file already exists with this name. "
 msgstr " I gn a ddja on fitchî lomé insi. "
@@ -865,6 +884,120 @@ msgid ""
 msgstr ""
 " Dji n' sai fé on chown «%s» \n"
 " %s "
+
+msgid "Displays the current version"
+msgstr "Håyneye li modêye do moumint"
+
+#, fuzzy
+msgid "Print data directory"
+msgstr "ridant"
+
+#, fuzzy
+msgid "Print last working directory to specified file"
+msgstr "Håyner li ridant do moumint å moumint ki vos moussîz foû"
+
+msgid "Enables subshell support (default)"
+msgstr ""
+
+msgid "Disables subshell support"
+msgstr ""
+
+msgid "Log ftp dialog to specified file"
+msgstr ""
+
+msgid "Set debug level"
+msgstr ""
+
+msgid "Launches the file viewer on a file"
+msgstr "Enonder li håyneu di fitchî so on fitchî"
+
+msgid "Edits one file"
+msgstr "Aspougne on fitchî"
+
+msgid "Forces xterm features"
+msgstr ""
+
+msgid "Disable mouse support in text version"
+msgstr "Ni nén sopoirter li soris dvins li modêye tecse"
+
+msgid "Tries to use termcap instead of terminfo"
+msgstr ""
+
+msgid "To run on slow terminals"
+msgstr "Po-aler so des londjins terminås"
+
+msgid "Use stickchars to draw"
+msgstr ""
+
+msgid "Resets soft keys on HP terminals"
+msgstr ""
+
+msgid "Requests to run in black and white"
+msgstr "Fé roter e noer et blanc"
+
+msgid "Request to run in color mode"
+msgstr "Fé roter e coleurs"
+
+msgid "Specifies a color configuration"
+msgstr "Dire avou kénès coleurs"
+
+msgid ""
+"--colors KEYWORD={FORE},{BACK}\n"
+"\n"
+"{FORE} and {BACK} can be omitted, and the default will be used\n"
+"\n"
+"Keywords:\n"
+"   Global:       errors, reverse, gauge, input, viewunderline\n"
+"   File display: normal, selected, marked, markselect\n"
+"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                 errdhotfocus\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
+msgstr ""
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
+
+#, fuzzy
+msgid "Color options"
+msgstr "Apontyî les tchûzes"
+
+msgid "+number"
+msgstr ""
+
+msgid "[this_dir] [other_panel_dir]"
+msgstr ""
+
+msgid "Set initial line number for the internal editor"
+msgstr ""
+
+msgid ""
+"\n"
+"Please send any bug reports (including the output of `mc -V')\n"
+"to mc-devel@gnome.org\n"
+msgstr ""
+
+#, c-format
+msgid "GNU Midnight Commander %s\n"
+msgstr "GNU Midnight Commander %s\n"
+
+#, fuzzy
+msgid "Main options"
+msgstr " Tchûzes pol panea "
+
+#, fuzzy
+msgid "Terminal options"
+msgstr " Ôtès tchûzes "
 
 msgid " Background process error "
 msgstr " Aroke e processus di fond «"
@@ -2501,114 +2634,6 @@ msgid ""
 "Or set 'don't ask again' and press <<Skip>>"
 msgstr ""
 
-#, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "GNU Midnight Commander %s\n"
-
-msgid "[flags] [this_dir] [other_panel_dir]\n"
-msgstr ""
-
-msgid "+number"
-msgstr ""
-
-msgid "Set initial line number for the internal editor"
-msgstr ""
-
-msgid ""
-"\n"
-"Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
-msgstr ""
-
-msgid ""
-"--colors KEYWORD={FORE},{BACK}\n"
-"\n"
-"{FORE} and {BACK} can be omitted, and the default will be used\n"
-"\n"
-"Keywords:\n"
-"   Global:       errors, reverse, gauge, input, viewunderline\n"
-"   File display: normal, selected, marked, markselect\n"
-"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate\n"
-msgstr ""
-
-msgid ""
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-msgstr ""
-
-msgid "Displays this help message"
-msgstr "Mostere ci messaedje d' aide chal"
-
-msgid "Displays the current version"
-msgstr "Håyneye li modêye do moumint"
-
-msgid "Forces xterm features"
-msgstr ""
-
-msgid "Disable mouse support in text version"
-msgstr "Ni nén sopoirter li soris dvins li modêye tecse"
-
-msgid "Tries to use termcap instead of terminfo"
-msgstr ""
-
-msgid "Resets soft keys on HP terminals"
-msgstr ""
-
-msgid "To run on slow terminals"
-msgstr "Po-aler so des londjins terminås"
-
-msgid "Use stickchars to draw"
-msgstr ""
-
-msgid "Requests to run in black and white"
-msgstr "Fé roter e noer et blanc"
-
-msgid "Request to run in color mode"
-msgstr "Fé roter e coleurs"
-
-msgid "Specifies a color configuration"
-msgstr "Dire avou kénès coleurs"
-
-msgid "Displays a help screen on how to change the color scheme"
-msgstr "Po vs mostrer comint c' est k' on candje l' arindjmint des coleurs"
-
-msgid "Log ftp dialog to specified file"
-msgstr ""
-
-msgid "Set debug level"
-msgstr ""
-
-#, fuzzy
-msgid "Print data directory"
-msgstr "ridant"
-
-#, fuzzy
-msgid "Print last working directory to specified file"
-msgstr "Håyner li ridant do moumint å moumint ki vos moussîz foû"
-
-msgid "Enables subshell support (default)"
-msgstr ""
-
-msgid "Disables subshell support"
-msgstr ""
-
-msgid "Launches the file viewer on a file"
-msgstr "Enonder li håyneu di fitchî so on fitchî"
-
-msgid "Edits one file"
-msgstr "Aspougne on fitchî"
-
 #, fuzzy, c-format
 msgid "Cannot create %s directory"
 msgstr "Dji n' sai candjî di ridant"
@@ -2726,29 +2751,6 @@ msgstr "Dji n' sai enonder li cmande."
 
 msgid "Pipe close failed"
 msgstr "Li cloyaedje del bûze a fwait berwete"
-
-msgid "missing argument"
-msgstr ""
-
-#, fuzzy
-msgid "unknown option"
-msgstr "<Groupe nén cnoxhou>"
-
-msgid "invalid numeric value"
-msgstr ""
-
-msgid "Show this help message"
-msgstr "Mostrer ci messaedje d' aide ci"
-
-msgid "Display brief usage message"
-msgstr "Mostrer on ptit messaedje po savu cmint fé"
-
-msgid "ARG"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Usage:"
-msgstr "No di l' ûzeu:"
 
 msgid "[dev]"
 msgstr ""
@@ -3784,6 +3786,26 @@ msgstr "Divintrinne aroke:"
 
 msgid "Changes to file lost"
 msgstr "Les candjmints do fitchî ont stî pierdous"
+
+#~ msgid "Displays this help message"
+#~ msgstr "Mostere ci messaedje d' aide chal"
+
+#~ msgid "Displays a help screen on how to change the color scheme"
+#~ msgstr "Po vs mostrer comint c' est k' on candje l' arindjmint des coleurs"
+
+#, fuzzy
+#~ msgid "unknown option"
+#~ msgstr "<Groupe nén cnoxhou>"
+
+#~ msgid "Show this help message"
+#~ msgstr "Mostrer ci messaedje d' aide ci"
+
+#~ msgid "Display brief usage message"
+#~ msgstr "Mostrer on ptit messaedje po savu cmint fé"
+
+#, fuzzy
+#~ msgid "Usage:"
+#~ msgstr "No di l' ûzeu:"
 
 #~ msgid "pro&Mpt on replace"
 #~ msgstr "&Dimander cwè divant do discandjî"

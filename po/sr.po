@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-08-26 17:11+0300\n"
+"POT-Creation-Date: 2009-09-02 23:01+0300\n"
 "PO-Revision-Date: 2003-09-20 18:50+0200\n"
 "Last-Translator: Strahinya Radich (Страхиња Радић) <mr99164@alas.matf.bg.ac."
 "yu>\n"
@@ -91,6 +91,10 @@ msgstr " Грешка при упису у цев: "
 msgid " Cannot open pipe for writing: "
 msgstr " Не могу да отворим цев за упис: "
 
+#, fuzzy, c-format
+msgid " Cannot open file for writing: %s "
+msgstr " Не могу да отворим цев за упис: "
+
 msgid "Quick save "
 msgstr "Брзо чување "
 
@@ -109,11 +113,26 @@ msgstr "Врста:"
 msgid " Edit Save Mode "
 msgstr " Режим чувања "
 
-msgid " Save As "
-msgstr " Сачувај као "
+msgid "&Do not change"
+msgstr ""
+
+msgid "&Unix format (LF)"
+msgstr ""
+
+msgid "&Windows/DOS format (CR LF)"
+msgstr ""
+
+msgid "&Macintosh format (LF)"
+msgstr ""
+
+msgid "Change line breaks to:"
+msgstr ""
 
 msgid " Enter file name: "
 msgstr " Унесите назив датотеке: "
+
+msgid " Save As "
+msgstr " Сачувај као "
 
 msgid " A file already exists with this name. "
 msgstr " Датотека под тим називом већ постоји. "
@@ -851,6 +870,141 @@ msgid ""
 msgstr ""
 " Не могу да променим власника `%s' \n"
 " %s "
+
+msgid "Displays the current version"
+msgstr "Приказује текућу верзију"
+
+msgid "Print data directory"
+msgstr "Штампај директоријум са подацима"
+
+msgid "Print last working directory to specified file"
+msgstr "Штампај последњи радни директоријум у задану датотеку"
+
+msgid "Enables subshell support (default)"
+msgstr "Укључује подршку за подљуске (подраз.)"
+
+msgid "Disables subshell support"
+msgstr "Искључује подршку за подљуске"
+
+msgid "Log ftp dialog to specified file"
+msgstr "Бележи садржај дијалога FTP-а у задану датотеку"
+
+msgid "Set debug level"
+msgstr "Постављање нивоа поправљања"
+
+msgid "Launches the file viewer on a file"
+msgstr "Покреће прегледач датотека над датотеком"
+
+msgid "Edits one file"
+msgstr "Уређује једну датотеку"
+
+msgid "Forces xterm features"
+msgstr "Захтева одлике Икс терминала"
+
+msgid "Disable mouse support in text version"
+msgstr "Искључи подршку за миша у текстуалној верзији"
+
+msgid "Tries to use termcap instead of terminfo"
+msgstr "Покушава да користи termcap уместо terminfo-а"
+
+msgid "To run on slow terminals"
+msgstr "Покретање на спором терминалу"
+
+msgid "Use stickchars to draw"
+msgstr "Користи квазиграфичке симболе за цртање"
+
+msgid "Resets soft keys on HP terminals"
+msgstr "Поставља меке тастере на ХП-овим терминалима"
+
+msgid "Requests to run in black and white"
+msgstr "Захтева покретање у режиму без боја"
+
+msgid "Request to run in color mode"
+msgstr "Захтевање обојеног режима"
+
+msgid "Specifies a color configuration"
+msgstr "Поставља подешавања боја"
+
+#, fuzzy
+msgid ""
+"--colors KEYWORD={FORE},{BACK}\n"
+"\n"
+"{FORE} and {BACK} can be omitted, and the default will be used\n"
+"\n"
+"Keywords:\n"
+"   Global:       errors, reverse, gauge, input, viewunderline\n"
+"   File display: normal, selected, marked, markselect\n"
+"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                 errdhotfocus\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
+msgstr ""
+"--colors КЉУЧНА РЕЧ={ИСПИС},{ПОЗАД}\n"
+"\n"
+"{ИСПИС} и {ПОЗАД} се могу изоставити и користиће се подраз. вредности\n"
+"\n"
+"Кључне речи:\n"
+"   Опште:       errors, reverse, gauge, input\n"
+"   Приказ дат.: normal, selected, marked, markselect\n"
+"   Дијалози:    dnormal, dfocus, dhotnormal, dhotfocus\n"
+"   Менији:      menu, menuhot, menusel, menuhotsel\n"
+"   Помоћ:       helpnormal, helpitalic, helplink, helpslink\n"
+"   Врсте дат.:  directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Боје:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray и white\n"
+"\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
+
+#, fuzzy
+msgid "Color options"
+msgstr "Подеси изборе"
+
+msgid "+number"
+msgstr "+број"
+
+#, fuzzy
+msgid "[this_dir] [other_panel_dir]"
+msgstr "[прекидачи] [овај_дир] [дир_другог_окна]\n"
+
+msgid "Set initial line number for the internal editor"
+msgstr "Поставите број почетног реда за уграђени уређивач"
+
+msgid ""
+"\n"
+"Please send any bug reports (including the output of `mc -V')\n"
+"to mc-devel@gnome.org\n"
+msgstr ""
+"\n"
+"Молим да пошаљете пријаве грешака (укључивши излаз наредбе `mc -V')\n"
+"на адресу mc-devel@gnome.org\n"
+
+#, c-format
+msgid "GNU Midnight Commander %s\n"
+msgstr "ГНУ-ов поноћни наредник %s\n"
+
+#, fuzzy
+msgid "Main options"
+msgstr " Избори окна "
+
+#, fuzzy
+msgid "Terminal options"
+msgstr " Други избори "
 
 msgid " Background process error "
 msgstr " Грешка позадинског процеса "
@@ -2476,134 +2630,6 @@ msgid ""
 "Or set 'don't ask again' and press <<Skip>>"
 msgstr ""
 
-#, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "ГНУ-ов поноћни наредник %s\n"
-
-msgid "[flags] [this_dir] [other_panel_dir]\n"
-msgstr "[прекидачи] [овај_дир] [дир_другог_окна]\n"
-
-msgid "+number"
-msgstr "+број"
-
-msgid "Set initial line number for the internal editor"
-msgstr "Поставите број почетног реда за уграђени уређивач"
-
-msgid ""
-"\n"
-"Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
-msgstr ""
-"\n"
-"Молим да пошаљете пријаве грешака (укључивши излаз наредбе `mc -V')\n"
-"на адресу mc-devel@gnome.org\n"
-
-#, fuzzy
-msgid ""
-"--colors KEYWORD={FORE},{BACK}\n"
-"\n"
-"{FORE} and {BACK} can be omitted, and the default will be used\n"
-"\n"
-"Keywords:\n"
-"   Global:       errors, reverse, gauge, input, viewunderline\n"
-"   File display: normal, selected, marked, markselect\n"
-"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate\n"
-msgstr ""
-"--colors КЉУЧНА РЕЧ={ИСПИС},{ПОЗАД}\n"
-"\n"
-"{ИСПИС} и {ПОЗАД} се могу изоставити и користиће се подраз. вредности\n"
-"\n"
-"Кључне речи:\n"
-"   Опште:       errors, reverse, gauge, input\n"
-"   Приказ дат.: normal, selected, marked, markselect\n"
-"   Дијалози:    dnormal, dfocus, dhotnormal, dhotfocus\n"
-"   Менији:      menu, menuhot, menusel, menuhotsel\n"
-"   Помоћ:       helpnormal, helpitalic, helplink, helpslink\n"
-"   Врсте дат.:  directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Боје:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray и white\n"
-"\n"
-
-msgid ""
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-msgstr ""
-
-msgid "Displays this help message"
-msgstr "Приказује ову поруку помоћи"
-
-msgid "Displays the current version"
-msgstr "Приказује текућу верзију"
-
-msgid "Forces xterm features"
-msgstr "Захтева одлике Икс терминала"
-
-msgid "Disable mouse support in text version"
-msgstr "Искључи подршку за миша у текстуалној верзији"
-
-msgid "Tries to use termcap instead of terminfo"
-msgstr "Покушава да користи termcap уместо terminfo-а"
-
-msgid "Resets soft keys on HP terminals"
-msgstr "Поставља меке тастере на ХП-овим терминалима"
-
-msgid "To run on slow terminals"
-msgstr "Покретање на спором терминалу"
-
-msgid "Use stickchars to draw"
-msgstr "Користи квазиграфичке симболе за цртање"
-
-msgid "Requests to run in black and white"
-msgstr "Захтева покретање у режиму без боја"
-
-msgid "Request to run in color mode"
-msgstr "Захтевање обојеног режима"
-
-msgid "Specifies a color configuration"
-msgstr "Поставља подешавања боја"
-
-msgid "Displays a help screen on how to change the color scheme"
-msgstr "Приказује екран помоћи око промене шеме боја"
-
-msgid "Log ftp dialog to specified file"
-msgstr "Бележи садржај дијалога FTP-а у задану датотеку"
-
-msgid "Set debug level"
-msgstr "Постављање нивоа поправљања"
-
-msgid "Print data directory"
-msgstr "Штампај директоријум са подацима"
-
-msgid "Print last working directory to specified file"
-msgstr "Штампај последњи радни директоријум у задану датотеку"
-
-msgid "Enables subshell support (default)"
-msgstr "Укључује подршку за подљуске (подраз.)"
-
-msgid "Disables subshell support"
-msgstr "Искључује подршку за подљуске"
-
-msgid "Launches the file viewer on a file"
-msgstr "Покреће прегледач датотека над датотеком"
-
-msgid "Edits one file"
-msgstr "Уређује једну датотеку"
-
 #, fuzzy, c-format
 msgid "Cannot create %s directory"
 msgstr "Не могу да променим директоријум"
@@ -2721,28 +2747,6 @@ msgstr "Не могу да покренем наредбу."
 
 msgid "Pipe close failed"
 msgstr "Затварање цеви није успело"
-
-msgid "missing argument"
-msgstr "недостаје аргумент"
-
-msgid "unknown option"
-msgstr "непознат избор"
-
-msgid "invalid numeric value"
-msgstr "неисправна бројевна вредност"
-
-msgid "Show this help message"
-msgstr "Прикажи ову поруку помоћи"
-
-msgid "Display brief usage message"
-msgstr "Прикажи кратку поруку о употреби"
-
-msgid "ARG"
-msgstr "АРГ"
-
-#, c-format
-msgid "Usage:"
-msgstr "Употреба:"
 
 msgid "[dev]"
 msgstr ""
@@ -3805,6 +3809,33 @@ msgstr "Унутрашња грешка:"
 
 msgid "Changes to file lost"
 msgstr "Измене у датотеци су изгубљене"
+
+#~ msgid "Displays this help message"
+#~ msgstr "Приказује ову поруку помоћи"
+
+#~ msgid "Displays a help screen on how to change the color scheme"
+#~ msgstr "Приказује екран помоћи око промене шеме боја"
+
+#~ msgid "missing argument"
+#~ msgstr "недостаје аргумент"
+
+#~ msgid "unknown option"
+#~ msgstr "непознат избор"
+
+#~ msgid "invalid numeric value"
+#~ msgstr "неисправна бројевна вредност"
+
+#~ msgid "Show this help message"
+#~ msgstr "Прикажи ову поруку помоћи"
+
+#~ msgid "Display brief usage message"
+#~ msgstr "Прикажи кратку поруку о употреби"
+
+#~ msgid "ARG"
+#~ msgstr "АРГ"
+
+#~ msgid "Usage:"
+#~ msgstr "Употреба:"
 
 #~ msgid "pro&Mpt on replace"
 #~ msgstr "п&Отврда замене"

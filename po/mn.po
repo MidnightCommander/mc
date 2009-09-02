@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mn\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-08-26 17:11+0300\n"
+"POT-Creation-Date: 2009-09-02 23:01+0300\n"
 "PO-Revision-Date: 2003-03-04 21:16+0100\n"
 "Last-Translator: Sanlig Badral <badral@chinggis.com>\n"
 "Language-Team: Mongolian <mn@li.org>\n"
@@ -93,6 +93,10 @@ msgstr " Урсгал руу бичихэд алдаа гарав: "
 msgid " Cannot open pipe for writing: "
 msgstr " Бичих урсгалыг нээж чадсангүй: "
 
+#, fuzzy, c-format
+msgid " Cannot open file for writing: %s "
+msgstr " Бичих урсгалыг нээж чадсангүй: "
+
 msgid "Quick save "
 msgstr "Хурдан хадгалалт"
 
@@ -111,11 +115,26 @@ msgstr "өргөтгөл:"
 msgid " Edit Save Mode "
 msgstr " Хадгалах гормыг засварлах "
 
-msgid " Save As "
-msgstr " Гэж хадгалах "
+msgid "&Do not change"
+msgstr ""
+
+msgid "&Unix format (LF)"
+msgstr ""
+
+msgid "&Windows/DOS format (CR LF)"
+msgstr ""
+
+msgid "&Macintosh format (LF)"
+msgstr ""
+
+msgid "Change line breaks to:"
+msgstr ""
 
 msgid " Enter file name: "
 msgstr " Файлын нэрээ оруул: "
+
+msgid " Save As "
+msgstr " Гэж хадгалах "
 
 msgid " A file already exists with this name. "
 msgstr " Файл аль хэдийнэ ийм нэрээр үүссэн байна. "
@@ -855,6 +874,141 @@ msgid ""
 msgstr ""
 " Алдаа chown \"%s\" \n"
 " %s "
+
+msgid "Displays the current version"
+msgstr "Одоогийн хувилбарыг харуулах"
+
+msgid "Print data directory"
+msgstr "өгөгдөлийн лавлахын нэрийг харуулах"
+
+msgid "Print last working directory to specified file"
+msgstr "Заагдсан файл руу хамгийн сүүлд ажилласан лавлахыг хэвлэх"
+
+msgid "Enables subshell support (default)"
+msgstr "Subshell боломжыг нээх (анхны утга)"
+
+msgid "Disables subshell support"
+msgstr "Subshell боломжыг хаах"
+
+msgid "Log ftp dialog to specified file"
+msgstr "Тусгайлсан файл руу тэмдэглэх FTP диалог"
+
+msgid "Set debug level"
+msgstr "Дебаг түвшинг тодорхойлох"
+
+msgid "Launches the file viewer on a file"
+msgstr "Файл харагчыг ажиллуулах"
+
+msgid "Edits one file"
+msgstr "Нэг файл засах"
+
+msgid "Forces xterm features"
+msgstr "xterm хүчингүүд"
+
+msgid "Disable mouse support in text version"
+msgstr "Текст хувилбарт хулганыг хаах"
+
+msgid "Tries to use termcap instead of terminfo"
+msgstr " terminfo г termcap тай хамт хэрэглэн дахин оролдох"
+
+msgid "To run on slow terminals"
+msgstr "Удаан терминалд ажиллах"
+
+msgid "Use stickchars to draw"
+msgstr "Псевдографикыг зурахад ашиглах"
+
+msgid "Resets soft keys on HP terminals"
+msgstr "HP терминал дахь программын товчлууруудыг хүчингүй болгох"
+
+msgid "Requests to run in black and white"
+msgstr "Хариултуудыг хар цагаан горимд ажилуулна"
+
+msgid "Request to run in color mode"
+msgstr "өнгөт горимд ажиллахад хариулна"
+
+msgid "Specifies a color configuration"
+msgstr "өнгөний тусгай тохиргоо"
+
+#, fuzzy
+msgid ""
+"--colors KEYWORD={FORE},{BACK}\n"
+"\n"
+"{FORE} and {BACK} can be omitted, and the default will be used\n"
+"\n"
+"Keywords:\n"
+"   Global:       errors, reverse, gauge, input, viewunderline\n"
+"   File display: normal, selected, marked, markselect\n"
+"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                 errdhotfocus\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
+msgstr ""
+"--colors {ТҮЛХҮҮР ҮГ}={ТЕКСТ},{ФОН}\n"
+"\n"
+"{ТЕКСТ} ба {ФОН} оруулж болно, анхны утгаар нь хэрэглэхэд\n"
+"\n"
+"Түлхүүр үгнүүд:\n"
+"   Глобаль:        errors, reverse, gauge, input\n"
+"   Панел:       normal, selected, marked, markselect\n"
+"   Диалог:      dnormal, dfocus, dhotnormal, dhotfocus\n"
+"   Цэс:         menu, menuhot, menusel, menuhotsel\n"
+"   Тусламж:      helpnormal, helpitalic, helplink, helpslink\n"
+"   Файлын төрөлүүд:  directory, executable, link, stalelink, device, "
+"special, core\n"
+"\n"
+"өнгүүд:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray, white\n"
+"\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
+
+#, fuzzy
+msgid "Color options"
+msgstr "Тохиргуулгын параметрүүд"
+
+msgid "+number"
+msgstr "+дугаар"
+
+#, fuzzy
+msgid "[this_dir] [other_panel_dir]"
+msgstr "[флаг] [энэ_лавлах] [бусад_лавлах_панел]\n"
+
+msgid "Set initial line number for the internal editor"
+msgstr "дотоод засварлагчын эхлэл мөрийн дугаарыг оноо"
+
+msgid ""
+"\n"
+"Please send any bug reports (including the output of `mc -V')\n"
+"to mc-devel@gnome.org\n"
+msgstr ""
+"\n"
+"Ямарваа нэгэн алдааны мэдээллийг ('mc -V' гаралттай хамтатган)\n"
+"mc-devel@gnome.org хаяг руу илгээнэ үү\n"
+
+#, c-format
+msgid "GNU Midnight Commander %s\n"
+msgstr "GNU Midnight Commander, хувилбар %s\n"
+
+#, fuzzy
+msgid "Main options"
+msgstr " Панелын тохиргоо "
+
+#, fuzzy
+msgid "Terminal options"
+msgstr " Бусад тохиргоонууд "
 
 msgid " Background process error "
 msgstr " Арын процесс дэхь алдаа"
@@ -2478,134 +2632,6 @@ msgid ""
 "Or set 'don't ask again' and press <<Skip>>"
 msgstr ""
 
-#, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "GNU Midnight Commander, хувилбар %s\n"
-
-msgid "[flags] [this_dir] [other_panel_dir]\n"
-msgstr "[флаг] [энэ_лавлах] [бусад_лавлах_панел]\n"
-
-msgid "+number"
-msgstr "+дугаар"
-
-msgid "Set initial line number for the internal editor"
-msgstr "дотоод засварлагчын эхлэл мөрийн дугаарыг оноо"
-
-msgid ""
-"\n"
-"Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
-msgstr ""
-"\n"
-"Ямарваа нэгэн алдааны мэдээллийг ('mc -V' гаралттай хамтатган)\n"
-"mc-devel@gnome.org хаяг руу илгээнэ үү\n"
-
-#, fuzzy
-msgid ""
-"--colors KEYWORD={FORE},{BACK}\n"
-"\n"
-"{FORE} and {BACK} can be omitted, and the default will be used\n"
-"\n"
-"Keywords:\n"
-"   Global:       errors, reverse, gauge, input, viewunderline\n"
-"   File display: normal, selected, marked, markselect\n"
-"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate\n"
-msgstr ""
-"--colors {ТҮЛХҮҮР ҮГ}={ТЕКСТ},{ФОН}\n"
-"\n"
-"{ТЕКСТ} ба {ФОН} оруулж болно, анхны утгаар нь хэрэглэхэд\n"
-"\n"
-"Түлхүүр үгнүүд:\n"
-"   Глобаль:        errors, reverse, gauge, input\n"
-"   Панел:       normal, selected, marked, markselect\n"
-"   Диалог:      dnormal, dfocus, dhotnormal, dhotfocus\n"
-"   Цэс:         menu, menuhot, menusel, menuhotsel\n"
-"   Тусламж:      helpnormal, helpitalic, helplink, helpslink\n"
-"   Файлын төрөлүүд:  directory, executable, link, stalelink, device, "
-"special, core\n"
-"\n"
-"өнгүүд:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray, white\n"
-"\n"
-
-msgid ""
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-msgstr ""
-
-msgid "Displays this help message"
-msgstr "Уг тусламжын захиаг харуулах"
-
-msgid "Displays the current version"
-msgstr "Одоогийн хувилбарыг харуулах"
-
-msgid "Forces xterm features"
-msgstr "xterm хүчингүүд"
-
-msgid "Disable mouse support in text version"
-msgstr "Текст хувилбарт хулганыг хаах"
-
-msgid "Tries to use termcap instead of terminfo"
-msgstr " terminfo г termcap тай хамт хэрэглэн дахин оролдох"
-
-msgid "Resets soft keys on HP terminals"
-msgstr "HP терминал дахь программын товчлууруудыг хүчингүй болгох"
-
-msgid "To run on slow terminals"
-msgstr "Удаан терминалд ажиллах"
-
-msgid "Use stickchars to draw"
-msgstr "Псевдографикыг зурахад ашиглах"
-
-msgid "Requests to run in black and white"
-msgstr "Хариултуудыг хар цагаан горимд ажилуулна"
-
-msgid "Request to run in color mode"
-msgstr "өнгөт горимд ажиллахад хариулна"
-
-msgid "Specifies a color configuration"
-msgstr "өнгөний тусгай тохиргоо"
-
-msgid "Displays a help screen on how to change the color scheme"
-msgstr "өнгөний схемийг яаж солих талаархи тусламжын дэлгэцийг харуулна"
-
-msgid "Log ftp dialog to specified file"
-msgstr "Тусгайлсан файл руу тэмдэглэх FTP диалог"
-
-msgid "Set debug level"
-msgstr "Дебаг түвшинг тодорхойлох"
-
-msgid "Print data directory"
-msgstr "өгөгдөлийн лавлахын нэрийг харуулах"
-
-msgid "Print last working directory to specified file"
-msgstr "Заагдсан файл руу хамгийн сүүлд ажилласан лавлахыг хэвлэх"
-
-msgid "Enables subshell support (default)"
-msgstr "Subshell боломжыг нээх (анхны утга)"
-
-msgid "Disables subshell support"
-msgstr "Subshell боломжыг хаах"
-
-msgid "Launches the file viewer on a file"
-msgstr "Файл харагчыг ажиллуулах"
-
-msgid "Edits one file"
-msgstr "Нэг файл засах"
-
 #, fuzzy, c-format
 msgid "Cannot create %s directory"
 msgstr "Хавтас руу шилжиж чадсангүй"
@@ -2723,28 +2749,6 @@ msgstr "Командыг биелүүлэх боломжгүй."
 
 msgid "Pipe close failed"
 msgstr "Урсгалыг хаахад алдаа гарлаа"
-
-msgid "missing argument"
-msgstr "утга дутуу"
-
-msgid "unknown option"
-msgstr "тодорхойгүй параметр"
-
-msgid "invalid numeric value"
-msgstr "буруу тоон утга"
-
-msgid "Show this help message"
-msgstr "Уг тусламжын зурвасыг үзүүлэх"
-
-msgid "Display brief usage message"
-msgstr "Товч зааварчилгааны мэдээллийг харуулах"
-
-msgid "ARG"
-msgstr "УТГА"
-
-#, c-format
-msgid "Usage:"
-msgstr "Хэрэглээ:"
 
 msgid "[dev]"
 msgstr ""
@@ -3805,6 +3809,33 @@ msgstr "Дотоод алдаа:"
 
 msgid "Changes to file lost"
 msgstr "Файлын өөрчлөлт алга байна"
+
+#~ msgid "Displays this help message"
+#~ msgstr "Уг тусламжын захиаг харуулах"
+
+#~ msgid "Displays a help screen on how to change the color scheme"
+#~ msgstr "өнгөний схемийг яаж солих талаархи тусламжын дэлгэцийг харуулна"
+
+#~ msgid "missing argument"
+#~ msgstr "утга дутуу"
+
+#~ msgid "unknown option"
+#~ msgstr "тодорхойгүй параметр"
+
+#~ msgid "invalid numeric value"
+#~ msgstr "буруу тоон утга"
+
+#~ msgid "Show this help message"
+#~ msgstr "Уг тусламжын зурвасыг үзүүлэх"
+
+#~ msgid "Display brief usage message"
+#~ msgstr "Товч зааварчилгааны мэдээллийг харуулах"
+
+#~ msgid "ARG"
+#~ msgstr "УТГА"
+
+#~ msgid "Usage:"
+#~ msgstr "Хэрэглээ:"
 
 #~ msgid "pro&Mpt on replace"
 #~ msgstr "Солилцоог &бататгах"

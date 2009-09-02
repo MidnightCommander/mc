@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-08-26 17:11+0300\n"
+"POT-Creation-Date: 2009-09-02 23:01+0300\n"
 "PO-Revision-Date: 2002-01-29 22:05+0800\n"
 "Last-Translator: Wang Jian <lark@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -89,6 +89,10 @@ msgstr " 写入管道时发生错误："
 msgid " Cannot open pipe for writing: "
 msgstr " 试图打开管道写入时失败："
 
+#, fuzzy, c-format
+msgid " Cannot open file for writing: %s "
+msgstr " 试图打开管道写入时失败："
+
 msgid "Quick save "
 msgstr "快速保存"
 
@@ -107,12 +111,27 @@ msgstr "扩展名："
 msgid " Edit Save Mode "
 msgstr " 编辑保存模式 "
 
-msgid " Save As "
-msgstr " 保存为"
+msgid "&Do not change"
+msgstr ""
+
+msgid "&Unix format (LF)"
+msgstr ""
+
+msgid "&Windows/DOS format (CR LF)"
+msgstr ""
+
+msgid "&Macintosh format (LF)"
+msgstr ""
+
+msgid "Change line breaks to:"
+msgstr ""
 
 #, fuzzy
 msgid " Enter file name: "
 msgstr " 输入行号："
+
+msgid " Save As "
+msgstr " 保存为"
 
 msgid " A file already exists with this name. "
 msgstr " 同名文件已存在。"
@@ -853,6 +872,143 @@ msgid ""
 msgstr ""
 " 无法 chown “%s” \n"
 " %s "
+
+msgid "Displays the current version"
+msgstr "显示当前版本"
+
+#, fuzzy
+msgid "Print data directory"
+msgstr "目录"
+
+#, fuzzy
+msgid "Print last working directory to specified file"
+msgstr "在程序退出时打印工作目录"
+
+msgid "Enables subshell support (default)"
+msgstr "启用子 shell 支持(默认)"
+
+msgid "Disables subshell support"
+msgstr "禁用子 shell 支持"
+
+msgid "Log ftp dialog to specified file"
+msgstr "记录 ftp 对话到指定的文件"
+
+msgid "Set debug level"
+msgstr ""
+
+msgid "Launches the file viewer on a file"
+msgstr "在文件上使用文件查看器"
+
+msgid "Edits one file"
+msgstr "编辑一个文件"
+
+msgid "Forces xterm features"
+msgstr "强制使用 xterm 特性"
+
+msgid "Disable mouse support in text version"
+msgstr "在文字版本中禁用鼠标支持"
+
+msgid "Tries to use termcap instead of terminfo"
+msgstr "尝试使用 termcap 而不是 terminfo"
+
+msgid "To run on slow terminals"
+msgstr "要在慢速的终端上运行"
+
+msgid "Use stickchars to draw"
+msgstr ""
+
+msgid "Resets soft keys on HP terminals"
+msgstr "在 HP 终端上复位软键"
+
+msgid "Requests to run in black and white"
+msgstr "请求运行在黑白模式"
+
+msgid "Request to run in color mode"
+msgstr "请求运行在彩色模式"
+
+msgid "Specifies a color configuration"
+msgstr "指定颜色配置"
+
+#, fuzzy
+msgid ""
+"--colors KEYWORD={FORE},{BACK}\n"
+"\n"
+"{FORE} and {BACK} can be omitted, and the default will be used\n"
+"\n"
+"Keywords:\n"
+"   Global:       errors, reverse, gauge, input, viewunderline\n"
+"   File display: normal, selected, marked, markselect\n"
+"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                 errdhotfocus\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
+msgstr ""
+"--colors KEYWORDS={FORE},{BACK}\n"
+"\n"
+"{FORE} 和 {BACK} 可被忽略，默认值将被使用\n"
+"\n"
+"关键字：\n"
+"  全局：       errors, reverse, gauge, input\n"
+"  文件显示：   normal, selected, marked, markselect\n"
+"  对话框：     dnormal, dfocus, dhotnormal, dhotfocus\n"
+"  菜单：       menu, menuhot, menusel, menuhotsel\n"
+"  帮助：       helpnormal, helpitalic, helplink, helpslink\n"
+"  文件类型：   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"颜色：\n"
+"  black, gray, red, brightred, green, brightgreen, brown,\n"
+"  yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"  brightcyan, lightgray and white\n"
+"\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
+
+#, fuzzy
+msgid "Color options"
+msgstr "配置选项"
+
+msgid "+number"
+msgstr ""
+
+#, fuzzy
+msgid "[this_dir] [other_panel_dir]"
+msgstr "[flags] [this_dir] [other_panel_dir]\n"
+
+msgid "Set initial line number for the internal editor"
+msgstr ""
+
+msgid ""
+"\n"
+"Please send any bug reports (including the output of `mc -V')\n"
+"to mc-devel@gnome.org\n"
+msgstr ""
+"\n"
+"请发送错误报告(包含有`mc -V`的输出)\n"
+"到 mc-devel@gnome.org\n"
+
+#, c-format
+msgid "GNU Midnight Commander %s\n"
+msgstr "GNU Midnight Commander %s\n"
+
+#, fuzzy
+msgid "Main options"
+msgstr " 面板选项 "
+
+#, fuzzy
+msgid "Terminal options"
+msgstr " 其它选项 "
 
 msgid " Background process error "
 msgstr " 后台进程错误 "
@@ -2464,136 +2620,6 @@ msgid ""
 "Or set 'don't ask again' and press <<Skip>>"
 msgstr ""
 
-#, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "GNU Midnight Commander %s\n"
-
-msgid "[flags] [this_dir] [other_panel_dir]\n"
-msgstr "[flags] [this_dir] [other_panel_dir]\n"
-
-msgid "+number"
-msgstr ""
-
-msgid "Set initial line number for the internal editor"
-msgstr ""
-
-msgid ""
-"\n"
-"Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
-msgstr ""
-"\n"
-"请发送错误报告(包含有`mc -V`的输出)\n"
-"到 mc-devel@gnome.org\n"
-
-#, fuzzy
-msgid ""
-"--colors KEYWORD={FORE},{BACK}\n"
-"\n"
-"{FORE} and {BACK} can be omitted, and the default will be used\n"
-"\n"
-"Keywords:\n"
-"   Global:       errors, reverse, gauge, input, viewunderline\n"
-"   File display: normal, selected, marked, markselect\n"
-"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate\n"
-msgstr ""
-"--colors KEYWORDS={FORE},{BACK}\n"
-"\n"
-"{FORE} 和 {BACK} 可被忽略，默认值将被使用\n"
-"\n"
-"关键字：\n"
-"  全局：       errors, reverse, gauge, input\n"
-"  文件显示：   normal, selected, marked, markselect\n"
-"  对话框：     dnormal, dfocus, dhotnormal, dhotfocus\n"
-"  菜单：       menu, menuhot, menusel, menuhotsel\n"
-"  帮助：       helpnormal, helpitalic, helplink, helpslink\n"
-"  文件类型：   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"颜色：\n"
-"  black, gray, red, brightred, green, brightgreen, brown,\n"
-"  yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"  brightcyan, lightgray and white\n"
-"\n"
-
-msgid ""
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-msgstr ""
-
-msgid "Displays this help message"
-msgstr "显示该帮助信息"
-
-msgid "Displays the current version"
-msgstr "显示当前版本"
-
-msgid "Forces xterm features"
-msgstr "强制使用 xterm 特性"
-
-msgid "Disable mouse support in text version"
-msgstr "在文字版本中禁用鼠标支持"
-
-msgid "Tries to use termcap instead of terminfo"
-msgstr "尝试使用 termcap 而不是 terminfo"
-
-msgid "Resets soft keys on HP terminals"
-msgstr "在 HP 终端上复位软键"
-
-msgid "To run on slow terminals"
-msgstr "要在慢速的终端上运行"
-
-msgid "Use stickchars to draw"
-msgstr ""
-
-msgid "Requests to run in black and white"
-msgstr "请求运行在黑白模式"
-
-msgid "Request to run in color mode"
-msgstr "请求运行在彩色模式"
-
-msgid "Specifies a color configuration"
-msgstr "指定颜色配置"
-
-msgid "Displays a help screen on how to change the color scheme"
-msgstr "显示如何修改配色方案的帮助"
-
-msgid "Log ftp dialog to specified file"
-msgstr "记录 ftp 对话到指定的文件"
-
-msgid "Set debug level"
-msgstr ""
-
-#, fuzzy
-msgid "Print data directory"
-msgstr "目录"
-
-#, fuzzy
-msgid "Print last working directory to specified file"
-msgstr "在程序退出时打印工作目录"
-
-msgid "Enables subshell support (default)"
-msgstr "启用子 shell 支持(默认)"
-
-msgid "Disables subshell support"
-msgstr "禁用子 shell 支持"
-
-msgid "Launches the file viewer on a file"
-msgstr "在文件上使用文件查看器"
-
-msgid "Edits one file"
-msgstr "编辑一个文件"
-
 #, fuzzy, c-format
 msgid "Cannot create %s directory"
 msgstr "无法改变目录"
@@ -2711,29 +2737,6 @@ msgstr "无法调用命令。"
 
 msgid "Pipe close failed"
 msgstr "关闭管道失败"
-
-msgid "missing argument"
-msgstr ""
-
-#, fuzzy
-msgid "unknown option"
-msgstr "<未知群组>"
-
-msgid "invalid numeric value"
-msgstr ""
-
-msgid "Show this help message"
-msgstr "显示该帮助信息"
-
-msgid "Display brief usage message"
-msgstr "显示简短的使用信息"
-
-msgid "ARG"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Usage:"
-msgstr "用户名："
 
 msgid "[dev]"
 msgstr ""
@@ -3797,6 +3800,26 @@ msgstr "内部错误："
 
 msgid "Changes to file lost"
 msgstr "对文件的修改被丢失"
+
+#~ msgid "Displays this help message"
+#~ msgstr "显示该帮助信息"
+
+#~ msgid "Displays a help screen on how to change the color scheme"
+#~ msgstr "显示如何修改配色方案的帮助"
+
+#, fuzzy
+#~ msgid "unknown option"
+#~ msgstr "<未知群组>"
+
+#~ msgid "Show this help message"
+#~ msgstr "显示该帮助信息"
+
+#~ msgid "Display brief usage message"
+#~ msgstr "显示简短的使用信息"
+
+#, fuzzy
+#~ msgid "Usage:"
+#~ msgstr "用户名："
 
 #~ msgid "pro&Mpt on replace"
 #~ msgstr "替换时提示(&O)"

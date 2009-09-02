@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-08-26 17:11+0300\n"
+"POT-Creation-Date: 2009-09-02 23:01+0300\n"
 "PO-Revision-Date: 2003-01-31 00:11+0200\n"
 "Last-Translator: Mişu Moldovan <dumol@go.ro>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
@@ -91,6 +91,10 @@ msgstr " Eroare la scrierea în filtrul: "
 msgid " Cannot open pipe for writing: "
 msgstr " Nu pot deschide pentru scriere filtrul: "
 
+#, fuzzy, c-format
+msgid " Cannot open file for writing: %s "
+msgstr " Nu pot deschide pentru scriere filtrul: "
+
 msgid "Quick save "
 msgstr "Rapidă"
 
@@ -109,11 +113,26 @@ msgstr "Extensie:"
 msgid " Edit Save Mode "
 msgstr " Editează Modul de Salvare "
 
-msgid " Save As "
-msgstr " Salvează Ca "
+msgid "&Do not change"
+msgstr ""
+
+msgid "&Unix format (LF)"
+msgstr ""
+
+msgid "&Windows/DOS format (CR LF)"
+msgstr ""
+
+msgid "&Macintosh format (LF)"
+msgstr ""
+
+msgid "Change line breaks to:"
+msgstr ""
 
 msgid " Enter file name: "
 msgstr " Introduceţi numele fişierului: "
+
+msgid " Save As "
+msgstr " Salvează Ca "
 
 msgid " A file already exists with this name. "
 msgstr " Există deja un fişier cu acest nume. "
@@ -851,6 +870,142 @@ msgid ""
 msgstr ""
 " Nu pot folosi chown pt. \"%s\" \n"
 " %s "
+
+msgid "Displays the current version"
+msgstr "Afişează versiunea curentă"
+
+msgid "Print data directory"
+msgstr "Arată datele directorului"
+
+msgid "Print last working directory to specified file"
+msgstr "Arată ultimul directorul curent în fişierul specificat"
+
+msgid "Enables subshell support (default)"
+msgstr "Activează suportul pentru subshell (implicit)"
+
+msgid "Disables subshell support"
+msgstr "Dezactivează suportul subshell"
+
+msgid "Log ftp dialog to specified file"
+msgstr "Înregistrează dialogul ftp în fişierul specificat"
+
+msgid "Set debug level"
+msgstr "Nivelul de depanare"
+
+msgid "Launches the file viewer on a file"
+msgstr "Lansează vizualizatorul de fişiere pe un fişier"
+
+msgid "Edits one file"
+msgstr "Editează un fişier"
+
+msgid "Forces xterm features"
+msgstr "Forţează facilităţile xterm"
+
+msgid "Disable mouse support in text version"
+msgstr "Dezactivează suportul de mouse în versiunea text"
+
+msgid "Tries to use termcap instead of terminfo"
+msgstr "Încearcă să utilizeze termcap în locul terminfo"
+
+msgid "To run on slow terminals"
+msgstr "Pentru a rula pe terminale încete"
+
+msgid "Use stickchars to draw"
+msgstr "Utilizează +, -, | pentru desenare"
+
+msgid "Resets soft keys on HP terminals"
+msgstr "Resetează tastele soft pe terminale HP"
+
+msgid "Requests to run in black and white"
+msgstr "Cerere de rulare în alb/negru"
+
+msgid "Request to run in color mode"
+msgstr "Cerere de rulare în culori"
+
+msgid "Specifies a color configuration"
+msgstr "Specifică o configuraţie de culori"
+
+#, fuzzy
+msgid ""
+"--colors KEYWORD={FORE},{BACK}\n"
+"\n"
+"{FORE} and {BACK} can be omitted, and the default will be used\n"
+"\n"
+"Keywords:\n"
+"   Global:       errors, reverse, gauge, input, viewunderline\n"
+"   File display: normal, selected, marked, markselect\n"
+"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                 errdhotfocus\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
+msgstr ""
+"--colors CHEIE={FAŢĂ},{FUNDAL}\n"
+"\n"
+"{FAŢĂ} şi/sau {FUNDAL} pot fi omise şi culorile standard vor fi folosite\n"
+"\n"
+"CHEI:\n"
+"   Globale:      errors, reverse, gauge, input\n"
+"   Fişiere:      normal, selected, marked, markselect\n"
+"   Dialoguri:    dnormal, dfocus, dhotnormal, dhotfocus\n"
+"   Meniuri:      menu, menuhot, menusel, menuhotsel\n"
+"   Ajutor:       helpnormal, helpitalic, helplink, helpslink\n"
+"   Tip fişier:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Culori:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
+
+#, fuzzy
+msgid "Color options"
+msgstr "Opţiuni de configurare"
+
+msgid "+number"
+msgstr "+număr"
+
+#, fuzzy
+msgid "[this_dir] [other_panel_dir]"
+msgstr "[opţiuni] [acest_dir] [celălalt_dir]\n"
+
+msgid "Set initial line number for the internal editor"
+msgstr "Numărul primei linii pentru editorul intern"
+
+msgid ""
+"\n"
+"Please send any bug reports (including the output of `mc -V')\n"
+"to mc-devel@gnome.org\n"
+msgstr ""
+"\n"
+"Vă rugăm semnalaţi orice eroare (inclusiv ale rezultatului comenzii 'mc -"
+"V')\n"
+"la adresa mc-devel@gnome.org\n"
+
+#, c-format
+msgid "GNU Midnight Commander %s\n"
+msgstr "GNU Midnight Commander %s\n"
+
+#, fuzzy
+msgid "Main options"
+msgstr " Opţiuni panou "
+
+#, fuzzy
+msgid "Terminal options"
+msgstr " Alte opţiuni "
 
 msgid " Background process error "
 msgstr " Eroare în procesul din fundal "
@@ -2474,135 +2629,6 @@ msgid ""
 "Or set 'don't ask again' and press <<Skip>>"
 msgstr ""
 
-#, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "GNU Midnight Commander %s\n"
-
-msgid "[flags] [this_dir] [other_panel_dir]\n"
-msgstr "[opţiuni] [acest_dir] [celălalt_dir]\n"
-
-msgid "+number"
-msgstr "+număr"
-
-msgid "Set initial line number for the internal editor"
-msgstr "Numărul primei linii pentru editorul intern"
-
-msgid ""
-"\n"
-"Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
-msgstr ""
-"\n"
-"Vă rugăm semnalaţi orice eroare (inclusiv ale rezultatului comenzii 'mc -"
-"V')\n"
-"la adresa mc-devel@gnome.org\n"
-
-#, fuzzy
-msgid ""
-"--colors KEYWORD={FORE},{BACK}\n"
-"\n"
-"{FORE} and {BACK} can be omitted, and the default will be used\n"
-"\n"
-"Keywords:\n"
-"   Global:       errors, reverse, gauge, input, viewunderline\n"
-"   File display: normal, selected, marked, markselect\n"
-"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate\n"
-msgstr ""
-"--colors CHEIE={FAŢĂ},{FUNDAL}\n"
-"\n"
-"{FAŢĂ} şi/sau {FUNDAL} pot fi omise şi culorile standard vor fi folosite\n"
-"\n"
-"CHEI:\n"
-"   Globale:      errors, reverse, gauge, input\n"
-"   Fişiere:      normal, selected, marked, markselect\n"
-"   Dialoguri:    dnormal, dfocus, dhotnormal, dhotfocus\n"
-"   Meniuri:      menu, menuhot, menusel, menuhotsel\n"
-"   Ajutor:       helpnormal, helpitalic, helplink, helpslink\n"
-"   Tip fişier:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Culori:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-
-msgid ""
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-msgstr ""
-
-msgid "Displays this help message"
-msgstr "Afişează un mesaj de ajutor"
-
-msgid "Displays the current version"
-msgstr "Afişează versiunea curentă"
-
-msgid "Forces xterm features"
-msgstr "Forţează facilităţile xterm"
-
-msgid "Disable mouse support in text version"
-msgstr "Dezactivează suportul de mouse în versiunea text"
-
-msgid "Tries to use termcap instead of terminfo"
-msgstr "Încearcă să utilizeze termcap în locul terminfo"
-
-msgid "Resets soft keys on HP terminals"
-msgstr "Resetează tastele soft pe terminale HP"
-
-msgid "To run on slow terminals"
-msgstr "Pentru a rula pe terminale încete"
-
-msgid "Use stickchars to draw"
-msgstr "Utilizează +, -, | pentru desenare"
-
-msgid "Requests to run in black and white"
-msgstr "Cerere de rulare în alb/negru"
-
-msgid "Request to run in color mode"
-msgstr "Cerere de rulare în culori"
-
-msgid "Specifies a color configuration"
-msgstr "Specifică o configuraţie de culori"
-
-msgid "Displays a help screen on how to change the color scheme"
-msgstr "Afişează un ecran de ajutor despre cum se schimbă schema de culori"
-
-msgid "Log ftp dialog to specified file"
-msgstr "Înregistrează dialogul ftp în fişierul specificat"
-
-msgid "Set debug level"
-msgstr "Nivelul de depanare"
-
-msgid "Print data directory"
-msgstr "Arată datele directorului"
-
-msgid "Print last working directory to specified file"
-msgstr "Arată ultimul directorul curent în fişierul specificat"
-
-msgid "Enables subshell support (default)"
-msgstr "Activează suportul pentru subshell (implicit)"
-
-msgid "Disables subshell support"
-msgstr "Dezactivează suportul subshell"
-
-msgid "Launches the file viewer on a file"
-msgstr "Lansează vizualizatorul de fişiere pe un fişier"
-
-msgid "Edits one file"
-msgstr "Editează un fişier"
-
 #, fuzzy, c-format
 msgid "Cannot create %s directory"
 msgstr "Nu pot deschide directorul %s"
@@ -2721,28 +2747,6 @@ msgstr "Nu pot invoca comanda."
 
 msgid "Pipe close failed"
 msgstr "Închiderea filtrului a eşuat"
-
-msgid "missing argument"
-msgstr "argument lipsă"
-
-msgid "unknown option"
-msgstr "opţiune necunoscută"
-
-msgid "invalid numeric value"
-msgstr "valoare numerică invalidă"
-
-msgid "Show this help message"
-msgstr "Arată acest mesaj de ajutor"
-
-msgid "Display brief usage message"
-msgstr "Afişează un mesaj sumar de utilizare"
-
-msgid "ARG"
-msgstr "ARG"
-
-#, c-format
-msgid "Usage:"
-msgstr "Utilizare:"
 
 msgid "[dev]"
 msgstr ""
@@ -3801,6 +3805,33 @@ msgstr "Eroare internă:"
 
 msgid "Changes to file lost"
 msgstr "S-au pierdut schimbările efectuate în fişier"
+
+#~ msgid "Displays this help message"
+#~ msgstr "Afişează un mesaj de ajutor"
+
+#~ msgid "Displays a help screen on how to change the color scheme"
+#~ msgstr "Afişează un ecran de ajutor despre cum se schimbă schema de culori"
+
+#~ msgid "missing argument"
+#~ msgstr "argument lipsă"
+
+#~ msgid "unknown option"
+#~ msgstr "opţiune necunoscută"
+
+#~ msgid "invalid numeric value"
+#~ msgstr "valoare numerică invalidă"
+
+#~ msgid "Show this help message"
+#~ msgstr "Arată acest mesaj de ajutor"
+
+#~ msgid "Display brief usage message"
+#~ msgstr "Afişează un mesaj sumar de utilizare"
+
+#~ msgid "ARG"
+#~ msgstr "ARG"
+
+#~ msgid "Usage:"
+#~ msgstr "Utilizare:"
 
 #~ msgid "pro&Mpt on replace"
 #~ msgstr "con&Firmă înlocuirea "

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-08-26 17:11+0300\n"
+"POT-Creation-Date: 2009-09-02 23:01+0300\n"
 "PO-Revision-Date: 2003-01-22 18:10+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <debian-l10n-swedish@lists.debian.org>\n"
@@ -95,6 +95,10 @@ msgstr " Fel vid skrivning till rör: "
 msgid " Cannot open pipe for writing: "
 msgstr " Kan inte öppna rör för skrivning: "
 
+#, fuzzy, c-format
+msgid " Cannot open file for writing: %s "
+msgstr " Kan inte öppna rör för skrivning: "
+
 msgid "Quick save "
 msgstr "Snabbspara"
 
@@ -113,11 +117,26 @@ msgstr "Ändelse:"
 msgid " Edit Save Mode "
 msgstr " Redigera sparläge "
 
-msgid " Save As "
-msgstr " Spara som "
+msgid "&Do not change"
+msgstr ""
+
+msgid "&Unix format (LF)"
+msgstr ""
+
+msgid "&Windows/DOS format (CR LF)"
+msgstr ""
+
+msgid "&Macintosh format (LF)"
+msgstr ""
+
+msgid "Change line breaks to:"
+msgstr ""
 
 msgid " Enter file name: "
 msgstr " Ange filnamn: "
+
+msgid " Save As "
+msgstr " Spara som "
 
 msgid " A file already exists with this name. "
 msgstr " Det finns redan en fil med det namnet. "
@@ -869,6 +888,144 @@ msgid ""
 msgstr ""
 " Kan inte byta ägare på \"%s\" \n"
 " %s "
+
+msgid "Displays the current version"
+msgstr "Visa den aktuella versionen"
+
+msgid "Print data directory"
+msgstr "Skriv ut datakatalog"
+
+msgid "Print last working directory to specified file"
+msgstr "Skriv ut senaste arbetskatalog till angiven fil"
+
+# incomplete
+msgid "Enables subshell support (default)"
+msgstr "Aktiverar stöd för subshell (default)"
+
+msgid "Disables subshell support"
+msgstr "Stäng av stöd för subshell"
+
+msgid "Log ftp dialog to specified file"
+msgstr "Logga ftpdialog till specificerad fil"
+
+msgid "Set debug level"
+msgstr "Ställ in felsökningsnivå"
+
+msgid "Launches the file viewer on a file"
+msgstr "Startar filläsaren"
+
+msgid "Edits one file"
+msgstr "Redigera en fil"
+
+msgid "Forces xterm features"
+msgstr "Tvinga fram xtermfinesser"
+
+msgid "Disable mouse support in text version"
+msgstr "Stäng av musstödet i text versionen"
+
+# svängelska
+msgid "Tries to use termcap instead of terminfo"
+msgstr "Försöker använda termcap istället för terminfo"
+
+msgid "To run on slow terminals"
+msgstr "Att köra på långsamma terminaler"
+
+msgid "Use stickchars to draw"
+msgstr "Använd \"stickchars\" för att rita"
+
+msgid "Resets soft keys on HP terminals"
+msgstr "Nollställ mjuka tangenter på HP-terminaler"
+
+msgid "Requests to run in black and white"
+msgstr "Begäran att köra i svartvitt"
+
+msgid "Request to run in color mode"
+msgstr "Begär att få köra i färgläge"
+
+msgid "Specifies a color configuration"
+msgstr "Specificera en färgkonfiguration"
+
+#, fuzzy
+msgid ""
+"--colors KEYWORD={FORE},{BACK}\n"
+"\n"
+"{FORE} and {BACK} can be omitted, and the default will be used\n"
+"\n"
+"Keywords:\n"
+"   Global:       errors, reverse, gauge, input, viewunderline\n"
+"   File display: normal, selected, marked, markselect\n"
+"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                 errdhotfocus\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
+msgstr ""
+"--colors TYP={FÖRGRUND},{BAKGRUND}\n"
+"\n"
+"{FÖRGRUND} och {BAKGRUND} behöver inte skrivas, då används standardvärden\n"
+"\n"
+"Typer:\n"
+"   Globala:     errors, reverse, gauge, input\n"
+"   Filvisning:  normal, selevted, marked, markselect\n"
+"   Dialogrutor: dnormal, dfocus, dnotnormal, dnotfocus\n"
+"   Menyer:      menu, menuhot, menusel, menuhotsel\n"
+"   Hjälp:       helpnormal, helpitalic, helplink, helpslink\n"
+"   Filtyper:    directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Färger:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
+
+#, fuzzy
+msgid "Color options"
+msgstr "Inställningar"
+
+msgid "+number"
+msgstr "+nummer"
+
+#, fuzzy
+msgid "[this_dir] [other_panel_dir]"
+msgstr "[flaggor] [denna katalog] [annan panels katalog]\n"
+
+msgid "Set initial line number for the internal editor"
+msgstr "Ställ in initialt radnummer för den interna redigeraren"
+
+msgid ""
+"\n"
+"Please send any bug reports (including the output of `mc -V')\n"
+"to mc-devel@gnome.org\n"
+msgstr ""
+"\n"
+"Skicka felrapporter (ta med utdata från \"mc -V\") till\n"
+"mc-devel@gnome.org och kommentarer på översättningen till sv@li.org\n"
+
+#, c-format
+msgid "GNU Midnight Commander %s\n"
+msgstr "GNU Midnight Commander %s\n"
+
+# kort och bra
+#, fuzzy
+msgid "Main options"
+msgstr " Panelinställningar "
+
+#, fuzzy
+msgid "Terminal options"
+msgstr " Andra inställningar "
 
 msgid " Background process error "
 msgstr " Bakgrundsprocessfel "
@@ -2513,136 +2670,6 @@ msgid ""
 "Or set 'don't ask again' and press <<Skip>>"
 msgstr ""
 
-#, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "GNU Midnight Commander %s\n"
-
-msgid "[flags] [this_dir] [other_panel_dir]\n"
-msgstr "[flaggor] [denna katalog] [annan panels katalog]\n"
-
-msgid "+number"
-msgstr "+nummer"
-
-msgid "Set initial line number for the internal editor"
-msgstr "Ställ in initialt radnummer för den interna redigeraren"
-
-msgid ""
-"\n"
-"Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
-msgstr ""
-"\n"
-"Skicka felrapporter (ta med utdata från \"mc -V\") till\n"
-"mc-devel@gnome.org och kommentarer på översättningen till sv@li.org\n"
-
-#, fuzzy
-msgid ""
-"--colors KEYWORD={FORE},{BACK}\n"
-"\n"
-"{FORE} and {BACK} can be omitted, and the default will be used\n"
-"\n"
-"Keywords:\n"
-"   Global:       errors, reverse, gauge, input, viewunderline\n"
-"   File display: normal, selected, marked, markselect\n"
-"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate\n"
-msgstr ""
-"--colors TYP={FÖRGRUND},{BAKGRUND}\n"
-"\n"
-"{FÖRGRUND} och {BAKGRUND} behöver inte skrivas, då används standardvärden\n"
-"\n"
-"Typer:\n"
-"   Globala:     errors, reverse, gauge, input\n"
-"   Filvisning:  normal, selevted, marked, markselect\n"
-"   Dialogrutor: dnormal, dfocus, dnotnormal, dnotfocus\n"
-"   Menyer:      menu, menuhot, menusel, menuhotsel\n"
-"   Hjälp:       helpnormal, helpitalic, helplink, helpslink\n"
-"   Filtyper:    directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Färger:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-
-msgid ""
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-msgstr ""
-
-msgid "Displays this help message"
-msgstr "Visa det här hjälpmeddelandet"
-
-msgid "Displays the current version"
-msgstr "Visa den aktuella versionen"
-
-msgid "Forces xterm features"
-msgstr "Tvinga fram xtermfinesser"
-
-msgid "Disable mouse support in text version"
-msgstr "Stäng av musstödet i text versionen"
-
-# svängelska
-msgid "Tries to use termcap instead of terminfo"
-msgstr "Försöker använda termcap istället för terminfo"
-
-msgid "Resets soft keys on HP terminals"
-msgstr "Nollställ mjuka tangenter på HP-terminaler"
-
-msgid "To run on slow terminals"
-msgstr "Att köra på långsamma terminaler"
-
-msgid "Use stickchars to draw"
-msgstr "Använd \"stickchars\" för att rita"
-
-msgid "Requests to run in black and white"
-msgstr "Begäran att köra i svartvitt"
-
-msgid "Request to run in color mode"
-msgstr "Begär att få köra i färgläge"
-
-msgid "Specifies a color configuration"
-msgstr "Specificera en färgkonfiguration"
-
-msgid "Displays a help screen on how to change the color scheme"
-msgstr "Visa ett hjälpfönster över hur man ändrar färgschema"
-
-msgid "Log ftp dialog to specified file"
-msgstr "Logga ftpdialog till specificerad fil"
-
-msgid "Set debug level"
-msgstr "Ställ in felsökningsnivå"
-
-msgid "Print data directory"
-msgstr "Skriv ut datakatalog"
-
-msgid "Print last working directory to specified file"
-msgstr "Skriv ut senaste arbetskatalog till angiven fil"
-
-# incomplete
-msgid "Enables subshell support (default)"
-msgstr "Aktiverar stöd för subshell (default)"
-
-msgid "Disables subshell support"
-msgstr "Stäng av stöd för subshell"
-
-msgid "Launches the file viewer on a file"
-msgstr "Startar filläsaren"
-
-msgid "Edits one file"
-msgstr "Redigera en fil"
-
 #, fuzzy, c-format
 msgid "Cannot create %s directory"
 msgstr "Kan inte byta katalog"
@@ -2763,28 +2790,6 @@ msgstr "Kan inte invokera kommandot."
 
 msgid "Pipe close failed"
 msgstr "Pipe close misslyckades"
-
-msgid "missing argument"
-msgstr "argument saknas"
-
-msgid "unknown option"
-msgstr "okänd flagga"
-
-msgid "invalid numeric value"
-msgstr "ogiltigt numeriskt värde"
-
-msgid "Show this help message"
-msgstr "Visa det här hjälpmeddelandet"
-
-msgid "Display brief usage message"
-msgstr "Visa korta användningsmeddelanden"
-
-msgid "ARG"
-msgstr "ARG"
-
-#, c-format
-msgid "Usage:"
-msgstr "Användning:"
 
 msgid "[dev]"
 msgstr ""
@@ -3850,6 +3855,33 @@ msgstr " Internt fel:"
 
 msgid "Changes to file lost"
 msgstr "Ändringar i filen förlorade"
+
+#~ msgid "Displays this help message"
+#~ msgstr "Visa det här hjälpmeddelandet"
+
+#~ msgid "Displays a help screen on how to change the color scheme"
+#~ msgstr "Visa ett hjälpfönster över hur man ändrar färgschema"
+
+#~ msgid "missing argument"
+#~ msgstr "argument saknas"
+
+#~ msgid "unknown option"
+#~ msgstr "okänd flagga"
+
+#~ msgid "invalid numeric value"
+#~ msgstr "ogiltigt numeriskt värde"
+
+#~ msgid "Show this help message"
+#~ msgstr "Visa det här hjälpmeddelandet"
+
+#~ msgid "Display brief usage message"
+#~ msgstr "Visa korta användningsmeddelanden"
+
+#~ msgid "ARG"
+#~ msgstr "ARG"
+
+#~ msgid "Usage:"
+#~ msgstr "Användning:"
 
 #~ msgid "pro&Mpt on replace"
 #~ msgstr "fr&Åga vid ersätt"

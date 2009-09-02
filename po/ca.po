@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-08-26 17:11+0300\n"
+"POT-Creation-Date: 2009-09-02 23:01+0300\n"
 "PO-Revision-Date: 2001-09-29 17:41+0200\n"
 "Last-Translator: Softcatalà <tradgnome@softcatala.org>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
@@ -91,6 +91,10 @@ msgstr " S'ha produït un error en escriure al conducte: "
 msgid " Cannot open pipe for writing: "
 msgstr " No s'ha pogut obrir el conducte per a l'escriptura: "
 
+#, fuzzy, c-format
+msgid " Cannot open file for writing: %s "
+msgstr " No s'ha pogut obrir el conducte per a l'escriptura: "
+
 msgid "Quick save "
 msgstr "Desat ràpid "
 
@@ -109,11 +113,26 @@ msgstr "Extensió:"
 msgid " Edit Save Mode "
 msgstr " Edita la manera de desar "
 
-msgid " Save As "
-msgstr " Desa com a"
+msgid "&Do not change"
+msgstr ""
+
+msgid "&Unix format (LF)"
+msgstr ""
+
+msgid "&Windows/DOS format (CR LF)"
+msgstr ""
+
+msgid "&Macintosh format (LF)"
+msgstr ""
+
+msgid "Change line breaks to:"
+msgstr ""
 
 msgid " Enter file name: "
 msgstr " Introduïu el nom del fitxer: "
+
+msgid " Save As "
+msgstr " Desa com a"
 
 msgid " A file already exists with this name. "
 msgstr " Ja existeix un fitxer amb aquest nom. "
@@ -856,6 +875,146 @@ msgid ""
 msgstr ""
 " No s'ha pogut canviar la propietat de \"%s\" \n"
 " %s "
+
+msgid "Displays the current version"
+msgstr "Mostra la versió actual"
+
+#, fuzzy
+msgid "Print data directory"
+msgstr "Crea un directori nou"
+
+#, fuzzy
+msgid "Print last working directory to specified file"
+msgstr "Imprimeix el directori de treball en sortir"
+
+msgid "Enables subshell support (default)"
+msgstr "Habilita el suport de subintèrprets (per defecte)"
+
+msgid "Disables subshell support"
+msgstr "Inhabilita el suport de subintèrprets"
+
+msgid "Log ftp dialog to specified file"
+msgstr "Enregistra el quadre ftp a un fitxer"
+
+msgid "Set debug level"
+msgstr ""
+
+msgid "Launches the file viewer on a file"
+msgstr "Executa el visualitzador de fitxers amb un fitxer"
+
+msgid "Edits one file"
+msgstr "Edita un fitxer"
+
+msgid "Forces xterm features"
+msgstr "Força l'ús de característiques d'xterm"
+
+msgid "Disable mouse support in text version"
+msgstr "Inhabilita el suport de ratolí a la versió text"
+
+msgid "Tries to use termcap instead of terminfo"
+msgstr "Prova d'utilitzar termcap en comptes de terminfo"
+
+msgid "To run on slow terminals"
+msgstr "Per funcionar amb terminals lents"
+
+msgid "Use stickchars to draw"
+msgstr "Utilitza el caràcters de línies per fer marcs"
+
+msgid "Resets soft keys on HP terminals"
+msgstr "Reinicia les tecles programades als terminals HP"
+
+msgid "Requests to run in black and white"
+msgstr "Demana que s'utilitzi el mode blanc i negre"
+
+msgid "Request to run in color mode"
+msgstr "Demana que s'utilitzi el mode en color"
+
+msgid "Specifies a color configuration"
+msgstr "Especifica una configuració de color"
+
+#, fuzzy
+msgid ""
+"--colors KEYWORD={FORE},{BACK}\n"
+"\n"
+"{FORE} and {BACK} can be omitted, and the default will be used\n"
+"\n"
+"Keywords:\n"
+"   Global:       errors, reverse, gauge, input, viewunderline\n"
+"   File display: normal, selected, marked, markselect\n"
+"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                 errdhotfocus\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
+msgstr ""
+"--colors KEYWORD={FRONT},{FONS}\n"
+"\n"
+"{FORE} i {BACK} es poden ometre, i s'utilitzarà l'opció per defecte\n"
+"Paraules clau:\n"
+"   Global:\t            errors, invertir, marcador, entrada\n"
+"   Visualització de fitxers: normal, seleccionat, marcat, selecció de "
+"marca \n"
+"   Quadres de diàleg:  dnormal, dfocus, dhotnormal, dhotfocus\n"
+"   Menús:              menú, menuhot, menusel, menuhotsel\n"
+"   Ajuda:              ajuda normal, ajuda cursiva, ajuda enllaç, enllaç "
+"d'ajuda\n"
+"   Tipus de fitxers:   directori, executable, enllaç, dispositiu, especial, "
+"core\n"
+"\n"
+"Colors:\n"
+"   negre, gris, vermell, vermell clar, verd, verd clar, marró,\n"
+"   groc, blau, blau clar, magenta, magenta clar, blau verdós,\n"
+"   blau verdós clar, gris clar i blanc\n"
+"\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
+
+#, fuzzy
+msgid "Color options"
+msgstr "Opcions de configuració"
+
+#, fuzzy
+msgid "+number"
+msgstr "Número de l'inode"
+
+#, fuzzy
+msgid "[this_dir] [other_panel_dir]"
+msgstr "[opcions] [aquest_dir] [dir_d'altre_quadre]\n"
+
+msgid "Set initial line number for the internal editor"
+msgstr ""
+
+msgid ""
+"\n"
+"Please send any bug reports (including the output of `mc -V')\n"
+"to mc-devel@gnome.org\n"
+msgstr ""
+"\n"
+"Si us plau envieu qualsevol informació sobre errors (incloent la sortida de "
+"'mc -V')\n"
+"a mc-devel@gnome.org\n"
+
+#, c-format
+msgid "GNU Midnight Commander %s\n"
+msgstr "GNU Midnight Commander %s\n"
+
+#, fuzzy
+msgid "Main options"
+msgstr " Opcions del quadre "
+
+#, fuzzy
+msgid "Terminal options"
+msgstr " Altres opcions "
 
 msgid " Background process error "
 msgstr " S'ha produït un error al procés de fons "
@@ -2487,139 +2646,6 @@ msgid ""
 "Or set 'don't ask again' and press <<Skip>>"
 msgstr ""
 
-#, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "GNU Midnight Commander %s\n"
-
-msgid "[flags] [this_dir] [other_panel_dir]\n"
-msgstr "[opcions] [aquest_dir] [dir_d'altre_quadre]\n"
-
-#, fuzzy
-msgid "+number"
-msgstr "Número de l'inode"
-
-msgid "Set initial line number for the internal editor"
-msgstr ""
-
-msgid ""
-"\n"
-"Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
-msgstr ""
-"\n"
-"Si us plau envieu qualsevol informació sobre errors (incloent la sortida de "
-"'mc -V')\n"
-"a mc-devel@gnome.org\n"
-
-#, fuzzy
-msgid ""
-"--colors KEYWORD={FORE},{BACK}\n"
-"\n"
-"{FORE} and {BACK} can be omitted, and the default will be used\n"
-"\n"
-"Keywords:\n"
-"   Global:       errors, reverse, gauge, input, viewunderline\n"
-"   File display: normal, selected, marked, markselect\n"
-"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate\n"
-msgstr ""
-"--colors KEYWORD={FRONT},{FONS}\n"
-"\n"
-"{FORE} i {BACK} es poden ometre, i s'utilitzarà l'opció per defecte\n"
-"Paraules clau:\n"
-"   Global:\t            errors, invertir, marcador, entrada\n"
-"   Visualització de fitxers: normal, seleccionat, marcat, selecció de "
-"marca \n"
-"   Quadres de diàleg:  dnormal, dfocus, dhotnormal, dhotfocus\n"
-"   Menús:              menú, menuhot, menusel, menuhotsel\n"
-"   Ajuda:              ajuda normal, ajuda cursiva, ajuda enllaç, enllaç "
-"d'ajuda\n"
-"   Tipus de fitxers:   directori, executable, enllaç, dispositiu, especial, "
-"core\n"
-"\n"
-"Colors:\n"
-"   negre, gris, vermell, vermell clar, verd, verd clar, marró,\n"
-"   groc, blau, blau clar, magenta, magenta clar, blau verdós,\n"
-"   blau verdós clar, gris clar i blanc\n"
-"\n"
-
-msgid ""
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-msgstr ""
-
-msgid "Displays this help message"
-msgstr "Mostra aquest missatge d'ajuda"
-
-msgid "Displays the current version"
-msgstr "Mostra la versió actual"
-
-msgid "Forces xterm features"
-msgstr "Força l'ús de característiques d'xterm"
-
-msgid "Disable mouse support in text version"
-msgstr "Inhabilita el suport de ratolí a la versió text"
-
-msgid "Tries to use termcap instead of terminfo"
-msgstr "Prova d'utilitzar termcap en comptes de terminfo"
-
-msgid "Resets soft keys on HP terminals"
-msgstr "Reinicia les tecles programades als terminals HP"
-
-msgid "To run on slow terminals"
-msgstr "Per funcionar amb terminals lents"
-
-msgid "Use stickchars to draw"
-msgstr "Utilitza el caràcters de línies per fer marcs"
-
-msgid "Requests to run in black and white"
-msgstr "Demana que s'utilitzi el mode blanc i negre"
-
-msgid "Request to run in color mode"
-msgstr "Demana que s'utilitzi el mode en color"
-
-msgid "Specifies a color configuration"
-msgstr "Especifica una configuració de color"
-
-msgid "Displays a help screen on how to change the color scheme"
-msgstr "Mostra una ajuda de com canviar l'esquema de colors"
-
-msgid "Log ftp dialog to specified file"
-msgstr "Enregistra el quadre ftp a un fitxer"
-
-msgid "Set debug level"
-msgstr ""
-
-#, fuzzy
-msgid "Print data directory"
-msgstr "Crea un directori nou"
-
-#, fuzzy
-msgid "Print last working directory to specified file"
-msgstr "Imprimeix el directori de treball en sortir"
-
-msgid "Enables subshell support (default)"
-msgstr "Habilita el suport de subintèrprets (per defecte)"
-
-msgid "Disables subshell support"
-msgstr "Inhabilita el suport de subintèrprets"
-
-msgid "Launches the file viewer on a file"
-msgstr "Executa el visualitzador de fitxers amb un fitxer"
-
-msgid "Edits one file"
-msgstr "Edita un fitxer"
-
 #, fuzzy, c-format
 msgid "Cannot create %s directory"
 msgstr "No he pogut canviar de directori"
@@ -2739,29 +2765,6 @@ msgstr "No puc cridar l'ordre."
 
 msgid "Pipe close failed"
 msgstr "Ha fallat el tancament del conducte"
-
-msgid "missing argument"
-msgstr ""
-
-#, fuzzy
-msgid "unknown option"
-msgstr "<Grup desconegut>"
-
-msgid "invalid numeric value"
-msgstr ""
-
-msgid "Show this help message"
-msgstr "Mostra aquest missatge d'ajuda"
-
-msgid "Display brief usage message"
-msgstr "Mostra un missatge breu d'ajuda"
-
-msgid "ARG"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Usage:"
-msgstr "Nom d'usuari:"
 
 msgid "[dev]"
 msgstr ""
@@ -3830,6 +3833,26 @@ msgstr "Error intern:"
 
 msgid "Changes to file lost"
 msgstr "Canvia al fitxer perdut"
+
+#~ msgid "Displays this help message"
+#~ msgstr "Mostra aquest missatge d'ajuda"
+
+#~ msgid "Displays a help screen on how to change the color scheme"
+#~ msgstr "Mostra una ajuda de com canviar l'esquema de colors"
+
+#, fuzzy
+#~ msgid "unknown option"
+#~ msgstr "<Grup desconegut>"
+
+#~ msgid "Show this help message"
+#~ msgstr "Mostra aquest missatge d'ajuda"
+
+#~ msgid "Display brief usage message"
+#~ msgstr "Mostra un missatge breu d'ajuda"
+
+#, fuzzy
+#~ msgid "Usage:"
+#~ msgstr "Nom d'usuari:"
 
 #~ msgid "pro&Mpt on replace"
 #~ msgstr "Preg&Unta en reemplaçar"

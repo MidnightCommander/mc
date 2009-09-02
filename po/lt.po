@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-08-26 17:11+0300\n"
+"POT-Creation-Date: 2009-09-02 23:01+0300\n"
 "PO-Revision-Date: 2009-02-16 19:45+0300\n"
 "Last-Translator: Andrius Štikonas <stikonas@gmail.com>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -90,6 +90,10 @@ msgstr " Klaida rašant į konvejerį: "
 msgid " Cannot open pipe for writing: "
 msgstr " Nepavyko atverti konvejerio rašymui: "
 
+#, fuzzy, c-format
+msgid " Cannot open file for writing: %s "
+msgstr " Nepavyko atverti konvejerio rašymui: "
+
 msgid "Quick save "
 msgstr "Greitas įrašymas "
 
@@ -108,11 +112,26 @@ msgstr "Plėtinys:"
 msgid " Edit Save Mode "
 msgstr " Keisti įrašymo režimą "
 
-msgid " Save As "
-msgstr " Įrašyti kaip "
+msgid "&Do not change"
+msgstr ""
+
+msgid "&Unix format (LF)"
+msgstr ""
+
+msgid "&Windows/DOS format (CR LF)"
+msgstr ""
+
+msgid "&Macintosh format (LF)"
+msgstr ""
+
+msgid "Change line breaks to:"
+msgstr ""
 
 msgid " Enter file name: "
 msgstr " Įveskite failo pavadinimą: "
+
+msgid " Save As "
+msgstr " Įrašyti kaip "
 
 msgid " A file already exists with this name. "
 msgstr " Failas šiuo pavadinimu jau yra. "
@@ -843,6 +862,143 @@ msgid ""
 msgstr ""
 " Nepavyko pakeisti „%s“ nuosavybės \n"
 " %s "
+
+msgid "Displays the current version"
+msgstr "Parodo dabartinę versiją"
+
+msgid "Print data directory"
+msgstr "Parodo duomenų aplanką"
+
+msgid "Print last working directory to specified file"
+msgstr "Įrašo paskutinį esamą aplanką į nurodytą failą"
+
+msgid "Enables subshell support (default)"
+msgstr "Įjungia „subshell“ palaikymą (nenurodžius kitaip)"
+
+msgid "Disables subshell support"
+msgstr "Išjungia „subshell“ palaikymą"
+
+msgid "Log ftp dialog to specified file"
+msgstr "Veda FTP dialogo žurnalą į nurodytą failą"
+
+msgid "Set debug level"
+msgstr "Nurodo „debug“ lygį"
+
+msgid "Launches the file viewer on a file"
+msgstr "Parodo failo turinį"
+
+msgid "Edits one file"
+msgstr "Keičia vieną failą"
+
+msgid "Forces xterm features"
+msgstr "Priverčia naudoti „xterm“ galimybes"
+
+msgid "Disable mouse support in text version"
+msgstr "Išjungia pelę tekstinėje versijoje"
+
+msgid "Tries to use termcap instead of terminfo"
+msgstr "Bando naudoti „termcap“ vietoj „terminfo“"
+
+msgid "To run on slow terminals"
+msgstr "Leidžia lėtame terminale"
+
+msgid "Use stickchars to draw"
+msgstr "Naudoja alternatyvią pseudografiką"
+
+msgid "Resets soft keys on HP terminals"
+msgstr "Iš naujo nustato „soft keys“ HP terminaluose"
+
+msgid "Requests to run in black and white"
+msgstr "Paleidžia nespalvotu režimu"
+
+msgid "Request to run in color mode"
+msgstr "Paleidžia spalvotu režimu"
+
+msgid "Specifies a color configuration"
+msgstr "Nurodo spalvų konfigūraciją"
+
+#, fuzzy
+msgid ""
+"--colors KEYWORD={FORE},{BACK}\n"
+"\n"
+"{FORE} and {BACK} can be omitted, and the default will be used\n"
+"\n"
+"Keywords:\n"
+"   Global:       errors, reverse, gauge, input, viewunderline\n"
+"   File display: normal, selected, marked, markselect\n"
+"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                 errdhotfocus\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
+msgstr ""
+"--colors RAKTAŽODIS={TEKSTAS},{FONAS}\n"
+"\n"
+"{TEKSTAS} ir {FONAS} gali būti praleisti (bus naudojamos pradinės reikšmės)\n"
+"\n"
+"Raktažodžiai:\n"
+"   Globalūs:       errors, reverse, gauge, input, viewunderline\n"
+"   Failų rodymas: normal, selected, marked, markselect\n"
+"   Dialogai:       dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                   errdhotfocus\n"
+"   Meniu:          menu, menuhot, menusel, menuhotsel\n"
+"   Redaktorius:    editnormal, editbold, editmarked\n"
+"   Pagalba:        helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   Failų tipai: directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Spalvos:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray ir white\n"
+"\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
+
+#, fuzzy
+msgid "Color options"
+msgstr "Nustatymai"
+
+msgid "+number"
+msgstr "+skaičius"
+
+#, fuzzy
+msgid "[this_dir] [other_panel_dir]"
+msgstr "[nustatymai] [katalogas] [kito skydelio katalogas]\n"
+
+msgid "Set initial line number for the internal editor"
+msgstr "Nustatykite pradinės eilutės numerį redaktoriuje"
+
+msgid ""
+"\n"
+"Please send any bug reports (including the output of `mc -V')\n"
+"to mc-devel@gnome.org\n"
+msgstr ""
+"\n"
+"Prašome siųsti klaidų pranešimus (taip pat ir „mc -V“ išvestį)\n"
+"į mc-devel@gnome.org\n"
+
+#, c-format
+msgid "GNU Midnight Commander %s\n"
+msgstr "GNU Midnight Commander %s\n"
+
+#, fuzzy
+msgid "Main options"
+msgstr " Skydų nustatymai "
+
+#, fuzzy
+msgid "Terminal options"
+msgstr " Kiti nustatymai "
 
 msgid " Background process error "
 msgstr " Foninio proceso klaida "
@@ -2465,136 +2621,6 @@ msgid ""
 "Or set 'don't ask again' and press <<Skip>>"
 msgstr ""
 
-#, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "GNU Midnight Commander %s\n"
-
-msgid "[flags] [this_dir] [other_panel_dir]\n"
-msgstr "[nustatymai] [katalogas] [kito skydelio katalogas]\n"
-
-msgid "+number"
-msgstr "+skaičius"
-
-msgid "Set initial line number for the internal editor"
-msgstr "Nustatykite pradinės eilutės numerį redaktoriuje"
-
-msgid ""
-"\n"
-"Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
-msgstr ""
-"\n"
-"Prašome siųsti klaidų pranešimus (taip pat ir „mc -V“ išvestį)\n"
-"į mc-devel@gnome.org\n"
-
-#, fuzzy
-msgid ""
-"--colors KEYWORD={FORE},{BACK}\n"
-"\n"
-"{FORE} and {BACK} can be omitted, and the default will be used\n"
-"\n"
-"Keywords:\n"
-"   Global:       errors, reverse, gauge, input, viewunderline\n"
-"   File display: normal, selected, marked, markselect\n"
-"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate\n"
-msgstr ""
-"--colors RAKTAŽODIS={TEKSTAS},{FONAS}\n"
-"\n"
-"{TEKSTAS} ir {FONAS} gali būti praleisti (bus naudojamos pradinės reikšmės)\n"
-"\n"
-"Raktažodžiai:\n"
-"   Globalūs:       errors, reverse, gauge, input, viewunderline\n"
-"   Failų rodymas: normal, selected, marked, markselect\n"
-"   Dialogai:       dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                   errdhotfocus\n"
-"   Meniu:          menu, menuhot, menusel, menuhotsel\n"
-"   Redaktorius:    editnormal, editbold, editmarked\n"
-"   Pagalba:        helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   Failų tipai: directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Spalvos:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray ir white\n"
-"\n"
-
-msgid ""
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-msgstr ""
-
-msgid "Displays this help message"
-msgstr "Parodo šį pagalbos pranešimą"
-
-msgid "Displays the current version"
-msgstr "Parodo dabartinę versiją"
-
-msgid "Forces xterm features"
-msgstr "Priverčia naudoti „xterm“ galimybes"
-
-msgid "Disable mouse support in text version"
-msgstr "Išjungia pelę tekstinėje versijoje"
-
-msgid "Tries to use termcap instead of terminfo"
-msgstr "Bando naudoti „termcap“ vietoj „terminfo“"
-
-msgid "Resets soft keys on HP terminals"
-msgstr "Iš naujo nustato „soft keys“ HP terminaluose"
-
-msgid "To run on slow terminals"
-msgstr "Leidžia lėtame terminale"
-
-msgid "Use stickchars to draw"
-msgstr "Naudoja alternatyvią pseudografiką"
-
-msgid "Requests to run in black and white"
-msgstr "Paleidžia nespalvotu režimu"
-
-msgid "Request to run in color mode"
-msgstr "Paleidžia spalvotu režimu"
-
-msgid "Specifies a color configuration"
-msgstr "Nurodo spalvų konfigūraciją"
-
-msgid "Displays a help screen on how to change the color scheme"
-msgstr "Padeda pakeisti spalvų schemą"
-
-msgid "Log ftp dialog to specified file"
-msgstr "Veda FTP dialogo žurnalą į nurodytą failą"
-
-msgid "Set debug level"
-msgstr "Nurodo „debug“ lygį"
-
-msgid "Print data directory"
-msgstr "Parodo duomenų aplanką"
-
-msgid "Print last working directory to specified file"
-msgstr "Įrašo paskutinį esamą aplanką į nurodytą failą"
-
-msgid "Enables subshell support (default)"
-msgstr "Įjungia „subshell“ palaikymą (nenurodžius kitaip)"
-
-msgid "Disables subshell support"
-msgstr "Išjungia „subshell“ palaikymą"
-
-msgid "Launches the file viewer on a file"
-msgstr "Parodo failo turinį"
-
-msgid "Edits one file"
-msgstr "Keičia vieną failą"
-
 #, fuzzy, c-format
 msgid "Cannot create %s directory"
 msgstr " Nepavyko pakeisti aplanko "
@@ -2712,28 +2738,6 @@ msgstr "Nepavyko iškviesti komandos."
 
 msgid "Pipe close failed"
 msgstr "Konvejerio užvėrimas nepavyko"
-
-msgid "missing argument"
-msgstr "trūksta argumento"
-
-msgid "unknown option"
-msgstr "nežinomas nustatymas"
-
-msgid "invalid numeric value"
-msgstr "netinkama skaitmeninė reikšmė"
-
-msgid "Show this help message"
-msgstr "Rodyti ši pagalbos pranešimą"
-
-msgid "Display brief usage message"
-msgstr "rodyti trumpą naudojimo pranešimą"
-
-msgid "ARG"
-msgstr "ARG"
-
-#, c-format
-msgid "Usage:"
-msgstr "Naudojimas:"
 
 msgid "[dev]"
 msgstr "[įts]"
@@ -3798,6 +3802,33 @@ msgstr "Vidinė klaida:"
 
 msgid "Changes to file lost"
 msgstr "Failo pakeitimai prarasti"
+
+#~ msgid "Displays this help message"
+#~ msgstr "Parodo šį pagalbos pranešimą"
+
+#~ msgid "Displays a help screen on how to change the color scheme"
+#~ msgstr "Padeda pakeisti spalvų schemą"
+
+#~ msgid "missing argument"
+#~ msgstr "trūksta argumento"
+
+#~ msgid "unknown option"
+#~ msgstr "nežinomas nustatymas"
+
+#~ msgid "invalid numeric value"
+#~ msgstr "netinkama skaitmeninė reikšmė"
+
+#~ msgid "Show this help message"
+#~ msgstr "Rodyti ši pagalbos pranešimą"
+
+#~ msgid "Display brief usage message"
+#~ msgstr "rodyti trumpą naudojimo pranešimą"
+
+#~ msgid "ARG"
+#~ msgstr "ARG"
+
+#~ msgid "Usage:"
+#~ msgstr "Naudojimas:"
 
 #~ msgid "pro&Mpt on replace"
 #~ msgstr "Praneš&ti keičiant"

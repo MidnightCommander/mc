@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-08-26 17:11+0300\n"
+"POT-Creation-Date: 2009-09-02 23:01+0300\n"
 "PO-Revision-Date: 2001-05-25 13:35+0200\n"
 "Last-Translator: mari susperregi <mari@elhuyar.com>\n"
 "Language-Team: Euskara <debian-l10n-basque@lists.debian.org>\n"
@@ -90,6 +90,10 @@ msgstr " Errorea kanalizazioan idaztean: "
 msgid " Cannot open pipe for writing: "
 msgstr " Huts egin da kanalizazioa idazteko irekitzen saiatzean: "
 
+#, fuzzy, c-format
+msgid " Cannot open file for writing: %s "
+msgstr " Huts egin da kanalizazioa idazteko irekitzen saiatzean: "
+
 msgid "Quick save "
 msgstr "Gordetze bizkorra "
 
@@ -108,12 +112,27 @@ msgstr "Luzapena:"
 msgid " Edit Save Mode "
 msgstr " Editatu Gorde modua "
 
-msgid " Save As "
-msgstr " Gorde honela "
+msgid "&Do not change"
+msgstr ""
+
+msgid "&Unix format (LF)"
+msgstr ""
+
+msgid "&Windows/DOS format (CR LF)"
+msgstr ""
+
+msgid "&Macintosh format (LF)"
+msgstr ""
+
+msgid "Change line breaks to:"
+msgstr ""
 
 #, fuzzy
 msgid " Enter file name: "
 msgstr "Sartu lerroa: "
+
+msgid " Save As "
+msgstr " Gorde honela "
 
 msgid " A file already exists with this name. "
 msgstr " Izen hau duen fitxategia badago lehendik. "
@@ -855,6 +874,143 @@ msgid ""
 msgstr ""
 "Ezin izan da \"%s\"(r)en jabea aldatu \n"
 " %s "
+
+msgid "Displays the current version"
+msgstr "Uneko bertsioa bistaratzen du"
+
+#, fuzzy
+msgid "Print data directory"
+msgstr "direktorioa"
+
+#, fuzzy
+msgid "Print last working directory to specified file"
+msgstr "Programatik irtetean oraingo direktorioa inprimatzen du"
+
+msgid "Enables subshell support (default)"
+msgstr "Subshell euskarria (lehenetsia) gaitzen du"
+
+msgid "Disables subshell support"
+msgstr "Subshell euskarria desgaitzen du"
+
+msgid "Log ftp dialog to specified file"
+msgstr "Erregistratu ftp elkarrizketa-koadroa zehaztutako fitxategian "
+
+msgid "Set debug level"
+msgstr ""
+
+msgid "Launches the file viewer on a file"
+msgstr "Fitxategi-ikustailea fitxategian abiarazten du"
+
+msgid "Edits one file"
+msgstr "Fitxategi bat editatzen du"
+
+msgid "Forces xterm features"
+msgstr "xterm eginbideak behartzen ditu"
+
+msgid "Disable mouse support in text version"
+msgstr "Testu-bertsioan sagu-euskarria desgaitzen du"
+
+msgid "Tries to use termcap instead of terminfo"
+msgstr "Terminfo-ren ordez termcap erabiltzen saiatzen da "
+
+msgid "To run on slow terminals"
+msgstr "Terminal moteletan exekutatzeko"
+
+msgid "Use stickchars to draw"
+msgstr "Erabili karaktere grafikoak marrazteko"
+
+msgid "Resets soft keys on HP terminals"
+msgstr "Tekla transferigarriak HP terminalean berrezartzen ditu"
+
+msgid "Requests to run in black and white"
+msgstr "Zuri-beltzean exekutatzea eskatzen du "
+
+msgid "Request to run in color mode"
+msgstr "Kolore moduan exekutatzeko eskatzen du"
+
+msgid "Specifies a color configuration"
+msgstr "Kolore-konfigurazioa zehazten du"
+
+#, fuzzy
+msgid ""
+"--colors KEYWORD={FORE},{BACK}\n"
+"\n"
+"{FORE} and {BACK} can be omitted, and the default will be used\n"
+"\n"
+"Keywords:\n"
+"   Global:       errors, reverse, gauge, input, viewunderline\n"
+"   File display: normal, selected, marked, markselect\n"
+"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                 errdhotfocus\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
+msgstr ""
+"--colors GAKO-HITZA=AURREKO PLANOA,ATZEKO PLANOA\n"
+"\n"
+"AURREKO PLANOA eta ATZEKO PLANOA kendu, eta lehenetsia erabil daiteke\n"
+"\n"
+"Gako-hitzak:\n"
+"   Orokorra:       erroreak, alderantzikatu, kalkulatu, sarrera\n"
+"   Fitxategiaren bistaratzea: normala, hautatua, markatua, markatze-aukera\n"
+"   Elkarrizketa-koadroak: dnormal, dfocus, dhotnormal, dhotfocus\n"
+"   Menuak:        menu, menuhot, menusel, menuhotsel\n"
+"   Laguntza:         helpnormal, helpitalic, helplink, helpslink\n"
+"   Fitxategi-motak:   direktorioa, exekutatzea, esteka, gailua, berezia, "
+"nukleoa\n"
+"\n"
+"Koloreak:\n"
+"   beltza, grisa, gorria, gorri argia, berdea, berde argia, marroia,\n"
+"   horia, urdina, urdin argia, magenta, magenta argia, cyana,\n"
+"   cyan argia, gris argia eta zuria\n"
+"\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
+
+#, fuzzy
+msgid "Color options"
+msgstr "Konfiguratu aukerak"
+
+msgid "+number"
+msgstr ""
+
+#, fuzzy
+msgid "[this_dir] [other_panel_dir]"
+msgstr "[flags] [this_dir] [other_panel_dir]\n"
+
+msgid "Set initial line number for the internal editor"
+msgstr ""
+
+msgid ""
+"\n"
+"Please send any bug reports (including the output of `mc -V')\n"
+"to mc-devel@gnome.org\n"
+msgstr ""
+"\n"
+"Bidali akatsen berri-emateak (`mc -V'-ren irteera barne)\n"
+"mc-devel@gnome.org helbidera\n"
+
+#, c-format
+msgid "GNU Midnight Commander %s\n"
+msgstr "GNUren %s Midnight Commander-a\n"
+
+#, fuzzy
+msgid "Main options"
+msgstr "Paneleko aukerak "
+
+#, fuzzy
+msgid "Terminal options"
+msgstr "Bestelako aukerak "
 
 msgid " Background process error "
 msgstr "Atzeko planoko prozesuaren errorea "
@@ -2488,137 +2644,6 @@ msgid ""
 "Or set 'don't ask again' and press <<Skip>>"
 msgstr ""
 
-#, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "GNUren %s Midnight Commander-a\n"
-
-msgid "[flags] [this_dir] [other_panel_dir]\n"
-msgstr "[flags] [this_dir] [other_panel_dir]\n"
-
-msgid "+number"
-msgstr ""
-
-msgid "Set initial line number for the internal editor"
-msgstr ""
-
-msgid ""
-"\n"
-"Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
-msgstr ""
-"\n"
-"Bidali akatsen berri-emateak (`mc -V'-ren irteera barne)\n"
-"mc-devel@gnome.org helbidera\n"
-
-#, fuzzy
-msgid ""
-"--colors KEYWORD={FORE},{BACK}\n"
-"\n"
-"{FORE} and {BACK} can be omitted, and the default will be used\n"
-"\n"
-"Keywords:\n"
-"   Global:       errors, reverse, gauge, input, viewunderline\n"
-"   File display: normal, selected, marked, markselect\n"
-"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate\n"
-msgstr ""
-"--colors GAKO-HITZA=AURREKO PLANOA,ATZEKO PLANOA\n"
-"\n"
-"AURREKO PLANOA eta ATZEKO PLANOA kendu, eta lehenetsia erabil daiteke\n"
-"\n"
-"Gako-hitzak:\n"
-"   Orokorra:       erroreak, alderantzikatu, kalkulatu, sarrera\n"
-"   Fitxategiaren bistaratzea: normala, hautatua, markatua, markatze-aukera\n"
-"   Elkarrizketa-koadroak: dnormal, dfocus, dhotnormal, dhotfocus\n"
-"   Menuak:        menu, menuhot, menusel, menuhotsel\n"
-"   Laguntza:         helpnormal, helpitalic, helplink, helpslink\n"
-"   Fitxategi-motak:   direktorioa, exekutatzea, esteka, gailua, berezia, "
-"nukleoa\n"
-"\n"
-"Koloreak:\n"
-"   beltza, grisa, gorria, gorri argia, berdea, berde argia, marroia,\n"
-"   horia, urdina, urdin argia, magenta, magenta argia, cyana,\n"
-"   cyan argia, gris argia eta zuria\n"
-"\n"
-
-msgid ""
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-msgstr ""
-
-msgid "Displays this help message"
-msgstr "Laguntza-mezu hau bistaratzen du"
-
-msgid "Displays the current version"
-msgstr "Uneko bertsioa bistaratzen du"
-
-msgid "Forces xterm features"
-msgstr "xterm eginbideak behartzen ditu"
-
-msgid "Disable mouse support in text version"
-msgstr "Testu-bertsioan sagu-euskarria desgaitzen du"
-
-msgid "Tries to use termcap instead of terminfo"
-msgstr "Terminfo-ren ordez termcap erabiltzen saiatzen da "
-
-msgid "Resets soft keys on HP terminals"
-msgstr "Tekla transferigarriak HP terminalean berrezartzen ditu"
-
-msgid "To run on slow terminals"
-msgstr "Terminal moteletan exekutatzeko"
-
-msgid "Use stickchars to draw"
-msgstr "Erabili karaktere grafikoak marrazteko"
-
-msgid "Requests to run in black and white"
-msgstr "Zuri-beltzean exekutatzea eskatzen du "
-
-msgid "Request to run in color mode"
-msgstr "Kolore moduan exekutatzeko eskatzen du"
-
-msgid "Specifies a color configuration"
-msgstr "Kolore-konfigurazioa zehazten du"
-
-msgid "Displays a help screen on how to change the color scheme"
-msgstr ""
-"Kolore-eskema nola aldatu azaltzen duen laguntza-pantaila bistaratzen du"
-
-msgid "Log ftp dialog to specified file"
-msgstr "Erregistratu ftp elkarrizketa-koadroa zehaztutako fitxategian "
-
-msgid "Set debug level"
-msgstr ""
-
-#, fuzzy
-msgid "Print data directory"
-msgstr "direktorioa"
-
-#, fuzzy
-msgid "Print last working directory to specified file"
-msgstr "Programatik irtetean oraingo direktorioa inprimatzen du"
-
-msgid "Enables subshell support (default)"
-msgstr "Subshell euskarria (lehenetsia) gaitzen du"
-
-msgid "Disables subshell support"
-msgstr "Subshell euskarria desgaitzen du"
-
-msgid "Launches the file viewer on a file"
-msgstr "Fitxategi-ikustailea fitxategian abiarazten du"
-
-msgid "Edits one file"
-msgstr "Fitxategi bat editatzen du"
-
 #, fuzzy, c-format
 msgid "Cannot create %s directory"
 msgstr "Ezin izan da direktorioz aldatu"
@@ -2738,29 +2763,6 @@ msgstr "Ezin da komandoa deitu."
 
 msgid "Pipe close failed"
 msgstr "Huts egin du kanalizazioa ixtean "
-
-msgid "missing argument"
-msgstr ""
-
-#, fuzzy
-msgid "unknown option"
-msgstr "<Talde ezezaguna>"
-
-msgid "invalid numeric value"
-msgstr ""
-
-msgid "Show this help message"
-msgstr "Erakutsi laguntza-mezu hau"
-
-msgid "Display brief usage message"
-msgstr "Bistaratu erabilera-mezu laburra"
-
-msgid "ARG"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Usage:"
-msgstr "Erabiltzaile-izena:"
 
 msgid "[dev]"
 msgstr ""
@@ -3825,6 +3827,27 @@ msgstr "Barne-errorea:"
 
 msgid "Changes to file lost"
 msgstr "Fitxategiko aldaketak galdu egin dira"
+
+#~ msgid "Displays this help message"
+#~ msgstr "Laguntza-mezu hau bistaratzen du"
+
+#~ msgid "Displays a help screen on how to change the color scheme"
+#~ msgstr ""
+#~ "Kolore-eskema nola aldatu azaltzen duen laguntza-pantaila bistaratzen du"
+
+#, fuzzy
+#~ msgid "unknown option"
+#~ msgstr "<Talde ezezaguna>"
+
+#~ msgid "Show this help message"
+#~ msgstr "Erakutsi laguntza-mezu hau"
+
+#~ msgid "Display brief usage message"
+#~ msgstr "Bistaratu erabilera-mezu laburra"
+
+#, fuzzy
+#~ msgid "Usage:"
+#~ msgstr "Erabiltzaile-izena:"
 
 #~ msgid "pro&Mpt on replace"
 #~ msgstr "&galdetu ordeztean"

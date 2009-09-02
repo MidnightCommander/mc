@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0-pre3\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-08-26 17:11+0300\n"
+"POT-Creation-Date: 2009-09-02 23:01+0300\n"
 "PO-Revision-Date: 2003-01-22 17:31+0900\n"
 "Last-Translator: Nam SungHyun <namsh@kldp.org>\n"
 "Language-Team: Korean <debian-l10n-korean@lists.debian.org>\n"
@@ -87,6 +87,10 @@ msgstr " 파이프 쓰기 에러: "
 msgid " Cannot open pipe for writing: "
 msgstr " 쓰기위한 파이프 열기 실패: "
 
+#, fuzzy, c-format
+msgid " Cannot open file for writing: %s "
+msgstr " 쓰기위한 파이프 열기 실패: "
+
 msgid "Quick save "
 msgstr "빠른 저장 "
 
@@ -105,11 +109,26 @@ msgstr "확장자:"
 msgid " Edit Save Mode "
 msgstr " 편집 저장 모드 "
 
-msgid " Save As "
-msgstr " 새이름으로 저장 "
+msgid "&Do not change"
+msgstr ""
+
+msgid "&Unix format (LF)"
+msgstr ""
+
+msgid "&Windows/DOS format (CR LF)"
+msgstr ""
+
+msgid "&Macintosh format (LF)"
+msgstr ""
+
+msgid "Change line breaks to:"
+msgstr ""
 
 msgid " Enter file name: "
 msgstr " 파일명 입력: "
+
+msgid " Save As "
+msgstr " 새이름으로 저장 "
 
 msgid " A file already exists with this name. "
 msgstr " 같은 이름의 파일이 이미 있습니다. "
@@ -847,6 +866,141 @@ msgid ""
 msgstr ""
 " \"%s\"의 소유자를 바꿀 수 없습니다 \n"
 " %s "
+
+msgid "Displays the current version"
+msgstr "현재 버젼 출력"
+
+msgid "Print data directory"
+msgstr "데이타 디렉토리 출력"
+
+msgid "Print last working directory to specified file"
+msgstr "프로그램 종료시 마지막 작업 디렉토리를 주어진 파일로 출력"
+
+msgid "Enables subshell support (default)"
+msgstr "subshell 지원함 (기본값)"
+
+msgid "Disables subshell support"
+msgstr "subshell 지원안함"
+
+msgid "Log ftp dialog to specified file"
+msgstr "주어진 파일로 ftp 다이알로그 로깅"
+
+msgid "Set debug level"
+msgstr "디버그 레벨 설정"
+
+msgid "Launches the file viewer on a file"
+msgstr "파일에 대해 파일 보기 실행"
+
+msgid "Edits one file"
+msgstr "한 파일 편집"
+
+msgid "Forces xterm features"
+msgstr "xterm 기능을 무조건 사용"
+
+msgid "Disable mouse support in text version"
+msgstr "텍스크 버젼에서 마우스 사용안함"
+
+msgid "Tries to use termcap instead of terminfo"
+msgstr "terminfo 대신 termcap 사용 시도"
+
+msgid "To run on slow terminals"
+msgstr "느린 터미널에서 실행 시"
+
+msgid "Use stickchars to draw"
+msgstr "Use stickchars to draw"
+
+msgid "Resets soft keys on HP terminals"
+msgstr "HP 터미널에서 소프트 글쇠 리셋"
+
+msgid "Requests to run in black and white"
+msgstr "흑백 모드로 실행을 요구"
+
+msgid "Request to run in color mode"
+msgstr "컬러 모드로 실행을 요구"
+
+msgid "Specifies a color configuration"
+msgstr "컬러 환경을 명세"
+
+#, fuzzy
+msgid ""
+"--colors KEYWORD={FORE},{BACK}\n"
+"\n"
+"{FORE} and {BACK} can be omitted, and the default will be used\n"
+"\n"
+"Keywords:\n"
+"   Global:       errors, reverse, gauge, input, viewunderline\n"
+"   File display: normal, selected, marked, markselect\n"
+"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                 errdhotfocus\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
+msgstr ""
+"--colors KEYWORD={FORE},{BACK}\n"
+"\n"
+"{FORE}와 {BACK}이 없는 경우 기본값이 사용됩니다.\n"
+"\n"
+"키워드:\n"
+"   전체:          errors, reverse, gauge, input\n"
+"   파일 보여주기: normal, selected, marked, markselect\n"
+"   대화상자:      dnormal, dfocus, dhotnormal, dhotfocus\n"
+"   메뉴:          menu, menuhot, menusel, menuhotsel\n"
+"   도움말:        helpnormal, helpitalic, helplink, helpslink\n"
+"   파일형식:      directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"색상:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
+
+#, fuzzy
+msgid "Color options"
+msgstr "환경설정 선택항목"
+
+msgid "+number"
+msgstr "+number"
+
+#, fuzzy
+msgid "[this_dir] [other_panel_dir]"
+msgstr "[플래그] [이 디렉토리] [다른 패널 디렉토리]\n"
+
+msgid "Set initial line number for the internal editor"
+msgstr "내장 편집기를 위한 초기 줄 번호 설정"
+
+msgid ""
+"\n"
+"Please send any bug reports (including the output of `mc -V')\n"
+"to mc-devel@gnome.org\n"
+msgstr ""
+"\n"
+"버그 레포트 (`mc -V'의 출력결과를 포함)를\n"
+"to mc-devel@gnome.org로 보내주세요\n"
+
+#, c-format
+msgid "GNU Midnight Commander %s\n"
+msgstr "GNU Midnight Commander %s\n"
+
+#, fuzzy
+msgid "Main options"
+msgstr " 패널 선택항목 "
+
+#, fuzzy
+msgid "Terminal options"
+msgstr " 기타 선택항목 "
 
 msgid " Background process error "
 msgstr " Background 프로세스 에러 "
@@ -2469,134 +2623,6 @@ msgid ""
 "Or set 'don't ask again' and press <<Skip>>"
 msgstr ""
 
-#, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "GNU Midnight Commander %s\n"
-
-msgid "[flags] [this_dir] [other_panel_dir]\n"
-msgstr "[플래그] [이 디렉토리] [다른 패널 디렉토리]\n"
-
-msgid "+number"
-msgstr "+number"
-
-msgid "Set initial line number for the internal editor"
-msgstr "내장 편집기를 위한 초기 줄 번호 설정"
-
-msgid ""
-"\n"
-"Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
-msgstr ""
-"\n"
-"버그 레포트 (`mc -V'의 출력결과를 포함)를\n"
-"to mc-devel@gnome.org로 보내주세요\n"
-
-#, fuzzy
-msgid ""
-"--colors KEYWORD={FORE},{BACK}\n"
-"\n"
-"{FORE} and {BACK} can be omitted, and the default will be used\n"
-"\n"
-"Keywords:\n"
-"   Global:       errors, reverse, gauge, input, viewunderline\n"
-"   File display: normal, selected, marked, markselect\n"
-"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate\n"
-msgstr ""
-"--colors KEYWORD={FORE},{BACK}\n"
-"\n"
-"{FORE}와 {BACK}이 없는 경우 기본값이 사용됩니다.\n"
-"\n"
-"키워드:\n"
-"   전체:          errors, reverse, gauge, input\n"
-"   파일 보여주기: normal, selected, marked, markselect\n"
-"   대화상자:      dnormal, dfocus, dhotnormal, dhotfocus\n"
-"   메뉴:          menu, menuhot, menusel, menuhotsel\n"
-"   도움말:        helpnormal, helpitalic, helplink, helpslink\n"
-"   파일형식:      directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"색상:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-
-msgid ""
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-msgstr ""
-
-msgid "Displays this help message"
-msgstr "이 도움말 보여주기"
-
-msgid "Displays the current version"
-msgstr "현재 버젼 출력"
-
-msgid "Forces xterm features"
-msgstr "xterm 기능을 무조건 사용"
-
-msgid "Disable mouse support in text version"
-msgstr "텍스크 버젼에서 마우스 사용안함"
-
-msgid "Tries to use termcap instead of terminfo"
-msgstr "terminfo 대신 termcap 사용 시도"
-
-msgid "Resets soft keys on HP terminals"
-msgstr "HP 터미널에서 소프트 글쇠 리셋"
-
-msgid "To run on slow terminals"
-msgstr "느린 터미널에서 실행 시"
-
-msgid "Use stickchars to draw"
-msgstr "Use stickchars to draw"
-
-msgid "Requests to run in black and white"
-msgstr "흑백 모드로 실행을 요구"
-
-msgid "Request to run in color mode"
-msgstr "컬러 모드로 실행을 요구"
-
-msgid "Specifies a color configuration"
-msgstr "컬러 환경을 명세"
-
-msgid "Displays a help screen on how to change the color scheme"
-msgstr "컬러를 어떻게 바꿀 수 있는 지 도움말 화면 출력"
-
-msgid "Log ftp dialog to specified file"
-msgstr "주어진 파일로 ftp 다이알로그 로깅"
-
-msgid "Set debug level"
-msgstr "디버그 레벨 설정"
-
-msgid "Print data directory"
-msgstr "데이타 디렉토리 출력"
-
-msgid "Print last working directory to specified file"
-msgstr "프로그램 종료시 마지막 작업 디렉토리를 주어진 파일로 출력"
-
-msgid "Enables subshell support (default)"
-msgstr "subshell 지원함 (기본값)"
-
-msgid "Disables subshell support"
-msgstr "subshell 지원안함"
-
-msgid "Launches the file viewer on a file"
-msgstr "파일에 대해 파일 보기 실행"
-
-msgid "Edits one file"
-msgstr "한 파일 편집"
-
 #, fuzzy, c-format
 msgid "Cannot create %s directory"
 msgstr "디렉토리을 바꿀 수 없습니다"
@@ -2714,28 +2740,6 @@ msgstr "명령을 실행할 수 없어요."
 
 msgid "Pipe close failed"
 msgstr "파이프 닫기 실패"
-
-msgid "missing argument"
-msgstr ""
-
-msgid "unknown option"
-msgstr "모르는 옵션"
-
-msgid "invalid numeric value"
-msgstr ""
-
-msgid "Show this help message"
-msgstr "이 도움말 보여주기"
-
-msgid "Display brief usage message"
-msgstr "간단한 사용 메시지 출력"
-
-msgid "ARG"
-msgstr "ARG"
-
-#, c-format
-msgid "Usage:"
-msgstr "사용법:"
 
 msgid "[dev]"
 msgstr ""
@@ -3791,6 +3795,27 @@ msgstr "내부 오류:"
 
 msgid "Changes to file lost"
 msgstr "수정 내용 잃어버림"
+
+#~ msgid "Displays this help message"
+#~ msgstr "이 도움말 보여주기"
+
+#~ msgid "Displays a help screen on how to change the color scheme"
+#~ msgstr "컬러를 어떻게 바꿀 수 있는 지 도움말 화면 출력"
+
+#~ msgid "unknown option"
+#~ msgstr "모르는 옵션"
+
+#~ msgid "Show this help message"
+#~ msgstr "이 도움말 보여주기"
+
+#~ msgid "Display brief usage message"
+#~ msgstr "간단한 사용 메시지 출력"
+
+#~ msgid "ARG"
+#~ msgstr "ARG"
+
+#~ msgid "Usage:"
+#~ msgstr "사용법:"
 
 #~ msgid "pro&Mpt on replace"
 #~ msgstr "바꿀 때마다 물어봄(&O)"

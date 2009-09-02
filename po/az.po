@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-08-26 17:11+0300\n"
+"POT-Creation-Date: 2009-09-02 23:01+0300\n"
 "PO-Revision-Date: 2001-09-26 16:43GMT +0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
@@ -90,6 +90,10 @@ msgstr " Faylı borularkən xəta oldu . "
 msgid " Cannot open pipe for writing: "
 msgstr " Faylı yazmaq məqsədi ilə borularkəbn xəta oldu : "
 
+#, fuzzy, c-format
+msgid " Cannot open file for writing: %s "
+msgstr " Faylı yazmaq məqsədi ilə borularkəbn xəta oldu : "
+
 msgid "Quick save "
 msgstr "Sür'ətli qeyd et "
 
@@ -108,12 +112,27 @@ msgstr "Uzantı:"
 msgid " Edit Save Mode "
 msgstr " Qeyd Etmə şəklini dəyişdir "
 
-msgid " Save As "
-msgstr " Fərqli qeyd et "
+msgid "&Do not change"
+msgstr ""
+
+msgid "&Unix format (LF)"
+msgstr ""
+
+msgid "&Windows/DOS format (CR LF)"
+msgstr ""
+
+msgid "&Macintosh format (LF)"
+msgstr ""
+
+msgid "Change line breaks to:"
+msgstr ""
 
 #, fuzzy
 msgid " Enter file name: "
 msgstr " Sətiri tap: "
+
+msgid " Save As "
+msgstr " Fərqli qeyd et "
 
 msgid " A file already exists with this name. "
 msgstr " Bu adla onsuz da bir fayl vardır "
@@ -854,6 +873,143 @@ msgid ""
 msgstr ""
 " \"%s\" chown edilə bilmədi \n"
 " %s "
+
+msgid "Displays the current version"
+msgstr "Hazırkı buraxılışı göstərər"
+
+#, fuzzy
+msgid "Print data directory"
+msgstr "qovluq"
+
+#, fuzzy
+msgid "Print last working directory to specified file"
+msgstr "Proqram çıxışında iş gedən qovluğu bildirər"
+
+msgid "Enables subshell support (default)"
+msgstr "Subshell dəstəyini fəallaşdırar (əsas)"
+
+msgid "Disables subshell support"
+msgstr "Subchell dətəyini passivləşdir"
+
+msgid "Log ftp dialog to specified file"
+msgstr "Ftp dialoqlarını bildirilən fayla qeyd edər"
+
+msgid "Set debug level"
+msgstr ""
+
+msgid "Launches the file viewer on a file"
+msgstr "Faylda göstərici proqramı başladar"
+
+msgid "Edits one file"
+msgstr "Faylı düzəldər"
+
+msgid "Forces xterm features"
+msgstr "Xterm qabiliyyətlərini zorlayar"
+
+msgid "Disable mouse support in text version"
+msgstr "Mətn modunda siçan dəstəyini passivləşdir"
+
+msgid "Tries to use termcap instead of terminfo"
+msgstr "terminfo əvəzinə termcap istifadə etməyə cəhd edər"
+
+msgid "To run on slow terminals"
+msgstr "Yavaş terminallarda işləmək üçün"
+
+msgid "Use stickchars to draw"
+msgstr "Use stickchars to draw"
+
+msgid "Resets soft keys on HP terminals"
+msgstr "HP terminallarda proqram düymələrini sıfırlayar"
+
+msgid "Requests to run in black and white"
+msgstr "Ağ və qara başlat"
+
+msgid "Request to run in color mode"
+msgstr "Rəngli modda başlat"
+
+msgid "Specifies a color configuration"
+msgstr "Rəng qurğularını bildir"
+
+#, fuzzy
+msgid ""
+"--colors KEYWORD={FORE},{BACK}\n"
+"\n"
+"{FORE} and {BACK} can be omitted, and the default will be used\n"
+"\n"
+"Keywords:\n"
+"   Global:       errors, reverse, gauge, input, viewunderline\n"
+"   File display: normal, selected, marked, markselect\n"
+"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                 errdhotfocus\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
+msgstr ""
+"--colors KEYWORD={FORE},{BACK}\n"
+"\n"
+"{FORE} və {BACK} seçilə bilər, və əsas rəng istifadə edilər\n"
+"\n"
+"Açarlar:\n"
+"   Qlobal:       \terrors, reverse, gauge, input\n"
+"   Fayl göstərən: \tnormal, selected, marked, markselect\n"
+"   Dialoq qutuları: \tdnormal, dfocus, dhotnormal, dhotfocus\n"
+"   Menyular:     \tmenu, menuhot, menusel, menuhotsel\n"
+"   Kömak:   \t      helpnormal, helpitalic, helplink, helpslink\n"
+"   Fayl növləri:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Rənglər:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
+
+#, fuzzy
+msgid "Color options"
+msgstr "Seçənəkləri quraşdır"
+
+msgid "+number"
+msgstr ""
+
+#, fuzzy
+msgid "[this_dir] [other_panel_dir]"
+msgstr "[flags] [this_dir] [other_panel_dir]\n"
+
+msgid "Set initial line number for the internal editor"
+msgstr ""
+
+msgid ""
+"\n"
+"Please send any bug reports (including the output of `mc -V')\n"
+"to mc-devel@gnome.org\n"
+msgstr ""
+"\n"
+"Lütfən xəta raportlarını (`mc -V'nin çıxışları daxil olmaq üzərə)\n"
+"mc-devel@gnome.org ünvanına göndərin\n"
+
+#, c-format
+msgid "GNU Midnight Commander %s\n"
+msgstr "GNU Midnight Commander %s\n"
+
+#, fuzzy
+msgid "Main options"
+msgstr " Panel Seçənəkləri "
+
+#, fuzzy
+msgid "Terminal options"
+msgstr " O biri seçənəklər"
 
 msgid " Background process error "
 msgstr " Arxaplan gedişat xətası "
@@ -2481,137 +2637,6 @@ msgid ""
 "Or set 'don't ask again' and press <<Skip>>"
 msgstr ""
 
-#, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "GNU Midnight Commander %s\n"
-
-msgid "[flags] [this_dir] [other_panel_dir]\n"
-msgstr "[flags] [this_dir] [other_panel_dir]\n"
-
-msgid "+number"
-msgstr ""
-
-msgid "Set initial line number for the internal editor"
-msgstr ""
-
-msgid ""
-"\n"
-"Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
-msgstr ""
-"\n"
-"Lütfən xəta raportlarını (`mc -V'nin çıxışları daxil olmaq üzərə)\n"
-"mc-devel@gnome.org ünvanına göndərin\n"
-
-#, fuzzy
-msgid ""
-"--colors KEYWORD={FORE},{BACK}\n"
-"\n"
-"{FORE} and {BACK} can be omitted, and the default will be used\n"
-"\n"
-"Keywords:\n"
-"   Global:       errors, reverse, gauge, input, viewunderline\n"
-"   File display: normal, selected, marked, markselect\n"
-"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate\n"
-msgstr ""
-"--colors KEYWORD={FORE},{BACK}\n"
-"\n"
-"{FORE} və {BACK} seçilə bilər, və əsas rəng istifadə edilər\n"
-"\n"
-"Açarlar:\n"
-"   Qlobal:       \terrors, reverse, gauge, input\n"
-"   Fayl göstərən: \tnormal, selected, marked, markselect\n"
-"   Dialoq qutuları: \tdnormal, dfocus, dhotnormal, dhotfocus\n"
-"   Menyular:     \tmenu, menuhot, menusel, menuhotsel\n"
-"   Kömak:   \t      helpnormal, helpitalic, helplink, helpslink\n"
-"   Fayl növləri:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Rənglər:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-
-msgid ""
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-msgstr ""
-
-msgid "Displays this help message"
-msgstr "Bu kömək ismarıcını göstərər"
-
-msgid "Displays the current version"
-msgstr "Hazırkı buraxılışı göstərər"
-
-msgid "Forces xterm features"
-msgstr "Xterm qabiliyyətlərini zorlayar"
-
-msgid "Disable mouse support in text version"
-msgstr "Mətn modunda siçan dəstəyini passivləşdir"
-
-msgid "Tries to use termcap instead of terminfo"
-msgstr "terminfo əvəzinə termcap istifadə etməyə cəhd edər"
-
-msgid "Resets soft keys on HP terminals"
-msgstr "HP terminallarda proqram düymələrini sıfırlayar"
-
-msgid "To run on slow terminals"
-msgstr "Yavaş terminallarda işləmək üçün"
-
-msgid "Use stickchars to draw"
-msgstr "Use stickchars to draw"
-
-msgid "Requests to run in black and white"
-msgstr "Ağ və qara başlat"
-
-msgid "Request to run in color mode"
-msgstr "Rəngli modda başlat"
-
-msgid "Specifies a color configuration"
-msgstr "Rəng qurğularını bildir"
-
-msgid "Displays a help screen on how to change the color scheme"
-msgstr ""
-"Rəng sxemini necə dəyişdirəcəyinizi bildiran kömak ekranı ortaya çıxardar"
-
-msgid "Log ftp dialog to specified file"
-msgstr "Ftp dialoqlarını bildirilən fayla qeyd edər"
-
-msgid "Set debug level"
-msgstr ""
-
-#, fuzzy
-msgid "Print data directory"
-msgstr "qovluq"
-
-#, fuzzy
-msgid "Print last working directory to specified file"
-msgstr "Proqram çıxışında iş gedən qovluğu bildirər"
-
-msgid "Enables subshell support (default)"
-msgstr "Subshell dəstəyini fəallaşdırar (əsas)"
-
-msgid "Disables subshell support"
-msgstr "Subchell dətəyini passivləşdir"
-
-msgid "Launches the file viewer on a file"
-msgstr "Faylda göstərici proqramı başladar"
-
-msgid "Edits one file"
-msgstr "Faylı düzəldər"
-
 #, fuzzy, c-format
 msgid "Cannot create %s directory"
 msgstr "Qovluq dəyişdirilə bilmir"
@@ -2729,29 +2754,6 @@ msgstr "Əmr işə salına bilmir."
 
 msgid "Pipe close failed"
 msgstr "Borulama bacarılmadı"
-
-msgid "missing argument"
-msgstr ""
-
-#, fuzzy
-msgid "unknown option"
-msgstr "<Namə'lum qrup>"
-
-msgid "invalid numeric value"
-msgstr ""
-
-msgid "Show this help message"
-msgstr "Bu kömək ismarıcını göstər"
-
-msgid "Display brief usage message"
-msgstr "Qısa istifadə qaydası ismarıcını göstər"
-
-msgid "ARG"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Usage:"
-msgstr "İstifadəçi adı: "
 
 msgid "[dev]"
 msgstr ""
@@ -3815,6 +3817,27 @@ msgstr "Daxili xəta :"
 
 msgid "Changes to file lost"
 msgstr "Dəyişiklikləri itirdim"
+
+#~ msgid "Displays this help message"
+#~ msgstr "Bu kömək ismarıcını göstərər"
+
+#~ msgid "Displays a help screen on how to change the color scheme"
+#~ msgstr ""
+#~ "Rəng sxemini necə dəyişdirəcəyinizi bildiran kömak ekranı ortaya çıxardar"
+
+#, fuzzy
+#~ msgid "unknown option"
+#~ msgstr "<Namə'lum qrup>"
+
+#~ msgid "Show this help message"
+#~ msgstr "Bu kömək ismarıcını göstər"
+
+#~ msgid "Display brief usage message"
+#~ msgstr "Qısa istifadə qaydası ismarıcını göstər"
+
+#, fuzzy
+#~ msgid "Usage:"
+#~ msgstr "İstifadəçi adı: "
 
 #~ msgid "pro&Mpt on replace"
 #~ msgstr "Dəyişiklikdə mey&dana çıx"

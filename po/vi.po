@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-08-26 17:11+0300\n"
+"POT-Creation-Date: 2009-09-02 23:01+0300\n"
 "PO-Revision-Date: 2006-08-16 16:20+0400\n"
 "Last-Translator: Phan Vĩnh Thịnh <teppi82@gmail.com>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
@@ -89,6 +89,10 @@ msgstr " Lỗi ghi vào đường ống: "
 msgid " Cannot open pipe for writing: "
 msgstr " Không thể mở đường ống để ghi: "
 
+#, fuzzy, c-format
+msgid " Cannot open file for writing: %s "
+msgstr " Không thể mở đường ống để ghi: "
+
 msgid "Quick save "
 msgstr "&Lưu nhanh"
 
@@ -107,11 +111,26 @@ msgstr "&Mở rộng:"
 msgid " Edit Save Mode "
 msgstr " Chế độ ghi nhớ "
 
-msgid " Save As "
-msgstr " Ghi như "
+msgid "&Do not change"
+msgstr ""
+
+msgid "&Unix format (LF)"
+msgstr ""
+
+msgid "&Windows/DOS format (CR LF)"
+msgstr ""
+
+msgid "&Macintosh format (LF)"
+msgstr ""
+
+msgid "Change line breaks to:"
+msgstr ""
 
 msgid " Enter file name: "
 msgstr " Hãy nhập tên tập tin: "
+
+msgid " Save As "
+msgstr " Ghi như "
 
 msgid " A file already exists with this name. "
 msgstr " Tập tin có tên như vậy đã tồn tại. "
@@ -843,6 +862,143 @@ msgid ""
 msgstr ""
 " Không thay thế được chủ sở hữu \"%s\" \n"
 " %s "
+
+msgid "Displays the current version"
+msgstr "Hiển thị số phiên bản hiện thời"
+
+msgid "Print data directory"
+msgstr "In ra tên thư mục dữ liệu"
+
+msgid "Print last working directory to specified file"
+msgstr "Ghi thư mục làm việc cuối cùng vào tập tin chỉ ra"
+
+msgid "Enables subshell support (default)"
+msgstr "Bật hỗ trợ shell con (mặc định)"
+
+msgid "Disables subshell support"
+msgstr "Tắt hỗ trợ shell con"
+
+msgid "Log ftp dialog to specified file"
+msgstr "Ghi hội thoại FTP vào một tập tin"
+
+msgid "Set debug level"
+msgstr "Đặt mức độ tìm sửa lỗi (debug)"
+
+msgid "Launches the file viewer on a file"
+msgstr "Xem tập tin"
+
+msgid "Edits one file"
+msgstr "Soạn thảo tập tin"
+
+msgid "Forces xterm features"
+msgstr "Bắt buộc dùng tính năng của xterm"
+
+msgid "Disable mouse support in text version"
+msgstr "Bỏ hỗ trợ chuột trong phiên bản văn bản (text)"
+
+msgid "Tries to use termcap instead of terminfo"
+msgstr "Thử sử dụng termcap thay cho terminfo"
+
+msgid "To run on slow terminals"
+msgstr "Để chạy trên các terminal chậm"
+
+msgid "Use stickchars to draw"
+msgstr "Sử dụng ký tự thẳng đứng để vẽ"
+
+msgid "Resets soft keys on HP terminals"
+msgstr "Đặt lại phím phần mềm trên các terminal HP"
+
+msgid "Requests to run in black and white"
+msgstr "Yêu cầu chạy trong chế độ đen trắng"
+
+msgid "Request to run in color mode"
+msgstr "Yêu cầu chạy trong chế độ màu"
+
+msgid "Specifies a color configuration"
+msgstr "Xác định cấu hình màu sắc"
+
+#, fuzzy
+msgid ""
+"--colors KEYWORD={FORE},{BACK}\n"
+"\n"
+"{FORE} and {BACK} can be omitted, and the default will be used\n"
+"\n"
+"Keywords:\n"
+"   Global:       errors, reverse, gauge, input, viewunderline\n"
+"   File display: normal, selected, marked, markselect\n"
+"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                 errdhotfocus\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
+msgstr ""
+"--colors TỪ_KHÓA={VĂN BẢN},{NỀN}\n"
+"\n"
+"có thể bỏ qua {VĂN BẢN} và {NỀN}, và sử dụng giá trị theo mặc định\n"
+"\n"
+"Từ khóa:\n"
+"   Toàn cầu:         errors, reverse, gauge, input, viewunderline\n"
+"   Hiển thị tập tin: normal, selected, marked, markselect\n"
+"   Hộp thoại:        dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                 errdhotfocus\n"
+"   Trình đơn:        menu, menuhot, menusel, menuhotsel\n"
+"   Soạn thảo:       editnormal, editbold, editmarked\n"
+"   Trợ giúp:         helpnormal, helpitalic, helplink, helpslink\n"
+"   Dạng tập tin:     directory, executable, link, stalelink, device, "
+"special, core\n"
+"\n"
+"Màu sắc:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray, và white\n"
+"\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
+
+#, fuzzy
+msgid "Color options"
+msgstr "Tùy chọn cấu hình"
+
+msgid "+number"
+msgstr "+số"
+
+#, fuzzy
+msgid "[this_dir] [other_panel_dir]"
+msgstr "[cờ] [thư_mục_này] [thư_mục_bảng_còn_lại]\n"
+
+msgid "Set initial line number for the internal editor"
+msgstr "Đặt số dòng ban đầu cho trình soạn thảo nội bộ"
+
+msgid ""
+"\n"
+"Please send any bug reports (including the output of `mc -V')\n"
+"to mc-devel@gnome.org\n"
+msgstr ""
+"\n"
+"Xin hãy gửi bất kỳ báo cáo lỗi bug nào (gồm cả kết quả của lệnh\n"
+"`mc -V') tới mc-devel@gnome.org\n"
+
+#, c-format
+msgid "GNU Midnight Commander %s\n"
+msgstr "GNU Midnight Commander %s\n"
+
+#, fuzzy
+msgid "Main options"
+msgstr " Cấu hình bảng "
+
+#, fuzzy
+msgid "Terminal options"
+msgstr " Cấu hình khác "
 
 msgid " Background process error "
 msgstr " Lỗi của tiến trình nền sau "
@@ -2469,136 +2625,6 @@ msgid ""
 "Or set 'don't ask again' and press <<Skip>>"
 msgstr ""
 
-#, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "GNU Midnight Commander %s\n"
-
-msgid "[flags] [this_dir] [other_panel_dir]\n"
-msgstr "[cờ] [thư_mục_này] [thư_mục_bảng_còn_lại]\n"
-
-msgid "+number"
-msgstr "+số"
-
-msgid "Set initial line number for the internal editor"
-msgstr "Đặt số dòng ban đầu cho trình soạn thảo nội bộ"
-
-msgid ""
-"\n"
-"Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
-msgstr ""
-"\n"
-"Xin hãy gửi bất kỳ báo cáo lỗi bug nào (gồm cả kết quả của lệnh\n"
-"`mc -V') tới mc-devel@gnome.org\n"
-
-#, fuzzy
-msgid ""
-"--colors KEYWORD={FORE},{BACK}\n"
-"\n"
-"{FORE} and {BACK} can be omitted, and the default will be used\n"
-"\n"
-"Keywords:\n"
-"   Global:       errors, reverse, gauge, input, viewunderline\n"
-"   File display: normal, selected, marked, markselect\n"
-"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate\n"
-msgstr ""
-"--colors TỪ_KHÓA={VĂN BẢN},{NỀN}\n"
-"\n"
-"có thể bỏ qua {VĂN BẢN} và {NỀN}, và sử dụng giá trị theo mặc định\n"
-"\n"
-"Từ khóa:\n"
-"   Toàn cầu:         errors, reverse, gauge, input, viewunderline\n"
-"   Hiển thị tập tin: normal, selected, marked, markselect\n"
-"   Hộp thoại:        dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Trình đơn:        menu, menuhot, menusel, menuhotsel\n"
-"   Soạn thảo:       editnormal, editbold, editmarked\n"
-"   Trợ giúp:         helpnormal, helpitalic, helplink, helpslink\n"
-"   Dạng tập tin:     directory, executable, link, stalelink, device, "
-"special, core\n"
-"\n"
-"Màu sắc:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray, và white\n"
-"\n"
-
-msgid ""
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-msgstr ""
-
-msgid "Displays this help message"
-msgstr "Hiển thị thông báo trợ giúp này"
-
-msgid "Displays the current version"
-msgstr "Hiển thị số phiên bản hiện thời"
-
-msgid "Forces xterm features"
-msgstr "Bắt buộc dùng tính năng của xterm"
-
-msgid "Disable mouse support in text version"
-msgstr "Bỏ hỗ trợ chuột trong phiên bản văn bản (text)"
-
-msgid "Tries to use termcap instead of terminfo"
-msgstr "Thử sử dụng termcap thay cho terminfo"
-
-msgid "Resets soft keys on HP terminals"
-msgstr "Đặt lại phím phần mềm trên các terminal HP"
-
-msgid "To run on slow terminals"
-msgstr "Để chạy trên các terminal chậm"
-
-msgid "Use stickchars to draw"
-msgstr "Sử dụng ký tự thẳng đứng để vẽ"
-
-msgid "Requests to run in black and white"
-msgstr "Yêu cầu chạy trong chế độ đen trắng"
-
-msgid "Request to run in color mode"
-msgstr "Yêu cầu chạy trong chế độ màu"
-
-msgid "Specifies a color configuration"
-msgstr "Xác định cấu hình màu sắc"
-
-msgid "Displays a help screen on how to change the color scheme"
-msgstr "Hiển thị cửa sổ trợ giúp cách thay đổi bộ phối hợp màu"
-
-msgid "Log ftp dialog to specified file"
-msgstr "Ghi hội thoại FTP vào một tập tin"
-
-msgid "Set debug level"
-msgstr "Đặt mức độ tìm sửa lỗi (debug)"
-
-msgid "Print data directory"
-msgstr "In ra tên thư mục dữ liệu"
-
-msgid "Print last working directory to specified file"
-msgstr "Ghi thư mục làm việc cuối cùng vào tập tin chỉ ra"
-
-msgid "Enables subshell support (default)"
-msgstr "Bật hỗ trợ shell con (mặc định)"
-
-msgid "Disables subshell support"
-msgstr "Tắt hỗ trợ shell con"
-
-msgid "Launches the file viewer on a file"
-msgstr "Xem tập tin"
-
-msgid "Edits one file"
-msgstr "Soạn thảo tập tin"
-
 #, fuzzy, c-format
 msgid "Cannot create %s directory"
 msgstr "Không thay đổi được thư mục"
@@ -2716,28 +2742,6 @@ msgstr "Không thực hiện được câu lệnh."
 
 msgid "Pipe close failed"
 msgstr "Đóng đường ống không thành công"
-
-msgid "missing argument"
-msgstr "thiếu tham số"
-
-msgid "unknown option"
-msgstr "tùy chọn không rõ"
-
-msgid "invalid numeric value"
-msgstr "giá trị số không thích hợp"
-
-msgid "Show this help message"
-msgstr "Hiển thị thông báo trợ giúp này"
-
-msgid "Display brief usage message"
-msgstr "Hiển thị chỉ dẫn ngắn gọn"
-
-msgid "ARG"
-msgstr "ARG"
-
-#, c-format
-msgid "Usage:"
-msgstr "Sử dụng:"
 
 msgid "[dev]"
 msgstr "[thiết bị]"
@@ -3803,6 +3807,33 @@ msgstr "Lỗi nội bộ:"
 
 msgid "Changes to file lost"
 msgstr "Thay đổi tới tập tin bị mất"
+
+#~ msgid "Displays this help message"
+#~ msgstr "Hiển thị thông báo trợ giúp này"
+
+#~ msgid "Displays a help screen on how to change the color scheme"
+#~ msgstr "Hiển thị cửa sổ trợ giúp cách thay đổi bộ phối hợp màu"
+
+#~ msgid "missing argument"
+#~ msgstr "thiếu tham số"
+
+#~ msgid "unknown option"
+#~ msgstr "tùy chọn không rõ"
+
+#~ msgid "invalid numeric value"
+#~ msgstr "giá trị số không thích hợp"
+
+#~ msgid "Show this help message"
+#~ msgstr "Hiển thị thông báo trợ giúp này"
+
+#~ msgid "Display brief usage message"
+#~ msgstr "Hiển thị chỉ dẫn ngắn gọn"
+
+#~ msgid "ARG"
+#~ msgstr "ARG"
+
+#~ msgid "Usage:"
+#~ msgstr "Sử dụng:"
 
 #, fuzzy
 #~ msgid "pro&Mpt on replace"

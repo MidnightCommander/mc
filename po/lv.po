@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-08-26 17:11+0300\n"
+"POT-Creation-Date: 2009-09-02 23:01+0300\n"
 "PO-Revision-Date: 2001-11-20 15:15+0200\n"
 "Last-Translator: Artis Trops <hornet@navigators.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -89,6 +89,10 @@ msgstr " Kļūda rakstot programkanālā: "
 msgid " Cannot open pipe for writing: "
 msgstr " Nevar atvērt programkanālu ierkastīšanai: "
 
+#, fuzzy, c-format
+msgid " Cannot open file for writing: %s "
+msgstr " Nevar atvērt programkanālu ierkastīšanai: "
+
 msgid "Quick save "
 msgstr "Ātra saglabāšana "
 
@@ -107,12 +111,27 @@ msgstr "Paplašinājums:"
 msgid " Edit Save Mode "
 msgstr " Rediģēt Glabāšanas Režīmu "
 
-msgid " Save As "
-msgstr " Glabāt Kā "
+msgid "&Do not change"
+msgstr ""
+
+msgid "&Unix format (LF)"
+msgstr ""
+
+msgid "&Windows/DOS format (CR LF)"
+msgstr ""
+
+msgid "&Macintosh format (LF)"
+msgstr ""
+
+msgid "Change line breaks to:"
+msgstr ""
 
 #, fuzzy
 msgid " Enter file name: "
 msgstr " Ievadīet līniju: "
+
+msgid " Save As "
+msgstr " Glabāt Kā "
 
 msgid " A file already exists with this name. "
 msgstr " Fails ar tādu nosaukumu jau eksistē. "
@@ -854,6 +873,143 @@ msgid ""
 msgstr ""
 " Nevarēja chown \"%s\" \n"
 " %s "
+
+msgid "Displays the current version"
+msgstr "Parāda pašreizējo versiju"
+
+#, fuzzy
+msgid "Print data directory"
+msgstr "direktoriju"
+
+#, fuzzy
+msgid "Print last working directory to specified file"
+msgstr "Pie ieziešanas parāda darba direktoriju"
+
+msgid "Enables subshell support (default)"
+msgstr "Ieslēdz zemčaulas atbalstu (noklusētais)"
+
+msgid "Disables subshell support"
+msgstr "Atslēdz zemčaulas atbalstu"
+
+msgid "Log ftp dialog to specified file"
+msgstr "Iegrāmatot ftp dialogu noteiktā failā"
+
+msgid "Set debug level"
+msgstr ""
+
+msgid "Launches the file viewer on a file"
+msgstr "Palaiž failam failu skatītāju"
+
+msgid "Edits one file"
+msgstr "Rediģē vienu failu"
+
+msgid "Forces xterm features"
+msgstr "Aktivizē xterm iespējas"
+
+msgid "Disable mouse support in text version"
+msgstr "Atslēdz peles atbalstu teksta režīmā"
+
+msgid "Tries to use termcap instead of terminfo"
+msgstr "Mēģina lietot termcap terminfo vietā"
+
+msgid "To run on slow terminals"
+msgstr "Lai palaistu uz lēniem termināļiem"
+
+msgid "Use stickchars to draw"
+msgstr ""
+
+msgid "Resets soft keys on HP terminals"
+msgstr "Pārslēdz mīkstos taustiņus uz HP termināļiem"
+
+msgid "Requests to run in black and white"
+msgstr "Pieprasa, lai darbotos melnbaltā režīmā"
+
+msgid "Request to run in color mode"
+msgstr "Pieprasījums darboties krāsu režīmā"
+
+msgid "Specifies a color configuration"
+msgstr "Nosaka krāsas konfigurāciju"
+
+#, fuzzy
+msgid ""
+"--colors KEYWORD={FORE},{BACK}\n"
+"\n"
+"{FORE} and {BACK} can be omitted, and the default will be used\n"
+"\n"
+"Keywords:\n"
+"   Global:       errors, reverse, gauge, input, viewunderline\n"
+"   File display: normal, selected, marked, markselect\n"
+"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                 errdhotfocus\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
+msgstr ""
+"--colors KEYWORD={FORE},{BACK}\n"
+"\n"
+"{FORE} and {BACK} can be omitted, and the default will be used\n"
+"\n"
+"Keywords:\n"
+"   Global:       errors, reverse, gauge, input\n"
+"   File display: normal, selected, marked, markselect\n"
+"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Help:         helpnormal, helpitalic, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
+
+#, fuzzy
+msgid "Color options"
+msgstr "Konfigurēt opcijas"
+
+msgid "+number"
+msgstr ""
+
+#, fuzzy
+msgid "[this_dir] [other_panel_dir]"
+msgstr "[karodziņi] [šis_dir] [cita_paneļa_dir]\n"
+
+msgid "Set initial line number for the internal editor"
+msgstr ""
+
+msgid ""
+"\n"
+"Please send any bug reports (including the output of `mc -V')\n"
+"to mc-devel@gnome.org\n"
+msgstr ""
+"\n"
+"Lūdzu sūtiet jebkādus kļūdu paziņojumus (ieskaitot `mc -V' izvadi)\n"
+"uz mc-bugs@gnome.org\n"
+
+#, c-format
+msgid "GNU Midnight Commander %s\n"
+msgstr "GNU Pusnakts Komandieris %s\n"
+
+#, fuzzy
+msgid "Main options"
+msgstr " Paneļa opcijas "
+
+#, fuzzy
+msgid "Terminal options"
+msgstr " Citas opcijas"
 
 msgid " Background process error "
 msgstr " Fona procesa kļūda "
@@ -2486,136 +2642,6 @@ msgid ""
 "Or set 'don't ask again' and press <<Skip>>"
 msgstr ""
 
-#, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "GNU Pusnakts Komandieris %s\n"
-
-msgid "[flags] [this_dir] [other_panel_dir]\n"
-msgstr "[karodziņi] [šis_dir] [cita_paneļa_dir]\n"
-
-msgid "+number"
-msgstr ""
-
-msgid "Set initial line number for the internal editor"
-msgstr ""
-
-msgid ""
-"\n"
-"Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
-msgstr ""
-"\n"
-"Lūdzu sūtiet jebkādus kļūdu paziņojumus (ieskaitot `mc -V' izvadi)\n"
-"uz mc-bugs@gnome.org\n"
-
-#, fuzzy
-msgid ""
-"--colors KEYWORD={FORE},{BACK}\n"
-"\n"
-"{FORE} and {BACK} can be omitted, and the default will be used\n"
-"\n"
-"Keywords:\n"
-"   Global:       errors, reverse, gauge, input, viewunderline\n"
-"   File display: normal, selected, marked, markselect\n"
-"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate\n"
-msgstr ""
-"--colors KEYWORD={FORE},{BACK}\n"
-"\n"
-"{FORE} and {BACK} can be omitted, and the default will be used\n"
-"\n"
-"Keywords:\n"
-"   Global:       errors, reverse, gauge, input\n"
-"   File display: normal, selected, marked, markselect\n"
-"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Help:         helpnormal, helpitalic, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-
-msgid ""
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-msgstr ""
-
-msgid "Displays this help message"
-msgstr "Pārāda šo palīdzības paziņojumu"
-
-msgid "Displays the current version"
-msgstr "Parāda pašreizējo versiju"
-
-msgid "Forces xterm features"
-msgstr "Aktivizē xterm iespējas"
-
-msgid "Disable mouse support in text version"
-msgstr "Atslēdz peles atbalstu teksta režīmā"
-
-msgid "Tries to use termcap instead of terminfo"
-msgstr "Mēģina lietot termcap terminfo vietā"
-
-msgid "Resets soft keys on HP terminals"
-msgstr "Pārslēdz mīkstos taustiņus uz HP termināļiem"
-
-msgid "To run on slow terminals"
-msgstr "Lai palaistu uz lēniem termināļiem"
-
-msgid "Use stickchars to draw"
-msgstr ""
-
-msgid "Requests to run in black and white"
-msgstr "Pieprasa, lai darbotos melnbaltā režīmā"
-
-msgid "Request to run in color mode"
-msgstr "Pieprasījums darboties krāsu režīmā"
-
-msgid "Specifies a color configuration"
-msgstr "Nosaka krāsas konfigurāciju"
-
-msgid "Displays a help screen on how to change the color scheme"
-msgstr "Parāda palīdzības ekrānu par to, kā nomainīt krāsu shēmu"
-
-msgid "Log ftp dialog to specified file"
-msgstr "Iegrāmatot ftp dialogu noteiktā failā"
-
-msgid "Set debug level"
-msgstr ""
-
-#, fuzzy
-msgid "Print data directory"
-msgstr "direktoriju"
-
-#, fuzzy
-msgid "Print last working directory to specified file"
-msgstr "Pie ieziešanas parāda darba direktoriju"
-
-msgid "Enables subshell support (default)"
-msgstr "Ieslēdz zemčaulas atbalstu (noklusētais)"
-
-msgid "Disables subshell support"
-msgstr "Atslēdz zemčaulas atbalstu"
-
-msgid "Launches the file viewer on a file"
-msgstr "Palaiž failam failu skatītāju"
-
-msgid "Edits one file"
-msgstr "Rediģē vienu failu"
-
 #, fuzzy, c-format
 msgid "Cannot create %s directory"
 msgstr "Nevar nomainīt direktoriju"
@@ -2734,29 +2760,6 @@ msgstr "Nevar palais komandu."
 
 msgid "Pipe close failed"
 msgstr "Kanāla aizvēršana neizdevās"
-
-msgid "missing argument"
-msgstr ""
-
-#, fuzzy
-msgid "unknown option"
-msgstr "<Nezināma grupa>"
-
-msgid "invalid numeric value"
-msgstr ""
-
-msgid "Show this help message"
-msgstr "Parādīt šo palīdzības ziņojumu"
-
-msgid "Display brief usage message"
-msgstr "Parādīt īsu lietošanas pamācību"
-
-msgid "ARG"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Usage:"
-msgstr "Lietotājvārds:"
 
 msgid "[dev]"
 msgstr ""
@@ -3822,6 +3825,26 @@ msgstr "Iekšējā kļūda:"
 
 msgid "Changes to file lost"
 msgstr "Izmaiņas failā pazudušas"
+
+#~ msgid "Displays this help message"
+#~ msgstr "Pārāda šo palīdzības paziņojumu"
+
+#~ msgid "Displays a help screen on how to change the color scheme"
+#~ msgstr "Parāda palīdzības ekrānu par to, kā nomainīt krāsu shēmu"
+
+#, fuzzy
+#~ msgid "unknown option"
+#~ msgstr "<Nezināma grupa>"
+
+#~ msgid "Show this help message"
+#~ msgstr "Parādīt šo palīdzības ziņojumu"
+
+#~ msgid "Display brief usage message"
+#~ msgstr "Parādīt īsu lietošanas pamācību"
+
+#, fuzzy
+#~ msgid "Usage:"
+#~ msgstr "Lietotājvārds:"
 
 #~ msgid "pro&Mpt on replace"
 #~ msgstr "jau&Tāt pie aizvietošanas"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-08-26 17:11+0300\n"
+"POT-Creation-Date: 2009-09-02 23:01+0300\n"
 "PO-Revision-Date: 2005-07-22 00:47+0200\n"
 "Last-Translator: Arpad Biro <biro_arpad@yahoo.com>\n"
 "Language-Team: Hungarian <debian-l10n-hungarian@lists.debian.org>\n"
@@ -96,6 +96,10 @@ msgstr " Hiba a csőfájl írásakor: "
 msgid " Cannot open pipe for writing: "
 msgstr " Nem sikerült megnyitni a csőfájlt írásra: "
 
+#, fuzzy, c-format
+msgid " Cannot open file for writing: %s "
+msgstr " Nem sikerült megnyitni a csőfájlt írásra: "
+
 msgid "Quick save "
 msgstr "Gyors mentés "
 
@@ -116,11 +120,26 @@ msgstr " Végződés:"
 msgid " Edit Save Mode "
 msgstr " Mentési mód "
 
-msgid " Save As "
-msgstr " Mentés más névvel "
+msgid "&Do not change"
+msgstr ""
+
+msgid "&Unix format (LF)"
+msgstr ""
+
+msgid "&Windows/DOS format (CR LF)"
+msgstr ""
+
+msgid "&Macintosh format (LF)"
+msgstr ""
+
+msgid "Change line breaks to:"
+msgstr ""
 
 msgid " Enter file name: "
 msgstr " Fájlnév: "
+
+msgid " Save As "
+msgstr " Mentés más névvel "
 
 msgid " A file already exists with this name. "
 msgstr " Már létezik ilyen nevű fájl. "
@@ -869,6 +888,162 @@ msgid ""
 msgstr ""
 " Nem sikerült beállítani \"%s\" tulajdonosát. \n"
 " %s "
+
+msgid "Displays the current version"
+msgstr "Verzióinformáció megjelenítése."
+
+msgid "Print data directory"
+msgstr "Az adatkönyvtár megjelenítése."
+
+msgid "Print last working directory to specified file"
+msgstr "A legutoljára aktuális könyvtár írása az adott fájlba."
+
+msgid "Enables subshell support (default)"
+msgstr "Háttér-shell bekapcsolása (alapértelmezett)."
+
+msgid "Disables subshell support"
+msgstr "Háttér-shell használatának letiltása."
+
+msgid "Log ftp dialog to specified file"
+msgstr "Az FTP-párbeszéd naplózása a megadott fájlba."
+
+msgid "Set debug level"
+msgstr "Nyomkövetési (debug) szint beállítása."
+
+msgid "Launches the file viewer on a file"
+msgstr "Fájlmegjelenítés indítása a megadott fájlon."
+
+msgid "Edits one file"
+msgstr "Fájl szerkesztése."
+
+msgid "Forces xterm features"
+msgstr "Xterm-funkciók kikényszerítése."
+
+msgid "Disable mouse support in text version"
+msgstr "Egérkezelés letiltása a szöveges változatban."
+
+msgid "Tries to use termcap instead of terminfo"
+msgstr "A \"Termcap\" használata a \"Terminfo\" helyett, ha lehetséges."
+
+msgid "To run on slow terminals"
+msgstr "Kisebb adatforgalommal való működés (lassú terminálhoz)."
+
+msgid "Use stickchars to draw"
+msgstr "7 bites ASCII karakterekkel való vonalrajzolás."
+
+# programozható billentyű?
+msgid "Resets soft keys on HP terminals"
+msgstr "HP terminálok \"soft\" billentyűinek alaphelyzetbe hozása."
+
+msgid "Requests to run in black and white"
+msgstr "Fekete-fehér üzemmód kérése."
+
+msgid "Request to run in color mode"
+msgstr "Színes üzemmód kérése."
+
+msgid "Specifies a color configuration"
+msgstr "Színösszeállítás megadása."
+
+#, fuzzy
+msgid ""
+"--colors KEYWORD={FORE},{BACK}\n"
+"\n"
+"{FORE} and {BACK} can be omitted, and the default will be used\n"
+"\n"
+"Keywords:\n"
+"   Global:       errors, reverse, gauge, input, viewunderline\n"
+"   File display: normal, selected, marked, markselect\n"
+"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                 errdhotfocus\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
+msgstr ""
+"--colors KULCSSZÓ={ELŐTÉR},{HÁTTÉR}\n"
+"\n"
+"{ELŐTÉR} és {HÁTTÉR} elhagyható, ekkor az alapértékek lesznek érvényesek.\n"
+"\n"
+"Kulcsszavak:\n"
+"   Globális:       errors (hibák), reverse (inverz), gauge (folyamatjelző),\n"
+"                   input (bevitel), viewunderline (aláhúzottak a\n"
+"                   megjelenítőben)\n"
+"   Fájllista:      normal (normál), selected (jelenlegi), marked "
+"(kijelölt),\n"
+"                   markselect (kijelölt + jelenlegi)\n"
+"   Párbeszédablakok:  dnormal (normál), dfocus (fókusz), dhotnormal\n"
+"                      (gyorsbillentyű), dhotfocus (gyorsbillentyű + "
+"fókusz),\n"
+"                      errdhotnormal (gyorsbillentyű hibaablakban), "
+"errdhotfocus\n"
+"                      (gyorsbillentyű + fókusz hibaablakban)\n"
+"   Menük:          menu (menü), menuhot (gyorsbillentyű), menusel "
+"(kijelölt),\n"
+"                   menuhotsel (gyorsbillentyű + kijelölt)\n"
+"   Szerkesztő:     editnormal (normál), editbold (félkövér), editmarked\n"
+"                   (kijelölt)\n"
+"   Segítség:       helpnormal (normál), helpitalic (dőlt), helpbold "
+"(félkövér),\n"
+"                   helplink (link), helpslink (kijelölt + link)\n"
+"   Fájltípusok:    directory (könyvtár), executable (végrehajtható), link\n"
+"                   (link), stalelink (hibás link), device (eszköz), special\n"
+"                   (speciális), core (hibakeresési információ)\n"
+"\n"
+"Színek:\n"
+"   black (fekete), gray (szürke), red (piros), brightred (élénkpiros), "
+"green\n"
+"   (zöld), brightgreen (élénkzöld), brown (barna), yellow (sárga), blue "
+"(kék),\n"
+"   brightblue (élénkkék), magenta (bíbor), brightmagenta (élénkbíbor), cyan\n"
+"   (ciánkék), brightcyan (élénk-ciánkék), lightgray (világosszürke), white\n"
+"   (fehér)\n"
+"\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
+
+#, fuzzy
+msgid "Color options"
+msgstr "Alapbeállítások"
+
+msgid "+number"
+msgstr "+szám"
+
+#, fuzzy
+msgid "[this_dir] [other_panel_dir]"
+msgstr "[opciók] [aktuális_könyvtár] [másik_könyvtár]\n"
+
+msgid "Set initial line number for the internal editor"
+msgstr "A kezdősor számának megadása a belső szerkesztő számára."
+
+msgid ""
+"\n"
+"Please send any bug reports (including the output of `mc -V')\n"
+"to mc-devel@gnome.org\n"
+msgstr ""
+"\n"
+"Hibajelentéseket (az \"mc -V\" parancs kimenetét is mellékelve) a következő\n"
+"címre lehet küldeni: mc-devel@gnome.org\n"
+
+#, c-format
+msgid "GNU Midnight Commander %s\n"
+msgstr "GNU Midnight Commander %s\n"
+
+#, fuzzy
+msgid "Main options"
+msgstr " Panelbeállítások "
+
+#, fuzzy
+msgid "Terminal options"
+msgstr " További opciók "
 
 msgid " Background process error "
 msgstr " Hiba a háttérfolyamatban "
@@ -2561,155 +2736,6 @@ msgid ""
 "Or set 'don't ask again' and press <<Skip>>"
 msgstr ""
 
-#, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "GNU Midnight Commander %s\n"
-
-msgid "[flags] [this_dir] [other_panel_dir]\n"
-msgstr "[opciók] [aktuális_könyvtár] [másik_könyvtár]\n"
-
-msgid "+number"
-msgstr "+szám"
-
-msgid "Set initial line number for the internal editor"
-msgstr "A kezdősor számának megadása a belső szerkesztő számára."
-
-msgid ""
-"\n"
-"Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
-msgstr ""
-"\n"
-"Hibajelentéseket (az \"mc -V\" parancs kimenetét is mellékelve) a következő\n"
-"címre lehet küldeni: mc-devel@gnome.org\n"
-
-#, fuzzy
-msgid ""
-"--colors KEYWORD={FORE},{BACK}\n"
-"\n"
-"{FORE} and {BACK} can be omitted, and the default will be used\n"
-"\n"
-"Keywords:\n"
-"   Global:       errors, reverse, gauge, input, viewunderline\n"
-"   File display: normal, selected, marked, markselect\n"
-"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate\n"
-msgstr ""
-"--colors KULCSSZÓ={ELŐTÉR},{HÁTTÉR}\n"
-"\n"
-"{ELŐTÉR} és {HÁTTÉR} elhagyható, ekkor az alapértékek lesznek érvényesek.\n"
-"\n"
-"Kulcsszavak:\n"
-"   Globális:       errors (hibák), reverse (inverz), gauge (folyamatjelző),\n"
-"                   input (bevitel), viewunderline (aláhúzottak a\n"
-"                   megjelenítőben)\n"
-"   Fájllista:      normal (normál), selected (jelenlegi), marked "
-"(kijelölt),\n"
-"                   markselect (kijelölt + jelenlegi)\n"
-"   Párbeszédablakok:  dnormal (normál), dfocus (fókusz), dhotnormal\n"
-"                      (gyorsbillentyű), dhotfocus (gyorsbillentyű + "
-"fókusz),\n"
-"                      errdhotnormal (gyorsbillentyű hibaablakban), "
-"errdhotfocus\n"
-"                      (gyorsbillentyű + fókusz hibaablakban)\n"
-"   Menük:          menu (menü), menuhot (gyorsbillentyű), menusel "
-"(kijelölt),\n"
-"                   menuhotsel (gyorsbillentyű + kijelölt)\n"
-"   Szerkesztő:     editnormal (normál), editbold (félkövér), editmarked\n"
-"                   (kijelölt)\n"
-"   Segítség:       helpnormal (normál), helpitalic (dőlt), helpbold "
-"(félkövér),\n"
-"                   helplink (link), helpslink (kijelölt + link)\n"
-"   Fájltípusok:    directory (könyvtár), executable (végrehajtható), link\n"
-"                   (link), stalelink (hibás link), device (eszköz), special\n"
-"                   (speciális), core (hibakeresési információ)\n"
-"\n"
-"Színek:\n"
-"   black (fekete), gray (szürke), red (piros), brightred (élénkpiros), "
-"green\n"
-"   (zöld), brightgreen (élénkzöld), brown (barna), yellow (sárga), blue "
-"(kék),\n"
-"   brightblue (élénkkék), magenta (bíbor), brightmagenta (élénkbíbor), cyan\n"
-"   (ciánkék), brightcyan (élénk-ciánkék), lightgray (világosszürke), white\n"
-"   (fehér)\n"
-"\n"
-
-msgid ""
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-msgstr ""
-
-msgid "Displays this help message"
-msgstr "Ennek a használati útmutatónak a megjelenítése."
-
-msgid "Displays the current version"
-msgstr "Verzióinformáció megjelenítése."
-
-msgid "Forces xterm features"
-msgstr "Xterm-funkciók kikényszerítése."
-
-msgid "Disable mouse support in text version"
-msgstr "Egérkezelés letiltása a szöveges változatban."
-
-msgid "Tries to use termcap instead of terminfo"
-msgstr "A \"Termcap\" használata a \"Terminfo\" helyett, ha lehetséges."
-
-# programozható billentyű?
-msgid "Resets soft keys on HP terminals"
-msgstr "HP terminálok \"soft\" billentyűinek alaphelyzetbe hozása."
-
-msgid "To run on slow terminals"
-msgstr "Kisebb adatforgalommal való működés (lassú terminálhoz)."
-
-msgid "Use stickchars to draw"
-msgstr "7 bites ASCII karakterekkel való vonalrajzolás."
-
-msgid "Requests to run in black and white"
-msgstr "Fekete-fehér üzemmód kérése."
-
-msgid "Request to run in color mode"
-msgstr "Színes üzemmód kérése."
-
-msgid "Specifies a color configuration"
-msgstr "Színösszeállítás megadása."
-
-msgid "Displays a help screen on how to change the color scheme"
-msgstr "Útmutató a színösszeállítás módosításához."
-
-msgid "Log ftp dialog to specified file"
-msgstr "Az FTP-párbeszéd naplózása a megadott fájlba."
-
-msgid "Set debug level"
-msgstr "Nyomkövetési (debug) szint beállítása."
-
-msgid "Print data directory"
-msgstr "Az adatkönyvtár megjelenítése."
-
-msgid "Print last working directory to specified file"
-msgstr "A legutoljára aktuális könyvtár írása az adott fájlba."
-
-msgid "Enables subshell support (default)"
-msgstr "Háttér-shell bekapcsolása (alapértelmezett)."
-
-msgid "Disables subshell support"
-msgstr "Háttér-shell használatának letiltása."
-
-msgid "Launches the file viewer on a file"
-msgstr "Fájlmegjelenítés indítása a megadott fájlon."
-
-msgid "Edits one file"
-msgstr "Fájl szerkesztése."
-
 #, fuzzy, c-format
 msgid "Cannot create %s directory"
 msgstr "Nem sikerült könyvtárt váltani"
@@ -2831,29 +2857,6 @@ msgstr "Nem sikerült végrehajtani a parancsot."
 
 msgid "Pipe close failed"
 msgstr "Nem sikerült lezárni a csőfájlt."
-
-msgid "missing argument"
-msgstr "hiányzó paraméter"
-
-msgid "unknown option"
-msgstr "ismeretlen opció"
-
-msgid "invalid numeric value"
-msgstr "érvénytelen numerikus érték"
-
-msgid "Show this help message"
-msgstr "Ennek a használati útmutatónak a megjelenítése."
-
-msgid "Display brief usage message"
-msgstr "Rövid használati útmutató megjelenítése."
-
-# "mc --help" listában
-msgid "ARG"
-msgstr "PAR"
-
-#, c-format
-msgid "Usage:"
-msgstr "Használat:"
 
 msgid "[dev]"
 msgstr "[eszk]"
@@ -3947,6 +3950,34 @@ msgstr "Belső programhiba:"
 
 msgid "Changes to file lost"
 msgstr "A fájl módosításai nem lettek rögzítve."
+
+#~ msgid "Displays this help message"
+#~ msgstr "Ennek a használati útmutatónak a megjelenítése."
+
+#~ msgid "Displays a help screen on how to change the color scheme"
+#~ msgstr "Útmutató a színösszeállítás módosításához."
+
+#~ msgid "missing argument"
+#~ msgstr "hiányzó paraméter"
+
+#~ msgid "unknown option"
+#~ msgstr "ismeretlen opció"
+
+#~ msgid "invalid numeric value"
+#~ msgstr "érvénytelen numerikus érték"
+
+#~ msgid "Show this help message"
+#~ msgstr "Ennek a használati útmutatónak a megjelenítése."
+
+#~ msgid "Display brief usage message"
+#~ msgstr "Rövid használati útmutató megjelenítése."
+
+# "mc --help" listában
+#~ msgid "ARG"
+#~ msgstr "PAR"
+
+#~ msgid "Usage:"
+#~ msgstr "Használat:"
 
 #~ msgid "pro&Mpt on replace"
 #~ msgstr "Csere előtt kér&dés"

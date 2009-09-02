@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.41\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-08-26 17:11+0300\n"
+"POT-Creation-Date: 2009-09-02 23:01+0300\n"
 "PO-Revision-Date: 2001-10-20 21:37+02:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -96,6 +96,10 @@ msgstr " Fejl ved skrivning af fil "
 msgid " Cannot open pipe for writing: "
 msgstr " Fejl ved forsøg på åbning af rør for skrivning: "
 
+#, fuzzy, c-format
+msgid " Cannot open file for writing: %s "
+msgstr " Fejl ved forsøg på åbning af rør for skrivning: "
+
 msgid "Quick save "
 msgstr "Gem hurtigt "
 
@@ -114,12 +118,27 @@ msgstr "Udvidelse"
 msgid " Edit Save Mode "
 msgstr " Redigér gemmemåde "
 
-msgid " Save As "
-msgstr " Gem som "
+msgid "&Do not change"
+msgstr ""
+
+msgid "&Unix format (LF)"
+msgstr ""
+
+msgid "&Windows/DOS format (CR LF)"
+msgstr ""
+
+msgid "&Macintosh format (LF)"
+msgstr ""
+
+msgid "Change line breaks to:"
+msgstr ""
 
 #, fuzzy
 msgid " Enter file name: "
 msgstr " Indtast linje: "
+
+msgid " Save As "
+msgstr " Gem som "
 
 msgid " A file already exists with this name. "
 msgstr " En fil med dette navn eksisterer allerede. "
@@ -860,6 +879,143 @@ msgid ""
 msgstr ""
 " Kunne ikke chown \"%s\" \n"
 " %s "
+
+msgid "Displays the current version"
+msgstr "Udskriver versionsnummer"
+
+#, fuzzy
+msgid "Print data directory"
+msgstr "mappe"
+
+#, fuzzy
+msgid "Print last working directory to specified file"
+msgstr "Viser nuværende mappe ved programafslut"
+
+msgid "Enables subshell support (default)"
+msgstr "Aktivér underskal understøttelse (forvalgt)"
+
+msgid "Disables subshell support"
+msgstr "Deaktivér underskal understøttelse"
+
+msgid "Log ftp dialog to specified file"
+msgstr "Gem ftp meddelelser i angivet fil"
+
+msgid "Set debug level"
+msgstr ""
+
+msgid "Launches the file viewer on a file"
+msgstr "Bruger filfremviseren på en fil"
+
+msgid "Edits one file"
+msgstr "Redigerer en fil"
+
+msgid "Forces xterm features"
+msgstr "Tvinger xterm funktioner"
+
+msgid "Disable mouse support in text version"
+msgstr "Fjern museunderstøttelse i tekstversion"
+
+msgid "Tries to use termcap instead of terminfo"
+msgstr "Prøver at bruge termcap istedetfor terminfo"
+
+msgid "To run on slow terminals"
+msgstr "For at køre på langsomme terminaler"
+
+msgid "Use stickchars to draw"
+msgstr "Brug tændstiktegn til at tegne"
+
+msgid "Resets soft keys on HP terminals"
+msgstr "Genstarter soft keys på HP terminaler"
+
+msgid "Requests to run in black and white"
+msgstr "Kør i sort-hvid"
+
+msgid "Request to run in color mode"
+msgstr "Forsøg at køre med farver"
+
+msgid "Specifies a color configuration"
+msgstr "Specificerer en farveindstilling"
+
+#, fuzzy
+msgid ""
+"--colors KEYWORD={FORE},{BACK}\n"
+"\n"
+"{FORE} and {BACK} can be omitted, and the default will be used\n"
+"\n"
+"Keywords:\n"
+"   Global:       errors, reverse, gauge, input, viewunderline\n"
+"   File display: normal, selected, marked, markselect\n"
+"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                 errdhotfocus\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
+msgstr ""
+"--colors KEYWORD={FORE},{BACK}\n"
+"\n"
+"{FORE} og {BACK} kan udelades, så vil standardværdierne bruges\n"
+"\n"
+"Nøgleord:\n"
+"   Global:       errors, reverse, gauge, input\n"
+"   Filvisning:   normal, ,selected, marked, markselect\n"
+"   Dialogbokse:  dnormal, dfocus, dhotnormalm dhotfoucus\n"
+"   Menuer:       menu, menuhot, menuselm menuhotsel\n"
+"   Hjælp:        helpnormal, helpitalic, helplink, helpslink\n"
+"   Filtyper:     directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Farver:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
+
+#, fuzzy
+msgid "Color options"
+msgstr "Indstil opsætning"
+
+msgid "+number"
+msgstr ""
+
+#, fuzzy
+msgid "[this_dir] [other_panel_dir]"
+msgstr "[flag] [dette_katalog] [andet_panels_katalog]\n"
+
+msgid "Set initial line number for the internal editor"
+msgstr ""
+
+msgid ""
+"\n"
+"Please send any bug reports (including the output of `mc -V')\n"
+"to mc-devel@gnome.org\n"
+msgstr ""
+"\n"
+"Venligst send fejlrapporter (inkluderet udskrift af `mc -V')\n"
+"til mc-devel@gnome.org\n"
+
+#, c-format
+msgid "GNU Midnight Commander %s\n"
+msgstr "GNU Midnight Commander %s\n"
+
+#, fuzzy
+msgid "Main options"
+msgstr " Indstillinger for panel "
+
+#, fuzzy
+msgid "Terminal options"
+msgstr " Andre indstillinger "
 
 msgid " Background process error "
 msgstr " Fejl i baggrundsprocessen "
@@ -2489,136 +2645,6 @@ msgid ""
 "Or set 'don't ask again' and press <<Skip>>"
 msgstr ""
 
-#, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "GNU Midnight Commander %s\n"
-
-msgid "[flags] [this_dir] [other_panel_dir]\n"
-msgstr "[flag] [dette_katalog] [andet_panels_katalog]\n"
-
-msgid "+number"
-msgstr ""
-
-msgid "Set initial line number for the internal editor"
-msgstr ""
-
-msgid ""
-"\n"
-"Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
-msgstr ""
-"\n"
-"Venligst send fejlrapporter (inkluderet udskrift af `mc -V')\n"
-"til mc-devel@gnome.org\n"
-
-#, fuzzy
-msgid ""
-"--colors KEYWORD={FORE},{BACK}\n"
-"\n"
-"{FORE} and {BACK} can be omitted, and the default will be used\n"
-"\n"
-"Keywords:\n"
-"   Global:       errors, reverse, gauge, input, viewunderline\n"
-"   File display: normal, selected, marked, markselect\n"
-"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate\n"
-msgstr ""
-"--colors KEYWORD={FORE},{BACK}\n"
-"\n"
-"{FORE} og {BACK} kan udelades, så vil standardværdierne bruges\n"
-"\n"
-"Nøgleord:\n"
-"   Global:       errors, reverse, gauge, input\n"
-"   Filvisning:   normal, ,selected, marked, markselect\n"
-"   Dialogbokse:  dnormal, dfocus, dhotnormalm dhotfoucus\n"
-"   Menuer:       menu, menuhot, menuselm menuhotsel\n"
-"   Hjælp:        helpnormal, helpitalic, helplink, helpslink\n"
-"   Filtyper:     directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Farver:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-
-msgid ""
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-msgstr ""
-
-msgid "Displays this help message"
-msgstr "Viser denne hjælpemeddelelse"
-
-msgid "Displays the current version"
-msgstr "Udskriver versionsnummer"
-
-msgid "Forces xterm features"
-msgstr "Tvinger xterm funktioner"
-
-msgid "Disable mouse support in text version"
-msgstr "Fjern museunderstøttelse i tekstversion"
-
-msgid "Tries to use termcap instead of terminfo"
-msgstr "Prøver at bruge termcap istedetfor terminfo"
-
-msgid "Resets soft keys on HP terminals"
-msgstr "Genstarter soft keys på HP terminaler"
-
-msgid "To run on slow terminals"
-msgstr "For at køre på langsomme terminaler"
-
-msgid "Use stickchars to draw"
-msgstr "Brug tændstiktegn til at tegne"
-
-msgid "Requests to run in black and white"
-msgstr "Kør i sort-hvid"
-
-msgid "Request to run in color mode"
-msgstr "Forsøg at køre med farver"
-
-msgid "Specifies a color configuration"
-msgstr "Specificerer en farveindstilling"
-
-msgid "Displays a help screen on how to change the color scheme"
-msgstr "Viser en hjælpeskærm der hjælper dig med at ændre farveskemaet"
-
-msgid "Log ftp dialog to specified file"
-msgstr "Gem ftp meddelelser i angivet fil"
-
-msgid "Set debug level"
-msgstr ""
-
-#, fuzzy
-msgid "Print data directory"
-msgstr "mappe"
-
-#, fuzzy
-msgid "Print last working directory to specified file"
-msgstr "Viser nuværende mappe ved programafslut"
-
-msgid "Enables subshell support (default)"
-msgstr "Aktivér underskal understøttelse (forvalgt)"
-
-msgid "Disables subshell support"
-msgstr "Deaktivér underskal understøttelse"
-
-msgid "Launches the file viewer on a file"
-msgstr "Bruger filfremviseren på en fil"
-
-msgid "Edits one file"
-msgstr "Redigerer en fil"
-
 #, fuzzy, c-format
 msgid "Cannot create %s directory"
 msgstr " Kunne ikke skifte mappe"
@@ -2736,29 +2762,6 @@ msgstr "Kan ikke udføre kommando."
 
 msgid "Pipe close failed"
 msgstr "Fejl under lukning af rør"
-
-msgid "missing argument"
-msgstr ""
-
-#, fuzzy
-msgid "unknown option"
-msgstr "<Ukendt gruppe>"
-
-msgid "invalid numeric value"
-msgstr ""
-
-msgid "Show this help message"
-msgstr "Vis denne hjælpemeddelelse"
-
-msgid "Display brief usage message"
-msgstr "Vis kort brugsmeddelelse"
-
-msgid "ARG"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Usage:"
-msgstr "Brugernavn:"
 
 msgid "[dev]"
 msgstr ""
@@ -3821,6 +3824,26 @@ msgstr " Intern fejl:"
 
 msgid "Changes to file lost"
 msgstr "Ændringer til fil tabt"
+
+#~ msgid "Displays this help message"
+#~ msgstr "Viser denne hjælpemeddelelse"
+
+#~ msgid "Displays a help screen on how to change the color scheme"
+#~ msgstr "Viser en hjælpeskærm der hjælper dig med at ændre farveskemaet"
+
+#, fuzzy
+#~ msgid "unknown option"
+#~ msgstr "<Ukendt gruppe>"
+
+#~ msgid "Show this help message"
+#~ msgstr "Vis denne hjælpemeddelelse"
+
+#~ msgid "Display brief usage message"
+#~ msgstr "Vis kort brugsmeddelelse"
+
+#, fuzzy
+#~ msgid "Usage:"
+#~ msgstr "Brugernavn:"
 
 #~ msgid "pro&Mpt on replace"
 #~ msgstr "s&Pørg før erstat"

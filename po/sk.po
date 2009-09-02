@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-08-26 17:11+0300\n"
+"POT-Creation-Date: 2009-09-02 23:01+0300\n"
 "PO-Revision-Date: 2009-07-27 17:18+0100\n"
 "Last-Translator: Ivan Masár <helix84@centrum.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -90,6 +90,10 @@ msgstr " Chyba počas zápisu do rúry: "
 msgid " Cannot open pipe for writing: "
 msgstr " Neúspešný pokus o otvorenie rúry pre zápis: "
 
+#, fuzzy, c-format
+msgid " Cannot open file for writing: %s "
+msgstr " Neúspešný pokus o otvorenie rúry pre zápis: "
+
 msgid "Quick save "
 msgstr "Rýchlo uložiť "
 
@@ -108,11 +112,26 @@ msgstr "Prípona:"
 msgid " Edit Save Mode "
 msgstr " Upraviť režim ukladania "
 
-msgid " Save As "
-msgstr " Uložiť ako "
+msgid "&Do not change"
+msgstr ""
+
+msgid "&Unix format (LF)"
+msgstr ""
+
+msgid "&Windows/DOS format (CR LF)"
+msgstr ""
+
+msgid "&Macintosh format (LF)"
+msgstr ""
+
+msgid "Change line breaks to:"
+msgstr ""
 
 msgid " Enter file name: "
 msgstr " Zadajte meno súboru: "
+
+msgid " Save As "
+msgstr " Uložiť ako "
 
 msgid " A file already exists with this name. "
 msgstr " Súbor s daným meno už existuje. "
@@ -820,6 +839,143 @@ msgid ""
 msgstr ""
 " Nepodarilo sa zmeniť vlastníka \"%s\" \n"
 " %s "
+
+msgid "Displays the current version"
+msgstr "Zobrazí aktuálnu verziu"
+
+msgid "Print data directory"
+msgstr "Adresár tlačových dát"
+
+msgid "Print last working directory to specified file"
+msgstr "Tlačiť posledný pracovný adresár do zadaného súboru"
+
+msgid "Enables subshell support (default)"
+msgstr "Zapnutá podpora pre subshell (štandardne)"
+
+msgid "Disables subshell support"
+msgstr "Vypína podporu pre subshell"
+
+msgid "Log ftp dialog to specified file"
+msgstr "Prihlasovacie ftp okno k určenému súboru"
+
+msgid "Set debug level"
+msgstr "Nastaviť ladiacu úroveň"
+
+msgid "Launches the file viewer on a file"
+msgstr "Spúšťa prehliadač súborov na súbore"
+
+msgid "Edits one file"
+msgstr "Upraví jeden súbor"
+
+msgid "Forces xterm features"
+msgstr "Vynúti funkcie xterm"
+
+msgid "Disable mouse support in text version"
+msgstr "Vypína podporu myši v textovej verzii"
+
+msgid "Tries to use termcap instead of terminfo"
+msgstr "Pokúsi sa použiť termcap namiesto terminfo"
+
+msgid "To run on slow terminals"
+msgstr "Na spúšťanie na pomalých termináloch"
+
+msgid "Use stickchars to draw"
+msgstr "Použiť na kreslenie čiarovú grafiku"
+
+msgid "Resets soft keys on HP terminals"
+msgstr "Resetuje mäkké klávesy na termináloch HP"
+
+msgid "Requests to run in black and white"
+msgstr "Požiadať o spustenie v čiernobielom režime"
+
+msgid "Request to run in color mode"
+msgstr "Požiadať o spustenie vo farebnom režime"
+
+msgid "Specifies a color configuration"
+msgstr "Určuje farebnú konfiguráciu"
+
+msgid ""
+"--colors KEYWORD={FORE},{BACK}\n"
+"\n"
+"{FORE} and {BACK} can be omitted, and the default will be used\n"
+"\n"
+"Keywords:\n"
+"   Global:       errors, reverse, gauge, input, viewunderline\n"
+"   File display: normal, selected, marked, markselect\n"
+"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                 errdhotfocus\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
+msgstr ""
+"--colors KĽÚČ={POPR},{POZA}\n"
+"\n"
+"{POPR} a {POZA} je možné vynechať a bude použitá štandardná hodnota\n"
+"\n"
+"Kľúčové slová:\n"
+"   Globálne:          errors, reverse, gauge, input, viewunderline\n"
+"   Zobrazenie súboru: normal, selected, marked, markselect\n"
+"   Dialógy:           dnormal, dfocus, dhotnormal, dhotfocus,\n"
+"                      errdhotnormal, errdhotfocus\n"
+"   Menu:              menu, menuhot, menusel, menuhotsel\n"
+"   Editor:            editnormal, editbold, editmarked,\n"
+"                      editwhitespace, editlinestate\n"
+
+msgid ""
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
+"   Pomoc:        helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   Typy súborov: directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Farby:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+
+#, fuzzy
+msgid "Color options"
+msgstr "Nastavovateľne voľby"
+
+msgid "+number"
+msgstr "+číslo"
+
+#, fuzzy
+msgid "[this_dir] [other_panel_dir]"
+msgstr "[príznaky] [tento_adresár] [adresár_v_druhom_paneli]\n"
+
+msgid "Set initial line number for the internal editor"
+msgstr "Nastaviť počiatočné číslo riadka pre interný editor"
+
+msgid ""
+"\n"
+"Please send any bug reports (including the output of `mc -V')\n"
+"to mc-devel@gnome.org\n"
+msgstr ""
+"\n"
+"Správy o chybách posielajte (vrátane výpisu `mc -V')\n"
+"na adresu mc-devel@gnome.org\n"
+
+#, c-format
+msgid "GNU Midnight Commander %s\n"
+msgstr "GNU Midnight Commander %s\n"
+
+#, fuzzy
+msgid "Main options"
+msgstr " Voľby panela "
+
+#, fuzzy
+msgid "Terminal options"
+msgstr " Ďalšie voľby "
 
 msgid " Background process error "
 msgstr " Chyba v procese na pozadí "
@@ -2447,136 +2603,6 @@ msgstr ""
 "Alebo označte 'znova sa nepýtať' a stlačte <<Preskočiť>>"
 
 #, c-format
-msgid "GNU Midnight Commander %s\n"
-msgstr "GNU Midnight Commander %s\n"
-
-msgid "[flags] [this_dir] [other_panel_dir]\n"
-msgstr "[príznaky] [tento_adresár] [adresár_v_druhom_paneli]\n"
-
-msgid "+number"
-msgstr "+číslo"
-
-msgid "Set initial line number for the internal editor"
-msgstr "Nastaviť počiatočné číslo riadka pre interný editor"
-
-msgid ""
-"\n"
-"Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
-msgstr ""
-"\n"
-"Správy o chybách posielajte (vrátane výpisu `mc -V')\n"
-"na adresu mc-devel@gnome.org\n"
-
-msgid ""
-"--colors KEYWORD={FORE},{BACK}\n"
-"\n"
-"{FORE} and {BACK} can be omitted, and the default will be used\n"
-"\n"
-"Keywords:\n"
-"   Global:       errors, reverse, gauge, input, viewunderline\n"
-"   File display: normal, selected, marked, markselect\n"
-"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate\n"
-msgstr ""
-"--colors KĽÚČ={POPR},{POZA}\n"
-"\n"
-"{POPR} a {POZA} je možné vynechať a bude použitá štandardná hodnota\n"
-"\n"
-"Kľúčové slová:\n"
-"   Globálne:          errors, reverse, gauge, input, viewunderline\n"
-"   Zobrazenie súboru: normal, selected, marked, markselect\n"
-"   Dialógy:           dnormal, dfocus, dhotnormal, dhotfocus,\n"
-"                      errdhotnormal, errdhotfocus\n"
-"   Menu:              menu, menuhot, menusel, menuhotsel\n"
-"   Editor:            editnormal, editbold, editmarked,\n"
-"                      editwhitespace, editlinestate\n"
-
-msgid ""
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Colors:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-msgstr ""
-"   Pomoc:        helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   Typy súborov: directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"Farby:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
-"\n"
-
-msgid "Displays this help message"
-msgstr "Zobrazí tento pomocný odkaz"
-
-msgid "Displays the current version"
-msgstr "Zobrazí aktuálnu verziu"
-
-msgid "Forces xterm features"
-msgstr "Vynúti funkcie xterm"
-
-msgid "Disable mouse support in text version"
-msgstr "Vypína podporu myši v textovej verzii"
-
-msgid "Tries to use termcap instead of terminfo"
-msgstr "Pokúsi sa použiť termcap namiesto terminfo"
-
-msgid "Resets soft keys on HP terminals"
-msgstr "Resetuje mäkké klávesy na termináloch HP"
-
-msgid "To run on slow terminals"
-msgstr "Na spúšťanie na pomalých termináloch"
-
-msgid "Use stickchars to draw"
-msgstr "Použiť na kreslenie čiarovú grafiku"
-
-msgid "Requests to run in black and white"
-msgstr "Požiadať o spustenie v čiernobielom režime"
-
-msgid "Request to run in color mode"
-msgstr "Požiadať o spustenie vo farebnom režime"
-
-msgid "Specifies a color configuration"
-msgstr "Určuje farebnú konfiguráciu"
-
-msgid "Displays a help screen on how to change the color scheme"
-msgstr "Zobrazí pomocníka o tom ako zmeniť farebnú schému"
-
-msgid "Log ftp dialog to specified file"
-msgstr "Prihlasovacie ftp okno k určenému súboru"
-
-msgid "Set debug level"
-msgstr "Nastaviť ladiacu úroveň"
-
-msgid "Print data directory"
-msgstr "Adresár tlačových dát"
-
-msgid "Print last working directory to specified file"
-msgstr "Tlačiť posledný pracovný adresár do zadaného súboru"
-
-msgid "Enables subshell support (default)"
-msgstr "Zapnutá podpora pre subshell (štandardne)"
-
-msgid "Disables subshell support"
-msgstr "Vypína podporu pre subshell"
-
-msgid "Launches the file viewer on a file"
-msgstr "Spúšťa prehliadač súborov na súbore"
-
-msgid "Edits one file"
-msgstr "Upraví jeden súbor"
-
-#, c-format
 msgid "Cannot create %s directory"
 msgstr "Nepodarilo sa vytvoriť adresár %s"
 
@@ -2694,28 +2720,6 @@ msgstr "Nepodarilo sa vyvolať príkaz."
 
 msgid "Pipe close failed"
 msgstr "Pipe, neúspešné uzavretie"
-
-msgid "missing argument"
-msgstr "chýbajúci parameter"
-
-msgid "unknown option"
-msgstr "neznáma voľba"
-
-msgid "invalid numeric value"
-msgstr "neplatná číselná hodnota"
-
-msgid "Show this help message"
-msgstr "Ukázať túto správu pomocníka"
-
-msgid "Display brief usage message"
-msgstr "Zobraziť stručnú správu o používaní"
-
-msgid "ARG"
-msgstr "PAR"
-
-#, c-format
-msgid "Usage:"
-msgstr "Použitie:"
 
 msgid "[dev]"
 msgstr "[dev]"
@@ -3778,6 +3782,33 @@ msgstr "Vnútorná chyba:"
 
 msgid "Changes to file lost"
 msgstr "Zmeny súboru stratené"
+
+#~ msgid "Displays this help message"
+#~ msgstr "Zobrazí tento pomocný odkaz"
+
+#~ msgid "Displays a help screen on how to change the color scheme"
+#~ msgstr "Zobrazí pomocníka o tom ako zmeniť farebnú schému"
+
+#~ msgid "missing argument"
+#~ msgstr "chýbajúci parameter"
+
+#~ msgid "unknown option"
+#~ msgstr "neznáma voľba"
+
+#~ msgid "invalid numeric value"
+#~ msgstr "neplatná číselná hodnota"
+
+#~ msgid "Show this help message"
+#~ msgstr "Ukázať túto správu pomocníka"
+
+#~ msgid "Display brief usage message"
+#~ msgstr "Zobraziť stručnú správu o používaní"
+
+#~ msgid "ARG"
+#~ msgstr "PAR"
+
+#~ msgid "Usage:"
+#~ msgstr "Použitie:"
 
 #~ msgid "pro&Mpt on replace"
 #~ msgstr "&Vyzvať pri nahradení"
