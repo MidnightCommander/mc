@@ -85,7 +85,7 @@ edit_options_dialog (void)
 	/*  5 */ QUICK_INPUT (OPT_DLG_W / 2 + 24, OPT_DLG_W, OPT_DLG_H - 7, OPT_DLG_H,
 				tab_spacing, OPT_DLG_W / 2 - 4 - 24, 0, "edit-tab-spacing", &q),
 	/*  6 */ QUICK_CHECKBOX (OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H - 8, OPT_DLG_H,
-				N_("Cursor beyond end of line"), option_cursor_beyond_eol),
+				N_("Cursor beyond end of line"), &option_cursor_beyond_eol),
 	/*  7 */ QUICK_CHECKBOX (OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H -  9, OPT_DLG_H,
 				N_("Pers&istent selection"), &option_persistent_selections),
 	/*  8 */ QUICK_CHECKBOX (OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H - 10, OPT_DLG_H,
@@ -116,7 +116,7 @@ edit_options_dialog (void)
     QuickDialog Quick_options =
     {
 	 OPT_DLG_W, OPT_DLG_H, -1, -1, N_(" Editor options "),
-	"", quick_widgets, FALSE
+	"[Editor options]", quick_widgets, FALSE
      };
 
 #ifdef ENABLE_NLS
