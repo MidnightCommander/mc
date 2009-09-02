@@ -1247,6 +1247,7 @@ setup_mc (void)
 
     verbose = !((tty_baudrate () < 9600) || tty_is_slow ());
 
+    init_xterm_support ();
     init_mouse ();
 }
 
@@ -1968,8 +1969,6 @@ main (int argc, char *argv[])
 	message (D_ERROR, _("Warning"),
 		    _("Cannot create %s directory"), mc_dir);
     g_free (mc_dir);
-
-    init_xterm_support ();
 
 #ifdef HAVE_SUBSHELL_SUPPORT
     /* Done here to ensure that the subshell doesn't  */
