@@ -485,7 +485,7 @@ edit_get_save_file_as (WEdit *edit)
         N_("&Do not change"),
         N_("&Unix format (LF)"),
         N_("&Windows/DOS format (CR LF)"),
-        N_("&Macintosh format (LF)")
+        N_("&Macintosh format (CR)")
     };
 
     QuickWidget quick_widgets[] =
