@@ -60,96 +60,61 @@
 gboolean
 mcview_dialog_search (mcview_t * view)
 {
-    enum {
-        SEARCH_DLG_MIN_HEIGHT = 11,
-        SEARCH_DLG_HEIGHT_SUPPLY = 3,
-        SEARCH_DLG_WIDTH = 58
-    };
+    int SEARCH_DLG_MIN_HEIGHT = 12;
+    int SEARCH_DLG_HEIGHT_SUPPLY = 3;
+    int SEARCH_DLG_WIDTH = 58;
 
     char *exp = NULL;
-#ifdef HAVE_CHARSET
-    GString *tmp;
-#endif
-
-    int ttype_of_search = (int) view->search_type;
-    int tall_codepages = (int) view->search_all_codepages;
-    int tsearch_case = (int) view->search_case;
-    int twhole_words = (int) view->whole_words;
-    int tsearch_backwards = (int) view->search_backwards;
     int qd_result;
 
     gchar **list_of_types = mc_search_get_types_strings_array ();
     int SEARCH_DLG_HEIGHT =
-        SEARCH_DLG_MIN_HEIGHT + g_strv_length (list_of_types) - SEARCH_DLG_HEIGHT_SUPPLY;
+	SEARCH_DLG_MIN_HEIGHT + g_strv_length (list_of_types) - SEARCH_DLG_HEIGHT_SUPPLY;
 
     QuickWidget quick_widgets[] = {
-
-        {quick_button, 6, 10, SEARCH_DLG_HEIGHT - 3, SEARCH_DLG_HEIGHT, N_("&Cancel"), 0,
-         B_CANCEL, 0, 0, NULL, NULL, NULL},
-
-        {quick_button, 2, 10, SEARCH_DLG_HEIGHT - 3, SEARCH_DLG_HEIGHT, N_("&OK"), 0, B_ENTER,
-         0, 0, NULL, NULL, NULL},
-
+	QUICK_BUTTON (6, 10, SEARCH_DLG_HEIGHT - 3, SEARCH_DLG_HEIGHT, N_("&Cancel"), B_CANCEL, NULL),
+	QUICK_BUTTON (2, 10, SEARCH_DLG_HEIGHT - 3, SEARCH_DLG_HEIGHT, N_("&OK"), B_ENTER, NULL),
 #ifdef HAVE_CHARSET
-        {quick_checkbox, SEARCH_DLG_WIDTH / 2 + 3, SEARCH_DLG_WIDTH, 7, SEARCH_DLG_HEIGHT,
-         N_("All charsets"), 0, 0,
-         &tall_codepages, 0, NULL, NULL, NULL},
+	QUICK_CHECKBOX (SEARCH_DLG_WIDTH / 2 + 3, SEARCH_DLG_WIDTH, 8, SEARCH_DLG_HEIGHT,
+			N_("All charsets"), &view->search_all_codepages),
 #endif
-
-        {quick_checkbox, SEARCH_DLG_WIDTH / 2 + 3, SEARCH_DLG_WIDTH, 6, SEARCH_DLG_HEIGHT,
-         N_("&Whole words"), 0, 0, &twhole_words, 0, NULL, NULL, NULL},
-
-        {quick_checkbox, SEARCH_DLG_WIDTH / 2 + 3, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT,
-         N_("&Backwards"), 0, 0, &tsearch_backwards, 0, NULL, NULL, NULL},
-
-        {quick_checkbox, SEARCH_DLG_WIDTH / 2 + 3, SEARCH_DLG_WIDTH, 4, SEARCH_DLG_HEIGHT,
-         N_("case &Sensitive"), 0, 0,
-         &tsearch_case, 0, NULL, NULL, NULL},
-
-        {quick_radio, 3, SEARCH_DLG_WIDTH, 4, SEARCH_DLG_HEIGHT, 0, g_strv_length (list_of_types),
-         ttype_of_search,
-         (void *) &ttype_of_search, const_cast (char **, list_of_types), NULL, NULL, NULL},
-
-
-        {quick_input, 3, SEARCH_DLG_WIDTH, 3, SEARCH_DLG_HEIGHT, INPUT_LAST_TEXT, 52, 0,
-         0, &exp, MC_HISTORY_SHARED_SEARCH, NULL, NULL},
-
-        {quick_label, 2, SEARCH_DLG_WIDTH, 2, SEARCH_DLG_HEIGHT,
-         N_(" Enter search string:"), 0, 0, 0, 0, 0, NULL, NULL},
-
-        NULL_QuickWidget
+	QUICK_CHECKBOX (SEARCH_DLG_WIDTH / 2 + 3, SEARCH_DLG_WIDTH, 7, SEARCH_DLG_HEIGHT,
+			N_("&Whole words"), &view->whole_words),
+	QUICK_CHECKBOX (SEARCH_DLG_WIDTH / 2 + 3, SEARCH_DLG_WIDTH, 6, SEARCH_DLG_HEIGHT,
+			N_("&Backwards"), &view->search_backwards),
+	QUICK_CHECKBOX (SEARCH_DLG_WIDTH / 2 + 3, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT,
+			N_("case &Sensitive"),  &view->search_case),
+	QUICK_RADIO (3, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT,
+			g_strv_length (list_of_types), (const char **) list_of_types, &view->search_type),
+	QUICK_INPUT (3, SEARCH_DLG_WIDTH, 3, SEARCH_DLG_HEIGHT,
+			INPUT_LAST_TEXT, SEARCH_DLG_WIDTH - 6, 0, MC_HISTORY_SHARED_SEARCH, &exp),
+	QUICK_LABEL (2, SEARCH_DLG_WIDTH, 2, SEARCH_DLG_HEIGHT, N_(" Enter search string:")),
+	QUICK_END
     };
 
-    QuickDialog Quick_input = {
-        SEARCH_DLG_WIDTH, SEARCH_DLG_HEIGHT, -1, 0, N_("Search"),
-        "[Input Line Keys]", quick_widgets, 0
+    QuickDialog Quick_input =
+    {
+	SEARCH_DLG_WIDTH, SEARCH_DLG_HEIGHT, -1, -1,
+	N_("Search"), "[Input Line Keys]",
+	quick_widgets, FALSE
     };
 
     qd_result = quick_dialog (&Quick_input);
     g_strfreev (list_of_types);
 
-    if (qd_result == B_CANCEL) {
+    if ((qd_result == B_CANCEL) ||(exp == NULL) || (exp[0] == '\0')) {
         g_free (exp);
         return FALSE;
     }
 
-    view->search_backwards = tsearch_backwards;
-    view->search_type = (mc_search_type_t) ttype_of_search;
-
-    view->search_all_codepages = (gboolean) tall_codepages;
-    view->search_case = (gboolean) tsearch_case;
-    view->whole_words = (gboolean) twhole_words;
-
-    if (exp == NULL || exp[0] == '\0') {
-        g_free (exp);
-        return FALSE;
-    }
 #ifdef HAVE_CHARSET
-    tmp = str_convert_to_input (exp);
+    {
+	GString *tmp = str_convert_to_input (exp);
 
-    if (tmp) {
-        g_free (exp);
-        exp = g_string_free (tmp, FALSE);
+	if (tmp) {
+	    g_free (exp);
+	    exp = g_string_free (tmp, FALSE);
+	}
     }
 #endif
 

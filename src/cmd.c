@@ -522,16 +522,19 @@ select_unselect_cmd (const char *title, const char *history_name, gboolean do_se
     mc_search_t *search;
     int i;
 
-    QuickWidget quick_widgets[] = {
-	{ quick_checkbox, 3,        DX, DY - 3, DY, N_("&Using shell patterns"),     0,      0, &shell_patterns, NULL,     NULL },
-	{ quick_checkbox, DX/2 + 1, DX, DY - 4, DY, N_("&Case sensitive"), 0,      0, &case_sens,  NULL,     NULL },
-	{ quick_checkbox, 3,        DX, DY - 4, DY, N_("&Files only"),     0,      0, &files_only, NULL,     NULL },
-	{ quick_input,    3,        DX, DY - 5, DY, INPUT_LAST_TEXT,       DX - 6, 0, NULL,        &reg_exp, history_name },
-	NULL_QuickWidget
+    QuickWidget quick_widgets[] =
+    {
+	QUICK_CHECKBOX (3,        DX, DY - 3, DY, N_("&Using shell patterns"), &shell_patterns),
+	QUICK_CHECKBOX (DX/2 + 1, DX, DY - 4, DY, N_("&Case sensitive"),       &case_sens),
+	QUICK_CHECKBOX (3,        DX, DY - 4, DY, N_("&Files only"),           &files_only),
+	QUICK_INPUT    (3,        DX, DY - 5, DY, INPUT_LAST_TEXT, DX - 6, 0, history_name, &reg_exp),
+	QUICK_END
     };
 
-    QuickDialog quick_dlg = {
-	DX, DY, -1, -1, title, "[Select/Unselect Files]", quick_widgets, 0
+    QuickDialog quick_dlg =
+    {
+	DX, DY, -1, -1, title,
+	"[Select/Unselect Files]", quick_widgets, FALSE
     };
 
     if (quick_dialog (&quick_dlg) == B_CANCEL)

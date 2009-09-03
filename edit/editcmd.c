@@ -383,77 +383,76 @@ edit_save_file (WEdit *edit, const char *filename)
     return 0;
 }
 
-void menu_save_mode_cmd (void)
+void
+menu_save_mode_cmd (void)
 {
-#define DLG_X 38
-#define DLG_Y 10
-    static char *str_result;
-    static int save_mode_new;
-    static const char *str[] =
+    /* diaog sizes */
+    const int DLG_X = 38;
+    const int DLG_Y = 10;
+
+    char *str_result;
+
+    const char *str[] =
     {
 	N_("Quick save "),
 	N_("Safe save "),
-	N_("Do backups -->")};
+	N_("Do backups -->")
+    };
 
-    static QuickWidget widgets[] =
+    QuickWidget widgets[] =
     {
-	{quick_button, 18, DLG_X, 7, DLG_Y, N_("&Cancel"), 0,
-	 B_CANCEL, 0, 0, NULL, NULL, NULL},
-	{quick_button, 6, DLG_X, 7, DLG_Y, N_("&OK"), 0,
-	 B_ENTER, 0, 0, NULL, NULL, NULL},
-	{quick_input, 23, DLG_X, 5, DLG_Y, 0, 9,
-	 0, 0, &str_result, "edit-backup-ext", NULL, NULL},
-	{quick_label, 22, DLG_X, 4, DLG_Y, N_("Extension:"), 0,
-	 0, 0, 0, NULL, NULL, NULL},
-	{quick_radio, 4, DLG_X, 3, DLG_Y, "", 3,
-	 0, &save_mode_new, (char **) str, NULL, NULL, NULL},
-	NULL_QuickWidget};
-    static QuickDialog dialog =
-    {DLG_X, DLG_Y, -1, -1, N_(" Edit Save Mode "), "[Edit Save Mode]",
-     widgets, 0};
-    static int i18n_flag = 0;
+	/* 0 */ QUICK_BUTTON (18, DLG_X, 7, DLG_Y, N_("&Cancel"), B_CANCEL, NULL),
+	/* 1 */ QUICK_BUTTON ( 6, DLG_X, 7, DLG_Y, N_("&OK"),     B_ENTER,  NULL),
+	/* 2 */ QUICK_INPUT  (23, DLG_X, 5, DLG_Y, option_backup_ext, 9, 0, "edit-backup-ext", &str_result),
+	/* 3 */ QUICK_LABEL  (22, DLG_X, 4, DLG_Y, N_("Extension:")),
+	/* 4 */ QUICK_RADIO  ( 4, DLG_X, 3, DLG_Y, 3, str, &option_save_mode),
+	QUICK_END
+    };
 
-    if (!i18n_flag) {
-        size_t i;
-	size_t maxlen = 0;
-	int dlg_x;
-	size_t l1;
+    QuickDialog dialog =
+    {
+	DLG_X, DLG_Y, -1, -1, N_(" Edit Save Mode "),
+	"[Edit Save Mode]", widgets, FALSE
+    };
 
-	/* OK/Cancel buttons */
-	l1 = str_term_width1 (_(widgets[0].text)) + str_term_width1 (_(widgets[1].text)) + 5;
-	maxlen = max (maxlen, l1);
-
-        for (i = 0; i < 3; i++ ) {
-            str[i] = _(str[i]);
-	    maxlen = max (maxlen, (size_t) str_term_width1 (str[i]) + 7);
-	}
-        i18n_flag = 1;
-
-        dlg_x = maxlen + str_term_width1 (_(widgets[3].text)) + 5 + 1;
-        widgets[2].hotkey_pos = str_term_width1 (_(widgets[3].text)); /* input field length */
-        dlg_x = min (COLS, dlg_x);
-	dialog.xlen = dlg_x;
-
-        i = (dlg_x - l1)/3;
-	widgets[1].relative_x = i;
-	widgets[0].relative_x = i + str_term_width1 (_(widgets[1].text)) + i + 4;
-
-	widgets[2].relative_x = widgets[3].relative_x = maxlen + 2;
-
-	for (i = 0; i < sizeof (widgets)/sizeof (widgets[0]); i++)
-		widgets[i].x_divisions = dlg_x;
-    }
+    size_t i;
+    size_t maxlen = 0;
+    int dlg_x;
+    size_t l1, w0, w1, w3;
 
     assert (option_backup_ext != NULL);
-    widgets[2].text = option_backup_ext;
-    widgets[4].value = option_save_mode;
-    if (quick_dialog (&dialog) != B_ENTER)
-	return;
-    option_save_mode = save_mode_new;
 
-    g_free (option_backup_ext);
-    option_backup_ext = str_result;
-    str_result = NULL;
+    /* OK/Cancel buttons */
+    w0 = str_term_width1 (_(widgets[0].u.button.text)) + 2;
+    w1 = str_term_width1 (_(widgets[1].u.button.text)) + 4; /* default batton */
+
+    w3 = str_term_width1 (_(widgets[3].u.label.text));
+
+    maxlen = l1 = w0 + w1 + 6;
+
+    for (i = 0; i < 3; i++) {
+#ifdef ENABLE_NLS
+	str[i] = _(str[i]);
+#endif
+	maxlen = max (maxlen, (size_t) str_term_width1 (str[i]) + 7);
+    }
+
+    dlg_x = maxlen + w3 + 5 + 2;
+    widgets[2].u.input.len = w3; /* input field length */
+    dlg_x = min (COLS, dlg_x);
+    dialog.xlen = dlg_x;
+
+    widgets[0].relative_x = dlg_x * 2/3 - w0/2;
+    widgets[1].relative_x = dlg_x/3 - w1/2;
+    widgets[2].relative_x = widgets[3].relative_x = maxlen + 3;
+
+    for (i = 0; i < sizeof (widgets)/sizeof (widgets[0]); i++)
+	widgets[i].x_divisions = dlg_x;
+
+    if (quick_dialog (&dialog) != B_CANCEL) {
+	g_free (option_backup_ext);
+	option_backup_ext = str_result;
+    }
 }
 
 void
@@ -477,42 +476,37 @@ edit_get_save_file_as (WEdit *edit)
 #define DLG_WIDTH 64
 #define DLG_HEIGHT 14
 
+    static LineBreaks cur_lb = LB_ASIS;
+
     char *filename = edit->filename;
 
-    const char *lb_names[LB_NAMES] =
+    char *lb_names[LB_NAMES] =
     {
         N_("&Do not change"),
         N_("&Unix format (LF)"),
         N_("&Windows/DOS format (CR LF)"),
-        N_("&Macintosh format (LF)")
+        N_("&Macintosh format (CR)")
     };
-
-    static LineBreaks cur_lb = LB_ASIS;
 
     QuickWidget quick_widgets[] =
     {
-        {quick_button, 6, 10, DLG_HEIGHT - 3, DLG_HEIGHT,
-	    N_("&Cancel"), 0, B_CANCEL, NULL, NULL, NULL, NULL, NULL},
-        {quick_button, 2, 10, DLG_HEIGHT - 3, DLG_HEIGHT,
-	    N_("&OK"), 0, B_ENTER,  NULL, NULL, NULL, NULL, NULL},
-        {quick_radio, 5, DLG_WIDTH, DLG_HEIGHT - 8, DLG_HEIGHT, "",
-	    LB_NAMES, cur_lb, (int *) &cur_lb, (char **) lb_names, NULL, NULL, NULL},
-        {quick_label, 3, DLG_WIDTH, DLG_HEIGHT - 9, DLG_HEIGHT,
-	    N_("Change line breaks to:"), 0, 0, NULL, NULL, NULL, NULL, NULL},
-        {quick_input, 3, DLG_WIDTH, DLG_HEIGHT - 11, DLG_HEIGHT,
-	    filename, 58, 0, 0, &filename, "save-file-as", NULL, NULL},
-        {quick_label, 2, DLG_WIDTH, DLG_HEIGHT - 12, DLG_HEIGHT,
-	    N_(" Enter file name: "), 0, 0, NULL, NULL, NULL, NULL, NULL},
-        NULL_QuickWidget
+	QUICK_BUTTON (6, 10, DLG_HEIGHT - 3, DLG_HEIGHT, N_("&Cancel"), B_CANCEL, NULL),
+	QUICK_BUTTON (2, 10, DLG_HEIGHT - 3, DLG_HEIGHT, N_("&OK"), B_ENTER,  NULL),
+	QUICK_RADIO (5, DLG_WIDTH, DLG_HEIGHT - 8, DLG_HEIGHT, LB_NAMES, (const char **) lb_names, &cur_lb),
+	QUICK_LABEL (3, DLG_WIDTH, DLG_HEIGHT - 9, DLG_HEIGHT, N_("Change line breaks to:")),
+	QUICK_INPUT (3, DLG_WIDTH, DLG_HEIGHT - 11, DLG_HEIGHT, filename, DLG_WIDTH - 6, 0, "save-as", &filename),
+	QUICK_LABEL (2, DLG_WIDTH, DLG_HEIGHT - 12, DLG_HEIGHT, N_(" Enter file name: ")),
+	QUICK_END
     };
 
     QuickDialog Quick_options =
     {
-     DLG_WIDTH, DLG_HEIGHT, -1, -1, N_(" Save As "), "", quick_widgets, 0
+	DLG_WIDTH, DLG_HEIGHT, -1, -1,
+	N_(" Save As "), "[Save File As]",
+	quick_widgets, FALSE
     };
 
-    if (quick_dialog (&Quick_options) != B_CANCEL)
-    {
+    if (quick_dialog (&Quick_options) != B_CANCEL) {
        edit->lb = cur_lb;
        return filename;
     }
@@ -2270,40 +2264,29 @@ void edit_mail_dialog (WEdit * edit)
     static char *mail_subject_last = 0;
     static char *mail_to_last = 0;
 
-    QuickDialog Quick_input =
-    {50, MAIL_DLG_HEIGHT, -1, 0, N_(" Mail "),
-     "[Input Line Keys]", 0, 0};
-
     QuickWidget quick_widgets[] =
     {
-	{quick_button, 6, 10, 9, MAIL_DLG_HEIGHT, N_("&Cancel"), 0, B_CANCEL, 0,
-	 0, NULL, NULL, NULL},
-	{quick_button, 2, 10, 9, MAIL_DLG_HEIGHT, N_("&OK"), 0, B_ENTER, 0,
-	 0, NULL, NULL, NULL},
-	{quick_input, 3, 50, 8, MAIL_DLG_HEIGHT, "", 44, 0, 0,
-	 0, "mail-dlg-input", NULL, NULL},
-	{quick_label, 2, 50, 7, MAIL_DLG_HEIGHT, N_(" Copies to"), 0, 0, 0,
-	 0, 0, NULL, NULL},
-	{quick_input, 3, 50, 6, MAIL_DLG_HEIGHT, "", 44, 0, 0,
-	 0, "mail-dlg-input-2", NULL, NULL},
-	{quick_label, 2, 50, 5, MAIL_DLG_HEIGHT, N_(" Subject"), 0, 0, 0,
-	 0, 0, NULL, NULL},
-	{quick_input, 3, 50, 4, MAIL_DLG_HEIGHT, "", 44, 0, 0,
-	 0, "mail-dlg-input-3", NULL, NULL},
-	{quick_label, 2, 50, 3, MAIL_DLG_HEIGHT, N_(" To"), 0, 0, 0,
-	 0, 0, NULL, NULL},
-	{quick_label, 2, 50, 2, MAIL_DLG_HEIGHT, N_(" mail -s <subject> -c <cc> <to>"), 0, 0, 0,
-	 0, 0, NULL, NULL},
-	NULL_QuickWidget};
+	/* 0 */ QUICK_BUTTON (6, 10, 9, MAIL_DLG_HEIGHT, N_("&Cancel"), B_CANCEL, NULL),
+	/* 1 */ QUICK_BUTTON (2, 10, 9, MAIL_DLG_HEIGHT, N_("&OK"),     B_ENTER,  NULL),
+	/* 2 */ QUICK_INPUT (3, 50, 8, MAIL_DLG_HEIGHT, "", 44, 0, "mail-dlg-input", &tmail_cc),
+	/* 3 */ QUICK_LABEL (2, 50, 7, MAIL_DLG_HEIGHT, N_(" Copies to")),
+	/* 4 */ QUICK_INPUT (3, 50, 6, MAIL_DLG_HEIGHT, "", 44, 0, "mail-dlg-input-2", &tmail_subject),
+	/* 5 */ QUICK_LABEL (2, 50, 5, MAIL_DLG_HEIGHT, N_(" Subject")),
+	/* 6 */ QUICK_INPUT (3, 50, 4, MAIL_DLG_HEIGHT, "", 44, 0, "mail-dlg-input-3", &tmail_to),
+	/* 7 */ QUICK_LABEL (2, 50, 3, MAIL_DLG_HEIGHT, N_(" To")),
+	/* 8 */ QUICK_LABEL (2, 50, 2, MAIL_DLG_HEIGHT, N_(" mail -s <subject> -c <cc> <to>")),
+	QUICK_END
+    };
 
-    quick_widgets[2].str_result = &tmail_cc;
-    quick_widgets[2].text = mail_cc_last ? mail_cc_last : "";
-    quick_widgets[4].str_result = &tmail_subject;
-    quick_widgets[4].text = mail_subject_last ? mail_subject_last : "";
-    quick_widgets[6].str_result = &tmail_to;
-    quick_widgets[6].text = mail_to_last ? mail_to_last : "";
+    QuickDialog Quick_input =
+    {
+	50, MAIL_DLG_HEIGHT, -1, -1, N_(" Mail "),
+	"[Input Line Keys]", quick_widgets, FALSE
+    };
 
-    Quick_input.widgets = quick_widgets;
+    quick_widgets[2].u.input.text = mail_cc_last ? mail_cc_last : "";
+    quick_widgets[4].u.input.text = mail_subject_last ? mail_subject_last : "";
+    quick_widgets[6].u.input.text = mail_to_last ? mail_to_last : "";
 
     if (quick_dialog (&Quick_input) != B_CANCEL) {
 	g_free (mail_cc_last);

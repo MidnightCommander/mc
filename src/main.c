@@ -1270,27 +1270,23 @@ static void check_codeset()
     if ( !skip_check_codeset ) {
 
         QuickWidget ecs_widgets [] = {
-        { quick_button, 4, 6, 13, CONFY, N_("&Skip"),
-          0, B_EXIT, 0, 0, NULL , NULL, NULL},
-        { quick_button, 1, 11, 13, CONFY, N_("&Fix it"),
-          0, B_ENTER, 0, 0, NULL , NULL, NULL},
-        { quick_checkbox, 1, 13, 11, CONFY, N_("don't ask again"),
-          11, 0, &skip_check_codeset, NULL, NULL , NULL, NULL},
-        { quick_label, 2, 30, 3, CONFY, N_("Chosen display charset (Settings->Display bits)\n"
-                                           "or source codeset (in mcedit ctrl-t) \n"
-                                           "does not match one set via locale. \n"
-                                           "Set correct codeset manually or press <<Fix it>> \n"
-                                           "to set locale default.\n\n"
-                                           "Or set \'don't ask again\' and press <<Skip>>"),
-          0, 0, 0, 0, NULL , NULL, NULL},
-
-          NULL_QuickWidget
+	    QUICK_BUTTON (4,  6, 13, CONFY, N_("&Skip"),   B_EXIT,  NULL),
+	    QUICK_BUTTON (1, 11, 13, CONFY, N_("&Fix it"), B_ENTER, NULL),
+	    QUICK_CHECKBOX (1, 13, 11, CONFY, N_("don't ask again"), &skip_check_codeset),
+	    QUICK_LABEL (2, 30, 3, CONFY, N_("Chosen display charset (Settings->Display bits)\n"
+					    "or source codeset (in mcedit ctrl-t) \n"
+					    "does not match one set via locale. \n"
+					    "Set correct codeset manually or press <<Fix it>> \n"
+					    "to set locale default.\n\n"
+					    "Or set \'don't ask again\' and press <<Skip>>")),
+	    QUICK_END
         };
 
-        QuickDialog ecs =
-        { CONFX, CONFY, -1, -1, N_(" Confirmation "), "[Confirmation]",
-            ecs_widgets, 0
-        };
+	QuickDialog ecs =
+	{
+	    CONFX, CONFY, -1, -1, N_(" Confirmation "),
+	    "[Confirmation]", ecs_widgets, FALSE
+	};
 
 
         _system_codepage = str_detect_termencoding();

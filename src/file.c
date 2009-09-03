@@ -1674,8 +1674,6 @@ panel_operate_generate_prompt (const WPanel *panel, const int operation,
 #ifdef ENABLE_NLS
     static int i18n_flag = 0;
     if (!i18n_flag) {
-	fmd_init_i18n (FALSE);	/* to get proper fmd_xlen */
-
 	for (i = sizeof (op_names1) / sizeof (op_names1[0]); i--;)
 	    op_names1[i] = _(op_names1[i]);
 
@@ -1741,7 +1739,6 @@ panel_operate_generate_prompt (const WPanel *panel, const int operation,
         i = str_term_width1 (cmd_buf) + 6 - fmd_xlen;
 	if (i > 0) {
 	    fmd_xlen += i;
-	    fmd_init_i18n (TRUE);	/* to recalculate positions of child widgets */
 	}
     }
 }

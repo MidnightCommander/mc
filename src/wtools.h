@@ -6,6 +6,8 @@
 #ifndef MC_WTOOLS_H
 #define MC_WTOOLS_H
 
+#include "global.h"
+#include "dialog.h"
 #include "widget.h"
 
 typedef struct {
@@ -23,32 +25,137 @@ Listbox *create_listbox_window (int cols, int lines, const char *title, const ch
 int run_listbox (Listbox *l);
 
 /* Quick Widgets */
-enum {
-    quick_end, quick_checkbox,
-    quick_button, quick_input,
-    quick_label, quick_radio
-} /* quick_t */;
+typedef enum {
+    quick_end		= 0,
+    quick_checkbox	= 1,
+    quick_button	= 2,
+    quick_input		= 3,
+    quick_label		= 4,
+    quick_radio		= 5
+} quick_t;
 
 /* The widget is placed on relative_?/divisions_? of the parent widget */
-
 typedef struct {
-    int widget_type;
+    quick_t widget_type;
+
     int relative_x;
     int x_divisions;
     int relative_y;
     int y_divisions;
 
-    const char *text;		/* Text */
-    int  hotkey_pos;		/* the hotkey position */
-    int  value;			/* Buttons only: value of button */
-    int  *result;		/* Checkbutton: where to store result */
-    char **str_result;		/* Input lines: destination  */
-    const char *histname;	/* Name of the section for saving history */
-    bcback cb;			/* Callback for quick_button */
-
     Widget *widget;
+
+    /* widget parameters */
+    union {
+	struct {
+	    const char *text;
+	    int *state;		/* in/out */
+	} checkbox;
+
+	struct {
+	    const char *text;
+	    int action;
+	    bcback callback;
+	} button;
+
+	struct {
+	    const char *text;
+	    int len;
+	    int flags;			/* 1 -- is_password, 2 -- INPUT_COMPLETE_CD */
+	    const char *histname;
+	    char **result;
+	} input;
+
+	struct {
+	    const char *text;
+	} label;
+
+	struct {
+	    int count;
+	    const char **items;
+	    int *value;			/* in/out */
+	} radio;
+    } u;
 } QuickWidget;
-#define NULL_QuickWidget { 0, 0, 0, 0, 0, NULL, 0, 0, NULL, NULL, NULL, NULL, NULL }
+
+#define QUICK_CHECKBOX(x, xdiv, y, ydiv, txt, st)			\
+{									\
+    .widget_type = quick_checkbox,					\
+    .relative_x = x,							\
+    .x_divisions = xdiv,						\
+    .relative_y = y,							\
+    .y_divisions = ydiv,						\
+    .widget = NULL,							\
+    .u.checkbox.text = txt,						\
+    .u.checkbox.state = st						\
+}
+
+#define QUICK_BUTTON(x, xdiv, y, ydiv, txt, act, cb)			\
+{									\
+    .widget_type = quick_button,					\
+    .relative_x = x,							\
+    .x_divisions = xdiv,						\
+    .relative_y = y,							\
+    .y_divisions = ydiv,						\
+    .widget = NULL,							\
+    .u.button.text = txt,						\
+    .u.button.action = act,						\
+    .u.button.callback = cb						\
+}
+
+#define QUICK_INPUT(x, xdiv, y, ydiv, txt, len_, flags_, hname, res)	\
+{									\
+    .widget_type = quick_input,						\
+    .relative_x = x,							\
+    .x_divisions = xdiv,						\
+    .relative_y = y,							\
+    .y_divisions = ydiv,						\
+    .widget = NULL,							\
+    .u.input.text = txt,						\
+    .u.input.len = len_,						\
+    .u.input.flags = flags_,						\
+    .u.input.histname = hname,						\
+    .u.input.result = res						\
+}
+
+#define QUICK_LABEL(x, xdiv, y, ydiv, txt)				\
+{									\
+    .widget_type = quick_label,						\
+    .relative_x = x,							\
+    .x_divisions = xdiv,						\
+    .relative_y = y,							\
+    .y_divisions = ydiv,						\
+    .widget = NULL,							\
+    .u.label.text = txt							\
+}
+
+#define QUICK_RADIO(x, xdiv, y, ydiv, cnt, items_, val)			\
+{									\
+    .widget_type = quick_radio,						\
+    .relative_x = x,							\
+    .x_divisions = xdiv,						\
+    .relative_y = y,							\
+    .y_divisions = ydiv,						\
+    .widget = NULL,							\
+    .u.radio.count = cnt,						\
+    .u.radio.items = items_,						\
+    .u.radio.value = val,						\
+}
+
+#define QUICK_END							\
+{									\
+    .widget_type = quick_end,						\
+    .relative_x = 0,							\
+    .x_divisions = 0,							\
+    .relative_y = 0,							\
+    .y_divisions = 0,							\
+    .widget = NULL,							\
+    .u.input.text = NULL,						\
+    .u.input.len = 0,							\
+    .u.input.flags = 0,							\
+    .u.input.histname = NULL,						\
+    .u.input.result = NULL						\
+}
 
 typedef struct {
     int  xlen, ylen;
@@ -56,7 +163,7 @@ typedef struct {
     const char *title;
     const char *help;
     QuickWidget *widgets;
-    int  i18n;			/* If true, internationalization has happened */
+    gboolean i18n;			/* If true, internationalization has happened */
 } QuickDialog;
 
 int quick_dialog (QuickDialog *qd);
