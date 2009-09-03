@@ -80,6 +80,7 @@
 #include "strutil.h"
 #include "dir.h"
 #include "../src/viewer/mcviewer.h"
+#include "../src/filehighlight/fhl.h"	/* MC_FHL_INI_FILE */
 
 #ifndef MAP_FILE
 #   define MAP_FILE 0
@@ -666,6 +667,43 @@ edit_mc_menu_cmd (void)
 
     g_free (buffer);
     g_free (menufile);
+}
+
+void edit_fhl_cmd (void)
+{
+    char *buffer = NULL;
+    char *fhlfile = NULL;
+    char *user_mc_dir;
+
+    int  dir;
+
+    dir = 0;
+    if (geteuid () == 0){
+	dir = query_dialog (_("Highlighting groups file edit"),
+			    _(" Which highlighting file you want to edit? "), D_NORMAL, 2,
+			    _("&User"), _("&System Wide"));
+    }
+    fhlfile = concat_dir_and_file (mc_home, MC_FHL_INI_FILE);
+
+    if (dir == 0){
+	user_mc_dir = concat_dir_and_file (home_dir, MC_BASE);
+	buffer = concat_dir_and_file (user_mc_dir, MC_FHL_INI_FILE);
+	g_free(user_mc_dir);
+	check_for_default (fhlfile, buffer);
+	do_edit (buffer);
+	g_free (buffer);
+    } else if (dir == 1) {
+	if (!exist_file(fhlfile)) {
+	    g_free (fhlfile);
+	    fhlfile = concat_dir_and_file (mc_home, MC_FHL_INI_FILE);
+	}
+	do_edit (fhlfile);
+    }
+   g_free (fhlfile);
+
+    /* refresh highlighting rules */
+   mc_fhl_free (&mc_filehighlight);
+   mc_filehighlight = mc_fhl_new (TRUE);
 }
 
 void quick_chdir_cmd (void)

@@ -32,14 +32,12 @@
 #include "../src/main.h"
 #include "../src/strescape.h"
 #include "../src/tty/color.h"
-#include "../src/filehighlight/fhl.h"
+#include "fhl.h"
 #include "internal.h"
 
 /*** global variables ****************************************************************************/
 
 /*** file scope macro definitions ****************************************************************/
-
-#define mc_fhl_INI_FILE "filehighlight.ini"
 
 /*** file scope type declarations ****************************************************************/
 
@@ -229,7 +227,7 @@ mc_fhl_init_from_standart_files (mc_fhl_t * fhl)
     gchar *user_mc_dir;
 
     /* ${datadir}/mc/filehighlight.ini  */
-    name = concat_dir_and_file (mc_home_alt, mc_fhl_INI_FILE);
+    name = concat_dir_and_file (mc_home_alt, MC_FHL_INI_FILE);
     if (exist_file (name) && (!mc_fhl_read_ini_file (fhl, name))) {
         g_free (name);
         return FALSE;
@@ -237,7 +235,7 @@ mc_fhl_init_from_standart_files (mc_fhl_t * fhl)
     g_free (name);
 
     /* ${sysconfdir}/mc/filehighlight.ini  */
-    name = concat_dir_and_file (mc_home, mc_fhl_INI_FILE);
+    name = concat_dir_and_file (mc_home, MC_FHL_INI_FILE);
     if (exist_file (name) && (!mc_fhl_read_ini_file (fhl, name))) {
         g_free (name);
         return FALSE;
@@ -246,7 +244,7 @@ mc_fhl_init_from_standart_files (mc_fhl_t * fhl)
 
     /* ~/.mc/filehighlight.ini */
     user_mc_dir = concat_dir_and_file (home_dir, MC_BASE);
-    name = concat_dir_and_file (user_mc_dir, mc_fhl_INI_FILE);
+    name = concat_dir_and_file (user_mc_dir, MC_FHL_INI_FILE);
     g_free (user_mc_dir);
     if (exist_file (name) && (!mc_fhl_read_ini_file (fhl, name))) {
         g_free (name);

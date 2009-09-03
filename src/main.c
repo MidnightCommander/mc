@@ -756,7 +756,8 @@ static menu_entry CmdMenu[] = {
     {' ', "", NULL_HOTKEY, 0},
 #endif
     {' ', N_("Edit &extension file"), NULL_HOTKEY, ext_cmd},
-    {' ', N_("Edit &menu file"), NULL_HOTKEY, edit_mc_menu_cmd}
+    {' ', N_("Edit &menu file"), NULL_HOTKEY, edit_mc_menu_cmd},
+    {' ', N_("Edit &highlighting group file"), NULL_HOTKEY, edit_fhl_cmd}
 };
 
 /* Must keep in sync with the constants in menu_cmd */
