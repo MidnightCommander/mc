@@ -2520,20 +2520,11 @@ do_panel_event (Gpm_Event *event, WPanel *panel, int *redir)
 
     int my_index;
 
-    /* Mouse wheel events */
-    if ((event->buttons & GPM_B_UP) && (event->type & GPM_DOWN)) {
-	if (panel->top_file > 0)
-	    prev_page (panel);
-	else                    /* We are in first page */
-	    move_up (panel);
-	return MOU_NORMAL;
-    }
-    if ((event->buttons & GPM_B_DOWN) && (event->type & GPM_DOWN)) {
-	if (panel->top_file + ITEMS (panel) < panel->count)
-	    next_page (panel);
-	else                    /* We are in last page */
-	    move_down (panel);
-	return MOU_NORMAL;
+    /* rest of the upper frame, the menu is invisible - call menu */
+    if (event->type & GPM_DOWN && event->y == 1 && !menubar_visible) {
+	*redir = 1;
+	event->x += panel->widget.x;
+	return (*(the_menubar->widget.mouse)) (event, the_menubar);
     }
 
     /* "<" button */
@@ -2556,16 +2547,24 @@ do_panel_event (Gpm_Event *event, WPanel *panel, int *redir)
 	return MOU_NORMAL;
     }
 
-    /* rest of the upper frame, the menu is invisible - call menu */
-    if (event->type & GPM_DOWN && event->y == 1 && !menubar_visible) {
-	*redir = 1;
-	event->x += panel->widget.x;
-	return (*(the_menubar->widget.mouse)) (event, the_menubar);
+    /* Mouse wheel events */
+    if ((event->buttons & GPM_B_UP) && (event->type & GPM_DOWN)) {
+	if (panel->top_file > 0)
+	    prev_page (panel);
+	else                    /* We are in first page */
+	    move_up (panel);
+	return MOU_NORMAL;
+    }
+    if ((event->buttons & GPM_B_DOWN) && (event->type & GPM_DOWN)) {
+	if (panel->top_file + ITEMS (panel) < panel->count)
+	    next_page (panel);
+	else                    /* We are in last page */
+	    move_down (panel);
+	return MOU_NORMAL;
     }
 
     event->y -= 2;
     if ((event->type & (GPM_DOWN | GPM_DRAG))) {
-
 	if (!dlg_widget_active (panel))
 	    change_panel ();
 
@@ -2587,6 +2586,7 @@ do_panel_event (Gpm_Event *event, WPanel *panel, int *redir)
 		move_down (panel);
 	    return MOU_REPEAT;
 	}
+
 	my_index = panel->top_file + event->y - 1;
 	if (panel->split) {
 	    if (event->x > ((panel->widget.cols - 2) / 2))
@@ -2604,7 +2604,6 @@ do_panel_event (Gpm_Event *event, WPanel *panel, int *redir)
 
 	/* This one is new */
 	mark_if_marking (panel, event);
-
     } else if ((event->type & (GPM_UP | GPM_DOUBLE)) ==
 	       (GPM_UP | GPM_DOUBLE)) {
 	if (event->y > 0 && event->y <= lines)
@@ -2619,7 +2618,7 @@ panel_event (Gpm_Event *event, void *data)
 {
     WPanel *panel = data;
     int ret;
-    int redir = 0;
+    int redir = MOU_NORMAL;
 
     ret = do_panel_event (event, panel, &redir);
     if (!redir)

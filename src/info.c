@@ -25,21 +25,25 @@
 #include <stdio.h>
 
 #include "global.h"
+
 #include "../src/tty/tty.h"
+#include "../src/tty/key.h"		/* is_idle() */
 #include "../src/tty/mouse.h"		/* Gpm_Event */
 #include "../src/tty/color.h"
+
 #include "dialog.h"
 #include "widget.h"		/* default_proc*/
-#include "info.h"
+#include "main-widgets.h"	/* the_menubar*/
 #include "dir.h"		/* required by panel */
 #include "panel.h"		/* for the panel structure */
 #include "main.h"		/* other_panel, current_panel definitions */
+#include "menu.h"		/* menubar_visible */
 #include "util.h"		/* size_trunc_len */
 #include "layout.h"
-#include "../src/tty/key.h"		/* is_idle() */
 #include "mountlist.h"
 #include "unixcompat.h"
 #include "strutil.h"
+#include "info.h"
 
 #ifndef VERSION
 #   define VERSION "undefined"
@@ -51,7 +55,7 @@ struct WInfo {
 };
 
 /* Have we called the init_my_statfs routine? */
-static int initialized;
+static gboolean initialized = FALSE;
 static struct my_statfs myfs_stats;
 
 static void info_box (Dlg_head *h, struct WInfo *info)
@@ -265,18 +269,33 @@ info_callback (Widget *w, widget_msg_t msg, int parm)
 	return default_proc (msg, parm);
     }
 }
-			   
-struct WInfo *info_new ()
+
+static int
+info_event (Gpm_Event *event, void *data)
+{
+    Widget *w = &((WInfo *) data)->widget;
+
+    /* rest of the upper frame, the menu is invisible - call menu */
+    if (event->type & GPM_DOWN && event->y == 1 && !menubar_visible) {
+	event->x += w->x;
+	return the_menubar->widget.mouse (event, the_menubar);
+    }
+
+    return MOU_NORMAL;
+}
+
+WInfo *
+info_new (void)
 {
     struct WInfo *info = g_new (struct WInfo, 1);
 
-    init_widget (&info->widget, 0, 0, 0, 0, info_callback, NULL);
+    init_widget (&info->widget, 0, 0, 0, 0, info_callback, info_event);
 
     /* We do not want the cursor */
     widget_want_cursor (info->widget, 0);
 
-    if (!initialized){
-	initialized = 1;
+    if (!initialized) {
+	initialized = TRUE;
 	init_my_statfs ();
     }
 

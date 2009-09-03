@@ -51,13 +51,15 @@
 #include "widget.h"
 #include "panel.h"
 #include "main.h"
-#include "file.h"	/* For copy_dir_dir(), move_dir_dir(), erase_dir() */
+#include "main-widgets.h"	/* the_menubar */
+#include "menu.h"		/* menubar_visible */
+#include "file.h"		/* copy_dir_dir(), move_dir_dir(), erase_dir() */
 #include "help.h"
-#include "tree.h"
 #include "treestore.h"
 #include "cmd.h"
 #include "history.h"
 #include "strutil.h"
+#include "tree.h"
 
 #define tlines(t) (t->is_panel ? t->widget.lines-2 - (show_mini_info ? 2 : 0) : t->widget.lines)
 
@@ -495,6 +497,13 @@ static int
 event_callback (Gpm_Event *event, void *data)
 {
     WTree *tree = data;
+
+    /* rest of the upper frame, the menu is invisible - call menu */
+    if (tree->is_panel && (event->type & GPM_DOWN)
+	    && event->y == 1 && !menubar_visible) {
+	event->x += tree->widget.x;
+	return the_menubar->widget.mouse (event, the_menubar);
+    }
 
     if (!(event->type & GPM_UP))
 	return MOU_NORMAL;
