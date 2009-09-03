@@ -2529,7 +2529,7 @@ do_panel_event (Gpm_Event *event, WPanel *panel, int *redir)
 	return MOU_NORMAL;
     }
     if ((event->buttons & GPM_B_DOWN) && (event->type & GPM_DOWN)) {
-	if (panel->top_file + lines < panel->count)
+	if (panel->top_file + ITEMS (panel) < panel->count)
 	    next_page (panel);
 	else                    /* We are in last page */
 	    move_down (panel);
