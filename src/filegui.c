@@ -2,7 +2,7 @@
  *
  * Copyright (C) 1994, 1995, 1996, 1998, 1999, 2000, 2001, 2002, 2003,
  * 2004, 2005, 2006, 2007, 2009 Free Software Foundation, Inc.
- *  
+ *
  * Written by: 1994, 1995       Janne Kukonlehto
  *             1994, 1995       Fred Leeflang
  *             1994, 1995, 1996 Miguel de Icaza
@@ -24,7 +24,7 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -616,8 +616,8 @@ init_replace (FileOpContext *ctx, enum OperationMode mode)
 	while (i--)
 	    rd_widgets[i].text = _(rd_widgets[i].text);
 
-	/* 
-	 * longest of "Overwrite..." labels 
+	/*
+	 * longest of "Overwrite..." labels
 	 * (assume "Target date..." are short enough)
 	 */
         l1 = max (str_term_width1 (rd_widgets[6].text),
@@ -816,16 +816,26 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
 #else
 #define OFFSET 1
 #endif		/* WITH_BACKGROUND */
-	/*  2 - OFFSET */ QUICK_BUTTON (14, FMDX, 10, FMDY, N_("&OK"), B_ENTER, NULL),
-	/*  3 - OFFSET */ QUICK_CHECKBOX (42, FMDX, 8, FMDY, N_("&Stable Symlinks"), &ctx->stable_symlinks),
-	/*  4 - OFFSET */ QUICK_CHECKBOX (31, FMDX, 7, FMDY, N_("&Dive into subdir if exists"), &ctx->dive_into_subdirs),
-	/*  5 - OFFSET */ QUICK_CHECKBOX (3, FMDX, 8, FMDY, N_("preserve &Attributes"), &ctx->op_preserve),
-	/*  6 - OFFSET */ QUICK_CHECKBOX (3, FMDX, 7, FMDY, N_("follow &Links"), &ctx->follow_links),
-	/*  7 - OFFSET */ QUICK_INPUT (3, FMDX, 6, FMDY, "", 58, 0, "input2", &dest_dir),
-	/*  8 - OFFSET */ QUICK_LABEL (3, FMDX, 5, FMDY, N_("to:")),
-	/*  9 - OFFSET */ QUICK_CHECKBOX (37, FMDX, 4, FMDY, N_("&Using shell patterns"), &source_easy_patterns),
-	/* 10 - OFFSET */ QUICK_INPUT (3, FMDX, 3, FMDY, easy_patterns ? "*" : "^\\(.*\\)$", 58, 0, "input-def", &source_mask),
-	/* 11 - OFFSET */ QUICK_LABEL (3, FMDX, 2, FMDY, text),
+	/*  2 - OFFSET */
+	QUICK_BUTTON (14, FMDX, 10, FMDY, N_("&OK"), B_ENTER, NULL),
+	/*  3 - OFFSET */
+	QUICK_CHECKBOX (42, FMDX, 8, FMDY, N_("&Stable Symlinks"), &ctx->stable_symlinks),
+	/*  4 - OFFSET */
+	QUICK_CHECKBOX (31, FMDX, 7, FMDY, N_("di&Ve into subdir if exists"), &ctx->dive_into_subdirs),
+	/*  5 - OFFSET */
+	QUICK_CHECKBOX (3, FMDX, 8, FMDY, N_("preserve &Attributes"), &ctx->op_preserve),
+	/*  6 - OFFSET */
+	QUICK_CHECKBOX (3, FMDX, 7, FMDY, N_("follow &Links"), &ctx->follow_links),
+	/*  7 - OFFSET */
+	QUICK_INPUT (3, FMDX, 6, FMDY, "", 58, 0, "input2", &dest_dir),
+	/*  8 - OFFSET */
+	QUICK_LABEL (3, FMDX, 5, FMDY, N_("to:")),
+	/*  9 - OFFSET */
+	QUICK_CHECKBOX (37, FMDX, 4, FMDY, N_("&Using shell patterns"), &source_easy_patterns),
+	/* 10 - OFFSET */
+	QUICK_INPUT (3, FMDX, 3, FMDY, easy_patterns ? "*" : "^\\(.*\\)$", 58, 0, "input-def", &source_mask),
+	/* 11 - OFFSET */
+	QUICK_LABEL (3, FMDX, 2, FMDY, text),
 	QUICK_END
     };
 
