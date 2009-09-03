@@ -104,6 +104,10 @@ extern const char *prompt;
 extern const char *edit_one_file;
 extern char *mc_home;
 extern char *mc_home_alt;
+
+struct mc_fhl_struct;
+extern struct mc_fhl_struct *mc_filehighlight;
+
 char *get_mc_lib_dir (void);
 
 void done_menu (void);

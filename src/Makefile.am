@@ -1,4 +1,4 @@
-SUBDIRS = mcconfig search tty viewer
+SUBDIRS = mcconfig search tty viewer filehighlight
 
 AM_CFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir) $(PCRE_CFLAGS)
 
@@ -43,8 +43,9 @@ MCCONFIGLIB = mcconfig/libmcconfig.la
 SEARCHLIB = search/libsearch.la
 TTYLIB =  tty/libmctty.la
 VIEWERLIB = viewer/libmcviewer.la
+FILEHIGHLIGHTLIB=filehighlight/libmcfilehighlight.la
 
-mc_LDADD = $(EDITLIB) $(VFSLIB) \
+mc_LDADD = $(EDITLIB) $(VFSLIB) $(FILEHIGHLIGHTLIB) \
 	$(MCCONFIGLIB) $(SEARCHLIB) $(TTYLIB) $(VIEWERLIB) \
 	$(INTLLIBS) $(MCLIBS) $(SLANGLIB) $(LIBICONV) $(GLIB_LIBS)
 

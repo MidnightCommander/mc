@@ -48,18 +48,8 @@
 #define GAUGE_COLOR        IF_COLOR (21, 0)
 #define INPUT_COLOR        IF_COLOR (22, 0)
 
-/* Add this to color panel, on BW all pairs are normal */
-#define DIRECTORY_COLOR    IF_COLOR (23, 0)
-#define EXECUTABLE_COLOR   IF_COLOR (24, 0)
-#define LINK_COLOR         IF_COLOR (25, 0)
-#define STALE_LINK_COLOR   IF_COLOR (26, 0)
-#define DEVICE_COLOR       IF_COLOR (27, 0)
-#define SPECIAL_COLOR      IF_COLOR (28, 0)
-#define CORE_COLOR         IF_COLOR (29, 0)
-
-
 /* For the default color any unused index may be chosen. */
-#define DEFAULT_COLOR_INDEX   30
+#define DEFAULT_COLOR_INDEX   23
 #define DEFAULT_COLOR      IF_COLOR (DEFAULT_COLOR_INDEX, 0)
 
 /*
@@ -67,18 +57,18 @@
  * respectively
  * Last is defined to view color.
  */
-#define EDITOR_NORMAL_COLOR_INDEX    34
+#define EDITOR_NORMAL_COLOR_INDEX    27
 #define EDITOR_NORMAL_COLOR          IF_COLOR (EDITOR_NORMAL_COLOR_INDEX, 0)
-#define EDITOR_BOLD_COLOR            IF_COLOR (35, A_BOLD)
-#define EDITOR_MARKED_COLOR          IF_COLOR (36, A_REVERSE)
-#define EDITOR_WHITESPACE_COLOR      IF_COLOR (37, 0 /* irrelevant */)
+#define EDITOR_BOLD_COLOR            IF_COLOR (28, A_BOLD)
+#define EDITOR_MARKED_COLOR          IF_COLOR (29, A_REVERSE)
+#define EDITOR_WHITESPACE_COLOR      IF_COLOR (30, 0 /* irrelevant */)
 
 /* color of left 8 char status per line */
-#define LINE_STATE_COLOR  IF_COLOR (38, 0)
+#define LINE_STATE_COLOR  IF_COLOR (31, 0)
 
 /* Error dialog colors */
-#define ERROR_HOT_NORMAL   IF_COLOR (39, 0)
-#define ERROR_HOT_FOCUS    IF_COLOR (40, 0)
+#define ERROR_HOT_NORMAL   IF_COLOR (32, 0)
+#define ERROR_HOT_FOCUS    IF_COLOR (43, 0)
 
 void tty_init_colors (gboolean disable, gboolean force);
 void tty_colors_done (void);

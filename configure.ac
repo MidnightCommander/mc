@@ -559,6 +559,7 @@ misc/Makefile
 misc/mc.ext
 
 src/Makefile
+src/filehighlight/Makefile
 src/mcconfig/Makefile
 src/search/Makefile
 src/tty/Makefile

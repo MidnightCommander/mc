@@ -49,6 +49,7 @@
 
 #include "../src/mcconfig/mcconfig.h"
 #include "../src/args.h"
+#include "../src/filehighlight/fhl.h"
 
 #include "dir.h"
 #include "dialog.h"
@@ -106,6 +107,8 @@
 /* The structures for the panels */
 WPanel *left_panel = NULL;
 WPanel *right_panel = NULL;
+
+mc_fhl_t *mc_filehighlight;
 
 /* The pointer to the tree */
 WTree *the_tree = NULL;
@@ -753,7 +756,8 @@ static menu_entry CmdMenu[] = {
     {' ', "", NULL_HOTKEY, 0},
 #endif
     {' ', N_("Edit &extension file"), NULL_HOTKEY, ext_cmd},
-    {' ', N_("Edit &menu file"), NULL_HOTKEY, edit_mc_menu_cmd}
+    {' ', N_("Edit &menu file"), NULL_HOTKEY, edit_mc_menu_cmd},
+    {' ', N_("Edit &highlighting group file"), NULL_HOTKEY, edit_fhl_cmd}
 };
 
 /* Must keep in sync with the constants in menu_cmd */
@@ -1994,10 +1998,12 @@ main (int argc, char *argv[])
 #endif				/* HAVE_SUBSHELL_SUPPORT */
 	prompt = (geteuid () == 0) ? "# " : "$ ";
 
+    mc_filehighlight = mc_fhl_new (TRUE);
     /* Program main loop */
     if (!midnight_shutdown)
 	do_nc ();
 
+    mc_fhl_free (&mc_filehighlight);
     /* Save the tree store */
     tree_store_save ();
 

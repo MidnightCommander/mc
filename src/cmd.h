@@ -40,6 +40,7 @@ void filter_cmd (void);
 void reread_cmd (void);
 void ext_cmd (void);
 void edit_mc_menu_cmd (void);
+void edit_fhl_cmd (void);
 void quick_chdir_cmd (void);
 void compare_dirs_cmd (void);
 void history_cmd (void);
