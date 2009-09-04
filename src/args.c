@@ -298,7 +298,6 @@ mc_args_new_color_group(void)
 	    "                 editlinestate\n"),
 	/* TRANSLATORS: don't translate keywords and names of colors */
 	_(  "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-	    "   File types:   directory, executable, link, stalelink, device, special, core\n"
 	    "\n" "Colors:\n"
 	    "   black, gray, red, brightred, green, brightgreen, brown,\n"
 	    "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
