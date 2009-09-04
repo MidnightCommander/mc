@@ -141,6 +141,7 @@ rm -rf $RPM_BUILD_ROOT
 %config %{_sysconfdir}/mc/Syntax
 %config %{_sysconfdir}/mc/mc.charsets
 %config %{_sysconfdir}/mc/mc.lib
+%config(noreplace) %{_sysconfdir}/mc/filehighlight.ini
 %config(noreplace) %{_sysconfdir}/mc/*edit*
 %config(noreplace) %{_sysconfdir}/mc/mc.ext
 %config(noreplace) %{_sysconfdir}/mc/mc.menu
@@ -153,6 +154,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libexecdir}/mc
 
 %changelog
+* Fri Sep 04 2009 Slava Zanko <slavazanko@gmail.com>
+- Add new file %%{_sysconfdir}/mc/filehighlight.ini
+
 * Sat Aug 01 2009 Yury V. Zaytsev <yury@shurup.com>
 - Fixed EL4 (and supposedly EL3) builds
 - Fixed some of rpmlint warnings
