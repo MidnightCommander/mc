@@ -175,7 +175,7 @@ cpio_open_cpio_file (struct vfs_class *me, struct vfs_s_super *super,
     mc_stat (name, &(super->u.arch.st));
     super->u.arch.type = CPIO_UNKNOWN;
 
-    type = get_compression_type (fd);
+    type = get_compression_type (fd, name);
     if (type != COMPRESSION_NONE) {
 	char *s;
 

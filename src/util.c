@@ -855,7 +855,7 @@ get_current_wd (char *buffer, int size)
 #endif /* !USE_VFS */
 
 enum compression_type
-get_compression_type (int fd)
+get_compression_type (int fd, const char * name)
 {
     unsigned char magic[16];
 
@@ -920,14 +920,23 @@ get_compression_type (int fd)
     }
 
     /* XZ compression magic */
-    if (magic[0] == 0xFD
-	&& magic[1] == 0x37
-	 && magic[2] == 0x7A
-	  && magic[3] == 0x58
-	   && magic[4] == 0x5A
-	    && magic[5] == 0x00) {
-                return COMPRESSION_XZ;
-        }
+    if (mc_read(fd, (char *) magic+5, 1) == 1)
+    {
+	if (
+	    magic[0] == 0xFD
+	    && magic[1] == 0x37
+	    && magic[2] == 0x7A
+	    && magic[3] == 0x58
+	    && magic[4] == 0x5A
+	    && magic[5] == 0x00
+	   ){
+	    return COMPRESSION_XZ;
+	}
+    }
+
+    /* HACK: we must belive to extention of LZMA file :) ...*/
+    if (strlen(name) > 5 && strcmp(&name[strlen(name)-5],".lzma") == 0)
+	return COMPRESSION_LZMA;
 
     return COMPRESSION_NONE;
 }
