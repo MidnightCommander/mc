@@ -1,7 +1,7 @@
 /* Widget based utility functions.
    Copyright (C) 1994, 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004,
    2005, 2006, 2007 Free Software Foundation, Inc.
-   
+
    Authors: 1994, 1995, 1996 Miguel de Icaza
             1994, 1995 Radek Doulik
 	    1995  Jakub Jelinek
@@ -456,13 +456,18 @@ quick_dialog (QuickDialog *qd)
  * The argument "history_name" holds the name of a section
  * in the history file. Data entered in the input field of
  * the dialog box will be stored there.
- * 
+ *
  */
 static char *
 fg_input_dialog_help (const char *header, const char *text, const char *help,
 		      const char *history_name, const char *def_text)
 {
     char *my_str;
+
+    /* The special value of def_text is used to identify password boxes */
+    if (def_text == INPUT_PASSWORD) {
+	def_text = "";
+    }
 
     QuickWidget quick_widgets[] = {
 	/* 0 */ QUICK_BUTTON (6, 10, 1, 0, N_("&Cancel"), B_CANCEL, NULL),
@@ -492,7 +497,6 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
     if (def_text == INPUT_PASSWORD) {
 	quick_widgets[2].u.input.flags = 1;
 	histname[3] = '\0';
-	def_text = "";
     }
 
 #ifdef ENABLE_NLS
@@ -570,7 +574,7 @@ char *input_dialog (const char *header, const char *text,
 }
 
 char *
-input_expand_dialog (const char *header, const char *text, 
+input_expand_dialog (const char *header, const char *text,
 		     const char *history_name, const char *def_text)
 {
     char *result;
