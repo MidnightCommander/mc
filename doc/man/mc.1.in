@@ -1806,9 +1806,13 @@ display fields
 which apply to the user running Midnight Commander are highlighted with
 the color defined by the
 .I selected
-keyword.  If the file type highlighting is enabled, files are colored
-according to their file type (e.g. directory, core file, executable,
-and so on).
+keyword.  If the file type highlighting is enabled, file names are colored
+according to rules described in /etc/mc/filehighlight.ini file. See
+.\"LINK2"
+Filenames Highlight
+.\"Filenames Highlight"
+for more info.
+
 .PP
 If the
 .I Show Mini\-Status
@@ -3056,9 +3060,8 @@ The colors are optional, and the keywords are: normal, selected, marked,
 markselect, errors, input, reverse, gauge.  Menu colors are: menu,
 menusel, menuhot, menuhotsel.  Dialog colors are: dnormal, dfocus,
 dhotnormal, dhotfocus.  Help colors are: helpnormal, helpitalic,
-helpbold, helplink, helpslink.  Viewer color is: viewunderline.  Special
-highlighting colors are: executable, directory, link, stalelink, device,
-special, core.  Editor colors are: editnormal, editbold, editmarked.
+helpbold, helplink, helpslink.  Viewer color is: viewunderline. Editor 
+colors are: editnormal, editbold, editmarked.
 .PP
 .I input
 determines the color of input lines used in query dialogs.
@@ -3095,27 +3098,6 @@ is used for not selected hyperlinks and
 .I helpslink
 is used for selected hyperlink.
 .PP
-Special highlight colors determine how files are displayed when file
-highlighting is enabled (see the section on
-.\"LINK2"
-Layout\&).
-.\"Layout"
-.I directory
-is used for directories or symbolic links to directories;
-.I executable
-for executable files;
-.I link
-is used for symbolic links which are neither stale nor linked
-to a directory;
-.I stalelink
-is used for stale symbolic links;
-.I device
-\- character and block devices;
-.I special
-is used for special files, such as pipes and sockets;
-.I core
-is for core files.
-.PP
 The possible colors are: black, gray, red, brightred, green,
 brightgreen, brown, yellow, blue, brightblue, magenta, brightmagenta,
 cyan, brightcyan, lightgray and white. And there is a special keyword
@@ -3126,6 +3108,43 @@ used for background color. Example:
 [Colors]
 base_color=normal=white,default:marked=magenta,default
 .fi
+
+.\"NODE "Filenames Highlight"
+.SH "Filenames Highlight"
+Rules of filenames highlight placed in /etc/mc/filehighlight.ini file.
+.PP
+Main section [filehighlight] contain key names as highlight groups and values as color pairs.
+Color pairs described as 'foreground;background'. 'background' may be omited.
+Other sections describe filegroup of highlight. Keys in these groups:
+.TP
+.I type
+file type. if present, all other option ignored
+.TP
+.I regexp
+regular expression. If present, 'extensions' option ignored
+.TP
+.I extensions
+list of extensions of files. Separated by ';' sign.
+.PP
+'type' key may have values:
+.nf
+\- FILE (all files)
+  \- FILE_EXE
+\- DIR (all directoryes)
+  \- LINK_DIR
+\- LINK (all links except stale link)
+  \- HARDLINK
+  \- SYMLINK
+\- STALE_LINK
+\- DEVICE (all device files)
+  \- DEVICE_BLOCK
+  \- DEVICE_CHAR
+\- SPECIAL (all special files)
+  \- SPECIAL_SOCKET
+  \- SPECIAL_FIFO
+  \- SPECIAL_DOOR
+.fi
+
 .\"NODE "Special Settings"
 .SH "Special Settings"
 Most of the settings of the Midnight Commander can be changed from the
