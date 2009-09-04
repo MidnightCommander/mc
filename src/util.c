@@ -921,13 +921,13 @@ get_compression_type (int fd)
 
     /* XZ compression magic */
     if (magic[0] == 0xFD
-	&& magic[1] == 0x37 && magic[2] == 0x7A && magic[3] == 0x58) {
-	if (mc_read (fd, (char *) magic + 4, 2) == 2) {
-            if (magic[4] == 0x5A && magic[5] == 0x00) {
+	&& magic[1] == 0x37
+	 && magic[2] == 0x7A
+	  && magic[3] == 0x58
+	   && magic[4] == 0x5A
+	    && magic[5] == 0x00) {
                 return COMPRESSION_XZ;
-            }
         }
-    }
 
     return COMPRESSION_NONE;
 }
