@@ -91,7 +91,7 @@ anything_ready (void)
 void
 do_enter_ca_mode (void)
 {
-    if (!xterm_flag) {
+    if (xterm_flag) {
 	fprintf (stdout, /* ESC_STR ")0" */ ESC_STR "7" ESC_STR "[?47h");
 	fflush (stdout);
     }
@@ -100,7 +100,7 @@ do_enter_ca_mode (void)
 void
 do_exit_ca_mode (void)
 {
-    if (!xterm_flag) {
+    if (xterm_flag) {
 	fprintf (stdout, ESC_STR "[?47l" ESC_STR "8" ESC_STR "[m");
 	fflush (stdout);
     }
