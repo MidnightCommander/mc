@@ -47,7 +47,7 @@
 
 #include "global.h"
 
-#include "../src/tty/tty.h"		/* LINES */
+#include "../src/tty/tty.h"		/* LINES, tty_touch_screen() */
 #include "../src/tty/key.h"		/* ALT() macro */
 #include "../src/tty/win.h"		/* do_enter_ca_mode() */
 
@@ -892,6 +892,7 @@ history_cmd (void)
 void swap_cmd (void)
 {
     swap_panels ();
+    tty_touch_screen ();
     repaint_screen ();
 }
 

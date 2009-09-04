@@ -587,7 +587,6 @@ void
 repaint_screen (void)
 {
     do_refresh ();
-    tty_touch_screen ();
     tty_refresh ();
 }
 
