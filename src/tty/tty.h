@@ -77,16 +77,20 @@ extern void tty_draw_box (int y, int x, int rows, int cols);
 extern void tty_draw_box_slow (int y, int x, int ys, int xs);
 extern void tty_fill_region (int y, int x, int rows, int cols, unsigned char ch);
 
-extern int ugly_frm_thinvert;
-extern int ugly_frm_thinhoriz;
-extern int ugly_frm_vert;
-extern int ugly_frm_horiz;
-extern int ugly_frm_lefttop;
-extern int ugly_frm_righttop;
-extern int ugly_frm_leftbottom;
-extern int ugly_frm_rightbottom;
-extern int ugly_frm_leftmiddle;
-extern int ugly_frm_rightmiddle;
+extern int mc_tty_ugly_frm[];
+
+typedef enum{
+    MC_TTY_FRM_thinvert,
+    MC_TTY_FRM_thinhoriz,
+    MC_TTY_FRM_vert,
+    MC_TTY_FRM_horiz,
+    MC_TTY_FRM_lefttop,
+    MC_TTY_FRM_righttop,
+    MC_TTY_FRM_leftbottom,
+    MC_TTY_FRM_rightbottom,
+    MC_TTY_FRM_leftmiddle,
+    MC_TTY_FRM_rightmiddle
+} mc_tty_frm_t;
 
 extern char *tty_tgetstr (const char *name);
 

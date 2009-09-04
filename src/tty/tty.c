@@ -49,16 +49,7 @@ gboolean slow_tty = FALSE;
 /* If true use +, -, | for line drawing */
 gboolean ugly_line_drawing = FALSE;
 
-int ugly_frm_thinvert = '|';
-int ugly_frm_thinhoriz = '-';
-int ugly_frm_vert = '|';
-int ugly_frm_horiz = '-';
-int ugly_frm_lefttop = '+';
-int ugly_frm_righttop = '+';
-int ugly_frm_leftbottom = '+';
-int ugly_frm_rightbottom = '+';
-int ugly_frm_leftmiddle = '+';
-int ugly_frm_rightmiddle = '+';
+int mc_tty_ugly_frm[] = { '|', '-', '|', '-', '+', '+', '+', '+', '+', '+'};
 
 /*** file scope macro definitions **************************************/
 
@@ -133,7 +124,7 @@ void
 tty_print_one_hline (void)
 {
     if (ugly_line_drawing || slow_tty)
-	tty_print_char (ugly_frm_thinhoriz);
+	tty_print_char (mc_tty_ugly_frm[MC_TTY_FRM_thinhoriz]);
     else
 	tty_print_alt_char (ACS_HLINE);
 }
@@ -142,7 +133,7 @@ void
 tty_print_one_vline (void)
 {
     if (ugly_line_drawing || slow_tty)
-	tty_print_char (ugly_frm_thinvert);
+	tty_print_char (mc_tty_ugly_frm[MC_TTY_FRM_thinvert]);
     else
 	tty_print_alt_char (ACS_VLINE);
 }
@@ -150,16 +141,16 @@ tty_print_one_vline (void)
 void
 tty_draw_box_slow (int y, int x, int ys, int xs)
 {
-    tty_draw_vline (y, x, ugly_frm_vert, ys);
-    tty_draw_vline (y, x + xs - 1, ugly_frm_vert, ys);
-    tty_draw_hline (y, x, ugly_frm_horiz, xs);
-    tty_draw_hline (y + ys - 1, x, ugly_frm_horiz, xs);
+    tty_draw_vline (y, x, mc_tty_ugly_frm[MC_TTY_FRM_vert], ys);
+    tty_draw_vline (y, x + xs - 1, mc_tty_ugly_frm[MC_TTY_FRM_vert], ys);
+    tty_draw_hline (y, x, mc_tty_ugly_frm[MC_TTY_FRM_horiz], xs);
+    tty_draw_hline (y + ys - 1, x, mc_tty_ugly_frm[MC_TTY_FRM_horiz], xs);
     tty_gotoyx (y, x);
-    tty_print_char (ugly_frm_lefttop);
+    tty_print_char (mc_tty_ugly_frm[MC_TTY_FRM_lefttop]);
     tty_gotoyx (y + ys - 1, x);
-    tty_print_char (ugly_frm_leftbottom);
+    tty_print_char (mc_tty_ugly_frm[MC_TTY_FRM_leftbottom]);
     tty_gotoyx (y, x + xs - 1);
-    tty_print_char (ugly_frm_righttop);
+    tty_print_char (mc_tty_ugly_frm[MC_TTY_FRM_righttop]);
     tty_gotoyx (y + ys - 1, x + xs - 1);
-    tty_print_char (ugly_frm_rightbottom);
+    tty_print_char (mc_tty_ugly_frm[MC_TTY_FRM_rightbottom]);
 }

@@ -388,7 +388,7 @@ void
 tty_draw_hline (int y, int x, int ch, int len)
 {
     if (ch == ACS_HLINE && (ugly_line_drawing || slow_tty)) {
-        ch = ugly_frm_thinhoriz;
+        ch = mc_tty_ugly_frm[MC_TTY_FRM_thinhoriz];
     }
 
     if ((y < 0) || (x < 0)) {
@@ -475,11 +475,11 @@ void
 tty_print_alt_char (int c)
 {
     if (c == ACS_RTEE && (ugly_line_drawing || slow_tty)) {
-        c = ugly_frm_rightmiddle;
+        c = mc_tty_ugly_frm[MC_TTY_FRM_rightmiddle];
     }
 
     if (c == ACS_LTEE && (ugly_line_drawing || slow_tty)) {
-        c = ugly_frm_leftmiddle;
+        c = mc_tty_ugly_frm[MC_TTY_FRM_leftmiddle];
     }
     if (ugly_line_drawing || slow_tty) {
         tty_print_char (c);
