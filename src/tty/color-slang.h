@@ -37,8 +37,8 @@ gboolean tty_use_colors ();
 
 #define IF_COLOR(co, bw) (tty_use_colors () ? COLOR_PAIR (co) : bw)
 
+/*
 #define MARKED_SELECTED_COLOR IF_COLOR (4, (SLtt_Use_Ansi_Colors ? A_BOLD_REVERSE : A_REVERSE | A_BOLD))
-
-void mc_init_pair (int index, const char *foreground, const char *background);
+*/
 
 #endif				/* MC_COLOR_SLANG_H */

@@ -43,7 +43,7 @@
 #include "user.h"		/* expand_format */
 #include "subshell.h"		/* SUBSHELL_EXIT */
 #include "tree.h"		/* for tree_chdir */
-#include "../src/tty/color.h"		/* DEFAULT_COLOR */
+#include "../src/skin/skin.h"		/* DEFAULT_COLOR */
 #include "execute.h"		/* shell_execute */
 #include "../src/strescape.h"
 

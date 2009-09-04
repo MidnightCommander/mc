@@ -31,11 +31,13 @@
 #include "../src/global.h"
 #include "../src/main.h"
 #include "../src/strescape.h"
-#include "../src/tty/color.h"
+#include "../src/skin/skin.h"
 #include "fhl.h"
 #include "internal.h"
 
 /*** global variables ****************************************************************************/
+
+extern mc_skin_t mc_skin__default;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -49,29 +51,8 @@
 static void
 mc_fhl_parce_fill_color_info (mc_fhl_filter_t * mc_filter, mc_fhl_t * fhl, const gchar * group_name)
 {
-    gchar **colors;
-    gsize colors_size;
-
-    colors = mc_config_get_string_list (fhl->config, "filehighlight", group_name, &colors_size);
-
-    if (colors == NULL)
-        return;
-
-    if (colors[0] == NULL) {
-        g_strfreev (colors);
-        return;
-    }
-
-    mc_filter->fgcolor = g_strdup (colors[0]);
-
-    if (colors[1] == NULL)
-        mc_filter->bgcolor = NULL;
-    else
-        mc_filter->bgcolor = g_strdup (colors[1]);
-
-    g_strfreev (colors);
-
-    mc_filter->color_pair_index = tty_try_alloc_color_pair (mc_filter->fgcolor, mc_filter->bgcolor);
+    (void) fhl;
+    mc_filter->color_pair_index = mc_skin_color_get("filehighlight", group_name);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -260,41 +241,34 @@ mc_fhl_init_from_standart_files (mc_fhl_t * fhl)
 gboolean
 mc_fhl_parce_ini_file (mc_fhl_t * fhl)
 {
-    gchar **ftype_names, **orig_ftype_names;
+    gchar **group_names, **orig_group_names;
     gsize ftype_names_size;
-
 
     mc_fhl_array_free (fhl);
     fhl->filters = g_ptr_array_new ();
 
-    if (!mc_config_has_group (fhl->config, "filehighlight"))
-        return FALSE;
+    orig_group_names = group_names =
+        mc_config_get_groups (fhl->config, &ftype_names_size);
 
-    orig_ftype_names = ftype_names =
-        mc_config_get_keys (fhl->config, "filehighlight", &ftype_names_size);
+    if (group_names == NULL)
+	return FALSE;
 
-    while (*ftype_names) {
+    while (*group_names) {
 
-        if (!mc_config_has_group (fhl->config, *ftype_names)) {
-            ftype_names++;
-            continue;
-        }
-
-        if (mc_config_has_param (fhl->config, *ftype_names, "type")) {
+        if (mc_config_has_param (fhl->config, *group_names, "type")) {
             /* parce filetype filter */
-            mc_fhl_parce_get_file_type_id (fhl, *ftype_names);
-        } else if (mc_config_has_param (fhl->config, *ftype_names, "regexp")) {
+            mc_fhl_parce_get_file_type_id (fhl, *group_names);
+        } else if (mc_config_has_param (fhl->config, *group_names, "regexp")) {
             /* parce regexp filter */
-            mc_fhl_parce_get_regexp (fhl, *ftype_names);
-        } else if (mc_config_has_param (fhl->config, *ftype_names, "extensions")) {
+            mc_fhl_parce_get_regexp (fhl, *group_names);
+        } else if (mc_config_has_param (fhl->config, *group_names, "extensions")) {
             /* parce extensions filter */
-            mc_fhl_parce_get_extensions (fhl, *ftype_names);
+            mc_fhl_parce_get_extensions (fhl, *group_names);
         }
-
-        ftype_names++;
+        group_names++;
     }
 
-    g_strfreev (orig_ftype_names);
+    g_strfreev (orig_group_names);
     return TRUE;
 }
 

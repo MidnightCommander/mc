@@ -34,7 +34,7 @@
 #include "global.h"
 
 #include "../src/tty/tty.h"
-#include "../src/tty/color.h"
+#include "../src/skin/skin.h"
 
 #include "dialog.h"	/* add_widget() */
 #include "widget.h"	/* NORMAL_BUTTON */

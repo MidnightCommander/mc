@@ -4,6 +4,7 @@
    
    Written by:
    Andrew Borodin <aborodin@vmail.ru>, 2009.
+   Slava Zanko <slavazanko@gmail.com>, 2009.
    
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -30,7 +31,20 @@
 #include "../../src/tty/color.h"		/* colors and attributes */
 #include "../../src/tty/color-internal.h"
 
-struct color_table_s const color_table [] = {
+/*** global variables ****************************************************************************/
+
+/*** file scope macro definitions ****************************************************************/
+
+/*** file scope type declarations ****************************************************************/
+
+typedef struct mc_tty_color_table_struct {
+    const char *name;
+    int  value;
+} mc_tty_color_table_t;
+
+/*** file scope variables ************************************************************************/
+
+mc_tty_color_table_t const color_table [] = {
     { "black",         COLOR_BLACK   },
     { "gray",          COLOR_BLACK   | A_BOLD },
     { "red",           COLOR_RED     },
@@ -47,63 +61,48 @@ struct color_table_s const color_table [] = {
     { "brightcyan",    COLOR_CYAN    | A_BOLD },
     { "lightgray",     COLOR_WHITE },
     { "white",         COLOR_WHITE   | A_BOLD },
-    { "default",       0 } /* default color of the terminal */
+    { "default",       0 }, /* default color of the terminal */
+    { NULL, 0}
 };
 
-struct colorpair color_map [] = {
-    { "normal=",     0, 0 },	/* normal */               /*  1 */
-    { "selected=",   0, 0 },	/* selected */
-    { "marked=",     0, 0 },	/* marked */
-    { "markselect=", 0, 0 },	/* marked/selected */
-    { "errors=",     0, 0 },	/* errors */
-    { "menu=",       0, 0 },	/* menu entry */
-    { "reverse=",    0, 0 },	/* reverse */
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
-    /* Dialog colors */
-    { "dnormal=",    0, 0 },	/* Dialog normal */        /*  8 */
-    { "dfocus=",     0, 0 },	/* Dialog focused */
-    { "dhotnormal=", 0, 0 },	/* Dialog normal/hot */
-    { "dhotfocus=",  0, 0 },	/* Dialog focused/hot */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
-    { "viewunderline=", 0, 0 },	/* _\b? sequence in view, underline in editor */
-    { "menusel=",    0, 0 },	/* Menu selected color */  /* 13 */
-    { "menuhot=",    0, 0 },	/* Color for menu hotkeys */
-    { "menuhotsel=", 0, 0 },	/* Menu hotkeys/selected entry */
-
-    { "helpnormal=", 0, 0 },	/* Help normal */          /* 16 */
-    { "helpitalic=", 0, 0 },	/* Italic in help */
-    { "helpbold=",   0, 0 },	/* Bold in help */
-    { "helplink=",   0, 0 },	/* Not selected hyperlink */
-    { "helpslink=",  0, 0 },	/* Selected hyperlink */
-
-    { "gauge=",      0, 0 },	/* Color of the progress bar (percentage) *//* 21 */
-    { "input=",      0, 0 },
-
-    { 0,             0, 0 },	/* not usable (DEFAULT_COLOR_INDEX) *//* 23 */
-    { 0,             0, 0 },	/* unused */
-    { 0,             0, 0 },	/* not usable (A_REVERSE) */
-    { 0,             0, 0 },	/* not usable (A_REVERSE_BOLD) */
-
-    /* editor colors start at 27 */
-    { "editnormal=",     0, 0 },	/* normal */       /* 27 */
-    { "editbold=",       0, 0 },	/* search->found */
-    { "editmarked=",     0, 0 },	/* marked/selected */
-    { "editwhitespace=", 0, 0 },	/* whitespace */
-    { "editlinestate=",  0, 0 },	/* line number bar*/
-
-    /* error dialog colors start at 32 */
-    { "errdhotnormal=",  0, 0 },	/* Error dialog normal/hot */ /* 32 */
-    { "errdhotfocus=",   0, 0 },	/* Error dialog focused/hot */
-};
-
-size_t
-color_table_len (void)
+const char *
+mc_tty_color_get_valid_name(const char *color_name)
 {
-    return sizeof (color_table)/sizeof(color_table [0]);
+    size_t i;
+
+    if (color_name == NULL)
+	return NULL;
+
+    for (i=0; color_table [i].name != NULL; i++)
+	if (strcmp (color_name, color_table [i].name) == 0) {
+	    return color_table [i].name;
+	    break;
+	}
+    return NULL;
 }
 
-size_t
-color_map_len (void)
+/* --------------------------------------------------------------------------------------------- */
+
+int
+mc_tty_color_get_index_by_name(const char *color_name)
 {
-    return sizeof (color_map)/sizeof(color_map [0]);
+    size_t i;
+
+    if (color_name == NULL)
+	return -1;
+
+    for (i=0; color_table [i].name != NULL; i++)
+	if (strcmp (color_name, color_table [i].name) == 0) {
+	    return color_table [i].value;
+	    break;
+	}
+    return -1;
 }
+
+/* --------------------------------------------------------------------------------------------- */

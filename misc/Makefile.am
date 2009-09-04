@@ -1,5 +1,7 @@
 ## Process this file with automake to create Makefile.in.
 
+SUBDIRS = skins
+
 LIBFILES_OUT = mc.ext
 
 noinst_DATA = xterm.ad

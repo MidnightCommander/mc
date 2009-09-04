@@ -10,14 +10,12 @@
 
 gboolean tty_use_colors ();
 
-#define MAX_PAIRS 64
-extern int attr_pairs [MAX_PAIRS];
 
 #define MY_COLOR_PAIR(x) (COLOR_PAIR (x) | attr_pairs [x])
 #define IF_COLOR(co, bw) (tty_use_colors () ? MY_COLOR_PAIR (co) : bw)
 
+/*
 #define MARKED_SELECTED_COLOR IF_COLOR (4, A_REVERSE | A_BOLD)
-
-void mc_init_pair (int index, int foreground, int background);
+*/
 
 #endif				/* MC_COLOR_NCURSES_H */

@@ -53,7 +53,7 @@
 
 #include "../src/search/search.h"	/* search engine */
 
-#include "../src/tty/color.h"
+#include "../src/skin/skin.h"
 
 #include "edit-impl.h"
 #include "edit-widget.h"
@@ -504,7 +504,7 @@ void edit_get_syntax_color (WEdit * edit, long byte_index, int *color)
                          option_syntax_highlighting && tty_use_colors ()) {
 	translate_rule_to_color (edit, edit_get_rule (edit, byte_index), color);
     } else {
-	*color = tty_use_colors () ? EDITOR_NORMAL_COLOR_INDEX : 0;
+	*color = tty_use_colors () ? mc_skin_color_get("editor", "_default_") : 0;
     }
 }
 

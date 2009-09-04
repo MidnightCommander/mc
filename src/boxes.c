@@ -37,7 +37,7 @@
 #include "global.h"
 
 #include "../src/tty/tty.h"
-#include "../src/tty/color.h"		/* INPUT_COLOR */
+#include "../src/skin/skin.h"		/* INPUT_COLOR */
 #include "../src/tty/key.h"		/* XCTRL and ALT macros  */
 
 #include "../src/mcconfig/mcconfig.h"	/* Load/save user formats */

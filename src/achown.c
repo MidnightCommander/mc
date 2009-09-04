@@ -37,7 +37,7 @@
 
 #include "../src/tty/tty.h"
 #include "../src/tty/key.h"		/* XCTRL and ALT macros */
-#include "../src/tty/color.h"
+#include "../src/skin/skin.h"
 
 #include "dialog.h"
 #include "widget.h"

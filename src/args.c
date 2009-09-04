@@ -69,6 +69,9 @@ gboolean mc_args__disable_colors = FALSE;
 /* Force colors, only used by Slang */
 gboolean mc_args__force_colors = FALSE;
 
+/* Show in specified skin */
+char *mc_args__skin = NULL;
+
 char *mc_args__last_wd_file = NULL;
 
 /* when enabled NETCODE, use folowing file as logfile */
@@ -243,6 +246,13 @@ static const GOptionEntry argument_color_table[] = {
      "colors", 'C', ARGS_COLOR_OPTIONS, G_OPTION_ARG_STRING,
      &command_line_colors,
      N_("Specifies a color configuration"),
+     "<string>"
+    },
+
+    {
+     "skin", 'S', ARGS_COLOR_OPTIONS, G_OPTION_ARG_STRING,
+     &mc_args__skin,
+     N_("Show mc with specified skin"),
      "<string>"
     },
 

@@ -41,7 +41,7 @@
 #include "../src/main.h"
 #include "../src/charsets.h"
 #include "../src/tty/tty.h"
-#include "../src/tty/color.h"
+#include "../src/skin/skin.h"
 #include "internal.h"
 
 /*** global variables ****************************************************************************/

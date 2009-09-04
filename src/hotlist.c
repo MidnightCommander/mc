@@ -43,7 +43,7 @@
 #include "global.h"
 
 #include "../src/tty/tty.h"		/* COLS */
-#include "../src/tty/color.h"
+#include "../src/skin/skin.h"
 #include "../src/tty/key.h"		/* KEY_M_CTRL */
 
 #include "dialog.h"

@@ -556,12 +556,14 @@ contrib/dist/pkginfo
 contrib/dist/prototype
 
 misc/Makefile
+misc/skins/Makefile
 misc/mc.ext
 
 src/Makefile
 src/filehighlight/Makefile
 src/mcconfig/Makefile
 src/search/Makefile
+src/skin/Makefile
 src/tty/Makefile
 src/viewer/Makefile
 

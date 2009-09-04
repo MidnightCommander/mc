@@ -39,107 +39,42 @@
 int attr_pairs [MAX_PAIRS];
 
 void
-tty_init_colors (gboolean disable, gboolean force)
+mc_tty_color_init_lib (gboolean disable, gboolean force)
 {
     (void) force;
 
     if (has_colors () && !disable) {
-	const size_t map_len = color_map_len ();
-        size_t i;
 
 	use_colors = TRUE;
 
 	start_color ();
 	use_default_colors ();
 
-	configure_colors ();
-
-	if (map_len > MAX_PAIRS) {
-	    /* This message should only be seen by the developers */
-	    fprintf (stderr,
-		     "Too many defined colors, resize MAX_PAIRS on color.c");
-	    exit (1);
-	}
-
-	/* Use default terminal colors */
-	mc_init_pair (DEFAULT_COLOR_INDEX, -1, -1);
-
-	for (i = 0; i < map_len; i++)
-	    if (color_map [i].name != NULL) {
-		mc_init_pair (i + 1, color_map_fg (i), color_map_bg (i));
-		/*
-		 * ncurses doesn't remember bold attribute in the color pairs,
-		 * so we should keep track of it in a separate array.
-		 */
-		attr_pairs [i + 1] = color_map [i].fg & A_BOLD;
-	    }
     }
 }
 
-/* Functions necessary to implement syntax highlighting  */
 void
-mc_init_pair (int index, CTYPE foreground, CTYPE background)
+mc_tty_color_try_alloc_pair_lib (mc_color_pair_t *mc_color_pair)
 {
-    init_pair (index, foreground, background == 0 ? -1 : background);
-    if (index > max_index)
-	max_index = index;
-}
-
-int
-tty_try_alloc_color_pair (const char *fg, const char *bg)
-{
-    int fg_index, bg_index;
-    int bold_attr;
-    struct colors_avail *p = &c;
-
-    c.index = EDITOR_NORMAL_COLOR_INDEX;
-    for (;;) {
-	if (((fg && p->fg) ? !strcmp (fg, p->fg) : fg == p->fg) != 0
-	    && ((bg && p->bg) ? !strcmp (bg, p->bg) : bg == p->bg) != 0)
-	    return p->index;
-	if (!p->next)
-	    break;
-	p = p->next;
-    }
-    p->next = g_new (struct colors_avail, 1);
-    p = p->next;
-    p->next = 0;
-    p->fg = fg ? g_strdup (fg) : 0;
-    p->bg = bg ? g_strdup (bg) : 0;
-    if (!fg)
-        /* Index in color_map array = COLOR_INDEX - 1 */
-	fg_index = color_map[EDITOR_NORMAL_COLOR_INDEX - 1].fg;
-    else
-	get_color (fg, &fg_index);
-
-    if (!bg)
-	bg_index = color_map[EDITOR_NORMAL_COLOR_INDEX - 1].bg;
-    else
-	get_color (bg, &bg_index);
-
-    bold_attr = fg_index & A_BOLD;
-    fg_index = fg_index & COLOR_WHITE;
-    bg_index = bg_index & COLOR_WHITE;
-
-    p->index = alloc_color_pair (fg_index, bg_index);
-    attr_pairs [p->index] = bold_attr;
-    return p->index;
+    init_pair (mc_color_pair->pair_index,
+	    mc_color_pair->ifg,
+	    mc_color_pair->ibg == 0 ? -1 : mc_color_pair->ibg);
 }
 
 void
-tty_setcolor (int color)
+mc_tty_color_set_lib (int color)
 {
     attrset (color);
 }
 
 void
-tty_lowlevel_setcolor (int color)
+mc_tty_color_lowlevel_set_lib (int color)
 {
     attrset (MY_COLOR_PAIR (color));
 }
 
 void
-tty_set_normal_attrs (void)
+mc_tty_color_set_normal_attrs_lib (void)
 {
     standend ();
 }

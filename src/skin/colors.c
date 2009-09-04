@@ -1,0 +1,293 @@
+/*
+   Skins engine.
+   Work with colors
+
+   Copyright (C) 2009 The Free Software Foundation, Inc.
+
+   Written by:
+   Slava Zanko <slavazanko@gmail.com>, 2009.
+
+   This file is part of the Midnight Commander.
+
+   The Midnight Commander is free software; you can redistribute it
+   and/or modify it under the terms of the GNU General Public License as
+   published by the Free Software Foundation; either version 2 of the
+   License, or (at your option) any later version.
+
+   The Midnight Commander is distributed in the hope that it will be
+   useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+   of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+   MA 02110-1301, USA.
+ */
+
+#include <config.h>
+#include <string.h>
+
+#include "../src/global.h"
+#include "../src/tty/color.h"
+#include "skin.h"
+#include "internal.h"
+
+/*** global variables ****************************************************************************/
+
+int mc_skin_color__cache[MC_SKIN_COLOR_CACHE_COUNT];
+
+/*** file scope macro definitions ****************************************************************/
+
+/*** file scope type declarations ****************************************************************/
+
+/*** file scope variables ************************************************************************/
+
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+inline static gchar *
+mc_skin_color_make_hash_key(const gchar *group, const gchar *key)
+{
+    return g_strdup_printf("%s.%s", group, key);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static mc_skin_color_t *
+mc_skin_color_get_from_hash(mc_skin_t *mc_skin, const gchar *group, const gchar *key)
+{
+    gchar *key_name;
+    mc_skin_color_t * mc_skin_color;
+
+    if (group == NULL || key == NULL)
+	return NULL;
+
+    if (mc_skin == NULL)
+	mc_skin = &mc_skin__default;
+
+    key_name = mc_skin_color_make_hash_key(group, key);
+    mc_skin_color = (mc_skin_color_t *) g_hash_table_lookup (mc_skin->colors, (gpointer) key_name);
+    g_free(key_name);
+
+    return mc_skin_color;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+mc_skin_color_remove_from_hash(mc_skin_t *mc_skin, const gchar *group, const gchar *key)
+{
+    gchar *key_name;
+    if (group == NULL || key == NULL)
+	return;
+
+    if (mc_skin == NULL)
+	mc_skin = &mc_skin__default;
+
+    key_name = mc_skin_color_make_hash_key(group, key);
+    g_hash_table_remove (mc_skin->colors, (gpointer) key_name);
+    g_free(key_name);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+mc_skin_color_add_to_hash(mc_skin_t *mc_skin, const gchar *group, const gchar *key, mc_skin_color_t *mc_skin_color)
+{
+    gchar *key_name;
+
+    key_name = mc_skin_color_make_hash_key(group, key);
+    if (key_name == NULL)
+	return;
+
+    if ( g_hash_table_lookup (mc_skin->colors, (gpointer) key_name) != NULL )
+    {
+	g_hash_table_remove (mc_skin->colors, (gpointer) key_name);
+    }
+
+    g_hash_table_insert (mc_skin->colors, (gpointer) key_name, (gpointer) mc_skin_color);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static mc_skin_color_t *
+mc_skin_color_get_with_defaults(const gchar *group, const gchar *name)
+{
+    mc_skin_color_t *mc_skin_color;
+
+    mc_skin_color =  mc_skin_color_get_from_hash(NULL, group, name);
+    if (mc_skin_color != NULL)
+	return mc_skin_color;
+
+    mc_skin_color =  mc_skin_color_get_from_hash(NULL, group, "_default_");
+    if (mc_skin_color != NULL)
+	return mc_skin_color;
+
+    mc_skin_color =  mc_skin_color_get_from_hash(NULL, "core", "_default_");
+    return mc_skin_color;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static mc_skin_color_t *
+mc_skin_color_get_from_ini_file(mc_skin_t *mc_skin, const gchar *group, const gchar *key)
+{
+    gsize items_count;
+    gchar **values;
+    mc_skin_color_t *mc_skin_color, *tmp;
+
+    values = mc_config_get_string_list (mc_skin->config, group, key,  &items_count);
+
+    if (values == NULL || *values == NULL)
+    {
+	if (values)
+	    g_strfreev(values);
+	return NULL;
+    }
+    mc_skin_color = g_new0(mc_skin_color_t,1);
+    if (mc_skin_color == NULL)
+    {
+	g_strfreev(values);
+	return NULL;
+    }
+
+    switch (items_count)
+    {
+    case 0:
+	tmp  = mc_skin_color_get_with_defaults(group, "_default_");
+	if (tmp)
+	{
+	    mc_skin_color->fgcolor = g_strdup(tmp->fgcolor);
+	    mc_skin_color->bgcolor = g_strdup(tmp->bgcolor);
+	}
+	else
+	{
+	    g_strfreev(values);
+	    g_free(mc_skin_color);
+	    return NULL;
+	}
+    break;
+    case 1:
+	mc_skin_color->fgcolor = (values[0]) ? g_strdup(values[0]) : NULL;
+	tmp  = mc_skin_color_get_with_defaults(group, "_default_");
+	if (tmp)
+	    mc_skin_color->bgcolor = g_strdup(tmp->bgcolor);
+	else
+
+	    mc_skin_color->bgcolor = NULL;
+    break;
+    case 2:
+	mc_skin_color->fgcolor = (values[0]) ? g_strdup(values[0]) : NULL;
+	mc_skin_color->bgcolor = (values[1]) ? g_strdup(values[1]) : NULL;
+    break;
+    }
+    g_strfreev (values);
+
+    mc_skin_color->pair_index = tty_try_alloc_color_pair (mc_skin_color->fgcolor, mc_skin_color->bgcolor);
+
+    return mc_skin_color;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+mc_skin_color_set_default_for_terminal(mc_skin_t *mc_skin)
+{
+    mc_skin_color_t *mc_skin_color;
+    mc_skin_color = g_new0(mc_skin_color_t,1);
+    if (mc_skin_color == NULL)
+	return;
+
+    mc_skin_color->fgcolor = g_strdup("default");
+    mc_skin_color->bgcolor = g_strdup("default");
+    mc_skin_color->pair_index = tty_try_alloc_color_pair (mc_skin_color->fgcolor, mc_skin_color->bgcolor);
+    mc_skin_color_add_to_hash(mc_skin, "skin", "terminal_default_color", mc_skin_color);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+static void
+mc_skin_color_cache_init(void)
+{
+    DEFAULT_COLOR = mc_skin_color_get("skin", "terminal_default_color");
+    NORMAL_COLOR = mc_skin_color_get("core", "_default_");
+    MARKED_COLOR = mc_skin_color_get("core", "marked");
+    SELECTED_COLOR = mc_skin_color_get("core", "selected");
+    REVERSE_COLOR  = mc_skin_color_get("core", "reverse");
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+gboolean
+mc_skin_color_parce_ini_file(mc_skin_t *mc_skin)
+{
+    gsize items_count;
+    gchar **groups, **orig_groups;
+    gchar **keys, **orig_keys;
+    mc_skin_color_t *mc_skin_color;
+
+    orig_groups = groups = mc_config_get_groups (mc_skin->config, &items_count);
+
+    if (groups == NULL || *groups == NULL)
+    {
+	if (groups)
+	    g_strfreev(groups);
+	return FALSE;
+    }
+
+    /* as first, need to set up default colors */
+    mc_skin_color_set_default_for_terminal(mc_skin);
+    mc_skin_color = mc_skin_color_get_from_ini_file(mc_skin, "core", "_default_");
+    if (mc_skin_color == NULL)
+	return FALSE;
+
+    mc_skin_color_add_to_hash(mc_skin, "core", "_default_", mc_skin_color);
+
+
+    for(;*groups; groups++)
+    {
+	if (strcasecmp("skin",*groups) == 0)
+	    continue;
+	if (strcasecmp("lines",*groups) == 0)
+	    continue;
+
+	orig_keys = keys = mc_config_get_keys (mc_skin->config, *groups , &items_count);
+	if (keys == NULL || *keys == NULL)
+	{
+	    if (keys)
+		g_strfreev(keys);
+	    continue;
+	}
+
+	for(;*keys; keys++)
+	{
+	    mc_skin_color = mc_skin_color_get_from_ini_file(mc_skin, *groups, *keys);
+	    if (mc_skin_color == NULL)
+		continue;
+	    mc_skin_color_add_to_hash(mc_skin, *groups, *keys, mc_skin_color);
+	}
+	g_strfreev(orig_keys);
+    }
+    g_strfreev(orig_groups);
+
+    mc_skin_color_cache_init();
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+int
+mc_skin_color_get(const gchar *group, const gchar *name)
+{
+    mc_skin_color_t *mc_skin_color;
+
+    mc_skin_color = mc_skin_color_get_with_defaults(group, name);
+    if (mc_skin_color == NULL)
+	return 0;
+
+    return mc_skin_color->pair_index;
+}
+
+/* --------------------------------------------------------------------------------------------- */

@@ -12,7 +12,7 @@ else
 endif
 
 TTY_SRC = \
-	color-internal.c color-internal.h\
+	color-internal.c color-internal.h \
 	color.c color.h \
 	key.c key.h keyxdef.c \
 	mouse.c mouse.h \
