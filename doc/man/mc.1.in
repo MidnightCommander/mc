@@ -66,10 +66,51 @@ the last directory the Midnight Commander was in.  Source the file
 .B mc
 as an alias to the appropriate shell script.
 .TP
-.I \-s, \-\-slow
-Turn on the slow terminal mode, in this mode the program will not
-draw expensive line drawing characters and will toggle verbose mode
-off.
+.I \-s
+Set alternative mode drawing of frameworks.
+If the section [Lines] is not filled, the symbol for the pseudographics
+frame is a space, otherwise the frame characters are taken from follow params.
+
+.B You can redefine follow variables:
+.TP
+.B lefttop
+left\-top corner
+.TP
+.B righttop
+right\-top corner
+.TP
+.B centertop
+center-top cross
+.TP
+.B centerbottom
+center\-bottom cross
+.TP
+.B leftbottom
+left\-bottom corner
+.TP
+.B rightbottom
+right\-bottom corner
+.TP
+.B leftmiddle
+left\-middle cross
+.TP
+.B rightmiddle
+right\-middle cross
+.TP
+.B centermiddle
+center cross
+.TP
+.B horiz
+default horizontal line
+.TP
+.B vert
+default vertical line
+.TP
+.B thinhoriz
+thin horizontal line
+.TP
+.B thinvert
+thin vertical line
 .TP
 .I \-t, \-\-termcap
 Used only if the code was compiled with Slang and terminfo: it makes
