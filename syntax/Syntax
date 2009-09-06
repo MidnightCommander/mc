@@ -193,6 +193,9 @@ include haskell.syntax
 file ..\*\\.(n|N)$ Nemerle\sProgram
 include nemerle.syntax
 
+file ..\*\\.(v|V)$ Verilog\sDevice\sDescription
+include verilog.syntax
+
 file ..\*\\.(hdl|vhd|vdhl|HDL|VHD|VHDL)$ VHDL\sDevice\sDescription
 include vhdl.syntax
 
