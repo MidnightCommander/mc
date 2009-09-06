@@ -135,14 +135,18 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
 void
 editcmd_dialog_search_show (WEdit * edit, char **search_text)
 {
-    int dialog_result;
-    int i;
-    int btn_pos, dlg_width;
+
     if (*search_text == '\0')
         *search_text = INPUT_LAST_TEXT;
+
     {
 	gchar **list_of_types = mc_search_get_types_strings_array();
 	int SEARCH_DLG_HEIGHT = SEARCH_DLG_MIN_HEIGHT + g_strv_length (list_of_types) - SEARCH_DLG_HEIGHT_SUPPLY;
+
+	int i;
+	int btn_pos, dlg_width;
+	int dialog_result;
+
 	QuickWidget quick_widgets[] =
 	{
 	    /* 0 */
@@ -174,39 +178,44 @@ editcmd_dialog_search_show (WEdit * edit, char **search_text)
 	    QUICK_END
 	};
 
-#ifdef ENABLE_NLS
-	for (i = 0; i < 3; i++)
-	    quick_widgets[i].u.button.text = _(quick_widgets[i].u.button.text);
-#endif
-
-    /* calculate button positions */
-    btn_pos = 7;
-
-    for (i = 2; i > -1; i--) {
-        quick_widgets[i].relative_x = btn_pos;
-        btn_pos += str_term_width1 (quick_widgets[i].u.button.text) + 7;
-        if (i == 2) /* default button */
-            btn_pos += 2;
-    }
-
-    dlg_width = btn_pos + 2;
-
-    /* correct widget coordinates */
-    for (i = 0; i <  10; i++)
-	quick_widgets[i].x_divisions = dlg_width;
-
-
 	QuickDialog Quick_input =
 	{
 	    SEARCH_DLG_WIDTH, SEARCH_DLG_HEIGHT, -1, -1, N_("Search"),
-	    "[Input Line Keys]", quick_widgets, FALSE
+	    "[Input Line Keys]", quick_widgets, TRUE
 	};
+
+
+#ifdef ENABLE_NLS
+	/* butons */
+	for (i = 0; i < 3; i++)
+	    quick_widgets[i].u.button.text = _(quick_widgets[i].u.button.text);
+	/* checkboxes */
+	for (i = 3; i < 8; i++)
+	    quick_widgets[i].u.checkbox.text = _(quick_widgets[i].u.checkbox.text);
+#endif
+
+	/* calculate button positions */
+	btn_pos = 7;
+
+	for (i = 2; i >= 0; i--) {
+	    quick_widgets[i].relative_x = btn_pos;
+	    btn_pos += str_term_width1 (quick_widgets[i].u.button.text) + 7;
+	    if (i == 2) /* default button */
+		btn_pos += 2;
+	}
+
+	dlg_width = btn_pos + 2;
+
+	/* correct widget coordinates */
+	for (i = 0; i < sizeof (quick_widgets)/sizeof (quick_widgets[0]); i++)
+	    quick_widgets[i].x_divisions = dlg_width;
+
 	dialog_result = quick_dialog (&Quick_input);
 
 	if (dialog_result == B_CANCEL)
 	    *search_text = NULL;
-        if (dialog_result == B_USER)
-            search_create_bookmark = 1;
+	else if (dialog_result == B_USER)
+	    search_create_bookmark = 1;
     }
 }
 
