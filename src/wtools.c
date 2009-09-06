@@ -335,14 +335,18 @@ message (int flags, const char *title, const char *text, ...)
 int
 quick_dialog_skip (QuickDialog *qd, int nskip)
 {
-#define I18N(x) (!qd->i18n && x && *x ? (x = _(x)): x)
+#ifdef ENABLE_NLS
+#define I18N(x) (x = !qd->i18n && x && *x ? _(x): x)
+#else
+#define I18N(x) (x = x)
+#endif
     Dlg_head *dd;
     QuickWidget *qw;
     WInput *in;
     WRadio *r;
     int return_val;
 
-    (void) I18N (qd->title);
+    I18N (qd->title);
 
     if ((qd->xpos == -1) || (qd->ypos == -1))
 	dd = create_dlg (0, 0, qd->ylen, qd->xlen,
@@ -387,10 +391,15 @@ quick_dialog_skip (QuickDialog *qd, int nskip)
 	    break;
 
 	case quick_radio:
+	{
+	    int i;
 	    r = radio_new (ypos, xpos, qw->u.radio.count, qw->u.radio.items);
+	    for (i = 0; i < qw->u.radio.count; i++)
+		I18N (qw->u.radio.items[i]);
 	    r->pos = r->sel = *qw->u.radio.value;
 	    qw->widget = (Widget *) r;
 	    break;
+	}
 
 	default:
 	    qw->widget = NULL;
