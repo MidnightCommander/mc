@@ -225,8 +225,9 @@ void gauge_show (WGauge *g, int shown);
 
 /* Buttons */
 /* return copy of button text */
-const char *button_get_text (WButton *b);
+const char *button_get_text (const WButton *b);
 void button_set_text (WButton *b, const char *text);
+int button_get_len (const WButton *b);
 
 /* Listbox manager */
 WLEntry *listbox_get_data (WListbox *l, int pos);
