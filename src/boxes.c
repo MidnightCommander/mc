@@ -1,16 +1,16 @@
 /* Some misc dialog boxes for the program.
-   
+
    Copyright (C) 1994, 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004,
    2005, 2006, 2009 Free Software Foundation, Inc.
-   
+
    Authors: 1994, 1995 Miguel de Icaza
             1995 Jakub Jelinek
-   
+
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2 of the License, or
    (at your option) any later version.
-   
+
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -40,14 +40,15 @@
 #include "../src/tty/color.h"		/* INPUT_COLOR */
 #include "../src/tty/key.h"		/* XCTRL and ALT macros  */
 
+#include "../src/mcconfig/mcconfig.h"	/* Load/save user formats */
+
 #include "dialog.h"		/* The nice dialog manager */
 #include "widget.h"		/* The widgets for the nice dialog manager */
 #include "wtools.h"
 #include "setup.h"		/* For profile_name */
-#include "../src/mcconfig/mcconfig.h"	/* Load/save user formats */
 #include "command.h"		/* For cmdline */
 #include "dir.h"
-#include "panel.h"
+#include "panel.h"		/* LIST_TYPES */
 #include "boxes.h"
 #include "main.h"		/* For the confirm_* variables */
 #include "tree.h"
@@ -68,7 +69,6 @@
 #include "../vfs/gc.h"
 #endif
 
-static int DISPLAY_X = 45, DISPLAY_Y = 14;
 
 static Dlg_head *dd;
 static WRadio *my_radio;
@@ -78,18 +78,6 @@ static WCheck *check_status;
 static int current_mode;
 
 static char **displays_status;
-
-/* Controls whether the array strings have been translated */
-static const char *displays [LIST_TYPES] = {
-    N_("&Full file list"),
-    N_("&Brief file list"),
-    N_("&Long file list"),
-    N_("&User defined:")
-};
-
-/* Index in displays[] for "user defined" */
-#define USER_TYPE 3
-
 static int user_hotkey = 'u';
 
 static cb_ret_t
@@ -142,71 +130,89 @@ static void
 display_init (int radio_sel, char *init_text, int _check_status,
 	      char **_status)
 {
-    static const char *display_title = N_("Listing mode");
-    static gboolean i18n_displays_flag = FALSE;
-    const char *user_mini_status = _("user &Mini status");
-    const char *ok_button = _("&OK");
-    const char *cancel_button = _("&Cancel");
+    int dlg_width = 48, dlg_height = 15;
 
-    static int button_start = 30;
+    /* Controls whether the array strings have been translated */
+    const char *displays [LIST_TYPES] =
+    {
+	N_("&Full file list"),
+	N_("&Brief file list"),
+	N_("&Long file list"),
+	N_("&User defined:")
+    };
+
+    /* Index in displays[] for "user defined" */
+    const int user_type_idx = 3;
+
+    const char *display_title = N_("Listing mode");
+    const char *user_mini_status = N_("user &Mini status");
+    const char *ok_name = N_("&OK");
+    const char *cancel_name = N_("&Cancel");
+
+    WButton *ok_button, *cancel_button;
+
+    {
+	int i, maxlen = 0;
+	const char *cp;
+	int ok_len, cancel_len;
+
+#ifdef ENABLE_NLS
+	display_title = _(display_title);
+	user_mini_status = _(user_mini_status);
+	ok_name = _(ok_name);
+	cancel_name = _(cancel_name);
+
+	for (i = 0; i < LIST_TYPES; i++)
+	    displays[i] = _(displays[i]);
+#endif
+
+	/* get hotkey of user-defined format string */
+	cp = strchr (displays[user_type_idx], '&');
+	if (cp != NULL && *++cp != '\0')
+	    user_hotkey = g_ascii_tolower (*cp);
+
+	/* xpos will be fixed later */
+	ok_button = button_new (dlg_height - 3, 0, B_ENTER, DEFPUSH_BUTTON, ok_name, 0);
+	ok_len = button_get_len (ok_button);
+	cancel_button = button_new (dlg_height - 3, 0, B_CANCEL, NORMAL_BUTTON, cancel_name, 0);
+	cancel_len = button_get_len (cancel_button);
+
+	dlg_width = max (dlg_width, str_term_width1 (display_title) + 10);
+	/* calculate max width of radiobutons */
+	for (i = 0; i < LIST_TYPES; i++)
+	    maxlen = max (maxlen, str_term_width1 (displays[i]));
+	dlg_width = max (dlg_width, maxlen);
+	dlg_width = max (dlg_width, str_term_width1 (user_mini_status) + 13);
+
+	/* buttons */
+	dlg_width = max (dlg_width, ok_len + cancel_len + 8);
+	ok_button->widget.x = dlg_width/3 - ok_len/2;
+	cancel_button->widget.x = dlg_width * 2/3 - cancel_len/2;
+    }
 
     displays_status = _status;
 
-    if (!i18n_displays_flag) {
-	int i, l, maxlen = 0;
-	const char *cp;
-
-	display_title = _(display_title);
-	for (i = 0; i < LIST_TYPES; i++) {
-#ifdef ENABLE_NLS
-	    displays[i] = _(displays[i]);
-#endif
-	    maxlen = max (maxlen, str_term_width1 (displays[i]));
-	}
-
-	l = max (str_term_width1 (ok_button) + 5, str_term_width1 (cancel_button) + 3);
-	DISPLAY_X = max (DISPLAY_X, maxlen + l + 16);
-	DISPLAY_X = max (DISPLAY_X, str_term_width1 (user_mini_status) + 13);
-	DISPLAY_X = max (DISPLAY_X, str_term_width1 (display_title) + 10);
-	button_start = DISPLAY_X - l - 5;
-
-	/* get hotkey of user-defined format string */
-	cp = strchr (displays[USER_TYPE], '&');
-	if (cp != NULL && *++cp != '\0')
-	    user_hotkey = g_ascii_tolower ((gchar) cp[0]);
-
-	i18n_displays_flag = TRUE;
-    }
-
-    dd = create_dlg (0, 0, DISPLAY_Y, DISPLAY_X, dialog_colors,
+    dd = create_dlg (0, 0, dlg_height, dlg_width, dialog_colors,
 		     display_callback, "[Listing Mode...]", display_title,
 		     DLG_CENTER | DLG_REVERSE);
 
-    add_widget (dd,
-		button_new (4, button_start, B_CANCEL, NORMAL_BUTTON,
-			    cancel_button, 0));
+    add_widget (dd, cancel_button);
+    add_widget (dd, ok_button);
 
-    add_widget (dd,
-		button_new (3, button_start, B_ENTER, DEFPUSH_BUTTON,
-			    ok_button, 0));
-
-    status =
-	input_new (10, 9, INPUT_COLOR, DISPLAY_X - 14, _status[radio_sel],
-		   "mini-input", INPUT_COMPLETE_DEFAULT);
+    status = input_new (10, 8, INPUT_COLOR, dlg_width - 12, _status[radio_sel],
+			    "mini-input", INPUT_COMPLETE_DEFAULT);
     add_widget (dd, status);
     input_set_point (status, 0);
 
-    check_status =
-	check_new (9, 5, _check_status, user_mini_status);
+    check_status = check_new (9, 4, _check_status, user_mini_status);
     add_widget (dd, check_status);
 
-    user =
-	input_new (7, 9, INPUT_COLOR, DISPLAY_X - 14, init_text,
-		   "user-fmt-input", INPUT_COMPLETE_DEFAULT);
+    user = input_new (7, 8, INPUT_COLOR, dlg_width - 12, init_text,
+			"user-fmt-input", INPUT_COMPLETE_DEFAULT);
     add_widget (dd, user);
     input_set_point (user, 0);
 
-    my_radio = radio_new (3, 5, LIST_TYPES, displays);
+    my_radio = radio_new (3, 4, LIST_TYPES, displays);
     my_radio->sel = my_radio->pos = current_mode;
     add_widget (dd, my_radio);
 }
@@ -214,7 +220,8 @@ display_init (int radio_sel, char *init_text, int _check_status,
 int
 display_box (WPanel *panel, char **userp, char **minip, int *use_msformat, int num)
 {
-    int result, i;
+    int result = -1;
+    int i;
     char *section = NULL;
     const char *p;
 
@@ -224,8 +231,8 @@ display_box (WPanel *panel, char **userp, char **minip, int *use_msformat, int n
         panel->list_type = list_full;
         panel->user_format = g_strdup (DEFAULT_USER_FORMAT);
         panel->user_mini_status = 0;
-	for (i = 0; i < LIST_TYPES; i++)
-    	    panel->user_status_format[i] = g_strdup (DEFAULT_USER_FORMAT);
+        for (i = 0; i < LIST_TYPES; i++)
+            panel->user_status_format[i] = g_strdup (DEFAULT_USER_FORMAT);
         section = g_strconcat ("Temporal:", p, (char *) NULL);
         if (! mc_config_has_group (mc_main_config, section)) {
             g_free (section);
@@ -238,24 +245,21 @@ display_box (WPanel *panel, char **userp, char **minip, int *use_msformat, int n
     current_mode = panel->list_type;
     display_init (current_mode, panel->user_format, 
 	panel->user_mini_status, panel->user_status_format);
-		  
-    run_dlg (dd);
 
-    result = -1;
-    
+    if (run_dlg (dd) != B_CANCEL) {
+	result = my_radio->sel;
+	*userp = g_strdup (user->buffer);
+	*minip = g_strdup (status->buffer);
+	*use_msformat = check_status->state & C_BOOL;
+    }
+
     if (section) {
         g_free (panel->user_format);
 	for (i = 0; i < LIST_TYPES; i++)
 	   g_free (panel->user_status_format [i]);
         g_free (panel);
     }
-    
-    if (dd->ret_value != B_CANCEL){
-	result = my_radio->sel;
-	*userp = g_strdup (user->buffer);
-	*minip = g_strdup (status->buffer);
-	*use_msformat = check_status->state & C_BOOL;
-    }
+
     destroy_dlg (dd);
 
     return result;
