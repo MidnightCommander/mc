@@ -264,91 +264,94 @@ display_box (WPanel *panel, char **userp, char **minip, int *use_msformat, int n
     return result;
 }
 
-static int SORT_X = 60, SORT_Y = 14;
-
-static const char *sort_orders_names [SORT_TYPES];
-
 sortfn *
 sort_box (sortfn *sort_fn, int *reverse, int *case_sensitive, int *exec_first)
 {
-    Dlg_head *dd;
+    int dlg_width = 40, dlg_height = 15;
 
-    int i;
-    sortfn *result = NULL;
-    WRadio *radio;
-    WCheck *c, *case_sense, *exec_ff;
-    int current_mode = 0;
+    char *sort_orders_names [SORT_TYPES];
+    int sort_idx = 0;
 
-    const char *ok_button = _("&OK");
-    const char *cancel_button = _("&Cancel");
-    const char *reverse_label = _("&Reverse");
-    const char *case_label = _("case sensi&tive");
-    const char *sort_title = _("Sort order");
-    const char *exec_label = _("Executable first");
+    sortfn *result = sort_fn;
 
-    static int i18n_sort_flag = 0, check_pos = 0, button_pos = 0;
+    {
+	int max_radio = 0, max_check = 0;
+	int ok_len, cancel_len;
+	int i;
 
-    if (!i18n_sort_flag) {
-	int maxlen = 0;
-	int r, l;
+	QuickWidget quick_widgets[] =
+	{
+	    /* 0 */ QUICK_BUTTON (0, dlg_width, dlg_height - 3, dlg_height, N_("&Cancel"), B_CANCEL, NULL),
+	    /* 1 */ QUICK_BUTTON (0, dlg_width, dlg_height - 3, dlg_height, N_("&OK"), B_ENTER, NULL),
+	    /* 2 */ QUICK_CHECKBOX (0, dlg_width, 5, dlg_height, N_("&Reverse"), reverse),
+	    /* 3 */ QUICK_CHECKBOX (0, dlg_width, 4, dlg_height, N_("Case sensi&tive"), case_sensitive),
+	    /* 4 */ QUICK_CHECKBOX (0, dlg_width, 3, dlg_height, N_("Executable &first"), exec_first),
+	    /* 5 */ QUICK_RADIO (4, dlg_width, 3, dlg_height, SORT_TYPES,
+				    (const char **) sort_orders_names, &sort_idx),
+	    QUICK_END
+	};
 
-	for (i = SORT_TYPES - 1; i >= 0; i--) {
+	QuickDialog quick_dlg =
+	{
+	    dlg_width, dlg_height, -1, -1,
+	    N_("Sort order"), "[Sort Order...]",
+	    quick_widgets, TRUE
+	};
+
+	for (i = 0; i < SORT_TYPES; i++)
+	    if ((sortfn *) (sort_orders[i].sort_fn) == sort_fn) {
+		sort_idx = i;
+		break;
+	    }
+
 #ifdef ENABLE_NLS
+	quick_dlg.title = _(quick_dlg.title);
+	/* buttons */
+	for (i = 0; i < 2; i++)
+	    quick_widgets[i].u.button.text = _(quick_widgets[i].u.button.text);
+	/* checkboxes */
+	for (i = 2; i < 5; i++)
+	    quick_widgets[i].u.checkbox.text = _(quick_widgets[i].u.checkbox.text);
+	/* radiobuttons */
+	for (i = 0; i < SORT_TYPES; i++)
 	    sort_orders_names[i] = _(sort_orders[i].sort_name);
-#endif
-	    maxlen = max (maxlen, str_term_width1 (sort_orders_names[i]));
-	}
+#else
+	/* radiobuttons */
+	for (i = 0; i < SORT_TYPES; i++)
+	    sort_orders_names[i] = sort_orders[i].sort_name;
+#endif				/* ENABLE_NlS */
 
-	check_pos = maxlen + 9;
-	r = max (str_term_width1 (reverse_label), str_term_width1 (case_label)) + 4;
-	l = max (str_term_width1 (ok_button) + 2, str_term_width1 (cancel_button)) + 4;
+	/* buttons */
+	cancel_len = str_term_width1 (quick_widgets[0].u.button.text) + 4;
+	ok_len = str_term_width1 (quick_widgets[1].u.button.text) + 6;
+	/* checkboxes */
+	for (i = 2; i < 5; i++)
+	    max_check = max (max_check, str_term_width1 (quick_widgets[i].u.checkbox.text) + 4);
+	/* radiobuttons */
+	for (i = 0; i < SORT_TYPES; i++)
+	    max_radio  = max (max_radio, str_term_width1 (sort_orders_names[i]) + 4);
 
-	SORT_X = max (SORT_X, check_pos + max (r, l) + 2);
-	SORT_X = max (SORT_X, str_term_width1 (sort_title) + 6);
+	/* dialog width */
+	dlg_width = max (dlg_width, str_term_width1 (quick_dlg.title) + 8);
+	dlg_width = max (dlg_width, ok_len + cancel_len + 8);
+	dlg_width = max (dlg_width, 2 * max (max_radio, max_check) + 8);
 
-	button_pos = SORT_X - l - 2;
+	/* fix widget and dialog parameters */
+	/* dialog */
+	quick_dlg.xlen = dlg_width;
+	/* widgets */
+	for (i = 0; i < sizeof (quick_widgets)/sizeof (quick_widgets[0]) - 1; i++)
+	    quick_widgets[i].x_divisions = dlg_width;
+	/* buttons */
+	quick_widgets[0].relative_x = dlg_width * 2/3 - cancel_len/2;
+	quick_widgets[1].relative_x = dlg_width/3 - ok_len/2;
+	/* checkboxes */
+	for (i = 2; i < 5; i++)
+	    quick_widgets[i].relative_x = dlg_width/2 + 2;
 
-	i18n_sort_flag = 1;
+	if (quick_dialog (&quick_dlg) != B_CANCEL)
+	    result = (sortfn *) sort_orders[sort_idx].sort_fn;
     }
-
-    for (i = 0; i < SORT_TYPES; i++)
-	if ((sortfn *) (sort_orders[i].sort_fn) == sort_fn) {
-	    current_mode = i;
-	    break;
-	}
-
-    dd = create_dlg (0, 0, SORT_Y, SORT_X, dialog_colors, NULL,
-		     "[Sort Order...]", sort_title, DLG_CENTER | DLG_REVERSE);
-
-    add_widget (dd,
-		button_new (10, button_pos, B_CANCEL, NORMAL_BUTTON,
-			    cancel_button, 0));
-
-    add_widget (dd,
-		button_new (9, button_pos, B_ENTER, DEFPUSH_BUTTON,
-			    ok_button, 0));
-
-    exec_ff = check_new (5, check_pos, *exec_first, exec_label);
-    add_widget (dd, exec_ff);
-    case_sense = check_new (4, check_pos, *case_sensitive, case_label);
-    add_widget (dd, case_sense);
-    c = check_new (3, check_pos, *reverse, reverse_label);
-    add_widget (dd, c);
-
-    radio = radio_new (3, 3, SORT_TYPES, sort_orders_names);
-    radio->sel = radio->pos = current_mode;
-
-    add_widget (dd, radio);
-
-    if (run_dlg (dd) == B_CANCEL)
-	result = sort_fn;
-    else {
-	result = (sortfn *) sort_orders[radio->sel].sort_fn;
-	*reverse = c->state & C_BOOL;
-	*case_sensitive = case_sense->state & C_BOOL;
-	*exec_first = exec_ff->state & C_BOOL;
-    }
-    destroy_dlg (dd);
 
     return result;
 }
