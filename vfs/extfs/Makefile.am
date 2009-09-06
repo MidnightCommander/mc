@@ -6,7 +6,7 @@ EXTFSCONFFILES = extfs.ini sfs.ini
 EXTFS_MISC  = README
 
 # Scripts hat don't need adaptation to the local system
-EXTFS_CONST = bpp rpm trpm srpm u7z ucab
+EXTFS_CONST = bpp rpm trpm u7z ucab
 
 # Scripts that need adaptation to the local system - source files
 EXTFS_IN    = 			\
@@ -72,3 +72,9 @@ endif
 
 EXTRA_DIST = $(EXTFS_MISC) $(EXTFS_CONST) $(EXTFSCONFFILES)
 
+install-exec-local:
+	$(MKDIR_P) $(DESTDIR)$(extfsdir)
+	$(LN_S) rpm $(DESTDIR)$(extfsdir)/srpm
+
+uninstall-local:
+	-rm $(DESTDIR)$(extfsdir)/srpm

@@ -19,8 +19,15 @@ unset LC_ALL
 LC_TIME=C
 export LC_TIME
 
+if rpmbuild --version >/dev/null 2>&1; then
+	RPMBUILD="rpmbuild"
+else
+	RPMBUILD="rpm"
+fi
+
 if rpm --nosignature --version >/dev/null 2>&1; then
   RPM="rpm --nosignature"
+  RPMBUILD="$RPMBUILD --nosignature"
 else
   RPM="rpm"
 fi
@@ -48,7 +55,14 @@ mcrpmfs_list ()
     HEADERSIZE=`echo "$DESC" | wc -c`
     echo "-r--r--r--   1 root     root  $HEADERSIZE $DATE HEADER"
     echo "-r-xr-xr-x   1 root     root    39 $DATE INSTALL"
-    echo "-r-xr-xr-x   1 root     root    39 $DATE UPGRADE"
+    case "$f" in
+		*.src.rpm)
+		echo "-r-xr-xr-x   1 root     root    39 $DATE REBUILD"
+		;;
+		*)
+		echo "-r-xr-xr-x   1 root     root    39 $DATE UPGRADE"
+		;;
+	esac
     echo "dr-xr-xr-x   3 root     root	   0 $DATE INFO"
     echo "$FILEPREF 0 $DATE INFO/NAME-VERSION-RELEASE"
     echo "$FILEPREF 0 $DATE INFO/GROUP"
@@ -138,6 +152,7 @@ mcrpmfs_copyout ()
 	HEADER) $RPM -qip "$f" > "$3"; exit 0;;
 	INSTALL) echo "# Run this to install this RPM package" > "$3"; exit 0;;
 	UPGRADE) echo "# Run this to upgrade this RPM package" > "$3"; exit 0;;
+	REBUILD) echo "# Run this to rebuild this RPM package" > "$3"; exit 0;;
 	ERROR) $RPM -qip "$f" > /dev/null 2> "$3"; exit 0;;
 	INFO/NAME-VERSION-RELEASE)	$RPM -qp --qf "%{NAME}-%{VERSION}-%{RELEASE}\n" "$f" > "$3"; exit 0;;
 	INFO/RELEASE)		$RPM -qp --qf "%{RELEASE}\n" "$f" > "$3"; exit 0;;
@@ -179,6 +194,7 @@ mcrpmfs_run ()
     case "$2" in
 	INSTALL) echo "Installing \"\"$f\"\""; $RPM -ivh "$f"; exit 0;;
 	UPGRADE) echo "Upgrading \"\"$f\"\""; $RPM -Uvh "$f"; exit 0;;
+	REBUILD) echo "Rebuilding \"$1\""; $RPMBUILD --rebuild "$1"; exit 0;;
     esac
 }
 
