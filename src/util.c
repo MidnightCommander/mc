@@ -320,7 +320,7 @@ size_trunc_sep (double size)
  *    0=bytes, 1=Kbytes, 2=Mbytes, etc.
  */
 void
-size_trunc_len (char *buffer, int len, off_t size, int units)
+size_trunc_len (char *buffer, unsigned int len, off_t size, int units)
 {
     /* Avoid taking power for every file.  */
     static const off_t power10 [] =
@@ -333,8 +333,7 @@ size_trunc_len (char *buffer, int len, off_t size, int units)
     int j = 0;
     int size_remain;
 
-    /* Don't print more than 9 digits - use suffix.  */
-    if (len == 0 || len > 9)
+    if (len == 0)
 	len = 9;
 
     /*

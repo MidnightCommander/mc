@@ -222,7 +222,7 @@ string_file_size (file_entry *fe, int len)
     else
 #endif
     {
-	size_trunc_len (buffer, len, fe->st.st_size, 0);
+	size_trunc_len (buffer, (unsigned int) len, fe->st.st_size, 0);
     }
     return buffer;
 }
