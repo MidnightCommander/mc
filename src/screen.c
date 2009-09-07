@@ -715,8 +715,7 @@ mini_info_separator (WPanel *panel)
 
     tty_setcolor (NORMAL_COLOR);
     tty_draw_hline (panel->widget.y + y, panel->widget.x + 1,
-		    tty_is_slow () ? '-' : ACS_HLINE,
-		    panel->widget.cols - 2);
+		    ACS_HLINE, panel->widget.cols - 2);
     /* Status displays total marked size.
      * Centered in panel, full format. */
     display_total_marked_size (panel, y, -1, FALSE);
@@ -769,7 +768,7 @@ show_dir (WPanel *panel)
 		 panel->widget.y, panel->widget.x,
 		 panel->widget.lines, panel->widget.cols);
 
-    if (show_mini_info && !tty_is_slow ()) {
+    if (show_mini_info) {
 	widget_move (&panel->widget, llines (panel) + 2, 0);
 	tty_print_alt_char (ACS_LTEE);
 	widget_move (&panel->widget, llines (panel) + 2,

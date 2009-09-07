@@ -77,6 +77,21 @@ extern void tty_draw_box (int y, int x, int rows, int cols);
 extern void tty_draw_box_slow (int y, int x, int ys, int xs);
 extern void tty_fill_region (int y, int x, int rows, int cols, unsigned char ch);
 
+extern int mc_tty_ugly_frm[];
+
+typedef enum{
+    MC_TTY_FRM_thinvert,
+    MC_TTY_FRM_thinhoriz,
+    MC_TTY_FRM_vert,
+    MC_TTY_FRM_horiz,
+    MC_TTY_FRM_lefttop,
+    MC_TTY_FRM_righttop,
+    MC_TTY_FRM_leftbottom,
+    MC_TTY_FRM_rightbottom,
+    MC_TTY_FRM_leftmiddle,
+    MC_TTY_FRM_rightmiddle
+} mc_tty_frm_t;
+
 extern char *tty_tgetstr (const char *name);
 
 extern void tty_beep (void);

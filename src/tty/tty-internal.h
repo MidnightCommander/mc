@@ -11,6 +11,9 @@
 /* If true lines are shown by spaces */
 extern gboolean slow_tty;
 
+/* If true use +, -, | for line drawing */
+extern gboolean ugly_line_drawing;
+
 /* The mouse is currently: TRUE - enabled, FALSE - disabled */
 extern gboolean mouse_enabled;
 
