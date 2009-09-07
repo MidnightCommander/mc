@@ -1,0 +1,240 @@
+# This is Cooledit syntax-file for verilog
+# Created by Andres Farfan, <nafraf@linuxmail.org>
+# Feel free to copy & modify this.
+# 09/2004
+
+wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_
+
+# default colors
+context default
+
+
+#Preprocessor keywords
+  keyword  whole  `resetall		brightred/
+  keyword  whole  `define		brightred/
+  keyword  whole  `timescale		brightred/
+  keyword  whole  `ifdef		brightred/
+  keyword  whole  `else			brightred/
+  keyword  whole  `endif		brightred/
+  keyword  whole  `include		brightred/
+  keyword  whole  `signed		brightred/
+  keyword  whole  `unsigned		brightred/
+  keyword  whole  `celldefine		brightred/
+  keyword  whole  `endcelldefine	brightred/
+  keyword  whole  `default_nettype	brightred/
+  keyword  whole  `unconnected_drive	brightred/
+  keyword  whole  `nounconnected_drive	brightred/
+  keyword  whole  `accelerate		brightred/
+  keyword  whole  `noaccelerate		brightred/
+  keyword  whole  `protect		brightred/
+  keyword  whole  `endprotect		brightred/
+  keyword  whole  `protected		brightred/
+  keyword  whole  `endprotected		brightred/
+  keyword  whole  `expand_vectornets	brightred/
+  keyword  whole  `noexpand_vectornets	brightred/
+  keyword  whole  `autoexpand_vectornets brightred/
+  keyword  whole  `remove_gatenames	brightred/
+  keyword  whole  `noremove_gatenames	brightred/
+  keyword  whole  `remove_netnames	brightred/
+  keyword  whole  `noremove_netnames	brightred/
+
+
+#Reserved Keywords 1
+  keyword  whole  always	yellow
+  keyword  whole  and		yellow
+  keyword  whole  assign	yellow
+  keyword  whole  attribute	yellow
+  keyword  whole  begin	 	yellow
+  keyword  whole  buf		yellow
+  keyword  whole  bufif0	yellow
+  keyword  whole  bufif1	yellow
+  keyword  whole  case		yellow
+  keyword  whole  casex	 	yellow
+  keyword  whole  casez	 	yellow
+  keyword  whole  cmos		yellow
+  keyword  whole  deassign	yellow
+  keyword  whole  default	yellow
+  keyword  whole  defparam	yellow
+  keyword  whole  disable	yellow
+  keyword  whole  edge		yellow
+  keyword  whole  else		yellow
+  keyword  whole  end		yellow
+  keyword  whole  endattribute	yellow
+  keyword  whole  endcase	yellow
+  keyword  whole  endmodule	yellow
+  keyword  whole  endfunction	yellow
+  keyword  whole  endprimitive	yellow
+  keyword  whole  endspecify	yellow
+  keyword  whole  endtable	yellow
+  keyword  whole  endtask	yellow
+  keyword  whole  event	 	yellow
+  keyword  whole  for		yellow
+  keyword  whole  force	 	yellow
+  keyword  whole  forever	yellow
+  keyword  whole  fork		yellow
+  keyword  whole  function	yellow
+  keyword  whole  highz0	yellow
+  keyword  whole  highz1	yellow
+  keyword  whole  if		yellow
+  keyword  whole  initial	yellow
+  keyword  whole  inout		yellow
+  keyword  whole  input		yellow
+  keyword  whole  integer	yellow
+  keyword  whole  join		yellow
+  keyword  whole  large		yellow
+  keyword  whole  macromodule	yellow
+  keyword  whole  medium	yellow
+  keyword  whole  module	yellow
+  keyword  whole  nand		yellow
+  keyword  whole  negedge	yellow
+  keyword  whole  nmos		yellow
+  keyword  whole  nor		yellow
+  keyword  whole  not		yellow
+  keyword  whole  notif0	yellow
+  keyword  whole  notif1	yellow
+  keyword  whole  or		yellow
+  keyword  whole  output	yellow
+  keyword  whole  parameter	yellow
+  keyword  whole  pmos		yellow
+  keyword  whole  posedge	yellow
+  keyword  whole  primitive	yellow
+  keyword  whole  pull0		yellow
+  keyword  whole  pull1		yellow
+  keyword  whole  pullup	yellow
+  keyword  whole  pulldown	yellow
+  keyword  whole  rcmos		yellow
+  keyword  whole  reg		yellow
+  keyword  whole  release	yellow
+  keyword  whole  repeat	yellow
+  keyword  whole  rnmos		yellow
+  keyword  whole  rpmos		yellow
+  keyword  whole  rtran		yellow
+  keyword  whole  rtranif0	yellow
+  keyword  whole  rtranif1	yellow
+  keyword  whole  scalared	yellow
+  keyword  whole  small		yellow
+  keyword  whole  specify	yellow
+  keyword  whole  specparam	yellow
+  keyword  whole  strength	yellow
+  keyword  whole  strong0	yellow
+  keyword  whole  strong1	yellow
+  keyword  whole  supply0	yellow
+  keyword  whole  supply1	yellow
+  keyword  whole  table		yellow
+  keyword  whole  task		yellow
+  keyword  whole  time		yellow
+  keyword  whole  tran		yellow
+  keyword  whole  tranif0	yellow
+  keyword  whole  tranif1	yellow
+  keyword  whole  tri		yellow
+  keyword  whole  tri0		yellow
+  keyword  whole  tri1		yellow
+  keyword  whole  triand	yellow
+  keyword  whole  trior		yellow
+  keyword  whole  trireg	yellow
+  keyword  whole  use		yellow
+  keyword  whole  vectored	yellow
+  keyword  whole  wait		yellow
+  keyword  whole  wand		yellow
+  keyword  whole  weak0		yellow
+  keyword  whole  weak1		yellow
+  keyword  whole  while		yellow
+  keyword  whole  wire		yellow
+  keyword  whole  wor		yellow
+  keyword  whole  xnor		yellow
+  keyword  whole  xor		yellow
+
+#Reserved Keywords 2
+
+  keyword  whole  $bitstoreal	yellow
+  keyword  whole  $countdrivers	yellow
+  keyword  whole  $display	yellow
+  keyword  whole  $dumpall	yellow
+  keyword  whole  $dumpfile	yellow
+  keyword  whole  $dumpflush	yellow
+  keyword  whole  $dumpoff	yellow
+  keyword  whole  $dumpon	yellow
+  keyword  whole  $dumpvars	yellow
+  keyword  whole  $fclose	yellow
+  keyword  whole  $fdisplay	yellow
+  keyword  whole  $finish	yellow
+  keyword  whole  $fmonitor	yellow
+  keyword  whole  $fopen	yellow
+  keyword  whole  $fstrobe	yellow
+  keyword  whole  $fwrite	yellow
+  keyword  whole  $getpattern	yellow
+  keyword  whole  $history	yellow
+  keyword  whole  $hold		yellow
+  keyword  whole  $incsave	yellow
+  keyword  whole  $input	yellow
+  keyword  whole  $itor		yellow
+  keyword  whole  $key		yellow
+  keyword  whole  $list		yellow
+  keyword  whole  $log		yellow
+  keyword  whole  $monitor	yellow
+  keyword  whole  $monitoroff	yellow
+  keyword  whole  $monitoron	yellow
+  keyword  whole  $nokey	yellow
+  keyword  whole  $nolog	yellow
+  keyword  whole  $period	yellow
+  keyword  whole  $printtimescale	yellow
+  keyword  whole  $readmemb	yellow
+  keyword  whole  $readmemh	yellow
+  keyword  whole  $realtime	yellow
+  keyword  whole  $realtobits	yellow
+  keyword  whole  $recovery	yellow
+  keyword  whole  $reset	yellow
+  keyword  whole  $reset_count	yellow
+  keyword  whole  $reset_value	yellow
+  keyword  whole  $restart	yellow
+  keyword  whole  $rtoi		yellow
+  keyword  whole  $save		yellow
+  keyword  whole  $scale	yellow
+  keyword  whole  $scope	yellow
+  keyword  whole  $setup	yellow
+  keyword  whole  $setuphold	yellow
+  keyword  whole  $showscopes	yellow
+  keyword  whole  $showvariables	yellow
+  keyword  whole  $showvars	yellow
+  keyword  whole  $skew		yellow
+  keyword  whole  $sreadmemb	yellow
+  keyword  whole  $sreadmemh	yellow
+  keyword  whole  $stime	yellow
+  keyword  whole  $stop		yellow
+  keyword  whole  $strobe	yellow
+  keyword  whole  $time		yellow
+  keyword  whole  $timeformat	yellow
+  keyword  whole  $width	yellow
+  keyword  whole  $write	yellow
+
+
+    keyword > yellow
+    keyword < yellow
+    keyword \+ yellow
+    keyword - yellow
+    keyword \* yellow
+    keyword / yellow
+    keyword % yellow
+    keyword = yellow
+    keyword != yellow
+    keyword == yellow
+    keyword { brightcyan
+    keyword } brightcyan
+    keyword ( brightcyan
+    keyword ) brightcyan
+    keyword [ brightcyan
+    keyword ] brightcyan
+    keyword , brightcyan
+    keyword . brightcyan
+    keyword : brightcyan
+    keyword ? brightcyan
+    keyword ; brightmagenta
+
+
+context exclusive /\* \*/ brown
+    spellcheck
+
+context exclusive // \n brown
+    spellcheck
+
+context " " green/
