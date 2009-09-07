@@ -464,11 +464,6 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
 {
     char *my_str;
 
-    /* The special value of def_text is used to identify password boxes */
-    if (def_text == INPUT_PASSWORD) {
-	def_text = "";
-    }
-
     QuickWidget quick_widgets[] = {
 	/* 0 */ QUICK_BUTTON (6, 10, 1, 0, N_("&Cancel"), B_CANCEL, NULL),
 	/* 1 */ QUICK_BUTTON (3, 10, 1, 0, N_("&OK"),     B_ENTER,  NULL),
@@ -497,6 +492,7 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
     if (def_text == INPUT_PASSWORD) {
 	quick_widgets[2].u.input.flags = 1;
 	histname[3] = '\0';
+	quick_widgets[2].u.input.text = "";
     }
 
 #ifdef ENABLE_NLS
