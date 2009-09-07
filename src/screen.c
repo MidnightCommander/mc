@@ -2517,55 +2517,59 @@ static int
 do_panel_event (Gpm_Event *event, WPanel *panel, int *redir)
 {
     const int lines = llines (panel);
-
-    int my_index;
+    const gboolean is_active = dlg_widget_active (panel);
+    const gboolean mouse_down = (event->type & GPM_DOWN) != 0;
 
     /* rest of the upper frame, the menu is invisible - call menu */
-    if (event->type & GPM_DOWN && event->y == 1 && !menubar_visible) {
+    if (mouse_down && event->y == 1 && !menubar_visible) {
 	*redir = 1;
 	event->x += panel->widget.x;
 	return (*(the_menubar->widget.mouse)) (event, the_menubar);
     }
 
     /* "<" button */
-    if (event->type & GPM_DOWN && event->x == 2 && event->y == 1) {
+    if (mouse_down && event->y == 1 && event->x == 2) {
 	directory_history_prev (panel);
 	return MOU_NORMAL;
     }
 
     /* ">" button */
-    if (event->type & GPM_DOWN && event->x == panel->widget.cols - 1
-	&& event->y == 1) {
+    if (mouse_down && event->y == 1 && event->x == panel->widget.cols - 1) {
 	directory_history_next (panel);
 	return MOU_NORMAL;
     }
 
     /* "v" button */
-    if (event->type & GPM_DOWN && event->x == panel->widget.cols - 2
-	&& event->y == 1) {
+    if (mouse_down && event->y == 1 && event->x == panel->widget.cols - 2) {
 	directory_history_list (panel);
 	return MOU_NORMAL;
     }
 
     /* Mouse wheel events */
-    if ((event->buttons & GPM_B_UP) && (event->type & GPM_DOWN)) {
-	if (panel->top_file > 0)
-	    prev_page (panel);
-	else                    /* We are in first page */
-	    move_up (panel);
+    if (mouse_down && (event->buttons & GPM_B_UP)) {
+	if (is_active) {
+	    if (panel->top_file > 0)
+		prev_page (panel);
+	    else                    /* We are in first page */
+		move_up (panel);
+	}
 	return MOU_NORMAL;
     }
-    if ((event->buttons & GPM_B_DOWN) && (event->type & GPM_DOWN)) {
-	if (panel->top_file + ITEMS (panel) < panel->count)
-	    next_page (panel);
-	else                    /* We are in last page */
-	    move_down (panel);
+    if (mouse_down && (event->buttons & GPM_B_DOWN)) {
+	if (is_active) {
+	    if (panel->top_file + ITEMS (panel) < panel->count)
+		next_page (panel);
+	    else                    /* We are in last page */
+		move_down (panel);
+	}
 	return MOU_NORMAL;
     }
 
     event->y -= 2;
     if ((event->type & (GPM_DOWN | GPM_DRAG))) {
-	if (!dlg_widget_active (panel))
+	int my_index;
+
+	if (!is_active)
 	    change_panel ();
 
 	if (event->y <= 0) {
@@ -2577,8 +2581,7 @@ do_panel_event (Gpm_Event *event, WPanel *panel, int *redir)
 	    return MOU_REPEAT;
 	}
 
-	if (!((panel->top_file + event->y <= panel->count)
-	      && event->y <= lines)) {
+	if (!((panel->top_file + event->y <= panel->count) && event->y <= lines)) {
 	    mark_if_marking (panel, event);
 	    if (mouse_move_pages)
 		next_page (panel);
@@ -2588,10 +2591,8 @@ do_panel_event (Gpm_Event *event, WPanel *panel, int *redir)
 	}
 
 	my_index = panel->top_file + event->y - 1;
-	if (panel->split) {
-	    if (event->x > ((panel->widget.cols - 2) / 2))
-		my_index += llines (panel);
-	}
+	if (panel->split && (event->x > ((panel->widget.cols - 2) / 2)))
+	    my_index += llines (panel);
 
 	if (my_index >= panel->count)
 	    my_index = panel->count - 1;
@@ -2604,8 +2605,7 @@ do_panel_event (Gpm_Event *event, WPanel *panel, int *redir)
 
 	/* This one is new */
 	mark_if_marking (panel, event);
-    } else if ((event->type & (GPM_UP | GPM_DOUBLE)) ==
-	       (GPM_UP | GPM_DOUBLE)) {
+    } else if ((event->type & (GPM_UP | GPM_DOUBLE)) == (GPM_UP | GPM_DOUBLE)) {
 	if (event->y > 0 && event->y <= lines)
 	    do_enter (panel);
     }
