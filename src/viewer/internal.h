@@ -274,6 +274,7 @@ void mcview_toggle_hex_mode (mcview_t *);
 gboolean mcview_ok_to_quit (mcview_t *);
 void mcview_done (mcview_t *);
 void mcview_select_encoding (mcview_t *);
+void mcview_set_codeset (mcview_t *);
 void mcview_show_error (mcview_t *, const char *);
 
 /* move.c */

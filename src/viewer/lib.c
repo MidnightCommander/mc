@@ -51,7 +51,7 @@
 /*** global variables ****************************************************************************/
 
 #define OFF_T_BITWIDTH (unsigned int) (sizeof (off_t) * CHAR_BIT - 1)
-const off_t INVALID_OFFSET = (off_t) -1;
+const off_t INVALID_OFFSET = (off_t) - 1;
 const off_t OFFSETTYPE_MAX = ((off_t) 1 << (OFF_T_BITWIDTH - 1)) - 1;
 
 /*** file scope macro definitions ****************************************************************/
@@ -195,11 +195,34 @@ mcview_done (mcview_t * view)
         g_array_free (view->coord_cache, TRUE), view->coord_cache = NULL;
     }
 
-    mcview_hexedit_free_change_list (view);
-    /* FIXME: what about view->search_exp? */
-
-    if (view->converter != str_cnv_from_term)
+    if (!(view->converter == INVALID_CONV || view->converter != str_cnv_from_term)) {
         str_close_conv (view->converter);
+        view->converter = str_cnv_from_term;
+    }
+
+    mcview_hexedit_free_change_list (view);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+mcview_set_codeset (mcview_t * view)
+{
+    const char *cp_id = NULL;
+
+    view->utf8 = TRUE;
+    cp_id = get_codepage_id (source_codepage >= 0 ? source_codepage : display_codepage);
+    if (cp_id != NULL) {
+        GIConv conv;
+        conv = str_crt_conv_from (cp_id);
+        if (conv != INVALID_CONV) {
+            if (view->converter != str_cnv_from_term)
+                str_close_conv (view->converter);
+            view->converter = conv;
+        }
+        view->utf8 = (gboolean) str_isutf8 (cp_id);
+    }
+
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -208,23 +231,8 @@ void
 mcview_select_encoding (mcview_t * view)
 {
 #ifdef HAVE_CHARSET
-    const char *cp_id = NULL;
     if (do_select_codepage ()) {
-	cp_id = get_codepage_id (source_codepage >= 0 ?
-				    source_codepage : display_codepage);
-
-        if (cp_id != NULL) {
-            GIConv conv;
-            conv = str_crt_conv_from (cp_id);
-            if (conv != INVALID_CONV) {
-                if (view->converter != str_cnv_from_term)
-                    str_close_conv (view->converter);
-                view->converter = conv;
-            }
-        }
-
-	if (cp_id != NULL)
-	    view->utf8 = (gboolean) str_isutf8 (cp_id);
+        mcview_set_codeset (view);
     }
 #endif
 

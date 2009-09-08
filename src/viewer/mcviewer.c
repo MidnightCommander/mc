@@ -210,7 +210,9 @@ mcview_new (int y, int x, int cols, int lines, int is_panel)
     view->cursor_row = 0;
     view->change_list = NULL;
     view->converter = str_cnv_from_term;
-
+#ifdef HAVE_CHARSET
+    mcview_set_codeset (view);
+#endif
     /* {status,ruler,data}_area are left uninitialized */
 
     view->dirty = 0;
@@ -290,18 +292,8 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
     char tmp[BUF_MEDIUM];
     char *canon_fname;
     struct stat st;
-#ifdef HAVE_CHARSET
-    const char *cp_id = NULL;
-#endif
-    gboolean retval = FALSE;
-#ifdef HAVE_CHARSET
-    cp_id = get_codepage_id (source_codepage);
 
-    if (cp_id != NULL && str_isutf8 (cp_id) != 0)
-        view->utf8 = TRUE;
-    else
-        view->utf8 = FALSE;
-#endif
+    gboolean retval = FALSE;
 
     assert (view->bytes_per_line != 0);
     mcview_done (view);
@@ -374,24 +366,6 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
     view->search_end = 0;
     view->dpy_text_column = 0;
 
-    view->converter = str_cnv_from_term;
-#ifdef HAVE_CHARSET
-    cp_id = get_codepage_id (source_codepage >= 0 ?
-                            source_codepage : display_codepage);
-
-    if (cp_id != NULL) {
-        GIConv conv;
-        conv = str_crt_conv_from (cp_id);
-        if (conv != INVALID_CONV) {
-            if (view->converter != str_cnv_from_term)
-                str_close_conv (view->converter);
-            view->converter = conv;
-        }
-    }
-    if (cp_id != NULL)
-        view->utf8 = (gboolean) str_isutf8 (cp_id);
-#endif
-
     mcview_compute_areas (view);
     assert (view->bytes_per_line != 0);
     if (mcview_remember_file_position && view->filename != NULL && start_line == 0) {
@@ -408,7 +382,6 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
     view->hexedit_lownibble = FALSE;
     view->hexview_in_text = FALSE;
     view->change_list = NULL;
-
     return retval;
 }
 

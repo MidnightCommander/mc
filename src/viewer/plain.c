@@ -68,7 +68,7 @@ mcview_display_text (mcview_t * view)
     screen_dimen row, col;
     off_t from;
     int cw = 1;
-    int c;
+    unsigned int c;
     gboolean read_res = TRUE;
     struct hexedit_change_node *curr = view->change_list;
 
@@ -136,7 +136,7 @@ mcview_display_text (mcview_t * view)
 #ifdef HAVE_CHARSET
             if (utf8_display) {
                 if (!view->utf8) {
-                    c = convert_from_8bit_to_utf_c ((unsigned char) c, view->converter);
+                    c = convert_from_8bit_to_utf_c (c, view->converter);
                 }
                 if (!g_unichar_isprint (c))
                     c = '.';
