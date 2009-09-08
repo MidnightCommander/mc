@@ -135,22 +135,8 @@ mc_skin_set_hardcoded_skin(mc_skin_t *mc_skin)
 
     mc_config_set_string(mc_skin->config, "skin", "description",  "hardcoded skin");
 
-#define set_lines(x,y) mc_config_set_string(mc_skin->config, "Lines", x, y)
-    set_lines("lefttop", "+");
-    set_lines("righttop", "+");
-    set_lines("centertop", "-");
-    set_lines("centerbottom", "-");
-    set_lines("leftbottom", "+");
-    set_lines("rightbottom", "+");
-    set_lines("leftmiddle", "|");
-    set_lines("rightmiddle", "|");
-    set_lines("centermiddle", "+");
-    set_lines("horiz", "-");
-    set_lines("vert", "-");
-    set_lines("thinhoriz", "-");
-    set_lines("thinvert", "|");
-#undef set_lines
-    mc_config_set_string(mc_skin->config, "core", "_default_",  "white;black;");
+    mc_skin_hardcoded_ugly_lines(mc_skin);
+    mc_skin_hardcoded_blackwhite_colors(mc_skin);
 }
 
 /* --------------------------------------------------------------------------------------------- */

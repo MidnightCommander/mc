@@ -52,6 +52,7 @@ static gboolean mc_skin_is_init = FALSE;
 static void
 mc_skin_hash_destroy_key (gpointer data)
 {
+    g_free(data);
 }
 
 /* --------------------------------------------------------------------------------------------- */

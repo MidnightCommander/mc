@@ -62,6 +62,7 @@ static int mc_tty_color__count = 0;
 static void
 mc_tty_color_hash_destroy_key (gpointer data)
 {
+    g_free(data);
 }
 
 /* --------------------------------------------------------------------------------------------- */
