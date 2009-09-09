@@ -88,8 +88,11 @@ typedef enum{
     MC_TTY_FRM_righttop,
     MC_TTY_FRM_leftbottom,
     MC_TTY_FRM_rightbottom,
+    MC_TTY_FRM_centertop,
+    MC_TTY_FRM_centerbottom,
     MC_TTY_FRM_leftmiddle,
-    MC_TTY_FRM_rightmiddle
+    MC_TTY_FRM_rightmiddle,
+    MC_TTY_FRM_MAX
 } mc_tty_frm_t;
 
 extern char *tty_tgetstr (const char *name);

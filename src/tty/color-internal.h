@@ -17,6 +17,8 @@
 #endif			/* HAVE_SLANG */
 
 extern gboolean use_colors;
+extern gboolean mc_tty_color_disable;
+
 
 #ifdef HAVE_SLANG
 #   define CTYPE const char *
@@ -32,6 +34,13 @@ typedef struct mc_color_pair_struct {
     int pair_index;
 } mc_color_pair_t;
 
+typedef enum
+{
+	SPEC_A_REVERSE		= -100,
+	SPEC_A_BOLD		= -101,
+	SPEC_A_BOLD_REVERSE	= -102,
+	SPEC_A_UNDERLINE	= -103
+} mc_tty_color_special_t;
 
 const char *mc_tty_color_get_valid_name(const char *);
 int mc_tty_color_get_index_by_name(const char *);

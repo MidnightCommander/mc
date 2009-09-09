@@ -41,12 +41,13 @@
 static int
 has_colors (gboolean disable, gboolean force)
 {
+    mc_tty_color_disable = disable;
+
     if (force || (getenv ("COLORTERM") != NULL))
 	SLtt_Use_Ansi_Colors = 1;
 
-#if 0
-    /* We want to allow overwriding */
-    if (!disable) {
+    if (!mc_tty_color_disable)
+    {
 	const char *terminal = getenv ("TERM");
 	const size_t len = strlen (terminal);
 
@@ -73,23 +74,30 @@ has_colors (gboolean disable, gboolean force)
 	        cts++;
 	}
     }
-    /* Setup emulated colors */
-    if (SLtt_Use_Ansi_Colors != 0) {
-        if (!disable) {
-	    mc_init_pair (A_REVERSE, "black", "white");
-	    mc_init_pair (A_BOLD, "white", "black");
-	} else {
-	    mc_init_pair (A_REVERSE, "black", "lightgray");
-	    mc_init_pair (A_BOLD, "white", "black");
-	    mc_init_pair (A_BOLD_REVERSE, "white", "lightgray");
-	}
-    } else {
-	SLtt_set_mono (A_BOLD,    NULL, SLTT_BOLD_MASK);
-	SLtt_set_mono (A_REVERSE, NULL, SLTT_REV_MASK);
-	SLtt_set_mono (A_BOLD | A_REVERSE, NULL, SLTT_BOLD_MASK | SLTT_REV_MASK);
-    }
-#endif
     return SLtt_Use_Ansi_Colors;
+}
+
+static void
+mc_tty_color_pair_init_special(mc_color_pair_t *mc_color_pair,
+    const char *fg1, const char *bg1,
+    const char *fg2, const char *bg2,
+    SLtt_Char_Type mask)
+{
+    if (SLtt_Use_Ansi_Colors != 0)
+    {
+	if (!mc_tty_color_disable)
+	{
+	    SLtt_set_color (mc_color_pair->pair_index, (char *) "", (char *) fg1, (char *) bg1);
+	}
+	else
+	{
+	    SLtt_set_color (mc_color_pair->pair_index, (char *) "", (char *) fg2, (char *) bg2);
+	}
+    }
+    else
+    {
+	SLtt_set_mono (mc_color_pair->pair_index, NULL, mask);
+    }
 }
 
 void
@@ -105,7 +113,48 @@ mc_tty_color_init_lib (gboolean disable, gboolean force)
 void
 mc_tty_color_try_alloc_pair_lib (mc_color_pair_t *mc_color_pair)
 {
-    SLtt_set_color (mc_color_pair->pair_index, (char *) "", (char *) mc_color_pair->cfg, (char *) mc_color_pair->cbg);
+    if (mc_color_pair->ifg <= (int) SPEC_A_REVERSE)
+    {
+	switch(mc_color_pair->ifg)
+	{
+	case SPEC_A_REVERSE:
+	    mc_tty_color_pair_init_special(
+		    mc_color_pair,
+		    "black", "white",
+		    "black", "lightgray",
+		    SLTT_REV_MASK
+	    );
+	break;
+	case SPEC_A_BOLD:
+	    mc_tty_color_pair_init_special(
+		    mc_color_pair,
+		    "white", "black",
+		    "white", "black",
+		    SLTT_BOLD_MASK
+	    );
+	break;
+	case SPEC_A_BOLD_REVERSE:
+	    mc_tty_color_pair_init_special(
+		    mc_color_pair,
+		    "white", "black",
+		    "white", "black",
+		    SLTT_BOLD_MASK | SLTT_REV_MASK
+	    );
+	break;
+	case SPEC_A_UNDERLINE:
+	    mc_tty_color_pair_init_special(
+		    mc_color_pair,
+		    "white", "black",
+		    "white", "black",
+		    SLTT_ULINE_MASK
+	    );
+	break;
+	}
+    }
+    else
+    {
+	SLtt_set_color (mc_color_pair->pair_index, (char *) "", (char *) mc_color_pair->cfg, (char *) mc_color_pair->cbg);
+    }
 }
 
 void

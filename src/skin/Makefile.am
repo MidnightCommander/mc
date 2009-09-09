@@ -6,6 +6,7 @@ libmcskin_la_SOURCES = \
 	common.c \
 	hc-skins.c \
 	ini-file.c \
+	lines.c \
 	skin.h \
 	internal.h
 

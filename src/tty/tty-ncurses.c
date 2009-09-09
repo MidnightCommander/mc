@@ -216,7 +216,7 @@ tty_getyx (int *py, int *px)
 void
 tty_draw_hline (int y, int x, int ch, int len)
 {
-    if (ch == ACS_HLINE && slow_tty) {
+    if (ch == ACS_HLINE) {
         ch = ugly_frm_thinhoriz;
     }
 
@@ -237,10 +237,8 @@ tty_draw_vline (int y, int x, int ch, int len)
 void
 tty_draw_box (int y, int x, int rows, int cols)
 {
-    if (slow_tty) {
-	tty_draw_box_slow (y, x, rows, cols);
-    } else {
 #define waddc(_y, _x, c) move (_y, _x); addch (c)
+!!!!!!
 	waddc (y, x, ACS_ULCORNER);
 	hline (ACS_HLINE, cols - 2);
 	waddc (y + rows - 1, x, ACS_LLCORNER);
@@ -255,7 +253,6 @@ tty_draw_box (int y, int x, int rows, int cols)
 	move (y + 1, x + cols - 1);
 	vline (ACS_VLINE, rows - 2);
 #undef waddc
-    }
 }
 
 void
@@ -294,11 +291,11 @@ tty_print_anychar (int c)
 {
     unsigned char str[6 + 1];
 
-    if (c == ACS_RTEE && (ugly_line_drawing || slow_tty)) {
+    if (c == ACS_RTEE ) {
         c = ugly_frm_rightmiddle;
     }
 
-    if (c == ACS_LTEE && (ugly_line_drawing || slow_tty)) {
+    if (c == ACS_LTEE ) {
         c = ugly_frm_leftmiddle;
     }
 

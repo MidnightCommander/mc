@@ -49,7 +49,7 @@ gboolean slow_tty = FALSE;
 /* If true use +, -, | for line drawing */
 gboolean ugly_line_drawing = FALSE;
 
-int mc_tty_ugly_frm[] = { '|', '-', '|', '-', '+', '+', '+', '+', '+', '+'};
+int mc_tty_ugly_frm[MC_TTY_FRM_MAX];
 
 /*** file scope macro definitions **************************************/
 
@@ -123,19 +123,13 @@ tty_got_interrupt(void)
 void
 tty_print_one_hline (void)
 {
-    if (ugly_line_drawing || slow_tty)
-	tty_print_char (mc_tty_ugly_frm[MC_TTY_FRM_thinhoriz]);
-    else
-	tty_print_alt_char (ACS_HLINE);
+    tty_print_char (mc_tty_ugly_frm[MC_TTY_FRM_thinhoriz]);
 }
 
 void
 tty_print_one_vline (void)
 {
-    if (ugly_line_drawing || slow_tty)
-	tty_print_char (mc_tty_ugly_frm[MC_TTY_FRM_thinvert]);
-    else
-	tty_print_alt_char (ACS_VLINE);
+    tty_print_char (mc_tty_ugly_frm[MC_TTY_FRM_thinvert]);
 }
 
 void

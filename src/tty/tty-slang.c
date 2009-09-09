@@ -387,7 +387,7 @@ tty_getyx (int *py, int *px)
 void
 tty_draw_hline (int y, int x, int ch, int len)
 {
-    if (ch == ACS_HLINE && (ugly_line_drawing || slow_tty)) {
+    if (ch == ACS_HLINE) {
         ch = mc_tty_ugly_frm[MC_TTY_FRM_thinhoriz];
     }
 
@@ -441,10 +441,7 @@ void
 tty_draw_box (int y, int x, int rows, int cols)
 {
     /* this fix slang drawing stickchars bug */
-    if (ugly_line_drawing || slow_tty)
-	tty_draw_box_slow (y, x, rows, cols);
-    else
-	SLsmg_draw_box (y, x, rows, cols);
+    tty_draw_box_slow (y, x, rows, cols);
 }
 
 void
@@ -469,23 +466,22 @@ void
 tty_print_char (int c)
 {
     SLsmg_write_char ((SLwchar_Type) ((unsigned int) c));
+
+    /* FIXME: or SLsmg_draw_object (SLsmg_get_row(), SLsmg_get_column(), c); ? */
 }
 
 void
 tty_print_alt_char (int c)
 {
-    if (c == ACS_RTEE && (ugly_line_drawing || slow_tty)) {
+    if (c == ACS_RTEE) {
         c = mc_tty_ugly_frm[MC_TTY_FRM_rightmiddle];
     }
 
-    if (c == ACS_LTEE && (ugly_line_drawing || slow_tty)) {
+    if (c == ACS_LTEE) {
         c = mc_tty_ugly_frm[MC_TTY_FRM_leftmiddle];
     }
-    if (ugly_line_drawing || slow_tty) {
-        tty_print_char (c);
-    } else {
-        SLsmg_draw_object (SLsmg_get_row(), SLsmg_get_column(), c);
-    }
+
+    tty_print_char (c);
 }
 
 void

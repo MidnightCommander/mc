@@ -115,7 +115,7 @@ int tty_try_alloc_color_pair (const char *fg, const char *bg)
     c_fg = mc_tty_color_get_valid_name(fg);
     c_bg = mc_tty_color_get_valid_name(bg);
 
-    color_pair = g_strdup_printf("%s.%s",fg,bg);
+    color_pair = g_strdup_printf("%s.%s",c_fg,c_bg);
     if (color_pair == NULL)
 	return 0;
 

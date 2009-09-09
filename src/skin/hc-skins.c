@@ -107,7 +107,7 @@ mc_skin_hardcoded_ugly_lines(mc_skin_t *mc_skin)
     set_lines("rightmiddle", "|");
     set_lines("centermiddle", "+");
     set_lines("horiz", "-");
-    set_lines("vert", "-");
+    set_lines("vert", "|");
     set_lines("thinhoriz", "-");
     set_lines("thinvert", "|");
 }

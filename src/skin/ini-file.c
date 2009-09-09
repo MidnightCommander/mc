@@ -123,6 +123,8 @@ mc_skin_ini_file_parce(mc_skin_t *mc_skin)
     if  (! mc_skin_color_parce_ini_file(mc_skin))
 	return FALSE;
 
+    mc_skin_lines_parce_ini_file(mc_skin);
+
     return TRUE;
 }
 
@@ -140,3 +142,4 @@ mc_skin_set_hardcoded_skin(mc_skin_t *mc_skin)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
