@@ -229,7 +229,7 @@ x       Extract the contents of a compressed tar file
 		PRG="bunzip2 -c %f"
 		;;
 	    *.tar.gz|*.tar.z|*.tgz|*.tpz|*.tar.Z)
-		PRG="gzup -dc %f"
+		PRG="gzip -dc %f"
 		;;
 	    *.tar.lzma)
 		PRG="lzma -dc %f"
