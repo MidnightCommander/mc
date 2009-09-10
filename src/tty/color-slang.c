@@ -113,6 +113,7 @@ mc_tty_color_init_lib (gboolean disable, gboolean force)
 void
 mc_tty_color_try_alloc_pair_lib (mc_color_pair_t *mc_color_pair)
 {
+    const char *fg, *bg;
     if (mc_color_pair->ifg <= (int) SPEC_A_REVERSE)
     {
 	switch(mc_color_pair->ifg)
@@ -134,10 +135,11 @@ mc_tty_color_try_alloc_pair_lib (mc_color_pair_t *mc_color_pair)
 	    );
 	break;
 	case SPEC_A_BOLD_REVERSE:
+
 	    mc_tty_color_pair_init_special(
 		    mc_color_pair,
-		    "white", "black",
-		    "white", "black",
+		    "white", "white",
+		    "white", "white",
 		    SLTT_BOLD_MASK | SLTT_REV_MASK
 	    );
 	break;
@@ -153,7 +155,11 @@ mc_tty_color_try_alloc_pair_lib (mc_color_pair_t *mc_color_pair)
     }
     else
     {
-	SLtt_set_color (mc_color_pair->pair_index, (char *) "", (char *) mc_color_pair->cfg, (char *) mc_color_pair->cbg);
+
+	fg = (mc_color_pair->cfg) ? mc_color_pair->cfg : "default";
+	bg = (mc_color_pair->cbg) ? mc_color_pair->cbg : "default";
+
+	SLtt_set_color (mc_color_pair->pair_index, (char *) "", (char *) fg, (char *) bg);
     }
 }
 

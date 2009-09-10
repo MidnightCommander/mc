@@ -40,6 +40,7 @@
 #include "main.h"
 #include "tree.h"		/* xtree_mode */
 #include "../src/mcconfig/mcconfig.h"
+#include "../src/skin/skin.h"
 #include "setup.h"
 #include "../src/viewer/mcviewer.h" /* For the externs */
 #include "hotlist.h"		/* load/save/done hotlist */
@@ -683,6 +684,11 @@ load_setup (void)
         utf8_display = str_isutf8 (get_codepage_id( display_codepage ));
 #endif /* HAVE_CHARSET */
 
+    /*
+	WARNING! We need to reinitialize 'Skin lines' again!
+	Because need to init systemCodepage parameter as well.
+    */
+    mc_skin_lines_parse_ini_file(&mc_skin__default);
 }
 
 #if defined(USE_VFS) && defined (USE_NETCODE)

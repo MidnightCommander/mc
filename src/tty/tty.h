@@ -92,6 +92,7 @@ typedef enum{
     MC_TTY_FRM_centerbottom,
     MC_TTY_FRM_leftmiddle,
     MC_TTY_FRM_rightmiddle,
+    MC_TTY_FRM_centermiddle,
     MC_TTY_FRM_MAX
 } mc_tty_frm_t;
 

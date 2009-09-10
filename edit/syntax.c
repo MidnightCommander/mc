@@ -1024,6 +1024,7 @@ void edit_free_syntax_rules (WEdit * edit)
     }
 
     MC_PTR_FREE (edit->rules);
+    tty_color_free_all_tmp();
 }
 
 /* returns -1 on file error, line number on error in file syntax */

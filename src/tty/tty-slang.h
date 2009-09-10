@@ -25,6 +25,7 @@ enum {
 #define ACS_LLCORNER		SLSMG_LLCORN_CHAR
 #define ACS_URCORNER		SLSMG_URCORN_CHAR
 #define ACS_LRCORNER		SLSMG_LRCORN_CHAR
+#define ACS_PLUS		SLSMG_PLUS_CHAR
 
 #define COLS		SLtt_Screen_Cols
 #define LINES		SLtt_Screen_Rows

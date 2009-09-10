@@ -44,6 +44,9 @@
 
 char *command_line_colors = NULL;
 
+static char *tty_color_defaults__fg = NULL;
+static char *tty_color_defaults__bg = NULL;
+
 /* Set if we are actually using colors */
 gboolean use_colors = FALSE;
 
@@ -54,7 +57,6 @@ gboolean use_colors = FALSE;
 /*** file scope variables ************************************************************************/
 
 static GHashTable *mc_tty_color__hashtable = NULL;
-static int mc_tty_color__count = 0;
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -75,6 +77,53 @@ mc_tty_color_hash_destroy_value (gpointer data)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+tty_color_free_condition_cb (gpointer key, gpointer value, gpointer user_data)
+{
+    gboolean is_temp_color = (gboolean) user_data;
+    mc_color_pair_t *mc_color_pair = (mc_color_pair_t *) value;
+    return (mc_color_pair->is_temp == is_temp_color);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+tty_color_free_all(gboolean is_temp_color)
+{
+    g_hash_table_foreach_remove (mc_tty_color__hashtable, tty_color_free_condition_cb, (gpointer) is_temp_color);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+tty_color_get_next_cpn_cb (gpointer key, gpointer value, gpointer user_data)
+{
+    int cp = (int) user_data;
+    mc_color_pair_t *mc_color_pair = (mc_color_pair_t *) value;
+
+    if (cp == mc_color_pair->pair_index)
+	return TRUE;
+
+    return FALSE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+tty_color_get_next__color_pair_number()
+{
+    int cp_count = g_hash_table_size (mc_tty_color__hashtable);
+    int cp=0;
+
+    for (cp = 0; cp < cp_count; cp++){
+	if (g_hash_table_find (mc_tty_color__hashtable, tty_color_get_next_cpn_cb, (gpointer) cp) == NULL)
+	    return cp;
+    }
+    return cp;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -82,7 +131,6 @@ void
 tty_init_colors (gboolean disable, gboolean force)
 {
     mc_tty_color_init_lib (disable, force);
-    mc_tty_color__count = 0;
     mc_tty_color__hashtable = g_hash_table_new_full (g_str_hash, g_str_equal,
 			       mc_tty_color_hash_destroy_key,
 			       mc_tty_color_hash_destroy_value);
@@ -93,6 +141,9 @@ tty_init_colors (gboolean disable, gboolean force)
 void
 tty_colors_done (void)
 {
+    g_free(tty_color_defaults__fg);
+    g_free(tty_color_defaults__bg);
+
     g_hash_table_destroy (mc_tty_color__hashtable);
 }
 
@@ -106,12 +157,19 @@ tty_use_colors (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int tty_try_alloc_color_pair (const char *fg, const char *bg)
+int tty_try_alloc_color_pair2 (const char *fg, const char *bg, gboolean is_temp_color)
 {
     gchar *color_pair;
     mc_color_pair_t *mc_color_pair;
     const char *c_fg, *c_bg;
 
+    if (fg == NULL)
+	fg = tty_color_defaults__fg;
+
+    if(bg == NULL)
+{
+	bg = tty_color_defaults__bg;
+}
     c_fg = mc_tty_color_get_valid_name(fg);
     c_bg = mc_tty_color_get_valid_name(bg);
 
@@ -133,17 +191,25 @@ int tty_try_alloc_color_pair (const char *fg, const char *bg)
 	return 0;
     }
 
+    mc_color_pair->is_temp = is_temp_color;
     mc_color_pair->cfg = c_fg;
     mc_color_pair->cbg = c_bg;
     mc_color_pair->ifg = mc_tty_color_get_index_by_name(c_fg);
     mc_color_pair->ibg = mc_tty_color_get_index_by_name(c_bg);
-    mc_color_pair->pair_index = mc_tty_color__count++;
+    mc_color_pair->pair_index = tty_color_get_next__color_pair_number();
 
     mc_tty_color_try_alloc_pair_lib (mc_color_pair);
 
     g_hash_table_insert (mc_tty_color__hashtable, (gpointer) color_pair, (gpointer) mc_color_pair);
 
     return mc_color_pair->pair_index;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+int tty_try_alloc_color_pair (const char *fg, const char *bg)
+{
+    return tty_try_alloc_color_pair2 (fg, bg, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -165,6 +231,34 @@ void tty_lowlevel_setcolor (int color)
 void tty_set_normal_attrs (void)
 {
     mc_tty_color_set_normal_attrs_lib();
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+tty_color_free_all_tmp(void)
+{
+    tty_color_free_all(TRUE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+tty_color_free_all_non_tmp(void)
+{
+    tty_color_free_all(FALSE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+tty_color_set_defaults( const char *fgcolor, const char *bgcolor)
+{
+    g_free(tty_color_defaults__fg);
+    g_free(tty_color_defaults__fg);
+
+    tty_color_defaults__fg = (fgcolor)? g_strdup(fgcolor):NULL;
+    tty_color_defaults__bg = (bgcolor)? g_strdup(bgcolor):NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */

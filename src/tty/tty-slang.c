@@ -387,9 +387,8 @@ tty_getyx (int *py, int *px)
 void
 tty_draw_hline (int y, int x, int ch, int len)
 {
-    if (ch == ACS_HLINE) {
+    if (ch == ACS_HLINE)
         ch = mc_tty_ugly_frm[MC_TTY_FRM_thinhoriz];
-    }
 
     if ((y < 0) || (x < 0)) {
 	y = SLsmg_get_row ();
@@ -413,6 +412,9 @@ tty_draw_hline (int y, int x, int ch, int len)
 void
 tty_draw_vline (int y, int x, int ch, int len)
 {
+    if (ch == ACS_VLINE)
+        ch = mc_tty_ugly_frm[MC_TTY_FRM_thinvert];
+
     if ((y < 0) || (x < 0)) {
 	y = SLsmg_get_row ();
 	x = SLsmg_get_column ();
@@ -466,22 +468,27 @@ void
 tty_print_char (int c)
 {
     SLsmg_write_char ((SLwchar_Type) ((unsigned int) c));
-
-    /* FIXME: or SLsmg_draw_object (SLsmg_get_row(), SLsmg_get_column(), c); ? */
 }
 
 void
 tty_print_alt_char (int c)
 {
-    if (c == ACS_RTEE) {
-        c = mc_tty_ugly_frm[MC_TTY_FRM_rightmiddle];
+#define DRAW(x, y) (x == y) \
+	? SLsmg_draw_object (SLsmg_get_row(), SLsmg_get_column(), x) \
+	: SLsmg_write_char ((unsigned int) y)
+    switch (c) {
+    case ACS_VLINE: DRAW (c, mc_tty_ugly_frm[MC_TTY_FRM_thinvert]); break;
+    case ACS_HLINE: DRAW (c, mc_tty_ugly_frm[MC_TTY_FRM_thinhoriz]); break;
+    case ACS_LTEE: DRAW (c, mc_tty_ugly_frm[MC_TTY_FRM_leftmiddle]); break;
+    case ACS_RTEE: DRAW (c, mc_tty_ugly_frm[MC_TTY_FRM_rightmiddle]); break;
+    case ACS_ULCORNER: DRAW (c, mc_tty_ugly_frm[MC_TTY_FRM_lefttop]); break;
+    case ACS_LLCORNER: DRAW (c, mc_tty_ugly_frm[MC_TTY_FRM_leftbottom]); break;
+    case ACS_URCORNER: DRAW (c, mc_tty_ugly_frm[MC_TTY_FRM_righttop]); break;
+    case ACS_LRCORNER: DRAW (c, mc_tty_ugly_frm[MC_TTY_FRM_rightbottom]); break;
+    case ACS_PLUS: DRAW (c, mc_tty_ugly_frm[MC_TTY_FRM_centermiddle]); break;
+    default: SLsmg_write_char ((unsigned int) c);
     }
-
-    if (c == ACS_LTEE) {
-        c = mc_tty_ugly_frm[MC_TTY_FRM_leftmiddle];
-    }
-
-    tty_print_char (c);
+#undef DRAW
 }
 
 void

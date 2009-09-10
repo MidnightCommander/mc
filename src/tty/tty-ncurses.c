@@ -65,24 +65,6 @@
 
 /*** file scope variables **********************************************/
 
-static const struct {
-    int acscode;
-    int character;
-} acs_approx [] = {
-    { 'q',  '-' }, /* ACS_HLINE */
-    { 'x',  '|' }, /* ACS_VLINE */
-    { 'l',  '+' }, /* ACS_ULCORNER */
-    { 'k',  '+' }, /* ACS_URCORNER */
-    { 'm',  '+' }, /* ACS_LLCORNER */
-    { 'j',  '+' }, /* ACS_LRCORNER */
-    { 'a',  '#' }, /* ACS_CKBOARD */
-    { 'u',  '+' }, /* ACS_RTEE */
-    { 't',  '+' }, /* ACS_LTEE */
-    { 'w',  '+' }, /* ACS_TTEE */
-    { 'v',  '+' }, /* ACS_BTEE */
-    { 'n',  '+' }, /* ACS_PLUS */
-    { 0, 0 } };
-
 /*** file scope functions **********************************************/
 
 /*** public functions **************************************************/
@@ -115,11 +97,6 @@ tty_init (gboolean slow, gboolean ugly_lines)
     keypad (stdscr, TRUE);
     nodelay (stdscr, FALSE);
 
-    if (ugly_lines) {
-	int i;
-	for (i = 0; acs_approx[i].acscode != 0; i++)
-	    acs_map[acs_approx[i].acscode] = acs_approx[i].character;
-    }
 }
 
 void
@@ -217,7 +194,7 @@ void
 tty_draw_hline (int y, int x, int ch, int len)
 {
     if (ch == ACS_HLINE) {
-        ch = ugly_frm_thinhoriz;
+        ch = mc_tty_ugly_frm[MC_TTY_FRM_thinhoriz];
     }
 
     if ((y >= 0) && (x >= 0))
@@ -237,22 +214,23 @@ tty_draw_vline (int y, int x, int ch, int len)
 void
 tty_draw_box (int y, int x, int rows, int cols)
 {
-#define waddc(_y, _x, c) move (_y, _x); addch (c)
-!!!!!!
-	waddc (y, x, ACS_ULCORNER);
-	hline (ACS_HLINE, cols - 2);
-	waddc (y + rows - 1, x, ACS_LLCORNER);
-	hline (ACS_HLINE, cols - 2);
 
-	waddc (y, x + cols - 1, ACS_URCORNER);
-	waddc (y + rows - 1, x + cols - 1, ACS_LRCORNER);
+#define waddc(_y, _x, c) move (_y, _x); addch (c)
+	waddc (y, x, mc_tty_ugly_frm[MC_TTY_FRM_lefttop]);
+	hline (mc_tty_ugly_frm[MC_TTY_FRM_horiz], cols - 2);
+	waddc (y + rows - 1, x, mc_tty_ugly_frm[MC_TTY_FRM_leftbottom]);
+	hline (mc_tty_ugly_frm[MC_TTY_FRM_horiz], cols - 2);
+
+	waddc (y, x + cols - 1, mc_tty_ugly_frm[MC_TTY_FRM_righttop]);
+	waddc (y + rows - 1, x + cols - 1, mc_tty_ugly_frm[MC_TTY_FRM_rightbottom]);
 
 	move (y + 1, x);
-	vline (ACS_VLINE, rows - 2);
+	vline (mc_tty_ugly_frm[MC_TTY_FRM_vert], rows - 2);
 
 	move (y + 1, x + cols - 1);
-	vline (ACS_VLINE, rows - 2);
+	vline (mc_tty_ugly_frm[MC_TTY_FRM_vert], rows - 2);
 #undef waddc
+
 }
 
 void
@@ -292,11 +270,11 @@ tty_print_anychar (int c)
     unsigned char str[6 + 1];
 
     if (c == ACS_RTEE ) {
-        c = ugly_frm_rightmiddle;
+        c = mc_tty_ugly_frm[MC_TTY_FRM_rightmiddle];
     }
 
     if (c == ACS_LTEE ) {
-        c = ugly_frm_leftmiddle;
+        c = mc_tty_ugly_frm[MC_TTY_FRM_leftmiddle];
     }
 
     if ( c > 255 ) {

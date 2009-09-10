@@ -36,8 +36,6 @@
 #include "../../src/tty/color.h"		/* variables */
 #include "../../src/tty/color-internal.h"
 
-int attr_pairs [MAX_PAIRS];
-
 void
 mc_tty_color_init_lib (gboolean disable, gboolean force)
 {
@@ -56,9 +54,16 @@ mc_tty_color_init_lib (gboolean disable, gboolean force)
 void
 mc_tty_color_try_alloc_pair_lib (mc_color_pair_t *mc_color_pair)
 {
-    init_pair (mc_color_pair->pair_index,
+    if (mc_color_pair->ifg <= (int) SPEC_A_REVERSE)
+    {
+/*  TODO: !!!!! */
+    }
+    else
+    {
+	init_pair (mc_color_pair->pair_index,
 	    mc_color_pair->ifg,
 	    mc_color_pair->ibg == 0 ? -1 : mc_color_pair->ibg);
+    }
 }
 
 void

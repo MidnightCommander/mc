@@ -19,7 +19,6 @@
 extern gboolean use_colors;
 extern gboolean mc_tty_color_disable;
 
-
 #ifdef HAVE_SLANG
 #   define CTYPE const char *
 #else
@@ -32,6 +31,7 @@ typedef struct mc_color_pair_struct {
     int ifg;
     int ibg;
     int pair_index;
+    gboolean is_temp;
 } mc_color_pair_t;
 
 typedef enum

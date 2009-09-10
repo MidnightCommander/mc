@@ -3,8 +3,6 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
-#define MC_SKIN_COLOR_CACHE_COUNT 5
-
 /*** enums ***************************************************************************************/
 
 /*** structures declarations (and typedefs of structures)*****************************************/
@@ -23,16 +21,16 @@ extern mc_skin_t mc_skin__default;
 
 
 gboolean mc_skin_ini_file_load(mc_skin_t *);
-gboolean mc_skin_ini_file_parce(mc_skin_t *);
+gboolean mc_skin_ini_file_parse(mc_skin_t *);
 void mc_skin_set_hardcoded_skin(mc_skin_t *);
 
-gboolean mc_skin_ini_file_parce_colors(mc_skin_t *);
+gboolean mc_skin_ini_file_parse_colors(mc_skin_t *);
 
 
 void mc_skin_hardcoded_ugly_lines(mc_skin_t *);
 void mc_skin_hardcoded_space_lines(mc_skin_t *);
 void mc_skin_hardcoded_blackwhite_colors(mc_skin_t *);
 
-void mc_skin_lines_parce_ini_file(mc_skin_t *);
+void mc_skin_colors_old_configure (mc_skin_t *);
 
 #endif

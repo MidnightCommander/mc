@@ -1,6 +1,6 @@
 /*
    File highlight plugin.
-   Reading and parce rules from ini-files
+   Reading and parse rules from ini-files
 
    Copyright (C) 2009 The Free Software Foundation, Inc.
 
@@ -49,7 +49,7 @@ extern mc_skin_t mc_skin__default;
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-mc_fhl_parce_fill_color_info (mc_fhl_filter_t * mc_filter, mc_fhl_t * fhl, const gchar * group_name)
+mc_fhl_parse_fill_color_info (mc_fhl_filter_t * mc_filter, mc_fhl_t * fhl, const gchar * group_name)
 {
     (void) fhl;
     mc_filter->color_pair_index = mc_skin_color_get("filehighlight", group_name);
@@ -58,7 +58,7 @@ mc_fhl_parce_fill_color_info (mc_fhl_filter_t * mc_filter, mc_fhl_t * fhl, const
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-mc_fhl_parce_get_file_type_id (mc_fhl_t * fhl, const gchar * group_name)
+mc_fhl_parse_get_file_type_id (mc_fhl_t * fhl, const gchar * group_name)
 {
     mc_fhl_filter_t *mc_filter;
 
@@ -90,7 +90,7 @@ mc_fhl_parce_get_file_type_id (mc_fhl_t * fhl, const gchar * group_name)
     mc_filter = g_new0 (mc_fhl_filter_t, 1);
     mc_filter->type = MC_FLHGH_T_FTYPE;
     mc_filter->file_type = (mc_flhgh_ftype_type) i;
-    mc_fhl_parce_fill_color_info (mc_filter, fhl, group_name);
+    mc_fhl_parse_fill_color_info (mc_filter, fhl, group_name);
 
     g_ptr_array_add (fhl->filters, (gpointer) mc_filter);
     return TRUE;
@@ -99,7 +99,7 @@ mc_fhl_parce_get_file_type_id (mc_fhl_t * fhl, const gchar * group_name)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-mc_fhl_parce_get_regexp (mc_fhl_t * fhl, const gchar * group_name)
+mc_fhl_parse_get_regexp (mc_fhl_t * fhl, const gchar * group_name)
 {
     mc_fhl_filter_t *mc_filter;
     gchar *regexp = mc_config_get_string (fhl->config, group_name, "regexp", "");
@@ -115,7 +115,7 @@ mc_fhl_parce_get_regexp (mc_fhl_t * fhl, const gchar * group_name)
     mc_filter->search_condition->is_case_sentitive = TRUE;
     mc_filter->search_condition->search_type = MC_SEARCH_T_REGEX;
 
-    mc_fhl_parce_fill_color_info (mc_filter, fhl, group_name);
+    mc_fhl_parse_fill_color_info (mc_filter, fhl, group_name);
     g_ptr_array_add (fhl->filters, (gpointer) mc_filter);
     g_free (regexp);
     return TRUE;
@@ -125,7 +125,7 @@ mc_fhl_parce_get_regexp (mc_fhl_t * fhl, const gchar * group_name)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-mc_fhl_parce_get_extensions (mc_fhl_t * fhl, const gchar * group_name)
+mc_fhl_parse_get_extensions (mc_fhl_t * fhl, const gchar * group_name)
 {
     mc_fhl_filter_t *mc_filter;
     gchar **exts, **exts_orig;
@@ -165,7 +165,7 @@ mc_fhl_parce_get_extensions (mc_fhl_t * fhl, const gchar * group_name)
     mc_filter->search_condition->is_case_sentitive = TRUE;
     mc_filter->search_condition->search_type = MC_SEARCH_T_REGEX;
 
-    mc_fhl_parce_fill_color_info (mc_filter, fhl, group_name);
+    mc_fhl_parse_fill_color_info (mc_filter, fhl, group_name);
     g_ptr_array_add (fhl->filters, (gpointer) mc_filter);
     g_string_free (buf, TRUE);
     return TRUE;
@@ -239,7 +239,7 @@ mc_fhl_init_from_standart_files (mc_fhl_t * fhl)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_fhl_parce_ini_file (mc_fhl_t * fhl)
+mc_fhl_parse_ini_file (mc_fhl_t * fhl)
 {
     gchar **group_names, **orig_group_names;
     gsize ftype_names_size;
@@ -256,14 +256,14 @@ mc_fhl_parce_ini_file (mc_fhl_t * fhl)
     while (*group_names) {
 
         if (mc_config_has_param (fhl->config, *group_names, "type")) {
-            /* parce filetype filter */
-            mc_fhl_parce_get_file_type_id (fhl, *group_names);
+            /* parse filetype filter */
+            mc_fhl_parse_get_file_type_id (fhl, *group_names);
         } else if (mc_config_has_param (fhl->config, *group_names, "regexp")) {
-            /* parce regexp filter */
-            mc_fhl_parce_get_regexp (fhl, *group_names);
+            /* parse regexp filter */
+            mc_fhl_parse_get_regexp (fhl, *group_names);
         } else if (mc_config_has_param (fhl->config, *group_names, "extensions")) {
-            /* parce extensions filter */
-            mc_fhl_parce_get_extensions (fhl, *group_names);
+            /* parse extensions filter */
+            mc_fhl_parse_get_extensions (fhl, *group_names);
         }
         group_names++;
     }

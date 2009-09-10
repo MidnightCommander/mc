@@ -123,13 +123,13 @@ tty_got_interrupt(void)
 void
 tty_print_one_hline (void)
 {
-    tty_print_char (mc_tty_ugly_frm[MC_TTY_FRM_thinhoriz]);
+    tty_print_alt_char (mc_tty_ugly_frm[MC_TTY_FRM_thinhoriz]);
 }
 
 void
 tty_print_one_vline (void)
 {
-    tty_print_char (mc_tty_ugly_frm[MC_TTY_FRM_thinvert]);
+    tty_print_alt_char (mc_tty_ugly_frm[MC_TTY_FRM_thinvert]);
 }
 
 void
@@ -140,11 +140,11 @@ tty_draw_box_slow (int y, int x, int ys, int xs)
     tty_draw_hline (y, x, mc_tty_ugly_frm[MC_TTY_FRM_horiz], xs);
     tty_draw_hline (y + ys - 1, x, mc_tty_ugly_frm[MC_TTY_FRM_horiz], xs);
     tty_gotoyx (y, x);
-    tty_print_char (mc_tty_ugly_frm[MC_TTY_FRM_lefttop]);
+    tty_print_alt_char (mc_tty_ugly_frm[MC_TTY_FRM_lefttop]);
     tty_gotoyx (y + ys - 1, x);
-    tty_print_char (mc_tty_ugly_frm[MC_TTY_FRM_leftbottom]);
+    tty_print_alt_char (mc_tty_ugly_frm[MC_TTY_FRM_leftbottom]);
     tty_gotoyx (y, x + xs - 1);
-    tty_print_char (mc_tty_ugly_frm[MC_TTY_FRM_righttop]);
+    tty_print_alt_char (mc_tty_ugly_frm[MC_TTY_FRM_righttop]);
     tty_gotoyx (y + ys - 1, x + xs - 1);
-    tty_print_char (mc_tty_ugly_frm[MC_TTY_FRM_rightbottom]);
+    tty_print_alt_char (mc_tty_ugly_frm[MC_TTY_FRM_rightbottom]);
 }

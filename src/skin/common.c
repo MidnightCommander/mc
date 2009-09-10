@@ -115,12 +115,14 @@ mc_skin_init(void)
 	mc_skin_reinit();
 	mc_skin_set_hardcoded_skin(&mc_skin__default);
     }
+    mc_skin_colors_old_configure (&mc_skin__default);
 
-    if (! mc_skin_ini_file_parce(&mc_skin__default))
+    if (! mc_skin_ini_file_parse(&mc_skin__default))
     {
 	mc_skin_reinit();
 	mc_skin_set_hardcoded_skin(&mc_skin__default);
-	(void) mc_skin_ini_file_parce(&mc_skin__default);
+	mc_skin_colors_old_configure (&mc_skin__default);
+	(void) mc_skin_ini_file_parse(&mc_skin__default);
     }
     mc_skin_is_init = TRUE;
 }
