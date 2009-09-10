@@ -307,7 +307,7 @@ mc_main_error_quark (void)
 GArray *editor_keymap = NULL;
 GArray *main_keymap = NULL;
 GArray *main_x_keymap = NULL;
-GArray *screen_keymap = NULL;
+GArray *panel_keymap = NULL;
 
 const global_key_map_t *main_map;
 const global_key_map_t *main_x_map;
@@ -1860,6 +1860,13 @@ do_nc (void)
 
    if (main_x_keymap && main_x_keymap->len > 0)
        main_x_map = (global_key_map_t *) main_x_keymap->data;
+
+    panel_map = default_panel_keymap;
+
+    if (panel_keymap && panel_keymap->len > 0) {
+        mc_log ("panel_keymap && panel_keymap->len > 0\n");
+        panel_map = (global_key_map_t *) panel_keymap->data;
+    }
 
     /* Check if we were invoked as an editor or file viewer */
     if (!mc_maybe_editor_or_viewer ()) {

@@ -6,7 +6,7 @@
 #ifndef MC_MAIN_H
 #define MC_MAIN_H
 
-//#include "global.h"
+#include "keybind.h"
 
 /* Toggling functions */
 void toggle_fast_reload (void);
@@ -77,8 +77,10 @@ extern int is_right;		/* If the selected menu was the right */
 extern GArray *editor_keymap;
 extern GArray *main_keymap;
 extern GArray *main_x_keymap;
-extern GArray *screen_keymap;
+extern GArray *panel_keymap;
 
+extern const global_key_map_t *panel_map;
+extern const global_key_map_t default_panel_keymap[];
 void do_update_prompt (void);
 
 enum cd_enum {
