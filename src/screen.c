@@ -107,7 +107,7 @@ int filetype_mode = 1;
 /* The hook list for the select file function */
 Hook *select_file_hook = 0;
 
-const global_key_map_t *panel_keymap;
+const global_key_map_t *panel_map;
 
 const global_key_map_t default_panel_keymap[] = {
 
@@ -134,6 +134,8 @@ const global_key_map_t default_panel_keymap[] = {
     { KEY_IC,           CK_PanelMarkFile },
     { KEY_UP,           CK_PanelMoveUp },
     { KEY_DOWN,         CK_PanelMoveDown },
+    { KEY_LEFT,         CK_PanelMoveLeft },
+    { KEY_RIGHT,        CK_PanelMoveRight },
     { KEY_END,          CK_PanelMoveEnd },
     { KEY_HOME,         CK_PanelMoveHome },
     { KEY_NPAGE,        CK_PanelNextPage },
@@ -1142,7 +1144,6 @@ panel_new_with_dir (const char *panel_name, const char *wpath)
     } else
 	mc_get_current_wd (panel->cwd, sizeof (panel->cwd) - 2);
 
-    panel_keymap = default_panel_keymap;
     strcpy (panel->lwd, ".");
 
     panel->hist_name = g_strconcat ("Dir Hist ", panel_name, (char *) NULL);
@@ -2429,20 +2430,22 @@ panel_key (WPanel *panel, int key)
 {
     int i;
 
-    for (i = 0; panel_keymap[i].key; i++) {
-	if (key == panel_keymap[i].key) {
+
+    for (i = 0; panel_map[i].key; i++) {
+	if (key == panel_map[i].key) {
 	    int old_searching = panel->searching;
 
-	    if (panel_keymap[i].command != CK_PanelStartSearch)
+	    if (panel_map[i].command != CK_PanelStartSearch)
 		panel->searching = 0;
 
-	    screen_execute_cmd (panel, panel_keymap[i].command, key);
+	    screen_execute_cmd (panel, panel_map[i].command, key);
 
 	    if (panel->searching != old_searching)
 		display_mini_info (panel);
 	    return MSG_HANDLED;
 	}
     }
+
     if (torben_fj_mode && key == ALT ('h')) {
 	goto_middle_file (panel);
 	return MSG_HANDLED;
