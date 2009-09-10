@@ -1853,18 +1853,17 @@ do_nc (void)
     check_codeset();
     main_map = default_main_map;
 
-   if (main_keymap && main_keymap->len > 0)
-       main_map = (global_key_map_t *) main_keymap->data;
+    if (main_keymap && main_keymap->len > 0)
+        main_map = (global_key_map_t *) main_keymap->data;
 
     main_x_map = default_main_x_map;
 
-   if (main_x_keymap && main_x_keymap->len > 0)
-       main_x_map = (global_key_map_t *) main_x_keymap->data;
+    if (main_x_keymap && main_x_keymap->len > 0)
+        main_x_map = (global_key_map_t *) main_x_keymap->data;
 
     panel_map = default_panel_keymap;
 
     if (panel_keymap && panel_keymap->len > 0) {
-        mc_log ("panel_keymap && panel_keymap->len > 0\n");
         panel_map = (global_key_map_t *) panel_keymap->data;
     }
 

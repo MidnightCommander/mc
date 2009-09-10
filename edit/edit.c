@@ -45,7 +45,6 @@
 #include "editlock.h"
 #include "edit-widget.h"
 #include "../src/cmddef.h"
-#include "usermap.h"
 
 #include "../src/tty/color.h"	/* EDITOR_NORMAL_COLOR */
 #include "../src/tty/tty.h"		/* attrset() */
