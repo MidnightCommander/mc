@@ -29,6 +29,7 @@
 #include <string.h>
 
 #include "../src/global.h"
+#include "../src/args.h"
 #include "../src/tty/color.h"
 #include "skin.h"
 #include "internal.h"
@@ -215,6 +216,47 @@ mc_skin_color_cache_init(void)
     SELECTED_COLOR = mc_skin_color_get("core", "selected");
     REVERSE_COLOR  = mc_skin_color_get("core", "reverse");
 }
+/* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+mc_skin_color_check_inisection(const gchar *group)
+{
+    if (strcasecmp("skin",group) == 0)
+	return FALSE;
+
+    if (strcasecmp("lines",group) == 0)
+	return FALSE;
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+mc_skin_color_check_bw_mode(mc_skin_t *mc_skin)
+{
+    gsize items_count;
+    gchar **groups, **orig_groups;
+
+    if (! mc_args__disable_colors)
+	return;
+
+    orig_groups = groups = mc_config_get_groups (mc_skin->config, &items_count);
+
+    if (groups == NULL)
+	return;
+
+
+    for(;*groups; groups++)
+    {
+	if (!mc_skin_color_check_inisection(*groups))
+	    continue;
+
+	mc_config_del_group (mc_skin->config, *groups);
+    }
+    g_strfreev(orig_groups);
+    mc_skin_hardcoded_blackwhite_colors(mc_skin);
+}
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
@@ -227,6 +269,8 @@ mc_skin_color_parce_ini_file(mc_skin_t *mc_skin)
     gchar **groups, **orig_groups;
     gchar **keys, **orig_keys;
     mc_skin_color_t *mc_skin_color;
+
+    mc_skin_color_check_bw_mode(mc_skin);
 
     orig_groups = groups = mc_config_get_groups (mc_skin->config, &items_count);
 
@@ -248,9 +292,7 @@ mc_skin_color_parce_ini_file(mc_skin_t *mc_skin)
 
     for(;*groups; groups++)
     {
-	if (strcasecmp("skin",*groups) == 0)
-	    continue;
-	if (strcasecmp("lines",*groups) == 0)
+	if (!mc_skin_color_check_inisection(*groups))
 	    continue;
 
 	orig_keys = keys = mc_config_get_keys (mc_skin->config, *groups , &items_count);
