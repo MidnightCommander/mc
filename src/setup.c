@@ -857,6 +857,7 @@ load_keymap_defs (void)
 
         panel_keymap = g_array_new(TRUE, FALSE, sizeof(global_key_map_t));
         load_keymap_from_section ("panel", panel_keymap, mc_global_keymap);
+
         mc_config_deinit(mc_global_keymap);
     }
 

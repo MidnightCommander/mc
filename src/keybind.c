@@ -295,7 +295,6 @@ keymap_add(GArray *keymap, int key, int cmd)
 {
     global_key_map_t new_one, *map;
     guint i;
-
     map = &(g_array_index(keymap, global_key_map_t, 0));
 
     for (i = 0; i < keymap->len; i++) {
@@ -304,10 +303,11 @@ keymap_add(GArray *keymap, int key, int cmd)
 	    return;
 	}
     }
-
-    new_one.key = key;
-    new_one.command = cmd;
-    g_array_append_val(keymap, new_one);
+    if (key !=0 && cmd !=0) {
+        new_one.key = key;
+        new_one.command = cmd;
+        g_array_append_val(keymap, new_one);
+    }
 
 }
 

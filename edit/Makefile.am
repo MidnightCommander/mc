@@ -9,7 +9,7 @@ endif
 libedit_a_SOURCES = \
 	bookmark.c edit.c editcmd.c editwidget.c editdraw.c editkeys.c \
 	editmenu.c editoptions.c editcmddef.h edit-impl.h edit.h edit-widget.h \
-	editlock.c editlock.h syntax.c usermap.h usermap.c wordproc.c \
+	editlock.c editlock.h syntax.c wordproc.c \
 	choosesyntax.c etags.c etags.h editcmd_dialogs.c editcmd_dialogs.h
 
 EXTRA_DIST =
