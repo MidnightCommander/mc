@@ -811,6 +811,7 @@ load_keymap_from_section (const char *section_name, GArray *keymap, mc_config_t 
     while (*profile_keys) {
 	curr_values = values = mc_config_get_string_list (cfg, section_name, *profile_keys, &values_len);
 	action = lookup_action (*profile_keys);
+	mc_log ("section: %s, val: %s, action: %i [%s]\n", section_name, *curr_values, action, *profile_keys);
 	if (action>0) {
 	    if (curr_values){
 	        while (*curr_values){
@@ -848,6 +849,12 @@ load_keymap_defs (void)
     {
         editor_keymap = g_array_new(TRUE, FALSE, sizeof(global_key_map_t));
         load_keymap_from_section ("editor", editor_keymap, mc_global_keymap);
+
+        viewer_keymap = g_array_new(TRUE, FALSE, sizeof(global_key_map_t));
+        load_keymap_from_section ("viewer", viewer_keymap, mc_global_keymap);
+
+        viewer_keymap = g_array_new(TRUE, FALSE, sizeof(global_key_map_t));
+        load_keymap_from_section ("viewer:hex", viewer_hex_keymap, mc_global_keymap);
 
         main_keymap = g_array_new(TRUE, FALSE, sizeof(global_key_map_t));
         load_keymap_from_section ("main", main_keymap, mc_global_keymap);

@@ -77,7 +77,7 @@
 #include "widget.h"
 #include "command.h"
 #include "wtools.h"
-#include "cmddef.h"
+#include "cmddef.h"		/* CK_ cmd name const */
 
 #include "../vfs/vfs.h"		/* vfs_translate_url() */
 
@@ -305,6 +305,8 @@ mc_main_error_quark (void)
 }
 
 GArray *editor_keymap = NULL;
+GArray *viewer_keymap = NULL;
+GArray *viewer_hex_keymap = NULL;
 GArray *main_keymap = NULL;
 GArray *main_x_keymap = NULL;
 GArray *panel_keymap = NULL;

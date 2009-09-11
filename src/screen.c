@@ -60,7 +60,7 @@
 #include "selcodepage.h"	/* select_charset () */
 #include "charsets.h"		/* get_codepage_id () */
 #include "strutil.h"
-#include "cmddef.h"		/* cmd name const */
+#include "cmddef.h"		/* CK_ cmd name const */
 #include "keybind.h"		/* global_key_map_t */
 
 #define ELEMENTS(arr) ( sizeof(arr) / sizeof((arr)[0]) )
@@ -2429,7 +2429,6 @@ static cb_ret_t
 panel_key (WPanel *panel, int key)
 {
     int i;
-
 
     for (i = 0; panel_map[i].key; i++) {
 	if (key == panel_map[i].key) {
