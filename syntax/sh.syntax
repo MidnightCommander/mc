@@ -57,11 +57,13 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
     keyword whole else yellow
     keyword whole esac yellow
     keyword whole exit yellow
+    keyword whole export yellow
     keyword whole fi yellow
     keyword whole for yellow
     keyword whole getopts       yellow
     keyword whole if yellow
     keyword whole in yellow
+    keyword whole read yellow
     keyword whole return yellow
     keyword whole select yellow
     keyword whole shift yellow
@@ -69,6 +71,7 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
     keyword whole then yellow
     keyword whole trap yellow
     keyword whole until yellow
+    keyword whole unset yellow
     keyword whole wait yellow
     keyword whole while yellow
 
