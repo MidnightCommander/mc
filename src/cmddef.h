@@ -193,6 +193,28 @@
 #define CK_Execute_Macro	852
 #define CK_Begin_End_Macro	853
 
+/* Viewer */
+#define CK_ViewSearch			5001
+#define CK_ViewContinueSearch		5002
+#define CK_ViewGotoBookmark		5003
+#define CK_ViewNewBookmark		5004
+#define CK_ViewMoveUp			5005
+#define CK_ViewMoveDown			5006
+#define CK_ViewMoveLeft			5007
+#define CK_ViewMoveRight		5008
+#define CK_ViewMovePgDn			5009
+#define CK_ViewMovePgUp			5010
+#define CK_ViewMoveHalfPgDn		5011
+#define CK_ViewMoveHalfPgUp		5012
+#define CK_ViewMoveToBol		5013
+#define CK_ViewMoveToEol		5014
+#define CK_ViewNextFile			5015
+#define CK_ViewPrevFile			5016
+#define CK_ViewToggleRuler		5017
+#define CK_HexViewToggleNavigationMode	5018
+#define CK_ViewQuit			5020
+
+/* main commands */
 #define CK_ChmodCmd                    7001
 #define CK_ChownAdvancedCmd            7002
 #define CK_ChownCmd                    7003

@@ -75,12 +75,15 @@ extern int is_right;		/* If the selected menu was the right */
 #define SELECTED_IS_PANEL (get_display_type (is_right ? 1 : 0) == view_listing)
 
 extern GArray *editor_keymap;
+extern GArray *viewer_keymap;
+extern GArray *viewer_hex_keymap;
 extern GArray *main_keymap;
 extern GArray *main_x_keymap;
 extern GArray *panel_keymap;
 
 extern const global_key_map_t *panel_map;
 extern const global_key_map_t default_panel_keymap[];
+
 void do_update_prompt (void);
 
 enum cd_enum {
