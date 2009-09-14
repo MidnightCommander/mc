@@ -132,7 +132,7 @@ static const global_key_map_t common_key_map[] = {
     { XCTRL ('o'), CK_Shell },
     { XCTRL ('s'), CK_Toggle_Syntax },
     { XCTRL ('u'), CK_Undo },
-    { XCTRL ('t'), CK_Select_Codepage },
+    { XCTRL ('t'), CK_SelectCodepage },
     { XCTRL ('q'), CK_Insert_Literal },
     { XCTRL ('a'), CK_Execute_Macro },
     { XCTRL ('r'), CK_Begin_End_Macro },

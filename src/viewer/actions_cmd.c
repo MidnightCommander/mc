@@ -109,8 +109,6 @@ const global_key_map_t default_keymap[] = {
 
     { 'u',              CK_ViewMoveHalfPgUp },
 
-    { XCTRL('o'),       CK_ViewOtherCmd },
-
     { 'm',              CK_ViewGotoBookmark },
     { 'r',              CK_ViewNewBookmark },
 
@@ -121,7 +119,8 @@ const global_key_map_t default_keymap[] = {
     { XCTRL ('g'),      CK_ViewQuit },
     { ESC_CHAR,         CK_ViewQuit },
 
-    { XCTRL ('t'),      CK_Select_Codepage },
+    { XCTRL ('t'),      CK_SelectCodepage },
+    { XCTRL('o'),       CK_ShowCommandLine },
     { 0, 0 }
 };
 
@@ -427,7 +426,7 @@ mcview_execute_cmd (mcview_t * view, int command, int key)
         case CK_ViewMovePgDn:
             mcview_move_down (view, view->data_area.height);
             break;
-        case CK_ViewOtherCmd:
+        case CK_ShowCommandLine:
             view_other_cmd ();
             break;
         /*
@@ -459,7 +458,7 @@ mcview_execute_cmd (mcview_t * view, int command, int key)
             if (mcview_ok_to_quit (view))
                 view->want_to_quit = TRUE;
             break;
-        case CK_Select_Codepage:
+        case CK_SelectCodepage:
             mcview_select_encoding (view);
             view->dirty++;
             mcview_update (view);

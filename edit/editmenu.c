@@ -227,7 +227,7 @@ menu_replace_cmd (void)
 static void
 menu_select_codepage_cmd (void)
 {
-    menu_cmd (CK_Select_Codepage);
+    menu_cmd (CK_SelectCodepage);
 }
 
 static void
