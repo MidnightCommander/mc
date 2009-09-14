@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.55\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-02 23:01+0300\n"
+"POT-Creation-Date: 2009-09-14 16:34+0300\n"
 "PO-Revision-Date: 2002-06-24 02:15+0300\n"
 "Last-Translator: Todor Buyukliev <adrez@mail.bg>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -54,10 +54,6 @@ msgstr ""
 
 msgid "Search"
 msgstr "Търси"
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " %d намирания, %d отметки добавени"
 
 msgid " Search string not found "
 msgstr " Търсеният низ не е намерен "
@@ -117,7 +113,7 @@ msgstr ""
 msgid "&Windows/DOS format (CR LF)"
 msgstr ""
 
-msgid "&Macintosh format (LF)"
+msgid "&Macintosh format (CR)"
 msgstr ""
 
 msgid "Change line breaks to:"
@@ -316,9 +312,6 @@ msgstr "Създаден скрипт:"
 msgid "Process block"
 msgstr "Обработи блока"
 
-msgid " Mail "
-msgstr " Изпрати по пощата "
-
 msgid " Copies to"
 msgstr " Копия до"
 
@@ -331,6 +324,9 @@ msgstr " До"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <тема> -c <cc> <до>"
 
+msgid " Mail "
+msgstr " Изпрати по пощата "
+
 msgid " Insert Literal "
 msgstr " Вмъкни символ "
 
@@ -340,7 +336,7 @@ msgstr " Натиснете клавиш: "
 msgid " Execute Macro "
 msgstr " Изпълни Макрос "
 
-msgid "&All charsets"
+msgid "All charsets"
 msgstr ""
 
 #, fuzzy
@@ -362,6 +358,10 @@ msgstr " Въведете заместващия низ:"
 
 msgid " Enter search string:"
 msgstr " Въведете търсения низ:"
+
+#, fuzzy
+msgid "&Find all"
+msgstr "Търси файл"
 
 msgid "Cancel"
 msgstr "Отказ"
@@ -926,6 +926,7 @@ msgstr "Поиск за стартиране е цветен режим"
 msgid "Specifies a color configuration"
 msgstr "Указва цветова конфигурация"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
@@ -960,10 +961,9 @@ msgstr ""
 "   brightcyan, lightgray and white\n"
 "\n"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
 "\n"
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -1056,6 +1056,9 @@ msgstr "Ред на сортиране"
 msgid "Executable first"
 msgstr ""
 
+msgid " Confirmation "
+msgstr " Потвърждение "
+
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
 msgstr "Горещи директории       C-\\"
@@ -1071,9 +1074,6 @@ msgstr " Потвърждавай презапис "
 
 msgid " confirm &Delete "
 msgstr " Потвърждавай изтриване "
-
-msgid " Confirmation "
-msgstr " Потвърждение "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1132,11 +1132,11 @@ msgstr "Време за освобождаване на ВФС:"
 msgid " Virtual File System Setting "
 msgstr " Настройка на Виртуална Файлова Система "
 
-msgid "Quick cd"
-msgstr "Бързо cd"
-
 msgid "cd"
 msgstr "cd"
+
+msgid "Quick cd"
+msgstr "Бързо cd"
 
 msgid "Symbolic link filename:"
 msgstr "Име на връзката:"
@@ -1345,6 +1345,13 @@ msgid "Extension file edit"
 msgstr "Редактирай файл с разширения"
 
 msgid " Which extension file you want to edit? "
+msgstr " Кой файл с разширения искате да редактирате? "
+
+msgid "Highlighting groups file edit"
+msgstr ""
+
+#, fuzzy
+msgid " Which highlighting file you want to edit? "
 msgstr " Кой файл с разширения искате да редактирате? "
 
 msgid " Compare directories "
@@ -1938,9 +1945,25 @@ msgstr "Назначение"
 msgid "Deleting"
 msgstr "Изтривам"
 
-#, c-format
-msgid "Target file \"%s\" already exists!"
+#, fuzzy
+msgid "Target file already exists!"
 msgstr "Файлът назначение \"%s\" вече съществува!"
+
+#, fuzzy, c-format
+msgid "Source date: %s, size %llu"
+msgstr "  Източник: дата %s, размер %llu"
+
+#, fuzzy, c-format
+msgid "Target date: %s, size %llu"
+msgstr "Назначение: дата %s, размер %llu"
+
+#, fuzzy, c-format
+msgid "Source date: %s, size %u"
+msgstr "  Източник: дата %s, размер %u"
+
+#, fuzzy, c-format
+msgid "Target date: %s, size %u"
+msgstr "Назначение: дата %s, размер %u"
 
 msgid "If &size differs"
 msgstr "при различен размер"
@@ -1960,27 +1983,21 @@ msgstr "добави"
 msgid "Overwrite this target?"
 msgstr "Да презапиша ли този?"
 
-#, fuzzy, c-format
-msgid "Target date: %s, size %llu"
-msgstr "Назначение: дата %s, размер %llu"
-
-#, fuzzy, c-format
-msgid "Source date: %s, size %llu"
-msgstr "  Източник: дата %s, размер %llu"
-
-#, fuzzy, c-format
-msgid "Target date: %s, size %u"
-msgstr "Назначение: дата %s, размер %u"
-
-#, fuzzy, c-format
-msgid "Source date: %s, size %u"
-msgstr "  Източник: дата %s, размер %u"
-
 msgid " File exists "
 msgstr " Файлът съществува "
 
 msgid " Background process: File exists "
 msgstr " Фонов процес: Файлът съществува "
+
+msgid "&Background"
+msgstr "Във фон"
+
+msgid "&Stable Symlinks"
+msgstr "Стабилни връзки"
+
+#, fuzzy
+msgid "di&Ve into subdir if exists"
+msgstr "В поддиректория, ако съществува"
 
 msgid "preserve &Attributes"
 msgstr "запази атрибутите"
@@ -1990,15 +2007,6 @@ msgstr "следвай връзките"
 
 msgid "to:"
 msgstr "в:"
-
-msgid "&Background"
-msgstr "Във фон"
-
-msgid "&Stable Symlinks"
-msgstr "Стабилни връзки"
-
-msgid "&Dive into subdir if exists"
-msgstr "В поддиректория, ако съществува"
 
 #, fuzzy, c-format
 msgid "Invalid source pattern `%s'"
@@ -2046,6 +2054,9 @@ msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
+msgstr ""
+
+msgid "&All charsets"
 msgstr ""
 
 #, fuzzy
@@ -2555,6 +2566,9 @@ msgstr "Редактирай файл с разширения"
 
 msgid "Edit &menu file"
 msgstr "Редактирай меню-файл"
+
+msgid "Edit &highlighting group file"
+msgstr ""
 
 msgid "&Configuration..."
 msgstr "Конфигурация..."
@@ -3258,9 +3272,6 @@ msgstr " Не мога дa пуснa програма-дете "
 msgid "Empty output from child filter"
 msgstr ""
 
-msgid "All charsets"
-msgstr ""
-
 msgid "ButtonBar|Help"
 msgstr ""
 
@@ -3814,6 +3825,9 @@ msgstr "Вътрешна грешка:"
 
 msgid "Changes to file lost"
 msgstr "Промените във файла изгубени"
+
+#~ msgid " %d items found, %d bookmarks added "
+#~ msgstr " %d намирания, %d отметки добавени"
 
 #~ msgid "Displays this help message"
 #~ msgstr "Показва това помощно съобщение"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-02 23:01+0300\n"
+"POT-Creation-Date: 2009-09-14 16:34+0300\n"
 "PO-Revision-Date: 2005-07-22 00:47+0200\n"
 "Last-Translator: Arpad Biro <biro_arpad@yahoo.com>\n"
 "Language-Team: Hungarian <debian-l10n-hungarian@lists.debian.org>\n"
@@ -62,10 +62,6 @@ msgstr "A makrórekurzió túl mély"
 # a gombsorban is szerepel (F7)
 msgid "Search"
 msgstr "Keresés"
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " %d találat, %d könyvjelző hozzáadva. "
 
 msgid " Search string not found "
 msgstr " A keresett minta nem található "
@@ -129,7 +125,7 @@ msgstr ""
 msgid "&Windows/DOS format (CR LF)"
 msgstr ""
 
-msgid "&Macintosh format (LF)"
+msgid "&Macintosh format (CR)"
 msgstr ""
 
 msgid "Change line breaks to:"
@@ -323,9 +319,6 @@ msgstr "Parancsfájl létrehozva: "
 msgid "Process block"
 msgstr "Blokk feldolgozása"
 
-msgid " Mail "
-msgstr " E-mail "
-
 msgid " Copies to"
 msgstr " Másolatot kap:"
 
@@ -338,6 +331,9 @@ msgstr " Címzett:"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <tárgy> -c <másolatot_kap> <címzett>"
 
+msgid " Mail "
+msgstr " E-mail "
+
 msgid " Insert Literal "
 msgstr " Karakter beszúrása "
 
@@ -347,7 +343,7 @@ msgstr " Nyomjon meg egy billentyűt: "
 msgid " Execute Macro "
 msgstr " Makró futtatása "
 
-msgid "&All charsets"
+msgid "All charsets"
 msgstr ""
 
 #, fuzzy
@@ -369,6 +365,10 @@ msgstr " Csereszöveg:"
 
 msgid " Enter search string:"
 msgstr " Keresendő minta:"
+
+#, fuzzy
+msgid "&Find all"
+msgstr "Fájl keresése"
 
 msgid "Cancel"
 msgstr "Mégsem"
@@ -944,6 +944,7 @@ msgstr "Színes üzemmód kérése."
 msgid "Specifies a color configuration"
 msgstr "Színösszeállítás megadása."
 
+#. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
@@ -998,10 +999,9 @@ msgstr ""
 "   (fehér)\n"
 "\n"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
 "\n"
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -1094,6 +1094,9 @@ msgstr " Rendezési mód "
 msgid "Executable first"
 msgstr ""
 
+msgid " Confirmation "
+msgstr " Megerősítés "
+
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
 msgstr "Könyvtár-&gyorslista       C-\\"
@@ -1109,9 +1112,6 @@ msgstr " &Felülírás előtt "
 
 msgid " confirm &Delete "
 msgstr " &Törlés előtt "
-
-msgid " Confirmation "
-msgstr " Megerősítés "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1169,11 +1169,11 @@ msgstr "VFS-felszabadítási idő:"
 msgid " Virtual File System Setting "
 msgstr " A virtuális fájlrendszer (VFS) beállításai "
 
-msgid "Quick cd"
-msgstr "Gyors könyvtárváltás (\"cd\")"
-
 msgid "cd"
 msgstr "cd"
+
+msgid "Quick cd"
+msgstr "Gyors könyvtárváltás (\"cd\")"
 
 msgid "Symbolic link filename:"
 msgstr "Szimbolikus link neve:"
@@ -1394,6 +1394,13 @@ msgid "Extension file edit"
 msgstr "Kiterjesztésfájl szerkesztése"
 
 msgid " Which extension file you want to edit? "
+msgstr " Melyik kiterjesztésfájlt kívánja szerkeszteni? "
+
+msgid "Highlighting groups file edit"
+msgstr ""
+
+#, fuzzy
+msgid " Which highlighting file you want to edit? "
 msgstr " Melyik kiterjesztésfájlt kívánja szerkeszteni? "
 
 msgid " Compare directories "
@@ -2028,9 +2035,27 @@ msgstr "Cél"
 msgid "Deleting"
 msgstr "Törlés"
 
-#, c-format
-msgid "Target file \"%s\" already exists!"
+#, fuzzy
+msgid "Target file already exists!"
 msgstr "A(z) \"%s\" célfájl már létezik."
+
+#, c-format
+msgid "Source date: %s, size %llu"
+msgstr "Forrásfájl dátuma: %s, mérete: %llu"
+
+# space-ek: hogy egymás alatt legyen a másolandó és a meglevő
+#, c-format
+msgid "Target date: %s, size %llu"
+msgstr "Célfájl dátuma:    %s, mérete: %llu"
+
+#, c-format
+msgid "Source date: %s, size %u"
+msgstr "Forrásfájl dátuma: %s, mérete: %u"
+
+# space-ek: hogy egymás alatt legyen a másolandó és a meglevő
+#, c-format
+msgid "Target date: %s, size %u"
+msgstr "Célfájl dátuma:    %s, mérete: %u"
 
 msgid "If &size differs"
 msgstr "Ha más a mére&te"
@@ -2053,29 +2078,22 @@ msgstr "&Hozzáírás"
 msgid "Overwrite this target?"
 msgstr "Felülírja ezt a fájlt?"
 
-# space-ek: hogy egymás alatt legyen a másolandó és a meglevő
-#, c-format
-msgid "Target date: %s, size %llu"
-msgstr "Célfájl dátuma:    %s, mérete: %llu"
-
-#, c-format
-msgid "Source date: %s, size %llu"
-msgstr "Forrásfájl dátuma: %s, mérete: %llu"
-
-# space-ek: hogy egymás alatt legyen a másolandó és a meglevő
-#, c-format
-msgid "Target date: %s, size %u"
-msgstr "Célfájl dátuma:    %s, mérete: %u"
-
-#, c-format
-msgid "Source date: %s, size %u"
-msgstr "Forrásfájl dátuma: %s, mérete: %u"
-
 msgid " File exists "
 msgstr " A fájl már létezik "
 
 msgid " Background process: File exists "
 msgstr " Háttérfolyamat: a fájl már létezik "
+
+# A "h" shortcut kerülendő, mert Alt+h = előzmények
+msgid "&Background"
+msgstr "Háttér&ben"
+
+msgid "&Stable Symlinks"
+msgstr "S&tabil szimbolikus linkek"
+
+#, fuzzy
+msgid "di&Ve into subdir if exists"
+msgstr "Lét&ező könyvtárba lemenni"
 
 msgid "preserve &Attributes"
 msgstr "&Attribútumok megőrzése"
@@ -2085,16 +2103,6 @@ msgstr "&Linkek követése"
 
 msgid "to:"
 msgstr "Cél:"
-
-# A "h" shortcut kerülendő, mert Alt+h = előzmények
-msgid "&Background"
-msgstr "Háttér&ben"
-
-msgid "&Stable Symlinks"
-msgstr "S&tabil szimbolikus linkek"
-
-msgid "&Dive into subdir if exists"
-msgstr "Lét&ező könyvtárba lemenni"
 
 #, fuzzy, c-format
 msgid "Invalid source pattern `%s'"
@@ -2143,6 +2151,9 @@ msgid "&Find recursively"
 msgstr "Rek&urzív keresés"
 
 msgid "S&kip hidden"
+msgstr ""
+
+msgid "&All charsets"
 msgstr ""
 
 #, fuzzy
@@ -2656,6 +2667,9 @@ msgstr "Kiter&jesztésfájl szerkesztése"
 
 msgid "Edit &menu file"
 msgstr "Me&nüfájl szerkesztése"
+
+msgid "Edit &highlighting group file"
+msgstr ""
 
 msgid "&Configuration..."
 msgstr "&Alapbeállítások..."
@@ -3375,9 +3389,6 @@ msgstr " Nem sikerült programot indítani "
 msgid "Empty output from child filter"
 msgstr "A szűrő kimenete üres."
 
-msgid "All charsets"
-msgstr ""
-
 msgid "ButtonBar|Help"
 msgstr "Súgó"
 
@@ -3950,6 +3961,9 @@ msgstr "Belső programhiba:"
 
 msgid "Changes to file lost"
 msgstr "A fájl módosításai nem lettek rögzítve."
+
+#~ msgid " %d items found, %d bookmarks added "
+#~ msgstr " %d találat, %d könyvjelző hozzáadva. "
 
 #~ msgid "Displays this help message"
 #~ msgstr "Ennek a használati útmutatónak a megjelenítése."

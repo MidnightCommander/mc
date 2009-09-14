@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-02 23:01+0300\n"
+"POT-Creation-Date: 2009-09-14 16:34+0300\n"
 "PO-Revision-Date: 2003-09-20 18:50+0200\n"
 "Last-Translator: Strahinya Radich (Страхиња Радић) <mr99164@alas.matf.bg.ac."
 "yu>\n"
@@ -59,10 +59,6 @@ msgstr "Ниво рекурзије макроа је превисок"
 
 msgid "Search"
 msgstr "Тражи"
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " Нађено %d, додано %d обележивача "
 
 msgid " Search string not found "
 msgstr " Тражена ниска није нађена "
@@ -122,7 +118,7 @@ msgstr ""
 msgid "&Windows/DOS format (CR LF)"
 msgstr ""
 
-msgid "&Macintosh format (LF)"
+msgid "&Macintosh format (CR)"
 msgstr ""
 
 msgid "Change line breaks to:"
@@ -315,9 +311,6 @@ msgstr "Спис је створен:"
 msgid "Process block"
 msgstr "Обради блок"
 
-msgid " Mail "
-msgstr " Пошта "
-
 msgid " Copies to"
 msgstr " Копије "
 
@@ -330,6 +323,9 @@ msgstr " Коме"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <тема> -c <копије> <коме>"
 
+msgid " Mail "
+msgstr " Пошта "
+
 msgid " Insert Literal "
 msgstr " Убаци литерал "
 
@@ -339,7 +335,7 @@ msgstr " Притисните било који тастер: "
 msgid " Execute Macro "
 msgstr " Изврши макро "
 
-msgid "&All charsets"
+msgid "All charsets"
 msgstr ""
 
 #, fuzzy
@@ -361,6 +357,10 @@ msgstr " Унесите ниску замене:"
 
 msgid " Enter search string:"
 msgstr " Унесите ниску претраге:"
+
+#, fuzzy
+msgid "&Find all"
+msgstr "Нађи датотеку"
 
 msgid "Cancel"
 msgstr "Поништи"
@@ -925,6 +925,7 @@ msgstr "Захтевање обојеног режима"
 msgid "Specifies a color configuration"
 msgstr "Поставља подешавања боја"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
@@ -959,10 +960,9 @@ msgstr ""
 "   brightcyan, lightgray и white\n"
 "\n"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
 "\n"
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -1055,6 +1055,9 @@ msgstr "Поредак ређања"
 msgid "Executable first"
 msgstr ""
 
+msgid " Confirmation "
+msgstr " Потврде "
+
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
 msgstr "брзи с&Писак директоријума  C-\\"
@@ -1070,9 +1073,6 @@ msgstr " потврда &Преписивања "
 
 msgid " confirm &Delete "
 msgstr " потврда &Брисања "
-
-msgid " Confirmation "
-msgstr " Потврде "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1130,11 +1130,11 @@ msgstr "Чекање ослобађања ВСД-ова:"
 msgid " Virtual File System Setting "
 msgstr " Подешавање виртуалног система датотека "
 
-msgid "Quick cd"
-msgstr "Брза пром.дир."
-
 msgid "cd"
 msgstr "пром.дир."
+
+msgid "Quick cd"
+msgstr "Брза пром.дир."
 
 msgid "Symbolic link filename:"
 msgstr "Датотека симболичке везе:"
@@ -1343,6 +1343,13 @@ msgid "Extension file edit"
 msgstr "Уређивање датотеке са врстама"
 
 msgid " Which extension file you want to edit? "
+msgstr " Коју датотеку са врстама желите да уредите? "
+
+msgid "Highlighting groups file edit"
+msgstr ""
+
+#, fuzzy
+msgid " Which highlighting file you want to edit? "
 msgstr " Коју датотеку са врстама желите да уредите? "
 
 msgid " Compare directories "
@@ -1935,9 +1942,25 @@ msgstr "Одредиште"
 msgid "Deleting"
 msgstr "Бришем"
 
-#, c-format
-msgid "Target file \"%s\" already exists!"
+#, fuzzy
+msgid "Target file already exists!"
 msgstr "Одредишна датотека `%s' већ постоји!"
+
+#, fuzzy, c-format
+msgid "Source date: %s, size %llu"
+msgstr "Датум извора: %s, величина %llu"
+
+#, fuzzy, c-format
+msgid "Target date: %s, size %llu"
+msgstr "Датум одредишта: %s, величина %llu"
+
+#, fuzzy, c-format
+msgid "Source date: %s, size %u"
+msgstr "Датум извора: %s, величина %u"
+
+#, fuzzy, c-format
+msgid "Target date: %s, size %u"
+msgstr "Датум одредишта: %s, величина %u"
 
 msgid "If &size differs"
 msgstr "Ако је &величина различита"
@@ -1957,27 +1980,21 @@ msgstr "&Надовежи"
 msgid "Overwrite this target?"
 msgstr "Желите ли да препишем ово одредиште?"
 
-#, fuzzy, c-format
-msgid "Target date: %s, size %llu"
-msgstr "Датум одредишта: %s, величина %llu"
-
-#, fuzzy, c-format
-msgid "Source date: %s, size %llu"
-msgstr "Датум извора: %s, величина %llu"
-
-#, fuzzy, c-format
-msgid "Target date: %s, size %u"
-msgstr "Датум одредишта: %s, величина %u"
-
-#, fuzzy, c-format
-msgid "Source date: %s, size %u"
-msgstr "Датум извора: %s, величина %u"
-
 msgid " File exists "
 msgstr " Датотека постоји "
 
 msgid " Background process: File exists "
 msgstr " Позадински процес: датотека постоји "
+
+msgid "&Background"
+msgstr "&Позадина"
+
+msgid "&Stable Symlinks"
+msgstr "&Стабилне симвезе"
+
+#, fuzzy
+msgid "di&Ve into subdir if exists"
+msgstr "&Зарони у поддиректоријуме"
 
 msgid "preserve &Attributes"
 msgstr "очувај &Атрибуте"
@@ -1987,15 +2004,6 @@ msgstr "прати &Везе"
 
 msgid "to:"
 msgstr "у:"
-
-msgid "&Background"
-msgstr "&Позадина"
-
-msgid "&Stable Symlinks"
-msgstr "&Стабилне симвезе"
-
-msgid "&Dive into subdir if exists"
-msgstr "&Зарони у поддиректоријуме"
 
 #, fuzzy, c-format
 msgid "Invalid source pattern `%s'"
@@ -2043,6 +2051,9 @@ msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
+msgstr ""
+
+msgid "&All charsets"
 msgstr ""
 
 #, fuzzy
@@ -2551,6 +2562,9 @@ msgstr "Уреди датотеку &врста"
 
 msgid "Edit &menu file"
 msgstr "Уреди датотеку &менија"
+
+msgid "Edit &highlighting group file"
+msgstr ""
 
 msgid "&Configuration..."
 msgstr "&Подешавања..."
@@ -3254,9 +3268,6 @@ msgstr " Не могу да створим дете-програм "
 msgid "Empty output from child filter"
 msgstr "Дете-филтар није исписало ништа"
 
-msgid "All charsets"
-msgstr ""
-
 msgid "ButtonBar|Help"
 msgstr ""
 
@@ -3809,6 +3820,9 @@ msgstr "Унутрашња грешка:"
 
 msgid "Changes to file lost"
 msgstr "Измене у датотеци су изгубљене"
+
+#~ msgid " %d items found, %d bookmarks added "
+#~ msgstr " Нађено %d, додано %d обележивача "
 
 #~ msgid "Displays this help message"
 #~ msgstr "Приказује ову поруку помоћи"

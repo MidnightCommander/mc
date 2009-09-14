@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc CVS-20011220\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-02 23:01+0300\n"
+"POT-Creation-Date: 2009-09-14 16:34+0300\n"
 "PO-Revision-Date: 2001-12-20 18:33+0900\n"
 "Last-Translator: Akira TAGOH <tagoh@gnome.gr.jp>\n"
 "Language-Team: Japanese <debian-japanese@lists.debian.org>\n"
@@ -58,10 +58,6 @@ msgstr ""
 
 msgid "Search"
 msgstr "検索"
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " %d 個発見し， %d 個のブックマークを追加しました "
 
 msgid " Search string not found "
 msgstr " 検索文字列が見付かりません "
@@ -121,7 +117,7 @@ msgstr ""
 msgid "&Windows/DOS format (CR LF)"
 msgstr ""
 
-msgid "&Macintosh format (LF)"
+msgid "&Macintosh format (CR)"
 msgstr ""
 
 msgid "Change line breaks to:"
@@ -321,9 +317,6 @@ msgstr "スクリプトは作成されました:"
 msgid "Process block"
 msgstr "プロセスブロック"
 
-msgid " Mail "
-msgstr " メイル "
-
 msgid " Copies to"
 msgstr " コピー"
 
@@ -336,6 +329,9 @@ msgstr " To"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <subject> -c <cc> <to>"
 
+msgid " Mail "
+msgstr " メイル "
+
 msgid " Insert Literal "
 msgstr " 文字を入力してください "
 
@@ -345,7 +341,7 @@ msgstr " キーを押してください: "
 msgid " Execute Macro "
 msgstr " マクロを実行 "
 
-msgid "&All charsets"
+msgid "All charsets"
 msgstr ""
 
 #, fuzzy
@@ -367,6 +363,10 @@ msgstr "置換文字列を入力してください:"
 
 msgid " Enter search string:"
 msgstr "検索文字列を入力してください:"
+
+#, fuzzy
+msgid "&Find all"
+msgstr "ファイル検索"
 
 msgid "Cancel"
 msgstr "キャンセル"
@@ -931,6 +931,7 @@ msgstr "カラーモードでの実行を要求"
 msgid "Specifies a color configuration"
 msgstr "カラー設定を指定"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
@@ -965,10 +966,9 @@ msgstr ""
 "   brightcyan, lightgray and white\n"
 "\n"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
 "\n"
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -1061,6 +1061,9 @@ msgstr "並び変える"
 msgid "Executable first"
 msgstr ""
 
+msgid " Confirmation "
+msgstr " 確認 "
+
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
 msgstr "ディレクトリホットリスト(&R) C-\\"
@@ -1076,9 +1079,6 @@ msgstr " 上書きを確認(&V) "
 
 msgid " confirm &Delete "
 msgstr " 削除を確認(&D) "
-
-msgid " Confirmation "
-msgstr " 確認 "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1137,11 +1137,11 @@ msgstr "VFSを解放するタイムアウト:"
 msgid " Virtual File System Setting "
 msgstr " 仮想ファイルシステムの設定 "
 
-msgid "Quick cd"
-msgstr "クイックcd"
-
 msgid "cd"
 msgstr "cd"
+
+msgid "Quick cd"
+msgstr "クイックcd"
 
 msgid "Symbolic link filename:"
 msgstr "リンクファイル名:"
@@ -1350,6 +1350,13 @@ msgid "Extension file edit"
 msgstr "拡張ファイルの編集"
 
 msgid " Which extension file you want to edit? "
+msgstr " どの拡張ファイルを編集しますか? "
+
+msgid "Highlighting groups file edit"
+msgstr ""
+
+#, fuzzy
+msgid " Which highlighting file you want to edit? "
 msgstr " どの拡張ファイルを編集しますか? "
 
 msgid " Compare directories "
@@ -1943,9 +1950,25 @@ msgstr "ターゲット"
 msgid "Deleting"
 msgstr "削除"
 
-#, c-format
-msgid "Target file \"%s\" already exists!"
+#, fuzzy
+msgid "Target file already exists!"
 msgstr "ターゲットのファイル \"%s\" は既に存在します!"
+
+#, fuzzy, c-format
+msgid "Source date: %s, size %llu"
+msgstr "元の日時: %s, 大きさ %llu"
+
+#, fuzzy, c-format
+msgid "Target date: %s, size %llu"
+msgstr "ターゲットの日時: %s, 大きさ %llu"
+
+#, fuzzy, c-format
+msgid "Source date: %s, size %u"
+msgstr "元の日時: %s, 大きさ %u"
+
+#, fuzzy, c-format
+msgid "Target date: %s, size %u"
+msgstr "ターゲットの日時: %s, 大きさ %u"
 
 msgid "If &size differs"
 msgstr "サイズが異なれば(&S)"
@@ -1965,27 +1988,21 @@ msgstr "追加(&P)"
 msgid "Overwrite this target?"
 msgstr "このターゲットを上書きしますか?"
 
-#, fuzzy, c-format
-msgid "Target date: %s, size %llu"
-msgstr "ターゲットの日時: %s, 大きさ %llu"
-
-#, fuzzy, c-format
-msgid "Source date: %s, size %llu"
-msgstr "元の日時: %s, 大きさ %llu"
-
-#, fuzzy, c-format
-msgid "Target date: %s, size %u"
-msgstr "ターゲットの日時: %s, 大きさ %u"
-
-#, fuzzy, c-format
-msgid "Source date: %s, size %u"
-msgstr "元の日時: %s, 大きさ %u"
-
 msgid " File exists "
 msgstr " ファイルが存在 "
 
 msgid " Background process: File exists "
 msgstr " バックグラウンドプロセス: ファイルが存在 "
+
+msgid "&Background"
+msgstr "バックグラウンド(&B)"
+
+msgid "&Stable Symlinks"
+msgstr "安定シンボリックリンク(&S)"
+
+#, fuzzy
+msgid "di&Ve into subdir if exists"
+msgstr "サブディレクトリが存在すれば入る(&D)"
 
 msgid "preserve &Attributes"
 msgstr "属性を保存する(&A)"
@@ -1995,15 +2012,6 @@ msgstr "リンクをたどる(&L)"
 
 msgid "to:"
 msgstr "to:"
-
-msgid "&Background"
-msgstr "バックグラウンド(&B)"
-
-msgid "&Stable Symlinks"
-msgstr "安定シンボリックリンク(&S)"
-
-msgid "&Dive into subdir if exists"
-msgstr "サブディレクトリが存在すれば入る(&D)"
 
 #, fuzzy, c-format
 msgid "Invalid source pattern `%s'"
@@ -2051,6 +2059,9 @@ msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
+msgstr ""
+
+msgid "&All charsets"
 msgstr ""
 
 #, fuzzy
@@ -2560,6 +2571,9 @@ msgstr "拡張ファイルを編集(&E)"
 
 msgid "Edit &menu file"
 msgstr "メニューファイル編集(&M)"
+
+msgid "Edit &highlighting group file"
+msgstr ""
 
 msgid "&Configuration..."
 msgstr "設定(&C)..."
@@ -3263,9 +3277,6 @@ msgstr " 子プロセスを起動できません "
 msgid "Empty output from child filter"
 msgstr ""
 
-msgid "All charsets"
-msgstr ""
-
 msgid "ButtonBar|Help"
 msgstr ""
 
@@ -3812,6 +3823,9 @@ msgstr "内部エラー:"
 
 msgid "Changes to file lost"
 msgstr "紛失したファイルに変更します"
+
+#~ msgid " %d items found, %d bookmarks added "
+#~ msgstr " %d 個発見し， %d 個のブックマークを追加しました "
 
 #~ msgid "Displays this help message"
 #~ msgstr "このヘルプメッセージを表示"

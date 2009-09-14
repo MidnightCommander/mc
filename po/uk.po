@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: uk\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-02 23:01+0300\n"
+"POT-Creation-Date: 2009-09-14 16:34+0300\n"
 "PO-Revision-Date: 2009-08-25 16:27+0300\n"
 "Last-Translator: Oleksandr Natalenko <pfactum@gmail.com>\n"
 "Language-Team: Ukrainian <kde-i18n-doc@kde.org>\n"
@@ -59,10 +59,6 @@ msgstr "Занадто глибока рекурсія макросів"
 
 msgid "Search"
 msgstr "Пошук"
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " %d знайдено, %d закладок додано "
 
 msgid " Search string not found "
 msgstr " Така стрічка не знайдена "
@@ -122,7 +118,7 @@ msgstr ""
 msgid "&Windows/DOS format (CR LF)"
 msgstr ""
 
-msgid "&Macintosh format (LF)"
+msgid "&Macintosh format (CR)"
 msgstr ""
 
 msgid "Change line breaks to:"
@@ -310,9 +306,6 @@ msgstr "Скрипт створено:"
 msgid "Process block"
 msgstr "Обробити блок"
 
-msgid " Mail "
-msgstr " Пошта "
-
 msgid " Copies to"
 msgstr " Копії до"
 
@@ -325,6 +318,9 @@ msgstr " До"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <Тема> -c <Копії> <До>"
 
+msgid " Mail "
+msgstr " Пошта "
+
 msgid " Insert Literal "
 msgstr " Вставити літерал "
 
@@ -334,7 +330,7 @@ msgstr " Натисніть будь яку клавішу: "
 msgid " Execute Macro "
 msgstr " Виконати макрос "
 
-msgid "&All charsets"
+msgid "All charsets"
 msgstr "Усі кодування"
 
 #, fuzzy
@@ -356,6 +352,10 @@ msgstr " Введіть стрічку для заміни:"
 
 msgid " Enter search string:"
 msgstr " Введіть стрічку для пошуку:"
+
+#, fuzzy
+msgid "&Find all"
+msgstr "Знайти файл"
 
 msgid "Cancel"
 msgstr "Скасувати"
@@ -894,6 +894,7 @@ msgstr "Запит на запуск у кольоровому режимі"
 msgid "Specifies a color configuration"
 msgstr "Визначити налаштування кольорів"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -923,10 +924,10 @@ msgstr ""
 "   Редактор:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 
+#. TRANSLATORS: don't translate keywords and names of colors
+#, fuzzy
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
 "\n"
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -1028,6 +1029,9 @@ msgstr "Порядок сортування"
 msgid "Executable first"
 msgstr "Виконувані першими"
 
+msgid " Confirmation "
+msgstr " Запит підтвердження "
+
 msgid " confirm di&Rectory hotlist delete "
 msgstr " підтверджувати видалення гарячого списку каталогів "
 
@@ -1042,9 +1046,6 @@ msgstr " перед пе&резаписом"
 
 msgid " confirm &Delete "
 msgstr " перед &видаленням"
-
-msgid " Confirmation "
-msgstr " Запит підтвердження "
 
 msgid "UTF-8 output"
 msgstr "Вивід UTF-8"
@@ -1100,11 +1101,11 @@ msgstr "Після якого часу звільняти ВФС:"
 msgid " Virtual File System Setting "
 msgstr " Установки Віртуальної Файлової Системи "
 
-msgid "Quick cd"
-msgstr "Швидка зміна каталогу"
-
 msgid "cd"
 msgstr "Перейти у"
+
+msgid "Quick cd"
+msgstr "Швидка зміна каталогу"
 
 msgid "Symbolic link filename:"
 msgstr "Назва символьного посилання:"
@@ -1311,6 +1312,13 @@ msgid "Extension file edit"
 msgstr "Редагування файла розширень"
 
 msgid " Which extension file you want to edit? "
+msgstr " Який файл розширень ви хочете редагувати? "
+
+msgid "Highlighting groups file edit"
+msgstr ""
+
+#, fuzzy
+msgid " Which highlighting file you want to edit? "
 msgstr " Який файл розширень ви хочете редагувати? "
 
 msgid " Compare directories "
@@ -1912,9 +1920,25 @@ msgstr "Ціль"
 msgid "Deleting"
 msgstr "Видалення"
 
-#, c-format
-msgid "Target file \"%s\" already exists!"
+#, fuzzy
+msgid "Target file already exists!"
 msgstr "Цільовий файл \"%s\" вже існує!"
+
+#, c-format
+msgid "Source date: %s, size %llu"
+msgstr "Дата модифікації джерела: %s, розмір %llu"
+
+#, c-format
+msgid "Target date: %s, size %llu"
+msgstr "Дата модифікації цілі: %s, розмір %llu"
+
+#, c-format
+msgid "Source date: %s, size %u"
+msgstr "Дата модифікації джерела: %s, розмір %u"
+
+#, c-format
+msgid "Target date: %s, size %u"
+msgstr "Дата модифікації цілі: %s, розмір %u"
 
 msgid "If &size differs"
 msgstr "З різним &розміром"
@@ -1934,27 +1958,21 @@ msgstr "Дописати у &кінець"
 msgid "Overwrite this target?"
 msgstr "Замістити цей файл?"
 
-#, c-format
-msgid "Target date: %s, size %llu"
-msgstr "Дата модифікації цілі: %s, розмір %llu"
-
-#, c-format
-msgid "Source date: %s, size %llu"
-msgstr "Дата модифікації джерела: %s, розмір %llu"
-
-#, c-format
-msgid "Target date: %s, size %u"
-msgstr "Дата модифікації цілі: %s, розмір %u"
-
-#, c-format
-msgid "Source date: %s, size %u"
-msgstr "Дата модифікації джерела: %s, розмір %u"
-
 msgid " File exists "
 msgstr " Файл існує "
 
 msgid " Background process: File exists "
 msgstr " Фоновий процес: Файл існує "
+
+msgid "&Background"
+msgstr "На &тлі"
+
+msgid "&Stable Symlinks"
+msgstr "Зберігати симв&oльні посилання"
+
+#, fuzzy
+msgid "di&Ve into subdir if exists"
+msgstr "Ус&eредину каталога, якщо є"
 
 msgid "preserve &Attributes"
 msgstr "Зберігати атриб&yти"
@@ -1964,15 +1982,6 @@ msgstr "&Iти за посиланнями"
 
 msgid "to:"
 msgstr "у:"
-
-msgid "&Background"
-msgstr "На &тлі"
-
-msgid "&Stable Symlinks"
-msgstr "Зберігати симв&oльні посилання"
-
-msgid "&Dive into subdir if exists"
-msgstr "Ус&eредину каталога, якщо є"
 
 # , c-format
 #, c-format
@@ -2018,6 +2027,9 @@ msgstr "Шукати рекурсивно"
 
 msgid "S&kip hidden"
 msgstr "Пропускати приховані"
+
+msgid "&All charsets"
+msgstr "Усі кодування"
 
 msgid "Case sens&itive"
 msgstr "Регістрозалежний"
@@ -2522,6 +2534,9 @@ msgstr "Редагувати файл роз&ширень"
 
 msgid "Edit &menu file"
 msgstr "Редагувати файл &меню"
+
+msgid "Edit &highlighting group file"
+msgstr ""
 
 msgid "&Configuration..."
 msgstr "&Конфігурація..."
@@ -3233,9 +3248,6 @@ msgstr " Не вдається створити процес-нащадок "
 msgid "Empty output from child filter"
 msgstr "Фільтр-нащадок не повернув даних"
 
-msgid "All charsets"
-msgstr "Усі кодування"
-
 msgid "ButtonBar|Help"
 msgstr "Нижня панель|Допомога"
 
@@ -3792,6 +3804,9 @@ msgstr "Внутрішня помилка:"
 
 msgid "Changes to file lost"
 msgstr "Зміни у файлі втрачені"
+
+#~ msgid " %d items found, %d bookmarks added "
+#~ msgstr " %d знайдено, %d закладок додано "
 
 #~ msgid "Displays this help message"
 #~ msgstr "Показує це довідкове повідомлення"

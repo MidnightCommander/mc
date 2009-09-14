@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-02 23:01+0300\n"
+"POT-Creation-Date: 2009-09-14 16:34+0300\n"
 "PO-Revision-Date: 2001-09-29 17:41+0200\n"
 "Last-Translator: Softcatalà <tradgnome@softcatala.org>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
@@ -58,10 +58,6 @@ msgstr ""
 
 msgid "Search"
 msgstr "Cerca"
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr "S'han trobat %d resultats, s'han afegit %d marcadors"
 
 msgid " Search string not found "
 msgstr " No s'ha trobat la cadena "
@@ -122,7 +118,7 @@ msgstr ""
 msgid "&Windows/DOS format (CR LF)"
 msgstr ""
 
-msgid "&Macintosh format (LF)"
+msgid "&Macintosh format (CR)"
 msgstr ""
 
 msgid "Change line breaks to:"
@@ -321,9 +317,6 @@ msgstr "Seqüència creada:"
 msgid "Process block"
 msgstr "Processa el bloc"
 
-msgid " Mail "
-msgstr " Envia per correu "
-
 msgid " Copies to"
 msgstr " Còpies per a"
 
@@ -336,6 +329,9 @@ msgstr " Per a"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <tema> -c <còpies> <per a>"
 
+msgid " Mail "
+msgstr " Envia per correu "
+
 msgid " Insert Literal "
 msgstr " Inserir literal "
 
@@ -345,7 +341,7 @@ msgstr " Premeu una tecla: "
 msgid " Execute Macro "
 msgstr " Executa la macro "
 
-msgid "&All charsets"
+msgid "All charsets"
 msgstr ""
 
 #, fuzzy
@@ -367,6 +363,10 @@ msgstr " Introduïu la cadena per reemplaçar:"
 
 msgid " Enter search string:"
 msgstr " Introduïu la cadena de cerca:"
+
+#, fuzzy
+msgid "&Find all"
+msgstr "Cerca Fitxer"
 
 msgid "Cancel"
 msgstr "Cancel·la"
@@ -932,6 +932,7 @@ msgstr "Demana que s'utilitzi el mode en color"
 msgid "Specifies a color configuration"
 msgstr "Especifica una configuració de color"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
@@ -967,10 +968,9 @@ msgstr ""
 "   blau verdós clar, gris clar i blanc\n"
 "\n"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
 "\n"
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -1065,6 +1065,9 @@ msgstr "Ordre de classificació"
 msgid "Executable first"
 msgstr ""
 
+msgid " Confirmation "
+msgstr " Confirmació "
+
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
 msgstr "directoris fa&Vorits     C-\\"
@@ -1080,9 +1083,6 @@ msgstr " confirma la s&Obreescriptura "
 
 msgid " confirm &Delete "
 msgstr " confirma la &Supressió "
-
-msgid " Confirmation "
-msgstr " Confirmació "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1141,11 +1141,11 @@ msgstr "Temps d'espera per alliberar VFSs:"
 msgid " Virtual File System Setting "
 msgstr " Configuració dels sistemes de fitxers virtuals "
 
-msgid "Quick cd"
-msgstr "Canvi ràpid de directori"
-
 msgid "cd"
 msgstr "cd"
+
+msgid "Quick cd"
+msgstr "Canvi ràpid de directori"
 
 msgid "Symbolic link filename:"
 msgstr "Nom de fitxer de l'enllaç simbòlic:"
@@ -1354,6 +1354,13 @@ msgid "Extension file edit"
 msgstr "Edita el fitxer d'extensions"
 
 msgid " Which extension file you want to edit? "
+msgstr " Quin fitxer d'extensions voleu editar? "
+
+msgid "Highlighting groups file edit"
+msgstr ""
+
+#, fuzzy
+msgid " Which highlighting file you want to edit? "
 msgstr " Quin fitxer d'extensions voleu editar? "
 
 msgid " Compare directories "
@@ -1947,9 +1954,25 @@ msgstr "Objectiu/Destí"
 msgid "Deleting"
 msgstr "Suprimint"
 
-#, c-format
-msgid "Target file \"%s\" already exists!"
+#, fuzzy
+msgid "Target file already exists!"
 msgstr "El fitxer de destí \"%s\" ja existeix!"
+
+#, fuzzy, c-format
+msgid "Source date: %s, size %llu"
+msgstr "Data del font: %s, mida %llu"
+
+#, fuzzy, c-format
+msgid "Target date: %s, size %llu"
+msgstr "Data del destí: %s, mida %llu"
+
+#, fuzzy, c-format
+msgid "Source date: %s, size %u"
+msgstr "Data del font: %s, mida %u"
+
+#, fuzzy, c-format
+msgid "Target date: %s, size %u"
+msgstr "Data del destí: %s, mida %u"
 
 msgid "If &size differs"
 msgstr "si difereix la  &Mida"
@@ -1969,27 +1992,21 @@ msgstr "afe&Geix"
 msgid "Overwrite this target?"
 msgstr "Voleu sobreescriure aquest destí?"
 
-#, fuzzy, c-format
-msgid "Target date: %s, size %llu"
-msgstr "Data del destí: %s, mida %llu"
-
-#, fuzzy, c-format
-msgid "Source date: %s, size %llu"
-msgstr "Data del font: %s, mida %llu"
-
-#, fuzzy, c-format
-msgid "Target date: %s, size %u"
-msgstr "Data del destí: %s, mida %u"
-
-#, fuzzy, c-format
-msgid "Source date: %s, size %u"
-msgstr "Data del font: %s, mida %u"
-
 msgid " File exists "
 msgstr " El fitxer ja existeix "
 
 msgid " Background process: File exists "
 msgstr " Tasca de fons: El fitxer ja existeix "
+
+msgid "&Background"
+msgstr "&Segon pla"
+
+msgid "&Stable Symlinks"
+msgstr "enllaços simbòlics &Estables"
+
+#, fuzzy
+msgid "di&Ve into subdir if exists"
+msgstr "&Recórrer al subdirectori si existeix"
 
 msgid "preserve &Attributes"
 msgstr "&Preserva els atributs"
@@ -1999,15 +2016,6 @@ msgstr "segueix els en&Llaços"
 
 msgid "to:"
 msgstr "cap a:"
-
-msgid "&Background"
-msgstr "&Segon pla"
-
-msgid "&Stable Symlinks"
-msgstr "enllaços simbòlics &Estables"
-
-msgid "&Dive into subdir if exists"
-msgstr "&Recórrer al subdirectori si existeix"
 
 #, fuzzy, c-format
 msgid "Invalid source pattern `%s'"
@@ -2055,6 +2063,9 @@ msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
+msgstr ""
+
+msgid "&All charsets"
 msgstr ""
 
 #, fuzzy
@@ -2567,6 +2578,9 @@ msgstr "edita el fitxer d'&Extensions"
 
 msgid "Edit &menu file"
 msgstr "edita el fitxer de &Menús"
+
+msgid "Edit &highlighting group file"
+msgstr ""
 
 msgid "&Configuration..."
 msgstr "&Configuració..."
@@ -3275,9 +3289,6 @@ msgstr " No puc llançar el procés fill "
 msgid "Empty output from child filter"
 msgstr ""
 
-msgid "All charsets"
-msgstr ""
-
 msgid "ButtonBar|Help"
 msgstr ""
 
@@ -3833,6 +3844,9 @@ msgstr "Error intern:"
 
 msgid "Changes to file lost"
 msgstr "Canvia al fitxer perdut"
+
+#~ msgid " %d items found, %d bookmarks added "
+#~ msgstr "S'han trobat %d resultats, s'han afegit %d marcadors"
 
 #~ msgid "Displays this help message"
 #~ msgstr "Mostra aquest missatge d'ajuda"

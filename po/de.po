@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.x\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-02 23:01+0300\n"
+"POT-Creation-Date: 2009-09-14 16:34+0300\n"
 "PO-Revision-Date: 2009-01-25 17:50-0000\n"
 "Last-Translator: Patrick Winnertz <winnie@der-winnie.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -62,10 +62,6 @@ msgstr "Makros sind zu tief verschachtelt"
 
 msgid "Search"
 msgstr "Suchen"
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " %d Treffer, %d Lesezeichen hinzugefügt "
 
 msgid " Search string not found "
 msgstr " Suchstring nicht gefunden "
@@ -126,7 +122,7 @@ msgstr ""
 msgid "&Windows/DOS format (CR LF)"
 msgstr ""
 
-msgid "&Macintosh format (LF)"
+msgid "&Macintosh format (CR)"
 msgstr ""
 
 msgid "Change line breaks to:"
@@ -316,9 +312,6 @@ msgstr "Skript erzeugt:"
 msgid "Process block"
 msgstr "Block verarbeiten"
 
-msgid " Mail "
-msgstr " Mail "
-
 msgid " Copies to"
 msgstr " Kopien an"
 
@@ -331,6 +324,9 @@ msgstr " An"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <betreff> -c <cc> <an>"
 
+msgid " Mail "
+msgstr " Mail "
+
 msgid " Insert Literal "
 msgstr " Literal einfügen "
 
@@ -340,7 +336,7 @@ msgstr " Eine Taste drücken: "
 msgid " Execute Macro "
 msgstr " Makro ausführen "
 
-msgid "&All charsets"
+msgid "All charsets"
 msgstr ""
 
 #, fuzzy
@@ -362,6 +358,10 @@ msgstr " Ersatzstring eingeben:"
 
 msgid " Enter search string:"
 msgstr " Suchstring eingeben:"
+
+#, fuzzy
+msgid "&Find all"
+msgstr "Datei suchen"
 
 msgid "Cancel"
 msgstr "Abbrechen"
@@ -923,6 +923,7 @@ msgstr "Anfrage für Ausführung im Farbmodus"
 msgid "Specifies a color configuration"
 msgstr "Gibt eine Farbkonfiguration an"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
@@ -960,10 +961,9 @@ msgstr ""
 "   brightcyan, lightgray und white\n"
 "\n"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
 "\n"
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -1056,6 +1056,9 @@ msgstr "Sortierung"
 msgid "Executable first"
 msgstr "Ausführbare Dateien zuerst"
 
+msgid " Confirmation "
+msgstr " Bestätigung "
+
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
 msgstr "Ve&Rzeichnis Hotlist  löschen"
@@ -1071,9 +1074,6 @@ msgstr " bestätige &Überschreiben "
 
 msgid " confirm &Delete "
 msgstr " bestätige &Löschen "
-
-msgid " Confirmation "
-msgstr " Bestätigung "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1130,11 +1130,11 @@ msgstr "Timeout bei der Freigabe in VFSen:"
 msgid " Virtual File System Setting "
 msgstr " Einstellungen für das Virtuelle Dateisystem "
 
-msgid "Quick cd"
-msgstr "Schnelles cd"
-
 msgid "cd"
 msgstr "cd"
+
+msgid "Quick cd"
+msgstr "Schnelles cd"
 
 msgid "Symbolic link filename:"
 msgstr "Name des symbolischen Links:"
@@ -1343,6 +1343,13 @@ msgid "Extension file edit"
 msgstr "Bearbeiten der Erweiterungsdatei"
 
 msgid " Which extension file you want to edit? "
+msgstr " Welcher Erweiterungsdatei möchten Sie bearbeiten? "
+
+msgid "Highlighting groups file edit"
+msgstr ""
+
+#, fuzzy
+msgid " Which highlighting file you want to edit? "
 msgstr " Welcher Erweiterungsdatei möchten Sie bearbeiten? "
 
 msgid " Compare directories "
@@ -1941,9 +1948,25 @@ msgstr "Ziel"
 msgid "Deleting"
 msgstr "Lösche"
 
-#, c-format
-msgid "Target file \"%s\" already exists!"
+#, fuzzy
+msgid "Target file already exists!"
 msgstr "Zieldatei \"%s\" existiert bereits!"
+
+#, c-format
+msgid "Source date: %s, size %llu"
+msgstr "Quelldatum: %s, Größe %llu"
+
+#, c-format
+msgid "Target date: %s, size %llu"
+msgstr "Zieldatum: %s, Größe %llu"
+
+#, c-format
+msgid "Source date: %s, size %u"
+msgstr "Quelldatum: %s, Größe %u"
+
+#, c-format
+msgid "Target date: %s, size %u"
+msgstr "Zieldatum: %s, Größe %u"
 
 msgid "If &size differs"
 msgstr "bei unter&Schiedlicher größe"
@@ -1963,27 +1986,21 @@ msgstr "Anhängen"
 msgid "Overwrite this target?"
 msgstr "Dieses Ziel überschreiben?"
 
-#, c-format
-msgid "Target date: %s, size %llu"
-msgstr "Zieldatum: %s, Größe %llu"
-
-#, c-format
-msgid "Source date: %s, size %llu"
-msgstr "Quelldatum: %s, Größe %llu"
-
-#, c-format
-msgid "Target date: %s, size %u"
-msgstr "Zieldatum: %s, Größe %u"
-
-#, c-format
-msgid "Source date: %s, size %u"
-msgstr "Quelldatum: %s, Größe %u"
-
 msgid " File exists "
 msgstr " Datei schon vorhanden "
 
 msgid " Background process: File exists "
 msgstr " Hintergrundprozeß: Datei schon vorhanden "
+
+msgid "&Background"
+msgstr "Hinter&grund"
+
+msgid "&Stable Symlinks"
+msgstr "&Stabile symbolische Links"
+
+#, fuzzy
+msgid "di&Ve into subdir if exists"
+msgstr "In Unterverzeichnis abtauchen, wenn es existiert"
 
 msgid "preserve &Attributes"
 msgstr "&Attribute sichern"
@@ -1993,15 +2010,6 @@ msgstr "&Links folgen"
 
 msgid "to:"
 msgstr "nach:"
-
-msgid "&Background"
-msgstr "Hinter&grund"
-
-msgid "&Stable Symlinks"
-msgstr "&Stabile symbolische Links"
-
-msgid "&Dive into subdir if exists"
-msgstr "In Unterverzeichnis abtauchen, wenn es existiert"
 
 #, fuzzy, c-format
 msgid "Invalid source pattern `%s'"
@@ -2049,6 +2057,9 @@ msgid "&Find recursively"
 msgstr "Rec&ursiv durchsuchen"
 
 msgid "S&kip hidden"
+msgstr ""
+
+msgid "&All charsets"
 msgstr ""
 
 #, fuzzy
@@ -2558,6 +2569,9 @@ msgstr "Suffixdaten b&Earbeiten"
 
 msgid "Edit &menu file"
 msgstr "&Menüdatei bearbeiten"
+
+msgid "Edit &highlighting group file"
+msgstr ""
 
 msgid "&Configuration..."
 msgstr "Konfiguration..."
@@ -3259,9 +3273,6 @@ msgstr " Kann Kindprozess nicht ausführen "
 msgid "Empty output from child filter"
 msgstr "Der Filter gab nichts aus"
 
-msgid "All charsets"
-msgstr ""
-
 msgid "ButtonBar|Help"
 msgstr "Hilfe"
 
@@ -3819,6 +3830,9 @@ msgstr "Interner Fehler:"
 
 msgid "Changes to file lost"
 msgstr "Änderungen an Datei verlorengegangen"
+
+#~ msgid " %d items found, %d bookmarks added "
+#~ msgstr " %d Treffer, %d Lesezeichen hinzugefügt "
 
 #~ msgid "Displays this help message"
 #~ msgstr "Zeigt diesen Hilfetext an"

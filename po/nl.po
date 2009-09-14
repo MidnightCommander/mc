@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-02 23:01+0300\n"
+"POT-Creation-Date: 2009-09-14 16:34+0300\n"
 "PO-Revision-Date: 2009-02-13\n"
 "Last-Translator: Marcel Pol <mpol@gmx.net>\n"
 "Language-Team: Dutch <debian-l10n-dutch@lists.debian.org>\n"
@@ -59,10 +59,6 @@ msgstr "Macro-recursie gaat te diep"
 
 msgid "Search"
 msgstr "Zoeken"
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " %d gevonden, %d bladwijzers toegevoegd "
 
 msgid " Search string not found "
 msgstr " Zoekstring niet gevonden "
@@ -122,7 +118,7 @@ msgstr ""
 msgid "&Windows/DOS format (CR LF)"
 msgstr ""
 
-msgid "&Macintosh format (LF)"
+msgid "&Macintosh format (CR)"
 msgstr ""
 
 msgid "Change line breaks to:"
@@ -311,9 +307,6 @@ msgstr "Script gemaakt:"
 msgid "Process block"
 msgstr "Bewerk blok"
 
-msgid " Mail "
-msgstr " Mail "
-
 msgid " Copies to"
 msgstr " Kopiëert naar"
 
@@ -326,6 +319,9 @@ msgstr " Aan"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <onderwerp> -c <cc> <aan>"
 
+msgid " Mail "
+msgstr " Mail "
+
 msgid " Insert Literal "
 msgstr " Letterlijk invoegen "
 
@@ -335,7 +331,7 @@ msgstr " Druk een toets: "
 msgid " Execute Macro "
 msgstr " Macro uitvoeren "
 
-msgid "&All charsets"
+msgid "All charsets"
 msgstr ""
 
 #, fuzzy
@@ -357,6 +353,10 @@ msgstr " Geef de vervangende string:"
 
 msgid " Enter search string:"
 msgstr " Geef de zoekstring:"
+
+#, fuzzy
+msgid "&Find all"
+msgstr "Bestand zoeken"
 
 msgid "Cancel"
 msgstr "Annuleren"
@@ -918,6 +918,7 @@ msgstr "Vraag om de kleurenmodus te gebruiken"
 msgid "Specifies a color configuration"
 msgstr "Geef een kleurconfiguratie aan"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
@@ -956,10 +957,9 @@ msgstr ""
 "   brightcyan, lightgray and white\n"
 "\n"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
 "\n"
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -1052,6 +1052,9 @@ msgstr "Sortering"
 msgid "Executable first"
 msgstr "Uitvoerbare bestanden eerst"
 
+msgid " Confirmation "
+msgstr " Bevestiging "
+
 msgid " confirm di&Rectory hotlist delete "
 msgstr " bevestig verwijderen mappen &Snellijst "
 
@@ -1066,9 +1069,6 @@ msgstr " Bevestig o&Verschrijven "
 
 msgid " confirm &Delete "
 msgstr " Bevestig verwij&Deren "
-
-msgid " Confirmation "
-msgstr " Bevestiging "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1125,11 +1125,11 @@ msgstr "Timeout bij vrijgegeven VFS'en:"
 msgid " Virtual File System Setting "
 msgstr " Instellingen voor het Virtuele Bestandssysteem (VFS) "
 
-msgid "Quick cd"
-msgstr "Snelle cd"
-
 msgid "cd"
 msgstr "cd"
+
+msgid "Quick cd"
+msgstr "Snelle cd"
 
 msgid "Symbolic link filename:"
 msgstr "Naam voor de symbolische link:"
@@ -1338,6 +1338,13 @@ msgid "Extension file edit"
 msgstr "Bewerken uitbreidingsbestand"
 
 msgid " Which extension file you want to edit? "
+msgstr " Welk uitbreidingsbestand wilt u bewerken? "
+
+msgid "Highlighting groups file edit"
+msgstr ""
+
+#, fuzzy
+msgid " Which highlighting file you want to edit? "
 msgstr " Welk uitbreidingsbestand wilt u bewerken? "
 
 msgid " Compare directories "
@@ -1931,9 +1938,25 @@ msgstr "Doel"
 msgid "Deleting"
 msgstr "Aan het verwijderen"
 
-#, c-format
-msgid "Target file \"%s\" already exists!"
+#, fuzzy
+msgid "Target file already exists!"
 msgstr "Doelbestand \"%s\" bestaat reeds!"
+
+#, c-format
+msgid "Source date: %s, size %llu"
+msgstr "Brondatum: %s, grootte %llu"
+
+#, c-format
+msgid "Target date: %s, size %llu"
+msgstr "Doeldatum: %s, grootte %llu"
+
+#, c-format
+msgid "Source date: %s, size %u"
+msgstr "Brondatum: %s, grootte %u"
+
+#, c-format
+msgid "Target date: %s, size %u"
+msgstr "Doeldatum: %s, grootte %u"
 
 msgid "If &size differs"
 msgstr "bij ver&Schillende grootte"
@@ -1953,27 +1976,21 @@ msgstr "Toevoegen"
 msgid "Overwrite this target?"
 msgstr "Dit doel overschrijven?"
 
-#, c-format
-msgid "Target date: %s, size %llu"
-msgstr "Doeldatum: %s, grootte %llu"
-
-#, c-format
-msgid "Source date: %s, size %llu"
-msgstr "Brondatum: %s, grootte %llu"
-
-#, c-format
-msgid "Target date: %s, size %u"
-msgstr "Doeldatum: %s, grootte %u"
-
-#, c-format
-msgid "Source date: %s, size %u"
-msgstr "Brondatum: %s, grootte %u"
-
 msgid " File exists "
 msgstr " Bestand bestaat reeds "
 
 msgid " Background process: File exists "
 msgstr " Achtergrondproces: bestand bestaat reeds "
+
+msgid "&Background"
+msgstr "Achter&Grond"
+
+msgid "&Stable Symlinks"
+msgstr "&Stabiele symbolische links"
+
+#, fuzzy
+msgid "di&Ve into subdir if exists"
+msgstr "Ga naar sub&Map, als deze bestaat"
 
 msgid "preserve &Attributes"
 msgstr "&Attributen behouden"
@@ -1983,15 +2000,6 @@ msgstr "&Links volgen"
 
 msgid "to:"
 msgstr "naar:"
-
-msgid "&Background"
-msgstr "Achter&Grond"
-
-msgid "&Stable Symlinks"
-msgstr "&Stabiele symbolische links"
-
-msgid "&Dive into subdir if exists"
-msgstr "Ga naar sub&Map, als deze bestaat"
 
 #, fuzzy, c-format
 msgid "Invalid source pattern `%s'"
@@ -2039,6 +2047,9 @@ msgid "&Find recursively"
 msgstr "&Vind recursief"
 
 msgid "S&kip hidden"
+msgstr ""
+
+msgid "&All charsets"
 msgstr ""
 
 #, fuzzy
@@ -2548,6 +2559,9 @@ msgstr "Bewerk &Extensie                  "
 
 msgid "Edit &menu file"
 msgstr "&Bewerk menubestand               "
+
+msgid "Edit &highlighting group file"
+msgstr ""
 
 msgid "&Configuration..."
 msgstr "&Configuratie...     "
@@ -3249,9 +3263,6 @@ msgstr " Starten kindproces mislukt "
 msgid "Empty output from child filter"
 msgstr "Geen uitvoer van kindfilter"
 
-msgid "All charsets"
-msgstr ""
-
 msgid "ButtonBar|Help"
 msgstr "Help"
 
@@ -3808,6 +3819,9 @@ msgstr "Interne fout:"
 
 msgid "Changes to file lost"
 msgstr "Wijzigingen zijn verloren"
+
+#~ msgid " %d items found, %d bookmarks added "
+#~ msgstr " %d gevonden, %d bladwijzers toegevoegd "
 
 #~ msgid "Displays this help message"
 #~ msgstr "Toont deze helptekst"

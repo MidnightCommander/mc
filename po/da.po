@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.41\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-02 23:01+0300\n"
+"POT-Creation-Date: 2009-09-14 16:34+0300\n"
 "PO-Revision-Date: 2001-10-20 21:37+02:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -64,10 +64,6 @@ msgstr ""
 
 msgid "Search"
 msgstr "Søg"
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr "%d fund gjort, %d bogmærker tilføjet"
 
 msgid " Search string not found "
 msgstr " Søgetekst ikke fundet "
@@ -127,7 +123,7 @@ msgstr ""
 msgid "&Windows/DOS format (CR LF)"
 msgstr ""
 
-msgid "&Macintosh format (LF)"
+msgid "&Macintosh format (CR)"
 msgstr ""
 
 msgid "Change line breaks to:"
@@ -326,9 +322,6 @@ msgstr "Skript oprettet:"
 msgid "Process block"
 msgstr "Procesblok"
 
-msgid " Mail "
-msgstr " Send "
-
 msgid " Copies to"
 msgstr " Kopiér til"
 
@@ -341,6 +334,9 @@ msgstr " Til"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <emne> -c <cc> <til>"
 
+msgid " Mail "
+msgstr " Send "
+
 msgid " Insert Literal "
 msgstr " Indsæt bogstaveligt "
 
@@ -350,7 +346,7 @@ msgstr " Tryk på en tast: "
 msgid " Execute Macro "
 msgstr " Kør makro "
 
-msgid "&All charsets"
+msgid "All charsets"
 msgstr ""
 
 #, fuzzy
@@ -372,6 +368,10 @@ msgstr " Indtast erstatningstekst:"
 
 msgid " Enter search string:"
 msgstr " Indtast søgetekst:"
+
+#, fuzzy
+msgid "&Find all"
+msgstr "Find fil"
 
 msgid "Cancel"
 msgstr "Annullér"
@@ -936,6 +936,7 @@ msgstr "Forsøg at køre med farver"
 msgid "Specifies a color configuration"
 msgstr "Specificerer en farveindstilling"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
@@ -970,10 +971,9 @@ msgstr ""
 "   brightcyan, lightgray and white\n"
 "\n"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
 "\n"
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -1066,6 +1066,9 @@ msgstr "Sorteringsrækkefølge"
 msgid "Executable first"
 msgstr ""
 
+msgid " Confirmation "
+msgstr " Bekræftelse "
+
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
 msgstr "ma&Ppe hurtigliste    C-\\"
@@ -1081,9 +1084,6 @@ msgstr " bekræft o&Verskriv "
 
 msgid " confirm &Delete "
 msgstr " bekræft &slet "
-
-msgid " Confirmation "
-msgstr " Bekræftelse "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1142,11 +1142,11 @@ msgstr "Tidsudløb for frigørelse af VFS'er:"
 msgid " Virtual File System Setting "
 msgstr " Indstillinger for virtuelt filsystem "
 
-msgid "Quick cd"
-msgstr "Hurtig mappeskift"
-
 msgid "cd"
 msgstr "cd"
+
+msgid "Quick cd"
+msgstr "Hurtig mappeskift"
 
 msgid "Symbolic link filename:"
 msgstr "Filnavn for symbolsk lænke:"
@@ -1355,6 +1355,13 @@ msgid "Extension file edit"
 msgstr "Redigér udvidelsesfil"
 
 msgid " Which extension file you want to edit? "
+msgstr " Hvilken udvidelsesfil vil du redigere? "
+
+msgid "Highlighting groups file edit"
+msgstr ""
+
+#, fuzzy
+msgid " Which highlighting file you want to edit? "
 msgstr " Hvilken udvidelsesfil vil du redigere? "
 
 msgid " Compare directories "
@@ -1948,9 +1955,25 @@ msgstr "Mål"
 msgid "Deleting"
 msgstr "Sletter"
 
-#, c-format
-msgid "Target file \"%s\" already exists!"
+#, fuzzy
+msgid "Target file already exists!"
 msgstr "Målfilen \"%s\" eksisterer allerede!"
+
+#, fuzzy, c-format
+msgid "Source date: %s, size %llu"
+msgstr "Kildefilens dato: %s, størrelse %llu"
+
+#, fuzzy, c-format
+msgid "Target date: %s, size %llu"
+msgstr "Målfilens dato: %s, størrelse %llu"
+
+#, fuzzy, c-format
+msgid "Source date: %s, size %u"
+msgstr "Kildefilens dato: %s, størrelse %u"
+
+#, fuzzy, c-format
+msgid "Target date: %s, size %u"
+msgstr "Målfilens dato: %s, størrelse %u"
 
 msgid "If &size differs"
 msgstr "hvis &Størrelsen er forskellig"
@@ -1970,27 +1993,21 @@ msgstr "Tilføj"
 msgid "Overwrite this target?"
 msgstr "Overskriv dette mål?"
 
-#, fuzzy, c-format
-msgid "Target date: %s, size %llu"
-msgstr "Målfilens dato: %s, størrelse %llu"
-
-#, fuzzy, c-format
-msgid "Source date: %s, size %llu"
-msgstr "Kildefilens dato: %s, størrelse %llu"
-
-#, fuzzy, c-format
-msgid "Target date: %s, size %u"
-msgstr "Målfilens dato: %s, størrelse %u"
-
-#, fuzzy, c-format
-msgid "Source date: %s, size %u"
-msgstr "Kildefilens dato: %s, størrelse %u"
-
 msgid " File exists "
 msgstr " Filen eksisterer "
 
 msgid " Background process: File exists "
 msgstr " Baggrundsproces: Filen eksisterer "
+
+msgid "&Background"
+msgstr "&Baggrund"
+
+msgid "&Stable Symlinks"
+msgstr "&Stabile symlænker"
+
+#, fuzzy
+msgid "di&Ve into subdir if exists"
+msgstr "Gå ned i un&Dermappe hvis den findes"
 
 msgid "preserve &Attributes"
 msgstr "bevar &Attributter"
@@ -2000,15 +2017,6 @@ msgstr "følg &Lænker"
 
 msgid "to:"
 msgstr "til:"
-
-msgid "&Background"
-msgstr "&Baggrund"
-
-msgid "&Stable Symlinks"
-msgstr "&Stabile symlænker"
-
-msgid "&Dive into subdir if exists"
-msgstr "Gå ned i un&Dermappe hvis den findes"
 
 #, fuzzy, c-format
 msgid "Invalid source pattern `%s'"
@@ -2056,6 +2064,9 @@ msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
+msgstr ""
+
+msgid "&All charsets"
 msgstr ""
 
 #, fuzzy
@@ -2566,6 +2577,9 @@ msgstr "Redigér fil&Endelser"
 
 msgid "Edit &menu file"
 msgstr "&Menufilsredigering"
+
+msgid "Edit &highlighting group file"
+msgstr ""
 
 msgid "&Configuration..."
 msgstr "&Opsætning..."
@@ -3269,9 +3283,6 @@ msgstr " Kan ikke starte barneprogram "
 msgid "Empty output from child filter"
 msgstr ""
 
-msgid "All charsets"
-msgstr ""
-
 msgid "ButtonBar|Help"
 msgstr ""
 
@@ -3824,6 +3835,9 @@ msgstr " Intern fejl:"
 
 msgid "Changes to file lost"
 msgstr "Ændringer til fil tabt"
+
+#~ msgid " %d items found, %d bookmarks added "
+#~ msgstr "%d fund gjort, %d bogmærker tilføjet"
 
 #~ msgid "Displays this help message"
 #~ msgstr "Viser denne hjælpemeddelelse"

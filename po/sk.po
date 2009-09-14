@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-02 23:01+0300\n"
+"POT-Creation-Date: 2009-09-14 16:34+0300\n"
 "PO-Revision-Date: 2009-07-27 17:18+0100\n"
 "Last-Translator: Ivan Masár <helix84@centrum.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -58,10 +58,6 @@ msgstr "Rekurzia makra je príliš hlboká"
 
 msgid "Search"
 msgstr "Hľadať"
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " %d nájdených, %d pridaných záložiek "
 
 msgid " Search string not found "
 msgstr " Hľadaný reťazec nebol nájdený "
@@ -121,7 +117,7 @@ msgstr ""
 msgid "&Windows/DOS format (CR LF)"
 msgstr ""
 
-msgid "&Macintosh format (LF)"
+msgid "&Macintosh format (CR)"
 msgstr ""
 
 msgid "Change line breaks to:"
@@ -310,9 +306,6 @@ msgstr "Vytvorený skript:"
 msgid "Process block"
 msgstr "Spracovať blok "
 
-msgid " Mail "
-msgstr " Pošta "
-
 msgid " Copies to"
 msgstr " Kopie komu"
 
@@ -325,6 +318,9 @@ msgstr " Komu"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <predmet> -c <cc> <pre>"
 
+msgid " Mail "
+msgstr " Pošta "
+
 msgid " Insert Literal "
 msgstr " Vložiť znak "
 
@@ -334,8 +330,8 @@ msgstr " Stlačte ľubovoľný kláves: "
 msgid " Execute Macro "
 msgstr " Spustiť makro "
 
-msgid "&All charsets"
-msgstr "Všetky zn&akové sady"
+msgid "All charsets"
+msgstr "Všetky znakové sady"
 
 #, fuzzy
 msgid "&Whole words"
@@ -356,6 +352,10 @@ msgstr " Zadajte reťazec pre nahradenie:"
 
 msgid " Enter search string:"
 msgstr " Zadajte reťazec pre hľadanie:"
+
+#, fuzzy
+msgid "&Find all"
+msgstr "Nájsť súbor"
 
 msgid "Cancel"
 msgstr "Zruš"
@@ -894,6 +894,7 @@ msgstr "Požiadať o spustenie vo farebnom režime"
 msgid "Specifies a color configuration"
 msgstr "Určuje farebnú konfiguráciu"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -921,10 +922,10 @@ msgstr ""
 "   Editor:            editnormal, editbold, editmarked,\n"
 "                      editwhitespace, editlinestate\n"
 
+#. TRANSLATORS: don't translate keywords and names of colors
+#, fuzzy
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
 "\n"
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -1026,6 +1027,9 @@ msgstr "Poradie triedenia"
 msgid "Executable first"
 msgstr "Najprv spustiteľné"
 
+msgid " Confirmation "
+msgstr " Potvrdenie "
+
 msgid " confirm di&Rectory hotlist delete "
 msgstr " potvrdiť zmazanie hotlistu ad&Resára "
 
@@ -1040,9 +1044,6 @@ msgstr " potvrdiť p&Repísanie "
 
 msgid " confirm &Delete "
 msgstr " potvrdiť z&Mazanie "
-
-msgid " Confirmation "
-msgstr " Potvrdenie "
 
 msgid "UTF-8 output"
 msgstr "Výstup v UTF-8"
@@ -1098,11 +1099,11 @@ msgstr "Časový limit pre uvoľnenie VFS:"
 msgid " Virtual File System Setting "
 msgstr " Nastavenie virtuálneho súborového systému "
 
-msgid "Quick cd"
-msgstr "Rýchly cd"
-
 msgid "cd"
 msgstr "cd"
+
+msgid "Quick cd"
+msgstr "Rýchly cd"
 
 msgid "Symbolic link filename:"
 msgstr "Meno symbolického odkazu:"
@@ -1309,6 +1310,13 @@ msgid "Extension file edit"
 msgstr "Upraviť príponu názvu súboru"
 
 msgid " Which extension file you want to edit? "
+msgstr " Ktorú príponu názvu súboru chcete upraviť? "
+
+msgid "Highlighting groups file edit"
+msgstr ""
+
+#, fuzzy
+msgid " Which highlighting file you want to edit? "
 msgstr " Ktorú príponu názvu súboru chcete upraviť? "
 
 msgid " Compare directories "
@@ -1907,9 +1915,25 @@ msgstr "Cieľ"
 msgid "Deleting"
 msgstr "Deleting"
 
-#, c-format
-msgid "Target file \"%s\" already exists!"
+#, fuzzy
+msgid "Target file already exists!"
 msgstr "Cieľový súbor \"%s\" už existuje!"
+
+#, c-format
+msgid "Source date: %s, size %llu"
+msgstr "Dátum zdroja: %s, veľkosť %llu"
+
+#, c-format
+msgid "Target date: %s, size %llu"
+msgstr "Dátum cieľa: %s, veľkosť %llu"
+
+#, c-format
+msgid "Source date: %s, size %u"
+msgstr "Dátum zdroja: %s, veľkosť %u"
+
+#, c-format
+msgid "Target date: %s, size %u"
+msgstr "Dátum cieľa: %s, veľkosť %u"
 
 msgid "If &size differs"
 msgstr "Ak sa líši v&eľkosť"
@@ -1929,27 +1953,21 @@ msgstr "&Pridať"
 msgid "Overwrite this target?"
 msgstr "Prepísať tento cieľ?"
 
-#, c-format
-msgid "Target date: %s, size %llu"
-msgstr "Dátum cieľa: %s, veľkosť %llu"
-
-#, c-format
-msgid "Source date: %s, size %llu"
-msgstr "Dátum zdroja: %s, veľkosť %llu"
-
-#, c-format
-msgid "Target date: %s, size %u"
-msgstr "Dátum cieľa: %s, veľkosť %u"
-
-#, c-format
-msgid "Source date: %s, size %u"
-msgstr "Dátum zdroja: %s, veľkosť %u"
-
 msgid " File exists "
 msgstr " Súbor existuje "
 
 msgid " Background process: File exists "
 msgstr " Proces v pozadí: Súbor existuje "
+
+msgid "&Background"
+msgstr "&Pozadie"
+
+msgid "&Stable Symlinks"
+msgstr "&Stále Sym. odkazy"
+
+#, fuzzy
+msgid "di&Ve into subdir if exists"
+msgstr "&Vnoriť sa do existujúceho podadr."
 
 msgid "preserve &Attributes"
 msgstr "uchovať a&Tribúty"
@@ -1959,15 +1977,6 @@ msgstr "nasledovať o&Dkazy"
 
 msgid "to:"
 msgstr "k:"
-
-msgid "&Background"
-msgstr "&Pozadie"
-
-msgid "&Stable Symlinks"
-msgstr "&Stále Sym. odkazy"
-
-msgid "&Dive into subdir if exists"
-msgstr "&Vnoriť sa do existujúceho podadr."
 
 #, c-format
 msgid "Invalid source pattern `%s'"
@@ -2012,6 +2021,9 @@ msgstr "&Hľadať rekurzívne"
 
 msgid "S&kip hidden"
 msgstr "Pres&kočiť skryté"
+
+msgid "&All charsets"
+msgstr "Všetky zn&akové sady"
 
 msgid "Case sens&itive"
 msgstr "Rozl&išovať veľkosť"
@@ -2516,6 +2528,9 @@ msgstr "Upraviť priradenie sú&boru"
 
 msgid "Edit &menu file"
 msgstr "Upraviť súborové me&nu"
+
+msgid "Edit &highlighting group file"
+msgstr ""
 
 msgid "&Configuration..."
 msgstr "&Konfigurácia..."
@@ -3223,9 +3238,6 @@ msgstr " Nepodarilo sa spustiť proces potomka "
 msgid "Empty output from child filter"
 msgstr "Prázdny výstup z filtra potomka"
 
-msgid "All charsets"
-msgstr "Všetky znakové sady"
-
 msgid "ButtonBar|Help"
 msgstr "ButtonBar|Pomoc"
 
@@ -3782,6 +3794,9 @@ msgstr "Vnútorná chyba:"
 
 msgid "Changes to file lost"
 msgstr "Zmeny súboru stratené"
+
+#~ msgid " %d items found, %d bookmarks added "
+#~ msgstr " %d nájdených, %d pridaných záložiek "
 
 #~ msgid "Displays this help message"
 #~ msgstr "Zobrazí tento pomocný odkaz"

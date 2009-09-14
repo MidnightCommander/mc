@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gmc finnish 0.01\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-02 23:01+0300\n"
+"POT-Creation-Date: 2009-09-14 16:34+0300\n"
 "PO-Revision-Date: 1999-08-23 17:30+0200\n"
 "Last-Translator: Mikko Rauhala <mjr@iki.fi>\n"
 "Language-Team: Finnish <debian-l10n-finnish@lists.debian.org>\n"
@@ -57,10 +57,6 @@ msgstr ""
 
 msgid "Search"
 msgstr "Etsi"
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr ""
 
 msgid " Search string not found "
 msgstr ""
@@ -122,7 +118,7 @@ msgstr ""
 msgid "&Windows/DOS format (CR LF)"
 msgstr ""
 
-msgid "&Macintosh format (LF)"
+msgid "&Macintosh format (CR)"
 msgstr ""
 
 msgid "Change line breaks to:"
@@ -321,9 +317,6 @@ msgstr ""
 msgid "Process block"
 msgstr " Käsittele valinta "
 
-msgid " Mail "
-msgstr " Posti "
-
 msgid " Copies to"
 msgstr " Kopiot"
 
@@ -336,6 +329,9 @@ msgstr " Vastaanottaja"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <subject> -c <cc> <to>"
 
+msgid " Mail "
+msgstr " Posti "
+
 msgid " Insert Literal "
 msgstr " Lisää merkki "
 
@@ -345,7 +341,7 @@ msgstr " Paina jotakin näppäintä: "
 msgid " Execute Macro "
 msgstr " Suorita makro "
 
-msgid "&All charsets"
+msgid "All charsets"
 msgstr ""
 
 #, fuzzy
@@ -367,6 +363,10 @@ msgstr " Anna korvaava merkkijono:"
 
 msgid " Enter search string:"
 msgstr " Anna haettava merkkijono:"
+
+#, fuzzy
+msgid "&Find all"
+msgstr "&Kaikki merkityt"
 
 msgid "Cancel"
 msgstr "Peruuta"
@@ -930,6 +930,7 @@ msgstr ""
 msgid "Specifies a color configuration"
 msgstr ""
 
+#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -945,10 +946,9 @@ msgid ""
 "                 editlinestate\n"
 msgstr ""
 
+#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
 "\n"
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -1035,6 +1035,9 @@ msgstr "Järjestys"
 msgid "Executable first"
 msgstr ""
 
+msgid " Confirmation "
+msgstr " Varmistus "
+
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
 msgstr " varmista &Poisto "
@@ -1050,9 +1053,6 @@ msgstr " vamista &Ylikirjoitus "
 
 msgid " confirm &Delete "
 msgstr " varmista &Poisto "
-
-msgid " Confirmation "
-msgstr " Varmistus "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1113,11 +1113,11 @@ msgstr "Aikaraja VFS:ien vapauttamiseen:"
 msgid " Virtual File System Setting "
 msgstr " VFS - virtuaalitiedostojärjestelmäasetus "
 
-msgid "Quick cd"
-msgstr "Pikainen hakemistonvaihto"
-
 msgid "cd"
 msgstr "Hakemistonvaihto"
+
+msgid "Quick cd"
+msgstr "Pikainen hakemistonvaihto"
 
 msgid "Symbolic link filename:"
 msgstr "Symbolisen linkin tiedostonimi:"
@@ -1330,6 +1330,13 @@ msgid "Extension file edit"
 msgstr "Laajennustiedoston muokkaus"
 
 msgid " Which extension file you want to edit? "
+msgstr " Mitä laajennustiedostoa haluat muokata? "
+
+msgid "Highlighting groups file edit"
+msgstr ""
+
+#, fuzzy
+msgid " Which highlighting file you want to edit? "
 msgstr " Mitä laajennustiedostoa haluat muokata? "
 
 msgid " Compare directories "
@@ -1865,8 +1872,24 @@ msgstr ""
 msgid "Deleting"
 msgstr ""
 
+#, fuzzy
+msgid "Target file already exists!"
+msgstr " Tämänniminen tiedosto on jo olemassa. "
+
 #, c-format
-msgid "Target file \"%s\" already exists!"
+msgid "Source date: %s, size %llu"
+msgstr ""
+
+#, c-format
+msgid "Target date: %s, size %llu"
+msgstr ""
+
+#, c-format
+msgid "Source date: %s, size %u"
+msgstr ""
+
+#, c-format
+msgid "Target date: %s, size %u"
 msgstr ""
 
 msgid "If &size differs"
@@ -1887,26 +1910,19 @@ msgstr ""
 msgid "Overwrite this target?"
 msgstr ""
 
-#, c-format
-msgid "Target date: %s, size %llu"
-msgstr ""
-
-#, c-format
-msgid "Source date: %s, size %llu"
-msgstr ""
-
-#, c-format
-msgid "Target date: %s, size %u"
-msgstr ""
-
-#, c-format
-msgid "Source date: %s, size %u"
-msgstr ""
-
 msgid " File exists "
 msgstr ""
 
 msgid " Background process: File exists "
+msgstr ""
+
+msgid "&Background"
+msgstr ""
+
+msgid "&Stable Symlinks"
+msgstr ""
+
+msgid "di&Ve into subdir if exists"
 msgstr ""
 
 msgid "preserve &Attributes"
@@ -1916,15 +1932,6 @@ msgid "follow &Links"
 msgstr ""
 
 msgid "to:"
-msgstr ""
-
-msgid "&Background"
-msgstr ""
-
-msgid "&Stable Symlinks"
-msgstr ""
-
-msgid "&Dive into subdir if exists"
 msgstr ""
 
 #, c-format
@@ -1971,6 +1978,9 @@ msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
+msgstr ""
+
+msgid "&All charsets"
 msgstr ""
 
 #, fuzzy
@@ -2463,6 +2473,9 @@ msgid "Edit &extension file"
 msgstr ""
 
 msgid "Edit &menu file"
+msgstr ""
+
+msgid "Edit &highlighting group file"
 msgstr ""
 
 msgid "&Configuration..."
@@ -3147,9 +3160,6 @@ msgid " Cannot spawn child process "
 msgstr " Ei voitu vaihtaa hakemistoa %s:ksi "
 
 msgid "Empty output from child filter"
-msgstr ""
-
-msgid "All charsets"
 msgstr ""
 
 msgid "ButtonBar|Help"

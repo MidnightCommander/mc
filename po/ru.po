@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-02 23:01+0300\n"
+"POT-Creation-Date: 2009-09-14 16:34+0300\n"
 "PO-Revision-Date: 2009-08-26 23:37+0300\n"
 "Last-Translator: Ilia Maslakov <il.smind@gmail.com>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
@@ -69,10 +69,6 @@ msgstr "Слишком глубокая рекурсия макросов"
 
 msgid "Search"
 msgstr "Поиск"
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " %d найдено, %d закладок добавлено "
 
 msgid " Search string not found "
 msgstr " Искомая строка не найдена "
@@ -132,7 +128,7 @@ msgstr ""
 msgid "&Windows/DOS format (CR LF)"
 msgstr ""
 
-msgid "&Macintosh format (LF)"
+msgid "&Macintosh format (CR)"
 msgstr ""
 
 msgid "Change line breaks to:"
@@ -320,9 +316,6 @@ msgstr "Скрипт создан:"
 msgid "Process block"
 msgstr "Обработать блок"
 
-msgid " Mail "
-msgstr " Почта "
-
 msgid " Copies to"
 msgstr " Отправить копии адресатам"
 
@@ -335,6 +328,9 @@ msgstr " Кому"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <Тема> -c <Копии> <Кому>"
 
+msgid " Mail "
+msgstr " Почта "
+
 msgid " Insert Literal "
 msgstr " Вставить литерал "
 
@@ -344,8 +340,8 @@ msgstr " Нажмите любую клавишу: "
 msgid " Execute Macro "
 msgstr " Выполнить макрос "
 
-msgid "&All charsets"
-msgstr "&Все кодировки"
+msgid "All charsets"
+msgstr "Все кодировки"
 
 msgid "&Whole words"
 msgstr "&Слово целиком"
@@ -364,6 +360,10 @@ msgstr " Введите текст для замены: "
 
 msgid " Enter search string:"
 msgstr " Введите строку для поиска:"
+
+#, fuzzy
+msgid "&Find all"
+msgstr "Поиск файла"
 
 msgid "Cancel"
 msgstr "Прервать"
@@ -898,6 +898,7 @@ msgstr "Принудительно установить цветной режи�
 msgid "Specifies a color configuration"
 msgstr "Определить настройки цветов"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -926,10 +927,10 @@ msgstr ""
 "   Редактор:           editnormal, editbold, editmarked, editwhitespace,\n"
 "                       editlinestate\n"
 
+#. TRANSLATORS: don't translate keywords and names of colors
+#, fuzzy
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
 "\n"
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -1032,6 +1033,9 @@ msgstr "Порядок сортировки"
 msgid "Executable first"
 msgstr "Исполняемые вначале"
 
+msgid " Confirmation "
+msgstr " Запрос подтверждения "
+
 msgid " confirm di&Rectory hotlist delete "
 msgstr " подтвердите удаление из списка быстрого доступа"
 
@@ -1046,9 +1050,6 @@ msgstr "перед &перезаписью"
 
 msgid " confirm &Delete "
 msgstr "перед &удалением"
-
-msgid " Confirmation "
-msgstr " Запрос подтверждения "
 
 msgid "UTF-8 output"
 msgstr "UTF-8 вывод"
@@ -1104,11 +1105,11 @@ msgstr "Тайм-аут высвобождения ВФС:"
 msgid " Virtual File System Setting "
 msgstr " Настройки виртуальной файловой системы "
 
-msgid "Quick cd"
-msgstr " Смена рабочего каталога "
-
 msgid "cd"
 msgstr "Перейти в"
+
+msgid "Quick cd"
+msgstr " Смена рабочего каталога "
 
 msgid "Symbolic link filename:"
 msgstr "Имя символической ссылки:"
@@ -1315,6 +1316,13 @@ msgid "Extension file edit"
 msgstr " Редактирование файла расширений "
 
 msgid " Which extension file you want to edit? "
+msgstr " Какой файл расширений Вы хотите редактировать? "
+
+msgid "Highlighting groups file edit"
+msgstr ""
+
+#, fuzzy
+msgid " Which highlighting file you want to edit? "
 msgstr " Какой файл расширений Вы хотите редактировать? "
 
 msgid " Compare directories "
@@ -1914,9 +1922,25 @@ msgstr "Приемник"
 msgid "Deleting"
 msgstr "Удаляем"
 
-#, c-format
-msgid "Target file \"%s\" already exists!"
+#, fuzzy
+msgid "Target file already exists!"
 msgstr "Целевой файл \"%s\" уже существует!"
+
+#, c-format
+msgid "Source date: %s, size %llu"
+msgstr "Источник: дата модификации: %s, размер: %llu"
+
+#, c-format
+msgid "Target date: %s, size %llu"
+msgstr "Приёмник: дата модификации: %s, размер: %llu"
+
+#, c-format
+msgid "Source date: %s, size %u"
+msgstr "Источник: дата модификации: %s, размер: %u"
+
+#, c-format
+msgid "Target date: %s, size %u"
+msgstr "Приёмник: дата модификации: %s, размер: %u"
 
 msgid "If &size differs"
 msgstr "&Различающиеся по длине"
@@ -1936,27 +1960,21 @@ msgstr "дописать в &Конец"
 msgid "Overwrite this target?"
 msgstr "Переписать этот файл?"
 
-#, c-format
-msgid "Target date: %s, size %llu"
-msgstr "Приёмник: дата модификации: %s, размер: %llu"
-
-#, c-format
-msgid "Source date: %s, size %llu"
-msgstr "Источник: дата модификации: %s, размер: %llu"
-
-#, c-format
-msgid "Target date: %s, size %u"
-msgstr "Приёмник: дата модификации: %s, размер: %u"
-
-#, c-format
-msgid "Source date: %s, size %u"
-msgstr "Источник: дата модификации: %s, размер: %u"
-
 msgid " File exists "
 msgstr " Файл существует "
 
 msgid " Background process: File exists "
 msgstr " Фоновый процесс: файл существует "
+
+msgid "&Background"
+msgstr "В &фоне"
+
+msgid "&Stable Symlinks"
+msgstr "&Сохранять символические ссылки"
+
+#, fuzzy
+msgid "di&Ve into subdir if exists"
+msgstr "&Внутрь каталога, если есть"
 
 msgid "preserve &Attributes"
 msgstr "Сохранять &атрибуты"
@@ -1966,15 +1984,6 @@ msgstr "&Разыменовывать ссылки"
 
 msgid "to:"
 msgstr "в:"
-
-msgid "&Background"
-msgstr "В &фоне"
-
-msgid "&Stable Symlinks"
-msgstr "&Сохранять символические ссылки"
-
-msgid "&Dive into subdir if exists"
-msgstr "&Внутрь каталога, если есть"
 
 #, c-format
 msgid "Invalid source pattern `%s'"
@@ -2019,6 +2028,9 @@ msgstr "Найти ре&курсивно"
 
 msgid "S&kip hidden"
 msgstr "Пропускать скр&ытые"
+
+msgid "&All charsets"
+msgstr "&Все кодировки"
 
 msgid "Case sens&itive"
 msgstr "Учет ре&гистра"
@@ -2524,6 +2536,9 @@ msgstr "Файл рас&ширений"
 
 msgid "Edit &menu file"
 msgstr "Файл &меню"
+
+msgid "Edit &highlighting group file"
+msgstr ""
 
 msgid "&Configuration..."
 msgstr "&Конфигурация..."
@@ -3230,9 +3245,6 @@ msgstr " Невозможно породить дочерний процесс "
 msgid "Empty output from child filter"
 msgstr "Дочерний фильтр не вернул данных"
 
-msgid "All charsets"
-msgstr "Все кодировки"
-
 msgid "ButtonBar|Help"
 msgstr "Нижняя панель|Помощь"
 
@@ -3788,6 +3800,9 @@ msgstr "Внутренняя ошибка:"
 
 msgid "Changes to file lost"
 msgstr "Изменения для файла потеряны"
+
+#~ msgid " %d items found, %d bookmarks added "
+#~ msgstr " %d найдено, %d закладок добавлено "
 
 #~ msgid "O&ne"
 #~ msgstr "&Один"

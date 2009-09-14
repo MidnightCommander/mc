@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mn\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-02 23:01+0300\n"
+"POT-Creation-Date: 2009-09-14 16:34+0300\n"
 "PO-Revision-Date: 2003-03-04 21:16+0100\n"
 "Last-Translator: Sanlig Badral <badral@chinggis.com>\n"
 "Language-Team: Mongolian <mn@li.org>\n"
@@ -61,10 +61,6 @@ msgstr "Макрогийн рекурс хэт гүн байна"
 
 msgid "Search"
 msgstr "Хайх"
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " %d н хайлт дуусч, %d н хавчуулага нэмэгдэв "
 
 msgid " Search string not found "
 msgstr " Хайсан г алга байна "
@@ -124,7 +120,7 @@ msgstr ""
 msgid "&Windows/DOS format (CR LF)"
 msgstr ""
 
-msgid "&Macintosh format (LF)"
+msgid "&Macintosh format (CR)"
 msgstr ""
 
 msgid "Change line breaks to:"
@@ -322,9 +318,6 @@ msgstr "Скрипт үүссэн:"
 msgid "Process block"
 msgstr "Гүйцэтгэлийн блок"
 
-msgid " Mail "
-msgstr " Шуудан "
-
 msgid " Copies to"
 msgstr " нд Хувилах"
 
@@ -337,6 +330,9 @@ msgstr " Хэнд"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <Гарчиг> -c <нд Хувилах> <Хэнд>"
 
+msgid " Mail "
+msgstr " Шуудан "
+
 msgid " Insert Literal "
 msgstr " Литерал оруулах "
 
@@ -346,7 +342,7 @@ msgstr " Дурын товч дарна уу: "
 msgid " Execute Macro "
 msgstr " Макрог гүйцэтгэх "
 
-msgid "&All charsets"
+msgid "All charsets"
 msgstr ""
 
 #, fuzzy
@@ -368,6 +364,10 @@ msgstr " Солигдох текстийг оруул: "
 
 msgid " Enter search string:"
 msgstr " Хайх үгээ оруул:"
+
+#, fuzzy
+msgid "&Find all"
+msgstr "Файл хайх"
 
 msgid "Cancel"
 msgstr "Болих"
@@ -929,6 +929,7 @@ msgstr "өнгөт горимд ажиллахад хариулна"
 msgid "Specifies a color configuration"
 msgstr "өнгөний тусгай тохиргоо"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
@@ -963,10 +964,9 @@ msgstr ""
 "   brightcyan, lightgray, white\n"
 "\n"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
 "\n"
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -1059,6 +1059,9 @@ msgstr "Эрэмбэлэх дараалал"
 msgid "Executable first"
 msgstr ""
 
+msgid " Confirmation "
+msgstr " Баталгаажуулалт "
+
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
 msgstr "&Хавтасны лавлах  C-\\"
@@ -1074,9 +1077,6 @@ msgstr " Баталгаажуулж &дарж бичих "
 
 msgid " confirm &Delete "
 msgstr " Баталгаажуулж &устгах "
-
-msgid " Confirmation "
-msgstr " Баталгаажуулалт "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1134,11 +1134,11 @@ msgstr "VFS г чөлөөлөх хугацаа:"
 msgid " Virtual File System Setting "
 msgstr " Виртуаль файл системын тохиргоо "
 
-msgid "Quick cd"
-msgstr " Хурдан шилжилт "
-
 msgid "cd"
 msgstr "шилжилт"
+
+msgid "Quick cd"
+msgstr " Хурдан шилжилт "
 
 msgid "Symbolic link filename:"
 msgstr "Тэмдэгт холбоос файлын нэр:"
@@ -1347,6 +1347,13 @@ msgid "Extension file edit"
 msgstr " Засварлагдах файлын өргөтгөл "
 
 msgid " Which extension file you want to edit? "
+msgstr " Ямар өргөтөлтэй файлыг засварлахыг хүсч байна вэ? "
+
+msgid "Highlighting groups file edit"
+msgstr ""
+
+#, fuzzy
+msgid " Which highlighting file you want to edit? "
 msgstr " Ямар өргөтөлтэй файлыг засварлахыг хүсч байна вэ? "
 
 msgid " Compare directories "
@@ -1937,9 +1944,25 @@ msgstr "Бай"
 msgid "Deleting"
 msgstr "Устгаж байна"
 
-#, c-format
-msgid "Target file \"%s\" already exists!"
+#, fuzzy
+msgid "Target file already exists!"
 msgstr "Заагдсан \"%s\" файл аль хэдийнэ үүссэн байна!"
+
+#, fuzzy, c-format
+msgid "Source date: %s, size %llu"
+msgstr "Эх засагдсан огноо: %s, хэмжээ %llu"
+
+#, fuzzy, c-format
+msgid "Target date: %s, size %llu"
+msgstr "Бай засагдсан огноо: %s, хэмжээ %llu"
+
+#, fuzzy, c-format
+msgid "Source date: %s, size %u"
+msgstr "Эх засагдсан огноо: %s, хэмжээ %u"
+
+#, fuzzy, c-format
+msgid "Target date: %s, size %u"
+msgstr "Бай засагдсан огноо: %s, хэмжээ %u"
 
 msgid "If &size differs"
 msgstr "Хэрвээ &хэмжээ нь ялгаатай бол"
@@ -1959,27 +1982,21 @@ msgstr "&Төгсгөлд нь гүйцээх"
 msgid "Overwrite this target?"
 msgstr "Энэ файлыг дарах уу?"
 
-#, fuzzy, c-format
-msgid "Target date: %s, size %llu"
-msgstr "Бай засагдсан огноо: %s, хэмжээ %llu"
-
-#, fuzzy, c-format
-msgid "Source date: %s, size %llu"
-msgstr "Эх засагдсан огноо: %s, хэмжээ %llu"
-
-#, fuzzy, c-format
-msgid "Target date: %s, size %u"
-msgstr "Бай засагдсан огноо: %s, хэмжээ %u"
-
-#, fuzzy, c-format
-msgid "Source date: %s, size %u"
-msgstr "Эх засагдсан огноо: %s, хэмжээ %u"
-
 msgid " File exists "
 msgstr " Файл үүссэн байна "
 
 msgid " Background process: File exists "
 msgstr " Арын процесс: Файл үүссэн байна "
+
+msgid "&Background"
+msgstr " &Ар тал"
+
+msgid "&Stable Symlinks"
+msgstr "&Тэмдэгт холбоосыг хадгалах"
+
+#, fuzzy
+msgid "di&Ve into subdir if exists"
+msgstr "&Хавтас дотор үүссэн бол"
 
 msgid "preserve &Attributes"
 msgstr "&Атрибутуудыг хадгалах"
@@ -1989,15 +2006,6 @@ msgstr "&Холбоосуудыг дагах"
 
 msgid "to:"
 msgstr "руу:"
-
-msgid "&Background"
-msgstr " &Ар тал"
-
-msgid "&Stable Symlinks"
-msgstr "&Тэмдэгт холбоосыг хадгалах"
-
-msgid "&Dive into subdir if exists"
-msgstr "&Хавтас дотор үүссэн бол"
 
 #, fuzzy, c-format
 msgid "Invalid source pattern `%s'"
@@ -2045,6 +2053,9 @@ msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
+msgstr ""
+
+msgid "&All charsets"
 msgstr ""
 
 #, fuzzy
@@ -2554,6 +2565,9 @@ msgstr "Файлын &өргөтгөл"
 
 msgid "Edit &menu file"
 msgstr "Файл &цэс"
+
+msgid "Edit &highlighting group file"
+msgstr ""
 
 msgid "&Configuration..."
 msgstr "&Тохиргоо..."
@@ -3252,9 +3266,6 @@ msgstr " Хүү процессийг солилож чадсангүй "
 msgid "Empty output from child filter"
 msgstr "Хүү шүүлтүүрийн гаралт хоосон байна"
 
-msgid "All charsets"
-msgstr ""
-
 msgid "ButtonBar|Help"
 msgstr ""
 
@@ -3809,6 +3820,9 @@ msgstr "Дотоод алдаа:"
 
 msgid "Changes to file lost"
 msgstr "Файлын өөрчлөлт алга байна"
+
+#~ msgid " %d items found, %d bookmarks added "
+#~ msgstr " %d н хайлт дуусч, %d н хавчуулага нэмэгдэв "
 
 #~ msgid "Displays this help message"
 #~ msgstr "Уг тусламжын захиаг харуулах"

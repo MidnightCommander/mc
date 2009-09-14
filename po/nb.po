@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-02 23:01+0300\n"
+"POT-Creation-Date: 2009-09-14 16:34+0300\n"
 "PO-Revision-Date: 2002-10-22 14:28+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -56,10 +56,6 @@ msgstr "For dyp rekursjon i makro"
 
 msgid "Search"
 msgstr "Søk"
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr "%d funn gjort, %d bokmerker lagt til"
 
 msgid " Search string not found "
 msgstr " Søkestrengen ikke funnet "
@@ -119,7 +115,7 @@ msgstr ""
 msgid "&Windows/DOS format (CR LF)"
 msgstr ""
 
-msgid "&Macintosh format (LF)"
+msgid "&Macintosh format (CR)"
 msgstr ""
 
 msgid "Change line breaks to:"
@@ -315,9 +311,6 @@ msgstr "Skript opprettet:"
 msgid "Process block"
 msgstr "Prosesser blokk"
 
-msgid " Mail "
-msgstr " Send "
-
 msgid " Copies to"
 msgstr " Kopier til:"
 
@@ -330,6 +323,9 @@ msgstr " Til"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <emne> -c <cc> <til>"
 
+msgid " Mail "
+msgstr " Send "
+
 msgid " Insert Literal "
 msgstr " Sett inn literal "
 
@@ -339,7 +335,7 @@ msgstr " Trykk en tast: "
 msgid " Execute Macro "
 msgstr " Kjør makro "
 
-msgid "&All charsets"
+msgid "All charsets"
 msgstr ""
 
 #, fuzzy
@@ -361,6 +357,10 @@ msgstr " Skriv inn erstatningsstreng:"
 
 msgid " Enter search string:"
 msgstr " Skriv inn søkestreng:"
+
+#, fuzzy
+msgid "&Find all"
+msgstr "Finn fil"
 
 msgid "Cancel"
 msgstr "Avbryt"
@@ -924,6 +924,7 @@ msgstr "Be om å kjøre i fargemodus"
 msgid "Specifies a color configuration"
 msgstr "Spesifiserer en fargekonfigurasjon"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
@@ -958,10 +959,9 @@ msgstr ""
 "   brightcyan, lightgray and white\n"
 "\n"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
 "\n"
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -1054,6 +1054,9 @@ msgstr "Sorteringsrekkefølge"
 msgid "Executable first"
 msgstr ""
 
+msgid " Confirmation "
+msgstr " Bekreftelse "
+
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
 msgstr "kataloghurtigliste    C-\\"
@@ -1069,9 +1072,6 @@ msgstr " bekreft o&Verskriv "
 
 msgid " confirm &Delete "
 msgstr " bekreft &slett "
-
-msgid " Confirmation "
-msgstr " Bekreftelse "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1130,11 +1130,11 @@ msgstr "Tidsavbrudd for frigjøring av VFS'er:"
 msgid " Virtual File System Setting "
 msgstr " Innstillinger for virtuelt filsystem "
 
-msgid "Quick cd"
-msgstr "Rask katalogskift"
-
 msgid "cd"
 msgstr "cd"
+
+msgid "Quick cd"
+msgstr "Rask katalogskift"
 
 msgid "Symbolic link filename:"
 msgstr "Filnavn for symbolsk lenke:"
@@ -1343,6 +1343,13 @@ msgid "Extension file edit"
 msgstr "Rediger utvidelsesfil"
 
 msgid " Which extension file you want to edit? "
+msgstr " Hvilken utvidelsesfil vil du redigere? "
+
+msgid "Highlighting groups file edit"
+msgstr ""
+
+#, fuzzy
+msgid " Which highlighting file you want to edit? "
 msgstr " Hvilken utvidelsesfil vil du redigere? "
 
 msgid " Compare directories "
@@ -1936,9 +1943,25 @@ msgstr "Mål"
 msgid "Deleting"
 msgstr "Sletter"
 
-#, c-format
-msgid "Target file \"%s\" already exists!"
+#, fuzzy
+msgid "Target file already exists!"
 msgstr "Målfilen \"%s\" eksisterer allerede!"
+
+#, fuzzy, c-format
+msgid "Source date: %s, size %llu"
+msgstr "Kildefilens dato: %s, størrelse %llu"
+
+#, fuzzy, c-format
+msgid "Target date: %s, size %llu"
+msgstr "Målfilens dato: %s, størrelse %llu"
+
+#, fuzzy, c-format
+msgid "Source date: %s, size %u"
+msgstr "Kildefilens dato: %s, størrelse %u"
+
+#, fuzzy, c-format
+msgid "Target date: %s, size %u"
+msgstr "Målfilens dato: %s, størrelse %u"
 
 msgid "If &size differs"
 msgstr "hvis størrelsen er forskjellig"
@@ -1958,27 +1981,21 @@ msgstr "legg til"
 msgid "Overwrite this target?"
 msgstr "Overskriv dette målet?"
 
-#, fuzzy, c-format
-msgid "Target date: %s, size %llu"
-msgstr "Målfilens dato: %s, størrelse %llu"
-
-#, fuzzy, c-format
-msgid "Source date: %s, size %llu"
-msgstr "Kildefilens dato: %s, størrelse %llu"
-
-#, fuzzy, c-format
-msgid "Target date: %s, size %u"
-msgstr "Målfilens dato: %s, størrelse %u"
-
-#, fuzzy, c-format
-msgid "Source date: %s, size %u"
-msgstr "Kildefilens dato: %s, størrelse %u"
-
 msgid " File exists "
 msgstr " Filen eksisterer "
 
 msgid " Background process: File exists "
 msgstr " Bakgrunnsprosess: Filen eksisterer "
+
+msgid "&Background"
+msgstr "Bakgrunn"
+
+msgid "&Stable Symlinks"
+msgstr "Stabile symlenker"
+
+#, fuzzy
+msgid "di&Ve into subdir if exists"
+msgstr "Gå inn ned underkatalog hvis den eksisterer"
 
 msgid "preserve &Attributes"
 msgstr "behold attributter"
@@ -1988,15 +2005,6 @@ msgstr "følg lenker"
 
 msgid "to:"
 msgstr "til:"
-
-msgid "&Background"
-msgstr "Bakgrunn"
-
-msgid "&Stable Symlinks"
-msgstr "Stabile symlenker"
-
-msgid "&Dive into subdir if exists"
-msgstr "Gå inn ned underkatalog hvis den eksisterer"
 
 #, fuzzy, c-format
 msgid "Invalid source pattern `%s'"
@@ -2044,6 +2052,9 @@ msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
+msgstr ""
+
+msgid "&All charsets"
 msgstr ""
 
 #, fuzzy
@@ -2552,6 +2563,9 @@ msgstr "Redigering av utvidelsesfil"
 
 msgid "Edit &menu file"
 msgstr "Menyfilredigering"
+
+msgid "Edit &highlighting group file"
+msgstr ""
 
 msgid "&Configuration..."
 msgstr "Konfigurasjon..."
@@ -3251,9 +3265,6 @@ msgstr " Kan ikke starte underprogram "
 msgid "Empty output from child filter"
 msgstr ""
 
-msgid "All charsets"
-msgstr ""
-
 msgid "ButtonBar|Help"
 msgstr ""
 
@@ -3807,6 +3818,9 @@ msgstr "Intern feil:"
 
 msgid "Changes to file lost"
 msgstr "Endringer i filen tapt"
+
+#~ msgid " %d items found, %d bookmarks added "
+#~ msgstr "%d funn gjort, %d bokmerker lagt til"
 
 #~ msgid "Displays this help message"
 #~ msgstr "Viser denne hjelpeteksten"

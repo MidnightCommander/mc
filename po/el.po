@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.38\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-02 23:01+0300\n"
+"POT-Creation-Date: 2009-09-14 16:34+0300\n"
 "PO-Revision-Date: 1997-07-23 00:04-0400\n"
 "Last-Translator: Spiros Papadimitriou <spapadim+@cs.cmu.edu>\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
@@ -57,10 +57,6 @@ msgstr ""
 
 msgid "Search"
 msgstr "Αναζήτηση"
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr ""
 
 msgid " Search string not found "
 msgstr ""
@@ -122,7 +118,7 @@ msgstr ""
 msgid "&Windows/DOS format (CR LF)"
 msgstr ""
 
-msgid "&Macintosh format (LF)"
+msgid "&Macintosh format (CR)"
 msgstr ""
 
 msgid "Change line breaks to:"
@@ -314,9 +310,6 @@ msgstr ""
 msgid "Process block"
 msgstr ""
 
-msgid " Mail "
-msgstr " Αλληλογραφία "
-
 msgid " Copies to"
 msgstr ""
 
@@ -329,6 +322,9 @@ msgstr " Προς"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <θέμα> -c <αντίγραφα> <προς>"
 
+msgid " Mail "
+msgstr " Αλληλογραφία "
+
 msgid " Insert Literal "
 msgstr ""
 
@@ -338,7 +334,7 @@ msgstr " Πιέστε κάποιο πλήκτρο: "
 msgid " Execute Macro "
 msgstr " Εκτελ. μακροεντολής"
 
-msgid "&All charsets"
+msgid "All charsets"
 msgstr ""
 
 msgid "&Whole words"
@@ -358,6 +354,9 @@ msgstr " Εισαγωγή ακολουθίας αντικατάστασης:"
 
 msgid " Enter search string:"
 msgstr " Εισαγωγή ακολουθίας προς αναζήτηση:"
+
+msgid "&Find all"
+msgstr ""
 
 msgid "Cancel"
 msgstr "Άκυρο"
@@ -904,6 +903,7 @@ msgstr ""
 msgid "Specifies a color configuration"
 msgstr ""
 
+#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -919,10 +919,9 @@ msgid ""
 "                 editlinestate\n"
 msgstr ""
 
+#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
 "\n"
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -1009,6 +1008,9 @@ msgstr ""
 msgid "Executable first"
 msgstr ""
 
+msgid " Confirmation "
+msgstr ""
+
 msgid " confirm di&Rectory hotlist delete "
 msgstr ""
 
@@ -1022,9 +1024,6 @@ msgid " confirm o&Verwrite "
 msgstr ""
 
 msgid " confirm &Delete "
-msgstr ""
-
-msgid " Confirmation "
 msgstr ""
 
 msgid "UTF-8 output"
@@ -1083,10 +1082,10 @@ msgstr ""
 msgid " Virtual File System Setting "
 msgstr ""
 
-msgid "Quick cd"
+msgid "cd"
 msgstr ""
 
-msgid "cd"
+msgid "Quick cd"
 msgstr ""
 
 msgid "Symbolic link filename:"
@@ -1298,6 +1297,12 @@ msgid "Extension file edit"
 msgstr ""
 
 msgid " Which extension file you want to edit? "
+msgstr ""
+
+msgid "Highlighting groups file edit"
+msgstr ""
+
+msgid " Which highlighting file you want to edit? "
 msgstr ""
 
 msgid " Compare directories "
@@ -1808,8 +1813,23 @@ msgstr ""
 msgid "Deleting"
 msgstr ""
 
+msgid "Target file already exists!"
+msgstr ""
+
 #, c-format
-msgid "Target file \"%s\" already exists!"
+msgid "Source date: %s, size %llu"
+msgstr ""
+
+#, c-format
+msgid "Target date: %s, size %llu"
+msgstr ""
+
+#, c-format
+msgid "Source date: %s, size %u"
+msgstr ""
+
+#, c-format
+msgid "Target date: %s, size %u"
 msgstr ""
 
 msgid "If &size differs"
@@ -1830,26 +1850,19 @@ msgstr ""
 msgid "Overwrite this target?"
 msgstr ""
 
-#, c-format
-msgid "Target date: %s, size %llu"
-msgstr ""
-
-#, c-format
-msgid "Source date: %s, size %llu"
-msgstr ""
-
-#, c-format
-msgid "Target date: %s, size %u"
-msgstr ""
-
-#, c-format
-msgid "Source date: %s, size %u"
-msgstr ""
-
 msgid " File exists "
 msgstr ""
 
 msgid " Background process: File exists "
+msgstr ""
+
+msgid "&Background"
+msgstr ""
+
+msgid "&Stable Symlinks"
+msgstr ""
+
+msgid "di&Ve into subdir if exists"
 msgstr ""
 
 msgid "preserve &Attributes"
@@ -1859,15 +1872,6 @@ msgid "follow &Links"
 msgstr ""
 
 msgid "to:"
-msgstr ""
-
-msgid "&Background"
-msgstr ""
-
-msgid "&Stable Symlinks"
-msgstr ""
-
-msgid "&Dive into subdir if exists"
 msgstr ""
 
 #, c-format
@@ -1914,6 +1918,9 @@ msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
+msgstr ""
+
+msgid "&All charsets"
 msgstr ""
 
 #, fuzzy
@@ -2402,6 +2409,9 @@ msgid "Edit &extension file"
 msgstr ""
 
 msgid "Edit &menu file"
+msgstr ""
+
+msgid "Edit &highlighting group file"
 msgstr ""
 
 msgid "&Configuration..."
@@ -3081,9 +3091,6 @@ msgstr ""
 "%s"
 
 msgid "Empty output from child filter"
-msgstr ""
-
-msgid "All charsets"
 msgstr ""
 
 msgid "ButtonBar|Help"

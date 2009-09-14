@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-02 23:01+0300\n"
+"POT-Creation-Date: 2009-09-14 16:34+0300\n"
 "PO-Revision-Date: 1999-03-18 23:11+0100\n"
 "Last-Translator: Lorint Hendschel <LorintHendschel@skynet.be>\n"
 "Language-Team: walon <linux-wa@chanae.alphanet.ch>\n"
@@ -64,10 +64,6 @@ msgstr ""
 
 msgid "Search"
 msgstr "Cweri"
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr ""
 
 msgid " Search string not found "
 msgstr " Dji n' a nén trové li tchinne ki dji cachîve après "
@@ -128,7 +124,7 @@ msgstr ""
 msgid "&Windows/DOS format (CR LF)"
 msgstr ""
 
-msgid "&Macintosh format (LF)"
+msgid "&Macintosh format (CR)"
 msgstr ""
 
 msgid "Change line breaks to:"
@@ -329,10 +325,6 @@ msgstr ""
 msgid "Process block"
 msgstr " Aspougnî li blok "
 
-# Viebe ou no?
-msgid " Mail "
-msgstr " Emile "
-
 msgid " Copies to"
 msgstr " Copyî po "
 
@@ -345,6 +337,10 @@ msgstr " Po"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <subject> -c <cc> <to>"
 
+# Viebe ou no?
+msgid " Mail "
+msgstr " Emile "
+
 msgid " Insert Literal "
 msgstr " Sititchî literål "
 
@@ -354,7 +350,7 @@ msgstr " Tchôkî tot l' minme li kéne tape: "
 msgid " Execute Macro "
 msgstr " Enonder Macro "
 
-msgid "&All charsets"
+msgid "All charsets"
 msgstr ""
 
 #, fuzzy
@@ -376,6 +372,10 @@ msgstr " Dinez li tchinne pol discandje:"
 
 msgid " Enter search string:"
 msgstr " Dinez li tchinne a cweri après:"
+
+#, fuzzy
+msgid "&Find all"
+msgstr "Trover Fitchî"
 
 msgid "Cancel"
 msgstr "Rinoncî"
@@ -941,6 +941,7 @@ msgstr "Fé roter e coleurs"
 msgid "Specifies a color configuration"
 msgstr "Dire avou kénès coleurs"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -956,10 +957,9 @@ msgid ""
 "                 editlinestate\n"
 msgstr ""
 
+#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
 "\n"
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -1048,6 +1048,9 @@ msgstr "Ôrde po relire"
 msgid "Executable first"
 msgstr ""
 
+msgid " Confirmation "
+msgstr " Racertinaedje "
+
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
 msgstr "djîvêye rascoûrti des &Ridants    C-\\"
@@ -1063,9 +1066,6 @@ msgstr " racertiner ki vos voloz bén &spotchî åk "
 
 msgid " confirm &Delete "
 msgstr " racertiner ki vos voloz bén &disfacer åk "
-
-msgid " Confirmation "
-msgstr " Racertinaedje "
 
 # Full?
 #, fuzzy
@@ -1127,11 +1127,11 @@ msgstr "Tins a ratinde po delîberer les VFS:"
 msgid " Virtual File System Setting "
 msgstr " Apontiaedje do forveyou sistinme di fitchîs "
 
-msgid "Quick cd"
-msgstr "Abeye cd"
-
 msgid "cd"
 msgstr "cd"
+
+msgid "Quick cd"
+msgstr "Abeye cd"
 
 msgid "Symbolic link filename:"
 msgstr "No do fitchî loyén simbolike:"
@@ -1342,6 +1342,13 @@ msgid "Extension file edit"
 msgstr "Aspougnî les cawetes di fitchîs"
 
 msgid " Which extension file you want to edit? "
+msgstr " Kénès cawetes di fitchîs voloz-ve aspougnî? "
+
+msgid "Highlighting groups file edit"
+msgstr ""
+
+#, fuzzy
+msgid " Which highlighting file you want to edit? "
 msgstr " Kénès cawetes di fitchîs voloz-ve aspougnî? "
 
 msgid " Compare directories "
@@ -1936,9 +1943,25 @@ msgstr "Såme"
 msgid "Deleting"
 msgstr "Dji disface"
 
-#, c-format
-msgid "Target file \"%s\" already exists!"
+#, fuzzy
+msgid "Target file already exists!"
 msgstr "Li fitchî såme «%s» egzisteye dedja!"
+
+#, fuzzy, c-format
+msgid "Source date: %s, size %llu"
+msgstr "Date soûrdant: %s, grandeu %llu"
+
+#, fuzzy, c-format
+msgid "Target date: %s, size %llu"
+msgstr "Date såme: %s, grandeu %llu"
+
+#, fuzzy, c-format
+msgid "Source date: %s, size %u"
+msgstr "Date soûrdant: %s, grandeu %u"
+
+#, fuzzy, c-format
+msgid "Target date: %s, size %u"
+msgstr "Date såme: %s, grandeu %u"
 
 msgid "If &size differs"
 msgstr "si li &grandeu n' est nén li minme"
@@ -1958,27 +1981,21 @@ msgstr "ra&djouter å coron"
 msgid "Overwrite this target?"
 msgstr "Sipotchî cisse såme chal?"
 
-#, fuzzy, c-format
-msgid "Target date: %s, size %llu"
-msgstr "Date såme: %s, grandeu %llu"
-
-#, fuzzy, c-format
-msgid "Source date: %s, size %llu"
-msgstr "Date soûrdant: %s, grandeu %llu"
-
-#, fuzzy, c-format
-msgid "Target date: %s, size %u"
-msgstr "Date såme: %s, grandeu %u"
-
-#, fuzzy, c-format
-msgid "Source date: %s, size %u"
-msgstr "Date soûrdant: %s, grandeu %u"
-
 msgid " File exists "
 msgstr " Li fitchî egzisteye dedja "
 
 msgid " Background process: File exists "
 msgstr " Bezogne di fond: li fitchî egzisteye dedja "
+
+msgid "&Background"
+msgstr "&Fond"
+
+msgid "&Stable Symlinks"
+msgstr "&Stocaesse loyéns simbolikes"
+
+#, fuzzy
+msgid "di&Ve into subdir if exists"
+msgstr "&Plonker ezès ridants efants, s' i gn a"
 
 msgid "preserve &Attributes"
 msgstr "wårder les &Atributs"
@@ -1988,15 +2005,6 @@ msgstr "shure les &Loyéns"
 
 msgid "to:"
 msgstr "a:"
-
-msgid "&Background"
-msgstr "&Fond"
-
-msgid "&Stable Symlinks"
-msgstr "&Stocaesse loyéns simbolikes"
-
-msgid "&Dive into subdir if exists"
-msgstr "&Plonker ezès ridants efants, s' i gn a"
 
 #, fuzzy, c-format
 msgid "Invalid source pattern `%s'"
@@ -2044,6 +2052,9 @@ msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
+msgstr ""
+
+msgid "&All charsets"
 msgstr ""
 
 #, fuzzy
@@ -2558,6 +2569,9 @@ msgid "Edit &extension file"
 msgstr ""
 
 msgid "Edit &menu file"
+msgstr ""
+
+msgid "Edit &highlighting group file"
 msgstr ""
 
 msgid "&Configuration..."
@@ -3257,9 +3271,6 @@ msgid " Cannot spawn child process "
 msgstr " Dji n' sai drovî li fitchî %s"
 
 msgid "Empty output from child filter"
-msgstr ""
-
-msgid "All charsets"
 msgstr ""
 
 msgid "ButtonBar|Help"

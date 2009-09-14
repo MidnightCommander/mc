@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-02 23:01+0300\n"
+"POT-Creation-Date: 2009-09-14 16:34+0300\n"
 "PO-Revision-Date: 2002-08-25 16:15GMT+2\n"
 "Last-Translator: Vital Khilko <dojlid@mova.org>\n"
 "Language-Team: belarussian (tarask) <debian-l10n-belarusian@lists.debian."
@@ -55,10 +55,6 @@ msgstr ""
 
 msgid "Search"
 msgstr "Пошук"
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " %d адшукана, %d закладак дадана "
 
 msgid " Search string not found "
 msgstr "Радок пошуку не адшуканы "
@@ -118,7 +114,7 @@ msgstr ""
 msgid "&Windows/DOS format (CR LF)"
 msgstr ""
 
-msgid "&Macintosh format (LF)"
+msgid "&Macintosh format (CR)"
 msgstr ""
 
 msgid "Change line breaks to:"
@@ -316,9 +312,6 @@ msgstr "Сцэнар створаны:"
 msgid "Process block"
 msgstr "Апрацаваць блёк"
 
-msgid " Mail "
-msgstr " Пошта "
-
 msgid " Copies to"
 msgstr " Копіі на адрэсы"
 
@@ -331,6 +324,9 @@ msgstr " Каму"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <Тэма> -c <Копіі> <Каму>"
 
+msgid " Mail "
+msgstr " Пошта "
+
 msgid " Insert Literal "
 msgstr "  Уставіць літэрал "
 
@@ -340,7 +336,7 @@ msgstr " Націсьніце любую клявішу: "
 msgid " Execute Macro "
 msgstr " Выканаць макрас "
 
-msgid "&All charsets"
+msgid "All charsets"
 msgstr ""
 
 #, fuzzy
@@ -362,6 +358,10 @@ msgstr " Увядзіце тэкст для замены: "
 
 msgid " Enter search string:"
 msgstr " Увядзіце радок для пошуку"
+
+#, fuzzy
+msgid "&Find all"
+msgstr " Пошук файлу "
 
 msgid "Cancel"
 msgstr "Адмена"
@@ -926,6 +926,7 @@ msgstr "Запыт на запуск у каляровым рэжыме"
 msgid "Specifies a color configuration"
 msgstr "Вызначае наладкі колераў"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -941,10 +942,9 @@ msgid ""
 "                 editlinestate\n"
 msgstr ""
 
+#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
 "\n"
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -1038,6 +1038,9 @@ msgstr "Парадак сартаваньня"
 msgid "Executable first"
 msgstr ""
 
+msgid " Confirmation "
+msgstr " Запыт падцьверджаньня "
+
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
 msgstr "Сьпіс ката&лёгаў      C-\\"
@@ -1053,9 +1056,6 @@ msgstr " падцьверджаньне &Перазапісу"
 
 msgid " confirm &Delete "
 msgstr " падцьверджаньне &Выдаленьня"
-
-msgid " Confirmation "
-msgstr " Запыт падцьверджаньня "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1114,11 +1114,11 @@ msgstr "Тайм-аўт вызваленьня ВФС:"
 msgid " Virtual File System Setting "
 msgstr " Наладка Віртуальнае Файлавае Сыстэмы "
 
-msgid "Quick cd"
-msgstr " Зьмена працоўнага каталёгу "
-
 msgid "cd"
 msgstr "Перайсьці ў"
+
+msgid "Quick cd"
+msgstr " Зьмена працоўнага каталёгу "
 
 msgid "Symbolic link filename:"
 msgstr "Імя сымбалічнае спасылкі:"
@@ -1327,6 +1327,13 @@ msgid "Extension file edit"
 msgstr " Рэдагаваньне файлу пашырэньняў "
 
 msgid " Which extension file you want to edit? "
+msgstr " Які файл пашырэньняў Вы жадаеце рэдагаваць? "
+
+msgid "Highlighting groups file edit"
+msgstr ""
+
+#, fuzzy
+msgid " Which highlighting file you want to edit? "
 msgstr " Які файл пашырэньняў Вы жадаеце рэдагаваць? "
 
 msgid " Compare directories "
@@ -1920,9 +1927,25 @@ msgstr "Мэта"
 msgid "Deleting"
 msgstr "Выдаляем"
 
-#, c-format
-msgid "Target file \"%s\" already exists!"
+#, fuzzy
+msgid "Target file already exists!"
 msgstr "Файл мэты \"%s\" ужо йснуе!"
+
+#, fuzzy, c-format
+msgid "Source date: %s, size %llu"
+msgstr "Дата крыніцы: %s, даўжыня %llu"
+
+#, fuzzy, c-format
+msgid "Target date: %s, size %llu"
+msgstr "Дата мэты: %s, даўжыня %llu"
+
+#, fuzzy, c-format
+msgid "Source date: %s, size %u"
+msgstr "Дата крыніцы: %s, даўжыня %u"
+
+#, fuzzy, c-format
+msgid "Target date: %s, size %u"
+msgstr "Дата мэты: %s, даўжыня %u"
 
 msgid "If &size differs"
 msgstr "якія адрозьніваюцца па &Даўжыні"
@@ -1942,27 +1965,21 @@ msgstr "дапісаць у &Канец"
 msgid "Overwrite this target?"
 msgstr "Перапісаць гэты файл?"
 
-#, fuzzy, c-format
-msgid "Target date: %s, size %llu"
-msgstr "Дата мэты: %s, даўжыня %llu"
-
-#, fuzzy, c-format
-msgid "Source date: %s, size %llu"
-msgstr "Дата крыніцы: %s, даўжыня %llu"
-
-#, fuzzy, c-format
-msgid "Target date: %s, size %u"
-msgstr "Дата мэты: %s, даўжыня %u"
-
-#, fuzzy, c-format
-msgid "Source date: %s, size %u"
-msgstr "Дата крыніцы: %s, даўжыня %u"
-
 msgid " File exists "
 msgstr " Файл існуе "
 
 msgid " Background process: File exists "
 msgstr " Працэс у тле: файл існуе "
+
+msgid "&Background"
+msgstr "У т&ле"
+
+msgid "&Stable Symlinks"
+msgstr "&Захоўваць сымбалічныя спасылкі"
+
+#, fuzzy
+msgid "di&Ve into subdir if exists"
+msgstr "У &нутро каталёгу, калі ёсьць"
 
 msgid "preserve &Attributes"
 msgstr "Захоўваць &Атрыбуты"
@@ -1972,15 +1989,6 @@ msgstr "Сачыць за &Спасылкамі."
 
 msgid "to:"
 msgstr "у:"
-
-msgid "&Background"
-msgstr "У т&ле"
-
-msgid "&Stable Symlinks"
-msgstr "&Захоўваць сымбалічныя спасылкі"
-
-msgid "&Dive into subdir if exists"
-msgstr "У &нутро каталёгу, калі ёсьць"
 
 #, fuzzy, c-format
 msgid "Invalid source pattern `%s'"
@@ -2028,6 +2036,9 @@ msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
+msgstr ""
+
+msgid "&All charsets"
 msgstr ""
 
 #, fuzzy
@@ -2536,6 +2547,9 @@ msgstr "Файл па&шырэньняў"
 
 msgid "Edit &menu file"
 msgstr "Файл мэн&ю"
+
+msgid "Edit &highlighting group file"
+msgstr ""
 
 msgid "&Configuration..."
 msgstr "&Канфігурацыя"
@@ -3240,9 +3254,6 @@ msgstr " Немагчыма стварыць дачэрні працэс "
 msgid "Empty output from child filter"
 msgstr ""
 
-msgid "All charsets"
-msgstr ""
-
 msgid "ButtonBar|Help"
 msgstr ""
 
@@ -3796,6 +3807,9 @@ msgstr " Нутраная памылка:"
 
 msgid "Changes to file lost"
 msgstr "Зьмены для файлу страчаны"
+
+#~ msgid " %d items found, %d bookmarks added "
+#~ msgstr " %d адшукана, %d закладак дадана "
 
 #~ msgid "Displays this help message"
 #~ msgstr "Адлюстраваць гэтае даведачнае паведамленьне"

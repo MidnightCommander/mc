@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-02 23:01+0300\n"
+"POT-Creation-Date: 2009-09-14 16:34+0300\n"
 "PO-Revision-Date: 2001-11-20 15:15+0200\n"
 "Last-Translator: Artis Trops <hornet@navigators.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -57,10 +57,6 @@ msgstr ""
 
 msgid "Search"
 msgstr "Meklēt"
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " %d meklējumi izdarīt, %d grāmatzīmes pievienotas"
 
 msgid " Search string not found "
 msgstr " Meklējamā rinda nav atrasta "
@@ -120,7 +116,7 @@ msgstr ""
 msgid "&Windows/DOS format (CR LF)"
 msgstr ""
 
-msgid "&Macintosh format (LF)"
+msgid "&Macintosh format (CR)"
 msgstr ""
 
 msgid "Change line breaks to:"
@@ -320,9 +316,6 @@ msgstr "Skripts izveidots:"
 msgid "Process block"
 msgstr "Procesa bloks"
 
-msgid " Mail "
-msgstr " Pasts"
-
 msgid " Copies to"
 msgstr " Kopét uz"
 
@@ -335,6 +328,9 @@ msgstr " Uz"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <subjekts> -c <cc> <kam>"
 
+msgid " Mail "
+msgstr " Pasts"
+
 msgid " Insert Literal "
 msgstr " Ievietot Burtu "
 
@@ -344,7 +340,7 @@ msgstr " Spiest jebkuru taustiņu: "
 msgid " Execute Macro "
 msgstr " Palaist Makro "
 
-msgid "&All charsets"
+msgid "All charsets"
 msgstr ""
 
 #, fuzzy
@@ -366,6 +362,10 @@ msgstr " Ievadiet aizvietotājvirkni:"
 
 msgid " Enter search string:"
 msgstr " Ievadiet meklējamo virkni:"
+
+#, fuzzy
+msgid "&Find all"
+msgstr "Atrast Failu"
 
 msgid "Cancel"
 msgstr "Atsaukt"
@@ -930,6 +930,7 @@ msgstr "Pieprasījums darboties krāsu režīmā"
 msgid "Specifies a color configuration"
 msgstr "Nosaka krāsas konfigurāciju"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
@@ -964,10 +965,9 @@ msgstr ""
 "   brightcyan, lightgray and white\n"
 "\n"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
 "\n"
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -1060,6 +1060,9 @@ msgstr "Kārtošanas secība"
 msgid "Executable first"
 msgstr ""
 
+msgid " Confirmation "
+msgstr " Apstiprināšana "
+
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
 msgstr "di&Rektoriju karstais saraksts    C-\\"
@@ -1075,9 +1078,6 @@ msgstr " apstiprināt pā&Rrakstīšanu "
 
 msgid " confirm &Delete "
 msgstr " apstiprināt i&Zdzēšanu "
-
-msgid " Confirmation "
-msgstr " Apstiprināšana "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1136,11 +1136,11 @@ msgstr "Taimauts atbrīvojot VFSas:"
 msgid " Virtual File System Setting "
 msgstr " Virtuālo Failsistēmas Uzstādījumi "
 
-msgid "Quick cd"
-msgstr "Ātrs cd"
-
 msgid "cd"
 msgstr "cd"
+
+msgid "Quick cd"
+msgstr "Ātrs cd"
 
 msgid "Symbolic link filename:"
 msgstr "Simbolsaites faila nosaukums:"
@@ -1350,6 +1350,13 @@ msgid "Extension file edit"
 msgstr "Paplašinājuma faila rediģēšana"
 
 msgid " Which extension file you want to edit? "
+msgstr " Kuru paplašinājuma failu jūs vēlaties rediģēt? "
+
+msgid "Highlighting groups file edit"
+msgstr ""
+
+#, fuzzy
+msgid " Which highlighting file you want to edit? "
 msgstr " Kuru paplašinājuma failu jūs vēlaties rediģēt? "
 
 msgid " Compare directories "
@@ -1942,9 +1949,25 @@ msgstr "Mērķis"
 msgid "Deleting"
 msgstr "Dzēšana"
 
-#, c-format
-msgid "Target file \"%s\" already exists!"
+#, fuzzy
+msgid "Target file already exists!"
 msgstr "Mērķa fails \"%s\" jau eksistē!"
+
+#, fuzzy, c-format
+msgid "Source date: %s, size %llu"
+msgstr "Avota datums: %s, lielums %llu"
+
+#, fuzzy, c-format
+msgid "Target date: %s, size %llu"
+msgstr "Mērķa datums: %s, lielums %llu"
+
+#, fuzzy, c-format
+msgid "Source date: %s, size %u"
+msgstr "Avota datums: %s, lielums %u"
+
+#, fuzzy, c-format
+msgid "Target date: %s, size %u"
+msgstr "Mērķa datums: %s, lielums %u"
 
 msgid "If &size differs"
 msgstr "ja i&Zmērs atšķiras"
@@ -1964,27 +1987,21 @@ msgstr "pie&Vienot"
 msgid "Overwrite this target?"
 msgstr "Pārrakstīt mērķi?"
 
-#, fuzzy, c-format
-msgid "Target date: %s, size %llu"
-msgstr "Mērķa datums: %s, lielums %llu"
-
-#, fuzzy, c-format
-msgid "Source date: %s, size %llu"
-msgstr "Avota datums: %s, lielums %llu"
-
-#, fuzzy, c-format
-msgid "Target date: %s, size %u"
-msgstr "Mērķa datums: %s, lielums %u"
-
-#, fuzzy, c-format
-msgid "Source date: %s, size %u"
-msgstr "Avota datums: %s, lielums %u"
-
 msgid " File exists "
 msgstr " Fails eksistē "
 
 msgid " Background process: File exists "
 msgstr " Fona darbs: Fails eksistē "
+
+msgid "&Background"
+msgstr "&Fonā"
+
+msgid "&Stable Symlinks"
+msgstr "&Stabilas Simbolsaites"
+
+#, fuzzy
+msgid "di&Ve into subdir if exists"
+msgstr "&Ieiet apakšdirektorijā, ja tāds eksistē"
 
 msgid "preserve &Attributes"
 msgstr "saglabāt &Atribūtus"
@@ -1994,15 +2011,6 @@ msgstr "sekot &Saitēm"
 
 msgid "to:"
 msgstr "uz:"
-
-msgid "&Background"
-msgstr "&Fonā"
-
-msgid "&Stable Symlinks"
-msgstr "&Stabilas Simbolsaites"
-
-msgid "&Dive into subdir if exists"
-msgstr "&Ieiet apakšdirektorijā, ja tāds eksistē"
 
 #, fuzzy, c-format
 msgid "Invalid source pattern `%s'"
@@ -2050,6 +2058,9 @@ msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
+msgstr ""
+
+msgid "&All charsets"
 msgstr ""
 
 #, fuzzy
@@ -2562,6 +2573,9 @@ msgstr "&Paplašinājumu faila rediģēšana"
 
 msgid "Edit &menu file"
 msgstr "&Izvēlnes faila rediģēšana"
+
+msgid "Edit &highlighting group file"
+msgstr ""
 
 msgid "&Configuration..."
 msgstr "&Konfigurācija..."
@@ -3268,9 +3282,6 @@ msgstr " Nevar pavairot bērna programmu "
 msgid "Empty output from child filter"
 msgstr ""
 
-msgid "All charsets"
-msgstr ""
-
 msgid "ButtonBar|Help"
 msgstr ""
 
@@ -3825,6 +3836,9 @@ msgstr "Iekšējā kļūda:"
 
 msgid "Changes to file lost"
 msgstr "Izmaiņas failā pazudušas"
+
+#~ msgid " %d items found, %d bookmarks added "
+#~ msgstr " %d meklējumi izdarīt, %d grāmatzīmes pievienotas"
 
 #~ msgid "Displays this help message"
 #~ msgstr "Pārāda šo palīdzības paziņojumu"

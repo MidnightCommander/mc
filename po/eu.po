@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-02 23:01+0300\n"
+"POT-Creation-Date: 2009-09-14 16:34+0300\n"
 "PO-Revision-Date: 2001-05-25 13:35+0200\n"
 "Last-Translator: mari susperregi <mari@elhuyar.com>\n"
 "Language-Team: Euskara <debian-l10n-basque@lists.debian.org>\n"
@@ -58,10 +58,6 @@ msgstr ""
 
 msgid "Search"
 msgstr "Bilatu"
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr "%d aurkikuntza egin dira, %d laster-marka gehituta "
 
 msgid " Search string not found "
 msgstr " Bilatutako katea ez da aurkitu "
@@ -121,7 +117,7 @@ msgstr ""
 msgid "&Windows/DOS format (CR LF)"
 msgstr ""
 
-msgid "&Macintosh format (LF)"
+msgid "&Macintosh format (CR)"
 msgstr ""
 
 msgid "Change line breaks to:"
@@ -321,9 +317,6 @@ msgstr "Sortutako script-a:"
 msgid "Process block"
 msgstr "Prozesatu blokea"
 
-msgid " Mail "
-msgstr "Posta "
-
 msgid " Copies to"
 msgstr "Hona kopiatzen du"
 
@@ -336,6 +329,9 @@ msgstr "Nori"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr "posta -s <gaia> -c <cc> <nori>"
 
+msgid " Mail "
+msgstr "Posta "
+
 msgid " Insert Literal "
 msgstr " Txertatu literala "
 
@@ -345,7 +341,7 @@ msgstr " Sakatu tekla bat: "
 msgid " Execute Macro "
 msgstr " Exekutatu makroa "
 
-msgid "&All charsets"
+msgid "All charsets"
 msgstr ""
 
 #, fuzzy
@@ -367,6 +363,10 @@ msgstr "Sartu ordezko katea:"
 
 msgid " Enter search string:"
 msgstr "Sartu bilaketa-katea:"
+
+#, fuzzy
+msgid "&Find all"
+msgstr "Bilatu fitxategia"
 
 msgid "Cancel"
 msgstr "Utzi"
@@ -931,6 +931,7 @@ msgstr "Kolore moduan exekutatzeko eskatzen du"
 msgid "Specifies a color configuration"
 msgstr "Kolore-konfigurazioa zehazten du"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
@@ -965,10 +966,9 @@ msgstr ""
 "   cyan argia, gris argia eta zuria\n"
 "\n"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
 "\n"
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -1061,6 +1061,9 @@ msgstr "Ordenazioa"
 msgid "Executable first"
 msgstr ""
 
+msgid " Confirmation "
+msgstr "Berrespena "
+
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
 msgstr "&gogokoen direktorioa                C-\\"
@@ -1076,9 +1079,6 @@ msgstr "berretsi &gainidatzi "
 
 msgid " confirm &Delete "
 msgstr "berretsi e&zabatu "
-
-msgid " Confirmation "
-msgstr "Berrespena "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1137,11 +1137,11 @@ msgstr "VFSak libratzeko denbora-muga:"
 msgid " Virtual File System Setting "
 msgstr "Fitxategi-sistema birtualaren konfigurazioa "
 
-msgid "Quick cd"
-msgstr "Cd bizkorra"
-
 msgid "cd"
 msgstr "cd"
+
+msgid "Quick cd"
+msgstr "Cd bizkorra"
 
 msgid "Symbolic link filename:"
 msgstr "Esteka sinbolikoaren fitxategi-izena:"
@@ -1352,6 +1352,13 @@ msgid "Extension file edit"
 msgstr "Editatu luzapen-fitxategia"
 
 msgid " Which extension file you want to edit? "
+msgstr "Zer luzapen-fitxategi nahi duzu editatu? "
+
+msgid "Highlighting groups file edit"
+msgstr ""
+
+#, fuzzy
+msgid " Which highlighting file you want to edit? "
 msgstr "Zer luzapen-fitxategi nahi duzu editatu? "
 
 msgid " Compare directories "
@@ -1946,9 +1953,25 @@ msgstr "Helburua"
 msgid "Deleting"
 msgstr "Ezabatzen"
 
-#, c-format
-msgid "Target file \"%s\" already exists!"
+#, fuzzy
+msgid "Target file already exists!"
 msgstr "\"%s\" helburu-fitxategia badago lehendik ere!"
+
+#, fuzzy, c-format
+msgid "Source date: %s, size %llu"
+msgstr "Iturburu-data: %s, tamaina %llu"
+
+#, fuzzy, c-format
+msgid "Target date: %s, size %llu"
+msgstr "Helburu-data: %s, tamaina %llu"
+
+#, fuzzy, c-format
+msgid "Source date: %s, size %u"
+msgstr "Iturburu-data: %s, tamaina %u"
+
+#, fuzzy, c-format
+msgid "Target date: %s, size %u"
+msgstr "Helburu-data: %s, tamaina %u"
 
 msgid "If &size differs"
 msgstr "&Tamaina desberdina bada"
@@ -1968,27 +1991,21 @@ msgstr "era&nskina"
 msgid "Overwrite this target?"
 msgstr "Helburu guztiak gainidatzi?"
 
-#, fuzzy, c-format
-msgid "Target date: %s, size %llu"
-msgstr "Helburu-data: %s, tamaina %llu"
-
-#, fuzzy, c-format
-msgid "Source date: %s, size %llu"
-msgstr "Iturburu-data: %s, tamaina %llu"
-
-#, fuzzy, c-format
-msgid "Target date: %s, size %u"
-msgstr "Helburu-data: %s, tamaina %u"
-
-#, fuzzy, c-format
-msgid "Source date: %s, size %u"
-msgstr "Iturburu-data: %s, tamaina %u"
-
 msgid " File exists "
 msgstr "Fitxategia badago lehendik ere "
 
 msgid " Background process: File exists "
 msgstr "Atzeko planoko prozesua: Fitxategia badago lehendik ere "
+
+msgid "&Background"
+msgstr "&Atzeko planoa"
+
+msgid "&Stable Symlinks"
+msgstr "Esteka sinboliko egon&korrak"
+
+#, fuzzy
+msgid "di&Ve into subdir if exists"
+msgstr "&Azpidirektorioetan sartu, lehendik badaude "
 
 msgid "preserve &Attributes"
 msgstr "mantendu a&tributuak"
@@ -1998,15 +2015,6 @@ msgstr "jarraitu &estekei"
 
 msgid "to:"
 msgstr "hona:"
-
-msgid "&Background"
-msgstr "&Atzeko planoa"
-
-msgid "&Stable Symlinks"
-msgstr "Esteka sinboliko egon&korrak"
-
-msgid "&Dive into subdir if exists"
-msgstr "&Azpidirektorioetan sartu, lehendik badaude "
 
 #, fuzzy, c-format
 msgid "Invalid source pattern `%s'"
@@ -2054,6 +2062,9 @@ msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
+msgstr ""
+
+msgid "&All charsets"
 msgstr ""
 
 #, fuzzy
@@ -2565,6 +2576,9 @@ msgstr "Editatu &luzapen-fitxategia"
 
 msgid "Edit &menu file"
 msgstr "Editatu &menu-fitxategia"
+
+msgid "Edit &highlighting group file"
+msgstr ""
 
 msgid "&Configuration..."
 msgstr "&Konfigurazioa..."
@@ -3271,9 +3285,6 @@ msgstr " Ezin da programa umea abiarazi "
 msgid "Empty output from child filter"
 msgstr ""
 
-msgid "All charsets"
-msgstr ""
-
 msgid "ButtonBar|Help"
 msgstr ""
 
@@ -3827,6 +3838,9 @@ msgstr "Barne-errorea:"
 
 msgid "Changes to file lost"
 msgstr "Fitxategiko aldaketak galdu egin dira"
+
+#~ msgid " %d items found, %d bookmarks added "
+#~ msgstr "%d aurkikuntza egin dira, %d laster-marka gehituta "
 
 #~ msgid "Displays this help message"
 #~ msgstr "Laguntza-mezu hau bistaratzen du"

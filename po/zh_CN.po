@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-02 23:01+0300\n"
+"POT-Creation-Date: 2009-09-14 16:34+0300\n"
 "PO-Revision-Date: 2002-01-29 22:05+0800\n"
 "Last-Translator: Wang Jian <lark@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -57,10 +57,6 @@ msgstr ""
 
 msgid "Search"
 msgstr "搜索"
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " 找到 %d 匹配项，添加了 %d 个书签 "
 
 msgid " Search string not found "
 msgstr " 没有找到要搜索的字符串 "
@@ -120,7 +116,7 @@ msgstr ""
 msgid "&Windows/DOS format (CR LF)"
 msgstr ""
 
-msgid "&Macintosh format (LF)"
+msgid "&Macintosh format (CR)"
 msgstr ""
 
 msgid "Change line breaks to:"
@@ -319,9 +315,6 @@ msgstr "脚本被创建："
 msgid "Process block"
 msgstr "处理块"
 
-msgid " Mail "
-msgstr " 邮件 "
-
 msgid " Copies to"
 msgstr " 复制到 "
 
@@ -334,6 +327,9 @@ msgstr " 收件人 "
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <subject> -c <cc> <to>"
 
+msgid " Mail "
+msgstr " 邮件 "
+
 msgid " Insert Literal "
 msgstr " 字面插入 "
 
@@ -343,7 +339,7 @@ msgstr " 按下任意键："
 msgid " Execute Macro "
 msgstr " 执行宏 "
 
-msgid "&All charsets"
+msgid "All charsets"
 msgstr ""
 
 #, fuzzy
@@ -365,6 +361,10 @@ msgstr " 输入替换字符串："
 
 msgid " Enter search string:"
 msgstr " 输入查找字符串："
+
+#, fuzzy
+msgid "&Find all"
+msgstr "搜索文件"
 
 msgid "Cancel"
 msgstr "取消"
@@ -929,6 +929,7 @@ msgstr "请求运行在彩色模式"
 msgid "Specifies a color configuration"
 msgstr "指定颜色配置"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
@@ -963,10 +964,9 @@ msgstr ""
 "  brightcyan, lightgray and white\n"
 "\n"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
 "\n"
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -1057,6 +1057,9 @@ msgstr "排序"
 msgid "Executable first"
 msgstr ""
 
+msgid " Confirmation "
+msgstr " 确认 "
+
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
 msgstr " 删除时确认(&D) "
@@ -1072,9 +1075,6 @@ msgstr " 覆盖时确认(&V) "
 
 msgid " confirm &Delete "
 msgstr " 删除时确认(&D) "
-
-msgid " Confirmation "
-msgstr " 确认 "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1133,11 +1133,11 @@ msgstr "释放 VFS 的超时值："
 msgid " Virtual File System Setting "
 msgstr " 虚拟文件系统设置 "
 
-msgid "Quick cd"
-msgstr "快速 cd"
-
 msgid "cd"
 msgstr "cd"
+
+msgid "Quick cd"
+msgstr "快速 cd"
 
 msgid "Symbolic link filename:"
 msgstr "符号链接文件名："
@@ -1346,6 +1346,13 @@ msgid "Extension file edit"
 msgstr "扩展文件编辑"
 
 msgid " Which extension file you want to edit? "
+msgstr " 您要编辑哪个扩展文件？ "
+
+msgid "Highlighting groups file edit"
+msgstr ""
+
+#, fuzzy
+msgid " Which highlighting file you want to edit? "
 msgstr " 您要编辑哪个扩展文件？ "
 
 msgid " Compare directories "
@@ -1933,9 +1940,25 @@ msgstr "目标"
 msgid "Deleting"
 msgstr "正在删除"
 
-#, c-format
-msgid "Target file \"%s\" already exists!"
+#, fuzzy
+msgid "Target file already exists!"
 msgstr "目标文件“%s”已存在！"
+
+#, fuzzy, c-format
+msgid "Source date: %s, size %llu"
+msgstr "源日期：%s，大小 %llu"
+
+#, fuzzy, c-format
+msgid "Target date: %s, size %llu"
+msgstr "目标日期：%s，大小 %llu"
+
+#, fuzzy, c-format
+msgid "Source date: %s, size %u"
+msgstr "源日期：%s，大小 %u"
+
+#, fuzzy, c-format
+msgid "Target date: %s, size %u"
+msgstr "目标日期：%s，大小 %u"
 
 msgid "If &size differs"
 msgstr "如果大小有差别(&S)"
@@ -1955,27 +1978,21 @@ msgstr "追加(&P)"
 msgid "Overwrite this target?"
 msgstr "覆盖该目标？"
 
-#, fuzzy, c-format
-msgid "Target date: %s, size %llu"
-msgstr "目标日期：%s，大小 %llu"
-
-#, fuzzy, c-format
-msgid "Source date: %s, size %llu"
-msgstr "源日期：%s，大小 %llu"
-
-#, fuzzy, c-format
-msgid "Target date: %s, size %u"
-msgstr "目标日期：%s，大小 %u"
-
-#, fuzzy, c-format
-msgid "Source date: %s, size %u"
-msgstr "源日期：%s，大小 %u"
-
 msgid " File exists "
 msgstr " 文件已存在 "
 
 msgid " Background process: File exists "
 msgstr " 后台进程：文件已存在 "
+
+msgid "&Background"
+msgstr "后台(&B)"
+
+msgid "&Stable Symlinks"
+msgstr "稳定符号链接(&S)"
+
+#, fuzzy
+msgid "di&Ve into subdir if exists"
+msgstr "如果有子目录则进入(&D)"
 
 msgid "preserve &Attributes"
 msgstr "保留属性(&A)"
@@ -1985,15 +2002,6 @@ msgstr "跟随链接(&L)"
 
 msgid "to:"
 msgstr "至："
-
-msgid "&Background"
-msgstr "后台(&B)"
-
-msgid "&Stable Symlinks"
-msgstr "稳定符号链接(&S)"
-
-msgid "&Dive into subdir if exists"
-msgstr "如果有子目录则进入(&D)"
 
 #, fuzzy, c-format
 msgid "Invalid source pattern `%s'"
@@ -2041,6 +2049,9 @@ msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
+msgstr ""
+
+msgid "&All charsets"
 msgstr ""
 
 #, fuzzy
@@ -2542,6 +2553,9 @@ msgstr "扩展文件编辑(&E)"
 
 msgid "Edit &menu file"
 msgstr "菜单文件编辑(&M)"
+
+msgid "Edit &highlighting group file"
+msgstr ""
 
 msgid "&Configuration..."
 msgstr "配置(&C)..."
@@ -3244,9 +3258,6 @@ msgstr " 无法生成子程序 "
 msgid "Empty output from child filter"
 msgstr ""
 
-msgid "All charsets"
-msgstr ""
-
 msgid "ButtonBar|Help"
 msgstr ""
 
@@ -3800,6 +3811,9 @@ msgstr "内部错误："
 
 msgid "Changes to file lost"
 msgstr "对文件的修改被丢失"
+
+#~ msgid " %d items found, %d bookmarks added "
+#~ msgstr " 找到 %d 匹配项，添加了 %d 个书签 "
 
 #~ msgid "Displays this help message"
 #~ msgstr "显示该帮助信息"

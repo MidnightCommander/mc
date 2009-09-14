@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0-pre3\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-02 23:01+0300\n"
+"POT-Creation-Date: 2009-09-14 16:34+0300\n"
 "PO-Revision-Date: 2003-01-22 17:31+0900\n"
 "Last-Translator: Nam SungHyun <namsh@kldp.org>\n"
 "Language-Team: Korean <debian-l10n-korean@lists.debian.org>\n"
@@ -55,10 +55,6 @@ msgstr "매크로가 너무 많이 반복되어 불려졌습니다"
 
 msgid "Search"
 msgstr "찾기"
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " %d이(가) 찾아짐, %d 책갈피 더함 "
 
 msgid " Search string not found "
 msgstr " 글월을 찾을 수 없군요 "
@@ -118,7 +114,7 @@ msgstr ""
 msgid "&Windows/DOS format (CR LF)"
 msgstr ""
 
-msgid "&Macintosh format (LF)"
+msgid "&Macintosh format (CR)"
 msgstr ""
 
 msgid "Change line breaks to:"
@@ -314,9 +310,6 @@ msgstr "스크립트 만듬:"
 msgid "Process block"
 msgstr "Process block"
 
-msgid " Mail "
-msgstr " 전자우편 "
-
 msgid " Copies to"
 msgstr " Copies to"
 
@@ -329,6 +322,9 @@ msgstr " To"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <subject> -c <cc> <to>"
 
+msgid " Mail "
+msgstr " 전자우편 "
+
 msgid " Insert Literal "
 msgstr " Literal 입력 "
 
@@ -338,7 +334,7 @@ msgstr " 아무 글쇠나 누르십시오: "
 msgid " Execute Macro "
 msgstr " 매크로 실행 "
 
-msgid "&All charsets"
+msgid "All charsets"
 msgstr ""
 
 #, fuzzy
@@ -360,6 +356,10 @@ msgstr " 바꿀 글월 입력:"
 
 msgid " Enter search string:"
 msgstr " 찾을 글월 입력:"
+
+#, fuzzy
+msgid "&Find all"
+msgstr "파일 찾기"
 
 msgid "Cancel"
 msgstr "취소"
@@ -921,6 +921,7 @@ msgstr "컬러 모드로 실행을 요구"
 msgid "Specifies a color configuration"
 msgstr "컬러 환경을 명세"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
@@ -955,10 +956,9 @@ msgstr ""
 "   brightcyan, lightgray and white\n"
 "\n"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
 "\n"
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -1051,6 +1051,9 @@ msgstr "정렬 순서"
 msgid "Executable first"
 msgstr ""
 
+msgid " Confirmation "
+msgstr " 확인 "
+
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
 msgstr "디렉토리 단축목록(&R)        C-\\"
@@ -1066,9 +1069,6 @@ msgstr " 덮어쓰기 확인(&V) "
 
 msgid " confirm &Delete "
 msgstr " 지우기 확인(&D) "
-
-msgid " Confirmation "
-msgstr " 확인 "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1126,11 +1126,11 @@ msgstr "Timeout for freeing VFSs:"
 msgid " Virtual File System Setting "
 msgstr " 가상 파일 체계 설정 "
 
-msgid "Quick cd"
-msgstr "Quick cd"
-
 msgid "cd"
 msgstr "cd"
+
+msgid "Quick cd"
+msgstr "Quick cd"
 
 msgid "Symbolic link filename:"
 msgstr "심볼릭링크 파일명:"
@@ -1339,6 +1339,13 @@ msgid "Extension file edit"
 msgstr "Extension 파일 수정"
 
 msgid " Which extension file you want to edit? "
+msgstr " 수정하기를 원하는 extension 파일은? "
+
+msgid "Highlighting groups file edit"
+msgstr ""
+
+#, fuzzy
+msgid " Which highlighting file you want to edit? "
 msgstr " 수정하기를 원하는 extension 파일은? "
 
 msgid " Compare directories "
@@ -1929,9 +1936,25 @@ msgstr "대상"
 msgid "Deleting"
 msgstr "지우기"
 
-#, c-format
-msgid "Target file \"%s\" already exists!"
+#, fuzzy
+msgid "Target file already exists!"
 msgstr "대상 파일 \"%s\"이(가) 이미 있는데요!"
+
+#, fuzzy, c-format
+msgid "Source date: %s, size %llu"
+msgstr "원본 날짜: %s, 크기 %llu"
+
+#, fuzzy, c-format
+msgid "Target date: %s, size %llu"
+msgstr "대상 날짜: %s, 크기 %llu"
+
+#, fuzzy, c-format
+msgid "Source date: %s, size %u"
+msgstr "원본 날짜: %s, 크기 %u"
+
+#, fuzzy, c-format
+msgid "Target date: %s, size %u"
+msgstr "대상 날짜: %s, 크기 %u"
 
 msgid "If &size differs"
 msgstr "크기가 틀리면(&s)"
@@ -1951,27 +1974,21 @@ msgstr "덧붙임(&p)"
 msgid "Overwrite this target?"
 msgstr "이 파일을 덮어쓸까요?"
 
-#, fuzzy, c-format
-msgid "Target date: %s, size %llu"
-msgstr "대상 날짜: %s, 크기 %llu"
-
-#, fuzzy, c-format
-msgid "Source date: %s, size %llu"
-msgstr "원본 날짜: %s, 크기 %llu"
-
-#, fuzzy, c-format
-msgid "Target date: %s, size %u"
-msgstr "대상 날짜: %s, 크기 %u"
-
-#, fuzzy, c-format
-msgid "Source date: %s, size %u"
-msgstr "원본 날짜: %s, 크기 %u"
-
 msgid " File exists "
 msgstr " 파일 있음 "
 
 msgid " Background process: File exists "
 msgstr " 백그라운드 프로세스: 파일 있음 "
+
+msgid "&Background"
+msgstr "&Background"
+
+msgid "&Stable Symlinks"
+msgstr "&Stable 심볼릭링크"
+
+#, fuzzy
+msgid "di&Ve into subdir if exists"
+msgstr "같은 디렉토리 존재시 그 밑으로(&D)"
 
 msgid "preserve &Attributes"
 msgstr "파일 속성 보존(&A)"
@@ -1981,15 +1998,6 @@ msgstr "링크 따르기(&L)"
 
 msgid "to:"
 msgstr "대상:"
-
-msgid "&Background"
-msgstr "&Background"
-
-msgid "&Stable Symlinks"
-msgstr "&Stable 심볼릭링크"
-
-msgid "&Dive into subdir if exists"
-msgstr "같은 디렉토리 존재시 그 밑으로(&D)"
 
 #, fuzzy, c-format
 msgid "Invalid source pattern `%s'"
@@ -2037,6 +2045,9 @@ msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
+msgstr ""
+
+msgid "&All charsets"
 msgstr ""
 
 #, fuzzy
@@ -2544,6 +2555,9 @@ msgstr "Extension 파일 편집(&e)"
 
 msgid "Edit &menu file"
 msgstr "메뉴 파일 편집(&m)"
+
+msgid "Edit &highlighting group file"
+msgstr ""
 
 msgid "&Configuration..."
 msgstr "환경설정(&C)..."
@@ -3243,9 +3257,6 @@ msgstr " 자식(child) 풀그림을 실행할 수 없습니다 "
 msgid "Empty output from child filter"
 msgstr "자식 필터에서 결과가 없습니다"
 
-msgid "All charsets"
-msgstr ""
-
 msgid "ButtonBar|Help"
 msgstr ""
 
@@ -3795,6 +3806,9 @@ msgstr "내부 오류:"
 
 msgid "Changes to file lost"
 msgstr "수정 내용 잃어버림"
+
+#~ msgid " %d items found, %d bookmarks added "
+#~ msgstr " %d이(가) 찾아짐, %d 책갈피 더함 "
 
 #~ msgid "Displays this help message"
 #~ msgstr "이 도움말 보여주기"

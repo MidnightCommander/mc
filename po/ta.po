@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-02 23:01+0300\n"
+"POT-Creation-Date: 2009-09-14 16:34+0300\n"
 "PO-Revision-Date: 2000-10-26 11:00 CST\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil <ubuntu-l10n-tam@lists.ubuntu.com>\n"
@@ -56,10 +56,6 @@ msgstr ""
 
 msgid "Search"
 msgstr "தேடு"
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " %d கண்டுபிடிக்கப் பட்டன, %d புத்தககுறிகள் சேர்க்கப்பட்டன "
 
 msgid " Search string not found "
 msgstr ""
@@ -119,7 +115,7 @@ msgstr ""
 msgid "&Windows/DOS format (CR LF)"
 msgstr ""
 
-msgid "&Macintosh format (LF)"
+msgid "&Macintosh format (CR)"
 msgstr ""
 
 msgid "Change line breaks to:"
@@ -314,9 +310,6 @@ msgstr ""
 msgid "Process block"
 msgstr ""
 
-msgid " Mail "
-msgstr " அஞ்சல் "
-
 msgid " Copies to"
 msgstr " நகலும் இடம்"
 
@@ -329,6 +322,9 @@ msgstr " நோக்கி"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " அஞ்சல் -s <விஷயம்> -c <cc> <நோக்கி>"
 
+msgid " Mail "
+msgstr " அஞ்சல் "
+
 msgid " Insert Literal "
 msgstr "நிலைஉரை செருகு "
 
@@ -338,7 +334,7 @@ msgstr "ஏதாவது ஒரு விசையை அழுத்து: "
 msgid " Execute Macro "
 msgstr " பெரு நிரலை செயல்படுத்து "
 
-msgid "&All charsets"
+msgid "All charsets"
 msgstr ""
 
 msgid "&Whole words"
@@ -358,6 +354,9 @@ msgstr " மாற்றல் சரத்தை நுழைவிடு:"
 
 msgid " Enter search string:"
 msgstr " தேடுவதட்க்கு சரத்தை நுழைவிடு:"
+
+msgid "&Find all"
+msgstr ""
 
 msgid "Cancel"
 msgstr "ரத்து"
@@ -912,6 +911,7 @@ msgstr ""
 msgid "Specifies a color configuration"
 msgstr ""
 
+#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -927,10 +927,9 @@ msgid ""
 "                 editlinestate\n"
 msgstr ""
 
+#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
 "\n"
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -1017,6 +1016,9 @@ msgstr ""
 msgid "Executable first"
 msgstr ""
 
+msgid " Confirmation "
+msgstr ""
+
 msgid " confirm di&Rectory hotlist delete "
 msgstr ""
 
@@ -1030,9 +1032,6 @@ msgid " confirm o&Verwrite "
 msgstr ""
 
 msgid " confirm &Delete "
-msgstr ""
-
-msgid " Confirmation "
 msgstr ""
 
 msgid "UTF-8 output"
@@ -1093,10 +1092,10 @@ msgstr ""
 msgid " Virtual File System Setting "
 msgstr ""
 
-msgid "Quick cd"
+msgid "cd"
 msgstr ""
 
-msgid "cd"
+msgid "Quick cd"
 msgstr ""
 
 msgid "Symbolic link filename:"
@@ -1305,6 +1304,12 @@ msgid "Extension file edit"
 msgstr ""
 
 msgid " Which extension file you want to edit? "
+msgstr ""
+
+msgid "Highlighting groups file edit"
+msgstr ""
+
+msgid " Which highlighting file you want to edit? "
 msgstr ""
 
 msgid " Compare directories "
@@ -1815,8 +1820,24 @@ msgstr ""
 msgid "Deleting"
 msgstr ""
 
+#, fuzzy
+msgid "Target file already exists!"
+msgstr " இந்த பெயரில் கோப்பு ஒன்று இருக்கின்றது. "
+
 #, c-format
-msgid "Target file \"%s\" already exists!"
+msgid "Source date: %s, size %llu"
+msgstr ""
+
+#, c-format
+msgid "Target date: %s, size %llu"
+msgstr ""
+
+#, c-format
+msgid "Source date: %s, size %u"
+msgstr ""
+
+#, c-format
+msgid "Target date: %s, size %u"
 msgstr ""
 
 msgid "If &size differs"
@@ -1837,26 +1858,19 @@ msgstr ""
 msgid "Overwrite this target?"
 msgstr ""
 
-#, c-format
-msgid "Target date: %s, size %llu"
-msgstr ""
-
-#, c-format
-msgid "Source date: %s, size %llu"
-msgstr ""
-
-#, c-format
-msgid "Target date: %s, size %u"
-msgstr ""
-
-#, c-format
-msgid "Source date: %s, size %u"
-msgstr ""
-
 msgid " File exists "
 msgstr ""
 
 msgid " Background process: File exists "
+msgstr ""
+
+msgid "&Background"
+msgstr ""
+
+msgid "&Stable Symlinks"
+msgstr ""
+
+msgid "di&Ve into subdir if exists"
 msgstr ""
 
 msgid "preserve &Attributes"
@@ -1866,15 +1880,6 @@ msgid "follow &Links"
 msgstr ""
 
 msgid "to:"
-msgstr ""
-
-msgid "&Background"
-msgstr ""
-
-msgid "&Stable Symlinks"
-msgstr ""
-
-msgid "&Dive into subdir if exists"
 msgstr ""
 
 #, c-format
@@ -1920,6 +1925,9 @@ msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
+msgstr ""
+
+msgid "&All charsets"
 msgstr ""
 
 msgid "Case sens&itive"
@@ -2408,6 +2416,9 @@ msgid "Edit &extension file"
 msgstr ""
 
 msgid "Edit &menu file"
+msgstr ""
+
+msgid "Edit &highlighting group file"
 msgstr ""
 
 msgid "&Configuration..."
@@ -3086,9 +3097,6 @@ msgstr " கோப்பை சேமிக்கும் போது பி�
 msgid "Empty output from child filter"
 msgstr ""
 
-msgid "All charsets"
-msgstr ""
-
 msgid "ButtonBar|Help"
 msgstr ""
 
@@ -3601,6 +3609,9 @@ msgstr ""
 
 msgid "Changes to file lost"
 msgstr ""
+
+#~ msgid " %d items found, %d bookmarks added "
+#~ msgstr " %d கண்டுபிடிக்கப் பட்டன, %d புத்தககுறிகள் சேர்க்கப்பட்டன "
 
 #~ msgid "pro&Mpt on replace"
 #~ msgstr "மாற்றும்போது தூ&ண்டு"

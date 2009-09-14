@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-02 23:01+0300\n"
+"POT-Creation-Date: 2009-09-14 16:34+0300\n"
 "PO-Revision-Date: 2001-09-26 16:43GMT +0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
@@ -58,10 +58,6 @@ msgstr ""
 
 msgid "Search"
 msgstr "Axtar"
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " %d tapılış oldu, %d qeyd əlavə edildi "
 
 msgid " Search string not found "
 msgstr " Axtarılşan kəlimə tapıla bilmədi "
@@ -121,7 +117,7 @@ msgstr ""
 msgid "&Windows/DOS format (CR LF)"
 msgstr ""
 
-msgid "&Macintosh format (LF)"
+msgid "&Macintosh format (CR)"
 msgstr ""
 
 msgid "Change line breaks to:"
@@ -320,9 +316,6 @@ msgstr "Script yaradıldı:"
 msgid "Process block"
 msgstr "Blok əməliyyatına başla"
 
-msgid " Mail "
-msgstr " Məktubla göndər "
-
 msgid " Copies to"
 msgstr " Köçürdülür"
 
@@ -335,6 +328,9 @@ msgstr " Göndərilən"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <subject> -c <cc> <to>"
 
+msgid " Mail "
+msgstr " Məktubla göndər "
+
 msgid " Insert Literal "
 msgstr " Hərfi daxil et"
 
@@ -344,7 +340,7 @@ msgstr " İstədiyin düyməyə bas :"
 msgid " Execute Macro "
 msgstr " Makronu işə sal"
 
-msgid "&All charsets"
+msgid "All charsets"
 msgstr ""
 
 #, fuzzy
@@ -366,6 +362,10 @@ msgstr " Dəyişdiriləcək kəliməyi gir:"
 
 msgid " Enter search string:"
 msgstr " Axtarılacaq kəliməyi gir:"
+
+#, fuzzy
+msgid "&Find all"
+msgstr "Faylı tap"
 
 msgid "Cancel"
 msgstr "Ləğv Et"
@@ -930,6 +930,7 @@ msgstr "Rəngli modda başlat"
 msgid "Specifies a color configuration"
 msgstr "Rəng qurğularını bildir"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
@@ -964,10 +965,9 @@ msgstr ""
 "   brightcyan, lightgray and white\n"
 "\n"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
 "\n"
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -1060,6 +1060,9 @@ msgstr "Süzmə əmri"
 msgid "Executable first"
 msgstr ""
 
+msgid " Confirmation "
+msgstr " İcazə "
+
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
 msgstr "qov&luqlar keçmişi      C-\\"
@@ -1075,9 +1078,6 @@ msgstr " ü&stünə yazmaq üçün icazə istə "
 
 msgid " confirm &Delete "
 msgstr " sil&mək üçün icazə istə "
-
-msgid " Confirmation "
-msgstr " İcazə "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1136,11 +1136,11 @@ msgstr "VFSnin azad edilməsi üçün vaxt dolması:"
 msgid " Virtual File System Setting "
 msgstr " Virtual Fayl Sistemi Qurğuları "
 
-msgid "Quick cd"
-msgstr "Sür'ətli cd"
-
 msgid "cd"
 msgstr "cd"
+
+msgid "Quick cd"
+msgstr "Sür'ətli cd"
 
 msgid "Symbolic link filename:"
 msgstr "Yumşaq bağın adı :"
@@ -1349,6 +1349,13 @@ msgid "Extension file edit"
 msgstr "Uzantılar faylı düzəldilməsi"
 
 msgid " Which extension file you want to edit? "
+msgstr " Hansı uzantılı faylı düzəltmək istəyirsən?"
+
+msgid "Highlighting groups file edit"
+msgstr ""
+
+#, fuzzy
+msgid " Which highlighting file you want to edit? "
 msgstr " Hansı uzantılı faylı düzəltmək istəyirsən?"
 
 msgid " Compare directories "
@@ -1941,9 +1948,25 @@ msgstr "Hədəf"
 msgid "Deleting"
 msgstr "Silinir"
 
-#, c-format
-msgid "Target file \"%s\" already exists!"
+#, fuzzy
+msgid "Target file already exists!"
 msgstr "Hədəf faylı \"%s\" onsuz da vardır!"
+
+#, fuzzy, c-format
+msgid "Source date: %s, size %llu"
+msgstr "Qaynaq tarixi: %s böyüklük%llu"
+
+#, fuzzy, c-format
+msgid "Target date: %s, size %llu"
+msgstr "Hədəf tarixi: %s, böyüklük %llu"
+
+#, fuzzy, c-format
+msgid "Source date: %s, size %u"
+msgstr "Qaynaq tarixi: %s böyüklük%u"
+
+#, fuzzy, c-format
+msgid "Target date: %s, size %u"
+msgstr "Hədəf tarixi: %s, böyüklük %u"
 
 msgid "If &size differs"
 msgstr "Başqa &Böyüklükdə isə"
@@ -1963,27 +1986,21 @@ msgstr "A&ppend"
 msgid "Overwrite this target?"
 msgstr "Bu hədəfin üstünə yazım mı?"
 
-#, fuzzy, c-format
-msgid "Target date: %s, size %llu"
-msgstr "Hədəf tarixi: %s, böyüklük %llu"
-
-#, fuzzy, c-format
-msgid "Source date: %s, size %llu"
-msgstr "Qaynaq tarixi: %s böyüklük%llu"
-
-#, fuzzy, c-format
-msgid "Target date: %s, size %u"
-msgstr "Hədəf tarixi: %s, böyüklük %u"
-
-#, fuzzy, c-format
-msgid "Source date: %s, size %u"
-msgstr "Qaynaq tarixi: %s böyüklük%u"
-
 msgid " File exists "
 msgstr " Fayl vardır "
 
 msgid " Background process: File exists "
 msgstr " Arxaplan aməliyyatı: Fayl vardır "
+
+msgid "&Background"
+msgstr "&Arxaplan"
+
+msgid "&Stable Symlinks"
+msgstr "%Sabit yumşaq bağlar"
+
+#, fuzzy
+msgid "di&Ve into subdir if exists"
+msgstr "Varsa alt qovluğa &Dal "
 
 msgid "preserve &Attributes"
 msgstr "&Atributlar qorunsun"
@@ -1993,15 +2010,6 @@ msgstr "&Bağlar təqib edilsin"
 
 msgid "to:"
 msgstr "göndər:"
-
-msgid "&Background"
-msgstr "&Arxaplan"
-
-msgid "&Stable Symlinks"
-msgstr "%Sabit yumşaq bağlar"
-
-msgid "&Dive into subdir if exists"
-msgstr "Varsa alt qovluğa &Dal "
 
 #, fuzzy, c-format
 msgid "Invalid source pattern `%s'"
@@ -2049,6 +2057,9 @@ msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
+msgstr ""
+
+msgid "&All charsets"
 msgstr ""
 
 #, fuzzy
@@ -2559,6 +2570,9 @@ msgstr "Fayl suf&fikslərini dəyişdir"
 
 msgid "Edit &menu file"
 msgstr "&Menyunu dəyişdir"
+
+msgid "Edit &highlighting group file"
+msgstr ""
 
 msgid "&Configuration..."
 msgstr "&Qurğular..."
@@ -3262,9 +3276,6 @@ msgstr " Törəmə proqramı başlada bilmədim "
 msgid "Empty output from child filter"
 msgstr ""
 
-msgid "All charsets"
-msgstr ""
-
 msgid "ButtonBar|Help"
 msgstr ""
 
@@ -3817,6 +3828,9 @@ msgstr "Daxili xəta :"
 
 msgid "Changes to file lost"
 msgstr "Dəyişiklikləri itirdim"
+
+#~ msgid " %d items found, %d bookmarks added "
+#~ msgstr " %d tapılış oldu, %d qeyd əlavə edildi "
 
 #~ msgid "Displays this help message"
 #~ msgstr "Bu kömək ismarıcını göstərər"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-02 23:01+0300\n"
+"POT-Creation-Date: 2009-09-14 16:34+0300\n"
 "PO-Revision-Date: 2003-01-22 18:10+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <debian-l10n-swedish@lists.debian.org>\n"
@@ -63,10 +63,6 @@ msgstr "Makrorekursion är för djup"
 
 msgid "Search"
 msgstr "Sök"
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " %d sökningar gjorda, %d bokmärken tillagda"
 
 msgid " Search string not found "
 msgstr " Söksträngen kunde inte hittas "
@@ -126,7 +122,7 @@ msgstr ""
 msgid "&Windows/DOS format (CR LF)"
 msgstr ""
 
-msgid "&Macintosh format (LF)"
+msgid "&Macintosh format (CR)"
 msgstr ""
 
 msgid "Change line breaks to:"
@@ -327,9 +323,6 @@ msgstr "Skript skapat:"
 msgid "Process block"
 msgstr "Processblock"
 
-msgid " Mail "
-msgstr " Brev "
-
 msgid " Copies to"
 msgstr " Kopior till"
 
@@ -342,6 +335,9 @@ msgstr " Till"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <ämne> -c <cc> <mottagare>"
 
+msgid " Mail "
+msgstr " Brev "
+
 msgid " Insert Literal "
 msgstr " Klistra in bokstavlig "
 
@@ -351,7 +347,7 @@ msgstr " Tryck valfri tangent:"
 msgid " Execute Macro "
 msgstr " Kör makro "
 
-msgid "&All charsets"
+msgid "All charsets"
 msgstr ""
 
 #, fuzzy
@@ -373,6 +369,10 @@ msgstr " Ange ersättningssträng:"
 
 msgid " Enter search string:"
 msgstr " Ange söksträng:"
+
+#, fuzzy
+msgid "&Find all"
+msgstr "Sök Fil"
 
 msgid "Cancel"
 msgstr "Avbryt"
@@ -945,6 +945,7 @@ msgstr "Begär att få köra i färgläge"
 msgid "Specifies a color configuration"
 msgstr "Specificera en färgkonfiguration"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
@@ -979,10 +980,9 @@ msgstr ""
 "   brightcyan, lightgray and white\n"
 "\n"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
 "\n"
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -1077,6 +1077,9 @@ msgstr "Sorteringsordning"
 msgid "Executable first"
 msgstr ""
 
+msgid " Confirmation "
+msgstr " Bekräftelse "
+
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
 msgstr "&Katalogfavoriter      C-\\"
@@ -1092,9 +1095,6 @@ msgstr " bekräfta &Överskrivning "
 
 msgid " confirm &Delete "
 msgstr " bekräfta &Radering "
-
-msgid " Confirmation "
-msgstr " Bekräftelse "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1153,11 +1153,11 @@ msgstr "Timeout för frigörande av VFSs:"
 msgid " Virtual File System Setting "
 msgstr " Inställningar för VFS "
 
-msgid "Quick cd"
-msgstr "Snabb cd"
-
 msgid "cd"
 msgstr "cd"
+
+msgid "Quick cd"
+msgstr "Snabb cd"
 
 msgid "Symbolic link filename:"
 msgstr "Länknamn:"
@@ -1367,6 +1367,13 @@ msgid "Extension file edit"
 msgstr "Redigera utökningsfilen"
 
 msgid " Which extension file you want to edit? "
+msgstr " Vilken utökningsfil vill du redigera? "
+
+msgid "Highlighting groups file edit"
+msgstr ""
+
+#, fuzzy
+msgid " Which highlighting file you want to edit? "
 msgstr " Vilken utökningsfil vill du redigera? "
 
 msgid " Compare directories "
@@ -1964,9 +1971,27 @@ msgstr "Mål"
 msgid "Deleting"
 msgstr "Tar bort"
 
-#, c-format
-msgid "Target file \"%s\" already exists!"
+#, fuzzy
+msgid "Target file already exists!"
 msgstr "Målfilen \"%s\" existerar redan!"
+
+#, fuzzy, c-format
+msgid "Source date: %s, size %llu"
+msgstr "Källdatum: %s, storlek %llu"
+
+# låter lite bättre än målet och i UNIX så är allt filer
+#, fuzzy, c-format
+msgid "Target date: %s, size %llu"
+msgstr "Måldatum : %s, storlek %llu"
+
+#, fuzzy, c-format
+msgid "Source date: %s, size %u"
+msgstr "Källdatum: %s, storlek %u"
+
+# låter lite bättre än målet och i UNIX så är allt filer
+#, fuzzy, c-format
+msgid "Target date: %s, size %u"
+msgstr "Måldatum : %s, storlek %u"
 
 msgid "If &size differs"
 msgstr "om s&Torleken skiljer"
@@ -1987,29 +2012,21 @@ msgstr "b&Ifoga"
 msgid "Overwrite this target?"
 msgstr "Skriv över målfilen?"
 
-# låter lite bättre än målet och i UNIX så är allt filer
-#, fuzzy, c-format
-msgid "Target date: %s, size %llu"
-msgstr "Måldatum : %s, storlek %llu"
-
-#, fuzzy, c-format
-msgid "Source date: %s, size %llu"
-msgstr "Källdatum: %s, storlek %llu"
-
-# låter lite bättre än målet och i UNIX så är allt filer
-#, fuzzy, c-format
-msgid "Target date: %s, size %u"
-msgstr "Måldatum : %s, storlek %u"
-
-#, fuzzy, c-format
-msgid "Source date: %s, size %u"
-msgstr "Källdatum: %s, storlek %u"
-
 msgid " File exists "
 msgstr " Filen existerar "
 
 msgid " Background process: File exists "
 msgstr " Bakgrundsprocess: Filen existerar "
+
+msgid "&Background"
+msgstr "&Bakgrund"
+
+msgid "&Stable Symlinks"
+msgstr "&Stabila symlänkar"
+
+#, fuzzy
+msgid "di&Ve into subdir if exists"
+msgstr "&Dyk in i underkataloger  "
 
 msgid "preserve &Attributes"
 msgstr "bevara &Attribut"
@@ -2019,15 +2036,6 @@ msgstr "följ &Länkar"
 
 msgid "to:"
 msgstr "till:"
-
-msgid "&Background"
-msgstr "&Bakgrund"
-
-msgid "&Stable Symlinks"
-msgstr "&Stabila symlänkar"
-
-msgid "&Dive into subdir if exists"
-msgstr "&Dyk in i underkataloger  "
 
 # om existerar" 
 # är inte säker på att texten får plats..
@@ -2077,6 +2085,9 @@ msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
+msgstr ""
+
+msgid "&All charsets"
 msgstr ""
 
 #, fuzzy
@@ -2590,6 +2601,9 @@ msgstr "Redigera &utökningsfil"
 
 msgid "Edit &menu file"
 msgstr "Redigera &menyfilen"
+
+msgid "Edit &highlighting group file"
+msgstr ""
 
 msgid "&Configuration..."
 msgstr "k&Onfiguration..."
@@ -3293,9 +3307,6 @@ msgstr " Kan inte skapa barnprogram "
 msgid "Empty output from child filter"
 msgstr "Tom utdata från barnfilter"
 
-msgid "All charsets"
-msgstr ""
-
 msgid "ButtonBar|Help"
 msgstr ""
 
@@ -3855,6 +3866,9 @@ msgstr " Internt fel:"
 
 msgid "Changes to file lost"
 msgstr "Ändringar i filen förlorade"
+
+#~ msgid " %d items found, %d bookmarks added "
+#~ msgstr " %d sökningar gjorda, %d bokmärken tillagda"
 
 #~ msgid "Displays this help message"
 #~ msgstr "Visa det här hjälpmeddelandet"

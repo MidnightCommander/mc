@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-02 23:01+0300\n"
+"POT-Creation-Date: 2009-09-14 16:34+0300\n"
 "PO-Revision-Date: 2001-11-06 05:50+0200\n"
 "Last-Translator: Nilgün Belma Bugüner <nilgun@fide.org>\n"
 "Language-Team: Turkish <debian-l10n-turkish@lists.debian.org>\n"
@@ -59,10 +59,6 @@ msgstr ""
 
 msgid "Search"
 msgstr "Ara"
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " %d bulma gerçekleşti, %d yer imi eklendi "
 
 msgid " Search string not found "
 msgstr " Aranan metin bulunamadı "
@@ -122,7 +118,7 @@ msgstr ""
 msgid "&Windows/DOS format (CR LF)"
 msgstr ""
 
-msgid "&Macintosh format (LF)"
+msgid "&Macintosh format (CR)"
 msgstr ""
 
 msgid "Change line breaks to:"
@@ -322,9 +318,6 @@ msgstr "Betik oluşturuldu:"
 msgid "Process block"
 msgstr "Bloku işle"
 
-msgid " Mail "
-msgstr " Posta"
-
 msgid " Copies to"
 msgstr " Kopyalar "
 
@@ -337,6 +330,9 @@ msgstr " Kime"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <konu> -c <karbonkopya> <kime>"
 
+msgid " Mail "
+msgstr " Posta"
+
 msgid " Insert Literal "
 msgstr " Harfi içer "
 
@@ -346,7 +342,7 @@ msgstr " Bir tuşa basınız: "
 msgid " Execute Macro "
 msgstr " Macro'yu çalıştır "
 
-msgid "&All charsets"
+msgid "All charsets"
 msgstr ""
 
 #, fuzzy
@@ -368,6 +364,10 @@ msgstr " Yerleştirilecek metni verin:"
 
 msgid " Enter search string:"
 msgstr " Aranacak metni girin:"
+
+#, fuzzy
+msgid "&Find all"
+msgstr "Dosyayı bul"
 
 msgid "Cancel"
 msgstr "Vazgeç"
@@ -932,6 +932,7 @@ msgstr "Renkli kipte çalıştırma isteği"
 msgid "Specifies a color configuration"
 msgstr "Bir renk yapılandırması belirtir"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
@@ -966,10 +967,9 @@ msgstr ""
 "   brightcyan, lightgray and white\n"
 "\n"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
 "\n"
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -1062,6 +1062,9 @@ msgstr "Sıralama türü"
 msgid "Executable first"
 msgstr ""
 
+msgid " Confirmation "
+msgstr " Onaylama "
+
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
 msgstr "Di&zin Geçmişi               C-\\"
@@ -1077,9 +1080,6 @@ msgstr " ü&stüne yazma onayı iste "
 
 msgid " confirm &Delete "
 msgstr " sil&me onayı iste "
-
-msgid " Confirmation "
-msgstr " Onaylama "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1138,11 +1138,11 @@ msgstr "VFS'leri boşaltma zamanaşımı:"
 msgid " Virtual File System Setting "
 msgstr " Sanal Dosya Sistemi Ayarları "
 
-msgid "Quick cd"
-msgstr "Çabuk dizin değiştirme"
-
 msgid "cd"
 msgstr "cd"
+
+msgid "Quick cd"
+msgstr "Çabuk dizin değiştirme"
 
 msgid "Symbolic link filename:"
 msgstr "Sembolik bağ ismi:"
@@ -1351,6 +1351,13 @@ msgid "Extension file edit"
 msgstr "Uzantı dosyası düzenleme"
 
 msgid " Which extension file you want to edit? "
+msgstr " Hangi uzantı dosyası düzenlenecek? "
+
+msgid "Highlighting groups file edit"
+msgstr ""
+
+#, fuzzy
+msgid " Which highlighting file you want to edit? "
 msgstr " Hangi uzantı dosyası düzenlenecek? "
 
 msgid " Compare directories "
@@ -1942,9 +1949,25 @@ msgstr "Hedef"
 msgid "Deleting"
 msgstr "Siliniyor"
 
-#, c-format
-msgid "Target file \"%s\" already exists!"
+#, fuzzy
+msgid "Target file already exists!"
 msgstr "Hedef dosya \"%s\" zaten var!"
+
+#, fuzzy, c-format
+msgid "Source date: %s, size %llu"
+msgstr "Kaynak tarihi: %s, boyutu %llu"
+
+#, fuzzy, c-format
+msgid "Target date: %s, size %llu"
+msgstr "Hedef tarihi: %s, boyutu %llu"
+
+#, fuzzy, c-format
+msgid "Source date: %s, size %u"
+msgstr "Kaynak tarihi: %s, boyutu %u"
+
+#, fuzzy, c-format
+msgid "Target date: %s, size %u"
+msgstr "Hedef tarihi: %s, boyutu %u"
 
 msgid "If &size differs"
 msgstr "Boyut &Farklıysa"
@@ -1964,27 +1987,21 @@ msgstr "Sonuna &Ekle"
 msgid "Overwrite this target?"
 msgstr "Üzerine yazılsın mı?"
 
-#, fuzzy, c-format
-msgid "Target date: %s, size %llu"
-msgstr "Hedef tarihi: %s, boyutu %llu"
-
-#, fuzzy, c-format
-msgid "Source date: %s, size %llu"
-msgstr "Kaynak tarihi: %s, boyutu %llu"
-
-#, fuzzy, c-format
-msgid "Target date: %s, size %u"
-msgstr "Hedef tarihi: %s, boyutu %u"
-
-#, fuzzy, c-format
-msgid "Source date: %s, size %u"
-msgstr "Kaynak tarihi: %s, boyutu %u"
-
 msgid " File exists "
 msgstr " Dosya var "
 
 msgid " Background process: File exists "
 msgstr "Artalan süreç: Dosya var "
+
+msgid "&Background"
+msgstr "A&rtalan"
+
+msgid "&Stable Symlinks"
+msgstr "Kararlı &Sembolik Bağlar"
+
+#, fuzzy
+msgid "di&Ve into subdir if exists"
+msgstr "Varsa altdizine &Dal"
 
 msgid "preserve &Attributes"
 msgstr "&Nitelikleri koru"
@@ -1994,15 +2011,6 @@ msgstr "&Bağları izle"
 
 msgid "to:"
 msgstr "buraya:"
-
-msgid "&Background"
-msgstr "A&rtalan"
-
-msgid "&Stable Symlinks"
-msgstr "Kararlı &Sembolik Bağlar"
-
-msgid "&Dive into subdir if exists"
-msgstr "Varsa altdizine &Dal"
 
 #, fuzzy, c-format
 msgid "Invalid source pattern `%s'"
@@ -2050,6 +2058,9 @@ msgid "&Find recursively"
 msgstr ""
 
 msgid "S&kip hidden"
+msgstr ""
+
+msgid "&All charsets"
 msgstr ""
 
 #, fuzzy
@@ -2559,6 +2570,9 @@ msgstr "Dosya &Uzantılarını düzenle"
 
 msgid "Edit &menu file"
 msgstr "Men&ü dosyasını düzenle"
+
+msgid "Edit &highlighting group file"
+msgstr ""
 
 msgid "&Configuration..."
 msgstr "&Yapılandırma..."
@@ -3263,9 +3277,6 @@ msgstr " Alt uygulama çalıştırılamadı "
 msgid "Empty output from child filter"
 msgstr ""
 
-msgid "All charsets"
-msgstr ""
-
 msgid "ButtonBar|Help"
 msgstr ""
 
@@ -3820,6 +3831,9 @@ msgstr "İç hata:"
 
 msgid "Changes to file lost"
 msgstr "Değişiklikler kayıp"
+
+#~ msgid " %d items found, %d bookmarks added "
+#~ msgstr " %d bulma gerçekleşti, %d yer imi eklendi "
 
 #~ msgid "Displays this help message"
 #~ msgstr "Bu yardım iletisini gösterir"

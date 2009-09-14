@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.7.0\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-02 23:01+0300\n"
+"POT-Creation-Date: 2009-09-14 16:34+0300\n"
 "PO-Revision-Date: 2009-08-25 21:40+0200\n"
 "Last-Translator: David Martín <dmartina@excite.com\n"
 "Language-Team: Spanish <debian-l10n-spanish@lists.debian.org>\n"
@@ -58,10 +58,6 @@ msgstr "La macro es demasiado recursiva"
 msgid "Search"
 msgstr "Buscar"
 
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " %d coincidencias, %d marcadores colocados "
-
 msgid " Search string not found "
 msgstr " La cadena buscada no ha sido encontrada "
 
@@ -89,9 +85,9 @@ msgstr " Error al escribir en tubería: "
 msgid " Cannot open pipe for writing: "
 msgstr " Imposible abrir tubería para escritura: "
 
-#, fuzzy, c-format
+#, c-format
 msgid " Cannot open file for writing: %s "
-msgstr " Imposible abrir tubería para escritura: "
+msgstr " Imposible abrir archivo para escritura: %s "
 
 msgid "Quick save "
 msgstr "Guardar rápido "
@@ -112,19 +108,19 @@ msgid " Edit Save Mode "
 msgstr " Modo de guardar "
 
 msgid "&Do not change"
-msgstr ""
+msgstr "&Sin cambios"
 
 msgid "&Unix format (LF)"
-msgstr ""
+msgstr "formato &UNIX (LF)"
 
 msgid "&Windows/DOS format (CR LF)"
-msgstr ""
+msgstr "formato &Windows/DOS (CR LF)"
 
-msgid "&Macintosh format (LF)"
-msgstr ""
+msgid "&Macintosh format (CR)"
+msgstr "formato &Macintosh (CR)"
 
 msgid "Change line breaks to:"
-msgstr ""
+msgstr "Cambiar saltos de línea por:"
 
 msgid " Enter file name: "
 msgstr " Teclee el nombre del archivo: "
@@ -308,9 +304,6 @@ msgstr "Guión creado:"
 msgid "Process block"
 msgstr "Procesar bloque"
 
-msgid " Mail "
-msgstr " Correo "
-
 msgid " Copies to"
 msgstr " Cursar Copias a"
 
@@ -323,6 +316,9 @@ msgstr " Para"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <tema> -c <cc> <para>"
 
+msgid " Mail "
+msgstr " Correo "
+
 msgid " Insert Literal "
 msgstr " Insertar literalmente "
 
@@ -332,11 +328,11 @@ msgstr " Presione cualquier tecla: "
 msgid " Execute Macro "
 msgstr " Ejecutar macro "
 
-msgid "&All charsets"
-msgstr "cualquier co&Dificación"
+msgid "All charsets"
+msgstr "en co&Dificaciones"
 
 msgid "&Whole words"
-msgstr "palabras comple&Tas"
+msgstr "&Palabras completas"
 
 msgid "In se&lection"
 msgstr "sólo en se&Lección"
@@ -352,6 +348,9 @@ msgstr " Teclee el cambio a realizar:"
 
 msgid " Enter search string:"
 msgstr " Teclee el texto a buscar:"
+
+msgid "&Find all"
+msgstr "buscar &Todos"
 
 msgid "Cancel"
 msgstr "Cancelar"
@@ -886,6 +885,7 @@ msgstr "Solicitar la ejecución en color"
 msgid "Specifies a color configuration"
 msgstr "Indicar una configuración de colores"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -907,17 +907,15 @@ msgstr ""
 "Contextos:\n"
 "   Globales:           errors, reverse, gauge, input, viewunderline\n"
 "   Visor de archivos:  normal, selected, marked, markselect\n"
-"   Diálogos:           dnormal, dfocus, dhotnormal, dhotfocus, "
-"errdhotnormal,\n"
-"                       errdhotfocus\n"
+"   Diálogos:           dnormal, dfocus, dhotnormal, dhotfocus,\n"
+"                        errdhotnormal, errdhotfocus\n"
 "   Menús:              menu, menuhot, menusel, menuhotsel\n"
 "   Editor:             editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate\n"
+"                       editlinestate\n"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
 "\n"
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -925,10 +923,8 @@ msgid ""
 "   brightcyan, lightgray and white\n"
 "\n"
 msgstr ""
-"   Ayuda:              helpnormal, helpitalic, helpbold, helplink, "
-"helpslink\n"
-"   Tipo de archivos:   directory, executable, link, stalelink, device, "
-"special, core\n"
+"   Ayuda:             helpnormal, helpitalic, helpbold, helplink,\n"
+"                      helpslink\n"
 "\n"
 "Colores:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -936,16 +932,14 @@ msgstr ""
 "   brightcyan, lightgray y white\n"
 "\n"
 
-#, fuzzy
 msgid "Color options"
-msgstr "Configuración"
+msgstr "Opciones de color"
 
 msgid "+number"
 msgstr "+número"
 
-#, fuzzy
 msgid "[this_dir] [other_panel_dir]"
-msgstr "[OPCIONES] [DIRECTORIO] [SEGUNDO_DIRECTORIO]\n"
+msgstr "[DIRECTORIO] [SEGUNDO_DIRECTORIO]"
 
 msgid "Set initial line number for the internal editor"
 msgstr "Línea de comienzo al abrir archivo con editor interno"
@@ -963,13 +957,11 @@ msgstr ""
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-#, fuzzy
 msgid "Main options"
-msgstr " Opciones de los paneles "
+msgstr "Opciones principales"
 
-#, fuzzy
 msgid "Terminal options"
-msgstr " Otras opciones "
+msgstr "Opciones de terminal"
 
 msgid " Background process error "
 msgstr " Error en un proceso en 2º plano"
@@ -1020,6 +1012,9 @@ msgstr " Ordenar "
 msgid "Executable first"
 msgstr "&Ejecutables primero"
 
+msgid " Confirmation "
+msgstr " Confirmación "
+
 msgid " confirm di&Rectory hotlist delete "
 msgstr " confirmar eliminación de &Favoritos "
 
@@ -1034,9 +1029,6 @@ msgstr " confirmar s&Obrescritura "
 
 msgid " confirm &Delete "
 msgstr " confirmar e&Liminación "
-
-msgid " Confirmation "
-msgstr " Confirmación "
 
 msgid "UTF-8 output"
 msgstr "salida UTF-8"
@@ -1092,11 +1084,11 @@ msgstr "Descartar los VFS tras: "
 msgid " Virtual File System Setting "
 msgstr " Sistema de archivos virtual (VFS) "
 
-msgid "Quick cd"
-msgstr " Cambiar directorio "
-
 msgid "cd"
 msgstr "cd"
+
+msgid "Quick cd"
+msgstr " Cambiar directorio "
 
 msgid "Symbolic link filename:"
 msgstr "Nombre del nuevo enlace simbólico:"
@@ -1300,10 +1292,16 @@ msgid " Unselect "
 msgstr " De-seleccionar grupo "
 
 msgid "Extension file edit"
-msgstr " Editar el archivo de extensiones "
+msgstr " Editar extensiones "
 
 msgid " Which extension file you want to edit? "
-msgstr " ¿Qué archivo de extensión desea editar? "
+msgstr " ¿Qué archivo de extensiones desea editar? "
+
+msgid "Highlighting groups file edit"
+msgstr " Editar colores de grupo "
+
+msgid " Which highlighting file you want to edit? "
+msgstr " ¿Qué archivo de colores de grupo desea editar? "
 
 msgid " Compare directories "
 msgstr " Comparar directorios "
@@ -1904,9 +1902,24 @@ msgstr "Destino"
 msgid "Deleting"
 msgstr "Borrando"
 
+msgid "Target file already exists!"
+msgstr "¡El archivo destino ya existe!"
+
 #, c-format
-msgid "Target file \"%s\" already exists!"
-msgstr "¡El archivo destino \"%s\" ya existe!"
+msgid "Source date: %s, size %llu"
+msgstr "Archivo origen: fecha %s, tamaño %llu"
+
+#, c-format
+msgid "Target date: %s, size %llu"
+msgstr "Archivo destino: fecha %s, tamaño %llu"
+
+#, c-format
+msgid "Source date: %s, size %u"
+msgstr "Archivo origen: fecha %s, tamaño %u"
+
+#, c-format
+msgid "Target date: %s, size %u"
+msgstr "Archivo destino: fecha %s, tamaño %u"
 
 msgid "If &size differs"
 msgstr "si el ta&Maño difiere"
@@ -1926,27 +1939,20 @@ msgstr "aña&Dir"
 msgid "Overwrite this target?"
 msgstr "¿Sobrescribir este archivo?"
 
-#, c-format
-msgid "Target date: %s, size %llu"
-msgstr "Archivo destino: fecha %s, tamaño %llu"
-
-#, c-format
-msgid "Source date: %s, size %llu"
-msgstr "Archivo origen: fecha %s, tamaño %llu"
-
-#, c-format
-msgid "Target date: %s, size %u"
-msgstr "Archivo destino: fecha %s, tamaño %u"
-
-#, c-format
-msgid "Source date: %s, size %u"
-msgstr "Archivo origen: fecha %s, tamaño %u"
-
 msgid " File exists "
 msgstr " El archivo ya existe "
 
 msgid " Background process: File exists "
 msgstr " Proceso en 2º plano: El archivo ya existe "
+
+msgid "&Background"
+msgstr "en 2º plan&O"
+
+msgid "&Stable Symlinks"
+msgstr "enlaces simbólicos &Estables"
+
+msgid "di&Ve into subdir if exists"
+msgstr "entrar en sub&Directorios"
 
 msgid "preserve &Attributes"
 msgstr "&Preservar atributos"
@@ -1956,15 +1962,6 @@ msgstr "seguir en&Laces"
 
 msgid "to:"
 msgstr "a:"
-
-msgid "&Background"
-msgstr "en 2º plan&O"
-
-msgid "&Stable Symlinks"
-msgstr "enlaces simbólicos &Estables"
-
-msgid "&Dive into subdir if exists"
-msgstr "copiar &Recursivamente en subdirectorios"
 
 #, c-format
 msgid "Invalid source pattern `%s'"
@@ -2009,6 +2006,9 @@ msgstr "buscar &Recursivamente"
 
 msgid "S&kip hidden"
 msgstr "saltar &Ocultos"
+
+msgid "&All charsets"
+msgstr "cualquier co&Dificación"
 
 msgid "Case sens&itive"
 msgstr "distinguir may/mi&N"
@@ -2507,10 +2507,13 @@ msgid "&Listing format edit"
 msgstr "edición del formato de &Listado"
 
 msgid "Edit &extension file"
-msgstr "&Editar el archivo de extensiones..."
+msgstr "&Editar extensiones..."
 
 msgid "Edit &menu file"
-msgstr "editar archivo de &Menú..."
+msgstr "editar &Menú..."
+
+msgid "Edit &highlighting group file"
+msgstr "editar colores de &Grupo..."
 
 msgid "&Configuration..."
 msgstr "&Configuración..."
@@ -3213,9 +3216,6 @@ msgstr " Imposible ejecutar el proceso hijo "
 msgid "Empty output from child filter"
 msgstr "Salida del filtro vacía"
 
-msgid "All charsets"
-msgstr "en co&Dificaciones"
-
 msgid "ButtonBar|Help"
 msgstr "Ayuda"
 
@@ -3774,6 +3774,9 @@ msgstr "Error interno:"
 msgid "Changes to file lost"
 msgstr "Los cambios del archivo se han perdido"
 
+#~ msgid " %d items found, %d bookmarks added "
+#~ msgstr " %d coincidencias, %d marcadores colocados "
+
 #~ msgid "Displays this help message"
 #~ msgstr "Mostrar este mensaje de ayuda"
 
@@ -3800,10 +3803,3 @@ msgstr "Los cambios del archivo se han perdido"
 
 #~ msgid "Usage:"
 #~ msgstr "Modo de empleo:"
-
-#~ msgid ""
-#~ " The current address is 0x%lx.\n"
-#~ " Enter the new address:"
-#~ msgstr ""
-#~ " La dirección actual es 0x%lx.\n"
-#~ " Teclee la dirección a buscar:"

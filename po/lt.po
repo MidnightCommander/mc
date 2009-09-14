@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-02 23:01+0300\n"
+"POT-Creation-Date: 2009-09-14 16:34+0300\n"
 "PO-Revision-Date: 2009-02-16 19:45+0300\n"
 "Last-Translator: Andrius Štikonas <stikonas@gmail.com>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -58,10 +58,6 @@ msgstr "Makrokomandų rekursija yra per gili"
 
 msgid "Search"
 msgstr "Paieška"
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " surasta %d, pridėta %d žymų  "
 
 msgid " Search string not found "
 msgstr " Ieškoma eilutė nerasta "
@@ -121,7 +117,7 @@ msgstr ""
 msgid "&Windows/DOS format (CR LF)"
 msgstr ""
 
-msgid "&Macintosh format (LF)"
+msgid "&Macintosh format (CR)"
 msgstr ""
 
 msgid "Change line breaks to:"
@@ -310,9 +306,6 @@ msgstr "Skriptas sukurtas:"
 msgid "Process block"
 msgstr "Apdoroti bloką"
 
-msgid " Mail "
-msgstr " Laiškas "
-
 msgid " Copies to"
 msgstr " Kopijos"
 
@@ -325,6 +318,9 @@ msgstr " Kam"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <tema> -c <kopija> <kam>"
 
+msgid " Mail "
+msgstr " Laiškas "
+
 msgid " Insert Literal "
 msgstr " Įterpti simbolį "
 
@@ -334,7 +330,7 @@ msgstr " Paspauskite bet kurį klavišą: "
 msgid " Execute Macro "
 msgstr " Įvykdyti makrokomandą "
 
-msgid "&All charsets"
+msgid "All charsets"
 msgstr ""
 
 #, fuzzy
@@ -356,6 +352,10 @@ msgstr " Įveskite pakeitimo eilutę:"
 
 msgid " Enter search string:"
 msgstr " Įveskite ieškomą eilutę:"
+
+#, fuzzy
+msgid "&Find all"
+msgstr "Rasti failą"
 
 msgid "Cancel"
 msgstr "Atsisakyti"
@@ -917,6 +917,7 @@ msgstr "Paleidžia spalvotu režimu"
 msgid "Specifies a color configuration"
 msgstr "Nurodo spalvų konfigūraciją"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
@@ -953,10 +954,9 @@ msgstr ""
 "   brightcyan, lightgray ir white\n"
 "\n"
 
+#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
 "\n"
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -1049,6 +1049,9 @@ msgstr "Rikiavimo tvarka"
 msgid "Executable first"
 msgstr ""
 
+msgid " Confirmation "
+msgstr " Patvirtinimas "
+
 msgid " confirm di&Rectory hotlist delete "
 msgstr " patvirtinti katalogų są&rašo šalinimą "
 
@@ -1063,9 +1066,6 @@ msgstr " patvirtinti perrašy&mą "
 
 msgid " confirm &Delete "
 msgstr " patvirtinti ša&linimą "
-
-msgid " Confirmation "
-msgstr " Patvirtinimas "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1122,11 +1122,11 @@ msgstr "VFS galiojimas:"
 msgid " Virtual File System Setting "
 msgstr " Virtualios failų sistemos nustatymai "
 
-msgid "Quick cd"
-msgstr "Greitas „cd“"
-
 msgid "cd"
 msgstr "Eiti į: "
+
+msgid "Quick cd"
+msgstr "Greitas „cd“"
 
 msgid "Symbolic link filename:"
 msgstr "Simbolinės nuorodos pavadinimas:"
@@ -1335,6 +1335,13 @@ msgid "Extension file edit"
 msgstr "Plėtinių failo keitimas"
 
 msgid " Which extension file you want to edit? "
+msgstr " Kurį plėtinių failą norite keisti? "
+
+msgid "Highlighting groups file edit"
+msgstr ""
+
+#, fuzzy
+msgid " Which highlighting file you want to edit? "
 msgstr " Kurį plėtinių failą norite keisti? "
 
 msgid " Compare directories "
@@ -1926,9 +1933,25 @@ msgstr "Į"
 msgid "Deleting"
 msgstr "Trinama"
 
-#, c-format
-msgid "Target file \"%s\" already exists!"
+#, fuzzy
+msgid "Target file already exists!"
 msgstr "Paskirties failas „%s“ jau yra!"
+
+#, c-format
+msgid "Source date: %s, size %llu"
+msgstr "Šaltinio data:   %s, dydis %llu"
+
+#, c-format
+msgid "Target date: %s, size %llu"
+msgstr "Paskirties data: %s, dydis %llu"
+
+#, c-format
+msgid "Source date: %s, size %u"
+msgstr "Šaltinio data:   %s, dydis %u"
+
+#, c-format
+msgid "Target date: %s, size %u"
+msgstr "Paskirties data: %s, dydis %u"
 
 msgid "If &size differs"
 msgstr "Jei &skiriasi dydis"
@@ -1948,27 +1971,21 @@ msgstr "&Papildyti"
 msgid "Overwrite this target?"
 msgstr "Perrašyti šią paskirtį?"
 
-#, c-format
-msgid "Target date: %s, size %llu"
-msgstr "Paskirties data: %s, dydis %llu"
-
-#, c-format
-msgid "Source date: %s, size %llu"
-msgstr "Šaltinio data:   %s, dydis %llu"
-
-#, c-format
-msgid "Target date: %s, size %u"
-msgstr "Paskirties data: %s, dydis %u"
-
-#, c-format
-msgid "Source date: %s, size %u"
-msgstr "Šaltinio data:   %s, dydis %u"
-
 msgid " File exists "
 msgstr " Failas jau yra "
 
 msgid " Background process: File exists "
 msgstr " Foninis procesas: failas jau yra "
+
+msgid "&Background"
+msgstr "&Fonas"
+
+msgid "&Stable Symlinks"
+msgstr "&Stabilios simb. nuor."
+
+#, fuzzy
+msgid "di&Ve into subdir if exists"
+msgstr "&Jei yra, ir pakatalogius"
 
 msgid "preserve &Attributes"
 msgstr "Išsaugoti &atributus"
@@ -1978,15 +1995,6 @@ msgstr "Sekti &nuorodomis"
 
 msgid "to:"
 msgstr "į:"
-
-msgid "&Background"
-msgstr "&Fonas"
-
-msgid "&Stable Symlinks"
-msgstr "&Stabilios simb. nuor."
-
-msgid "&Dive into subdir if exists"
-msgstr "&Jei yra, ir pakatalogius"
 
 #, fuzzy, c-format
 msgid "Invalid source pattern `%s'"
@@ -2034,6 +2042,9 @@ msgid "&Find recursively"
 msgstr "&Rasti rekursyviai"
 
 msgid "S&kip hidden"
+msgstr ""
+
+msgid "&All charsets"
 msgstr ""
 
 #, fuzzy
@@ -2543,6 +2554,9 @@ msgstr "K&eisti plėtinių failą"
 
 msgid "Edit &menu file"
 msgstr "Keisti &meniu failą"
+
+msgid "Edit &highlighting group file"
+msgstr ""
 
 msgid "&Configuration..."
 msgstr "Konfigūra&cija..."
@@ -3243,9 +3257,6 @@ msgstr " Nepavyko sukurti vaiko "
 msgid "Empty output from child filter"
 msgstr "Filtras nepateikė informacijos"
 
-msgid "All charsets"
-msgstr ""
-
 msgid "ButtonBar|Help"
 msgstr "ButtonBar|Pagalb"
 
@@ -3802,6 +3813,9 @@ msgstr "Vidinė klaida:"
 
 msgid "Changes to file lost"
 msgstr "Failo pakeitimai prarasti"
+
+#~ msgid " %d items found, %d bookmarks added "
+#~ msgstr " surasta %d, pridėta %d žymų  "
 
 #~ msgid "Displays this help message"
 #~ msgstr "Parodo šį pagalbos pranešimą"
