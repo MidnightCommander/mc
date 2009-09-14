@@ -281,12 +281,18 @@ sort_box (sortfn *sort_fn, int *reverse, int *case_sensitive, int *exec_first)
 
 	QuickWidget quick_widgets[] =
 	{
-	    /* 0 */ QUICK_BUTTON (0, dlg_width, dlg_height - 3, dlg_height, N_("&Cancel"), B_CANCEL, NULL),
-	    /* 1 */ QUICK_BUTTON (0, dlg_width, dlg_height - 3, dlg_height, N_("&OK"), B_ENTER, NULL),
-	    /* 2 */ QUICK_CHECKBOX (0, dlg_width, 5, dlg_height, N_("&Reverse"), reverse),
-	    /* 3 */ QUICK_CHECKBOX (0, dlg_width, 4, dlg_height, N_("Case sensi&tive"), case_sensitive),
-	    /* 4 */ QUICK_CHECKBOX (0, dlg_width, 3, dlg_height, N_("Executable &first"), exec_first),
-	    /* 5 */ QUICK_RADIO (4, dlg_width, 3, dlg_height, SORT_TYPES,
+	    /* 0 */
+	    QUICK_BUTTON (0, dlg_width, dlg_height - 3, dlg_height, N_("&Cancel"), B_CANCEL, NULL),
+	    /* 1 */
+	    QUICK_BUTTON (0, dlg_width, dlg_height - 3, dlg_height, N_("&OK"), B_ENTER, NULL),
+	    /* 2 */
+	    QUICK_CHECKBOX (0, dlg_width, 5, dlg_height, N_("&Reverse"), reverse),
+	    /* 3 */
+	    QUICK_CHECKBOX (0, dlg_width, 4, dlg_height, N_("Case sensi&tive"), case_sensitive),
+	    /* 4 */
+	    QUICK_CHECKBOX (0, dlg_width, 3, dlg_height, N_("Executable &first"), exec_first),
+	    /* 5 */
+	    QUICK_RADIO (4, dlg_width, 3, dlg_height, SORT_TYPES,
 				    (const char **) sort_orders_names, &sort_idx),
 	    QUICK_END
 	};
