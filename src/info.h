@@ -7,6 +7,8 @@
 #define MC_INFO_H
 
 struct WInfo;
-struct WInfo *info_new (void);
+typedef struct WInfo WInfo;
+
+WInfo *info_new (void);
 
 #endif

@@ -58,15 +58,26 @@ int column_highlighting = 0;
 static cb_ret_t edit_callback (Widget *, widget_msg_t msg, int parm);
 
 static int
-edit_event (WEdit * edit, Gpm_Event * event, int *result)
+edit_event (Gpm_Event *event, void *data)
 {
-    *result = MOU_NORMAL;
-    edit_update_curs_row (edit);
-    edit_update_curs_col (edit);
+    WEdit *edit = (WEdit *) data;
 
     /* Unknown event type */
     if (!(event->type & (GPM_DOWN | GPM_DRAG | GPM_UP)))
-	return 0;
+	return MOU_NORMAL;
+
+    /* rest of the upper frame, the menu is invisible - call menu */
+    if ((event->type & GPM_DOWN) && (event->y == 1))
+	return edit_menubar->widget.mouse (event, edit_menubar);
+
+    edit_update_curs_row (edit);
+    edit_update_curs_col (edit);
+
+    /* Outside editor window */
+    if (event->y <= 1 || event->x <= 0
+	|| event->x > edit->num_widget_columns
+	|| event->y > edit->num_widget_lines + 1)
+	return MOU_NORMAL;
 
     /* Wheel events */
     if ((event->buttons & GPM_B_UP) && (event->type & GPM_DOWN)) {
@@ -78,15 +89,9 @@ edit_event (WEdit * edit, Gpm_Event * event, int *result)
 	goto update;
     }
 
-    /* Outside editor window */
-    if (event->y <= 1 || event->x <= 0
-	|| event->x > edit->num_widget_columns
-	|| event->y > edit->num_widget_lines + 1)
-	return 0;
-
     /* A lone up mustn't do anything */
     if (edit->mark2 != -1 && event->type & (GPM_UP | GPM_DRAG))
-	return 1;
+	return MOU_NORMAL;
 
     if (event->type & (GPM_DOWN | GPM_UP))
 	edit_push_key_press (edit);
@@ -127,18 +132,7 @@ edit_event (WEdit * edit, Gpm_Event * event, int *result)
     edit_update_curs_col (edit);
     edit_update_screen (edit);
 
-    return 1;
-}
-
-
-static int
-edit_mouse_event (Gpm_Event *event, void *x)
-{
-    int result;
-    if (edit_event ((WEdit *) x, event, &result))
-	return result;
-    else
-	return (*edit_menubar->widget.mouse) (event, edit_menubar);
+    return MOU_NORMAL;
 }
 
 static void
@@ -205,8 +199,7 @@ edit_file (const char *_file, int line)
 		    "[Internal File Editor]", NULL, DLG_WANT_TAB);
 
     init_widget (&(wedit->widget), 0, 0, LINES - 1, COLS,
-		 edit_callback,
-		 edit_mouse_event);
+		 edit_callback, edit_event);
 
     widget_want_cursor (wedit->widget, 1);
 

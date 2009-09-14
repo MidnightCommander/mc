@@ -53,7 +53,6 @@
 #include "widget.h"
 #include "wtools.h"
 #include "strutil.h"
-#include "layout.h"		/* mc_refresh() */
 
 #define HISTORY_FILE_NAME ".mc/history"
 
@@ -2284,7 +2283,6 @@ static int
 listbox_event (Gpm_Event *event, void *data)
 {
     WListbox *l = data;
-    Widget *w = data;
     int i;
 
     Dlg_head *h = l->widget.parent;
@@ -2292,27 +2290,37 @@ listbox_event (Gpm_Event *event, void *data)
     /* Single click */
     if (event->type & GPM_DOWN)
 	dlg_select_widget (l);
-    if (!l->list)
+
+    if (l->list == NULL)
 	return MOU_NORMAL;
+
     if (event->type & (GPM_DOWN | GPM_DRAG)) {
-	if (event->x < 0 || event->x >= l->widget.cols)
-	    return MOU_REPEAT;
+	int ret = MOU_REPEAT;
+
+	if (event->x < 0 || event->x > l->widget.cols)
+	    return ret;
+
 	if (event->y < 1)
 	    for (i = -event->y; i >= 0; i--)
 		listbox_back (l);
 	else if (event->y > l->widget.lines)
 	    for (i = event->y - l->widget.lines; i > 0; i--)
 		listbox_fwd (l);
-	else
+	else if (event->buttons & GPM_B_UP) {
+		listbox_back (l);
+		ret = MOU_NORMAL;
+	} else if (event->buttons & GPM_B_DOWN) {
+		listbox_fwd (l);
+		ret = MOU_NORMAL;
+	} else
 	    listbox_select_entry (l,
 				  listbox_select_pos (l, l->top,
 						      event->y - 1));
 
 	/* We need to refresh ourselves since the dialog manager doesn't */
 	/* know about this event */
-	listbox_callback (w, WIDGET_DRAW, 0);
-	mc_refresh ();
-	return MOU_REPEAT;
+	listbox_draw (l, TRUE);
+	return ret;
     }
 
     /* Double click */

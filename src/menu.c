@@ -311,7 +311,7 @@ static int menubar_handle_key (WMenu *menubar, int key)
         }
         if (key == KEY_ENTER || key == XCTRL ('n') 
             || key == KEY_DOWN || key == '\n') {
-            
+
 	    menubar_drop (menubar, menubar->selected);
 	    return 1;
 	}
@@ -324,15 +324,15 @@ static int menubar_handle_key (WMenu *menubar, int key)
         for (i = 0; i < items; i++) {
 	    if (!menu->entries [i].call_back)
 		continue;
-	    
+
             if (menu->entries[i].text.hotkey != NULL) {
                 if (key != g_ascii_tolower (menu->entries[i].text.hotkey[0]))
 			continue;
-	    
+
 	    menubar_execute (menubar, i);
 	    return 1;
 	}
-        }
+    }
 
         if (key == KEY_ENTER || key == '\n') {
 	    menubar_execute (menubar, menubar->subsel);
@@ -411,16 +411,19 @@ menubar_callback (Widget *w, widget_msg_t msg, int parm)
 }
 
 static int
-menubar_event    (Gpm_Event *event, void *data)
+menubar_event (Gpm_Event *event, void *data)
 {
     WMenu *menubar = data;
     int was_active;
-    int new_selection;
     int left_x, right_x, bottom_y;
 
-    if (!(event->type & (GPM_UP|GPM_DOWN|GPM_DRAG)))
+    if ((event->type & (GPM_UP | GPM_DOWN | GPM_DRAG)) == 0)
 	return MOU_NORMAL;
-    
+
+    /* ignore wheel events if menu is inactive */
+    if (!menubar->active && (event->buttons & (GPM_B_MIDDLE | GPM_B_UP | GPM_B_DOWN)))
+	return MOU_NORMAL;
+
     if (!menubar->dropped){
 	menubar->previous_widget = menubar->widget.parent->current->dlg_id;
 	menubar->active = 1;
@@ -433,67 +436,81 @@ menubar_event    (Gpm_Event *event, void *data)
     if (event->y == 1 || !was_active){
 	if (event->type & GPM_UP)
 	    return MOU_NORMAL;
-    
-	new_selection = 0;
-	while (new_selection < menubar->items 
-		&& event->x > menubar->menu[new_selection]->start_x
-	)
+
+	if (event->buttons & GPM_B_UP)
+	    menubar_left (menubar);
+	else if (event->buttons & GPM_B_DOWN)
+	    menubar_right (menubar);
+	else {
+	    int new_selection = 0;
+
+	    while (new_selection < menubar->items
+		    && event->x > menubar->menu[new_selection]->start_x)
 		new_selection++;
 
-	if (new_selection) /* Don't set the invalid value -1 */
+	    if (new_selection) /* Don't set the invalid value -1 */
 		--new_selection;
 	
-	if (!was_active){
-	    menubar->selected = new_selection;
-	    dlg_select_widget (menubar);
-	    menubar_drop_compute (menubar);
-	    menubar_draw (menubar);
-	    return MOU_NORMAL;
+	    if (!was_active) {
+		menubar->selected = new_selection;
+		dlg_select_widget (menubar);
+		menubar_drop_compute (menubar);
+		menubar_draw (menubar);
+	    } else {
+		menubar_remove (menubar);
+		menubar->selected = new_selection;
+		menubar_drop_compute (menubar);
+		menubar_draw (menubar);
+	    }
 	}
-	
-	menubar_remove (menubar);
-
-	menubar->selected = new_selection;
-
-	menubar_drop_compute (menubar);
-	menubar_draw (menubar);
 	return MOU_NORMAL;
     }
 
-    if (!menubar->dropped)
+    if (!menubar->dropped || (event->y < 2))
 	return MOU_NORMAL;
-    
-    /* Ignore the events on anything below the third line */
-    if (event->y <= 2)
+
+    /* middle click -- everywhere */
+    if ((event->buttons & GPM_B_MIDDLE) && (event->type & GPM_DOWN)) {
+	menubar_execute (menubar, menubar->subsel);
 	return MOU_NORMAL;
-    
-    /* Else, the mouse operation is on the menus or it is not */
-	left_x = menubar->menu[menubar->selected]->start_x;
-	right_x = left_x + menubar->max_entry_len + 4;
-	if (right_x > menubar->widget.cols)
-	{
-		left_x = menubar->widget.cols - menubar->max_entry_len - 3;
-		right_x = menubar->widget.cols - 1;
-	}
+    }
+
+    /* the mouse operation is on the menus or it is not */
+    left_x = menubar->menu[menubar->selected]->start_x;
+    right_x = left_x + menubar->max_entry_len + 3;
+    if (right_x > menubar->widget.cols) {
+	left_x = menubar->widget.cols - menubar->max_entry_len - 3;
+	right_x = menubar->widget.cols;
+    }
 
     bottom_y = (menubar->menu [menubar->selected])->count + 3;
 
-    if ((event->x > left_x) && (event->x < right_x) && (event->y < bottom_y)){
+    if ((event->x >= left_x) && (event->x <= right_x) && (event->y <= bottom_y)){
 	int pos = event->y - 3;
 
-	if (!menubar->menu [menubar->selected]->entries [pos].call_back)
+	/* mouse wheel */
+	if ((event->buttons & GPM_B_UP) && (event->type & GPM_DOWN)) {
+	    menubar_move (menubar, -1);
 	    return MOU_NORMAL;
-	
-	menubar_paint_idx (menubar, menubar->subsel, MENU_ENTRY_COLOR);
-	menubar->subsel = pos;
-	menubar_paint_idx (menubar, menubar->subsel, MENU_SELECTED_COLOR);
+	}
+	if ((event->buttons & GPM_B_DOWN) && (event->type & GPM_DOWN)) {
+	    menubar_move (menubar, 1);
+	    return MOU_NORMAL;
+	}
 
-	if (event->type & GPM_UP)
-	    menubar_execute (menubar, pos);
+	if (menubar->menu [menubar->selected]->entries [pos].call_back) {
+	    menubar_paint_idx (menubar, menubar->subsel, MENU_ENTRY_COLOR);
+	    menubar->subsel = pos;
+	    menubar_paint_idx (menubar, menubar->subsel, MENU_SELECTED_COLOR);
+
+	    if (event->type & GPM_UP)
+		menubar_execute (menubar, menubar->subsel);
+	}
     } else
-	if (event->type & GPM_DOWN)
+	/* use click not wheel to close menu */
+	if ((event->type & GPM_DOWN) && !(event->buttons & (GPM_B_UP | GPM_B_DOWN)))
 	    menubar_finish (menubar);
-	 
+
     return MOU_NORMAL;
 }
 

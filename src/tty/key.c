@@ -643,11 +643,20 @@ xmouse_get_event (Gpm_Event *ev)
     /* So we assume all the buttons were released */
 
     if (btn == 3) {
-	if (last_btn) {
-	    ev->type = GPM_UP | (GPM_SINGLE << clicks);
+	if (last_btn != 0) {
+	    if ((last_btn & (GPM_B_UP | GPM_B_DOWN)) != 0) {
+		/* FIXME: DIRTY HACK */
+		/* don't generate GPM_UP after mouse wheel */
+		/* need for menu event handling */
+		ev->type = 0;
+		tv1.tv_sec = 0;
+		tv1.tv_usec = 0;
+	    } else {
+		ev->type = GPM_UP | (GPM_SINGLE << clicks);
+		GET_TIME (tv1);
+	    }
 	    ev->buttons = 0;
 	    last_btn = 0;
-	    GET_TIME (tv1);
 	    clicks = 0;
 	} else {
 	    /* Bogus event, maybe mouse wheel */

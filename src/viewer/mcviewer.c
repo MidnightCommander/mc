@@ -40,10 +40,15 @@
 #include <fcntl.h>
 
 #include "../src/global.h"
+
+#include "../src/tty/tty.h"
+
 #include "../src/strutil.h"
 #include "../src/main.h"
 #include "../src/charsets.h"
-#include "../src/tty/tty.h"
+#include "../src/main-widgets.h"	/* the_menubar */
+#include "../src/menu.h"		/* menubar_visible */
+
 #include "internal.h"
 #include "mcviewer.h"
 
@@ -80,11 +85,19 @@ int mcview_mouse_move_pages = 1;
 
 /* Both views */
 static int
-mcview_event (mcview_t * view, Gpm_Event * event, int *result)
+mcview_event (mcview_t *view, Gpm_Event *event, int *result)
 {
     screen_dimen y, x;
 
     *result = MOU_NORMAL;
+
+    /* rest of the upper frame, the menu is invisible - call menu */
+    if (mcview_is_in_panel (view) && (event->type & GPM_DOWN)
+	    && event->y == 1 && !menubar_visible) {
+	event->x += view->widget.x;
+	*result = the_menubar->widget.mouse (event, the_menubar);
+	return 0; /* don't draw viewer over menu */
+    }
 
     /* We are not interested in the release events */
     if (!(event->type & (GPM_DOWN | GPM_DRAG)))
