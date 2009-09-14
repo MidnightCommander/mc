@@ -1,14 +1,58 @@
 [editor]
-XStore = ctrl g
-XPaste = ctrl v
-XCut = ctrl x
-Delete-Line = ctrl y
+EditXStore = ctrl g
+EditXPaste = ctrl v
+EditXCut = ctrl x
+EditDeleteLine = ctrl y
+
+[viewer:hex]
+HexViewToggleNavigationMode = tab
+ViewMoveToBol = ctrl a; home
+ViewMoveToEol = ctrl e; end
+ViewMoveLeft = b; left
+ViewMoveRight = f; right
+ViewMoveUp = k; y; up
+ViewMoveDown = j; delete; down
+
+[viewer]
+ViewSearch = ?; /; f7
+ViewContinueSearch = ctrl r; ctrl s; f17
+ViewMoveToBol = home
+ViewMoveToEol = end
+ViewMoveLeft = h; left
+ViewMoveRight = l; right
+ViewMoveUp = k; y; insert; up
+ViewMoveDown = j; e; delete; down
+ViewMovePgDn = f; space; pgdn
+ViewMovePgUp = b; pgup
+ViewMoveHalfPgDn = d
+ViewMoveHalfPgUp = u
+ViewGotoBookmark = m
+ViewNewBookmark = r
+ViewNextFile = ctrl f
+ViewPrevFile = ctrl b
+ViewQuit = q; esc
+SelectCodepage = ctrl t
+ShowCommandLine = ctrl o
+ViewToggleRuler = alt r
 
 [main]
-FindCmd = alt f7
-ViewOtherCmd = ctrl o
+CmdMenuLastSelected = f19
+CmdQuietQuit = f20
+CmdSingleDirsize = ctrl @
+CmdCopyCurrentPathname = alt a
+CmdCopyOtherPathname = alt A
+CmdQuickCd = alt c
+CmdQuickChdir = ctrl \\
+CmdSuspend = ctrl z
+CmdFilteredView = alt !
+CmdFind = alt ?
+CmdReread = ctrl r
+CmdToggleListing = alt t
+CmdSwapPanel = ctrl u
+ShowCommandLine = ctrl o
 
-[panel:xmap]
+ExtMap1 = ctrl x
+[main:xmap]
 
 
 [panel]
@@ -18,6 +62,8 @@ PanelMoveDown = down
 PanelMoveUp = up
 PanelMoveLeft = left
 PanelMoveRight = right
+PanelMoveHome = home
+PanelMoveEnd = end
 PanelPrevPage = pgup
 PanelNextPage = pgdn
 PanelDoEnter = enter
@@ -42,3 +88,30 @@ PanelSyncOtherPanel = alt i
 PanelGotoTopFile = alt g
 PanelSetPanelEncoding = ctrl t
 
+[panel:xmap]
+
+[widget]
+WidgetBol = ctrl a; alt <; home
+WidgetEol = ctrl e; alt >;end
+WidgetMoveLeft = alt left
+WidgetWordLeft = ctrl left
+WidgetBackwardChar = ctrl b
+WidgetBackwardWord = alt b
+WidgetMoveRight = alt right
+WidgetWordRight = ctrl right
+WidgetForwardChar = ctrl f
+WidgetForwardWord = alt f
+
+WidgetBackwardDelete = backspace
+WidgetDeleteChar = delete
+WidgetKillWord = alt d
+WidgetBackwardKillWord = alt backspace
+WidgetSetMark = 
+WidgetKillRegion = ctrl w
+WidgetKillSave = alt w
+WidgetYank = ctrl y
+WidgetKillLine = ctrl k
+WidgetHistoryPrev = alt p; ctrl down
+WidgetHistoryNext = alt n; ctrl up
+WidgetHistoryShow = alt h
+WidgetComplete = alt tab

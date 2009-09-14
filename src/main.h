@@ -80,9 +80,13 @@ extern GArray *viewer_hex_keymap;
 extern GArray *main_keymap;
 extern GArray *main_x_keymap;
 extern GArray *panel_keymap;
+extern GArray *widget_keymap;
 
 extern const global_key_map_t *panel_map;
 extern const global_key_map_t default_panel_keymap[];
+
+extern const global_key_map_t *widget_map;
+extern const global_key_map_t default_widget_keymap[];
 
 void do_update_prompt (void);
 

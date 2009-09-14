@@ -853,7 +853,7 @@ load_keymap_defs (void)
         viewer_keymap = g_array_new(TRUE, FALSE, sizeof(global_key_map_t));
         load_keymap_from_section ("viewer", viewer_keymap, mc_global_keymap);
 
-        viewer_keymap = g_array_new(TRUE, FALSE, sizeof(global_key_map_t));
+        viewer_hex_keymap = g_array_new(TRUE, FALSE, sizeof(global_key_map_t));
         load_keymap_from_section ("viewer:hex", viewer_hex_keymap, mc_global_keymap);
 
         main_keymap = g_array_new(TRUE, FALSE, sizeof(global_key_map_t));
@@ -864,6 +864,9 @@ load_keymap_defs (void)
 
         panel_keymap = g_array_new(TRUE, FALSE, sizeof(global_key_map_t));
         load_keymap_from_section ("panel", panel_keymap, mc_global_keymap);
+
+        widget_keymap = g_array_new(TRUE, FALSE, sizeof(global_key_map_t));
+        load_keymap_from_section ("widget", widget_keymap, mc_global_keymap);
 
         mc_config_deinit(mc_global_keymap);
     }

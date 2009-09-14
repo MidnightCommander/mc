@@ -49,6 +49,8 @@
 #include "tty/key.h"		/* KEY_M_ */
 #include "tty/tty.h"		/* keys */
 #include "wtools.h"
+#include "strutil.h"
+
 #include "keybind.h"
 
 static const name_key_map_t command_names[] = {
@@ -169,7 +171,6 @@ static const name_key_map_t command_names[] = {
     { "EditXPaste",                        CK_XPaste },
     { "EditSelectionHistory",              CK_Selection_History },
     { "EditShell",                         CK_Shell },
-    { "EditSelectCodepage",                CK_Select_Codepage },
     { "EditInsertLiteral",                 CK_Insert_Literal },
     { "EditExecuteMacro",                  CK_Execute_Macro },
     { "EditBeginorEndMacro",               CK_Begin_End_Macro },
@@ -208,6 +209,12 @@ static const name_key_map_t command_names[] = {
 
     /* main commands */
     { "CmdChmod",                          CK_ChmodCmd },
+    { "CmdMenuLastSelected",               CK_MenuLastSelectedCmd },
+    { "CmdSingleDirsize",                  CK_SingleDirsizeCmd },
+    { "CmdCopyCurrentPathname",            CK_CopyCurrentPathname },
+    { "CmdCopyOtherPathname",              CK_CopyOtherPathname },
+    { "CmdSuspend",                        CK_SuspendCmd },
+    { "CmdToggleListing",                  CK_ToggleListingCmd },
     { "CmdChownAdvanced",                  CK_ChownAdvancedCmd },
     { "CmdChown",                          CK_ChownCmd },
     { "CmdCompareDirs",                    CK_CompareDirsCmd },
@@ -255,11 +262,9 @@ static const name_key_map_t command_names[] = {
     { "CmdUserFileMenu",                   CK_UserFileMenuCmd },
     { "CmdView",                           CK_ViewCmd },
     { "CmdViewFile",                       CK_ViewFileCmd },
-    { "CmdViewOther",                      CK_ViewOtherCmd },
     { "CmdCmdCopyCurrentReadlink",         CK_CopyCurrentReadlink },
     { "CmdCopyOtherReadlink",              CK_CopyOtherReadlink },
     { "CmdAddHotlist",                     CK_AddHotlist },
-    { "CmdStartExt",                       CK_StartExtCmd },
     { "CmdQuit",                           CK_QuitCmd },
     { "CmdCopyOtherTarget",                CK_CopyOtherTarget },
     { "CmdCopyOthertReadlink",             CK_CopyOthertReadlink },
@@ -296,6 +301,38 @@ static const name_key_map_t command_names[] = {
     { "PanelSetPanelEncoding",             CK_PanelSetPanelEncoding },
     { "PanelStartSearch",                  CK_PanelStartSearch },
     { "PanelSyncOtherPanel",               CK_PanelSyncOtherPanel },
+
+    /* widgets */
+    { "WidgetBol",                         CK_WidgetBol },
+    { "WidgetEol",                         CK_WidgetEol },
+    { "WidgetMoveLeft",                    CK_WidgetMoveLeft },
+    { "WidgetWordLeft",                    CK_WidgetWordLeft },
+    { "WidgetBackwardChar",                CK_WidgetBackwardChar },
+    { "WidgetBackwardWord",                CK_WidgetBackwardWord },
+    { "WidgetMoveRight",                   CK_WidgetMoveRight },
+    { "WidgetWordRight",                   CK_WidgetWordRight },
+    { "WidgetForwardChar",                 CK_WidgetForwardChar },
+    { "WidgetForwardWord",                 CK_WidgetForwardWord },
+    { "WidgetBackwardDelete",              CK_WidgetBackwardDelete },
+    { "WidgetDeleteChar",                  CK_WidgetDeleteChar },
+    { "WidgetKillWord",                    CK_WidgetKillWord },
+    { "WidgetBackwardKillWord",            CK_WidgetBackwardKillWord },
+    { "WidgetSetMark",                     CK_WidgetSetMark },
+    { "WidgetKillRegion",                  CK_WidgetKillRegion },
+    { "WidgetKillSave",                    CK_WidgetKillSave },
+    { "WidgetYank",                        CK_WidgetYank },
+    { "WidgetKillLine",                    CK_WidgetKillLine },
+    { "WidgetHistoryPrev",                 CK_WidgetHistoryPrev },
+    { "WidgetHistoryNext",                 CK_WidgetHistoryNext },
+    { "WidgetHistoryShow",                 CK_WidgetHistoryShow },
+    { "WidgetComplete",                    CK_WidgetComplete },
+
+    /* common */
+    { "ExtMap1",                           CK_StartExtMap1 },
+    { "ExtMap2",                           CK_StartExtMap2 },
+    { "ShowCommandLine",                   CK_ShowCommandLine },
+    { "SelectCodepage",                    CK_SelectCodepage },
+
     { NULL,                                0 }
 };
 
@@ -314,7 +351,6 @@ void
 keymap_add(GArray *keymap, int key, int cmd)
 {
     global_key_map_t new_bind, *map;
-    guint i;
     map = &(g_array_index(keymap, global_key_map_t, 0));
 
     if (key !=0 && cmd !=0) {

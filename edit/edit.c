@@ -3119,7 +3119,7 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
     case CK_Shell:
 	view_other_cmd ();
 	break;
-    case CK_Select_Codepage:
+    case CK_SelectCodepage:
 	edit_select_codepage_cmd (edit);
 	break;
     case CK_Insert_Literal:

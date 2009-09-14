@@ -54,7 +54,55 @@
 #include "wtools.h"
 #include "strutil.h"
 
+#include "cmddef.h"		/* CK_ cmd name const */
+#include "keybind.h"		/* global_key_map_t */
+
 #define HISTORY_FILE_NAME ".mc/history"
+
+const global_key_map_t *widget_map;
+
+const global_key_map_t default_widget_keymap[] = {
+    /* Motion */
+    { XCTRL('a'),               CK_WidgetBol },
+    { KEY_HOME,                 CK_WidgetBol },
+    { KEY_A1,                   CK_WidgetBol },
+    { ALT ('<'),                CK_WidgetBol },
+    { XCTRL('e'),               CK_WidgetEol },
+    { KEY_END,                  CK_WidgetEol },
+    { KEY_C1,                   CK_WidgetEol },
+    { ALT ('>'),                CK_WidgetEol },
+    { KEY_LEFT,                 CK_WidgetMoveLeft },
+    { KEY_LEFT | KEY_M_CTRL,    CK_WidgetWordLeft },
+    { KEY_RIGHT,                CK_WidgetMoveRight },
+    { KEY_RIGHT | KEY_M_CTRL,   CK_WidgetWordRight },
+
+    { XCTRL('b'),               CK_WidgetBackwardChar },
+    { ALT('b'),                 CK_WidgetBackwardWord },
+    { XCTRL('f'),               CK_WidgetForwardChar },
+    { ALT('f'),                 CK_WidgetForwardWord },
+
+    /* Editing */
+    { KEY_BACKSPACE,            CK_WidgetBackwardDelete },
+    { KEY_DC,                   CK_WidgetDeleteChar },
+    { ALT('d'),                 CK_WidgetKillWord },
+    { ALT(KEY_BACKSPACE),       CK_WidgetBackwardKillWord },
+
+    /* Region manipulation */
+    { 0,                        CK_WidgetSetMark },
+    { XCTRL('w'),               CK_WidgetKillRegion },
+    { ALT('w'),                 CK_WidgetKillSave },
+    { XCTRL('y'),               CK_WidgetYank },
+    { XCTRL('k'),               CK_WidgetKillLine },
+
+    /* History */
+    { ALT('p'),                 CK_WidgetHistoryPrev },
+    { ALT('n'),                 CK_WidgetHistoryNext },
+    { ALT('h'),                 CK_WidgetHistoryShow },
+
+    /* Completion */
+    { ALT('\t'),                CK_WidgetComplete },
+    { 0, 0 }
+};
 
 static void
 widget_selectcolor (Widget *w, gboolean focused, gboolean hotkey)
@@ -1669,26 +1717,6 @@ static const struct {
     { 0,            0 }
 };
 
-/* This function is a test for a special input key used in complete.c */
-/* Returns 0 if it is not a special key, 1 if it is a non-complete key
-   and 2 if it is a complete key */
-int
-is_in_input_map (WInput *in, int c_code)
-{
-    int i;
-
-    (void) in;
-
-    for (i = 0; input_map [i].fn; i++)
-	if (c_code == input_map [i].key_code) {
-	    if (input_map [i].fn == complete)
-	    	return 2;
-	    else
-	    	return 1;
-	}
-    return 0;
-}
-
 static void
 port_region_marked_for_delete (WInput *in)
 {
@@ -1698,39 +1726,136 @@ port_region_marked_for_delete (WInput *in)
     in->charpoint = 0;
 }
 
+static void
+widget_execute_cmd (WInput *in, int command, int key)
+{
+    switch (command) {
+    case CK_WidgetBol:
+        beginning_of_line (in);
+        break;
+    case CK_WidgetEol:
+        end_of_line (in);
+        break;
+    case CK_WidgetMoveLeft:
+        key_left (in);
+        break;
+    case CK_WidgetWordLeft:
+        key_ctrl_left (in);
+        break;
+    case CK_WidgetMoveRight:
+        key_right (in);
+        break;
+    case CK_WidgetWordRight:
+        key_ctrl_right (in);
+        break;
+    case CK_WidgetBackwardChar:
+        backward_char (in);
+        break;
+    case CK_WidgetBackwardWord:
+        backward_word (in);
+        break;
+    case CK_WidgetForwardChar:
+        forward_char (in);
+        break;
+    case CK_WidgetForwardWord:
+        forward_word (in);
+        break;
+    case CK_WidgetBackwardDelete:
+        backward_delete (in);
+        break;
+    case CK_WidgetDeleteChar:
+        delete_char (in);
+        break;
+    case CK_WidgetKillWord:
+        kill_word (in);
+        break;
+    case CK_WidgetBackwardKillWord:
+        back_kill_word (in);
+        break;
+    case CK_WidgetSetMark:
+        set_mark (in);
+        break;
+    case CK_WidgetKillRegion:
+        kill_region (in);
+        break;
+    case CK_WidgetKillSave:
+        kill_save (in);
+        break;
+    case CK_WidgetYank:
+        yank (in);
+        break;
+    case CK_WidgetKillLine:
+        kill_line (in);
+        break;
+    case CK_WidgetHistoryPrev:
+        hist_prev (in);
+        break;
+    case CK_WidgetHistoryNext:
+        hist_next (in);
+        break;
+    case CK_WidgetHistoryShow:
+        do_show_hist (in);
+        break;
+    case CK_WidgetComplete:
+        complete (in);
+        break;
+    }
+}
+
+/* This function is a test for a special input key used in complete.c */
+/* Returns 0 if it is not a special key, 1 if it is a non-complete key
+   and 2 if it is a complete key */
+int
+is_in_input_map (WInput *in, int key)
+{
+    int i;
+
+    for (i = 0; widget_map[i].key; i++) {
+        if (key == widget_map[i].key) {
+            widget_execute_cmd (in, widget_map[i].command, key);
+            if (widget_map[i].command == CK_WidgetComplete)
+                return 2;
+            else
+                return 1;
+        }
+    }
+    return 0;
+}
+
 cb_ret_t
-handle_char (WInput *in, int c_code)
+handle_char (WInput *in, int key)
 {
     cb_ret_t v;
     int    i;
 
     v = MSG_NOT_HANDLED;
 
-    if (quote){
-    	free_completions (in);
-	v = insert_char (in, c_code);
-	update_input (in, 1);
-	quote = 0;
-	return v;
+    if (quote) {
+        free_completions (in);
+        v = insert_char (in, key);
+        update_input (in, 1);
+        quote = 0;
+        return v;
     }
 
-    for (i = 0; input_map [i].fn; i++){
-	if (c_code == input_map [i].key_code){
-	    if (input_map [i].fn != complete)
-	    	free_completions (in);
-	    (*input_map [i].fn)(in);
-	    v = MSG_HANDLED;
-	    break;
-	}
+    for (i = 0; widget_map[i].key; i++) {
+        if (key == widget_map[i].key) {
+            if (widget_map[i].command != CK_WidgetComplete) {
+                free_completions (in);
+                widget_execute_cmd (in, widget_map[i].command, key);
+                update_input (in, 1);
+                v = MSG_HANDLED;
+                break;
+            }
+        }
     }
-    if (!input_map [i].fn){
-        if (c_code > 255)
-	    return MSG_NOT_HANDLED;
-	if (in->first){
-	    port_region_marked_for_delete (in);
-	}
-    	free_completions (in);
-	v = insert_char (in, c_code);
+    if (widget_map[i].command == 0) {
+        if (key > 255)
+            return MSG_NOT_HANDLED;
+        if (in->first)
+            port_region_marked_for_delete (in);
+        free_completions (in);
+        v = insert_char (in, key);
     }
     update_input (in, 1);
     return v;

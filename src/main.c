@@ -310,6 +310,7 @@ GArray *viewer_hex_keymap = NULL;
 GArray *main_keymap = NULL;
 GArray *main_x_keymap = NULL;
 GArray *panel_keymap = NULL;
+GArray *widget_keymap = NULL;
 
 const global_key_map_t *main_map;
 const global_key_map_t *main_x_map;
@@ -337,8 +338,8 @@ static const global_key_map_t default_main_map[] = {
     /* Swap panels */
     {XCTRL ('u'), CK_SwapCmd},
     /* View output */
-    {XCTRL ('o'), CK_ViewOtherCmd},
-    {XCTRL ('x'), CK_StartExtCmd},
+    {XCTRL ('o'), CK_ShowCommandLine},
+    {XCTRL ('x'), CK_StartExtMap1 },
     { 0, 0 }
 };
 
@@ -1299,7 +1300,7 @@ execute_cmd(int command)
     case CK_SwapCmd:
         swap_cmd ();
         break;
-    case CK_ViewOtherCmd:
+    case CK_ShowCommandLine:
         view_other_cmd ();
         break;
     case CK_QuitCmd:
@@ -1340,7 +1341,7 @@ execute_cmd(int command)
         break;
     case CK_JobsCmd:
         break;
-    case CK_StartExtCmd:
+    case CK_StartExtMap1:
         ctl_x_cmd ();
         break;
     }
@@ -1868,6 +1869,11 @@ do_nc (void)
     if (panel_keymap && panel_keymap->len > 0) {
         panel_map = (global_key_map_t *) panel_keymap->data;
     }
+
+    widget_map = default_widget_keymap;
+
+    if (widget_keymap && widget_keymap->len > 0)
+        widget_map = (global_key_map_t *) widget_keymap->data;
 
     /* Check if we were invoked as an editor or file viewer */
     if (!mc_maybe_editor_or_viewer ()) {
