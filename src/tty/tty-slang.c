@@ -44,7 +44,7 @@
 #include "../../src/global.h"
 
 #include "../../src/tty/tty-internal.h"		/* slow_tty */
-#include "../../src/tty/tty.h"			/* tty_draw_box_slow */
+#include "../../src/tty/tty.h"
 #include "../../src/tty/color-slang.h"
 #include "../../src/tty/color-internal.h"
 #include "../../src/tty/mouse.h"	/* Gpm_Event is required in key.h */
@@ -191,8 +191,56 @@ load_terminfo_keys (void)
 	do_define_key (key_table [i].key_code, key_table [i].key_name);
 }
 
-/*** public functions **************************************************/
+static char *
+mc_tty_normalize_from_utf8 (const char *str)
+{
+    GIConv conv;
+    GString *buffer;
+    const char *_system_codepage = str_detect_termencoding();
 
+    if (str_isutf8 (_system_codepage))
+        return g_strdup(str);
+
+    conv = g_iconv_open (_system_codepage, "UTF-8");
+    if (conv == INVALID_CONV)
+        return g_strdup(str);
+
+    buffer = g_string_new ("");
+
+    if (str_convert (conv, str, buffer) == ESTR_FAILURE)
+    {
+        g_string_free(buffer, TRUE);
+        str_close_conv (conv);
+        return g_strdup(str);
+    }
+    str_close_conv (conv);
+
+    return g_string_free(buffer, FALSE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions **************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+int
+mc_tty_normalize_lines_char(const char *str)
+{
+    char *str2;
+    int res;
+
+    if (!str)
+        return (int) ' ';
+    str2 = mc_tty_normalize_from_utf8 (str);
+    res = g_utf8_get_char_validated (str2, -1);
+
+    if (res < 0)
+	res = (unsigned char) str2[0];
+    g_free(str2);
+
+    return res;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 void
 tty_init (gboolean slow, gboolean ugly_lines)
 {
@@ -437,13 +485,6 @@ tty_draw_vline (int y, int x, int ch, int len)
     }
 
     SLsmg_gotorc (y, x);
-}
-
-void
-tty_draw_box (int y, int x, int rows, int cols)
-{
-    /* this fix slang drawing stickchars bug */
-    tty_draw_box_slow (y, x, rows, cols);
 }
 
 void

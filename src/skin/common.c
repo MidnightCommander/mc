@@ -49,10 +49,10 @@ static gboolean mc_skin_is_init = FALSE;
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-static void
+static inline void
 mc_skin_hash_destroy_key (gpointer data)
 {
-    g_free(data);
+    g_free (data);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -69,33 +69,33 @@ mc_skin_hash_destroy_value (gpointer data)
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-mc_skin_get_default_name(void)
+mc_skin_get_default_name (void)
 {
     char *tmp_str;
 
     /* from command line */
     if (mc_args__skin != NULL)
-	return g_strdup(mc_args__skin);
+        return g_strdup (mc_args__skin);
 
     /* from envirovement variable */
     tmp_str = getenv ("MC_SKIN");
     if (tmp_str != NULL)
-	return g_strdup(tmp_str);
+        return g_strdup (tmp_str);
 
     /*  from config. Or 'default' if no present in config */
-    return mc_config_get_string(mc_main_config, CONFIG_APP_SECTION, "skin" , "default");
+    return mc_config_get_string (mc_main_config, CONFIG_APP_SECTION, "skin", "default");
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-mc_skin_reinit(void)
+mc_skin_reinit (void)
 {
-    mc_skin_deinit();
-    mc_skin__default.name = mc_skin_get_default_name();
+    mc_skin_deinit ();
+    mc_skin__default.name = mc_skin_get_default_name ();
     mc_skin__default.colors = g_hash_table_new_full (g_str_hash, g_str_equal,
-			       mc_skin_hash_destroy_key,
-			       mc_skin_hash_destroy_value);
+                                                     mc_skin_hash_destroy_key,
+                                                     mc_skin_hash_destroy_value);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -103,26 +103,24 @@ mc_skin_reinit(void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mc_skin_init(void)
+mc_skin_init (void)
 {
-    mc_skin__default.name = mc_skin_get_default_name();
+    mc_skin__default.name = mc_skin_get_default_name ();
     mc_skin__default.colors = g_hash_table_new_full (g_str_hash, g_str_equal,
-			       mc_skin_hash_destroy_key,
-			       mc_skin_hash_destroy_value);
+                                                     mc_skin_hash_destroy_key,
+                                                     mc_skin_hash_destroy_value);
 
-    if (! mc_skin_ini_file_load(&mc_skin__default))
-    {
-	mc_skin_reinit();
-	mc_skin_set_hardcoded_skin(&mc_skin__default);
+    if (!mc_skin_ini_file_load (&mc_skin__default)) {
+        mc_skin_reinit ();
+        mc_skin_set_hardcoded_skin (&mc_skin__default);
     }
     mc_skin_colors_old_configure (&mc_skin__default);
 
-    if (! mc_skin_ini_file_parse(&mc_skin__default))
-    {
-	mc_skin_reinit();
-	mc_skin_set_hardcoded_skin(&mc_skin__default);
-	mc_skin_colors_old_configure (&mc_skin__default);
-	(void) mc_skin_ini_file_parse(&mc_skin__default);
+    if (!mc_skin_ini_file_parse (&mc_skin__default)) {
+        mc_skin_reinit ();
+        mc_skin_set_hardcoded_skin (&mc_skin__default);
+        mc_skin_colors_old_configure (&mc_skin__default);
+        (void) mc_skin_ini_file_parse (&mc_skin__default);
     }
     mc_skin_is_init = TRUE;
 }
@@ -130,19 +128,18 @@ mc_skin_init(void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mc_skin_deinit(void)
+mc_skin_deinit (void)
 {
 
-    g_free(mc_skin__default.name);
+    g_free (mc_skin__default.name);
     mc_skin__default.name = NULL;
     g_hash_table_destroy (mc_skin__default.colors);
     mc_skin__default.colors = NULL;
 
-    g_free(mc_skin__default.description);
+    g_free (mc_skin__default.description);
     mc_skin__default.description = NULL;
 
-    if (mc_skin__default.config)
-    {
+    if (mc_skin__default.config) {
         mc_config_deinit (mc_skin__default.config);
         mc_skin__default.config = NULL;
     }

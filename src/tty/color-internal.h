@@ -19,12 +19,6 @@
 extern gboolean use_colors;
 extern gboolean mc_tty_color_disable;
 
-#ifdef HAVE_SLANG
-#   define CTYPE const char *
-#else
-#   define CTYPE int
-#endif			/* HAVE_SLANG */
-
 typedef struct mc_color_pair_struct {
     const char *cfg;
     const char *cbg;
@@ -32,23 +26,22 @@ typedef struct mc_color_pair_struct {
     int ibg;
     int pair_index;
     gboolean is_temp;
-} mc_color_pair_t;
+} tty_color_pair_t;
 
 typedef enum
 {
-	SPEC_A_REVERSE		= -100,
-	SPEC_A_BOLD		= -101,
-	SPEC_A_BOLD_REVERSE	= -102,
-	SPEC_A_UNDERLINE	= -103
-} mc_tty_color_special_t;
+    SPEC_A_REVERSE		= -100,
+    SPEC_A_BOLD			= -101,
+    SPEC_A_BOLD_REVERSE		= -102,
+    SPEC_A_UNDERLINE		= -103
+} tty_special_color_t;
 
-const char *mc_tty_color_get_valid_name(const char *);
-int mc_tty_color_get_index_by_name(const char *);
+const char *tty_color_get_valid_name (const char *);
+int tty_color_get_index_by_name (const char *);
 
-void mc_tty_color_init_lib (gboolean, gboolean);
-void mc_tty_color_try_alloc_pair_lib (mc_color_pair_t *);
-void mc_tty_color_set_lib (int);
-void mc_tty_color_set_normal_attrs_lib (void);
-void mc_tty_color_lowlevel_set_lib (int);
+void tty_color_init_lib (gboolean, gboolean);
+void tty_color_deinit_lib (void);
+
+void tty_color_try_alloc_pair_lib (tty_color_pair_t *);
 
 #endif				/* MC_COLOR_INTERNAL_H */

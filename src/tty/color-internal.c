@@ -26,7 +26,7 @@
 
 #include <config.h>
 
-#include <sys/types.h>				/* size_t */
+#include <string.h>				/* strcmp */
 
 #include "../../src/tty/color.h"		/* colors and attributes */
 #include "../../src/tty/color-internal.h"
@@ -63,7 +63,7 @@ mc_tty_color_table_t const color_table [] = {
     { "brightcyan",    COLOR_CYAN    | A_BOLD },
     { "lightgray",     COLOR_WHITE },
     { "white",         COLOR_WHITE   | A_BOLD },
-    { "default",       0 }, /* default color of the terminal */
+    { "default",       -1 }, /* default color of the terminal */
     /* special colors */
     { "A_REVERSE",      SPEC_A_REVERSE },
     { "A_BOLD",         SPEC_A_BOLD},
@@ -80,36 +80,28 @@ mc_tty_color_table_t const color_table [] = {
 /* --------------------------------------------------------------------------------------------- */
 
 const char *
-mc_tty_color_get_valid_name(const char *color_name)
+tty_color_get_valid_name (const char *color_name)
 {
-    size_t i;
+    int i;
 
-    if (color_name == NULL)
-	return NULL;
-
-    for (i=0; color_table [i].name != NULL; i++)
-	if (strcmp (color_name, color_table [i].name) == 0) {
-	    return color_table [i].name;
-	    break;
-	}
+    if (color_name != NULL)
+	for (i = 0; color_table [i].name != NULL; i++)
+	    if (strcmp (color_name, color_table [i].name) == 0)
+		return color_table [i].name;
     return NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 int
-mc_tty_color_get_index_by_name(const char *color_name)
+tty_color_get_index_by_name (const char *color_name)
 {
-    size_t i;
+    int i;
 
-    if (color_name == NULL)
-	return -1;
-
-    for (i=0; color_table [i].name != NULL; i++)
-	if (strcmp (color_name, color_table [i].name) == 0) {
-	    return color_table [i].value;
-	    break;
-	}
+    if (color_name != NULL)
+	for (i = 0; color_table [i].name != NULL; i++)
+	    if (strcmp (color_name, color_table [i].name) == 0)
+		return color_table [i].value;
     return -1;
 }
 

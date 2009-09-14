@@ -17,7 +17,7 @@
 #ifdef HAVE_SLANG
 #   include "../../src/tty/color-slang.h"
 #else
-#   include "../../src/tty/color-ncurses.h"
+#   include "../../src/tty/tty-ncurses.h"
 #endif
 
 extern char *command_line_colors;
@@ -29,14 +29,14 @@ gboolean tty_use_colors (void);
 int tty_try_alloc_color_pair (const char *, const char *);
 int tty_try_alloc_color_pair2 (const char *, const char *, gboolean);
 
-void tty_color_free_all_tmp(void);
-void tty_color_free_all_non_tmp(void);
+void tty_color_free_all_tmp (void);
+void tty_color_free_all_non_tmp (void);
 
 void tty_setcolor (int color);
 void tty_lowlevel_setcolor (int color);
 void tty_set_normal_attrs (void);
 
-void tty_color_set_defaults( const char *, const char *);
+void tty_color_set_defaults (const char *, const char *);
 
 #define ALLOC_COLOR_PAIR_INDEX 1
 

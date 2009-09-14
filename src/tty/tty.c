@@ -133,7 +133,7 @@ tty_print_one_vline (void)
 }
 
 void
-tty_draw_box_slow (int y, int x, int ys, int xs)
+tty_draw_box (int y, int x, int ys, int xs)
 {
     tty_draw_vline (y, x, mc_tty_ugly_frm[MC_TTY_FRM_vert], ys);
     tty_draw_vline (y, x + xs - 1, mc_tty_ugly_frm[MC_TTY_FRM_vert], ys);

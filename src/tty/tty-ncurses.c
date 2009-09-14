@@ -43,8 +43,7 @@
 #endif
 
 #include "../../src/tty/tty-internal.h"		/* slow_tty */
-#include "../../src/tty/tty.h"			/* tty_draw_box_slow */
-#include "../../src/tty/color-ncurses.h"
+#include "../../src/tty/tty.h"
 #include "../../src/tty/color-internal.h"
 #include "../../src/tty/win.h"
 
@@ -67,7 +66,58 @@
 
 /*** file scope functions **********************************************/
 
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions **************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+int
+mc_tty_normalize_lines_char(const char *ch)
+{
+    int i;
+    struct mc_tty_lines_struct {
+        const char *line;
+        int line_code;
+    } const lines_codes[] =
+    {
+	{"┌", ACS_BSSB},
+	{"┐", ACS_BBSS},
+	{"└", ACS_SSBB},
+	{"┘", ACS_SBBS},
+	{"├", ACS_SBSS},
+	{"┤", ACS_SSSB},
+	{"┬", ACS_BSSS},
+	{"┴", ACS_SSBS},
+	{"─", ACS_BSBS},
+	{"│", ACS_SBSB},
+	{"┼", ACS_SSSS},
+	{"╔", ACS_BSSB | A_BOLD},
+	{"╗", ACS_BBSS | A_BOLD},
+	{"╤", ACS_BSSS | A_BOLD},
+	{"╧", ACS_SSBS | A_BOLD},
+	{"╚", ACS_SSBB | A_BOLD},
+	{"╝", ACS_SBBS | A_BOLD},
+	{"╟", ACS_SSSB | A_BOLD},
+	{"╢", ACS_SBSS | A_BOLD},
+	{"═", ACS_BSBS | A_BOLD},
+	{"║", ACS_SBSB | A_BOLD},
+	{NULL,0}
+    };
+
+    if (ch == NULL)
+	return (int) ' ';
+
+    for(i=0;lines_codes[i].line;i++)
+    {
+	if (strcmp(ch,lines_codes[i].line) == 0)
+	    return lines_codes[i].line_code;
+    }
+
+    return (int) ' ';
+
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 
 void
 tty_init (gboolean slow, gboolean ugly_lines)
@@ -193,9 +243,8 @@ tty_getyx (int *py, int *px)
 void
 tty_draw_hline (int y, int x, int ch, int len)
 {
-    if (ch == ACS_HLINE) {
+    if (ch == ACS_HLINE)
         ch = mc_tty_ugly_frm[MC_TTY_FRM_thinhoriz];
-    }
 
     if ((y >= 0) && (x >= 0))
         move (y, x);
@@ -206,31 +255,12 @@ tty_draw_hline (int y, int x, int ch, int len)
 void
 tty_draw_vline (int y, int x, int ch, int len)
 {
+    if (ch == ACS_VLINE)
+        ch = mc_tty_ugly_frm[MC_TTY_FRM_thinvert];
+
     if ((y >= 0) && (x >= 0))
 	move (y, x);
     vline (ch, len);
-}
-
-void
-tty_draw_box (int y, int x, int rows, int cols)
-{
-
-#define waddc(_y, _x, c) move (_y, _x); addch (c)
-	waddc (y, x, mc_tty_ugly_frm[MC_TTY_FRM_lefttop]);
-	hline (mc_tty_ugly_frm[MC_TTY_FRM_horiz], cols - 2);
-	waddc (y + rows - 1, x, mc_tty_ugly_frm[MC_TTY_FRM_leftbottom]);
-	hline (mc_tty_ugly_frm[MC_TTY_FRM_horiz], cols - 2);
-
-	waddc (y, x + cols - 1, mc_tty_ugly_frm[MC_TTY_FRM_righttop]);
-	waddc (y + rows - 1, x + cols - 1, mc_tty_ugly_frm[MC_TTY_FRM_rightbottom]);
-
-	move (y + 1, x);
-	vline (mc_tty_ugly_frm[MC_TTY_FRM_vert], rows - 2);
-
-	move (y + 1, x + cols - 1);
-	vline (mc_tty_ugly_frm[MC_TTY_FRM_vert], rows - 2);
-#undef waddc
-
 }
 
 void
@@ -269,14 +299,6 @@ tty_print_anychar (int c)
 {
     unsigned char str[6 + 1];
 
-    if (c == ACS_RTEE ) {
-        c = mc_tty_ugly_frm[MC_TTY_FRM_rightmiddle];
-    }
-
-    if (c == ACS_LTEE ) {
-        c = mc_tty_ugly_frm[MC_TTY_FRM_leftmiddle];
-    }
-
     if ( c > 255 ) {
         int res = g_unichar_to_utf8 (c, (char *)str);
         if ( res == 0 ) {
@@ -285,7 +307,7 @@ tty_print_anychar (int c)
         } else {
             str[res] = '\0';
         }
-        addstr (str_term_form (str));
+        addstr (str_term_form ((char *)str));
     } else {
         addch (c);
     }
@@ -294,6 +316,25 @@ tty_print_anychar (int c)
 void
 tty_print_alt_char (int c)
 {
+    if (c == ACS_VLINE)
+	c = mc_tty_ugly_frm[MC_TTY_FRM_thinvert];
+    else if (c == ACS_HLINE)
+	c = mc_tty_ugly_frm[MC_TTY_FRM_thinhoriz];
+    else if (c == ACS_LTEE)
+	c = mc_tty_ugly_frm[MC_TTY_FRM_leftmiddle];
+    else if (c == ACS_RTEE)
+	c = mc_tty_ugly_frm[MC_TTY_FRM_rightmiddle];
+    else if (c == ACS_ULCORNER)
+	c = mc_tty_ugly_frm[MC_TTY_FRM_lefttop];
+    else if (c == ACS_LLCORNER)
+	c = mc_tty_ugly_frm[MC_TTY_FRM_leftbottom];
+    else if (c == ACS_URCORNER)
+	c = mc_tty_ugly_frm[MC_TTY_FRM_righttop];
+    else if (c == ACS_LRCORNER)
+	c = mc_tty_ugly_frm[MC_TTY_FRM_rightbottom];
+    else if (c == ACS_PLUS)
+	c = mc_tty_ugly_frm[MC_TTY_FRM_centermiddle];
+
     addch (c);
 }
 

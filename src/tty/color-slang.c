@@ -78,10 +78,10 @@ has_colors (gboolean disable, gboolean force)
 }
 
 static void
-mc_tty_color_pair_init_special(mc_color_pair_t *mc_color_pair,
-    const char *fg1, const char *bg1,
-    const char *fg2, const char *bg2,
-    SLtt_Char_Type mask)
+mc_tty_color_pair_init_special (tty_color_pair_t *mc_color_pair,
+				const char *fg1, const char *bg1,
+				const char *fg2, const char *bg2,
+				SLtt_Char_Type mask)
 {
     if (SLtt_Use_Ansi_Colors != 0)
     {
@@ -101,7 +101,7 @@ mc_tty_color_pair_init_special(mc_color_pair_t *mc_color_pair,
 }
 
 void
-mc_tty_color_init_lib (gboolean disable, gboolean force)
+tty_color_init_lib (gboolean disable, gboolean force)
 {
     /* FIXME: if S-Lang is used, has_colors() must be called regardless
        of whether we are interested in its result */
@@ -111,7 +111,12 @@ mc_tty_color_init_lib (gboolean disable, gboolean force)
 }
 
 void
-mc_tty_color_try_alloc_pair_lib (mc_color_pair_t *mc_color_pair)
+tty_color_deinit_lib (void)
+{
+}
+
+void
+tty_color_try_alloc_pair_lib (tty_color_pair_t *mc_color_pair)
 {
     const char *fg, *bg;
     if (mc_color_pair->ifg <= (int) SPEC_A_REVERSE)
@@ -155,16 +160,14 @@ mc_tty_color_try_alloc_pair_lib (mc_color_pair_t *mc_color_pair)
     }
     else
     {
-
 	fg = (mc_color_pair->cfg) ? mc_color_pair->cfg : "default";
 	bg = (mc_color_pair->cbg) ? mc_color_pair->cbg : "default";
-
 	SLtt_set_color (mc_color_pair->pair_index, (char *) "", (char *) fg, (char *) bg);
     }
 }
 
 void
-mc_tty_color_set_lib (int color)
+tty_setcolor (int color)
 {
     if (!SLtt_Use_Ansi_Colors)
 	SLsmg_set_color (color);
@@ -173,19 +176,21 @@ mc_tty_color_set_lib (int color)
 	    SLsmg_set_color (A_BOLD);
 	else
 	    SLsmg_set_color ((color & (~A_BOLD)) + 8);
-    } else
+    } else if (color == A_REVERSE)
+	SLsmg_set_color (A_REVERSE);
+    else
 	SLsmg_set_color (color);
 }
 
 /* Set colorpair by index, don't interpret S-Lang "emulated attributes" */
 void
-mc_tty_color_lowlevel_set_lib (int color)
+tty_lowlevel_setcolor (int color)
 {
     SLsmg_set_color (color & 0x7F);
 }
 
 void
-mc_tty_color_set_normal_attrs_lib (void)
+tty_set_normal_attrs (void)
 {
     SLsmg_normal_video ();
 }

@@ -1,6 +1,8 @@
 #ifndef MC__SKIN_H
 #define MC__SKIN_H
 
+#include "../../src/global.h"
+
 #include "../../src/mcconfig/mcconfig.h"
 
 #include "../src/tty/color.h"
@@ -69,14 +71,11 @@
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
-typedef struct mc_skin_struct{
+typedef struct mc_skin_struct {
     gchar *name;
     gchar *description;
-
     mc_config_t *config;
-
     GHashTable *colors;
-
 } mc_skin_t;
 
 /*** global variables defined in .c file *********************************************************/
@@ -86,11 +85,11 @@ extern mc_skin_t mc_skin__default;
 
 /*** declarations of public functions ************************************************************/
 
-void mc_skin_init(void);
-void mc_skin_deinit(void);
+void mc_skin_init (void);
+void mc_skin_deinit (void);
 
-int mc_skin_color_get(const gchar *, const gchar *);
+int mc_skin_color_get (const gchar *, const gchar *);
 
-void mc_skin_lines_parse_ini_file(mc_skin_t *);
+void mc_skin_lines_parse_ini_file (mc_skin_t *);
 
 #endif

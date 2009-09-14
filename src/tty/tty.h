@@ -74,7 +74,6 @@ extern void tty_print_one_hline (void);
 extern void tty_draw_hline (int y, int x, int ch, int len);
 extern void tty_draw_vline (int y, int x, int ch, int len);
 extern void tty_draw_box (int y, int x, int rows, int cols);
-extern void tty_draw_box_slow (int y, int x, int ys, int xs);
 extern void tty_fill_region (int y, int x, int rows, int cols, unsigned char ch);
 
 extern int mc_tty_ugly_frm[];
@@ -106,5 +105,7 @@ extern void tty_beep (void);
 
 extern void tty_refresh (void);
 extern void tty_setup_sigwinch (void (*handler) (int));
+
+extern int  mc_tty_normalize_lines_char(const char *);
 
 #endif			/* MC_TTY_H */

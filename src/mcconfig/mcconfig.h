@@ -49,6 +49,9 @@ gchar **mc_config_get_keys (mc_config_t *, const gchar *, gsize *);
 gchar *mc_config_get_string (mc_config_t *, const gchar *, const gchar *,
 			     const gchar *);
 
+gchar *mc_config_get_string_raw (mc_config_t *, const gchar *, const gchar *,
+			     const gchar *);
+
 gboolean mc_config_get_bool (mc_config_t *, const gchar *, const gchar *,
 			     gboolean);
 

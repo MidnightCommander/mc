@@ -50,66 +50,66 @@
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mc_skin_hardcoded_blackwhite_colors(mc_skin_t *mc_skin)
+mc_skin_hardcoded_blackwhite_colors (mc_skin_t * mc_skin)
 {
-    mc_config_set_string(mc_skin->config, "core", "_default_",  "default;default");
-    mc_config_set_string(mc_skin->config, "core", "selected",  "A_REVERSE");
-    mc_config_set_string(mc_skin->config, "core", "marked",  "A_BOLD");
-    mc_config_set_string(mc_skin->config, "core", "markselect",  "A_BOLD_REVERSE");
-    mc_config_set_string(mc_skin->config, "core", "reverse",  "A_REVERSE");
-    mc_config_set_string(mc_skin->config, "dialog", "_default_",  "A_REVERSE");
-    mc_config_set_string(mc_skin->config, "dialog", "focus",  "A_BOLD");
-    mc_config_set_string(mc_skin->config, "menu", "entry",  "A_REVERSE");
-    mc_config_set_string(mc_skin->config, "menu", "selected",  "A_BOLD");
-    mc_config_set_string(mc_skin->config, "help", "_default_",  "A_REVERSE");
-    mc_config_set_string(mc_skin->config, "help", "italic",  "A_REVERSE");
-    mc_config_set_string(mc_skin->config, "help", "bold",  "A_REVERSE");
-    mc_config_set_string(mc_skin->config, "help", "slink",  "A_BOLD");
-    mc_config_set_string(mc_skin->config, "editor", "bold",  "A_BOLD");
-    mc_config_set_string(mc_skin->config, "editor", "marked",  "A_REVERSE");
-    mc_config_set_string(mc_skin->config, "viewer", "underline",  "A_UNDERLINE");
-    mc_config_set_string(mc_skin->config, "error", "_default_",  "A_BOLD");
-    
+    mc_config_set_string (mc_skin->config, "core", "_default_", "default;default");
+    mc_config_set_string (mc_skin->config, "core", "selected", "A_REVERSE");
+    mc_config_set_string (mc_skin->config, "core", "marked", "A_BOLD");
+    mc_config_set_string (mc_skin->config, "core", "markselect", "A_BOLD_REVERSE");
+    mc_config_set_string (mc_skin->config, "core", "reverse", "A_REVERSE");
+    mc_config_set_string (mc_skin->config, "dialog", "_default_", "A_REVERSE");
+    mc_config_set_string (mc_skin->config, "dialog", "focus", "A_BOLD");
+    mc_config_set_string (mc_skin->config, "menu", "entry", "A_REVERSE");
+    mc_config_set_string (mc_skin->config, "menu", "selected", "A_BOLD");
+    mc_config_set_string (mc_skin->config, "help", "_default_", "A_REVERSE");
+    mc_config_set_string (mc_skin->config, "help", "italic", "A_REVERSE");
+    mc_config_set_string (mc_skin->config, "help", "bold", "A_REVERSE");
+    mc_config_set_string (mc_skin->config, "help", "slink", "A_BOLD");
+    mc_config_set_string (mc_skin->config, "editor", "bold", "A_BOLD");
+    mc_config_set_string (mc_skin->config, "editor", "marked", "A_REVERSE");
+    mc_config_set_string (mc_skin->config, "viewer", "underline", "A_UNDERLINE");
+    mc_config_set_string (mc_skin->config, "error", "_default_", "A_BOLD");
+
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mc_skin_hardcoded_space_lines(mc_skin_t *mc_skin)
+mc_skin_hardcoded_space_lines (mc_skin_t * mc_skin)
 {
-    set_lines("lefttop", " ");
-    set_lines("righttop", " ");
-    set_lines("centertop", " ");
-    set_lines("centerbottom", " ");
-    set_lines("leftbottom", " ");
-    set_lines("rightbottom", " ");
-    set_lines("leftmiddle", " ");
-    set_lines("rightmiddle", " ");
-    set_lines("centermiddle", " ");
-    set_lines("horiz", " ");
-    set_lines("vert", " ");
-    set_lines("thinhoriz", " ");
-    set_lines("thinvert", " ");
+    set_lines ("lefttop", " ");
+    set_lines ("righttop", " ");
+    set_lines ("centertop", " ");
+    set_lines ("centerbottom", " ");
+    set_lines ("leftbottom", " ");
+    set_lines ("rightbottom", " ");
+    set_lines ("leftmiddle", " ");
+    set_lines ("rightmiddle", " ");
+    set_lines ("centermiddle", " ");
+    set_lines ("horiz", " ");
+    set_lines ("vert", " ");
+    set_lines ("thinhoriz", " ");
+    set_lines ("thinvert", " ");
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mc_skin_hardcoded_ugly_lines(mc_skin_t *mc_skin)
+mc_skin_hardcoded_ugly_lines (mc_skin_t * mc_skin)
 {
-    set_lines("lefttop", "+");
-    set_lines("righttop", "+");
-    set_lines("centertop", "-");
-    set_lines("centerbottom", "-");
-    set_lines("leftbottom", "+");
-    set_lines("rightbottom", "+");
-    set_lines("leftmiddle", "|");
-    set_lines("rightmiddle", "|");
-    set_lines("centermiddle", "+");
-    set_lines("horiz", "-");
-    set_lines("vert", "|");
-    set_lines("thinhoriz", "-");
-    set_lines("thinvert", "|");
+    set_lines ("lefttop", "+");
+    set_lines ("righttop", "+");
+    set_lines ("centertop", "-");
+    set_lines ("centerbottom", "-");
+    set_lines ("leftbottom", "+");
+    set_lines ("rightbottom", "+");
+    set_lines ("leftmiddle", "|");
+    set_lines ("rightmiddle", "|");
+    set_lines ("centermiddle", "+");
+    set_lines ("horiz", "-");
+    set_lines ("vert", "|");
+    set_lines ("thinhoriz", "-");
+    set_lines ("thinvert", "|");
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -87,6 +87,7 @@ mc_config_get_string (mc_config_t * mc_config, const gchar * group,
     GIConv conv;
     GString *buffer;
     gchar *ret;
+    const char *_system_codepage = str_detect_termencoding();
 
     if (!mc_config || !group || !param)
 	return def ? g_strdup (def) : NULL;
@@ -102,10 +103,10 @@ mc_config_get_string (mc_config_t * mc_config, const gchar * group,
     if (!ret)
 	ret = def ? g_strdup (def) : NULL;
 
-    if (utf8_display)
+    if (str_isutf8 (_system_codepage))
         return ret;
 
-    conv = str_crt_conv_from ("UTF-8");
+    conv = g_iconv_open (_system_codepage, "UTF-8");
     if (conv == INVALID_CONV)
         return ret;
 
@@ -122,6 +123,31 @@ mc_config_get_string (mc_config_t * mc_config, const gchar * group,
     g_free(ret);
 
     return g_string_free(buffer, FALSE);
+}
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+gchar *
+mc_config_get_string_raw (mc_config_t * mc_config, const gchar * group,
+		      const gchar * param, const gchar * def)
+{
+    gchar *ret;
+
+    if (!mc_config || !group || !param)
+	return def ? g_strdup (def) : NULL;
+
+    if (! mc_config_has_param(mc_config, group, param))
+    {
+	mc_config_set_string (mc_config, group, param, def ? def : "");
+	return def ? g_strdup (def) : NULL;
+    }
+
+    ret = g_key_file_get_string (mc_config->handle, group, param, NULL);
+
+    if (!ret)
+	ret = def ? g_strdup (def) : NULL;
+
+    return ret;
 }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
