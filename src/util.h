@@ -190,7 +190,7 @@ enum compression_type {
 
 /* Looks for ``magic'' bytes at the start of the VFS file to guess the
  * compression type. Side effect: modifies the file position. */
-enum compression_type get_compression_type (int fd);
+enum compression_type get_compression_type (int fd, const char*);
 const char *decompress_extension (int type);
 
 /* Hook functions */

@@ -243,7 +243,7 @@ tar_open_archive_int (struct vfs_class *me, const char *name,
     archive->u.arch.type = TAR_UNKNOWN;
 
     /* Find out the method to handle this tar file */
-    type = get_compression_type (result);
+    type = get_compression_type (result, name);
     mc_lseek (result, 0, SEEK_SET);
     if (type != COMPRESSION_NONE) {
 	char *s;

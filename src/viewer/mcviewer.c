@@ -348,7 +348,7 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
             /* Must be one of those nice files that grow (/proc) */
             mcview_set_datasource_vfs_pipe (view, fd);
         } else {
-            type = get_compression_type (fd);
+            type = get_compression_type (fd, file);
 
             if (view->magic_mode && (type != COMPRESSION_NONE)) {
                 g_free (view->filename);
