@@ -667,7 +667,6 @@ display_total_marked_size (WPanel *panel, int y, int x, gboolean size_only)
 {
     char buffer[BUF_SMALL], b_bytes[BUF_SMALL], *buf;
     int cols;
-    size_t blen;
 
     if (panel->marked <= 0)
 	return;
@@ -687,17 +686,12 @@ display_total_marked_size (WPanel *panel, int y, int x, gboolean size_only)
 		    ngettext("%s in %d file", "%s in %d files", panel->marked),
 		    b_bytes, panel->marked);
 
-    blen = strlen (buf);
-
     /* don't forget spaces around buffer content */
-    if ((int) blen > cols - 2) {
-	buf[cols - 2] = '\0';
-	blen = (size_t) (cols - 2);
-    }
+    buf = (char *) str_trunc (buf, cols - 4);
 
     if (x < 0)
 	/* center in panel */
-	x = (panel->widget.cols - (int) blen) / 2 - 1;
+	x = (panel->widget.cols - str_term_width1 (buf)) / 2 - 1;
 
     /*
      * y == llines (panel) + 2      for mini_info_separator
