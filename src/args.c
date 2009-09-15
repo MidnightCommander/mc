@@ -77,6 +77,9 @@ char *mc_args__last_wd_file = NULL;
 /* when enabled NETCODE, use folowing file as logfile */
 char *mc_args__netfs_logfile = NULL;
 
+/* keymap file */
+char *mc_args__keymap_file = NULL;
+
 /* Debug level*/
 int mc_args__debug_level = 0;
 
@@ -217,6 +220,13 @@ static const GOptionEntry argument_terminal_table[] = {
      &reset_hp_softkeys,
      N_("Resets soft keys on HP terminals"),
      NULL
+    },
+
+    {
+     "keymap", 'K', ARGS_TERM_OPTIONS, G_OPTION_ARG_STRING,
+     &mc_args__keymap_file,
+     N_("Load definitions of key bindings from specified file"),
+     "<file>"
     },
 
     {NULL}
