@@ -49,6 +49,7 @@
 #include "cmd.h"
 #include "file.h"		/* safe_delete */
 #include "keybind.h"		/* lookup_action */
+#include "fileloc.h"
 
 #ifdef USE_VFS
 #include "../vfs/gc.h"
@@ -77,7 +78,6 @@ extern int num_history_items_recorded;
 char *profile_name;		/* .mc/ini */
 char *global_profile_name;	/* mc.lib */
 char *panels_profile_name;	/* .mc/panels.ini */
-char *global_keymap_name;	/* GLOBAL_KEYMAP_FILE */
 
 char *setup_color_string;
 char *term_color_string;
@@ -553,6 +553,154 @@ setup__move_panels_config_into_separate_file(const char*profile)
 
 }
 
+/**
+  Get name of config file.
+
+ \param subdir
+ if not NULL, then config also search into specified subdir
+
+ \param config_file_name
+ If specified filename is relative, then will search in standart patches.
+
+ \return
+ Newly allocated path to config name or NULL if file not found
+
+If config_file_name is a relative path, then search config in stantart pathes */
+static char*
+load_setup_get_full_config_name(const char *subdir, const char *config_file_name)
+{
+    /*
+	TODO: IMHO, in future this function must be placed into mc_config module.
+	      Also, need to rename stupid mc_home and mc_home_alt to mc_sysconfdir and mc_datadir;
+	      home_mc => mc_user_homedir
+    */
+    char *basename, *ret;
+
+    if (config_file_name == NULL)
+	return NULL;
+
+    if (g_path_is_absolute (config_file_name))
+	return g_strdup(config_file_name);
+
+
+    basename = g_path_get_basename(config_file_name);
+    if (basename == NULL)
+	return NULL;
+
+
+    if (subdir)
+	ret = g_build_filename (home_dir, MC_USERCONF_DIR, subdir, basename, NULL);
+    else
+	ret = g_build_filename (home_dir, MC_USERCONF_DIR, basename, NULL);
+
+    if (exist_file(ret)) {
+	g_free(basename);
+	return ret;
+    }
+    g_free(ret);
+
+
+    if (subdir)
+	ret = g_build_filename (mc_home, subdir, basename, NULL);
+    else
+	ret = g_build_filename (mc_home, basename, NULL);
+
+    if (exist_file(ret)) {
+	g_free(basename);
+	return ret;
+    }
+    g_free(ret);
+
+    if (subdir)
+	ret = g_build_filename (mc_home_alt, subdir, basename, NULL);
+    else
+	ret = g_build_filename (mc_home_alt, basename, NULL);
+
+    if (exist_file(ret)) {
+	g_free(basename);
+	return ret;
+    }
+    g_free(ret);
+    g_free(basename);
+    return NULL;
+
+}
+
+/**
+  Create new mc_config object from specified ini-file or
+  append data to existing mc_config object from ini-file
+
+*/
+static void
+load_setup_init_config_from_file(mc_config_t **config, const char *fname)
+{
+    /*
+	TODO: IMHO, in future this function must be placed into mc_config module.
+    */
+    if (exist_file(fname)) {
+	if (*config)
+	    mc_config_read_file( *config, fname);
+	else
+	    *config = mc_config_init(fname);
+    }
+}
+
+
+
+static mc_config_t *
+load_setup_get_keymap_profile_config(void)
+{
+    /*
+	TODO: IMHO, in future this function must be placed into mc_config module.
+    */
+    mc_config_t *keymap_config = NULL ;
+
+    char *fname, *fname2;
+
+    /* 1) /usr/share/mc (mc_home_alt) */
+    fname = g_build_filename (mc_home_alt, GLOBAL_KEYMAP_FILE, NULL);
+    load_setup_init_config_from_file( &keymap_config, fname);
+    g_free(fname);
+
+    /* 2) /etc/mc (mc_home) */
+    fname = g_build_filename (mc_home, GLOBAL_KEYMAP_FILE, NULL);
+    load_setup_init_config_from_file( &keymap_config, fname);
+    g_free(fname);
+
+    /* 3) ~/.mc (home_dir?) */
+    fname = g_build_filename (home_dir, MC_USERCONF_DIR, GLOBAL_KEYMAP_FILE, NULL);
+    load_setup_init_config_from_file( &keymap_config, fname);
+    g_free(fname);
+
+    /* 4) main config; [Midnight Commander] -> keymap*/
+
+    fname2 = mc_config_get_string(mc_main_config, CONFIG_APP_SECTION, "keymap" , GLOBAL_KEYMAP_FILE);
+    fname = load_setup_get_full_config_name(NULL, fname2);
+    if (fname)
+    {
+	load_setup_init_config_from_file( &keymap_config, fname);
+	g_free(fname);
+    }
+    g_free(fname2);
+
+    /* 5) getenv("MC_KEYMAP") */
+    fname = load_setup_get_full_config_name(NULL, g_getenv ("MC_KEYMAP"));
+    if (fname)
+    {
+	load_setup_init_config_from_file( &keymap_config, fname);
+	g_free(fname);
+    }
+
+    /* 6) --keymap=<keymap> */
+    fname = load_setup_get_full_config_name(NULL, mc_args__keymap_file);
+    if (fname)
+    {
+	load_setup_init_config_from_file( &keymap_config, fname);
+	g_free(fname);
+    }
+
+    return keymap_config;
+}
 
 char *
 setup_init (void)
@@ -602,11 +750,6 @@ load_setup (void)
 	global_profile_name = concat_dir_and_file (mc_home_alt, "mc.lib");
     }
 
-    global_keymap_name = concat_dir_and_file (mc_home, GLOBAL_KEYMAP_FILE);
-    if (!exist_file(global_keymap_name)) {
-	g_free (global_keymap_name);
-	global_keymap_name = concat_dir_and_file (mc_home_alt, GLOBAL_KEYMAP_FILE);
-    }
     panels_profile_name = concat_dir_and_file (home_dir, PANELS_PROFILE_NAME);
 
     mc_main_config = mc_config_init(profile);
@@ -708,7 +851,6 @@ load_anon_passwd ()
 
 void done_setup (void)
 {
-    g_free (global_keymap_name);
     g_free (profile_name);
     g_free (global_profile_name);
     g_free(color_terminal_string);
@@ -811,7 +953,6 @@ load_keymap_from_section (const char *section_name, GArray *keymap, mc_config_t 
     while (*profile_keys) {
 	curr_values = values = mc_config_get_string_list (cfg, section_name, *profile_keys, &values_len);
 	action = lookup_action (*profile_keys);
-	mc_log ("section: %s, val: %s, action: %i [%s]\n", section_name, *curr_values, action, *profile_keys);
 	if (action>0) {
 	    if (curr_values){
 	        while (*curr_values){
@@ -844,7 +985,8 @@ load_keymap_defs (void)
      */
     mc_config_t *mc_global_keymap;
 
-    mc_global_keymap = mc_config_init(global_keymap_name);
+    mc_global_keymap = load_setup_get_keymap_profile_config();
+
     if (mc_global_keymap != NULL)
     {
         editor_keymap = g_array_new(TRUE, FALSE, sizeof(global_key_map_t));

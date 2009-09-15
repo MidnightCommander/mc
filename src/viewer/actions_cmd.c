@@ -493,7 +493,6 @@ mcview_handle_key (mcview_t * view, int key)
         for (i = 0; view->plain_map[i].key; i++) {
             if (key == view->plain_map[i].key) {
                 res = mcview_execute_cmd (view, view->plain_map[i].command, key);
-                mc_log ("key: %i, command: %i, res: %i\n", key, view->plain_map[i].command, res);
                 if (res == MSG_HANDLED) {
                     return MSG_HANDLED;
                 }
