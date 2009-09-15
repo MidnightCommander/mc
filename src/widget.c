@@ -290,11 +290,11 @@ button_event (Gpm_Event *event, void *data)
     return MOU_NORMAL;
 }
 
-static int
-button_len (const struct hotkey_t text, unsigned int flags)
+int
+button_get_len (const WButton *b)
 {
-    int ret = hotkey_width (text);
-    switch (flags) {
+    int ret = hotkey_width (b->text);
+    switch (b->flags) {
 	case DEFPUSH_BUTTON:
 	    ret += 6;
 	    break;
@@ -317,13 +317,13 @@ button_new (int y, int x, int action, int flags, const char *text,
 {
     WButton *b = g_new (WButton, 1);
 
-    b->text = parse_hotkey (text);
-    
-    init_widget (&b->widget, y, x, 1, button_len (b->text, flags),
-		 button_callback, button_event);
-    
     b->action = action;
     b->flags  = flags;
+    b->text = parse_hotkey (text);
+
+    init_widget (&b->widget, y, x, 1, button_get_len (b),
+		 button_callback, button_event);
+
     b->selected = 0;
     b->callback = callback;
     widget_want_hotkey (b->widget, 1);
@@ -333,27 +333,21 @@ button_new (int y, int x, int action, int flags, const char *text,
 }
 
 const char *
-button_get_text (WButton *b)
+button_get_text (const WButton *b)
 {
-    if (b->text.hotkey != NULL) 
-        return g_strconcat (b->text.start, "&", b->text.hotkey, 
+    if (b->text.hotkey != NULL)
+        return g_strconcat (b->text.start, "&", b->text.hotkey,
                             b->text.end, NULL);
     else
-        return g_strdup (b->text.start); 
+        return g_strdup (b->text.start);
 }
 
 void
 button_set_text (WButton *b, const char *text)
 {
-/*
-    g_free (b->text);
-    b->text = g_strdup (text);
-    b->widget.cols = button_len (text, b->flags);
-    button_scan_hotkey(b);
-*/
     release_hotkey (b->text);
     b->text = parse_hotkey (text);
-    b->widget.cols = button_len (b->text, b->flags);
+    b->widget.cols = button_get_len (b);
     dlg_redraw (b->widget.parent);
 }
 

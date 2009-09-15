@@ -1,16 +1,16 @@
 /* Some misc dialog boxes for the program.
-   
+
    Copyright (C) 1994, 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004,
    2005, 2006, 2009 Free Software Foundation, Inc.
-   
+
    Authors: 1994, 1995 Miguel de Icaza
             1995 Jakub Jelinek
-   
+
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2 of the License, or
    (at your option) any later version.
-   
+
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -40,14 +40,15 @@
 #include "../src/tty/color.h"		/* INPUT_COLOR */
 #include "../src/tty/key.h"		/* XCTRL and ALT macros  */
 
+#include "../src/mcconfig/mcconfig.h"	/* Load/save user formats */
+
 #include "dialog.h"		/* The nice dialog manager */
 #include "widget.h"		/* The widgets for the nice dialog manager */
 #include "wtools.h"
 #include "setup.h"		/* For profile_name */
-#include "../src/mcconfig/mcconfig.h"	/* Load/save user formats */
 #include "command.h"		/* For cmdline */
 #include "dir.h"
-#include "panel.h"
+#include "panel.h"		/* LIST_TYPES */
 #include "boxes.h"
 #include "main.h"		/* For the confirm_* variables */
 #include "tree.h"
@@ -68,67 +69,51 @@
 #include "../vfs/gc.h"
 #endif
 
-static int DISPLAY_X = 45, DISPLAY_Y = 14;
 
-static Dlg_head *dd;
-static WRadio *my_radio;
-static WInput *user;
-static WInput *status;
-static WCheck *check_status;
-static int current_mode;
-
+static WRadio *display_radio;
+static WInput *display_user_format;
+static WInput *display_mini_status;
+static WCheck *display_check_status;
 static char **displays_status;
-
-/* Controls whether the array strings have been translated */
-static const char *displays [LIST_TYPES] = {
-    N_("&Full file list"),
-    N_("&Brief file list"),
-    N_("&Long file list"),
-    N_("&User defined:")
-};
-
-/* Index in displays[] for "user defined" */
-#define USER_TYPE 3
-
-static int user_hotkey = 'u';
+static int display_user_hotkey = 'u';
 
 static cb_ret_t
-display_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
+display_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 {
     switch (msg) {
     case DLG_UNFOCUS:
-	if (dlg_widget_active (my_radio)) {
-	    assign_text (status, displays_status[my_radio->sel]);
-	    input_set_point (status, 0);
+	if (dlg_widget_active (display_radio)) {
+	    assign_text (display_mini_status, displays_status[display_radio->sel]);
+	    input_set_point (display_mini_status, 0);
 	}
 	return MSG_HANDLED;
 
     case DLG_KEY:
 	if (parm == '\n') {
-	    if (dlg_widget_active (my_radio)) {
-		assign_text (status, displays_status[my_radio->sel]);
+	    if (dlg_widget_active (display_radio)) {
+		assign_text (display_mini_status, displays_status[display_radio->sel]);
 		dlg_stop (h);
 		return MSG_HANDLED;
 	    }
 
-	    if (dlg_widget_active (user)) {
+	    if (dlg_widget_active (display_user_format)) {
 		h->ret_value = B_USER + 6;
 		dlg_stop (h);
 		return MSG_HANDLED;
 	    }
 
-	    if (dlg_widget_active (status)) {
+	    if (dlg_widget_active (display_mini_status)) {
 		h->ret_value = B_USER + 7;
 		dlg_stop (h);
 		return MSG_HANDLED;
 	    }
 	}
 
-	if (g_ascii_tolower (parm) == user_hotkey && dlg_widget_active (user)
-	    && dlg_widget_active (status)) {
-	    my_radio->sel = 3;
-	    dlg_select_widget (my_radio);	/* force redraw */
-	    dlg_select_widget (user);
+	if (g_ascii_tolower (parm) == display_user_hotkey && dlg_widget_active (display_user_format)
+	    && dlg_widget_active (display_mini_status)) {
+	    display_radio->sel = 3;
+	    dlg_select_widget (display_radio);	/* force redraw */
+	    dlg_select_widget (display_user_format);
 	    return MSG_HANDLED;
 	}
 	return MSG_NOT_HANDLED;
@@ -138,94 +123,116 @@ display_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
     }
 }
 
-static void
+static Dlg_head *
 display_init (int radio_sel, char *init_text, int _check_status,
 	      char **_status)
 {
-    static const char *display_title = N_("Listing mode");
-    static gboolean i18n_displays_flag = FALSE;
-    const char *user_mini_status = _("user &Mini status");
-    const char *ok_button = _("&OK");
-    const char *cancel_button = _("&Cancel");
+    int dlg_width = 48, dlg_height = 15;
+    Dlg_head *dd;
 
-    static int button_start = 30;
+    /* Controls whether the array strings have been translated */
+    const char *displays [LIST_TYPES] =
+    {
+	N_("&Full file list"),
+	N_("&Brief file list"),
+	N_("&Long file list"),
+	N_("&User defined:")
+    };
+
+    /* Index in displays[] for "user defined" */
+    const int user_type_idx = 3;
+
+    const char *display_title = N_("Listing mode");
+    const char *user_mini_status = N_("user &Mini status");
+    const char *ok_name = N_("&OK");
+    const char *cancel_name = N_("&Cancel");
+
+    WButton *ok_button, *cancel_button;
+
+    {
+	int i, maxlen = 0;
+	const char *cp;
+	int ok_len, cancel_len;
+
+#ifdef ENABLE_NLS
+	display_title = _(display_title);
+	user_mini_status = _(user_mini_status);
+	ok_name = _(ok_name);
+	cancel_name = _(cancel_name);
+
+	for (i = 0; i < LIST_TYPES; i++)
+	    displays[i] = _(displays[i]);
+#endif
+
+	/* get hotkey of user-defined format string */
+	cp = strchr (displays[user_type_idx], '&');
+	if (cp != NULL && *++cp != '\0')
+	    display_user_hotkey = g_ascii_tolower (*cp);
+
+	/* xpos will be fixed later */
+	ok_button = button_new (dlg_height - 3, 0, B_ENTER, DEFPUSH_BUTTON, ok_name, 0);
+	ok_len = button_get_len (ok_button);
+	cancel_button = button_new (dlg_height - 3, 0, B_CANCEL, NORMAL_BUTTON, cancel_name, 0);
+	cancel_len = button_get_len (cancel_button);
+
+	dlg_width = max (dlg_width, str_term_width1 (display_title) + 10);
+	/* calculate max width of radiobutons */
+	for (i = 0; i < LIST_TYPES; i++)
+	    maxlen = max (maxlen, str_term_width1 (displays[i]));
+	dlg_width = max (dlg_width, maxlen);
+	dlg_width = max (dlg_width, str_term_width1 (user_mini_status) + 13);
+
+	/* buttons */
+	dlg_width = max (dlg_width, ok_len + cancel_len + 8);
+	ok_button->widget.x = dlg_width/3 - ok_len/2;
+	cancel_button->widget.x = dlg_width * 2/3 - cancel_len/2;
+    }
 
     displays_status = _status;
 
-    if (!i18n_displays_flag) {
-	int i, l, maxlen = 0;
-	const char *cp;
-
-	display_title = _(display_title);
-	for (i = 0; i < LIST_TYPES; i++) {
-#ifdef ENABLE_NLS
-	    displays[i] = _(displays[i]);
-#endif
-	    maxlen = max (maxlen, str_term_width1 (displays[i]));
-	}
-
-	l = max (str_term_width1 (ok_button) + 5, str_term_width1 (cancel_button) + 3);
-	DISPLAY_X = max (DISPLAY_X, maxlen + l + 16);
-	DISPLAY_X = max (DISPLAY_X, str_term_width1 (user_mini_status) + 13);
-	DISPLAY_X = max (DISPLAY_X, str_term_width1 (display_title) + 10);
-	button_start = DISPLAY_X - l - 5;
-
-	/* get hotkey of user-defined format string */
-	cp = strchr (displays[USER_TYPE], '&');
-	if (cp != NULL && *++cp != '\0')
-	    user_hotkey = g_ascii_tolower ((gchar) cp[0]);
-
-	i18n_displays_flag = TRUE;
-    }
-
-    dd = create_dlg (0, 0, DISPLAY_Y, DISPLAY_X, dialog_colors,
+    dd = create_dlg (0, 0, dlg_height, dlg_width, dialog_colors,
 		     display_callback, "[Listing Mode...]", display_title,
 		     DLG_CENTER | DLG_REVERSE);
 
-    add_widget (dd,
-		button_new (4, button_start, B_CANCEL, NORMAL_BUTTON,
-			    cancel_button, 0));
+    add_widget (dd, cancel_button);
+    add_widget (dd, ok_button);
 
-    add_widget (dd,
-		button_new (3, button_start, B_ENTER, DEFPUSH_BUTTON,
-			    ok_button, 0));
+    display_mini_status = input_new (10, 8, INPUT_COLOR, dlg_width - 12, _status[radio_sel],
+			    "mini-input", INPUT_COMPLETE_DEFAULT);
+    add_widget (dd, display_mini_status);
+    input_set_point (display_mini_status, 0);
 
-    status =
-	input_new (10, 9, INPUT_COLOR, DISPLAY_X - 14, _status[radio_sel],
-		   "mini-input", INPUT_COMPLETE_DEFAULT);
-    add_widget (dd, status);
-    input_set_point (status, 0);
+    display_check_status = check_new (9, 4, _check_status, user_mini_status);
+    add_widget (dd, display_check_status);
 
-    check_status =
-	check_new (9, 5, _check_status, user_mini_status);
-    add_widget (dd, check_status);
+    display_user_format = input_new (7, 8, INPUT_COLOR, dlg_width - 12, init_text,
+			"user-fmt-input", INPUT_COMPLETE_DEFAULT);
+    add_widget (dd, display_user_format);
+    input_set_point (display_user_format, 0);
 
-    user =
-	input_new (7, 9, INPUT_COLOR, DISPLAY_X - 14, init_text,
-		   "user-fmt-input", INPUT_COMPLETE_DEFAULT);
-    add_widget (dd, user);
-    input_set_point (user, 0);
+    display_radio = radio_new (3, 4, LIST_TYPES, displays);
+    display_radio->sel = display_radio->pos = radio_sel;
+    add_widget (dd, display_radio);
 
-    my_radio = radio_new (3, 5, LIST_TYPES, displays);
-    my_radio->sel = my_radio->pos = current_mode;
-    add_widget (dd, my_radio);
+    return dd;
 }
 
 int
 display_box (WPanel *panel, char **userp, char **minip, int *use_msformat, int num)
 {
-    int result, i;
+    int result = -1;
+    Dlg_head *dd;
     char *section = NULL;
-    const char *p;
+    int i;
 
-    if (!panel) {
-        p = get_nth_panel_name (num);
+    if (panel == NULL) {
+        const char *p = get_nth_panel_name (num);
         panel = g_new (WPanel, 1);
         panel->list_type = list_full;
         panel->user_format = g_strdup (DEFAULT_USER_FORMAT);
         panel->user_mini_status = 0;
-	for (i = 0; i < LIST_TYPES; i++)
-    	    panel->user_status_format[i] = g_strdup (DEFAULT_USER_FORMAT);
+        for (i = 0; i < LIST_TYPES; i++)
+            panel->user_status_format[i] = g_strdup (DEFAULT_USER_FORMAT);
         section = g_strconcat ("Temporal:", p, (char *) NULL);
         if (! mc_config_has_group (mc_main_config, section)) {
             g_free (section);
@@ -235,113 +242,122 @@ display_box (WPanel *panel, char **userp, char **minip, int *use_msformat, int n
         g_free (section);
     }
 
-    current_mode = panel->list_type;
-    display_init (current_mode, panel->user_format, 
+    dd = display_init (panel->list_type, panel->user_format,
 	panel->user_mini_status, panel->user_status_format);
-		  
-    run_dlg (dd);
 
-    result = -1;
-    
-    if (section) {
+    if (run_dlg (dd) != B_CANCEL) {
+	result = display_radio->sel;
+	*userp = g_strdup (display_user_format->buffer);
+	*minip = g_strdup (display_mini_status->buffer);
+	*use_msformat = display_check_status->state & C_BOOL;
+    }
+
+    if (section != NULL) {
         g_free (panel->user_format);
 	for (i = 0; i < LIST_TYPES; i++)
 	   g_free (panel->user_status_format [i]);
         g_free (panel);
     }
-    
-    if (dd->ret_value != B_CANCEL){
-	result = my_radio->sel;
-	*userp = g_strdup (user->buffer);
-	*minip = g_strdup (status->buffer);
-	*use_msformat = check_status->state & C_BOOL;
-    }
+
     destroy_dlg (dd);
 
     return result;
 }
 
-static int SORT_X = 60, SORT_Y = 14;
-
-static const char *sort_orders_names [SORT_TYPES];
-
 sortfn *
 sort_box (sortfn *sort_fn, int *reverse, int *case_sensitive, int *exec_first)
 {
-    int i;
-    sortfn *result = NULL;
-    WCheck *c, *case_sense, *exec_ff;
+    int dlg_width = 40, dlg_height = 15;
 
-    const char *ok_button = _("&OK");
-    const char *cancel_button = _("&Cancel");
-    const char *reverse_label = _("&Reverse");
-    const char *case_label = _("case sensi&tive");
-    const char *sort_title = _("Sort order");
-    const char *exec_label = _("Executable first");
+    char *sort_orders_names [SORT_TYPES];
+    int sort_idx = 0;
 
-    static int i18n_sort_flag = 0, check_pos = 0, button_pos = 0;
+    sortfn *result = sort_fn;
 
-    if (!i18n_sort_flag) {
-	int maxlen = 0;
-	int r, l;
+    {
+	int max_radio = 0, max_check = 0;
+	int ok_len, cancel_len;
+	int i;
 
-	for (i = SORT_TYPES - 1; i >= 0; i--) {
+	QuickWidget quick_widgets[] =
+	{
+	    /* 0 */
+	    QUICK_BUTTON (0, dlg_width, dlg_height - 3, dlg_height, N_("&Cancel"), B_CANCEL, NULL),
+	    /* 1 */
+	    QUICK_BUTTON (0, dlg_width, dlg_height - 3, dlg_height, N_("&OK"), B_ENTER, NULL),
+	    /* 2 */
+	    QUICK_CHECKBOX (0, dlg_width, 5, dlg_height, N_("&Reverse"), reverse),
+	    /* 3 */
+	    QUICK_CHECKBOX (0, dlg_width, 4, dlg_height, N_("Case sensi&tive"), case_sensitive),
+	    /* 4 */
+	    QUICK_CHECKBOX (0, dlg_width, 3, dlg_height, N_("Executable &first"), exec_first),
+	    /* 5 */
+	    QUICK_RADIO (4, dlg_width, 3, dlg_height, SORT_TYPES,
+				    (const char **) sort_orders_names, &sort_idx),
+	    QUICK_END
+	};
+
+	QuickDialog quick_dlg =
+	{
+	    dlg_width, dlg_height, -1, -1,
+	    N_("Sort order"), "[Sort Order...]",
+	    quick_widgets, TRUE
+	};
+
+	for (i = 0; i < SORT_TYPES; i++)
+	    if ((sortfn *) (sort_orders[i].sort_fn) == sort_fn) {
+		sort_idx = i;
+		break;
+	    }
+
 #ifdef ENABLE_NLS
+	quick_dlg.title = _(quick_dlg.title);
+	/* buttons */
+	for (i = 0; i < 2; i++)
+	    quick_widgets[i].u.button.text = _(quick_widgets[i].u.button.text);
+	/* checkboxes */
+	for (i = 2; i < 5; i++)
+	    quick_widgets[i].u.checkbox.text = _(quick_widgets[i].u.checkbox.text);
+	/* radiobuttons */
+	for (i = 0; i < SORT_TYPES; i++)
 	    sort_orders_names[i] = _(sort_orders[i].sort_name);
-#endif
-	    maxlen = max (maxlen, str_term_width1 (sort_orders_names[i]));
-	}
+#else
+	/* radiobuttons */
+	for (i = 0; i < SORT_TYPES; i++)
+	    sort_orders_names[i] = sort_orders[i].sort_name;
+#endif				/* ENABLE_NlS */
 
-	check_pos = maxlen + 9;
-	r = max (str_term_width1 (reverse_label), str_term_width1 (case_label)) + 4;
-	l = max (str_term_width1 (ok_button) + 2, str_term_width1 (cancel_button)) + 4;
+	/* buttons */
+	cancel_len = str_term_width1 (quick_widgets[0].u.button.text) + 4;
+	ok_len = str_term_width1 (quick_widgets[1].u.button.text) + 6;
+	/* checkboxes */
+	for (i = 2; i < 5; i++)
+	    max_check = max (max_check, str_term_width1 (quick_widgets[i].u.checkbox.text) + 4);
+	/* radiobuttons */
+	for (i = 0; i < SORT_TYPES; i++)
+	    max_radio  = max (max_radio, str_term_width1 (sort_orders_names[i]) + 4);
 
-	SORT_X = max (SORT_X, check_pos + max (r, l) + 2);
-	SORT_X = max (SORT_X, str_term_width1 (sort_title) + 6);
+	/* dialog width */
+	dlg_width = max (dlg_width, str_term_width1 (quick_dlg.title) + 8);
+	dlg_width = max (dlg_width, ok_len + cancel_len + 8);
+	dlg_width = max (dlg_width, 2 * max (max_radio, max_check) + 8);
 
-	button_pos = SORT_X - l - 2;
+	/* fix widget and dialog parameters */
+	/* dialog */
+	quick_dlg.xlen = dlg_width;
+	/* widgets */
+	for (i = 0; i < sizeof (quick_widgets)/sizeof (quick_widgets[0]) - 1; i++)
+	    quick_widgets[i].x_divisions = dlg_width;
+	/* buttons */
+	quick_widgets[0].relative_x = dlg_width * 2/3 - cancel_len/2;
+	quick_widgets[1].relative_x = dlg_width/3 - ok_len/2;
+	/* checkboxes */
+	for (i = 2; i < 5; i++)
+	    quick_widgets[i].relative_x = dlg_width/2 + 2;
 
-	i18n_sort_flag = 1;
+	if (quick_dialog (&quick_dlg) != B_CANCEL)
+	    result = (sortfn *) sort_orders[sort_idx].sort_fn;
     }
-
-    for (i = 0; i < SORT_TYPES; i++)
-	if ((sortfn *) (sort_orders[i].sort_fn) == sort_fn) {
-	    current_mode = i;
-	    break;
-	}
-
-    dd = create_dlg (0, 0, SORT_Y, SORT_X, dialog_colors, NULL,
-		     "[Sort Order...]", sort_title, DLG_CENTER | DLG_REVERSE);
-
-    add_widget (dd,
-		button_new (10, button_pos, B_CANCEL, NORMAL_BUTTON,
-			    cancel_button, 0));
-
-    add_widget (dd,
-		button_new (9, button_pos, B_ENTER, DEFPUSH_BUTTON,
-			    ok_button, 0));
-
-    exec_ff = check_new (5, check_pos, *exec_first, exec_label);
-    add_widget (dd, exec_ff);
-    case_sense = check_new (4, check_pos, *case_sensitive, case_label);
-    add_widget (dd, case_sense);
-    c = check_new (3, check_pos, *reverse, reverse_label);
-    add_widget (dd, c);
-
-    my_radio = radio_new (3, 3, SORT_TYPES, sort_orders_names);
-    my_radio->sel = my_radio->pos = current_mode;
-
-    add_widget (dd, my_radio);
-
-    if (run_dlg (dd) == B_CANCEL)
-	result = sort_fn;
-    else {
-	result = (sortfn *) sort_orders[my_radio->sel].sort_fn;
-	*reverse = c->state & C_BOOL;
-	*case_sensitive = case_sense->state & C_BOOL;
-	*exec_first = exec_ff->state & C_BOOL;
-    }
-    destroy_dlg (dd);
 
     return result;
 }
@@ -425,6 +441,7 @@ display_bits_box (void) /* AB:FIXME: test dialog */
     const int DISPX = 46;
 
     int new_meta = 0;
+    int current_mode;
 
     const char *display_bits_str [] =
     {
@@ -450,7 +467,6 @@ display_bits_box (void) /* AB:FIXME: test dialog */
     };
 
     int i;
-    int current_mode;
     int l1, maxlen = 0;
     int ok_len, cancel_len;
 
