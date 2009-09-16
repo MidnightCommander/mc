@@ -28,15 +28,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/types.h>		/* size_t */
+#include <sys/types.h>          /* size_t */
 
 #include "../../src/global.h"
 
 #include "../../src/tty/tty-slang.h"
-#include "../../src/tty/color.h"		/* variables */
+#include "../../src/tty/color.h"        /* variables */
 #include "../../src/tty/color-internal.h"
 
-#include "../../src/setup.h"	/* color_terminal_string */
+#include "../../src/setup.h"    /* color_terminal_string */
 
 static int
 has_colors (gboolean disable, gboolean force)
@@ -44,59 +44,51 @@ has_colors (gboolean disable, gboolean force)
     mc_tty_color_disable = disable;
 
     if (force || (getenv ("COLORTERM") != NULL))
-	SLtt_Use_Ansi_Colors = 1;
+        SLtt_Use_Ansi_Colors = 1;
 
-    if (!mc_tty_color_disable)
-    {
-	const char *terminal = getenv ("TERM");
-	const size_t len = strlen (terminal);
+    if (!mc_tty_color_disable) {
+        const char *terminal = getenv ("TERM");
+        const size_t len = strlen (terminal);
 
-	char *cts = color_terminal_string;
-	char *s;
-	size_t i;
+        char *cts = color_terminal_string;
+        char *s;
+        size_t i;
 
-	/* check color_terminal_string */
-	while (*cts != '\0') {
-	    while (*cts == ' ' || *cts == '\t')
-		cts++;
-	    s = cts;
-	    i = 0;
+        /* check color_terminal_string */
+        while (*cts != '\0') {
+            while (*cts == ' ' || *cts == '\t')
+                cts++;
+            s = cts;
+            i = 0;
 
-	    while (*cts != '\0' && *cts != ',') {
-		cts++;
-		i++;
-	    }
+            while (*cts != '\0' && *cts != ',') {
+                cts++;
+                i++;
+            }
 
-	    if ((i != 0) && (i == len) && (strncmp (s, terminal, i) == 0))
-		SLtt_Use_Ansi_Colors = 1;
+            if ((i != 0) && (i == len) && (strncmp (s, terminal, i) == 0))
+                SLtt_Use_Ansi_Colors = 1;
 
-	    if (*cts == ',')
-	        cts++;
-	}
+            if (*cts == ',')
+                cts++;
+        }
     }
     return SLtt_Use_Ansi_Colors;
 }
 
 static void
-mc_tty_color_pair_init_special (tty_color_pair_t *mc_color_pair,
-				const char *fg1, const char *bg1,
-				const char *fg2, const char *bg2,
-				SLtt_Char_Type mask)
+mc_tty_color_pair_init_special (tty_color_pair_t * mc_color_pair,
+                                const char *fg1, const char *bg1,
+                                const char *fg2, const char *bg2, SLtt_Char_Type mask)
 {
-    if (SLtt_Use_Ansi_Colors != 0)
-    {
-	if (!mc_tty_color_disable)
-	{
-	    SLtt_set_color (mc_color_pair->pair_index, (char *) "", (char *) fg1, (char *) bg1);
-	}
-	else
-	{
-	    SLtt_set_color (mc_color_pair->pair_index, (char *) "", (char *) fg2, (char *) bg2);
-	}
-    }
-    else
-    {
-	SLtt_set_mono (mc_color_pair->pair_index, NULL, mask);
+    if (SLtt_Use_Ansi_Colors != 0) {
+        if (!mc_tty_color_disable) {
+            SLtt_set_color (mc_color_pair->pair_index, (char *) "", (char *) fg1, (char *) bg1);
+        } else {
+            SLtt_set_color (mc_color_pair->pair_index, (char *) "", (char *) fg2, (char *) bg2);
+        }
+    } else {
+        SLtt_set_mono (mc_color_pair->pair_index, NULL, mask);
     }
 }
 
@@ -106,7 +98,7 @@ tty_color_init_lib (gboolean disable, gboolean force)
     /* FIXME: if S-Lang is used, has_colors() must be called regardless
        of whether we are interested in its result */
     if (has_colors (disable, force) && !disable) {
-	use_colors = TRUE;
+        use_colors = TRUE;
     }
 }
 
@@ -116,53 +108,34 @@ tty_color_deinit_lib (void)
 }
 
 void
-tty_color_try_alloc_pair_lib (tty_color_pair_t *mc_color_pair)
+tty_color_try_alloc_pair_lib (tty_color_pair_t * mc_color_pair)
 {
     const char *fg, *bg;
-    if (mc_color_pair->ifg <= (int) SPEC_A_REVERSE)
-    {
-	switch(mc_color_pair->ifg)
-	{
-	case SPEC_A_REVERSE:
-	    mc_tty_color_pair_init_special(
-		    mc_color_pair,
-		    "black", "white",
-		    "black", "lightgray",
-		    SLTT_REV_MASK
-	    );
-	break;
-	case SPEC_A_BOLD:
-	    mc_tty_color_pair_init_special(
-		    mc_color_pair,
-		    "white", "black",
-		    "white", "black",
-		    SLTT_BOLD_MASK
-	    );
-	break;
-	case SPEC_A_BOLD_REVERSE:
+    if (mc_color_pair->ifg <= (int) SPEC_A_REVERSE) {
+        switch (mc_color_pair->ifg) {
+        case SPEC_A_REVERSE:
+            mc_tty_color_pair_init_special (mc_color_pair,
+                                            "black", "white", "black", "lightgray", SLTT_REV_MASK);
+            break;
+        case SPEC_A_BOLD:
+            mc_tty_color_pair_init_special (mc_color_pair,
+                                            "white", "black", "white", "black", SLTT_BOLD_MASK);
+            break;
+        case SPEC_A_BOLD_REVERSE:
 
-	    mc_tty_color_pair_init_special(
-		    mc_color_pair,
-		    "white", "white",
-		    "white", "white",
-		    SLTT_BOLD_MASK | SLTT_REV_MASK
-	    );
-	break;
-	case SPEC_A_UNDERLINE:
-	    mc_tty_color_pair_init_special(
-		    mc_color_pair,
-		    "white", "black",
-		    "white", "black",
-		    SLTT_ULINE_MASK
-	    );
-	break;
-	}
-    }
-    else
-    {
-	fg = (mc_color_pair->cfg) ? mc_color_pair->cfg : "default";
-	bg = (mc_color_pair->cbg) ? mc_color_pair->cbg : "default";
-	SLtt_set_color (mc_color_pair->pair_index, (char *) "", (char *) fg, (char *) bg);
+            mc_tty_color_pair_init_special (mc_color_pair,
+                                            "white", "white",
+                                            "white", "white", SLTT_BOLD_MASK | SLTT_REV_MASK);
+            break;
+        case SPEC_A_UNDERLINE:
+            mc_tty_color_pair_init_special (mc_color_pair,
+                                            "white", "black", "white", "black", SLTT_ULINE_MASK);
+            break;
+        }
+    } else {
+        fg = (mc_color_pair->cfg) ? mc_color_pair->cfg : "default";
+        bg = (mc_color_pair->cbg) ? mc_color_pair->cbg : "default";
+        SLtt_set_color (mc_color_pair->pair_index, (char *) "", (char *) fg, (char *) bg);
     }
 }
 
@@ -170,16 +143,16 @@ void
 tty_setcolor (int color)
 {
     if (!SLtt_Use_Ansi_Colors)
-	SLsmg_set_color (color);
+        SLsmg_set_color (color);
     else if ((color & A_BOLD) != 0) {
-	if (color == A_BOLD)
-	    SLsmg_set_color (A_BOLD);
-	else
-	    SLsmg_set_color ((color & (~A_BOLD)) + 8);
+        if (color == A_BOLD)
+            SLsmg_set_color (A_BOLD);
+        else
+            SLsmg_set_color ((color & (~A_BOLD)) + 8);
     } else if (color == A_REVERSE)
-	SLsmg_set_color (A_REVERSE);
+        SLsmg_set_color (A_REVERSE);
     else
-	SLsmg_set_color (color);
+        SLsmg_set_color (color);
 }
 
 /* Set colorpair by index, don't interpret S-Lang "emulated attributes" */

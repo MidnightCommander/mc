@@ -6,7 +6,7 @@
 #ifndef MC_COLOR_SLANG_H
 #define MC_COLOR_SLANG_H
 
-#include "../../src/tty/tty-slang.h"	/* S-Lang headers */
+#include "../../src/tty/tty-slang.h"    /* S-Lang headers */
 
 enum {
     COLOR_BLACK = 0,
@@ -31,4 +31,4 @@ enum {
 #    define A_NORMAL	0x00
 #endif
 
-#endif				/* MC_COLOR_SLANG_H */
+#endif /* MC_COLOR_SLANG_H */

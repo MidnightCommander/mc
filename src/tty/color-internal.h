@@ -6,7 +6,7 @@
 #ifndef MC_COLOR_INTERNAL_H
 #define MC_COLOR_INTERNAL_H
 
-#include <sys/types.h>			/* size_t */
+#include <sys/types.h>          /* size_t */
 
 #include "../../src/global.h"
 
@@ -14,7 +14,7 @@
 #   include "../../src/tty/tty-slang.h"
 #else
 #   include "../../src/tty/tty-ncurses.h"
-#endif			/* HAVE_SLANG */
+#endif /* HAVE_SLANG */
 
 extern gboolean use_colors;
 extern gboolean mc_tty_color_disable;
@@ -28,8 +28,7 @@ typedef struct mc_color_pair_struct {
     gboolean is_temp;
 } tty_color_pair_t;
 
-typedef enum
-{
+typedef enum {
     SPEC_A_REVERSE		= -100,
     SPEC_A_BOLD			= -101,
     SPEC_A_BOLD_REVERSE		= -102,
@@ -44,4 +43,4 @@ void tty_color_deinit_lib (void);
 
 void tty_color_try_alloc_pair_lib (tty_color_pair_t *);
 
-#endif				/* MC_COLOR_INTERNAL_H */
+#endif /* MC_COLOR_INTERNAL_H */

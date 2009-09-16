@@ -31,7 +31,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/types.h>		/* size_t */
+#include <sys/types.h>          /* size_t */
 
 #include "../../src/global.h"
 
@@ -81,17 +81,22 @@ color_hash_destroy_value (gpointer data)
 static gboolean
 tty_color_free_condition_cb (gpointer key, gpointer value, gpointer user_data)
 {
-    gboolean is_temp_color = (gboolean) user_data;
-    tty_color_pair_t *mc_color_pair = (tty_color_pair_t *) value;
+    gboolean is_temp_color;
+    tty_color_pair_t *mc_color_pair;
+    (void) key;
+
+    is_temp_color = (gboolean) user_data;
+    mc_color_pair = (tty_color_pair_t *) value;
     return (mc_color_pair->is_temp == is_temp_color);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-tty_color_free_all(gboolean is_temp_color)
+tty_color_free_all (gboolean is_temp_color)
 {
-    g_hash_table_foreach_remove (mc_tty_color__hashtable, tty_color_free_condition_cb, (gpointer) is_temp_color);
+    g_hash_table_foreach_remove (mc_tty_color__hashtable, tty_color_free_condition_cb,
+                                 (gpointer) is_temp_color);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -99,11 +104,15 @@ tty_color_free_all(gboolean is_temp_color)
 static gboolean
 tty_color_get_next_cpn_cb (gpointer key, gpointer value, gpointer user_data)
 {
-    int cp = (int) user_data;
-    tty_color_pair_t *mc_color_pair = (tty_color_pair_t *) value;
+    int cp;
+    tty_color_pair_t *mc_color_pair;
+    (void) key;
+
+    cp = (int) user_data;
+    mc_color_pair = (tty_color_pair_t *) value;
 
     if (cp == mc_color_pair->pair_index)
-	return TRUE;
+        return TRUE;
 
     return FALSE;
 }
@@ -111,14 +120,15 @@ tty_color_get_next_cpn_cb (gpointer key, gpointer value, gpointer user_data)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-tty_color_get_next__color_pair_number()
+tty_color_get_next__color_pair_number ()
 {
     int cp_count = g_hash_table_size (mc_tty_color__hashtable);
-    int cp=0;
+    int cp = 0;
 
-    for (cp = 0; cp < cp_count; cp++){
-	if (g_hash_table_find (mc_tty_color__hashtable, tty_color_get_next_cpn_cb, (gpointer) cp) == NULL)
-	    return cp;
+    for (cp = 0; cp < cp_count; cp++) {
+        if (g_hash_table_find (mc_tty_color__hashtable, tty_color_get_next_cpn_cb, (gpointer) cp) ==
+            NULL)
+            return cp;
     }
     return cp;
 }
@@ -132,8 +142,8 @@ tty_init_colors (gboolean disable, gboolean force)
 {
     tty_color_init_lib (disable, force);
     mc_tty_color__hashtable = g_hash_table_new_full (g_str_hash, g_str_equal,
-			       color_hash_destroy_key,
-			       color_hash_destroy_value);
+                                                     color_hash_destroy_key,
+                                                     color_hash_destroy_value);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -166,31 +176,30 @@ tty_try_alloc_color_pair2 (const char *fg, const char *bg, gboolean is_temp_colo
     const char *c_fg, *c_bg;
 
     if (fg == NULL)
-	fg = tty_color_defaults__fg;
+        fg = tty_color_defaults__fg;
 
-    if(bg == NULL)
-{
-	bg = tty_color_defaults__bg;
-}
+    if (bg == NULL) {
+        bg = tty_color_defaults__bg;
+    }
     c_fg = tty_color_get_valid_name (fg);
     c_bg = tty_color_get_valid_name (bg);
 
-    color_pair = g_strdup_printf ("%s.%s",c_fg,c_bg);
+    color_pair = g_strdup_printf ("%s.%s", c_fg, c_bg);
     if (color_pair == NULL)
-	return 0;
+        return 0;
 
-    mc_color_pair = (tty_color_pair_t *) g_hash_table_lookup (mc_tty_color__hashtable, (gpointer) color_pair);
+    mc_color_pair =
+        (tty_color_pair_t *) g_hash_table_lookup (mc_tty_color__hashtable, (gpointer) color_pair);
 
-    if (mc_color_pair != NULL){
-	g_free(color_pair);
-	return mc_color_pair->pair_index;
+    if (mc_color_pair != NULL) {
+        g_free (color_pair);
+        return mc_color_pair->pair_index;
     }
 
     mc_color_pair = g_new0 (tty_color_pair_t, 1);
-    if (mc_color_pair == NULL)
-    {
-	g_free(color_pair);
-	return 0;
+    if (mc_color_pair == NULL) {
+        g_free (color_pair);
+        return 0;
     }
 
     mc_color_pair->is_temp = is_temp_color;
@@ -198,7 +207,7 @@ tty_try_alloc_color_pair2 (const char *fg, const char *bg, gboolean is_temp_colo
     mc_color_pair->cbg = c_bg;
     mc_color_pair->ifg = tty_color_get_index_by_name (c_fg);
     mc_color_pair->ibg = tty_color_get_index_by_name (c_bg);
-    mc_color_pair->pair_index = tty_color_get_next__color_pair_number();
+    mc_color_pair->pair_index = tty_color_get_next__color_pair_number ();
 
     tty_color_try_alloc_pair_lib (mc_color_pair);
 
@@ -218,17 +227,17 @@ tty_try_alloc_color_pair (const char *fg, const char *bg)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-tty_color_free_all_tmp(void)
+tty_color_free_all_tmp (void)
 {
-    tty_color_free_all(TRUE);
+    tty_color_free_all (TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 void
-tty_color_free_all_non_tmp(void)
+tty_color_free_all_non_tmp (void)
 {
-    tty_color_free_all(FALSE);
+    tty_color_free_all (FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -236,8 +245,8 @@ tty_color_free_all_non_tmp(void)
 void
 tty_color_set_defaults (const char *fgcolor, const char *bgcolor)
 {
-    g_free(tty_color_defaults__fg);
-    g_free(tty_color_defaults__fg);
+    g_free (tty_color_defaults__fg);
+    g_free (tty_color_defaults__fg);
 
     tty_color_defaults__fg = (fgcolor != NULL) ? g_strdup (fgcolor) : NULL;
     tty_color_defaults__bg = (bgcolor != NULL) ? g_strdup (bgcolor) : NULL;

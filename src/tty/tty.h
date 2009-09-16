@@ -11,7 +11,7 @@
 #ifndef MC_TTY_H
 #define MC_TTY_H
 
-#include "../../src/global.h"		/* include <glib.h> */
+#include "../../src/global.h"   /* include <glib.h> */
 
 #ifdef HAVE_SLANG
 #   include "../../src/tty/tty-slang.h"
@@ -26,10 +26,10 @@ extern void tty_shutdown (void);
 
 extern gboolean tty_is_slow (void);
 
-extern void tty_start_interrupt_key(void);
-extern void tty_enable_interrupt_key(void);
-extern void tty_disable_interrupt_key(void);
-extern gboolean tty_got_interrupt(void);
+extern void tty_start_interrupt_key (void);
+extern void tty_enable_interrupt_key (void);
+extern void tty_disable_interrupt_key (void);
+extern gboolean tty_got_interrupt (void);
 
 extern void tty_reset_prog_mode (void);
 extern void tty_reset_shell_mode (void);
@@ -57,17 +57,17 @@ extern int tty_lowlevel_getch (void);
 extern int tty_reset_screen (void);
 extern void tty_touch_screen (void);
 
-extern void tty_gotoyx(int y, int x);
-extern void tty_getyx(int *py, int *px);
+extern void tty_gotoyx (int y, int x);
+extern void tty_getyx (int *py, int *px);
 
 extern void tty_set_alt_charset (gboolean alt_charset);
 
 extern void tty_display_8bit (gboolean what);
-extern void tty_print_char(int c);
-extern void tty_print_alt_char(int c);
-extern void tty_print_anychar(int c);
-extern void tty_print_string(const char *s);
-extern void tty_printf(const char *s, ...);
+extern void tty_print_char (int c);
+extern void tty_print_alt_char (int c);
+extern void tty_print_anychar (int c);
+extern void tty_print_string (const char *s);
+extern void tty_printf (const char *s, ...);
 
 extern void tty_print_one_vline (void);
 extern void tty_print_one_hline (void);
@@ -78,7 +78,7 @@ extern void tty_fill_region (int y, int x, int rows, int cols, unsigned char ch)
 
 extern int mc_tty_ugly_frm[];
 
-typedef enum{
+typedef enum {
     MC_TTY_FRM_thinvert,
     MC_TTY_FRM_thinhoriz,
     MC_TTY_FRM_vert,
@@ -106,6 +106,6 @@ extern void tty_beep (void);
 extern void tty_refresh (void);
 extern void tty_setup_sigwinch (void (*handler) (int));
 
-extern int  mc_tty_normalize_lines_char(const char *);
+extern int mc_tty_normalize_lines_char (const char *);
 
-#endif			/* MC_TTY_H */
+#endif /* MC_TTY_H */

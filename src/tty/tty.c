@@ -62,7 +62,7 @@ static volatile sig_atomic_t got_interrupt = 0;
 /*** file scope functions **********************************************/
 
 static void
-sigintr_handler(int signo)
+sigintr_handler (int signo)
 {
     (void) &signo;
     got_interrupt = 1;
@@ -77,7 +77,7 @@ tty_is_slow (void)
 }
 
 extern void
-tty_start_interrupt_key(void)
+tty_start_interrupt_key (void)
 {
     struct sigaction act;
 
@@ -88,7 +88,7 @@ tty_start_interrupt_key(void)
 }
 
 extern void
-tty_enable_interrupt_key(void)
+tty_enable_interrupt_key (void)
 {
     struct sigaction act;
 
@@ -100,7 +100,7 @@ tty_enable_interrupt_key(void)
 }
 
 extern void
-tty_disable_interrupt_key(void)
+tty_disable_interrupt_key (void)
 {
     struct sigaction act;
 
@@ -111,7 +111,7 @@ tty_disable_interrupt_key(void)
 }
 
 extern gboolean
-tty_got_interrupt(void)
+tty_got_interrupt (void)
 {
     gboolean rv;
 

@@ -30,7 +30,7 @@
 #include <config.h>
 
 #ifndef HAVE_TEXTMODE_X11_SUPPORT
-typedef int dummy;		/* C99 forbids empty compilation unit */
+typedef int dummy;              /* C99 forbids empty compilation unit */
 #else
 
 #include <setjmp.h>
@@ -51,14 +51,14 @@ typedef int (*mc_XIOErrorHandler_callback) (Display *);
 
 #ifdef HAVE_GMODULE
 
-static Display * (*func_XOpenDisplay) (_Xconst char *);
+static Display *(*func_XOpenDisplay) (_Xconst char *);
 static int (*func_XCloseDisplay) (Display *);
 static mc_XErrorHandler_callback (*func_XSetErrorHandler)
-	(mc_XErrorHandler_callback);
+  (mc_XErrorHandler_callback);
 static mc_XIOErrorHandler_callback (*func_XSetIOErrorHandler)
-	(mc_XIOErrorHandler_callback);
+  (mc_XIOErrorHandler_callback);
 static Bool (*func_XQueryPointer) (Display *, Window, Window *, Window *,
-	int *, int *, int *, int *, unsigned int *);
+                                   int *, int *, int *, int *, unsigned int *);
 
 static GModule *x11_module;
 
@@ -79,80 +79,80 @@ static gboolean handlers_installed = FALSE;
  * reconnect, as that would violate the X11 protocol. */
 static gboolean lost_connection = FALSE;
 
-static jmp_buf x11_exception; /* FIXME: get a better name */
+static jmp_buf x11_exception;   /* FIXME: get a better name */
 static gboolean longjmp_allowed = FALSE;
 
 /*** file private functions ********************************************/
 
-static int x_io_error_handler (Display *dpy)
+static int
+x_io_error_handler (Display * dpy)
 {
     (void) dpy;
 
     lost_connection = TRUE;
     if (longjmp_allowed) {
-	longjmp_allowed = FALSE;
-	longjmp(x11_exception, 1);
+        longjmp_allowed = FALSE;
+        longjmp (x11_exception, 1);
     }
     return 0;
 }
 
-static int x_error_handler (Display *dpy, XErrorEvent *ee)
+static int
+x_error_handler (Display * dpy, XErrorEvent * ee)
 {
     (void) ee;
     (void) func_XCloseDisplay (dpy);
     return x_io_error_handler (dpy);
 }
 
-static void install_error_handlers(void)
+static void
+install_error_handlers (void)
 {
-    if (handlers_installed) return;
+    if (handlers_installed)
+        return;
 
     (void) func_XSetErrorHandler (x_error_handler);
     (void) func_XSetIOErrorHandler (x_io_error_handler);
     handlers_installed = TRUE;
 }
 
-static gboolean x11_available(void)
+static gboolean
+x11_available (void)
 {
 #ifdef HAVE_GMODULE
     gchar *x11_module_fname;
 
     if (lost_connection)
-	return FALSE;
+        return FALSE;
 
     if (x11_module != NULL)
-	return TRUE;
+        return TRUE;
 
     x11_module_fname = g_module_build_path (NULL, "X11");
     x11_module = g_module_open (x11_module_fname, G_MODULE_BIND_LAZY);
     if (x11_module == NULL)
-	x11_module = g_module_open ("libX11.so.6", G_MODULE_BIND_LAZY);
+        x11_module = g_module_open ("libX11.so.6", G_MODULE_BIND_LAZY);
 
     g_free (x11_module_fname);
 
     if (x11_module == NULL)
-	return FALSE;
+        return FALSE;
 
-    if (!g_module_symbol (x11_module, "XOpenDisplay",
-			(void *) &func_XOpenDisplay))
-	goto cleanup;
-    if (!g_module_symbol (x11_module, "XCloseDisplay",
-			(void *) &func_XCloseDisplay))
-	goto cleanup;
-    if (!g_module_symbol (x11_module, "XQueryPointer",
-			(void *) &func_XQueryPointer))
-	goto cleanup;
-    if (!g_module_symbol (x11_module, "XSetErrorHandler",
-			(void *) &func_XSetErrorHandler))
-	goto cleanup;
-    if (!g_module_symbol (x11_module, "XSetIOErrorHandler",
-			(void *) &func_XSetIOErrorHandler))
-	goto cleanup;
+    if (!g_module_symbol (x11_module, "XOpenDisplay", (void *) &func_XOpenDisplay))
+        goto cleanup;
+    if (!g_module_symbol (x11_module, "XCloseDisplay", (void *) &func_XCloseDisplay))
+        goto cleanup;
+    if (!g_module_symbol (x11_module, "XQueryPointer", (void *) &func_XQueryPointer))
+        goto cleanup;
+    if (!g_module_symbol (x11_module, "XSetErrorHandler", (void *) &func_XSetErrorHandler))
+        goto cleanup;
+    if (!g_module_symbol (x11_module, "XSetIOErrorHandler", (void *) &func_XSetIOErrorHandler))
+        goto cleanup;
 
-    install_error_handlers();
+    install_error_handlers ();
     return TRUE;
 
-cleanup:
+  cleanup:
     func_XOpenDisplay = 0;
     func_XCloseDisplay = 0;
     func_XQueryPointer = 0;
@@ -162,58 +162,61 @@ cleanup:
     x11_module = NULL;
     return FALSE;
 #else
-    install_error_handlers();
+    install_error_handlers ();
     return !(lost_connection);
 #endif
 }
 
 /*** public functions **************************************************/
 
-Display *mc_XOpenDisplay (const char *displayname)
+Display *
+mc_XOpenDisplay (const char *displayname)
 {
     Display *retval;
 
-    if (x11_available()) {
-	if (setjmp(x11_exception) == 0) {
-	    longjmp_allowed = TRUE;
-	    retval = func_XOpenDisplay (displayname);
-	    longjmp_allowed = FALSE;
-	    return retval;
-	}
+    if (x11_available ()) {
+        if (setjmp (x11_exception) == 0) {
+            longjmp_allowed = TRUE;
+            retval = func_XOpenDisplay (displayname);
+            longjmp_allowed = FALSE;
+            return retval;
+        }
     }
     return NULL;
 }
 
-int mc_XCloseDisplay (Display *display)
+int
+mc_XCloseDisplay (Display * display)
 {
     int retval;
 
-    if (x11_available()) {
-	if (setjmp(x11_exception) == 0) {
-	    longjmp_allowed = TRUE;
-	    retval = func_XCloseDisplay (display);
-	    longjmp_allowed = FALSE;
-	    return retval;
-	}
+    if (x11_available ()) {
+        if (setjmp (x11_exception) == 0) {
+            longjmp_allowed = TRUE;
+            retval = func_XCloseDisplay (display);
+            longjmp_allowed = FALSE;
+            return retval;
+        }
     }
     return 0;
 }
 
-Bool mc_XQueryPointer (Display *display, Window win, Window *root_return,
-	Window *child_return, int *root_x_return, int *root_y_return,
-	int *win_x_return, int *win_y_return, unsigned int *mask_return)
+Bool
+mc_XQueryPointer (Display * display, Window win, Window * root_return,
+                  Window * child_return, int *root_x_return, int *root_y_return,
+                  int *win_x_return, int *win_y_return, unsigned int *mask_return)
 {
     Bool retval;
 
-    if (x11_available()) {
-	if (setjmp(x11_exception) == 0) {
-	    longjmp_allowed = TRUE;
-	    retval = func_XQueryPointer (display, win, root_return,
-		child_return, root_x_return, root_y_return,
-		win_x_return, win_y_return, mask_return);
-	    longjmp_allowed = FALSE;
-	    return retval;
-	}
+    if (x11_available ()) {
+        if (setjmp (x11_exception) == 0) {
+            longjmp_allowed = TRUE;
+            retval = func_XQueryPointer (display, win, root_return,
+                                         child_return, root_x_return, root_y_return,
+                                         win_x_return, win_y_return, mask_return);
+            longjmp_allowed = FALSE;
+            return retval;
+        }
     }
     *root_return = None;
     *child_return = None;

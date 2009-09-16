@@ -26,9 +26,9 @@
 
 #include <config.h>
 
-#include <string.h>				/* strcmp */
+#include <string.h>             /* strcmp */
 
-#include "../../src/tty/color.h"		/* colors and attributes */
+#include "../../src/tty/color.h"        /* colors and attributes */
 #include "../../src/tty/color-internal.h"
 
 /*** global variables ****************************************************************************/
@@ -41,12 +41,12 @@ gboolean mc_tty_color_disable;
 
 typedef struct mc_tty_color_table_struct {
     const char *name;
-    int  value;
+    int value;
 } mc_tty_color_table_t;
 
 /*** file scope variables ************************************************************************/
 
-mc_tty_color_table_t const color_table [] = {
+mc_tty_color_table_t const color_table[] = {
     { "black",         COLOR_BLACK   },
     { "gray",          COLOR_BLACK   | A_BOLD },
     { "red",           COLOR_RED     },
@@ -85,9 +85,9 @@ tty_color_get_valid_name (const char *color_name)
     int i;
 
     if (color_name != NULL)
-	for (i = 0; color_table [i].name != NULL; i++)
-	    if (strcmp (color_name, color_table [i].name) == 0)
-		return color_table [i].name;
+        for (i = 0; color_table[i].name != NULL; i++)
+            if (strcmp (color_name, color_table[i].name) == 0)
+                return color_table[i].name;
     return NULL;
 }
 
@@ -99,9 +99,9 @@ tty_color_get_index_by_name (const char *color_name)
     int i;
 
     if (color_name != NULL)
-	for (i = 0; color_table [i].name != NULL; i++)
-	    if (strcmp (color_name, color_table [i].name) == 0)
-		return color_table [i].value;
+        for (i = 0; color_table[i].name != NULL; i++)
+            if (strcmp (color_name, color_table[i].name) == 0)
+                return color_table[i].value;
     return -1;
 }
 

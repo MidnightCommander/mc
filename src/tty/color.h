@@ -12,7 +12,7 @@
 #ifndef MC_COLOR_H
 #define MC_COLOR_H
 
-#include "../../src/global.h"		/* glib.h */
+#include "../../src/global.h"   /* glib.h */
 
 #ifdef HAVE_SLANG
 #   include "../../src/tty/color-slang.h"
@@ -40,4 +40,4 @@ void tty_color_set_defaults (const char *, const char *);
 
 #define ALLOC_COLOR_PAIR_INDEX 1
 
-#endif				/* MC_COLOR_H */
+#endif /* MC_COLOR_H */

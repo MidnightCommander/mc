@@ -23,6 +23,6 @@ extern Display *mc_XOpenDisplay (const char *);
 extern int mc_XCloseDisplay (Display *);
 
 extern Bool mc_XQueryPointer (Display *, Window, Window *, Window *,
-	int *, int *, int *, int *, unsigned int *);
+                              int *, int *, int *, int *, unsigned int *);
 
 #endif

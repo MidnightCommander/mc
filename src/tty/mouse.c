@@ -34,9 +34,9 @@
 #include "../../src/global.h"
 
 #include "../../src/tty/tty.h"
-#include "../../src/tty/tty-internal.h"	/* mouse_enabled */
+#include "../../src/tty/tty-internal.h" /* mouse_enabled */
 #include "../../src/tty/mouse.h"
-#include "../../src/tty/key.h"		/* define sequence */
+#include "../../src/tty/key.h"  /* define sequence */
 
 gboolean mouse_enabled = FALSE;
 const char *xmouse_seq;
@@ -46,7 +46,7 @@ show_mouse_pointer (int x, int y)
 {
 #ifdef HAVE_LIBGPM
     if (use_mouse_p == MOUSE_GPM)
-	Gpm_DrawPointer (x, y, gpm_consolefd);
+        Gpm_DrawPointer (x, y, gpm_consolefd);
 #endif /* HAVE_LIBGPM */
 }
 
@@ -56,17 +56,17 @@ init_mouse (void)
     switch (use_mouse_p) {
 #ifdef HAVE_LIBGPM
     case MOUSE_NONE:
-	use_mouse_p = MOUSE_GPM;
-	break;
+        use_mouse_p = MOUSE_GPM;
+        break;
 #endif /* HAVE_LIBGPM */
 
     case MOUSE_XTERM_NORMAL_TRACKING:
     case MOUSE_XTERM_BUTTON_EVENT_TRACKING:
-	define_sequence (MCKEY_MOUSE, xmouse_seq, MCKEY_NOACTION);
-	break;
+        define_sequence (MCKEY_MOUSE, xmouse_seq, MCKEY_NOACTION);
+        break;
 
     default:
-	break;
+        break;
     }
 
     enable_mouse ();
@@ -76,54 +76,54 @@ void
 enable_mouse (void)
 {
     if (mouse_enabled)
-	return;
+        return;
 
     switch (use_mouse_p) {
 #ifdef HAVE_LIBGPM
     case MOUSE_GPM:
-	{
-	    int mouse_d;
-	    Gpm_Connect conn;
+    {
+        int mouse_d;
+        Gpm_Connect conn;
 
-	    conn.eventMask   = ~GPM_MOVE;
-	    conn.defaultMask = GPM_MOVE;
-	    conn.minMod      = 0;
-	    conn.maxMod      = 0;
+        conn.eventMask = ~GPM_MOVE;
+        conn.defaultMask = GPM_MOVE;
+        conn.minMod = 0;
+        conn.maxMod = 0;
 
-	    mouse_d = Gpm_Open (&conn, 0);
-	    if (mouse_d == -1) {
-		use_mouse_p = MOUSE_NONE;
-	        return;
-	    }
-	    mouse_enabled = 1;
-	}
-	break;
+        mouse_d = Gpm_Open (&conn, 0);
+        if (mouse_d == -1) {
+            use_mouse_p = MOUSE_NONE;
+            return;
+        }
+        mouse_enabled = 1;
+    }
+        break;
 #endif /* HAVE_LIBGPM */
 
     case MOUSE_XTERM_NORMAL_TRACKING:
-	/* save old highlight mouse tracking */
-	printf(ESC_STR "[?1001s");
+        /* save old highlight mouse tracking */
+        printf (ESC_STR "[?1001s");
 
-	/* enable mouse tracking */
-	printf(ESC_STR "[?1000h");
+        /* enable mouse tracking */
+        printf (ESC_STR "[?1000h");
 
-	fflush (stdout);
-	mouse_enabled = TRUE;
-	break;
+        fflush (stdout);
+        mouse_enabled = TRUE;
+        break;
 
     case MOUSE_XTERM_BUTTON_EVENT_TRACKING:
-	/* save old highlight mouse tracking */
-	printf(ESC_STR "[?1001s");
+        /* save old highlight mouse tracking */
+        printf (ESC_STR "[?1001s");
 
-	/* enable mouse tracking */
-	printf(ESC_STR "[?1002h");
+        /* enable mouse tracking */
+        printf (ESC_STR "[?1002h");
 
-	fflush (stdout);
-	mouse_enabled = TRUE;
-	break;
+        fflush (stdout);
+        mouse_enabled = TRUE;
+        break;
 
     default:
-	break;
+        break;
     }
 }
 
@@ -131,35 +131,35 @@ void
 disable_mouse (void)
 {
     if (!mouse_enabled)
-	return;
+        return;
 
     mouse_enabled = FALSE;
 
     switch (use_mouse_p) {
 #ifdef HAVE_LIBGPM
     case MOUSE_GPM:
-	Gpm_Close ();
-	break;
+        Gpm_Close ();
+        break;
 #endif
     case MOUSE_XTERM_NORMAL_TRACKING:
-	/* disable mouse tracking */
-	printf(ESC_STR "[?1000l");
+        /* disable mouse tracking */
+        printf (ESC_STR "[?1000l");
 
-	/* restore old highlight mouse tracking */
-	printf(ESC_STR "[?1001r");
+        /* restore old highlight mouse tracking */
+        printf (ESC_STR "[?1001r");
 
-	fflush (stdout);
-	break;
+        fflush (stdout);
+        break;
     case MOUSE_XTERM_BUTTON_EVENT_TRACKING:
-	/* disable mouse tracking */
-	printf(ESC_STR "[?1002l");
+        /* disable mouse tracking */
+        printf (ESC_STR "[?1002l");
 
-	/* restore old highlight mouse tracking */
-	printf(ESC_STR "[?1001r");
+        /* restore old highlight mouse tracking */
+        printf (ESC_STR "[?1001r");
 
-	fflush (stdout);
-	break;
+        fflush (stdout);
+        break;
     default:
-	break;
+        break;
     }
 }

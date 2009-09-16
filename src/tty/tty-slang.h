@@ -6,7 +6,7 @@
 #    include <slang/slang.h>
 #else
 #    include <slang.h>
-#endif		/* HAVE_SLANG_SLANG_H */
+#endif /* HAVE_SLANG_SLANG_H */
 
 enum {
     KEY_BACKSPACE = 400,
@@ -30,4 +30,4 @@ enum {
 #define COLS		SLtt_Screen_Cols
 #define LINES		SLtt_Screen_Rows
 
-#endif				/* MC_TTY_SLANG_H */
+#endif /* MC_TTY_SLANG_H */

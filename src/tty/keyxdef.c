@@ -44,7 +44,7 @@
 #include "../../src/global.h"
 
 #include "../../src/tty/tty.h"
-#include "../../src/tty/mouse.h" /* required before key.h */
+#include "../../src/tty/mouse.h"        /* required before key.h */
 #include "../../src/tty/key.h"
 
 #if defined (__QNX__) && !defined (__QNXNTO__)
@@ -61,11 +61,11 @@
 
 /* include QNX/term.h (not NCURSES/term.h!) */
 #if __WATCOMC__ > 1000
-    #include <sys/term.h>
+#include <sys/term.h>
 #else
-    #include <term.h>
+#include <term.h>
 #endif
-#include <stdlib.h> /* getenv() */
+#include <stdlib.h>             /* getenv() */
 
 /* fieldname -> index conversion */
 #define __QTISX(_qtisn) \
@@ -73,14 +73,14 @@
 
 /* define the OS/implementation-specific __TK() format */
 #define __TK(_tis,_tcs,_tisx,_qtisn)  __QTISX(_qtisn)
-    
+
 #endif /* __USE_QNX_TI */
-    
+
 #endif /* HAVE_QNX_KEYS */
 
 
 /* {{{ */
-    
+
 /* general key definitions:
  * 
  * format:
@@ -90,7 +90,7 @@
  *   index in the terminfo string table (ncurses),
  *   field name in the QNX terminfo strings struct
  */
-    
+
 #define Key_backspace   __TK("kbs",   "kb",  55, _ky_backspace )
 #define Key_catab       __TK("ktbc",  "ka",  56, _ky_catab )
 #define Key_clear       __TK("kclr",  "kC",  57, _ky_clear )
@@ -247,7 +247,7 @@
 
 /* don't force pre-defining of base keys under QNX */
 #define FORCE_BASE_KEY_DEFS 0
-    
+
 /* OS specific key aliases */
 #define Key_alt_a       Key_clear
 #define Key_alt_b       Key_stab
@@ -279,11 +279,11 @@
 #define Key_ctl_enter   Key_enter
 #define Key_ctl_tab     Key_ctab
 
-#define Key_alt_tab     Key_ctl_tab         /* map ALT-TAB to CTRL-TAB */
-#define Key_alt_enter   Key_ctl_enter       /* map ALT-ENTER to CTRL-ENTER */
+#define Key_alt_tab     Key_ctl_tab     /* map ALT-TAB to CTRL-TAB */
+#define Key_alt_enter   Key_ctl_enter   /* map ALT-ENTER to CTRL-ENTER */
 
 #ifdef __USE_QNX_TI
-    
+
 /* OS/implementation specific key-define struct */
 typedef const struct qnx_key_define_s {
     int mc_code;
@@ -307,70 +307,70 @@ typedef const struct qnx_key_define_s {
 /* general key define table */
 xtra_key_define_t xtra_key_defines[] = {
 #if FORCE_BASE_KEY_DEFS
-    {KEY_BACKSPACE,Key_backspace},
-    {KEY_LEFT,     Key_left     },
-    {KEY_RIGHT,    Key_right    },
-    {KEY_UP,       Key_up       },
-    {KEY_DOWN,     Key_down     },
-    {KEY_NPAGE,    Key_npage    },
-    {KEY_PPAGE,    Key_ppage    },
-    {KEY_HOME,     Key_home     },
-    {KEY_END,      Key_end      },
-    {KEY_DC,       Key_dc       },
-    {KEY_IC,       Key_ic       },
-    {KEY_F(1),     Key_f1       },
-    {KEY_F(2),     Key_f2       },
-    {KEY_F(3),     Key_f3       },
-    {KEY_F(4),     Key_f4       },
-    {KEY_F(5),     Key_f5       },
-    {KEY_F(6),     Key_f6       },
-    {KEY_F(7),     Key_f7       },
-    {KEY_F(8),     Key_f8       },
-    {KEY_F(9),     Key_f9       },
-    {KEY_F(10),    Key_f10      },
-    {KEY_F(11),    Key_f11      },
-    {KEY_F(12),    Key_f12      },
-    {KEY_F(13),    Key_f13      },
-    {KEY_F(14),    Key_f14      },
-    {KEY_F(15),    Key_f15      },
-    {KEY_F(16),    Key_f16      },
-    {KEY_F(17),    Key_f17      },
-    {KEY_F(18),    Key_f18      },
-    {KEY_F(19),    Key_f19      },
-    {KEY_F(20),    Key_f20      },
+    {KEY_BACKSPACE, Key_backspace},
+    {KEY_LEFT, Key_left},
+    {KEY_RIGHT, Key_right},
+    {KEY_UP, Key_up},
+    {KEY_DOWN, Key_down},
+    {KEY_NPAGE, Key_npage},
+    {KEY_PPAGE, Key_ppage},
+    {KEY_HOME, Key_home},
+    {KEY_END, Key_end},
+    {KEY_DC, Key_dc},
+    {KEY_IC, Key_ic},
+    {KEY_F (1), Key_f1},
+    {KEY_F (2), Key_f2},
+    {KEY_F (3), Key_f3},
+    {KEY_F (4), Key_f4},
+    {KEY_F (5), Key_f5},
+    {KEY_F (6), Key_f6},
+    {KEY_F (7), Key_f7},
+    {KEY_F (8), Key_f8},
+    {KEY_F (9), Key_f9},
+    {KEY_F (10), Key_f10},
+    {KEY_F (11), Key_f11},
+    {KEY_F (12), Key_f12},
+    {KEY_F (13), Key_f13},
+    {KEY_F (14), Key_f14},
+    {KEY_F (15), Key_f15},
+    {KEY_F (16), Key_f16},
+    {KEY_F (17), Key_f17},
+    {KEY_F (18), Key_f18},
+    {KEY_F (19), Key_f19},
+    {KEY_F (20), Key_f20},
 #endif
-    {ALT('a'),     Key_alt_a    },
-    {ALT('b'),     Key_alt_b    },
-    {ALT('c'),     Key_alt_c    },
-    {ALT('d'),     Key_alt_d    },
-    {ALT('e'),     Key_alt_e    },
-    {ALT('f'),     Key_alt_f    },
-    {ALT('g'),     Key_alt_g    },
-    {ALT('h'),     Key_alt_h    },
-    {ALT('i'),     Key_alt_i    },
-    {ALT('j'),     Key_alt_j    },
-    {ALT('k'),     Key_alt_k    },
-    {ALT('l'),     Key_alt_l    },
-    {ALT('m'),     Key_alt_m    },
-    {ALT('n'),     Key_alt_n    },
-    {ALT('o'),     Key_alt_o    },
-    {ALT('p'),     Key_alt_p    },
-    {ALT('q'),     Key_alt_q    },
-    {ALT('r'),     Key_alt_r    },
-    {ALT('s'),     Key_alt_s    },
-    {ALT('t'),     Key_alt_t    },
-    {ALT('u'),     Key_alt_u    },
-    {ALT('v'),     Key_alt_v    },
-    {ALT('w'),     Key_alt_w    },
-    {ALT('x'),     Key_alt_x    },
-    {ALT('y'),     Key_alt_y    },
-    {ALT('z'),     Key_alt_z    },
+    {ALT ('a'), Key_alt_a},
+    {ALT ('b'), Key_alt_b},
+    {ALT ('c'), Key_alt_c},
+    {ALT ('d'), Key_alt_d},
+    {ALT ('e'), Key_alt_e},
+    {ALT ('f'), Key_alt_f},
+    {ALT ('g'), Key_alt_g},
+    {ALT ('h'), Key_alt_h},
+    {ALT ('i'), Key_alt_i},
+    {ALT ('j'), Key_alt_j},
+    {ALT ('k'), Key_alt_k},
+    {ALT ('l'), Key_alt_l},
+    {ALT ('m'), Key_alt_m},
+    {ALT ('n'), Key_alt_n},
+    {ALT ('o'), Key_alt_o},
+    {ALT ('p'), Key_alt_p},
+    {ALT ('q'), Key_alt_q},
+    {ALT ('r'), Key_alt_r},
+    {ALT ('s'), Key_alt_s},
+    {ALT ('t'), Key_alt_t},
+    {ALT ('u'), Key_alt_u},
+    {ALT ('v'), Key_alt_v},
+    {ALT ('w'), Key_alt_w},
+    {ALT ('x'), Key_alt_x},
+    {ALT ('y'), Key_alt_y},
+    {ALT ('z'), Key_alt_z},
 
-    {ALT('\n'),    Key_alt_enter},
-    {ALT('\t'),    Key_alt_tab  }
+    {ALT ('\n'), Key_alt_enter},
+    {ALT ('\t'), Key_alt_tab}
 };
 
-#endif  /* xtra_key_define_t */
+#endif /* xtra_key_define_t */
 
 
 #ifdef HAVE_QNX_KEYS
@@ -381,28 +381,25 @@ xtra_key_define_t xtra_key_defines[] = {
 #define __QTISOFFS(_qtisx) (((charoffset*)(&__CT->_strs))[_qtisx])
 #define __QTISSTR(_qtisx)  (&__CT->_strtab[0]+__QTISOFFS(_qtisx))
 
-void load_qnx_key_defines (void)
+void
+load_qnx_key_defines (void)
 {
     static int _qnx_keys_defined = 0;
 
     if (!_qnx_keys_defined) {
-	int idx, str_idx;
-	int term_setup_ok;
+        int idx, str_idx;
+        int term_setup_ok;
 
-        __setupterm(NULL, fileno(stdout), &term_setup_ok);
+        __setupterm (NULL, fileno (stdout), &term_setup_ok);
         if (term_setup_ok != 1)
             return;
 
-        for (idx = 0; 
-             idx < sizeof(xtra_key_defines) / sizeof(xtra_key_defines[0]);
-             idx++) {
+        for (idx = 0; idx < sizeof (xtra_key_defines) / sizeof (xtra_key_defines[0]); idx++) {
             str_idx = xtra_key_defines[idx].str_idx;
-            if (__QTISOFFS(str_idx)) {
-                if (*__QTISSTR(str_idx)) {
-                    define_sequence(
-                        xtra_key_defines[idx].mc_code,
-                        __QTISSTR(str_idx),
-                        MCKEY_NOACTION);
+            if (__QTISOFFS (str_idx)) {
+                if (*__QTISSTR (str_idx)) {
+                    define_sequence (xtra_key_defines[idx].mc_code,
+                                     __QTISSTR (str_idx), MCKEY_NOACTION);
                 }
             }
         }
@@ -416,11 +413,10 @@ void load_qnx_key_defines (void)
 
 
 /* called from key.c/init_key() */
-void load_xtra_key_defines (void)
+void
+load_xtra_key_defines (void)
 {
 #ifdef HAVE_QNX_KEYS
-    load_qnx_key_defines();
+    load_qnx_key_defines ();
 #endif
 }
-
-

@@ -98,10 +98,10 @@ mc_skin_colors_old_transform (const char *old_color, const char **group, const c
                 if (group != NULL)
                     *group = old_colors[index].group;
                 if (key != NULL)
-                   *key = old_colors[index].key;
+                    *key = old_colors[index].key;
                 return TRUE;
             }
-    }
+        }
     return FALSE;
 }
 
