@@ -192,8 +192,9 @@ editcmd_dialog_search_show (WEdit * edit, char **search_text)
 	/* checkboxes */
 	for (i = 3; i < 8; i++)
 	    quick_widgets[i].u.checkbox.text = _(quick_widgets[i].u.checkbox.text);
+	/* label */
+	quick_widgets[10].u.label.text = _(quick_widgets[10].u.label.text);
 #endif
-
 	/* calculate button positions */
 	btn_pos = 7;
 

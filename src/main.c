@@ -1312,6 +1312,7 @@ static void check_codeset()
                     profile_changed = 1;
                 } else {
                     utf8_display = str_isutf8 (_system_codepage);
+                    cp_source = cp_display = _system_codepage;
                 }
             } else {
                 if ( skip_check_codeset ) {
