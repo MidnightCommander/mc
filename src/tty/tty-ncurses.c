@@ -78,27 +78,27 @@ mc_tty_normalize_lines_char (const char *ch)
         const char *line;
         int line_code;
     } const lines_codes[] = {
-        {"┌", ACS_BSSB},
-        {"┐", ACS_BBSS},
-        {"└", ACS_SSBB},
-        {"┘", ACS_SBBS},
-        {"├", ACS_SBSS},
-        {"┤", ACS_SSSB},
-        {"┬", ACS_BSSS},
-        {"┴", ACS_SSBS},
-        {"─", ACS_BSBS},
-        {"│", ACS_SBSB},
-        {"┼", ACS_SSSS},
-        {"╔", ACS_BSSB | A_BOLD},
-        {"╗", ACS_BBSS | A_BOLD},
-        {"╤", ACS_BSSS | A_BOLD},
-        {"╧", ACS_SSBS | A_BOLD},
-        {"╚", ACS_SSBB | A_BOLD},
-        {"╝", ACS_SBBS | A_BOLD},
-        {"╟", ACS_SSSB | A_BOLD},
-        {"╢", ACS_SBSS | A_BOLD},
-        {"═", ACS_BSBS | A_BOLD},
-        {"║", ACS_SBSB | A_BOLD},
+        {"\342\224\214", ACS_LRCORNER}, /* ┌ */
+        {"\342\224\220", ACS_LLCORNER}, /* ┐ */
+        {"\342\224\224", ACS_URCORNER}, /* └ */
+        {"\342\224\230", ACS_ULCORNER}, /* ┘ */
+        {"\342\224\234", ACS_LTEE}, /* ├ */
+        {"\342\224\244", ACS_RTEE}, /* ┤ */
+        {"\342\224\254", ACS_TTEE}, /* ┬ */
+        {"\342\224\264", ACS_BTEE}, /* ┴ */
+        {"\342\224\200", ACS_HLINE}, /* ─ */
+        {"\342\224\202", ACS_VLINE}, /* │ */
+        {"\342\224\274", ACS_PLUS}, /* ┼ */
+        {"\342\225\235", ACS_LRCORNER | A_BOLD}, /* ╔ */
+        {"\342\225\232", ACS_LLCORNER | A_BOLD}, /* ╗ */
+        {"\342\225\227", ACS_URCORNER | A_BOLD}, /* ╚ */
+        {"\342\225\224", ACS_ULCORNER | A_BOLD}, /* ╝ */
+        {"\342\225\237", ACS_LTEE | A_BOLD}, /* ╟ */
+        {"\342\225\242", ACS_RTEE | A_BOLD}, /* ╢ */
+        {"\342\225\244", ACS_TTEE | A_BOLD}, /* ╤ */
+        {"\342\225\247", ACS_BTEE | A_BOLD}, /* ╧ */
+        {"\342\225\220", ACS_HLINE | A_BOLD}, /* ═ */
+        {"\342\225\221", ACS_VLINE | A_BOLD}, /* ║ */
         {NULL, 0}
     };
 
