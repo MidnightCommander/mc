@@ -36,6 +36,14 @@ Colors
 .\"Colors"
 section.
 .TP
+.I \-S arg
+Specify a name of skin in the command line. Technology of skins is
+documented in the
+.\"LINK2"
+Skins\&.
+.\"Skins"
+section.
+.TP
 .I \-d, \-\-nomouse
 Disable mouse support.
 .TP
@@ -253,7 +261,7 @@ Thus C\-f would be: hold the Control key and type f.
 .B Alt\-<chr>
 means hold the Meta or Alt key down while typing <chr>.
 If there is no Meta or Alt key, type
-.IR ESC , 
+.IR ESC ,
 release it, then type the character <chr>.
 .TP
 .B S\-<chr>
@@ -299,7 +307,7 @@ the input lines in the query dialogs.
 .\"NODE "  Miscellaneous Keys"
 .SH "  Miscellaneous Keys"
 Here are some keys which don't fall into any of the other categories:
-.TP 
+.TP
 .B Enter
 if there is some text in the command line (the one at the bottom of
 the panels), then that command is executed. If there is no text in the
@@ -324,7 +332,7 @@ run the
 Chmod
 .\"Chmod"
 command on a file or on the tagged files.
-.TP 
+.TP
 .B C\-x o
 run the
 .\"LINK2"
@@ -407,14 +415,14 @@ selection bar moves from the old current panel to the new current
 panel.
 .TP
 .B Insert
-to tag files you may use the Insert key (the kich1 terminfo sequence). 
+to tag files you may use the Insert key (the kich1 terminfo sequence).
 To untag files, just retag a tagged file.
 .TP
 .B C\-t
 to change charset of panel you may use C\-t (Control\-t).
 Recoding is made from selected codepage into system codepage. To
 cancel the recoding you may select "directory up" (..) in active panel.
-To cancel the charsets in all directories, select "No translation " in 
+To cancel the charsets in all directories, select "No translation " in
 the dialog of encodings.
 .TP
 .B Alt\-g, Alt\-r, Alt\-j
@@ -978,7 +986,7 @@ if the use_internal_edit option is on.
 .PP
 Press F5 to pop up an input dialog to copy the currently selected file (or
 the tagged files, if there is at least one file tagged) to the
-directory/filename you specify in the input dialog.  The destination 
+directory/filename you specify in the input dialog.  The destination
 defaults to the directory in the non\-selected panel. During this
 process, you can press C\-c or ESC to abort the operation. For details
 about source mask (which will be usually either * or ^\\(.*\\)$ depending
@@ -1033,7 +1041,7 @@ confusion that can be caused by hard links.
 .PP
 Press F6 to pop up an input dialog to copy the currently selected file (or
 the tagged files, if there is at least one file tagged) to the
-directory/filename you specify in the input dialog.  The destination 
+directory/filename you specify in the input dialog.  The destination
 defaults to the directory in the non\-selected panel. For more details
 look at Copy (F5) operation above, most of the things are quite similar.
 .PP
@@ -1853,7 +1861,6 @@ according to rules described in /etc/mc/filehighlight.ini file. See
 Filenames Highlight
 .\"Filenames Highlight"
 for more info.
-
 .PP
 If the
 .I Show Mini\-Status
@@ -1956,7 +1963,7 @@ a valid e\-mail address.  On the other hand, you probably don't want to
 give your real e\-mail address to untrusted sites, especially if you are
 not using spam filtering.
 .PP
-ftpfs keeps the directory listing it fetches from a FTP server in a cache. 
+ftpfs keeps the directory listing it fetches from a FTP server in a cache.
 The cache expire time is configurable with the
 .I ftpfs directory cache timeout
 option.  A low value for this option may slow down every operation on
@@ -2358,7 +2365,7 @@ directory or whether would you like to copy their content.
 .PP
 determines the behavior when the source directory is about to be copied,
 but the target directory already exists.  The default action is to copy
-the contents of the source directory into the target directory. 
+the contents of the source directory into the target directory.
 Enabling this option causes copying the source directory itself into the
 target directory.
 .PP
@@ -2586,7 +2593,7 @@ Extension File Edit section
 .\"NODE "Internal File Editor"
 .SH "Internal File Editor"
 The internal file editor is a full\-featured full screen editor.  It can
-edit files up to 64 megabytes.  It is possible to edit binary files. 
+edit files up to 64 megabytes.  It is possible to edit binary files.
 The internal file editor is invoked using
 .B F4
 if the
@@ -3101,7 +3108,7 @@ The colors are optional, and the keywords are: normal, selected, marked,
 markselect, errors, input, reverse, gauge.  Menu colors are: menu,
 menusel, menuhot, menuhotsel.  Dialog colors are: dnormal, dfocus,
 dhotnormal, dhotfocus.  Help colors are: helpnormal, helpitalic,
-helpbold, helplink, helpslink.  Viewer color is: viewunderline. Editor 
+helpbold, helplink, helpslink.  Viewer color is: viewunderline. Editor
 colors are: editnormal, editbold, editmarked.
 .PP
 .I input
@@ -3150,13 +3157,347 @@ used for background color. Example:
 base_color=normal=white,default:marked=magenta,default
 .fi
 
+.\"NODE "Skins"
+.SH "Skins"
+You can change the appearance of Midhight Commander.
+To do this, you must specify a file that contain descriptions of colors
+and lines to draw boxes. Redefining of the colors is entirely compatible
+with the assignment of colors, as described in Section
+.\"LINK2"
+Colors\&.
+.\"Colors"
+.PP
+A skin\-file is searched on the following algorithm (to the first one found):
+.IP
+.br
+1) command line option
+.BR \-S
+.BR \<skin\>
+or
+.BR \-\-skin=\<skin\>
+.br
+2) Environment variable
+.BR MC_SKIN
+.br
+3) In config file parameter
+.BR skin
+in section
+.BR \[Midhight
+.BR Commander\]
+.br
+4) File
+.BR /etc/mc/skins/default.ini
+.br
+5) File
+.BR @prefix@/share/mc/skins/default.ini
+
+.PP
+Command line option, environment variable and parameter in config file may
+contain the absolute path to the skin\-file (with the extension \.ini
+or without it). Search of skin\-file will occur in (to the first one found):
+.IP
+1)
+.BR ~/.mc/skins/
+.br
+2)
+.BR /etc/mc/skins/
+.br
+3)
+.BR @prefix@/share/mc/skins/
+.br
+
+.PP
+For getting extended info, refer to:
+.IP
+.\"LINK2"
+Description of section and parameters
+.\"Skins sections"
+.br
+.\"LINK2"
+Color pair definitions
+.\"Skins colors"
+.br
+.\"LINK2"
+Draw lines
+.\"Skins lines"
+.br
+.\"LINK2"
+Compability
+.\"Skins oldcolors"
+.br
+
+.\"NODE "  Skins sections"
+.SH "  Description of section and parameters"
+
+Section
+.BR [skin]
+contain metainfo for skin\-file. Paramter
+.I description
+contain short text about skin.
+
+.PP
+Section
+.BR [filehighlight]
+contain descriptions of color pairs for filenames highlighting.
+Name of parameters must be equal to names of sections into
+filehighlight.ini file.
+See
+.\"LINK2"
+Filenames Highlight
+.\"Filenames Highlight"
+for getting more info.
+
+.PP
+Section
+.BR [core]
+describes the elements that are used everywhere.
+.TP
+.I _default_
+Default color pair. Used in all other sections if they not contain
+color definitions
+.TP
+.I selected
+cursor
+.TP
+.I marked
+selected data
+.TP
+.I markselect
+cursor on selected data
+.TP
+.I gauge
+color of the filled part of the progress bar
+.TP
+.I input
+color of input lines used in query dialogs.
+.TP
+.I reverse
+reverse color
+
+.PP
+Section
+.BR [dialog]
+describes the elements that are placed on dialog windows (except error dialogs).
+.TP
+.I _default_
+Default color for this section. Used [core]._default_ if not specified
+.TP
+.I dfocus
+Color of active element (in focus)
+.TP
+.I dhotnormal
+Color of hotkeys
+.TP
+.I dhotfocus
+Color of hotkeys in focused element
+
+.PP
+Section
+.BR [error]
+describes the elements that are placed on error dialog windows
+.TP
+.I _default_
+Default color for this section. Used [core]._default_ if not specified
+.TP
+.I errdhotnormal
+Color of hotkeys
+.TP
+.I errdhotfocus
+Color of hotkeys in focused element
+
+.PP
+Section
+.BR [menu]
+describes the elements that are placed on menu. This section describes
+system menu (called by F9) and user-defined menus (called by F2 in panels
+and by F11 in editor).
+.TP
+.I _default_
+Default color for this section. Used [core]._default_ if not specified
+.TP
+.I entry
+Color of menu items
+.TP
+.I menuhot
+Color of menu hotkeys
+.TP
+.I menusel
+Color of active menu item (in focus)
+.TP
+.I menuhotsel
+Color of menu hotkeys in focused menu item
+
+.PP
+Section
+.BR [help]
+describes the elements that are placed on help window.
+.TP
+.I _default_
+Default color for this section. Used [core]._default_ if not specified
+.TP
+.I helpitalic
+Color pair for element with
+.BR italic
+attribute
+.TP
+.I helpbold
+Color pair for element with
+.BR bold
+attribute
+.TP
+.I helplink
+Color of links
+.TP
+.I helpslink
+Color of active link (on focus)
+
+.PP
+Section
+.BR [editor]
+describes the colors of elements plased in editor.
+.TP
+.I _default_
+Default color for this section. Used [core]._default_ if not specified
+.TP
+.I editbold
+Color pair for element with
+.BR bold
+attribute
+.TP
+.I editmarked
+Color of selected text
+.TP
+.I editwhitespace
+Color of tabs and trailing spaces highlighting
+.TP
+.I linestate
+Color for line state area
+
+.PP
+Section
+.BR [viewer]
+describes the colors of elements plased in viewer.
+.TP
+.I viewunderline
+Color pair for element with
+.BR underline
+attribute
+
+.\"NODE "  Skins colors"
+.SH "  Color pair definitions"
+Any parameter in skin\-file contain definition of color pair.
+.PP
+Color pairs described as two color separated by ';'. First color
+sets the foreground color, second color sets background color.
+One of the colors may be omitted, in this case color will be
+taken from  default color pair (global color pair  or
+from default color pair of this section).
+.PP
+Example:
+.br
+.nf
+[core]
+    # green on black
+    _default_=green;black
+    # green(default)  on blue
+    selected=;blue
+    # yellow on black(default)
+    marked=yellow;
+.fi
+
+.PP
+Possible colors (names) described in
+.\"LINK2"
+Colors\&.
+.\"Colors"
+section.
+
+.\"NODE "  Skins lines"
+.SH "  Draw lines"
+Lines sets in section
+.BR [Lines]
+into skin\-file. By default used single lines, but you may redefine
+to usage of any utf\-8 symbols (like to lines, for example).
+.PP
+.I WARNING!!!
+When you build Midnight Commander with the Ncurses screen library
+usage of drawing lines is limited!
+Possible only drawing a single lines.
+For all questions and comments please contact the developers of Ncurses.
+
+.PP
+Descriptions of parameters
+.BR [Lines] :
+.TP
+.I lefttop
+left-top line fragment.
+.TP
+.I righttop
+right-top line fragment.
+.TP
+.I centertop
+down branch of horizontal line
+.TP
+.I centerbottom
+up branch of horizontal line
+.TP
+.I leftbottom
+left-bottom line fragment
+.TP
+.I rightbottom
+right-bottom line fragment
+.TP
+.I leftmiddle
+right branch of vertical line
+.TP
+.I rightmiddle
+left branch of vertical line
+.TP
+.I centermiddle
+cross of lines
+.TP
+.I horiz
+horizontal line
+.TP
+.I vert
+vertical line
+.TP
+.I thinhoriz
+thin horizontal line
+.TP
+.I thinvert
+thin vertical line
+
+
+.\"NODE "  Skins oldcolors"
+.SH "  Compability"
+
+Appointment of color  by skin\-files fully compatible with
+the appointment of the colors described in
+.\"LINK2"
+Colors\&.
+.\"Colors"
+section.
+.PP
+In this case, reassignment of colors has priority over the skin files and is
+complementary.
+
 .\"NODE "Filenames Highlight"
 .SH "Filenames Highlight"
-Rules of filenames highlight placed in /etc/mc/filehighlight.ini file.
+Section [filehighlight] from current skin\-file contain key names as
+highlight groups and values as color pairs. Color pairs is documented
+into
+.\"LINK2"
+Skins
+.\"Skins"
+section.
 .PP
-Main section [filehighlight] contain key names as highlight groups and values as color pairs.
-Color pairs described as 'foreground;background'. 'background' may be omited.
-Other sections describe filegroup of highlight. Keys in these groups:
+Rules of filenames highlight placed in /etc/mc/filehighlight.ini file
+(~/.mc/filehighlight.ini).
+Name of section in this file must be equal to parameters names into
+[filehighlight] section (in current skin\-file)
+.PP
+Keys in these groups:
 .TP
 .I type
 file type. if present, all other option ignored
@@ -3185,6 +3526,7 @@ list of extensions of files. Separated by ';' sign.
   \- SPECIAL_FIFO
   \- SPECIAL_DOOR
 .fi
+.PP
 
 .\"NODE "Special Settings"
 .SH "Special Settings"
@@ -3327,7 +3669,7 @@ insert=\\e[Op
 .fi
 
 .PP
-Also now you can use 
+Also now you can use
 .I extended learn keys.
 For example:
 
