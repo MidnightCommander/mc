@@ -198,8 +198,6 @@ typedef struct mcview_nroff_struct {
 /*** declarations of public functions **********************************/
 
 /* actions_cmd.c:  */
-extern const global_key_map_t default_keymap[];
-extern const global_key_map_t default_hex_keymap[];
 cb_ret_t mcview_callback (Widget *, widget_msg_t, int);
 cb_ret_t mcview_dialog_callback (Dlg_head *, dlg_msg_t, int);
 void mcview_help_cmd (void);
