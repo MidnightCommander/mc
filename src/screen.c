@@ -109,43 +109,6 @@ Hook *select_file_hook = 0;
 
 const global_key_map_t *panel_map;
 
-const global_key_map_t default_panel_keymap[] = {
-
-    { ALT('o'),         CK_PanelChdirOtherPanel },
-    { ALT('l'),         CK_PanelChdirToReadlink },
-    { KEY_F(15),        CK_PanelCmdCopyLocal },
-    { KEY_F(18),        CK_PanelCmdDeleteLocal },
-    { KEY_ENTER,        CK_PanelCmdDoEnter },
-    { '\n',             CK_PanelCmdDoEnter },
-    { KEY_F(14),        CK_PanelCmdEditNew },
-    { KEY_F(16),        CK_PanelCmdRenameLocal },
-    { ALT('*'),         CK_PanelCmdReverseSelection },
-    { KEY_KP_ADD,       CK_PanelCmdSelect },
-    { KEY_KP_SUBTRACT,  CK_PanelCmdUnselect },
-    { KEY_F(13),        CK_PanelCmdViewSimple },
-    { KEY_M_CTRL | KEY_NPAGE, CK_PanelCtrlNextPage },
-    { KEY_M_CTRL | KEY_PPAGE, CK_PanelCtrlPrevPage },
-    { ALT('H'),         CK_PanelDirectoryHistoryList },
-    { ALT('u'),         CK_PanelDirectoryHistoryNext },
-    { ALT('y'),         CK_PanelDirectoryHistoryPrev },
-    { ALT('j'),         CK_PanelGotoBottomFile },
-    { ALT('r'),         CK_PanelGotoMiddleFile },
-    { ALT('g'),         CK_PanelGotoTopFile },
-    { KEY_IC,           CK_PanelMarkFile },
-    { KEY_UP,           CK_PanelMoveUp },
-    { KEY_DOWN,         CK_PanelMoveDown },
-    { KEY_LEFT,         CK_PanelMoveLeft },
-    { KEY_RIGHT,        CK_PanelMoveRight },
-    { KEY_END,          CK_PanelMoveEnd },
-    { KEY_HOME,         CK_PanelMoveHome },
-    { KEY_NPAGE,        CK_PanelNextPage },
-    { KEY_PPAGE,        CK_PanelPrevPage },
-    { XCTRL('t'),       CK_PanelSetPanelEncoding },
-    { XCTRL('s'),       CK_PanelStartSearch },
-    { ALT('i'),         CK_PanelSyncOtherPanel },
-    { 0, 0 }
-};
-
 static cb_ret_t panel_callback (Widget *, widget_msg_t msg, int parm);
 static int panel_event (Gpm_Event *event, void *);
 static void paint_frame (WPanel *panel);

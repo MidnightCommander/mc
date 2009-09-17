@@ -315,61 +315,6 @@ GArray *widget_keymap = NULL;
 const global_key_map_t *main_map;
 const global_key_map_t *main_x_map;
 
-static const global_key_map_t default_main_map[] = {
-    {KEY_F (19), CK_MenuLastSelectedCmd},
-    {KEY_F (20), CK_QuietQuitCmd},
-    {XCTRL ('@'), CK_SingleDirsizeCmd},
-    /* Copy useful information to the command line */
-    {ALT ('a'), CK_CopyCurrentPathname},
-    {ALT ('A'), CK_CopyOtherPathname},
-    {ALT ('c'), CK_QuickCdCmd},
-    /* To access the directory hotlist */
-    {XCTRL ('\\'), CK_QuickChdirCmd},
-    /* Suspend */
-    {XCTRL ('z'), CK_SuspendCmd},
-    /* The filtered view command */
-    {ALT ('!'), CK_FilteredViewCmd},
-    /* Find file */
-    {ALT ('?'), CK_FindCmd},
-    /* Panel refresh */
-    {XCTRL ('r'), CK_RereadCmd},
-    /* Toggle listing between long, user defined and full formats */
-    {ALT ('t'), CK_ToggleListingCmd},
-    /* Swap panels */
-    {XCTRL ('u'), CK_SwapCmd},
-    /* View output */
-    {XCTRL ('o'), CK_ShowCommandLine},
-    {XCTRL ('x'), CK_StartExtMap1 },
-    { 0, 0 }
-};
-
-static const global_key_map_t default_main_x_map[] = {
-    {XCTRL ('c'), CK_QuitCmd},
-    {'d', CK_CompareDirsCmd},
-#ifdef USE_VFS
-    {'a', CK_ReselectVfs},
-#endif				/* USE_VFS */
-    {'p', CK_CopyCurrentPathname},
-    {XCTRL ('p'), CK_CopyOtherPathname},
-    {'t', CK_CopyCurrentTagged},
-    {XCTRL ('t'), CK_CopyCurrentReadlink},
-    {'c', CK_ChmodCmd},
-    {'o', CK_ChownCmd},
-    {'r', CK_CopyCurrentReadlink},
-    {XCTRL ('r'), CK_CopyOtherReadlink},
-    {'l', CK_LinkCmd},
-    {'s', CK_SymlinkCmd},
-    {XCTRL ('s'), CK_EditSymlinkCmd},
-    {'i', CK_InfoCmd},
-    {'q', CK_QuickViewCmd},
-    {'h', CK_AddHotlist},
-    {'!', CK_ExternalPanelize},
-#ifdef WITH_BACKGROUND
-    {'j', CK_JobsCmd},
-#endif				/* WITH_BACKGROUND */
-    {0, 0}
-};
-
 static void
 reload_panelized (WPanel *panel)
 {

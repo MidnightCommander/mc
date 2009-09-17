@@ -28,3 +28,17 @@ int lookup_action (char *keyname);
 void keybind_cmd_bind(GArray *keymap, char *keybind, int action);
 
 #endif					/* MC_KEYBIND_H */
+
+/* viewer/actions_cmd.c */
+extern const global_key_map_t default_viewer_keymap[];
+extern const global_key_map_t default_viewer_hex_keymap[];
+
+/* screen.c */
+extern const global_key_map_t default_panel_keymap[];
+
+/* widget.c */
+extern const global_key_map_t default_widget_keymap[];
+
+/* main.c */
+extern const global_key_map_t default_main_map[];
+extern const global_key_map_t default_main_x_map[];

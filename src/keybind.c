@@ -1,33 +1,25 @@
-/* File management GUI for the text mode edition
- *
- * Copyright (C) 1994, 1995, 1996, 1998, 1999, 2000, 2001, 2002, 2003,
- * 2004, 2005, 2006, 2007, 2009 Free Software Foundation, Inc.
- *
- * Written by:    2005        Vitja Makarov
- *                2009        Ilia Maslakov
- *
- * The copy code was based in GNU's cp, and was written by:
- * Torbjorn Granlund, David MacKenzie, and Jim Meyering.
- *
- * The move code was based in GNU's mv, and was written by:
- * Mike Parker and David MacKenzie.
- *
- * Janne Kukonlehto added much error recovery to them for being used
- * in an interactive program.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+/*
+    Copyright (C) 2009 The Free Software Foundation, Inc.
+
+    Written by:    2005        Vitja Makarov
+                   2009        Ilia Maslakov
+
+    This file is part of the Midnight Commander.
+
+    The Midnight Commander is free software; you can redistribute it
+    and/or modify it under the terms of the GNU General Public License as
+    published by the Free Software Foundation; either version 2 of the
+    License, or (at your option) any later version.
+
+    The Midnight Commander is distributed in the hope that it will be
+    useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+    of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+    MA 02110-1301, USA.
  */
 
 #include <config.h>
@@ -335,6 +327,182 @@ static const name_key_map_t command_names[] = {
 
     { NULL,                                0 }
 };
+
+/*** global variables ****************************************************************************/
+
+/* viewer/actions_cmd.c */
+const global_key_map_t default_viewer_keymap[] = {
+
+    { '?',              CK_ViewSearch },
+    { '/',              CK_ViewSearch },
+    { XCTRL('r'),       CK_ViewContinueSearch },
+    { XCTRL('s'),       CK_ViewContinueSearch },
+    { KEY_F (17),       CK_ViewContinueSearch },
+    { ALT('r'),         CK_ViewToggleRuler  },
+
+    { KEY_HOME,         CK_ViewMoveToBol },
+    { KEY_END,          CK_ViewMoveToEol },
+
+    { 'h',              CK_ViewMoveLeft },
+    { KEY_LEFT,         CK_ViewMoveLeft },
+
+    { 'l',              CK_ViewMoveRight },
+    { KEY_RIGHT,        CK_ViewMoveRight },
+
+    { 'k',              CK_ViewMoveUp },
+    { 'y',              CK_ViewMoveUp },
+    { KEY_IC,           CK_ViewMoveUp },
+    { KEY_UP,           CK_ViewMoveUp },
+
+    { 'j',              CK_ViewMoveDown },
+    { 'e',              CK_ViewMoveDown },
+    { KEY_DOWN,         CK_ViewMoveDown },
+    { KEY_DC,           CK_ViewMoveDown },
+
+
+    { ' ',              CK_ViewMovePgDn },
+    { 'f',              CK_ViewMovePgDn },
+    { KEY_NPAGE,        CK_ViewMovePgDn },
+
+    { 'b',              CK_ViewMovePgUp },
+    { KEY_PPAGE,        CK_ViewMovePgUp },
+
+    { 'd',              CK_ViewMoveHalfPgDn },
+
+    { 'u',              CK_ViewMoveHalfPgUp },
+
+    { 'm',              CK_ViewGotoBookmark },
+    { 'r',              CK_ViewNewBookmark },
+
+    { XCTRL ('f'),      CK_ViewNextFile },
+    { XCTRL ('b'),      CK_ViewPrevFile },
+
+    { 'q',              CK_ViewQuit },
+    { XCTRL ('g'),      CK_ViewQuit },
+    { ESC_CHAR,         CK_ViewQuit },
+
+    { XCTRL ('t'),      CK_SelectCodepage },
+    { XCTRL('o'),       CK_ShowCommandLine },
+    { 0, 0 }
+};
+
+const global_key_map_t default_viewer_hex_keymap[] = {
+
+    { '\t',             CK_HexViewToggleNavigationMode },
+    { XCTRL ('a'),      CK_ViewMoveToBol },
+    { XCTRL ('e'),      CK_ViewMoveToEol },
+
+    { 'b',              CK_ViewMoveLeft },
+    { KEY_LEFT,         CK_ViewMoveLeft },
+
+    { 'f',              CK_ViewMoveRight },
+    { KEY_RIGHT,        CK_ViewMoveRight },
+
+    { 'k',              CK_ViewMoveUp },
+    { 'y',              CK_ViewMoveUp },
+    { KEY_UP,           CK_ViewMoveUp },
+
+    { 'j',              CK_ViewMoveDown },
+    { KEY_DOWN,         CK_ViewMoveDown },
+    { KEY_DC,           CK_ViewMoveDown },
+
+    { 0, 0 }
+};
+/* screen.c */
+const global_key_map_t default_panel_keymap[] = {
+
+    { ALT('o'),         CK_PanelChdirOtherPanel },
+    { ALT('l'),         CK_PanelChdirToReadlink },
+    { KEY_F(15),        CK_PanelCmdCopyLocal },
+    { KEY_F(18),        CK_PanelCmdDeleteLocal },
+    { KEY_ENTER,        CK_PanelCmdDoEnter },
+    { '\n',             CK_PanelCmdDoEnter },
+    { KEY_F(14),        CK_PanelCmdEditNew },
+    { KEY_F(16),        CK_PanelCmdRenameLocal },
+    { ALT('*'),         CK_PanelCmdReverseSelection },
+    { KEY_KP_ADD,       CK_PanelCmdSelect },
+    { KEY_KP_SUBTRACT,  CK_PanelCmdUnselect },
+    { KEY_F(13),        CK_PanelCmdViewSimple },
+    { KEY_M_CTRL | KEY_NPAGE, CK_PanelCtrlNextPage },
+    { KEY_M_CTRL | KEY_PPAGE, CK_PanelCtrlPrevPage },
+    { ALT('H'),         CK_PanelDirectoryHistoryList },
+    { ALT('u'),         CK_PanelDirectoryHistoryNext },
+    { ALT('y'),         CK_PanelDirectoryHistoryPrev },
+    { ALT('j'),         CK_PanelGotoBottomFile },
+    { ALT('r'),         CK_PanelGotoMiddleFile },
+    { ALT('g'),         CK_PanelGotoTopFile },
+    { KEY_IC,           CK_PanelMarkFile },
+    { KEY_UP,           CK_PanelMoveUp },
+    { KEY_DOWN,         CK_PanelMoveDown },
+    { KEY_LEFT,         CK_PanelMoveLeft },
+    { KEY_RIGHT,        CK_PanelMoveRight },
+    { KEY_END,          CK_PanelMoveEnd },
+    { KEY_HOME,         CK_PanelMoveHome },
+    { KEY_NPAGE,        CK_PanelNextPage },
+    { KEY_PPAGE,        CK_PanelPrevPage },
+    { XCTRL('t'),       CK_PanelSetPanelEncoding },
+    { XCTRL('s'),       CK_PanelStartSearch },
+    { ALT('i'),         CK_PanelSyncOtherPanel },
+    { 0, 0 }
+};
+
+/* main.c */
+const global_key_map_t default_main_map[] = {
+    {KEY_F (19), CK_MenuLastSelectedCmd},
+    {KEY_F (20), CK_QuietQuitCmd},
+    {XCTRL ('@'), CK_SingleDirsizeCmd},
+    /* Copy useful information to the command line */
+    {ALT ('a'), CK_CopyCurrentPathname},
+    {ALT ('A'), CK_CopyOtherPathname},
+    {ALT ('c'), CK_QuickCdCmd},
+    /* To access the directory hotlist */
+    {XCTRL ('\\'), CK_QuickChdirCmd},
+    /* Suspend */
+    {XCTRL ('z'), CK_SuspendCmd},
+    /* The filtered view command */
+    {ALT ('!'), CK_FilteredViewCmd},
+    /* Find file */
+    {ALT ('?'), CK_FindCmd},
+    /* Panel refresh */
+    {XCTRL ('r'), CK_RereadCmd},
+    /* Toggle listing between long, user defined and full formats */
+    {ALT ('t'), CK_ToggleListingCmd},
+    /* Swap panels */
+    {XCTRL ('u'), CK_SwapCmd},
+    /* View output */
+    {XCTRL ('o'), CK_ShowCommandLine},
+    {XCTRL ('x'), CK_StartExtMap1 },
+    { 0, 0 }
+};
+
+const global_key_map_t default_main_x_map[] = {
+    {XCTRL ('c'), CK_QuitCmd},
+    {'d', CK_CompareDirsCmd},
+#ifdef USE_VFS
+    {'a', CK_ReselectVfs},
+#endif				/* USE_VFS */
+    {'p', CK_CopyCurrentPathname},
+    {XCTRL ('p'), CK_CopyOtherPathname},
+    {'t', CK_CopyCurrentTagged},
+    {XCTRL ('t'), CK_CopyCurrentReadlink},
+    {'c', CK_ChmodCmd},
+    {'o', CK_ChownCmd},
+    {'r', CK_CopyCurrentReadlink},
+    {XCTRL ('r'), CK_CopyOtherReadlink},
+    {'l', CK_LinkCmd},
+    {'s', CK_SymlinkCmd},
+    {XCTRL ('s'), CK_EditSymlinkCmd},
+    {'i', CK_InfoCmd},
+    {'q', CK_QuickViewCmd},
+    {'h', CK_AddHotlist},
+    {'!', CK_ExternalPanelize},
+#ifdef WITH_BACKGROUND
+    {'j', CK_JobsCmd},
+#endif				/* WITH_BACKGROUND */
+    {0, 0}
+};
+
+
 
 int lookup_action (char *keyname)
 {
