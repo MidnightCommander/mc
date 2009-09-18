@@ -210,9 +210,7 @@ mcview_new (int y, int x, int cols, int lines, int is_panel)
     view->cursor_row = 0;
     view->change_list = NULL;
     view->converter = str_cnv_from_term;
-#ifdef HAVE_CHARSET
     mcview_set_codeset (view);
-#endif
     /* {status,ruler,data}_area are left uninitialized */
 
     view->dirty = 0;
