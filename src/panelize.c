@@ -35,7 +35,7 @@
 
 #include "global.h"
 
-#include "../src/tty/color.h"
+#include "../src/skin/skin.h"
 
 #include "dialog.h"
 #include "widget.h"

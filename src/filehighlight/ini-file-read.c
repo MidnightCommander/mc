@@ -1,6 +1,6 @@
 /*
    File highlight plugin.
-   Reading and parce rules from ini-files
+   Reading and parse rules from ini-files
 
    Copyright (C) 2009 The Free Software Foundation, Inc.
 
@@ -31,11 +31,13 @@
 #include "../src/global.h"
 #include "../src/main.h"
 #include "../src/strescape.h"
-#include "../src/tty/color.h"
+#include "../src/skin/skin.h"
 #include "fhl.h"
 #include "internal.h"
 
 /*** global variables ****************************************************************************/
+
+extern mc_skin_t mc_skin__default;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -47,37 +49,16 @@
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-mc_fhl_parce_fill_color_info (mc_fhl_filter_t * mc_filter, mc_fhl_t * fhl, const gchar * group_name)
+mc_fhl_parse_fill_color_info (mc_fhl_filter_t * mc_filter, mc_fhl_t * fhl, const gchar * group_name)
 {
-    gchar **colors;
-    gsize colors_size;
-
-    colors = mc_config_get_string_list (fhl->config, "filehighlight", group_name, &colors_size);
-
-    if (colors == NULL)
-        return;
-
-    if (colors[0] == NULL) {
-        g_strfreev (colors);
-        return;
-    }
-
-    mc_filter->fgcolor = g_strdup (colors[0]);
-
-    if (colors[1] == NULL)
-        mc_filter->bgcolor = NULL;
-    else
-        mc_filter->bgcolor = g_strdup (colors[1]);
-
-    g_strfreev (colors);
-
-    mc_filter->color_pair_index = tty_try_alloc_color_pair (mc_filter->fgcolor, mc_filter->bgcolor);
+    (void) fhl;
+    mc_filter->color_pair_index = mc_skin_color_get("filehighlight", group_name);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-mc_fhl_parce_get_file_type_id (mc_fhl_t * fhl, const gchar * group_name)
+mc_fhl_parse_get_file_type_id (mc_fhl_t * fhl, const gchar * group_name)
 {
     mc_fhl_filter_t *mc_filter;
 
@@ -109,7 +90,7 @@ mc_fhl_parce_get_file_type_id (mc_fhl_t * fhl, const gchar * group_name)
     mc_filter = g_new0 (mc_fhl_filter_t, 1);
     mc_filter->type = MC_FLHGH_T_FTYPE;
     mc_filter->file_type = (mc_flhgh_ftype_type) i;
-    mc_fhl_parce_fill_color_info (mc_filter, fhl, group_name);
+    mc_fhl_parse_fill_color_info (mc_filter, fhl, group_name);
 
     g_ptr_array_add (fhl->filters, (gpointer) mc_filter);
     return TRUE;
@@ -118,7 +99,7 @@ mc_fhl_parce_get_file_type_id (mc_fhl_t * fhl, const gchar * group_name)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-mc_fhl_parce_get_regexp (mc_fhl_t * fhl, const gchar * group_name)
+mc_fhl_parse_get_regexp (mc_fhl_t * fhl, const gchar * group_name)
 {
     mc_fhl_filter_t *mc_filter;
     gchar *regexp = mc_config_get_string (fhl->config, group_name, "regexp", "");
@@ -134,7 +115,7 @@ mc_fhl_parce_get_regexp (mc_fhl_t * fhl, const gchar * group_name)
     mc_filter->search_condition->is_case_sentitive = TRUE;
     mc_filter->search_condition->search_type = MC_SEARCH_T_REGEX;
 
-    mc_fhl_parce_fill_color_info (mc_filter, fhl, group_name);
+    mc_fhl_parse_fill_color_info (mc_filter, fhl, group_name);
     g_ptr_array_add (fhl->filters, (gpointer) mc_filter);
     g_free (regexp);
     return TRUE;
@@ -144,7 +125,7 @@ mc_fhl_parce_get_regexp (mc_fhl_t * fhl, const gchar * group_name)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-mc_fhl_parce_get_extensions (mc_fhl_t * fhl, const gchar * group_name)
+mc_fhl_parse_get_extensions (mc_fhl_t * fhl, const gchar * group_name)
 {
     mc_fhl_filter_t *mc_filter;
     gchar **exts, **exts_orig;
@@ -184,7 +165,7 @@ mc_fhl_parce_get_extensions (mc_fhl_t * fhl, const gchar * group_name)
     mc_filter->search_condition->is_case_sentitive = TRUE;
     mc_filter->search_condition->search_type = MC_SEARCH_T_REGEX;
 
-    mc_fhl_parce_fill_color_info (mc_filter, fhl, group_name);
+    mc_fhl_parse_fill_color_info (mc_filter, fhl, group_name);
     g_ptr_array_add (fhl->filters, (gpointer) mc_filter);
     g_string_free (buf, TRUE);
     return TRUE;
@@ -258,43 +239,36 @@ mc_fhl_init_from_standart_files (mc_fhl_t * fhl)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_fhl_parce_ini_file (mc_fhl_t * fhl)
+mc_fhl_parse_ini_file (mc_fhl_t * fhl)
 {
-    gchar **ftype_names, **orig_ftype_names;
+    gchar **group_names, **orig_group_names;
     gsize ftype_names_size;
-
 
     mc_fhl_array_free (fhl);
     fhl->filters = g_ptr_array_new ();
 
-    if (!mc_config_has_group (fhl->config, "filehighlight"))
-        return FALSE;
+    orig_group_names = group_names =
+        mc_config_get_groups (fhl->config, &ftype_names_size);
 
-    orig_ftype_names = ftype_names =
-        mc_config_get_keys (fhl->config, "filehighlight", &ftype_names_size);
+    if (group_names == NULL)
+	return FALSE;
 
-    while (*ftype_names) {
+    while (*group_names) {
 
-        if (!mc_config_has_group (fhl->config, *ftype_names)) {
-            ftype_names++;
-            continue;
+        if (mc_config_has_param (fhl->config, *group_names, "type")) {
+            /* parse filetype filter */
+            mc_fhl_parse_get_file_type_id (fhl, *group_names);
+        } else if (mc_config_has_param (fhl->config, *group_names, "regexp")) {
+            /* parse regexp filter */
+            mc_fhl_parse_get_regexp (fhl, *group_names);
+        } else if (mc_config_has_param (fhl->config, *group_names, "extensions")) {
+            /* parse extensions filter */
+            mc_fhl_parse_get_extensions (fhl, *group_names);
         }
-
-        if (mc_config_has_param (fhl->config, *ftype_names, "type")) {
-            /* parce filetype filter */
-            mc_fhl_parce_get_file_type_id (fhl, *ftype_names);
-        } else if (mc_config_has_param (fhl->config, *ftype_names, "regexp")) {
-            /* parce regexp filter */
-            mc_fhl_parce_get_regexp (fhl, *ftype_names);
-        } else if (mc_config_has_param (fhl->config, *ftype_names, "extensions")) {
-            /* parce extensions filter */
-            mc_fhl_parce_get_extensions (fhl, *ftype_names);
-        }
-
-        ftype_names++;
+        group_names++;
     }
 
-    g_strfreev (orig_ftype_names);
+    g_strfreev (orig_group_names);
     return TRUE;
 }
 

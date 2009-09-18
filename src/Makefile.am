@@ -1,4 +1,4 @@
-SUBDIRS = mcconfig search tty viewer filehighlight
+SUBDIRS = mcconfig search tty viewer filehighlight skin
 
 AM_CFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir) $(PCRE_CFLAGS)
 
@@ -44,8 +44,9 @@ SEARCHLIB = search/libsearch.la
 TTYLIB =  tty/libmctty.la
 VIEWERLIB = viewer/libmcviewer.la
 FILEHIGHLIGHTLIB=filehighlight/libmcfilehighlight.la
+SKINLIB =  skin/libmcskin.la
 
-mc_LDADD = $(EDITLIB) $(VFSLIB) $(FILEHIGHLIGHTLIB) \
+mc_LDADD = $(EDITLIB) $(VFSLIB) $(FILEHIGHLIGHTLIB) $(SKINLIB) \
 	$(MCCONFIGLIB) $(SEARCHLIB) $(TTYLIB) $(VIEWERLIB) \
 	$(INTLLIBS) $(MCLIBS) $(SLANGLIB) $(LIBICONV) $(GLIB_LIBS)
 

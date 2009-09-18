@@ -49,7 +49,7 @@ gboolean slow_tty = FALSE;
 /* If true use +, -, | for line drawing */
 gboolean ugly_line_drawing = FALSE;
 
-int mc_tty_ugly_frm[] = { '|', '-', '|', '-', '+', '+', '+', '+', '+', '+'};
+int mc_tty_ugly_frm[MC_TTY_FRM_MAX];
 
 /*** file scope macro definitions **************************************/
 
@@ -62,7 +62,7 @@ static volatile sig_atomic_t got_interrupt = 0;
 /*** file scope functions **********************************************/
 
 static void
-sigintr_handler(int signo)
+sigintr_handler (int signo)
 {
     (void) &signo;
     got_interrupt = 1;
@@ -77,7 +77,7 @@ tty_is_slow (void)
 }
 
 extern void
-tty_start_interrupt_key(void)
+tty_start_interrupt_key (void)
 {
     struct sigaction act;
 
@@ -88,7 +88,7 @@ tty_start_interrupt_key(void)
 }
 
 extern void
-tty_enable_interrupt_key(void)
+tty_enable_interrupt_key (void)
 {
     struct sigaction act;
 
@@ -100,7 +100,7 @@ tty_enable_interrupt_key(void)
 }
 
 extern void
-tty_disable_interrupt_key(void)
+tty_disable_interrupt_key (void)
 {
     struct sigaction act;
 
@@ -111,7 +111,7 @@ tty_disable_interrupt_key(void)
 }
 
 extern gboolean
-tty_got_interrupt(void)
+tty_got_interrupt (void)
 {
     gboolean rv;
 
@@ -123,34 +123,28 @@ tty_got_interrupt(void)
 void
 tty_print_one_hline (void)
 {
-    if (ugly_line_drawing || slow_tty)
-	tty_print_char (mc_tty_ugly_frm[MC_TTY_FRM_thinhoriz]);
-    else
-	tty_print_alt_char (ACS_HLINE);
+    tty_print_alt_char (mc_tty_ugly_frm[MC_TTY_FRM_thinhoriz]);
 }
 
 void
 tty_print_one_vline (void)
 {
-    if (ugly_line_drawing || slow_tty)
-	tty_print_char (mc_tty_ugly_frm[MC_TTY_FRM_thinvert]);
-    else
-	tty_print_alt_char (ACS_VLINE);
+    tty_print_alt_char (mc_tty_ugly_frm[MC_TTY_FRM_thinvert]);
 }
 
 void
-tty_draw_box_slow (int y, int x, int ys, int xs)
+tty_draw_box (int y, int x, int ys, int xs)
 {
     tty_draw_vline (y, x, mc_tty_ugly_frm[MC_TTY_FRM_vert], ys);
     tty_draw_vline (y, x + xs - 1, mc_tty_ugly_frm[MC_TTY_FRM_vert], ys);
     tty_draw_hline (y, x, mc_tty_ugly_frm[MC_TTY_FRM_horiz], xs);
     tty_draw_hline (y + ys - 1, x, mc_tty_ugly_frm[MC_TTY_FRM_horiz], xs);
     tty_gotoyx (y, x);
-    tty_print_char (mc_tty_ugly_frm[MC_TTY_FRM_lefttop]);
+    tty_print_alt_char (mc_tty_ugly_frm[MC_TTY_FRM_lefttop]);
     tty_gotoyx (y + ys - 1, x);
-    tty_print_char (mc_tty_ugly_frm[MC_TTY_FRM_leftbottom]);
+    tty_print_alt_char (mc_tty_ugly_frm[MC_TTY_FRM_leftbottom]);
     tty_gotoyx (y, x + xs - 1);
-    tty_print_char (mc_tty_ugly_frm[MC_TTY_FRM_righttop]);
+    tty_print_alt_char (mc_tty_ugly_frm[MC_TTY_FRM_righttop]);
     tty_gotoyx (y + ys - 1, x + xs - 1);
-    tty_print_char (mc_tty_ugly_frm[MC_TTY_FRM_rightbottom]);
+    tty_print_alt_char (mc_tty_ugly_frm[MC_TTY_FRM_rightbottom]);
 }

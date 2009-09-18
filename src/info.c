@@ -29,7 +29,7 @@
 #include "../src/tty/tty.h"
 #include "../src/tty/key.h"		/* is_idle() */
 #include "../src/tty/mouse.h"		/* Gpm_Event */
-#include "../src/tty/color.h"
+#include "../src/skin/skin.h"
 
 #include "dialog.h"
 #include "widget.h"		/* default_proc*/

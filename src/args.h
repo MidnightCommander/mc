@@ -15,6 +15,7 @@ extern gboolean mc_args__slow_terminal;
 extern gboolean mc_args__ugly_line_drawing;
 extern gboolean mc_args__disable_colors;
 extern gboolean mc_args__force_colors;
+extern char *mc_args__skin;
 extern gboolean mc_args__version;
 extern char *mc_args__last_wd_file;
 extern char *mc_args__netfs_logfile;

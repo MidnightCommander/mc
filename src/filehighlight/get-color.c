@@ -31,7 +31,7 @@
 
 #include "../src/global.h"
 #include "../src/util.h"
-#include "../src/tty/color.h"
+#include "../src/skin/skin.h"
 #include "../src/filehighlight/fhl.h"
 #include "internal.h"
 
@@ -224,7 +224,6 @@ mc_fhl_get_color (mc_fhl_t * fhl, file_entry * fe)
     guint i;
     mc_fhl_filter_t *mc_filter;
     int ret;
-
 
     if (fhl == NULL)
         return NORMAL_COLOR;

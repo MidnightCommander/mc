@@ -37,21 +37,21 @@
 #ifdef HAVE_TERMIOS_H
 #include <termios.h>
 #endif
-#include <sys/types.h>			/* size_t */
+#include <sys/types.h>          /* size_t */
 #include <unistd.h>
 #include <signal.h>
 
 #include "../../src/global.h"
 
-#include "../../src/tty/tty-internal.h"		/* slow_tty */
-#include "../../src/tty/tty.h"			/* tty_draw_box_slow */
+#include "../../src/tty/tty-internal.h" /* slow_tty */
+#include "../../src/tty/tty.h"
 #include "../../src/tty/color-slang.h"
 #include "../../src/tty/color-internal.h"
-#include "../../src/tty/mouse.h"	/* Gpm_Event is required in key.h */
-#include "../../src/tty/key.h"		/* define_sequence */
+#include "../../src/tty/mouse.h"        /* Gpm_Event is required in key.h */
+#include "../../src/tty/key.h"  /* define_sequence */
 #include "../../src/tty/win.h"
 
-#include "../../src/strutil.h"		/* str_term_form */
+#include "../../src/strutil.h"  /* str_term_form */
 
 /*** global variables **************************************************/
 extern int reset_hp_softkeys;
@@ -59,7 +59,7 @@ extern int reset_hp_softkeys;
 /*** file scope macro definitions **************************************/
 
 /* Taken from S-Lang's slutty.c */
-#ifdef ultrix   /* Ultrix gets _POSIX_VDISABLE wrong! */
+#ifdef ultrix                   /* Ultrix gets _POSIX_VDISABLE wrong! */
 #   define NULL_VALUE -1
 #else
 #   ifdef _POSIX_VDISABLE
@@ -67,7 +67,7 @@ extern int reset_hp_softkeys;
 #   else
 #	define NULL_VALUE 255
 #   endif
-#endif				/* ultrix */
+#endif /* ultrix */
 
 #ifndef SA_RESTART
 #   define SA_RESTART 0
@@ -97,42 +97,43 @@ static gboolean no_slang_delay;
  * assign to them.
  */
 static const struct {
-    int  key_code;
+    int key_code;
     const char *key_name;
-} key_table [] = {
-    { KEY_F(0),      "k0" },
-    { KEY_F(1),      "k1" },
-    { KEY_F(2),      "k2" },
-    { KEY_F(3),      "k3" },
-    { KEY_F(4),      "k4" },
-    { KEY_F(5),      "k5" },
-    { KEY_F(6),      "k6" },
-    { KEY_F(7),      "k7" },
-    { KEY_F(8),      "k8" },
-    { KEY_F(9),      "k9" },
-    { KEY_F(10),     "k;" },
-    { KEY_F(11),     "F1" },
-    { KEY_F(12),     "F2" },
-    { KEY_F(13),     "F3" },
-    { KEY_F(14),     "F4" },
-    { KEY_F(15),     "F5" },
-    { KEY_F(16),     "F6" },
-    { KEY_F(17),     "F7" },
-    { KEY_F(18),     "F8" },
-    { KEY_F(19),     "F9" },
-    { KEY_F(20),     "FA" },
-    { KEY_IC,        "kI" },
-    { KEY_NPAGE,     "kN" },
-    { KEY_PPAGE,     "kP" },
-    { KEY_LEFT,      "kl" },
-    { KEY_RIGHT,     "kr" },
-    { KEY_UP,        "ku" },
-    { KEY_DOWN,      "kd" },
-    { KEY_DC,        "kD" },
-    { KEY_BACKSPACE, "kb" },
-    { KEY_HOME,      "kh" },
-    { KEY_END,       "@7" },
-    { 0,             NULL }
+} key_table[] = {
+    {
+    KEY_F (0), "k0"}, {
+    KEY_F (1), "k1"}, {
+    KEY_F (2), "k2"}, {
+    KEY_F (3), "k3"}, {
+    KEY_F (4), "k4"}, {
+    KEY_F (5), "k5"}, {
+    KEY_F (6), "k6"}, {
+    KEY_F (7), "k7"}, {
+    KEY_F (8), "k8"}, {
+    KEY_F (9), "k9"}, {
+    KEY_F (10), "k;"}, {
+    KEY_F (11), "F1"}, {
+    KEY_F (12), "F2"}, {
+    KEY_F (13), "F3"}, {
+    KEY_F (14), "F4"}, {
+    KEY_F (15), "F5"}, {
+    KEY_F (16), "F6"}, {
+    KEY_F (17), "F7"}, {
+    KEY_F (18), "F8"}, {
+    KEY_F (19), "F9"}, {
+    KEY_F (20), "FA"}, {
+    KEY_IC, "kI"}, {
+    KEY_NPAGE, "kN"}, {
+    KEY_PPAGE, "kP"}, {
+    KEY_LEFT, "kl"}, {
+    KEY_RIGHT, "kr"}, {
+    KEY_UP, "ku"}, {
+    KEY_DOWN, "kd"}, {
+    KEY_DC, "kD"}, {
+    KEY_BACKSPACE, "kb"}, {
+    KEY_HOME, "kh"}, {
+    KEY_END, "@7"}, {
+    0, NULL}
 };
 
 /*** file scope functions **********************************************/
@@ -161,14 +162,13 @@ slang_reset_softkeys (void)
     char tmp[BUF_SMALL];
 
     for (key = 1; key < 9; key++) {
-	g_snprintf (tmp, sizeof (tmp), "k%d", key);
-	send = (char *) SLtt_tgetstr (tmp);
-	if (send != NULL) {
-	    g_snprintf (tmp, sizeof (tmp), "\033&f%dk%dd%dL%s%s", key,
-			(int) (sizeof (display) - 1), (int) strlen (send),
-			display, send);
-	    SLtt_write_string (tmp);
-	}
+        g_snprintf (tmp, sizeof (tmp), "k%d", key);
+        send = (char *) SLtt_tgetstr (tmp);
+        if (send != NULL) {
+            g_snprintf (tmp, sizeof (tmp), "\033&f%dk%dd%dL%s%s", key,
+                        (int) (sizeof (display) - 1), (int) strlen (send), display, send);
+            SLtt_write_string (tmp);
+        }
     }
 }
 
@@ -179,7 +179,7 @@ do_define_key (int code, const char *strcap)
 
     seq = (char *) SLtt_tgetstr ((char *) strcap);
     if (seq != NULL)
-	define_sequence (code, seq, MCKEY_NOACTION);
+        define_sequence (code, seq, MCKEY_NOACTION);
 }
 
 static void
@@ -187,12 +187,59 @@ load_terminfo_keys (void)
 {
     int i;
 
-    for (i = 0; key_table [i].key_code; i++)
-	do_define_key (key_table [i].key_code, key_table [i].key_name);
+    for (i = 0; key_table[i].key_code; i++)
+        do_define_key (key_table[i].key_code, key_table[i].key_name);
 }
 
-/*** public functions **************************************************/
+static char *
+mc_tty_normalize_from_utf8 (const char *str)
+{
+    GIConv conv;
+    GString *buffer;
+    const char *_system_codepage = str_detect_termencoding ();
 
+    if (str_isutf8 (_system_codepage))
+        return g_strdup (str);
+
+    conv = g_iconv_open (_system_codepage, "UTF-8");
+    if (conv == INVALID_CONV)
+        return g_strdup (str);
+
+    buffer = g_string_new ("");
+
+    if (str_convert (conv, str, buffer) == ESTR_FAILURE) {
+        g_string_free (buffer, TRUE);
+        str_close_conv (conv);
+        return g_strdup (str);
+    }
+    str_close_conv (conv);
+
+    return g_string_free (buffer, FALSE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions **************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+int
+mc_tty_normalize_lines_char (const char *str)
+{
+    char *str2;
+    int res;
+
+    if (!str)
+        return (int) ' ';
+    str2 = mc_tty_normalize_from_utf8 (str);
+    res = g_utf8_get_char_validated (str2, -1);
+
+    if (res < 0)
+        res = (unsigned char) str2[0];
+    g_free (str2);
+
+    return res;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 void
 tty_init (gboolean slow, gboolean ugly_lines)
 {
@@ -201,44 +248,43 @@ tty_init (gboolean slow, gboolean ugly_lines)
 
     SLtt_get_terminfo ();
     SLutf8_enable (-1);
-   /*
-    * If the terminal in not in terminfo but begins with a well-known
-    * string such as "linux" or "xterm" S-Lang will go on, but the
-    * terminal size and several other variables won't be initialized
-    * (as of S-Lang 1.4.4). Detect it and abort. Also detect extremely
-    * small, large and negative screen dimensions.
-    */
+    /*
+     * If the terminal in not in terminfo but begins with a well-known
+     * string such as "linux" or "xterm" S-Lang will go on, but the
+     * terminal size and several other variables won't be initialized
+     * (as of S-Lang 1.4.4). Detect it and abort. Also detect extremely
+     * small, large and negative screen dimensions.
+     */
     if ((COLS < 10) || (LINES < 5)
-	|| (COLS > SLTT_MAX_SCREEN_COLS) || (LINES > SLTT_MAX_SCREEN_ROWS)) {
-	fprintf (stderr,
-		_("Screen size %dx%d is not supported.\n"
-		    "Check the TERM environment variable.\n"),
-		    COLS, LINES);
-	exit (1);
+        || (COLS > SLTT_MAX_SCREEN_COLS) || (LINES > SLTT_MAX_SCREEN_ROWS)) {
+        fprintf (stderr,
+                 _("Screen size %dx%d is not supported.\n"
+                   "Check the TERM environment variable.\n"), COLS, LINES);
+        exit (1);
     }
 
     tcgetattr (fileno (stdin), &boot_mode);
     /* 255 = ignore abort char; XCTRL('g') for abort char = ^g */
-    SLang_init_tty (XCTRL('c'), 1, 0);
+    SLang_init_tty (XCTRL ('c'), 1, 0);
 
     if (ugly_lines)
-	SLtt_Has_Alt_Charset = 0;
+        SLtt_Has_Alt_Charset = 0;
 
     /* If SLang uses fileno(stderr) for terminal input MC will hang
        if we call SLang_getkey between calls to open_error_pipe and
        close_error_pipe, e.g. when we do a growing view of an gzipped
        file. */
     if (SLang_TT_Read_FD == fileno (stderr))
-	SLang_TT_Read_FD = fileno (stdin);
+        SLang_TT_Read_FD = fileno (stdin);
 
     if (tcgetattr (SLang_TT_Read_FD, &new_mode) == 0) {
 #ifdef VDSUSP
-	new_mode.c_cc[VDSUSP] = NULL_VALUE;	/* to ignore ^Y */
+        new_mode.c_cc[VDSUSP] = NULL_VALUE;     /* to ignore ^Y */
 #endif
 #ifdef VLNEXT
-	new_mode.c_cc[VLNEXT] = NULL_VALUE;	/* to ignore ^V */
+        new_mode.c_cc[VLNEXT] = NULL_VALUE;     /* to ignore ^V */
 #endif
-	tcsetattr (SLang_TT_Read_FD, TCSADRAIN, &new_mode);
+        tcsetattr (SLang_TT_Read_FD, TCSADRAIN, &new_mode);
     }
 
     tty_reset_prog_mode ();
@@ -270,9 +316,9 @@ tty_shutdown (void)
      * active when the program was started up 
      */
     op_cap = SLtt_tgetstr ((char *) "op");
-    if (op_cap != NULL){
-	fputs (op_cap, stdout);
-	fflush (stdout);
+    if (op_cap != NULL) {
+        fputs (op_cap, stdout);
+        fflush (stdout);
     }
 }
 
@@ -311,7 +357,7 @@ tty_noecho (void)
 int
 tty_flush_input (void)
 {
-    return 0; /* OK */
+    return 0;                   /* OK */
 }
 
 void
@@ -321,9 +367,9 @@ tty_keypad (gboolean set)
 
     keypad_string = (char *) SLtt_tgetstr ((char *) (set ? "ks" : "ke"));
     if (keypad_string != NULL)
-	SLtt_write_string (keypad_string);
+        SLtt_write_string (keypad_string);
     if (set && reset_hp_softkeys)
-	slang_reset_softkeys ();
+        slang_reset_softkeys ();
 }
 
 void
@@ -344,14 +390,14 @@ tty_lowlevel_getch (void)
     int c;
 
     if (no_slang_delay && (SLang_input_pending (0) == 0))
-	return -1;
+        return -1;
 
     c = SLang_getkey ();
     if (c == SLANG_GETKEY_ERROR) {
-	fprintf (stderr,
-		    "SLang_getkey returned SLANG_GETKEY_ERROR\n"
-		    "Assuming EOF on stdin and exiting\n");
-	exit (1);
+        fprintf (stderr,
+                 "SLang_getkey returned SLANG_GETKEY_ERROR\n"
+                 "Assuming EOF on stdin and exiting\n");
+        exit (1);
     }
 
     return c;
@@ -361,7 +407,7 @@ int
 tty_reset_screen (void)
 {
     SLsmg_reset_smg ();
-    return 0; /* OK */
+    return 0;                   /* OK */
 }
 
 void
@@ -387,24 +433,23 @@ tty_getyx (int *py, int *px)
 void
 tty_draw_hline (int y, int x, int ch, int len)
 {
-    if (ch == ACS_HLINE && (ugly_line_drawing || slow_tty)) {
+    if (ch == ACS_HLINE)
         ch = mc_tty_ugly_frm[MC_TTY_FRM_thinhoriz];
-    }
 
     if ((y < 0) || (x < 0)) {
-	y = SLsmg_get_row ();
-	x = SLsmg_get_column ();
+        y = SLsmg_get_row ();
+        x = SLsmg_get_column ();
     } else
-	SLsmg_gotorc (y, x);
+        SLsmg_gotorc (y, x);
 
     if (ch == 0)
-	ch = ACS_HLINE;
+        ch = ACS_HLINE;
 
     if (ch == ACS_HLINE)
-	SLsmg_draw_hline (len);
+        SLsmg_draw_hline (len);
     else
-	while (len-- != 0)
-	    tty_print_char (ch);
+        while (len-- != 0)
+            tty_print_char (ch);
 
     SLsmg_gotorc (y, x);
 }
@@ -413,38 +458,31 @@ tty_draw_hline (int y, int x, int ch, int len)
 void
 tty_draw_vline (int y, int x, int ch, int len)
 {
+    if (ch == ACS_VLINE)
+        ch = mc_tty_ugly_frm[MC_TTY_FRM_thinvert];
+
     if ((y < 0) || (x < 0)) {
-	y = SLsmg_get_row ();
-	x = SLsmg_get_column ();
+        y = SLsmg_get_row ();
+        x = SLsmg_get_column ();
     } else
-	SLsmg_gotorc (y, x);
+        SLsmg_gotorc (y, x);
 
     if (ch == 0)
-	ch = ACS_VLINE;
+        ch = ACS_VLINE;
 
     if (ch == ACS_VLINE)
-	SLsmg_draw_vline (len);
+        SLsmg_draw_vline (len);
     else {
-	int pos = 0;
+        int pos = 0;
 
-	while (len-- != 0) {
-	    SLsmg_gotorc (y + pos, x);
-	    tty_print_char (ch);
-	    pos++;
-	}
+        while (len-- != 0) {
+            SLsmg_gotorc (y + pos, x);
+            tty_print_char (ch);
+            pos++;
+        }
     }
 
     SLsmg_gotorc (y, x);
-}
-
-void
-tty_draw_box (int y, int x, int rows, int cols)
-{
-    /* this fix slang drawing stickchars bug */
-    if (ugly_line_drawing || slow_tty)
-	tty_draw_box_slow (y, x, rows, cols);
-    else
-	SLsmg_draw_box (y, x, rows, cols);
 }
 
 void
@@ -474,18 +512,41 @@ tty_print_char (int c)
 void
 tty_print_alt_char (int c)
 {
-    if (c == ACS_RTEE && (ugly_line_drawing || slow_tty)) {
-        c = mc_tty_ugly_frm[MC_TTY_FRM_rightmiddle];
+#define DRAW(x, y) (x == y) \
+	? SLsmg_draw_object (SLsmg_get_row(), SLsmg_get_column(), x) \
+	: SLsmg_write_char ((unsigned int) y)
+    switch (c) {
+    case ACS_VLINE:
+        DRAW (c, mc_tty_ugly_frm[MC_TTY_FRM_thinvert]);
+        break;
+    case ACS_HLINE:
+        DRAW (c, mc_tty_ugly_frm[MC_TTY_FRM_thinhoriz]);
+        break;
+    case ACS_LTEE:
+        DRAW (c, mc_tty_ugly_frm[MC_TTY_FRM_leftmiddle]);
+        break;
+    case ACS_RTEE:
+        DRAW (c, mc_tty_ugly_frm[MC_TTY_FRM_rightmiddle]);
+        break;
+    case ACS_ULCORNER:
+        DRAW (c, mc_tty_ugly_frm[MC_TTY_FRM_lefttop]);
+        break;
+    case ACS_LLCORNER:
+        DRAW (c, mc_tty_ugly_frm[MC_TTY_FRM_leftbottom]);
+        break;
+    case ACS_URCORNER:
+        DRAW (c, mc_tty_ugly_frm[MC_TTY_FRM_righttop]);
+        break;
+    case ACS_LRCORNER:
+        DRAW (c, mc_tty_ugly_frm[MC_TTY_FRM_rightbottom]);
+        break;
+    case ACS_PLUS:
+        DRAW (c, mc_tty_ugly_frm[MC_TTY_FRM_centermiddle]);
+        break;
+    default:
+        SLsmg_write_char ((unsigned int) c);
     }
-
-    if (c == ACS_LTEE && (ugly_line_drawing || slow_tty)) {
-        c = mc_tty_ugly_frm[MC_TTY_FRM_leftmiddle];
-    }
-    if (ugly_line_drawing || slow_tty) {
-        tty_print_char (c);
-    } else {
-        SLsmg_draw_object (SLsmg_get_row(), SLsmg_get_column(), c);
-    }
+#undef DRAW
 }
 
 void
@@ -493,9 +554,9 @@ tty_print_anychar (int c)
 {
     char str[6 + 1];
 
-    if ( c > 255 ) {
+    if (c > 255) {
         int res = g_unichar_to_utf8 (c, str);
-        if ( res == 0 ) {
+        if (res == 0) {
             str[0] = '.';
             str[1] = '\0';
         } else {
@@ -545,9 +606,9 @@ tty_setup_sigwinch (void (*handler) (int))
     act.sa_flags = 0;
 #ifdef SA_RESTART
     act.sa_flags |= SA_RESTART;
-#endif		/* SA_RESTART */
+#endif /* SA_RESTART */
     sigaction (SIGWINCH, &act, &oact);
-#endif		/* SIGWINCH */
+#endif /* SIGWINCH */
 }
 
 void

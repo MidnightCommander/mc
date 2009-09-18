@@ -28,7 +28,7 @@ void mc_fhl_free (mc_fhl_t **);
 int mc_fhl_get_color (mc_fhl_t *, file_entry *);
 
 gboolean mc_fhl_read_ini_file (mc_fhl_t *, const gchar *);
-gboolean mc_fhl_parce_ini_file (mc_fhl_t *);
+gboolean mc_fhl_parse_ini_file (mc_fhl_t *);
 void mc_fhl_clear (mc_fhl_t *);
 
 #endif

@@ -28,153 +28,131 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/types.h>		/* size_t */
+#include <sys/types.h>          /* size_t */
 
 #include "../../src/global.h"
 
 #include "../../src/tty/tty-slang.h"
-#include "../../src/tty/color.h"		/* variables */
+#include "../../src/tty/color.h"        /* variables */
 #include "../../src/tty/color-internal.h"
 
-#include "../../src/setup.h"	/* color_terminal_string */
+#include "../../src/setup.h"    /* color_terminal_string */
 
 static int
 has_colors (gboolean disable, gboolean force)
 {
+    mc_tty_color_disable = disable;
+
     if (force || (getenv ("COLORTERM") != NULL))
-	SLtt_Use_Ansi_Colors = 1;
+        SLtt_Use_Ansi_Colors = 1;
 
-    /* We want to allow overwriding */
-    if (!disable) {
-	const char *terminal = getenv ("TERM");
-	const size_t len = strlen (terminal);
+    if (!mc_tty_color_disable) {
+        const char *terminal = getenv ("TERM");
+        const size_t len = strlen (terminal);
 
-	char *cts = color_terminal_string;
-	char *s;
-	size_t i;
+        char *cts = color_terminal_string;
+        char *s;
+        size_t i;
 
-	/* check color_terminal_string */
-	while (*cts != '\0') {
-	    while (*cts == ' ' || *cts == '\t')
-		cts++;
-	    s = cts;
-	    i = 0;
+        /* check color_terminal_string */
+        while (*cts != '\0') {
+            while (*cts == ' ' || *cts == '\t')
+                cts++;
+            s = cts;
+            i = 0;
 
-	    while (*cts != '\0' && *cts != ',') {
-		cts++;
-		i++;
-	    }
+            while (*cts != '\0' && *cts != ',') {
+                cts++;
+                i++;
+            }
 
-	    if ((i != 0) && (i == len) && (strncmp (s, terminal, i) == 0))
-		SLtt_Use_Ansi_Colors = 1;
+            if ((i != 0) && (i == len) && (strncmp (s, terminal, i) == 0))
+                SLtt_Use_Ansi_Colors = 1;
 
-	    if (*cts == ',')
-	        cts++;
-	}
+            if (*cts == ',')
+                cts++;
+        }
     }
-
-    /* Setup emulated colors */
-    if (SLtt_Use_Ansi_Colors != 0) {
-        if (!disable) {
-	    mc_init_pair (A_REVERSE, "black", "white");
-	    mc_init_pair (A_BOLD, "white", "black");
-	} else {
-	    mc_init_pair (A_REVERSE, "black", "lightgray");
-	    mc_init_pair (A_BOLD, "white", "black");
-	    mc_init_pair (A_BOLD_REVERSE, "white", "lightgray");
-	}
-    } else {
-	SLtt_set_mono (A_BOLD,    NULL, SLTT_BOLD_MASK);
-	SLtt_set_mono (A_REVERSE, NULL, SLTT_REV_MASK);
-	SLtt_set_mono (A_BOLD | A_REVERSE, NULL, SLTT_BOLD_MASK | SLTT_REV_MASK);
-    }
-
     return SLtt_Use_Ansi_Colors;
 }
 
+static void
+mc_tty_color_pair_init_special (tty_color_pair_t * mc_color_pair,
+                                const char *fg1, const char *bg1,
+                                const char *fg2, const char *bg2, SLtt_Char_Type mask)
+{
+    if (SLtt_Use_Ansi_Colors != 0) {
+        if (!mc_tty_color_disable) {
+            SLtt_set_color (mc_color_pair->pair_index, (char *) "", (char *) fg1, (char *) bg1);
+        } else {
+            SLtt_set_color (mc_color_pair->pair_index, (char *) "", (char *) fg2, (char *) bg2);
+        }
+    } else {
+        SLtt_set_mono (mc_color_pair->pair_index, NULL, mask);
+    }
+}
+
 void
-tty_init_colors (gboolean disable, gboolean force)
+tty_color_init_lib (gboolean disable, gboolean force)
 {
     /* FIXME: if S-Lang is used, has_colors() must be called regardless
        of whether we are interested in its result */
     if (has_colors (disable, force) && !disable) {
-	const size_t map_len = color_map_len ();
-	size_t i;
-
-	use_colors = TRUE;
-
-	configure_colors ();
-
-	/*
-	 * We are relying on undocumented feature of
-	 * S-Lang to make COLOR_PAIR(DEFAULT_COLOR_INDEX)
-	 * the default fg/bg of the terminal.
-	 * Hopefully, future versions of S-Lang will
-	 * document this feature.
-	 */
-	SLtt_set_color (DEFAULT_COLOR_INDEX, NULL, (char *) "default", (char *) "default");
-
-	for (i = 0; i < map_len; i++)
-	    if (color_map [i].name != NULL)
-		mc_init_pair (i + 1, color_map_fg(i), color_map_bg(i));
+        use_colors = TRUE;
     }
 }
 
-/* Functions necessary to implement syntax highlighting  */
 void
-mc_init_pair (int index, CTYPE foreground, CTYPE background)
+tty_color_deinit_lib (void)
 {
-    if (!background)
-	background = "default";
-
-    if (!foreground)
-	foreground = "default";
-
-    SLtt_set_color (index, (char *) "", (char *) foreground, (char *) background);
-    if (index > max_index)
-	max_index = index;
 }
 
-int
-tty_try_alloc_color_pair (const char *fg, const char *bg)
+void
+tty_color_try_alloc_pair_lib (tty_color_pair_t * mc_color_pair)
 {
-    struct colors_avail *p = &c;
+    const char *fg, *bg;
+    if (mc_color_pair->ifg <= (int) SPEC_A_REVERSE) {
+        switch (mc_color_pair->ifg) {
+        case SPEC_A_REVERSE:
+            mc_tty_color_pair_init_special (mc_color_pair,
+                                            "black", "white", "black", "lightgray", SLTT_REV_MASK);
+            break;
+        case SPEC_A_BOLD:
+            mc_tty_color_pair_init_special (mc_color_pair,
+                                            "white", "black", "white", "black", SLTT_BOLD_MASK);
+            break;
+        case SPEC_A_BOLD_REVERSE:
 
-    c.index = EDITOR_NORMAL_COLOR_INDEX;
-    for (;;) {
-	if (((fg && p->fg) ? (strcmp (fg, p->fg) == 0) : (fg == p->fg)) != 0
-	    && ((bg && p->bg) ? (strcmp (bg, p->bg) == 0) : (bg == p->bg)) != 0)
-	    return p->index;
-	if (p->next == NULL)
-	    break;
-	p = p->next;
+            mc_tty_color_pair_init_special (mc_color_pair,
+                                            "white", "white",
+                                            "white", "white", SLTT_BOLD_MASK | SLTT_REV_MASK);
+            break;
+        case SPEC_A_UNDERLINE:
+            mc_tty_color_pair_init_special (mc_color_pair,
+                                            "white", "black", "white", "black", SLTT_ULINE_MASK);
+            break;
+        }
+    } else {
+        fg = (mc_color_pair->cfg) ? mc_color_pair->cfg : "default";
+        bg = (mc_color_pair->cbg) ? mc_color_pair->cbg : "default";
+        SLtt_set_color (mc_color_pair->pair_index, (char *) "", (char *) fg, (char *) bg);
     }
-    p->next = g_new (struct colors_avail, 1);
-    p = p->next;
-    p->next = NULL;
-    p->fg = fg ? g_strdup (fg) : NULL;
-    p->bg = bg ? g_strdup (bg) : NULL;
-    if (fg == NULL)
-        /* Index in color_map array = COLOR_INDEX - 1 */
-	fg = color_map[EDITOR_NORMAL_COLOR_INDEX - 1].fg;
-    if (bg == NULL)
-	bg = color_map[EDITOR_NORMAL_COLOR_INDEX - 1].bg;
-    p->index = alloc_color_pair (fg, bg);
-    return p->index;
 }
 
 void
 tty_setcolor (int color)
 {
     if (!SLtt_Use_Ansi_Colors)
-	SLsmg_set_color (color);
+        SLsmg_set_color (color);
     else if ((color & A_BOLD) != 0) {
-	if (color == A_BOLD)
-	    SLsmg_set_color (A_BOLD);
-	else
-	    SLsmg_set_color ((color & (~A_BOLD)) + 8);
-    } else
-	SLsmg_set_color (color);
+        if (color == A_BOLD)
+            SLsmg_set_color (A_BOLD);
+        else
+            SLsmg_set_color ((color & (~A_BOLD)) + 8);
+    } else if (color == A_REVERSE)
+        SLsmg_set_color (A_REVERSE);
+    else
+        SLsmg_set_color (color);
 }
 
 /* Set colorpair by index, don't interpret S-Lang "emulated attributes" */

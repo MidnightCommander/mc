@@ -42,18 +42,17 @@
 #   define WANT_TERM_H
 #endif
 
-#include "../../src/tty/tty-internal.h"		/* slow_tty */
-#include "../../src/tty/tty.h"			/* tty_draw_box_slow */
-#include "../../src/tty/color-ncurses.h"
+#include "../../src/tty/tty-internal.h" /* slow_tty */
+#include "../../src/tty/tty.h"
 #include "../../src/tty/color-internal.h"
 #include "../../src/tty/win.h"
 
-#include "../../src/strutil.h"		/* str_term_form */
+#include "../../src/strutil.h"  /* str_term_form */
 
 /* include at last !!! */
 #ifdef WANT_TERM_H
 #   include <term.h>
-#endif			/* WANT_TERM_H*/
+#endif /* WANT_TERM_H */
 
 /*** global variables **************************************************/
 
@@ -65,32 +64,64 @@
 
 /*** file scope variables **********************************************/
 
-static const struct {
-    int acscode;
-    int character;
-} acs_approx [] = {
-    { 'q',  '-' }, /* ACS_HLINE */
-    { 'x',  '|' }, /* ACS_VLINE */
-    { 'l',  '+' }, /* ACS_ULCORNER */
-    { 'k',  '+' }, /* ACS_URCORNER */
-    { 'm',  '+' }, /* ACS_LLCORNER */
-    { 'j',  '+' }, /* ACS_LRCORNER */
-    { 'a',  '#' }, /* ACS_CKBOARD */
-    { 'u',  '+' }, /* ACS_RTEE */
-    { 't',  '+' }, /* ACS_LTEE */
-    { 'w',  '+' }, /* ACS_TTEE */
-    { 'v',  '+' }, /* ACS_BTEE */
-    { 'n',  '+' }, /* ACS_PLUS */
-    { 0, 0 } };
-
 /*** file scope functions **********************************************/
 
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions **************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+int
+mc_tty_normalize_lines_char (const char *ch)
+{
+    int i;
+    struct mc_tty_lines_struct {
+        const char *line;
+        int line_code;
+    } const lines_codes[] = {
+        {"\342\224\214", ACS_LRCORNER}, /* ┌ */
+        {"\342\224\220", ACS_LLCORNER}, /* ┐ */
+        {"\342\224\224", ACS_URCORNER}, /* └ */
+        {"\342\224\230", ACS_ULCORNER}, /* ┘ */
+        {"\342\224\234", ACS_LTEE}, /* ├ */
+        {"\342\224\244", ACS_RTEE}, /* ┤ */
+        {"\342\224\254", ACS_TTEE}, /* ┬ */
+        {"\342\224\264", ACS_BTEE}, /* ┴ */
+        {"\342\224\200", ACS_HLINE}, /* ─ */
+        {"\342\224\202", ACS_VLINE}, /* │ */
+        {"\342\224\274", ACS_PLUS}, /* ┼ */
+        {"\342\225\235", ACS_LRCORNER | A_BOLD}, /* ╔ */
+        {"\342\225\232", ACS_LLCORNER | A_BOLD}, /* ╗ */
+        {"\342\225\227", ACS_URCORNER | A_BOLD}, /* ╚ */
+        {"\342\225\224", ACS_ULCORNER | A_BOLD}, /* ╝ */
+        {"\342\225\237", ACS_LTEE | A_BOLD}, /* ╟ */
+        {"\342\225\242", ACS_RTEE | A_BOLD}, /* ╢ */
+        {"\342\225\244", ACS_TTEE | A_BOLD}, /* ╤ */
+        {"\342\225\247", ACS_BTEE | A_BOLD}, /* ╧ */
+        {"\342\225\220", ACS_HLINE | A_BOLD}, /* ═ */
+        {"\342\225\221", ACS_VLINE | A_BOLD}, /* ║ */
+        {NULL, 0}
+    };
+
+    if (ch == NULL)
+        return (int) ' ';
+
+    for (i = 0; lines_codes[i].line; i++) {
+        if (strcmp (ch, lines_codes[i].line) == 0)
+            return lines_codes[i].line_code;
+    }
+
+    return (int) ' ';
+
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 
 void
 tty_init (gboolean slow, gboolean ugly_lines)
 {
     slow_tty = slow;
+    (void) ugly_lines;
 
     initscr ();
 
@@ -115,11 +146,6 @@ tty_init (gboolean slow, gboolean ugly_lines)
     keypad (stdscr, TRUE);
     nodelay (stdscr, FALSE);
 
-    if (ugly_lines) {
-	int i;
-	for (i = 0; acs_approx[i].acscode != 0; i++)
-	    acs_map[acs_approx[i].acscode] = acs_approx[i].character;
-    }
 }
 
 void
@@ -179,7 +205,7 @@ tty_nodelay (gboolean set)
 int
 tty_baudrate (void)
 {
-    return baudrate();
+    return baudrate ();
 }
 
 int
@@ -216,9 +242,8 @@ tty_getyx (int *py, int *px)
 void
 tty_draw_hline (int y, int x, int ch, int len)
 {
-    if (ch == ACS_HLINE && slow_tty) {
-        ch = ugly_frm_thinhoriz;
-    }
+    if ((chtype) ch == ACS_HLINE)
+        ch = mc_tty_ugly_frm[MC_TTY_FRM_thinhoriz];
 
     if ((y >= 0) && (x >= 0))
         move (y, x);
@@ -229,33 +254,12 @@ tty_draw_hline (int y, int x, int ch, int len)
 void
 tty_draw_vline (int y, int x, int ch, int len)
 {
+    if ((chtype) ch == ACS_VLINE)
+        ch = mc_tty_ugly_frm[MC_TTY_FRM_thinvert];
+
     if ((y >= 0) && (x >= 0))
-	move (y, x);
+        move (y, x);
     vline (ch, len);
-}
-
-void
-tty_draw_box (int y, int x, int rows, int cols)
-{
-    if (slow_tty) {
-	tty_draw_box_slow (y, x, rows, cols);
-    } else {
-#define waddc(_y, _x, c) move (_y, _x); addch (c)
-	waddc (y, x, ACS_ULCORNER);
-	hline (ACS_HLINE, cols - 2);
-	waddc (y + rows - 1, x, ACS_LLCORNER);
-	hline (ACS_HLINE, cols - 2);
-
-	waddc (y, x + cols - 1, ACS_URCORNER);
-	waddc (y + rows - 1, x + cols - 1, ACS_LRCORNER);
-
-	move (y + 1, x);
-	vline (ACS_VLINE, rows - 2);
-
-	move (y + 1, x + cols - 1);
-	vline (ACS_VLINE, rows - 2);
-#undef waddc
-    }
 }
 
 void
@@ -264,8 +268,8 @@ tty_fill_region (int y, int x, int rows, int cols, unsigned char ch)
     int i;
 
     for (i = 0; i < rows; i++) {
-	move (y + i, x);
-	hline (ch, cols);
+        move (y + i, x);
+        hline (ch, cols);
     }
 
     move (y, x);
@@ -294,23 +298,15 @@ tty_print_anychar (int c)
 {
     unsigned char str[6 + 1];
 
-    if (c == ACS_RTEE && (ugly_line_drawing || slow_tty)) {
-        c = ugly_frm_rightmiddle;
-    }
-
-    if (c == ACS_LTEE && (ugly_line_drawing || slow_tty)) {
-        c = ugly_frm_leftmiddle;
-    }
-
-    if ( c > 255 ) {
-        int res = g_unichar_to_utf8 (c, (char *)str);
-        if ( res == 0 ) {
+    if (c > 255) {
+        int res = g_unichar_to_utf8 (c, (char *) str);
+        if (res == 0) {
             str[0] = '.';
             str[1] = '\0';
         } else {
             str[res] = '\0';
         }
-        addstr (str_term_form (str));
+        addstr (str_term_form ((char *) str));
     } else {
         addch (c);
     }
@@ -319,6 +315,25 @@ tty_print_anychar (int c)
 void
 tty_print_alt_char (int c)
 {
+    if ((chtype) c == ACS_VLINE)
+        c = mc_tty_ugly_frm[MC_TTY_FRM_thinvert];
+    else if ((chtype) c == ACS_HLINE)
+        c = mc_tty_ugly_frm[MC_TTY_FRM_thinhoriz];
+    else if ((chtype) c == ACS_LTEE)
+        c = mc_tty_ugly_frm[MC_TTY_FRM_leftmiddle];
+    else if ((chtype) c == ACS_RTEE)
+        c = mc_tty_ugly_frm[MC_TTY_FRM_rightmiddle];
+    else if ((chtype) c == ACS_ULCORNER)
+        c = mc_tty_ugly_frm[MC_TTY_FRM_lefttop];
+    else if ((chtype) c == ACS_LLCORNER)
+        c = mc_tty_ugly_frm[MC_TTY_FRM_leftbottom];
+    else if ((chtype) c == ACS_URCORNER)
+        c = mc_tty_ugly_frm[MC_TTY_FRM_righttop];
+    else if ((chtype) c == ACS_LRCORNER)
+        c = mc_tty_ugly_frm[MC_TTY_FRM_rightbottom];
+    else if ((chtype) c == ACS_PLUS)
+        c = mc_tty_ugly_frm[MC_TTY_FRM_centermiddle];
+
     addch (c);
 }
 
@@ -362,9 +377,9 @@ tty_setup_sigwinch (void (*handler) (int))
     act.sa_flags = 0;
 #ifdef SA_RESTART
     act.sa_flags |= SA_RESTART;
-#endif		 /* SA_RESTART */
+#endif /* SA_RESTART */
     sigaction (SIGWINCH, &act, &oact);
-#endif		/* SIGWINCH */
+#endif /* SIGWINCH */
 }
 
 void

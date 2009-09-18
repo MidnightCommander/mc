@@ -28,118 +28,179 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/types.h>		/* size_t*/
+#include <sys/types.h>          /* size_t */
 
 #include "../../src/global.h"
 
 #include "../../src/tty/tty-ncurses.h"
-#include "../../src/tty/color.h"		/* variables */
+#include "../../src/tty/color.h"        /* variables */
 #include "../../src/tty/color-internal.h"
 
-int attr_pairs [MAX_PAIRS];
+/*** global variables ****************************************************************************/
+
+/*** file scope macro definitions ****************************************************************/
+
+/*** file scope type declarations ****************************************************************/
+
+/*** file scope variables ************************************************************************/
+
+static GHashTable *mc_tty_color_color_pair_attrs = NULL;
+
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+static inline void
+mc_tty_color_attr_destroy_cb (gpointer data)
+{
+    g_free (data);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+mc_tty_color_save_attr_lib (int color_pair, int color_attr)
+{
+    int *attr, *key;
+    attr = g_new0 (int, 1);
+    if (attr == NULL)
+        return color_attr;
+
+    key = g_new0 (int, 1);
+    if (key == NULL) {
+        g_free (attr);
+        return color_attr;
+    }
+    memcpy (key, &color_pair, sizeof (int));
+
+    if (color_attr != -1)
+        *attr = color_attr & (A_BOLD | A_REVERSE | A_UNDERLINE);
+    g_hash_table_replace (mc_tty_color_color_pair_attrs, (gpointer) key, (gpointer) attr);
+    return color_attr & (~(*attr));
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+color_get_attr (int color_pair)
+{
+    int *fnd;
+
+    if (mc_tty_color_color_pair_attrs == NULL)
+        return 0;
+
+    fnd = (int *) g_hash_table_lookup (mc_tty_color_color_pair_attrs, (gpointer) & color_pair);
+    return (fnd != NULL) ? *fnd : 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+mc_tty_color_pair_init_special (tty_color_pair_t * mc_color_pair,
+                                int fg1, int bg1, int fg2, int bg2, int mask)
+{
+    if (has_colors ()) {
+        if (!mc_tty_color_disable) {
+            init_pair (mc_color_pair->pair_index,
+                       mc_tty_color_save_attr_lib (mc_color_pair->pair_index, fg1 | mask), bg1);
+        } else {
+            init_pair (mc_color_pair->pair_index,
+                       mc_tty_color_save_attr_lib (mc_color_pair->pair_index, fg2 | mask), bg2);
+        }
+    }
+#if 0
+    else {
+        SLtt_set_mono (mc_color_pair->pair_index, NULL, mask);
+    }
+#endif
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 void
-tty_init_colors (gboolean disable, gboolean force)
+tty_color_init_lib (gboolean disable, gboolean force)
 {
     (void) force;
 
     if (has_colors () && !disable) {
-	const size_t map_len = color_map_len ();
-        size_t i;
-
-	use_colors = TRUE;
-
-	start_color ();
-	use_default_colors ();
-
-	configure_colors ();
-
-	if (map_len > MAX_PAIRS) {
-	    /* This message should only be seen by the developers */
-	    fprintf (stderr,
-		     "Too many defined colors, resize MAX_PAIRS on color.c");
-	    exit (1);
-	}
-
-	/* Use default terminal colors */
-	mc_init_pair (DEFAULT_COLOR_INDEX, -1, -1);
-
-	for (i = 0; i < map_len; i++)
-	    if (color_map [i].name != NULL) {
-		mc_init_pair (i + 1, color_map_fg (i), color_map_bg (i));
-		/*
-		 * ncurses doesn't remember bold attribute in the color pairs,
-		 * so we should keep track of it in a separate array.
-		 */
-		attr_pairs [i + 1] = color_map [i].fg & A_BOLD;
-	    }
+        use_colors = TRUE;
+        start_color ();
+        use_default_colors ();
     }
+
+    mc_tty_color_color_pair_attrs = g_hash_table_new_full
+        (g_int_hash, g_int_equal, mc_tty_color_attr_destroy_cb, mc_tty_color_attr_destroy_cb);
 }
 
-/* Functions necessary to implement syntax highlighting  */
+/* --------------------------------------------------------------------------------------------- */
+
 void
-mc_init_pair (int index, CTYPE foreground, CTYPE background)
+tty_color_deinit_lib (void)
 {
-    init_pair (index, foreground, background == 0 ? -1 : background);
-    if (index > max_index)
-	max_index = index;
+    g_hash_table_destroy (mc_tty_color_color_pair_attrs);
+    mc_tty_color_color_pair_attrs = NULL;
 }
 
-int
-tty_try_alloc_color_pair (const char *fg, const char *bg)
-{
-    int fg_index, bg_index;
-    int bold_attr;
-    struct colors_avail *p = &c;
+/* --------------------------------------------------------------------------------------------- */
 
-    c.index = EDITOR_NORMAL_COLOR_INDEX;
-    for (;;) {
-	if (((fg && p->fg) ? !strcmp (fg, p->fg) : fg == p->fg) != 0
-	    && ((bg && p->bg) ? !strcmp (bg, p->bg) : bg == p->bg) != 0)
-	    return p->index;
-	if (!p->next)
-	    break;
-	p = p->next;
+void
+tty_color_try_alloc_pair_lib (tty_color_pair_t * mc_color_pair)
+{
+    if (mc_color_pair->ifg <= (int) SPEC_A_REVERSE) {
+        switch (mc_color_pair->ifg) {
+        case SPEC_A_REVERSE:
+            mc_tty_color_pair_init_special (mc_color_pair,
+                                            COLOR_BLACK, COLOR_WHITE,
+                                            COLOR_BLACK, COLOR_WHITE | A_BOLD, A_REVERSE);
+            break;
+        case SPEC_A_BOLD:
+            mc_tty_color_pair_init_special (mc_color_pair,
+                                            COLOR_WHITE, COLOR_BLACK,
+                                            COLOR_WHITE, COLOR_BLACK, A_BOLD);
+            break;
+        case SPEC_A_BOLD_REVERSE:
+
+            mc_tty_color_pair_init_special (mc_color_pair,
+                                            COLOR_WHITE, COLOR_WHITE,
+                                            COLOR_WHITE, COLOR_WHITE, A_BOLD | A_REVERSE);
+            break;
+        case SPEC_A_UNDERLINE:
+            mc_tty_color_pair_init_special (mc_color_pair,
+                                            COLOR_WHITE, COLOR_BLACK,
+                                            COLOR_WHITE, COLOR_BLACK, A_UNDERLINE);
+            break;
+        }
+    } else {
+        init_pair (mc_color_pair->pair_index,
+                   mc_tty_color_save_attr_lib (mc_color_pair->pair_index,
+                                               mc_color_pair->ifg) & COLOR_WHITE,
+                   mc_color_pair->ibg & COLOR_WHITE);
     }
-    p->next = g_new (struct colors_avail, 1);
-    p = p->next;
-    p->next = 0;
-    p->fg = fg ? g_strdup (fg) : 0;
-    p->bg = bg ? g_strdup (bg) : 0;
-    if (!fg)
-        /* Index in color_map array = COLOR_INDEX - 1 */
-	fg_index = color_map[EDITOR_NORMAL_COLOR_INDEX - 1].fg;
-    else
-	get_color (fg, &fg_index);
-
-    if (!bg)
-	bg_index = color_map[EDITOR_NORMAL_COLOR_INDEX - 1].bg;
-    else
-	get_color (bg, &bg_index);
-
-    bold_attr = fg_index & A_BOLD;
-    fg_index = fg_index & COLOR_WHITE;
-    bg_index = bg_index & COLOR_WHITE;
-
-    p->index = alloc_color_pair (fg_index, bg_index);
-    attr_pairs [p->index] = bold_attr;
-    return p->index;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 tty_setcolor (int color)
 {
-    attrset (color);
+    attrset (COLOR_PAIR (color) | color_get_attr (color));
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 tty_lowlevel_setcolor (int color)
 {
-    attrset (MY_COLOR_PAIR (color));
+    attrset (COLOR_PAIR (color) | color_get_attr (color));
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 tty_set_normal_attrs (void)
 {
     standend ();
 }
+
+/* --------------------------------------------------------------------------------------------- */

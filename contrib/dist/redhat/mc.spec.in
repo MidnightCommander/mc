@@ -150,6 +150,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %dir %{_datadir}/mc
 %{_datadir}/mc/*
+%{_datadir}/mc/skins/*
 
 %dir %{_libexecdir}/mc
 

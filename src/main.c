@@ -42,13 +42,14 @@
 #include "global.h"
 
 #include "../src/tty/tty.h"
-#include "../src/tty/color.h"
+#include "../src/skin/skin.h"
 #include "../src/tty/mouse.h"
 #include "../src/tty/key.h"		/* For init_key() */
 #include "../src/tty/win.h"		/* xterm_flag */
 
 #include "../src/mcconfig/mcconfig.h"
 #include "../src/args.h"
+#include "../src/skin/skin.h"
 #include "../src/filehighlight/fhl.h"
 
 #include "dir.h"
@@ -1666,13 +1667,11 @@ mc_maybe_editor_or_viewer (void)
 static void
 do_nc (void)
 {
-    const int midnight_colors[DLG_COLOR_NUM] =
-    {
-	NORMAL_COLOR,	/* NORMALC */
-	REVERSE_COLOR,	/* FOCUSC */
-	INPUT_COLOR,	/* HOT_NORMALC */
-	NORMAL_COLOR	/* HOT_FOCUSC */
-    };
+    int midnight_colors[DLG_COLOR_NUM];
+    midnight_colors[0] = mc_skin_color_get("dialog", "_default_");
+    midnight_colors[1] = mc_skin_color_get("dialog", "focus");
+    midnight_colors[2] = mc_skin_color_get("dialog", "hotnormal");
+    midnight_colors[3] = mc_skin_color_get("dialog", "hotfocus");
 
     midnight_dlg = create_dlg (0, 0, LINES, COLS, midnight_colors, midnight_callback,
 			       "[main]", NULL, DLG_WANT_IDLE);
@@ -1959,6 +1958,10 @@ main (int argc, char *argv[])
     load_setup ();
 
     tty_init_colors (mc_args__disable_colors, mc_args__force_colors);
+
+    mc_skin_init();
+    mc_filehighlight = mc_fhl_new (TRUE);
+
     dlg_set_default_colors ();
 
     /* create home directory */
@@ -1998,12 +2001,11 @@ main (int argc, char *argv[])
 #endif				/* HAVE_SUBSHELL_SUPPORT */
 	prompt = (geteuid () == 0) ? "# " : "$ ";
 
-    mc_filehighlight = mc_fhl_new (TRUE);
+
     /* Program main loop */
     if (!midnight_shutdown)
 	do_nc ();
 
-    mc_fhl_free (&mc_filehighlight);
     /* Save the tree store */
     tree_store_save ();
 
@@ -2011,6 +2013,9 @@ main (int argc, char *argv[])
     vfs_shut ();
 
     flush_extension_file ();	/* does only free memory */
+
+    mc_fhl_free (&mc_filehighlight);
+    mc_skin_deinit();
 
     tty_shutdown ();
 

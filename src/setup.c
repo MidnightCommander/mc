@@ -552,48 +552,6 @@ setup__move_panels_config_into_separate_file(const char*profile)
 }
 
 
-static int
-setup_srt_to_char (char* str)
-{
-    int res = -1;
-
-    if (!str)
-        return (int) ' ';
-    res = g_utf8_get_char_validated (str, -1);
-
-    if ( res < 0 ) {
-        return (int) *str;
-    } else {
-        return res;
-    }
-}
-
-static inline int
-setup_load_lines_frm(const char *name)
-{
-    int ret;
-    char *frm_val = NULL;
-    frm_val = mc_config_get_string(mc_main_config, "Lines", name, " ");
-    ret = setup_srt_to_char (frm_val);
-    g_free (frm_val);
-    return ret;
-}
-
-static void
-setup_load_lines_tty(void)
-{
-    mc_tty_ugly_frm[MC_TTY_FRM_horiz] = setup_load_lines_frm("horiz");
-    mc_tty_ugly_frm[MC_TTY_FRM_vert] = setup_load_lines_frm("vert");
-    mc_tty_ugly_frm[MC_TTY_FRM_lefttop] = setup_load_lines_frm("lefttop");
-    mc_tty_ugly_frm[MC_TTY_FRM_righttop] = setup_load_lines_frm("righttop");
-    mc_tty_ugly_frm[MC_TTY_FRM_leftbottom] = setup_load_lines_frm("leftbottom");
-    mc_tty_ugly_frm[MC_TTY_FRM_rightbottom] = setup_load_lines_frm("rightbottom");
-    mc_tty_ugly_frm[MC_TTY_FRM_thinvert] = setup_load_lines_frm("thinvert");
-    mc_tty_ugly_frm[MC_TTY_FRM_thinhoriz] = setup_load_lines_frm("thinhoriz");
-    mc_tty_ugly_frm[MC_TTY_FRM_rightmiddle] = setup_load_lines_frm("rightmiddle");
-    mc_tty_ugly_frm[MC_TTY_FRM_leftmiddle] = setup_load_lines_frm("leftmiddle");
-}
-
 char *
 setup_init (void)
 {
@@ -724,9 +682,6 @@ load_setup (void)
     if ( get_codepage_id( display_codepage ) )
         utf8_display = str_isutf8 (get_codepage_id( display_codepage ));
 #endif /* HAVE_CHARSET */
-
-    if (!mc_args__ugly_line_drawing)
-        setup_load_lines_tty();
 }
 
 #if defined(USE_VFS) && defined (USE_NETCODE)

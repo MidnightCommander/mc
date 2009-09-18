@@ -6,7 +6,7 @@
 #ifndef MC_COLOR_SLANG_H
 #define MC_COLOR_SLANG_H
 
-#include "../../src/tty/tty-slang.h"	/* S-Lang headers */
+#include "../../src/tty/tty-slang.h"    /* S-Lang headers */
 
 enum {
     COLOR_BLACK = 0,
@@ -31,14 +31,4 @@ enum {
 #    define A_NORMAL	0x00
 #endif
 
-gboolean tty_use_colors ();
-
-#define COLOR_PAIR(x) x
-
-#define IF_COLOR(co, bw) (tty_use_colors () ? COLOR_PAIR (co) : bw)
-
-#define MARKED_SELECTED_COLOR IF_COLOR (4, (SLtt_Use_Ansi_Colors ? A_BOLD_REVERSE : A_REVERSE | A_BOLD))
-
-void mc_init_pair (int index, const char *foreground, const char *background);
-
-#endif				/* MC_COLOR_SLANG_H */
+#endif /* MC_COLOR_SLANG_H */

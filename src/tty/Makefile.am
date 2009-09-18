@@ -7,12 +7,12 @@ if USE_SCREEN_SLANG
 	tty-slang.c tty-slang.h
 else
     TTY_SCREEN_SRC = \
-	color-ncurses.c color-ncurses.h \
+	color-ncurses.c \
 	tty-ncurses.c tty-ncurses.h
 endif
 
 TTY_SRC = \
-	color-internal.c color-internal.h\
+	color-internal.c color-internal.h \
 	color.c color.h \
 	key.c key.h keyxdef.c \
 	mouse.c mouse.h \

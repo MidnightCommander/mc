@@ -30,7 +30,7 @@
 
 #include "global.h"
 #include "../src/tty/tty.h"
-#include "../src/tty/color.h"
+#include "../src/skin/skin.h"
 #include "dir.h"
 #include "panel.h"
 #include "main.h"

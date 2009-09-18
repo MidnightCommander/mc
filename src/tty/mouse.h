@@ -26,25 +26,25 @@
 /* Xterm mouse support supports only GPM_DOWN and GPM_UP */
 /* If you use others make sure your code also works without them */
 enum Gpm_Etype {
-  GPM_MOVE=1,
-  GPM_DRAG=2,   /* exactly one in four is active at a time */
-  GPM_DOWN=4,
-  GPM_UP=  8,
+    GPM_MOVE = 1,
+    GPM_DRAG = 2,               /* exactly one in four is active at a time */
+    GPM_DOWN = 4,
+    GPM_UP = 8,
 
 #define GPM_BARE_EVENTS(ev) ((ev)&0xF)
 
-  GPM_SINGLE=16,            /* at most one in three is set */
-  GPM_DOUBLE=32,
-  GPM_TRIPLE=64,
+    GPM_SINGLE = 16,            /* at most one in three is set */
+    GPM_DOUBLE = 32,
+    GPM_TRIPLE = 64,
 
-  GPM_MFLAG=128,            /* motion during click? */
-  GPM_HARD=256             /* if set in the defaultMask, force an already
-                              used event to pass over to another handler */
+    GPM_MFLAG = 128,            /* motion during click? */
+    GPM_HARD = 256              /* if set in the defaultMask, force an already
+                                   used event to pass over to another handler */
 };
 
 typedef struct Gpm_Event {
-  int buttons, x, y;
-  enum Gpm_Etype type;
+    int buttons, x, y;
+    enum Gpm_Etype type;
 } Gpm_Event;
 
 #endif /* !HAVE_LIBGPM */
@@ -59,10 +59,10 @@ typedef int (*mouse_h) (Gpm_Event *, void *);
 
 /* Type of mouse support */
 typedef enum {
-    MOUSE_NONE,		/* Not detected yet */
-    MOUSE_DISABLED,	/* Explicitly disabled by -d */
-    MOUSE_GPM,		/* Support using GPM on Linux */
-    MOUSE_XTERM,	/* Support using xterm-style mouse reporting */
+    MOUSE_NONE,                 /* Not detected yet */
+    MOUSE_DISABLED,             /* Explicitly disabled by -d */
+    MOUSE_GPM,                  /* Support using GPM on Linux */
+    MOUSE_XTERM,                /* Support using xterm-style mouse reporting */
     MOUSE_XTERM_NORMAL_TRACKING = MOUSE_XTERM,
     MOUSE_XTERM_BUTTON_EVENT_TRACKING
 } Mouse_Type;
@@ -88,4 +88,4 @@ void disable_mouse (void);
 
 void show_mouse_pointer (int x, int y);
 
-#endif				/* MC_MOUSE_H */
+#endif /* MC_MOUSE_H */

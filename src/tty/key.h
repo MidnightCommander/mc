@@ -6,10 +6,10 @@
 #ifndef MC_KEY_H
 #define MC_KEY_H
 
-#include "../../src/global.h"		/* <glib.h> */
-#include "../../src/dialog.h"		/* cb_ret_t */
+#include "../../src/global.h"   /* <glib.h> */
+#include "../../src/dialog.h"   /* cb_ret_t */
 
-#include "../../src/tty/tty.h"		/* KEY_F macro */
+#include "../../src/tty/tty.h"  /* KEY_F macro */
 
 gboolean define_sequence (int code, const char *seq, int action);
 
@@ -20,8 +20,7 @@ void done_key (void);
 /* Keys management */
 typedef void (*move_fn) (void *data, int param);
 cb_ret_t check_movement_keys (int key, int page_size, void *data,
-				move_fn backfn, move_fn forfn,
-				move_fn topfn, move_fn bottomfn);
+                              move_fn backfn, move_fn forfn, move_fn topfn, move_fn bottomfn);
 int lookup_keyname (char *keyname);
 int lookup_key (char *keyname);
 
@@ -31,7 +30,7 @@ typedef const struct {
     const char *longname;
 } key_code_name_t;
 
-extern key_code_name_t key_name_conv_tab [];
+extern key_code_name_t key_name_conv_tab[];
 
 /* mouse support */
 struct Gpm_Event;
@@ -62,7 +61,7 @@ extern int mou_auto_repeat;
 typedef int (*select_fn) (int fd, void *info);
 
 /* Channel manipulation */
-void add_select_channel    (int fd, select_fn callback, void *info);
+void add_select_channel (int fd, select_fn callback, void *info);
 void delete_select_channel (int fd);
 void remove_select_channel (int fd);
 
@@ -77,7 +76,7 @@ static inline gboolean
 is_abort_char (int c)
 {
     return ((c == XCTRL ('c')) || (c == XCTRL ('g'))
-	    || (c == ESC_CHAR) || (c  == KEY_F (10)));
+            || (c == ESC_CHAR) || (c == KEY_F (10)));
 }
 
 /* To define sequences and return codes */
@@ -101,4 +100,4 @@ int get_key_code (int nodelay);
 void numeric_keypad_mode (void);
 void application_keypad_mode (void);
 
-#endif				/* MC_KEY_H */
+#endif /* MC_KEY_H */
