@@ -135,16 +135,14 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
 void
 editcmd_dialog_search_show (WEdit * edit, char **search_text)
 {
-
     if (*search_text == '\0')
         *search_text = INPUT_LAST_TEXT;
 
     {
+	int i;
 	gchar **list_of_types = mc_search_get_types_strings_array();
 	int SEARCH_DLG_HEIGHT = SEARCH_DLG_MIN_HEIGHT + g_strv_length (list_of_types) - SEARCH_DLG_HEIGHT_SUPPLY;
 
-	int i;
-	int btn_pos, dlg_width;
 	int dialog_result;
 
 	QuickWidget quick_widgets[] =
@@ -178,6 +176,12 @@ editcmd_dialog_search_show (WEdit * edit, char **search_text)
 	    QUICK_END
 	};
 
+#ifdef HAVE_CHARSET
+	int last_checkbox = 7;
+#else
+	int last_checkbox = 6;
+#endif
+
 	QuickDialog Quick_input =
 	{
 	    SEARCH_DLG_WIDTH, SEARCH_DLG_HEIGHT, -1, -1, N_("Search"),
@@ -186,30 +190,61 @@ editcmd_dialog_search_show (WEdit * edit, char **search_text)
 
 
 #ifdef ENABLE_NLS
-	/* butons */
+	/* header title */
+	Quick_input.title = _(Quick_input.title);
+	/* buttons */
 	for (i = 0; i < 3; i++)
 	    quick_widgets[i].u.button.text = _(quick_widgets[i].u.button.text);
 	/* checkboxes */
-	for (i = 3; i < 8; i++)
+	for (i = 3; i <= last_checkbox; i++)
 	    quick_widgets[i].u.checkbox.text = _(quick_widgets[i].u.checkbox.text);
 	/* label */
 	quick_widgets[10].u.label.text = _(quick_widgets[10].u.label.text);
 #endif
-	/* calculate button positions */
-	btn_pos = 7;
 
-	for (i = 2; i >= 0; i--) {
-	    quick_widgets[i].relative_x = btn_pos;
-	    btn_pos += str_term_width1 (quick_widgets[i].u.button.text) + 7;
-	    if (i == 2) /* default button */
-		btn_pos += 2;
+	/* calculate widget coordinates */
+	{
+	    int len = 0;
+	    int dlg_width;
+	    gchar **radio = list_of_types;
+	    int b0_len, b1_len, b2_len;
+	    const int button_gap = 2;
+
+	    /* length of radiobuttons */
+            while (*radio != NULL) {
+		len = max (len, str_term_width1 (*radio));
+		radio++;
+	    }
+	    /* length of checkboxes */
+	    for (i = 3; i <= last_checkbox; i++)
+		len = max (len, str_term_width1 (quick_widgets[i].u.checkbox.text) + 4);
+
+	    /* preliminary dialog width */
+	    dlg_width = max (len * 2, str_term_width1 (Quick_input.title)) + 4;
+
+	    /* length of buttons */
+	    b0_len = str_term_width1 (quick_widgets[0].u.button.text) + 3;
+	    b1_len = str_term_width1 (quick_widgets[1].u.button.text) + 3;
+	    b2_len = str_term_width1 (quick_widgets[2].u.button.text) + 5; /* default button */
+	    len = b0_len + b1_len + b2_len + 6 + button_gap * 2;
+
+	    /* dialog width */
+	    Quick_input.xlen = max (SEARCH_DLG_WIDTH, max (dlg_width, len));
+
+	    /* correct widget coordinates */
+	    for (i = 0; i < sizeof (quick_widgets)/sizeof (quick_widgets[0]); i++)
+		quick_widgets[i].x_divisions = Quick_input.xlen;
+
+	    /* checkbox positions */
+	    for (i = 3; i <= last_checkbox; i++)
+		quick_widgets[i].relative_x = Quick_input.xlen/2 + 2;
+	    /* input length */
+	    quick_widgets[last_checkbox + 2].u.input.len = Quick_input.xlen - 6;
+	    /* button positions */
+	    quick_widgets[1].relative_x = Quick_input.xlen/2 - b1_len/2;
+	    quick_widgets[2].relative_x = quick_widgets[1].relative_x - button_gap - b2_len;
+	    quick_widgets[0].relative_x = quick_widgets[1].relative_x + button_gap + b1_len;
 	}
-
-	dlg_width = btn_pos + 2;
-
-	/* correct widget coordinates */
-	for (i = 0; i < sizeof (quick_widgets)/sizeof (quick_widgets[0]); i++)
-	    quick_widgets[i].x_divisions = dlg_width;
 
 	dialog_result = quick_dialog (&Quick_input);
 
