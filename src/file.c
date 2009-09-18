@@ -743,13 +743,13 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 			break;
 		    }
 		}
-		mc_utime (dst_path, &utb);
 	    } else {
 		src_mode = umask(-1);
 		umask(src_mode);
 		src_mode = 0100666 & ~src_mode;
 		mc_chmod (dst_path, (src_mode & ctx->umask_kill));
 	    }
+	    mc_utime (dst_path, &utb);
 	}
     }
 
