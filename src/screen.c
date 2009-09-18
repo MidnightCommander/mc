@@ -436,7 +436,7 @@ static struct {
     const char *title;
     int  use_in_gui;
     const char *(*string_fn)(file_entry *, int);
-    sortfn *sort_routine; /* This field is currently unused. */
+    sortfn *sort_routine; /* used by mouse_sort_col() */
 } formats [] = {
 { "name",  12, 1, J_LEFT_FIT,	N_("Name"),	1, string_file_name,	   (sortfn *) sort_name },
 { "size",  7,  0, J_RIGHT,	N_("Size"),	1, string_file_size,	   (sortfn *) sort_size },
@@ -790,6 +790,8 @@ show_dir (WPanel *panel)
     tty_print_string (">");
     widget_move (&panel->widget, 0, panel->widget.cols - 3);
     tty_print_string ("v");
+    widget_move (&panel->widget, 0, panel->widget.cols - 4);
+    tty_print_string (".");
 
     if (!show_mini_info) {
 	if (panel->marked == 0) {
@@ -2547,6 +2549,50 @@ mark_if_marking (WPanel *panel, Gpm_Event *event)
     return 0;
 }
 
+/* Determine which column was clicked, and sort the panel on
+ * that column, or reverse sort on that column if already
+ * sorted on that column.
+ */
+static void
+mouse_sort_col(Gpm_Event *event, WPanel *panel)
+{
+    int i;
+    const char *sort_name = NULL;
+    sortfn *col_sort_type = NULL;
+    format_e *format;
+
+
+    for (i=0, format = panel->format; format != NULL; format = format->next, i += format->field_len){
+	if ( event->x < i + 1) {
+	    /* found column */
+	    sort_name = format->title;
+	    break;
+	}
+    }
+
+    if (sort_name == NULL)
+	return;
+
+    for (i=0; i < ELEMENTS(formats); i++) {
+	if ( !strcmp(sort_name,_(formats[i].title)) && formats[i].sort_routine ) {
+	    col_sort_type = formats[i].sort_routine;
+	    break;
+	}
+    }
+
+    if (! col_sort_type)
+	return;
+
+    if (panel->sort_type == col_sort_type) {
+	/* reverse the sort if clicked column is already the sorted column */
+	panel->reverse = ! panel->reverse;
+    } else {
+	panel->reverse = 0; /* new sort is forced to be ascending */
+    }
+    panel_set_sort_order(panel, col_sort_type);
+}
+
+
 /*
  * Mouse callback of the panel minus repainting.
  * If the event is redirected to the menu, *redir is set to 1.
@@ -2557,6 +2603,25 @@ do_panel_event (Gpm_Event *event, WPanel *panel, int *redir)
     const int lines = llines (panel);
     const gboolean is_active = dlg_widget_active (panel);
     const gboolean mouse_down = (event->type & GPM_DOWN) != 0;
+
+    /* "." button show/hide hidden files */
+    if (event->type & GPM_DOWN && event->x == panel->widget.cols - 3 && event->y == 1) {
+	toggle_show_hidden();
+	return MOU_NORMAL;
+    }
+
+    /* sort on clicked column */
+    if (event->type & GPM_DOWN && event->y == 2) {
+	mouse_sort_col(event,panel);
+	return MOU_NORMAL;
+    }
+
+    /* rest of the upper frame, the menu is invisible - call menu */
+    if (mouse_down && event->y == 1 && !menubar_visible) {
+	*redir = 1;
+	event->x += panel->widget.x;
+	return (*(the_menubar->widget.mouse)) (event, the_menubar);
+    }
 
     /* "<" button */
     if (mouse_down && event->y == 1 && event->x == 2) {
