@@ -208,6 +208,7 @@ mcview_done (mcview_t * view)
 void
 mcview_set_codeset (mcview_t * view)
 {
+#ifdef HAVE_CHARSET
     const char *cp_id = NULL;
 
     view->utf8 = TRUE;
@@ -222,7 +223,9 @@ mcview_set_codeset (mcview_t * view)
         }
         view->utf8 = (gboolean) str_isutf8 (cp_id);
     }
-
+#else
+    (void) view;
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -234,9 +237,9 @@ mcview_select_encoding (mcview_t * view)
     if (do_select_codepage ()) {
         mcview_set_codeset (view);
     }
+#else
+    (void) view;
 #endif
-
-
 }
 
 /* --------------------------------------------------------------------------------------------- */
