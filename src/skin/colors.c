@@ -195,20 +195,25 @@ mc_skin_color_cache_init (void)
     NORMAL_COLOR = mc_skin_color_get ("core", "_default_");
     MARKED_COLOR = mc_skin_color_get ("core", "marked");
     SELECTED_COLOR = mc_skin_color_get ("core", "selected");
-    REVERSE_COLOR = mc_skin_color_get ("core", "reverse");
     MARKED_SELECTED_COLOR = mc_skin_color_get ("core", "markselect");
-    ERROR_COLOR = mc_skin_color_get ("error", "_default_");
-    MENU_ENTRY_COLOR = mc_skin_color_get ("menu", "_default_");
+    REVERSE_COLOR = mc_skin_color_get ("core", "reverse");
 
     COLOR_NORMAL = mc_skin_color_get ("dialog", "_default_");
     COLOR_FOCUS = mc_skin_color_get ("dialog", "dfocus");
     COLOR_HOT_NORMAL = mc_skin_color_get ("dialog", "dhotnormal");
     COLOR_HOT_FOCUS = mc_skin_color_get ("dialog", "dhotfocus");
 
-    VIEW_UNDERLINED_COLOR = mc_skin_color_get ("viewer", "viewunderline");
+    ERROR_COLOR = mc_skin_color_get ("error", "_default_");
+    ERROR_HOT_NORMAL = mc_skin_color_get ("error", "errdhotnormal");
+    ERROR_HOT_FOCUS = mc_skin_color_get ("error", "errdhotfocus");
+
+    MENU_ENTRY_COLOR = mc_skin_color_get ("menu", "_default_");
     MENU_SELECTED_COLOR = mc_skin_color_get ("menu", "menusel");
     MENU_HOT_COLOR = mc_skin_color_get ("menu", "menuhot");
     MENU_HOTSEL_COLOR = mc_skin_color_get ("menu", "menuhotsel");
+
+    GAUGE_COLOR = mc_skin_color_get ("core", "gauge");
+    INPUT_COLOR = mc_skin_color_get ("core", "input");
 
     HELP_NORMAL_COLOR = mc_skin_color_get ("help", "_default_");
     HELP_ITALIC_COLOR = mc_skin_color_get ("help", "helpitalic");
@@ -216,19 +221,13 @@ mc_skin_color_cache_init (void)
     HELP_LINK_COLOR = mc_skin_color_get ("help", "helplink");
     HELP_SLINK_COLOR = mc_skin_color_get ("help", "helpslink");
 
-    GAUGE_COLOR = mc_skin_color_get ("core", "gauge");
-    INPUT_COLOR = mc_skin_color_get ("core", "input");
+    VIEW_UNDERLINED_COLOR = mc_skin_color_get ("viewer", "viewunderline");
 
     EDITOR_NORMAL_COLOR = mc_skin_color_get ("editor", "_default_");
     EDITOR_BOLD_COLOR = mc_skin_color_get ("editor", "editbold");
     EDITOR_MARKED_COLOR = mc_skin_color_get ("editor", "editmarked");
     EDITOR_WHITESPACE_COLOR = mc_skin_color_get ("editor", "editwhitespace");
-
-    ERROR_HOT_NORMAL = mc_skin_color_get ("error", "errdhotnormal");
-    ERROR_HOT_FOCUS = mc_skin_color_get ("error", "errdhotfocus");
-
     LINE_STATE_COLOR = mc_skin_color_get ("editor", "linestate");
-
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -236,11 +235,8 @@ mc_skin_color_cache_init (void)
 static gboolean
 mc_skin_color_check_inisection (const gchar * group)
 {
-    if ((strcasecmp ("skin", group) == 0)
-        || (strcasecmp ("lines", group) == 0))
-        return FALSE;
-
-    return TRUE;
+    return !((strcasecmp ("skin", group) == 0)
+        || (strcasecmp ("lines", group) == 0));
 }
 
 /* --------------------------------------------------------------------------------------------- */

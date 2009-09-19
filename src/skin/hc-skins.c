@@ -61,6 +61,7 @@ mc_skin_hardcoded_blackwhite_colors (mc_skin_t * mc_skin)
     mc_config_set_string (mc_skin->config, "dialog", "dfocus", "A_BOLD");
     mc_config_set_string (mc_skin->config, "dialog", "dhotnormal", "A_UNDERLINE");
     mc_config_set_string (mc_skin->config, "dialog", "dhotfocus", "A_UNDERLINE");
+    mc_config_set_string (mc_skin->config, "error", "_default_", "A_BOLD");
     mc_config_set_string (mc_skin->config, "menu", "_default_", "default");
     mc_config_set_string (mc_skin->config, "menu", "menuhot", "A_UNDERLINE");
     mc_config_set_string (mc_skin->config, "menu", "menusel", "A_REVERSE");
@@ -69,10 +70,9 @@ mc_skin_hardcoded_blackwhite_colors (mc_skin_t * mc_skin)
     mc_config_set_string (mc_skin->config, "help", "helpitalic", "A_REVERSE");
     mc_config_set_string (mc_skin->config, "help", "helpbold", "A_REVERSE");
     mc_config_set_string (mc_skin->config, "help", "helpslink", "A_BOLD");
+    mc_config_set_string (mc_skin->config, "viewer", "viewunderline", "A_UNDERLINE");
     mc_config_set_string (mc_skin->config, "editor", "editbold", "A_BOLD");
     mc_config_set_string (mc_skin->config, "editor", "editmarked", "A_REVERSE");
-    mc_config_set_string (mc_skin->config, "viewer", "viewunderline", "A_UNDERLINE");
-    mc_config_set_string (mc_skin->config, "error", "_default_", "A_BOLD");
 }
 
 /* --------------------------------------------------------------------------------------------- */
