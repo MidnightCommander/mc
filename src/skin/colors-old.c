@@ -52,7 +52,7 @@ typedef struct mc_skin_colors_old_struct {
 
 mc_skin_colors_old_t old_colors[] = {
     {"normal", "core", "_default_"},
-    {"selected", "ore", "selected"},
+    {"selected", "core", "selected"},
     {"marked", "core", "marked"},
     {"markselect", "core", "markselect"},
     {"errors", "error", "_default_"},
