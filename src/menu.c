@@ -291,10 +291,10 @@ menubar_drop (WMenuBar *menubar, unsigned int selected)
 }
 
 static void
-menubar_execute (WMenuBar *menubar, unsigned int idx)
+menubar_execute (WMenuBar *menubar)
 {
     const Menu *menu = g_list_nth_data (menubar->menu, menubar->selected);
-    const menu_entry_t *entry = g_list_nth_data (menu->entries, idx);
+    const menu_entry_t *entry = g_list_nth_data (menu->entries, menu->selected);
 
     if ((entry == NULL) || (entry->callback == NULL))
 	return;
@@ -452,17 +452,18 @@ menubar_handle_key (WMenuBar *menubar, int key)
     }
 
     {
-	const Menu *menu = g_list_nth_data (menubar->menu, menubar->selected);
+	Menu *menu = g_list_nth_data (menubar->menu, menubar->selected);
 	GList *i;
 
 	/* execute menu callback by hotkey */
-	for (i = menubar->menu; i != NULL; i = g_list_next (i)) {
+	for (i = menu->entries; i != NULL; i = g_list_next (i)) {
 	    const menu_entry_t *entry = i->data;
 
 	    if ((entry != NULL) && (entry->callback != NULL)
 		&& (entry->text.hotkey != NULL)
 		&& (key == g_ascii_tolower (entry->text.hotkey[0]))) {
-		menubar_execute (menubar, g_list_position (menubar->menu, i));
+		menu->selected = g_list_position (menu->entries, i);
+		menubar_execute (menubar);
 		return 1;
 	    }
         }
@@ -471,7 +472,7 @@ menubar_handle_key (WMenuBar *menubar, int key)
 	switch (key) {
 	case KEY_ENTER:
 	case '\n':
-	    menubar_execute (menubar, menu->selected);
+	    menubar_execute (menubar);
 	    return 1;
 
 	case KEY_HOME:
@@ -626,8 +627,7 @@ menubar_event (Gpm_Event *event, void *data)
     /* middle click -- everywhere */
     if (((event->buttons & GPM_B_MIDDLE) != 0)
 	    && ((event->type & GPM_DOWN) != 0)) {
-	Menu *menu = (Menu *) g_list_nth_data (menubar->menu, menubar->selected);
-	menubar_execute (menubar, menu->selected);
+	menubar_execute (menubar);
 	return MOU_NORMAL;
     }
 
@@ -666,7 +666,7 @@ menubar_event (Gpm_Event *event, void *data)
 	    menubar_paint_idx (menubar, menu->selected, MENU_SELECTED_COLOR);
 
 	    if ((event->type & GPM_UP) != 0)
-		menubar_execute (menubar, pos);
+		menubar_execute (menubar);
 	}
     } else
 	/* use click not wheel to close menu */
