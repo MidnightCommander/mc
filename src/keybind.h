@@ -33,6 +33,10 @@ void keybind_cmd_bind(GArray *keymap, char *keybind, int action);
 extern const global_key_map_t default_viewer_keymap[];
 extern const global_key_map_t default_viewer_hex_keymap[];
 
+/* ../edit/editkey.c */
+extern const global_key_map_t default_edit_keymap[];
+extern const global_key_map_t default_edit_x_keymap[];
+
 /* screen.c */
 extern const global_key_map_t default_panel_keymap[];
 
@@ -42,3 +46,4 @@ extern const global_key_map_t default_widget_keymap[];
 /* main.c */
 extern const global_key_map_t default_main_map[];
 extern const global_key_map_t default_main_x_map[];
+
