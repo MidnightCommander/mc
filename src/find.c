@@ -150,9 +150,7 @@ static struct {
 	{ N_("&Edit - F4"), 13, 38 }
 };
 
-static char *in_contents = NULL;
-static char *in_start_dir = NULL;
-static char *in_start_name = NULL;
+static char *in_start_dir = INPUT_LAST_TEXT;
 
 static mc_search_t *search_file_handle = NULL;
 static gboolean skip_hidden_flag = FALSE;
@@ -318,12 +316,8 @@ find_parameters (char **start_dir, char **pattern, char **content)
     b2 = str_term_width1 (buts[2]) + 4;
 
   find_par_start:
-    if (!in_start_dir)
+    if (in_start_dir == NULL)
 	in_start_dir = g_strdup (".");
-    if (!in_start_name)
-	in_start_name = g_strdup (easy_patterns ? "*" : ".");
-    if (!in_contents)
-	in_contents = g_strdup ("");
 
     find_dlg =
 	create_dlg (0, 0, FIND_Y, FIND_X, dialog_colors,
@@ -371,12 +365,12 @@ find_parameters (char **start_dir, char **pattern, char **content)
     file_case_sens_cbox = check_new (7, 3, file_case_sens_flag, file_case_label);
     add_widget (find_dlg, file_case_sens_cbox);
 
-    in_with = input_new (6, FIND_X / 2 + 1, INPUT_COLOR, FIND_X / 2 - 4, in_contents,
+    in_with = input_new (6, FIND_X / 2 + 1, INPUT_COLOR, FIND_X / 2 - 4, INPUT_LAST_TEXT,
                          MC_HISTORY_SHARED_SEARCH, INPUT_COMPLETE_DEFAULT);
     add_widget (find_dlg, in_with);
     add_widget (find_dlg, label_new (5, FIND_X / 2 + 1, _("Content:")));
 
-    in_name = input_new (6, 3, INPUT_COLOR, FIND_X / 2 - 4, in_start_name, "name",
+    in_name = input_new (6, 3, INPUT_COLOR, FIND_X / 2 - 4, INPUT_LAST_TEXT, "name",
                          INPUT_COMPLETE_DEFAULT);
     add_widget (find_dlg, in_name);
     add_widget (find_dlg, label_new (5, 3, _("File name:")));
@@ -397,7 +391,6 @@ find_parameters (char **start_dir, char **pattern, char **content)
 	break;
 
     case B_TREE:
-	temp_dir = g_strdup (in_start->buffer);
 #ifdef HAVE_CHARSET
 	file_all_charsets_flag = file_all_charsets_cbox->state & C_BOOL;
 	content_all_charsets_flag = content_all_charsets_cbox->state & C_BOOL;
@@ -411,13 +404,15 @@ find_parameters (char **start_dir, char **pattern, char **content)
 	find_recurs_flag = recursively_cbox->state & C_BOOL;
 	skip_hidden_flag = skip_hidden_cbox->state & C_BOOL;
 	destroy_dlg (find_dlg);
-	g_free (in_start_dir);
+	if (in_start_dir != INPUT_LAST_TEXT)
+	    g_free (in_start_dir);
+	temp_dir = g_strdup (in_start->buffer);
 	if ((temp_dir[0] == '.') && (temp_dir[1] == '\0')) {
 	    g_free (temp_dir);
 	    temp_dir = g_strdup (current_panel->cwd);
 	}
 	in_start_dir = tree_box (temp_dir);
-	if (in_start_dir)
+	if (in_start_dir != NULL)
 	    g_free (temp_dir);
 	else
 	    in_start_dir = temp_dir;
@@ -426,13 +421,6 @@ find_parameters (char **start_dir, char **pattern, char **content)
 	break;
 
     default:
-	g_free (in_contents);
-	if (in_with->buffer[0]) {
-	    *content = g_strdup (in_with->buffer);
-	    in_contents = g_strdup (*content);
-	} else {
-	    *content = in_contents = NULL;
-	}
 #ifdef HAVE_CHARSET
 	file_all_charsets_flag = file_all_charsets_cbox->state & C_BOOL;
 	content_all_charsets_flag = content_all_charsets_cbox->state & C_BOOL;
@@ -446,13 +434,12 @@ find_parameters (char **start_dir, char **pattern, char **content)
 	file_case_sens_flag = file_case_sens_cbox->state & C_BOOL;
 	skip_hidden_flag = skip_hidden_cbox->state & C_BOOL;
 	return_value = 1;
+	*content = (in_with->buffer[0] != '\0') ? g_strdup (in_with->buffer) : NULL;
 	*start_dir = g_strdup (in_start->buffer);
 	*pattern = g_strdup (in_name->buffer);
-
-	g_free (in_start_dir);
+	if (in_start_dir != INPUT_LAST_TEXT)
+	    g_free (in_start_dir);
 	in_start_dir = g_strdup (*start_dir);
-	g_free (in_start_name);
-	in_start_name = g_strdup (*pattern);
     }
 
     destroy_dlg (find_dlg);
