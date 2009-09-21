@@ -1,8 +1,13 @@
 [editor]
+
 EditXStore = ctrl g
 EditXPaste = ctrl v
 EditXCut = ctrl x
+
 EditDeleteLine = ctrl y
+EditDeleteToLineEnd = ctrl k
+EditDeleteToLineBegin =
+
 EditLeft = left
 EditRight = right
 EditUp = up
@@ -39,6 +44,7 @@ EditMove = f6
 EditRemove = f8
 EditUnmark =
 EditFind = f7
+
 EditPageUpHighlight = shift pgup
 EditPageDownHighlight = shift pgdn
 EditLeftHighlight = shift left
@@ -58,7 +64,67 @@ EditScrollDownHighlight =
 EditParagraphUpHighlight =
 EditParagraphDownHighlight =
 
+EditSaveBlock = ctrl f
+EditColumnMark = f13
+EditFindAgain = f17
+EditReplace = f4
+EditReplaceAgain = f14
+EditCompleteWord = alt tab
+EditDebugStart =
+EditDebugStop =
+EditDebugToggleBreak =
+EditDebugClear =
+EditDebugNext =
+EditDebugStep =
+EditDebugBackTrace =
+EditDebugContinue =
+EditDebugEnterCommand =
+EditDebugUntilCurser =
+EditInsertFile = f15
+EditExit = f10
+EditToggleInsert = ins
+EditHelp = f1
+EditDate =
+EditRefresh = ctrl l
+EditGoto = alt l
+EditManPage =
+EditSort = alt t
+EditMail =
+EditCancel =
+EditComplete =
 
+EditParagraphFormat = alt p
+EditUtil =
+EditTypeLoadPython =
+EditFindFile =
+EditCtags =
+EditMatchBracket = alt b
+EditTerminal =
+EditTerminalApp =
+EditExtCmd = alt u
+EditUserMenu = f11
+EditSaveDesktop =
+EditNewWindow =
+EditCycle =
+EditMenu = f9
+EditSaveAndQuit =
+EditRunAnother =
+EditCheckSaveAndQuit =
+EditMaximize =
+EditDeleteMacro =
+EditToggleBookmark = alt k
+EditFlushBookmarks = alt o
+EditNextBookmark = alt j
+EditPrevBookmark = alt i
+
+EditSelectionHistory =
+EditShell = ctrl o
+EditInsertLiteral = ctrl q
+EditExecuteMacro ctrl a
+EditBeginorEndMacro = ctrl r
+EditBeginRecordMacro =
+EditEndRecordMacro =
+EditToggleLineState = alt n
 
 
 [viewer:hex]

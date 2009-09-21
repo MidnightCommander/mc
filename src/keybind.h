@@ -34,8 +34,8 @@ extern const global_key_map_t default_viewer_keymap[];
 extern const global_key_map_t default_viewer_hex_keymap[];
 
 /* ../edit/editkey.c */
-extern const global_key_map_t default_edit_keymap[];
-extern const global_key_map_t default_edit_x_keymap[];
+extern const global_key_map_t default_editor_keymap[];
+extern const global_key_map_t default_editor_x_keymap[];
 
 /* screen.c */
 extern const global_key_map_t default_panel_keymap[];
