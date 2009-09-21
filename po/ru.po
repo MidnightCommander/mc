@@ -361,9 +361,8 @@ msgstr " Введите текст для замены: "
 msgid " Enter search string:"
 msgstr " Введите строку для поиска:"
 
-#, fuzzy
 msgid "&Find all"
-msgstr "Поиск файла"
+msgstr "На&йти всё"
 
 msgid "Cancel"
 msgstr "Прервать"
