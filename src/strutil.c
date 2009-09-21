@@ -48,6 +48,8 @@ static const char *str_8bit_encodings[] = {
     "cp1250",
     "cp-866",
     "cp866",
+    "ibm-866",
+    "ibm866",
     "cp-850",
     "cp850",
     "cp-852",

@@ -1253,7 +1253,7 @@ setup_mc (void)
 }
 
 static void
-setup_dummy_mc ()
+setup_dummy_mc (void)
 {
     char d[MC_MAXPATHLEN];
 
@@ -1642,8 +1642,6 @@ mc_maybe_editor_or_viewer (void)
     if (!(view_one_file || edit_one_file))
 	return 0;
 
-    setup_dummy_mc ();
-
     /* Invoke the internal view/edit routine with:
      * the default processing and forcing the internal viewer/editor
      */
@@ -1676,12 +1674,16 @@ do_nc (void)
     midnight_dlg = create_dlg (0, 0, LINES, COLS, midnight_colors, midnight_callback,
 			       "[main]", NULL, DLG_WANT_IDLE);
 
+    if (view_one_file || edit_one_file)
+	setup_dummy_mc ();
+    else
+	setup_mc ();
+
     /* start check display_codepage and source_codepage */
     check_codeset();
 
     /* Check if we were invoked as an editor or file viewer */
     if (!mc_maybe_editor_or_viewer ()) {
-	setup_mc ();
 	setup_panels_and_run_mc ();
 
 	/* Program end */
