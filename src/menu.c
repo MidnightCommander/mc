@@ -414,9 +414,11 @@ static int
 menubar_event (Gpm_Event *event, void *data)
 {
     WMenu *menubar = data;
-    int was_active;
+    Menu *menu = menubar->menu [menubar->selected];
+    int was_active = 1;
     int left_x, right_x, bottom_y;
 
+    /* ignore unsupported events */
     if ((event->type & (GPM_UP | GPM_DOWN | GPM_DRAG)) == 0)
 	return MOU_NORMAL;
 
@@ -424,19 +426,20 @@ menubar_event (Gpm_Event *event, void *data)
     if (!menubar->active && (event->buttons & (GPM_B_MIDDLE | GPM_B_UP | GPM_B_DOWN)))
 	return MOU_NORMAL;
 
-    if (!menubar->dropped){
+    /* detect the menu state */
+    if (!menubar->dropped) {
 	menubar->previous_widget = menubar->widget.parent->current->dlg_id;
 	menubar->active = 1;
 	menubar->dropped = 1;
 	was_active = 0;
-    } else
-	was_active = 1;
+    }
 
     /* Mouse operations on the menubar */
     if (event->y == 1 || !was_active){
 	if (event->type & GPM_UP)
 	    return MOU_NORMAL;
 
+	/* wheel events on menubar */
 	if (event->buttons & GPM_B_UP)
 	    menubar_left (menubar);
 	else if (event->buttons & GPM_B_DOWN)
@@ -454,14 +457,12 @@ menubar_event (Gpm_Event *event, void *data)
 	    if (!was_active) {
 		menubar->selected = new_selection;
 		dlg_select_widget (menubar);
-		menubar_drop_compute (menubar);
-		menubar_draw (menubar);
 	    } else {
 		menubar_remove (menubar);
 		menubar->selected = new_selection;
-		menubar_drop_compute (menubar);
-		menubar_draw (menubar);
 	    }
+	    menubar_drop_compute (menubar);
+	    menubar_draw (menubar);
 	}
 	return MOU_NORMAL;
     }
@@ -476,14 +477,14 @@ menubar_event (Gpm_Event *event, void *data)
     }
 
     /* the mouse operation is on the menus or it is not */
-    left_x = menubar->menu[menubar->selected]->start_x;
+    left_x = menu->start_x;
     right_x = left_x + menubar->max_entry_len + 3;
     if (right_x > menubar->widget.cols) {
 	left_x = menubar->widget.cols - menubar->max_entry_len - 3;
 	right_x = menubar->widget.cols;
     }
 
-    bottom_y = (menubar->menu [menubar->selected])->count + 3;
+    bottom_y = menu->count + 3;
 
     if ((event->x >= left_x) && (event->x <= right_x) && (event->y <= bottom_y)){
 	int pos = event->y - 3;
@@ -497,6 +498,10 @@ menubar_event (Gpm_Event *event, void *data)
 	    menubar_move (menubar, 1);
 	    return MOU_NORMAL;
 	}
+
+	/* ignore events above and below dropped down menu */
+	if  ((pos < 0) || (pos >= menu->count))
+	    return MOU_NORMAL;
 
 	if (menubar->menu [menubar->selected]->entries [pos].call_back) {
 	    menubar_paint_idx (menubar, menubar->subsel, MENU_ENTRY_COLOR);
