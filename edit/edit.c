@@ -2718,9 +2718,13 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	edit_delete (edit, 0);
 	break;
     case CK_Delete_Word_Left:
+        edit->over_col = 0;
 	edit_left_delete_word (edit);
 	break;
     case CK_Delete_Word_Right:
+        if ( option_cursor_beyond_eol && edit->over_col > 0 )
+            edit_insert_over (edit);
+
 	edit_right_delete_word (edit);
 	break;
     case CK_Delete_Line:
@@ -2801,10 +2805,12 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	break;
     case CK_Word_Left:
     case CK_Word_Left_Highlight:
+	edit->over_col = 0;
 	edit_left_word_move_cmd (edit);
 	break;
     case CK_Word_Right:
     case CK_Word_Right_Highlight:
+	edit->over_col = 0;
 	edit_right_word_move_cmd (edit);
 	break;
     case CK_Up_Alt_Highlight:
