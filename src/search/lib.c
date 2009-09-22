@@ -27,6 +27,8 @@
 
 #include <config.h>
 
+#include <stdlib.h>
+#include <sys/types.h>
 
 #include "../src/global.h"
 #include "../src/search/search.h"
@@ -241,20 +243,27 @@ mc_search__toupper_case_str (const char *charset, const char *str, gsize str_len
 /* --------------------------------------------------------------------------------------------- */
 
 gchar **
-mc_search_get_types_strings_array (void)
+mc_search_get_types_strings_array (size_t *num)
 {
     gchar **ret;
     int index;
-    const mc_search_type_str_t *type_str;
-    const mc_search_type_str_t *types_str = mc_search_types_list_get ();
+    size_t n;
 
-    ret = g_malloc0(sizeof(char**) * sizeof(types_str) );
+    const mc_search_type_str_t *type_str;
+    const mc_search_type_str_t *types_str = mc_search_types_list_get (&n);
+
+    ret = g_new0 (char *, n + 1);
     if (ret == NULL)
         return NULL;
 
-    for (index=0, type_str = types_str; type_str->str != NULL; type_str++, index++){
-        ret[index] = g_strdup(_(type_str->str));
-    }
+    for (index = 0, type_str = types_str;
+	    type_str->str != NULL;
+	    type_str++, index++)
+        ret[index] = g_strdup (type_str->str);
+
+    /* don't count last NULL item */
+    if (num != NULL)
+	*num = (size_t) index;
 
     return ret;
 }
