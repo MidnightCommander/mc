@@ -68,7 +68,7 @@ mcview_display_text (mcview_t * view)
     screen_dimen row, col;
     off_t from;
     int cw = 1;
-    unsigned int c;
+    unsigned int c, prev_ch;
     gboolean read_res = TRUE;
     struct hexedit_change_node *curr = view->change_list;
 
@@ -98,22 +98,21 @@ mcview_display_text (mcview_t * view)
         if (cw > 1)
             from += cw - 1;
 
+        if (c != '\n' && prev_ch == '\r') {
+            col = 0;
+            row++;
+            tty_print_anychar ('\n');
+        }
+
+        prev_ch = c;
+        if (c == '\r')
+            continue;
+
         if ((c == '\n') || (col >= width && view->text_wrap_mode)) {
             col = 0;
             row++;
             if (c == '\n' || row >= height)
                 continue;
-        }
-
-        if (c == '\r') {
-            if (! mcview_get_byte_indexed (view, from, 1, &c))
-                break;
-
-            if (c == '\r' || c == '\n')
-                continue;
-            col = 0;
-            row++;
-            continue;
         }
 
         if (c == '\t') {
