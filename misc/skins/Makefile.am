@@ -4,3 +4,5 @@ skin_DATA = \
 	default.ini \
 	double-lines.ini
 
+EXTRA_DIST = \
+    $(skin_DATA)
