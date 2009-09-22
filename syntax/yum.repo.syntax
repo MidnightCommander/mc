@@ -1,0 +1,15 @@
+# Yum repo syntax highlighting
+#
+# Author: Andy Shevchenko <andy.shevchenko@gmail.com>
+
+context default
+	keyword whole enabled=0 brightred
+	keyword whole gpgcheck=0 brightred
+	keyword whole enabled=1 brightgreen
+	keyword whole gpgcheck=1 brightgreen
+
+context # \n brown
+	spellcheck
+
+context [ ] brightcyan
+context exclusive = \n	green
