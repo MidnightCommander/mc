@@ -325,8 +325,12 @@ linux*)
 		       [Define to enable gpm mouse support on Linux])
 	    mouse_lib="gpm and xterm"
 	    MCLIBS="$MCLIBS -lgpm"],
-	    [AC_MSG_WARN([libgpm is missing or older than 0.18])
-	])
+            if test "x$with_gpm_mouse" = "xyes"; then
+                [AC_MSG_ERROR([libgpm is missing or older than 0.18])]
+            else
+                [AC_MSG_WARN([libgpm is missing or older than 0.18])]
+            fi
+	)
     fi
     ;;
 esac
