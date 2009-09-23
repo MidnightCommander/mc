@@ -53,6 +53,7 @@
 #include "widget.h"
 #include "wtools.h"
 #include "strutil.h"
+#include "../src/event/event.h"
 
 #include "cmddef.h"		/* CK_ cmd name const */
 #include "keybind.h"		/* global_key_map_t */
@@ -1165,6 +1166,7 @@ input_destroy (WInput *in)
 {
     if (!in){
 	fprintf (stderr, "Internal error: null Input *\n");
+	mc_event_deinit();
 	exit (1);
     }
 

@@ -78,6 +78,7 @@
 #include "command.h"
 #include "wtools.h"
 #include "cmddef.h"		/* CK_ cmd name const */
+#include "../src/event/event.h"
 
 #include "../vfs/vfs.h"		/* vfs_translate_url() */
 
@@ -1113,6 +1114,7 @@ init_xterm_support (void)
     termvalue = getenv ("TERM");
     if (!termvalue || !(*termvalue)) {
 	fputs (_("The TERM environment variable is unset!\n"), stderr);
+	mc_event_deinit();
 	exit (1);
     }
 
@@ -1811,6 +1813,7 @@ mc_main__setup_by_args(int argc, char *argv[])
 	    view_one_file = g_strdup (tmp);
 	else {
 	    fputs ("No arguments given to the viewer\n", stderr);
+	    mc_event_deinit();
 	    exit (1);
 	}
     } else {
@@ -1838,6 +1841,9 @@ main (int argc, char *argv[])
     setlocale (LC_ALL, "");
     bindtextdomain ("mc", LOCALEDIR);
     textdomain ("mc");
+
+    /* we need for event system berofe any other functions calls */
+    mc_event_init();
 
     /* Set up temporary directory */
     mc_tmpdir ();
@@ -1996,6 +2002,7 @@ main (int argc, char *argv[])
 #ifdef USE_INTERNAL_EDIT
     edit_stack_free ();
 #endif
+    mc_event_deinit();
 
     return 0;
 }
