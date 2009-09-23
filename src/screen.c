@@ -2683,7 +2683,9 @@ set_panel_encoding (WPanel *panel)
 	offset = (get_current_index () != 0) ? panel->widget.lines : -panel->widget.lines;
 	r = select_charset (0, offset, source_codepage, FALSE);
     } else {
-	offset = (get_current_index () != 0) ? panel->widget.cols : -panel->widget.cols;
+	offset = (panel->widget.cols == COLS) ? 0
+		    : (get_current_index () != 0) ? panel->widget.cols
+		    : -panel->widget.cols;
 	r = select_charset (offset, 0, source_codepage, FALSE);
     }
 
