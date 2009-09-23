@@ -169,7 +169,7 @@ static const edit_key_map_type common_key_map[] = {
 
     /* Alt */
     { KEY_M_ALT | KEY_PPAGE, CK_Page_Up_Alt_Highlight },
-    { KEY_M_ALT | KEY_NPAGE, CK_Page_Down_Highlight },
+    { KEY_M_ALT | KEY_NPAGE, CK_Page_Down_Alt_Highlight },
     { KEY_M_ALT | KEY_LEFT, CK_Left_Alt_Highlight },
     { KEY_M_ALT | KEY_RIGHT, CK_Right_Alt_Highlight },
     { KEY_M_ALT | KEY_UP, CK_Up_Alt_Highlight },
