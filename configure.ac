@@ -498,10 +498,10 @@ dnl
 dnl User visible support for charset conversion.
 dnl
 AC_ARG_ENABLE([charset],
-	      [  --enable-charset        Support for charset selection and conversion [[no]]])
+	      [  --enable-charset        Support for charset selection and conversion [[yes]]])
 have_charset=
 charset_msg="no"
-if test "x$enable_charset" = xyes; then
+if test "x$enable_charset" != "xno"; then
     AC_DEFINE(HAVE_CHARSET, 1,
 	      [Define to enable charset selection and conversion])
     have_charset=yes
