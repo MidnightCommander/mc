@@ -567,6 +567,7 @@ misc/skins/Makefile
 misc/mc.ext
 
 src/Makefile
+src/event/Makefile
 src/filehighlight/Makefile
 src/mcconfig/Makefile
 src/search/Makefile
