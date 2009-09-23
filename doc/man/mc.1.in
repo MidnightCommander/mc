@@ -2590,6 +2590,7 @@ at the
 .\"LINK2"
 Extension File Edit section
 .\"Extension File Edit"
+
 .\"NODE "Internal File Editor"
 .SH "Internal File Editor"
 The internal file editor is a full\-featured full screen editor.  It can
@@ -2607,6 +2608,14 @@ commands; regular expression search and replace; shift\-arrow text highlighting
 autoindent; tunable tab size; syntax highlighting for various file
 types; and an option to pipe text blocks through shell commands like
 indent and ispell.
+.PP
+Sections:
+.IP
+
+.\"LINK2"
+Options of editor in ini-file
+.\"Internal File Editor / options"
+
 .PP
 The editor is very easy to use and requires no tutoring. To see what
 keys do what, just consult the appropriate pull\-down menu. Other keys
@@ -2659,6 +2668,19 @@ The editor also displays non\-us characters (160+). When editing
 binary files, you should set
 .B display bits
 to 7 bits in the options menu to keep the spacing clean.
+
+.\"NODE "Internal File Editor / options"
+.SH "Options of editor in ini-file"
+
+In this section described some options in ini-file.
+Options placed in '[Midnight Commander]' section
+
+.TP
+.I editor_wordcompletion_collect_entire_file
+Search autocomplete candidates in entire of file or just from
+begin of file to cursor position (0)
+
+
 .\"NODE "Completion"
 .SH "Completion"
 Let the Midnight Commander type for you.

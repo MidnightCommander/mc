@@ -484,6 +484,11 @@ save file position on exit.
 .TP
 .I source_codepage
 symbol representation of codepage name for file (i.e. CP1251, ~ \- default).
+.TP
+.I editor_wordcompletion_collect_entire_file
+Search autocomplete candidates in entire of file or just from
+begin of file to cursor position (0)
+
 .SH MISCELLANEOUS
 You can use scanf search and replace to search and replace a C format
 string.  First take a look at the
