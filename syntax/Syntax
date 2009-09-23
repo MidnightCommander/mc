@@ -214,5 +214,11 @@ include named.syntax
 file .\*\\.strace$ Strace\sdebug\soutput
 include strace.syntax
 
+file PKGBUILD$ Arch\\spackage\\sbuild\\sscript
+include PKGBUILD.syntax
+
+file \\.install$ Arch\\spackage\\sinstall\\sscript
+include sh.syntax
+
 file .\* unknown
 include unknown.syntax
