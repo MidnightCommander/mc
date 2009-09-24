@@ -63,44 +63,44 @@ const global_key_map_t *widget_map;
 
 const global_key_map_t default_widget_keymap[] = {
     /* Motion */
-    { XCTRL('a'),               CK_WidgetBol },
-    { KEY_HOME,                 CK_WidgetBol },
-    { KEY_A1,                   CK_WidgetBol },
-    { ALT ('<'),                CK_WidgetBol },
-    { XCTRL('e'),               CK_WidgetEol },
-    { KEY_END,                  CK_WidgetEol },
-    { KEY_C1,                   CK_WidgetEol },
-    { ALT ('>'),                CK_WidgetEol },
-    { KEY_LEFT,                 CK_WidgetMoveLeft },
-    { KEY_LEFT | KEY_M_CTRL,    CK_WidgetWordLeft },
-    { KEY_RIGHT,                CK_WidgetMoveRight },
-    { KEY_RIGHT | KEY_M_CTRL,   CK_WidgetWordRight },
+    { XCTRL('a'),               CK_InputBol },
+    { KEY_HOME,                 CK_InputBol },
+    { KEY_A1,                   CK_InputBol },
+    { ALT ('<'),                CK_InputBol },
+    { XCTRL('e'),               CK_InputEol },
+    { KEY_END,                  CK_InputEol },
+    { KEY_C1,                   CK_InputEol },
+    { ALT ('>'),                CK_InputEol },
+    { KEY_LEFT,                 CK_InputMoveLeft },
+    { KEY_LEFT | KEY_M_CTRL,    CK_InputWordLeft },
+    { KEY_RIGHT,                CK_InputMoveRight },
+    { KEY_RIGHT | KEY_M_CTRL,   CK_InputWordRight },
 
-    { XCTRL('b'),               CK_WidgetBackwardChar },
-    { ALT('b'),                 CK_WidgetBackwardWord },
-    { XCTRL('f'),               CK_WidgetForwardChar },
-    { ALT('f'),                 CK_WidgetForwardWord },
+    { XCTRL('b'),               CK_InputBackwardChar },
+    { ALT('b'),                 CK_InputBackwardWord },
+    { XCTRL('f'),               CK_InputForwardChar },
+    { ALT('f'),                 CK_InputForwardWord },
 
     /* Editing */
-    { KEY_BACKSPACE,            CK_WidgetBackwardDelete },
-    { KEY_DC,                   CK_WidgetDeleteChar },
-    { ALT('d'),                 CK_WidgetKillWord },
-    { ALT(KEY_BACKSPACE),       CK_WidgetBackwardKillWord },
+    { KEY_BACKSPACE,            CK_InputBackwardDelete },
+    { KEY_DC,                   CK_InputDeleteChar },
+    { ALT('d'),                 CK_InputKillWord },
+    { ALT(KEY_BACKSPACE),       CK_InputBackwardKillWord },
 
     /* Region manipulation */
-    { 0,                        CK_WidgetSetMark },
-    { XCTRL('w'),               CK_WidgetKillRegion },
-    { ALT('w'),                 CK_WidgetKillSave },
-    { XCTRL('y'),               CK_WidgetYank },
-    { XCTRL('k'),               CK_WidgetKillLine },
+    { 0,                        CK_InputSetMark },
+    { XCTRL('w'),               CK_InputKillRegion },
+    { ALT('w'),                 CK_InputKillSave },
+    { XCTRL('y'),               CK_InputYank },
+    { XCTRL('k'),               CK_InputKillLine },
 
     /* History */
-    { ALT('p'),                 CK_WidgetHistoryPrev },
-    { ALT('n'),                 CK_WidgetHistoryNext },
-    { ALT('h'),                 CK_WidgetHistoryShow },
+    { ALT('p'),                 CK_InputHistoryPrev },
+    { ALT('n'),                 CK_InputHistoryNext },
+    { ALT('h'),                 CK_InputHistoryShow },
 
     /* Completion */
-    { ALT('\t'),                CK_WidgetComplete },
+    { ALT('\t'),                CK_InputComplete },
     { 0, 0 }
 };
 
@@ -1730,73 +1730,73 @@ static void
 widget_execute_cmd (WInput *in, int command, int key)
 {
     switch (command) {
-    case CK_WidgetBol:
+    case CK_InputBol:
         beginning_of_line (in);
         break;
-    case CK_WidgetEol:
+    case CK_InputEol:
         end_of_line (in);
         break;
-    case CK_WidgetMoveLeft:
+    case CK_InputMoveLeft:
         key_left (in);
         break;
-    case CK_WidgetWordLeft:
+    case CK_InputWordLeft:
         key_ctrl_left (in);
         break;
-    case CK_WidgetMoveRight:
+    case CK_InputMoveRight:
         key_right (in);
         break;
-    case CK_WidgetWordRight:
+    case CK_InputWordRight:
         key_ctrl_right (in);
         break;
-    case CK_WidgetBackwardChar:
+    case CK_InputBackwardChar:
         backward_char (in);
         break;
-    case CK_WidgetBackwardWord:
+    case CK_InputBackwardWord:
         backward_word (in);
         break;
-    case CK_WidgetForwardChar:
+    case CK_InputForwardChar:
         forward_char (in);
         break;
-    case CK_WidgetForwardWord:
+    case CK_InputForwardWord:
         forward_word (in);
         break;
-    case CK_WidgetBackwardDelete:
+    case CK_InputBackwardDelete:
         backward_delete (in);
         break;
-    case CK_WidgetDeleteChar:
+    case CK_InputDeleteChar:
         delete_char (in);
         break;
-    case CK_WidgetKillWord:
+    case CK_InputKillWord:
         kill_word (in);
         break;
-    case CK_WidgetBackwardKillWord:
+    case CK_InputBackwardKillWord:
         back_kill_word (in);
         break;
-    case CK_WidgetSetMark:
+    case CK_InputSetMark:
         set_mark (in);
         break;
-    case CK_WidgetKillRegion:
+    case CK_InputKillRegion:
         kill_region (in);
         break;
-    case CK_WidgetKillSave:
+    case CK_InputKillSave:
         kill_save (in);
         break;
-    case CK_WidgetYank:
+    case CK_InputYank:
         yank (in);
         break;
-    case CK_WidgetKillLine:
+    case CK_InputKillLine:
         kill_line (in);
         break;
-    case CK_WidgetHistoryPrev:
+    case CK_InputHistoryPrev:
         hist_prev (in);
         break;
-    case CK_WidgetHistoryNext:
+    case CK_InputHistoryNext:
         hist_next (in);
         break;
-    case CK_WidgetHistoryShow:
+    case CK_InputHistoryShow:
         do_show_hist (in);
         break;
-    case CK_WidgetComplete:
+    case CK_InputComplete:
         complete (in);
         break;
     }
@@ -1813,7 +1813,7 @@ is_in_input_map (WInput *in, int key)
     for (i = 0; widget_map[i].key; i++) {
         if (key == widget_map[i].key) {
             widget_execute_cmd (in, widget_map[i].command, key);
-            if (widget_map[i].command == CK_WidgetComplete)
+            if (widget_map[i].command == CK_InputComplete)
                 return 2;
             else
                 return 1;
@@ -1840,7 +1840,7 @@ handle_char (WInput *in, int key)
 
     for (i = 0; widget_map[i].key; i++) {
         if (key == widget_map[i].key) {
-            if (widget_map[i].command != CK_WidgetComplete) {
+            if (widget_map[i].command != CK_InputComplete) {
                 free_completions (in);
                 widget_execute_cmd (in, widget_map[i].command, key);
                 update_input (in, 1);
