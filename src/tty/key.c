@@ -1232,7 +1232,7 @@ lookup_key (char *keyname)
     if (keyname == NULL)
         return 0;
 
-    keys = g_strsplit (keyname, " ", -1);
+    keys = g_strsplit (keyname, "-", -1);
     keys_count = g_strv_length (keys);
     for (i = keys_count - 1; i >= 0; i--) {
         if (keys[i] != NULL && keys[i][0] != 0) {
