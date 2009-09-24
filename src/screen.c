@@ -2289,7 +2289,7 @@ static void cmd_unselect(WPanel *wp) { (void) wp;unselect_cmd(); }
 static void cmd_reverse_selection(WPanel *wp) { (void) wp;reverse_selection_cmd(); }
 
 void
-screen_execute_cmd (WPanel *panel, int command, int key)
+panel_execute_cmd (WPanel *panel, int command, int key)
 {
     switch (command) {
     case CK_PanelChdirOtherPanel:
@@ -2400,7 +2400,7 @@ panel_key (WPanel *panel, int key)
 	    if (panel_map[i].command != CK_PanelStartSearch)
 		panel->searching = 0;
 
-	    screen_execute_cmd (panel, panel_map[i].command, key);
+	    panel_execute_cmd (panel, panel_map[i].command, key);
 
 	    if (panel->searching != old_searching)
 		display_mini_info (panel);

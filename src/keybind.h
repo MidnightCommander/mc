@@ -41,7 +41,7 @@ extern const global_key_map_t default_editor_x_keymap[];
 extern const global_key_map_t default_panel_keymap[];
 
 /* widget.c */
-extern const global_key_map_t default_widget_keymap[];
+extern const global_key_map_t default_input_keymap[];
 
 /* main.c */
 extern const global_key_map_t default_main_map[];
