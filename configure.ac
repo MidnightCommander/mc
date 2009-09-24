@@ -573,6 +573,7 @@ src/search/Makefile
 src/skin/Makefile
 src/tty/Makefile
 src/viewer/Makefile
+src/widget/Makefile
 
 edit/Makefile
 syntax/Makefile
