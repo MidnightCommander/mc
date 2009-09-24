@@ -3294,8 +3294,8 @@ También se pueden usar
 Por ejemplo:
 
 .nf
-    ctrl alt right=\\e[[1;6C
-    ctrl alt left=\\e[[1;6D
+    ctrl-alt-right=\\e[[1;6C
+    ctrl-alt-left=\\e[[1;6D
 .fi
 
 .PP
