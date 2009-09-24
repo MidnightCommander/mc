@@ -211,28 +211,28 @@ PanelSetPanelEncoding = ctrl-t
 
 [panel:xmap]
 
-[widget]
-WidgetBol = ctrl-a; alt-<; home
-WidgetEol = ctrl-e; alt->; end
-WidgetMoveLeft = alt-left
-WidgetWordLeft = ctrl-left
-WidgetBackwardChar = ctrl-b
-WidgetBackwardWord = alt-b
-WidgetMoveRight = alt-right
-WidgetWordRight = ctrl-right
-WidgetForwardChar = ctrl-f
-WidgetForwardWord = alt-f
+[input]
+InputBol = ctrl-a; alt-<; home
+InputEol = ctrl-e; alt->; end
+InputMoveLeft = alt-left
+InputWordLeft = ctrl-left
+InputBackwardChar = ctrl-b
+InputBackwardWord = alt-b
+InputMoveRight = alt-right
+InputWordRight = ctrl-right
+InputForwardChar = ctrl-f
+InputForwardWord = alt-f
 
-WidgetBackwardDelete = backspace
-WidgetDeleteChar = delete
-WidgetKillWord = alt-d
-WidgetBackwardKillWord = alt-backspace
-WidgetSetMark = 
-WidgetKillRegion = ctrl-w
-WidgetKillSave = alt-w
-WidgetYank = ctrl-y
-WidgetKillLine = ctrl-k
-WidgetHistoryPrev = alt-p; ctrl-down
-WidgetHistoryNext = alt-n; ctrl-up
-WidgetHistoryShow = alt-h
-WidgetComplete = alt-tab
+InputBackwardDelete = backspace
+InputDeleteChar = delete
+InputKillWord = alt-d
+InputBackwardKillWord = alt-backspace
+InputSetMark = 
+InputKillRegion = ctrl-w
+InputKillSave = alt-w
+InputYank = ctrl-y
+InputKillLine = ctrl-k
+InputHistoryPrev = alt-p; ctrl-down
+InputHistoryNext = alt-n; ctrl-up
+InputHistoryShow = alt-h
+InputComplete = alt-tab
