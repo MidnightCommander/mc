@@ -208,6 +208,8 @@ PanelGotoMiddleFile = alt-r
 PanelSyncOtherPanel = alt-i
 PanelGotoTopFile = alt-g
 PanelSetPanelEncoding = ctrl-t
+PanelMoveHome = home
+PanelMoveEnd = end
 
 [panel:xmap]
 

@@ -603,7 +603,7 @@ const global_key_map_t default_main_x_map[] = {
     {'p', CK_CopyCurrentPathname},
     {XCTRL ('p'), CK_CopyOtherPathname},
     {'t', CK_CopyCurrentTagged},
-    {XCTRL ('t'), CK_CopyCurrentReadlink},
+    {XCTRL ('t'), CK_CopyOtherTarget},
     {'c', CK_ChmodCmd},
     {'o', CK_ChownCmd},
     {'r', CK_CopyCurrentReadlink},
