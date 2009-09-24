@@ -179,14 +179,14 @@ ExtMap1 = ctrl-x
 
 
 [panel]
-PanelStartSearch = ctrl-s
+PanelStartSearch = ctrl-s; alt-s
 PanelMarkFile = ins
-PanelMoveDown = down
-PanelMoveUp = up
+PanelMoveDown = down; ctrl-n
+PanelMoveUp = up; ctrl-p
 PanelMoveLeft = left
 PanelMoveRight = right
-PanelPrevPage = pgup
-PanelNextPage = pgdn
+PanelPrevPage = pgup; alt-v
+PanelNextPage = pgdn; ctrl-v
 PanelDoEnter = enter
 PanelChdirOtherPanel = alt-o
 PanelChdirToReadlink = alt-l
@@ -200,7 +200,7 @@ PanelSelect = plus
 PanelUnselect = minus
 PanelCtrlNextPage = ctrl-pgdn
 PanelCtrlPrevPage = ctrl-pgup
-PanelDirectoryHistoryList = alt-h
+PanelDirectoryHistoryList = alt-shift-h
 PanelDirectoryHistoryNext = alt-u
 PanelDirectoryHistoryPrev = alt-y
 PanelGotoBottomFile = alt-j
@@ -210,6 +210,7 @@ PanelGotoTopFile = alt-g
 PanelSetPanelEncoding = ctrl-t
 PanelMoveHome = home
 PanelMoveEnd = end
+
 
 [panel:xmap]
 
