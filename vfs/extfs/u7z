@@ -5,7 +5,7 @@
 # Some Bugfixes/workarounds by Sergiy Niskorodov <sgh@mail.zp.ua>
 # Licensed under GNU GPL version 2 or later version.
 
-P7ZIP=7za
+P7ZIP=`which 7z 2>/dev/null` || P7ZIP=`which 7za 2>/dev/null`
 
 mcu7zip_list ()
 {
@@ -21,8 +21,8 @@ mcu7zip_list ()
 mcu7zip_copyout ()
 {
 	#first we check if we have old p7zip archive with prefix ./ in filename
-	$P7ZIP l "$1" "$2" | grep -q "0 files" && \
-	EXFNAME=*./"$2" || EXFNAME="$2"
+	$P7ZIP l "$1" "$2" | grep -q "0 files, 0 folders" && \
+	EXFNAME='*./'"$2" || EXFNAME="$2"
 	$P7ZIP e -so "$1" "$EXFNAME" > "$3" 2>/dev/null
 }
 
@@ -43,8 +43,8 @@ mcu7zip_rm ()
 {
 	# NOTE: Version 4.20 fails to delete files in subdirectories
 	#first we check if we have old p7zip archive with prefix ./ in filename
-	$P7ZIP l "$1" "$2" | grep -q "0 files" && \
-	EXFNAME=*./"$2" || EXFNAME="$2"
+	$P7ZIP l "$1" "$2" | grep -q "0 files, 0 folders" && \
+	EXFNAME='*./'"$2" || EXFNAME="$2"
 	$P7ZIP d "$1" "$EXFNAME" 2>&1 | grep -q E_NOTIMPL > /dev/null 2>&1 && \
 	{ printf "Function not implemented...\n7z cannot delete from solid archive." >&2 ; exit 1 ; }
 }
@@ -52,8 +52,8 @@ mcu7zip_rm ()
 mcu7zip_rmdir ()
 {
 	#first we check if we have old p7zip archive with prefix ./ in filename
-	$P7ZIP l "$1" "$2" | grep -q "0 files" && \
-	EXFNAME=*./"$2" || EXFNAME="$2"
+	$P7ZIP l "$1" "$2" | grep -q "0 files, 0 folders" && \
+	EXFNAME='*./'"$2" || EXFNAME="$2"
 	$P7ZIP d "$1" "$EXFNAME"/ 2>&1 | grep -q E_NOTIMPL > /dev/null 2>&1 && \
 	{ printf "Function not implemented...\n7z cannot delete from solid archive." >&2 ; exit 1 ; }
 }
