@@ -557,6 +557,7 @@ const global_key_map_t default_panel_keymap[] = {
     { KEY_RIGHT,                             CK_PanelMoveRight },
     { KEY_END,                               CK_PanelMoveEnd },
     { KEY_HOME,                              CK_PanelMoveHome },
+    { KEY_A1,                                CK_PanelMoveHome },
     { KEY_NPAGE,                             CK_PanelNextPage },
     { KEY_PPAGE,                             CK_PanelPrevPage },
     { XCTRL('t'),                            CK_PanelSetPanelEncoding },
