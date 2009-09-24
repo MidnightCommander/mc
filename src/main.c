@@ -1202,7 +1202,7 @@ nothing (void)
 {
 }
 
-void
+static void
 midnight_execute_cmd(int command)
 {
     switch (command) {
@@ -1267,25 +1267,37 @@ midnight_execute_cmd(int command)
         copy_other_readlink ();
         break;
     case CK_ChmodCmd:
+        chmod_cmd ();
         break;
     case CK_ChownCmd:
+        chown_cmd ();
         break;
     case CK_LinkCmd:
+        link_cmd () ;
         break;
     case CK_SymlinkCmd:
+        symlink_cmd ();
         break;
     case CK_EditSymlinkCmd:
+        edit_symlink_cmd ();
         break;
     case CK_InfoCmd:
+        info_cmd_no_menu ();
         break;
     case CK_QuickViewCmd:
+        quick_cmd_no_menu ();
         break;
     case CK_AddHotlist:
+	add2hotlist_cmd ();
         break;
     case CK_ExternalPanelize:
+	external_panelize ();
         break;
+#ifdef WITH_BACKGROUND
     case CK_JobsCmd:
+	jobs_cmd ();
         break;
+#endif
     case CK_StartExtMap1:
         ctl_x_cmd ();
         break;
