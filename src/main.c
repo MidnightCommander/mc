@@ -310,7 +310,7 @@ GArray *viewer_hex_keymap = NULL;
 GArray *main_keymap = NULL;
 GArray *main_x_keymap = NULL;
 GArray *panel_keymap = NULL;
-GArray *widget_keymap = NULL;
+GArray *input_keymap = NULL;
 
 const global_key_map_t *main_map;
 const global_key_map_t *main_x_map;
@@ -1203,7 +1203,7 @@ nothing (void)
 }
 
 void
-execute_cmd(int command)
+midnight_execute_cmd(int command)
 {
     switch (command) {
     case CK_MenuLastSelectedCmd:
@@ -1512,7 +1512,7 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	    ctl_x_map_enabled = 0;
 	    for (i = 0; main_x_map[i].key; i++)
 		if (parm == main_x_map[i].key) {
-		    execute_cmd (main_x_map[i].command);
+		    midnight_execute_cmd (main_x_map[i].command);
 		    return MSG_HANDLED;
 		}
 	}
@@ -1614,13 +1614,13 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	    ctl_x_map_enabled = 0;
 	    for (i = 0; main_x_map[i].key; i++)
 		if (parm == main_x_map[i].key) {
-		    execute_cmd (main_x_map[i].command);
+		    midnight_execute_cmd (main_x_map[i].command);
 		    return MSG_HANDLED;
 		}
 	} else {
 	    for (i = 0; main_map[i].key; i++) {
 		if (parm == main_map[i].key) {
-		    execute_cmd (main_map[i].command);
+		    midnight_execute_cmd (main_map[i].command);
 		    return MSG_HANDLED;
 		}
 	    }
@@ -1815,10 +1815,10 @@ do_nc (void)
         panel_map = (global_key_map_t *) panel_keymap->data;
     }
 
-    widget_map = default_widget_keymap;
+    input_map = default_input_keymap;
 
-    if (widget_keymap && widget_keymap->len > 0)
-        widget_map = (global_key_map_t *) widget_keymap->data;
+    if (input_keymap && input_keymap->len > 0)
+        input_map = (global_key_map_t *) input_keymap->data;
 
     /* Check if we were invoked as an editor or file viewer */
     if (!mc_maybe_editor_or_viewer ()) {

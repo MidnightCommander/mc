@@ -59,9 +59,9 @@
 
 #define HISTORY_FILE_NAME ".mc/history"
 
-const global_key_map_t *widget_map;
+const global_key_map_t *input_map;
 
-const global_key_map_t default_widget_keymap[] = {
+const global_key_map_t default_input_keymap[] = {
     /* Motion */
     { XCTRL('a'),               CK_InputBol },
     { KEY_HOME,                 CK_InputBol },
@@ -1727,7 +1727,7 @@ port_region_marked_for_delete (WInput *in)
 }
 
 static void
-widget_execute_cmd (WInput *in, int command, int key)
+input_execute_cmd (WInput *in, int command, int key)
 {
     switch (command) {
     case CK_InputBol:
@@ -1810,10 +1810,10 @@ is_in_input_map (WInput *in, int key)
 {
     int i;
 
-    for (i = 0; widget_map[i].key; i++) {
-        if (key == widget_map[i].key) {
-            widget_execute_cmd (in, widget_map[i].command, key);
-            if (widget_map[i].command == CK_InputComplete)
+    for (i = 0; input_map[i].key; i++) {
+        if (key == input_map[i].key) {
+            input_execute_cmd (in, input_map[i].command, key);
+            if (input_map[i].command == CK_InputComplete)
                 return 2;
             else
                 return 1;
@@ -1838,18 +1838,18 @@ handle_char (WInput *in, int key)
         return v;
     }
 
-    for (i = 0; widget_map[i].key; i++) {
-        if (key == widget_map[i].key) {
-            if (widget_map[i].command != CK_InputComplete) {
+    for (i = 0; input_map[i].key; i++) {
+        if (key == input_map[i].key) {
+            if (input_map[i].command != CK_InputComplete) {
                 free_completions (in);
-                widget_execute_cmd (in, widget_map[i].command, key);
+                input_execute_cmd (in, input_map[i].command, key);
                 update_input (in, 1);
                 v = MSG_HANDLED;
                 break;
             }
         }
     }
-    if (widget_map[i].command == 0) {
+    if (input_map[i].command == 0) {
         if (key > 255)
             return MSG_NOT_HANDLED;
         if (in->first)
