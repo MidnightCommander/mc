@@ -50,13 +50,16 @@
 #include <stdlib.h>
 
 #include "../src/global.h"
+
+#include "../src/tty/tty.h"
+#include "../src/tty/key.h"
+
+#include "../src/dialog.h"	/* cb_ret_t */
 #include "../src/panel.h"
 #include "../src/layout.h"
 #include "../src/wtools.h"
 #include "../src/history.h"
 #include "../src/charsets.h"
-#include "../src/tty/tty.h"
-#include "../src/tty/key.h"
 #include "../src/cmd.h"
 #include "../src/execute.h"
 #include "../src/help.h"
@@ -282,7 +285,7 @@ mcview_hook (void *v)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static cb_ret_t
 mcview_execute_cmd (mcview_t * view, int command, int key)
 {
     int res = MSG_HANDLED;
@@ -399,27 +402,20 @@ mcview_handle_key (mcview_t * view, int key)
 {
     key = convert_from_input_c (key);
 
-    int res = 0;
     int i;
 
     if (view->hex_mode) {
-        for (i = 0; view->hex_map[i].key; i++) {
-            if (key == view->hex_map[i].key) {
-                res = mcview_execute_cmd (view, view->hex_map[i].command, key);
-                if (res == MSG_HANDLED) {
+        for (i = 0; view->hex_map[i].key != 0; i++)
+            if ((key == view->hex_map[i].key)
+                && (mcview_execute_cmd (view, view->hex_map[i].command,
+                                        key) == MSG_HANDLED))
                     return MSG_HANDLED;
-                }
-            }
-        }
     } else {
-        for (i = 0; view->plain_map[i].key; i++) {
-            if (key == view->plain_map[i].key) {
-                res = mcview_execute_cmd (view, view->plain_map[i].command, key);
-                if (res == MSG_HANDLED) {
+        for (i = 0; view->plain_map[i].key != 0; i++)
+            if ((key == view->plain_map[i].key)
+                && (mcview_execute_cmd (view, view->plain_map[i].command,
+                                        key) == MSG_HANDLED))
                     return MSG_HANDLED;
-                }
-            }
-        }
     }
     if (mcview_check_left_right_keys (view, key))
         return MSG_HANDLED;

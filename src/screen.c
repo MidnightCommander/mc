@@ -1780,9 +1780,8 @@ move_selection (WPanel *panel, int lines)
 }
 
 static cb_ret_t
-move_left (WPanel *panel, int c_code)
+move_left (WPanel *panel)
 {
-    (void) c_code;
     if (panel->split) {
 	move_selection (panel, -llines (panel));
 	return MSG_HANDLED;
@@ -1791,9 +1790,8 @@ move_left (WPanel *panel, int c_code)
 }
 
 static int
-move_right (WPanel *panel, int c_code)
+move_right (WPanel *panel)
 {
-    (void) c_code;
     if (panel->split) {
 	move_selection (panel, llines (panel));
 	return MSG_HANDLED;
@@ -2289,7 +2287,7 @@ static void cmd_unselect(WPanel *wp) { (void) wp;unselect_cmd(); }
 static void cmd_reverse_selection(WPanel *wp) { (void) wp;reverse_selection_cmd(); }
 
 void
-panel_execute_cmd (WPanel *panel, int command, int key)
+panel_execute_cmd (WPanel *panel, int command)
 {
     switch (command) {
     case CK_PanelChdirOtherPanel:
@@ -2365,10 +2363,10 @@ panel_execute_cmd (WPanel *panel, int command, int key)
         move_down (panel);
         break;
     case CK_PanelMoveLeft:
-        move_left (panel, key);
+        move_left (panel);
         break;
     case CK_PanelMoveRight:
-        move_right (panel, key);
+        move_right (panel);
         break;
     case CK_PanelMoveEnd:
         move_end (panel);
@@ -2400,7 +2398,7 @@ panel_key (WPanel *panel, int key)
 	    if (panel_map[i].command != CK_PanelStartSearch)
 		panel->searching = 0;
 
-	    panel_execute_cmd (panel, panel_map[i].command, key);
+	    panel_execute_cmd (panel, panel_map[i].command);
 
 	    if (panel->searching != old_searching)
 		display_mini_info (panel);
@@ -2417,10 +2415,10 @@ panel_key (WPanel *panel, int key)
     /* The command line widget may do something more useful */
 /*
     if (key == KEY_LEFT)
-	return move_left (panel, key);
+	return move_left (panel);
 
     if (key == KEY_RIGHT)
-	return move_right (panel, key);
+	return move_right (panel);
 */
     if (is_abort_char (key)) {
 	panel->searching = 0;
