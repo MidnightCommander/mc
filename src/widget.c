@@ -1726,10 +1726,10 @@ port_region_marked_for_delete (WInput *in)
     in->charpoint = 0;
 }
 
-static void
-input_execute_cmd (WInput *in, int command, int key)
+static cb_ret_t
+input_execute_cmd (WInput *in, int command)
 {
-    (void) key;
+    cb_ret_t res = MSG_HANDLED;
 
     switch (command) {
     case CK_InputBol:
@@ -1801,7 +1801,11 @@ input_execute_cmd (WInput *in, int command, int key)
     case CK_InputComplete:
         complete (in);
         break;
+    default:
+	res = MSG_NOT_HANDLED;
     }
+
+    return res;
 }
 
 /* This function is a test for a special input key used in complete.c */
@@ -1814,7 +1818,7 @@ is_in_input_map (WInput *in, int key)
 
     for (i = 0; input_map[i].key; i++) {
         if (key == input_map[i].key) {
-            input_execute_cmd (in, input_map[i].command, key);
+            input_execute_cmd (in, input_map[i].command);
             if (input_map[i].command == CK_InputComplete)
                 return 2;
             else
@@ -1844,7 +1848,7 @@ handle_char (WInput *in, int key)
         if (key == input_map[i].key) {
             if (input_map[i].command != CK_InputComplete) {
                 free_completions (in);
-                input_execute_cmd (in, input_map[i].command, key);
+                input_execute_cmd (in, input_map[i].command);
                 update_input (in, 1);
                 v = MSG_HANDLED;
                 break;
@@ -1919,6 +1923,9 @@ input_callback (Widget *w, widget_msg_t msg, int parm)
 	}
 
 	return handle_char (in, parm);
+
+    case WIDGET_COMMAND:
+	return input_execute_cmd (in, parm);
 
     case WIDGET_FOCUS:
     case WIDGET_UNFOCUS:
