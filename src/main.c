@@ -410,18 +410,6 @@ save_cwds_stat (void)
     }
 }
 
-#ifdef HAVE_SUBSHELL_SUPPORT
-void
-do_update_prompt (void)
-{
-    if (update_prompt) {
-	printf ("\r\n%s", subshell_prompt);
-	fflush (stdout);
-	update_prompt = 0;
-    }
-}
-#endif				/* HAVE_SUBSHELL_SUPPORT */
-
 void
 change_panel (void)
 {

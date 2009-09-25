@@ -1223,4 +1223,15 @@ pty_open_slave (const char *pty_name)
 }
 
 #endif /* !HAVE_GRANTPT */
+
+void
+do_update_prompt (void)
+{
+    if (update_prompt) {
+	printf ("\r\n%s", subshell_prompt);
+	fflush (stdout);
+	update_prompt = 0;
+    }
+}
+
 #endif /* HAVE_SUBSHELL_SUPPORT */

@@ -85,8 +85,6 @@ extern GArray *input_keymap;
 extern const global_key_map_t *panel_map;
 extern const global_key_map_t *input_map;
 
-void do_update_prompt (void);
-
 enum cd_enum {
     cd_parse_command,
     cd_exact

@@ -35,6 +35,8 @@ void do_subshell_chdir (const char *directory, int update_prompt, int reset_prom
 void subshell_get_console_attributes (void);
 void sigchld_handler (int sig);
 
+void do_update_prompt (void);
+
 #endif /* not HAVE_SUBSHELL_SUPPORT */
 
 #endif
