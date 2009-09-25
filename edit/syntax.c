@@ -58,7 +58,7 @@
 #include "edit-impl.h"
 #include "edit-widget.h"
 
-#include "../src/main.h"		/* mc_home */
+#include "../src/main.h"		/* mc_main_sysconf_dir */
 #include "../src/wtools.h"		/* message() */
 #include "../src/strutil.h"		/* utf string functions */
 
@@ -690,7 +690,7 @@ static FILE *open_include_file (const char *filename)
 	return f;
 
     g_free (error_file_name);
-    error_file_name = g_strconcat (mc_home, PATH_SEP_STR, "syntax", PATH_SEP_STR,
+    error_file_name = g_strconcat (mc_main_sysconf_dir, PATH_SEP_STR, "syntax", PATH_SEP_STR,
 				   filename, (char *) NULL);
 
     if ((f = fopen (error_file_name, "r"))) {
@@ -1045,7 +1045,7 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
 
     f = fopen (syntax_file, "r");
     if (!f){
-	lib_file = concat_dir_and_file (mc_home, "Syntax");
+	lib_file = concat_dir_and_file (mc_main_sysconf_dir, "Syntax");
 	f = fopen (lib_file, "r");
 	g_free (lib_file);
 	if (!f)

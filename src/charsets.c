@@ -55,7 +55,7 @@ load_codepages_list (void)
     char buf[BUF_MEDIUM];
     char *default_codepage = NULL;
 
-    fname = concat_dir_and_file (mc_home, CHARSETS_INDEX);
+    fname = concat_dir_and_file (mc_main_sysconf_dir, CHARSETS_INDEX);
     if (!(f = fopen (fname, "r"))) {
 	fprintf (stderr, _("Warning: file %s not found\n"), fname);
 	g_free (fname);

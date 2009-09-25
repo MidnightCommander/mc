@@ -53,7 +53,7 @@
 #include "../src/history.h"
 #include "../src/widget.h"	/* listbox_new() */
 #include "../src/layout.h"	/* clr_scr() */
-#include "../src/main.h"	/* mc_home source_codepage */
+#include "../src/main.h"	/* mc_main_sysconf_dir source_codepage */
 #include "../src/help.h"	/* interactive_display() */
 #include "../src/wtools.h"	/* message() */
 #include "../src/charsets.h"
@@ -898,7 +898,7 @@ edit_load_syntax_file (WEdit * edit)
 			    _("&User"), _("&System Wide"));
     }
 
-    extdir = concat_dir_and_file (mc_home, "syntax" PATH_SEP_STR "Syntax");
+    extdir = concat_dir_and_file (mc_main_sysconf_dir, "syntax" PATH_SEP_STR "Syntax");
     if (!exist_file(extdir)) {
 	g_free (extdir);
 	extdir = concat_dir_and_file (mc_main_sharedata_dir, "syntax" PATH_SEP_STR "Syntax");
@@ -930,7 +930,7 @@ edit_load_menu_file (WEdit * edit)
 	geteuid() ? 2 : 3, _("&Local"), _("&User"), _("&System Wide")
     );
 
-    menufile = concat_dir_and_file (mc_home, EDIT_GLOBAL_MENU);
+    menufile = concat_dir_and_file (mc_main_sysconf_dir, EDIT_GLOBAL_MENU);
 
     if (!exist_file (menufile)) {
 	g_free (menufile);
@@ -950,7 +950,7 @@ edit_load_menu_file (WEdit * edit)
 	    break;
 	
 	case 2:
-	    buffer = concat_dir_and_file (mc_home, EDIT_GLOBAL_MENU);
+	    buffer = concat_dir_and_file (mc_main_sysconf_dir, EDIT_GLOBAL_MENU);
 	    if (!exist_file (buffer)) {
 		g_free (buffer);
 		buffer = concat_dir_and_file (mc_main_sharedata_dir, EDIT_GLOBAL_MENU);
@@ -2125,7 +2125,7 @@ edit_block_process_cmd (WEdit *edit, const char *shell_cmd, int block)
     gchar *o, *h, *b, *tmp;
     char *quoted_name = NULL;
 
-    o = g_strconcat (mc_home, shell_cmd, (char *) NULL);				/* original source script */
+    o = g_strconcat (mc_main_sysconf_dir, shell_cmd, (char *) NULL);				/* original source script */
     h = g_strconcat (home_dir, PATH_SEP_STR EDIT_DIR, shell_cmd, (char *) NULL);	/* home script */
     b = concat_dir_and_file (home_dir, EDIT_BLOCK_FILE);				/* block file */
 

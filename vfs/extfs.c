@@ -1306,7 +1306,7 @@ static int extfs_init (struct vfs_class *me)
 
     (void) me;
 
-    mc_extfsini = concat_dir_and_file (mc_home, "extfs" PATH_SEP_STR "extfs.ini");
+    mc_extfsini = concat_dir_and_file (mc_main_sysconf_dir, "extfs" PATH_SEP_STR "extfs.ini");
     cfg = fopen (mc_extfsini, "r");
 
     /* We may not use vfs_die() message or message or similar,

@@ -46,7 +46,7 @@
 
 #include "../src/search/search.h"
 
-#include "main.h"		/* mc_home */
+#include "main.h"		/* mc_main_sysconf_dir */
 #include "cmd.h"		/* guess_message_value */
 #include "mountlist.h"
 #include "timefmt.h"
@@ -592,7 +592,7 @@ load_mc_home_file (const char *filename, char **allocated_filename)
     char *lang;
     char *data;
 
-    hintfile_base = concat_dir_and_file (mc_home, filename);
+    hintfile_base = concat_dir_and_file (mc_main_sysconf_dir, filename);
     lang = guess_message_value ();
 
     hintfile = g_strconcat (hintfile_base, ".", lang, (char *) NULL);

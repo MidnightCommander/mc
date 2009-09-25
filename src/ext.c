@@ -453,7 +453,7 @@ regex_command (const char *filename, const char *action, int *move_dir)
 	if (!exist_file (extension_file)) {
 	    g_free (extension_file);
 	  check_stock_mc_ext:
-	    extension_file = concat_dir_and_file (mc_home, MC_LIB_EXT);
+	    extension_file = concat_dir_and_file (mc_main_sysconf_dir, MC_LIB_EXT);
 	    if (!exist_file (extension_file)) {
 		g_free (extension_file);
 		extension_file = concat_dir_and_file (mc_main_sharedata_dir, MC_LIB_EXT);
@@ -476,12 +476,12 @@ regex_command (const char *filename, const char *action, int *move_dir)
 		} else {
 		    char *title =
 			g_strdup_printf (_(" %s%s file error"),
-			    mc_home, MC_LIB_EXT);
+			    mc_main_sysconf_dir, MC_LIB_EXT);
 		    message (D_ERROR, title, _("The format of the %smc.ext "
 			"file has changed with version 3.0.  It seems that "
 			"the installation failed.  Please fetch a fresh "
 			"copy from the Midnight Commander package."),
-			mc_home);
+			mc_main_sysconf_dir);
 		    g_free (title);
 		    return 0;
 		}
@@ -493,7 +493,7 @@ regex_command (const char *filename, const char *action, int *move_dir)
 	    message (D_ERROR, title, _("The format of the ~/%s file has "
 		"changed with version 3.0.  You may either want to copy "
 		"it from %smc.ext or use that file as an example of how "
-		"to write it."), MC_USER_EXT, mc_home);
+		"to write it."), MC_USER_EXT, mc_main_sysconf_dir);
 	    g_free (title);
 	}
     }

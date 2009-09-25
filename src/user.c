@@ -763,7 +763,7 @@ user_menu_cmd (WEdit *edit_widget)
 	if (!exist_file (menu)){
 	    g_free (menu);
 	    menu = concat_dir_and_file
-                        (mc_home, edit_widget ? EDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
+                        (mc_main_sysconf_dir, edit_widget ? EDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
 	    if (!exist_file (menu)) {
 		g_free (menu);
 		menu = concat_dir_and_file

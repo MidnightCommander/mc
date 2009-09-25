@@ -216,7 +216,7 @@ mc_fhl_init_from_standart_files (mc_fhl_t * fhl)
     g_free (name);
 
     /* ${sysconfdir}/mc/filehighlight.ini  */
-    name = concat_dir_and_file (mc_home, MC_FHL_INI_FILE);
+    name = concat_dir_and_file (mc_main_sysconf_dir, MC_FHL_INI_FILE);
     if (exist_file (name) && (!mc_fhl_read_ini_file (fhl, name))) {
         g_free (name);
         return FALSE;

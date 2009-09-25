@@ -289,10 +289,10 @@ int midnight_shutdown = 0;
 /* The user's shell */
 char *shell = NULL;
 
-/* mc_home: The home of MC - /etc/mc or defined by MC_DATADIR */
-char *mc_home = NULL;
+/* mc_main_sysconf_dir: The main config dir for MC - ${prefix}/etc/mc or defined by MC_CONFDIR  */
+char *mc_main_sysconf_dir = NULL;
 
-/* mc_main_sharedata_dir: Alternative home of MC - deprecated /usr/share/mc */
+/* mc_main_sharedata_dir: Share data dir for MC - ${prefix}/share/mc or defined by MC_DATADIR */
 char *mc_main_sharedata_dir = NULL;
 
 char cmd_buf[512];
@@ -1876,22 +1876,17 @@ OS_Setup (void)
 	shell = g_strdup ("/bin/sh");
     }
 
-    /* This is the directory, where MC was installed, on Unix this is DATADIR */
-    /* and can be overriden by the MC_DATADIR environment variable */
     mc_libdir = getenv ("MC_DATADIR");
-    if (mc_libdir != NULL) {
-	mc_home = g_strdup (mc_libdir);
-	mc_main_sharedata_dir = g_strdup (SYSCONFDIR);
-    } else {
-	mc_home = g_strdup (SYSCONFDIR);
-	mc_main_sharedata_dir = g_strdup (DATADIR);
-    }
+    mc_main_sharedata_dir = (mc_libdir != NULL) ? g_strdup (mc_libdir) : g_strdup (DATADIR);
+
+    mc_libdir = getenv ("MC_CONFDIR");
+    mc_main_sysconf_dir = (mc_libdir != NULL) ? g_strdup (mc_libdir) : g_strdup (SYSCONFDIR);
 
     /* This variable is used by the subshell */
     home_dir = getenv ("HOME");
 
     if (!home_dir)
-	home_dir = mc_home;
+	home_dir = mc_main_sysconf_dir;
 
 }
 
@@ -2213,7 +2208,7 @@ main (int argc, char *argv[])
     g_free (last_wd_string);
 
     g_free (mc_main_sharedata_dir);
-    g_free (mc_home);
+    g_free (mc_main_sysconf_dir);
     g_free (shell);
 
     done_key ();

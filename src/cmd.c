@@ -598,7 +598,7 @@ void ext_cmd (void)
 			    _(" Which extension file you want to edit? "), D_NORMAL, 2,
 			    _("&User"), _("&System Wide"));
     }
-    extdir = concat_dir_and_file (mc_home, MC_LIB_EXT);
+    extdir = concat_dir_and_file (mc_main_sysconf_dir, MC_LIB_EXT);
 
     if (dir == 0){
 	buffer = concat_dir_and_file (home_dir, MC_USER_EXT);
@@ -631,7 +631,7 @@ edit_mc_menu_cmd (void)
 	_("&Local"), _("&User"), _("&System Wide")
     );
 
-    menufile = concat_dir_and_file (mc_home, MC_GLOBAL_MENU);
+    menufile = concat_dir_and_file (mc_main_sysconf_dir, MC_GLOBAL_MENU);
 
     if (!exist_file(menufile)) {
 	g_free (menufile);
@@ -651,7 +651,7 @@ edit_mc_menu_cmd (void)
 	    break;
 
 	case 2:
-	    buffer = concat_dir_and_file (mc_home, MC_GLOBAL_MENU);
+	    buffer = concat_dir_and_file (mc_main_sysconf_dir, MC_GLOBAL_MENU);
 	    if (!exist_file(buffer)) {
 		g_free (buffer);
 		buffer = concat_dir_and_file (mc_main_sharedata_dir, MC_GLOBAL_MENU);
@@ -683,7 +683,7 @@ void edit_fhl_cmd (void)
 			    _(" Which highlighting file you want to edit? "), D_NORMAL, 2,
 			    _("&User"), _("&System Wide"));
     }
-    fhlfile = concat_dir_and_file (mc_home, MC_FHL_INI_FILE);
+    fhlfile = concat_dir_and_file (mc_main_sysconf_dir, MC_FHL_INI_FILE);
 
     if (dir == 0){
 	user_mc_dir = concat_dir_and_file (home_dir, MC_BASE);
@@ -695,7 +695,7 @@ void edit_fhl_cmd (void)
     } else if (dir == 1) {
 	if (!exist_file(fhlfile)) {
 	    g_free (fhlfile);
-	    fhlfile = concat_dir_and_file (mc_home, MC_FHL_INI_FILE);
+	    fhlfile = concat_dir_and_file (mc_main_sysconf_dir, MC_FHL_INI_FILE);
 	}
 	do_edit (fhlfile);
     }

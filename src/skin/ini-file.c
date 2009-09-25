@@ -99,7 +99,7 @@ mc_skin_ini_file_load (mc_skin_t * mc_skin)
     g_free (user_home_dir);
 
     /* /etc/mc/skins/ */
-    if (mc_skin_ini_file_load_search_in_dir (mc_skin, mc_home))
+    if (mc_skin_ini_file_load_search_in_dir (mc_skin, mc_main_sysconf_dir))
         return TRUE;
 
     /* /usr/share/mc/skins/ */

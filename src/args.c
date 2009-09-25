@@ -38,7 +38,7 @@
 
 extern int reset_hp_softkeys;
 
-extern char *mc_home;
+extern char *mc_main_sysconf_dir;
 extern char *mc_main_sharedata_dir;
 
 /* colors specified on the command line: they override any other setting */
@@ -380,7 +380,7 @@ mc_args_process(void)
 	return FALSE;
     }
     if (mc_args__show_datadirs){
-	printf ("%s (%s)\n", mc_home, mc_main_sharedata_dir);
+	printf ("%s (%s)\n", mc_main_sysconf_dir, mc_main_sharedata_dir);
 	return FALSE;
     }
 

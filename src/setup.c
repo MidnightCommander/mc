@@ -600,9 +600,9 @@ load_setup_get_full_config_name(const char *subdir, const char *config_file_name
 
 
     if (subdir)
-	ret = g_build_filename (mc_home, subdir, basename, NULL);
+	ret = g_build_filename (mc_main_sysconf_dir, subdir, basename, NULL);
     else
-	ret = g_build_filename (mc_home, basename, NULL);
+	ret = g_build_filename (mc_main_sysconf_dir, basename, NULL);
 
     if (exist_file(ret)) {
 	g_free(basename);
@@ -661,8 +661,8 @@ load_setup_get_keymap_profile_config(void)
     load_setup_init_config_from_file( &keymap_config, fname);
     g_free(fname);
 
-    /* 2) /etc/mc (mc_home) */
-    fname = g_build_filename (mc_home, GLOBAL_KEYMAP_FILE, NULL);
+    /* 2) /etc/mc (mc_main_sysconf_dir) */
+    fname = g_build_filename (mc_main_sysconf_dir, GLOBAL_KEYMAP_FILE, NULL);
     load_setup_init_config_from_file( &keymap_config, fname);
     g_free(fname);
 
@@ -712,7 +712,7 @@ setup_init (void)
 
     profile = concat_dir_and_file (home_dir, PROFILE_NAME);
     if (!exist_file (profile)){
-	inifile = concat_dir_and_file (mc_home, "mc.ini");
+	inifile = concat_dir_and_file (mc_main_sysconf_dir, "mc.ini");
 	if (exist_file (inifile)){
 	    g_free (profile);
 	    profile = inifile;
@@ -743,7 +743,8 @@ load_setup (void)
 
     /* mc.lib is common for all users, but has priority lower than
        ~/.mc/ini.  FIXME: it's only used for keys and treestore now */
-    global_profile_name = concat_dir_and_file (mc_home, "mc.lib");
+    global_profile_name = concat_dir_and_file (mc_main_sysconf_dir, "mc.lib");
+
     if (!exist_file(global_profile_name)) {
 	g_free (global_profile_name);
 	global_profile_name = concat_dir_and_file (mc_main_sharedata_dir, "mc.lib");
