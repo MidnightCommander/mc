@@ -41,6 +41,7 @@ typedef enum {
     WIDGET_DRAW,		/* Sent to widget to draw themselves */
     WIDGET_KEY,			/* Sent to widgets on key press */
     WIDGET_HOTKEY,		/* Sent to widget to catch preprocess key */
+    WIDGET_COMMAND,		/* Send to widget to handle command */
     WIDGET_DESTROY,		/* Sent to widget at destruction time */
     WIDGET_CURSOR,		/* Sent to widget to position the cursor */
     WIDGET_IDLE,		/* Sent to widgets with options & W_WANT_IDLE*/
