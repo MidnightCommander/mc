@@ -62,7 +62,7 @@
 #include "find.h"		/* do_find() */
 #include "hotlist.h"		/* hotlist_cmd() */
 #include "tree.h"		/* tree_chdir() */
-#include "subshell.h"		/* use_subshell */
+#include "args.h"		/* mc_args__use_subshell */
 #include "cons.saver.h"		/* console_flag */
 #include "dialog.h"		/* Widget */
 #include "wtools.h"		/* message() */
@@ -903,7 +903,7 @@ view_other_cmd (void)
 {
     static int message_flag = TRUE;
 
-    if (!xterm_flag && !console_flag && !use_subshell && !output_starts_shell) {
+    if (!xterm_flag && !console_flag && !mc_args__use_subshell && !output_starts_shell) {
 	if (message_flag)
 	    message (D_ERROR, MSG_ERROR,
 		     _(" Not an xterm or Linux console; \n"

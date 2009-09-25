@@ -9,6 +9,12 @@
 
 /*** global variables defined in .c file *********************************************************/
 
+#ifdef HAVE_SUBSHELL_SUPPORT
+extern gboolean mc_args__use_subshell;
+#else
+#define mc_args__use_subshell FALSE
+#endif /* not HAVE_SUBSHELL_SUPPORT */
+
 extern gboolean mc_args__force_xterm;
 extern gboolean mc_args__nomouse;
 extern gboolean mc_args__slow_terminal;

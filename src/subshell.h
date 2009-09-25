@@ -12,9 +12,6 @@
 
 #ifdef HAVE_SUBSHELL_SUPPORT
 
-/* If using a subshell for evaluating commands this is true */
-extern int use_subshell;
-
 /* File descriptor of the pseudoterminal used by the subshell */
 extern int subshell_pty;
 
@@ -38,8 +35,6 @@ void do_subshell_chdir (const char *directory, int update_prompt, int reset_prom
 void subshell_get_console_attributes (void);
 void sigchld_handler (int sig);
 
-#else
-#define use_subshell 0
 #endif /* not HAVE_SUBSHELL_SUPPORT */
 
 #endif

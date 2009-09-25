@@ -50,6 +50,7 @@
 #endif /* HAVE_STROPTS_H */
 
 #include "global.h"
+#include "args.h"
 #include "../src/tty/tty.h"	/* LINES */
 #include "panel.h"	/* current_panel */
 #include "wtools.h"	/* query_dialog() */
@@ -88,14 +89,6 @@ static int resize_tty (int fd);
 
 #ifndef STDERR_FILENO
 #    define STDERR_FILENO 2
-#endif
-
-/* If using a subshell for evaluating commands this is true */
-int use_subshell =
-#ifdef SUBSHELL_OPTIONAL
-FALSE;
-#else
-TRUE;
 #endif
 
 /* File descriptors of the pseudoterminal used by the subshell */
@@ -369,7 +362,7 @@ check_sid (void)
  *
  *  Possibly modifies the global variables:
  *	subshell_type, subshell_alive, subshell_stopped, subshell_pid
- *	use_subshell - Is set to FALSE if we can't run the subshell
+ *	mc_args__use_subshell - Is set to FALSE if we can't run the subshell
  *	quit - Can be set to SUBSHELL_EXIT by the SIGCHLD handler
  */
 
@@ -383,10 +376,10 @@ init_subshell (void)
 #ifdef HAVE_GETSID
     switch (check_sid ()) {
     case 1:
-	use_subshell = FALSE;
+	mc_args__use_subshell = FALSE;
 	return;
     case 2:
-	use_subshell = FALSE;
+	mc_args__use_subshell = FALSE;
 	midnight_shutdown = 1;
 	return;
     }
@@ -410,7 +403,7 @@ init_subshell (void)
 	else if (strstr (shell, "/fish"))
 	    subshell_type = FISH;
 	else {
-	    use_subshell = FALSE;
+	    mc_args__use_subshell = FALSE;
 	    return;
 	}
 
@@ -422,14 +415,14 @@ init_subshell (void)
 	if (subshell_pty == -1) {
 	    fprintf (stderr, "Cannot open master side of pty: %s\r\n",
 		     unix_error_string (errno));
-	    use_subshell = FALSE;
+	    mc_args__use_subshell = FALSE;
 	    return;
 	}
 	subshell_pty_slave = pty_open_slave (pty_name);
 	if (subshell_pty_slave == -1) {
 	    fprintf (stderr, "Cannot open slave side of pty %s: %s\r\n",
 		     pty_name, unix_error_string (errno));
-	    use_subshell = FALSE;
+	    mc_args__use_subshell = FALSE;
 	    return;
 	}
 
@@ -446,7 +439,7 @@ init_subshell (void)
 	    if (mkfifo (tcsh_fifo, 0600) == -1) {
 		fprintf (stderr, "mkfifo(%s) failed: %s\r\n", tcsh_fifo,
 			 unix_error_string (errno));
-		use_subshell = FALSE;
+		mc_args__use_subshell = FALSE;
 		return;
 	    }
 
@@ -457,12 +450,12 @@ init_subshell (void)
 		    open (tcsh_fifo, O_RDWR)) == -1) {
 		fprintf (stderr, _("Cannot open named pipe %s\n"), tcsh_fifo);
 		perror (__FILE__": open");
-		use_subshell = FALSE;
+		mc_args__use_subshell = FALSE;
 		return;
 	    }
 	} else /* subshell_type is BASH or ZSH */ if (pipe (subshell_pipe)) {
 	    perror (__FILE__": couldn't create pipe");
-	    use_subshell = FALSE;
+	    mc_args__use_subshell = FALSE;
 	    return;
 	}
     }
@@ -520,11 +513,11 @@ init_subshell (void)
     subshell_state = RUNNING_COMMAND;
     tty_enable_interrupt_key ();
     if (!feed_subshell (QUIETLY, TRUE)) {
-	use_subshell = FALSE;
+	mc_args__use_subshell = FALSE;
     }
     tty_disable_interrupt_key ();
     if (!subshell_alive)
-	use_subshell = FALSE;	/* Subshell died instantly, so don't use it */
+	mc_args__use_subshell = FALSE;	/* Subshell died instantly, so don't use it */
 }
 
 
@@ -594,7 +587,7 @@ int invoke_subshell (const char *command, int how, char **new_dir)
     g_free (pcwd);
 
     /* Restart the subshell if it has died by SIGHUP, SIGQUIT, etc. */
-    while (!subshell_alive && !quit && use_subshell)
+    while (!subshell_alive && !quit && mc_args__use_subshell)
 	init_subshell ();
 
     prompt_pos = 0;
@@ -677,7 +670,7 @@ static int resize_tty (int fd)
 /* Resize subshell_pty */
 void resize_subshell (void)
 {
-    if (use_subshell == 0)
+    if (! mc_args__use_subshell)
 	return;
 
     resize_tty (subshell_pty);
@@ -879,7 +872,7 @@ subshell_get_console_attributes (void)
     if (tcgetattr (STDOUT_FILENO, &shell_mode)) {
 	fprintf (stderr, "Cannot get terminal settings: %s\r\n",
 		 unix_error_string (errno));
-	use_subshell = FALSE;
+	mc_args__use_subshell = FALSE;
 	return;
     }
 }

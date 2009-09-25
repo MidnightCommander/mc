@@ -456,7 +456,7 @@ quit_cmd_internal (int quiet)
     }
     if (q) {
 #ifdef HAVE_SUBSHELL_SUPPORT
-	if (!use_subshell)
+	if (!mc_args__use_subshell)
 	    stop_dialogs ();
 	else if ((q = exit_subshell ()))
 #endif
@@ -485,7 +485,7 @@ void
 subshell_chdir (const char *directory)
 {
 #ifdef HAVE_SUBSHELL_SUPPORT
-    if (use_subshell) {
+    if (mc_args__use_subshell) {
 	if (vfs_current_is_local ())
 	    do_subshell_chdir (directory, 0, 1);
     }
@@ -1382,7 +1382,7 @@ setup_mc (void)
     setup_panels ();
 
 #ifdef HAVE_SUBSHELL_SUPPORT
-    if (use_subshell)
+    if (mc_args__use_subshell)
 	add_select_channel (subshell_pty, load_prompt, 0);
 #endif				/* !HAVE_SUBSHELL_SUPPORT */
 
@@ -1906,7 +1906,7 @@ sigchld_handler_no_subshell (int sig)
 
     /* COMMENT: if it were true that after the call to handle_console(..INIT)
        the value of console_flag never changed, we could simply not install
-       this handler at all if (!console_flag && !use_subshell). */
+       this handler at all if (!console_flag && !mc_args__use_subshell). */
 
     /* That comment is no longer true.  We need to wait() on a sigchld
        handler (that's at least what the tarfs code expects currently). */
@@ -1937,7 +1937,7 @@ init_sigchld (void)
 
     sigchld_action.sa_handler =
 #ifdef HAVE_SUBSHELL_SUPPORT
-	use_subshell ? sigchld_handler :
+	mc_args__use_subshell ? sigchld_handler :
 #endif				/* HAVE_SUBSHELL_SUPPORT */
 	sigchld_handler_no_subshell;
 
@@ -1955,7 +1955,7 @@ init_sigchld (void)
 	 * This may happen on QNX Neutrino 6, where SA_RESTART
 	 * is defined but not implemented.  Fallback to no subshell.
 	 */
-	use_subshell = 0;
+	mc_args__use_subshell = 0;
 #endif				/* HAVE_SUBSHELL_SUPPORT */
     }
 }
@@ -2099,9 +2099,9 @@ main (int argc, char *argv[])
 #ifdef HAVE_SUBSHELL_SUPPORT
     /* Don't use subshell when invoked as viewer or editor */
     if (edit_one_file || view_one_file)
-	use_subshell = 0;
+	mc_args__use_subshell = 0;
 
-    if (use_subshell)
+    if (mc_args__use_subshell)
 	subshell_get_console_attributes ();
 #endif				/* HAVE_SUBSHELL_SUPPORT */
 
@@ -2144,7 +2144,7 @@ main (int argc, char *argv[])
 #ifdef HAVE_SUBSHELL_SUPPORT
     /* Done here to ensure that the subshell doesn't  */
     /* inherit the file descriptors opened below, etc */
-    if (use_subshell)
+    if (mc_args__use_subshell)
 	init_subshell ();
 
 #endif				/* HAVE_SUBSHELL_SUPPORT */
@@ -2162,7 +2162,7 @@ main (int argc, char *argv[])
 	application_keypad_mode ();
 
 #ifdef HAVE_SUBSHELL_SUPPORT
-    if (use_subshell) {
+    if (mc_args__use_subshell) {
 	prompt = strip_ctrl_codes (subshell_prompt);
 	if (!prompt)
 	    prompt = "";

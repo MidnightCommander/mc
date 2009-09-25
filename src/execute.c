@@ -34,6 +34,7 @@
 #include "main.h"
 #include "cons.saver.h"
 #include "subshell.h"
+#include "args.h"
 #include "layout.h"
 #include "dialog.h"
 #include "wtools.h"
@@ -130,12 +131,12 @@ do_execute (const char *shell, const char *command, int flags)
     if (console_flag)
 	handle_console (CONSOLE_RESTORE);
 
-    if (!use_subshell && command && !(flags & EXECUTE_INTERNAL)) {
+    if (!mc_args__use_subshell && command && !(flags & EXECUTE_INTERNAL)) {
 	printf ("%s%s\n", prompt, command);
 	fflush (stdout);
     }
 #ifdef HAVE_SUBSHELL_SUPPORT
-    if (use_subshell && !(flags & EXECUTE_INTERNAL)) {
+    if (mc_args__use_subshell && !(flags & EXECUTE_INTERNAL)) {
 	do_update_prompt ();
 
 	/* We don't care if it died, higher level takes care of this */
@@ -208,7 +209,7 @@ shell_execute (const char *command, int flags)
     }
 
 #ifdef HAVE_SUBSHELL_SUPPORT
-    if (use_subshell)
+    if (mc_args__use_subshell)
 	if (subshell_state == INACTIVE)
 	    do_execute (shell, cmd ? cmd : command, flags | EXECUTE_AS_SHELL);
 	else
@@ -258,7 +259,7 @@ toggle_panels (void)
 	handle_console (CONSOLE_RESTORE);
 
 #ifdef HAVE_SUBSHELL_SUPPORT
-    if (use_subshell) {
+    if (mc_args__use_subshell) {
 	new_dir_p = vfs_current_is_local ()? &new_dir : NULL;
 	if (invoke_subshell (NULL, VISIBLY, new_dir_p))
 	    quiet_quit_cmd ();	/* User did `exit' or `logout': quit MC quietly */
@@ -293,7 +294,7 @@ toggle_panels (void)
 	application_keypad_mode ();
 
 #ifdef HAVE_SUBSHELL_SUPPORT
-    if (use_subshell) {
+    if (mc_args__use_subshell) {
 	load_prompt (0, 0);
 	if (new_dir)
 	    do_possible_cd (new_dir);
@@ -315,7 +316,7 @@ do_suspend_cmd (void)
 {
     pre_exec ();
 
-    if (console_flag && !use_subshell)
+    if (console_flag && !mc_args__use_subshell)
 	handle_console (CONSOLE_RESTORE);
 
 #ifdef SIGTSTP
@@ -334,7 +335,7 @@ do_suspend_cmd (void)
     }
 #endif				/* SIGTSTP */
 
-    if (console_flag && !use_subshell)
+    if (console_flag && !mc_args__use_subshell)
 	handle_console (CONSOLE_SAVE);
 
     edition_post_exec ();

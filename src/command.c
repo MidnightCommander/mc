@@ -33,6 +33,7 @@
 #include <string.h>
 
 #include "global.h"		/* home_dir */
+#include "args.h"		/* mc_args__use_subshell */
 #include "../src/tty/tty.h"
 #include "widget.h"		/* WInput */
 #include "command.h"
@@ -233,7 +234,7 @@ enter (WInput *cmdline)
 #ifdef HAVE_SUBSHELL_SUPPORT
 	/* Check this early before we clean command line
 	 * (will be checked again by shell_execute) */
-	if (use_subshell && subshell_state != INACTIVE) {
+	if (mc_args__use_subshell && subshell_state != INACTIVE) {
 	    message (D_ERROR, MSG_ERROR,
 		     _(" The shell is already running a command "));
 	    return MSG_NOT_HANDLED;
@@ -265,7 +266,7 @@ enter (WInput *cmdline)
 	    quiet_quit_cmd ();
 	    return MSG_HANDLED;
 	}
-	if (use_subshell)
+	if (mc_args__use_subshell)
 	    load_prompt (0, 0);
 #endif
     }

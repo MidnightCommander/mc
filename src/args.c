@@ -37,7 +37,6 @@
 /*** external variables **************************************************************************/
 
 extern int reset_hp_softkeys;
-extern int use_subshell;
 
 extern char *mc_home;
 extern char *mc_home_alt;
@@ -48,6 +47,14 @@ extern char *command_line_colors;
 extern const char *edit_one_file;
 extern const char *view_one_file;
 /*** global variables ****************************************************************************/
+
+/* If using a subshell for evaluating commands this is true */
+gboolean mc_args__use_subshell =
+#ifdef SUBSHELL_OPTIONAL
+FALSE;
+#else
+TRUE;
+#endif
 
 /* If true, show version info and exit */
 gboolean mc_args__version = FALSE;
@@ -124,7 +131,7 @@ static const GOptionEntry argument_main_table[] = {
 #ifdef HAVE_SUBSHELL_SUPPORT
     {
      "subshell", 'U', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE,
-     &use_subshell,
+     &mc_args__use_subshell,
      N_("Enables subshell support (default)"),
      NULL
     },
@@ -382,10 +389,10 @@ mc_args_process(void)
 
 #ifdef HAVE_SUBSHELL_SUPPORT
     if (mc_args__nouse_subshell)
-	use_subshell = 0;
+	mc_args__use_subshell = 0;
 
     if (mc_args__nouse_subshell)
-	use_subshell = 0;
+	mc_args__use_subshell = 0;
 #endif				/* HAVE_SUBSHELL_SUPPORT */
 
     return TRUE;

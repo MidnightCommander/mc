@@ -61,7 +61,7 @@
 #include "command.h"
 #include "main-widgets.h"
 #include "main.h"
-#include "subshell.h"	/* For use_subshell and resize_subshell() */
+#include "subshell.h"	/* For resize_subshell() */
 #include "tree.h"
 #include "menu.h"
 #include "strutil.h"
