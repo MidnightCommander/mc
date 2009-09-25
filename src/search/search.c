@@ -27,6 +27,8 @@
 
 #include <config.h>
 
+#include <stdlib.h>
+#include <sys/types.h>
 
 #include "../src/global.h"
 #include "../src/search/search.h"
@@ -290,8 +292,12 @@ mc_search_is_type_avail (mc_search_type_t search_type)
 /* --------------------------------------------------------------------------------------------- */
 
 const mc_search_type_str_t *
-mc_search_types_list_get (void)
+mc_search_types_list_get (size_t *num)
 {
+    /* don't count last NULL item */
+    if (num != NULL)
+	*num = sizeof (mc_search__list_types) / sizeof (mc_search__list_types[0]) - 1;
+
     return mc_search__list_types;
 }
 

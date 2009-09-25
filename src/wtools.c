@@ -393,11 +393,22 @@ quick_dialog_skip (QuickDialog *qd, int nskip)
 	case quick_radio:
 	{
 	    int i;
-	    r = radio_new (ypos, xpos, qw->u.radio.count, qw->u.radio.items);
-	    for (i = 0; i < qw->u.radio.count; i++)
-		I18N (qw->u.radio.items[i]);
+	    char **items = NULL;
+
+	    /* create the copy of radio_items to avoid mwmory leak */
+	    items = g_new0 (char *, qw->u.radio.count + 1);
+
+	    if (!qd->i18n)
+		for (i = 0; i < qw->u.radio.count; i++)
+		    items[i] = g_strdup (_(qw->u.radio.items[i]));
+	    else
+		for (i = 0; i < qw->u.radio.count; i++)
+		    items[i] = g_strdup (qw->u.radio.items[i]);
+
+	    r = radio_new (ypos, xpos, qw->u.radio.count, items);
 	    r->pos = r->sel = *qw->u.radio.value;
 	    qw->widget = (Widget *) r;
+	    g_strfreev (items);
 	    break;
 	}
 

@@ -37,11 +37,17 @@
 
 #include <config.h>
 
+#include <stdlib.h>
+#include <sys/types.h>
+
+#include "../src/search/search.h"
+
 #include "../src/global.h"
 #include "../src/wtools.h"
-#include "internal.h"
 #include "../src/history.h"
 #include "../src/charsets.h"
+
+#include "internal.h"
 
 /*** global variables ****************************************************************************/
 
@@ -67,11 +73,12 @@ mcview_dialog_search (mcview_t * view)
     char *exp = NULL;
     int qd_result;
 
-    gchar **list_of_types = mc_search_get_types_strings_array ();
-    int SEARCH_DLG_HEIGHT =
-	SEARCH_DLG_MIN_HEIGHT + g_strv_length (list_of_types) - SEARCH_DLG_HEIGHT_SUPPLY;
+    size_t num_of_types;
+    gchar **list_of_types = mc_search_get_types_strings_array (&num_of_types);
+    int SEARCH_DLG_HEIGHT = SEARCH_DLG_MIN_HEIGHT + num_of_types - SEARCH_DLG_HEIGHT_SUPPLY;
 
-    QuickWidget quick_widgets[] = {
+    QuickWidget quick_widgets[] =
+    {
 	QUICK_BUTTON (6, 10, SEARCH_DLG_HEIGHT - 3, SEARCH_DLG_HEIGHT, N_("&Cancel"), B_CANCEL, NULL),
 	QUICK_BUTTON (2, 10, SEARCH_DLG_HEIGHT - 3, SEARCH_DLG_HEIGHT, N_("&OK"), B_ENTER, NULL),
 #ifdef HAVE_CHARSET
@@ -85,7 +92,7 @@ mcview_dialog_search (mcview_t * view)
 	QUICK_CHECKBOX (SEARCH_DLG_WIDTH / 2 + 3, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT,
 			N_("case &Sensitive"),  &view->search_case),
 	QUICK_RADIO (3, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT,
-			g_strv_length (list_of_types), (const char **) list_of_types, &view->search_type),
+			num_of_types, (const char **) list_of_types, &view->search_type),
 	QUICK_INPUT (3, SEARCH_DLG_WIDTH, 3, SEARCH_DLG_HEIGHT,
 			INPUT_LAST_TEXT, SEARCH_DLG_WIDTH - 6, 0, MC_HISTORY_SHARED_SEARCH, &exp),
 	QUICK_LABEL (2, SEARCH_DLG_WIDTH, 2, SEARCH_DLG_HEIGHT, N_(" Enter search string:")),

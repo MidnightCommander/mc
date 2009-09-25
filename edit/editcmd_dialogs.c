@@ -89,8 +89,9 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
         search_default = INPUT_LAST_TEXT;
 
     {
-	gchar **list_of_types = mc_search_get_types_strings_array();
-	int REPLACE_DLG_HEIGHT = REPLACE_DLG_MIN_HEIGHT + g_strv_length (list_of_types) - REPLACE_DLG_HEIGHT_SUPPLY;
+	size_t num_of_types;
+	gchar **list_of_types = mc_search_get_types_strings_array (&num_of_types);
+	int REPLACE_DLG_HEIGHT = REPLACE_DLG_MIN_HEIGHT + num_of_types - REPLACE_DLG_HEIGHT_SUPPLY;
 
 	QuickWidget quick_widgets[] =
 	{
@@ -104,7 +105,7 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
 	    /*  5 */ QUICK_CHECKBOX (33, REPLACE_DLG_WIDTH,  8, REPLACE_DLG_HEIGHT, N_("&Backwards"), &edit->replace_backwards),
 	    /*  6 */ QUICK_CHECKBOX (33, REPLACE_DLG_WIDTH,  7, REPLACE_DLG_HEIGHT, N_("case &Sensitive"), &edit->replace_case),
 	    /*  7 */ QUICK_RADIO (3, REPLACE_DLG_WIDTH,   7, REPLACE_DLG_HEIGHT,
-				g_strv_length (list_of_types), (const char **) list_of_types, &edit->search_type),
+				num_of_types, (const char **) list_of_types, &edit->search_type),
 	    /*  8 */ QUICK_LABEL (2, REPLACE_DLG_WIDTH,   4, REPLACE_DLG_HEIGHT, N_(" Enter replacement string:")),
 	    /*  9 */ QUICK_INPUT (3, REPLACE_DLG_WIDTH,   5, REPLACE_DLG_HEIGHT,
 				replace_default, REPLACE_DLG_WIDTH - 6, 0, "replace", replace_text),
@@ -140,9 +141,10 @@ editcmd_dialog_search_show (WEdit * edit, char **search_text)
         *search_text = INPUT_LAST_TEXT;
 
     {
+	size_t num_of_types;
+	gchar **list_of_types = mc_search_get_types_strings_array (&num_of_types);
+	int SEARCH_DLG_HEIGHT = SEARCH_DLG_MIN_HEIGHT + num_of_types - SEARCH_DLG_HEIGHT_SUPPLY;
 	int i;
-	gchar **list_of_types = mc_search_get_types_strings_array();
-	int SEARCH_DLG_HEIGHT = SEARCH_DLG_MIN_HEIGHT + g_strv_length (list_of_types) - SEARCH_DLG_HEIGHT_SUPPLY;
 
 	int dialog_result;
 
@@ -168,7 +170,7 @@ editcmd_dialog_search_show (WEdit * edit, char **search_text)
 	    QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT, N_("case &Sensitive"), &edit->replace_case),
 	    /* 8 */
 	    QUICK_RADIO ( 3, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT,
-				    g_strv_length (list_of_types), (const char **) list_of_types, &edit->search_type),
+				    num_of_types, (const char **) list_of_types, &edit->search_type),
 	    /* 9 */
 	    QUICK_INPUT (3, SEARCH_DLG_WIDTH, 3, SEARCH_DLG_HEIGHT,
 				    *search_text, SEARCH_DLG_WIDTH - 6, 0, MC_HISTORY_SHARED_SEARCH, search_text),
@@ -189,8 +191,9 @@ editcmd_dialog_search_show (WEdit * edit, char **search_text)
 	    "[Input Line Keys]", quick_widgets, TRUE
 	};
 
-
 #ifdef ENABLE_NLS
+	char **list_of_types_nls;
+
 	/* header title */
 	Quick_input.title = _(Quick_input.title);
 	/* buttons */
@@ -201,6 +204,15 @@ editcmd_dialog_search_show (WEdit * edit, char **search_text)
 	    quick_widgets[i].u.checkbox.text = _(quick_widgets[i].u.checkbox.text);
 	/* label */
 	quick_widgets[10].u.label.text = _(quick_widgets[10].u.label.text);
+
+	/* radiobuttons */
+	/* create copy of radio items to avoid memory leak */
+	list_of_types_nls = g_new0 (char *, num_of_types + 1);
+	for (i = 0; i < num_of_types; i++)
+	    list_of_types_nls[i] = g_strdup (_(list_of_types[i]));
+	g_strfreev (list_of_types);
+	list_of_types = list_of_types_nls;
+	quick_widgets[last_checkbox + 1].u.radio.items = (const char **) list_of_types;
 #endif
 
 	/* calculate widget coordinates */
@@ -248,6 +260,8 @@ editcmd_dialog_search_show (WEdit * edit, char **search_text)
 	}
 
 	dialog_result = quick_dialog (&Quick_input);
+
+	g_strfreev (list_of_types);
 
 	if (dialog_result == B_CANCEL)
 	    *search_text = NULL;
