@@ -217,11 +217,11 @@ PanelMoveEnd = end
 [input]
 InputBol = ctrl-a; alt-<; home
 InputEol = ctrl-e; alt->; end
-InputMoveLeft = alt-left
+InputMoveLeft = left; alt-left
 InputWordLeft = ctrl-left
 InputBackwardChar = ctrl-b
 InputBackwardWord = alt-b
-InputMoveRight = alt-right
+InputMoveRight = right; alt-right
 InputWordRight = ctrl-right
 InputForwardChar = ctrl-f
 InputForwardWord = alt-f

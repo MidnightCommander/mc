@@ -2286,9 +2286,11 @@ static void cmd_select(WPanel *wp) { (void) wp;select_cmd(); }
 static void cmd_unselect(WPanel *wp) { (void) wp;unselect_cmd(); }
 static void cmd_reverse_selection(WPanel *wp) { (void) wp;reverse_selection_cmd(); }
 
-void
+static cb_ret_t
 panel_execute_cmd (WPanel *panel, int command)
 {
+    int res = MSG_HANDLED;
+
     switch (command) {
     case CK_PanelChdirOtherPanel:
         chdir_other_panel (panel);
@@ -2363,10 +2365,10 @@ panel_execute_cmd (WPanel *panel, int command)
         move_down (panel);
         break;
     case CK_PanelMoveLeft:
-        move_left (panel);
+        res = move_left (panel);
         break;
     case CK_PanelMoveRight:
-        move_right (panel);
+        res = move_right (panel);
         break;
     case CK_PanelMoveEnd:
         move_end (panel);
@@ -2384,12 +2386,14 @@ panel_execute_cmd (WPanel *panel, int command)
         sync_other_panel (panel);
         break;
     }
+   return res;
 }
 
 static cb_ret_t
 panel_key (WPanel *panel, int key)
 {
     int i;
+    int res, command;
 
     for (i = 0; panel_map[i].key; i++) {
 	if (key == panel_map[i].key) {
@@ -2398,7 +2402,11 @@ panel_key (WPanel *panel, int key)
 	    if (panel_map[i].command != CK_PanelStartSearch)
 		panel->searching = 0;
 
-	    panel_execute_cmd (panel, panel_map[i].command);
+	    command = panel_map[i].command;
+	    res = panel_execute_cmd (panel, command);
+
+	    if (res == MSG_NOT_HANDLED)
+		return res;
 
 	    if (panel->searching != old_searching)
 		display_mini_info (panel);
@@ -2411,15 +2419,6 @@ panel_key (WPanel *panel, int key)
 	return MSG_HANDLED;
     }
 
-    /* We do not want to take a key press if nothing can be done with it */
-    /* The command line widget may do something more useful */
-/*
-    if (key == KEY_LEFT)
-	return move_left (panel);
-
-    if (key == KEY_RIGHT)
-	return move_right (panel);
-*/
     if (is_abort_char (key)) {
 	panel->searching = 0;
 	display_mini_info (panel);
