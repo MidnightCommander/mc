@@ -1250,6 +1250,7 @@ lookup_key (char *keyname)
             }
         }
     }
+    g_strfreev (keys);
     if (k == -1)
         return 0;
 
