@@ -1202,9 +1202,11 @@ nothing (void)
 {
 }
 
-static void
+static cb_ret_t
 midnight_execute_cmd(int command)
 {
+    cb_ret_t res = MSG_HANDLED;
+
     switch (command) {
     case CK_MenuLastSelectedCmd:
         menu_last_selected_cmd ();
@@ -1301,7 +1303,11 @@ midnight_execute_cmd(int command)
     case CK_StartExtMap1:
         ctl_x_cmd ();
         break;
+    default:
+        res = MSG_NOT_HANDLED;
     }
+
+    return res;
 }
 
 static void
@@ -1523,10 +1529,8 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	if (ctl_x_map_enabled) {
 	    ctl_x_map_enabled = 0;
 	    for (i = 0; main_x_map[i].key; i++)
-		if (parm == main_x_map[i].key) {
-		    midnight_execute_cmd (main_x_map[i].command);
-		    return MSG_HANDLED;
-		}
+		if (parm == main_x_map[i].key)
+		    return midnight_execute_cmd (main_x_map[i].command);
 	}
 
 	/* FIXME: should handle all menu shortcuts before this point */
@@ -1616,25 +1620,21 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 
     case DLG_UNHANDLED_KEY:
 	if (command_prompt) {
-	    int v;
+	    cb_ret_t v;
 
 	    v = send_message ((Widget *) cmdline, WIDGET_KEY, parm);
-	    if (v)
-		return v;
+	    if (v == MSG_HANDLED)
+		return MSG_HANDLED;
 	}
 	if (ctl_x_map_enabled) {
 	    ctl_x_map_enabled = 0;
 	    for (i = 0; main_x_map[i].key; i++)
-		if (parm == main_x_map[i].key) {
-		    midnight_execute_cmd (main_x_map[i].command);
-		    return MSG_HANDLED;
-		}
+		if (parm == main_x_map[i].key)
+		    return midnight_execute_cmd (main_x_map[i].command);
 	} else {
 	    for (i = 0; main_map[i].key; i++) {
-		if (parm == main_map[i].key) {
-		    midnight_execute_cmd (main_map[i].command);
-		    return MSG_HANDLED;
-		}
+		if (parm == main_map[i].key)
+		    return midnight_execute_cmd (main_map[i].command);
 	    }
 	}
 	return MSG_NOT_HANDLED;

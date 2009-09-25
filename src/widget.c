@@ -1729,6 +1729,8 @@ port_region_marked_for_delete (WInput *in)
 static void
 input_execute_cmd (WInput *in, int command, int key)
 {
+    (void) key;
+
     switch (command) {
     case CK_InputBol:
         beginning_of_line (in);
