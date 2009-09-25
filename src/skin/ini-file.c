@@ -103,7 +103,7 @@ mc_skin_ini_file_load (mc_skin_t * mc_skin)
         return TRUE;
 
     /* /usr/share/mc/skins/ */
-    return mc_skin_ini_file_load_search_in_dir (mc_skin, mc_home_alt);
+    return mc_skin_ini_file_load_search_in_dir (mc_skin, mc_main_sharedata_dir);
 }
 
 /* --------------------------------------------------------------------------------------------- */

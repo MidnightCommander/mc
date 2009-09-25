@@ -608,7 +608,7 @@ void ext_cmd (void)
     } else if (dir == 1) {
 	if (!exist_file(extdir)) {
 	    g_free (extdir);
-	    extdir = concat_dir_and_file (mc_home_alt, MC_LIB_EXT);
+	    extdir = concat_dir_and_file (mc_main_sharedata_dir, MC_LIB_EXT);
 	}
 	do_edit (extdir);
     }
@@ -635,7 +635,7 @@ edit_mc_menu_cmd (void)
 
     if (!exist_file(menufile)) {
 	g_free (menufile);
-	menufile = concat_dir_and_file (mc_home_alt, MC_GLOBAL_MENU);
+	menufile = concat_dir_and_file (mc_main_sharedata_dir, MC_GLOBAL_MENU);
     }
 
     switch (dir) {
@@ -654,7 +654,7 @@ edit_mc_menu_cmd (void)
 	    buffer = concat_dir_and_file (mc_home, MC_GLOBAL_MENU);
 	    if (!exist_file(buffer)) {
 		g_free (buffer);
-		buffer = concat_dir_and_file (mc_home_alt, MC_GLOBAL_MENU);
+		buffer = concat_dir_and_file (mc_main_sharedata_dir, MC_GLOBAL_MENU);
 	    }
 	    break;
 

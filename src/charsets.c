@@ -60,7 +60,7 @@ load_codepages_list (void)
 	fprintf (stderr, _("Warning: file %s not found\n"), fname);
 	g_free (fname);
 
-	fname = concat_dir_and_file (mc_home_alt, CHARSETS_INDEX);
+	fname = concat_dir_and_file (mc_main_sharedata_dir, CHARSETS_INDEX);
 	if (!(f = fopen (fname, "r"))) {
 	    fprintf (stderr, _("Warning: file %s not found\n"), fname);
 	    g_free (fname);

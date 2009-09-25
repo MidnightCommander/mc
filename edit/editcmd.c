@@ -901,7 +901,7 @@ edit_load_syntax_file (WEdit * edit)
     extdir = concat_dir_and_file (mc_home, "syntax" PATH_SEP_STR "Syntax");
     if (!exist_file(extdir)) {
 	g_free (extdir);
-	extdir = concat_dir_and_file (mc_home_alt, "syntax" PATH_SEP_STR "Syntax");
+	extdir = concat_dir_and_file (mc_main_sharedata_dir, "syntax" PATH_SEP_STR "Syntax");
     }
 
     if (dir == 0) {
@@ -934,7 +934,7 @@ edit_load_menu_file (WEdit * edit)
 
     if (!exist_file (menufile)) {
 	g_free (menufile);
-	menufile = concat_dir_and_file (mc_home_alt, EDIT_GLOBAL_MENU);
+	menufile = concat_dir_and_file (mc_main_sharedata_dir, EDIT_GLOBAL_MENU);
     }
 
     switch (dir) {
@@ -953,7 +953,7 @@ edit_load_menu_file (WEdit * edit)
 	    buffer = concat_dir_and_file (mc_home, EDIT_GLOBAL_MENU);
 	    if (!exist_file (buffer)) {
 		g_free (buffer);
-		buffer = concat_dir_and_file (mc_home_alt, EDIT_GLOBAL_MENU);
+		buffer = concat_dir_and_file (mc_main_sharedata_dir, EDIT_GLOBAL_MENU);
 	    }
 	    break;
 
@@ -2137,7 +2137,7 @@ edit_block_process_cmd (WEdit *edit, const char *shell_cmd, int block)
 	    goto edit_block_process_cmd__EXIT;
 	}
 	if (!(script_src = fopen (o, "r"))) {
-	    o = g_strconcat (mc_home_alt, shell_cmd, (char *) NULL);
+	    o = g_strconcat (mc_main_sharedata_dir, shell_cmd, (char *) NULL);
 	    if (!(script_src = fopen (o, "r"))) {
 		fclose (script_home);
 		unlink (h);

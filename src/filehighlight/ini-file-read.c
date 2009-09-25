@@ -208,7 +208,7 @@ mc_fhl_init_from_standart_files (mc_fhl_t * fhl)
     gchar *user_mc_dir;
 
     /* ${datadir}/mc/filehighlight.ini  */
-    name = concat_dir_and_file (mc_home_alt, MC_FHL_INI_FILE);
+    name = concat_dir_and_file (mc_main_sharedata_dir, MC_FHL_INI_FILE);
     if (exist_file (name) && (!mc_fhl_read_ini_file (fhl, name))) {
         g_free (name);
         return FALSE;

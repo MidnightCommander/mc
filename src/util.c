@@ -601,7 +601,7 @@ load_mc_home_file (const char *filename, char **allocated_filename)
     if (!data) {
 	g_free (hintfile);
 	g_free (hintfile_base);
-	hintfile_base = concat_dir_and_file (mc_home_alt, filename);
+	hintfile_base = concat_dir_and_file (mc_main_sharedata_dir, filename);
 
 	hintfile = g_strconcat (hintfile_base, ".", lang, (char *) NULL);
 	data = load_file (hintfile);

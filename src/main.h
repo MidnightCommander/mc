@@ -108,7 +108,7 @@ void print_vfs_message(const char *msg, ...)
 extern const char *prompt;
 extern const char *edit_one_file;
 extern char *mc_home;
-extern char *mc_home_alt;
+extern char *mc_main_sharedata_dir;
 
 struct mc_fhl_struct;
 extern struct mc_fhl_struct *mc_filehighlight;

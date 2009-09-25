@@ -292,8 +292,8 @@ char *shell = NULL;
 /* mc_home: The home of MC - /etc/mc or defined by MC_DATADIR */
 char *mc_home = NULL;
 
-/* mc_home_alt: Alternative home of MC - deprecated /usr/share/mc */
-char *mc_home_alt = NULL;
+/* mc_main_sharedata_dir: Alternative home of MC - deprecated /usr/share/mc */
+char *mc_main_sharedata_dir = NULL;
 
 char cmd_buf[512];
 
@@ -1881,10 +1881,10 @@ OS_Setup (void)
     mc_libdir = getenv ("MC_DATADIR");
     if (mc_libdir != NULL) {
 	mc_home = g_strdup (mc_libdir);
-	mc_home_alt = g_strdup (SYSCONFDIR);
+	mc_main_sharedata_dir = g_strdup (SYSCONFDIR);
     } else {
 	mc_home = g_strdup (SYSCONFDIR);
-	mc_home_alt = g_strdup (DATADIR);
+	mc_main_sharedata_dir = g_strdup (DATADIR);
     }
 
     /* This variable is used by the subshell */
@@ -2212,7 +2212,7 @@ main (int argc, char *argv[])
     }
     g_free (last_wd_string);
 
-    g_free (mc_home_alt);
+    g_free (mc_main_sharedata_dir);
     g_free (mc_home);
     g_free (shell);
 

@@ -698,7 +698,7 @@ static FILE *open_include_file (const char *filename)
 	return f;
     }
     g_free (error_file_name);
-    error_file_name = g_strconcat (mc_home_alt, PATH_SEP_STR "syntax" PATH_SEP_STR,
+    error_file_name = g_strconcat (mc_main_sharedata_dir, PATH_SEP_STR "syntax" PATH_SEP_STR,
 				   filename, (char *) NULL);
 
     return fopen (error_file_name, "r");
