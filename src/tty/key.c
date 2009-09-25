@@ -1238,15 +1238,24 @@ lookup_key (char *keyname)
         if (keys[i] != NULL && keys[i][0] != 0) {
             g_strstrip(keys[i]);
             key = lookup_keyname (keys[i]);
+
+            if (key & KEY_M_SHIFT) {
+                if (k < 127) {
+                    k = (gchar) g_ascii_toupper ((gchar) k);
+                    continue;
+                }
+            }
             if (key & KEY_M_CTRL) {
                 if (k < 256)
                     k = XCTRL (k);
                 else
                     k |= key;
             } else {
-                if (k == -1)
+                if (k == -1) {
+                    if (key < 127)
+                        key = (gchar) g_ascii_tolower ((gchar) key);
                     k = key;
-                else
+                } else
                     k |= key;
             }
         }
