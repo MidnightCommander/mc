@@ -226,5 +226,8 @@ include PKGBUILD.syntax
 file \\.install$ Arch\\spackage\\sinstall\\sscript
 include sh.syntax
 
+file ..\*\\.(y|yxx|ypp)$ Yacc/Bison\sParser
+include yxx.syntax
+
 file .\* unknown
 include unknown.syntax
