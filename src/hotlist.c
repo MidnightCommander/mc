@@ -11,7 +11,7 @@
    Janne did the original Hotlist code, Andrej made the groupable
    hotlist; the move hotlist and revamped the file format and made
    it stronger.
-   
+
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2 of the License, or
@@ -24,7 +24,7 @@
 
    You should have received a copy of the GNU General Public License
    along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  
+   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
 /** \file hotlist.c
@@ -126,20 +126,32 @@ static struct _hotlist_but {
     int   type;
     widget_pos_flags_t pos_flags;
 } hotlist_but[] = {
-    { B_MOVE, NORMAL_BUTTON,         1,   42, N_("&Move"),       LIST_HOTLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
-    { B_REMOVE, NORMAL_BUTTON,       1,   30, N_("&Remove"),     LIST_HOTLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
-    { B_APPEND, NORMAL_BUTTON,       1,   15, N_("&Append"),     LIST_MOVELIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
-    { B_INSERT, NORMAL_BUTTON,       1,    0, N_("&Insert"),     LIST_MOVELIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
-    { B_NEW_ENTRY, NORMAL_BUTTON,    1,   15, N_("New &Entry"),  LIST_HOTLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
-    { B_NEW_GROUP, NORMAL_BUTTON,    1,    0, N_("New &Group"),  LIST_HOTLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
-    { B_CANCEL, NORMAL_BUTTON,       0,   53, N_("&Cancel"),     LIST_HOTLIST | LIST_VFSLIST|LIST_MOVELIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
-    { B_UP_GROUP, NORMAL_BUTTON,     0,   42, N_("&Up"),         LIST_HOTLIST | LIST_MOVELIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
-    { B_ADD_CURRENT, NORMAL_BUTTON,  0,   20, N_("&Add current"), LIST_HOTLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
+    { B_MOVE, NORMAL_BUTTON,         1,   42, N_("&Move"),
+      LIST_HOTLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
+    { B_REMOVE, NORMAL_BUTTON,       1,   30, N_("&Remove"),
+      LIST_HOTLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
+    { B_APPEND, NORMAL_BUTTON,       1,   15, N_("&Append"),
+      LIST_MOVELIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
+    { B_INSERT, NORMAL_BUTTON,       1,    0, N_("&Insert"),
+      LIST_MOVELIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
+    { B_NEW_ENTRY, NORMAL_BUTTON,    1,   15, N_("New &Entry"),
+      LIST_HOTLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
+    { B_NEW_GROUP, NORMAL_BUTTON,    1,    0, N_("New &Group"),
+      LIST_HOTLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
+    { B_CANCEL, NORMAL_BUTTON,       0,   53, N_("&Cancel"),
+      LIST_HOTLIST | LIST_VFSLIST|LIST_MOVELIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
+    { B_UP_GROUP, NORMAL_BUTTON,     0,   42, N_("&Up"),
+      LIST_HOTLIST | LIST_MOVELIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
+    { B_ADD_CURRENT, NORMAL_BUTTON,  0,   20, N_("&Add current"),
+      LIST_HOTLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
 #ifdef	USE_VFS
-    { B_REFRESH_VFS, NORMAL_BUTTON,  0,   43, N_("&Refresh"),    LIST_VFSLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
-    { B_FREE_ALL_VFS, NORMAL_BUTTON, 0,   20, N_("Fr&ee VFSs now"), LIST_VFSLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
+    { B_REFRESH_VFS, NORMAL_BUTTON,  0,   43, N_("&Refresh"),
+      LIST_VFSLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
+    { B_FREE_ALL_VFS, NORMAL_BUTTON, 0,   20, N_("Fr&ee VFSs now"),
+      LIST_VFSLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
 #endif
-    { B_ENTER, DEFPUSH_BUTTON,       0,    0, N_("Change &To"),  LIST_HOTLIST | LIST_VFSLIST | LIST_MOVELIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM }
+    { B_ENTER, DEFPUSH_BUTTON,       0,    0, N_("Change &To"),
+      LIST_HOTLIST | LIST_VFSLIST | LIST_MOVELIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM }
 };
 
 /* Directory hotlist */
@@ -273,7 +285,7 @@ unlink_entry (struct hotlist *entry)
     entry->next =
 	entry->up = 0;
 }
-    
+
 #ifdef USE_VFS
 static void add_name_to_list (const char *path)
 {
@@ -594,11 +606,11 @@ init_i18n_stuff(int list_type, int cols)
 
 			row = hotlist_but [i].y;
 
-			if (hotlist_but [i].x != 0) 
+			if (hotlist_but [i].x != 0)
 			{
 				/* not first int the row */
 				if (!strcmp (hotlist_but [i].text, cancel_but))
-					hotlist_but [i].x = 
+					hotlist_but [i].x =
 						cols - str_term_width1 (hotlist_but [i].text) - 13;
 				else
 					hotlist_but [i].x = cur_x [row];
@@ -608,7 +620,7 @@ init_i18n_stuff(int list_type, int cols)
 				+ (hotlist_but [i].flags == DEFPUSH_BUTTON ? 5 : 3);
 		}
 	}
-	
+
 	return cols;
 }
 
@@ -650,7 +662,7 @@ init_hotlist (int list_type)
 			hotlist_but[i].pos_flags);
     }
 
-    /* We add the labels. 
+    /* We add the labels.
      *    pname       will hold entry's pathname;
      *    pname_group will hold name of current group
      */
@@ -870,7 +882,7 @@ add_new_entry_input (const char *header, const char *text1, const char *text2,
 	/* 0 */ QUICK_BUTTON (55, 80, RELATIVE_Y_BUTTONS, 0, N_("&Cancel"), B_CANCEL, NULL),
 	/* 1 */ QUICK_BUTTON (30, 80, RELATIVE_Y_BUTTONS, 0, N_("&Insert"), B_INSERT, NULL),
 	/* 2 */ QUICK_BUTTON (10, 80, RELATIVE_Y_BUTTONS, 0, N_("&Append"), B_APPEND, NULL),
-	/* 3 */ QUICK_INPUT (4, 80, RELATIVE_Y_INPUT_PTH, 0, *r2, 58, 0, "input-pth", r2),
+	/* 3 */ QUICK_INPUT (4, 80, RELATIVE_Y_INPUT_PTH, 0, *r2, 58, 2, "input-pth", r2),
 	/* 4 */ QUICK_LABEL (RELATIVE_Y_LABEL_PTH, 80, 3, 0, text2),
 	/* 5 */ QUICK_INPUT (4, 80, 3, 0, *r1,  58, 0, "input-lbl", r1),
 	/* 6 */ QUICK_LABEL (3, 80, 2, 0, text1),
@@ -1063,7 +1075,7 @@ static void remove_group (struct hotlist *grp)
     }
 
 }
-	
+
 static void remove_from_hotlist (struct hotlist *entry)
 {
     if (entry->type == HL_TYPE_DOTDOT)
@@ -1162,7 +1174,7 @@ load_group (struct hotlist *grp)
     gsize  len;
     char *group_section;
     struct hotlist *current = 0;
-    
+
     group_section = find_group_section (grp);
 
     profile_keys = keys = mc_config_get_keys (mc_main_config, group_section, &len);
@@ -1219,7 +1231,7 @@ static int hot_skip_blanks (void)
     while ((c = getc (hotlist_file)) != EOF && c != '\n' && g_ascii_isspace (c))
 	;
     return c;
-    
+
 }
 
 static int hot_next_token (void)
@@ -1273,7 +1285,7 @@ again:
     default:
 	do {
 	    g_string_append_c (tkn_buf, g_ascii_toupper (c));
-	} while ((c = fgetc (hotlist_file)) != EOF && 
+	} while ((c = fgetc (hotlist_file)) != EOF &&
                          (g_ascii_isalnum (c) || !isascii (c)));
 	if (c != EOF)
 	    ungetc (c, hotlist_file);
@@ -1431,7 +1443,7 @@ load_hotlist (void)
 
     if (hotlist_state.loaded) {
 	stat (hotlist_file_name, &stat_buf);
-	if (hotlist_file_mtime < stat_buf.st_mtime) 
+	if (hotlist_file_mtime < stat_buf.st_mtime)
 	    done_hotlist ();
 	else
 	    return;
@@ -1439,7 +1451,7 @@ load_hotlist (void)
 
     if (!hotlist_file_name)
 	hotlist_file_name = concat_dir_and_file (home_dir, HOTLIST_FILENAME);
-    
+
     hotlist	       = new_hotlist ();
     hotlist->type      = HL_TYPE_GROUP;
     hotlist->label     = g_strdup (_(" Top level group "));
@@ -1545,7 +1557,7 @@ int save_hotlist (void)
 {
     int		saved = 0;
     struct      stat stat_buf;
-    
+
     if (!hotlist_state.readonly && hotlist_state.modified && hotlist_file_name) {
 	char	*fbak = g_strconcat (hotlist_file_name, ".bak", (char *) NULL);
 

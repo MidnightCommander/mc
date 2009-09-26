@@ -2,7 +2,7 @@
 
    Copyright (C) 1994, 1995, 1996, 1998, 1999, 2000, 2001, 2002, 2003,
    2004, 2005, 2006, 2007, 2009 Free Software Foundation, Inc.
-   
+
    Authors: 1994, 1995 Radek Doulik
             1994, 1995 Miguel de Icaza
             1995 Jakub Jelinek
@@ -75,17 +75,17 @@ parse_hotkey (const char *text)
 {
     struct hotkey_t result;
     const char *cp, *p;
-    
+
     /* search for '&', that is not on the of text */
     cp = strchr (text, '&');
     if (cp != NULL && cp[1] != '\0') {
         result.start = g_strndup (text, cp - text);
-        
+
         /* skip '&' */
         cp++;
         p = str_cget_next_char (cp);
         result.hotkey = g_strndup (cp, p - cp);
-        
+
         cp = p;
         result.end = g_strdup (cp);
     } else {
@@ -93,7 +93,7 @@ parse_hotkey (const char *text)
         result.hotkey = NULL;
         result.end = NULL;
     }
-    
+
     return result;
 }
 void
@@ -102,13 +102,13 @@ release_hotkey (const struct hotkey_t hotkey)
     g_free (hotkey.start);
     g_free (hotkey.hotkey);
     g_free (hotkey.end);
-}        
+}
 
 int
 hotkey_width (const struct hotkey_t hotkey)
 {
     int result;
-    
+
     result = str_term_width1 (hotkey.start);
     result+= (hotkey.hotkey != NULL) ? str_term_width1 (hotkey.hotkey) : 0;
     result+= (hotkey.end != NULL) ? str_term_width1 (hotkey.end) : 0;
@@ -446,7 +446,7 @@ radio_event (Gpm_Event *event, void *data)
 
     if (event->type & (GPM_DOWN|GPM_UP)){
     	Dlg_head *h = r->widget.parent;
-	
+
 	r->pos = event->y - 1;
 	dlg_select_widget (r);
 	if (event->type & GPM_UP){
@@ -467,7 +467,7 @@ radio_new (int y, int x, int count, const char **texts)
 
     /* Compute the longest string */
     result->texts = g_new (struct hotkey_t, count);
-    
+
     max = 0;
     for (i = 0; i < count; i++){
         result->texts[i] = parse_hotkey (texts[i]);
@@ -482,7 +482,7 @@ radio_new (int y, int x, int count, const char **texts)
     result->sel = 0;
     result->count = count;
     widget_want_hotkey (result->widget, 1);
-    
+
     return result;
 }
 
@@ -500,7 +500,7 @@ check_callback (Widget *w, widget_msg_t msg, int parm)
     switch (msg) {
     case WIDGET_HOTKEY:
         if (c->text.hotkey != NULL) {
-            if (g_ascii_tolower ((gchar)c->text.hotkey[0]) == 
+            if (g_ascii_tolower ((gchar)c->text.hotkey[0]) ==
                 g_ascii_tolower ((gchar)parm)) {
 
 		check_callback (w, WIDGET_KEY, ' ');	/* make action */
@@ -548,7 +548,7 @@ check_event (Gpm_Event *event, void *data)
 
     if (event->type & (GPM_DOWN|GPM_UP)){
     	Dlg_head *h = c->widget.parent;
-	
+
 	dlg_select_widget (c);
 	if (event->type & GPM_UP){
 	    check_callback (w, WIDGET_KEY, ' ');
@@ -564,10 +564,10 @@ WCheck *
 check_new (int y, int x, int state, const char *text)
 {
     WCheck *c =  g_new (WCheck, 1);
-    
+
     c->text = parse_hotkey (text);
-    
-    init_widget (&c->widget, y, x, 1, hotkey_width (c->text), 
+
+    init_widget (&c->widget, y, x, 1, hotkey_width (c->text),
 	check_callback, check_event);
     c->state = state ? C_BOOL : 0;
     widget_want_hotkey (c->widget, 1);
@@ -611,7 +611,7 @@ label_callback (Widget *w, widget_msg_t msg, int parm)
                     c = q[0];
                     q[0] = '\0';
 		}
-		
+
 		widget_move (&l->widget, y, 0);
                 tty_print_string (str_fit_to_term (p, l->widget.cols, J_LEFT));
 
@@ -638,7 +638,7 @@ label_set_text (WLabel *label, const char *text)
 {
     int newcols = label->widget.cols;
     int newlines;
-    
+
     if (label->text && text && !strcmp (label->text, text))
         return; /* Flickering is not nice */
 
@@ -654,7 +654,7 @@ label_set_text (WLabel *label, const char *text)
                 label->widget.lines = newlines;
 	}
     } else label->text = NULL;
-    
+
     if (label->widget.parent)
 	label_callback ((Widget *) label, WIDGET_DRAW, 0);
 
@@ -707,7 +707,7 @@ gauge_callback (Widget *w, widget_msg_t msg, int parm)
 	else {
 	    int percentage, columns;
 	    long total = g->max, done = g->current;
-	
+
 	    if (total <= 0 || done < 0) {
 	        done = 0;
 	        total = 100;
@@ -773,15 +773,15 @@ gauge_new (int y, int x, int shown, int max, int current)
 /* Input widget */
 
 /* {{{ history button */
- 
+
 #define LARGE_HISTORY_BUTTON 1
- 
+
 #ifdef LARGE_HISTORY_BUTTON
 #  define HISTORY_BUTTON_WIDTH 3
 #else
 #  define HISTORY_BUTTON_WIDTH 1
 #endif
- 
+
 #define should_show_history_button(in) \
 (in->history && in->field_width > HISTORY_BUTTON_WIDTH * 2 + 1 && in->widget.parent)
 
@@ -829,11 +829,11 @@ update_input (WInput *in, int clear_first)
 	return;
 
     pw = str_term_width2 (in->buffer, in->point);
-    
+
     /* Make the point visible */
-    if ((pw < in->term_first_shown) || 
+    if ((pw < in->term_first_shown) ||
          (pw >= in->term_first_shown + in->field_width - has_history)) {
-        
+
         in->term_first_shown = pw - (in->field_width / 3);
         if (in->term_first_shown < 0)
             in->term_first_shown = 0;
@@ -842,16 +842,16 @@ update_input (WInput *in, int clear_first)
     /* Adjust the mark */
     if (in->mark > buf_len)
 	in->mark = buf_len;
-    
+
     if (has_history)
 	draw_history_button (in);
 
     tty_setcolor (in->color);
-    
+
     widget_move (&in->widget, 0, 0);
-    
+
     if (!in->is_password) {
-        tty_print_string (str_term_substring (in->buffer, in->term_first_shown, 
+        tty_print_string (str_term_substring (in->buffer, in->term_first_shown,
                 in->field_width - has_history));
     } else {
         cp = in->buffer;
@@ -1071,8 +1071,8 @@ char *
 show_hist (GList *history, Widget *widget)
 {
     GList *hi, *z;
-    size_t maxlen, i, count = 0; 
-    char *q, *r = NULL; 
+    size_t maxlen, i, count = 0;
+    char *q, *r = NULL;
     Dlg_head *query_dlg;
     WListbox *query_list;
     dlg_hist_data hist_data;
@@ -1301,7 +1301,7 @@ insert_char (WInput *in, int c_code)
     in->need_push = 1;
     if (strlen (in->buffer) + 1 + in->charpoint >= in->current_max_size){
 	/* Expand the buffer */
-        size_t new_length = in->current_max_size + 
+        size_t new_length = in->current_max_size +
                 in->field_width + in->charpoint;
         char *narea = g_try_renew (char, in->buffer, new_length);
 	if (narea){
@@ -1312,15 +1312,15 @@ insert_char (WInput *in, int c_code)
 
     if (strlen (in->buffer) + in->charpoint < in->current_max_size) {
         /* bytes from begin */
-        size_t ins_point = str_offset_to_pos (in->buffer, in->point); 
+        size_t ins_point = str_offset_to_pos (in->buffer, in->point);
         /* move chars */
         size_t rest_bytes = strlen (in->buffer + ins_point);
 
-        for (i = rest_bytes + 1; i > 0; i--) 
-            in->buffer[ins_point + i + in->charpoint - 1] = 
+        for (i = rest_bytes + 1; i > 0; i--)
+            in->buffer[ins_point + i + in->charpoint - 1] =
                     in->buffer[ins_point + i - 1];
 
-        memcpy(in->buffer + ins_point, in->charbuf, in->charpoint); 
+        memcpy(in->buffer + ins_point, in->charbuf, in->charpoint);
 	in->point++;
     }
 
@@ -1346,7 +1346,7 @@ static void
 backward_char (WInput *in)
 {
     const char *act = in->buffer + str_offset_to_pos (in->buffer, in->point);
-    
+
     if (in->point > 0) {
         in->point-= str_cprev_noncomb_char (&act, in->buffer);
     }
@@ -1387,7 +1387,7 @@ backward_word (WInput *in)
 	p--;
         in->point--;
     }
-    
+
     while ((p != in->buffer) && (str_isspace (p) || str_ispunct (p))) {
         str_cprev_char (&p);
         in->point--;
@@ -1426,12 +1426,12 @@ backward_delete (WInput *in)
 {
     const char *act = in->buffer + str_offset_to_pos (in->buffer, in->point);
     int start;
-    
+
     if (in->point == 0)
 	return;
 
     start = in->point - str_cprev_noncomb_char (&act, in->buffer);
-    move_buffer_backward(in, start, in->point);    
+    move_buffer_backward(in, start, in->point);
     in->charpoint = 0;
     in->need_push = 1;
     in->point = start;
@@ -1442,10 +1442,10 @@ delete_char (WInput *in)
 {
     const char *act = in->buffer + str_offset_to_pos (in->buffer, in->point);
     int end = in->point;
-    
+
     end+= str_cnext_noncomb_char (&act);
 
-    move_buffer_backward(in, in->point, end);    
+    move_buffer_backward(in, in->point, end);
     in->charpoint = 0;
     in->need_push = 1;
 }
@@ -1455,15 +1455,15 @@ copy_region (WInput *in, int x_first, int x_last)
 {
     int first = min (x_first, x_last);
     int last  = max (x_first, x_last);
-    
+
     if (last == first)
 	return;
-    
+
     g_free (kill_buffer);
 
     first = str_offset_to_pos (in->buffer, first);
     last = str_offset_to_pos (in->buffer, last);
-    
+
     kill_buffer = g_strndup(in->buffer + first, last - first);
 }
 
@@ -1539,7 +1539,7 @@ static void
 yank (WInput *in)
 {
     char *p;
-    
+
     if (!kill_buffer)
         return;
     in->charpoint = 0;
@@ -1609,7 +1609,7 @@ hist_next (WInput *in)
             return;
         }
     }
-    
+
     if (!in->history)
 	return;
 
@@ -1617,7 +1617,7 @@ hist_next (WInput *in)
         assign_text (in, "");
 	return;
     }
-    
+
     in->history = g_list_next (in->history);
     assign_text (in, (char *) in->history->data);
     in->need_push = 0;
@@ -1644,28 +1644,28 @@ static const struct {
     { KEY_RIGHT | KEY_M_CTRL, key_ctrl_right },
     { XCTRL('f'),         forward_char },
     { ALT('f'),           forward_word },
-		          
-    /* Editing */         
+
+    /* Editing */
     { KEY_BACKSPACE,      backward_delete },
     { KEY_DC,             delete_char },
     { ALT('d'),           kill_word },
     { ALT(KEY_BACKSPACE), back_kill_word },
-    
+
     /* Region manipulation */
     { 0,              	  set_mark },
     { XCTRL('w'),     	  kill_region },
     { ALT('w'),       	  kill_save },
     { XCTRL('y'),     	  yank },
     { XCTRL('k'),     	  kill_line },
-    		      	  
-    /* History */     	  
+
+    /* History */
     { ALT('p'),       	  hist_prev },
     { ALT('n'),       	  hist_next },
     { ALT('h'),       	  do_show_hist },
-    
+
     /* Completion */
     { ALT('\t'),	  complete },
-    
+
     { 0,            0 }
 };
 
@@ -1753,7 +1753,7 @@ void
 input_set_point (WInput *in, int pos)
 {
     int max_pos = str_length (in->buffer);
-    
+
     if (pos > max_pos)
         pos = max_pos;
     if (pos != in->point)
@@ -1826,12 +1826,12 @@ input_event (Gpm_Event * event, void *data)
 	    do_show_hist (in);
 	} else {
             in->point = str_length (in->buffer);
-            if (event->x + in->term_first_shown - 1 < 
+            if (event->x + in->term_first_shown - 1 <
                 str_term_width1 (in->buffer))
-                    
-                in->point = str_column_to_pos (in->buffer, event->x 
+
+                in->point = str_column_to_pos (in->buffer, event->x
                            + in->term_first_shown - 1);
-               
+
 	}
 	update_input (in, 1);
     }
@@ -1939,7 +1939,7 @@ listbox_draw (WListbox *l, gboolean focused)
     WLEntry *e;
     int i;
     int sel_line = -1;
-    const char *text; 
+    const char *text;
 
     for (e = l->top, i = 0; i < l->widget.lines; i++) {
 	/* Display the entry */
@@ -2032,7 +2032,7 @@ listbox_remove_list (WListbox *l)
 	return;
 
     p = l->list;
-    
+
     while (l->count--) {
 	q = p->next;
 	g_free (p->text);
@@ -2052,7 +2052,7 @@ void
 listbox_remove_current (WListbox *l, int force)
 {
     WLEntry *p;
-    
+
     /* Ok, note: this won't allow for emtpy lists */
     if (!force && (!l->count || l->count == 1))
 	return;
@@ -2066,10 +2066,10 @@ listbox_remove_current (WListbox *l, int force)
 	if (p->next == l->list) {
 	    l->current = p->prev;
 	    l->pos--;
-	}	
-	else 
+	}
+	else
 	    l->current = p->next;
-	
+
 	if (p == l->list)
 	    l->list = l->top = p->next;
     } else {
@@ -2088,15 +2088,15 @@ listbox_select_entry (WListbox *l, WLEntry *dest)
     WLEntry *e;
     int pos;
     int top_seen;
-    
+
     top_seen = 0;
-    
+
     /* Special case */
     for (pos = 0, e = l->list; pos < l->count; e = e->next, pos++){
 
 	if (e == l->top)
 	    top_seen = 1;
-	
+
 	if (e == dest){
 	    l->current = e;
 	    if (top_seen){
@@ -2147,6 +2147,18 @@ listbox_key (WListbox *l, int key)
 
     cb_ret_t j = MSG_NOT_HANDLED;
 
+    /* focus on listbox item N by '0'..'9' keys */
+    if (key >= '0' && key <= '9') {
+	int oldpos = l->pos;
+	listbox_select_by_number(l, key - '0');
+
+	/* need scroll to item? */
+	if (abs(oldpos - l->pos) > l->widget.lines)
+	    l->top = l->current;
+
+	return MSG_HANDLED;
+    }
+
     if (!l->list)
 	return MSG_NOT_HANDLED;
 
@@ -2162,7 +2174,7 @@ listbox_key (WListbox *l, int key)
     case ALT ('>'):
         listbox_select_last (l);
 	return MSG_HANDLED;
-	
+
     case XCTRL('p'):
     case KEY_UP:
 	listbox_back (l);
@@ -2429,14 +2441,14 @@ listbox_add_item (WListbox *l, enum append_pos pos, int hotkey,
     if (!l->allow_duplicates)
 	if (listbox_search_text (l, text))
 	    return NULL;
-	    
+
     entry = g_new (WLEntry, 1);
     entry->text = g_strdup (text);
     entry->data = data;
     entry->hotkey = hotkey;
 
     listbox_append_item (l, entry, pos);
-    
+
     return entry->text;
 }
 
@@ -2456,7 +2468,7 @@ listbox_search_text (WListbox *l, const char *text)
     e = l->list;
     if (!e)
 	return NULL;
-    
+
     do {
 	if(!strcmp (e->text, text))
 	    return e;
@@ -2621,7 +2633,7 @@ buttonbar_clear_label (Dlg_head *h, int idx)
 }
 
 void
-buttonbar_set_label_data (Dlg_head *h, int idx, const char *text, 
+buttonbar_set_label_data (Dlg_head *h, int idx, const char *text,
                           buttonbarfn cback, void *data)
 {
     WButtonBar *bb = find_buttonbar (h);

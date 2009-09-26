@@ -716,9 +716,11 @@ void quick_chdir_cmd (void)
 
     if (get_current_type () == view_tree)
 	tree_chdir (the_tree, target);
-    else
-        if (!do_cd (target, cd_exact))
-	    message (D_ERROR, MSG_ERROR, _("Cannot change directory") );
+    else {
+	char *cmd = g_strconcat ("cd ", target, (char *) NULL);
+	do_cd_command (cmd);
+	g_free (cmd);
+    }
     g_free (target);
 }
 
