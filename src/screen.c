@@ -781,17 +781,13 @@ show_dir (WPanel *panel)
 
     tty_printf (" %s ",
 		str_term_trim (strip_home_and_password (panel->cwd),
-				min (max (panel->widget.cols - 9, 0),
+				min (max (panel->widget.cols - 10, 0),
 					panel->widget.cols)));
 
     widget_move (&panel->widget, 0, 1);
-    tty_print_string ("<");
-    widget_move (&panel->widget, 0, panel->widget.cols - 2);
-    tty_print_string (">");
-    widget_move (&panel->widget, 0, panel->widget.cols - 3);
-    tty_print_string ("v");
+    tty_print_char ('<');
     widget_move (&panel->widget, 0, panel->widget.cols - 4);
-    tty_print_string (".");
+    tty_print_string (".v>");
 
     if (!show_mini_info) {
 	if (panel->marked == 0) {
