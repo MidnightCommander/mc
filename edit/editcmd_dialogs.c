@@ -239,10 +239,10 @@ editcmd_dialog_search_show (WEdit * edit, char **search_text)
 	    b0_len = str_term_width1 (quick_widgets[0].u.button.text) + 3;
 	    b1_len = str_term_width1 (quick_widgets[1].u.button.text) + 3;
 	    b2_len = str_term_width1 (quick_widgets[2].u.button.text) + 5; /* default button */
-	    len = b0_len + b1_len + b2_len + 6 + button_gap * 2;
+	    len = b0_len + b1_len + b2_len + button_gap * 2;
 
 	    /* dialog width */
-	    Quick_input.xlen = max (SEARCH_DLG_WIDTH, max (dlg_width, len));
+	    Quick_input.xlen = max (SEARCH_DLG_WIDTH, max (dlg_width, len + 6));
 
 	    /* correct widget coordinates */
 	    for (i = 0; i < sizeof (quick_widgets)/sizeof (quick_widgets[0]); i++)
@@ -254,9 +254,9 @@ editcmd_dialog_search_show (WEdit * edit, char **search_text)
 	    /* input length */
 	    quick_widgets[last_checkbox + 2].u.input.len = Quick_input.xlen - 6;
 	    /* button positions */
-	    quick_widgets[1].relative_x = Quick_input.xlen/2 - b1_len/2;
-	    quick_widgets[2].relative_x = quick_widgets[1].relative_x - button_gap - b2_len;
-	    quick_widgets[0].relative_x = quick_widgets[1].relative_x + button_gap + b1_len;
+	    quick_widgets[2].relative_x = Quick_input.xlen/2 - len/2;
+	    quick_widgets[1].relative_x = quick_widgets[2].relative_x + b2_len + button_gap;
+	    quick_widgets[0].relative_x = quick_widgets[1].relative_x + b1_len + button_gap;
 	}
 
 	dialog_result = quick_dialog (&Quick_input);
