@@ -73,7 +73,9 @@
 int
 mc_tty_normalize_lines_char (const char *ch)
 {
-    int i;
+    char *str2;
+    int res;
+
     struct mc_tty_lines_struct {
         const char *line;
         int line_code;
@@ -89,6 +91,7 @@ mc_tty_normalize_lines_char (const char *ch)
         {"\342\224\200", ACS_HLINE}, /* ─ */
         {"\342\224\202", ACS_VLINE}, /* │ */
         {"\342\224\274", ACS_PLUS}, /* ┼ */
+
         {"\342\225\235", ACS_LRCORNER | A_BOLD}, /* ╔ */
         {"\342\225\232", ACS_LLCORNER | A_BOLD}, /* ╗ */
         {"\342\225\227", ACS_URCORNER | A_BOLD}, /* ╚ */
@@ -99,19 +102,26 @@ mc_tty_normalize_lines_char (const char *ch)
         {"\342\225\247", ACS_BTEE | A_BOLD}, /* ╧ */
         {"\342\225\220", ACS_HLINE | A_BOLD}, /* ═ */
         {"\342\225\221", ACS_VLINE | A_BOLD}, /* ║ */
+
         {NULL, 0}
     };
 
     if (ch == NULL)
         return (int) ' ';
 
-    for (i = 0; lines_codes[i].line; i++) {
-        if (strcmp (ch, lines_codes[i].line) == 0)
-            return lines_codes[i].line_code;
+    for (res = 0; lines_codes[res].line; res++) {
+        if (strcmp (ch, lines_codes[res].line) == 0)
+            return lines_codes[res].line_code;
     }
 
-    return (int) ' ';
+    str2 = mc_tty_normalize_from_utf8 (ch);
+    res = g_utf8_get_char_validated (str2, -1);
 
+    if (res < 0)
+        res = (unsigned char) str2[0];
+    g_free (str2);
+
+    return res;
 }
 
 /* --------------------------------------------------------------------------------------------- */

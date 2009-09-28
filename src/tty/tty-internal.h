@@ -17,4 +17,6 @@ extern gboolean ugly_line_drawing;
 /* The mouse is currently: TRUE - enabled, FALSE - disabled */
 extern gboolean mouse_enabled;
 
+char *mc_tty_normalize_from_utf8 (const char *);
+
 #endif /* MC_TTY_INTERNAL_H */
