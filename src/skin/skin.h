@@ -85,7 +85,7 @@ extern mc_skin_t mc_skin__default;
 
 /*** declarations of public functions ************************************************************/
 
-void mc_skin_init (void);
+gboolean mc_skin_init (GError **);
 void mc_skin_deinit (void);
 
 int mc_skin_color_get (const gchar *, const gchar *);

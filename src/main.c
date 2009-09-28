@@ -294,6 +294,14 @@ char *mc_home_alt = NULL;
 
 char cmd_buf[512];
 
+/* Define this function for glib-style error handling */
+GQuark
+mc_main_error_quark (void)
+{
+  return g_quark_from_static_string (PACKAGE);
+}
+
+
 /* Save current stat of directories to avoid reloading the panels */
 /* when no modifications have taken place */
 void
@@ -1903,6 +1911,8 @@ main (int argc, char *argv[])
 {
     struct stat s;
     char *mc_dir;
+    GError *error = NULL;
+    gboolean isInitialized;
 
     /* We had LC_CTYPE before, LC_ALL includs LC_TYPE as well */
     setlocale (LC_ALL, "");
@@ -1961,10 +1971,17 @@ main (int argc, char *argv[])
 
     tty_init_colors (mc_args__disable_colors, mc_args__force_colors);
 
-    mc_skin_init();
+    isInitialized = mc_skin_init(&error);
+
     mc_filehighlight = mc_fhl_new (TRUE);
 
     dlg_set_default_colors ();
+
+    if ( ! isInitialized ) {
+        message (D_ERROR, _("Warning"), error->message);
+        g_error_free(error);
+        error = NULL;
+    }
 
     /* create home directory */
     /* do it after the screen library initialization to show the error message */
