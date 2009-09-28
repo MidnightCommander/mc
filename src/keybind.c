@@ -642,6 +642,47 @@ const global_key_map_t default_main_x_map[] = {
     {0, 0}
 };
 
+const global_key_map_t default_input_keymap[] = {
+    /* Motion */
+    { XCTRL('a'),               CK_InputBol },
+    { KEY_HOME,                 CK_InputBol },
+    { KEY_A1,                   CK_InputBol },
+    { ALT ('<'),                CK_InputBol },
+    { XCTRL('e'),               CK_InputEol },
+    { KEY_END,                  CK_InputEol },
+    { KEY_C1,                   CK_InputEol },
+    { ALT ('>'),                CK_InputEol },
+    { KEY_LEFT,                 CK_InputMoveLeft },
+    { KEY_LEFT | KEY_M_CTRL,    CK_InputWordLeft },
+    { KEY_RIGHT,                CK_InputMoveRight },
+    { KEY_RIGHT | KEY_M_CTRL,   CK_InputWordRight },
+
+    { XCTRL('b'),               CK_InputBackwardChar },
+    { ALT('b'),                 CK_InputBackwardWord },
+    { XCTRL('f'),               CK_InputForwardChar },
+    { ALT('f'),                 CK_InputForwardWord },
+
+    /* Editing */
+    { KEY_BACKSPACE,            CK_InputBackwardDelete },
+    { KEY_DC,                   CK_InputDeleteChar },
+    { ALT('d'),                 CK_InputKillWord },
+    { ALT(KEY_BACKSPACE),       CK_InputBackwardKillWord },
+
+    /* Region manipulation */
+    { XCTRL('w'),               CK_InputKillRegion },
+    { ALT('w'),                 CK_InputKillSave },
+    { XCTRL('y'),               CK_InputYank },
+    { XCTRL('k'),               CK_InputKillLine },
+
+    /* History */
+    { ALT('p'),                 CK_InputHistoryPrev },
+    { ALT('n'),                 CK_InputHistoryNext },
+    { ALT('h'),                 CK_InputHistoryShow },
+
+    /* Completion */
+    { ALT('\t'),                CK_InputComplete },
+    { 0, 0 }
+};
 
 
 int lookup_action (char *keyname)
