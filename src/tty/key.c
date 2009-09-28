@@ -130,7 +130,8 @@ key_code_name_t key_name_conv_tab[] = {
     {ALT ('\t'), "complete", N_("Completion/M-tab")},
     {KEY_KP_ADD, "kpplus", N_("+ on keypad")},
     {KEY_KP_SUBTRACT, "kpminus", N_("- on keypad")},
-    {KEY_KP_MULTIPLY, "kpasterix", N_("* on keypad")},
+    {(int) '/', "kpslash", N_("Slash on keypad")},
+    {KEY_KP_MULTIPLY, "kpasterisk", N_("* on keypad")},
 
 /* From here on, these won't be shown in Learn keys (no space) */
     {KEY_LEFT, "kpleft", N_("Left arrow keypad")},
@@ -144,18 +145,19 @@ key_code_name_t key_name_conv_tab[] = {
     {KEY_IC, "kpinsert", N_("Insert on keypad")},
     {KEY_DC, "kpdelete", N_("Delete on keypad")},
     {(int) '\n', "kpenter", N_("Enter on keypad")},
-    {(int) '\n', "enter", N_("Enter on keypad")},
-    {(int) '\t', "tab", N_("Tab on keypad")},
-    {(int) ' ', "space", N_("Space on keypad")},
-    {(int) '/', "kpslash", N_("Slash on keypad")},
-    {(int) '#', "kpnumlock", N_("NumLock on keypad")},
 
 /* Alternative label */
     {KEY_BACKSPACE, "backspace", N_("Backspace key")},
     {KEY_IC, "insert", N_("Insert key")},
-    {KEY_KP_ADD, "plus", N_("+ on keypad")},
-    {KEY_KP_SUBTRACT, "minus", N_("- on keypad")},
-    {KEY_KP_MULTIPLY, "asterix", N_("* on keypad")},
+    {(int) '+', "plus", N_("Plus")},
+    {(int) '-', "minus", N_("Minus")},
+    {(int) '*', "asterisk", N_("Asterisk")},
+    {(int) '\n', "enter", N_("Enter")},
+    {(int) '\t', "tab", N_("Tab key")},
+    {(int) ' ', "space", N_("Space key")},
+    {(int) '/', "slash", N_("Slash key")},
+    {(int) '\\', "backslash", N_("Backslash key")},
+    {(int) '#', "number", N_("Number sign #")},
 
 /* meta keys */
     {KEY_M_CTRL, "control", N_("Ctrl")},

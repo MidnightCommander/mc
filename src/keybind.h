@@ -47,3 +47,4 @@ extern const global_key_map_t default_input_keymap[];
 extern const global_key_map_t default_main_map[];
 extern const global_key_map_t default_main_x_map[];
 
+const global_key_map_t default_input_keymap[];
