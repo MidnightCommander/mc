@@ -15,7 +15,8 @@ AM_CPPFLAGS = -DDATADIR=\""$(pkgdatadir)/"\" -DLOCALEDIR=\""$(localedir)"\" \
 else
 AM_CPPFLAGS = -DDATADIR=\""$(pkgdatadir)/"\" \
 	-DLOCALEDIR=\""$(localedir)"\" \
-	-DSYSCONFDIR=\""$(sysconfdir)/@PACKAGE@/"\"
+	-DSYSCONFDIR=\""$(sysconfdir)/@PACKAGE@/"\" \
+	-DPACKAGE=\""@PACKAGE@\"
 endif
 
 noinst_PROGRAMS = man2hlp

@@ -149,4 +149,7 @@ void refresh_screen (void *);
 #include <assert.h>
 #endif
 
+#define MC_ERROR mc_main_error_quark ()
+GQuark mc_main_error_quark (void);
+
 #endif

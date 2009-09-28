@@ -99,30 +99,59 @@ mc_skin_reinit (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/*** public functions ****************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
 
-void
-mc_skin_init (void)
+static void
+mc_skin_try_to_load_default (void)
 {
-    mc_skin__default.name = mc_skin_get_default_name ();
-    mc_skin__default.colors = g_hash_table_new_full (g_str_hash, g_str_equal,
-                                                     mc_skin_hash_destroy_key,
-                                                     mc_skin_hash_destroy_value);
-
+    mc_skin_reinit ();
+    g_free (mc_skin__default.name);
+    mc_skin__default.name = g_strdup ("default");
     if (!mc_skin_ini_file_load (&mc_skin__default)) {
         mc_skin_reinit ();
         mc_skin_set_hardcoded_skin (&mc_skin__default);
     }
+
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+gboolean
+mc_skin_init (GError ** error)
+{
+
+    mc_skin__default.name = mc_skin_get_default_name ();
+
+    mc_skin__default.colors = g_hash_table_new_full (g_str_hash, g_str_equal,
+                                                     mc_skin_hash_destroy_key,
+                                                     mc_skin_hash_destroy_value);
+
+    gboolean is_good_init = TRUE;
+
+    if (!mc_skin_ini_file_load (&mc_skin__default)) {
+        *error = g_error_new (MC_ERROR, 0,
+                              _("Unable to load '%s' skin.\nDefault skin has been loaded"),
+                              mc_skin__default.name);
+
+        mc_skin_try_to_load_default ();
+        is_good_init = FALSE;
+    }
     mc_skin_colors_old_configure (&mc_skin__default);
 
     if (!mc_skin_ini_file_parse (&mc_skin__default)) {
-        mc_skin_reinit ();
-        mc_skin_set_hardcoded_skin (&mc_skin__default);
+        if (*error == NULL)
+            *error = g_error_new (MC_ERROR, 0,
+                                  _("Unable to parse '%s' skin.\nDefault skin has been loaded"),
+                                  mc_skin__default.name);
+
+        mc_skin_try_to_load_default ();
         mc_skin_colors_old_configure (&mc_skin__default);
         (void) mc_skin_ini_file_parse (&mc_skin__default);
+        is_good_init = FALSE;
     }
     mc_skin_is_init = TRUE;
+    return is_good_init;
 }
 
 /* --------------------------------------------------------------------------------------------- */
