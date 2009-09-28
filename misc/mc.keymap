@@ -156,7 +156,7 @@ ViewMoveUp = k; y; up
 ViewMoveDown = j; delete; down
 
 [viewer]
-ViewSearch = ?; /; f7
+ViewSearch = question; slash; f7
 ViewContinueSearch = ctrl-r; ctrl-s; f17
 ViewMoveToBol = home
 ViewMoveToEol = end
@@ -180,18 +180,19 @@ ViewToggleRuler = alt-r
 [main]
 CmdMenuLastSelected = f19
 CmdQuietQuit = f20
-CmdSingleDirsize = ctrl-@
+CmdSingleDirsize = ctrl-space
 CmdCopyCurrentPathname = alt-a
 CmdCopyOtherPathname = alt-A
 CmdQuickCd = alt-c
-CmdQuickChdir = ctrl-\\
+CmdQuickChdir = ctrl-backslash
 CmdSuspend = ctrl-z
-CmdFilteredView = alt-!
-CmdFind = alt-?
+CmdFilteredView = alt-exclamation
+CmdFind = alt-question
 CmdReread = ctrl-r
 CmdToggleListing = alt-t
 CmdSwapPanel = ctrl-u
 ShowCommandLine = ctrl-o
+CmdToggleShowHidden = alt-dot
 
 ExtMap1 = ctrl-x
 [main:xmap]
@@ -214,12 +215,12 @@ PanelEditNew = F14
 PanelCopyLocal = F15
 PanelRenameLocal = F16
 PanelDeleteLocal = F18
-PanelReverseSelection = alt-*
-PanelSelect = plus
-PanelUnselect = minus
+PanelReverseSelection = alt-asterisk
+PanelSelect = alt-plus
+PanelUnselect = alt-minus
 PanelCtrlNextPage = ctrl-pgdn
 PanelCtrlPrevPage = ctrl-pgup
-PanelDirectoryHistoryList = alt-H
+PanelDirectoryHistoryList = alt-shift-h
 PanelDirectoryHistoryNext = alt-u
 PanelDirectoryHistoryPrev = alt-y
 PanelGotoBottomFile = alt-j
@@ -227,15 +228,14 @@ PanelGotoMiddleFile = alt-r
 PanelSyncOtherPanel = alt-i
 PanelGotoTopFile = alt-g
 PanelSetPanelEncoding = ctrl-t
-PanelMoveHome = home
-PanelMoveEnd = end
-
+PanelMoveHome = alt-lt; home
+PanelMoveEnd = alt-gt; end
 
 [panel:xmap]
 
 [input]
-InputBol = ctrl-a; alt-<; home
-InputEol = ctrl-e; alt->; end
+InputBol = ctrl-a; alt-lt; home
+InputEol = ctrl-e; alt-gt; end
 InputMoveLeft = left; alt-left
 InputWordLeft = ctrl-left
 InputBackwardChar = ctrl-b

@@ -274,12 +274,12 @@ static const name_key_map_t command_names[] = {
     { "CmdUserFileMenu",                   CK_UserFileMenuCmd },
     { "CmdView",                           CK_ViewCmd },
     { "CmdViewFile",                       CK_ViewFileCmd },
-    { "CmdCmdCopyCurrentReadlink",         CK_CopyCurrentReadlink },
+    { "CmdCopyCurrentReadlink",            CK_CopyCurrentReadlink },
     { "CmdCopyOtherReadlink",              CK_CopyOtherReadlink },
     { "CmdAddHotlist",                     CK_AddHotlist },
     { "CmdQuit",                           CK_QuitCmd },
     { "CmdCopyOtherTarget",                CK_CopyOtherTarget },
-    { "CmdCopyOthertReadlink",             CK_CopyOthertReadlink },
+    { "CmdToggleShowHidden",               CK_ToggleShowHidden },
 
     /* panel */
     { "PanelChdirOtherPanel",              CK_PanelChdirOtherPanel },
@@ -611,6 +611,7 @@ const global_key_map_t default_main_map[] = {
     {XCTRL ('u'), CK_SwapCmd},
     /* View output */
     {XCTRL ('o'), CK_ShowCommandLine},
+    {ALT ('.'), CK_ToggleShowHidden},
     {XCTRL ('x'), CK_StartExtMap1 },
     { 0, 0 }
 };
