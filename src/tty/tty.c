@@ -148,3 +148,29 @@ tty_draw_box (int y, int x, int ys, int xs)
     tty_gotoyx (y + ys - 1, x + xs - 1);
     tty_print_alt_char (mc_tty_ugly_frm[MC_TTY_FRM_rightbottom]);
 }
+
+char *
+mc_tty_normalize_from_utf8 (const char *str)
+{
+    GIConv conv;
+    GString *buffer;
+    const char *_system_codepage = str_detect_termencoding ();
+
+    if (str_isutf8 (_system_codepage))
+        return g_strdup (str);
+
+    conv = g_iconv_open (_system_codepage, "UTF-8");
+    if (conv == INVALID_CONV)
+        return g_strdup (str);
+
+    buffer = g_string_new ("");
+
+    if (str_convert (conv, str, buffer) == ESTR_FAILURE) {
+        g_string_free (buffer, TRUE);
+        str_close_conv (conv);
+        return g_strdup (str);
+    }
+    str_close_conv (conv);
+
+    return g_string_free (buffer, FALSE);
+}

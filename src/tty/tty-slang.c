@@ -191,32 +191,6 @@ load_terminfo_keys (void)
         do_define_key (key_table[i].key_code, key_table[i].key_name);
 }
 
-static char *
-mc_tty_normalize_from_utf8 (const char *str)
-{
-    GIConv conv;
-    GString *buffer;
-    const char *_system_codepage = str_detect_termencoding ();
-
-    if (str_isutf8 (_system_codepage))
-        return g_strdup (str);
-
-    conv = g_iconv_open (_system_codepage, "UTF-8");
-    if (conv == INVALID_CONV)
-        return g_strdup (str);
-
-    buffer = g_string_new ("");
-
-    if (str_convert (conv, str, buffer) == ESTR_FAILURE) {
-        g_string_free (buffer, TRUE);
-        str_close_conv (conv);
-        return g_strdup (str);
-    }
-    str_close_conv (conv);
-
-    return g_string_free (buffer, FALSE);
-}
-
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions **************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -227,8 +201,33 @@ mc_tty_normalize_lines_char (const char *str)
     char *str2;
     int res;
 
+    struct mc_tty_lines_struct {
+        const char *line;
+        int line_code;
+    } const lines_codes[] = {
+        {"\342\224\214", SLSMG_ULCORN_CHAR},
+        {"\342\224\220", SLSMG_URCORN_CHAR},
+        {"\342\224\224", SLSMG_LLCORN_CHAR},
+        {"\342\224\230", SLSMG_LRCORN_CHAR},
+        {"\342\224\234", SLSMG_LTEE_CHAR},
+        {"\342\224\244", SLSMG_RTEE_CHAR},
+        {"\342\224\254", SLSMG_UTEE_CHAR},
+        {"\342\224\264", SLSMG_DTEE_CHAR},
+        {"\342\224\200", SLSMG_HLINE_CHAR},
+        {"\342\224\202", SLSMG_VLINE_CHAR},
+        {"\342\224\274", SLSMG_PLUS_CHAR},
+
+        {NULL, 0}
+    };
+
     if (!str)
         return (int) ' ';
+
+    for (res = 0; lines_codes[res].line; res++) {
+        if (strcmp (str, lines_codes[res].line) == 0)
+            return lines_codes[res].line_code;
+    }
+
     str2 = mc_tty_normalize_from_utf8 (str);
     res = g_utf8_get_char_validated (str2, -1);
 
@@ -513,8 +512,8 @@ void
 tty_print_alt_char (int c)
 {
 #define DRAW(x, y) (x == y) \
-	? SLsmg_draw_object (SLsmg_get_row(), SLsmg_get_column(), x) \
-	: SLsmg_write_char ((unsigned int) y)
+       ? SLsmg_draw_object (SLsmg_get_row(), SLsmg_get_column(), x) \
+       : SLsmg_write_char ((unsigned int) y)
     switch (c) {
     case ACS_VLINE:
         DRAW (c, mc_tty_ugly_frm[MC_TTY_FRM_thinvert]);
