@@ -111,6 +111,89 @@ typedef enum {
 
 static select_flags_t select_flags = SELECT_MATCH_CASE | SELECT_SHELL_PATTERNS;
 
+/*
+ *  If we moved to the parent directory move the selection pointer to
+ *  the old directory name; If we leave VFS dir, remove FS specificator.
+ *
+ *  You do _NOT_ want to add any vfs aware code here. <pavel@ucw.cz>
+ */
+static const char *
+get_parent_dir_name (const char *cwd, const char *lwd)
+{
+    const char *p;
+    if (strlen (lwd) > strlen (cwd))
+	if ((p = strrchr (lwd, PATH_SEP)) && !strncmp (cwd, lwd, p - lwd) &&
+	 ((gsize)strlen (cwd) == (gsize) p - (gsize) lwd || (p == lwd && cwd[0] == PATH_SEP &&
+	  cwd[1] == '\0'))) {
+	    return (p + 1);
+	}
+    return NULL;
+}
+
+/*
+ * Changes the current directory of the panel.
+ * Don't record change in the directory history.
+ */
+int
+cmd_do_panel_cd (WPanel *panel, const char *new_dir, enum cd_enum cd_type)
+{
+    const char *directory;
+    char *olddir;
+    char temp[MC_MAXPATHLEN];
+    char *translated_url;
+
+    if (cd_type == cd_parse_command) {
+	while (*new_dir == ' ')
+	    new_dir++;
+    }
+
+    olddir = g_strdup (panel->cwd);
+    new_dir = translated_url = vfs_translate_url (new_dir);
+
+    /* Convert *new_path to a suitable pathname, handle ~user */
+
+    if (cd_type == cd_parse_command) {
+	if (!strcmp (new_dir, "-")) {
+	    strcpy (temp, panel->lwd);
+	    new_dir = temp;
+	}
+    }
+    directory = *new_dir ? new_dir : home_dir;
+
+    if (mc_chdir (directory) == -1) {
+	strcpy (panel->cwd, olddir);
+	g_free (olddir);
+	g_free (translated_url);
+	return 0;
+    }
+    g_free (translated_url);
+
+    /* Success: save previous directory, shutdown status of previous dir */
+    strcpy (panel->lwd, olddir);
+    free_completions (cmdline);
+
+    mc_get_current_wd (panel->cwd, sizeof (panel->cwd) - 2);
+
+    vfs_release_path (olddir);
+
+    subshell_chdir (panel->cwd);
+
+    /* Reload current panel */
+    panel_clean_dir (panel);
+    panel->count =
+	do_load_dir (panel->cwd, &panel->dir, panel->sort_type,
+		     panel->reverse, panel->case_sensitive,
+		     panel->exec_first, panel->filter);
+    try_to_select (panel, get_parent_dir_name (panel->cwd, olddir));
+    load_hint (0);
+    panel->dirty = 1;
+    update_xterm_title_path ();
+
+    g_free (olddir);
+
+    return 1;
+}
+
 int
 view_file_at_line (const char *filename, int plain_view, int internal,
 		   int start_line)
@@ -1444,4 +1527,36 @@ encoding_cmd (void)
 
     panel = MENU_PANEL;
     set_panel_encoding (panel);
+}
+
+void
+directory_history_add (struct WPanel *panel, const char *dir)
+{
+    char *tmp;
+
+    tmp = g_strdup (dir);
+    strip_password (tmp, 1);
+
+    panel->dir_history = list_append_unique (panel->dir_history, tmp);
+}
+
+/*
+ * Changes the current directory of the panel.
+ * Record change in the directory history.
+ */
+int
+do_panel_cd (struct WPanel *panel, const char *new_dir, enum cd_enum cd_type)
+{
+    int r;
+
+    r = cmd_do_panel_cd (panel, new_dir, cd_type);
+    if (r)
+	directory_history_add (panel, panel->cwd);
+    return r;
+}
+
+int
+do_cd (const char *new_dir, enum cd_enum exact)
+{
+    return (do_panel_cd (current_panel, new_dir, exact));
 }

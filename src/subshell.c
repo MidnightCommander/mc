@@ -1233,5 +1233,21 @@ do_update_prompt (void)
 	update_prompt = 0;
     }
 }
+/* Wrapper for do_subshell_chdir, check for availability of subshell */
+void
+subshell_chdir (const char *directory)
+{
+    if (mc_args__use_subshell) {
+	if (vfs_current_is_local ())
+	    do_subshell_chdir (directory, 0, 1);
+    }
+}
 
+
+#else
+void
+subshell_chdir (const char *directory)
+{
+    (void) directory
+}
 #endif /* HAVE_SUBSHELL_SUPPORT */

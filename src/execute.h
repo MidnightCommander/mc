@@ -26,4 +26,6 @@ void suspend_cmd (void);
 /* Execute command on a filename that can be on VFS */
 void execute_with_vfs_arg (const char *command, const char *filename);
 
+void save_cwds_stat (void);
+
 #endif /* !MC_EXECUTE_H */

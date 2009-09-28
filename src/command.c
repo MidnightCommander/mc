@@ -34,6 +34,7 @@
 
 #include "global.h"		/* home_dir */
 #include "args.h"		/* mc_args__use_subshell */
+#include "cmd.h"
 #include "../src/tty/tty.h"
 #include "widget.h"		/* WInput */
 #include "command.h"

@@ -130,4 +130,6 @@ void directory_history_next (WPanel *panel);
 void directory_history_prev (WPanel *panel);
 void directory_history_list (WPanel *panel);
 
+void change_panel   (void);
+
 #endif

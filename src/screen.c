@@ -55,6 +55,7 @@
 #include "menu.h"		/* menubar_visible */
 #include "main-widgets.h"
 #include "main.h"
+#include "subshell.h"
 #include "unixcompat.h"
 #include "mountlist.h"		/* my_statfs */
 #include "selcodepage.h"	/* select_charset () */
@@ -2870,4 +2871,59 @@ update_panels (int force_update, const char *current_file)
 	panel = (WPanel *) get_panel_widget (get_other_index ());
 
     mc_chdir (panel->cwd);
+}
+
+void
+change_panel (void)
+{
+    free_completions (cmdline);
+    dlg_one_down (midnight_dlg);
+}
+
+void
+directory_history_next (WPanel *panel)
+{
+    GList *nextdir;
+
+    nextdir = g_list_next (panel->dir_history);
+
+    if (!nextdir)
+	return;
+
+    if (cmd_do_panel_cd (panel, (char *) nextdir->data, cd_exact))
+	panel->dir_history = nextdir;
+}
+
+void
+directory_history_prev (WPanel *panel)
+{
+    GList *prevdir;
+
+    prevdir = g_list_previous (panel->dir_history);
+
+    if (!prevdir)
+	return;
+
+    if (cmd_do_panel_cd (panel, (char *) prevdir->data, cd_exact))
+	panel->dir_history = prevdir;
+}
+
+void
+directory_history_list (WPanel *panel)
+{
+    char *s;
+
+    if (!panel->dir_history)
+	return;
+
+    s = show_hist (panel->dir_history, &panel->widget);
+
+    if (!s)
+	return;
+
+    if (cmd_do_panel_cd (panel, s, cd_exact))
+	directory_history_add (panel, panel->cwd);
+    else
+	message (D_ERROR, MSG_ERROR, _("Cannot change directory"));
+    g_free (s);
 }

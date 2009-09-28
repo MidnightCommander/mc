@@ -36,6 +36,7 @@
 #include "../src/tty/tty.h"
 #include "user.h"
 #include "main.h"
+#include "cmd.h"
 #include "wtools.h"
 #include "ext.h"
 #include "execute.h"

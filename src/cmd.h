@@ -66,4 +66,17 @@ void quick_view_cmd (void);
 void toggle_listing_cmd (void);
 void encoding_cmd (void);
 
+struct WPanel;
+
+enum cd_enum {
+    cd_parse_command,
+    cd_exact
+};
+
+int do_cd (const char *, enum cd_enum); /* For find.c */
+
+void directory_history_add (struct WPanel *, const char *);
+int do_panel_cd (struct WPanel *, const char *, enum cd_enum);
+int cmd_do_panel_cd (struct WPanel *, const char *, enum cd_enum);
+
 #endif

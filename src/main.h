@@ -21,8 +21,6 @@ extern volatile int quit;
 /* If true, after executing a command, wait for a keystroke */
 enum { pause_never, pause_on_dumb_terminals, pause_always };
 
-void subshell_chdir (const char *command);
-
 /* See main.c for details on these variables */
 extern int mark_moves_down;
 extern int auto_menu;
@@ -85,15 +83,7 @@ extern GArray *input_keymap;
 extern const global_key_map_t *panel_map;
 extern const global_key_map_t *input_map;
 
-enum cd_enum {
-    cd_parse_command,
-    cd_exact
-};
-
-int do_cd           (const char *new_dir, enum cd_enum cd_type); /* For find.c */
-void change_panel   (void);
 int load_prompt     (int, void *);
-void save_cwds_stat (void);
 void quiet_quit_cmd (void);	/* For cmd.c and command.c */
 
 void touch_bar      (void);
@@ -119,10 +109,5 @@ void init_menu (void);
 char *remove_encoding_from_path (const char *);
 
 #define MC_BASE "/.mc/"
-
-struct WPanel;
-
-void directory_history_add   (struct WPanel *panel, const char *dir);
-int  do_panel_cd             (struct WPanel *panel, const char *new_dir, enum cd_enum cd_type);
 
 #endif

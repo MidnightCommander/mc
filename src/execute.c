@@ -31,6 +31,7 @@
 #include "../src/tty/key.h"
 #include "../src/tty/win.h"
 
+#include "cmd.h"
 #include "main.h"
 #include "cons.saver.h"
 #include "subshell.h"
@@ -396,4 +397,16 @@ execute_with_vfs_arg (const char *command, const char *filename)
     mc_ungetlocalcopy (fn, localcopy, mtime != st.st_mtime);
     g_free (localcopy);
     g_free (fn);
+}
+
+/* Save current stat of directories to avoid reloading the panels */
+/* when no modifications have taken place */
+void
+save_cwds_stat (void)
+{
+    if (fast_reload) {
+	mc_stat (current_panel->cwd, &(current_panel->dir_stat));
+	if (get_other_type () == view_listing)
+	    mc_stat (other_panel->cwd, &(other_panel->dir_stat));
+    }
 }
