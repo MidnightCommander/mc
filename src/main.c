@@ -1215,7 +1215,7 @@ midnight_execute_cmd(int command)
         quiet_quit_cmd ();
         break;
     case CK_SingleDirsizeCmd:
-        single_dirsize_cmd ();
+        smart_dirsize_cmd ();
         break;
     case CK_CopyCurrentPathname:
         copy_current_pathname ();
@@ -1251,10 +1251,13 @@ midnight_execute_cmd(int command)
         view_other_cmd ();
         break;
     case CK_QuitCmd:
+        quit_cmd ();
         break;
     case CK_CompareDirsCmd:
+        compare_dirs_cmd ();
         break;
     case CK_ReselectVfs:
+        reselect_vfs ();
         break;
     case CK_CopyCurrentTagged:
         copy_current_tagged ();
@@ -1265,7 +1268,7 @@ midnight_execute_cmd(int command)
     case CK_CopyCurrentReadlink:
         copy_current_readlink ();
         break;
-    case CK_CopyOthertReadlink:
+    case CK_CopyOtherReadlink:
         copy_other_readlink ();
         break;
     case CK_ChmodCmd:
@@ -1300,6 +1303,9 @@ midnight_execute_cmd(int command)
 	jobs_cmd ();
         break;
 #endif
+    case CK_ToggleShowHidden:
+        toggle_show_hidden ();
+        break;
     case CK_StartExtMap1:
         ctl_x_cmd ();
         break;

@@ -723,10 +723,8 @@ static void
 edit_set_keymap (WEdit *edit)
 {
     edit->user_map = default_editor_keymap;
-    if (editor_keymap && editor_keymap->len > 0) {
+    if (editor_keymap && editor_keymap->len > 0)
         edit->user_map = (global_key_map_t *) editor_keymap->data;
-        mc_log ("edit->user_map");
-    }
 }
 
 

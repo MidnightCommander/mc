@@ -304,7 +304,7 @@
 #define CK_AddHotlist                   7062
 #define CK_QuitCmd                      7064
 #define CK_CopyOtherTarget              7065
-#define CK_CopyOthertReadlink           7066
+#define CK_ToggleShowHidden             7066
 
 /* panels */
 #define CK_PanelChdirOtherPanel         8001
