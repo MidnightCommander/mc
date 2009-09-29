@@ -68,7 +68,7 @@ mcview_display_text (mcview_t * view)
     screen_dimen row, col;
     off_t from;
     int cw = 1;
-    unsigned int c, prev_ch;
+    int c, prev_ch;
     gboolean read_res = TRUE;
     struct hexedit_change_node *curr = view->change_list;
 

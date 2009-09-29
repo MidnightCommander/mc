@@ -1994,6 +1994,7 @@ static char *automount_lookup(char *user_name)
 static char *automount_server(const char *user_name)
 {
 	static pstring server_name;
+	(void) user_name;
 
 	/* use the local machine name as the default */
 	/* this will be the default if WITH_AUTOMOUNT is not used or fails */
@@ -2123,7 +2124,7 @@ void standard_sub_basic(char *str)
 				}
 
 				r = p+3;
-				copylen = MIN((q-r),(sizeof(envname)-1));
+				copylen = MIN((size_t)(q-r),(size_t)(sizeof(envname)-1));
 				strncpy(envname,r,copylen);
 				envname[copylen] = '\0';
 
@@ -2135,7 +2136,7 @@ void standard_sub_basic(char *str)
 					break;
 				}
 
-				copylen = MIN((q+1-p),(sizeof(envname)-1));
+				copylen = MIN((size_t)(q+1-p),(size_t)(sizeof(envname)-1));
 				strncpy(envname,p,copylen);
 				envname[copylen] = '\0';
 				string_sub(p,envname,envval);

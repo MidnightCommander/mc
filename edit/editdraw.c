@@ -387,7 +387,7 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 						q)) + edit->start_col;
     if ( option_line_state ) {
         cur_line = edit->start_line + row;
-        if ( cur_line <= edit->total_lines ) {
+        if ( cur_line <= (unsigned int) edit->total_lines ) {
             g_snprintf (line_stat, LINE_STATE_WIDTH + 1, "%7i ", cur_line + 1);
         } else {
             memset(line_stat, ' ', LINE_STATE_WIDTH);

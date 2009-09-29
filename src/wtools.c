@@ -405,7 +405,7 @@ quick_dialog_skip (QuickDialog *qd, int nskip)
 		for (i = 0; i < qw->u.radio.count; i++)
 		    items[i] = g_strdup (qw->u.radio.items[i]);
 
-	    r = radio_new (ypos, xpos, qw->u.radio.count, items);
+	    r = radio_new (ypos, xpos, qw->u.radio.count, (const char **) items);
 	    r->pos = r->sel = *qw->u.radio.value;
 	    qw->widget = (Widget *) r;
 	    g_strfreev (items);

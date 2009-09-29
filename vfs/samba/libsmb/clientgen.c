@@ -708,7 +708,7 @@ BOOL cli_session_setup(struct cli_state *cli,
 	if (cli->protocol < PROTOCOL_LANMAN1)
 		return True;
 
-	if (passlen > sizeof(pword)-1 || ntpasslen > sizeof(ntpword)-1) {
+	if ((size_t) passlen > sizeof(pword)-1 || (size_t)ntpasslen > sizeof(ntpword)-1) {
 		return False;
 	}
 
@@ -1356,7 +1356,7 @@ size_t cli_read(struct cli_state *cli, int fnum, char *buf, off_t offset, size_t
 		int size2;
 
 		while (issued - received < mpx && issued < blocks) {
-			int size1 = MIN(block, size-issued*block);
+			int size1 = MIN(block, (int) size-issued*block);
 			cli_issue_read(cli, fnum, offset+issued*block, size1, issued);
 			issued++;
 		}
@@ -1466,7 +1466,7 @@ ssize_t cli_write(struct cli_state *cli,
 		while ((issued - received < mpx) && (issued < blocks))
 		{
 			int bsent = issued * block;
-			int size1 = MIN(block, size - bsent);
+			int size1 = MIN(block, (int) size - bsent);
 
 			cli_issue_write(cli, fnum, offset + bsent,
 			                write_mode,

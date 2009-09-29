@@ -118,6 +118,7 @@ static size_t  format_pos     = 0;
  */
 void setup_logging( const char *pname, BOOL interactive )
   {
+  (void) pname;
   if( interactive )
     {
     stdout_logging = True;

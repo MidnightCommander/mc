@@ -315,89 +315,6 @@ GArray *input_keymap = NULL;
 const global_key_map_t *main_map;
 const global_key_map_t *main_x_map;
 
-static void
-reload_panelized (WPanel *panel)
-{
-    int i, j;
-    dir_list *list = &panel->dir;
-
-    if (panel != current_panel)
-	mc_chdir (panel->cwd);
-
-    for (i = 0, j = 0; i < panel->count; i++) {
-	if (list->list[i].f.marked) {
-	    /* Unmark the file in advance. In case the following mc_lstat
-	     * fails we are done, else we have to mark the file again
-	     * (Note: do_file_mark depends on a valid "list->list [i].buf").
-	     * IMO that's the best way to update the panel's summary status
-	     * -- Norbert
-	     */
-	    do_file_mark (panel, i, 0);
-	}
-	if (mc_lstat (list->list[i].fname, &list->list[i].st)) {
-	    g_free (list->list[i].fname);
-	    continue;
-	}
-	if (list->list[i].f.marked)
-	    do_file_mark (panel, i, 1);
-	if (j != i)
-	    list->list[j] = list->list[i];
-	j++;
-    }
-    if (j == 0)
-	panel->count = set_zero_dir (list);
-    else
-	panel->count = j;
-
-    if (panel != current_panel)
-	mc_chdir (current_panel->cwd);
-}
-
-static void
-update_one_panel_widget (WPanel *panel, int force_update,
-			 const char *current_file)
-{
-    int free_pointer;
-    char *my_current_file = NULL;
-
-    if (force_update & UP_RELOAD) {
-	panel->is_panelized = 0;
-	mc_setctl (panel->cwd, VFS_SETCTL_FLUSH, 0);
-	memset (&(panel->dir_stat), 0, sizeof (panel->dir_stat));
-    }
-
-    /* If current_file == -1 (an invalid pointer) then preserve selection */
-    if (current_file == UP_KEEPSEL) {
-	free_pointer = 1;
-	my_current_file = g_strdup (panel->dir.list[panel->selected].fname);
-	current_file = my_current_file;
-    } else
-	free_pointer = 0;
-
-    if (panel->is_panelized)
-	reload_panelized (panel);
-    else
-	panel_reload (panel);
-
-    try_to_select (panel, current_file);
-    panel->dirty = 1;
-
-    if (free_pointer)
-	g_free (my_current_file);
-}
-
-static void
-update_one_panel (int which, int force_update, const char *current_file)
-{
-    WPanel *panel;
-
-    if (get_display_type (which) != view_listing)
-	return;
-
-    panel = (WPanel *) get_panel_widget (which);
-    update_one_panel_widget (panel, force_update, current_file);
-}
-
 /* Save current stat of directories to avoid reloading the panels */
 /* when no modifications have taken place */
 void
@@ -1195,11 +1112,6 @@ static void
 ctl_x_cmd (void)
 {
     ctl_x_map_enabled = 1;
-}
-
-static void
-nothing (void)
-{
 }
 
 static cb_ret_t

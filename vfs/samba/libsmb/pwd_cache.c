@@ -45,6 +45,7 @@ de-obfuscates a password
 ****************************************************************************/
 static void pwd_deobfuscate(struct pwd_info *pwd)
 {
+    (void) pwd;
 }
 
 /****************************************************************************
@@ -52,6 +53,7 @@ obfuscates a password
 ****************************************************************************/
 static void pwd_obfuscate(struct pwd_info *pwd)
 {
+    (void) pwd;
 }
 
 /****************************************************************************
@@ -59,6 +61,9 @@ sets the obfuscation key info
 ****************************************************************************/
 void pwd_obfuscate_key(struct pwd_info *pwd, uint32 int_key, char *str_key)
 {
+    (void) pwd;
+    (void) int_key;
+    (void) str_key;
 }
 
 #if 0

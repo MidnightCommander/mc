@@ -203,7 +203,7 @@ static int parse_nmb_name(char *inbuf,int offset,int length, struct nmb_name *na
     unsigned char c1,c2;
     c1 = ubuf[offset++]-'A';
     c2 = ubuf[offset++]-'A';
-    if ((c1 & 0xF0) || (c2 & 0xF0) || (n > sizeof(name->name)-1))
+    if ((c1 & 0xF0) || (c2 & 0xF0) || ((size_t) n > sizeof(name->name)-1))
       return(0);
     name->name[n++] = (c1<<4) | c2;
     m -= 2;
@@ -234,7 +234,7 @@ static int parse_nmb_name(char *inbuf,int offset,int length, struct nmb_name *na
       ret += m+1;
     if (n)
       name->scope[n++] = '.';
-    if (m+2+offset>length || n+m+1>sizeof(name->scope))
+    if (m+2+offset>length || (size_t) n+m+1 >sizeof(name->scope))
       return(0);
     offset++;
     while (m--)
@@ -340,7 +340,7 @@ static BOOL parse_alloc_res_rec(char *inbuf,int *offset,int length,
     (*recs)[i].ttl = RIVAL(inbuf,(*offset)+4);
     (*recs)[i].rdlength = RSVAL(inbuf,(*offset)+8);
     (*offset) += 10;
-    if ((*recs)[i].rdlength>sizeof((*recs)[i].rdata) || 
+    if ((size_t)(*recs)[i].rdlength>sizeof((*recs)[i].rdata) || 
 	(*offset)+(*recs)[i].rdlength > length) {
       free(*recs);
       return(False);
@@ -431,7 +431,7 @@ static BOOL parse_dgram(char *inbuf,int length,struct dgram_packet *dgram)
     offset += parse_nmb_name(inbuf,offset,length,&dgram->dest_name);
   }
 
-  if (offset >= length || (length-offset > sizeof(dgram->data))) 
+  if (offset >= length || ((size_t)length-offset > sizeof(dgram->data))) 
     return(False);
 
   dgram->datasize = length-offset;
@@ -630,6 +630,7 @@ static void free_nmb_packet(struct nmb_packet *nmb)
 static void free_dgram_packet(struct dgram_packet *nmb)
 {  
   /* We have nothing to do for a dgram packet. */
+  (void) nmb;
 }
 
 /*******************************************************************

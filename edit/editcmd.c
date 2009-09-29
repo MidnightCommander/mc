@@ -485,7 +485,7 @@ edit_get_save_file_as (WEdit *edit)
 
     char *filename = edit->filename;
 
-    char *lb_names[LB_NAMES] =
+    const char *lb_names[LB_NAMES] =
     {
         N_("&Do not change"),
         N_("&Unix format (LF)"),
@@ -497,7 +497,7 @@ edit_get_save_file_as (WEdit *edit)
     {
 	QUICK_BUTTON (6, 10, DLG_HEIGHT - 3, DLG_HEIGHT, N_("&Cancel"), B_CANCEL, NULL),
 	QUICK_BUTTON (2, 10, DLG_HEIGHT - 3, DLG_HEIGHT, N_("&OK"), B_ENTER,  NULL),
-	QUICK_RADIO (5, DLG_WIDTH, DLG_HEIGHT - 8, DLG_HEIGHT, LB_NAMES, (const char **) lb_names, &cur_lb),
+	QUICK_RADIO (5, DLG_WIDTH, DLG_HEIGHT - 8, DLG_HEIGHT, LB_NAMES, lb_names, (int *) &cur_lb),
 	QUICK_LABEL (3, DLG_WIDTH, DLG_HEIGHT - 9, DLG_HEIGHT, N_("Change line breaks to:")),
 	QUICK_INPUT (3, DLG_WIDTH, DLG_HEIGHT - 11, DLG_HEIGHT, filename, DLG_WIDTH - 6, 0, "save-as", &filename),
 	QUICK_LABEL (2, DLG_WIDTH, DLG_HEIGHT - 12, DLG_HEIGHT, N_(" Enter file name: ")),
@@ -2315,9 +2315,10 @@ static gboolean is_break_char(char c)
 }
 
 /* find first character of current word */
-static int edit_find_word_start (WEdit *edit, long *word_start, int *word_len)
+static int edit_find_word_start (WEdit *edit, long *word_start, gsize *word_len)
 {
-    int i, c, last;
+    int c, last;
+    gsize i;
 
 /* return if at begin of file */
     if (edit->curs1 <= 0)
@@ -2354,10 +2355,10 @@ static int edit_find_word_start (WEdit *edit, long *word_start, int *word_len)
 #define MAX_WORD_COMPLETIONS 100	/* in listbox */
 
 /* collect the possible completions */
-static int
-edit_collect_completions (WEdit *edit, long start, int word_len,
+static gsize
+edit_collect_completions (WEdit *edit, long start, gsize word_len,
 			  char *match_expr, struct selection *compl,
-			  int *num)
+			  gsize *num)
 {
     gsize len = 0;
     gsize max_len = 0;
@@ -2461,8 +2462,7 @@ edit_collect_completions (WEdit *edit, long start, int word_len,
 void
 edit_complete_word_cmd (WEdit *edit)
 {
-    int word_len = 0, num_compl = 0;
-    gsize i, max_len;
+    gsize i, max_len, word_len = 0, num_compl = 0;
     long word_start = 0;
     unsigned char *bufpos;
     char *match_expr;
@@ -2507,7 +2507,7 @@ edit_complete_word_cmd (WEdit *edit)
 
     g_free (match_expr);
     /* release memory before return */
-    for (i = 0; i < (gsize) num_compl; i++)
+    for (i = 0; i < num_compl; i++)
 	g_free (compl[i].text);
 
 }
@@ -2638,9 +2638,8 @@ edit_load_back_cmd (WEdit *edit)
 void
 edit_get_match_keyword_cmd (WEdit *edit)
 {
-    int word_len = 0;
+    gsize word_len = 0, max_len = 0;
     int num_def = 0;
-    int max_len = 0;
     int i;
     long word_start = 0;
     unsigned char *bufpos;

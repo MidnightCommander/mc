@@ -509,7 +509,7 @@ BOOL resolve_name(const char *name, struct in_addr *return_ip, int name_type)
   }
 
   pstrcpy(name_resolve_list, lp_name_resolve_order());
-  if (!name_resolve_list || !*name_resolve_list)
+  if (name_resolve_list == NULL || *name_resolve_list == '\0')
     pstrcpy(name_resolve_list, "host");
   ptr = name_resolve_list;
 

@@ -170,7 +170,6 @@ mcview_real_event (Gpm_Event * event, void *x)
 static void
 mcview_set_keymap (mcview_t * view)
 {
-    int i;
     view->plain_map = default_viewer_keymap;
     if (viewer_keymap && viewer_keymap->len > 0)
         view->plain_map = (global_key_map_t *) viewer_keymap->data;
