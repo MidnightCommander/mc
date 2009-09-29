@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-14 16:34+0300\n"
+"POT-Creation-Date: 2009-09-29 12:37+0300\n"
 "PO-Revision-Date: 2002-10-22 14:28+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -382,9 +382,6 @@ msgstr " Bekreft erstatt "
 
 msgid "&Dismiss"
 msgstr "Forkast"
-
-msgid " Emacs key: "
-msgstr " Emacs-tast: "
 
 #, c-format
 msgid ""
@@ -924,6 +921,9 @@ msgstr "Be om å kjøre i fargemodus"
 msgid "Specifies a color configuration"
 msgstr "Spesifiserer en fargekonfigurasjon"
 
+msgid "Show mc with specified skin"
+msgstr ""
+
 #. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
@@ -1045,14 +1045,15 @@ msgstr "brukers &Ministatus"
 msgid "&Reverse"
 msgstr "&Reversert"
 
-msgid "case sensi&tive"
+#, fuzzy
+msgid "Case sensi&tive"
 msgstr "skill mellom s&tore/små tegn"
+
+msgid "Executable &first"
+msgstr ""
 
 msgid "Sort order"
 msgstr "Sorteringsrekkefølge"
-
-msgid "Executable first"
-msgstr ""
 
 msgid " Confirmation "
 msgstr " Bekreftelse "
@@ -3818,6 +3819,9 @@ msgstr "Intern feil:"
 
 msgid "Changes to file lost"
 msgstr "Endringer i filen tapt"
+
+#~ msgid " Emacs key: "
+#~ msgstr " Emacs-tast: "
 
 #~ msgid " %d items found, %d bookmarks added "
 #~ msgstr "%d funn gjort, %d bokmerker lagt til"

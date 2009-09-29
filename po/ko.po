@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0-pre3\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-14 16:34+0300\n"
+"POT-Creation-Date: 2009-09-29 12:37+0300\n"
 "PO-Revision-Date: 2003-01-22 17:31+0900\n"
 "Last-Translator: Nam SungHyun <namsh@kldp.org>\n"
 "Language-Team: Korean <debian-l10n-korean@lists.debian.org>\n"
@@ -381,9 +381,6 @@ msgstr " 바꾸기 확인 "
 
 msgid "&Dismiss"
 msgstr "취소(&D)"
-
-msgid " Emacs key: "
-msgstr " Emacs 글쇠: "
 
 #, c-format
 msgid ""
@@ -921,6 +918,9 @@ msgstr "컬러 모드로 실행을 요구"
 msgid "Specifies a color configuration"
 msgstr "컬러 환경을 명세"
 
+msgid "Show mc with specified skin"
+msgstr ""
+
 #. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
@@ -1042,14 +1042,15 @@ msgstr "미니 상태바(&M)"
 msgid "&Reverse"
 msgstr "반대로(&R)"
 
-msgid "case sensi&tive"
+#, fuzzy
+msgid "Case sensi&tive"
 msgstr "대소문자 구분(&t)"
+
+msgid "Executable &first"
+msgstr ""
 
 msgid "Sort order"
 msgstr "정렬 순서"
-
-msgid "Executable first"
-msgstr ""
 
 msgid " Confirmation "
 msgstr " 확인 "
@@ -3806,6 +3807,9 @@ msgstr "내부 오류:"
 
 msgid "Changes to file lost"
 msgstr "수정 내용 잃어버림"
+
+#~ msgid " Emacs key: "
+#~ msgstr " Emacs 글쇠: "
 
 #~ msgid " %d items found, %d bookmarks added "
 #~ msgstr " %d이(가) 찾아짐, %d 책갈피 더함 "

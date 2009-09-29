@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-14 16:34+0300\n"
+"POT-Creation-Date: 2009-09-29 12:37+0300\n"
 "PO-Revision-Date: 1999-03-18 23:11+0100\n"
 "Last-Translator: Lorint Hendschel <LorintHendschel@skynet.be>\n"
 "Language-Team: walon <linux-wa@chanae.alphanet.ch>\n"
@@ -397,9 +397,6 @@ msgstr " Racertiner li discandje "
 
 msgid "&Dismiss"
 msgstr "&Rinoncî"
-
-msgid " Emacs key: "
-msgstr " Tape di Emacs: "
 
 #, c-format
 msgid ""
@@ -941,6 +938,9 @@ msgstr "Fé roter e coleurs"
 msgid "Specifies a color configuration"
 msgstr "Dire avou kénès coleurs"
 
+msgid "Show mc with specified skin"
+msgstr ""
+
 #. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
@@ -1039,14 +1039,15 @@ msgstr "&Mini statut ûzeu"
 msgid "&Reverse"
 msgstr "Å&rvier"
 
-msgid "case sensi&tive"
+#, fuzzy
+msgid "Case sensi&tive"
 msgstr "grandès <> ptitès letes"
+
+msgid "Executable &first"
+msgstr ""
 
 msgid "Sort order"
 msgstr "Ôrde po relire"
-
-msgid "Executable first"
-msgstr ""
 
 msgid " Confirmation "
 msgstr " Racertinaedje "
@@ -3797,6 +3798,9 @@ msgstr "Divintrinne aroke:"
 
 msgid "Changes to file lost"
 msgstr "Les candjmints do fitchî ont stî pierdous"
+
+#~ msgid " Emacs key: "
+#~ msgstr " Tape di Emacs: "
 
 #~ msgid "Displays this help message"
 #~ msgstr "Mostere ci messaedje d' aide chal"

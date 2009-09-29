@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-14 16:34+0300\n"
+"POT-Creation-Date: 2009-09-29 12:37+0300\n"
 "PO-Revision-Date: 2003-09-20 18:50+0200\n"
 "Last-Translator: Strahinya Radich (Страхиња Радић) <mr99164@alas.matf.bg.ac."
 "yu>\n"
@@ -382,9 +382,6 @@ msgstr " Потврда замене "
 
 msgid "&Dismiss"
 msgstr "&Отпусти"
-
-msgid " Emacs key: "
-msgstr " Пречица Емакса: "
 
 #, c-format
 msgid ""
@@ -925,6 +922,9 @@ msgstr "Захтевање обојеног режима"
 msgid "Specifies a color configuration"
 msgstr "Поставља подешавања боја"
 
+msgid "Show mc with specified skin"
+msgstr ""
+
 #. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
@@ -1046,14 +1046,15 @@ msgstr "корисничко &Мини стање"
 msgid "&Reverse"
 msgstr "&Обрни"
 
-msgid "case sensi&tive"
+#, fuzzy
+msgid "Case sensi&tive"
 msgstr "разлику&ј велика и мала слова"
+
+msgid "Executable &first"
+msgstr ""
 
 msgid "Sort order"
 msgstr "Поредак ређања"
-
-msgid "Executable first"
-msgstr ""
 
 msgid " Confirmation "
 msgstr " Потврде "
@@ -3820,6 +3821,9 @@ msgstr "Унутрашња грешка:"
 
 msgid "Changes to file lost"
 msgstr "Измене у датотеци су изгубљене"
+
+#~ msgid " Emacs key: "
+#~ msgstr " Пречица Емакса: "
 
 #~ msgid " %d items found, %d bookmarks added "
 #~ msgstr " Нађено %d, додано %d обележивача "

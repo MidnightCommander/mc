@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-14 16:34+0300\n"
+"POT-Creation-Date: 2009-09-29 12:37+0300\n"
 "PO-Revision-Date: 2005-07-22 00:47+0200\n"
 "Last-Translator: Arpad Biro <biro_arpad@yahoo.com>\n"
 "Language-Team: Hungarian <debian-l10n-hungarian@lists.debian.org>\n"
@@ -390,9 +390,6 @@ msgstr " Csere megerősítése "
 
 msgid "&Dismiss"
 msgstr "&Tovább"
-
-msgid " Emacs key: "
-msgstr " Emacs-billentyű: "
 
 #, c-format
 msgid ""
@@ -944,6 +941,9 @@ msgstr "Színes üzemmód kérése."
 msgid "Specifies a color configuration"
 msgstr "Színösszeállítás megadása."
 
+msgid "Show mc with specified skin"
+msgstr ""
+
 #. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
@@ -1085,14 +1085,15 @@ msgstr "Beállított extra adat&sor:"
 msgid "&Reverse"
 msgstr "&Fordított sorrend"
 
-msgid "case sensi&tive"
+#, fuzzy
+msgid "Case sensi&tive"
 msgstr "&Kis-/nagybetű számít"
+
+msgid "Executable &first"
+msgstr ""
 
 msgid "Sort order"
 msgstr " Rendezési mód "
-
-msgid "Executable first"
-msgstr ""
 
 msgid " Confirmation "
 msgstr " Megerősítés "
@@ -3961,6 +3962,9 @@ msgstr "Belső programhiba:"
 
 msgid "Changes to file lost"
 msgstr "A fájl módosításai nem lettek rögzítve."
+
+#~ msgid " Emacs key: "
+#~ msgstr " Emacs-billentyű: "
 
 #~ msgid " %d items found, %d bookmarks added "
 #~ msgstr " %d találat, %d könyvjelző hozzáadva. "

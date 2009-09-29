@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-14 16:34+0300\n"
+"POT-Creation-Date: 2009-09-29 12:37+0300\n"
 "PO-Revision-Date: 2001-09-29 17:41+0200\n"
 "Last-Translator: Softcatalà <tradgnome@softcatala.org>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
@@ -388,9 +388,6 @@ msgstr " Confirma el reemplaçament "
 
 msgid "&Dismiss"
 msgstr "&Ignora"
-
-msgid " Emacs key: "
-msgstr " Tecla d'Emacs: "
 
 #, c-format
 msgid ""
@@ -932,6 +929,9 @@ msgstr "Demana que s'utilitzi el mode en color"
 msgid "Specifies a color configuration"
 msgstr "Especifica una configuració de color"
 
+msgid "Show mc with specified skin"
+msgstr ""
+
 #. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
@@ -1056,14 +1056,15 @@ msgstr "&Miniestat d'usuari"
 msgid "&Reverse"
 msgstr "in&Verteix"
 
-msgid "case sensi&tive"
+#, fuzzy
+msgid "Case sensi&tive"
 msgstr "distingeix entre majú&Scules/minúscules"
+
+msgid "Executable &first"
+msgstr ""
 
 msgid "Sort order"
 msgstr "Ordre de classificació"
-
-msgid "Executable first"
-msgstr ""
 
 msgid " Confirmation "
 msgstr " Confirmació "
@@ -3844,6 +3845,9 @@ msgstr "Error intern:"
 
 msgid "Changes to file lost"
 msgstr "Canvia al fitxer perdut"
+
+#~ msgid " Emacs key: "
+#~ msgstr " Tecla d'Emacs: "
 
 #~ msgid " %d items found, %d bookmarks added "
 #~ msgstr "S'han trobat %d resultats, s'han afegit %d marcadors"

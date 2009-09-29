@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-14 16:34+0300\n"
+"POT-Creation-Date: 2009-09-29 12:37+0300\n"
 "PO-Revision-Date: 2009-02-16 19:45+0300\n"
 "Last-Translator: Andrius Štikonas <stikonas@gmail.com>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -377,9 +377,6 @@ msgstr " Patvirtinti pakeitimą "
 
 msgid "&Dismiss"
 msgstr "At&mesti"
-
-msgid " Emacs key: "
-msgstr " „Emacs“ klavišas: "
 
 #, c-format
 msgid ""
@@ -917,6 +914,9 @@ msgstr "Paleidžia spalvotu režimu"
 msgid "Specifies a color configuration"
 msgstr "Nurodo spalvų konfigūraciją"
 
+msgid "Show mc with specified skin"
+msgstr ""
+
 #. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
@@ -1040,14 +1040,15 @@ msgstr "Sutraukta būs&ena"
 msgid "&Reverse"
 msgstr "A&tbulai"
 
-msgid "case sensi&tive"
+#, fuzzy
+msgid "Case sensi&tive"
 msgstr "Skir&ti ABC nuo abc"
+
+msgid "Executable &first"
+msgstr ""
 
 msgid "Sort order"
 msgstr "Rikiavimo tvarka"
-
-msgid "Executable first"
-msgstr ""
 
 msgid " Confirmation "
 msgstr " Patvirtinimas "
@@ -3813,6 +3814,9 @@ msgstr "Vidinė klaida:"
 
 msgid "Changes to file lost"
 msgstr "Failo pakeitimai prarasti"
+
+#~ msgid " Emacs key: "
+#~ msgstr " „Emacs“ klavišas: "
 
 #~ msgid " %d items found, %d bookmarks added "
 #~ msgstr " surasta %d, pridėta %d žymų  "

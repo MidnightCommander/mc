@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-14 16:34+0300\n"
+"POT-Creation-Date: 2009-09-29 12:37+0300\n"
 "PO-Revision-Date: 2003-01-22 18:10+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <debian-l10n-swedish@lists.debian.org>\n"
@@ -394,9 +394,6 @@ msgstr " Bekräfta ersättningar "
 
 msgid "&Dismiss"
 msgstr "&Försvinn"
-
-msgid " Emacs key: "
-msgstr " Emacstangent: "
 
 #, c-format
 msgid ""
@@ -945,6 +942,9 @@ msgstr "Begär att få köra i färgläge"
 msgid "Specifies a color configuration"
 msgstr "Specificera en färgkonfiguration"
 
+msgid "Show mc with specified skin"
+msgstr ""
+
 #. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
@@ -1068,14 +1068,15 @@ msgstr "&Ministatus"
 msgid "&Reverse"
 msgstr "&Omvänd"
 
-msgid "case sensi&tive"
+#, fuzzy
+msgid "Case sensi&tive"
 msgstr "ski&Lj på versaler/gemener"
+
+msgid "Executable &first"
+msgstr ""
 
 msgid "Sort order"
 msgstr "Sorteringsordning"
-
-msgid "Executable first"
-msgstr ""
 
 msgid " Confirmation "
 msgstr " Bekräftelse "
@@ -3866,6 +3867,9 @@ msgstr " Internt fel:"
 
 msgid "Changes to file lost"
 msgstr "Ändringar i filen förlorade"
+
+#~ msgid " Emacs key: "
+#~ msgstr " Emacstangent: "
 
 #~ msgid " %d items found, %d bookmarks added "
 #~ msgstr " %d sökningar gjorda, %d bokmärken tillagda"

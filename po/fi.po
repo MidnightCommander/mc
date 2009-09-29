@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gmc finnish 0.01\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-14 16:34+0300\n"
+"POT-Creation-Date: 2009-09-29 12:37+0300\n"
 "PO-Revision-Date: 1999-08-23 17:30+0200\n"
 "Last-Translator: Mikko Rauhala <mjr@iki.fi>\n"
 "Language-Team: Finnish <debian-l10n-finnish@lists.debian.org>\n"
@@ -388,9 +388,6 @@ msgstr " Varmista korvaus "
 
 msgid "&Dismiss"
 msgstr "&Kuittaa"
-
-msgid " Emacs key: "
-msgstr " Emacs-näppäin: "
 
 #, c-format
 msgid ""
@@ -930,6 +927,9 @@ msgstr ""
 msgid "Specifies a color configuration"
 msgstr ""
 
+msgid "Show mc with specified skin"
+msgstr ""
+
 #. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
@@ -1026,14 +1026,15 @@ msgstr "&Minitila"
 msgid "&Reverse"
 msgstr "&Käänteinen"
 
-msgid "case sensi&tive"
+#, fuzzy
+msgid "Case sensi&tive"
 msgstr "&Isot/pienet eroavat"
+
+msgid "Executable &first"
+msgstr ""
 
 msgid "Sort order"
 msgstr "Järjestys"
-
-msgid "Executable first"
-msgstr ""
 
 msgid " Confirmation "
 msgstr " Varmistus "
@@ -3694,6 +3695,9 @@ msgstr ""
 #, fuzzy
 msgid "Changes to file lost"
 msgstr "&Pitkä tiedostolista"
+
+#~ msgid " Emacs key: "
+#~ msgstr " Emacs-näppäin: "
 
 #, fuzzy
 #~ msgid "unknown option"

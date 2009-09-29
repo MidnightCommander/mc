@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-14 16:34+0300\n"
+"POT-Creation-Date: 2009-09-29 12:37+0300\n"
 "PO-Revision-Date: 2003-02-04 02:57+0100\n"
 "Last-Translator: Andrzej Zaborowski <balrog@zabor.org>\n"
 "Language-Team: Polish <debian-l10n-polish@lists.debian.org>\n"
@@ -380,9 +380,6 @@ msgstr " Potwierdzanie "
 
 msgid "&Dismiss"
 msgstr "&Porzuć"
-
-msgid " Emacs key: "
-msgstr " Klawisz Emacsa: "
 
 #, c-format
 msgid ""
@@ -920,6 +917,9 @@ msgstr "Powoduje uruchomienie w trybie kolorowym"
 msgid "Specifies a color configuration"
 msgstr "Określa konfigurację kolorów"
 
+msgid "Show mc with specified skin"
+msgstr ""
+
 #. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
@@ -1046,14 +1046,15 @@ msgstr "Do&wolny krótki stan"
 msgid "&Reverse"
 msgstr "Od&wrócony"
 
-msgid "case sensi&tive"
+#, fuzzy
+msgid "Case sensi&tive"
 msgstr "Rozróżnianie wie&lkości"
+
+msgid "Executable &first"
+msgstr ""
 
 msgid "Sort order"
 msgstr "Porządek sortowania"
-
-msgid "Executable first"
-msgstr ""
 
 msgid " Confirmation "
 msgstr " Potwierdzanie "
@@ -3824,6 +3825,9 @@ msgstr "Błąd wewnętrzny:"
 
 msgid "Changes to file lost"
 msgstr "Utracono zmiany w pliku"
+
+#~ msgid " Emacs key: "
+#~ msgstr " Klawisz Emacsa: "
 
 #~ msgid " %d items found, %d bookmarks added "
 #~ msgstr " %d odnalezionych, %d dodanych zakładek "

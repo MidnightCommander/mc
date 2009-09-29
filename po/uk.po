@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: uk\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-14 16:34+0300\n"
+"POT-Creation-Date: 2009-09-29 12:37+0300\n"
 "PO-Revision-Date: 2009-08-25 16:27+0300\n"
 "Last-Translator: Oleksandr Natalenko <pfactum@gmail.com>\n"
 "Language-Team: Ukrainian <kde-i18n-doc@kde.org>\n"
@@ -377,9 +377,6 @@ msgstr " Підтвердити заміну "
 
 msgid "&Dismiss"
 msgstr "&Закрити"
-
-msgid " Emacs key: "
-msgstr " Клавіша Emacs: "
 
 #, c-format
 msgid ""
@@ -894,6 +891,9 @@ msgstr "Запит на запуск у кольоровому режимі"
 msgid "Specifies a color configuration"
 msgstr "Визначити налаштування кольорів"
 
+msgid "Show mc with specified skin"
+msgstr ""
+
 #. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
@@ -1020,14 +1020,16 @@ msgstr "Рядок &міні-статусу у форматі користува
 msgid "&Reverse"
 msgstr "&Зворотній"
 
-msgid "case sensi&tive"
+#, fuzzy
+msgid "Case sensi&tive"
 msgstr "Врахування ре&гістру"
+
+#, fuzzy
+msgid "Executable &first"
+msgstr "Виконувані першими"
 
 msgid "Sort order"
 msgstr "Порядок сортування"
-
-msgid "Executable first"
-msgstr "Виконувані першими"
 
 msgid " Confirmation "
 msgstr " Запит підтвердження "
@@ -3804,6 +3806,9 @@ msgstr "Внутрішня помилка:"
 
 msgid "Changes to file lost"
 msgstr "Зміни у файлі втрачені"
+
+#~ msgid " Emacs key: "
+#~ msgstr " Клавіша Emacs: "
 
 #~ msgid " %d items found, %d bookmarks added "
 #~ msgstr " %d знайдено, %d закладок додано "

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc \n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-14 16:34+0300\n"
+"POT-Creation-Date: 2009-09-29 12:37+0300\n"
 "PO-Revision-Date: 2000-06-22 00:00+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -383,9 +383,6 @@ msgstr " Potrdi zamenjavo"
 
 msgid "&Dismiss"
 msgstr "&Opusti"
-
-msgid " Emacs key: "
-msgstr " Emacs ključ: "
 
 #, c-format
 msgid ""
@@ -924,6 +921,9 @@ msgstr "Prošnja za izvajanje v barvnem načinu"
 msgid "Specifies a color configuration"
 msgstr "Določi nastavitve barv"
 
+msgid "Show mc with specified skin"
+msgstr ""
+
 #. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
@@ -1045,14 +1045,15 @@ msgstr "uporabniško &Mini stanje"
 msgid "&Reverse"
 msgstr "&Obrnjeno"
 
-msgid "case sensi&tive"
+#, fuzzy
+msgid "Case sensi&tive"
 msgstr "razlikuj velike in male črke"
+
+msgid "Executable &first"
+msgstr ""
 
 msgid "Sort order"
 msgstr "Vrstni red sortiranja"
-
-msgid "Executable first"
-msgstr ""
 
 msgid " Confirmation "
 msgstr " Potrditev"
@@ -3818,6 +3819,9 @@ msgstr "Interna napaka:"
 
 msgid "Changes to file lost"
 msgstr "Spremembe v datoteki izgubljene"
+
+#~ msgid " Emacs key: "
+#~ msgstr " Emacs ključ: "
 
 #~ msgid " %d items found, %d bookmarks added "
 #~ msgstr " %d najdb, %d dodanih zaznamkov"

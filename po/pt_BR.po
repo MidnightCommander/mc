@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc-4.5.36\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-14 16:34+0300\n"
+"POT-Creation-Date: 2009-09-29 12:37+0300\n"
 "PO-Revision-Date: 2000-10-27 15:37-03:00\n"
 "Last-Translator: E. A. Tacão <tacao@conectiva.com.br>\n"
 "Language-Team: pt_BR <ldp-br@bazar.conectiva.com.br>\n"
@@ -397,9 +397,6 @@ msgstr " Confirme substituição "
 
 msgid "&Dismiss"
 msgstr "&Dispensar"
-
-msgid " Emacs key: "
-msgstr " Tecla do Emacs: "
 
 #, c-format
 msgid ""
@@ -943,6 +940,9 @@ msgstr "Solicita para ser executado em cores"
 msgid "Specifies a color configuration"
 msgstr "Especifica uma configuração de cores"
 
+msgid "Show mc with specified skin"
+msgstr ""
+
 #. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
@@ -1066,14 +1066,15 @@ msgstr "&Mini status de usuário"
 msgid "&Reverse"
 msgstr "&Reversa"
 
-msgid "case sensi&tive"
+#, fuzzy
+msgid "Case sensi&tive"
 msgstr "sensível à &caixa (minúsc/maiusc)"
+
+msgid "Executable &first"
+msgstr ""
 
 msgid "Sort order"
 msgstr "Parâmetros de ordenamento"
-
-msgid "Executable first"
-msgstr ""
 
 msgid " Confirmation "
 msgstr " Confirmação "
@@ -3871,6 +3872,9 @@ msgstr "Erro interno:"
 #
 msgid "Changes to file lost"
 msgstr "Alterações no arquivo perdidas"
+
+#~ msgid " Emacs key: "
+#~ msgstr " Tecla do Emacs: "
 
 #~ msgid " %d items found, %d bookmarks added "
 #~ msgstr " %d buscas encontradas, %d favoritos adicionados"

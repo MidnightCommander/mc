@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 4.7.0\n"
+"Project-Id-Version: 4.7.0pre3\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-14 16:34+0300\n"
-"PO-Revision-Date: 2009-08-25 21:40+0200\n"
+"POT-Creation-Date: 2009-09-29 12:37+0300\n"
+"PO-Revision-Date: 2009-09-27 11:00+0200\n"
 "Last-Translator: David Martín <dmartina@excite.com\n"
 "Language-Team: Spanish <debian-l10n-spanish@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -372,9 +372,6 @@ msgstr " Confirmar cambios "
 
 msgid "&Dismiss"
 msgstr "&Ignorar"
-
-msgid " Emacs key: "
-msgstr " Tecla Emacs: "
 
 #, c-format
 msgid ""
@@ -885,6 +882,9 @@ msgstr "Solicitar la ejecución en color"
 msgid "Specifies a color configuration"
 msgstr "Indicar una configuración de colores"
 
+msgid "Show mc with specified skin"
+msgstr "Mostrar mc con la careta (skin) indicada"
+
 #. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
@@ -1003,14 +1003,14 @@ msgstr "&Mini-estado"
 msgid "&Reverse"
 msgstr "inve&Rtir"
 
-msgid "case sensi&tive"
+msgid "Case sensi&tive"
 msgstr "distinguir ma&Yúsculas"
+
+msgid "Executable &first"
+msgstr "&Ejecutables primero"
 
 msgid "Sort order"
 msgstr " Ordenar "
-
-msgid "Executable first"
-msgstr "&Ejecutables primero"
 
 msgid " Confirmation "
 msgstr " Confirmación "
@@ -2813,7 +2813,7 @@ msgid " Invalid token number %d "
 msgstr " El elemento número %d no es válido "
 
 msgid "Normal"
-msgstr "Normal"
+msgstr "&Normal"
 
 msgid "&Regular expression"
 msgstr "expresión &Regular"
@@ -3773,6 +3773,9 @@ msgstr "Error interno:"
 
 msgid "Changes to file lost"
 msgstr "Los cambios del archivo se han perdido"
+
+#~ msgid " Emacs key: "
+#~ msgstr " Tecla Emacs: "
 
 #~ msgid " %d items found, %d bookmarks added "
 #~ msgstr " %d coincidencias, %d marcadores colocados "

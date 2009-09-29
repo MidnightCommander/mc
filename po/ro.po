@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-14 16:34+0300\n"
+"POT-Creation-Date: 2009-09-29 12:37+0300\n"
 "PO-Revision-Date: 2003-01-31 00:11+0200\n"
 "Last-Translator: Mişu Moldovan <dumol@go.ro>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
@@ -385,9 +385,6 @@ msgstr " Confirmă înlocuirea"
 
 msgid "&Dismiss"
 msgstr "&Închide"
-
-msgid " Emacs key: "
-msgstr " Tasta Emacs: "
 
 #, c-format
 msgid ""
@@ -925,6 +922,9 @@ msgstr "Cerere de rulare în culori"
 msgid "Specifies a color configuration"
 msgstr "Specifică o configuraţie de culori"
 
+msgid "Show mc with specified skin"
+msgstr ""
+
 #. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
@@ -1047,14 +1047,15 @@ msgstr "&Mini status utilizator"
 msgid "&Reverse"
 msgstr "in&Vers"
 
-msgid "case sensi&tive"
+#, fuzzy
+msgid "Case sensi&tive"
 msgstr "nu ignora &Majusculele "
+
+msgid "Executable &first"
+msgstr ""
 
 msgid "Sort order"
 msgstr "Ordinea de sortare"
-
-msgid "Executable first"
-msgstr ""
 
 msgid " Confirmation "
 msgstr " Confirmare "
@@ -3816,6 +3817,9 @@ msgstr "Eroare internă:"
 
 msgid "Changes to file lost"
 msgstr "S-au pierdut schimbările efectuate în fişier"
+
+#~ msgid " Emacs key: "
+#~ msgstr " Tasta Emacs: "
 
 #~ msgid " %d items found, %d bookmarks added "
 #~ msgstr " %d căutări efectuate, %d semne de carte adăugate "

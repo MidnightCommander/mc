@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-14 16:34+0300\n"
+"POT-Creation-Date: 2009-09-29 12:37+0300\n"
 "PO-Revision-Date: 2009-07-27 17:18+0100\n"
 "Last-Translator: Ivan Masár <helix84@centrum.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -377,9 +377,6 @@ msgstr " Potvrdiť nahradenie "
 
 msgid "&Dismiss"
 msgstr "&Odmietnuť"
-
-msgid " Emacs key: "
-msgstr " Emacs kláves: "
 
 #, c-format
 msgid ""
@@ -894,6 +891,9 @@ msgstr "Požiadať o spustenie vo farebnom režime"
 msgid "Specifies a color configuration"
 msgstr "Určuje farebnú konfiguráciu"
 
+msgid "Show mc with specified skin"
+msgstr ""
+
 #. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
@@ -1018,14 +1018,16 @@ msgstr "používateľský &Mini stav"
 msgid "&Reverse"
 msgstr "o&Brátený"
 
-msgid "case sensi&tive"
+#, fuzzy
+msgid "Case sensi&tive"
 msgstr "&Citlivý na veľkosť"
+
+#, fuzzy
+msgid "Executable &first"
+msgstr "Najprv spustiteľné"
 
 msgid "Sort order"
 msgstr "Poradie triedenia"
-
-msgid "Executable first"
-msgstr "Najprv spustiteľné"
 
 msgid " Confirmation "
 msgstr " Potvrdenie "
@@ -3794,6 +3796,9 @@ msgstr "Vnútorná chyba:"
 
 msgid "Changes to file lost"
 msgstr "Zmeny súboru stratené"
+
+#~ msgid " Emacs key: "
+#~ msgstr " Emacs kláves: "
 
 #~ msgid " %d items found, %d bookmarks added "
 #~ msgstr " %d nájdených, %d pridaných záložiek "

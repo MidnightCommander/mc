@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-14 16:34+0300\n"
+"POT-Creation-Date: 2009-09-29 12:37+0300\n"
 "PO-Revision-Date: 2002-04-30 16:46+0200\n"
 "Last-Translator: Christophe Merlet (RedFox) <christophe@merlet.net>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
@@ -390,9 +390,6 @@ msgstr " Confirmer le remplacement "
 
 msgid "&Dismiss"
 msgstr "&Fermer"
-
-msgid " Emacs key: "
-msgstr " Touches Emacs : "
 
 #, c-format
 msgid ""
@@ -933,6 +930,9 @@ msgstr "Demande à fonctionner en mode couleur"
 msgid "Specifies a color configuration"
 msgstr "Spécifie une configuration des couleurs"
 
+msgid "Show mc with specified skin"
+msgstr ""
+
 #. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
@@ -1055,14 +1055,15 @@ msgstr "&Mini-afficheur d'état utilisateur"
 msgid "&Reverse"
 msgstr "Inve&Rsé"
 
-msgid "case sensi&tive"
+#, fuzzy
+msgid "Case sensi&tive"
 msgstr "Respec&t de la casse "
+
+msgid "Executable &first"
+msgstr ""
 
 msgid "Sort order"
 msgstr "Ordre de tri"
-
-msgid "Executable first"
-msgstr ""
 
 msgid " Confirmation "
 msgstr " Confirmation "
@@ -3843,6 +3844,9 @@ msgstr "Erreur interne :"
 
 msgid "Changes to file lost"
 msgstr "Les changements au fichier sont perdus"
+
+#~ msgid " Emacs key: "
+#~ msgstr " Touches Emacs : "
 
 #~ msgid " %d items found, %d bookmarks added "
 #~ msgstr " %d découvertes faites, %d signets ajoutés "

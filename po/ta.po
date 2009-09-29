@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-14 16:34+0300\n"
+"POT-Creation-Date: 2009-09-29 12:37+0300\n"
 "PO-Revision-Date: 2000-10-26 11:00 CST\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil <ubuntu-l10n-tam@lists.ubuntu.com>\n"
@@ -378,9 +378,6 @@ msgstr " மாற்றுதலை உறுதிப்படுத்து 
 
 msgid "&Dismiss"
 msgstr ""
-
-msgid " Emacs key: "
-msgstr "  Emacs விசை:"
 
 #, c-format
 msgid ""
@@ -911,6 +908,9 @@ msgstr ""
 msgid "Specifies a color configuration"
 msgstr ""
 
+msgid "Show mc with specified skin"
+msgstr ""
+
 #. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
@@ -1007,13 +1007,13 @@ msgstr ""
 msgid "&Reverse"
 msgstr ""
 
-msgid "case sensi&tive"
+msgid "Case sensi&tive"
+msgstr ""
+
+msgid "Executable &first"
 msgstr ""
 
 msgid "Sort order"
-msgstr ""
-
-msgid "Executable first"
 msgstr ""
 
 msgid " Confirmation "
@@ -3609,6 +3609,9 @@ msgstr ""
 
 msgid "Changes to file lost"
 msgstr ""
+
+#~ msgid " Emacs key: "
+#~ msgstr "  Emacs விசை:"
 
 #~ msgid " %d items found, %d bookmarks added "
 #~ msgstr " %d கண்டுபிடிக்கப் பட்டன, %d புத்தககுறிகள் சேர்க்கப்பட்டன "

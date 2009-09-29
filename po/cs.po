@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-14 16:34+0300\n"
+"POT-Creation-Date: 2009-09-29 12:37+0300\n"
 "PO-Revision-Date: 2008-06-05 17:36+0100\n"
 "Last-Translator: Anna Talianova <anickat1@gmail.com>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
@@ -380,9 +380,6 @@ msgstr " Potvrdit náhradu "
 
 msgid "&Dismiss"
 msgstr "&Odmítnout"
-
-msgid " Emacs key: "
-msgstr " Emacsová klávesa: "
 
 #, c-format
 msgid ""
@@ -928,6 +925,9 @@ msgstr "Spustí se v barevném režimu"
 msgid "Specifies a color configuration"
 msgstr "Určí konfiguraci barev"
 
+msgid "Show mc with specified skin"
+msgstr ""
+
 #. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
@@ -1052,14 +1052,15 @@ msgstr "vlastní &Mini status"
 msgid "&Reverse"
 msgstr "&Pozpátku"
 
-msgid "case sensi&tive"
+#, fuzzy
+msgid "Case sensi&tive"
 msgstr "všímat si velikos&Ti písmen"
+
+msgid "Executable &first"
+msgstr ""
 
 msgid "Sort order"
 msgstr "Pořadí"
-
-msgid "Executable first"
-msgstr ""
 
 msgid " Confirmation "
 msgstr " Potvrzování "
@@ -3843,6 +3844,9 @@ msgstr "Interní chyba:"
 
 msgid "Changes to file lost"
 msgstr "Změny souboru byly ztraceny"
+
+#~ msgid " Emacs key: "
+#~ msgstr " Emacsová klávesa: "
 
 #~ msgid " %d items found, %d bookmarks added "
 #~ msgstr " nalezeno: %d, přidáno záložek: %d "

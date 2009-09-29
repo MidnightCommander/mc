@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-14 16:34+0300\n"
+"POT-Creation-Date: 2009-09-29 12:37+0300\n"
 "PO-Revision-Date: 2001-09-26 16:43GMT +0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
@@ -387,9 +387,6 @@ msgstr " Dəyişikliyi qəbul et"
 
 msgid "&Dismiss"
 msgstr "&Keç"
-
-msgid " Emacs key: "
-msgstr " Emacs düyməsi :"
 
 #, c-format
 msgid ""
@@ -930,6 +927,9 @@ msgstr "Rəngli modda başlat"
 msgid "Specifies a color configuration"
 msgstr "Rəng qurğularını bildir"
 
+msgid "Show mc with specified skin"
+msgstr ""
+
 #. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
@@ -1051,14 +1051,15 @@ msgstr "istifadəçi &Mini statusu"
 msgid "&Reverse"
 msgstr "Tə&rs"
 
-msgid "case sensi&tive"
+#, fuzzy
+msgid "Case sensi&tive"
 msgstr "böyük/kiçik hərf həssas"
+
+msgid "Executable &first"
+msgstr ""
 
 msgid "Sort order"
 msgstr "Süzmə əmri"
-
-msgid "Executable first"
-msgstr ""
 
 msgid " Confirmation "
 msgstr " İcazə "
@@ -3828,6 +3829,9 @@ msgstr "Daxili xəta :"
 
 msgid "Changes to file lost"
 msgstr "Dəyişiklikləri itirdim"
+
+#~ msgid " Emacs key: "
+#~ msgstr " Emacs düyməsi :"
 
 #~ msgid " %d items found, %d bookmarks added "
 #~ msgstr " %d tapılış oldu, %d qeyd əlavə edildi "

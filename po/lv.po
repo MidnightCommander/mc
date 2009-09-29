@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-14 16:34+0300\n"
+"POT-Creation-Date: 2009-09-29 12:37+0300\n"
 "PO-Revision-Date: 2001-11-20 15:15+0200\n"
 "Last-Translator: Artis Trops <hornet@navigators.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -387,9 +387,6 @@ msgstr " Apstirpināt aizvietošanu "
 
 msgid "&Dismiss"
 msgstr "&Atcelt"
-
-msgid " Emacs key: "
-msgstr "Emacs taustiņš: "
 
 #, c-format
 msgid ""
@@ -930,6 +927,9 @@ msgstr "Pieprasījums darboties krāsu režīmā"
 msgid "Specifies a color configuration"
 msgstr "Nosaka krāsas konfigurāciju"
 
+msgid "Show mc with specified skin"
+msgstr ""
+
 #. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
@@ -1051,14 +1051,15 @@ msgstr "lietotāja &Mini statuss"
 msgid "&Reverse"
 msgstr "&Pretēji"
 
-msgid "case sensi&tive"
+#, fuzzy
+msgid "Case sensi&tive"
 msgstr "lielo/ma&zo burtu jūtīgs"
+
+msgid "Executable &first"
+msgstr ""
 
 msgid "Sort order"
 msgstr "Kārtošanas secība"
-
-msgid "Executable first"
-msgstr ""
 
 msgid " Confirmation "
 msgstr " Apstiprināšana "
@@ -3836,6 +3837,9 @@ msgstr "Iekšējā kļūda:"
 
 msgid "Changes to file lost"
 msgstr "Izmaiņas failā pazudušas"
+
+#~ msgid " Emacs key: "
+#~ msgstr "Emacs taustiņš: "
 
 #~ msgid " %d items found, %d bookmarks added "
 #~ msgstr " %d meklējumi izdarīt, %d grāmatzīmes pievienotas"

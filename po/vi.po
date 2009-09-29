@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-14 16:34+0300\n"
+"POT-Creation-Date: 2009-09-29 12:37+0300\n"
 "PO-Revision-Date: 2006-08-16 16:20+0400\n"
 "Last-Translator: Phan Vĩnh Thịnh <teppi82@gmail.com>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
@@ -377,9 +377,6 @@ msgstr " Phê chuẩn thay thế "
 
 msgid "&Dismiss"
 msgstr "Đó&ng"
-
-msgid " Emacs key: "
-msgstr "Phím Emacs: "
 
 #, c-format
 msgid ""
@@ -917,6 +914,9 @@ msgstr "Yêu cầu chạy trong chế độ màu"
 msgid "Specifies a color configuration"
 msgstr "Xác định cấu hình màu sắc"
 
+msgid "Show mc with specified skin"
+msgstr ""
+
 #. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
@@ -1040,14 +1040,15 @@ msgstr "dòng t&Rạng thái nhỏ"
 msgid "&Reverse"
 msgstr "&Ngược lại"
 
-msgid "case sensi&tive"
+#, fuzzy
+msgid "Case sensi&tive"
 msgstr "tính đến kiể&U chữ"
+
+msgid "Executable &first"
+msgstr ""
 
 msgid "Sort order"
 msgstr "Thứ tự sắp xếp"
-
-msgid "Executable first"
-msgstr ""
 
 msgid " Confirmation "
 msgstr " Hỏi xác nhận "
@@ -3818,6 +3819,9 @@ msgstr "Lỗi nội bộ:"
 
 msgid "Changes to file lost"
 msgstr "Thay đổi tới tập tin bị mất"
+
+#~ msgid " Emacs key: "
+#~ msgstr "Phím Emacs: "
 
 #~ msgid " %d items found, %d bookmarks added "
 #~ msgstr " tìm thấy %d mục, đã thêm %d đánh dấu (bookmark) "

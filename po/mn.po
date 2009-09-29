@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mn\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-14 16:34+0300\n"
+"POT-Creation-Date: 2009-09-29 12:37+0300\n"
 "PO-Revision-Date: 2003-03-04 21:16+0100\n"
 "Last-Translator: Sanlig Badral <badral@chinggis.com>\n"
 "Language-Team: Mongolian <mn@li.org>\n"
@@ -389,9 +389,6 @@ msgstr " Солихыг баталгаажуулах "
 
 msgid "&Dismiss"
 msgstr "&Хаах"
-
-msgid " Emacs key: "
-msgstr " Emacs-ийн товчлуурууд: "
 
 #, c-format
 msgid ""
@@ -929,6 +926,9 @@ msgstr "өнгөт горимд ажиллахад хариулна"
 msgid "Specifies a color configuration"
 msgstr "өнгөний тусгай тохиргоо"
 
+msgid "Show mc with specified skin"
+msgstr ""
+
 #. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
@@ -1050,14 +1050,15 @@ msgstr "Хэрэглэгч &мини-статус"
 msgid "&Reverse"
 msgstr "&Эсрэг"
 
-msgid "case sensi&tive"
+#, fuzzy
+msgid "Case sensi&tive"
 msgstr "Учет ре&гистра"
+
+msgid "Executable &first"
+msgstr ""
 
 msgid "Sort order"
 msgstr "Эрэмбэлэх дараалал"
-
-msgid "Executable first"
-msgstr ""
 
 msgid " Confirmation "
 msgstr " Баталгаажуулалт "
@@ -3820,6 +3821,9 @@ msgstr "Дотоод алдаа:"
 
 msgid "Changes to file lost"
 msgstr "Файлын өөрчлөлт алга байна"
+
+#~ msgid " Emacs key: "
+#~ msgstr " Emacs-ийн товчлуурууд: "
 
 #~ msgid " %d items found, %d bookmarks added "
 #~ msgstr " %d н хайлт дуусч, %d н хавчуулага нэмэгдэв "

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-14 16:34+0300\n"
+"POT-Creation-Date: 2009-09-29 12:37+0300\n"
 "PO-Revision-Date: 2009-02-13\n"
 "Last-Translator: Marcel Pol <mpol@gmx.net>\n"
 "Language-Team: Dutch <debian-l10n-dutch@lists.debian.org>\n"
@@ -378,9 +378,6 @@ msgstr " Vervanging bevestigen "
 
 msgid "&Dismiss"
 msgstr "&Verwerp"
-
-msgid " Emacs key: "
-msgstr " Emacs-toets: "
 
 #, c-format
 msgid ""
@@ -918,6 +915,9 @@ msgstr "Vraag om de kleurenmodus te gebruiken"
 msgid "Specifies a color configuration"
 msgstr "Geef een kleurconfiguratie aan"
 
+msgid "Show mc with specified skin"
+msgstr ""
+
 #. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
@@ -1043,14 +1043,16 @@ msgstr "Gebruiker &Mini-status"
 msgid "&Reverse"
 msgstr "Omd&raaien"
 
-msgid "case sensi&tive"
+#, fuzzy
+msgid "Case sensi&tive"
 msgstr "Hoofd-/kleine le&tters"
+
+#, fuzzy
+msgid "Executable &first"
+msgstr "Uitvoerbare bestanden eerst"
 
 msgid "Sort order"
 msgstr "Sortering"
-
-msgid "Executable first"
-msgstr "Uitvoerbare bestanden eerst"
 
 msgid " Confirmation "
 msgstr " Bevestiging "
@@ -3819,6 +3821,9 @@ msgstr "Interne fout:"
 
 msgid "Changes to file lost"
 msgstr "Wijzigingen zijn verloren"
+
+#~ msgid " Emacs key: "
+#~ msgstr " Emacs-toets: "
 
 #~ msgid " %d items found, %d bookmarks added "
 #~ msgstr " %d gevonden, %d bladwijzers toegevoegd "

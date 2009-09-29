@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-14 16:34+0300\n"
+"POT-Creation-Date: 2009-09-29 12:37+0300\n"
 "PO-Revision-Date: 2001-05-25 13:35+0200\n"
 "Last-Translator: mari susperregi <mari@elhuyar.com>\n"
 "Language-Team: Euskara <debian-l10n-basque@lists.debian.org>\n"
@@ -388,9 +388,6 @@ msgstr " Berretsi ordeztea "
 
 msgid "&Dismiss"
 msgstr "&Itxi"
-
-msgid " Emacs key: "
-msgstr " Emacs tekla: "
 
 #, c-format
 msgid ""
@@ -931,6 +928,9 @@ msgstr "Kolore moduan exekutatzeko eskatzen du"
 msgid "Specifies a color configuration"
 msgstr "Kolore-konfigurazioa zehazten du"
 
+msgid "Show mc with specified skin"
+msgstr ""
+
 #. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
@@ -1052,14 +1052,15 @@ msgstr "erabiltzailearen &Mini egoera"
 msgid "&Reverse"
 msgstr "&Alderantzikatu"
 
-msgid "case sensi&tive"
+#, fuzzy
+msgid "Case sensi&tive"
 msgstr "maiuskulak eta minuskulak bereizten ditu"
+
+msgid "Executable &first"
+msgstr ""
 
 msgid "Sort order"
 msgstr "Ordenazioa"
-
-msgid "Executable first"
-msgstr ""
 
 msgid " Confirmation "
 msgstr "Berrespena "
@@ -3838,6 +3839,9 @@ msgstr "Barne-errorea:"
 
 msgid "Changes to file lost"
 msgstr "Fitxategiko aldaketak galdu egin dira"
+
+#~ msgid " Emacs key: "
+#~ msgstr " Emacs tekla: "
 
 #~ msgid " %d items found, %d bookmarks added "
 #~ msgstr "%d aurkikuntza egin dira, %d laster-marka gehituta "

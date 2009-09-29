@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc CVS-20011220\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-14 16:34+0300\n"
+"POT-Creation-Date: 2009-09-29 12:37+0300\n"
 "PO-Revision-Date: 2001-12-20 18:33+0900\n"
 "Last-Translator: Akira TAGOH <tagoh@gnome.gr.jp>\n"
 "Language-Team: Japanese <debian-japanese@lists.debian.org>\n"
@@ -388,9 +388,6 @@ msgstr " 確認置換 "
 
 msgid "&Dismiss"
 msgstr "消去(&D)"
-
-msgid " Emacs key: "
-msgstr " Emacsキー: "
 
 #, c-format
 msgid ""
@@ -931,6 +928,9 @@ msgstr "カラーモードでの実行を要求"
 msgid "Specifies a color configuration"
 msgstr "カラー設定を指定"
 
+msgid "Show mc with specified skin"
+msgstr ""
+
 #. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
@@ -1052,14 +1052,15 @@ msgstr "ユーザミニステータス(&M)"
 msgid "&Reverse"
 msgstr "反転(&R)"
 
-msgid "case sensi&tive"
+#, fuzzy
+msgid "Case sensi&tive"
 msgstr "大文字・小文字を区別(&t)"
+
+msgid "Executable &first"
+msgstr ""
 
 msgid "Sort order"
 msgstr "並び変える"
-
-msgid "Executable first"
-msgstr ""
 
 msgid " Confirmation "
 msgstr " 確認 "
@@ -3823,6 +3824,9 @@ msgstr "内部エラー:"
 
 msgid "Changes to file lost"
 msgstr "紛失したファイルに変更します"
+
+#~ msgid " Emacs key: "
+#~ msgstr " Emacsキー: "
 
 #~ msgid " %d items found, %d bookmarks added "
 #~ msgstr " %d 個発見し， %d 個のブックマークを追加しました "

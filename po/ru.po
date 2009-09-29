@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-14 16:34+0300\n"
+"POT-Creation-Date: 2009-09-29 12:37+0300\n"
 "PO-Revision-Date: 2009-08-26 23:37+0300\n"
 "Last-Translator: Ilia Maslakov <il.smind@gmail.com>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
@@ -384,9 +384,6 @@ msgstr " Подтвердить замену "
 
 msgid "&Dismiss"
 msgstr "&Закрыть"
-
-msgid " Emacs key: "
-msgstr " Клавиша Emacs: "
 
 #, c-format
 msgid ""
@@ -897,6 +894,9 @@ msgstr "Принудительно установить цветной режи�
 msgid "Specifies a color configuration"
 msgstr "Определить настройки цветов"
 
+msgid "Show mc with specified skin"
+msgstr ""
+
 #. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
@@ -1023,14 +1023,16 @@ msgstr "Строка &мини-статуса в формате пользова
 msgid "&Reverse"
 msgstr "&Обратный"
 
-msgid "case sensi&tive"
+#, fuzzy
+msgid "Case sensi&tive"
 msgstr "Учет ре&гистра"
+
+#, fuzzy
+msgid "Executable &first"
+msgstr "Исполняемые вначале"
 
 msgid "Sort order"
 msgstr "Порядок сортировки"
-
-msgid "Executable first"
-msgstr "Исполняемые вначале"
 
 msgid " Confirmation "
 msgstr " Запрос подтверждения "
@@ -3799,6 +3801,9 @@ msgstr "Внутренняя ошибка:"
 
 msgid "Changes to file lost"
 msgstr "Изменения для файла потеряны"
+
+#~ msgid " Emacs key: "
+#~ msgstr " Клавиша Emacs: "
 
 #~ msgid " %d items found, %d bookmarks added "
 #~ msgstr " %d найдено, %d закладок добавлено "

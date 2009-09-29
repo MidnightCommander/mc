@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-14 16:34+0300\n"
+"POT-Creation-Date: 2009-09-29 12:37+0300\n"
 "PO-Revision-Date: 2001-11-06 05:50+0200\n"
 "Last-Translator: Nilgün Belma Bugüner <nilgun@fide.org>\n"
 "Language-Team: Turkish <debian-l10n-turkish@lists.debian.org>\n"
@@ -389,9 +389,6 @@ msgstr " Yer değişikliğini onaylat "
 
 msgid "&Dismiss"
 msgstr "&Bırak"
-
-msgid " Emacs key: "
-msgstr " Emacs tuşu: "
 
 #, c-format
 msgid ""
@@ -932,6 +929,9 @@ msgstr "Renkli kipte çalıştırma isteği"
 msgid "Specifies a color configuration"
 msgstr "Bir renk yapılandırması belirtir"
 
+msgid "Show mc with specified skin"
+msgstr ""
+
 #. TRANSLATORS: don't translate keywords and names of colors
 #, fuzzy
 msgid ""
@@ -1053,14 +1053,15 @@ msgstr "&Mini durum satırı"
 msgid "&Reverse"
 msgstr "Te&rs"
 
-msgid "case sensi&tive"
+#, fuzzy
+msgid "Case sensi&tive"
 msgstr "&Harf büyüklüğüne duyarlı"
+
+msgid "Executable &first"
+msgstr ""
 
 msgid "Sort order"
 msgstr "Sıralama türü"
-
-msgid "Executable first"
-msgstr ""
 
 msgid " Confirmation "
 msgstr " Onaylama "
@@ -3831,6 +3832,9 @@ msgstr "İç hata:"
 
 msgid "Changes to file lost"
 msgstr "Değişiklikler kayıp"
+
+#~ msgid " Emacs key: "
+#~ msgstr " Emacs tuşu: "
 
 #~ msgid " %d items found, %d bookmarks added "
 #~ msgstr " %d bulma gerçekleşti, %d yer imi eklendi "

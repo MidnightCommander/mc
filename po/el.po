@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.38\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-14 16:34+0300\n"
+"POT-Creation-Date: 2009-09-29 12:37+0300\n"
 "PO-Revision-Date: 1997-07-23 00:04-0400\n"
 "Last-Translator: Spiros Papadimitriou <spapadim+@cs.cmu.edu>\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
@@ -378,9 +378,6 @@ msgstr " Επιβεβαίωση αντικατάστασης "
 
 msgid "&Dismiss"
 msgstr ""
-
-msgid " Emacs key: "
-msgstr " Πλήκτρο Emacs: "
 
 #, c-format
 msgid ""
@@ -903,6 +900,9 @@ msgstr ""
 msgid "Specifies a color configuration"
 msgstr ""
 
+msgid "Show mc with specified skin"
+msgstr ""
+
 #. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
@@ -999,13 +999,14 @@ msgstr ""
 msgid "&Reverse"
 msgstr ""
 
-msgid "case sensi&tive"
+#, fuzzy
+msgid "Case sensi&tive"
+msgstr "κεφαλαία/πε&ζά"
+
+msgid "Executable &first"
 msgstr ""
 
 msgid "Sort order"
-msgstr ""
-
-msgid "Executable first"
 msgstr ""
 
 msgid " Confirmation "
@@ -3629,6 +3630,9 @@ msgstr ""
 
 msgid "Changes to file lost"
 msgstr ""
+
+#~ msgid " Emacs key: "
+#~ msgstr " Πλήκτρο Emacs: "
 
 #, fuzzy
 #~ msgid "Usage:"
