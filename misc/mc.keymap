@@ -1,0 +1,260 @@
+[editor]
+
+EditXStore = ctrl-g
+EditXPaste = ctrl-v
+EditXCut = ctrl-x
+
+EditDeleteLine = ctrl-y
+EditDeleteToLineEnd = ctrl-k
+EditDeleteToLineBegin =
+
+EditLeft = left
+EditRight = right
+EditUp = up
+EditDown = down
+EditEnter = enter
+EditBackSpace = backspace
+EditDelete = delete
+EditPageUp = pgup
+EditPageDown = pgdn
+EditWordLeft = ctrl-left
+EditWordRight = ctrl-right
+EditHome = home
+EditEnd = end
+EditTab = tab
+EditUndo = alt-backspace
+EditBeginningOfText = ctrl-shift-pgup
+EditEndOfText = ctrl-shift-pgdn
+EditScrollUp = ctrl-up
+EditScrollDown = ctrl-down
+EditReturn = shift-enter
+EditBeginPage =
+EditEndPage =
+EditDeleteWordLeft = alt-f
+EditDeleteWordRight = alt-d
+EditParagraphUp =
+EditParagraphDown =
+EditSave = f2
+EditLoad =
+EditNew =
+EditSaveas = f12
+EditMark = f3
+EditCopy = f5
+EditMove = f6
+EditRemove = f8
+EditUnmark =
+EditFind = f7
+
+EditPageUpHighlight = shift-pgup
+EditPageDownHighlight = shift-pgdn
+EditLeftHighlight = shift-left
+EditRightHighlight = shift-right
+EditWordLeftHighlight = ctrl-shift-left
+EditWordRightHighlight = ctrl-shift-right
+EditUpHighlight = shift-up
+EditDownHighlight = shift-down
+EditHomeHighlight = shift-home
+EditEndHighlight = shift-end
+EditBeginningOfTextHighlight = ctrl-shift-home
+EditEndOfTextHighlight  = ctrl-shift-end
+EditBeginPageHighlight  = ctrl-shift-pgup
+EditEndPageHighlight = ctrl-shift-pgdn
+EditScrollUpHighlight =
+EditScrollDownHighlight =
+EditParagraphUpHighlight =
+EditParagraphDownHighlight =
+
+EditPageUpAltHighlight = alt-pgup
+EditPageDownAltHighlight = alt-pgdn
+EditLeftAltHighlight = alt-left
+EditRightAltHighlight = alt-right
+EditWordLeftAltHighlight = ctrl-alt-left
+EditWordRightAltHighlight = ctrl-alt-right
+EditUpAltHighlight = alt-up
+EditDownAltHighlight = alt-down
+EditHomeAltHighlight = alt-home
+EditEndAltHighlight = alt-end
+EditBeginningOfTextAltHighlight = ctrl-alt-home
+EditEndOfTextHighlight  = ctrl-alt-end
+EditBeginPageHighlight  = ctrl-alt-pgup
+EditEndPageAltHighlight = ctrl-alt-pgdn
+EditScrollUpAltHighlight =
+EditScrollDownAltHighlight =
+EditParagraphUpAltHighlight =
+EditParagraphDownAltHighlight =
+
+EditSaveBlock = ctrl-f
+EditColumnMark = f13
+EditFindAgain = f17
+EditReplace = f4
+EditReplaceAgain = f14
+EditCompleteWord = alt-tab
+EditDebugStart =
+EditDebugStop =
+EditDebugToggleBreak =
+EditDebugClear =
+EditDebugNext =
+EditDebugStep =
+EditDebugBackTrace =
+EditDebugContinue =
+EditDebugEnterCommand =
+EditDebugUntilCurser =
+EditInsertFile = f15
+EditExit = f10
+EditToggleInsert = ins
+EditHelp = f1
+EditDate =
+EditRefresh = ctrl-l
+EditGoto = alt-l
+EditManPage =
+EditSort = alt-t
+EditMail =
+EditCancel =
+EditComplete =
+
+EditParagraphFormat = alt-p
+EditUtil =
+EditTypeLoadPython =
+EditFindFile =
+EditCtags =
+EditMatchBracket = alt-b
+EditTerminal =
+EditTerminalApp =
+EditExtCmd = alt-u
+EditUserMenu = f11
+EditSaveDesktop =
+EditNewWindow =
+EditCycle =
+EditMenu = f9
+EditSaveAndQuit =
+EditRunAnother =
+EditCheckSaveAndQuit =
+EditMaximize =
+EditDeleteMacro =
+EditToggleBookmark = alt-k
+EditFlushBookmarks = alt-o
+EditNextBookmark = alt-j
+EditPrevBookmark = alt-i
+
+EditSelectionHistory =
+EditShell = ctrl-o
+EditInsertLiteral = ctrl-q
+EditExecuteMacro = ctrl-a
+EditBeginorEndMacro = ctrl-r
+EditBeginRecordMacro =
+EditEndRecordMacro =
+EditToggleLineState = alt-n
+
+
+[viewer:hex]
+HexViewToggleNavigationMode = tab
+ViewMoveToBol = ctrl-a; home
+ViewMoveToEol = ctrl-e; end
+ViewMoveLeft = b; left
+ViewMoveRight = f; right
+ViewMoveUp = k; y; up
+ViewMoveDown = j; delete; down
+
+[viewer]
+ViewSearch = question; slash; f7
+ViewContinueSearch = ctrl-r; ctrl-s; f17
+ViewMoveToBol = home
+ViewMoveToEol = end
+ViewMoveLeft = h; left
+ViewMoveRight = l; right
+ViewMoveUp = k; y; insert; up
+ViewMoveDown = j; e; delete; down
+ViewMovePgDn = f; space; pgdn
+ViewMovePgUp = b; pgup
+ViewMoveHalfPgDn = d
+ViewMoveHalfPgUp = u
+ViewGotoBookmark = m
+ViewNewBookmark = r
+ViewNextFile = ctrl-f
+ViewPrevFile = ctrl-b
+ViewQuit = q; esc
+SelectCodepage = ctrl-t
+ShowCommandLine = ctrl-o
+ViewToggleRuler = alt-r
+
+[main]
+CmdMenuLastSelected = f19
+CmdQuietQuit = f20
+CmdSingleDirsize = ctrl-space
+CmdCopyCurrentPathname = alt-a
+CmdCopyOtherPathname = alt-A
+CmdQuickCd = alt-c
+CmdQuickChdir = ctrl-backslash
+CmdSuspend = ctrl-z
+CmdFilteredView = alt-exclamation
+CmdFind = alt-question
+CmdReread = ctrl-r
+CmdToggleListing = alt-t
+CmdSwapPanel = ctrl-u
+ShowCommandLine = ctrl-o
+CmdToggleShowHidden = alt-dot
+
+ExtMap1 = ctrl-x
+[main:xmap]
+
+
+[panel]
+PanelStartSearch = ctrl-s; alt-s
+PanelMarkFile = ins
+PanelMoveDown = down; ctrl-n
+PanelMoveUp = up; ctrl-p
+PanelMoveLeft = left
+PanelMoveRight = right
+PanelPrevPage = pgup; alt-v
+PanelNextPage = pgdn; ctrl-v
+PanelDoEnter = enter
+PanelChdirOtherPanel = alt-o
+PanelChdirToReadlink = alt-l
+PanelViewSimple = shift-F3
+PanelEditNew = F14
+PanelCopyLocal = F15
+PanelRenameLocal = F16
+PanelDeleteLocal = F18
+PanelReverseSelection = alt-asterisk
+PanelSelect = alt-plus
+PanelUnselect = alt-minus
+PanelCtrlNextPage = ctrl-pgdn
+PanelCtrlPrevPage = ctrl-pgup
+PanelDirectoryHistoryList = alt-shift-h
+PanelDirectoryHistoryNext = alt-u
+PanelDirectoryHistoryPrev = alt-y
+PanelGotoBottomFile = alt-j
+PanelGotoMiddleFile = alt-r
+PanelSyncOtherPanel = alt-i
+PanelGotoTopFile = alt-g
+PanelSetPanelEncoding = ctrl-t
+PanelMoveHome = alt-lt; home
+PanelMoveEnd = alt-gt; end
+
+[panel:xmap]
+
+[input]
+InputBol = ctrl-a; alt-lt; home
+InputEol = ctrl-e; alt-gt; end
+InputMoveLeft = left; alt-left
+InputWordLeft = ctrl-left
+InputBackwardChar = ctrl-b
+InputBackwardWord = alt-b
+InputMoveRight = right; alt-right
+InputWordRight = ctrl-right
+InputForwardChar = ctrl-f
+InputForwardWord = alt-f
+
+InputBackwardDelete = backspace
+InputDeleteChar = delete
+InputKillWord = alt-d
+InputBackwardKillWord = alt-backspace
+InputSetMark = 
+InputKillRegion = ctrl-w
+InputKillSave = alt-w
+InputYank = ctrl-y
+InputKillLine = ctrl-k
+InputHistoryPrev = alt-p; ctrl-down
+InputHistoryNext = alt-n; ctrl-up
+InputHistoryShow = alt-h
+InputComplete = alt-tab

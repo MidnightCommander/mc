@@ -54,6 +54,9 @@
 #include "../src/main.h"	/* drop_menus */
 #include "../src/learn.h"	/* learn_keys */
 
+#include "edit-widget.h"
+#include "../src/cmddef.h"
+
 static void
 menu_cmd (int command)
 {
@@ -224,7 +227,7 @@ menu_replace_cmd (void)
 static void
 menu_select_codepage_cmd (void)
 {
-    menu_cmd (CK_Select_Codepage);
+    menu_cmd (CK_SelectCodepage);
 }
 
 static void

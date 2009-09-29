@@ -9,6 +9,7 @@
 
 #include "../src/widget.h"
 #include "../src/search/search.h"
+#include "../src/keybind.h"		/* global_key_map_t */
 
 /*** typedefs(not structures) and defined constants ********************/
 
@@ -166,6 +167,10 @@ typedef struct mcview_struct {
     /* converter for translation of text */
     GIConv converter;
 
+    /* keymaps */
+    const global_key_map_t *plain_map;
+    const global_key_map_t *hex_map;
+
     /* handle of search engine */
     mc_search_t *search;
     gchar *last_search_string;
@@ -192,7 +197,7 @@ typedef struct mcview_nroff_struct {
 
 /*** declarations of public functions **********************************/
 
-/* actions_cmd.c: callbacks  */
+/* actions_cmd.c:  */
 cb_ret_t mcview_callback (Widget *, widget_msg_t, int);
 cb_ret_t mcview_dialog_callback (Dlg_head *, dlg_msg_t, int);
 void mcview_help_cmd (void);

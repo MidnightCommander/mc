@@ -51,9 +51,10 @@
 #include "../src/tty/key.h"		/* ALT() macro */
 #include "../src/tty/win.h"		/* do_enter_ca_mode() */
 
-#include "../src/search/search.h"
-
 #include "../src/mcconfig/mcconfig.h"
+#include "../src/search/search.h"
+#include "../src/viewer/mcviewer.h"
+#include "../src/filehighlight/fhl.h"	/* MC_FHL_INI_FILE */
 
 #include "cmd.h"		/* Our definitions */
 #include "fileopctx.h"
@@ -79,8 +80,7 @@
 #include "history.h"
 #include "strutil.h"
 #include "dir.h"
-#include "../src/viewer/mcviewer.h"
-#include "../src/filehighlight/fhl.h"	/* MC_FHL_INI_FILE */
+#include "cmddef.h"		/* CK_InputHistoryShow */
 
 #ifndef MAP_FILE
 #   define MAP_FILE 0
@@ -888,7 +888,7 @@ void
 history_cmd (void)
 {
     /* show the history of command line widget */
-    send_message (&cmdline->widget, WIDGET_KEY, ALT ('h'));
+    send_message (&cmdline->widget, WIDGET_COMMAND, CK_InputHistoryShow);
 }
 
 void swap_cmd (void)

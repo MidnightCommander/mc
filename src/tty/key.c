@@ -130,7 +130,8 @@ key_code_name_t key_name_conv_tab[] = {
     {ALT ('\t'), "complete", N_("Completion/M-tab")},
     {KEY_KP_ADD, "kpplus", N_("+ on keypad")},
     {KEY_KP_SUBTRACT, "kpminus", N_("- on keypad")},
-    {KEY_KP_MULTIPLY, "kpasterix", N_("* on keypad")},
+    {(int) '/', "kpslash", N_("Slash on keypad")},
+    {KEY_KP_MULTIPLY, "kpasterisk", N_("* on keypad")},
 
 /* From here on, these won't be shown in Learn keys (no space) */
     {KEY_LEFT, "kpleft", N_("Left arrow keypad")},
@@ -144,18 +145,38 @@ key_code_name_t key_name_conv_tab[] = {
     {KEY_IC, "kpinsert", N_("Insert on keypad")},
     {KEY_DC, "kpdelete", N_("Delete on keypad")},
     {(int) '\n', "kpenter", N_("Enter on keypad")},
-    {(int) '\n', "enter", N_("Enter on keypad")},
-    {(int) '\t', "tab", N_("Tab on keypad")},
-    {(int) ' ', "space", N_("Space on keypad")},
-    {(int) '/', "kpslash", N_("Slash on keypad")},
-    {(int) '#', "kpnumlock", N_("NumLock on keypad")},
 
 /* Alternative label */
     {KEY_BACKSPACE, "backspace", N_("Backspace key")},
     {KEY_IC, "insert", N_("Insert key")},
-    {KEY_KP_ADD, "plus", N_("+ on keypad")},
-    {KEY_KP_SUBTRACT, "minus", N_("- on keypad")},
-    {KEY_KP_MULTIPLY, "asterix", N_("* on keypad")},
+    {(int) '+', "plus", N_("Plus")},
+    {(int) '-', "minus", N_("Minus")},
+    {(int) '*', "asterisk", N_("Asterisk")},
+    {(int) '.', "dot", N_("Dot")},
+    {(int) '<', "lt", N_("Less than")},
+    {(int) '>', "gt", N_("Great than")},
+    {(int) '=', "equal", N_("Equal")},
+    {(int) ',', "comma", N_("Comma")},
+    {(int) '\'', "apostrophe", N_("Apostrophe")},
+    {(int) ':', "colon", N_("Colon")},
+    {(int) '!', "exclamation", N_("Exclamation mark")},
+    {(int) '?', "question", N_("Question mark")},
+    {(int) '&', "ampersand", N_("Ampersand")},
+    {(int) '$', "dollar", N_("Dollar sign")},
+    {(int) '"', "quota", N_("Quotation mark")},
+    {(int) '^', "caret", N_("Caret")},
+    {(int) '~', "tilda", N_("Tilda")},
+    {(int) '`', "prime", N_("Prime")},
+    {(int) '_', "underline", N_("Underline")},
+    {(int) '_', "understrike", N_("Understrike")},
+    {(int) '|', "pipe", N_("Pipe")},
+    {(int) '\n', "enter", N_("Enter")},
+    {(int) '\t', "tab", N_("Tab key")},
+    {(int) ' ', "space", N_("Space key")},
+    {(int) '/', "slash", N_("Slash key")},
+    {(int) '\\', "backslash", N_("Backslash key")},
+    {(int) '#', "number", N_("Number sign #")},
+    {(int) '#', "hash", N_("Number sign #")},
 
 /* meta keys */
     {KEY_M_CTRL, "control", N_("Ctrl")},
@@ -1232,24 +1253,35 @@ lookup_key (char *keyname)
     if (keyname == NULL)
         return 0;
 
-    keys = g_strsplit (keyname, " ", -1);
+    keys = g_strsplit_set (keyname, "-+ ", -1);
     keys_count = g_strv_length (keys);
     for (i = keys_count - 1; i >= 0; i--) {
         if (keys[i] != NULL && keys[i][0] != 0) {
+            g_strstrip(keys[i]);
             key = lookup_keyname (keys[i]);
+
+            if (key & KEY_M_SHIFT) {
+                if (k < 127) {
+                    k = (gchar) g_ascii_toupper ((gchar) k);
+                    continue;
+                }
+            }
             if (key & KEY_M_CTRL) {
                 if (k < 256)
                     k = XCTRL (k);
                 else
                     k |= key;
             } else {
-                if (k == -1)
+                if (k == -1) {
+                    if (key < 127)
+                        key = (gchar) g_ascii_tolower ((gchar) key);
                     k = key;
-                else
+                } else
                     k |= key;
             }
         }
     }
+    g_strfreev (keys);
     if (k == -1)
         return 0;
 

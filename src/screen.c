@@ -60,6 +60,8 @@
 #include "selcodepage.h"	/* select_charset () */
 #include "charsets.h"		/* get_codepage_id () */
 #include "strutil.h"
+#include "cmddef.h"		/* CK_ cmd name const */
+#include "keybind.h"		/* global_key_map_t */
 
 #define ELEMENTS(arr) ( sizeof(arr) / sizeof((arr)[0]) )
 
@@ -104,6 +106,8 @@ int filetype_mode = 1;
 
 /* The hook list for the select file function */
 Hook *select_file_hook = 0;
+
+const global_key_map_t *panel_map;
 
 static cb_ret_t panel_callback (Widget *, widget_msg_t msg, int parm);
 static int panel_event (Gpm_Event *event, void *);
@@ -1776,9 +1780,8 @@ move_selection (WPanel *panel, int lines)
 }
 
 static cb_ret_t
-move_left (WPanel *panel, int c_code)
+move_left (WPanel *panel)
 {
-    (void) c_code;
     if (panel->split) {
 	move_selection (panel, -llines (panel));
 	return MSG_HANDLED;
@@ -1787,9 +1790,8 @@ move_left (WPanel *panel, int c_code)
 }
 
 static int
-move_right (WPanel *panel, int c_code)
+move_right (WPanel *panel)
 {
-    (void) c_code;
     if (panel->split) {
 	move_selection (panel, llines (panel));
 	return MSG_HANDLED;
@@ -2273,10 +2275,6 @@ chdir_to_readlink (WPanel *panel)
 }
 
 typedef void (*panel_key_callback) (WPanel *);
-typedef struct {
-    int key_code;
-    panel_key_callback fn;
-} panel_key_map;
 
 static void cmd_do_enter(WPanel *wp) { (void) do_enter(wp); }
 static void cmd_view_simple(WPanel *wp) { (void) wp; view_simple_cmd(); }
@@ -2288,92 +2286,138 @@ static void cmd_select(WPanel *wp) { (void) wp;select_cmd(); }
 static void cmd_unselect(WPanel *wp) { (void) wp;unselect_cmd(); }
 static void cmd_reverse_selection(WPanel *wp) { (void) wp;reverse_selection_cmd(); }
 
-static const panel_key_map panel_keymap [] = {
-    { KEY_DOWN,   move_down },
-    { KEY_UP, 	move_up },
+static cb_ret_t
+panel_execute_cmd (WPanel *panel, int command)
+{
+    int res = MSG_HANDLED;
 
-    /* The action button :-) */
-    { '\n',       cmd_do_enter },
-    { KEY_ENTER,  cmd_do_enter },
-
-    { KEY_IC,     mark_file },
-    { KEY_HOME,	  move_home },
-    { KEY_A1,     move_home },
-    { ALT ('<'),  move_home },
-    { KEY_C1,     move_end },
-    { KEY_END,    move_end },
-    { ALT ('>'),  move_end },
-    { KEY_NPAGE,  next_page },
-    { KEY_PPAGE,  prev_page },
-    { KEY_NPAGE | KEY_M_CTRL, ctrl_next_page },
-    { KEY_PPAGE | KEY_M_CTRL, ctrl_prev_page },
-
-    /* To quickly move in the panel */
-    { ALT('g'),   goto_top_file },
-    { ALT('r'),   goto_middle_file }, /* M-r like emacs */
-    { ALT('j'),   goto_bottom_file },
-
-    /* Emacs-like bindings */
-    { XCTRL('v'), next_page },		/* C-v like emacs */
-    { ALT('v'),   prev_page },		/* M-v like emacs */
-    { XCTRL('p'), move_up },		/* C-p like emacs */
-    { XCTRL('n'), move_down },		/* C-n like emacs */
-    { XCTRL('s'), start_search },	/* C-s like emacs */
-    { ALT('s'),   start_search },	/* M-s not like emacs */
-/*    { XCTRL('t'), mark_file },*/
-    { XCTRL('t'), set_panel_encoding },
-    { ALT('o'),   chdir_other_panel },
-    { ALT('i'),   sync_other_panel },
-    { ALT('l'),   chdir_to_readlink },
-    { ALT('H'),   directory_history_list },
-    { KEY_F(13),  cmd_view_simple },
-    { KEY_F(14),  cmd_edit_new },
-    { KEY_F(15),  cmd_copy_local },
-    { KEY_F(16),  cmd_rename_local },
-    { KEY_F(18),  cmd_delete_local },
-    { ALT('y'),   directory_history_prev },
-    { ALT('u'),   directory_history_next },
-    { ALT('+'),	  cmd_select },
-    { KEY_KP_ADD, cmd_select },
-    { ALT('\\'),  cmd_unselect },
-    { ALT('-'),	  cmd_unselect },
-    { KEY_KP_SUBTRACT, cmd_unselect },
-    { ALT('*'),	  cmd_reverse_selection },
-    { KEY_KP_MULTIPLY, cmd_reverse_selection },
-    { 0, 0 }
-};
+    switch (command) {
+    case CK_PanelChdirOtherPanel:
+        chdir_other_panel (panel);
+        break;
+    case CK_PanelChdirToReadlink:
+        chdir_to_readlink (panel);
+        break;
+    case CK_PanelCmdCopyLocal:
+        cmd_copy_local (panel);
+        break;
+    case CK_PanelCmdDeleteLocal:
+        cmd_delete_local (panel);
+        break;
+    case CK_PanelCmdDoEnter:
+        cmd_do_enter (panel);
+        break;
+    case CK_PanelCmdViewSimple:
+        cmd_view_simple (panel);
+        break;
+    case CK_PanelCmdEditNew:
+        cmd_edit_new (panel);
+        break;
+    case CK_PanelCmdRenameLocal:
+        cmd_rename_local (panel);
+        break;
+    case CK_PanelCmdReverseSelection:
+        cmd_reverse_selection (panel);
+        break;
+    case CK_PanelCmdSelect:
+        cmd_select (panel);
+        break;
+    case CK_PanelCmdUnselect:
+        cmd_unselect (panel);
+        break;
+    case CK_PanelNextPage:
+        next_page (panel);
+        break;
+    case CK_PanelPrevPage:
+        prev_page (panel);
+        break;
+    case CK_PanelCtrlNextPage:
+        ctrl_next_page (panel);
+        break;
+    case CK_PanelCtrlPrevPage:
+        ctrl_prev_page (panel);
+        break;
+    case CK_PanelDirectoryHistoryList:
+        directory_history_list (panel);
+        break;
+    case CK_PanelDirectoryHistoryNext:
+        directory_history_next (panel);
+        break;
+    case CK_PanelDirectoryHistoryPrev:
+        directory_history_prev (panel);
+        break;
+    case CK_PanelGotoBottomFile:
+        goto_bottom_file (panel);
+        break;
+    case CK_PanelGotoMiddleFile:
+        goto_middle_file (panel);
+        break;
+    case CK_PanelGotoTopFile:
+        goto_top_file (panel);
+        break;
+    case CK_PanelMarkFile:
+        mark_file (panel);
+        break;
+    case CK_PanelMoveUp:
+        move_up (panel);
+        break;
+    case CK_PanelMoveDown:
+        move_down (panel);
+        break;
+    case CK_PanelMoveLeft:
+        res = move_left (panel);
+        break;
+    case CK_PanelMoveRight:
+        res = move_right (panel);
+        break;
+    case CK_PanelMoveEnd:
+        move_end (panel);
+        break;
+    case CK_PanelMoveHome:
+        move_home (panel);
+        break;
+    case CK_PanelSetPanelEncoding:
+        set_panel_encoding (panel);
+        break;
+    case CK_PanelStartSearch:
+        start_search (panel);
+        break;
+    case CK_PanelSyncOtherPanel:
+        sync_other_panel (panel);
+        break;
+    }
+   return res;
+}
 
 static cb_ret_t
 panel_key (WPanel *panel, int key)
 {
     int i;
+    int res, command;
 
-    for (i = 0; panel_keymap[i].key_code; i++) {
-	if (key == panel_keymap[i].key_code) {
+    for (i = 0; panel_map[i].key; i++) {
+	if (key == panel_map[i].key) {
 	    int old_searching = panel->searching;
 
-	    if (panel_keymap[i].fn != start_search)
+	    if (panel_map[i].command != CK_PanelStartSearch)
 		panel->searching = 0;
 
-	    (*panel_keymap[i].fn) (panel);
+	    command = panel_map[i].command;
+	    res = panel_execute_cmd (panel, command);
+
+	    if (res == MSG_NOT_HANDLED)
+		return res;
 
 	    if (panel->searching != old_searching)
 		display_mini_info (panel);
 	    return MSG_HANDLED;
 	}
     }
+
     if (torben_fj_mode && key == ALT ('h')) {
 	goto_middle_file (panel);
 	return MSG_HANDLED;
     }
-
-    /* We do not want to take a key press if nothing can be done with it */
-    /* The command line widget may do something more useful */
-    if (key == KEY_LEFT)
-	return move_left (panel, key);
-
-    if (key == KEY_RIGHT)
-	return move_right (panel, key);
 
     if (is_abort_char (key)) {
 	panel->searching = 0;

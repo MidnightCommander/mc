@@ -6,6 +6,8 @@
 #ifndef MC_MAIN_H
 #define MC_MAIN_H
 
+#include "keybind.h"
+
 /* Toggling functions */
 void toggle_fast_reload (void);
 void toggle_mix_all_files (void);
@@ -72,13 +74,16 @@ extern int is_right;		/* If the selected menu was the right */
 #define MENU_PANEL_IDX  (is_right ? 1 : 0)
 #define SELECTED_IS_PANEL (get_display_type (is_right ? 1 : 0) == view_listing)
 
-typedef void (*key_callback) (void);
+extern GArray *editor_keymap;
+extern GArray *viewer_keymap;
+extern GArray *viewer_hex_keymap;
+extern GArray *main_keymap;
+extern GArray *main_x_keymap;
+extern GArray *panel_keymap;
+extern GArray *input_keymap;
 
-/* The keymaps are of this type */
-typedef struct {
-    int   key_code;
-    key_callback fn;
-} key_map;
+extern const global_key_map_t *panel_map;
+extern const global_key_map_t *input_map;
 
 void do_update_prompt (void);
 

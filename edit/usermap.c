@@ -43,7 +43,7 @@
 
 #include "edit-impl.h"
 #include "edit-widget.h"
-#include "editcmddef.h"		/* list of commands */
+#include "../src/cmddef.h"		/* list of commands */
 #include "usermap.h"
 
 #include "../src/wtools.h"
@@ -333,10 +333,10 @@ split_line(char *str)
 static void
 keymap_add(GArray *keymap, int key, int cmd)
 {
-    edit_key_map_type new_one, *map;
+    global_key_map_t new_one, *map;
     guint i;
 
-    map = &(g_array_index(keymap, edit_key_map_type, 0));
+    map = &(g_array_index(keymap, global_key_map_t, 0));
     for (i = 0; i < keymap->len; i++) {
 	if (map[i].key == key) {
 	    map[i].command = cmd;
@@ -583,8 +583,8 @@ load_user_keymap(config_t *cfg, const char *file)
 	{0, 0}
     };
 
-    cfg->keymap = g_array_new(TRUE, FALSE, sizeof(edit_key_map_type));
-    cfg->ext_keymap = g_array_new(TRUE, FALSE, sizeof(edit_key_map_type));
+    cfg->keymap = g_array_new(TRUE, FALSE, sizeof(global_key_map_t));
+    cfg->ext_keymap = g_array_new(TRUE, FALSE, sizeof(global_key_map_t));
 
     if (!parse_file(cfg, file, cmd)) {
 	return FALSE;
@@ -629,8 +629,8 @@ edit_load_user_map(WEdit *edit)
 	}
     }
 
-    edit->user_map = (edit_key_map_type *) cfg.keymap->data;
-    edit->ext_map = (edit_key_map_type *) cfg.ext_keymap->data;
+    edit->user_map = (global_key_map_t *) cfg.keymap->data;
+    edit->ext_map = (global_key_map_t *) cfg.ext_keymap->data;
     memcpy(edit->labels, cfg.labels, sizeof(edit->labels));
 
     g_free(file);

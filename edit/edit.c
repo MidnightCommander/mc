@@ -44,8 +44,7 @@
 #include "edit-impl.h"
 #include "editlock.h"
 #include "edit-widget.h"
-#include "editcmddef.h"
-#include "usermap.h"
+#include "../src/cmddef.h"
 
 #include "../src/tty/color.h"	/* EDITOR_NORMAL_COLOR */
 #include "../src/tty/tty.h"		/* attrset() */
@@ -720,6 +719,15 @@ edit_purge_widget (WEdit *edit)
     edit->macro_i = -1;		/* not recording a macro */
 }
 
+static void
+edit_set_keymap (WEdit *edit)
+{
+    edit->user_map = default_editor_keymap;
+    if (editor_keymap && editor_keymap->len > 0)
+        edit->user_map = (global_key_map_t *) editor_keymap->data;
+}
+
+
 #define space_width 1
 
 /*
@@ -829,7 +837,7 @@ edit_init (WEdit *edit, int lines, int columns, const char *filename,
 	edit_move_to_line (edit, line - 1);
     }
 
-    edit_load_user_map(edit);
+    edit_set_keymap (edit);
 
     return edit;
 }
@@ -3113,7 +3121,7 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
     case CK_Shell:
 	view_other_cmd ();
 	break;
-    case CK_Select_Codepage:
+    case CK_SelectCodepage:
 	edit_select_codepage_cmd (edit);
 	break;
     case CK_Insert_Literal:

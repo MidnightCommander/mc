@@ -50,16 +50,23 @@
 #include <stdlib.h>
 
 #include "../src/global.h"
+
+#include "../src/tty/tty.h"
+#include "../src/tty/key.h"
+
+#include "../src/dialog.h"	/* cb_ret_t */
 #include "../src/panel.h"
 #include "../src/layout.h"
 #include "../src/wtools.h"
 #include "../src/history.h"
 #include "../src/charsets.h"
-#include "../src/tty/tty.h"
-#include "../src/tty/key.h"
 #include "../src/cmd.h"
 #include "../src/execute.h"
 #include "../src/help.h"
+#include "../src/keybind.h"	/* global_key_map_t */
+#include "../src/cmddef.h"	/* CK_ cmd name const */
+
+
 #include "internal.h"
 #include "mcviewer.h"
 
@@ -278,160 +285,154 @@ mcview_hook (void *v)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* Both views */
 static cb_ret_t
-mcview_handle_key (mcview_t * view, int c)
+mcview_execute_cmd (mcview_t * view, int command, int key)
 {
-    c = convert_from_input_c (c);
+    int res = MSG_HANDLED;
 
     if (view->hex_mode) {
-        switch (c) {
-        case '\t':
+        switch (command) {
+        case CK_HexViewToggleNavigationMode:
             view->hexview_in_text = !view->hexview_in_text;
             view->dirty++;
-            return MSG_HANDLED;
-
-        case XCTRL ('a'):
+            break;
+        case CK_ViewMoveToBol:
             mcview_moveto_bol (view);
             view->dirty++;
-            return MSG_HANDLED;
-
-        case XCTRL ('b'):
-            mcview_move_left (view, 1);
-            return MSG_HANDLED;
-
-        case XCTRL ('e'):
+            break;
+        case CK_ViewMoveToEol:
             mcview_moveto_eol (view);
-            return MSG_HANDLED;
-
-        case XCTRL ('f'):
+            break;
+        case CK_ViewMoveLeft:
+            mcview_move_left (view, 1);
+            break;
+        case CK_ViewMoveRight:
             mcview_move_right (view, 1);
-            return MSG_HANDLED;
+            break;
+        default :
+            res = MSG_NOT_HANDLED;
+            break;
         }
-
-        if (view->hexedit_mode && mcview_handle_editkey (view, c) == MSG_HANDLED)
+    } else {
+        switch (command) {
+        case CK_ViewSearch:
+            view->search_type = MC_SEARCH_T_REGEX;
+            mcview_search_cmd (view);
+            break;
+            /* Continue search */
+        case CK_ViewContinueSearch:
+            mcview_continue_search_cmd (view);
+            break;
+            /* toggle ruler */
+        case CK_ViewToggleRuler:
+            mcview_toggle_ruler_cmd (view);
+            break;
+        case CK_ViewMoveLeft:
+            mcview_move_left (view, 1);
+            break;
+        case CK_ViewMoveRight:
+            mcview_move_right (view, 1);
+            break;
+        case CK_ViewMoveUp:
+            mcview_move_up (view, 1);
+            break;
+        case CK_ViewMoveDown:
+            mcview_move_down (view, 1);
+            break;
+        case CK_ViewMoveHalfPgUp:
+            mcview_move_up (view, (view->data_area.height + 1) / 2);
+            break;
+        case CK_ViewMoveHalfPgDn:
+            mcview_move_down (view, (view->data_area.height + 1) / 2);
+            break;
+        case CK_ViewMovePgUp:
+            mcview_move_up (view, view->data_area.height);
+            break;
+        case CK_ViewMovePgDn:
+            mcview_move_down (view, view->data_area.height);
+            break;
+        case CK_ShowCommandLine:
+            view_other_cmd ();
+            break;
+        /*
+            // Unlike Ctrl-O, run a new shell if the subshell is not running
+        case '!':
+            exec_shell ();
             return MSG_HANDLED;
+        */
+        case CK_ViewGotoBookmark:
+            view->marks[view->marker] = view->dpy_start;
+            break;
+        case CK_ViewNewBookmark:
+            view->dpy_start = view->marks[view->marker];
+            view->dirty++;
+            break;
+        case CK_ViewNextFile:
+            /*  Use to indicate parent that we want to see the next/previous file */
+            /* Does not work in panel mode */
+            if (!mcview_is_in_panel (view))
+                view->move_dir = 1;
+            break;
+        case CK_ViewPrevFile:
+            /*  Use to indicate parent that we want to see the next/previous file */
+            /* Does not work in panel mode */
+            if (!mcview_is_in_panel (view))
+                view->move_dir = -1;
+            break;
+        case CK_ViewQuit:
+            if (mcview_ok_to_quit (view))
+                view->want_to_quit = TRUE;
+            break;
+        case CK_SelectCodepage:
+            mcview_select_encoding (view);
+            view->dirty++;
+            mcview_update (view);
+            break;
+        default :
+            res = MSG_NOT_HANDLED;
+        }
     }
+    return res;
+}
 
-    if (mcview_check_left_right_keys (view, c))
+
+/* Both views */
+static cb_ret_t
+mcview_handle_key (mcview_t * view, int key)
+{
+    key = convert_from_input_c (key);
+
+    int i;
+
+    if (view->hex_mode) {
+        for (i = 0; view->hex_map[i].key != 0; i++)
+            if ((key == view->hex_map[i].key)
+                && (mcview_execute_cmd (view, view->hex_map[i].command,
+                                        key) == MSG_HANDLED))
+                    return MSG_HANDLED;
+    } else {
+        for (i = 0; view->plain_map[i].key != 0; i++)
+            if ((key == view->plain_map[i].key)
+                && (mcview_execute_cmd (view, view->plain_map[i].command,
+                                        key) == MSG_HANDLED))
+                    return MSG_HANDLED;
+    }
+    if (mcview_check_left_right_keys (view, key))
         return MSG_HANDLED;
 
-    if (check_movement_keys (c, view->data_area.height + 1, view,
+    if (check_movement_keys (key, view->data_area.height + 1, view,
                              mcview_cmk_move_up, mcview_cmk_move_down,
                              mcview_cmk_moveto_top, mcview_cmk_moveto_bottom))
         return MSG_HANDLED;
 
-    switch (c) {
-
-    case '?':
-    case '/':
-        view->search_type = MC_SEARCH_T_REGEX;
-        mcview_search_cmd (view);
-        return MSG_HANDLED;
-        break;
-        /* Continue search */
-    case XCTRL ('r'):
-    case XCTRL ('s'):
-    case 'n':
-    case KEY_F (17):
-        mcview_continue_search_cmd (view);
-        return MSG_HANDLED;
-
-        /* toggle ruler */
-    case ALT ('r'):
-        mcview_toggle_ruler_cmd (view);
-        return MSG_HANDLED;
-
-    case 'h':
-        mcview_move_left (view, 1);
-        return MSG_HANDLED;
-
-    case 'j':
-    case '\n':
-    case 'e':
-        mcview_move_down (view, 1);
-        return MSG_HANDLED;
-
-    case 'd':
-        mcview_move_down (view, (view->data_area.height + 1) / 2);
-        return MSG_HANDLED;
-
-    case 'u':
-        mcview_move_up (view, (view->data_area.height + 1) / 2);
-        return MSG_HANDLED;
-
-    case 'k':
-    case 'y':
-        mcview_move_up (view, 1);
-        return MSG_HANDLED;
-
-    case 'l':
-        mcview_move_right (view, 1);
-        return MSG_HANDLED;
-
-    case ' ':
-    case 'f':
-        mcview_move_down (view, view->data_area.height);
-        return MSG_HANDLED;
-
-    case XCTRL ('o'):
-        view_other_cmd ();
-        return MSG_HANDLED;
-
-        /* Unlike Ctrl-O, run a new shell if the subshell is not running.  */
-    case '!':
-        exec_shell ();
-        return MSG_HANDLED;
-
-    case 'b':
-        mcview_move_up (view, view->data_area.height);
-        return MSG_HANDLED;
-
-    case KEY_IC:
-        mcview_move_up (view, 2);
-        return MSG_HANDLED;
-
-    case KEY_DC:
-        mcview_move_down (view, 2);
-        return MSG_HANDLED;
-
-    case 'm':
-        view->marks[view->marker] = view->dpy_start;
-        return MSG_HANDLED;
-
-    case 'r':
-        view->dpy_start = view->marks[view->marker];
-        view->dirty++;
-        return MSG_HANDLED;
-
-        /*  Use to indicate parent that we want to see the next/previous file */
-        /* Does not work in panel mode */
-    case XCTRL ('f'):
-    case XCTRL ('b'):
-        if (!mcview_is_in_panel (view))
-            view->move_dir = c == XCTRL ('f') ? 1 : -1;
-        /* FALLTHROUGH */
-    case 'q':
-    case XCTRL ('g'):
-    case ESC_CHAR:
-        if (mcview_ok_to_quit (view))
-            view->want_to_quit = TRUE;
-        return MSG_HANDLED;
-
-    case XCTRL ('t'):
-        mcview_select_encoding (view);
-        view->dirty++;
-        mcview_update (view);
-        return MSG_HANDLED;
-
 #ifdef MC_ENABLE_DEBUGGING_CODE
-    case 't':                  /* mnemonic: "test" */
+    if (c == 't') {                  /* mnemonic: "test" */
         mcview_ccache_dump (view);
         return MSG_HANDLED;
-#endif
     }
-    if (c >= '0' && c <= '9')
-        view->marker = c - '0';
+#endif
+    if (key >= '0' && key <= '9')
+        view->marker = key - '0';
 
     /* Key not used */
     return MSG_NOT_HANDLED;

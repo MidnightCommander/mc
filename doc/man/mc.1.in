@@ -59,6 +59,9 @@ Display the compiled\-in search paths for Midnight Commander files.
 Reset softkeys to their default from the termcap/terminfo
 database. Only useful on HP terminals when the function keys don't work.
 .TP
+.I \-K файл
+Specify a name of keymap file in the command line.
+.TP
 .I \-l file, \-\-ftplog=file
 Save the ftpfs dialog with the server in file.
 .TP
@@ -268,7 +271,16 @@ release it, then type the character <chr>.
 means hold the Shift key down while typing <chr>.
 .PP
 All input lines in the Midnight Commander use an approximation to
-the GNU Emacs editor's key bindings.
+the GNU Emacs editor's key bindings (default).
+.PP
+You may redefine key bindings. See
+.\"LINK2"
+.I redefine hotkey bindings
+.\"Keys_redefine"
+.PP
+for more info. All other key bindings (described in this manual) relative
+to default behavior.
+
 .PP
 There are many sections which tell about the keys. The following are
 the most important.
@@ -304,6 +316,52 @@ Input Line Keys
 .\"Input Line Keys"
 are used for editing input lines. This means both the command line and
 the input lines in the query dialogs.
+
+.\"NODE "  Keys_redefine"
+.SH "  Redefine hotkey bindings"
+Hotkey bindings may be readed from external file (keymap\-file).
+A keymap\-file is searched on the following algorithm (to the first one found):
+.IP
+.br
+1) command line option
+.BR \-K
+.BR \<keymap\>
+or
+.BR \-\-keymap=\<keymap\>
+.br
+2) Environment variable
+.BR MC_KEYMAP
+.br
+3) In config file parameter
+.BR keymap
+in section
+.BR \[Midhight
+.BR Commander\]
+.br
+4) File
+.BR ~/.mc/mc.keymap
+.br
+5) File
+.BR /etc/mc/mc.keymap
+.br
+6) File
+.BR @prefix@/share/mc/mc.keymap
+
+.PP
+Command line option, environment variable and parameter in config file may
+contain the absolute path to the keymap\-file (with the extension \.keymap
+or without it). Search of keymap\-file will occur in (to the first one found):
+.IP
+1)
+.BR ~/.mc/
+.br
+2)
+.BR /etc/mc/
+.br
+3)
+.BR @prefix@/share/mc/
+.br
+
 .\"NODE "  Miscellaneous Keys"
 .SH "  Miscellaneous Keys"
 Here are some keys which don't fall into any of the other categories:
@@ -3696,8 +3754,8 @@ Also now you can use
 For example:
 
 .nf
-    ctrl alt right=\\e[[1;6C
-    ctrl alt left=\\e[[1;6D
+    ctrl-alt-right=\\e[[1;6C
+    ctrl-alt-left=\\e[[1;6D
 .fi
 
 .PP

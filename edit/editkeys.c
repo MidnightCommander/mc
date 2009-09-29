@@ -44,10 +44,10 @@
 #include "edit-impl.h"
 #include "edit-widget.h"	/* edit->macro_i */
 #include "editcmd_dialogs.h"
-#include "editcmddef.h"		/* list of commands */
 
 #include "../src/tty/tty.h"	/* keys */
 #include "../src/tty/key.h"	/* KEY_M_SHIFT */
+#include "../src/cmddef.h"		/* list of commands */
 
 #include "../src/charsets.h"	/* convert_from_input_c() */
 #include "../src/main.h"	/* display_codepage */
@@ -57,7 +57,7 @@
  * Ordinary translations.  Note that the keys listed first take priority
  * when the key is assigned to more than one command.
  */
-static const edit_key_map_type cooledit_key_map[] = {
+static const global_key_map_t cooledit_key_map[] = {
     { ALT ('b'), CK_Match_Bracket },
     { ALT ('m'), CK_Mail },
     { XCTRL ('f'), CK_Save_Block },
@@ -69,7 +69,7 @@ static const edit_key_map_type cooledit_key_map[] = {
     { 0, 0 }
 };
 
-static const edit_key_map_type emacs_key_map[] = {
+static const global_key_map_t emacs_key_map[] = {
     { ALT ('$'), CK_Pipe_Block (1) },	/* spell check */
     { ALT ('b'), CK_Word_Left },
     { ALT ('f'), CK_Word_Right },
@@ -90,7 +90,7 @@ static const edit_key_map_type emacs_key_map[] = {
     { 0, 0 }
 };
 
-static const edit_key_map_type common_key_map[] = {
+static const global_key_map_t common_key_map[] = {
     { '\n', CK_Enter },
     { '\t', CK_Tab },
 
@@ -132,7 +132,7 @@ static const edit_key_map_type common_key_map[] = {
     { XCTRL ('o'), CK_Shell },
     { XCTRL ('s'), CK_Toggle_Syntax },
     { XCTRL ('u'), CK_Undo },
-    { XCTRL ('t'), CK_Select_Codepage },
+    { XCTRL ('t'), CK_SelectCodepage },
     { XCTRL ('q'), CK_Insert_Literal },
     { XCTRL ('a'), CK_Execute_Macro },
     { XCTRL ('r'), CK_Begin_End_Macro },
@@ -207,7 +207,7 @@ static const edit_key_map_type common_key_map[] = {
 
 /*
  * Translate the keycode into either 'command' or 'char_for_insertion'.
- * 'command' is one of the editor commands from editcmddef.h.
+ * 'command' is one of the editor commands from cmddef.h.
  */
 int
 edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
@@ -217,56 +217,6 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
     int i = 0;
     int extmod = 0;
     int c;
-
-    const edit_key_map_type *key_map = NULL;
-    switch (edit_key_emulation) {
-    case EDIT_KEY_EMULATION_NORMAL:
-	key_map = cooledit_key_map;
-	break;
-    case EDIT_KEY_EMULATION_EMACS:
-	key_map = emacs_key_map;
-	if (x_key == XCTRL ('x')) {
-	    int ext_key;
-	    ext_key =
-		editcmd_dialog_raw_key_query (" Ctrl-X ", _(" Emacs key: "), 0);
-	    switch (ext_key) {
-	    case 's':
-		command = CK_Save;
-		goto fin;
-	    case 'x':
-		command = CK_Exit;
-		goto fin;
-	    case 'k':
-		command = CK_New;
-		goto fin;
-	    case 'e':
-		command =
-		    CK_Macro (editcmd_dialog_raw_key_query
-			      (_(" Execute Macro "),
-			       _(" Press macro hotkey: "), 1));
-		if (command == CK_Macro (0))
-		    command = CK_Insert_Char;
-		goto fin;
-	    }
-	    goto fin;
-	}
-	break;
-
-    case EDIT_KEY_EMULATION_USER:
-	if (edit->user_map != NULL) {
-	    if (edit->extmod && edit->ext_map != NULL) {
-		key_map = edit->ext_map;
-		extmod = 1;
-	    } else {
-		key_map = edit->user_map;
-	    }
-	    edit->extmod = 0;
-	} else {
-	    key_map = edit->user_map = cooledit_key_map;
-	}
-	break;
-    }
-    assert (key_map != NULL);
 
     /* an ordinary insertable character */
     if (x_key < 256 && !extmod) {
@@ -292,7 +242,7 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
                 }
 #ifdef HAVE_CHARSET
             } else {
-		c = convert_from_input_c (x_key);
+                c = convert_from_input_c (x_key);
                 if (is_printable (c)) {
                     char_for_insertion = convert_from_8bit_to_utf_c2((unsigned char) x_key);
                     goto fin;
@@ -347,34 +297,12 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
     }
 
     /* Commands specific to the key emulation */
-    for (i = 0; key_map[i].key != 0 && key_map[i].key != x_key; i++)
-	continue;
-    if (key_map[i].key != 0) {
-	command = key_map[i].command;
-	goto fin;
+    for (i = 0; edit->user_map[i].key != 0; i++) {
+        if (x_key == edit->user_map[i].key) {
+            command = edit->user_map[i].command;
+        }
     }
 
-    /* Commands common for the key emulations */
-    key_map = common_key_map;
-    for (i = 0; key_map[i].key != 0 && key_map[i].key != x_key; i++)
-	continue;
-    if (key_map[i].key != 0) {
-	command = key_map[i].command;
-	goto fin;
-    }
-
-    /* Function still not found for this key, so try macros */
-    /* This allows the same macro to be
-       enabled by either eg "ALT('f')" or "XCTRL('f')" or "XCTRL('a'), 'f'" */
-
-    if (x_key & ALT (0)) {	/* is an alt key ? */
-	command = CK_Macro (x_key - ALT (0));
-	goto fin;
-    }
-    if (x_key < ' ') {		/* is a ctrl key ? */
-	command = CK_Macro (x_key);
-	goto fin;
-    }
   fin:
 
     *cmd = command;
