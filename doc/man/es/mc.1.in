@@ -5,7 +5,7 @@
 .\"	David H. Martín Alonso <dmartina@excite.com>
 .\"
 .\"TOPICS "Índice de Contenidos:"
-.TH MC 1 "Septiembre de 2009" "MC Versión 4.7.0\-pre2" "GNU Midnight Commander"
+.TH MC 1 "Octubre de 2009" "MC Versión 4.7.0\-pre3" "GNU Midnight Commander"
 .\"SKIP_SECTION"
 .SH "NOMBRE"
 mc \- Entorno visual para sistemas tipo Unix.
@@ -41,6 +41,14 @@ Usado para especificar un juego de colores diferentes desde la línea de
 .\"LINK2"
 Colores\&. 
 .\"Colors"
+.TP
+.I \-S arg
+Permite elegir un skin o apariencia para mc.  La configuración de las
+características de visualización (colores, líneas, etc.) se explica
+detalladamente en la sección
+.\"LINK2"
+Skins\&.
+.\"Skins"
 .TP
 .I \-d, \-\-nomouse
 Deshabilita el soporte de ratón.
@@ -1796,8 +1804,14 @@ Modo de Listado
 aplicables al usuario actual de Midnight Commander serán resaltados
 usando el color indicado por medio de la palabra clave
 .I selected.
-Si se activa el resaltado de tipos de archivos, los archivos aparecerán
-coloreados según su tipo (i.e. directorios, archivos core, ejecutables,...).
+Si se activa el resaltado de tipos de archivos, los nombres aparecerán
+coloreados según las reglas almacenadas en el archivo
+@prefix@/etc/mc/filehighlight.ini. Para más información, véase la
+sección sobre
+.\"LINK2"
+Resaltado de nombres\&.
+.\"Filenames Highlight"
+
 .PP
 Si la opción
 .I Mostrar Mini\-Estado
@@ -2643,6 +2657,7 @@ Completar: Mostrar Todos
 está desactivado, la lista aparece cuando pulsamos
 .B Alt\-Tab
 por segunda vez; con la primera Midnight Commander sólo emite un pitido.
+
 .\"NODE "Virtual File System"
 .SH "Sistemas de Archivos Virtuales (VFS)"
 Midnight Commander dispone de una capa de código de acceso al sistema
@@ -2690,7 +2705,7 @@ de directorio empleando la siguiente sintaxis:
 .PP
 El archivo mc.ext también ofrece un atajo para los archivos tar, esto quiere decir
 que normalmente basta con apuntar a un archivo tar y pulsar Intro para entrar en el
-archivo tar. Véase la sección
+archivo tar.  Véase la sección
 .\"LINK2"
 Edición del Archivo de Extensiones
 .\"Extension File Edit"
@@ -2704,6 +2719,7 @@ Ejemplos:
 .fi
 .PP
 En este último se indica la ruta completa hasta el archivo tar.
+
 .\"NODE "  FTP File System"
 .SH "  Sistema de archivos FTP (FTPfs)"
 FTPfs permite manipular archivos en máquinas remotas. Para utilizarlo
@@ -2753,12 +2769,13 @@ La opciones de FTPfs se encuentran entre las opciones de configuración del
 .\"LINK2"
 Sistema de Archivos Virtual (VFS)\&.
 .\"Virtual FS"
+
 .\"NODE "  FIle transfer over SHell filesystem"
-.SH "  Sistema de archivos de envío Archivos por SHell (FISH)"
+.SH "  Sistema de archivos a través de SHell (FISH)"
 El FISH es un sistema de archivos por red que permite manipular archivos
-en una máquina remota como si estuvieran almacenados localmente. Para
-ello es preciso que el sistema remoto este ejecutando el servidor FISH
-o que la shell sea de tipo bash.
+en una máquina remota como si estuvieran almacenados localmente.  Para
+ello es preciso que el sistema remoto esté ejecutando el servidor FISH
+o permitir la conexión a una shell de tipo bash.
 .PP
 Para conectar con la máquina remota basta cambiar de directorio a un
 directorio virtual cuyo nombre sea de la forma:
@@ -2790,15 +2807,16 @@ Ejemplos:
     /#sh:pepe@quiero.comprension.edu:C/privado
     /#sh:pepe@sincomprimir.ssh.edu/privado
 .fi
+
 .\"NODE "  Network File System"
-.SH "  Sistema de archivos de Red"
-El sistema de archivos de Midnight Commander es un sistema de archivos de red básico que
-nos permite manipular archivos en una máquina remota como si estuviesen
-accesibles localmente. Para utilizar esto, la máquina remota debe estar ejecutando el
-programa servidor mcserv(8).
+.SH "  Sistema de archivos en Red"
+El sistema de archivos en red de Midnight Commander es un sistema de
+archivos en red básico que permite manipular archivos en una máquina
+remota como si estuviesen accesibles localmente. Para ello, la máquina
+remota debe estar ejecutando el programa servidor mcserv(8).
 .PP
-Para conectar a una máquina remota, sólo necesitamos hacer un chdir a un
-directorio especial cuyo nombre sigue el siguiente formato:
+Para conectar a una máquina remota, sólo necesitamos hacer el cambio de
+directorio a un directorio especial cuyo nombre tendrá la forma:
 .PP
 .I /#mc:[usuario@]máquina[:puerto][directorio\-remoto]
 .PP
@@ -2857,6 +2875,7 @@ Ejemplos:
     /#smb:otramaquina
     /#smb:invitado@maquina/publico/leyes
 .fi
+
 .\"NODE "  Undelete File System"
 .SH "  Sistema de archivos de Recuperación"
 En sistemas Linux, si el programa de configuración nos preguntó si queríamos usar
@@ -3011,7 +3030,7 @@ usando el argumento \-c y \-b respectivamente.
 .PP
 Si el programa está compilado con el gestor pantallas Slang
 en lugar de ncurses, también chequeará la variable
-.B COLORTERM,
+.BR COLORTERM ,
 si existe, lo que tiene el mismo efecto que la opción \-c.
 .PP
 Podemos especificar a los terminales que siempre fuercen el modo en color
@@ -3057,10 +3076,9 @@ El formato de la definición de color es:
 los colores son opcionales, y las palabras claves son: normal, selected,
 marked, markselect, errors, input, reverse menu, menusel, menuhot, menuhotsel,
 gauge;  los colores por defecto son: dnormal, dfocus, dhotnormal, dhotfocus;
-Los colores de Ayuda son: helpnormal, helpitalic, helpbold, helplink,
-helpslink; Color del visor: viewunderline; Modo especial resaltado:
-executable, directory, link, stalelink, device, special, core.
-Colores del editor: editnormal, editbold, editmarked.
+los colores de Ayuda son: helpnormal, helpitalic, helpbold, helplink,
+helpslink;  color del visor: viewunderline; colores del editor: editnormal,
+editbold, editmarked.
 .PP
 Los cuadros de diálogo usan los siguientes colores:
 .I dnormal
@@ -3092,37 +3110,390 @@ es utilizado para el hiperenlace seleccionado.
 determina el color de la parte completada de la barra de progresión (gauge), que muestra
 qué porcentaje de archivos fueron copiados etc. de modo gráfico.
 .PP
-Para el modo de resaltado del tipo de archivos,
-.I directory
-especifica el color con que se muestran los directorios;
-.I executable
-para los archivos ejecutables;
-.I link
-usado para representar enlaces;
-.I device
-para dispositivos de caracteres y de bloque;
-.I special
-para archivos especiales, tales como colas (FIFO) e IPC sockets;
-.I core
-es para los archivos volcados (véase también la opción
-.B highlight_mode
-en la sección sobre
-.\"LINK2"
-Ajustes Especiales
-.\"Special Settings"
-).
-.PP
 Los colores posibles son: negro (black), gris (gray), rojo (red), rojo brillante (brightred), verde (green),
 verde claro (brightgreen), marrón (brown), amarillo (yellow), azul oscuro (blue), azul brillante (brightblue),
 rosa (magenta), rosa claro (brightmagenta),
 azul celeste (cyan), celeste claro (brightcyan), gris claro (lightgray) y blanco (white).
 Hay una palabra clave especial para obtener un fondo transparente. Se trata de 'default'. 'default'
-solo se puede utilizar para en el color de fondo. Ejemplo:
+sólo se puede utilizar como color de fondo. Ejemplo:
 .PP
 .nf
 [Colors]
 base_color=normal=white,default:marked=magenta,default
 .fi
+
+.\"NODE "Skins"
+.SH "Skins"
+Con los skins (pieles, caretas) se puede cambiar la apariencia global de
+Midhight Commander.  Para ello hay que proporcionar un archivo que contenga
+descripciones de colores y formas de trazar las líneas de borde de los
+paneles y diálogos.  La redefinición de colores es completamente compatible
+con la configuración tradicional detallada en la sección sobre
+.\"LINK2"
+Colores\&.
+.\"Colors"
+.PP
+El archivo se busca, en orden, de varias maneras:
+.IP
+.br
+1) La opción
+.B \-S \<skin\>
+o
+.B \-\-skin=\<skin\>
+al ejecutar mc.
+.br
+2) La variable de entorno
+.BR MC_SKIN .
+.br
+3) El parámetro
+.B skin
+en la sección
+.B \[Midnight Commander\]
+del archivo de configuración.
+.br
+4) El archivo
+.BR @prefix@/etc/mc/skins/default.ini .
+.br
+5) El archivo
+.BR @prefix@/share/mc/skins/default.ini .
+
+.PP
+En línea de órdenes, en la variable de entorno o el parámetro de la
+configuración pueden contener la ruta absoluta al archivo de skin con
+o sin su extensión \.ini. De no indicar la ruta se realiza la búsqueda,
+en orden, en:
+.IP
+1)
+.BR ~/.mc/skins/ .
+.br
+2)
+.BR @prefix@/etc/mc/skins/ .
+.br
+3)
+.BR @prefix@/share/mc/skins/ .
+.br
+
+.PP
+Para más información consultar:
+.IP
+.\"LINK2"
+Descripción de secciones y parámetros
+.\"Skins sections"
+.br
+.\"LINK2"
+Definiciones de pares de colores
+.\"Skins colors"
+.br
+.\"LINK2"
+Trazado de líneas
+.\"Skins lines"
+.br
+.\"LINK2"
+Compatibilidad
+.\"Skins oldcolors"
+.br
+
+.\"NODE "  Skins sections"
+.SH "  Descripción de secciones y parámetros"
+
+La sección
+.B [skin]
+contiene metadatos del archivo. El parámetro
+.I description
+proporciona un pequeño texto descriptivo.
+
+.PP
+La sección
+.B [filehighlight]
+contiene descripciones de pares de colores para el resaltado de nombres
+de archivo.  Los nombres de parámetros de esta sección tienen que coincidir
+con los nombres de sección del archivo filehighlight.ini.
+
+Para más información, véase la sección sobre
+.\"LINK2"
+Resaltado de nombres\&.
+.\"Filenames Highlight"
+
+.PP
+La sección
+.B [core]
+permite definir elementos que se utilizan en otras partes.
+.TP
+.I _default_
+Colores por defecto.  Se utilizará en todas las secciones que
+no contengan definición de colores.
+.TP
+.I selected
+cursor.
+.TP
+.I marked
+elementos seleccionados.
+.TP
+.I markselect
+cursor sobre elementos seleccionados.
+.TP
+.I gauge
+color de la parte completada en las barras de progreso.
+.TP
+.I input
+color de los recuadros de texto editable en los dialogos.
+.TP
+.I reverse
+color inverso.
+
+.PP
+La sección
+.B [dialog]
+define elementos de las ventanas de diálogo salvo los diálogos de error.
+.TP
+.I _default_
+Colores por defecto para esta sección.  Se utilizará [core]._default_
+si no se especifica
+.TP
+.I dfocus
+Color del elemento activo, con el foco.
+.TP
+.I dhotnormal
+Color de las teclas de acceso rápido.
+.TP
+.I dhotfocus
+Color de las teclas de acceso rápido del elemento activo.
+
+.PP
+La sección
+.B [error]
+define elementos de las ventanas de diálogo de error.
+.TP
+.I _default_
+Colores por defecto para esta sección.  Se utilizará [core]._default_
+si no se especifica.
+.TP
+.I errdhotnormal
+Color de las teclas de acceso rápido.
+.TP
+.I errdhotfocus
+Color de las teclas de acceso rápido del elemento activo.
+
+.PP
+La sección
+.B [menu]
+define elementos de menú.  Esta sección afecta al menú general (activado
+con F9) y a los menús de usuario (activados con F2 en la pantalla general
+y con F11 en el editor).
+.TP
+.I _default_
+Colores por defecto para esta sección. Se utilizará [core]._default_
+si no se especifica
+.TP
+.I entry
+Color de las entradas de menú.
+.TP
+.I menuhot
+Color de las teclas de acceso rápido en menú.
+.TP
+.I menusel
+Color de la entrada de menú activa, con el foco.
+.TP
+.I menuhotsel
+Color de las teclas de acceso rápido en la entrada activa de menú.
+
+.PP
+La sección
+.B [help]
+define los elementos de la ventana de ayuda.
+.TP
+.I _default_
+Colores por defecto para esta sección. Se utilizará [core]._default_
+si no se especifica.
+.TP
+.I helpitalic
+Par de color para elementos en
+.BR cursiva .
+.TP
+.I helpbold
+Par de color para elementos
+.BR resaltados .
+.TP
+.I helplink
+Color de los enlaces
+.TP
+.I helpslink
+Color del enlace activo, con el foco.
+
+.PP
+La sección
+.B [editor]
+define los colores de los elementos que se encuentran en el editor.
+.TP
+.I _default_
+Colores por defecto para esta sección. Se utilizará [core]._default_
+si no se especifica.
+.TP
+.I editbold
+Par de color para elementos
+.BR resaltados .
+.TP
+.I editmarked
+Color del texto seleccionado.
+.TP
+.I editwhitespace
+Color de las tabulaciones y espacios al final de línea resaltados.
+.TP
+.I linestate
+Color de la línea de estado.
+
+.PP
+La sección
+.B [viewer]
+define los colores de los elementos que se encuentran en el visor.
+.TP
+.I viewunderline
+Par de color para elementos
+.BR subrayados .
+
+.\"NODE "  Skins colors"
+.SH "  Definiciones de pares de colores"
+Cualquier parámetro del archivo de skin puede contener definiciones de
+pares de color.
+.PP
+Un par de colores está formado por el nombre de los dos colores separados
+por ';'. El primer color establece el color de frente y el segundo el
+color de fondo. Se puede omitir alguno de los dos colores, en cuyo caso
+se utilizará el color del par de color por defecto (par de color general
+o del par de color por defecto en la sección).
+.PP
+Ejemplo:
+.br
+.nf
+[core]
+    # verde sobre negro
+    _default_=green;black
+    # verde (por defecto) sobre azul
+    selected=;blue
+    # amarillo sobre negro (por defecto)
+    marked=yellow;
+.fi
+
+.PP
+Los nombres de colores permitidos son los que aparecen en la sección
+.\"LINK2"
+Colores\&.
+.\"Colors"
+
+.\"NODE "  Skins lines"
+.SH "  Trazado de líneas"
+Trazos de líneas de la sección
+.B [Lines]
+del archivo de skins.  Por defecto se utilizan líneas sencillas, pero
+se pueden redefinir empleando cualquier símbolo utf\-8 (por ejemplo,
+líneas dobles).
+.PP
+.I ¡¡¡ATENCIÓN!!!
+Si se compila Midnight Commander empleando la biblioteca de pantalla
+Ncurses, entonces el trazado de líneas está limitado. Es posible que
+sólo se puedan utilizar líneas simples. Para consultas y comentarios
+contactar con los desarrolladores de Ncurses.
+
+.PP
+Descripción de parámetros de la sección
+.BR [Lines] :
+.TP
+.I lefttop
+esquina superior izquierda.
+.TP
+.I righttop
+esquina superior derecha.
+.TP
+.I centertop
+unión central en el borde superior.
+.TP
+.I centerbottom
+unión central en el borde inferior.
+.TP
+.I leftbottom
+esquina inferior izquierda.
+.TP
+.I rightbottom
+esquina inferior derecha.
+.TP
+.I leftmiddle
+unión central en el borde izquierdo.
+.TP
+.I rightmiddle
+unión central en el borde derecho.
+.TP
+.I centermiddle
+cruz central.
+.TP
+.I horiz
+línea horizontal.
+.TP
+.I vert
+línea vertical.
+.TP
+.I thinhoriz
+línea horizontal fina.
+.TP
+.I thinvert
+línea vertical fina.
+
+
+.\"NODE "  Skins oldcolors"
+.SH "  Compatibilidad"
+Compatibilidad de la asignación de colores empleando archivos de skin
+con la configuración general de
+.\"LINK2"
+Colores\&.
+.\"Colors"
+.PP
+La compatibilidad es completa. En este caso la redefinición de colores
+tiene prioridad sobre las definiciones de skin y se completa con esta.
+
+
+.\"NODE "Filenames Highlight"
+.SH "Resaltado de nombres"
+La sección [filehighlight] de un archivo de skin contiene como claves
+los nombres que identificarán cada grupo de resaltado y como valor el
+par de colores que le corresponda. El formato de estas parejas se explica
+en la sección
+.\"LINK2"
+Skins\&.
+.\"Skins"
+.PP
+Reglas de resaltado de nombres en el archivo @prefix@/etc/mc/filehighlight.ini.
+Los nombres de sección en este archivo tienen que ser iguales a los nombres
+empleados en la sección [filehighlight] del archivo de skin en uso.
+PP.
+Los nombres de los parámetros en estos grupos podrán ser:
+.TP
+.I type
+tipo de archivo. Si existe se ignoran otras opciones.
+.TP
+.I regexp
+expresión regular. Si existe se ignora la opción 'extensions'.
+.TP
+.I extensions
+lista de extensiones de archivos. Separadas por punto y coma.
+.PP
+'type' puede tomar los valores:
+.nf
+\- FILE (todos los archivos)
+  \- FILE_EXE
+\- DIR (todos los directorios)
+  \- LINK_DIR
+\- LINK (todos los enlaces excepto los rotos)
+  \- HARDLINK
+  \- SYMLINK
+\- STALE_LINK
+\- DEVICE (todos los archivos de dispositivo)
+  \- DEVICE_BLOCK
+  \- DEVICE_CHAR
+\- SPECIAL (todos los archivos especiales)
+  \- SPECIAL_SOCKET
+  \- SPECIAL_FIFO
+  \- SPECIAL_DOOR
+.fi
+
 .\"NODE "Special Settings"
 .SH "Ajustes Especiales"
 La mayoría de las opciones de Midnight Commander pueden cambiarse desde
