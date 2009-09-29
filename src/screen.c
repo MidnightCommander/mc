@@ -59,7 +59,6 @@
 #include "mountlist.h"		/* my_statfs */
 #include "selcodepage.h"	/* select_charset () */
 #include "charsets.h"		/* get_codepage_id () */
-#include "strutil.h"
 #include "cmddef.h"		/* CK_ cmd name const */
 #include "keybind.h"		/* global_key_map_t */
 
@@ -428,35 +427,135 @@ string_dot (file_entry *fe, int len)
 
 #define GT 1
 
-static struct {
-    const char *id;
-    int  min_size;
-    int  expands;
-    align_crt_t default_just;
-    const char *title;
-    int  use_in_gui;
-    const char *(*string_fn)(file_entry *, int);
-    sortfn *sort_routine; /* used by mouse_sort_col() */
-} formats [] = {
-{ "name",  12, 1, J_LEFT_FIT,	N_("Name"),	1, string_file_name,	   (sortfn *) sort_name },
-{ "size",  7,  0, J_RIGHT,	N_("Size"),	1, string_file_size,	   (sortfn *) sort_size },
-{ "bsize", 7,  0, J_RIGHT,	N_("Size"),	1, string_file_size_brief, (sortfn *) sort_size },
-{ "type",  GT, 0, J_LEFT,	"",		2, string_file_type,	   NULL },
-{ "mtime", 12, 0, J_RIGHT,	N_("MTime"),	1, string_file_mtime,	   (sortfn *) sort_time },
-{ "atime", 12, 0, J_RIGHT,	N_("ATime"),	1, string_file_atime,	   (sortfn *) sort_atime },
-{ "ctime", 12, 0, J_RIGHT,	N_("CTime"),	1, string_file_ctime,	   (sortfn *) sort_ctime },
-{ "perm",  10, 0, J_LEFT,	N_("Permission"),1,string_file_permission, NULL },
-{ "mode",  6,  0, J_RIGHT,	N_("Perm"),	1, string_file_perm_octal, NULL },
-{ "nlink", 2,  0, J_RIGHT,	N_("Nl"),	1, string_file_nlinks,	   NULL },
-{ "inode", 5,  0, J_RIGHT,	N_("Inode"),	1, string_inode,	   (sortfn *) sort_inode },
-{ "nuid",  5,  0, J_RIGHT,	N_("UID"),	1, string_file_nuid,	   NULL },
-{ "ngid",  5,  0, J_RIGHT,	N_("GID"),	1, string_file_ngid,	   NULL },
-{ "owner", 8,  0, J_LEFT_FIT,	N_("Owner"),	1, string_file_owner,	   NULL },
-{ "group", 8,  0, J_LEFT_FIT,	N_("Group"),	1, string_file_group,	   NULL },
-{ "mark",  1,  0, J_RIGHT,	" ",		1, string_marked,	   NULL },
-{ "|",     1,  0, J_RIGHT,	" ",		0, NULL,		   NULL },
-{ "space", 1,  0, J_RIGHT,	" ",		0, string_space,	   NULL },
-{ "dot",   1,  0, J_RIGHT,	" ",		0, string_dot,		   NULL },
+panel_format_t panel_formats [] = {
+    {
+	"unsorted", 12, 1, J_LEFT_FIT,
+	N_("Unsorted"), N_("&Unsorted"), 1,
+	string_file_name,
+	(sortfn *) unsorted
+    },
+    {
+	"name", 12, 1, J_LEFT_FIT,
+	N_("Name"), N_("&Name"), 1,
+	string_file_name,
+	(sortfn *) sort_name
+    },
+    {
+	"extension", 12, 1, J_LEFT_FIT,
+	N_("Extension"), N_("&Extension"), 1,
+	string_file_name, /* TODO: string_file_ext*/
+	(sortfn *) sort_ext
+    },
+    {
+	"size", 7,  0, J_RIGHT,
+	N_("Size"), N_("&Size"), 1,
+	string_file_size,
+	(sortfn *) sort_size
+    },
+    {
+	"bsize", 7,  0, J_RIGHT,
+	N_("Block Size"), NULL, 1,
+	string_file_size_brief,
+	(sortfn *) sort_size
+    },
+    {
+	"type", GT, 0, J_LEFT,
+	"", NULL, 2,
+	string_file_type,
+	NULL
+    },
+    {
+	"mtime", 12, 0, J_RIGHT,
+	N_("MTime"), N_("&Modify time"), 1,
+	string_file_mtime,
+	(sortfn *) sort_time
+    },
+    {
+	"atime", 12, 0, J_RIGHT,
+	N_("ATime"), N_("&Access time"), 1,
+	string_file_atime,
+	(sortfn *) sort_atime
+    },
+    {
+	"ctime", 12, 0, J_RIGHT,
+	N_("CTime"), N_("C&Hange time"), 1,
+	string_file_ctime,
+	(sortfn *) sort_ctime
+    },
+    {
+	"perm", 10, 0, J_LEFT,
+	N_("Permission"), NULL, 1,
+	string_file_permission,
+	NULL
+    },
+    {
+	"mode", 6,  0, J_RIGHT,
+	N_("Perm"), NULL, 1,
+	string_file_perm_octal,
+	NULL
+    },
+    {
+	"nlink", 2,  0, J_RIGHT,
+	N_("Nl"), NULL, 1,
+	string_file_nlinks, NULL
+    },
+    {
+	"inode", 5,  0, J_RIGHT,
+	N_("Inode"), N_("&Inode"), 1,
+	string_inode,
+	(sortfn *) sort_inode
+    },
+    {
+	"nuid", 5,  0, J_RIGHT,
+	N_("UID"), NULL, 1,
+	string_file_nuid,
+	NULL
+    },
+    {
+	"ngid", 5,  0, J_RIGHT,
+	N_("GID"), NULL, 1,
+	string_file_ngid,
+	NULL
+    },
+    {
+	"owner", 8, 0, J_LEFT_FIT,
+	N_("Owner"), NULL, 1,
+	string_file_owner,
+	NULL
+    },
+    {
+	"group", 8,0, J_LEFT_FIT,
+	N_("Group"), NULL, 1,
+	string_file_group,
+	NULL
+    },
+    {
+	"mark", 1, 0, J_RIGHT,
+	" ", NULL, 1,
+	string_marked,
+	NULL
+    },
+    {
+	"|", 1, 0, J_RIGHT,
+	" ", NULL, 0,
+	NULL,
+	NULL
+    },
+    {
+	"space", 1, 0, J_RIGHT,
+	" ", NULL, 0,
+	string_space,
+	NULL
+    },
+    {
+	"dot", 1, 0, J_RIGHT,
+	" ", NULL, 0,
+	string_dot,
+	NULL
+    },
+    {
+	NULL, 0, 0, J_RIGHT, NULL, NULL, 0, NULL, NULL
+    },
 };
 
 static int
@@ -1158,7 +1257,7 @@ panel_new_with_dir (const char *panel_name, const char *wpath)
 
     /* Load the default format */
     panel->count =
-	do_load_dir (panel->cwd, &panel->dir, panel->sort_type,
+	do_load_dir (panel->cwd, &panel->dir, panel->current_sort_field->sort_routine,
 		     panel->reverse, panel->case_sensitive,
 		     panel->exec_first, panel->filter);
 
@@ -1197,7 +1296,7 @@ panel_reload (WPanel *panel)
     }
 
     panel->count =
-	do_reload_dir (panel->cwd, &panel->dir, panel->sort_type,
+	do_reload_dir (panel->cwd, &panel->dir, panel->current_sort_field->sort_routine,
 		       panel->count, panel->reverse, panel->case_sensitive,
 		       panel->exec_first, panel->filter);
 
@@ -1325,9 +1424,9 @@ parse_display_format (WPanel *panel, const char *format, char **error, int issta
     if (i18n_timelength == 0) {
 	i18n_timelength = i18n_checktimelength ();	/* Musn't be 0 */
 
-	for (i = 0; i < ELEMENTS(formats); i++)
-	    if (strcmp ("time", formats [i].id+1) == 0)
-		formats [i].min_size = i18n_timelength;
+	for (i = 0; panel_formats[i].id != NULL; i++)
+	    if (strcmp ("time", panel_formats[i].id + 1) == 0)
+		panel_formats [i].min_size = i18n_timelength;
     }
 
     /*
@@ -1370,26 +1469,26 @@ parse_display_format (WPanel *panel, const char *format, char **error, int issta
 	} else
 	    set_justify = 0;
 
-	for (i = 0; i < ELEMENTS(formats); i++){
-	    size_t klen = strlen (formats [i].id);
+	for (i = 0; panel_formats[i].id != NULL; i++) {
+	    size_t klen = strlen (panel_formats [i].id);
 
-	    if (strncmp (format, formats [i].id, klen) != 0)
+	    if (strncmp (format, panel_formats [i].id, klen) != 0)
 		continue;
 
 	    format += klen;
 
-	    if (formats [i].use_in_gui)
+	    if (panel_formats [i].use_in_gui)
 	    	items++;
 
-            darr->requested_field_len = formats [i].min_size;
-            darr->string_fn           = formats [i].string_fn;
-	    if (formats [i].title [0])
-		    darr->title = _(formats [i].title);
+            darr->requested_field_len = panel_formats [i].min_size;
+            darr->string_fn           = panel_formats [i].string_fn;
+	    if (panel_formats [i].title [0])
+		    darr->title = _(panel_formats [i].title);
 	    else
 		    darr->title = "";
-            darr->id                  = formats [i].id;
-	    darr->expand              = formats [i].expands;
-	    darr->just_mode 	      = formats [i].default_just;
+            darr->id                  = panel_formats [i].id;
+	    darr->expand              = panel_formats [i].expands;
+	    darr->just_mode 	      = panel_formats [i].default_just;
 
 	    if (set_justify) {
 		if (IS_FIT(darr->just_mode))
@@ -2554,7 +2653,7 @@ mouse_sort_col(Gpm_Event *event, WPanel *panel)
 {
     int i;
     const char *sort_name = NULL;
-    sortfn *col_sort_type = NULL;
+    panel_format_t *col_sort_format = NULL;
     format_e *format;
 
 
@@ -2569,23 +2668,23 @@ mouse_sort_col(Gpm_Event *event, WPanel *panel)
     if (sort_name == NULL)
 	return;
 
-    for (i=0; i < ELEMENTS(formats); i++) {
-	if ( !strcmp(sort_name,_(formats[i].title)) && formats[i].sort_routine ) {
-	    col_sort_type = formats[i].sort_routine;
+    for(i=0; panel_formats[i].id != NULL; i ++) {
+	if ( !strcmp(sort_name,_(panel_formats[i].title)) && panel_formats[i].sort_routine ) {
+	    col_sort_format = &panel_formats[i];
 	    break;
 	}
     }
 
-    if (! col_sort_type)
+    if (! col_sort_format)
 	return;
 
-    if (panel->sort_type == col_sort_type) {
+    if (panel->current_sort_field == col_sort_format) {
 	/* reverse the sort if clicked column is already the sorted column */
 	panel->reverse = ! panel->reverse;
     } else {
 	panel->reverse = 0; /* new sort is forced to be ascending */
     }
-    panel_set_sort_order(panel, col_sort_type);
+    panel_set_sort_order(panel, col_sort_format);
 }
 
 
@@ -2738,7 +2837,7 @@ panel_re_sort (WPanel *panel)
 
     filename = g_strdup (selection (panel)->fname);
     unselect_item (panel);
-    do_sort (&panel->dir, panel->sort_type, panel->count-1, panel->reverse,
+    do_sort (&panel->dir, panel->current_sort_field->sort_routine, panel->count-1, panel->reverse,
              panel->case_sensitive, panel->exec_first);
     panel->selected = -1;
     for (i = panel->count; i; i--){
@@ -2756,15 +2855,15 @@ panel_re_sort (WPanel *panel)
 }
 
 void
-panel_set_sort_order (WPanel *panel, sortfn *sort_order)
+panel_set_sort_order (WPanel *panel, const panel_format_t *sort_order)
 {
     if (sort_order == 0)
 	return;
 
-    panel->sort_type = sort_order;
+    panel->current_sort_field = sort_order;
 
     /* The directory is already sorted, we have to load the unsorted stuff */
-    if (sort_order == (sortfn *) unsorted){
+    if (sort_order->sort_routine == (sortfn *) unsorted){
 	char *current_file;
 
 	current_file = g_strdup (panel->dir.list [panel->selected].fname);
@@ -2932,4 +3031,65 @@ update_panels (int force_update, const char *current_file)
 	panel = (WPanel *) get_panel_widget (get_other_index ());
 
     mc_chdir (panel->cwd);
+}
+
+gsize
+panel_get_num_of_sortable_formats(void)
+{
+    gsize ret = 0, index;
+
+    for(index=0; panel_formats[index].id != NULL; index ++)
+	if (panel_formats[index].title_hotkey != NULL)
+	    ret++;
+    return ret;
+}
+
+
+const char **
+panel_get_sortable_formats(gsize *array_size)
+{
+    char **ret;
+    gsize index, i;
+
+    index = panel_get_num_of_sortable_formats();
+
+    ret = g_new0 (char *, index + 1);
+    if (ret == NULL)
+        return NULL;
+
+    if (array_size != NULL)
+	*array_size = index;
+
+    index=0;
+
+    for(i=0; panel_formats[i].id != NULL; i ++)
+	if (panel_formats[i].title_hotkey != NULL)
+	    ret[index++] = g_strdup(_(panel_formats[i].title_hotkey));
+    return (const char**) ret;
+}
+
+const panel_format_t *
+panel_get_format_by_id(const char *name)
+{
+    gsize index;
+    for(index=0; panel_formats[index].id != NULL; index ++)
+	if (
+	    panel_formats[index].id != NULL &&
+	    strcmp(name, panel_formats[index].id) == 0
+	)
+	    return &panel_formats[index];
+    return NULL;
+}
+
+const panel_format_t *
+panel_get_format_by_title_hotkey(const char *name)
+{
+    gsize index;
+    for(index=0; panel_formats[index].id != NULL; index ++)
+	if (
+	    panel_formats[index].title_hotkey != NULL &&
+	    strcmp(name, _(panel_formats[index].title_hotkey)) == 0
+	)
+	    return &panel_formats[index];
+    return NULL;
 }

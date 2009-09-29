@@ -264,15 +264,17 @@ display_box (WPanel *panel, char **userp, char **minip, int *use_msformat, int n
     return result;
 }
 
-sortfn *
-sort_box (sortfn *sort_fn, int *reverse, int *case_sensitive, int *exec_first)
+const panel_format_t *
+sort_box (const panel_format_t *sort_format, int *reverse, int *case_sensitive, int *exec_first)
 {
     int dlg_width = 40, dlg_height = 15;
 
-    char *sort_orders_names [SORT_TYPES];
+    const char **sort_orders_names;
+    gsize sort_names_num;
+
     int sort_idx = 0;
 
-    sortfn *result = sort_fn;
+    const panel_format_t *result = sort_format;
 
     {
 	int max_radio = 0, max_check = 0;
@@ -293,7 +295,7 @@ sort_box (sortfn *sort_fn, int *reverse, int *case_sensitive, int *exec_first)
 	    QUICK_CHECKBOX (0, dlg_width, 3, dlg_height, N_("Executable &first"), exec_first),
 	    /* 5 */
 	    QUICK_RADIO (4, dlg_width, 3, dlg_height, SORT_TYPES,
-				    (const char **) sort_orders_names, &sort_idx),
+				    NULL, &sort_idx),
 	    QUICK_END
 	};
 
@@ -304,8 +306,11 @@ sort_box (sortfn *sort_fn, int *reverse, int *case_sensitive, int *exec_first)
 	    quick_widgets, TRUE
 	};
 
-	for (i = 0; i < SORT_TYPES; i++)
-	    if ((sortfn *) (sort_orders[i].sort_fn) == sort_fn) {
+	sort_orders_names = panel_get_sortable_formats(&sort_names_num);
+	quick_widgets[5].u.radio.items = sort_orders_names;
+
+	for (i = 0; i < sort_names_num; i++)
+	    if (strcmp (sort_orders_names[i], _(sort_format->title_hotkey)) == 0 ) {
 		sort_idx = i;
 		break;
 	    }
@@ -318,13 +323,6 @@ sort_box (sortfn *sort_fn, int *reverse, int *case_sensitive, int *exec_first)
 	/* checkboxes */
 	for (i = 2; i < 5; i++)
 	    quick_widgets[i].u.checkbox.text = _(quick_widgets[i].u.checkbox.text);
-	/* radiobuttons */
-	for (i = 0; i < SORT_TYPES; i++)
-	    sort_orders_names[i] = _(sort_orders[i].sort_name);
-#else
-	/* radiobuttons */
-	for (i = 0; i < SORT_TYPES; i++)
-	    sort_orders_names[i] = sort_orders[i].sort_name;
 #endif				/* ENABLE_NlS */
 
 	/* buttons */
@@ -356,9 +354,12 @@ sort_box (sortfn *sort_fn, int *reverse, int *case_sensitive, int *exec_first)
 	    quick_widgets[i].relative_x = dlg_width/2 + 2;
 
 	if (quick_dialog (&quick_dlg) != B_CANCEL)
-	    result = (sortfn *) sort_orders[sort_idx].sort_fn;
-    }
+	    result = panel_get_format_by_title_hotkey(sort_orders_names[sort_idx]);
 
+	if (result == NULL)
+	    result = sort_format;
+    }
+    g_strfreev((gchar **)sort_orders_names);
     return result;
 }
 

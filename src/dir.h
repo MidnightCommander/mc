@@ -75,7 +75,7 @@ typedef struct {
     int     (*sort_fn)(file_entry *, file_entry *);
 } sort_orders_t;
 
-extern sort_orders_t sort_orders [SORT_TYPES_TOTAL];
+// extern sort_orders_t sort_orders [SORT_TYPES_TOTAL];
 
 int link_isdir (const file_entry *);
 int if_link_is_exe (const char *full_name, const file_entry *file);

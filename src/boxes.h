@@ -11,7 +11,7 @@
 
 int     display_box      (WPanel *p, char **user, char **mini,
 			  int *use_msformat, int num);
-sortfn *sort_box         (sortfn *sort_fn, int *reverse,
+const panel_format_t *sort_box (const panel_format_t *, int *reverse,
 			  int *case_sensitive, int *exec_first);
 void    confirm_box      (void);
 void    display_bits_box (void);

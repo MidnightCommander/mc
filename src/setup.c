@@ -92,21 +92,6 @@ int saving_setup;
 
 static const struct {
     const char *key;
-    sortfn *sort_type;
-} sort_names [] = {
-    { "name",      (sortfn *) sort_name },
-    { "extension", (sortfn *) sort_ext },
-    { "time",      (sortfn *) sort_time },
-    { "atime",     (sortfn *) sort_atime },
-    { "ctime",     (sortfn *) sort_ctime },
-    { "size",      (sortfn *) sort_size },
-    { "inode",     (sortfn *) sort_inode },
-    { "unsorted",  (sortfn *) unsorted },
-    { 0, 0 }
-};
-
-static const struct {
-    const char *key;
     int  list_type;
 } list_types [] = {
     { "full",  list_full  },
@@ -265,11 +250,7 @@ panel_save_setup (struct WPanel *panel, const char *section)
     mc_config_set_int(mc_panels_config, section, "exec_first", panel->exec_first);
 
 
-    for (i = 0; sort_names [i].key; i++)
-	if (sort_names [i].sort_type == (sortfn *) panel->sort_type){
-	    mc_config_set_string(mc_panels_config, section, "sort_order", sort_names [i].key);
-	    break;
-	}
+    mc_config_set_string(mc_panels_config, section, "sort_order", panel->current_sort_field->id);
 
     for (i = 0; list_types [i].key; i++)
 	if (list_types [i].list_type == panel->list_type){
@@ -417,14 +398,9 @@ panel_load_setup (WPanel *panel, const char *section)
 
     /* Load sort order */
     buffer = mc_config_get_string(mc_panels_config, section, "sort_order", "name");
-
-    panel->sort_type = (sortfn *) sort_name;
-    for (i = 0; sort_names [i].key; i++)
-	if ( g_strcasecmp (sort_names [i].key, buffer) == 0){
-	    panel->sort_type = sort_names [i].sort_type;
-	    break;
-	}
+    panel->current_sort_field = panel_get_format_by_id(buffer);
     g_free(buffer);
+
     /* Load the listing mode */
     buffer = mc_config_get_string(mc_panels_config, section, "list_mode", "full");
     panel->list_type = list_full;
