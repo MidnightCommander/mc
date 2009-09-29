@@ -82,7 +82,7 @@ Set alternative mode drawing of frameworks.
 If the section [Lines] is not filled, the symbol for the pseudographics
 frame is a space, otherwise the frame characters are taken from follow params.
 
-.B You can redefine follow variables:
+.B You can redefine the following variables:
 .TP
 .B lefttop
 left\-top corner
@@ -342,7 +342,7 @@ in section
 .BR ~/.mc/mc.keymap
 .br
 5) File
-.BR /etc/mc/mc.keymap
+.BR @prefix@/etc/mc/mc.keymap
 .br
 6) File
 .BR @prefix@/share/mc/mc.keymap
@@ -356,7 +356,7 @@ or without it). Search of keymap\-file will occur in (to the first one found):
 .BR ~/.mc/
 .br
 2)
-.BR /etc/mc/
+.BR @prefix@/etc/mc/
 .br
 3)
 .BR @prefix@/share/mc/
@@ -515,16 +515,16 @@ directory hotlist
 and change to the selected directory.
 .TP
 .B + \ (plus)
-this is used to select (tag) a group of files.The Midnight Commander
+this is used to select (tag) a group of files.  The Midnight Commander
 will prompt for a selection options. When
 .I Files only
-checkbox is on, than files only will be selected. If
+checkbox is on, only files will be selected.  If
 .I Files only
 is off, as files as directories will be selected.
 When
 .I Shell Patterns
 checkbox is on, the regular expression is much like the filename globbing
-in the shell (* standing for zero or more characters and ?  standing
+in the shell (* standing for zero or more characters and ? standing
 for one character). If
 .I Shell Patterns
 is off, then the tagging of files is done with normal regular
@@ -1137,7 +1137,7 @@ command if you have full command line and want to cd somewhere.
 This is used to select (tag) a group of files. The Midnight Commander
 will prompt for a selection options. When
 .I Files only
-checkbox is on, than files only will be selected. If
+checkbox is on, only files will be selected.  If
 .I Files only
 is off, as files as directories will be selected.
 When
@@ -1914,7 +1914,7 @@ which apply to the user running Midnight Commander are highlighted with
 the color defined by the
 .I selected
 keyword.  If the file type highlighting is enabled, file names are colored
-according to rules described in /etc/mc/filehighlight.ini file. See
+according to rules described in @prefix@/etc/mc/filehighlight.ini file.  See
 .\"LINK2"
 Filenames Highlight
 .\"Filenames Highlight"
@@ -2521,7 +2521,7 @@ selected/unselected.
 .PP
 When
 .I Files only
-checkbox is on, than files only will be selected. If
+checkbox is on, only files will be selected.  If
 .I Files only
 is off, as files as directories will be selected.
 When
@@ -3251,25 +3251,23 @@ A skin\-file is searched on the following algorithm (to the first one found):
 .IP
 .br
 1) command line option
-.BR \-S
-.BR \<skin\>
+.B \-S \<skin\>
 or
-.BR \-\-skin=\<skin\>
+.B \-\-skin=\<skin\>
 .br
 2) Environment variable
-.BR MC_SKIN
+.B MC_SKIN
 .br
 3) In config file parameter
-.BR skin
+.B skin
 in section
-.BR \[Midhight
-.BR Commander\]
+.B \[Midnight Commander\]
 .br
 4) File
-.BR /etc/mc/skins/default.ini
+.B @prefix@/etc/mc/skins/default.ini
 .br
 5) File
-.BR @prefix@/share/mc/skins/default.ini
+.B @prefix@/share/mc/skins/default.ini
 
 .PP
 Command line option, environment variable and parameter in config file may
@@ -3277,13 +3275,13 @@ contain the absolute path to the skin\-file (with the extension \.ini
 or without it). Search of skin\-file will occur in (to the first one found):
 .IP
 1)
-.BR ~/.mc/skins/
+.B ~/.mc/skins/
 .br
 2)
-.BR /etc/mc/skins/
+.B @prefix@/etc/mc/skins/
 .br
 3)
-.BR @prefix@/share/mc/skins/
+.B @prefix@/share/mc/skins/
 .br
 
 .PP
@@ -3310,14 +3308,14 @@ Compability
 .SH "  Description of section and parameters"
 
 Section
-.BR [skin]
+.B [skin]
 contain metainfo for skin\-file. Paramter
 .I description
 contain short text about skin.
 
 .PP
 Section
-.BR [filehighlight]
+.B [filehighlight]
 contain descriptions of color pairs for filenames highlighting.
 Name of parameters must be equal to names of sections into
 filehighlight.ini file.
@@ -3329,7 +3327,7 @@ for getting more info.
 
 .PP
 Section
-.BR [core]
+.B [core]
 describes the elements that are used everywhere.
 .TP
 .I _default_
@@ -3356,7 +3354,7 @@ reverse color
 
 .PP
 Section
-.BR [dialog]
+.B [dialog]
 describes the elements that are placed on dialog windows (except error dialogs).
 .TP
 .I _default_
@@ -3373,7 +3371,7 @@ Color of hotkeys in focused element
 
 .PP
 Section
-.BR [error]
+.B [error]
 describes the elements that are placed on error dialog windows
 .TP
 .I _default_
@@ -3387,7 +3385,7 @@ Color of hotkeys in focused element
 
 .PP
 Section
-.BR [menu]
+.B [menu]
 describes the elements that are placed on menu. This section describes
 system menu (called by F9) and user-defined menus (called by F2 in panels
 and by F11 in editor).
@@ -3409,7 +3407,7 @@ Color of menu hotkeys in focused menu item
 
 .PP
 Section
-.BR [help]
+.B [help]
 describes the elements that are placed on help window.
 .TP
 .I _default_
@@ -3417,12 +3415,12 @@ Default color for this section. Used [core]._default_ if not specified
 .TP
 .I helpitalic
 Color pair for element with
-.BR italic
+.B italic
 attribute
 .TP
 .I helpbold
 Color pair for element with
-.BR bold
+.B bold
 attribute
 .TP
 .I helplink
@@ -3433,15 +3431,15 @@ Color of active link (on focus)
 
 .PP
 Section
-.BR [editor]
-describes the colors of elements plased in editor.
+.B [editor]
+describes the colors of elements placed in editor.
 .TP
 .I _default_
 Default color for this section. Used [core]._default_ if not specified
 .TP
 .I editbold
 Color pair for element with
-.BR bold
+.B bold
 attribute
 .TP
 .I editmarked
@@ -3455,22 +3453,22 @@ Color for line state area
 
 .PP
 Section
-.BR [viewer]
-describes the colors of elements plased in viewer.
+.B [viewer]
+describes the colors of elements placed in viewer.
 .TP
 .I viewunderline
 Color pair for element with
-.BR underline
+.B underline
 attribute
 
 .\"NODE "  Skins colors"
 .SH "  Color pair definitions"
 Any parameter in skin\-file contain definition of color pair.
 .PP
-Color pairs described as two color separated by ';'. First color
+Color pairs described as two colors separated by ';'. First color
 sets the foreground color, second color sets background color.
 One of the colors may be omitted, in this case color will be
-taken from  default color pair (global color pair  or
+taken from default color pair (global color pair  or
 from default color pair of this section).
 .PP
 Example:
@@ -3479,9 +3477,9 @@ Example:
 [core]
     # green on black
     _default_=green;black
-    # green(default)  on blue
+    # green (default)  on blue
     selected=;blue
-    # yellow on black(default)
+    # yellow on black (default)
     marked=yellow;
 .fi
 
@@ -3495,8 +3493,8 @@ section.
 .\"NODE "  Skins lines"
 .SH "  Draw lines"
 Lines sets in section
-.BR [Lines]
-into skin\-file. By default used single lines, but you may redefine
+.B [Lines]
+into skin\-file. By default single lines are used, but you may redefine
 to usage of any utf\-8 symbols (like to lines, for example).
 .PP
 .I WARNING!!!
@@ -3572,7 +3570,7 @@ Skins
 .\"Skins"
 section.
 .PP
-Rules of filenames highlight placed in /etc/mc/filehighlight.ini file
+Rules of filenames highlight placed in @prefix@/etc/mc/filehighlight.ini file
 (~/.mc/filehighlight.ini).
 Name of section in this file must be equal to parameters names into
 [filehighlight] section (in current skin\-file)
@@ -3592,7 +3590,7 @@ list of extensions of files. Separated by ';' sign.
 .nf
 \- FILE (all files)
   \- FILE_EXE
-\- DIR (all directoryes)
+\- DIR (all directories)
   \- LINK_DIR
 \- LINK (all links except stale link)
   \- HARDLINK
@@ -3759,8 +3757,8 @@ For example:
 .fi
 
 .PP
-This means that ctrl+alt+left send \\e[[1;6D esc sequence
-and mc interprets "\\e[[1;6D" as C\-A\-Left.
+This means that ctrl+alt+left sends a \\e[[1;6D escape sequence
+and therefore Midnight Commander interprets "\\e[[1;6D" as Ctrl\-Alt\-Left.
 
 .PP
 The
