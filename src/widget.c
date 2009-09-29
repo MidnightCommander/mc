@@ -1628,52 +1628,6 @@ hist_next (WInput *in)
     in->need_push = 0;
 }
 
-static const struct {
-    int key_code;
-    void (*fn)(WInput *in);
-} input_map [] = {
-    /* Motion */
-    { XCTRL('a'),         beginning_of_line },
-    { KEY_HOME,	          beginning_of_line },
-    { KEY_A1,	          beginning_of_line },
-    { ALT ('<'),          beginning_of_line },
-    { XCTRL('e'),         end_of_line },
-    { KEY_END,            end_of_line },
-    { KEY_C1,             end_of_line },
-    { ALT ('>'),          end_of_line },
-    { KEY_LEFT,           key_left },
-    { KEY_LEFT | KEY_M_CTRL, key_ctrl_left },
-    { XCTRL('b'),         backward_char },
-    { ALT('b'),           backward_word },
-    { KEY_RIGHT,          key_right },
-    { KEY_RIGHT | KEY_M_CTRL, key_ctrl_right },
-    { XCTRL('f'),         forward_char },
-    { ALT('f'),           forward_word },
-
-    /* Editing */
-    { KEY_BACKSPACE,      backward_delete },
-    { KEY_DC,             delete_char },
-    { ALT('d'),           kill_word },
-    { ALT(KEY_BACKSPACE), back_kill_word },
-
-    /* Region manipulation */
-    { 0,              	  set_mark },
-    { XCTRL('w'),     	  kill_region },
-    { ALT('w'),       	  kill_save },
-    { XCTRL('y'),     	  yank },
-    { XCTRL('k'),     	  kill_line },
-
-    /* History */
-    { ALT('p'),       	  hist_prev },
-    { ALT('n'),       	  hist_next },
-    { ALT('h'),       	  do_show_hist },
-
-    /* Completion */
-    { ALT('\t'),	  complete },
-
-    { 0,            0 }
-};
-
 static void
 port_region_marked_for_delete (WInput *in)
 {
@@ -1759,7 +1713,7 @@ input_execute_cmd (WInput *in, int command)
         complete (in);
         break;
     default:
-	res = MSG_NOT_HANDLED;
+        res = MSG_NOT_HANDLED;
     }
 
     return res;
