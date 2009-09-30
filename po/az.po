@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-30 11:15+0300\n"
+"POT-Creation-Date: 2009-10-01 02:39+0300\n"
 "PO-Revision-Date: 2001-09-26 16:43GMT +0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
@@ -2576,7 +2576,7 @@ msgstr "Fayl suf&fikslərini dəyişdir"
 msgid "Edit &menu file"
 msgstr "&Menyunu dəyişdir"
 
-msgid "Edit &highlighting group file"
+msgid "Edit hi&ghlighting group file"
 msgstr ""
 
 msgid "&Configuration..."
@@ -3153,6 +3153,22 @@ msgstr "düymə lövhəsi üstündəki sil (delete) düyməsi"
 
 msgid "Enter on keypad"
 msgstr "düymə lövhəsi üstündəki Enter düyməsi"
+
+#, fuzzy
+msgid "Function key 21"
+msgstr "Funksiya Düyməsi 1"
+
+#, fuzzy
+msgid "Function key 22"
+msgstr "Funksiya Düyməsi 2"
+
+#, fuzzy
+msgid "Function key 23"
+msgstr "Funksiya Düyməsi 2"
+
+#, fuzzy
+msgid "Function key 24"
+msgstr "Funksiya Düyməsi 2"
 
 msgid "Plus"
 msgstr ""

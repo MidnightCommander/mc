@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-30 11:15+0300\n"
+"POT-Creation-Date: 2009-10-01 02:39+0300\n"
 "PO-Revision-Date: 2008-06-05 17:36+0100\n"
 "Last-Translator: Anna Talianova <anickat1@gmail.com>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
@@ -2582,7 +2582,7 @@ msgstr "upravit akc&E k příponám"
 msgid "Edit &menu file"
 msgstr "upravit uživatelské &Menu"
 
-msgid "Edit &highlighting group file"
+msgid "Edit hi&ghlighting group file"
 msgstr ""
 
 msgid "&Configuration..."
@@ -3166,6 +3166,22 @@ msgstr "Delete na numerické klávesnici"
 
 msgid "Enter on keypad"
 msgstr "Enter na numerické klávesnici"
+
+#, fuzzy
+msgid "Function key 21"
+msgstr "Funkční klávesa 1"
+
+#, fuzzy
+msgid "Function key 22"
+msgstr "Funkční klávesa 2"
+
+#, fuzzy
+msgid "Function key 23"
+msgstr "Funkční klávesa 2"
+
+#, fuzzy
+msgid "Function key 24"
+msgstr "Funkční klávesa 2"
 
 msgid "Plus"
 msgstr ""

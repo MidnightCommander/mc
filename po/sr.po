@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-30 11:15+0300\n"
+"POT-Creation-Date: 2009-10-01 02:39+0300\n"
 "PO-Revision-Date: 2003-09-20 18:50+0200\n"
 "Last-Translator: Strahinya Radich (Страхиња Радић) <mr99164@alas.matf.bg.ac."
 "yu>\n"
@@ -2568,7 +2568,7 @@ msgstr "Уреди датотеку &врста"
 msgid "Edit &menu file"
 msgstr "Уреди датотеку &менија"
 
-msgid "Edit &highlighting group file"
+msgid "Edit hi&ghlighting group file"
 msgstr ""
 
 msgid "&Configuration..."
@@ -3149,6 +3149,22 @@ msgstr "Сиви `Delete'"
 
 msgid "Enter on keypad"
 msgstr "Сиви `Enter'"
+
+#, fuzzy
+msgid "Function key 21"
+msgstr "Функц. тастер 1"
+
+#, fuzzy
+msgid "Function key 22"
+msgstr "Функц. тастер 2"
+
+#, fuzzy
+msgid "Function key 23"
+msgstr "Функц. тастер 2"
+
+#, fuzzy
+msgid "Function key 24"
+msgstr "Функц. тастер 2"
 
 msgid "Plus"
 msgstr ""

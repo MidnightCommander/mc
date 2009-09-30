@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-30 11:15+0300\n"
+"POT-Creation-Date: 2009-10-01 02:39+0300\n"
 "PO-Revision-Date: 2000-10-26 11:00 CST\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil <ubuntu-l10n-tam@lists.ubuntu.com>\n"
@@ -2421,7 +2421,7 @@ msgstr ""
 msgid "Edit &menu file"
 msgstr ""
 
-msgid "Edit &highlighting group file"
+msgid "Edit hi&ghlighting group file"
 msgstr ""
 
 msgid "&Configuration..."
@@ -2986,6 +2986,18 @@ msgid "Delete on keypad"
 msgstr ""
 
 msgid "Enter on keypad"
+msgstr ""
+
+msgid "Function key 21"
+msgstr ""
+
+msgid "Function key 22"
+msgstr ""
+
+msgid "Function key 23"
+msgstr ""
+
+msgid "Function key 24"
 msgstr ""
 
 msgid "Plus"

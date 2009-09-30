@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-30 11:15+0300\n"
+"POT-Creation-Date: 2009-10-01 02:39+0300\n"
 "PO-Revision-Date: 2009-02-16 19:45+0300\n"
 "Last-Translator: Andrius Štikonas <stikonas@gmail.com>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -2560,7 +2560,7 @@ msgstr "K&eisti plėtinių failą"
 msgid "Edit &menu file"
 msgstr "Keisti &meniu failą"
 
-msgid "Edit &highlighting group file"
+msgid "Edit hi&ghlighting group file"
 msgstr ""
 
 msgid "&Configuration..."
@@ -3140,6 +3140,22 @@ msgstr "Skaitm. „Delete“"
 
 msgid "Enter on keypad"
 msgstr "Skaitm. „Enter“"
+
+#, fuzzy
+msgid "Function key 21"
+msgstr "Funkcinis klav. 1"
+
+#, fuzzy
+msgid "Function key 22"
+msgstr "Funkcinis klav. 2"
+
+#, fuzzy
+msgid "Function key 23"
+msgstr "Funkcinis klav. 2"
+
+#, fuzzy
+msgid "Function key 24"
+msgstr "Funkcinis klav. 2"
 
 msgid "Plus"
 msgstr ""

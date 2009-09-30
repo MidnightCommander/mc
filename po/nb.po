@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-30 11:15+0300\n"
+"POT-Creation-Date: 2009-10-01 02:39+0300\n"
 "PO-Revision-Date: 2002-10-22 14:28+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -2569,7 +2569,7 @@ msgstr "Redigering av utvidelsesfil"
 msgid "Edit &menu file"
 msgstr "Menyfilredigering"
 
-msgid "Edit &highlighting group file"
+msgid "Edit hi&ghlighting group file"
 msgstr ""
 
 msgid "&Configuration..."
@@ -3146,6 +3146,22 @@ msgstr "Slett på numerisk tastatur"
 
 msgid "Enter on keypad"
 msgstr "Linjeskift på numerisk tastatur"
+
+#, fuzzy
+msgid "Function key 21"
+msgstr "Funksjonstast 1"
+
+#, fuzzy
+msgid "Function key 22"
+msgstr "Funksjonstast 2"
+
+#, fuzzy
+msgid "Function key 23"
+msgstr "Funksjonstast 2"
+
+#, fuzzy
+msgid "Function key 24"
+msgstr "Funksjonstast 2"
 
 msgid "Plus"
 msgstr ""

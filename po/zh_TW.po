@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-30 11:15+0300\n"
+"POT-Creation-Date: 2009-10-01 02:39+0300\n"
 "PO-Revision-Date: 2001-07-27 03:02+0800\n"
 "Last-Translator: Jing-Jong Shyue <shyue@sonoma.com.tw>\n"
 "Language-Team: Chinese <zh-l10n@linux.org.tw>\n"
@@ -2575,7 +2575,7 @@ msgstr "編輯擴充檔"
 msgid "Edit &menu file"
 msgstr "編輯選單檔"
 
-msgid "Edit &highlighting group file"
+msgid "Edit hi&ghlighting group file"
 msgstr ""
 
 msgid "&Configuration..."
@@ -3154,6 +3154,22 @@ msgstr "數字區的 Del 鍵"
 
 msgid "Enter on keypad"
 msgstr "數字區的 Enter 鍵"
+
+#, fuzzy
+msgid "Function key 21"
+msgstr "功能鍵 1"
+
+#, fuzzy
+msgid "Function key 22"
+msgstr "功能鍵 2"
+
+#, fuzzy
+msgid "Function key 23"
+msgstr "功能鍵 2"
+
+#, fuzzy
+msgid "Function key 24"
+msgstr "功能鍵 2"
 
 msgid "Plus"
 msgstr ""

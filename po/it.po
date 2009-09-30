@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.6.2\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-30 11:15+0300\n"
+"POT-Creation-Date: 2009-10-01 02:39+0300\n"
 "PO-Revision-Date: 2008-04-07 17:25+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian <debian-l10n-italian@lists.debian.org>\n"
@@ -2570,7 +2570,7 @@ msgstr "Modifica file &estensioni"
 msgid "Edit &menu file"
 msgstr "Modifica file &menu"
 
-msgid "Edit &highlighting group file"
+msgid "Edit hi&ghlighting group file"
 msgstr ""
 
 msgid "&Configuration..."
@@ -3151,6 +3151,22 @@ msgstr "Canc sul tastierino"
 
 msgid "Enter on keypad"
 msgstr "Invio sul tastierino"
+
+#, fuzzy
+msgid "Function key 21"
+msgstr "Tasto funzione  1"
+
+#, fuzzy
+msgid "Function key 22"
+msgstr "Tasto funzione  2"
+
+#, fuzzy
+msgid "Function key 23"
+msgstr "Tasto funzione  2"
+
+#, fuzzy
+msgid "Function key 24"
+msgstr "Tasto funzione  2"
 
 msgid "Plus"
 msgstr ""

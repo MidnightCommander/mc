@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-30 11:15+0300\n"
+"POT-Creation-Date: 2009-10-01 02:39+0300\n"
 "PO-Revision-Date: 2002-04-30 16:46+0200\n"
 "Last-Translator: Christophe Merlet (RedFox) <christophe@merlet.net>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
@@ -2580,7 +2580,7 @@ msgstr "Édition des &Extensions de fichier"
 msgid "Edit &menu file"
 msgstr "Édition du fichier de &Menu"
 
-msgid "Edit &highlighting group file"
+msgid "Edit hi&ghlighting group file"
 msgstr ""
 
 msgid "&Configuration..."
@@ -3162,6 +3162,22 @@ msgstr "« Suppr » sur pavé numérique"
 
 msgid "Enter on keypad"
 msgstr "« Entrée » sur pavé numérique"
+
+#, fuzzy
+msgid "Function key 21"
+msgstr "Fonction :  F1 "
+
+#, fuzzy
+msgid "Function key 22"
+msgstr "Fonction :  F2 "
+
+#, fuzzy
+msgid "Function key 23"
+msgstr "Fonction :  F2 "
+
+#, fuzzy
+msgid "Function key 24"
+msgstr "Fonction :  F2 "
 
 msgid "Plus"
 msgstr ""

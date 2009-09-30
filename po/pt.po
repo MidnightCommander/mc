@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-30 11:15+0300\n"
+"POT-Creation-Date: 2009-10-01 02:39+0300\n"
 "PO-Revision-Date: 2002-04-25 03:55+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <debian-l10n-portuguese@lists.debian.org>\n"
@@ -2577,7 +2577,7 @@ msgstr "Editar &extensão de ficheiro"
 msgid "Edit &menu file"
 msgstr "Editar &menu ficheiro"
 
-msgid "Edit &highlighting group file"
+msgid "Edit hi&ghlighting group file"
 msgstr ""
 
 msgid "&Configuration..."
@@ -3157,6 +3157,22 @@ msgstr "Delete no teclado numérico"
 
 msgid "Enter on keypad"
 msgstr "Enter no teclado numérico"
+
+#, fuzzy
+msgid "Function key 21"
+msgstr "Tecla de função 1"
+
+#, fuzzy
+msgid "Function key 22"
+msgstr "Tecla de função 2"
+
+#, fuzzy
+msgid "Function key 23"
+msgstr "Tecla de função 2"
+
+#, fuzzy
+msgid "Function key 24"
+msgstr "Tecla de função 2"
 
 msgid "Plus"
 msgstr ""

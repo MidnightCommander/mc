@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-30 11:15+0300\n"
+"POT-Creation-Date: 2009-10-01 02:39+0300\n"
 "PO-Revision-Date: 2001-05-25 13:35+0200\n"
 "Last-Translator: mari susperregi <mari@elhuyar.com>\n"
 "Language-Team: Euskara <debian-l10n-basque@lists.debian.org>\n"
@@ -2582,7 +2582,7 @@ msgstr "Editatu &luzapen-fitxategia"
 msgid "Edit &menu file"
 msgstr "Editatu &menu-fitxategia"
 
-msgid "Edit &highlighting group file"
+msgid "Edit hi&ghlighting group file"
 msgstr ""
 
 msgid "&Configuration..."
@@ -3161,6 +3161,22 @@ msgstr "Ezabatu zenbakizko teklatuan"
 
 msgid "Enter on keypad"
 msgstr "Sartu zenbakizko teklatuan"
+
+#, fuzzy
+msgid "Function key 21"
+msgstr "1. funtzio-tekla "
+
+#, fuzzy
+msgid "Function key 22"
+msgstr "2. funtzio-tekla "
+
+#, fuzzy
+msgid "Function key 23"
+msgstr "2. funtzio-tekla "
+
+#, fuzzy
+msgid "Function key 24"
+msgstr "2. funtzio-tekla "
 
 msgid "Plus"
 msgstr ""

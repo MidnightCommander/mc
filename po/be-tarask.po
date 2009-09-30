@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-30 11:15+0300\n"
+"POT-Creation-Date: 2009-10-01 02:39+0300\n"
 "PO-Revision-Date: 2002-08-25 16:15GMT+2\n"
 "Last-Translator: Vital Khilko <dojlid@mova.org>\n"
 "Language-Team: belarussian (tarask) <debian-l10n-belarusian@lists.debian."
@@ -2553,7 +2553,7 @@ msgstr "Файл па&шырэньняў"
 msgid "Edit &menu file"
 msgstr "Файл мэн&ю"
 
-msgid "Edit &highlighting group file"
+msgid "Edit hi&ghlighting group file"
 msgstr ""
 
 msgid "&Configuration..."
@@ -3130,6 +3130,22 @@ msgstr "Delete на keypad'е"
 
 msgid "Enter on keypad"
 msgstr "Enter на keypad'е"
+
+#, fuzzy
+msgid "Function key 21"
+msgstr "Функцыянальная 1 "
+
+#, fuzzy
+msgid "Function key 22"
+msgstr "Функцыянальная 2 "
+
+#, fuzzy
+msgid "Function key 23"
+msgstr "Функцыянальная 2 "
+
+#, fuzzy
+msgid "Function key 24"
+msgstr "Функцыянальная 2 "
 
 msgid "Plus"
 msgstr ""

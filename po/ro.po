@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-30 11:15+0300\n"
+"POT-Creation-Date: 2009-10-01 02:39+0300\n"
 "PO-Revision-Date: 2003-01-31 00:11+0200\n"
 "Last-Translator: Mişu Moldovan <dumol@go.ro>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
@@ -2566,7 +2566,7 @@ msgstr "editare fişier &Extensii"
 msgid "Edit &menu file"
 msgstr "editare fişier &Meniuri"
 
-msgid "Edit &highlighting group file"
+msgid "Edit hi&ghlighting group file"
 msgstr ""
 
 msgid "&Configuration..."
@@ -3145,6 +3145,22 @@ msgstr "Delete pe keypad"
 
 msgid "Enter on keypad"
 msgstr "Enter pe keypad"
+
+#, fuzzy
+msgid "Function key 21"
+msgstr "Tasta funcţ. 1"
+
+#, fuzzy
+msgid "Function key 22"
+msgstr "Tasta funcţ. 2"
+
+#, fuzzy
+msgid "Function key 23"
+msgstr "Tasta funcţ. 2"
+
+#, fuzzy
+msgid "Function key 24"
+msgstr "Tasta funcţ. 2"
 
 msgid "Plus"
 msgstr ""

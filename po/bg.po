@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.55\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-30 11:15+0300\n"
+"POT-Creation-Date: 2009-10-01 02:39+0300\n"
 "PO-Revision-Date: 2002-06-24 02:15+0300\n"
 "Last-Translator: Todor Buyukliev <adrez@mail.bg>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -2572,7 +2572,7 @@ msgstr "Редактирай файл с разширения"
 msgid "Edit &menu file"
 msgstr "Редактирай меню-файл"
 
-msgid "Edit &highlighting group file"
+msgid "Edit hi&ghlighting group file"
 msgstr ""
 
 msgid "&Configuration..."
@@ -3149,6 +3149,22 @@ msgstr "Delete от доп. клв."
 
 msgid "Enter on keypad"
 msgstr "Enter от доп. клв."
+
+#, fuzzy
+msgid "Function key 21"
+msgstr "F1"
+
+#, fuzzy
+msgid "Function key 22"
+msgstr "F2"
+
+#, fuzzy
+msgid "Function key 23"
+msgstr "F2"
+
+#, fuzzy
+msgid "Function key 24"
+msgstr "F2"
 
 msgid "Plus"
 msgstr ""

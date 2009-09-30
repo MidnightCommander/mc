@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc-4.5.36\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-30 11:15+0300\n"
+"POT-Creation-Date: 2009-10-01 02:39+0300\n"
 "PO-Revision-Date: 2000-10-27 15:37-03:00\n"
 "Last-Translator: E. A. Tacão <tacao@conectiva.com.br>\n"
 "Language-Team: pt_BR <ldp-br@bazar.conectiva.com.br>\n"
@@ -2599,7 +2599,7 @@ msgstr "Editar &extensões de arquivo"
 msgid "Edit &menu file"
 msgstr "Editar &Menu de arquivo"
 
-msgid "Edit &highlighting group file"
+msgid "Edit hi&ghlighting group file"
 msgstr ""
 
 msgid "&Configuration..."
@@ -3191,6 +3191,22 @@ msgstr "Apagar no teclado numérico"
 
 msgid "Enter on keypad"
 msgstr "Enter no teclado numérico"
+
+#, fuzzy
+msgid "Function key 21"
+msgstr "Tecla de função 1"
+
+#, fuzzy
+msgid "Function key 22"
+msgstr "Tecla de função 2"
+
+#, fuzzy
+msgid "Function key 23"
+msgstr "Tecla de função 2"
+
+#, fuzzy
+msgid "Function key 24"
+msgstr "Tecla de função 2"
 
 msgid "Plus"
 msgstr ""

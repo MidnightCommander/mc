@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-30 11:15+0300\n"
+"POT-Creation-Date: 2009-10-01 02:39+0300\n"
 "PO-Revision-Date: 2001-09-29 17:41+0200\n"
 "Last-Translator: Softcatalà <tradgnome@softcatala.org>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
@@ -2584,7 +2584,7 @@ msgstr "edita el fitxer d'&Extensions"
 msgid "Edit &menu file"
 msgstr "edita el fitxer de &Menús"
 
-msgid "Edit &highlighting group file"
+msgid "Edit hi&ghlighting group file"
 msgstr ""
 
 msgid "&Configuration..."
@@ -3166,6 +3166,22 @@ msgstr "Suprimir teclat numèric"
 
 msgid "Enter on keypad"
 msgstr "Tecla de retorn teclat numèric"
+
+#, fuzzy
+msgid "Function key 21"
+msgstr "Tecla de funció 1"
+
+#, fuzzy
+msgid "Function key 22"
+msgstr "Tecla de funció 2"
+
+#, fuzzy
+msgid "Function key 23"
+msgstr "Tecla de funció 2"
+
+#, fuzzy
+msgid "Function key 24"
+msgstr "Tecla de funció 2"
 
 msgid "Plus"
 msgstr ""

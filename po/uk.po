@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: uk\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-30 11:15+0300\n"
+"POT-Creation-Date: 2009-10-01 02:39+0300\n"
 "PO-Revision-Date: 2009-08-25 16:27+0300\n"
 "Last-Translator: Oleksandr Natalenko <pfactum@gmail.com>\n"
 "Language-Team: Ukrainian <kde-i18n-doc@kde.org>\n"
@@ -2541,7 +2541,7 @@ msgstr "Редагувати файл роз&ширень"
 msgid "Edit &menu file"
 msgstr "Редагувати файл &меню"
 
-msgid "Edit &highlighting group file"
+msgid "Edit hi&ghlighting group file"
 msgstr ""
 
 msgid "&Configuration..."
@@ -3130,6 +3130,22 @@ msgstr "Додатковий Del"
 
 msgid "Enter on keypad"
 msgstr "Додатковий Enter"
+
+#, fuzzy
+msgid "Function key 21"
+msgstr "Функціональна 1 "
+
+#, fuzzy
+msgid "Function key 22"
+msgstr "Функціональна 2 "
+
+#, fuzzy
+msgid "Function key 23"
+msgstr "Функціональна 2 "
+
+#, fuzzy
+msgid "Function key 24"
+msgstr "Функціональна 2 "
 
 msgid "Plus"
 msgstr ""

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-30 11:15+0300\n"
+"POT-Creation-Date: 2009-10-01 02:39+0300\n"
 "PO-Revision-Date: 2003-01-22 18:10+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <debian-l10n-swedish@lists.debian.org>\n"
@@ -2607,7 +2607,7 @@ msgstr "Redigera &utökningsfil"
 msgid "Edit &menu file"
 msgstr "Redigera &menyfilen"
 
-msgid "Edit &highlighting group file"
+msgid "Edit hi&ghlighting group file"
 msgstr ""
 
 msgid "&Configuration..."
@@ -3188,6 +3188,22 @@ msgstr "Delete, numeriska"
 
 msgid "Enter on keypad"
 msgstr "Enter, numeriska"
+
+#, fuzzy
+msgid "Function key 21"
+msgstr "Funktionstangent 1"
+
+#, fuzzy
+msgid "Function key 22"
+msgstr "Funktionstangent 2"
+
+#, fuzzy
+msgid "Function key 23"
+msgstr "Funktionstangent 2"
+
+#, fuzzy
+msgid "Function key 24"
+msgstr "Funktionstangent 2"
 
 msgid "Plus"
 msgstr ""

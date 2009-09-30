@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.41\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-30 11:15+0300\n"
+"POT-Creation-Date: 2009-10-01 02:39+0300\n"
 "PO-Revision-Date: 2001-10-20 21:37+02:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -2583,7 +2583,7 @@ msgstr "Redigér fil&Endelser"
 msgid "Edit &menu file"
 msgstr "&Menufilsredigering"
 
-msgid "Edit &highlighting group file"
+msgid "Edit hi&ghlighting group file"
 msgstr ""
 
 msgid "&Configuration..."
@@ -3160,6 +3160,22 @@ msgstr "Slet på numerisk tastatur"
 
 msgid "Enter on keypad"
 msgstr "Enter på numerisk tastatur"
+
+#, fuzzy
+msgid "Function key 21"
+msgstr "Funktionstast 1"
+
+#, fuzzy
+msgid "Function key 22"
+msgstr "Funktionstast 2"
+
+#, fuzzy
+msgid "Function key 23"
+msgstr "Funktionstast 2"
+
+#, fuzzy
+msgid "Function key 24"
+msgstr "Funktionstast 2"
 
 msgid "Plus"
 msgstr ""

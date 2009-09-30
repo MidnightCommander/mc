@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: be\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-30 11:15+0300\n"
+"POT-Creation-Date: 2009-10-01 02:39+0300\n"
 "PO-Revision-Date: 2008-12-21 23:28+0200\n"
 "Last-Translator: Pavel Piatruk <piatruk.p@gmail.com>\n"
 "Language-Team: belarussian <debian-l10n-belarusian@lists.debian.org>\n"
@@ -2566,7 +2566,7 @@ msgid "Edit &menu file"
 msgstr "Файл мен&ю"
 
 #, fuzzy
-msgid "Edit &highlighting group file"
+msgid "Edit hi&ghlighting group file"
 msgstr " Падсветка файлаў "
 
 msgid "&Configuration..."
@@ -3147,6 +3147,22 @@ msgstr "Delete на keypad'е"
 
 msgid "Enter on keypad"
 msgstr "Enter на keypad'е"
+
+#, fuzzy
+msgid "Function key 21"
+msgstr "Функцыянальная 1 "
+
+#, fuzzy
+msgid "Function key 22"
+msgstr "Функцыянальная 2 "
+
+#, fuzzy
+msgid "Function key 23"
+msgstr "Функцыянальная 2 "
+
+#, fuzzy
+msgid "Function key 24"
+msgstr "Функцыянальная 2 "
 
 msgid "Plus"
 msgstr ""
