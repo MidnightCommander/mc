@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.7.0pre3\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-29 12:37+0300\n"
+"POT-Creation-Date: 2009-09-30 11:15+0300\n"
 "PO-Revision-Date: 2009-09-27 11:00+0200\n"
 "Last-Translator: David Martín <dmartina@excite.com\n"
 "Language-Team: Spanish <debian-l10n-spanish@lists.debian.org>\n"
@@ -872,6 +872,9 @@ msgstr "Usar caracteres simples para recuadros"
 
 msgid "Resets soft keys on HP terminals"
 msgstr "Restablecer teclas en terminales HP"
+
+msgid "Load definitions of key bindings from specified file"
+msgstr "Cargar asociaciones de teclas desde el archivo indicado"
 
 msgid "Requests to run in black and white"
 msgstr "Solicitar ejecución en blanco y negro"
@@ -2830,6 +2833,22 @@ msgstr "Codificación de caracteres"
 msgid "-  < No translation >"
 msgstr "-  < Sin traducción >"
 
+#, c-format
+msgid ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+"Imposible cargar skin '%s'.\n"
+"Se ha cargado skin por defecto."
+
+#, c-format
+msgid ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+"Imposible procesar skin '%s'.\n"
+"Se ha cargado skin por defecto."
+
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -3046,6 +3065,9 @@ msgstr "+ en el pad"
 msgid "- on keypad"
 msgstr "- en el pad"
 
+msgid "Slash on keypad"
+msgstr "Diagonal, pad"
+
 msgid "* on keypad"
 msgstr "* en el pad"
 
@@ -3082,17 +3104,86 @@ msgstr "Eliminar, pad"
 msgid "Enter on keypad"
 msgstr "Intro, pad"
 
-msgid "Tab on keypad"
-msgstr "Tab, pad"
+msgid "Plus"
+msgstr "Más"
 
-msgid "Space on keypad"
-msgstr "Espacio, pad"
+msgid "Minus"
+msgstr "Menos"
 
-msgid "Slash on keypad"
-msgstr "Diagonal, pad"
+msgid "Asterisk"
+msgstr "Asterisco"
 
-msgid "NumLock on keypad"
-msgstr "Bloquea números, pad"
+msgid "Dot"
+msgstr "Punto"
+
+msgid "Less than"
+msgstr "Menor que"
+
+msgid "Great than"
+msgstr "Mayor que"
+
+msgid "Equal"
+msgstr "Igual"
+
+msgid "Comma"
+msgstr "Coma"
+
+msgid "Apostrophe"
+msgstr "Apóstrofo"
+
+msgid "Colon"
+msgstr "Dos puntos"
+
+msgid "Exclamation mark"
+msgstr "Exclamación"
+
+msgid "Question mark"
+msgstr "Interrrogación"
+
+msgid "Ampersand"
+msgstr "Ampersand"
+
+msgid "Dollar sign"
+msgstr "Dólar"
+
+msgid "Quotation mark"
+msgstr "Comillas"
+
+msgid "Caret"
+msgstr "Ángulo"
+
+msgid "Tilda"
+msgstr "Tilde"
+
+msgid "Prime"
+msgstr "Prima"
+
+msgid "Underline"
+msgstr "Subrayado"
+
+msgid "Understrike"
+msgstr "Guión bajo"
+
+msgid "Pipe"
+msgstr "Tubería"
+
+msgid "Enter"
+msgstr "Intro"
+
+msgid "Tab key"
+msgstr "Tab"
+
+msgid "Space key"
+msgstr "Espacio"
+
+msgid "Slash key"
+msgstr "Barra diagonal"
+
+msgid "Backslash key"
+msgstr "Contrabarra"
+
+msgid "Number sign #"
+msgstr "Sostenido"
 
 msgid "Ctrl"
 msgstr "Ctrl"
@@ -3773,6 +3864,9 @@ msgstr "Error interno:"
 
 msgid "Changes to file lost"
 msgstr "Los cambios del archivo se han perdido"
+
+#~ msgid "NumLock on keypad"
+#~ msgstr "Bloquea números, pad"
 
 #~ msgid " Emacs key: "
 #~ msgstr " Tecla Emacs: "
