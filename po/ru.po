@@ -2862,7 +2862,7 @@ msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
 msgstr ""
-"Невозможно отпарсить скин '%s'.\n"
+"Невозможно произвести синтаксический разбор файла '%s'.\n"
 "Используется скин по умолчанию"
 
 msgid ""
@@ -3145,7 +3145,7 @@ msgid "Comma"
 msgstr "Запятая"
 
 msgid "Apostrophe"
-msgstr "апостроф"
+msgstr "Апостроф"
 
 msgid "Colon"
 msgstr "Двоеточие"
@@ -3172,7 +3172,7 @@ msgid "Tilda"
 msgstr "Тильда"
 
 msgid "Prime"
-msgstr "обратный апостроф"
+msgstr "Обратный апостроф"
 
 msgid "Underline"
 msgstr "Подчёркивание"
