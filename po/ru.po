@@ -954,7 +954,7 @@ msgid "+number"
 msgstr "+число"
 
 msgid "[this_dir] [other_panel_dir]"
-msgstr "[этот_каталог] [каталог_другой_панели]\n"
+msgstr "[этот_каталог] [каталог_другой_панели]"
 
 msgid "Set initial line number for the internal editor"
 msgstr "Задать начальную строку для встроенного редактора"
