@@ -145,6 +145,11 @@ key_code_name_t key_name_conv_tab[] = {
     {KEY_IC, "kpinsert", N_("Insert on keypad")},
     {KEY_DC, "kpdelete", N_("Delete on keypad")},
     {(int) '\n', "kpenter", N_("Enter on keypad")},
+    {KEY_F (21), "f21", N_("Function key 21")},
+    {KEY_F (22), "f22", N_("Function key 22")},
+    {KEY_F (23), "f23", N_("Function key 23")},
+    {KEY_F (24), "f24", N_("Function key 24")},
+
 
 /* Alternative label */
     {KEY_BACKSPACE, "backspace", N_("Backspace key")},

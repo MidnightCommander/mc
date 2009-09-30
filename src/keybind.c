@@ -188,6 +188,11 @@ static const name_key_map_t command_names[] = {
     { "EditBeginorEndMacro",               CK_Begin_End_Macro },
     { "EditExtmode",                       CK_Ext_Mode },
     { "EditToggleLineState",               CK_Toggle_Line_State },
+    { "EditToggleTabTWS",                  CK_Toggle_Tab_TWS },
+    { "EditFindDefinition",                CK_Find_Definition },
+    { "EditLoadPrevFile",                  CK_Load_Prev_File },
+    { "EditLoadNextFile",                  CK_Load_Next_File },
+
 #if 0
     { "EditFocusNext",                     CK_Focus_Next },
     { "EditFocusPrev",                     CK_Focus_Prev },

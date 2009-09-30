@@ -1,8 +1,8 @@
 [editor]
 
-EditXStore = ctrl-g
-EditXPaste = ctrl-v
-EditXCut = ctrl-x
+EditXStore =
+EditXPaste =
+EditXCut =
 
 EditDeleteLine = ctrl-y
 EditDeleteToLineEnd = ctrl-k
@@ -22,15 +22,15 @@ EditWordRight = ctrl-right
 EditHome = home
 EditEnd = end
 EditTab = tab
-EditUndo = alt-backspace
-EditBeginningOfText = ctrl-shift-pgup
-EditEndOfText = ctrl-shift-pgdn
+EditUndo = ctrl-u
+EditBeginningOfText = ctrl-pgup
+EditEndOfText = ctrl-pgdn
 EditScrollUp = ctrl-up
 EditScrollDown = ctrl-down
 EditReturn = shift-enter
-EditBeginPage =
-EditEndPage =
-EditDeleteWordLeft = alt-f
+EditBeginPage = ctrl-home
+EditEndPage = ctrl-end
+EditDeleteWordLeft = alt-backspace
 EditDeleteWordRight = alt-d
 EditParagraphUp =
 EditParagraphDown =
@@ -144,7 +144,10 @@ EditBeginorEndMacro = ctrl-r
 EditBeginRecordMacro =
 EditEndRecordMacro =
 EditToggleLineState = alt-n
-
+EditToggleTabTWS = alt-underline
+EditFindDefinition = alt-enter
+EditLoadPrevFile = alt-minus
+EditLoadNextFile = alt-equal
 
 [viewer:hex]
 HexViewToggleNavigationMode = tab

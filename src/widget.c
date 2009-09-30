@@ -1757,13 +1757,12 @@ handle_char (WInput *in, int key)
 
     for (i = 0; input_map[i].key; i++) {
         if (key == input_map[i].key) {
-            if (input_map[i].command != CK_InputComplete) {
+            if (input_map[i].command != CK_InputComplete)
                 free_completions (in);
-                input_execute_cmd (in, input_map[i].command);
-                update_input (in, 1);
-                v = MSG_HANDLED;
-                break;
-            }
+            input_execute_cmd (in, input_map[i].command);
+            update_input (in, 1);
+            v = MSG_HANDLED;
+            break;
         }
     }
     if (input_map[i].command == 0) {
