@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.41\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-29 12:37+0300\n"
+"POT-Creation-Date: 2009-09-30 11:15+0300\n"
 "PO-Revision-Date: 2001-10-20 21:37+02:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -923,6 +923,10 @@ msgstr "Brug tændstiktegn til at tegne"
 
 msgid "Resets soft keys on HP terminals"
 msgstr "Genstarter soft keys på HP terminaler"
+
+#, fuzzy
+msgid "Load definitions of key bindings from specified file"
+msgstr "Gem ftp meddelelser i angivet fil"
 
 msgid "Requests to run in black and white"
 msgstr "Kør i sort-hvid"
@@ -2892,6 +2896,18 @@ msgstr " Vælg kodning for inddata "
 msgid "-  < No translation >"
 msgstr "- < Ingen oversættelse >"
 
+#, c-format
+msgid ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -3106,6 +3122,9 @@ msgstr "+ på numerisk tastatur"
 msgid "- on keypad"
 msgstr "- på numerisk tastatur"
 
+msgid "Slash on keypad"
+msgstr "Slash på numerisk tastatur"
+
 msgid "* on keypad"
 msgstr "* på numerisk tastatur"
 
@@ -3142,19 +3161,98 @@ msgstr "Slet på numerisk tastatur"
 msgid "Enter on keypad"
 msgstr "Enter på numerisk tastatur"
 
+msgid "Plus"
+msgstr ""
+
 #, fuzzy
-msgid "Tab on keypad"
+msgid "Minus"
+msgstr "Menu"
+
+msgid "Asterisk"
+msgstr ""
+
+msgid "Dot"
+msgstr ""
+
+msgid "Less than"
+msgstr ""
+
+msgid "Great than"
+msgstr ""
+
+msgid "Equal"
+msgstr ""
+
+#, fuzzy
+msgid "Comma"
+msgstr "Kommando"
+
+msgid "Apostrophe"
+msgstr ""
+
+#, fuzzy
+msgid "Colon"
+msgstr "Tæl"
+
+msgid "Exclamation mark"
+msgstr ""
+
+msgid "Question mark"
+msgstr ""
+
+#, fuzzy
+msgid "Ampersand"
+msgstr "Tilføj"
+
+msgid "Dollar sign"
+msgstr ""
+
+msgid "Quotation mark"
+msgstr ""
+
+#, fuzzy
+msgid "Caret"
+msgstr "Mål"
+
+msgid "Tilda"
+msgstr ""
+
+#, fuzzy
+msgid "Prime"
+msgstr "Forr."
+
+#, fuzzy
+msgid "Underline"
+msgstr " Indtast linje: "
+
+msgid "Understrike"
+msgstr ""
+
+msgid "Pipe"
+msgstr ""
+
+#, fuzzy
+msgid "Enter"
+msgstr "ejer"
+
+#, fuzzy
+msgid "Tab key"
 msgstr "+ på numerisk tastatur"
 
 #, fuzzy
-msgid "Space on keypad"
+msgid "Space key"
 msgstr "Slash på numerisk tastatur"
 
-msgid "Slash on keypad"
+#, fuzzy
+msgid "Slash key"
 msgstr "Slash på numerisk tastatur"
 
-msgid "NumLock on keypad"
-msgstr "NumLock på numerisk tastatur"
+#, fuzzy
+msgid "Backslash key"
+msgstr "Backspace-tast"
+
+msgid "Number sign #"
+msgstr ""
 
 msgid "Ctrl"
 msgstr ""
@@ -3836,6 +3934,9 @@ msgstr " Intern fejl:"
 
 msgid "Changes to file lost"
 msgstr "Ændringer til fil tabt"
+
+#~ msgid "NumLock on keypad"
+#~ msgstr "NumLock på numerisk tastatur"
 
 #~ msgid " Emacs key: "
 #~ msgstr " Emacs-tast: "

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-29 12:37+0300\n"
+"POT-Creation-Date: 2009-09-30 11:15+0300\n"
 "PO-Revision-Date: 2001-09-26 16:43GMT +0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
@@ -917,6 +917,10 @@ msgstr "Use stickchars to draw"
 
 msgid "Resets soft keys on HP terminals"
 msgstr "HP terminallarda proqram düymələrini sıfırlayar"
+
+#, fuzzy
+msgid "Load definitions of key bindings from specified file"
+msgstr "Ftp dialoqlarını bildirilən fayla qeyd edər"
 
 msgid "Requests to run in black and white"
 msgstr "Ağ və qara başlat"
@@ -2885,6 +2889,18 @@ msgstr " Giriş kod səhifəsini seç "
 msgid "-  < No translation >"
 msgstr "-  < Tərcüməsiz >"
 
+#, c-format
+msgid ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -3099,6 +3115,9 @@ msgstr "düymə lövhəsi üstündəki +"
 msgid "- on keypad"
 msgstr "düymə lövhəsi üstündəki -"
 
+msgid "Slash on keypad"
+msgstr "düymə lövhəsi üstündəki Slash düyməsi"
+
 msgid "* on keypad"
 msgstr "düymə lövhəsi üstündəki *"
 
@@ -3135,19 +3154,98 @@ msgstr "düymə lövhəsi üstündəki sil (delete) düyməsi"
 msgid "Enter on keypad"
 msgstr "düymə lövhəsi üstündəki Enter düyməsi"
 
+msgid "Plus"
+msgstr ""
+
 #, fuzzy
-msgid "Tab on keypad"
+msgid "Minus"
+msgstr "Menyu"
+
+msgid "Asterisk"
+msgstr ""
+
+msgid "Dot"
+msgstr ""
+
+msgid "Less than"
+msgstr ""
+
+msgid "Great than"
+msgstr ""
+
+msgid "Equal"
+msgstr ""
+
+#, fuzzy
+msgid "Comma"
+msgstr "Əmr"
+
+msgid "Apostrophe"
+msgstr ""
+
+#, fuzzy
+msgid "Colon"
+msgstr "Rəqəm"
+
+msgid "Exclamation mark"
+msgstr ""
+
+msgid "Question mark"
+msgstr ""
+
+#, fuzzy
+msgid "Ampersand"
+msgstr "A&ppend"
+
+msgid "Dollar sign"
+msgstr ""
+
+msgid "Quotation mark"
+msgstr ""
+
+#, fuzzy
+msgid "Caret"
+msgstr "Hədəf"
+
+msgid "Tilda"
+msgstr ""
+
+#, fuzzy
+msgid "Prime"
+msgstr "Əvvəlki"
+
+#, fuzzy
+msgid "Underline"
+msgstr " Sətiri tap: "
+
+msgid "Understrike"
+msgstr ""
+
+msgid "Pipe"
+msgstr ""
+
+#, fuzzy
+msgid "Enter"
+msgstr "yiyəsi"
+
+#, fuzzy
+msgid "Tab key"
 msgstr "düymə lövhəsi üstündəki +"
 
 #, fuzzy
-msgid "Space on keypad"
+msgid "Space key"
 msgstr "düymə lövhəsi üstündəki Slash düyməsi"
 
-msgid "Slash on keypad"
+#, fuzzy
+msgid "Slash key"
 msgstr "düymə lövhəsi üstündəki Slash düyməsi"
 
-msgid "NumLock on keypad"
-msgstr "düymə lövhəsi üstündəki NumLock düyməsi"
+#, fuzzy
+msgid "Backslash key"
+msgstr "Backspace düyməsi"
+
+msgid "Number sign #"
+msgstr ""
 
 msgid "Ctrl"
 msgstr ""
@@ -3829,6 +3927,9 @@ msgstr "Daxili xəta :"
 
 msgid "Changes to file lost"
 msgstr "Dəyişiklikləri itirdim"
+
+#~ msgid "NumLock on keypad"
+#~ msgstr "düymə lövhəsi üstündəki NumLock düyməsi"
 
 #~ msgid " Emacs key: "
 #~ msgstr " Emacs düyməsi :"

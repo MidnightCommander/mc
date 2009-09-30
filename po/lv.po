@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-29 12:37+0300\n"
+"POT-Creation-Date: 2009-09-30 11:15+0300\n"
 "PO-Revision-Date: 2001-11-20 15:15+0200\n"
 "Last-Translator: Artis Trops <hornet@navigators.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -917,6 +917,10 @@ msgstr ""
 
 msgid "Resets soft keys on HP terminals"
 msgstr "Pārslēdz mīkstos taustiņus uz HP termināļiem"
+
+#, fuzzy
+msgid "Load definitions of key bindings from specified file"
+msgstr "Iegrāmatot ftp dialogu noteiktā failā"
 
 msgid "Requests to run in black and white"
 msgstr "Pieprasa, lai darbotos melnbaltā režīmā"
@@ -2891,6 +2895,18 @@ msgstr " Izvēlies ievades kodu tabulu "
 msgid "-  < No translation >"
 msgstr "-  < Nav tulkojuma >"
 
+#, c-format
+msgid ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -3105,6 +3121,9 @@ msgstr "+ uz klaviatūras"
 msgid "- on keypad"
 msgstr "- uz klaviatūras"
 
+msgid "Slash on keypad"
+msgstr "/ (Slash) uz klaviatūras"
+
 msgid "* on keypad"
 msgstr "* uz klaviatūras"
 
@@ -3141,19 +3160,98 @@ msgstr "Delete uz klaviatūras"
 msgid "Enter on keypad"
 msgstr "Enter uz klaviatūras"
 
+msgid "Plus"
+msgstr ""
+
 #, fuzzy
-msgid "Tab on keypad"
+msgid "Minus"
+msgstr "Izvēlne"
+
+msgid "Asterisk"
+msgstr ""
+
+msgid "Dot"
+msgstr ""
+
+msgid "Less than"
+msgstr ""
+
+msgid "Great than"
+msgstr ""
+
+msgid "Equal"
+msgstr ""
+
+#, fuzzy
+msgid "Comma"
+msgstr "Komanda"
+
+msgid "Apostrophe"
+msgstr ""
+
+#, fuzzy
+msgid "Colon"
+msgstr "Skaitīt"
+
+msgid "Exclamation mark"
+msgstr ""
+
+msgid "Question mark"
+msgstr ""
+
+#, fuzzy
+msgid "Ampersand"
+msgstr "pie&Vienot"
+
+msgid "Dollar sign"
+msgstr ""
+
+msgid "Quotation mark"
+msgstr ""
+
+#, fuzzy
+msgid "Caret"
+msgstr "Mērķis"
+
+msgid "Tilda"
+msgstr ""
+
+#, fuzzy
+msgid "Prime"
+msgstr "Iepr"
+
+#, fuzzy
+msgid "Underline"
+msgstr " Ievadīet līniju: "
+
+msgid "Understrike"
+msgstr ""
+
+msgid "Pipe"
+msgstr ""
+
+#, fuzzy
+msgid "Enter"
+msgstr "īpašnieks"
+
+#, fuzzy
+msgid "Tab key"
 msgstr "+ uz klaviatūras"
 
 #, fuzzy
-msgid "Space on keypad"
+msgid "Space key"
 msgstr "/ (Slash) uz klaviatūras"
 
-msgid "Slash on keypad"
+#, fuzzy
+msgid "Slash key"
 msgstr "/ (Slash) uz klaviatūras"
 
-msgid "NumLock on keypad"
-msgstr "NumLock uz klaviatūras"
+#, fuzzy
+msgid "Backslash key"
+msgstr "Backspace taustiņš"
+
+msgid "Number sign #"
+msgstr ""
 
 msgid "Ctrl"
 msgstr ""
@@ -3837,6 +3935,9 @@ msgstr "Iekšējā kļūda:"
 
 msgid "Changes to file lost"
 msgstr "Izmaiņas failā pazudušas"
+
+#~ msgid "NumLock on keypad"
+#~ msgstr "NumLock uz klaviatūras"
 
 #~ msgid " Emacs key: "
 #~ msgstr "Emacs taustiņš: "

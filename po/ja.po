@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc CVS-20011220\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-29 12:37+0300\n"
+"POT-Creation-Date: 2009-09-30 11:15+0300\n"
 "PO-Revision-Date: 2001-12-20 18:33+0900\n"
 "Last-Translator: Akira TAGOH <tagoh@gnome.gr.jp>\n"
 "Language-Team: Japanese <debian-japanese@lists.debian.org>\n"
@@ -918,6 +918,10 @@ msgstr "stickchars で描画"
 
 msgid "Resets soft keys on HP terminals"
 msgstr "HPターミナルでソフトウェアキーボードを要求"
+
+#, fuzzy
+msgid "Load definitions of key bindings from specified file"
+msgstr "ftp の対話記録を指定したファイルに保存"
 
 msgid "Requests to run in black and white"
 msgstr "白黒モードでの実行を要求"
@@ -2886,6 +2890,18 @@ msgstr " 入力コードページを選択 "
 msgid "-  < No translation >"
 msgstr "-  < 翻訳がありません >"
 
+#, c-format
+msgid ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -3100,6 +3116,9 @@ msgstr "10キーの +"
 msgid "- on keypad"
 msgstr "10キーの -"
 
+msgid "Slash on keypad"
+msgstr "10キーの /"
+
 msgid "* on keypad"
 msgstr "10キーの *"
 
@@ -3136,19 +3155,98 @@ msgstr "10キーの Delete"
 msgid "Enter on keypad"
 msgstr "10キーの Enter"
 
+msgid "Plus"
+msgstr ""
+
 #, fuzzy
-msgid "Tab on keypad"
+msgid "Minus"
+msgstr "メニュ"
+
+msgid "Asterisk"
+msgstr ""
+
+msgid "Dot"
+msgstr ""
+
+msgid "Less than"
+msgstr ""
+
+msgid "Great than"
+msgstr ""
+
+msgid "Equal"
+msgstr ""
+
+#, fuzzy
+msgid "Comma"
+msgstr "コマンド"
+
+msgid "Apostrophe"
+msgstr ""
+
+#, fuzzy
+msgid "Colon"
+msgstr "カウント"
+
+msgid "Exclamation mark"
+msgstr ""
+
+msgid "Question mark"
+msgstr ""
+
+#, fuzzy
+msgid "Ampersand"
+msgstr "追加(&P)"
+
+msgid "Dollar sign"
+msgstr ""
+
+msgid "Quotation mark"
+msgstr ""
+
+#, fuzzy
+msgid "Caret"
+msgstr "ターゲット"
+
+msgid "Tilda"
+msgstr ""
+
+#, fuzzy
+msgid "Prime"
+msgstr "前へ"
+
+#, fuzzy
+msgid "Underline"
+msgstr " 行番号を入力してください: "
+
+msgid "Understrike"
+msgstr ""
+
+msgid "Pipe"
+msgstr ""
+
+#, fuzzy
+msgid "Enter"
+msgstr "所有者"
+
+#, fuzzy
+msgid "Tab key"
 msgstr "10キーの +"
 
 #, fuzzy
-msgid "Space on keypad"
+msgid "Space key"
 msgstr "10キーの /"
 
-msgid "Slash on keypad"
+#, fuzzy
+msgid "Slash key"
 msgstr "10キーの /"
 
-msgid "NumLock on keypad"
-msgstr "10キーの NumLock"
+#, fuzzy
+msgid "Backslash key"
+msgstr "Backspaeceキー"
+
+msgid "Number sign #"
+msgstr ""
 
 msgid "Ctrl"
 msgstr ""
@@ -3824,6 +3922,9 @@ msgstr "内部エラー:"
 
 msgid "Changes to file lost"
 msgstr "紛失したファイルに変更します"
+
+#~ msgid "NumLock on keypad"
+#~ msgstr "10キーの NumLock"
 
 #~ msgid " Emacs key: "
 #~ msgstr " Emacsキー: "

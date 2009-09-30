@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-29 12:37+0300\n"
+"POT-Creation-Date: 2009-09-30 11:15+0300\n"
 "PO-Revision-Date: 2002-04-25 03:55+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <debian-l10n-portuguese@lists.debian.org>\n"
@@ -915,6 +915,10 @@ msgstr "Utilizar caracteres lineares para desenhar"
 
 msgid "Resets soft keys on HP terminals"
 msgstr "Limpa teclas de atalho nos terminais HP"
+
+#, fuzzy
+msgid "Load definitions of key bindings from specified file"
+msgstr "Registar diálogo de ftp para o ficheiro especificado"
 
 msgid "Requests to run in black and white"
 msgstr "Requerer que execute em modo preto e branco"
@@ -2889,6 +2893,18 @@ msgstr " Seleccionar página de códigos "
 msgid "-  < No translation >"
 msgstr "- < Sem tradução >"
 
+#, c-format
+msgid ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -3103,6 +3119,9 @@ msgstr "+ no teclado numérico"
 msgid "- on keypad"
 msgstr "- no teclado numérico"
 
+msgid "Slash on keypad"
+msgstr "Barra no teclado numérico"
+
 msgid "* on keypad"
 msgstr "* no teclado numérico"
 
@@ -3139,19 +3158,98 @@ msgstr "Delete no teclado numérico"
 msgid "Enter on keypad"
 msgstr "Enter no teclado numérico"
 
+msgid "Plus"
+msgstr ""
+
 #, fuzzy
-msgid "Tab on keypad"
+msgid "Minus"
+msgstr "Menu"
+
+msgid "Asterisk"
+msgstr ""
+
+msgid "Dot"
+msgstr ""
+
+msgid "Less than"
+msgstr ""
+
+msgid "Great than"
+msgstr ""
+
+msgid "Equal"
+msgstr ""
+
+#, fuzzy
+msgid "Comma"
+msgstr "Comando"
+
+msgid "Apostrophe"
+msgstr ""
+
+#, fuzzy
+msgid "Colon"
+msgstr "Contagem"
+
+msgid "Exclamation mark"
+msgstr ""
+
+msgid "Question mark"
+msgstr ""
+
+#, fuzzy
+msgid "Ampersand"
+msgstr "&Acrescentar"
+
+msgid "Dollar sign"
+msgstr ""
+
+msgid "Quotation mark"
+msgstr ""
+
+#, fuzzy
+msgid "Caret"
+msgstr "Alvo"
+
+msgid "Tilda"
+msgstr ""
+
+#, fuzzy
+msgid "Prime"
+msgstr "Ant"
+
+#, fuzzy
+msgid "Underline"
+msgstr " Introduza linha: "
+
+msgid "Understrike"
+msgstr ""
+
+msgid "Pipe"
+msgstr ""
+
+#, fuzzy
+msgid "Enter"
+msgstr "dono"
+
+#, fuzzy
+msgid "Tab key"
 msgstr "+ no teclado numérico"
 
 #, fuzzy
-msgid "Space on keypad"
+msgid "Space key"
 msgstr "Barra no teclado numérico"
 
-msgid "Slash on keypad"
+#, fuzzy
+msgid "Slash key"
 msgstr "Barra no teclado numérico"
 
-msgid "NumLock on keypad"
-msgstr "NumLock no teclado numérico"
+#, fuzzy
+msgid "Backslash key"
+msgstr "Tecla de apagar"
+
+msgid "Number sign #"
+msgstr ""
 
 msgid "Ctrl"
 msgstr ""
@@ -3834,6 +3932,9 @@ msgstr "Erro interno:"
 
 msgid "Changes to file lost"
 msgstr "Modificações ao ficheiro perdidas"
+
+#~ msgid "NumLock on keypad"
+#~ msgstr "NumLock no teclado numérico"
 
 #~ msgid " Emacs key: "
 #~ msgstr " Tecla Emacs: "

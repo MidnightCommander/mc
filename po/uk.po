@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: uk\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-29 12:37+0300\n"
+"POT-Creation-Date: 2009-09-30 11:15+0300\n"
 "PO-Revision-Date: 2009-08-25 16:27+0300\n"
 "Last-Translator: Oleksandr Natalenko <pfactum@gmail.com>\n"
 "Language-Team: Ukrainian <kde-i18n-doc@kde.org>\n"
@@ -881,6 +881,10 @@ msgstr "Псевдографіка для малювання"
 
 msgid "Resets soft keys on HP terminals"
 msgstr "Перевстановити програмні клавіші на терміналах HP"
+
+#, fuzzy
+msgid "Load definitions of key bindings from specified file"
+msgstr "Журналювати діалог по FTP у вказаний файл"
 
 msgid "Requests to run in black and white"
 msgstr "Запит на запуск у чорно-білому режимі"
@@ -2860,6 +2864,18 @@ msgstr "Виберіть кодову сторінку"
 msgid "-  < No translation >"
 msgstr "-  < Без перекодування >"
 
+#, c-format
+msgid ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -3076,6 +3092,9 @@ msgstr "Додатковий +"
 msgid "- on keypad"
 msgstr "Додатковий -"
 
+msgid "Slash on keypad"
+msgstr "Додатковий /"
+
 msgid "* on keypad"
 msgstr "Додаткова *"
 
@@ -3112,19 +3131,98 @@ msgstr "Додатковий Del"
 msgid "Enter on keypad"
 msgstr "Додатковий Enter"
 
+msgid "Plus"
+msgstr ""
+
 #, fuzzy
-msgid "Tab on keypad"
+msgid "Minus"
+msgstr "Меню"
+
+msgid "Asterisk"
+msgstr ""
+
+msgid "Dot"
+msgstr ""
+
+msgid "Less than"
+msgstr ""
+
+msgid "Great than"
+msgstr ""
+
+msgid "Equal"
+msgstr ""
+
+#, fuzzy
+msgid "Comma"
+msgstr "Команда"
+
+msgid "Apostrophe"
+msgstr ""
+
+#, fuzzy
+msgid "Colon"
+msgstr "Кількість"
+
+msgid "Exclamation mark"
+msgstr ""
+
+msgid "Question mark"
+msgstr ""
+
+#, fuzzy
+msgid "Ampersand"
+msgstr "Дописати у &кінець"
+
+msgid "Dollar sign"
+msgstr ""
+
+msgid "Quotation mark"
+msgstr ""
+
+#, fuzzy
+msgid "Caret"
+msgstr "Ціль"
+
+msgid "Tilda"
+msgstr ""
+
+#, fuzzy
+msgid "Prime"
+msgstr "Назад"
+
+#, fuzzy
+msgid "Underline"
+msgstr " Введіть номер рядка: "
+
+msgid "Understrike"
+msgstr ""
+
+msgid "Pipe"
+msgstr ""
+
+#, fuzzy
+msgid "Enter"
+msgstr "власник"
+
+#, fuzzy
+msgid "Tab key"
 msgstr "Додатковий +"
 
 #, fuzzy
-msgid "Space on keypad"
+msgid "Space key"
 msgstr "Додатковий /"
 
-msgid "Slash on keypad"
+#, fuzzy
+msgid "Slash key"
 msgstr "Додатковий /"
 
-msgid "NumLock on keypad"
-msgstr "NumLock"
+#, fuzzy
+msgid "Backslash key"
+msgstr "Клавіша Забій"
+
+msgid "Number sign #"
+msgstr ""
 
 msgid "Ctrl"
 msgstr ""
@@ -3806,6 +3904,9 @@ msgstr "Внутрішня помилка:"
 
 msgid "Changes to file lost"
 msgstr "Зміни у файлі втрачені"
+
+#~ msgid "NumLock on keypad"
+#~ msgstr "NumLock"
 
 #~ msgid " Emacs key: "
 #~ msgstr " Клавіша Emacs: "

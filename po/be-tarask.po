@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-29 12:37+0300\n"
+"POT-Creation-Date: 2009-09-30 11:15+0300\n"
 "PO-Revision-Date: 2002-08-25 16:15GMT+2\n"
 "Last-Translator: Vital Khilko <dojlid@mova.org>\n"
 "Language-Team: belarussian (tarask) <debian-l10n-belarusian@lists.debian."
@@ -913,6 +913,10 @@ msgstr "Псэўдаграфіка для маляваньня"
 
 msgid "Resets soft keys on HP terminals"
 msgstr "Скідае праграмныя клявішы на терміналах HP"
+
+#, fuzzy
+msgid "Load definitions of key bindings from specified file"
+msgstr "Весьці пратакол дыялёгу з FTP у файл"
 
 msgid "Requests to run in black and white"
 msgstr "Запыт на запуск у монахромным рэжыме"
@@ -2862,6 +2866,18 @@ msgstr " Выбраць табліцу сымбаляў вываду"
 msgid "-  < No translation >"
 msgstr "-  < Не перакладзена >"
 
+#, c-format
+msgid ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -3076,6 +3092,9 @@ msgstr "+ на keypad'е"
 msgid "- on keypad"
 msgstr "- на keypad'е"
 
+msgid "Slash on keypad"
+msgstr "Slash на keypad'е"
+
 msgid "* on keypad"
 msgstr "* на лічбавых клявішах"
 
@@ -3112,19 +3131,98 @@ msgstr "Delete на keypad'е"
 msgid "Enter on keypad"
 msgstr "Enter на keypad'е"
 
+msgid "Plus"
+msgstr ""
+
 #, fuzzy
-msgid "Tab on keypad"
+msgid "Minus"
+msgstr "Мэню"
+
+msgid "Asterisk"
+msgstr ""
+
+msgid "Dot"
+msgstr ""
+
+msgid "Less than"
+msgstr ""
+
+msgid "Great than"
+msgstr ""
+
+msgid "Equal"
+msgstr ""
+
+#, fuzzy
+msgid "Comma"
+msgstr "Каманда"
+
+msgid "Apostrophe"
+msgstr ""
+
+#, fuzzy
+msgid "Colon"
+msgstr "Лік"
+
+msgid "Exclamation mark"
+msgstr ""
+
+msgid "Question mark"
+msgstr ""
+
+#, fuzzy
+msgid "Ampersand"
+msgstr "дапісаць у &Канец"
+
+msgid "Dollar sign"
+msgstr ""
+
+msgid "Quotation mark"
+msgstr ""
+
+#, fuzzy
+msgid "Caret"
+msgstr "Мэта"
+
+msgid "Tilda"
+msgstr ""
+
+#, fuzzy
+msgid "Prime"
+msgstr "Назад"
+
+#, fuzzy
+msgid "Underline"
+msgstr " Увядзіце нумар радку: "
+
+msgid "Understrike"
+msgstr ""
+
+msgid "Pipe"
+msgstr ""
+
+#, fuzzy
+msgid "Enter"
+msgstr "гаспадар"
+
+#, fuzzy
+msgid "Tab key"
 msgstr "+ на keypad'е"
 
 #, fuzzy
-msgid "Space on keypad"
+msgid "Space key"
 msgstr "Slash на keypad'е"
 
-msgid "Slash on keypad"
+#, fuzzy
+msgid "Slash key"
 msgstr "Slash на keypad'е"
 
-msgid "NumLock on keypad"
-msgstr "NumLock на keypad'е"
+#, fuzzy
+msgid "Backslash key"
+msgstr "Клявіша Backspace"
+
+msgid "Number sign #"
+msgstr ""
 
 msgid "Ctrl"
 msgstr ""
@@ -3808,6 +3906,9 @@ msgstr " Нутраная памылка:"
 
 msgid "Changes to file lost"
 msgstr "Зьмены для файлу страчаны"
+
+#~ msgid "NumLock on keypad"
+#~ msgstr "NumLock на keypad'е"
 
 #~ msgid " Emacs key: "
 #~ msgstr " Клявіша Emacs: "

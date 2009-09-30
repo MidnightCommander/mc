@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-29 12:37+0300\n"
+"POT-Creation-Date: 2009-09-30 11:15+0300\n"
 "PO-Revision-Date: 2003-01-31 00:11+0200\n"
 "Last-Translator: Mişu Moldovan <dumol@go.ro>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
@@ -912,6 +912,10 @@ msgstr "Utilizează +, -, | pentru desenare"
 
 msgid "Resets soft keys on HP terminals"
 msgstr "Resetează tastele soft pe terminale HP"
+
+#, fuzzy
+msgid "Load definitions of key bindings from specified file"
+msgstr "Înregistrează dialogul ftp în fişierul specificat"
 
 msgid "Requests to run in black and white"
 msgstr "Cerere de rulare în alb/negru"
@@ -2877,6 +2881,18 @@ msgstr " Alegeţi codul de intrare "
 msgid "-  < No translation >"
 msgstr "-  < Fără translatare >"
 
+#, c-format
+msgid ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -3091,6 +3107,9 @@ msgstr "+ pe keypad"
 msgid "- on keypad"
 msgstr "- pe keypad"
 
+msgid "Slash on keypad"
+msgstr "Slash pe keypad"
+
 msgid "* on keypad"
 msgstr "* pe keypad"
 
@@ -3127,19 +3146,98 @@ msgstr "Delete pe keypad"
 msgid "Enter on keypad"
 msgstr "Enter pe keypad"
 
+msgid "Plus"
+msgstr ""
+
 #, fuzzy
-msgid "Tab on keypad"
+msgid "Minus"
+msgstr "Meniu"
+
+msgid "Asterisk"
+msgstr ""
+
+msgid "Dot"
+msgstr ""
+
+msgid "Less than"
+msgstr ""
+
+msgid "Great than"
+msgstr ""
+
+msgid "Equal"
+msgstr ""
+
+#, fuzzy
+msgid "Comma"
+msgstr "Comandă"
+
+msgid "Apostrophe"
+msgstr ""
+
+#, fuzzy
+msgid "Colon"
+msgstr "Număr"
+
+msgid "Exclamation mark"
+msgstr ""
+
+msgid "Question mark"
+msgstr ""
+
+#, fuzzy
+msgid "Ampersand"
+msgstr "adau&G"
+
+msgid "Dollar sign"
+msgstr ""
+
+msgid "Quotation mark"
+msgstr ""
+
+#, fuzzy
+msgid "Caret"
+msgstr "Ţintă"
+
+msgid "Tilda"
+msgstr ""
+
+#, fuzzy
+msgid "Prime"
+msgstr "Înapoi"
+
+#, fuzzy
+msgid "Underline"
+msgstr " Introduceţi numărul liniei: "
+
+msgid "Understrike"
+msgstr ""
+
+msgid "Pipe"
+msgstr ""
+
+#, fuzzy
+msgid "Enter"
+msgstr "propr."
+
+#, fuzzy
+msgid "Tab key"
 msgstr "+ pe keypad"
 
 #, fuzzy
-msgid "Space on keypad"
+msgid "Space key"
 msgstr "Slash pe keypad"
 
-msgid "Slash on keypad"
+#, fuzzy
+msgid "Slash key"
 msgstr "Slash pe keypad"
 
-msgid "NumLock on keypad"
-msgstr "NumLock pe keypad"
+#, fuzzy
+msgid "Backslash key"
+msgstr "Tasta Backspace"
+
+msgid "Number sign #"
+msgstr ""
 
 msgid "Ctrl"
 msgstr ""
@@ -3817,6 +3915,9 @@ msgstr "Eroare internă:"
 
 msgid "Changes to file lost"
 msgstr "S-au pierdut schimbările efectuate în fişier"
+
+#~ msgid "NumLock on keypad"
+#~ msgstr "NumLock pe keypad"
 
 #~ msgid " Emacs key: "
 #~ msgstr " Tasta Emacs: "

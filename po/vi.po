@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-29 12:37+0300\n"
+"POT-Creation-Date: 2009-09-30 11:15+0300\n"
 "PO-Revision-Date: 2006-08-16 16:20+0400\n"
 "Last-Translator: Phan Vĩnh Thịnh <teppi82@gmail.com>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
@@ -904,6 +904,10 @@ msgstr "Sử dụng ký tự thẳng đứng để vẽ"
 
 msgid "Resets soft keys on HP terminals"
 msgstr "Đặt lại phím phần mềm trên các terminal HP"
+
+#, fuzzy
+msgid "Load definitions of key bindings from specified file"
+msgstr "Ghi hội thoại FTP vào một tập tin"
 
 msgid "Requests to run in black and white"
 msgstr "Yêu cầu chạy trong chế độ đen trắng"
@@ -2870,6 +2874,18 @@ msgstr " Chọn bảng mã dữ liệu vào "
 msgid "-  < No translation >"
 msgstr "-  < Không có dịch >"
 
+#, c-format
+msgid ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -3087,6 +3103,9 @@ msgstr "+ trên phần keypad"
 msgid "- on keypad"
 msgstr "- trên phần keypad"
 
+msgid "Slash on keypad"
+msgstr "Slash trên keypad"
+
 msgid "* on keypad"
 msgstr "* trên phần keypad"
 
@@ -3123,19 +3142,98 @@ msgstr "Delete trên keypad"
 msgid "Enter on keypad"
 msgstr "Enter trên keypad"
 
+msgid "Plus"
+msgstr ""
+
 #, fuzzy
-msgid "Tab on keypad"
+msgid "Minus"
+msgstr "Trđơn "
+
+msgid "Asterisk"
+msgstr ""
+
+msgid "Dot"
+msgstr ""
+
+msgid "Less than"
+msgstr ""
+
+msgid "Great than"
+msgstr ""
+
+msgid "Equal"
+msgstr ""
+
+#, fuzzy
+msgid "Comma"
+msgstr "Câu lệnh"
+
+msgid "Apostrophe"
+msgstr ""
+
+#, fuzzy
+msgid "Colon"
+msgstr "Đếm"
+
+msgid "Exclamation mark"
+msgstr ""
+
+msgid "Question mark"
+msgstr ""
+
+#, fuzzy
+msgid "Ampersand"
+msgstr "&Thêm vào cuối"
+
+msgid "Dollar sign"
+msgstr ""
+
+msgid "Quotation mark"
+msgstr ""
+
+#, fuzzy
+msgid "Caret"
+msgstr "Đích"
+
+msgid "Tilda"
+msgstr ""
+
+#, fuzzy
+msgid "Prime"
+msgstr "Quay lại"
+
+#, fuzzy
+msgid "Underline"
+msgstr "Hãy nhập số thứ tự dòng: "
+
+msgid "Understrike"
+msgstr ""
+
+msgid "Pipe"
+msgstr ""
+
+#, fuzzy
+msgid "Enter"
+msgstr "sở hữu"
+
+#, fuzzy
+msgid "Tab key"
 msgstr "+ trên phần keypad"
 
 #, fuzzy
-msgid "Space on keypad"
+msgid "Space key"
 msgstr "Slash trên keypad"
 
-msgid "Slash on keypad"
+#, fuzzy
+msgid "Slash key"
 msgstr "Slash trên keypad"
 
-msgid "NumLock on keypad"
-msgstr "NumLock trên keypad"
+#, fuzzy
+msgid "Backslash key"
+msgstr "Phím Backspace"
+
+msgid "Number sign #"
+msgstr ""
 
 msgid "Ctrl"
 msgstr ""
@@ -3819,6 +3917,9 @@ msgstr "Lỗi nội bộ:"
 
 msgid "Changes to file lost"
 msgstr "Thay đổi tới tập tin bị mất"
+
+#~ msgid "NumLock on keypad"
+#~ msgstr "NumLock trên keypad"
 
 #~ msgid " Emacs key: "
 #~ msgstr "Phím Emacs: "

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-29 12:37+0300\n"
+"POT-Creation-Date: 2009-09-30 11:15+0300\n"
 "PO-Revision-Date: 1999-03-18 23:11+0100\n"
 "Last-Translator: Lorint Hendschel <LorintHendschel@skynet.be>\n"
 "Language-Team: walon <linux-wa@chanae.alphanet.ch>\n"
@@ -927,6 +927,9 @@ msgid "Use stickchars to draw"
 msgstr ""
 
 msgid "Resets soft keys on HP terminals"
+msgstr ""
+
+msgid "Load definitions of key bindings from specified file"
 msgstr ""
 
 msgid "Requests to run in black and white"
@@ -2880,6 +2883,18 @@ msgstr ""
 msgid "-  < No translation >"
 msgstr ""
 
+#, c-format
+msgid ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -3096,6 +3111,9 @@ msgstr ""
 msgid "- on keypad"
 msgstr ""
 
+msgid "Slash on keypad"
+msgstr ""
+
 msgid "* on keypad"
 msgstr ""
 
@@ -3132,18 +3150,96 @@ msgstr ""
 msgid "Enter on keypad"
 msgstr ""
 
-#, fuzzy
-msgid "Tab on keypad"
-msgstr "Pådje copete"
-
-#, fuzzy
-msgid "Space on keypad"
-msgstr "Pådje copete"
-
-msgid "Slash on keypad"
+msgid "Plus"
 msgstr ""
 
-msgid "NumLock on keypad"
+#, fuzzy
+msgid "Minus"
+msgstr "Menu"
+
+msgid "Asterisk"
+msgstr ""
+
+msgid "Dot"
+msgstr ""
+
+msgid "Less than"
+msgstr ""
+
+msgid "Great than"
+msgstr ""
+
+msgid "Equal"
+msgstr ""
+
+#, fuzzy
+msgid "Comma"
+msgstr "Comande"
+
+msgid "Apostrophe"
+msgstr ""
+
+#, fuzzy
+msgid "Colon"
+msgstr "Conter"
+
+msgid "Exclamation mark"
+msgstr ""
+
+msgid "Question mark"
+msgstr ""
+
+#, fuzzy
+msgid "Ampersand"
+msgstr "ra&djouter å coron"
+
+msgid "Dollar sign"
+msgstr ""
+
+msgid "Quotation mark"
+msgstr ""
+
+#, fuzzy
+msgid "Caret"
+msgstr "Såme"
+
+msgid "Tilda"
+msgstr ""
+
+#, fuzzy
+msgid "Prime"
+msgstr "Divant"
+
+#, fuzzy
+msgid "Underline"
+msgstr " Diner roye: "
+
+msgid "Understrike"
+msgstr ""
+
+msgid "Pipe"
+msgstr ""
+
+#, fuzzy
+msgid "Enter"
+msgstr "da"
+
+#, fuzzy
+msgid "Tab key"
+msgstr "Pådje copete"
+
+#, fuzzy
+msgid "Space key"
+msgstr "Pådje copete"
+
+msgid "Slash key"
+msgstr ""
+
+#, fuzzy
+msgid "Backslash key"
+msgstr "Backspace"
+
+msgid "Number sign #"
 msgstr ""
 
 msgid "Ctrl"

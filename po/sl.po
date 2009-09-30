@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc \n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-29 12:37+0300\n"
+"POT-Creation-Date: 2009-09-30 11:15+0300\n"
 "PO-Revision-Date: 2000-06-22 00:00+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -911,6 +911,10 @@ msgstr "Uporabi lepljive znake za risanje"
 
 msgid "Resets soft keys on HP terminals"
 msgstr "Ponastavi mehke tipke na HP terminalih"
+
+#, fuzzy
+msgid "Load definitions of key bindings from specified file"
+msgstr "Zapiše dnevnik ftp dialogov v določeno datoteko"
 
 msgid "Requests to run in black and white"
 msgstr "Prošnja za izvajanje v črnobelem načinu"
@@ -2877,6 +2881,18 @@ msgstr " Izberite vhodni nabor znakov"
 msgid "-  < No translation >"
 msgstr "- < Brez prevoda >"
 
+#, c-format
+msgid ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -3091,6 +3107,9 @@ msgstr "+ na številčni tipkovnici"
 msgid "- on keypad"
 msgstr "- na številčni tipkovnici"
 
+msgid "Slash on keypad"
+msgstr "Poševnica na številčni tipkovnici"
+
 msgid "* on keypad"
 msgstr "* na številčni tipkovnici"
 
@@ -3127,19 +3146,98 @@ msgstr "Tipka Delete na številčni tipkovnici"
 msgid "Enter on keypad"
 msgstr "Enter na številčni tipkovnici"
 
+msgid "Plus"
+msgstr ""
+
 #, fuzzy
-msgid "Tab on keypad"
+msgid "Minus"
+msgstr "Menu"
+
+msgid "Asterisk"
+msgstr ""
+
+msgid "Dot"
+msgstr ""
+
+msgid "Less than"
+msgstr ""
+
+msgid "Great than"
+msgstr ""
+
+msgid "Equal"
+msgstr ""
+
+#, fuzzy
+msgid "Comma"
+msgstr "Ukaz"
+
+msgid "Apostrophe"
+msgstr ""
+
+#, fuzzy
+msgid "Colon"
+msgstr "Števec"
+
+msgid "Exclamation mark"
+msgstr ""
+
+msgid "Question mark"
+msgstr ""
+
+#, fuzzy
+msgid "Ampersand"
+msgstr "&Pripni"
+
+msgid "Dollar sign"
+msgstr ""
+
+msgid "Quotation mark"
+msgstr ""
+
+#, fuzzy
+msgid "Caret"
+msgstr "Cilj"
+
+msgid "Tilda"
+msgstr ""
+
+#, fuzzy
+msgid "Prime"
+msgstr "Nazaj"
+
+#, fuzzy
+msgid "Underline"
+msgstr " Vpiši vrstico: "
+
+msgid "Understrike"
+msgstr ""
+
+msgid "Pipe"
+msgstr ""
+
+#, fuzzy
+msgid "Enter"
+msgstr "lastnik"
+
+#, fuzzy
+msgid "Tab key"
 msgstr "+ na številčni tipkovnici"
 
 #, fuzzy
-msgid "Space on keypad"
+msgid "Space key"
 msgstr "Poševnica na številčni tipkovnici"
 
-msgid "Slash on keypad"
+#, fuzzy
+msgid "Slash key"
 msgstr "Poševnica na številčni tipkovnici"
 
-msgid "NumLock on keypad"
-msgstr "NumLock na številčni tipkovnici"
+#, fuzzy
+msgid "Backslash key"
+msgstr "Vračalka"
+
+msgid "Number sign #"
+msgstr ""
 
 msgid "Ctrl"
 msgstr ""
@@ -3819,6 +3917,9 @@ msgstr "Interna napaka:"
 
 msgid "Changes to file lost"
 msgstr "Spremembe v datoteki izgubljene"
+
+#~ msgid "NumLock on keypad"
+#~ msgstr "NumLock na številčni tipkovnici"
 
 #~ msgid " Emacs key: "
 #~ msgstr " Emacs ključ: "

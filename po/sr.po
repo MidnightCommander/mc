@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-29 12:37+0300\n"
+"POT-Creation-Date: 2009-09-30 11:15+0300\n"
 "PO-Revision-Date: 2003-09-20 18:50+0200\n"
 "Last-Translator: Strahinya Radich (Страхиња Радић) <mr99164@alas.matf.bg.ac."
 "yu>\n"
@@ -912,6 +912,10 @@ msgstr "Користи квазиграфичке симболе за цртањ
 
 msgid "Resets soft keys on HP terminals"
 msgstr "Поставља меке тастере на ХП-овим терминалима"
+
+#, fuzzy
+msgid "Load definitions of key bindings from specified file"
+msgstr "Бележи садржај дијалога FTP-а у задану датотеку"
 
 msgid "Requests to run in black and white"
 msgstr "Захтева покретање у режиму без боја"
@@ -2878,6 +2882,18 @@ msgstr " Изаберите кодну страну улаза "
 msgid "-  < No translation >"
 msgstr "-  < Без претварања >"
 
+#, c-format
+msgid ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -3095,6 +3111,9 @@ msgstr "Сиви +"
 msgid "- on keypad"
 msgstr "Сиви -"
 
+msgid "Slash on keypad"
+msgstr "Сиви /"
+
 msgid "* on keypad"
 msgstr "Сиви *"
 
@@ -3131,19 +3150,98 @@ msgstr "Сиви `Delete'"
 msgid "Enter on keypad"
 msgstr "Сиви `Enter'"
 
+msgid "Plus"
+msgstr ""
+
 #, fuzzy
-msgid "Tab on keypad"
+msgid "Minus"
+msgstr "Мени"
+
+msgid "Asterisk"
+msgstr ""
+
+msgid "Dot"
+msgstr ""
+
+msgid "Less than"
+msgstr ""
+
+msgid "Great than"
+msgstr ""
+
+msgid "Equal"
+msgstr ""
+
+#, fuzzy
+msgid "Comma"
+msgstr "Наредба"
+
+msgid "Apostrophe"
+msgstr ""
+
+#, fuzzy
+msgid "Colon"
+msgstr "Број"
+
+msgid "Exclamation mark"
+msgstr ""
+
+msgid "Question mark"
+msgstr ""
+
+#, fuzzy
+msgid "Ampersand"
+msgstr "&Надовежи"
+
+msgid "Dollar sign"
+msgstr ""
+
+msgid "Quotation mark"
+msgstr ""
+
+#, fuzzy
+msgid "Caret"
+msgstr "Одредиште"
+
+msgid "Tilda"
+msgstr ""
+
+#, fuzzy
+msgid "Prime"
+msgstr "Претх"
+
+#, fuzzy
+msgid "Underline"
+msgstr " Унесите број реда: "
+
+msgid "Understrike"
+msgstr ""
+
+msgid "Pipe"
+msgstr ""
+
+#, fuzzy
+msgid "Enter"
+msgstr "власник"
+
+#, fuzzy
+msgid "Tab key"
 msgstr "Сиви +"
 
 #, fuzzy
-msgid "Space on keypad"
+msgid "Space key"
 msgstr "Сиви /"
 
-msgid "Slash on keypad"
+#, fuzzy
+msgid "Slash key"
 msgstr "Сиви /"
 
-msgid "NumLock on keypad"
-msgstr "Сиви `NumLock'"
+#, fuzzy
+msgid "Backslash key"
+msgstr "Таст. `Backspace'"
+
+msgid "Number sign #"
+msgstr ""
 
 msgid "Ctrl"
 msgstr ""
@@ -3821,6 +3919,9 @@ msgstr "Унутрашња грешка:"
 
 msgid "Changes to file lost"
 msgstr "Измене у датотеци су изгубљене"
+
+#~ msgid "NumLock on keypad"
+#~ msgstr "Сиви `NumLock'"
 
 #~ msgid " Emacs key: "
 #~ msgstr " Пречица Емакса: "

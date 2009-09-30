@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-29 12:37+0300\n"
+"POT-Creation-Date: 2009-09-30 11:15+0300\n"
 "PO-Revision-Date: 2002-01-29 22:05+0800\n"
 "Last-Translator: Wang Jian <lark@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -916,6 +916,10 @@ msgstr ""
 
 msgid "Resets soft keys on HP terminals"
 msgstr "在 HP 终端上复位软键"
+
+#, fuzzy
+msgid "Load definitions of key bindings from specified file"
+msgstr "记录 ftp 对话到指定的文件"
 
 msgid "Requests to run in black and white"
 msgstr "请求运行在黑白模式"
@@ -2867,6 +2871,18 @@ msgstr " 选择输入代码页"
 msgid "-  < No translation >"
 msgstr "-  < 没有翻译 >"
 
+#, c-format
+msgid ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -3081,6 +3097,9 @@ msgstr "小键盘上的 +"
 msgid "- on keypad"
 msgstr "小键盘上的 -"
 
+msgid "Slash on keypad"
+msgstr "小键盘上的 /"
+
 msgid "* on keypad"
 msgstr "小键盘上的 *"
 
@@ -3117,19 +3136,98 @@ msgstr "小键盘上的 Delete"
 msgid "Enter on keypad"
 msgstr "小键盘上的 Enter"
 
+msgid "Plus"
+msgstr ""
+
 #, fuzzy
-msgid "Tab on keypad"
+msgid "Minus"
+msgstr "菜单"
+
+msgid "Asterisk"
+msgstr ""
+
+msgid "Dot"
+msgstr ""
+
+msgid "Less than"
+msgstr ""
+
+msgid "Great than"
+msgstr ""
+
+msgid "Equal"
+msgstr ""
+
+#, fuzzy
+msgid "Comma"
+msgstr "命令"
+
+msgid "Apostrophe"
+msgstr ""
+
+#, fuzzy
+msgid "Colon"
+msgstr "计数"
+
+msgid "Exclamation mark"
+msgstr ""
+
+msgid "Question mark"
+msgstr ""
+
+#, fuzzy
+msgid "Ampersand"
+msgstr "追加(&P)"
+
+msgid "Dollar sign"
+msgstr ""
+
+msgid "Quotation mark"
+msgstr ""
+
+#, fuzzy
+msgid "Caret"
+msgstr "目标"
+
+msgid "Tilda"
+msgstr ""
+
+#, fuzzy
+msgid "Prime"
+msgstr "前"
+
+#, fuzzy
+msgid "Underline"
+msgstr " 输入行号："
+
+msgid "Understrike"
+msgstr ""
+
+msgid "Pipe"
+msgstr ""
+
+#, fuzzy
+msgid "Enter"
+msgstr "所有者"
+
+#, fuzzy
+msgid "Tab key"
 msgstr "小键盘上的 +"
 
 #, fuzzy
-msgid "Space on keypad"
+msgid "Space key"
 msgstr "小键盘上的 /"
 
-msgid "Slash on keypad"
+#, fuzzy
+msgid "Slash key"
 msgstr "小键盘上的 /"
 
-msgid "NumLock on keypad"
-msgstr "小键盘上的 NumLock"
+#, fuzzy
+msgid "Backslash key"
+msgstr "Backspace 键"
+
+msgid "Number sign #"
+msgstr ""
 
 msgid "Ctrl"
 msgstr ""
@@ -3812,6 +3910,9 @@ msgstr "内部错误："
 
 msgid "Changes to file lost"
 msgstr "对文件的修改被丢失"
+
+#~ msgid "NumLock on keypad"
+#~ msgstr "小键盘上的 NumLock"
 
 #~ msgid " Emacs key: "
 #~ msgstr " Emacs 键："

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.6.2\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-29 12:37+0300\n"
+"POT-Creation-Date: 2009-09-30 11:15+0300\n"
 "PO-Revision-Date: 2008-04-07 17:25+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian <debian-l10n-italian@lists.debian.org>\n"
@@ -906,6 +906,10 @@ msgstr "Usa caratteri semigrafici"
 
 msgid "Resets soft keys on HP terminals"
 msgstr "Ripristina i tasti soft nei terminali HP"
+
+#, fuzzy
+msgid "Load definitions of key bindings from specified file"
+msgstr "Annota i messaggi dell'ftp in un file specificato"
 
 msgid "Requests to run in black and white"
 msgstr "Richiede l'esecuzione in bianco e nero"
@@ -2880,6 +2884,18 @@ msgstr " Scegli la codepage "
 msgid "-  < No translation >"
 msgstr "-  < Non tradotto >"
 
+#, c-format
+msgid ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -3097,6 +3113,9 @@ msgstr "+ sul tastierino "
 msgid "- on keypad"
 msgstr "- sul tastierino "
 
+msgid "Slash on keypad"
+msgstr "/ sul tastierino"
+
 msgid "* on keypad"
 msgstr "* sul tastierino "
 
@@ -3133,19 +3152,98 @@ msgstr "Canc sul tastierino"
 msgid "Enter on keypad"
 msgstr "Invio sul tastierino"
 
+msgid "Plus"
+msgstr ""
+
 #, fuzzy
-msgid "Tab on keypad"
+msgid "Minus"
+msgstr "Menu"
+
+msgid "Asterisk"
+msgstr ""
+
+msgid "Dot"
+msgstr ""
+
+msgid "Less than"
+msgstr ""
+
+msgid "Great than"
+msgstr ""
+
+msgid "Equal"
+msgstr ""
+
+#, fuzzy
+msgid "Comma"
+msgstr "Comando"
+
+msgid "Apostrophe"
+msgstr ""
+
+#, fuzzy
+msgid "Colon"
+msgstr "Totale"
+
+msgid "Exclamation mark"
+msgstr ""
+
+msgid "Question mark"
+msgstr ""
+
+#, fuzzy
+msgid "Ampersand"
+msgstr "Atta&cca"
+
+msgid "Dollar sign"
+msgstr ""
+
+msgid "Quotation mark"
+msgstr ""
+
+#, fuzzy
+msgid "Caret"
+msgstr "Destinaz"
+
+msgid "Tilda"
+msgstr ""
+
+#, fuzzy
+msgid "Prime"
+msgstr "Precedente"
+
+#, fuzzy
+msgid "Underline"
+msgstr " Riga: "
+
+msgid "Understrike"
+msgstr ""
+
+msgid "Pipe"
+msgstr ""
+
+#, fuzzy
+msgid "Enter"
+msgstr "propr."
+
+#, fuzzy
+msgid "Tab key"
 msgstr "+ sul tastierino "
 
 #, fuzzy
-msgid "Space on keypad"
+msgid "Space key"
 msgstr "/ sul tastierino"
 
-msgid "Slash on keypad"
+#, fuzzy
+msgid "Slash key"
 msgstr "/ sul tastierino"
 
-msgid "NumLock on keypad"
-msgstr "NumLock sul tastierino"
+#, fuzzy
+msgid "Backslash key"
+msgstr "Tasto Backspace  "
+
+msgid "Number sign #"
+msgstr ""
 
 msgid "Ctrl"
 msgstr ""
@@ -3825,6 +3923,9 @@ msgstr " Errore interno:"
 
 msgid "Changes to file lost"
 msgstr "Cambiamenti al file persi"
+
+#~ msgid "NumLock on keypad"
+#~ msgstr "NumLock sul tastierino"
 
 #~ msgid " Emacs key: "
 #~ msgstr " Tasto emacs: "

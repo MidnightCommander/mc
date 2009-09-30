@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.55\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-29 12:37+0300\n"
+"POT-Creation-Date: 2009-09-30 11:15+0300\n"
 "PO-Revision-Date: 2002-06-24 02:15+0300\n"
 "Last-Translator: Todor Buyukliev <adrez@mail.bg>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -913,6 +913,10 @@ msgstr "Рисува в псевдографика"
 
 msgid "Resets soft keys on HP terminals"
 msgstr "Реинициализира програмните клавищи на HP терминали"
+
+#, fuzzy
+msgid "Load definitions of key bindings from specified file"
+msgstr "Записва ftp сесиите в указан файл"
 
 msgid "Requests to run in black and white"
 msgstr "Поиск за стартиране в черно-бяло"
@@ -2881,6 +2885,18 @@ msgstr " Изберете входна кодова страница "
 msgid "-  < No translation >"
 msgstr "-  < Няма превод >"
 
+#, c-format
+msgid ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -3095,6 +3111,9 @@ msgstr "+ от доп. клв."
 msgid "- on keypad"
 msgstr "- от доп. клв."
 
+msgid "Slash on keypad"
+msgstr "Накл. черта от доп. клв."
+
 msgid "* on keypad"
 msgstr "* от доп. клв."
 
@@ -3131,19 +3150,98 @@ msgstr "Delete от доп. клв."
 msgid "Enter on keypad"
 msgstr "Enter от доп. клв."
 
+msgid "Plus"
+msgstr ""
+
 #, fuzzy
-msgid "Tab on keypad"
+msgid "Minus"
+msgstr "Меню"
+
+msgid "Asterisk"
+msgstr ""
+
+msgid "Dot"
+msgstr ""
+
+msgid "Less than"
+msgstr ""
+
+msgid "Great than"
+msgstr ""
+
+msgid "Equal"
+msgstr ""
+
+#, fuzzy
+msgid "Comma"
+msgstr "Команда"
+
+msgid "Apostrophe"
+msgstr ""
+
+#, fuzzy
+msgid "Colon"
+msgstr "Брой"
+
+msgid "Exclamation mark"
+msgstr ""
+
+msgid "Question mark"
+msgstr ""
+
+#, fuzzy
+msgid "Ampersand"
+msgstr "добави"
+
+msgid "Dollar sign"
+msgstr ""
+
+msgid "Quotation mark"
+msgstr ""
+
+#, fuzzy
+msgid "Caret"
+msgstr "Назначение"
+
+msgid "Tilda"
+msgstr ""
+
+#, fuzzy
+msgid "Prime"
+msgstr "Преди"
+
+#, fuzzy
+msgid "Underline"
+msgstr " Въведете ред: "
+
+msgid "Understrike"
+msgstr ""
+
+msgid "Pipe"
+msgstr ""
+
+#, fuzzy
+msgid "Enter"
+msgstr "собст."
+
+#, fuzzy
+msgid "Tab key"
 msgstr "+ от доп. клв."
 
 #, fuzzy
-msgid "Space on keypad"
+msgid "Space key"
 msgstr "Накл. черта от доп. клв."
 
-msgid "Slash on keypad"
+#, fuzzy
+msgid "Slash key"
 msgstr "Накл. черта от доп. клв."
 
-msgid "NumLock on keypad"
-msgstr "NumLock от доп. клв."
+#, fuzzy
+msgid "Backslash key"
+msgstr "Backspace"
+
+msgid "Number sign #"
+msgstr ""
 
 msgid "Ctrl"
 msgstr ""
@@ -3826,6 +3924,9 @@ msgstr "Вътрешна грешка:"
 
 msgid "Changes to file lost"
 msgstr "Промените във файла изгубени"
+
+#~ msgid "NumLock on keypad"
+#~ msgstr "NumLock от доп. клв."
 
 #~ msgid " Emacs key: "
 #~ msgstr " Emacs клавиш: "

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-29 12:37+0300\n"
+"POT-Creation-Date: 2009-09-30 11:15+0300\n"
 "PO-Revision-Date: 2008-06-05 17:36+0100\n"
 "Last-Translator: Anna Talianova <anickat1@gmail.com>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
@@ -915,6 +915,10 @@ msgstr "Pro vykreslení použít ascii znaky"
 
 msgid "Resets soft keys on HP terminals"
 msgstr "Vynulovat programové klávesy na HP terminálech"
+
+#, fuzzy
+msgid "Load definitions of key bindings from specified file"
+msgstr "Zapíše dialog ftp do zadaného souboru"
 
 msgid "Requests to run in black and white"
 msgstr "Spustí se černobíle"
@@ -2895,6 +2899,18 @@ msgstr " Zvolte vstupní kódovou stránku "
 msgid "-  < No translation >"
 msgstr "- < Bez převodu >"
 
+#, c-format
+msgid ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -3112,6 +3128,9 @@ msgstr "+ na numerické klávesnici"
 msgid "- on keypad"
 msgstr "- na numerické klávesnici"
 
+msgid "Slash on keypad"
+msgstr "Lomítko na numerické klávesnici"
+
 msgid "* on keypad"
 msgstr "* na numerické klávesnici"
 
@@ -3148,19 +3167,98 @@ msgstr "Delete na numerické klávesnici"
 msgid "Enter on keypad"
 msgstr "Enter na numerické klávesnici"
 
+msgid "Plus"
+msgstr ""
+
 #, fuzzy
-msgid "Tab on keypad"
+msgid "Minus"
+msgstr "MenuUž"
+
+msgid "Asterisk"
+msgstr ""
+
+msgid "Dot"
+msgstr ""
+
+msgid "Less than"
+msgstr ""
+
+msgid "Great than"
+msgstr ""
+
+msgid "Equal"
+msgstr ""
+
+#, fuzzy
+msgid "Comma"
+msgstr "Příkaz"
+
+msgid "Apostrophe"
+msgstr ""
+
+#, fuzzy
+msgid "Colon"
+msgstr "Počet"
+
+msgid "Exclamation mark"
+msgstr ""
+
+msgid "Question mark"
+msgstr ""
+
+#, fuzzy
+msgid "Ampersand"
+msgstr "&Připojit"
+
+msgid "Dollar sign"
+msgstr ""
+
+msgid "Quotation mark"
+msgstr ""
+
+#, fuzzy
+msgid "Caret"
+msgstr "Cíl"
+
+msgid "Tilda"
+msgstr ""
+
+#, fuzzy
+msgid "Prime"
+msgstr "Dozadu"
+
+#, fuzzy
+msgid "Underline"
+msgstr " Zadejte číslo řádku: "
+
+msgid "Understrike"
+msgstr ""
+
+msgid "Pipe"
+msgstr ""
+
+#, fuzzy
+msgid "Enter"
+msgstr "vlastník"
+
+#, fuzzy
+msgid "Tab key"
 msgstr "+ na numerické klávesnici"
 
 #, fuzzy
-msgid "Space on keypad"
+msgid "Space key"
 msgstr "Lomítko na numerické klávesnici"
 
-msgid "Slash on keypad"
+#, fuzzy
+msgid "Slash key"
 msgstr "Lomítko na numerické klávesnici"
 
-msgid "NumLock on keypad"
-msgstr "NumLock na numerické klávesnici"
+#, fuzzy
+msgid "Backslash key"
+msgstr "Klávesa Backspace"
+
+msgid "Number sign #"
+msgstr ""
 
 msgid "Ctrl"
 msgstr ""
@@ -3844,6 +3942,9 @@ msgstr "Interní chyba:"
 
 msgid "Changes to file lost"
 msgstr "Změny souboru byly ztraceny"
+
+#~ msgid "NumLock on keypad"
+#~ msgstr "NumLock na numerické klávesnici"
 
 #~ msgid " Emacs key: "
 #~ msgstr " Emacsová klávesa: "

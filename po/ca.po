@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-29 12:37+0300\n"
+"POT-Creation-Date: 2009-09-30 11:15+0300\n"
 "PO-Revision-Date: 2001-09-29 17:41+0200\n"
 "Last-Translator: Softcatalà <tradgnome@softcatala.org>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
@@ -919,6 +919,10 @@ msgstr "Utilitza el caràcters de línies per fer marcs"
 
 msgid "Resets soft keys on HP terminals"
 msgstr "Reinicia les tecles programades als terminals HP"
+
+#, fuzzy
+msgid "Load definitions of key bindings from specified file"
+msgstr "Enregistra el quadre ftp a un fitxer"
 
 msgid "Requests to run in black and white"
 msgstr "Demana que s'utilitzi el mode blanc i negre"
@@ -2897,6 +2901,18 @@ msgstr " Escolliu la pàgina de codis d'entrada "
 msgid "-  < No translation >"
 msgstr "-  < Cap traducció >"
 
+#, c-format
+msgid ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -3112,6 +3128,9 @@ msgstr "+ teclat numèric"
 msgid "- on keypad"
 msgstr "- teclat numèric"
 
+msgid "Slash on keypad"
+msgstr "Barra teclat numèric"
+
 msgid "* on keypad"
 msgstr "* teclat numèric"
 
@@ -3148,19 +3167,98 @@ msgstr "Suprimir teclat numèric"
 msgid "Enter on keypad"
 msgstr "Tecla de retorn teclat numèric"
 
+msgid "Plus"
+msgstr ""
+
 #, fuzzy
-msgid "Tab on keypad"
+msgid "Minus"
+msgstr "Menú"
+
+msgid "Asterisk"
+msgstr ""
+
+msgid "Dot"
+msgstr ""
+
+msgid "Less than"
+msgstr ""
+
+msgid "Great than"
+msgstr ""
+
+msgid "Equal"
+msgstr ""
+
+#, fuzzy
+msgid "Comma"
+msgstr "Ordre"
+
+msgid "Apostrophe"
+msgstr ""
+
+#, fuzzy
+msgid "Colon"
+msgstr "Compta"
+
+msgid "Exclamation mark"
+msgstr ""
+
+msgid "Question mark"
+msgstr ""
+
+#, fuzzy
+msgid "Ampersand"
+msgstr "afe&Geix"
+
+msgid "Dollar sign"
+msgstr ""
+
+msgid "Quotation mark"
+msgstr ""
+
+#, fuzzy
+msgid "Caret"
+msgstr "Objectiu/Destí"
+
+msgid "Tilda"
+msgstr ""
+
+#, fuzzy
+msgid "Prime"
+msgstr "Anterior"
+
+#, fuzzy
+msgid "Underline"
+msgstr " Introduïu la línia: "
+
+msgid "Understrike"
+msgstr ""
+
+msgid "Pipe"
+msgstr ""
+
+#, fuzzy
+msgid "Enter"
+msgstr "propietari"
+
+#, fuzzy
+msgid "Tab key"
 msgstr "+ teclat numèric"
 
 #, fuzzy
-msgid "Space on keypad"
+msgid "Space key"
 msgstr "Barra teclat numèric"
 
-msgid "Slash on keypad"
+#, fuzzy
+msgid "Slash key"
 msgstr "Barra teclat numèric"
 
-msgid "NumLock on keypad"
-msgstr "BloqNum teclat numèric"
+#, fuzzy
+msgid "Backslash key"
+msgstr "Tecla de retrocés"
+
+msgid "Number sign #"
+msgstr ""
 
 msgid "Ctrl"
 msgstr ""
@@ -3845,6 +3943,9 @@ msgstr "Error intern:"
 
 msgid "Changes to file lost"
 msgstr "Canvia al fitxer perdut"
+
+#~ msgid "NumLock on keypad"
+#~ msgstr "BloqNum teclat numèric"
 
 #~ msgid " Emacs key: "
 #~ msgstr " Tecla d'Emacs: "

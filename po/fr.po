@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-29 12:37+0300\n"
+"POT-Creation-Date: 2009-09-30 11:15+0300\n"
 "PO-Revision-Date: 2002-04-30 16:46+0200\n"
 "Last-Translator: Christophe Merlet (RedFox) <christophe@merlet.net>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
@@ -920,6 +920,10 @@ msgstr "Utiliser les caractères graphiques pour dessiner"
 
 msgid "Resets soft keys on HP terminals"
 msgstr "Réinitialiser les « softkeys » sur les terminaux HP"
+
+#, fuzzy
+msgid "Load definitions of key bindings from specified file"
+msgstr "Consigne les dialogues FTP dans le fichier spécifié"
 
 msgid "Requests to run in black and white"
 msgstr "Demande à fonctionner en mode noir et blanc"
@@ -2894,6 +2898,18 @@ msgstr " Choisissez un codepage d'entrée"
 msgid "-  < No translation >"
 msgstr "- < Pas de conversion >"
 
+#, c-format
+msgid ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -3108,6 +3124,9 @@ msgstr "Pavé numérique +"
 msgid "- on keypad"
 msgstr "Pavé numérique -"
 
+msgid "Slash on keypad"
+msgstr "« / » sur pavé numérique"
+
 msgid "* on keypad"
 msgstr "Pavé numérique *"
 
@@ -3144,19 +3163,98 @@ msgstr "« Suppr » sur pavé numérique"
 msgid "Enter on keypad"
 msgstr "« Entrée » sur pavé numérique"
 
+msgid "Plus"
+msgstr ""
+
 #, fuzzy
-msgid "Tab on keypad"
+msgid "Minus"
+msgstr "Menu"
+
+msgid "Asterisk"
+msgstr ""
+
+msgid "Dot"
+msgstr ""
+
+msgid "Less than"
+msgstr ""
+
+msgid "Great than"
+msgstr ""
+
+msgid "Equal"
+msgstr ""
+
+#, fuzzy
+msgid "Comma"
+msgstr "Commande"
+
+msgid "Apostrophe"
+msgstr ""
+
+#, fuzzy
+msgid "Colon"
+msgstr "Compter"
+
+msgid "Exclamation mark"
+msgstr ""
+
+msgid "Question mark"
+msgstr ""
+
+#, fuzzy
+msgid "Ampersand"
+msgstr "a&Joute"
+
+msgid "Dollar sign"
+msgstr ""
+
+msgid "Quotation mark"
+msgstr ""
+
+#, fuzzy
+msgid "Caret"
+msgstr "Cible"
+
+msgid "Tilda"
+msgstr ""
+
+#, fuzzy
+msgid "Prime"
+msgstr "Précédent"
+
+#, fuzzy
+msgid "Underline"
+msgstr " Saisissez la ligne : "
+
+msgid "Understrike"
+msgstr ""
+
+msgid "Pipe"
+msgstr ""
+
+#, fuzzy
+msgid "Enter"
+msgstr "propriétaire"
+
+#, fuzzy
+msgid "Tab key"
 msgstr "Pavé numérique +"
 
 #, fuzzy
-msgid "Space on keypad"
+msgid "Space key"
 msgstr "« / » sur pavé numérique"
 
-msgid "Slash on keypad"
+#, fuzzy
+msgid "Slash key"
 msgstr "« / » sur pavé numérique"
 
-msgid "NumLock on keypad"
-msgstr "NumLock sur pavé numérique"
+#, fuzzy
+msgid "Backslash key"
+msgstr "Retour arrière"
+
+msgid "Number sign #"
+msgstr ""
 
 msgid "Ctrl"
 msgstr ""
@@ -3844,6 +3942,9 @@ msgstr "Erreur interne :"
 
 msgid "Changes to file lost"
 msgstr "Les changements au fichier sont perdus"
+
+#~ msgid "NumLock on keypad"
+#~ msgstr "NumLock sur pavé numérique"
 
 #~ msgid " Emacs key: "
 #~ msgstr " Touches Emacs : "

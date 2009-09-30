@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-29 12:37+0300\n"
+"POT-Creation-Date: 2009-09-30 11:15+0300\n"
 "PO-Revision-Date: 2003-01-22 18:10+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <debian-l10n-swedish@lists.debian.org>\n"
@@ -932,6 +932,10 @@ msgstr "Använd \"stickchars\" för att rita"
 
 msgid "Resets soft keys on HP terminals"
 msgstr "Nollställ mjuka tangenter på HP-terminaler"
+
+#, fuzzy
+msgid "Load definitions of key bindings from specified file"
+msgstr "Logga ftpdialog till specificerad fil"
 
 msgid "Requests to run in black and white"
 msgstr "Begäran att köra i svartvitt"
@@ -2920,6 +2924,18 @@ msgstr " Välj teckentabell för inmatning "
 msgid "-  < No translation >"
 msgstr "- < Ingen översättning >"
 
+#, c-format
+msgid ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -3134,6 +3150,9 @@ msgstr "+ på numeriska tangentbordet"
 msgid "- on keypad"
 msgstr "- på numeriska tangentbordet"
 
+msgid "Slash on keypad"
+msgstr "Snedstreck, numeriska"
+
 msgid "* on keypad"
 msgstr "* på numeriska tangentbordet"
 
@@ -3170,19 +3189,98 @@ msgstr "Delete, numeriska"
 msgid "Enter on keypad"
 msgstr "Enter, numeriska"
 
+msgid "Plus"
+msgstr ""
+
 #, fuzzy
-msgid "Tab on keypad"
+msgid "Minus"
+msgstr "Meny"
+
+msgid "Asterisk"
+msgstr ""
+
+msgid "Dot"
+msgstr ""
+
+msgid "Less than"
+msgstr ""
+
+msgid "Great than"
+msgstr ""
+
+msgid "Equal"
+msgstr ""
+
+#, fuzzy
+msgid "Comma"
+msgstr "Kommando"
+
+msgid "Apostrophe"
+msgstr ""
+
+#, fuzzy
+msgid "Colon"
+msgstr "Summa"
+
+msgid "Exclamation mark"
+msgstr ""
+
+msgid "Question mark"
+msgstr ""
+
+#, fuzzy
+msgid "Ampersand"
+msgstr "b&Ifoga"
+
+msgid "Dollar sign"
+msgstr ""
+
+msgid "Quotation mark"
+msgstr ""
+
+#, fuzzy
+msgid "Caret"
+msgstr "Mål"
+
+msgid "Tilda"
+msgstr ""
+
+#, fuzzy
+msgid "Prime"
+msgstr "Tidigare"
+
+#, fuzzy
+msgid "Underline"
+msgstr " Ange radnummer: "
+
+msgid "Understrike"
+msgstr ""
+
+msgid "Pipe"
+msgstr ""
+
+#, fuzzy
+msgid "Enter"
+msgstr "ägare"
+
+#, fuzzy
+msgid "Tab key"
 msgstr "+ på numeriska tangentbordet"
 
 #, fuzzy
-msgid "Space on keypad"
+msgid "Space key"
 msgstr "Snedstreck, numeriska"
 
-msgid "Slash on keypad"
+#, fuzzy
+msgid "Slash key"
 msgstr "Snedstreck, numeriska"
 
-msgid "NumLock on keypad"
-msgstr "Numlock, numeriska"
+#, fuzzy
+msgid "Backslash key"
+msgstr "Backspace"
+
+msgid "Number sign #"
+msgstr ""
 
 msgid "Ctrl"
 msgstr ""
@@ -3867,6 +3965,9 @@ msgstr " Internt fel:"
 
 msgid "Changes to file lost"
 msgstr "Ändringar i filen förlorade"
+
+#~ msgid "NumLock on keypad"
+#~ msgstr "Numlock, numeriska"
 
 #~ msgid " Emacs key: "
 #~ msgstr " Emacstangent: "

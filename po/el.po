@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.38\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-29 12:37+0300\n"
+"POT-Creation-Date: 2009-09-30 11:15+0300\n"
 "PO-Revision-Date: 1997-07-23 00:04-0400\n"
 "Last-Translator: Spiros Papadimitriou <spapadim+@cs.cmu.edu>\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
@@ -889,6 +889,9 @@ msgid "Use stickchars to draw"
 msgstr ""
 
 msgid "Resets soft keys on HP terminals"
+msgstr ""
+
+msgid "Load definitions of key bindings from specified file"
 msgstr ""
 
 msgid "Requests to run in black and white"
@@ -2719,6 +2722,18 @@ msgstr ""
 msgid "-  < No translation >"
 msgstr ""
 
+#, c-format
+msgid ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -2928,6 +2943,9 @@ msgstr ""
 msgid "- on keypad"
 msgstr ""
 
+msgid "Slash on keypad"
+msgstr ""
+
 msgid "* on keypad"
 msgstr ""
 
@@ -2964,16 +2982,88 @@ msgstr ""
 msgid "Enter on keypad"
 msgstr ""
 
-msgid "Tab on keypad"
+msgid "Plus"
 msgstr ""
 
-msgid "Space on keypad"
+msgid "Minus"
 msgstr ""
 
-msgid "Slash on keypad"
+msgid "Asterisk"
 msgstr ""
 
-msgid "NumLock on keypad"
+msgid "Dot"
+msgstr ""
+
+msgid "Less than"
+msgstr ""
+
+msgid "Great than"
+msgstr ""
+
+msgid "Equal"
+msgstr ""
+
+#, fuzzy
+msgid "Comma"
+msgstr "Εντολή"
+
+msgid "Apostrophe"
+msgstr ""
+
+msgid "Colon"
+msgstr ""
+
+msgid "Exclamation mark"
+msgstr ""
+
+msgid "Question mark"
+msgstr ""
+
+msgid "Ampersand"
+msgstr ""
+
+msgid "Dollar sign"
+msgstr ""
+
+msgid "Quotation mark"
+msgstr ""
+
+msgid "Caret"
+msgstr ""
+
+msgid "Tilda"
+msgstr ""
+
+msgid "Prime"
+msgstr ""
+
+#, fuzzy
+msgid "Underline"
+msgstr " Γραμμή: "
+
+msgid "Understrike"
+msgstr ""
+
+msgid "Pipe"
+msgstr ""
+
+#, fuzzy
+msgid "Enter"
+msgstr "Ιδιοκτήτης"
+
+msgid "Tab key"
+msgstr ""
+
+msgid "Space key"
+msgstr ""
+
+msgid "Slash key"
+msgstr ""
+
+msgid "Backslash key"
+msgstr ""
+
+msgid "Number sign #"
 msgstr ""
 
 msgid "Ctrl"

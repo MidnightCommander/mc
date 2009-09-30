@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-29 12:37+0300\n"
+"POT-Creation-Date: 2009-09-30 11:15+0300\n"
 "PO-Revision-Date: 2001-07-27 03:02+0800\n"
 "Last-Translator: Jing-Jong Shyue <shyue@sonoma.com.tw>\n"
 "Language-Team: Chinese <zh-l10n@linux.org.tw>\n"
@@ -916,6 +916,10 @@ msgstr "使用stickchars繪製"
 
 msgid "Resets soft keys on HP terminals"
 msgstr "在 HP 終端機上重設軟鍵 (soft keys)"
+
+#, fuzzy
+msgid "Load definitions of key bindings from specified file"
+msgstr "紀錄 FTP 對話框到特定檔案"
 
 msgid "Requests to run in black and white"
 msgstr "要求在黑白模式下執行"
@@ -2885,6 +2889,18 @@ msgstr " 選擇輸入頁碼 "
 msgid "-  < No translation >"
 msgstr "-  < 不轉換 >"
 
+#, c-format
+msgid ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -3100,6 +3116,9 @@ msgstr "數字區的 +"
 msgid "- on keypad"
 msgstr "數字區的 -"
 
+msgid "Slash on keypad"
+msgstr "數字區的 / 鍵"
+
 msgid "* on keypad"
 msgstr "數字區的 *"
 
@@ -3136,19 +3155,98 @@ msgstr "數字區的 Del 鍵"
 msgid "Enter on keypad"
 msgstr "數字區的 Enter 鍵"
 
+msgid "Plus"
+msgstr ""
+
 #, fuzzy
-msgid "Tab on keypad"
+msgid "Minus"
+msgstr "選單"
+
+msgid "Asterisk"
+msgstr ""
+
+msgid "Dot"
+msgstr ""
+
+msgid "Less than"
+msgstr ""
+
+msgid "Great than"
+msgstr ""
+
+msgid "Equal"
+msgstr ""
+
+#, fuzzy
+msgid "Comma"
+msgstr "指令"
+
+msgid "Apostrophe"
+msgstr ""
+
+#, fuzzy
+msgid "Colon"
+msgstr "計數"
+
+msgid "Exclamation mark"
+msgstr ""
+
+msgid "Question mark"
+msgstr ""
+
+#, fuzzy
+msgid "Ampersand"
+msgstr "追加"
+
+msgid "Dollar sign"
+msgstr ""
+
+msgid "Quotation mark"
+msgstr ""
+
+#, fuzzy
+msgid "Caret"
+msgstr "目標"
+
+msgid "Tilda"
+msgstr ""
+
+#, fuzzy
+msgid "Prime"
+msgstr "往前"
+
+#, fuzzy
+msgid "Underline"
+msgstr " 輸入行號： "
+
+msgid "Understrike"
+msgstr ""
+
+msgid "Pipe"
+msgstr ""
+
+#, fuzzy
+msgid "Enter"
+msgstr "擁有者"
+
+#, fuzzy
+msgid "Tab key"
 msgstr "數字區的 +"
 
 #, fuzzy
-msgid "Space on keypad"
+msgid "Space key"
 msgstr "數字區的 / 鍵"
 
-msgid "Slash on keypad"
+#, fuzzy
+msgid "Slash key"
 msgstr "數字區的 / 鍵"
 
-msgid "NumLock on keypad"
-msgstr "數字區的 NumLock 鍵"
+#, fuzzy
+msgid "Backslash key"
+msgstr "Backspace 鍵"
+
+msgid "Number sign #"
+msgstr ""
 
 msgid "Ctrl"
 msgstr ""
@@ -3831,6 +3929,9 @@ msgstr "內部錯誤:"
 
 msgid "Changes to file lost"
 msgstr "改變到檔案遺失"
+
+#~ msgid "NumLock on keypad"
+#~ msgstr "數字區的 NumLock 鍵"
 
 #~ msgid " Emacs key: "
 #~ msgstr " Emacs 按鍵："

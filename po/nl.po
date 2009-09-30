@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-29 12:37+0300\n"
+"POT-Creation-Date: 2009-09-30 11:15+0300\n"
 "PO-Revision-Date: 2009-02-13\n"
 "Last-Translator: Marcel Pol <mpol@gmx.net>\n"
 "Language-Team: Dutch <debian-l10n-dutch@lists.debian.org>\n"
@@ -905,6 +905,10 @@ msgstr "Gebruik ASCII karakters om te tekenen"
 
 msgid "Resets soft keys on HP terminals"
 msgstr "Zet soft-key bij HP terminals terug"
+
+#, fuzzy
+msgid "Load definitions of key bindings from specified file"
+msgstr "Schrijf FTP log naar aangegeven bestand"
 
 msgid "Requests to run in black and white"
 msgstr "Verzoek om in zwart/wit te werken"
@@ -2875,6 +2879,18 @@ msgstr " Kies invoerkarakterset"
 msgid "-  < No translation >"
 msgstr "- < Geen vertaling >"
 
+#, c-format
+msgid ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -3092,6 +3108,9 @@ msgstr "Numeriek +"
 msgid "- on keypad"
 msgstr "Numeriek -"
 
+msgid "Slash on keypad"
+msgstr "Numeriek /"
+
 msgid "* on keypad"
 msgstr "Numeriek *"
 
@@ -3128,19 +3147,98 @@ msgstr "Numeriek Del"
 msgid "Enter on keypad"
 msgstr "Numeriek Enter"
 
+msgid "Plus"
+msgstr ""
+
 #, fuzzy
-msgid "Tab on keypad"
+msgid "Minus"
+msgstr "Menu"
+
+msgid "Asterisk"
+msgstr ""
+
+msgid "Dot"
+msgstr ""
+
+msgid "Less than"
+msgstr ""
+
+msgid "Great than"
+msgstr ""
+
+msgid "Equal"
+msgstr ""
+
+#, fuzzy
+msgid "Comma"
+msgstr "Opdracht"
+
+msgid "Apostrophe"
+msgstr ""
+
+#, fuzzy
+msgid "Colon"
+msgstr "Aantal"
+
+msgid "Exclamation mark"
+msgstr ""
+
+msgid "Question mark"
+msgstr ""
+
+#, fuzzy
+msgid "Ampersand"
+msgstr "Toevoegen"
+
+msgid "Dollar sign"
+msgstr ""
+
+msgid "Quotation mark"
+msgstr ""
+
+#, fuzzy
+msgid "Caret"
+msgstr "Doel"
+
+msgid "Tilda"
+msgstr ""
+
+#, fuzzy
+msgid "Prime"
+msgstr "Terug"
+
+#, fuzzy
+msgid "Underline"
+msgstr " Geef regelnummer: "
+
+msgid "Understrike"
+msgstr ""
+
+msgid "Pipe"
+msgstr ""
+
+#, fuzzy
+msgid "Enter"
+msgstr "eigenaar"
+
+#, fuzzy
+msgid "Tab key"
 msgstr "Numeriek +"
 
 #, fuzzy
-msgid "Space on keypad"
+msgid "Space key"
 msgstr "Numeriek /"
 
-msgid "Slash on keypad"
+#, fuzzy
+msgid "Slash key"
 msgstr "Numeriek /"
 
-msgid "NumLock on keypad"
-msgstr "Numerisch NumLock"
+#, fuzzy
+msgid "Backslash key"
+msgstr "Backspace"
+
+msgid "Number sign #"
+msgstr ""
 
 msgid "Ctrl"
 msgstr ""
@@ -3821,6 +3919,9 @@ msgstr "Interne fout:"
 
 msgid "Changes to file lost"
 msgstr "Wijzigingen zijn verloren"
+
+#~ msgid "NumLock on keypad"
+#~ msgstr "Numerisch NumLock"
 
 #~ msgid " Emacs key: "
 #~ msgstr " Emacs-toets: "

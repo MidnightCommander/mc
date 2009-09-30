@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-29 12:37+0300\n"
+"POT-Creation-Date: 2009-09-30 11:15+0300\n"
 "PO-Revision-Date: 2009-02-16 19:45+0300\n"
 "Last-Translator: Andrius Štikonas <stikonas@gmail.com>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -904,6 +904,10 @@ msgstr "Naudoja alternatyvią pseudografiką"
 
 msgid "Resets soft keys on HP terminals"
 msgstr "Iš naujo nustato „soft keys“ HP terminaluose"
+
+#, fuzzy
+msgid "Load definitions of key bindings from specified file"
+msgstr "Veda FTP dialogo žurnalą į nurodytą failą"
 
 msgid "Requests to run in black and white"
 msgstr "Paleidžia nespalvotu režimu"
@@ -2869,6 +2873,18 @@ msgstr " Parinkite įvesties koduotę "
 msgid "-  < No translation >"
 msgstr "–  < Jokio vertimo >"
 
+#, c-format
+msgid ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -3086,6 +3102,9 @@ msgstr "Skaitm. +"
 msgid "- on keypad"
 msgstr "Skaitm. -"
 
+msgid "Slash on keypad"
+msgstr "Skaitm. /"
+
 msgid "* on keypad"
 msgstr "Skaitm. *"
 
@@ -3122,19 +3141,98 @@ msgstr "Skaitm. „Delete“"
 msgid "Enter on keypad"
 msgstr "Skaitm. „Enter“"
 
+msgid "Plus"
+msgstr ""
+
 #, fuzzy
-msgid "Tab on keypad"
+msgid "Minus"
+msgstr "Meniu"
+
+msgid "Asterisk"
+msgstr ""
+
+msgid "Dot"
+msgstr ""
+
+msgid "Less than"
+msgstr ""
+
+msgid "Great than"
+msgstr ""
+
+msgid "Equal"
+msgstr ""
+
+#, fuzzy
+msgid "Comma"
+msgstr "Komanda"
+
+msgid "Apostrophe"
+msgstr ""
+
+#, fuzzy
+msgid "Colon"
+msgstr "Kiekis"
+
+msgid "Exclamation mark"
+msgstr ""
+
+msgid "Question mark"
+msgstr ""
+
+#, fuzzy
+msgid "Ampersand"
+msgstr "&Papildyti"
+
+msgid "Dollar sign"
+msgstr ""
+
+msgid "Quotation mark"
+msgstr ""
+
+#, fuzzy
+msgid "Caret"
+msgstr "Į"
+
+msgid "Tilda"
+msgstr ""
+
+#, fuzzy
+msgid "Prime"
+msgstr "Atgal"
+
+#, fuzzy
+msgid "Underline"
+msgstr " Įveskite eilutę: "
+
+msgid "Understrike"
+msgstr ""
+
+msgid "Pipe"
+msgstr ""
+
+#, fuzzy
+msgid "Enter"
+msgstr "savin."
+
+#, fuzzy
+msgid "Tab key"
 msgstr "Skaitm. +"
 
 #, fuzzy
-msgid "Space on keypad"
+msgid "Space key"
 msgstr "Skaitm. /"
 
-msgid "Slash on keypad"
+#, fuzzy
+msgid "Slash key"
 msgstr "Skaitm. /"
 
-msgid "NumLock on keypad"
-msgstr "Skaitm. „NumLock“"
+#, fuzzy
+msgid "Backslash key"
+msgstr "„Backspace“"
+
+msgid "Number sign #"
+msgstr ""
 
 msgid "Ctrl"
 msgstr ""
@@ -3814,6 +3912,9 @@ msgstr "Vidinė klaida:"
 
 msgid "Changes to file lost"
 msgstr "Failo pakeitimai prarasti"
+
+#~ msgid "NumLock on keypad"
+#~ msgstr "Skaitm. „NumLock“"
 
 #~ msgid " Emacs key: "
 #~ msgstr " „Emacs“ klavišas: "

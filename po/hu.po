@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-29 12:37+0300\n"
+"POT-Creation-Date: 2009-09-30 11:15+0300\n"
 "PO-Revision-Date: 2005-07-22 00:47+0200\n"
 "Last-Translator: Arpad Biro <biro_arpad@yahoo.com>\n"
 "Language-Team: Hungarian <debian-l10n-hungarian@lists.debian.org>\n"
@@ -931,6 +931,10 @@ msgstr "7 bites ASCII karakterekkel való vonalrajzolás."
 # programozható billentyű?
 msgid "Resets soft keys on HP terminals"
 msgstr "HP terminálok \"soft\" billentyűinek alaphelyzetbe hozása."
+
+#, fuzzy
+msgid "Load definitions of key bindings from specified file"
+msgstr "Az FTP-párbeszéd naplózása a megadott fájlba."
 
 msgid "Requests to run in black and white"
 msgstr "Fekete-fehér üzemmód kérése."
@@ -2994,6 +2998,18 @@ msgstr " Válasszon beviteli kódlapot "
 msgid "-  < No translation >"
 msgstr "-  < Nincs konverzió >"
 
+#, c-format
+msgid ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -3214,6 +3230,9 @@ msgstr "\"+\" - numerikus"
 msgid "- on keypad"
 msgstr "\"-\" - numerikus"
 
+msgid "Slash on keypad"
+msgstr "\"/\" - numerikus"
+
 msgid "* on keypad"
 msgstr "\"*\" - numerikus"
 
@@ -3250,19 +3269,100 @@ msgstr "\"Delete\" - numer."
 msgid "Enter on keypad"
 msgstr "\"Enter\" - numer."
 
+msgid "Plus"
+msgstr ""
+
 #, fuzzy
-msgid "Tab on keypad"
+msgid "Minus"
+msgstr "Menü"
+
+msgid "Asterisk"
+msgstr ""
+
+msgid "Dot"
+msgstr ""
+
+msgid "Less than"
+msgstr ""
+
+msgid "Great than"
+msgstr ""
+
+msgid "Equal"
+msgstr ""
+
+# ez is egy prompt (azert a ":")
+#, fuzzy
+msgid "Comma"
+msgstr "Parancs:"
+
+msgid "Apostrophe"
+msgstr ""
+
+#, fuzzy
+msgid "Colon"
+msgstr "Darab"
+
+msgid "Exclamation mark"
+msgstr ""
+
+msgid "Question mark"
+msgstr ""
+
+# ha már létezik a célfájl
+#, fuzzy
+msgid "Ampersand"
+msgstr "&Hozzáírás"
+
+msgid "Dollar sign"
+msgstr ""
+
+msgid "Quotation mark"
+msgstr ""
+
+#, fuzzy
+msgid "Caret"
+msgstr "Cél"
+
+msgid "Tilda"
+msgstr ""
+
+#, fuzzy
+msgid "Prime"
+msgstr "Előző"
+
+#, fuzzy
+msgid "Underline"
+msgstr " Sor száma: "
+
+msgid "Understrike"
+msgstr ""
+
+msgid "Pipe"
+msgstr ""
+
+#, fuzzy
+msgid "Enter"
+msgstr "Tulajd."
+
+#, fuzzy
+msgid "Tab key"
 msgstr "\"+\" - numerikus"
 
 #, fuzzy
-msgid "Space on keypad"
+msgid "Space key"
 msgstr "\"/\" - numerikus"
 
-msgid "Slash on keypad"
+#, fuzzy
+msgid "Slash key"
 msgstr "\"/\" - numerikus"
 
-msgid "NumLock on keypad"
-msgstr "\"Num Lock\" - num."
+#, fuzzy
+msgid "Backslash key"
+msgstr "\"Backspace\" gomb"
+
+msgid "Number sign #"
+msgstr ""
 
 msgid "Ctrl"
 msgstr ""
@@ -3962,6 +4062,9 @@ msgstr "Belső programhiba:"
 
 msgid "Changes to file lost"
 msgstr "A fájl módosításai nem lettek rögzítve."
+
+#~ msgid "NumLock on keypad"
+#~ msgstr "\"Num Lock\" - num."
 
 #~ msgid " Emacs key: "
 #~ msgstr " Emacs-billentyű: "

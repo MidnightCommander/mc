@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-09-29 12:37+0300\n"
+"POT-Creation-Date: 2009-09-30 11:15+0300\n"
 "PO-Revision-Date: 2001-11-06 05:50+0200\n"
 "Last-Translator: Nilgün Belma Bugüner <nilgun@fide.org>\n"
 "Language-Team: Turkish <debian-l10n-turkish@lists.debian.org>\n"
@@ -919,6 +919,10 @@ msgstr "Pencere çizgilerinde çubuk karakterleri kullanılır"
 
 msgid "Resets soft keys on HP terminals"
 msgstr "HP terminallerde soft tuşları sıfırlar"
+
+#, fuzzy
+msgid "Load definitions of key bindings from specified file"
+msgstr "ftp dialog günlüğünü belirtilen dosyaya yazar"
 
 msgid "Requests to run in black and white"
 msgstr "Siyah/Beyaz olarak çalıştırma isteği"
@@ -2886,6 +2890,18 @@ msgstr " Girdi karakter kümesini seçin "
 msgid "-  < No translation >"
 msgstr "-  < Çeviri yok >"
 
+#, c-format
+msgid ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -3100,6 +3116,9 @@ msgstr "Gri +"
 msgid "- on keypad"
 msgstr "Gri -"
 
+msgid "Slash on keypad"
+msgstr "Sayılarda / tuşu"
+
 msgid "* on keypad"
 msgstr "Gri *"
 
@@ -3136,19 +3155,98 @@ msgstr "Sayılarda Del tuşu"
 msgid "Enter on keypad"
 msgstr "Sayılarda Enter tuşu"
 
+msgid "Plus"
+msgstr ""
+
 #, fuzzy
-msgid "Tab on keypad"
+msgid "Minus"
+msgstr "KMenü"
+
+msgid "Asterisk"
+msgstr ""
+
+msgid "Dot"
+msgstr ""
+
+msgid "Less than"
+msgstr ""
+
+msgid "Great than"
+msgstr ""
+
+msgid "Equal"
+msgstr ""
+
+#, fuzzy
+msgid "Comma"
+msgstr "Komut"
+
+msgid "Apostrophe"
+msgstr ""
+
+#, fuzzy
+msgid "Colon"
+msgstr "Sayı"
+
+msgid "Exclamation mark"
+msgstr ""
+
+msgid "Question mark"
+msgstr ""
+
+#, fuzzy
+msgid "Ampersand"
+msgstr "Sonuna &Ekle"
+
+msgid "Dollar sign"
+msgstr ""
+
+msgid "Quotation mark"
+msgstr ""
+
+#, fuzzy
+msgid "Caret"
+msgstr "Hedef"
+
+msgid "Tilda"
+msgstr ""
+
+#, fuzzy
+msgid "Prime"
+msgstr "Önceki"
+
+#, fuzzy
+msgid "Underline"
+msgstr " Satırı girin: "
+
+msgid "Understrike"
+msgstr ""
+
+msgid "Pipe"
+msgstr ""
+
+#, fuzzy
+msgid "Enter"
+msgstr "sahibi"
+
+#, fuzzy
+msgid "Tab key"
 msgstr "Gri +"
 
 #, fuzzy
-msgid "Space on keypad"
+msgid "Space key"
 msgstr "Sayılarda / tuşu"
 
-msgid "Slash on keypad"
+#, fuzzy
+msgid "Slash key"
 msgstr "Sayılarda / tuşu"
 
-msgid "NumLock on keypad"
-msgstr "Numlock tuşu"
+#, fuzzy
+msgid "Backslash key"
+msgstr "Geriye silme tuşu "
+
+msgid "Number sign #"
+msgstr ""
 
 msgid "Ctrl"
 msgstr ""
@@ -3832,6 +3930,9 @@ msgstr "İç hata:"
 
 msgid "Changes to file lost"
 msgstr "Değişiklikler kayıp"
+
+#~ msgid "NumLock on keypad"
+#~ msgstr "Numlock tuşu"
 
 #~ msgid " Emacs key: "
 #~ msgstr " Emacs tuşu: "
