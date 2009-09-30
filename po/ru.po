@@ -98,7 +98,7 @@ msgid " Cannot open pipe for writing: "
 msgstr " Невозможно открыть канал для записи: "
 
 msgid " Cannot open file for writing: %s "
-msgstr " Невозможно открыть файл для записи: "
+msgstr " Невозможно открыть файл для записи: %s "
 
 msgid "Quick save "
 msgstr "Быстрое сохранение"
