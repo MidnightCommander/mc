@@ -59,7 +59,7 @@ SRCS =	args.c args.h achown.c achown.h background.c background.h	\
 	cons.saver.h dialog.c dialog.h dir.c dir.h			\
 	execute.c execute.h ext.c ext.h file.c filegui.c		\
 	filegui.h file.h filenot.c fileopctx.c fileopctx.h find.c	\
-	find.h fs.h							\
+	fileloc.h find.h fs.h						\
 	glibcompat.c glibcompat.h global.h help.c help.h hotlist.c	\
 	hotlist.h info.c info.h layout.c				\
 	layout.h learn.c learn.h listmode.c listmode.h history.h	\
