@@ -2558,13 +2558,6 @@ do_panel_event (Gpm_Event *event, WPanel *panel, int *redir)
     const gboolean is_active = dlg_widget_active (panel);
     const gboolean mouse_down = (event->type & GPM_DOWN) != 0;
 
-    /* rest of the upper frame, the menu is invisible - call menu */
-    if (mouse_down && event->y == 1 && !menubar_visible) {
-	*redir = 1;
-	event->x += panel->widget.x;
-	return (*(the_menubar->widget.mouse)) (event, the_menubar);
-    }
-
     /* "<" button */
     if (mouse_down && event->y == 1 && event->x == 2) {
 	directory_history_prev (panel);
@@ -2583,6 +2576,13 @@ do_panel_event (Gpm_Event *event, WPanel *panel, int *redir)
 	return MOU_NORMAL;
     }
 
+    /* rest of the upper frame, the menu is invisible - call menu */
+    if (mouse_down && event->y == 1 && !menubar_visible) {
+	*redir = 1;
+	event->x += panel->widget.x;
+	return the_menubar->widget.mouse (event, the_menubar);
+    }
+
     /* Mouse wheel events */
     if (mouse_down && (event->buttons & GPM_B_UP)) {
 	if (is_active) {
@@ -2593,6 +2593,7 @@ do_panel_event (Gpm_Event *event, WPanel *panel, int *redir)
 	}
 	return MOU_NORMAL;
     }
+
     if (mouse_down && (event->buttons & GPM_B_DOWN)) {
 	if (is_active) {
 	    if (panel->top_file + ITEMS (panel) < panel->count)
