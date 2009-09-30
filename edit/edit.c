@@ -2191,7 +2191,7 @@ edit_do_undo (WEdit * edit)
     long count = 0;
 
     edit->stack_disable = 1;	/* don't record undo's onto undo stack! */
-
+    edit->over_col = 0;
     while ((ac = pop_action (edit)) < KEY_PRESS) {
 	switch ((int) ac) {
 	case STACK_BOTTOM:
