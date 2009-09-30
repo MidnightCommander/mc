@@ -128,6 +128,7 @@ static int
 mc_fhl_get_color_filetype (mc_fhl_filter_t * mc_filter, mc_fhl_t * fhl, file_entry * fe)
 {
     gboolean my_color = FALSE;
+    (void) fhl;
 
     switch (mc_filter->file_type) {
     case MC_FLHGH_FTYPE_T_FILE:
@@ -202,6 +203,7 @@ mc_fhl_get_color_filetype (mc_fhl_filter_t * mc_filter, mc_fhl_t * fhl, file_ent
 static int
 mc_fhl_get_color_regexp (mc_fhl_filter_t * mc_filter, mc_fhl_t * fhl, file_entry * fe)
 {
+    (void) fhl;
     if (mc_filter->search_condition == NULL)
         return -1;
 

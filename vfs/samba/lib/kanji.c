@@ -1145,6 +1145,7 @@ void interpret_coding_system(const char *str)
    
 static size_t skip_non_multibyte_char(char c)
 {
+  (void) c;
   return 0;
 }
 
@@ -1154,6 +1155,7 @@ static size_t skip_non_multibyte_char(char c)
 
 static BOOL not_multibyte_char_1(char c)
 {
+  (void) c;
   return False;
 }
 

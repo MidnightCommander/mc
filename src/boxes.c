@@ -346,7 +346,7 @@ sort_box (sortfn *sort_fn, int *reverse, int *case_sensitive, int *exec_first)
 	/* dialog */
 	quick_dlg.xlen = dlg_width;
 	/* widgets */
-	for (i = 0; i < sizeof (quick_widgets)/sizeof (quick_widgets[0]) - 1; i++)
+	for (i = 0; (size_t) i < sizeof (quick_widgets)/sizeof (quick_widgets[0]) - 1; i++)
 	    quick_widgets[i].x_divisions = dlg_width;
 	/* buttons */
 	quick_widgets[0].relative_x = dlg_width * 2/3 - cancel_len/2;

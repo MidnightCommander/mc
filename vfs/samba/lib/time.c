@@ -334,7 +334,7 @@ check if it's a null mtime
 ****************************************************************************/
 BOOL null_mtime(time_t mtime)
 {
-  if (mtime == 0 || mtime == 0xFFFFFFFF || mtime == (time_t)-1)
+  if (mtime == (time_t)0 || mtime == (time_t)0xFFFFFFFF || mtime == (time_t)-1)
     return(True);
   return(False);
 }

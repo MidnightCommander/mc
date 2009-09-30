@@ -819,9 +819,9 @@ char *
 file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
 		  const char *def_text, int only_one, int *do_background)
 {
-    const int FMDY = 13;
-    const int FMDX = 64;
-    int fmd_xlen = 0;
+    const size_t FMDY = 13;
+    const size_t FMDX = 64;
+    size_t fmd_xlen = 0;
 
     int source_easy_patterns = easy_patterns;
     size_t i, len;

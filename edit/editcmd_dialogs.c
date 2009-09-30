@@ -105,7 +105,7 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
 	    /*  5 */ QUICK_CHECKBOX (33, REPLACE_DLG_WIDTH,  8, REPLACE_DLG_HEIGHT, N_("&Backwards"), &edit->replace_backwards),
 	    /*  6 */ QUICK_CHECKBOX (33, REPLACE_DLG_WIDTH,  7, REPLACE_DLG_HEIGHT, N_("case &Sensitive"), &edit->replace_case),
 	    /*  7 */ QUICK_RADIO (3, REPLACE_DLG_WIDTH,   7, REPLACE_DLG_HEIGHT,
-				num_of_types, (const char **) list_of_types, &edit->search_type),
+				num_of_types, (const char **) list_of_types, (int *) &edit->search_type),
 	    /*  8 */ QUICK_LABEL (2, REPLACE_DLG_WIDTH,   4, REPLACE_DLG_HEIGHT, N_(" Enter replacement string:")),
 	    /*  9 */ QUICK_INPUT (3, REPLACE_DLG_WIDTH,   5, REPLACE_DLG_HEIGHT,
 				replace_default, REPLACE_DLG_WIDTH - 6, 0, "replace", replace_text),
@@ -144,7 +144,7 @@ editcmd_dialog_search_show (WEdit * edit, char **search_text)
 	size_t num_of_types;
 	gchar **list_of_types = mc_search_get_types_strings_array (&num_of_types);
 	int SEARCH_DLG_HEIGHT = SEARCH_DLG_MIN_HEIGHT + num_of_types - SEARCH_DLG_HEIGHT_SUPPLY;
-	int i;
+	size_t i;
 
 	int dialog_result;
 
@@ -170,7 +170,7 @@ editcmd_dialog_search_show (WEdit * edit, char **search_text)
 	    QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT, N_("case &Sensitive"), &edit->replace_case),
 	    /* 8 */
 	    QUICK_RADIO ( 3, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT,
-				    num_of_types, (const char **) list_of_types, &edit->search_type),
+				    num_of_types, (const char **) list_of_types, (int *) &edit->search_type),
 	    /* 9 */
 	    QUICK_INPUT (3, SEARCH_DLG_WIDTH, 3, SEARCH_DLG_HEIGHT,
 				    *search_text, SEARCH_DLG_WIDTH - 6, 0, MC_HISTORY_SHARED_SEARCH, search_text),
@@ -180,9 +180,9 @@ editcmd_dialog_search_show (WEdit * edit, char **search_text)
 	};
 
 #ifdef HAVE_CHARSET
-	int last_checkbox = 7;
+	size_t last_checkbox = 7;
 #else
-	int last_checkbox = 6;
+	size_t last_checkbox = 6;
 #endif
 
 	QuickDialog Quick_input =

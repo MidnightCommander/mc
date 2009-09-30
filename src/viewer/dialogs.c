@@ -92,7 +92,7 @@ mcview_dialog_search (mcview_t * view)
 	QUICK_CHECKBOX (SEARCH_DLG_WIDTH / 2 + 3, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT,
 			N_("case &Sensitive"),  &view->search_case),
 	QUICK_RADIO (3, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT,
-			num_of_types, (const char **) list_of_types, &view->search_type),
+			num_of_types, (const char **) list_of_types, (int *) &view->search_type),
 	QUICK_INPUT (3, SEARCH_DLG_WIDTH, 3, SEARCH_DLG_HEIGHT,
 			INPUT_LAST_TEXT, SEARCH_DLG_WIDTH - 6, 0, MC_HISTORY_SHARED_SEARCH, &exp),
 	QUICK_LABEL (2, SEARCH_DLG_WIDTH, 2, SEARCH_DLG_HEIGHT, N_(" Enter search string:")),

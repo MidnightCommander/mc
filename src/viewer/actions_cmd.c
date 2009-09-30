@@ -124,62 +124,6 @@ mcview_continue_search_cmd (mcview_t * view)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-static cb_ret_t
-mcview_handle_editkey (mcview_t * view, int key)
-{
-    struct hexedit_change_node *node;
-    int byte_val;
-
-    /* Has there been a change at this position? */
-    node = view->change_list;
-    while (node && (node->offset != view->hex_cursor))
-        node = node->next;
-
-    if (!view->hexview_in_text) {
-        /* Hex editing */
-        unsigned int hexvalue = 0;
-
-        if (key >= '0' && key <= '9')
-            hexvalue = 0 + (key - '0');
-        else if (key >= 'A' && key <= 'F')
-            hexvalue = 10 + (key - 'A');
-        else if (key >= 'a' && key <= 'f')
-            hexvalue = 10 + (key - 'a');
-        else
-            return MSG_NOT_HANDLED;
-
-        if (node)
-            byte_val = node->value;
-        else
-            mcview_get_byte (view, view->hex_cursor, &byte_val);
-
-        if (view->hexedit_lownibble) {
-            byte_val = (byte_val & 0xf0) | (hexvalue);
-        } else {
-            byte_val = (byte_val & 0x0f) | (hexvalue << 4);
-        }
-    } else {
-        /* Text editing */
-        if (key < 256 && ((key == '\n') || is_printable (key)))
-            byte_val = key;
-        else
-            return MSG_NOT_HANDLED;
-    }
-    if (!node) {
-        node = g_new (struct hexedit_change_node, 1);
-        node->offset = view->hex_cursor;
-        node->value = byte_val;
-        mcview_enqueue_change (&view->change_list, node);
-    } else {
-        node->value = byte_val;
-    }
-    view->dirty++;
-    mcview_update (view);
-    mcview_move_right (view, 1);
-    return MSG_HANDLED;
-}
-
-/* --------------------------------------------------------------------------------------------- */
 
 /* Check for left and right arrows, possibly with modifiers */
 static cb_ret_t
@@ -289,6 +233,7 @@ static cb_ret_t
 mcview_execute_cmd (mcview_t * view, int command, int key)
 {
     int res = MSG_HANDLED;
+    (void) key;
 
     if (view->hex_mode) {
         switch (command) {
