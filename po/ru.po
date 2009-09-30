@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
 "POT-Creation-Date: 2009-09-30 11:15+0300\n"
-"PO-Revision-Date: 2009-08-26 23:37+0300\n"
-"Last-Translator: Ilia Maslakov <il.smind@gmail.com>\n"
+"PO-Revision-Date: 2009-09-30  11:15+0300\n"
+"Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -97,9 +97,8 @@ msgstr " Ошибка записи в канал: "
 msgid " Cannot open pipe for writing: "
 msgstr " Невозможно открыть канал для записи: "
 
-#, fuzzy, c-format
 msgid " Cannot open file for writing: %s "
-msgstr " Невозможно открыть канал для записи: "
+msgstr " Невозможно открыть файл для записи: "
 
 msgid "Quick save "
 msgstr "Быстрое сохранение"
@@ -120,19 +119,19 @@ msgid " Edit Save Mode "
 msgstr " Режим сохранения "
 
 msgid "&Do not change"
-msgstr ""
+msgstr "&Не изменять"
 
 msgid "&Unix format (LF)"
-msgstr ""
+msgstr "Формат &UNIX (LF)"
 
 msgid "&Windows/DOS format (CR LF)"
-msgstr ""
+msgstr "Формат &Windows/DOS (CR LF)"
 
 msgid "&Macintosh format (CR)"
-msgstr ""
+msgstr "Формат &Macintosh (CR)"
 
 msgid "Change line breaks to:"
-msgstr ""
+msgstr "Изменить окончания строк на:"
 
 msgid " Enter file name: "
 msgstr " Введите имя файла: "
@@ -885,9 +884,8 @@ msgstr "Использовать псевдографику для рисова�
 msgid "Resets soft keys on HP terminals"
 msgstr "Сбросить программные клавиши на терминалах HP"
 
-#, fuzzy
 msgid "Load definitions of key bindings from specified file"
-msgstr "Записывать диалог с FTP в заданный файл"
+msgstr "Чтение определений привязок клавиш из указанного файла"
 
 msgid "Requests to run in black and white"
 msgstr "Принудительно установить черно-белый режим"
@@ -899,7 +897,7 @@ msgid "Specifies a color configuration"
 msgstr "Определить настройки цветов"
 
 msgid "Show mc with specified skin"
-msgstr ""
+msgstr "Отобразить mc с указанным скином"
 
 #. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
@@ -931,7 +929,6 @@ msgstr ""
 "                       editlinestate\n"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#, fuzzy
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 "\n"
@@ -943,8 +940,6 @@ msgid ""
 msgstr ""
 "   Справка:            helpnormal, helpitalic, helpbold, helplink, "
 "helpslink\n"
-"   Типы файлов:        directory, executable, link, stalelink, device, "
-"special, core\n"
 "\n"
 "Цвета:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -952,16 +947,14 @@ msgstr ""
 "   brightcyan, lightgray, white\n"
 "\n"
 
-#, fuzzy
 msgid "Color options"
-msgstr "Параметры конфигурации"
+msgstr "Цветовые опции"
 
 msgid "+number"
 msgstr "+число"
 
-#, fuzzy
 msgid "[this_dir] [other_panel_dir]"
-msgstr "[флаги] [этот_каталог] [каталог_другой_панели]\n"
+msgstr "[этот_каталог] [каталог_другой_панели]\n"
 
 msgid "Set initial line number for the internal editor"
 msgstr "Задать начальную строку для встроенного редактора"
@@ -979,13 +972,11 @@ msgstr ""
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander, версия %s\n"
 
-#, fuzzy
 msgid "Main options"
-msgstr " Настройки панелей "
+msgstr "Основные опции"
 
-#, fuzzy
 msgid "Terminal options"
-msgstr " Прочие настройки "
+msgstr "Опции терминала"
 
 msgid " Background process error "
 msgstr " Ошибка фонового процесса "
@@ -1027,13 +1018,11 @@ msgstr "Строка &мини-статуса в формате пользова
 msgid "&Reverse"
 msgstr "&Обратный"
 
-#, fuzzy
 msgid "Case sensi&tive"
 msgstr "Учет ре&гистра"
 
-#, fuzzy
 msgid "Executable &first"
-msgstr "Исполняемые вначале"
+msgstr "Исполняемые &вначале"
 
 msgid "Sort order"
 msgstr "Порядок сортировки"
@@ -1324,11 +1313,10 @@ msgid " Which extension file you want to edit? "
 msgstr " Какой файл расширений Вы хотите редактировать? "
 
 msgid "Highlighting groups file edit"
-msgstr ""
+msgstr "Редактирование файла подсветки имён"
 
-#, fuzzy
 msgid " Which highlighting file you want to edit? "
-msgstr " Какой файл расширений Вы хотите редактировать? "
+msgstr " Какой файл расцветки имён Вы хотите редактировать? "
 
 msgid " Compare directories "
 msgstr " Сравнить каталоги "
@@ -1927,9 +1915,8 @@ msgstr "Приемник"
 msgid "Deleting"
 msgstr "Удаляем"
 
-#, fuzzy
 msgid "Target file already exists!"
-msgstr "Целевой файл \"%s\" уже существует!"
+msgstr "Целевой файл уже существует!"
 
 #, c-format
 msgid "Source date: %s, size %llu"
@@ -1977,9 +1964,8 @@ msgstr "В &фоне"
 msgid "&Stable Symlinks"
 msgstr "&Сохранять символические ссылки"
 
-#, fuzzy
 msgid "di&Ve into subdir if exists"
-msgstr "&Внутрь каталога, если есть"
+msgstr "&Внутрь подкаталога, если есть"
 
 msgid "preserve &Attributes"
 msgstr "Сохранять &атрибуты"
@@ -2543,7 +2529,7 @@ msgid "Edit &menu file"
 msgstr "Файл &меню"
 
 msgid "Edit &highlighting group file"
-msgstr ""
+msgstr "Редактировать файл расцветки имён"
 
 msgid "&Configuration..."
 msgstr "&Конфигурация..."
@@ -2868,12 +2854,16 @@ msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
 msgstr ""
+"Невозможно загрузить скин '%s'.\n"
+"Используется скин по умолчанию"
 
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
 msgstr ""
+"Невозможно отпарсить скин '%s'.\n"
+"Используется скин по умолчанию"
 
 msgid ""
 "GNU Midnight Commander is already\n"
@@ -3131,97 +3121,85 @@ msgid "Enter on keypad"
 msgstr "Enter доп.клавиатуры"
 
 msgid "Plus"
-msgstr ""
+msgstr "Плюс"
 
-#, fuzzy
 msgid "Minus"
-msgstr "Меню"
+msgstr "Минус"
 
 msgid "Asterisk"
-msgstr ""
+msgstr "Звёздочка"
 
 msgid "Dot"
-msgstr ""
+msgstr "Точка"
 
 msgid "Less than"
-msgstr ""
+msgstr "Меньше"
 
 msgid "Great than"
-msgstr ""
+msgstr "Больше"
 
 msgid "Equal"
-msgstr ""
+msgstr "Равно"
 
-#, fuzzy
 msgid "Comma"
-msgstr "Команда"
+msgstr "Запятая"
 
 msgid "Apostrophe"
-msgstr ""
+msgstr "апостроф"
 
-#, fuzzy
 msgid "Colon"
-msgstr "Счет"
+msgstr "Двоеточие"
 
 msgid "Exclamation mark"
-msgstr ""
+msgstr "Восклицательный знак"
 
 msgid "Question mark"
-msgstr ""
+msgstr "Вопросительный знак"
 
-#, fuzzy
 msgid "Ampersand"
-msgstr "дописать в &Конец"
+msgstr "Амперсанд"
 
 msgid "Dollar sign"
-msgstr ""
+msgstr "Знак доллара"
 
 msgid "Quotation mark"
-msgstr ""
+msgstr "Знак цитирования"
 
-#, fuzzy
 msgid "Caret"
-msgstr "Приемник"
+msgstr "Каретка"
 
 msgid "Tilda"
-msgstr ""
+msgstr "Тильда"
 
-#, fuzzy
 msgid "Prime"
-msgstr "Назад"
+msgstr "обратный апостроф"
 
-#, fuzzy
 msgid "Underline"
-msgstr " Введите номер строки: "
+msgstr "Подчёркивание"
 
 msgid "Understrike"
-msgstr ""
+msgstr "Подчёркивание"
 
 msgid "Pipe"
-msgstr ""
+msgstr "Прямая черта"
 
-#, fuzzy
 msgid "Enter"
-msgstr "хозяин"
+msgstr "Ввод"
 
-#, fuzzy
 msgid "Tab key"
-msgstr "Таб доп.клавиатуры"
+msgstr "Клавиша TAB"
 
-#, fuzzy
 msgid "Space key"
-msgstr "Пробел доп.клавиатуры"
+msgstr "Пробел"
 
-#, fuzzy
 msgid "Slash key"
-msgstr "Slash доп.клавиатуры"
+msgstr "Знак деления (слэш)"
 
-#, fuzzy
 msgid "Backslash key"
 msgstr "Клавиша Backspace"
 
 msgid "Number sign #"
-msgstr ""
+msgstr "Знак номера"
 
 msgid "Ctrl"
 msgstr "Ctrl"
@@ -3902,236 +3880,3 @@ msgstr "Внутренняя ошибка:"
 msgid "Changes to file lost"
 msgstr "Изменения для файла потеряны"
 
-#~ msgid "NumLock on keypad"
-#~ msgstr "NumLock доп.клавиатуры"
-
-#~ msgid " Emacs key: "
-#~ msgstr " Клавиша Emacs: "
-
-#~ msgid " %d items found, %d bookmarks added "
-#~ msgstr " %d найдено, %d закладок добавлено "
-
-#~ msgid "O&ne"
-#~ msgstr "&Один"
-
-#~ msgid "scanf &Expression"
-#~ msgstr "scanf &выражение"
-
-#~ msgid "replace &All"
-#~ msgstr "Заменить &всё"
-
-#~ msgid "pro&Mpt on replace"
-#~ msgstr "Подтверждать &замену"
-
-#~ msgid "&Whole words only"
-#~ msgstr "&Слово целиком"
-
-#~ msgid " Enter replacement argument order eg. 3,2,1,4 "
-#~ msgstr " Последовательность замены: напр. 3,2,1,4 "
-
-#~ msgid ""
-#~ " Invalid regular expression, or scanf expression with too many "
-#~ "conversions "
-#~ msgstr " Ошибочное регулярное или scanf выражение "
-
-#~ msgid " Error in replacement format string. "
-#~ msgstr " Ошибка в формате строки замены. "
-
-#~ msgid " Replacement too long. "
-#~ msgstr " Строка замены слишком велика. "
-
-#~ msgid "&Toggle Mark       F3"
-#~ msgstr "&Вкл/выкл. режим пометки           F3"
-
-#~ msgid "&Mark Columns    S-F3"
-#~ msgstr "Выделить &столбцы                S-F3"
-
-#~ msgid "Toggle &ins/overw Ins"
-#~ msgstr "&Режим вставки/замены             Ins"
-
-#~ msgid "&Copy              F5"
-#~ msgstr "&Копирование           F5"
-
-#~ msgid "&Move              F6"
-#~ msgstr "&Сохранить             F2"
-
-#~ msgid "&Delete            F8"
-#~ msgstr "&Удаление              F8"
-
-#~ msgid "&Undo             C-u"
-#~ msgstr "&Отмена                           C-u"
-
-#~ msgid "&Beginning     C-PgUp"
-#~ msgstr "&Начало файла                  C-PgUp"
-
-#~ msgid "&End           C-PgDn"
-#~ msgstr "Конец &файла                   C-PgDn"
-
-#~ msgid "Save setu&p..."
-#~ msgstr "&Сохранить настройки"
-
-#~ msgid "  Malformed regular expression  "
-#~ msgstr " Регулярное выражение сформировано неверно "
-
-#~ msgid " The command history is empty "
-#~ msgstr "История командной строки пуста"
-
-#~ msgid " Command history "
-#~ msgstr "&История командной строки  M-h"
-
-#~ msgid " Invalid target mask "
-#~ msgstr " Неверная целевая маска "
-
-#~ msgid " `%s' and `%s' are the same file "
-#~ msgstr ""
-#~ " `%s' \n"
-#~ " и \n"
-#~ " `%s' \n"
-#~ " один и тот же file "
-
-#~ msgid " `%s' and `%s' are the same directory "
-#~ msgstr ""
-#~ " `%s' \n"
-#~ " и \n"
-#~ " `%s' \n"
-#~ " один и тот же каталог "
-
-#~ msgid ""
-#~ "Invalid source pattern `%s' \n"
-#~ " %s "
-#~ msgstr "Неправильный образец \"%s\" %s "
-
-#~ msgid "Ski&p hidden"
-#~ msgstr "Про&пускать скр&ытые"
-
-#~ msgid "Filename:"
-#~ msgstr "Имя файла:"
-
-#~ msgid "Content: "
-#~ msgstr "Содержимое: "
-
-#~ msgid "command &History"
-#~ msgstr "&История командной строки   M-h"
-
-#~ msgid "Edit edi&tor menu file"
-#~ msgstr "Редактирование Файл &меню"
-
-#~ msgid "Edit &syntax file"
-#~ msgstr "Редактирование файла синтаксиса"
-
-#~ msgid ""
-#~ "--colors KEYWORD={FORE},{BACK}\n"
-#~ "\n"
-#~ "{FORE} and {BACK} can be omitted, and the default will be used\n"
-#~ "\n"
-#~ "Keywords:\n"
-#~ "   Global:       errors, reverse, gauge, input, viewunderline\n"
-#~ "   File display: normal, selected, marked, markselect\n"
-#~ "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-#~ "                 errdhotfocus\n"
-#~ "   Menus:        menu, menuhot, menusel, menuhotsel\n"
-#~ "   Editor:       editnormal, editbold, editmarked\n"
-#~ "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-#~ "   File types:   directory, executable, link, stalelink, device, special, "
-#~ "core\n"
-#~ "\n"
-#~ "Colors:\n"
-#~ "   black, gray, red, brightred, green, brightgreen, brown,\n"
-#~ "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-#~ "   brightcyan, lightgray and white\n"
-#~ "\n"
-#~ msgstr ""
-#~ "--colors {КЛЮЧЕВОЕ СЛОВО}={ТЕКСТ},{ФОН}\n"
-#~ "\n"
-#~ "{ТЕКСТ} и {ФОН} можно опустить, чтобы использовать значения по умолчанию\n"
-#~ "\n"
-#~ "Ключевые слова:\n"
-#~ "   Обшие:              errors, reverse, gauge, input, viewunderline\n"
-#~ "   Отображение файлов: normal, selected, marked, markselect\n"
-#~ "   Диалоги:            dnormal, dfocus, dhotnormal, dhotfocus, "
-#~ "errdhotnormal,\n"
-#~ "                       errdhotfocus\n"
-#~ "   Меню:               menu, menuhot, menusel, menuhotsel\n"
-#~ "   Редактор:           editnormal, editbold, editmarked, editwhitespace,\n"
-#~ "                       editlinestate\n"
-#~ "   Справка:            helpnormal, helpitalic, helpbold, helplink, "
-#~ "helpslink\n"
-#~ "   Типы файлов:        directory, executable, link, stalelink, device, "
-#~ "special, core\n"
-#~ "\n"
-#~ "Цвета:\n"
-#~ "   black, gray, red, brightred, green, brightgreen, brown,\n"
-#~ "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-#~ "   brightcyan, lightgray and white\n"
-#~ "\n"
-
-#~ msgid "Displays this help message"
-#~ msgstr "Показать это справочное сообщение"
-
-#~ msgid "Displays a help screen on how to change the color scheme"
-#~ msgstr "Показать справку, как изменить цветовую схему"
-
-#~ msgid "missing argument"
-#~ msgstr "отсутствует аргумент"
-
-#~ msgid "unknown option"
-#~ msgstr "неизвестный ключ"
-
-#~ msgid "invalid numeric value"
-#~ msgstr "неверное числовое значение"
-
-#~ msgid "Show this help message"
-#~ msgstr "Показать это сообщение помощи"
-
-#~ msgid "Display brief usage message"
-#~ msgstr "Показать краткую инструкцию"
-
-#~ msgid "ARG"
-#~ msgstr "АРГ"
-
-#~ msgid "Usage:"
-#~ msgstr "Используйте:"
-
-#~ msgid " Choose input codepage "
-#~ msgstr " Выберите кодировку "
-
-#~ msgid "Invalid hex search expression"
-#~ msgstr "Неверное шеснадцетиричное значение для поиска"
-
-#~ msgid " Invalid regular expression "
-#~ msgstr " Регулярное выражение сформировано неверно "
-
-#~ msgid ""
-#~ " The current line number is %d.\n"
-#~ " Enter the new line number:"
-#~ msgstr ""
-#~ " Номер текущей строки %d.\n"
-#~ " Введите номер новой строки:"
-
-#~ msgid ""
-#~ " The current address is 0x%lx.\n"
-#~ " Enter the new address:"
-#~ msgstr ""
-#~ " Текущий адрес %lx.\n"
-#~ " Введите новый адрес:"
-
-#~ msgid " Enter regexp:"
-#~ msgstr " Введите регулярное выражение: "
-
-#~ msgid "ButtonBar|RxSrch"
-#~ msgstr "Нижняя панель|Поиск"
-
-#~ msgid "ftpfs: Invalid host address."
-#~ msgstr "ftpfs: неверный адрес хоста."
-
-#~ msgid " Dialogs "
-#~ msgstr " Диалоги "
-
-#~ msgid "%b %d %H:%M"
-#~ msgstr "%b %e %H:%M"
-
-#~ msgid "%b %d %Y"
-#~ msgstr "%b %e %Y"
-
-#~ msgid " The current address is 0x%08"
-#~ msgstr "  Текущий адрес - 0x%08"
