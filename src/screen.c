@@ -2441,13 +2441,6 @@ panel_toggle_sort_order_prev(WPanel *panel)
 
     const panel_field_t *pfield = NULL;
 
-    /* If reverse try to direct sort */
-    if (panel->reverse) {
-	panel->reverse = ! panel->reverse;
-	panel_set_sort_order(panel, panel->current_sort_field);
-	return;
-    }
-
     index = panel_get_format_field_index_by_name(panel, panel->current_sort_field->title);
 
     if (index > 1){
@@ -2469,7 +2462,6 @@ panel_toggle_sort_order_prev(WPanel *panel)
     }
     if ( pfield == NULL)
 	return;
-    panel->reverse = 1;
     panel->current_sort_field = pfield;
     panel_set_sort_order(panel, panel->current_sort_field);
 }
@@ -2481,13 +2473,6 @@ panel_toggle_sort_order_next(WPanel *panel)
     gsize index, i;
     const panel_field_t *pfield = NULL;
     gsize format_field_count = panel_get_format_field_count(panel);
-
-    /* If reverse try to direct sort */
-    if (! panel->reverse) {
-	panel->reverse = ! panel->reverse;
-	panel_set_sort_order(panel, panel->current_sort_field);
-	return;
-    }
 
     index = panel_get_format_field_index_by_name(panel, panel->current_sort_field->title);
 
@@ -2510,7 +2495,6 @@ panel_toggle_sort_order_next(WPanel *panel)
     }
     if ( pfield == NULL)
 	return;
-    panel->reverse = 0;
     panel->current_sort_field = pfield;
     panel_set_sort_order(panel, panel->current_sort_field);
 }
