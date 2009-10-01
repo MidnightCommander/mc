@@ -2513,6 +2513,18 @@ panel_select_sort_order(WPanel *panel)
 
 }
 
+static void
+panel_set_sort_type_by_id(WPanel *panel, const char *name)
+{
+    const panel_field_t *sort_order;
+
+    sort_order = panel_get_field_by_id (name);
+    if (sort_order == NULL)
+	return;
+    panel->current_sort_field = sort_order;
+    panel_set_sort_order (panel, panel->current_sort_field);
+}
+
 typedef void (*panel_key_callback) (WPanel *);
 
 static void cmd_do_enter(WPanel *wp) { (void) do_enter(wp); }
@@ -2632,6 +2644,22 @@ panel_execute_cmd (WPanel *panel, int command)
         break;
     case CK_PanelToggleSortOrderNext:
         panel_toggle_sort_order_next(panel);
+        break;
+    case CK_PanelReverseSort:
+        panel->reverse = ! panel->reverse;
+        panel_set_sort_order (panel, panel->current_sort_field);
+        break;
+    case CK_PanelSortOrderByName:
+        panel_set_sort_type_by_id(panel, "name");
+        break;
+    case CK_PanelSortOrderByExt:
+        panel_set_sort_type_by_id(panel, "extension");
+        break;
+    case CK_PanelSortOrderBySize:
+        panel_set_sort_type_by_id(panel, "size");
+        break;
+    case CK_PanelSortOrderByMTime:
+        panel_set_sort_type_by_id(panel, "mtime");
         break;
     }
    return res;

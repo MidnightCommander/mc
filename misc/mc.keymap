@@ -238,6 +238,12 @@ PanelMoveEnd = alt-gt; end
 PanelSelectSortOrder=
 PanelToggleSortOrderPrev=
 PanelToggleSortOrderNext=
+PanelReverseSort=
+PanelSortOrderByName=
+PanelSortOrderByExt=
+PanelSortOrderBySize=
+PanelSortOrderByMTime=
+
 
 [panel:xmap]
 
