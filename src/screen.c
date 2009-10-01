@@ -2839,8 +2839,8 @@ mouse_sort_col(Gpm_Event *event, WPanel *panel)
     panel_field_t *col_sort_format = NULL;
     format_e *format;
 
-
-    for (i=0, format = panel->format; format != NULL; format = format->next, i += format->field_len){
+    for (i=0, format = panel->format; format != NULL; format = format->next ){
+	i += format->field_len;
 	if ( event->x < i + 1) {
 	    /* found column */
 	    sort_name = format->title;
