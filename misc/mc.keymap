@@ -149,6 +149,8 @@ EditFindDefinition = alt-enter
 EditLoadPrevFile = alt-minus
 EditLoadNextFile = alt-equal
 
+SelectCodepage = ctrl-t
+
 [viewer:hex]
 HexViewToggleNavigationMode = tab
 ViewMoveToBol = ctrl-a; home
