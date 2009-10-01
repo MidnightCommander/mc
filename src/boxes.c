@@ -294,7 +294,7 @@ sort_box (const panel_field_t *sort_format, int *reverse, int *case_sensitive, i
 	    /* 4 */
 	    QUICK_CHECKBOX (0, dlg_width, 3, dlg_height, N_("Executable &first"), exec_first),
 	    /* 5 */
-	    QUICK_RADIO (4, dlg_width, 3, dlg_height, SORT_TYPES,
+	    QUICK_RADIO (4, dlg_width, 3, dlg_height, 0,
 				    NULL, &sort_idx),
 	    QUICK_END
 	};
@@ -308,6 +308,7 @@ sort_box (const panel_field_t *sort_format, int *reverse, int *case_sensitive, i
 
 	sort_orders_names = panel_get_sortable_fields(&sort_names_num);
 	quick_widgets[5].u.radio.items = sort_orders_names;
+	quick_widgets[5].u.radio.count = sort_names_num;
 
 	for (i = 0; i < sort_names_num; i++)
 	    if (strcmp (sort_orders_names[i], _(sort_format->title_hotkey)) == 0 ) {
@@ -332,7 +333,7 @@ sort_box (const panel_field_t *sort_format, int *reverse, int *case_sensitive, i
 	for (i = 2; i < 5; i++)
 	    max_check = max (max_check, str_term_width1 (quick_widgets[i].u.checkbox.text) + 4);
 	/* radiobuttons */
-	for (i = 0; i < SORT_TYPES; i++)
+	for (i = 0; i < sort_names_num; i++)
 	    max_radio  = max (max_radio, str_term_width1 (sort_orders_names[i]) + 4);
 
 	/* dialog width */
