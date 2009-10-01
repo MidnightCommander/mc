@@ -338,6 +338,9 @@
 #define CK_PanelSetPanelEncoding        8029
 #define CK_PanelStartSearch             8030
 #define CK_PanelSyncOtherPanel          8031
+#define CK_PanelToggleSortOrderNext     8032
+#define CK_PanelToggleSortOrderPrev     8033
+#define CK_PanelSelectSortOrder         8034
 
 /*
    Process a block through a shell command: CK_Pipe_Block(i) executes shell_cmd[i].

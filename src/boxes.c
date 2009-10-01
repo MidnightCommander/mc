@@ -264,8 +264,8 @@ display_box (WPanel *panel, char **userp, char **minip, int *use_msformat, int n
     return result;
 }
 
-const panel_format_t *
-sort_box (const panel_format_t *sort_format, int *reverse, int *case_sensitive, int *exec_first)
+const panel_field_t *
+sort_box (const panel_field_t *sort_format, int *reverse, int *case_sensitive, int *exec_first)
 {
     int dlg_width = 40, dlg_height = 15;
 
@@ -274,7 +274,7 @@ sort_box (const panel_format_t *sort_format, int *reverse, int *case_sensitive, 
 
     int sort_idx = 0;
 
-    const panel_format_t *result = sort_format;
+    const panel_field_t *result = sort_format;
 
     {
 	int max_radio = 0, max_check = 0;
@@ -306,7 +306,7 @@ sort_box (const panel_format_t *sort_format, int *reverse, int *case_sensitive, 
 	    quick_widgets, TRUE
 	};
 
-	sort_orders_names = panel_get_sortable_formats(&sort_names_num);
+	sort_orders_names = panel_get_sortable_fields(&sort_names_num);
 	quick_widgets[5].u.radio.items = sort_orders_names;
 
 	for (i = 0; i < sort_names_num; i++)
@@ -354,7 +354,7 @@ sort_box (const panel_format_t *sort_format, int *reverse, int *case_sensitive, 
 	    quick_widgets[i].relative_x = dlg_width/2 + 2;
 
 	if (quick_dialog (&quick_dlg) != B_CANCEL)
-	    result = panel_get_format_by_title_hotkey(sort_orders_names[sort_idx]);
+	    result = panel_get_field_by_title_hotkey(sort_orders_names[sort_idx]);
 
 	if (result == NULL)
 	    result = sort_format;

@@ -93,6 +93,7 @@ enum cd_enum {
 };
 
 int do_cd           (const char *new_dir, enum cd_enum cd_type); /* For find.c */
+void sort_cmd (void);
 void change_panel   (void);
 int load_prompt     (int, void *);
 void save_cwds_stat (void);

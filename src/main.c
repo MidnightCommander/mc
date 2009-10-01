@@ -612,11 +612,11 @@ load_prompt (int fd, void *unused)
 }
 #endif				/* HAVE_SUBSHELL_SUPPORT */
 
-static void
+void
 sort_cmd (void)
 {
     WPanel *p;
-    const panel_format_t *sort_order;
+    const panel_field_t *sort_order;
 
     if (!SELECTED_IS_PANEL)
 	return;

@@ -99,7 +99,7 @@ select_new_item (void)
     int i;
     Listbox *mylistbox;
 
-    possible_items = panel_get_user_possible_formats(NULL);
+    possible_items = panel_get_user_possible_fields(NULL);
 
     mylistbox =
 	create_listbox_window (12, 20, " Add listing format item ",
