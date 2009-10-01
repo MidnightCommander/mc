@@ -549,7 +549,7 @@ msgid "Find declaration      A-Enter"
 msgstr "Перейти к определению       A-Enter"
 
 msgid "Back from declaration     M--"
-msgstr "Назад...                        M--"
+msgstr "Назад к точке вызова            M--"
 
 msgid "Forward to declaration    M-+"
 msgstr "Вперед к определению            M-+"
@@ -2530,9 +2530,8 @@ msgstr "Файл рас&ширений"
 msgid "Edit &menu file"
 msgstr "Файл &меню"
 
-#, fuzzy
 msgid "Edit hi&ghlighting group file"
-msgstr "Редактировать файл расцветки имён"
+msgstr "Редактировать файл рас&цветки имён"
 
 msgid "&Configuration..."
 msgstr "&Конфигурация..."
