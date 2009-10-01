@@ -43,7 +43,6 @@
 
 #include "edit-impl.h"
 #include "edit-widget.h"
-#include "editcmddef.h"
 
 #include "../src/tty/tty.h"	/* KEY_F */
 #include "../src/tty/key.h"	/* XCTRL */
