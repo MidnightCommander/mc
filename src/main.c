@@ -695,7 +695,7 @@ create_panel_menu (void)
 #endif
 #endif
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&Rescan         C-r"),    reread_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Rescan         C-r"),    CK_RereadCmd));
 
     return entries;
 }
