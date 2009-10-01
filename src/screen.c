@@ -115,6 +115,9 @@ static void paint_frame (WPanel *panel);
 static const char *panel_format (WPanel *panel);
 static const char *mini_status_format (WPanel *panel);
 
+static char *panel_sort_up_sign = NULL;
+static char *panel_sort_down_sign = NULL;
+
 /* This macro extracts the number of available lines in a panel */
 #define llines(p) (p->widget.lines-3 - (show_mini_info ? 2 : 0))
 
@@ -1309,10 +1312,42 @@ panel_reload (WPanel *panel)
 }
 
 static void
+panel_paint_sort_info(WPanel *panel)
+{
+    struct hotkey_t hk;
+    const char *sort_sign = (panel->reverse) ? panel_sort_down_sign : panel_sort_up_sign;
+    char *str, *hotkey;
+    gsize len=6;
+
+    /* get hotkey from field description */
+    hk = parse_hotkey (_(panel->current_sort_field->title_hotkey));
+    if (hk.hotkey) {
+	hotkey = g_strdup(hk.hotkey);
+    } else {
+	/* if field don't have hotkey - use first char of field name */
+	hotkey = g_strdup(panel->current_sort_field->id);
+	hotkey[1] = '\0';
+    }
+    release_hotkey (hk);
+
+    /* transform to lower case */
+    str = hotkey;
+    str_tolower (hotkey, &str, &len);
+
+    str = g_strdup_printf("%s%s",sort_sign, hotkey);
+    g_free(hotkey);
+
+    widget_move (&panel->widget, 1, 1);
+    tty_print_string (str);
+
+    g_free(str);
+}
+
+static void
 paint_frame (WPanel *panel)
 {
     int side, width;
-    char *txt = NULL;
+    GString *format_txt;
 
     if (!panel->split)
 	adjust_top_file (panel);
@@ -1334,18 +1369,24 @@ paint_frame (WPanel *panel)
 	else
 	    width = panel->widget.cols - 2;
 
+	format_txt = g_string_new("");
 	for (format = panel->format; format; format = format->next){
             if (format->string_fn){
-                if (panel->filter && !strcmp (format->id, "name")) {
-                    txt = g_strdup_printf ("%s [%s]", format->title, panel->filter);
-                } else {
-                    txt = g_strdup (format->title);
+                g_string_set_size(format_txt, 0);
+
+                if (panel->list_type == list_long && strcmp (format->id, panel->current_sort_field->id) == 0)
+                    g_string_append (format_txt, (panel->reverse) ? panel_sort_down_sign : panel_sort_up_sign);
+
+                g_string_append (format_txt, format->title);
+                if (strcmp (format->id, "name") == 0 && panel->filter && *panel->filter) {
+                        g_string_append (format_txt, " [");
+                        g_string_append (format_txt, panel->filter);
+                        g_string_append (format_txt, "]");
                 }
 
                 tty_setcolor (MARKED_COLOR);
-                tty_print_string (str_fit_to_term (format->title, format->field_len,
+                tty_print_string (str_fit_to_term (format_txt->str, format->field_len,
                                                     J_CENTER_LEFT));
-                g_free(txt);
                 width -= format->field_len;
 	    } else {
 		tty_setcolor (NORMAL_COLOR);
@@ -1353,10 +1394,14 @@ paint_frame (WPanel *panel)
 		width--;
 	    }
 	}
+	g_string_free(format_txt, TRUE);
 
 	if (width > 0)
 	    tty_draw_hline (-1, -1, ' ', width);
     }
+
+    if (panel->list_type != list_long)
+	panel_paint_sort_info(panel);
 }
 
 static const char *
@@ -3322,4 +3367,18 @@ panel_get_user_possible_fields(gsize *array_size)
 	if (panel_fields[i].use_in_user_format)
 	    ret[index++] = g_strdup(_(panel_fields[i].title_hotkey));
     return (const char**) ret;
+}
+
+void
+panel_init(void)
+{
+    panel_sort_up_sign =  mc_config_get_string(mc_skin__default.config,"widget-common","sort-sign-up","'");
+    panel_sort_down_sign = mc_config_get_string(mc_skin__default.config,"widget-common","sort-sign-down",",");
+}
+
+void
+panel_deinit(void)
+{
+    g_free(panel_sort_up_sign);
+    g_free(panel_sort_down_sign);
 }

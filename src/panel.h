@@ -154,4 +154,7 @@ const panel_field_t *panel_get_field_by_title_hotkey(const char *);
 gsize panel_get_num_of_user_possible_fields(void);
 const char **panel_get_user_possible_fields(gsize *);
 
+void panel_init(void);
+void panel_deinit(void);
+
 #endif

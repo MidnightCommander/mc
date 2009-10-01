@@ -1719,6 +1719,8 @@ do_nc (void)
     midnight_colors[2] = mc_skin_color_get("dialog", "hotnormal");
     midnight_colors[3] = mc_skin_color_get("dialog", "hotfocus");
 
+    panel_init();
+
     midnight_dlg = create_dlg (0, 0, LINES, COLS, midnight_colors, midnight_callback,
 			       "[main]", NULL, DLG_WANT_IDLE);
 
@@ -1764,6 +1766,7 @@ do_nc (void)
 	done_mc ();
     }
     destroy_dlg (midnight_dlg);
+    panel_deinit();
     current_panel = 0;
     done_mc_profile ();
 }
