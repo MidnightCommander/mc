@@ -41,6 +41,7 @@
 
 #include "dir.h"
 #include "panel.h"
+#include "boxes.h"
 #include "tree.h"
 #include "ext.h"		/* regexp_command */
 #include "layout.h"		/* Most layout variables are here */
@@ -2514,6 +2515,20 @@ panel_toggle_sort_order_next(WPanel *panel)
     panel_set_sort_order(panel, panel->current_sort_field);
 }
 
+static void
+panel_select_sort_order(WPanel *panel)
+{
+    const panel_field_t *sort_order;
+    sort_order = sort_box (panel->current_sort_field, &panel->reverse,
+			   &panel->case_sensitive,
+			   &panel->exec_first);
+    if (sort_order == NULL)
+	return;
+    panel->current_sort_field = sort_order;
+    panel_set_sort_order (panel, panel->current_sort_field);
+
+}
+
 typedef void (*panel_key_callback) (WPanel *);
 
 static void cmd_do_enter(WPanel *wp) { (void) do_enter(wp); }
@@ -2626,7 +2641,7 @@ panel_execute_cmd (WPanel *panel, int command)
         sync_other_panel (panel);
         break;
     case CK_PanelSelectSortOrder:
-        sort_cmd ();
+        panel_select_sort_order(panel);
         break;
     case CK_PanelToggleSortOrderPrev:
         panel_toggle_sort_order_prev(panel);
