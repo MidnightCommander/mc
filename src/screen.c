@@ -430,131 +430,131 @@ string_dot (file_entry *fe, int len)
 panel_format_t panel_formats [] = {
     {
 	"unsorted", 12, 1, J_LEFT_FIT,
-	N_("Unsorted"), N_("&Unsorted"), 1,
+	N_("Unsorted"), N_("&Unsorted"), 0, FALSE,
 	string_file_name,
 	(sortfn *) unsorted
     },
     {
 	"name", 12, 1, J_LEFT_FIT,
-	N_("Name"), N_("&Name"), 1,
+	N_("Name"), N_("&Name"), 1, TRUE,
 	string_file_name,
 	(sortfn *) sort_name
     },
     {
 	"extension", 12, 1, J_LEFT_FIT,
-	N_("Extension"), N_("&Extension"), 1,
+	N_("Extension"), N_("&Extension"), 1, FALSE,
 	string_file_name, /* TODO: string_file_ext*/
 	(sortfn *) sort_ext
     },
     {
 	"size", 7,  0, J_RIGHT,
-	N_("Size"), N_("&Size"), 1,
+	N_("Size"), N_("&Size"), 1, TRUE,
 	string_file_size,
 	(sortfn *) sort_size
     },
     {
 	"bsize", 7,  0, J_RIGHT,
-	N_("Block Size"), NULL, 1,
+	N_("Block Size"), NULL, 1, FALSE,
 	string_file_size_brief,
 	(sortfn *) sort_size
     },
     {
 	"type", GT, 0, J_LEFT,
-	"", NULL, 2,
+	"", NULL, 2, TRUE,
 	string_file_type,
 	NULL
     },
     {
 	"mtime", 12, 0, J_RIGHT,
-	N_("MTime"), N_("&Modify time"), 1,
+	N_("MTime"), N_("&Modify time"), 1, TRUE,
 	string_file_mtime,
 	(sortfn *) sort_time
     },
     {
 	"atime", 12, 0, J_RIGHT,
-	N_("ATime"), N_("&Access time"), 1,
+	N_("ATime"), N_("&Access time"), 1, TRUE,
 	string_file_atime,
 	(sortfn *) sort_atime
     },
     {
 	"ctime", 12, 0, J_RIGHT,
-	N_("CTime"), N_("C&Hange time"), 1,
+	N_("CTime"), N_("C&Hange time"), 1, TRUE,
 	string_file_ctime,
 	(sortfn *) sort_ctime
     },
     {
 	"perm", 10, 0, J_LEFT,
-	N_("Permission"), NULL, 1,
+	N_("Permission"), NULL, 1, TRUE,
 	string_file_permission,
 	NULL
     },
     {
 	"mode", 6,  0, J_RIGHT,
-	N_("Perm"), NULL, 1,
+	N_("Perm"), NULL, 1, TRUE,
 	string_file_perm_octal,
 	NULL
     },
     {
 	"nlink", 2,  0, J_RIGHT,
-	N_("Nl"), NULL, 1,
+	N_("Nl"), NULL, 1, TRUE,
 	string_file_nlinks, NULL
     },
     {
 	"inode", 5,  0, J_RIGHT,
-	N_("Inode"), N_("&Inode"), 1,
+	N_("Inode"), N_("&Inode"), 1, TRUE,
 	string_inode,
 	(sortfn *) sort_inode
     },
     {
 	"nuid", 5,  0, J_RIGHT,
-	N_("UID"), NULL, 1,
+	N_("UID"), NULL, 1, FALSE,
 	string_file_nuid,
 	NULL
     },
     {
 	"ngid", 5,  0, J_RIGHT,
-	N_("GID"), NULL, 1,
+	N_("GID"), NULL, 1, FALSE,
 	string_file_ngid,
 	NULL
     },
     {
 	"owner", 8, 0, J_LEFT_FIT,
-	N_("Owner"), NULL, 1,
+	N_("Owner"), NULL, 1, TRUE,
 	string_file_owner,
 	NULL
     },
     {
 	"group", 8,0, J_LEFT_FIT,
-	N_("Group"), NULL, 1,
+	N_("Group"), NULL, 1, TRUE,
 	string_file_group,
 	NULL
     },
     {
 	"mark", 1, 0, J_RIGHT,
-	" ", NULL, 1,
+	" ", NULL, 1, TRUE,
 	string_marked,
 	NULL
     },
     {
 	"|", 1, 0, J_RIGHT,
-	" ", NULL, 0,
+	" ", NULL, 0, TRUE,
 	NULL,
 	NULL
     },
     {
 	"space", 1, 0, J_RIGHT,
-	" ", NULL, 0,
+	" ", NULL, 0, TRUE,
 	string_space,
 	NULL
     },
     {
 	"dot", 1, 0, J_RIGHT,
-	" ", NULL, 0,
+	" ", NULL, 0, FALSE,
 	string_dot,
 	NULL
     },
     {
-	NULL, 0, 0, J_RIGHT, NULL, NULL, 0, NULL, NULL
+	NULL, 0, 0, J_RIGHT, NULL, NULL, 0, FALSE, NULL, NULL
     },
 };
 
@@ -3092,4 +3092,38 @@ panel_get_format_by_title_hotkey(const char *name)
 	)
 	    return &panel_formats[index];
     return NULL;
+}
+
+gsize
+panel_get_num_of_user_possible_formats(void)
+{
+    gsize ret = 0, index;
+
+    for(index=0; panel_formats[index].id != NULL; index ++)
+	if (panel_formats[index].use_in_user_format)
+	    ret++;
+    return ret;
+}
+
+const char **
+panel_get_user_possible_formats(gsize *array_size)
+{
+    char **ret;
+    gsize index, i;
+
+    index = panel_get_num_of_user_possible_formats();
+
+    ret = g_new0 (char *, index + 1);
+    if (ret == NULL)
+        return NULL;
+
+    if (array_size != NULL)
+	*array_size = index;
+
+    index=0;
+
+    for(i=0; panel_formats[i].id != NULL; i ++)
+	if (panel_formats[i].use_in_user_format)
+	    ret[index++] = g_strdup(_(panel_formats[i].title_hotkey));
+    return (const char**) ret;
 }

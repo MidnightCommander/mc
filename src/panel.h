@@ -46,6 +46,7 @@ typedef struct panel_format_struct {
     const char *title;
     const char *title_hotkey;
     int  use_in_gui;
+    gboolean use_in_user_format;
     const char *(*string_fn)(file_entry *, int);
     sortfn *sort_routine; /* used by mouse_sort_col() */
 } panel_format_t;
@@ -149,5 +150,7 @@ gsize panel_get_num_of_sortable_formats(void);
 const char **panel_get_sortable_formats(gsize *);
 const panel_format_t *panel_get_format_by_id(const char *);
 const panel_format_t *panel_get_format_by_title_hotkey(const char *);
+gsize panel_get_num_of_user_possible_formats(void);
+const char **panel_get_user_possible_formats(gsize *);
 
 #endif
