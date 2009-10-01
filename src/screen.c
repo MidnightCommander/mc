@@ -2518,10 +2518,14 @@ panel_set_sort_type_by_id(WPanel *panel, const char *name)
 {
     const panel_field_t *sort_order;
 
-    sort_order = panel_get_field_by_id (name);
-    if (sort_order == NULL)
-	return;
-    panel->current_sort_field = sort_order;
+    if (strcmp(panel->current_sort_field->id, name) != 0) {
+        sort_order = panel_get_field_by_id (name);
+        if (sort_order == NULL)
+	    return;
+	panel->current_sort_field = sort_order;
+    } else {
+	panel->reverse = ! panel->reverse;
+    }
     panel_set_sort_order (panel, panel->current_sort_field);
 }
 
