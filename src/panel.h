@@ -45,7 +45,6 @@ typedef struct panel_format_struct {
     align_crt_t default_just;
     const char *title;
     const char *title_hotkey;
-    int  use_in_gui;
     gboolean use_in_user_format;
     const char *(*string_fn)(file_entry *, int);
     sortfn *sort_routine; /* used by mouse_sort_col() */

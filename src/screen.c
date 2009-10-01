@@ -434,131 +434,131 @@ string_dot (file_entry *fe, int len)
 panel_field_t panel_fields [] = {
     {
 	"unsorted", 12, 1, J_LEFT_FIT,
-	N_("Unsorted"), N_("&Unsorted"), 0, FALSE,
+	N_("Unsorted"), N_("&Unsorted"), FALSE,
 	string_file_name,
 	(sortfn *) unsorted
     },
     {
 	"name", 12, 1, J_LEFT_FIT,
-	N_("Name"), N_("&Name"), 1, TRUE,
+	N_("Name"), N_("&Name"), TRUE,
 	string_file_name,
 	(sortfn *) sort_name
     },
     {
 	"extension", 12, 1, J_LEFT_FIT,
-	N_("Extension"), N_("&Extension"), 1, FALSE,
+	N_("Extension"), N_("&Extension"), FALSE,
 	string_file_name, /* TODO: string_file_ext*/
 	(sortfn *) sort_ext
     },
     {
 	"size", 7,  0, J_RIGHT,
-	N_("Size"), N_("&Size"), 1, TRUE,
+	N_("Size"), N_("&Size"), TRUE,
 	string_file_size,
 	(sortfn *) sort_size
     },
     {
 	"bsize", 7,  0, J_RIGHT,
-	N_("Block Size"), NULL, 1, FALSE,
+	N_("Block Size"), NULL, FALSE,
 	string_file_size_brief,
 	(sortfn *) sort_size
     },
     {
 	"type", GT, 0, J_LEFT,
-	"", NULL, 2, TRUE,
+	"", NULL, TRUE,
 	string_file_type,
 	NULL
     },
     {
 	"mtime", 12, 0, J_RIGHT,
-	N_("MTime"), N_("&Modify time"), 1, TRUE,
+	N_("MTime"), N_("&Modify time"), TRUE,
 	string_file_mtime,
 	(sortfn *) sort_time
     },
     {
 	"atime", 12, 0, J_RIGHT,
-	N_("ATime"), N_("&Access time"), 1, TRUE,
+	N_("ATime"), N_("&Access time"), TRUE,
 	string_file_atime,
 	(sortfn *) sort_atime
     },
     {
 	"ctime", 12, 0, J_RIGHT,
-	N_("CTime"), N_("C&Hange time"), 1, TRUE,
+	N_("CTime"), N_("C&Hange time"), TRUE,
 	string_file_ctime,
 	(sortfn *) sort_ctime
     },
     {
 	"perm", 10, 0, J_LEFT,
-	N_("Permission"), NULL, 1, TRUE,
+	N_("Permission"), NULL, TRUE,
 	string_file_permission,
 	NULL
     },
     {
 	"mode", 6,  0, J_RIGHT,
-	N_("Perm"), NULL, 1, TRUE,
+	N_("Perm"), NULL, TRUE,
 	string_file_perm_octal,
 	NULL
     },
     {
 	"nlink", 2,  0, J_RIGHT,
-	N_("Nl"), NULL, 1, TRUE,
+	N_("Nl"), NULL, TRUE,
 	string_file_nlinks, NULL
     },
     {
 	"inode", 5,  0, J_RIGHT,
-	N_("Inode"), N_("&Inode"), 1, TRUE,
+	N_("Inode"), N_("&Inode"), TRUE,
 	string_inode,
 	(sortfn *) sort_inode
     },
     {
 	"nuid", 5,  0, J_RIGHT,
-	N_("UID"), NULL, 1, FALSE,
+	N_("UID"), NULL, FALSE,
 	string_file_nuid,
 	NULL
     },
     {
 	"ngid", 5,  0, J_RIGHT,
-	N_("GID"), NULL, 1, FALSE,
+	N_("GID"), NULL, FALSE,
 	string_file_ngid,
 	NULL
     },
     {
 	"owner", 8, 0, J_LEFT_FIT,
-	N_("Owner"), NULL, 1, TRUE,
+	N_("Owner"), NULL, TRUE,
 	string_file_owner,
 	NULL
     },
     {
 	"group", 8,0, J_LEFT_FIT,
-	N_("Group"), NULL, 1, TRUE,
+	N_("Group"), NULL, TRUE,
 	string_file_group,
 	NULL
     },
     {
 	"mark", 1, 0, J_RIGHT,
-	" ", NULL, 1, TRUE,
+	" ", NULL, TRUE,
 	string_marked,
 	NULL
     },
     {
 	"|", 1, 0, J_RIGHT,
-	" ", NULL, 0, TRUE,
+	" ", NULL, TRUE,
 	NULL,
 	NULL
     },
     {
 	"space", 1, 0, J_RIGHT,
-	" ", NULL, 0, TRUE,
+	" ", NULL, TRUE,
 	string_space,
 	NULL
     },
     {
 	"dot", 1, 0, J_RIGHT,
-	" ", NULL, 0, FALSE,
+	" ", NULL, FALSE,
 	string_dot,
 	NULL
     },
     {
-	NULL, 0, 0, J_RIGHT, NULL, NULL, 0, FALSE, NULL, NULL
+	NULL, 0, 0, J_RIGHT, NULL, NULL, FALSE, NULL, NULL
     },
 };
 
@@ -1460,7 +1460,6 @@ parse_display_format (WPanel *panel, const char *format, char **error, int issta
     int  total_cols = 0;		/* Used columns by the format */
     int  set_justify;                  	/* flag: set justification mode? */
     align_crt_t justify = J_LEFT;	/* Which mode. */
-    int  items = 0;			/* Number of items in the format */
     size_t  i;
 
     static size_t i18n_timelength = 0; /* flag: check ?Time length at startup */
@@ -1522,9 +1521,6 @@ parse_display_format (WPanel *panel, const char *format, char **error, int issta
 		continue;
 
 	    format += klen;
-
-	    if (panel_fields [i].use_in_gui)
-	    	items++;
 
             darr->requested_field_len = panel_fields [i].min_size;
             darr->string_fn           = panel_fields [i].string_fn;
@@ -2884,9 +2880,9 @@ mouse_sort_col(Gpm_Event *event, WPanel *panel)
     panel_field_t *col_sort_format = NULL;
     format_e *format;
 
-    for (i=0, format = panel->format; format != NULL; format = format->next ){
+    for (i = 0, format = panel->format; format != NULL; format = format->next) {
 	i += format->field_len;
-	if ( event->x < i + 1) {
+	if (event->x < i + 1) {
 	    /* found column */
 	    sort_name = format->title;
 	    break;
@@ -2896,23 +2892,24 @@ mouse_sort_col(Gpm_Event *event, WPanel *panel)
     if (sort_name == NULL)
 	return;
 
-    for(i=0; panel_fields[i].id != NULL; i ++) {
-	if ( !strcmp(sort_name,_(panel_fields[i].title)) && panel_fields[i].sort_routine ) {
+    for(i = 0; panel_fields[i].id != NULL; i++) {
+	if (!strcmp (sort_name, _(panel_fields[i].title)) && panel_fields[i].sort_routine) {
 	    col_sort_format = &panel_fields[i];
 	    break;
 	}
     }
 
-    if (! col_sort_format)
+    if (!col_sort_format)
 	return;
 
     if (panel->current_sort_field == col_sort_format) {
 	/* reverse the sort if clicked column is already the sorted column */
-	panel->reverse = ! panel->reverse;
+	panel->reverse = !panel->reverse;
     } else {
-	panel->reverse = 0; /* new sort is forced to be ascending */
+        /* new sort is forced to be ascending */
+	panel->reverse = 0;
     }
-    panel_set_sort_order(panel, col_sort_format);
+    panel_set_sort_order (panel, col_sort_format);
 }
 
 
