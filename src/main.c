@@ -667,65 +667,31 @@ listmode_cmd (void)
 
 /* NOTICE: hotkeys specified here are overriden in menubar_paint_idx (alex) */
 static GList *
-create_left_menu (void)
+create_panel_menu (void)
 {
     GList *entries = NULL;
 
-    entries = g_list_append (entries, menu_entry_create (_("&Listing mode..."),       listing_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Quick view     C-x q"),  quick_view_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Info           C-x i" ), info_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Tree"),                  tree_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Listing mode..."),       CK_ListingCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Quick view     C-x q"),  CK_MenuQuickViewCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Info           C-x i" ), CK_MenuInfoCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Tree"),                  CK_TreeCmd));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&Sort order..."),         sort_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Sort order..."),         CK_Sort));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&Filter..."),             filter_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Filter..."),             CK_FilterCmd));
 #ifdef HAVE_CHARSET
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&Encoding...    M-e"),    encoding_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Encoding...    M-e"),    CK_PanelSetPanelEncoding));
 #endif
 #ifdef USE_NETCODE
     entries = g_list_append (entries, menu_separator_create ());
 #ifdef ENABLE_VFS_MCFS
-    entries = g_list_append (entries, menu_entry_create (_("&Network link..."),       netlink_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Network link..."),       CK_NetlinkCmd));
 #endif
-    entries = g_list_append (entries, menu_entry_create (_("FT&P link..."),           ftplink_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("S&hell link..."),         fishlink_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("FT&P link..."),           CK_FtplinkCmd));
+    entries = g_list_append (entries, menu_entry_create (_("S&hell link..."),         CK_FishlinkCmd));
 #ifdef WITH_SMBFS
-    entries = g_list_append (entries, menu_entry_create (_("SM&B link..."),           smblink_cmd));
-#endif
-#endif
-    entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&Rescan         C-r"),    reread_cmd));
-
-    return entries;
-}
-
-static GList *
-create_right_menu (void)
-{
-    GList *entries = NULL;
-
-    entries = g_list_append (entries, menu_entry_create (_("&Listing mode..."),       listing_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Quick view     C-x q"),  quick_view_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Info           C-x i" ), info_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Tree"),                  tree_cmd));
-    entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&Sort order..."),         sort_cmd));
-    entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&Filter..."),             filter_cmd));
-#ifdef HAVE_CHARSET
-    entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&Encoding...    M-e"),    encoding_cmd));
-#endif
-#ifdef USE_NETCODE
-    entries = g_list_append (entries, menu_separator_create ());
-#ifdef ENABLE_VFS_MCFS
-    entries = g_list_append (entries, menu_entry_create (_("&Network link..."),       netlink_cmd));
-#endif
-    entries = g_list_append (entries, menu_entry_create (_("FT&P link..."),           ftplink_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("S&hell link..."),         fishlink_cmd));
-#ifdef WITH_SMBFS
-    entries = g_list_append (entries, menu_entry_create (_("SM&B link..."),           smblink_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("SM&B link..."),           CK_SmblinkCmd));
 #endif
 #endif
     entries = g_list_append (entries, menu_separator_create ());
@@ -739,27 +705,27 @@ create_file_menu (void)
 {
     GList *entries = NULL;
 
-    entries = g_list_append (entries, menu_entry_create (_("&View               F3"),  view_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("Vie&w file...         "),  view_file_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Filtered view     M-!"),  filtered_view_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Edit               F4"),  edit_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Copy               F5"),  copy_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("c&Hmod           C-x c"),  chmod_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Link            C-x l"),  link_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&SymLink         C-x s"),  symlink_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("edit s&Ymlink  C-x C-s"),  edit_symlink_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("ch&Own           C-x o"),  chown_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Advanced chown       "),  chown_advanced_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Rename/Move        F6"),  ren_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Mkdir              F7"),  mkdir_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Delete             F8"),  delete_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Quick cd          M-c"),  quick_cd_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&View               F3"),  CK_ViewCmd));
+    entries = g_list_append (entries, menu_entry_create (_("Vie&w file...         "),  CK_ViewFileCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Filtered view     M-!"),  CK_FilteredViewCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Edit               F4"),  CK_EditCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Copy               F5"),  CK_CopyCmd));
+    entries = g_list_append (entries, menu_entry_create (_("c&Hmod           C-x c"),  CK_ChmodCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Link            C-x l"),  CK_LinkCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&SymLink         C-x s"),  CK_SymlinkCmd));
+    entries = g_list_append (entries, menu_entry_create (_("edit s&Ymlink  C-x C-s"),  CK_EditSymlinkCmd));
+    entries = g_list_append (entries, menu_entry_create (_("ch&Own           C-x o"),  CK_ChownCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Advanced chown       "),  CK_ChownAdvancedCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Rename/Move        F6"),  CK_RenCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Mkdir              F7"),  CK_MkdirCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Delete             F8"),  CK_DeleteCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Quick cd          M-c"),  CK_QuickCdCmd));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("select &Group      M-+"),  select_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("u&Nselect group    M-\\"), unselect_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("reverse selec&Tion M-*"),  reverse_selection_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("select &Group      M-+"),  CK_SelectCmd));
+    entries = g_list_append (entries, menu_entry_create (_("u&Nselect group    M-\\"), CK_UnselectCmd));
+    entries = g_list_append (entries, menu_entry_create (_("reverse selec&Tion M-*"),  CK_ReverseSelectionCmd));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("e&Xit              F10"),  quit_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("e&Xit              F10"),  CK_QuitCmd));
 
     return entries;
 }
@@ -773,36 +739,36 @@ create_command_menu (void)
      */
     GList *entries = NULL;
 
-    entries = g_list_append (entries, menu_entry_create (_("&User menu          F2"),        user_file_menu_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Directory tree"),               treebox_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Find file            M-?"),     find_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("s&Wap panels          C-u"),     swap_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("switch &Panels on/off C-o"),     view_other_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Compare directories  C-x d"),   compare_dirs_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("e&Xternal panelize    C-x !"),   external_panelize));
-    entries = g_list_append (entries, menu_entry_create (_("show directory s&Izes"),         dirsizes_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&User menu          F2"),        CK_UserMenuCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Directory tree"),               CK_TreeBoxCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Find file            M-?"),     CK_FindCmd));
+    entries = g_list_append (entries, menu_entry_create (_("s&Wap panels          C-u"),     CK_SwapCmd));
+    entries = g_list_append (entries, menu_entry_create (_("switch &Panels on/off C-o"),     CK_ShowCommandLine));
+    entries = g_list_append (entries, menu_entry_create (_("&Compare directories  C-x d"),   CK_CompareDirsCmd));
+    entries = g_list_append (entries, menu_entry_create (_("e&Xternal panelize    C-x !"),   CK_ExternalPanelize));
+    entries = g_list_append (entries, menu_entry_create (_("show directory s&Izes"),         CK_SingleDirsizeCmd));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("command &History"),              history_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("di&Rectory hotlist    C-\\"),    quick_chdir_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("command &History"),              CK_HistoryCmd));
+    entries = g_list_append (entries, menu_entry_create (_("di&Rectory hotlist    C-\\"),    CK_QuickChdirCmd));
 #ifdef USE_VFS
-    entries = g_list_append (entries, menu_entry_create (_("&Active VFS list      C-x a"),   reselect_vfs));
+    entries = g_list_append (entries, menu_entry_create (_("&Active VFS list      C-x a"),   CK_ReselectVfs));
 #endif
 #ifdef WITH_BACKGROUND
-    entries = g_list_append (entries, menu_entry_create (_("&Background jobs      C-x j"),   jobs_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Background jobs      C-x j"),   CK_JobsCmd));
 #endif
     entries = g_list_append (entries, menu_separator_create ());
 #ifdef USE_EXT2FSLIB
-    entries = g_list_append (entries, menu_entry_create (_("&Undelete files (ext2fs only)"), undelete_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Undelete files (ext2fs only)"), CK_UndeleteCmd));
 #endif
 #ifdef LISTMODE_EDITOR
-    entries = g_list_append (entries, menu_entry_create (_("&Listing format edit"),          listmode_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Listing format edit"),          CK_ListmodeCmd));
 #endif
 #if defined (USE_EXT2FSLIB) || defined (LISTMODE_EDITOR)
     entries = g_list_append (entries, menu_separator_create ());
 #endif
-    entries = g_list_append (entries, menu_entry_create (_("Edit &extension file"),          ext_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("Edit &menu file"),               edit_mc_menu_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("Edit hi&ghlighting group file"), edit_fhl_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("Edit &extension file"),          CK_EditExtFileCmd));
+    entries = g_list_append (entries, menu_entry_create (_("Edit &menu file"),               CK_EditMcMenuCmd));
+    entries = g_list_append (entries, menu_entry_create (_("Edit hi&ghlighting group file"), CK_EditFhlFileCmd));
 
     return entries;
 }
@@ -812,16 +778,16 @@ create_options_menu (void)
 {
     GList *entries = NULL;
 
-    entries = g_list_append (entries, menu_entry_create (_("&Configuration..."), configure_box));
-    entries = g_list_append (entries, menu_entry_create (_("&Layout..."),        layout_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("c&Onfirmation..."),  confirm_box));
-    entries = g_list_append (entries, menu_entry_create (_("&Display bits..."),  display_bits_box));
-    entries = g_list_append (entries, menu_entry_create (_("learn &Keys..."),    learn_keys));
+    entries = g_list_append (entries, menu_entry_create (_("&Configuration..."), CK_ConfigureBox));
+    entries = g_list_append (entries, menu_entry_create (_("&Layout..."),        CK_LayoutCmd));
+    entries = g_list_append (entries, menu_entry_create (_("c&Onfirmation..."),  CK_ConfirmBox));
+    entries = g_list_append (entries, menu_entry_create (_("&Display bits..."),  CK_DisplayBitsBox));
+    entries = g_list_append (entries, menu_entry_create (_("learn &Keys..."),    CK_LearnKeys));
 #ifdef USE_VFS
-    entries = g_list_append (entries, menu_entry_create (_("&Virtual FS..."),    configure_vfs));
+    entries = g_list_append (entries, menu_entry_create (_("&Virtual FS..."),    CK_ConfigureVfs));
 #endif
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&Save setup"),       save_setup_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Save setup"),       CK_SaveSetupCmd));
 
     return entries;
 }
@@ -831,7 +797,7 @@ init_menu (void)
 {
     menubar_add_menu (the_menubar,
 	create_menu (horizontal_split ? _(" &Above ") : _(" &Left "),
-					create_left_menu (),    "[Left and Right Menus]"));
+					create_panel_menu (), "[Left and Right Menus]"));
     menubar_add_menu (the_menubar,
 	create_menu (_(" &File "),      create_file_menu (),    "[File Menu]"));
     menubar_add_menu (the_menubar,
@@ -840,7 +806,7 @@ init_menu (void)
 	create_menu (_(" &Options "),   create_options_menu (), "[Options Menu]"));
     menubar_add_menu (the_menubar,
 	create_menu (horizontal_split ? _(" &Below ") : _(" &Right "),
-					create_right_menu (),   "[Left and Right Menus]"));
+					create_panel_menu (), "[Left and Right Menus]"));
 }
 
 void
@@ -1138,68 +1104,8 @@ midnight_execute_cmd(int command)
     cb_ret_t res = MSG_HANDLED;
 
     switch (command) {
-    case CK_MenuLastSelectedCmd:
-        menu_last_selected_cmd ();
-        break;
-    case CK_QuietQuitCmd:
-        quiet_quit_cmd ();
-        break;
-    case CK_SingleDirsizeCmd:
-        smart_dirsize_cmd ();
-        break;
-    case CK_CopyCurrentPathname:
-        copy_current_pathname ();
-        break;
-    case CK_CopyOtherPathname:
-        copy_other_pathname ();
-        break;
-    case CK_QuickCdCmd:
-        quick_cd_cmd ();
-        break;
-    case CK_QuickChdirCmd:
-        quick_chdir_cmd ();
-        break;
-    case CK_SuspendCmd:
-        suspend_cmd ();
-        break;
-    case CK_FilteredViewCmd:
-        filtered_view_cmd ();
-        break;
-    case CK_FindCmd:
-        find_cmd ();
-        break;
-    case CK_RereadCmd:
-        reread_cmd ();
-        break;
-    case CK_ToggleListingCmd:
-        toggle_listing_cmd ();
-        break;
-    case CK_SwapCmd:
-        swap_cmd ();
-        break;
-    case CK_ShowCommandLine:
-        view_other_cmd ();
-        break;
-    case CK_QuitCmd:
-        quit_cmd ();
-        break;
-    case CK_CompareDirsCmd:
-        compare_dirs_cmd ();
-        break;
-    case CK_ReselectVfs:
-        reselect_vfs ();
-        break;
-    case CK_CopyCurrentTagged:
-        copy_current_tagged ();
-        break;
-    case CK_CopyOtherTarget:
-        copy_other_tagged ();
-        break;
-    case CK_CopyCurrentReadlink:
-        copy_current_readlink ();
-        break;
-    case CK_CopyOtherReadlink:
-        copy_other_readlink ();
+    case CK_AddHotlist:
+        add2hotlist_cmd ();
         break;
     case CK_ChmodCmd:
         chmod_cmd ();
@@ -1207,37 +1113,224 @@ midnight_execute_cmd(int command)
     case CK_ChownCmd:
         chown_cmd ();
         break;
-    case CK_LinkCmd:
-        link_cmd () ;
+    case CK_ChownAdvancedCmd:
+        chown_advanced_cmd ();
         break;
-    case CK_SymlinkCmd:
-        symlink_cmd ();
+    case CK_CompareDirsCmd:
+        compare_dirs_cmd ();
+        break;
+    case CK_ConfigureBox:
+        configure_box ();
+        break;
+#ifdef USE_VFS
+    case CK_ConfigureVfs:
+        configure_vfs ();
+        break;
+#endif
+    case CK_ConfirmBox:
+        confirm_box ();
+        break;
+    case CK_CopyCmd:
+        copy_cmd ();
+        break;
+    case CK_CopyCurrentPathname:
+        copy_current_pathname ();
+        break;
+    case CK_CopyCurrentReadlink:
+        copy_current_readlink ();
+        break;
+    case CK_CopyCurrentTagged:
+        copy_current_tagged ();
+        break;
+    case CK_CopyOtherPathname:
+        copy_other_pathname ();
+        break;
+    case CK_CopyOtherReadlink:
+        copy_other_readlink ();
+        break;
+    case CK_CopyOtherTarget:
+        copy_other_tagged ();
+        break;
+    case CK_DeleteCmd:
+        delete_cmd ();
+        break;
+    case CK_DisplayBitsBox:
+        display_bits_box ();
+        break;
+    case CK_EditCmd:
+        edit_cmd ();
+        break;
+    case CK_EditExtFileCmd:
+        ext_cmd ();
+        break;
+    case CK_EditFhlFileCmd:
+        edit_fhl_cmd ();
+        break;
+    case CK_EditMcMenuCmd:
+        edit_mc_menu_cmd ();
         break;
     case CK_EditSymlinkCmd:
         edit_symlink_cmd ();
         break;
+    case CK_ExternalPanelize:
+        external_panelize ();
+        break;
+    case CK_FilterCmd:
+        filter_cmd ();
+        break;
+    case CK_FilteredViewCmd:
+        filtered_view_cmd ();
+        break;
+    case CK_FindCmd:
+        find_cmd ();
+        break;
+#if defined (USE_NETCODE)
+    case CK_FishlinkCmd:
+        fishlink_cmd ();
+        break;
+    case CK_FtplinkCmd:
+        ftplink_cmd ();
+        break;
+#endif
+    case CK_HistoryCmd:
+        history_cmd ();
+        break;
     case CK_InfoCmd:
         info_cmd_no_menu ();
+        break;
+#ifdef WITH_BACKGROUND
+    case CK_JobsCmd:
+        jobs_cmd ();
+        break;
+#endif
+    case CK_LayoutCmd:
+        layout_cmd ();
+        break;
+    case CK_LearnKeys:
+        learn_keys ();
+        break;
+    case CK_LinkCmd:
+        link_cmd ();
+        break;
+    case CK_ListingCmd:
+        listing_cmd ();
+        break;
+#ifdef LISTMODE_EDITOR
+    case CK_ListmodeCmd:
+        listmode_cmd ();
+        break;
+#endif
+    case CK_MenuInfoCmd:
+        info_cmd ();
+        break;
+    case CK_MenuLastSelectedCmd:
+        menu_last_selected_cmd ();
+        break;
+    case CK_MenuQuickViewCmd:
+        quick_view_cmd ();
+        break;
+    case CK_MkdirCmd:
+        mkdir_cmd ();
+        break;
+#if defined (USE_NETCODE) && defined (ENABLE_VFS_MCFS)
+    case CK_NetlinkCmd:
+        netlink_cmd ();
+        break;
+#endif
+#ifdef HAVE_CHARSET
+    case CK_PanelSetPanelEncoding:
+        encoding_cmd ();
+        break;
+#endif
+    case CK_QuickCdCmd:
+        quick_cd_cmd ();
+        break;
+    case CK_QuickChdirCmd:
+        quick_chdir_cmd ();
         break;
     case CK_QuickViewCmd:
         quick_cmd_no_menu ();
         break;
-    case CK_AddHotlist:
-	add2hotlist_cmd ();
+    case CK_QuietQuitCmd:
+        quiet_quit_cmd ();
         break;
-    case CK_ExternalPanelize:
-	external_panelize ();
+    case CK_QuitCmd:
+        quit_cmd ();
         break;
-#ifdef WITH_BACKGROUND
-    case CK_JobsCmd:
-	jobs_cmd ();
+    case CK_RenCmd:
+        ren_cmd ();
+        break;
+    case CK_RereadCmd:
+        reread_cmd ();
+        break;
+#ifdef USE_VFS
+    case CK_ReselectVfs:
+        reselect_vfs ();
         break;
 #endif
-    case CK_ToggleShowHidden:
-        toggle_show_hidden ();
+    case CK_ReverseSelectionCmd:
+        reverse_selection_cmd ();
+        break;
+    case CK_SaveSetupCmd:
+        save_setup_cmd ();
+        break;
+    case CK_SelectCmd:
+        select_cmd ();
+        break;
+    case CK_ShowCommandLine:
+        view_other_cmd ();
+        break;
+    case CK_SingleDirsizeCmd:
+        smart_dirsize_cmd ();
+        break;
+#if defined (USE_NETCODE) && defined (WITH_SMBFS)
+    case CK_SmblinkCmd:
+        smblink_cmd ();
+        break;
+#endif
+    case CK_Sort:
+        sort_cmd ();
         break;
     case CK_StartExtMap1:
         ctl_x_cmd ();
+        break;
+    case CK_SuspendCmd:
+        suspend_cmd ();
+        break;
+    case CK_SwapCmd:
+        swap_cmd ();
+        break;
+    case CK_SymlinkCmd:
+        symlink_cmd ();
+        break;
+    case CK_ToggleListingCmd:
+        toggle_listing_cmd ();
+        break;
+    case CK_ToggleShowHidden:
+        toggle_show_hidden ();
+        break;
+    case CK_TreeCmd:
+        tree_cmd ();
+        break;
+    case CK_TreeBoxCmd:
+        treebox_cmd ();
+        break;
+#ifdef USE_EXT2FSLIB
+    case CK_UndeleteCmd:
+        undelete_cmd ();
+        break;
+#endif
+    case CK_UnselectCmd:
+        unselect_cmd ();
+        break;
+    case CK_UserMenuCmd:
+        user_file_menu_cmd ();
+        break;
+    case CK_ViewCmd:
+        view_cmd ();
+        break;
+    case CK_ViewFileCmd:
+        view_file_cmd ();
         break;
     default:
         res = MSG_NOT_HANDLED;
@@ -1670,6 +1763,8 @@ setup_panels_and_run_mc (void)
     add_widget (midnight_dlg, the_prompt);
     add_widget (midnight_dlg, the_bar);
     init_labels ();
+
+    midnight_dlg->menu_executor = midnight_execute_cmd;
 
     if (boot_current_is_left)
 	dlg_select_widget (get_panel_widget (0));

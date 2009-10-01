@@ -1,5 +1,4 @@
 [editor]
-
 EditXStore =
 EditXPaste =
 EditXCut =
@@ -185,25 +184,32 @@ ShowCommandLine = ctrl-o
 ViewToggleRuler = alt-r
 
 [main]
-CmdMenuLastSelected = f19
-CmdQuietQuit = f20
-CmdSingleDirsize = ctrl-space
 CmdCopyCurrentPathname = alt-a
 CmdCopyOtherPathname = alt-A
-CmdQuickCd = alt-c
-CmdQuickChdir = ctrl-backslash
-CmdSuspend = ctrl-z
 CmdFilteredView = alt-exclamation
 CmdFind = alt-question
+CmdMenuLastSelected = f19
+CmdQuickCd = alt-c
+CmdQuickChdir = ctrl-backslash
+CmdQuietQuit = f20
 CmdReread = ctrl-r
-CmdToggleListing = alt-t
+CmdSingleDirsize = ctrl-space
+CmdSuspend = ctrl-z
 CmdSwapPanel = ctrl-u
-ShowCommandLine = ctrl-o
+CmdToggleListing = alt-t
 CmdToggleShowHidden = alt-dot
-
 ExtMap1 = ctrl-x
-[main:xmap]
+ShowCommandLine = ctrl-o
 
+[main:xmap]
+CmdChmod = c
+CmdChown = o
+CmdCompareDirs = d
+CmdEditSymlink = ctrl-s
+CmdLink = l
+CmdSymlink = s
+CmdMenuInfoCmd = i
+CmdMenuQuickView = q
 
 [panel]
 PanelStartSearch = ctrl-s; alt-s

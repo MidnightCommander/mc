@@ -46,6 +46,7 @@
 #include "keybind.h"
 
 static const name_key_map_t command_names[] = {
+#ifdef USE_INTERNAL_EDIT
     { "EditNoCommand",                     CK_Ignore_Key },
     { "EditIgnoreKey",                     CK_Ignore_Key },
     { "EditBackSpace",                     CK_BackSpace },
@@ -125,14 +126,6 @@ static const name_key_map_t command_names[] = {
     { "EditTerminalApp",                   CK_Terminal_App },
     { "EditExtCmd",                        CK_ExtCmd },
     { "EditUserMenu",                      CK_User_Menu },
-    { "EditSaveDesktop",                   CK_Save_Desktop },
-    { "EditNewWindow",                     CK_New_Window },
-    { "EditCycle",                         CK_Cycle },
-    { "EditMenu",                          CK_Menu },
-    { "EditSaveAndQuit",                   CK_Save_And_Quit },
-    { "EditRunAnother",                    CK_Run_Another },
-    { "EditCheckSaveAndQuit",              CK_Check_Save_And_Quit },
-    { "EditMaximize",                      CK_Maximize },
     { "EditBeginRecordMacro",              CK_Begin_Record_Macro },
     { "EditEndRecordMacro",                CK_End_Record_Macro },
     { "EditDeleteMacro",                   CK_Delete_Macro },
@@ -193,6 +186,10 @@ static const name_key_map_t command_names[] = {
     { "EditFindDefinition",                CK_Find_Definition },
     { "EditLoadPrevFile",                  CK_Load_Prev_File },
     { "EditLoadNextFile",                  CK_Load_Next_File },
+    { "EditOptions",                       CK_Edit_Options },
+    { "EditSaveMode",                      CK_Edit_Save_Mode },
+    { "EditChooseSyntax",                  CK_Choose_Syntax },
+    { "EditAbout",                         CK_About },
 
 #if 0
     { "EditFocusNext",                     CK_Focus_Next },
@@ -202,6 +199,19 @@ static const name_key_map_t command_names[] = {
     { "EditMake",                          CK_Make },
     { "EditErrorNext",                     CK_Error_Next },
     { "EditErrorPrev",                     CK_Error_Prev },
+#endif
+
+#if 0
+    { "EditSaveDesktop",                   CK_Save_Desktop },
+    { "EditNewWindow",                     CK_New_Window },
+    { "EditCycle",                         CK_Cycle },
+    { "EditMenu",                          CK_Menu },
+    { "EditSaveAndQuit",                   CK_Save_And_Quit },
+    { "EditRunAnother",                    CK_Run_Another },
+    { "EditCheckSaveAndQuit",              CK_Check_Save_And_Quit },
+    { "EditMaximize",                      CK_Maximize },
+#endif
+
 #endif
 
     /* viewer */
@@ -244,6 +254,8 @@ static const name_key_map_t command_names[] = {
     { "CmdDirsizes",                       CK_DirsizesCmd },
     { "CmdDisplayBitsBox",                 CK_DisplayBitsBox },
     { "CmdEdit",                           CK_EditCmd },
+    { "CmdEditExtFile",                    CK_EditExtFileCmd },
+    { "CmdEditFhlFile",                    CK_EditFhlFileCmd },
     { "CmdEditMcMenu",                     CK_EditMcMenuCmd },
     { "CmdEditSymlink",                    CK_EditSymlinkCmd },
     { "CmdEditSyntax",                     CK_EditSyntaxCmd },
@@ -252,16 +264,28 @@ static const name_key_map_t command_names[] = {
     { "CmdFilter",                         CK_FilterCmd },
     { "CmdFilteredView",                   CK_FilteredViewCmd },
     { "CmdFind",                           CK_FindCmd },
+#ifdef USE_NETCODE
     { "CmdFishlink",                       CK_FishlinkCmd },
     { "CmdFtplink",                        CK_FtplinkCmd },
+#endif
     { "CmdHistory",                        CK_HistoryCmd },
     { "CmdInfo",                           CK_InfoCmd },
+#ifdef WITH_BACKGROUND
     { "CmdJobs",                           CK_JobsCmd },
+#endif
     { "CmdLayout",                         CK_LayoutCmd },
     { "CmdLearnKeys",                      CK_LearnKeys },
     { "CmdLink",                           CK_LinkCmd },
     { "CmdListing",                        CK_ListingCmd },
+#ifdef LISTMODE_EDITOR
+    { "CmdListmodeCmd",                    CK_ListmodeCmd }.
+#endif
+    { "CmdMenuInfo",                       CK_MenuInfoCmd },
+    { "CmdMenuQuickView",                  CK_MenuQuickViewCmd },
     { "CmdMkdir",                          CK_MkdirCmd },
+#if defined (USE_NETCODE) && defined (ENABLE_VFS_MCFS)
+    { "CmdNetlink",                        CK_NetlinkCmd },
+#endif
     { "CmdQuickCd",                        CK_QuickCdCmd },
     { "CmdQuickChdir",                     CK_QuickChdirCmd },
     { "CmdQuickView",                      CK_QuickViewCmd },
@@ -272,11 +296,18 @@ static const name_key_map_t command_names[] = {
     { "CmdReverseSelection",               CK_ReverseSelectionCmd },
     { "CmdSaveSetup",                      CK_SaveSetupCmd },
     { "CmdSelect",                         CK_SelectCmd },
+#if defined (USE_NETCODE) && defined (WITH_SMBFS)
+    { "CmdSmblinkCmd",                     CK_SmblinkCmd },
+#endif
     { "CmdSwapPanel",                      CK_SwapCmd },
     { "CmdSymlink",                        CK_SymlinkCmd },
     { "CmdTree",                           CK_TreeCmd },
+    { "CmdTreeBox",                        CK_TreeBoxCmd },
+#ifdef USE_EXT2FSLIB
     { "CmdUndelete",                       CK_UndeleteCmd },
+#endif
     { "CmdUnselect",                       CK_UnselectCmd },
+    { "CmdUserMenu",                       CK_UserMenuCmd },
     { "CmdUserFileMenu",                   CK_UserFileMenuCmd },
     { "CmdView",                           CK_ViewCmd },
     { "CmdViewFile",                       CK_ViewFileCmd },
@@ -316,7 +347,9 @@ static const name_key_map_t command_names[] = {
     { "PanelMoveHome",                     CK_PanelMoveHome },
     { "PanelNextPage",                     CK_PanelNextPage },
     { "PanelPrevPage",                     CK_PanelPrevPage },
+#ifdef HAVE_CHARSET
     { "PanelSetPanelEncoding",             CK_PanelSetPanelEncoding },
+#endif
     { "PanelStartSearch",                  CK_PanelStartSearch },
     { "PanelSyncOtherPanel",               CK_PanelSyncOtherPanel },
     { "PanelToggleSortOrderNext",          CK_PanelToggleSortOrderNext },
@@ -328,7 +361,7 @@ static const name_key_map_t command_names[] = {
     { "PanelSortOrderBySize",              CK_PanelSortOrderBySize },
     { "PanelSortOrderByMTime",             CK_PanelSortOrderByMTime },
 
-    /* widgets */
+    /* input line */
     { "InputBol",                         CK_InputBol },
     { "InputEol",                         CK_InputEol },
     { "InputMoveLeft",                    CK_InputMoveLeft },

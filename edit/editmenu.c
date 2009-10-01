@@ -41,336 +41,23 @@
 
 #include "../src/global.h"
 
-#include "edit-impl.h"
-#include "edit-widget.h"
-
 #include "../src/tty/tty.h"	/* KEY_F */
 #include "../src/tty/key.h"	/* XCTRL */
 
-#include "../src/cmd.h"		/* save_setup_cmd() */
-#include "../src/wtools.h"	/* query_dialog() */
 #include "../src/menu.h"	/* menu_entry */
 #include "../src/main.h"	/* drop_menus */
-#include "../src/learn.h"	/* learn_keys */
-
-#include "edit-widget.h"
+#include "../src/dialog.h"	/* cb_ret_t */
 #include "../src/cmddef.h"
 
-static void
-menu_cmd (int command)
+#include "edit-impl.h"
+#include "edit-widget.h"
+
+cb_ret_t
+edit_menu_execute (int command)
 {
     edit_execute_key_command (wedit, command, -1);
     edit_update_screen (wedit);
-}
-
-static void menu_key (int i)
-{
-    send_message ((Widget *) wedit, WIDGET_KEY, i);
-}
-
-static void
-edit_about_cmd (void)
-{
-    query_dialog (_(" About "),
-		  _("\n                Cooledit  v3.11.5\n\n"
-		    " Copyright (C) 1996 the Free Software Foundation\n\n"
-		    "       A user friendly text editor written\n"
-		    "           for the Midnight Commander.\n"), D_NORMAL,
-		  1, _("&OK"));
-}
-
-static void
-menu_mail_cmd (void)
-{
-    menu_cmd (CK_Mail);
-}
-
-static void
-menu_load_cmd (void)
-{
-    menu_cmd (CK_Load);
-}
-
-static void
-menu_new_cmd (void)
-{
-    menu_cmd (CK_New);
-}
-
-static void
-menu_save_cmd (void)
-{
-    menu_cmd (CK_Save);
-}
-
-static void
-menu_save_as_cmd (void)
-{
-    menu_cmd (CK_Save_As);
-}
-
-static void
-menu_insert_file_cmd (void)
-{
-    menu_cmd (CK_Insert_File);
-}
-
-static void
-menu_quit_cmd (void)
-{
-    menu_cmd (CK_Exit);
-}
-
-static void
-menu_mark_cmd (void)
-{
-    menu_cmd (CK_Mark);
-}
-
-static void
-menu_markcol_cmd (void)
-{
-    menu_cmd (CK_Column_Mark);
-}
-
-static void
-menu_ins_cmd (void)
-{
-    menu_cmd (CK_Toggle_Insert);
-}
-
-static void
-menu_copy_cmd (void)
-{
-    menu_cmd (CK_Copy);
-}
-
-static void
-menu_move_cmd (void)
-{
-    menu_cmd (CK_Move);
-}
-
-static void
-menu_delete_cmd (void)
-{
-    menu_cmd (CK_Remove);
-}
-
-static void
-menu_xstore_cmd (void)
-{
-    menu_cmd (CK_XStore);
-}
-
-static void
-menu_xcut_cmd (void)
-{
-    menu_cmd (CK_XCut);
-}
-
-static void
-menu_xpaste_cmd (void)
-{
-    menu_cmd (CK_XPaste);
-}
-
-static void
-menu_toggle_bookmark_cmd (void)
-{
-    menu_cmd (CK_Toggle_Bookmark);
-}
-
-static void
-menu_flush_bookmark_cmd (void)
-{
-    menu_cmd (CK_Flush_Bookmarks);
-}
-
-static void
-menu_next_bookmark_cmd (void)
-{
-    menu_cmd (CK_Next_Bookmark);
-}
-
-static void
-menu_prev_bookmark_cmd (void)
-{
-    menu_cmd (CK_Prev_Bookmark);
-}
-
-static void
-menu_cut_cmd (void)
-{
-    menu_cmd (CK_Save_Block);
-}
-
-static void
-menu_search_cmd (void)
-{
-    menu_cmd (CK_Find);
-}
-
-static void
-menu_search_again_cmd (void)
-{
-    menu_cmd (CK_Find_Again);
-}
-
-static void
-menu_replace_cmd (void)
-{
-    menu_cmd (CK_Replace);
-}
-
-static void
-menu_select_codepage_cmd (void)
-{
-    menu_cmd (CK_SelectCodepage);
-}
-
-static void
-menu_begin_record_cmd (void)
-{
-    menu_cmd (CK_Begin_Record_Macro);
-}
-
-static void
-menu_end_record_cmd (void)
-{
-    menu_cmd (CK_End_Record_Macro);
-}
-
-static void
-menu_exec_macro_cmd (void)
-{
-    menu_key (XCTRL ('a'));
-}
-
-static void
-menu_exec_macro_delete_cmd (void)
-{
-    menu_cmd (CK_Delete_Macro);
-}
-
-static void
-menu_c_form_cmd (void)
-{
-    menu_key (KEY_F (19));
-}
-
-static void
-menu_ispell_cmd (void)
-{
-    menu_cmd (CK_Pipe_Block (1));
-}
-
-static void
-menu_sort_cmd (void)
-{
-    menu_cmd (CK_Sort);
-}
-
-static void
-menu_ext_cmd (void)
-{
-    menu_cmd (CK_ExtCmd);
-}
-
-static void
-menu_date_cmd (void)
-{
-    menu_cmd (CK_Date);
-}
-
-static void
-menu_undo_cmd (void)
-{
-    menu_cmd (CK_Undo);
-}
-
-static void
-menu_beginning_cmd (void)
-{
-    menu_cmd (CK_Beginning_Of_Text);
-}
-
-static void
-menu_end_cmd (void)
-{
-    menu_cmd (CK_End_Of_Text);
-}
-
-static void
-menu_refresh_cmd (void)
-{
-    menu_cmd (CK_Refresh);
-}
-
-static void
-menu_goto_line (void)
-{
-    menu_cmd (CK_Goto);
-}
-
-static void
-menu_toggle_line_state (void)
-{
-    menu_cmd (CK_Toggle_Line_State);
-}
-
-static void
-menu_goto_bracket (void)
-{
-    menu_cmd (CK_Match_Bracket);
-}
-
-static void
-menu_lit_cmd (void)
-{
-    menu_key (XCTRL ('q'));
-}
-
-static void
-menu_format_paragraph (void)
-{
-    menu_cmd (CK_Paragraph_Format);
-}
-
-static void
-menu_edit_syntax_file_cmd (void)
-{
-    menu_cmd (CK_Load_Syntax_File);
-}
-
-static void
-menu_edit_menu_file_cmd (void)
-{
-    menu_cmd (CK_Load_Menu_File);
-}
-
-static void
-menu_user_menu_cmd (void)
-{
-    menu_key (KEY_F (11));
-}
-
-static void
-menu_find_declare (void)
-{
-    menu_cmd (CK_Find_Definition);
-}
-
-static void
-menu_declare_back (void)
-{
-    menu_cmd (CK_Load_Prev_File);
-}
-
-static void
-menu_declare_forward (void)
-{
-    menu_cmd (CK_Load_Next_File);
+    return MSG_HANDLED;
 }
 
 static GList *
@@ -378,20 +65,20 @@ create_file_menu (void)
 {
     GList *entries = NULL;
 
-    entries = g_list_append (entries, menu_entry_create (_("&Open file..."),         menu_load_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&New              C-n"), menu_new_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Open file..."),         CK_Load));
+    entries = g_list_append (entries, menu_entry_create (_("&New              C-n"), CK_New));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&Save              F2"), menu_save_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("Save &as...       F12"), menu_save_as_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Save              F2"), CK_Save));
+    entries = g_list_append (entries, menu_entry_create (_("Save &as...       F12"), CK_Save_As));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&Insert file...   F15"), menu_insert_file_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("Copy to &file...  C-f"), menu_cut_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Insert file...   F15"), CK_Insert_File));
+    entries = g_list_append (entries, menu_entry_create (_("Copy to &file...  C-f"), CK_Save_Block));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&User menu...     F11"), menu_user_menu_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&User menu...     F11"), CK_User_Menu));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("A&bout...            "), edit_about_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("A&bout...            "), CK_About));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&Quit             F10"), menu_quit_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Quit             F10"), CK_Exit));
 
     return entries;
 }
@@ -401,20 +88,20 @@ create_file_menu_emacs (void)
 {
     GList *entries = NULL;
 
-    entries = g_list_append (entries, menu_entry_create (_("&Open file..."),         menu_load_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&New            C-x k"), menu_new_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Open file..."),         CK_Load));
+    entries = g_list_append (entries, menu_entry_create (_("&New            C-x k"), CK_New));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&Save              F2"), menu_save_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("Save &as...       F12"), menu_save_as_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Save              F2"), CK_Save));
+    entries = g_list_append (entries, menu_entry_create (_("Save &as...       F12"), CK_Save_As));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&Insert file...   F15"), menu_insert_file_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("Copy to &file...     "), menu_cut_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Insert file...   F15"), CK_Insert_File));
+    entries = g_list_append (entries, menu_entry_create (_("Copy to &file...     "), CK_Save_Block));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&User menu...     F11"), menu_user_menu_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&User menu...     F11"), CK_User_Menu));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("A&bout...            "), edit_about_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("A&bout...            "), CK_About));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&Quit             F10"), menu_quit_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Quit             F10"), CK_Exit));
 
     return entries;
 }
@@ -424,28 +111,28 @@ create_edit_menu (void)
 {
     GList *entries = NULL;
 
-    entries = g_list_append (entries, menu_entry_create (_("&Toggle Mark       F3"), menu_mark_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Mark Columns    S-F3"), menu_markcol_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Toggle Mark       F3"), CK_Mark));
+    entries = g_list_append (entries, menu_entry_create (_("&Mark Columns    S-F3"), CK_Column_Mark));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("Toggle &ins/overw Ins"), menu_ins_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("Toggle &ins/overw Ins"), CK_Toggle_Insert));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&Copy              F5"), menu_copy_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Move              F6"), menu_move_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Delete            F8"), menu_delete_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Copy              F5"), CK_Copy));
+    entries = g_list_append (entries, menu_entry_create (_("&Move              F6"), CK_Move));
+    entries = g_list_append (entries, menu_entry_create (_("&Delete            F8"), CK_Remove));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("C&opy to clipfile         C-Ins"), menu_xstore_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("C&ut to clipfile          S-Del"), menu_xcut_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Paste from clipfile      S-Ins"), menu_xpaste_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("C&opy to clipfile         C-Ins"), CK_XStore));
+    entries = g_list_append (entries, menu_entry_create (_("C&ut to clipfile          S-Del"), CK_XCut));
+    entries = g_list_append (entries, menu_entry_create (_("&Paste from clipfile      S-Ins"), CK_XPaste));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("Toggle bookmar&k            M-k"), menu_toggle_bookmark_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Next bookmark              M-j"), menu_next_bookmark_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("Pre&v bookmark              M-i"), menu_prev_bookmark_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Flush bookmark             M-o"), menu_flush_bookmark_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("Toggle bookmar&k            M-k"), CK_Toggle_Bookmark));
+    entries = g_list_append (entries, menu_entry_create (_("&Next bookmark              M-j"), CK_Next_Bookmark));
+    entries = g_list_append (entries, menu_entry_create (_("Pre&v bookmark              M-i"), CK_Prev_Bookmark));
+    entries = g_list_append (entries, menu_entry_create (_("&Flush bookmark             M-o"), CK_Flush_Bookmarks));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&Undo                       C-u"), menu_undo_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Undo                       C-u"), CK_Undo));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&Beginning     C-PgUp"), menu_beginning_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&End           C-PgDn"), menu_end_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Beginning     C-PgUp"), CK_Beginning_Of_Text));
+    entries = g_list_append (entries, menu_entry_create (_("&End           C-PgDn"), CK_End_Of_Text));
 
     return entries;
 }
@@ -455,28 +142,28 @@ create_edit_menu_emacs (void)
 {
     GList *entries = NULL;
 
-    entries = g_list_append (entries, menu_entry_create (_("&Toggle mark                 F3"), menu_mark_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("Mar&k columns              S-F3"), menu_markcol_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Toggle mark                 F3"), CK_Mark));
+    entries = g_list_append (entries, menu_entry_create (_("Mar&k columns              S-F3"), CK_Column_Mark));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("Toggle &ins/overw           Ins"), menu_ins_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("Toggle &ins/overw           Ins"), CK_Toggle_Insert));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&Copy                        F5"), menu_copy_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Move                        F6"), menu_move_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Delete                      F8"), menu_delete_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Copy                        F5"), CK_Copy));
+    entries = g_list_append (entries, menu_entry_create (_("&Move                        F6"), CK_Move));
+    entries = g_list_append (entries, menu_entry_create (_("&Delete                      F8"), CK_Remove));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("C&opy to clipfile           M-w"), menu_xstore_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("C&ut to clipfile            C-w"), menu_xcut_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Paste from clipfile        C-y"), menu_xpaste_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("C&opy to clipfile           M-w"), CK_XStore));
+    entries = g_list_append (entries, menu_entry_create (_("C&ut to clipfile            C-w"), CK_XCut));
+    entries = g_list_append (entries, menu_entry_create (_("&Paste from clipfile        C-y"), CK_XPaste));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("Toggle bookmar&k               "), menu_toggle_bookmark_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Next bookmark                 "), menu_next_bookmark_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("Pre&v bookmark                 "), menu_prev_bookmark_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Flush bookmark                "), menu_flush_bookmark_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("Toggle bookmar&k               "), CK_Toggle_Bookmark));
+    entries = g_list_append (entries, menu_entry_create (_("&Next bookmark                 "), CK_Next_Bookmark));
+    entries = g_list_append (entries, menu_entry_create (_("Pre&v bookmark                 "), CK_Prev_Bookmark));
+    entries = g_list_append (entries, menu_entry_create (_("&Flush bookmark                "), CK_Flush_Bookmarks));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&Undo                       C-u"), menu_undo_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Undo                       C-u"), CK_Undo));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&Beginning               C-PgUp"), menu_beginning_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&End                     C-PgDn"), menu_end_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Beginning               C-PgUp"), CK_Beginning_Of_Text));
+    entries = g_list_append (entries, menu_entry_create (_("&End                     C-PgDn"), CK_End_Of_Text));
 
     return entries;
 }
@@ -486,9 +173,9 @@ create_search_replace_menu (void)
 {
     GList *entries = NULL;
 
-    entries = g_list_append (entries, menu_entry_create (_("&Search...         F7"), menu_search_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("Search &again     F17"), menu_search_again_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Replace...        F4"), menu_replace_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Search...         F7"), CK_Find));
+    entries = g_list_append (entries, menu_entry_create (_("Search &again     F17"), CK_Find_Again));
+    entries = g_list_append (entries, menu_entry_create (_("&Replace...        F4"), CK_Replace));
 
     return entries;
 }
@@ -498,35 +185,35 @@ create_command_menu (void)
 {
     GList *entries = NULL;
 
-    entries = g_list_append (entries, menu_entry_create (_("&Go to line...            M-l"), menu_goto_line));
-    entries = g_list_append (entries, menu_entry_create (_("Toggle li&ne state        M-n"), menu_toggle_line_state));
-    entries = g_list_append (entries, menu_entry_create (_("Go to matching &bracket   M-b"), menu_goto_bracket));
+    entries = g_list_append (entries, menu_entry_create (_("&Go to line...            M-l"), CK_Goto));
+    entries = g_list_append (entries, menu_entry_create (_("Toggle li&ne state        M-n"), CK_Toggle_Line_State));
+    entries = g_list_append (entries, menu_entry_create (_("Go to matching &bracket   M-b"), CK_Match_Bracket));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("Find declaration      A-Enter"), menu_find_declare));
-    entries = g_list_append (entries, menu_entry_create (_("Back from declaration     M--"), menu_declare_back));
-    entries = g_list_append (entries, menu_entry_create (_("Forward to declaration    M-+"), menu_declare_forward));
+    entries = g_list_append (entries, menu_entry_create (_("Find declaration      A-Enter"), CK_Find_Definition));
+    entries = g_list_append (entries, menu_entry_create (_("Back from declaration     M--"), CK_Load_Prev_File));
+    entries = g_list_append (entries, menu_entry_create (_("Forward to declaration    M-+"), CK_Load_Next_File));
 #ifdef HAVE_CHARSET
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("Encod&ing...             M-e"), menu_select_codepage_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("Encod&ing...             M-e"), CK_SelectCodepage));
 #endif
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("Insert &literal...       C-q"),  menu_lit_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("Insert &literal...       C-q"),  CK_Insert_Literal));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&Refresh screen          C-l"),  menu_refresh_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Refresh screen          C-l"),  CK_Refresh));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&Start record macro      C-r"),  menu_begin_record_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Finish record macro...  C-r"),  menu_end_record_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Execute macro...   C-a, KEY"),  menu_exec_macro_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("Delete macr&o...            "),  menu_exec_macro_delete_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Start record macro      C-r"),  CK_Begin_Record_Macro));
+    entries = g_list_append (entries, menu_entry_create (_("&Finish record macro...  C-r"),  CK_End_Record_Macro));
+    entries = g_list_append (entries, menu_entry_create (_("&Execute macro...   C-a, KEY"),  CK_Execute_Macro));
+    entries = g_list_append (entries, menu_entry_create (_("Delete macr&o...            "),  CK_Delete_Macro));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("Insert &date/time           "),  menu_date_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("Insert &date/time           "),  CK_Date));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("Format p&aragraph        M-p"),  menu_format_paragraph));
-    entries = g_list_append (entries, menu_entry_create (_("'ispell' s&pell check    C-p"),  menu_ispell_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("Sor&t...                 M-t"),  menu_sort_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("Paste o&utput of...      M-u"),  menu_ext_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("E&xternal Formatter      F19"),  menu_c_form_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Mail...                    "),  menu_mail_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("Format p&aragraph        M-p"),  CK_Paragraph_Format));
+    entries = g_list_append (entries, menu_entry_create (_("'ispell' s&pell check    C-p"),  CK_Pipe_Block (1)));
+    entries = g_list_append (entries, menu_entry_create (_("Sor&t...                 M-t"),  CK_Sort));
+    entries = g_list_append (entries, menu_entry_create (_("Paste o&utput of...      M-u"),  CK_ExtCmd));
+    entries = g_list_append (entries, menu_entry_create (_("E&xternal Formatter      F19"),  CK_Pipe_Block (0)));
+    entries = g_list_append (entries, menu_entry_create (_("&Mail...                    "),  CK_Mail));
 
     return entries;
 }
@@ -536,35 +223,35 @@ create_command_menu_emacs (void)
 {
     GList *entries = NULL;
 
-    entries = g_list_append (entries, menu_entry_create (_("&Go to line...            M-l"), menu_goto_line));
-    entries = g_list_append (entries, menu_entry_create (_("Toggle li&ne state        M-n"), menu_toggle_line_state));
-    entries = g_list_append (entries, menu_entry_create (_("Go to matching &bracket   M-b"), menu_goto_bracket));
+    entries = g_list_append (entries, menu_entry_create (_("&Go to line...            M-l"), CK_Goto));
+    entries = g_list_append (entries, menu_entry_create (_("Toggle li&ne state        M-n"), CK_Toggle_Line_State));
+    entries = g_list_append (entries, menu_entry_create (_("Go to matching &bracket   M-b"), CK_Match_Bracket));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("Find declaration      A-Enter"), menu_find_declare));
-    entries = g_list_append (entries, menu_entry_create (_("Back from declaration     M--"), menu_declare_back));
-    entries = g_list_append (entries, menu_entry_create (_("Forward to declaration    M-+"), menu_declare_forward));
+    entries = g_list_append (entries, menu_entry_create (_("Find declaration      A-Enter"), CK_Find_Definition));
+    entries = g_list_append (entries, menu_entry_create (_("Back from declaration     M--"), CK_Load_Prev_File));
+    entries = g_list_append (entries, menu_entry_create (_("Forward to declaration    M-+"), CK_Load_Next_File));
 #ifdef HAVE_CHARSET
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("Encod&ing...             C-t"), menu_select_codepage_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("Encod&ing...             C-t"), CK_SelectCodepage));
 #endif
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("Insert &literal...       C-q"), menu_lit_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("Insert &literal...       C-q"), CK_Insert_Literal));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&Refresh screen          C-l"), menu_refresh_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Refresh screen          C-l"), CK_Refresh));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&Start record macro      C-r"), menu_begin_record_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Finish record macro...  C-r"), menu_end_record_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Execute macro... C-x e, KEY"), menu_exec_macro_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("Delete macr&o...            "), menu_exec_macro_delete_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Start record macro      C-r"), CK_Begin_Record_Macro));
+    entries = g_list_append (entries, menu_entry_create (_("&Finish record macro...  C-r"), CK_End_Record_Macro));
+    entries = g_list_append (entries, menu_entry_create (_("&Execute macro... C-x e, KEY"), CK_Execute_Macro));
+    entries = g_list_append (entries, menu_entry_create (_("Delete macr&o...            "), CK_Delete_Macro));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("Insert &date/time           "), menu_date_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("Insert &date/time           "), CK_Date));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("Format p&aragraph        M-p"), menu_format_paragraph));
-    entries = g_list_append (entries, menu_entry_create (_("'ispell' s&pell check    M-$"), menu_ispell_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("Sor&t...                 M-t"), menu_sort_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("Paste o&utput of...      M-u"), menu_ext_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("E&xternal Formatter      F19"), menu_c_form_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Mail...                    "), menu_mail_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("Format p&aragraph        M-p"), CK_Paragraph_Format));
+    entries = g_list_append (entries, menu_entry_create (_("'ispell' s&pell check    M-$"), CK_Pipe_Block (1)));
+    entries = g_list_append (entries, menu_entry_create (_("Sor&t...                 M-t"), CK_Sort));
+    entries = g_list_append (entries, menu_entry_create (_("Paste o&utput of...      M-u"), CK_ExtCmd));
+    entries = g_list_append (entries, menu_entry_create (_("E&xternal Formatter      F19"), CK_Pipe_Block (0)));
+    entries = g_list_append (entries, menu_entry_create (_("&Mail...                    "), CK_Mail));
 
     return entries;
 }
@@ -574,15 +261,15 @@ create_options_menu (void)
 {
     GList *entries = NULL;
 
-    entries = g_list_append (entries, menu_entry_create (_("&General...  "),           edit_options_dialog));
-    entries = g_list_append (entries, menu_entry_create (_("&Save mode..."),           menu_save_mode_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("Learn &Keys..."),          learn_keys));
-    entries = g_list_append (entries, menu_entry_create (_("Syntax &Highlighting..."), edit_syntax_dialog));
+    entries = g_list_append (entries, menu_entry_create (_("&General...  "),           CK_Edit_Options));
+    entries = g_list_append (entries, menu_entry_create (_("&Save mode..."),           CK_Edit_Save_Mode));
+    entries = g_list_append (entries, menu_entry_create (_("Learn &Keys..."),          CK_LearnKeys));
+    entries = g_list_append (entries, menu_entry_create (_("Syntax &Highlighting..."), CK_Choose_Syntax));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("S&yntax file"),            menu_edit_syntax_file_cmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Menu file"),              menu_edit_menu_file_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("S&yntax file"),            CK_Load_Syntax_File));
+    entries = g_list_append (entries, menu_entry_create (_("&Menu file"),              CK_Load_Menu_File));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("Save setu&p..."),          save_setup_cmd));
+    entries = g_list_append (entries, menu_entry_create (_("Save setu&p..."),          CK_SaveSetupCmd));
 
     return entries;
 }

@@ -211,6 +211,8 @@ edit_file (const char *_file, int line)
     add_widget (edit_dlg, wedit);
     add_widget (edit_dlg, edit_menubar);
 
+    edit_dlg->menu_executor = edit_menu_execute;
+
     run_dlg (edit_dlg);
 
     destroy_dlg (edit_dlg);

@@ -84,6 +84,9 @@ typedef enum {
 struct Dlg_head;
 typedef cb_ret_t (*dlg_cb_fn)(struct Dlg_head *h, dlg_msg_t msg, int parm);
 
+/* menu command execution */
+typedef cb_ret_t (*menu_exec_fn) (int command);
+
 /* Dialog color constants */
 #define DLG_COLOR_NUM		4
 #define DLG_NORMALC(h)		((h)->color[0])
@@ -115,6 +118,7 @@ typedef struct Dlg_head {
     struct Widget *current;	/* Curently active widget */
     void *data;			/* data can be passed to dialog */
     dlg_cb_fn callback;
+    menu_exec_fn menu_executor;	/* execute menu commands */
     struct Dlg_head *parent;	/* Parent dialog */
 } Dlg_head;
 

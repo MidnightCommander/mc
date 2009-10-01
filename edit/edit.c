@@ -59,6 +59,7 @@
 #include "../src/strutil.h"	/* utf string functions */
 #include "../src/charsets.h"	/* get_codepage_id */
 #include "../src/main.h"	/* source_codepage */
+#include "../src/learn.h"	/* learn_keys */
 
 /*
    what editor are we going to emulate? one of EDIT_KEY_EMULATION_NORMAL
@@ -2535,7 +2536,7 @@ void edit_execute_key_command (WEdit *edit, int command, int char_for_insertion)
 	edit->macro[edit->macro_i].command = command;
 	edit->macro[edit->macro_i++].ch = char_for_insertion;
     }
-/* record the beginning of a set of editing actions initiated by a key press */
+    /* record the beginning of a set of editing actions initiated by a key press */
     if (command != CK_Undo && command != CK_Ext_Mode)
 	edit_push_key_press (edit);
 
@@ -3030,6 +3031,10 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
     case CK_Load_Syntax_File:
 	edit_load_cmd (edit, EDIT_FILE_SYNTAX);
 	break;
+    case CK_Choose_Syntax:
+	edit_syntax_dialog ();
+	break;
+
     case CK_Load_Menu_File:
 	edit_load_cmd (edit, EDIT_FILE_MENU);
 	break;
@@ -3068,23 +3073,40 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
     case CK_Find_Definition:
 	edit_get_match_keyword_cmd (edit);
 	break;
-
     case CK_Exit:
 	dlg_stop (edit->widget.parent);
 	break;
     case CK_New:
 	edit_new_cmd (edit);
 	break;
-
     case CK_Help:
 	edit_help_cmd (edit);
 	break;
-
     case CK_Refresh:
 	edit_refresh_cmd (edit);
 	break;
-
-    case CK_Date:{
+    case CK_SaveSetupCmd:
+	save_setup_cmd ();
+	break;
+    case CK_About:
+	query_dialog (_(" About "),
+			_("\n                Cooledit  v3.11.5\n\n"
+			" Copyright (C) 1996 the Free Software Foundation\n\n"
+			"       A user friendly text editor written\n"
+			"           for the Midnight Commander.\n"), D_NORMAL,
+			 1, _("&OK"));
+	break;
+    case CK_LearnKeys:
+	learn_keys ();
+	break;
+    case CK_Edit_Options:
+	edit_options_dialog ();
+	break;
+    case CK_Edit_Save_Mode:
+	menu_save_mode_cmd ();
+    case CK_Date:
+	break;
+	{
 	    char s[1024];
 	    /* fool gcc to prevent a Y2K warning */
 	    char time_format[] = "_c";

@@ -32,6 +32,8 @@
 
 #include <stdio.h>
 
+#include "../src/dialog.h"	/* cb_ret_t */
+
 #include "../edit/edit.h"
 
 #define SEARCH_DIALOG_OPTION_NO_SCANF	(1 << 0)
@@ -146,6 +148,7 @@ extern int enable_show_tabs_tws;
 int edit_drop_hotkey_menu (WEdit *e, int key);
 void edit_menu_cmd (WEdit *e);
 struct WMenuBar *edit_create_menu (void);
+cb_ret_t edit_menu_execute (int command);
 void edit_reload_menu (void);
 void menu_save_mode_cmd (void);
 int edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch);

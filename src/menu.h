@@ -29,16 +29,13 @@
 
 extern int menubar_visible;
 
-typedef void (*menu_exec_fn) (void);
-
 typedef struct menu_entry_t {
     unsigned char first_letter;
     struct hotkey_t text;
-    menu_exec_fn callback;
+    int command;
 } menu_entry_t;
 
-
-menu_entry_t *menu_entry_create (const char *name, menu_exec_fn cmd);
+menu_entry_t *menu_entry_create (const char *name, int command);
 void menu_entry_free (menu_entry_t *me);
 #define menu_separator_create() NULL
 
@@ -55,8 +52,6 @@ Menu *create_menu (const char *name, GList *entries,
 		    const char *help_node);
 
 void destroy_menu (Menu *menu);
-void menu_add_entry (Menu *menu, const char *name, menu_exec_fn cmd);
-void menu_add_separator (Menu *menu);
 
 /* The button bar menu */
 typedef struct WMenuBar {

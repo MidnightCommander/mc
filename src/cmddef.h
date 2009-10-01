@@ -107,7 +107,12 @@
 #define CK_ExtCmd		424
 #define CK_User_Menu		425
 #define CK_Find_Definition	426
+#define CK_Edit_Options     427
+#define CK_Edit_Save_Mode   428
+#define CK_Choose_Syntax    429
+#define CK_About            430
 
+#if 0
 /* application control */
 #define CK_Save_Desktop		451
 #define CK_New_Window		452
@@ -117,6 +122,7 @@
 #define CK_Run_Another		456
 #define CK_Check_Save_And_Quit	457
 #define CK_Maximize		458
+#endif
 
 #define CK_Toggle_Tab_TWS	470
 #define CK_Toggle_Syntax	480
@@ -181,15 +187,12 @@
 
 #define CK_Shell		801
 
-
 /* C-x or similar */
 #define CK_Ext_Mode		820
-
 
 #define CK_Insert_Literal	851
 #define CK_Execute_Macro	852
 #define CK_Begin_End_Macro	853
-
 
 /* common */
 #define CK_ShowCommandLine              2001
@@ -244,67 +247,76 @@
 #define CK_ViewQuit                     5020
 
 /* main commands */
-#define CK_ChmodCmd                     7001
-#define CK_ChownAdvancedCmd             7002
-#define CK_ChownCmd                     7003
-#define CK_CompareDirsCmd               7004
-#define CK_ConfigureBox                 7005
-#define CK_ConfigureVfs                 7006
-#define CK_ConfirmBox                   7007
-#define CK_CopyCmd                      7008
-#define CK_CopyCurrentPathname          7009
-#define CK_CopyOtherPathname            7010
-#define CK_DeleteCmd                    7011
-#define CK_DirsizesCmd                  7012
-#define CK_DisplayBitsBox               7013
-#define CK_EditCmd                      7014
-#define CK_EditMcMenuCmd                7015
-#define CK_EditSymlinkCmd               7016
-#define CK_EditSyntaxCmd                7017
-#define CK_EditUserMenuCmd              7018
-#define CK_ExternalPanelize             7020
-#define CK_FilterCmd                    7021
-#define CK_FilteredViewCmd              7022
-#define CK_FindCmd                      7023
-#define CK_FishlinkCmd                  7024
-#define CK_FtplinkCmd                   7025
-#define CK_HistoryCmd                   7026
-#define CK_InfoCmd                      7027
-#define CK_JobsCmd                      7028
-#define CK_LayoutCmd                    7029
-#define CK_LearnKeys                    7030
-#define CK_LinkCmd                      7031
-#define CK_ListingCmd                   7033
-#define CK_MenuLastSelectedCmd          7034
-#define CK_MkdirCmd                     7035
-#define CK_QuickCdCmd                   7036
-#define CK_QuickChdirCmd                7037
-#define CK_QuickViewCmd                 7038
-#define CK_RenCmd                       7039
-#define CK_RereadCmd                    7040
-#define CK_ReselectVfs                  7041
-#define CK_ReverseSelectionCmd          7043
-#define CK_SaveSetupCmd                 7044
-#define CK_SelectCmd                    7045
-#define CK_SingleDirsizeCmd             7046
-#define CK_SuspendCmd                   7047
-#define CK_SwapCmd                      7048
-#define CK_SymlinkCmd                   7049
-#define CK_ToggleListingCmd             7050
-#define CK_TreeCmd                      7051
-#define CK_UndeleteCmd                  7052
-#define CK_UnselectCmd                  7053
-#define CK_UserFileMenuCmd              7054
-#define CK_ViewCmd                      7055
-#define CK_ViewFileCmd                  7056
-#define CK_QuietQuitCmd                 7058
-#define CK_CopyCurrentTagged            7059
-#define CK_CopyCurrentReadlink          7060
-#define CK_CopyOtherReadlink            7061
-#define CK_AddHotlist                   7062
-#define CK_QuitCmd                      7064
-#define CK_CopyOtherTarget              7065
-#define CK_ToggleShowHidden             7066
+#define CK_AddHotlist                   7001
+#define CK_ChmodCmd                     7002
+#define CK_ChownAdvancedCmd             7003
+#define CK_ChownCmd                     7004
+#define CK_CompareDirsCmd               7005
+#define CK_ConfigureBox                 7006
+#define CK_ConfigureVfs                 7007
+#define CK_ConfirmBox                   7008
+#define CK_CopyCmd                      7009
+#define CK_CopyCurrentPathname          7010
+#define CK_CopyCurrentReadlink          7011
+#define CK_CopyCurrentTagged            7012
+#define CK_CopyOtherPathname            7013
+#define CK_CopyOtherReadlink            7014
+#define CK_CopyOtherTarget              7015
+#define CK_DeleteCmd                    7016
+#define CK_DirsizesCmd                  7017
+#define CK_DisplayBitsBox               7018
+#define CK_EditCmd                      7019
+#define CK_EditExtFileCmd               7020
+#define CK_EditFhlFileCmd               7021
+#define CK_EditMcMenuCmd                7022
+#define CK_EditSymlinkCmd               7023
+#define CK_EditSyntaxCmd                7024
+#define CK_EditUserMenuCmd              7025
+#define CK_ExternalPanelize             7026
+#define CK_FilterCmd                    7027
+#define CK_FilteredViewCmd              7028
+#define CK_FindCmd                      7029
+#define CK_FishlinkCmd                  7030
+#define CK_FtplinkCmd                   7031
+#define CK_HistoryCmd                   7032
+#define CK_InfoCmd                      7033
+#define CK_JobsCmd                      7034
+#define CK_LayoutCmd                    7035
+#define CK_LearnKeys                    7036
+#define CK_LinkCmd                      7037
+#define CK_ListingCmd                   7038
+#define CK_ListmodeCmd                  7039
+#define CK_MenuInfoCmd                  7040
+#define CK_MenuLastSelectedCmd          7042
+#define CK_MenuQuickViewCmd             7043
+#define CK_MkdirCmd                     7044
+#define CK_NetlinkCmd                   7045
+#define CK_QuickCdCmd                   7046
+#define CK_QuickChdirCmd                7047
+#define CK_QuickViewCmd                 7048
+#define CK_QuietQuitCmd                 7049
+#define CK_QuitCmd                      7050
+#define CK_RenCmd                       7051
+#define CK_RereadCmd                    7052
+#define CK_ReselectVfs                  7053
+#define CK_ReverseSelectionCmd          7054
+#define CK_SaveSetupCmd                 7055
+#define CK_SelectCmd                    7056
+#define CK_SingleDirsizeCmd             7057
+#define CK_SmblinkCmd                   7058
+#define CK_SuspendCmd                   7059
+#define CK_SwapCmd                      7060
+#define CK_SymlinkCmd                   7061
+#define CK_ToggleListingCmd             7062
+#define CK_ToggleShowHidden             7063
+#define CK_TreeCmd                      7064
+#define CK_TreeBoxCmd                   7065
+#define CK_UndeleteCmd                  7066
+#define CK_UnselectCmd                  7067
+#define CK_UserFileMenuCmd              7068
+#define CK_UserMenuCmd                  7069
+#define CK_ViewCmd                      7070
+#define CK_ViewFileCmd                  7071
 
 /* panels */
 #define CK_PanelChdirOtherPanel         8001

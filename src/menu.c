@@ -43,14 +43,14 @@
 int menubar_visible = 1;	/* This is the new default */
 
 menu_entry_t *
-menu_entry_create (const char *name, menu_exec_fn cmd)
+menu_entry_create (const char *name, int command)
 {
     menu_entry_t *entry;
 
     entry = g_new (menu_entry_t, 1);
     entry->first_letter = ' ';
     entry->text = parse_hotkey (name);
-    entry->callback = cmd;
+    entry->command = command;
 
     return entry;
 }
@@ -106,20 +106,6 @@ destroy_menu (Menu *menu)
     g_list_free (menu->entries);
     g_free (menu->help_node);
     g_free (menu);
-}
-
-void
-menu_add_entry (Menu *menu, const char *name, menu_exec_fn cmd)
-{
-    menu->entries = g_list_append (menu->entries,
-			menu_entry_create (name, cmd));
-    menu_arrange (menu);
-}
-
-void
-menu_add_separator (Menu *menu)
-{
-    menu->entries = g_list_append (menu->entries, menu_separator_create ());
 }
 
 static void
@@ -296,18 +282,12 @@ menubar_execute (WMenuBar *menubar)
     const Menu *menu = g_list_nth_data (menubar->menu, menubar->selected);
     const menu_entry_t *entry = g_list_nth_data (menu->entries, menu->selected);
 
-    if ((entry == NULL) || (entry->callback == NULL))
-	return;
-
-    is_right = (menubar->selected != 0);
-
-    /* This used to be the other way round, i.e. first callback and 
-       then menubar_finish. The new order (hack?) is needed to make 
-       change_panel () work which is used in quick_view_cmd () -- Norbert
-    */
-    menubar_finish (menubar);
-    (*entry->callback) ();
-    do_refresh ();
+    if ((entry != NULL) && (entry->command != 0)) {
+	is_right = (menubar->selected != 0);
+	menubar_finish (menubar);
+	menubar->widget.parent->menu_executor (entry->command);
+	do_refresh ();
+    }
 }
 
 static void
@@ -322,7 +302,7 @@ menubar_down (WMenuBar *menubar)
     do {
 	menu->selected = (menu->selected + 1) % len;
 	entry = (menu_entry_t *) g_list_nth_data (menu->entries, menu->selected);
-    } while ((entry == NULL) || (entry->callback == NULL));
+    } while ((entry == NULL) || (entry->command == 0));
 
     menubar_paint_idx (menubar, menu->selected, MENU_SELECTED_COLOR);
 }
@@ -342,7 +322,7 @@ menubar_up (WMenuBar *menubar)
 	else
 	    menu->selected--;
 	entry = (menu_entry_t *) g_list_nth_data (menu->entries, menu->selected);
-    } while ((entry == NULL) || (entry->callback == NULL));
+    } while ((entry == NULL) || (entry->command == 0));
 
     menubar_paint_idx (menubar, menu->selected, MENU_SELECTED_COLOR);
 }
@@ -363,7 +343,7 @@ menubar_first (WMenuBar *menubar)
     while (TRUE) {
 	entry = (menu_entry_t *) g_list_nth_data (menu->entries, menu->selected);
 
-	if ((entry == NULL) || (entry->callback == NULL))
+	if ((entry == NULL) || (entry->command == 0))
 	    menu->selected++;
 	else
 	    break;
@@ -389,7 +369,7 @@ menubar_last (WMenuBar *menubar)
     do {
 	menu->selected--;
 	entry = (menu_entry_t *) g_list_nth_data (menu->entries, menu->selected);
-    } while ((entry == NULL) || (entry->callback == NULL));
+    } while ((entry == NULL) || (entry->command == 0));
 
     menubar_paint_idx (menubar, menu->selected, MENU_SELECTED_COLOR);
 }
@@ -455,11 +435,11 @@ menubar_handle_key (WMenuBar *menubar, int key)
 	Menu *menu = g_list_nth_data (menubar->menu, menubar->selected);
 	GList *i;
 
-	/* execute menu callback by hotkey */
+	/* execute menu command by hotkey */
 	for (i = menu->entries; i != NULL; i = g_list_next (i)) {
 	    const menu_entry_t *entry = i->data;
 
-	    if ((entry != NULL) && (entry->callback != NULL)
+	    if ((entry != NULL) && (entry->command != 0)
 		&& (entry->text.hotkey != NULL)
 		&& (key == g_ascii_tolower (entry->text.hotkey[0]))) {
 		menu->selected = g_list_position (menu->entries, i);
@@ -660,7 +640,7 @@ menubar_event (Gpm_Event *event, void *data)
 	if  ((pos < 0) || (pos >= bottom_y - 3))
 	    return MOU_NORMAL;
 
-	if ((entry != NULL) && (entry->callback != NULL)) {
+	if ((entry != NULL) && (entry->command != 0)) {
 	    menubar_paint_idx (menubar, menu->selected, MENU_ENTRY_COLOR);
 	    menu->selected = pos;
 	    menubar_paint_idx (menubar, menu->selected, MENU_SELECTED_COLOR);
