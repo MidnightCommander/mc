@@ -3585,6 +3585,10 @@ regular expression. If present, 'extensions' option ignored
 .TP
 .I extensions
 list of extensions of files. Separated by ';' sign.
+.TP
+.I extensions_case
+(make sense only with 'extensions' parameter) make 'extensions'
+rule case sentitive (true) or not (false).
 .PP
 'type' key may have values:
 .nf
