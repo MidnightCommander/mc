@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.7.0pre3\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-01 02:39+0300\n"
-"PO-Revision-Date: 2009-09-27 11:00+0200\n"
+"POT-Creation-Date: 2009-10-02 10:22+0300\n"
+"PO-Revision-Date: 2009-10-01 23:55+0200\n"
 "Last-Translator: David Martín <dmartina@excite.com\n"
 "Language-Team: Spanish <debian-l10n-spanish@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -729,54 +729,6 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Error en el archivo %s (línea %d) "
-
-#, c-format
-msgid "bind: Wrong argument number, bind <key> <command>"
-msgstr "bind: Número de argumentos incorrecto, bind <key> <orden>"
-
-#, c-format
-msgid "bind: Bad key value `%s'"
-msgstr "bind: Clave incorrecta `%s'"
-
-#, c-format
-msgid "bind: Ehh...no key?"
-msgstr "bind: Ehh... ¿la clave?"
-
-#, c-format
-msgid "bind: Unknown key: `%s'"
-msgstr "bind: Clave desconocida: `%s'"
-
-#, c-format
-msgid "bind: Unknown command: `%s'"
-msgstr "bind: Orden desconocida: `%s'"
-
-#, c-format
-msgid "%s: Syntax: %s <n> <command> <label>"
-msgstr "%s: Sintaxis: %s <n> <orden> <etiqueta>"
-
-#, c-format
-msgid "%s: Unknown command: `%s'"
-msgstr "%s: Orden desconocida: `%s'"
-
-#, c-format
-msgid "%s: fn should be 1-10"
-msgstr "%s: fn debe estar entre 1 y 10"
-
-#, c-format
-msgid "%s: fopen(): %s"
-msgstr "%s: fopen(): %s"
-
-#, c-format
-msgid "%s:%d: unknown command `%s'"
-msgstr "%s:%d: orden desconocida `%s'"
-
-#, c-format
-msgid "%s:%d: %s"
-msgstr "%s:%d: %s"
-
-#, c-format
-msgid "%s not found!"
-msgstr "¡No se encuentra %s!"
 
 msgid "&Set"
 msgstr "a&Plicar"
@@ -2515,9 +2467,8 @@ msgstr "&Editar extensiones..."
 msgid "Edit &menu file"
 msgstr "editar &Menú..."
 
-#, fuzzy
 msgid "Edit hi&ghlighting group file"
-msgstr "editar colores de &Grupo..."
+msgstr "editar &Grupos de resaltado"
 
 msgid "&Configuration..."
 msgstr "&Configuración..."
@@ -3105,27 +3056,23 @@ msgstr "Eliminar, pad"
 msgid "Enter on keypad"
 msgstr "Intro, pad"
 
-#, fuzzy
 msgid "Function key 21"
-msgstr "Tecla F1"
+msgstr "Tecla F21"
 
-#, fuzzy
 msgid "Function key 22"
-msgstr "Tecla F2"
+msgstr "Tecla F22"
 
-#, fuzzy
 msgid "Function key 23"
-msgstr "Tecla F2"
+msgstr "Tecla F23"
 
-#, fuzzy
 msgid "Function key 24"
-msgstr "Tecla F2"
+msgstr "Tecla F24"
 
 msgid "Plus"
-msgstr "Más"
+msgstr "Suma"
 
 msgid "Minus"
-msgstr "Menos"
+msgstr "Resta"
 
 msgid "Asterisk"
 msgstr "Asterisco"
@@ -3881,6 +3828,42 @@ msgstr "Error interno:"
 
 msgid "Changes to file lost"
 msgstr "Los cambios del archivo se han perdido"
+
+#~ msgid "bind: Wrong argument number, bind <key> <command>"
+#~ msgstr "bind: Número de argumentos incorrecto, bind <key> <orden>"
+
+#~ msgid "bind: Bad key value `%s'"
+#~ msgstr "bind: Clave incorrecta `%s'"
+
+#~ msgid "bind: Ehh...no key?"
+#~ msgstr "bind: Ehh... ¿la clave?"
+
+#~ msgid "bind: Unknown key: `%s'"
+#~ msgstr "bind: Clave desconocida: `%s'"
+
+#~ msgid "bind: Unknown command: `%s'"
+#~ msgstr "bind: Orden desconocida: `%s'"
+
+#~ msgid "%s: Syntax: %s <n> <command> <label>"
+#~ msgstr "%s: Sintaxis: %s <n> <orden> <etiqueta>"
+
+#~ msgid "%s: Unknown command: `%s'"
+#~ msgstr "%s: Orden desconocida: `%s'"
+
+#~ msgid "%s: fn should be 1-10"
+#~ msgstr "%s: fn debe estar entre 1 y 10"
+
+#~ msgid "%s: fopen(): %s"
+#~ msgstr "%s: fopen(): %s"
+
+#~ msgid "%s:%d: unknown command `%s'"
+#~ msgstr "%s:%d: orden desconocida `%s'"
+
+#~ msgid "%s:%d: %s"
+#~ msgstr "%s:%d: %s"
+
+#~ msgid "%s not found!"
+#~ msgstr "¡No se encuentra %s!"
 
 #~ msgid "NumLock on keypad"
 #~ msgstr "Bloquea números, pad"
