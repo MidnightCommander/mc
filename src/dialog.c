@@ -752,22 +752,20 @@ dlg_mouse_event (Dlg_head * h, Gpm_Event * event)
 
     item = starting_widget;
     do {
-	Widget *widget = item;
+	Widget *widget;
 
+	widget = item;
 	item = item->next;
 
-	if (!((x > widget->x) && (x <= widget->x + widget->cols)
-	      && (y > widget->y) && (y <= widget->y + widget->lines)))
-	    continue;
+	if ((x > widget->x) && (x <= widget->x + widget->cols)
+		&& (y > widget->y) && (y <= widget->y + widget->lines)) {
+	    new_event = *event;
+	    new_event.x -= widget->x;
+	    new_event.y -= widget->y;
 
-	new_event = *event;
-	new_event.x -= widget->x;
-	new_event.y -= widget->y;
-
-	if (!widget->mouse)
-	    return MOU_NORMAL;
-
-	return (*widget->mouse) (&new_event, widget);
+	    if (widget->mouse != NULL)
+		return widget->mouse (&new_event, widget);
+	}
     } while (item != starting_widget);
 
     return MOU_NORMAL;
