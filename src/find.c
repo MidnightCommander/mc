@@ -433,13 +433,13 @@ find_parameters (char **start_dir, char **pattern, char **content)
 	file_pattern_flag = file_pattern_cbox->state & C_BOOL;
 	file_case_sens_flag = file_case_sens_cbox->state & C_BOOL;
 	skip_hidden_flag = skip_hidden_cbox->state & C_BOOL;
-	return_value = 1;
 	*content = (in_with->buffer[0] != '\0') ? g_strdup (in_with->buffer) : NULL;
-	*start_dir = g_strdup (in_start->buffer);
+	*start_dir = g_strdup ((in_start->buffer[0] != '\0') ? in_start->buffer : ".");
 	*pattern = g_strdup (in_name->buffer);
 	if (in_start_dir != INPUT_LAST_TEXT)
 	    g_free (in_start_dir);
 	in_start_dir = g_strdup (*start_dir);
+	return_value = 1;
     }
 
     destroy_dlg (find_dlg);
