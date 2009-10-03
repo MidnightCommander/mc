@@ -481,7 +481,7 @@ static menu_entry CmdMenu[] =
     {' ', N_("Forward to declaration    M-+"), NULL_HOTKEY, menu_declare_forward},
 #ifdef HAVE_CHARSET
     {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("Encod&ing...             C-t"), NULL_HOTKEY, menu_select_codepage_cmd},
+    {' ', N_("Encod&ing...             M-e"), NULL_HOTKEY, menu_select_codepage_cmd},
 #endif
     {' ', "", NULL_HOTKEY, 0},
     {' ', N_("Insert &literal...       C-q"), NULL_HOTKEY, menu_lit_cmd},

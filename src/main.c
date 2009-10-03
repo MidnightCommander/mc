@@ -676,7 +676,7 @@ static menu_entry LeftMenu[] = {
     {' ', N_("&Filter..."), NULL_HOTKEY, filter_cmd},
 #ifdef HAVE_CHARSET
     {' ', "",NULL_HOTKEY, 0},
-    {' ', N_("&Encoding...    C-t"), NULL_HOTKEY, encoding_cmd},
+    {' ', N_("&Encoding...    M-e"), NULL_HOTKEY, encoding_cmd},
 #endif
 #ifdef USE_NETCODE
     {' ', "", NULL_HOTKEY, 0},
@@ -704,7 +704,7 @@ static menu_entry RightMenu[] = {
     {' ', N_("&Filter..."), NULL_HOTKEY, filter_cmd},
 #ifdef HAVE_CHARSET
     {' ', "",NULL_HOTKEY, 0},
-    {' ', N_("&Encoding...    C-t"), NULL_HOTKEY, encoding_cmd},
+    {' ', N_("&Encoding...    M-e"), NULL_HOTKEY, encoding_cmd},
 #endif
 #ifdef USE_NETCODE
     {' ', "", NULL_HOTKEY, 0},

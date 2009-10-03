@@ -149,7 +149,7 @@ EditFindDefinition = alt-enter
 EditLoadPrevFile = alt-minus
 EditLoadNextFile = alt-equal
 
-SelectCodepage = ctrl-t
+SelectCodepage = alt-e
 
 [viewer:hex]
 HexViewToggleNavigationMode = tab
@@ -178,7 +178,7 @@ ViewNewBookmark = r
 ViewNextFile = ctrl-f
 ViewPrevFile = ctrl-b
 ViewQuit = q; esc
-SelectCodepage = ctrl-t
+SelectCodepage = alt-e
 ShowCommandLine = ctrl-o
 ViewToggleRuler = alt-r
 
@@ -205,7 +205,7 @@ ExtMap1 = ctrl-x
 
 [panel]
 PanelStartSearch = ctrl-s; alt-s
-PanelMarkFile = ins
+PanelMarkFile = ins; ctrl-t
 PanelMoveDown = down; ctrl-n
 PanelMoveUp = up; ctrl-p
 PanelMoveLeft = left
@@ -232,7 +232,7 @@ PanelGotoBottomFile = alt-j
 PanelGotoMiddleFile = alt-r
 PanelSyncOtherPanel = alt-i
 PanelGotoTopFile = alt-g
-PanelSetPanelEncoding = ctrl-t
+PanelSetPanelEncoding = alt-e
 PanelMoveHome = alt-lt; home
 PanelMoveEnd = alt-gt; end
 
