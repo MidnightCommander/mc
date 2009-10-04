@@ -150,6 +150,7 @@ static struct {
 	{ N_("&Edit - F4"), 13, 38 }
 };
 
+static char *in_contents = NULL;
 static char *in_start_dir = INPUT_LAST_TEXT;
 
 static mc_search_t *search_file_handle = NULL;
@@ -316,6 +317,9 @@ find_parameters (char **start_dir, char **pattern, char **content)
     b2 = str_term_width1 (buts[2]) + 4;
 
   find_par_start:
+    if (in_contents == NULL)
+	in_contents = INPUT_LAST_TEXT;
+
     if (in_start_dir == NULL)
 	in_start_dir = g_strdup (".");
 
@@ -365,7 +369,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
     file_case_sens_cbox = check_new (7, 3, file_case_sens_flag, file_case_label);
     add_widget (find_dlg, file_case_sens_cbox);
 
-    in_with = input_new (6, FIND_X / 2 + 1, INPUT_COLOR, FIND_X / 2 - 4, INPUT_LAST_TEXT,
+    in_with = input_new (6, FIND_X / 2 + 1, INPUT_COLOR, FIND_X / 2 - 4, in_contents,
                          MC_HISTORY_SHARED_SEARCH, INPUT_COMPLETE_DEFAULT);
     add_widget (find_dlg, in_with);
     add_widget (find_dlg, label_new (5, FIND_X / 2 + 1, _("Content:")));
@@ -433,7 +437,16 @@ find_parameters (char **start_dir, char **pattern, char **content)
 	file_pattern_flag = file_pattern_cbox->state & C_BOOL;
 	file_case_sens_flag = file_case_sens_cbox->state & C_BOOL;
 	skip_hidden_flag = skip_hidden_cbox->state & C_BOOL;
-	*content = (in_with->buffer[0] != '\0') ? g_strdup (in_with->buffer) : NULL;
+
+	/* keep empty Content field */
+	/* if not empty, fill from history */
+	*content = NULL;
+	in_contents = "";
+	if (in_with->buffer[0] != '\0') {
+	    *content = g_strdup (in_with->buffer);
+	    in_contents = INPUT_LAST_TEXT;
+	}
+
 	*start_dir = g_strdup ((in_start->buffer[0] != '\0') ? in_start->buffer : ".");
 	*pattern = g_strdup (in_name->buffer);
 	if (in_start_dir != INPUT_LAST_TEXT)
