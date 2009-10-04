@@ -27,8 +27,9 @@ struct Widget *get_panel_widget (int index);
 
 struct WPanel *get_other_panel (void);
 
-void save_panel_dir(int index);
-Widget *restore_into_right_dir_panel(int index, Widget *from_widget);
+void save_panel_dir (int index);
+Widget *restore_into_right_dir_panel (int index, Widget *from_widget);
+const char *get_panel_dir_for (const WPanel *widget);
 
 void set_hintbar (const char *str);
 

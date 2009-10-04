@@ -913,6 +913,14 @@ set_display_type (int num, int type)
 	}
     }
 
+    /* Restoring saved path from panels.ini for nonlist panel */
+    /* when it's first creation (for example view_info) */
+    if (old_widget == NULL && type != view_listing) {
+	char panel_dir[MC_MAXPATHLEN];
+	mc_get_current_wd (panel_dir, sizeof (panel_dir));
+	panels[num].last_saved_dir = g_strdup (panel_dir);
+    }
+
     switch (type){
     case view_listing:
 	new_widget = restore_into_right_dir_panel(num, old_widget);
@@ -1133,7 +1141,8 @@ save_panel_dir (int index)
 }
 
 /* Save current list_view widget directory into panel */
-Widget *restore_into_right_dir_panel(int index, Widget *from_widget)
+Widget *
+restore_into_right_dir_panel (int index, Widget *from_widget)
 {
     Widget *new_widget = 0;
     const char *saved_dir = panels [index].last_saved_dir;
@@ -1141,10 +1150,30 @@ Widget *restore_into_right_dir_panel(int index, Widget *from_widget)
 				get_display_type(index) != view_listing);
     const char *p_name = get_nth_panel_name (index);
 
-    if (last_was_panel) {
+    if (last_was_panel)
 	new_widget = (Widget *) panel_new_with_dir (p_name, saved_dir);
-    } else
+    else
 	new_widget = (Widget *) panel_new (p_name);
 
     return new_widget;
+}
+
+/* Return working dir, if it's view_listing - cwd,
+   but for other types - last_saved_dir */
+const char *
+get_panel_dir_for (const WPanel *widget)
+{
+    int i;
+
+    for (i = 0; i < MAX_VIEWS; i++)
+	if ((WPanel *) get_panel_widget (i) == widget)
+	    break;
+
+    if (i >= MAX_VIEWS)
+	return ".";
+
+    if (get_display_type (i) == view_listing)
+	return ((WPanel *) get_panel_widget (i))->cwd;
+
+    return panels[i].last_saved_dir;
 }
