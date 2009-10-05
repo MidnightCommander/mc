@@ -144,6 +144,8 @@ key_code_name_t key_name_conv_tab[] = {
     {KEY_PPAGE, "kpppage", N_("Page Up keypad")},
     {KEY_IC, "kpinsert", N_("Insert on keypad")},
     {KEY_DC, "kpdelete", N_("Delete on keypad")},
+    {ESC_CHAR, "esc", N_("Escape key")},
+    {ESC_CHAR, "escape", N_("Escape key")},
     {(int) '\n', "kpenter", N_("Enter on keypad")},
     {KEY_F (21), "f21", N_("Function key 21")},
     {KEY_F (22), "f22", N_("Function key 22")},

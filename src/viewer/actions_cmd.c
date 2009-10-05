@@ -228,6 +228,60 @@ mcview_hook (void *v)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+static cb_ret_t
+mcview_handle_editkey (mcview_t * view, int key)
+{
+    struct hexedit_change_node *node;
+    int byte_val;
+    /* Has there been a change at this position? */
+    node = view->change_list;
+    while (node && (node->offset != view->hex_cursor))
+        node = node->next;
+
+    if (!view->hexview_in_text) {
+        /* Hex editing */
+        unsigned int hexvalue = 0;
+        if (key >= '0' && key <= '9') {
+            hexvalue = 0 + (key - '0');
+        } else if (key >= 'A' && key <= 'F')
+            hexvalue = 10 + (key - 'A');
+        else if (key >= 'a' && key <= 'f')
+            hexvalue = 10 + (key - 'a');
+        else
+            return MSG_NOT_HANDLED;
+
+        if (node)
+            byte_val = node->value;
+        else
+            mcview_get_byte (view, view->hex_cursor, &byte_val);
+
+        if (view->hexedit_lownibble) {
+            byte_val = (byte_val & 0xf0) | (hexvalue);
+        } else {
+            byte_val = (byte_val & 0x0f) | (hexvalue << 4);
+        }
+    } else {
+        /* Text editing */
+        if (key < 256 && ((key == '\n') || is_printable (key)))
+            byte_val = key;
+        else
+            return MSG_NOT_HANDLED;
+    }
+    if (!node) {
+        node = g_new (struct hexedit_change_node, 1);
+        node->offset = view->hex_cursor;
+        node->value = byte_val;
+        mcview_enqueue_change (&view->change_list, node);
+    } else {
+        node->value = byte_val;
+    }
+    view->dirty++;
+    mcview_update (view);
+    mcview_move_right (view, 1);
+    return MSG_HANDLED;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
 mcview_execute_cmd (mcview_t * view, int command, int key)
@@ -235,107 +289,93 @@ mcview_execute_cmd (mcview_t * view, int command, int key)
     int res = MSG_HANDLED;
     (void) key;
 
-    if (view->hex_mode) {
-        switch (command) {
-        case CK_HexViewToggleNavigationMode:
-            view->hexview_in_text = !view->hexview_in_text;
-            view->dirty++;
-            break;
-        case CK_ViewMoveToBol:
-            mcview_moveto_bol (view);
-            view->dirty++;
-            break;
-        case CK_ViewMoveToEol:
-            mcview_moveto_eol (view);
-            break;
-        case CK_ViewMoveLeft:
-            mcview_move_left (view, 1);
-            break;
-        case CK_ViewMoveRight:
-            mcview_move_right (view, 1);
-            break;
-        default :
-            res = MSG_NOT_HANDLED;
-            break;
-        }
-    } else {
-        switch (command) {
-        case CK_ViewSearch:
-            view->search_type = MC_SEARCH_T_REGEX;
-            mcview_search_cmd (view);
-            break;
-            /* Continue search */
-        case CK_ViewContinueSearch:
-            mcview_continue_search_cmd (view);
-            break;
-            /* toggle ruler */
-        case CK_ViewToggleRuler:
-            mcview_toggle_ruler_cmd (view);
-            break;
-        case CK_ViewMoveLeft:
-            mcview_move_left (view, 1);
-            break;
-        case CK_ViewMoveRight:
-            mcview_move_right (view, 1);
-            break;
-        case CK_ViewMoveUp:
-            mcview_move_up (view, 1);
-            break;
-        case CK_ViewMoveDown:
-            mcview_move_down (view, 1);
-            break;
-        case CK_ViewMoveHalfPgUp:
-            mcview_move_up (view, (view->data_area.height + 1) / 2);
-            break;
-        case CK_ViewMoveHalfPgDn:
-            mcview_move_down (view, (view->data_area.height + 1) / 2);
-            break;
-        case CK_ViewMovePgUp:
-            mcview_move_up (view, view->data_area.height);
-            break;
-        case CK_ViewMovePgDn:
-            mcview_move_down (view, view->data_area.height);
-            break;
-        case CK_ShowCommandLine:
-            view_other_cmd ();
-            break;
-        /*
-            // Unlike Ctrl-O, run a new shell if the subshell is not running
-        case '!':
-            exec_shell ();
-            return MSG_HANDLED;
-        */
-        case CK_ViewGotoBookmark:
-            view->marks[view->marker] = view->dpy_start;
-            break;
-        case CK_ViewNewBookmark:
-            view->dpy_start = view->marks[view->marker];
-            view->dirty++;
-            break;
-        case CK_ViewNextFile:
-            /*  Use to indicate parent that we want to see the next/previous file */
-            /* Does not work in panel mode */
-            if (!mcview_is_in_panel (view))
-                view->move_dir = 1;
-            break;
-        case CK_ViewPrevFile:
-            /*  Use to indicate parent that we want to see the next/previous file */
-            /* Does not work in panel mode */
-            if (!mcview_is_in_panel (view))
-                view->move_dir = -1;
-            break;
-        case CK_ViewQuit:
-            if (mcview_ok_to_quit (view))
-                view->want_to_quit = TRUE;
-            break;
-        case CK_SelectCodepage:
-            mcview_select_encoding (view);
-            view->dirty++;
-            mcview_update (view);
-            break;
-        default :
-            res = MSG_NOT_HANDLED;
-        }
+    switch (command) {
+    case CK_HexViewToggleNavigationMode:
+        view->hexview_in_text = !view->hexview_in_text;
+        view->dirty++;
+        break;
+    case CK_ViewMoveToBol:
+        mcview_moveto_bol (view);
+        view->dirty++;
+        break;
+    case CK_ViewMoveToEol:
+        mcview_moveto_eol (view);
+        break;
+    case CK_ViewMoveLeft:
+        mcview_move_left (view, 1);
+        break;
+    case CK_ViewMoveRight:
+        mcview_move_right (view, 1);
+        break;
+    case CK_ViewQuit:
+        if (mcview_ok_to_quit (view))
+            view->want_to_quit = TRUE;
+        break;
+    case CK_ViewSearch:
+        view->search_type = MC_SEARCH_T_REGEX;
+        mcview_search_cmd (view);
+        break;
+        /* Continue search */
+    case CK_ViewContinueSearch:
+        mcview_continue_search_cmd (view);
+        break;
+        /* toggle ruler */
+    case CK_ViewToggleRuler:
+        mcview_toggle_ruler_cmd (view);
+        break;
+    case CK_ViewMoveUp:
+        mcview_move_up (view, 1);
+        break;
+    case CK_ViewMoveDown:
+        mcview_move_down (view, 1);
+        break;
+    case CK_ViewMoveHalfPgUp:
+        mcview_move_up (view, (view->data_area.height + 1) / 2);
+        break;
+    case CK_ViewMoveHalfPgDn:
+        mcview_move_down (view, (view->data_area.height + 1) / 2);
+        break;
+    case CK_ViewMovePgUp:
+        mcview_move_up (view, view->data_area.height);
+        break;
+    case CK_ViewMovePgDn:
+        mcview_move_down (view, view->data_area.height);
+        break;
+    case CK_ShowCommandLine:
+        view_other_cmd ();
+        break;
+    /*
+        // Unlike Ctrl-O, run a new shell if the subshell is not running
+    case '!':
+        exec_shell ();
+        return MSG_HANDLED;
+    */
+    case CK_ViewGotoBookmark:
+        view->marks[view->marker] = view->dpy_start;
+        break;
+    case CK_ViewNewBookmark:
+        view->dpy_start = view->marks[view->marker];
+        view->dirty++;
+        break;
+    case CK_ViewNextFile:
+        /*  Use to indicate parent that we want to see the next/previous file */
+        /* Does not work in panel mode */
+        if (!mcview_is_in_panel (view))
+            view->move_dir = 1;
+        break;
+    case CK_ViewPrevFile:
+        /*  Use to indicate parent that we want to see the next/previous file */
+        /* Does not work in panel mode */
+        if (!mcview_is_in_panel (view))
+            view->move_dir = -1;
+        break;
+    case CK_SelectCodepage:
+        mcview_select_encoding (view);
+        view->dirty++;
+        mcview_update (view);
+        break;
+    default :
+        res = MSG_NOT_HANDLED;
     }
     return res;
 }
@@ -345,23 +385,26 @@ mcview_execute_cmd (mcview_t * view, int command, int key)
 static cb_ret_t
 mcview_handle_key (mcview_t * view, int key)
 {
-    key = convert_from_input_c (key);
-
     int i;
 
+    key = convert_from_input_c (key);
+
     if (view->hex_mode) {
+        if (view->hexedit_mode)
+            if (mcview_handle_editkey (view, key) == MSG_HANDLED)
+                return MSG_HANDLED;
         for (i = 0; view->hex_map[i].key != 0; i++)
             if ((key == view->hex_map[i].key)
                 && (mcview_execute_cmd (view, view->hex_map[i].command,
                                         key) == MSG_HANDLED))
                     return MSG_HANDLED;
-    } else {
-        for (i = 0; view->plain_map[i].key != 0; i++)
-            if ((key == view->plain_map[i].key)
-                && (mcview_execute_cmd (view, view->plain_map[i].command,
-                                        key) == MSG_HANDLED))
-                    return MSG_HANDLED;
     }
+    for (i = 0; view->plain_map[i].key != 0; i++)
+        if ((key == view->plain_map[i].key)
+            && (mcview_execute_cmd (view, view->plain_map[i].command,
+                                    key) == MSG_HANDLED))
+                return MSG_HANDLED;
+
     if (mcview_check_left_right_keys (view, key))
         return MSG_HANDLED;
 
