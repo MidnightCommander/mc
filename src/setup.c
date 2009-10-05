@@ -275,7 +275,7 @@ save_layout (void)
     char *profile;
     int  i;
 
-    profile = concat_dir_and_file (home_dir, PROFILE_NAME);
+    profile = g_build_filename (home_dir, MC_USERCONF_DIR, MC_CONFIG_FILE, NULL);
 
     /* Save integer options */
     for (i = 0; layout [i].opt_name; i++){
@@ -292,7 +292,7 @@ save_configure (void)
     char *profile;
     int  i;
 
-    profile = concat_dir_and_file (home_dir, PROFILE_NAME);
+    profile = g_build_filename (home_dir, MC_USERCONF_DIR, MC_CONFIG_FILE, NULL);
 
     /* Save integer options */
     for (i = 0; int_options[i].opt_name; i++)
@@ -380,7 +380,7 @@ save_setup (void)
     mc_config_set_string(mc_main_config, "Misc" , "source_codepage",
 		 get_codepage_id( source_codepage ));
 #endif /* HAVE_CHARSET */
-    tmp_profile = concat_dir_and_file (home_dir, PROFILE_NAME);
+    tmp_profile = g_build_filename (home_dir, MC_USERCONF_DIR, MC_CONFIG_FILE, NULL);
     mc_config_save_to_file (mc_main_config, tmp_profile);
     g_free (tmp_profile);
     saving_setup = 0;
@@ -687,7 +687,7 @@ setup_init (void)
     if (profile_name)
 	    return profile_name;
 
-    profile = concat_dir_and_file (home_dir, PROFILE_NAME);
+    profile = g_build_filename (home_dir, MC_USERCONF_DIR, MC_CONFIG_FILE, NULL);
     if (!exist_file (profile)){
 	inifile = concat_dir_and_file (mc_home, "mc.ini");
 	if (exist_file (inifile)){
@@ -720,13 +720,13 @@ load_setup (void)
 
     /* mc.lib is common for all users, but has priority lower than
        ~/.mc/ini.  FIXME: it's only used for keys and treestore now */
-    global_profile_name = concat_dir_and_file (mc_home, "mc.lib");
+    global_profile_name = concat_dir_and_file (mc_home, MC_GLOBAL_CONFIG_FILE);
     if (!exist_file(global_profile_name)) {
 	g_free (global_profile_name);
-	global_profile_name = concat_dir_and_file (mc_home_alt, "mc.lib");
+	global_profile_name = concat_dir_and_file (mc_home_alt, MC_GLOBAL_CONFIG_FILE);
     }
 
-    panels_profile_name = concat_dir_and_file (home_dir, PANELS_PROFILE_NAME);
+    panels_profile_name = g_build_filename (home_dir, MC_USERCONF_DIR, MC_PANELS_FILE, NULL);
 
     mc_main_config = mc_config_init(profile);
 

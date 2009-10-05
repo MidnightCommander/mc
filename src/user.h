@@ -14,9 +14,4 @@ int check_format_view (const char *);
 int check_format_var (const char *, char **);
 int check_format_cd (const char *);
 
-#define MC_GLOBAL_MENU       "mc.menu"
-#define MC_LOCAL_MENU        ".mc.menu"
-#define MC_HOME_MENU         ".mc/menu"
-#define MC_HINT              "mc.hint"
-
 #endif

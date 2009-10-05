@@ -2051,7 +2051,7 @@ main (int argc, char *argv[])
 
     /* create home directory */
     /* do it after the screen library initialization to show the error message */
-    mc_dir = concat_dir_and_file (home_dir, MC_BASE);
+    mc_dir = concat_dir_and_file (home_dir, MC_USERCONF_DIR);
     canonicalize_pathname (mc_dir);
     if ((stat (mc_dir, &s) != 0) && (errno == ENOENT)
 	&& mkdir (mc_dir, 0700) != 0)

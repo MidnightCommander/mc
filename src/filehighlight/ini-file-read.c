@@ -30,6 +30,7 @@
 
 #include "../src/global.h"
 #include "../src/main.h"
+#include "../src/fileloc.h"
 #include "../src/strescape.h"
 #include "../src/skin/skin.h"
 #include "fhl.h"
@@ -206,7 +207,6 @@ gboolean
 mc_fhl_init_from_standart_files (mc_fhl_t * fhl)
 {
     gchar *name;
-    gchar *user_mc_dir;
 
     /* ${datadir}/mc/filehighlight.ini  */
     name = concat_dir_and_file (mc_home_alt, MC_FHL_INI_FILE);
@@ -225,9 +225,8 @@ mc_fhl_init_from_standart_files (mc_fhl_t * fhl)
     g_free (name);
 
     /* ~/.mc/filehighlight.ini */
-    user_mc_dir = concat_dir_and_file (home_dir, MC_BASE);
-    name = concat_dir_and_file (user_mc_dir, MC_FHL_INI_FILE);
-    g_free (user_mc_dir);
+    name = g_build_filename (home_dir, MC_USERCONF_DIR, MC_FHL_INI_FILE, NULL);
+
     if (exist_file (name) && (!mc_fhl_read_ini_file (fhl, name))) {
         g_free (name);
         return FALSE;

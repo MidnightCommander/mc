@@ -44,55 +44,6 @@ mc_config_t *mc_panels_config;
 /*** file scope functions **********************************************/
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-static void
-mc_config_make_backup_if_possible (const gchar * ini_path)
-{
-    char *backup_path, *contents;
-    gsize length;
-
-
-    if (!g_file_get_contents (ini_path, &contents, &length, NULL))
-        return;
-
-    /* If length of main file is 0, then do nothing */
-    if (length == 0) {
-        g_free (contents);
-        return;
-    }
-
-    backup_path = g_strdup_printf ("%s~", ini_path);
-    if (backup_path == NULL) {
-        g_free (contents);
-        return;
-    }
-
-    /* if backup file not exists, then do backup */
-    if (!exist_file (backup_path))
-        g_file_set_contents (backup_path, contents, length, NULL);
-
-    g_free (contents);
-    g_free (backup_path);
-}
-
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-
-static void
-mc_config_remove_backup_if_possible (const gchar * ini_path)
-{
-    char *backup_path;
-
-    backup_path = g_strdup_printf ("%s~", ini_path);
-    if (backup_path == NULL)
-        return;
-
-    if (exist_file (backup_path))
-        mc_unlink (backup_path);
-
-    g_free (backup_path);
-}
-
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-
 static gboolean
 mc_config_new_or_override_file (mc_config_t * mc_config, const gchar * ini_path)
 {
@@ -108,7 +59,7 @@ mc_config_new_or_override_file (mc_config_t * mc_config, const gchar * ini_path)
         g_free (data);
         return ret;
     }
-    mc_config_make_backup_if_possible (ini_path);
+    mc_util_make_backup_if_possible (ini_path, "~");
 
     fd = mc_open (ini_path, O_WRONLY | O_TRUNC | O_SYNC, 0);
     if (fd == -1)
@@ -120,10 +71,12 @@ mc_config_new_or_override_file (mc_config_t * mc_config, const gchar * ini_path)
     mc_close (fd);
     g_free (data);
 
-    if (cur_written == -1)
+    if (cur_written == -1) {
+        mc_util_restore_from_backup_if_possible (ini_path, "~");
         return FALSE;
+    }
 
-    mc_config_remove_backup_if_possible (ini_path);
+    mc_util_unlink_backup_if_possible (ini_path, "~");
     return TRUE;
 }
 

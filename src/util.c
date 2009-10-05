@@ -54,6 +54,7 @@
 #include "fileopctx.h"
 #include "file.h"		/* copy_file_file() */
 #include "dir.h"
+#include "fileloc.h"
 
 #ifdef HAVE_CHARSET
 #include "charsets.h"
@@ -1139,6 +1140,30 @@ resolve_symlinks (const char *path)
     return buf;
 }
 
+static gboolean
+mc_util_write_backup_content(const char *from_file_name, const char *to_file_name)
+{
+    FILE *backup_fd;
+    char *contents;
+    gsize length;
+
+    if (!g_file_get_contents (from_file_name, &contents, &length, NULL))
+	return FALSE;
+
+    backup_fd = fopen (to_file_name, "w");
+    if (backup_fd == NULL) {
+	g_free(contents);
+	return FALSE;
+    }
+
+    fwrite ( (const void *) contents, length, 1, backup_fd);
+
+    fflush(backup_fd);
+    fclose(backup_fd);
+    g_free(contents);
+    return TRUE;
+}
+
 /* Finds out a relative path from first to second, i.e. goes as many ..
  * as needed up in first and then goes down using second */
 char *
@@ -1337,7 +1362,7 @@ load_file_position (const char *filename, long *line, long *column)
     *column = 0;
 
     /* open file with positions */
-    fn = concat_dir_and_file (home_dir, MC_FILEPOS);
+    fn =  g_build_filename (home_dir, MC_USERCONF_DIR, MC_FILEPOS_FILE, NULL);
     f = fopen (fn, "r");
     g_free (fn);
     if (!f)
@@ -1376,50 +1401,36 @@ load_file_position (const char *filename, long *line, long *column)
 void
 save_file_position (const char *filename, long line, long column)
 {
-    char *tmp, *fn;
-    FILE *f, *t;
-    char buf[MC_MAXPATHLEN + 20];
-    int i = 1;
-    int len;
+    char *fn;
+    FILE *f;
 
-    len = strlen (filename);
 
-    tmp = concat_dir_and_file (home_dir, MC_FILEPOS_TMP);
-    fn = concat_dir_and_file (home_dir, MC_FILEPOS);
+    fn =  g_build_filename (home_dir, MC_USERCONF_DIR, MC_FILEPOS_FILE, NULL);
+    if (fn == NULL)
+	return;
 
-    /* open temporary file */
-    t = fopen (tmp, "w");
-    if (!t) {
-	g_free (tmp);
+    if (! mc_util_make_backup_if_possible (fn, ".tmp"))
+	return;
+
+    /* open file */
+    f = fopen (fn, "a");
+    if (f == NULL) {
 	g_free (fn);
 	return;
     }
 
     /* put the new record */
     if (line != 1 || column != 0) {
-	fprintf (t, "%s %ld;%ld\n", filename, line, column);
-    }
-
-    /* copy records from the old file */
-    f = fopen (fn, "r");
-    if (f) {
-	while (fgets (buf, sizeof (buf), f)) {
-	    /* Skip entries for the current filename */
-	    if (strncmp (buf, filename, len) == 0 && buf[len] == ' '
-		&& !strchr (&buf[len + 1], ' '))
-		continue;
-
-	    fprintf (t, "%s", buf);
-	    if (++i > MC_FILEPOS_ENTRIES)
-		break;
+	if (fprintf (f, "%s %ld;%ld\n", filename, line, column) < 0) {
+	    fclose (f);
+	    mc_util_restore_from_backup_if_possible (fn, ".tmp");
 	}
+    } else
 	fclose (f);
-    }
 
-    fclose (t);
-    rename (tmp, fn);
-    g_free (tmp);
+    mc_util_unlink_backup_if_possible (fn, ".tmp");
     g_free (fn);
+
 }
 
 extern const char *
@@ -1468,3 +1479,65 @@ Q_ (const char *s)
     return (sep != NULL) ? sep + 1 : result;
 }
 
+
+gboolean
+mc_util_make_backup_if_possible (const char *file_name, const char *backup_suffix)
+{
+    struct stat stat_buf;
+    char *backup_path;
+    gboolean ret;
+
+    if (!exist_file (file_name))
+	return FALSE;
+
+    backup_path = g_strdup_printf("%s%s",file_name,backup_suffix);
+
+    if (backup_path == NULL)
+	return FALSE;
+
+    ret = mc_util_write_backup_content (file_name, backup_path);
+
+    if (ret) {
+	/* Backup file will have same ownership with main file. */
+	if (stat (file_name, &stat_buf) == 0)
+	    chmod (backup_path, stat_buf.st_mode);
+	else
+	    chmod (backup_path, S_IRUSR | S_IWUSR);
+    }
+
+    g_free(backup_path);
+
+    return ret;
+}
+
+gboolean
+mc_util_restore_from_backup_if_possible (const char *file_name, const char *backup_suffix)
+{
+    gboolean ret;
+    char *backup_path;
+
+    backup_path = g_strdup_printf("%s%s",file_name,backup_suffix);
+    if (backup_path == NULL)
+	return FALSE;
+
+    ret = mc_util_write_backup_content (backup_path, file_name);
+    g_free(backup_path);
+
+    return ret;
+}
+
+gboolean
+mc_util_unlink_backup_if_possible (const char *file_name, const char *backup_suffix)
+{
+    char *backup_path;
+
+    backup_path = g_strdup_printf("%s%s",file_name,backup_suffix);
+    if (backup_path == NULL)
+	return FALSE;
+
+    if (exist_file (backup_path))
+	mc_unlink (backup_path);
+
+    g_free(backup_path);
+    return TRUE;
+}

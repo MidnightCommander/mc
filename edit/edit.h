@@ -33,6 +33,7 @@
 #define MC_EDIT_H
 
 #include "../src/global.h"	/* PATH_SEP_STR */
+#include "../src/fileloc.h"
 
 /* Editor widget */
 struct WEdit;
@@ -76,19 +77,5 @@ int edit_file (const char *_file, int line);
 const char *edit_get_file_name (const WEdit *edit);
 int edit_get_curs_col (const WEdit *edit);
 const char *edit_get_syntax_type (const WEdit *edit);
-
-/* editor home directory */
-#define EDIT_DIR		".mc" PATH_SEP_STR "cedit"
-
-/* file names */
-#define EDIT_SYNTAX_FILE	EDIT_DIR PATH_SEP_STR "Syntax"
-#define EDIT_CLIP_FILE		EDIT_DIR PATH_SEP_STR "cooledit.clip"
-#define EDIT_MACRO_FILE		EDIT_DIR PATH_SEP_STR "cooledit.macros"
-#define EDIT_BLOCK_FILE		EDIT_DIR PATH_SEP_STR "cooledit.block"
-#define EDIT_TEMP_FILE		EDIT_DIR PATH_SEP_STR "cooledit.temp"
-
-#define EDIT_GLOBAL_MENU	"cedit.menu"
-#define EDIT_LOCAL_MENU		".cedit.menu"
-#define EDIT_HOME_MENU		EDIT_DIR PATH_SEP_STR "menu"
 
 #endif				/* MC_EDIT_H */

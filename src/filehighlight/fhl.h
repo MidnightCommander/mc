@@ -5,8 +5,6 @@
 #include "../../src/search/search.h"
 #include "../src/dir.h"
 
-#define MC_FHL_INI_FILE "filehighlight.ini"
-
 /*** typedefs(not structures) and defined constants **********************************************/
 
 /*** enums ***************************************************************************************/

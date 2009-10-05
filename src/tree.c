@@ -60,6 +60,7 @@
 #include "history.h"
 #include "strutil.h"
 #include "tree.h"
+#include "fileloc.h"
 
 #define tlines(t) (t->is_panel ? t->widget.lines-2 - (show_mini_info ? 2 : 0) : t->widget.lines)
 
@@ -154,13 +155,17 @@ static void load_tree (WTree *tree)
 static void save_tree (WTree *tree)
 {
     int error;
+    char *tree_name;
 
     (void) tree;
     error = tree_store_save ();
 
+
     if (error){
-	fprintf (stderr, _("Cannot open the %s file for writing:\n%s\n"), MC_TREE,
+	tree_name = g_build_filename (home_dir, MC_USERCONF_DIR, MC_TREESTORE_FILE, NULL);
+	fprintf (stderr, _("Cannot open the %s file for writing:\n%s\n"), tree_name,
 		 unix_error_string (error));
+	g_free(tree_name);
     }
 }
 

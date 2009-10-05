@@ -58,6 +58,7 @@
 #include "../src/tty/key.h"	/* XCTRL */
 #include "subshell.h"
 #include "strutil.h"
+#include "fileloc.h"
 
 #ifndef WEXITSTATUS
 #   define WEXITSTATUS(stat_val) ((unsigned)(stat_val) >> 8)
@@ -247,7 +248,7 @@ init_subshell_child (const char *pty_name)
 
     switch (subshell_type) {
     case BASH:
-	init_file = ".mc/bashrc";
+	init_file = MC_USERCONF_DIR PATH_SEP_STR "bashrc";
 	if (access (init_file, R_OK) == -1)
 	    init_file = ".bashrc";
 
@@ -255,8 +256,8 @@ init_subshell_child (const char *pty_name)
 	putenv ((char*)"HISTCONTROL=ignorespace");
 
 	/* Allow alternative readline settings for MC */
-	if (access (".mc/inputrc", R_OK) == 0)
-	    putenv ((char*)"INPUTRC=.mc/inputrc");
+	if (access (MC_USERCONF_DIR PATH_SEP_STR "inputrc", R_OK) == 0)
+	    putenv ((char*)"INPUTRC=" MC_USERCONF_DIR PATH_SEP_STR "/inputrc");
 
 	break;
 

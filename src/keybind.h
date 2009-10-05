@@ -4,8 +4,6 @@
 
 #include "global.h"
 
-#define GLOBAL_KEYMAP_FILE	"mc.keymap"
-
 typedef struct name_key_map_t {
     const char *name;
     int val;

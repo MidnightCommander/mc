@@ -449,7 +449,7 @@ regex_command (const char *filename, const char *action, int *move_dir)
 	int mc_user_ext = 1;
 	int home_error = 0;
 
-	extension_file = concat_dir_and_file (home_dir, MC_USER_EXT);
+	extension_file = g_build_filename (home_dir, MC_USERCONF_DIR, MC_FILEBIND_FILE, NULL);
 	if (!exist_file (extension_file)) {
 	    g_free (extension_file);
 	  check_stock_mc_ext:
@@ -489,11 +489,11 @@ regex_command (const char *filename, const char *action, int *move_dir)
 	}
 	if (home_error) {
 	    char *title =
-		g_strdup_printf (_(" ~/%s file error "), MC_USER_EXT);
+		g_strdup_printf (_(" ~/%s file error "), MC_USERCONF_DIR PATH_SEP_STR MC_FILEBIND_FILE);
 	    message (D_ERROR, title, _("The format of the ~/%s file has "
 		"changed with version 3.0.  You may either want to copy "
 		"it from %smc.ext or use that file as an example of how "
-		"to write it."), MC_USER_EXT, mc_home);
+		"to write it."), MC_USERCONF_DIR PATH_SEP_STR MC_FILEBIND_FILE, mc_home);
 	    g_free (title);
 	}
     }

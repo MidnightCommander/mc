@@ -35,8 +35,4 @@ extern int verbose;
 extern int mouse_close_dialog;
 extern int reverse_files_only;
 
-#define PROFILE_NAME     ".mc/ini"
-#define HOTLIST_FILENAME ".mc/hotlist"
-#define PANELS_PROFILE_NAME ".mc/panels.ini"
-
 #endif

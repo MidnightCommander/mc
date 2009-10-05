@@ -758,8 +758,12 @@ user_menu_cmd (WEdit *edit_widget)
     menu = g_strdup (edit_widget ? EDIT_LOCAL_MENU : MC_LOCAL_MENU);
     if (!exist_file (menu) || !menu_file_own (menu)){
 	g_free (menu);
-        menu = concat_dir_and_file
-                            (home_dir, edit_widget ? EDIT_HOME_MENU : MC_HOME_MENU);
+	if (edit_widget)
+	    menu = concat_dir_and_file (home_dir, EDIT_HOME_MENU);
+	else
+	    menu = g_build_filename (home_dir, MC_USERCONF_DIR, MC_USERMENU_FILE, NULL);
+
+
 	if (!exist_file (menu)){
 	    g_free (menu);
 	    menu = concat_dir_and_file
