@@ -1261,7 +1261,7 @@ single_dirsize_cmd (void)
 
     recalculate_panel_summary (panel);
 
-    if ( current_panel->sort_type == (sortfn *) sort_size )
+    if ( current_panel->current_sort_field->sort_routine == (sortfn *) sort_size )
 	panel_re_sort (panel);
 
     panel->dirty = 1;
@@ -1298,7 +1298,7 @@ dirsizes_cmd (void)
 
     recalculate_panel_summary (panel);
 
-    if ( current_panel->sort_type == (sortfn *) sort_size )
+    if ( current_panel->current_sort_field->sort_routine == (sortfn *) sort_size )
 	panel_re_sort (panel);
 
     panel->dirty = 1;

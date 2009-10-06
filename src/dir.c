@@ -62,7 +62,7 @@ static int case_sensitive = OS_SORT_CASE_SENSITIVE_DEFAULT;
 static int exec_first = 1;
 
 #define MY_ISDIR(x) ( (is_exe (x->st.st_mode) && !(S_ISDIR (x->st.st_mode) || x->f.link_to_dir) && (exec_first == 1)) ? 1 : ( (S_ISDIR (x->st.st_mode) || x->f.link_to_dir) ? 2 : 0) )
-
+/*
 sort_orders_t sort_orders [SORT_TYPES_TOTAL] = {
     { N_("&Unsorted"),    unsorted },
     { N_("&Name"),        sort_name },
@@ -73,7 +73,7 @@ sort_orders_t sort_orders [SORT_TYPES_TOTAL] = {
     { N_("&Size"),        sort_size },
     { N_("&Inode"),       sort_inode },
 };
-
+*/
 
 int
 unsorted (file_entry *a, file_entry *b)

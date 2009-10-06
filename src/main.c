@@ -490,7 +490,7 @@ _do_panel_cd (WPanel *panel, const char *new_dir, enum cd_enum cd_type)
     /* Reload current panel */
     panel_clean_dir (panel);
     panel->count =
-	do_load_dir (panel->cwd, &panel->dir, panel->sort_type,
+	do_load_dir (panel->cwd, &panel->dir, panel->current_sort_field->sort_routine,
 		     panel->reverse, panel->case_sensitive,
 		     panel->exec_first, panel->filter);
     try_to_select (panel, get_parent_dir_name (panel->cwd, olddir));
@@ -612,17 +612,17 @@ load_prompt (int fd, void *unused)
 }
 #endif				/* HAVE_SUBSHELL_SUPPORT */
 
-static void
+void
 sort_cmd (void)
 {
     WPanel *p;
-    sortfn *sort_order;
+    const panel_field_t *sort_order;
 
     if (!SELECTED_IS_PANEL)
 	return;
 
     p = MENU_PANEL;
-    sort_order = sort_box (p->sort_type, &p->reverse,
+    sort_order = sort_box (p->current_sort_field, &p->reverse,
 			   &p->case_sensitive,
 			   &p->exec_first);
 
@@ -1719,6 +1719,8 @@ do_nc (void)
     midnight_colors[2] = mc_skin_color_get("dialog", "hotnormal");
     midnight_colors[3] = mc_skin_color_get("dialog", "hotfocus");
 
+    panel_init();
+
     midnight_dlg = create_dlg (0, 0, LINES, COLS, midnight_colors, midnight_callback,
 			       "[main]", NULL, DLG_WANT_IDLE);
 
@@ -1764,6 +1766,7 @@ do_nc (void)
 	done_mc ();
     }
     destroy_dlg (midnight_dlg);
+    panel_deinit();
     current_panel = 0;
     done_mc_profile ();
 }

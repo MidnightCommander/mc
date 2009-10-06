@@ -94,17 +94,12 @@ struct listmode_label {
 static char *
 select_new_item (void)
 {
-    /* NOTE: The following array of possible items must match the
-       formats array in screen.c. Better approach might be to make the
-       formats array global */
-    char *possible_items[] =
-	{ "name", "size", "type", "mtime", "perm", "mode", "|", "nlink",
-	"owner", "group", "atime", "ctime", "space", "mark",
-	"inode", NULL
-    };
-
+    char **possible_items;
+    char *ret = NULL;
     int i;
     Listbox *mylistbox;
+
+    possible_items = panel_get_user_possible_fields(NULL);
 
     mylistbox =
 	create_listbox_window (12, 20, " Add listing format item ",
@@ -115,9 +110,10 @@ select_new_item (void)
 
     i = run_listbox (mylistbox);
     if (i >= 0)
-	return possible_items[i];
-    else
-	return NULL;
+	ret = g_strdup(possible_items[i]);
+
+    g_strfreev (possible_items);
+    return ret;
 }
 
 static int
@@ -138,6 +134,7 @@ badd_cback (int action)
     char *s = select_new_item ();
     if (s) {
 	listbox_add_item (l_listmode, 0, 0, s, NULL);
+	g_free(s);
     }
     return 0;
 }

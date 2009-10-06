@@ -9,6 +9,7 @@
 #include "dir.h"		/* dir_list */
 #include "dialog.h"		/* Widget */
 #include "fs.h"			/* MC_MAXPATHLEN */
+#include "strutil.h"
 
 #define selection(p) (&(p->dir.list[p->selected]))
 #define DEFAULT_USER_FORMAT "half type name | size | perm"
@@ -37,6 +38,20 @@ enum panel_display_enum {
 
 struct format_e;
 
+typedef struct panel_format_struct {
+    const char *id;
+    int  min_size;
+    int  expands;
+    align_crt_t default_just;
+    const char *title;
+    const char *title_hotkey;
+    gboolean use_in_user_format;
+    const char *(*string_fn)(file_entry *, int);
+    sortfn *sort_routine; /* used by mouse_sort_col() */
+} panel_field_t;
+
+extern panel_field_t panel_fields [];
+
 typedef struct WPanel {
     Widget   widget;
     dir_list dir;		/* Directory contents */
@@ -59,7 +74,7 @@ typedef struct WPanel {
     int      split;		/* Split panel to allow two columns */
     int      is_panelized;	/* Flag: special filelisting, can't reload */
     int      frame_size;	/* half or full frame */
-    sortfn   *sort_type;	/* Sort type */
+    const panel_field_t *current_sort_field;
     char     *filter;		/* File name filter */
 
     int      dirty;		/* Should we redisplay the panel? */
@@ -94,7 +109,7 @@ extern int panel_scroll_pages;
 extern int fast_reload;
 
 void panel_reload         (WPanel *panel);
-void panel_set_sort_order (WPanel *panel, sortfn *sort_order);
+void panel_set_sort_order (WPanel *panel, const panel_field_t *sort_order);
 void panel_re_sort        (WPanel *panel);
 void set_panel_encoding (WPanel *);
 
@@ -129,5 +144,16 @@ void do_file_mark (WPanel *panel, int index, int val);
 void directory_history_next (WPanel *panel);
 void directory_history_prev (WPanel *panel);
 void directory_history_list (WPanel *panel);
+
+gsize panel_get_num_of_sortable_fields(void);
+const char **panel_get_sortable_fields(gsize *);
+const panel_field_t *panel_get_field_by_id(const char *);
+const panel_field_t *panel_get_field_by_title(const char *);
+const panel_field_t *panel_get_field_by_title_hotkey(const char *);
+gsize panel_get_num_of_user_possible_fields(void);
+const char **panel_get_user_possible_fields(gsize *);
+
+void panel_init(void);
+void panel_deinit(void);
 
 #endif

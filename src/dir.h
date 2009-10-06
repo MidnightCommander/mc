@@ -61,21 +61,6 @@ int sort_ctime (file_entry *a, file_entry *b);
 int sort_size  (file_entry *a, file_entry *b);
 int sort_inode (file_entry *a, file_entry *b);
 
-/* SORT_TYPES is used to build the nice dialog box entries */
-#define SORT_TYPES 8
-
-/* This is the number of sort types not available in that dialog box */
-#define SORT_TYPES_EXTRA 0
-
-/* The total nnumber of sort types */
-#define SORT_TYPES_TOTAL (SORT_TYPES + SORT_TYPES_EXTRA)
-
-typedef struct {
-    const char    *sort_name;
-    int     (*sort_fn)(file_entry *, file_entry *);
-} sort_orders_t;
-
-extern sort_orders_t sort_orders [SORT_TYPES_TOTAL];
 
 int link_isdir (const file_entry *);
 int if_link_is_exe (const char *full_name, const file_entry *file);

@@ -318,6 +318,14 @@ static const name_key_map_t command_names[] = {
     { "PanelSetPanelEncoding",             CK_PanelSetPanelEncoding },
     { "PanelStartSearch",                  CK_PanelStartSearch },
     { "PanelSyncOtherPanel",               CK_PanelSyncOtherPanel },
+    { "PanelToggleSortOrderNext",          CK_PanelToggleSortOrderNext },
+    { "PanelToggleSortOrderPrev",          CK_PanelToggleSortOrderPrev },
+    { "PanelSelectSortOrder",              CK_PanelSelectSortOrder },
+    { "PanelReverseSort",                  CK_PanelReverseSort },
+    { "PanelSortOrderByName",              CK_PanelSortOrderByName },
+    { "PanelSortOrderByExt",               CK_PanelSortOrderByExt },
+    { "PanelSortOrderBySize",              CK_PanelSortOrderBySize },
+    { "PanelSortOrderByMTime",             CK_PanelSortOrderByMTime },
 
     /* widgets */
     { "InputBol",                         CK_InputBol },
