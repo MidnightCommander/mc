@@ -154,6 +154,11 @@ regex/\.a(rj|[0-9][0-9])$
 	Open=%cd %p#uarj
 	View=%view{ascii} unarj l %f
 
+# cab
+regex/\.([cC][aA][bB])$
+	Open=%cd %p#ucab
+	View=%view{ascii} cabextract -l %f
+
 # ha
 regex/\.([Hh][Aa])$
 	Open=%cd %p#uha

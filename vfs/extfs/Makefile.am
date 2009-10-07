@@ -6,7 +6,7 @@ EXTFSCONFFILES = extfs.ini sfs.ini
 EXTFS_MISC  = README
 
 # Scripts hat don't need adaptation to the local system
-EXTFS_CONST = bpp rpm trpm srpm u7z
+EXTFS_CONST = bpp rpm trpm srpm u7z ucab
 
 # Scripts that need adaptation to the local system - source files
 EXTFS_IN    = 			\
