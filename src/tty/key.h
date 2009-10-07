@@ -75,8 +75,7 @@ void channels_down (void);
 static inline gboolean
 is_abort_char (int c)
 {
-    return ((c == XCTRL ('c')) || (c == XCTRL ('g'))
-            || (c == ESC_CHAR) || (c == KEY_F (10)));
+    return ((c == ESC_CHAR) || (c == KEY_F (10)));
 }
 
 /* To define sequences and return codes */

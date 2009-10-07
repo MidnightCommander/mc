@@ -1569,7 +1569,6 @@ static cb_ret_t
 midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 {
     int i;
-
     switch (msg) {
 
     case DLG_IDLE:

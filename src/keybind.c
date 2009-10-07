@@ -382,13 +382,15 @@ static const name_keymap_t command_names[] = {
     { "InputBackwardKillWord",           CK_InputBackwardKillWord },
     { "InputSetMark",                    CK_InputSetMark },
     { "InputKillRegion",                 CK_InputKillRegion },
-    { "InputKillSave",                   CK_InputKillSave },
     { "InputYank",                       CK_InputYank },
     { "InputKillLine",                   CK_InputKillLine },
     { "InputHistoryPrev",                CK_InputHistoryPrev },
     { "InputHistoryNext",                CK_InputHistoryNext },
     { "InputHistoryShow",                CK_InputHistoryShow },
     { "InputComplete",                   CK_InputComplete },
+    { "InputXStore",                     CK_InputKillSave },
+    { "InputXPaste",                     CK_InputPaste },
+    { "InputClearLine",                  CK_InputClearLine },
 
     /* common */
     { "ExtMap1",                         CK_StartExtMap1 },

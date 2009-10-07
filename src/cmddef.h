@@ -226,6 +226,9 @@
 #define CK_InputHistoryNext            4022
 #define CK_InputHistoryShow            4023
 #define CK_InputComplete               4024
+#define CK_InputPaste                  4025
+#define CK_InputClearLine              4026
+
 
 /* Viewer */
 #define CK_ViewSearch                   5001

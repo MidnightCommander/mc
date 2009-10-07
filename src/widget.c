@@ -57,6 +57,7 @@
 #include "cmddef.h"		/* CK_ cmd name const */
 #include "keybind.h"		/* global_keymap_t */
 #include "fileloc.h"
+#include "panel.h"		/* current_panel */
 
 const global_keymap_t *input_map;
 
@@ -577,6 +578,104 @@ check_new (int y, int x, int state, const char *text)
     widget_want_hotkey (c->widget, 1);
 
     return c;
+}
+
+static gboolean
+save_text_to_clip_file (const char *text)
+{
+    int file;
+    char *fname = NULL;
+
+    fname = g_build_filename (home_dir, EDIT_CLIP_FILE, NULL);
+    file = mc_open (fname, O_CREAT | O_WRONLY | O_TRUNC,
+                        S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH | O_BINARY);
+    g_free (fname);
+
+    if (file == -1)
+        return FALSE;
+
+    mc_write (file, (char *) text, strlen (text));
+    mc_close (file);
+    return TRUE;
+}
+
+static gboolean
+load_text_from_clip_file (char **text)
+{
+    char buf[BUF_LARGE];
+    FILE *f;
+    char *fname = NULL;
+    gboolean first = TRUE;
+
+    fname = g_build_filename (home_dir, EDIT_CLIP_FILE, NULL);
+    f = fopen (fname, "r");
+    g_free (fname);
+
+    if (f == NULL)
+        return FALSE;
+
+    *text = NULL;
+
+    while (fgets (buf, sizeof (buf), f)) {
+        size_t len;
+
+        len = strlen (buf);
+        if ( len > 0 ) {
+            if (buf[len - 1] == '\n')
+                buf[len - 1] = '\0';
+
+            if (first) {
+                first = FALSE;
+                *text = g_strdup (buf);
+            } else {
+                /* remove \n on EOL */
+                char *tmp;
+
+                tmp = g_strconcat (*text, " ", buf, (char *) NULL);
+                g_free (*text);
+                *text = tmp;
+            }
+        }
+    }
+
+    fclose (f);
+
+    return (*text != NULL);
+}
+
+static gboolean
+panel_save_curent_file_to_clip_file (void)
+{
+    gboolean res;
+
+    if (current_panel->marked == 0)
+        res = save_text_to_clip_file (selection (current_panel)->fname);
+    else {
+        int i;
+        gboolean first = TRUE;
+        char *flist = NULL;
+
+        for (i = 0; i < current_panel->count; i++)
+            if (current_panel->dir.list[i].f.marked != 0) { /* Skip the unmarked ones */
+                if (first) {
+                    flist = g_strdup (current_panel->dir.list[i].fname);
+                    first = FALSE;
+                } else {
+                    /* Add empty lines after the file */
+                    char *tmp;
+
+                    tmp = g_strconcat (flist, "\n", current_panel->dir.list[i].fname, (char *) NULL);
+                    g_free (flist);
+                    flist = tmp;
+                }
+            }
+
+        if (flist != NULL) {
+            res = save_text_to_clip_file (flist);
+            g_free (flist);
+        }
+    }
+    return res;
 }
 
 
@@ -1470,8 +1569,11 @@ copy_region (WInput *in, int x_first, int x_last)
     int first = min (x_first, x_last);
     int last  = max (x_first, x_last);
 
-    if (last == first)
-	return;
+    if (last == first) {
+        /* Copy selected files to clipboard */
+        panel_save_curent_file_to_clip_file ();
+        return;
+    }
 
     g_free (kill_buffer);
 
@@ -1479,23 +1581,24 @@ copy_region (WInput *in, int x_first, int x_last)
     last = str_offset_to_pos (in->buffer, last);
 
     kill_buffer = g_strndup(in->buffer + first, last - first);
+    save_text_to_clip_file (kill_buffer);
 }
 
 static void
 delete_region (WInput *in, int x_first, int x_last)
 {
-   int first = min (x_first, x_last);
-   int last  = max (x_first, x_last);
+    int first = min (x_first, x_last);
+    int last  = max (x_first, x_last);
     size_t len;
 
-   in->point = first;
-   in->mark  = first;
+    in->point = first;
+    in->mark  = first;
     last = str_offset_to_pos (in->buffer, last);
     first = str_offset_to_pos (in->buffer, first);
     len = strlen (&in->buffer[last]) + 1;
     memmove (&in->buffer[first], &in->buffer[last], len);
     in->charpoint = 0;
-   in->need_push = 1;
+    in->need_push = 1;
 }
 
 static void
@@ -1550,6 +1653,12 @@ kill_region (WInput *in)
 }
 
 static void
+clear_region (WInput *in)
+{
+    delete_region (in, in->point, in->mark);
+}
+
+static void
 yank (WInput *in)
 {
     char *p;
@@ -1570,6 +1679,21 @@ kill_line (WInput *in)
     kill_buffer = g_strdup (&in->buffer[chp]);
     in->buffer[chp] = '\0';
     in->charpoint = 0;
+}
+
+static void
+ins_from_clip (WInput *in)
+{
+    char *p = NULL;
+
+    if (load_text_from_clip_file (&p)) {
+        char *pp;
+
+        for (pp = p; *pp != '\0'; pp++)
+            insert_char (in, *pp);
+
+        g_free (p);
+    }
 }
 
 void
@@ -1700,11 +1824,17 @@ input_execute_cmd (WInput *in, int command)
     case CK_InputKillRegion:
         kill_region (in);
         break;
+    case CK_InputClearLine:
+        clear_region (in);
+        break;
     case CK_InputKillSave:
         kill_save (in);
         break;
     case CK_InputYank:
         yank (in);
+        break;
+    case CK_InputPaste:
+        ins_from_clip (in);
         break;
     case CK_InputKillLine:
         kill_line (in);
@@ -1735,7 +1865,6 @@ int
 is_in_input_map (WInput *in, int key)
 {
     int i;
-
     for (i = 0; input_map[i].key; i++) {
         if (key == input_map[i].key) {
             input_execute_cmd (in, input_map[i].command);
@@ -1763,7 +1892,6 @@ handle_char (WInput *in, int key)
         quote = 0;
         return v;
     }
-
     for (i = 0; input_map[i].key; i++) {
         if (key == input_map[i].key) {
             if (input_map[i].command != CK_InputComplete)
@@ -1830,7 +1958,7 @@ input_callback (Widget *w, widget_msg_t msg, int parm)
 
 	/* Keys we want others to handle */
 	if (parm == KEY_UP || parm == KEY_DOWN || parm == ESC_CHAR
-	    || parm == KEY_F (10) || parm == XCTRL ('g') || parm == '\n')
+	    || parm == KEY_F (10) || parm == '\n')
 	    return MSG_NOT_HANDLED;
 
 	/* When pasting multiline text, insert literal Enter */
