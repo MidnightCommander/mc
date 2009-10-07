@@ -51,6 +51,7 @@
 #include "treestore.h"
 #include "../src/mcconfig/mcconfig.h"
 #include "setup.h"
+#include "fileloc.h"
 
 #define TREE_SIGNATURE "Midnight Commander TreeStore v 2.0"
 
@@ -267,7 +268,7 @@ tree_store_load(void)
     char *name;
     int retval;
 
-    name = concat_dir_and_file(home_dir, MC_TREE);
+    name =  g_build_filename (home_dir, MC_USERCONF_DIR, MC_TREESTORE_FILE, NULL);
     retval = tree_store_load_from(name);
     g_free(name);
 
@@ -366,28 +367,21 @@ tree_store_save_to(char *name)
 int
 tree_store_save(void)
 {
-    char *tmp;
     char *name;
     int retval;
 
-    tmp = concat_dir_and_file(home_dir, MC_TREE_TMP);
-    retval = tree_store_save_to(tmp);
+    name = g_build_filename (home_dir, MC_USERCONF_DIR, MC_TREESTORE_FILE, NULL);
+    mc_util_make_backup_if_possible (name, ".tmp");
 
-    if (retval) {
-	g_free(tmp);
+    if ((retval = tree_store_save_to(name)) != 0) {
+	mc_util_restore_from_backup_if_possible (name, ".tmp");
+	g_free(name);
 	return retval;
     }
 
-    name = concat_dir_and_file(home_dir, MC_TREE);
-    retval = rename(tmp, name);
-
-    g_free(tmp);
+    mc_util_unlink_backup_if_possible (name, ".tmp");
     g_free(name);
-
-    if (retval)
-	return errno;
-    else
-	return 0;
+    return 0;
 }
 
 static tree_entry *

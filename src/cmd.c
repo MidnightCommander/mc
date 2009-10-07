@@ -81,6 +81,7 @@
 #include "strutil.h"
 #include "dir.h"
 #include "cmddef.h"		/* CK_InputHistoryShow */
+#include "fileloc.h"
 
 #ifndef MAP_FILE
 #   define MAP_FILE 0
@@ -601,7 +602,7 @@ void ext_cmd (void)
     extdir = concat_dir_and_file (mc_home, MC_LIB_EXT);
 
     if (dir == 0){
-	buffer = concat_dir_and_file (home_dir, MC_USER_EXT);
+	buffer = g_build_filename (home_dir, MC_USERCONF_DIR, MC_FILEBIND_FILE, NULL);
 	check_for_default (extdir, buffer);
 	do_edit (buffer);
 	g_free (buffer);
@@ -646,7 +647,7 @@ edit_mc_menu_cmd (void)
 	    break;
 
 	case 1:
-	    buffer = concat_dir_and_file (home_dir, MC_HOME_MENU);
+	    buffer = g_build_filename (home_dir, MC_USERCONF_DIR, MC_USERMENU_FILE, NULL);
 	    check_for_default (menufile, buffer);
 	    break;
 
@@ -673,7 +674,6 @@ void edit_fhl_cmd (void)
 {
     char *buffer = NULL;
     char *fhlfile = NULL;
-    char *user_mc_dir;
 
     int  dir;
 
@@ -686,9 +686,7 @@ void edit_fhl_cmd (void)
     fhlfile = concat_dir_and_file (mc_home, MC_FHL_INI_FILE);
 
     if (dir == 0){
-	user_mc_dir = concat_dir_and_file (home_dir, MC_BASE);
-	buffer = concat_dir_and_file (user_mc_dir, MC_FHL_INI_FILE);
-	g_free(user_mc_dir);
+	buffer = g_build_filename (home_dir, MC_USERCONF_DIR, MC_FHL_INI_FILE, NULL);
 	check_for_default (fhlfile, buffer);
 	do_edit (buffer);
 	g_free (buffer);
@@ -1308,7 +1306,8 @@ void
 save_setup_cmd (void)
 {
     save_setup ();
-    message (D_NORMAL, _(" Setup "), _(" Setup saved to ~/%s"), PROFILE_NAME);
+    message (D_NORMAL, _(" Setup "), _(" Setup saved to ~/%s"),
+	     MC_USERCONF_DIR PATH_SEP_STR MC_CONFIG_FILE);
 }
 
 static void

@@ -59,6 +59,8 @@
 #include "glibcompat.h"		/* g_strlcpy for glib < 2.0 */
 #include "history.h"
 #include "strutil.h"
+#include "util.h"
+#include "fileloc.h"
 
 #define UX		5
 #define UY		2
@@ -1450,7 +1452,7 @@ load_hotlist (void)
     }
 
     if (!hotlist_file_name)
-	hotlist_file_name = concat_dir_and_file (home_dir, HOTLIST_FILENAME);
+	hotlist_file_name = g_build_filename (home_dir, MC_USERCONF_DIR, MC_HOTLIST_FILE, NULL);
 
     hotlist	       = new_hotlist ();
     hotlist->type      = HL_TYPE_GROUP;
@@ -1477,7 +1479,7 @@ load_hotlist (void)
 	} else {
 	    message (D_ERROR, _(" Hotlist Load "),
 		     _("MC was unable to write ~/%s file, your old hotlist entries were not deleted"),
-		     HOTLIST_FILENAME);
+		     MC_USERCONF_DIR PATH_SEP_STR MC_HOTLIST_FILE);
 	}
     } else {
 	hot_load_file (hotlist);
@@ -1559,14 +1561,9 @@ int save_hotlist (void)
     struct      stat stat_buf;
 
     if (!hotlist_state.readonly && hotlist_state.modified && hotlist_file_name) {
-	char	*fbak = g_strconcat (hotlist_file_name, ".bak", (char *) NULL);
+	mc_util_make_backup_if_possible (hotlist_file_name, ".bak");
 
-	rename (hotlist_file_name, fbak);
 	if ((hotlist_file = fopen (hotlist_file_name, "w")) != 0) {
-	    if (stat (fbak, &stat_buf) == 0)
-		chmod (hotlist_file_name, stat_buf.st_mode);
-	    else
-		chmod (hotlist_file_name, S_IRUSR | S_IWUSR);
 	    hot_save_group (hotlist);
 	    fclose (hotlist_file);
 	    stat (hotlist_file_name, &stat_buf);
@@ -1574,8 +1571,7 @@ int save_hotlist (void)
 	    saved = 1;
 	    hotlist_state.modified = 0;
 	} else
-	    rename (fbak, hotlist_file_name);
-	g_free (fbak);
+	    mc_util_restore_from_backup_if_possible (hotlist_file_name, ".bak");
     }
 
     return saved;

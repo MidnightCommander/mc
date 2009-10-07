@@ -13,7 +13,4 @@ int regex_command (const char *filename, const char *action, int *move_dir);
  */
 void flush_extension_file (void);
 
-#define MC_USER_EXT ".mc/bindings"
-#define MC_LIB_EXT  "mc.ext"
-
 #endif

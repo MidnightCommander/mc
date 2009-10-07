@@ -9,7 +9,6 @@
 #define SHORT_DEF_LEN   30
 #define LONG_DEF_LEN    40
 #define LINE_DEF_LEN    16
-#define TAGS_NAME       "TAGS"
 
 typedef struct etags_hash_struct {
    size_t filename_len;

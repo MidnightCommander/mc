@@ -36,6 +36,7 @@
 #include "logging.h"
 #include "setup.h"
 #include "../src/mcconfig/mcconfig.h"
+#include "fileloc.h"
 
 /*** file scope functions **********************************************/
 
@@ -64,7 +65,7 @@ mc_log(const char *fmt, ...)
 
 	if (is_logging_enabled()) {
 		va_start(args, fmt);
-		logfilename = g_strdup_printf("%s/.mc/log", home_dir);
+		logfilename = g_strdup_printf("%s/%s/log", home_dir, MC_USERCONF_DIR);
 		if ((f = fopen(logfilename, "a")) != NULL) {
 			(void)vfprintf(f, fmt, args);
 			(void)fclose(f);

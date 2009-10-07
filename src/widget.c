@@ -56,8 +56,7 @@
 
 #include "cmddef.h"		/* CK_ cmd name const */
 #include "keybind.h"		/* global_key_map_t */
-
-#define HISTORY_FILE_NAME ".mc/history"
+#include "fileloc.h"
 
 const global_key_map_t *input_map;
 
@@ -911,7 +910,7 @@ history_get (const char *input_name)
     if (!input_name || !*input_name)
 	return NULL;
 
-    profile = concat_dir_and_file (home_dir, HISTORY_FILE_NAME);
+    profile = g_build_filename (home_dir, MC_USERCONF_DIR, MC_HISTORY_FILE, NULL);
     cfg = mc_config_init (profile);
 
     /* get number of keys */
@@ -953,7 +952,7 @@ history_put (const char *input_name, GList *h)
     if (!num_history_items_recorded)	/* this is how to disable */
 	return;
 
-    profile = concat_dir_and_file (home_dir, HISTORY_FILE_NAME);
+    profile = g_build_filename (home_dir, MC_USERCONF_DIR, MC_HISTORY_FILE, NULL);
 
     if ((i = open (profile, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR)) != -1)
 	close (i);

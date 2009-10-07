@@ -10,7 +10,6 @@
 
 #define UNKNCHAR '\001'
 
-#define CHARSETS_INDEX "mc.charsets"
 extern int n_codepages;
 
 extern unsigned char conv_displ[256];

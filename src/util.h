@@ -210,10 +210,6 @@ GList *list_append_unique (GList *list, char *text);
 
 /* Position saving and restoring */
 
-/* file where positions are stored */
-#define MC_FILEPOS ".mc/filepos"
-/* temporary file */
-#define MC_FILEPOS_TMP ".mc/filepos.tmp"
 /* maximum entries in MC_FILEPOS */
 #define MC_FILEPOS_ENTRIES 1024
 /* Load position for the given filename */
@@ -285,6 +281,10 @@ static inline char * str_move(char * dest, const char * src)
 
     return memmove (dest, src, n);
 }
+
+gboolean mc_util_make_backup_if_possible (const char *, const char *);
+gboolean mc_util_restore_from_backup_if_possible (const char *, const char *);
+gboolean mc_util_unlink_backup_if_possible (const char *, const char *);
 
 #define MC_PTR_FREE(ptr) do { g_free(ptr); (ptr) = NULL; } while (0)
 

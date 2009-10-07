@@ -34,6 +34,7 @@
 #include "strutil.h"		/* utf-8 functions */
 #include "main.h"
 #include "util.h"		/* concat_dir_and_file() */
+#include "fileloc.h"
 
 int n_codepages = 0;
 
