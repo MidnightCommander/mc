@@ -1385,19 +1385,29 @@ forward_word (WInput * in)
 static void
 backward_word (WInput *in)
 {
-    const char *p = in->buffer + str_offset_to_pos (in->buffer, in->point);
+    const char *p;
+    const char *p_tmp;
 
-    while ((p != in->buffer) && (p[0] == '\0')) {
-	p--;
+    for (
+        p = in->buffer + str_offset_to_pos (in->buffer, in->point);
+        (p != in->buffer) && (p[0] == '\0');
+        p-- , in->point--
+    );
+
+    while (p != in->buffer) {
+        p_tmp = p;
+        str_cprev_char (&p);
+        if (!str_isspace (p) && !str_ispunct (p)) {
+            p = p_tmp;
+            break;
+        }
         in->point--;
     }
+    while (p != in->buffer) {
+        str_cprev_char (&p);
+        if (str_isspace (p) || str_ispunct (p))
+            break;
 
-    while ((p != in->buffer) && (str_isspace (p) || str_ispunct (p))) {
-        str_cprev_char (&p);
-        in->point--;
-    }
-    while ((p != in->buffer) && !str_isspace (p) && !str_ispunct (p)) {
-        str_cprev_char (&p);
         in->point--;
     }
 }
