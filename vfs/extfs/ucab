@@ -1,0 +1,40 @@
+#! /bin/sh
+
+CAB=cabextract
+
+mccabfs_list ()
+{
+    $CAB -l "$1" | gawk -v uid=`id -un` -v gid=`id -gn` '
+BEGIN { flag=0 }
+/^-------/ { flag++; if (flag > 1) exit 0; next }
+{
+if (flag == 0) next
+if (length($6) == 0) next
+pr="-rw-r--r--"
+split($3, a, ".")
+split($4, b, ":")
+printf "%s 1 %s %s %d %02d/%02d/%02d %02d:%02d  %s\n", pr, uid, gid, $1, a[2], a[1], a[3], b[1], b[2], $6
+}'
+
+}
+
+mccabfs_copyout ()
+{
+    $CAB -F "$2" -p "$1" > "$3"
+}
+
+LC_ALL=C
+export LC_ALL
+
+umask 077
+
+cmd="$1"
+
+case "$cmd" in
+  # Workaround for a bug in mc - directories must precede files to
+  # avoid duplicate entries, so we sort output by filenames
+  list)    mccabfs_list    "$2" ;;
+  copyout) mccabfs_copyout "$2" "$3" "$4" ;;
+  *) exit 1 ;;
+esac
+exit 0
