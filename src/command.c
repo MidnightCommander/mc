@@ -224,6 +224,11 @@ enter (WInput *cmdline)
 	size_t i, j, cmd_len;
 
 	if (!vfs_current_is_local ()) {
+	    if (strcmp (cmd, "exit") == 0) {
+		quiet_quit_cmd ();
+		return MSG_HANDLED;
+	    }
+
 	    message (D_ERROR, MSG_ERROR,
 		     _
 		     (" Cannot execute commands on non-local filesystems"));
