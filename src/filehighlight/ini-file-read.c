@@ -52,7 +52,7 @@ static void
 mc_fhl_parse_fill_color_info (mc_fhl_filter_t * mc_filter, mc_fhl_t * fhl, const gchar * group_name)
 {
     (void) fhl;
-    mc_filter->color_pair_index = mc_skin_color_get("filehighlight", group_name);
+    mc_filter->color_pair_index = mc_skin_color_get ("filehighlight", group_name);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -162,7 +162,8 @@ mc_fhl_parse_get_extensions (mc_fhl_t * fhl, const gchar * group_name)
     mc_filter = g_new0 (mc_fhl_filter_t, 1);
     mc_filter->type = MC_FLHGH_T_FREGEXP;
     mc_filter->search_condition = mc_search_new (buf->str, -1);
-    mc_filter->search_condition->is_case_sentitive = TRUE;
+    mc_filter->search_condition->is_case_sentitive =
+        mc_config_get_bool (fhl->config, group_name, "extensions_case", TRUE);
     mc_filter->search_condition->search_type = MC_SEARCH_T_REGEX;
 
     mc_fhl_parse_fill_color_info (mc_filter, fhl, group_name);
@@ -247,21 +248,22 @@ mc_fhl_parse_ini_file (mc_fhl_t * fhl)
     mc_fhl_array_free (fhl);
     fhl->filters = g_ptr_array_new ();
 
-    orig_group_names = group_names =
-        mc_config_get_groups (fhl->config, &ftype_names_size);
+    orig_group_names = group_names = mc_config_get_groups (fhl->config, &ftype_names_size);
 
     if (group_names == NULL)
-	return FALSE;
+        return FALSE;
 
     while (*group_names) {
 
         if (mc_config_has_param (fhl->config, *group_names, "type")) {
             /* parse filetype filter */
             mc_fhl_parse_get_file_type_id (fhl, *group_names);
-        } else if (mc_config_has_param (fhl->config, *group_names, "regexp")) {
+        }
+        if (mc_config_has_param (fhl->config, *group_names, "regexp")) {
             /* parse regexp filter */
             mc_fhl_parse_get_regexp (fhl, *group_names);
-        } else if (mc_config_has_param (fhl->config, *group_names, "extensions")) {
+        }
+        if (mc_config_has_param (fhl->config, *group_names, "extensions")) {
             /* parse extensions filter */
             mc_fhl_parse_get_extensions (fhl, *group_names);
         }

@@ -3902,6 +3902,10 @@ base_color=normal=white,default:marked=magenta,default
 .TP
 .I extensions
 Список расширений файлов. Раасширения разделяются символом ';'.
+.TP
+.I extensions_case
+(имеет смысл только с параметром 'extensions') делает правило 'extensions'
+чувствительным к регистру букв (true) или не чувтсвительным (false).
 .PP
 Параметр 'type' (тип файла) может принимать значения:
 .nf
