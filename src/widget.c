@@ -1388,16 +1388,24 @@ backward_word (WInput *in)
     const char *p = in->buffer + str_offset_to_pos (in->buffer, in->point);
 
     while ((p != in->buffer) && (p[0] == '\0')) {
-	p--;
+        p--;
         in->point--;
     }
 
-    while ((p != in->buffer) && (str_isspace (p) || str_ispunct (p))) {
+    while (p != in->buffer) {
         str_cprev_char (&p);
+        if (!str_isspace (p) && !str_ispunct (p)) {
+            str_cnext_char (&p);
+            break;
+        }
         in->point--;
     }
-    while ((p != in->buffer) && !str_isspace (p) && !str_ispunct (p)) {
+    while (p != in->buffer) {
         str_cprev_char (&p);
+        if (str_isspace (p) || str_ispunct (p)) {
+            str_cnext_char (&p);
+            break;
+        }
         in->point--;
     }
 }
