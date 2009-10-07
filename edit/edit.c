@@ -68,7 +68,6 @@ int edit_key_emulation = EDIT_KEY_EMULATION_NORMAL;
 int option_word_wrap_line_length = 72;
 int option_typewriter_wrap = 0;
 int option_auto_para_formatting = 0;
-int option_tab_spacing = 8;
 int option_fill_tabs_with_spaces = 0;
 int option_return_does_auto_indent = 1;
 int option_backspace_through_tabs = 0;

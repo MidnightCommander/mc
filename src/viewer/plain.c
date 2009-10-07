@@ -118,7 +118,7 @@ mcview_display_text (mcview_t * view)
         if (c == '\t') {
             off_t line, column;
             mcview_offset_to_coord (view, &line, &column, from);
-            col += (8 - column % 8);
+            col += (option_tab_spacing - col % option_tab_spacing);
             if (view->text_wrap_mode && col >= width && width != 0) {
                 row += col / width;
                 col %= width;

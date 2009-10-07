@@ -45,7 +45,6 @@ typedef struct WEdit WEdit;
 extern int option_word_wrap_line_length;
 extern int option_typewriter_wrap;
 extern int option_auto_para_formatting;
-extern int option_tab_spacing;
 extern int option_fill_tabs_with_spaces;
 extern int option_return_does_auto_indent;
 extern int option_backspace_through_tabs;

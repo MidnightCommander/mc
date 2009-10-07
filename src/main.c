@@ -254,6 +254,9 @@ int update_prompt = 0;
 /* The home directory */
 const char *home_dir = NULL;
 
+/* Tab size */
+int option_tab_spacing = 8;
+
 /* The value of the other directory, only used when loading the setup */
 char *other_dir = NULL;
 
