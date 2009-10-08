@@ -106,10 +106,10 @@ static void menubar_paint_idx (WMenu *menubar, int idx, int color)
         tty_draw_hline (-1, -1, ' ', menubar->max_entry_len + 1); /* clear line */
         tty_print_string (entry->text.start);
 
-        if (entry->text.hotkey != NULL) {
+        if (entry->text.hotkey != 0) {
             tty_setcolor (color == MENU_SELECTED_COLOR ?
                         MENU_HOTSEL_COLOR : MENU_HOT_COLOR);
-            tty_print_string (entry->text.hotkey);
+            tty_print_anychar (entry->text.hotkey);
             tty_setcolor(color);
         }
 
@@ -170,9 +170,9 @@ static void menubar_draw (WMenu *menubar)
 
         tty_print_string (menubar->menu[i]->text.start);
 
-        if (menubar->menu[i]->text.hotkey != NULL) {
+        if (menubar->menu[i]->text.hotkey != 0) {
 	    menubar_set_color (menubar, i, TRUE);
-            tty_print_string (menubar->menu[i]->text.hotkey);
+            tty_print_anychar (menubar->menu[i]->text.hotkey);
 	    menubar_set_color (menubar, i, FALSE);
         }
         if (menubar->menu[i]->text.end != NULL)
@@ -302,8 +302,8 @@ static int menubar_handle_key (WMenu *menubar, int key)
         for (i = 0; i < items; i++) {
 	    const Menu *menu = menubar->menu [i];
 
-            if (menu->text.hotkey != NULL) {
-                if (g_ascii_tolower(menu->text.hotkey[0]) == key) {
+            if (menu->text.hotkey != 0) {
+                if (menu->text.hotkey == key) {
 		menubar_drop (menubar, i);
 		return 1; 
 	    }
@@ -325,9 +325,9 @@ static int menubar_handle_key (WMenu *menubar, int key)
 	    if (!menu->entries [i].call_back)
 		continue;
 
-            if (menu->entries[i].text.hotkey != NULL) {
-                if (key != g_ascii_tolower (menu->entries[i].text.hotkey[0]))
-			continue;
+            if (menu->entries[i].text.hotkey != 0) {
+                if (key != menu->entries[i].text.hotkey)
+		    continue;
 
 	    menubar_execute (menubar, i);
 	    return 1;

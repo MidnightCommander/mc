@@ -79,6 +79,8 @@ parse_hotkey (const char *text)
 {
     struct hotkey_t result;
     const char *cp, *p;
+    char *hotkey = NULL;
+    int res = 0;
 
     /* search for '&', that is not on the of text */
     cp = strchr (text, '&');
@@ -88,13 +90,21 @@ parse_hotkey (const char *text)
         /* skip '&' */
         cp++;
         p = str_cget_next_char (cp);
-        result.hotkey = g_strndup (cp, p - cp);
+        hotkey = g_strndup (cp, p - cp);
+        res = g_utf8_get_char_validated (hotkey, -1);
+
+        if ( res < 0 )
+            result.hotkey = (int) *hotkey;
+        else
+            result.hotkey = res;
+
+        g_free (hotkey);
 
         cp = p;
         result.end = g_strdup (cp);
     } else {
         result.start = g_strdup (text);
-        result.hotkey = NULL;
+        result.hotkey = 0;
         result.end = NULL;
     }
 
@@ -104,7 +114,6 @@ void
 release_hotkey (const struct hotkey_t hotkey)
 {
     g_free (hotkey.start);
-    g_free (hotkey.hotkey);
     g_free (hotkey.end);
 }
 
@@ -112,10 +121,18 @@ int
 hotkey_width (const struct hotkey_t hotkey)
 {
     int result;
+    int len = 0;
 
     result = str_term_width1 (hotkey.start);
-    result+= (hotkey.hotkey != NULL) ? str_term_width1 (hotkey.hotkey) : 0;
-    result+= (hotkey.end != NULL) ? str_term_width1 (hotkey.end) : 0;
+    if (hotkey.hotkey > 255) {
+        len = g_unichar_to_utf8 (hotkey.hotkey, (char *) NULL);
+        if (len != 0)
+            result += len;
+    } else {
+        if (hotkey.hotkey != 0)
+            result += 1;
+    }
+    result += (hotkey.end != NULL) ? str_term_width1 (hotkey.end) : 0;
     return result;
 }
 
@@ -125,9 +142,9 @@ draw_hotkey (Widget *w, const struct hotkey_t hotkey, gboolean focused)
     widget_selectcolor (w, focused, FALSE);
     tty_print_string (hotkey.start);
 
-    if (hotkey.hotkey != NULL) {
+    if (hotkey.hotkey != 0) {
 	widget_selectcolor (w, focused, TRUE);
-	tty_print_string (hotkey.hotkey);
+	tty_print_anychar (hotkey.hotkey);
 	widget_selectcolor (w, focused, FALSE);
     }
 
@@ -187,9 +204,8 @@ button_callback (Widget *w, widget_msg_t msg, int parm)
 	    return MSG_HANDLED;
 	}
 
-        if (b->text.hotkey != NULL) {
-            if (g_ascii_tolower ((gchar)b->text.hotkey[0]) ==
-                g_ascii_tolower ((gchar)parm)) {
+        if (b->text.hotkey != 0) {
+            if (b->text.hotkey == parm) {
 		button_callback (w, WIDGET_KEY, ' ');
 		return MSG_HANDLED;
 	    }
@@ -331,7 +347,7 @@ button_new (int y, int x, int action, int flags, const char *text,
     b->selected = 0;
     b->callback = callback;
     widget_want_hotkey (b->widget, 1);
-    b->hotpos = (b->text.hotkey != NULL) ? str_term_width1 (b->text.start) : -1;
+    b->hotpos = (b->text.hotkey != 0) ? str_term_width1 (b->text.start) : -1;
 
     return b;
 }
@@ -369,11 +385,11 @@ radio_callback (Widget *w, widget_msg_t msg, int parm)
     switch (msg) {
     case WIDGET_HOTKEY:
 	{
-	    int i, lp = g_ascii_tolower ((gchar)parm);
+	    int i, lp = parm;
 
 	    for (i = 0; i < r->count; i++) {
-                if (r->texts[i].hotkey != NULL) {
-                    int c = g_ascii_tolower ((gchar)r->texts[i].hotkey[0]);
+                if (r->texts[i].hotkey != 0) {
+                    int c = r->texts[i].hotkey;
 
 		    if (c != lp)
 			continue;
@@ -503,10 +519,8 @@ check_callback (Widget *w, widget_msg_t msg, int parm)
 
     switch (msg) {
     case WIDGET_HOTKEY:
-        if (c->text.hotkey != NULL) {
-            if (g_ascii_tolower ((gchar)c->text.hotkey[0]) ==
-                g_ascii_tolower ((gchar)parm)) {
-
+        if (c->text.hotkey != 0) {
+            if (c->text.hotkey == parm) {
 		check_callback (w, WIDGET_KEY, ' ');	/* make action */
 		return MSG_HANDLED;
 	    }

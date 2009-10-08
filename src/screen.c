@@ -1319,16 +1319,19 @@ panel_paint_sort_info(WPanel *panel)
     char *str, *hotkey;
     gsize len=6;
 
+    hotkey = g_strdup("*");
     /* get hotkey from field description */
-    hk = parse_hotkey (_(panel->current_sort_field->title_hotkey));
-    if (hk.hotkey) {
-	hotkey = g_strdup(hk.hotkey);
-    } else {
-	/* if field don't have hotkey - use first char of field name */
-	hotkey = g_strdup(panel->current_sort_field->id);
-	hotkey[1] = '\0';
-    }
-    release_hotkey (hk);
+    
+    //hk = parse_hotkey (_(panel->current_sort_field->title_hotkey));
+
+    //if (hk.hotkey) {
+//	hotkey = g_strdup(hk.hotkey);
+  //  } else {
+//	/* if field don't have hotkey - use first char of field name */
+//	hotkey = g_strdup(panel->current_sort_field->id);
+//	hotkey[1] = '\0';
+//    }
+//    release_hotkey (hk);
 
     /* transform to lower case */
     str = hotkey;
