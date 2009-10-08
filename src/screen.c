@@ -434,24 +434,32 @@ string_dot (file_entry *fe, int len)
 panel_field_t panel_fields [] = {
     {
 	"unsorted", 12, 1, J_LEFT_FIT,
+	/* TRANSLATORS: one single character to represent 'unsorted' sort mode  */
+	N_("u"),
 	N_("Unsorted"), N_("&Unsorted"), FALSE,
 	string_file_name,
 	(sortfn *) unsorted
     },
     {
 	"name", 12, 1, J_LEFT_FIT,
+	/* TRANSLATORS: one single character to represent 'name' sort mode  */
+	N_("n"),
 	N_("Name"), N_("&Name"), TRUE,
 	string_file_name,
 	(sortfn *) sort_name
     },
     {
 	"extension", 12, 1, J_LEFT_FIT,
+	/* TRANSLATORS: one single character to represent 'extension' sort mode  */
+	N_("e"),
 	N_("Extension"), N_("&Extension"), FALSE,
 	string_file_name, /* TODO: string_file_ext*/
 	(sortfn *) sort_ext
     },
     {
 	"size", 7,  0, J_RIGHT,
+	/* TRANSLATORS: one single character to represent 'size' sort mode  */
+	N_("s"),
 	N_("Size"), N_("&Size"), TRUE,
 	string_file_size,
 	(sortfn *) sort_size
@@ -464,101 +472,121 @@ panel_field_t panel_fields [] = {
     },
     {
 	"type", GT, 0, J_LEFT,
+	"",
 	"", NULL, TRUE,
 	string_file_type,
 	NULL
     },
     {
 	"mtime", 12, 0, J_RIGHT,
+	/* TRANSLATORS: one single character to represent 'Modify time' sort mode  */
+	N_("m"),
 	N_("MTime"), N_("&Modify time"), TRUE,
 	string_file_mtime,
 	(sortfn *) sort_time
     },
     {
 	"atime", 12, 0, J_RIGHT,
+	/* TRANSLATORS: one single character to represent 'Access time' sort mode  */
+	N_("a"),
 	N_("ATime"), N_("&Access time"), TRUE,
 	string_file_atime,
 	(sortfn *) sort_atime
     },
     {
 	"ctime", 12, 0, J_RIGHT,
+	/* TRANSLATORS: one single character to represent 'Change time' sort mode  */
+	N_("h"),
 	N_("CTime"), N_("C&Hange time"), TRUE,
 	string_file_ctime,
 	(sortfn *) sort_ctime
     },
     {
 	"perm", 10, 0, J_LEFT,
+	"",
 	N_("Permission"), NULL, TRUE,
 	string_file_permission,
 	NULL
     },
     {
 	"mode", 6,  0, J_RIGHT,
+	"",
 	N_("Perm"), NULL, TRUE,
 	string_file_perm_octal,
 	NULL
     },
     {
 	"nlink", 2,  0, J_RIGHT,
+	"",
 	N_("Nl"), NULL, TRUE,
 	string_file_nlinks, NULL
     },
     {
 	"inode", 5,  0, J_RIGHT,
+	/* TRANSLATORS: one single character to represent 'inode' sort mode  */
+	N_("i"),
 	N_("Inode"), N_("&Inode"), TRUE,
 	string_inode,
 	(sortfn *) sort_inode
     },
     {
 	"nuid", 5,  0, J_RIGHT,
+	"",
 	N_("UID"), NULL, FALSE,
 	string_file_nuid,
 	NULL
     },
     {
 	"ngid", 5,  0, J_RIGHT,
+	"",
 	N_("GID"), NULL, FALSE,
 	string_file_ngid,
 	NULL
     },
     {
 	"owner", 8, 0, J_LEFT_FIT,
+	"",
 	N_("Owner"), NULL, TRUE,
 	string_file_owner,
 	NULL
     },
     {
 	"group", 8,0, J_LEFT_FIT,
+	"",
 	N_("Group"), NULL, TRUE,
 	string_file_group,
 	NULL
     },
     {
 	"mark", 1, 0, J_RIGHT,
+	"",
 	" ", NULL, TRUE,
 	string_marked,
 	NULL
     },
     {
 	"|", 1, 0, J_RIGHT,
+	"",
 	" ", NULL, TRUE,
 	NULL,
 	NULL
     },
     {
 	"space", 1, 0, J_RIGHT,
+	"",
 	" ", NULL, TRUE,
 	string_space,
 	NULL
     },
     {
 	"dot", 1, 0, J_RIGHT,
+	"",
 	" ", NULL, FALSE,
 	string_dot,
 	NULL
     },
     {
-	NULL, 0, 0, J_RIGHT, NULL, NULL, FALSE, NULL, NULL
+	NULL, 0, 0, J_RIGHT, NULL, NULL, NULL, FALSE, NULL, NULL
     },
 };
 
@@ -1314,32 +1342,16 @@ panel_reload (WPanel *panel)
 static void
 panel_paint_sort_info(WPanel *panel)
 {
-    struct hotkey_t hk;
     const char *sort_sign = (panel->reverse) ? panel_sort_down_sign : panel_sort_up_sign;
-    char *str, *hotkey;
-    gsize len=6;
+    char *str;
 
-    /* get hotkey from field description */
-    hk = parse_hotkey (_(panel->current_sort_field->title_hotkey));
-    if (hk.hotkey) {
-	hotkey = g_strdup(hk.hotkey);
-    } else {
-	/* if field don't have hotkey - use first char of field name */
-	hotkey = g_strdup(panel->current_sort_field->id);
-	hotkey[1] = '\0';
-    }
-    release_hotkey (hk);
+    if (*panel->current_sort_field->hotkey == '\0')
+	return;
 
-    /* transform to lower case */
-    str = hotkey;
-    str_tolower (hotkey, &str, &len);
-
-    str = g_strdup_printf("%s%s",sort_sign, hotkey);
-    g_free(hotkey);
+    str = g_strdup_printf("%s%s",sort_sign, _(panel->current_sort_field->hotkey));
 
     widget_move (&panel->widget, 1, 1);
     tty_print_string (str);
-
     g_free(str);
 }
 
