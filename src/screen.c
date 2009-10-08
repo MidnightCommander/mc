@@ -109,7 +109,7 @@ Hook *select_file_hook = 0;
 
 const global_key_map_t *panel_map;
 
-static cb_ret_t panel_callback (Widget *, widget_msg_t msg, int parm);
+static cb_ret_t panel_callback (Widget *, widget_msg_t msg, gpointer data);
 static int panel_event (Gpm_Event *event, void *);
 static void paint_frame (WPanel *panel);
 static const char *panel_format (WPanel *panel);
@@ -2764,7 +2764,7 @@ panel_key (WPanel *panel, int key)
 }
 
 static cb_ret_t
-panel_callback (Widget *w, widget_msg_t msg, int parm)
+panel_callback (Widget *w, widget_msg_t msg, gpointer data)
 {
     WPanel *panel = (WPanel *) w;
     Dlg_head *h = panel->widget.parent;
@@ -2814,14 +2814,16 @@ panel_callback (Widget *w, widget_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     case WIDGET_KEY:
-	return panel_key (panel, parm);
-
+    {
+	int key = *((int *) data);
+	return panel_key (panel, key);
+    }
     case WIDGET_DESTROY:
 	panel_destroy (panel);
 	return MSG_HANDLED;
 
     default:
-	return default_proc (msg, parm);
+	return default_proc (msg, data);
     }
 }
 

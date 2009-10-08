@@ -211,7 +211,7 @@ learn_check_key (int c)
 }
 
 static cb_ret_t
-learn_callback (Dlg_head *h, dlg_msg_t msg, int parm)
+learn_callback (Dlg_head *h, dlg_msg_t msg, gpointer data)
 {
     switch (msg) {
     case DLG_DRAW:
@@ -219,10 +219,12 @@ learn_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     case DLG_KEY:
-	return learn_check_key (parm);
-
+    {
+	int key = *((int *) data);
+	return learn_check_key (key);
+    }
     default:
-	return default_dlg_callback (h, msg, parm);
+	return default_dlg_callback (h, msg, data);
     }
 }
 

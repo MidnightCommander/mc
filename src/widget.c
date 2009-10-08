@@ -138,9 +138,9 @@ draw_hotkey (Widget *w, const struct hotkey_t hotkey, gboolean focused)
 
 /* Default callback for widgets */
 cb_ret_t
-default_proc (widget_msg_t msg, int parm)
+default_proc (widget_msg_t msg, gpointer data)
 {
-    (void) parm;
+    (void) data;
 
     switch (msg) {
     case WIDGET_INIT:
@@ -162,7 +162,7 @@ static int button_event (Gpm_Event *event, void *);
 int quote = 0;
 
 static cb_ret_t
-button_callback (Widget *w, widget_msg_t msg, int parm)
+button_callback (Widget *w, widget_msg_t msg, gpointer data)
 {
     WButton *b = (WButton *) w;
     int stop = 0;
@@ -171,33 +171,40 @@ button_callback (Widget *w, widget_msg_t msg, int parm)
 
     switch (msg) {
     case WIDGET_HOTKEY:
+    {
 	/*
 	 * Don't let the default button steal Enter from the current
 	 * button.  This is a workaround for the flawed event model
 	 * when hotkeys are sent to all widgets before the key is
 	 * handled by the current widget.
 	 */
-	if (parm == '\n' && h->current == &b->widget) {
-	    button_callback (w, WIDGET_KEY, ' ');
+	int key = *((int *) data);
+	if (key == '\n' && h->current == &b->widget) {
+	    key = ' ';
+	    button_callback (w, WIDGET_KEY, (gpointer) &key);
 	    return MSG_HANDLED;
 	}
 
-	if (parm == '\n' && b->flags == DEFPUSH_BUTTON) {
-	    button_callback (w, WIDGET_KEY, ' ');
+	if (key == '\n' && b->flags == DEFPUSH_BUTTON) {
+	    key = ' ';
+	    button_callback (w, WIDGET_KEY, (gpointer) &key);
 	    return MSG_HANDLED;
 	}
 
         if (b->text.hotkey != NULL) {
             if (g_ascii_tolower ((gchar)b->text.hotkey[0]) ==
-                g_ascii_tolower ((gchar)parm)) {
-		button_callback (w, WIDGET_KEY, ' ');
+                g_ascii_tolower ((gchar)key)) {
+		key = ' ';
+		button_callback (w, WIDGET_KEY, (gpointer) &key);
 		return MSG_HANDLED;
 	    }
         }
 	return MSG_NOT_HANDLED;
-
+    }
     case WIDGET_KEY:
-	if (parm != ' ' && parm != '\n')
+    {
+	int key = *((int *) data);
+	if (key != ' ' && key != '\n')
 	    return MSG_NOT_HANDLED;
 
 	if (b->callback)
@@ -207,7 +214,7 @@ button_callback (Widget *w, widget_msg_t msg, int parm)
 	    dlg_stop (h);
 	}
 	return MSG_HANDLED;
-
+    }
     case WIDGET_CURSOR:
 	switch (b->flags) {
 	case DEFPUSH_BUTTON:
@@ -273,7 +280,7 @@ button_callback (Widget *w, widget_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     default:
-	return default_proc (msg, parm);
+	return default_proc (msg, data);
     }
 }
 
@@ -286,8 +293,9 @@ button_event (Gpm_Event *event, void *data)
     	Dlg_head *h=b->widget.parent;
 	dlg_select_widget (b);
 	if (event->type & GPM_UP){
-	    button_callback ((Widget *) data, WIDGET_KEY, ' ');
-	    (*h->callback) (h, DLG_POST_KEY, ' ');
+	    int key = ' '; // must be tty_key_t
+	    button_callback ((Widget *) data, WIDGET_KEY, (gpointer) &key);
+	    (*h->callback) (h, DLG_POST_KEY, (gpointer) &key);
 	    return MOU_NORMAL;
 	}
     }
@@ -360,7 +368,7 @@ button_set_text (WButton *b, const char *text)
 static int radio_event (Gpm_Event *event, void *);
 
 static cb_ret_t
-radio_callback (Widget *w, widget_msg_t msg, int parm)
+radio_callback (Widget *w, widget_msg_t msg, gpointer data)
 {
     WRadio *r = (WRadio *) w;
     int i;
@@ -369,7 +377,8 @@ radio_callback (Widget *w, widget_msg_t msg, int parm)
     switch (msg) {
     case WIDGET_HOTKEY:
 	{
-	    int i, lp = g_ascii_tolower ((gchar)parm);
+	    int key = *((int *) data);
+	    int i, lp = g_ascii_tolower ((gchar)key);
 
 	    for (i = 0; i < r->count; i++) {
                 if (r->texts[i].hotkey != NULL) {
@@ -380,7 +389,8 @@ radio_callback (Widget *w, widget_msg_t msg, int parm)
 		    r->pos = i;
 
 		    /* Take action */
-		    radio_callback (w, WIDGET_KEY, ' ');
+		    key = ' ';
+		    radio_callback (w, WIDGET_KEY, (gpointer) &key);
 		    return MSG_HANDLED;
 		}
 	    }
@@ -388,11 +398,14 @@ radio_callback (Widget *w, widget_msg_t msg, int parm)
 	return MSG_NOT_HANDLED;
 
     case WIDGET_KEY:
-	switch (parm) {
+    {
+	int key = *((int *) data);
+	switch (key) {
 	case ' ':
 	    r->sel = r->pos;
 	    (*h->callback) (h, DLG_ACTION, 0);
-	    radio_callback (w, WIDGET_FOCUS, ' ');
+	    key = ' ';
+	    radio_callback (w, WIDGET_FOCUS, (gpointer) &key);
 	    return MSG_HANDLED;
 
 	case KEY_UP:
@@ -411,13 +424,15 @@ radio_callback (Widget *w, widget_msg_t msg, int parm)
 	    }
 	}
 	return MSG_NOT_HANDLED;
-
+    }
     case WIDGET_CURSOR:
-	(*h->callback) (h, DLG_ACTION, 0);
-	radio_callback (w, WIDGET_FOCUS, ' ');
+    {
+	int key = ' ';
+	(*h->callback) (h, DLG_ACTION, NULL);
+	radio_callback (w, WIDGET_FOCUS, (gpointer) &key);
 	widget_move (&r->widget, r->pos, 1);
 	return MSG_HANDLED;
-
+    }
     case WIDGET_UNFOCUS:
     case WIDGET_FOCUS:
     case WIDGET_DRAW:
@@ -438,7 +453,7 @@ radio_callback (Widget *w, widget_msg_t msg, int parm)
         return MSG_HANDLED;
 
     default:
-	return default_proc (msg, parm);
+	return default_proc (msg, data);
     }
 }
 
@@ -454,9 +469,10 @@ radio_event (Gpm_Event *event, void *data)
 	r->pos = event->y - 1;
 	dlg_select_widget (r);
 	if (event->type & GPM_UP){
-	    radio_callback (w, WIDGET_KEY, ' ');
-	    radio_callback (w, WIDGET_FOCUS, 0);
-	    (*h->callback) (h, DLG_POST_KEY, ' ');
+	    int key = ' '; // must be tty_key_t
+	    radio_callback (w, WIDGET_KEY, (gpointer) &key);
+	    radio_callback (w, WIDGET_FOCUS, NULL);
+	    (*h->callback) (h, DLG_POST_KEY, (gpointer) &key);
 	    return MOU_NORMAL;
 	}
     }
@@ -496,32 +512,37 @@ radio_new (int y, int x, int count, const char **texts)
 static int check_event (Gpm_Event *event, void *);
 
 static cb_ret_t
-check_callback (Widget *w, widget_msg_t msg, int parm)
+check_callback (Widget *w, widget_msg_t msg, gpointer data)
 {
     WCheck *c = (WCheck *) w;
     Dlg_head *h = c->widget.parent;
 
     switch (msg) {
     case WIDGET_HOTKEY:
+    {
+	int key = *((int *) data); // must be tty_key_t
         if (c->text.hotkey != NULL) {
             if (g_ascii_tolower ((gchar)c->text.hotkey[0]) ==
-                g_ascii_tolower ((gchar)parm)) {
-
-		check_callback (w, WIDGET_KEY, ' ');	/* make action */
+                g_ascii_tolower ((gchar)key)) {
+		key = ' ';
+		check_callback (w, WIDGET_KEY, (gpointer) &key); /* make action */
 		return MSG_HANDLED;
 	    }
 	}
 	return MSG_NOT_HANDLED;
-
+    }
     case WIDGET_KEY:
-	if (parm != ' ')
+    {
+	int key = *((int *) data); // must be tty_key_t
+	if (key != ' ')
 	    return MSG_NOT_HANDLED;
 	c->state ^= C_BOOL;
 	c->state ^= C_CHANGE;
-	(*h->callback) (h, DLG_ACTION, 0);
-	check_callback (w, WIDGET_FOCUS, ' ');
+	(*h->callback) (h, DLG_ACTION, NULL);
+	key = ' ';
+	check_callback (w, WIDGET_FOCUS, (gpointer) &key);
 	return MSG_HANDLED;
-
+    }
     case WIDGET_CURSOR:
 	widget_move (&c->widget, 0, 1);
 	return MSG_HANDLED;
@@ -540,7 +561,7 @@ check_callback (Widget *w, widget_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     default:
-	return default_proc (msg, parm);
+	return default_proc (msg, data);
     }
 }
 
@@ -555,9 +576,10 @@ check_event (Gpm_Event *event, void *data)
 
 	dlg_select_widget (c);
 	if (event->type & GPM_UP){
-	    check_callback (w, WIDGET_KEY, ' ');
-	    check_callback (w, WIDGET_FOCUS, 0);
-	    (*h->callback) (h, DLG_POST_KEY, ' ');
+	    int key = ' '; // must be tty_key_t
+	    check_callback (w, WIDGET_KEY, (gpointer) &key);
+	    check_callback (w, WIDGET_FOCUS, NULL);
+	    (*h->callback) (h, DLG_POST_KEY, (gpointer) &key);
 	    return MOU_NORMAL;
 	}
     }
@@ -583,7 +605,7 @@ check_new (int y, int x, int state, const char *text)
 /* Label widget */
 
 static cb_ret_t
-label_callback (Widget *w, widget_msg_t msg, int parm)
+label_callback (Widget *w, widget_msg_t msg, gpointer data)
 {
     WLabel *l = (WLabel *) w;
     Dlg_head *h = l->widget.parent;
@@ -633,7 +655,7 @@ label_callback (Widget *w, widget_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     default:
-	return default_proc (msg, parm);
+	return default_proc (msg, data);
     }
 }
 
@@ -691,7 +713,7 @@ label_new (int y, int x, const char *text)
 #define gauge_len 47
 
 static cb_ret_t
-gauge_callback (Widget *w, widget_msg_t msg, int parm)
+gauge_callback (Widget *w, widget_msg_t msg, gpointer data)
 {
     WGauge *g = (WGauge *) w;
     Dlg_head *h = g->widget.parent;
@@ -733,7 +755,7 @@ gauge_callback (Widget *w, widget_msg_t msg, int parm)
 	return MSG_HANDLED;
     }
 
-    return default_proc (msg, parm);
+    return default_proc (msg, data);
 }
 
 void
@@ -1060,14 +1082,14 @@ dlg_hist_reposition (Dlg_head *dlg_head)
 }
 
 static cb_ret_t
-dlg_hist_callback (Dlg_head *h, dlg_msg_t msg, int parm)
+dlg_hist_callback (Dlg_head *h, dlg_msg_t msg, gpointer data)
 {
     switch (msg) {
     case DLG_RESIZE:
 	return dlg_hist_reposition (h);
 
     default:
-	return default_dlg_callback (h, msg, parm);
+	return default_dlg_callback (h, msg, data);
     }
 }
 
@@ -1814,14 +1836,16 @@ input_set_point (WInput *in, int pos)
 }
 
 cb_ret_t
-input_callback (Widget *w, widget_msg_t msg, int parm)
+input_callback (Widget *w, widget_msg_t msg, gpointer data)
 {
     WInput *in = (WInput *) w;
     cb_ret_t v;
 
     switch (msg) {
     case WIDGET_KEY:
-	if (parm == XCTRL ('q')) {
+    {
+	int key = *((int *) data);
+	if (key == XCTRL ('q')) {
 	    quote = 1;
 	    v = handle_char (in, ascii_alpha_to_cntrl (tty_getch ()));
 	    quote = 0;
@@ -1829,23 +1853,25 @@ input_callback (Widget *w, widget_msg_t msg, int parm)
 	}
 
 	/* Keys we want others to handle */
-	if (parm == KEY_UP || parm == KEY_DOWN || parm == ESC_CHAR
-	    || parm == KEY_F (10) || parm == XCTRL ('g') || parm == '\n')
+	if (key == KEY_UP || key == KEY_DOWN || key == ESC_CHAR
+	    || key == KEY_F (10) || key == XCTRL ('g') || key == '\n')
 	    return MSG_NOT_HANDLED;
 
 	/* When pasting multiline text, insert literal Enter */
-	if ((parm & ~KEY_M_MASK) == '\n') {
+	if ((key & ~KEY_M_MASK) == '\n') {
 	    quote = 1;
 	    v = handle_char (in, '\n');
 	    quote = 0;
 	    return v;
 	}
 
-	return handle_char (in, parm);
-
+	return handle_char (in, key);
+    }
     case WIDGET_COMMAND:
-	return input_execute_cmd (in, parm);
-
+    {
+	int command = *((int *) data);
+	return input_execute_cmd (in, command);
+    }
     case WIDGET_FOCUS:
     case WIDGET_UNFOCUS:
     case WIDGET_DRAW:
@@ -1862,7 +1888,7 @@ input_callback (Widget *w, widget_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     default:
-	return default_proc (msg, parm);
+	return default_proc (msg, data);
     }
 }
 
@@ -2274,7 +2300,7 @@ listbox_destroy (WListbox *l)
 }
 
 static cb_ret_t
-listbox_callback (Widget *w, widget_msg_t msg, int parm)
+listbox_callback (Widget *w, widget_msg_t msg, gpointer data)
 {
     WListbox *l = (WListbox *) w;
     Dlg_head *h = l->widget.parent;
@@ -2286,13 +2312,15 @@ listbox_callback (Widget *w, widget_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     case WIDGET_HOTKEY:
-	e = listbox_check_hotkey (l, parm);
+    {
+	int key = *((int *) data);
+	e = listbox_check_hotkey (l, key);
 	if (e != NULL) {
 	    int action;
 
 	    listbox_select_entry (l, e);
 
-	    (*h->callback) (h, DLG_ACTION, l->pos);
+	    (*h->callback) (h, DLG_ACTION, (gpointer) &(l->pos));
 
 	    if (l->cback)
 		action = (*l->cback) (l);
@@ -2306,18 +2334,20 @@ listbox_callback (Widget *w, widget_msg_t msg, int parm)
 	    return MSG_HANDLED;
 	}
 	return MSG_NOT_HANDLED;
-
+    }
     case WIDGET_KEY:
-	ret_code = listbox_key (l, parm);
+    {
+	int key = *((int *) data);
+	ret_code = listbox_key (l, key);
 	if (ret_code != MSG_NOT_HANDLED) {
 	    listbox_draw (l, TRUE);
-	    (*h->callback) (h, DLG_ACTION, l->pos);
+	    (*h->callback) (h, DLG_ACTION, (gpointer) &(l->pos));
 	}
 	return ret_code;
-
+    }
     case WIDGET_CURSOR:
 	widget_move (&l->widget, l->cursor_y, 0);
-	(*h->callback) (h, DLG_ACTION, l->pos);
+	(*h->callback) (h, DLG_ACTION, (gpointer) &(l->pos));
 	return MSG_HANDLED;
 
     case WIDGET_FOCUS:
@@ -2334,7 +2364,7 @@ listbox_callback (Widget *w, widget_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     default:
-	return default_proc (msg, parm);
+	return default_proc (msg, data);
     }
 }
 
@@ -2572,7 +2602,7 @@ buttonbat_get_button_width ()
 
 
 static cb_ret_t
-buttonbar_callback (Widget *w, widget_msg_t msg, int parm)
+buttonbar_callback (Widget *w, widget_msg_t msg, gpointer data)
 {
     WButtonBar *bb = (WButtonBar *) w;
     int i;
@@ -2583,11 +2613,13 @@ buttonbar_callback (Widget *w, widget_msg_t msg, int parm)
 	return MSG_NOT_HANDLED;
 
     case WIDGET_HOTKEY:
+    {
+	int key = *((int *) data);
 	for (i = 0; i < BUTTONBAR_LABELS_NUM; i++)
-	    if (parm == KEY_F (i + 1) && buttonbar_call (bb, i))
+	    if (key == KEY_F (i + 1) && buttonbar_call (bb, i))
 		return MSG_HANDLED;
 	return MSG_NOT_HANDLED;
-
+    }
     case WIDGET_DRAW:
 	if (bb->visible) {
 	    widget_move (&bb->widget, 0, 0);
@@ -2612,7 +2644,7 @@ buttonbar_callback (Widget *w, widget_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     default:
-	return default_proc (msg, parm);
+	return default_proc (msg, data);
     }
 }
 
@@ -2733,7 +2765,7 @@ buttonbar_redraw (Dlg_head *h)
 }
 
 static cb_ret_t
-groupbox_callback (Widget *w, widget_msg_t msg, int parm)
+groupbox_callback (Widget *w, widget_msg_t msg, gpointer data)
 {
     WGroupbox *g = (WGroupbox *) w;
 
@@ -2761,7 +2793,7 @@ groupbox_callback (Widget *w, widget_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     default:
-	return default_proc (msg, parm);
+	return default_proc (msg, data);
     }
 }
 

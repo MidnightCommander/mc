@@ -100,7 +100,7 @@ typedef struct Link_Area {
 static Link_Area *link_area = NULL;
 static int inside_link_area = 0;
 
-static cb_ret_t help_callback (struct Dlg_head *h, dlg_msg_t, int parm);
+static cb_ret_t help_callback (struct Dlg_head *h, dlg_msg_t, gpointer data);
 
 /* returns the position where text was found in the start buffer */
 /* or 0 if not found */
@@ -590,7 +590,7 @@ static void prev_node_cmd (void *vp)
 }
 
 static cb_ret_t
-md_callback (Widget *w, widget_msg_t msg, int parm)
+md_callback (Widget *w, widget_msg_t msg, gpointer data)
 {
     switch (msg) {
     case WIDGET_RESIZED:
@@ -598,7 +598,7 @@ md_callback (Widget *w, widget_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     default:
-	return default_proc (msg, parm);
+	return default_proc (msg, data);
     }
 }
 
@@ -756,7 +756,7 @@ help_handle_key (struct Dlg_head *h, int c)
 }
 
 static cb_ret_t
-help_callback (Dlg_head *h, dlg_msg_t msg, int parm)
+help_callback (Dlg_head *h, dlg_msg_t msg, gpointer data)
 {
     WButtonBar *bb;
 
@@ -774,10 +774,12 @@ help_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     case DLG_KEY:
-	return help_handle_key (h, parm);
-
+    {
+	int key = *((int *) data);
+	return help_handle_key (h, key);
+    }
     default:
-	return default_dlg_callback (h, msg, parm);
+	return default_dlg_callback (h, msg, data);
     }
 }
 

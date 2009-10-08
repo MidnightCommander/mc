@@ -1004,7 +1004,7 @@ tree_rmdir_command (void *data)
 }
 
 static cb_ret_t
-tree_callback (Widget *w, widget_msg_t msg, int parm)
+tree_callback (Widget *w, widget_msg_t msg, gpointer data)
 {
     WTree *tree = (WTree *) w;
     Dlg_head *h = tree->widget.parent;
@@ -1016,8 +1016,10 @@ tree_callback (Widget *w, widget_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     case WIDGET_KEY:
-	return tree_key (tree, parm);
-
+    {
+	int key = *((int *) data);
+	return tree_key (tree, key);
+    }
     case WIDGET_FOCUS:
 	tree->active = 1;
 	buttonbar_set_label (h, 1, _("Help"), tree_help_cmd);
@@ -1055,7 +1057,7 @@ tree_callback (Widget *w, widget_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     default:
-	return default_proc (msg, parm);
+	return default_proc (msg, data);
     }
 }
 

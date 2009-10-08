@@ -198,8 +198,8 @@ typedef struct mcview_nroff_struct {
 /*** declarations of public functions **********************************/
 
 /* actions_cmd.c:  */
-cb_ret_t mcview_callback (Widget *, widget_msg_t, int);
-cb_ret_t mcview_dialog_callback (Dlg_head *, dlg_msg_t, int);
+cb_ret_t mcview_callback (Widget *, widget_msg_t, gpointer);
+cb_ret_t mcview_dialog_callback (Dlg_head *, dlg_msg_t, gpointer);
 void mcview_help_cmd (void);
 void mcview_quit_cmd (mcview_t *);
 void mcview_toggle_hex_mode_cmd (mcview_t *);

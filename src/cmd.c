@@ -886,7 +886,8 @@ void
 history_cmd (void)
 {
     /* show the history of command line widget */
-    send_message (&cmdline->widget, WIDGET_COMMAND, CK_InputHistoryShow);
+    int command = CK_InputHistoryShow;
+    send_message (&cmdline->widget, WIDGET_COMMAND, (gpointer) &command);
 }
 
 void swap_cmd (void)
@@ -1254,9 +1255,10 @@ single_dirsize_cmd (void)
 	compute_dir_size_destroy_ui (ui);
     }
 
-    if (mark_moves_down)
-	send_message (&(panel->widget), WIDGET_KEY, KEY_DOWN);
-
+    if (mark_moves_down) {
+	int key = KEY_DOWN; // must be tty_key_t
+	send_message (&(panel->widget), WIDGET_KEY, (gpointer) &key);
+    }
     recalculate_panel_summary (panel);
 
     if ( current_panel->current_sort_field->sort_routine == (sortfn *) sort_size )

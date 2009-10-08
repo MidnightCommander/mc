@@ -900,14 +900,16 @@ static int insert_text (WInput *in, char *text, ssize_t size)
 }
 
 static cb_ret_t
-query_callback (Dlg_head *h, dlg_msg_t msg, int parm)
+query_callback (Dlg_head *h, dlg_msg_t msg, gpointer data)
 {
     static char buff[MB_LEN_MAX] = "";
     static int bl = 0;
     
     switch (msg) {
     case DLG_KEY:
-	switch (parm) {
+    {
+	int key = *((int *) data);
+	switch (key) {
 	case KEY_LEFT:
 	case KEY_RIGHT:
             bl = 0;
@@ -932,7 +934,7 @@ query_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 			listbox_select_entry ((WListbox *) (h->current), e1);
 			end = str_get_prev_char (&(input->buffer[end])) 
                                 - input->buffer;
-			handle_char (input, parm);
+			handle_char (input, key);
 			send_message (h->current, WIDGET_DRAW, 0);
 			break;
 		    }
@@ -942,9 +944,9 @@ query_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	    return MSG_HANDLED;
 
 	default:
-	    if (parm < 32 || parm > 256) {
+	    if (key < 32 || key > 256) {
                 bl = 0;
-		if (is_in_input_map (input, parm) == 2) {
+		if (is_in_input_map (input, key) == 2) {
 		    if (end == min_end)
 			return MSG_HANDLED;
 		    h->ret_value = B_USER;	/* This means we want to refill the
@@ -959,7 +961,7 @@ query_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 		int low = 4096;
 		char *last_text = NULL;
 
-                buff[bl] = (char) parm;
+                buff[bl] = key;
                 bl++;
                 buff[bl] = '\0';
                 switch (str_is_valid_char (buff, bl)) {
@@ -1021,9 +1023,9 @@ query_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	    return MSG_HANDLED;
 	}
 	break;
-
+    }
     default:
-	return default_dlg_callback (h, msg, parm);
+	return default_dlg_callback (h, msg, data);
     }
 }
 

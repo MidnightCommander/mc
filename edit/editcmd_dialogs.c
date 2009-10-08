@@ -67,15 +67,15 @@
 /*** file scope functions **********************************************/
 
 static cb_ret_t
-editcmd_dialog_raw_key_query_cb (struct Dlg_head *h, dlg_msg_t msg, int parm)
+editcmd_dialog_raw_key_query_cb (struct Dlg_head *h, dlg_msg_t msg, gpointer data)
 {
     switch (msg) {
     case DLG_KEY:
         dlg_stop (h);
-        h->ret_value = parm;
+        h->ret_value = *((int *) data);
         return MSG_HANDLED;
     default:
-        return default_dlg_callback (h, msg, parm);
+        return default_dlg_callback (h, msg, data);
     }
 }
 
@@ -445,7 +445,7 @@ editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, int max_l
     run_dlg (def_dlg);
 
     /* apply the choosen completion */
-    if (def_dlg->ret_value == B_ENTER) {
+    if (*((int *)def_dlg->ret_value) == B_ENTER) {
         char *tmp_curr_def = (char *) curr_def;
         int do_moveto = 0;
 

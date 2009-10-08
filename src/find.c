@@ -222,7 +222,7 @@ find_check_regexp (const char *r)
  * Validate regex, prevent closing the dialog if it's invalid.
  */
 static cb_ret_t
-find_parm_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
+find_parm_callback (struct Dlg_head *h, dlg_msg_t msg, gpointer data)
 {
     switch (msg) {
     case DLG_VALIDATE:
@@ -252,7 +252,7 @@ find_parm_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     default:
-	return default_dlg_callback (h, msg, parm);
+	return default_dlg_callback (h, msg, data);
     }
 }
 
@@ -982,25 +982,26 @@ view_edit_currently_selected_file (int unparsed_view, int edit)
 }
 
 static cb_ret_t
-find_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
+find_callback (struct Dlg_head *h, dlg_msg_t msg, gpointer data)
 {
     switch (msg) {
     case DLG_KEY:
-	if (parm == KEY_F (3) || parm == KEY_F (13)) {
-	    int unparsed_view = (parm == KEY_F (13));
+    {
+	int key = *((int *) data);
+	if (key == KEY_F (3) || key == KEY_F (13)) {
+	    int unparsed_view = (key == KEY_F (13));
 	    return view_edit_currently_selected_file (unparsed_view, 0);
 	}
-	if (parm == KEY_F (4)) {
+	if (key == KEY_F (4)) {
 	    return view_edit_currently_selected_file (0, 1);
 	}
 	return MSG_NOT_HANDLED;
-
+    }
     case DLG_IDLE:
 	do_search (h);
 	return MSG_HANDLED;
-
     default:
-	return default_dlg_callback (h, msg, parm);
+	return default_dlg_callback (h, msg, data);
     }
 }
 

@@ -204,9 +204,9 @@ dlg_set_size (Dlg_head *h, int lines, int cols)
 }
 
 /* Default dialog callback */
-cb_ret_t default_dlg_callback (Dlg_head *h, dlg_msg_t msg, int parm)
+cb_ret_t default_dlg_callback (Dlg_head *h, dlg_msg_t msg, gpointer data)
 {
-    (void) parm;
+    (void) data;
 
     switch (msg) {
     case DLG_DRAW:
@@ -667,7 +667,7 @@ dlg_try_hotkey (Dlg_head *h, int d_key)
 
     handled = MSG_NOT_HANDLED;
     if (h->current->options & W_WANT_HOTKEY)
-	handled = send_message (h->current, WIDGET_HOTKEY, d_key);
+	handled = send_message (h->current, WIDGET_HOTKEY, (gpointer) &d_key);
 
     /* If not used, send hotkey to other widgets */
     if (handled == MSG_HANDLED)
@@ -678,7 +678,7 @@ dlg_try_hotkey (Dlg_head *h, int d_key)
     /* send it to all widgets */
     while (h->current != hot_cur && handled == MSG_NOT_HANDLED) {
 	if (hot_cur->options & W_WANT_HOTKEY)
-	    handled = send_message (hot_cur, WIDGET_HOTKEY, d_key);
+	    handled = send_message (hot_cur, WIDGET_HOTKEY, (gpointer) &d_key);
 
 	if (handled == MSG_NOT_HANDLED)
 	    hot_cur = hot_cur->next;
@@ -710,26 +710,28 @@ dlg_key_event (Dlg_head *h, int d_key)
     }
 
     /* first can dlg_callback handle the key */
-    handled = (*h->callback) (h, DLG_KEY, d_key);
+    handled = (*h->callback) (h, DLG_KEY, (gpointer) &d_key);
 
     /* next try the hotkey */
     if (handled == MSG_NOT_HANDLED)
 	handled = dlg_try_hotkey (h, d_key);
 
-    if (handled == MSG_HANDLED)
-	(*h->callback) (h, DLG_HOTKEY_HANDLED, 0);
+    if (handled == MSG_HANDLED) {
+	int tmp=0;
+	(*h->callback) (h, DLG_HOTKEY_HANDLED, (gpointer) &tmp);
+    }
     else
 	/* not used - then try widget_callback */
-	handled = send_message (h->current, WIDGET_KEY, d_key);
+	handled = send_message (h->current, WIDGET_KEY, (gpointer) &d_key);
 
     /* not used- try to use the unhandled case */
     if (handled == MSG_NOT_HANDLED)
-	handled = (*h->callback) (h, DLG_UNHANDLED_KEY, d_key);
+	handled = (*h->callback) (h, DLG_UNHANDLED_KEY, (gpointer) &d_key);
 
     if (handled == MSG_NOT_HANDLED)
 	dialog_handle_key (h, d_key);
 
-    (*h->callback) (h, DLG_POST_KEY, d_key);
+    (*h->callback) (h, DLG_POST_KEY, (gpointer) &d_key);
 }
 
 static int

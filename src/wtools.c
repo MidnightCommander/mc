@@ -108,7 +108,7 @@ run_listbox (Listbox *l)
 
 /* default query callback, used to reposition query */
 static cb_ret_t
-default_query_callback (Dlg_head *h, dlg_msg_t msg, int parm)
+default_query_callback (Dlg_head *h, dlg_msg_t msg, gpointer data)
 {
     switch (msg) {
     case DLG_RESIZE:
@@ -122,7 +122,7 @@ default_query_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     default:
-	return default_dlg_callback (h, msg, parm);
+	return default_dlg_callback (h, msg, data);
     }
 }
 

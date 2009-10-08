@@ -278,7 +278,7 @@ enter (WInput *cmdline)
 }
 
 static cb_ret_t
-command_callback (Widget *w, widget_msg_t msg, int parm)
+command_callback (Widget *w, widget_msg_t msg, gpointer data)
 {
     WInput *cmd = (WInput *) w;
 
@@ -288,14 +288,16 @@ command_callback (Widget *w, widget_msg_t msg, int parm)
 	return MSG_NOT_HANDLED;
 
     case WIDGET_KEY:
+    {
+	int key = *((int *) data);
 	/* Special case: we handle the enter key */
-	if (parm == '\n') {
+	if (key == '\n') {
 	    return enter (cmd);
 	}
 	/* fall through */
-
+    }
     default:
-	return input_callback (w, msg, parm);
+	return input_callback (w, msg, data);
     }
 }
 

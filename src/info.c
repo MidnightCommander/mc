@@ -242,7 +242,7 @@ static void info_hook (void *data)
 }
 
 static cb_ret_t
-info_callback (Widget *w, widget_msg_t msg, int parm)
+info_callback (Widget *w, widget_msg_t msg, gpointer data)
 {
     struct WInfo *info = (struct WInfo *) w;
 
@@ -266,7 +266,7 @@ info_callback (Widget *w, widget_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     default:
-	return default_proc (msg, parm);
+	return default_proc (msg, data);
     }
 }
 

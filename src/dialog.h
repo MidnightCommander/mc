@@ -82,7 +82,7 @@ typedef enum {
 
 /* Dialog callback */
 struct Dlg_head;
-typedef cb_ret_t (*dlg_cb_fn)(struct Dlg_head *h, dlg_msg_t msg, int parm);
+typedef cb_ret_t (*dlg_cb_fn)(struct Dlg_head *, dlg_msg_t, gpointer);
 
 /* Dialog color constants */
 #define DLG_COLOR_NUM		4
@@ -125,7 +125,7 @@ extern int alarm_colors[4];
 typedef struct Widget Widget;
 
 /* Widget callback */
-typedef cb_ret_t (*callback_fn) (Widget *widget, widget_msg_t msg, int parm);
+typedef cb_ret_t (*callback_fn) (Widget *, widget_msg_t, gpointer);
 
 /* widget options */
 typedef enum {
@@ -209,7 +209,7 @@ void init_widget (Widget *w, int y, int x, int lines, int cols,
 		  callback_fn callback, mouse_h mouse_handler);
 
 /* Default callback for dialogs */
-cb_ret_t default_dlg_callback (Dlg_head *h, dlg_msg_t msg, int parm);
+cb_ret_t default_dlg_callback (Dlg_head *, dlg_msg_t, gpointer);
 
 /* Default paint routine for dialogs */
 void common_dialog_repaint (struct Dlg_head *h);
@@ -223,9 +223,9 @@ extern Dlg_head *current_dlg;
 extern Hook *idle_hook;
 
 static inline cb_ret_t
-send_message (Widget *w, widget_msg_t msg, int parm)
+send_message (Widget *w, widget_msg_t msg, gpointer data)
 {
-    return (*(w->callback)) (w, msg, parm);
+    return (*(w->callback)) (w, msg, data);
 }
 
 /* Return 1 if the widget is active, 0 otherwise */

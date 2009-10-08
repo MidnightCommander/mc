@@ -186,7 +186,7 @@ typedef struct WGroupbox {
 
 
 /* Default callback for widgets */
-cb_ret_t default_proc (widget_msg_t msg, int parm);
+cb_ret_t default_proc (widget_msg_t, gpointer);
 
 /* Constructors */
 WButton *button_new   (int y, int x, int action, int flags, const char *text,
@@ -214,7 +214,7 @@ void input_enable_update (WInput *in);
 void input_set_point (WInput *in, int pos);
 void input_show_cursor (WInput *in);
 void assign_text (WInput *in, const char *text);
-cb_ret_t input_callback (Widget *, widget_msg_t msg, int parm);
+cb_ret_t input_callback (Widget *, widget_msg_t msg, gpointer data);
 
 /* Labels */
 void label_set_text (WLabel *label, const char *text);

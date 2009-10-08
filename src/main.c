@@ -1432,7 +1432,7 @@ done_mc_profile (void)
 }
 
 static cb_ret_t
-midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
+midnight_callback (struct Dlg_head *h, dlg_msg_t msg, gpointer data)
 {
     int i;
 
@@ -1447,10 +1447,12 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     case DLG_KEY:
+    {
+	int key = *((int *) data);
 	if (ctl_x_map_enabled) {
 	    ctl_x_map_enabled = 0;
 	    for (i = 0; main_x_map[i].key; i++)
-		if (parm == main_x_map[i].key)
+		if (key == main_x_map[i].key)
 		    return midnight_execute_cmd (main_x_map[i].command);
 	}
 
@@ -1458,19 +1460,19 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	if (the_menubar->active)
 	    return MSG_NOT_HANDLED;
 
-	if (parm == KEY_F (10)) {
+	if (key == KEY_F (10)) {
 	    quit_cmd ();
 	    return MSG_HANDLED;
 	}
 
-	if (parm == '\t')
+	if (key == '\t')
 	    free_completions (cmdline);
 
-	if (parm == '\n') {
+	if (key == '\n') {
 	    for (i = 0; cmdline->buffer[i] && (cmdline->buffer[i] == ' ' ||
 		cmdline->buffer[i] == '\t'); i++);
 	    if (cmdline->buffer[i]) {
-	        send_message ((Widget *) cmdline, WIDGET_KEY, parm);
+	        send_message ((Widget *) cmdline, WIDGET_KEY, data);
 		return MSG_HANDLED;
 	    }
 	    stuff (cmdline, "", 0);
@@ -1478,14 +1480,14 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	}
 
 	/* Ctrl-Enter and Alt-Enter */
-	if (((parm & ~(KEY_M_CTRL | KEY_M_ALT)) == '\n')
-	    && (parm & (KEY_M_CTRL | KEY_M_ALT))) {
+	if (((key & ~(KEY_M_CTRL | KEY_M_ALT)) == '\n')
+	    && (key & (KEY_M_CTRL | KEY_M_ALT))) {
 	    copy_prog_name ();
 	    return MSG_HANDLED;
 	}
 
 	/* Ctrl-Shift-Enter */
-	if (parm == (KEY_M_CTRL | KEY_M_SHIFT | '\n')) {
+	if (key == (KEY_M_CTRL | KEY_M_SHIFT | '\n')) {
 	    copy_current_pathname ();
 	    copy_prog_name ();
 	    return MSG_HANDLED;
@@ -1495,17 +1497,17 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	    && !quote && !current_panel->searching) {
 	    if (!only_leading_plus_minus) {
 		/* Special treatement, since the input line will eat them */
-		if (parm == '+') {
+		if (key == '+') {
 		    select_cmd ();
 		    return MSG_HANDLED;
 		}
 
-		if (parm == '\\' || parm == '-') {
+		if (key == '\\' || key == '-') {
 		    unselect_cmd ();
 		    return MSG_HANDLED;
 		}
 
-		if (parm == '*') {
+		if (key == '*') {
 		    reverse_selection_cmd ();
 		    return MSG_HANDLED;
 		}
@@ -1514,24 +1516,24 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 		 * first char on input line
 		 */
 
-		if (parm == '+') {
+		if (key == '+') {
 		    select_cmd ();
 		    return MSG_HANDLED;
 		}
 
-		if (parm == '\\' || parm == '-') {
+		if (key == '\\' || key == '-') {
 		    unselect_cmd ();
 		    return MSG_HANDLED;
 		}
 
-		if (parm == '*') {
+		if (key == '*') {
 		    reverse_selection_cmd ();
 		    return MSG_HANDLED;
 		}
 	    }
 	}
 	return MSG_NOT_HANDLED;
-
+    }
     case DLG_HOTKEY_HANDLED:
 	if ((get_current_type () == view_listing) && current_panel->searching) {
 	    current_panel->searching = 0;
@@ -1540,26 +1542,28 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     case DLG_UNHANDLED_KEY:
+    {
+	int key = *((int *) data);
 	if (command_prompt) {
 	    cb_ret_t v;
 
-	    v = send_message ((Widget *) cmdline, WIDGET_KEY, parm);
+	    v = send_message ((Widget *) cmdline, WIDGET_KEY, data);
 	    if (v == MSG_HANDLED)
 		return MSG_HANDLED;
 	}
 	if (ctl_x_map_enabled) {
 	    ctl_x_map_enabled = 0;
 	    for (i = 0; main_x_map[i].key; i++)
-		if (parm == main_x_map[i].key)
+		if (key == main_x_map[i].key)
 		    return midnight_execute_cmd (main_x_map[i].command);
 	} else {
 	    for (i = 0; main_map[i].key; i++) {
-		if (parm == main_map[i].key)
+		if (key == main_map[i].key)
 		    return midnight_execute_cmd (main_map[i].command);
 	    }
 	}
 	return MSG_NOT_HANDLED;
-
+    }
     case DLG_DRAW:
 	load_hint (1);
 	/* We handle the special case of the output lines */
@@ -1575,7 +1579,7 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     default:
-	return default_dlg_callback (h, msg, parm);
+	return default_dlg_callback (h, msg, data);
     }
 }
 

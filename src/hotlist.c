@@ -437,7 +437,7 @@ hotlist_button_callback (int action)
 }
 
 static cb_ret_t
-hotlist_callback (Dlg_head *h, dlg_msg_t msg, int parm)
+hotlist_callback (Dlg_head *h, dlg_msg_t msg, gpointer data)
 {
     switch (msg) {
     case DLG_DRAW:
@@ -445,7 +445,9 @@ hotlist_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     case DLG_UNHANDLED_KEY:
-	switch (parm) {
+    {
+	int key = *((int *) data);
+	switch (key) {
 	case KEY_M_CTRL | '\n':
 	    goto l1;
 	case '\n':
@@ -492,7 +494,7 @@ hotlist_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	    return MSG_HANDLED;	/* ignore key */
 	}
 	return MSG_NOT_HANDLED;
-
+    }
     case DLG_POST_KEY:
 	if (hotlist_state.moving)
 	    dlg_select_widget (l_movelist);
@@ -512,13 +514,14 @@ hotlist_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     default:
-	return default_dlg_callback (h, msg, parm);
+	return default_dlg_callback (h, msg, data);
     }
 }
 
 static int l_call (WListbox *list)
 {
     Dlg_head *dlg = list->widget.parent;
+    int key;
 
     if (list->current){
 	if (list->current->data) {
@@ -528,8 +531,9 @@ static int l_call (WListbox *list)
 		dlg_stop (dlg);
 		return LISTBOX_DONE;
 	    } else {
+		key = '\n';
 		hotlist_button_callback (B_ENTER);
-		hotlist_callback (dlg, DLG_POST_KEY, '\n');
+		hotlist_callback (dlg, DLG_POST_KEY, (gpointer) &key);
 		return LISTBOX_CONT;
 	    }
 	} else {
@@ -540,7 +544,8 @@ static int l_call (WListbox *list)
     }
 
     hotlist_button_callback (B_UP_GROUP);
-    hotlist_callback (dlg, DLG_POST_KEY, 'u');
+    key = 'u';
+    hotlist_callback (dlg, DLG_POST_KEY, (gpointer) &key);
     return LISTBOX_CONT;
 }
 

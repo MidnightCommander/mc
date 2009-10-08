@@ -127,8 +127,10 @@ mcview_continue_search_cmd (mcview_t * view)
 
 /* Check for left and right arrows, possibly with modifiers */
 static cb_ret_t
-mcview_check_left_right_keys (mcview_t * view, int c)
+mcview_check_left_right_keys (mcview_t * view, gpointer data)
 {
+    int c = *((int *) data);
+
     if (c == KEY_LEFT) {
         mcview_move_left (view, 1);
         return MSG_HANDLED;
@@ -229,10 +231,12 @@ mcview_hook (void *v)
 
 /* --------------------------------------------------------------------------------------------- */
 static cb_ret_t
-mcview_handle_editkey (mcview_t * view, int key)
+mcview_handle_editkey (mcview_t * view, gpointer data)
 {
     struct hexedit_change_node *node;
     int byte_val;
+    int key = *((int *) data);
+
     /* Has there been a change at this position? */
     node = view->change_list;
     while (node && (node->offset != view->hex_cursor))
@@ -284,10 +288,10 @@ mcview_handle_editkey (mcview_t * view, int key)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-mcview_execute_cmd (mcview_t * view, int command, int key)
+mcview_execute_cmd (mcview_t * view, int command, gpointer data)
 {
     int res = MSG_HANDLED;
-    (void) key;
+    (void) data;
 
     switch (command) {
     case CK_HexViewToggleNavigationMode:
@@ -383,29 +387,30 @@ mcview_execute_cmd (mcview_t * view, int command, int key)
 
 /* Both views */
 static cb_ret_t
-mcview_handle_key (mcview_t * view, int key)
+mcview_handle_key (mcview_t * view, gpointer data)
 {
     int i;
+    int key = *((int *) data);
 
     key = convert_from_input_c (key);
 
     if (view->hex_mode) {
         if (view->hexedit_mode)
-            if (mcview_handle_editkey (view, key) == MSG_HANDLED)
+            if (mcview_handle_editkey (view, data) == MSG_HANDLED)
                 return MSG_HANDLED;
         for (i = 0; view->hex_map[i].key != 0; i++)
             if ((key == view->hex_map[i].key)
                 && (mcview_execute_cmd (view, view->hex_map[i].command,
-                                        key) == MSG_HANDLED))
+                                        data) == MSG_HANDLED))
                     return MSG_HANDLED;
     }
     for (i = 0; view->plain_map[i].key != 0; i++)
         if ((key == view->plain_map[i].key)
             && (mcview_execute_cmd (view, view->plain_map[i].command,
-                                    key) == MSG_HANDLED))
+                                    data) == MSG_HANDLED))
                 return MSG_HANDLED;
 
-    if (mcview_check_left_right_keys (view, key))
+    if (mcview_check_left_right_keys (view, data))
         return MSG_HANDLED;
 
     if (check_movement_keys (key, view->data_area.height + 1, view,
@@ -433,7 +438,7 @@ mcview_handle_key (mcview_t * view, int key)
 /* --------------------------------------------------------------------------------------------- */
 
 cb_ret_t
-mcview_callback (Widget * w, widget_msg_t msg, int parm)
+mcview_callback (Widget * w, widget_msg_t msg, gpointer data)
 {
     mcview_t *view = (mcview_t *) w;
     cb_ret_t i;
@@ -460,7 +465,7 @@ mcview_callback (Widget * w, widget_msg_t msg, int parm)
         return MSG_HANDLED;
 
     case WIDGET_KEY:
-        i = mcview_handle_key ((mcview_t *) view, parm);
+        i = mcview_handle_key ((mcview_t *) view, data);
         if (view->want_to_quit && !mcview_is_in_panel (view))
             dlg_stop (h);
         else {
@@ -480,14 +485,14 @@ mcview_callback (Widget * w, widget_msg_t msg, int parm)
         return MSG_HANDLED;
 
     default:
-        return default_proc (msg, parm);
+        return default_proc (msg, data);
     }
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 cb_ret_t
-mcview_dialog_callback (Dlg_head * h, dlg_msg_t msg, int parm)
+mcview_dialog_callback (Dlg_head * h, dlg_msg_t msg, gpointer data)
 {
     switch (msg) {
     case DLG_RESIZE:
@@ -495,7 +500,7 @@ mcview_dialog_callback (Dlg_head * h, dlg_msg_t msg, int parm)
         return MSG_HANDLED;
 
     default:
-        return default_dlg_callback (h, msg, parm);
+        return default_dlg_callback (h, msg, data);
     }
 }
 

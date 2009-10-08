@@ -78,7 +78,7 @@ static char **displays_status;
 static int display_user_hotkey = 'u';
 
 static cb_ret_t
-display_callback (Dlg_head *h, dlg_msg_t msg, int parm)
+display_callback (Dlg_head *h, dlg_msg_t msg, gpointer data)
 {
     switch (msg) {
     case DLG_UNFOCUS:
@@ -89,7 +89,9 @@ display_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     case DLG_KEY:
-	if (parm == '\n') {
+    {
+	int key = *((int *) data);
+	if (key == '\n') {
 	    if (dlg_widget_active (display_radio)) {
 		assign_text (display_mini_status, displays_status[display_radio->sel]);
 		dlg_stop (h);
@@ -109,7 +111,7 @@ display_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	    }
 	}
 
-	if (g_ascii_tolower (parm) == display_user_hotkey && dlg_widget_active (display_user_format)
+	if (g_ascii_tolower (key) == display_user_hotkey && dlg_widget_active (display_user_format)
 	    && dlg_widget_active (display_mini_status)) {
 	    display_radio->sel = 3;
 	    dlg_select_widget (display_radio);	/* force redraw */
@@ -117,9 +119,9 @@ display_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	    return MSG_HANDLED;
 	}
 	return MSG_NOT_HANDLED;
-
+    }
     default:
-	return default_dlg_callback (h, msg, parm);
+	return default_dlg_callback (h, msg, data);
     }
 }
 
@@ -640,20 +642,22 @@ display_bits_box (void)
 #define TREE_X 60
 
 static cb_ret_t
-tree_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
+tree_callback (struct Dlg_head *h, dlg_msg_t msg, gpointer data)
 {
     switch (msg) {
 
     case DLG_POST_KEY:
+    {
+	int key = *((int *) data);
 	/* The enter key will be processed by the tree widget */
-	if (parm == '\n') {
+	if (key == '\n') {
 	    h->ret_value = B_ENTER;
 	    dlg_stop (h);
 	}
 	return MSG_HANDLED;
-	
+    }
     default:
-	return default_dlg_callback (h, msg, parm);
+	return default_dlg_callback (h, msg, data);
     }
 }
 

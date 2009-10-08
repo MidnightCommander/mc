@@ -65,7 +65,7 @@ menu_cmd (int command)
 
 static void menu_key (int i)
 {
-    send_message ((Widget *) wedit, WIDGET_KEY, i);
+    send_message ((Widget *) wedit, WIDGET_KEY, (gpointer) &i);
 }
 
 static void

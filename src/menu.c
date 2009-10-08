@@ -350,7 +350,7 @@ static int menubar_handle_key (WMenu *menubar, int key)
 }
 
 static cb_ret_t
-menubar_callback (Widget *w, widget_msg_t msg, int parm)
+menubar_callback (Widget *w, widget_msg_t msg, gpointer data)
 {
     WMenu *menubar = (WMenu *) w;
 
@@ -375,12 +375,14 @@ menubar_callback (Widget *w, widget_msg_t msg, int parm)
 	/* We don't want the buttonbar to activate while using the menubar */
     case WIDGET_HOTKEY:
     case WIDGET_KEY:
+    {
+	int key = *((int *) data);
 	if (menubar->active) {
-	    menubar_handle_key (menubar, parm);
+	    menubar_handle_key (menubar, key);
 	    return MSG_HANDLED;
 	} else
 	    return MSG_NOT_HANDLED;
-
+    }
     case WIDGET_CURSOR:
 	/* Put the cursor in a suitable place */
 	return MSG_NOT_HANDLED;
@@ -406,7 +408,7 @@ menubar_callback (Widget *w, widget_msg_t msg, int parm)
 	return MSG_HANDLED;
 	
     default:
-	return default_proc (msg, parm);
+	return default_proc (msg, data);
     }
 }
 

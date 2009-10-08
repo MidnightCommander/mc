@@ -160,7 +160,7 @@ static void chmod_refresh (Dlg_head *h)
 }
 
 static cb_ret_t
-chmod_callback (Dlg_head *h, dlg_msg_t msg, int parm)
+chmod_callback (Dlg_head *h, dlg_msg_t msg, gpointer data)
 {
     char buffer[BUF_TINY];
     int id = h->current->dlg_id - BUTTONS + single_set * 2;
@@ -177,20 +177,22 @@ chmod_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     case DLG_KEY:
-	if ((parm == 'T' || parm == 't' || parm == KEY_IC) && id > 0) {
+    {
+	int key = *((int *) data);
+	if ((key == 'T' || key == 't' || key == KEY_IC) && id > 0) {
 	    chmod_toggle_select (h, id);
-	    if (parm == KEY_IC)
+	    if (key == KEY_IC)
 		dlg_one_down (h);
 	    return MSG_HANDLED;
 	}
 	return MSG_NOT_HANDLED;
-
+    }
     case DLG_DRAW:
 	chmod_refresh (h);
 	return MSG_HANDLED;
 
     default:
-	return default_dlg_callback (h, msg, parm);
+	return default_dlg_callback (h, msg, data);
     }
 }
 

@@ -294,7 +294,7 @@ static int bminus_cback (int action)
 }
 
 static cb_ret_t
-layout_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
+layout_callback (struct Dlg_head *h, dlg_msg_t msg, gpointer data)
 {
     switch (msg) {
     case DLG_DRAW:
@@ -366,7 +366,7 @@ layout_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     default:
-        return default_dlg_callback (h, msg, parm);
+        return default_dlg_callback (h, msg, data);
     }
 }
 
