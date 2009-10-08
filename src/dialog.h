@@ -27,11 +27,13 @@
 #include "util.h" /* Hook */
 
 /* Common return values */
-#define B_EXIT		0
-#define B_CANCEL	1
-#define B_ENTER		2
-#define B_HELP		3
-#define B_USER          100
+typedef enum {
+    B_EXIT	= 0,
+    B_CANCEL	= 1,
+    B_ENTER	= 2,
+    B_HELP	= 3,
+    B_USER	= 100
+} dialog_common_return_t;
 
 /* Widget messages */
 typedef enum {

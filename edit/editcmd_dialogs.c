@@ -445,7 +445,7 @@ editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, int max_l
     run_dlg (def_dlg);
 
     /* apply the choosen completion */
-    if (*((int *)def_dlg->ret_value) == B_ENTER) {
+    if ( def_dlg->ret_value == B_ENTER) {
         char *tmp_curr_def = (char *) curr_def;
         int do_moveto = 0;
 

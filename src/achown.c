@@ -67,6 +67,8 @@
 #define B_OTH           (B_USER + 5)
 #define B_OUSER         (B_USER + 6)
 #define B_OGROUP        (B_USER + 7)
+#define B_KEY_LEFT      (B_USER + 8)
+#define B_KEY_RIGHT     (B_USER + 9)
 
 static struct Dlg_head *ch_dlg;
 
@@ -233,8 +235,11 @@ chl_callback (Dlg_head *h, dlg_msg_t msg, gpointer data)
 	int key = *((int *)data);
 	switch (key) {
 	case KEY_LEFT:
+	    h->ret_value = B_KEY_LEFT;
+	    dlg_stop (h);
+	break;
 	case KEY_RIGHT:
-	    h->ret_value = key; // must be tty_key_t
+	    h->ret_value = B_KEY_RIGHT;
 	    dlg_stop (h);
 	}
     }
@@ -326,12 +331,12 @@ do_enter_key (Dlg_head * h, int f_pos)
 	    if (ok)
 		print_flags ();
 	}
-	if (chl_dlg->ret_value == KEY_LEFT) {
+	if (chl_dlg->ret_value == B_KEY_LEFT) {
 	    if (!is_owner)
 		chl_end = 1;
 	    dlg_one_up (ch_dlg);
 	    f_pos--;
-	} else if (chl_dlg->ret_value == KEY_RIGHT) {
+	} else if (chl_dlg->ret_value == B_KEY_RIGHT) {
 	    if (is_owner)
 		chl_end = 1;
 	    dlg_one_down (ch_dlg);
