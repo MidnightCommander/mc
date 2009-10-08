@@ -1404,13 +1404,11 @@ save_file_position (const char *filename, long line, long column)
     char *fn;
     FILE *f;
 
-
     fn =  g_build_filename (home_dir, MC_USERCONF_DIR, MC_FILEPOS_FILE, NULL);
     if (fn == NULL)
 	return;
 
-    if (! mc_util_make_backup_if_possible (fn, ".tmp"))
-	return;
+    mc_util_make_backup_if_possible (fn, ".tmp");
 
     /* open file */
     f = fopen (fn, "a");
@@ -1424,13 +1422,14 @@ save_file_position (const char *filename, long line, long column)
 	if (fprintf (f, "%s %ld;%ld\n", filename, line, column) < 0) {
 	    fclose (f);
 	    mc_util_restore_from_backup_if_possible (fn, ".tmp");
+	    g_free (fn);
+	    return;
 	}
-    } else
-	fclose (f);
+    }
 
+    fclose (f);
     mc_util_unlink_backup_if_possible (fn, ".tmp");
     g_free (fn);
-
 }
 
 extern const char *
@@ -1486,7 +1485,6 @@ mc_util_make_backup_if_possible (const char *file_name, const char *backup_suffi
     struct stat stat_buf;
     char *backup_path;
     gboolean ret;
-
     if (!exist_file (file_name))
 	return FALSE;
 
