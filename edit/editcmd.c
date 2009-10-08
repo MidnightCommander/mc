@@ -48,7 +48,7 @@
 #include "../src/global.h"
 
 #include "../src/tty/tty.h"
-#include "../src/tty/key.h"	/* XCTRL */
+#include "../src/tty/key.h"
 
 #include "../src/history.h"
 #include "../src/widget.h"	/* listbox_new() */

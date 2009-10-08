@@ -15,8 +15,6 @@ enum {
     KEY_ENTER, KEY_DC, KEY_SCANCEL, KEY_BTAB
 };
 
-#define KEY_F(x)	(1000 + x)
-
 #define ACS_VLINE		SLSMG_VLINE_CHAR
 #define ACS_HLINE		SLSMG_HLINE_CHAR
 #define ACS_LTEE		SLSMG_LTEE_CHAR

@@ -45,7 +45,7 @@
 #include "edit-widget.h"
 
 #include "../src/tty/tty.h"	/* KEY_F */
-#include "../src/tty/key.h"	/* XCTRL */
+#include "../src/tty/key.h"
 
 #include "../src/cmd.h"		/* save_setup_cmd() */
 #include "../src/wtools.h"	/* query_dialog() */
@@ -63,9 +63,9 @@ menu_cmd (int command)
     edit_update_screen (wedit);
 }
 
-static void menu_key (int i)
+static void menu_key (tty_key_t key)
 {
-    send_message ((Widget *) wedit, WIDGET_KEY, (gpointer) &i);
+    send_message ((Widget *) wedit, WIDGET_KEY, (gpointer) &key);
 }
 
 static void
@@ -244,7 +244,7 @@ menu_end_record_cmd (void)
 static void
 menu_exec_macro_cmd (void)
 {
-    menu_key (XCTRL ('a'));
+    menu_key (HOTKEY(KEY_M_CTRL, L'a'));
 }
 
 static void
@@ -256,7 +256,7 @@ menu_exec_macro_delete_cmd (void)
 static void
 menu_c_form_cmd (void)
 {
-    menu_key (KEY_F (19));
+    menu_key (HOTKEY(KEY_M_F, 19));
 }
 
 static void
@@ -328,7 +328,7 @@ menu_goto_bracket (void)
 static void
 menu_lit_cmd (void)
 {
-    menu_key (XCTRL ('q'));
+    menu_key (HOTKEY( KEY_M_CTRL , L'q'));
 }
 
 static void
@@ -352,7 +352,7 @@ menu_edit_menu_file_cmd (void)
 static void
 menu_user_menu_cmd (void)
 {
-    menu_key (KEY_F (11));
+    menu_key (HOTKEY(KEY_M_F, 11));
 }
 
 static void
@@ -640,28 +640,27 @@ void edit_menu_cmd (WEdit * e)
 }
 
 
-int edit_drop_hotkey_menu (WEdit * e, int key)
+int edit_drop_hotkey_menu (WEdit * e, tty_key_t *key)
 {
     int m = 0;
-    switch (key) {
-    case ALT ('f'):
+
+    if ( tty_key_compare(key, KEY_M_ALT, L'f') ) {
 	if (edit_key_emulation == EDIT_KEY_EMULATION_EMACS)
 	    return 0;
 	m = 0;
-	break;
-    case ALT ('e'):
+    } else
+    if ( tty_key_compare(key, KEY_M_ALT, L'e') ) {
 	m = 1;
-	break;
-    case ALT ('s'):
+    } else
+    if ( tty_key_compare(key, KEY_M_ALT, L's') ) {
 	m = 2;
-	break;
-    case ALT ('c'):
+    } else
+    if ( tty_key_compare(key, KEY_M_ALT, L'c') ) {
 	m = 3;
-	break;
-    case ALT ('o'):
+    } else
+    if ( tty_key_compare(key, KEY_M_ALT, L'o') ) {
 	m = 4;
-	break;
-    default:
+    } else {
 	return 0;
     }
 

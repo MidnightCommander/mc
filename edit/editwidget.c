@@ -237,63 +237,63 @@ static void edit_my_define (Dlg_head * h, int idx, const char *text,
 
 static void cmd_F1 (WEdit * edit)
 {
-    int key = KEY_F (1);
+    tty_key_t key = HOTKEY( KEY_M_F , 1);
     send_message ((Widget *) edit, WIDGET_KEY, (gpointer) &key);
 }
 
 static void cmd_F2 (WEdit * edit)
 {
-    int key = KEY_F (2);
+    tty_key_t key = HOTKEY( KEY_M_F , 2);
     send_message ((Widget *) edit, WIDGET_KEY, (gpointer) &key);
 }
 
 static void cmd_F3 (WEdit * edit)
 {
-    int key = KEY_F (3);
+    tty_key_t key = HOTKEY( KEY_M_F , 3);
     send_message ((Widget *) edit, WIDGET_KEY, (gpointer) &key);
 }
 
 static void cmd_F4 (WEdit * edit)
 {
-    int key = KEY_F (4);
+    tty_key_t key = HOTKEY( KEY_M_F , 4);
     send_message ((Widget *) edit, WIDGET_KEY, (gpointer) &key);
 }
 
 static void cmd_F5 (WEdit * edit)
 {
-    int key = KEY_F (5);
+    tty_key_t key = HOTKEY( KEY_M_F , 5);
     send_message ((Widget *) edit, WIDGET_KEY, (gpointer) &key);
 }
 
 static void cmd_F6 (WEdit * edit)
 {
-    int key = KEY_F (6);
+    tty_key_t key = HOTKEY( KEY_M_F , 6);
     send_message ((Widget *) edit, WIDGET_KEY, (gpointer) &key);
 }
 
 static void cmd_F7 (WEdit * edit)
 {
-    int key = KEY_F (7);
+    tty_key_t key = HOTKEY( KEY_M_F , 7);
     send_message ((Widget *) edit, WIDGET_KEY, (gpointer) &key);
 }
 
 static void cmd_F8 (WEdit * edit)
 {
-    int key = KEY_F (8);
+    tty_key_t key = HOTKEY( KEY_M_F , 8);
     send_message ((Widget *) edit, WIDGET_KEY, (gpointer) &key);
 }
 
 #if 0
 static void cmd_F9 (WEdit * edit)
 {
-    int key = KEY_F (9);
+    tty_key_t key = HOTKEY( KEY_M_F , 9);
     send_message ((Widget *) edit, WIDGET_KEY, (gpointer) &key);
 }
 #endif
 
 static void cmd_F10 (WEdit * edit)
 {
-    int key = KEY_F (10);
+    tty_key_t key = HOTKEY( KEY_M_F , 10);
     send_message ((Widget *) edit, WIDGET_KEY, (gpointer) &key);
 }
 
@@ -364,7 +364,7 @@ edit_callback (Widget *w, widget_msg_t msg, gpointer data)
 		edit_execute_key_command (e, cmd, ch);
 		edit_update_screen (e);
 		return MSG_HANDLED;
-	    } else  if (edit_drop_hotkey_menu (e, *((int *)data))) {
+	    } else  if (edit_drop_hotkey_menu (e, (tty_key_t *) data )) {
 		return MSG_HANDLED;
 	    } else {
 		return MSG_NOT_HANDLED;

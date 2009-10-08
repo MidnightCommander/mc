@@ -33,6 +33,7 @@
 #include <stdio.h>
 
 #include "../edit/edit.h"
+#include "../src/tty/key.h"
 
 #define SEARCH_DIALOG_OPTION_NO_SCANF	(1 << 0)
 #define SEARCH_DIALOG_OPTION_NO_REGEX	(1 << 1)
@@ -143,7 +144,7 @@ typedef enum {
 extern const char VERTICAL_MAGIC[5];
 /* if enable_show_tabs_tws ==1 then use visible_tab visible_tws */
 extern int enable_show_tabs_tws;
-int edit_drop_hotkey_menu (WEdit *e, int key);
+int edit_drop_hotkey_menu (WEdit *e, tty_key_t*);
 void edit_menu_cmd (WEdit *e);
 struct WMenu *edit_create_menu (void);
 void edit_done_menu (struct WMenu *wmenu);
