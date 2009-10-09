@@ -14,7 +14,7 @@ endif
 TTY_SRC = \
 	color-internal.c color-internal.h \
 	color.c color.h \
-	key.c key.h keyxdef.c \
+	key-parse.c key.c key.h key-internal.h keystruct.h keyxdef.c \
 	mouse.c mouse.h \
 	tty.c tty.h tty-internal.h \
 	win.c win.h \

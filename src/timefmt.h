@@ -42,7 +42,7 @@
     {								\
 	time_t __current_time;					\
 	time(&__current_time);					\
-	FMT_LOCALTIME(buffer,bufsize,fmt,__current_time);	\
+	FMT_LOCALTIME(buffer,bufsize,fmt,&__current_time);	\
     }
 
 #endif				/* !__UTIL_H */

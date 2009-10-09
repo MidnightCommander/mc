@@ -24,6 +24,7 @@
 #define MC_DIALOG_H
 
 #include "../src/tty/mouse.h"
+#include "../src/tty/keystruct.h"
 #include "util.h" /* Hook */
 
 /* Common return values */
@@ -102,6 +103,7 @@ typedef struct Dlg_head {
 
     /* Set and received by the user */
     int ret_value;		/* Result of run_dlg() */
+    tty_key_t ret_key;
 
     /* Geometry */
     int x, y;			/* Position relative to screen origin */

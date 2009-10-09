@@ -137,6 +137,9 @@ void refresh_screen (void *);
 #define ESC_CHAR '\033'
 #define ESC_STR  "\033"
 
+#define W_ESC_CHAR L'\033'
+#define W_ESC_STR  L"\033"
+
 /* C++ style type casts */
 #define const_cast(m_type, m_expr) ((m_type) (m_expr))
 

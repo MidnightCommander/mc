@@ -293,7 +293,12 @@ editcmd_dialog_raw_key_query (const char *heading, const char *query, int cancel
     w = run_dlg (raw_dlg);
     destroy_dlg (raw_dlg);
     if (cancel) {
-        if (w == XCTRL ('g') || w == XCTRL ('c') || w == ESC_CHAR || w == B_CANCEL)
+        if (
+            tty_key_compare(&raw_dlg->ret_key, KEY_M_CTRL, L'g')  ||
+            tty_key_compare(&raw_dlg->ret_key, KEY_M_CTRL, L'c')  ||
+            tty_key_compare(&raw_dlg->ret_key, KEY_M_CTRL, W_ESC_CHAR)  ||
+            w == B_CANCEL
+        )
             return 0;
     }
 

@@ -10,8 +10,9 @@
 #include "../../src/dialog.h"   /* cb_ret_t */
 
 #include "../../src/tty/tty.h"  /* KEY_F macro */
+#include "../../src/tty/keystruct.h"  /* KEY_F macro */
 
-gboolean define_sequence (int code, const char *seq, int action);
+gboolean define_sequence (tty_key_t, const char *, int);
 
 void init_key (void);
 void init_key_input_fd (void);
@@ -19,15 +20,9 @@ void done_key (void);
 
 /* Keys management */
 typedef void (*move_fn) (void *data, int param);
-cb_ret_t check_movement_keys (int key, int page_size, void *data,
-                              move_fn backfn, move_fn forfn, move_fn topfn, move_fn bottomfn);
-int lookup_keyname (char *keyname);
-int lookup_key (char *keyname);
-
-typedef struct tty_key_struct{
-    int modificator;
-    gunichar code;
-} tty_key_t;
+cb_ret_t check_movement_keys (tty_key_t, int, void *, move_fn, move_fn, move_fn, move_fn);
+tty_key_t lookup_keyname (const char *);
+tty_key_t lookup_key (const char *);
 
 typedef const struct {
     tty_key_t code;
@@ -47,20 +42,6 @@ int tty_getch (void);
 #define EV_MOUSE   -2
 #define EV_NONE    -1
 
-/*
- * Internal representation of the key modifiers.  It is used in the
- * sequence tables and the keycodes in the mc sources.
- */
-
-typedef enum {
-    KEY_M_INVALID = -1,
-    KEY_M_NONE  = 0,
-    KEY_M_F     = (1 << 0),
-    KEY_M_SHIFT = (1 << 1),
-    KEY_M_ALT   = (1 << 2),
-    KEY_M_CTRL  = (1 << 3),
-} tty_key_modificators_t;
-
 extern int alternate_plus_minus;
 extern int double_click_speed;
 extern int old_esc_mode;
@@ -78,25 +59,6 @@ void remove_select_channel (int fd);
 /* Activate/deactivate the channel checking */
 void channels_up (void);
 void channels_down (void);
-
-#define HOTKEY(x,y) (tty_key_t){x,y}
-
-static inline gboolean
-tty_key_compare(tty_key_t *key, int modificator, gunichar code)
-{
- if (modificator == KEY_M_NONE || modificator == KEY_M_INVALID)
-    return key->code == code;
-
- if (code == 0)
-    return key->modificator == modificator;
-  return ((key->code == code) && (key->modificator == modificator));
-}
-
-static inline gboolean
-tty_key_cmp(tty_key_t *key1, tty_key_t *key2)
-{
-    return tty_key_compare(key1, key2->modificator, key2->code);
-}
 
 static inline gboolean
 is_abort_char (tty_key_t c)
@@ -123,7 +85,7 @@ void load_xtra_key_defines (void);
 char *learn_key (void);
 
 /* Returns a key code (interpreted) */
-int get_key_code (int nodelay);
+tty_key_t get_key_code (int nodelay);
 
 /* Set keypad mode (xterm and linux console only) */
 void numeric_keypad_mode (void);
