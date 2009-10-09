@@ -383,6 +383,9 @@ shell/.xpm
 	Include=image
 	View=sxpm %f
 
+shell/.ico
+	Include=image
+
 include/image
 	Open=if [ "$DISPLAY" = "" ]; then zgv %f; else (gqview %f &); fi
 	View=%view{ascii} identify %f
