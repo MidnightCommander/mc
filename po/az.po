@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-01 02:39+0300\n"
+"POT-Creation-Date: 2009-10-09 09:50+0300\n"
 "PO-Revision-Date: 2001-09-26 16:43GMT +0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
@@ -576,7 +576,7 @@ msgid "Forward to declaration    M-+"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             C-t"
+msgid "Encod&ing...             M-e"
 msgstr "sü&z...\t\t\t\tM-t"
 
 msgid "Insert &literal...       C-q"
@@ -772,54 +772,6 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " %s faylında %d sətirinda xəta oldu "
-
-#, c-format
-msgid "bind: Wrong argument number, bind <key> <command>"
-msgstr ""
-
-#, c-format
-msgid "bind: Bad key value `%s'"
-msgstr ""
-
-#, c-format
-msgid "bind: Ehh...no key?"
-msgstr ""
-
-#, c-format
-msgid "bind: Unknown key: `%s'"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "bind: Unknown command: `%s'"
-msgstr " Chown əmri "
-
-#, c-format
-msgid "%s: Syntax: %s <n> <command> <label>"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: Unknown command: `%s'"
-msgstr " Chown əmri "
-
-#, c-format
-msgid "%s: fn should be 1-10"
-msgstr ""
-
-#, c-format
-msgid "%s: fopen(): %s"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s:%d: unknown command `%s'"
-msgstr " Chown əmri "
-
-#, c-format
-msgid "%s:%d: %s"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s not found!"
-msgstr "Xəbərdarlıq: %s faylı tapılmadı\n"
 
 msgid "&Set"
 msgstr "&Seç"
@@ -1473,30 +1425,6 @@ msgstr " Yerli olmayan fayl sistemləri üstündə fayl işə sala bilməzsiniz 
 
 msgid " The shell is already running a command "
 msgstr " Shell artıq əmri işə salıb "
-
-msgid "&Unsorted"
-msgstr "&Süzülməmiş"
-
-msgid "&Name"
-msgstr "&Ad"
-
-msgid "&Extension"
-msgstr "&Uzantı"
-
-msgid "&Modify time"
-msgstr "&Vaxtı düzəlt"
-
-msgid "&Access time"
-msgstr "&Çatma vaxtı"
-
-msgid "C&Hange time"
-msgstr "&Dəyişdirilmə vaxtı"
-
-msgid "&Size"
-msgstr "&Böyüklük"
-
-msgid "&Inode"
-msgstr "&Inode"
 
 #, fuzzy
 msgid "Cannot read directory contents"
@@ -2451,8 +2379,9 @@ msgstr "&Sıralama əmri..."
 msgid "&Filter..."
 msgstr "&Süzgəc ..."
 
-msgid "&Encoding...    C-t"
-msgstr ""
+#, fuzzy
+msgid "&Encoding...    M-e"
+msgstr "sü&z...\t\t\t\tM-t"
 
 msgid "&Network link..."
 msgstr "Ş&əbəkə bağı ..."
@@ -2786,17 +2715,79 @@ msgstr ""
 msgid "SUB-DIR"
 msgstr "SUB-DIR"
 
+#. TRANSLATORS: one single character to represent 'unsorted' sort mode
+msgid "u"
+msgstr ""
+
+#, fuzzy
+msgid "Unsorted"
+msgstr "&Süzülməmiş"
+
+msgid "&Unsorted"
+msgstr "&Süzülməmiş"
+
+#. TRANSLATORS: one single character to represent 'name' sort mode
+#, fuzzy
+msgid "n"
+msgstr "Aç"
+
+msgid "&Name"
+msgstr "&Ad"
+
+#. TRANSLATORS: one single character to represent 'extension' sort mode
+msgid "e"
+msgstr ""
+
+#, fuzzy
+msgid "Extension"
+msgstr "Uzantı:"
+
+msgid "&Extension"
+msgstr "&Uzantı"
+
+#. TRANSLATORS: one single character to represent 'size' sort mode
+msgid "s"
+msgstr ""
+
 msgid "Size"
 msgstr "Böyüklük"
+
+msgid "&Size"
+msgstr "&Böyüklük"
+
+#, fuzzy
+msgid "Block Size"
+msgstr " Böyüklük "
+
+#. TRANSLATORS: one single character to represent 'Modify time' sort mode
+msgid "m"
+msgstr ""
 
 msgid "MTime"
 msgstr "MTime"
 
+msgid "&Modify time"
+msgstr "&Vaxtı düzəlt"
+
+#. TRANSLATORS: one single character to represent 'Access time' sort mode
+msgid "a"
+msgstr ""
+
 msgid "ATime"
 msgstr "ATime"
 
+msgid "&Access time"
+msgstr "&Çatma vaxtı"
+
+#. TRANSLATORS: one single character to represent 'Change time' sort mode
+msgid "h"
+msgstr ""
+
 msgid "CTime"
 msgstr "CTime"
+
+msgid "C&Hange time"
+msgstr "&Dəyişdirilmə vaxtı"
 
 msgid "Permission"
 msgstr "İstifadəhaqları"
@@ -2807,8 +2798,15 @@ msgstr "Perm"
 msgid "Nl"
 msgstr "Nl"
 
+#. TRANSLATORS: one single character to represent 'inode' sort mode
+msgid "i"
+msgstr ""
+
 msgid "Inode"
 msgstr "Inode"
+
+msgid "&Inode"
+msgstr "&Inode"
 
 msgid "UID"
 msgstr "UID"
@@ -3150,6 +3148,10 @@ msgstr "düymə lövhəsi üstündəki Insert düyməsi"
 
 msgid "Delete on keypad"
 msgstr "düymə lövhəsi üstündəki sil (delete) düyməsi"
+
+#, fuzzy
+msgid "Escape key"
+msgstr "düymə lövhəsi üstündəki Slash düyməsi"
 
 msgid "Enter on keypad"
 msgstr "düymə lövhəsi üstündəki Enter düyməsi"
@@ -3943,6 +3945,22 @@ msgstr "Daxili xəta :"
 
 msgid "Changes to file lost"
 msgstr "Dəyişiklikləri itirdim"
+
+#, fuzzy
+#~ msgid "bind: Unknown command: `%s'"
+#~ msgstr " Chown əmri "
+
+#, fuzzy
+#~ msgid "%s: Unknown command: `%s'"
+#~ msgstr " Chown əmri "
+
+#, fuzzy
+#~ msgid "%s:%d: unknown command `%s'"
+#~ msgstr " Chown əmri "
+
+#, fuzzy
+#~ msgid "%s not found!"
+#~ msgstr "Xəbərdarlıq: %s faylı tapılmadı\n"
 
 #~ msgid "NumLock on keypad"
 #~ msgstr "düymə lövhəsi üstündəki NumLock düyməsi"

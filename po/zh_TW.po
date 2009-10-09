@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-01 02:39+0300\n"
+"POT-Creation-Date: 2009-10-09 09:50+0300\n"
 "PO-Revision-Date: 2001-07-27 03:02+0800\n"
 "Last-Translator: Jing-Jong Shyue <shyue@sonoma.com.tw>\n"
 "Language-Team: Chinese <zh-l10n@linux.org.tw>\n"
@@ -575,7 +575,7 @@ msgid "Forward to declaration    M-+"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             C-t"
+msgid "Encod&ing...             M-e"
 msgstr "排序...                  M-t"
 
 msgid "Insert &literal...       C-q"
@@ -771,54 +771,6 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " 檔案 %s 的第 %d 行有語法錯誤 "
-
-#, c-format
-msgid "bind: Wrong argument number, bind <key> <command>"
-msgstr ""
-
-#, c-format
-msgid "bind: Bad key value `%s'"
-msgstr ""
-
-#, c-format
-msgid "bind: Ehh...no key?"
-msgstr ""
-
-#, c-format
-msgid "bind: Unknown key: `%s'"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "bind: Unknown command: `%s'"
-msgstr " chmod 指令 "
-
-#, c-format
-msgid "%s: Syntax: %s <n> <command> <label>"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: Unknown command: `%s'"
-msgstr " chmod 指令 "
-
-#, c-format
-msgid "%s: fn should be 1-10"
-msgstr ""
-
-#, c-format
-msgid "%s: fopen(): %s"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s:%d: unknown command `%s'"
-msgstr " chmod 指令 "
-
-#, c-format
-msgid "%s:%d: %s"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s not found!"
-msgstr "警告：找不到檔案 %s\n"
 
 msgid "&Set"
 msgstr "設定"
@@ -1472,30 +1424,6 @@ msgstr " 不能在非本地端的檔案系統上執行指令 "
 
 msgid " The shell is already running a command "
 msgstr " 此系統殼正在執行指令中 "
-
-msgid "&Unsorted"
-msgstr "未排序的"
-
-msgid "&Name"
-msgstr "名稱"
-
-msgid "&Extension"
-msgstr "擴充"
-
-msgid "&Modify time"
-msgstr "更動時間"
-
-msgid "&Access time"
-msgstr "存取時間"
-
-msgid "C&Hange time"
-msgstr "改變時間"
-
-msgid "&Size"
-msgstr "大小"
-
-msgid "&Inode"
-msgstr "節點"
 
 #, fuzzy
 msgid "Cannot read directory contents"
@@ -2450,8 +2378,9 @@ msgstr "排列順序..."
 msgid "&Filter..."
 msgstr "過濾器..."
 
-msgid "&Encoding...    C-t"
-msgstr ""
+#, fuzzy
+msgid "&Encoding...    M-e"
+msgstr "排序...                  M-t"
 
 msgid "&Network link..."
 msgstr "網路連結..."
@@ -2786,17 +2715,79 @@ msgstr ""
 msgid "SUB-DIR"
 msgstr "子目錄"
 
+#. TRANSLATORS: one single character to represent 'unsorted' sort mode
+msgid "u"
+msgstr ""
+
+#, fuzzy
+msgid "Unsorted"
+msgstr "未排序的"
+
+msgid "&Unsorted"
+msgstr "未排序的"
+
+#. TRANSLATORS: one single character to represent 'name' sort mode
+#, fuzzy
+msgid "n"
+msgstr "開"
+
+msgid "&Name"
+msgstr "名稱"
+
+#. TRANSLATORS: one single character to represent 'extension' sort mode
+msgid "e"
+msgstr ""
+
+#, fuzzy
+msgid "Extension"
+msgstr "擴充:"
+
+msgid "&Extension"
+msgstr "擴充"
+
+#. TRANSLATORS: one single character to represent 'size' sort mode
+msgid "s"
+msgstr ""
+
 msgid "Size"
 msgstr "大小"
+
+msgid "&Size"
+msgstr "大小"
+
+#, fuzzy
+msgid "Block Size"
+msgstr "大小 "
+
+#. TRANSLATORS: one single character to represent 'Modify time' sort mode
+msgid "m"
+msgstr ""
 
 msgid "MTime"
 msgstr "修改時間"
 
+msgid "&Modify time"
+msgstr "更動時間"
+
+#. TRANSLATORS: one single character to represent 'Access time' sort mode
+msgid "a"
+msgstr ""
+
 msgid "ATime"
 msgstr "存取時間"
 
+msgid "&Access time"
+msgstr "存取時間"
+
+#. TRANSLATORS: one single character to represent 'Change time' sort mode
+msgid "h"
+msgstr ""
+
 msgid "CTime"
 msgstr "建立時間"
+
+msgid "C&Hange time"
+msgstr "改變時間"
 
 msgid "Permission"
 msgstr "權限"
@@ -2807,8 +2798,15 @@ msgstr "權限"
 msgid "Nl"
 msgstr "Nl"
 
+#. TRANSLATORS: one single character to represent 'inode' sort mode
+msgid "i"
+msgstr ""
+
 msgid "Inode"
 msgstr "i 節點"
+
+msgid "&Inode"
+msgstr "節點"
 
 msgid "UID"
 msgstr "UID"
@@ -3151,6 +3149,10 @@ msgstr "數字區的 Insert 鍵"
 
 msgid "Delete on keypad"
 msgstr "數字區的 Del 鍵"
+
+#, fuzzy
+msgid "Escape key"
+msgstr "數字區的 / 鍵"
 
 msgid "Enter on keypad"
 msgstr "數字區的 Enter 鍵"
@@ -3945,6 +3947,22 @@ msgstr "內部錯誤:"
 
 msgid "Changes to file lost"
 msgstr "改變到檔案遺失"
+
+#, fuzzy
+#~ msgid "bind: Unknown command: `%s'"
+#~ msgstr " chmod 指令 "
+
+#, fuzzy
+#~ msgid "%s: Unknown command: `%s'"
+#~ msgstr " chmod 指令 "
+
+#, fuzzy
+#~ msgid "%s:%d: unknown command `%s'"
+#~ msgstr " chmod 指令 "
+
+#, fuzzy
+#~ msgid "%s not found!"
+#~ msgstr "警告：找不到檔案 %s\n"
 
 #~ msgid "NumLock on keypad"
 #~ msgstr "數字區的 NumLock 鍵"

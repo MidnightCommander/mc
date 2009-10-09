@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc \n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-01 02:39+0300\n"
+"POT-Creation-Date: 2009-10-09 09:50+0300\n"
 "PO-Revision-Date: 2000-06-22 00:00+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -573,7 +573,7 @@ msgid "Forward to declaration    M-+"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             C-t"
+msgid "Encod&ing...             M-e"
 msgstr "Sor&tiraj...             M-t"
 
 msgid "Insert &literal...       C-q"
@@ -768,54 +768,6 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Napaka v datoteki %s v vrstici %d"
-
-#, c-format
-msgid "bind: Wrong argument number, bind <key> <command>"
-msgstr ""
-
-#, c-format
-msgid "bind: Bad key value `%s'"
-msgstr ""
-
-#, c-format
-msgid "bind: Ehh...no key?"
-msgstr ""
-
-#, c-format
-msgid "bind: Unknown key: `%s'"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "bind: Unknown command: `%s'"
-msgstr " Chown ukaz "
-
-#, c-format
-msgid "%s: Syntax: %s <n> <command> <label>"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: Unknown command: `%s'"
-msgstr " Chown ukaz "
-
-#, c-format
-msgid "%s: fn should be 1-10"
-msgstr ""
-
-#, c-format
-msgid "%s: fopen(): %s"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s:%d: unknown command `%s'"
-msgstr " Chown ukaz "
-
-#, c-format
-msgid "%s:%d: %s"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s not found!"
-msgstr "Opozorilo: datoteka %s ni bila najdena\n"
 
 msgid "&Set"
 msgstr "&Nastavi"
@@ -1464,30 +1416,6 @@ msgstr " Ukaze lahko izvršujete le na krajevnih datotečnih sistemih"
 
 msgid " The shell is already running a command "
 msgstr " Lupina že izvaja ukaz "
-
-msgid "&Unsorted"
-msgstr "ne&Sortirano"
-
-msgid "&Name"
-msgstr "&Ime"
-
-msgid "&Extension"
-msgstr "&Pripona"
-
-msgid "&Modify time"
-msgstr "Čas &Modifikacije"
-
-msgid "&Access time"
-msgstr "čas &Dostopa"
-
-msgid "C&Hange time"
-msgstr "Čas &Spremembe"
-
-msgid "&Size"
-msgstr "&Velikost"
-
-msgid "&Inode"
-msgstr "&Inode"
 
 msgid "Cannot read directory contents"
 msgstr "Ne morem prebrati vsebine imenika"
@@ -2443,8 +2371,9 @@ msgstr "&Vrstni red..."
 msgid "&Filter..."
 msgstr "&Filter..."
 
-msgid "&Encoding...    C-t"
-msgstr ""
+#, fuzzy
+msgid "&Encoding...    M-e"
+msgstr "Sor&tiraj...             M-t"
 
 msgid "&Network link..."
 msgstr "&Mrežna povezava..."
@@ -2778,17 +2707,79 @@ msgstr "SIMBLINK"
 msgid "SUB-DIR"
 msgstr "POD-IMENIK"
 
+#. TRANSLATORS: one single character to represent 'unsorted' sort mode
+msgid "u"
+msgstr ""
+
+#, fuzzy
+msgid "Unsorted"
+msgstr "ne&Sortirano"
+
+msgid "&Unsorted"
+msgstr "ne&Sortirano"
+
+#. TRANSLATORS: one single character to represent 'name' sort mode
+#, fuzzy
+msgid "n"
+msgstr "Vklopljeno"
+
+msgid "&Name"
+msgstr "&Ime"
+
+#. TRANSLATORS: one single character to represent 'extension' sort mode
+msgid "e"
+msgstr ""
+
+#, fuzzy
+msgid "Extension"
+msgstr "Pripona:"
+
+msgid "&Extension"
+msgstr "&Pripona"
+
+#. TRANSLATORS: one single character to represent 'size' sort mode
+msgid "s"
+msgstr ""
+
 msgid "Size"
 msgstr "Velikost"
+
+msgid "&Size"
+msgstr "&Velikost"
+
+#, fuzzy
+msgid "Block Size"
+msgstr " Velikost "
+
+#. TRANSLATORS: one single character to represent 'Modify time' sort mode
+msgid "m"
+msgstr ""
 
 msgid "MTime"
 msgstr "MČas"
 
+msgid "&Modify time"
+msgstr "Čas &Modifikacije"
+
+#. TRANSLATORS: one single character to represent 'Access time' sort mode
+msgid "a"
+msgstr ""
+
 msgid "ATime"
 msgstr "DČas"
 
+msgid "&Access time"
+msgstr "čas &Dostopa"
+
+#. TRANSLATORS: one single character to represent 'Change time' sort mode
+msgid "h"
+msgstr ""
+
 msgid "CTime"
 msgstr "SČas"
+
+msgid "C&Hange time"
+msgstr "Čas &Spremembe"
 
 msgid "Permission"
 msgstr "Dovoljenje"
@@ -2799,8 +2790,15 @@ msgstr "Dovo"
 msgid "Nl"
 msgstr "Nl"
 
+#. TRANSLATORS: one single character to represent 'inode' sort mode
+msgid "i"
+msgstr ""
+
 msgid "Inode"
 msgstr "Inode"
+
+msgid "&Inode"
+msgstr "&Inode"
 
 msgid "UID"
 msgstr "UID"
@@ -3142,6 +3140,10 @@ msgstr "Tipka Insert na številčni tipkovnici"
 
 msgid "Delete on keypad"
 msgstr "Tipka Delete na številčni tipkovnici"
+
+#, fuzzy
+msgid "Escape key"
+msgstr "Poševnica na številčni tipkovnici"
 
 msgid "Enter on keypad"
 msgstr "Enter na številčni tipkovnici"
@@ -3933,6 +3935,22 @@ msgstr "Interna napaka:"
 
 msgid "Changes to file lost"
 msgstr "Spremembe v datoteki izgubljene"
+
+#, fuzzy
+#~ msgid "bind: Unknown command: `%s'"
+#~ msgstr " Chown ukaz "
+
+#, fuzzy
+#~ msgid "%s: Unknown command: `%s'"
+#~ msgstr " Chown ukaz "
+
+#, fuzzy
+#~ msgid "%s:%d: unknown command `%s'"
+#~ msgstr " Chown ukaz "
+
+#, fuzzy
+#~ msgid "%s not found!"
+#~ msgstr "Opozorilo: datoteka %s ni bila najdena\n"
 
 #~ msgid "NumLock on keypad"
 #~ msgstr "NumLock na številčni tipkovnici"

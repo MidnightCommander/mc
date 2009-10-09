@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-01 02:39+0300\n"
+"POT-Creation-Date: 2009-10-09 09:50+0300\n"
 "PO-Revision-Date: 2009-02-16 19:45+0300\n"
 "Last-Translator: Andrius Štikonas <stikonas@gmail.com>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -569,7 +569,7 @@ msgid "Forward to declaration    M-+"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             C-t"
+msgid "Encod&ing...             M-e"
 msgstr "Rikiuo&ti...             M-t"
 
 msgid "Insert &literal...       C-q"
@@ -761,54 +761,6 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Klaida failo %s eilutėje %d "
-
-#, c-format
-msgid "bind: Wrong argument number, bind <key> <command>"
-msgstr "„bind“: neteisingas argumentų kiekis, „bind <klavišas> <komanda>“"
-
-#, c-format
-msgid "bind: Bad key value `%s'"
-msgstr "„bind“: Netaisyklinga klavišo reikšmė „%s“"
-
-#, c-format
-msgid "bind: Ehh...no key?"
-msgstr "„bind“: Hmm... nėra klavišo?"
-
-#, c-format
-msgid "bind: Unknown key: `%s'"
-msgstr "„bind“: Nežinomas klavišas „%s“"
-
-#, c-format
-msgid "bind: Unknown command: `%s'"
-msgstr "„bind“: Nežinoma komanda „%s“"
-
-#, c-format
-msgid "%s: Syntax: %s <n> <command> <label>"
-msgstr "%s: Sintaksė: %s <n> <komanda> <pavadinimas>"
-
-#, c-format
-msgid "%s: Unknown command: `%s'"
-msgstr "%s: Nežinoma komanda „%s“"
-
-#, c-format
-msgid "%s: fn should be 1-10"
-msgstr "%s: fn turėtų būti 1-10"
-
-#, c-format
-msgid "%s: fopen(): %s"
-msgstr "%s: fopen(): %s"
-
-#, c-format
-msgid "%s:%d: unknown command `%s'"
-msgstr "%s:%d: nežinoma komanda „%s“"
-
-#, c-format
-msgid "%s:%d: %s"
-msgstr "%s:%d: %s"
-
-#, c-format
-msgid "%s not found!"
-msgstr "%s nerasta!"
 
 msgid "&Set"
 msgstr "&Nustatyti"
@@ -1457,30 +1409,6 @@ msgstr "Negalima vykdyti komandų nevietinėje failų sistemoje"
 
 msgid " The shell is already running a command "
 msgstr " Aplinkoje jau vykdoma komanda "
-
-msgid "&Unsorted"
-msgstr "Neriki&uotai"
-
-msgid "&Name"
-msgstr "Pavadi&nimas"
-
-msgid "&Extension"
-msgstr "Plė&tinys"
-
-msgid "&Modify time"
-msgstr "&Modif. laikas"
-
-msgid "&Access time"
-msgstr "P&asiek. laikas"
-
-msgid "C&Hange time"
-msgstr "Pakei&t. laikas"
-
-msgid "&Size"
-msgstr "Dydi&s"
-
-msgid "&Inode"
-msgstr "„&Inode“"
 
 msgid "Cannot read directory contents"
 msgstr "Nepavyko perskaityti aplanko turinio"
@@ -2436,8 +2364,9 @@ msgstr "Rik. t&varka..."
 msgid "&Filter..."
 msgstr "&Filtras..."
 
-msgid "&Encoding...    C-t"
-msgstr ""
+#, fuzzy
+msgid "&Encoding...    M-e"
+msgstr "Rikiuo&ti...             M-t"
 
 msgid "&Network link..."
 msgstr "Ti&nklo ryšys..."
@@ -2770,17 +2699,79 @@ msgstr "NUORODA"
 msgid "SUB-DIR"
 msgstr "PAKATAL"
 
+#. TRANSLATORS: one single character to represent 'unsorted' sort mode
+msgid "u"
+msgstr ""
+
+#, fuzzy
+msgid "Unsorted"
+msgstr "Neriki&uotai"
+
+msgid "&Unsorted"
+msgstr "Neriki&uotai"
+
+#. TRANSLATORS: one single character to represent 'name' sort mode
+#, fuzzy
+msgid "n"
+msgstr "Ką:"
+
+msgid "&Name"
+msgstr "Pavadi&nimas"
+
+#. TRANSLATORS: one single character to represent 'extension' sort mode
+msgid "e"
+msgstr ""
+
+#, fuzzy
+msgid "Extension"
+msgstr "Plėtinys:"
+
+msgid "&Extension"
+msgstr "Plė&tinys"
+
+#. TRANSLATORS: one single character to represent 'size' sort mode
+msgid "s"
+msgstr ""
+
 msgid "Size"
 msgstr "Dydis"
+
+msgid "&Size"
+msgstr "Dydi&s"
+
+#, fuzzy
+msgid "Block Size"
+msgstr " Dydis "
+
+#. TRANSLATORS: one single character to represent 'Modify time' sort mode
+msgid "m"
+msgstr ""
 
 msgid "MTime"
 msgstr "Laikas"
 
+msgid "&Modify time"
+msgstr "&Modif. laikas"
+
+#. TRANSLATORS: one single character to represent 'Access time' sort mode
+msgid "a"
+msgstr ""
+
 msgid "ATime"
 msgstr "Laikas"
 
+msgid "&Access time"
+msgstr "P&asiek. laikas"
+
+#. TRANSLATORS: one single character to represent 'Change time' sort mode
+msgid "h"
+msgstr ""
+
 msgid "CTime"
 msgstr "Laikas"
+
+msgid "C&Hange time"
+msgstr "Pakei&t. laikas"
 
 msgid "Permission"
 msgstr "Leidimai"
@@ -2791,8 +2782,15 @@ msgstr "Leid."
 msgid "Nl"
 msgstr "Nl"
 
+#. TRANSLATORS: one single character to represent 'inode' sort mode
+msgid "i"
+msgstr ""
+
 msgid "Inode"
 msgstr "„Inode“"
+
+msgid "&Inode"
+msgstr "„&Inode“"
 
 msgid "UID"
 msgstr "UID"
@@ -3137,6 +3135,10 @@ msgstr "Skaitm. „Insert“"
 
 msgid "Delete on keypad"
 msgstr "Skaitm. „Delete“"
+
+#, fuzzy
+msgid "Escape key"
+msgstr "Skaitm. /"
 
 msgid "Enter on keypad"
 msgstr "Skaitm. „Enter“"
@@ -3928,6 +3930,42 @@ msgstr "Vidinė klaida:"
 
 msgid "Changes to file lost"
 msgstr "Failo pakeitimai prarasti"
+
+#~ msgid "bind: Wrong argument number, bind <key> <command>"
+#~ msgstr "„bind“: neteisingas argumentų kiekis, „bind <klavišas> <komanda>“"
+
+#~ msgid "bind: Bad key value `%s'"
+#~ msgstr "„bind“: Netaisyklinga klavišo reikšmė „%s“"
+
+#~ msgid "bind: Ehh...no key?"
+#~ msgstr "„bind“: Hmm... nėra klavišo?"
+
+#~ msgid "bind: Unknown key: `%s'"
+#~ msgstr "„bind“: Nežinomas klavišas „%s“"
+
+#~ msgid "bind: Unknown command: `%s'"
+#~ msgstr "„bind“: Nežinoma komanda „%s“"
+
+#~ msgid "%s: Syntax: %s <n> <command> <label>"
+#~ msgstr "%s: Sintaksė: %s <n> <komanda> <pavadinimas>"
+
+#~ msgid "%s: Unknown command: `%s'"
+#~ msgstr "%s: Nežinoma komanda „%s“"
+
+#~ msgid "%s: fn should be 1-10"
+#~ msgstr "%s: fn turėtų būti 1-10"
+
+#~ msgid "%s: fopen(): %s"
+#~ msgstr "%s: fopen(): %s"
+
+#~ msgid "%s:%d: unknown command `%s'"
+#~ msgstr "%s:%d: nežinoma komanda „%s“"
+
+#~ msgid "%s:%d: %s"
+#~ msgstr "%s:%d: %s"
+
+#~ msgid "%s not found!"
+#~ msgstr "%s nerasta!"
 
 #~ msgid "NumLock on keypad"
 #~ msgstr "Skaitm. „NumLock“"

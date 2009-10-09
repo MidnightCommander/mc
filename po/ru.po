@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-01 02:39+0300\n"
+"POT-Creation-Date: 2009-10-09 09:50+0300\n"
 "PO-Revision-Date: 2009-09-30  11:15+0300\n"
 "Last-Translator: Ilia Maslakov <il.smind@gmail.com>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
@@ -554,8 +554,8 @@ msgstr "Назад к точке вызова            M--"
 msgid "Forward to declaration    M-+"
 msgstr "Вперед к определению            M-+"
 
-msgid "Encod&ing...             C-t"
-msgstr "Кодировка...                    С-t"
+msgid "Encod&ing...             M-e"
+msgstr "Кодировка...                    С-e"
 
 msgid "Insert &literal...       C-q"
 msgstr "Вставить &литерал...             C-q"
@@ -742,54 +742,6 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Ошибка в файле %s в строке %d "
-
-#, c-format
-msgid "bind: Wrong argument number, bind <key> <command>"
-msgstr "bind: Не верное количество аргументов, bind <клавиша> <команда>"
-
-#, c-format
-msgid "bind: Bad key value `%s'"
-msgstr "Неподходящее значение клавиши `%s' "
-
-#, c-format
-msgid "bind: Ehh...no key?"
-msgstr "bind: М-мм... нет клавиши?"
-
-#, c-format
-msgid "bind: Unknown key: `%s'"
-msgstr "bind: Неизвестная клавиша: `%s'"
-
-#, c-format
-msgid "bind: Unknown command: `%s'"
-msgstr "bind: Неизвестная команда.`%s'"
-
-#, c-format
-msgid "%s: Syntax: %s <n> <command> <label>"
-msgstr "%s: Синтаксис: %s <n> <command> <label>"
-
-#, c-format
-msgid "%s: Unknown command: `%s'"
-msgstr "%s: Неизвестная команда: `%s'"
-
-#, c-format
-msgid "%s: fn should be 1-10"
-msgstr "%s: fn должно быть 1-10"
-
-#, c-format
-msgid "%s: fopen(): %s"
-msgstr "%s: fopen(): %s"
-
-#, c-format
-msgid "%s:%d: unknown command `%s'"
-msgstr "%s:%d: неизвестная команда `%s'"
-
-#, c-format
-msgid "%s:%d: %s"
-msgstr "%s:%d: %s"
-
-#, c-format
-msgid "%s not found!"
-msgstr "%s не найдено!"
 
 msgid "&Set"
 msgstr "&Установить"
@@ -1428,30 +1380,6 @@ msgstr " Невозможно выполнять команды на не лок
 
 msgid " The shell is already running a command "
 msgstr " Интерпретатор занят выполнением команды "
-
-msgid "&Unsorted"
-msgstr "&Без сортировки"
-
-msgid "&Name"
-msgstr "&Имя"
-
-msgid "&Extension"
-msgstr "Рас&ширение"
-
-msgid "&Modify time"
-msgstr "Время &правки"
-
-msgid "&Access time"
-msgstr "Время &доступа"
-
-msgid "C&Hange time"
-msgstr "Время изменения &атрибутов"
-
-msgid "&Size"
-msgstr "&Размер"
-
-msgid "&Inode"
-msgstr "&Узел"
 
 msgid "Cannot read directory contents"
 msgstr "Невозможно прочесть содержимое каталога"
@@ -2407,8 +2335,8 @@ msgstr "Порядок &сортировки..."
 msgid "&Filter..."
 msgstr "&Фильтр..."
 
-msgid "&Encoding...    C-t"
-msgstr "Кодировка панели     C-t"
+msgid "&Encoding...    M-e"
+msgstr "Кодировка панели     C-e"
 
 msgid "&Network link..."
 msgstr "Се&тевое соединение..."
@@ -2748,17 +2676,75 @@ msgstr "ССЫЛКА"
 msgid "SUB-DIR"
 msgstr "ПОД-КАТ"
 
+#. TRANSLATORS: one single character to represent 'unsorted' sort mode
+msgid "u"
+msgstr "б"
+
+msgid "Unsorted"
+msgstr "Без сортировки""
+
+msgid "&Unsorted"
+msgstr "&Без сортировки"
+
+#. TRANSLATORS: one single character to represent 'name' sort mode
+msgid "n"
+msgstr "и"
+
+msgid "&Name"
+msgstr "&Имя"
+
+#. TRANSLATORS: one single character to represent 'extension' sort mode
+msgid "e"
+msgstr "ш"
+
+msgid "Extension"
+msgstr "Расширение"
+
+msgid "&Extension"
+msgstr "Рас&ширение"
+
+#. TRANSLATORS: one single character to represent 'size' sort mode
+msgid "s"
+msgstr "р"
+
 msgid "Size"
 msgstr "Размер"
+
+msgid "&Size"
+msgstr "&Размер"
+
+msgid "Block Size"
+msgstr "Размер блока"
+
+#. TRANSLATORS: one single character to represent 'Modify time' sort mode
+msgid "m"
+msgstr "м"
 
 msgid "MTime"
 msgstr "Время правки"
 
+msgid "&Modify time"
+msgstr "Время &правки"
+
+#. TRANSLATORS: one single character to represent 'Access time' sort mode
+msgid "a"
+msgstr "д"
+
 msgid "ATime"
 msgstr "Посл. доступ"
 
+msgid "&Access time"
+msgstr "Время &доступа"
+
+#. TRANSLATORS: one single character to represent 'Change time' sort mode
+msgid "h"
+msgstr "п"
+
 msgid "CTime"
 msgstr "Изм. узла"
+
+msgid "C&Hange time"
+msgstr "Время изменения &атрибутов"
 
 msgid "Permission"
 msgstr "Атрибуты"
@@ -2769,8 +2755,15 @@ msgstr "Права"
 msgid "Nl"
 msgstr "Кс"
 
+#. TRANSLATORS: one single character to represent 'inode' sort mode
+msgid "i"
+msgstr "у"
+
 msgid "Inode"
 msgstr "Узел"
+
+msgid "&Inode"
+msgstr "&Узел"
 
 msgid "UID"
 msgstr "UID"
@@ -3118,6 +3111,9 @@ msgstr "Insert доп.клавиатуры"
 
 msgid "Delete on keypad"
 msgstr "Delete доп.клавиатуры"
+
+msgid "Escape key"
+msgstr "Клавиша Escape"
 
 msgid "Enter on keypad"
 msgstr "Enter доп.клавиатуры"
@@ -3893,6 +3889,3 @@ msgstr "Внутренняя ошибка:"
 
 msgid "Changes to file lost"
 msgstr "Изменения для файла потеряны"
-
-#~ msgid "pro&Mpt on replace"
-#~ msgstr "Подтвердить замену"

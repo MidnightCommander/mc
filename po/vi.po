@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-01 02:39+0300\n"
+"POT-Creation-Date: 2009-10-09 09:50+0300\n"
 "PO-Revision-Date: 2006-08-16 16:20+0400\n"
 "Last-Translator: Phan Vĩnh Thịnh <teppi82@gmail.com>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
@@ -569,7 +569,7 @@ msgid "Forward to declaration    M-+"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             C-t"
+msgid "Encod&ing...             M-e"
 msgstr "&Sắp xếp...                      M-t"
 
 msgid "Insert &literal...       C-q"
@@ -761,54 +761,6 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Lỗi trong tập tin %s trên dòng %d "
-
-#, c-format
-msgid "bind: Wrong argument number, bind <key> <command>"
-msgstr "bind: Sai số của tham số, bind <key> <command>"
-
-#, c-format
-msgid "bind: Bad key value `%s'"
-msgstr "bind: Giá trị chìa khóa xấu `%s'"
-
-#, c-format
-msgid "bind: Ehh...no key?"
-msgstr "bind: E hèm... không có chìa khóa?"
-
-#, c-format
-msgid "bind: Unknown key: `%s'"
-msgstr "bind: Chìa khóa không biết: `%s'"
-
-#, c-format
-msgid "bind: Unknown command: `%s'"
-msgstr "bind: Câu lệnh không rõ: `%s'"
-
-#, c-format
-msgid "%s: Syntax: %s <n> <command> <label>"
-msgstr "%s: Cú pháp: %s <n> <command> <label>"
-
-#, c-format
-msgid "%s: Unknown command: `%s'"
-msgstr "%s: Câu lệnh không biết: `%s'"
-
-#, c-format
-msgid "%s: fn should be 1-10"
-msgstr "%s: fn phải là 1-10"
-
-#, c-format
-msgid "%s: fopen(): %s"
-msgstr "%s: fopen(): %s"
-
-#, c-format
-msgid "%s:%d: unknown command `%s'"
-msgstr "%s:%d: câu lệnh không rõ `%s'"
-
-#, c-format
-msgid "%s:%d: %s"
-msgstr "%s:%d: %s"
-
-#, c-format
-msgid "%s not found!"
-msgstr "Không tìm thấy %s!"
 
 msgid "&Set"
 msgstr "Đồ&ng ý"
@@ -1458,31 +1410,6 @@ msgstr " Chỉ có thể thực hiện câu lệnh trên hệ thống tập tin 
 
 msgid " The shell is already running a command "
 msgstr " shell đang chạy một câu lệnh"
-
-msgid "&Unsorted"
-msgstr "không &Sắp xếp"
-
-msgid "&Name"
-msgstr "th&Eo tên"
-
-msgid "&Extension"
-msgstr "&Phần mở rộng"
-
-msgid "&Modify time"
-msgstr "&Thời gian sửa đổi"
-
-msgid "&Access time"
-msgstr "thời &Gian truy cập"
-
-#, fuzzy
-msgid "C&Hange time"
-msgstr "thời gi&An thay đổi"
-
-msgid "&Size"
-msgstr "&Kích thước"
-
-msgid "&Inode"
-msgstr "&Chỉ mục inode"
 
 msgid "Cannot read directory contents"
 msgstr "Không đọc được nội dung thư mục"
@@ -2439,8 +2366,9 @@ msgstr "t&Hứ tự sắp xếp..."
 msgid "&Filter..."
 msgstr "&Lọc tập tin..."
 
-msgid "&Encoding...    C-t"
-msgstr ""
+#, fuzzy
+msgid "&Encoding...    M-e"
+msgstr "&Sắp xếp...                      M-t"
 
 msgid "&Network link..."
 msgstr "&Kết nối mạng..."
@@ -2774,17 +2702,80 @@ msgstr "LIÊNKẾTMỀM"
 msgid "SUB-DIR"
 msgstr "THƯMỤCCON"
 
+#. TRANSLATORS: one single character to represent 'unsorted' sort mode
+msgid "u"
+msgstr ""
+
+#, fuzzy
+msgid "Unsorted"
+msgstr "không &Sắp xếp"
+
+msgid "&Unsorted"
+msgstr "không &Sắp xếp"
+
+#. TRANSLATORS: one single character to represent 'name' sort mode
+#, fuzzy
+msgid "n"
+msgstr "Trên"
+
+msgid "&Name"
+msgstr "th&Eo tên"
+
+#. TRANSLATORS: one single character to represent 'extension' sort mode
+msgid "e"
+msgstr ""
+
+#, fuzzy
+msgid "Extension"
+msgstr "&Mở rộng:"
+
+msgid "&Extension"
+msgstr "&Phần mở rộng"
+
+#. TRANSLATORS: one single character to represent 'size' sort mode
+msgid "s"
+msgstr ""
+
 msgid "Size"
 msgstr "Kích cỡ"
+
+msgid "&Size"
+msgstr "&Kích thước"
+
+#, fuzzy
+msgid "Block Size"
+msgstr " Kích thước "
+
+#. TRANSLATORS: one single character to represent 'Modify time' sort mode
+msgid "m"
+msgstr ""
 
 msgid "MTime"
 msgstr "Thời gian sửa"
 
+msgid "&Modify time"
+msgstr "&Thời gian sửa đổi"
+
+#. TRANSLATORS: one single character to represent 'Access time' sort mode
+msgid "a"
+msgstr ""
+
 msgid "ATime"
 msgstr "Truy cập cuối cùng"
 
+msgid "&Access time"
+msgstr "thời &Gian truy cập"
+
+#. TRANSLATORS: one single character to represent 'Change time' sort mode
+msgid "h"
+msgstr ""
+
 msgid "CTime"
 msgstr "Thời gian thay đổi"
+
+#, fuzzy
+msgid "C&Hange time"
+msgstr "thời gi&An thay đổi"
 
 msgid "Permission"
 msgstr "Quyền hạn"
@@ -2795,8 +2786,15 @@ msgstr "Quyền"
 msgid "Nl"
 msgstr "Nl"
 
+#. TRANSLATORS: one single character to represent 'inode' sort mode
+msgid "i"
+msgstr ""
+
 msgid "Inode"
 msgstr "Nút"
+
+msgid "&Inode"
+msgstr "&Chỉ mục inode"
 
 msgid "UID"
 msgstr "UID"
@@ -3138,6 +3136,10 @@ msgstr "Insert trên keypad"
 
 msgid "Delete on keypad"
 msgstr "Delete trên keypad"
+
+#, fuzzy
+msgid "Escape key"
+msgstr "Slash trên keypad"
 
 msgid "Enter on keypad"
 msgstr "Enter trên keypad"
@@ -3933,6 +3935,42 @@ msgstr "Lỗi nội bộ:"
 
 msgid "Changes to file lost"
 msgstr "Thay đổi tới tập tin bị mất"
+
+#~ msgid "bind: Wrong argument number, bind <key> <command>"
+#~ msgstr "bind: Sai số của tham số, bind <key> <command>"
+
+#~ msgid "bind: Bad key value `%s'"
+#~ msgstr "bind: Giá trị chìa khóa xấu `%s'"
+
+#~ msgid "bind: Ehh...no key?"
+#~ msgstr "bind: E hèm... không có chìa khóa?"
+
+#~ msgid "bind: Unknown key: `%s'"
+#~ msgstr "bind: Chìa khóa không biết: `%s'"
+
+#~ msgid "bind: Unknown command: `%s'"
+#~ msgstr "bind: Câu lệnh không rõ: `%s'"
+
+#~ msgid "%s: Syntax: %s <n> <command> <label>"
+#~ msgstr "%s: Cú pháp: %s <n> <command> <label>"
+
+#~ msgid "%s: Unknown command: `%s'"
+#~ msgstr "%s: Câu lệnh không biết: `%s'"
+
+#~ msgid "%s: fn should be 1-10"
+#~ msgstr "%s: fn phải là 1-10"
+
+#~ msgid "%s: fopen(): %s"
+#~ msgstr "%s: fopen(): %s"
+
+#~ msgid "%s:%d: unknown command `%s'"
+#~ msgstr "%s:%d: câu lệnh không rõ `%s'"
+
+#~ msgid "%s:%d: %s"
+#~ msgstr "%s:%d: %s"
+
+#~ msgid "%s not found!"
+#~ msgstr "Không tìm thấy %s!"
 
 #~ msgid "NumLock on keypad"
 #~ msgstr "NumLock trên keypad"

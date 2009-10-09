@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-01 02:39+0300\n"
+"POT-Creation-Date: 2009-10-09 09:50+0300\n"
 "PO-Revision-Date: 2002-04-30 16:46+0200\n"
 "Last-Translator: Christophe Merlet (RedFox) <christophe@merlet.net>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
@@ -579,7 +579,7 @@ msgid "Forward to declaration    M-+"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             C-t"
+msgid "Encod&ing...             M-e"
 msgstr "&Trier...                           M-t"
 
 msgid "Insert &literal...       C-q"
@@ -775,54 +775,6 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Erreur dans le fichier %s à la ligne %d "
-
-#, c-format
-msgid "bind: Wrong argument number, bind <key> <command>"
-msgstr ""
-
-#, c-format
-msgid "bind: Bad key value `%s'"
-msgstr ""
-
-#, c-format
-msgid "bind: Ehh...no key?"
-msgstr ""
-
-#, c-format
-msgid "bind: Unknown key: `%s'"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "bind: Unknown command: `%s'"
-msgstr " Commande chown "
-
-#, c-format
-msgid "%s: Syntax: %s <n> <command> <label>"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: Unknown command: `%s'"
-msgstr " Commande chown "
-
-#, c-format
-msgid "%s: fn should be 1-10"
-msgstr ""
-
-#, c-format
-msgid "%s: fopen(): %s"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s:%d: unknown command `%s'"
-msgstr " Commande chown "
-
-#, c-format
-msgid "%s:%d: %s"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s not found!"
-msgstr "Attention : fichier %s non trouvé\n"
 
 msgid "&Set"
 msgstr "&Appliquer"
@@ -1478,30 +1430,6 @@ msgstr " Ne peut exécuter une commande sur un système de fichiers non local"
 
 msgid " The shell is already running a command "
 msgstr " Le shell est déjà en train d'exécuter une commande "
-
-msgid "&Unsorted"
-msgstr "&Pas de tri"
-
-msgid "&Name"
-msgstr "&Nom"
-
-msgid "&Extension"
-msgstr "&Extension"
-
-msgid "&Modify time"
-msgstr "Date de &Modification"
-
-msgid "&Access time"
-msgstr "Date d'&Accès"
-
-msgid "C&Hange time"
-msgstr "Date de &Changement"
-
-msgid "&Size"
-msgstr "&Taille"
-
-msgid "&Inode"
-msgstr "&I-noeud"
 
 #, fuzzy
 msgid "Cannot read directory contents"
@@ -2455,8 +2383,9 @@ msgstr "&Ordre de tri..."
 msgid "&Filter..."
 msgstr "&Filtre..."
 
-msgid "&Encoding...    C-t"
-msgstr ""
+#, fuzzy
+msgid "&Encoding...    M-e"
+msgstr "&Trier...                           M-t"
 
 msgid "&Network link..."
 msgstr "Lien ré&Seau..."
@@ -2794,17 +2723,79 @@ msgstr "SYMLINK"
 msgid "SUB-DIR"
 msgstr "SOUS-RÉP"
 
+#. TRANSLATORS: one single character to represent 'unsorted' sort mode
+msgid "u"
+msgstr ""
+
+#, fuzzy
+msgid "Unsorted"
+msgstr "&Pas de tri"
+
+msgid "&Unsorted"
+msgstr "&Pas de tri"
+
+#. TRANSLATORS: one single character to represent 'name' sort mode
+#, fuzzy
+msgid "n"
+msgstr "Activé"
+
+msgid "&Name"
+msgstr "&Nom"
+
+#. TRANSLATORS: one single character to represent 'extension' sort mode
+msgid "e"
+msgstr ""
+
+#, fuzzy
+msgid "Extension"
+msgstr "Extension :"
+
+msgid "&Extension"
+msgstr "&Extension"
+
+#. TRANSLATORS: one single character to represent 'size' sort mode
+msgid "s"
+msgstr ""
+
 msgid "Size"
 msgstr "Taille"
+
+msgid "&Size"
+msgstr "&Taille"
+
+#, fuzzy
+msgid "Block Size"
+msgstr " Taille "
+
+#. TRANSLATORS: one single character to represent 'Modify time' sort mode
+msgid "m"
+msgstr ""
 
 msgid "MTime"
 msgstr "Date de modif."
 
+msgid "&Modify time"
+msgstr "Date de &Modification"
+
+#. TRANSLATORS: one single character to represent 'Access time' sort mode
+msgid "a"
+msgstr ""
+
 msgid "ATime"
 msgstr "Date d'acc."
 
+msgid "&Access time"
+msgstr "Date d'&Accès"
+
+#. TRANSLATORS: one single character to represent 'Change time' sort mode
+msgid "h"
+msgstr ""
+
 msgid "CTime"
 msgstr "Date de créa."
+
+msgid "C&Hange time"
+msgstr "Date de &Changement"
 
 msgid "Permission"
 msgstr "Permission"
@@ -2815,8 +2806,15 @@ msgstr "Perm"
 msgid "Nl"
 msgstr "Nl"
 
+#. TRANSLATORS: one single character to represent 'inode' sort mode
+msgid "i"
+msgstr ""
+
 msgid "Inode"
 msgstr "I-noeud"
+
+msgid "&Inode"
+msgstr "&I-noeud"
 
 msgid "UID"
 msgstr "UID"
@@ -3159,6 +3157,10 @@ msgstr "« Insert » sur pavé numérique"
 
 msgid "Delete on keypad"
 msgstr "« Suppr » sur pavé numérique"
+
+#, fuzzy
+msgid "Escape key"
+msgstr "« / » sur pavé numérique"
 
 msgid "Enter on keypad"
 msgstr "« Entrée » sur pavé numérique"
@@ -3958,6 +3960,22 @@ msgstr "Erreur interne :"
 
 msgid "Changes to file lost"
 msgstr "Les changements au fichier sont perdus"
+
+#, fuzzy
+#~ msgid "bind: Unknown command: `%s'"
+#~ msgstr " Commande chown "
+
+#, fuzzy
+#~ msgid "%s: Unknown command: `%s'"
+#~ msgstr " Commande chown "
+
+#, fuzzy
+#~ msgid "%s:%d: unknown command `%s'"
+#~ msgstr " Commande chown "
+
+#, fuzzy
+#~ msgid "%s not found!"
+#~ msgstr "Attention : fichier %s non trouvé\n"
 
 #~ msgid "NumLock on keypad"
 #~ msgstr "NumLock sur pavé numérique"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-01 02:39+0300\n"
+"POT-Creation-Date: 2009-10-09 09:50+0300\n"
 "PO-Revision-Date: 2001-11-20 15:15+0200\n"
 "Last-Translator: Artis Trops <hornet@navigators.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -576,7 +576,7 @@ msgid "Forward to declaration    M-+"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             C-t"
+msgid "Encod&ing...             M-e"
 msgstr "kārto&T...                 M-t"
 
 msgid "Insert &literal...       C-q"
@@ -772,54 +772,6 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Kļūda faila %s %d rindiņā "
-
-#, c-format
-msgid "bind: Wrong argument number, bind <key> <command>"
-msgstr ""
-
-#, c-format
-msgid "bind: Bad key value `%s'"
-msgstr ""
-
-#, c-format
-msgid "bind: Ehh...no key?"
-msgstr ""
-
-#, c-format
-msgid "bind: Unknown key: `%s'"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "bind: Unknown command: `%s'"
-msgstr " Komanda chown "
-
-#, c-format
-msgid "%s: Syntax: %s <n> <command> <label>"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: Unknown command: `%s'"
-msgstr " Komanda chown "
-
-#, c-format
-msgid "%s: fn should be 1-10"
-msgstr ""
-
-#, c-format
-msgid "%s: fopen(): %s"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s:%d: unknown command `%s'"
-msgstr " Komanda chown "
-
-#, c-format
-msgid "%s:%d: %s"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s not found!"
-msgstr "Brīdinājums: fails %s nav atrasts\n"
 
 msgid "&Set"
 msgstr "&Uzstādīt"
@@ -1473,30 +1425,6 @@ msgstr " Tu nevari palaist komandas uz ne-vietējām failsistēmām"
 
 msgid " The shell is already running a command "
 msgstr " Čaulā jau ir palaista komanda "
-
-msgid "&Unsorted"
-msgstr "&Nesakārtots"
-
-msgid "&Name"
-msgstr "&Vārds"
-
-msgid "&Extension"
-msgstr "&Paplašinājums"
-
-msgid "&Modify time"
-msgstr "&Modificēšanas laiks"
-
-msgid "&Access time"
-msgstr "&Pieejas laiks"
-
-msgid "C&Hange time"
-msgstr "&Izmainīšanas laiks"
-
-msgid "&Size"
-msgstr "&Lielums"
-
-msgid "&Inode"
-msgstr "&Inode"
 
 #, fuzzy
 msgid "Cannot read directory contents"
@@ -2454,8 +2382,9 @@ msgstr "&Kārtotā secībā..."
 msgid "&Filter..."
 msgstr "&Filtrs..."
 
-msgid "&Encoding...    C-t"
-msgstr ""
+#, fuzzy
+msgid "&Encoding...    M-e"
+msgstr "kārto&T...                 M-t"
 
 msgid "&Network link..."
 msgstr "&Tīkla saite..."
@@ -2792,17 +2721,79 @@ msgstr ""
 msgid "SUB-DIR"
 msgstr "ZEM-DIR"
 
+#. TRANSLATORS: one single character to represent 'unsorted' sort mode
+msgid "u"
+msgstr ""
+
+#, fuzzy
+msgid "Unsorted"
+msgstr "&Nesakārtots"
+
+msgid "&Unsorted"
+msgstr "&Nesakārtots"
+
+#. TRANSLATORS: one single character to represent 'name' sort mode
+#, fuzzy
+msgid "n"
+msgstr "Ieslēgts"
+
+msgid "&Name"
+msgstr "&Vārds"
+
+#. TRANSLATORS: one single character to represent 'extension' sort mode
+msgid "e"
+msgstr ""
+
+#, fuzzy
+msgid "Extension"
+msgstr "Paplašinājums:"
+
+msgid "&Extension"
+msgstr "&Paplašinājums"
+
+#. TRANSLATORS: one single character to represent 'size' sort mode
+msgid "s"
+msgstr ""
+
 msgid "Size"
 msgstr "Lielums"
+
+msgid "&Size"
+msgstr "&Lielums"
+
+#, fuzzy
+msgid "Block Size"
+msgstr " Izmērs "
+
+#. TRANSLATORS: one single character to represent 'Modify time' sort mode
+msgid "m"
+msgstr ""
 
 msgid "MTime"
 msgstr "MLaiks"
 
+msgid "&Modify time"
+msgstr "&Modificēšanas laiks"
+
+#. TRANSLATORS: one single character to represent 'Access time' sort mode
+msgid "a"
+msgstr ""
+
 msgid "ATime"
 msgstr "ALaiks"
 
+msgid "&Access time"
+msgstr "&Pieejas laiks"
+
+#. TRANSLATORS: one single character to represent 'Change time' sort mode
+msgid "h"
+msgstr ""
+
 msgid "CTime"
 msgstr "CLaiks"
+
+msgid "C&Hange time"
+msgstr "&Izmainīšanas laiks"
 
 msgid "Permission"
 msgstr "Atļauja"
@@ -2813,8 +2804,15 @@ msgstr "Atļ"
 msgid "Nl"
 msgstr "Nl"
 
+#. TRANSLATORS: one single character to represent 'inode' sort mode
+msgid "i"
+msgstr ""
+
 msgid "Inode"
 msgstr "Inode"
+
+msgid "&Inode"
+msgstr "&Inode"
 
 msgid "UID"
 msgstr "UID"
@@ -3156,6 +3154,10 @@ msgstr "Insert uz klaviatūras"
 
 msgid "Delete on keypad"
 msgstr "Delete uz klaviatūras"
+
+#, fuzzy
+msgid "Escape key"
+msgstr "/ (Slash) uz klaviatūras"
 
 msgid "Enter on keypad"
 msgstr "Enter uz klaviatūras"
@@ -3951,6 +3953,22 @@ msgstr "Iekšējā kļūda:"
 
 msgid "Changes to file lost"
 msgstr "Izmaiņas failā pazudušas"
+
+#, fuzzy
+#~ msgid "bind: Unknown command: `%s'"
+#~ msgstr " Komanda chown "
+
+#, fuzzy
+#~ msgid "%s: Unknown command: `%s'"
+#~ msgstr " Komanda chown "
+
+#, fuzzy
+#~ msgid "%s:%d: unknown command `%s'"
+#~ msgstr " Komanda chown "
+
+#, fuzzy
+#~ msgid "%s not found!"
+#~ msgstr "Brīdinājums: fails %s nav atrasts\n"
 
 #~ msgid "NumLock on keypad"
 #~ msgstr "NumLock uz klaviatūras"

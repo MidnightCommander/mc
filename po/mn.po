@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mn\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-01 02:39+0300\n"
+"POT-Creation-Date: 2009-10-09 09:50+0300\n"
 "PO-Revision-Date: 2003-03-04 21:16+0100\n"
 "Last-Translator: Sanlig Badral <badral@chinggis.com>\n"
 "Language-Team: Mongolian <mn@li.org>\n"
@@ -578,7 +578,7 @@ msgid "Forward to declaration    M-+"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             C-t"
+msgid "Encod&ing...             M-e"
 msgstr "&Эрэмбэлэлт...              M-t"
 
 msgid "Insert &literal...       C-q"
@@ -773,54 +773,6 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " %s файлын %d р мөр алдаатай "
-
-#, c-format
-msgid "bind: Wrong argument number, bind <key> <command>"
-msgstr ""
-
-#, c-format
-msgid "bind: Bad key value `%s'"
-msgstr ""
-
-#, c-format
-msgid "bind: Ehh...no key?"
-msgstr ""
-
-#, c-format
-msgid "bind: Unknown key: `%s'"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "bind: Unknown command: `%s'"
-msgstr " Команд chown "
-
-#, c-format
-msgid "%s: Syntax: %s <n> <command> <label>"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: Unknown command: `%s'"
-msgstr " Команд chown "
-
-#, c-format
-msgid "%s: fn should be 1-10"
-msgstr ""
-
-#, c-format
-msgid "%s: fopen(): %s"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s:%d: unknown command `%s'"
-msgstr " Команд chown "
-
-#, c-format
-msgid "%s:%d: %s"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s not found!"
-msgstr "Анхааруулга: файл %s алга байна\n"
 
 msgid "&Set"
 msgstr "&Оноох"
@@ -1469,30 +1421,6 @@ msgstr " Локал бус файл систем дэх командуудыг �
 
 msgid " The shell is already running a command "
 msgstr " shell коммандыг аль хэдийнэ биелүүлж байна "
-
-msgid "&Unsorted"
-msgstr "&Эрэмбэлэгдээгүй"
-
-msgid "&Name"
-msgstr "&Нэр"
-
-msgid "&Extension"
-msgstr "өргө&тгөл"
-
-msgid "&Modify time"
-msgstr "За&сварлагдсан огноо"
-
-msgid "&Access time"
-msgstr "Х&андсан огноо"
-
-msgid "C&Hange time"
-msgstr "өө&рчлөгдсөн огноо"
-
-msgid "&Size"
-msgstr "&Хэмжээ"
-
-msgid "&Inode"
-msgstr "&Зангилаа"
 
 msgid "Cannot read directory contents"
 msgstr "Хавтасны доторхыг уншиж чадсангүй"
@@ -2447,8 +2375,9 @@ msgstr "Эрэмбэлэх &дараалал..."
 msgid "&Filter..."
 msgstr "&Шүүлт..."
 
-msgid "&Encoding...    C-t"
-msgstr ""
+#, fuzzy
+msgid "&Encoding...    M-e"
+msgstr "&Эрэмбэлэлт...              M-t"
 
 msgid "&Network link..."
 msgstr "&Сүлжээний холбоос..."
@@ -2781,17 +2710,79 @@ msgstr "ХОЛБООС"
 msgid "SUB-DIR"
 msgstr "ДЭД-ХАВТ"
 
+#. TRANSLATORS: one single character to represent 'unsorted' sort mode
+msgid "u"
+msgstr ""
+
+#, fuzzy
+msgid "Unsorted"
+msgstr "&Эрэмбэлэгдээгүй"
+
+msgid "&Unsorted"
+msgstr "&Эрэмбэлэгдээгүй"
+
+#. TRANSLATORS: one single character to represent 'name' sort mode
+#, fuzzy
+msgid "n"
+msgstr "Дээр"
+
+msgid "&Name"
+msgstr "&Нэр"
+
+#. TRANSLATORS: one single character to represent 'extension' sort mode
+msgid "e"
+msgstr ""
+
+#, fuzzy
+msgid "Extension"
+msgstr "өргөтгөл:"
+
+msgid "&Extension"
+msgstr "өргө&тгөл"
+
+#. TRANSLATORS: one single character to represent 'size' sort mode
+msgid "s"
+msgstr ""
+
 msgid "Size"
 msgstr "Хэмжээ"
+
+msgid "&Size"
+msgstr "&Хэмжээ"
+
+#, fuzzy
+msgid "Block Size"
+msgstr " Хэмжээ "
+
+#. TRANSLATORS: one single character to represent 'Modify time' sort mode
+msgid "m"
+msgstr ""
 
 msgid "MTime"
 msgstr "Засагдсан Огноо"
 
+msgid "&Modify time"
+msgstr "За&сварлагдсан огноо"
+
+#. TRANSLATORS: one single character to represent 'Access time' sort mode
+msgid "a"
+msgstr ""
+
 msgid "ATime"
 msgstr "Ханд. Огноо"
 
+msgid "&Access time"
+msgstr "Х&андсан огноо"
+
+#. TRANSLATORS: one single character to represent 'Change time' sort mode
+msgid "h"
+msgstr ""
+
 msgid "CTime"
 msgstr "үүс. Огноо"
+
+msgid "C&Hange time"
+msgstr "өө&рчлөгдсөн огноо"
 
 msgid "Permission"
 msgstr "Зөвшөөрөл"
@@ -2802,8 +2793,15 @@ msgstr "Зөвш"
 msgid "Nl"
 msgstr "Кс"
 
+#. TRANSLATORS: one single character to represent 'inode' sort mode
+msgid "i"
+msgstr ""
+
 msgid "Inode"
 msgstr "Зангилаа"
+
+msgid "&Inode"
+msgstr "&Зангилаа"
 
 msgid "UID"
 msgstr "UID"
@@ -3144,6 +3142,10 @@ msgstr "Insert on keypad"
 
 msgid "Delete on keypad"
 msgstr "Delete on keypad"
+
+#, fuzzy
+msgid "Escape key"
+msgstr "Slash on keypad"
 
 msgid "Enter on keypad"
 msgstr "Enter on keypad"
@@ -3935,6 +3937,22 @@ msgstr "Дотоод алдаа:"
 
 msgid "Changes to file lost"
 msgstr "Файлын өөрчлөлт алга байна"
+
+#, fuzzy
+#~ msgid "bind: Unknown command: `%s'"
+#~ msgstr " Команд chown "
+
+#, fuzzy
+#~ msgid "%s: Unknown command: `%s'"
+#~ msgstr " Команд chown "
+
+#, fuzzy
+#~ msgid "%s:%d: unknown command `%s'"
+#~ msgstr " Команд chown "
+
+#, fuzzy
+#~ msgid "%s not found!"
+#~ msgstr "Анхааруулга: файл %s алга байна\n"
 
 #~ msgid "NumLock on keypad"
 #~ msgstr "NumLock on keypad"

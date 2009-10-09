@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-01 02:39+0300\n"
+"POT-Creation-Date: 2009-10-09 09:50+0300\n"
 "PO-Revision-Date: 2001-09-29 17:41+0200\n"
 "Last-Translator: Softcatalà <tradgnome@softcatala.org>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
@@ -577,7 +577,7 @@ msgid "Forward to declaration    M-+"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             C-t"
+msgid "Encod&ing...             M-e"
 msgstr "&Ordena...                 M-t"
 
 msgid "Insert &literal...       C-q"
@@ -774,54 +774,6 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " S'ha produït  un error al fitxer %s, línia %d "
-
-#, c-format
-msgid "bind: Wrong argument number, bind <key> <command>"
-msgstr ""
-
-#, c-format
-msgid "bind: Bad key value `%s'"
-msgstr ""
-
-#, c-format
-msgid "bind: Ehh...no key?"
-msgstr ""
-
-#, c-format
-msgid "bind: Unknown key: `%s'"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "bind: Unknown command: `%s'"
-msgstr " Canvi de propietari "
-
-#, c-format
-msgid "%s: Syntax: %s <n> <command> <label>"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: Unknown command: `%s'"
-msgstr " Canvi de propietari "
-
-#, c-format
-msgid "%s: fn should be 1-10"
-msgstr ""
-
-#, c-format
-msgid "%s: fopen(): %s"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s:%d: unknown command `%s'"
-msgstr " Canvi de propietari "
-
-#, c-format
-msgid "%s:%d: %s"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s not found!"
-msgstr "Avís: no s'ha trobat el fitxer %s\n"
 
 msgid "&Set"
 msgstr "&Estableix"
@@ -1477,30 +1429,6 @@ msgstr " No podeu executar ordres a sistemes de fitxers no-locals"
 
 msgid " The shell is already running a command "
 msgstr " L'intèrpret ja esta executant una comanda "
-
-msgid "&Unsorted"
-msgstr "sense &Ordre"
-
-msgid "&Name"
-msgstr "&Nom"
-
-msgid "&Extension"
-msgstr "&Extensió"
-
-msgid "&Modify time"
-msgstr "data de &Modificació"
-
-msgid "&Access time"
-msgstr "data d'&Accés"
-
-msgid "C&Hange time"
-msgstr "data de &Canvi"
-
-msgid "&Size"
-msgstr "Mi&da"
-
-msgid "&Inode"
-msgstr "node-&I"
 
 #, fuzzy
 msgid "Cannot read directory contents"
@@ -2459,8 +2387,9 @@ msgstr "&Ordenació..."
 msgid "&Filter..."
 msgstr "&Filtra..."
 
-msgid "&Encoding...    C-t"
-msgstr ""
+#, fuzzy
+msgid "&Encoding...    M-e"
+msgstr "&Ordena...                 M-t"
 
 msgid "&Network link..."
 msgstr "enllaç per a la &Xarxa..."
@@ -2797,17 +2726,79 @@ msgstr ""
 msgid "SUB-DIR"
 msgstr "SUB-DIR"
 
+#. TRANSLATORS: one single character to represent 'unsorted' sort mode
+msgid "u"
+msgstr ""
+
+#, fuzzy
+msgid "Unsorted"
+msgstr "sense &Ordre"
+
+msgid "&Unsorted"
+msgstr "sense &Ordre"
+
+#. TRANSLATORS: one single character to represent 'name' sort mode
+#, fuzzy
+msgid "n"
+msgstr "Sobre"
+
+msgid "&Name"
+msgstr "&Nom"
+
+#. TRANSLATORS: one single character to represent 'extension' sort mode
+msgid "e"
+msgstr ""
+
+#, fuzzy
+msgid "Extension"
+msgstr "Extensió:"
+
+msgid "&Extension"
+msgstr "&Extensió"
+
+#. TRANSLATORS: one single character to represent 'size' sort mode
+msgid "s"
+msgstr ""
+
 msgid "Size"
 msgstr "Mida"
+
+msgid "&Size"
+msgstr "Mi&da"
+
+#, fuzzy
+msgid "Block Size"
+msgstr " Mida"
+
+#. TRANSLATORS: one single character to represent 'Modify time' sort mode
+msgid "m"
+msgstr ""
 
 msgid "MTime"
 msgstr "MTime"
 
+msgid "&Modify time"
+msgstr "data de &Modificació"
+
+#. TRANSLATORS: one single character to represent 'Access time' sort mode
+msgid "a"
+msgstr ""
+
 msgid "ATime"
 msgstr "ATime"
 
+msgid "&Access time"
+msgstr "data d'&Accés"
+
+#. TRANSLATORS: one single character to represent 'Change time' sort mode
+msgid "h"
+msgstr ""
+
 msgid "CTime"
 msgstr "CTime"
+
+msgid "C&Hange time"
+msgstr "data de &Canvi"
 
 msgid "Permission"
 msgstr "Permisos"
@@ -2818,8 +2809,15 @@ msgstr "Perm"
 msgid "Nl"
 msgstr "N1"
 
+#. TRANSLATORS: one single character to represent 'inode' sort mode
+msgid "i"
+msgstr ""
+
 msgid "Inode"
 msgstr "Inode"
+
+msgid "&Inode"
+msgstr "node-&I"
 
 msgid "UID"
 msgstr "UID"
@@ -3163,6 +3161,10 @@ msgstr "Inserir teclat numèric"
 
 msgid "Delete on keypad"
 msgstr "Suprimir teclat numèric"
+
+#, fuzzy
+msgid "Escape key"
+msgstr "Barra teclat numèric"
 
 msgid "Enter on keypad"
 msgstr "Tecla de retorn teclat numèric"
@@ -3959,6 +3961,22 @@ msgstr "Error intern:"
 
 msgid "Changes to file lost"
 msgstr "Canvia al fitxer perdut"
+
+#, fuzzy
+#~ msgid "bind: Unknown command: `%s'"
+#~ msgstr " Canvi de propietari "
+
+#, fuzzy
+#~ msgid "%s: Unknown command: `%s'"
+#~ msgstr " Canvi de propietari "
+
+#, fuzzy
+#~ msgid "%s:%d: unknown command `%s'"
+#~ msgstr " Canvi de propietari "
+
+#, fuzzy
+#~ msgid "%s not found!"
+#~ msgstr "Avís: no s'ha trobat el fitxer %s\n"
 
 #~ msgid "NumLock on keypad"
 #~ msgstr "BloqNum teclat numèric"

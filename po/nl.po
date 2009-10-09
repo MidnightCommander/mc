@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-01 02:39+0300\n"
+"POT-Creation-Date: 2009-10-09 09:50+0300\n"
 "PO-Revision-Date: 2009-02-13\n"
 "Last-Translator: Marcel Pol <mpol@gmx.net>\n"
 "Language-Team: Dutch <debian-l10n-dutch@lists.debian.org>\n"
@@ -570,7 +570,7 @@ msgid "Forward to declaration    M-+"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             C-t"
+msgid "Encod&ing...             M-e"
 msgstr "Sor&teren               M-t"
 
 msgid "Insert &literal...       C-q"
@@ -762,54 +762,6 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Fout in bestand %s, op regel %d "
-
-#, c-format
-msgid "bind: Wrong argument number, bind <key> <command>"
-msgstr "bind: Verkeerd argument nummer, bind <toets> <opdracht>"
-
-#, c-format
-msgid "bind: Bad key value `%s'"
-msgstr "bind: Verkeerde waarde toets `%s'"
-
-#, c-format
-msgid "bind: Ehh...no key?"
-msgstr "bind: Ehh...geen toets?"
-
-#, c-format
-msgid "bind: Unknown key: `%s'"
-msgstr "bind: Onbekende toets: `%s'"
-
-#, c-format
-msgid "bind: Unknown command: `%s'"
-msgstr "bind: Onbekende opdracht: `%s'"
-
-#, c-format
-msgid "%s: Syntax: %s <n> <command> <label>"
-msgstr "%s: Syntax: %s <n> <opdracht> <label>"
-
-#, c-format
-msgid "%s: Unknown command: `%s'"
-msgstr "%s: Onbekende opdracht: `%s'"
-
-#, c-format
-msgid "%s: fn should be 1-10"
-msgstr "%s: kies functie van 1-10"
-
-#, c-format
-msgid "%s: fopen(): %s"
-msgstr "%s: fopen(): %s"
-
-#, c-format
-msgid "%s:%d: unknown command `%s'"
-msgstr "%s:%d: onbekende opdracht `%s'"
-
-#, c-format
-msgid "%s:%d: %s"
-msgstr "%s:%d: %s"
-
-#, c-format
-msgid "%s not found!"
-msgstr "%s niet gevonden!"
 
 msgid "&Set"
 msgstr "&Zetten"
@@ -1463,30 +1415,6 @@ msgstr " U kunt geen opdrachten uitvoeren op non-lokale bestandssystemen"
 
 msgid " The shell is already running a command "
 msgstr " De shell voert al een opdracht uit "
-
-msgid "&Unsorted"
-msgstr "&Ongesorteerd"
-
-msgid "&Name"
-msgstr "&Naam"
-
-msgid "&Extension"
-msgstr "&Extensie"
-
-msgid "&Modify time"
-msgstr "&Wijzigingstijd"
-
-msgid "&Access time"
-msgstr "Toegang&Stijd"
-
-msgid "C&Hange time"
-msgstr "&Veranderingstijd"
-
-msgid "&Size"
-msgstr "&Grootte"
-
-msgid "&Inode"
-msgstr "&Inode"
 
 msgid "Cannot read directory contents"
 msgstr "Kan mapinhoud niet lezen"
@@ -2442,8 +2370,9 @@ msgstr "&Sorteervolgorde...     "
 msgid "&Filter..."
 msgstr "&Filter...              "
 
-msgid "&Encoding...    C-t"
-msgstr ""
+#, fuzzy
+msgid "&Encoding...    M-e"
+msgstr "Sor&teren               M-t"
 
 msgid "&Network link..."
 msgstr "&Netwerkverbinding..."
@@ -2776,17 +2705,79 @@ msgstr "SYMLINK"
 msgid "SUB-DIR"
 msgstr "SUB-DIR"
 
+#. TRANSLATORS: one single character to represent 'unsorted' sort mode
+msgid "u"
+msgstr ""
+
+#, fuzzy
+msgid "Unsorted"
+msgstr "&Ongesorteerd"
+
+msgid "&Unsorted"
+msgstr "&Ongesorteerd"
+
+#. TRANSLATORS: one single character to represent 'name' sort mode
+#, fuzzy
+msgid "n"
+msgstr "Op"
+
+msgid "&Name"
+msgstr "&Naam"
+
+#. TRANSLATORS: one single character to represent 'extension' sort mode
+msgid "e"
+msgstr ""
+
+#, fuzzy
+msgid "Extension"
+msgstr "Extensie:"
+
+msgid "&Extension"
+msgstr "&Extensie"
+
+#. TRANSLATORS: one single character to represent 'size' sort mode
+msgid "s"
+msgstr ""
+
 msgid "Size"
 msgstr "Grootte"
+
+msgid "&Size"
+msgstr "&Grootte"
+
+#, fuzzy
+msgid "Block Size"
+msgstr " Grootte "
+
+#. TRANSLATORS: one single character to represent 'Modify time' sort mode
+msgid "m"
+msgstr ""
 
 msgid "MTime"
 msgstr "MTime"
 
+msgid "&Modify time"
+msgstr "&Wijzigingstijd"
+
+#. TRANSLATORS: one single character to represent 'Access time' sort mode
+msgid "a"
+msgstr ""
+
 msgid "ATime"
 msgstr "ATime"
 
+msgid "&Access time"
+msgstr "Toegang&Stijd"
+
+#. TRANSLATORS: one single character to represent 'Change time' sort mode
+msgid "h"
+msgstr ""
+
 msgid "CTime"
 msgstr "CTime"
+
+msgid "C&Hange time"
+msgstr "&Veranderingstijd"
 
 msgid "Permission"
 msgstr "Rechten"
@@ -2797,8 +2788,15 @@ msgstr "Rechten"
 msgid "Nl"
 msgstr "Nl"
 
+#. TRANSLATORS: one single character to represent 'inode' sort mode
+msgid "i"
+msgstr ""
+
 msgid "Inode"
 msgstr "Inode"
+
+msgid "&Inode"
+msgstr "&Inode"
 
 msgid "UID"
 msgstr "UID"
@@ -3143,6 +3141,10 @@ msgstr "Numeriek Ins"
 
 msgid "Delete on keypad"
 msgstr "Numeriek Del"
+
+#, fuzzy
+msgid "Escape key"
+msgstr "Numeriek /"
 
 msgid "Enter on keypad"
 msgstr "Numeriek Enter"
@@ -3935,6 +3937,42 @@ msgstr "Interne fout:"
 
 msgid "Changes to file lost"
 msgstr "Wijzigingen zijn verloren"
+
+#~ msgid "bind: Wrong argument number, bind <key> <command>"
+#~ msgstr "bind: Verkeerd argument nummer, bind <toets> <opdracht>"
+
+#~ msgid "bind: Bad key value `%s'"
+#~ msgstr "bind: Verkeerde waarde toets `%s'"
+
+#~ msgid "bind: Ehh...no key?"
+#~ msgstr "bind: Ehh...geen toets?"
+
+#~ msgid "bind: Unknown key: `%s'"
+#~ msgstr "bind: Onbekende toets: `%s'"
+
+#~ msgid "bind: Unknown command: `%s'"
+#~ msgstr "bind: Onbekende opdracht: `%s'"
+
+#~ msgid "%s: Syntax: %s <n> <command> <label>"
+#~ msgstr "%s: Syntax: %s <n> <opdracht> <label>"
+
+#~ msgid "%s: Unknown command: `%s'"
+#~ msgstr "%s: Onbekende opdracht: `%s'"
+
+#~ msgid "%s: fn should be 1-10"
+#~ msgstr "%s: kies functie van 1-10"
+
+#~ msgid "%s: fopen(): %s"
+#~ msgstr "%s: fopen(): %s"
+
+#~ msgid "%s:%d: unknown command `%s'"
+#~ msgstr "%s:%d: onbekende opdracht `%s'"
+
+#~ msgid "%s:%d: %s"
+#~ msgstr "%s:%d: %s"
+
+#~ msgid "%s not found!"
+#~ msgstr "%s niet gevonden!"
 
 #~ msgid "NumLock on keypad"
 #~ msgstr "Numerisch NumLock"

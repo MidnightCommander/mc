@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-01 02:39+0300\n"
+"POT-Creation-Date: 2009-10-09 09:50+0300\n"
 "PO-Revision-Date: 2000-10-26 11:00 CST\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil <ubuntu-l10n-tam@lists.ubuntu.com>\n"
@@ -568,7 +568,7 @@ msgid "Forward to declaration    M-+"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             C-t"
+msgid "Encod&ing...             M-e"
 msgstr "வாிசை&யாக்கு...          M-t"
 
 msgid "Insert &literal...       C-q"
@@ -757,54 +757,6 @@ msgstr ""
 
 #, c-format
 msgid " Error in file %s on line %d "
-msgstr ""
-
-#, c-format
-msgid "bind: Wrong argument number, bind <key> <command>"
-msgstr ""
-
-#, c-format
-msgid "bind: Bad key value `%s'"
-msgstr ""
-
-#, c-format
-msgid "bind: Ehh...no key?"
-msgstr ""
-
-#, c-format
-msgid "bind: Unknown key: `%s'"
-msgstr ""
-
-#, c-format
-msgid "bind: Unknown command: `%s'"
-msgstr ""
-
-#, c-format
-msgid "%s: Syntax: %s <n> <command> <label>"
-msgstr ""
-
-#, c-format
-msgid "%s: Unknown command: `%s'"
-msgstr ""
-
-#, c-format
-msgid "%s: fn should be 1-10"
-msgstr ""
-
-#, c-format
-msgid "%s: fopen(): %s"
-msgstr ""
-
-#, c-format
-msgid "%s:%d: unknown command `%s'"
-msgstr ""
-
-#, c-format
-msgid "%s:%d: %s"
-msgstr ""
-
-#, c-format
-msgid "%s not found!"
 msgstr ""
 
 msgid "&Set"
@@ -1416,30 +1368,6 @@ msgid " Cannot execute commands on non-local filesystems"
 msgstr ""
 
 msgid " The shell is already running a command "
-msgstr ""
-
-msgid "&Unsorted"
-msgstr ""
-
-msgid "&Name"
-msgstr ""
-
-msgid "&Extension"
-msgstr ""
-
-msgid "&Modify time"
-msgstr ""
-
-msgid "&Access time"
-msgstr ""
-
-msgid "C&Hange time"
-msgstr ""
-
-msgid "&Size"
-msgstr ""
-
-msgid "&Inode"
 msgstr ""
 
 msgid "Cannot read directory contents"
@@ -2297,8 +2225,9 @@ msgstr ""
 msgid "&Filter..."
 msgstr ""
 
-msgid "&Encoding...    C-t"
-msgstr ""
+#, fuzzy
+msgid "&Encoding...    M-e"
+msgstr "வாிசை&யாக்கு...          M-t"
 
 msgid "&Network link..."
 msgstr ""
@@ -2628,16 +2557,75 @@ msgstr ""
 msgid "SUB-DIR"
 msgstr ""
 
+#. TRANSLATORS: one single character to represent 'unsorted' sort mode
+msgid "u"
+msgstr ""
+
+msgid "Unsorted"
+msgstr ""
+
+msgid "&Unsorted"
+msgstr ""
+
+#. TRANSLATORS: one single character to represent 'name' sort mode
+msgid "n"
+msgstr ""
+
+msgid "&Name"
+msgstr ""
+
+#. TRANSLATORS: one single character to represent 'extension' sort mode
+msgid "e"
+msgstr ""
+
+#, fuzzy
+msgid "Extension"
+msgstr "நீட்டிப்பு:"
+
+msgid "&Extension"
+msgstr ""
+
+#. TRANSLATORS: one single character to represent 'size' sort mode
+msgid "s"
+msgstr ""
+
 msgid "Size"
 msgstr "அளவு"
 
+msgid "&Size"
+msgstr ""
+
+msgid "Block Size"
+msgstr ""
+
+#. TRANSLATORS: one single character to represent 'Modify time' sort mode
+msgid "m"
+msgstr ""
+
 msgid "MTime"
+msgstr ""
+
+msgid "&Modify time"
+msgstr ""
+
+#. TRANSLATORS: one single character to represent 'Access time' sort mode
+msgid "a"
 msgstr ""
 
 msgid "ATime"
 msgstr ""
 
+msgid "&Access time"
+msgstr ""
+
+#. TRANSLATORS: one single character to represent 'Change time' sort mode
+msgid "h"
+msgstr ""
+
 msgid "CTime"
+msgstr ""
+
+msgid "C&Hange time"
 msgstr ""
 
 msgid "Permission"
@@ -2649,7 +2637,14 @@ msgstr ""
 msgid "Nl"
 msgstr ""
 
+#. TRANSLATORS: one single character to represent 'inode' sort mode
+msgid "i"
+msgstr ""
+
 msgid "Inode"
+msgstr ""
+
+msgid "&Inode"
 msgstr ""
 
 msgid "UID"
@@ -2983,6 +2978,9 @@ msgid "Insert on keypad"
 msgstr ""
 
 msgid "Delete on keypad"
+msgstr ""
+
+msgid "Escape key"
 msgstr ""
 
 msgid "Enter on keypad"

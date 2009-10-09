@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.55\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-01 02:39+0300\n"
+"POT-Creation-Date: 2009-10-09 09:50+0300\n"
 "PO-Revision-Date: 2002-06-24 02:15+0300\n"
 "Last-Translator: Todor Buyukliev <adrez@mail.bg>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -572,7 +572,7 @@ msgid "Forward to declaration    M-+"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             C-t"
+msgid "Encod&ing...             M-e"
 msgstr "Сортирай...                M-t"
 
 msgid "Insert &literal...       C-q"
@@ -768,54 +768,6 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Грешка във файла %s на ред %d "
-
-#, c-format
-msgid "bind: Wrong argument number, bind <key> <command>"
-msgstr ""
-
-#, c-format
-msgid "bind: Bad key value `%s'"
-msgstr ""
-
-#, c-format
-msgid "bind: Ehh...no key?"
-msgstr ""
-
-#, c-format
-msgid "bind: Unknown key: `%s'"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "bind: Unknown command: `%s'"
-msgstr " Команда Chown "
-
-#, c-format
-msgid "%s: Syntax: %s <n> <command> <label>"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: Unknown command: `%s'"
-msgstr " Команда Chown "
-
-#, c-format
-msgid "%s: fn should be 1-10"
-msgstr ""
-
-#, c-format
-msgid "%s: fopen(): %s"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s:%d: unknown command `%s'"
-msgstr " Команда Chown "
-
-#, c-format
-msgid "%s:%d: %s"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s not found!"
-msgstr "Внимание: файлът %s не е намерен\n"
 
 msgid "&Set"
 msgstr "Промени"
@@ -1469,30 +1421,6 @@ msgstr " Не може да изпълнявате команди на не-ло
 
 msgid " The shell is already running a command "
 msgstr " Обвивката вече изпълнява команда "
-
-msgid "&Unsorted"
-msgstr "Неподредени"
-
-msgid "&Name"
-msgstr "Име"
-
-msgid "&Extension"
-msgstr "Разширение"
-
-msgid "&Modify time"
-msgstr "Време на промяна на файла"
-
-msgid "&Access time"
-msgstr "Време на достъп"
-
-msgid "C&Hange time"
-msgstr "Време на промяна на i-възела"
-
-msgid "&Size"
-msgstr "Размер"
-
-msgid "&Inode"
-msgstr "I-възел"
 
 #, fuzzy
 msgid "Cannot read directory contents"
@@ -2447,8 +2375,9 @@ msgstr "Ред на сортиране..."
 msgid "&Filter..."
 msgstr "Филтър..."
 
-msgid "&Encoding...    C-t"
-msgstr ""
+#, fuzzy
+msgid "&Encoding...    M-e"
+msgstr "Сортирай...                M-t"
 
 msgid "&Network link..."
 msgstr "Мрежова връзка..."
@@ -2783,17 +2712,79 @@ msgstr "ВРЪЗКА"
 msgid "SUB-DIR"
 msgstr "ПОД-ДИР"
 
+#. TRANSLATORS: one single character to represent 'unsorted' sort mode
+msgid "u"
+msgstr ""
+
+#, fuzzy
+msgid "Unsorted"
+msgstr "Неподредени"
+
+msgid "&Unsorted"
+msgstr "Неподредени"
+
+#. TRANSLATORS: one single character to represent 'name' sort mode
+#, fuzzy
+msgid "n"
+msgstr "За"
+
+msgid "&Name"
+msgstr "Име"
+
+#. TRANSLATORS: one single character to represent 'extension' sort mode
+msgid "e"
+msgstr ""
+
+#, fuzzy
+msgid "Extension"
+msgstr "Разширение:"
+
+msgid "&Extension"
+msgstr "Разширение"
+
+#. TRANSLATORS: one single character to represent 'size' sort mode
+msgid "s"
+msgstr ""
+
 msgid "Size"
 msgstr "Размер"
+
+msgid "&Size"
+msgstr "Размер"
+
+#, fuzzy
+msgid "Block Size"
+msgstr " Размер "
+
+#. TRANSLATORS: one single character to represent 'Modify time' sort mode
+msgid "m"
+msgstr ""
 
 msgid "MTime"
 msgstr "MTime"
 
+msgid "&Modify time"
+msgstr "Време на промяна на файла"
+
+#. TRANSLATORS: one single character to represent 'Access time' sort mode
+msgid "a"
+msgstr ""
+
 msgid "ATime"
 msgstr "ATime"
 
+msgid "&Access time"
+msgstr "Време на достъп"
+
+#. TRANSLATORS: one single character to represent 'Change time' sort mode
+msgid "h"
+msgstr ""
+
 msgid "CTime"
 msgstr "CTime"
+
+msgid "C&Hange time"
+msgstr "Време на промяна на i-възела"
 
 msgid "Permission"
 msgstr "Режим"
@@ -2804,7 +2795,14 @@ msgstr "Режим"
 msgid "Nl"
 msgstr "Връзки"
 
+#. TRANSLATORS: one single character to represent 'inode' sort mode
+msgid "i"
+msgstr ""
+
 msgid "Inode"
+msgstr "I-възел"
+
+msgid "&Inode"
 msgstr "I-възел"
 
 msgid "UID"
@@ -3146,6 +3144,10 @@ msgstr "Insert от доп. клв."
 
 msgid "Delete on keypad"
 msgstr "Delete от доп. клв."
+
+#, fuzzy
+msgid "Escape key"
+msgstr "Накл. черта от доп. клв."
 
 msgid "Enter on keypad"
 msgstr "Enter от доп. клв."
@@ -3940,6 +3942,22 @@ msgstr "Вътрешна грешка:"
 
 msgid "Changes to file lost"
 msgstr "Промените във файла изгубени"
+
+#, fuzzy
+#~ msgid "bind: Unknown command: `%s'"
+#~ msgstr " Команда Chown "
+
+#, fuzzy
+#~ msgid "%s: Unknown command: `%s'"
+#~ msgstr " Команда Chown "
+
+#, fuzzy
+#~ msgid "%s:%d: unknown command `%s'"
+#~ msgstr " Команда Chown "
+
+#, fuzzy
+#~ msgid "%s not found!"
+#~ msgstr "Внимание: файлът %s не е намерен\n"
 
 #~ msgid "NumLock on keypad"
 #~ msgstr "NumLock от доп. клв."

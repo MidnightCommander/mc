@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: be\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-01 02:39+0300\n"
+"POT-Creation-Date: 2009-10-09 09:50+0300\n"
 "PO-Revision-Date: 2008-12-21 23:28+0200\n"
 "Last-Translator: Pavel Piatruk <piatruk.p@gmail.com>\n"
 "Language-Team: belarussian <debian-l10n-belarusian@lists.debian.org>\n"
@@ -568,7 +568,7 @@ msgid "Forward to declaration    M-+"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             C-t"
+msgid "Encod&ing...             M-e"
 msgstr "&Сартаванне                M-t"
 
 msgid "Insert &literal...       C-q"
@@ -761,54 +761,6 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Памылка ў файле %s у радку %d "
-
-#, c-format
-msgid "bind: Wrong argument number, bind <key> <command>"
-msgstr "bind: Памылковая кольскасць параметраў, bind <клавіша> <каманда>"
-
-#, c-format
-msgid "bind: Bad key value `%s'"
-msgstr "bind: Дрэннае значэнне клавішы `%s'"
-
-#, c-format
-msgid "bind: Ehh...no key?"
-msgstr "bind: Гм, няма клавішы?"
-
-#, c-format
-msgid "bind: Unknown key: `%s'"
-msgstr "bind: Невядомая клавіша: `%s'"
-
-#, c-format
-msgid "bind: Unknown command: `%s'"
-msgstr "bind: Невядомая каманда:`%s'"
-
-#, c-format
-msgid "%s: Syntax: %s <n> <command> <label>"
-msgstr "%s: Сінатаксіс: %s <n> <каманда> <пазнака>"
-
-#, c-format
-msgid "%s: Unknown command: `%s'"
-msgstr "%s: Невядомая каманда: `%s'"
-
-#, c-format
-msgid "%s: fn should be 1-10"
-msgstr "%s: fn мусіць быць 1-10"
-
-#, c-format
-msgid "%s: fopen(): %s"
-msgstr "%s: fopen(): %s"
-
-#, c-format
-msgid "%s:%d: unknown command `%s'"
-msgstr "%s:%d: невядомая каманда `%s'"
-
-#, c-format
-msgid "%s:%d: %s"
-msgstr "%s:%d: %s"
-
-#, c-format
-msgid "%s not found!"
-msgstr "%s адсутнічае!"
 
 msgid "&Set"
 msgstr "&Усталяваць"
@@ -1462,30 +1414,6 @@ msgstr " Немагчыма выконваць каманды на нелака�
 
 msgid " The shell is already running a command "
 msgstr " Абалонка ўжо апрацоўвае каманду "
-
-msgid "&Unsorted"
-msgstr "&Без сартавання"
-
-msgid "&Name"
-msgstr "&Назва"
-
-msgid "&Extension"
-msgstr "Па&шырэнне"
-
-msgid "&Modify time"
-msgstr "Час &мадыфікацыі"
-
-msgid "&Access time"
-msgstr "Час &доступу"
-
-msgid "C&Hange time"
-msgstr "Час &змянення"
-
-msgid "&Size"
-msgstr "&Памер"
-
-msgid "&Inode"
-msgstr "&Інода"
 
 msgid "Cannot read directory contents"
 msgstr "Немагчыма прычтаць змест каталога"
@@ -2441,8 +2369,9 @@ msgstr "Парадак &сартавання"
 msgid "&Filter..."
 msgstr "&Фільтр"
 
-msgid "&Encoding...    C-t"
-msgstr ""
+#, fuzzy
+msgid "&Encoding...    M-e"
+msgstr "&Сартаванне                M-t"
 
 msgid "&Network link..."
 msgstr "Се&ткавае злучэнне..."
@@ -2777,17 +2706,79 @@ msgstr "СІМСПАСЫЛКА"
 msgid "SUB-DIR"
 msgstr "ПАД-КАТАЛОГ"
 
+#. TRANSLATORS: one single character to represent 'unsorted' sort mode
+msgid "u"
+msgstr ""
+
+#, fuzzy
+msgid "Unsorted"
+msgstr "&Без сартавання"
+
+msgid "&Unsorted"
+msgstr "&Без сартавання"
+
+#. TRANSLATORS: one single character to represent 'name' sort mode
+#, fuzzy
+msgid "n"
+msgstr "На"
+
+msgid "&Name"
+msgstr "&Назва"
+
+#. TRANSLATORS: one single character to represent 'extension' sort mode
+msgid "e"
+msgstr ""
+
+#, fuzzy
+msgid "Extension"
+msgstr "Пашырэнне:"
+
+msgid "&Extension"
+msgstr "Па&шырэнне"
+
+#. TRANSLATORS: one single character to represent 'size' sort mode
+msgid "s"
+msgstr ""
+
 msgid "Size"
 msgstr "Памер"
+
+msgid "&Size"
+msgstr "&Памер"
+
+#, fuzzy
+msgid "Block Size"
+msgstr " Памер "
+
+#. TRANSLATORS: one single character to represent 'Modify time' sort mode
+msgid "m"
+msgstr ""
 
 msgid "MTime"
 msgstr "Ап.мадыфікацыя"
 
+msgid "&Modify time"
+msgstr "Час &мадыфікацыі"
+
+#. TRANSLATORS: one single character to represent 'Access time' sort mode
+msgid "a"
+msgstr ""
+
 msgid "ATime"
 msgstr "Ап. доступ"
 
+msgid "&Access time"
+msgstr "Час &доступу"
+
+#. TRANSLATORS: one single character to represent 'Change time' sort mode
+msgid "h"
+msgstr ""
+
 msgid "CTime"
 msgstr "Час стварэння"
+
+msgid "C&Hange time"
+msgstr "Час &змянення"
 
 msgid "Permission"
 msgstr "Атрыбуты"
@@ -2798,8 +2789,15 @@ msgstr "Правы"
 msgid "Nl"
 msgstr "Кс"
 
+#. TRANSLATORS: one single character to represent 'inode' sort mode
+msgid "i"
+msgstr ""
+
 msgid "Inode"
 msgstr "Інода"
+
+msgid "&Inode"
+msgstr "&Інода"
 
 msgid "UID"
 msgstr "UID"
@@ -3144,6 +3142,10 @@ msgstr "Insert на keypad'е"
 
 msgid "Delete on keypad"
 msgstr "Delete на keypad'е"
+
+#, fuzzy
+msgid "Escape key"
+msgstr "Slash на keypad'е"
 
 msgid "Enter on keypad"
 msgstr "Enter на keypad'е"
@@ -3935,6 +3937,42 @@ msgstr "Унутраная памылка:"
 
 msgid "Changes to file lost"
 msgstr "Змены для файла страчаны"
+
+#~ msgid "bind: Wrong argument number, bind <key> <command>"
+#~ msgstr "bind: Памылковая кольскасць параметраў, bind <клавіша> <каманда>"
+
+#~ msgid "bind: Bad key value `%s'"
+#~ msgstr "bind: Дрэннае значэнне клавішы `%s'"
+
+#~ msgid "bind: Ehh...no key?"
+#~ msgstr "bind: Гм, няма клавішы?"
+
+#~ msgid "bind: Unknown key: `%s'"
+#~ msgstr "bind: Невядомая клавіша: `%s'"
+
+#~ msgid "bind: Unknown command: `%s'"
+#~ msgstr "bind: Невядомая каманда:`%s'"
+
+#~ msgid "%s: Syntax: %s <n> <command> <label>"
+#~ msgstr "%s: Сінатаксіс: %s <n> <каманда> <пазнака>"
+
+#~ msgid "%s: Unknown command: `%s'"
+#~ msgstr "%s: Невядомая каманда: `%s'"
+
+#~ msgid "%s: fn should be 1-10"
+#~ msgstr "%s: fn мусіць быць 1-10"
+
+#~ msgid "%s: fopen(): %s"
+#~ msgstr "%s: fopen(): %s"
+
+#~ msgid "%s:%d: unknown command `%s'"
+#~ msgstr "%s:%d: невядомая каманда `%s'"
+
+#~ msgid "%s:%d: %s"
+#~ msgstr "%s:%d: %s"
+
+#~ msgid "%s not found!"
+#~ msgstr "%s адсутнічае!"
 
 #~ msgid "NumLock on keypad"
 #~ msgstr "NumLock на keypad'е"

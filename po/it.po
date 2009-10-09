@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.6.2\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-01 02:39+0300\n"
+"POT-Creation-Date: 2009-10-09 09:50+0300\n"
 "PO-Revision-Date: 2008-04-07 17:25+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian <debian-l10n-italian@lists.debian.org>\n"
@@ -571,7 +571,7 @@ msgid "Forward to declaration    M-+"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             C-t"
+msgid "Encod&ing...             M-e"
 msgstr "&Ordina...                      M-t"
 
 msgid "Insert &literal...       C-q"
@@ -763,54 +763,6 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Errore nel file %s alla riga %d "
-
-#, c-format
-msgid "bind: Wrong argument number, bind <key> <command>"
-msgstr "bind: errato numero di argomenti, bind <tasto> <comando>"
-
-#, c-format
-msgid "bind: Bad key value `%s'"
-msgstr "bind: valore tasto errato `%s'"
-
-#, c-format
-msgid "bind: Ehh...no key?"
-msgstr "bind: ... e il tasto?"
-
-#, c-format
-msgid "bind: Unknown key: `%s'"
-msgstr "bind: tasto sconosciuto: `%s'"
-
-#, c-format
-msgid "bind: Unknown command: `%s'"
-msgstr "bind: comando sconosciuto: `%s'"
-
-#, c-format
-msgid "%s: Syntax: %s <n> <command> <label>"
-msgstr "%s: sintassi: %s <n> <comando> <etichetta>"
-
-#, c-format
-msgid "%s: Unknown command: `%s'"
-msgstr "%s: comando sconosciuto: `%s'"
-
-#, c-format
-msgid "%s: fn should be 1-10"
-msgstr "%s: fn deve essere tra 1-10"
-
-#, c-format
-msgid "%s: fopen(): %s"
-msgstr "%s: fopen(): %s"
-
-#, c-format
-msgid "%s:%d: unknown command `%s'"
-msgstr "%s:%d: comando sconosciuto `%s'"
-
-#, c-format
-msgid "%s:%d: %s"
-msgstr "%s:%d: %s"
-
-#, c-format
-msgid "%s not found!"
-msgstr "%s non trovato!"
 
 msgid "&Set"
 msgstr "&Imposta"
@@ -1464,30 +1416,6 @@ msgstr " Non è possibile eseguire comandi su filesystem non locali "
 
 msgid " The shell is already running a command "
 msgstr " La shell sta già eseguendo un comando "
-
-msgid "&Unsorted"
-msgstr "&Senza ordine"
-
-msgid "&Name"
-msgstr "&Nome"
-
-msgid "&Extension"
-msgstr "&Estensione"
-
-msgid "&Modify time"
-msgstr "Data di &modifica"
-
-msgid "&Access time"
-msgstr "Data di a&ccesso"
-
-msgid "C&Hange time"
-msgstr "Data di cambiament&o"
-
-msgid "&Size"
-msgstr "&Dimensione"
-
-msgid "&Inode"
-msgstr "&Inode"
 
 msgid "Cannot read directory contents"
 msgstr "Impossibile leggere il contenuto della directory"
@@ -2446,8 +2374,9 @@ msgstr "&Ordina per..."
 msgid "&Filter..."
 msgstr "&Filtro"
 
-msgid "&Encoding...    C-t"
-msgstr ""
+#, fuzzy
+msgid "&Encoding...    M-e"
+msgstr "&Ordina...                      M-t"
 
 msgid "&Network link..."
 msgstr "&Connessione di rete..."
@@ -2783,17 +2712,79 @@ msgstr "SYMLINK"
 msgid "SUB-DIR"
 msgstr "SUB-DIR"
 
+#. TRANSLATORS: one single character to represent 'unsorted' sort mode
+msgid "u"
+msgstr ""
+
+#, fuzzy
+msgid "Unsorted"
+msgstr "&Senza ordine"
+
+msgid "&Unsorted"
+msgstr "&Senza ordine"
+
+#. TRANSLATORS: one single character to represent 'name' sort mode
+#, fuzzy
+msgid "n"
+msgstr "Su"
+
+msgid "&Name"
+msgstr "&Nome"
+
+#. TRANSLATORS: one single character to represent 'extension' sort mode
+msgid "e"
+msgstr ""
+
+#, fuzzy
+msgid "Extension"
+msgstr "Estensione:"
+
+msgid "&Extension"
+msgstr "&Estensione"
+
+#. TRANSLATORS: one single character to represent 'size' sort mode
+msgid "s"
+msgstr ""
+
 msgid "Size"
 msgstr "Dimensione"
+
+msgid "&Size"
+msgstr "&Dimensione"
+
+#, fuzzy
+msgid "Block Size"
+msgstr " Dimensione "
+
+#. TRANSLATORS: one single character to represent 'Modify time' sort mode
+msgid "m"
+msgstr ""
 
 msgid "MTime"
 msgstr "MTime"
 
+msgid "&Modify time"
+msgstr "Data di &modifica"
+
+#. TRANSLATORS: one single character to represent 'Access time' sort mode
+msgid "a"
+msgstr ""
+
 msgid "ATime"
 msgstr "ATime"
 
+msgid "&Access time"
+msgstr "Data di a&ccesso"
+
+#. TRANSLATORS: one single character to represent 'Change time' sort mode
+msgid "h"
+msgstr ""
+
 msgid "CTime"
 msgstr "CTime"
+
+msgid "C&Hange time"
+msgstr "Data di cambiament&o"
 
 msgid "Permission"
 msgstr "Permessi"
@@ -2804,8 +2795,15 @@ msgstr "Perm"
 msgid "Nl"
 msgstr "Nl"
 
+#. TRANSLATORS: one single character to represent 'inode' sort mode
+msgid "i"
+msgstr ""
+
 msgid "Inode"
 msgstr "Nodo-I"
+
+msgid "&Inode"
+msgstr "&Inode"
 
 msgid "UID"
 msgstr "UID"
@@ -3148,6 +3146,10 @@ msgstr "Ins sul tastierino"
 
 msgid "Delete on keypad"
 msgstr "Canc sul tastierino"
+
+#, fuzzy
+msgid "Escape key"
+msgstr "/ sul tastierino"
 
 msgid "Enter on keypad"
 msgstr "Invio sul tastierino"
@@ -3939,6 +3941,42 @@ msgstr " Errore interno:"
 
 msgid "Changes to file lost"
 msgstr "Cambiamenti al file persi"
+
+#~ msgid "bind: Wrong argument number, bind <key> <command>"
+#~ msgstr "bind: errato numero di argomenti, bind <tasto> <comando>"
+
+#~ msgid "bind: Bad key value `%s'"
+#~ msgstr "bind: valore tasto errato `%s'"
+
+#~ msgid "bind: Ehh...no key?"
+#~ msgstr "bind: ... e il tasto?"
+
+#~ msgid "bind: Unknown key: `%s'"
+#~ msgstr "bind: tasto sconosciuto: `%s'"
+
+#~ msgid "bind: Unknown command: `%s'"
+#~ msgstr "bind: comando sconosciuto: `%s'"
+
+#~ msgid "%s: Syntax: %s <n> <command> <label>"
+#~ msgstr "%s: sintassi: %s <n> <comando> <etichetta>"
+
+#~ msgid "%s: Unknown command: `%s'"
+#~ msgstr "%s: comando sconosciuto: `%s'"
+
+#~ msgid "%s: fn should be 1-10"
+#~ msgstr "%s: fn deve essere tra 1-10"
+
+#~ msgid "%s: fopen(): %s"
+#~ msgstr "%s: fopen(): %s"
+
+#~ msgid "%s:%d: unknown command `%s'"
+#~ msgstr "%s:%d: comando sconosciuto `%s'"
+
+#~ msgid "%s:%d: %s"
+#~ msgstr "%s:%d: %s"
+
+#~ msgid "%s not found!"
+#~ msgstr "%s non trovato!"
 
 #~ msgid "NumLock on keypad"
 #~ msgstr "NumLock sul tastierino"

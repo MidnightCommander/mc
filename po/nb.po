@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-01 02:39+0300\n"
+"POT-Creation-Date: 2009-10-09 09:50+0300\n"
 "PO-Revision-Date: 2002-10-22 14:28+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -571,7 +571,7 @@ msgid "Forward to declaration    M-+"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             C-t"
+msgid "Encod&ing...             M-e"
 msgstr "Sor&ter...               M-t"
 
 msgid "Insert &literal...       C-q"
@@ -767,54 +767,6 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Feil i filen %s ved linje %d "
-
-#, c-format
-msgid "bind: Wrong argument number, bind <key> <command>"
-msgstr ""
-
-#, c-format
-msgid "bind: Bad key value `%s'"
-msgstr ""
-
-#, c-format
-msgid "bind: Ehh...no key?"
-msgstr ""
-
-#, c-format
-msgid "bind: Unknown key: `%s'"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "bind: Unknown command: `%s'"
-msgstr " Chown kommando "
-
-#, c-format
-msgid "%s: Syntax: %s <n> <command> <label>"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: Unknown command: `%s'"
-msgstr " Chown kommando "
-
-#, c-format
-msgid "%s: fn should be 1-10"
-msgstr ""
-
-#, c-format
-msgid "%s: fopen(): %s"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s:%d: unknown command `%s'"
-msgstr " Chown kommando "
-
-#, c-format
-msgid "%s:%d: %s"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s not found!"
-msgstr "Advarsel: fil %s ikke funnet\n"
 
 msgid "&Set"
 msgstr "&Sett"
@@ -1467,30 +1419,6 @@ msgstr " Kan ikke kjøre kommandoer på ikke-lokale filsystemer"
 
 msgid " The shell is already running a command "
 msgstr " Skallet kjører allerede en kommando "
-
-msgid "&Unsorted"
-msgstr "&Usortert"
-
-msgid "&Name"
-msgstr "&Navn"
-
-msgid "&Extension"
-msgstr "&Utvidelse"
-
-msgid "&Modify time"
-msgstr "&Modifisert"
-
-msgid "&Access time"
-msgstr "&Aksessert"
-
-msgid "C&Hange time"
-msgstr "&Endret"
-
-msgid "&Size"
-msgstr "&Størrelse"
-
-msgid "&Inode"
-msgstr "&Inode"
 
 #, fuzzy
 msgid "Cannot read directory contents"
@@ -2445,8 +2373,9 @@ msgstr "&Sorteringsrekkefølge..."
 msgid "&Filter..."
 msgstr "&Filter..."
 
-msgid "&Encoding...    C-t"
-msgstr ""
+#, fuzzy
+msgid "&Encoding...    M-e"
+msgstr "Sor&ter...               M-t"
 
 msgid "&Network link..."
 msgstr "&Nettverkskobling..."
@@ -2780,17 +2709,79 @@ msgstr "SYMLENKE"
 msgid "SUB-DIR"
 msgstr "SUB-DIR"
 
+#. TRANSLATORS: one single character to represent 'unsorted' sort mode
+msgid "u"
+msgstr ""
+
+#, fuzzy
+msgid "Unsorted"
+msgstr "&Usortert"
+
+msgid "&Unsorted"
+msgstr "&Usortert"
+
+#. TRANSLATORS: one single character to represent 'name' sort mode
+#, fuzzy
+msgid "n"
+msgstr "På"
+
+msgid "&Name"
+msgstr "&Navn"
+
+#. TRANSLATORS: one single character to represent 'extension' sort mode
+msgid "e"
+msgstr ""
+
+#, fuzzy
+msgid "Extension"
+msgstr "Utvidelse:"
+
+msgid "&Extension"
+msgstr "&Utvidelse"
+
+#. TRANSLATORS: one single character to represent 'size' sort mode
+msgid "s"
+msgstr ""
+
 msgid "Size"
 msgstr "Størrelse"
+
+msgid "&Size"
+msgstr "&Størrelse"
+
+#, fuzzy
+msgid "Block Size"
+msgstr " Størrelse "
+
+#. TRANSLATORS: one single character to represent 'Modify time' sort mode
+msgid "m"
+msgstr ""
 
 msgid "MTime"
 msgstr "MTime"
 
+msgid "&Modify time"
+msgstr "&Modifisert"
+
+#. TRANSLATORS: one single character to represent 'Access time' sort mode
+msgid "a"
+msgstr ""
+
 msgid "ATime"
 msgstr "ATime"
 
+msgid "&Access time"
+msgstr "&Aksessert"
+
+#. TRANSLATORS: one single character to represent 'Change time' sort mode
+msgid "h"
+msgstr ""
+
 msgid "CTime"
 msgstr "CTime"
+
+msgid "C&Hange time"
+msgstr "&Endret"
 
 msgid "Permission"
 msgstr "Rettighet"
@@ -2801,8 +2792,15 @@ msgstr "Rett"
 msgid "Nl"
 msgstr "Nl"
 
+#. TRANSLATORS: one single character to represent 'inode' sort mode
+msgid "i"
+msgstr ""
+
 msgid "Inode"
 msgstr "Inode"
+
+msgid "&Inode"
+msgstr "&Inode"
 
 msgid "UID"
 msgstr "UID"
@@ -3143,6 +3141,10 @@ msgstr "Sett inn på numerisk tastatur"
 
 msgid "Delete on keypad"
 msgstr "Slett på numerisk tastatur"
+
+#, fuzzy
+msgid "Escape key"
+msgstr "Slash på numerisk tastatur"
 
 msgid "Enter on keypad"
 msgstr "Linjeskift på numerisk tastatur"
@@ -3933,6 +3935,22 @@ msgstr "Intern feil:"
 
 msgid "Changes to file lost"
 msgstr "Endringer i filen tapt"
+
+#, fuzzy
+#~ msgid "bind: Unknown command: `%s'"
+#~ msgstr " Chown kommando "
+
+#, fuzzy
+#~ msgid "%s: Unknown command: `%s'"
+#~ msgstr " Chown kommando "
+
+#, fuzzy
+#~ msgid "%s:%d: unknown command `%s'"
+#~ msgstr " Chown kommando "
+
+#, fuzzy
+#~ msgid "%s not found!"
+#~ msgstr "Advarsel: fil %s ikke funnet\n"
 
 #~ msgid "NumLock on keypad"
 #~ msgstr "NumLock på numerisk tastatur"

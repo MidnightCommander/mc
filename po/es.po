@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.7.0pre3\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-02 10:22+0300\n"
+"POT-Creation-Date: 2009-10-09 09:50+0300\n"
 "PO-Revision-Date: 2009-10-01 23:55+0200\n"
 "Last-Translator: David Martín <dmartina@excite.com\n"
 "Language-Team: Spanish <debian-l10n-spanish@lists.debian.org>\n"
@@ -541,7 +541,8 @@ msgstr "&Volver desde declaración          M--"
 msgid "Forward to declaration    M-+"
 msgstr "ava&Nzar a declaración             M-+"
 
-msgid "Encod&ing...             C-t"
+#, fuzzy
+msgid "Encod&ing...             M-e"
 msgstr "&Código carácter...                C-t"
 
 msgid "Insert &literal...       C-q"
@@ -1366,30 +1367,6 @@ msgstr " Imposible ejecutar comandos desde directorios no locales "
 
 msgid " The shell is already running a command "
 msgstr " El shell ya está ejecutando un comando "
-
-msgid "&Unsorted"
-msgstr "sin &Ordenar"
-
-msgid "&Name"
-msgstr "&Nombre"
-
-msgid "&Extension"
-msgstr "e&Xtensión"
-
-msgid "&Modify time"
-msgstr "fecha de &Modificación"
-
-msgid "&Access time"
-msgstr "fecha de acce&So"
-
-msgid "C&Hange time"
-msgstr "fecha de cam&Bio"
-
-msgid "&Size"
-msgstr "&Tamaño"
-
-msgid "&Inode"
-msgstr "&Inodo"
 
 msgid "Cannot read directory contents"
 msgstr "Imposible leer directorio"
@@ -2344,7 +2321,8 @@ msgstr "&Ordenar..."
 msgid "&Filter..."
 msgstr "&Filtro..."
 
-msgid "&Encoding...    C-t"
+#, fuzzy
+msgid "&Encoding...    M-e"
 msgstr "&Código carácter...  C-t"
 
 msgid "&Network link..."
@@ -2685,17 +2663,79 @@ msgstr "ENLACE"
 msgid "SUB-DIR"
 msgstr "SUB-DIR"
 
+#. TRANSLATORS: one single character to represent 'unsorted' sort mode
+msgid "u"
+msgstr ""
+
+#, fuzzy
+msgid "Unsorted"
+msgstr "sin &Ordenar"
+
+msgid "&Unsorted"
+msgstr "sin &Ordenar"
+
+#. TRANSLATORS: one single character to represent 'name' sort mode
+#, fuzzy
+msgid "n"
+msgstr "En"
+
+msgid "&Name"
+msgstr "&Nombre"
+
+#. TRANSLATORS: one single character to represent 'extension' sort mode
+msgid "e"
+msgstr ""
+
+#, fuzzy
+msgid "Extension"
+msgstr "Extensión:"
+
+msgid "&Extension"
+msgstr "e&Xtensión"
+
+#. TRANSLATORS: one single character to represent 'size' sort mode
+msgid "s"
+msgstr ""
+
 msgid "Size"
 msgstr "Tamaño"
+
+msgid "&Size"
+msgstr "&Tamaño"
+
+#, fuzzy
+msgid "Block Size"
+msgstr " Tamaño "
+
+#. TRANSLATORS: one single character to represent 'Modify time' sort mode
+msgid "m"
+msgstr ""
 
 msgid "MTime"
 msgstr "FechaMod"
 
+msgid "&Modify time"
+msgstr "fecha de &Modificación"
+
+#. TRANSLATORS: one single character to represent 'Access time' sort mode
+msgid "a"
+msgstr ""
+
 msgid "ATime"
 msgstr "FechaAcc"
 
+msgid "&Access time"
+msgstr "fecha de acce&So"
+
+#. TRANSLATORS: one single character to represent 'Change time' sort mode
+msgid "h"
+msgstr ""
+
 msgid "CTime"
 msgstr "FechaCmb"
+
+msgid "C&Hange time"
+msgstr "fecha de cam&Bio"
 
 msgid "Permission"
 msgstr "Permisos"
@@ -2706,8 +2746,15 @@ msgstr "Perm"
 msgid "Nl"
 msgstr "Ne"
 
+#. TRANSLATORS: one single character to represent 'inode' sort mode
+msgid "i"
+msgstr ""
+
 msgid "Inode"
 msgstr "Inodo"
+
+msgid "&Inode"
+msgstr "&Inodo"
 
 msgid "UID"
 msgstr "UID"
@@ -3052,6 +3099,10 @@ msgstr "Ins, pad"
 
 msgid "Delete on keypad"
 msgstr "Eliminar, pad"
+
+#, fuzzy
+msgid "Escape key"
+msgstr "Espacio"
 
 msgid "Enter on keypad"
 msgstr "Intro, pad"

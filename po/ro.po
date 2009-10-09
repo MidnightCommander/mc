@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-01 02:39+0300\n"
+"POT-Creation-Date: 2009-10-09 09:50+0300\n"
 "PO-Revision-Date: 2003-01-31 00:11+0200\n"
 "Last-Translator: Mişu Moldovan <dumol@go.ro>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
@@ -574,7 +574,7 @@ msgid "Forward to declaration    M-+"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             C-t"
+msgid "Encod&ing...             M-e"
 msgstr "Sor&tează...                     M-t"
 
 msgid "Insert &literal...       C-q"
@@ -769,54 +769,6 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Eroare în fişierul %s la linia %d "
-
-#, c-format
-msgid "bind: Wrong argument number, bind <key> <command>"
-msgstr ""
-
-#, c-format
-msgid "bind: Bad key value `%s'"
-msgstr ""
-
-#, c-format
-msgid "bind: Ehh...no key?"
-msgstr ""
-
-#, c-format
-msgid "bind: Unknown key: `%s'"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "bind: Unknown command: `%s'"
-msgstr " Comanda chown "
-
-#, c-format
-msgid "%s: Syntax: %s <n> <command> <label>"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: Unknown command: `%s'"
-msgstr " Comanda chown "
-
-#, c-format
-msgid "%s: fn should be 1-10"
-msgstr ""
-
-#, c-format
-msgid "%s: fopen(): %s"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s:%d: unknown command `%s'"
-msgstr " Comanda chown "
-
-#, c-format
-msgid "%s:%d: %s"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s not found!"
-msgstr "Atenţie: nu am găsit fişierul %s\n"
 
 msgid "&Set"
 msgstr "&Setez"
@@ -1466,30 +1418,6 @@ msgstr " Nu puteţi executa comenzi pe sisteme de fişiere non-locale "
 
 msgid " The shell is already running a command "
 msgstr " Shell-ul deja execută o altă comandă "
-
-msgid "&Unsorted"
-msgstr "ne-Sor&tat"
-
-msgid "&Name"
-msgstr "&Nume"
-
-msgid "&Extension"
-msgstr "&Extensie"
-
-msgid "&Modify time"
-msgstr "data modi&Ficării"
-
-msgid "&Access time"
-msgstr "data &Accesului"
-
-msgid "C&Hange time"
-msgstr "data &Creării"
-
-msgid "&Size"
-msgstr "&Mărime"
-
-msgid "&Inode"
-msgstr "&Inod"
 
 msgid "Cannot read directory contents"
 msgstr "Nu pot citi conţinutul directorului"
@@ -2442,8 +2370,9 @@ msgstr "&Ordinea sortării..."
 msgid "&Filter..."
 msgstr "&Filtru..."
 
-msgid "&Encoding...    C-t"
-msgstr ""
+#, fuzzy
+msgid "&Encoding...    M-e"
+msgstr "Sor&tează...                     M-t"
 
 msgid "&Network link..."
 msgstr "l&Egătură reţea..."
@@ -2779,17 +2708,79 @@ msgstr "LEG. SIMB."
 msgid "SUB-DIR"
 msgstr "SUB-DIR"
 
+#. TRANSLATORS: one single character to represent 'unsorted' sort mode
+msgid "u"
+msgstr ""
+
+#, fuzzy
+msgid "Unsorted"
+msgstr "ne-Sor&tat"
+
+msgid "&Unsorted"
+msgstr "ne-Sor&tat"
+
+#. TRANSLATORS: one single character to represent 'name' sort mode
+#, fuzzy
+msgid "n"
+msgstr "Pe"
+
+msgid "&Name"
+msgstr "&Nume"
+
+#. TRANSLATORS: one single character to represent 'extension' sort mode
+msgid "e"
+msgstr ""
+
+#, fuzzy
+msgid "Extension"
+msgstr "Extensie:"
+
+msgid "&Extension"
+msgstr "&Extensie"
+
+#. TRANSLATORS: one single character to represent 'size' sort mode
+msgid "s"
+msgstr ""
+
 msgid "Size"
 msgstr "Mărime"
+
+msgid "&Size"
+msgstr "&Mărime"
+
+#, fuzzy
+msgid "Block Size"
+msgstr " Mărime "
+
+#. TRANSLATORS: one single character to represent 'Modify time' sort mode
+msgid "m"
+msgstr ""
 
 msgid "MTime"
 msgstr "DataM"
 
+msgid "&Modify time"
+msgstr "data modi&Ficării"
+
+#. TRANSLATORS: one single character to represent 'Access time' sort mode
+msgid "a"
+msgstr ""
+
 msgid "ATime"
 msgstr "DataA"
 
+msgid "&Access time"
+msgstr "data &Accesului"
+
+#. TRANSLATORS: one single character to represent 'Change time' sort mode
+msgid "h"
+msgstr ""
+
 msgid "CTime"
 msgstr "DataC"
+
+msgid "C&Hange time"
+msgstr "data &Creării"
 
 msgid "Permission"
 msgstr "Drepturi"
@@ -2800,8 +2791,15 @@ msgstr "Mod"
 msgid "Nl"
 msgstr "Nl"
 
+#. TRANSLATORS: one single character to represent 'inode' sort mode
+msgid "i"
+msgstr ""
+
 msgid "Inode"
 msgstr "Inod"
+
+msgid "&Inode"
+msgstr "&Inod"
 
 msgid "UID"
 msgstr "UID"
@@ -3142,6 +3140,10 @@ msgstr "Insert pe keypad"
 
 msgid "Delete on keypad"
 msgstr "Delete pe keypad"
+
+#, fuzzy
+msgid "Escape key"
+msgstr "Slash pe keypad"
 
 msgid "Enter on keypad"
 msgstr "Enter pe keypad"
@@ -3931,6 +3933,22 @@ msgstr "Eroare internă:"
 
 msgid "Changes to file lost"
 msgstr "S-au pierdut schimbările efectuate în fişier"
+
+#, fuzzy
+#~ msgid "bind: Unknown command: `%s'"
+#~ msgstr " Comanda chown "
+
+#, fuzzy
+#~ msgid "%s: Unknown command: `%s'"
+#~ msgstr " Comanda chown "
+
+#, fuzzy
+#~ msgid "%s:%d: unknown command `%s'"
+#~ msgstr " Comanda chown "
+
+#, fuzzy
+#~ msgid "%s not found!"
+#~ msgstr "Atenţie: nu am găsit fişierul %s\n"
 
 #~ msgid "NumLock on keypad"
 #~ msgstr "NumLock pe keypad"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-01 02:39+0300\n"
+"POT-Creation-Date: 2009-10-09 09:50+0300\n"
 "PO-Revision-Date: 2008-06-05 17:36+0100\n"
 "Last-Translator: Anna Talianova <anickat1@gmail.com>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
@@ -574,7 +574,7 @@ msgid "Forward to declaration    M-+"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             C-t"
+msgid "Encod&ing...             M-e"
 msgstr "&Setřídit                     M-t"
 
 msgid "Insert &literal...       C-q"
@@ -767,54 +767,6 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Chyba v souboru %s na řádce %d "
-
-#, c-format
-msgid "bind: Wrong argument number, bind <key> <command>"
-msgstr "bind: Špatné číslo argumentu, bind <klíč> <příkaz>"
-
-#, c-format
-msgid "bind: Bad key value `%s'"
-msgstr "bind: Špatná hodnota klíče `%s'"
-
-#, c-format
-msgid "bind: Ehh...no key?"
-msgstr "bind: Uh... žádný klíč?"
-
-#, c-format
-msgid "bind: Unknown key: `%s'"
-msgstr "bind: Neznámý klíč: `%s'"
-
-#, c-format
-msgid "bind: Unknown command: `%s'"
-msgstr "bind: Neznámý příkaz: `%s'"
-
-#, c-format
-msgid "%s: Syntax: %s <n> <command> <label>"
-msgstr "%s: Syntaxe: %s <n> <příkaz> <označení>"
-
-#, c-format
-msgid "%s: Unknown command: `%s'"
-msgstr "%s: Neznámý příkaz: `%s'"
-
-#, c-format
-msgid "%s: fn should be 1-10"
-msgstr "%s: fn by mělo být mezi 1-10"
-
-#, c-format
-msgid "%s: fopen(): %s"
-msgstr "%s: fopen(): %s"
-
-#, c-format
-msgid "%s:%d: unknown command `%s'"
-msgstr "%s:%d: Neznámý příkaz `%s'"
-
-#, c-format
-msgid "%s:%d: %s"
-msgstr "%s:%d: %s"
-
-#, c-format
-msgid "%s not found!"
-msgstr "%s nebyl nalezen!"
 
 # "Nastav" je úmyslně, "Nastavit" se nevejde
 msgid "&Set"
@@ -1477,30 +1429,6 @@ msgstr " Pokud nepracujete s lokálními soubory, nelze spouštět žádné př�
 
 msgid " The shell is already running a command "
 msgstr " Shell už provádí příkaz "
-
-msgid "&Unsorted"
-msgstr "&Netříděno"
-
-msgid "&Name"
-msgstr "&Jméno"
-
-msgid "&Extension"
-msgstr "&Přípona"
-
-msgid "&Modify time"
-msgstr "čas &Modifikace"
-
-msgid "&Access time"
-msgstr "čas &Přístupu"
-
-msgid "C&Hange time"
-msgstr "čas změn&Y"
-
-msgid "&Size"
-msgstr "&Velikost"
-
-msgid "&Inode"
-msgstr "&I-uzel"
 
 msgid "Cannot read directory contents"
 msgstr "Nelze číst obsah adresáře"
@@ -2458,8 +2386,9 @@ msgstr "&Pořadí..."
 msgid "&Filter..."
 msgstr "&Filtr..."
 
-msgid "&Encoding...    C-t"
-msgstr ""
+#, fuzzy
+msgid "&Encoding...    M-e"
+msgstr "&Setřídit                     M-t"
 
 msgid "&Network link..."
 msgstr "síťové spoje&Ní..."
@@ -2795,17 +2724,79 @@ msgstr "SYMLINK"
 msgid "SUB-DIR"
 msgstr "PODADR"
 
+#. TRANSLATORS: one single character to represent 'unsorted' sort mode
+msgid "u"
+msgstr ""
+
+#, fuzzy
+msgid "Unsorted"
+msgstr "&Netříděno"
+
+msgid "&Unsorted"
+msgstr "&Netříděno"
+
+#. TRANSLATORS: one single character to represent 'name' sort mode
+#, fuzzy
+msgid "n"
+msgstr "Na"
+
+msgid "&Name"
+msgstr "&Jméno"
+
+#. TRANSLATORS: one single character to represent 'extension' sort mode
+msgid "e"
+msgstr ""
+
+#, fuzzy
+msgid "Extension"
+msgstr "Přípona:"
+
+msgid "&Extension"
+msgstr "&Přípona"
+
+#. TRANSLATORS: one single character to represent 'size' sort mode
+msgid "s"
+msgstr ""
+
 msgid "Size"
 msgstr "Velikost"
+
+msgid "&Size"
+msgstr "&Velikost"
+
+#, fuzzy
+msgid "Block Size"
+msgstr " Velikost "
+
+#. TRANSLATORS: one single character to represent 'Modify time' sort mode
+msgid "m"
+msgstr ""
 
 msgid "MTime"
 msgstr "Modifikace"
 
+msgid "&Modify time"
+msgstr "čas &Modifikace"
+
+#. TRANSLATORS: one single character to represent 'Access time' sort mode
+msgid "a"
+msgstr ""
+
 msgid "ATime"
 msgstr "Přístup"
 
+msgid "&Access time"
+msgstr "čas &Přístupu"
+
+#. TRANSLATORS: one single character to represent 'Change time' sort mode
+msgid "h"
+msgstr ""
+
 msgid "CTime"
 msgstr "Změna"
+
+msgid "C&Hange time"
+msgstr "čas změn&Y"
 
 msgid "Permission"
 msgstr "Práva"
@@ -2816,8 +2807,15 @@ msgstr "Práva"
 msgid "Nl"
 msgstr "Od"
 
+#. TRANSLATORS: one single character to represent 'inode' sort mode
+msgid "i"
+msgstr ""
+
 msgid "Inode"
 msgstr "I-uzel"
+
+msgid "&Inode"
+msgstr "&I-uzel"
 
 msgid "UID"
 msgstr "UID"
@@ -3163,6 +3161,10 @@ msgstr "Insert na numerické klávesnici"
 
 msgid "Delete on keypad"
 msgstr "Delete na numerické klávesnici"
+
+#, fuzzy
+msgid "Escape key"
+msgstr "Lomítko na numerické klávesnici"
 
 msgid "Enter on keypad"
 msgstr "Enter na numerické klávesnici"
@@ -3958,6 +3960,42 @@ msgstr "Interní chyba:"
 
 msgid "Changes to file lost"
 msgstr "Změny souboru byly ztraceny"
+
+#~ msgid "bind: Wrong argument number, bind <key> <command>"
+#~ msgstr "bind: Špatné číslo argumentu, bind <klíč> <příkaz>"
+
+#~ msgid "bind: Bad key value `%s'"
+#~ msgstr "bind: Špatná hodnota klíče `%s'"
+
+#~ msgid "bind: Ehh...no key?"
+#~ msgstr "bind: Uh... žádný klíč?"
+
+#~ msgid "bind: Unknown key: `%s'"
+#~ msgstr "bind: Neznámý klíč: `%s'"
+
+#~ msgid "bind: Unknown command: `%s'"
+#~ msgstr "bind: Neznámý příkaz: `%s'"
+
+#~ msgid "%s: Syntax: %s <n> <command> <label>"
+#~ msgstr "%s: Syntaxe: %s <n> <příkaz> <označení>"
+
+#~ msgid "%s: Unknown command: `%s'"
+#~ msgstr "%s: Neznámý příkaz: `%s'"
+
+#~ msgid "%s: fn should be 1-10"
+#~ msgstr "%s: fn by mělo být mezi 1-10"
+
+#~ msgid "%s: fopen(): %s"
+#~ msgstr "%s: fopen(): %s"
+
+#~ msgid "%s:%d: unknown command `%s'"
+#~ msgstr "%s:%d: Neznámý příkaz `%s'"
+
+#~ msgid "%s:%d: %s"
+#~ msgstr "%s:%d: %s"
+
+#~ msgid "%s not found!"
+#~ msgstr "%s nebyl nalezen!"
 
 #~ msgid "NumLock on keypad"
 #~ msgstr "NumLock na numerické klávesnici"

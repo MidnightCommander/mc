@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0-pre3\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-01 02:39+0300\n"
+"POT-Creation-Date: 2009-10-09 09:50+0300\n"
 "PO-Revision-Date: 2003-01-22 17:31+0900\n"
 "Last-Translator: Nam SungHyun <namsh@kldp.org>\n"
 "Language-Team: Korean <debian-l10n-korean@lists.debian.org>\n"
@@ -570,7 +570,7 @@ msgid "Forward to declaration    M-+"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             C-t"
+msgid "Encod&ing...             M-e"
 msgstr "정렬(&t)                  M-t"
 
 msgid "Insert &literal...       C-q"
@@ -765,54 +765,6 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " 파일 %s의 %d 라인에 에러 "
-
-#, c-format
-msgid "bind: Wrong argument number, bind <key> <command>"
-msgstr ""
-
-#, c-format
-msgid "bind: Bad key value `%s'"
-msgstr ""
-
-#, c-format
-msgid "bind: Ehh...no key?"
-msgstr ""
-
-#, c-format
-msgid "bind: Unknown key: `%s'"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "bind: Unknown command: `%s'"
-msgstr " Chown 명령 "
-
-#, c-format
-msgid "%s: Syntax: %s <n> <command> <label>"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: Unknown command: `%s'"
-msgstr " Chown 명령 "
-
-#, c-format
-msgid "%s: fn should be 1-10"
-msgstr ""
-
-#, c-format
-msgid "%s: fopen(): %s"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s:%d: unknown command `%s'"
-msgstr " Chown 명령 "
-
-#, c-format
-msgid "%s:%d: %s"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s not found!"
-msgstr "경고: 파일 %s을(를) 찾을 수 없습니다\n"
 
 msgid "&Set"
 msgstr "설정(&S)"
@@ -1461,30 +1413,6 @@ msgstr " 로컬 파일 시스템이 아니면 명령을 실행할 수 없습니�
 
 msgid " The shell is already running a command "
 msgstr " 명령해석기가 이미 명령을 수행중입니다 "
-
-msgid "&Unsorted"
-msgstr "정렬 안함(&U)"
-
-msgid "&Name"
-msgstr "이름(&N)"
-
-msgid "&Extension"
-msgstr "확장자(&E)"
-
-msgid "&Modify time"
-msgstr "수정 시간(&M)"
-
-msgid "&Access time"
-msgstr "접근 시간(&A)"
-
-msgid "C&Hange time"
-msgstr "바꾼 시간(&C)"
-
-msgid "&Size"
-msgstr "크기(&S)"
-
-msgid "&Inode"
-msgstr "Inode(&I)"
 
 msgid "Cannot read directory contents"
 msgstr "디렉토리 내용을 읽을 수 없습니다"
@@ -2437,8 +2365,9 @@ msgstr "정렬 순서(&S)..."
 msgid "&Filter..."
 msgstr "필터(&F)..."
 
-msgid "&Encoding...    C-t"
-msgstr ""
+#, fuzzy
+msgid "&Encoding...    M-e"
+msgstr "정렬(&t)                  M-t"
 
 msgid "&Network link..."
 msgstr "네트워크 연결(&N)..."
@@ -2772,17 +2701,79 @@ msgstr "SYMLINK"
 msgid "SUB-DIR"
 msgstr "SUB-DIR"
 
+#. TRANSLATORS: one single character to represent 'unsorted' sort mode
+msgid "u"
+msgstr ""
+
+#, fuzzy
+msgid "Unsorted"
+msgstr "정렬 안함(&U)"
+
+msgid "&Unsorted"
+msgstr "정렬 안함(&U)"
+
+#. TRANSLATORS: one single character to represent 'name' sort mode
+#, fuzzy
+msgid "n"
+msgstr "On"
+
+msgid "&Name"
+msgstr "이름(&N)"
+
+#. TRANSLATORS: one single character to represent 'extension' sort mode
+msgid "e"
+msgstr ""
+
+#, fuzzy
+msgid "Extension"
+msgstr "확장자:"
+
+msgid "&Extension"
+msgstr "확장자(&E)"
+
+#. TRANSLATORS: one single character to represent 'size' sort mode
+msgid "s"
+msgstr ""
+
 msgid "Size"
 msgstr "크기"
+
+msgid "&Size"
+msgstr "크기(&S)"
+
+#, fuzzy
+msgid "Block Size"
+msgstr " 크기 "
+
+#. TRANSLATORS: one single character to represent 'Modify time' sort mode
+msgid "m"
+msgstr ""
 
 msgid "MTime"
 msgstr "MTime"
 
+msgid "&Modify time"
+msgstr "수정 시간(&M)"
+
+#. TRANSLATORS: one single character to represent 'Access time' sort mode
+msgid "a"
+msgstr ""
+
 msgid "ATime"
 msgstr "ATime"
 
+msgid "&Access time"
+msgstr "접근 시간(&A)"
+
+#. TRANSLATORS: one single character to represent 'Change time' sort mode
+msgid "h"
+msgstr ""
+
 msgid "CTime"
 msgstr "CTime"
+
+msgid "C&Hange time"
+msgstr "바꾼 시간(&C)"
 
 msgid "Permission"
 msgstr "허용"
@@ -2793,8 +2784,15 @@ msgstr "Perm"
 msgid "Nl"
 msgstr "Nl"
 
+#. TRANSLATORS: one single character to represent 'inode' sort mode
+msgid "i"
+msgstr ""
+
 msgid "Inode"
 msgstr "Inode"
+
+msgid "&Inode"
+msgstr "Inode(&I)"
 
 msgid "UID"
 msgstr "UID"
@@ -3135,6 +3133,10 @@ msgstr "Insert on keypad"
 
 msgid "Delete on keypad"
 msgstr "Delete on keypad"
+
+#, fuzzy
+msgid "Escape key"
+msgstr "Slash on keypad"
 
 msgid "Enter on keypad"
 msgstr "Enter on keypad"
@@ -3921,6 +3923,22 @@ msgstr "내부 오류:"
 
 msgid "Changes to file lost"
 msgstr "수정 내용 잃어버림"
+
+#, fuzzy
+#~ msgid "bind: Unknown command: `%s'"
+#~ msgstr " Chown 명령 "
+
+#, fuzzy
+#~ msgid "%s: Unknown command: `%s'"
+#~ msgstr " Chown 명령 "
+
+#, fuzzy
+#~ msgid "%s:%d: unknown command `%s'"
+#~ msgstr " Chown 명령 "
+
+#, fuzzy
+#~ msgid "%s not found!"
+#~ msgstr "경고: 파일 %s을(를) 찾을 수 없습니다\n"
 
 #~ msgid "NumLock on keypad"
 #~ msgstr "NumLock on keypad"

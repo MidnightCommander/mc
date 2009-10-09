@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-01 02:39+0300\n"
+"POT-Creation-Date: 2009-10-09 09:50+0300\n"
 "PO-Revision-Date: 1999-03-18 23:11+0100\n"
 "Last-Translator: Lorint Hendschel <LorintHendschel@skynet.be>\n"
 "Language-Team: walon <linux-wa@chanae.alphanet.ch>\n"
@@ -586,7 +586,7 @@ msgid "Forward to declaration    M-+"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             C-t"
+msgid "Encod&ing...             M-e"
 msgstr "re&Lire...                          M-t"
 
 msgid "Insert &literal...       C-q"
@@ -783,54 +783,6 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Aroke e fitchî %s al roye %d "
-
-#, c-format
-msgid "bind: Wrong argument number, bind <key> <command>"
-msgstr ""
-
-#, c-format
-msgid "bind: Bad key value `%s'"
-msgstr ""
-
-#, c-format
-msgid "bind: Ehh...no key?"
-msgstr ""
-
-#, c-format
-msgid "bind: Unknown key: `%s'"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "bind: Unknown command: `%s'"
-msgstr " Comande chown "
-
-#, c-format
-msgid "%s: Syntax: %s <n> <command> <label>"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: Unknown command: `%s'"
-msgstr " Comande chown "
-
-#, c-format
-msgid "%s: fn should be 1-10"
-msgstr ""
-
-#, c-format
-msgid "%s: fopen(): %s"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s:%d: unknown command `%s'"
-msgstr " Comande chown "
-
-#, c-format
-msgid "%s:%d: %s"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s not found!"
-msgstr "Advietixhmint: li fitchî «%s» n' a nén stî trové\n"
 
 msgid "&Set"
 msgstr "&Mete"
@@ -1467,30 +1419,6 @@ msgstr ""
 
 msgid " The shell is already running a command "
 msgstr "Li shell est ddja k' il enonde ene comande "
-
-msgid "&Unsorted"
-msgstr "Nén r&elî"
-
-msgid "&Name"
-msgstr "&No"
-
-msgid "&Extension"
-msgstr "&Cawete"
-
-msgid "&Modify time"
-msgstr "C&andjî tins"
-
-msgid "&Access time"
-msgstr "E&ployî"
-
-msgid "C&Hange time"
-msgstr "As&pougnî"
-
-msgid "&Size"
-msgstr "&Grandeu"
-
-msgid "&Inode"
-msgstr "&Inode"
 
 #, fuzzy
 msgid "Cannot read directory contents"
@@ -2450,8 +2378,9 @@ msgstr "Ôrde po &Relire..."
 msgid "&Filter..."
 msgstr "&Passete..."
 
-msgid "&Encoding...    C-t"
-msgstr ""
+#, fuzzy
+msgid "&Encoding...    M-e"
+msgstr "re&Lire...                          M-t"
 
 msgid "&Network link..."
 msgstr "&Loyén Rantoele???"
@@ -2782,17 +2711,79 @@ msgstr ""
 msgid "SUB-DIR"
 msgstr ""
 
+#. TRANSLATORS: one single character to represent 'unsorted' sort mode
+msgid "u"
+msgstr ""
+
+#, fuzzy
+msgid "Unsorted"
+msgstr "Nén r&elî"
+
+msgid "&Unsorted"
+msgstr "Nén r&elî"
+
+#. TRANSLATORS: one single character to represent 'name' sort mode
+#, fuzzy
+msgid "n"
+msgstr "Metou"
+
+msgid "&Name"
+msgstr "&No"
+
+#. TRANSLATORS: one single character to represent 'extension' sort mode
+msgid "e"
+msgstr ""
+
+#, fuzzy
+msgid "Extension"
+msgstr "Cawete:"
+
+msgid "&Extension"
+msgstr "&Cawete"
+
+#. TRANSLATORS: one single character to represent 'size' sort mode
+msgid "s"
+msgstr ""
+
 msgid "Size"
 msgstr "Grandeu"
+
+msgid "&Size"
+msgstr "&Grandeu"
+
+#, fuzzy
+msgid "Block Size"
+msgstr " Grandeu "
+
+#. TRANSLATORS: one single character to represent 'Modify time' sort mode
+msgid "m"
+msgstr ""
 
 msgid "MTime"
 msgstr "MTime"
 
+msgid "&Modify time"
+msgstr "C&andjî tins"
+
+#. TRANSLATORS: one single character to represent 'Access time' sort mode
+msgid "a"
+msgstr ""
+
 msgid "ATime"
 msgstr "ATime"
 
+msgid "&Access time"
+msgstr "E&ployî"
+
+#. TRANSLATORS: one single character to represent 'Change time' sort mode
+msgid "h"
+msgstr ""
+
 msgid "CTime"
 msgstr "CTime"
+
+msgid "C&Hange time"
+msgstr "As&pougnî"
 
 msgid "Permission"
 msgstr "Permission"
@@ -2803,8 +2794,15 @@ msgstr ""
 msgid "Nl"
 msgstr ""
 
+#. TRANSLATORS: one single character to represent 'inode' sort mode
+msgid "i"
+msgstr ""
+
 msgid "Inode"
 msgstr "Inode"
+
+msgid "&Inode"
+msgstr "&Inode"
 
 msgid "UID"
 msgstr "UID"
@@ -3146,6 +3144,10 @@ msgstr ""
 
 msgid "Delete on keypad"
 msgstr ""
+
+#, fuzzy
+msgid "Escape key"
+msgstr "Pådje copete"
 
 msgid "Enter on keypad"
 msgstr ""
@@ -3910,6 +3912,22 @@ msgstr "Divintrinne aroke:"
 
 msgid "Changes to file lost"
 msgstr "Les candjmints do fitchî ont stî pierdous"
+
+#, fuzzy
+#~ msgid "bind: Unknown command: `%s'"
+#~ msgstr " Comande chown "
+
+#, fuzzy
+#~ msgid "%s: Unknown command: `%s'"
+#~ msgstr " Comande chown "
+
+#, fuzzy
+#~ msgid "%s:%d: unknown command `%s'"
+#~ msgstr " Comande chown "
+
+#, fuzzy
+#~ msgid "%s not found!"
+#~ msgstr "Advietixhmint: li fitchî «%s» n' a nén stî trové\n"
 
 #~ msgid " Emacs key: "
 #~ msgstr " Tape di Emacs: "

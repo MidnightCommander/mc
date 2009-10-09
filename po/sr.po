@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-01 02:39+0300\n"
+"POT-Creation-Date: 2009-10-09 09:50+0300\n"
 "PO-Revision-Date: 2003-09-20 18:50+0200\n"
 "Last-Translator: Strahinya Radich (Страхиња Радић) <mr99164@alas.matf.bg.ac."
 "yu>\n"
@@ -574,7 +574,7 @@ msgid "Forward to declaration    M-+"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             C-t"
+msgid "Encod&ing...             M-e"
 msgstr "Поре&ђај...                     M-t"
 
 msgid "Insert &literal...       C-q"
@@ -769,54 +769,6 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Грешка у датотеци `%s' на реду %d "
-
-#, c-format
-msgid "bind: Wrong argument number, bind <key> <command>"
-msgstr ""
-
-#, c-format
-msgid "bind: Bad key value `%s'"
-msgstr ""
-
-#, c-format
-msgid "bind: Ehh...no key?"
-msgstr ""
-
-#, c-format
-msgid "bind: Unknown key: `%s'"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "bind: Unknown command: `%s'"
-msgstr " Промена власника "
-
-#, c-format
-msgid "%s: Syntax: %s <n> <command> <label>"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: Unknown command: `%s'"
-msgstr " Промена власника "
-
-#, c-format
-msgid "%s: fn should be 1-10"
-msgstr ""
-
-#, c-format
-msgid "%s: fopen(): %s"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s:%d: unknown command `%s'"
-msgstr " Промена власника "
-
-#, c-format
-msgid "%s:%d: %s"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s not found!"
-msgstr "Упозорење: датотека %s није нађена\n"
 
 msgid "&Set"
 msgstr "&Постави"
@@ -1465,30 +1417,6 @@ msgstr " Не могу да извршавам наредбе на не-лок. 
 
 msgid " The shell is already running a command "
 msgstr " Љуска већ извршава наредбу "
-
-msgid "&Unsorted"
-msgstr "Н&есређено"
-
-msgid "&Name"
-msgstr "&Назив"
-
-msgid "&Extension"
-msgstr "&Врста"
-
-msgid "&Modify time"
-msgstr "Датум &измене"
-
-msgid "&Access time"
-msgstr "Датум &приступа"
-
-msgid "C&Hange time"
-msgstr "Датум &промене"
-
-msgid "&Size"
-msgstr "&Величина"
-
-msgid "&Inode"
-msgstr "&Ичвор"
 
 msgid "Cannot read directory contents"
 msgstr "Не могу да учитам садржај директоријума"
@@ -2444,8 +2372,9 @@ msgstr "&Поредак ређања..."
 msgid "&Filter..."
 msgstr "&Филтар..."
 
-msgid "&Encoding...    C-t"
-msgstr ""
+#, fuzzy
+msgid "&Encoding...    M-e"
+msgstr "Поре&ђај...                     M-t"
 
 msgid "&Network link..."
 msgstr "&Мрежно повезивање..."
@@ -2779,17 +2708,79 @@ msgstr "СИМВЕЗА"
 msgid "SUB-DIR"
 msgstr "ПОД-ДИР"
 
+#. TRANSLATORS: one single character to represent 'unsorted' sort mode
+msgid "u"
+msgstr ""
+
+#, fuzzy
+msgid "Unsorted"
+msgstr "Н&есређено"
+
+msgid "&Unsorted"
+msgstr "Н&есређено"
+
+#. TRANSLATORS: one single character to represent 'name' sort mode
+#, fuzzy
+msgid "n"
+msgstr "За"
+
+msgid "&Name"
+msgstr "&Назив"
+
+#. TRANSLATORS: one single character to represent 'extension' sort mode
+msgid "e"
+msgstr ""
+
+#, fuzzy
+msgid "Extension"
+msgstr "Врста:"
+
+msgid "&Extension"
+msgstr "&Врста"
+
+#. TRANSLATORS: one single character to represent 'size' sort mode
+msgid "s"
+msgstr ""
+
 msgid "Size"
 msgstr "Величина"
+
+msgid "&Size"
+msgstr "&Величина"
+
+#, fuzzy
+msgid "Block Size"
+msgstr " Величина "
+
+#. TRANSLATORS: one single character to represent 'Modify time' sort mode
+msgid "m"
+msgstr ""
 
 msgid "MTime"
 msgstr "ДатИзм"
 
+msgid "&Modify time"
+msgstr "Датум &измене"
+
+#. TRANSLATORS: one single character to represent 'Access time' sort mode
+msgid "a"
+msgstr ""
+
 msgid "ATime"
 msgstr "ДатПрс"
 
+msgid "&Access time"
+msgstr "Датум &приступа"
+
+#. TRANSLATORS: one single character to represent 'Change time' sort mode
+msgid "h"
+msgstr ""
+
 msgid "CTime"
 msgstr "ДатПрм"
+
+msgid "C&Hange time"
+msgstr "Датум &промене"
 
 msgid "Permission"
 msgstr "Дозволе"
@@ -2801,8 +2792,15 @@ msgstr "Дозв"
 msgid "Nl"
 msgstr "Бв"
 
+#. TRANSLATORS: one single character to represent 'inode' sort mode
+msgid "i"
+msgstr ""
+
 msgid "Inode"
 msgstr "Ичвор"
+
+msgid "&Inode"
+msgstr "&Ичвор"
 
 msgid "UID"
 msgstr "КИБ"
@@ -3146,6 +3144,10 @@ msgstr "Сиви `Insert'"
 
 msgid "Delete on keypad"
 msgstr "Сиви `Delete'"
+
+#, fuzzy
+msgid "Escape key"
+msgstr "Сиви /"
 
 msgid "Enter on keypad"
 msgstr "Сиви `Enter'"
@@ -3935,6 +3937,22 @@ msgstr "Унутрашња грешка:"
 
 msgid "Changes to file lost"
 msgstr "Измене у датотеци су изгубљене"
+
+#, fuzzy
+#~ msgid "bind: Unknown command: `%s'"
+#~ msgstr " Промена власника "
+
+#, fuzzy
+#~ msgid "%s: Unknown command: `%s'"
+#~ msgstr " Промена власника "
+
+#, fuzzy
+#~ msgid "%s:%d: unknown command `%s'"
+#~ msgstr " Промена власника "
+
+#, fuzzy
+#~ msgid "%s not found!"
+#~ msgstr "Упозорење: датотека %s није нађена\n"
 
 #~ msgid "NumLock on keypad"
 #~ msgstr "Сиви `NumLock'"

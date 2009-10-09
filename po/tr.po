@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-01 02:39+0300\n"
+"POT-Creation-Date: 2009-10-09 09:50+0300\n"
 "PO-Revision-Date: 2001-11-06 05:50+0200\n"
 "Last-Translator: Nilgün Belma Bugüner <nilgun@fide.org>\n"
 "Language-Team: Turkish <debian-l10n-turkish@lists.debian.org>\n"
@@ -578,7 +578,7 @@ msgid "Forward to declaration    M-+"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             C-t"
+msgid "Encod&ing...             M-e"
 msgstr "sıra&La...               M-t"
 
 msgid "Insert &literal...       C-q"
@@ -774,54 +774,6 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " %s dosyası %d satırında hata "
-
-#, c-format
-msgid "bind: Wrong argument number, bind <key> <command>"
-msgstr ""
-
-#, c-format
-msgid "bind: Bad key value `%s'"
-msgstr ""
-
-#, c-format
-msgid "bind: Ehh...no key?"
-msgstr ""
-
-#, c-format
-msgid "bind: Unknown key: `%s'"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "bind: Unknown command: `%s'"
-msgstr " Chown komutu "
-
-#, c-format
-msgid "%s: Syntax: %s <n> <command> <label>"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: Unknown command: `%s'"
-msgstr " Chown komutu "
-
-#, c-format
-msgid "%s: fn should be 1-10"
-msgstr ""
-
-#, c-format
-msgid "%s: fopen(): %s"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s:%d: unknown command `%s'"
-msgstr " Chown komutu "
-
-#, c-format
-msgid "%s:%d: %s"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s not found!"
-msgstr "Uyarı: %s dosyası yok\n"
 
 msgid "&Set"
 msgstr "&Tamam"
@@ -1474,30 +1426,6 @@ msgstr " Yerel dosya sistemi dışında komut çalıştırılamaz"
 
 msgid " The shell is already running a command "
 msgstr " Kabukta halen bir komut etkin "
-
-msgid "&Unsorted"
-msgstr "&Sırasız"
-
-msgid "&Name"
-msgstr "İs&me göre"
-
-msgid "&Extension"
-msgstr "&Uzantısına göre"
-
-msgid "&Modify time"
-msgstr "Dü&zenleme tarihine göre"
-
-msgid "&Access time"
-msgstr "&Erişim zamanına göre"
-
-msgid "C&Hange time"
-msgstr "D&üğüm Değişim zamanına göre"
-
-msgid "&Size"
-msgstr "&Boyutuna göre"
-
-msgid "&Inode"
-msgstr "Düğüm &numarasına göre"
 
 #, fuzzy
 msgid "Cannot read directory contents"
@@ -2451,8 +2379,9 @@ msgstr "&Sıralama türü..."
 msgid "&Filter..."
 msgstr "&Süzgeç..."
 
-msgid "&Encoding...    C-t"
-msgstr ""
+#, fuzzy
+msgid "&Encoding...    M-e"
+msgstr "sıra&La...               M-t"
 
 msgid "&Network link..."
 msgstr "&Ağ bağı..."
@@ -2788,17 +2717,79 @@ msgstr ""
 msgid "SUB-DIR"
 msgstr "ALT-DİZ"
 
+#. TRANSLATORS: one single character to represent 'unsorted' sort mode
+msgid "u"
+msgstr ""
+
+#, fuzzy
+msgid "Unsorted"
+msgstr "&Sırasız"
+
+msgid "&Unsorted"
+msgstr "&Sırasız"
+
+#. TRANSLATORS: one single character to represent 'name' sort mode
+#, fuzzy
+msgid "n"
+msgstr " "
+
+msgid "&Name"
+msgstr "İs&me göre"
+
+#. TRANSLATORS: one single character to represent 'extension' sort mode
+msgid "e"
+msgstr ""
+
+#, fuzzy
+msgid "Extension"
+msgstr "Uzantı:"
+
+msgid "&Extension"
+msgstr "&Uzantısına göre"
+
+#. TRANSLATORS: one single character to represent 'size' sort mode
+msgid "s"
+msgstr ""
+
 msgid "Size"
 msgstr "Boyut"
+
+msgid "&Size"
+msgstr "&Boyutuna göre"
+
+#, fuzzy
+msgid "Block Size"
+msgstr " Boyut "
+
+#. TRANSLATORS: one single character to represent 'Modify time' sort mode
+msgid "m"
+msgstr ""
 
 msgid "MTime"
 msgstr "DeğTrh"
 
+msgid "&Modify time"
+msgstr "Dü&zenleme tarihine göre"
+
+#. TRANSLATORS: one single character to represent 'Access time' sort mode
+msgid "a"
+msgstr ""
+
 msgid "ATime"
 msgstr "ErşTrh"
 
+msgid "&Access time"
+msgstr "&Erişim zamanına göre"
+
+#. TRANSLATORS: one single character to represent 'Change time' sort mode
+msgid "h"
+msgstr ""
+
 msgid "CTime"
 msgstr "OlşTrh"
+
+msgid "C&Hange time"
+msgstr "D&üğüm Değişim zamanına göre"
 
 msgid "Permission"
 msgstr "İzinler"
@@ -2809,8 +2800,15 @@ msgstr "İzin"
 msgid "Nl"
 msgstr "Nl"
 
+#. TRANSLATORS: one single character to represent 'inode' sort mode
+msgid "i"
+msgstr ""
+
 msgid "Inode"
 msgstr "I-düğüm"
+
+msgid "&Inode"
+msgstr "Düğüm &numarasına göre"
 
 msgid "UID"
 msgstr "KullKim"
@@ -3151,6 +3149,10 @@ msgstr "Sayılarda Ins tuşu"
 
 msgid "Delete on keypad"
 msgstr "Sayılarda Del tuşu"
+
+#, fuzzy
+msgid "Escape key"
+msgstr "Sayılarda / tuşu"
 
 msgid "Enter on keypad"
 msgstr "Sayılarda Enter tuşu"
@@ -3946,6 +3948,22 @@ msgstr "İç hata:"
 
 msgid "Changes to file lost"
 msgstr "Değişiklikler kayıp"
+
+#, fuzzy
+#~ msgid "bind: Unknown command: `%s'"
+#~ msgstr " Chown komutu "
+
+#, fuzzy
+#~ msgid "%s: Unknown command: `%s'"
+#~ msgstr " Chown komutu "
+
+#, fuzzy
+#~ msgid "%s:%d: unknown command `%s'"
+#~ msgstr " Chown komutu "
+
+#, fuzzy
+#~ msgid "%s not found!"
+#~ msgstr "Uyarı: %s dosyası yok\n"
 
 #~ msgid "NumLock on keypad"
 #~ msgstr "Numlock tuşu"

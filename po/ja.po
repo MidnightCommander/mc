@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc CVS-20011220\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-01 02:39+0300\n"
+"POT-Creation-Date: 2009-10-09 09:50+0300\n"
 "PO-Revision-Date: 2001-12-20 18:33+0900\n"
 "Last-Translator: Akira TAGOH <tagoh@gnome.gr.jp>\n"
 "Language-Team: Japanese <debian-japanese@lists.debian.org>\n"
@@ -577,7 +577,7 @@ msgid "Forward to declaration    M-+"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             C-t"
+msgid "Encod&ing...             M-e"
 msgstr "並べ替え(&T)               M-t"
 
 msgid "Insert &literal...       C-q"
@@ -773,54 +773,6 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " ファイル %s の %d 行目でエラー "
-
-#, c-format
-msgid "bind: Wrong argument number, bind <key> <command>"
-msgstr ""
-
-#, c-format
-msgid "bind: Bad key value `%s'"
-msgstr ""
-
-#, c-format
-msgid "bind: Ehh...no key?"
-msgstr ""
-
-#, c-format
-msgid "bind: Unknown key: `%s'"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "bind: Unknown command: `%s'"
-msgstr " chown コマンド "
-
-#, c-format
-msgid "%s: Syntax: %s <n> <command> <label>"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: Unknown command: `%s'"
-msgstr " chown コマンド "
-
-#, c-format
-msgid "%s: fn should be 1-10"
-msgstr ""
-
-#, c-format
-msgid "%s: fopen(): %s"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s:%d: unknown command `%s'"
-msgstr " chown コマンド "
-
-#, c-format
-msgid "%s:%d: %s"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s not found!"
-msgstr "警告: ファイル %s は見つかりませんでした\n"
 
 msgid "&Set"
 msgstr "設定(&S)"
@@ -1474,30 +1426,6 @@ msgstr " 非ローカルのファイルシステム上ではコマンドを実�
 
 msgid " The shell is already running a command "
 msgstr " シェルはすでにコマンドを実行中です "
-
-msgid "&Unsorted"
-msgstr "並べ替え無し(&U)"
-
-msgid "&Name"
-msgstr "名前(&N)"
-
-msgid "&Extension"
-msgstr "拡張子(&E)"
-
-msgid "&Modify time"
-msgstr "更新時刻(&M)"
-
-msgid "&Access time"
-msgstr "アクセス時刻(&A)"
-
-msgid "C&Hange time"
-msgstr "変更時刻(&C)"
-
-msgid "&Size"
-msgstr "サイズ(&S)"
-
-msgid "&Inode"
-msgstr "Iノード(&I)"
 
 #, fuzzy
 msgid "Cannot read directory contents"
@@ -2452,8 +2380,9 @@ msgstr "整列順(&S)..."
 msgid "&Filter..."
 msgstr "フィルタ(&F)..."
 
-msgid "&Encoding...    C-t"
-msgstr ""
+#, fuzzy
+msgid "&Encoding...    M-e"
+msgstr "並べ替え(&T)               M-t"
 
 msgid "&Network link..."
 msgstr "ネットワークリンク(&N)..."
@@ -2788,17 +2717,79 @@ msgstr ""
 msgid "SUB-DIR"
 msgstr "SUB-DIR"
 
+#. TRANSLATORS: one single character to represent 'unsorted' sort mode
+msgid "u"
+msgstr ""
+
+#, fuzzy
+msgid "Unsorted"
+msgstr "並べ替え無し(&U)"
+
+msgid "&Unsorted"
+msgstr "並べ替え無し(&U)"
+
+#. TRANSLATORS: one single character to represent 'name' sort mode
+#, fuzzy
+msgid "n"
+msgstr "オン"
+
+msgid "&Name"
+msgstr "名前(&N)"
+
+#. TRANSLATORS: one single character to represent 'extension' sort mode
+msgid "e"
+msgstr ""
+
+#, fuzzy
+msgid "Extension"
+msgstr "拡張子: "
+
+msgid "&Extension"
+msgstr "拡張子(&E)"
+
+#. TRANSLATORS: one single character to represent 'size' sort mode
+msgid "s"
+msgstr ""
+
 msgid "Size"
 msgstr "サイズ"
+
+msgid "&Size"
+msgstr "サイズ(&S)"
+
+#, fuzzy
+msgid "Block Size"
+msgstr " 大きさ "
+
+#. TRANSLATORS: one single character to represent 'Modify time' sort mode
+msgid "m"
+msgstr ""
 
 msgid "MTime"
 msgstr "更新時刻"
 
+msgid "&Modify time"
+msgstr "更新時刻(&M)"
+
+#. TRANSLATORS: one single character to represent 'Access time' sort mode
+msgid "a"
+msgstr ""
+
 msgid "ATime"
 msgstr "Acess時刻"
 
+msgid "&Access time"
+msgstr "アクセス時刻(&A)"
+
+#. TRANSLATORS: one single character to represent 'Change time' sort mode
+msgid "h"
+msgstr ""
+
 msgid "CTime"
 msgstr "変更時刻"
+
+msgid "C&Hange time"
+msgstr "変更時刻(&C)"
 
 msgid "Permission"
 msgstr "アクセス権"
@@ -2809,8 +2800,15 @@ msgstr "Perm"
 msgid "Nl"
 msgstr "Nl"
 
+#. TRANSLATORS: one single character to represent 'inode' sort mode
+msgid "i"
+msgstr ""
+
 msgid "Inode"
 msgstr "Iノード"
+
+msgid "&Inode"
+msgstr "Iノード(&I)"
 
 msgid "UID"
 msgstr "UID"
@@ -3151,6 +3149,10 @@ msgstr "10キーの Insert"
 
 msgid "Delete on keypad"
 msgstr "10キーの Delete"
+
+#, fuzzy
+msgid "Escape key"
+msgstr "10キーの /"
 
 msgid "Enter on keypad"
 msgstr "10キーの Enter"
@@ -3938,6 +3940,22 @@ msgstr "内部エラー:"
 
 msgid "Changes to file lost"
 msgstr "紛失したファイルに変更します"
+
+#, fuzzy
+#~ msgid "bind: Unknown command: `%s'"
+#~ msgstr " chown コマンド "
+
+#, fuzzy
+#~ msgid "%s: Unknown command: `%s'"
+#~ msgstr " chown コマンド "
+
+#, fuzzy
+#~ msgid "%s:%d: unknown command `%s'"
+#~ msgstr " chown コマンド "
+
+#, fuzzy
+#~ msgid "%s not found!"
+#~ msgstr "警告: ファイル %s は見つかりませんでした\n"
 
 #~ msgid "NumLock on keypad"
 #~ msgstr "10キーの NumLock"

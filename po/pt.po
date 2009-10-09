@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-01 02:39+0300\n"
+"POT-Creation-Date: 2009-10-09 09:50+0300\n"
 "PO-Revision-Date: 2002-04-25 03:55+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <debian-l10n-portuguese@lists.debian.org>\n"
@@ -574,7 +574,7 @@ msgid "Forward to declaration    M-+"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             C-t"
+msgid "Encod&ing...             M-e"
 msgstr "&Ordenar...              M-t"
 
 msgid "Insert &literal...       C-q"
@@ -770,54 +770,6 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Erro no ficheiro %s na linha %d "
-
-#, c-format
-msgid "bind: Wrong argument number, bind <key> <command>"
-msgstr ""
-
-#, c-format
-msgid "bind: Bad key value `%s'"
-msgstr ""
-
-#, c-format
-msgid "bind: Ehh...no key?"
-msgstr ""
-
-#, c-format
-msgid "bind: Unknown key: `%s'"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "bind: Unknown command: `%s'"
-msgstr " Comando chown "
-
-#, c-format
-msgid "%s: Syntax: %s <n> <command> <label>"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: Unknown command: `%s'"
-msgstr " Comando chown "
-
-#, c-format
-msgid "%s: fn should be 1-10"
-msgstr ""
-
-#, c-format
-msgid "%s: fopen(): %s"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s:%d: unknown command `%s'"
-msgstr " Comando chown "
-
-#, c-format
-msgid "%s:%d: %s"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s not found!"
-msgstr "Aviso: ficheiro %s não encontrado\n"
 
 msgid "&Set"
 msgstr "&Definir"
@@ -1473,30 +1425,6 @@ msgstr " Não pode executar comandos em sistemas de ficheiros não-locais"
 
 msgid " The shell is already running a command "
 msgstr " O terminal já se encontra a executar um comando "
-
-msgid "&Unsorted"
-msgstr "Não &Ordenado"
-
-msgid "&Name"
-msgstr "&Nome"
-
-msgid "&Extension"
-msgstr "&Extensão"
-
-msgid "&Modify time"
-msgstr "&Modificar hora"
-
-msgid "&Access time"
-msgstr "Hora de &acesso"
-
-msgid "C&Hange time"
-msgstr "Alte&rar hora"
-
-msgid "&Size"
-msgstr "Tama&nho"
-
-msgid "&Inode"
-msgstr "&Inode"
 
 #, fuzzy
 msgid "Cannot read directory contents"
@@ -2452,8 +2380,9 @@ msgstr "&Ordenação..."
 msgid "&Filter..."
 msgstr "&Filtro..."
 
-msgid "&Encoding...    C-t"
-msgstr ""
+#, fuzzy
+msgid "&Encoding...    M-e"
+msgstr "&Ordenar...              M-t"
 
 msgid "&Network link..."
 msgstr "Ligação de &rede..."
@@ -2790,17 +2719,79 @@ msgstr "SYMLINK"
 msgid "SUB-DIR"
 msgstr "SUB-DIR"
 
+#. TRANSLATORS: one single character to represent 'unsorted' sort mode
+msgid "u"
+msgstr ""
+
+#, fuzzy
+msgid "Unsorted"
+msgstr "Não &Ordenado"
+
+msgid "&Unsorted"
+msgstr "Não &Ordenado"
+
+#. TRANSLATORS: one single character to represent 'name' sort mode
+#, fuzzy
+msgid "n"
+msgstr "Activo"
+
+msgid "&Name"
+msgstr "&Nome"
+
+#. TRANSLATORS: one single character to represent 'extension' sort mode
+msgid "e"
+msgstr ""
+
+#, fuzzy
+msgid "Extension"
+msgstr "Extensão:"
+
+msgid "&Extension"
+msgstr "&Extensão"
+
+#. TRANSLATORS: one single character to represent 'size' sort mode
+msgid "s"
+msgstr ""
+
 msgid "Size"
 msgstr "Tamanho"
+
+msgid "&Size"
+msgstr "Tama&nho"
+
+#, fuzzy
+msgid "Block Size"
+msgstr " Tamanho "
+
+#. TRANSLATORS: one single character to represent 'Modify time' sort mode
+msgid "m"
+msgstr ""
 
 msgid "MTime"
 msgstr "MTime"
 
+msgid "&Modify time"
+msgstr "&Modificar hora"
+
+#. TRANSLATORS: one single character to represent 'Access time' sort mode
+msgid "a"
+msgstr ""
+
 msgid "ATime"
 msgstr "ATime"
 
+msgid "&Access time"
+msgstr "Hora de &acesso"
+
+#. TRANSLATORS: one single character to represent 'Change time' sort mode
+msgid "h"
+msgstr ""
+
 msgid "CTime"
 msgstr "CTime"
+
+msgid "C&Hange time"
+msgstr "Alte&rar hora"
 
 msgid "Permission"
 msgstr "Permissão"
@@ -2811,8 +2802,15 @@ msgstr "Perm"
 msgid "Nl"
 msgstr "Nl"
 
+#. TRANSLATORS: one single character to represent 'inode' sort mode
+msgid "i"
+msgstr ""
+
 msgid "Inode"
 msgstr "Inode"
+
+msgid "&Inode"
+msgstr "&Inode"
 
 msgid "UID"
 msgstr "UID"
@@ -3154,6 +3152,10 @@ msgstr "Insert no teclado numérico"
 
 msgid "Delete on keypad"
 msgstr "Delete no teclado numérico"
+
+#, fuzzy
+msgid "Escape key"
+msgstr "Barra no teclado numérico"
 
 msgid "Enter on keypad"
 msgstr "Enter no teclado numérico"
@@ -3948,6 +3950,22 @@ msgstr "Erro interno:"
 
 msgid "Changes to file lost"
 msgstr "Modificações ao ficheiro perdidas"
+
+#, fuzzy
+#~ msgid "bind: Unknown command: `%s'"
+#~ msgstr " Comando chown "
+
+#, fuzzy
+#~ msgid "%s: Unknown command: `%s'"
+#~ msgstr " Comando chown "
+
+#, fuzzy
+#~ msgid "%s:%d: unknown command `%s'"
+#~ msgstr " Comando chown "
+
+#, fuzzy
+#~ msgid "%s not found!"
+#~ msgstr "Aviso: ficheiro %s não encontrado\n"
 
 #~ msgid "NumLock on keypad"
 #~ msgstr "NumLock no teclado numérico"

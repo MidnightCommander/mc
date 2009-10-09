@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-01 02:39+0300\n"
+"POT-Creation-Date: 2009-10-09 09:50+0300\n"
 "PO-Revision-Date: 2005-10-01 00:47+0200\n"
 "Last-Translator: Gergely Szabo <sub.o.gero@gmail.com>\n"
 "Language-Team: Hungarian <debian-l10n-hungarian@lists.debian.org>\n"
@@ -555,7 +555,8 @@ msgstr "Vissza a deklarációtól   M--"
 msgid "Forward to declaration    M-+"
 msgstr "Vissza a deklarációhoz   M-+"
 
-msgid "Encod&ing...             C-t"
+#, fuzzy
+msgid "Encod&ing...             M-e"
 msgstr "Kódolá&s                 C-t"
 
 msgid "Insert &literal...       C-q"
@@ -749,54 +750,6 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Hiba a(z) %s fájl %d. sorában "
-
-#, c-format
-msgid "bind: Wrong argument number, bind <key> <command>"
-msgstr "Bind: helytelen argumentumszám, bind <kulcs> <parancs>"
-
-#, c-format
-msgid "bind: Bad key value `%s'"
-msgstr "Bind: helytelen kulcsérték: \"%s\""
-
-#, c-format
-msgid "bind: Ehh...no key?"
-msgstr "Bind: nincs kulcs?"
-
-#, c-format
-msgid "bind: Unknown key: `%s'"
-msgstr "Bind: ismeretlen kulcs: \"%s\""
-
-#, c-format
-msgid "bind: Unknown command: `%s'"
-msgstr "Bind: ismeretlen parancs: \"%s\""
-
-#, c-format
-msgid "%s: Syntax: %s <n> <command> <label>"
-msgstr "%s: szintaxis: %s <n> <parancs> <címke>"
-
-#, c-format
-msgid "%s: Unknown command: `%s'"
-msgstr "%s: ismeretlen parancs: \"%s\""
-
-#, c-format
-msgid "%s: fn should be 1-10"
-msgstr "%s: fn értéke 1...10 lehet"
-
-#, c-format
-msgid "%s: fopen(): %s"
-msgstr "%s: fopen(): %s"
-
-#, c-format
-msgid "%s:%d: unknown command `%s'"
-msgstr "%s:%d: ismeretlen parancs: \"%s\""
-
-#, c-format
-msgid "%s:%d: %s"
-msgstr "%s:%d: %s"
-
-#, c-format
-msgid "%s not found!"
-msgstr "\"%s\" nem található"
 
 msgid "&Set"
 msgstr "&Beállít"
@@ -1460,32 +1413,6 @@ msgstr " Távoli fájlrendszeren nem lehet végrehajtani a parancsokat "
 
 msgid " The shell is already running a command "
 msgstr " A parancsértelmező már futtat egy parancsot. "
-
-msgid "&Unsorted"
-msgstr "Nincs rende&zés"
-
-msgid "&Name"
-msgstr "&Név"
-
-msgid "&Extension"
-msgstr "&Végződés (kiterjesztés)"
-
-# tartalomra vonatkozik
-msgid "&Modify time"
-msgstr "(Tartalmi) mó&dosítás ideje"
-
-msgid "&Access time"
-msgstr "&Elérés ideje"
-
-# metaadat-módosulás, például chmod dátuma
-msgid "C&Hange time"
-msgstr "&Adatváltozás ideje"
-
-msgid "&Size"
-msgstr "Mé&ret"
-
-msgid "&Inode"
-msgstr "&Inode"
 
 msgid "Cannot read directory contents"
 msgstr "Könyvtár tartalma nem olvasható"
@@ -2469,7 +2396,8 @@ msgstr "&Rendezési mód..."
 msgid "&Filter..."
 msgstr "&Szűrő..."
 
-msgid "&Encoding...    C-t"
+#, fuzzy
+msgid "&Encoding...    M-e"
 msgstr "&Kódolás          C-t"
 
 msgid "&Network link..."
@@ -2816,20 +2744,86 @@ msgstr "SZ.LINK"
 msgid "SUB-DIR"
 msgstr "AL-KVTR"
 
+#. TRANSLATORS: one single character to represent 'unsorted' sort mode
+msgid "u"
+msgstr ""
+
+#, fuzzy
+msgid "Unsorted"
+msgstr "Nincs rende&zés"
+
+msgid "&Unsorted"
+msgstr "Nincs rende&zés"
+
+#. TRANSLATORS: one single character to represent 'name' sort mode
+#, fuzzy
+msgid "n"
+msgstr "Be"
+
+msgid "&Name"
+msgstr "&Név"
+
+#. TRANSLATORS: one single character to represent 'extension' sort mode
+msgid "e"
+msgstr ""
+
+# ! az a szokoz direkt van ott!
+# backup-fájlok végződése, például ~
+#, fuzzy
+msgid "Extension"
+msgstr " Végződés:"
+
+msgid "&Extension"
+msgstr "&Végződés (kiterjesztés)"
+
+#. TRANSLATORS: one single character to represent 'size' sort mode
+msgid "s"
+msgstr ""
+
 msgid "Size"
 msgstr "Méret"
+
+msgid "&Size"
+msgstr "Mé&ret"
+
+#, fuzzy
+msgid "Block Size"
+msgstr " Fájlméret "
+
+#. TRANSLATORS: one single character to represent 'Modify time' sort mode
+msgid "m"
+msgstr ""
 
 # 12 karakteres lehet
 msgid "MTime"
 msgstr "TartalMódIdő"
 
+# tartalomra vonatkozik
+msgid "&Modify time"
+msgstr "(Tartalmi) mó&dosítás ideje"
+
+#. TRANSLATORS: one single character to represent 'Access time' sort mode
+msgid "a"
+msgstr ""
+
 # 12 karakteres lehet
 msgid "ATime"
 msgstr "Elérési idő"
 
+msgid "&Access time"
+msgstr "&Elérés ideje"
+
+#. TRANSLATORS: one single character to represent 'Change time' sort mode
+msgid "h"
+msgstr ""
+
 # 12 karakteres lehet
 msgid "CTime"
 msgstr "AdatváltIdő"
+
+# metaadat-módosulás, például chmod dátuma
+msgid "C&Hange time"
+msgstr "&Adatváltozás ideje"
 
 # jogok, mnemonikkal
 msgid "Permission"
@@ -2841,8 +2835,15 @@ msgstr "Jogok"
 msgid "Nl"
 msgstr "Ln"
 
+#. TRANSLATORS: one single character to represent 'inode' sort mode
+msgid "i"
+msgstr ""
+
 msgid "Inode"
 msgstr "Inode"
+
+msgid "&Inode"
+msgstr "&Inode"
 
 msgid "UID"
 msgstr "UID"
@@ -3189,6 +3190,10 @@ msgstr "\"Insert\" - numer."
 
 msgid "Delete on keypad"
 msgstr "\"Delete\" - numer."
+
+#, fuzzy
+msgid "Escape key"
+msgstr "Szóköz - numerikus"
 
 msgid "Enter on keypad"
 msgstr "\"Enter\" - numer."
@@ -3984,6 +3989,42 @@ msgstr "Belső programhiba:"
 
 msgid "Changes to file lost"
 msgstr "A fájl módosításai elvesztek"
+
+#~ msgid "bind: Wrong argument number, bind <key> <command>"
+#~ msgstr "Bind: helytelen argumentumszám, bind <kulcs> <parancs>"
+
+#~ msgid "bind: Bad key value `%s'"
+#~ msgstr "Bind: helytelen kulcsérték: \"%s\""
+
+#~ msgid "bind: Ehh...no key?"
+#~ msgstr "Bind: nincs kulcs?"
+
+#~ msgid "bind: Unknown key: `%s'"
+#~ msgstr "Bind: ismeretlen kulcs: \"%s\""
+
+#~ msgid "bind: Unknown command: `%s'"
+#~ msgstr "Bind: ismeretlen parancs: \"%s\""
+
+#~ msgid "%s: Syntax: %s <n> <command> <label>"
+#~ msgstr "%s: szintaxis: %s <n> <parancs> <címke>"
+
+#~ msgid "%s: Unknown command: `%s'"
+#~ msgstr "%s: ismeretlen parancs: \"%s\""
+
+#~ msgid "%s: fn should be 1-10"
+#~ msgstr "%s: fn értéke 1...10 lehet"
+
+#~ msgid "%s: fopen(): %s"
+#~ msgstr "%s: fopen(): %s"
+
+#~ msgid "%s:%d: unknown command `%s'"
+#~ msgstr "%s:%d: ismeretlen parancs: \"%s\""
+
+#~ msgid "%s:%d: %s"
+#~ msgstr "%s:%d: %s"
+
+#~ msgid "%s not found!"
+#~ msgstr "\"%s\" nem található"
 
 #~ msgid " Emacs key: "
 #~ msgstr " Emacs-billentyű: "

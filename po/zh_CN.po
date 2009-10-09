@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-01 02:39+0300\n"
+"POT-Creation-Date: 2009-10-09 09:50+0300\n"
 "PO-Revision-Date: 2002-01-29 22:05+0800\n"
 "Last-Translator: Wang Jian <lark@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -575,7 +575,7 @@ msgid "Forward to declaration    M-+"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             C-t"
+msgid "Encod&ing...             M-e"
 msgstr "排序(&T)...             M-t"
 
 msgid "Insert &literal...       C-q"
@@ -771,54 +771,6 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " 在文件 %s 的第 %d 行有错误 "
-
-#, c-format
-msgid "bind: Wrong argument number, bind <key> <command>"
-msgstr ""
-
-#, c-format
-msgid "bind: Bad key value `%s'"
-msgstr ""
-
-#, c-format
-msgid "bind: Ehh...no key?"
-msgstr ""
-
-#, c-format
-msgid "bind: Unknown key: `%s'"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "bind: Unknown command: `%s'"
-msgstr " Chown 命令 "
-
-#, c-format
-msgid "%s: Syntax: %s <n> <command> <label>"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: Unknown command: `%s'"
-msgstr " Chown 命令 "
-
-#, c-format
-msgid "%s: fn should be 1-10"
-msgstr ""
-
-#, c-format
-msgid "%s: fopen(): %s"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s:%d: unknown command `%s'"
-msgstr " Chown 命令 "
-
-#, c-format
-msgid "%s:%d: %s"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s not found!"
-msgstr "警告：没有找到文件 %s\n"
 
 msgid "&Set"
 msgstr "设置(&S)"
@@ -1469,30 +1421,6 @@ msgstr " 您无法在非本地文件系统上执行命令"
 
 msgid " The shell is already running a command "
 msgstr " Shell 正在运行一个命令 "
-
-msgid "&Unsorted"
-msgstr "未排序(&U)"
-
-msgid "&Name"
-msgstr "名字(&N)"
-
-msgid "&Extension"
-msgstr "扩展(&E)"
-
-msgid "&Modify time"
-msgstr "修改时间(&M)"
-
-msgid "&Access time"
-msgstr "访问时间(&A)"
-
-msgid "C&Hange time"
-msgstr "修改时间(&C)"
-
-msgid "&Size"
-msgstr "大小(&S)"
-
-msgid "&Inode"
-msgstr "Inode(&I)"
 
 #, fuzzy
 msgid "Cannot read directory contents"
@@ -2434,8 +2362,9 @@ msgstr "排序(&S)..."
 msgid "&Filter..."
 msgstr "过滤(&F)..."
 
-msgid "&Encoding...    C-t"
-msgstr ""
+#, fuzzy
+msgid "&Encoding...    M-e"
+msgstr "排序(&T)...             M-t"
 
 msgid "&Network link..."
 msgstr "网络链接(&N)..."
@@ -2769,17 +2698,79 @@ msgstr "符号链接"
 msgid "SUB-DIR"
 msgstr "子目录"
 
+#. TRANSLATORS: one single character to represent 'unsorted' sort mode
+msgid "u"
+msgstr ""
+
+#, fuzzy
+msgid "Unsorted"
+msgstr "未排序(&U)"
+
+msgid "&Unsorted"
+msgstr "未排序(&U)"
+
+#. TRANSLATORS: one single character to represent 'name' sort mode
+#, fuzzy
+msgid "n"
+msgstr "开"
+
+msgid "&Name"
+msgstr "名字(&N)"
+
+#. TRANSLATORS: one single character to represent 'extension' sort mode
+msgid "e"
+msgstr ""
+
+#, fuzzy
+msgid "Extension"
+msgstr "扩展名："
+
+msgid "&Extension"
+msgstr "扩展(&E)"
+
+#. TRANSLATORS: one single character to represent 'size' sort mode
+msgid "s"
+msgstr ""
+
 msgid "Size"
 msgstr "大小"
+
+msgid "&Size"
+msgstr "大小(&S)"
+
+#, fuzzy
+msgid "Block Size"
+msgstr " 大小 "
+
+#. TRANSLATORS: one single character to represent 'Modify time' sort mode
+msgid "m"
+msgstr ""
 
 msgid "MTime"
 msgstr "修改时间"
 
+msgid "&Modify time"
+msgstr "修改时间(&M)"
+
+#. TRANSLATORS: one single character to represent 'Access time' sort mode
+msgid "a"
+msgstr ""
+
 msgid "ATime"
 msgstr "访问时间"
 
+msgid "&Access time"
+msgstr "访问时间(&A)"
+
+#. TRANSLATORS: one single character to represent 'Change time' sort mode
+msgid "h"
+msgstr ""
+
 msgid "CTime"
 msgstr "创建时间"
+
+msgid "C&Hange time"
+msgstr "修改时间(&C)"
 
 msgid "Permission"
 msgstr "权限"
@@ -2790,8 +2781,15 @@ msgstr "权限"
 msgid "Nl"
 msgstr "Nl"
 
+#. TRANSLATORS: one single character to represent 'inode' sort mode
+msgid "i"
+msgstr ""
+
 msgid "Inode"
 msgstr "Inode"
+
+msgid "&Inode"
+msgstr "Inode(&I)"
 
 msgid "UID"
 msgstr "UID"
@@ -3132,6 +3130,10 @@ msgstr "小键盘上的 Insert"
 
 msgid "Delete on keypad"
 msgstr "小键盘上的 Delete"
+
+#, fuzzy
+msgid "Escape key"
+msgstr "小键盘上的 /"
 
 msgid "Enter on keypad"
 msgstr "小键盘上的 Enter"
@@ -3926,6 +3928,22 @@ msgstr "内部错误："
 
 msgid "Changes to file lost"
 msgstr "对文件的修改被丢失"
+
+#, fuzzy
+#~ msgid "bind: Unknown command: `%s'"
+#~ msgstr " Chown 命令 "
+
+#, fuzzy
+#~ msgid "%s: Unknown command: `%s'"
+#~ msgstr " Chown 命令 "
+
+#, fuzzy
+#~ msgid "%s:%d: unknown command `%s'"
+#~ msgstr " Chown 命令 "
+
+#, fuzzy
+#~ msgid "%s not found!"
+#~ msgstr "警告：没有找到文件 %s\n"
 
 #~ msgid "NumLock on keypad"
 #~ msgstr "小键盘上的 NumLock"

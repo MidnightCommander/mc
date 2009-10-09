@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-01 02:39+0300\n"
+"POT-Creation-Date: 2009-10-09 09:50+0300\n"
 "PO-Revision-Date: 2009-07-27 17:18+0100\n"
 "Last-Translator: Ivan Masár <helix84@centrum.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -550,7 +550,8 @@ msgstr "Späť z deklarácie         M--"
 msgid "Forward to declaration    M-+"
 msgstr "Vpred na deklaráciu       M-+"
 
-msgid "Encod&ing...             C-t"
+#, fuzzy
+msgid "Encod&ing...             M-e"
 msgstr "kódovan&Ie...            C-t"
 
 msgid "Insert &literal...       C-q"
@@ -738,54 +739,6 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Chyba v súbore %s na riadku %d "
-
-#, c-format
-msgid "bind: Wrong argument number, bind <key> <command>"
-msgstr "bind: Nesprávne číslo argumentu, bind <kláv.> <príkaz>"
-
-#, c-format
-msgid "bind: Bad key value `%s'"
-msgstr "bind: Zlá hodnota klávesu `%s'"
-
-#, c-format
-msgid "bind: Ehh...no key?"
-msgstr "bind: Hmm... žiaden kláves?"
-
-#, c-format
-msgid "bind: Unknown key: `%s'"
-msgstr "bind: neznámy kláves: `%s'"
-
-#, c-format
-msgid "bind: Unknown command: `%s'"
-msgstr "bind: neznámy príkaz: `%s'"
-
-#, c-format
-msgid "%s: Syntax: %s <n> <command> <label>"
-msgstr "%s: Syntax: %s <n> <príkaz> <menovka>"
-
-#, c-format
-msgid "%s: Unknown command: `%s'"
-msgstr "%s: Neznámy príkaz: `%s'"
-
-#, c-format
-msgid "%s: fn should be 1-10"
-msgstr "%s: fn by malo byť 1-10"
-
-#, c-format
-msgid "%s: fopen(): %s"
-msgstr "%s: fopen(): %s"
-
-#, c-format
-msgid "%s:%d: unknown command `%s'"
-msgstr "%s:%d: neznámy príkaz `%s'"
-
-#, c-format
-msgid "%s:%d: %s"
-msgstr "%s:%d: %s"
-
-#, c-format
-msgid "%s not found!"
-msgstr "%s nenájdené!"
 
 msgid "&Set"
 msgstr "&Nastaviť"
@@ -1433,30 +1386,6 @@ msgstr " Nemôžete spustiť príkazy na nelokálnych súborových systémoch"
 
 msgid " The shell is already running a command "
 msgstr " Shell už spustil príkaz "
-
-msgid "&Unsorted"
-msgstr "&Netriedené"
-
-msgid "&Name"
-msgstr "&Meno"
-
-msgid "&Extension"
-msgstr "&Prípona súboru"
-
-msgid "&Modify time"
-msgstr "čas úp&Ravy"
-
-msgid "&Access time"
-msgstr "ča&S prístupu "
-
-msgid "C&Hange time"
-msgstr "čas zmen&Y "
-
-msgid "&Size"
-msgstr "&Veľkosť"
-
-msgid "&Inode"
-msgstr "&I-uzol"
 
 msgid "Cannot read directory contents"
 msgstr "Nepodarilo sa načítať obsah adresára"
@@ -2412,7 +2341,8 @@ msgstr "&Poradie výpisu..."
 msgid "&Filter..."
 msgstr "fi&Lter..."
 
-msgid "&Encoding...    C-t"
+#, fuzzy
+msgid "&Encoding...    M-e"
 msgstr "Kódovani&e...   C-t"
 
 msgid "&Network link..."
@@ -2754,17 +2684,79 @@ msgstr "SYMLINK"
 msgid "SUB-DIR"
 msgstr "SUB-DIR"
 
+#. TRANSLATORS: one single character to represent 'unsorted' sort mode
+msgid "u"
+msgstr ""
+
+#, fuzzy
+msgid "Unsorted"
+msgstr "&Netriedené"
+
+msgid "&Unsorted"
+msgstr "&Netriedené"
+
+#. TRANSLATORS: one single character to represent 'name' sort mode
+#, fuzzy
+msgid "n"
+msgstr "na"
+
+msgid "&Name"
+msgstr "&Meno"
+
+#. TRANSLATORS: one single character to represent 'extension' sort mode
+msgid "e"
+msgstr ""
+
+#, fuzzy
+msgid "Extension"
+msgstr "Prípona:"
+
+msgid "&Extension"
+msgstr "&Prípona súboru"
+
+#. TRANSLATORS: one single character to represent 'size' sort mode
+msgid "s"
+msgstr ""
+
 msgid "Size"
 msgstr "Veľkosť"
+
+msgid "&Size"
+msgstr "&Veľkosť"
+
+#, fuzzy
+msgid "Block Size"
+msgstr " Veľkosť "
+
+#. TRANSLATORS: one single character to represent 'Modify time' sort mode
+msgid "m"
+msgstr ""
 
 msgid "MTime"
 msgstr "ČasMod"
 
+msgid "&Modify time"
+msgstr "čas úp&Ravy"
+
+#. TRANSLATORS: one single character to represent 'Access time' sort mode
+msgid "a"
+msgstr ""
+
 msgid "ATime"
 msgstr "ČasPri"
 
+msgid "&Access time"
+msgstr "ča&S prístupu "
+
+#. TRANSLATORS: one single character to represent 'Change time' sort mode
+msgid "h"
+msgstr ""
+
 msgid "CTime"
 msgstr "ČasVyt"
+
+msgid "C&Hange time"
+msgstr "čas zmen&Y "
 
 msgid "Permission"
 msgstr "Práva"
@@ -2775,8 +2767,15 @@ msgstr "Perm"
 msgid "Nl"
 msgstr "Nl"
 
+#. TRANSLATORS: one single character to represent 'inode' sort mode
+msgid "i"
+msgstr ""
+
 msgid "Inode"
 msgstr "I-uzol"
+
+msgid "&Inode"
+msgstr "&I-uzol"
 
 msgid "UID"
 msgstr "UID"
@@ -3119,6 +3118,10 @@ msgstr "Insert na kláves."
 
 msgid "Delete on keypad"
 msgstr "Delete na kláves."
+
+#, fuzzy
+msgid "Escape key"
+msgstr "Lomka na kláves."
 
 msgid "Enter on keypad"
 msgstr "Enter na kláves."
@@ -3910,6 +3913,42 @@ msgstr "Vnútorná chyba:"
 
 msgid "Changes to file lost"
 msgstr "Zmeny súboru stratené"
+
+#~ msgid "bind: Wrong argument number, bind <key> <command>"
+#~ msgstr "bind: Nesprávne číslo argumentu, bind <kláv.> <príkaz>"
+
+#~ msgid "bind: Bad key value `%s'"
+#~ msgstr "bind: Zlá hodnota klávesu `%s'"
+
+#~ msgid "bind: Ehh...no key?"
+#~ msgstr "bind: Hmm... žiaden kláves?"
+
+#~ msgid "bind: Unknown key: `%s'"
+#~ msgstr "bind: neznámy kláves: `%s'"
+
+#~ msgid "bind: Unknown command: `%s'"
+#~ msgstr "bind: neznámy príkaz: `%s'"
+
+#~ msgid "%s: Syntax: %s <n> <command> <label>"
+#~ msgstr "%s: Syntax: %s <n> <príkaz> <menovka>"
+
+#~ msgid "%s: Unknown command: `%s'"
+#~ msgstr "%s: Neznámy príkaz: `%s'"
+
+#~ msgid "%s: fn should be 1-10"
+#~ msgstr "%s: fn by malo byť 1-10"
+
+#~ msgid "%s: fopen(): %s"
+#~ msgstr "%s: fopen(): %s"
+
+#~ msgid "%s:%d: unknown command `%s'"
+#~ msgstr "%s:%d: neznámy príkaz `%s'"
+
+#~ msgid "%s:%d: %s"
+#~ msgstr "%s:%d: %s"
+
+#~ msgid "%s not found!"
+#~ msgstr "%s nenájdené!"
 
 #~ msgid "NumLock on keypad"
 #~ msgstr "NumLock na kláves."
