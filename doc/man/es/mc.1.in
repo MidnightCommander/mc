@@ -1267,7 +1267,7 @@ p.e. si buscamos "strcmp (" tendremos que introducir "strcmp \\("
 .PP
 Con la opción \"Palabras completas\" se puede limitar la búsqueda a archivos donde
 la parte coincidente forme una palabra completa.  Esto coincide con la utilidad de la
-opción \"-w\" de grep.
+opción \"\-w\" de grep.
 .PP
 Podemos iniciar la búsqueda pulsando el botón Aceptar.
 Durante el proceso de búsqueda podemos detenerla desde el botón Terminar.
@@ -1818,7 +1818,7 @@ Si la opción
 está activa se muestra, en la parte inferior de cada panel, una línea
 con información sobre el archivo seleccionado en cada momento.
 .PP
-Si se está ejecutando en X-Windows dentro de un emulador de terminal,
+Si se está ejecutando en X\-Windows dentro de un emulador de terminal,
 Midnight Commander toma control del titulo de la ventana mostrando allí
 el nombre del directorio actual.  El título se actualiza cuando sea preciso.
 Podemos desactivar la opción de
@@ -1834,7 +1834,7 @@ sobreescritura, ejecución pulsando intro y salir del programa.
 Esta opción permite configurar el conjunto de caracteres visibles en la
 pantalla.  Éste puede ser 7\-bits si nuestro terminal/curses soporta
 sólo siete bits de salida, alguna de las tablas del estándar ISO\-8859 y
-diversas codificaciones comunes de PC con ocho bits por carácter, o UTF-8
+diversas codificaciones comunes de PC con ocho bits por carácter, o UTF\-8
 para Unicode.
 .PP
 Para soportar teclados con caracteres locales debemos marcar la opción de
