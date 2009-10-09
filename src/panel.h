@@ -43,6 +43,7 @@ typedef struct panel_format_struct {
     int  min_size;
     int  expands;
     align_crt_t default_just;
+    const char *hotkey;
     const char *title;
     const char *title_hotkey;
     gboolean use_in_user_format;
