@@ -867,7 +867,7 @@ load_keys_from_section (const char *terminal, mc_config_t *cfg)
 	}
 	curr_values = values = mc_config_get_string_list (cfg, section_name, *profile_keys, &values_len);
 
-	key_code = lookup_key (*profile_keys);
+	key_code = lookup_key (*profile_keys, NULL);
 	if (key_code){
 	    if (curr_values){
 	        while (*curr_values){
@@ -881,14 +881,14 @@ load_keys_from_section (const char *terminal, mc_config_t *cfg)
 	        valcopy = convert_controls (value);
 	        define_sequence (key_code, valcopy, MCKEY_NOACTION);
 	        g_free (valcopy);
-	        g_free(value);
+	        g_free (value);
 	    }
 	}
 	profile_keys++;
 	if (values)
-	    g_strfreev(values);
+	    g_strfreev (values);
     }
-    g_strfreev(keys);
+    g_strfreev (keys);
     g_free (section_name);
 }
 

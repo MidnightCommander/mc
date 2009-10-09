@@ -155,5 +155,5 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
     *cmd = command;
     *ch = char_for_insertion;
 
-    return !(command == CK_Insert_Char && char_for_insertion == -1);
+    return (command == CK_Insert_Char && char_for_insertion == -1) ? 0 : 1;
 }
