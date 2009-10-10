@@ -145,6 +145,8 @@ EditBeginRecordMacro =
 EditEndRecordMacro =
 EditToggleLineState = alt-n
 EditToggleTabTWS = alt-underline
+EditToggleSyntax = ctrl-s
+
 EditFindDefinition = alt-enter
 EditLoadPrevFile = alt-minus
 EditLoadNextFile = alt-equal
