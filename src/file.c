@@ -1632,8 +1632,13 @@ panel_compute_totals (WPanel *panel, const void *ui,
  * (I don't use spaces around the words, because someday they could be
  * dropped, when widgets get smarter)
  */
-static const char *op_names1[] = { N_("1Copy"), N_("1Move"), N_("1Delete") };
-#define	FMD_XLEN 64
+static const char *op_names1[] = {
+    N_("1Copy"),
+    N_("1Move"),
+    N_("1Delete")
+};
+
+#define FMD_XLEN 64
 
 int fmd_xlen = FMD_XLEN;
 
@@ -1645,14 +1650,20 @@ int fmd_xlen = FMD_XLEN;
  * %s - source name (truncated)
  * %d - number of marked files
  * %e - "to:" or question mark for delete
- * 
+ *
  * xgettext:no-c-format */
 static const char *one_format = N_("%o %f \"%s\"%m");
 /* xgettext:no-c-format */
 static const char *many_format = N_("%o %d %f%m");
+
 static const char *prompt_parts[] = {
-    N_("file"), N_("files"), N_("directory"), N_("directories"),
-    N_("files/directories"), N_(" with source mask:"), N_(" to:")
+    N_("file"),
+    N_("files"),
+    N_("directory"),
+    N_("directories"),
+    N_("files/directories"),
+    N_(" with source mask:"),
+    N_(" to:")
 };
 
 /*
@@ -1666,8 +1677,8 @@ panel_operate_generate_prompt (const WPanel *panel, const int operation,
 			       const char *single_source,
 			       const struct stat *src_stat)
 {
-    register const char *sp, *cp;
-    register int i;
+    const char *sp, *cp;
+    int i;
     char format_string[BUF_MEDIUM];
     char *dp = format_string;
 
@@ -1785,11 +1796,13 @@ panel_operate (void *source_panel, FileOperation operation,
     free_linklist (&linklist);
     free_linklist (&dest_dirs);
 
+#if 0
     /* Update panel contents to avoid actions on deleted files */
     if (!panel->is_panelized) {
 	update_panels (UP_RELOAD, UP_KEEPSEL);
 	repaint_screen ();
     }
+#endif
 
     if (single_entry) {
 	if (force_single) {
@@ -1811,18 +1824,7 @@ panel_operate (void *source_panel, FileOperation operation,
     ctx = file_op_context_new (operation);
 
     /* Show confirmation dialog */
-    if (operation == OP_DELETE && confirm_delete) {
-	if (safe_delete)
-	    query_set_sel (1);
-
-	i = query_dialog (_(op_names[operation]), cmd_buf, D_ERROR, 2,
-			  _("&Yes"), _("&No"));
-
-	if (i != 0) {
-	    file_op_context_destroy (ctx);
-	    return 0;
-	}
-    } else if (operation != OP_DELETE) {
+    if (operation != OP_DELETE) {
 	char *dest_dir;
 	char *dest_dir_;
 
@@ -1839,30 +1841,41 @@ panel_operate (void *source_panel, FileOperation operation,
 	 * dir is deleted)
 	 */
 	if (!force_single
-	 && dest_dir[0]
-	 && dest_dir[strlen(dest_dir)-1] != PATH_SEP) {
+		&& dest_dir[0] != '\0'
+		&& dest_dir[strlen (dest_dir) - 1] != PATH_SEP) {
 	    /* add trailing separator */
-	    dest_dir_ = g_strconcat (dest_dir, PATH_SEP_STR, (char*)0);
+	    dest_dir_ = g_strconcat (dest_dir, PATH_SEP_STR, (char *) NULL);
 	} else {
 	    /* just copy */
 	    dest_dir_ = g_strdup (dest_dir);
 	}
-	if (!dest_dir_) {
+	if (dest_dir_ == NULL) {
 	    file_op_context_destroy (ctx);
 	    return 0;
 	}
 
-	dest =
-	    file_mask_dialog (ctx, operation, cmd_buf, dest_dir_,
-			      single_entry, &do_bg);
-	g_free(dest_dir_);
+	dest = file_mask_dialog (ctx, operation, cmd_buf, dest_dir_,
+				    single_entry, &do_bg);
+	g_free (dest_dir_);
 
-	if (!dest || !dest[0]) {
+	if (dest == NULL || dest[0] == '\0') {
 	    file_op_context_destroy (ctx);
 	    g_free (dest);
 	    return 0;
 	}
+    } else if (confirm_delete) {
+	if (safe_delete)
+	    query_set_sel (1);
+
+	i = query_dialog (_(op_names[operation]), cmd_buf, D_ERROR, 2,
+			  _("&Yes"), _("&No"));
+
+	if (i != 0) {
+	    file_op_context_destroy (ctx);
+	    return 0;
+	}
     }
+
 #ifdef WITH_BACKGROUND
     /* Did the user select to do a background operation? */
     if (do_bg) {
