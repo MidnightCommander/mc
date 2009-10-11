@@ -1,7 +1,7 @@
 /* File management.
    Copyright (C) 1994, 1995, 1996, 1998, 1999, 2000, 2001, 2002, 2003,
    2004, 2005, 2006, 2007 Free Software Foundation, Inc.
-   
+
    Written by: 1994, 1995       Janne Kukonlehto
                1994, 1995       Fred Leeflang
                1994, 1995, 1996 Miguel de Icaza
@@ -22,7 +22,7 @@
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2 of the License, or
    (at your option) any later version.
-   
+
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -66,7 +66,7 @@
 #include "setup.h"
 #include "dialog.h"
 #include "widget.h"
-#include "main.h"		/* cmd_buf */
+#include "main.h"
 #include "layout.h"
 #include "widget.h"
 #include "wtools.h"
@@ -1639,8 +1639,8 @@ static const char *op_names1[] = {
 };
 
 #define FMD_XLEN 64
-
 int fmd_xlen = FMD_XLEN;
+char fmd_buf [BUF_MEDIUM];
 
 /*
  * These are formats for building a prompt. Parts encoded as follows:
@@ -1741,13 +1741,13 @@ panel_operate_generate_prompt (const WPanel *panel, const int operation,
     *dp = '\0';
 
     if (single_source) {
-        i = fmd_xlen - str_term_width1 (format_string) - 4;
-	g_snprintf (cmd_buf, sizeof (cmd_buf), format_string,
+	i = fmd_xlen - str_term_width1 (format_string) - 4;
+	g_snprintf (fmd_buf, sizeof (fmd_buf), format_string,
 		    str_trunc (single_source, i));
     } else {
-	g_snprintf (cmd_buf, sizeof (cmd_buf), format_string,
+	g_snprintf (fmd_buf, sizeof (fmd_buf), format_string,
 		    panel->marked);
-        i = str_term_width1 (cmd_buf) + 6 - fmd_xlen;
+	i = str_term_width1 (fmd_buf) + 6 - fmd_xlen;
 	if (i > 0) {
 	    fmd_xlen += i;
 	}
@@ -1758,7 +1758,7 @@ panel_operate_generate_prompt (const WPanel *panel, const int operation,
  * panel_operate:
  *
  * Performs one of the operations on the selection on the source_panel
- * (copy, delete, move).  
+ * (copy, delete, move).
  *
  * Returns 1 if did change the directory
  * structure, Returns 0 if user aborted
@@ -1796,13 +1796,11 @@ panel_operate (void *source_panel, FileOperation operation,
     free_linklist (&linklist);
     free_linklist (&dest_dirs);
 
-#if 0
     /* Update panel contents to avoid actions on deleted files */
     if (!panel->is_panelized) {
 	update_panels (UP_RELOAD, UP_KEEPSEL);
 	repaint_screen ();
     }
-#endif
 
     if (single_entry) {
 	if (force_single) {
@@ -1854,7 +1852,7 @@ panel_operate (void *source_panel, FileOperation operation,
 	    return 0;
 	}
 
-	dest = file_mask_dialog (ctx, operation, cmd_buf, dest_dir_,
+	dest = file_mask_dialog (ctx, operation, fmd_buf, dest_dir_,
 				    single_entry, &do_bg);
 	g_free (dest_dir_);
 
@@ -1867,7 +1865,7 @@ panel_operate (void *source_panel, FileOperation operation,
 	if (safe_delete)
 	    query_set_sel (1);
 
-	i = query_dialog (_(op_names[operation]), cmd_buf, D_ERROR, 2,
+	i = query_dialog (_(op_names[operation]), fmd_buf, D_ERROR, 2,
 			  _("&Yes"), _("&No"));
 
 	if (i != 0) {
@@ -2189,26 +2187,29 @@ real_do_file_error (enum OperationMode mode, const char *error)
 FileProgressStatus
 file_error (const char *format, const char *file)
 {
-    g_snprintf (cmd_buf, sizeof (cmd_buf), format,
+    char buf [BUF_MEDIUM];
+
+    g_snprintf (buf, sizeof (buf), format,
 		path_trunc (file, 30), unix_error_string (errno));
 
-    return do_file_error (cmd_buf);
+    return do_file_error (buf);
 }
 
 /* Report error with two files */
 static FileProgressStatus
 files_error (const char *format, const char *file1, const char *file2)
 {
+    char buf [BUF_MEDIUM];
     char *nfile1 = g_strdup (path_trunc (file1, 15));
     char *nfile2 = g_strdup (path_trunc (file2, 15));
 
-    g_snprintf (cmd_buf, sizeof (cmd_buf), format, nfile1, nfile2,
+    g_snprintf (buf, sizeof (buf), format, nfile1, nfile2,
 		unix_error_string (errno));
 
     g_free (nfile1);
     g_free (nfile2);
-    
-    return do_file_error (cmd_buf);
+
+    return do_file_error (buf);
 }
 
 static FileProgressStatus

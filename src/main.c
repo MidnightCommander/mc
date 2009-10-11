@@ -298,8 +298,6 @@ char *mc_home = NULL;
 /* mc_home_alt: Alternative home of MC - deprecated /usr/share/mc */
 char *mc_home_alt = NULL;
 
-char cmd_buf[512];
-
 /* Define this function for glib-style error handling */
 GQuark
 mc_main_error_quark (void)

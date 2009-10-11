@@ -608,31 +608,28 @@ tree_forget_cmd (void *data)
 	tree_remove_entry (tree, tree->selected_ptr->name);
 }
 
-static void tree_copy (WTree *tree, const char *default_dest)
+static void
+tree_copy (WTree *tree, const char *default_dest)
 {
+    char   msg [BUF_MEDIUM];
     char   *dest;
     off_t  count = 0;
     double bytes = 0;
     FileOpContext *ctx;
 
-    if (!tree->selected_ptr)
-	return;
-    g_snprintf (cmd_buf, sizeof(cmd_buf), _("Copy \"%s\" directory to:"),
-	     str_trunc (tree->selected_ptr->name, 50));
-    dest = input_expand_dialog (_(" Copy "), cmd_buf, MC_HISTORY_FM_TREE_COPY, default_dest);
-
-    if (!dest)
+    if (tree->selected_ptr == NULL)
 	return;
 
-    if (!*dest){
-	g_free (dest);
-	return;
+    g_snprintf (msg, sizeof (msg), _("Copy \"%s\" directory to:"),
+			str_trunc (tree->selected_ptr->name, 50));
+    dest = input_expand_dialog (_(" Copy "), msg, MC_HISTORY_FM_TREE_COPY, default_dest);
+
+    if (dest != NULL && *dest != '\0') {
+	ctx = file_op_context_new (OP_COPY);
+	file_op_context_create_ui (ctx, FALSE);
+	copy_dir_dir (ctx, tree->selected_ptr->name, dest, 1, 0, 0, 0, &count, &bytes);
+	file_op_context_destroy (ctx);
     }
-
-    ctx = file_op_context_new (OP_COPY);
-    file_op_context_create_ui (ctx, FALSE);
-    copy_dir_dir (ctx, tree->selected_ptr->name, dest, 1, 0, 0, 0, &count, &bytes);
-    file_op_context_destroy (ctx);
 
     g_free (dest);
 }
@@ -650,25 +647,28 @@ tree_copy_cmd (void *data)
     tree_copy (tree, "");
 }
 
-static void tree_move (WTree *tree, const char *default_dest)
+static void
+tree_move (WTree *tree, const char *default_dest)
 {
+    char   msg [BUF_MEDIUM];
     char   *dest;
     struct stat buf;
     double bytes = 0;
     off_t  count = 0;
     FileOpContext *ctx;
 
-    if (!tree->selected_ptr)
+    if (tree->selected_ptr == NULL)
 	return;
-    g_snprintf (cmd_buf, sizeof (cmd_buf), _("Move \"%s\" directory to:"),
-    str_trunc (tree->selected_ptr->name, 50));
-    dest = input_expand_dialog (_(" Move "), cmd_buf, MC_HISTORY_FM_TREE_MOVE, default_dest);
-    if (!dest)
-	return;
-    if (!*dest){
+
+    g_snprintf (msg, sizeof (msg), _("Move \"%s\" directory to:"),
+			str_trunc (tree->selected_ptr->name, 50));
+    dest = input_expand_dialog (_(" Move "), msg, MC_HISTORY_FM_TREE_MOVE, default_dest);
+
+    if (dest == NULL || *dest == '\0') {
 	g_free (dest);
 	return;
     }
+
     if (stat (dest, &buf)){
 	message (D_ERROR, MSG_ERROR, _(" Cannot stat the destination \n %s "),
 		 unix_error_string (errno));
