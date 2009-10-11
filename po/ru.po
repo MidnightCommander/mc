@@ -554,7 +554,7 @@ msgid "Forward to declaration    M-+"
 msgstr "Вперед к определению            M-+"
 
 msgid "Encod&ing...             M-e"
-msgstr "Кодировка...                    С-e"
+msgstr "Кодировка...                    M-e"
 
 msgid "Insert &literal...       C-q"
 msgstr "Вставить &литерал...             C-q"
@@ -2335,7 +2335,7 @@ msgid "&Filter..."
 msgstr "&Фильтр..."
 
 msgid "&Encoding...    M-e"
-msgstr "Кодировка панели     C-e"
+msgstr "Кодировка панели     M-e"
 
 msgid "&Network link..."
 msgstr "Се&тевое соединение..."
@@ -2680,7 +2680,7 @@ msgid "u"
 msgstr "б"
 
 msgid "Unsorted"
-msgstr "Без сортировки""
+msgstr "Без сортировки"
 
 msgid "&Unsorted"
 msgstr "&Без сортировки"
