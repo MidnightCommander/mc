@@ -1638,10 +1638,6 @@ static const char *op_names1[] = {
     N_("1Delete")
 };
 
-#define FMD_XLEN 64
-int fmd_xlen = FMD_XLEN;
-char fmd_buf [BUF_MEDIUM];
-
 /*
  * These are formats for building a prompt. Parts encoded as follows:
  * %o - operation from op_names1
@@ -1672,9 +1668,9 @@ static const char *prompt_parts[] = {
  * entries.
  * src_stat is only used when single_source is not NULL.
  */
-static void
+static char *
 panel_operate_generate_prompt (const WPanel *panel, const int operation,
-			       const char *single_source,
+			       gboolean single_source,
 			       const struct stat *src_stat)
 {
     const char *sp, *cp;
@@ -1716,13 +1712,11 @@ panel_operate_generate_prompt (const WPanel *panel, const int operation,
 	    case 'f':
 		if (single_source) {
 		    cp = S_ISDIR (src_stat->
-				  st_mode) ? prompt_parts[2] :
-			prompt_parts[0];
+				  st_mode) ? prompt_parts[2] : prompt_parts[0];
 		} else {
 		    cp = (panel->marked == panel->dirs_marked)
 			? prompt_parts[3]
-			: (panel->dirs_marked ? prompt_parts[4]
-			   : prompt_parts[1]);
+			: (panel->dirs_marked ? prompt_parts[4] : prompt_parts[1]);
 		}
 		break;
 	    default:
@@ -1740,18 +1734,7 @@ panel_operate_generate_prompt (const WPanel *panel, const int operation,
     }
     *dp = '\0';
 
-    if (single_source) {
-	i = fmd_xlen - str_term_width1 (format_string) - 4;
-	g_snprintf (fmd_buf, sizeof (fmd_buf), format_string,
-		    str_trunc (single_source, i));
-    } else {
-	g_snprintf (fmd_buf, sizeof (fmd_buf), format_string,
-		    panel->marked);
-	i = str_term_width1 (fmd_buf) + 6 - fmd_xlen;
-	if (i > 0) {
-	    fmd_xlen += i;
-	}
-    }
+    return g_strdup (format_string);
 }
 
 /**
@@ -1771,12 +1754,12 @@ panel_operate (void *source_panel, FileOperation operation,
 	       int force_single)
 {
     WPanel *panel = source_panel;
+    char *source = NULL;
 #ifdef WITH_FULL_PATHS
     char *source_with_path = NULL;
 #else
 #   define source_with_path source
 #endif				/* !WITH_FULL_PATHS */
-    char *source = NULL;
     char *dest = NULL;
     char *temp = NULL;
     char *save_cwd = NULL, *save_dest = NULL;
@@ -1816,15 +1799,13 @@ panel_operate (void *source_panel, FileOperation operation,
 	}
     }
 
-    /* Generate confirmation prompt */
-    panel_operate_generate_prompt (panel, operation, source, &src_stat);
-
     ctx = file_op_context_new (operation);
 
     /* Show confirmation dialog */
     if (operation != OP_DELETE) {
 	char *dest_dir;
 	char *dest_dir_;
+	char *format;
 
 	/* Forced single operations default to the original name */
 	if (force_single)
@@ -1852,8 +1833,15 @@ panel_operate (void *source_panel, FileOperation operation,
 	    return 0;
 	}
 
-	dest = file_mask_dialog (ctx, operation, fmd_buf, dest_dir_,
-				    single_entry, &do_bg);
+	/* Generate confirmation prompt */
+	format = panel_operate_generate_prompt (panel, operation,
+						source != NULL, &src_stat);
+
+	dest = file_mask_dialog (ctx, operation, source != NULL,
+				format, source != NULL ? source : &panel->marked,
+				dest_dir_, &do_bg);
+
+	g_free (format);
 	g_free (dest_dir_);
 
 	if (dest == NULL || dest[0] == '\0') {
@@ -1862,11 +1850,29 @@ panel_operate (void *source_panel, FileOperation operation,
 	    return 0;
 	}
     } else if (confirm_delete) {
+	char *format;
+	char fmd_buf [BUF_MEDIUM];
+
+	/* Generate confirmation prompt */
+	format = panel_operate_generate_prompt (panel, OP_DELETE,
+						source != NULL, &src_stat);
+
+	if (source == NULL)
+	    g_snprintf (fmd_buf, sizeof (fmd_buf), format, panel->marked);
+	else {
+	    const int fmd_xlen = 64;
+	    i = fmd_xlen - str_term_width1 (format) - 4;
+	    g_snprintf (fmd_buf, sizeof (fmd_buf),
+			format, str_trunc (source, i));
+	}
+
+	g_free (format);
+
 	if (safe_delete)
 	    query_set_sel (1);
 
 	i = query_dialog (_(op_names[operation]), fmd_buf, D_ERROR, 2,
-			  _("&Yes"), _("&No"));
+				_("&Yes"), _("&No"));
 
 	if (i != 0) {
 	    file_op_context_destroy (ctx);
