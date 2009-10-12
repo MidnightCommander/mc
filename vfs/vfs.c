@@ -676,6 +676,9 @@ mc_ctl (int handle, int ctlop, void *arg)
 {
     struct vfs_class *vfs = vfs_op (handle);
 
+    if (vfs == NULL)
+        return 0;
+
     return vfs->ctl ? (*vfs->ctl)(vfs_info (handle), ctlop, arg) : 0;
 }
 
@@ -708,6 +711,9 @@ mc_close (int handle)
 	return -1;
     
     vfs = vfs_op (handle);
+    if (vfs == NULL)
+	return -1;
+
     if (handle < 3)
 	return close (handle);
 
@@ -797,7 +803,11 @@ mc_readdir (DIR *dirp)
 	return NULL;
     }
     handle = *(int *) dirp;
+
     vfs = vfs_op (handle);
+    if (vfs == NULL)
+	return NULL;
+
     dirinfo = vfs_info (handle);
     if (vfs->readdir) {
         entry = (*vfs->readdir) (dirinfo->info);
@@ -820,6 +830,9 @@ mc_closedir (DIR *dirp)
     int result;
     struct vfs_dirinfo *dirinfo;
 
+    if (vfs == NULL)
+	return -1;
+
     dirinfo = vfs_info (handle);
     if (dirinfo->converter != str_cnv_from_term) str_close_conv (dirinfo->converter);
 
@@ -834,37 +847,49 @@ int mc_stat (const char *filename, struct stat *buf) {
     struct vfs_class *vfs;
     int result;
     char *path;
-    
+
     path = vfs_canon_and_translate (filename);
-    
-    if (path != NULL) {
-        vfs = vfs_get_class (path);
-    
+
+    if (path == NULL)
+	return -1;
+
+    vfs = vfs_get_class (path);
+
+    if (vfs == NULL) {
+	g_free (path);
+	return -1;
+    }
+
     result = vfs->stat ? (*vfs->stat) (vfs, path, buf) : -1;
-    
+
     g_free (path);
-    
+
     if (result == -1)
 	errno = vfs->name ? ferrno (vfs) : E_NOTSUPP;
     return result;
-    } else return -1;
 }
 
 int mc_lstat (const char *filename, struct stat *buf) {
     struct vfs_class *vfs;
     int result;
     char *path;
-    
+
     path = vfs_canon_and_translate (filename);
-    
-    if (path != NULL) {
-        vfs = vfs_get_class (path);
+
+    if (path == NULL)
+	return -1;
+
+    vfs = vfs_get_class (path);
+    if (vfs == NULL) {
+	g_free (path);
+	return -1;
+    }
+
     result = vfs->lstat ? (*vfs->lstat) (vfs, path, buf) : -1;
     g_free (path);
     if (result == -1)
 	errno = vfs->name ? ferrno (vfs) : E_NOTSUPP;
     return result;
-    } else return -1;
 }
 
 int mc_fstat (int handle, struct stat *buf) {
@@ -873,7 +898,11 @@ int mc_fstat (int handle, struct stat *buf) {
 
     if (handle == -1)
 	return -1;
+
     vfs = vfs_op (handle);
+    if (vfs == NULL)
+	return -1;
+
     result = vfs->fstat ? (*vfs->fstat) (vfs_info (handle), buf) : -1;
     if (result == -1)
 	errno = vfs->name ? ferrno (vfs) : E_NOTSUPP;
@@ -967,6 +996,9 @@ off_t mc_lseek (int fd, off_t offset, int whence)
 	return -1;
 
     vfs = vfs_op (fd);
+    if (vfs == NULL)
+	return -1;
+
     result = vfs->lseek ? (*vfs->lseek)(vfs_info (fd), offset, whence) : -1;
     if (result == -1)
         errno = vfs->lseek ? ferrno (vfs) : E_NOTSUPP;
