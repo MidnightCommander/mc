@@ -47,6 +47,7 @@
 #include "learn.h"
 #include "wtools.h"
 #include "strutil.h"
+#include "strescape.h"
 
 #define UX		4
 #define UY		3
@@ -311,12 +312,18 @@ learn_save (void)
     int i;
     int profile_changed = 0;
     char *section = g_strconcat ("terminal:", getenv ("TERM"), (char *) NULL);
+    char *esc_str;
 
     for (i = 0; i < learn_total; i++) {
 	if (learnkeys [i].sequence != NULL) {
 	    profile_changed = 1;
-	    mc_config_set_string(mc_main_config, section,
-		key_name_conv_tab [i].name, learnkeys [i].sequence);
+
+	    esc_str = strutils_escape (learnkeys [i].sequence, -1, ";\\", TRUE);
+
+	    mc_config_direct_set_string(mc_main_config, section,
+		key_name_conv_tab [i].name, esc_str);
+
+	    g_free(esc_str);
 	}
     }
 
