@@ -466,6 +466,7 @@ panel_field_t panel_fields [] = {
     },
     {
 	"bsize", 7,  0, J_RIGHT,
+	"",
 	N_("Block Size"), NULL, FALSE,
 	string_file_size_brief,
 	(sortfn *) sort_size
