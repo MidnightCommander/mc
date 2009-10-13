@@ -153,13 +153,13 @@ mc_skin_color_get_from_ini_file (mc_skin_t * mc_skin, const gchar * group, const
         }
         break;
     case 1:
-        mc_skin_color->fgcolor = (values[0]) ? g_strdup (values[0]) : NULL;
+        mc_skin_color->fgcolor = (values[0]) ? g_strstrip (g_strdup (values[0])) : NULL;
         tmp = mc_skin_color_get_with_defaults (group, "_default_");
         mc_skin_color->bgcolor = (tmp != NULL) ? g_strdup (tmp->bgcolor) : NULL;
         break;
     case 2:
-        mc_skin_color->fgcolor = (values[0]) ? g_strdup (values[0]) : NULL;
-        mc_skin_color->bgcolor = (values[1]) ? g_strdup (values[1]) : NULL;
+        mc_skin_color->fgcolor = (values[0]) ? g_strstrip (g_strdup (values[0])) : NULL;
+        mc_skin_color->bgcolor = (values[1]) ? g_strstrip (g_strdup (values[1])) : NULL;
         break;
     }
     g_strfreev (values);
