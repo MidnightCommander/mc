@@ -435,7 +435,8 @@ panel_field_t panel_fields [] = {
     {
 	"unsorted", 12, 1, J_LEFT_FIT,
 	/* TRANSLATORS: one single character to represent 'unsorted' sort mode  */
-	N_("u"),
+	/* TRANSLATORS: no need to translate 'sort', it's just a context prefix  */
+	N_("sort|u"),
 	N_("Unsorted"), N_("&Unsorted"), FALSE,
 	string_file_name,
 	(sortfn *) unsorted
@@ -443,7 +444,8 @@ panel_field_t panel_fields [] = {
     {
 	"name", 12, 1, J_LEFT_FIT,
 	/* TRANSLATORS: one single character to represent 'name' sort mode  */
-	N_("n"),
+	/* TRANSLATORS: no need to translate 'sort', it's just a context prefix  */
+	N_("sort|n"),
 	N_("Name"), N_("&Name"), TRUE,
 	string_file_name,
 	(sortfn *) sort_name
@@ -451,7 +453,8 @@ panel_field_t panel_fields [] = {
     {
 	"extension", 12, 1, J_LEFT_FIT,
 	/* TRANSLATORS: one single character to represent 'extension' sort mode  */
-	N_("e"),
+	/* TRANSLATORS: no need to translate 'sort', it's just a context prefix  */
+	N_("sort|e"),
 	N_("Extension"), N_("&Extension"), FALSE,
 	string_file_name, /* TODO: string_file_ext*/
 	(sortfn *) sort_ext
@@ -459,7 +462,8 @@ panel_field_t panel_fields [] = {
     {
 	"size", 7,  0, J_RIGHT,
 	/* TRANSLATORS: one single character to represent 'size' sort mode  */
-	N_("s"),
+	/* TRANSLATORS: no need to translate 'sort', it's just a context prefix  */
+	N_("sort|s"),
 	N_("Size"), N_("&Size"), TRUE,
 	string_file_size,
 	(sortfn *) sort_size
@@ -481,7 +485,8 @@ panel_field_t panel_fields [] = {
     {
 	"mtime", 12, 0, J_RIGHT,
 	/* TRANSLATORS: one single character to represent 'Modify time' sort mode  */
-	N_("m"),
+	/* TRANSLATORS: no need to translate 'sort', it's just a context prefix  */
+	N_("sort|m"),
 	N_("MTime"), N_("&Modify time"), TRUE,
 	string_file_mtime,
 	(sortfn *) sort_time
@@ -489,7 +494,8 @@ panel_field_t panel_fields [] = {
     {
 	"atime", 12, 0, J_RIGHT,
 	/* TRANSLATORS: one single character to represent 'Access time' sort mode  */
-	N_("a"),
+	/* TRANSLATORS: no need to translate 'sort', it's just a context prefix  */
+	N_("sort|a"),
 	N_("ATime"), N_("&Access time"), TRUE,
 	string_file_atime,
 	(sortfn *) sort_atime
@@ -497,7 +503,8 @@ panel_field_t panel_fields [] = {
     {
 	"ctime", 12, 0, J_RIGHT,
 	/* TRANSLATORS: one single character to represent 'Change time' sort mode  */
-	N_("h"),
+	/* TRANSLATORS: no need to translate 'sort', it's just a context prefix  */
+	N_("sort|h"),
 	N_("CTime"), N_("C&Hange time"), TRUE,
 	string_file_ctime,
 	(sortfn *) sort_ctime
@@ -525,7 +532,8 @@ panel_field_t panel_fields [] = {
     {
 	"inode", 5,  0, J_RIGHT,
 	/* TRANSLATORS: one single character to represent 'inode' sort mode  */
-	N_("i"),
+	/* TRANSLATORS: no need to translate 'sort', it's just a context prefix  */
+	N_("sort|i"),
 	N_("Inode"), N_("&Inode"), TRUE,
 	string_inode,
 	(sortfn *) sort_inode
@@ -1349,7 +1357,7 @@ panel_paint_sort_info(WPanel *panel)
     if (*panel->current_sort_field->hotkey == '\0')
 	return;
 
-    str = g_strdup_printf("%s%s",sort_sign, _(panel->current_sort_field->hotkey));
+    str = g_strdup_printf("%s%s",sort_sign, Q_(panel->current_sort_field->hotkey));
 
     widget_move (&panel->widget, 1, 1);
     tty_print_string (str);
