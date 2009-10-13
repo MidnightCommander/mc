@@ -46,6 +46,7 @@
 #include "../../src/tty/tty.h"
 #include "../../src/tty/color-internal.h"
 #include "../../src/tty/win.h"
+#include "../../src/main.h"
 
 #include "../../src/strutil.h"  /* str_term_form */
 
@@ -308,14 +309,19 @@ tty_print_anychar (int c)
 {
     unsigned char str[6 + 1];
 
-    int res = g_unichar_to_utf8 (c, (char *) str);
-    if (res == 0) {
-        str[0] = '.';
-        str[1] = '\0';
+    if (utf8_display || c > 255) {
+        int res = g_unichar_to_utf8 (c, (char *) str);
+        if (res == 0) {
+            str[0] = '.';
+            str[1] = '\0';
+        } else {
+            str[res] = '\0';
+        }
+        addstr (str_term_form ((char *) str));
     } else {
-        str[res] = '\0';
+        addch (c);
     }
-    addstr (str_term_form ((char *) str));
+
 }
 
 void
