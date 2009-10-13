@@ -308,18 +308,14 @@ tty_print_anychar (int c)
 {
     unsigned char str[6 + 1];
 
-    if (c > 255) {
-        int res = g_unichar_to_utf8 (c, (char *) str);
-        if (res == 0) {
-            str[0] = '.';
-            str[1] = '\0';
-        } else {
-            str[res] = '\0';
-        }
-        addstr (str_term_form ((char *) str));
+    int res = g_unichar_to_utf8 (c, (char *) str);
+    if (res == 0) {
+        str[0] = '.';
+        str[1] = '\0';
     } else {
-        addch (c);
+        str[res] = '\0';
     }
+    addstr (str_term_form ((char *) str));
 }
 
 void
