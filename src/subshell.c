@@ -573,7 +573,8 @@ int invoke_subshell (const char *command, int how, char **new_dir)
 	    subshell_state = ACTIVE;
 	    /* FIXME: possibly take out this hack; the user can
 	       re-play it by hitting C-hyphen a few times! */
-	    write_all (subshell_pty, " \b", 2);  /* Hack to make prompt reappear */
+	    if (subshell_ready)
+		write_all (subshell_pty, " \b", 2);  /* Hack to make prompt reappear */
 	}
     }
     else  /* MC has passed us a user command */
@@ -1052,7 +1053,9 @@ feed_subshell (int how, int fail_on_error)
 		}
 
 	    write_all (subshell_pty, pty_buffer, bytes);
-	    subshell_ready = FALSE;
+
+	    if (pty_buffer[bytes-1] == '\n' || pty_buffer[bytes-1] == '\r')
+		subshell_ready = FALSE;
 	} else {
 	    return FALSE;
 	}
