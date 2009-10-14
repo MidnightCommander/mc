@@ -823,7 +823,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation,
 {
     const size_t FMDY = 13;
     const size_t FMDX = 68;
-    size_t fmd_xlen = FMDX;
+    size_t fmd_xlen;
 
     /* buttons */
     const size_t gap = 1;
@@ -883,6 +883,8 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation,
 	i18n = TRUE;
     }
 
+    fmd_xlen = max (FMDX, COLS * 2/3);
+
     /* buttons */
     for (i = 0; i <= 2 - OFFSET; i++)
 	fmd_widgets[i].u.button.text = _(fmd_widgets[i].u.button.text);
@@ -908,7 +910,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation,
 #endif
     b0_len = str_term_width1 (fmd_widgets[0].u.button.text) + 4; /* Cancel */
     len = b0_len + b1_len + b2_len;
-    fmd_xlen = max (fmd_xlen, len + 6);
+    fmd_xlen = min (max (fmd_xlen, len + 6), COLS);
 
     if (only_one) {
 	int flen;
