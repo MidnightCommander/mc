@@ -36,8 +36,9 @@
 #include "global.h"
 
 #include "../src/tty/tty.h"
-#include "../src/skin/skin.h"		/* INPUT_COLOR */
 #include "../src/tty/key.h"		/* tty_getch() */
+
+#include "../src/skin/skin.h"		/* INPUT_COLOR */
 
 #include "dialog.h"
 #include "widget.h"
@@ -47,7 +48,7 @@
 
 
 Listbox *
-create_listbox_window_delta (int delta_x, int delta_y, int cols, int lines,
+create_listbox_window_centered (int center_y, int center_x, int lines, int cols,
 				const char *title, const char *help)
 {
     const int listbox_colors[DLG_COLOR_NUM] =
@@ -57,6 +58,8 @@ create_listbox_window_delta (int delta_x, int delta_y, int cols, int lines,
 	MENU_HOT_COLOR,
 	MENU_HOTSEL_COLOR,
     };
+
+    const int space = 4;
 
     int xpos, ypos, len;
     Listbox *listbox;
@@ -72,14 +75,33 @@ create_listbox_window_delta (int delta_x, int delta_y, int cols, int lines,
     cols = min (cols, COLS - 6);
 
     /* adjust position */
-    xpos = (COLS - cols + delta_x) / 2;
-    ypos = (LINES - lines + delta_y) / 2 - 2;
+    if ((center_y < 0) || (center_x < 0)) {
+	ypos = LINES/2;
+	xpos = COLS/2;
+    } else {
+	ypos = center_y;
+	xpos = center_x;
+    }
+
+    ypos -= lines/2;
+    xpos -= cols/2;
+
+    if (ypos + lines >= LINES)
+	ypos = LINES - lines - space;
+    if (ypos < 0)
+	ypos = 0;
+
+    if (xpos + cols >= COLS)
+	xpos = COLS - cols - space;
+    if (xpos < 0)
+	xpos = 0;
 
     listbox = g_new (Listbox, 1);
 
     listbox->dlg =
-	create_dlg (ypos, xpos, lines + 4, cols + 4, listbox_colors, NULL,
-		    help, title, DLG_REVERSE);
+	create_dlg (ypos, xpos, lines + space, cols + space,
+		    listbox_colors, NULL,
+		    help, title, DLG_REVERSE | DLG_TRYUP);
 
     listbox->list = listbox_new (2, 2, lines, cols, NULL);
     add_widget (listbox->dlg, listbox->list);
@@ -88,9 +110,9 @@ create_listbox_window_delta (int delta_x, int delta_y, int cols, int lines,
 }
 
 Listbox *
-create_listbox_window (int cols, int lines, const char *title, const char *help)
+create_listbox_window (int lines, int cols, const char *title, const char *help)
 {
-    return create_listbox_window_delta (0, 0, cols, lines, title, help);
+    return create_listbox_window_centered (-1, -1, lines, cols, title, help);
 }
 
 /* Returns the number of the item selected */

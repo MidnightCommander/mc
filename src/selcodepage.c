@@ -36,7 +36,7 @@
 #include "selcodepage.h"
 #include "main.h"
 
-#define ENTRY_LEN 35
+#define ENTRY_LEN 30
 
 /* Numbers of (file I/O) and (input/display) codepages. -1 if not selected */
 int source_codepage = -1;
@@ -55,14 +55,14 @@ get_hotkey (int n)
  *   >= 0                             : charset number
  */
 int
-select_charset (int delta_x, int delta_y, int current_charset, gboolean seldisplay)
+select_charset (int center_y, int center_x, int current_charset, gboolean seldisplay)
 {
     int i;
     char buffer[255];
 
     /* Create listbox */
-    Listbox *listbox = create_listbox_window_delta (delta_x, delta_y,
-					      ENTRY_LEN + 2, n_codepages + 1,
+    Listbox *listbox = create_listbox_window_centered (center_y, center_x,
+					      n_codepages + 1, ENTRY_LEN + 2,
 					      _("Choose codepage"),
 					      "[Codepages Translation]");
 
@@ -114,7 +114,7 @@ do_select_codepage (void)
     const char *errmsg = NULL;
     int r;
 
-    r = select_charset (0, 0, source_codepage, FALSE);
+    r = select_charset (-1, -1, source_codepage, FALSE);
     if (r == SELECT_CHARSET_CANCEL)
 	return FALSE;
 

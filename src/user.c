@@ -863,7 +863,7 @@ user_menu_cmd (WEdit *edit_widget)
 	max_cols = min (max (max_cols, col), MAX_ENTRY_LEN);
 
 	/* Create listbox */
-	listbox = create_listbox_window (max_cols+2, menu_lines, _(" User menu "),
+	listbox = create_listbox_window (menu_lines, max_cols + 2,_(" User menu "),
 					    "[Menu File Edit]");
 	/* insert all the items found */
 	for (i = 0; i < menu_lines; i++) {
