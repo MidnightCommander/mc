@@ -2962,19 +2962,6 @@ do_panel_event (Gpm_Event *event, WPanel *panel, int *redir)
 	return MOU_NORMAL;
     }
 
-    /* sort on clicked column */
-    if (event->type & GPM_DOWN && event->y == 2) {
-	mouse_sort_col(event,panel);
-	return MOU_NORMAL;
-    }
-
-    /* rest of the upper frame, the menu is invisible - call menu */
-    if (mouse_down && event->y == 1 && !menubar_visible) {
-	*redir = 1;
-	event->x += panel->widget.x;
-	return (*(the_menubar->widget.mouse)) (event, the_menubar);
-    }
-
     /* "<" button */
     if (mouse_down && event->y == 1 && event->x == 2) {
 	directory_history_prev (panel);
@@ -2990,6 +2977,12 @@ do_panel_event (Gpm_Event *event, WPanel *panel, int *redir)
     /* "v" button */
     if (mouse_down && event->y == 1 && event->x == panel->widget.cols - 2) {
 	directory_history_list (panel);
+	return MOU_NORMAL;
+    }
+
+    /* sort on clicked column */
+    if (event->type & GPM_DOWN && event->y == 2) {
+	mouse_sort_col(event,panel);
 	return MOU_NORMAL;
     }
 
