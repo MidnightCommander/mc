@@ -177,3 +177,14 @@ mc_skin_deinit (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+gchar *
+mc_skin_get(const gchar *group, const gchar *key, const gchar *default_value)
+{
+    if (mc_args__ugly_line_drawing) {
+	return g_strdup(default_value);
+    }
+    return mc_config_get_string(mc_skin__default.config, group, key, default_value);
+}
+
+/* --------------------------------------------------------------------------------------------- */

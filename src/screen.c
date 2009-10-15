@@ -118,6 +118,12 @@ static const char *mini_status_format (WPanel *panel);
 static char *panel_sort_up_sign = NULL;
 static char *panel_sort_down_sign = NULL;
 
+static char *panel_hiddenfiles_sign_show = NULL;
+static char *panel_hiddenfiles_sign_hide = NULL;
+static char *panel_history_prev_item_sign = NULL;
+static char *panel_history_next_item_sign = NULL;
+static char *panel_history_show_list_sign = NULL;
+
 /* This macro extracts the number of available lines in a panel */
 #define llines(p) (p->widget.lines-3 - (show_mini_info ? 2 : 0))
 
@@ -901,6 +907,7 @@ show_free_space (WPanel *panel)
 static void
 show_dir (WPanel *panel)
 {
+    gchar *tmp;
     set_colors (panel);
     draw_box (panel->widget.parent,
 		 panel->widget.y, panel->widget.x,
@@ -914,6 +921,17 @@ show_dir (WPanel *panel)
 	tty_print_alt_char (ACS_RTEE);
     }
 
+    widget_move (&panel->widget, 0, 1);
+    tty_print_string (panel_history_prev_item_sign);
+
+    tmp = (show_dot_files) ? panel_hiddenfiles_sign_show : panel_hiddenfiles_sign_hide;
+    tmp = g_strdup_printf("%s[%s]%s",tmp,panel_history_show_list_sign,panel_history_next_item_sign);
+
+    widget_move (&panel->widget, 0, panel->widget.cols - 6);
+    tty_print_string (tmp);
+
+    g_free(tmp);
+
     if (panel->active)
 	tty_setcolor (REVERSE_COLOR);
 
@@ -921,13 +939,8 @@ show_dir (WPanel *panel)
 
     tty_printf (" %s ",
 		str_term_trim (strip_home_and_password (panel->cwd),
-				min (max (panel->widget.cols - 10, 0),
+				min (max (panel->widget.cols - 12, 0),
 					panel->widget.cols)));
-
-    widget_move (&panel->widget, 0, 1);
-    tty_print_char ('<');
-    widget_move (&panel->widget, 0, panel->widget.cols - 4);
-    tty_print_string (".v>");
 
     if (!show_mini_info) {
 	if (panel->marked == 0) {
@@ -938,7 +951,7 @@ show_dir (WPanel *panel)
 		g_snprintf (buffer, sizeof (buffer), " %s ",
 			    size_trunc_sep (panel->dir.list [panel->selected].st.st_size));
 		tty_setcolor (NORMAL_COLOR);
-		widget_move (&panel->widget, panel->widget.lines - 1, 2);
+		widget_move (&panel->widget, panel->widget.lines - 1, 4);
 		tty_print_string (buffer);
 	    }
 	} else {
@@ -2946,22 +2959,10 @@ do_panel_event (Gpm_Event *event, WPanel *panel, int *redir)
     const gboolean mouse_down = (event->type & GPM_DOWN) != 0;
 
     /* "." button show/hide hidden files */
-    if (event->type & GPM_DOWN && event->x == panel->widget.cols - 3 && event->y == 1) {
+    if (event->type & GPM_DOWN && event->x == panel->widget.cols - 5 && event->y == 1) {
 	toggle_show_hidden();
+	repaint_screen ();
 	return MOU_NORMAL;
-    }
-
-    /* sort on clicked column */
-    if (event->type & GPM_DOWN && event->y == 2) {
-	mouse_sort_col(event,panel);
-	return MOU_NORMAL;
-    }
-
-    /* rest of the upper frame, the menu is invisible - call menu */
-    if (mouse_down && event->y == 1 && !menubar_visible) {
-	*redir = 1;
-	event->x += panel->widget.x;
-	return (*(the_menubar->widget.mouse)) (event, the_menubar);
     }
 
     /* "<" button */
@@ -2976,9 +2977,15 @@ do_panel_event (Gpm_Event *event, WPanel *panel, int *redir)
 	return MOU_NORMAL;
     }
 
-    /* "v" button */
-    if (mouse_down && event->y == 1 && event->x == panel->widget.cols - 2) {
+    /* "^" button */
+    if (mouse_down && event->y == 1 && event->x >= panel->widget.cols - 4 && event->x <= panel->widget.cols - 2) {
 	directory_history_list (panel);
+	return MOU_NORMAL;
+    }
+
+    /* sort on clicked column */
+    if (event->type & GPM_DOWN && event->y == 2) {
+	mouse_sort_col(event,panel);
 	return MOU_NORMAL;
     }
 
@@ -3381,8 +3388,15 @@ panel_get_user_possible_fields(gsize *array_size)
 void
 panel_init(void)
 {
-    panel_sort_up_sign =  mc_config_get_string(mc_skin__default.config,"widget-common","sort-sign-up","'");
-    panel_sort_down_sign = mc_config_get_string(mc_skin__default.config,"widget-common","sort-sign-down",",");
+    panel_sort_up_sign   = mc_skin_get("widget-common","sort-sign-up","'");
+    panel_sort_down_sign = mc_skin_get("widget-common","sort-sign-down",",");
+
+    panel_hiddenfiles_sign_show  = mc_skin_get("widget-panel", "hiddenfiles-sign-show", ".");
+    panel_hiddenfiles_sign_hide  = mc_skin_get("widget-panel", "hiddenfiles-sign-hide", ".");
+    panel_history_prev_item_sign = mc_skin_get("widget-panel", "history-prev-item-sign", "<");
+    panel_history_next_item_sign = mc_skin_get("widget-panel", "history-next-item-sign", ">");
+    panel_history_show_list_sign = mc_skin_get("widget-panel", "history-show-list-sign", "^");
+
 }
 
 void
@@ -3390,4 +3404,11 @@ panel_deinit(void)
 {
     g_free(panel_sort_up_sign);
     g_free(panel_sort_down_sign);
+
+    g_free(panel_hiddenfiles_sign_show);
+    g_free(panel_hiddenfiles_sign_hide);
+    g_free(panel_history_prev_item_sign);
+    g_free(panel_history_next_item_sign);
+    g_free(panel_history_show_list_sign);
+
 }
