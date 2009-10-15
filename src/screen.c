@@ -752,13 +752,16 @@ repaint_file (WPanel *panel, int file_index, int mv, int attr, int isstatus)
 static void
 display_mini_info (WPanel *panel)
 {
-    widget_move (&panel->widget, llines (panel)+3, 1);
+    if (!show_mini_info)
+	return;
 
-    if (panel->searching){
+    widget_move (&panel->widget, llines (panel) + 3, 1);
+
+    if (panel->searching) {
 	tty_setcolor (INPUT_COLOR);
-        tty_print_char ('/');
-        tty_print_string (str_fit_to_term (panel->search_buffer,
-                panel->widget.cols - 3, J_LEFT));
+	tty_print_char ('/');
+	tty_print_string (str_fit_to_term (panel->search_buffer,
+				panel->widget.cols - 3, J_LEFT));
 	return;
     }
 
@@ -855,14 +858,16 @@ display_total_marked_size (WPanel *panel, int y, int x, gboolean size_only)
 static void
 mini_info_separator (WPanel *panel)
 {
-    const int y = llines (panel) + 2;
+    if (show_mini_info) {
+	const int y = llines (panel) + 2;
 
-    tty_setcolor (NORMAL_COLOR);
-    tty_draw_hline (panel->widget.y + y, panel->widget.x + 1,
-		    ACS_HLINE, panel->widget.cols - 2);
-    /* Status displays total marked size.
-     * Centered in panel, full format. */
-    display_total_marked_size (panel, y, -1, FALSE);
+	tty_setcolor (NORMAL_COLOR);
+	tty_draw_hline (panel->widget.y + y, panel->widget.x + 1,
+			    ACS_HLINE, panel->widget.cols - 2);
+	/* Status displays total marked size.
+	 * Centered in panel, full format. */
+	display_total_marked_size (panel, y, -1, FALSE);
+    }
 }
 
 static void
@@ -985,12 +990,8 @@ paint_panel (WPanel *panel)
 {
     paint_frame (panel); /* including show_dir */
     paint_dir (panel);
-
-    if (show_mini_info) {
-	mini_info_separator (panel);
-	display_mini_info (panel);
-    }
-
+    mini_info_separator (panel);
+    display_mini_info (panel);
     panel->dirty = 0;
 }
 
