@@ -92,4 +92,7 @@ int mc_skin_color_get (const gchar *, const gchar *);
 
 void mc_skin_lines_parse_ini_file (mc_skin_t *);
 
+gchar *mc_skin_get(const gchar *, const gchar *, const gchar *);
+
+
 #endif
