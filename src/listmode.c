@@ -102,7 +102,7 @@ select_new_item (void)
     possible_items = panel_get_user_possible_fields(NULL);
 
     mylistbox =
-	create_listbox_window (12, 20, " Add listing format item ",
+	create_listbox_window (20, 12, " Add listing format item ",
 			       listmode_section);
     for (i = 0; possible_items[i]; i++) {
 	listbox_add_item (mylistbox->list, 0, 0, possible_items[i], NULL);

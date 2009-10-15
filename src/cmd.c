@@ -1436,11 +1436,6 @@ toggle_listing_cmd (void)
 void
 encoding_cmd (void)
 {
-    WPanel *panel;
-
-    if (!SELECTED_IS_PANEL)
-        return;
-
-    panel = MENU_PANEL;
-    set_panel_encoding (panel);
+    if (SELECTED_IS_PANEL)
+	set_panel_encoding (MENU_PANEL);
 }

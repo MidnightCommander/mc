@@ -541,7 +541,7 @@ sel_charset_button (int action)
 
     (void) action;
 
-    new_dcp = select_charset (0, 0, new_display_codepage, TRUE);
+    new_dcp = select_charset (-1, -1, new_display_codepage, TRUE);
 
     if (new_dcp != SELECT_CHARSET_CANCEL) {
 	const char *cpname;

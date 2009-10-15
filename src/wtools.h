@@ -16,9 +16,9 @@ typedef struct {
 } Listbox;
 
 /* Listbox utility functions */
-Listbox *create_listbox_window_delta (int delta_x, int delta_y, int cols, int lines, const char *title, const char *help);
-
-Listbox *create_listbox_window (int cols, int lines, const char *title, const char *help);
+Listbox *create_listbox_window_centered (int center_y, int center_x, int lines, int cols,
+					    const char *title, const char *help);
+Listbox *create_listbox_window (int lines, int cols, const char *title, const char *help);
 #define LISTBOX_APPEND_TEXT(l,h,t,d) \
     listbox_add_item (l->list, LISTBOX_APPEND_AT_END, h, t, d)
 
