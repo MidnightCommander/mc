@@ -921,6 +921,17 @@ show_dir (WPanel *panel)
 	tty_print_alt_char (ACS_RTEE);
     }
 
+    widget_move (&panel->widget, 0, 1);
+    tty_print_string (panel_history_prev_item_sign);
+
+    tmp = (show_dot_files) ? panel_hiddenfiles_sign_show : panel_hiddenfiles_sign_hide;
+    tmp = g_strdup_printf("%s[%s]%s",tmp,panel_history_show_list_sign,panel_history_next_item_sign);
+
+    widget_move (&panel->widget, 0, panel->widget.cols - 6);
+    tty_print_string (tmp);
+
+    g_free(tmp);
+
     if (panel->active)
 	tty_setcolor (REVERSE_COLOR);
 
@@ -928,17 +939,8 @@ show_dir (WPanel *panel)
 
     tty_printf (" %s ",
 		str_term_trim (strip_home_and_password (panel->cwd),
-				min (max (panel->widget.cols - 10, 0),
+				min (max (panel->widget.cols - 12, 0),
 					panel->widget.cols)));
-
-    tmp = (show_dot_files) ? panel_hiddenfiles_sign_show : panel_hiddenfiles_sign_hide;
-
-    widget_move (&panel->widget, 0, 1);
-    tty_print_string (panel_history_prev_item_sign);
-    widget_move (&panel->widget, 0, panel->widget.cols - 4);
-    tmp = g_strdup_printf("%s%s%s",tmp,panel_history_show_list_sign,panel_history_next_item_sign);
-    tty_print_string (tmp);
-    g_free(tmp);
 
     if (!show_mini_info) {
 	if (panel->marked == 0) {
@@ -949,7 +951,7 @@ show_dir (WPanel *panel)
 		g_snprintf (buffer, sizeof (buffer), " %s ",
 			    size_trunc_sep (panel->dir.list [panel->selected].st.st_size));
 		tty_setcolor (NORMAL_COLOR);
-		widget_move (&panel->widget, panel->widget.lines - 1, 2);
+		widget_move (&panel->widget, panel->widget.lines - 1, 4);
 		tty_print_string (buffer);
 	    }
 	} else {
@@ -2957,8 +2959,9 @@ do_panel_event (Gpm_Event *event, WPanel *panel, int *redir)
     const gboolean mouse_down = (event->type & GPM_DOWN) != 0;
 
     /* "." button show/hide hidden files */
-    if (event->type & GPM_DOWN && event->x == panel->widget.cols - 3 && event->y == 1) {
+    if (event->type & GPM_DOWN && event->x == panel->widget.cols - 5 && event->y == 1) {
 	toggle_show_hidden();
+	repaint_screen ();
 	return MOU_NORMAL;
     }
 
@@ -2974,8 +2977,8 @@ do_panel_event (Gpm_Event *event, WPanel *panel, int *redir)
 	return MOU_NORMAL;
     }
 
-    /* "v" button */
-    if (mouse_down && event->y == 1 && event->x == panel->widget.cols - 2) {
+    /* "^" button */
+    if (mouse_down && event->y == 1 && event->x >= panel->widget.cols - 4 && event->x <= panel->widget.cols - 2) {
 	directory_history_list (panel);
 	return MOU_NORMAL;
     }
@@ -3393,6 +3396,7 @@ panel_init(void)
     panel_history_prev_item_sign = mc_skin_get("widget-panel", "history-prev-item-sign", "<");
     panel_history_next_item_sign = mc_skin_get("widget-panel", "history-next-item-sign", ">");
     panel_history_show_list_sign = mc_skin_get("widget-panel", "history-show-list-sign", "^");
+
 }
 
 void
