@@ -35,18 +35,13 @@ extern int utf8_display;
 /*** file scope variables **********************************************/
 
 /*** file scope functions **********************************************/
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-/*** public functions **************************************************/
-
-void
-mc_config_set_string (mc_config_t * mc_config, const gchar * group,
-		      const gchar * param, const gchar * value)
+static gchar *
+mc_config_normalize_before_save(const gchar * value)
 {
     GIConv conv;
     GString *buffer;
-
-    if (!mc_config || !group || !param || !value)
-	return;
 
     if (utf8_display)
     {
@@ -69,8 +64,45 @@ mc_config_set_string (mc_config_t * mc_config, const gchar * group,
         str_close_conv (conv);
     }
 
-    g_key_file_set_string (mc_config->handle, group, param, buffer->str);
-    g_string_free(buffer, TRUE);
+    return g_string_free(buffer, FALSE);
+}
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/*** public functions **************************************************/
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+void
+mc_config_direct_set_string (mc_config_t * mc_config, const gchar * group,
+		      const gchar * param, const gchar * value)
+{
+    gchar *buffer;
+
+    if (!mc_config || !group || !param || !value)
+	return;
+
+    buffer = mc_config_normalize_before_save(value);
+
+    g_key_file_set_value (mc_config->handle, group, param, buffer);
+
+    g_free(buffer);
+}
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+void
+mc_config_set_string (mc_config_t * mc_config, const gchar * group,
+		      const gchar * param, const gchar * value)
+{
+    gchar *buffer;
+
+    if (!mc_config || !group || !param || !value)
+	return;
+
+    buffer = mc_config_normalize_before_save(value);
+
+    g_key_file_set_string (mc_config->handle, group, param, buffer);
+
+    g_free(buffer);
 }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

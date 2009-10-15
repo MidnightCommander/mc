@@ -71,6 +71,10 @@ int *mc_config_get_int_list (mc_config_t *, const gchar *,
 /* mcconfig/set.c: */
 
 void
+mc_config_direct_set_string (mc_config_t *, const gchar *,
+		      const gchar *, const gchar *);
+
+void
 mc_config_set_string (mc_config_t *, const gchar *,
 		      const gchar *, const gchar *);
 
