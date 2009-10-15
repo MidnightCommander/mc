@@ -3126,19 +3126,10 @@ set_panel_encoding (WPanel *panel)
     const char *encoding = NULL;
     char *cd_path;
 #ifdef HAVE_CHARSET
-    int center_x, center_y;
     const char *errmsg;
     int r;
 
-    if (horizontal_split) {
-	center_y = panel->widget.y + panel->widget.lines/2;
-	center_x = COLS/2;
-    } else {
-	center_y = LINES/2;
-	center_x = panel->widget.x + panel->widget.cols/2;
-    }
-
-    r = select_charset (center_y, center_x, source_codepage, FALSE);
+    r = select_charset (-1, -1, source_codepage, FALSE);
 
     if (r == SELECT_CHARSET_CANCEL)
 	return; /* Cancel */
