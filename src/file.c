@@ -1747,12 +1747,11 @@ panel_operate_generate_prompt (const WPanel *panel, const int operation,
     *dp = '\0';
 
     if (build_question) {
-	const char *tmp;
+	char tmp[BUF_MEDIUM];
 
-	tmp = g_strdup (format_string);
+	memmove (tmp, format_string, sizeof (tmp));
 	g_snprintf (format_string, sizeof (format_string),
 		    question_format, tmp);
-	g_free (tmp);
     }
 
     return g_strdup (format_string);
@@ -1858,8 +1857,9 @@ panel_operate (void *source_panel, FileOperation operation,
 	format = panel_operate_generate_prompt (panel, operation,
 						source != NULL, &src_stat);
 
-	dest = file_mask_dialog (ctx, operation, source != NULL,
-				format, source != NULL ? source : &panel->marked,
+	dest = file_mask_dialog (ctx, operation, source != NULL, format,
+				source != NULL ? (void *) source
+						: (void *) &panel->marked,
 				dest_dir_, &do_bg);
 
 	g_free (format);
