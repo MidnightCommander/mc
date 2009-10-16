@@ -1,7 +1,7 @@
 /* File management.
    Copyright (C) 1994, 1995, 1996, 1998, 1999, 2000, 2001, 2002, 2003,
    2004, 2005, 2006, 2007 Free Software Foundation, Inc.
-   
+
    Written by: 1994, 1995       Janne Kukonlehto
                1994, 1995       Fred Leeflang
                1994, 1995, 1996 Miguel de Icaza
@@ -22,7 +22,7 @@
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2 of the License, or
    (at your option) any later version.
-   
+
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -66,7 +66,7 @@
 #include "setup.h"
 #include "dialog.h"
 #include "widget.h"
-#include "main.h"		/* cmd_buf */
+#include "main.h"
 #include "layout.h"
 #include "widget.h"
 #include "wtools.h"
@@ -1632,10 +1632,11 @@ panel_compute_totals (WPanel *panel, const void *ui,
  * (I don't use spaces around the words, because someday they could be
  * dropped, when widgets get smarter)
  */
-static const char *op_names1[] = { N_("1Copy"), N_("1Move"), N_("1Delete") };
-#define	FMD_XLEN 64
-
-int fmd_xlen = FMD_XLEN;
+static const char *op_names1[] = {
+    N_("1Copy"),
+    N_("1Move"),
+    N_("1Delete")
+};
 
 /*
  * These are formats for building a prompt. Parts encoded as follows:
@@ -1645,14 +1646,20 @@ int fmd_xlen = FMD_XLEN;
  * %s - source name (truncated)
  * %d - number of marked files
  * %e - "to:" or question mark for delete
- * 
+ *
  * xgettext:no-c-format */
 static const char *one_format = N_("%o %f \"%s\"%m");
 /* xgettext:no-c-format */
 static const char *many_format = N_("%o %d %f%m");
+
 static const char *prompt_parts[] = {
-    N_("file"), N_("files"), N_("directory"), N_("directories"),
-    N_("files/directories"), N_(" with source mask:"), N_(" to:")
+    N_("file"),
+    N_("files"),
+    N_("directory"),
+    N_("directories"),
+    N_("files/directories"),
+    N_(" with source mask:"),
+    N_(" to:")
 };
 
 /*
@@ -1661,13 +1668,13 @@ static const char *prompt_parts[] = {
  * entries.
  * src_stat is only used when single_source is not NULL.
  */
-static void
+static char *
 panel_operate_generate_prompt (const WPanel *panel, const int operation,
-			       const char *single_source,
+			       gboolean single_source,
 			       const struct stat *src_stat)
 {
-    register const char *sp, *cp;
-    register int i;
+    const char *sp, *cp;
+    int i;
     char format_string[BUF_MEDIUM];
     char *dp = format_string;
 
@@ -1705,13 +1712,11 @@ panel_operate_generate_prompt (const WPanel *panel, const int operation,
 	    case 'f':
 		if (single_source) {
 		    cp = S_ISDIR (src_stat->
-				  st_mode) ? prompt_parts[2] :
-			prompt_parts[0];
+				  st_mode) ? prompt_parts[2] : prompt_parts[0];
 		} else {
 		    cp = (panel->marked == panel->dirs_marked)
 			? prompt_parts[3]
-			: (panel->dirs_marked ? prompt_parts[4]
-			   : prompt_parts[1]);
+			: (panel->dirs_marked ? prompt_parts[4] : prompt_parts[1]);
 		}
 		break;
 	    default:
@@ -1729,25 +1734,14 @@ panel_operate_generate_prompt (const WPanel *panel, const int operation,
     }
     *dp = '\0';
 
-    if (single_source) {
-        i = fmd_xlen - str_term_width1 (format_string) - 4;
-	g_snprintf (cmd_buf, sizeof (cmd_buf), format_string,
-		    str_trunc (single_source, i));
-    } else {
-	g_snprintf (cmd_buf, sizeof (cmd_buf), format_string,
-		    panel->marked);
-        i = str_term_width1 (cmd_buf) + 6 - fmd_xlen;
-	if (i > 0) {
-	    fmd_xlen += i;
-	}
-    }
+    return g_strdup (format_string);
 }
 
 /**
  * panel_operate:
  *
  * Performs one of the operations on the selection on the source_panel
- * (copy, delete, move).  
+ * (copy, delete, move).
  *
  * Returns 1 if did change the directory
  * structure, Returns 0 if user aborted
@@ -1760,12 +1754,12 @@ panel_operate (void *source_panel, FileOperation operation,
 	       int force_single)
 {
     WPanel *panel = source_panel;
+    char *source = NULL;
 #ifdef WITH_FULL_PATHS
     char *source_with_path = NULL;
 #else
 #   define source_with_path source
 #endif				/* !WITH_FULL_PATHS */
-    char *source = NULL;
     char *dest = NULL;
     char *temp = NULL;
     char *save_cwd = NULL, *save_dest = NULL;
@@ -1805,26 +1799,13 @@ panel_operate (void *source_panel, FileOperation operation,
 	}
     }
 
-    /* Generate confirmation prompt */
-    panel_operate_generate_prompt (panel, operation, source, &src_stat);
-
     ctx = file_op_context_new (operation);
 
     /* Show confirmation dialog */
-    if (operation == OP_DELETE && confirm_delete) {
-	if (safe_delete)
-	    query_set_sel (1);
-
-	i = query_dialog (_(op_names[operation]), cmd_buf, D_ERROR, 2,
-			  _("&Yes"), _("&No"));
-
-	if (i != 0) {
-	    file_op_context_destroy (ctx);
-	    return 0;
-	}
-    } else if (operation != OP_DELETE) {
+    if (operation != OP_DELETE) {
 	char *dest_dir;
 	char *dest_dir_;
+	char *format;
 
 	/* Forced single operations default to the original name */
 	if (force_single)
@@ -1839,30 +1820,66 @@ panel_operate (void *source_panel, FileOperation operation,
 	 * dir is deleted)
 	 */
 	if (!force_single
-	 && dest_dir[0]
-	 && dest_dir[strlen(dest_dir)-1] != PATH_SEP) {
+		&& dest_dir[0] != '\0'
+		&& dest_dir[strlen (dest_dir) - 1] != PATH_SEP) {
 	    /* add trailing separator */
-	    dest_dir_ = g_strconcat (dest_dir, PATH_SEP_STR, (char*)0);
+	    dest_dir_ = g_strconcat (dest_dir, PATH_SEP_STR, (char *) NULL);
 	} else {
 	    /* just copy */
 	    dest_dir_ = g_strdup (dest_dir);
 	}
-	if (!dest_dir_) {
+	if (dest_dir_ == NULL) {
 	    file_op_context_destroy (ctx);
 	    return 0;
 	}
 
-	dest =
-	    file_mask_dialog (ctx, operation, cmd_buf, dest_dir_,
-			      single_entry, &do_bg);
-	g_free(dest_dir_);
+	/* Generate confirmation prompt */
+	format = panel_operate_generate_prompt (panel, operation,
+						source != NULL, &src_stat);
 
-	if (!dest || !dest[0]) {
+	dest = file_mask_dialog (ctx, operation, source != NULL,
+				format, source != NULL ? source : &panel->marked,
+				dest_dir_, &do_bg);
+
+	g_free (format);
+	g_free (dest_dir_);
+
+	if (dest == NULL || dest[0] == '\0') {
 	    file_op_context_destroy (ctx);
 	    g_free (dest);
 	    return 0;
 	}
+    } else if (confirm_delete) {
+	char *format;
+	char fmd_buf [BUF_MEDIUM];
+
+	/* Generate confirmation prompt */
+	format = panel_operate_generate_prompt (panel, OP_DELETE,
+						source != NULL, &src_stat);
+
+	if (source == NULL)
+	    g_snprintf (fmd_buf, sizeof (fmd_buf), format, panel->marked);
+	else {
+	    const int fmd_xlen = 64;
+	    i = fmd_xlen - str_term_width1 (format) - 4;
+	    g_snprintf (fmd_buf, sizeof (fmd_buf),
+			format, str_trunc (source, i));
+	}
+
+	g_free (format);
+
+	if (safe_delete)
+	    query_set_sel (1);
+
+	i = query_dialog (_(op_names[operation]), fmd_buf, D_ERROR, 2,
+				_("&Yes"), _("&No"));
+
+	if (i != 0) {
+	    file_op_context_destroy (ctx);
+	    return 0;
+	}
     }
+
 #ifdef WITH_BACKGROUND
     /* Did the user select to do a background operation? */
     if (do_bg) {
@@ -2176,26 +2193,29 @@ real_do_file_error (enum OperationMode mode, const char *error)
 FileProgressStatus
 file_error (const char *format, const char *file)
 {
-    g_snprintf (cmd_buf, sizeof (cmd_buf), format,
+    char buf [BUF_MEDIUM];
+
+    g_snprintf (buf, sizeof (buf), format,
 		path_trunc (file, 30), unix_error_string (errno));
 
-    return do_file_error (cmd_buf);
+    return do_file_error (buf);
 }
 
 /* Report error with two files */
 static FileProgressStatus
 files_error (const char *format, const char *file1, const char *file2)
 {
+    char buf [BUF_MEDIUM];
     char *nfile1 = g_strdup (path_trunc (file1, 15));
     char *nfile2 = g_strdup (path_trunc (file2, 15));
 
-    g_snprintf (cmd_buf, sizeof (cmd_buf), format, nfile1, nfile2,
+    g_snprintf (buf, sizeof (buf), format, nfile1, nfile2,
 		unix_error_string (errno));
 
     g_free (nfile1);
     g_free (nfile2);
-    
-    return do_file_error (cmd_buf);
+
+    return do_file_error (buf);
 }
 
 static FileProgressStatus

@@ -66,7 +66,6 @@ extern int vfs_use_limit;
 extern int only_leading_plus_minus;
 extern int output_starts_shell;
 extern int midnight_shutdown;
-extern char cmd_buf [512];
 extern char *shell;
 extern int auto_fill_mkdir_name;
 extern int skip_check_codeset;

@@ -6,11 +6,12 @@
 #ifndef MC_FILE_H
 #define MC_FILE_H
 
-#include "global.h"
 #include <sys/types.h>		/* off_t */
-#include "fileopctx.h"
+
+#include "global.h"
 #include "dialog.h"		/* Dlg_head */
 #include "widget.h"		/* WLabel */
+#include "fileopctx.h"
 
 struct link;
 
@@ -52,6 +53,5 @@ typedef struct {
 ComputeDirSizeUI *compute_dir_size_create_ui (void);
 void compute_dir_size_destroy_ui (ComputeDirSizeUI *ui);
 FileProgressStatus compute_dir_size_update_ui (const void *ui, const char *dirname);
-
 
 #endif				/* MC_FILE_H */

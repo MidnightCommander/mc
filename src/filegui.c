@@ -816,15 +816,23 @@ is_wildcarded (char *p)
 }
 
 char *
-file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
-		  const char *def_text, int only_one, int *do_background)
+file_mask_dialog (FileOpContext *ctx, FileOperation operation,
+		    gboolean only_one,
+		    const char *format, const void *text,
+		    const char *def_text, gboolean *do_background)
 {
     const size_t FMDY = 13;
-    const size_t FMDX = 64;
-    size_t fmd_xlen = 0;
+    const size_t FMDX = 68;
+    size_t fmd_xlen;
+
+    /* buttons */
+    const size_t gap = 1;
+    size_t b0_len, b2_len;
+    size_t b1_len = 0;
 
     int source_easy_patterns = easy_patterns;
     size_t i, len;
+    char fmd_buf [BUF_MEDIUM];
     char *source_mask, *orig_mask, *dest_dir, *tmp;
     char *def_text_secure;
     int val;
@@ -861,7 +869,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
 	/* 10 - OFFSET */
 	QUICK_INPUT (3, FMDX, 3, FMDY, easy_patterns ? "*" : "^\\(.*\\)$", 58, 0, "input-def", &source_mask),
 	/* 11 - OFFSET */
-	QUICK_LABEL (3, FMDX, 2, FMDY, text),
+	QUICK_LABEL (3, FMDX, 2, FMDY, fmd_buf),
 	QUICK_END
     };
 
@@ -874,6 +882,8 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
 
 	i18n = TRUE;
     }
+
+    fmd_xlen = max (FMDX, COLS * 2/3);
 
     /* buttons */
     for (i = 0; i <= 2 - OFFSET; i++)
@@ -894,23 +904,39 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
     fmd_xlen = max (fmd_xlen, len);
 
     /* buttons */
-    len = str_term_width1 (fmd_widgets[2 - OFFSET].u.button.text)
-	+ str_term_width1 (fmd_widgets[0].u.button.text) + 11;
+    b2_len = str_term_width1 (fmd_widgets[2 - OFFSET].u.button.text) + 6 + gap; /* OK */
 #ifdef WITH_BACKGROUND
-    len += str_term_width1 (fmd_widgets[1].u.button.text) + 6;
+    b1_len = str_term_width1 (fmd_widgets[1].u.button.text) + 4 + gap; /* Background */
 #endif
-    fmd_xlen = max (fmd_xlen, len + 4);
+    b0_len = str_term_width1 (fmd_widgets[0].u.button.text) + 4; /* Cancel */
+    len = b0_len + b1_len + b2_len;
+    fmd_xlen = min (max (fmd_xlen, len + 6), COLS);
 
-    len = (fmd_xlen - (len + 6)) / 2;
-    i = len + 3;
+    if (only_one) {
+	int flen;
+
+	flen = str_term_width1 (format);
+	i = fmd_xlen - flen - 4; /* FIXME */
+	g_snprintf (fmd_buf, sizeof (fmd_buf),
+		    format, str_trunc ((const char *) text, i));
+    } else {
+	g_snprintf (fmd_buf, sizeof (fmd_buf), format, *(const int *) text);
+	fmd_xlen = max (fmd_xlen, str_term_width1 (fmd_buf) + 6);
+    }
+
+    for (i = sizeof (fmd_widgets) / sizeof (fmd_widgets[0]); i > 0; )
+	fmd_widgets[--i].x_divisions = fmd_xlen;
+
+    i = (fmd_xlen - len)/2;
+    /* OK button */
     fmd_widgets[2 - OFFSET].relative_x = i;
-    i += str_term_width1 (fmd_widgets[2 - OFFSET].u.button.text) + 8;
-
+    i += b2_len;
 #ifdef WITH_BACKGROUND
+    /* Background button */
     fmd_widgets[1].relative_x = i;
-    i += str_term_width1 (fmd_widgets[1].u.button.text) + 6;
+    i += b1_len;
 #endif
-
+    /* Cancel button */
     fmd_widgets[0].relative_x = i;
 
 #define chkbox_xpos(i) \
@@ -920,15 +946,9 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
     chkbox_xpos (9 - OFFSET);
 #undef chkbox_xpos
 
-    if (fmd_xlen != FMDX) {
-	i = sizeof (fmd_widgets) / sizeof (fmd_widgets[0]) - 1;
-	while (i--)
-	    fmd_widgets[i].x_divisions = fmd_xlen;
-
-	/* inputs */
-	fmd_widgets[ 7 - OFFSET].u.input.len =
-	fmd_widgets[10 - OFFSET].u.input.len = fmd_xlen - 6;
-    }
+    /* inputs */
+    fmd_widgets[ 7 - OFFSET].u.input.len =
+    fmd_widgets[10 - OFFSET].u.input.len = fmd_xlen - 6;
 
     /* unselect checkbox if target filesystem don't support attributes */
     ctx->op_preserve = filegui__check_attrs_on_fs (def_text);
@@ -945,7 +965,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
     fmd_widgets[7 - OFFSET].u.input.text = def_text_secure;
 
     ctx->stable_symlinks = 0;
-    *do_background = 0;
+    *do_background = FALSE;
 
     {
 	struct stat buf;
@@ -1034,7 +1054,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
 	    dest_dir = g_strdup ("./");
 	}
 	if (val == B_USER)
-	    *do_background = 1;
+	    *do_background = TRUE;
     }
 
     return dest_dir;
