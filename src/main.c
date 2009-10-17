@@ -1101,10 +1101,10 @@ copy_other_tagged (void)
 static void
 init_labels (void)
 {
-    buttonbar_set_label (midnight_dlg, 1, _("Help"), help_cmd);
-    buttonbar_set_label (midnight_dlg, 2, _("Menu"), user_file_menu_cmd);
-    buttonbar_set_label (midnight_dlg, 9, _("PullDn"), menu_cmd);
-    buttonbar_set_label (midnight_dlg, 10, _("Quit"), quit_cmd);
+    buttonbar_set_label (midnight_dlg, 1, Q_("ButtonBar|Help"), help_cmd);
+    buttonbar_set_label (midnight_dlg, 2, Q_("ButtonBar|Menu"), user_file_menu_cmd);
+    buttonbar_set_label (midnight_dlg, 9, Q_("ButtonBar|PullDn"), menu_cmd);
+    buttonbar_set_label (midnight_dlg, 10, Q_("ButtonBar|Quit"), quit_cmd);
 }
 
 static int ctl_x_map_enabled = 0;

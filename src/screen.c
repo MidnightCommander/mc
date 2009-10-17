@@ -2826,14 +2826,14 @@ panel_callback (Widget *w, widget_msg_t msg, int parm)
 	paint_dir (panel);
 	panel->dirty = 0;
 
-	buttonbar_set_label (h, 1, _("Help"), help_cmd);
-	buttonbar_set_label (h, 2, _("Menu"), user_file_menu_cmd);
-	buttonbar_set_label (h, 3, _("View"), view_cmd);
-	buttonbar_set_label (h, 4, _("Edit"), edit_cmd);
-	buttonbar_set_label (h, 5, _("Copy"), copy_cmd);
-	buttonbar_set_label (h, 6, _("RenMov"), ren_cmd);
-	buttonbar_set_label (h, 7, _("Mkdir"), mkdir_cmd);
-	buttonbar_set_label (h, 8, _("Delete"), delete_cmd);
+	buttonbar_set_label (h, 1, Q_("ButtonBar|Help"), help_cmd);
+	buttonbar_set_label (h, 2, Q_("ButtonBar|Menu"), user_file_menu_cmd);
+	buttonbar_set_label (h, 3, Q_("ButtonBar|View"), view_cmd);
+	buttonbar_set_label (h, 4, Q_("ButtonBar|Edit"), edit_cmd);
+	buttonbar_set_label (h, 5, Q_("ButtonBar|Copy"), copy_cmd);
+	buttonbar_set_label (h, 6, Q_("ButtonBar|RenMov"), ren_cmd);
+	buttonbar_set_label (h, 7, Q_("ButtonBar|Mkdir"), mkdir_cmd);
+	buttonbar_set_label (h, 8, Q_("ButtonBar|Delete"), delete_cmd);
 	buttonbar_redraw (h);
 	return MSG_HANDLED;
 

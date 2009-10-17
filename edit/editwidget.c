@@ -292,16 +292,16 @@ edit_labels (WEdit *edit)
 {
     Dlg_head *h = edit->widget.parent;
 
-    edit_my_define (h, 1, _("Help"), cmd_F1, edit);
-    edit_my_define (h, 2, _("Save"), cmd_F2, edit);
-    edit_my_define (h, 3, _("Mark"), cmd_F3, edit);
-    edit_my_define (h, 4, _("Replac"), cmd_F4, edit);
-    edit_my_define (h, 5, _("Copy"), cmd_F5, edit);
-    edit_my_define (h, 6, _("Move"), cmd_F6, edit);
-    edit_my_define (h, 7, _("Search"), cmd_F7, edit);
-    edit_my_define (h, 8, _("Delete"), cmd_F8, edit);
-    edit_my_define (h, 9, _("PullDn"), edit_menu_cmd, edit);
-    edit_my_define (h, 10, _("Quit"), cmd_F10, edit);
+    edit_my_define (h, 1, Q_("ButtonBar|Help"), cmd_F1, edit);
+    edit_my_define (h, 2, Q_("ButtonBar|Save"), cmd_F2, edit);
+    edit_my_define (h, 3, Q_("ButtonBar|Mark"), cmd_F3, edit);
+    edit_my_define (h, 4, Q_("ButtonBar|Replac"), cmd_F4, edit);
+    edit_my_define (h, 5, Q_("ButtonBar|Copy"), cmd_F5, edit);
+    edit_my_define (h, 6, Q_("ButtonBar|Move"), cmd_F6, edit);
+    edit_my_define (h, 7, Q_("ButtonBar|Search"), cmd_F7, edit);
+    edit_my_define (h, 8, Q_("ButtonBar|Delete"), cmd_F8, edit);
+    edit_my_define (h, 9, Q_("ButtonBar|PullDn"), edit_menu_cmd, edit);
+    edit_my_define (h, 10, Q_("ButtonBar|Quit"), cmd_F10, edit);
 
     buttonbar_redraw (h);
 }

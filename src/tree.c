@@ -622,7 +622,7 @@ tree_copy (WTree *tree, const char *default_dest)
 
     g_snprintf (msg, sizeof (msg), _("Copy \"%s\" directory to:"),
 			str_trunc (tree->selected_ptr->name, 50));
-    dest = input_expand_dialog (_(" Copy "), msg, MC_HISTORY_FM_TREE_COPY, default_dest);
+    dest = input_expand_dialog (Q_("DialogTitle|Copy"), msg, MC_HISTORY_FM_TREE_COPY, default_dest);
 
     if (dest != NULL && *dest != '\0') {
 	ctx = file_op_context_new (OP_COPY);
@@ -662,7 +662,7 @@ tree_move (WTree *tree, const char *default_dest)
 
     g_snprintf (msg, sizeof (msg), _("Move \"%s\" directory to:"),
 			str_trunc (tree->selected_ptr->name, 50));
-    dest = input_expand_dialog (_(" Move "), msg, MC_HISTORY_FM_TREE_MOVE, default_dest);
+    dest = input_expand_dialog (Q_("DialogTitle|Move"), msg, MC_HISTORY_FM_TREE_MOVE, default_dest);
 
     if (dest == NULL || *dest == '\0') {
 	g_free (dest);
@@ -735,7 +735,7 @@ tree_rmdir_cmd (WTree *tree)
 	    g_strdup_printf (_("  Delete %s?  "),
 			     tree->selected_ptr->name);
 	result =
-	    query_dialog (_(" Delete "), buf, D_ERROR, 2, _("&Yes"), _("&No"));
+	    query_dialog (Q_("DialogTitle|Delete"), buf, D_ERROR, 2, _("&Yes"), _("&No"));
 	g_free (buf);
 	if (result != 0)
 	    return;
@@ -764,7 +764,7 @@ static void
 set_navig_label (WTree *tree)
 {
     buttonbar_set_label_data (tree->widget.parent, 4,
-		       tree_navigation_flag ? _("Static") : _("Dynamc"),
+		       tree_navigation_flag ? Q_("ButtonBar|Static") : Q_("ButtonBar|Dynamc"),
 		       tree_toggle_navig, tree);
 }
 
@@ -1020,19 +1020,19 @@ tree_callback (Widget *w, widget_msg_t msg, int parm)
 
     case WIDGET_FOCUS:
 	tree->active = 1;
-	buttonbar_set_label (h, 1, _("Help"), tree_help_cmd);
-	buttonbar_set_label_data (h, 2, _("Rescan"),
+	buttonbar_set_label (h, 1, Q_("ButtonBar|Help"), tree_help_cmd);
+	buttonbar_set_label_data (h, 2, Q_("ButtonBar|Rescan"),
 	    tree_rescan_command, tree);
-	buttonbar_set_label_data (h, 3, _("Forget"), tree_forget_cmd, tree);
-	buttonbar_set_label_data (h, 5, _("Copy"), tree_copy_cmd, tree);
-	buttonbar_set_label_data (h, 6, _("RenMov"), tree_move_cmd, tree);
+	buttonbar_set_label_data (h, 3, Q_("ButtonBar|Forget"), tree_forget_cmd, tree);
+	buttonbar_set_label_data (h, 5, Q_("ButtonBar|Copy"), tree_copy_cmd, tree);
+	buttonbar_set_label_data (h, 6, Q_("ButtonBar|RenMov"), tree_move_cmd, tree);
 #if 0
 	/* FIXME: mkdir is currently defunct */
-	buttonbar_set_label_data (h, 7, _("Mkdir"), tree_mkdir_cmd, tree);
+	buttonbar_set_label_data (h, 7, Q_("ButtonBar|Mkdir"), tree_mkdir_cmd, tree);
 #else
 	buttonbar_clear_label (h, 7);
 #endif
-	buttonbar_set_label_data (h, 8, _("Rmdir"), tree_rmdir_command, tree);
+	buttonbar_set_label_data (h, 8, Q_("ButtonBar|Rmdir"), tree_rmdir_command, tree);
 	set_navig_label (tree);
 	buttonbar_redraw (h);
 

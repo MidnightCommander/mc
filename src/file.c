@@ -123,12 +123,13 @@ static struct link *erase_list;
  * Both lists don't use the linkcount and name structure members of struct
  * link.
  */
-static struct link *dest_dirs = 0;
+static struct link *dest_dirs = NULL;
 
+/* TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix  */
 const char *op_names[3] = {
-    N_(" Copy "),
-    N_(" Move "),
-    N_(" Delete ")
+    N_("DialogTitle|Copy"),
+    N_("DialogTitle|Move"),
+    N_("DialogTitle|Delete")
 };
 
 /* }}} */
@@ -143,10 +144,6 @@ static FileProgressStatus erase_file (FileOpContext *ctx, const char *s,
 					int is_toplevel_file);
 static FileProgressStatus files_error (const char *format, const char *file1,
 					const char *file2);
-
-
-enum CaseConvs { NO_CONV = 0, UP_CHAR = 1, LOW_CHAR = 2, UP_SECT =
-	4, LOW_SECT = 8 };
 
 static FileProgressStatus transform_error = FILE_CONT;
 
@@ -715,7 +712,7 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
     if (dst_status == DEST_SHORT) {
 	/* Remove short file */
 	int result;
-	result = query_dialog (_("Copy"),
+	result = query_dialog (Q_("DialogTitle|Copy"),
 		_("Incomplete file was retrieved. Keep it?"),
 		D_ERROR, 2, _("&Delete"), _("&Keep"));
 	if (!result)
@@ -1631,11 +1628,11 @@ panel_compute_totals (WPanel *panel, const void *ui,
  * dropped, when widgets get smarter)
  */
 
-/* TRANSLATORS: no need to translate 'fileop', it's just a context prefix  */
+/* TRANSLATORS: no need to translate 'FileOperation', it's just a context prefix  */
 static const char *op_names1[] = {
-    N_("fileop|Copy"),
-    N_("fileop|Move"),
-    N_("fileop|Delete")
+    N_("FileOperation|Copy"),
+    N_("FileOperation|Move"),
+    N_("FileOperation|Delete")
 };
 
 /*
@@ -1892,7 +1889,7 @@ panel_operate (void *source_panel, FileOperation operation,
 	if (safe_delete)
 	    query_set_sel (1);
 
-	i = query_dialog (_(op_names[operation]), fmd_buf, D_ERROR, 2,
+	i = query_dialog (Q_(op_names[operation]), fmd_buf, D_ERROR, 2,
 				_("&Yes"), _("&No"));
 
 	if (i != 0) {
