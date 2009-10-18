@@ -109,6 +109,11 @@ What to do with this?
 #define INADDR_NONE 0xffffffff
 #endif
 
+/* for uclibc < 0.9.29 */
+#ifndef AI_ADDRCONFIG
+#define AI_ADDRCONFIG 0x0020
+#endif
+
 #define RFC_AUTODETECT 0
 #define RFC_DARING 1
 #define RFC_STRICT 2
