@@ -82,7 +82,7 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
         if ( !utf8_display ) {
             /* source in 8-bit codeset */
             if (!edit->utf8) {
-#endif
+#endif				/* HAVE_CHARSET */
                 c = convert_from_input_c (x_key);
                 if (is_printable (c)) {
                     char_for_insertion = c;
@@ -141,25 +141,19 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
                 }
             }
         }
-#endif
+#endif				/* HAVE_CHARSET */
     }
 
     /* Commands specific to the key emulation */
-    for (i = 0; edit->user_map[i].key != 0; i++) {
+    for (i = 0; edit->user_map[i].key != 0; i++)
         if (x_key == edit->user_map[i].key) {
             command = edit->user_map[i].command;
+            break;
         }
-    }
 
   fin:
-
     *cmd = command;
     *ch = char_for_insertion;
 
-    if (command == CK_Insert_Char && char_for_insertion == -1) {
-	/* unchanged, key has no function here */
-	return 0;
-    }
-
-    return 1;
+    return !(command == CK_Insert_Char && char_for_insertion == -1);
 }
