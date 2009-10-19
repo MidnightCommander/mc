@@ -55,19 +55,23 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-#if defined (__FreeBSD__)
+#if defined(STAT_STATVFS) \
+     && (defined(HAVE_STRUCT_STATVFS_F_BASETYPE) \
+         || defined(HAVE_STRUCT_STATVFS_F_FSTYPENAME))
+#   include <sys/statvfs.h>
+#   define STRUCT_STATFS struct statvfs
+#   define STATFS statvfs
+#elif defined(HAVE_STATFS) && !defined(STAT_STATFS4)
+#   ifdef HAVE_SYS_VFS_H
+#      include <sys/vfs.h>
+#   elif defined(HAVE_SYS_MOUNT_H) && defined(HAVE_SYS_PARAM_H)
 #      include <sys/param.h>
-#endif
-#if defined(__APPLE__) || defined (__FreeBSD__)
 #      include <sys/mount.h>
-#elif defined (__NetBSD__)
-#      include <sys/param.h>
-#else
-#      ifdef HAVE_VFS
-#           include <sys/vfs.h>
-#      else
-#           include <sys/statfs.h>
-#      endif
+#   elif defined(HAVE_SYS_STATFS_H)
+#      include <sys/statfs.h>
+#   endif
+#   define STRUCT_STATFS struct statfs
+#   define STATFS statfs
 #endif
 
 #include <unistd.h>
@@ -164,14 +168,16 @@ enum {
 static int
 filegui__check_attrs_on_fs(const char *fs_path)
 {
-    struct statfs stfs;
+#ifdef STATFS
+    STRUCT_STATFS stfs;
 
     if (!setup_copymove_persistent_attr)
         return 0;
 
-    if (statfs(fs_path, &stfs)!=0)
+    if (STATFS(fs_path, &stfs)!=0)
         return 1;
 
+# ifdef __linux__
     switch ((filegui_nonattrs_fs_t) stfs.f_type)
     {
     case MSDOS_SUPER_MAGIC:
@@ -184,6 +190,25 @@ filegui__check_attrs_on_fs(const char *fs_path)
         return 0;
         break;
     }
+# elif defined(HAVE_STRUCT_STATFS_F_FSTYPENAME) \
+      || defined(HAVE_STRUCT_STATVFS_F_FSTYPENAME)
+    if (!strcmp(stfs.f_fstypename, "msdos")
+        || !strcmp(stfs.f_fstypename, "msdosfs")
+        || !strcmp(stfs.f_fstypename, "ntfs")
+        || !strcmp(stfs.f_fstypename, "procfs")
+        || !strcmp(stfs.f_fstypename, "smbfs")
+        || strstr(stfs.f_fstypename, "fusefs"))
+        return 0;
+# elif defined(HAVE_STRUCT_STATVFS_F_BASETYPE)
+    if (!strcmp(stfs.f_basetype, "pcfs")
+        || !strcmp(stfs.f_basetype, "ntfs")
+        || !strcmp(stfs.f_basetype, "proc")
+        || !strcmp(stfs.f_basetype, "smbfs")
+        || !strcmp(stfs.f_basetype, "fuse"))
+        return 0;
+# endif
+#endif /* STATFS */
+
     return 1;
 }
 

@@ -628,6 +628,11 @@ AC_DEFUN([gl_FSTYPENAME],
       #include <sys/param.h>
       #include <sys/mount.h>
     ])
+  AC_CHECK_MEMBERS([struct statvfs.f_fstypename, struct statvfs.f_basetype],,,
+    [
+      AC_INCLUDES_DEFAULT
+      #include <sys/statvfs.h>
+    ])
 ])
 
 dnl
