@@ -82,7 +82,7 @@ typedef struct format_e {
     align_crt_t just_mode;
     int    expand;
     const char *(*string_fn)(file_entry *, int len);
-    const char   *title;
+    char   *title;
     const char   *id;
 } format_e;
 
@@ -143,6 +143,7 @@ delete_format (format_e *format)
 
     while (format){
         next = format->next;
+        g_free(format->title);
         g_free (format);
         format = next;
      }
@@ -443,7 +444,7 @@ panel_field_t panel_fields [] = {
 	/* TRANSLATORS: one single character to represent 'unsorted' sort mode  */
 	/* TRANSLATORS: no need to translate 'sort', it's just a context prefix  */
 	N_("sort|u"),
-	N_("Unsorted"), N_("&Unsorted"), FALSE,
+	N_("&Unsorted"), TRUE, FALSE,
 	string_file_name,
 	(sortfn *) unsorted
     },
@@ -452,7 +453,7 @@ panel_field_t panel_fields [] = {
 	/* TRANSLATORS: one single character to represent 'name' sort mode  */
 	/* TRANSLATORS: no need to translate 'sort', it's just a context prefix  */
 	N_("sort|n"),
-	N_("Name"), N_("&Name"), TRUE,
+	N_("&Name"), TRUE, TRUE,
 	string_file_name,
 	(sortfn *) sort_name
     },
@@ -461,7 +462,7 @@ panel_field_t panel_fields [] = {
 	/* TRANSLATORS: one single character to represent 'extension' sort mode  */
 	/* TRANSLATORS: no need to translate 'sort', it's just a context prefix  */
 	N_("sort|e"),
-	N_("Extension"), N_("&Extension"), FALSE,
+	N_("&Extension"), TRUE, FALSE,
 	string_file_name, /* TODO: string_file_ext*/
 	(sortfn *) sort_ext
     },
@@ -470,21 +471,21 @@ panel_field_t panel_fields [] = {
 	/* TRANSLATORS: one single character to represent 'size' sort mode  */
 	/* TRANSLATORS: no need to translate 'sort', it's just a context prefix  */
 	N_("sort|s"),
-	N_("Size"), N_("&Size"), TRUE,
+	N_("&Size"), TRUE,TRUE,
 	string_file_size,
 	(sortfn *) sort_size
     },
     {
 	"bsize", 7,  0, J_RIGHT,
 	"",
-	N_("Block Size"), NULL, FALSE,
+	N_("Block Size"), FALSE, FALSE,
 	string_file_size_brief,
 	(sortfn *) sort_size
     },
     {
 	"type", GT, 0, J_LEFT,
 	"",
-	"", NULL, TRUE,
+	"", FALSE, TRUE,
 	string_file_type,
 	NULL
     },
@@ -493,7 +494,7 @@ panel_field_t panel_fields [] = {
 	/* TRANSLATORS: one single character to represent 'Modify time' sort mode  */
 	/* TRANSLATORS: no need to translate 'sort', it's just a context prefix  */
 	N_("sort|m"),
-	N_("MTime"), N_("&Modify time"), TRUE,
+	N_("&Modify time"), TRUE,TRUE,
 	string_file_mtime,
 	(sortfn *) sort_time
     },
@@ -502,7 +503,7 @@ panel_field_t panel_fields [] = {
 	/* TRANSLATORS: one single character to represent 'Access time' sort mode  */
 	/* TRANSLATORS: no need to translate 'sort', it's just a context prefix  */
 	N_("sort|a"),
-	N_("ATime"), N_("&Access time"), TRUE,
+	N_("&Access time"), TRUE,TRUE,
 	string_file_atime,
 	(sortfn *) sort_atime
     },
@@ -511,28 +512,28 @@ panel_field_t panel_fields [] = {
 	/* TRANSLATORS: one single character to represent 'Change time' sort mode  */
 	/* TRANSLATORS: no need to translate 'sort', it's just a context prefix  */
 	N_("sort|h"),
-	N_("CTime"), N_("C&Hange time"), TRUE,
+	N_("C&Hange time"), TRUE,TRUE,
 	string_file_ctime,
 	(sortfn *) sort_ctime
     },
     {
 	"perm", 10, 0, J_LEFT,
 	"",
-	N_("Permission"), NULL, TRUE,
+	N_("Permission"), FALSE,TRUE,
 	string_file_permission,
 	NULL
     },
     {
 	"mode", 6,  0, J_RIGHT,
 	"",
-	N_("Perm"), NULL, TRUE,
+	N_("Perm"), FALSE,TRUE,
 	string_file_perm_octal,
 	NULL
     },
     {
 	"nlink", 2,  0, J_RIGHT,
 	"",
-	N_("Nl"), NULL, TRUE,
+	N_("Nl"), FALSE,TRUE,
 	string_file_nlinks, NULL
     },
     {
@@ -540,68 +541,68 @@ panel_field_t panel_fields [] = {
 	/* TRANSLATORS: one single character to represent 'inode' sort mode  */
 	/* TRANSLATORS: no need to translate 'sort', it's just a context prefix  */
 	N_("sort|i"),
-	N_("Inode"), N_("&Inode"), TRUE,
+	N_("&Inode"), TRUE,TRUE,
 	string_inode,
 	(sortfn *) sort_inode
     },
     {
 	"nuid", 5,  0, J_RIGHT,
 	"",
-	N_("UID"), NULL, FALSE,
+	N_("UID"), FALSE,FALSE,
 	string_file_nuid,
 	NULL
     },
     {
 	"ngid", 5,  0, J_RIGHT,
 	"",
-	N_("GID"), NULL, FALSE,
+	N_("GID"), FALSE,FALSE,
 	string_file_ngid,
 	NULL
     },
     {
 	"owner", 8, 0, J_LEFT_FIT,
 	"",
-	N_("Owner"), NULL, TRUE,
+	N_("Owner"), FALSE,TRUE,
 	string_file_owner,
 	NULL
     },
     {
 	"group", 8,0, J_LEFT_FIT,
 	"",
-	N_("Group"), NULL, TRUE,
+	N_("Group"), FALSE,TRUE,
 	string_file_group,
 	NULL
     },
     {
 	"mark", 1, 0, J_RIGHT,
 	"",
-	" ", NULL, TRUE,
+	" ", FALSE,TRUE,
 	string_marked,
 	NULL
     },
     {
 	"|", 1, 0, J_RIGHT,
 	"",
-	" ", NULL, TRUE,
+	" ", FALSE,TRUE,
 	NULL,
 	NULL
     },
     {
 	"space", 1, 0, J_RIGHT,
 	"",
-	" ", NULL, TRUE,
+	" ", FALSE,TRUE,
 	string_space,
 	NULL
     },
     {
 	"dot", 1, 0, J_RIGHT,
 	"",
-	" ", NULL, FALSE,
+	" ", FALSE,FALSE,
 	string_dot,
 	NULL
     },
     {
-	NULL, 0, 0, J_RIGHT, NULL, NULL, NULL, FALSE, NULL, NULL
+	NULL, 0, 0, J_RIGHT, NULL, NULL, FALSE, FALSE, NULL, NULL
     },
 };
 
@@ -1378,6 +1379,26 @@ panel_paint_sort_info(WPanel *panel)
     g_free(str);
 }
 
+static gchar*
+panel_get_title_without_hotkey(const char *title)
+{
+    gchar *translated_title;
+    const gchar *hkey;
+
+    if (title == NULL)
+	return NULL;
+    if (title[0] == '\0')
+	return g_strdup("");
+
+    translated_title = g_strdup(_(title));
+
+    hkey = strchr(translated_title, '&');
+    if ((hkey != NULL) && (hkey[1] != '\0'))
+        memmove(hkey, hkey+1,strlen(hkey));
+
+    return translated_title;
+}
+
 static void
 paint_frame (WPanel *panel)
 {
@@ -1559,10 +1580,8 @@ parse_display_format (WPanel *panel, const char *format, char **error, int issta
 
             darr->requested_field_len = panel_fields [i].min_size;
             darr->string_fn           = panel_fields [i].string_fn;
-	    if (panel_fields [i].title [0])
-		    darr->title = _(panel_fields [i].title);
-	    else
-		    darr->title = "";
+            darr->title = panel_get_title_without_hotkey(panel_fields [i].title_hotkey);
+
             darr->id                  = panel_fields [i].id;
 	    darr->expand              = panel_fields [i].expands;
 	    darr->just_mode 	      = panel_fields [i].default_just;
@@ -2472,7 +2491,7 @@ panel_get_format_field_index_by_name(WPanel *panel, const char *name)
 
     for (
 	index=1, format = panel->format;
-	! ( format == NULL || strcmp(format->title, _(name)) == 0 );
+	! ( format == NULL || strcmp(format->title, name) == 0 );
 	format = format->next, index++
     );
     if (format == NULL)
@@ -2514,10 +2533,13 @@ static void
 panel_toggle_sort_order_prev(WPanel *panel)
 {
     gsize index, i;
+    gchar *title;
 
     const panel_field_t *pfield = NULL;
 
-    index = panel_get_format_field_index_by_name(panel, panel->current_sort_field->title);
+    title = panel_get_title_without_hotkey(panel->current_sort_field->title_hotkey);
+    index = panel_get_format_field_index_by_name(panel, title);
+    g_free(title);
 
     if (index > 1){
 	/* search for prev sortable column in panel format */
@@ -2549,8 +2571,11 @@ panel_toggle_sort_order_next(WPanel *panel)
     gsize index, i;
     const panel_field_t *pfield = NULL;
     gsize format_field_count = panel_get_format_field_count(panel);
+    gchar *title;
 
-    index = panel_get_format_field_index_by_name(panel, panel->current_sort_field->title);
+    title = panel_get_title_without_hotkey(panel->current_sort_field->title_hotkey);
+    index = panel_get_format_field_index_by_name(panel, title);
+    g_free(title);
 
     if (index != 0 && index != format_field_count){
 	/* search for prev sortable column in panel format */
@@ -2914,6 +2939,7 @@ mouse_sort_col(Gpm_Event *event, WPanel *panel)
     const char *sort_name = NULL;
     panel_field_t *col_sort_format = NULL;
     format_e *format;
+    gchar *title;
 
     for (i = 0, format = panel->format; format != NULL; format = format->next) {
 	i += format->field_len;
@@ -2928,10 +2954,13 @@ mouse_sort_col(Gpm_Event *event, WPanel *panel)
 	return;
 
     for(i = 0; panel_fields[i].id != NULL; i++) {
-	if (!strcmp (sort_name, _(panel_fields[i].title)) && panel_fields[i].sort_routine) {
+	title = panel_get_title_without_hotkey(panel_fields[i].title_hotkey);
+	if (!strcmp (sort_name, title) && panel_fields[i].sort_routine) {
 	    col_sort_format = &panel_fields[i];
+	    g_free(title);
 	    break;
 	}
+	g_free(title);
     }
 
     if (!col_sort_format)
@@ -3284,7 +3313,7 @@ panel_get_num_of_sortable_fields(void)
     gsize ret = 0, index;
 
     for(index=0; panel_fields[index].id != NULL; index ++)
-	if (panel_fields[index].title_hotkey != NULL)
+	if (panel_fields[index].is_user_choice)
 	    ret++;
     return ret;
 }
@@ -3308,7 +3337,7 @@ panel_get_sortable_fields(gsize *array_size)
     index=0;
 
     for(i=0; panel_fields[i].id != NULL; i ++)
-	if (panel_fields[i].title_hotkey != NULL)
+	if (panel_fields[i].is_user_choice)
 	    ret[index++] = g_strdup(_(panel_fields[i].title_hotkey));
     return (const char**) ret;
 }
@@ -3343,12 +3372,19 @@ const panel_field_t *
 panel_get_field_by_title(const char *name)
 {
     gsize index;
-    for(index=0; panel_fields[index].id != NULL; index ++)
+    gchar *title;
+
+    for(index=0; panel_fields[index].id != NULL; index ++) {
+	title = panel_get_title_without_hotkey(panel_fields[index].title_hotkey);
 	if (
 	    panel_fields[index].title_hotkey != NULL &&
-	    strcmp(name, _(panel_fields[index].title)) == 0
-	)
+	    strcmp(name, title) == 0
+	) {
+	    g_free(title);
 	    return &panel_fields[index];
+	}
+    }
+    g_free(title);
     return NULL;
 }
 
