@@ -381,12 +381,18 @@ enum {
 };
 
 static FileProgressStatus
-warn_same_file (const char *fmt, const char *a, const char *b)
+real_warn_same_file (enum OperationMode mode, const char *fmt,
+					 const char *a, const char *b)
 {
     char *msg;
     int result = 0;
+    const char *head_msg;
+
+    head_msg = mode == Foreground ? MSG_ERROR :
+		_(" Background process error ");
+
     msg = g_strdup_printf (fmt, a, b);
-    result = query_dialog (MSG_ERROR, msg, D_ERROR, 2, _("&Skip"), _("&Abort"));
+    result = query_dialog (head_msg, msg, D_ERROR, 2, _("&Skip"), _("&Abort"));
     g_free(msg);
     do_refresh ();
     if ( result ) { /* 1 == Abort */
@@ -395,6 +401,31 @@ warn_same_file (const char *fmt, const char *a, const char *b)
         return FILE_SKIP;
     }
 }
+
+#ifdef WITH_BACKGROUND
+static FileProgressStatus
+warn_same_file (const char *fmt, const char *a, const char *b)
+{
+    union {
+	void *p;
+	FileProgressStatus (*f) (enum OperationMode, const char *fmt,
+				 const char *a, const char *b);
+    } pntr;
+    pntr.f = real_warn_same_file;
+
+    if (we_are_background)
+	return parent_call (pntr.p, NULL, 3, strlen (fmt),
+			    fmt, strlen(a), a, strlen(b), b);
+    else
+	return real_warn_same_file (Foreground, fmt, a, b);
+}
+#else
+static FileProgressStatus
+warn_same_file (const char *fmt, const char *a, const char *b)
+{
+    return real_warn_same_file (Foreground, fmt, a, b);
+}
+#endif
 
 FileProgressStatus
 copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,

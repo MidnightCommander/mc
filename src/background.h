@@ -17,6 +17,7 @@ enum TaskState {
 
 typedef struct TaskList {
     int fd;
+    int to_child_fd;
     pid_t pid;
     int state;
     char *info;

@@ -61,6 +61,9 @@ int we_are_background = 0;
 /* File descriptor for talking to our parent */
 static int parent_fd;
 
+/* File descriptor for messages from our parent */
+static int from_parent_fd;
+
 #define MAXCALLARGS 4		/* Number of arguments supported */
 
 struct TaskList *task_list = NULL;
@@ -68,7 +71,8 @@ struct TaskList *task_list = NULL;
 static int background_attention (int fd, void *closure);
     
 static void
-register_task_running (FileOpContext *ctx, pid_t pid, int fd, char *info)
+register_task_running (FileOpContext *ctx, pid_t pid, int fd, int to_child,
+					   char *info)
 {
     TaskList *new;
 
@@ -78,6 +82,7 @@ register_task_running (FileOpContext *ctx, pid_t pid, int fd, char *info)
     new->state = Task_Running;
     new->next  = task_list;
     new->fd    = fd;
+    new->to_child_fd = to_child;
     task_list  = new;
 
     add_select_channel (fd, background_attention, ctx);
@@ -117,24 +122,31 @@ int
 do_background (struct FileOpContext *ctx, char *info)
 {
     int comm[2];		/* control connection stream */
+    int back_comm[2];	/* back connection */
     pid_t pid;
 
     if (pipe (comm) == -1)
 	return -1;
 
+    if (pipe (back_comm) == -1)
+	return -1;
+
     if ((pid = fork ()) == -1) {
-    	int saved_errno = errno;
-    	(void) close (comm[0]);
-    	(void) close (comm[1]);
-    	errno = saved_errno;
+	int saved_errno = errno;
+	(void) close (comm[0]);
+	(void) close (comm[1]);
+	(void) close (back_comm[0]);
+	(void) close (back_comm[1]);
+	errno = saved_errno;
 	return -1;
     }
 
     if (pid == 0) {
 	int nullfd;
 
-	close (comm[0]);
 	parent_fd = comm[1];
+	from_parent_fd = back_comm[0];
+
 	we_are_background = 1;
 	current_dlg = NULL;
 
@@ -151,9 +163,8 @@ do_background (struct FileOpContext *ctx, char *info)
 
 	return 0;
     } else {
-	close (comm[1]);
 	ctx->pid = pid;
-	register_task_running (ctx, pid, comm[0], info);
+	register_task_running (ctx, pid, comm[0], back_comm[1], info);
 	return 1;
     }
 }
@@ -226,6 +237,8 @@ background_attention (int fd, void *closure)
     int  argc, i, result, status;
     char *data [MAXCALLARGS];
     ssize_t bytes;
+	struct TaskList *p;
+	int to_child_fd;
     enum ReturnType type;
 
     ctx = closure;
@@ -305,10 +318,18 @@ background_attention (int fd, void *closure)
 		break;
 	    }
 
+	/* Find child task info by descriptor */
+	for (p = task_list; p; p = p->next) {
+		if (p->fd == fd)
+			break;
+	}
+
+	to_child_fd = p->to_child_fd;
+
 	/* Send the result code and the value for shared variables */
-	write (fd, &result, sizeof (int));
+	write (to_child_fd, &result, sizeof (int));
 	if (have_ctx)
-	    write (fd, ctx, sizeof (FileOpContext));
+	    write (to_child_fd, ctx, sizeof (FileOpContext));
     } else if (type == Return_String) {
 	int len;
 	char *resstr = NULL;
@@ -333,14 +354,14 @@ background_attention (int fd, void *closure)
 	}
 	if (resstr){
 	    len = strlen (resstr);
-	    write (fd, &len, sizeof (len));
+	    write (to_child_fd, &len, sizeof (len));
 	    if (len){
-		write (fd, resstr, len);
+		write (to_child_fd, resstr, len);
 		g_free (resstr);
 	    }
 	} else {
 	    len = 0;
-	    write (fd, &len, sizeof (len));
+	    write (to_child_fd, &len, sizeof (len));
 	}
     }
     for (i = 0; i < argc; i++)
@@ -392,9 +413,10 @@ parent_call (void *routine, struct FileOpContext *ctx, int argc, ...)
 	write (parent_fd, &len, sizeof (int));
 	write (parent_fd, value, len);
     }
-    read (parent_fd, &i, sizeof (int));
+
+    read (from_parent_fd, &i, sizeof (int));
     if (ctx)
-	read (parent_fd, ctx, sizeof (FileOpContext));
+	read (from_parent_fd, ctx, sizeof (FileOpContext));
 
     return i;
 }
@@ -417,11 +439,11 @@ parent_call_string (void *routine, int argc, ...)
 	write (parent_fd, &len, sizeof (int));
 	write (parent_fd, value, len);
     }
-    read (parent_fd, &i, sizeof (int));
+    read (from_parent_fd, &i, sizeof (int));
     if (!i)
 	return NULL;
     str = g_malloc (i + 1);
-    read (parent_fd, str, i);
+    read (from_parent_fd, str, i);
     str [i] = 0;
     return str;
 }
