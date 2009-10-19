@@ -1437,7 +1437,6 @@ void edit_cursor_move (WEdit * edit, long increment)
 {
 /* this is the same as a combination of two of the above routines, with only one push onto the undo stack */
     int c;
-
 #ifdef FAST_MOVE_CURSOR
     if (increment < -256) {
 	edit->force |= REDRAW_PAGE;
@@ -1576,8 +1575,8 @@ long edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
 {
     long p, q;
     int col = 0;
+    int cw = 1;
 #ifdef HAVE_CHARSET
-	int cw = 1;
 	int utf_ch = 0;
 #endif
     if (upto) {
@@ -1585,7 +1584,8 @@ long edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
 	cols = -10;
     } else
 	q = edit->last_byte + 2;
-    for (col = 0, p = current; p < q; p++) {
+    p = current;
+    while (p < q) {
 	int c;
 #ifdef HAVE_CHARSET
 	cw = 1;
@@ -1604,12 +1604,7 @@ long edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
 #ifdef HAVE_CHARSET
 	} else {
 	    cw = 1;
-	    c = edit_get_byte (edit, p);
-	    utf_ch = edit_get_utf (edit, p, &cw);
-	}
-	if ( utf8_display ) {
-	    if ( edit->utf8 && g_unichar_iswide(utf_ch) )
-	        col++;
+	    c = utf_ch = edit_get_utf (edit, p, &cw);
 	}
 #endif
 	if (c == '\t')
@@ -1624,9 +1619,21 @@ long edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
 	else
 	    col++;
 #ifdef HAVE_CHARSET
-	if ( cw > 1 )
-	    col -= cw-1;
+	if ( cw > 1 ) {
+	    if (edit->utf8 && g_unichar_iswide(utf_ch)) {
+                col -= cw - 1;
+	        if (utf8_display)
+	            col += 1;
+	    } else {
+	        col -= cw;
+	    }
+	    p += cw - 1;
+	}
+	else
 #endif
+	{
+	    p++;
+	}
     }
     return col;
 }
@@ -1724,7 +1731,6 @@ edit_move_to_prev_col (WEdit * edit, long p)
 {
     int prev = edit->prev_col;
     int over = edit->over_col;
-
     edit_cursor_move (edit, edit_move_forward3 (edit, p, prev + edit->over_col, 0) - edit->curs1);
 
     if (option_cursor_beyond_eol) {
@@ -1875,7 +1881,6 @@ static void edit_move_up_paragraph (WEdit * edit, int scroll)
 void edit_move_down (WEdit * edit, int i, int scroll)
 {
     long p, l = edit->total_lines - edit->curs_line;
-
     if (i > l)
 	i = l;
     if (i) {
