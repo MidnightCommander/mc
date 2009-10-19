@@ -290,9 +290,9 @@ static ssize_t cpio_read_bin_head(struct vfs_class *me, struct vfs_s_super *supe
 	for(i = 0; i < (HEAD_LENGTH >> 1); i++)
 	    u.shorts[i] = GUINT16_SWAP_LE_BE_CONSTANT(u.shorts[i]);
     }
-    g_assert(u.buf.c_magic == 070707);
 
-    if (u.buf.c_namesize == 0 || u.buf.c_namesize > MC_MAXPATHLEN) {
+    if (u.buf.c_magic != 070707 ||
+	u.buf.c_namesize == 0 || u.buf.c_namesize > MC_MAXPATHLEN) {
 	message (D_ERROR, MSG_ERROR, _("Corrupted cpio header encountered in\n%s"), 
 		super->name);
 	return STATUS_FAIL;
