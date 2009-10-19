@@ -162,7 +162,6 @@ transform_source (FileOpContext *ctx, const char *source)
 	    *q = ' ';
 
     fnsource = (char *) x_basename (s);
-    str_fix_string (fnsource);
 
     if (mc_search_run (ctx->search_handle, fnsource, 0, strlen (fnsource), NULL))
 	q = mc_search_prepare_replace_str2 (ctx->search_handle, ctx->dest_mask);
