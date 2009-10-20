@@ -3119,6 +3119,9 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
     case CK_Mail:
 	edit_mail_dialog (edit);
 	break;
+    case CK_ExtScript:
+	edit_escript_dialog (edit);
+	break;
     case CK_Shell:
 	view_other_cmd ();
 	break;

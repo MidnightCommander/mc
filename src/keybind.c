@@ -182,6 +182,8 @@ static const name_key_map_t command_names[] = {
     { "EditXCut",                          CK_XCut },
     { "EditXPaste",                        CK_XPaste },
     { "EditSelectionHistory",              CK_Selection_History },
+    { "EditExtScript",                     CK_ExtScript },
+
     { "EditShell",                         CK_Shell },
     { "EditInsertLiteral",                 CK_Insert_Literal },
     { "EditExecuteMacro",                  CK_Execute_Macro },

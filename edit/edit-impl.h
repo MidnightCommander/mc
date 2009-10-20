@@ -275,6 +275,7 @@ void format_paragraph (WEdit *edit, int force);
 
 /* either command or char_for_insertion must be passed as -1 */
 void edit_execute_cmd (WEdit *edit, int command, int char_for_insertion);
+void edit_ext_script_cmd (WEdit *edit, const char *scr, int type, int sout, int ifnhi, int pad);
 
 #define get_sys_error(s) (s)
 

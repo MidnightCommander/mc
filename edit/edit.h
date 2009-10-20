@@ -43,6 +43,13 @@ typedef struct WEdit WEdit;
 #define EDIT_KEY_EMULATION_EMACS  1
 #define EDIT_KEY_EMULATION_USER   2
 
+#define EXT_SCRIPT_BASIC  0
+#define EXT_SCRIPT_FILTER 1
+
+#define EXT_SCRIPT_REPLACE 0
+#define EXT_SCRIPT_INSERT  1
+#define EXT_SCRIPT_DISCARD 2
+
 extern int option_word_wrap_line_length;
 extern int option_typewriter_wrap;
 extern int option_auto_para_formatting;

@@ -107,6 +107,7 @@
 #define CK_ExtCmd		424
 #define CK_User_Menu		425
 #define CK_Find_Definition	426
+#define CK_ExtScript		427
 
 /* application control */
 #define CK_Save_Desktop		451

@@ -2762,3 +2762,193 @@ edit_move_block_to_left (WEdit * edit)
     } while (cur_bol >= start_bol) ;
     edit->force |= REDRAW_PAGE;
 }
+
+void edit_ext_script_cb (WEdit *edit, int ch, void *data)
+{
+    FILE *p = data;
+    putc (ch, p);
+}
+
+/* return next character of highlited block... */
+static void
+edit_iter_block (WEdit *edit, long start, long finish, int pad, void *data)
+{
+    long idx = start;
+
+    if (column_highlighting) {
+	int col1, col2;
+	
+	col1 = min (edit->column1, edit->column2);
+	col2 = max (edit->column1, edit->column2);
+
+	if (edit_move_forward3 (edit, edit_bol (edit, idx), 0, idx) == col2)
+	    idx++;
+        /* copy from buffer, excluding chars that are out of the column 'margins' */
+	while (idx < finish) {
+	    long i;
+	    int c, x;
+	    c = edit_get_byte (edit, idx);
+	    x = edit_move_forward3 (edit, edit_bol (edit, idx), 0, idx);
+	    if (x >= col1 && x < col2) {
+		if (c == '\n' && pad)
+	    for (i = edit_move_forward3 (edit, edit_bol (edit, idx), 0, idx); i < col2; i++)
+		edit_ext_script_cb (edit, ' ', data);
+		edit_ext_script_cb (edit, c, data);
+	    }
+	    else if (x == col2)
+		edit_ext_script_cb (edit, '\n', data);
+	    idx++;
+	}
+    } else {
+	while (idx < finish) {
+	    edit_ext_script_cb (edit, edit_get_byte (edit, idx), data);
+	    idx++;
+	}
+    }
+}
+
+static int error_pipe[2];	/* File descriptors of error pipe */
+static int old_error;		/* File descriptor of old standard error */
+
+/*
+ * Returns true if an error was displayed
+ * error: -1 - ignore errors, 0 - display warning, 1 - display error
+ * text is prepended to the error message from the pipe
+ */
+static int
+edit_close_error_pipe (int error, char *text)
+{
+    char *title;
+    char msg[BUF_4K];
+    int len = 0;
+
+    if (error)
+	title = MSG_ERROR;
+    else
+	title = _("Warning");
+    if (old_error >= 0){
+	close (2);
+	dup (old_error);
+	close (old_error);
+	len = read (error_pipe[0], msg, BUF_4K);
+
+	if (len >= 0)
+	    msg[len] = 0;
+	close (error_pipe[0]);
+    }
+    if (error < 0)
+	return 0;	/* Just ignore error message */
+    if (text == NULL){
+	if (len <= 0)
+	    return 0;	/* Nothing to show */
+
+	/* Show message from pipe */
+	message (error, title, "%s", msg);
+    } else {
+	/* Show given text and possible message from pipe */
+	message (error, title, " %s \n %s ", text, msg);
+    }
+    return 1;
+}
+
+
+void
+edit_ext_script_cmd (WEdit *edit, const char *scr, int type,
+			     int sout, int whole_file, int pad)
+{
+    long start_mark, end_mark;
+    FILE *script_home = NULL;
+    FILE *p = NULL;	/* pipe */
+    char *s = NULL;	/* script */
+    char *b = NULL;	/* block file */
+    char *q = NULL;	/* quoted name */
+    char *full_scr = NULL; /* full quality script name */
+
+    if (eval_marks (edit, &start_mark, &end_mark)) {
+	if (whole_file) {
+	    edit_push_markers (edit);
+	    edit_set_markers (edit, 0, edit->last_byte, 0, 0);
+	    eval_marks (edit, &start_mark, &end_mark);
+	} else
+	    sout = EXT_SCRIPT_DISCARD;
+    }
+    mc_log ("scr: %s\n", scr);
+    b  = g_strconcat (home_dir, EDIT_BLOCK_FILE, (char *) NULL);	/* block file */
+    q = name_quote (edit->filename, 0);
+    open_error_pipe ();
+    if (type == EXT_SCRIPT_BASIC) {
+	s = g_strconcat (home_dir, EDIT_DIR "/", scr, (char *) NULL);	/* user script */
+	if (!(script_home = fopen (s, "r"))) {
+	    g_free (s);
+	    s = g_strconcat (home_dir, EDIT_DIR "/edit.", scr, ".rc", (char *) NULL); /* user script short name */
+	    if (!(script_home = fopen (s, "r"))) {
+		g_free (s);
+		s = g_strconcat (mc_home, scr, (char *) NULL);	/* system wide script */
+		if (!(script_home = fopen (s, "r"))) {
+		    g_free (s);
+		    s = g_strconcat (mc_home, "edit.", scr, ".rc", (char *) NULL);	/* system wide script */
+		}
+	    }
+	}
+	if (script_home)
+	    fclose (script_home);
+	edit_save_block (edit, b, start_mark, end_mark);
+	/*
+	 * Run script.
+	 * Initial space is to avoid polluting bash history.
+	 * Arguments:
+	 *   $1 - name of the edited file (to check its extension etc).
+	 *   $2 - file containing the current block.
+	 *   $3 - file where error messages should be put
+	 *        (for compatibility with old scripts).
+	 *                    $0      $1      $2   $3                   */
+	full_scr = g_strconcat (" ", s, " ", q, " ", b, " /dev/null", (char *) NULL);
+	g_free (s);
+	system (full_scr);
+	g_free (full_scr);
+    } else if (type == EXT_SCRIPT_FILTER) {
+	s = g_strconcat (" ", scr, "| cat >", b, (char *) NULL);
+	mc_log("filter: %s\n", s);
+	/* remove '|' if scr is empty */
+	if (*(s + 1) == '|')
+	    *(s + 1) = ' ';
+	p = popen (s, "w");
+	g_free (s);
+	if (p) {
+	    edit_iter_block (edit, start_mark, end_mark, pad, p);
+	    pclose (p);
+	}
+    }
+    g_free (q);
+
+    if (edit_close_error_pipe (0, 0)) {
+	if (whole_file)
+	    edit_set_markers (edit, 0, 0, 0, 0);
+	g_free (b);
+	return;
+    }
+
+    edit_refresh_cmd (edit);
+    edit->force |= REDRAW_COMPLETELY;
+
+    /* insert result block */
+
+    switch (sout) {
+    case EXT_SCRIPT_REPLACE:
+	if (edit_block_delete_cmd (edit))
+	    break;
+	if (column_highlighting)
+	    edit_cursor_move (edit, start_mark - edit->curs1);
+	break;
+    case EXT_SCRIPT_INSERT:
+	if (column_highlighting)
+	    edit_insert_column_of_text_from_file (edit, b);
+	else
+            edit_insert_file (edit, b);
+	break;
+    case EXT_SCRIPT_DISCARD:
+	break;
+    }
+    g_free (b);
+    return;
+}

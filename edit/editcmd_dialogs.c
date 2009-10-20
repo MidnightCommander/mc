@@ -81,6 +81,76 @@ editcmd_dialog_raw_key_query_cb (struct Dlg_head *h, dlg_msg_t msg, int parm)
 
 /*** public functions **************************************************/
 
+#define EXT_SCRIPT_H 18
+#define EXT_SCRIPT_W 51
+
+void edit_escript_dialog (WEdit * edit)
+{
+    const char *str_types[] =
+    {
+        N_("&Basic"),
+        N_("&Pipe")
+    };
+
+    const char *str_sout[] =
+    {
+        N_("&Replace"),
+        N_("&Insert"),
+        N_("&Skip")
+    };
+
+    char *script = NULL;
+    char *filter = NULL;
+
+    int type = 0;
+    int sout = 0;
+    int whole_file = 0;
+    int pad = 1;
+
+    QuickWidget quick_widgets[] =
+    {
+        /* 0 */
+        QUICK_BUTTON (6, 10, 15, EXT_SCRIPT_H, N_("&Cancel"), B_CANCEL, NULL),
+        /* 1 */
+        QUICK_BUTTON (2, 10, 15, EXT_SCRIPT_H, N_("&OK"), B_ENTER, NULL),
+        /* 2 */
+        QUICK_RADIO (4, EXT_SCRIPT_W, 11, EXT_SCRIPT_H, 3, str_sout, &sout),
+        /* 3 */
+        QUICK_LABEL (3, EXT_SCRIPT_W, 10, EXT_SCRIPT_H, N_("Output:")),
+        /* 4 */
+        QUICK_CHECKBOX (3, EXT_SCRIPT_W, 8, EXT_SCRIPT_H, N_("Pad if column highliting"), &pad),
+        /* 5 */
+        QUICK_CHECKBOX (3, EXT_SCRIPT_W, 7, EXT_SCRIPT_H, N_("Whole file if no highlited block"), &whole_file),
+        /* 6 */
+        QUICK_INPUT (14, EXT_SCRIPT_W, 5, EXT_SCRIPT_H, "", EXT_SCRIPT_W - 17, 0, "extscript-dlg-pipe", &filter),
+        /* 7 */
+        QUICK_INPUT (14, EXT_SCRIPT_W, 4, EXT_SCRIPT_H, "", EXT_SCRIPT_W - 17, 0, "extscript-dlg-script", &script),
+        /* 8 */
+        QUICK_RADIO (4, EXT_SCRIPT_W, 4, EXT_SCRIPT_H, 2, str_types, &type),
+        /* 9 */
+        QUICK_LABEL (3, EXT_SCRIPT_W, 3, EXT_SCRIPT_H, N_("Script:")),
+        /*10*/
+        QUICK_LABEL (14, EXT_SCRIPT_W, 3, EXT_SCRIPT_H, N_("Name/command line")),
+        QUICK_END
+    };
+
+    QuickDialog Quick_input =
+    {
+        EXT_SCRIPT_W, EXT_SCRIPT_H, -1, -1, N_("External scripting"),
+        "[Input Line Keys]", quick_widgets, FALSE
+    };
+
+    Quick_input.widgets = quick_widgets;
+
+    if (quick_dialog (&Quick_input) != B_CANCEL) {
+        edit_ext_script_cmd (edit, (type == EXT_SCRIPT_BASIC ? script : filter), type, sout, whole_file, pad);
+    }
+    g_free (script);
+    g_free (filter);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 void
 editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const char *replace_default,
                              /*@out@ */ char **search_text, /*@out@ */ char **replace_text)

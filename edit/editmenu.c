@@ -80,6 +80,12 @@ edit_about_cmd (void)
 }
 
 static void
+menu_extscript_cmd (void)
+{
+    menu_cmd (CK_ExtScript);
+}
+
+static void
 menu_mail_cmd (void)
 {
     menu_cmd (CK_Mail);
@@ -495,6 +501,7 @@ static menu_entry CmdMenu[] =
     {' ', "", NULL_HOTKEY, 0},
     {' ', N_("Insert &date/time           "), NULL_HOTKEY, menu_date_cmd},
     {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("Exte&rnal Scripting      M-y"), NULL_HOTKEY, menu_extscript_cmd},
     {' ', N_("Format p&aragraph        M-p"), NULL_HOTKEY, menu_format_paragraph},
     {' ', N_("'ispell' s&pell check    C-p"), NULL_HOTKEY, menu_ispell_cmd},
     {' ', N_("Sor&t...                 M-t"), NULL_HOTKEY, menu_sort_cmd},
@@ -520,6 +527,7 @@ static menu_entry CmdMenuEmacs[] =
     {' ', "", NULL_HOTKEY, 0},
     {' ', N_("Insert &date/time           "), NULL_HOTKEY, menu_date_cmd},
     {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("Exte&rnal Scripting      M-y"), NULL_HOTKEY, menu_extscript_cmd},
     {' ', N_("Format p&aragraph        M-p"), NULL_HOTKEY, menu_format_paragraph},
     {' ', N_("'ispell' s&pell check    M-$"), NULL_HOTKEY, menu_ispell_cmd},
     {' ', N_("Sor&t...                 M-t"), NULL_HOTKEY, menu_sort_cmd},
