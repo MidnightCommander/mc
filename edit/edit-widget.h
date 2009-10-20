@@ -106,6 +106,7 @@ struct WEdit {
 
     /* undo stack and pointers */
     unsigned long stack_pointer;
+    unsigned long stack_last_save_pointer;
     long *undo_stack;
     unsigned long stack_size;
     unsigned long stack_size_mask;

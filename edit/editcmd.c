@@ -597,6 +597,7 @@ edit_save_as_cmd (WEdit *edit)
 		g_free (exp);
 		edit->modified = 0;
 		edit->delete_file = 0;
+		edit->stack_last_save_pointer = edit->stack_pointer;
 		if (different_filename)
 		    edit_load_syntax (edit, NULL, option_syntax_type);
 		edit->force |= REDRAW_COMPLETELY;
@@ -848,6 +849,7 @@ edit_save_cmd (WEdit *edit)
     if (res > 0) {
         edit->delete_file = 0;
         edit->modified = 0;
+        edit->stack_last_save_pointer = edit->stack_pointer;
     }
 
     return 1;

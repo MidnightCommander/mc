@@ -792,6 +792,8 @@ edit_init (WEdit *edit, int lines, int columns, const char *filename,
     edit->stack_size_mask = START_STACK_SIZE - 1;
     edit->undo_stack = g_malloc ((edit->stack_size + 10) * sizeof (long));
     edit->stack_wrapped = FALSE;
+    edit->stack_pointer = 0;
+    edit->stack_last_save_pointer = edit->stack_pointer;
 
     if (edit_load_file (edit)) {
 	/* edit_load_file already gives an error message */
@@ -1098,8 +1100,9 @@ pop_action (WEdit * edit)
     if ((c = edit->undo_stack[sp]) >= 0) {
 /*	edit->undo_stack[sp] = '@'; */
 	edit->stack_pointer = (edit->stack_pointer - 1) & edit->stack_size_mask;
-        // if stack wasn't wraped and empty then reset modified satus
-        if (sp == edit->stack_bottom && !edit->stack_wrapped) {
+        /* if stack wasn't wraped and current stack pointer is eq to the last
+           saving action then reset modified satus */
+        if (!edit->stack_wrapped && edit->stack_last_save_pointer == sp) {
             edit->modified = 0;
             edit->locked = edit_unlock_file (edit->filename);
         }
@@ -1128,6 +1131,10 @@ static void edit_modification (WEdit * edit)
     if (!edit->modified && !edit->delete_file)
 	edit->locked = edit_lock_file (edit->filename);
     edit->modified = 1;
+
+    // This will reset save flag, if undo action was performed and text entered
+    if edit->stack_last_save_pointer > edit->stack_pointer
+        edit->stack_last_save_pointer = 0;
 }
 
 /*
