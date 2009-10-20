@@ -720,6 +720,13 @@ extfs_open (struct vfs_class *me, const char *file, int flags, int mode)
 
     local_handle =
 	open (entry->inode->local_filename, NO_LINEAR (flags), mode);
+
+    if (local_handle == -1) {
+	/* file exists(may be). Need to drop O_CREAT flag and truncate file content */
+	flags = ~O_CREAT & (NO_LINEAR (flags)|O_TRUNC);
+	local_handle = open (entry->inode->local_filename, flags  , mode);
+    }
+
     if (local_handle == -1)
 	ERRNOR (EIO, NULL);
 
@@ -1017,6 +1024,15 @@ extfs_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
 cleanup:
     g_free (mpath);
     return result;
+}
+
+static int extfs_chown (struct vfs_class *me, const char *path, int owner, int group)
+{
+    (void) me;
+    (void) path;
+    (void) owner;
+    (void) group;
+    return 0;
 }
 
 static int extfs_chmod (struct vfs_class *me, const char *path, int mode)
@@ -1414,6 +1430,7 @@ init_extfs (void)
     vfs_extfs_ops.lstat = extfs_lstat;
     vfs_extfs_ops.fstat = extfs_fstat;
     vfs_extfs_ops.chmod = extfs_chmod;
+    vfs_extfs_ops.chown = extfs_chown;
     vfs_extfs_ops.readlink = extfs_readlink;
     vfs_extfs_ops.unlink = extfs_unlink;
     vfs_extfs_ops.chdir = extfs_chdir;
