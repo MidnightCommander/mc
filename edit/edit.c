@@ -2867,6 +2867,8 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
     case CK_Tab:
         /* if text marked shift block */
         if ( edit->mark1 != edit->mark2 && !option_persistent_selections ) {
+            if (edit->mark2 < 0)
+                edit_mark_cmd (edit, 0);
             edit_move_block_to_right (edit);
         } else {
             if ( option_cursor_beyond_eol )
