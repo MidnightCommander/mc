@@ -539,6 +539,9 @@ regex/\.([dD][vV][iI])$
 regex/\.([Tt][Ee][Xx])$
 	Open=%var{EDITOR:vi} %f
 
+# DjVu
+regex/\.(djvu|DJVU)$
+	Open=djview %f &
 
 ### Miscellaneous ###
 
