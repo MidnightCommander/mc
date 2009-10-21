@@ -110,12 +110,12 @@ static void status_string (WEdit * edit, char *s, int w)
     /* The field lengths just prevent the status line from shortening too much */
     if (simple_statusbar)
         g_snprintf (s, w,
-                        "[%c%c%c%c] %2ld %3ld/%3ld (%-4ld/%4ldb)= %s  cp:%s",
+                        "%c%c%c%c %3ld %5ld/%ld %6ld/%ld %s %s",
                         edit->mark1 != edit->mark2 ? ( column_highlighting ? 'C' : 'B') : '-',
                         edit->modified ? 'M' : '-',
                         edit->macro_i < 0 ? '-' : 'R',
                         edit->overwrite == 0 ? '-' : 'O',
-                        edit->curs_col,
+                        edit->curs_col + edit->over_col,
 
                         edit->curs_line + 1,
                         edit->total_lines + 1,
@@ -132,12 +132,12 @@ static void status_string (WEdit * edit, char *s, int w)
                     );
     else
         g_snprintf (s, w,
-                        "[%c%c%c%c] %2ld L:[%3ld+%2ld %3ld/%3ld] *(%-4ld/%4ldb)= %s  %s",
+                        "[%c%c%c%c] %2ld L:[%3ld+%2ld %3ld/%3ld] *(%-4ld/%4ldb) %s  %s",
                         edit->mark1 != edit->mark2 ? ( column_highlighting ? 'C' : 'B') : '-',
                         edit->modified ? 'M' : '-',
                         edit->macro_i < 0 ? '-' : 'R',
                         edit->overwrite == 0 ? '-' : 'O',
-                        edit->curs_col,
+                        edit->curs_col + edit->over_col,
 
                         edit->start_line + 1,
                         edit->curs_row,
@@ -176,7 +176,7 @@ edit_status (WEdit *edit)
     const char *fname = "";
     int fname_len;
     const int gap = 3; /* between the filename and the status */
-    const int right_gap = 2; /* at the right end of the screen */
+    const int right_gap = 5; /* at the right end of the screen */
     const int preferred_fname_len = 16;
 
     status_string (edit, status, status_size);
@@ -200,6 +200,16 @@ edit_status (WEdit *edit)
     tty_setcolor (SELECTED_COLOR);
     printwstr (fname, fname_len + gap);
     printwstr (status, w - (fname_len + gap));
+
+    if (simple_statusbar && edit->widget.cols > 30) {
+        size_t percent;
+        if (edit->total_lines + 1 != 0)
+            percent = (edit->curs_line + 1) * 100 / (edit->total_lines + 1);
+        else
+            percent = 100;
+        widget_move (edit, 0, edit->widget.cols - 5);
+        tty_printf (" %3d%%", percent);
+    }
     tty_setcolor (EDITOR_NORMAL_COLOR);
 
     g_free (status);
