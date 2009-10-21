@@ -6,7 +6,7 @@ LIBFILES_OUT = mc.ext
 
 noinst_DATA = xterm.ad
 
-pkgdata_DATA = mc.menu.sr
+pkgdata_DATA =
 
 LIBFILES_CONST = \
 	cedit.menu      \
@@ -15,7 +15,8 @@ LIBFILES_CONST = \
 	mc.lib \
 	filehighlight.ini \
 	mc.keymap \
-	mc.menu
+	mc.menu \
+	mc.menu.sr
 
 
 CLEANFILES = $(SCRIPTS_OUT)
