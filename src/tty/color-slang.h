@@ -22,13 +22,9 @@ enum {
 /* When using Slang with color, we have all the indexes free but
  * those defined here (A_BOLD, A_UNDERLINE, A_REVERSE, A_BOLD_REVERSE)
  */
-#define A_BOLD		0x40
-#define A_UNDERLINE	0x40
-#define A_REVERSE	0x20
-#define A_BOLD_REVERSE	0x21
 
-#ifndef A_NORMAL
-#    define A_NORMAL	0x00
-#endif
+#ifndef A_BOLD
+#define A_BOLD SLTT_BOLD_MASK
+#endif /* A_BOLD */
 
 #endif /* MC_COLOR_SLANG_H */
