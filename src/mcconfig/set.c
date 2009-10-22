@@ -51,7 +51,7 @@ mc_config_normalize_before_save(const gchar * value)
     {
         conv = str_crt_conv_to ("UTF-8");
         if (conv == INVALID_CONV)
-            return;
+            return g_strdup(value);
 
         buffer = g_string_new ("");
 
