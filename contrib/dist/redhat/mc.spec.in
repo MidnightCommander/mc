@@ -145,13 +145,13 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %{_sysconfdir}/mc/*edit*
 %config(noreplace) %{_sysconfdir}/mc/mc.ext
 %config(noreplace) %{_sysconfdir}/mc/mc.menu
+%config(noreplace) %{_sysconfdir}/mc/mc.menu.*
 %config(noreplace) %{_sysconfdir}/mc/extfs/extfs.ini
 %config(noreplace) %{_sysconfdir}/mc/extfs/sfs.ini
 %config(noreplace) %{_sysconfdir}/mc/mc.keymap
 
 %dir %{_datadir}/mc
 %{_datadir}/mc/*
-%{_datadir}/mc/skins/*
 
 %dir %{_libexecdir}/mc
 
