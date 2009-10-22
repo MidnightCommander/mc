@@ -60,6 +60,7 @@
 #include "../src/selcodepage.h"
 #include "../src/strutil.h"	/* utf string functions */
 #include "../src/mcconfig/mcconfig.h"
+#include "../src/skin/skin.h"		/* mc_skin_color_get */
 
 #include "../edit/edit-impl.h"
 #include "../edit/edit.h"

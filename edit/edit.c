@@ -49,6 +49,7 @@
 #include "../src/tty/color.h"	/* EDITOR_NORMAL_COLOR */
 #include "../src/tty/tty.h"		/* attrset() */
 #include "../src/tty/key.h"		/* is_idle() */
+#include "../src/skin/skin.h"		/* mc_skin_color_get */
 
 #include "../src/widget.h"	/* buttonbar_redraw() */
 #include "../src/cmd.h"		/* view_other_cmd() */

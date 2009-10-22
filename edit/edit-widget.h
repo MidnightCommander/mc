@@ -12,12 +12,8 @@
 #include "edit-impl.h"
 #include "../src/keybind.h"
 
-
 #define MAX_MACRO_LENGTH 1024
 #define N_LINE_CACHES 32
-
-#define BOOK_MARK_COLOR ((25 << 8) | 5)
-#define BOOK_MARK_FOUND_COLOR ((26 << 8) | 4)
 
 struct _book_mark {
     int line;			/* line number */
