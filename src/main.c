@@ -78,6 +78,7 @@
 #include "command.h"
 #include "wtools.h"
 #include "cmddef.h"		/* CK_ cmd name const */
+#include "fileloc.h"		/* MC_USERCONF_DIR */
 
 #include "../vfs/vfs.h"		/* vfs_translate_url() */
 
