@@ -63,11 +63,10 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
     int command = CK_Insert_Char;
     int char_for_insertion = -1;
     int i = 0;
-    int extmod = 0;
     int c;
 
     /* an ordinary insertable character */
-    if (x_key < 256 && !extmod) {
+    if (x_key < 256) {
 #ifdef HAVE_CHARSET
         if ( edit->charpoint >= 4 ) {
             edit->charpoint = 0;
@@ -145,12 +144,22 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
     }
 
     /* Commands specific to the key emulation */
-    for (i = 0; edit->user_map[i].key != 0; i++)
-        if (x_key == edit->user_map[i].key) {
-            command = edit->user_map[i].command;
-            break;
+    if (edit->extmod) {
+        edit->extmod = 0;
+        for (i = 0; edit->user_x_map[i].key; i++) {
+            if (x_key == edit->user_x_map[i].key) {
+                command = edit->user_x_map[i].command;
+                break;
+            }
         }
-
+    } else {
+        for (i = 0; edit->user_map[i].key != 0; i++) {
+            if (x_key == edit->user_map[i].key) {
+                command = edit->user_map[i].command;
+                break;
+            }
+        }
+    }
   fin:
     *cmd = command;
     *ch = char_for_insertion;

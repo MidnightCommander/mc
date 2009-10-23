@@ -594,6 +594,10 @@ const global_keymap_t default_editor_keymap[] = {
 
     { 0, 0, "" }
 };
+
+const global_keymap_t default_editor_x_keymap[] = {
+    { 0, 0, "" }
+};
 #endif
 
 /* screen.c */

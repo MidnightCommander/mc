@@ -308,6 +308,7 @@ mc_main_error_quark (void)
 
 #ifdef USE_INTERNAL_EDIT
 GArray *editor_keymap = NULL;
+GArray *editor_x_keymap = NULL;
 #endif
 GArray *viewer_keymap = NULL;
 GArray *viewer_hex_keymap = NULL;

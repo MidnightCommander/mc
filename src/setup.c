@@ -966,29 +966,31 @@ load_keymap_defs (void)
     if (mc_global_keymap != NULL)
     {
 #ifdef USE_INTERNAL_EDIT
-        editor_keymap = g_array_new(TRUE, FALSE, sizeof (global_keymap_t));
+        editor_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
         load_keymap_from_section ("editor", editor_keymap, mc_global_keymap);
+        editor_x_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
+        load_keymap_from_section ("editor:xmap", editor_x_keymap, mc_global_keymap);
 #endif
 
-        viewer_keymap = g_array_new(TRUE, FALSE, sizeof (global_keymap_t));
+        viewer_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
         load_keymap_from_section ("viewer", viewer_keymap, mc_global_keymap);
 
-        viewer_hex_keymap = g_array_new(TRUE, FALSE, sizeof (global_keymap_t));
+        viewer_hex_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
         load_keymap_from_section ("viewer:hex", viewer_hex_keymap, mc_global_keymap);
 
-        main_keymap = g_array_new(TRUE, FALSE, sizeof (global_keymap_t));
+        main_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
         load_keymap_from_section ("main", main_keymap, mc_global_keymap);
 
-        main_x_keymap = g_array_new(TRUE, FALSE, sizeof (global_keymap_t));
+        main_x_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
         load_keymap_from_section ("main:xmap", main_x_keymap, mc_global_keymap);
 
-        panel_keymap = g_array_new(TRUE, FALSE, sizeof (global_keymap_t));
+        panel_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
         load_keymap_from_section ("panel", panel_keymap, mc_global_keymap);
 
-        input_keymap = g_array_new(TRUE, FALSE, sizeof (global_keymap_t));
+        input_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
         load_keymap_from_section ("input", input_keymap, mc_global_keymap);
 
-        mc_config_deinit(mc_global_keymap);
+        mc_config_deinit (mc_global_keymap);
     }
 
 }

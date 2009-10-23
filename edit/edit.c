@@ -726,6 +726,9 @@ edit_set_keymap (WEdit *edit)
     edit->user_map = default_editor_keymap;
     if (editor_keymap && editor_keymap->len > 0)
         edit->user_map = (global_keymap_t *) editor_keymap->data;
+    edit->user_x_map = default_editor_x_keymap;
+    if (editor_x_keymap && editor_x_keymap->len > 0)
+        edit->user_x_map = (global_keymap_t *) editor_x_keymap->data;
 }
 
 

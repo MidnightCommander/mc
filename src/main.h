@@ -77,6 +77,7 @@ extern int is_right;		/* If the selected menu was the right */
 
 #ifdef USE_INTERNAL_EDIT
 extern GArray *editor_keymap;
+extern GArray *editor_x_keymap;
 #endif
 extern GArray *viewer_keymap;
 extern GArray *viewer_hex_keymap;
