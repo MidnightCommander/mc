@@ -123,12 +123,13 @@ static struct link *erase_list;
  * Both lists don't use the linkcount and name structure members of struct
  * link.
  */
-static struct link *dest_dirs = 0;
+static struct link *dest_dirs = NULL;
 
+/* TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix  */
 const char *op_names[3] = {
-    N_(" Copy "),
-    N_(" Move "),
-    N_(" Delete ")
+    N_("DialogTitle|Copy"),
+    N_("DialogTitle|Move"),
+    N_("DialogTitle|Delete")
 };
 
 /* }}} */
@@ -143,10 +144,6 @@ static FileProgressStatus erase_file (FileOpContext *ctx, const char *s,
 					int is_toplevel_file);
 static FileProgressStatus files_error (const char *format, const char *file1,
 					const char *file2);
-
-
-enum CaseConvs { NO_CONV = 0, UP_CHAR = 1, LOW_CHAR = 2, UP_SECT =
-	4, LOW_SECT = 8 };
 
 static FileProgressStatus transform_error = FILE_CONT;
 
@@ -715,7 +712,7 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
     if (dst_status == DEST_SHORT) {
 	/* Remove short file */
 	int result;
-	result = query_dialog (_("Copy"),
+	result = query_dialog (Q_("DialogTitle|Copy"),
 		_("Incomplete file was retrieved. Keep it?"),
 		D_ERROR, 2, _("&Delete"), _("&Keep"));
 	if (!result)
@@ -1627,15 +1624,15 @@ panel_compute_totals (WPanel *panel, const void *ui,
  * This array introduced to avoid translation problems. The former (op_names)
  * is assumed to be nouns, suitable in dialog box titles; this one should
  * contain whatever is used in prompt itself (i.e. in russian, it's verb).
- * Notice first symbol - it is to fool gettext and force these strings to
- * be different for it. First symbol is skipped while building a prompt.
  * (I don't use spaces around the words, because someday they could be
  * dropped, when widgets get smarter)
  */
+
+/* TRANSLATORS: no need to translate 'FileOperation', it's just a context prefix  */
 static const char *op_names1[] = {
-    N_("1Copy"),
-    N_("1Move"),
-    N_("1Delete")
+    N_("FileOperation|Copy"),
+    N_("FileOperation|Move"),
+    N_("FileOperation|Delete")
 };
 
 /*
@@ -1662,6 +1659,8 @@ static const char *prompt_parts[] = {
     N_(" to:")
 };
 
+static const char *question_format = N_("%s?");
+
 /*
  * Generate user prompt for panel operation.
  * single_source is the name if the source entry or NULL for multiple
@@ -1677,37 +1676,47 @@ panel_operate_generate_prompt (const WPanel *panel, const int operation,
     int i;
     char format_string[BUF_MEDIUM];
     char *dp = format_string;
+    gboolean build_question = FALSE;
 
 #ifdef ENABLE_NLS
-    static int i18n_flag = 0;
+    static gboolean i18n_flag = FALSE;
     if (!i18n_flag) {
 	for (i = sizeof (op_names1) / sizeof (op_names1[0]); i--;)
-	    op_names1[i] = _(op_names1[i]);
+	    op_names1[i] = Q_(op_names1[i]);
 
 	for (i = sizeof (prompt_parts) / sizeof (prompt_parts[0]); i--;)
 	    prompt_parts[i] = _(prompt_parts[i]);
 
 	one_format = _(one_format);
 	many_format = _(many_format);
-	i18n_flag = 1;
+	question_format = _(question_format);
+	i18n_flag = TRUE;
     }
 #endif				/* ENABLE_NLS */
 
     sp = single_source ? one_format : many_format;
 
-    while (*sp) {
+    while (*sp != '\0') {
 	switch (*sp) {
 	case '%':
 	    cp = NULL;
 	    switch (sp[1]) {
 	    case 'o':
-		cp = op_names1[operation] + 1;
+		cp = op_names1[operation];
 		break;
 	    case 'm':
-		cp = operation == OP_DELETE ? "?" : prompt_parts[5];
+		if (operation == OP_DELETE) {
+		    cp = "";
+		    build_question = TRUE;
+		} else
+		    cp = prompt_parts[5];
 		break;
 	    case 'e':
-		cp = operation == OP_DELETE ? "?" : prompt_parts[6];
+		if (operation == OP_DELETE) {
+		    cp = "";
+		    build_question = TRUE;
+		} else
+		    cp = prompt_parts[6];
 		break;
 	    case 'f':
 		if (single_source) {
@@ -1722,9 +1731,9 @@ panel_operate_generate_prompt (const WPanel *panel, const int operation,
 	    default:
 		*dp++ = *sp++;
 	    }
-	    if (cp) {
+	    if (cp != NULL) {
 		sp += 2;
-		while (*cp)
+		while (*cp != '\0')
 		    *dp++ = *cp++;
 	    }
 	    break;
@@ -1733,6 +1742,14 @@ panel_operate_generate_prompt (const WPanel *panel, const int operation,
 	}
     }
     *dp = '\0';
+
+    if (build_question) {
+	char tmp[BUF_MEDIUM];
+
+	memmove (tmp, format_string, sizeof (tmp));
+	g_snprintf (format_string, sizeof (format_string),
+		    question_format, tmp);
+    }
 
     return g_strdup (format_string);
 }
@@ -1837,8 +1854,9 @@ panel_operate (void *source_panel, FileOperation operation,
 	format = panel_operate_generate_prompt (panel, operation,
 						source != NULL, &src_stat);
 
-	dest = file_mask_dialog (ctx, operation, source != NULL,
-				format, source != NULL ? source : &panel->marked,
+	dest = file_mask_dialog (ctx, operation, source != NULL, format,
+				source != NULL ? (void *) source
+						: (void *) &panel->marked,
 				dest_dir_, &do_bg);
 
 	g_free (format);
@@ -1871,7 +1889,7 @@ panel_operate (void *source_panel, FileOperation operation,
 	if (safe_delete)
 	    query_set_sel (1);
 
-	i = query_dialog (_(op_names[operation]), fmd_buf, D_ERROR, 2,
+	i = query_dialog (Q_(op_names[operation]), fmd_buf, D_ERROR, 2,
 				_("&Yes"), _("&No"));
 
 	if (i != 0) {
