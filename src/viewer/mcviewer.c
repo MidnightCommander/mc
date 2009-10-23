@@ -172,11 +172,11 @@ mcview_set_keymap (mcview_t * view)
 {
     view->plain_map = default_viewer_keymap;
     if (viewer_keymap && viewer_keymap->len > 0)
-        view->plain_map = (global_key_map_t *) viewer_keymap->data;
+        view->plain_map = (global_keymap_t *) viewer_keymap->data;
 
     view->hex_map = default_viewer_hex_keymap;
     if (viewer_hex_keymap && viewer_hex_keymap->len > 0)
-        view->hex_map = (global_key_map_t *) viewer_hex_keymap->data;
+        view->hex_map = (global_keymap_t *) viewer_hex_keymap->data;
 }
 
 /* --------------------------------------------------------------------------------------------- */

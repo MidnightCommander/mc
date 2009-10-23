@@ -101,7 +101,7 @@
 #include "../vfs/gc.h"
 #endif
 
-#include "keybind.h"		/* type global_key_map_t */
+#include "keybind.h"		/* type global_keymap_t */
 
 /* When the modes are active, left_panel, right_panel and tree_panel */
 /* Point to a proper data structure.  You should check with the functions */
@@ -305,7 +305,9 @@ mc_main_error_quark (void)
   return g_quark_from_static_string (PACKAGE);
 }
 
+#ifdef USE_INTERNAL_EDIT
 GArray *editor_keymap = NULL;
+#endif
 GArray *viewer_keymap = NULL;
 GArray *viewer_hex_keymap = NULL;
 GArray *main_keymap = NULL;
@@ -313,8 +315,8 @@ GArray *main_x_keymap = NULL;
 GArray *panel_keymap = NULL;
 GArray *input_keymap = NULL;
 
-const global_key_map_t *main_map;
-const global_key_map_t *main_x_map;
+const global_keymap_t *main_map;
+const global_keymap_t *main_x_map;
 
 /* Save current stat of directories to avoid reloading the panels */
 /* when no modifications have taken place */
@@ -1846,23 +1848,23 @@ do_nc (void)
     main_map = default_main_map;
 
     if (main_keymap && main_keymap->len > 0)
-        main_map = (global_key_map_t *) main_keymap->data;
+        main_map = (global_keymap_t *) main_keymap->data;
 
     main_x_map = default_main_x_map;
 
     if (main_x_keymap && main_x_keymap->len > 0)
-        main_x_map = (global_key_map_t *) main_x_keymap->data;
+        main_x_map = (global_keymap_t *) main_x_keymap->data;
 
     panel_map = default_panel_keymap;
 
     if (panel_keymap && panel_keymap->len > 0) {
-        panel_map = (global_key_map_t *) panel_keymap->data;
+        panel_map = (global_keymap_t *) panel_keymap->data;
     }
 
     input_map = default_input_keymap;
 
     if (input_keymap && input_keymap->len > 0)
-        input_map = (global_key_map_t *) input_keymap->data;
+        input_map = (global_keymap_t *) input_keymap->data;
 
     /* Check if we were invoked as an editor or file viewer */
     if (!mc_maybe_editor_or_viewer ()) {

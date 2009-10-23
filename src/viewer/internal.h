@@ -9,7 +9,7 @@
 
 #include "../src/widget.h"
 #include "../src/search/search.h"
-#include "../src/keybind.h"		/* global_key_map_t */
+#include "../src/keybind.h"		/* global_keymap_t */
 
 /*** typedefs(not structures) and defined constants ********************/
 
@@ -168,8 +168,8 @@ typedef struct mcview_struct {
     GIConv converter;
 
     /* keymaps */
-    const global_key_map_t *plain_map;
-    const global_key_map_t *hex_map;
+    const global_keymap_t *plain_map;
+    const global_keymap_t *hex_map;
 
     /* handle of search engine */
     mc_search_t *search;

@@ -45,7 +45,7 @@
 
 #include "keybind.h"
 
-static const name_key_map_t command_names[] = {
+static const name_keymap_t command_names[] = {
 #ifdef USE_INTERNAL_EDIT
     { "EditNoCommand",                     CK_Ignore_Key },
     { "EditIgnoreKey",                     CK_Ignore_Key },
@@ -398,7 +398,7 @@ static const name_key_map_t command_names[] = {
 /*** global variables ****************************************************************************/
 
 /* viewer/actions_cmd.c */
-const global_key_map_t default_viewer_keymap[] = {
+const global_keymap_t default_viewer_keymap[] = {
 
     { '?',         CK_ViewSearch,         "" },
     { '/',         CK_ViewSearch,         "" },
@@ -451,7 +451,7 @@ const global_key_map_t default_viewer_keymap[] = {
     { 0, 0, "" }
 };
 
-const global_key_map_t default_viewer_hex_keymap[] = {
+const global_keymap_t default_viewer_hex_keymap[] = {
 
     { '\t',        CK_HexViewToggleNavigationMode, "" },
     { XCTRL ('a'), CK_ViewMoveToBol,               "" },
@@ -474,8 +474,9 @@ const global_key_map_t default_viewer_hex_keymap[] = {
     { 0, 0, "" }
 };
 
+#ifdef USE_INTERNAL_EDIT
 /* ../edit/editkeys.c */
-const global_key_map_t default_editor_keymap[] = {
+const global_keymap_t default_editor_keymap[] = {
     { '\n',                                 CK_Enter,               "" },
     { '\t',                                 CK_Tab,                 "" },
 
@@ -593,9 +594,10 @@ const global_key_map_t default_editor_keymap[] = {
 
     { 0, 0, "" }
 };
+#endif
 
 /* screen.c */
-const global_key_map_t default_panel_keymap[] = {
+const global_keymap_t default_panel_keymap[] = {
 
     { ALT ('o'),              CK_PanelChdirOtherPanel,      "" },
     { ALT ('l'),              CK_PanelChdirToReadlink,      "" },
@@ -635,7 +637,7 @@ const global_key_map_t default_panel_keymap[] = {
 };
 
 /* main.c */
-const global_key_map_t default_main_map[] = {
+const global_keymap_t default_main_map[] = {
     { KEY_F (19),   CK_MenuLastSelectedCmd, "" },
     { KEY_F (20),   CK_QuietQuitCmd,        "" },
     { XCTRL ('@'),  CK_SingleDirsizeCmd,    "" },
@@ -664,7 +666,7 @@ const global_key_map_t default_main_map[] = {
     { 0, 0, "" }
 };
 
-const global_key_map_t default_main_x_map[] = {
+const global_keymap_t default_main_x_map[] = {
     { XCTRL ('c'), CK_QuitCmd,             "" },
     { 'd', CK_CompareDirsCmd,              "" },
 #ifdef USE_VFS
@@ -691,7 +693,7 @@ const global_key_map_t default_main_x_map[] = {
     { 0, 0, "" }
 };
 
-const global_key_map_t default_input_keymap[] = {
+const global_keymap_t default_input_keymap[] = {
     /* Motion */
     { XCTRL ('a'),            CK_InputBol,              "" },
     { KEY_HOME,               CK_InputBol,              "" },
@@ -735,7 +737,7 @@ const global_key_map_t default_input_keymap[] = {
 
 
 int
-lookup_action (char *keyname)
+lookup_action (const char *keyname)
 {
     int i;
 
@@ -749,11 +751,9 @@ lookup_action (char *keyname)
 void
 keymap_add (GArray *keymap, int key, int cmd, const char *caption)
 {
-    global_key_map_t new_bind, *map;
-
-    map = &(g_array_index (keymap, global_key_map_t, 0));
-
     if (key != 0 && cmd != 0) {
+        global_keymap_t new_bind;
+
         new_bind.key = key;
         new_bind.command = cmd;
         g_snprintf (new_bind.caption, sizeof (new_bind.caption), "%s", caption);
@@ -762,7 +762,7 @@ keymap_add (GArray *keymap, int key, int cmd, const char *caption)
 }
 
 void
-keybind_cmd_bind (GArray *keymap, char *keybind, int action)
+keybind_cmd_bind (GArray *keymap, const char *keybind, int action)
 {
     char *caption = NULL;
     int key;

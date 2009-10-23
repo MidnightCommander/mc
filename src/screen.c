@@ -61,7 +61,7 @@
 #include "selcodepage.h"	/* select_charset () */
 #include "charsets.h"		/* get_codepage_id () */
 #include "cmddef.h"		/* CK_ cmd name const */
-#include "keybind.h"		/* global_key_map_t */
+#include "keybind.h"		/* global_keymap_t */
 
 #define ELEMENTS(arr) ( sizeof(arr) / sizeof((arr)[0]) )
 
@@ -107,7 +107,7 @@ int filetype_mode = 1;
 /* The hook list for the select file function */
 Hook *select_file_hook = 0;
 
-const global_key_map_t *panel_map;
+const global_keymap_t *panel_map;
 
 static cb_ret_t panel_callback (Widget *, widget_msg_t msg, int parm);
 static int panel_event (Gpm_Event *event, void *);
