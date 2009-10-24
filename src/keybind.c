@@ -102,7 +102,7 @@ static const name_keymap_t command_names[] = {
     { "EditDebugEnterCommand",             CK_Debug_Enter_Command },
     { "EditDebugUntilCurser",              CK_Debug_Until_Curser },
     { "EditInsertFile",                    CK_Insert_File },
-    { "EditExit",                          CK_Exit },
+    { "EditQuit",                          CK_Quit },
     { "EditToggleInsert",                  CK_Toggle_Insert },
     { "EditHelp",                          CK_Help },
     { "EditDate",                          CK_Date },
@@ -290,7 +290,7 @@ static const name_keymap_t command_names[] = {
     { "CmdQuickChdir",                   CK_QuickChdirCmd },
     { "CmdQuickView",                    CK_QuickViewCmd },
     { "CmdQuietQuit",                    CK_QuietQuitCmd },
-    { "CmdRename",                       CK_RenCmd },
+    { "CmdRename",                       CK_RenameCmd },
     { "CmdReread",                       CK_RereadCmd },
     { "CmdReselectVfs",                  CK_ReselectVfs },
     { "CmdReverseSelection",             CK_ReverseSelectionCmd },
@@ -479,7 +479,7 @@ const global_keymap_t default_editor_keymap[] = {
     { '\n',                                 CK_Enter,               "Enter" },
     { '\t',                                 CK_Tab,                 "Tab" },
 
-    { ESC_CHAR,                             CK_Exit,                "Esc" },
+    { ESC_CHAR,                             CK_Quit,                "Esc" },
     { KEY_BACKSPACE,                        CK_BackSpace,           "BackSpace" },
     { KEY_DC,                               CK_Delete,              "Delete" },
     { KEY_DOWN,                             CK_Down,                "Down" },
@@ -530,7 +530,7 @@ const global_keymap_t default_editor_keymap[] = {
     { KEY_F (6),                            CK_Move,                "F6" },
     { KEY_F (7),                            CK_Find,                "F7" },
     { KEY_F (8),                            CK_Remove,              "F8" },
-    { KEY_F (10),                           CK_Exit,                "F10" },
+    { KEY_F (10),                           CK_Quit,                "F10" },
     /* edit user menu */
     { KEY_F (11),                           CK_User_Menu,           "S-F1" },
     { KEY_F (12),                           CK_Save_As,             "S-F2" },
@@ -583,7 +583,7 @@ const global_keymap_t default_editor_keymap[] = {
 
     /* Ctrl + Shift */
     { KEY_M_SHIFT | KEY_M_CTRL | KEY_PPAGE, CK_Beginning_Of_Text_Highlight, "C-S-PageUp" },
-    { KEY_M_SHIFT | KEY_M_CTRL | KEY_NPAGE, CK_End_Of_Text_Highlight,       "C-S-pageDown" },
+    { KEY_M_SHIFT | KEY_M_CTRL | KEY_NPAGE, CK_End_Of_Text_Highlight,       "C-S-PageDown" },
     { KEY_M_SHIFT | KEY_M_CTRL | KEY_LEFT,  CK_Word_Left_Highlight,         "C-S-Left" },
     { KEY_M_SHIFT | KEY_M_CTRL | KEY_RIGHT, CK_Word_Right_Highlight,        "C-S-Right" },
     { KEY_M_SHIFT | KEY_M_CTRL | KEY_UP,    CK_Scroll_Up_Highlight,         "C-S-Up" },
@@ -641,31 +641,45 @@ const global_keymap_t default_panel_keymap[] = {
 
 /* main.c */
 const global_keymap_t default_main_map[] = {
-    { KEY_F (19),   CK_MenuLastSelectedCmd, "S-F9" },
-    { KEY_F (20),   CK_QuietQuitCmd,        "S-10" },
-    { XCTRL ('@'),  CK_SingleDirsizeCmd,    "C-Space" },
+    { KEY_F (2),    CK_UserMenuCmd,                   "F2" },
+    { KEY_F (3),    CK_ViewCmd,                       "F3" },
+    { KEY_F (4),    CK_EditCmd,                       "F4" },
+    { KEY_F (5),    CK_CopyCmd,                       "F5" },
+    { KEY_F (6),    CK_RenameCmd,                     "F6" },
+    { KEY_F (7),    CK_MkdirCmd,                      "F7" },
+    { KEY_F (8),    CK_DeleteCmd,                     "F6" },
+    { KEY_F (10),   CK_QuitCmd,                       "F10" },
+    { KEY_F (13),   CK_ViewFileCmd,                   "S-F3" },
+    { KEY_F (19),   CK_MenuLastSelectedCmd,           "S-F9" },
+    { KEY_F (20),   CK_QuietQuitCmd,                  "S-10" },
+    { ALT ('h'),    CK_HistoryCmd,                    "M-h" },
+    { XCTRL ('@'),  CK_SingleDirsizeCmd,              "C-Space" },
     /* Copy useful information to the command line */
-    { ALT ('a'),    CK_CopyCurrentPathname, "M-a" },
-    { ALT ('A'),    CK_CopyOtherPathname,   "M-A" },
-    { ALT ('c'),    CK_QuickCdCmd,          "M-c" },
+    { ALT ('a'),    CK_CopyCurrentPathname,           "M-a" },
+    { ALT ('A'),    CK_CopyOtherPathname,             "M-A" },
+    { ALT ('c'),    CK_QuickCdCmd,                    "M-c" },
     /* To access the directory hotlist */
-    { XCTRL ('\\'), CK_QuickChdirCmd,       "C-\\" },
+    { XCTRL ('\\'), CK_QuickChdirCmd,                 "C-\\" },
     /* Suspend */
-    { XCTRL ('z'),  CK_SuspendCmd,          "C-z" },
+    { XCTRL ('z'),  CK_SuspendCmd,                    "C-z" },
     /* The filtered view command */
-    { ALT ('!'),    CK_FilteredViewCmd,     "M-!" },
+    { ALT ('!'),    CK_FilteredViewCmd,               "M-!" },
     /* Find file */
-    { ALT ('?'),    CK_FindCmd,             "M-?" },
+    { ALT ('?'),    CK_FindCmd,                       "M-?" },
     /* Panel refresh */
-    { XCTRL ('r'),  CK_RereadCmd,           "C-r" },
+    { XCTRL ('r'),  CK_RereadCmd,                     "C-r" },
     /* Toggle listing between long, user defined and full formats */
-    { ALT ('t'),    CK_ToggleListingCmd,    "M-t" },
+    { ALT ('t'),    CK_ToggleListingCmd,              "M-t" },
     /* Swap panels */
-    { XCTRL ('u'),  CK_SwapCmd,             "C-u" },
+    { XCTRL ('u'),  CK_SwapCmd,                       "C-u" },
     /* View output */
-    { XCTRL ('o'),  CK_ShowCommandLine,     "C-o" },
-    { ALT ('.'),    CK_ToggleShowHidden,    "M-." },
-    { XCTRL ('x'),  CK_StartExtMap1,        "C-x" },
+    { XCTRL ('o'),  CK_ShowCommandLine,               "C-o" },
+    { ALT ('.'),    CK_ToggleShowHidden,              "M-." },
+    { XCTRL ('x'),  CK_StartExtMap1,                  "C-x" },
+    /* Select/unselect group */
+    { ALT ('*'),              CK_SelectCmd,           "M-*" },
+    { KEY_KP_ADD,             CK_UnselectCmd,         "Gray+" },
+    { KEY_KP_SUBTRACT,        CK_ReverseSelectionCmd, "Gray-" },
 
     { 0, 0, "" }
 };

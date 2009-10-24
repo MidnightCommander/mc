@@ -720,7 +720,7 @@ create_file_menu (void)
     entries = g_list_append (entries, menu_entry_create (_("Edit s&ymlink"),      CK_EditSymlinkCmd));
     entries = g_list_append (entries, menu_entry_create (_("Ch&own"),             CK_ChownCmd));
     entries = g_list_append (entries, menu_entry_create (_("&Advanced chown"),    CK_ChownAdvancedCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Rename/Move"),       CK_RenCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Rename/Move"),       CK_RenameCmd));
     entries = g_list_append (entries, menu_entry_create (_("&Mkdir"),             CK_MkdirCmd));
     entries = g_list_append (entries, menu_entry_create (_("&Delete"),            CK_DeleteCmd));
     entries = g_list_append (entries, menu_entry_create (_("&Quick cd"),          CK_QuickCdCmd));
@@ -1284,8 +1284,8 @@ midnight_execute_cmd (int command)
     case CK_QuitCmd:
         quit_cmd ();
         break;
-    case CK_RenCmd:
-        ren_cmd ();
+    case CK_RenameCmd:
+        rename_cmd ();
         break;
     case CK_RereadCmd:
         reread_cmd ();

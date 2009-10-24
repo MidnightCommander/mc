@@ -3076,7 +3076,7 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
     case CK_Find_Definition:
 	edit_get_match_keyword_cmd (edit);
 	break;
-    case CK_Exit:
+    case CK_Quit:
 	dlg_stop (edit->widget.parent);
 	break;
     case CK_New:

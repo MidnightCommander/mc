@@ -348,7 +348,7 @@ copy_cmd (void)
 }
 
 /* Invoked by F6.  Move/rename, default to the other panel, ignore marks.  */
-void ren_cmd (void)
+void rename_cmd (void)
 {
     save_cwds_stat ();
     if (panel_operate (current_panel, OP_MOVE, 0)){
@@ -368,7 +368,7 @@ void copy_cmd_local (void)
 }
 
 /* Invoked by F16.  Move/rename, default to the same panel.  */
-void ren_cmd_local (void)
+void rename_cmd_local (void)
 {
     save_cwds_stat ();
     if (panel_operate (current_panel, OP_MOVE, 1)){

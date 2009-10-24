@@ -2635,12 +2635,12 @@ typedef void (*panel_key_callback) (WPanel *);
 static void cmd_do_enter(WPanel *wp) { (void) do_enter(wp); }
 static void cmd_view_simple(WPanel *wp) { (void) wp; view_simple_cmd(); }
 static void cmd_edit_new(WPanel *wp) { (void) wp; edit_cmd_new(); }
-static void cmd_copy_local(WPanel *wp) { (void) wp;copy_cmd_local(); }
-static void cmd_rename_local(WPanel *wp) { (void) wp;ren_cmd_local(); }
-static void cmd_delete_local(WPanel *wp) { (void) wp;delete_cmd_local(); }
-static void cmd_select(WPanel *wp) { (void) wp;select_cmd(); }
-static void cmd_unselect(WPanel *wp) { (void) wp;unselect_cmd(); }
-static void cmd_reverse_selection(WPanel *wp) { (void) wp;reverse_selection_cmd(); }
+static void cmd_copy_local(WPanel *wp) { (void) wp; copy_cmd_local(); }
+static void cmd_rename_local(WPanel *wp) { (void) wp; rename_cmd_local(); }
+static void cmd_delete_local(WPanel *wp) { (void) wp; delete_cmd_local(); }
+static void cmd_select(WPanel *wp) { (void) wp; select_cmd(); }
+static void cmd_unselect(WPanel *wp) { (void) wp; unselect_cmd(); }
+static void cmd_reverse_selection(WPanel *wp) { (void) wp; reverse_selection_cmd(); }
 
 static cb_ret_t
 panel_execute_cmd (WPanel *panel, int command)

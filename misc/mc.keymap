@@ -99,7 +99,7 @@ EditDebugContinue =
 EditDebugEnterCommand =
 EditDebugUntilCurser =
 EditInsertFile = f15
-EditExit = f10
+EditQuit = f10
 EditToggleInsert = ins
 EditHelp = f1
 EditDate =
@@ -152,15 +152,6 @@ EditLoadNextFile = alt-equal
 
 SelectCodepage = alt-e
 
-[viewer:hex]
-HexViewToggleNavigationMode = tab
-ViewMoveToBol = ctrl-a; home
-ViewMoveToEol = ctrl-e; end
-ViewMoveLeft = b; left
-ViewMoveRight = f; right
-ViewMoveUp = k; y; up
-ViewMoveDown = j; delete; down
-
 [viewer]
 ViewSearch = question; slash; f7
 ViewContinueSearch = ctrl-r; ctrl-s; f17
@@ -183,23 +174,45 @@ SelectCodepage = alt-e
 ShowCommandLine = ctrl-o
 ViewToggleRuler = alt-r
 
+[viewer:hex]
+HexViewToggleNavigationMode = tab
+ViewMoveToBol = ctrl-a; home
+ViewMoveToEol = ctrl-e; end
+ViewMoveLeft = b; left
+ViewMoveRight = f; right
+ViewMoveUp = k; y; up
+ViewMoveDown = j; delete; down
+
 [main]
-CmdCopyCurrentPathname = alt-a
-CmdCopyOtherPathname = alt-A
-CmdFilteredView = alt-exclamation
-CmdFind = alt-question
+CmdUserMenu = f2
+CmdView = f3
+CmdViewFile = f13
+CmdEdit = f4
+CmdCopy = f5
+CmdRename = f6
+CmdMkdir = f7
+CmdDelete = f8
+CmdQuit = f10
 CmdMenuLastSelected = f19
+CmdQuietQuit = f20
+CmdFind = alt-question
 CmdQuickCd = alt-c
 CmdQuickChdir = ctrl-backslash
-CmdQuietQuit = f20
 CmdReread = ctrl-r
 CmdSingleDirsize = ctrl-space
 CmdSuspend = ctrl-z
 CmdSwapPanel = ctrl-u
+CmdHistory = alt-h
 CmdToggleListing = alt-t
 CmdToggleShowHidden = alt-dot
-ExtMap1 = ctrl-x
 ShowCommandLine = ctrl-o
+CmdCopyCurrentPathname = alt-a
+CmdCopyOtherPathname = alt-shift-a
+CmdFilteredView = alt-exclamation
+CmdSelect = kpplus
+CmdUnselect = kpminus
+CmdReverseSelection = alt-kpasterisk
+ExtMap1 = ctrl-x
 
 [main:xmap]
 CmdChmod = c
@@ -208,8 +221,11 @@ CmdCompareDirs = d
 CmdEditSymlink = ctrl-s
 CmdLink = l
 CmdSymlink = s
-CmdMenuInfoCmd = i
+CmdMenuInfo = i
 CmdMenuQuickView = q
+CmdExternalPanelize = exclamation
+CmdReselectVfs = a
+CmdJobs = j
 
 [panel]
 PanelStartSearch = ctrl-s; alt-s

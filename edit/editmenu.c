@@ -78,7 +78,7 @@ create_file_menu (void)
     entries = g_list_append (entries, menu_separator_create ());
     entries = g_list_append (entries, menu_entry_create (_("A&bout...            "), CK_About));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&Quit             F10"), CK_Exit));
+    entries = g_list_append (entries, menu_entry_create (_("&Quit             F10"), CK_Quit));
 
     return entries;
 }
@@ -101,7 +101,7 @@ create_file_menu_emacs (void)
     entries = g_list_append (entries, menu_separator_create ());
     entries = g_list_append (entries, menu_entry_create (_("A&bout...            "), CK_About));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&Quit             F10"), CK_Exit));
+    entries = g_list_append (entries, menu_entry_create (_("&Quit             F10"), CK_Quit));
 
     return entries;
 }

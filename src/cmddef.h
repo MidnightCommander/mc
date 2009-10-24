@@ -82,7 +82,7 @@
 
 /* misc */
 #define CK_Insert_File		401
-#define CK_Exit			402
+#define CK_Quit			402
 #define CK_Toggle_Insert        403
 #define CK_Help			404
 #define CK_Date			405
@@ -296,7 +296,7 @@
 #define CK_QuickViewCmd                 7048
 #define CK_QuietQuitCmd                 7049
 #define CK_QuitCmd                      7050
-#define CK_RenCmd                       7051
+#define CK_RenameCmd                    7051
 #define CK_RereadCmd                    7052
 #define CK_ReselectVfs                  7053
 #define CK_ReverseSelectionCmd          7054

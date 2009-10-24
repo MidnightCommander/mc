@@ -105,7 +105,7 @@ key_code_name_t key_name_conv_tab[] = {
     { KEY_F (7),	"f7",		N_("Function key 7"),	"F7" },
     { KEY_F (8),	"f8",		N_("Function key 8"),	"F8" },
     { KEY_F (9),	"f9",		N_("Function key 9"),	"F9" },
-    { KEY_F (10),	"f10",		N_("Function key 10"),	"F19" },
+    { KEY_F (10),	"f10",		N_("Function key 10"),	"F10" },
     { KEY_F (11),	"f11",		N_("Function key 11"),	"F11" },
     { KEY_F (12),	"f12",		N_("Function key 12"),	"F12" },
     { KEY_F (13),	"f13",		N_("Function key 13"),	"F13" },
