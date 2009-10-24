@@ -142,17 +142,7 @@ tty_color_try_alloc_pair_lib (tty_color_pair_t * mc_color_pair)
 void
 tty_setcolor (int color)
 {
-    if (!SLtt_Use_Ansi_Colors)
-        SLsmg_set_color (color);
-    else if ((color & A_BOLD) != 0) {
-        if (color == A_BOLD)
-            SLsmg_set_color (A_BOLD);
-        else
-            SLsmg_set_color ((color & (~A_BOLD)) + 8);
-    } else if (color == A_REVERSE)
-        SLsmg_set_color (A_REVERSE);
-    else
-        SLsmg_set_color (color);
+    SLsmg_set_color (color);
 }
 
 /* Set colorpair by index, don't interpret S-Lang "emulated attributes" */

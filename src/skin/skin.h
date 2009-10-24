@@ -63,8 +63,10 @@
 #define EDITOR_WHITESPACE_COLOR mc_skin_color__cache[28]
 /* color of left 8 char status per line */
 #define LINE_STATE_COLOR        mc_skin_color__cache[29]
+#define BOOK_MARK_COLOR         mc_skin_color__cache[30]
+#define BOOK_MARK_FOUND_COLOR   mc_skin_color__cache[31]
 
-#define MC_SKIN_COLOR_CACHE_COUNT 30
+#define MC_SKIN_COLOR_CACHE_COUNT 32
 
 
 /*** enums ***************************************************************************************/
