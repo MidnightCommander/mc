@@ -88,8 +88,8 @@ register_task_running (FileOpContext *ctx, pid_t pid, int fd, int to_child,
     add_select_channel (fd, background_attention, ctx);
 }
 
-void
-unregister_task_running (pid_t pid, int fd)
+int
+destroy_task_and_return_fd (pid_t pid)
 {
     TaskList *p = task_list;
     TaskList *prev = 0;
@@ -102,12 +102,29 @@ unregister_task_running (pid_t pid, int fd)
 		task_list = p->next;
 	    g_free (p->info);
 	    g_free (p);
-	    break;
+	    return p->fd;
 	}
 	prev = p;
 	p = p->next;
     }
+
+    /* pid not found */
+    return -1;
+}
+
+void
+unregister_task_running (pid_t pid, int fd)
+{
+    destroy_task_and_return_fd(pid);
     delete_select_channel (fd);
+}
+
+void
+unregister_task_with_pid (pid_t pid)
+{
+    int fd = destroy_task_and_return_fd(pid);
+    if (fd != -1)
+	delete_select_channel (fd);
 }
 
 /*
@@ -216,16 +233,19 @@ background_attention (int fd, void *closure)
     int have_ctx;
     union 
     {
+      int (*have_ctx0)(int);
       int (*have_ctx1)(int, char *);
       int (*have_ctx2)(int, char *, char *);
       int (*have_ctx3)(int, char *, char *, char *);
       int (*have_ctx4)(int, char *, char *, char *, char *);
 
+      int (*non_have_ctx0)(FileOpContext *, int);
       int (*non_have_ctx1)(FileOpContext *, int, char *);
       int (*non_have_ctx2)(FileOpContext *, int, char *, char *);
       int (*non_have_ctx3)(FileOpContext *, int, char *, char *, char *);
       int (*non_have_ctx4)(FileOpContext *, int, char *, char *, char *, char *);
 
+      char * (*ret_str0)();
       char * (*ret_str1)(char *);
       char * (*ret_str2)(char *, char *);
       char * (*ret_str3)(char *, char *, char *);
@@ -238,7 +258,7 @@ background_attention (int fd, void *closure)
     char *data [MAXCALLARGS];
     ssize_t bytes;
 	struct TaskList *p;
-	int to_child_fd;
+	int to_child_fd = -1;
     enum ReturnType type;
 
     ctx = closure;
@@ -285,10 +305,25 @@ background_attention (int fd, void *closure)
 	data [i][size] = 0;	/* NULL terminate the blocks (they could be strings) */
     }
 
+	/* Find child task info by descriptor */
+	/* Find before call, because process can destroy self after */
+	for (p = task_list; p; p = p->next) {
+		if (p->fd == fd)
+			break;
+	}
+
+	if (p) to_child_fd = p->to_child_fd;
+
+    if (to_child_fd == -1)
+	message (D_ERROR, _(" Background process error "), _(" Unknown error in child "));
+
     /* Handle the call */
     if (type == Return_Integer){
 	if (!have_ctx)
 	    switch (argc){
+	    case 0:
+		result = routine.have_ctx0 (Background);
+		break;
 	    case 1:
 		result = routine.have_ctx1 (Background, data [0]);
 		break;
@@ -304,6 +339,9 @@ background_attention (int fd, void *closure)
 	    }
 	else
 	    switch (argc){
+	    case 0:
+		result = routine.non_have_ctx0 (ctx, Background);
+		break;
 	    case 1:
 		result = routine.non_have_ctx1 (ctx, Background, data [0]);
 		break;
@@ -318,17 +356,9 @@ background_attention (int fd, void *closure)
 		break;
 	    }
 
-	/* Find child task info by descriptor */
-	for (p = task_list; p; p = p->next) {
-		if (p->fd == fd)
-			break;
-	}
-
-	to_child_fd = p->to_child_fd;
-
 	/* Send the result code and the value for shared variables */
 	write (to_child_fd, &result, sizeof (int));
-	if (have_ctx)
+	if (have_ctx && to_child_fd != -1)
 	    write (to_child_fd, ctx, sizeof (FileOpContext));
     } else if (type == Return_String) {
 	int len;
@@ -338,6 +368,9 @@ background_attention (int fd, void *closure)
 	 * parameter.  Currently, this is not used here
 	 */
 	switch (argc){
+	case 0:
+	    resstr = routine.ret_str0 ();
+	    break;
 	case 1:
 	    resstr = routine.ret_str1 (data [0]);
 	    break;

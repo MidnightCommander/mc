@@ -883,7 +883,7 @@ task_cb (int action)
 	sig = SIGKILL;
     }
     
-    if (sig == SIGINT)
+    if (sig == SIGKILL)
 	unregister_task_running (tl->pid, tl->fd);
 
     kill (tl->pid, sig);
