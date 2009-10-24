@@ -21,7 +21,7 @@ void done_key (void);
 typedef void (*move_fn) (void *data, int param);
 cb_ret_t check_movement_keys (int key, int page_size, void *data,
                               move_fn backfn, move_fn forfn, move_fn topfn, move_fn bottomfn);
-int lookup_key (char *keyname, char **label);
+int lookup_key (const char *keyname, char **label);
 
 typedef const struct {
     int code;

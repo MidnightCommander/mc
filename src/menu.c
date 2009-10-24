@@ -51,6 +51,7 @@ menu_entry_create (const char *name, int command)
     entry->first_letter = ' ';
     entry->text = parse_hotkey (name);
     entry->command = command;
+    entry->shortcut = NULL;
 
     return entry;
 }
@@ -60,24 +61,41 @@ menu_entry_free (menu_entry_t *entry)
 {
     if (entry != NULL) {
 	release_hotkey (entry->text);
+	g_free (entry->shortcut);
 	g_free (entry);
     }
 }
 
 static void
-menu_arrange (Menu *menu)
+menu_arrange (Menu *menu, dlg_shortcut_str get_shortcut)
 {
     if (menu != NULL) {
 	GList *i;
+	size_t max_shortcut_len = 0;
+
+	menu->max_entry_len = 1;
+	menu->max_hotkey_len = 1;
 
 	for (i = menu->entries; i != NULL; i = g_list_next (i)) {
 	    menu_entry_t *entry = i->data;
 
 	    if (entry != NULL) {
-		const size_t len = (size_t) hotkey_width (entry->text);
-		menu->max_entry_len = max (menu->max_entry_len, len);
+		size_t len;
+
+		len = (size_t) hotkey_width (entry->text);
+		menu->max_hotkey_len = max (menu->max_hotkey_len, len);
+
+		if (get_shortcut != NULL)
+		    entry->shortcut = get_shortcut (entry->command);
+
+		if (entry->shortcut != NULL) {
+		    len = (size_t) str_term_width1 (entry->shortcut);
+		    max_shortcut_len = max (max_shortcut_len, len);
+		}
 	    }
 	}
+
+	menu->max_entry_len = menu->max_hotkey_len + max_shortcut_len;
     }
 }
 
@@ -91,9 +109,9 @@ create_menu (const char *name, GList *entries, const char *help_node)
     menu->text = parse_hotkey (name);
     menu->entries = entries;
     menu->max_entry_len = 1;
+    menu->max_hotkey_len = 0;
     menu->selected = 0;
     menu->help_node = g_strdup (help_node);
-    menu_arrange (menu);
 
     return menu;
 }
@@ -116,8 +134,8 @@ menubar_paint_idx (WMenuBar *menubar, unsigned int idx, int color)
     const int y = 2 + idx;
     int x = menu->start_x;
 
-    if (x + menu->max_entry_len + 3 > menubar->widget.cols)
-	x = menubar->widget.cols - menu->max_entry_len - 3;
+    if (x + menu->max_entry_len + 4 > menubar->widget.cols)
+	x = menubar->widget.cols - menu->max_entry_len - 4;
 
     if (entry == NULL) {
 	/* menu separator */
@@ -127,16 +145,16 @@ menubar_paint_idx (WMenuBar *menubar, unsigned int idx, int color)
 	tty_print_alt_char (ACS_LTEE);
 
 	tty_draw_hline (menubar->widget.y + y, menubar->widget.x + x,
-			    ACS_HLINE, menu->max_entry_len + 2);
+			    ACS_HLINE, menu->max_entry_len + 3);
 
-	widget_move (&menubar->widget, y, x + menu->max_entry_len + 2);
+	widget_move (&menubar->widget, y, x + menu->max_entry_len + 3);
 	tty_print_alt_char (ACS_RTEE);
     } else {
 	/* menu text */
 	tty_setcolor (color);
 	widget_move (&menubar->widget, y, x);
 	tty_print_char ((unsigned char) entry->first_letter);
-	tty_draw_hline (-1, -1, ' ', menu->max_entry_len + 1); /* clear line */
+	tty_draw_hline (-1, -1, ' ', menu->max_entry_len + 2); /* clear line */
 	tty_print_string (entry->text.start);
 
 	if (entry->text.hotkey != NULL) {
@@ -148,6 +166,11 @@ menubar_paint_idx (WMenuBar *menubar, unsigned int idx, int color)
 
 	if (entry->text.end != NULL)
 	    tty_print_string (entry->text.end);
+
+	if (entry->shortcut != NULL) {
+	    widget_move (&menubar->widget, y, x + menu->max_hotkey_len + 3);
+	    tty_print_string (entry->shortcut);
+	}
 
 	/* move cursor to the start of entry text */
 	widget_move (&menubar->widget, y, x + 1);
@@ -162,13 +185,13 @@ menubar_draw_drop (WMenuBar *menubar)
     int column = menu->start_x - 1;
     unsigned int i;
 
-    if (column + menu->max_entry_len + 4 > menubar->widget.cols)
-	column = menubar->widget.cols - menu->max_entry_len - 4;
+    if (column + menu->max_entry_len + 5 > menubar->widget.cols)
+	column = menubar->widget.cols - menu->max_entry_len - 5;
 
     tty_setcolor (MENU_ENTRY_COLOR);
     draw_box (menubar->widget.parent,
 		 menubar->widget.y + 1, menubar->widget.x + column,
-		 count + 2, menu->max_entry_len + 4);
+		 count + 2, menu->max_entry_len + 5);
 
     /* draw items except selected */
     for (i = 0; i < count; i++)
@@ -207,6 +230,7 @@ menubar_draw (WMenuBar *menubar)
 	menubar_set_color (menubar, is_selected, FALSE);
 	widget_move (&menubar->widget, 0, menu->start_x);
 
+	tty_print_char (' ');
 	tty_print_string (menu->text.start);
 
 	if (menu->text.hotkey != NULL) {
@@ -217,6 +241,8 @@ menubar_draw (WMenuBar *menubar)
 
 	if (menu->text.end != NULL)
 	    tty_print_string (menu->text.end);
+
+	tty_print_char (' ');
     }
 
     if (menubar->is_dropped)
@@ -688,8 +714,10 @@ menubar_set_menu (WMenuBar *menubar, GList *menu)
 void
 menubar_add_menu (WMenuBar *menubar, Menu *menu)
 {
-    if (menu != NULL)
+    if (menu != NULL) {
+	menu_arrange (menu, menubar->widget.parent->get_shortcut);
 	menubar->menu = g_list_append (menubar->menu, menu);
+    }
 
     menubar_arrange (menubar);
 }
@@ -713,7 +741,7 @@ menubar_arrange (WMenuBar* menubar)
 
     for (i = menubar->menu; i != NULL; i = g_list_next (i)) {
 	Menu *menu = i->data;
-	int len = hotkey_width (menu->text);
+	int len = hotkey_width (menu->text) + 2;
 
 	menu->start_x = start_x;
 	start_x += len + gap;
@@ -725,7 +753,7 @@ menubar_arrange (WMenuBar* menubar)
     for (i = menubar->menu; i != NULL; i = g_list_nwxt (i)) {
 	Menu *menu = i->data;
 	/* preserve length here, to be used below */
-	menu->start_x = hotkey_width (menu->text);
+	menu->start_x = hotkey_width (menu->text) + 2;
 	gap -= menu->start_x;
     }
 

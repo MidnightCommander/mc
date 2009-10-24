@@ -142,12 +142,14 @@ typedef enum {
 } LineBreaks;
 #define LB_NAMES (LB_MAC + 1)
 
+struct WMenuBar;
+
 extern const char VERTICAL_MAGIC[5];
 /* if enable_show_tabs_tws ==1 then use visible_tab visible_tws */
 extern int enable_show_tabs_tws;
 int edit_drop_hotkey_menu (WEdit *e, int key);
 void edit_menu_cmd (WEdit *e);
-struct WMenuBar *edit_create_menu (void);
+void edit_init_menu (struct WMenuBar *menubar);
 cb_ret_t edit_menu_execute (int command);
 void edit_reload_menu (void);
 void menu_save_mode_cmd (void);

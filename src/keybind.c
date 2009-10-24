@@ -399,7 +399,6 @@ static const name_keymap_t command_names[] = {
 
 /* viewer/actions_cmd.c */
 const global_keymap_t default_viewer_keymap[] = {
-
     { '?',         CK_ViewSearch,         "?" },
     { '/',         CK_ViewSearch,         "/" },
     { XCTRL ('r'), CK_ViewContinueSearch, "C-r" },
@@ -448,11 +447,11 @@ const global_keymap_t default_viewer_keymap[] = {
 
     { ALT ('e'),   CK_SelectCodepage,     "M-e" },
     { XCTRL ('o'), CK_ShowCommandLine,    "C-o" },
+
     { 0, 0, "" }
 };
 
 const global_keymap_t default_viewer_hex_keymap[] = {
-
     { '\t',        CK_HexViewToggleNavigationMode, "Tab" },
     { XCTRL ('a'), CK_ViewMoveToBol,               "C-a" },
     { XCTRL ('e'), CK_ViewMoveToEol,               "C-e" },
@@ -602,7 +601,6 @@ const global_keymap_t default_editor_x_keymap[] = {
 
 /* screen.c */
 const global_keymap_t default_panel_keymap[] = {
-
     { ALT ('o'),              CK_PanelChdirOtherPanel,      "M-o" },
     { ALT ('l'),              CK_PanelChdirToReadlink,      "M-l" },
     { KEY_F (15),             CK_PanelCmdCopyLocal,         "S-F5" },
@@ -637,6 +635,7 @@ const global_keymap_t default_panel_keymap[] = {
     { XCTRL ('s'),            CK_PanelStartSearch,          "C-s" },
     { ALT ('s'),              CK_PanelStartSearch,          "M-s" },
     { ALT ('i'),              CK_PanelSyncOtherPanel,       "M-i" },
+
     { 0, 0 , "" }
 };
 
@@ -667,33 +666,36 @@ const global_keymap_t default_main_map[] = {
     { XCTRL ('o'),  CK_ShowCommandLine,     "C-o" },
     { ALT ('.'),    CK_ToggleShowHidden,    "M-." },
     { XCTRL ('x'),  CK_StartExtMap1,        "C-x" },
+
     { 0, 0, "" }
 };
 
 const global_keymap_t default_main_x_map[] = {
-    { XCTRL ('c'), CK_QuitCmd,             "C-x C-c" },
-    { 'd',         CK_CompareDirsCmd,      "C-x d" },
+    { XCTRL ('c'), CK_QuitCmd,             "C-c" },
+    { 'd',         CK_CompareDirsCmd,      "d" },
 #ifdef USE_VFS
-    { 'a',         CK_ReselectVfs,         "C-x a"},
+    { 'a',         CK_ReselectVfs,         "a"},
 #endif				/* USE_VFS */
-    { 'p',         CK_CopyCurrentPathname, "C-x p" },
-    { XCTRL ('p'), CK_CopyOtherPathname,   "C-x C-p" },
-    { 't',         CK_CopyCurrentTagged,   "C-x t" },
-    { XCTRL ('t'), CK_CopyOtherTarget,     "C-x C-t" },
-    { 'c',         CK_ChmodCmd,            "C-x c" },
-    { 'o',         CK_ChownCmd,            "C-x o" },
-    { 'r',         CK_CopyCurrentReadlink, "C-x r" },
-    { XCTRL ('r'), CK_CopyOtherReadlink,   "C-x C-r" },
-    { 'l',         CK_LinkCmd,             "C-x l" },
-    { 's',         CK_SymlinkCmd,          "C-x s" },
-    { XCTRL ('s'), CK_EditSymlinkCmd,      "C-x C-s" },
-    { 'i',         CK_InfoCmd,             "C-x i" },
-    { 'q',         CK_QuickViewCmd,        "C-x q" },
-    { 'h',         CK_AddHotlist,          "C-x h" },
-    { '!',         CK_ExternalPanelize,    "C-x !" },
+    { 'p',         CK_CopyCurrentPathname, "p" },
+    { XCTRL ('p'), CK_CopyOtherPathname,   "C-p" },
+    { 't',         CK_CopyCurrentTagged,   "t" },
+    { XCTRL ('t'), CK_CopyOtherTarget,     "C-t" },
+    { 'c',         CK_ChmodCmd,            "c" },
+    { 'o',         CK_ChownCmd,            "o" },
+    { 'r',         CK_CopyCurrentReadlink, "r" },
+    { XCTRL ('r'), CK_CopyOtherReadlink,   "C-r" },
+    { 'l',         CK_LinkCmd,             "l" },
+    { 's',         CK_SymlinkCmd,          "s" },
+    { XCTRL ('s'), CK_EditSymlinkCmd,      "C-s" },
+    { 'i',         CK_MenuInfoCmd,         "i" },
+    { 'i',         CK_InfoCmd,             "i" },
+    { 'q',         CK_QuickViewCmd,        "q" },
+    { 'h',         CK_AddHotlist,          "h" },
+    { '!',         CK_ExternalPanelize,    "!" },
 #ifdef WITH_BACKGROUND
-    { 'j',         CK_JobsCmd,             "C-x j" },
+    { 'j',         CK_JobsCmd,             "j" },
 #endif				/* WITH_BACKGROUND */
+
     { 0, 0, "" }
 };
 
@@ -736,6 +738,7 @@ const global_keymap_t default_input_keymap[] = {
 
     /* Completion */
     { ALT ('\t'),             CK_InputComplete,         "M-tab" },
+
     { 0, 0, "" }
 };
 
@@ -774,4 +777,16 @@ keybind_cmd_bind (GArray *keymap, const char *keybind, int action)
     key = lookup_key (keybind, &caption);
     keymap_add (keymap, key, action, caption);
     g_free (caption);
+}
+
+const char *
+lookup_keymap_shortcut (const global_keymap_t *keymap, int action)
+{
+    unsigned int i;
+
+    for (i = 0; keymap[i].key != 0; i++)
+	if (keymap[i].command == action)
+	    return (keymap[i].caption[0] != '\0') ? keymap[i].	caption : NULL;
+
+    return NULL;
 }

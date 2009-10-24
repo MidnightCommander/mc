@@ -33,6 +33,7 @@ typedef struct menu_entry_t {
     unsigned char first_letter;
     struct hotkey_t text;
     int command;
+    char *shortcut;
 } menu_entry_t;
 
 menu_entry_t *menu_entry_create (const char *name, int command);
@@ -43,7 +44,8 @@ typedef struct Menu {
     int start_x;		/* position relative to menubar start */
     struct hotkey_t text;
     GList *entries;
-    size_t max_entry_len;
+    size_t max_entry_len;	/* cached max length of entry texts (text + shortcut) */
+    size_t max_hotkey_len;	/* cached max length of shortcuts */
     unsigned int selected;	/* pointer to current menu entry */
     char *help_node;
 } Menu;

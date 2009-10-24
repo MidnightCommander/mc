@@ -204,14 +204,14 @@ edit_file (const char *_file, int line)
     widget_want_cursor (wedit->widget, 1);
 
     edit_bar = buttonbar_new (1);
-
-    edit_menubar = edit_create_menu ();
-
     add_widget (edit_dlg, edit_bar);
+
     add_widget (edit_dlg, wedit);
-    add_widget (edit_dlg, edit_menubar);
 
     edit_dlg->menu_executor = edit_menu_execute;
+    edit_menubar = menubar_new (0, 0, COLS, NULL);
+    add_widget (edit_dlg, edit_menubar);
+    edit_init_menu (edit_menubar);
 
     run_dlg (edit_dlg);
 

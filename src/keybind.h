@@ -26,6 +26,7 @@ typedef struct global_keymap_t {
 
 int lookup_action (const char *keyname);
 void keybind_cmd_bind (GArray *keymap, const char *keybind, int action);
+const char *lookup_keymap_shortcut (const global_keymap_t *keymap, int action);
 
 /* viewer/actions_cmd.c */
 extern const global_keymap_t default_viewer_keymap[];
@@ -46,7 +47,5 @@ extern const global_keymap_t default_input_keymap[];
 /* main.c */
 extern const global_keymap_t default_main_map[];
 extern const global_keymap_t default_main_x_map[];
-
-extern const global_keymap_t default_input_keymap[];
 
 #endif					/* MC_KEYBIND_H */

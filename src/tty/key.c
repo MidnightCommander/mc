@@ -1229,7 +1229,7 @@ check_movement_keys (int key, int page_size, void *data, move_fn backfn,
 }
 
 static int
-lookup_keyname (char *keyname, int *index)
+lookup_keyname (const char *keyname, int *index)
 {
     if (keyname[0] != '\0') {
 	int i;
@@ -1252,7 +1252,7 @@ lookup_keyname (char *keyname, int *index)
 
 /* Return the code associated with the symbolic name keyname */
 int
-lookup_key (char *keyname, char **label)
+lookup_key (const char *keyname, char **label)
 {
     char **keys, **p;
     int k = -1;
@@ -1266,9 +1266,9 @@ lookup_key (char *keyname, char **label)
     if (keyname == NULL)
 	return 0;
 
-    g_strstrip (keyname);
-
+    keyname = g_strstrip (g_strdup (keyname));
     p = keys = g_strsplit_set (keyname, "-+ ", -1);
+    g_free ((char *) keyname);
 
     while ((p != NULL) && (*p != NULL)) {
 	if ((*p)[0] != '\0') {

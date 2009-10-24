@@ -294,7 +294,7 @@ edit_init_menu_emacs (struct WMenuBar *menubar)
     menubar_add_menu (menubar, create_menu (_(" &Options "),   create_options_menu (),        "[Internal File Editor]"));
 }
 
-static void
+void
 edit_init_menu (struct WMenuBar *menubar)
 {
     switch (edit_key_emulation) {
@@ -306,16 +306,6 @@ edit_init_menu (struct WMenuBar *menubar)
 	edit_init_menu_emacs (menubar);
 	break;
     }
-}
-
-struct WMenuBar *
-edit_create_menu (void)
-{
-    struct WMenuBar *menubar;
-
-    menubar = menubar_new (0, 0, COLS, NULL);
-    edit_init_menu (menubar);
-    return menubar;
 }
 
 void

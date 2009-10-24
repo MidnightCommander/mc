@@ -249,7 +249,7 @@ create_dlg (int y1, int x1, int lines, int cols, const int *color_set,
 	memmove (new_d->color, color_set, sizeof (int) * DLG_COLOR_NUM);
     }
     new_d->help_ctx = help_ctx;
-    new_d->callback = callback ? callback : default_dlg_callback;
+    new_d->callback = (callback != NULL) ? callback : default_dlg_callback;
     new_d->x = x1;
     new_d->y = y1;
     new_d->flags = flags;
@@ -260,12 +260,14 @@ create_dlg (int y1, int x1, int lines, int cols, const int *color_set,
     /* Strip existing spaces, add one space before and after the title */
     if (title) {
 	char *t;
+
 	t = g_strstrip (g_strdup (title));
-	new_d->title = g_strconcat (" ", t, " ", (char *) NULL);
+	if (*t != '\0')
+	    new_d->title = g_strdup_printf (" %s ", t);
 	g_free (t);
     }
 
-    return (new_d);
+    return new_d;
 }
 
 void
