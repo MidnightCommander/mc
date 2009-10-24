@@ -878,7 +878,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation,
 #ifdef ENABLE_NLS
     if (!i18n) {
 	for (i = sizeof (op_names) / sizeof (op_names[0]); i--;)
-	    op_names[i] = _(op_names[i]);
+	    op_names[i] = Q_(op_names[i]);
 
 	i18n = TRUE;
     }
