@@ -150,26 +150,28 @@ static FileProgressStatus transform_error = FILE_CONT;
 static char *
 transform_source (FileOpContext *ctx, const char *source)
 {
-    char *s = g_strdup (source);
-    char *q;
-    char *fnsource = (char*)x_basename (s);
+    char *s, *q;
+    char *fnsource;
+
+    s = g_strdup (source);
 
     /* We remove \n from the filename since regex routines would use \n as an anchor */
     /* this is just to be allowed to maniupulate file names with \n on it */
-    for (q = s; *q; q++) {
+    for (q = s; *q != '\0'; q++)
 	if (*q == '\n')
 	    *q = ' ';
-    }
 
-    str_fix_string (fnsource);
+    fnsource = (char *) x_basename (s);
 
-    if ( ! mc_search_run(ctx->search_handle, fnsource, 0, strlen (fnsource), NULL) ){
+    if (mc_search_run (ctx->search_handle, fnsource, 0, strlen (fnsource), NULL))
+	q = mc_search_prepare_replace_str2 (ctx->search_handle, ctx->dest_mask);
+    else {
+	q = NULL;
 	transform_error = FILE_SKIP;
-	g_free (s);
-	return NULL;
     }
+
     g_free (s);
-    return mc_search_prepare_replace_str2 (ctx->search_handle, ctx->dest_mask);
+    return q;
 }
 
 static void
