@@ -152,6 +152,13 @@ mcview_display_text (mcview_t * view)
             tty_print_anychar (c);
         }
         col++;
+#ifdef HAVE_CHARSET
+        if (view->utf8)
+            if (g_unichar_iswide(c))
+                col++;
+            else if (g_unichar_iszerowidth(c))
+                col--;
+#endif
         tty_setcolor (NORMAL_COLOR);
     }
     view->dpy_end = from;

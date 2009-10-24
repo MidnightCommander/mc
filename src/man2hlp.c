@@ -32,7 +32,6 @@
 #include <glib.h>
 
 #include "help.h"
-#include "glibcompat.h"
 
 #define BUFFER_SIZE 256
 

@@ -56,7 +56,6 @@
 #include "layout.h"		/* repaint_screen() */
 #include "hotlist.h"
 #include "command.h"		/* cmdline */
-#include "glibcompat.h"		/* g_strlcpy for glib < 2.0 */
 #include "history.h"
 #include "strutil.h"
 #include "util.h"
