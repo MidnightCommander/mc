@@ -146,16 +146,16 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
     /* Commands specific to the key emulation */
     if (edit->extmod) {
         edit->extmod = 0;
-        for (i = 0; edit->user_x_map[i].key; i++) {
-            if (x_key == edit->user_x_map[i].key) {
-                command = edit->user_x_map[i].command;
+        for (i = 0; editor_x_map[i].key; i++) {
+            if (x_key == editor_x_map[i].key) {
+                command = editor_x_map[i].command;
                 break;
             }
         }
     } else {
-        for (i = 0; edit->user_map[i].key != 0; i++) {
-            if (x_key == edit->user_map[i].key) {
-                command = edit->user_map[i].command;
+        for (i = 0; editor_map[i].key != 0; i++) {
+            if (x_key == editor_map[i].key) {
+                command = editor_map[i].command;
                 break;
             }
         }

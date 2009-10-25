@@ -61,12 +61,6 @@
 #include "../src/main.h"	/* source_codepage */
 #include "../src/learn.h"	/* learn_keys */
 
-/*
-   what editor are we going to emulate? one of EDIT_KEY_EMULATION_NORMAL
-   or EDIT_KEY_EMULATION_EMACS
- */
-int edit_key_emulation = EDIT_KEY_EMULATION_NORMAL;
-
 int option_word_wrap_line_length = 72;
 int option_typewriter_wrap = 0;
 int option_auto_para_formatting = 0;
@@ -123,6 +117,8 @@ const char VERTICAL_MAGIC[] = {'\1', '\1', '\1', '\1', '\n'};
  * fin.
  */
 
+const global_keymap_t *editor_map;
+const global_keymap_t *editor_x_map;
 
 static void user_menu (WEdit *edit);
 
@@ -723,12 +719,13 @@ edit_purge_widget (WEdit *edit)
 static void
 edit_set_keymap (WEdit *edit)
 {
-    edit->user_map = default_editor_keymap;
+    editor_map = default_editor_keymap;
     if (editor_keymap && editor_keymap->len > 0)
-        edit->user_map = (global_keymap_t *) editor_keymap->data;
-    edit->user_x_map = default_editor_x_keymap;
+	editor_map = (global_keymap_t *) editor_keymap->data;
+
+    editor_x_map = default_editor_x_keymap;
     if (editor_x_keymap && editor_x_keymap->len > 0)
-        edit->user_x_map = (global_keymap_t *) editor_x_keymap->data;
+	editor_x_map = (global_keymap_t *) editor_x_keymap->data;
 }
 
 

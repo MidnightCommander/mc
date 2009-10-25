@@ -126,8 +126,6 @@ struct WEdit {
 
     /* user map stuff */
     GIConv converter;
-    const global_keymap_t *user_map;
-    const global_keymap_t *user_x_map;
 
     /* line break */
     LineBreaks lb;

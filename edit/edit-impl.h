@@ -33,6 +33,7 @@
 #include <stdio.h>
 
 #include "../src/dialog.h"	/* cb_ret_t */
+#include "../src/keybind.h"	/* global_keymap_t */
 
 #include "../edit/edit.h"
 
@@ -151,7 +152,6 @@ int edit_drop_hotkey_menu (WEdit *e, int key);
 void edit_menu_cmd (WEdit *e);
 void edit_init_menu (struct WMenuBar *menubar);
 cb_ret_t edit_menu_execute (int command);
-void edit_reload_menu (void);
 void menu_save_mode_cmd (void);
 int edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch);
 int edit_get_byte (WEdit * edit, long byte_index);
@@ -304,6 +304,9 @@ extern edit_stack_type edit_history_moveto [MAX_HISTORY_MOVETO];
 
 extern WEdit *wedit;
 extern struct WMenuBar *edit_menubar;
+
+extern const global_keymap_t *editor_map;
+extern const global_keymap_t *editor_x_map;
 
 extern int option_line_state_width;
 

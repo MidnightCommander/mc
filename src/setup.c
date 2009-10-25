@@ -200,7 +200,6 @@ static const struct {
 #endif /* USE_VFS */
 #ifdef USE_INTERNAL_EDIT
     { "editor_word_wrap_line_length", &option_word_wrap_line_length },
-    { "editor_key_emulation", &edit_key_emulation },
     { "editor_tab_spacing", &option_tab_spacing },
     { "editor_fill_tabs_with_spaces", &option_fill_tabs_with_spaces },
     { "editor_return_does_auto_indent", &option_return_does_auto_indent },

@@ -178,8 +178,8 @@ static const name_keymap_t command_names[] = {
     { "EditShell",                         CK_Shell },
     { "EditInsertLiteral",                 CK_Insert_Literal },
     { "EditExecuteMacro",                  CK_Execute_Macro },
-    { "EditBeginorEndMacro",               CK_Begin_End_Macro },
-    { "EditExtmode",                       CK_Ext_Mode },
+    { "EditBeginOrEndMacro",               CK_Begin_End_Macro },
+    { "EditExtMode",                       CK_Ext_Mode },
     { "EditToggleLineState",               CK_Toggle_Line_State },
     { "EditToggleTabTWS",                  CK_Toggle_Tab_TWS },
     { "EditToggleSyntax",                  CK_Toggle_Syntax },
@@ -427,10 +427,10 @@ const global_keymap_t default_viewer_keymap[] = {
 
     { ' ',         CK_ViewMovePgDn,       "Space" },
     { 'f',         CK_ViewMovePgDn,       "f" },
-    { KEY_NPAGE,   CK_ViewMovePgDn,       "PageDown" },
+    { KEY_NPAGE,   CK_ViewMovePgDn,       "PgDn" },
 
     { 'b',         CK_ViewMovePgUp,       "b" },
-    { KEY_PPAGE,   CK_ViewMovePgUp,       "PageUp" },
+    { KEY_PPAGE,   CK_ViewMovePgUp,       "PgUp" },
 
     { 'd',         CK_ViewMoveHalfPgDn,   "d" },
     { 'u',         CK_ViewMoveHalfPgUp,   "u" },
@@ -487,8 +487,8 @@ const global_keymap_t default_editor_keymap[] = {
     { KEY_HOME,                             CK_Home,                "Home" },
     { KEY_IC,                               CK_Toggle_Insert,       "Insert" },
     { KEY_LEFT,                             CK_Left,                "Left" },
-    { KEY_NPAGE,                            CK_Page_Down,           "PageDown" },
-    { KEY_PPAGE,                            CK_Page_Up,             "PageUp" },
+    { KEY_NPAGE,                            CK_Page_Down,           "PgDn" },
+    { KEY_PPAGE,                            CK_Page_Up,             "PgUp" },
     { KEY_RIGHT,                            CK_Right,               "Right" },
     { KEY_UP,                               CK_Up,                  "Up" },
 
@@ -502,7 +502,7 @@ const global_keymap_t default_editor_keymap[] = {
     { ALT ('<'),                            CK_Beginning_Of_Text,   "M-<" },
     { ALT ('>'),                            CK_End_Of_Text,         "M->" },
     { ALT ('-'),                            CK_Load_Prev_File,      "M--" },
-    { ALT ('='),                            CK_Load_Next_File,      "M-=" },
+    { ALT ('+'),                            CK_Load_Next_File,      "M-+" },
     { ALT ('d'),                            CK_Delete_Word_Right,   "M-d" },
     { ALT (KEY_BACKSPACE),                  CK_Delete_Word_Left,    "M-BackSpace" },
     { ALT ('n'),                            CK_Toggle_Line_State,   "M-n" },
@@ -512,6 +512,7 @@ const global_keymap_t default_editor_keymap[] = {
     { ALT ('j'),                            CK_Next_Bookmark,       "M-j" },
     { ALT ('o'),                            CK_Flush_Bookmarks,     "M-o" },
 
+    { XCTRL ('n'),                          CK_New,                 "C-n" },
     { XCTRL ('k'),                          CK_Delete_To_Line_End,  "C-k" },
     { XCTRL ('l'),                          CK_Refresh,             "C-l" },
     { XCTRL ('o'),                          CK_Shell,               "C-o" },
@@ -519,8 +520,10 @@ const global_keymap_t default_editor_keymap[] = {
     { XCTRL ('u'),                          CK_Undo,                "C-u" },
     { ALT ('e'),                            CK_SelectCodepage,      "M-e" },
     { XCTRL ('q'),                          CK_Insert_Literal,      "C-q" },
-    { XCTRL ('a'),                          CK_Execute_Macro,       "C-a" },
     { XCTRL ('r'),                          CK_Begin_End_Macro,     "C-r" },
+    { XCTRL ('r'),                          CK_Begin_Record_Macro,  "C-r" },
+    { XCTRL ('r'),                          CK_End_Record_Macro,    "C-r" },
+    { XCTRL ('a'),                          CK_Execute_Macro,       "C-a" },
 
     { KEY_F (1),                            CK_Help,                "F1" },
     { KEY_F (2),                            CK_Save,                "F2" },
@@ -542,8 +545,8 @@ const global_keymap_t default_editor_keymap[] = {
     { KEY_F (19),                           CK_Pipe_Block (0),      "S-F9" },
 
     /* Shift */
-    { KEY_M_SHIFT | KEY_PPAGE,              CK_Page_Up_Highlight,   "S-PageUp" },
-    { KEY_M_SHIFT | KEY_NPAGE,              CK_Page_Down_Highlight, "S-PageDown" },
+    { KEY_M_SHIFT | KEY_NPAGE,              CK_Page_Down_Highlight, "S-PgDn" },
+    { KEY_M_SHIFT | KEY_PPAGE,              CK_Page_Up_Highlight,   "S-PgUp" },
     { KEY_M_SHIFT | KEY_LEFT,               CK_Left_Highlight,      "S-Left" },
     { KEY_M_SHIFT | KEY_RIGHT,              CK_Right_Highlight,     "S-Right" },
     { KEY_M_SHIFT | KEY_UP,                 CK_Up_Highlight,        "S-Up" },
@@ -556,8 +559,8 @@ const global_keymap_t default_editor_keymap[] = {
     { KEY_M_SHIFT | '\n',                   CK_Return,              "S-Enter" },
 
     /* Alt */
-    { KEY_M_ALT | KEY_PPAGE,                CK_Page_Up_Alt_Highlight,       "M-PageUp" },
-    { KEY_M_ALT | KEY_NPAGE,                CK_Page_Down_Alt_Highlight,     "M-PageDown" },
+    { KEY_M_ALT | KEY_NPAGE,                CK_Page_Down_Alt_Highlight,     "M-PgDn" },
+    { KEY_M_ALT | KEY_PPAGE,                CK_Page_Up_Alt_Highlight,       "M-PgUp" },
     { KEY_M_ALT | KEY_LEFT,                 CK_Left_Alt_Highlight,          "M-Left" },
     { KEY_M_ALT | KEY_RIGHT,                CK_Right_Alt_Highlight,         "M-Right" },
     { KEY_M_ALT | KEY_UP,                   CK_Up_Alt_Highlight,            "M-Up" },
@@ -570,8 +573,8 @@ const global_keymap_t default_editor_keymap[] = {
     { KEY_M_CTRL | (KEY_F (4)),             CK_Replace_Again,               "C-F4" },
     { KEY_M_CTRL | (KEY_F (7)),             CK_Find_Again,                  "C-F7" },
     { KEY_M_CTRL | KEY_BACKSPACE,           CK_Undo,                        "C-BackSpase" },
-    { KEY_M_CTRL | KEY_PPAGE,               CK_Beginning_Of_Text,           "C-PageUp" },
-    { KEY_M_CTRL | KEY_NPAGE,               CK_End_Of_Text,                 "C-PageDown" },
+    { KEY_M_CTRL | KEY_NPAGE,               CK_End_Of_Text,                 "C-PgDn" },
+    { KEY_M_CTRL | KEY_PPAGE,               CK_Beginning_Of_Text,           "C-PgUp" },
     { KEY_M_CTRL | KEY_HOME,                CK_Beginning_Of_Text,           "C-Home" },
     { KEY_M_CTRL | KEY_END,                 CK_End_Of_Text,                 "C-End" },
     { KEY_M_CTRL | KEY_UP,                  CK_Scroll_Up,                   "C-Up" },
@@ -582,19 +585,22 @@ const global_keymap_t default_editor_keymap[] = {
     { KEY_M_CTRL | KEY_DC,                  CK_Remove,                      "C-Delete" },
 
     /* Ctrl + Shift */
-    { KEY_M_SHIFT | KEY_M_CTRL | KEY_PPAGE, CK_Beginning_Of_Text_Highlight, "C-S-PageUp" },
-    { KEY_M_SHIFT | KEY_M_CTRL | KEY_NPAGE, CK_End_Of_Text_Highlight,       "C-S-PageDown" },
+    { KEY_M_SHIFT | KEY_M_CTRL | KEY_NPAGE, CK_End_Of_Text_Highlight,       "C-S-PgDn" },
+    { KEY_M_SHIFT | KEY_M_CTRL | KEY_PPAGE, CK_Beginning_Of_Text_Highlight, "C-S-PgUp" },
     { KEY_M_SHIFT | KEY_M_CTRL | KEY_LEFT,  CK_Word_Left_Highlight,         "C-S-Left" },
     { KEY_M_SHIFT | KEY_M_CTRL | KEY_RIGHT, CK_Word_Right_Highlight,        "C-S-Right" },
     { KEY_M_SHIFT | KEY_M_CTRL | KEY_UP,    CK_Scroll_Up_Highlight,         "C-S-Up" },
     { KEY_M_SHIFT | KEY_M_CTRL | KEY_DOWN,  CK_Scroll_Down_Highlight,       "C-S-Down" },
 
-    { XCTRL ('x'),                          CK_StartExtMap1,                "C-x" },
+    { XCTRL ('x'),                          CK_Ext_Mode,                    "C-x" },
 
     { 0, 0, "" }
 };
 
+/* emacs keyboard layout emulation */
 const global_keymap_t default_editor_x_keymap[] = {
+    { 'k', CK_New,           "k"},
+    { 'e', CK_Execute_Macro, "e"},
     { 0, 0, "" }
 };
 #endif
@@ -613,8 +619,8 @@ const global_keymap_t default_panel_keymap[] = {
     { KEY_KP_ADD,             CK_PanelCmdSelect,            "Gray+" },
     { KEY_KP_SUBTRACT,        CK_PanelCmdUnselect,          "Gray-" },
     { KEY_F (13),             CK_PanelCmdViewSimple,        "S-F3" },
-    { KEY_M_CTRL | KEY_NPAGE, CK_PanelCtrlNextPage,         "C-PageDown" },
-    { KEY_M_CTRL | KEY_PPAGE, CK_PanelCtrlPrevPage,         "C-PageUp" },
+    { KEY_M_CTRL | KEY_NPAGE, CK_PanelCtrlNextPage,         "C-PgDn" },
+    { KEY_M_CTRL | KEY_PPAGE, CK_PanelCtrlPrevPage,         "C-PgUp" },
     { ALT ('H'),              CK_PanelDirectoryHistoryList, "M-H" },
     { ALT ('u'),              CK_PanelDirectoryHistoryNext, "M-u" },
     { ALT ('y'),              CK_PanelDirectoryHistoryPrev, "M-y" },
@@ -629,8 +635,8 @@ const global_keymap_t default_panel_keymap[] = {
     { KEY_END,                CK_PanelMoveEnd,              "End" },
     { KEY_HOME,               CK_PanelMoveHome,             "Home" },
     { KEY_A1,                 CK_PanelMoveHome,             "Home" },
-    { KEY_NPAGE,              CK_PanelNextPage,             "PageDown" },
-    { KEY_PPAGE,              CK_PanelPrevPage,             "PageUp" },
+    { KEY_NPAGE,              CK_PanelNextPage,             "PgDn" },
+    { KEY_PPAGE,              CK_PanelPrevPage,             "PgUp" },
     { ALT ('e'),              CK_PanelSetPanelEncoding,     "M-e" },
     { XCTRL ('s'),            CK_PanelStartSearch,          "C-s" },
     { ALT ('s'),              CK_PanelStartSearch,          "M-s" },
@@ -800,7 +806,7 @@ lookup_keymap_shortcut (const global_keymap_t *keymap, int action)
 
     for (i = 0; keymap[i].key != 0; i++)
 	if (keymap[i].command == action)
-	    return (keymap[i].caption[0] != '\0') ? keymap[i].	caption : NULL;
+	    return (keymap[i].caption[0] != '\0') ? keymap[i].caption : NULL;
 
     return NULL;
 }

@@ -116,7 +116,7 @@ key_code_name_t key_name_conv_tab[] = {
     { KEY_F (18),	"f18",		N_("Function key 18"),	"F18" },
     { KEY_F (19),	"f19",		N_("Function key 19"),	"F19" },
     { KEY_F (20),	"f20",		N_("Function key 20"),	"F20" },
-    { KEY_BACKSPACE,	"bs",		N_("Backspace key"),	"Backspace" },
+    { KEY_BACKSPACE,	"backspace",	N_("Backspace key"),	"Backspace" },
     { KEY_END,		"end",		N_("End key"),		"End" },
     { KEY_UP,		"up",		N_("Up arrow key"),	"Up" },
     { KEY_DOWN,		"down",		N_("Down arrow key"),	"Down" },
@@ -125,7 +125,7 @@ key_code_name_t key_name_conv_tab[] = {
     { KEY_HOME,		"home",		N_("Home key"),		"Home" },
     { KEY_NPAGE,	"pgdn",		N_("Page Down key"),	"PgDn" },
     { KEY_PPAGE,	"pgup",		N_("Page Up key"),	"PgUp" },
-    { KEY_IC,		"ins",		N_("Insert key"),	"Ins" },
+    { KEY_IC,		"insert",	N_("Insert key"),	"Ins" },
     { KEY_DC,		"delete",	N_("Delete key"),	"Del" },
     { ALT ('\t'),	"complete",	N_("Completion/M-tab"),	"Meta-Tab" },
     { KEY_KP_ADD,	"kpplus",	N_("+ on keypad"),	"Gray+" },
@@ -152,36 +152,37 @@ key_code_name_t key_name_conv_tab[] = {
 
 
     /* Alternative label */
-    { KEY_BACKSPACE,	"backspace", N_("Backspace key"),	"Bakspace" },
-    { KEY_IC,		"insert", N_("Insert key"),		"Ins" },
-    { (int) '+',	"plus", N_("Plus"),			"+" },
-    { (int) '-',	"minus", N_("Minus"),			"-" },
-    { (int) '*',	"asterisk", N_("Asterisk"),		"*" },
-    { (int) '.',	"dot", N_("Dot"),			"." },
-    { (int) '<',	"lt", N_("Less than"),			"<" },
-    { (int) '>',	"gt", N_("Great than"),			">" },
-    { (int) '=',	"equal", N_("Equal"),			"=" },
-    { (int) ',',	"comma", N_("Comma"),			"," },
-    { (int) '\'',	"apostrophe", N_("Apostrophe"),		"\'" },
-    { (int) ':',	"colon", N_("Colon"),			":" },
-    { (int) '!',	"exclamation", N_("Exclamation mark"),	"!" },
-    { (int) '?',	"question", N_("Question mark"),	"?" },
-    { (int) '&',	"ampersand", N_("Ampersand"),		"&" },
-    { (int) '$',	"dollar", N_("Dollar sign"),		"$" },
-    { (int) '"',	"quota", N_("Quotation mark"),		"\"" },
-    { (int) '^',	"caret", N_("Caret"),			"^" },
-    { (int) '~',	"tilda", N_("Tilda"),			"~" },
-    { (int) '`',	"prime", N_("Prime"),			"`" },
-    { (int) '_',	"underline", N_("Underline"),		"_" },
-    { (int) '_',	"understrike", N_("Understrike"),	"_" },
-    { (int) '|',	"pipe", N_("Pipe"),			"|" },
-    { (int) '\n',	"enter", N_("Enter"),			"Enter" },
-    { (int) '\t',	"tab", N_("Tab key"),			"Tab" },
-    { (int) ' ',	"space", N_("Space key"),		"Space" },
-    { (int) '/',	"slash", N_("Slash key"),		"/" },
-    { (int) '\\',	"backslash", N_("Backslash key"),	"\\" },
-    { (int) '#',	"number", N_("Number sign #"),		"#" },
-    { (int) '#',	"hash", N_("Number sign #"),		"#" },
+    { KEY_BACKSPACE,	"bs",		N_("Backspace key"),	"Bakspace" },
+    { KEY_IC,		"ins",		N_("Insert key"),	"Ins" },
+    { KEY_DC,		"del",		N_("Delete key"),	"Del" },
+    { (int) '+',	"plus",		N_("Plus"),		"+" },
+    { (int) '-',	"minus",	N_("Minus"),		"-" },
+    { (int) '*',	"asterisk",	N_("Asterisk"),		"*" },
+    { (int) '.',	"dot",		N_("Dot"),		"." },
+    { (int) '<',	"lt",		N_("Less than"),	"<" },
+    { (int) '>',	"gt",		N_("Great than"),	">" },
+    { (int) '=',	"equal",	N_("Equal"),		"=" },
+    { (int) ',',	"comma",	N_("Comma"),		"," },
+    { (int) '\'',	"apostrophe",	N_("Apostrophe"),	"\'" },
+    { (int) ':',	"colon",	N_("Colon"),		":" },
+    { (int) '!',	"exclamation",	N_("Exclamation mark"),	"!" },
+    { (int) '?',	"question",	N_("Question mark"),	"?" },
+    { (int) '&',	"ampersand",	N_("Ampersand"),	"&" },
+    { (int) '$',	"dollar",	N_("Dollar sign"),	"$" },
+    { (int) '"',	"quota",	N_("Quotation mark"),	"\"" },
+    { (int) '^',	"caret",	N_("Caret"),		"^" },
+    { (int) '~',	"tilda",	N_("Tilda"),		"~" },
+    { (int) '`',	"prime",	N_("Prime"),		"`" },
+    { (int) '_',	"underline",	N_("Underline"),	"_" },
+    { (int) '_',	"understrike",	N_("Understrike"),	"_" },
+    { (int) '|',	"pipe",		N_("Pipe"),		"|" },
+    { (int) '\n',	"enter",	N_("Enter"),		"Enter" },
+    { (int) '\t',	"tab",		N_("Tab key"),		"Tab" },
+    { (int) ' ',	"space",	N_("Space key"),	"Space" },
+    { (int) '/',	"slash",	N_("Slash key"),	"/" },
+    { (int) '\\',	"backslash",	N_("Backslash key"),	"\\" },
+    { (int) '#',	"number",	N_("Number sign #"),	"#" },
+    { (int) '#',	"hash",		N_("Number sign #"),	"#" },
 
     /* meta keys */
     { KEY_M_CTRL,	"control",	N_("Ctrl"),	"C" },
@@ -1312,9 +1313,15 @@ lookup_key (const char *keyname, char **label)
 	    g_string_append (s, key_name_conv_tab[use_ctrl].shortcut);
 	    g_string_append_c (s, '-');
 	}
-	if (use_shift != -1)
-	    g_string_append_c (s, (gchar) g_ascii_toupper ((gchar) k));
-	else if (k < 128) {
+	if (use_shift != -1) {
+	    if (k < 127)
+		g_string_append_c (s, (gchar) g_ascii_toupper ((gchar) k));
+	    else {
+		g_string_append (s, key_name_conv_tab[use_shift].shortcut);
+		g_string_append_c (s, '-');
+		g_string_append (s, key_name_conv_tab[index].shortcut);
+	    }
+	} else if (k < 128) {
 	    if ((k >= 'A') || (index < 0)
 		|| (key_name_conv_tab[index].shortcut == NULL))
 		g_string_append_c (s, (gchar) g_ascii_tolower ((gchar) k));
