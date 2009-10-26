@@ -1132,8 +1132,8 @@ static void edit_modification (WEdit * edit)
 	edit->locked = edit_lock_file (edit->filename);
     edit->modified = 1;
 
-    // This will reset save flag, if undo action was performed and text entered
-    if edit->stack_last_save_pointer > edit->stack_pointer
+    /* This will reset save flag, if undo action was performed and text entered */
+    if (edit->stack_last_save_pointer > edit->stack_pointer)
         edit->stack_last_save_pointer = 0;
 }
 
