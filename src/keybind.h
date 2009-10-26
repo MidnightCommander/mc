@@ -4,10 +4,10 @@
 
 #include "global.h"
 
-typedef struct name_key_map_t {
+typedef struct name_keymap_t {
     const char *name;
     int val;
-} name_key_map_t;
+} name_keymap_t;
 
 typedef struct key_config_t {
     time_t mtime;	/* mtime at the moment we read config file */
@@ -17,32 +17,35 @@ typedef struct key_config_t {
 } key_config_t;
 
 /* The global keymaps are of this type */
-typedef struct global_key_map_t {
+#define KEYMAP_SHORTCUT_LENGTH		32 /* FIXME: is 32 bytes enough for shortcut? */
+typedef struct global_keymap_t {
     long key;
     long command;
-} global_key_map_t;
+    char caption[KEYMAP_SHORTCUT_LENGTH];
+} global_keymap_t;
 
-int lookup_action (char *keyname);
-void keybind_cmd_bind(GArray *keymap, char *keybind, int action);
-
-#endif					/* MC_KEYBIND_H */
+int lookup_action (const char *keyname);
+void keybind_cmd_bind (GArray *keymap, const char *keybind, int action);
+const char *lookup_keymap_shortcut (const global_keymap_t *keymap, int action);
 
 /* viewer/actions_cmd.c */
-extern const global_key_map_t default_viewer_keymap[];
-extern const global_key_map_t default_viewer_hex_keymap[];
+extern const global_keymap_t default_viewer_keymap[];
+extern const global_keymap_t default_viewer_hex_keymap[];
 
+#ifdef USE_INTERNAL_EDIT
 /* ../edit/editkey.c */
-extern const global_key_map_t default_editor_keymap[];
-extern const global_key_map_t default_editor_x_keymap[];
+extern const global_keymap_t default_editor_keymap[];
+extern const global_keymap_t default_editor_x_keymap[];
+#endif
 
 /* screen.c */
-extern const global_key_map_t default_panel_keymap[];
+extern const global_keymap_t default_panel_keymap[];
 
 /* widget.c */
-extern const global_key_map_t default_input_keymap[];
+extern const global_keymap_t default_input_keymap[];
 
 /* main.c */
-extern const global_key_map_t default_main_map[];
-extern const global_key_map_t default_main_x_map[];
+extern const global_keymap_t default_main_map[];
+extern const global_keymap_t default_main_x_map[];
 
-extern const global_key_map_t default_input_keymap[];
+#endif					/* MC_KEYBIND_H */

@@ -49,13 +49,34 @@
 
 #include "../src/widget.h"		/* buttonbar_redraw() */
 #include "../src/menu.h"		/* menubar_new() */
+#include "../src/cmddef.h"
 
 WEdit *wedit;
-struct WMenu *edit_menubar;
+struct WMenuBar *edit_menubar;
 
 int column_highlighting = 0;
 
 static cb_ret_t edit_callback (Widget *, widget_msg_t msg, int parm);
+
+static char *
+edit_get_shortcut (int command)
+{
+    const char *ext_map;
+    const char *shortcut = NULL;
+
+    ext_map = lookup_keymap_shortcut (editor_map, CK_Ext_Mode);
+
+    if (ext_map != NULL)
+	shortcut = lookup_keymap_shortcut (editor_x_map, command);
+    if (shortcut != NULL)
+	return g_strdup_printf ("%s %s", ext_map, shortcut);
+
+    shortcut = lookup_keymap_shortcut (editor_map, command);
+    if (shortcut != NULL)
+	return g_strdup (shortcut);
+
+    return NULL;
+}
 
 static int
 edit_event (Gpm_Event *event, void *data)
@@ -189,9 +210,10 @@ edit_file (const char *_file, int line)
 	g_free (dir);
     }
 
-    if (!(wedit = edit_init (NULL, LINES - 2, COLS, _file, line))) {
+    wedit = edit_init (NULL, LINES - 2, COLS, _file, line);
+
+    if (wedit == NULL)
 	return 0;
-    }
 
     /* Create a new dialog and add it widgets to it */
     edit_dlg =
@@ -204,16 +226,17 @@ edit_file (const char *_file, int line)
     widget_want_cursor (wedit->widget, 1);
 
     edit_bar = buttonbar_new (1);
-
-    edit_menubar = edit_create_menu ();
-
     add_widget (edit_dlg, edit_bar);
+
     add_widget (edit_dlg, wedit);
+
+    edit_dlg->menu_executor = edit_menu_execute;
+    edit_dlg->get_shortcut = edit_get_shortcut;
+    edit_menubar = menubar_new (0, 0, COLS, NULL);
     add_widget (edit_dlg, edit_menubar);
+    edit_init_menu (edit_menubar);
 
     run_dlg (edit_dlg);
-
-    edit_done_menu (edit_menubar);		/* editmenu.c */
 
     destroy_dlg (edit_dlg);
 

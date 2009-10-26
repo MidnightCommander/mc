@@ -32,6 +32,9 @@
 
 #include <stdio.h>
 
+#include "../src/dialog.h"	/* cb_ret_t */
+#include "../src/keybind.h"	/* global_keymap_t */
+
 #include "../edit/edit.h"
 
 #define SEARCH_DIALOG_OPTION_NO_SCANF	(1 << 0)
@@ -140,14 +143,15 @@ typedef enum {
 } LineBreaks;
 #define LB_NAMES (LB_MAC + 1)
 
+struct WMenuBar;
+
 extern const char VERTICAL_MAGIC[5];
 /* if enable_show_tabs_tws ==1 then use visible_tab visible_tws */
 extern int enable_show_tabs_tws;
 int edit_drop_hotkey_menu (WEdit *e, int key);
 void edit_menu_cmd (WEdit *e);
-struct WMenu *edit_create_menu (void);
-void edit_done_menu (struct WMenu *wmenu);
-void edit_reload_menu (void);
+void edit_init_menu (struct WMenuBar *menubar);
+cb_ret_t edit_menu_execute (int command);
 void menu_save_mode_cmd (void);
 int edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch);
 int edit_get_byte (WEdit * edit, long byte_index);
@@ -299,8 +303,10 @@ extern int edit_stack_iterator;
 extern edit_stack_type edit_history_moveto [MAX_HISTORY_MOVETO];
 
 extern WEdit *wedit;
-struct WMenu;
-extern struct WMenu *edit_menubar;
+extern struct WMenuBar *edit_menubar;
+
+extern const global_keymap_t *editor_map;
+extern const global_keymap_t *editor_x_map;
 
 extern int option_line_state_width;
 

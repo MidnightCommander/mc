@@ -59,12 +59,7 @@
 #include "../src/strutil.h"	/* utf string functions */
 #include "../src/charsets.h"	/* get_codepage_id */
 #include "../src/main.h"	/* source_codepage */
-
-/*
-   what editor are we going to emulate? one of EDIT_KEY_EMULATION_NORMAL
-   or EDIT_KEY_EMULATION_EMACS
- */
-int edit_key_emulation = EDIT_KEY_EMULATION_NORMAL;
+#include "../src/learn.h"	/* learn_keys */
 
 int option_word_wrap_line_length = 72;
 int option_typewriter_wrap = 0;
@@ -122,6 +117,8 @@ const char VERTICAL_MAGIC[] = {'\1', '\1', '\1', '\1', '\n'};
  * fin.
  */
 
+const global_keymap_t *editor_map;
+const global_keymap_t *editor_x_map;
 
 static void user_menu (WEdit *edit);
 
@@ -722,9 +719,13 @@ edit_purge_widget (WEdit *edit)
 static void
 edit_set_keymap (WEdit *edit)
 {
-    edit->user_map = default_editor_keymap;
+    editor_map = default_editor_keymap;
     if (editor_keymap && editor_keymap->len > 0)
-        edit->user_map = (global_key_map_t *) editor_keymap->data;
+	editor_map = (global_keymap_t *) editor_keymap->data;
+
+    editor_x_map = default_editor_x_keymap;
+    if (editor_x_keymap && editor_x_keymap->len > 0)
+	editor_x_map = (global_keymap_t *) editor_x_keymap->data;
 }
 
 
@@ -2535,7 +2536,7 @@ void edit_execute_key_command (WEdit *edit, int command, int char_for_insertion)
 	edit->macro[edit->macro_i].command = command;
 	edit->macro[edit->macro_i++].ch = char_for_insertion;
     }
-/* record the beginning of a set of editing actions initiated by a key press */
+    /* record the beginning of a set of editing actions initiated by a key press */
     if (command != CK_Undo && command != CK_Ext_Mode)
 	edit_push_key_press (edit);
 
@@ -3030,6 +3031,10 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
     case CK_Load_Syntax_File:
 	edit_load_cmd (edit, EDIT_FILE_SYNTAX);
 	break;
+    case CK_Choose_Syntax:
+	edit_syntax_dialog ();
+	break;
+
     case CK_Load_Menu_File:
 	edit_load_cmd (edit, EDIT_FILE_MENU);
 	break;
@@ -3068,23 +3073,40 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
     case CK_Find_Definition:
 	edit_get_match_keyword_cmd (edit);
 	break;
-
-    case CK_Exit:
+    case CK_Quit:
 	dlg_stop (edit->widget.parent);
 	break;
     case CK_New:
 	edit_new_cmd (edit);
 	break;
-
     case CK_Help:
 	edit_help_cmd (edit);
 	break;
-
     case CK_Refresh:
 	edit_refresh_cmd (edit);
 	break;
-
-    case CK_Date:{
+    case CK_SaveSetupCmd:
+	save_setup_cmd ();
+	break;
+    case CK_About:
+	query_dialog (_(" About "),
+			_("\n                Cooledit  v3.11.5\n\n"
+			" Copyright (C) 1996 the Free Software Foundation\n\n"
+			"       A user friendly text editor written\n"
+			"           for the Midnight Commander.\n"), D_NORMAL,
+			 1, _("&OK"));
+	break;
+    case CK_LearnKeys:
+	learn_keys ();
+	break;
+    case CK_Edit_Options:
+	edit_options_dialog ();
+	break;
+    case CK_Edit_Save_Mode:
+	menu_save_mode_cmd ();
+    case CK_Date:
+	break;
+	{
 	    char s[1024];
 	    /* fool gcc to prevent a Y2K warning */
 	    char time_format[] = "_c";

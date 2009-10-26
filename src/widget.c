@@ -55,10 +55,10 @@
 #include "strutil.h"
 
 #include "cmddef.h"		/* CK_ cmd name const */
-#include "keybind.h"		/* global_key_map_t */
+#include "keybind.h"		/* global_keymap_t */
 #include "fileloc.h"
 
-const global_key_map_t *input_map;
+const global_keymap_t *input_map;
 
 static void
 widget_selectcolor (Widget *w, gboolean focused, gboolean hotkey)

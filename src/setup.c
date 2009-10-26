@@ -200,7 +200,6 @@ static const struct {
 #endif /* USE_VFS */
 #ifdef USE_INTERNAL_EDIT
     { "editor_word_wrap_line_length", &option_word_wrap_line_length },
-    { "editor_key_emulation", &edit_key_emulation },
     { "editor_tab_spacing", &option_tab_spacing },
     { "editor_fill_tabs_with_spaces", &option_fill_tabs_with_spaces },
     { "editor_return_does_auto_indent", &option_return_does_auto_indent },
@@ -867,7 +866,7 @@ load_keys_from_section (const char *terminal, mc_config_t *cfg)
 	}
 	curr_values = values = mc_config_get_string_list (cfg, section_name, *profile_keys, &values_len);
 
-	key_code = lookup_key (*profile_keys);
+	key_code = lookup_key (*profile_keys, NULL);
 	if (key_code){
 	    if (curr_values){
 	        while (*curr_values){
@@ -881,14 +880,14 @@ load_keys_from_section (const char *terminal, mc_config_t *cfg)
 	        valcopy = convert_controls (value);
 	        define_sequence (key_code, valcopy, MCKEY_NOACTION);
 	        g_free (valcopy);
-	        g_free(value);
+	        g_free (value);
 	    }
 	}
 	profile_keys++;
 	if (values)
-	    g_strfreev(values);
+	    g_strfreev (values);
     }
-    g_strfreev(keys);
+    g_strfreev (keys);
     g_free (section_name);
 }
 
@@ -965,28 +964,29 @@ load_keymap_defs (void)
 
     if (mc_global_keymap != NULL)
     {
-        editor_keymap = g_array_new(TRUE, FALSE, sizeof(global_key_map_t));
+#ifdef USE_INTERNAL_EDIT
+        editor_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
         load_keymap_from_section ("editor", editor_keymap, mc_global_keymap);
+        editor_x_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
+        load_keymap_from_section ("editor:xmap", editor_x_keymap, mc_global_keymap);
+#endif
 
-        viewer_keymap = g_array_new(TRUE, FALSE, sizeof(global_key_map_t));
+        viewer_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
         load_keymap_from_section ("viewer", viewer_keymap, mc_global_keymap);
-
-        viewer_hex_keymap = g_array_new(TRUE, FALSE, sizeof(global_key_map_t));
+        viewer_hex_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
         load_keymap_from_section ("viewer:hex", viewer_hex_keymap, mc_global_keymap);
 
-        main_keymap = g_array_new(TRUE, FALSE, sizeof(global_key_map_t));
+        main_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
         load_keymap_from_section ("main", main_keymap, mc_global_keymap);
-
-        main_x_keymap = g_array_new(TRUE, FALSE, sizeof(global_key_map_t));
+        main_x_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
         load_keymap_from_section ("main:xmap", main_x_keymap, mc_global_keymap);
 
-        panel_keymap = g_array_new(TRUE, FALSE, sizeof(global_key_map_t));
+        panel_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
         load_keymap_from_section ("panel", panel_keymap, mc_global_keymap);
 
-        input_keymap = g_array_new(TRUE, FALSE, sizeof(global_key_map_t));
+        input_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
         load_keymap_from_section ("input", input_keymap, mc_global_keymap);
 
-        mc_config_deinit(mc_global_keymap);
+        mc_config_deinit (mc_global_keymap);
     }
-
 }

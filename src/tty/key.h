@@ -21,13 +21,13 @@ void done_key (void);
 typedef void (*move_fn) (void *data, int param);
 cb_ret_t check_movement_keys (int key, int page_size, void *data,
                               move_fn backfn, move_fn forfn, move_fn topfn, move_fn bottomfn);
-int lookup_keyname (char *keyname);
-int lookup_key (char *keyname);
+int lookup_key (const char *keyname, char **label);
 
 typedef const struct {
     int code;
     const char *name;
     const char *longname;
+    const char *shortcut;
 } key_code_name_t;
 
 extern key_code_name_t key_name_conv_tab[];
@@ -69,7 +69,7 @@ void remove_select_channel (int fd);
 void channels_up (void);
 void channels_down (void);
 
-#define XCTRL(x) (KEY_M_CTRL | ((x) & 31))
+#define XCTRL(x) (KEY_M_CTRL | ((x) & 0x1F))
 #define ALT(x) (KEY_M_ALT | (unsigned int)(x))
 
 static inline gboolean

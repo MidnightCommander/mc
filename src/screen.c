@@ -61,7 +61,7 @@
 #include "selcodepage.h"	/* select_charset () */
 #include "charsets.h"		/* get_codepage_id () */
 #include "cmddef.h"		/* CK_ cmd name const */
-#include "keybind.h"		/* global_key_map_t */
+#include "keybind.h"		/* global_keymap_t */
 
 #define ELEMENTS(arr) ( sizeof(arr) / sizeof((arr)[0]) )
 
@@ -107,7 +107,7 @@ int filetype_mode = 1;
 /* The hook list for the select file function */
 Hook *select_file_hook = 0;
 
-const global_key_map_t *panel_map;
+const global_keymap_t *panel_map;
 
 static cb_ret_t panel_callback (Widget *, widget_msg_t msg, int parm);
 static int panel_event (Gpm_Event *event, void *);
@@ -2635,12 +2635,12 @@ typedef void (*panel_key_callback) (WPanel *);
 static void cmd_do_enter(WPanel *wp) { (void) do_enter(wp); }
 static void cmd_view_simple(WPanel *wp) { (void) wp; view_simple_cmd(); }
 static void cmd_edit_new(WPanel *wp) { (void) wp; edit_cmd_new(); }
-static void cmd_copy_local(WPanel *wp) { (void) wp;copy_cmd_local(); }
-static void cmd_rename_local(WPanel *wp) { (void) wp;ren_cmd_local(); }
-static void cmd_delete_local(WPanel *wp) { (void) wp;delete_cmd_local(); }
-static void cmd_select(WPanel *wp) { (void) wp;select_cmd(); }
-static void cmd_unselect(WPanel *wp) { (void) wp;unselect_cmd(); }
-static void cmd_reverse_selection(WPanel *wp) { (void) wp;reverse_selection_cmd(); }
+static void cmd_copy_local(WPanel *wp) { (void) wp; copy_cmd_local(); }
+static void cmd_rename_local(WPanel *wp) { (void) wp; rename_cmd_local(); }
+static void cmd_delete_local(WPanel *wp) { (void) wp; delete_cmd_local(); }
+static void cmd_select(WPanel *wp) { (void) wp; select_cmd(); }
+static void cmd_unselect(WPanel *wp) { (void) wp; unselect_cmd(); }
+static void cmd_reverse_selection(WPanel *wp) { (void) wp; reverse_selection_cmd(); }
 
 static cb_ret_t
 panel_execute_cmd (WPanel *panel, int command)
@@ -2856,7 +2856,7 @@ panel_callback (Widget *w, widget_msg_t msg, int parm)
 	buttonbar_set_label (h, 3, Q_("ButtonBar|View"), view_cmd);
 	buttonbar_set_label (h, 4, Q_("ButtonBar|Edit"), edit_cmd);
 	buttonbar_set_label (h, 5, Q_("ButtonBar|Copy"), copy_cmd);
-	buttonbar_set_label (h, 6, Q_("ButtonBar|RenMov"), ren_cmd);
+	buttonbar_set_label (h, 6, Q_("ButtonBar|RenMov"), rename_cmd);
 	buttonbar_set_label (h, 7, Q_("ButtonBar|Mkdir"), mkdir_cmd);
 	buttonbar_set_label (h, 8, Q_("ButtonBar|Delete"), delete_cmd);
 	buttonbar_redraw (h);

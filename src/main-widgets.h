@@ -14,6 +14,6 @@ extern WLabel     *the_prompt;
 extern WLabel     *the_hint;
 extern Dlg_head   *midnight_dlg;
 
-extern struct WMenu *the_menubar;
+extern struct WMenuBar *the_menubar;
 
 #endif

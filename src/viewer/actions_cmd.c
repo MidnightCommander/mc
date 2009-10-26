@@ -63,7 +63,7 @@
 #include "../src/cmd.h"
 #include "../src/execute.h"
 #include "../src/help.h"
-#include "../src/keybind.h"	/* global_key_map_t */
+#include "../src/keybind.h"
 #include "../src/cmddef.h"	/* CK_ cmd name const */
 
 

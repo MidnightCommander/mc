@@ -84,6 +84,13 @@ typedef enum {
 struct Dlg_head;
 typedef cb_ret_t (*dlg_cb_fn)(struct Dlg_head *h, dlg_msg_t msg, int parm);
 
+/* menu command execution */
+typedef cb_ret_t (*menu_exec_fn) (int command);
+
+/* get string representation of shortcut assigned  with command */
+/* as menu is a widget of dialog, ask dialog about shortcut string */
+typedef char * (*dlg_shortcut_str) (int command);
+
 /* Dialog color constants */
 #define DLG_COLOR_NUM		4
 #define DLG_NORMALC(h)		((h)->color[0])
@@ -93,29 +100,31 @@ typedef cb_ret_t (*dlg_cb_fn)(struct Dlg_head *h, dlg_msg_t msg, int parm);
 
 typedef struct Dlg_head {
     /* Set by the user */
-    int flags;			/* User flags */
-    const char *help_ctx;	/* Name of the help entry */
-    int *color;			/* Color set. Unused in viewer and editor */
-    /*notconst*/ char *title;	/* Title of the dialog */
+    int flags;				/* User flags */
+    const char *help_ctx;		/* Name of the help entry */
+    int *color;				/* Color set. Unused in viewer and editor */
+    /*notconst*/ char *title;		/* Title of the dialog */
 
     /* Set and received by the user */
-    int ret_value;		/* Result of run_dlg() */
+    int ret_value;			/* Result of run_dlg() */
 
     /* Geometry */
-    int x, y;			/* Position relative to screen origin */
-    int cols, lines;		/* Width and height of the window */
+    int x, y;				/* Position relative to screen origin */
+    int cols, lines;			/* Width and height of the window */
 
     /* Internal flags */
-    unsigned int running:1;	/* The dialog is currently active */
-    unsigned int fullscreen:1;	/* Parents dialogs don't need refresh */
-    int mouse_status;		/* For the autorepeat status of the mouse */
+    unsigned int running:1;		/* The dialog is currently active */
+    unsigned int fullscreen:1;		/* Parents dialogs don't need refresh */
+    int mouse_status;			/* For the autorepeat status of the mouse */
 
     /* Internal variables */
-    int count;			/* Number of widgets */
-    struct Widget *current;	/* Curently active widget */
-    void *data;			/* data can be passed to dialog */
+    int count;				/* Number of widgets */
+    struct Widget *current;		/* Curently active widget */
+    void *data;				/* Data can be passed to dialog */
     dlg_cb_fn callback;
-    struct Dlg_head *parent;	/* Parent dialog */
+    menu_exec_fn menu_executor;		/* Execute menu commands */
+    dlg_shortcut_str get_shortcut;	/* Shortcut string */
+    struct Dlg_head *parent;		/* Parent dialog */
 } Dlg_head;
 
 /* Color styles for normal and error dialogs */
