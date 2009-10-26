@@ -143,8 +143,6 @@ create_command_menu (void)
     entries = g_list_append (entries, menu_entry_create (_("Encod&ing..."),            CK_SelectCodepage));
 #endif
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("Insert &literal..."),      CK_Insert_Literal));
-    entries = g_list_append (entries, menu_separator_create ());
     entries = g_list_append (entries, menu_entry_create (_("&Refresh screen"),         CK_Refresh));
     entries = g_list_append (entries, menu_separator_create ());
     entries = g_list_append (entries, menu_entry_create (_("&Start record macro"),     CK_Begin_Record_Macro));
@@ -152,14 +150,24 @@ create_command_menu (void)
     entries = g_list_append (entries, menu_entry_create (_("&Execute macro..."),       CK_Execute_Macro));
     entries = g_list_append (entries, menu_entry_create (_("Delete macr&o..."),        CK_Delete_Macro));
     entries = g_list_append (entries, menu_separator_create ());
+    entries = g_list_append (entries, menu_entry_create (_("'ispell' s&pell check"),   CK_Pipe_Block (1)));
+    entries = g_list_append (entries, menu_entry_create (_("&Mail..."),                CK_Mail));
+
+    return entries;
+}
+
+static GList *
+create_format_menu (void)
+{
+    GList *entries = NULL;
+
+    entries = g_list_append (entries, menu_entry_create (_("Insert &literal..."),      CK_Insert_Literal));
     entries = g_list_append (entries, menu_entry_create (_("Insert &date/time"),       CK_Date));
     entries = g_list_append (entries, menu_separator_create ());
     entries = g_list_append (entries, menu_entry_create (_("Format p&aragraph"),       CK_Paragraph_Format));
-    entries = g_list_append (entries, menu_entry_create (_("'ispell' s&pell check"),   CK_Pipe_Block (1)));
     entries = g_list_append (entries, menu_entry_create (_("Sor&t..."),                CK_Sort));
     entries = g_list_append (entries, menu_entry_create (_("Paste o&utput of..."),     CK_ExtCmd));
     entries = g_list_append (entries, menu_entry_create (_("E&xternal formatter"),     CK_Pipe_Block (0)));
-    entries = g_list_append (entries, menu_entry_create (_("&Mail..."),                CK_Mail));
 
     return entries;
 }
@@ -189,6 +197,7 @@ edit_init_menu (struct WMenuBar *menubar)
     menubar_add_menu (menubar, create_menu (_("&Edit"),    create_edit_menu (),           "[Internal File Editor]"));
     menubar_add_menu (menubar, create_menu (_("&Search"),  create_search_replace_menu (), "[Internal File Editor]"));
     menubar_add_menu (menubar, create_menu (_("&Command"), create_command_menu (),        "[Internal File Editor]"));
+    menubar_add_menu (menubar, create_menu (_("For&mat"),  create_format_menu (),         "[Internal File Editor]"));
     menubar_add_menu (menubar, create_menu (_("&Options"), create_options_menu (),        "[Internal File Editor]"));
 }
 
@@ -229,8 +238,11 @@ edit_drop_hotkey_menu (WEdit *e, int key)
     case ALT ('c'):
 	m = 3;
 	break;
-    case ALT ('o'):
+    case ALT ('m'):
 	m = 4;
+	break;
+    case ALT ('o'):
+	m = 5;
 	break;
     default:
 	return 0;
