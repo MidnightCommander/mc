@@ -149,6 +149,7 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %{_sysconfdir}/mc/extfs/extfs.ini
 %config(noreplace) %{_sysconfdir}/mc/extfs/sfs.ini
 %config(noreplace) %{_sysconfdir}/mc/mc.keymap
+%config(noreplace) %{_sysconfdir}/mc/mc.keymap.*
 
 %dir %{_datadir}/mc
 %{_datadir}/mc/*
@@ -156,6 +157,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libexecdir}/mc
 
 %changelog
+* Mon Oct 26 2009 Andrew Borodin <aborodin@vmail.ru>
+- Add new %%{_sysconfdir}/mc/mc.keymap.* files.
+
 * Fri Sep 04 2009 Slava Zanko <slavazanko@gmail.com>
 - Add new file %%{_sysconfdir}/mc/filehighlight.ini
 
