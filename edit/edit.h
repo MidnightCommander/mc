@@ -60,6 +60,7 @@ extern int visible_tabs;
 extern int visible_tws;
 
 extern int simple_statusbar;
+extern int option_check_nl_at_eof;
 
 /* used in main() */
 void edit_stack_init (void);

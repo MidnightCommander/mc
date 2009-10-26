@@ -394,24 +394,29 @@ menu_save_mode_cmd (void)
 {
     /* diaog sizes */
     const int DLG_X = 38;
-    const int DLG_Y = 10;
+    const int DLG_Y = 13;
 
     char *str_result;
 
     const char *str[] =
     {
-	N_("Quick save "),
-	N_("Safe save "),
-	N_("Do backups -->")
+	N_("&Quick save"),
+	N_("&Safe save"),
+	N_("&Do backups with following extension:")
     };
 
     QuickWidget widgets[] =
     {
-	/* 0 */ QUICK_BUTTON (18, DLG_X, 7, DLG_Y, N_("&Cancel"), B_CANCEL, NULL),
-	/* 1 */ QUICK_BUTTON ( 6, DLG_X, 7, DLG_Y, N_("&OK"),     B_ENTER,  NULL),
-	/* 2 */ QUICK_INPUT  (23, DLG_X, 5, DLG_Y, option_backup_ext, 9, 0, "edit-backup-ext", &str_result),
-	/* 3 */ QUICK_LABEL  (22, DLG_X, 4, DLG_Y, N_("Extension:")),
-	/* 4 */ QUICK_RADIO  ( 4, DLG_X, 3, DLG_Y, 3, str, &option_save_mode),
+	/* 0 */
+	QUICK_BUTTON   (18, DLG_X, DLG_Y - 3, DLG_Y, N_("&Cancel"), B_CANCEL, NULL),
+	/* 1 */
+	QUICK_BUTTON   ( 6, DLG_X, DLG_Y - 3, DLG_Y, N_("&OK"),     B_ENTER,  NULL),
+	/* 2 */
+	QUICK_CHECKBOX ( 4, DLG_X, 8, DLG_Y, N_("Check &POSIX new line"), &option_check_nl_at_eof),
+	/* 3 */
+	QUICK_INPUT    ( 8, DLG_X, 6, DLG_Y, option_backup_ext, 9, 0, "edit-backup-ext", &str_result),
+	/* 4 */
+	QUICK_RADIO    ( 4, DLG_X, 3, DLG_Y, 3, str, &option_save_mode),
 	QUICK_END
     };
 
@@ -424,36 +429,35 @@ menu_save_mode_cmd (void)
     size_t i;
     size_t maxlen = 0;
     int dlg_x;
-    size_t l1, w0, w1, w3;
+    size_t w0, w1, b_len, w3;
 
     assert (option_backup_ext != NULL);
 
     /* OK/Cancel buttons */
-    w0 = str_term_width1 (_(widgets[0].u.button.text)) + 2;
-    w1 = str_term_width1 (_(widgets[1].u.button.text)) + 4; /* default batton */
+    w0 = str_term_width1 (_(widgets[0].u.button.text)) + 3;
+    w1 = str_term_width1 (_(widgets[1].u.button.text)) + 5; /* default button */
+    b_len = w0 + w1 + 3;
 
-    w3 = str_term_width1 (_(widgets[3].u.label.text));
+    maxlen = max (b_len, str_term_width1 (_(dialog.title)) + 2);
 
-    maxlen = l1 = w0 + w1 + 6;
-
+    w3 = 0;
     for (i = 0; i < 3; i++) {
 #ifdef ENABLE_NLS
 	str[i] = _(str[i]);
 #endif
-	maxlen = max (maxlen, (size_t) str_term_width1 (str[i]) + 7);
+	w3 = max (w3, (size_t) str_term_width1 (str[i]));
     }
 
-    dlg_x = maxlen + w3 + 5 + 2;
-    widgets[2].u.input.len = w3; /* input field length */
-    dlg_x = min (COLS, dlg_x);
-    dialog.xlen = dlg_x;
+    maxlen = max (maxlen, w3 + 4);
 
-    widgets[0].relative_x = dlg_x * 2/3 - w0/2;
-    widgets[1].relative_x = dlg_x/3 - w1/2;
-    widgets[2].relative_x = widgets[3].relative_x = maxlen + 3;
+    dialog.xlen = min (COLS, maxlen + 8);
+
+    widgets[3].u.input.len = w3;
+    widgets[1].relative_x = (dialog.xlen - b_len)/2;
+    widgets[0].relative_x = widgets[1].relative_x + w0 + 2;
 
     for (i = 0; i < sizeof (widgets)/sizeof (widgets[0]); i++)
-	widgets[i].x_divisions = dlg_x;
+	widgets[i].x_divisions = dialog.xlen;
 
     if (quick_dialog (&dialog) != B_CANCEL) {
 	g_free (option_backup_ext);
@@ -474,6 +478,16 @@ edit_set_filename (WEdit *edit, const char *f)
 #else
 	edit->dir = g_get_current_dir ();
 #endif
+}
+
+static gboolean
+edit_check_newline (WEdit *edit)
+{
+    return !(option_check_nl_at_eof && edit->last_byte > 0
+        && edit_get_byte (edit, edit->last_byte - 1) != '\n'
+        && edit_query_dialog2 (_("Warning"),
+                               _("The file you are saving is not finished with a newline"),
+                               _("C&ontinue"), _("&Cancel")));
 }
 
 static char *
@@ -533,6 +547,9 @@ edit_save_as_cmd (WEdit *edit)
     char *exp;
     int save_lock = 0;
     int different_filename = 0;
+
+    if (!edit_check_newline (edit))
+        return 0;
 
     exp = edit_get_save_file_as (edit);
     edit_push_action (edit, KEY_PRESS + edit->start_display);
@@ -815,6 +832,9 @@ int edit_load_macro_cmd (WEdit * edit, struct macro macro[], int *n, int k)
 int edit_save_confirm_cmd (WEdit * edit)
 {
     gchar *f = NULL;
+
+    if (!edit_check_newline (edit))
+        return 0;
 
     if (edit_confirm_save) {
 	f = g_strconcat (_(" Confirm save file? : "), edit->filename, " ", NULL);
@@ -1766,6 +1786,9 @@ edit_ok_to_exit (WEdit *edit)
 {
     if (!edit->modified)
 	return 1;
+
+    if (!edit_check_newline (edit))
+        return 0;
 
     switch (edit_query_dialog3
 	    (_("Quit"), _(" File was modified, Save with exit? "),

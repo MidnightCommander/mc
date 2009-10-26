@@ -81,6 +81,7 @@ int option_edit_left_extreme = 0;
 int option_edit_top_extreme = 0;
 int option_edit_bottom_extreme = 0;
 int enable_show_tabs_tws = 1;
+int option_check_nl_at_eof = 0;
 
 const char *option_whole_chars_search = "0123456789abcdefghijklmnopqrstuvwxyz_";
 char *option_backup_ext = NULL;

@@ -217,6 +217,7 @@ static const struct {
     { "editor_visible_spaces", &visible_tws },
     { "editor_line_state", &option_line_state },
     { "editor_simple_statusbar", &simple_statusbar },
+    { "editor_check_new_line", &option_check_nl_at_eof },
 #endif /* USE_INTERNAL_EDIT */
 
     { "nice_rotating_dash", &nice_rotating_dash },

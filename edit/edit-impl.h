@@ -319,7 +319,6 @@ typedef enum {
 extern int option_max_undo;
 extern int option_auto_syntax;
 extern char *option_syntax_type;
-extern int editor_option_check_nl_at_eof;
 
 extern int option_edit_right_extreme;
 extern int option_edit_left_extreme;
