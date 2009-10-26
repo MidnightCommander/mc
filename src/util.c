@@ -51,6 +51,7 @@
 #include "mountlist.h"
 #include "timefmt.h"
 #include "strutil.h"
+#include "./src/mcconfig/mcconfig.h"
 #include "fileopctx.h"
 #include "file.h"		/* copy_file_file() */
 #include "dir.h"
@@ -1398,40 +1399,75 @@ load_file_position (const char *filename, long *line, long *column)
 }
 
 /* Save position for the given file */
+#define TMP_SUFFIX ".tmp"
 void
 save_file_position (const char *filename, long line, long column)
 {
-    char *fn;
-    FILE *f;
+    static int filepos_max_saved_entries = 0;
+    char *fn, *tmp_fn;
+    FILE *f, *tmp_f;
+    char buf[MC_MAXPATHLEN + 20];
+    int i = 1;
+    gsize len;
+
+    if (filepos_max_saved_entries == 0)
+	filepos_max_saved_entries = mc_config_get_int(mc_main_config, CONFIG_APP_SECTION, "filepos_max_saved_entries", 1024);
 
     fn =  g_build_filename (home_dir, MC_USERCONF_DIR, MC_FILEPOS_FILE, NULL);
     if (fn == NULL)
 	return;
 
-    mc_util_make_backup_if_possible (fn, ".tmp");
+    len = strlen (filename);
+
+    mc_util_make_backup_if_possible (fn, TMP_SUFFIX);
 
     /* open file */
-    f = fopen (fn, "a");
+    f = fopen (fn, "w");
     if (f == NULL) {
 	g_free (fn);
 	return;
     }
 
+    tmp_fn = g_strdup_printf("%s" TMP_SUFFIX ,fn);
+    tmp_f = fopen (tmp_fn, "r");
+    if (tmp_f == NULL) {
+        g_free(tmp_fn);
+        mc_util_restore_from_backup_if_possible (fn, TMP_SUFFIX);
+        g_free (fn);
+        return;
+    }
+
     /* put the new record */
     if (line != 1 || column != 0) {
 	if (fprintf (f, "%s %ld;%ld\n", filename, line, column) < 0) {
+	    g_free(tmp_fn);
+	    fclose (tmp_f);
 	    fclose (f);
-	    mc_util_restore_from_backup_if_possible (fn, ".tmp");
+	    mc_util_restore_from_backup_if_possible (fn, TMP_SUFFIX);
 	    g_free (fn);
 	    return;
 	}
     }
 
+    while (fgets (buf, sizeof (buf), tmp_f)) {
+	if (
+	    buf[len] == ' ' &&
+	    strncmp (buf, filename, len) == 0 &&
+	    !strchr (&buf[len + 1], ' ')
+	)
+	    continue;
+
+	fprintf (f, "%s", buf);
+	if (++i > filepos_max_saved_entries)
+	    break;
+    }
+    fclose (tmp_f);
+    g_free(tmp_fn);
     fclose (f);
-    mc_util_unlink_backup_if_possible (fn, ".tmp");
+    mc_util_unlink_backup_if_possible (fn, TMP_SUFFIX);
     g_free (fn);
 }
-
+#undef TMP_SUFFIX
 extern const char *
 cstrcasestr (const char *haystack, const char *needle)
 {
