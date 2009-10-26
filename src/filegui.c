@@ -166,6 +166,9 @@ filegui__check_attrs_on_fs(const char *fs_path)
 {
     struct statfs stfs;
 
+    if (!setup_copymove_persistent_attr)
+        return 0;
+
     if (statfs(fs_path, &stfs)!=0)
         return 1;
 

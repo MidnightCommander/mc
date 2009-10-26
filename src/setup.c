@@ -89,6 +89,7 @@ int startup_right_mode;
 /* Ugly hack to allow panel_save_setup to work as a place holder for */
 /* default panel values */
 int saving_setup;
+int setup_copymove_persistent_attr = 1;
 
 static const struct {
     const char *key;
@@ -225,6 +226,7 @@ static const struct {
     { "mcview_remember_file_position", &mcview_remember_file_position },
     { "auto_fill_mkdir_name", &auto_fill_mkdir_name },
     { "reverse_files_only", &reverse_files_only },
+    { "copymove_persistent_attr", &setup_copymove_persistent_attr },
     { 0, 0 }
 };
 

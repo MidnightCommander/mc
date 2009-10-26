@@ -35,4 +35,6 @@ extern int verbose;
 extern int mouse_close_dialog;
 extern int reverse_files_only;
 
+extern int setup_copymove_persistent_attr;
+
 #endif
