@@ -404,10 +404,11 @@ const global_keymap_t default_viewer_keymap[] = {
     { XCTRL ('r'), CK_ViewContinueSearch, "C-r" },
     { XCTRL ('s'), CK_ViewContinueSearch, "C-s" },
     { KEY_F (17),  CK_ViewContinueSearch, "S-F7" },
+    { 'n',         CK_ViewContinueSearch, "n" },
     { ALT ('r'),   CK_ViewToggleRuler,    "M-r" },
 
-    { KEY_HOME,    CK_ViewMoveToBol,      "Home" },
-    { KEY_END,     CK_ViewMoveToEol,      "End" },
+    { XCTRL ('a'), CK_ViewMoveToBol,      "C-a" },
+    { XCTRL ('e'), CK_ViewMoveToEol,      "C-e" },
 
     { 'h',         CK_ViewMoveLeft,       "h" },
     { KEY_LEFT,    CK_ViewMoveLeft,       "Left" },
