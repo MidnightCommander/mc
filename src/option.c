@@ -244,7 +244,7 @@ void configure_box (void)
     /* If they pressed the save button */
     if (result == B_EXIT){
 	save_configure ();
-	mc_config_save_file (mc_main_config);
+	mc_config_save_file (mc_main_config, NULL);
     }
 
     destroy_dlg (conf_dlg);

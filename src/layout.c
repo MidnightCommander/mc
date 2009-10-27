@@ -548,7 +548,7 @@ void layout_cmd (void)
     }
     if (result == B_EXIT){
 	save_layout ();
-	mc_config_save_file (mc_main_config);
+	mc_config_save_file (mc_main_config, NULL);
     }
 
     destroy_dlg (layout_dlg);

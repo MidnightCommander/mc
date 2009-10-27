@@ -334,7 +334,7 @@ learn_save (void)
      * disk is much worse.
      */
     if (profile_changed)
-	mc_config_save_file (mc_main_config);
+	mc_config_save_file (mc_main_config, NULL);
 
     g_free (section);
 }

@@ -1305,7 +1305,8 @@ dirsizes_cmd (void)
 void
 save_setup_cmd (void)
 {
-    save_setup ();
+    if (! save_setup ())
+	return;
     message (D_NORMAL, _(" Setup "), _(" Setup saved to ~/%s"),
 	     MC_USERCONF_DIR PATH_SEP_STR MC_CONFIG_FILE);
 }

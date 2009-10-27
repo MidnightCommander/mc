@@ -50,6 +50,7 @@
 #include "file.h"		/* safe_delete */
 #include "keybind.h"		/* lookup_action */
 #include "fileloc.h"
+#include "wtools.h"
 
 #ifdef USE_VFS
 #include "../vfs/gc.h"
@@ -283,7 +284,7 @@ save_layout (void)
     for (i = 0; layout [i].opt_name; i++){
 	mc_config_set_int(mc_main_config, "Layout", layout [i].opt_name, *layout [i].opt_addr);
     }
-    mc_config_save_to_file (mc_main_config, profile);
+    mc_config_save_to_file (mc_main_config, profile, NULL);
 
     g_free (profile);
 }
@@ -292,6 +293,7 @@ void
 save_configure (void)
 {
     char *profile;
+    GError *error = NULL;
     int  i;
 
     profile = g_build_filename (home_dir, MC_USERCONF_DIR, MC_CONFIG_FILE, NULL);
@@ -304,7 +306,9 @@ save_configure (void)
     for (i = 0; str_options[i].opt_name != NULL; i++)
 	mc_config_set_string(mc_main_config, CONFIG_APP_SECTION, str_options[i].opt_name, *str_options[i].opt_addr);
 
-    mc_config_save_to_file (mc_main_config, profile);
+    if (! mc_config_save_to_file (mc_main_config, profile, &error))
+	setup_save_config_show_error(profile, &error);
+
     g_free (profile);
 }
 
@@ -348,13 +352,14 @@ save_panel_types (void)
     mc_config_del_group (mc_panels_config, "Temporal:New Left Panel");
     mc_config_del_group (mc_panels_config, "Temporal:New Right Panel");
 
-    mc_config_save_file (mc_panels_config);
+    mc_config_save_file (mc_panels_config, NULL);
 }
 
-void
+gboolean
 save_setup (void)
 {
     char *tmp_profile;
+    gboolean ret;
 
     saving_setup = 1;
 
@@ -383,9 +388,11 @@ save_setup (void)
 		 get_codepage_id( source_codepage ));
 #endif /* HAVE_CHARSET */
     tmp_profile = g_build_filename (home_dir, MC_USERCONF_DIR, MC_CONFIG_FILE, NULL);
-    mc_config_save_to_file (mc_main_config, tmp_profile);
+    ret = mc_config_save_to_file (mc_main_config, tmp_profile, NULL);
+
     g_free (tmp_profile);
     saving_setup = 0;
+    return ret;
 }
 
 void
@@ -504,7 +511,7 @@ setup__move_panels_config_into_separate_file(const char*profile)
         curr_grp++;
     }
 
-    mc_config_save_to_file (tmp_cfg, panels_profile_name);
+    mc_config_save_to_file (tmp_cfg, panels_profile_name, NULL);
     mc_config_deinit(tmp_cfg);
 
     tmp_cfg = mc_config_init(profile);
@@ -526,7 +533,7 @@ setup__move_panels_config_into_separate_file(const char*profile)
         curr_grp++;
     }
     g_strfreev(groups);
-    mc_config_save_file (tmp_cfg);
+    mc_config_save_file (tmp_cfg, NULL);
     mc_config_deinit(tmp_cfg);
 
 }
@@ -992,4 +999,17 @@ load_keymap_defs (void)
 
         mc_config_deinit (mc_global_keymap);
     }
+}
+
+void
+setup_save_config_show_error(const char *filename, GError **error)
+{
+    if (error == NULL || *error == NULL)
+        return;
+
+    message (D_ERROR, MSG_ERROR, _("Cannot save file %s:\n%s"),
+             filename, (*error)->message);
+
+    g_error_free(*error);
+    *error = NULL;
 }
