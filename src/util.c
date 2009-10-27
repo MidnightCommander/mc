@@ -780,7 +780,8 @@ strip_ctrl_codes (char *s)
     for (w = s, r = s; *r; ) {
 	if (*r == ESC_CHAR) {
 	    /* Skip the control sequence's arguments */ ;
-	    if (*(++r) == '[') {
+	    /* '(' need to avoid strange 'B' letter in *Suse (if mc runs under root user) */
+	    if (*(++r) == '[' || *r == '(') {
 		/* strchr() matches trailing binary 0 */
 		while (*(++r) && strchr ("0123456789;?", *r));
 	    } else
