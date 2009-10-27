@@ -1,0 +1,90 @@
+# Syntax highlighting rules for file highlighting rules
+
+# Use \[\] at the end of keywords to suppress their special meaning
+
+context default
+    keyword whole black black blue
+    keyword whole red red
+    keyword whole green green
+    keyword whole brown brown
+    keyword whole blue blue black
+    keyword whole magenta magenta
+    keyword whole cyan cyan
+    keyword whole lightgray lightgray
+    keyword whole gray gray black
+    keyword whole brightred brightred
+    keyword whole brightgreen brightgreen
+    keyword whole yellow yellow
+    keyword whole brightblue brightblue black
+    keyword whole brightmagenta brightmagenta
+    keyword whole brightcyan brightcyan
+    keyword whole white white
+
+    keyword = brightcyan
+    keyword ; brightmagenta
+    keyword whole extensions yellow
+    keyword whole type yellow
+    keyword DEVICE brightred
+    keyword DIR brightred
+    keyword FILE_EXE brightred
+    keyword SPECIAL brightred
+    keyword STALE_LINK brightred
+    keyword SYMLINK brightred
+
+context linestart # \n brown
+
+context linestart [ ] white
+
+context regexp= \n lightgray
+    keyword = brightcyan
+    keyword whole regexp yellow
+
+# regexp patterns
+    keyword \\\/  brightcyan
+    keyword \\\\  brightcyan
+    keyword \\B  brightcyan
+    keyword \\b  brightcyan
+    keyword \\D  brightcyan
+    keyword \\d  brightcyan
+    keyword \\S  brightcyan
+    keyword \\s  brightcyan
+    keyword \\W  brightcyan
+    keyword \\w  brightcyan
+    keyword \\A  brightcyan
+    keyword \\Z  brightcyan
+
+    keyword \\(  brightcyan
+    keyword \\)  brightcyan
+    keyword \\[  brightcyan
+    keyword \\]  brightcyan
+    keyword \\{  brightcyan
+    keyword \\}  brightcyan
+    keyword \\$ brightcyan
+    keyword \\\+ brightcyan
+    keyword \\. brightcyan
+    keyword \\? brightcyan
+    keyword \\\* brightcyan
+    keyword \\^ brightcyan
+    keyword \\| brightcyan
+
+    keyword ( brightmagenta
+    keyword ) brightmagenta
+    keyword [ brightmagenta
+    keyword ] brightmagenta
+    keyword { brightmagenta
+    keyword } brightmagenta
+
+    keyword ?! yellow
+    keyword ?# yellow
+    keyword ?: yellow
+    keyword ?= yellow
+    keyword ?\{-imx:\}+ yellow
+
+    keyword $ yellow
+    keyword \+ yellow
+    keyword . yellow
+    keyword ? yellow
+    keyword \* yellow
+    keyword ^ yellow
+    keyword | yellow
+

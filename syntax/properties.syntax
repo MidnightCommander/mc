@@ -1,0 +1,38 @@
+# Java properties file syntax highlighting
+# Author: Tomas Horsky <tomas@thorsky.info>
+# 
+# http://java.sun.com/j2se/1.4.2/docs/api/java/util/Properties.html#load(java.io.InputStream)
+# - Does not support escapes in keys: \ , \=, \:
+# - Additionally highlights numbers, HTML color codes (#AABBCC), some sort of "variable references" (${ref.to.other.key}), and more
+
+context default lightgray
+# Keys
+    keyword linestart \[\s\t\]\{"$%&'()\*\+,-./0123456789;<>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\}\[!"#$%&'()\*\+,-./0123456789;<>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\] cyan
+    keyword = yellow
+    keyword : yellow
+# Value continuation (first line)
+    keyword \\\n yellow
+    
+    keyword ${*} brightgreen
+    keyword \\u\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\} magenta
+    keyword whole \{-0123456789\}\[0123456789\] brightcyan
+    keyword whole #\{0123456789ABCDEFabcdef\}\[0123456789ABCDEFabcdef\] green
+    
+    keyword whole true white
+    keyword whole false white
+
+# Value continuation (rest of the lines)
+context exclusive \\\n \n lightgray
+    keyword linestart \{\s\t\}\[\s\t\] lightgray black
+    keyword \\\n yellow
+    
+    keyword ${*} brightgreen
+    keyword \\u\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\} magenta
+    keyword whole \{-0123456789\}\[0123456789\] brightcyan
+    keyword whole #\{0123456789ABCDEFabcdef\}\[0123456789ABCDEFabcdef\] green
+
+context linestart # \n brown
+    spellcheck
+
+context linestart ! \n brown
+    spellcheck

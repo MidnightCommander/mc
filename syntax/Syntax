@@ -25,6 +25,9 @@
 file [Ss]yntax$ Syntax\sHighlighting\sdefinitions ^#\ssyntax\srules\sversion\s
 include syntax.syntax
 
+file filehighlight.ini$ File\sHighlighting\sdefinitions ^#\sfile\shighlight\srules\sversion\s
+include filehighlight.syntax
+
 file ..\*\\.(e)$ Eiffel\sSource\sFile
 include eiffel.syntax
 
@@ -103,6 +106,9 @@ include j.syntax
 file ..\*\\.(java|JAVA|Java|jav|groovy|GROOVY|Groovy)$ Java\sProgram
 include java.syntax
 
+file ..\*\\.(properties|config) Java\sFile
+include properties.syntax
+
 file ..\*\\.(cs|CS)$ C\#\sProgram
 include cs.syntax
 
@@ -131,7 +137,7 @@ file ..\*\\.(spec|spec\.in)$ RPM\sSpecfile
 include spec.syntax
 
 file ..\*\\.repo$ YUM\sRepo File
-include yum.repo.syntax
+include yum-repo.syntax
 
 file ..\*\\.(awk)$ AWK\sFile
 include awk.syntax
@@ -219,6 +225,9 @@ include PKGBUILD.syntax
 
 file \\.install$ Arch\\spackage\\sinstall\\sscript
 include sh.syntax
+
+file ..\*\\.(y|yxx|ypp)$ Yacc/Bison\sParser
+include yxx.syntax
 
 file .\* unknown
 include unknown.syntax
