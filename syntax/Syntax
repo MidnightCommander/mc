@@ -137,7 +137,7 @@ file ..\*\\.(spec|spec\.in)$ RPM\sSpecfile
 include spec.syntax
 
 file ..\*\\.repo$ YUM\sRepo File
-include yum.repo.syntax
+include yum-repo.syntax
 
 file ..\*\\.(awk)$ AWK\sFile
 include awk.syntax
