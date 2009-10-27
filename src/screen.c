@@ -1158,11 +1158,10 @@ panel_update_cols (Widget *widget, int frame_size)
     widget->x = origin;
 }
 
+extern int saving_setup;
 static char *
 panel_save_name (WPanel *panel)
 {
-    extern int saving_setup;
-
     /* If the program is shuting down */
     if ((midnight_shutdown && auto_save_setup) || saving_setup)
 	return  g_strdup (panel->panel_name);
@@ -1394,7 +1393,7 @@ panel_get_title_without_hotkey(const char *title)
 
     hkey = strchr(translated_title, '&');
     if ((hkey != NULL) && (hkey[1] != '\0'))
-        memmove(hkey, hkey+1,strlen(hkey));
+        memmove((void *) hkey, (void *) hkey+1,strlen(hkey));
 
     return translated_title;
 }
@@ -3372,7 +3371,7 @@ const panel_field_t *
 panel_get_field_by_title(const char *name)
 {
     gsize index;
-    gchar *title;
+    gchar *title = NULL;
 
     for(index=0; panel_fields[index].id != NULL; index ++) {
 	title = panel_get_title_without_hotkey(panel_fields[index].title_hotkey);

@@ -134,7 +134,7 @@ menubar_paint_idx (WMenuBar *menubar, unsigned int idx, int color)
     const int y = 2 + idx;
     int x = menu->start_x;
 
-    if (x + menu->max_entry_len + 4 > menubar->widget.cols)
+    if (x + menu->max_entry_len + 4 > (gsize) menubar->widget.cols)
 	x = menubar->widget.cols - menu->max_entry_len - 4;
 
     if (entry == NULL) {
@@ -185,7 +185,7 @@ menubar_draw_drop (WMenuBar *menubar)
     int column = menu->start_x - 1;
     unsigned int i;
 
-    if (column + menu->max_entry_len + 5 > menubar->widget.cols)
+    if (column + menu->max_entry_len + 5 > (gsize) menubar->widget.cols)
 	column = menubar->widget.cols - menu->max_entry_len - 5;
 
     tty_setcolor (MENU_ENTRY_COLOR);
@@ -225,7 +225,7 @@ menubar_draw (WMenuBar *menubar)
     /* Now each one of the entries */
     for (i = menubar->menu; i != NULL; i = g_list_next (i)) {
 	Menu *menu = i->data;
-	gboolean is_selected = (menubar->selected == g_list_position (menubar->menu, i));
+	gboolean is_selected = (menubar->selected == (gsize) g_list_position (menubar->menu, i));
 
 	menubar_set_color (menubar, is_selected, FALSE);
 	widget_move (&menubar->widget, 0, menu->start_x);
@@ -605,7 +605,7 @@ menubar_event (Gpm_Event *event, void *data)
 	    menubar_right (menubar);
 	else {
 	    const unsigned int len = g_list_length (menubar->menu);
-	    int new_selection = 0;
+	    unsigned int new_selection = 0;
 
 	    while ((new_selection < len)
 		    && (event->x > ((Menu *) g_list_nth_data (menubar->menu,

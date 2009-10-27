@@ -182,11 +182,12 @@ mcview_display_nroff (mcview_t * view)
         }
         col++;
 #ifdef HAVE_CHARSET
-        if (view->utf8)
+        if (view->utf8) {
             if (g_unichar_iswide(c))
                 col++;
             else if (g_unichar_iszerowidth(c))
                 col--;
+        }
 #endif
         tty_setcolor (NORMAL_COLOR);
     }

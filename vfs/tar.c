@@ -531,7 +531,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive,
     } else {
 	struct stat st;
 	struct vfs_s_entry *entry;
-	struct vfs_s_inode *inode, *parent;
+	struct vfs_s_inode *inode = NULL, *parent;
 	long data_position;
 	char *q;
 	int len;

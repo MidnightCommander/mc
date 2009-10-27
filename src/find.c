@@ -150,7 +150,7 @@ static struct {
 	{ N_("&Edit - F4"), 13, 38 }
 };
 
-static char *in_contents = NULL;
+static const char *in_contents = NULL;
 static char *in_start_dir = INPUT_LAST_TEXT;
 
 static mc_search_t *search_file_handle = NULL;
@@ -441,7 +441,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
 	/* keep empty Content field */
 	/* if not empty, fill from history */
 	*content = NULL;
-	in_contents = "";
+	in_contents =  "";
 	if (in_with->buffer[0] != '\0') {
 	    *content = g_strdup (in_with->buffer);
 	    in_contents = INPUT_LAST_TEXT;

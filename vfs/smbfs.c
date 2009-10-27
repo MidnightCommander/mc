@@ -288,11 +288,12 @@ smbfs_set_debug (int arg)
     DEBUGLEVEL = arg;
 }
 
+extern pstring debugf;
+extern FILE *dbf;
+
 void
 smbfs_set_debugf (const char *filename)
 {
-    extern pstring debugf;
-    extern FILE *dbf;
     if (DEBUGLEVEL > 0) {
 	FILE *outfile = fopen (filename, "w");
 	if (outfile) {

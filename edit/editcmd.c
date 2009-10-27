@@ -428,7 +428,6 @@ menu_save_mode_cmd (void)
 
     size_t i;
     size_t maxlen = 0;
-    int dlg_x;
     size_t w0, w1, b_len, w3;
 
     assert (option_backup_ext != NULL);
@@ -438,7 +437,7 @@ menu_save_mode_cmd (void)
     w1 = str_term_width1 (_(widgets[1].u.button.text)) + 5; /* default button */
     b_len = w0 + w1 + 3;
 
-    maxlen = max (b_len, str_term_width1 (_(dialog.title)) + 2);
+    maxlen = max (b_len, (size_t) str_term_width1 (_(dialog.title)) + 2);
 
     w3 = 0;
     for (i = 0; i < 3; i++) {
@@ -450,7 +449,7 @@ menu_save_mode_cmd (void)
 
     maxlen = max (maxlen, w3 + 4);
 
-    dialog.xlen = min (COLS, maxlen + 8);
+    dialog.xlen = min ((size_t) COLS, maxlen + 8);
 
     widgets[3].u.input.len = w3;
     widgets[1].relative_x = (dialog.xlen - b_len)/2;

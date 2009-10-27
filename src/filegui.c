@@ -923,7 +923,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation,
 	i18n = TRUE;
     }
 
-    fmd_xlen = max (FMDX, COLS * 2/3);
+    fmd_xlen = max (FMDX, (size_t) COLS * 2/3);
 
     /* buttons */
     for (i = 0; i <= 2 - OFFSET; i++)
@@ -950,7 +950,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation,
 #endif
     b0_len = str_term_width1 (fmd_widgets[0].u.button.text) + 4; /* Cancel */
     len = b0_len + b1_len + b2_len;
-    fmd_xlen = min (max (fmd_xlen, len + 6), COLS);
+    fmd_xlen = min (max (fmd_xlen, len + 6), (size_t) COLS);
 
     if (only_one) {
 	int flen;
@@ -961,7 +961,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation,
 		    format, str_trunc ((const char *) text, i));
     } else {
 	g_snprintf (fmd_buf, sizeof (fmd_buf), format, *(const int *) text);
-	fmd_xlen = max (fmd_xlen, str_term_width1 (fmd_buf) + 6);
+	fmd_xlen = max (fmd_xlen, (size_t) str_term_width1 (fmd_buf) + 6);
     }
 
     for (i = sizeof (fmd_widgets) / sizeof (fmd_widgets[0]); i > 0; )
