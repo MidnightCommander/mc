@@ -39,13 +39,6 @@
 
 /*** file scope macro definitions ****************************************************************/
 
-#if ! GLIB_CHECK_VERSION (2, 13, 0)
-#define ISZEROWIDTHTYPE(Type)	IS ((Type),			\
-			    OR (G_UNICODE_NON_SPACING_MARK,	\
-			    OR (G_UNICODE_ENCLOSING_MARK,	\
-			    OR (G_UNICODE_FORMAT,		0))))
-#endif /* ! GLIB_CHECK_VERSION (2, 13, 0) */
-
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/
@@ -56,14 +49,16 @@
 /* --------------------------------------------------------------------------------------------- */
 
 #if ! GLIB_CHECK_VERSION (2, 13, 0)
+/*
+    This is incomplete copy of same glib-function.
+    For older glib (less than 2.13) functional is enought.
+    For full version of glib welcome to glib update.
+*/
 gboolean
 g_unichar_iszerowidth (gunichar c)
 {
     if (G_UNLIKELY (c == 0x00AD))
         return FALSE;
-
-    if (G_UNLIKELY (ISZEROWIDTHTYPE (TYPE (c))))
-        return TRUE;
 
     if (G_UNLIKELY ((c >= 0x1160 && c < 0x1200) || c == 0x200B))
         return TRUE;
