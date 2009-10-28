@@ -11,6 +11,8 @@
 
 #include <sys/stat.h>
 
+#include <glib.h>
+
 /* Flags for vfs_split_url() */
 #define URL_ALLOW_ANON 1
 #define URL_NOSLASH 2
