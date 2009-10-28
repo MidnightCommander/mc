@@ -2590,18 +2590,28 @@ buttonbar_callback (Widget *w, widget_msg_t msg, int parm)
 
     case WIDGET_DRAW:
 	if (bb->visible) {
+	    int offset = 0;
+	    int count_free_positions;
+
 	    widget_move (&bb->widget, 0, 0);
 	    tty_setcolor (DEFAULT_COLOR);
 	    bb->btn_width = buttonbat_get_button_width ();
 	    tty_printf ("%-*s", bb->widget.cols, "");
+	    count_free_positions = COLS - bb->btn_width*BUTTONBAR_LABELS_NUM;
 
 	    for (i = 0; i < COLS / bb->btn_width && i < BUTTONBAR_LABELS_NUM; i++) {
-		widget_move (&bb->widget, 0, i * bb->btn_width);
-		tty_setcolor (DEFAULT_COLOR);
+		widget_move (&bb->widget, 0, (i * bb->btn_width) + offset);
+		tty_setcolor (BUTTONBAR_HOTKEY_COLOR);
 		tty_printf ("%2d", i + 1);
-		tty_setcolor (SELECTED_COLOR);
+		tty_setcolor (BUTTONBAR_BUTTON_COLOR);
 		text = (bb->labels[i].text != NULL) ? bb->labels[i].text : "";
-		tty_print_string (str_fit_to_term (text, bb->btn_width - 2, J_CENTER_LEFT));
+		tty_print_string (str_fit_to_term (
+			text,
+			bb->btn_width - 2 + (int)(offset < count_free_positions),
+			J_LEFT_FIT));
+
+		if (count_free_positions != 0 && offset < count_free_positions)
+		    offset++;
 	    }
 	}
 	return MSG_HANDLED;
@@ -2626,7 +2636,7 @@ buttonbar_event (Gpm_Event *event, void *data)
 	return MOU_NORMAL;
     if (event->y == 2)
 	return MOU_NORMAL;
-    button = (event->x - 1) / bb->btn_width;
+    button = (event->x - 1) * BUTTONBAR_LABELS_NUM / (COLS);
     if (button < BUTTONBAR_LABELS_NUM)
 	buttonbar_call (bb, button);
     return MOU_NORMAL;
