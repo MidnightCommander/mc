@@ -1336,7 +1336,7 @@ lookup_key (const char *keyname, char **label)
     }
 
     if (use_shift != -1) {
-	if (k < 127)
+	if (k < 127 && k > 31 )
 	    k = g_ascii_toupper ((gchar) k);
 	else
 	    k |= KEY_M_SHIFT;
