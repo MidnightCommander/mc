@@ -1372,8 +1372,8 @@ panel_paint_sort_info(WPanel *panel)
 static gchar*
 panel_get_title_without_hotkey(const char *title)
 {
-    gchar *translated_title;
-    const gchar *hkey;
+    char *translated_title;
+    char *hkey;
 
     if (title == NULL)
 	return NULL;
