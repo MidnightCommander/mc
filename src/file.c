@@ -381,12 +381,18 @@ enum {
 };
 
 static FileProgressStatus
-warn_same_file (const char *fmt, const char *a, const char *b)
+real_warn_same_file (enum OperationMode mode, const char *fmt,
+					 const char *a, const char *b)
 {
     char *msg;
     int result = 0;
+    const char *head_msg;
+
+    head_msg = mode == Foreground ? MSG_ERROR :
+		_(" Background process error ");
+
     msg = g_strdup_printf (fmt, a, b);
-    result = query_dialog (MSG_ERROR, msg, D_ERROR, 2, _("&Skip"), _("&Abort"));
+    result = query_dialog (head_msg, msg, D_ERROR, 2, _("&Skip"), _("&Abort"));
     g_free(msg);
     do_refresh ();
     if ( result ) { /* 1 == Abort */
@@ -395,6 +401,31 @@ warn_same_file (const char *fmt, const char *a, const char *b)
         return FILE_SKIP;
     }
 }
+
+#ifdef WITH_BACKGROUND
+static FileProgressStatus
+warn_same_file (const char *fmt, const char *a, const char *b)
+{
+    union {
+	void *p;
+	FileProgressStatus (*f) (enum OperationMode, const char *fmt,
+				 const char *a, const char *b);
+    } pntr;
+    pntr.f = real_warn_same_file;
+
+    if (we_are_background)
+	return parent_call (pntr.p, NULL, 3, strlen (fmt),
+			    fmt, strlen(a), a, strlen(b), b);
+    else
+	return real_warn_same_file (Foreground, fmt, a, b);
+}
+#else
+static FileProgressStatus
+warn_same_file (const char *fmt, const char *a, const char *b)
+{
+    return real_warn_same_file (Foreground, fmt, a, b);
+}
+#endif
 
 FileProgressStatus
 copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
@@ -1756,6 +1787,17 @@ panel_operate_generate_prompt (const WPanel *panel, const int operation,
     return g_strdup (format_string);
 }
 
+#ifdef WITH_BACKGROUND
+int end_bg_process (FileOpContext *ctx, enum OperationMode mode) {
+    int pid = ctx->pid;
+    ctx->pid = 0;
+
+    unregister_task_with_pid(pid);
+//    file_op_context_destroy(ctx);
+    return 1;
+}
+#endif
+
 /**
  * panel_operate:
  *
@@ -1900,6 +1942,12 @@ panel_operate (void *source_panel, FileOperation operation,
 	}
     }
 
+    /* Background also need ctx->ui, but not full */
+    if (do_bg)
+	file_op_context_create_ui_without_init (ctx, 1);
+    else
+	file_op_context_create_ui (ctx, 1);
+
 #ifdef WITH_BACKGROUND
     /* Did the user select to do a background operation? */
     if (do_bg) {
@@ -1937,11 +1985,6 @@ panel_operate (void *source_panel, FileOperation operation,
     }
 
     /* Now, let's do the job */
-
-    if (do_bg)
-	ctx->ui = NULL;
-    else
-	file_op_context_create_ui (ctx, 1);
 
     /* This code is only called by the tree and panel code */
     if (single_entry) {
@@ -2170,6 +2213,12 @@ panel_operate (void *source_panel, FileOperation operation,
 #ifdef WITH_BACKGROUND
     /* Let our parent know we are saying bye bye */
     if (we_are_background) {
+	int cur_pid = getpid();
+	/* Send pid to parent with child context, it is fork and
+	   don't modify real parent ctx */
+	ctx->pid = cur_pid;
+	parent_call ((void *) end_bg_process, ctx, 0);
+
 	vfs_shut ();
 	_exit (0);
     }

@@ -250,7 +250,7 @@ check_progress_buttons (FileOpContext *ctx)
 /* {{{ File progress display routines */
 
 void
-file_op_context_create_ui (FileOpContext *ctx, int with_eta)
+file_op_context_create_ui_without_init (FileOpContext *ctx, int with_eta)
 {
     FileOpContextUI *ui;
     int x_size;
@@ -321,6 +321,18 @@ file_op_context_create_ui (FileOpContext *ctx, int with_eta)
 		label_new (3, FCOPY_GAUGE_X, sixty));
     add_widget (ui->op_dlg, ui->file_label[0] =
 		label_new (3, FCOPY_LABEL_X, fifteen));
+}
+
+void
+file_op_context_create_ui (FileOpContext *ctx, int with_eta)
+{
+    FileOpContextUI *ui;
+
+    g_return_if_fail (ctx != NULL);
+    g_return_if_fail (ctx->ui == NULL);
+
+    file_op_context_create_ui_without_init(ctx, with_eta);
+    ui = ctx->ui;
 
     /* We will manage the dialog without any help, that's why
        we have to call init_dlg */

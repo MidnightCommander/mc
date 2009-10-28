@@ -144,6 +144,7 @@ enum OperationMode {
 /* The following functions are implemented separately by each port */
 
 void file_op_context_create_ui (FileOpContext *ctx, int with_eta);
+void file_op_context_create_ui_without_init (FileOpContext *ctx, int with_eta);
 void file_op_context_destroy_ui (FileOpContext *ctx);
 
 FileProgressStatus file_progress_show (FileOpContext *ctx, off_t done, off_t total);
