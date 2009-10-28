@@ -2597,9 +2597,9 @@ buttonbar_callback (Widget *w, widget_msg_t msg, int parm)
 
 	    for (i = 0; i < COLS / bb->btn_width && i < BUTTONBAR_LABELS_NUM; i++) {
 		widget_move (&bb->widget, 0, i * bb->btn_width);
-		tty_setcolor (DEFAULT_COLOR);
+		tty_setcolor (BUTTONBAR_HOTKEY_COLOR);
 		tty_printf ("%2d", i + 1);
-		tty_setcolor (SELECTED_COLOR);
+		tty_setcolor (BUTTONBAR_BUTTON_COLOR);
 		text = (bb->labels[i].text != NULL) ? bb->labels[i].text : "";
 		tty_print_string (str_fit_to_term (text, bb->btn_width - 2, J_CENTER_LEFT));
 	    }

@@ -230,6 +230,8 @@ mc_skin_color_cache_init (void)
     LINE_STATE_COLOR = mc_skin_color_get ("editor", "linestate");
     BOOK_MARK_COLOR = mc_skin_color_get ("editor", "bookmark");
     BOOK_MARK_FOUND_COLOR = mc_skin_color_get ("editor", "bookmarkfound");
+    BUTTONBAR_HOTKEY_COLOR = mc_skin_color_get ("buttonbar", "hotkey");
+    BUTTONBAR_BUTTON_COLOR = mc_skin_color_get ("buttonbar", "button");
 
 
 }

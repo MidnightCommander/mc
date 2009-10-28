@@ -66,7 +66,10 @@
 #define BOOK_MARK_COLOR         mc_skin_color__cache[30]
 #define BOOK_MARK_FOUND_COLOR   mc_skin_color__cache[31]
 
-#define MC_SKIN_COLOR_CACHE_COUNT 32
+#define BUTTONBAR_HOTKEY_COLOR   mc_skin_color__cache[32]
+#define BUTTONBAR_BUTTON_COLOR   mc_skin_color__cache[33]
+
+#define MC_SKIN_COLOR_CACHE_COUNT 34
 
 
 /*** enums ***************************************************************************************/
