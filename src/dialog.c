@@ -253,7 +253,7 @@ default_dlg_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, vo
 
 Dlg_head *
 create_dlg (int y1, int x1, int lines, int cols, const int *colors,
-            dlg_cb_fn callback, const char *help_ctx, const char *title, int flags)
+            dlg_cb_fn callback, const char *help_ctx, const char *title, dlg_flags_t flags)
 {
     Dlg_head *new_d;
 

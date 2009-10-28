@@ -83,11 +83,25 @@ typedef enum
     DLG_END = 12                /* Shut down dialog */
 } dlg_msg_t;
 
+/* Flags for create_dlg */
+typedef enum
+{
+    DLG_REVERSE = (1 << 5),     /* Tab order is opposite to the add order */
+    DLG_WANT_TAB = (1 << 4),    /* Should the tab key be sent to the dialog? */
+    DLG_WANT_IDLE = (1 << 3),   /* Dialog wants idle events */
+    DLG_COMPACT = (1 << 2),     /* Suppress spaces around the frame */
+    DLG_TRYUP = (1 << 1),       /* Try to move two lines up the dialog */
+    DLG_CENTER = (1 << 0),      /* Center the dialog */
+    DLG_NONE = 0                /* No options */
+} dlg_flags_t;
 
 /* Dialog callback */
 typedef struct Dlg_head Dlg_head;
 typedef cb_ret_t (*dlg_cb_fn) (struct Dlg_head * h, Widget * sender,
                                dlg_msg_t msg, int parm, void *data);
+
+/* menu command execution */
+typedef cb_ret_t (*menu_exec_fn) (int command);
 
 /* get string representation of shortcut assigned  with command */
 /* as menu is a widget of dialog, ask dialog about shortcut string */
@@ -103,11 +117,10 @@ typedef char *(*dlg_shortcut_str) (unsigned long command);
 struct Dlg_head
 {
     /* Set by the user */
-    int flags;                  /* User flags */
+    dlg_flags_t flags;          /* User flags */
     const char *help_ctx;       /* Name of the help entry */
     int *color;                 /* Color set. Unused in viewer and editor */
-                                /*notconst */ char *title;
-                                /* Title of the dialog */
+    char *title;                /* Title of the dialog */
 
     /* Set and received by the user */
     int ret_value;              /* Result of run_dlg() */
@@ -177,19 +190,10 @@ struct Widget
 /* draw box in window */
 void draw_box (Dlg_head * h, int y, int x, int ys, int xs, gboolean single);
 
-/* Flags for create_dlg: */
-#define DLG_REVERSE    (1 << 5)        /* Tab order is opposite to the add order */
-#define DLG_WANT_TAB   (1 << 4)        /* Should the tab key be sent to the dialog? */
-#define DLG_WANT_IDLE  (1 << 3)        /* Dialog wants idle events */
-#define DLG_COMPACT    (1 << 2)        /* Suppress spaces around the frame */
-#define DLG_TRYUP      (1 << 1)        /* Try to move two lines up the dialog */
-#define DLG_CENTER     (1 << 0)        /* Center the dialog */
-#define DLG_NONE       (000000)        /* No options */
-
 /* Creates a dialog head  */
 Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
                       const int *colors, dlg_cb_fn callback,
-                      const char *help_ctx, const char *title, int flags);
+                      const char *help_ctx, const char *title, dlg_flags_t flags);
 
 void dlg_set_default_colors (void);
 
