@@ -307,10 +307,6 @@ mcview_execute_cmd (mcview_t * view, int command, int key)
     case CK_ViewMoveRight:
         mcview_move_right (view, 1);
         break;
-    case CK_ViewQuit:
-        if (mcview_ok_to_quit (view))
-            view->want_to_quit = TRUE;
-        break;
     case CK_ViewSearch:
         view->search_type = MC_SEARCH_T_REGEX;
         mcview_search_cmd (view);
@@ -357,22 +353,21 @@ mcview_execute_cmd (mcview_t * view, int command, int key)
         view->dpy_start = view->marks[view->marker];
         view->dirty++;
         break;
-    case CK_ViewNextFile:
-        /*  Use to indicate parent that we want to see the next/previous file */
-        /* Does not work in panel mode */
-        if (!mcview_is_in_panel (view))
-            view->move_dir = 1;
-        break;
-    case CK_ViewPrevFile:
-        /*  Use to indicate parent that we want to see the next/previous file */
-        /* Does not work in panel mode */
-        if (!mcview_is_in_panel (view))
-            view->move_dir = -1;
-        break;
     case CK_SelectCodepage:
         mcview_select_encoding (view);
         view->dirty++;
         mcview_update (view);
+        break;
+    case CK_ViewNextFile:
+    case CK_ViewPrevFile:
+        /*  Use to indicate parent that we want to see the next/previous file */
+        /* Does not work in panel mode */
+        if (!mcview_is_in_panel (view))
+            view->move_dir = (command == CK_ViewNextFile) ? 1 : -1;
+        /* fallthrough */
+    case CK_ViewQuit:
+        if (mcview_ok_to_quit (view))
+            view->want_to_quit = TRUE;
         break;
     default :
         res = MSG_NOT_HANDLED;
