@@ -24,7 +24,7 @@ AC_DEFUN([MC_SLANG_TERMCAP], [
 #include <slang.h>
 #endif
 		    ],
-		    [SLtt_get_terminfo(); SLtt_tgetflag("");],
+		    [SLtt_get_terminfo(); SLtt_tgetflag((char*)"");],
 		    [mc_cv_slang_termcap=no],
 		    [mc_cv_slang_termcap=yes])
 	LIBS="$ac_save_LIBS"
