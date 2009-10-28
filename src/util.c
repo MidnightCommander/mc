@@ -861,6 +861,7 @@ enum compression_type
 get_compression_type (int fd, const char * name)
 {
     unsigned char magic[16];
+    size_t str_len;
 
     /* Read the magic signature */
     if (mc_read (fd, (char *) magic, 4) != 4)
@@ -937,8 +938,10 @@ get_compression_type (int fd, const char * name)
 	}
     }
 
+    str_len = strlen(name);
     /* HACK: we must belive to extention of LZMA file :) ...*/
-    if (strlen(name) > 5 && strcmp(&name[strlen(name)-5],".lzma") == 0)
+    if ( (str_len > 5 && strcmp(&name[str_len-5],".lzma") == 0) ||
+         (str_len > 4 && strcmp(&name[str_len-4],".tlz") == 0))
 	return COMPRESSION_LZMA;
 
     return COMPRESSION_NONE;
