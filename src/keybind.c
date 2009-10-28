@@ -171,6 +171,9 @@ static const name_keymap_t command_names[] = {
     { "EditParagraphUpAltHighlight",       CK_Paragraph_Up_Alt_Highlight },
     { "EditParagraphDownAltHighlight",     CK_Paragraph_Down_Alt_Highlight },
 
+    { "EditShiftBlockLeft",                CK_Shift_Block_Left },
+    { "EditShiftBlockRight",               CK_Shift_Block_Right },
+
     { "EditXStore",                        CK_XStore },
     { "EditXCut",                          CK_XCut },
     { "EditXPaste",                        CK_XPaste },

@@ -2991,6 +2991,14 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	edit_block_move_cmd (edit);
 	break;
 
+    case CK_Shift_Block_Left:
+        if (edit->mark1 != edit->mark2)
+            edit_move_block_to_left (edit);
+        break;
+    case CK_Shift_Block_Right:
+        if (edit->mark1 != edit->mark2)
+            edit_move_block_to_right (edit);
+        break;
     case CK_XStore:
 	edit_copy_to_X_buf_cmd (edit);
 	break;

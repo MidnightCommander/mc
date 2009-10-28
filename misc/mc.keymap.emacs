@@ -43,6 +43,9 @@ EditRemove = f8
 EditUnmark =
 EditFind = f7
 
+EditShiftBlockLeft =
+EditShiftBlockRight =
+
 EditPageUpHighlight = shift-pgup
 EditPageDownHighlight = shift-pgdn
 EditLeftHighlight = shift-left
