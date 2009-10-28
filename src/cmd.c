@@ -1029,10 +1029,8 @@ user_file_menu_cmd (void)
 char *guess_message_value (void)
 {
     static const char * const var[] = {
-	/* The highest priority value is the `LANGUAGE' environment
-        variable.  This is a GNU extension.  */
-	"LANGUAGE",
 	/* Setting of LC_ALL overwrites all other.  */
+	/* Do not use LANGUAGE for check user locale and drowing hints */
 	"LC_ALL",
 	/* Next comes the name of the desired category.  */
 	"LC_MESSAGES",
