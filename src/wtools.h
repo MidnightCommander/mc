@@ -86,8 +86,12 @@ typedef struct {
     .relative_y = y,							\
     .y_divisions = ydiv,						\
     .widget = NULL,							\
-    .u.checkbox.text = txt,						\
-    .u.checkbox.state = st						\
+    .u = { 								\
+	.checkbox = {							\
+	    .text = txt,						\
+	    .state = st							\
+	}								\
+    }									\
 }
 
 #define QUICK_BUTTON(x, xdiv, y, ydiv, txt, act, cb)			\
@@ -98,9 +102,13 @@ typedef struct {
     .relative_y = y,							\
     .y_divisions = ydiv,						\
     .widget = NULL,							\
-    .u.button.text = txt,						\
-    .u.button.action = act,						\
-    .u.button.callback = cb						\
+    .u = {								\
+	.button = {							\
+	    .text = txt,						\
+	    .action = act,						\
+	    .callback = cb						\
+	}								\
+    }									\
 }
 
 #define QUICK_INPUT(x, xdiv, y, ydiv, txt, len_, flags_, hname, res)	\
@@ -111,11 +119,15 @@ typedef struct {
     .relative_y = y,							\
     .y_divisions = ydiv,						\
     .widget = NULL,							\
-    .u.input.text = txt,						\
-    .u.input.len = len_,						\
-    .u.input.flags = flags_,						\
-    .u.input.histname = hname,						\
-    .u.input.result = res						\
+    .u = {								\
+	.input = {							\
+	    .text = txt,						\
+	    .len = len_,						\
+	    .flags = flags_,						\
+	    .histname = hname,						\
+	    .result = res						\
+	}								\
+    }									\
 }
 
 #define QUICK_LABEL(x, xdiv, y, ydiv, txt)				\
@@ -126,7 +138,11 @@ typedef struct {
     .relative_y = y,							\
     .y_divisions = ydiv,						\
     .widget = NULL,							\
-    .u.label.text = txt							\
+    .u = {								\
+	.label = {							\
+	    .text = txt							\
+	}								\
+    }									\
 }
 
 #define QUICK_RADIO(x, xdiv, y, ydiv, cnt, items_, val)			\
@@ -137,9 +153,13 @@ typedef struct {
     .relative_y = y,							\
     .y_divisions = ydiv,						\
     .widget = NULL,							\
-    .u.radio.count = cnt,						\
-    .u.radio.items = items_,						\
-    .u.radio.value = val,						\
+    .u = {								\
+	.radio = {							\
+	    .count = cnt,						\
+	    .items = items_,						\
+	    .value = val						\
+	}								\
+    }									\
 }
 
 #define QUICK_END							\
@@ -150,11 +170,15 @@ typedef struct {
     .relative_y = 0,							\
     .y_divisions = 0,							\
     .widget = NULL,							\
-    .u.input.text = NULL,						\
-    .u.input.len = 0,							\
-    .u.input.flags = 0,							\
-    .u.input.histname = NULL,						\
-    .u.input.result = NULL						\
+    .u = {								\
+	.input = {							\
+	    .text = NULL,						\
+	    .len = 0,							\
+	    .flags = 0,							\
+	    .histname = NULL,						\
+	    .result = NULL						\
+	}								\
+    }									\
 }
 
 typedef struct {
