@@ -261,7 +261,7 @@
 #define CK_CopyCurrentTagged            7012
 #define CK_CopyOtherPathname            7013
 #define CK_CopyOtherReadlink            7014
-#define CK_CopyOtherTarget              7015
+#define CK_CopyOtherTagged              7015
 #define CK_DeleteCmd                    7016
 #define CK_DirsizesCmd                  7017
 #define CK_DisplayBitsBox               7018

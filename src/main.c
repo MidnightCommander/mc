@@ -1175,7 +1175,7 @@ midnight_execute_cmd (int command)
     case CK_CopyOtherReadlink:
         copy_other_readlink ();
         break;
-    case CK_CopyOtherTarget:
+    case CK_CopyOtherTagged:
         copy_other_tagged ();
         break;
     case CK_DeleteCmd:

@@ -315,7 +315,8 @@ static const name_keymap_t command_names[] = {
     { "CmdCopyOtherReadlink",            CK_CopyOtherReadlink },
     { "CmdAddHotlist",                   CK_AddHotlist },
     { "CmdQuit",                         CK_QuitCmd },
-    { "CmdCopyOtherTarget",              CK_CopyOtherTarget },
+    { "CmdCopyCurrentTagged",            CK_CopyCurrentTagged },
+    { "CmdCopyOtherTagged",              CK_CopyOtherTagged },
     { "CmdToggleShowHidden",             CK_ToggleShowHidden },
 
     /* panel */
@@ -700,7 +701,7 @@ const global_keymap_t default_main_x_map[] = {
     { 'p',         CK_CopyCurrentPathname, "p" },
     { XCTRL ('p'), CK_CopyOtherPathname,   "C-p" },
     { 't',         CK_CopyCurrentTagged,   "t" },
-    { XCTRL ('t'), CK_CopyOtherTarget,     "C-t" },
+    { XCTRL ('t'), CK_CopyOtherTagged,     "C-t" },
     { 'c',         CK_ChmodCmd,            "c" },
     { 'o',         CK_ChownCmd,            "o" },
     { 'r',         CK_CopyCurrentReadlink, "r" },

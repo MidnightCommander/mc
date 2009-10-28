@@ -232,6 +232,10 @@ CmdMenuQuickView = q
 CmdExternalPanelize = exclamation
 CmdReselectVfs = a
 CmdJobs = j
+CmdCopyCurrentPathname = p
+CmdCopyOtherPathname = ctrl-p
+CmdCopyCurrentTagged = t
+CmdCopyOtherTagged = ctrl-t
 
 [panel]
 PanelStartSearch = ctrl-s; alt-s
