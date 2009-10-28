@@ -142,7 +142,7 @@ if test x"$ac_cv_func_getmntent" = xyes; then
 # endif
 #endif
 ],
-                    [ struct mntent *mnt = 0; char *table = MOUNTED;
+                    [ struct mntent *mnt = 0; const char *table = MOUNTED;
 		      if (sizeof mnt && sizeof table) return 0;],
 		    fu_cv_sys_mounted_getmntent1=yes,
 		    fu_cv_sys_mounted_getmntent1=no)])
