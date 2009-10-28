@@ -718,7 +718,7 @@ edit_purge_widget (WEdit *edit)
 }
 
 static void
-edit_set_keymap (WEdit *edit)
+edit_set_keymap (void)
 {
     editor_map = default_editor_keymap;
     if (editor_keymap && editor_keymap->len > 0)
@@ -839,7 +839,7 @@ edit_init (WEdit *edit, int lines, int columns, const char *filename,
 	edit_move_to_line (edit, line - 1);
     }
 
-    edit_set_keymap (edit);
+    edit_set_keymap ();
 
     return edit;
 }

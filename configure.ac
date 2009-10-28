@@ -13,7 +13,6 @@ AM_INIT_AUTOMAKE(mc, ${VERSION} )
 
 AM_CONFIG_HEADER(config.h)
 AM_MAINTAINER_MODE
-
 AC_CANONICAL_HOST
 
 AC_USE_SYSTEM_EXTENSIONS
@@ -521,6 +520,12 @@ if test -z "$ac_env_CFLAGS_set"; then
     if test -n "$GCC"; then
 	CFLAGS="$CFLAGS -Wall"
     fi
+fi
+
+if test x$USE_MAINTAINER_MODE = xyes; then
+    CFLAGS_WARNINGS="-Wall -Werror -Wwrite-strings -Wnested-externs -Wsign-compare -Wuninitialized"
+    CFLAGS_DEBUG="-g3 -O -ggdb"
+    CFLAGS="$CFLAGS $CFLAGS_WARNINGS $CFLAGS_DEBUG"
 fi
 
 AC_SUBST(CFLAGS)

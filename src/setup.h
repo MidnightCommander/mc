@@ -12,7 +12,7 @@ char *setup_init (void);
 void save_layout (void);
 void save_configure (void);
 void load_setup (void);
-void save_setup (void);
+gboolean save_setup (void);
 void done_setup (void);
 void load_key_defs (void);
 char *load_anon_passwd (void);
@@ -36,5 +36,6 @@ extern int mouse_close_dialog;
 extern int reverse_files_only;
 
 extern int setup_copymove_persistent_attr;
+void setup_save_config_show_error(const char *filename, GError **error);
 
 #endif

@@ -279,7 +279,7 @@ sort_box (const panel_field_t *sort_format, int *reverse, int *case_sensitive, i
     {
 	int max_radio = 0, max_check = 0;
 	int ok_len, cancel_len;
-	int i;
+	gsize i;
 
 	QuickWidget quick_widgets[] =
 	{

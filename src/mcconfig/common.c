@@ -23,6 +23,9 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <string.h> /* strerror() */
+#include <errno.h> /* extern int errno */
+
 
 #include "global.h"
 
@@ -45,7 +48,8 @@ mc_config_t *mc_panels_config;
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 static gboolean
-mc_config_new_or_override_file (mc_config_t * mc_config, const gchar * ini_path)
+mc_config_new_or_override_file (mc_config_t * mc_config, const gchar * ini_path,
+                                GError **error)
 {
     gchar *data, *written_data;
     gsize len, total_written;
@@ -55,15 +59,17 @@ mc_config_new_or_override_file (mc_config_t * mc_config, const gchar * ini_path)
 
     data = g_key_file_to_data (mc_config->handle, &len, NULL);
     if (!exist_file (ini_path)) {
-        ret = g_file_set_contents (ini_path, data, len, NULL);
+        ret = g_file_set_contents (ini_path, data, len, error);
         g_free (data);
         return ret;
     }
     mc_util_make_backup_if_possible (ini_path, "~");
 
     fd = mc_open (ini_path, O_WRONLY | O_TRUNC | O_SYNC, 0);
-    if (fd == -1)
+    if (fd == -1) {
+        g_propagate_error (error, g_error_new (mc_main_error_quark() ,0, strerror(errno)));
         return FALSE;
+    }
 
     for (written_data = data, total_written = len;
          (cur_written = mc_write (fd, (const void *) written_data, total_written)) > 0;
@@ -73,6 +79,7 @@ mc_config_new_or_override_file (mc_config_t * mc_config, const gchar * ini_path)
 
     if (cur_written == -1) {
         mc_util_restore_from_backup_if_possible (ini_path, "~");
+        g_propagate_error (error, g_error_new (mc_main_error_quark() ,0, strerror(errno)));
         return FALSE;
     }
 
@@ -221,24 +228,24 @@ mc_config_read_file (mc_config_t * mc_config, const gchar * ini_path)
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 gboolean
-mc_config_save_file (mc_config_t * mc_config)
+mc_config_save_file (mc_config_t * mc_config, GError **error)
 {
     if (mc_config == NULL || mc_config->ini_path == NULL) {
         return FALSE;
     }
-    return mc_config_new_or_override_file (mc_config, mc_config->ini_path);
+    return mc_config_new_or_override_file (mc_config, mc_config->ini_path, error);
 }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 gboolean
-mc_config_save_to_file (mc_config_t * mc_config, const gchar * ini_path)
+mc_config_save_to_file (mc_config_t * mc_config, const gchar * ini_path, GError **error)
 {
 
     if (mc_config == NULL) {
         return FALSE;
     }
-    return mc_config_new_or_override_file (mc_config, ini_path);
+    return mc_config_new_or_override_file (mc_config, ini_path, error);
 
 }
 

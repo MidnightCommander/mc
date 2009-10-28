@@ -49,6 +49,9 @@
 inline static gboolean
 mc_fhl_is_file (file_entry * fe)
 {
+#if S_ISREG == 0
+    (void) fe;
+#endif
     return S_ISREG (fe->st.st_mode);
 }
 
@@ -61,12 +64,18 @@ mc_fhl_is_file_exec (file_entry * fe)
 inline static gboolean
 mc_fhl_is_dir (file_entry * fe)
 {
+#if S_ISDIR == 0
+    (void) fe;
+#endif
     return S_ISDIR (fe->st.st_mode);
 }
 
 inline static gboolean
 mc_fhl_is_link (file_entry * fe)
 {
+#if S_ISLNK == 0
+    (void) fe;
+#endif
     return S_ISLNK (fe->st.st_mode);
 }
 
@@ -85,30 +94,46 @@ mc_fhl_is_stale_link (file_entry * fe)
 inline static gboolean
 mc_fhl_is_device_char (file_entry * fe)
 {
+#if S_ISCHR == 0
+    (void) fe;
+#endif
     return S_ISCHR (fe->st.st_mode);
 }
 
 inline static gboolean
 mc_fhl_is_device_block (file_entry * fe)
 {
+#if S_ISBLK == 0
+    (void) fe;
+#endif
     return S_ISBLK (fe->st.st_mode);
 }
 
 inline static gboolean
 mc_fhl_is_special_socket (file_entry * fe)
 {
+#if S_ISSOCK == 0
+    (void) fe;
+#endif
     return S_ISSOCK (fe->st.st_mode);
 }
 
 inline static gboolean
 mc_fhl_is_special_fifo (file_entry * fe)
 {
+#if S_ISFIFO == 0
+    (void) fe;
+#endif
     return S_ISFIFO (fe->st.st_mode);
 }
 
 inline static gboolean
 mc_fhl_is_special_door (file_entry * fe)
 {
+#if S_ISDOOR == 0
+    (void) fe;
+#endif
+
     return S_ISDOOR (fe->st.st_mode);
 }
 

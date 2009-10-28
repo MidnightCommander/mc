@@ -68,7 +68,7 @@ mcview_display_text (mcview_t * view)
     screen_dimen row, col;
     off_t from;
     int cw = 1;
-    int c, prev_ch;
+    int c, prev_ch = 0;
     gboolean read_res = TRUE;
     struct hexedit_change_node *curr = view->change_list;
 
@@ -153,11 +153,12 @@ mcview_display_text (mcview_t * view)
         }
         col++;
 #ifdef HAVE_CHARSET
-        if (view->utf8)
+        if (view->utf8) {
             if (g_unichar_iswide(c))
                 col++;
             else if (g_unichar_iszerowidth(c))
                 col--;
+        }
 #endif
         tty_setcolor (NORMAL_COLOR);
     }

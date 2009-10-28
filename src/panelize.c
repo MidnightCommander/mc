@@ -366,7 +366,7 @@ void save_panelize (void)
 				current->label,
 				current->command);
     }
-    mc_config_save_file (mc_main_config);
+    mc_config_save_file (mc_main_config, NULL);
 }
 
 void done_panelize (void)
