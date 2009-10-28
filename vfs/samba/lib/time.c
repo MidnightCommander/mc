@@ -493,11 +493,7 @@ char *http_timestring(time_t t)
   if (!tm)
     slprintf(buf,sizeof(buf)-1,"%ld seconds since the Epoch",(long)t);
   else
-#ifndef HAVE_STRFTIME
-  fstrcpy(buf, asctime(tm));
-#else /* !HAVE_STRFTIME */
   strftime(buf, sizeof(buf)-1, "%a, %d %b %Y %H:%M:%S %Z", tm);
-#endif /* !HAVE_STRFTIME */
   return buf;
 }
 #endif /*0 */
@@ -515,11 +511,7 @@ char *timestring(void )
 	if (!tm) {
 		slprintf(TimeBuf,sizeof(TimeBuf)-1,"%ld seconds since the Epoch",(long)t);
 	} else {
-#ifdef HAVE_STRFTIME
 		strftime(TimeBuf,100,"%Y/%m/%d %H:%M:%S",tm);
-#else
-		fstrcpy(TimeBuf, asctime(tm));
-#endif
 	}
 	return(TimeBuf);
 }
