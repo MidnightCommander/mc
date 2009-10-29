@@ -7,6 +7,7 @@ pkglibexecdir =		$(libexecdir)/@PACKAGE@
 
 bin_PROGRAMS = mc mcmfmt
 
+
 if CONS_SAVER
 pkglibexec_PROGRAMS = cons.saver
 AM_CPPFLAGS = -DDATADIR=\""$(pkgdatadir)/"\" -DLOCALEDIR=\""$(localedir)"\" \
@@ -39,57 +40,111 @@ VFSLIB = ../vfs/libvfs-mc.a
 endif
 endif
 
+SRC_maintainer=logging.c logging.h
+SRC_charset = charsets.c charsets.h selcodepage.c selcodepage.h
+
 if USE_MAINTAINER_MODE
-    MAINTAINER_sources=logging.c logging.h
+    SRC_USE_maintainer=$(SRC_MAINTAINER)
 endif
-
-
-
-
-MCCONFIGLIB = mcconfig/libmcconfig.la
-SEARCHLIB = search/libsearch.la
-TTYLIB =  tty/libmctty.la
-VIEWERLIB = viewer/libmcviewer.la
-FILEHIGHLIGHTLIB=filehighlight/libmcfilehighlight.la
-SKINLIB =  skin/libmcskin.la
-
-mc_LDADD = $(EDITLIB) $(VFSLIB) $(FILEHIGHLIGHTLIB) $(SKINLIB) \
-	$(MCCONFIGLIB) $(SEARCHLIB) $(TTYLIB) $(VIEWERLIB) \
-	$(INTLLIBS) $(MCLIBS) $(SLANGLIB) $(LIBICONV) $(GLIB_LIBS)
-
-CHARSET_SRC = charsets.c charsets.h selcodepage.c selcodepage.h
-
-SRCS = \
-	$(MAINTAINER_sources) \
-	args.c args.h achown.c achown.h background.c background.h	\
-	boxes.c boxes.h chmod.c chmod.h chown.c chown.h cmd.c cmd.h	\
-	command.c command.h complete.c cons.handler.c			\
-	cons.saver.h dialog.c dialog.h dir.c dir.h			\
-	execute.c execute.h ext.c ext.h file.c filegui.c		\
-	filegui.h file.h filenot.c fileopctx.c fileopctx.h find.c	\
-	fileloc.h find.h fs.h						\
-	glibcompat.c glibcompat.h global.h help.c help.h hotlist.c	\
-	hotlist.h info.c info.h layout.c				\
-	layout.h learn.c learn.h listmode.c listmode.h history.h	\
-	 main.c main.h main-widgets.h		\
-	menu.c menu.h mountlist.c mountlist.h				\
-	option.c option.h panel.h panelize.c panelize.h screen.c	\
-	setup.c setup.h  subshell.c subshell.h textconf.c textconf.h	\
-	tree.c tree.h treestore.c treestore.h timefmt.h user.c		\
-	user.h util.c util.h utilunix.c vfsdummy.h 			\
-	widget.c widget.h wtools.c wtools.h unixcompat.h		\
-	ecs.h ecs.c							\
-	keybind.c keybind.h cmddef.h					\
-	strutil.h strutil.c strutilascii.c strutil8bit.c strutilutf8.c	\
-	search/search.h strescape.c strescape.h
 
 if CHARSET
-mc_SOURCES = $(SRCS) $(CHARSET_SRC)
-else
-mc_SOURCES = $(SRCS)
+    SRC_USE_charset=$(SRC_charset)
 endif
 
-EXTRA_DIST = man2hlp.c $(CHARSET_SRC)
+mc_LDADD = \
+	$(EDITLIB) $(VFSLIB) \
+	filehighlight/libmcfilehighlight.la \
+	mcconfig/libmcconfig.la \
+	search/libsearch.la \
+	skin/libmcskin.la \
+	tty/libmctty.la \
+	viewer/libmcviewer.la \
+	$(INTLLIBS) $(MCLIBS) $(SLANGLIB) $(LIBICONV) $(GLIB_LIBS)
+
+SRC_mc_widgets = \
+	dialog.c dialog.h \
+	menu.c menu.h \
+	screen.c panel.h \
+	tree.c tree.h \
+	widget.c widget.h \
+	wtools.c wtools.h
+
+SRC_mc_strutils = \
+	strescape.c strescape.h \
+	strutil8bit.c \
+	strutilascii.c \
+	strutil.c strutil.h \
+	strutilutf8.c
+
+SRC_mc_conssaver = \
+	cons.handler.c cons.saver.h
+
+SRC_mc_options = \
+	learn.c learn.h \
+	option.c option.h \
+	setup.c setup.h
+
+SRC_mc_keybind = \
+	keybind.c keybind.h \
+	cmddef.h
+
+SRC_mc_utils = \
+	util.c util.h \
+	utilunix.c \
+	vfsdummy.h \
+	unixcompat.h
+
+SRC_mc_extended_charset = \
+	ecs.c ecs.h
+
+mc_SOURCES = \
+	$(SRC_USE_maintainer) \
+	$(SRC_USE_charset) \
+	$(SRC_mc_widgets) \
+	$(SRC_mc_strutils) \
+	$(SRC_mc_conssaver) \
+	$(SRC_mc_options) \
+	$(SRC_mc_keybind) \
+	$(SRC_mc_utils) \
+	$(SRC_mc_extended_charset) \
+	achown.c achown.h \
+	args.c args.h \
+	background.c background.h \
+	boxes.c boxes.h \
+	chmod.c chmod.h \
+	chown.c chown.h \
+	cmd.c cmd.h \
+	command.c command.h \
+	complete.c \
+	dir.c dir.h \
+	execute.c execute.h \
+	ext.c ext.h \
+	file.c file.h \
+	filegui.c filegui.h \
+	fileloc.h \
+	filenot.c \
+	fileopctx.c fileopctx.h \
+	find.c find.h \
+	fs.h \
+	glibcompat.c glibcompat.h \
+	global.h \
+	help.c help.h \
+	history.h \
+	hotlist.c hotlist.h \
+	info.c info.h \
+	layout.c layout.h \
+	listmode.c listmode.h \
+	main.c main.h \
+	main-widgets.h \
+	mountlist.c mountlist.h \
+	panelize.c panelize.h \
+	subshell.c subshell.h \
+	textconf.c textconf.h \
+	timefmt.h \
+	treestore.c treestore.h \
+	user.c user.h
+
+EXTRA_DIST = man2hlp.c $(SRC_maintainer) $(SRC_charset)
 
 # automated testing
 
