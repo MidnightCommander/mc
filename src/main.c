@@ -2236,6 +2236,8 @@ main (int argc, char *argv[])
     /* Save the tree store */
     tree_store_save ();
 
+    free_keymap_defs ();
+
     /* Virtual File System shutdown */
     vfs_shut ();
 

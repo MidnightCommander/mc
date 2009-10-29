@@ -21,6 +21,7 @@ void panel_save_setup (struct WPanel *panel, const char *section);
 void panel_load_setup (struct WPanel *panel, const char *section);
 void save_panel_types (void);
 void load_keymap_defs (void);
+void free_keymap_defs (void);
 extern char *profile_name;
 extern char *global_profile_name;
 

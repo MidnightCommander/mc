@@ -78,7 +78,6 @@ extern int num_history_items_recorded;
 
 char *profile_name;		/* .mc/ini */
 char *global_profile_name;	/* mc.lib */
-char *panels_profile_name;	/* .mc/panels.ini */
 
 char *setup_color_string;
 char *term_color_string;
@@ -91,6 +90,8 @@ int startup_right_mode;
 /* default panel values */
 int saving_setup;
 int setup_copymove_persistent_attr = 1;
+
+static char *panels_profile_name = NULL;	/* .mc/panels.ini */
 
 static const struct {
     const char *key;
@@ -834,15 +835,23 @@ load_anon_passwd ()
 }
 #endif /* USE_VFS && USE_NETCODE */
 
-void done_setup (void)
+void
+done_setup (void)
 {
+    int i;
+
     g_free (profile_name);
     g_free (global_profile_name);
-    g_free(color_terminal_string);
-    g_free(term_color_string);
-    g_free(setup_color_string);
-    mc_config_deinit(mc_main_config);
-    mc_config_deinit(mc_panels_config);
+    g_free (color_terminal_string);
+    g_free (term_color_string);
+    g_free (setup_color_string);
+    g_free (panels_profile_name);
+    mc_config_deinit (mc_main_config);
+    mc_config_deinit (mc_panels_config);
+
+    for (i = 0; str_options[i].opt_name != NULL; i++)
+	g_free (*str_options[i].opt_addr);
+
     done_hotlist ();
     done_panelize ();
 /*    directory_history_free (); */
@@ -999,6 +1008,21 @@ load_keymap_defs (void)
 
         mc_config_deinit (mc_global_keymap);
     }
+}
+
+void
+free_keymap_defs (void)
+{
+#ifdef USE_INTERNAL_EDIT
+        g_array_free (editor_keymap, TRUE);
+        g_array_free (editor_x_keymap, TRUE);
+#endif
+        g_array_free (viewer_keymap, TRUE);
+        g_array_free (viewer_hex_keymap, TRUE);
+        g_array_free (main_keymap, TRUE);
+        g_array_free (main_x_keymap, TRUE);
+        g_array_free (panel_keymap, TRUE);
+        g_array_free (input_keymap, TRUE);
 }
 
 void
