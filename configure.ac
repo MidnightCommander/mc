@@ -515,18 +515,17 @@ if test "$GLIBC21" != yes; then
     AC_DEFINE(USE_INCLUDED_REGEX, 1, [Use the regex included here])
 fi
 
-dnl If default CFLAGS is used with gcc, add -Wall
-if test -z "$ac_env_CFLAGS_set"; then
-    if test -n "$GCC"; then
-	CFLAGS="$CFLAGS -Wall"
-    fi
-fi
+MC_CHECK_CFLAGS
+
+CFLAGS_OPTS=" -O2 "
+CFLAGS_EXTRA=""
 
 if test x$USE_MAINTAINER_MODE = xyes; then
-    CFLAGS_WARNINGS="-Wall -Werror -Wwrite-strings -Wnested-externs -Wsign-compare -Wuninitialized"
-    CFLAGS_DEBUG="-g3 -O -ggdb"
-    CFLAGS="$CFLAGS $CFLAGS_WARNINGS $CFLAGS_DEBUG"
+    CFLAGS_EXTRA="-Werror"
+    CFLAGS_OPTS="-g3 -O -ggdb"
 fi
+
+CFLAGS="$CFLAGS $mc_configured_cflags $CFLAGS_OPTS $CFLAGS_EXTRA"
 
 AC_SUBST(CFLAGS)
 AC_SUBST(CPPFLAGS)
