@@ -39,6 +39,13 @@ VFSLIB = ../vfs/libvfs-mc.a
 endif
 endif
 
+if USE_MAINTAINER_MODE
+    MAINTAINER_sources=logging.c logging.h
+endif
+
+
+
+
 MCCONFIGLIB = mcconfig/libmcconfig.la
 SEARCHLIB = search/libsearch.la
 TTYLIB =  tty/libmctty.la
@@ -52,7 +59,9 @@ mc_LDADD = $(EDITLIB) $(VFSLIB) $(FILEHIGHLIGHTLIB) $(SKINLIB) \
 
 CHARSET_SRC = charsets.c charsets.h selcodepage.c selcodepage.h
 
-SRCS =	args.c args.h achown.c achown.h background.c background.h	\
+SRCS = \
+	$(MAINTAINER_sources) \
+	args.c args.h achown.c achown.h background.c background.h	\
 	boxes.c boxes.h chmod.c chmod.h chown.c chown.h cmd.c cmd.h	\
 	command.c command.h complete.c cons.handler.c			\
 	cons.saver.h dialog.c dialog.h dir.c dir.h			\
@@ -62,7 +71,7 @@ SRCS =	args.c args.h achown.c achown.h background.c background.h	\
 	glibcompat.c glibcompat.h global.h help.c help.h hotlist.c	\
 	hotlist.h info.c info.h layout.c				\
 	layout.h learn.c learn.h listmode.c listmode.h history.h	\
-	logging.h logging.c main.c main.h main-widgets.h		\
+	 main.c main.h main-widgets.h		\
 	menu.c menu.h mountlist.c mountlist.h				\
 	option.c option.h panel.h panelize.c panelize.h screen.c	\
 	setup.c setup.h  subshell.c subshell.h textconf.c textconf.h	\

@@ -518,14 +518,22 @@ fi
 MC_CHECK_CFLAGS
 
 CFLAGS_OPTS=" -O2 "
-CFLAGS_EXTRA=""
 
 if test x$USE_MAINTAINER_MODE = xyes; then
-    CFLAGS_EXTRA="-Werror"
     CFLAGS_OPTS="-g3 -O -ggdb"
+    AC_DEFINE(USE_MAINTAINER_MODE, 1, [Use maintainer mode])
 fi
 
-CFLAGS="$CFLAGS $mc_configured_cflags $CFLAGS_OPTS $CFLAGS_EXTRA"
+AC_ARG_ENABLE(
+    [werror],
+    AC_HELP_STRING([--enable-werror], [Handle all compiler warnings as errors] )
+)
+
+if test "x$enable_werror" = xyes; then
+    MC_CHECK_ONE_CFLAG([-Werror])
+fi
+
+CFLAGS="$CFLAGS $mc_configured_cflags $CFLAGS_OPTS"
 
 AC_SUBST(CFLAGS)
 AC_SUBST(CPPFLAGS)
@@ -543,6 +551,7 @@ if test -n "$use_smbfs"; then
   AC_CONFIG_SUBDIRS([vfs/samba])
 fi
 
+AM_CONDITIONAL(USE_MAINTAINER_MODE, [test x"$USE_MAINTAINER_MODE" = xyes])
 AM_CONDITIONAL(USE_SCREEN_SLANG, [test x"$with_screen" = xslang])
 AM_CONDITIONAL(USE_EDIT, [test -n "$use_edit"])
 AM_CONDITIONAL(USE_VFS, [test "x$use_vfs" = xyes])
