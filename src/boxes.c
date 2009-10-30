@@ -975,7 +975,7 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain,
     static int dialog_x = 44;
     enum { b0 = 3, dialog_y = 12};
     struct smb_authinfo *return_value;
-    static const char* labs[] = {N_("Domain:"), N_("Username:"), N_("Password:")};
+    static const char* lc_labs[] = {N_("Domain:"), N_("Username:"), N_("Password:")};
     static const char* buts[] = {N_("&OK"), N_("&Cancel")};
     static int ilen = 30, istart = 14;
     static int b2 = 30;
@@ -990,12 +990,12 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain,
     
     if (!i18n_flag)
     {
-        register int i = sizeof(labs)/sizeof(labs[0]);
+        register int i = sizeof(lc_labs)/sizeof(lc_labs[0]);
         int l1, maxlen = 0;
         
         while (i--)
         {
-            l1 = str_term_width1 (labs [i] = _(labs [i]));
+            l1 = str_term_width1 (lc_labs [i] = _(lc_labs [i]));
             if (l1 > maxlen)
                 maxlen = l1;
         }
@@ -1048,9 +1048,9 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain,
     in_password->is_password = 1;
     add_widget (auth_dlg, in_password);
 
-    add_widget (auth_dlg, label_new (7, 3, labs[2]));
-    add_widget (auth_dlg, label_new (5, 3, labs[1]));
-    add_widget (auth_dlg, label_new (3, 3, labs[0]));
+    add_widget (auth_dlg, label_new (7, 3, lc_labs[2]));
+    add_widget (auth_dlg, label_new (5, 3, lc_labs[1]));
+    add_widget (auth_dlg, label_new (3, 3, lc_labs[0]));
 
     run_dlg (auth_dlg);
 

@@ -1034,11 +1034,11 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation,
 	    ctx->umask_kill = 0777777;
 	    ctx->preserve_uidgid = (geteuid () == 0) ? 1 : 0;
 	} else {
-	    int i;
+	    int i2;
 	    ctx->preserve = ctx->preserve_uidgid = 0;
-	    i = umask (0);
-	    umask (i);
-	    ctx->umask_kill = i ^ 0777777;
+	    i2 = umask (0);
+	    umask (i2);
+	    ctx->umask_kill = i2 ^ 0777777;
 	}
 
 	if (!dest_dir || !*dest_dir) {

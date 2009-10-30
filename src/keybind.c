@@ -782,7 +782,7 @@ lookup_action (const char *keyname)
     return 0;
 }
 
-void
+static void
 keymap_add (GArray *keymap, int key, int cmd, const char *caption)
 {
     if (key != 0 && cmd != 0) {

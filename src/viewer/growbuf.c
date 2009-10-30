@@ -168,10 +168,14 @@ mcview_growbuf_read_until (mcview_t * view, off_t ofs)
 gboolean
 mcview_get_byte_growing_buffer (mcview_t * view, off_t byte_index, int *retval)
 {
+    off_t pageno;
+    off_t pageindex;
+
     if (retval)
         *retval = -1;
-    off_t pageno = byte_index / VIEW_PAGE_SIZE;
-    off_t pageindex = byte_index % VIEW_PAGE_SIZE;
+
+    pageno = byte_index / VIEW_PAGE_SIZE;
+    pageindex = byte_index % VIEW_PAGE_SIZE;
 
     assert (view->growbuf_in_use);
 

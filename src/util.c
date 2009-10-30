@@ -1243,7 +1243,7 @@ concat_dir_and_file (const char *dir, const char *file)
 GList *
 list_append_unique (GList *list, char *text)
 {
-    GList *link, *newlink, *tmp;
+    GList *lc_link, *newlink, *tmp;
 
     /*
      * Go to the last position and traverse the list backwards
@@ -1252,16 +1252,16 @@ list_append_unique (GList *list, char *text)
      */
     list = g_list_append (list, text);
     list = g_list_last (list);
-    link = g_list_previous (list);
+    lc_link = g_list_previous (list);
 
-    while (link) {
-	newlink = g_list_previous (link);
-	if (!strcmp ((char *) link->data, text)) {
-	    g_free (link->data);
-	    tmp = g_list_remove_link (list, link);
-	    g_list_free_1 (link);
+    while (lc_link) {
+	newlink = g_list_previous (lc_link);
+	if (!strcmp ((char *) lc_link->data, text)) {
+	    g_free (lc_link->data);
+	    tmp = g_list_remove_link (list, lc_link);
+	    g_list_free_1 (lc_link);
 	}
-	link = newlink;
+	lc_link = newlink;
     }
 
     return list;

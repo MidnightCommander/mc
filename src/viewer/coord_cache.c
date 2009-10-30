@@ -67,6 +67,36 @@
 
 /*** file scope functions ************************************************************************/
 
+/* --------------------------------------------------------------------------------------------- */
+
+/* Find and return the index of the last cache entry that is
+ * smaller than ''coord'', according to the criterion ''sort_by''. */
+static guint
+mcview_ccache_find (mcview_t * view, const struct coord_cache_entry *cache,
+                    const struct coord_cache_entry *coord, enum ccache_type sort_by)
+{
+    guint base, i, limit;
+
+    limit = view->coord_cache->len;
+    assert (limit != 0);
+
+    base = 0;
+    while (limit > 1) {
+        i = base + limit / 2;
+        if (mcview_coord_cache_entry_less (coord, &cache[i], sort_by, view->text_nroff_mode)) {
+            /* continue the search in the lower half of the cache */
+        } else {
+            /* continue the search in the upper half of the cache */
+            base = i;
+        }
+        limit = (limit + 1) / 2;
+    }
+    return base;
+}
+
+
+/* --------------------------------------------------------------------------------------------- */
+
 /*** public functions ****************************************************************************/
 
 /* --------------------------------------------------------------------------------------------- */
@@ -161,33 +191,6 @@ mcview_ccache_dump (mcview_t * view)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* Find and return the index of the last cache entry that is
- * smaller than ''coord'', according to the criterion ''sort_by''. */
-guint
-mcview_ccache_find (mcview_t * view, const struct coord_cache_entry *cache,
-                    const struct coord_cache_entry *coord, enum ccache_type sort_by)
-{
-    guint base, i, limit;
-
-    limit = view->coord_cache->len;
-    assert (limit != 0);
-
-    base = 0;
-    while (limit > 1) {
-        i = base + limit / 2;
-        if (mcview_coord_cache_entry_less (coord, &cache[i], sort_by, view->text_nroff_mode)) {
-            /* continue the search in the lower half of the cache */
-        } else {
-            /* continue the search in the upper half of the cache */
-            base = i;
-        }
-        limit = (limit + 1) / 2;
-    }
-    return base;
-}
-
-
-/* --------------------------------------------------------------------------------------------- */
 
 /* Look up the missing components of ''coord'', which are given by
  * ''lookup_what''. The function returns the smallest value that

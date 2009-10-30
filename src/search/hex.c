@@ -92,7 +92,7 @@ mc_search__hex_translate_to_regex (gchar * str, gsize * len)
 /*** public functions ****************************************************************************/
 
 void
-mc_search__cond_struct_new_init_hex (const char *charset, mc_search_t * mc_search,
+mc_search__cond_struct_new_init_hex (const char *charset, mc_search_t * lc_mc_search,
                                      mc_search_cond_t * mc_search_cond)
 {
     GString *tmp =
@@ -101,25 +101,25 @@ mc_search__cond_struct_new_init_hex (const char *charset, mc_search_t * mc_searc
     g_string_free (mc_search_cond->str, TRUE);
     mc_search_cond->str = tmp;
 
-    mc_search__cond_struct_new_init_regex (charset, mc_search, mc_search_cond);
+    mc_search__cond_struct_new_init_regex (charset, lc_mc_search, mc_search_cond);
 
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_search__run_hex (mc_search_t * mc_search, const void *user_data,
+mc_search__run_hex (mc_search_t * lc_mc_search, const void *user_data,
                     gsize start_search, gsize end_search, gsize * found_len)
 {
-    return mc_search__run_regex (mc_search, user_data, start_search, end_search, found_len);
+    return mc_search__run_regex (lc_mc_search, user_data, start_search, end_search, found_len);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 GString *
-mc_search_hex_prepare_replace_str (mc_search_t * mc_search, GString * replace_str)
+mc_search_hex_prepare_replace_str (mc_search_t * lc_mc_search, GString * replace_str)
 {
-    (void) mc_search;
+    (void) lc_mc_search;
     return g_string_new_len (replace_str->str, replace_str->len);
 }
 

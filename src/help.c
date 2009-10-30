@@ -243,16 +243,16 @@ static void move_to_bottom (void)
     move_backward (help_lines - 1);
 }
 
-static const char *help_follow_link (const char *start, const char *selected_item)
+static const char *help_follow_link (const char *start, const char *lc_selected_item)
 {
     char link_name [MAXLINKNAME];
     const char *p;
     int  i = 0;
 
-    if (!selected_item)
+    if (!lc_selected_item)
 	return start;
     
-    for (p = selected_item; *p && *p != CHAR_NODE_END && *p != CHAR_LINK_POINTER; p++)
+    for (p = lc_selected_item; *p && *p != CHAR_NODE_END && *p != CHAR_LINK_POINTER; p++)
 	;
     if (*p == CHAR_LINK_POINTER){
 	link_name [0] = '[';

@@ -1230,24 +1230,24 @@ check_movement_keys (int key, int page_size, void *data, move_fn backfn,
 }
 
 static int
-lookup_keyname (const char *keyname, int *index)
+lookup_keyname (const char *keyname, int *lc_index)
 {
     if (keyname[0] != '\0') {
 	int i;
 
 	if (keyname[1] == '\0') {
-	    *index = -1;
+	    *lc_index = -1;
 	    return (int) keyname[0];
 	}
 
 	for (i = 0; key_name_conv_tab[i].code; i++)
 	    if (str_casecmp (key_name_conv_tab[i].name, keyname) == 0) {
-		*index = i;
+		*lc_index = i;
 		return key_name_conv_tab[i].code;
 	    }
     }
 
-    *index = -1;
+    *lc_index = -1;
     return 0;
 }
 
@@ -1255,10 +1255,10 @@ lookup_keyname (const char *keyname, int *index)
 int
 lookup_key (const char *keyname, char **label)
 {
-    char **keys, **p;
+    char **lc_keys, **p;
     int k = -1;
     int key = 0;
-    int index = -1;
+    int lc_index = -1;
 
     int use_meta = -1;
     int use_ctrl = -1;
@@ -1268,7 +1268,7 @@ lookup_key (const char *keyname, char **label)
 	return 0;
 
     keyname = g_strstrip (g_strdup (keyname));
-    p = keys = g_strsplit_set (keyname, "-+ ", -1);
+    p = lc_keys = g_strsplit_set (keyname, "-+ ", -1);
     g_free ((char *) keyname);
 
     while ((p != NULL) && (*p != NULL)) {
@@ -1285,7 +1285,7 @@ lookup_key (const char *keyname, char **label)
 		use_shift = idx;
 	    else {
 		k = key;
-		index = idx;
+		lc_index = idx;
 		break;
 	    }
 	}
@@ -1293,7 +1293,7 @@ lookup_key (const char *keyname, char **label)
 	p++;
     }
 
-    g_strfreev (keys);
+    g_strfreev (lc_keys);
 
     /* output */
     if (k <= 0)
@@ -1319,16 +1319,16 @@ lookup_key (const char *keyname, char **label)
 	    else {
 		g_string_append (s, key_name_conv_tab[use_shift].shortcut);
 		g_string_append_c (s, '-');
-		g_string_append (s, key_name_conv_tab[index].shortcut);
+		g_string_append (s, key_name_conv_tab[lc_index].shortcut);
 	    }
 	} else if (k < 128) {
-	    if ((k >= 'A') || (index < 0)
-		|| (key_name_conv_tab[index].shortcut == NULL))
+	    if ((k >= 'A') || (lc_index < 0)
+		|| (key_name_conv_tab[lc_index].shortcut == NULL))
 		g_string_append_c (s, (gchar) g_ascii_tolower ((gchar) k));
 	    else
-		g_string_append (s, key_name_conv_tab[index].shortcut);
-	} else if ((index != -1) && (key_name_conv_tab[index].shortcut != NULL))
-	    g_string_append (s, key_name_conv_tab[index].shortcut);
+		g_string_append (s, key_name_conv_tab[lc_index].shortcut);
+	} else if ((lc_index != -1) && (key_name_conv_tab[lc_index].shortcut != NULL))
+	    g_string_append (s, key_name_conv_tab[lc_index].shortcut);
 	else
 	    g_string_append_c (s, (gchar) g_ascii_tolower ((gchar) key));
 

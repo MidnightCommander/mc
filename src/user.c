@@ -175,7 +175,7 @@ strip_ext(char *ss)
 }
 
 char *
-expand_format (WEdit *edit_widget, char c, int quote)
+expand_format (WEdit *edit_widget, char c, int lc_quote)
 {
     WPanel *panel = NULL;
     char *(*quote_func) (const char *, int);
@@ -201,7 +201,7 @@ expand_format (WEdit *edit_widget, char c, int quote)
 	fname = str_unconst (edit_get_file_name (edit_widget));
 #endif
 
-    if (quote)
+    if (lc_quote)
 	quote_func = name_quote;
     else
 	quote_func = fake_name_quote;
@@ -604,7 +604,7 @@ execute_menu_command (WEdit *edit_widget, const char *commands)
     int  expand_prefix_found = 0;
     char *parameter = 0;
     int  do_quote = 0;
-    char prompt [80];
+    char lc_prompt [80];
     int  col;
     char *file_name;
     int run_view = 0;
@@ -642,7 +642,7 @@ execute_menu_command (WEdit *edit_widget, const char *commands)
 	    if (*commands == '}'){
 		char *tmp;
 		*parameter = 0;
-		parameter = input_dialog (_(" Parameter "), prompt, MC_HISTORY_FM_MENU_EXEC_PARAM, "");
+		parameter = input_dialog (_(" Parameter "), lc_prompt, MC_HISTORY_FM_MENU_EXEC_PARAM, "");
 		if (!parameter || !*parameter){
 		    /* User canceled */
 		    fclose (cmd_file);
@@ -658,7 +658,7 @@ execute_menu_command (WEdit *edit_widget, const char *commands)
 		g_free (parameter);
 		parameter = 0;
 	    } else {
-		if (parameter < &prompt [sizeof (prompt) - 1]) {
+		if (parameter < &lc_prompt [sizeof (lc_prompt) - 1]) {
 		    *parameter++ = *commands;
 		} 
 	    }
@@ -670,7 +670,7 @@ execute_menu_command (WEdit *edit_widget, const char *commands)
 		    commands++;
 	    }
 	    if (*commands == '{')
-		parameter = prompt;
+		parameter = lc_prompt;
 	    else{
 		char *text = expand_format (edit_widget, *commands, do_quote);
 		fputs (text, cmd_file);

@@ -391,13 +391,6 @@ sets the option to on, and a 0 sets it to off, as is usual.
 This option is ignored when invoking
 .BR mcedit .
 .TP
-.I editor_key_emulation
-1 for
-.B Emacs
-keys, 0 for normal
-.B Cooledit
-keys, and 2 for user defined keys. 0 is default.
-.TP
 .I editor_tab_spacing
 Interpret the tab character as being of this length.
 Default is 8. You should avoid using

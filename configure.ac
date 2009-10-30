@@ -515,18 +515,25 @@ if test "$GLIBC21" != yes; then
     AC_DEFINE(USE_INCLUDED_REGEX, 1, [Use the regex included here])
 fi
 
-dnl If default CFLAGS is used with gcc, add -Wall
-if test -z "$ac_env_CFLAGS_set"; then
-    if test -n "$GCC"; then
-	CFLAGS="$CFLAGS -Wall"
-    fi
-fi
+MC_CHECK_CFLAGS
+
+CFLAGS_OPTS=" -O2 "
 
 if test x$USE_MAINTAINER_MODE = xyes; then
-    CFLAGS_WARNINGS="-Wall -Werror -Wwrite-strings -Wnested-externs -Wsign-compare -Wuninitialized"
-    CFLAGS_DEBUG="-g3 -O -ggdb"
-    CFLAGS="$CFLAGS $CFLAGS_WARNINGS $CFLAGS_DEBUG"
+    CFLAGS_OPTS="-g3 -O -ggdb"
+    AC_DEFINE(USE_MAINTAINER_MODE, 1, [Use maintainer mode])
 fi
+
+AC_ARG_ENABLE(
+    [werror],
+    AC_HELP_STRING([--enable-werror], [Handle all compiler warnings as errors] )
+)
+
+if test "x$enable_werror" = xyes; then
+    MC_CHECK_ONE_CFLAG([-Werror])
+fi
+
+CFLAGS="$CFLAGS $mc_configured_cflags $CFLAGS_OPTS"
 
 AC_SUBST(CFLAGS)
 AC_SUBST(CPPFLAGS)
@@ -544,6 +551,7 @@ if test -n "$use_smbfs"; then
   AC_CONFIG_SUBDIRS([vfs/samba])
 fi
 
+AM_CONDITIONAL(USE_MAINTAINER_MODE, [test x"$USE_MAINTAINER_MODE" = xyes])
 AM_CONDITIONAL(USE_SCREEN_SLANG, [test x"$with_screen" = xslang])
 AM_CONDITIONAL(USE_EDIT, [test -n "$use_edit"])
 AM_CONDITIONAL(USE_VFS, [test "x$use_vfs" = xyes])

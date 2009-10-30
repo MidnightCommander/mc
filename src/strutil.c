@@ -61,7 +61,7 @@ static const char *str_8bit_encodings[] = {
 };
 
 /* terminal encoding*/
-static char *codeset;
+static char *codeset = NULL;
 /* function for encoding specific operations*/
 static struct str_class used_class;
 
@@ -402,9 +402,10 @@ str_init_strings (const char *termenc)
 }
 
 void
-str_uninit_strings ()
+str_uninit_strings (void)
 {
     g_iconv_close (str_cnv_not_convert);
+    g_free (codeset);
 }
 
 const char *

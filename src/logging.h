@@ -11,6 +11,8 @@
    events into a central log file that can be used for debugging.
  */
 
+#define mc_log_mark() mc_log("%s:%d\n",__FILE,__LINE__)
+
 extern void mc_log(const char *, ...)
 	__attribute__((__format__(__printf__,1,2)));
 

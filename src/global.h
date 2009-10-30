@@ -99,6 +99,10 @@
 #include "fs.h"
 #include "util.h"
 
+#ifdef USE_MAINTAINER_MODE
+#include "../src/logging.h"
+#endif
+
 #include "textconf.h"
 
 #ifdef USE_VFS

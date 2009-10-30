@@ -113,15 +113,15 @@ mcview_find (mcview_t * view, gsize search_start, gsize * len)
 int
 mcview_search_cmd_callback (const void *user_data, gsize char_offset)
 {
-    int byte;
+    int lc_byte;
     mcview_t *view = (mcview_t *) user_data;
 
     /*    view_read_continue (view, &view->search_onechar_info); *//* AB:FIXME */
     if (!view->text_nroff_mode) {
-        if (! mcview_get_byte (view, char_offset, &byte))
+        if (! mcview_get_byte (view, char_offset, &lc_byte))
             return MC_SEARCH_CB_ABORT;
 
-        return byte;
+        return lc_byte;
     }
 
     if (view->search_numNeedSkipChar) {
@@ -129,9 +129,9 @@ mcview_search_cmd_callback (const void *user_data, gsize char_offset)
         return MC_SEARCH_CB_SKIP;
     }
 
-    byte = view->search_nroff_seq->current_char;
+    lc_byte = view->search_nroff_seq->current_char;
 
-    if (byte == -1)
+    if (lc_byte == -1)
         return MC_SEARCH_CB_ABORT;
 
     mcview_nroff_seq_next (view->search_nroff_seq);
@@ -139,7 +139,7 @@ mcview_search_cmd_callback (const void *user_data, gsize char_offset)
     if (view->search_nroff_seq->type != NROFF_TYPE_NONE)
         view->search_numNeedSkipChar = 2;
 
-    return byte;
+    return lc_byte;
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -1300,8 +1300,8 @@ vfs_shut (void)
 	    (*vfs->done) (vfs);
 
     g_ptr_array_free (vfs_openfiles, TRUE);
-    
     g_string_free (vfs_str_buffer, TRUE);
+    g_free (mc_readdir_result);
 }
 
 /*

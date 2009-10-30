@@ -239,7 +239,7 @@ void
 vfs_expire (int now)
 {
     static int locked = 0;
-    struct timeval time;
+    struct timeval lc_time;
     struct vfs_stamping *stamp, *st;
 
     /* Avoid recursive invocation, e.g. when one of the free functions
@@ -248,11 +248,11 @@ vfs_expire (int now)
 	return;
     locked = 1;
 
-    gettimeofday (&time, NULL);
-    time.tv_sec -= vfs_timeout;
+    gettimeofday (&lc_time, NULL);
+    lc_time.tv_sec -= vfs_timeout;
 
     for (stamp = stamps; stamp != NULL;) {
-	if (now || (timeoutcmp (&stamp->time, &time))) {
+	if (now || (timeoutcmp (&stamp->time, &lc_time))) {
 	    st = stamp->next;
 	    if (stamp->v->free)
 		(*stamp->v->free) (stamp->id);

@@ -123,11 +123,11 @@ mc_search__get_one_symbol (const char *charset, const char *str, gsize str_len,
 
 /* --------------------------------------------------------------------------------------------- */
 int
-mc_search__get_char (mc_search_t * mc_search, const void *user_data, gsize current_pos)
+mc_search__get_char (mc_search_t * lc_mc_search, const void *user_data, gsize current_pos)
 {
     char *data;
-    if (mc_search->search_fn)
-        return (mc_search->search_fn) (user_data, current_pos);
+    if (lc_mc_search->search_fn)
+        return (lc_mc_search->search_fn) (user_data, current_pos);
 
     data = (char *) user_data;
     return (int) (unsigned char) data[current_pos];
@@ -245,7 +245,7 @@ gchar **
 mc_search_get_types_strings_array (size_t *num)
 {
     gchar **ret;
-    int index;
+    int lc_index;
     size_t n;
 
     const mc_search_type_str_t *type_str;
@@ -255,14 +255,14 @@ mc_search_get_types_strings_array (size_t *num)
     if (ret == NULL)
         return NULL;
 
-    for (index = 0, type_str = types_str;
+    for (lc_index = 0, type_str = types_str;
 	    type_str->str != NULL;
-	    type_str++, index++)
-        ret[index] = g_strdup (type_str->str);
+	    type_str++, lc_index++)
+        ret[lc_index] = g_strdup (type_str->str);
 
     /* don't count last NULL item */
     if (num != NULL)
-	*num = (size_t) index;
+	*num = (size_t) lc_index;
 
     return ret;
 }

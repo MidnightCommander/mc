@@ -803,6 +803,7 @@ edit_init (WEdit *edit, int lines, int columns, const char *filename,
     edit->utf8 = 0;
     edit->converter = str_cnv_from_term;
 #ifdef HAVE_CHARSET
+    {
     const char *cp_id = NULL;
     cp_id = get_codepage_id (source_codepage >= 0 ?
                             source_codepage : display_codepage);
@@ -818,6 +819,7 @@ edit_init (WEdit *edit, int lines, int columns, const char *filename,
     }
     if (cp_id != NULL)
         edit->utf8 = str_isutf8 (cp_id);
+    }
 #endif
 
     edit->loading_done = 1;
@@ -1186,7 +1188,7 @@ edit_insert (WEdit *edit, int c)
     edit->curs1++;
 }
 
-void
+static void
 edit_insert_over (WEdit * edit)
 {
     int i;

@@ -78,7 +78,6 @@ extern int num_history_items_recorded;
 
 char *profile_name;		/* .mc/ini */
 char *global_profile_name;	/* mc.lib */
-char *panels_profile_name;	/* .mc/panels.ini */
 
 char *setup_color_string;
 char *term_color_string;
@@ -91,6 +90,8 @@ int startup_right_mode;
 /* default panel values */
 int saving_setup;
 int setup_copymove_persistent_attr = 1;
+
+static char *panels_profile_name = NULL;	/* .mc/panels.ini */
 
 static const struct {
     const char *key;
@@ -559,7 +560,7 @@ load_setup_get_full_config_name(const char *subdir, const char *config_file_name
 	      Also, need to rename stupid mc_home and mc_home_alt to mc_sysconfdir and mc_datadir;
 	      home_mc => mc_user_homedir
     */
-    char *basename, *ret;
+    char *lc_basename, *ret;
 
     if (config_file_name == NULL)
 	return NULL;
@@ -568,45 +569,45 @@ load_setup_get_full_config_name(const char *subdir, const char *config_file_name
 	return g_strdup(config_file_name);
 
 
-    basename = g_path_get_basename(config_file_name);
-    if (basename == NULL)
+    lc_basename = g_path_get_basename(config_file_name);
+    if (lc_basename == NULL)
 	return NULL;
 
 
     if (subdir)
-	ret = g_build_filename (home_dir, MC_USERCONF_DIR, subdir, basename, NULL);
+	ret = g_build_filename (home_dir, MC_USERCONF_DIR, subdir, lc_basename, NULL);
     else
-	ret = g_build_filename (home_dir, MC_USERCONF_DIR, basename, NULL);
+	ret = g_build_filename (home_dir, MC_USERCONF_DIR, lc_basename, NULL);
 
     if (exist_file(ret)) {
-	g_free(basename);
+	g_free(lc_basename);
 	return ret;
     }
     g_free(ret);
 
 
     if (subdir)
-	ret = g_build_filename (mc_home, subdir, basename, NULL);
+	ret = g_build_filename (mc_home, subdir, lc_basename, NULL);
     else
-	ret = g_build_filename (mc_home, basename, NULL);
+	ret = g_build_filename (mc_home, lc_basename, NULL);
 
     if (exist_file(ret)) {
-	g_free(basename);
+	g_free(lc_basename);
 	return ret;
     }
     g_free(ret);
 
     if (subdir)
-	ret = g_build_filename (mc_home_alt, subdir, basename, NULL);
+	ret = g_build_filename (mc_home_alt, subdir, lc_basename, NULL);
     else
-	ret = g_build_filename (mc_home_alt, basename, NULL);
+	ret = g_build_filename (mc_home_alt, lc_basename, NULL);
 
     if (exist_file(ret)) {
-	g_free(basename);
+	g_free(lc_basename);
 	return ret;
     }
     g_free(ret);
-    g_free(basename);
+    g_free(lc_basename);
     return NULL;
 
 }
@@ -834,15 +835,23 @@ load_anon_passwd ()
 }
 #endif /* USE_VFS && USE_NETCODE */
 
-void done_setup (void)
+void
+done_setup (void)
 {
+    int i;
+
     g_free (profile_name);
     g_free (global_profile_name);
-    g_free(color_terminal_string);
-    g_free(term_color_string);
-    g_free(setup_color_string);
-    mc_config_deinit(mc_main_config);
-    mc_config_deinit(mc_panels_config);
+    g_free (color_terminal_string);
+    g_free (term_color_string);
+    g_free (setup_color_string);
+    g_free (panels_profile_name);
+    mc_config_deinit (mc_main_config);
+    mc_config_deinit (mc_panels_config);
+
+    for (i = 0; str_options[i].opt_name != NULL; i++)
+	g_free (*str_options[i].opt_addr);
+
     done_hotlist ();
     done_panelize ();
 /*    directory_history_free (); */
@@ -999,6 +1008,21 @@ load_keymap_defs (void)
 
         mc_config_deinit (mc_global_keymap);
     }
+}
+
+void
+free_keymap_defs (void)
+{
+#ifdef USE_INTERNAL_EDIT
+        g_array_free (editor_keymap, TRUE);
+        g_array_free (editor_x_keymap, TRUE);
+#endif
+        g_array_free (viewer_keymap, TRUE);
+        g_array_free (viewer_hex_keymap, TRUE);
+        g_array_free (main_keymap, TRUE);
+        g_array_free (main_x_keymap, TRUE);
+        g_array_free (panel_keymap, TRUE);
+        g_array_free (input_keymap, TRUE);
 }
 
 void

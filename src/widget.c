@@ -370,7 +370,7 @@ radio_callback (Widget *w, widget_msg_t msg, int parm)
     switch (msg) {
     case WIDGET_HOTKEY:
 	{
-	    int i, lp = g_ascii_tolower ((gchar)parm);
+	    int lp = g_ascii_tolower ((gchar)parm);
 
 	    for (i = 0; i < r->count; i++) {
                 if (r->texts[i].hotkey != NULL) {
@@ -2794,11 +2794,11 @@ buttonbar_new (int visible)
 }
 
 static void
-set_label_text (WButtonBar * bb, int index, const char *text)
+set_label_text (WButtonBar * bb, int lc_index, const char *text)
 {
-    g_free (bb->labels[index - 1].text);
+    g_free (bb->labels[lc_index - 1].text);
 
-    bb->labels[index - 1].text = g_strdup (text);
+    bb->labels[lc_index - 1].text = g_strdup (text);
 }
 
 /* Find ButtonBar widget in the dialog */

@@ -206,7 +206,7 @@ tree_store_load_from(char *name)
 	while (fgets(buffer, MC_MAXPATHLEN, file)) {
 	    tree_entry *e;
 	    int scanned;
-	    char *name;
+	    char *lc_name;
 
 	    /* Skip invalid records */
 	    if ((buffer[0] != '0' && buffer[0] != '1'))
@@ -217,12 +217,12 @@ tree_store_load_from(char *name)
 
 	    scanned = buffer[0] == '1';
 
-	    name = decode(buffer + 2);
+	    lc_name = decode(buffer + 2);
 
-	    len = strlen(name);
+	    len = strlen(lc_name);
 	    if (name[0] != PATH_SEP) {
 		/* Clear-text decompression */
-		char *s = strtok(name, " ");
+		char *s = strtok(lc_name, " ");
 
 		if (s) {
 		    common = atoi(s);
@@ -236,13 +236,13 @@ tree_store_load_from(char *name)
 		    }
 		}
 	    } else {
-		if (vfs_file_is_local(name)) {
-		    e = tree_store_add_entry(name);
+		if (vfs_file_is_local(lc_name)) {
+		    e = tree_store_add_entry(lc_name);
 		    e->scanned = scanned;
 		}
-		strcpy(oldname, name);
+		strcpy(oldname, lc_name);
 	    }
-	    g_free(name);
+	    g_free(lc_name);
 	}
 	fclose(file);
     }
@@ -465,7 +465,6 @@ tree_store_add_entry(const char *name)
     if (new->sublevel > 1) {
 	/* Let's check if the parent directory is in the tree */
 	char *parent = g_strdup(new->name);
-	int i;
 
 	for (i = strlen(parent) - 1; i > 1; i--) {
 	    if (parent[i] == PATH_SEP) {

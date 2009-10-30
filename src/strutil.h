@@ -133,9 +133,9 @@ struct str_class {
     void (*release_key) (char *key, int case_sen);                      /*I*/
 };
 
-struct str_class str_utf8_init ();
-struct str_class str_8bit_init ();
-struct str_class str_ascii_init ();
+struct str_class str_utf8_init (void);
+struct str_class str_8bit_init (void);
+struct str_class str_ascii_init (void);
 
 /* create convertor from "from_enc" to terminal encoding
  * if "from_enc" is not supported return INVALID_CONV 
@@ -200,7 +200,7 @@ void str_init_strings (const char *termenc);
 
 /* free all str_buffer and all str_cnv_*
  */
-void str_uninit_strings ();
+void str_uninit_strings (void);
 
 /* try convert characters in ch to output using conv
  * ch_size is size of ch, can by (size_t)(-1) (-1 only for ASCII 

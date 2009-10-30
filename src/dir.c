@@ -257,10 +257,10 @@ clean_dir (dir_list *list, int count)
 }
 
 static int
-add_dotdot_to_list (dir_list *list, int index)
+add_dotdot_to_list (dir_list *list, int lc_index)
 {
     /* Need to grow the *list? */
-    if (index == list->size) {
+    if (lc_index == list->size) {
 	list->list = g_realloc (list->list, sizeof (file_entry) *
 			      (list->size + RESIZE_STEPS));
 	if (!list->list)
@@ -268,14 +268,14 @@ add_dotdot_to_list (dir_list *list, int index)
 	list->size += RESIZE_STEPS;
     }
 
-    memset (&(list->list) [index], 0, sizeof(file_entry));
-    (list->list) [index].fnamelen = 2;
-    (list->list) [index].fname = g_strdup ("..");
-    (list->list) [index].f.link_to_dir = 0;
-    (list->list) [index].f.stale_link = 0;
-    (list->list) [index].f.dir_size_computed = 0;
-    (list->list) [index].f.marked = 0;
-    (list->list) [index].st.st_mode = 040755;
+    memset (&(list->list) [lc_index], 0, sizeof(file_entry));
+    (list->list) [lc_index].fnamelen = 2;
+    (list->list) [lc_index].fname = g_strdup ("..");
+    (list->list) [lc_index].f.link_to_dir = 0;
+    (list->list) [lc_index].f.stale_link = 0;
+    (list->list) [lc_index].f.dir_size_computed = 0;
+    (list->list) [lc_index].f.marked = 0;
+    (list->list) [lc_index].st.st_mode = 040755;
     return 1;
 }
 
@@ -382,8 +382,8 @@ handle_path (dir_list *list, const char *path,
 }
 
 int
-do_load_dir (const char *path, dir_list *list, sortfn *sort, int reverse,
-	     int case_sensitive, int exec_ff, const char *filter)
+do_load_dir (const char *path, dir_list *list, sortfn *sort, int lc_reverse,
+	     int lc_case_sensitive, int exec_ff, const char *filter)
 {
     DIR *dirp;
     struct dirent *dp;
@@ -431,7 +431,7 @@ do_load_dir (const char *path, dir_list *list, sortfn *sort, int reverse,
     }
 
     if (next_free) {
-	do_sort (list, sort, next_free - 1, reverse, case_sensitive, exec_ff);
+	do_sort (list, sort, next_free - 1, lc_reverse, lc_case_sensitive, exec_ff);
     }
 
     mc_closedir (dirp);
@@ -490,7 +490,7 @@ alloc_dir_copy (int size)
 /* If filter is null, then it is a match */
 int
 do_reload_dir (const char *path, dir_list *list, sortfn *sort, int count,
-	       int rev, int case_sensitive, int exec_ff, const char *filter)
+	       int rev, int lc_case_sensitive, int exec_ff, const char *filter)
 {
     DIR *dirp;
     struct dirent *dp;
@@ -591,7 +591,7 @@ do_reload_dir (const char *path, dir_list *list, sortfn *sort, int count,
     tree_store_end_check ();
     g_hash_table_destroy (marked_files);
     if (next_free) {
-	do_sort (list, sort, next_free - 1, rev, case_sensitive, exec_ff);
+	do_sort (list, sort, next_free - 1, rev, lc_case_sensitive, exec_ff);
     }
     clean_dir (&dir_copy, count);
     return next_free;
