@@ -325,10 +325,9 @@ static void
 stop_dialogs (void)
 {
     midnight_dlg->running = 0;
-    if (current_dlg)
-    {
-        current_dlg->running = 0;
-    }
+
+    if ((current_dlg != NULL) && (current_dlg->data != NULL))
+        ((Dlg_head *) current_dlg->data)->running = 0;
 }
 
 static int
@@ -573,7 +572,7 @@ load_prompt (int fd, void *unused)
         return 0;
 
     /* Don't actually change the prompt if it's invisible */
-    if (current_dlg == midnight_dlg && command_prompt)
+    if (((Dlg_head *) current_dlg->data == midnight_dlg) && command_prompt)
     {
         char *tmp_prompt;
         int prompt_len;
@@ -584,8 +583,8 @@ load_prompt (int fd, void *unused)
         /* Check for prompts too big */
         if (COLS > 8 && prompt_len > COLS - 8)
         {
-            tmp_prompt[COLS - 8] = '\0';
             prompt_len = COLS - 8;
+            tmp_prompt[prompt_len] = '\0';
         }
         mc_prompt = tmp_prompt;
         label_set_text (the_prompt, mc_prompt);

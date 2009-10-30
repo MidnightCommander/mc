@@ -23,7 +23,9 @@
 #ifndef MC_DIALOG_H
 #define MC_DIALOG_H
 
+#include "lib/global.h"
 #include "lib/tty/mouse.h"
+#include "lib/util.h"		/* Hook */
 
 /* Common return values */
 #define B_EXIT		0
@@ -235,7 +237,7 @@ void common_dialog_repaint (struct Dlg_head *h);
 #define widget_move(w, _y, _x) tty_gotoyx (((Widget *)(w))->y + _y, ((Widget *)(w))->x + _x)
 #define dlg_move(h, _y, _x) tty_gotoyx (((Dlg_head *)(h))->y + _y, ((Dlg_head *)(h))->x + _x)
 
-extern Dlg_head *current_dlg;
+extern GList *current_dlg;
 
 /* A hook list for idle events */
 extern Hook *idle_hook;

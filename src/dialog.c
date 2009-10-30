@@ -52,10 +52,10 @@ int alarm_colors[4];
 
 /* Primitive way to check if the the current dialog is our dialog */
 /* This is needed by async routines like load_prompt */
-Dlg_head *current_dlg = 0;
+GList *current_dlg = NULL;
 
 /* A hook list for idle events */
-Hook *idle_hook = 0;
+Hook *idle_hook = NULL;
 
 /* left click outside of dialog closes it */
 int mouse_close_dialog = 0;
@@ -67,19 +67,6 @@ void
 draw_box (Dlg_head * h, int y, int x, int ys, int xs, gboolean single)
 {
     tty_draw_box (h->y + y, h->x + x, ys, xs, single);
-}
-
-void
-widget_erase (Widget * w)
-{
-    tty_fill_region (w->y, w->x, w->lines, w->cols, ' ');
-}
-
-void
-dlg_erase (Dlg_head * h)
-{
-    if (h != NULL)
-        tty_fill_region (h->y, h->x, h->lines, h->cols, ' ');
 }
 
 void
@@ -96,6 +83,23 @@ init_widget (Widget * w, int y, int x, int lines, int cols,
 
     /* Almost all widgets want to put the cursor in a suitable place */
     w->options = W_WANT_CURSOR;
+}
+
+void
+widget_set_size (Widget * widget, int y, int x, int lines, int cols)
+{
+    widget->x = x;
+    widget->y = y;
+    widget->cols = cols;
+    widget->lines = lines;
+    send_message (widget, WIDGET_RESIZED, 0 /* unused */ );
+}
+
+void
+widget_erase (Widget * w)
+{
+    if (w != NULL)
+        tty_fill_region (w->y, w->x, w->lines, w->cols, ' ');
 }
 
 /* Clean the dialog area, draw the frame and the title */
@@ -301,6 +305,13 @@ dlg_set_default_colors (void)
 }
 
 void
+dlg_erase (Dlg_head * h)
+{
+    if (h != NULL)
+        tty_fill_region (h->y, h->x, h->lines, h->cols, ' ');
+}
+
+void
 set_idle_proc (Dlg_head * d, int enable)
 {
     if (enable)
@@ -354,25 +365,27 @@ add_widget (Dlg_head * h, void *w)
     return add_widget_autopos (h, w, WPOS_KEEP_LEFT | WPOS_KEEP_TOP);
 }
 
-static void
-do_complete_refresh (Dlg_head * dlg)
-{
-    if (!dlg->fullscreen && dlg->parent)
-        do_complete_refresh (dlg->parent);
-
-    dlg_redraw (dlg);
-}
-
 void
 do_refresh (void)
 {
-    if (!current_dlg)
-        return;
+    GList *d = current_dlg;
 
     if (fast_refresh)
-        dlg_redraw (current_dlg);
+    {
+        if ((d != NULL) && (d->data != NULL))
+            dlg_redraw ((Dlg_head *) d->data);
+    }
     else
-        do_complete_refresh (current_dlg);
+    {
+        /* Search first fullscreen dialog */
+        for (; d != NULL; d = g_list_next (d))
+            if ((d->data != NULL) && ((Dlg_head *) d->data)->fullscreen)
+                break;
+        /* back to top dialog */
+        for (; d != NULL; d = g_list_previous (d))
+            if (d->data != NULL)
+                dlg_redraw ((Dlg_head *) d->data);
+    }
 }
 
 /* broadcast a message to all the widgets in a dialog that have
@@ -434,17 +447,13 @@ dlg_unfocus (Dlg_head * h)
     return 0;
 }
 
-
 /* Return true if the windows overlap */
 int
 dlg_overlap (Widget * a, Widget * b)
 {
-    if ((b->x >= a->x + a->cols)
-        || (a->x >= b->x + b->cols) || (b->y >= a->y + a->lines) || (a->y >= b->y + b->lines))
-        return 0;
-    return 1;
+    return !((b->x >= a->x + a->cols)
+             || (a->x >= b->x + b->cols) || (b->y >= a->y + a->lines) || (a->y >= b->y + b->lines));
 }
-
 
 /* Find the widget with the given callback in the dialog h */
 Widget *
@@ -474,13 +483,11 @@ find_widget_type (const Dlg_head * h, callback_fn callback)
 void
 dlg_select_by_id (const Dlg_head * h, int id)
 {
-    Widget *w, *w_found;
+    Widget *w = h->current;
+    Widget *w_found = NULL;
 
-    if (!h->current)
+    if (h->current == NULL)
         return;
-
-    w = h->current;
-    w_found = NULL;
 
     do
     {
@@ -493,7 +500,7 @@ dlg_select_by_id (const Dlg_head * h, int id)
     }
     while (w != h->current);
 
-    if (w_found)
+    if (w_found != NULL)
         dlg_select_widget (w_found);
 }
 
@@ -547,7 +554,6 @@ do_select_widget (Dlg_head * h, Widget * w, select_dir_t dir)
     }
 }
 
-
 /*
  * Try to select widget in the dialog.
  */
@@ -557,7 +563,6 @@ dlg_select_widget (void *w)
     do_select_widget (((Widget *) w)->parent, w, SELECT_NEXT);
 }
 
-
 /* Try to select previous widget in the tab order */
 void
 dlg_one_up (Dlg_head * h)
@@ -566,7 +571,6 @@ dlg_one_up (Dlg_head * h)
         do_select_widget (h, h->current->prev, SELECT_PREV);
 }
 
-
 /* Try to select next widget in the tab order */
 void
 dlg_one_down (Dlg_head * h)
@@ -574,7 +578,6 @@ dlg_one_down (Dlg_head * h)
     if (h->current)
         do_select_widget (h, h->current->next, SELECT_NEXT);
 }
-
 
 void
 update_cursor (Dlg_head * h)
@@ -672,6 +675,48 @@ dlg_handle_key (Dlg_head * h, int d_key)
         return MSG_HANDLED;
 }
 
+static int
+dlg_mouse_event (Dlg_head * h, Gpm_Event * event)
+{
+    Widget *item;
+    Widget *starting_widget = h->current;
+    Gpm_Event new_event;
+    int x = event->x;
+    int y = event->y;
+
+    /* close the dialog by mouse click out of dialog area */
+    if (mouse_close_dialog && !h->fullscreen && ((event->buttons & GPM_B_LEFT) != 0) && ((event->type & GPM_DOWN) != 0) /* left click */
+        && !((x > h->x) && (x <= h->x + h->cols) && (y > h->y) && (y <= h->y + h->lines)))
+    {
+        h->ret_value = B_CANCEL;
+        dlg_stop (h);
+        return MOU_NORMAL;
+    }
+
+    item = starting_widget;
+    do
+    {
+        Widget *widget;
+
+        widget = item;
+        item = item->next;
+
+        if ((x > widget->x) && (x <= widget->x + widget->cols)
+            && (y > widget->y) && (y <= widget->y + widget->lines))
+        {
+            new_event = *event;
+            new_event.x -= widget->x;
+            new_event.y -= widget->y;
+
+            if (widget->mouse != NULL)
+                return widget->mouse (&new_event, widget);
+        }
+    }
+    while (item != starting_widget);
+
+    return MOU_NORMAL;
+}
+
 static cb_ret_t
 dlg_try_hotkey (Dlg_head * h, int d_key)
 {
@@ -735,7 +780,7 @@ dlg_key_event (Dlg_head * h, int d_key)
         return;
 
     /* TAB used to cycle */
-    if (!(h->flags & DLG_WANT_TAB))
+    if ((h->flags & DLG_WANT_TAB) == 0)
     {
         if (d_key == '\t')
         {
@@ -772,69 +817,25 @@ dlg_key_event (Dlg_head * h, int d_key)
     h->callback (h, NULL, DLG_POST_KEY, d_key, NULL);
 }
 
-static int
-dlg_mouse_event (Dlg_head * h, Gpm_Event * event)
-{
-    Widget *item;
-    Widget *starting_widget = h->current;
-    Gpm_Event new_event;
-    int x = event->x;
-    int y = event->y;
-
-    /* close the dialog by mouse click out of dialog area */
-    if (mouse_close_dialog && !h->fullscreen && ((event->buttons & GPM_B_LEFT) != 0) && ((event->type & GPM_DOWN) != 0) /* left click */
-        && !((x > h->x) && (x <= h->x + h->cols) && (y > h->y) && (y <= h->y + h->lines)))
-    {
-        h->ret_value = B_CANCEL;
-        dlg_stop (h);
-        return MOU_NORMAL;
-    }
-
-    item = starting_widget;
-    do
-    {
-        Widget *widget;
-
-        widget = item;
-        item = item->next;
-
-        if ((x > widget->x) && (x <= widget->x + widget->cols)
-            && (y > widget->y) && (y <= widget->y + widget->lines))
-        {
-            new_event = *event;
-            new_event.x -= widget->x;
-            new_event.y -= widget->y;
-
-            if (widget->mouse != NULL)
-                return widget->mouse (&new_event, widget);
-        }
-    }
-    while (item != starting_widget);
-
-    return MOU_NORMAL;
-}
-
-/* Run dialog routines */
-
 /* Init the process */
 void
 init_dlg (Dlg_head * h)
 {
-    /* Initialize dialog manager and widgets */
-    h->callback (h, NULL, DLG_INIT, 0, NULL);
-    dlg_broadcast_msg (h, WIDGET_INIT, 0);
+    /* add dialog to the stack */
+    current_dlg = g_list_prepend (current_dlg, h);
 
     if (h->x == 0 && h->y == 0 && h->cols == COLS && h->lines == LINES)
         h->fullscreen = 1;
 
-    h->parent = current_dlg;
-    current_dlg = h;
-
     /* Initialize the mouse status */
     h->mouse_status = MOU_NORMAL;
 
+    /* Initialize dialog manager and widgets */
+    h->callback (h, NULL, DLG_INIT, 0, NULL);
+    dlg_broadcast_msg (h, WIDGET_INIT, 0);
+
     /* Select the first widget that takes focus */
-    while (!dlg_focus (h) && h->current)
+    while (h->current != NULL && !dlg_focus (h))
         h->current = h->current->next;
 
     /* Redraw the screen */
@@ -842,16 +843,6 @@ init_dlg (Dlg_head * h)
 
     h->ret_value = 0;
     h->running = 1;
-}
-
-/* Shutdown the run_dlg */
-void
-dlg_run_done (Dlg_head * h)
-{
-    if (h->current != NULL)
-        h->callback (h, h->current, DLG_END, 0, NULL);
-
-    current_dlg = h->parent;
 }
 
 void
@@ -909,6 +900,16 @@ frontend_run_dlg (Dlg_head * h)
     }
 }
 
+/* Shutdown the run_dlg */
+void
+dlg_run_done (Dlg_head * h)
+{
+    if (h->current != NULL)
+        h->callback (h, h->current, DLG_END, 0, NULL);
+
+    current_dlg = g_list_remove (current_dlg, h);
+}
+
 /* Standard run dialog routine
  * We have to keep this routine small so that we can duplicate it's
  * behavior on complex routines like the file routines, this way,
@@ -942,16 +943,6 @@ destroy_dlg (Dlg_head * h)
     g_free (h);
 
     do_refresh ();
-}
-
-void
-widget_set_size (Widget * widget, int y, int x, int lines, int cols)
-{
-    widget->x = x;
-    widget->y = y;
-    widget->cols = cols;
-    widget->lines = lines;
-    send_message (widget, WIDGET_RESIZED, 0 /* unused */ );
 }
 
 /* Replace widget old_w for widget new_w in the dialog */
