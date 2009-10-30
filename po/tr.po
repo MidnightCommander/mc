@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-09 09:50+0300\n"
+"POT-Creation-Date: 2009-10-30 10:39+0200\n"
 "PO-Revision-Date: 2001-11-06 05:50+0200\n"
 "Last-Translator: Nilgün Belma Bugüner <nilgun@fide.org>\n"
 "Language-Team: Turkish <debian-l10n-turkish@lists.debian.org>\n"
@@ -54,6 +54,29 @@ msgstr " Gösterilemiyor: normal bir dosya değil "
 msgid " File %s is too large "
 msgstr " Dosya çok fazla büyük: "
 
+msgid " About "
+msgstr " Hakkında "
+
+msgid ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       A user friendly text editor written\n"
+"           for the Midnight Commander.\n"
+msgstr ""
+"\n"
+"              Cooledit  v3.11.5\n"
+"\n"
+" TelifHakkı (C) 1996 the Free Software Foundation\n"
+"\n"
+"      Kullanıcı dostu bir metin düzenleyici\n"
+"        Midnight Commander için yazıldı\n"
+
+msgid "&OK"
+msgstr "&Tamam"
+
 msgid "Macro recursion is too deep"
 msgstr ""
 
@@ -91,23 +114,29 @@ msgstr " Veri yolu yazmak için açılırken hata oluştu: "
 msgid " Cannot open file for writing: %s "
 msgstr " Veri yolu yazmak için açılırken hata oluştu: "
 
-msgid "Quick save "
+#, fuzzy
+msgid "&Quick save"
 msgstr "Çabuk "
 
-msgid "Safe save "
+#, fuzzy
+msgid "&Safe save"
 msgstr "Güvenli "
 
-msgid "Do backups -->"
-msgstr "Yedekle -->"
+msgid "&Do backups with following extension:"
+msgstr ""
 
-msgid "&OK"
-msgstr "&Tamam"
-
-msgid "Extension:"
-msgstr "Uzantı:"
+msgid "Check &POSIX new line"
+msgstr ""
 
 msgid " Edit Save Mode "
 msgstr " Kaydetme kipini düzenle "
+
+msgid "The file you are saving is not finished with a newline"
+msgstr ""
+
+#, fuzzy
+msgid "C&ontinue"
+msgstr "Devam et"
 
 msgid "&Do not change"
 msgstr ""
@@ -180,10 +209,6 @@ msgid ""
 msgstr ""
 "Mevcut metin kaydedilmemiş değişiklikler içeriyor.\n"
 " Bu değişiklikler yoksayılarak devam edilsin mi?"
-
-#, fuzzy
-msgid "C&ontinue"
-msgstr "Devam et"
 
 #, fuzzy
 msgid "Syntax file edit"
@@ -406,238 +431,196 @@ msgstr ""
 msgid "&Ignore lock"
 msgstr ""
 
-msgid " About "
-msgstr " Hakkında "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"              Cooledit  v3.11.5\n"
-"\n"
-" TelifHakkı (C) 1996 the Free Software Foundation\n"
-"\n"
-"      Kullanıcı dostu bir metin düzenleyici\n"
-"        Midnight Commander için yazıldı\n"
-
 msgid "&Open file..."
 msgstr "D&osyayı aç..."
 
-msgid "&New              C-n"
-msgstr "&Yeni             C-n"
+#, fuzzy
+msgid "&New"
+msgstr "İs&me göre"
 
-msgid "&Save              F2"
-msgstr "&Kaydet            F2"
+#, fuzzy
+msgid "Save &as..."
+msgstr "Ayarları &Kaydet"
 
-msgid "Save &as...       F12"
-msgstr "&Farklı kaydet    F12"
-
-msgid "&Insert file...   F15"
+#, fuzzy
+msgid "&Insert file..."
 msgstr "Dosyayı &içer...  F15"
 
-msgid "Copy to &file...  C-f"
+#, fuzzy
+msgid "Cop&y to file..."
 msgstr "Dosyaya k&opyala  C-f"
 
-msgid "&User menu...     F11"
+#, fuzzy
+msgid "&User menu..."
 msgstr "K&ullanıcı menüsü...   F11"
 
-msgid "A&bout...            "
-msgstr "&Hakkında...         "
+#, fuzzy
+msgid "A&bout..."
+msgstr "&Yerleşim...     "
 
-msgid "&Quit             F10"
-msgstr "&Çıkış            F10"
-
-msgid "&New            C-x k"
-msgstr "&Yeni           C-x k"
-
-msgid "Copy to &file...     "
-msgstr "&Dosyaya kopyala...  "
+msgid "&Quit"
+msgstr "Çı&k"
 
 #, fuzzy
-msgid "&Toggle mark                 F3"
-msgstr "&Seçim             F3"
+msgid "&Toggle mark"
+msgstr "İşa&retlenenleri Temizle"
+
+msgid "&Mark columns"
+msgstr ""
 
 #, fuzzy
-msgid "Mar&k columns              S-F3"
-msgstr "Sütunları &Seç   S-F3"
-
-#, fuzzy
-msgid "Toggle &ins/overw           Ins"
+msgid "Toggle &ins/overw"
 msgstr "&Ins/Owr          Ins"
 
 #, fuzzy
-msgid "&Copy                        F5"
-msgstr "Dosya/Dizini &Kopyala         F5"
+msgid "&Copy"
+msgstr "Kopyala"
+
+msgid "&Move"
+msgstr "&Taşı"
+
+msgid "&Delete"
+msgstr "&Sil"
 
 #, fuzzy
-msgid "&Move                        F6"
-msgstr "&Taşı              F6"
-
-#, fuzzy
-msgid "&Delete                      F8"
-msgstr "Dosya / Dizini Si&L           F8"
-
-#, fuzzy
-msgid "C&opy to clipfile         C-Ins"
+msgid "C&opy to clipfile"
 msgstr "&Dosyaya kopyala...  "
 
 #, fuzzy
-msgid "C&ut to clipfile          S-Del"
+msgid "C&ut to clipfile"
 msgstr "&Satıra git...           M-l"
 
-msgid "&Paste from clipfile      S-Ins"
+msgid "&Paste from clipfile"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k            M-k"
+msgid "Toggle bookmar&k"
 msgstr "&Seçim             F3"
 
 #, fuzzy
-msgid "&Next bookmark              M-j"
-msgstr "&Yeni             C-n"
+msgid "&Next bookmark"
+msgstr "S&eçimi başlat"
 
 #, fuzzy
-msgid "Pre&v bookmark              M-i"
+msgid "Pre&v bookmark"
 msgstr "sıra&La...               M-t"
 
 #, fuzzy
-msgid "&Flush bookmark             M-o"
+msgid "&Flush bookmark"
 msgstr "&Posta...                   "
 
-#, fuzzy
-msgid "&Undo                       C-u"
-msgstr "&Geri al          C-u"
+msgid "&Undo"
+msgstr ""
 
-#, fuzzy
-msgid "&Beginning               C-PgUp"
-msgstr "&Başlangıca    C-PgUp"
-
-#, fuzzy
-msgid "&End                     C-PgDn"
-msgstr "&Sona          C-PgDn"
-
-#, fuzzy
-msgid "C&opy to clipfile           M-w"
-msgstr "&Satıra git...           M-l"
-
-#, fuzzy
-msgid "C&ut to clipfile            C-w"
-msgstr "&Satıra git...           M-l"
-
-msgid "&Paste from clipfile        C-y"
+msgid "&Beginning"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k               "
-msgstr "&Seçim             F3"
+msgid "&End"
+msgstr "Düğüm &numarasına göre"
 
 #, fuzzy
-msgid "&Next bookmark                 "
-msgstr "&Yeni             C-n"
+msgid "&Search..."
+msgstr "Ara"
 
 #, fuzzy
-msgid "Pre&v bookmark                 "
-msgstr "sıra&La...               M-t"
-
-#, fuzzy
-msgid "&Flush bookmark                "
-msgstr "&Posta...                   "
-
-msgid "&Search...         F7"
-msgstr "&Ara...            F7"
-
-msgid "Search &again     F17"
+msgid "Search &again"
 msgstr "&Tekrar Ara       F17"
 
-msgid "&Replace...        F4"
-msgstr "&Yerleştir...      F4"
-
-msgid "&Go to line...            M-l"
-msgstr "&Satıra git...           M-l"
+#, fuzzy
+msgid "&Replace..."
+msgstr "&Yerleştir"
 
 #, fuzzy
-msgid "Toggle li&ne state        M-n"
+msgid "&Go to line..."
+msgstr " Satıra git "
+
+#, fuzzy
+msgid "Toggle li&ne state"
 msgstr "&Seçim             F3"
 
-msgid "Go to matching &bracket   M-b"
+#, fuzzy
+msgid "Go to matching &bracket"
 msgstr "Eşleşen &Paranteze Git   M-b"
 
-msgid "Find declaration      A-Enter"
+#, fuzzy
+msgid "Find declaration"
+msgstr "Yamadan sonraki reddedilenleri bul"
+
+msgid "Back from declaration"
 msgstr ""
 
-msgid "Back from declaration     M--"
-msgstr ""
-
-msgid "Forward to declaration    M-+"
+msgid "Forward to declaration"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             M-e"
+msgid "Encod&ing..."
 msgstr "sıra&La...               M-t"
 
-msgid "Insert &literal...       C-q"
-msgstr "&Harfi içer...           C-q"
-
-msgid "&Refresh screen          C-l"
+#, fuzzy
+msgid "&Refresh screen"
 msgstr "Ekranı &Tazele           C-l"
 
-msgid "&Start record macro      C-r"
+#, fuzzy
+msgid "&Start record macro"
 msgstr "&Makro kaydını başlat    C-r"
 
-msgid "&Finish record macro...  C-r"
+#, fuzzy
+msgid "&Finish record macro..."
 msgstr "Makro kaydını &Bitir...  C-r"
 
-msgid "&Execute macro...   C-a, KEY"
+#, fuzzy
+msgid "&Execute macro..."
 msgstr "Makro Ça&lıştır...  C-a, TUŞ"
 
-msgid "Delete macr&o...            "
-msgstr "makr&oyu sil...             "
+#, fuzzy
+msgid "Delete macr&o..."
+msgstr " Makroyu sil "
 
-msgid "Insert &date/time           "
-msgstr "t&arih/zaman ekle           "
-
-msgid "Format p&aragraph        M-p"
-msgstr "p&Aragrafı biçimle       M-p"
-
-msgid "'ispell' s&pell check    C-p"
+#, fuzzy
+msgid "'ispell' s&pell check"
 msgstr "'ispell' sözel &denetimi C-p"
 
-msgid "Sor&t...                 M-t"
-msgstr "sıra&La...               M-t"
+#, fuzzy
+msgid "&Mail..."
+msgstr "&Süzgeç..."
 
-msgid "Paste o&utput of...      M-u"
+#, fuzzy
+msgid "Insert &literal..."
+msgstr "&Harfi içer...           C-q"
+
+#, fuzzy
+msgid "Insert &date/time"
+msgstr "t&arih/zaman ekle           "
+
+#, fuzzy
+msgid "Format p&aragraph"
+msgstr "p&Aragrafı biçimle       M-p"
+
+#, fuzzy
+msgid "Sor&t..."
+msgstr "&Sıralama türü..."
+
+msgid "Paste o&utput of..."
 msgstr ""
 
-msgid "E&xternal Formatter      F19"
+#, fuzzy
+msgid "E&xternal formatter"
 msgstr "D&ış Biçimlendirici      F19"
-
-msgid "&Mail...                    "
-msgstr "&Posta...                   "
-
-msgid "&Execute macro... C-x e, KEY"
-msgstr "Ma&Kro çalıştır...C-x e, TUŞ"
-
-msgid "'ispell' s&pell check    M-$"
-msgstr "'ispell' sö&Zel denetim  M-$"
 
 msgid "&General...  "
 msgstr "&Genel...        "
 
-msgid "&Save mode..."
+#, fuzzy
+msgid "Save &mode..."
 msgstr "Ka&Ydetme kipi..."
 
 #, fuzzy
-msgid "Learn &Keys..."
+msgid "Learn &keys..."
 msgstr "&Tuşları öğren..."
 
 #, fuzzy
-msgid "Syntax &Highlighting..."
+msgid "Syntax &highlighting..."
 msgstr "&Sözdizimi aydınlatma"
 
 #, fuzzy
@@ -648,34 +631,32 @@ msgstr "Men&ü dosyasını düzenle"
 msgid "&Menu file"
 msgstr "Men&ü dosyasını düzenle"
 
-#, fuzzy
-msgid "Save setu&p"
+msgid "&Save setup"
 msgstr "Ayarları &Kaydet"
 
-msgid " File "
-msgstr " Dosya "
-
-msgid " Edit "
-msgstr " Değiştir "
-
-msgid " Sear/Repl "
-msgstr " Ara/Değiş "
-
-msgid " Command "
-msgstr " Komut "
-
-msgid " Options "
-msgstr " Seçenekler "
-
-msgid "Intuitive"
-msgstr "Geleneksel"
-
-msgid "Emacs"
-msgstr "Emacs"
+#, fuzzy
+msgid "&File"
+msgstr "Dosya"
 
 #, fuzzy
-msgid "User-defined"
-msgstr "Ku&llanıcı tanımlı:"
+msgid "&Edit"
+msgstr "Düzenle"
+
+#, fuzzy
+msgid "&Search"
+msgstr "Ara"
+
+#, fuzzy
+msgid "&Command"
+msgstr "Komut"
+
+#, fuzzy
+msgid "For&mat"
+msgstr "Biçim"
+
+#, fuzzy
+msgid "&Options"
+msgstr " Seçe&nekler "
 
 msgid "None"
 msgstr "Hiçbiri"
@@ -688,9 +669,6 @@ msgstr "Daktilo sarmalaması"
 
 msgid "Word wrap line length: "
 msgstr "satır sarmalama uzunluğu: "
-
-msgid "Tab spacing: "
-msgstr "Sekme uzunluğu: "
 
 msgid "Cursor beyond end of line"
 msgstr ""
@@ -715,11 +693,14 @@ msgstr " Dosyayı kaydet"
 msgid "Confir&m before saving"
 msgstr "kaydet&Meden önce sor"
 
-msgid "Fill tabs with &spaces"
-msgstr "&Sekmeleri boşluklarla değiştir"
-
 msgid "&Return does autoindent"
 msgstr "&Return otogirintileme yapar"
+
+msgid "Tab spacing: "
+msgstr "Sekme uzunluğu: "
+
+msgid "Fill tabs with &spaces"
+msgstr "&Sekmeleri boşluklarla değiştir"
 
 msgid "&Backspace through tabs"
 msgstr "&Geri silme sekmeleri izler"
@@ -730,35 +711,38 @@ msgstr "Sahte &Yarım sekmeler"
 msgid "Wrap mode"
 msgstr "Sarmalama kipi"
 
-msgid "Key emulation"
-msgstr "Tuş ayarı"
-
 msgid " Editor options "
 msgstr " Düzenleyici seçenekleri "
 
-msgid "Help"
-msgstr "Yardım"
+msgid "ButtonBar|Help"
+msgstr ""
 
-msgid "Save"
-msgstr "Kaydet"
+msgid "ButtonBar|Save"
+msgstr ""
 
-msgid "Mark"
-msgstr "Seç"
+msgid "ButtonBar|Mark"
+msgstr ""
 
-msgid "Replac"
-msgstr "Değştir"
+msgid "ButtonBar|Replac"
+msgstr ""
 
-msgid "Copy"
-msgstr "Kopyala"
+msgid "ButtonBar|Copy"
+msgstr ""
 
-msgid "Move"
-msgstr "Taşı"
+msgid "ButtonBar|Move"
+msgstr ""
 
-msgid "Delete"
-msgstr "Sil"
+msgid "ButtonBar|Search"
+msgstr ""
 
-msgid "PullDn"
-msgstr "AnaMenü"
+msgid "ButtonBar|Delete"
+msgstr ""
+
+msgid "ButtonBar|PullDn"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
 
 msgid " Load syntax file "
 msgstr " Sözdizimi dosyasını yükle "
@@ -1224,6 +1208,9 @@ msgstr "tuşlarını kullanabilirsiniz"
 msgid " Permission "
 msgstr " İzinler "
 
+msgid " File "
+msgstr " Dosya "
+
 msgid "Chmod command"
 msgstr "Chmod komutu"
 
@@ -1490,14 +1477,14 @@ msgid ""
 "it."
 msgstr ""
 
-msgid " Copy "
-msgstr " Kopyala "
+msgid "DialogTitle|Copy"
+msgstr ""
 
-msgid " Move "
-msgstr " Taşıma "
+msgid "DialogTitle|Move"
+msgstr ""
 
-msgid " Delete "
-msgstr " Sil "
+msgid "DialogTitle|Delete"
+msgstr ""
 
 msgid " Cannot make the hardlink "
 msgstr " Sabit bağ oluşturulamadı "
@@ -1651,9 +1638,6 @@ msgstr ""
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr " Tamamlanmamış dosya alındı. Korunsun mu?"
 
-msgid "&Delete"
-msgstr "&Sil"
-
 msgid "&Keep"
 msgstr "&Koru"
 
@@ -1777,14 +1761,14 @@ msgstr ""
 msgid "Directory scanning"
 msgstr "Dizin yolu"
 
-msgid "1Copy"
-msgstr "1Kopyala"
+msgid "FileOperation|Copy"
+msgstr ""
 
-msgid "1Move"
-msgstr "1Taşı"
+msgid "FileOperation|Move"
+msgstr ""
 
-msgid "1Delete"
-msgstr "1Sil"
+msgid "FileOperation|Delete"
+msgstr ""
 
 #, no-c-format
 msgid "%o %f \"%s\"%m"
@@ -1814,6 +1798,10 @@ msgstr " bu maskla:"
 
 msgid " to:"
 msgstr " için bağ dosyası:"
+
+#, c-format
+msgid "%s?"
+msgstr ""
 
 msgid " Cannot operate on \"..\"! "
 msgstr " \"..\" üzerinde işlem yapılamıyor! "
@@ -1963,9 +1951,6 @@ msgstr "Di&zin değiştir"
 msgid "&Again"
 msgstr "&Tekrar"
 
-msgid "&Quit"
-msgstr "Çı&k"
-
 msgid "Pane&lize"
 msgstr "Pane&lle"
 
@@ -2051,14 +2036,14 @@ msgstr " Yazılım hatası: Bağ alanında çift başlangıç "
 msgid " Cannot find node %s in help file "
 msgstr " Yardım dosyasında %s düğümü bulunamadı "
 
-msgid "Index"
-msgstr "İndeks"
+msgid "Help"
+msgstr "Yardım"
 
-msgid "Prev"
-msgstr "Önceki"
+msgid "ButtonBar|Index"
+msgstr ""
 
-msgid "&Move"
-msgstr "&Taşı"
+msgid "ButtonBar|Prev"
+msgstr ""
 
 msgid "&Remove"
 msgstr "Ka&ldır"
@@ -2367,11 +2352,13 @@ msgstr " Midnight Commander'dan gerçekten çıkmak istiyor musunuz? "
 msgid "&Listing mode..."
 msgstr "&Listeleme kipi..."
 
-msgid "&Quick view     C-x q"
-msgstr "Dosya içe&Riği     C-x q"
+#, fuzzy
+msgid "&Quick view"
+msgstr "Çabuk "
 
-msgid "&Info           C-x i"
-msgstr "&Bilgi kipi        C-x i"
+#, fuzzy
+msgid "&Info"
+msgstr "Düğüm &numarasına göre"
 
 msgid "&Sort order..."
 msgstr "&Sıralama türü..."
@@ -2380,7 +2367,7 @@ msgid "&Filter..."
 msgstr "&Süzgeç..."
 
 #, fuzzy
-msgid "&Encoding...    M-e"
+msgid "&Encoding..."
 msgstr "sıra&La...               M-t"
 
 msgid "&Network link..."
@@ -2396,102 +2383,117 @@ msgstr "S&MB bağı..."
 msgid "SM&B link..."
 msgstr "S&MB bağı..."
 
-msgid "&Rescan         C-r"
-msgstr "Taz&ele            C-r"
+#, fuzzy
+msgid "&Rescan"
+msgstr "Tazele"
 
-msgid "&View               F3"
-msgstr "&Görünüm                      F3"
+#, fuzzy
+msgid "&View"
+msgstr "Görünüm"
 
-msgid "Vie&w file...         "
-msgstr "Bir dos&ya göster...  "
+#, fuzzy
+msgid "Vie&w file..."
+msgstr " Dosyayı göster "
 
-msgid "&Filtered view     M-!"
-msgstr "Görünüm &Süzgeci             M-!"
+#, fuzzy
+msgid "&Filtered view"
+msgstr " Görünüm Süzgeci "
 
-msgid "&Edit               F4"
-msgstr "Dosyayı Düz&enle              F4"
+msgid "C&hmod"
+msgstr ""
 
-msgid "&Copy               F5"
-msgstr "Dosya/Dizini &Kopyala         F5"
+#, fuzzy
+msgid "&Link"
+msgstr "&Bağlar"
 
-msgid "c&Hmod           C-x c"
-msgstr "Dosya ki&Pini değiştir     C-x c"
+#, fuzzy
+msgid "&SymLink"
+msgstr "&Bağlar"
 
-msgid "&Link            C-x l"
-msgstr "Sabi&t Bağ Oluştur         C-x l"
+#, fuzzy
+msgid "Edit s&ymlink"
+msgstr " Sembolik bağı düzenle "
 
-msgid "&SymLink         C-x s"
-msgstr "Se&mbolik Bağ oluştur      C-x s"
+msgid "Ch&own"
+msgstr ""
 
-msgid "edit s&Ymlink  C-x C-s"
-msgstr "Sembolik &Bağı düzenle   C-x C-s"
-
-msgid "ch&Own           C-x o"
-msgstr "Sa&hip/Grup değiştir       C-x o"
-
-msgid "&Advanced chown       "
+#, fuzzy
+msgid "&Advanced chown"
 msgstr "&Dosya Özelliklerini Değiştir   "
 
-msgid "&Rename/Move        F6"
-msgstr "Taşıma / &Ad Değiştirme       F6"
+#, fuzzy
+msgid "&Rename/Move"
+msgstr "Ka&ldır"
 
-msgid "&Mkdir              F7"
-msgstr "Yeni Di&zin oluştur           F7"
+#, fuzzy
+msgid "&Mkdir"
+msgstr "DizinAç"
 
-msgid "&Delete             F8"
-msgstr "Dosya / Dizini Si&L           F8"
+#, fuzzy
+msgid "&Quick cd"
+msgstr "Çabuk dizin değiştirme"
 
-msgid "&Quick cd          M-c"
-msgstr "Çabuk Dizin de&ğiştirme      M-c"
+#, fuzzy
+msgid "Select &group"
+msgstr "&Grupları belirle"
 
-msgid "select &Group      M-+"
-msgstr "Bl&ok Seçimi                 M-+"
+#, fuzzy
+msgid "U&nselect group"
+msgstr " Seçimi bırak "
 
-msgid "u&Nselect group    M-\\"
-msgstr "Blok seçimi&ni kaldır        M-\\"
-
-msgid "reverse selec&Tion M-*"
+#, fuzzy
+msgid "Reverse selec&tion"
 msgstr "Seçimi Tersine Çe&vir        M-*"
 
-msgid "e&Xit              F10"
-msgstr "&Çıkış            F10"
+#, fuzzy
+msgid "E&xit"
+msgstr "Düzenle"
 
-msgid "&User menu          F2"
-msgstr "K&ullanıcı menüsü             F2"
+#, fuzzy
+msgid "&User menu"
+msgstr " Kullanıcı menüsü "
 
 msgid "&Directory tree"
 msgstr "&Dizin ağacı"
 
-msgid "&Find file            M-?"
-msgstr "Dosya b&ul                    M-?"
+#, fuzzy
+msgid "&Find file"
+msgstr "Dosyayı bul"
 
-msgid "s&Wap panels          C-u"
-msgstr "Panelleri yer &değiştir       C-u"
+msgid "S&wap panels"
+msgstr ""
 
-msgid "switch &Panels on/off C-o"
+#, fuzzy
+msgid "Switch &panels on/off"
 msgstr "&Panelleri kapat/aç           C-o"
 
-msgid "&Compare directories  C-x d"
-msgstr "&Dizinleri karşılaştır      C-x d"
+#, fuzzy
+msgid "&Compare directories"
+msgstr " Dizinleri karşılaştır"
 
-msgid "e&Xternal panelize    C-x !"
-msgstr "Dışarıda&n panelle          C-x !"
+#, fuzzy
+msgid "E&xternal panelize"
+msgstr "Dış panelleme"
 
-msgid "show directory s&Izes"
+#, fuzzy
+msgid "Show directory s&izes"
 msgstr "diz&in boyutlarını göster"
 
 #, fuzzy
-msgid "Command &history      M-h"
-msgstr " Komut Geçmişi "
+msgid "Command &history"
+msgstr "komut &Geçmişi"
 
-msgid "di&Rectory hotlist    C-\\"
-msgstr "Di&zin Geçmişi               C-\\"
+#, fuzzy
+msgid "Di&rectory hotlist"
+msgstr "Dizin listesi"
 
-msgid "&Active VFS list      C-x a"
+#, fuzzy
+msgid "&Active VFS list"
 msgstr "Etkin &VFS listesi          C-x a"
 
-msgid "&Background jobs      C-x j"
-msgstr "&Ardalan işlemleri          C-x j"
+#, fuzzy
+msgid "&Background jobs"
+msgstr "Artalan İşleri"
 
 msgid "&Undelete files (ext2fs only)"
 msgstr "Dosyaları k&urtar (sadece ext2fs)"
@@ -2514,40 +2516,30 @@ msgstr "&Yapılandırma..."
 msgid "&Layout..."
 msgstr "&Yerleşim...     "
 
-msgid "c&Onfirmation..."
+#, fuzzy
+msgid "C&onfirmation..."
 msgstr "&Onaylama..."
 
 msgid "&Display bits..."
 msgstr "Bit &gösterimi..."
 
-msgid "learn &Keys..."
-msgstr "&Tuşları öğren..."
-
 msgid "&Virtual FS..."
 msgstr "&Sanal Dosya Sistemi..."
 
-msgid "&Save setup"
-msgstr "Ayarları &Kaydet"
-
-msgid " &Above "
+#, fuzzy
+msgid "&Above"
 msgstr " &Üst "
 
-msgid " &Left "
+#, fuzzy
+msgid "&Left"
 msgstr " &Sol "
 
-msgid " &File "
-msgstr " &Dosya "
-
-msgid " &Command "
-msgstr " &Komut "
-
-msgid " &Options "
-msgstr " Seçe&nekler "
-
-msgid " &Below "
+#, fuzzy
+msgid "&Below"
 msgstr " &Alt"
 
-msgid " &Right "
+#, fuzzy
+msgid "&Right"
 msgstr " &Sağ "
 
 msgid " Information "
@@ -2565,8 +2557,8 @@ msgstr ""
 " kalacaksınız. Daha detaylı bilgi için man sayfalarına\n"
 " bakınız."
 
-msgid "Menu"
-msgstr "KMenü"
+msgid "ButtonBar|Menu"
+msgstr ""
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "TERM çevre değişkeni atanmamış!\n"
@@ -2718,41 +2710,34 @@ msgid "SUB-DIR"
 msgstr "ALT-DİZ"
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
-msgid "u"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|u"
 msgstr ""
-
-#, fuzzy
-msgid "Unsorted"
-msgstr "&Sırasız"
 
 msgid "&Unsorted"
 msgstr "&Sırasız"
 
 #. TRANSLATORS: one single character to represent 'name' sort mode
-#, fuzzy
-msgid "n"
-msgstr " "
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|n"
+msgstr ""
 
 msgid "&Name"
 msgstr "İs&me göre"
 
 #. TRANSLATORS: one single character to represent 'extension' sort mode
-msgid "e"
-msgstr ""
-
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 #, fuzzy
-msgid "Extension"
-msgstr "Uzantı:"
+msgid "sort|e"
+msgstr "&Sırasız"
 
 msgid "&Extension"
 msgstr "&Uzantısına göre"
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
-msgid "s"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|s"
 msgstr ""
-
-msgid "Size"
-msgstr "Boyut"
 
 msgid "&Size"
 msgstr "&Boyutuna göre"
@@ -2762,31 +2747,25 @@ msgid "Block Size"
 msgstr " Boyut "
 
 #. TRANSLATORS: one single character to represent 'Modify time' sort mode
-msgid "m"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|m"
 msgstr ""
-
-msgid "MTime"
-msgstr "DeğTrh"
 
 msgid "&Modify time"
 msgstr "Dü&zenleme tarihine göre"
 
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
-msgid "a"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|a"
 msgstr ""
-
-msgid "ATime"
-msgstr "ErşTrh"
 
 msgid "&Access time"
 msgstr "&Erişim zamanına göre"
 
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
-msgid "h"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|h"
 msgstr ""
-
-msgid "CTime"
-msgstr "OlşTrh"
 
 msgid "C&Hange time"
 msgstr "D&üğüm Değişim zamanına göre"
@@ -2801,11 +2780,9 @@ msgid "Nl"
 msgstr "Nl"
 
 #. TRANSLATORS: one single character to represent 'inode' sort mode
-msgid "i"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|i"
 msgstr ""
-
-msgid "Inode"
-msgstr "I-düğüm"
 
 msgid "&Inode"
 msgstr "Düğüm &numarasına göre"
@@ -2846,17 +2823,17 @@ msgstr "Kullanıcı tanımlı biçim geçersiz: öntanımlısı kullanılacak."
 msgid " Do you really want to execute? "
 msgstr "Gerçekten çalıştırmak istiyor musunuz?"
 
-msgid "View"
-msgstr "Görünüm"
+msgid "ButtonBar|View"
+msgstr ""
 
-msgid "Edit"
-msgstr "Düzenle"
+msgid "ButtonBar|Edit"
+msgstr ""
 
-msgid "RenMov"
-msgstr "Taşı"
+msgid "ButtonBar|RenMov"
+msgstr ""
 
-msgid "Mkdir"
-msgstr "DizinAç"
+msgid "ButtonBar|Mkdir"
+msgstr ""
 
 msgid " Not implemented yet "
 msgstr ""
@@ -2887,6 +2864,12 @@ msgstr " Girdi karakter kümesini seçin "
 
 msgid "-  < No translation >"
 msgstr "-  < Çeviri yok >"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot save file %s:\n"
+"%s"
+msgstr " Dosyayı kaydederken hata oluştu. "
 
 #, c-format
 msgid ""
@@ -2989,20 +2972,20 @@ msgstr ""
 msgid "  Delete %s?  "
 msgstr "  %s silinsin mi ?  "
 
-msgid "Static"
-msgstr "Statik"
+msgid "ButtonBar|Static"
+msgstr ""
 
-msgid "Dynamc"
-msgstr "Dinamik"
+msgid "ButtonBar|Dynamc"
+msgstr ""
 
-msgid "Rescan"
-msgstr "Tazele"
+msgid "ButtonBar|Rescan"
+msgstr ""
 
-msgid "Forget"
-msgstr "Unut"
+msgid "ButtonBar|Forget"
+msgstr ""
 
-msgid "Rmdir"
-msgstr "Dizini sil"
+msgid "ButtonBar|Rmdir"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -3149,10 +3132,6 @@ msgstr "Sayılarda Ins tuşu"
 
 msgid "Delete on keypad"
 msgstr "Sayılarda Del tuşu"
-
-#, fuzzy
-msgid "Escape key"
-msgstr "Sayılarda / tuşu"
 
 msgid "Enter on keypad"
 msgstr "Sayılarda Enter tuşu"
@@ -3394,12 +3373,6 @@ msgstr " Alt uygulama çalıştırılamadı "
 msgid "Empty output from child filter"
 msgstr ""
 
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Quit"
-msgstr ""
-
 msgid "ButtonBar|Ascii"
 msgstr ""
 
@@ -3412,15 +3385,6 @@ msgstr ""
 msgid "ButtonBar|Line"
 msgstr ""
 
-msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
 msgid "ButtonBar|UnWrap"
 msgstr ""
 
@@ -3428,9 +3392,6 @@ msgid "ButtonBar|Wrap"
 msgstr ""
 
 msgid "ButtonBar|HxSrch"
-msgstr ""
-
-msgid "ButtonBar|Search"
 msgstr ""
 
 msgid "ButtonBar|Raw"
@@ -3949,6 +3910,331 @@ msgstr "İç hata:"
 msgid "Changes to file lost"
 msgstr "Değişiklikler kayıp"
 
+#~ msgid "Do backups -->"
+#~ msgstr "Yedekle -->"
+
+#~ msgid "Extension:"
+#~ msgstr "Uzantı:"
+
+#~ msgid "&New              C-n"
+#~ msgstr "&Yeni             C-n"
+
+#~ msgid "&Save              F2"
+#~ msgstr "&Kaydet            F2"
+
+#~ msgid "Save &as...       F12"
+#~ msgstr "&Farklı kaydet    F12"
+
+#~ msgid "A&bout...            "
+#~ msgstr "&Hakkında...         "
+
+#~ msgid "&Quit             F10"
+#~ msgstr "&Çıkış            F10"
+
+#~ msgid "&New            C-x k"
+#~ msgstr "&Yeni           C-x k"
+
+#~ msgid "Copy to &file...     "
+#~ msgstr "&Dosyaya kopyala...  "
+
+#, fuzzy
+#~ msgid "&Toggle mark                 F3"
+#~ msgstr "&Seçim             F3"
+
+#, fuzzy
+#~ msgid "Mar&k columns              S-F3"
+#~ msgstr "Sütunları &Seç   S-F3"
+
+#, fuzzy
+#~ msgid "&Copy                        F5"
+#~ msgstr "Dosya/Dizini &Kopyala         F5"
+
+#, fuzzy
+#~ msgid "&Move                        F6"
+#~ msgstr "&Taşı              F6"
+
+#, fuzzy
+#~ msgid "&Delete                      F8"
+#~ msgstr "Dosya / Dizini Si&L           F8"
+
+#, fuzzy
+#~ msgid "&Next bookmark              M-j"
+#~ msgstr "&Yeni             C-n"
+
+#, fuzzy
+#~ msgid "&Undo                       C-u"
+#~ msgstr "&Geri al          C-u"
+
+#, fuzzy
+#~ msgid "&Beginning               C-PgUp"
+#~ msgstr "&Başlangıca    C-PgUp"
+
+#, fuzzy
+#~ msgid "&End                     C-PgDn"
+#~ msgstr "&Sona          C-PgDn"
+
+#, fuzzy
+#~ msgid "C&opy to clipfile           M-w"
+#~ msgstr "&Satıra git...           M-l"
+
+#, fuzzy
+#~ msgid "C&ut to clipfile            C-w"
+#~ msgstr "&Satıra git...           M-l"
+
+#, fuzzy
+#~ msgid "Toggle bookmar&k               "
+#~ msgstr "&Seçim             F3"
+
+#, fuzzy
+#~ msgid "&Next bookmark                 "
+#~ msgstr "&Yeni             C-n"
+
+#, fuzzy
+#~ msgid "Pre&v bookmark                 "
+#~ msgstr "sıra&La...               M-t"
+
+#, fuzzy
+#~ msgid "&Flush bookmark                "
+#~ msgstr "&Posta...                   "
+
+#~ msgid "&Search...         F7"
+#~ msgstr "&Ara...            F7"
+
+#~ msgid "&Replace...        F4"
+#~ msgstr "&Yerleştir...      F4"
+
+#~ msgid "&Go to line...            M-l"
+#~ msgstr "&Satıra git...           M-l"
+
+#, fuzzy
+#~ msgid "Encod&ing...             M-e"
+#~ msgstr "sıra&La...               M-t"
+
+#~ msgid "Delete macr&o...            "
+#~ msgstr "makr&oyu sil...             "
+
+#~ msgid "Sor&t...                 M-t"
+#~ msgstr "sıra&La...               M-t"
+
+#~ msgid "&Mail...                    "
+#~ msgstr "&Posta...                   "
+
+#~ msgid "&Execute macro... C-x e, KEY"
+#~ msgstr "Ma&Kro çalıştır...C-x e, TUŞ"
+
+#~ msgid "'ispell' s&pell check    M-$"
+#~ msgstr "'ispell' sö&Zel denetim  M-$"
+
+#, fuzzy
+#~ msgid "Save setu&p"
+#~ msgstr "Ayarları &Kaydet"
+
+#~ msgid " Edit "
+#~ msgstr " Değiştir "
+
+#~ msgid " Sear/Repl "
+#~ msgstr " Ara/Değiş "
+
+#~ msgid " Command "
+#~ msgstr " Komut "
+
+#~ msgid " Options "
+#~ msgstr " Seçenekler "
+
+#~ msgid "Intuitive"
+#~ msgstr "Geleneksel"
+
+#~ msgid "Emacs"
+#~ msgstr "Emacs"
+
+#, fuzzy
+#~ msgid "User-defined"
+#~ msgstr "Ku&llanıcı tanımlı:"
+
+#~ msgid "Key emulation"
+#~ msgstr "Tuş ayarı"
+
+#~ msgid "Save"
+#~ msgstr "Kaydet"
+
+#~ msgid "Mark"
+#~ msgstr "Seç"
+
+#~ msgid "Replac"
+#~ msgstr "Değştir"
+
+#~ msgid "Move"
+#~ msgstr "Taşı"
+
+#~ msgid "Delete"
+#~ msgstr "Sil"
+
+#~ msgid "PullDn"
+#~ msgstr "AnaMenü"
+
+#~ msgid " Copy "
+#~ msgstr " Kopyala "
+
+#~ msgid " Move "
+#~ msgstr " Taşıma "
+
+#~ msgid " Delete "
+#~ msgstr " Sil "
+
+#~ msgid "1Copy"
+#~ msgstr "1Kopyala"
+
+#~ msgid "1Move"
+#~ msgstr "1Taşı"
+
+#~ msgid "1Delete"
+#~ msgstr "1Sil"
+
+#~ msgid "Index"
+#~ msgstr "İndeks"
+
+#~ msgid "Prev"
+#~ msgstr "Önceki"
+
+#~ msgid "&Quick view     C-x q"
+#~ msgstr "Dosya içe&Riği     C-x q"
+
+#~ msgid "&Info           C-x i"
+#~ msgstr "&Bilgi kipi        C-x i"
+
+#~ msgid "&Rescan         C-r"
+#~ msgstr "Taz&ele            C-r"
+
+#~ msgid "&View               F3"
+#~ msgstr "&Görünüm                      F3"
+
+#~ msgid "Vie&w file...         "
+#~ msgstr "Bir dos&ya göster...  "
+
+#~ msgid "&Filtered view     M-!"
+#~ msgstr "Görünüm &Süzgeci             M-!"
+
+#~ msgid "&Edit               F4"
+#~ msgstr "Dosyayı Düz&enle              F4"
+
+#~ msgid "&Copy               F5"
+#~ msgstr "Dosya/Dizini &Kopyala         F5"
+
+#~ msgid "c&Hmod           C-x c"
+#~ msgstr "Dosya ki&Pini değiştir     C-x c"
+
+#~ msgid "&Link            C-x l"
+#~ msgstr "Sabi&t Bağ Oluştur         C-x l"
+
+#~ msgid "&SymLink         C-x s"
+#~ msgstr "Se&mbolik Bağ oluştur      C-x s"
+
+#~ msgid "edit s&Ymlink  C-x C-s"
+#~ msgstr "Sembolik &Bağı düzenle   C-x C-s"
+
+#~ msgid "ch&Own           C-x o"
+#~ msgstr "Sa&hip/Grup değiştir       C-x o"
+
+#~ msgid "&Rename/Move        F6"
+#~ msgstr "Taşıma / &Ad Değiştirme       F6"
+
+#~ msgid "&Mkdir              F7"
+#~ msgstr "Yeni Di&zin oluştur           F7"
+
+#~ msgid "&Delete             F8"
+#~ msgstr "Dosya / Dizini Si&L           F8"
+
+#~ msgid "&Quick cd          M-c"
+#~ msgstr "Çabuk Dizin de&ğiştirme      M-c"
+
+#~ msgid "select &Group      M-+"
+#~ msgstr "Bl&ok Seçimi                 M-+"
+
+#~ msgid "u&Nselect group    M-\\"
+#~ msgstr "Blok seçimi&ni kaldır        M-\\"
+
+#~ msgid "e&Xit              F10"
+#~ msgstr "&Çıkış            F10"
+
+#~ msgid "&User menu          F2"
+#~ msgstr "K&ullanıcı menüsü             F2"
+
+#~ msgid "&Find file            M-?"
+#~ msgstr "Dosya b&ul                    M-?"
+
+#~ msgid "s&Wap panels          C-u"
+#~ msgstr "Panelleri yer &değiştir       C-u"
+
+#~ msgid "&Compare directories  C-x d"
+#~ msgstr "&Dizinleri karşılaştır      C-x d"
+
+#~ msgid "e&Xternal panelize    C-x !"
+#~ msgstr "Dışarıda&n panelle          C-x !"
+
+#, fuzzy
+#~ msgid "Command &history      M-h"
+#~ msgstr " Komut Geçmişi "
+
+#~ msgid "di&Rectory hotlist    C-\\"
+#~ msgstr "Di&zin Geçmişi               C-\\"
+
+#~ msgid "&Background jobs      C-x j"
+#~ msgstr "&Ardalan işlemleri          C-x j"
+
+#~ msgid "learn &Keys..."
+#~ msgstr "&Tuşları öğren..."
+
+#~ msgid " &File "
+#~ msgstr " &Dosya "
+
+#~ msgid " &Command "
+#~ msgstr " &Komut "
+
+#~ msgid "Menu"
+#~ msgstr "KMenü"
+
+#, fuzzy
+#~ msgid "n"
+#~ msgstr " "
+
+#, fuzzy
+#~ msgid "Extension"
+#~ msgstr "Uzantı:"
+
+#~ msgid "Size"
+#~ msgstr "Boyut"
+
+#~ msgid "MTime"
+#~ msgstr "DeğTrh"
+
+#~ msgid "ATime"
+#~ msgstr "ErşTrh"
+
+#~ msgid "CTime"
+#~ msgstr "OlşTrh"
+
+#~ msgid "Inode"
+#~ msgstr "I-düğüm"
+
+#~ msgid "RenMov"
+#~ msgstr "Taşı"
+
+#~ msgid "Static"
+#~ msgstr "Statik"
+
+#~ msgid "Dynamc"
+#~ msgstr "Dinamik"
+
+#~ msgid "Forget"
+#~ msgstr "Unut"
+
+#~ msgid "Rmdir"
+#~ msgstr "Dizini sil"
+
+#, fuzzy
+#~ msgid "Escape key"
+#~ msgstr "Sayılarda / tuşu"
+
 #, fuzzy
 #~ msgid "bind: Unknown command: `%s'"
 #~ msgstr " Chown komutu "
@@ -4041,15 +4327,8 @@ msgstr "Değişiklikler kayıp"
 #~ msgid "&Delete            F8"
 #~ msgstr "&Sil               F8"
 
-#, fuzzy
-#~ msgid "Save setu&p..."
-#~ msgstr "Ayarları &Kaydet"
-
 #~ msgid " The command history is empty "
 #~ msgstr " Komut geçmişi boş "
-
-#~ msgid "command &History"
-#~ msgstr "komut &Geçmişi"
 
 #~ msgid "Edit edi&tor menu file"
 #~ msgstr "Menü d&üzenleyici düzenleme"
@@ -4088,9 +4367,6 @@ msgstr "Değişiklikler kayıp"
 
 #~ msgid "&Type"
 #~ msgstr "&Türü"
-
-#~ msgid "&Links"
-#~ msgstr "&Bağlar"
 
 #~ msgid "N&GID"
 #~ msgstr "N&GID"

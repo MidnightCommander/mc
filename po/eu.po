@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-09 09:50+0300\n"
+"POT-Creation-Date: 2009-10-30 10:39+0200\n"
 "PO-Revision-Date: 2001-05-25 13:35+0200\n"
 "Last-Translator: Mari Susperregi <mari@elhuyar.com>\n"
 "Language-Team: Euskara <debian-l10n-basque@lists.debian.org>\n"
@@ -53,6 +53,29 @@ msgstr " Ezin da ikusi: ez da fitxategi erregularra "
 msgid " File %s is too large "
 msgstr " Fitxategia handiegia da: "
 
+msgid " About "
+msgstr "Honi buruz "
+
+msgid ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       A user friendly text editor written\n"
+"           for the Midnight Commander.\n"
+msgstr ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 Free Software Foundation\n"
+"\n"
+"       Testu-editore lagungarri bat idatzi da\n"
+"           Midnight Commander-entzat.\n"
+
+msgid "&OK"
+msgstr "&Ados"
+
 msgid "Macro recursion is too deep"
 msgstr ""
 
@@ -90,23 +113,29 @@ msgstr " Huts egin da kanalizazioa idazteko irekitzen saiatzean: "
 msgid " Cannot open file for writing: %s "
 msgstr " Huts egin da kanalizazioa idazteko irekitzen saiatzean: "
 
-msgid "Quick save "
+#, fuzzy
+msgid "&Quick save"
 msgstr "Gordetze bizkorra "
 
-msgid "Safe save "
+#, fuzzy
+msgid "&Safe save"
 msgstr "Gordetze segurua "
 
-msgid "Do backups -->"
-msgstr "Egin babeskopiak -->"
+msgid "&Do backups with following extension:"
+msgstr ""
 
-msgid "&OK"
-msgstr "&Ados"
-
-msgid "Extension:"
-msgstr "Luzapena:"
+msgid "Check &POSIX new line"
+msgstr ""
 
 msgid " Edit Save Mode "
 msgstr " Editatu Gorde modua "
+
+msgid "The file you are saving is not finished with a newline"
+msgstr ""
+
+#, fuzzy
+msgid "C&ontinue"
+msgstr "Jarraitu"
 
 msgid "&Do not change"
 msgstr ""
@@ -179,10 +208,6 @@ msgid ""
 msgstr ""
 " Uneko testuan aldaketak egin dira eta ez dira gorde.\n"
 " Jarraitzen baduzu aldaketa horiek baztertu egingo dira."
-
-#, fuzzy
-msgid "C&ontinue"
-msgstr "Jarraitu"
 
 #, fuzzy
 msgid "Syntax file edit"
@@ -405,238 +430,196 @@ msgstr ""
 msgid "&Ignore lock"
 msgstr ""
 
-msgid " About "
-msgstr "Honi buruz "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 Free Software Foundation\n"
-"\n"
-"       Testu-editore lagungarri bat idatzi da\n"
-"           Midnight Commander-entzat.\n"
-
 msgid "&Open file..."
 msgstr "&Ireki fitxategia..."
 
-msgid "&New              C-n"
-msgstr "&Berria           C-n"
+#, fuzzy
+msgid "&New"
+msgstr "&Izena"
 
-msgid "&Save              F2"
-msgstr "&Gorde             F2"
+#, fuzzy
+msgid "Save &as..."
+msgstr "&Gorde konfigurazioa"
 
-msgid "Save &as...       F12"
-msgstr "Gorde &honela...      F12"
-
-msgid "&Insert file...   F15"
+#, fuzzy
+msgid "&Insert file..."
 msgstr "T&xertatu fitxategia...  F15"
 
-msgid "Copy to &file...  C-f"
+#, fuzzy
+msgid "Cop&y to file..."
 msgstr "kopiatu &fitxategira... C-f"
 
-msgid "&User menu...     F11"
+#, fuzzy
+msgid "&User menu..."
 msgstr "&Erabiltzaile-menua...    F11"
 
-msgid "A&bout...            "
-msgstr "&honi buruz...           "
+#, fuzzy
+msgid "A&bout..."
+msgstr "&Diseinua..."
 
-msgid "&Quit             F10"
-msgstr "&Irten            F10"
-
-msgid "&New            C-x k"
-msgstr "&Berria         C-x k"
-
-msgid "Copy to &file...     "
-msgstr "Kopiatu &fitxategira...    "
+msgid "&Quit"
+msgstr "&Irten"
 
 #, fuzzy
-msgid "&Toggle mark                 F3"
-msgstr "&Txandakatu marka  F3"
+msgid "&Toggle mark"
+msgstr "&Garbitu markatutakoa"
+
+msgid "&Mark columns"
+msgstr ""
 
 #, fuzzy
-msgid "Mar&k columns              S-F3"
-msgstr "&Markatu zutabeak S-F3"
-
-#, fuzzy
-msgid "Toggle &ins/overw           Ins"
+msgid "Toggle &ins/overw"
 msgstr "txandakatu &Txertatu/gainidatzi  Ins"
 
 #, fuzzy
-msgid "&Copy                        F5"
-msgstr "&Kopiatu                         F5"
+msgid "&Copy"
+msgstr "Kopiatu"
+
+msgid "&Move"
+msgstr "&Lekuz aldatu"
+
+msgid "&Delete"
+msgstr "E&zabatu"
 
 #, fuzzy
-msgid "&Move                        F6"
-msgstr "&Lekuz aldatu      F6"
-
-#, fuzzy
-msgid "&Delete                      F8"
-msgstr "Ezabat&u                         F8"
-
-#, fuzzy
-msgid "C&opy to clipfile         C-Ins"
+msgid "C&opy to clipfile"
 msgstr "Kopiatu &fitxategira...    "
 
 #, fuzzy
-msgid "C&ut to clipfile          S-Del"
+msgid "C&ut to clipfile"
 msgstr "&Joan lerro honetara...           M-l"
 
-msgid "&Paste from clipfile      S-Ins"
+msgid "&Paste from clipfile"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k            M-k"
+msgid "Toggle bookmar&k"
 msgstr "&Txandakatu marka  F3"
 
 #, fuzzy
-msgid "&Next bookmark              M-j"
-msgstr "&Berria           C-n"
+msgid "&Next bookmark"
+msgstr "&Konfiguratu markatutakoa"
 
 #, fuzzy
-msgid "Pre&v bookmark              M-i"
+msgid "Pre&v bookmark"
 msgstr "&Ordenatu...                M-t"
 
 #, fuzzy
-msgid "&Flush bookmark             M-o"
+msgid "&Flush bookmark"
 msgstr "&Posta...                   "
 
-#, fuzzy
-msgid "&Undo                       C-u"
-msgstr "De&segin          C-u"
+msgid "&Undo"
+msgstr ""
 
-#, fuzzy
-msgid "&Beginning               C-PgUp"
-msgstr "&Hasiera       C-PgUp"
-
-#, fuzzy
-msgid "&End                     C-PgDn"
-msgstr "&Amaiera       C-PgDn"
-
-#, fuzzy
-msgid "C&opy to clipfile           M-w"
-msgstr "&Joan lerro honetara...           M-l"
-
-#, fuzzy
-msgid "C&ut to clipfile            C-w"
-msgstr "&Joan lerro honetara...           M-l"
-
-msgid "&Paste from clipfile        C-y"
+msgid "&Beginning"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k               "
-msgstr "&Txandakatu marka  F3"
+msgid "&End"
+msgstr "&Inodoa"
 
 #, fuzzy
-msgid "&Next bookmark                 "
-msgstr "&Berria           C-n"
+msgid "&Search..."
+msgstr "Bilatu"
 
 #, fuzzy
-msgid "Pre&v bookmark                 "
-msgstr "&Ordenatu...                M-t"
-
-#, fuzzy
-msgid "&Flush bookmark                "
-msgstr "&Posta...                   "
-
-msgid "&Search...         F7"
-msgstr "&Bilatu...        F7"
-
-msgid "Search &again     F17"
+msgid "Search &again"
 msgstr "bilatu &berriro   F17"
 
-msgid "&Replace...        F4"
-msgstr "&Ordeztu...       F4"
-
-msgid "&Go to line...            M-l"
-msgstr "&Joan lerro honetara...           M-l"
+#, fuzzy
+msgid "&Replace..."
+msgstr "&Ordeztu"
 
 #, fuzzy
-msgid "Toggle li&ne state        M-n"
+msgid "&Go to line..."
+msgstr "Joan lerro honetara "
+
+#, fuzzy
+msgid "Toggle li&ne state"
 msgstr "&Txandakatu marka  F3"
 
-msgid "Go to matching &bracket   M-b"
+#, fuzzy
+msgid "Go to matching &bracket"
 msgstr "joan dagokion &kortxetera M-b"
 
-msgid "Find declaration      A-Enter"
+#, fuzzy
+msgid "Find declaration"
+msgstr "Bilatu ezetsiak zuzendu ondoren "
+
+msgid "Back from declaration"
 msgstr ""
 
-msgid "Back from declaration     M--"
-msgstr ""
-
-msgid "Forward to declaration    M-+"
+msgid "Forward to declaration"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             M-e"
+msgid "Encod&ing..."
 msgstr "&Ordenatu...                M-t"
 
-msgid "Insert &literal...       C-q"
-msgstr "Txertatu &literala...      C-q"
-
-msgid "&Refresh screen          C-l"
+#, fuzzy
+msgid "&Refresh screen"
 msgstr "&Pantaila freskatu       C-l"
 
-msgid "&Start record macro      C-r"
+#, fuzzy
+msgid "&Start record macro"
 msgstr "&Hasi makroaren grabaketa  C-r"
 
-msgid "&Finish record macro...  C-r"
+#, fuzzy
+msgid "&Finish record macro..."
 msgstr "&Amaitu makroaren grabaketa... C-r"
 
-msgid "&Execute macro...   C-a, KEY"
+#, fuzzy
+msgid "&Execute macro..."
 msgstr "&Exekutatu makroa...  C-a, TEKLA"
 
-msgid "Delete macr&o...            "
-msgstr "ezabatu makr&Oa...           "
+#, fuzzy
+msgid "Delete macr&o..."
+msgstr " Ezabatu makroa "
 
-msgid "Insert &date/time           "
-msgstr "txertatu &Data/ordua           "
-
-msgid "Format p&aragraph        M-p"
-msgstr "formateatu &paragrafoa   M-p"
-
-msgid "'ispell' s&pell check    C-p"
+#, fuzzy
+msgid "'ispell' s&pell check"
 msgstr "'ispell' ortografia-egiaztapena    C-p"
 
-msgid "Sor&t...                 M-t"
-msgstr "&Ordenatu...                M-t"
+#, fuzzy
+msgid "&Mail..."
+msgstr "I&ragazkia..."
 
-msgid "Paste o&utput of...      M-u"
+#, fuzzy
+msgid "Insert &literal..."
+msgstr "Txertatu &literala...      C-q"
+
+#, fuzzy
+msgid "Insert &date/time"
+msgstr "txertatu &Data/ordua           "
+
+#, fuzzy
+msgid "Format p&aragraph"
+msgstr "formateatu &paragrafoa   M-p"
+
+#, fuzzy
+msgid "Sor&t..."
+msgstr "&Ordenazioa..."
+
+msgid "Paste o&utput of..."
 msgstr ""
 
-msgid "E&xternal Formatter      F19"
+#, fuzzy
+msgid "E&xternal formatter"
 msgstr "Kanpoko formateatzailea  F19"
-
-msgid "&Mail...                    "
-msgstr "&Posta...                   "
-
-msgid "&Execute macro... C-x e, KEY"
-msgstr "&Exekutatu makroa...C-x e, TEKLA"
-
-msgid "'ispell' s&pell check    M-$"
-msgstr "'ispell' &ortografia-egiaztapena    M-$"
 
 msgid "&General...  "
 msgstr "&Orokorra... "
 
-msgid "&Save mode..."
+#, fuzzy
+msgid "Save &mode..."
 msgstr "&Gorde modua..."
 
 #, fuzzy
-msgid "Learn &Keys..."
+msgid "Learn &keys..."
 msgstr "ikasteko &teklak..."
 
 #, fuzzy
-msgid "Syntax &Highlighting..."
+msgid "Syntax &highlighting..."
 msgstr "sinta&xia nabarmentzen"
 
 #, fuzzy
@@ -647,34 +630,32 @@ msgstr "Editatu &menu-fitxategia"
 msgid "&Menu file"
 msgstr "Editatu &menu-fitxategia"
 
-#, fuzzy
-msgid "Save setu&p"
+msgid "&Save setup"
 msgstr "&Gorde konfigurazioa"
 
-msgid " File "
-msgstr "Fitxategia "
-
-msgid " Edit "
-msgstr "Edizioa "
-
-msgid " Sear/Repl "
-msgstr "Bilatu/ordeztu  "
-
-msgid " Command "
-msgstr "Komandoa "
-
-msgid " Options "
-msgstr "Aukerak "
-
-msgid "Intuitive"
-msgstr "Intuitiboa"
-
-msgid "Emacs"
-msgstr "Emacs"
+#, fuzzy
+msgid "&File"
+msgstr "Fitxategia"
 
 #, fuzzy
-msgid "User-defined"
-msgstr "&Erabiltzaileak hau definitu du:"
+msgid "&Edit"
+msgstr "Edizioa"
+
+#, fuzzy
+msgid "&Search"
+msgstr "Bilatu"
+
+#, fuzzy
+msgid "&Command"
+msgstr "Komandoa"
+
+#, fuzzy
+msgid "For&mat"
+msgstr "Formateatu"
+
+#, fuzzy
+msgid "&Options"
+msgstr " &Aukerak "
 
 msgid "None"
 msgstr "Bat ere ez"
@@ -687,9 +668,6 @@ msgstr "Idatzi idazlearen itzulbira"
 
 msgid "Word wrap line length: "
 msgstr "Itzulbira-lerroaren luzera : "
-
-msgid "Tab spacing: "
-msgstr "Tabulazio-tartea : "
 
 msgid "Cursor beyond end of line"
 msgstr ""
@@ -714,11 +692,14 @@ msgstr " Gorde fitxategia "
 msgid "Confir&m before saving"
 msgstr "Be&rretsi gorde aurretik"
 
-msgid "Fill tabs with &spaces"
-msgstr "bete tabulazioak &tarteekin"
-
 msgid "&Return does autoindent"
 msgstr "&Itzulera teklak koska automatikoki jartzen du"
+
+msgid "Tab spacing: "
+msgstr "Tabulazio-tartea : "
+
+msgid "Fill tabs with &spaces"
+msgstr "bete tabulazioak &tarteekin"
 
 msgid "&Backspace through tabs"
 msgstr "&Atzera tabuladoreen bidez"
@@ -729,35 +710,38 @@ msgstr "&Itxuratu tabuladore erdiak "
 msgid "Wrap mode"
 msgstr "Doipen-modua"
 
-msgid "Key emulation"
-msgstr "Gako-emulazioa"
-
 msgid " Editor options "
 msgstr "Editore-aukerak "
 
-msgid "Help"
-msgstr "Laguntza"
+msgid "ButtonBar|Help"
+msgstr ""
 
-msgid "Save"
-msgstr "Gorde"
+msgid "ButtonBar|Save"
+msgstr ""
 
-msgid "Mark"
-msgstr "Markatu"
+msgid "ButtonBar|Mark"
+msgstr ""
 
-msgid "Replac"
-msgstr "Ordeztu"
+msgid "ButtonBar|Replac"
+msgstr ""
 
-msgid "Copy"
-msgstr "Kopiatu"
+msgid "ButtonBar|Copy"
+msgstr ""
 
-msgid "Move"
-msgstr "Lekuz aldatu"
+msgid "ButtonBar|Move"
+msgstr ""
 
-msgid "Delete"
-msgstr "Ezabatu"
+msgid "ButtonBar|Search"
+msgstr ""
 
-msgid "PullDn"
-msgstr "GoitBeh"
+msgid "ButtonBar|Delete"
+msgstr ""
+
+msgid "ButtonBar|PullDn"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
 
 msgid " Load syntax file "
 msgstr " Kargatu sintaxiaren fitxategia "
@@ -1225,6 +1209,9 @@ msgstr "eta T edo INS markatzeko"
 msgid " Permission "
 msgstr "Baimena "
 
+msgid " File "
+msgstr "Fitxategia "
+
 msgid "Chmod command"
 msgstr "Chmod komandoa"
 
@@ -1494,14 +1481,14 @@ msgid ""
 "it."
 msgstr ""
 
-msgid " Copy "
-msgstr "Kopiatu "
+msgid "DialogTitle|Copy"
+msgstr ""
 
-msgid " Move "
-msgstr "Lekuz aldatu "
+msgid "DialogTitle|Move"
+msgstr ""
 
-msgid " Delete "
-msgstr "Ezabatu "
+msgid "DialogTitle|Delete"
+msgstr ""
 
 msgid " Cannot make the hardlink "
 msgstr "Ezin izan da esteka sortu "
@@ -1655,9 +1642,6 @@ msgstr ""
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr "Fitxategi osatugabea berreskuratu da. Mantendu?"
 
-msgid "&Delete"
-msgstr "E&zabatu"
-
 msgid "&Keep"
 msgstr "&Gorde"
 
@@ -1781,14 +1765,14 @@ msgstr ""
 msgid "Directory scanning"
 msgstr "Direktorioaren bide-izena"
 
-msgid "1Copy"
-msgstr "1Kopiatu"
+msgid "FileOperation|Copy"
+msgstr ""
 
-msgid "1Move"
-msgstr "1Lekuz aldatu"
+msgid "FileOperation|Move"
+msgstr ""
 
-msgid "1Delete"
-msgstr "1Ezabatu"
+msgid "FileOperation|Delete"
+msgstr ""
 
 #, no-c-format
 msgid "%o %f \"%s\"%m"
@@ -1818,6 +1802,10 @@ msgstr "iturburu-maskararekin:"
 
 msgid " to:"
 msgstr "hona:"
+
+#, c-format
+msgid "%s?"
+msgstr ""
 
 msgid " Cannot operate on \"..\"! "
 msgstr " Ezin da hemen erabili: \"..\"! "
@@ -1967,9 +1955,6 @@ msgstr "&Aldatu direktorioa"
 msgid "&Again"
 msgstr "&Berriro"
 
-msgid "&Quit"
-msgstr "&Irten"
-
 msgid "Pane&lize"
 msgstr "Pane&lera eraman"
 
@@ -2055,14 +2040,14 @@ msgstr "Barne-akatsa: Estekaren hasieratze bikoitza "
 msgid " Cannot find node %s in help file "
 msgstr "Ezin da %s nodoa laguntza-fitxategian aurkitu "
 
-msgid "Index"
-msgstr "Indizea"
+msgid "Help"
+msgstr "Laguntza"
 
-msgid "Prev"
-msgstr "Aurrekoa"
+msgid "ButtonBar|Index"
+msgstr ""
 
-msgid "&Move"
-msgstr "&Lekuz aldatu"
+msgid "ButtonBar|Prev"
+msgstr ""
 
 msgid "&Remove"
 msgstr "Ke&ndu"
@@ -2373,11 +2358,13 @@ msgstr "Midnight Commander-etik irten nahi duzu? "
 msgid "&Listing mode..."
 msgstr "&Zerrendatze-modua..."
 
-msgid "&Quick view     C-x q"
-msgstr "I&kuspegi bizkorra  C-x q"
+#, fuzzy
+msgid "&Quick view"
+msgstr "Gordetze bizkorra "
 
-msgid "&Info           C-x i"
-msgstr "&Informazioa        C-x i"
+#, fuzzy
+msgid "&Info"
+msgstr "&Inodoa"
 
 msgid "&Sort order..."
 msgstr "&Ordenazioa..."
@@ -2386,7 +2373,7 @@ msgid "&Filter..."
 msgstr "I&ragazkia..."
 
 #, fuzzy
-msgid "&Encoding...    M-e"
+msgid "&Encoding..."
 msgstr "&Ordenatu...                M-t"
 
 msgid "&Network link..."
@@ -2402,102 +2389,117 @@ msgstr "S&MB esteka..."
 msgid "SM&B link..."
 msgstr "S&MB esteka..."
 
-msgid "&Rescan         C-r"
-msgstr "&Berreskaneatu        C-r"
+#, fuzzy
+msgid "&Rescan"
+msgstr "Berreskaneatu"
 
-msgid "&View               F3"
-msgstr "&Ikus                            F3"
+#, fuzzy
+msgid "&View"
+msgstr "Ikuspegia"
 
-msgid "Vie&w file...         "
-msgstr "Ikus &fitxategia...                "
+#, fuzzy
+msgid "Vie&w file..."
+msgstr "Ikusi fitxategia "
 
-msgid "&Filtered view     M-!"
-msgstr "Ikuspegi ira&gazia              M-!"
+#, fuzzy
+msgid "&Filtered view"
+msgstr " Ikuspegi iragazia "
 
-msgid "&Edit               F4"
-msgstr "E&dizioa                         F4"
+msgid "C&hmod"
+msgstr ""
 
-msgid "&Copy               F5"
-msgstr "&Kopiatu                         F5"
+#, fuzzy
+msgid "&Link"
+msgstr "&Estekak"
 
-msgid "c&Hmod           C-x c"
-msgstr "a&ldatu baimenak              C-x c"
+#, fuzzy
+msgid "&SymLink"
+msgstr "&Estekak"
 
-msgid "&Link            C-x l"
-msgstr "E&steka                       C-x l"
+#, fuzzy
+msgid "Edit s&ymlink"
+msgstr "Editatu esteka sinbolikoa "
 
-msgid "&SymLink         C-x s"
-msgstr "Esteka sin&bolikoa            C-x s"
+msgid "Ch&own"
+msgstr ""
 
-msgid "edit s&Ymlink  C-x C-s"
-msgstr "editatu esteka sinb&olikoa  C-x C-s"
-
-msgid "ch&Own           C-x o"
-msgstr "aldatu &jabea                 C-x o"
-
-msgid "&Advanced chown       "
+#, fuzzy
+msgid "&Advanced chown"
 msgstr "chown &aurreratua                  "
 
-msgid "&Rename/Move        F6"
-msgstr "I&zena aldatu/Lekuz aldatu       F6"
+#, fuzzy
+msgid "&Rename/Move"
+msgstr "Ke&ndu"
 
-msgid "&Mkdir              F7"
-msgstr "&Mkdir                           F7"
+#, fuzzy
+msgid "&Mkdir"
+msgstr "Mkdir"
 
-msgid "&Delete             F8"
-msgstr "Ezabat&u                         F8"
+#, fuzzy
+msgid "&Quick cd"
+msgstr "Cd bizkorra"
 
-msgid "&Quick cd          M-c"
-msgstr "&cd bizkorra                    M-c"
+#, fuzzy
+msgid "Select &group"
+msgstr "Konfiguratu &taldeak"
 
-msgid "select &Group      M-+"
-msgstr "hautatu &taldea                 M-+"
+#, fuzzy
+msgid "U&nselect group"
+msgstr "Desautatu "
 
-msgid "u&Nselect group    M-\\"
-msgstr "&desautatu taldea               M-\\"
-
-msgid "reverse selec&Tion M-*"
+#, fuzzy
+msgid "Reverse selec&tion"
 msgstr "alderantzikatu &hautapena       M-*"
 
-msgid "e&Xit              F10"
-msgstr "irte&n                          F10"
+#, fuzzy
+msgid "E&xit"
+msgstr "Edizioa"
 
-msgid "&User menu          F2"
-msgstr "&Erabiltzaile-menua              F2"
+#, fuzzy
+msgid "&User menu"
+msgstr " Erabiltzaile-menua "
 
 msgid "&Directory tree"
 msgstr "&Direktorio-zuhaitza"
 
-msgid "&Find file            M-?"
-msgstr "&Bilatu fitxategia                   M-?"
+#, fuzzy
+msgid "&Find file"
+msgstr "Bilatu fitxategia"
 
-msgid "s&Wap panels          C-u"
-msgstr "&Trukatu panelak                     C-u"
+msgid "S&wap panels"
+msgstr ""
 
-msgid "switch &Panels on/off C-o"
+#, fuzzy
+msgid "Switch &panels on/off"
 msgstr "aktibatu/desaktibatu &panelak        C-o"
 
-msgid "&Compare directories  C-x d"
-msgstr "K&onparatu direktorioak            C-x d"
+#, fuzzy
+msgid "&Compare directories"
+msgstr "Konparatu direktorioak "
 
-msgid "e&Xternal panelize    C-x !"
-msgstr "&kanpoko panela                    C-x !"
+#, fuzzy
+msgid "E&xternal panelize"
+msgstr "Kanpoko panela"
 
-msgid "show directory s&Izes"
+#, fuzzy
+msgid "Show directory s&izes"
 msgstr "erakutsi direktorio-tama&inak"
 
 #, fuzzy
-msgid "Command &history      M-h"
-msgstr "Komando-historia "
+msgid "Command &history"
+msgstr "komandoen &historia"
 
-msgid "di&Rectory hotlist    C-\\"
-msgstr "&gogokoen direktorioa                C-\\"
+#, fuzzy
+msgid "Di&rectory hotlist"
+msgstr "Gogokoen direktorioa"
 
-msgid "&Active VFS list      C-x a"
+#, fuzzy
+msgid "&Active VFS list"
 msgstr "Aktibatu &VFS zerrenda             C-x a"
 
-msgid "&Background jobs      C-x j"
-msgstr "&Atzeko planoko lanak              C-x j"
+#, fuzzy
+msgid "&Background jobs"
+msgstr "Atzeko planoko lanak"
 
 msgid "&Undelete files (ext2fs only)"
 msgstr "Desautatu &fitxategiak (ext2fs bakarrik)"
@@ -2520,40 +2522,30 @@ msgstr "&Konfigurazioa..."
 msgid "&Layout..."
 msgstr "&Diseinua..."
 
-msgid "c&Onfirmation..."
+#, fuzzy
+msgid "C&onfirmation..."
 msgstr "B&errespena..."
 
 msgid "&Display bits..."
 msgstr "&Bistaratu bitak..."
 
-msgid "learn &Keys..."
-msgstr "ikasteko &teklak..."
-
 msgid "&Virtual FS..."
 msgstr "&FS birtuala..."
 
-msgid "&Save setup"
-msgstr "&Gorde konfigurazioa"
-
-msgid " &Above "
+#, fuzzy
+msgid "&Above"
 msgstr " &Gainean "
 
-msgid " &Left "
+#, fuzzy
+msgid "&Left"
 msgstr " &Ezkerrean "
 
-msgid " &File "
-msgstr " &Fitxategia "
-
-msgid " &Command "
-msgstr " &Komandoa "
-
-msgid " &Options "
-msgstr " &Aukerak "
-
-msgid " &Below "
+#, fuzzy
+msgid "&Below"
 msgstr " &Azpian "
 
-msgid " &Right "
+#, fuzzy
+msgid "&Right"
 msgstr " Es&kuinean "
 
 msgid " Information "
@@ -2570,8 +2562,8 @@ msgstr ""
 " direktorioa eskuz berritu beharko duzu. Ikus eskuliburuko \n"
 " orrialdeak xehetasunetarako.                                "
 
-msgid "Menu"
-msgstr "Menua"
+msgid "ButtonBar|Menu"
+msgstr ""
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "TERM ingurune-aldagaia ez dago konfiguratuta!\n"
@@ -2725,41 +2717,34 @@ msgid "SUB-DIR"
 msgstr "AZPI-DIR"
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
-msgid "u"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|u"
 msgstr ""
-
-#, fuzzy
-msgid "Unsorted"
-msgstr "&Desordenatu"
 
 msgid "&Unsorted"
 msgstr "&Desordenatu"
 
 #. TRANSLATORS: one single character to represent 'name' sort mode
-#, fuzzy
-msgid "n"
-msgstr "Non"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|n"
+msgstr ""
 
 msgid "&Name"
 msgstr "&Izena"
 
 #. TRANSLATORS: one single character to represent 'extension' sort mode
-msgid "e"
-msgstr ""
-
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 #, fuzzy
-msgid "Extension"
-msgstr "Luzapena:"
+msgid "sort|e"
+msgstr "&Desordenatu"
 
 msgid "&Extension"
 msgstr "&Luzapena"
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
-msgid "s"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|s"
 msgstr ""
-
-msgid "Size"
-msgstr "Tamaina"
 
 msgid "&Size"
 msgstr "&Tamaina"
@@ -2769,31 +2754,25 @@ msgid "Block Size"
 msgstr "Tamaina "
 
 #. TRANSLATORS: one single character to represent 'Modify time' sort mode
-msgid "m"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|m"
 msgstr ""
-
-msgid "MTime"
-msgstr "MOrdua"
 
 msgid "&Modify time"
 msgstr "&Aldatu ordua"
 
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
-msgid "a"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|a"
 msgstr ""
-
-msgid "ATime"
-msgstr "AOrdua"
 
 msgid "&Access time"
 msgstr "&Atzipen-ordua"
 
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
-msgid "h"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|h"
 msgstr ""
-
-msgid "CTime"
-msgstr "COrdua"
 
 msgid "C&Hange time"
 msgstr "&Aldatu denbora"
@@ -2808,11 +2787,9 @@ msgid "Nl"
 msgstr "Nl"
 
 #. TRANSLATORS: one single character to represent 'inode' sort mode
-msgid "i"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|i"
 msgstr ""
-
-msgid "Inode"
-msgstr "Inodoa"
 
 msgid "&Inode"
 msgstr "&Inodoa"
@@ -2853,17 +2830,17 @@ msgstr "Erabiltzaileak emandako formatua baliogabea da, lehenetsira itzultzen."
 msgid " Do you really want to execute? "
 msgstr "Ziur zaude exekutatu nahi duzula? "
 
-msgid "View"
-msgstr "Ikuspegia"
+msgid "ButtonBar|View"
+msgstr ""
 
-msgid "Edit"
-msgstr "Edizioa"
+msgid "ButtonBar|Edit"
+msgstr ""
 
-msgid "RenMov"
-msgstr "RenMov"
+msgid "ButtonBar|RenMov"
+msgstr ""
 
-msgid "Mkdir"
-msgstr "Mkdir"
+msgid "ButtonBar|Mkdir"
+msgstr ""
 
 msgid " Not implemented yet "
 msgstr ""
@@ -2894,6 +2871,12 @@ msgstr " Aukeratu sarrerako kode-orria "
 
 msgid "-  < No translation >"
 msgstr "-  < Ez dago itzulpenik >"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot save file %s:\n"
+"%s"
+msgstr " Errorea fitxategia gordetzen saiatzean. "
 
 #, c-format
 msgid ""
@@ -2996,20 +2979,20 @@ msgstr ""
 msgid "  Delete %s?  "
 msgstr "  Ezabatu %s?  "
 
-msgid "Static"
-msgstr "Estatikoa"
+msgid "ButtonBar|Static"
+msgstr ""
 
-msgid "Dynamc"
-msgstr "Dinamikoa"
+msgid "ButtonBar|Dynamc"
+msgstr ""
 
-msgid "Rescan"
-msgstr "Berreskaneatu"
+msgid "ButtonBar|Rescan"
+msgstr ""
 
-msgid "Forget"
-msgstr "Ahaztu"
+msgid "ButtonBar|Forget"
+msgstr ""
 
-msgid "Rmdir"
-msgstr "Rmdir"
+msgid "ButtonBar|Rmdir"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -3156,10 +3139,6 @@ msgstr "Txertatu zenbakizko teklatuan"
 
 msgid "Delete on keypad"
 msgstr "Ezabatu zenbakizko teklatuan"
-
-#, fuzzy
-msgid "Escape key"
-msgstr "Barra zenbakizko teklatuan"
 
 msgid "Enter on keypad"
 msgstr "Sartu zenbakizko teklatuan"
@@ -3402,12 +3381,6 @@ msgstr " Ezin da programa umea abiarazi "
 msgid "Empty output from child filter"
 msgstr ""
 
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Quit"
-msgstr ""
-
 msgid "ButtonBar|Ascii"
 msgstr ""
 
@@ -3420,15 +3393,6 @@ msgstr ""
 msgid "ButtonBar|Line"
 msgstr ""
 
-msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
 msgid "ButtonBar|UnWrap"
 msgstr ""
 
@@ -3436,9 +3400,6 @@ msgid "ButtonBar|Wrap"
 msgstr ""
 
 msgid "ButtonBar|HxSrch"
-msgstr ""
-
-msgid "ButtonBar|Search"
 msgstr ""
 
 msgid "ButtonBar|Raw"
@@ -3956,6 +3917,331 @@ msgstr "Barne-errorea:"
 msgid "Changes to file lost"
 msgstr "Fitxategiko aldaketak galdu egin dira"
 
+#~ msgid "Do backups -->"
+#~ msgstr "Egin babeskopiak -->"
+
+#~ msgid "Extension:"
+#~ msgstr "Luzapena:"
+
+#~ msgid "&New              C-n"
+#~ msgstr "&Berria           C-n"
+
+#~ msgid "&Save              F2"
+#~ msgstr "&Gorde             F2"
+
+#~ msgid "Save &as...       F12"
+#~ msgstr "Gorde &honela...      F12"
+
+#~ msgid "A&bout...            "
+#~ msgstr "&honi buruz...           "
+
+#~ msgid "&Quit             F10"
+#~ msgstr "&Irten            F10"
+
+#~ msgid "&New            C-x k"
+#~ msgstr "&Berria         C-x k"
+
+#~ msgid "Copy to &file...     "
+#~ msgstr "Kopiatu &fitxategira...    "
+
+#, fuzzy
+#~ msgid "&Toggle mark                 F3"
+#~ msgstr "&Txandakatu marka  F3"
+
+#, fuzzy
+#~ msgid "Mar&k columns              S-F3"
+#~ msgstr "&Markatu zutabeak S-F3"
+
+#, fuzzy
+#~ msgid "&Copy                        F5"
+#~ msgstr "&Kopiatu                         F5"
+
+#, fuzzy
+#~ msgid "&Move                        F6"
+#~ msgstr "&Lekuz aldatu      F6"
+
+#, fuzzy
+#~ msgid "&Delete                      F8"
+#~ msgstr "Ezabat&u                         F8"
+
+#, fuzzy
+#~ msgid "&Next bookmark              M-j"
+#~ msgstr "&Berria           C-n"
+
+#, fuzzy
+#~ msgid "&Undo                       C-u"
+#~ msgstr "De&segin          C-u"
+
+#, fuzzy
+#~ msgid "&Beginning               C-PgUp"
+#~ msgstr "&Hasiera       C-PgUp"
+
+#, fuzzy
+#~ msgid "&End                     C-PgDn"
+#~ msgstr "&Amaiera       C-PgDn"
+
+#, fuzzy
+#~ msgid "C&opy to clipfile           M-w"
+#~ msgstr "&Joan lerro honetara...           M-l"
+
+#, fuzzy
+#~ msgid "C&ut to clipfile            C-w"
+#~ msgstr "&Joan lerro honetara...           M-l"
+
+#, fuzzy
+#~ msgid "Toggle bookmar&k               "
+#~ msgstr "&Txandakatu marka  F3"
+
+#, fuzzy
+#~ msgid "&Next bookmark                 "
+#~ msgstr "&Berria           C-n"
+
+#, fuzzy
+#~ msgid "Pre&v bookmark                 "
+#~ msgstr "&Ordenatu...                M-t"
+
+#, fuzzy
+#~ msgid "&Flush bookmark                "
+#~ msgstr "&Posta...                   "
+
+#~ msgid "&Search...         F7"
+#~ msgstr "&Bilatu...        F7"
+
+#~ msgid "&Replace...        F4"
+#~ msgstr "&Ordeztu...       F4"
+
+#~ msgid "&Go to line...            M-l"
+#~ msgstr "&Joan lerro honetara...           M-l"
+
+#, fuzzy
+#~ msgid "Encod&ing...             M-e"
+#~ msgstr "&Ordenatu...                M-t"
+
+#~ msgid "Delete macr&o...            "
+#~ msgstr "ezabatu makr&Oa...           "
+
+#~ msgid "Sor&t...                 M-t"
+#~ msgstr "&Ordenatu...                M-t"
+
+#~ msgid "&Mail...                    "
+#~ msgstr "&Posta...                   "
+
+#~ msgid "&Execute macro... C-x e, KEY"
+#~ msgstr "&Exekutatu makroa...C-x e, TEKLA"
+
+#~ msgid "'ispell' s&pell check    M-$"
+#~ msgstr "'ispell' &ortografia-egiaztapena    M-$"
+
+#, fuzzy
+#~ msgid "Save setu&p"
+#~ msgstr "&Gorde konfigurazioa"
+
+#~ msgid " Edit "
+#~ msgstr "Edizioa "
+
+#~ msgid " Sear/Repl "
+#~ msgstr "Bilatu/ordeztu  "
+
+#~ msgid " Command "
+#~ msgstr "Komandoa "
+
+#~ msgid " Options "
+#~ msgstr "Aukerak "
+
+#~ msgid "Intuitive"
+#~ msgstr "Intuitiboa"
+
+#~ msgid "Emacs"
+#~ msgstr "Emacs"
+
+#, fuzzy
+#~ msgid "User-defined"
+#~ msgstr "&Erabiltzaileak hau definitu du:"
+
+#~ msgid "Key emulation"
+#~ msgstr "Gako-emulazioa"
+
+#~ msgid "Save"
+#~ msgstr "Gorde"
+
+#~ msgid "Mark"
+#~ msgstr "Markatu"
+
+#~ msgid "Replac"
+#~ msgstr "Ordeztu"
+
+#~ msgid "Move"
+#~ msgstr "Lekuz aldatu"
+
+#~ msgid "Delete"
+#~ msgstr "Ezabatu"
+
+#~ msgid "PullDn"
+#~ msgstr "GoitBeh"
+
+#~ msgid " Copy "
+#~ msgstr "Kopiatu "
+
+#~ msgid " Move "
+#~ msgstr "Lekuz aldatu "
+
+#~ msgid " Delete "
+#~ msgstr "Ezabatu "
+
+#~ msgid "1Copy"
+#~ msgstr "1Kopiatu"
+
+#~ msgid "1Move"
+#~ msgstr "1Lekuz aldatu"
+
+#~ msgid "1Delete"
+#~ msgstr "1Ezabatu"
+
+#~ msgid "Index"
+#~ msgstr "Indizea"
+
+#~ msgid "Prev"
+#~ msgstr "Aurrekoa"
+
+#~ msgid "&Quick view     C-x q"
+#~ msgstr "I&kuspegi bizkorra  C-x q"
+
+#~ msgid "&Info           C-x i"
+#~ msgstr "&Informazioa        C-x i"
+
+#~ msgid "&Rescan         C-r"
+#~ msgstr "&Berreskaneatu        C-r"
+
+#~ msgid "&View               F3"
+#~ msgstr "&Ikus                            F3"
+
+#~ msgid "Vie&w file...         "
+#~ msgstr "Ikus &fitxategia...                "
+
+#~ msgid "&Filtered view     M-!"
+#~ msgstr "Ikuspegi ira&gazia              M-!"
+
+#~ msgid "&Edit               F4"
+#~ msgstr "E&dizioa                         F4"
+
+#~ msgid "&Copy               F5"
+#~ msgstr "&Kopiatu                         F5"
+
+#~ msgid "c&Hmod           C-x c"
+#~ msgstr "a&ldatu baimenak              C-x c"
+
+#~ msgid "&Link            C-x l"
+#~ msgstr "E&steka                       C-x l"
+
+#~ msgid "&SymLink         C-x s"
+#~ msgstr "Esteka sin&bolikoa            C-x s"
+
+#~ msgid "edit s&Ymlink  C-x C-s"
+#~ msgstr "editatu esteka sinb&olikoa  C-x C-s"
+
+#~ msgid "ch&Own           C-x o"
+#~ msgstr "aldatu &jabea                 C-x o"
+
+#~ msgid "&Rename/Move        F6"
+#~ msgstr "I&zena aldatu/Lekuz aldatu       F6"
+
+#~ msgid "&Mkdir              F7"
+#~ msgstr "&Mkdir                           F7"
+
+#~ msgid "&Delete             F8"
+#~ msgstr "Ezabat&u                         F8"
+
+#~ msgid "&Quick cd          M-c"
+#~ msgstr "&cd bizkorra                    M-c"
+
+#~ msgid "select &Group      M-+"
+#~ msgstr "hautatu &taldea                 M-+"
+
+#~ msgid "u&Nselect group    M-\\"
+#~ msgstr "&desautatu taldea               M-\\"
+
+#~ msgid "e&Xit              F10"
+#~ msgstr "irte&n                          F10"
+
+#~ msgid "&User menu          F2"
+#~ msgstr "&Erabiltzaile-menua              F2"
+
+#~ msgid "&Find file            M-?"
+#~ msgstr "&Bilatu fitxategia                   M-?"
+
+#~ msgid "s&Wap panels          C-u"
+#~ msgstr "&Trukatu panelak                     C-u"
+
+#~ msgid "&Compare directories  C-x d"
+#~ msgstr "K&onparatu direktorioak            C-x d"
+
+#~ msgid "e&Xternal panelize    C-x !"
+#~ msgstr "&kanpoko panela                    C-x !"
+
+#, fuzzy
+#~ msgid "Command &history      M-h"
+#~ msgstr "Komando-historia "
+
+#~ msgid "di&Rectory hotlist    C-\\"
+#~ msgstr "&gogokoen direktorioa                C-\\"
+
+#~ msgid "&Background jobs      C-x j"
+#~ msgstr "&Atzeko planoko lanak              C-x j"
+
+#~ msgid "learn &Keys..."
+#~ msgstr "ikasteko &teklak..."
+
+#~ msgid " &File "
+#~ msgstr " &Fitxategia "
+
+#~ msgid " &Command "
+#~ msgstr " &Komandoa "
+
+#~ msgid "Menu"
+#~ msgstr "Menua"
+
+#, fuzzy
+#~ msgid "n"
+#~ msgstr "Non"
+
+#, fuzzy
+#~ msgid "Extension"
+#~ msgstr "Luzapena:"
+
+#~ msgid "Size"
+#~ msgstr "Tamaina"
+
+#~ msgid "MTime"
+#~ msgstr "MOrdua"
+
+#~ msgid "ATime"
+#~ msgstr "AOrdua"
+
+#~ msgid "CTime"
+#~ msgstr "COrdua"
+
+#~ msgid "Inode"
+#~ msgstr "Inodoa"
+
+#~ msgid "RenMov"
+#~ msgstr "RenMov"
+
+#~ msgid "Static"
+#~ msgstr "Estatikoa"
+
+#~ msgid "Dynamc"
+#~ msgstr "Dinamikoa"
+
+#~ msgid "Forget"
+#~ msgstr "Ahaztu"
+
+#~ msgid "Rmdir"
+#~ msgstr "Rmdir"
+
+#, fuzzy
+#~ msgid "Escape key"
+#~ msgstr "Barra zenbakizko teklatuan"
+
 #, fuzzy
 #~ msgid "bind: Unknown command: `%s'"
 #~ msgstr "Chown komandoa "
@@ -4051,15 +4337,8 @@ msgstr "Fitxategiko aldaketak galdu egin dira"
 #~ msgid "&Delete            F8"
 #~ msgstr "&Ezabatu           F8"
 
-#, fuzzy
-#~ msgid "Save setu&p..."
-#~ msgstr "&Gorde konfigurazioa"
-
 #~ msgid " The command history is empty "
 #~ msgstr "Komando-historia hutsik dago "
-
-#~ msgid "command &History"
-#~ msgstr "komandoen &historia"
 
 #~ msgid "Edit edi&tor menu file"
 #~ msgstr "Editatu menu &editorea"
@@ -4097,9 +4376,6 @@ msgstr "Fitxategiko aldaketak galdu egin dira"
 
 #~ msgid "&Type"
 #~ msgstr "&Mota"
-
-#~ msgid "&Links"
-#~ msgstr "&Estekak"
 
 #~ msgid "N&GID"
 #~ msgstr "N&GID"

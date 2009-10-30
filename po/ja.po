@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc CVS-20011220\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-09 09:50+0300\n"
+"POT-Creation-Date: 2009-10-30 10:39+0200\n"
 "PO-Revision-Date: 2001-12-20 18:33+0900\n"
 "Last-Translator: Akira TAGOH <tagoh@gnome.gr.jp>\n"
 "Language-Team: Japanese <debian-japanese@lists.debian.org>\n"
@@ -53,6 +53,29 @@ msgstr " 表示できません: 通常ファイルではありません "
 msgid " File %s is too large "
 msgstr "ファイルが大きすぎます: "
 
+msgid " About "
+msgstr " Cooledit について "
+
+msgid ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       A user friendly text editor written\n"
+"           for the Midnight Commander.\n"
+msgstr ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"             Midnight Commander 用の\n"
+"            ユーザに親切なエディタです\n"
+
+msgid "&OK"
+msgstr "はい(&O)"
+
 msgid "Macro recursion is too deep"
 msgstr ""
 
@@ -90,23 +113,29 @@ msgstr "書き込み用のパイプのオープンに失敗しました: "
 msgid " Cannot open file for writing: %s "
 msgstr "書き込み用のパイプのオープンに失敗しました: "
 
-msgid "Quick save "
+#, fuzzy
+msgid "&Quick save"
 msgstr "クイックセーブ "
 
-msgid "Safe save "
+#, fuzzy
+msgid "&Safe save"
 msgstr "セーフセーブ "
 
-msgid "Do backups -->"
-msgstr "バックアップする →"
+msgid "&Do backups with following extension:"
+msgstr ""
 
-msgid "&OK"
-msgstr "はい(&O)"
-
-msgid "Extension:"
-msgstr "拡張子: "
+msgid "Check &POSIX new line"
+msgstr ""
 
 msgid " Edit Save Mode "
 msgstr "保存方法を変更 "
+
+msgid "The file you are saving is not finished with a newline"
+msgstr ""
+
+#, fuzzy
+msgid "C&ontinue"
+msgstr "継続"
 
 msgid "&Do not change"
 msgstr ""
@@ -179,10 +208,6 @@ msgid ""
 msgstr ""
 "テキストに変更が加えられていますが保存されていません。\n"
 "変更を破棄して続けます。"
-
-#, fuzzy
-msgid "C&ontinue"
-msgstr "継続"
 
 #, fuzzy
 msgid "Syntax file edit"
@@ -405,238 +430,196 @@ msgstr ""
 msgid "&Ignore lock"
 msgstr ""
 
-msgid " About "
-msgstr " Cooledit について "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"             Midnight Commander 用の\n"
-"            ユーザに親切なエディタです\n"
-
 msgid "&Open file..."
 msgstr "ファイルを開く(&O)..."
 
-msgid "&New              C-n"
-msgstr "新規作成(&N)            C-n"
+#, fuzzy
+msgid "&New"
+msgstr "名前(&N)"
 
-msgid "&Save              F2"
-msgstr "保存(&S)                 F2"
+#, fuzzy
+msgid "Save &as..."
+msgstr "設定保存(&S)"
 
-msgid "Save &as...       F12"
-msgstr "別名で保存(&A)...       F12"
-
-msgid "&Insert file...   F15"
+#, fuzzy
+msgid "&Insert file..."
 msgstr "ファイル挿入(&I)...     F15"
 
-msgid "Copy to &file...  C-f"
+#, fuzzy
+msgid "Cop&y to file..."
 msgstr "ファイルへコピー(&F)... C-f"
 
-msgid "&User menu...     F11"
+#, fuzzy
+msgid "&User menu..."
 msgstr "ユーザメニュー(&U)...   F11"
 
-msgid "A&bout...            "
-msgstr "情報(&B)...                "
+#, fuzzy
+msgid "A&bout..."
+msgstr "レイアウト(&L)..."
 
-msgid "&Quit             F10"
-msgstr "終了(&Q)                F10"
-
-msgid "&New            C-x k"
-msgstr "新規(&N)              C-x k"
-
-msgid "Copy to &file...     "
-msgstr "ファイルへコピー(&F)...    "
+msgid "&Quit"
+msgstr "終了 (&Q)"
 
 #, fuzzy
-msgid "&Toggle mark                 F3"
-msgstr "マークを切替え(&T)       F3"
+msgid "&Toggle mark"
+msgstr "マークをクリア(&l)"
+
+msgid "&Mark columns"
+msgstr ""
 
 #, fuzzy
-msgid "Mar&k columns              S-F3"
-msgstr "列にマーク(&M)         S-F3"
-
-#, fuzzy
-msgid "Toggle &ins/overw           Ins"
+msgid "Toggle &ins/overw"
 msgstr "挿入・上書きを切替え(&I) Ins"
 
 #, fuzzy
-msgid "&Copy                        F5"
-msgstr "コピー(&C)                        F5"
+msgid "&Copy"
+msgstr "コピー"
+
+msgid "&Move"
+msgstr "移動(&M)"
+
+msgid "&Delete"
+msgstr "削除(&D)"
 
 #, fuzzy
-msgid "&Move                        F6"
-msgstr "移動(&M)                 F6"
-
-#, fuzzy
-msgid "&Delete                      F8"
-msgstr "削除(&D)                          F8"
-
-#, fuzzy
-msgid "C&opy to clipfile         C-Ins"
+msgid "C&opy to clipfile"
 msgstr "ファイルへコピー(&F)...    "
 
 #, fuzzy
-msgid "C&ut to clipfile          S-Del"
+msgid "C&ut to clipfile"
 msgstr "行移動(&G)...              M-l"
 
-msgid "&Paste from clipfile      S-Ins"
+msgid "&Paste from clipfile"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k            M-k"
+msgid "Toggle bookmar&k"
 msgstr "マークを切替え(&T)       F3"
 
 #, fuzzy
-msgid "&Next bookmark              M-j"
-msgstr "新規作成(&N)            C-n"
+msgid "&Next bookmark"
+msgstr "マークを設定(&e)"
 
 #, fuzzy
-msgid "Pre&v bookmark              M-i"
+msgid "Pre&v bookmark"
 msgstr "並べ替え(&T)               M-t"
 
 #, fuzzy
-msgid "&Flush bookmark             M-o"
+msgid "&Flush bookmark"
 msgstr "メイル(&M)...                 "
 
-#, fuzzy
-msgid "&Undo                       C-u"
-msgstr "やりなおし(&U)          C-u"
+msgid "&Undo"
+msgstr ""
 
-#, fuzzy
-msgid "&Beginning               C-PgUp"
-msgstr "先頭(&B)             C-PgUp"
-
-#, fuzzy
-msgid "&End                     C-PgDn"
-msgstr "末尾(&E)             C-PgDn"
-
-#, fuzzy
-msgid "C&opy to clipfile           M-w"
-msgstr "行移動(&G)...              M-l"
-
-#, fuzzy
-msgid "C&ut to clipfile            C-w"
-msgstr "行移動(&G)...              M-l"
-
-msgid "&Paste from clipfile        C-y"
+msgid "&Beginning"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k               "
-msgstr "マークを切替え(&T)       F3"
+msgid "&End"
+msgstr "Iノード(&I)"
 
 #, fuzzy
-msgid "&Next bookmark                 "
-msgstr "新規作成(&N)            C-n"
+msgid "&Search..."
+msgstr "検索"
 
 #, fuzzy
-msgid "Pre&v bookmark                 "
-msgstr "並べ替え(&T)               M-t"
-
-#, fuzzy
-msgid "&Flush bookmark                "
-msgstr "メイル(&M)...                 "
-
-msgid "&Search...         F7"
-msgstr "検索(&S)...              F7"
-
-msgid "Search &again     F17"
+msgid "Search &again"
 msgstr "再検索(&A)              F17"
 
-msgid "&Replace...        F4"
-msgstr "置換(&R)...              F4"
-
-msgid "&Go to line...            M-l"
-msgstr "行移動(&G)...              M-l"
+#, fuzzy
+msgid "&Replace..."
+msgstr "置換(&R)"
 
 #, fuzzy
-msgid "Toggle li&ne state        M-n"
+msgid "&Go to line..."
+msgstr " 指定行へ移動 "
+
+#, fuzzy
+msgid "Toggle li&ne state"
 msgstr "マークを切替え(&T)       F3"
 
-msgid "Go to matching &bracket   M-b"
+#, fuzzy
+msgid "Go to matching &bracket"
 msgstr "対の括弧へ移動             M-b"
 
-msgid "Find declaration      A-Enter"
+#, fuzzy
+msgid "Find declaration"
+msgstr "パッチを当てた後のrejectファイルを検索"
+
+msgid "Back from declaration"
 msgstr ""
 
-msgid "Back from declaration     M--"
-msgstr ""
-
-msgid "Forward to declaration    M-+"
+msgid "Forward to declaration"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             M-e"
+msgid "Encod&ing..."
 msgstr "並べ替え(&T)               M-t"
 
-msgid "Insert &literal...       C-q"
-msgstr "文字を挿入(&L)...          C-q"
-
-msgid "&Refresh screen          C-l"
+#, fuzzy
+msgid "&Refresh screen"
 msgstr "画面を再描画(&R)           C-l"
 
-msgid "&Start record macro      C-r"
+#, fuzzy
+msgid "&Start record macro"
 msgstr "マクロの記録を開始(&S)     C-r"
 
-msgid "&Finish record macro...  C-r"
+#, fuzzy
+msgid "&Finish record macro..."
 msgstr "マクロの記録を終了(&F)...  C-r"
 
-msgid "&Execute macro...   C-a, KEY"
+#, fuzzy
+msgid "&Execute macro..."
 msgstr "マクロを実行(&E)...   C-a, KEY"
 
-msgid "Delete macr&o...            "
-msgstr "マクロを削除(&O)              "
+#, fuzzy
+msgid "Delete macr&o..."
+msgstr " マクロを削除 "
 
-msgid "Insert &date/time           "
-msgstr "日付・時間を挿入(&D)          "
-
-msgid "Format p&aragraph        M-p"
-msgstr "段落を整形(&A)             M-p"
-
-msgid "'ispell' s&pell check    C-p"
+#, fuzzy
+msgid "'ispell' s&pell check"
 msgstr "'ispell'スペルチェック(&P) C-p"
 
-msgid "Sor&t...                 M-t"
-msgstr "並べ替え(&T)               M-t"
+#, fuzzy
+msgid "&Mail..."
+msgstr "フィルタ(&F)..."
 
-msgid "Paste o&utput of...      M-u"
+#, fuzzy
+msgid "Insert &literal..."
+msgstr "文字を挿入(&L)...          C-q"
+
+#, fuzzy
+msgid "Insert &date/time"
+msgstr "日付・時間を挿入(&D)          "
+
+#, fuzzy
+msgid "Format p&aragraph"
+msgstr "段落を整形(&A)             M-p"
+
+#, fuzzy
+msgid "Sor&t..."
+msgstr "整列順(&S)..."
+
+msgid "Paste o&utput of..."
 msgstr ""
 
-msgid "E&xternal Formatter      F19"
+#, fuzzy
+msgid "E&xternal formatter"
 msgstr "外部フォーマッタ(&x)       F19"
-
-msgid "&Mail...                    "
-msgstr "メイル(&M)...                 "
-
-msgid "&Execute macro... C-x e, KEY"
-msgstr "マクロを実行(&E)... C-x e, KEY"
-
-msgid "'ispell' s&pell check    M-$"
-msgstr "'ispell'スペルチェック(&P) M-$"
 
 msgid "&General...  "
 msgstr "一般(&G)...   "
 
-msgid "&Save mode..."
+#, fuzzy
+msgid "Save &mode..."
 msgstr "保存方法(&S)..."
 
 #, fuzzy
-msgid "Learn &Keys..."
+msgid "Learn &keys..."
 msgstr "キーの学習(&K)..."
 
 #, fuzzy
-msgid "Syntax &Highlighting..."
+msgid "Syntax &highlighting..."
 msgstr "文法ハイライト(&S)"
 
 #, fuzzy
@@ -647,34 +630,32 @@ msgstr "メニューファイル編集(&M)"
 msgid "&Menu file"
 msgstr "メニューファイル編集(&M)"
 
-#, fuzzy
-msgid "Save setu&p"
+msgid "&Save setup"
 msgstr "設定保存(&S)"
 
-msgid " File "
-msgstr " ファイル "
-
-msgid " Edit "
-msgstr " 編集 "
-
-msgid " Sear/Repl "
-msgstr " 検索・置換 "
-
-msgid " Command "
-msgstr " コマンド "
-
-msgid " Options "
-msgstr " オプション "
-
-msgid "Intuitive"
-msgstr "Intuitive"
-
-msgid "Emacs"
-msgstr "Emacs"
+#, fuzzy
+msgid "&File"
+msgstr "ファイル"
 
 #, fuzzy
-msgid "User-defined"
-msgstr "ユーザ定義(&U):"
+msgid "&Edit"
+msgstr "編集"
+
+#, fuzzy
+msgid "&Search"
+msgstr "検索"
+
+#, fuzzy
+msgid "&Command"
+msgstr "コマンド"
+
+#, fuzzy
+msgid "For&mat"
+msgstr "Format"
+
+#, fuzzy
+msgid "&Options"
+msgstr " オプション(&O) "
 
 msgid "None"
 msgstr "なし"
@@ -687,9 +668,6 @@ msgstr "タイプライター風折返し"
 
 msgid "Word wrap line length: "
 msgstr "折り返しする行の長さ : "
-
-msgid "Tab spacing: "
-msgstr "タブの空白数 : "
 
 msgid "Cursor beyond end of line"
 msgstr ""
@@ -714,11 +692,14 @@ msgstr " ファイル保存 "
 msgid "Confir&m before saving"
 msgstr "保存前に確認(&M)"
 
-msgid "Fill tabs with &spaces"
-msgstr "タブを空白で埋める(&S)"
-
 msgid "&Return does autoindent"
 msgstr "リターンで自動的にインデント(&R)"
+
+msgid "Tab spacing: "
+msgstr "タブの空白数 : "
+
+msgid "Fill tabs with &spaces"
+msgstr "タブを空白で埋める(&S)"
 
 msgid "&Backspace through tabs"
 msgstr "バックスペースでTABを一気に消去(&B)"
@@ -729,35 +710,38 @@ msgstr "疑似半タブ(&F)"
 msgid "Wrap mode"
 msgstr "折り返し方法"
 
-msgid "Key emulation"
-msgstr "キー・エミュレーション"
-
 msgid " Editor options "
 msgstr " エディタ・オプション "
 
-msgid "Help"
-msgstr "ヘルプ"
+msgid "ButtonBar|Help"
+msgstr ""
 
-msgid "Save"
-msgstr "保存"
+msgid "ButtonBar|Save"
+msgstr ""
 
-msgid "Mark"
-msgstr "マーク"
+msgid "ButtonBar|Mark"
+msgstr ""
 
-msgid "Replac"
-msgstr "置換"
+msgid "ButtonBar|Replac"
+msgstr ""
 
-msgid "Copy"
-msgstr "コピー"
+msgid "ButtonBar|Copy"
+msgstr ""
 
-msgid "Move"
-msgstr "移動"
+msgid "ButtonBar|Move"
+msgstr ""
 
-msgid "Delete"
-msgstr "削除"
+msgid "ButtonBar|Search"
+msgstr ""
 
-msgid "PullDn"
-msgstr "PullDn"
+msgid "ButtonBar|Delete"
+msgstr ""
+
+msgid "ButtonBar|PullDn"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
 
 msgid " Load syntax file "
 msgstr " 文法ファイルをロード "
@@ -1223,6 +1207,9 @@ msgstr "TあるいはINSでマーク"
 msgid " Permission "
 msgstr " パーミッション "
 
+msgid " File "
+msgstr " ファイル "
+
 msgid "Chmod command"
 msgstr "chmod コマンド"
 
@@ -1491,14 +1478,14 @@ msgid ""
 "it."
 msgstr ""
 
-msgid " Copy "
-msgstr " コピー "
+msgid "DialogTitle|Copy"
+msgstr ""
 
-msgid " Move "
-msgstr " 移動 "
+msgid "DialogTitle|Move"
+msgstr ""
 
-msgid " Delete "
-msgstr " 削除 "
+msgid "DialogTitle|Delete"
+msgstr ""
 
 msgid " Cannot make the hardlink "
 msgstr " ハードリンクを作成できません "
@@ -1652,9 +1639,6 @@ msgstr ""
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr "ファイルを完全に取得できませんでした。保存しますか?"
 
-msgid "&Delete"
-msgstr "削除(&D)"
-
 msgid "&Keep"
 msgstr "保存(&K)"
 
@@ -1778,14 +1762,14 @@ msgstr ""
 msgid "Directory scanning"
 msgstr "ディレクトリパス"
 
-msgid "1Copy"
-msgstr "1Copy"
+msgid "FileOperation|Copy"
+msgstr ""
 
-msgid "1Move"
-msgstr "1Move"
+msgid "FileOperation|Move"
+msgstr ""
 
-msgid "1Delete"
-msgstr "1Delete"
+msgid "FileOperation|Delete"
+msgstr ""
 
 #, no-c-format
 msgid "%o %f \"%s\"%m"
@@ -1815,6 +1799,10 @@ msgstr " with source mask:"
 
 msgid " to:"
 msgstr " to:"
+
+#, c-format
+msgid "%s?"
+msgstr ""
 
 msgid " Cannot operate on \"..\"! "
 msgstr "\"..\" に対して操作できません!"
@@ -1964,9 +1952,6 @@ msgstr "ディレクトリ移動(&C)"
 msgid "&Again"
 msgstr "もう一度(&A)"
 
-msgid "&Quit"
-msgstr "終了 (&Q)"
-
 msgid "Pane&lize"
 msgstr "パネル化(&l)"
 
@@ -2052,14 +2037,14 @@ msgstr " 内部エラー: リンクエリアを二重起動 "
 msgid " Cannot find node %s in help file "
 msgstr " ヘルプファイルでノード %s を見付けることができません "
 
-msgid "Index"
-msgstr "目次"
+msgid "Help"
+msgstr "ヘルプ"
 
-msgid "Prev"
-msgstr "前へ"
+msgid "ButtonBar|Index"
+msgstr ""
 
-msgid "&Move"
-msgstr "移動(&M)"
+msgid "ButtonBar|Prev"
+msgstr ""
 
 msgid "&Remove"
 msgstr "削除(&R)"
@@ -2368,11 +2353,13 @@ msgstr "本当にMidnight Commanderを終了させますか?"
 msgid "&Listing mode..."
 msgstr "一覧方法(&L)..."
 
-msgid "&Quick view     C-x q"
-msgstr "簡易表示(&Q)       C-x q"
+#, fuzzy
+msgid "&Quick view"
+msgstr "クイックセーブ "
 
-msgid "&Info           C-x i"
-msgstr "情報(&I)           C-x i"
+#, fuzzy
+msgid "&Info"
+msgstr "Iノード(&I)"
 
 msgid "&Sort order..."
 msgstr "整列順(&S)..."
@@ -2381,7 +2368,7 @@ msgid "&Filter..."
 msgstr "フィルタ(&F)..."
 
 #, fuzzy
-msgid "&Encoding...    M-e"
+msgid "&Encoding..."
 msgstr "並べ替え(&T)               M-t"
 
 msgid "&Network link..."
@@ -2397,102 +2384,117 @@ msgstr "SMBリンク(&B)..."
 msgid "SM&B link..."
 msgstr "SMBリンク(&B)..."
 
-msgid "&Rescan         C-r"
-msgstr "再スキャン(&R)     C-r"
+#, fuzzy
+msgid "&Rescan"
+msgstr "再走査"
 
-msgid "&View               F3"
-msgstr "表示(&V)                          F3"
+#, fuzzy
+msgid "&View"
+msgstr "表示"
 
-msgid "Vie&w file...         "
-msgstr "ファイルを表示(&W)...               "
+#, fuzzy
+msgid "Vie&w file..."
+msgstr " ファイルを見る "
 
-msgid "&Filtered view     M-!"
-msgstr "フィルタリングして表示(&F)       M-!"
+#, fuzzy
+msgid "&Filtered view"
+msgstr " フィルタされた一覧 "
 
-msgid "&Edit               F4"
-msgstr "編集(&E)                          F4"
+msgid "C&hmod"
+msgstr ""
 
-msgid "&Copy               F5"
-msgstr "コピー(&C)                        F5"
+#, fuzzy
+msgid "&Link"
+msgstr "リンク(&L)"
 
-msgid "c&Hmod           C-x c"
-msgstr "chmod(&H)                      C-x c"
+#, fuzzy
+msgid "&SymLink"
+msgstr "リンク(&L)"
 
-msgid "&Link            C-x l"
-msgstr "リンク(&L)                     C-x l"
+#, fuzzy
+msgid "Edit s&ymlink"
+msgstr " シンボリックリンクの編集 "
 
-msgid "&SymLink         C-x s"
-msgstr "シンボリックリンク(&S)         C-x s"
+msgid "Ch&own"
+msgstr ""
 
-msgid "edit s&Ymlink  C-x C-s"
-msgstr "シンボリックリンクの編集(&Y) C-x C-s"
-
-msgid "ch&Own           C-x o"
-msgstr "chown(&O)                      C-x o"
-
-msgid "&Advanced chown       "
+#, fuzzy
+msgid "&Advanced chown"
 msgstr "上級chown(&A)                       "
 
-msgid "&Rename/Move        F6"
-msgstr "名前変更・移動(&R)                F6"
+#, fuzzy
+msgid "&Rename/Move"
+msgstr "削除(&R)"
 
-msgid "&Mkdir              F7"
-msgstr "ディレクトリ作成(&M)              F7"
+#, fuzzy
+msgid "&Mkdir"
+msgstr "MkDir"
 
-msgid "&Delete             F8"
-msgstr "削除(&D)                          F8"
+#, fuzzy
+msgid "&Quick cd"
+msgstr "クイックcd"
 
-msgid "&Quick cd          M-c"
-msgstr "クイックcd(&Q)                   M-c"
+#, fuzzy
+msgid "Select &group"
+msgstr "グループを設定(&g)"
 
-msgid "select &Group      M-+"
-msgstr "グループ選択(&G)                 M-+"
+#, fuzzy
+msgid "U&nselect group"
+msgstr " 選択解除 "
 
-msgid "u&Nselect group    M-\\"
-msgstr "グループ選択解除(&N)             M-\\"
-
-msgid "reverse selec&Tion M-*"
+#, fuzzy
+msgid "Reverse selec&tion"
 msgstr "選択反転(&N)                     M-*"
 
-msgid "e&Xit              F10"
-msgstr "終了(&X)                         F10"
+#, fuzzy
+msgid "E&xit"
+msgstr "編集"
 
-msgid "&User menu          F2"
-msgstr "ユーザメニュー(&U)                F2"
+#, fuzzy
+msgid "&User menu"
+msgstr " ユーザー・メニュー "
 
 msgid "&Directory tree"
 msgstr "ディレクトリツリー(&D)"
 
-msgid "&Find file            M-?"
-msgstr "ファイル検索(&F)             M-?"
+#, fuzzy
+msgid "&Find file"
+msgstr "ファイル検索"
 
-msgid "s&Wap panels          C-u"
-msgstr "パネルを入れ換え(&W)         C-u"
+msgid "S&wap panels"
+msgstr ""
 
-msgid "switch &Panels on/off C-o"
+#, fuzzy
+msgid "Switch &panels on/off"
 msgstr "パネルのon/off切替(&P)       C-o"
 
-msgid "&Compare directories  C-x d"
-msgstr "ディレクトリ比較(&C)         C-x d"
+#, fuzzy
+msgid "&Compare directories"
+msgstr " ディレクトリを比較 "
 
-msgid "e&Xternal panelize    C-x !"
-msgstr "外部パネル(&X)               C-x !"
+#, fuzzy
+msgid "E&xternal panelize"
+msgstr "外部パネル化"
 
-msgid "show directory s&Izes"
+#, fuzzy
+msgid "Show directory s&izes"
 msgstr "ディレクトリサイズ表示(&I)"
 
 #, fuzzy
-msgid "Command &history      M-h"
-msgstr " コマンドの履歴 "
+msgid "Command &history"
+msgstr "コマンド履歴(&H)"
 
-msgid "di&Rectory hotlist    C-\\"
-msgstr "ディレクトリホットリスト(&R) C-\\"
+#, fuzzy
+msgid "Di&rectory hotlist"
+msgstr "ディレクトリホットリスト"
 
-msgid "&Active VFS list      C-x a"
+#, fuzzy
+msgid "&Active VFS list"
 msgstr "アクティブなVFS一覧(&V)      C-x a"
 
-msgid "&Background jobs      C-x j"
-msgstr "バックグラウンドジョブ(&B)   C-x j"
+#, fuzzy
+msgid "&Background jobs"
+msgstr "バックグラウンドジョブ"
 
 msgid "&Undelete files (ext2fs only)"
 msgstr "ファイルの復活(&U) (ext2fsのみ)"
@@ -2515,40 +2517,30 @@ msgstr "設定(&C)..."
 msgid "&Layout..."
 msgstr "レイアウト(&L)..."
 
-msgid "c&Onfirmation..."
+#, fuzzy
+msgid "C&onfirmation..."
 msgstr "確認(&O)..."
 
 msgid "&Display bits..."
 msgstr "表示ビット数(&D)..."
 
-msgid "learn &Keys..."
-msgstr "キーの学習(&K)..."
-
 msgid "&Virtual FS..."
 msgstr "仮想FS(&V)..."
 
-msgid "&Save setup"
-msgstr "設定保存(&S)"
-
-msgid " &Above "
+#, fuzzy
+msgid "&Above"
 msgstr "上(&A)"
 
-msgid " &Left "
+#, fuzzy
+msgid "&Left"
 msgstr "左(&L)"
 
-msgid " &File "
-msgstr " ファイル(&F) "
-
-msgid " &Command "
-msgstr " コマンド(&C) "
-
-msgid " &Options "
-msgstr " オプション(&O) "
-
-msgid " &Below "
+#, fuzzy
+msgid "&Below"
 msgstr " 下(&B) "
 
-msgid " &Right "
+#, fuzzy
+msgid "&Right"
 msgstr " 右(&R) "
 
 msgid " Information "
@@ -2565,8 +2557,8 @@ msgstr ""
 " レクトリの再読込をする必要があります。詳しくはマニュ\n"
 " アルを見てください"
 
-msgid "Menu"
-msgstr "メニュ"
+msgid "ButtonBar|Menu"
+msgstr ""
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "環境変数 TERM がセットされていません\n"
@@ -2718,41 +2710,34 @@ msgid "SUB-DIR"
 msgstr "SUB-DIR"
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
-msgid "u"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|u"
 msgstr ""
-
-#, fuzzy
-msgid "Unsorted"
-msgstr "並べ替え無し(&U)"
 
 msgid "&Unsorted"
 msgstr "並べ替え無し(&U)"
 
 #. TRANSLATORS: one single character to represent 'name' sort mode
-#, fuzzy
-msgid "n"
-msgstr "オン"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|n"
+msgstr ""
 
 msgid "&Name"
 msgstr "名前(&N)"
 
 #. TRANSLATORS: one single character to represent 'extension' sort mode
-msgid "e"
-msgstr ""
-
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 #, fuzzy
-msgid "Extension"
-msgstr "拡張子: "
+msgid "sort|e"
+msgstr "並べ替え無し(&U)"
 
 msgid "&Extension"
 msgstr "拡張子(&E)"
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
-msgid "s"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|s"
 msgstr ""
-
-msgid "Size"
-msgstr "サイズ"
 
 msgid "&Size"
 msgstr "サイズ(&S)"
@@ -2762,31 +2747,25 @@ msgid "Block Size"
 msgstr " 大きさ "
 
 #. TRANSLATORS: one single character to represent 'Modify time' sort mode
-msgid "m"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|m"
 msgstr ""
-
-msgid "MTime"
-msgstr "更新時刻"
 
 msgid "&Modify time"
 msgstr "更新時刻(&M)"
 
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
-msgid "a"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|a"
 msgstr ""
-
-msgid "ATime"
-msgstr "Acess時刻"
 
 msgid "&Access time"
 msgstr "アクセス時刻(&A)"
 
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
-msgid "h"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|h"
 msgstr ""
-
-msgid "CTime"
-msgstr "変更時刻"
 
 msgid "C&Hange time"
 msgstr "変更時刻(&C)"
@@ -2801,11 +2780,9 @@ msgid "Nl"
 msgstr "Nl"
 
 #. TRANSLATORS: one single character to represent 'inode' sort mode
-msgid "i"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|i"
 msgstr ""
-
-msgid "Inode"
-msgstr "Iノード"
 
 msgid "&Inode"
 msgstr "Iノード(&I)"
@@ -2846,17 +2823,17 @@ msgstr "ユーザの指定した形式は不正なようです. デフォルト�
 msgid " Do you really want to execute? "
 msgstr " 本当に実行しますか? "
 
-msgid "View"
-msgstr "表示"
+msgid "ButtonBar|View"
+msgstr ""
 
-msgid "Edit"
-msgstr "編集"
+msgid "ButtonBar|Edit"
+msgstr ""
 
-msgid "RenMov"
-msgstr "RenMov"
+msgid "ButtonBar|RenMov"
+msgstr ""
 
-msgid "Mkdir"
-msgstr "MkDir"
+msgid "ButtonBar|Mkdir"
+msgstr ""
 
 msgid " Not implemented yet "
 msgstr ""
@@ -2887,6 +2864,12 @@ msgstr " 入力コードページを選択 "
 
 msgid "-  < No translation >"
 msgstr "-  < 翻訳がありません >"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot save file %s:\n"
+"%s"
+msgstr "ファイルの保存時にエラーが発生しました"
 
 #, c-format
 msgid ""
@@ -2989,20 +2972,20 @@ msgstr ""
 msgid "  Delete %s?  "
 msgstr "  %s を削除しますか?  "
 
-msgid "Static"
-msgstr "静的"
+msgid "ButtonBar|Static"
+msgstr ""
 
-msgid "Dynamc"
-msgstr "動的"
+msgid "ButtonBar|Dynamc"
+msgstr ""
 
-msgid "Rescan"
-msgstr "再走査"
+msgid "ButtonBar|Rescan"
+msgstr ""
 
-msgid "Forget"
-msgstr "Forget"
+msgid "ButtonBar|Forget"
+msgstr ""
 
-msgid "Rmdir"
-msgstr "Rmdir"
+msgid "ButtonBar|Rmdir"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -3149,10 +3132,6 @@ msgstr "10キーの Insert"
 
 msgid "Delete on keypad"
 msgstr "10キーの Delete"
-
-#, fuzzy
-msgid "Escape key"
-msgstr "10キーの /"
 
 msgid "Enter on keypad"
 msgstr "10キーの Enter"
@@ -3394,12 +3373,6 @@ msgstr " 子プロセスを起動できません "
 msgid "Empty output from child filter"
 msgstr ""
 
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Quit"
-msgstr ""
-
 msgid "ButtonBar|Ascii"
 msgstr ""
 
@@ -3412,15 +3385,6 @@ msgstr ""
 msgid "ButtonBar|Line"
 msgstr ""
 
-msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
 msgid "ButtonBar|UnWrap"
 msgstr ""
 
@@ -3428,9 +3392,6 @@ msgid "ButtonBar|Wrap"
 msgstr ""
 
 msgid "ButtonBar|HxSrch"
-msgstr ""
-
-msgid "ButtonBar|Search"
 msgstr ""
 
 msgid "ButtonBar|Raw"
@@ -3941,6 +3902,331 @@ msgstr "内部エラー:"
 msgid "Changes to file lost"
 msgstr "紛失したファイルに変更します"
 
+#~ msgid "Do backups -->"
+#~ msgstr "バックアップする →"
+
+#~ msgid "Extension:"
+#~ msgstr "拡張子: "
+
+#~ msgid "&New              C-n"
+#~ msgstr "新規作成(&N)            C-n"
+
+#~ msgid "&Save              F2"
+#~ msgstr "保存(&S)                 F2"
+
+#~ msgid "Save &as...       F12"
+#~ msgstr "別名で保存(&A)...       F12"
+
+#~ msgid "A&bout...            "
+#~ msgstr "情報(&B)...                "
+
+#~ msgid "&Quit             F10"
+#~ msgstr "終了(&Q)                F10"
+
+#~ msgid "&New            C-x k"
+#~ msgstr "新規(&N)              C-x k"
+
+#~ msgid "Copy to &file...     "
+#~ msgstr "ファイルへコピー(&F)...    "
+
+#, fuzzy
+#~ msgid "&Toggle mark                 F3"
+#~ msgstr "マークを切替え(&T)       F3"
+
+#, fuzzy
+#~ msgid "Mar&k columns              S-F3"
+#~ msgstr "列にマーク(&M)         S-F3"
+
+#, fuzzy
+#~ msgid "&Copy                        F5"
+#~ msgstr "コピー(&C)                        F5"
+
+#, fuzzy
+#~ msgid "&Move                        F6"
+#~ msgstr "移動(&M)                 F6"
+
+#, fuzzy
+#~ msgid "&Delete                      F8"
+#~ msgstr "削除(&D)                          F8"
+
+#, fuzzy
+#~ msgid "&Next bookmark              M-j"
+#~ msgstr "新規作成(&N)            C-n"
+
+#, fuzzy
+#~ msgid "&Undo                       C-u"
+#~ msgstr "やりなおし(&U)          C-u"
+
+#, fuzzy
+#~ msgid "&Beginning               C-PgUp"
+#~ msgstr "先頭(&B)             C-PgUp"
+
+#, fuzzy
+#~ msgid "&End                     C-PgDn"
+#~ msgstr "末尾(&E)             C-PgDn"
+
+#, fuzzy
+#~ msgid "C&opy to clipfile           M-w"
+#~ msgstr "行移動(&G)...              M-l"
+
+#, fuzzy
+#~ msgid "C&ut to clipfile            C-w"
+#~ msgstr "行移動(&G)...              M-l"
+
+#, fuzzy
+#~ msgid "Toggle bookmar&k               "
+#~ msgstr "マークを切替え(&T)       F3"
+
+#, fuzzy
+#~ msgid "&Next bookmark                 "
+#~ msgstr "新規作成(&N)            C-n"
+
+#, fuzzy
+#~ msgid "Pre&v bookmark                 "
+#~ msgstr "並べ替え(&T)               M-t"
+
+#, fuzzy
+#~ msgid "&Flush bookmark                "
+#~ msgstr "メイル(&M)...                 "
+
+#~ msgid "&Search...         F7"
+#~ msgstr "検索(&S)...              F7"
+
+#~ msgid "&Replace...        F4"
+#~ msgstr "置換(&R)...              F4"
+
+#~ msgid "&Go to line...            M-l"
+#~ msgstr "行移動(&G)...              M-l"
+
+#, fuzzy
+#~ msgid "Encod&ing...             M-e"
+#~ msgstr "並べ替え(&T)               M-t"
+
+#~ msgid "Delete macr&o...            "
+#~ msgstr "マクロを削除(&O)              "
+
+#~ msgid "Sor&t...                 M-t"
+#~ msgstr "並べ替え(&T)               M-t"
+
+#~ msgid "&Mail...                    "
+#~ msgstr "メイル(&M)...                 "
+
+#~ msgid "&Execute macro... C-x e, KEY"
+#~ msgstr "マクロを実行(&E)... C-x e, KEY"
+
+#~ msgid "'ispell' s&pell check    M-$"
+#~ msgstr "'ispell'スペルチェック(&P) M-$"
+
+#, fuzzy
+#~ msgid "Save setu&p"
+#~ msgstr "設定保存(&S)"
+
+#~ msgid " Edit "
+#~ msgstr " 編集 "
+
+#~ msgid " Sear/Repl "
+#~ msgstr " 検索・置換 "
+
+#~ msgid " Command "
+#~ msgstr " コマンド "
+
+#~ msgid " Options "
+#~ msgstr " オプション "
+
+#~ msgid "Intuitive"
+#~ msgstr "Intuitive"
+
+#~ msgid "Emacs"
+#~ msgstr "Emacs"
+
+#, fuzzy
+#~ msgid "User-defined"
+#~ msgstr "ユーザ定義(&U):"
+
+#~ msgid "Key emulation"
+#~ msgstr "キー・エミュレーション"
+
+#~ msgid "Save"
+#~ msgstr "保存"
+
+#~ msgid "Mark"
+#~ msgstr "マーク"
+
+#~ msgid "Replac"
+#~ msgstr "置換"
+
+#~ msgid "Move"
+#~ msgstr "移動"
+
+#~ msgid "Delete"
+#~ msgstr "削除"
+
+#~ msgid "PullDn"
+#~ msgstr "PullDn"
+
+#~ msgid " Copy "
+#~ msgstr " コピー "
+
+#~ msgid " Move "
+#~ msgstr " 移動 "
+
+#~ msgid " Delete "
+#~ msgstr " 削除 "
+
+#~ msgid "1Copy"
+#~ msgstr "1Copy"
+
+#~ msgid "1Move"
+#~ msgstr "1Move"
+
+#~ msgid "1Delete"
+#~ msgstr "1Delete"
+
+#~ msgid "Index"
+#~ msgstr "目次"
+
+#~ msgid "Prev"
+#~ msgstr "前へ"
+
+#~ msgid "&Quick view     C-x q"
+#~ msgstr "簡易表示(&Q)       C-x q"
+
+#~ msgid "&Info           C-x i"
+#~ msgstr "情報(&I)           C-x i"
+
+#~ msgid "&Rescan         C-r"
+#~ msgstr "再スキャン(&R)     C-r"
+
+#~ msgid "&View               F3"
+#~ msgstr "表示(&V)                          F3"
+
+#~ msgid "Vie&w file...         "
+#~ msgstr "ファイルを表示(&W)...               "
+
+#~ msgid "&Filtered view     M-!"
+#~ msgstr "フィルタリングして表示(&F)       M-!"
+
+#~ msgid "&Edit               F4"
+#~ msgstr "編集(&E)                          F4"
+
+#~ msgid "&Copy               F5"
+#~ msgstr "コピー(&C)                        F5"
+
+#~ msgid "c&Hmod           C-x c"
+#~ msgstr "chmod(&H)                      C-x c"
+
+#~ msgid "&Link            C-x l"
+#~ msgstr "リンク(&L)                     C-x l"
+
+#~ msgid "&SymLink         C-x s"
+#~ msgstr "シンボリックリンク(&S)         C-x s"
+
+#~ msgid "edit s&Ymlink  C-x C-s"
+#~ msgstr "シンボリックリンクの編集(&Y) C-x C-s"
+
+#~ msgid "ch&Own           C-x o"
+#~ msgstr "chown(&O)                      C-x o"
+
+#~ msgid "&Rename/Move        F6"
+#~ msgstr "名前変更・移動(&R)                F6"
+
+#~ msgid "&Mkdir              F7"
+#~ msgstr "ディレクトリ作成(&M)              F7"
+
+#~ msgid "&Delete             F8"
+#~ msgstr "削除(&D)                          F8"
+
+#~ msgid "&Quick cd          M-c"
+#~ msgstr "クイックcd(&Q)                   M-c"
+
+#~ msgid "select &Group      M-+"
+#~ msgstr "グループ選択(&G)                 M-+"
+
+#~ msgid "u&Nselect group    M-\\"
+#~ msgstr "グループ選択解除(&N)             M-\\"
+
+#~ msgid "e&Xit              F10"
+#~ msgstr "終了(&X)                         F10"
+
+#~ msgid "&User menu          F2"
+#~ msgstr "ユーザメニュー(&U)                F2"
+
+#~ msgid "&Find file            M-?"
+#~ msgstr "ファイル検索(&F)             M-?"
+
+#~ msgid "s&Wap panels          C-u"
+#~ msgstr "パネルを入れ換え(&W)         C-u"
+
+#~ msgid "&Compare directories  C-x d"
+#~ msgstr "ディレクトリ比較(&C)         C-x d"
+
+#~ msgid "e&Xternal panelize    C-x !"
+#~ msgstr "外部パネル(&X)               C-x !"
+
+#, fuzzy
+#~ msgid "Command &history      M-h"
+#~ msgstr " コマンドの履歴 "
+
+#~ msgid "di&Rectory hotlist    C-\\"
+#~ msgstr "ディレクトリホットリスト(&R) C-\\"
+
+#~ msgid "&Background jobs      C-x j"
+#~ msgstr "バックグラウンドジョブ(&B)   C-x j"
+
+#~ msgid "learn &Keys..."
+#~ msgstr "キーの学習(&K)..."
+
+#~ msgid " &File "
+#~ msgstr " ファイル(&F) "
+
+#~ msgid " &Command "
+#~ msgstr " コマンド(&C) "
+
+#~ msgid "Menu"
+#~ msgstr "メニュ"
+
+#, fuzzy
+#~ msgid "n"
+#~ msgstr "オン"
+
+#, fuzzy
+#~ msgid "Extension"
+#~ msgstr "拡張子: "
+
+#~ msgid "Size"
+#~ msgstr "サイズ"
+
+#~ msgid "MTime"
+#~ msgstr "更新時刻"
+
+#~ msgid "ATime"
+#~ msgstr "Acess時刻"
+
+#~ msgid "CTime"
+#~ msgstr "変更時刻"
+
+#~ msgid "Inode"
+#~ msgstr "Iノード"
+
+#~ msgid "RenMov"
+#~ msgstr "RenMov"
+
+#~ msgid "Static"
+#~ msgstr "静的"
+
+#~ msgid "Dynamc"
+#~ msgstr "動的"
+
+#~ msgid "Forget"
+#~ msgstr "Forget"
+
+#~ msgid "Rmdir"
+#~ msgstr "Rmdir"
+
+#, fuzzy
+#~ msgid "Escape key"
+#~ msgstr "10キーの /"
+
 #, fuzzy
 #~ msgid "bind: Unknown command: `%s'"
 #~ msgstr " chown コマンド "
@@ -4033,15 +4319,8 @@ msgstr "紛失したファイルに変更します"
 #~ msgid "&Delete            F8"
 #~ msgstr "削除(&D)                 F8"
 
-#, fuzzy
-#~ msgid "Save setu&p..."
-#~ msgstr "設定保存(&S)"
-
 #~ msgid " The command history is empty "
 #~ msgstr " コマンドの履歴は空です "
-
-#~ msgid "command &History"
-#~ msgstr "コマンド履歴(&H)"
 
 #~ msgid "Edit edi&tor menu file"
 #~ msgstr "メニューエディタで編集(&T)"
@@ -4079,9 +4358,6 @@ msgstr "紛失したファイルに変更します"
 
 #~ msgid "&Type"
 #~ msgstr "形式(&T)"
-
-#~ msgid "&Links"
-#~ msgstr "リンク(&L)"
 
 #~ msgid "N&GID"
 #~ msgstr "N&GID"

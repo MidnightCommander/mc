@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: uk\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-09 09:50+0300\n"
+"POT-Creation-Date: 2009-10-30 10:39+0200\n"
 "PO-Revision-Date: 2009-08-25 16:27+0300\n"
 "Last-Translator: Oleksandr Natalenko <pfactum@gmail.com>\n"
 "Language-Team: Ukrainian <kde-i18n-doc@kde.org>\n"
@@ -54,6 +54,29 @@ msgstr " %s не э звичайний файл"
 msgid " File %s is too large "
 msgstr "файл %s надто великий"
 
+msgid " About "
+msgstr " Про програму "
+
+msgid ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       A user friendly text editor written\n"
+"           for the Midnight Commander.\n"
+msgstr ""
+"\n"
+"                     Cooledit  v3.11.5\n"
+"\n"
+"       Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+" Текстовий редактор з дружнім інтерфейсом користувача.\n"
+"               Створено для Midnight Commander.\n"
+
+msgid "&OK"
+msgstr "Г&aразд"
+
 msgid "Macro recursion is too deep"
 msgstr "Занадто глибока рекурсія макросів"
 
@@ -91,23 +114,28 @@ msgstr " Збій при спробі відкрити канал для зап�
 msgid " Cannot open file for writing: %s "
 msgstr " Збій при спробі відкрити канал для запису: "
 
-msgid "Quick save "
+#, fuzzy
+msgid "&Quick save"
 msgstr "Швидке "
 
-msgid "Safe save "
+#, fuzzy
+msgid "&Safe save"
 msgstr "Безпечне "
 
-msgid "Do backups -->"
-msgstr "Резервні копії -->"
+msgid "&Do backups with following extension:"
+msgstr ""
 
-msgid "&OK"
-msgstr "Г&aразд"
-
-msgid "Extension:"
-msgstr "Розширення:"
+msgid "Check &POSIX new line"
+msgstr ""
 
 msgid " Edit Save Mode "
 msgstr " Режим збереження "
+
+msgid "The file you are saving is not finished with a newline"
+msgstr ""
+
+msgid "C&ontinue"
+msgstr "Пр&одовжити"
 
 msgid "&Do not change"
 msgstr ""
@@ -178,9 +206,6 @@ msgid ""
 msgstr ""
 " Поточний текст було змінено і не збережено. \n"
 " Продовження операції приведе до втрати змін. "
-
-msgid "C&ontinue"
-msgstr "Пр&одовжити"
 
 msgid "Syntax file edit"
 msgstr "Редагувати файл синтаксису"
@@ -397,218 +422,200 @@ msgstr "Захватити замок"
 msgid "&Ignore lock"
 msgstr "Ігнорувати замок"
 
-msgid " About "
-msgstr " Про програму "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                     Cooledit  v3.11.5\n"
-"\n"
-"       Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-" Текстовий редактор з дружнім інтерфейсом користувача.\n"
-"               Створено для Midnight Commander.\n"
-
 msgid "&Open file..."
 msgstr "&Відкрити файл..."
 
-msgid "&New              C-n"
-msgstr "&Новий файл           C-n"
+#, fuzzy
+msgid "&New"
+msgstr "За &назвою"
 
-msgid "&Save              F2"
-msgstr "&Зберегти              F2"
+#, fuzzy
+msgid "Save &as..."
+msgstr "&Зберегти налаштування"
 
-msgid "Save &as...       F12"
-msgstr "Зберегти &як...       F12"
-
-msgid "&Insert file...   F15"
+#, fuzzy
+msgid "&Insert file..."
 msgstr "&Вставити файл...     F15"
 
-msgid "Copy to &file...  C-f"
+#, fuzzy
+msgid "Cop&y to file..."
 msgstr "&Копіювати у файл...  C-f"
 
-msgid "&User menu...     F11"
+#, fuzzy
+msgid "&User menu..."
 msgstr "&Меню користувача...  F11"
 
-msgid "A&bout...            "
-msgstr "&Про програму..."
+#, fuzzy
+msgid "A&bout..."
+msgstr "&Макет..."
 
-msgid "&Quit             F10"
-msgstr "&Вийти                F10"
+msgid "&Quit"
+msgstr "&Вийти"
 
-msgid "&New            C-x k"
-msgstr "&Новий файл         C-x k"
+#, fuzzy
+msgid "&Toggle mark"
+msgstr "&Вим. поміч."
 
-msgid "Copy to &file...     "
-msgstr "&Копіювати у файл..."
+msgid "&Mark columns"
+msgstr ""
 
-msgid "&Toggle mark                 F3"
-msgstr "Перемкнути відмітку   F3"
-
-msgid "Mar&k columns              S-F3"
-msgstr "Відмітити &стовпці    S-F3"
-
-msgid "Toggle &ins/overw           Ins"
+#, fuzzy
+msgid "Toggle &ins/overw"
 msgstr "&Режим вставки/заміни  Ins"
 
-msgid "&Copy                        F5"
-msgstr "&Скопіювати                F5"
+#, fuzzy
+msgid "&Copy"
+msgstr "Копіювати"
 
-msgid "&Move                        F6"
-msgstr "&Перенести         F6"
+msgid "&Move"
+msgstr "Пере&нести"
 
-msgid "&Delete                      F8"
-msgstr "&Видалити                  F8"
+msgid "&Delete"
+msgstr "&Видалити"
 
-msgid "C&opy to clipfile         C-Ins"
+#, fuzzy
+msgid "C&opy to clipfile"
 msgstr "Копіювати у файл         C-Ins"
 
-msgid "C&ut to clipfile          S-Del"
+#, fuzzy
+msgid "C&ut to clipfile"
 msgstr "Вирізати до файлу          S-Del"
 
-msgid "&Paste from clipfile      S-Ins"
+#, fuzzy
+msgid "&Paste from clipfile"
 msgstr "Вставити із файлу      S-Ins"
 
 #, fuzzy
-msgid "Toggle bookmar&k            M-k"
+msgid "Toggle bookmar&k"
 msgstr "Перемкнути закладку               "
 
 #, fuzzy
-msgid "&Next bookmark              M-j"
-msgstr "Наступна закладка                 "
+msgid "&Next bookmark"
+msgstr "Увім. п&oміч."
 
 #, fuzzy
-msgid "Pre&v bookmark              M-i"
+msgid "Pre&v bookmark"
 msgstr "Попередня закладка                 "
 
 #, fuzzy
-msgid "&Flush bookmark             M-o"
+msgid "&Flush bookmark"
 msgstr "Скинути закладки                "
 
-msgid "&Undo                       C-u"
-msgstr "В&ідкат операції       C-u"
+msgid "&Undo"
+msgstr ""
 
-msgid "&Beginning               C-PgUp"
-msgstr "На &початок   C-PgUp"
+msgid "&Beginning"
+msgstr ""
 
-msgid "&End                     C-PgDn"
-msgstr "На кінець    C-PgDn"
+#, fuzzy
+msgid "&End"
+msgstr "За &i-вузлами"
 
-msgid "C&opy to clipfile           M-w"
-msgstr "Копіювати до файлу           M-w"
+#, fuzzy
+msgid "&Search..."
+msgstr "Пошук"
 
-msgid "C&ut to clipfile            C-w"
-msgstr "Вирізати до файлу            C-w"
-
-msgid "&Paste from clipfile        C-y"
-msgstr "Вставити з файлу        C-y"
-
-msgid "Toggle bookmar&k               "
-msgstr "Перемкнути закладку               "
-
-msgid "&Next bookmark                 "
-msgstr "Наступна закладка                 "
-
-msgid "Pre&v bookmark                 "
-msgstr "Попередня закладка                 "
-
-msgid "&Flush bookmark                "
-msgstr "Скинути закладки                "
-
-msgid "&Search...         F7"
-msgstr "&Шукати...          F7"
-
-msgid "Search &again     F17"
+#, fuzzy
+msgid "Search &again"
 msgstr "Шукати &знову      F17"
 
-msgid "&Replace...        F4"
-msgstr "&Замінити...        F4"
+#, fuzzy
+msgid "&Replace..."
+msgstr "&Замінити"
 
-msgid "&Go to line...            M-l"
-msgstr "&Перейти на рядок                M-l"
+#, fuzzy
+msgid "&Go to line..."
+msgstr " Перейти на рядок "
 
-msgid "Toggle li&ne state        M-n"
+#, fuzzy
+msgid "Toggle li&ne state"
 msgstr "Перемкнути стан рядка        M-n"
 
-msgid "Go to matching &bracket   M-b"
+#, fuzzy
+msgid "Go to matching &bracket"
 msgstr "Перейти до парної &дужки         M-b"
 
-msgid "Find declaration      A-Enter"
+#, fuzzy
+msgid "Find declaration"
 msgstr "Знайти об’явлення      A-Enter"
 
-msgid "Back from declaration     M--"
+#, fuzzy
+msgid "Back from declaration"
 msgstr "Повернутися з об’явлення     M--"
 
-msgid "Forward to declaration    M-+"
+#, fuzzy
+msgid "Forward to declaration"
 msgstr "Перейти до об’явлення    M-+"
 
 #, fuzzy
-msgid "Encod&ing...             M-e"
-msgstr "Кодування...             C-t"
+msgid "Encod&ing..."
+msgstr "Кодування...    C-t"
 
-msgid "Insert &literal...       C-q"
-msgstr "Вставити &літерал...             C-q"
-
-msgid "&Refresh screen          C-l"
+#, fuzzy
+msgid "&Refresh screen"
 msgstr "Пере&малювати екран              C-l"
 
-msgid "&Start record macro      C-r"
+#, fuzzy
+msgid "&Start record macro"
 msgstr "&Розпочати запис макросу         C-r"
 
-msgid "&Finish record macro...  C-r"
+#, fuzzy
+msgid "&Finish record macro..."
 msgstr "&Завершити запис макросу...      C-r"
 
-msgid "&Execute macro...   C-a, KEY"
+#, fuzzy
+msgid "&Execute macro..."
 msgstr "&Виконати макрос...         C-a, KEY"
 
-msgid "Delete macr&o...            "
-msgstr "&Видалити макрос"
+#, fuzzy
+msgid "Delete macr&o..."
+msgstr " Видалити макрос "
 
-msgid "Insert &date/time           "
-msgstr "Вставити &дату/час"
-
-msgid "Format p&aragraph        M-p"
-msgstr "Форматувати &абзац               M-p"
-
-msgid "'ispell' s&pell check    C-p"
+#, fuzzy
+msgid "'ispell' s&pell check"
 msgstr "&Перевірка орфографії            C-p"
 
-msgid "Sor&t...                 M-t"
-msgstr "&Сортувати                       M-t"
+#, fuzzy
+msgid "&Mail..."
+msgstr "&Фільтр..."
 
-msgid "Paste o&utput of...      M-u"
+#, fuzzy
+msgid "Insert &literal..."
+msgstr "Вставити &літерал...             C-q"
+
+#, fuzzy
+msgid "Insert &date/time"
+msgstr "Вставити &дату/час"
+
+#, fuzzy
+msgid "Format p&aragraph"
+msgstr "Форматувати &абзац               M-p"
+
+#, fuzzy
+msgid "Sor&t..."
+msgstr "Порядок &сортування"
+
+#, fuzzy
+msgid "Paste o&utput of..."
 msgstr "Вставити вивід &команди...       M-u"
 
-msgid "E&xternal Formatter      F19"
+#, fuzzy
+msgid "E&xternal formatter"
 msgstr "З&овнішня програма форматування  F19"
-
-msgid "&Mail...                    "
-msgstr "&Відіслати поштою..."
-
-msgid "&Execute macro... C-x e, KEY"
-msgstr "&Виконати макрос... C-x e, KEY"
-
-msgid "'ispell' s&pell check    M-$"
-msgstr "&Перевірка орфографії        M-$"
 
 msgid "&General...  "
 msgstr "&Загальні...  "
 
-msgid "&Save mode..."
+#, fuzzy
+msgid "Save &mode..."
 msgstr "Режим &збереження..."
 
-msgid "Learn &Keys..."
+#, fuzzy
+msgid "Learn &keys..."
 msgstr "Вивчення к&лавіш..."
 
-msgid "Syntax &Highlighting..."
+#, fuzzy
+msgid "Syntax &highlighting..."
 msgstr "&Підсвітка синтаксису"
 
 msgid "S&yntax file"
@@ -617,32 +624,32 @@ msgstr "Файл синтаксису"
 msgid "&Menu file"
 msgstr "Файл меню"
 
-msgid "Save setu&p"
-msgstr "&Зберегти налаштування"
+msgid "&Save setup"
+msgstr "&Зберегти установки"
 
-msgid " File "
-msgstr " Файл "
+#, fuzzy
+msgid "&File"
+msgstr "Файл"
 
-msgid " Edit "
-msgstr " Редагування "
+#, fuzzy
+msgid "&Edit"
+msgstr "Редагувати"
 
-msgid " Sear/Repl "
-msgstr " Пошук/Заміна "
+#, fuzzy
+msgid "&Search"
+msgstr "Пошук"
 
-msgid " Command "
-msgstr " Команда "
+#, fuzzy
+msgid "&Command"
+msgstr "Команда"
 
-msgid " Options "
-msgstr " Параметри "
+#, fuzzy
+msgid "For&mat"
+msgstr "Нормальний"
 
-msgid "Intuitive"
-msgstr "Інтуїтивна"
-
-msgid "Emacs"
-msgstr "Emacs"
-
-msgid "User-defined"
-msgstr "&Визначений користувачем:"
+#, fuzzy
+msgid "&Options"
+msgstr " &Параметри "
 
 msgid "None"
 msgstr "Немає"
@@ -655,9 +662,6 @@ msgstr "Переносити при наборі"
 
 msgid "Word wrap line length: "
 msgstr "Переносити при довжині: "
-
-msgid "Tab spacing: "
-msgstr "Крок табуляції : "
 
 msgid "Cursor beyond end of line"
 msgstr ""
@@ -680,11 +684,14 @@ msgstr "Зберегти позицію в файлі"
 msgid "Confir&m before saving"
 msgstr "Пит&атися перед записуванням"
 
-msgid "Fill tabs with &spaces"
-msgstr "Заміняти &табуляцію пробілами"
-
 msgid "&Return does autoindent"
 msgstr "Автові&дтсуп"
+
+msgid "Tab spacing: "
+msgstr "Крок табуляції : "
+
+msgid "Fill tabs with &spaces"
+msgstr "Заміняти &табуляцію пробілами"
 
 msgid "&Backspace through tabs"
 msgstr "&Забій в обхід табуляції"
@@ -695,35 +702,44 @@ msgstr "&Симуляція півтабуляції"
 msgid "Wrap mode"
 msgstr "Режим переносу"
 
-msgid "Key emulation"
-msgstr "Розкладка клавіатури"
-
 msgid " Editor options "
 msgstr " Параметри редактора "
 
-msgid "Help"
-msgstr "Довідка"
+msgid "ButtonBar|Help"
+msgstr "Нижня панель|Допомога"
 
-msgid "Save"
-msgstr "Запис"
+msgid "ButtonBar|Save"
+msgstr "Нижня панель|Зберегти"
 
-msgid "Mark"
-msgstr "Блок"
+#, fuzzy
+msgid "ButtonBar|Mark"
+msgstr "Нижня панель|Фільтр"
 
-msgid "Replac"
-msgstr "Замінити"
+#, fuzzy
+msgid "ButtonBar|Replac"
+msgstr "Нижня панель|Як є"
 
-msgid "Copy"
-msgstr "Копіювати"
+#, fuzzy
+msgid "ButtonBar|Copy"
+msgstr "Нижня панель|Допомога"
 
-msgid "Move"
-msgstr "Перенести"
+#, fuzzy
+msgid "ButtonBar|Move"
+msgstr "Нижня панель|Зберегти"
 
-msgid "Delete"
-msgstr "Видалити"
+msgid "ButtonBar|Search"
+msgstr "Нижня панель|Пошук"
 
-msgid "PullDn"
-msgstr "МенюMC"
+#, fuzzy
+msgid "ButtonBar|Delete"
+msgstr "Нижня панель|Допомога"
+
+#, fuzzy
+msgid "ButtonBar|PullDn"
+msgstr "Нижня панель|Допомога"
+
+msgid "ButtonBar|Quit"
+msgstr "Нижня панель|Вихід"
 
 msgid " Load syntax file "
 msgstr " Завантажити синтаксичний файл "
@@ -1189,6 +1205,9 @@ msgstr "і T або INS для помітки"
 msgid " Permission "
 msgstr " Права "
 
+msgid " File "
+msgstr " Файл "
+
 msgid "Chmod command"
 msgstr "Команда chmod"
 
@@ -1453,14 +1472,14 @@ msgstr ""
 "Формат файлу %smc.ext було змінено у версіі 3.0. Ви можете зкопіювати його з "
 "%smc.ext чи зкористуватися ним як зразком та написати свій."
 
-msgid " Copy "
-msgstr " Скопіювати "
+msgid "DialogTitle|Copy"
+msgstr ""
 
-msgid " Move "
-msgstr " Перенести "
+msgid "DialogTitle|Move"
+msgstr ""
 
-msgid " Delete "
-msgstr " Видалення "
+msgid "DialogTitle|Delete"
+msgstr ""
 
 msgid " Cannot make the hardlink "
 msgstr " Не вдалося створити жорстке посилання "
@@ -1620,9 +1639,6 @@ msgstr ""
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr "Отримано неповний файл. Залишити його?"
 
-msgid "&Delete"
-msgstr "&Видалити"
-
 msgid "&Keep"
 msgstr "&Лишити"
 
@@ -1750,14 +1766,14 @@ msgstr ""
 msgid "Directory scanning"
 msgstr "Сканування каталога"
 
-msgid "1Copy"
-msgstr "1Cкопіювати"
+msgid "FileOperation|Copy"
+msgstr ""
 
-msgid "1Move"
-msgstr "1Перенести"
+msgid "FileOperation|Move"
+msgstr ""
 
-msgid "1Delete"
-msgstr "1Видалити"
+msgid "FileOperation|Delete"
+msgstr ""
 
 #, no-c-format
 msgid "%o %f \"%s\"%m"
@@ -1787,6 +1803,10 @@ msgstr " з шаблоном джерела:"
 
 msgid " to:"
 msgstr " у:"
+
+#, c-format
+msgid "%s?"
+msgstr ""
 
 msgid " Cannot operate on \"..\"! "
 msgstr " Не можу виконувати операції над \"..\"! "
@@ -1935,9 +1955,6 @@ msgstr "Пере&хід"
 msgid "&Again"
 msgstr "&Знову"
 
-msgid "&Quit"
-msgstr "&Вийти"
-
 msgid "Pane&lize"
 msgstr "Па&нелізувати"
 
@@ -2017,14 +2034,16 @@ msgstr " Внутрішня помилка: Подвійний початок о
 msgid " Cannot find node %s in help file "
 msgstr " Не вдається знайти вузол %s у файлі довідки "
 
-msgid "Index"
-msgstr "Вміст"
+msgid "Help"
+msgstr "Довідка"
 
-msgid "Prev"
-msgstr "Назад"
+#, fuzzy
+msgid "ButtonBar|Index"
+msgstr "Нижня панель|Hex"
 
-msgid "&Move"
-msgstr "Пере&нести"
+#, fuzzy
+msgid "ButtonBar|Prev"
+msgstr "Нижня панель|Фільтр"
 
 msgid "&Remove"
 msgstr "Ви&далити"
@@ -2335,11 +2354,13 @@ msgstr " Ви дійсно хочете вийти з Midnight Commander? "
 msgid "&Listing mode..."
 msgstr "Фор&мат списку..."
 
-msgid "&Quick view     C-x q"
-msgstr "&Швидкий перегляд   C-x q"
+#, fuzzy
+msgid "&Quick view"
+msgstr "Швидке "
 
-msgid "&Info           C-x i"
-msgstr "&Інформація         C-x i"
+#, fuzzy
+msgid "&Info"
+msgstr "За &i-вузлами"
 
 msgid "&Sort order..."
 msgstr "Порядок &сортування"
@@ -2348,7 +2369,7 @@ msgid "&Filter..."
 msgstr "&Фільтр..."
 
 #, fuzzy
-msgid "&Encoding...    M-e"
+msgid "&Encoding..."
 msgstr "Кодування...    C-t"
 
 msgid "&Network link..."
@@ -2363,101 +2384,117 @@ msgstr "Зв'язок через &shell..."
 msgid "SM&B link..."
 msgstr "Зв'язок через &SMB..."
 
-msgid "&Rescan         C-r"
-msgstr "&Пересканувати       C-r"
+#, fuzzy
+msgid "&Rescan"
+msgstr "Пересканувати"
 
-msgid "&View               F3"
-msgstr "Переглянути &файл          F3"
+#, fuzzy
+msgid "&View"
+msgstr "Переглянути"
 
-msgid "Vie&w file...         "
-msgstr "&Переглянути файл..."
+#, fuzzy
+msgid "Vie&w file..."
+msgstr " Перегляд файлу "
 
-msgid "&Filtered view     M-!"
-msgstr "&Перегляд виводу команди  M-!"
+#, fuzzy
+msgid "&Filtered view"
+msgstr " Перегляд виводу команди "
 
-msgid "&Edit               F4"
-msgstr "&Редагувати                F4"
+msgid "C&hmod"
+msgstr ""
 
-msgid "&Copy               F5"
-msgstr "&Скопіювати                F5"
+#, fuzzy
+msgid "&Link"
+msgstr "&Посилання"
 
-msgid "c&Hmod           C-x c"
-msgstr "Права &доступу          C-x c"
+#, fuzzy
+msgid "&SymLink"
+msgstr "&Посилання"
 
-msgid "&Link            C-x l"
-msgstr "&Жорстке посилання      C-x l"
+#, fuzzy
+msgid "Edit s&ymlink"
+msgstr " Виправити символьне посилання "
 
-msgid "&SymLink         C-x s"
-msgstr "&Символьне посилання    C-x s"
+msgid "Ch&own"
+msgstr ""
 
-msgid "edit s&Ymlink  C-x C-s"
-msgstr "Виправити поси&лання  C-x C-s"
-
-msgid "ch&Own           C-x o"
-msgstr "&Власник/група          C-x o"
-
-msgid "&Advanced chown       "
+#, fuzzy
+msgid "&Advanced chown"
 msgstr "Пр&ава (розширені)    "
 
-msgid "&Rename/Move        F6"
-msgstr "Пере&йменувати             F6"
+#, fuzzy
+msgid "&Rename/Move"
+msgstr "Ви&далити"
 
-msgid "&Mkdir              F7"
-msgstr "Ст&ворити каталог          F7"
+#, fuzzy
+msgid "&Mkdir"
+msgstr "СтвКат"
 
-msgid "&Delete             F8"
-msgstr "&Видалити                  F8"
+#, fuzzy
+msgid "&Quick cd"
+msgstr "Швидка зміна каталогу"
 
-msgid "&Quick cd          M-c"
-msgstr "&Швидка зміна каталогу    M-c"
+#, fuzzy
+msgid "Select &group"
+msgstr "Вст. гр&yпу"
 
-msgid "select &Group      M-+"
-msgstr "Відмітити &групу          M-+"
+#, fuzzy
+msgid "U&nselect group"
+msgstr " Зняти відмітку "
 
-msgid "u&Nselect group    M-\\"
-msgstr "Зняти &відмітку з групи   M-\\"
-
-msgid "reverse selec&Tion M-*"
+#, fuzzy
+msgid "Reverse selec&tion"
 msgstr "Інвер&тувати відмітку     M-*"
 
-msgid "e&Xit              F10"
-msgstr "Ви&хід                    F10"
+#, fuzzy
+msgid "E&xit"
+msgstr "Виправити"
 
-msgid "&User menu          F2"
-msgstr "&Меню користувача          F2"
+#, fuzzy
+msgid "&User menu"
+msgstr " Меню користувача "
 
 msgid "&Directory tree"
 msgstr "&Дерево каталогів"
 
-msgid "&Find file            M-?"
-msgstr "&Знайти файл                  M-?"
+#, fuzzy
+msgid "&Find file"
+msgstr "Знайти файл"
 
-msgid "s&Wap panels          C-u"
-msgstr "&Переставити панелі           C-u"
+msgid "S&wap panels"
+msgstr ""
 
-msgid "switch &Panels on/off C-o"
+#, fuzzy
+msgid "Switch &panels on/off"
 msgstr "&Сховати панелі               C-o"
 
-msgid "&Compare directories  C-x d"
-msgstr "&Порівняти каталоги         C-x d"
+#, fuzzy
+msgid "&Compare directories"
+msgstr " Порівняти каталоги "
 
-msgid "e&Xternal panelize    C-x !"
-msgstr "&Вивід команди на панель    C-x !"
+#, fuzzy
+msgid "E&xternal panelize"
+msgstr "Вивід файлів з команди на панель"
 
-msgid "show directory s&Izes"
+#, fuzzy
+msgid "Show directory s&izes"
 msgstr "Показати &розміри каталогів"
 
-msgid "Command &history      M-h"
-msgstr "Історія команд       M-h"
+#, fuzzy
+msgid "Command &history"
+msgstr "&Історія команд"
 
-msgid "di&Rectory hotlist    C-\\"
-msgstr "Список ката&логів           C-\\"
+#, fuzzy
+msgid "Di&rectory hotlist"
+msgstr "Список каталогів"
 
-msgid "&Active VFS list      C-x a"
+#, fuzzy
+msgid "&Active VFS list"
 msgstr "Список &активних ВФС        C-x a"
 
-msgid "&Background jobs      C-x j"
-msgstr "Завдання на &тлі            C-x j"
+#, fuzzy
+msgid "&Background jobs"
+msgstr "Фонові завдання"
 
 msgid "&Undelete files (ext2fs only)"
 msgstr "&Відновлення файлів (лише ext2fs)"
@@ -2480,40 +2517,30 @@ msgstr "&Конфігурація..."
 msgid "&Layout..."
 msgstr "&Макет..."
 
-msgid "c&Onfirmation..."
+#, fuzzy
+msgid "C&onfirmation..."
 msgstr "&Підтвердження..."
 
 msgid "&Display bits..."
 msgstr "&Відображення символів..."
 
-msgid "learn &Keys..."
-msgstr "Вивчення к&лавіш..."
-
 msgid "&Virtual FS..."
 msgstr "Віртуальні &ФС..."
 
-msgid "&Save setup"
-msgstr "&Зберегти установки"
-
-msgid " &Above "
+#, fuzzy
+msgid "&Above"
 msgstr " &Верхня "
 
-msgid " &Left "
+#, fuzzy
+msgid "&Left"
 msgstr " &Ліва панель "
 
-msgid " &File "
-msgstr " &Файл "
-
-msgid " &Command "
-msgstr " &Команда "
-
-msgid " &Options "
-msgstr " &Параметри "
-
-msgid " &Below "
+#, fuzzy
+msgid "&Below"
 msgstr " &Нижня "
 
-msgid " &Right "
+#, fuzzy
+msgid "&Right"
 msgstr " &Права панель "
 
 msgid " Information "
@@ -2530,8 +2557,9 @@ msgstr ""
 " перезавантажити каталог. Для додаткової інформації подивіться     \n"
 " керівництво (man mc).                                             "
 
-msgid "Menu"
-msgstr "Меню"
+#, fuzzy
+msgid "ButtonBar|Menu"
+msgstr "Нижня панель|Hex"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "Змінна середовища TERM не встановлена!\n"
@@ -2692,41 +2720,34 @@ msgid "SUB-DIR"
 msgstr "ПІД-КАТ"
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
-msgid "u"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|u"
 msgstr ""
-
-#, fuzzy
-msgid "Unsorted"
-msgstr "&Не сортувати"
 
 msgid "&Unsorted"
 msgstr "&Не сортувати"
 
 #. TRANSLATORS: one single character to represent 'name' sort mode
-#, fuzzy
-msgid "n"
-msgstr "На"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|n"
+msgstr ""
 
 msgid "&Name"
 msgstr "За &назвою"
 
 #. TRANSLATORS: one single character to represent 'extension' sort mode
-msgid "e"
-msgstr ""
-
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 #, fuzzy
-msgid "Extension"
-msgstr "Розширення:"
+msgid "sort|e"
+msgstr "&Не сортувати"
 
 msgid "&Extension"
 msgstr "За роз&ширенням"
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
-msgid "s"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|s"
 msgstr ""
-
-msgid "Size"
-msgstr "Розмір"
 
 msgid "&Size"
 msgstr "За &розміром"
@@ -2736,31 +2757,25 @@ msgid "Block Size"
 msgstr " Розмір "
 
 #. TRANSLATORS: one single character to represent 'Modify time' sort mode
-msgid "m"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|m"
 msgstr ""
-
-msgid "MTime"
-msgstr "Час зміни"
 
 msgid "&Modify time"
 msgstr "За часом &зміни"
 
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
-msgid "a"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|a"
 msgstr ""
-
-msgid "ATime"
-msgstr "ЧасДост"
 
 msgid "&Access time"
 msgstr "За часом &доступу"
 
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
-msgid "h"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|h"
 msgstr ""
-
-msgid "CTime"
-msgstr "ЧасЗміни"
 
 msgid "C&Hange time"
 msgstr "За часом &зміни вузла"
@@ -2775,11 +2790,9 @@ msgid "Nl"
 msgstr "Кс"
 
 #. TRANSLATORS: one single character to represent 'inode' sort mode
-msgid "i"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|i"
 msgstr ""
-
-msgid "Inode"
-msgstr "I-вузол"
 
 msgid "&Inode"
 msgstr "За &i-вузлами"
@@ -2822,17 +2835,19 @@ msgstr "Формат користувача виглядає неправиль�
 msgid " Do you really want to execute? "
 msgstr " Ви дійсно хочете виконати? "
 
-msgid "View"
-msgstr "Переглянути"
+msgid "ButtonBar|View"
+msgstr "Нижня панель|Вид"
 
-msgid "Edit"
-msgstr "Редагувати"
+msgid "ButtonBar|Edit"
+msgstr "Нижня панель|Редагувати"
 
-msgid "RenMov"
-msgstr "Перенести"
+#, fuzzy
+msgid "ButtonBar|RenMov"
+msgstr "Нижня панель|Hex"
 
-msgid "Mkdir"
-msgstr "СтвКат"
+#, fuzzy
+msgid "ButtonBar|Mkdir"
+msgstr "Нижня панель|Редагувати"
 
 msgid " Not implemented yet "
 msgstr " Ще не реалізовано "
@@ -2862,6 +2877,14 @@ msgstr "Виберіть кодову сторінку"
 
 msgid "-  < No translation >"
 msgstr "-  < Без перекодування >"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot save file %s:\n"
+"%s"
+msgstr ""
+" Не вдається зберегти файл: \n"
+" %s "
 
 #, c-format
 msgid ""
@@ -2966,20 +2989,25 @@ msgstr ""
 msgid "  Delete %s?  "
 msgstr "  Видалити %s?  "
 
-msgid "Static"
-msgstr "Статичне"
+#, fuzzy
+msgid "ButtonBar|Static"
+msgstr "Нижня панель|Пошук"
 
-msgid "Dynamc"
-msgstr "Динамч"
+#, fuzzy
+msgid "ButtonBar|Dynamc"
+msgstr "Нижня панель|Як є"
 
-msgid "Rescan"
-msgstr "Пересканувати"
+#, fuzzy
+msgid "ButtonBar|Rescan"
+msgstr "Нижня панель|Як є"
 
-msgid "Forget"
-msgstr "Забути"
+#, fuzzy
+msgid "ButtonBar|Forget"
+msgstr "Нижня панель|Формат."
 
-msgid "Rmdir"
-msgstr "ВидКтлг"
+#, fuzzy
+msgid "ButtonBar|Rmdir"
+msgstr "Нижня панель|Редагувати"
 
 #, c-format
 msgid ""
@@ -3126,10 +3154,6 @@ msgstr "Додатковий Insert"
 
 msgid "Delete on keypad"
 msgstr "Додатковий Del"
-
-#, fuzzy
-msgid "Escape key"
-msgstr "Додатковий /"
 
 msgid "Enter on keypad"
 msgstr "Додатковий Enter"
@@ -3367,12 +3391,6 @@ msgstr " Не вдається створити процес-нащадок "
 msgid "Empty output from child filter"
 msgstr "Фільтр-нащадок не повернув даних"
 
-msgid "ButtonBar|Help"
-msgstr "Нижня панель|Допомога"
-
-msgid "ButtonBar|Quit"
-msgstr "Нижня панель|Вихід"
-
 msgid "ButtonBar|Ascii"
 msgstr "Нижня панель|Ascii"
 
@@ -3385,15 +3403,6 @@ msgstr "Нижня панель|Перехід"
 msgid "ButtonBar|Line"
 msgstr "Нижня панель|Рядок"
 
-msgid "ButtonBar|View"
-msgstr "Нижня панель|Вид"
-
-msgid "ButtonBar|Edit"
-msgstr "Нижня панель|Редагувати"
-
-msgid "ButtonBar|Save"
-msgstr "Нижня панель|Зберегти"
-
 msgid "ButtonBar|UnWrap"
 msgstr "Нижня панель|НеПеренос."
 
@@ -3402,9 +3411,6 @@ msgstr "Нижня панель|Перенос."
 
 msgid "ButtonBar|HxSrch"
 msgstr "Нижня панель|HxПошук"
-
-msgid "ButtonBar|Search"
-msgstr "Нижня панель|Пошук"
 
 msgid "ButtonBar|Raw"
 msgstr "Нижня панель|Як є"
@@ -3924,6 +3930,317 @@ msgstr "Внутрішня помилка:"
 msgid "Changes to file lost"
 msgstr "Зміни у файлі втрачені"
 
+#~ msgid "Do backups -->"
+#~ msgstr "Резервні копії -->"
+
+#~ msgid "Extension:"
+#~ msgstr "Розширення:"
+
+#~ msgid "&New              C-n"
+#~ msgstr "&Новий файл           C-n"
+
+#~ msgid "&Save              F2"
+#~ msgstr "&Зберегти              F2"
+
+#~ msgid "Save &as...       F12"
+#~ msgstr "Зберегти &як...       F12"
+
+#~ msgid "A&bout...            "
+#~ msgstr "&Про програму..."
+
+#~ msgid "&Quit             F10"
+#~ msgstr "&Вийти                F10"
+
+#~ msgid "&New            C-x k"
+#~ msgstr "&Новий файл         C-x k"
+
+#~ msgid "Copy to &file...     "
+#~ msgstr "&Копіювати у файл..."
+
+#~ msgid "&Toggle mark                 F3"
+#~ msgstr "Перемкнути відмітку   F3"
+
+#~ msgid "Mar&k columns              S-F3"
+#~ msgstr "Відмітити &стовпці    S-F3"
+
+#~ msgid "&Copy                        F5"
+#~ msgstr "&Скопіювати                F5"
+
+#~ msgid "&Move                        F6"
+#~ msgstr "&Перенести         F6"
+
+#~ msgid "&Delete                      F8"
+#~ msgstr "&Видалити                  F8"
+
+#, fuzzy
+#~ msgid "&Next bookmark              M-j"
+#~ msgstr "Наступна закладка                 "
+
+#~ msgid "&Undo                       C-u"
+#~ msgstr "В&ідкат операції       C-u"
+
+#~ msgid "&Beginning               C-PgUp"
+#~ msgstr "На &початок   C-PgUp"
+
+#~ msgid "&End                     C-PgDn"
+#~ msgstr "На кінець    C-PgDn"
+
+#~ msgid "C&opy to clipfile           M-w"
+#~ msgstr "Копіювати до файлу           M-w"
+
+#~ msgid "C&ut to clipfile            C-w"
+#~ msgstr "Вирізати до файлу            C-w"
+
+#~ msgid "&Paste from clipfile        C-y"
+#~ msgstr "Вставити з файлу        C-y"
+
+#~ msgid "Toggle bookmar&k               "
+#~ msgstr "Перемкнути закладку               "
+
+#~ msgid "&Next bookmark                 "
+#~ msgstr "Наступна закладка                 "
+
+#~ msgid "Pre&v bookmark                 "
+#~ msgstr "Попередня закладка                 "
+
+#~ msgid "&Flush bookmark                "
+#~ msgstr "Скинути закладки                "
+
+#~ msgid "&Search...         F7"
+#~ msgstr "&Шукати...          F7"
+
+#~ msgid "&Replace...        F4"
+#~ msgstr "&Замінити...        F4"
+
+#~ msgid "&Go to line...            M-l"
+#~ msgstr "&Перейти на рядок                M-l"
+
+#, fuzzy
+#~ msgid "Encod&ing...             M-e"
+#~ msgstr "Кодування...             C-t"
+
+#~ msgid "Delete macr&o...            "
+#~ msgstr "&Видалити макрос"
+
+#~ msgid "Sor&t...                 M-t"
+#~ msgstr "&Сортувати                       M-t"
+
+#~ msgid "&Mail...                    "
+#~ msgstr "&Відіслати поштою..."
+
+#~ msgid "&Execute macro... C-x e, KEY"
+#~ msgstr "&Виконати макрос... C-x e, KEY"
+
+#~ msgid "'ispell' s&pell check    M-$"
+#~ msgstr "&Перевірка орфографії        M-$"
+
+#~ msgid "Save setu&p"
+#~ msgstr "&Зберегти налаштування"
+
+#~ msgid " Edit "
+#~ msgstr " Редагування "
+
+#~ msgid " Sear/Repl "
+#~ msgstr " Пошук/Заміна "
+
+#~ msgid " Command "
+#~ msgstr " Команда "
+
+#~ msgid " Options "
+#~ msgstr " Параметри "
+
+#~ msgid "Intuitive"
+#~ msgstr "Інтуїтивна"
+
+#~ msgid "Emacs"
+#~ msgstr "Emacs"
+
+#~ msgid "User-defined"
+#~ msgstr "&Визначений користувачем:"
+
+#~ msgid "Key emulation"
+#~ msgstr "Розкладка клавіатури"
+
+#~ msgid "Save"
+#~ msgstr "Запис"
+
+#~ msgid "Mark"
+#~ msgstr "Блок"
+
+#~ msgid "Replac"
+#~ msgstr "Замінити"
+
+#~ msgid "Move"
+#~ msgstr "Перенести"
+
+#~ msgid "Delete"
+#~ msgstr "Видалити"
+
+#~ msgid "PullDn"
+#~ msgstr "МенюMC"
+
+#~ msgid " Copy "
+#~ msgstr " Скопіювати "
+
+#~ msgid " Move "
+#~ msgstr " Перенести "
+
+#~ msgid " Delete "
+#~ msgstr " Видалення "
+
+#~ msgid "1Copy"
+#~ msgstr "1Cкопіювати"
+
+#~ msgid "1Move"
+#~ msgstr "1Перенести"
+
+#~ msgid "1Delete"
+#~ msgstr "1Видалити"
+
+#~ msgid "Index"
+#~ msgstr "Вміст"
+
+#~ msgid "Prev"
+#~ msgstr "Назад"
+
+#~ msgid "&Quick view     C-x q"
+#~ msgstr "&Швидкий перегляд   C-x q"
+
+#~ msgid "&Info           C-x i"
+#~ msgstr "&Інформація         C-x i"
+
+#~ msgid "&Rescan         C-r"
+#~ msgstr "&Пересканувати       C-r"
+
+#~ msgid "&View               F3"
+#~ msgstr "Переглянути &файл          F3"
+
+#~ msgid "Vie&w file...         "
+#~ msgstr "&Переглянути файл..."
+
+#~ msgid "&Filtered view     M-!"
+#~ msgstr "&Перегляд виводу команди  M-!"
+
+#~ msgid "&Edit               F4"
+#~ msgstr "&Редагувати                F4"
+
+#~ msgid "&Copy               F5"
+#~ msgstr "&Скопіювати                F5"
+
+#~ msgid "c&Hmod           C-x c"
+#~ msgstr "Права &доступу          C-x c"
+
+#~ msgid "&Link            C-x l"
+#~ msgstr "&Жорстке посилання      C-x l"
+
+#~ msgid "&SymLink         C-x s"
+#~ msgstr "&Символьне посилання    C-x s"
+
+#~ msgid "edit s&Ymlink  C-x C-s"
+#~ msgstr "Виправити поси&лання  C-x C-s"
+
+#~ msgid "ch&Own           C-x o"
+#~ msgstr "&Власник/група          C-x o"
+
+#~ msgid "&Rename/Move        F6"
+#~ msgstr "Пере&йменувати             F6"
+
+#~ msgid "&Mkdir              F7"
+#~ msgstr "Ст&ворити каталог          F7"
+
+#~ msgid "&Delete             F8"
+#~ msgstr "&Видалити                  F8"
+
+#~ msgid "&Quick cd          M-c"
+#~ msgstr "&Швидка зміна каталогу    M-c"
+
+#~ msgid "select &Group      M-+"
+#~ msgstr "Відмітити &групу          M-+"
+
+#~ msgid "u&Nselect group    M-\\"
+#~ msgstr "Зняти &відмітку з групи   M-\\"
+
+#~ msgid "e&Xit              F10"
+#~ msgstr "Ви&хід                    F10"
+
+#~ msgid "&User menu          F2"
+#~ msgstr "&Меню користувача          F2"
+
+#~ msgid "&Find file            M-?"
+#~ msgstr "&Знайти файл                  M-?"
+
+#~ msgid "s&Wap panels          C-u"
+#~ msgstr "&Переставити панелі           C-u"
+
+#~ msgid "&Compare directories  C-x d"
+#~ msgstr "&Порівняти каталоги         C-x d"
+
+#~ msgid "e&Xternal panelize    C-x !"
+#~ msgstr "&Вивід команди на панель    C-x !"
+
+#~ msgid "Command &history      M-h"
+#~ msgstr "Історія команд       M-h"
+
+#~ msgid "di&Rectory hotlist    C-\\"
+#~ msgstr "Список ката&логів           C-\\"
+
+#~ msgid "&Background jobs      C-x j"
+#~ msgstr "Завдання на &тлі            C-x j"
+
+#~ msgid "learn &Keys..."
+#~ msgstr "Вивчення к&лавіш..."
+
+#~ msgid " &File "
+#~ msgstr " &Файл "
+
+#~ msgid " &Command "
+#~ msgstr " &Команда "
+
+#~ msgid "Menu"
+#~ msgstr "Меню"
+
+#, fuzzy
+#~ msgid "n"
+#~ msgstr "На"
+
+#, fuzzy
+#~ msgid "Extension"
+#~ msgstr "Розширення:"
+
+#~ msgid "Size"
+#~ msgstr "Розмір"
+
+#~ msgid "MTime"
+#~ msgstr "Час зміни"
+
+#~ msgid "ATime"
+#~ msgstr "ЧасДост"
+
+#~ msgid "CTime"
+#~ msgstr "ЧасЗміни"
+
+#~ msgid "Inode"
+#~ msgstr "I-вузол"
+
+#~ msgid "RenMov"
+#~ msgstr "Перенести"
+
+#~ msgid "Static"
+#~ msgstr "Статичне"
+
+#~ msgid "Dynamc"
+#~ msgstr "Динамч"
+
+#~ msgid "Forget"
+#~ msgstr "Забути"
+
+#~ msgid "Rmdir"
+#~ msgstr "ВидКтлг"
+
+#, fuzzy
+#~ msgid "Escape key"
+#~ msgstr "Додатковий /"
+
 #~ msgid "bind: Wrong argument number, bind <key> <command>"
 #~ msgstr "bind: Помилкова кількість аргументів bind <key> <command>"
 
@@ -4038,14 +4355,8 @@ msgstr "Зміни у файлі втрачені"
 #~ msgid "&Delete            F8"
 #~ msgstr "В&идалити блок          F8"
 
-#~ msgid "Save setu&p..."
-#~ msgstr "&Зберегти налаштування"
-
 #~ msgid " The command history is empty "
 #~ msgstr " Історія командного рядка порожня "
-
-#~ msgid "command &History"
-#~ msgstr "&Історія команд"
 
 #~ msgid "Edit edi&tor menu file"
 #~ msgstr "Редагувати м&еню редактора"
@@ -4085,9 +4396,6 @@ msgstr "Зміни у файлі втрачені"
 
 #~ msgid "&Type"
 #~ msgstr "За &типом"
-
-#~ msgid "&Links"
-#~ msgstr "&Посилання"
 
 #~ msgid "N&GID"
 #~ msgstr "N&GID"

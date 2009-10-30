@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-09 09:50+0300\n"
+"POT-Creation-Date: 2009-10-30 10:39+0200\n"
 "PO-Revision-Date: 2003-01-31 00:11+0200\n"
 "Last-Translator: Mişu Moldovan <dumol@go.ro>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
@@ -54,6 +54,29 @@ msgstr " Nu poate fi vizualizat: nu este un fişier obişnuit "
 msgid " File %s is too large "
 msgstr " Fişierul este prea mare: "
 
+msgid " About "
+msgstr " Despre "
+
+msgid ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       A user friendly text editor written\n"
+"           for the Midnight Commander.\n"
+msgstr ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"          Un editor de text scris pentru\n"
+"                Midnight Commander.\n"
+
+msgid "&OK"
+msgstr "&OK"
+
 msgid "Macro recursion is too deep"
 msgstr "Recursivitatea macro este prea mare"
 
@@ -91,23 +114,29 @@ msgstr " Nu pot deschide pentru scriere filtrul: "
 msgid " Cannot open file for writing: %s "
 msgstr " Nu pot deschide pentru scriere filtrul: "
 
-msgid "Quick save "
+#, fuzzy
+msgid "&Quick save"
 msgstr "Rapidă"
 
-msgid "Safe save "
+#, fuzzy
+msgid "&Safe save"
 msgstr "Sigură"
 
-msgid "Do backups -->"
-msgstr "Fă backup -->"
+msgid "&Do backups with following extension:"
+msgstr ""
 
-msgid "&OK"
-msgstr "&OK"
-
-msgid "Extension:"
-msgstr "Extensie:"
+msgid "Check &POSIX new line"
+msgstr ""
 
 msgid " Edit Save Mode "
 msgstr " Editează Modul de Salvare "
+
+msgid "The file you are saving is not finished with a newline"
+msgstr ""
+
+#, fuzzy
+msgid "C&ontinue"
+msgstr "Continuă"
 
 msgid "&Do not change"
 msgstr ""
@@ -179,10 +208,6 @@ msgid ""
 msgstr ""
 " Fişierul curent a fost modificat fără a fi salvat. \n"
 " Dacă continuaţi veţi anula aceste schimbări. "
-
-#, fuzzy
-msgid "C&ontinue"
-msgstr "Continuă"
 
 msgid "Syntax file edit"
 msgstr "editare fişier sintaxă"
@@ -402,238 +427,196 @@ msgstr ""
 msgid "&Ignore lock"
 msgstr ""
 
-msgid " About "
-msgstr " Despre "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"          Un editor de text scris pentru\n"
-"                Midnight Commander.\n"
-
 msgid "&Open file..."
 msgstr "D&eschide cu..."
 
-msgid "&New              C-n"
-msgstr "&Nou                  C-n"
+#, fuzzy
+msgid "&New"
+msgstr "&Nume"
 
-msgid "&Save              F2"
-msgstr "&Salvează              F2"
+#, fuzzy
+msgid "Save &as..."
+msgstr "&Salvează setările"
 
-msgid "Save &as...       F12"
-msgstr "s&Alvează ca...       F12"
-
-msgid "&Insert file...   F15"
+#, fuzzy
+msgid "&Insert file..."
 msgstr "inserează &Fişier...  F15"
 
-msgid "Copy to &file...  C-f"
+#, fuzzy
+msgid "Cop&y to file..."
 msgstr "&Copiază în fişier... C-f"
 
-msgid "&User menu...     F11"
+#, fuzzy
+msgid "&User menu..."
 msgstr "&Meniu utilizator     F11"
 
-msgid "A&bout...            "
-msgstr "des&Pre...               "
+#, fuzzy
+msgid "A&bout..."
+msgstr "&Aspect..."
 
-msgid "&Quit             F10"
-msgstr "&Ieşire               F10"
-
-msgid "&New            C-x k"
-msgstr "&Nou                C-x k"
-
-msgid "Copy to &file...     "
-msgstr "copiază în &Fişier...    "
+msgid "&Quit"
+msgstr "&Ieşire"
 
 #, fuzzy
-msgid "&Toggle mark                 F3"
-msgstr "in&Versează selecţia    F3"
+msgid "&Toggle mark"
+msgstr "Şter&g marc."
+
+msgid "&Mark columns"
+msgstr ""
 
 #, fuzzy
-msgid "Mar&k columns              S-F3"
-msgstr "se&Lectează coloanele S-F3"
-
-#, fuzzy
-msgid "Toggle &ins/overw           Ins"
+msgid "Toggle &ins/overw"
 msgstr "&Inserare/suprascriere Ins"
 
 #, fuzzy
-msgid "&Copy                        F5"
-msgstr "&Copiază                F5"
+msgid "&Copy"
+msgstr "Copiază"
+
+msgid "&Move"
+msgstr "&Mută"
+
+msgid "&Delete"
+msgstr "&Şterge"
 
 #, fuzzy
-msgid "&Move                        F6"
-msgstr "&Mută                   F6"
-
-#, fuzzy
-msgid "&Delete                      F8"
-msgstr "şter&Ge                 F8"
-
-#, fuzzy
-msgid "C&opy to clipfile         C-Ins"
+msgid "C&opy to clipfile"
 msgstr "copiază în &Fişier...    "
 
 #, fuzzy
-msgid "C&ut to clipfile          S-Del"
+msgid "C&ut to clipfile"
 msgstr "&Du-te la linia...               M-l"
 
-msgid "&Paste from clipfile      S-Ins"
+msgid "&Paste from clipfile"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k            M-k"
+msgid "Toggle bookmar&k"
 msgstr "in&Versează selecţia    F3"
 
 #, fuzzy
-msgid "&Next bookmark              M-j"
-msgstr "&Nou                  C-n"
+msgid "&Next bookmark"
+msgstr "Set. &marc."
 
 #, fuzzy
-msgid "Pre&v bookmark              M-i"
+msgid "Pre&v bookmark"
 msgstr "Sor&tează...                     M-t"
 
 #, fuzzy
-msgid "&Flush bookmark             M-o"
+msgid "&Flush bookmark"
 msgstr "&Poşta...                           "
 
-#, fuzzy
-msgid "&Undo                       C-u"
-msgstr "&Anulează              C-u"
+msgid "&Undo"
+msgstr ""
 
-#, fuzzy
-msgid "&Beginning               C-PgUp"
-msgstr "începu&T            C-PgUp"
-
-#, fuzzy
-msgid "&End                     C-PgDn"
-msgstr "&Sfârşit            C-PgDn"
-
-#, fuzzy
-msgid "C&opy to clipfile           M-w"
-msgstr "&Du-te la linia...               M-l"
-
-#, fuzzy
-msgid "C&ut to clipfile            C-w"
-msgstr "&Du-te la linia...               M-l"
-
-msgid "&Paste from clipfile        C-y"
+msgid "&Beginning"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k               "
-msgstr "in&Versează selecţia    F3"
+msgid "&End"
+msgstr "&Inod"
 
 #, fuzzy
-msgid "&Next bookmark                 "
-msgstr "&Nou                  C-n"
+msgid "&Search..."
+msgstr "Caută"
 
 #, fuzzy
-msgid "Pre&v bookmark                 "
-msgstr "Sor&tează...                     M-t"
-
-#, fuzzy
-msgid "&Flush bookmark                "
-msgstr "&Poşta...                           "
-
-msgid "&Search...         F7"
-msgstr "&Caută...          F7"
-
-msgid "Search &again     F17"
+msgid "Search &again"
 msgstr "caută din &Nou    F17"
 
-msgid "&Replace...        F4"
-msgstr "în&Locuieşte...    F4"
-
-msgid "&Go to line...            M-l"
-msgstr "&Du-te la linia...               M-l"
+#, fuzzy
+msgid "&Replace..."
+msgstr "&Înlocuieşte"
 
 #, fuzzy
-msgid "Toggle li&ne state        M-n"
+msgid "&Go to line..."
+msgstr " Du-te la linia "
+
+#, fuzzy
+msgid "Toggle li&ne state"
 msgstr "in&Versează selecţia    F3"
 
-msgid "Go to matching &bracket   M-b"
+#, fuzzy
+msgid "Go to matching &bracket"
 msgstr "d&U-te la paranteza pereche      M-b"
 
-msgid "Find declaration      A-Enter"
+#, fuzzy
+msgid "Find declaration"
+msgstr "Caută reject-uri după patch-uire"
+
+msgid "Back from declaration"
 msgstr ""
 
-msgid "Back from declaration     M--"
-msgstr ""
-
-msgid "Forward to declaration    M-+"
+msgid "Forward to declaration"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             M-e"
+msgid "Encod&ing..."
 msgstr "Sor&tează...                     M-t"
 
-msgid "Insert &literal...       C-q"
-msgstr "inserează un &Literal...         C-q"
-
-msgid "&Refresh screen          C-l"
+#, fuzzy
+msgid "&Refresh screen"
 msgstr "&Redesenează ecranul             C-l"
 
-msgid "&Start record macro      C-r"
+#, fuzzy
+msgid "&Start record macro"
 msgstr "înregistrează &Combinaţia        C-r"
 
-msgid "&Finish record macro...  C-r"
+#, fuzzy
+msgid "&Finish record macro..."
 msgstr "opreşte înre&Gistrarea           C-r"
 
-msgid "&Execute macro...   C-a, KEY"
+#, fuzzy
+msgid "&Execute macro..."
 msgstr "&Execută combinaţia...    C-a, TASTA"
 
-msgid "Delete macr&o...            "
-msgstr "şterge com&Binaţia...               "
+#, fuzzy
+msgid "Delete macr&o..."
+msgstr " Şterge combinaţia "
 
-msgid "Insert &date/time           "
-msgstr "inserează data/&Ora                 "
-
-msgid "Format p&aragraph        M-p"
-msgstr "formatează p&Aragraful           M-p"
-
-msgid "'ispell' s&pell check    C-p"
+#, fuzzy
+msgid "'ispell' s&pell check"
 msgstr "corectare ortografică cu &Ispell C-p"
 
-msgid "Sor&t...                 M-t"
-msgstr "Sor&tează...                     M-t"
+#, fuzzy
+msgid "&Mail..."
+msgstr "&Filtru..."
 
-msgid "Paste o&utput of...      M-u"
+#, fuzzy
+msgid "Insert &literal..."
+msgstr "inserează un &Literal...         C-q"
+
+#, fuzzy
+msgid "Insert &date/time"
+msgstr "inserează data/&Ora                 "
+
+#, fuzzy
+msgid "Format p&aragraph"
+msgstr "formatează p&Aragraful           M-p"
+
+#, fuzzy
+msgid "Sor&t..."
+msgstr "&Ordinea sortării..."
+
+msgid "Paste o&utput of..."
 msgstr ""
 
-msgid "E&xternal Formatter      F19"
+#, fuzzy
+msgid "E&xternal formatter"
 msgstr "Formatare E&xternă               F19"
-
-msgid "&Mail...                    "
-msgstr "&Poşta...                           "
-
-msgid "&Execute macro... C-x e, KEY"
-msgstr "&Execută combinaţia...  C-x e, TASTA"
-
-msgid "'ispell' s&pell check    M-$"
-msgstr "corectare ortografică 'is&Pell'  M-$"
 
 msgid "&General...  "
 msgstr "&Generale...      "
 
-msgid "&Save mode..."
+#, fuzzy
+msgid "Save &mode..."
 msgstr "Modul de &Salvare..."
 
 #, fuzzy
-msgid "Learn &Keys..."
+msgid "Learn &keys..."
 msgstr "învaţă &Tastele..."
 
 #, fuzzy
-msgid "Syntax &Highlighting..."
+msgid "Syntax &highlighting..."
 msgstr "&Evidenţiere sintaxă"
 
 #, fuzzy
@@ -644,34 +627,32 @@ msgstr "editare fişier sintaxă"
 msgid "&Menu file"
 msgstr "editare fişier &Meniuri"
 
-#, fuzzy
-msgid "Save setu&p"
+msgid "&Save setup"
 msgstr "&Salvează setările"
 
-msgid " File "
-msgstr " Fişier "
-
-msgid " Edit "
-msgstr " Editare "
-
-msgid " Sear/Repl "
-msgstr " Caut/Înloc "
-
-msgid " Command "
-msgstr " Comenzi "
-
-msgid " Options "
-msgstr " Opţiuni "
-
-msgid "Intuitive"
-msgstr "Intuitivă"
-
-msgid "Emacs"
-msgstr "Emacs"
+#, fuzzy
+msgid "&File"
+msgstr " Fişier"
 
 #, fuzzy
-msgid "User-defined"
-msgstr "definit de &Utilizator:"
+msgid "&Edit"
+msgstr "Editare"
+
+#, fuzzy
+msgid "&Search"
+msgstr "Caută"
+
+#, fuzzy
+msgid "&Command"
+msgstr "Comandă"
+
+#, fuzzy
+msgid "For&mat"
+msgstr "Format"
+
+#, fuzzy
+msgid "&Options"
+msgstr " &Opţiuni "
 
 msgid "None"
 msgstr "Fără aranjare"
@@ -684,9 +665,6 @@ msgstr "Tip \"maşină de scris\""
 
 msgid "Word wrap line length: "
 msgstr "Lungimea max. a liniei: "
-
-msgid "Tab spacing: "
-msgstr "Mărimea tab-ului: "
 
 msgid "Cursor beyond end of line"
 msgstr ""
@@ -710,11 +688,14 @@ msgstr "Salvează fişierul şi &poziţia"
 msgid "Confir&m before saving"
 msgstr "&Confirmă înainte de a salva"
 
-msgid "Fill tabs with &spaces"
-msgstr "&Umple tab-urile cu spaţii"
-
 msgid "&Return does autoindent"
 msgstr "returul &Autoindentează"
+
+msgid "Tab spacing: "
+msgstr "Mărimea tab-ului: "
+
+msgid "Fill tabs with &spaces"
+msgstr "&Umple tab-urile cu spaţii"
 
 msgid "&Backspace through tabs"
 msgstr "şterge deodată &Tab-urile"
@@ -725,35 +706,38 @@ msgstr "&Simulează tab-urile 1/2"
 msgid "Wrap mode"
 msgstr "Mod de aranjare"
 
-msgid "Key emulation"
-msgstr "Emulare de taste"
-
 msgid " Editor options "
 msgstr " Opţiuni ale editorului "
 
-msgid "Help"
-msgstr "Ajutor"
+msgid "ButtonBar|Help"
+msgstr ""
 
-msgid "Save"
-msgstr "Salvează"
+msgid "ButtonBar|Save"
+msgstr ""
 
-msgid "Mark"
-msgstr "March."
+msgid "ButtonBar|Mark"
+msgstr ""
 
-msgid "Replac"
-msgstr "Înloc."
+msgid "ButtonBar|Replac"
+msgstr ""
 
-msgid "Copy"
-msgstr "Copiază"
+msgid "ButtonBar|Copy"
+msgstr ""
 
-msgid "Move"
-msgstr "Mută"
+msgid "ButtonBar|Move"
+msgstr ""
 
-msgid "Delete"
-msgstr "Şterge"
+msgid "ButtonBar|Search"
+msgstr ""
 
-msgid "PullDn"
-msgstr "Meniu"
+msgid "ButtonBar|Delete"
+msgstr ""
+
+msgid "ButtonBar|PullDn"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
 
 msgid " Load syntax file "
 msgstr " Încarcă fişierul de sintaxă "
@@ -1217,6 +1201,9 @@ msgstr "şi T sau INS pentru marcare"
 msgid " Permission "
 msgstr " Drepturi "
 
+msgid " File "
+msgstr " Fişier "
+
 msgid "Chmod command"
 msgstr "Comanda chmod"
 
@@ -1482,14 +1469,14 @@ msgid ""
 "it."
 msgstr ""
 
-msgid " Copy "
-msgstr " Copiază "
+msgid "DialogTitle|Copy"
+msgstr ""
 
-msgid " Move "
-msgstr " Mută "
+msgid "DialogTitle|Move"
+msgstr ""
 
-msgid " Delete "
-msgstr " Şterge "
+msgid "DialogTitle|Delete"
+msgstr ""
 
 msgid " Cannot make the hardlink "
 msgstr " Nu pot crea legătura reală "
@@ -1643,9 +1630,6 @@ msgstr ""
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr "Fişierul a fost transferat incomplet. Îl păstrez?"
 
-msgid "&Delete"
-msgstr "&Şterge"
-
 msgid "&Keep"
 msgstr "&Păstrează"
 
@@ -1769,14 +1753,14 @@ msgstr ""
 msgid "Directory scanning"
 msgstr "Calea directorului"
 
-msgid "1Copy"
-msgstr "1Copiază"
+msgid "FileOperation|Copy"
+msgstr ""
 
-msgid "1Move"
-msgstr "1Mută"
+msgid "FileOperation|Move"
+msgstr ""
 
-msgid "1Delete"
-msgstr "1Şterge"
+msgid "FileOperation|Delete"
+msgstr ""
 
 #, no-c-format
 msgid "%o %f \"%s\"%m"
@@ -1806,6 +1790,10 @@ msgstr " cu mască sursă:"
 
 msgid " to:"
 msgstr " către:"
+
+#, c-format
+msgid "%s?"
+msgstr ""
 
 msgid " Cannot operate on \"..\"! "
 msgstr " Nu pot opera pe  \"..\"! "
@@ -1955,9 +1943,6 @@ msgstr "&Chdir"
 msgid "&Again"
 msgstr "&Din nou"
 
-msgid "&Quit"
-msgstr "&Ieşire"
-
 msgid "Pane&lize"
 msgstr "Pane&lizare"
 
@@ -2043,14 +2028,14 @@ msgstr " Eroare internă: Start dublu al zonei de legătură "
 msgid " Cannot find node %s in help file "
 msgstr " Nu găsesc nodul %s în fişierul de ajutor "
 
-msgid "Index"
-msgstr "Index"
+msgid "Help"
+msgstr "Ajutor"
 
-msgid "Prev"
-msgstr "Înapoi"
+msgid "ButtonBar|Index"
+msgstr ""
 
-msgid "&Move"
-msgstr "&Mută"
+msgid "ButtonBar|Prev"
+msgstr ""
 
 msgid "&Remove"
 msgstr "Ş&Terge"
@@ -2358,11 +2343,13 @@ msgstr " Vreţi într-adevăr să ieşiţi din Midnight Commander? "
 msgid "&Listing mode..."
 msgstr "mod de &Listare..."
 
-msgid "&Quick view     C-x q"
-msgstr "&Vizualizare rapidă C-x q"
+#, fuzzy
+msgid "&Quick view"
+msgstr "Rapidă"
 
-msgid "&Info           C-x i"
-msgstr "&Info               C-x i"
+#, fuzzy
+msgid "&Info"
+msgstr "&Inod"
 
 msgid "&Sort order..."
 msgstr "&Ordinea sortării..."
@@ -2371,7 +2358,7 @@ msgid "&Filter..."
 msgstr "&Filtru..."
 
 #, fuzzy
-msgid "&Encoding...    M-e"
+msgid "&Encoding..."
 msgstr "Sor&tează...                     M-t"
 
 msgid "&Network link..."
@@ -2386,102 +2373,117 @@ msgstr "conexiune s&hell..."
 msgid "SM&B link..."
 msgstr "legătură SM&B..."
 
-msgid "&Rescan         C-r"
-msgstr "&Re-scanează        C-r"
+#, fuzzy
+msgid "&Rescan"
+msgstr "Reîncarcă"
 
-msgid "&View               F3"
-msgstr "&Vizualizare            F3"
+#, fuzzy
+msgid "&View"
+msgstr "Vizualizare"
 
-msgid "Vie&w file...         "
-msgstr "vizualizare fi&Şier...    "
+#, fuzzy
+msgid "Vie&w file..."
+msgstr " Vizualizare fişier "
 
-msgid "&Filtered view     M-!"
-msgstr "vizualizare &Filtrată   M-!"
+#, fuzzy
+msgid "&Filtered view"
+msgstr " Vizualizare filtrată "
 
-msgid "&Edit               F4"
-msgstr "&Editare                F4"
+msgid "C&hmod"
+msgstr ""
 
-msgid "&Copy               F5"
-msgstr "&Copiază                F5"
+#, fuzzy
+msgid "&Link"
+msgstr "&Legături"
 
-msgid "c&Hmod           C-x c"
-msgstr "c&Hmod                  C-x c"
+#, fuzzy
+msgid "&SymLink"
+msgstr "&Legături"
 
-msgid "&Link            C-x l"
-msgstr "&Legatură               C-x l"
+#, fuzzy
+msgid "Edit s&ymlink"
+msgstr " Editare legătură simbolică "
 
-msgid "&SymLink         C-x s"
-msgstr "legătură &Simbolică     C-x s"
+msgid "Ch&own"
+msgstr ""
 
-msgid "edit s&Ymlink  C-x C-s"
-msgstr "edit. legăt. sim&Bolică C-x C-s"
-
-msgid "ch&Own           C-x o"
-msgstr "ch&Own                  C-x o"
-
-msgid "&Advanced chown       "
+#, fuzzy
+msgid "&Advanced chown"
 msgstr "chown &Avansat            "
 
-msgid "&Rename/Move        F6"
-msgstr "&Redenumeşte/Mută       F6"
+#, fuzzy
+msgid "&Rename/Move"
+msgstr "Ş&Terge"
 
-msgid "&Mkdir              F7"
-msgstr "creează direc&Tor       F7"
+#, fuzzy
+msgid "&Mkdir"
+msgstr "DirNou"
 
-msgid "&Delete             F8"
-msgstr "şter&Ge                 F8"
+#, fuzzy
+msgid "&Quick cd"
+msgstr "Schimbare rapidă de director"
 
-msgid "&Quick cd          M-c"
-msgstr "c&D rapid               M-c"
+#, fuzzy
+msgid "Select &group"
+msgstr "Setează &grupuri"
 
-msgid "select &Group      M-+"
-msgstr "selecteaz&Ă grup        M-+"
+#, fuzzy
+msgid "U&nselect group"
+msgstr " Deselectează "
 
-msgid "u&Nselect group    M-\\"
-msgstr "deselectea&Ză grup      M-\\"
-
-msgid "reverse selec&Tion M-*"
+#, fuzzy
+msgid "Reverse selec&tion"
 msgstr "inversează selec&Ţia    M-*"
 
-msgid "e&Xit              F10"
-msgstr "&Ieşire                 F10"
+#, fuzzy
+msgid "E&xit"
+msgstr "Editare"
 
-msgid "&User menu          F2"
-msgstr "meniu &Utilizator       F2"
+#, fuzzy
+msgid "&User menu"
+msgstr " Meniu utilizator "
 
 msgid "&Directory tree"
 msgstr "arbore de &Directoare"
 
-msgid "&Find file            M-?"
-msgstr "caută &Fişier                     M-?"
+#, fuzzy
+msgid "&Find file"
+msgstr "Caut fişier"
 
-msgid "s&Wap panels          C-u"
-msgstr "&Schimbă panourile                C-u"
+msgid "S&wap panels"
+msgstr ""
 
-msgid "switch &Panels on/off C-o"
+#, fuzzy
+msgid "Switch &panels on/off"
 msgstr "acti&Vează/dezactivează panourile C-o"
 
-msgid "&Compare directories  C-x d"
-msgstr "&Compar directoarele              C-x d"
+#, fuzzy
+msgid "&Compare directories"
+msgstr " Compar directoarele "
 
-msgid "e&Xternal panelize    C-x !"
-msgstr "panelare e&Xterioară              C-x !"
+#, fuzzy
+msgid "E&xternal panelize"
+msgstr "Panelare externă"
 
-msgid "show directory s&Izes"
+#, fuzzy
+msgid "Show directory s&izes"
 msgstr "afi&Şează mărimea directoarelor"
 
 #, fuzzy
-msgid "Command &history      M-h"
-msgstr " Istoricul comenzilor "
+msgid "Command &history"
+msgstr "&Istoricul comenzilor "
 
-msgid "di&Rectory hotlist    C-\\"
-msgstr "lista rapidă de di&Rectoare       C-\\"
+#, fuzzy
+msgid "Di&rectory hotlist"
+msgstr "Lista rapidă de directoare"
 
-msgid "&Active VFS list      C-x a"
+#, fuzzy
+msgid "&Active VFS list"
 msgstr "lista VFS-urilor &Active          C-x a"
 
-msgid "&Background jobs      C-x j"
-msgstr "sarcini de funda&L                C-x j"
+#, fuzzy
+msgid "&Background jobs"
+msgstr "Sarcini de Fundal"
 
 msgid "&Undelete files (ext2fs only)"
 msgstr "rec&Uperare fişiere (doar ext2fs)"
@@ -2504,40 +2506,30 @@ msgstr "&Configurare..."
 msgid "&Layout..."
 msgstr "&Aspect..."
 
-msgid "c&Onfirmation..."
+#, fuzzy
+msgid "C&onfirmation..."
 msgstr "c&Onfirmare..."
 
 msgid "&Display bits..."
 msgstr "&Biţi de afişare..."
 
-msgid "learn &Keys..."
-msgstr "învaţă &Tastele..."
-
 msgid "&Virtual FS..."
 msgstr "Sistem &Virtual de Fişiere..."
 
-msgid "&Save setup"
-msgstr "&Salvează setările"
-
-msgid " &Above "
+#, fuzzy
+msgid "&Above"
 msgstr " &Deasupra "
 
-msgid " &Left "
+#, fuzzy
+msgid "&Left"
 msgstr " &Stânga "
 
-msgid " &File "
-msgstr " &Fişiere "
-
-msgid " &Command "
-msgstr " &Comenzi "
-
-msgid " &Options "
-msgstr " &Opţiuni "
-
-msgid " &Below "
+#, fuzzy
+msgid "&Below"
 msgstr " Dedesu&Bt "
 
-msgid " &Right "
+#, fuzzy
+msgid "&Right"
 msgstr " &Dreapta "
 
 msgid " Information "
@@ -2555,8 +2547,8 @@ msgstr ""
 " ală (Ctrl-R) a conţinutului directorului. Consultaţi    \n"
 " pagina man pentru mai multe detalii.              "
 
-msgid "Menu"
-msgstr "Meniu"
+msgid "ButtonBar|Menu"
+msgstr ""
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "Variabila de mediu TERM nu este setată!\n"
@@ -2709,41 +2701,34 @@ msgid "SUB-DIR"
 msgstr "SUB-DIR"
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
-msgid "u"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|u"
 msgstr ""
-
-#, fuzzy
-msgid "Unsorted"
-msgstr "ne-Sor&tat"
 
 msgid "&Unsorted"
 msgstr "ne-Sor&tat"
 
 #. TRANSLATORS: one single character to represent 'name' sort mode
-#, fuzzy
-msgid "n"
-msgstr "Pe"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|n"
+msgstr ""
 
 msgid "&Name"
 msgstr "&Nume"
 
 #. TRANSLATORS: one single character to represent 'extension' sort mode
-msgid "e"
-msgstr ""
-
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 #, fuzzy
-msgid "Extension"
-msgstr "Extensie:"
+msgid "sort|e"
+msgstr "ne-Sor&tat"
 
 msgid "&Extension"
 msgstr "&Extensie"
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
-msgid "s"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|s"
 msgstr ""
-
-msgid "Size"
-msgstr "Mărime"
 
 msgid "&Size"
 msgstr "&Mărime"
@@ -2753,31 +2738,25 @@ msgid "Block Size"
 msgstr " Mărime "
 
 #. TRANSLATORS: one single character to represent 'Modify time' sort mode
-msgid "m"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|m"
 msgstr ""
-
-msgid "MTime"
-msgstr "DataM"
 
 msgid "&Modify time"
 msgstr "data modi&Ficării"
 
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
-msgid "a"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|a"
 msgstr ""
-
-msgid "ATime"
-msgstr "DataA"
 
 msgid "&Access time"
 msgstr "data &Accesului"
 
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
-msgid "h"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|h"
 msgstr ""
-
-msgid "CTime"
-msgstr "DataC"
 
 msgid "C&Hange time"
 msgstr "data &Creării"
@@ -2792,11 +2771,9 @@ msgid "Nl"
 msgstr "Nl"
 
 #. TRANSLATORS: one single character to represent 'inode' sort mode
-msgid "i"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|i"
 msgstr ""
-
-msgid "Inode"
-msgstr "Inod"
 
 msgid "&Inode"
 msgstr "&Inod"
@@ -2837,17 +2814,17 @@ msgstr "Formatul furnizat de utilizator pare invalid, revin la cel implicit"
 msgid " Do you really want to execute? "
 msgstr " Chiar doriţi să executaţi? "
 
-msgid "View"
-msgstr "Vizualizare"
+msgid "ButtonBar|View"
+msgstr ""
 
-msgid "Edit"
-msgstr "Editare"
+msgid "ButtonBar|Edit"
+msgstr ""
 
-msgid "RenMov"
-msgstr "RedMut"
+msgid "ButtonBar|RenMov"
+msgstr ""
 
-msgid "Mkdir"
-msgstr "DirNou"
+msgid "ButtonBar|Mkdir"
+msgstr ""
 
 msgid " Not implemented yet "
 msgstr ""
@@ -2878,6 +2855,12 @@ msgstr " Alegeţi codul de intrare "
 
 msgid "-  < No translation >"
 msgstr "-  < Fără translatare >"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot save file %s:\n"
+"%s"
+msgstr " Eroare la salvarea fişierului. "
 
 #, c-format
 msgid ""
@@ -2980,20 +2963,20 @@ msgstr ""
 msgid "  Delete %s?  "
 msgstr "  Şterg %s?  "
 
-msgid "Static"
-msgstr "Static"
+msgid "ButtonBar|Static"
+msgstr ""
 
-msgid "Dynamc"
-msgstr "Dinamc"
+msgid "ButtonBar|Dynamc"
+msgstr ""
 
-msgid "Rescan"
-msgstr "Reîncarcă"
+msgid "ButtonBar|Rescan"
+msgstr ""
 
-msgid "Forget"
-msgstr "Uită"
+msgid "ButtonBar|Forget"
+msgstr ""
 
-msgid "Rmdir"
-msgstr "Ştgdir"
+msgid "ButtonBar|Rmdir"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -3140,10 +3123,6 @@ msgstr "Insert pe keypad"
 
 msgid "Delete on keypad"
 msgstr "Delete pe keypad"
-
-#, fuzzy
-msgid "Escape key"
-msgstr "Slash pe keypad"
 
 msgid "Enter on keypad"
 msgstr "Enter pe keypad"
@@ -3381,12 +3360,6 @@ msgstr " Nu pot clona programul copil "
 msgid "Empty output from child filter"
 msgstr "Ieşire vidă de la filtrul copil "
 
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Quit"
-msgstr ""
-
 msgid "ButtonBar|Ascii"
 msgstr ""
 
@@ -3399,15 +3372,6 @@ msgstr ""
 msgid "ButtonBar|Line"
 msgstr ""
 
-msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
 msgid "ButtonBar|UnWrap"
 msgstr ""
 
@@ -3415,9 +3379,6 @@ msgid "ButtonBar|Wrap"
 msgstr ""
 
 msgid "ButtonBar|HxSrch"
-msgstr ""
-
-msgid "ButtonBar|Search"
 msgstr ""
 
 msgid "ButtonBar|Raw"
@@ -3934,6 +3895,331 @@ msgstr "Eroare internă:"
 msgid "Changes to file lost"
 msgstr "S-au pierdut schimbările efectuate în fişier"
 
+#~ msgid "Do backups -->"
+#~ msgstr "Fă backup -->"
+
+#~ msgid "Extension:"
+#~ msgstr "Extensie:"
+
+#~ msgid "&New              C-n"
+#~ msgstr "&Nou                  C-n"
+
+#~ msgid "&Save              F2"
+#~ msgstr "&Salvează              F2"
+
+#~ msgid "Save &as...       F12"
+#~ msgstr "s&Alvează ca...       F12"
+
+#~ msgid "A&bout...            "
+#~ msgstr "des&Pre...               "
+
+#~ msgid "&Quit             F10"
+#~ msgstr "&Ieşire               F10"
+
+#~ msgid "&New            C-x k"
+#~ msgstr "&Nou                C-x k"
+
+#~ msgid "Copy to &file...     "
+#~ msgstr "copiază în &Fişier...    "
+
+#, fuzzy
+#~ msgid "&Toggle mark                 F3"
+#~ msgstr "in&Versează selecţia    F3"
+
+#, fuzzy
+#~ msgid "Mar&k columns              S-F3"
+#~ msgstr "se&Lectează coloanele S-F3"
+
+#, fuzzy
+#~ msgid "&Copy                        F5"
+#~ msgstr "&Copiază                F5"
+
+#, fuzzy
+#~ msgid "&Move                        F6"
+#~ msgstr "&Mută                   F6"
+
+#, fuzzy
+#~ msgid "&Delete                      F8"
+#~ msgstr "şter&Ge                 F8"
+
+#, fuzzy
+#~ msgid "&Next bookmark              M-j"
+#~ msgstr "&Nou                  C-n"
+
+#, fuzzy
+#~ msgid "&Undo                       C-u"
+#~ msgstr "&Anulează              C-u"
+
+#, fuzzy
+#~ msgid "&Beginning               C-PgUp"
+#~ msgstr "începu&T            C-PgUp"
+
+#, fuzzy
+#~ msgid "&End                     C-PgDn"
+#~ msgstr "&Sfârşit            C-PgDn"
+
+#, fuzzy
+#~ msgid "C&opy to clipfile           M-w"
+#~ msgstr "&Du-te la linia...               M-l"
+
+#, fuzzy
+#~ msgid "C&ut to clipfile            C-w"
+#~ msgstr "&Du-te la linia...               M-l"
+
+#, fuzzy
+#~ msgid "Toggle bookmar&k               "
+#~ msgstr "in&Versează selecţia    F3"
+
+#, fuzzy
+#~ msgid "&Next bookmark                 "
+#~ msgstr "&Nou                  C-n"
+
+#, fuzzy
+#~ msgid "Pre&v bookmark                 "
+#~ msgstr "Sor&tează...                     M-t"
+
+#, fuzzy
+#~ msgid "&Flush bookmark                "
+#~ msgstr "&Poşta...                           "
+
+#~ msgid "&Search...         F7"
+#~ msgstr "&Caută...          F7"
+
+#~ msgid "&Replace...        F4"
+#~ msgstr "în&Locuieşte...    F4"
+
+#~ msgid "&Go to line...            M-l"
+#~ msgstr "&Du-te la linia...               M-l"
+
+#, fuzzy
+#~ msgid "Encod&ing...             M-e"
+#~ msgstr "Sor&tează...                     M-t"
+
+#~ msgid "Delete macr&o...            "
+#~ msgstr "şterge com&Binaţia...               "
+
+#~ msgid "Sor&t...                 M-t"
+#~ msgstr "Sor&tează...                     M-t"
+
+#~ msgid "&Mail...                    "
+#~ msgstr "&Poşta...                           "
+
+#~ msgid "&Execute macro... C-x e, KEY"
+#~ msgstr "&Execută combinaţia...  C-x e, TASTA"
+
+#~ msgid "'ispell' s&pell check    M-$"
+#~ msgstr "corectare ortografică 'is&Pell'  M-$"
+
+#, fuzzy
+#~ msgid "Save setu&p"
+#~ msgstr "&Salvează setările"
+
+#~ msgid " Edit "
+#~ msgstr " Editare "
+
+#~ msgid " Sear/Repl "
+#~ msgstr " Caut/Înloc "
+
+#~ msgid " Command "
+#~ msgstr " Comenzi "
+
+#~ msgid " Options "
+#~ msgstr " Opţiuni "
+
+#~ msgid "Intuitive"
+#~ msgstr "Intuitivă"
+
+#~ msgid "Emacs"
+#~ msgstr "Emacs"
+
+#, fuzzy
+#~ msgid "User-defined"
+#~ msgstr "definit de &Utilizator:"
+
+#~ msgid "Key emulation"
+#~ msgstr "Emulare de taste"
+
+#~ msgid "Save"
+#~ msgstr "Salvează"
+
+#~ msgid "Mark"
+#~ msgstr "March."
+
+#~ msgid "Replac"
+#~ msgstr "Înloc."
+
+#~ msgid "Move"
+#~ msgstr "Mută"
+
+#~ msgid "Delete"
+#~ msgstr "Şterge"
+
+#~ msgid "PullDn"
+#~ msgstr "Meniu"
+
+#~ msgid " Copy "
+#~ msgstr " Copiază "
+
+#~ msgid " Move "
+#~ msgstr " Mută "
+
+#~ msgid " Delete "
+#~ msgstr " Şterge "
+
+#~ msgid "1Copy"
+#~ msgstr "1Copiază"
+
+#~ msgid "1Move"
+#~ msgstr "1Mută"
+
+#~ msgid "1Delete"
+#~ msgstr "1Şterge"
+
+#~ msgid "Index"
+#~ msgstr "Index"
+
+#~ msgid "Prev"
+#~ msgstr "Înapoi"
+
+#~ msgid "&Quick view     C-x q"
+#~ msgstr "&Vizualizare rapidă C-x q"
+
+#~ msgid "&Info           C-x i"
+#~ msgstr "&Info               C-x i"
+
+#~ msgid "&Rescan         C-r"
+#~ msgstr "&Re-scanează        C-r"
+
+#~ msgid "&View               F3"
+#~ msgstr "&Vizualizare            F3"
+
+#~ msgid "Vie&w file...         "
+#~ msgstr "vizualizare fi&Şier...    "
+
+#~ msgid "&Filtered view     M-!"
+#~ msgstr "vizualizare &Filtrată   M-!"
+
+#~ msgid "&Edit               F4"
+#~ msgstr "&Editare                F4"
+
+#~ msgid "&Copy               F5"
+#~ msgstr "&Copiază                F5"
+
+#~ msgid "c&Hmod           C-x c"
+#~ msgstr "c&Hmod                  C-x c"
+
+#~ msgid "&Link            C-x l"
+#~ msgstr "&Legatură               C-x l"
+
+#~ msgid "&SymLink         C-x s"
+#~ msgstr "legătură &Simbolică     C-x s"
+
+#~ msgid "edit s&Ymlink  C-x C-s"
+#~ msgstr "edit. legăt. sim&Bolică C-x C-s"
+
+#~ msgid "ch&Own           C-x o"
+#~ msgstr "ch&Own                  C-x o"
+
+#~ msgid "&Rename/Move        F6"
+#~ msgstr "&Redenumeşte/Mută       F6"
+
+#~ msgid "&Mkdir              F7"
+#~ msgstr "creează direc&Tor       F7"
+
+#~ msgid "&Delete             F8"
+#~ msgstr "şter&Ge                 F8"
+
+#~ msgid "&Quick cd          M-c"
+#~ msgstr "c&D rapid               M-c"
+
+#~ msgid "select &Group      M-+"
+#~ msgstr "selecteaz&Ă grup        M-+"
+
+#~ msgid "u&Nselect group    M-\\"
+#~ msgstr "deselectea&Ză grup      M-\\"
+
+#~ msgid "e&Xit              F10"
+#~ msgstr "&Ieşire                 F10"
+
+#~ msgid "&User menu          F2"
+#~ msgstr "meniu &Utilizator       F2"
+
+#~ msgid "&Find file            M-?"
+#~ msgstr "caută &Fişier                     M-?"
+
+#~ msgid "s&Wap panels          C-u"
+#~ msgstr "&Schimbă panourile                C-u"
+
+#~ msgid "&Compare directories  C-x d"
+#~ msgstr "&Compar directoarele              C-x d"
+
+#~ msgid "e&Xternal panelize    C-x !"
+#~ msgstr "panelare e&Xterioară              C-x !"
+
+#, fuzzy
+#~ msgid "Command &history      M-h"
+#~ msgstr " Istoricul comenzilor "
+
+#~ msgid "di&Rectory hotlist    C-\\"
+#~ msgstr "lista rapidă de di&Rectoare       C-\\"
+
+#~ msgid "&Background jobs      C-x j"
+#~ msgstr "sarcini de funda&L                C-x j"
+
+#~ msgid "learn &Keys..."
+#~ msgstr "învaţă &Tastele..."
+
+#~ msgid " &File "
+#~ msgstr " &Fişiere "
+
+#~ msgid " &Command "
+#~ msgstr " &Comenzi "
+
+#~ msgid "Menu"
+#~ msgstr "Meniu"
+
+#, fuzzy
+#~ msgid "n"
+#~ msgstr "Pe"
+
+#, fuzzy
+#~ msgid "Extension"
+#~ msgstr "Extensie:"
+
+#~ msgid "Size"
+#~ msgstr "Mărime"
+
+#~ msgid "MTime"
+#~ msgstr "DataM"
+
+#~ msgid "ATime"
+#~ msgstr "DataA"
+
+#~ msgid "CTime"
+#~ msgstr "DataC"
+
+#~ msgid "Inode"
+#~ msgstr "Inod"
+
+#~ msgid "RenMov"
+#~ msgstr "RedMut"
+
+#~ msgid "Static"
+#~ msgstr "Static"
+
+#~ msgid "Dynamc"
+#~ msgstr "Dinamc"
+
+#~ msgid "Forget"
+#~ msgstr "Uită"
+
+#~ msgid "Rmdir"
+#~ msgstr "Ştgdir"
+
+#, fuzzy
+#~ msgid "Escape key"
+#~ msgstr "Slash pe keypad"
+
 #, fuzzy
 #~ msgid "bind: Unknown command: `%s'"
 #~ msgstr " Comanda chown "
@@ -4034,15 +4320,8 @@ msgstr "S-au pierdut schimbările efectuate în fişier"
 #~ msgid "&Delete            F8"
 #~ msgstr "şter&Ge                 F8"
 
-#, fuzzy
-#~ msgid "Save setu&p..."
-#~ msgstr "&Salvează setările"
-
 #~ msgid " The command history is empty "
 #~ msgstr " Istoricul comenzilor este gol "
-
-#~ msgid "command &History"
-#~ msgstr "&Istoricul comenzilor "
 
 #~ msgid "Edit edi&tor menu file"
 #~ msgstr "editare meniuri edi&Tor"
@@ -4079,9 +4358,6 @@ msgstr "S-au pierdut schimbările efectuate în fişier"
 
 #~ msgid "&Type"
 #~ msgstr "&Tipul"
-
-#~ msgid "&Links"
-#~ msgstr "&Legături"
 
 #~ msgid "N&GID"
 #~ msgstr "N&GID"

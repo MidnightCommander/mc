@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-09 09:50+0300\n"
+"POT-Creation-Date: 2009-10-30 10:39+0200\n"
 "PO-Revision-Date: 2005-10-01 00:47+0200\n"
 "Last-Translator: Gergely Szabo <sub.o.gero@gmail.com>\n"
 "Language-Team: Hungarian <debian-l10n-hungarian@lists.debian.org>\n"
@@ -56,6 +56,29 @@ msgstr " \"%s\": speciális fájl "
 msgid " File %s is too large "
 msgstr " A(z) \"%s\" fájl túl nagy "
 
+msgid " About "
+msgstr " Névjegy "
+
+msgid ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       A user friendly text editor written\n"
+"           for the Midnight Commander.\n"
+msgstr ""
+"\n"
+"               Cooledit 3.11.5\n"
+"\n"
+" Copyright (C) 1996, Free Software Foundation \n"
+"\n"
+"             a Midnight Commander.\n"
+"     könnyen kezelhető szövegszerkesztője\n"
+
+msgid "&OK"
+msgstr "&OK"
+
 msgid "Macro recursion is too deep"
 msgstr "A makrórekurzió túl mély"
 
@@ -96,25 +119,28 @@ msgstr " A cső nem megnyitható írásra: "
 msgid " Cannot open file for writing: %s "
 msgstr " A(z) \"%s\" fájl nem megnyitható írásra. "
 
-msgid "Quick save "
+#, fuzzy
+msgid "&Quick save"
 msgstr "Gyors mentés "
 
-msgid "Safe save "
+#, fuzzy
+msgid "&Safe save"
 msgstr "Biztonságos mentés "
 
-msgid "Do backups -->"
-msgstr "Másolatok készítése -->"
+msgid "&Do backups with following extension:"
+msgstr ""
 
-msgid "&OK"
-msgstr "&OK"
-
-# ! az a szokoz direkt van ott!
-# backup-fájlok végződése, például ~
-msgid "Extension:"
-msgstr " Végződés:"
+msgid "Check &POSIX new line"
+msgstr ""
 
 msgid " Edit Save Mode "
 msgstr " Mentési mód "
+
+msgid "The file you are saving is not finished with a newline"
+msgstr ""
+
+msgid "C&ontinue"
+msgstr "&Tovább"
 
 msgid "&Do not change"
 msgstr "&Ne változtass"
@@ -185,9 +211,6 @@ msgid ""
 msgstr ""
 " A szöveg módosult a legutóbbi mentés óta. \n"
 " Ha továbblép, ezek a változások elvesznek. "
-
-msgid "C&ontinue"
-msgstr "&Tovább"
 
 msgid "Syntax file edit"
 msgstr "Szintaxisfájl szerkesztése"
@@ -404,216 +427,204 @@ msgstr "Zárolás át&vétele"
 msgid "&Ignore lock"
 msgstr "&Nem érdekes, tovább"
 
-msgid " About "
-msgstr " Névjegy "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"               Cooledit 3.11.5\n"
-"\n"
-" Copyright (C) 1996, Free Software Foundation \n"
-"\n"
-"             a Midnight Commander.\n"
-"     könnyen kezelhető szövegszerkesztője\n"
-
 # !! osszevetni az mc-ssel...
 msgid "&Open file..."
 msgstr "&Megnyitás..."
 
-msgid "&New              C-n"
-msgstr "Ú&j                    C-n"
+#, fuzzy
+msgid "&New"
+msgstr "&Név"
 
-msgid "&Save              F2"
-msgstr "M&entés                 F2"
+#, fuzzy
+msgid "Save &as..."
+msgstr "Beállítások m&entése"
 
-msgid "Save &as...       F12"
-msgstr "Mentés má&sként...     F12"
-
-msgid "&Insert file...   F15"
+#, fuzzy
+msgid "&Insert file..."
 msgstr "Fájl &beszúrása...     F15"
 
-msgid "Copy to &file...  C-f"
+#, fuzzy
+msgid "Cop&y to file..."
 msgstr "B&lokk mentése...      C-f"
 
 # a másik helyen nincs "..."
-msgid "&User menu...     F11"
+#, fuzzy
+msgid "&User menu..."
 msgstr "Felhasz&nálói menü     F11"
 
-msgid "A&bout...            "
-msgstr "Né&vjegy                  "
+#, fuzzy
+msgid "A&bout..."
+msgstr "Meg&jelenés..."
 
-msgid "&Quit             F10"
-msgstr "&Kilépés               F10"
+msgid "&Quit"
+msgstr "&Kilépés"
 
-msgid "&New            C-x k"
-msgstr "Ú&j                  C-x k"
+# több fájl kijelölése esetén jelenik meg
+#, fuzzy
+msgid "&Toggle mark"
+msgstr "Jel. &ki"
 
-msgid "Copy to &file...     "
-msgstr "B&lokk mentése...         "
+msgid "&Mark columns"
+msgstr ""
 
-msgid "&Toggle mark                 F3"
-msgstr "&Kijelölés                  F3"
-
-msgid "Mar&k columns              S-F3"
-msgstr "&Oszlopkijelölés          S-F3"
-
-msgid "Toggle &ins/overw           Ins"
+#, fuzzy
+msgid "Toggle &ins/overw"
 msgstr "&Beszúrás/átírás           Ins"
 
-msgid "&Copy                        F5"
-msgstr "&Másolás                    F5"
+#, fuzzy
+msgid "&Copy"
+msgstr "Másol"
 
-msgid "&Move                        F6"
-msgstr "Át&helyezés                 F6"
+msgid "&Move"
+msgstr "Át&helyezés"
 
-msgid "&Delete                      F8"
-msgstr "&Törlés                     F8"
+msgid "&Delete"
+msgstr "&Törlés"
 
-msgid "C&opy to clipfile         C-Ins"
+#, fuzzy
+msgid "C&opy to clipfile"
 msgstr "Máso&lás vágólapra       C-Ins"
 
-msgid "C&ut to clipfile          S-Del"
+#, fuzzy
+msgid "C&ut to clipfile"
 msgstr "Kivágás vágólapra        S-Del"
 
-msgid "&Paste from clipfile      S-Ins"
+#, fuzzy
+msgid "&Paste from clipfile"
 msgstr "Beillesztés vágólapról   S-Ins"
 
-msgid "Toggle bookmar&k            M-k"
+#, fuzzy
+msgid "Toggle bookmar&k"
 msgstr "&Könyvjelző                M-k"
 
-msgid "&Next bookmark              M-j"
-msgstr "Következő könyvjelző       M-j"
+#, fuzzy
+msgid "&Next bookmark"
+msgstr "Jel. b&e"
 
-msgid "Pre&v bookmark              M-i"
+#, fuzzy
+msgid "Pre&v bookmark"
 msgstr "Előző könyvjelző           M-i"
 
-msgid "&Flush bookmark             M-o"
+#, fuzzy
+msgid "&Flush bookmark"
 msgstr "Könyvjelző törlése         M-o"
 
-msgid "&Undo                       C-u"
-msgstr "Viss&zavonás               C-u"
+msgid "&Undo"
+msgstr ""
 
-msgid "&Beginning               C-PgUp"
-msgstr "Szöveg &elejére         C-PgUp"
+msgid "&Beginning"
+msgstr ""
 
-msgid "&End                     C-PgDn"
-msgstr "Szöveg &végére          C-PgDn"
+#, fuzzy
+msgid "&End"
+msgstr "&Inode"
 
-msgid "C&opy to clipfile           M-w"
-msgstr "Máso&lás vágólapra         M-w"
+# a gombsorban is szerepel (F7)
+#, fuzzy
+msgid "&Search..."
+msgstr "Keresés"
 
-msgid "C&ut to clipfile            C-w"
-msgstr "Kivágás vágólapra          C-w"
-
-msgid "&Paste from clipfile        C-y"
-msgstr "Beillesztés vágólapról     C-y"
-
-msgid "Toggle bookmar&k               "
-msgstr "&Könyvjelző                   "
-
-msgid "&Next bookmark                 "
-msgstr "Következő könyvjelző          "
-
-msgid "Pre&v bookmark                 "
-msgstr "Előző könyvjelző              "
-
-msgid "&Flush bookmark                "
-msgstr "Könyvjelző törlése            "
-
-msgid "&Search...         F7"
-msgstr "&Keresés...         F7"
-
-msgid "Search &again     F17"
+#, fuzzy
+msgid "Search &again"
 msgstr "Keresés &tovább    F17"
 
-msgid "&Replace...        F4"
-msgstr "&Csere...           F4"
+#, fuzzy
+msgid "&Replace..."
+msgstr "&Csere"
 
-msgid "&Go to line...            M-l"
-msgstr "&Ugrás adott sorra...    M-l"
+#, fuzzy
+msgid "&Go to line..."
+msgstr " Ugrás adott sorra "
 
-msgid "Toggle li&ne state        M-n"
+#, fuzzy
+msgid "Toggle li&ne state"
 msgstr "Sorszámok                M-n"
 
-msgid "Go to matching &bracket   M-b"
+#, fuzzy
+msgid "Go to matching &bracket"
 msgstr "Ugrás &zárójel párjára   M-b"
 
-msgid "Find declaration      A-Enter"
+#, fuzzy
+msgid "Find declaration"
 msgstr "Deklaráció keresése  A-Enter"
 
-msgid "Back from declaration     M--"
+#, fuzzy
+msgid "Back from declaration"
 msgstr "Vissza a deklarációtól   M--"
 
-msgid "Forward to declaration    M-+"
+#, fuzzy
+msgid "Forward to declaration"
 msgstr "Vissza a deklarációhoz   M-+"
 
 #, fuzzy
-msgid "Encod&ing...             M-e"
-msgstr "Kódolá&s                 C-t"
+msgid "Encod&ing..."
+msgstr "&Kódolás          C-t"
 
-msgid "Insert &literal...       C-q"
-msgstr "Karakter &beszúrása...   C-q"
-
-msgid "&Refresh screen          C-l"
+#, fuzzy
+msgid "&Refresh screen"
 msgstr "&Képernyő frissítése     C-l"
 
-msgid "&Start record macro      C-r"
+#, fuzzy
+msgid "&Start record macro"
 msgstr "&Makrórögzítés indítása  C-r"
 
-msgid "&Finish record macro...  C-r"
+#, fuzzy
+msgid "&Finish record macro..."
 msgstr "Makrórögzítés &vége...   C-r"
 
-msgid "&Execute macro...   C-a, KEY"
+#, fuzzy
+msgid "&Execute macro..."
 msgstr "Mak&rófuttatás... C-a <bill>"
 
-msgid "Delete macr&o...            "
-msgstr "Makró &törlése...           "
+#, fuzzy
+msgid "Delete macr&o..."
+msgstr " Makró törlése "
 
-msgid "Insert &date/time           "
-msgstr "&Dátum/idő beszúrás a       "
-
-msgid "Format p&aragraph        M-p"
-msgstr "Bekezdés &formázása      M-p"
-
-msgid "'ispell' s&pell check    C-p"
+#, fuzzy
+msgid "'ispell' s&pell check"
 msgstr "&Helyesírás-ellenőrzés   C-p"
 
-msgid "Sor&t...                 M-t"
-msgstr "Rendezé&s...             M-t"
+#, fuzzy
+msgid "&Mail..."
+msgstr "&Szűrő..."
 
-msgid "Paste o&utput of...      M-u"
+#, fuzzy
+msgid "Insert &literal..."
+msgstr "Karakter &beszúrása...   C-q"
+
+#, fuzzy
+msgid "Insert &date/time"
+msgstr "&Dátum/idő beszúrás a       "
+
+#, fuzzy
+msgid "Format p&aragraph"
+msgstr "Bekezdés &formázása      M-p"
+
+#, fuzzy
+msgid "Sor&t..."
+msgstr "&Rendezési mód..."
+
+#, fuzzy
+msgid "Paste o&utput of..."
 msgstr "K&imenet beillesztése... M-u"
 
-msgid "E&xternal Formatter      F19"
+#, fuzzy
+msgid "E&xternal formatter"
 msgstr "Kü&lső formázó           F19"
-
-msgid "&Mail...                    "
-msgstr "&E-mail...                  "
-
-msgid "&Execute macro... C-x e, KEY"
-msgstr "Mak&rófuttatás...C-x e bill>"
-
-msgid "'ispell' s&pell check    M-$"
-msgstr "&Helyesírás-ellenőrzés   M-$"
 
 msgid "&General...  "
 msgstr "Á&ltalános..."
 
-msgid "&Save mode..."
+#, fuzzy
+msgid "Save &mode..."
 msgstr "&Mentési mód..."
 
-msgid "Learn &Keys..."
+#, fuzzy
+msgid "Learn &keys..."
 msgstr "&Billentyűk..."
 
-msgid "Syntax &Highlighting..."
+#, fuzzy
+msgid "Syntax &highlighting..."
 msgstr "&Szintaktikus szövegkiemelés"
 
 msgid "S&yntax file"
@@ -622,33 +633,34 @@ msgstr "Szintaxisfájl szerkesztése"
 msgid "&Menu file"
 msgstr "Me&nüfájl szerkesztése"
 
-msgid "Save setu&p"
+msgid "&Save setup"
 msgstr "Beállítások m&entése"
 
-msgid " File "
-msgstr " Fájl "
+#, fuzzy
+msgid "&File"
+msgstr "Fájl"
 
-msgid " Edit "
-msgstr " Szerkesztés "
+#, fuzzy
+msgid "&Edit"
+msgstr "Szerk"
 
-msgid " Sear/Repl "
-msgstr " Keresés "
+# a gombsorban is szerepel (F7)
+#, fuzzy
+msgid "&Search"
+msgstr "Keresés"
 
-# menü
-msgid " Command "
-msgstr " Eszközök "
+# ez is egy prompt (azert a ":")
+#, fuzzy
+msgid "&Command"
+msgstr "Parancs:"
 
-msgid " Options "
-msgstr " Beállítások "
+#, fuzzy
+msgid "For&mat"
+msgstr "Normális"
 
-msgid "Intuitive"
-msgstr "Intuitív"
-
-msgid "Emacs"
-msgstr "Emacs"
-
-msgid "User-defined"
-msgstr "Saját"
+#, fuzzy
+msgid "&Options"
+msgstr " Beállí&tások "
 
 msgid "None"
 msgstr "Nincs"
@@ -661,9 +673,6 @@ msgstr "Sortörés"
 
 msgid "Word wrap line length: "
 msgstr "Sortörési pozíció: "
-
-msgid "Tab spacing: "
-msgstr "Tabulátor mérete: "
 
 msgid "Cursor beyond end of line"
 msgstr "Kurzor a sor vége mögött"
@@ -687,12 +696,15 @@ msgstr "Fájlbeli &pozíció mentése"
 msgid "Confir&m before saving"
 msgstr "M&entés előtt megerősítés"
 
-msgid "Fill tabs with &spaces"
-msgstr "&Tabulálás szóközökkel"
-
 # stringhosszra ügyelni
 msgid "&Return does autoindent"
 msgstr "Új sor &auto. behúzás"
+
+msgid "Tab spacing: "
+msgstr "Tabulátor mérete: "
+
+msgid "Fill tabs with &spaces"
+msgstr "&Tabulálás szóközökkel"
 
 msgid "&Backspace through tabs"
 msgstr "&Backspace: tabokat egyszerre"
@@ -703,37 +715,44 @@ msgstr "Hamis &fél-tabulátorok"
 msgid "Wrap mode"
 msgstr "Tördelés"
 
-msgid "Key emulation"
-msgstr "Billentyűzet-emuláció"
-
 msgid " Editor options "
 msgstr " A szövegszerkesztő beállításai "
 
-# "Segítség" nem mindenhol férne ki, lásd funkciógomb-sor
-msgid "Help"
+msgid "ButtonBar|Help"
 msgstr "Súgó"
 
-msgid "Save"
+msgid "ButtonBar|Save"
 msgstr "Mentés"
 
-msgid "Mark"
-msgstr "Blokk"
+#, fuzzy
+msgid "ButtonBar|Mark"
+msgstr "Értelm"
 
-msgid "Replac"
-msgstr "Csere"
+#, fuzzy
+msgid "ButtonBar|Replac"
+msgstr "Nyers"
 
-msgid "Copy"
-msgstr "Másol"
+#, fuzzy
+msgid "ButtonBar|Copy"
+msgstr "Súgó"
 
-msgid "Move"
-msgstr "Áthely"
+#, fuzzy
+msgid "ButtonBar|Move"
+msgstr "Mentés"
 
-# F-key label
-msgid "Delete"
-msgstr "Töröl"
+msgid "ButtonBar|Search"
+msgstr "Keresés"
 
-msgid "PullDn"
-msgstr "Főmenü"
+#, fuzzy
+msgid "ButtonBar|Delete"
+msgstr "Súgó"
+
+#, fuzzy
+msgid "ButtonBar|PullDn"
+msgstr "Súgó"
+
+msgid "ButtonBar|Quit"
+msgstr "Kilép"
 
 msgid " Load syntax file "
 msgstr " Szintaxisfájl betöltése "
@@ -1208,6 +1227,9 @@ msgstr "\"Insert\" a kijelölés."
 msgid " Permission "
 msgstr " Jogosultságok "
 
+msgid " File "
+msgstr " Fájl "
+
 msgid "Chmod command"
 msgstr "Jogosultságok beállítása (Chmod)"
 
@@ -1479,15 +1501,14 @@ msgstr ""
 "A \"~/%s\" fájl formátuma a 3.0-s verzióval módosult. Lemásolhatja azt a(z) "
 "\"%smc.ext\" fájlból, vagy elkészítheti az alapján."
 
-msgid " Copy "
-msgstr " Másolás "
+msgid "DialogTitle|Copy"
+msgstr ""
 
-# tree esetén csak áthelyezést jelent
-msgid " Move "
-msgstr " Átnevezés/áthelyezés "
+msgid "DialogTitle|Move"
+msgstr ""
 
-msgid " Delete "
-msgstr " Törlés "
+msgid "DialogTitle|Delete"
+msgstr ""
 
 msgid " Cannot make the hardlink "
 msgstr " Nem sikerült létrehozni a hard linket "
@@ -1650,9 +1671,6 @@ msgstr ""
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr "Nem másolódott át a teljes fájl. Megtartja a célfájlt?"
 
-msgid "&Delete"
-msgstr "&Törlés"
-
 msgid "&Keep"
 msgstr "&Megtartás"
 
@@ -1780,14 +1798,14 @@ msgstr ""
 msgid "Directory scanning"
 msgstr "Könyvtárak átfésülése"
 
-msgid "1Copy"
-msgstr "1másolása"
+msgid "FileOperation|Copy"
+msgstr ""
 
-msgid "1Move"
-msgstr "1áthelyezése"
+msgid "FileOperation|Move"
+msgstr ""
 
-msgid "1Delete"
-msgstr "1törlése"
+msgid "FileOperation|Delete"
+msgstr ""
 
 # pl.: "dfdsfds" nevű fájl törlése?
 # (Copy, Move, Delete)
@@ -1825,6 +1843,10 @@ msgstr " az alábbi maszkkal:"
 # ! promptokban, mint pl. "copy ... to:"
 msgid " to:"
 msgstr " ide:"
+
+#, c-format
+msgid "%s?"
+msgstr ""
 
 msgid " Cannot operate on \"..\"! "
 msgstr " A \"..\" könyvtárral ez nem lehetséges! "
@@ -1979,9 +2001,6 @@ msgstr "&Belépés a könyvtárba"
 msgid "&Again"
 msgstr "Ú&jra"
 
-msgid "&Quit"
-msgstr "&Kilépés"
-
 msgid "Pane&lize"
 msgstr "Listát a &panelra"
 
@@ -2061,14 +2080,17 @@ msgstr " Belső programhiba: linkterület duplán kezdve "
 msgid " Cannot find node %s in help file "
 msgstr " Nem található \"%s\" bejegyzés a súgóban "
 
-msgid "Index"
-msgstr "Index"
+# "Segítség" nem mindenhol férne ki, lásd funkciógomb-sor
+msgid "Help"
+msgstr "Súgó"
 
-msgid "Prev"
-msgstr "Előző"
+#, fuzzy
+msgid "ButtonBar|Index"
+msgstr "Hex"
 
-msgid "&Move"
-msgstr "Át&helyezés"
+#, fuzzy
+msgid "ButtonBar|Prev"
+msgstr "Értelm"
 
 msgid "&Remove"
 msgstr "&Törlés"
@@ -2384,11 +2406,13 @@ msgstr " Valóban ki szeretne lépni a Midnight Commanderből? "
 msgid "&Listing mode..."
 msgstr "&Listázási mód..."
 
-msgid "&Quick view     C-x q"
-msgstr "&Gyorsnézet       C-x q"
+#, fuzzy
+msgid "&Quick view"
+msgstr "Gyors mentés "
 
-msgid "&Info           C-x i"
-msgstr "&Információk      C-x i"
+#, fuzzy
+msgid "&Info"
+msgstr "&Inode"
 
 msgid "&Sort order..."
 msgstr "&Rendezési mód..."
@@ -2397,7 +2421,7 @@ msgid "&Filter..."
 msgstr "&Szűrő..."
 
 #, fuzzy
-msgid "&Encoding...    M-e"
+msgid "&Encoding..."
 msgstr "&Kódolás          C-t"
 
 msgid "&Network link..."
@@ -2412,101 +2436,118 @@ msgstr "Sh&ell-kapcsolat..."
 msgid "SM&B link..."
 msgstr "SM&B-kapcsolat..."
 
-msgid "&Rescan         C-r"
-msgstr "Frissí&tés          C-r"
+# 7 karakteres még lehet (funkciógomb-sor)
+#, fuzzy
+msgid "&Rescan"
+msgstr "Frissít"
 
-msgid "&View               F3"
-msgstr "Megteki&ntés                   F3"
+#, fuzzy
+msgid "&View"
+msgstr "Megnéz"
 
-msgid "Vie&w file...         "
-msgstr "Fájl megtek&intése...            "
+#, fuzzy
+msgid "Vie&w file..."
+msgstr " Fájl megjelenítése "
 
-msgid "&Filtered view     M-!"
-msgstr "Szűrt né&zet                  M-!"
+#, fuzzy
+msgid "&Filtered view"
+msgstr " Szűrt nézet "
 
-msgid "&Edit               F4"
-msgstr "Sz&erkesztés                   F4"
+msgid "C&hmod"
+msgstr ""
 
-msgid "&Copy               F5"
-msgstr "&Másolás                       F5"
+#, fuzzy
+msgid "&Link"
+msgstr "&Linkek"
 
-msgid "c&Hmod           C-x c"
-msgstr "Jogosultságok (&Chmod)      C-x c"
+#, fuzzy
+msgid "&SymLink"
+msgstr "&Linkek"
 
-msgid "&Link            C-x l"
-msgstr "&Hard link                  C-x l"
+#, fuzzy
+msgid "Edit s&ymlink"
+msgstr " Szimbolikus link módosítása "
 
-msgid "&SymLink         C-x s"
-msgstr "&Szimbolikus link           C-x s"
+msgid "Ch&own"
+msgstr ""
 
-msgid "edit s&Ymlink  C-x C-s"
-msgstr "Szimb. &link módosítása   C-x C-s"
-
-msgid "ch&Own           C-x o"
-msgstr "T&ulajdonos (Chown)         C-x o"
-
-msgid "&Advanced chown       "
+#, fuzzy
+msgid "&Advanced chown"
 msgstr "H&aladó \"Chown\" (tulajdonos)     "
 
-msgid "&Rename/Move        F6"
-msgstr "Átne&vezés/áthelyezés          F6"
+#, fuzzy
+msgid "&Rename/Move"
+msgstr "&Törlés"
 
-msgid "&Mkdir              F7"
-msgstr "Új könyvtá&r                   F7"
+#, fuzzy
+msgid "&Mkdir"
+msgstr "ÚjKvtr"
 
-msgid "&Delete             F8"
-msgstr "&Törlés                        F8"
+#, fuzzy
+msgid "&Quick cd"
+msgstr "Gyors könyvtárváltás (\"cd\")"
 
-msgid "&Quick cd          M-c"
-msgstr "Gy&ors könyvtárváltás         M-c"
+#, fuzzy
+msgid "Select &group"
+msgstr "&Csoportot"
 
-msgid "select &Group      M-+"
-msgstr "Fájlok ki&jelölése            M-+"
+#, fuzzy
+msgid "U&nselect group"
+msgstr " Kijelölések megszüntetése "
 
-msgid "u&Nselect group    M-\\"
-msgstr "Kijelölés me&gszüntetése      M-\\"
-
-msgid "reverse selec&Tion M-*"
+#, fuzzy
+msgid "Reverse selec&tion"
 msgstr "Kijelölés megfor&dítása       M-*"
 
-msgid "e&Xit              F10"
-msgstr "&Kilépés                      F10"
+#, fuzzy
+msgid "E&xit"
+msgstr "&Javítsd ki"
 
-msgid "&User menu          F2"
-msgstr "&Felhasználói menü             F2"
+#, fuzzy
+msgid "&User menu"
+msgstr " Felhasználói menü "
 
 msgid "&Directory tree"
 msgstr "Köny&vtárfa"
 
-msgid "&Find file            M-?"
-msgstr "&Fájlkeresés               M-?"
+#, fuzzy
+msgid "&Find file"
+msgstr "Fájl keresése"
 
-msgid "s&Wap panels          C-u"
-msgstr "Panelek fel&cserélése      C-u"
+msgid "S&wap panels"
+msgstr ""
 
-msgid "switch &Panels on/off C-o"
+#, fuzzy
+msgid "Switch &panels on/off"
 msgstr "Pane&lek ki/be             C-o"
 
-msgid "&Compare directories  C-x d"
-msgstr "&Könyvtárak összevetése  C-x d"
+#, fuzzy
+msgid "&Compare directories"
+msgstr " Könyvtárak összehasonlítása "
 
-msgid "e&Xternal panelize    C-x !"
-msgstr "Külső &panel-parancs     C-x !"
+#, fuzzy
+msgid "E&xternal panelize"
+msgstr "Külső panel-parancs"
 
-msgid "show directory s&Izes"
+#, fuzzy
+msgid "Show directory s&izes"
 msgstr "Könyvtár&méret"
 
-msgid "Command &history      M-h"
-msgstr " Korábbi parancsok         M-h"
+#, fuzzy
+msgid "Command &history"
+msgstr "Ko&rábbi parancsok"
 
-msgid "di&Rectory hotlist    C-\\"
-msgstr "Könyvtár-&gyorslista       C-\\"
+#, fuzzy
+msgid "Di&rectory hotlist"
+msgstr "Könyvtár-gyorslista"
 
-msgid "&Active VFS list      C-x a"
+#, fuzzy
+msgid "&Active VFS list"
 msgstr "&Aktív VFS-lista         C-x a"
 
-msgid "&Background jobs      C-x j"
-msgstr "&Háttérfolyamatok        C-x j"
+#, fuzzy
+msgid "&Background jobs"
+msgstr "Háttérfolyamatok"
 
 msgid "&Undelete files (ext2fs only)"
 msgstr "&Törölt fájlok visszaállítása"
@@ -2530,41 +2571,30 @@ msgstr "&Alapbeállítások..."
 msgid "&Layout..."
 msgstr "Meg&jelenés..."
 
-msgid "c&Onfirmation..."
+#, fuzzy
+msgid "C&onfirmation..."
 msgstr "&Megerősítések..."
 
 msgid "&Display bits..."
 msgstr "&Kivitel és bevitel..."
 
-msgid "learn &Keys..."
-msgstr "&Billentyűk..."
-
 msgid "&Virtual FS..."
 msgstr "&Virtuális fájlrendszer..."
 
-msgid "&Save setup"
-msgstr "Beállítások m&entése"
-
-msgid " &Above "
+#, fuzzy
+msgid "&Above"
 msgstr " Fe&nt "
 
-msgid " &Left "
+#, fuzzy
+msgid "&Left"
 msgstr " &Bal "
 
-msgid " &File "
-msgstr " &Fájl "
-
-# menü
-msgid " &Command "
-msgstr " &Eszközök "
-
-msgid " &Options "
-msgstr " Beállí&tások "
-
-msgid " &Below "
+#, fuzzy
+msgid "&Below"
 msgstr " &Lent "
 
-msgid " &Right "
+#, fuzzy
+msgid "&Right"
 msgstr " &Jobb "
 
 msgid " Information "
@@ -2581,8 +2611,9 @@ msgstr ""
 " kell egy frissítést. További részletek a kézikönyvben (amely  \n"
 " a \"man mc\" paranccsal jeleníthető meg). "
 
-msgid "Menu"
-msgstr "Menü"
+#, fuzzy
+msgid "ButtonBar|Menu"
+msgstr "Hex"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "Nincs beállítva a TERM környezeti változó.\n"
@@ -2745,43 +2776,34 @@ msgid "SUB-DIR"
 msgstr "AL-KVTR"
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
-msgid "u"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|u"
 msgstr ""
-
-#, fuzzy
-msgid "Unsorted"
-msgstr "Nincs rende&zés"
 
 msgid "&Unsorted"
 msgstr "Nincs rende&zés"
 
 #. TRANSLATORS: one single character to represent 'name' sort mode
-#, fuzzy
-msgid "n"
-msgstr "Be"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|n"
+msgstr ""
 
 msgid "&Name"
 msgstr "&Név"
 
 #. TRANSLATORS: one single character to represent 'extension' sort mode
-msgid "e"
-msgstr ""
-
-# ! az a szokoz direkt van ott!
-# backup-fájlok végződése, például ~
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 #, fuzzy
-msgid "Extension"
-msgstr " Végződés:"
+msgid "sort|e"
+msgstr "Nincs rende&zés"
 
 msgid "&Extension"
 msgstr "&Végződés (kiterjesztés)"
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
-msgid "s"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|s"
 msgstr ""
-
-msgid "Size"
-msgstr "Méret"
 
 msgid "&Size"
 msgstr "Mé&ret"
@@ -2791,35 +2813,26 @@ msgid "Block Size"
 msgstr " Fájlméret "
 
 #. TRANSLATORS: one single character to represent 'Modify time' sort mode
-msgid "m"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|m"
 msgstr ""
-
-# 12 karakteres lehet
-msgid "MTime"
-msgstr "TartalMódIdő"
 
 # tartalomra vonatkozik
 msgid "&Modify time"
 msgstr "(Tartalmi) mó&dosítás ideje"
 
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
-msgid "a"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|a"
 msgstr ""
-
-# 12 karakteres lehet
-msgid "ATime"
-msgstr "Elérési idő"
 
 msgid "&Access time"
 msgstr "&Elérés ideje"
 
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
-msgid "h"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|h"
 msgstr ""
-
-# 12 karakteres lehet
-msgid "CTime"
-msgstr "AdatváltIdő"
 
 # metaadat-módosulás, például chmod dátuma
 msgid "C&Hange time"
@@ -2836,11 +2849,9 @@ msgid "Nl"
 msgstr "Ln"
 
 #. TRANSLATORS: one single character to represent 'inode' sort mode
-msgid "i"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|i"
 msgstr ""
-
-msgid "Inode"
-msgstr "Inode"
 
 msgid "&Inode"
 msgstr "&Inode"
@@ -2884,17 +2895,19 @@ msgstr "A beállított formátum hibás; az alapértelmezés lép életbe."
 msgid " Do you really want to execute? "
 msgstr " Biztosan futtatni kívánja a programot? "
 
-msgid "View"
+msgid "ButtonBar|View"
 msgstr "Megnéz"
 
-msgid "Edit"
+msgid "ButtonBar|Edit"
 msgstr "Szerk"
 
-msgid "RenMov"
-msgstr "Áthely"
+#, fuzzy
+msgid "ButtonBar|RenMov"
+msgstr "Hex"
 
-msgid "Mkdir"
-msgstr "ÚjKvtr"
+#, fuzzy
+msgid "ButtonBar|Mkdir"
+msgstr "Szerk"
 
 msgid " Not implemented yet "
 msgstr " Még nincs megvalósítva "
@@ -2923,6 +2936,14 @@ msgstr "Válasszon kódlapot"
 
 msgid "-  < No translation >"
 msgstr "-  < Nincs konverzió >"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot save file %s:\n"
+"%s"
+msgstr ""
+" Nem sikerült a mentés: \n"
+" %s "
 
 #, c-format
 msgid ""
@@ -3027,23 +3048,25 @@ msgstr ""
 msgid "  Delete %s?  "
 msgstr "  %s törlése?  "
 
-msgid "Static"
-msgstr "Statik"
+#, fuzzy
+msgid "ButtonBar|Static"
+msgstr "Keresés"
 
-# 7 karakteres még lehet (funkciógomb-sor)
-msgid "Dynamc"
-msgstr "Dinamik"
+#, fuzzy
+msgid "ButtonBar|Dynamc"
+msgstr "Nyers"
 
-# 7 karakteres még lehet (funkciógomb-sor)
-msgid "Rescan"
-msgstr "Frissít"
+#, fuzzy
+msgid "ButtonBar|Rescan"
+msgstr "Nyers"
 
-msgid "Forget"
-msgstr "Kihagy"
+#, fuzzy
+msgid "ButtonBar|Forget"
+msgstr "Formáz"
 
-# 7 karakteres még lehet (funkciógomb-sor)
-msgid "Rmdir"
-msgstr "KvtTörl"
+#, fuzzy
+msgid "ButtonBar|Rmdir"
+msgstr "Szerk"
 
 #, c-format
 msgid ""
@@ -3190,10 +3213,6 @@ msgstr "\"Insert\" - numer."
 
 msgid "Delete on keypad"
 msgstr "\"Delete\" - numer."
-
-#, fuzzy
-msgid "Escape key"
-msgstr "Szóköz - numerikus"
 
 msgid "Enter on keypad"
 msgstr "\"Enter\" - numer."
@@ -3431,12 +3450,6 @@ msgstr " Nem sikerült programot indítani "
 msgid "Empty output from child filter"
 msgstr "A szűrő kimenete üres."
 
-msgid "ButtonBar|Help"
-msgstr "Súgó"
-
-msgid "ButtonBar|Quit"
-msgstr "Kilép"
-
 msgid "ButtonBar|Ascii"
 msgstr "ASCII"
 
@@ -3449,15 +3462,6 @@ msgstr "Ugrás"
 msgid "ButtonBar|Line"
 msgstr "UgrSor"
 
-msgid "ButtonBar|View"
-msgstr "Megnéz"
-
-msgid "ButtonBar|Edit"
-msgstr "Szerk"
-
-msgid "ButtonBar|Save"
-msgstr "Mentés"
-
 msgid "ButtonBar|UnWrap"
 msgstr "NemTör"
 
@@ -3466,9 +3470,6 @@ msgstr "SorTör"
 
 msgid "ButtonBar|HxSrch"
 msgstr "HexKer"
-
-msgid "ButtonBar|Search"
-msgstr "Keresés"
 
 msgid "ButtonBar|Raw"
 msgstr "Nyers"
@@ -3990,6 +3991,329 @@ msgstr "Belső programhiba:"
 msgid "Changes to file lost"
 msgstr "A fájl módosításai elvesztek"
 
+#~ msgid "Do backups -->"
+#~ msgstr "Másolatok készítése -->"
+
+# ! az a szokoz direkt van ott!
+# backup-fájlok végződése, például ~
+#~ msgid "Extension:"
+#~ msgstr " Végződés:"
+
+#~ msgid "&New              C-n"
+#~ msgstr "Ú&j                    C-n"
+
+#~ msgid "&Save              F2"
+#~ msgstr "M&entés                 F2"
+
+#~ msgid "Save &as...       F12"
+#~ msgstr "Mentés má&sként...     F12"
+
+#~ msgid "A&bout...            "
+#~ msgstr "Né&vjegy                  "
+
+#~ msgid "&Quit             F10"
+#~ msgstr "&Kilépés               F10"
+
+#~ msgid "&New            C-x k"
+#~ msgstr "Ú&j                  C-x k"
+
+#~ msgid "Copy to &file...     "
+#~ msgstr "B&lokk mentése...         "
+
+#~ msgid "&Toggle mark                 F3"
+#~ msgstr "&Kijelölés                  F3"
+
+#~ msgid "Mar&k columns              S-F3"
+#~ msgstr "&Oszlopkijelölés          S-F3"
+
+#~ msgid "&Copy                        F5"
+#~ msgstr "&Másolás                    F5"
+
+#~ msgid "&Move                        F6"
+#~ msgstr "Át&helyezés                 F6"
+
+#~ msgid "&Delete                      F8"
+#~ msgstr "&Törlés                     F8"
+
+#~ msgid "&Next bookmark              M-j"
+#~ msgstr "Következő könyvjelző       M-j"
+
+#~ msgid "&Undo                       C-u"
+#~ msgstr "Viss&zavonás               C-u"
+
+#~ msgid "&Beginning               C-PgUp"
+#~ msgstr "Szöveg &elejére         C-PgUp"
+
+#~ msgid "&End                     C-PgDn"
+#~ msgstr "Szöveg &végére          C-PgDn"
+
+#~ msgid "C&opy to clipfile           M-w"
+#~ msgstr "Máso&lás vágólapra         M-w"
+
+#~ msgid "C&ut to clipfile            C-w"
+#~ msgstr "Kivágás vágólapra          C-w"
+
+#~ msgid "&Paste from clipfile        C-y"
+#~ msgstr "Beillesztés vágólapról     C-y"
+
+#~ msgid "Toggle bookmar&k               "
+#~ msgstr "&Könyvjelző                   "
+
+#~ msgid "&Next bookmark                 "
+#~ msgstr "Következő könyvjelző          "
+
+#~ msgid "Pre&v bookmark                 "
+#~ msgstr "Előző könyvjelző              "
+
+#~ msgid "&Flush bookmark                "
+#~ msgstr "Könyvjelző törlése            "
+
+#~ msgid "&Search...         F7"
+#~ msgstr "&Keresés...         F7"
+
+#~ msgid "&Replace...        F4"
+#~ msgstr "&Csere...           F4"
+
+#~ msgid "&Go to line...            M-l"
+#~ msgstr "&Ugrás adott sorra...    M-l"
+
+#, fuzzy
+#~ msgid "Encod&ing...             M-e"
+#~ msgstr "Kódolá&s                 C-t"
+
+#~ msgid "Delete macr&o...            "
+#~ msgstr "Makró &törlése...           "
+
+#~ msgid "Sor&t...                 M-t"
+#~ msgstr "Rendezé&s...             M-t"
+
+#~ msgid "&Mail...                    "
+#~ msgstr "&E-mail...                  "
+
+#~ msgid "&Execute macro... C-x e, KEY"
+#~ msgstr "Mak&rófuttatás...C-x e bill>"
+
+#~ msgid "'ispell' s&pell check    M-$"
+#~ msgstr "&Helyesírás-ellenőrzés   M-$"
+
+#~ msgid "Save setu&p"
+#~ msgstr "Beállítások m&entése"
+
+#~ msgid " Edit "
+#~ msgstr " Szerkesztés "
+
+#~ msgid " Sear/Repl "
+#~ msgstr " Keresés "
+
+# menü
+#~ msgid " Command "
+#~ msgstr " Eszközök "
+
+#~ msgid " Options "
+#~ msgstr " Beállítások "
+
+#~ msgid "Intuitive"
+#~ msgstr "Intuitív"
+
+#~ msgid "Emacs"
+#~ msgstr "Emacs"
+
+#~ msgid "User-defined"
+#~ msgstr "Saját"
+
+#~ msgid "Key emulation"
+#~ msgstr "Billentyűzet-emuláció"
+
+#~ msgid "Save"
+#~ msgstr "Mentés"
+
+#~ msgid "Mark"
+#~ msgstr "Blokk"
+
+#~ msgid "Replac"
+#~ msgstr "Csere"
+
+#~ msgid "Move"
+#~ msgstr "Áthely"
+
+# F-key label
+#~ msgid "Delete"
+#~ msgstr "Töröl"
+
+#~ msgid "PullDn"
+#~ msgstr "Főmenü"
+
+#~ msgid " Copy "
+#~ msgstr " Másolás "
+
+# tree esetén csak áthelyezést jelent
+#~ msgid " Move "
+#~ msgstr " Átnevezés/áthelyezés "
+
+#~ msgid " Delete "
+#~ msgstr " Törlés "
+
+#~ msgid "1Copy"
+#~ msgstr "1másolása"
+
+#~ msgid "1Move"
+#~ msgstr "1áthelyezése"
+
+#~ msgid "1Delete"
+#~ msgstr "1törlése"
+
+#~ msgid "Index"
+#~ msgstr "Index"
+
+#~ msgid "Prev"
+#~ msgstr "Előző"
+
+#~ msgid "&Quick view     C-x q"
+#~ msgstr "&Gyorsnézet       C-x q"
+
+#~ msgid "&Info           C-x i"
+#~ msgstr "&Információk      C-x i"
+
+#~ msgid "&Rescan         C-r"
+#~ msgstr "Frissí&tés          C-r"
+
+#~ msgid "&View               F3"
+#~ msgstr "Megteki&ntés                   F3"
+
+#~ msgid "Vie&w file...         "
+#~ msgstr "Fájl megtek&intése...            "
+
+#~ msgid "&Filtered view     M-!"
+#~ msgstr "Szűrt né&zet                  M-!"
+
+#~ msgid "&Edit               F4"
+#~ msgstr "Sz&erkesztés                   F4"
+
+#~ msgid "&Copy               F5"
+#~ msgstr "&Másolás                       F5"
+
+#~ msgid "c&Hmod           C-x c"
+#~ msgstr "Jogosultságok (&Chmod)      C-x c"
+
+#~ msgid "&Link            C-x l"
+#~ msgstr "&Hard link                  C-x l"
+
+#~ msgid "&SymLink         C-x s"
+#~ msgstr "&Szimbolikus link           C-x s"
+
+#~ msgid "edit s&Ymlink  C-x C-s"
+#~ msgstr "Szimb. &link módosítása   C-x C-s"
+
+#~ msgid "ch&Own           C-x o"
+#~ msgstr "T&ulajdonos (Chown)         C-x o"
+
+#~ msgid "&Rename/Move        F6"
+#~ msgstr "Átne&vezés/áthelyezés          F6"
+
+#~ msgid "&Mkdir              F7"
+#~ msgstr "Új könyvtá&r                   F7"
+
+#~ msgid "&Delete             F8"
+#~ msgstr "&Törlés                        F8"
+
+#~ msgid "&Quick cd          M-c"
+#~ msgstr "Gy&ors könyvtárváltás         M-c"
+
+#~ msgid "select &Group      M-+"
+#~ msgstr "Fájlok ki&jelölése            M-+"
+
+#~ msgid "u&Nselect group    M-\\"
+#~ msgstr "Kijelölés me&gszüntetése      M-\\"
+
+#~ msgid "e&Xit              F10"
+#~ msgstr "&Kilépés                      F10"
+
+#~ msgid "&User menu          F2"
+#~ msgstr "&Felhasználói menü             F2"
+
+#~ msgid "&Find file            M-?"
+#~ msgstr "&Fájlkeresés               M-?"
+
+#~ msgid "s&Wap panels          C-u"
+#~ msgstr "Panelek fel&cserélése      C-u"
+
+#~ msgid "&Compare directories  C-x d"
+#~ msgstr "&Könyvtárak összevetése  C-x d"
+
+#~ msgid "e&Xternal panelize    C-x !"
+#~ msgstr "Külső &panel-parancs     C-x !"
+
+#~ msgid "Command &history      M-h"
+#~ msgstr " Korábbi parancsok         M-h"
+
+#~ msgid "di&Rectory hotlist    C-\\"
+#~ msgstr "Könyvtár-&gyorslista       C-\\"
+
+#~ msgid "&Background jobs      C-x j"
+#~ msgstr "&Háttérfolyamatok        C-x j"
+
+#~ msgid "learn &Keys..."
+#~ msgstr "&Billentyűk..."
+
+#~ msgid " &File "
+#~ msgstr " &Fájl "
+
+# menü
+#~ msgid " &Command "
+#~ msgstr " &Eszközök "
+
+#~ msgid "Menu"
+#~ msgstr "Menü"
+
+#, fuzzy
+#~ msgid "n"
+#~ msgstr "Be"
+
+# ! az a szokoz direkt van ott!
+# backup-fájlok végződése, például ~
+#, fuzzy
+#~ msgid "Extension"
+#~ msgstr " Végződés:"
+
+#~ msgid "Size"
+#~ msgstr "Méret"
+
+# 12 karakteres lehet
+#~ msgid "MTime"
+#~ msgstr "TartalMódIdő"
+
+# 12 karakteres lehet
+#~ msgid "ATime"
+#~ msgstr "Elérési idő"
+
+# 12 karakteres lehet
+#~ msgid "CTime"
+#~ msgstr "AdatváltIdő"
+
+#~ msgid "Inode"
+#~ msgstr "Inode"
+
+#~ msgid "RenMov"
+#~ msgstr "Áthely"
+
+#~ msgid "Static"
+#~ msgstr "Statik"
+
+# 7 karakteres még lehet (funkciógomb-sor)
+#~ msgid "Dynamc"
+#~ msgstr "Dinamik"
+
+#~ msgid "Forget"
+#~ msgstr "Kihagy"
+
+# 7 karakteres még lehet (funkciógomb-sor)
+#~ msgid "Rmdir"
+#~ msgstr "KvtTörl"
+
+#, fuzzy
+#~ msgid "Escape key"
+#~ msgstr "Szóköz - numerikus"
+
 #~ msgid "bind: Wrong argument number, bind <key> <command>"
 #~ msgstr "Bind: helytelen argumentumszám, bind <kulcs> <parancs>"
 
@@ -4111,15 +4435,8 @@ msgstr "A fájl módosításai elvesztek"
 #~ msgid "&Delete            F8"
 #~ msgstr "&Törlés              F8"
 
-#, fuzzy
-#~ msgid "Save setu&p..."
-#~ msgstr "Beállítások m&entése"
-
 #~ msgid " The command history is empty "
 #~ msgstr " A korábbi parancsok listája üres "
-
-#~ msgid "command &History"
-#~ msgstr "Ko&rábbi parancsok"
 
 #~ msgid "Edit edi&tor menu file"
 #~ msgstr "&Szerkesztő menüjének szerk."
@@ -4159,9 +4476,6 @@ msgstr "A fájl módosításai elvesztek"
 
 #~ msgid "&Type"
 #~ msgstr "&Típus"
-
-#~ msgid "&Links"
-#~ msgstr "&Linkek"
 
 #~ msgid "N&GID"
 #~ msgstr "N&GID"

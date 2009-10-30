@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.38\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-09 09:50+0300\n"
+"POT-Creation-Date: 2009-10-30 10:39+0200\n"
 "PO-Revision-Date: 1997-07-23 00:04-0400\n"
 "Last-Translator: Spiros Papadimitriou <spapadim+@cs.cmu.edu>\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
@@ -52,6 +52,23 @@ msgstr "Δημηουργία νέου καταλόγου"
 msgid " File %s is too large "
 msgstr " Αρχείο πολύ μεγάλο: "
 
+#, fuzzy
+msgid " About "
+msgstr " Τέλος "
+
+msgid ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       A user friendly text editor written\n"
+"           for the Midnight Commander.\n"
+msgstr ""
+
+msgid "&OK"
+msgstr "&Εντάξει"
+
 msgid "Macro recursion is too deep"
 msgstr ""
 
@@ -91,23 +108,29 @@ msgstr " Άνοιγμα αρχείου προς ανάγνωση ανεπιτυ�
 msgid " Cannot open file for writing: %s "
 msgstr " Άνοιγμα αρχείου προς ανάγνωση ανεπιτυχής: "
 
-msgid "Quick save "
+#, fuzzy
+msgid "&Quick save"
 msgstr "Ταχεία αποθήκευση "
 
-msgid "Safe save "
+#, fuzzy
+msgid "&Safe save"
 msgstr "Ασφαλής αποθήκευση "
 
-msgid "Do backups -->"
+msgid "&Do backups with following extension:"
 msgstr ""
 
-msgid "&OK"
-msgstr "&Εντάξει"
-
-msgid "Extension:"
-msgstr "Επέκταση:"
+msgid "Check &POSIX new line"
+msgstr ""
 
 msgid " Edit Save Mode "
 msgstr ""
+
+msgid "The file you are saving is not finished with a newline"
+msgstr ""
+
+#, fuzzy
+msgid "C&ontinue"
+msgstr "Συνέχεια"
 
 msgid "&Do not change"
 msgstr ""
@@ -177,10 +200,6 @@ msgid ""
 " Current text was modified without a file save. \n"
 " Continue discards these changes. "
 msgstr ""
-
-#, fuzzy
-msgid "C&ontinue"
-msgstr "Συνέχεια"
 
 msgid "Syntax file edit"
 msgstr ""
@@ -396,228 +415,179 @@ msgid "&Ignore lock"
 msgstr ""
 
 #, fuzzy
-msgid " About "
-msgstr " Τέλος "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-
-#, fuzzy
 msgid "&Open file..."
 msgstr "Άνοιγμα με..."
 
-msgid "&New              C-n"
-msgstr "&Νέο                    C-n"
+msgid "&New"
+msgstr ""
 
-msgid "&Save              F2"
-msgstr "Απο&θήκευση             F2"
-
-msgid "Save &as...       F12"
+#, fuzzy
+msgid "Save &as..."
 msgstr "Αποθήκευση &ως...       F12"
 
-msgid "&Insert file...   F15"
+#, fuzzy
+msgid "&Insert file..."
 msgstr "&Παρεμβολή αρχείου...   F15"
 
-msgid "Copy to &file...  C-f"
+#, fuzzy
+msgid "Cop&y to file..."
 msgstr "αντιγραφή σε αρ&χείο... C-f"
 
 #, fuzzy
-msgid "&User menu...     F11"
+msgid "&User menu..."
 msgstr "&Παρεμβολή αρχείου...   F15"
 
-msgid "A&bout...            "
-msgstr "Πε&ρί...                   "
+#, fuzzy
+msgid "A&bout..."
+msgstr " Τέλος "
 
-msgid "&Quit             F10"
-msgstr "&Τέλος                  F10"
+msgid "&Quit"
+msgstr ""
 
-msgid "&New            C-x k"
-msgstr "&Νέο                  C-x k"
+msgid "&Toggle mark"
+msgstr ""
 
-msgid "Copy to &file...     "
+msgid "&Mark columns"
+msgstr ""
+
+msgid "Toggle &ins/overw"
+msgstr ""
+
+#, fuzzy
+msgid "&Copy"
+msgstr "Αντιγραφή"
+
+msgid "&Move"
+msgstr ""
+
+msgid "&Delete"
+msgstr ""
+
+#, fuzzy
+msgid "C&opy to clipfile"
 msgstr "αντιγραφή σε αρ&χείο       "
 
 #, fuzzy
-msgid "&Toggle mark                 F3"
-msgstr "Απο&θήκευση             F2"
-
-#, fuzzy
-msgid "Mar&k columns              S-F3"
+msgid "C&ut to clipfile"
 msgstr "&Νέο                    C-n"
 
-msgid "Toggle &ins/overw           Ins"
+msgid "&Paste from clipfile"
 msgstr ""
 
 #, fuzzy
-msgid "&Copy                        F5"
+msgid "Toggle bookmar&k"
 msgstr "Απο&θήκευση             F2"
 
 #, fuzzy
-msgid "&Move                        F6"
-msgstr "Απο&θήκευση             F2"
-
-#, fuzzy
-msgid "&Delete                      F8"
-msgstr "Απο&θήκευση             F2"
-
-#, fuzzy
-msgid "C&opy to clipfile         C-Ins"
-msgstr "αντιγραφή σε αρ&χείο       "
-
-msgid "C&ut to clipfile          S-Del"
-msgstr ""
-
-msgid "&Paste from clipfile      S-Ins"
-msgstr ""
-
-#, fuzzy
-msgid "Toggle bookmar&k            M-k"
-msgstr "Απο&θήκευση             F2"
-
-#, fuzzy
-msgid "&Next bookmark              M-j"
+msgid "&Next bookmark"
 msgstr "&Νέο                    C-n"
 
 #, fuzzy
-msgid "Pre&v bookmark              M-i"
+msgid "Pre&v bookmark"
 msgstr "Απο&θήκευση             F2"
 
 #, fuzzy
-msgid "&Flush bookmark             M-o"
+msgid "&Flush bookmark"
 msgstr "Απο&θήκευση             F2"
 
+msgid "&Undo"
+msgstr ""
+
+msgid "&Beginning"
+msgstr ""
+
+msgid "&End"
+msgstr ""
+
 #, fuzzy
-msgid "&Undo                       C-u"
+msgid "&Search..."
+msgstr "Αναζήτηση"
+
+#, fuzzy
+msgid "Search &again"
+msgstr "Αναζήτηση"
+
+#, fuzzy
+msgid "&Replace..."
+msgstr "&Αντικατάσταση"
+
+#, fuzzy
+msgid "&Go to line..."
+msgstr " Επίσκεψη γραμμής "
+
+msgid "Toggle li&ne state"
+msgstr ""
+
+msgid "Go to matching &bracket"
+msgstr ""
+
+msgid "Find declaration"
+msgstr ""
+
+msgid "Back from declaration"
+msgstr ""
+
+msgid "Forward to declaration"
+msgstr ""
+
+#, fuzzy
+msgid "Encod&ing..."
 msgstr "&Νέο                    C-n"
 
-#, fuzzy
-msgid "&Beginning               C-PgUp"
-msgstr "&Νέο                    C-n"
-
-#, fuzzy
-msgid "&End                     C-PgDn"
-msgstr "&Νέο                    C-n"
-
-#, fuzzy
-msgid "C&opy to clipfile           M-w"
-msgstr "αντιγραφή σε αρ&χείο       "
-
-#, fuzzy
-msgid "C&ut to clipfile            C-w"
-msgstr "&Νέο                    C-n"
-
-msgid "&Paste from clipfile        C-y"
+msgid "&Refresh screen"
 msgstr ""
 
-msgid "Toggle bookmar&k               "
+msgid "&Start record macro"
+msgstr ""
+
+msgid "&Finish record macro..."
 msgstr ""
 
 #, fuzzy
-msgid "&Next bookmark                 "
-msgstr "&Νέο                    C-n"
+msgid "&Execute macro..."
+msgstr " Εκτελ. μακροεντολής"
 
 #, fuzzy
-msgid "Pre&v bookmark                 "
-msgstr "Απο&θήκευση             F2"
+msgid "Delete macr&o..."
+msgstr " Διαγραφή μακροεντολής "
 
-#, fuzzy
-msgid "&Flush bookmark                "
-msgstr "Απο&θήκευση             F2"
-
-msgid "&Search...         F7"
+msgid "'ispell' s&pell check"
 msgstr ""
 
-msgid "Search &again     F17"
-msgstr ""
-
-msgid "&Replace...        F4"
-msgstr ""
-
-msgid "&Go to line...            M-l"
-msgstr ""
-
-msgid "Toggle li&ne state        M-n"
-msgstr ""
-
-msgid "Go to matching &bracket   M-b"
-msgstr ""
-
-msgid "Find declaration      A-Enter"
-msgstr ""
-
-msgid "Back from declaration     M--"
-msgstr ""
-
-msgid "Forward to declaration    M-+"
+msgid "&Mail..."
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             M-e"
-msgstr "&Νέο                    C-n"
+msgid "Insert &literal..."
+msgstr "&Παρεμβολή αρχείου...   F15"
 
-msgid "Insert &literal...       C-q"
+#, fuzzy
+msgid "Insert &date/time"
+msgstr " Παρεμβολή αρχείου "
+
+msgid "Format p&aragraph"
 msgstr ""
 
-msgid "&Refresh screen          C-l"
+msgid "Sor&t..."
 msgstr ""
 
-msgid "&Start record macro      C-r"
+msgid "Paste o&utput of..."
 msgstr ""
 
-msgid "&Finish record macro...  C-r"
-msgstr ""
-
-msgid "&Execute macro...   C-a, KEY"
-msgstr ""
-
-msgid "Delete macr&o...            "
-msgstr ""
-
-msgid "Insert &date/time           "
-msgstr ""
-
-msgid "Format p&aragraph        M-p"
-msgstr ""
-
-msgid "'ispell' s&pell check    C-p"
-msgstr ""
-
-msgid "Sor&t...                 M-t"
-msgstr ""
-
-msgid "Paste o&utput of...      M-u"
-msgstr ""
-
-msgid "E&xternal Formatter      F19"
-msgstr ""
-
-msgid "&Mail...                    "
-msgstr ""
-
-msgid "&Execute macro... C-x e, KEY"
-msgstr ""
-
-msgid "'ispell' s&pell check    M-$"
+msgid "E&xternal formatter"
 msgstr ""
 
 msgid "&General...  "
 msgstr ""
 
-msgid "&Save mode..."
+msgid "Save &mode..."
 msgstr ""
 
-msgid "Learn &Keys..."
+msgid "Learn &keys..."
 msgstr ""
 
 #, fuzzy
-msgid "Syntax &Highlighting..."
+msgid "Syntax &highlighting..."
 msgstr "τονισμός σύντα&ξης"
 
 #, fuzzy
@@ -628,33 +598,31 @@ msgstr " Αποθήκευση αρχείου "
 msgid "&Menu file"
 msgstr "Άνοιγμα με..."
 
-#, fuzzy
-msgid "Save setu&p"
-msgstr " Αποθήκευση ως "
+msgid "&Save setup"
+msgstr ""
 
-msgid " File "
+#, fuzzy
+msgid "&File"
 msgstr " Αρχείο "
 
-msgid " Edit "
-msgstr " Επεξεργασία "
+#, fuzzy
+msgid "&Edit"
+msgstr "Επεξεργασία"
 
-msgid " Sear/Repl "
-msgstr " Αναζήτηση/Αντικατάσταση"
+#, fuzzy
+msgid "&Search"
+msgstr "Αναζήτηση"
 
-msgid " Command "
-msgstr " Εντολή "
+#, fuzzy
+msgid "&Command"
+msgstr "Εντολή"
 
-msgid " Options "
+msgid "For&mat"
+msgstr ""
+
+#, fuzzy
+msgid "&Options"
 msgstr "Επιλογές "
-
-msgid "Intuitive"
-msgstr ""
-
-msgid "Emacs"
-msgstr ""
-
-msgid "User-defined"
-msgstr ""
 
 msgid "None"
 msgstr "Κανένα"
@@ -666,9 +634,6 @@ msgid "Type writer wrap"
 msgstr ""
 
 msgid "Word wrap line length: "
-msgstr ""
-
-msgid "Tab spacing: "
 msgstr ""
 
 msgid "Cursor beyond end of line"
@@ -693,10 +658,13 @@ msgstr " Αποθήκευση αρχείου "
 msgid "Confir&m before saving"
 msgstr ""
 
-msgid "Fill tabs with &spaces"
+msgid "&Return does autoindent"
 msgstr ""
 
-msgid "&Return does autoindent"
+msgid "Tab spacing: "
+msgstr ""
+
+msgid "Fill tabs with &spaces"
 msgstr ""
 
 msgid "&Backspace through tabs"
@@ -708,34 +676,37 @@ msgstr ""
 msgid "Wrap mode"
 msgstr ""
 
-msgid "Key emulation"
-msgstr "Εξομοίοση πληκτρολογίου"
-
 msgid " Editor options "
 msgstr " Επιλογές επεξεργαστή "
 
-msgid "Help"
-msgstr "Βοήθεια"
-
-msgid "Save"
-msgstr "Αποθήκευση"
-
-msgid "Mark"
+msgid "ButtonBar|Help"
 msgstr ""
 
-msgid "Replac"
+msgid "ButtonBar|Save"
 msgstr ""
 
-msgid "Copy"
-msgstr "Αντιγραφή"
+msgid "ButtonBar|Mark"
+msgstr ""
 
-msgid "Move"
-msgstr "Μετακίνηση"
+msgid "ButtonBar|Replac"
+msgstr ""
 
-msgid "Delete"
-msgstr "Διαγραφή"
+msgid "ButtonBar|Copy"
+msgstr ""
 
-msgid "PullDn"
+msgid "ButtonBar|Move"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Delete"
+msgstr ""
+
+msgid "ButtonBar|PullDn"
+msgstr ""
+
+msgid "ButtonBar|Quit"
 msgstr ""
 
 msgid " Load syntax file "
@@ -1169,6 +1140,9 @@ msgstr ""
 msgid " Permission "
 msgstr ""
 
+msgid " File "
+msgstr " Αρχείο "
+
 msgid "Chmod command"
 msgstr ""
 
@@ -1417,13 +1391,13 @@ msgid ""
 "it."
 msgstr ""
 
-msgid " Copy "
+msgid "DialogTitle|Copy"
 msgstr ""
 
-msgid " Move "
+msgid "DialogTitle|Move"
 msgstr ""
 
-msgid " Delete "
+msgid "DialogTitle|Delete"
 msgstr ""
 
 msgid " Cannot make the hardlink "
@@ -1545,9 +1519,6 @@ msgstr ""
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr ""
 
-msgid "&Delete"
-msgstr ""
-
 msgid "&Keep"
 msgstr ""
 
@@ -1646,13 +1617,13 @@ msgstr ""
 msgid "Directory scanning"
 msgstr ""
 
-msgid "1Copy"
+msgid "FileOperation|Copy"
 msgstr ""
 
-msgid "1Move"
+msgid "FileOperation|Move"
 msgstr ""
 
-msgid "1Delete"
+msgid "FileOperation|Delete"
 msgstr ""
 
 #, no-c-format
@@ -1682,6 +1653,10 @@ msgid " with source mask:"
 msgstr ""
 
 msgid " to:"
+msgstr ""
+
+#, c-format
+msgid "%s?"
 msgstr ""
 
 msgid " Cannot operate on \"..\"! "
@@ -1822,9 +1797,6 @@ msgstr ""
 msgid "&Again"
 msgstr ""
 
-msgid "&Quit"
-msgstr ""
-
 msgid "Pane&lize"
 msgstr ""
 
@@ -1909,13 +1881,13 @@ msgstr ""
 msgid " Cannot find node %s in help file "
 msgstr ""
 
-msgid "Index"
+msgid "Help"
+msgstr "Βοήθεια"
+
+msgid "ButtonBar|Index"
 msgstr ""
 
-msgid "Prev"
-msgstr ""
-
-msgid "&Move"
+msgid "ButtonBar|Prev"
 msgstr ""
 
 msgid "&Remove"
@@ -2208,10 +2180,11 @@ msgstr ""
 msgid "&Listing mode..."
 msgstr ""
 
-msgid "&Quick view     C-x q"
-msgstr ""
+#, fuzzy
+msgid "&Quick view"
+msgstr "Ταχεία αποθήκευση "
 
-msgid "&Info           C-x i"
+msgid "&Info"
 msgstr ""
 
 msgid "&Sort order..."
@@ -2221,7 +2194,7 @@ msgid "&Filter..."
 msgstr ""
 
 #, fuzzy
-msgid "&Encoding...    M-e"
+msgid "&Encoding..."
 msgstr "&Νέο                    C-n"
 
 msgid "&Network link..."
@@ -2236,101 +2209,101 @@ msgstr ""
 msgid "SM&B link..."
 msgstr ""
 
-msgid "&Rescan         C-r"
+msgid "&Rescan"
 msgstr ""
 
-msgid "&View               F3"
+#, fuzzy
+msgid "&View"
+msgstr "Προβολή"
+
+#, fuzzy
+msgid "Vie&w file..."
+msgstr "Άνοιγμα με..."
+
+msgid "&Filtered view"
 msgstr ""
 
-msgid "Vie&w file...         "
+msgid "C&hmod"
 msgstr ""
 
-msgid "&Filtered view     M-!"
+msgid "&Link"
 msgstr ""
 
-msgid "&Edit               F4"
+msgid "&SymLink"
 msgstr ""
 
-msgid "&Copy               F5"
+msgid "Edit s&ymlink"
 msgstr ""
 
-msgid "c&Hmod           C-x c"
+msgid "Ch&own"
 msgstr ""
 
-msgid "&Link            C-x l"
+msgid "&Advanced chown"
 msgstr ""
 
-msgid "&SymLink         C-x s"
+msgid "&Rename/Move"
 msgstr ""
 
-msgid "edit s&Ymlink  C-x C-s"
+msgid "&Mkdir"
 msgstr ""
 
-msgid "ch&Own           C-x o"
+#, fuzzy
+msgid "&Quick cd"
+msgstr "Ταχεία αποθήκευση "
+
+#, fuzzy
+msgid "Select &group"
+msgstr "Επιλογή εικονιδίου"
+
+msgid "U&nselect group"
 msgstr ""
 
-msgid "&Advanced chown       "
+msgid "Reverse selec&tion"
 msgstr ""
 
-msgid "&Rename/Move        F6"
-msgstr ""
+#, fuzzy
+msgid "E&xit"
+msgstr "Επεξεργασία"
 
-msgid "&Mkdir              F7"
-msgstr ""
-
-msgid "&Delete             F8"
-msgstr ""
-
-msgid "&Quick cd          M-c"
-msgstr ""
-
-msgid "select &Group      M-+"
-msgstr ""
-
-msgid "u&Nselect group    M-\\"
-msgstr ""
-
-msgid "reverse selec&Tion M-*"
-msgstr ""
-
-msgid "e&Xit              F10"
-msgstr ""
-
-msgid "&User menu          F2"
-msgstr ""
+#, fuzzy
+msgid "&User menu"
+msgstr "&Παρεμβολή αρχείου...   F15"
 
 msgid "&Directory tree"
 msgstr ""
 
-msgid "&Find file            M-?"
+#, fuzzy
+msgid "&Find file"
+msgstr "Άνοιγμα με..."
+
+msgid "S&wap panels"
 msgstr ""
 
-msgid "s&Wap panels          C-u"
+msgid "Switch &panels on/off"
 msgstr ""
 
-msgid "switch &Panels on/off C-o"
+msgid "&Compare directories"
 msgstr ""
 
-msgid "&Compare directories  C-x d"
+msgid "E&xternal panelize"
 msgstr ""
 
-msgid "e&Xternal panelize    C-x !"
+msgid "Show directory s&izes"
 msgstr ""
 
-msgid "show directory s&Izes"
+#, fuzzy
+msgid "Command &history"
+msgstr " Εντολή "
+
+msgid "Di&rectory hotlist"
 msgstr ""
 
-msgid "Command &history      M-h"
+msgid "&Active VFS list"
 msgstr ""
 
-msgid "di&Rectory hotlist    C-\\"
-msgstr ""
-
-msgid "&Active VFS list      C-x a"
-msgstr ""
-
-msgid "&Background jobs      C-x j"
-msgstr ""
+#, fuzzy
+msgid "&Background jobs"
+msgstr "Πρός τα &πίσω"
 
 msgid "&Undelete files (ext2fs only)"
 msgstr ""
@@ -2353,40 +2326,26 @@ msgstr ""
 msgid "&Layout..."
 msgstr ""
 
-msgid "c&Onfirmation..."
+msgid "C&onfirmation..."
 msgstr ""
 
 msgid "&Display bits..."
 msgstr ""
 
-msgid "learn &Keys..."
-msgstr ""
-
 msgid "&Virtual FS..."
 msgstr ""
 
-msgid "&Save setup"
+#, fuzzy
+msgid "&Above"
+msgstr "Μετακίνηση"
+
+msgid "&Left"
 msgstr ""
 
-msgid " &Above "
+msgid "&Below"
 msgstr ""
 
-msgid " &Left "
-msgstr ""
-
-msgid " &File "
-msgstr ""
-
-msgid " &Command "
-msgstr ""
-
-msgid " &Options "
-msgstr ""
-
-msgid " &Below "
-msgstr ""
-
-msgid " &Right "
+msgid "&Right"
 msgstr ""
 
 msgid " Information "
@@ -2399,7 +2358,7 @@ msgid ""
 " the details.                                           "
 msgstr ""
 
-msgid "Menu"
+msgid "ButtonBar|Menu"
 msgstr ""
 
 msgid "The TERM environment variable is unset!\n"
@@ -2552,39 +2511,33 @@ msgid "SUB-DIR"
 msgstr ""
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
-msgid "u"
-msgstr ""
-
-msgid "Unsorted"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|u"
 msgstr ""
 
 msgid "&Unsorted"
 msgstr ""
 
 #. TRANSLATORS: one single character to represent 'name' sort mode
-msgid "n"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|n"
 msgstr ""
 
 msgid "&Name"
 msgstr ""
 
 #. TRANSLATORS: one single character to represent 'extension' sort mode
-msgid "e"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|e"
 msgstr ""
-
-#, fuzzy
-msgid "Extension"
-msgstr "Επέκταση:"
 
 msgid "&Extension"
 msgstr ""
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
-msgid "s"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|s"
 msgstr ""
-
-msgid "Size"
-msgstr "Μέγεθος"
 
 msgid "&Size"
 msgstr ""
@@ -2593,30 +2546,24 @@ msgid "Block Size"
 msgstr ""
 
 #. TRANSLATORS: one single character to represent 'Modify time' sort mode
-msgid "m"
-msgstr ""
-
-msgid "MTime"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|m"
 msgstr ""
 
 msgid "&Modify time"
 msgstr ""
 
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
-msgid "a"
-msgstr ""
-
-msgid "ATime"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|a"
 msgstr ""
 
 msgid "&Access time"
 msgstr ""
 
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
-msgid "h"
-msgstr ""
-
-msgid "CTime"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|h"
 msgstr ""
 
 msgid "C&Hange time"
@@ -2632,10 +2579,8 @@ msgid "Nl"
 msgstr ""
 
 #. TRANSLATORS: one single character to represent 'inode' sort mode
-msgid "i"
-msgstr ""
-
-msgid "Inode"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|i"
 msgstr ""
 
 msgid "&Inode"
@@ -2677,16 +2622,16 @@ msgstr ""
 msgid " Do you really want to execute? "
 msgstr ""
 
-msgid "View"
-msgstr "Προβολή"
-
-msgid "Edit"
-msgstr "Επεξεργασία"
-
-msgid "RenMov"
+msgid "ButtonBar|View"
 msgstr ""
 
-msgid "Mkdir"
+msgid "ButtonBar|Edit"
+msgstr ""
+
+msgid "ButtonBar|RenMov"
+msgstr ""
+
+msgid "ButtonBar|Mkdir"
 msgstr ""
 
 msgid " Not implemented yet "
@@ -2716,6 +2661,12 @@ msgstr ""
 
 msgid "-  < No translation >"
 msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+"Cannot save file %s:\n"
+"%s"
+msgstr " Σφάλμα αποθήκευσης αρχείου. "
 
 #, c-format
 msgid ""
@@ -2815,19 +2766,19 @@ msgstr ""
 msgid "  Delete %s?  "
 msgstr ""
 
-msgid "Static"
+msgid "ButtonBar|Static"
 msgstr ""
 
-msgid "Dynamc"
+msgid "ButtonBar|Dynamc"
 msgstr ""
 
-msgid "Rescan"
+msgid "ButtonBar|Rescan"
 msgstr ""
 
-msgid "Forget"
+msgid "ButtonBar|Forget"
 msgstr ""
 
-msgid "Rmdir"
+msgid "ButtonBar|Rmdir"
 msgstr ""
 
 #, c-format
@@ -2972,9 +2923,6 @@ msgid "Insert on keypad"
 msgstr ""
 
 msgid "Delete on keypad"
-msgstr ""
-
-msgid "Escape key"
 msgstr ""
 
 msgid "Enter on keypad"
@@ -3194,12 +3142,6 @@ msgstr ""
 msgid "Empty output from child filter"
 msgstr ""
 
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Quit"
-msgstr ""
-
 msgid "ButtonBar|Ascii"
 msgstr ""
 
@@ -3212,15 +3154,6 @@ msgstr ""
 msgid "ButtonBar|Line"
 msgstr ""
 
-msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
 msgid "ButtonBar|UnWrap"
 msgstr ""
 
@@ -3228,9 +3161,6 @@ msgid "ButtonBar|Wrap"
 msgstr ""
 
 msgid "ButtonBar|HxSrch"
-msgstr ""
-
-msgid "ButtonBar|Search"
 msgstr ""
 
 msgid "ButtonBar|Raw"
@@ -3730,6 +3660,105 @@ msgstr ""
 
 msgid "Changes to file lost"
 msgstr ""
+
+#~ msgid "Extension:"
+#~ msgstr "Επέκταση:"
+
+#~ msgid "&New              C-n"
+#~ msgstr "&Νέο                    C-n"
+
+#~ msgid "&Save              F2"
+#~ msgstr "Απο&θήκευση             F2"
+
+#~ msgid "A&bout...            "
+#~ msgstr "Πε&ρί...                   "
+
+#~ msgid "&Quit             F10"
+#~ msgstr "&Τέλος                  F10"
+
+#~ msgid "&New            C-x k"
+#~ msgstr "&Νέο                  C-x k"
+
+#~ msgid "Copy to &file...     "
+#~ msgstr "αντιγραφή σε αρ&χείο       "
+
+#, fuzzy
+#~ msgid "&Toggle mark                 F3"
+#~ msgstr "Απο&θήκευση             F2"
+
+#, fuzzy
+#~ msgid "Mar&k columns              S-F3"
+#~ msgstr "&Νέο                    C-n"
+
+#, fuzzy
+#~ msgid "&Copy                        F5"
+#~ msgstr "Απο&θήκευση             F2"
+
+#, fuzzy
+#~ msgid "&Move                        F6"
+#~ msgstr "Απο&θήκευση             F2"
+
+#, fuzzy
+#~ msgid "&Delete                      F8"
+#~ msgstr "Απο&θήκευση             F2"
+
+#, fuzzy
+#~ msgid "&Undo                       C-u"
+#~ msgstr "&Νέο                    C-n"
+
+#, fuzzy
+#~ msgid "&Beginning               C-PgUp"
+#~ msgstr "&Νέο                    C-n"
+
+#, fuzzy
+#~ msgid "&End                     C-PgDn"
+#~ msgstr "&Νέο                    C-n"
+
+#, fuzzy
+#~ msgid "C&opy to clipfile           M-w"
+#~ msgstr "αντιγραφή σε αρ&χείο       "
+
+#, fuzzy
+#~ msgid "&Next bookmark                 "
+#~ msgstr "&Νέο                    C-n"
+
+#, fuzzy
+#~ msgid "Pre&v bookmark                 "
+#~ msgstr "Απο&θήκευση             F2"
+
+#, fuzzy
+#~ msgid "&Flush bookmark                "
+#~ msgstr "Απο&θήκευση             F2"
+
+#, fuzzy
+#~ msgid "Encod&ing...             M-e"
+#~ msgstr "&Νέο                    C-n"
+
+#, fuzzy
+#~ msgid "Save setu&p"
+#~ msgstr " Αποθήκευση ως "
+
+#~ msgid " Edit "
+#~ msgstr " Επεξεργασία "
+
+#~ msgid " Sear/Repl "
+#~ msgstr " Αναζήτηση/Αντικατάσταση"
+
+#~ msgid "Key emulation"
+#~ msgstr "Εξομοίοση πληκτρολογίου"
+
+#~ msgid "Save"
+#~ msgstr "Αποθήκευση"
+
+#~ msgid "Delete"
+#~ msgstr "Διαγραφή"
+
+#, fuzzy
+#~ msgid "Extension"
+#~ msgstr "Επέκταση:"
+
+#~ msgid "Size"
+#~ msgstr "Μέγεθος"
 
 #~ msgid " Emacs key: "
 #~ msgstr " Πλήκτρο Emacs: "

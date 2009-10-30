@@ -7,14 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-09 09:50+0300\n"
+"POT-Creation-Date: 2009-10-30 10:39+0200\n"
 "PO-Revision-Date: 2009-02-16 19:45+0300\n"
 "Last-Translator: Andrius Štikonas <stikonas@gmail.com>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%"
+"100<10 || n%100>=20) ? 1 : 2;\n"
 
 msgid " Choose syntax highlighting "
 msgstr " Parinkite sintaksės ryškinimą "
@@ -51,6 +52,29 @@ msgstr " %s nėra įprastinis failas "
 #, c-format
 msgid " File %s is too large "
 msgstr " Failas %s yra per didelis "
+
+msgid " About "
+msgstr " Apie "
+
+msgid ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       A user friendly text editor written\n"
+"           for the Midnight Commander.\n"
+msgstr ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       Naudotojui draugiškas redaktorius, \n"
+"         parašytas „Midnight Commander“.\n"
+
+msgid "&OK"
+msgstr "&Gerai"
 
 msgid "Macro recursion is too deep"
 msgstr "Makrokomandų rekursija yra per gili"
@@ -89,23 +113,28 @@ msgstr " Nepavyko atverti konvejerio rašymui: "
 msgid " Cannot open file for writing: %s "
 msgstr " Nepavyko atverti konvejerio rašymui: "
 
-msgid "Quick save "
+#, fuzzy
+msgid "&Quick save"
 msgstr "Greitas įrašymas "
 
-msgid "Safe save "
+#, fuzzy
+msgid "&Safe save"
 msgstr "Saugus įrašymas "
 
-msgid "Do backups -->"
-msgstr "Daryti kopijas -->"
+msgid "&Do backups with following extension:"
+msgstr ""
 
-msgid "&OK"
-msgstr "&Gerai"
-
-msgid "Extension:"
-msgstr "Plėtinys:"
+msgid "Check &POSIX new line"
+msgstr ""
 
 msgid " Edit Save Mode "
 msgstr " Keisti įrašymo režimą "
+
+msgid "The file you are saving is not finished with a newline"
+msgstr ""
+
+msgid "C&ontinue"
+msgstr "&Tęsti"
 
 msgid "&Do not change"
 msgstr ""
@@ -176,9 +205,6 @@ msgid ""
 msgstr ""
 " Dabartinis tekstas buvo pakeistas ir neįrašytas į failą. \n"
 " Tęsdami atmesite visus pakeitimus. "
-
-msgid "C&ontinue"
-msgstr "&Tęsti"
 
 msgid "Syntax file edit"
 msgstr "Sintaksės failo keitimas"
@@ -396,236 +422,197 @@ msgstr "&Paimti užraktą"
 msgid "&Ignore lock"
 msgstr "&Ignoruoti užraktą"
 
-msgid " About "
-msgstr " Apie "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       Naudotojui draugiškas redaktorius, \n"
-"         parašytas „Midnight Commander“.\n"
-
 msgid "&Open file..."
 msgstr "At&verti failą..."
 
-msgid "&New              C-n"
-msgstr "&Nauja                C-n"
+#, fuzzy
+msgid "&New"
+msgstr "Pavadi&nimas"
 
-msgid "&Save              F2"
-msgstr "Į&rašyti               F2"
+#, fuzzy
+msgid "Save &as..."
+msgstr "Įrašyti nu&statymus..."
 
-msgid "Save &as...       F12"
-msgstr "Įrašyti &kaip...      F12"
-
-msgid "&Insert file...   F15"
+#, fuzzy
+msgid "&Insert file..."
 msgstr "Įterpt&i failą...  F15"
 
-msgid "Copy to &file...  C-f"
+#, fuzzy
+msgid "Cop&y to file..."
 msgstr "Kopijuoti į &failą C-f"
 
-msgid "&User menu...     F11"
+#, fuzzy
+msgid "&User menu..."
 msgstr "Naudotojo meni&u      F11"
 
-msgid "A&bout...            "
-msgstr "A&pie...                 "
+#, fuzzy
+msgid "A&bout..."
+msgstr "&Išdėstymas..."
 
-msgid "&Quit             F10"
-msgstr "Iš&eiti               F10"
-
-msgid "&New            C-x k"
-msgstr "&Nauja              C-x k"
-
-msgid "Copy to &file...     "
-msgstr "Kopijuoti į &failą... "
+msgid "&Quit"
+msgstr "&Išeiti"
 
 #, fuzzy
-msgid "&Toggle mark                 F3"
-msgstr "Keis&ti žymėjimą       F3"
+msgid "&Toggle mark"
+msgstr "Išva&lyti pažymėtus"
+
+msgid "&Mark columns"
+msgstr ""
 
 #, fuzzy
-msgid "Mar&k columns              S-F3"
-msgstr "Žy&mėti stulpelius       "
-
-#, fuzzy
-msgid "Toggle &ins/overw           Ins"
+msgid "Toggle &ins/overw"
 msgstr "Keisti įterpimo rež.     "
 
 #, fuzzy
-msgid "&Copy                        F5"
-msgstr "&Kopijuoti           F5"
+msgid "&Copy"
+msgstr "Kopij."
+
+msgid "&Move"
+msgstr "&Perkelti"
+
+msgid "&Delete"
+msgstr "Š&alinti"
 
 #, fuzzy
-msgid "&Move                        F6"
-msgstr "&Perkelti              F6"
-
-#, fuzzy
-msgid "&Delete                      F8"
-msgstr "Ša&linti             F8"
-
-#, fuzzy
-msgid "C&opy to clipfile         C-Ins"
+msgid "C&opy to clipfile"
 msgstr "Kopijuoti į &failą... "
 
 #, fuzzy
-msgid "C&ut to clipfile          S-Del"
+msgid "C&ut to clipfile"
 msgstr "&Eiti į eilutę...         M-l"
 
-msgid "&Paste from clipfile      S-Ins"
+msgid "&Paste from clipfile"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k            M-k"
+msgid "Toggle bookmar&k"
 msgstr "Keis&ti žymėjimą       F3"
 
 #, fuzzy
-msgid "&Next bookmark              M-j"
-msgstr "&Nauja                C-n"
+msgid "&Next bookmark"
+msgstr "Nustat&yti pažymėtus"
 
 #, fuzzy
-msgid "Pre&v bookmark              M-i"
+msgid "Pre&v bookmark"
 msgstr "Rikiuo&ti...             M-t"
 
 #, fuzzy
-msgid "&Flush bookmark             M-o"
+msgid "&Flush bookmark"
 msgstr "Paš&tas..."
 
-#, fuzzy
-msgid "&Undo                       C-u"
-msgstr "Atša&ukti             C-u"
+msgid "&Undo"
+msgstr ""
 
-#, fuzzy
-msgid "&Beginning               C-PgUp"
-msgstr "Į pra&džią         C-PgUp"
-
-#, fuzzy
-msgid "&End                     C-PgDn"
-msgstr "Į &galą            C-PgDn"
-
-#, fuzzy
-msgid "C&opy to clipfile           M-w"
-msgstr "&Eiti į eilutę...         M-l"
-
-#, fuzzy
-msgid "C&ut to clipfile            C-w"
-msgstr "&Eiti į eilutę...         M-l"
-
-msgid "&Paste from clipfile        C-y"
+msgid "&Beginning"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k               "
-msgstr "Keis&ti žymėjimą       F3"
+msgid "&End"
+msgstr "„&Inode“"
 
 #, fuzzy
-msgid "&Next bookmark                 "
-msgstr "&Nauja                C-n"
+msgid "&Search..."
+msgstr "Paieška"
 
 #, fuzzy
-msgid "Pre&v bookmark                 "
-msgstr "Rikiuo&ti...             M-t"
-
-#, fuzzy
-msgid "&Flush bookmark                "
-msgstr "Paš&tas..."
-
-msgid "&Search...         F7"
-msgstr "&Paieška...            F7"
-
-msgid "Search &again     F17"
+msgid "Search &again"
 msgstr "Iešk&oti vėl          F17"
 
-msgid "&Replace...        F4"
-msgstr "Pa&keisti...           F4"
-
-msgid "&Go to line...            M-l"
-msgstr "&Eiti į eilutę...         M-l"
+#, fuzzy
+msgid "&Replace..."
+msgstr "Pa&keisti"
 
 #, fuzzy
-msgid "Toggle li&ne state        M-n"
+msgid "&Go to line..."
+msgstr " Eiti į eilutę "
+
+#, fuzzy
+msgid "Toggle li&ne state"
 msgstr "Keis&ti žymėjimą       F3"
 
-msgid "Go to matching &bracket   M-b"
+#, fuzzy
+msgid "Go to matching &bracket"
 msgstr "Eiti į porinį skliaustelį M-b"
 
-msgid "Find declaration      A-Enter"
+#, fuzzy
+msgid "Find declaration"
+msgstr "Rasti atmetimus po „patch“"
+
+msgid "Back from declaration"
 msgstr ""
 
-msgid "Back from declaration     M--"
-msgstr ""
-
-msgid "Forward to declaration    M-+"
+msgid "Forward to declaration"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             M-e"
+msgid "Encod&ing..."
 msgstr "Rikiuo&ti...             M-t"
 
-msgid "Insert &literal...       C-q"
-msgstr "Įterpti simbo&lį...      C-q"
-
-msgid "&Refresh screen          C-l"
+#, fuzzy
+msgid "&Refresh screen"
 msgstr "Atnau&jinti ekraną       C-l"
 
-msgid "&Start record macro      C-r"
+#, fuzzy
+msgid "&Start record macro"
 msgstr "Pradėti makroko&mandos įrašą   C-r"
 
-msgid "&Finish record macro...  C-r"
+#, fuzzy
+msgid "&Finish record macro..."
 msgstr "&Baigti makrokomandos įrašą...  C-r"
 
-msgid "&Execute macro...   C-a, KEY"
+#, fuzzy
+msgid "&Execute macro..."
 msgstr "Pal&eisti makrokomandą... C-a, KLV"
 
-msgid "Delete macr&o...            "
-msgstr "Šalinti makr&osą..."
+#, fuzzy
+msgid "Delete macr&o..."
+msgstr " Pašalinti makrokomandą "
 
-msgid "Insert &date/time           "
-msgstr "Įterpti &datą/laiką         "
-
-msgid "Format p&aragraph        M-p"
-msgstr "Formuoti p&astraipą      M-p"
-
-msgid "'ispell' s&pell check    C-p"
+#, fuzzy
+msgid "'ispell' s&pell check"
 msgstr "„ispell“ rašybos patikra C-p"
 
-msgid "Sor&t...                 M-t"
-msgstr "Rikiuo&ti...             M-t"
+#, fuzzy
+msgid "&Mail..."
+msgstr "&Filtras..."
 
-msgid "Paste o&utput of...      M-u"
+#, fuzzy
+msgid "Insert &literal..."
+msgstr "Įterpti simbo&lį...      C-q"
+
+#, fuzzy
+msgid "Insert &date/time"
+msgstr "Įterpti &datą/laiką         "
+
+#, fuzzy
+msgid "Format p&aragraph"
+msgstr "Formuoti p&astraipą      M-p"
+
+#, fuzzy
+msgid "Sor&t..."
+msgstr "Rik. t&varka..."
+
+#, fuzzy
+msgid "Paste o&utput of..."
 msgstr "Įdėti iš&vestį...        M-u"
 
-msgid "E&xternal Formatter      F19"
+#, fuzzy
+msgid "E&xternal formatter"
 msgstr "Išo&rinis formatas       F19"
-
-msgid "&Mail...                    "
-msgstr "Paš&tas..."
-
-msgid "&Execute macro... C-x e, KEY"
-msgstr "V&ykdyti makrokomandą... C-x e, KL"
-
-msgid "'ispell' s&pell check    M-$"
-msgstr "„ispell“ rašybos patikra M-$"
 
 msgid "&General...  "
 msgstr "&Bendrosios..."
 
-msgid "&Save mode..."
+#, fuzzy
+msgid "Save &mode..."
 msgstr "Įrašymo režima&s..."
 
-msgid "Learn &Keys..."
+#, fuzzy
+msgid "Learn &keys..."
 msgstr "Mokyti &klavišų..."
 
-msgid "Syntax &Highlighting..."
+#, fuzzy
+msgid "Syntax &highlighting..."
 msgstr "Sintak&sės ryškinimas..."
 
 #, fuzzy
@@ -636,33 +623,32 @@ msgstr "Sintaksės failo keitimas"
 msgid "&Menu file"
 msgstr "Keisti &meniu failą"
 
-#, fuzzy
-msgid "Save setu&p"
+msgid "&Save setup"
 msgstr "Įrašyti nu&statymus"
 
-msgid " File "
-msgstr " Failas "
+#, fuzzy
+msgid "&File"
+msgstr "Failas"
 
-msgid " Edit "
-msgstr " Taisa "
+#, fuzzy
+msgid "&Edit"
+msgstr "Taisyti"
 
-msgid " Sear/Repl "
-msgstr " Rasti/pakeisti "
+#, fuzzy
+msgid "&Search"
+msgstr "Paieška"
 
-msgid " Command "
-msgstr " Komanda "
+#, fuzzy
+msgid "&Command"
+msgstr "Komanda"
 
-msgid " Options "
-msgstr " Nustatymai "
+#, fuzzy
+msgid "For&mat"
+msgstr "Pamiršt"
 
-msgid "Intuitive"
-msgstr "Intuityvus"
-
-msgid "Emacs"
-msgstr "„Emacs“"
-
-msgid "User-defined"
-msgstr "Kit&oks"
+#, fuzzy
+msgid "&Options"
+msgstr " N&ustatymai "
 
 msgid "None"
 msgstr "Joks"
@@ -675,9 +661,6 @@ msgstr "Kaip rašom. mašinėlėje"
 
 msgid "Word wrap line length: "
 msgstr "Laužyti eilutes ties: "
-
-msgid "Tab spacing: "
-msgstr "Tabuliacijos ilgis: "
 
 msgid "Cursor beyond end of line"
 msgstr ""
@@ -701,11 +684,14 @@ msgstr "Išsaugoti &vietą faile"
 msgid "Confir&m before saving"
 msgstr "Patvirtinti pri&eš įrašant"
 
-msgid "Fill tabs with &spaces"
-msgstr "Tabuliacija tarpai&s"
-
 msgid "&Return does autoindent"
 msgstr "„&Return“ autom. įtraukia"
+
+msgid "Tab spacing: "
+msgstr "Tabuliacijos ilgis: "
+
+msgid "Fill tabs with &spaces"
+msgstr "Tabuliacija tarpai&s"
 
 msgid "&Backspace through tabs"
 msgstr "Trinti ta&buliaciją"
@@ -716,35 +702,44 @@ msgstr "Netikra pusinė tabuliacija"
 msgid "Wrap mode"
 msgstr "Eilučių laužymas"
 
-msgid "Key emulation"
-msgstr "Klavišų išdėstymas"
-
 msgid " Editor options "
 msgstr " Nustatymai "
 
-msgid "Help"
-msgstr "Pagalba"
+msgid "ButtonBar|Help"
+msgstr "ButtonBar|Pagalb"
 
-msgid "Save"
-msgstr "Įrašyti"
+msgid "ButtonBar|Save"
+msgstr "ButtonBar|Įrašy"
 
-msgid "Mark"
-msgstr "Žymėti"
+#, fuzzy
+msgid "ButtonBar|Mark"
+msgstr "ButtonBar|Apdorot."
 
-msgid "Replac"
-msgstr "Keisti"
+#, fuzzy
+msgid "ButtonBar|Replac"
+msgstr "ButtonBar|Pradin"
 
-msgid "Copy"
-msgstr "Kopij."
+#, fuzzy
+msgid "ButtonBar|Copy"
+msgstr "ButtonBar|Pagalb"
 
-msgid "Move"
-msgstr "Perkelti"
+#, fuzzy
+msgid "ButtonBar|Move"
+msgstr "ButtonBar|Įrašy"
 
-msgid "Delete"
-msgstr "Šalinti"
+msgid "ButtonBar|Search"
+msgstr "ButtonBar|Ieškot"
 
-msgid "PullDn"
-msgstr "Meniu"
+#, fuzzy
+msgid "ButtonBar|Delete"
+msgstr "ButtonBar|Pagalb"
+
+#, fuzzy
+msgid "ButtonBar|PullDn"
+msgstr "ButtonBar|Pagalb"
+
+msgid "ButtonBar|Quit"
+msgstr "ButtonBar|Išeit"
 
 msgid " Load syntax file "
 msgstr " Įkelti sintaksės failą "
@@ -1207,6 +1202,9 @@ msgstr "naudokite T ar INS"
 msgid " Permission "
 msgstr " Leidimai "
 
+msgid " File "
+msgstr " Failas "
+
 msgid "Chmod command"
 msgstr "„chmod“ komanda"
 
@@ -1471,14 +1469,14 @@ msgstr ""
 "3.0 versijoje pasikeitė ~/%s failo formatas. Galite jį nukopijuoti iš %smc."
 "ext arba naudoti tą failą kaip pavyzdį naujo rašymui."
 
-msgid " Copy "
-msgstr " Kopijuoti "
+msgid "DialogTitle|Copy"
+msgstr ""
 
-msgid " Move "
-msgstr " Perkelti "
+msgid "DialogTitle|Move"
+msgstr ""
 
-msgid " Delete "
-msgstr " Šalinti "
+msgid "DialogTitle|Delete"
+msgstr ""
 
 msgid " Cannot make the hardlink "
 msgstr " Nepavyko sukurti nuorodos "
@@ -1632,9 +1630,6 @@ msgstr ""
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr "Gautas nepilnas failas. Ar jį išlaikyti?"
 
-msgid "&Delete"
-msgstr "Š&alinti"
-
 msgid "&Keep"
 msgstr "Išlai&kyti"
 
@@ -1760,14 +1755,14 @@ msgstr ""
 msgid "Directory scanning"
 msgstr "Aplanko kelias"
 
-msgid "1Copy"
-msgstr "1Kopijuoti"
+msgid "FileOperation|Copy"
+msgstr ""
 
-msgid "1Move"
-msgstr "1Perkelti"
+msgid "FileOperation|Move"
+msgstr ""
 
-msgid "1Delete"
-msgstr "1Šalinti"
+msgid "FileOperation|Delete"
+msgstr ""
 
 #, no-c-format
 msgid "%o %f \"%s\"%m"
@@ -1797,6 +1792,10 @@ msgstr ", tokiu formatu:"
 
 msgid " to:"
 msgstr " į:"
+
+#, c-format
+msgid "%s?"
+msgstr ""
 
 msgid " Cannot operate on \"..\"! "
 msgstr " Negalima dirbti su „..“! "
@@ -1946,9 +1945,6 @@ msgstr "&Eiti į katal."
 msgid "&Again"
 msgstr "Iš n&aujo"
 
-msgid "&Quit"
-msgstr "&Išeiti"
-
 msgid "Pane&lize"
 msgstr "Į skyde&lį"
 
@@ -2034,14 +2030,16 @@ msgstr " Vidinė klaida: „Double start of link area“ "
 msgid " Cannot find node %s in help file "
 msgstr " Nepavyko rasti %s mazgo pagalbos faile "
 
-msgid "Index"
-msgstr "Rodyklė"
+msgid "Help"
+msgstr "Pagalba"
 
-msgid "Prev"
-msgstr "Atgal"
+#, fuzzy
+msgid "ButtonBar|Index"
+msgstr "ButtonBar|Šešiol"
 
-msgid "&Move"
-msgstr "&Perkelti"
+#, fuzzy
+msgid "ButtonBar|Prev"
+msgstr "ButtonBar|Apdorot."
 
 msgid "&Remove"
 msgstr "Ša&linti"
@@ -2351,11 +2349,13 @@ msgstr " Ar tikrai norite palikti „Midnight Commander“? "
 msgid "&Listing mode..."
 msgstr "Rod&ymo režimas..."
 
-msgid "&Quick view     C-x q"
-msgstr "&Greitai rodyti C-x q"
+#, fuzzy
+msgid "&Quick view"
+msgstr "Greitas įrašymas "
 
-msgid "&Info           C-x i"
-msgstr "&Informacija    C-x i"
+#, fuzzy
+msgid "&Info"
+msgstr "„&Inode“"
 
 msgid "&Sort order..."
 msgstr "Rik. t&varka..."
@@ -2364,7 +2364,7 @@ msgid "&Filter..."
 msgstr "&Filtras..."
 
 #, fuzzy
-msgid "&Encoding...    M-e"
+msgid "&Encoding..."
 msgstr "Rikiuo&ti...             M-t"
 
 msgid "&Network link..."
@@ -2379,102 +2379,117 @@ msgstr "Apli&nkos ryšys..."
 msgid "SM&B link..."
 msgstr "SM&B ryšys..."
 
-msgid "&Rescan         C-r"
-msgstr "A&tnaujinti       C-r"
+#, fuzzy
+msgid "&Rescan"
+msgstr "Atnauj"
 
-msgid "&View               F3"
-msgstr "&Rodyti              F3"
+#, fuzzy
+msgid "&View"
+msgstr "Rodyti"
 
-msgid "Vie&w file...         "
-msgstr "Rodyti &failą...   "
+#, fuzzy
+msgid "Vie&w file..."
+msgstr " Rodyti failą "
 
-msgid "&Filtered view     M-!"
-msgstr "&Filtruotas vaizdas M-!"
+#, fuzzy
+msgid "&Filtered view"
+msgstr " Filtruotas vaizdas "
 
-msgid "&Edit               F4"
-msgstr "K&eisti              F4"
+msgid "C&hmod"
+msgstr ""
 
-msgid "&Copy               F5"
-msgstr "&Kopijuoti           F5"
+#, fuzzy
+msgid "&Link"
+msgstr "&Nuorodos"
 
-msgid "c&Hmod           C-x c"
-msgstr "R&ežimai          C-x c"
+#, fuzzy
+msgid "&SymLink"
+msgstr "&Nuorodos"
 
-msgid "&Link            C-x l"
-msgstr "N&uoroda          C-x l"
+#, fuzzy
+msgid "Edit s&ymlink"
+msgstr " Keisti simb. nuorodą "
 
-msgid "&SymLink         C-x s"
-msgstr "&Simb. nuoroda    C-x s"
+msgid "Ch&own"
+msgstr ""
 
-msgid "edit s&Ymlink  C-x C-s"
-msgstr "Keisti s&imb.n. C-x C-s"
-
-msgid "ch&Own           C-x o"
-msgstr "Keis&ti savin.    C-x o"
-
-msgid "&Advanced chown       "
+#, fuzzy
+msgid "&Advanced chown"
 msgstr "Keisti s&avin. išsamiau"
 
-msgid "&Rename/Move        F6"
-msgstr "Pe&rkelti            F6"
+#, fuzzy
+msgid "&Rename/Move"
+msgstr "Ša&linti"
 
-msgid "&Mkdir              F7"
-msgstr "&Kurti katalogą      F7"
+#, fuzzy
+msgid "&Mkdir"
+msgstr "N.katal"
 
-msgid "&Delete             F8"
-msgstr "Ša&linti             F8"
+#, fuzzy
+msgid "&Quick cd"
+msgstr "Greitas „cd“"
 
-msgid "&Quick cd          M-c"
-msgstr "Gr&eitas „cd“       M-c"
+#, fuzzy
+msgid "Select &group"
+msgstr "Nustatyti &grupes"
 
-msgid "select &Group      M-+"
-msgstr "Žymėti &grupę       M-+"
+#, fuzzy
+msgid "U&nselect group"
+msgstr " Atžymėti "
 
-msgid "u&Nselect group    M-\\"
-msgstr "Atžymėti &grupę     M-\\"
-
-msgid "reverse selec&Tion M-*"
+#, fuzzy
+msgid "Reverse selec&tion"
 msgstr "Žymėti at&virkščiai M-*"
 
-msgid "e&Xit              F10"
-msgstr "&Išeiti             F10"
+#, fuzzy
+msgid "E&xit"
+msgstr "Taisyti"
 
-msgid "&User menu          F2"
-msgstr "Naudot. meni&u       F2"
+#, fuzzy
+msgid "&User menu"
+msgstr " Naudotojo meniu "
 
 msgid "&Directory tree"
 msgstr "&Aplankų medis"
 
-msgid "&Find file            M-?"
-msgstr "&Rasti failą         M-?"
+#, fuzzy
+msgid "&Find file"
+msgstr "Rasti failą"
 
-msgid "s&Wap panels          C-u"
-msgstr "S&ukeisti skydus        C-u"
+msgid "S&wap panels"
+msgstr ""
 
-msgid "switch &Panels on/off C-o"
+#, fuzzy
+msgid "Switch &panels on/off"
 msgstr "Įjungti/išj. skydus    C-o"
 
-msgid "&Compare directories  C-x d"
-msgstr "Paly&ginti aplankus  C-x d"
+#, fuzzy
+msgid "&Compare directories"
+msgstr " Palyginti aplankus "
 
-msgid "e&Xternal panelize    C-x !"
-msgstr "Iš&orinis skydelis    C-x !"
+#, fuzzy
+msgid "E&xternal panelize"
+msgstr "Išorinis skydelis"
 
-msgid "show directory s&Izes"
+#, fuzzy
+msgid "Show directory s&izes"
 msgstr "Rodyt&i aplankų dydžius"
 
 #, fuzzy
-msgid "Command &history      M-h"
-msgstr " Komandų istorija "
+msgid "Command &history"
+msgstr "Komandų is&torija"
 
-msgid "di&Rectory hotlist    C-\\"
-msgstr "Katalogų są&rašas       C-\\"
+#, fuzzy
+msgid "Di&rectory hotlist"
+msgstr "Aplankų sąrašas"
 
-msgid "&Active VFS list      C-x a"
+#, fuzzy
+msgid "&Active VFS list"
 msgstr "Aktyvių VFS sąrašas  C-x a"
 
-msgid "&Background jobs      C-x j"
-msgstr "Foniniai dar&bai      C-x j"
+#, fuzzy
+msgid "&Background jobs"
+msgstr "Darbai fone"
 
 msgid "&Undelete files (ext2fs only)"
 msgstr "Atk&urti failus  (tik ext2fs)"
@@ -2497,40 +2512,30 @@ msgstr "Konfigūra&cija..."
 msgid "&Layout..."
 msgstr "&Išdėstymas..."
 
-msgid "c&Onfirmation..."
+#, fuzzy
+msgid "C&onfirmation..."
 msgstr "&Patvirtinimai..."
 
 msgid "&Display bits..."
 msgstr "Iš&vesties bitai..."
 
-msgid "learn &Keys..."
-msgstr "Mokyti &klavišų..."
-
 msgid "&Virtual FS..."
 msgstr "&Virtuali failų sistema..."
 
-msgid "&Save setup"
-msgstr "Įrašyti nu&statymus"
-
-msgid " &Above "
+#, fuzzy
+msgid "&Above"
 msgstr " &Aukščiau "
 
-msgid " &Left "
+#, fuzzy
+msgid "&Left"
 msgstr " &Kairysis skydas "
 
-msgid " &File "
-msgstr " &Failas "
-
-msgid " &Command "
-msgstr " &Komanda "
-
-msgid " &Options "
-msgstr " N&ustatymai "
-
-msgid " &Below "
+#, fuzzy
+msgid "&Below"
 msgstr " Ž&emiau "
 
-msgid " &Right "
+#, fuzzy
+msgid "&Right"
 msgstr " &Dešinysis skydas "
 
 msgid " Information "
@@ -2546,8 +2551,9 @@ msgstr ""
 " aplanko turinį. Tuomet jį atnaujinti reikia rankiniu \n"
 " būdu - žr. naudotojo vadovą.                          "
 
-msgid "Menu"
-msgstr "Meniu"
+#, fuzzy
+msgid "ButtonBar|Menu"
+msgstr "ButtonBar|Šešiol"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "Aplinkos kintamasis TERM nenustatytas!\n"
@@ -2699,41 +2705,34 @@ msgid "SUB-DIR"
 msgstr "PAKATAL"
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
-msgid "u"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|u"
 msgstr ""
-
-#, fuzzy
-msgid "Unsorted"
-msgstr "Neriki&uotai"
 
 msgid "&Unsorted"
 msgstr "Neriki&uotai"
 
 #. TRANSLATORS: one single character to represent 'name' sort mode
-#, fuzzy
-msgid "n"
-msgstr "Ką:"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|n"
+msgstr ""
 
 msgid "&Name"
 msgstr "Pavadi&nimas"
 
 #. TRANSLATORS: one single character to represent 'extension' sort mode
-msgid "e"
-msgstr ""
-
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 #, fuzzy
-msgid "Extension"
-msgstr "Plėtinys:"
+msgid "sort|e"
+msgstr "Neriki&uotai"
 
 msgid "&Extension"
 msgstr "Plė&tinys"
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
-msgid "s"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|s"
 msgstr ""
-
-msgid "Size"
-msgstr "Dydis"
 
 msgid "&Size"
 msgstr "Dydi&s"
@@ -2743,31 +2742,25 @@ msgid "Block Size"
 msgstr " Dydis "
 
 #. TRANSLATORS: one single character to represent 'Modify time' sort mode
-msgid "m"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|m"
 msgstr ""
-
-msgid "MTime"
-msgstr "Laikas"
 
 msgid "&Modify time"
 msgstr "&Modif. laikas"
 
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
-msgid "a"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|a"
 msgstr ""
-
-msgid "ATime"
-msgstr "Laikas"
 
 msgid "&Access time"
 msgstr "P&asiek. laikas"
 
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
-msgid "h"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|h"
 msgstr ""
-
-msgid "CTime"
-msgstr "Laikas"
 
 msgid "C&Hange time"
 msgstr "Pakei&t. laikas"
@@ -2782,11 +2775,9 @@ msgid "Nl"
 msgstr "Nl"
 
 #. TRANSLATORS: one single character to represent 'inode' sort mode
-msgid "i"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|i"
 msgstr ""
-
-msgid "Inode"
-msgstr "„Inode“"
 
 msgid "&Inode"
 msgstr "„&Inode“"
@@ -2829,17 +2820,19 @@ msgstr "Naudotojo formatas atrodo netaisyklingai, grįžtu prie pradinio."
 msgid " Do you really want to execute? "
 msgstr " Ar tikrai norite paleisti? "
 
-msgid "View"
-msgstr "Rodyti"
+msgid "ButtonBar|View"
+msgstr "ButtonBar|Rodyt"
 
-msgid "Edit"
-msgstr "Taisyti"
+msgid "ButtonBar|Edit"
+msgstr "ButtonBar|Keist"
 
-msgid "RenMov"
-msgstr "Perkelt"
+#, fuzzy
+msgid "ButtonBar|RenMov"
+msgstr "ButtonBar|Šešiol"
 
-msgid "Mkdir"
-msgstr "N.katal"
+#, fuzzy
+msgid "ButtonBar|Mkdir"
+msgstr "ButtonBar|Keist"
 
 msgid " Not implemented yet "
 msgstr ""
@@ -2869,6 +2862,14 @@ msgstr " Parinkite įvesties koduotę "
 
 msgid "-  < No translation >"
 msgstr "–  < Jokio vertimo >"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot save file %s:\n"
+"%s"
+msgstr ""
+" Nepavyko įrašyti failo: \n"
+" %s "
 
 #, c-format
 msgid ""
@@ -2974,20 +2975,25 @@ msgstr ""
 msgid "  Delete %s?  "
 msgstr " Šalinti %s? "
 
-msgid "Static"
-msgstr "Stat."
+#, fuzzy
+msgid "ButtonBar|Static"
+msgstr "ButtonBar|Ieškot"
 
-msgid "Dynamc"
-msgstr "Dinam."
+#, fuzzy
+msgid "ButtonBar|Dynamc"
+msgstr "ButtonBar|Pradin"
 
-msgid "Rescan"
-msgstr "Atnauj"
+#, fuzzy
+msgid "ButtonBar|Rescan"
+msgstr "ButtonBar|Pradin"
 
-msgid "Forget"
-msgstr "Pamiršt"
+#, fuzzy
+msgid "ButtonBar|Forget"
+msgstr "ButtonBar|Formuot."
 
-msgid "Rmdir"
-msgstr "Šalint"
+#, fuzzy
+msgid "ButtonBar|Rmdir"
+msgstr "ButtonBar|Keist"
 
 #, c-format
 msgid ""
@@ -3134,10 +3140,6 @@ msgstr "Skaitm. „Insert“"
 
 msgid "Delete on keypad"
 msgstr "Skaitm. „Delete“"
-
-#, fuzzy
-msgid "Escape key"
-msgstr "Skaitm. /"
 
 msgid "Enter on keypad"
 msgstr "Skaitm. „Enter“"
@@ -3373,12 +3375,6 @@ msgstr " Nepavyko sukurti vaiko "
 msgid "Empty output from child filter"
 msgstr "Filtras nepateikė informacijos"
 
-msgid "ButtonBar|Help"
-msgstr "ButtonBar|Pagalb"
-
-msgid "ButtonBar|Quit"
-msgstr "ButtonBar|Išeit"
-
 msgid "ButtonBar|Ascii"
 msgstr "ButtonBar|ASCII"
 
@@ -3391,15 +3387,6 @@ msgstr "ButtonBar|Eiti į"
 msgid "ButtonBar|Line"
 msgstr "ButtonBar|Eilutė"
 
-msgid "ButtonBar|View"
-msgstr "ButtonBar|Rodyt"
-
-msgid "ButtonBar|Edit"
-msgstr "ButtonBar|Keist"
-
-msgid "ButtonBar|Save"
-msgstr "ButtonBar|Įrašy"
-
 msgid "ButtonBar|UnWrap"
 msgstr "ButtonBar|Nelauž"
 
@@ -3408,9 +3395,6 @@ msgstr "ButtonBar|Lauž"
 
 msgid "ButtonBar|HxSrch"
 msgstr "ButtonBar|ŠšlIeš"
-
-msgid "ButtonBar|Search"
-msgstr "ButtonBar|Ieškot"
 
 msgid "ButtonBar|Raw"
 msgstr "ButtonBar|Pradin"
@@ -3930,6 +3914,327 @@ msgstr "Vidinė klaida:"
 msgid "Changes to file lost"
 msgstr "Failo pakeitimai prarasti"
 
+#~ msgid "Do backups -->"
+#~ msgstr "Daryti kopijas -->"
+
+#~ msgid "Extension:"
+#~ msgstr "Plėtinys:"
+
+#~ msgid "&New              C-n"
+#~ msgstr "&Nauja                C-n"
+
+#~ msgid "&Save              F2"
+#~ msgstr "Į&rašyti               F2"
+
+#~ msgid "Save &as...       F12"
+#~ msgstr "Įrašyti &kaip...      F12"
+
+#~ msgid "A&bout...            "
+#~ msgstr "A&pie...                 "
+
+#~ msgid "&Quit             F10"
+#~ msgstr "Iš&eiti               F10"
+
+#~ msgid "&New            C-x k"
+#~ msgstr "&Nauja              C-x k"
+
+#~ msgid "Copy to &file...     "
+#~ msgstr "Kopijuoti į &failą... "
+
+#, fuzzy
+#~ msgid "&Toggle mark                 F3"
+#~ msgstr "Keis&ti žymėjimą       F3"
+
+#, fuzzy
+#~ msgid "Mar&k columns              S-F3"
+#~ msgstr "Žy&mėti stulpelius       "
+
+#, fuzzy
+#~ msgid "&Copy                        F5"
+#~ msgstr "&Kopijuoti           F5"
+
+#, fuzzy
+#~ msgid "&Move                        F6"
+#~ msgstr "&Perkelti              F6"
+
+#, fuzzy
+#~ msgid "&Delete                      F8"
+#~ msgstr "Ša&linti             F8"
+
+#, fuzzy
+#~ msgid "&Next bookmark              M-j"
+#~ msgstr "&Nauja                C-n"
+
+#, fuzzy
+#~ msgid "&Undo                       C-u"
+#~ msgstr "Atša&ukti             C-u"
+
+#, fuzzy
+#~ msgid "&Beginning               C-PgUp"
+#~ msgstr "Į pra&džią         C-PgUp"
+
+#, fuzzy
+#~ msgid "&End                     C-PgDn"
+#~ msgstr "Į &galą            C-PgDn"
+
+#, fuzzy
+#~ msgid "C&opy to clipfile           M-w"
+#~ msgstr "&Eiti į eilutę...         M-l"
+
+#, fuzzy
+#~ msgid "C&ut to clipfile            C-w"
+#~ msgstr "&Eiti į eilutę...         M-l"
+
+#, fuzzy
+#~ msgid "Toggle bookmar&k               "
+#~ msgstr "Keis&ti žymėjimą       F3"
+
+#, fuzzy
+#~ msgid "&Next bookmark                 "
+#~ msgstr "&Nauja                C-n"
+
+#, fuzzy
+#~ msgid "Pre&v bookmark                 "
+#~ msgstr "Rikiuo&ti...             M-t"
+
+#, fuzzy
+#~ msgid "&Flush bookmark                "
+#~ msgstr "Paš&tas..."
+
+#~ msgid "&Search...         F7"
+#~ msgstr "&Paieška...            F7"
+
+#~ msgid "&Replace...        F4"
+#~ msgstr "Pa&keisti...           F4"
+
+#~ msgid "&Go to line...            M-l"
+#~ msgstr "&Eiti į eilutę...         M-l"
+
+#, fuzzy
+#~ msgid "Encod&ing...             M-e"
+#~ msgstr "Rikiuo&ti...             M-t"
+
+#~ msgid "Delete macr&o...            "
+#~ msgstr "Šalinti makr&osą..."
+
+#~ msgid "Sor&t...                 M-t"
+#~ msgstr "Rikiuo&ti...             M-t"
+
+#~ msgid "&Mail...                    "
+#~ msgstr "Paš&tas..."
+
+#~ msgid "&Execute macro... C-x e, KEY"
+#~ msgstr "V&ykdyti makrokomandą... C-x e, KL"
+
+#~ msgid "'ispell' s&pell check    M-$"
+#~ msgstr "„ispell“ rašybos patikra M-$"
+
+#, fuzzy
+#~ msgid "Save setu&p"
+#~ msgstr "Įrašyti nu&statymus"
+
+#~ msgid " Edit "
+#~ msgstr " Taisa "
+
+#~ msgid " Sear/Repl "
+#~ msgstr " Rasti/pakeisti "
+
+#~ msgid " Command "
+#~ msgstr " Komanda "
+
+#~ msgid " Options "
+#~ msgstr " Nustatymai "
+
+#~ msgid "Intuitive"
+#~ msgstr "Intuityvus"
+
+#~ msgid "Emacs"
+#~ msgstr "„Emacs“"
+
+#~ msgid "User-defined"
+#~ msgstr "Kit&oks"
+
+#~ msgid "Key emulation"
+#~ msgstr "Klavišų išdėstymas"
+
+#~ msgid "Save"
+#~ msgstr "Įrašyti"
+
+#~ msgid "Mark"
+#~ msgstr "Žymėti"
+
+#~ msgid "Replac"
+#~ msgstr "Keisti"
+
+#~ msgid "Move"
+#~ msgstr "Perkelti"
+
+#~ msgid "Delete"
+#~ msgstr "Šalinti"
+
+#~ msgid "PullDn"
+#~ msgstr "Meniu"
+
+#~ msgid " Copy "
+#~ msgstr " Kopijuoti "
+
+#~ msgid " Move "
+#~ msgstr " Perkelti "
+
+#~ msgid " Delete "
+#~ msgstr " Šalinti "
+
+#~ msgid "1Copy"
+#~ msgstr "1Kopijuoti"
+
+#~ msgid "1Move"
+#~ msgstr "1Perkelti"
+
+#~ msgid "1Delete"
+#~ msgstr "1Šalinti"
+
+#~ msgid "Index"
+#~ msgstr "Rodyklė"
+
+#~ msgid "Prev"
+#~ msgstr "Atgal"
+
+#~ msgid "&Quick view     C-x q"
+#~ msgstr "&Greitai rodyti C-x q"
+
+#~ msgid "&Info           C-x i"
+#~ msgstr "&Informacija    C-x i"
+
+#~ msgid "&Rescan         C-r"
+#~ msgstr "A&tnaujinti       C-r"
+
+#~ msgid "&View               F3"
+#~ msgstr "&Rodyti              F3"
+
+#~ msgid "Vie&w file...         "
+#~ msgstr "Rodyti &failą...   "
+
+#~ msgid "&Filtered view     M-!"
+#~ msgstr "&Filtruotas vaizdas M-!"
+
+#~ msgid "&Edit               F4"
+#~ msgstr "K&eisti              F4"
+
+#~ msgid "&Copy               F5"
+#~ msgstr "&Kopijuoti           F5"
+
+#~ msgid "c&Hmod           C-x c"
+#~ msgstr "R&ežimai          C-x c"
+
+#~ msgid "&Link            C-x l"
+#~ msgstr "N&uoroda          C-x l"
+
+#~ msgid "&SymLink         C-x s"
+#~ msgstr "&Simb. nuoroda    C-x s"
+
+#~ msgid "edit s&Ymlink  C-x C-s"
+#~ msgstr "Keisti s&imb.n. C-x C-s"
+
+#~ msgid "ch&Own           C-x o"
+#~ msgstr "Keis&ti savin.    C-x o"
+
+#~ msgid "&Rename/Move        F6"
+#~ msgstr "Pe&rkelti            F6"
+
+#~ msgid "&Mkdir              F7"
+#~ msgstr "&Kurti katalogą      F7"
+
+#~ msgid "&Delete             F8"
+#~ msgstr "Ša&linti             F8"
+
+#~ msgid "&Quick cd          M-c"
+#~ msgstr "Gr&eitas „cd“       M-c"
+
+#~ msgid "select &Group      M-+"
+#~ msgstr "Žymėti &grupę       M-+"
+
+#~ msgid "u&Nselect group    M-\\"
+#~ msgstr "Atžymėti &grupę     M-\\"
+
+#~ msgid "e&Xit              F10"
+#~ msgstr "&Išeiti             F10"
+
+#~ msgid "&User menu          F2"
+#~ msgstr "Naudot. meni&u       F2"
+
+#~ msgid "&Find file            M-?"
+#~ msgstr "&Rasti failą         M-?"
+
+#~ msgid "s&Wap panels          C-u"
+#~ msgstr "S&ukeisti skydus        C-u"
+
+#~ msgid "&Compare directories  C-x d"
+#~ msgstr "Paly&ginti aplankus  C-x d"
+
+#~ msgid "e&Xternal panelize    C-x !"
+#~ msgstr "Iš&orinis skydelis    C-x !"
+
+#, fuzzy
+#~ msgid "Command &history      M-h"
+#~ msgstr " Komandų istorija "
+
+#~ msgid "di&Rectory hotlist    C-\\"
+#~ msgstr "Katalogų są&rašas       C-\\"
+
+#~ msgid "&Background jobs      C-x j"
+#~ msgstr "Foniniai dar&bai      C-x j"
+
+#~ msgid "learn &Keys..."
+#~ msgstr "Mokyti &klavišų..."
+
+#~ msgid " &File "
+#~ msgstr " &Failas "
+
+#~ msgid " &Command "
+#~ msgstr " &Komanda "
+
+#~ msgid "Menu"
+#~ msgstr "Meniu"
+
+#, fuzzy
+#~ msgid "n"
+#~ msgstr "Ką:"
+
+#, fuzzy
+#~ msgid "Extension"
+#~ msgstr "Plėtinys:"
+
+#~ msgid "Size"
+#~ msgstr "Dydis"
+
+#~ msgid "MTime"
+#~ msgstr "Laikas"
+
+#~ msgid "ATime"
+#~ msgstr "Laikas"
+
+#~ msgid "CTime"
+#~ msgstr "Laikas"
+
+#~ msgid "Inode"
+#~ msgstr "„Inode“"
+
+#~ msgid "RenMov"
+#~ msgstr "Perkelt"
+
+#~ msgid "Static"
+#~ msgstr "Stat."
+
+#~ msgid "Dynamc"
+#~ msgstr "Dinam."
+
+#~ msgid "Rmdir"
+#~ msgstr "Šalint"
+
+#, fuzzy
+#~ msgid "Escape key"
+#~ msgstr "Skaitm. /"
+
 #~ msgid "bind: Wrong argument number, bind <key> <command>"
 #~ msgstr "„bind“: neteisingas argumentų kiekis, „bind <klavišas> <komanda>“"
 
@@ -4050,14 +4355,8 @@ msgstr "Failo pakeitimai prarasti"
 #~ msgid "&Delete            F8"
 #~ msgstr "Ša&linti               F9"
 
-#~ msgid "Save setu&p..."
-#~ msgstr "Įrašyti nu&statymus..."
-
 #~ msgid " The command history is empty "
 #~ msgstr " Komandų istorija yra tuščia "
-
-#~ msgid "command &History"
-#~ msgstr "Komandų is&torija"
 
 #~ msgid "Edit edi&tor menu file"
 #~ msgstr "Keisti red. meniu r&inkmeną"
@@ -4100,9 +4399,6 @@ msgstr "Failo pakeitimai prarasti"
 
 #~ msgid "&Type"
 #~ msgstr "&Tipas"
-
-#~ msgid "&Links"
-#~ msgstr "&Nuorodos"
 
 #~ msgid "N&GID"
 #~ msgstr "N&GID"

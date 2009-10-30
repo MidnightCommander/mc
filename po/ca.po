@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-09 09:50+0300\n"
+"POT-Creation-Date: 2009-10-30 10:39+0200\n"
 "PO-Revision-Date: 2001-09-29 17:41+0200\n"
 "Last-Translator: Softcatalà <tradgnome@softcatala.org>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
@@ -53,6 +53,29 @@ msgstr " No puc visualitzar-lo perquè no és un fitxer habitual "
 msgid " File %s is too large "
 msgstr " El fitxer és massa gran: "
 
+msgid " About "
+msgstr " Quant a "
+
+msgid ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       A user friendly text editor written\n"
+"           for the Midnight Commander.\n"
+msgstr ""
+"\n"
+"                 Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 Free Software Foundation\n"
+"\n"
+"        Un editor de text amistós escrit\n"
+"             pel Midnight Commander.\n"
+
+msgid "&OK"
+msgstr "&D'acord"
+
 msgid "Macro recursion is too deep"
 msgstr ""
 
@@ -91,23 +114,29 @@ msgstr " No s'ha pogut obrir el conducte per a l'escriptura: "
 msgid " Cannot open file for writing: %s "
 msgstr " No s'ha pogut obrir el conducte per a l'escriptura: "
 
-msgid "Quick save "
+#, fuzzy
+msgid "&Quick save"
 msgstr "Desat ràpid "
 
-msgid "Safe save "
+#, fuzzy
+msgid "&Safe save"
 msgstr "Desat segur "
 
-msgid "Do backups -->"
-msgstr "Fer còpies de seguretat -->"
+msgid "&Do backups with following extension:"
+msgstr ""
 
-msgid "&OK"
-msgstr "&D'acord"
-
-msgid "Extension:"
-msgstr "Extensió:"
+msgid "Check &POSIX new line"
+msgstr ""
 
 msgid " Edit Save Mode "
 msgstr " Edita la manera de desar "
+
+msgid "The file you are saving is not finished with a newline"
+msgstr ""
+
+#, fuzzy
+msgid "C&ontinue"
+msgstr "Continua"
 
 msgid "&Do not change"
 msgstr ""
@@ -179,10 +208,6 @@ msgid ""
 msgstr ""
 " El text actual s'ha modificat, però no s'ha desat. \n"
 " 'Continua' descartarà aquests canvis. "
-
-#, fuzzy
-msgid "C&ontinue"
-msgstr "Continua"
 
 #, fuzzy
 msgid "Syntax file edit"
@@ -405,238 +430,196 @@ msgstr ""
 msgid "&Ignore lock"
 msgstr ""
 
-msgid " About "
-msgstr " Quant a "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                 Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 Free Software Foundation\n"
-"\n"
-"        Un editor de text amistós escrit\n"
-"             pel Midnight Commander.\n"
-
 msgid "&Open file..."
 msgstr "&Obre el fitxer..."
 
-msgid "&New              C-n"
-msgstr "&Nou                  C-n"
+#, fuzzy
+msgid "&New"
+msgstr "&Nom"
 
-msgid "&Save              F2"
-msgstr "&Desa               F2"
+#, fuzzy
+msgid "Save &as..."
+msgstr "&Desa la configuració"
 
-msgid "Save &as...       F12"
-msgstr "desa com &a...     F12"
-
-msgid "&Insert file...   F15"
+#, fuzzy
+msgid "&Insert file..."
 msgstr "&Insereix el fitxer...    F15"
 
-msgid "Copy to &file...  C-f"
+#, fuzzy
+msgid "Cop&y to file..."
 msgstr "copia al &Fitxer...   C-f"
 
-msgid "&User menu...     F11"
+#, fuzzy
+msgid "&User menu..."
 msgstr "Menú d'&usuari...     F11"
 
-msgid "A&bout...            "
-msgstr "a &Propòsit de...        "
+#, fuzzy
+msgid "A&bout..."
+msgstr "&Format..."
 
-msgid "&Quit             F10"
-msgstr "&Surt                F10"
-
-msgid "&New            C-x k"
-msgstr "&Nou                C-x k"
-
-msgid "Copy to &file...     "
-msgstr "copia al &Fitxer...      "
+msgid "&Quit"
+msgstr "&Surt"
 
 #, fuzzy
-msgid "&Toggle mark                 F3"
-msgstr "&Canvia inici/fi de marcador    F3"
+msgid "&Toggle mark"
+msgstr "&Esborra els marcats"
+
+msgid "&Mark columns"
+msgstr ""
 
 #, fuzzy
-msgid "Mar&k columns              S-F3"
-msgstr "&Marca les columnes     S-F3"
-
-#, fuzzy
-msgid "Toggle &ins/overw           Ins"
+msgid "Toggle &ins/overw"
 msgstr "Canvia entre &Insereix/sobreescriu Ins"
 
 #, fuzzy
-msgid "&Copy                        F5"
-msgstr "&Copia                      F5"
+msgid "&Copy"
+msgstr "Copia"
+
+msgid "&Move"
+msgstr "&Mou"
+
+msgid "&Delete"
+msgstr "&Suprimeix"
 
 #, fuzzy
-msgid "&Move                        F6"
-msgstr "&Mou                 F6"
-
-#, fuzzy
-msgid "&Delete                      F8"
-msgstr "sup&Rimeix                  F8"
-
-#, fuzzy
-msgid "C&opy to clipfile         C-Ins"
+msgid "C&opy to clipfile"
 msgstr "copia al &Fitxer...      "
 
 #, fuzzy
-msgid "C&ut to clipfile          S-Del"
+msgid "C&ut to clipfile"
 msgstr "&Vés a la línia...          M-l"
 
-msgid "&Paste from clipfile      S-Ins"
+msgid "&Paste from clipfile"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k            M-k"
+msgid "Toggle bookmar&k"
 msgstr "&Canvia inici/fi de marcador    F3"
 
 #, fuzzy
-msgid "&Next bookmark              M-j"
-msgstr "&Nou                  C-n"
+msgid "&Next bookmark"
+msgstr "&Posa els marcats"
 
 #, fuzzy
-msgid "Pre&v bookmark              M-i"
+msgid "Pre&v bookmark"
 msgstr "&Ordena...                 M-t"
 
 #, fuzzy
-msgid "&Flush bookmark             M-o"
+msgid "&Flush bookmark"
 msgstr "envia per co&Rreu...          "
 
-#, fuzzy
-msgid "&Undo                       C-u"
-msgstr "&Desfés               C-u"
+msgid "&Undo"
+msgstr ""
 
-#, fuzzy
-msgid "&Beginning               C-PgUp"
-msgstr "&Principi         C-RePàg"
-
-#, fuzzy
-msgid "&End                     C-PgDn"
-msgstr "&Final            C-AvPàg"
-
-#, fuzzy
-msgid "C&opy to clipfile           M-w"
-msgstr "&Vés a la línia...          M-l"
-
-#, fuzzy
-msgid "C&ut to clipfile            C-w"
-msgstr "&Vés a la línia...          M-l"
-
-msgid "&Paste from clipfile        C-y"
+msgid "&Beginning"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k               "
-msgstr "&Canvia inici/fi de marcador    F3"
+msgid "&End"
+msgstr "node-&I"
 
 #, fuzzy
-msgid "&Next bookmark                 "
-msgstr "&Nou                  C-n"
+msgid "&Search..."
+msgstr "Cerca"
 
 #, fuzzy
-msgid "Pre&v bookmark                 "
-msgstr "&Ordena...                 M-t"
-
-#, fuzzy
-msgid "&Flush bookmark                "
-msgstr "envia per co&Rreu...          "
-
-msgid "&Search...         F7"
-msgstr "&Cerca...             F7"
-
-msgid "Search &again     F17"
+msgid "Search &again"
 msgstr "cerca &de nou   F17"
 
-msgid "&Replace...        F4"
-msgstr "&Reemplaça...            F4"
-
-msgid "&Go to line...            M-l"
-msgstr "&Vés a la línia...          M-l"
+#, fuzzy
+msgid "&Replace..."
+msgstr "&Reemplaça"
 
 #, fuzzy
-msgid "Toggle li&ne state        M-n"
+msgid "&Go to line..."
+msgstr " Vés a la línia "
+
+#, fuzzy
+msgid "Toggle li&ne state"
 msgstr "&Canvia inici/fi de marcador    F3"
 
-msgid "Go to matching &bracket   M-b"
+#, fuzzy
+msgid "Go to matching &bracket"
 msgstr "ves al &Claudàtor coincident  M-b"
 
-msgid "Find declaration      A-Enter"
+#, fuzzy
+msgid "Find declaration"
+msgstr "Troba els fitxers rebutjats després d'apedaçar"
+
+msgid "Back from declaration"
 msgstr ""
 
-msgid "Back from declaration     M--"
-msgstr ""
-
-msgid "Forward to declaration    M-+"
+msgid "Forward to declaration"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             M-e"
+msgid "Encod&ing..."
 msgstr "&Ordena...                 M-t"
 
-msgid "Insert &literal...       C-q"
-msgstr "insereix &Literal...         C-q"
-
-msgid "&Refresh screen          C-l"
+#, fuzzy
+msgid "&Refresh screen"
 msgstr "Actualit&za la pantalla    C-l"
 
-msgid "&Start record macro      C-r"
+#, fuzzy
+msgid "&Start record macro"
 msgstr "Comença a &enregistrar la macro    C-r"
 
-msgid "&Finish record macro...  C-r"
+#, fuzzy
+msgid "&Finish record macro..."
 msgstr "&Finalitza l'enregistrament de la macro...  C-r"
 
-msgid "&Execute macro...   C-a, KEY"
+#, fuzzy
+msgid "&Execute macro..."
 msgstr "e&Xecuta la macro...   C-a, TECLA"
 
-msgid "Delete macr&o...            "
-msgstr "&Esborra la macro...             "
+#, fuzzy
+msgid "Delete macr&o..."
+msgstr " Suprimeix la macro "
 
-msgid "Insert &date/time           "
-msgstr "insereix &Data/hora             "
-
-msgid "Format p&aragraph        M-p"
-msgstr "&Formateja el paràgraf          M-p"
-
-msgid "'ispell' s&pell check    C-p"
+#, fuzzy
+msgid "'ispell' s&pell check"
 msgstr "comprova l'or&Tografia: ispell  C-p"
 
-msgid "Sor&t...                 M-t"
-msgstr "&Ordena...                 M-t"
+#, fuzzy
+msgid "&Mail..."
+msgstr "&Filtra..."
 
-msgid "Paste o&utput of...      M-u"
+#, fuzzy
+msgid "Insert &literal..."
+msgstr "insereix &Literal...         C-q"
+
+#, fuzzy
+msgid "Insert &date/time"
+msgstr "insereix &Data/hora             "
+
+#, fuzzy
+msgid "Format p&aragraph"
+msgstr "&Formateja el paràgraf          M-p"
+
+#, fuzzy
+msgid "Sor&t..."
+msgstr "&Ordenació..."
+
+msgid "Paste o&utput of..."
 msgstr ""
 
-msgid "E&xternal Formatter      F19"
+#, fuzzy
+msgid "E&xternal formatter"
 msgstr "Formatador e&xtern       F19"
-
-msgid "&Mail...                    "
-msgstr "envia per co&Rreu...          "
-
-msgid "&Execute macro... C-x e, KEY"
-msgstr "e&Xecuta la macro... C-x e, TECLA"
-
-msgid "'ispell' s&pell check    M-$"
-msgstr "comprova l'or&Tografia: ispell  M-$"
 
 msgid "&General...  "
 msgstr "&General..."
 
-msgid "&Save mode..."
+#, fuzzy
+msgid "Save &mode..."
 msgstr "&Mode de desar..."
 
 #, fuzzy
-msgid "Learn &Keys..."
+msgid "Learn &keys..."
 msgstr "defineix &Tecles..."
 
 #, fuzzy
-msgid "Syntax &Highlighting..."
+msgid "Syntax &highlighting..."
 msgstr "Ressaltament de la sinta&Xi"
 
 #, fuzzy
@@ -647,35 +630,32 @@ msgstr "edita el fitxer de &Menús"
 msgid "&Menu file"
 msgstr "edita el fitxer de &Menús"
 
-#, fuzzy
-msgid "Save setu&p"
+msgid "&Save setup"
 msgstr "&Desa la configuració"
 
-# Açò s'agraeix!  iv
-msgid " File "
-msgstr " Fitxer "
-
-msgid " Edit "
-msgstr " Edició "
-
-msgid " Sear/Repl "
-msgstr " Cerca/Reempl "
-
-msgid " Command "
-msgstr " Ordres "
-
-msgid " Options "
-msgstr " Opcions "
-
-msgid "Intuitive"
-msgstr "Intuïtiu"
-
-msgid "Emacs"
-msgstr "Emacs"
+#, fuzzy
+msgid "&File"
+msgstr "Fitxer"
 
 #, fuzzy
-msgid "User-defined"
-msgstr "definit per l'&Usuari:"
+msgid "&Edit"
+msgstr "Edita"
+
+#, fuzzy
+msgid "&Search"
+msgstr "Cerca"
+
+#, fuzzy
+msgid "&Command"
+msgstr "Ordre"
+
+#, fuzzy
+msgid "For&mat"
+msgstr "Formata"
+
+#, fuzzy
+msgid "&Options"
+msgstr " &Opcions "
 
 msgid "None"
 msgstr "Cap"
@@ -688,9 +668,6 @@ msgstr "Ajustament de màquina d'escriure"
 
 msgid "Word wrap line length: "
 msgstr "Longitud de línia per a l'ajustament: "
-
-msgid "Tab spacing: "
-msgstr "Mida del tabulador: "
 
 msgid "Cursor beyond end of line"
 msgstr ""
@@ -715,11 +692,14 @@ msgstr " Desa el fitxer "
 msgid "Confir&m before saving"
 msgstr "con&Firma en desar"
 
-msgid "Fill tabs with &spaces"
-msgstr "omple els tabuladors amb e&Spais"
-
 msgid "&Return does autoindent"
 msgstr "Fes auto&Sagnat en prémer la tecla de retorn del carro"
+
+msgid "Tab spacing: "
+msgstr "Mida del tabulador: "
+
+msgid "Fill tabs with &spaces"
+msgstr "omple els tabuladors amb e&Spais"
 
 msgid "&Backspace through tabs"
 msgstr "es&Borra els tabuladors amb la tecla de retrocés"
@@ -730,35 +710,38 @@ msgstr "&Simula les mitges tabulacions"
 msgid "Wrap mode"
 msgstr "Mode d'ajustament"
 
-msgid "Key emulation"
-msgstr "Emulació de tecles"
-
 msgid " Editor options "
 msgstr " Opcions de l'editor "
 
-msgid "Help"
-msgstr "Ajuda"
+msgid "ButtonBar|Help"
+msgstr ""
 
-msgid "Save"
-msgstr "Desa"
+msgid "ButtonBar|Save"
+msgstr ""
 
-msgid "Mark"
-msgstr "Marca"
+msgid "ButtonBar|Mark"
+msgstr ""
 
-msgid "Replac"
-msgstr "Reempl"
+msgid "ButtonBar|Replac"
+msgstr ""
 
-msgid "Copy"
-msgstr "Copia"
+msgid "ButtonBar|Copy"
+msgstr ""
 
-msgid "Move"
-msgstr "Mou"
+msgid "ButtonBar|Move"
+msgstr ""
 
-msgid "Delete"
-msgstr "Suprimeix"
+msgid "ButtonBar|Search"
+msgstr ""
 
-msgid "PullDn"
-msgstr "Desplega"
+msgid "ButtonBar|Delete"
+msgstr ""
+
+msgid "ButtonBar|PullDn"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
 
 msgid " Load syntax file "
 msgstr " Carrega un fitxer de sintaxi "
@@ -1227,6 +1210,10 @@ msgstr "i la T o INS per marcar-les"
 msgid " Permission "
 msgstr " Permisos "
 
+# Açò s'agraeix!  iv
+msgid " File "
+msgstr " Fitxer "
+
 msgid "Chmod command"
 msgstr "Canvi de permisos"
 
@@ -1494,14 +1481,14 @@ msgid ""
 "it."
 msgstr ""
 
-msgid " Copy "
-msgstr " Copia "
+msgid "DialogTitle|Copy"
+msgstr ""
 
-msgid " Move "
-msgstr " Mou "
+msgid "DialogTitle|Move"
+msgstr ""
 
-msgid " Delete "
-msgstr " Suprimeix "
+msgid "DialogTitle|Delete"
+msgstr ""
 
 msgid " Cannot make the hardlink "
 msgstr " No s'ha pogut fer l'enllaç fort "
@@ -1656,9 +1643,6 @@ msgstr ""
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr "S'ha recuperat un fitxer incomplet. Voleu conservar-lo?"
 
-msgid "&Delete"
-msgstr "&Suprimeix"
-
 msgid "&Keep"
 msgstr "&Conservar-lo"
 
@@ -1782,14 +1766,14 @@ msgstr ""
 msgid "Directory scanning"
 msgstr "Ruta del directori"
 
-msgid "1Copy"
-msgstr "1Copia"
+msgid "FileOperation|Copy"
+msgstr ""
 
-msgid "1Move"
-msgstr "1Mou"
+msgid "FileOperation|Move"
+msgstr ""
 
-msgid "1Delete"
-msgstr "1Suprimeix"
+msgid "FileOperation|Delete"
+msgstr ""
 
 #, no-c-format
 msgid "%o %f \"%s\"%m"
@@ -1819,6 +1803,10 @@ msgstr " amb màscara font:"
 
 msgid " to:"
 msgstr " cap a:"
+
+#, c-format
+msgid "%s?"
+msgstr ""
 
 msgid " Cannot operate on \"..\"! "
 msgstr " No puc treballar sobre \"..\"! "
@@ -1968,9 +1956,6 @@ msgstr "Canvia de &dirextori"
 msgid "&Again"
 msgstr "Un &Altre cop"
 
-msgid "&Quit"
-msgstr "&Surt"
-
 msgid "Pane&lize"
 msgstr "Converteix-ho en &quadre"
 
@@ -2057,14 +2042,14 @@ msgstr " S'ha produït un error intern: Començament doble de l'àrea d'enllaço
 msgid " Cannot find node %s in help file "
 msgstr " No es troba el node %s al fitxer d'ajuda"
 
-msgid "Index"
-msgstr "Índex"
+msgid "Help"
+msgstr "Ajuda"
 
-msgid "Prev"
-msgstr "Anterior"
+msgid "ButtonBar|Index"
+msgstr ""
 
-msgid "&Move"
-msgstr "&Mou"
+msgid "ButtonBar|Prev"
+msgstr ""
 
 msgid "&Remove"
 msgstr "&Suprimeix"
@@ -2375,11 +2360,13 @@ msgstr " Realment voleu sortir del Midnight Commander? "
 msgid "&Listing mode..."
 msgstr "mode de &Llistat..."
 
-msgid "&Quick view     C-x q"
-msgstr "&Vista ràpida     C-x q"
+#, fuzzy
+msgid "&Quick view"
+msgstr "Desat ràpid "
 
-msgid "&Info           C-x i"
-msgstr "&Informació       C-x i"
+#, fuzzy
+msgid "&Info"
+msgstr "node-&I"
 
 msgid "&Sort order..."
 msgstr "&Ordenació..."
@@ -2388,7 +2375,7 @@ msgid "&Filter..."
 msgstr "&Filtra..."
 
 #, fuzzy
-msgid "&Encoding...    M-e"
+msgid "&Encoding..."
 msgstr "&Ordena...                 M-t"
 
 msgid "&Network link..."
@@ -2404,102 +2391,117 @@ msgstr "Enllaç SM&B..."
 msgid "SM&B link..."
 msgstr "Enllaç SM&B..."
 
-msgid "&Rescan         C-r"
-msgstr "&Rellegeix      C-r"
+#, fuzzy
+msgid "&Rescan"
+msgstr "Rellegeix"
 
-msgid "&View               F3"
-msgstr "&Visualitza                  F3"
+#, fuzzy
+msgid "&View"
+msgstr "Vista"
 
-msgid "Vie&w file...         "
-msgstr "Visualitza el fi&Txer...               "
+#, fuzzy
+msgid "Vie&w file..."
+msgstr " Visualització del fitxer "
 
-msgid "&Filtered view     M-!"
-msgstr "vista &Filtrada              M-!"
+#, fuzzy
+msgid "&Filtered view"
+msgstr " Vista filtrada "
 
-msgid "&Edit               F4"
-msgstr "&Edita                      F4"
+msgid "C&hmod"
+msgstr ""
 
-msgid "&Copy               F5"
-msgstr "&Copia                      F5"
+#, fuzzy
+msgid "&Link"
+msgstr "en&Llaços"
 
-msgid "c&Hmod           C-x c"
-msgstr "permisos (c&Hmod)        C-x c"
+#, fuzzy
+msgid "&SymLink"
+msgstr "en&Llaços"
 
-msgid "&Link            C-x l"
-msgstr "en&Llaça                 C-x l"
+#, fuzzy
+msgid "Edit s&ymlink"
+msgstr " Edita l'enllaç simbòlic "
 
-msgid "&SymLink         C-x s"
-msgstr "enllaç &Simbòlic          C-x s"
+msgid "Ch&own"
+msgstr ""
 
-msgid "edit s&Ymlink  C-x C-s"
-msgstr "e&Dita l'enllaç simbòlic C-x C-s"
-
-msgid "ch&Own           C-x o"
-msgstr "canvia el propietari (ch&Own)       C-x o"
-
-msgid "&Advanced chown       "
+#, fuzzy
+msgid "&Advanced chown"
 msgstr "&Permisos i propietari        "
 
-msgid "&Rename/Move        F6"
-msgstr "&Reanomena/Mou            F6"
+#, fuzzy
+msgid "&Rename/Move"
+msgstr "&Suprimeix"
 
-msgid "&Mkdir              F7"
-msgstr "crea directori (&Mkdir)     F7"
+#, fuzzy
+msgid "&Mkdir"
+msgstr "FerDir"
 
-msgid "&Delete             F8"
-msgstr "sup&Rimeix                  F8"
+#, fuzzy
+msgid "&Quick cd"
+msgstr "Canvi ràpid de directori"
 
-msgid "&Quick cd          M-c"
-msgstr "&Canvi ràpid de directori           M-c"
+#, fuzzy
+msgid "Select &group"
+msgstr "Estableix els &grups"
 
-msgid "select &Group      M-+"
-msgstr "selecciona el &Grup           M-+"
+#, fuzzy
+msgid "U&nselect group"
+msgstr " Deselecciona "
 
-msgid "u&Nselect group    M-\\"
-msgstr "deseleccio&Na el grup         M-\\"
-
-msgid "reverse selec&Tion M-*"
+#, fuzzy
+msgid "Reverse selec&tion"
 msgstr "&Inverteix la selecció        M-*"
 
-msgid "e&Xit              F10"
-msgstr "&Surt                      F10"
+#, fuzzy
+msgid "E&xit"
+msgstr "Edita"
 
-msgid "&User menu          F2"
-msgstr "menú d'&Usuari               F2"
+#, fuzzy
+msgid "&User menu"
+msgstr " Menú d'usuari "
 
 msgid "&Directory tree"
 msgstr "arbre de &Directoris"
 
-msgid "&Find file            M-?"
-msgstr "&Cerca el fitxer           M-?"
+#, fuzzy
+msgid "&Find file"
+msgstr "Cerca Fitxer"
 
-msgid "s&Wap panels          C-u"
-msgstr "I&ntercanvia els quadres    C-u"
+msgid "S&wap panels"
+msgstr ""
 
-msgid "switch &Panels on/off C-o"
+#, fuzzy
+msgid "Switch &panels on/off"
 msgstr "activa/desactiva la commutació de &Quadres C-o"
 
-msgid "&Compare directories  C-x d"
-msgstr "c&Ompara directoris     C-x d"
+#, fuzzy
+msgid "&Compare directories"
+msgstr " Compara els directoris "
 
-msgid "e&Xternal panelize    C-x !"
-msgstr "quadre de cerca e&Xterna   C-x !"
+#, fuzzy
+msgid "E&xternal panelize"
+msgstr "Quadre de recerca externa"
 
-msgid "show directory s&Izes"
+#, fuzzy
+msgid "Show directory s&izes"
 msgstr "mostra la mi&Da dels directoris"
 
 #, fuzzy
-msgid "Command &history      M-h"
-msgstr " Historial d'ordres "
+msgid "Command &history"
+msgstr "&Historial d'ordres"
 
-msgid "di&Rectory hotlist    C-\\"
-msgstr "directoris fa&Vorits     C-\\"
+#, fuzzy
+msgid "Di&rectory hotlist"
+msgstr "Directori favorits"
 
-msgid "&Active VFS list      C-x a"
+#, fuzzy
+msgid "&Active VFS list"
 msgstr "llista de VFSs &Actius   C-x a"
 
-msgid "&Background jobs      C-x j"
-msgstr "tasques de &Fons         C-x j"
+#, fuzzy
+msgid "&Background jobs"
+msgstr "Tasques de fons"
 
 msgid "&Undelete files (ext2fs only)"
 msgstr "&Recupera els fitxers (sols ext2fs)"
@@ -2522,40 +2524,30 @@ msgstr "&Configuració..."
 msgid "&Layout..."
 msgstr "&Format..."
 
-msgid "c&Onfirmation..."
+#, fuzzy
+msgid "C&onfirmation..."
 msgstr "con&Firmació..."
 
 msgid "&Display bits..."
 msgstr "&Bits de visualització..."
 
-msgid "learn &Keys..."
-msgstr "defineix &Tecles..."
-
 msgid "&Virtual FS..."
 msgstr "Sistemes de fitxers &Virtuals..."
 
-msgid "&Save setup"
-msgstr "&Desa la configuració"
-
-msgid " &Above "
+#, fuzzy
+msgid "&Above"
 msgstr " a dal&T "
 
-msgid " &Left "
+#, fuzzy
+msgid "&Left"
 msgstr " &Esquerra "
 
-msgid " &File "
-msgstr " &Fitxer "
-
-msgid " &Command "
-msgstr " &Ordre "
-
-msgid " &Options "
-msgstr " &Opcions "
-
-msgid " &Below "
+#, fuzzy
+msgid "&Below"
 msgstr " a bai&X "
 
-msgid " &Right "
+#, fuzzy
+msgid "&Right"
 msgstr " &Dreta "
 
 msgid " Information "
@@ -2572,8 +2564,8 @@ msgstr ""
 " que feu una recàrrega manual del directori. Vegeu la   \n"
 " pàgina del manual per als detalls.          "
 
-msgid "Menu"
-msgstr "Menú"
+msgid "ButtonBar|Menu"
+msgstr ""
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "La variable d'entorn TERM no esta definida!\n"
@@ -2727,41 +2719,34 @@ msgid "SUB-DIR"
 msgstr "SUB-DIR"
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
-msgid "u"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|u"
 msgstr ""
-
-#, fuzzy
-msgid "Unsorted"
-msgstr "sense &Ordre"
 
 msgid "&Unsorted"
 msgstr "sense &Ordre"
 
 #. TRANSLATORS: one single character to represent 'name' sort mode
-#, fuzzy
-msgid "n"
-msgstr "Sobre"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|n"
+msgstr ""
 
 msgid "&Name"
 msgstr "&Nom"
 
 #. TRANSLATORS: one single character to represent 'extension' sort mode
-msgid "e"
-msgstr ""
-
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 #, fuzzy
-msgid "Extension"
-msgstr "Extensió:"
+msgid "sort|e"
+msgstr "sense &Ordre"
 
 msgid "&Extension"
 msgstr "&Extensió"
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
-msgid "s"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|s"
 msgstr ""
-
-msgid "Size"
-msgstr "Mida"
 
 msgid "&Size"
 msgstr "Mi&da"
@@ -2771,31 +2756,25 @@ msgid "Block Size"
 msgstr " Mida"
 
 #. TRANSLATORS: one single character to represent 'Modify time' sort mode
-msgid "m"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|m"
 msgstr ""
-
-msgid "MTime"
-msgstr "MTime"
 
 msgid "&Modify time"
 msgstr "data de &Modificació"
 
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
-msgid "a"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|a"
 msgstr ""
-
-msgid "ATime"
-msgstr "ATime"
 
 msgid "&Access time"
 msgstr "data d'&Accés"
 
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
-msgid "h"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|h"
 msgstr ""
-
-msgid "CTime"
-msgstr "CTime"
 
 msgid "C&Hange time"
 msgstr "data de &Canvi"
@@ -2810,11 +2789,9 @@ msgid "Nl"
 msgstr "N1"
 
 #. TRANSLATORS: one single character to represent 'inode' sort mode
-msgid "i"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|i"
 msgstr ""
-
-msgid "Inode"
-msgstr "Inode"
 
 msgid "&Inode"
 msgstr "node-&I"
@@ -2857,17 +2834,17 @@ msgstr ""
 msgid " Do you really want to execute? "
 msgstr " Realment ho voleu executar? "
 
-msgid "View"
-msgstr "Vista"
+msgid "ButtonBar|View"
+msgstr ""
 
-msgid "Edit"
-msgstr "Edita"
+msgid "ButtonBar|Edit"
+msgstr ""
 
-msgid "RenMov"
-msgstr "RenMov"
+msgid "ButtonBar|RenMov"
+msgstr ""
 
-msgid "Mkdir"
-msgstr "FerDir"
+msgid "ButtonBar|Mkdir"
+msgstr ""
 
 msgid " Not implemented yet "
 msgstr ""
@@ -2898,6 +2875,12 @@ msgstr " Escolliu la pàgina de codis d'entrada "
 
 msgid "-  < No translation >"
 msgstr "-  < Cap traducció >"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot save file %s:\n"
+"%s"
+msgstr " S'ha produït un error en intentar desar el fitxer. "
 
 #, c-format
 msgid ""
@@ -3001,20 +2984,20 @@ msgstr ""
 msgid "  Delete %s?  "
 msgstr "  Suprimir %s?  "
 
-msgid "Static"
-msgstr "Estàtic"
+msgid "ButtonBar|Static"
+msgstr ""
 
-msgid "Dynamc"
-msgstr "Dinàmic"
+msgid "ButtonBar|Dynamc"
+msgstr ""
 
-msgid "Rescan"
-msgstr "Rellegeix"
+msgid "ButtonBar|Rescan"
+msgstr ""
 
-msgid "Forget"
-msgstr "Oblida-ho"
+msgid "ButtonBar|Forget"
+msgstr ""
 
-msgid "Rmdir"
-msgstr "SupDir"
+msgid "ButtonBar|Rmdir"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -3161,10 +3144,6 @@ msgstr "Inserir teclat numèric"
 
 msgid "Delete on keypad"
 msgstr "Suprimir teclat numèric"
-
-#, fuzzy
-msgid "Escape key"
-msgstr "Barra teclat numèric"
 
 msgid "Enter on keypad"
 msgstr "Tecla de retorn teclat numèric"
@@ -3406,12 +3385,6 @@ msgstr " No puc llançar el procés fill "
 msgid "Empty output from child filter"
 msgstr ""
 
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Quit"
-msgstr ""
-
 msgid "ButtonBar|Ascii"
 msgstr ""
 
@@ -3424,15 +3397,6 @@ msgstr ""
 msgid "ButtonBar|Line"
 msgstr ""
 
-msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
 msgid "ButtonBar|UnWrap"
 msgstr ""
 
@@ -3440,9 +3404,6 @@ msgid "ButtonBar|Wrap"
 msgstr ""
 
 msgid "ButtonBar|HxSrch"
-msgstr ""
-
-msgid "ButtonBar|Search"
 msgstr ""
 
 msgid "ButtonBar|Raw"
@@ -3962,6 +3923,331 @@ msgstr "Error intern:"
 msgid "Changes to file lost"
 msgstr "Canvia al fitxer perdut"
 
+#~ msgid "Do backups -->"
+#~ msgstr "Fer còpies de seguretat -->"
+
+#~ msgid "Extension:"
+#~ msgstr "Extensió:"
+
+#~ msgid "&New              C-n"
+#~ msgstr "&Nou                  C-n"
+
+#~ msgid "&Save              F2"
+#~ msgstr "&Desa               F2"
+
+#~ msgid "Save &as...       F12"
+#~ msgstr "desa com &a...     F12"
+
+#~ msgid "A&bout...            "
+#~ msgstr "a &Propòsit de...        "
+
+#~ msgid "&Quit             F10"
+#~ msgstr "&Surt                F10"
+
+#~ msgid "&New            C-x k"
+#~ msgstr "&Nou                C-x k"
+
+#~ msgid "Copy to &file...     "
+#~ msgstr "copia al &Fitxer...      "
+
+#, fuzzy
+#~ msgid "&Toggle mark                 F3"
+#~ msgstr "&Canvia inici/fi de marcador    F3"
+
+#, fuzzy
+#~ msgid "Mar&k columns              S-F3"
+#~ msgstr "&Marca les columnes     S-F3"
+
+#, fuzzy
+#~ msgid "&Copy                        F5"
+#~ msgstr "&Copia                      F5"
+
+#, fuzzy
+#~ msgid "&Move                        F6"
+#~ msgstr "&Mou                 F6"
+
+#, fuzzy
+#~ msgid "&Delete                      F8"
+#~ msgstr "sup&Rimeix                  F8"
+
+#, fuzzy
+#~ msgid "&Next bookmark              M-j"
+#~ msgstr "&Nou                  C-n"
+
+#, fuzzy
+#~ msgid "&Undo                       C-u"
+#~ msgstr "&Desfés               C-u"
+
+#, fuzzy
+#~ msgid "&Beginning               C-PgUp"
+#~ msgstr "&Principi         C-RePàg"
+
+#, fuzzy
+#~ msgid "&End                     C-PgDn"
+#~ msgstr "&Final            C-AvPàg"
+
+#, fuzzy
+#~ msgid "C&opy to clipfile           M-w"
+#~ msgstr "&Vés a la línia...          M-l"
+
+#, fuzzy
+#~ msgid "C&ut to clipfile            C-w"
+#~ msgstr "&Vés a la línia...          M-l"
+
+#, fuzzy
+#~ msgid "Toggle bookmar&k               "
+#~ msgstr "&Canvia inici/fi de marcador    F3"
+
+#, fuzzy
+#~ msgid "&Next bookmark                 "
+#~ msgstr "&Nou                  C-n"
+
+#, fuzzy
+#~ msgid "Pre&v bookmark                 "
+#~ msgstr "&Ordena...                 M-t"
+
+#, fuzzy
+#~ msgid "&Flush bookmark                "
+#~ msgstr "envia per co&Rreu...          "
+
+#~ msgid "&Search...         F7"
+#~ msgstr "&Cerca...             F7"
+
+#~ msgid "&Replace...        F4"
+#~ msgstr "&Reemplaça...            F4"
+
+#~ msgid "&Go to line...            M-l"
+#~ msgstr "&Vés a la línia...          M-l"
+
+#, fuzzy
+#~ msgid "Encod&ing...             M-e"
+#~ msgstr "&Ordena...                 M-t"
+
+#~ msgid "Delete macr&o...            "
+#~ msgstr "&Esborra la macro...             "
+
+#~ msgid "Sor&t...                 M-t"
+#~ msgstr "&Ordena...                 M-t"
+
+#~ msgid "&Mail...                    "
+#~ msgstr "envia per co&Rreu...          "
+
+#~ msgid "&Execute macro... C-x e, KEY"
+#~ msgstr "e&Xecuta la macro... C-x e, TECLA"
+
+#~ msgid "'ispell' s&pell check    M-$"
+#~ msgstr "comprova l'or&Tografia: ispell  M-$"
+
+#, fuzzy
+#~ msgid "Save setu&p"
+#~ msgstr "&Desa la configuració"
+
+#~ msgid " Edit "
+#~ msgstr " Edició "
+
+#~ msgid " Sear/Repl "
+#~ msgstr " Cerca/Reempl "
+
+#~ msgid " Command "
+#~ msgstr " Ordres "
+
+#~ msgid " Options "
+#~ msgstr " Opcions "
+
+#~ msgid "Intuitive"
+#~ msgstr "Intuïtiu"
+
+#~ msgid "Emacs"
+#~ msgstr "Emacs"
+
+#, fuzzy
+#~ msgid "User-defined"
+#~ msgstr "definit per l'&Usuari:"
+
+#~ msgid "Key emulation"
+#~ msgstr "Emulació de tecles"
+
+#~ msgid "Save"
+#~ msgstr "Desa"
+
+#~ msgid "Mark"
+#~ msgstr "Marca"
+
+#~ msgid "Replac"
+#~ msgstr "Reempl"
+
+#~ msgid "Move"
+#~ msgstr "Mou"
+
+#~ msgid "Delete"
+#~ msgstr "Suprimeix"
+
+#~ msgid "PullDn"
+#~ msgstr "Desplega"
+
+#~ msgid " Copy "
+#~ msgstr " Copia "
+
+#~ msgid " Move "
+#~ msgstr " Mou "
+
+#~ msgid " Delete "
+#~ msgstr " Suprimeix "
+
+#~ msgid "1Copy"
+#~ msgstr "1Copia"
+
+#~ msgid "1Move"
+#~ msgstr "1Mou"
+
+#~ msgid "1Delete"
+#~ msgstr "1Suprimeix"
+
+#~ msgid "Index"
+#~ msgstr "Índex"
+
+#~ msgid "Prev"
+#~ msgstr "Anterior"
+
+#~ msgid "&Quick view     C-x q"
+#~ msgstr "&Vista ràpida     C-x q"
+
+#~ msgid "&Info           C-x i"
+#~ msgstr "&Informació       C-x i"
+
+#~ msgid "&Rescan         C-r"
+#~ msgstr "&Rellegeix      C-r"
+
+#~ msgid "&View               F3"
+#~ msgstr "&Visualitza                  F3"
+
+#~ msgid "Vie&w file...         "
+#~ msgstr "Visualitza el fi&Txer...               "
+
+#~ msgid "&Filtered view     M-!"
+#~ msgstr "vista &Filtrada              M-!"
+
+#~ msgid "&Edit               F4"
+#~ msgstr "&Edita                      F4"
+
+#~ msgid "&Copy               F5"
+#~ msgstr "&Copia                      F5"
+
+#~ msgid "c&Hmod           C-x c"
+#~ msgstr "permisos (c&Hmod)        C-x c"
+
+#~ msgid "&Link            C-x l"
+#~ msgstr "en&Llaça                 C-x l"
+
+#~ msgid "&SymLink         C-x s"
+#~ msgstr "enllaç &Simbòlic          C-x s"
+
+#~ msgid "edit s&Ymlink  C-x C-s"
+#~ msgstr "e&Dita l'enllaç simbòlic C-x C-s"
+
+#~ msgid "ch&Own           C-x o"
+#~ msgstr "canvia el propietari (ch&Own)       C-x o"
+
+#~ msgid "&Rename/Move        F6"
+#~ msgstr "&Reanomena/Mou            F6"
+
+#~ msgid "&Mkdir              F7"
+#~ msgstr "crea directori (&Mkdir)     F7"
+
+#~ msgid "&Delete             F8"
+#~ msgstr "sup&Rimeix                  F8"
+
+#~ msgid "&Quick cd          M-c"
+#~ msgstr "&Canvi ràpid de directori           M-c"
+
+#~ msgid "select &Group      M-+"
+#~ msgstr "selecciona el &Grup           M-+"
+
+#~ msgid "u&Nselect group    M-\\"
+#~ msgstr "deseleccio&Na el grup         M-\\"
+
+#~ msgid "e&Xit              F10"
+#~ msgstr "&Surt                      F10"
+
+#~ msgid "&User menu          F2"
+#~ msgstr "menú d'&Usuari               F2"
+
+#~ msgid "&Find file            M-?"
+#~ msgstr "&Cerca el fitxer           M-?"
+
+#~ msgid "s&Wap panels          C-u"
+#~ msgstr "I&ntercanvia els quadres    C-u"
+
+#~ msgid "&Compare directories  C-x d"
+#~ msgstr "c&Ompara directoris     C-x d"
+
+#~ msgid "e&Xternal panelize    C-x !"
+#~ msgstr "quadre de cerca e&Xterna   C-x !"
+
+#, fuzzy
+#~ msgid "Command &history      M-h"
+#~ msgstr " Historial d'ordres "
+
+#~ msgid "di&Rectory hotlist    C-\\"
+#~ msgstr "directoris fa&Vorits     C-\\"
+
+#~ msgid "&Background jobs      C-x j"
+#~ msgstr "tasques de &Fons         C-x j"
+
+#~ msgid "learn &Keys..."
+#~ msgstr "defineix &Tecles..."
+
+#~ msgid " &File "
+#~ msgstr " &Fitxer "
+
+#~ msgid " &Command "
+#~ msgstr " &Ordre "
+
+#~ msgid "Menu"
+#~ msgstr "Menú"
+
+#, fuzzy
+#~ msgid "n"
+#~ msgstr "Sobre"
+
+#, fuzzy
+#~ msgid "Extension"
+#~ msgstr "Extensió:"
+
+#~ msgid "Size"
+#~ msgstr "Mida"
+
+#~ msgid "MTime"
+#~ msgstr "MTime"
+
+#~ msgid "ATime"
+#~ msgstr "ATime"
+
+#~ msgid "CTime"
+#~ msgstr "CTime"
+
+#~ msgid "Inode"
+#~ msgstr "Inode"
+
+#~ msgid "RenMov"
+#~ msgstr "RenMov"
+
+#~ msgid "Static"
+#~ msgstr "Estàtic"
+
+#~ msgid "Dynamc"
+#~ msgstr "Dinàmic"
+
+#~ msgid "Forget"
+#~ msgstr "Oblida-ho"
+
+#~ msgid "Rmdir"
+#~ msgstr "SupDir"
+
+#, fuzzy
+#~ msgid "Escape key"
+#~ msgstr "Barra teclat numèric"
+
 #, fuzzy
 #~ msgid "bind: Unknown command: `%s'"
 #~ msgstr " Canvi de propietari "
@@ -4055,15 +4341,8 @@ msgstr "Canvia al fitxer perdut"
 #~ msgid "&Delete            F8"
 #~ msgstr "&Suprimeix              F8"
 
-#, fuzzy
-#~ msgid "Save setu&p..."
-#~ msgstr "&Desa la configuració"
-
 #~ msgid " The command history is empty "
 #~ msgstr " L'historial d'ordres és buit "
-
-#~ msgid "command &History"
-#~ msgstr "&Historial d'ordres"
 
 #~ msgid "Edit edi&tor menu file"
 #~ msgstr "Edició de l'edi&Tor de menús"
@@ -4102,9 +4381,6 @@ msgstr "Canvia al fitxer perdut"
 
 #~ msgid "&Type"
 #~ msgstr "&Tipus"
-
-#~ msgid "&Links"
-#~ msgstr "en&Llaços"
 
 #~ msgid "N&GID"
 #~ msgstr "&GID numèric"

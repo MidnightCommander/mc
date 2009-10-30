@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-09 09:50+0300\n"
+"POT-Creation-Date: 2009-10-30 10:39+0200\n"
 "PO-Revision-Date: 2000-10-26 11:00 CST\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil <ubuntu-l10n-tam@lists.ubuntu.com>\n"
@@ -51,6 +51,29 @@ msgstr "புதிய முனையம் ஒனறைப் படைக்
 msgid " File %s is too large "
 msgstr " இந்த கோப்பு மிகப் பெரியது: "
 
+msgid " About "
+msgstr " பற்றி "
+
+msgid ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       A user friendly text editor written\n"
+"           for the Midnight Commander.\n"
+msgstr ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+"நகல் காப்பு (C) 1996 இலவசப் மென்பொருள் நிறுவனம்\n"
+"\n"
+"    Midnight Commanderக்காக எழுதப்பட்ட ஓர்\n"
+"        பயனர் தோழமையான உரை பதிப்பான்.\n"
+
+msgid "&OK"
+msgstr "&சரி"
+
 msgid "Macro recursion is too deep"
 msgstr ""
 
@@ -88,23 +111,29 @@ msgstr ""
 msgid " Cannot open file for writing: %s "
 msgstr "கோப்பை வாசிப்பதட்கு திறக்க முடியவில்லை: "
 
-msgid "Quick save "
+#, fuzzy
+msgid "&Quick save"
 msgstr "விரைவான சேமிப்பு "
 
-msgid "Safe save "
+#, fuzzy
+msgid "&Safe save"
 msgstr "பத்திரமான சேமிப்பு "
 
-msgid "Do backups -->"
-msgstr "காப்பு செய் -->"
+msgid "&Do backups with following extension:"
+msgstr ""
 
-msgid "&OK"
-msgstr "&சரி"
-
-msgid "Extension:"
-msgstr "நீட்டிப்பு:"
+msgid "Check &POSIX new line"
+msgstr ""
 
 msgid " Edit Save Mode "
 msgstr " சேமிப்பு முறைமையை பதி "
+
+msgid "The file you are saving is not finished with a newline"
+msgstr ""
+
+#, fuzzy
+msgid "C&ontinue"
+msgstr "தொடர்ந்து செல்"
 
 msgid "&Do not change"
 msgstr ""
@@ -176,10 +205,6 @@ msgid ""
 msgstr ""
 " கோப்பை சேமிக்காமல் இந்த உரை மாற்றப்பட்டது. \n"
 " தொடர்ந்தால், மாறறங்கள் வீசப்படும். "
-
-#, fuzzy
-msgid "C&ontinue"
-msgstr "தொடர்ந்து செல்"
 
 msgid "Syntax file edit"
 msgstr ""
@@ -395,237 +420,187 @@ msgstr ""
 msgid "&Ignore lock"
 msgstr ""
 
-msgid " About "
-msgstr " பற்றி "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-"நகல் காப்பு (C) 1996 இலவசப் மென்பொருள் நிறுவனம்\n"
-"\n"
-"    Midnight Commanderக்காக எழுதப்பட்ட ஓர்\n"
-"        பயனர் தோழமையான உரை பதிப்பான்.\n"
-
 #, fuzzy
 msgid "&Open file..."
 msgstr "இதை வைத்து திற..."
 
-msgid "&New              C-n"
-msgstr "&புதியது            C-n"
+msgid "&New"
+msgstr ""
 
-msgid "&Save              F2"
-msgstr "&சேமி              F2"
-
-msgid "Save &as...       F12"
+#, fuzzy
+msgid "Save &as..."
 msgstr "வேறு &பெயரில் சேமி...  F12"
 
-msgid "&Insert file...   F15"
+#, fuzzy
+msgid "&Insert file..."
 msgstr "&கோப்பை செருகு... F15"
 
-msgid "Copy to &file...  C-f"
+#, fuzzy
+msgid "Cop&y to file..."
 msgstr "கோப்புக்கு &நகல்... C-f"
 
-msgid "&User menu...     F11"
+#, fuzzy
+msgid "&User menu..."
 msgstr "&பயனர் பட்டி...       F11"
 
-msgid "A&bout...            "
-msgstr "ப&ற்றி...              "
+#, fuzzy
+msgid "A&bout..."
+msgstr "&இட அமைவு..."
 
-msgid "&Quit             F10"
-msgstr "&வெளியேறு         F10"
+msgid "&Quit"
+msgstr ""
 
-msgid "&New            C-x k"
-msgstr "&புதியது           C-x k"
+msgid "&Toggle mark"
+msgstr ""
 
-msgid "Copy to &file...     "
-msgstr "கோப்புக்கு &நகல்...    "
+msgid "&Mark columns"
+msgstr ""
 
 #, fuzzy
-msgid "&Toggle mark                 F3"
-msgstr "குறி இருநிலை &மாற்றல் F3"
-
-#, fuzzy
-msgid "Mar&k columns              S-F3"
-msgstr "நெடுவாிசைகளை குறியிடு S-F3"
-
-#, fuzzy
-msgid "Toggle &ins/overw           Ins"
+msgid "Toggle &ins/overw"
 msgstr "&Ins/overw இருநிலை &மாற்று"
 
 #, fuzzy
-msgid "&Copy                        F5"
-msgstr "&நகல்               F5"
+msgid "&Copy"
+msgstr "நகல்"
+
+msgid "&Move"
+msgstr ""
+
+msgid "&Delete"
+msgstr ""
 
 #, fuzzy
-msgid "&Move                        F6"
-msgstr "ந&கர்               F6"
-
-#, fuzzy
-msgid "&Delete                      F8"
-msgstr "&நீக்கு             F8"
-
-#, fuzzy
-msgid "C&opy to clipfile         C-Ins"
+msgid "C&opy to clipfile"
 msgstr "கோப்புக்கு &நகல்...    "
 
 #, fuzzy
-msgid "C&ut to clipfile          S-Del"
+msgid "C&ut to clipfile"
 msgstr "&வாிசைக்குப் போ...       M-l"
 
-msgid "&Paste from clipfile      S-Ins"
+msgid "&Paste from clipfile"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k            M-k"
+msgid "Toggle bookmar&k"
 msgstr "குறி இருநிலை &மாற்றல் F3"
 
 #, fuzzy
-msgid "&Next bookmark              M-j"
+msgid "&Next bookmark"
 msgstr "&புதியது            C-n"
 
 #, fuzzy
-msgid "Pre&v bookmark              M-i"
+msgid "Pre&v bookmark"
 msgstr "வாிசை&யாக்கு...          M-t"
 
 #, fuzzy
-msgid "&Flush bookmark             M-o"
+msgid "&Flush bookmark"
 msgstr "&அஞ்சல்...                  "
 
-#, fuzzy
-msgid "&Undo                       C-u"
-msgstr "&கவிழ்              C-u"
+msgid "&Undo"
+msgstr ""
 
-#, fuzzy
-msgid "&Beginning               C-PgUp"
-msgstr "&தொடங்கள்      C-PgUp"
+msgid "&Beginning"
+msgstr ""
 
-#, fuzzy
-msgid "&End                     C-PgDn"
-msgstr "&கடைசி          C-PgDn"
-
-#, fuzzy
-msgid "C&opy to clipfile           M-w"
-msgstr "&வாிசைக்குப் போ...       M-l"
-
-#, fuzzy
-msgid "C&ut to clipfile            C-w"
-msgstr "&வாிசைக்குப் போ...       M-l"
-
-msgid "&Paste from clipfile        C-y"
+msgid "&End"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k               "
-msgstr "குறி இருநிலை &மாற்றல் F3"
+msgid "&Search..."
+msgstr "தேடு"
 
 #, fuzzy
-msgid "&Next bookmark                 "
-msgstr "&புதியது            C-n"
-
-#, fuzzy
-msgid "Pre&v bookmark                 "
-msgstr "வாிசை&யாக்கு...          M-t"
-
-#, fuzzy
-msgid "&Flush bookmark                "
-msgstr "&அஞ்சல்...                  "
-
-msgid "&Search...         F7"
-msgstr "&தேடு...            F7"
-
-msgid "Search &again     F17"
+msgid "Search &again"
 msgstr "&மறுபடியும் தேடு       F17"
 
-msgid "&Replace...        F4"
-msgstr "&மாற்று...           F4"
-
-msgid "&Go to line...            M-l"
-msgstr "&வாிசைக்குப் போ...       M-l"
+#, fuzzy
+msgid "&Replace..."
+msgstr "&மாற்று"
 
 #, fuzzy
-msgid "Toggle li&ne state        M-n"
+msgid "&Go to line..."
+msgstr " வாிசைக்குப் போ "
+
+#, fuzzy
+msgid "Toggle li&ne state"
 msgstr "குறி இருநிலை &மாற்றல் F3"
 
-msgid "Go to matching &bracket   M-b"
-msgstr ""
-
-msgid "Find declaration      A-Enter"
-msgstr ""
-
-msgid "Back from declaration     M--"
-msgstr ""
-
-msgid "Forward to declaration    M-+"
+msgid "Go to matching &bracket"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             M-e"
+msgid "Find declaration"
+msgstr "விலக்கியவைகளை ஒட்டு-வேலைகளுக்கு பிரகு கண்டுபிடி"
+
+msgid "Back from declaration"
+msgstr ""
+
+msgid "Forward to declaration"
+msgstr ""
+
+#, fuzzy
+msgid "Encod&ing..."
 msgstr "வாிசை&யாக்கு...          M-t"
 
-msgid "Insert &literal...       C-q"
-msgstr "நிலைஉரு &செருகுதல்...    C-q"
-
-msgid "&Refresh screen          C-l"
+#, fuzzy
+msgid "&Refresh screen"
 msgstr "திரையை &புதுக்கு            C-l"
 
-msgid "&Start record macro      C-r"
+msgid "&Start record macro"
 msgstr ""
 
-msgid "&Finish record macro...  C-r"
+msgid "&Finish record macro..."
 msgstr ""
 
-msgid "&Execute macro...   C-a, KEY"
-msgstr ""
+#, fuzzy
+msgid "&Execute macro..."
+msgstr " பெரு நிரலை செயல்படுத்து "
 
-msgid "Delete macr&o...            "
-msgstr ""
+#, fuzzy
+msgid "Delete macr&o..."
+msgstr " பெரும்-நிரலை நீக்கு"
 
-msgid "Insert &date/time           "
-msgstr "&திகதி/நேரம் செருகு           "
-
-msgid "Format p&aragraph        M-p"
-msgstr "&பத்தி வடிவம்                   M-p"
-
-msgid "'ispell' s&pell check    C-p"
+#, fuzzy
+msgid "'ispell' s&pell check"
 msgstr "'ispell' எ&ழுத்து சாிபார்ப்பு C-p"
 
-msgid "Sor&t...                 M-t"
-msgstr "வாிசை&யாக்கு...          M-t"
-
-msgid "Paste o&utput of...      M-u"
+msgid "&Mail..."
 msgstr ""
 
-msgid "E&xternal Formatter      F19"
+#, fuzzy
+msgid "Insert &literal..."
+msgstr "நிலைஉரு &செருகுதல்...    C-q"
+
+#, fuzzy
+msgid "Insert &date/time"
+msgstr "&திகதி/நேரம் செருகு           "
+
+#, fuzzy
+msgid "Format p&aragraph"
+msgstr "&பத்தி வடிவம்                   M-p"
+
+msgid "Sor&t..."
+msgstr ""
+
+msgid "Paste o&utput of..."
+msgstr ""
+
+#, fuzzy
+msgid "E&xternal formatter"
 msgstr "பு&ற வடிவூட்டி                  F19"
-
-msgid "&Mail...                    "
-msgstr "&அஞ்சல்...                  "
-
-msgid "&Execute macro... C-x e, KEY"
-msgstr ""
-
-msgid "'ispell' s&pell check    M-$"
-msgstr "'ispell' எ&ழுத்து சாிபார்ப்பு  M-$"
 
 msgid "&General...  "
 msgstr "&பொதுவானது... "
 
-msgid "&Save mode..."
+#, fuzzy
+msgid "Save &mode..."
 msgstr "சேமிப்பு முறைமை..."
 
-msgid "Learn &Keys..."
+msgid "Learn &keys..."
 msgstr ""
 
-msgid "Syntax &Highlighting..."
+msgid "Syntax &highlighting..."
 msgstr ""
 
 #, fuzzy
@@ -636,33 +611,31 @@ msgstr " கோப்பை சேமி "
 msgid "&Menu file"
 msgstr "இதை வைத்து திற..."
 
-#, fuzzy
-msgid "Save setu&p"
-msgstr "சேமிப்பு முறைமை..."
+msgid "&Save setup"
+msgstr ""
 
-msgid " File "
+#, fuzzy
+msgid "&File"
 msgstr " கோப்பு "
 
-msgid " Edit "
-msgstr " பதிப்பு "
+#, fuzzy
+msgid "&Edit"
+msgstr "பதிப்பு"
 
-msgid " Sear/Repl "
+#, fuzzy
+msgid "&Search"
+msgstr "தேடு"
+
+#, fuzzy
+msgid "&Command"
+msgstr "கட்டளை"
+
+msgid "For&mat"
 msgstr ""
 
-msgid " Command "
-msgstr " கட்டளை "
-
-msgid " Options "
+#, fuzzy
+msgid "&Options"
 msgstr " விருப்பங்கள் "
-
-msgid "Intuitive"
-msgstr ""
-
-msgid "Emacs"
-msgstr ""
-
-msgid "User-defined"
-msgstr ""
 
 msgid "None"
 msgstr ""
@@ -674,9 +647,6 @@ msgid "Type writer wrap"
 msgstr ""
 
 msgid "Word wrap line length: "
-msgstr ""
-
-msgid "Tab spacing: "
 msgstr ""
 
 msgid "Cursor beyond end of line"
@@ -701,10 +671,13 @@ msgstr " கோப்பை சேமி "
 msgid "Confir&m before saving"
 msgstr ""
 
-msgid "Fill tabs with &spaces"
+msgid "&Return does autoindent"
 msgstr ""
 
-msgid "&Return does autoindent"
+msgid "Tab spacing: "
+msgstr ""
+
+msgid "Fill tabs with &spaces"
 msgstr ""
 
 msgid "&Backspace through tabs"
@@ -716,34 +689,37 @@ msgstr ""
 msgid "Wrap mode"
 msgstr ""
 
-msgid "Key emulation"
-msgstr ""
-
 msgid " Editor options "
 msgstr ""
 
-msgid "Help"
+msgid "ButtonBar|Help"
 msgstr ""
 
-msgid "Save"
-msgstr "சேமி"
-
-msgid "Mark"
+msgid "ButtonBar|Save"
 msgstr ""
 
-msgid "Replac"
+msgid "ButtonBar|Mark"
 msgstr ""
 
-msgid "Copy"
-msgstr "நகல்"
+msgid "ButtonBar|Replac"
+msgstr ""
 
-msgid "Move"
-msgstr "நகர்வு"
+msgid "ButtonBar|Copy"
+msgstr ""
 
-msgid "Delete"
-msgstr "நீக்கு"
+msgid "ButtonBar|Move"
+msgstr ""
 
-msgid "PullDn"
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Delete"
+msgstr ""
+
+msgid "ButtonBar|PullDn"
+msgstr ""
+
+msgid "ButtonBar|Quit"
 msgstr ""
 
 msgid " Load syntax file "
@@ -1176,6 +1152,9 @@ msgstr ""
 msgid " Permission "
 msgstr ""
 
+msgid " File "
+msgstr " கோப்பு "
+
 msgid "Chmod command"
 msgstr ""
 
@@ -1423,13 +1402,13 @@ msgid ""
 "it."
 msgstr ""
 
-msgid " Copy "
+msgid "DialogTitle|Copy"
 msgstr ""
 
-msgid " Move "
+msgid "DialogTitle|Move"
 msgstr ""
 
-msgid " Delete "
+msgid "DialogTitle|Delete"
 msgstr ""
 
 msgid " Cannot make the hardlink "
@@ -1551,9 +1530,6 @@ msgstr ""
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr ""
 
-msgid "&Delete"
-msgstr ""
-
 msgid "&Keep"
 msgstr ""
 
@@ -1652,13 +1628,13 @@ msgstr ""
 msgid "Directory scanning"
 msgstr ""
 
-msgid "1Copy"
+msgid "FileOperation|Copy"
 msgstr ""
 
-msgid "1Move"
+msgid "FileOperation|Move"
 msgstr ""
 
-msgid "1Delete"
+msgid "FileOperation|Delete"
 msgstr ""
 
 #, no-c-format
@@ -1688,6 +1664,10 @@ msgid " with source mask:"
 msgstr ""
 
 msgid " to:"
+msgstr ""
+
+#, c-format
+msgid "%s?"
 msgstr ""
 
 msgid " Cannot operate on \"..\"! "
@@ -1829,9 +1809,6 @@ msgstr ""
 msgid "&Again"
 msgstr ""
 
-msgid "&Quit"
-msgstr ""
-
 msgid "Pane&lize"
 msgstr ""
 
@@ -1914,13 +1891,13 @@ msgstr ""
 msgid " Cannot find node %s in help file "
 msgstr ""
 
-msgid "Index"
+msgid "Help"
 msgstr ""
 
-msgid "Prev"
+msgid "ButtonBar|Index"
 msgstr ""
 
-msgid "&Move"
+msgid "ButtonBar|Prev"
 msgstr ""
 
 msgid "&Remove"
@@ -2213,10 +2190,11 @@ msgstr ""
 msgid "&Listing mode..."
 msgstr ""
 
-msgid "&Quick view     C-x q"
-msgstr ""
+#, fuzzy
+msgid "&Quick view"
+msgstr "விரைவான சேமிப்பு "
 
-msgid "&Info           C-x i"
+msgid "&Info"
 msgstr ""
 
 msgid "&Sort order..."
@@ -2226,7 +2204,7 @@ msgid "&Filter..."
 msgstr ""
 
 #, fuzzy
-msgid "&Encoding...    M-e"
+msgid "&Encoding..."
 msgstr "வாிசை&யாக்கு...          M-t"
 
 msgid "&Network link..."
@@ -2242,101 +2220,102 @@ msgstr "குறியீட்டு இணைப்பு..."
 msgid "SM&B link..."
 msgstr ""
 
-msgid "&Rescan         C-r"
+#, fuzzy
+msgid "&Rescan"
+msgstr "மறுவருடல்"
+
+#, fuzzy
+msgid "&View"
+msgstr "காட்சி"
+
+#, fuzzy
+msgid "Vie&w file..."
+msgstr "இதை வைத்து திற..."
+
+msgid "&Filtered view"
 msgstr ""
 
-msgid "&View               F3"
+msgid "C&hmod"
 msgstr ""
 
-msgid "Vie&w file...         "
+msgid "&Link"
 msgstr ""
 
-msgid "&Filtered view     M-!"
+msgid "&SymLink"
 msgstr ""
 
-msgid "&Edit               F4"
+msgid "Edit s&ymlink"
 msgstr ""
 
-msgid "&Copy               F5"
+msgid "Ch&own"
 msgstr ""
 
-msgid "c&Hmod           C-x c"
+msgid "&Advanced chown"
 msgstr ""
 
-msgid "&Link            C-x l"
+msgid "&Rename/Move"
 msgstr ""
 
-msgid "&SymLink         C-x s"
+msgid "&Mkdir"
 msgstr ""
 
-msgid "edit s&Ymlink  C-x C-s"
+#, fuzzy
+msgid "&Quick cd"
+msgstr "விரைவான சேமிப்பு "
+
+#, fuzzy
+msgid "Select &group"
+msgstr "குறும்படத்தை தேர்ந்தெடு"
+
+msgid "U&nselect group"
 msgstr ""
 
-msgid "ch&Own           C-x o"
+msgid "Reverse selec&tion"
 msgstr ""
 
-msgid "&Advanced chown       "
-msgstr ""
+#, fuzzy
+msgid "E&xit"
+msgstr "பதிப்பு"
 
-msgid "&Rename/Move        F6"
-msgstr ""
-
-msgid "&Mkdir              F7"
-msgstr ""
-
-msgid "&Delete             F8"
-msgstr ""
-
-msgid "&Quick cd          M-c"
-msgstr ""
-
-msgid "select &Group      M-+"
-msgstr ""
-
-msgid "u&Nselect group    M-\\"
-msgstr ""
-
-msgid "reverse selec&Tion M-*"
-msgstr ""
-
-msgid "e&Xit              F10"
-msgstr ""
-
-msgid "&User menu          F2"
-msgstr ""
+#, fuzzy
+msgid "&User menu"
+msgstr "&பயனர் பட்டி...       F11"
 
 msgid "&Directory tree"
 msgstr ""
 
-msgid "&Find file            M-?"
+#, fuzzy
+msgid "&Find file"
+msgstr "இதை வைத்து திற..."
+
+msgid "S&wap panels"
 msgstr ""
 
-msgid "s&Wap panels          C-u"
+msgid "Switch &panels on/off"
 msgstr ""
 
-msgid "switch &Panels on/off C-o"
+msgid "&Compare directories"
 msgstr ""
 
-msgid "&Compare directories  C-x d"
+msgid "E&xternal panelize"
 msgstr ""
 
-msgid "e&Xternal panelize    C-x !"
+msgid "Show directory s&izes"
 msgstr ""
 
-msgid "show directory s&Izes"
+#, fuzzy
+msgid "Command &history"
+msgstr " கட்டளை "
+
+msgid "Di&rectory hotlist"
 msgstr ""
 
-msgid "Command &history      M-h"
+msgid "&Active VFS list"
 msgstr ""
 
-msgid "di&Rectory hotlist    C-\\"
-msgstr ""
-
-msgid "&Active VFS list      C-x a"
-msgstr ""
-
-msgid "&Background jobs      C-x j"
-msgstr ""
+#, fuzzy
+msgid "&Background jobs"
+msgstr "&பின்னோக்கம்"
 
 msgid "&Undelete files (ext2fs only)"
 msgstr ""
@@ -2359,40 +2338,26 @@ msgstr ""
 msgid "&Layout..."
 msgstr "&இட அமைவு..."
 
-msgid "c&Onfirmation..."
+msgid "C&onfirmation..."
 msgstr ""
 
 msgid "&Display bits..."
 msgstr ""
 
-msgid "learn &Keys..."
-msgstr ""
-
 msgid "&Virtual FS..."
 msgstr ""
 
-msgid "&Save setup"
+#, fuzzy
+msgid "&Above"
+msgstr "நகர்வு"
+
+msgid "&Left"
 msgstr ""
 
-msgid " &Above "
+msgid "&Below"
 msgstr ""
 
-msgid " &Left "
-msgstr ""
-
-msgid " &File "
-msgstr ""
-
-msgid " &Command "
-msgstr ""
-
-msgid " &Options "
-msgstr ""
-
-msgid " &Below "
-msgstr ""
-
-msgid " &Right "
+msgid "&Right"
 msgstr ""
 
 msgid " Information "
@@ -2405,7 +2370,7 @@ msgid ""
 " the details.                                           "
 msgstr ""
 
-msgid "Menu"
+msgid "ButtonBar|Menu"
 msgstr ""
 
 msgid "The TERM environment variable is unset!\n"
@@ -2558,39 +2523,33 @@ msgid "SUB-DIR"
 msgstr ""
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
-msgid "u"
-msgstr ""
-
-msgid "Unsorted"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|u"
 msgstr ""
 
 msgid "&Unsorted"
 msgstr ""
 
 #. TRANSLATORS: one single character to represent 'name' sort mode
-msgid "n"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|n"
 msgstr ""
 
 msgid "&Name"
 msgstr ""
 
 #. TRANSLATORS: one single character to represent 'extension' sort mode
-msgid "e"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|e"
 msgstr ""
-
-#, fuzzy
-msgid "Extension"
-msgstr "நீட்டிப்பு:"
 
 msgid "&Extension"
 msgstr ""
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
-msgid "s"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|s"
 msgstr ""
-
-msgid "Size"
-msgstr "அளவு"
 
 msgid "&Size"
 msgstr ""
@@ -2599,30 +2558,24 @@ msgid "Block Size"
 msgstr ""
 
 #. TRANSLATORS: one single character to represent 'Modify time' sort mode
-msgid "m"
-msgstr ""
-
-msgid "MTime"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|m"
 msgstr ""
 
 msgid "&Modify time"
 msgstr ""
 
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
-msgid "a"
-msgstr ""
-
-msgid "ATime"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|a"
 msgstr ""
 
 msgid "&Access time"
 msgstr ""
 
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
-msgid "h"
-msgstr ""
-
-msgid "CTime"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|h"
 msgstr ""
 
 msgid "C&Hange time"
@@ -2638,10 +2591,8 @@ msgid "Nl"
 msgstr ""
 
 #. TRANSLATORS: one single character to represent 'inode' sort mode
-msgid "i"
-msgstr ""
-
-msgid "Inode"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|i"
 msgstr ""
 
 msgid "&Inode"
@@ -2683,16 +2634,16 @@ msgstr ""
 msgid " Do you really want to execute? "
 msgstr ""
 
-msgid "View"
-msgstr "காட்சி"
-
-msgid "Edit"
-msgstr "பதிப்பு"
-
-msgid "RenMov"
+msgid "ButtonBar|View"
 msgstr ""
 
-msgid "Mkdir"
+msgid "ButtonBar|Edit"
+msgstr ""
+
+msgid "ButtonBar|RenMov"
+msgstr ""
+
+msgid "ButtonBar|Mkdir"
 msgstr ""
 
 msgid " Not implemented yet "
@@ -2722,6 +2673,12 @@ msgstr ""
 
 msgid "-  < No translation >"
 msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+"Cannot save file %s:\n"
+"%s"
+msgstr " கோப்பை சேமிக்கும் போது பிழை. "
 
 #, c-format
 msgid ""
@@ -2821,19 +2778,19 @@ msgstr ""
 msgid "  Delete %s?  "
 msgstr ""
 
-msgid "Static"
+msgid "ButtonBar|Static"
 msgstr ""
 
-msgid "Dynamc"
+msgid "ButtonBar|Dynamc"
 msgstr ""
 
-msgid "Rescan"
-msgstr "மறுவருடல்"
-
-msgid "Forget"
+msgid "ButtonBar|Rescan"
 msgstr ""
 
-msgid "Rmdir"
+msgid "ButtonBar|Forget"
+msgstr ""
+
+msgid "ButtonBar|Rmdir"
 msgstr ""
 
 #, c-format
@@ -2978,9 +2935,6 @@ msgid "Insert on keypad"
 msgstr ""
 
 msgid "Delete on keypad"
-msgstr ""
-
-msgid "Escape key"
 msgstr ""
 
 msgid "Enter on keypad"
@@ -3197,12 +3151,6 @@ msgstr " கோப்பை சேமிக்கும் போது பி�
 msgid "Empty output from child filter"
 msgstr ""
 
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Quit"
-msgstr ""
-
 msgid "ButtonBar|Ascii"
 msgstr ""
 
@@ -3215,15 +3163,6 @@ msgstr ""
 msgid "ButtonBar|Line"
 msgstr ""
 
-msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
 msgid "ButtonBar|UnWrap"
 msgstr ""
 
@@ -3231,9 +3170,6 @@ msgid "ButtonBar|Wrap"
 msgstr ""
 
 msgid "ButtonBar|HxSrch"
-msgstr ""
-
-msgid "ButtonBar|Search"
 msgstr ""
 
 msgid "ButtonBar|Raw"
@@ -3709,6 +3645,128 @@ msgstr ""
 
 msgid "Changes to file lost"
 msgstr ""
+
+#~ msgid "Do backups -->"
+#~ msgstr "காப்பு செய் -->"
+
+#~ msgid "Extension:"
+#~ msgstr "நீட்டிப்பு:"
+
+#~ msgid "&New              C-n"
+#~ msgstr "&புதியது            C-n"
+
+#~ msgid "&Save              F2"
+#~ msgstr "&சேமி              F2"
+
+#~ msgid "A&bout...            "
+#~ msgstr "ப&ற்றி...              "
+
+#~ msgid "&Quit             F10"
+#~ msgstr "&வெளியேறு         F10"
+
+#~ msgid "&New            C-x k"
+#~ msgstr "&புதியது           C-x k"
+
+#~ msgid "Copy to &file...     "
+#~ msgstr "கோப்புக்கு &நகல்...    "
+
+#, fuzzy
+#~ msgid "&Toggle mark                 F3"
+#~ msgstr "குறி இருநிலை &மாற்றல் F3"
+
+#, fuzzy
+#~ msgid "Mar&k columns              S-F3"
+#~ msgstr "நெடுவாிசைகளை குறியிடு S-F3"
+
+#, fuzzy
+#~ msgid "&Copy                        F5"
+#~ msgstr "&நகல்               F5"
+
+#, fuzzy
+#~ msgid "&Move                        F6"
+#~ msgstr "ந&கர்               F6"
+
+#, fuzzy
+#~ msgid "&Delete                      F8"
+#~ msgstr "&நீக்கு             F8"
+
+#, fuzzy
+#~ msgid "&Undo                       C-u"
+#~ msgstr "&கவிழ்              C-u"
+
+#, fuzzy
+#~ msgid "&Beginning               C-PgUp"
+#~ msgstr "&தொடங்கள்      C-PgUp"
+
+#, fuzzy
+#~ msgid "&End                     C-PgDn"
+#~ msgstr "&கடைசி          C-PgDn"
+
+#, fuzzy
+#~ msgid "C&opy to clipfile           M-w"
+#~ msgstr "&வாிசைக்குப் போ...       M-l"
+
+#, fuzzy
+#~ msgid "C&ut to clipfile            C-w"
+#~ msgstr "&வாிசைக்குப் போ...       M-l"
+
+#, fuzzy
+#~ msgid "Toggle bookmar&k               "
+#~ msgstr "குறி இருநிலை &மாற்றல் F3"
+
+#, fuzzy
+#~ msgid "&Next bookmark                 "
+#~ msgstr "&புதியது            C-n"
+
+#, fuzzy
+#~ msgid "Pre&v bookmark                 "
+#~ msgstr "வாிசை&யாக்கு...          M-t"
+
+#, fuzzy
+#~ msgid "&Flush bookmark                "
+#~ msgstr "&அஞ்சல்...                  "
+
+#~ msgid "&Search...         F7"
+#~ msgstr "&தேடு...            F7"
+
+#~ msgid "&Replace...        F4"
+#~ msgstr "&மாற்று...           F4"
+
+#~ msgid "&Go to line...            M-l"
+#~ msgstr "&வாிசைக்குப் போ...       M-l"
+
+#, fuzzy
+#~ msgid "Encod&ing...             M-e"
+#~ msgstr "வாிசை&யாக்கு...          M-t"
+
+#~ msgid "Sor&t...                 M-t"
+#~ msgstr "வாிசை&யாக்கு...          M-t"
+
+#~ msgid "&Mail...                    "
+#~ msgstr "&அஞ்சல்...                  "
+
+#~ msgid "'ispell' s&pell check    M-$"
+#~ msgstr "'ispell' எ&ழுத்து சாிபார்ப்பு  M-$"
+
+#, fuzzy
+#~ msgid "Save setu&p"
+#~ msgstr "சேமிப்பு முறைமை..."
+
+#~ msgid " Edit "
+#~ msgstr " பதிப்பு "
+
+#~ msgid "Save"
+#~ msgstr "சேமி"
+
+#~ msgid "Delete"
+#~ msgstr "நீக்கு"
+
+#, fuzzy
+#~ msgid "Extension"
+#~ msgstr "நீட்டிப்பு:"
+
+#~ msgid "Size"
+#~ msgstr "அளவு"
 
 #~ msgid " Emacs key: "
 #~ msgstr "  Emacs விசை:"

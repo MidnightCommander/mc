@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-09 09:50+0300\n"
+"POT-Creation-Date: 2009-10-30 10:39+0200\n"
 "PO-Revision-Date: 2006-08-16 16:20+0400\n"
 "Last-Translator: Phan Vĩnh Thịnh <teppi82@gmail.com>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
@@ -52,6 +52,29 @@ msgstr " %s phải tập tin thông thường "
 msgid " File %s is too large "
 msgstr " Tập tin %s quá lớn "
 
+msgid " About "
+msgstr " Về chương trình "
+
+msgid ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       A user friendly text editor written\n"
+"           for the Midnight Commander.\n"
+msgstr ""
+"\n"
+"                     Cooledit  v3.11.5\n"
+"\n"
+"       Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+" Trình soạn thảo với giao diện người dùng thân thiện.\n"
+"               Được viết cho Midnight Commander.\n"
+
+msgid "&OK"
+msgstr "Đồng ý &="
+
 msgid "Macro recursion is too deep"
 msgstr "Đệ qui của macro quá sâu"
 
@@ -89,23 +112,28 @@ msgstr " Không thể mở đường ống để ghi: "
 msgid " Cannot open file for writing: %s "
 msgstr " Không thể mở đường ống để ghi: "
 
-msgid "Quick save "
+#, fuzzy
+msgid "&Quick save"
 msgstr "&Lưu nhanh"
 
-msgid "Safe save "
+#, fuzzy
+msgid "&Safe save"
 msgstr "Lưu &an toàn"
 
-msgid "Do backups -->"
-msgstr "&Sao lưu -->"
+msgid "&Do backups with following extension:"
+msgstr ""
 
-msgid "&OK"
-msgstr "Đồng ý &="
-
-msgid "Extension:"
-msgstr "&Mở rộng:"
+msgid "Check &POSIX new line"
+msgstr ""
 
 msgid " Edit Save Mode "
 msgstr " Chế độ ghi nhớ "
+
+msgid "The file you are saving is not finished with a newline"
+msgstr ""
+
+msgid "C&ontinue"
+msgstr "&Tiếp tục"
 
 msgid "&Do not change"
 msgstr ""
@@ -176,9 +204,6 @@ msgid ""
 msgstr ""
 " Văn bản hiện thời đã thay đổi và chưa được ghi nhớ. \n"
 " Tiếp tục thao tác sẽ làm mất những thay đổi này. "
-
-msgid "C&ontinue"
-msgstr "&Tiếp tục"
 
 msgid "Syntax file edit"
 msgstr "Soạn thảo tập tin cú pháp"
@@ -397,236 +422,197 @@ msgstr "&Chiếm đoạt khóa"
 msgid "&Ignore lock"
 msgstr "&Lời đi khóa"
 
-msgid " About "
-msgstr " Về chương trình "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                     Cooledit  v3.11.5\n"
-"\n"
-"       Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-" Trình soạn thảo với giao diện người dùng thân thiện.\n"
-"               Được viết cho Midnight Commander.\n"
-
 msgid "&Open file..."
 msgstr "&Mở tập tin..."
 
-msgid "&New              C-n"
-msgstr "&Tập tin mới             C-n"
+#, fuzzy
+msgid "&New"
+msgstr "th&Eo tên"
 
-msgid "&Save              F2"
-msgstr "&Ghi nhớ                  F2"
+#, fuzzy
+msgid "Save &as..."
+msgstr "&Ghi nhớ cấu hình..."
 
-msgid "Save &as...       F12"
-msgstr "Ghi &như...              F12"
-
-msgid "&Insert file...   F15"
+#, fuzzy
+msgid "&Insert file..."
 msgstr "&Chèn tập tin...         F15"
 
-msgid "Copy to &file...  C-f"
+#, fuzzy
+msgid "Cop&y to file..."
 msgstr "Ché&p vào tập tin...    C-f"
 
-msgid "&User menu...     F11"
+#, fuzzy
+msgid "&User menu..."
 msgstr "Trình đơn người &dùng... F11"
 
-msgid "A&bout...            "
-msgstr "&Về chương trình...         "
+#, fuzzy
+msgid "A&bout..."
+msgstr "&Vẻ ngoài..."
 
-msgid "&Quit             F10"
-msgstr "T&hoát                   F10"
-
-msgid "&New            C-x k"
-msgstr "&Tập tin mới           C-x k"
-
-msgid "Copy to &file...     "
-msgstr "S&ao chép vào tập tin...    "
+msgid "&Quit"
+msgstr "&Thoát"
 
 #, fuzzy
-msgid "&Toggle mark                 F3"
-msgstr "&Bật/tắt bôi đen           F3"
+msgid "&Toggle mark"
+msgstr "&Xóa đánh dấu"
+
+msgid "&Mark columns"
+msgstr ""
 
 #, fuzzy
-msgid "Mar&k columns              S-F3"
-msgstr "Bôi đen &cột             S-F3"
-
-#, fuzzy
-msgid "Toggle &ins/overw           Ins"
+msgid "Toggle &ins/overw"
 msgstr "Chế độ chèn/&thay thế     Ins"
 
 #, fuzzy
-msgid "&Copy                        F5"
-msgstr "sao &Chép               F5"
+msgid "&Copy"
+msgstr "Cópi  "
+
+msgid "&Move"
+msgstr "&Di chuyển"
+
+msgid "&Delete"
+msgstr "&Xóa"
 
 #, fuzzy
-msgid "&Move                        F6"
-msgstr "&Di chuyển                 F6"
-
-#, fuzzy
-msgid "&Delete                      F8"
-msgstr "xó&A                    F8"
-
-#, fuzzy
-msgid "C&opy to clipfile         C-Ins"
+msgid "C&opy to clipfile"
 msgstr "S&ao chép vào tập tin...    "
 
 #, fuzzy
-msgid "C&ut to clipfile          S-Del"
+msgid "C&ut to clipfile"
 msgstr "&Chuyển tới dòng...             M-l"
 
-msgid "&Paste from clipfile      S-Ins"
+msgid "&Paste from clipfile"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k            M-k"
+msgid "Toggle bookmar&k"
 msgstr "&Bật/tắt bôi đen           F3"
 
 #, fuzzy
-msgid "&Next bookmark              M-j"
-msgstr "&Tập tin mới             C-n"
+msgid "&Next bookmark"
+msgstr "Đá&nh dấu"
 
 #, fuzzy
-msgid "Pre&v bookmark              M-i"
+msgid "Pre&v bookmark"
 msgstr "&Sắp xếp...                      M-t"
 
 #, fuzzy
-msgid "&Flush bookmark             M-o"
+msgid "&Flush bookmark"
 msgstr "T&hư điện tử...                     "
 
-#, fuzzy
-msgid "&Undo                       C-u"
-msgstr "&Hủy bước                 C-u"
+msgid "&Undo"
+msgstr ""
 
-#, fuzzy
-msgid "&Beginning               C-PgUp"
-msgstr "Đầ&u tập tin           C-PgUp"
-
-#, fuzzy
-msgid "&End                     C-PgDn"
-msgstr "Cuố&i tập tin          C-PgDn"
-
-#, fuzzy
-msgid "C&opy to clipfile           M-w"
-msgstr "&Chuyển tới dòng...             M-l"
-
-#, fuzzy
-msgid "C&ut to clipfile            C-w"
-msgstr "&Chuyển tới dòng...             M-l"
-
-msgid "&Paste from clipfile        C-y"
+msgid "&Beginning"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k               "
-msgstr "&Bật/tắt bôi đen           F3"
+msgid "&End"
+msgstr "&Chỉ mục inode"
 
 #, fuzzy
-msgid "&Next bookmark                 "
-msgstr "&Tập tin mới             C-n"
+msgid "&Search..."
+msgstr "Tìm"
 
 #, fuzzy
-msgid "Pre&v bookmark                 "
-msgstr "&Sắp xếp...                      M-t"
-
-#, fuzzy
-msgid "&Flush bookmark                "
-msgstr "T&hư điện tử...                     "
-
-msgid "&Search...         F7"
-msgstr "Tìm &kiếm...               F7"
-
-msgid "Search &again     F17"
+msgid "Search &again"
 msgstr "&Tìm kiếm lại lần nữa     F17"
 
-msgid "&Replace...        F4"
-msgstr "Th&ay thế...               F4"
-
-msgid "&Go to line...            M-l"
-msgstr "&Chuyển tới dòng...             M-l"
+#, fuzzy
+msgid "&Replace..."
+msgstr "&Thay thế"
 
 #, fuzzy
-msgid "Toggle li&ne state        M-n"
+msgid "&Go to line..."
+msgstr "Chuyển tới dòng "
+
+#, fuzzy
+msgid "Toggle li&ne state"
 msgstr "&Bật/tắt bôi đen           F3"
 
-msgid "Go to matching &bracket   M-b"
+#, fuzzy
+msgid "Go to matching &bracket"
 msgstr "Chuyển &tới dấu ngoặc tạo cặp    M-b"
 
-msgid "Find declaration      A-Enter"
+#, fuzzy
+msgid "Find declaration"
+msgstr "Tìm những loại bỏ sau khi vá lỗi (patch)"
+
+msgid "Back from declaration"
 msgstr ""
 
-msgid "Back from declaration     M--"
-msgstr ""
-
-msgid "Forward to declaration    M-+"
+msgid "Forward to declaration"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             M-e"
+msgid "Encod&ing..."
 msgstr "&Sắp xếp...                      M-t"
 
-msgid "Insert &literal...       C-q"
-msgstr "Chèn &văn bản thuần túy...       C-q"
-
-msgid "&Refresh screen          C-l"
+#, fuzzy
+msgid "&Refresh screen"
 msgstr "&Làm mới màn hình                C-l"
 
-msgid "&Start record macro      C-r"
+#, fuzzy
+msgid "&Start record macro"
 msgstr "&Bắt đầu ghi macro               C-r"
 
-msgid "&Finish record macro...  C-r"
+#, fuzzy
+msgid "&Finish record macro..."
 msgstr "&Kết thúc ghi macro...           C-r"
 
-msgid "&Execute macro...   C-a, KEY"
+#, fuzzy
+msgid "&Execute macro..."
 msgstr "Chạy &macro...              C-a, KEY"
 
-msgid "Delete macr&o...            "
-msgstr "&Xóa macro...                       "
+#, fuzzy
+msgid "Delete macr&o..."
+msgstr " Xóa macro "
 
-msgid "Insert &date/time           "
-msgstr "Chèn &ngày/giờ                      "
-
-msgid "Format p&aragraph        M-p"
-msgstr "Định &dạng đoạn văn              M-p"
-
-msgid "'ispell' s&pell check    C-p"
+#, fuzzy
+msgid "'ispell' s&pell check"
 msgstr "Kiểm tra chính tả '&ispell'      C-p"
 
-msgid "Sor&t...                 M-t"
-msgstr "&Sắp xếp...                      M-t"
+#, fuzzy
+msgid "&Mail..."
+msgstr "&Lọc tập tin..."
 
-msgid "Paste o&utput of...      M-u"
+#, fuzzy
+msgid "Insert &literal..."
+msgstr "Chèn &văn bản thuần túy...       C-q"
+
+#, fuzzy
+msgid "Insert &date/time"
+msgstr "Chèn &ngày/giờ                      "
+
+#, fuzzy
+msgid "Format p&aragraph"
+msgstr "Định &dạng đoạn văn              M-p"
+
+#, fuzzy
+msgid "Sor&t..."
+msgstr "t&Hứ tự sắp xếp..."
+
+#, fuzzy
+msgid "Paste o&utput of..."
 msgstr "Dán &kết quả của lệnh...         M-u"
 
-msgid "E&xternal Formatter      F19"
+#, fuzzy
+msgid "E&xternal formatter"
 msgstr "T&rình định dạng ngoài           F19"
-
-msgid "&Mail...                    "
-msgstr "T&hư điện tử...                     "
-
-msgid "&Execute macro... C-x e, KEY"
-msgstr "Thực hiện &macro...       C-x e, KEY"
-
-msgid "'ispell' s&pell check    M-$"
-msgstr "Kiểm tra chính tả '&ispell'      M-$"
 
 msgid "&General...  "
 msgstr "Ch&ung...         "
 
-msgid "&Save mode..."
+#, fuzzy
+msgid "Save &mode..."
 msgstr "&Chế độ ghi nhớ..."
 
-msgid "Learn &Keys..."
+#, fuzzy
+msgid "Learn &keys..."
 msgstr "&Tạo phím tắt..."
 
-msgid "Syntax &Highlighting..."
+#, fuzzy
+msgid "Syntax &highlighting..."
 msgstr "&Chiếu sáng cú pháp..."
 
 #, fuzzy
@@ -637,33 +623,32 @@ msgstr "Soạn thảo tập tin cú pháp"
 msgid "&Menu file"
 msgstr "soạ&N thảo tập tin trình đơn"
 
-#, fuzzy
-msgid "Save setu&p"
+msgid "&Save setup"
 msgstr "&Ghi nhớ cấu hình"
 
-msgid " File "
-msgstr " Tập tin "
+#, fuzzy
+msgid "&File"
+msgstr "Tập tin"
 
-msgid " Edit "
-msgstr " Soạn thảo "
+#, fuzzy
+msgid "&Edit"
+msgstr "Soạn  "
 
-msgid " Sear/Repl "
-msgstr " Tìm kiếm/Thay thế "
+#, fuzzy
+msgid "&Search"
+msgstr "Tìm"
 
-msgid " Command "
-msgstr " Câu lệnh "
+#, fuzzy
+msgid "&Command"
+msgstr "Câu lệnh"
 
-msgid " Options "
-msgstr " Tùy chọn "
+#, fuzzy
+msgid "For&mat"
+msgstr "Quên"
 
-msgid "Intuitive"
-msgstr "T&rực giác"
-
-msgid "Emacs"
-msgstr "&Emacs"
-
-msgid "User-defined"
-msgstr "Người dùng xác định"
+#, fuzzy
+msgid "&Options"
+msgstr " &Cấu hình "
 
 msgid "None"
 msgstr "&Không"
@@ -676,9 +661,6 @@ msgstr "Tự độ&ng chuyển dòng"
 
 msgid "Word wrap line length: "
 msgstr "Vị trí chuyển dòng: "
-
-msgid "Tab spacing: "
-msgstr "Độ rộng tab: "
 
 msgid "Cursor beyond end of line"
 msgstr ""
@@ -702,11 +684,14 @@ msgstr "&Ghi nhớ vị trí trong tập tin"
 msgid "Confir&m before saving"
 msgstr "&Hỏi lại trước khi ghi nhớ"
 
-msgid "Fill tabs with &spaces"
-msgstr "&Làm đầy tab bằng khoảng trắng"
-
 msgid "&Return does autoindent"
 msgstr "&Enter tự động thụt dòng"
+
+msgid "Tab spacing: "
+msgstr "Độ rộng tab: "
+
+msgid "Fill tabs with &spaces"
+msgstr "&Làm đầy tab bằng khoảng trắng"
 
 msgid "&Backspace through tabs"
 msgstr "&Backpace xóa hết tab"
@@ -717,35 +702,44 @@ msgstr "&Tạo một nửa tab"
 msgid "Wrap mode"
 msgstr "Chế độ chuyển dòng"
 
-msgid "Key emulation"
-msgstr "Giả tạo phím"
-
 msgid " Editor options "
 msgstr " Cấu hình trình soạn thảo "
 
-msgid "Help"
-msgstr "Giúpđỡ"
+msgid "ButtonBar|Help"
+msgstr "Trợ giúp"
 
-msgid "Save"
-msgstr "Ghinhớ"
+msgid "ButtonBar|Save"
+msgstr "Lưu"
 
-msgid "Mark"
-msgstr "Bôiđen"
+#, fuzzy
+msgid "ButtonBar|Mark"
+msgstr "Phân tích"
 
-msgid "Replac"
-msgstr "Thayth"
+#, fuzzy
+msgid "ButtonBar|Replac"
+msgstr "Thô"
 
-msgid "Copy"
-msgstr "Cópi  "
+#, fuzzy
+msgid "ButtonBar|Copy"
+msgstr "Trợ giúp"
 
-msgid "Move"
-msgstr "Chuyển"
+#, fuzzy
+msgid "ButtonBar|Move"
+msgstr "Lưu"
 
-msgid "Delete"
-msgstr "Xóa   "
+msgid "ButtonBar|Search"
+msgstr "Tìm kiếm"
 
-msgid "PullDn"
-msgstr "GọiTĐ "
+#, fuzzy
+msgid "ButtonBar|Delete"
+msgstr "Trợ giúp"
+
+#, fuzzy
+msgid "ButtonBar|PullDn"
+msgstr "Trợ giúp"
+
+msgid "ButtonBar|Quit"
+msgstr "Thoát"
 
 msgid " Load syntax file "
 msgstr " Nạp tập tin cú pháp "
@@ -1209,6 +1203,9 @@ msgstr "và T hoặc INS để đánh dấu"
 msgid " Permission "
 msgstr " Quyền truy cập "
 
+msgid " File "
+msgstr " Tập tin "
+
 msgid "Chmod command"
 msgstr " Câu lệnh chmod "
 
@@ -1475,14 +1472,14 @@ msgstr ""
 "chép nó từ %smc.ext hoặc sử dụng tập tin đó làm ví dụ để viết tập tin của "
 "mình."
 
-msgid " Copy "
-msgstr " Sao chép "
+msgid "DialogTitle|Copy"
+msgstr ""
 
-msgid " Move "
-msgstr " Di chuyển "
+msgid "DialogTitle|Move"
+msgstr ""
 
-msgid " Delete "
-msgstr " Xóa "
+msgid "DialogTitle|Delete"
+msgstr ""
 
 msgid " Cannot make the hardlink "
 msgstr " Không thể tạo liên kết cứng "
@@ -1637,9 +1634,6 @@ msgstr ""
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr "Nhận được tập tin không đầy đủ. Giữ tập tin?"
 
-msgid "&Delete"
-msgstr "&Xóa"
-
 msgid "&Keep"
 msgstr "&Giữ"
 
@@ -1763,14 +1757,14 @@ msgstr ""
 msgid "Directory scanning"
 msgstr " Đường dẫn tới thư mục"
 
-msgid "1Copy"
-msgstr "1Sao chép"
+msgid "FileOperation|Copy"
+msgstr ""
 
-msgid "1Move"
-msgstr "1Di chuyển"
+msgid "FileOperation|Move"
+msgstr ""
 
-msgid "1Delete"
-msgstr "1Xóa"
+msgid "FileOperation|Delete"
+msgstr ""
 
 #, no-c-format
 msgid "%o %f \"%s\"%m"
@@ -1801,6 +1795,10 @@ msgstr " với nhãn ban đầu:"
 
 msgid " to:"
 msgstr " vào:"
+
+#, c-format
+msgid "%s?"
+msgstr ""
 
 msgid " Cannot operate on \"..\"! "
 msgstr " Không thể thao tác trên \"..\"! "
@@ -1950,9 +1948,6 @@ msgstr "&Chuyển thư mục"
 msgid "&Again"
 msgstr "&Lặp lại"
 
-msgid "&Quit"
-msgstr "&Thoát"
-
 msgid "Pane&lize"
 msgstr "&Bảng"
 
@@ -2039,14 +2034,16 @@ msgstr " Lỗi (bug) nội bộ: vùng liên kết có hai đầu "
 msgid " Cannot find node %s in help file "
 msgstr " Không tìm thấy nút %s trong tập tin trợ giúp "
 
-msgid "Index"
-msgstr "Chỉ mục"
+msgid "Help"
+msgstr "Giúpđỡ"
 
-msgid "Prev"
-msgstr "Quay lại"
+#, fuzzy
+msgid "ButtonBar|Index"
+msgstr "Hex"
 
-msgid "&Move"
-msgstr "&Di chuyển"
+#, fuzzy
+msgid "ButtonBar|Prev"
+msgstr "Phân tích"
 
 msgid "&Remove"
 msgstr "&Xóa"
@@ -2354,11 +2351,13 @@ msgstr " Thực sự muốn thoát Midnight Commander? "
 msgid "&Listing mode..."
 msgstr "&Dạng danh sách..."
 
-msgid "&Quick view     C-x q"
-msgstr "&Xem nhanh     C-x q"
+#, fuzzy
+msgid "&Quick view"
+msgstr "&Lưu nhanh"
 
-msgid "&Info           C-x i"
-msgstr "&Thông tin     C-x i"
+#, fuzzy
+msgid "&Info"
+msgstr "&Chỉ mục inode"
 
 msgid "&Sort order..."
 msgstr "t&Hứ tự sắp xếp..."
@@ -2367,7 +2366,7 @@ msgid "&Filter..."
 msgstr "&Lọc tập tin..."
 
 #, fuzzy
-msgid "&Encoding...    M-e"
+msgid "&Encoding..."
 msgstr "&Sắp xếp...                      M-t"
 
 msgid "&Network link..."
@@ -2382,102 +2381,117 @@ msgstr "kết nối &Shell..."
 msgid "SM&B link..."
 msgstr "kết nối SM&B..."
 
-msgid "&Rescan         C-r"
-msgstr "&Quét lại        C-r"
+#, fuzzy
+msgid "&Rescan"
+msgstr "Quét lại"
 
-msgid "&View               F3"
-msgstr "&Xem                    F3"
+#, fuzzy
+msgid "&View"
+msgstr "Xem   "
 
-msgid "Vie&w file...         "
-msgstr "x&Em tập tin...       "
+#, fuzzy
+msgid "Vie&w file..."
+msgstr " Xem tập tin "
 
-msgid "&Filtered view     M-!"
-msgstr "xe&M kết quả lệnh      M-!"
+#, fuzzy
+msgid "&Filtered view"
+msgstr " Lọc rồi xem "
 
-msgid "&Edit               F4"
-msgstr "&Soạn thảo              F4"
+msgid "C&hmod"
+msgstr ""
 
-msgid "&Copy               F5"
-msgstr "sao &Chép               F5"
+#, fuzzy
+msgid "&Link"
+msgstr "&Liên kết"
 
-msgid "c&Hmod           C-x c"
-msgstr "c&Hmod               C-x c"
+#, fuzzy
+msgid "&SymLink"
+msgstr "&Liên kết"
 
-msgid "&Link            C-x l"
-msgstr "&Liên kết cứng       C-x l"
+#, fuzzy
+msgid "Edit s&ymlink"
+msgstr " Sửa liên kết mềm "
 
-msgid "&SymLink         C-x s"
-msgstr "liên &Kết mềm        C-x s"
+msgid "Ch&own"
+msgstr ""
 
-msgid "edit s&Ymlink  C-x C-s"
-msgstr "sử&A liên kết mềm  C-x C-s"
-
-msgid "ch&Own           C-x o"
-msgstr "cho&Wn               C-x o"
-
-msgid "&Advanced chown       "
+#, fuzzy
+msgid "&Advanced chown"
 msgstr "chown &Nâng cao      "
 
-msgid "&Rename/Move        F6"
-msgstr "Đổi tên/&Di chuyển      F6"
+#, fuzzy
+msgid "&Rename/Move"
+msgstr "&Xóa"
 
-msgid "&Mkdir              F7"
-msgstr "mkdi&R                  F7"
+#, fuzzy
+msgid "&Mkdir"
+msgstr "Tạotm "
 
-msgid "&Delete             F8"
-msgstr "xó&A                    F8"
+#, fuzzy
+msgid "&Quick cd"
+msgstr "cd nhanh"
 
-msgid "&Quick cd          M-c"
-msgstr "cd nhanh &>             M-c"
+#, fuzzy
+msgid "Select &group"
+msgstr "Đặt &nhóm"
 
-msgid "select &Group      M-+"
-msgstr "Chọn Nhóm &+           M-+"
+#, fuzzy
+msgid "U&nselect group"
+msgstr " Bỏ chọn "
 
-msgid "u&Nselect group    M-\\"
-msgstr "&Bỏ chọn nhóm          M-\\"
-
-msgid "reverse selec&Tion M-*"
+#, fuzzy
+msgid "Reverse selec&tion"
 msgstr "Chọn ngược lạ&I        M-*"
 
-msgid "e&Xit              F10"
-msgstr "Th&Oát                 F10"
+#, fuzzy
+msgid "E&xit"
+msgstr "Soạn  "
 
-msgid "&User menu          F2"
-msgstr "&Trình đơn người dùng   F2"
+#, fuzzy
+msgid "&User menu"
+msgstr " Trình đơn người dùng "
 
 msgid "&Directory tree"
 msgstr "cây thư &Mục"
 
-msgid "&Find file            M-?"
-msgstr "&Tìm tập tin                   M-?"
+#, fuzzy
+msgid "&Find file"
+msgstr "Tìm tập tin"
 
-msgid "s&Wap panels          C-u"
-msgstr "đổi chỗ h&Ai bảng              C-u"
+msgid "S&wap panels"
+msgstr ""
 
-msgid "switch &Panels on/off C-o"
+#, fuzzy
+msgid "Switch &panels on/off"
 msgstr "&Bật/tắt bảng                  C-o"
 
-msgid "&Compare directories  C-x d"
-msgstr "&So sánh thư mục             C-x d"
+#, fuzzy
+msgid "&Compare directories"
+msgstr " So sánh thư mục "
 
-msgid "e&Xternal panelize    C-x !"
-msgstr "bản&G ngoài                  C-x !"
+#, fuzzy
+msgid "E&xternal panelize"
+msgstr "Bảng ngoài"
 
-msgid "show directory s&Izes"
+#, fuzzy
+msgid "Show directory s&izes"
 msgstr "&Hiển thị kích thước thư mục"
 
 #, fuzzy
-msgid "Command &history      M-h"
-msgstr " Lịch sử dòng lệnh "
+msgid "Command &history"
+msgstr "&Lịch sử câu lệnh"
 
-msgid "di&Rectory hotlist    C-\\"
-msgstr "Thư mục thường dùng &*         C-\\"
+#, fuzzy
+msgid "Di&rectory hotlist"
+msgstr "Danh sách thư mục thường dùng"
 
-msgid "&Active VFS list      C-x a"
+#, fuzzy
+msgid "&Active VFS list"
 msgstr "&Danh sách VFS hoạt động     C-x a"
 
-msgid "&Background jobs      C-x j"
-msgstr "&Công việc nền sau           C-x j"
+#, fuzzy
+msgid "&Background jobs"
+msgstr " Công việc nền sau"
 
 msgid "&Undelete files (ext2fs only)"
 msgstr "&Phục hồi tập tin đã xóa (chỉ ext2fs)"
@@ -2500,40 +2514,30 @@ msgstr "&Cấu hình..."
 msgid "&Layout..."
 msgstr "&Vẻ ngoài..."
 
-msgid "c&Onfirmation..."
+#, fuzzy
+msgid "C&onfirmation..."
 msgstr "&Xác nhận..."
 
 msgid "&Display bits..."
 msgstr "bit &Hiển thị..."
 
-msgid "learn &Keys..."
-msgstr "&Tạo phím tắt...  "
-
 msgid "&Virtual FS..."
 msgstr "&FS ảo..."
 
-msgid "&Save setup"
-msgstr "&Ghi nhớ cấu hình"
-
-msgid " &Above "
+#, fuzzy
+msgid "&Above"
 msgstr " Ở &trên "
 
-msgid " &Left "
+#, fuzzy
+msgid "&Left"
 msgstr " &Bảng trái "
 
-msgid " &File "
-msgstr " &Tập tin "
-
-msgid " &Command "
-msgstr " &Câu lệnh "
-
-msgid " &Options "
-msgstr " &Cấu hình "
-
-msgid " &Below "
+#, fuzzy
+msgid "&Below"
 msgstr " Ở &dưới "
 
-msgid " &Right "
+#, fuzzy
+msgid "&Right"
 msgstr " Bảng &phải "
 
 msgid " Information "
@@ -2550,8 +2554,9 @@ msgstr ""
 " này cần nạp lại thư mục một cách thủ công. Hãy xem     \n"
 " trang hướng dẫn sử dụng man để biết them chi tiết.     "
 
-msgid "Menu"
-msgstr "Trđơn "
+#, fuzzy
+msgid "ButtonBar|Menu"
+msgstr "Hex"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "Biến môi trườn TERM chưa được xác định!\n"
@@ -2703,41 +2708,34 @@ msgid "SUB-DIR"
 msgstr "THƯMỤCCON"
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
-msgid "u"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|u"
 msgstr ""
-
-#, fuzzy
-msgid "Unsorted"
-msgstr "không &Sắp xếp"
 
 msgid "&Unsorted"
 msgstr "không &Sắp xếp"
 
 #. TRANSLATORS: one single character to represent 'name' sort mode
-#, fuzzy
-msgid "n"
-msgstr "Trên"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|n"
+msgstr ""
 
 msgid "&Name"
 msgstr "th&Eo tên"
 
 #. TRANSLATORS: one single character to represent 'extension' sort mode
-msgid "e"
-msgstr ""
-
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 #, fuzzy
-msgid "Extension"
-msgstr "&Mở rộng:"
+msgid "sort|e"
+msgstr "không &Sắp xếp"
 
 msgid "&Extension"
 msgstr "&Phần mở rộng"
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
-msgid "s"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|s"
 msgstr ""
-
-msgid "Size"
-msgstr "Kích cỡ"
 
 msgid "&Size"
 msgstr "&Kích thước"
@@ -2747,31 +2745,25 @@ msgid "Block Size"
 msgstr " Kích thước "
 
 #. TRANSLATORS: one single character to represent 'Modify time' sort mode
-msgid "m"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|m"
 msgstr ""
-
-msgid "MTime"
-msgstr "Thời gian sửa"
 
 msgid "&Modify time"
 msgstr "&Thời gian sửa đổi"
 
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
-msgid "a"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|a"
 msgstr ""
-
-msgid "ATime"
-msgstr "Truy cập cuối cùng"
 
 msgid "&Access time"
 msgstr "thời &Gian truy cập"
 
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
-msgid "h"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|h"
 msgstr ""
-
-msgid "CTime"
-msgstr "Thời gian thay đổi"
 
 #, fuzzy
 msgid "C&Hange time"
@@ -2787,11 +2779,9 @@ msgid "Nl"
 msgstr "Nl"
 
 #. TRANSLATORS: one single character to represent 'inode' sort mode
-msgid "i"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|i"
 msgstr ""
-
-msgid "Inode"
-msgstr "Nút"
 
 msgid "&Inode"
 msgstr "&Chỉ mục inode"
@@ -2831,17 +2821,19 @@ msgstr ""
 msgid " Do you really want to execute? "
 msgstr " Thực sự muốn thực hiện? "
 
-msgid "View"
-msgstr "Xem   "
+msgid "ButtonBar|View"
+msgstr "Xem"
 
-msgid "Edit"
-msgstr "Soạn  "
+msgid "ButtonBar|Edit"
+msgstr "Sửa"
 
-msgid "RenMov"
-msgstr "Chuyển"
+#, fuzzy
+msgid "ButtonBar|RenMov"
+msgstr "Hex"
 
-msgid "Mkdir"
-msgstr "Tạotm "
+#, fuzzy
+msgid "ButtonBar|Mkdir"
+msgstr "Sửa"
 
 msgid " Not implemented yet "
 msgstr ""
@@ -2871,6 +2863,14 @@ msgstr " Chọn bảng mã dữ liệu vào "
 
 msgid "-  < No translation >"
 msgstr "-  < Không có dịch >"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot save file %s:\n"
+"%s"
+msgstr ""
+" Không thể lưu tập tin. \n"
+" %s "
 
 #, c-format
 msgid ""
@@ -2976,20 +2976,25 @@ msgstr ""
 msgid "  Delete %s?  "
 msgstr "  Xóa %s?  "
 
-msgid "Static"
-msgstr "Tĩnh"
+#, fuzzy
+msgid "ButtonBar|Static"
+msgstr "Tìm kiếm"
 
-msgid "Dynamc"
-msgstr "Động"
+#, fuzzy
+msgid "ButtonBar|Dynamc"
+msgstr "Thô"
 
-msgid "Rescan"
-msgstr "Quét lại"
+#, fuzzy
+msgid "ButtonBar|Rescan"
+msgstr "Thô"
 
-msgid "Forget"
-msgstr "Quên"
+#, fuzzy
+msgid "ButtonBar|Forget"
+msgstr "Định dạng"
 
-msgid "Rmdir"
-msgstr "Xóa thư mục"
+#, fuzzy
+msgid "ButtonBar|Rmdir"
+msgstr "Sửa"
 
 #, c-format
 msgid ""
@@ -3136,10 +3141,6 @@ msgstr "Insert trên keypad"
 
 msgid "Delete on keypad"
 msgstr "Delete trên keypad"
-
-#, fuzzy
-msgid "Escape key"
-msgstr "Slash trên keypad"
 
 msgid "Enter on keypad"
 msgstr "Enter trên keypad"
@@ -3376,12 +3377,6 @@ msgstr " Không sinh ra được tiến trình con "
 msgid "Empty output from child filter"
 msgstr "Bộ lọc con trả lại kết quả rỗng"
 
-msgid "ButtonBar|Help"
-msgstr "Trợ giúp"
-
-msgid "ButtonBar|Quit"
-msgstr "Thoát"
-
 msgid "ButtonBar|Ascii"
 msgstr "Ascii"
 
@@ -3394,15 +3389,6 @@ msgstr "Đi tới"
 msgid "ButtonBar|Line"
 msgstr "Dòng"
 
-msgid "ButtonBar|View"
-msgstr "Xem"
-
-msgid "ButtonBar|Edit"
-msgstr "Sửa"
-
-msgid "ButtonBar|Save"
-msgstr "Lưu"
-
 msgid "ButtonBar|UnWrap"
 msgstr "Bỏ chuyển dòng"
 
@@ -3411,9 +3397,6 @@ msgstr "Chuyển dòng"
 
 msgid "ButtonBar|HxSrch"
 msgstr "Tìm hx"
-
-msgid "ButtonBar|Search"
-msgstr "Tìm kiếm"
 
 msgid "ButtonBar|Raw"
 msgstr "Thô"
@@ -3936,6 +3919,327 @@ msgstr "Lỗi nội bộ:"
 msgid "Changes to file lost"
 msgstr "Thay đổi tới tập tin bị mất"
 
+#~ msgid "Do backups -->"
+#~ msgstr "&Sao lưu -->"
+
+#~ msgid "Extension:"
+#~ msgstr "&Mở rộng:"
+
+#~ msgid "&New              C-n"
+#~ msgstr "&Tập tin mới             C-n"
+
+#~ msgid "&Save              F2"
+#~ msgstr "&Ghi nhớ                  F2"
+
+#~ msgid "Save &as...       F12"
+#~ msgstr "Ghi &như...              F12"
+
+#~ msgid "A&bout...            "
+#~ msgstr "&Về chương trình...         "
+
+#~ msgid "&Quit             F10"
+#~ msgstr "T&hoát                   F10"
+
+#~ msgid "&New            C-x k"
+#~ msgstr "&Tập tin mới           C-x k"
+
+#~ msgid "Copy to &file...     "
+#~ msgstr "S&ao chép vào tập tin...    "
+
+#, fuzzy
+#~ msgid "&Toggle mark                 F3"
+#~ msgstr "&Bật/tắt bôi đen           F3"
+
+#, fuzzy
+#~ msgid "Mar&k columns              S-F3"
+#~ msgstr "Bôi đen &cột             S-F3"
+
+#, fuzzy
+#~ msgid "&Copy                        F5"
+#~ msgstr "sao &Chép               F5"
+
+#, fuzzy
+#~ msgid "&Move                        F6"
+#~ msgstr "&Di chuyển                 F6"
+
+#, fuzzy
+#~ msgid "&Delete                      F8"
+#~ msgstr "xó&A                    F8"
+
+#, fuzzy
+#~ msgid "&Next bookmark              M-j"
+#~ msgstr "&Tập tin mới             C-n"
+
+#, fuzzy
+#~ msgid "&Undo                       C-u"
+#~ msgstr "&Hủy bước                 C-u"
+
+#, fuzzy
+#~ msgid "&Beginning               C-PgUp"
+#~ msgstr "Đầ&u tập tin           C-PgUp"
+
+#, fuzzy
+#~ msgid "&End                     C-PgDn"
+#~ msgstr "Cuố&i tập tin          C-PgDn"
+
+#, fuzzy
+#~ msgid "C&opy to clipfile           M-w"
+#~ msgstr "&Chuyển tới dòng...             M-l"
+
+#, fuzzy
+#~ msgid "C&ut to clipfile            C-w"
+#~ msgstr "&Chuyển tới dòng...             M-l"
+
+#, fuzzy
+#~ msgid "Toggle bookmar&k               "
+#~ msgstr "&Bật/tắt bôi đen           F3"
+
+#, fuzzy
+#~ msgid "&Next bookmark                 "
+#~ msgstr "&Tập tin mới             C-n"
+
+#, fuzzy
+#~ msgid "Pre&v bookmark                 "
+#~ msgstr "&Sắp xếp...                      M-t"
+
+#, fuzzy
+#~ msgid "&Flush bookmark                "
+#~ msgstr "T&hư điện tử...                     "
+
+#~ msgid "&Search...         F7"
+#~ msgstr "Tìm &kiếm...               F7"
+
+#~ msgid "&Replace...        F4"
+#~ msgstr "Th&ay thế...               F4"
+
+#~ msgid "&Go to line...            M-l"
+#~ msgstr "&Chuyển tới dòng...             M-l"
+
+#, fuzzy
+#~ msgid "Encod&ing...             M-e"
+#~ msgstr "&Sắp xếp...                      M-t"
+
+#~ msgid "Delete macr&o...            "
+#~ msgstr "&Xóa macro...                       "
+
+#~ msgid "Sor&t...                 M-t"
+#~ msgstr "&Sắp xếp...                      M-t"
+
+#~ msgid "&Mail...                    "
+#~ msgstr "T&hư điện tử...                     "
+
+#~ msgid "&Execute macro... C-x e, KEY"
+#~ msgstr "Thực hiện &macro...       C-x e, KEY"
+
+#~ msgid "'ispell' s&pell check    M-$"
+#~ msgstr "Kiểm tra chính tả '&ispell'      M-$"
+
+#, fuzzy
+#~ msgid "Save setu&p"
+#~ msgstr "&Ghi nhớ cấu hình"
+
+#~ msgid " Edit "
+#~ msgstr " Soạn thảo "
+
+#~ msgid " Sear/Repl "
+#~ msgstr " Tìm kiếm/Thay thế "
+
+#~ msgid " Command "
+#~ msgstr " Câu lệnh "
+
+#~ msgid " Options "
+#~ msgstr " Tùy chọn "
+
+#~ msgid "Intuitive"
+#~ msgstr "T&rực giác"
+
+#~ msgid "Emacs"
+#~ msgstr "&Emacs"
+
+#~ msgid "User-defined"
+#~ msgstr "Người dùng xác định"
+
+#~ msgid "Key emulation"
+#~ msgstr "Giả tạo phím"
+
+#~ msgid "Save"
+#~ msgstr "Ghinhớ"
+
+#~ msgid "Mark"
+#~ msgstr "Bôiđen"
+
+#~ msgid "Replac"
+#~ msgstr "Thayth"
+
+#~ msgid "Move"
+#~ msgstr "Chuyển"
+
+#~ msgid "Delete"
+#~ msgstr "Xóa   "
+
+#~ msgid "PullDn"
+#~ msgstr "GọiTĐ "
+
+#~ msgid " Copy "
+#~ msgstr " Sao chép "
+
+#~ msgid " Move "
+#~ msgstr " Di chuyển "
+
+#~ msgid " Delete "
+#~ msgstr " Xóa "
+
+#~ msgid "1Copy"
+#~ msgstr "1Sao chép"
+
+#~ msgid "1Move"
+#~ msgstr "1Di chuyển"
+
+#~ msgid "1Delete"
+#~ msgstr "1Xóa"
+
+#~ msgid "Index"
+#~ msgstr "Chỉ mục"
+
+#~ msgid "Prev"
+#~ msgstr "Quay lại"
+
+#~ msgid "&Quick view     C-x q"
+#~ msgstr "&Xem nhanh     C-x q"
+
+#~ msgid "&Info           C-x i"
+#~ msgstr "&Thông tin     C-x i"
+
+#~ msgid "&Rescan         C-r"
+#~ msgstr "&Quét lại        C-r"
+
+#~ msgid "&View               F3"
+#~ msgstr "&Xem                    F3"
+
+#~ msgid "Vie&w file...         "
+#~ msgstr "x&Em tập tin...       "
+
+#~ msgid "&Filtered view     M-!"
+#~ msgstr "xe&M kết quả lệnh      M-!"
+
+#~ msgid "&Edit               F4"
+#~ msgstr "&Soạn thảo              F4"
+
+#~ msgid "&Copy               F5"
+#~ msgstr "sao &Chép               F5"
+
+#~ msgid "c&Hmod           C-x c"
+#~ msgstr "c&Hmod               C-x c"
+
+#~ msgid "&Link            C-x l"
+#~ msgstr "&Liên kết cứng       C-x l"
+
+#~ msgid "&SymLink         C-x s"
+#~ msgstr "liên &Kết mềm        C-x s"
+
+#~ msgid "edit s&Ymlink  C-x C-s"
+#~ msgstr "sử&A liên kết mềm  C-x C-s"
+
+#~ msgid "ch&Own           C-x o"
+#~ msgstr "cho&Wn               C-x o"
+
+#~ msgid "&Rename/Move        F6"
+#~ msgstr "Đổi tên/&Di chuyển      F6"
+
+#~ msgid "&Mkdir              F7"
+#~ msgstr "mkdi&R                  F7"
+
+#~ msgid "&Delete             F8"
+#~ msgstr "xó&A                    F8"
+
+#~ msgid "&Quick cd          M-c"
+#~ msgstr "cd nhanh &>             M-c"
+
+#~ msgid "select &Group      M-+"
+#~ msgstr "Chọn Nhóm &+           M-+"
+
+#~ msgid "u&Nselect group    M-\\"
+#~ msgstr "&Bỏ chọn nhóm          M-\\"
+
+#~ msgid "e&Xit              F10"
+#~ msgstr "Th&Oát                 F10"
+
+#~ msgid "&User menu          F2"
+#~ msgstr "&Trình đơn người dùng   F2"
+
+#~ msgid "&Find file            M-?"
+#~ msgstr "&Tìm tập tin                   M-?"
+
+#~ msgid "s&Wap panels          C-u"
+#~ msgstr "đổi chỗ h&Ai bảng              C-u"
+
+#~ msgid "&Compare directories  C-x d"
+#~ msgstr "&So sánh thư mục             C-x d"
+
+#~ msgid "e&Xternal panelize    C-x !"
+#~ msgstr "bản&G ngoài                  C-x !"
+
+#, fuzzy
+#~ msgid "Command &history      M-h"
+#~ msgstr " Lịch sử dòng lệnh "
+
+#~ msgid "di&Rectory hotlist    C-\\"
+#~ msgstr "Thư mục thường dùng &*         C-\\"
+
+#~ msgid "&Background jobs      C-x j"
+#~ msgstr "&Công việc nền sau           C-x j"
+
+#~ msgid "learn &Keys..."
+#~ msgstr "&Tạo phím tắt...  "
+
+#~ msgid " &File "
+#~ msgstr " &Tập tin "
+
+#~ msgid " &Command "
+#~ msgstr " &Câu lệnh "
+
+#~ msgid "Menu"
+#~ msgstr "Trđơn "
+
+#, fuzzy
+#~ msgid "n"
+#~ msgstr "Trên"
+
+#, fuzzy
+#~ msgid "Extension"
+#~ msgstr "&Mở rộng:"
+
+#~ msgid "Size"
+#~ msgstr "Kích cỡ"
+
+#~ msgid "MTime"
+#~ msgstr "Thời gian sửa"
+
+#~ msgid "ATime"
+#~ msgstr "Truy cập cuối cùng"
+
+#~ msgid "CTime"
+#~ msgstr "Thời gian thay đổi"
+
+#~ msgid "Inode"
+#~ msgstr "Nút"
+
+#~ msgid "RenMov"
+#~ msgstr "Chuyển"
+
+#~ msgid "Static"
+#~ msgstr "Tĩnh"
+
+#~ msgid "Dynamc"
+#~ msgstr "Động"
+
+#~ msgid "Rmdir"
+#~ msgstr "Xóa thư mục"
+
+#, fuzzy
+#~ msgid "Escape key"
+#~ msgstr "Slash trên keypad"
+
 #~ msgid "bind: Wrong argument number, bind <key> <command>"
 #~ msgstr "bind: Sai số của tham số, bind <key> <command>"
 
@@ -4057,14 +4361,8 @@ msgstr "Thay đổi tới tập tin bị mất"
 #~ msgid "&Delete            F8"
 #~ msgstr "&Xóa                       F8"
 
-#~ msgid "Save setu&p..."
-#~ msgstr "&Ghi nhớ cấu hình..."
-
 #~ msgid " The command history is empty "
 #~ msgstr " Lịch sử dòng lệnh rỗng "
-
-#~ msgid "command &History"
-#~ msgstr "&Lịch sử câu lệnh"
 
 #~ msgid "Edit edi&tor menu file"
 #~ msgstr "sửa trình đơn của trình s&Oạn thảo"
@@ -4104,9 +4402,6 @@ msgstr "Thay đổi tới tập tin bị mất"
 
 #~ msgid "&Type"
 #~ msgstr "&Loại"
-
-#~ msgid "&Links"
-#~ msgstr "&Liên kết"
 
 #~ msgid "N&GID"
 #~ msgstr "N&GID"

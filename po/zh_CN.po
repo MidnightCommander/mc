@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-09 09:50+0300\n"
+"POT-Creation-Date: 2009-10-30 10:39+0200\n"
 "PO-Revision-Date: 2002-01-29 22:05+0800\n"
 "Last-Translator: Wang Jian <lark@linux.net.cn>\n"
 "Language-Team: Chinese Simplified <i18n-translation@lists.linux.net.cn>\n"
@@ -52,6 +52,29 @@ msgstr " 无法查看：不是常规文件 "
 msgid " File %s is too large "
 msgstr " 文件太大："
 
+msgid " About "
+msgstr " 关于 "
+
+msgid ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       A user friendly text editor written\n"
+"           for the Midnight Commander.\n"
+msgstr ""
+"\n"
+"        Cooledit   v3.11.5\n"
+"\n"
+" 版权所有 (C) 1996 自由软件基金会(FSF)\n"
+"\n"
+"     为 Midnight Commander 开发的\n"
+"       对用户友好的文字编辑器。\n"
+
+msgid "&OK"
+msgstr "确认(&O)"
+
 msgid "Macro recursion is too deep"
 msgstr ""
 
@@ -89,23 +112,29 @@ msgstr " 试图打开管道写入时失败："
 msgid " Cannot open file for writing: %s "
 msgstr " 试图打开管道写入时失败："
 
-msgid "Quick save "
+#, fuzzy
+msgid "&Quick save"
 msgstr "快速保存"
 
-msgid "Safe save "
+#, fuzzy
+msgid "&Safe save"
 msgstr "安全保存"
 
-msgid "Do backups -->"
-msgstr "备份 -->"
+msgid "&Do backups with following extension:"
+msgstr ""
 
-msgid "&OK"
-msgstr "确认(&O)"
-
-msgid "Extension:"
-msgstr "扩展名："
+msgid "Check &POSIX new line"
+msgstr ""
 
 msgid " Edit Save Mode "
 msgstr " 编辑保存模式 "
+
+msgid "The file you are saving is not finished with a newline"
+msgstr ""
+
+#, fuzzy
+msgid "C&ontinue"
+msgstr "继续"
 
 msgid "&Do not change"
 msgstr ""
@@ -178,10 +207,6 @@ msgid ""
 msgstr ""
 " 当前文字被修改但没有保存。\n"
 " 选择继续将丢失这些修改。"
-
-#, fuzzy
-msgid "C&ontinue"
-msgstr "继续"
 
 #, fuzzy
 msgid "Syntax file edit"
@@ -403,238 +428,196 @@ msgstr ""
 msgid "&Ignore lock"
 msgstr ""
 
-msgid " About "
-msgstr " 关于 "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"        Cooledit   v3.11.5\n"
-"\n"
-" 版权所有 (C) 1996 自由软件基金会(FSF)\n"
-"\n"
-"     为 Midnight Commander 开发的\n"
-"       对用户友好的文字编辑器。\n"
-
 msgid "&Open file..."
 msgstr "打开文件(&O)..."
 
-msgid "&New              C-n"
-msgstr "新建(&N)         C-n"
+#, fuzzy
+msgid "&New"
+msgstr "名字(&N)"
 
-msgid "&Save              F2"
-msgstr "保存(&S)           F2"
+#, fuzzy
+msgid "Save &as..."
+msgstr "保存设置(&S)"
 
-msgid "Save &as...       F12"
-msgstr "保存为(&A)...     F12"
-
-msgid "&Insert file...   F15"
+#, fuzzy
+msgid "&Insert file..."
 msgstr "插入文件(&I)...   F15"
 
-msgid "Copy to &file...  C-f"
+#, fuzzy
+msgid "Cop&y to file..."
 msgstr "复制到文件(&F)... C-f"
 
-msgid "&User menu...     F11"
+#, fuzzy
+msgid "&User menu..."
 msgstr "用户菜单(&U)...   F11"
 
-msgid "A&bout...            "
-msgstr "关于(&B)...          "
+#, fuzzy
+msgid "A&bout..."
+msgstr "布局(&L)..."
 
-msgid "&Quit             F10"
-msgstr "退出(&Q)          F10"
-
-msgid "&New            C-x k"
-msgstr "新建(&N)        C-x k"
-
-msgid "Copy to &file...     "
-msgstr "复制到文件(&F)...    "
+msgid "&Quit"
+msgstr "退出(&Q)"
 
 #, fuzzy
-msgid "&Toggle mark                 F3"
-msgstr "翻转标记(&T)       F3"
+msgid "&Toggle mark"
+msgstr "清除标记位(&L)"
+
+msgid "&Mark columns"
+msgstr ""
 
 #, fuzzy
-msgid "Mar&k columns              S-F3"
-msgstr "标记列(&M)       S-F3"
-
-#, fuzzy
-msgid "Toggle &ins/overw           Ins"
+msgid "Toggle &ins/overw"
 msgstr "翻转插入/覆盖(&I) Ins"
 
 #, fuzzy
-msgid "&Copy                        F5"
-msgstr "复制(&C)              F5"
+msgid "&Copy"
+msgstr "复制"
+
+msgid "&Move"
+msgstr "移动(&M)"
+
+msgid "&Delete"
+msgstr "删除(&D)"
 
 #, fuzzy
-msgid "&Move                        F6"
-msgstr "移动(&M)           F6"
-
-#, fuzzy
-msgid "&Delete                      F8"
-msgstr "删除(&D)              F8"
-
-#, fuzzy
-msgid "C&opy to clipfile         C-Ins"
+msgid "C&opy to clipfile"
 msgstr "复制到文件(&F)...    "
 
 #, fuzzy
-msgid "C&ut to clipfile          S-Del"
+msgid "C&ut to clipfile"
 msgstr "转到行(&G)...           M-l"
 
-msgid "&Paste from clipfile      S-Ins"
+msgid "&Paste from clipfile"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k            M-k"
+msgid "Toggle bookmar&k"
 msgstr "翻转标记(&T)       F3"
 
 #, fuzzy
-msgid "&Next bookmark              M-j"
-msgstr "新建(&N)         C-n"
+msgid "&Next bookmark"
+msgstr "设置标记位(&E)"
 
 #, fuzzy
-msgid "Pre&v bookmark              M-i"
+msgid "Pre&v bookmark"
 msgstr "排序(&T)...             M-t"
 
 #, fuzzy
-msgid "&Flush bookmark             M-o"
+msgid "&Flush bookmark"
 msgstr "邮寄(&M)...                 "
 
-#, fuzzy
-msgid "&Undo                       C-u"
-msgstr "撤消(&U)          C-u"
+msgid "&Undo"
+msgstr ""
 
-#, fuzzy
-msgid "&Beginning               C-PgUp"
-msgstr "开始(&B)       C-PgUp"
-
-#, fuzzy
-msgid "&End                     C-PgDn"
-msgstr "结尾(&E)       C-PgDn"
-
-#, fuzzy
-msgid "C&opy to clipfile           M-w"
-msgstr "转到行(&G)...           M-l"
-
-#, fuzzy
-msgid "C&ut to clipfile            C-w"
-msgstr "转到行(&G)...           M-l"
-
-msgid "&Paste from clipfile        C-y"
+msgid "&Beginning"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k               "
-msgstr "翻转标记(&T)       F3"
+msgid "&End"
+msgstr "Inode(&I)"
 
 #, fuzzy
-msgid "&Next bookmark                 "
-msgstr "新建(&N)         C-n"
+msgid "&Search..."
+msgstr "搜索"
 
 #, fuzzy
-msgid "Pre&v bookmark                 "
-msgstr "排序(&T)...             M-t"
-
-#, fuzzy
-msgid "&Flush bookmark                "
-msgstr "邮寄(&M)...                 "
-
-msgid "&Search...         F7"
-msgstr "查找(&S)...        F7"
-
-msgid "Search &again     F17"
+msgid "Search &again"
 msgstr "再次查找(&A)      F17"
 
-msgid "&Replace...        F4"
-msgstr "替换(&R)...        F4"
-
-msgid "&Go to line...            M-l"
-msgstr "转到行(&G)...           M-l"
+#, fuzzy
+msgid "&Replace..."
+msgstr "替换(&R)"
 
 #, fuzzy
-msgid "Toggle li&ne state        M-n"
+msgid "&Go to line..."
+msgstr " 转到行 "
+
+#, fuzzy
+msgid "Toggle li&ne state"
 msgstr "翻转标记(&T)       F3"
 
-msgid "Go to matching &bracket   M-b"
+#, fuzzy
+msgid "Go to matching &bracket"
 msgstr "转到对应的括号(&B)      M-b"
 
-msgid "Find declaration      A-Enter"
+#, fuzzy
+msgid "Find declaration"
+msgstr "应用补丁后查找被拒绝的补丁"
+
+msgid "Back from declaration"
 msgstr ""
 
-msgid "Back from declaration     M--"
-msgstr ""
-
-msgid "Forward to declaration    M-+"
+msgid "Forward to declaration"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             M-e"
+msgid "Encod&ing..."
 msgstr "排序(&T)...             M-t"
 
-msgid "Insert &literal...       C-q"
-msgstr "字面插入(&L)...         C-q"
-
-msgid "&Refresh screen          C-l"
+#, fuzzy
+msgid "&Refresh screen"
 msgstr "刷新屏幕(&R)            C-l"
 
-msgid "&Start record macro      C-r"
+#, fuzzy
+msgid "&Start record macro"
 msgstr "开始记录宏(&S)          C-r"
 
-msgid "&Finish record macro...  C-r"
+#, fuzzy
+msgid "&Finish record macro..."
 msgstr "完成记录宏(&F)...       C-r"
 
-msgid "&Execute macro...   C-a, KEY"
+#, fuzzy
+msgid "&Execute macro..."
 msgstr "执行宏(&E)...      C-a, KEY"
 
-msgid "Delete macr&o...            "
-msgstr "删除宏(&O)...              "
+#, fuzzy
+msgid "Delete macr&o..."
+msgstr " 删除宏 "
 
-msgid "Insert &date/time           "
-msgstr "插入日期/时间(&D)          "
-
-msgid "Format p&aragraph        M-p"
-msgstr "格式化段落(&A)          M-p"
-
-msgid "'ispell' s&pell check    C-p"
+#, fuzzy
+msgid "'ispell' s&pell check"
 msgstr "“ispell”拼写检查(&P)  C-p"
 
-msgid "Sor&t...                 M-t"
-msgstr "排序(&T)...             M-t"
+#, fuzzy
+msgid "&Mail..."
+msgstr "过滤(&F)..."
 
-msgid "Paste o&utput of...      M-u"
+#, fuzzy
+msgid "Insert &literal..."
+msgstr "字面插入(&L)...         C-q"
+
+#, fuzzy
+msgid "Insert &date/time"
+msgstr "插入日期/时间(&D)          "
+
+#, fuzzy
+msgid "Format p&aragraph"
+msgstr "格式化段落(&A)          M-p"
+
+#, fuzzy
+msgid "Sor&t..."
+msgstr "排序(&S)..."
+
+msgid "Paste o&utput of..."
 msgstr ""
 
-msgid "E&xternal Formatter      F19"
+#, fuzzy
+msgid "E&xternal formatter"
 msgstr "外部格式化工具(&X)      F19"
-
-msgid "&Mail...                    "
-msgstr "邮寄(&M)...                 "
-
-msgid "&Execute macro... C-x e, KEY"
-msgstr "执行宏(&E)...    C-x e, KEY"
-
-msgid "'ispell' s&pell check    M-$"
-msgstr "“ispell”拼写检查(&P)  M-$"
 
 msgid "&General...  "
 msgstr "常规(&G)..."
 
-msgid "&Save mode..."
+#, fuzzy
+msgid "Save &mode..."
 msgstr "保存模式(&S)..."
 
 #, fuzzy
-msgid "Learn &Keys..."
+msgid "Learn &keys..."
 msgstr "学习按键(&K)..."
 
 #, fuzzy
-msgid "Syntax &Highlighting..."
+msgid "Syntax &highlighting..."
 msgstr "语法突出显示(&X)"
 
 #, fuzzy
@@ -645,34 +628,32 @@ msgstr "菜单文件编辑(&M)"
 msgid "&Menu file"
 msgstr "菜单文件编辑(&M)"
 
-#, fuzzy
-msgid "Save setu&p"
+msgid "&Save setup"
 msgstr "保存设置(&S)"
 
-msgid " File "
-msgstr " 文件 "
-
-msgid " Edit "
-msgstr " 编辑 "
-
-msgid " Sear/Repl "
-msgstr " 搜索/替换 "
-
-msgid " Command "
-msgstr " 命令 "
-
-msgid " Options "
-msgstr " 选项 "
-
-msgid "Intuitive"
-msgstr "直观的"
-
-msgid "Emacs"
-msgstr "Emacs"
+#, fuzzy
+msgid "&File"
+msgstr "文件"
 
 #, fuzzy
-msgid "User-defined"
-msgstr "用户定义(&U)："
+msgid "&Edit"
+msgstr "编辑"
+
+#, fuzzy
+msgid "&Search"
+msgstr "搜索"
+
+#, fuzzy
+msgid "&Command"
+msgstr "命令"
+
+#, fuzzy
+msgid "For&mat"
+msgstr "格式化"
+
+#, fuzzy
+msgid "&Options"
+msgstr " 选项 (&O) "
 
 msgid "None"
 msgstr "无"
@@ -685,9 +666,6 @@ msgstr "打字机换行"
 
 msgid "Word wrap line length: "
 msgstr "换行位置："
-
-msgid "Tab spacing: "
-msgstr "制表位间距："
 
 msgid "Cursor beyond end of line"
 msgstr ""
@@ -712,11 +690,14 @@ msgstr " 保存文件 "
 msgid "Confir&m before saving"
 msgstr "保存前确认(&M)"
 
-msgid "Fill tabs with &spaces"
-msgstr "使用空格填充制表位(&S)"
-
 msgid "&Return does autoindent"
 msgstr "回车不自动缩进(&R)"
+
+msgid "Tab spacing: "
+msgstr "制表位间距："
+
+msgid "Fill tabs with &spaces"
+msgstr "使用空格填充制表位(&S)"
 
 msgid "&Backspace through tabs"
 msgstr "退格键删除制表符(&B)"
@@ -727,35 +708,38 @@ msgstr "模拟半个制表符(&F)"
 msgid "Wrap mode"
 msgstr "换行模式"
 
-msgid "Key emulation"
-msgstr "键模拟"
-
 msgid " Editor options "
 msgstr " 编辑器选项 "
 
-msgid "Help"
-msgstr "帮助"
+msgid "ButtonBar|Help"
+msgstr ""
 
-msgid "Save"
-msgstr "保存"
+msgid "ButtonBar|Save"
+msgstr ""
 
-msgid "Mark"
-msgstr "标记"
+msgid "ButtonBar|Mark"
+msgstr ""
 
-msgid "Replac"
-msgstr "替换"
+msgid "ButtonBar|Replac"
+msgstr ""
 
-msgid "Copy"
-msgstr "复制"
+msgid "ButtonBar|Copy"
+msgstr ""
 
-msgid "Move"
-msgstr "移动"
+msgid "ButtonBar|Move"
+msgstr ""
 
-msgid "Delete"
-msgstr "删除"
+msgid "ButtonBar|Search"
+msgstr ""
 
-msgid "PullDn"
-msgstr "下拉"
+msgid "ButtonBar|Delete"
+msgstr ""
+
+msgid "ButtonBar|PullDn"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
 
 msgid " Load syntax file "
 msgstr " 载入语法文件 "
@@ -1219,6 +1203,9 @@ msgstr "T 或 INS 做标记"
 msgid " Permission "
 msgstr " 权限 "
 
+msgid " File "
+msgstr " 文件 "
+
 msgid "Chmod command"
 msgstr "Chmod 命令"
 
@@ -1481,14 +1468,14 @@ msgid ""
 "it."
 msgstr ""
 
-msgid " Copy "
-msgstr " 复制 "
+msgid "DialogTitle|Copy"
+msgstr ""
 
-msgid " Move "
-msgstr " 移动 "
+msgid "DialogTitle|Move"
+msgstr ""
 
-msgid " Delete "
-msgstr " 删除 "
+msgid "DialogTitle|Delete"
+msgstr ""
 
 msgid " Cannot make the hardlink "
 msgstr " 无法创建硬链接 "
@@ -1642,9 +1629,6 @@ msgstr ""
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr "文件没有完整获取。保留它吗？"
 
-msgid "&Delete"
-msgstr "删除(&D)"
-
 msgid "&Keep"
 msgstr "保留(&K)"
 
@@ -1768,14 +1752,14 @@ msgstr ""
 msgid "Directory scanning"
 msgstr "目录路径"
 
-msgid "1Copy"
-msgstr "1复制"
+msgid "FileOperation|Copy"
+msgstr ""
 
-msgid "1Move"
-msgstr "1移动"
+msgid "FileOperation|Move"
+msgstr ""
 
-msgid "1Delete"
-msgstr "1删除"
+msgid "FileOperation|Delete"
+msgstr ""
 
 #, no-c-format
 msgid "%o %f \"%s\"%m"
@@ -1805,6 +1789,10 @@ msgstr " 源掩码："
 
 msgid " to:"
 msgstr " 至："
+
+#, c-format
+msgid "%s?"
+msgstr ""
 
 msgid " Cannot operate on \"..\"! "
 msgstr " 无法操作“..”！ "
@@ -1954,9 +1942,6 @@ msgstr "改目录(&C)"
 msgid "&Again"
 msgstr "再次(&A)"
 
-msgid "&Quit"
-msgstr "退出(&Q)"
-
 msgid "Pane&lize"
 msgstr ""
 
@@ -2042,14 +2027,14 @@ msgstr ""
 msgid " Cannot find node %s in help file "
 msgstr " 无法在帮助文件中找到节点 %s "
 
-msgid "Index"
-msgstr "索引"
+msgid "Help"
+msgstr "帮助"
 
-msgid "Prev"
-msgstr "前"
+msgid "ButtonBar|Index"
+msgstr ""
 
-msgid "&Move"
-msgstr "移动(&M)"
+msgid "ButtonBar|Prev"
+msgstr ""
 
 msgid "&Remove"
 msgstr "删除(&R)"
@@ -2350,11 +2335,13 @@ msgstr " 您真的要退出 Midnight Commander 吗？"
 msgid "&Listing mode..."
 msgstr "列表模式(&L)..."
 
-msgid "&Quick view     C-x q"
-msgstr "快速查看(&Q)   C-x q"
+#, fuzzy
+msgid "&Quick view"
+msgstr "快速保存"
 
-msgid "&Info           C-x i"
-msgstr "信息(&I)       C-x i"
+#, fuzzy
+msgid "&Info"
+msgstr "Inode(&I)"
 
 msgid "&Sort order..."
 msgstr "排序(&S)..."
@@ -2363,7 +2350,7 @@ msgid "&Filter..."
 msgstr "过滤(&F)..."
 
 #, fuzzy
-msgid "&Encoding...    M-e"
+msgid "&Encoding..."
 msgstr "排序(&T)...             M-t"
 
 msgid "&Network link..."
@@ -2379,102 +2366,117 @@ msgstr "SMB 链接(&B)..."
 msgid "SM&B link..."
 msgstr "SMB 链接(&B)..."
 
-msgid "&Rescan         C-r"
-msgstr "重新扫描(&R)   C-r"
+#, fuzzy
+msgid "&Rescan"
+msgstr "重新扫描"
 
-msgid "&View               F3"
-msgstr "查看(&V)              F3"
+#, fuzzy
+msgid "&View"
+msgstr "查看"
 
-msgid "Vie&w file...         "
-msgstr "查看文件(&W)...         "
+#, fuzzy
+msgid "Vie&w file..."
+msgstr " 查看文件 "
 
-msgid "&Filtered view     M-!"
-msgstr "过滤视图(&F)         M-!"
+#, fuzzy
+msgid "&Filtered view"
+msgstr " 过滤视图 "
 
-msgid "&Edit               F4"
-msgstr "编辑(&E)              F4"
+msgid "C&hmod"
+msgstr ""
 
-msgid "&Copy               F5"
-msgstr "复制(&C)              F5"
+#, fuzzy
+msgid "&Link"
+msgstr "链接(&L)"
 
-msgid "c&Hmod           C-x c"
-msgstr "chmod(&H)          C-x c"
+#, fuzzy
+msgid "&SymLink"
+msgstr "链接(&L)"
 
-msgid "&Link            C-x l"
-msgstr "链接(&L)           C-x l"
+#, fuzzy
+msgid "Edit s&ymlink"
+msgstr " 编辑符号链接 "
 
-msgid "&SymLink         C-x s"
-msgstr "符号链接(&S)       C-x s"
+msgid "Ch&own"
+msgstr ""
 
-msgid "edit s&Ymlink  C-x C-s"
-msgstr "编辑符号链接(&Y) C-x C-s"
-
-msgid "ch&Own           C-x o"
-msgstr "chown(&O)          C-x o"
-
-msgid "&Advanced chown       "
+#, fuzzy
+msgid "&Advanced chown"
 msgstr "高级 chown(&A)          "
 
-msgid "&Rename/Move        F6"
-msgstr "重命名(&R)            F6"
+#, fuzzy
+msgid "&Rename/Move"
+msgstr "删除(&R)"
 
-msgid "&Mkdir              F7"
-msgstr "创建目录(&M)          F7"
+#, fuzzy
+msgid "&Mkdir"
+msgstr "建目录"
 
-msgid "&Delete             F8"
-msgstr "删除(&D)              F8"
+#, fuzzy
+msgid "&Quick cd"
+msgstr "快速 cd"
 
-msgid "&Quick cd          M-c"
-msgstr "快速 cd(&Q)          M-c"
+#, fuzzy
+msgid "Select &group"
+msgstr "设置群组(&G)"
 
-msgid "select &Group      M-+"
-msgstr "选择组(&G)           M-+"
+#, fuzzy
+msgid "U&nselect group"
+msgstr " 取消选择 "
 
-msgid "u&Nselect group    M-\\"
-msgstr "取消选择组(&N)       M-\\"
-
-msgid "reverse selec&Tion M-*"
+#, fuzzy
+msgid "Reverse selec&tion"
 msgstr "反转选择(&T)         M-*"
 
-msgid "e&Xit              F10"
-msgstr "退出(&X)             F10"
+#, fuzzy
+msgid "E&xit"
+msgstr "编辑"
 
-msgid "&User menu          F2"
-msgstr "用户菜单(&U)          F2"
+#, fuzzy
+msgid "&User menu"
+msgstr " 用户菜单 "
 
 msgid "&Directory tree"
 msgstr "目录树(&D)"
 
-msgid "&Find file            M-?"
-msgstr "查找文件(&F)       M-?"
+#, fuzzy
+msgid "&Find file"
+msgstr "搜索文件"
 
-msgid "s&Wap panels          C-u"
-msgstr "交换面板(&W)       C-u"
-
-msgid "switch &Panels on/off C-o"
-msgstr "切换面板开/关(&P)  C-o"
-
-msgid "&Compare directories  C-x d"
-msgstr "比较目录(&C)       C-x d"
-
-msgid "e&Xternal panelize    C-x !"
+msgid "S&wap panels"
 msgstr ""
 
-msgid "show directory s&Izes"
+#, fuzzy
+msgid "Switch &panels on/off"
+msgstr "切换面板开/关(&P)  C-o"
+
+#, fuzzy
+msgid "&Compare directories"
+msgstr " 比较目录 "
+
+#, fuzzy
+msgid "E&xternal panelize"
+msgstr "其它命令"
+
+#, fuzzy
+msgid "Show directory s&izes"
 msgstr "显示目录大小(&I)"
 
 #, fuzzy
-msgid "Command &history      M-h"
-msgstr " 命令历史 "
+msgid "Command &history"
+msgstr "命令历史(&H)"
 
-msgid "di&Rectory hotlist    C-\\"
-msgstr ""
+#, fuzzy
+msgid "Di&rectory hotlist"
+msgstr "目录路径"
 
-msgid "&Active VFS list      C-x a"
+#, fuzzy
+msgid "&Active VFS list"
 msgstr "活动 VFS 列表(&A)  C-x a"
 
-msgid "&Background jobs      C-x j"
-msgstr "后台任务(&B)       C-x j"
+#, fuzzy
+msgid "&Background jobs"
+msgstr "后台任务"
 
 msgid "&Undelete files (ext2fs only)"
 msgstr "反删除文件(仅限 ext2fs)(&U)"
@@ -2497,40 +2499,30 @@ msgstr "配置(&C)..."
 msgid "&Layout..."
 msgstr "布局(&L)..."
 
-msgid "c&Onfirmation..."
+#, fuzzy
+msgid "C&onfirmation..."
 msgstr "确认(&O)..."
 
 msgid "&Display bits..."
 msgstr "显示位(&D)..."
 
-msgid "learn &Keys..."
-msgstr "学习按键(&K)..."
-
 msgid "&Virtual FS..."
 msgstr "虚拟文件系统(&V)..."
 
-msgid "&Save setup"
-msgstr "保存设置(&S)"
-
-msgid " &Above "
+#, fuzzy
+msgid "&Above"
 msgstr " 上(&A) "
 
-msgid " &Left "
+#, fuzzy
+msgid "&Left"
 msgstr " 左(&L) "
 
-msgid " &File "
-msgstr " 文件(&F) "
-
-msgid " &Command "
-msgstr " 命令(&C) "
-
-msgid " &Options "
-msgstr " 选项 (&O) "
-
-msgid " &Below "
+#, fuzzy
+msgid "&Below"
 msgstr " 下(&B) "
 
-msgid " &Right "
+#, fuzzy
+msgid "&Right"
 msgstr " 右(&R) "
 
 msgid " Information "
@@ -2546,8 +2538,8 @@ msgstr ""
 " 情况下，您需要手工刷新目录的内容。请参考手册获得详细 \n"
 " 的信息。                                             "
 
-msgid "Menu"
-msgstr "菜单"
+msgid "ButtonBar|Menu"
+msgstr ""
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "没有设置 TERM 环境变量！\n"
@@ -2699,41 +2691,34 @@ msgid "SUB-DIR"
 msgstr "子目录"
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
-msgid "u"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|u"
 msgstr ""
-
-#, fuzzy
-msgid "Unsorted"
-msgstr "未排序(&U)"
 
 msgid "&Unsorted"
 msgstr "未排序(&U)"
 
 #. TRANSLATORS: one single character to represent 'name' sort mode
-#, fuzzy
-msgid "n"
-msgstr "开"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|n"
+msgstr ""
 
 msgid "&Name"
 msgstr "名字(&N)"
 
 #. TRANSLATORS: one single character to represent 'extension' sort mode
-msgid "e"
-msgstr ""
-
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 #, fuzzy
-msgid "Extension"
-msgstr "扩展名："
+msgid "sort|e"
+msgstr "未排序(&U)"
 
 msgid "&Extension"
 msgstr "扩展(&E)"
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
-msgid "s"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|s"
 msgstr ""
-
-msgid "Size"
-msgstr "大小"
 
 msgid "&Size"
 msgstr "大小(&S)"
@@ -2743,31 +2728,25 @@ msgid "Block Size"
 msgstr " 大小 "
 
 #. TRANSLATORS: one single character to represent 'Modify time' sort mode
-msgid "m"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|m"
 msgstr ""
-
-msgid "MTime"
-msgstr "修改时间"
 
 msgid "&Modify time"
 msgstr "修改时间(&M)"
 
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
-msgid "a"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|a"
 msgstr ""
-
-msgid "ATime"
-msgstr "访问时间"
 
 msgid "&Access time"
 msgstr "访问时间(&A)"
 
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
-msgid "h"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|h"
 msgstr ""
-
-msgid "CTime"
-msgstr "创建时间"
 
 msgid "C&Hange time"
 msgstr "修改时间(&C)"
@@ -2782,11 +2761,9 @@ msgid "Nl"
 msgstr "Nl"
 
 #. TRANSLATORS: one single character to represent 'inode' sort mode
-msgid "i"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|i"
 msgstr ""
-
-msgid "Inode"
-msgstr "Inode"
 
 msgid "&Inode"
 msgstr "Inode(&I)"
@@ -2827,17 +2804,17 @@ msgstr "用户提供的格式无效，回复到默认设置。"
 msgid " Do you really want to execute? "
 msgstr " 您真的要执行吗？"
 
-msgid "View"
-msgstr "查看"
+msgid "ButtonBar|View"
+msgstr ""
 
-msgid "Edit"
-msgstr "编辑"
+msgid "ButtonBar|Edit"
+msgstr ""
 
-msgid "RenMov"
-msgstr "重命名"
+msgid "ButtonBar|RenMov"
+msgstr ""
 
-msgid "Mkdir"
-msgstr "建目录"
+msgid "ButtonBar|Mkdir"
+msgstr ""
 
 msgid " Not implemented yet "
 msgstr ""
@@ -2868,6 +2845,12 @@ msgstr " 选择输入代码页"
 
 msgid "-  < No translation >"
 msgstr "-  < 没有翻译 >"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot save file %s:\n"
+"%s"
+msgstr " 保存文件时发生错误。"
 
 #, c-format
 msgid ""
@@ -2970,20 +2953,20 @@ msgstr ""
 msgid "  Delete %s?  "
 msgstr "  删除 %s？ "
 
-msgid "Static"
-msgstr "静态"
+msgid "ButtonBar|Static"
+msgstr ""
 
-msgid "Dynamc"
-msgstr "动态"
+msgid "ButtonBar|Dynamc"
+msgstr ""
 
-msgid "Rescan"
-msgstr "重新扫描"
+msgid "ButtonBar|Rescan"
+msgstr ""
 
-msgid "Forget"
-msgstr "忘记"
+msgid "ButtonBar|Forget"
+msgstr ""
 
-msgid "Rmdir"
-msgstr "删除目录"
+msgid "ButtonBar|Rmdir"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -3130,10 +3113,6 @@ msgstr "小键盘上的 Insert"
 
 msgid "Delete on keypad"
 msgstr "小键盘上的 Delete"
-
-#, fuzzy
-msgid "Escape key"
-msgstr "小键盘上的 /"
 
 msgid "Enter on keypad"
 msgstr "小键盘上的 Enter"
@@ -3375,12 +3354,6 @@ msgstr " 无法生成子程序 "
 msgid "Empty output from child filter"
 msgstr ""
 
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Quit"
-msgstr ""
-
 msgid "ButtonBar|Ascii"
 msgstr ""
 
@@ -3393,15 +3366,6 @@ msgstr ""
 msgid "ButtonBar|Line"
 msgstr ""
 
-msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
 msgid "ButtonBar|UnWrap"
 msgstr ""
 
@@ -3409,9 +3373,6 @@ msgid "ButtonBar|Wrap"
 msgstr ""
 
 msgid "ButtonBar|HxSrch"
-msgstr ""
-
-msgid "ButtonBar|Search"
 msgstr ""
 
 msgid "ButtonBar|Raw"
@@ -3929,6 +3890,325 @@ msgstr "内部错误："
 msgid "Changes to file lost"
 msgstr "对文件的修改被丢失"
 
+#~ msgid "Do backups -->"
+#~ msgstr "备份 -->"
+
+#~ msgid "Extension:"
+#~ msgstr "扩展名："
+
+#~ msgid "&New              C-n"
+#~ msgstr "新建(&N)         C-n"
+
+#~ msgid "&Save              F2"
+#~ msgstr "保存(&S)           F2"
+
+#~ msgid "Save &as...       F12"
+#~ msgstr "保存为(&A)...     F12"
+
+#~ msgid "A&bout...            "
+#~ msgstr "关于(&B)...          "
+
+#~ msgid "&Quit             F10"
+#~ msgstr "退出(&Q)          F10"
+
+#~ msgid "&New            C-x k"
+#~ msgstr "新建(&N)        C-x k"
+
+#~ msgid "Copy to &file...     "
+#~ msgstr "复制到文件(&F)...    "
+
+#, fuzzy
+#~ msgid "&Toggle mark                 F3"
+#~ msgstr "翻转标记(&T)       F3"
+
+#, fuzzy
+#~ msgid "Mar&k columns              S-F3"
+#~ msgstr "标记列(&M)       S-F3"
+
+#, fuzzy
+#~ msgid "&Copy                        F5"
+#~ msgstr "复制(&C)              F5"
+
+#, fuzzy
+#~ msgid "&Move                        F6"
+#~ msgstr "移动(&M)           F6"
+
+#, fuzzy
+#~ msgid "&Delete                      F8"
+#~ msgstr "删除(&D)              F8"
+
+#, fuzzy
+#~ msgid "&Next bookmark              M-j"
+#~ msgstr "新建(&N)         C-n"
+
+#, fuzzy
+#~ msgid "&Undo                       C-u"
+#~ msgstr "撤消(&U)          C-u"
+
+#, fuzzy
+#~ msgid "&Beginning               C-PgUp"
+#~ msgstr "开始(&B)       C-PgUp"
+
+#, fuzzy
+#~ msgid "&End                     C-PgDn"
+#~ msgstr "结尾(&E)       C-PgDn"
+
+#, fuzzy
+#~ msgid "C&opy to clipfile           M-w"
+#~ msgstr "转到行(&G)...           M-l"
+
+#, fuzzy
+#~ msgid "C&ut to clipfile            C-w"
+#~ msgstr "转到行(&G)...           M-l"
+
+#, fuzzy
+#~ msgid "Toggle bookmar&k               "
+#~ msgstr "翻转标记(&T)       F3"
+
+#, fuzzy
+#~ msgid "&Next bookmark                 "
+#~ msgstr "新建(&N)         C-n"
+
+#, fuzzy
+#~ msgid "Pre&v bookmark                 "
+#~ msgstr "排序(&T)...             M-t"
+
+#, fuzzy
+#~ msgid "&Flush bookmark                "
+#~ msgstr "邮寄(&M)...                 "
+
+#~ msgid "&Search...         F7"
+#~ msgstr "查找(&S)...        F7"
+
+#~ msgid "&Replace...        F4"
+#~ msgstr "替换(&R)...        F4"
+
+#~ msgid "&Go to line...            M-l"
+#~ msgstr "转到行(&G)...           M-l"
+
+#, fuzzy
+#~ msgid "Encod&ing...             M-e"
+#~ msgstr "排序(&T)...             M-t"
+
+#~ msgid "Delete macr&o...            "
+#~ msgstr "删除宏(&O)...              "
+
+#~ msgid "Sor&t...                 M-t"
+#~ msgstr "排序(&T)...             M-t"
+
+#~ msgid "&Mail...                    "
+#~ msgstr "邮寄(&M)...                 "
+
+#~ msgid "&Execute macro... C-x e, KEY"
+#~ msgstr "执行宏(&E)...    C-x e, KEY"
+
+#~ msgid "'ispell' s&pell check    M-$"
+#~ msgstr "“ispell”拼写检查(&P)  M-$"
+
+#, fuzzy
+#~ msgid "Save setu&p"
+#~ msgstr "保存设置(&S)"
+
+#~ msgid " Edit "
+#~ msgstr " 编辑 "
+
+#~ msgid " Sear/Repl "
+#~ msgstr " 搜索/替换 "
+
+#~ msgid " Command "
+#~ msgstr " 命令 "
+
+#~ msgid " Options "
+#~ msgstr " 选项 "
+
+#~ msgid "Intuitive"
+#~ msgstr "直观的"
+
+#~ msgid "Emacs"
+#~ msgstr "Emacs"
+
+#, fuzzy
+#~ msgid "User-defined"
+#~ msgstr "用户定义(&U)："
+
+#~ msgid "Key emulation"
+#~ msgstr "键模拟"
+
+#~ msgid "Save"
+#~ msgstr "保存"
+
+#~ msgid "Mark"
+#~ msgstr "标记"
+
+#~ msgid "Replac"
+#~ msgstr "替换"
+
+#~ msgid "Move"
+#~ msgstr "移动"
+
+#~ msgid "Delete"
+#~ msgstr "删除"
+
+#~ msgid "PullDn"
+#~ msgstr "下拉"
+
+#~ msgid " Copy "
+#~ msgstr " 复制 "
+
+#~ msgid " Move "
+#~ msgstr " 移动 "
+
+#~ msgid " Delete "
+#~ msgstr " 删除 "
+
+#~ msgid "1Copy"
+#~ msgstr "1复制"
+
+#~ msgid "1Move"
+#~ msgstr "1移动"
+
+#~ msgid "1Delete"
+#~ msgstr "1删除"
+
+#~ msgid "Index"
+#~ msgstr "索引"
+
+#~ msgid "Prev"
+#~ msgstr "前"
+
+#~ msgid "&Quick view     C-x q"
+#~ msgstr "快速查看(&Q)   C-x q"
+
+#~ msgid "&Info           C-x i"
+#~ msgstr "信息(&I)       C-x i"
+
+#~ msgid "&Rescan         C-r"
+#~ msgstr "重新扫描(&R)   C-r"
+
+#~ msgid "&View               F3"
+#~ msgstr "查看(&V)              F3"
+
+#~ msgid "Vie&w file...         "
+#~ msgstr "查看文件(&W)...         "
+
+#~ msgid "&Filtered view     M-!"
+#~ msgstr "过滤视图(&F)         M-!"
+
+#~ msgid "&Edit               F4"
+#~ msgstr "编辑(&E)              F4"
+
+#~ msgid "&Copy               F5"
+#~ msgstr "复制(&C)              F5"
+
+#~ msgid "c&Hmod           C-x c"
+#~ msgstr "chmod(&H)          C-x c"
+
+#~ msgid "&Link            C-x l"
+#~ msgstr "链接(&L)           C-x l"
+
+#~ msgid "&SymLink         C-x s"
+#~ msgstr "符号链接(&S)       C-x s"
+
+#~ msgid "edit s&Ymlink  C-x C-s"
+#~ msgstr "编辑符号链接(&Y) C-x C-s"
+
+#~ msgid "ch&Own           C-x o"
+#~ msgstr "chown(&O)          C-x o"
+
+#~ msgid "&Rename/Move        F6"
+#~ msgstr "重命名(&R)            F6"
+
+#~ msgid "&Mkdir              F7"
+#~ msgstr "创建目录(&M)          F7"
+
+#~ msgid "&Delete             F8"
+#~ msgstr "删除(&D)              F8"
+
+#~ msgid "&Quick cd          M-c"
+#~ msgstr "快速 cd(&Q)          M-c"
+
+#~ msgid "select &Group      M-+"
+#~ msgstr "选择组(&G)           M-+"
+
+#~ msgid "u&Nselect group    M-\\"
+#~ msgstr "取消选择组(&N)       M-\\"
+
+#~ msgid "e&Xit              F10"
+#~ msgstr "退出(&X)             F10"
+
+#~ msgid "&User menu          F2"
+#~ msgstr "用户菜单(&U)          F2"
+
+#~ msgid "&Find file            M-?"
+#~ msgstr "查找文件(&F)       M-?"
+
+#~ msgid "s&Wap panels          C-u"
+#~ msgstr "交换面板(&W)       C-u"
+
+#~ msgid "&Compare directories  C-x d"
+#~ msgstr "比较目录(&C)       C-x d"
+
+#, fuzzy
+#~ msgid "Command &history      M-h"
+#~ msgstr " 命令历史 "
+
+#~ msgid "&Background jobs      C-x j"
+#~ msgstr "后台任务(&B)       C-x j"
+
+#~ msgid "learn &Keys..."
+#~ msgstr "学习按键(&K)..."
+
+#~ msgid " &File "
+#~ msgstr " 文件(&F) "
+
+#~ msgid " &Command "
+#~ msgstr " 命令(&C) "
+
+#~ msgid "Menu"
+#~ msgstr "菜单"
+
+#, fuzzy
+#~ msgid "n"
+#~ msgstr "开"
+
+#, fuzzy
+#~ msgid "Extension"
+#~ msgstr "扩展名："
+
+#~ msgid "Size"
+#~ msgstr "大小"
+
+#~ msgid "MTime"
+#~ msgstr "修改时间"
+
+#~ msgid "ATime"
+#~ msgstr "访问时间"
+
+#~ msgid "CTime"
+#~ msgstr "创建时间"
+
+#~ msgid "Inode"
+#~ msgstr "Inode"
+
+#~ msgid "RenMov"
+#~ msgstr "重命名"
+
+#~ msgid "Static"
+#~ msgstr "静态"
+
+#~ msgid "Dynamc"
+#~ msgstr "动态"
+
+#~ msgid "Forget"
+#~ msgstr "忘记"
+
+#~ msgid "Rmdir"
+#~ msgstr "删除目录"
+
+#, fuzzy
+#~ msgid "Escape key"
+#~ msgstr "小键盘上的 /"
+
 #, fuzzy
 #~ msgid "bind: Unknown command: `%s'"
 #~ msgstr " Chown 命令 "
@@ -4021,15 +4301,8 @@ msgstr "对文件的修改被丢失"
 #~ msgid "&Delete            F8"
 #~ msgstr "删除(&D)           F8"
 
-#, fuzzy
-#~ msgid "Save setu&p..."
-#~ msgstr "保存设置(&S)"
-
 #~ msgid " The command history is empty "
 #~ msgstr " 命令历史是空的 "
-
-#~ msgid "command &History"
-#~ msgstr "命令历史(&H)"
 
 #~ msgid "Edit edi&tor menu file"
 #~ msgstr "菜单编辑器编辑(&T)"
@@ -4067,9 +4340,6 @@ msgstr "对文件的修改被丢失"
 
 #~ msgid "&Type"
 #~ msgstr "类型(&T)"
-
-#~ msgid "&Links"
-#~ msgstr "链接(&L)"
 
 #~ msgid "N&GID"
 #~ msgstr "N&GID"

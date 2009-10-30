@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mn\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-09 09:50+0300\n"
+"POT-Creation-Date: 2009-10-30 10:39+0200\n"
 "PO-Revision-Date: 2003-03-04 21:16+0100\n"
 "Last-Translator: Sanlig Badral <badral@chinggis.com>\n"
 "Language-Team: Mongolian <mn@li.org>\n"
@@ -56,6 +56,29 @@ msgstr " Харж чадсангүй: хэвийн бус файл "
 msgid " File %s is too large "
 msgstr " Маш том файл: "
 
+msgid " About "
+msgstr " Бидний тухай "
+
+msgid ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       A user friendly text editor written\n"
+"           for the Midnight Commander.\n"
+msgstr ""
+"\n"
+"                     Cooledit  v3.11.5\n"
+"\n"
+"       Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+" Хэрэглэгчидэд тааламжтай тект засварлагчыг.\n"
+"               бүтээсэн Midnight Commander.\n"
+
+msgid "&OK"
+msgstr "&ОК"
+
 msgid "Macro recursion is too deep"
 msgstr "Макрогийн рекурс хэт гүн байна"
 
@@ -93,23 +116,29 @@ msgstr " Бичих урсгалыг нээж чадсангүй: "
 msgid " Cannot open file for writing: %s "
 msgstr " Бичих урсгалыг нээж чадсангүй: "
 
-msgid "Quick save "
+#, fuzzy
+msgid "&Quick save"
 msgstr "Хурдан хадгалалт"
 
-msgid "Safe save "
+#, fuzzy
+msgid "&Safe save"
 msgstr "Аваарын хадгалалт"
 
-msgid "Do backups -->"
-msgstr "Нөөц үүсгэх -->"
+msgid "&Do backups with following extension:"
+msgstr ""
 
-msgid "&OK"
-msgstr "&ОК"
-
-msgid "Extension:"
-msgstr "өргөтгөл:"
+msgid "Check &POSIX new line"
+msgstr ""
 
 msgid " Edit Save Mode "
 msgstr " Хадгалах гормыг засварлах "
+
+msgid "The file you are saving is not finished with a newline"
+msgstr ""
+
+#, fuzzy
+msgid "C&ontinue"
+msgstr "үргэлжлэх"
 
 msgid "&Do not change"
 msgstr ""
@@ -181,10 +210,6 @@ msgid ""
 msgstr ""
 " Одоогийн энэ текст нь файлд хадгалагдалгүйгээр өөрчлөгдсөн байна. \n"
 " үүнийг үргэлжлүүлвэл өөрчлөлт нь алдагдахад хүргэнэ. "
-
-#, fuzzy
-msgid "C&ontinue"
-msgstr "үргэлжлэх"
 
 msgid "Syntax file edit"
 msgstr "Файлын синтаксийг засварлах"
@@ -406,238 +431,196 @@ msgstr ""
 msgid "&Ignore lock"
 msgstr ""
 
-msgid " About "
-msgstr " Бидний тухай "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                     Cooledit  v3.11.5\n"
-"\n"
-"       Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-" Хэрэглэгчидэд тааламжтай тект засварлагчыг.\n"
-"               бүтээсэн Midnight Commander.\n"
-
 msgid "&Open file..."
 msgstr "Файл &нээх..."
 
-msgid "&New              C-n"
-msgstr "&Шинэ файл           C-n"
+#, fuzzy
+msgid "&New"
+msgstr "&Нэр"
 
-msgid "&Save              F2"
-msgstr "&Хадгалах             F2"
+#, fuzzy
+msgid "Save &as..."
+msgstr "&Тохиргоо хадгалах"
 
-msgid "Save &as...       F12"
-msgstr "&гэж Хадгалах...     F12"
-
-msgid "&Insert file...   F15"
+#, fuzzy
+msgid "&Insert file..."
 msgstr "Файл &оруулах...     F15"
 
-msgid "Copy to &file...  C-f"
+#, fuzzy
+msgid "Cop&y to file..."
 msgstr "Файл руу &хуулах... C-f"
 
-msgid "&User menu...     F11"
+#, fuzzy
+msgid "&User menu..."
 msgstr "&Хэрэглэгчийн цэс... F11"
 
-msgid "A&bout...            "
-msgstr "&Зохиогчийн тухай..."
+#, fuzzy
+msgid "A&bout..."
+msgstr "&Гадаад төрх..."
 
-msgid "&Quit             F10"
-msgstr "Г&арах                F10"
-
-msgid "&New            C-x k"
-msgstr "&Шинэ файл         C-x k"
-
-msgid "Copy to &file...     "
-msgstr "Файл руу &хуулах..."
+msgid "&Quit"
+msgstr "&Гарах"
 
 #, fuzzy
-msgid "&Toggle mark                 F3"
-msgstr "Блокыг &тэмдэглэх          F3"
+msgid "&Toggle mark"
+msgstr "Тэмдэглэгдсэнг &устгах"
+
+msgid "&Mark columns"
+msgstr ""
 
 #, fuzzy
-msgid "Mar&k columns              S-F3"
-msgstr "Багануудыг &ялгах     S-F3"
-
-#, fuzzy
-msgid "Toggle &ins/overw           Ins"
+msgid "Toggle &ins/overw"
 msgstr "&Оруул/соли горим Ins"
 
 #, fuzzy
-msgid "&Copy                        F5"
-msgstr "&Хуулах           F5"
+msgid "&Copy"
+msgstr "Хуулах"
+
+msgid "&Move"
+msgstr "&Зөөх"
+
+msgid "&Delete"
+msgstr "&Устгах"
 
 #, fuzzy
-msgid "&Move                        F6"
-msgstr "Блокыг &зөөх       F6"
-
-#, fuzzy
-msgid "&Delete                      F8"
-msgstr "&Устгах           F8"
-
-#, fuzzy
-msgid "C&opy to clipfile         C-Ins"
+msgid "C&opy to clipfile"
 msgstr "Файл руу &хуулах..."
 
 #, fuzzy
-msgid "C&ut to clipfile          S-Del"
+msgid "C&ut to clipfile"
 msgstr "&Мөр луу очих...        M-l"
 
-msgid "&Paste from clipfile      S-Ins"
+msgid "&Paste from clipfile"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k            M-k"
+msgid "Toggle bookmar&k"
 msgstr "Блокыг &тэмдэглэх          F3"
 
 #, fuzzy
-msgid "&Next bookmark              M-j"
-msgstr "&Шинэ файл           C-n"
+msgid "&Next bookmark"
+msgstr "Тэмдэглэгдсэнг &оноох"
 
 #, fuzzy
-msgid "Pre&v bookmark              M-i"
+msgid "Pre&v bookmark"
 msgstr "&Эрэмбэлэлт...              M-t"
 
 #, fuzzy
-msgid "&Flush bookmark             M-o"
+msgid "&Flush bookmark"
 msgstr "&Шуудан..."
 
-#, fuzzy
-msgid "&Undo                       C-u"
-msgstr "&Буцаах                C-u"
+msgid "&Undo"
+msgstr ""
 
-#, fuzzy
-msgid "&Beginning               C-PgUp"
-msgstr "Файлын &эхлэлд очих       C-PgUp"
-
-#, fuzzy
-msgid "&End                     C-PgDn"
-msgstr "Файлын &төгсгөл        C-PgDn"
-
-#, fuzzy
-msgid "C&opy to clipfile           M-w"
-msgstr "&Мөр луу очих...        M-l"
-
-#, fuzzy
-msgid "C&ut to clipfile            C-w"
-msgstr "&Мөр луу очих...        M-l"
-
-msgid "&Paste from clipfile        C-y"
+msgid "&Beginning"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k               "
-msgstr "Блокыг &тэмдэглэх          F3"
+msgid "&End"
+msgstr "&Зангилаа"
 
 #, fuzzy
-msgid "&Next bookmark                 "
-msgstr "&Шинэ файл           C-n"
+msgid "&Search..."
+msgstr "Хайх"
 
 #, fuzzy
-msgid "Pre&v bookmark                 "
-msgstr "&Эрэмбэлэлт...              M-t"
-
-#, fuzzy
-msgid "&Flush bookmark                "
-msgstr "&Шуудан..."
-
-msgid "&Search...         F7"
-msgstr "&Хайх...          F7"
-
-msgid "Search &again     F17"
+msgid "Search &again"
 msgstr "&Цааш хайх F17"
 
-msgid "&Replace...        F4"
-msgstr "&Солих...         F4"
-
-msgid "&Go to line...            M-l"
-msgstr "&Мөр луу очих...        M-l"
+#, fuzzy
+msgid "&Replace..."
+msgstr "&Солих"
 
 #, fuzzy
-msgid "Toggle li&ne state        M-n"
+msgid "&Go to line..."
+msgstr " мөр рүү очих "
+
+#, fuzzy
+msgid "Toggle li&ne state"
 msgstr "Блокыг &тэмдэглэх          F3"
 
-msgid "Go to matching &bracket   M-b"
+#, fuzzy
+msgid "Go to matching &bracket"
 msgstr "Хос &хаалтууд руу очих    M-b"
 
-msgid "Find declaration      A-Enter"
+#, fuzzy
+msgid "Find declaration"
+msgstr "Рatch-ээр гүйцэтгэгдээгүй шалтгааныг олох"
+
+msgid "Back from declaration"
 msgstr ""
 
-msgid "Back from declaration     M--"
-msgstr ""
-
-msgid "Forward to declaration    M-+"
+msgid "Forward to declaration"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             M-e"
+msgid "Encod&ing..."
 msgstr "&Эрэмбэлэлт...              M-t"
 
-msgid "Insert &literal...       C-q"
-msgstr "&Литерал оруулах...        C-q"
-
-msgid "&Refresh screen          C-l"
+#, fuzzy
+msgid "&Refresh screen"
 msgstr "Дэл&гэцийг дахин дуудах         C-l"
 
-msgid "&Start record macro      C-r"
+#, fuzzy
+msgid "&Start record macro"
 msgstr "&Бичигдсэн макрог эхлүүлэх      C-r"
 
-msgid "&Finish record macro...  C-r"
+#, fuzzy
+msgid "&Finish record macro..."
 msgstr "Бичигдсэн макрог &дуусгах... C-r"
 
-msgid "&Execute macro...   C-a, KEY"
+#, fuzzy
+msgid "&Execute macro..."
 msgstr "Макрог &гүйцэтгэх...   C-a, KEY"
 
-msgid "Delete macr&o...            "
-msgstr "Макрог &устгах..."
+#, fuzzy
+msgid "Delete macr&o..."
+msgstr " Макрог устгах "
 
-msgid "Insert &date/time           "
-msgstr "&Огноо оруулах"
-
-msgid "Format p&aragraph        M-p"
-msgstr "Параграфын &бүтэц        M-p"
-
-msgid "'ispell' s&pell check    C-p"
+#, fuzzy
+msgid "'ispell' s&pell check"
 msgstr "Зөв бичлэгийн дүр&эм шалгах        C-p"
 
-msgid "Sor&t...                 M-t"
-msgstr "&Эрэмбэлэлт...              M-t"
+#, fuzzy
+msgid "&Mail..."
+msgstr "&Шүүлт..."
 
-msgid "Paste o&utput of...      M-u"
+#, fuzzy
+msgid "Insert &literal..."
+msgstr "&Литерал оруулах...        C-q"
+
+#, fuzzy
+msgid "Insert &date/time"
+msgstr "&Огноо оруулах"
+
+#, fuzzy
+msgid "Format p&aragraph"
+msgstr "Параграфын &бүтэц        M-p"
+
+#, fuzzy
+msgid "Sor&t..."
+msgstr "Эрэмбэлэх &дараалал..."
+
+msgid "Paste o&utput of..."
 msgstr ""
 
-msgid "E&xternal Formatter      F19"
+#, fuzzy
+msgid "E&xternal formatter"
 msgstr "&Хэлбэржүүлэгч             F19"
-
-msgid "&Mail...                    "
-msgstr "&Шуудан..."
-
-msgid "&Execute macro... C-x e, KEY"
-msgstr "Макрог &гүйцэтгэх... C-x e, KEY"
-
-msgid "'ispell' s&pell check    M-$"
-msgstr "Зөв бичлэгийн дүр&эм шалгах    M-$"
 
 msgid "&General...  "
 msgstr "&Ерөнхий..."
 
-msgid "&Save mode..."
+#, fuzzy
+msgid "Save &mode..."
 msgstr "Хадгалах &горим..."
 
 #, fuzzy
-msgid "Learn &Keys..."
+msgid "Learn &keys..."
 msgstr "&Товчлууруудыг судлах..."
 
 #, fuzzy
-msgid "Syntax &Highlighting..."
+msgid "Syntax &highlighting..."
 msgstr "&өгүүлбэрзүйг өнгөөр тодотгох"
 
 #, fuzzy
@@ -648,34 +631,32 @@ msgstr "Файлын синтаксийг засварлах"
 msgid "&Menu file"
 msgstr "Файл &цэс"
 
-#, fuzzy
-msgid "Save setu&p"
+msgid "&Save setup"
 msgstr "&Тохиргоо хадгалах"
 
-msgid " File "
-msgstr " Файл "
-
-msgid " Edit "
-msgstr " Засварлах "
-
-msgid " Sear/Repl "
-msgstr " Хайх/Солих "
-
-msgid " Command "
-msgstr " Команд "
-
-msgid " Options "
-msgstr " Тохируулга "
-
-msgid "Intuitive"
-msgstr "Мэдрэмж"
-
-msgid "Emacs"
-msgstr "Emacs"
+#, fuzzy
+msgid "&File"
+msgstr "Файл"
 
 #, fuzzy
-msgid "User-defined"
-msgstr "&Хэрэглэгч тодорхойлсон"
+msgid "&Edit"
+msgstr "Засах"
+
+#, fuzzy
+msgid "&Search"
+msgstr "Хайх"
+
+#, fuzzy
+msgid "&Command"
+msgstr "Команд"
+
+#, fuzzy
+msgid "For&mat"
+msgstr "Формат"
+
+#, fuzzy
+msgid "&Options"
+msgstr " &Тохиргоо "
 
 msgid "None"
 msgstr "Байхгүй"
@@ -688,9 +669,6 @@ msgstr "Бичлэг автомат таслагч"
 
 msgid "Word wrap line length: "
 msgstr "Таслагдах мөрийн урт:"
-
-msgid "Tab spacing: "
-msgstr "Таб зогсолт: "
 
 msgid "Cursor beyond end of line"
 msgstr ""
@@ -714,11 +692,14 @@ msgstr "Файлын &байрлал руу хадгалах"
 msgid "Confir&m before saving"
 msgstr "Хадгалахын өмнө &баталгаажуулах"
 
-msgid "Fill tabs with &spaces"
-msgstr "&Таб шилжилтийг зайгаар нөхөх"
-
 msgid "&Return does autoindent"
 msgstr "&Автоиндентийг буцаах"
+
+msgid "Tab spacing: "
+msgstr "Таб зогсолт: "
+
+msgid "Fill tabs with &spaces"
+msgstr "&Таб шилжилтийг зайгаар нөхөх"
 
 msgid "&Backspace through tabs"
 msgstr "&Табыг байкспайсээр устгана"
@@ -729,35 +710,38 @@ msgstr "&Хагас табуудыг орлуулна"
 msgid "Wrap mode"
 msgstr "Таслагч горим"
 
-msgid "Key emulation"
-msgstr "Гарын орлуулга"
-
 msgid " Editor options "
 msgstr " Засварлагчын тохиргоо "
 
-msgid "Help"
-msgstr "Тусламж"
+msgid "ButtonBar|Help"
+msgstr ""
 
-msgid "Save"
-msgstr "Хадгалах"
+msgid "ButtonBar|Save"
+msgstr ""
 
-msgid "Mark"
-msgstr "Блок"
+msgid "ButtonBar|Mark"
+msgstr ""
 
-msgid "Replac"
-msgstr "Солих"
+msgid "ButtonBar|Replac"
+msgstr ""
 
-msgid "Copy"
-msgstr "Хуулах"
+msgid "ButtonBar|Copy"
+msgstr ""
 
-msgid "Move"
-msgstr "Зөөх"
+msgid "ButtonBar|Move"
+msgstr ""
 
-msgid "Delete"
-msgstr "Устгах"
+msgid "ButtonBar|Search"
+msgstr ""
 
-msgid "PullDn"
-msgstr "ЦэсMC"
+msgid "ButtonBar|Delete"
+msgstr ""
+
+msgid "ButtonBar|PullDn"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
 
 msgid " Load syntax file "
 msgstr " өгүүлбэрзүйн файлыг ачаалах "
@@ -1220,6 +1204,9 @@ msgstr "ба T эсвэл INS -р тэмдэглэнэ"
 msgid " Permission "
 msgstr " Зөвшөөрөл "
 
+msgid " File "
+msgstr " Файл "
+
 msgid "Chmod command"
 msgstr " Команд chmod "
 
@@ -1484,14 +1471,14 @@ msgid ""
 "it."
 msgstr ""
 
-msgid " Copy "
-msgstr " Хуулах "
+msgid "DialogTitle|Copy"
+msgstr ""
 
-msgid " Move "
-msgstr " Зөөх "
+msgid "DialogTitle|Move"
+msgstr ""
 
-msgid " Delete "
-msgstr " Устгах "
+msgid "DialogTitle|Delete"
+msgstr ""
 
 msgid " Cannot make the hardlink "
 msgstr " Хард холбоосыг үүсгэж чадсангүй "
@@ -1645,9 +1632,6 @@ msgstr ""
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr "Дутуу файл орж ирсэн байна. Хадгалах уу?"
 
-msgid "&Delete"
-msgstr "&Устгах"
-
 msgid "&Keep"
 msgstr "&Хадгалах"
 
@@ -1771,14 +1755,14 @@ msgstr ""
 msgid "Directory scanning"
 msgstr " Лавлахын зам"
 
-msgid "1Copy"
-msgstr "1Хуулах"
+msgid "FileOperation|Copy"
+msgstr ""
 
-msgid "1Move"
-msgstr "1Зөөх"
+msgid "FileOperation|Move"
+msgstr ""
 
-msgid "1Delete"
-msgstr "1Устгах"
+msgid "FileOperation|Delete"
+msgstr ""
 
 #, no-c-format
 msgid "%o %f \"%s\"%m"
@@ -1809,6 +1793,10 @@ msgstr " эх маскийн хамт:"
 
 msgid " to:"
 msgstr " руу:"
+
+#, c-format
+msgid "%s?"
+msgstr ""
 
 msgid " Cannot operate on \"..\"! "
 msgstr " \"..\" г гүйцэтгэж чадсангүй! "
@@ -1958,9 +1946,6 @@ msgstr "&Шилжих"
 msgid "&Again"
 msgstr "&Дахин"
 
-msgid "&Quit"
-msgstr "&Гарах"
-
 msgid "Pane&lize"
 msgstr "Па&нел хийх"
 
@@ -2046,14 +2031,14 @@ msgstr " Дотоод алдаа: Холбоос хэсгийн хос эхлэ�
 msgid " Cannot find node %s in help file "
 msgstr " Тусламжын файл дахь %s мөчрийг олсонгүй "
 
-msgid "Index"
-msgstr "Индекс"
+msgid "Help"
+msgstr "Тусламж"
 
-msgid "Prev"
-msgstr "Буцах"
+msgid "ButtonBar|Index"
+msgstr ""
 
-msgid "&Move"
-msgstr "&Зөөх"
+msgid "ButtonBar|Prev"
+msgstr ""
 
 msgid "&Remove"
 msgstr "&Устгах"
@@ -2363,11 +2348,13 @@ msgstr " Та Midnight Commander аас гарах гэж байна уу? "
 msgid "&Listing mode..."
 msgstr "&Жагсаалтын горим..."
 
-msgid "&Quick view     C-x q"
-msgstr "&Хурдан харах   C-x q"
+#, fuzzy
+msgid "&Quick view"
+msgstr "Хурдан хадгалалт"
 
-msgid "&Info           C-x i"
-msgstr "&Мэдээлэл         C-x i"
+#, fuzzy
+msgid "&Info"
+msgstr "&Зангилаа"
 
 msgid "&Sort order..."
 msgstr "Эрэмбэлэх &дараалал..."
@@ -2376,7 +2363,7 @@ msgid "&Filter..."
 msgstr "&Шүүлт..."
 
 #, fuzzy
-msgid "&Encoding...    M-e"
+msgid "&Encoding..."
 msgstr "&Эрэмбэлэлт...              M-t"
 
 msgid "&Network link..."
@@ -2391,102 +2378,117 @@ msgstr "S&hell-холбоос..."
 msgid "SM&B link..."
 msgstr "SM&B-холбоос..."
 
-msgid "&Rescan         C-r"
-msgstr "&Дахин харах         C-r"
+#, fuzzy
+msgid "&Rescan"
+msgstr "ДахинШалгах."
 
-msgid "&View               F3"
-msgstr "&Харах        F3"
+#, fuzzy
+msgid "&View"
+msgstr "Харах"
 
-msgid "Vie&w file...         "
-msgstr "Файл &харах..."
+#, fuzzy
+msgid "Vie&w file..."
+msgstr " Файлыг харах "
 
-msgid "&Filtered view     M-!"
-msgstr "&Команд харах     M-!"
+#, fuzzy
+msgid "&Filtered view"
+msgstr " Шүүлтүүртэйгээр харах "
 
-msgid "&Edit               F4"
-msgstr "&Засах        F4"
+msgid "C&hmod"
+msgstr ""
 
-msgid "&Copy               F5"
-msgstr "&Хуулах           F5"
+#, fuzzy
+msgid "&Link"
+msgstr "&Холбоосууд"
 
-msgid "c&Hmod           C-x c"
-msgstr "с &Hmod      C-x c"
+#, fuzzy
+msgid "&SymLink"
+msgstr "&Холбоосууд"
 
-msgid "&Link            C-x l"
-msgstr "&Холбоос     C-x l"
+#, fuzzy
+msgid "Edit s&ymlink"
+msgstr " Тэмдэгт холбоосийг засах "
 
-msgid "&SymLink         C-x s"
-msgstr "&Тэмдэгт холбоос   C-x s"
+msgid "Ch&own"
+msgstr ""
 
-msgid "edit s&Ymlink  C-x C-s"
-msgstr "Тэмдэгт &Холбоос засах    C-x C-s"
-
-msgid "ch&Own           C-x o"
-msgstr "ch&Own            C-x o"
-
-msgid "&Advanced chown       "
+#, fuzzy
+msgid "&Advanced chown"
 msgstr "Бусад &chmod       "
 
-msgid "&Rename/Move        F6"
-msgstr "Зөөх&Шинэ нэр өгөх  F6"
+#, fuzzy
+msgid "&Rename/Move"
+msgstr "&Устгах"
 
-msgid "&Mkdir              F7"
-msgstr "&Хавтас үүсгэх     F7"
+#, fuzzy
+msgid "&Mkdir"
+msgstr "ШинэХавт"
 
-msgid "&Delete             F8"
-msgstr "&Устгах           F8"
+#, fuzzy
+msgid "&Quick cd"
+msgstr " Хурдан шилжилт "
 
-msgid "&Quick cd          M-c"
-msgstr "Х&урдан шилжих  M-c"
+#, fuzzy
+msgid "Select &group"
+msgstr "&Бүлгүүдийг тодорхойлох"
 
-msgid "select &Group      M-+"
-msgstr "&Бүлэг сонгох   M-+"
+#, fuzzy
+msgid "U&nselect group"
+msgstr " Сонголтыг буцаах "
 
-msgid "u&Nselect group    M-\\"
-msgstr "Бүлэг &сонгохоо болих M-\\"
-
-msgid "reverse selec&Tion M-*"
+#, fuzzy
+msgid "Reverse selec&tion"
 msgstr "Тэмдэглэгдсэнг &эсрэгээр болгох  М *"
 
-msgid "e&Xit              F10"
-msgstr "Га&рах              F10"
+#, fuzzy
+msgid "E&xit"
+msgstr "Засах"
 
-msgid "&User menu          F2"
-msgstr "&Хэрэглэгчийн цэс     F2"
+#, fuzzy
+msgid "&User menu"
+msgstr " Хэрэглэгчийн цэс "
 
 msgid "&Directory tree"
 msgstr "&Хавтас мод"
 
-msgid "&Find file            M-?"
-msgstr "Файл &хайх        M-?"
+#, fuzzy
+msgid "&Find file"
+msgstr "Файл хайх"
 
-msgid "s&Wap panels          C-u"
-msgstr "&Панел солих     C-u"
+msgid "S&wap panels"
+msgstr ""
 
-msgid "switch &Panels on/off C-o"
+#, fuzzy
+msgid "Switch &panels on/off"
 msgstr "&Панел шилжилт нээх/хаах  C-o"
 
-msgid "&Compare directories  C-x d"
-msgstr "&Хавтасуудыг харьцуулах    C-x d"
+#, fuzzy
+msgid "&Compare directories"
+msgstr " Хавтасуудыг харьцуулах "
 
-msgid "e&Xternal panelize    C-x !"
-msgstr "&Гадаад панел хийх  C-x !"
+#, fuzzy
+msgid "E&xternal panelize"
+msgstr "Гадаад панелиз хийх"
 
-msgid "show directory s&Izes"
+#, fuzzy
+msgid "Show directory s&izes"
 msgstr "&Хавтасны хэмжээг харуулах"
 
 #, fuzzy
-msgid "Command &history      M-h"
-msgstr " Командын бүртгэл "
+msgid "Command &history"
+msgstr "&Командын бүртгэл"
 
-msgid "di&Rectory hotlist    C-\\"
-msgstr "&Хавтасны лавлах  C-\\"
+#, fuzzy
+msgid "Di&rectory hotlist"
+msgstr " Хавтасуудын лавлах "
 
-msgid "&Active VFS list      C-x a"
+#, fuzzy
+msgid "&Active VFS list"
 msgstr "&Идэвхтэй VFS жагсаалт C-x a"
 
-msgid "&Background jobs      C-x j"
-msgstr "&Арын ажилууд       C-x j"
+#, fuzzy
+msgid "&Background jobs"
+msgstr " Арын ажилууд "
 
 msgid "&Undelete files (ext2fs only)"
 msgstr "&Сэргээгдсэн файлууд (зөвхөн ext2fs)"
@@ -2509,40 +2511,30 @@ msgstr "&Тохиргоо..."
 msgid "&Layout..."
 msgstr "&Гадаад төрх..."
 
-msgid "c&Onfirmation..."
+#, fuzzy
+msgid "C&onfirmation..."
 msgstr "&Баталгаажуулалт..."
 
 msgid "&Display bits..."
 msgstr "&Бит тэмдэгтүүд..."
 
-msgid "learn &Keys..."
-msgstr "&Товчлууруудыг судлах..."
-
 msgid "&Virtual FS..."
 msgstr "Виртуаль &FS..."
 
-msgid "&Save setup"
-msgstr "&Тохиргоо хадгалах"
-
-msgid " &Above "
+#, fuzzy
+msgid "&Above"
 msgstr " &Above "
 
-msgid " &Left "
+#, fuzzy
+msgid "&Left"
 msgstr " &Зүүн "
 
-msgid " &File "
-msgstr " &Файл "
-
-msgid " &Command "
-msgstr " &Команд "
-
-msgid " &Options "
-msgstr " &Тохиргоо "
-
-msgid " &Below "
+#, fuzzy
+msgid "&Below"
 msgstr " &Доод "
 
-msgid " &Right "
+#, fuzzy
+msgid "&Right"
 msgstr " &Баруун "
 
 msgid " Information "
@@ -2558,8 +2550,8 @@ msgstr ""
 " тохиргоо хэрэглэж болсонгүй. Энэ тохиолдолд та лавлахыг гар аргаар ачаалах "
 "хэрэгтэй.  Дэлгэрэнгүй мэдээллийг лавлахаас (man) харна уу."
 
-msgid "Menu"
-msgstr "Цэс"
+msgid "ButtonBar|Menu"
+msgstr ""
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "TERM хувьсагч утга аваагүй байна!\n"
@@ -2711,41 +2703,34 @@ msgid "SUB-DIR"
 msgstr "ДЭД-ХАВТ"
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
-msgid "u"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|u"
 msgstr ""
-
-#, fuzzy
-msgid "Unsorted"
-msgstr "&Эрэмбэлэгдээгүй"
 
 msgid "&Unsorted"
 msgstr "&Эрэмбэлэгдээгүй"
 
 #. TRANSLATORS: one single character to represent 'name' sort mode
-#, fuzzy
-msgid "n"
-msgstr "Дээр"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|n"
+msgstr ""
 
 msgid "&Name"
 msgstr "&Нэр"
 
 #. TRANSLATORS: one single character to represent 'extension' sort mode
-msgid "e"
-msgstr ""
-
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 #, fuzzy
-msgid "Extension"
-msgstr "өргөтгөл:"
+msgid "sort|e"
+msgstr "&Эрэмбэлэгдээгүй"
 
 msgid "&Extension"
 msgstr "өргө&тгөл"
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
-msgid "s"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|s"
 msgstr ""
-
-msgid "Size"
-msgstr "Хэмжээ"
 
 msgid "&Size"
 msgstr "&Хэмжээ"
@@ -2755,31 +2740,25 @@ msgid "Block Size"
 msgstr " Хэмжээ "
 
 #. TRANSLATORS: one single character to represent 'Modify time' sort mode
-msgid "m"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|m"
 msgstr ""
-
-msgid "MTime"
-msgstr "Засагдсан Огноо"
 
 msgid "&Modify time"
 msgstr "За&сварлагдсан огноо"
 
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
-msgid "a"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|a"
 msgstr ""
-
-msgid "ATime"
-msgstr "Ханд. Огноо"
 
 msgid "&Access time"
 msgstr "Х&андсан огноо"
 
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
-msgid "h"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|h"
 msgstr ""
-
-msgid "CTime"
-msgstr "үүс. Огноо"
 
 msgid "C&Hange time"
 msgstr "өө&рчлөгдсөн огноо"
@@ -2794,11 +2773,9 @@ msgid "Nl"
 msgstr "Кс"
 
 #. TRANSLATORS: one single character to represent 'inode' sort mode
-msgid "i"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|i"
 msgstr ""
-
-msgid "Inode"
-msgstr "Зангилаа"
 
 msgid "&Inode"
 msgstr "&Зангилаа"
@@ -2839,17 +2816,17 @@ msgstr "Хэрэглэж байгаа формат буруу байна, тий
 msgid " Do you really want to execute? "
 msgstr " Та үүнийг ажиллуулахдаа итгэлтэй байна уу? "
 
-msgid "View"
-msgstr "Харах"
+msgid "ButtonBar|View"
+msgstr ""
 
-msgid "Edit"
-msgstr "Засах"
+msgid "ButtonBar|Edit"
+msgstr ""
 
-msgid "RenMov"
-msgstr "Зөөх"
+msgid "ButtonBar|RenMov"
+msgstr ""
 
-msgid "Mkdir"
-msgstr "ШинэХавт"
+msgid "ButtonBar|Mkdir"
+msgstr ""
 
 msgid " Not implemented yet "
 msgstr ""
@@ -2880,6 +2857,12 @@ msgstr " Оролтын кодлогч хуудасаа сонгоно уу "
 
 msgid "-  < No translation >"
 msgstr "-  < Хөрвүүлэгдэхгүй >"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot save file %s:\n"
+"%s"
+msgstr " Файлыг хадгалж чадсангүй "
 
 #, c-format
 msgid ""
@@ -2982,20 +2965,20 @@ msgstr ""
 msgid "  Delete %s?  "
 msgstr "  Устгах уу %s?  "
 
-msgid "Static"
-msgstr "Статик"
+msgid "ButtonBar|Static"
+msgstr ""
 
-msgid "Dynamc"
-msgstr "Динамик"
+msgid "ButtonBar|Dynamc"
+msgstr ""
 
-msgid "Rescan"
-msgstr "ДахинШалгах."
+msgid "ButtonBar|Rescan"
+msgstr ""
 
-msgid "Forget"
-msgstr "Мартах"
+msgid "ButtonBar|Forget"
+msgstr ""
 
-msgid "Rmdir"
-msgstr "ХавтУст"
+msgid "ButtonBar|Rmdir"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -3142,10 +3125,6 @@ msgstr "Insert on keypad"
 
 msgid "Delete on keypad"
 msgstr "Delete on keypad"
-
-#, fuzzy
-msgid "Escape key"
-msgstr "Slash on keypad"
 
 msgid "Enter on keypad"
 msgstr "Enter on keypad"
@@ -3383,12 +3362,6 @@ msgstr " Хүү процессийг солилож чадсангүй "
 msgid "Empty output from child filter"
 msgstr "Хүү шүүлтүүрийн гаралт хоосон байна"
 
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Quit"
-msgstr ""
-
 msgid "ButtonBar|Ascii"
 msgstr ""
 
@@ -3401,15 +3374,6 @@ msgstr ""
 msgid "ButtonBar|Line"
 msgstr ""
 
-msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
 msgid "ButtonBar|UnWrap"
 msgstr ""
 
@@ -3417,9 +3381,6 @@ msgid "ButtonBar|Wrap"
 msgstr ""
 
 msgid "ButtonBar|HxSrch"
-msgstr ""
-
-msgid "ButtonBar|Search"
 msgstr ""
 
 msgid "ButtonBar|Raw"
@@ -3938,6 +3899,331 @@ msgstr "Дотоод алдаа:"
 msgid "Changes to file lost"
 msgstr "Файлын өөрчлөлт алга байна"
 
+#~ msgid "Do backups -->"
+#~ msgstr "Нөөц үүсгэх -->"
+
+#~ msgid "Extension:"
+#~ msgstr "өргөтгөл:"
+
+#~ msgid "&New              C-n"
+#~ msgstr "&Шинэ файл           C-n"
+
+#~ msgid "&Save              F2"
+#~ msgstr "&Хадгалах             F2"
+
+#~ msgid "Save &as...       F12"
+#~ msgstr "&гэж Хадгалах...     F12"
+
+#~ msgid "A&bout...            "
+#~ msgstr "&Зохиогчийн тухай..."
+
+#~ msgid "&Quit             F10"
+#~ msgstr "Г&арах                F10"
+
+#~ msgid "&New            C-x k"
+#~ msgstr "&Шинэ файл         C-x k"
+
+#~ msgid "Copy to &file...     "
+#~ msgstr "Файл руу &хуулах..."
+
+#, fuzzy
+#~ msgid "&Toggle mark                 F3"
+#~ msgstr "Блокыг &тэмдэглэх          F3"
+
+#, fuzzy
+#~ msgid "Mar&k columns              S-F3"
+#~ msgstr "Багануудыг &ялгах     S-F3"
+
+#, fuzzy
+#~ msgid "&Copy                        F5"
+#~ msgstr "&Хуулах           F5"
+
+#, fuzzy
+#~ msgid "&Move                        F6"
+#~ msgstr "Блокыг &зөөх       F6"
+
+#, fuzzy
+#~ msgid "&Delete                      F8"
+#~ msgstr "&Устгах           F8"
+
+#, fuzzy
+#~ msgid "&Next bookmark              M-j"
+#~ msgstr "&Шинэ файл           C-n"
+
+#, fuzzy
+#~ msgid "&Undo                       C-u"
+#~ msgstr "&Буцаах                C-u"
+
+#, fuzzy
+#~ msgid "&Beginning               C-PgUp"
+#~ msgstr "Файлын &эхлэлд очих       C-PgUp"
+
+#, fuzzy
+#~ msgid "&End                     C-PgDn"
+#~ msgstr "Файлын &төгсгөл        C-PgDn"
+
+#, fuzzy
+#~ msgid "C&opy to clipfile           M-w"
+#~ msgstr "&Мөр луу очих...        M-l"
+
+#, fuzzy
+#~ msgid "C&ut to clipfile            C-w"
+#~ msgstr "&Мөр луу очих...        M-l"
+
+#, fuzzy
+#~ msgid "Toggle bookmar&k               "
+#~ msgstr "Блокыг &тэмдэглэх          F3"
+
+#, fuzzy
+#~ msgid "&Next bookmark                 "
+#~ msgstr "&Шинэ файл           C-n"
+
+#, fuzzy
+#~ msgid "Pre&v bookmark                 "
+#~ msgstr "&Эрэмбэлэлт...              M-t"
+
+#, fuzzy
+#~ msgid "&Flush bookmark                "
+#~ msgstr "&Шуудан..."
+
+#~ msgid "&Search...         F7"
+#~ msgstr "&Хайх...          F7"
+
+#~ msgid "&Replace...        F4"
+#~ msgstr "&Солих...         F4"
+
+#~ msgid "&Go to line...            M-l"
+#~ msgstr "&Мөр луу очих...        M-l"
+
+#, fuzzy
+#~ msgid "Encod&ing...             M-e"
+#~ msgstr "&Эрэмбэлэлт...              M-t"
+
+#~ msgid "Delete macr&o...            "
+#~ msgstr "Макрог &устгах..."
+
+#~ msgid "Sor&t...                 M-t"
+#~ msgstr "&Эрэмбэлэлт...              M-t"
+
+#~ msgid "&Mail...                    "
+#~ msgstr "&Шуудан..."
+
+#~ msgid "&Execute macro... C-x e, KEY"
+#~ msgstr "Макрог &гүйцэтгэх... C-x e, KEY"
+
+#~ msgid "'ispell' s&pell check    M-$"
+#~ msgstr "Зөв бичлэгийн дүр&эм шалгах    M-$"
+
+#, fuzzy
+#~ msgid "Save setu&p"
+#~ msgstr "&Тохиргоо хадгалах"
+
+#~ msgid " Edit "
+#~ msgstr " Засварлах "
+
+#~ msgid " Sear/Repl "
+#~ msgstr " Хайх/Солих "
+
+#~ msgid " Command "
+#~ msgstr " Команд "
+
+#~ msgid " Options "
+#~ msgstr " Тохируулга "
+
+#~ msgid "Intuitive"
+#~ msgstr "Мэдрэмж"
+
+#~ msgid "Emacs"
+#~ msgstr "Emacs"
+
+#, fuzzy
+#~ msgid "User-defined"
+#~ msgstr "&Хэрэглэгч тодорхойлсон"
+
+#~ msgid "Key emulation"
+#~ msgstr "Гарын орлуулга"
+
+#~ msgid "Save"
+#~ msgstr "Хадгалах"
+
+#~ msgid "Mark"
+#~ msgstr "Блок"
+
+#~ msgid "Replac"
+#~ msgstr "Солих"
+
+#~ msgid "Move"
+#~ msgstr "Зөөх"
+
+#~ msgid "Delete"
+#~ msgstr "Устгах"
+
+#~ msgid "PullDn"
+#~ msgstr "ЦэсMC"
+
+#~ msgid " Copy "
+#~ msgstr " Хуулах "
+
+#~ msgid " Move "
+#~ msgstr " Зөөх "
+
+#~ msgid " Delete "
+#~ msgstr " Устгах "
+
+#~ msgid "1Copy"
+#~ msgstr "1Хуулах"
+
+#~ msgid "1Move"
+#~ msgstr "1Зөөх"
+
+#~ msgid "1Delete"
+#~ msgstr "1Устгах"
+
+#~ msgid "Index"
+#~ msgstr "Индекс"
+
+#~ msgid "Prev"
+#~ msgstr "Буцах"
+
+#~ msgid "&Quick view     C-x q"
+#~ msgstr "&Хурдан харах   C-x q"
+
+#~ msgid "&Info           C-x i"
+#~ msgstr "&Мэдээлэл         C-x i"
+
+#~ msgid "&Rescan         C-r"
+#~ msgstr "&Дахин харах         C-r"
+
+#~ msgid "&View               F3"
+#~ msgstr "&Харах        F3"
+
+#~ msgid "Vie&w file...         "
+#~ msgstr "Файл &харах..."
+
+#~ msgid "&Filtered view     M-!"
+#~ msgstr "&Команд харах     M-!"
+
+#~ msgid "&Edit               F4"
+#~ msgstr "&Засах        F4"
+
+#~ msgid "&Copy               F5"
+#~ msgstr "&Хуулах           F5"
+
+#~ msgid "c&Hmod           C-x c"
+#~ msgstr "с &Hmod      C-x c"
+
+#~ msgid "&Link            C-x l"
+#~ msgstr "&Холбоос     C-x l"
+
+#~ msgid "&SymLink         C-x s"
+#~ msgstr "&Тэмдэгт холбоос   C-x s"
+
+#~ msgid "edit s&Ymlink  C-x C-s"
+#~ msgstr "Тэмдэгт &Холбоос засах    C-x C-s"
+
+#~ msgid "ch&Own           C-x o"
+#~ msgstr "ch&Own            C-x o"
+
+#~ msgid "&Rename/Move        F6"
+#~ msgstr "Зөөх&Шинэ нэр өгөх  F6"
+
+#~ msgid "&Mkdir              F7"
+#~ msgstr "&Хавтас үүсгэх     F7"
+
+#~ msgid "&Delete             F8"
+#~ msgstr "&Устгах           F8"
+
+#~ msgid "&Quick cd          M-c"
+#~ msgstr "Х&урдан шилжих  M-c"
+
+#~ msgid "select &Group      M-+"
+#~ msgstr "&Бүлэг сонгох   M-+"
+
+#~ msgid "u&Nselect group    M-\\"
+#~ msgstr "Бүлэг &сонгохоо болих M-\\"
+
+#~ msgid "e&Xit              F10"
+#~ msgstr "Га&рах              F10"
+
+#~ msgid "&User menu          F2"
+#~ msgstr "&Хэрэглэгчийн цэс     F2"
+
+#~ msgid "&Find file            M-?"
+#~ msgstr "Файл &хайх        M-?"
+
+#~ msgid "s&Wap panels          C-u"
+#~ msgstr "&Панел солих     C-u"
+
+#~ msgid "&Compare directories  C-x d"
+#~ msgstr "&Хавтасуудыг харьцуулах    C-x d"
+
+#~ msgid "e&Xternal panelize    C-x !"
+#~ msgstr "&Гадаад панел хийх  C-x !"
+
+#, fuzzy
+#~ msgid "Command &history      M-h"
+#~ msgstr " Командын бүртгэл "
+
+#~ msgid "di&Rectory hotlist    C-\\"
+#~ msgstr "&Хавтасны лавлах  C-\\"
+
+#~ msgid "&Background jobs      C-x j"
+#~ msgstr "&Арын ажилууд       C-x j"
+
+#~ msgid "learn &Keys..."
+#~ msgstr "&Товчлууруудыг судлах..."
+
+#~ msgid " &File "
+#~ msgstr " &Файл "
+
+#~ msgid " &Command "
+#~ msgstr " &Команд "
+
+#~ msgid "Menu"
+#~ msgstr "Цэс"
+
+#, fuzzy
+#~ msgid "n"
+#~ msgstr "Дээр"
+
+#, fuzzy
+#~ msgid "Extension"
+#~ msgstr "өргөтгөл:"
+
+#~ msgid "Size"
+#~ msgstr "Хэмжээ"
+
+#~ msgid "MTime"
+#~ msgstr "Засагдсан Огноо"
+
+#~ msgid "ATime"
+#~ msgstr "Ханд. Огноо"
+
+#~ msgid "CTime"
+#~ msgstr "үүс. Огноо"
+
+#~ msgid "Inode"
+#~ msgstr "Зангилаа"
+
+#~ msgid "RenMov"
+#~ msgstr "Зөөх"
+
+#~ msgid "Static"
+#~ msgstr "Статик"
+
+#~ msgid "Dynamc"
+#~ msgstr "Динамик"
+
+#~ msgid "Forget"
+#~ msgstr "Мартах"
+
+#~ msgid "Rmdir"
+#~ msgstr "ХавтУст"
+
+#, fuzzy
+#~ msgid "Escape key"
+#~ msgstr "Slash on keypad"
+
 #, fuzzy
 #~ msgid "bind: Unknown command: `%s'"
 #~ msgstr " Команд chown "
@@ -4039,15 +4325,8 @@ msgstr "Файлын өөрчлөлт алга байна"
 #~ msgid "&Delete            F8"
 #~ msgstr "Блокыг &устгах           F8"
 
-#, fuzzy
-#~ msgid "Save setu&p..."
-#~ msgstr "&Тохиргоо хадгалах"
-
 #~ msgid " The command history is empty "
 #~ msgstr " Командын бүртгэл хоосон байна "
-
-#~ msgid "command &History"
-#~ msgstr "&Командын бүртгэл"
 
 #~ msgid "Edit edi&tor menu file"
 #~ msgstr "Цэс &засварлагч файлыг засах"
@@ -4084,9 +4363,6 @@ msgstr "Файлын өөрчлөлт алга байна"
 
 #~ msgid "&Type"
 #~ msgstr "&Төрөл"
-
-#~ msgid "&Links"
-#~ msgstr "&Холбоосууд"
 
 #~ msgid "N&GID"
 #~ msgstr "N&GID"

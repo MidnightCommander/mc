@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-09 09:50+0300\n"
+"POT-Creation-Date: 2009-10-30 10:39+0200\n"
 "PO-Revision-Date: 2008-06-05 17:36+0100\n"
 "Last-Translator: Anna Talianova <anickat1@gmail.com>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
@@ -56,6 +56,30 @@ msgstr " %s není normální soubor "
 msgid " File %s is too large "
 msgstr " Soubor %s je příliš velký "
 
+msgid " About "
+msgstr " O programu "
+
+msgid ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       A user friendly text editor written\n"
+"           for the Midnight Commander.\n"
+msgstr ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       Uživatelsky příjemný textový editor\n"
+"       pro program Midnight Commander.\n"
+"\n"
+
+msgid "&OK"
+msgstr "&OK"
+
 msgid "Macro recursion is too deep"
 msgstr "Rekurze maker je příliš hluboká"
 
@@ -93,23 +117,28 @@ msgstr " Nelze otevřít rouru pro zápis: "
 msgid " Cannot open file for writing: %s "
 msgstr " Nelze otevřít rouru pro zápis: "
 
-msgid "Quick save "
+#, fuzzy
+msgid "&Quick save"
 msgstr "Rychlé ukládání "
 
-msgid "Safe save "
+#, fuzzy
+msgid "&Safe save"
 msgstr "Bezpečné ukládání "
 
-msgid "Do backups -->"
-msgstr "Ukládání záloh -->"
+msgid "&Do backups with following extension:"
+msgstr ""
 
-msgid "&OK"
-msgstr "&OK"
-
-msgid "Extension:"
-msgstr "Přípona:"
+msgid "Check &POSIX new line"
+msgstr ""
 
 msgid " Edit Save Mode "
 msgstr " Upravit ukládací režim "
+
+msgid "The file you are saving is not finished with a newline"
+msgstr ""
+
+msgid "C&ontinue"
+msgstr "P&okračovat"
 
 msgid "&Do not change"
 msgstr ""
@@ -180,9 +209,6 @@ msgid ""
 msgstr ""
 " Tento text byl změněn, ale změny nebyly uloženy. \n"
 " Pokračováním se změny ztratí. "
-
-msgid "C&ontinue"
-msgstr "P&okračovat"
 
 msgid "Syntax file edit"
 msgstr "Úpravy souboru se syntaxí"
@@ -400,239 +426,199 @@ msgstr "&Převzít zámek"
 msgid "&Ignore lock"
 msgstr "&Ignorovat zámek"
 
-msgid " About "
-msgstr " O programu "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       Uživatelsky příjemný textový editor\n"
-"       pro program Midnight Commander.\n"
-"\n"
-
 msgid "&Open file..."
 msgstr "&Otevřít soubor..."
 
-msgid "&New              C-n"
-msgstr "&Nový                      C-n"
+#, fuzzy
+msgid "&New"
+msgstr "&Jméno"
 
-msgid "&Save              F2"
-msgstr "&Uložit                     F2"
+#, fuzzy
+msgid "Save &as..."
+msgstr "uložit na&Stavení..."
 
-msgid "Save &as...       F12"
-msgstr "uložit &Jako...            F12"
-
-msgid "&Insert file...   F15"
+#, fuzzy
+msgid "&Insert file..."
 msgstr "&Vložit soubor...          F15"
 
-msgid "Copy to &file...  C-f"
+#, fuzzy
+msgid "Cop&y to file..."
 msgstr "zkopírovat do &Souboru...  C-f"
 
-msgid "&User menu...     F11"
+#, fuzzy
+msgid "&User menu..."
 msgstr "uživatelské &Menu...       F11"
 
-msgid "A&bout...            "
-msgstr "o &Programu...            "
+#, fuzzy
+msgid "A&bout..."
+msgstr "&Rozložení..."
 
-msgid "&Quit             F10"
-msgstr "&Konec                     F10"
-
-msgid "&New            C-x k"
-msgstr "&Nový           C-x k"
-
-msgid "Copy to &file...     "
-msgstr "Zkopírovat do &Souboru... C-f"
+msgid "&Quit"
+msgstr "&Konec"
 
 #, fuzzy
-msgid "&Toggle mark                 F3"
-msgstr "&Přehodit značky     F3"
+msgid "&Toggle mark"
+msgstr "&Smazat označené"
+
+msgid "&Mark columns"
+msgstr ""
 
 #, fuzzy
-msgid "Mar&k columns              S-F3"
-msgstr "z&Načit sloupcově  S-F3"
-
-#, fuzzy
-msgid "Toggle &ins/overw           Ins"
+msgid "Toggle &ins/overw"
 msgstr "&Vkládání/Přepis    Ins"
 
 #, fuzzy
-msgid "&Copy                        F5"
-msgstr "&Kopírovat               F5"
+msgid "&Copy"
+msgstr "Kopírovat"
+
+msgid "&Move"
+msgstr "&Přesun"
+
+msgid "&Delete"
+msgstr "&Smazat"
 
 #, fuzzy
-msgid "&Move                        F6"
-msgstr "př&Esunout           F6"
-
-#, fuzzy
-msgid "&Delete                      F8"
-msgstr "s&Mazat                  F8"
-
-#, fuzzy
-msgid "C&opy to clipfile         C-Ins"
+msgid "C&opy to clipfile"
 msgstr "Zkopírovat do &Souboru... C-f"
 
 #, fuzzy
-msgid "C&ut to clipfile          S-Del"
+msgid "C&ut to clipfile"
 msgstr "&Jít na řádku...              M-l"
 
-msgid "&Paste from clipfile      S-Ins"
+msgid "&Paste from clipfile"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k            M-k"
+msgid "Toggle bookmar&k"
 msgstr "&Přehodit značky     F3"
 
 #, fuzzy
-msgid "&Next bookmark              M-j"
-msgstr "&Nový                      C-n"
+msgid "&Next bookmark"
+msgstr "&Nastavit označené"
 
 #, fuzzy
-msgid "Pre&v bookmark              M-i"
+msgid "Pre&v bookmark"
 msgstr "&Setřídit                     M-t"
 
 #, fuzzy
-msgid "&Flush bookmark             M-o"
+msgid "&Flush bookmark"
 msgstr "od&Eslat...                         "
 
-#, fuzzy
-msgid "&Undo                       C-u"
-msgstr "&Akce zpět          C-u"
+msgid "&Undo"
+msgstr ""
 
-#, fuzzy
-msgid "&Beginning               C-PgUp"
-msgstr "na &Začátek      C-PgUp"
-
-#, fuzzy
-msgid "&End                     C-PgDn"
-msgstr "na &Konec        C-PgDn"
-
-#, fuzzy
-msgid "C&opy to clipfile           M-w"
-msgstr "&Jít na řádku...              M-l"
-
-#, fuzzy
-msgid "C&ut to clipfile            C-w"
-msgstr "&Jít na řádku...              M-l"
-
-msgid "&Paste from clipfile        C-y"
+msgid "&Beginning"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k               "
-msgstr "&Přehodit značky     F3"
+msgid "&End"
+msgstr "&I-uzel"
 
 #, fuzzy
-msgid "&Next bookmark                 "
-msgstr "&Nový                      C-n"
-
-#, fuzzy
-msgid "Pre&v bookmark                 "
-msgstr "&Setřídit                     M-t"
-
-#, fuzzy
-msgid "&Flush bookmark                "
-msgstr "od&Eslat...                         "
-
-msgid "&Search...         F7"
-msgstr "&Hledat...         F7"
+msgid "&Search..."
+msgstr "Hledat"
 
 # Klávesa F17 neexistje! V originálu je ale skutečně uvedeno "F17".
-msgid "Search &again     F17"
+#, fuzzy
+msgid "Search &again"
 msgstr "hledat &Znovu     F17"
 
-msgid "&Replace...        F4"
-msgstr "&Nahradit...       F4"
-
-msgid "&Go to line...            M-l"
-msgstr "&Jít na řádku...              M-l"
+#, fuzzy
+msgid "&Replace..."
+msgstr "&Nahradit"
 
 #, fuzzy
-msgid "Toggle li&ne state        M-n"
+msgid "&Go to line..."
+msgstr " Jdi na řádek "
+
+#, fuzzy
+msgid "Toggle li&ne state"
 msgstr "&Přehodit značky     F3"
 
-msgid "Go to matching &bracket   M-b"
+#, fuzzy
+msgid "Go to matching &bracket"
 msgstr "jít na &Párovou závorku       M-b"
 
-msgid "Find declaration      A-Enter"
+#, fuzzy
+msgid "Find declaration"
+msgstr "Najít odmítnuté části záplat (*.rej) po záplatování"
+
+msgid "Back from declaration"
 msgstr ""
 
-msgid "Back from declaration     M--"
-msgstr ""
-
-msgid "Forward to declaration    M-+"
+msgid "Forward to declaration"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             M-e"
+msgid "Encod&ing..."
 msgstr "&Setřídit                     M-t"
 
-msgid "Insert &literal...       C-q"
-msgstr "vložit &Znak...               C-q"
-
-msgid "&Refresh screen          C-l"
+#, fuzzy
+msgid "&Refresh screen"
 msgstr "&Obnovit obrazovku            C-l"
 
-msgid "&Start record macro      C-r"
+#, fuzzy
+msgid "&Start record macro"
 msgstr "z&Ačít zaznamenávat makro     C-r"
 
-msgid "&Finish record macro...  C-r"
+#, fuzzy
+msgid "&Finish record macro..."
 msgstr "&Ukončit záznam makra...      C-r"
 
-msgid "&Execute macro...   C-a, KEY"
+#, fuzzy
+msgid "&Execute macro..."
 msgstr "provést &Makro...       C-a, KLÁV"
 
-msgid "Delete macr&o...            "
-msgstr "smaza&T makro...            "
+#, fuzzy
+msgid "Delete macr&o..."
+msgstr " Smazat makro "
 
-msgid "Insert &date/time           "
-msgstr "vložit &Datum/čas           "
-
-msgid "Format p&aragraph        M-p"
-msgstr "pře&Formátovat odstavec       M-p"
-
-msgid "'ispell' s&pell check    C-p"
+#, fuzzy
+msgid "'ispell' s&pell check"
 msgstr "'ispell' &Kontrola pravopisu  C-p"
 
-msgid "Sor&t...                 M-t"
-msgstr "&Setřídit                     M-t"
+#, fuzzy
+msgid "&Mail..."
+msgstr "&Filtr..."
+
+#, fuzzy
+msgid "Insert &literal..."
+msgstr "vložit &Znak...               C-q"
+
+#, fuzzy
+msgid "Insert &date/time"
+msgstr "vložit &Datum/čas           "
+
+#, fuzzy
+msgid "Format p&aragraph"
+msgstr "pře&Formátovat odstavec       M-p"
+
+#, fuzzy
+msgid "Sor&t..."
+msgstr "&Pořadí..."
 
 # V překladu doplněna klávesová zkratka "M-u", možná je potřeba ji zarovnat s ostatními klávesovými zkratkami.
-msgid "Paste o&utput of...      M-u"
+#, fuzzy
+msgid "Paste o&utput of..."
 msgstr "vložit &Výstup...      M-u"
 
-msgid "E&xternal Formatter      F19"
+#, fuzzy
+msgid "E&xternal formatter"
 msgstr "E&Xterní formátovač           F19"
-
-msgid "&Mail...                    "
-msgstr "od&Eslat...                         "
-
-msgid "&Execute macro... C-x e, KEY"
-msgstr "&Provést makro...     C-x e, KLÁV"
-
-msgid "'ispell' s&pell check    M-$"
-msgstr "'ispell' &Kontrola pravopisu  M-$"
 
 msgid "&General...  "
 msgstr "&Obecné...  "
 
-msgid "&Save mode..."
+#, fuzzy
+msgid "Save &mode..."
 msgstr "&Režim ukládání..."
 
-msgid "Learn &Keys..."
+#, fuzzy
+msgid "Learn &keys..."
 msgstr "učení &Kláves..."
 
-msgid "Syntax &Highlighting..."
+#, fuzzy
+msgid "Syntax &highlighting..."
 msgstr "zvýraznění synta&Xe..."
 
 #, fuzzy
@@ -643,33 +629,32 @@ msgstr "Úpravy souboru se syntaxí"
 msgid "&Menu file"
 msgstr "upravit uživatelské &Menu"
 
-#, fuzzy
-msgid "Save setu&p"
+msgid "&Save setup"
 msgstr "uložit na&Stavení"
 
-msgid " File "
-msgstr " Soubor "
+#, fuzzy
+msgid "&File"
+msgstr "Soubor"
 
-msgid " Edit "
-msgstr " Upravit "
+#, fuzzy
+msgid "&Edit"
+msgstr "Editace"
 
-msgid " Sear/Repl "
-msgstr " Hledat/Nahradit "
+#, fuzzy
+msgid "&Search"
+msgstr "Hledat"
 
-msgid " Command "
-msgstr " Příkaz "
+#, fuzzy
+msgid "&Command"
+msgstr "Příkaz"
 
-msgid " Options "
-msgstr " Nastavení "
+#, fuzzy
+msgid "For&mat"
+msgstr "Zapomenout"
 
-msgid "Intuitive"
-msgstr "Intuitivní"
-
-msgid "Emacs"
-msgstr "Emacs"
-
-msgid "User-defined"
-msgstr "Definované uživatelem"
+#, fuzzy
+msgid "&Options"
+msgstr " &Nastavení "
 
 msgid "None"
 msgstr "Žádný"
@@ -682,9 +667,6 @@ msgstr "Zalamování psacího stroje"
 
 msgid "Word wrap line length: "
 msgstr "Šířka řádku pro zlom: "
-
-msgid "Tab spacing: "
-msgstr "Velikost tabelátoru: "
 
 msgid "Cursor beyond end of line"
 msgstr ""
@@ -708,11 +690,14 @@ msgstr "&Uložit pozici v souboru"
 msgid "Confir&m before saving"
 msgstr "&Potvrdit před uložením"
 
-msgid "Fill tabs with &spaces"
-msgstr "měnit tabelátory na &Mezery"
-
 msgid "&Return does autoindent"
 msgstr "&Return automaticky odsadí"
+
+msgid "Tab spacing: "
+msgstr "Velikost tabelátoru: "
+
+msgid "Fill tabs with &spaces"
+msgstr "měnit tabelátory na &Mezery"
 
 msgid "&Backspace through tabs"
 msgstr "&Backspace přes tabelátory"
@@ -723,35 +708,44 @@ msgstr "&Falešné poloviční tabelátory"
 msgid "Wrap mode"
 msgstr "Režim zalamování"
 
-msgid "Key emulation"
-msgstr "Emulace kláves"
-
 msgid " Editor options "
 msgstr " Nastavení editoru "
 
-msgid "Help"
-msgstr "Nápověda"
+msgid "ButtonBar|Help"
+msgstr "TlačítkováLišta|Pomoc"
 
-msgid "Save"
-msgstr "Uložit"
+msgid "ButtonBar|Save"
+msgstr "TlačítkováLišta|Ulož"
 
-msgid "Mark"
-msgstr "Značka"
+#, fuzzy
+msgid "ButtonBar|Mark"
+msgstr "TlačítkováLišta|Rozeb."
 
-msgid "Replac"
-msgstr "Náhrada"
+#, fuzzy
+msgid "ButtonBar|Replac"
+msgstr "TlačítkováLišta|Hrubě"
 
-msgid "Copy"
-msgstr "Kopírovat"
+#, fuzzy
+msgid "ButtonBar|Copy"
+msgstr "TlačítkováLišta|Pomoc"
 
-msgid "Move"
-msgstr "Přesunout"
+#, fuzzy
+msgid "ButtonBar|Move"
+msgstr "TlačítkováLišta|Ulož"
 
-msgid "Delete"
-msgstr "Smazat"
+msgid "ButtonBar|Search"
+msgstr "TlačítkováLišta|Hledej"
 
-msgid "PullDn"
-msgstr "HlMenu"
+#, fuzzy
+msgid "ButtonBar|Delete"
+msgstr "TlačítkováLišta|Pomoc"
+
+#, fuzzy
+msgid "ButtonBar|PullDn"
+msgstr "TlačítkováLišta|Pomoc"
+
+msgid "ButtonBar|Quit"
+msgstr "TlačítkováLišta|Konec"
 
 msgid " Load syntax file "
 msgstr " Načíst syntaktický soubor "
@@ -1227,6 +1221,9 @@ msgstr "nebo INS pro označení"
 msgid " Permission "
 msgstr " Práva "
 
+msgid " File "
+msgstr " Soubor "
+
 msgid "Chmod command"
 msgstr "Příkaz chmod"
 
@@ -1496,14 +1493,14 @@ msgstr ""
 "Formát souboru ~/%s byl modifikován verzí 3.0.  Můžete ho buď zkopírovat ze %"
 "smc.ext nebo použít tento soubor jako příklad jak jej napsat."
 
-msgid " Copy "
-msgstr " Kopírovat "
+msgid "DialogTitle|Copy"
+msgstr ""
 
-msgid " Move "
-msgstr " Přesun "
+msgid "DialogTitle|Move"
+msgstr ""
 
-msgid " Delete "
-msgstr " Smazat "
+msgid "DialogTitle|Delete"
+msgstr ""
 
 msgid " Cannot make the hardlink "
 msgstr " Nelze vytvořit přímý odkaz "
@@ -1657,9 +1654,6 @@ msgstr ""
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr "Získaný soubor není kompletní. Přesto uložit?"
 
-msgid "&Delete"
-msgstr "&Smazat"
-
 msgid "&Keep"
 msgstr "&Ponechat"
 
@@ -1783,14 +1777,14 @@ msgstr ""
 msgid "Directory scanning"
 msgstr "Cesta k adresáři"
 
-msgid "1Copy"
-msgstr "1Kopírovat"
+msgid "FileOperation|Copy"
+msgstr ""
 
-msgid "1Move"
-msgstr "1Přesunout"
+msgid "FileOperation|Move"
+msgstr ""
 
-msgid "1Delete"
-msgstr "1Smazat"
+msgid "FileOperation|Delete"
+msgstr ""
 
 #, no-c-format
 msgid "%o %f \"%s\"%m"
@@ -1820,6 +1814,10 @@ msgstr " vyhovující masce:"
 
 msgid " to:"
 msgstr " na:"
+
+#, c-format
+msgid "%s?"
+msgstr ""
 
 msgid " Cannot operate on \"..\"! "
 msgstr " Nelze pracovat s \"..\"! "
@@ -1969,9 +1967,6 @@ msgstr "&Chdir"
 msgid "&Again"
 msgstr "&Znovu"
 
-msgid "&Quit"
-msgstr "&Konec"
-
 msgid "Pane&lize"
 msgstr "Pane&Lizace"
 
@@ -2059,14 +2054,16 @@ msgstr "Interní závada: Dvojité spuštění pole odkazů "
 msgid " Cannot find node %s in help file "
 msgstr " V souboru s nápovědou nelze najít sekci %s "
 
-msgid "Index"
-msgstr "Index"
+msgid "Help"
+msgstr "Nápověda"
 
-msgid "Prev"
-msgstr "Dozadu"
+#, fuzzy
+msgid "ButtonBar|Index"
+msgstr "TlačítkováLišta|Hex"
 
-msgid "&Move"
-msgstr "&Přesun"
+#, fuzzy
+msgid "ButtonBar|Prev"
+msgstr "TlačítkováLišta|Rozeb."
 
 msgid "&Remove"
 msgstr "&Smazat"
@@ -2374,11 +2371,13 @@ msgstr " Opravdu ukončit Midnight Commander? "
 msgid "&Listing mode..."
 msgstr "režim &Výpisu..."
 
-msgid "&Quick view     C-x q"
-msgstr "&Rychlé prohlížení  C-x q"
+#, fuzzy
+msgid "&Quick view"
+msgstr "Rychlé ukládání "
 
-msgid "&Info           C-x i"
-msgstr "&Informace          C-x i"
+#, fuzzy
+msgid "&Info"
+msgstr "&I-uzel"
 
 msgid "&Sort order..."
 msgstr "&Pořadí..."
@@ -2387,7 +2386,7 @@ msgid "&Filter..."
 msgstr "&Filtr..."
 
 #, fuzzy
-msgid "&Encoding...    M-e"
+msgid "&Encoding..."
 msgstr "&Setřídit                     M-t"
 
 msgid "&Network link..."
@@ -2402,102 +2401,116 @@ msgstr "s&Hellové spojení..."
 msgid "SM&B link..."
 msgstr "SM&B spojení..."
 
-msgid "&Rescan         C-r"
-msgstr "&Znovu načíst         C-r"
+#, fuzzy
+msgid "&Rescan"
+msgstr "Obnovit"
 
-msgid "&View               F3"
-msgstr "proh&Lédnout             F3"
+#, fuzzy
+msgid "&View"
+msgstr "Prohlížet"
 
-msgid "Vie&w file...         "
-msgstr "p&Rohlédnout soubor..."
+#, fuzzy
+msgid "Vie&w file..."
+msgstr " Prohlížet soubor "
 
-msgid "&Filtered view     M-!"
-msgstr "&Filtrovaný pohled      M-!"
+#, fuzzy
+msgid "&Filtered view"
+msgstr " Filtrovaný pohled "
 
-msgid "&Edit               F4"
-msgstr "e&Ditovat                F4"
+msgid "C&hmod"
+msgstr ""
 
-msgid "&Copy               F5"
-msgstr "&Kopírovat               F5"
+#, fuzzy
+msgid "&Link"
+msgstr " Odkaz "
 
-msgid "c&Hmod           C-x c"
-msgstr "změna &Práv           C-x c"
+msgid "&SymLink"
+msgstr ""
 
-msgid "&Link            C-x l"
-msgstr "&Odkaz                C-x l"
+#, fuzzy
+msgid "Edit s&ymlink"
+msgstr " Upravit symlink "
 
-msgid "&SymLink         C-x s"
-msgstr "&Symlink              C-x s"
+msgid "Ch&own"
+msgstr ""
 
-msgid "edit s&Ymlink  C-x C-s"
-msgstr "upravit s&Ymlink    C-x C-s"
-
-msgid "ch&Own           C-x o"
-msgstr "změna &Vlastníka      C-x o"
-
-msgid "&Advanced chown       "
+#, fuzzy
+msgid "&Advanced chown"
 msgstr "&Změna práv/vlastníka      "
 
-msgid "&Rename/Move        F6"
-msgstr "přesun/pře&Jmenovat      F6"
+#, fuzzy
+msgid "&Rename/Move"
+msgstr "&Smazat"
 
-msgid "&Mkdir              F7"
-msgstr "nový &Adresář            F7"
+#, fuzzy
+msgid "&Mkdir"
+msgstr "NovýAdr"
 
-msgid "&Delete             F8"
-msgstr "s&Mazat                  F8"
+#, fuzzy
+msgid "&Quick cd"
+msgstr "Rychlá změna adresáře"
 
-msgid "&Quick cd          M-c"
-msgstr "rychlé &Cd              M-c"
+#, fuzzy
+msgid "Select &group"
+msgstr "Nastav &Skupiny"
 
-msgid "select &Group      M-+"
-msgstr "označ&It skupinu        M-+"
+#, fuzzy
+msgid "U&nselect group"
+msgstr " Odvyber "
 
-msgid "u&Nselect group    M-\\"
-msgstr "odz&Načit skupinu       M-\\"
-
-msgid "reverse selec&Tion M-*"
+#, fuzzy
+msgid "Reverse selec&tion"
 msgstr "prohodi&T označení      M-*"
 
-msgid "e&Xit              F10"
-msgstr "kon&Ec                  F10"
+#, fuzzy
+msgid "E&xit"
+msgstr "Editace"
 
-msgid "&User menu          F2"
-msgstr "&Uživatelské menu        F2"
+#, fuzzy
+msgid "&User menu"
+msgstr " Uživatelské menu "
 
 msgid "&Directory tree"
 msgstr "strom a&Dresářů"
 
-msgid "&Find file            M-?"
-msgstr "&Najít soubor                   M-?"
+#, fuzzy
+msgid "&Find file"
+msgstr "Najít soubor"
 
-msgid "s&Wap panels          C-u"
-msgstr "prohodit panel&Y                C-u"
+msgid "S&wap panels"
+msgstr ""
 
-msgid "switch &Panels on/off C-o"
+#, fuzzy
+msgid "Switch &panels on/off"
 msgstr "&Panely ano/ne                  C-o"
 
-msgid "&Compare directories  C-x d"
-msgstr "porovna&T adresáře            C-x d"
+#, fuzzy
+msgid "&Compare directories"
+msgstr " Porovnat adresáře "
 
-msgid "e&Xternal panelize    C-x !"
-msgstr "e&Xterní panelizace           C-x !"
+#, fuzzy
+msgid "E&xternal panelize"
+msgstr "Externí panelizace"
 
-msgid "show directory s&Izes"
+#, fuzzy
+msgid "Show directory s&izes"
 msgstr "ukázat velikost&I adresářů"
 
 #, fuzzy
-msgid "Command &history      M-h"
-msgstr " Historie příkazů "
+msgid "Command &history"
+msgstr "&Historie příkazů"
 
-msgid "di&Rectory hotlist    C-\\"
-msgstr "&Rychlý přístup k adresářům     C-\\"
+#, fuzzy
+msgid "Di&rectory hotlist"
+msgstr "Rychlý přístup k adresářům"
 
-msgid "&Active VFS list      C-x a"
+#, fuzzy
+msgid "&Active VFS list"
 msgstr "seznam &Aktivních VFS         C-x a"
 
-msgid "&Background jobs      C-x j"
-msgstr "úlohy &Běžící na pozadí       C-x j"
+#, fuzzy
+msgid "&Background jobs"
+msgstr "Úlohy na pozadí"
 
 msgid "&Undelete files (ext2fs only)"
 msgstr "&Obnovit smazané soubory (jen ext2fs)"
@@ -2520,40 +2533,30 @@ msgstr "kon&Figurace..."
 msgid "&Layout..."
 msgstr "&Rozložení..."
 
-msgid "c&Onfirmation..."
+#, fuzzy
+msgid "C&onfirmation..."
 msgstr "p&Otvrzování..."
 
 msgid "&Display bits..."
 msgstr "&Zobrazení bitů..."
 
-msgid "learn &Keys..."
-msgstr "učení &Kláves..."
-
 msgid "&Virtual FS..."
 msgstr "&Virtuální FS..."
 
-msgid "&Save setup"
-msgstr "uložit na&Stavení"
-
-msgid " &Above "
+#, fuzzy
+msgid "&Above"
 msgstr " &Nahoře "
 
-msgid " &Left "
+#, fuzzy
+msgid "&Left"
 msgstr " &Levý "
 
-msgid " &File "
-msgstr " &Soubor "
-
-msgid " &Command "
-msgstr " &Příkaz "
-
-msgid " &Options "
-msgstr " &Nastavení "
-
-msgid " &Below "
+#, fuzzy
+msgid "&Below"
 msgstr " &Níže "
 
-msgid " &Right "
+#, fuzzy
+msgid "&Right"
 msgstr " &Pravý "
 
 msgid " Information "
@@ -2570,8 +2573,9 @@ msgstr ""
 " použijte ruční načtení obsahu adresáře (manual reload). \n"
 " Podrobnosti se dozvíte v manuálové stránce.           "
 
-msgid "Menu"
-msgstr "MenuUž"
+#, fuzzy
+msgid "ButtonBar|Menu"
+msgstr "TlačítkováLišta|Hex"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "Proměnná prostředí TERM není nastavena!\n"
@@ -2725,41 +2729,34 @@ msgid "SUB-DIR"
 msgstr "PODADR"
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
-msgid "u"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|u"
 msgstr ""
-
-#, fuzzy
-msgid "Unsorted"
-msgstr "&Netříděno"
 
 msgid "&Unsorted"
 msgstr "&Netříděno"
 
 #. TRANSLATORS: one single character to represent 'name' sort mode
-#, fuzzy
-msgid "n"
-msgstr "Na"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|n"
+msgstr ""
 
 msgid "&Name"
 msgstr "&Jméno"
 
 #. TRANSLATORS: one single character to represent 'extension' sort mode
-msgid "e"
-msgstr ""
-
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 #, fuzzy
-msgid "Extension"
-msgstr "Přípona:"
+msgid "sort|e"
+msgstr "&Netříděno"
 
 msgid "&Extension"
 msgstr "&Přípona"
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
-msgid "s"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|s"
 msgstr ""
-
-msgid "Size"
-msgstr "Velikost"
 
 msgid "&Size"
 msgstr "&Velikost"
@@ -2769,31 +2766,25 @@ msgid "Block Size"
 msgstr " Velikost "
 
 #. TRANSLATORS: one single character to represent 'Modify time' sort mode
-msgid "m"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|m"
 msgstr ""
-
-msgid "MTime"
-msgstr "Modifikace"
 
 msgid "&Modify time"
 msgstr "čas &Modifikace"
 
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
-msgid "a"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|a"
 msgstr ""
-
-msgid "ATime"
-msgstr "Přístup"
 
 msgid "&Access time"
 msgstr "čas &Přístupu"
 
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
-msgid "h"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|h"
 msgstr ""
-
-msgid "CTime"
-msgstr "Změna"
 
 msgid "C&Hange time"
 msgstr "čas změn&Y"
@@ -2808,11 +2799,9 @@ msgid "Nl"
 msgstr "Od"
 
 #. TRANSLATORS: one single character to represent 'inode' sort mode
-msgid "i"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|i"
 msgstr ""
-
-msgid "Inode"
-msgstr "I-uzel"
 
 msgid "&Inode"
 msgstr "&I-uzel"
@@ -2856,17 +2845,19 @@ msgstr "Chybný formát zadaný uživatelem, bude použit standardní."
 msgid " Do you really want to execute? "
 msgstr " Opravdu spustit? "
 
-msgid "View"
-msgstr "Prohlížet"
+msgid "ButtonBar|View"
+msgstr "TlačítkováLišta|Zobraz"
 
-msgid "Edit"
-msgstr "Editace"
+msgid "ButtonBar|Edit"
+msgstr "TlačítkováLišta|Edituj"
 
-msgid "RenMov"
-msgstr "Přesun"
+#, fuzzy
+msgid "ButtonBar|RenMov"
+msgstr "TlačítkováLišta|Hex"
 
-msgid "Mkdir"
-msgstr "NovýAdr"
+#, fuzzy
+msgid "ButtonBar|Mkdir"
+msgstr "TlačítkováLišta|Edituj"
 
 msgid " Not implemented yet "
 msgstr ""
@@ -2896,6 +2887,14 @@ msgstr " Zvolte vstupní kódovou stránku "
 
 msgid "-  < No translation >"
 msgstr "- < Bez převodu >"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot save file %s:\n"
+"%s"
+msgstr ""
+" Nemohu uložit soubor: \n"
+" %s "
 
 #, c-format
 msgid ""
@@ -3001,20 +3000,25 @@ msgstr ""
 msgid "  Delete %s?  "
 msgstr "  Smazat %s?  "
 
-msgid "Static"
-msgstr "Statický"
+#, fuzzy
+msgid "ButtonBar|Static"
+msgstr "TlačítkováLišta|Hledej"
 
-msgid "Dynamc"
-msgstr "Dynamický"
+#, fuzzy
+msgid "ButtonBar|Dynamc"
+msgstr "TlačítkováLišta|Hrubě"
 
-msgid "Rescan"
-msgstr "Obnovit"
+#, fuzzy
+msgid "ButtonBar|Rescan"
+msgstr "TlačítkováLišta|Hrubě"
 
-msgid "Forget"
-msgstr "Zapomenout"
+#, fuzzy
+msgid "ButtonBar|Forget"
+msgstr "TlačítkováLišta|Formát."
 
-msgid "Rmdir"
-msgstr "MažAdr"
+#, fuzzy
+msgid "ButtonBar|Rmdir"
+msgstr "TlačítkováLišta|Edituj"
 
 #, c-format
 msgid ""
@@ -3161,10 +3165,6 @@ msgstr "Insert na numerické klávesnici"
 
 msgid "Delete on keypad"
 msgstr "Delete na numerické klávesnici"
-
-#, fuzzy
-msgid "Escape key"
-msgstr "Lomítko na numerické klávesnici"
 
 msgid "Enter on keypad"
 msgstr "Enter na numerické klávesnici"
@@ -3403,12 +3403,6 @@ msgstr " Nelze vytvořit proces potomka "
 msgid "Empty output from child filter"
 msgstr "Prázdný výstup z filtru potomka"
 
-msgid "ButtonBar|Help"
-msgstr "TlačítkováLišta|Pomoc"
-
-msgid "ButtonBar|Quit"
-msgstr "TlačítkováLišta|Konec"
-
 msgid "ButtonBar|Ascii"
 msgstr "TlačítkováLišta|Ascii"
 
@@ -3421,15 +3415,6 @@ msgstr "TlačítkováLišta|JdiNa"
 msgid "ButtonBar|Line"
 msgstr "TlačítkováLišta|Řádek"
 
-msgid "ButtonBar|View"
-msgstr "TlačítkováLišta|Zobraz"
-
-msgid "ButtonBar|Edit"
-msgstr "TlačítkováLišta|Edituj"
-
-msgid "ButtonBar|Save"
-msgstr "TlačítkováLišta|Ulož"
-
 msgid "ButtonBar|UnWrap"
 msgstr "TlačítkováLišta|Nezal."
 
@@ -3438,9 +3423,6 @@ msgstr "TlačítkováLišta|Zalam."
 
 msgid "ButtonBar|HxSrch"
 msgstr "TlačítkováLišta|HxHled"
-
-msgid "ButtonBar|Search"
-msgstr "TlačítkováLišta|Hledej"
 
 msgid "ButtonBar|Raw"
 msgstr "TlačítkováLišta|Hrubě"
@@ -3961,6 +3943,327 @@ msgstr "Interní chyba:"
 msgid "Changes to file lost"
 msgstr "Změny souboru byly ztraceny"
 
+#~ msgid "Do backups -->"
+#~ msgstr "Ukládání záloh -->"
+
+#~ msgid "Extension:"
+#~ msgstr "Přípona:"
+
+#~ msgid "&New              C-n"
+#~ msgstr "&Nový                      C-n"
+
+#~ msgid "&Save              F2"
+#~ msgstr "&Uložit                     F2"
+
+#~ msgid "Save &as...       F12"
+#~ msgstr "uložit &Jako...            F12"
+
+#~ msgid "A&bout...            "
+#~ msgstr "o &Programu...            "
+
+#~ msgid "&Quit             F10"
+#~ msgstr "&Konec                     F10"
+
+#~ msgid "&New            C-x k"
+#~ msgstr "&Nový           C-x k"
+
+#~ msgid "Copy to &file...     "
+#~ msgstr "Zkopírovat do &Souboru... C-f"
+
+#, fuzzy
+#~ msgid "&Toggle mark                 F3"
+#~ msgstr "&Přehodit značky     F3"
+
+#, fuzzy
+#~ msgid "Mar&k columns              S-F3"
+#~ msgstr "z&Načit sloupcově  S-F3"
+
+#, fuzzy
+#~ msgid "&Copy                        F5"
+#~ msgstr "&Kopírovat               F5"
+
+#, fuzzy
+#~ msgid "&Move                        F6"
+#~ msgstr "př&Esunout           F6"
+
+#, fuzzy
+#~ msgid "&Delete                      F8"
+#~ msgstr "s&Mazat                  F8"
+
+#, fuzzy
+#~ msgid "&Next bookmark              M-j"
+#~ msgstr "&Nový                      C-n"
+
+#, fuzzy
+#~ msgid "&Undo                       C-u"
+#~ msgstr "&Akce zpět          C-u"
+
+#, fuzzy
+#~ msgid "&Beginning               C-PgUp"
+#~ msgstr "na &Začátek      C-PgUp"
+
+#, fuzzy
+#~ msgid "&End                     C-PgDn"
+#~ msgstr "na &Konec        C-PgDn"
+
+#, fuzzy
+#~ msgid "C&opy to clipfile           M-w"
+#~ msgstr "&Jít na řádku...              M-l"
+
+#, fuzzy
+#~ msgid "C&ut to clipfile            C-w"
+#~ msgstr "&Jít na řádku...              M-l"
+
+#, fuzzy
+#~ msgid "Toggle bookmar&k               "
+#~ msgstr "&Přehodit značky     F3"
+
+#, fuzzy
+#~ msgid "&Next bookmark                 "
+#~ msgstr "&Nový                      C-n"
+
+#, fuzzy
+#~ msgid "Pre&v bookmark                 "
+#~ msgstr "&Setřídit                     M-t"
+
+#, fuzzy
+#~ msgid "&Flush bookmark                "
+#~ msgstr "od&Eslat...                         "
+
+#~ msgid "&Search...         F7"
+#~ msgstr "&Hledat...         F7"
+
+#~ msgid "&Replace...        F4"
+#~ msgstr "&Nahradit...       F4"
+
+#~ msgid "&Go to line...            M-l"
+#~ msgstr "&Jít na řádku...              M-l"
+
+#, fuzzy
+#~ msgid "Encod&ing...             M-e"
+#~ msgstr "&Setřídit                     M-t"
+
+#~ msgid "Delete macr&o...            "
+#~ msgstr "smaza&T makro...            "
+
+#~ msgid "Sor&t...                 M-t"
+#~ msgstr "&Setřídit                     M-t"
+
+#~ msgid "&Mail...                    "
+#~ msgstr "od&Eslat...                         "
+
+#~ msgid "&Execute macro... C-x e, KEY"
+#~ msgstr "&Provést makro...     C-x e, KLÁV"
+
+#~ msgid "'ispell' s&pell check    M-$"
+#~ msgstr "'ispell' &Kontrola pravopisu  M-$"
+
+#, fuzzy
+#~ msgid "Save setu&p"
+#~ msgstr "uložit na&Stavení"
+
+#~ msgid " Edit "
+#~ msgstr " Upravit "
+
+#~ msgid " Sear/Repl "
+#~ msgstr " Hledat/Nahradit "
+
+#~ msgid " Command "
+#~ msgstr " Příkaz "
+
+#~ msgid " Options "
+#~ msgstr " Nastavení "
+
+#~ msgid "Intuitive"
+#~ msgstr "Intuitivní"
+
+#~ msgid "Emacs"
+#~ msgstr "Emacs"
+
+#~ msgid "User-defined"
+#~ msgstr "Definované uživatelem"
+
+#~ msgid "Key emulation"
+#~ msgstr "Emulace kláves"
+
+#~ msgid "Save"
+#~ msgstr "Uložit"
+
+#~ msgid "Mark"
+#~ msgstr "Značka"
+
+#~ msgid "Replac"
+#~ msgstr "Náhrada"
+
+#~ msgid "Move"
+#~ msgstr "Přesunout"
+
+#~ msgid "Delete"
+#~ msgstr "Smazat"
+
+#~ msgid "PullDn"
+#~ msgstr "HlMenu"
+
+#~ msgid " Copy "
+#~ msgstr " Kopírovat "
+
+#~ msgid " Move "
+#~ msgstr " Přesun "
+
+#~ msgid " Delete "
+#~ msgstr " Smazat "
+
+#~ msgid "1Copy"
+#~ msgstr "1Kopírovat"
+
+#~ msgid "1Move"
+#~ msgstr "1Přesunout"
+
+#~ msgid "1Delete"
+#~ msgstr "1Smazat"
+
+#~ msgid "Index"
+#~ msgstr "Index"
+
+#~ msgid "Prev"
+#~ msgstr "Dozadu"
+
+#~ msgid "&Quick view     C-x q"
+#~ msgstr "&Rychlé prohlížení  C-x q"
+
+#~ msgid "&Info           C-x i"
+#~ msgstr "&Informace          C-x i"
+
+#~ msgid "&Rescan         C-r"
+#~ msgstr "&Znovu načíst         C-r"
+
+#~ msgid "&View               F3"
+#~ msgstr "proh&Lédnout             F3"
+
+#~ msgid "Vie&w file...         "
+#~ msgstr "p&Rohlédnout soubor..."
+
+#~ msgid "&Filtered view     M-!"
+#~ msgstr "&Filtrovaný pohled      M-!"
+
+#~ msgid "&Edit               F4"
+#~ msgstr "e&Ditovat                F4"
+
+#~ msgid "&Copy               F5"
+#~ msgstr "&Kopírovat               F5"
+
+#~ msgid "c&Hmod           C-x c"
+#~ msgstr "změna &Práv           C-x c"
+
+#~ msgid "&Link            C-x l"
+#~ msgstr "&Odkaz                C-x l"
+
+#~ msgid "&SymLink         C-x s"
+#~ msgstr "&Symlink              C-x s"
+
+#~ msgid "edit s&Ymlink  C-x C-s"
+#~ msgstr "upravit s&Ymlink    C-x C-s"
+
+#~ msgid "ch&Own           C-x o"
+#~ msgstr "změna &Vlastníka      C-x o"
+
+#~ msgid "&Rename/Move        F6"
+#~ msgstr "přesun/pře&Jmenovat      F6"
+
+#~ msgid "&Mkdir              F7"
+#~ msgstr "nový &Adresář            F7"
+
+#~ msgid "&Delete             F8"
+#~ msgstr "s&Mazat                  F8"
+
+#~ msgid "&Quick cd          M-c"
+#~ msgstr "rychlé &Cd              M-c"
+
+#~ msgid "select &Group      M-+"
+#~ msgstr "označ&It skupinu        M-+"
+
+#~ msgid "u&Nselect group    M-\\"
+#~ msgstr "odz&Načit skupinu       M-\\"
+
+#~ msgid "e&Xit              F10"
+#~ msgstr "kon&Ec                  F10"
+
+#~ msgid "&User menu          F2"
+#~ msgstr "&Uživatelské menu        F2"
+
+#~ msgid "&Find file            M-?"
+#~ msgstr "&Najít soubor                   M-?"
+
+#~ msgid "s&Wap panels          C-u"
+#~ msgstr "prohodit panel&Y                C-u"
+
+#~ msgid "&Compare directories  C-x d"
+#~ msgstr "porovna&T adresáře            C-x d"
+
+#~ msgid "e&Xternal panelize    C-x !"
+#~ msgstr "e&Xterní panelizace           C-x !"
+
+#, fuzzy
+#~ msgid "Command &history      M-h"
+#~ msgstr " Historie příkazů "
+
+#~ msgid "di&Rectory hotlist    C-\\"
+#~ msgstr "&Rychlý přístup k adresářům     C-\\"
+
+#~ msgid "&Background jobs      C-x j"
+#~ msgstr "úlohy &Běžící na pozadí       C-x j"
+
+#~ msgid "learn &Keys..."
+#~ msgstr "učení &Kláves..."
+
+#~ msgid " &File "
+#~ msgstr " &Soubor "
+
+#~ msgid " &Command "
+#~ msgstr " &Příkaz "
+
+#~ msgid "Menu"
+#~ msgstr "MenuUž"
+
+#, fuzzy
+#~ msgid "n"
+#~ msgstr "Na"
+
+#, fuzzy
+#~ msgid "Extension"
+#~ msgstr "Přípona:"
+
+#~ msgid "Size"
+#~ msgstr "Velikost"
+
+#~ msgid "MTime"
+#~ msgstr "Modifikace"
+
+#~ msgid "ATime"
+#~ msgstr "Přístup"
+
+#~ msgid "CTime"
+#~ msgstr "Změna"
+
+#~ msgid "Inode"
+#~ msgstr "I-uzel"
+
+#~ msgid "RenMov"
+#~ msgstr "Přesun"
+
+#~ msgid "Static"
+#~ msgstr "Statický"
+
+#~ msgid "Dynamc"
+#~ msgstr "Dynamický"
+
+#~ msgid "Rmdir"
+#~ msgstr "MažAdr"
+
+#, fuzzy
+#~ msgid "Escape key"
+#~ msgstr "Lomítko na numerické klávesnici"
+
 #~ msgid "bind: Wrong argument number, bind <key> <command>"
 #~ msgstr "bind: Špatné číslo argumentu, bind <klíč> <příkaz>"
 
@@ -4079,14 +4382,8 @@ msgstr "Změny souboru byly ztraceny"
 #~ msgid "&Delete            F8"
 #~ msgstr "&Smazat              F8"
 
-#~ msgid "Save setu&p..."
-#~ msgstr "uložit na&Stavení..."
-
 #~ msgid " The command history is empty "
 #~ msgstr " Historie příkazů je prázdná "
-
-#~ msgid "command &History"
-#~ msgstr "&Historie příkazů"
 
 #~ msgid "Edit edi&tor menu file"
 #~ msgstr "upravit &Soubor s menu"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-09 09:50+0300\n"
+"POT-Creation-Date: 2009-10-30 10:39+0200\n"
 "PO-Revision-Date: 2002-04-25 03:55+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <debian-l10n-portuguese@lists.debian.org>\n"
@@ -52,6 +52,29 @@ msgstr " Incapaz de ver: não é um ficheiro normal "
 msgid " File %s is too large "
 msgstr " Ficheiro demasiado grande: "
 
+msgid " About "
+msgstr " Sobre "
+
+msgid ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       A user friendly text editor written\n"
+"           for the Midnight Commander.\n"
+msgstr ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       Um editor de texto de utilização simples escrito\n"
+"           para o Midnight Commander.\n"
+
+msgid "&OK"
+msgstr "&OK"
+
 msgid "Macro recursion is too deep"
 msgstr ""
 
@@ -89,23 +112,29 @@ msgstr " Falha ao tentar abrir canal para escrita: "
 msgid " Cannot open file for writing: %s "
 msgstr " Falha ao tentar abrir canal para escrita: "
 
-msgid "Quick save "
+#, fuzzy
+msgid "&Quick save"
 msgstr "Gravação rápida "
 
-msgid "Safe save "
+#, fuzzy
+msgid "&Safe save"
 msgstr "Gravação segura "
 
-msgid "Do backups -->"
-msgstr "Fazer cópias de segurança -->"
+msgid "&Do backups with following extension:"
+msgstr ""
 
-msgid "&OK"
-msgstr "&OK"
-
-msgid "Extension:"
-msgstr "Extensão:"
+msgid "Check &POSIX new line"
+msgstr ""
 
 msgid " Edit Save Mode "
 msgstr " Editar Modo Gravação "
+
+msgid "The file you are saving is not finished with a newline"
+msgstr ""
+
+#, fuzzy
+msgid "C&ontinue"
+msgstr "Continuar"
 
 msgid "&Do not change"
 msgstr ""
@@ -178,10 +207,6 @@ msgid ""
 msgstr ""
 " Texto actual foi modificado sem gravação de ficheiro. \n"
 " Se continuar irá perder estas alterações. "
-
-#, fuzzy
-msgid "C&ontinue"
-msgstr "Continuar"
 
 msgid "Syntax file edit"
 msgstr "Edição ficheiro sintaxe"
@@ -402,238 +427,196 @@ msgstr ""
 msgid "&Ignore lock"
 msgstr ""
 
-msgid " About "
-msgstr " Sobre "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       Um editor de texto de utilização simples escrito\n"
-"           para o Midnight Commander.\n"
-
 msgid "&Open file..."
 msgstr "&Abrir ficheiro..."
 
-msgid "&New              C-n"
-msgstr "&Novo             C-n"
+#, fuzzy
+msgid "&New"
+msgstr "&Nome"
 
-msgid "&Save              F2"
-msgstr "&Gravar            F2"
+#, fuzzy
+msgid "Save &as..."
+msgstr "&Gravar configuração"
 
-msgid "Save &as...       F12"
-msgstr "gravar &Como...   F12"
-
-msgid "&Insert file...   F15"
+#, fuzzy
+msgid "&Insert file..."
 msgstr "&Inserir ficheiro... F15"
 
-msgid "Copy to &file...  C-f"
+#, fuzzy
+msgid "Cop&y to file..."
 msgstr "copiar para &Ficheiro... C-f"
 
-msgid "&User menu...     F11"
+#, fuzzy
+msgid "&User menu..."
 msgstr "menu &Utilizador... F11"
 
-msgid "A&bout...            "
-msgstr "so&Bre...            "
+#, fuzzy
+msgid "A&bout..."
+msgstr "&Disposição..."
 
-msgid "&Quit             F10"
-msgstr "&Sair             F10"
-
-msgid "&New            C-x k"
-msgstr "&Novo           C-x k"
-
-msgid "Copy to &file...     "
-msgstr "copiar para &Ficheiro... "
+msgid "&Quit"
+msgstr "S&air"
 
 #, fuzzy
-msgid "&Toggle mark                 F3"
-msgstr "al&Ternar Marca    F3"
+msgid "&Toggle mark"
+msgstr "Marcado para &Limpar"
+
+msgid "&Mark columns"
+msgstr ""
 
 #, fuzzy
-msgid "Mar&k columns              S-F3"
-msgstr "&Marcar Colunas  S-F3"
-
-#, fuzzy
-msgid "Toggle &ins/overw           Ins"
+msgid "Toggle &ins/overw"
 msgstr "alternar &Ins/sobr Ins"
 
 #, fuzzy
-msgid "&Copy                        F5"
-msgstr "&Copiar             F5"
+msgid "&Copy"
+msgstr "Copiar"
+
+msgid "&Move"
+msgstr "&Mover"
+
+msgid "&Delete"
+msgstr "&Apagar"
 
 #, fuzzy
-msgid "&Move                        F6"
-msgstr "&Mover             F6"
-
-#, fuzzy
-msgid "&Delete                      F8"
-msgstr "&Apagar             F8"
-
-#, fuzzy
-msgid "C&opy to clipfile         C-Ins"
+msgid "C&opy to clipfile"
 msgstr "copiar para &Ficheiro... "
 
 #, fuzzy
-msgid "C&ut to clipfile          S-Del"
+msgid "C&ut to clipfile"
 msgstr "&Ir para linha...        M-l"
 
-msgid "&Paste from clipfile      S-Ins"
+msgid "&Paste from clipfile"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k            M-k"
+msgid "Toggle bookmar&k"
 msgstr "al&Ternar Marca    F3"
 
 #, fuzzy
-msgid "&Next bookmark              M-j"
-msgstr "&Novo             C-n"
+msgid "&Next bookmark"
+msgstr "Marcado para d&efinit"
 
 #, fuzzy
-msgid "Pre&v bookmark              M-i"
+msgid "Pre&v bookmark"
 msgstr "&Ordenar...              M-t"
 
 #, fuzzy
-msgid "&Flush bookmark             M-o"
+msgid "&Flush bookmark"
 msgstr "E-&Mail...                  "
 
-#, fuzzy
-msgid "&Undo                       C-u"
-msgstr "&Desfazer         C-u"
+msgid "&Undo"
+msgstr ""
 
-#, fuzzy
-msgid "&Beginning               C-PgUp"
-msgstr "&Início        C-PgUp"
-
-#, fuzzy
-msgid "&End                     C-PgDn"
-msgstr "&Final         C-PgDn"
-
-#, fuzzy
-msgid "C&opy to clipfile           M-w"
-msgstr "&Ir para linha...        M-l"
-
-#, fuzzy
-msgid "C&ut to clipfile            C-w"
-msgstr "&Ir para linha...        M-l"
-
-msgid "&Paste from clipfile        C-y"
+msgid "&Beginning"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k               "
-msgstr "al&Ternar Marca    F3"
+msgid "&End"
+msgstr "&Inode"
 
 #, fuzzy
-msgid "&Next bookmark                 "
-msgstr "&Novo             C-n"
+msgid "&Search..."
+msgstr "Procurar"
 
 #, fuzzy
-msgid "Pre&v bookmark                 "
-msgstr "&Ordenar...              M-t"
-
-#, fuzzy
-msgid "&Flush bookmark                "
-msgstr "E-&Mail...                  "
-
-msgid "&Search...         F7"
-msgstr "&Procurar...       F7"
-
-msgid "Search &again     F17"
+msgid "Search &again"
 msgstr "procurar nov&Amente F17"
 
-msgid "&Replace...        F4"
-msgstr "substitui&R...     F4"
-
-msgid "&Go to line...            M-l"
-msgstr "&Ir para linha...        M-l"
+#, fuzzy
+msgid "&Replace..."
+msgstr "&Substituir"
 
 #, fuzzy
-msgid "Toggle li&ne state        M-n"
+msgid "&Go to line..."
+msgstr " Ir para linha "
+
+#, fuzzy
+msgid "Toggle li&ne state"
 msgstr "al&Ternar Marca    F3"
 
-msgid "Go to matching &bracket   M-b"
+#, fuzzy
+msgid "Go to matching &bracket"
 msgstr "ir para &parentesis respectivo M-b"
 
-msgid "Find declaration      A-Enter"
+#, fuzzy
+msgid "Find declaration"
+msgstr "Encontrar rejeitados após patching"
+
+msgid "Back from declaration"
 msgstr ""
 
-msgid "Back from declaration     M--"
-msgstr ""
-
-msgid "Forward to declaration    M-+"
+msgid "Forward to declaration"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             M-e"
+msgid "Encod&ing..."
 msgstr "&Ordenar...              M-t"
 
-msgid "Insert &literal...       C-q"
-msgstr "inserir &Literal...      C-q"
-
-msgid "&Refresh screen          C-l"
+#, fuzzy
+msgid "&Refresh screen"
 msgstr "Actualiza&R ecrã         C-l"
 
-msgid "&Start record macro      C-r"
+#, fuzzy
+msgid "&Start record macro"
 msgstr "&Começar a gravar macro  C-r"
 
-msgid "&Finish record macro...  C-r"
+#, fuzzy
+msgid "&Finish record macro..."
 msgstr "&Para de gravar macro... C-r"
 
-msgid "&Execute macro...   C-a, KEY"
+#, fuzzy
+msgid "&Execute macro..."
 msgstr "&Executar macro...  C-a, KEY"
 
-msgid "Delete macr&o...            "
-msgstr "apagar macr&O...            "
+#, fuzzy
+msgid "Delete macr&o..."
+msgstr " Apagar macro "
 
-msgid "Insert &date/time           "
-msgstr "inserir &Data/hora          "
-
-msgid "Format p&aragraph        M-p"
-msgstr "formatar p&Arágrafo      M-p"
-
-msgid "'ispell' s&pell check    C-p"
+#, fuzzy
+msgid "'ispell' s&pell check"
 msgstr "verificação ortográfica 'is&Pell' C-p"
 
-msgid "Sor&t...                 M-t"
-msgstr "&Ordenar...              M-t"
+#, fuzzy
+msgid "&Mail..."
+msgstr "&Filtro..."
 
-msgid "Paste o&utput of...      M-u"
+#, fuzzy
+msgid "Insert &literal..."
+msgstr "inserir &Literal...      C-q"
+
+#, fuzzy
+msgid "Insert &date/time"
+msgstr "inserir &Data/hora          "
+
+#, fuzzy
+msgid "Format p&aragraph"
+msgstr "formatar p&Arágrafo      M-p"
+
+#, fuzzy
+msgid "Sor&t..."
+msgstr "&Ordenação..."
+
+msgid "Paste o&utput of..."
 msgstr ""
 
-msgid "E&xternal Formatter      F19"
+#, fuzzy
+msgid "E&xternal formatter"
 msgstr "Formatador E&xterno      F19"
-
-msgid "&Mail...                    "
-msgstr "E-&Mail...                  "
-
-msgid "&Execute macro... C-x e, KEY"
-msgstr "&Executar macro... C-x e, KEY"
-
-msgid "'ispell' s&pell check    M-$"
-msgstr "verificação ortográfica 'is&Pell' M-$"
 
 msgid "&General...  "
 msgstr "&Geral...    "
 
-msgid "&Save mode..."
+#, fuzzy
+msgid "Save &mode..."
 msgstr "Modo &gravação..."
 
 #, fuzzy
-msgid "Learn &Keys..."
+msgid "Learn &keys..."
 msgstr "aprender &Teclas..."
 
 #, fuzzy
-msgid "Syntax &Highlighting..."
+msgid "Syntax &highlighting..."
 msgstr "Realce de sinta&Xe"
 
 #, fuzzy
@@ -644,34 +627,32 @@ msgstr "Edição ficheiro sintaxe"
 msgid "&Menu file"
 msgstr "Editar &menu ficheiro"
 
-#, fuzzy
-msgid "Save setu&p"
+msgid "&Save setup"
 msgstr "&Gravar configuração"
 
-msgid " File "
-msgstr " Ficheiro "
-
-msgid " Edit "
-msgstr " Edit "
-
-msgid " Sear/Repl "
-msgstr " Proc/Subst "
-
-msgid " Command "
-msgstr " Comando "
-
-msgid " Options "
-msgstr " Opções "
-
-msgid "Intuitive"
-msgstr "Intuitivo"
-
-msgid "Emacs"
-msgstr "Emacs"
+#, fuzzy
+msgid "&File"
+msgstr "Ficheiro"
 
 #, fuzzy
-msgid "User-defined"
-msgstr "Definida pelo &utilizador:"
+msgid "&Edit"
+msgstr "Editar"
+
+#, fuzzy
+msgid "&Search"
+msgstr "Procurar"
+
+#, fuzzy
+msgid "&Command"
+msgstr "Comando"
+
+#, fuzzy
+msgid "For&mat"
+msgstr "Formatar"
+
+#, fuzzy
+msgid "&Options"
+msgstr " &Opções "
 
 msgid "None"
 msgstr "Nenhum"
@@ -684,9 +665,6 @@ msgstr "Quebra máq. escrever"
 
 msgid "Word wrap line length: "
 msgstr "Tamanho de linha na quebra : "
-
-msgid "Tab spacing: "
-msgstr "Espaço do Tab : "
 
 msgid "Cursor beyond end of line"
 msgstr ""
@@ -711,11 +689,14 @@ msgstr " Gravar ficheiro "
 msgid "Confir&m before saving"
 msgstr "confir&Mar antes de gravar"
 
-msgid "Fill tabs with &spaces"
-msgstr "encher tabs com e&Spaços"
-
 msgid "&Return does autoindent"
 msgstr "ente&R faz auto-indentação"
+
+msgid "Tab spacing: "
+msgstr "Espaço do Tab : "
+
+msgid "Fill tabs with &spaces"
+msgstr "encher tabs com e&Spaços"
 
 msgid "&Backspace through tabs"
 msgstr "apagar através de ta&Bs"
@@ -726,35 +707,38 @@ msgstr "&Fingir meios tabs"
 msgid "Wrap mode"
 msgstr "Modo de quebra"
 
-msgid "Key emulation"
-msgstr "Emulação de teclas"
-
 msgid " Editor options "
 msgstr " Opções de editor "
 
-msgid "Help"
-msgstr "Ajuda"
+msgid "ButtonBar|Help"
+msgstr ""
 
-msgid "Save"
-msgstr "Gravar"
+msgid "ButtonBar|Save"
+msgstr ""
 
-msgid "Mark"
-msgstr "Marca"
+msgid "ButtonBar|Mark"
+msgstr ""
 
-msgid "Replac"
-msgstr "Subst"
+msgid "ButtonBar|Replac"
+msgstr ""
 
-msgid "Copy"
-msgstr "Copiar"
+msgid "ButtonBar|Copy"
+msgstr ""
 
-msgid "Move"
-msgstr "Mover"
+msgid "ButtonBar|Move"
+msgstr ""
 
-msgid "Delete"
-msgstr "Apagar"
+msgid "ButtonBar|Search"
+msgstr ""
 
-msgid "PullDn"
-msgstr "PuxarAbaixo"
+msgid "ButtonBar|Delete"
+msgstr ""
+
+msgid "ButtonBar|PullDn"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
 
 msgid " Load syntax file "
 msgstr " Ler ficheiro de sintaxe "
@@ -1221,6 +1205,9 @@ msgstr "e T ou INS para marcar"
 msgid " Permission "
 msgstr " Permissão "
 
+msgid " File "
+msgstr " Ficheiro "
+
 msgid "Chmod command"
 msgstr "Comando chmod"
 
@@ -1490,14 +1477,14 @@ msgid ""
 "it."
 msgstr ""
 
-msgid " Copy "
-msgstr " Copiar "
+msgid "DialogTitle|Copy"
+msgstr ""
 
-msgid " Move "
-msgstr " Mover "
+msgid "DialogTitle|Move"
+msgstr ""
 
-msgid " Delete "
-msgstr " Apagar "
+msgid "DialogTitle|Delete"
+msgstr ""
 
 msgid " Cannot make the hardlink "
 msgstr " Incapaz de criar o atalho 'hard' "
@@ -1652,9 +1639,6 @@ msgstr ""
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr "Foi obtido ficheiro incompleto. Ficar com ele?"
 
-msgid "&Delete"
-msgstr "&Apagar"
-
 msgid "&Keep"
 msgstr "&Manter"
 
@@ -1778,14 +1762,14 @@ msgstr ""
 msgid "Directory scanning"
 msgstr "Caminho de directório"
 
-msgid "1Copy"
-msgstr "1Copiar"
+msgid "FileOperation|Copy"
+msgstr ""
 
-msgid "1Move"
-msgstr "1Mover"
+msgid "FileOperation|Move"
+msgstr ""
 
-msgid "1Delete"
-msgstr "1Apagar"
+msgid "FileOperation|Delete"
+msgstr ""
 
 #, no-c-format
 msgid "%o %f \"%s\"%m"
@@ -1815,6 +1799,10 @@ msgstr " com máscara na origem:"
 
 msgid " to:"
 msgstr " para:"
+
+#, c-format
+msgid "%s?"
+msgstr ""
 
 msgid " Cannot operate on \"..\"! "
 msgstr " Incapaz de operar em \"..\"! "
@@ -1964,9 +1952,6 @@ msgstr "&Chdir"
 msgid "&Again"
 msgstr "&Novamente"
 
-msgid "&Quit"
-msgstr "S&air"
-
 msgid "Pane&lize"
 msgstr "Em &Paineis"
 
@@ -2052,14 +2037,14 @@ msgstr " Erro interno: Início duplo de área de ligação "
 msgid " Cannot find node %s in help file "
 msgstr " Incapaz de encontrar nó %s no ficheiro ajuda "
 
-msgid "Index"
-msgstr "Índice"
+msgid "Help"
+msgstr "Ajuda"
 
-msgid "Prev"
-msgstr "Ant"
+msgid "ButtonBar|Index"
+msgstr ""
 
-msgid "&Move"
-msgstr "&Mover"
+msgid "ButtonBar|Prev"
+msgstr ""
 
 msgid "&Remove"
 msgstr "&Remover"
@@ -2368,11 +2353,13 @@ msgstr " Deseja mesmo sair do Midnight Commander? "
 msgid "&Listing mode..."
 msgstr "Modo de &listagem..."
 
-msgid "&Quick view     C-x q"
-msgstr "Vista &rápida   C-x q"
+#, fuzzy
+msgid "&Quick view"
+msgstr "Gravação rápida "
 
-msgid "&Info           C-x i"
-msgstr "&Info           C-x i"
+#, fuzzy
+msgid "&Info"
+msgstr "&Inode"
 
 msgid "&Sort order..."
 msgstr "&Ordenação..."
@@ -2381,7 +2368,7 @@ msgid "&Filter..."
 msgstr "&Filtro..."
 
 #, fuzzy
-msgid "&Encoding...    M-e"
+msgid "&Encoding..."
 msgstr "&Ordenar...              M-t"
 
 msgid "&Network link..."
@@ -2397,102 +2384,117 @@ msgstr "Ligação SM&B..."
 msgid "SM&B link..."
 msgstr "Ligação SM&B..."
 
-msgid "&Rescan         C-r"
-msgstr "&Reprocurar     C-r"
+#, fuzzy
+msgid "&Rescan"
+msgstr "Reprocurar"
 
-msgid "&View               F3"
-msgstr "&Ver                F3"
+#, fuzzy
+msgid "&View"
+msgstr "Ver"
 
-msgid "Vie&w file...         "
-msgstr "Ver fic&heiro...      "
+#, fuzzy
+msgid "Vie&w file..."
+msgstr " Ver ficheiro "
 
-msgid "&Filtered view     M-!"
-msgstr "Vista &filtrada    M-!"
+#, fuzzy
+msgid "&Filtered view"
+msgstr " Vista filtrada "
 
-msgid "&Edit               F4"
-msgstr "&Editar             F4"
+msgid "C&hmod"
+msgstr ""
 
-msgid "&Copy               F5"
-msgstr "&Copiar             F5"
+#, fuzzy
+msgid "&Link"
+msgstr "Ata&lhos"
 
-msgid "c&Hmod           C-x c"
-msgstr "c&Hmod           C-x c"
+#, fuzzy
+msgid "&SymLink"
+msgstr "Ata&lhos"
 
-msgid "&Link            C-x l"
-msgstr "&Ligação         C-x l"
+#, fuzzy
+msgid "Edit s&ymlink"
+msgstr " Editar atalho "
 
-msgid "&SymLink         C-x s"
-msgstr "Ligação &simbólica C-x s"
+msgid "Ch&own"
+msgstr ""
 
-msgid "edit s&Ymlink  C-x C-s"
-msgstr "editar lig. s&imbólica C-x C-s"
-
-msgid "ch&Own           C-x o"
-msgstr "ch&own           C-x o"
-
-msgid "&Advanced chown       "
+#, fuzzy
+msgid "&Advanced chown"
 msgstr "chown &avançado       "
 
-msgid "&Rename/Move        F6"
-msgstr "&Renomear/Mover     F6"
+#, fuzzy
+msgid "&Rename/Move"
+msgstr "&Remover"
 
-msgid "&Mkdir              F7"
-msgstr "&Mkdir              F7"
+#, fuzzy
+msgid "&Mkdir"
+msgstr "Mkdir"
 
-msgid "&Delete             F8"
-msgstr "&Apagar             F8"
+#, fuzzy
+msgid "&Quick cd"
+msgstr "cd rápido"
 
-msgid "&Quick cd          M-c"
-msgstr "cd &Rápido         M-c"
+#, fuzzy
+msgid "Select &group"
+msgstr "Definir &grupos"
 
-msgid "select &Group      M-+"
-msgstr "seleccionar &Grupo M-+"
+#, fuzzy
+msgid "U&nselect group"
+msgstr " Des-seleccionar "
 
-msgid "u&Nselect group    M-\\"
-msgstr "Desseleccio&nar grupo M-\\"
-
-msgid "reverse selec&Tion M-*"
+#, fuzzy
+msgid "Reverse selec&tion"
 msgstr "reverter sele&cção M-*"
 
-msgid "e&Xit              F10"
-msgstr "S&air              F10"
+#, fuzzy
+msgid "E&xit"
+msgstr "Editar"
 
-msgid "&User menu          F2"
-msgstr "Menu &utilizador    F2"
+#, fuzzy
+msgid "&User menu"
+msgstr " Menu utilizador "
 
 msgid "&Directory tree"
 msgstr "Árvore de &directório"
 
-msgid "&Find file            M-?"
-msgstr "Encontrar &ficheiro   M-?"
+#, fuzzy
+msgid "&Find file"
+msgstr "Encontrar Ficheiro"
 
-msgid "s&Wap panels          C-u"
-msgstr "Tro&car paineis       C-u"
+msgid "S&wap panels"
+msgstr ""
 
-msgid "switch &Panels on/off C-o"
+#, fuzzy
+msgid "Switch &panels on/off"
 msgstr "ligar/desligar &Paineis C-o"
 
-msgid "&Compare directories  C-x d"
-msgstr "&Comparar directórios C-x d"
+#, fuzzy
+msgid "&Compare directories"
+msgstr " Comparar directórios "
 
-msgid "e&Xternal panelize    C-x !"
-msgstr "tornar paineis e&Xternos C-x !"
+#, fuzzy
+msgid "E&xternal panelize"
+msgstr "Paineis externos"
 
-msgid "show directory s&Izes"
+#, fuzzy
+msgid "Show directory s&izes"
 msgstr "mostrar tamanhos dos d&irectórios"
 
 #, fuzzy
-msgid "Command &history      M-h"
-msgstr " Histórico de comando "
+msgid "Command &history"
+msgstr "&Histórico de comandos"
 
-msgid "di&Rectory hotlist    C-\\"
-msgstr "lista-top de di&rectórios C-\\"
+#, fuzzy
+msgid "Di&rectory hotlist"
+msgstr "Lista-top de directórios"
 
-msgid "&Active VFS list      C-x a"
+#, fuzzy
+msgid "&Active VFS list"
 msgstr "Lista VFS &Activa     C-x a"
 
-msgid "&Background jobs      C-x j"
-msgstr "Trabalhos em &fundo   C-x j"
+#, fuzzy
+msgid "&Background jobs"
+msgstr "Processos em Fundo"
 
 msgid "&Undelete files (ext2fs only)"
 msgstr "Rec&uperar ficheiros (apenas ext2fs)"
@@ -2515,40 +2517,30 @@ msgstr "&Configuração..."
 msgid "&Layout..."
 msgstr "&Disposição..."
 
-msgid "c&Onfirmation..."
+#, fuzzy
+msgid "C&onfirmation..."
 msgstr "c&Onfirmação..."
 
 msgid "&Display bits..."
 msgstr "Mostrar &bits..."
 
-msgid "learn &Keys..."
-msgstr "aprender &Teclas..."
-
 msgid "&Virtual FS..."
 msgstr "FS &Virtual..."
 
-msgid "&Save setup"
-msgstr "&Gravar configuração"
-
-msgid " &Above "
+#, fuzzy
+msgid "&Above"
 msgstr " &Acima "
 
-msgid " &Left "
+#, fuzzy
+msgid "&Left"
 msgstr " &Esquerda "
 
-msgid " &File "
-msgstr " &Ficheiro "
-
-msgid " &Command "
-msgstr " &Commando "
-
-msgid " &Options "
-msgstr " &Opções "
-
-msgid " &Below "
+#, fuzzy
+msgid "&Below"
 msgstr " a&Baixo "
 
-msgid " &Right "
+#, fuzzy
+msgid "&Right"
 msgstr " &Direita "
 
 msgid " Information "
@@ -2565,8 +2557,8 @@ msgstr ""
 " fazer uma releitura manual do directório. Veja a página   \n"
 " de manual para detalhes.                                    "
 
-msgid "Menu"
-msgstr "Menu"
+msgid "ButtonBar|Menu"
+msgstr ""
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "A variável de ambiente TERM foi limpa!\n"
@@ -2720,41 +2712,34 @@ msgid "SUB-DIR"
 msgstr "SUB-DIR"
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
-msgid "u"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|u"
 msgstr ""
-
-#, fuzzy
-msgid "Unsorted"
-msgstr "Não &Ordenado"
 
 msgid "&Unsorted"
 msgstr "Não &Ordenado"
 
 #. TRANSLATORS: one single character to represent 'name' sort mode
-#, fuzzy
-msgid "n"
-msgstr "Activo"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|n"
+msgstr ""
 
 msgid "&Name"
 msgstr "&Nome"
 
 #. TRANSLATORS: one single character to represent 'extension' sort mode
-msgid "e"
-msgstr ""
-
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 #, fuzzy
-msgid "Extension"
-msgstr "Extensão:"
+msgid "sort|e"
+msgstr "Não &Ordenado"
 
 msgid "&Extension"
 msgstr "&Extensão"
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
-msgid "s"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|s"
 msgstr ""
-
-msgid "Size"
-msgstr "Tamanho"
 
 msgid "&Size"
 msgstr "Tama&nho"
@@ -2764,31 +2749,25 @@ msgid "Block Size"
 msgstr " Tamanho "
 
 #. TRANSLATORS: one single character to represent 'Modify time' sort mode
-msgid "m"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|m"
 msgstr ""
-
-msgid "MTime"
-msgstr "MTime"
 
 msgid "&Modify time"
 msgstr "&Modificar hora"
 
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
-msgid "a"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|a"
 msgstr ""
-
-msgid "ATime"
-msgstr "ATime"
 
 msgid "&Access time"
 msgstr "Hora de &acesso"
 
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
-msgid "h"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|h"
 msgstr ""
-
-msgid "CTime"
-msgstr "CTime"
 
 msgid "C&Hange time"
 msgstr "Alte&rar hora"
@@ -2803,11 +2782,9 @@ msgid "Nl"
 msgstr "Nl"
 
 #. TRANSLATORS: one single character to represent 'inode' sort mode
-msgid "i"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|i"
 msgstr ""
-
-msgid "Inode"
-msgstr "Inode"
 
 msgid "&Inode"
 msgstr "&Inode"
@@ -2849,17 +2826,17 @@ msgstr ""
 msgid " Do you really want to execute? "
 msgstr " Deseja mesmo executar? "
 
-msgid "View"
-msgstr "Ver"
+msgid "ButtonBar|View"
+msgstr ""
 
-msgid "Edit"
-msgstr "Editar"
+msgid "ButtonBar|Edit"
+msgstr ""
 
-msgid "RenMov"
-msgstr "RenMov"
+msgid "ButtonBar|RenMov"
+msgstr ""
 
-msgid "Mkdir"
-msgstr "Mkdir"
+msgid "ButtonBar|Mkdir"
+msgstr ""
 
 msgid " Not implemented yet "
 msgstr ""
@@ -2890,6 +2867,12 @@ msgstr " Seleccionar página de códigos "
 
 msgid "-  < No translation >"
 msgstr "- < Sem tradução >"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot save file %s:\n"
+"%s"
+msgstr " Erro ao tentar gravar ficheiro. "
 
 #, c-format
 msgid ""
@@ -2992,20 +2975,20 @@ msgstr ""
 msgid "  Delete %s?  "
 msgstr "  Apagar %s?  "
 
-msgid "Static"
-msgstr "Estático"
+msgid "ButtonBar|Static"
+msgstr ""
 
-msgid "Dynamc"
-msgstr "Dinâmico"
+msgid "ButtonBar|Dynamc"
+msgstr ""
 
-msgid "Rescan"
-msgstr "Reprocurar"
+msgid "ButtonBar|Rescan"
+msgstr ""
 
-msgid "Forget"
-msgstr "Esquecer"
+msgid "ButtonBar|Forget"
+msgstr ""
 
-msgid "Rmdir"
-msgstr "Rmdir"
+msgid "ButtonBar|Rmdir"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -3152,10 +3135,6 @@ msgstr "Insert no teclado numérico"
 
 msgid "Delete on keypad"
 msgstr "Delete no teclado numérico"
-
-#, fuzzy
-msgid "Escape key"
-msgstr "Barra no teclado numérico"
 
 msgid "Enter on keypad"
 msgstr "Enter no teclado numérico"
@@ -3397,12 +3376,6 @@ msgstr " Incapaz de lançar aplicação filha "
 msgid "Empty output from child filter"
 msgstr ""
 
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Quit"
-msgstr ""
-
 msgid "ButtonBar|Ascii"
 msgstr ""
 
@@ -3415,15 +3388,6 @@ msgstr ""
 msgid "ButtonBar|Line"
 msgstr ""
 
-msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
 msgid "ButtonBar|UnWrap"
 msgstr ""
 
@@ -3431,9 +3395,6 @@ msgid "ButtonBar|Wrap"
 msgstr ""
 
 msgid "ButtonBar|HxSrch"
-msgstr ""
-
-msgid "ButtonBar|Search"
 msgstr ""
 
 msgid "ButtonBar|Raw"
@@ -3951,6 +3912,331 @@ msgstr "Erro interno:"
 msgid "Changes to file lost"
 msgstr "Modificações ao ficheiro perdidas"
 
+#~ msgid "Do backups -->"
+#~ msgstr "Fazer cópias de segurança -->"
+
+#~ msgid "Extension:"
+#~ msgstr "Extensão:"
+
+#~ msgid "&New              C-n"
+#~ msgstr "&Novo             C-n"
+
+#~ msgid "&Save              F2"
+#~ msgstr "&Gravar            F2"
+
+#~ msgid "Save &as...       F12"
+#~ msgstr "gravar &Como...   F12"
+
+#~ msgid "A&bout...            "
+#~ msgstr "so&Bre...            "
+
+#~ msgid "&Quit             F10"
+#~ msgstr "&Sair             F10"
+
+#~ msgid "&New            C-x k"
+#~ msgstr "&Novo           C-x k"
+
+#~ msgid "Copy to &file...     "
+#~ msgstr "copiar para &Ficheiro... "
+
+#, fuzzy
+#~ msgid "&Toggle mark                 F3"
+#~ msgstr "al&Ternar Marca    F3"
+
+#, fuzzy
+#~ msgid "Mar&k columns              S-F3"
+#~ msgstr "&Marcar Colunas  S-F3"
+
+#, fuzzy
+#~ msgid "&Copy                        F5"
+#~ msgstr "&Copiar             F5"
+
+#, fuzzy
+#~ msgid "&Move                        F6"
+#~ msgstr "&Mover             F6"
+
+#, fuzzy
+#~ msgid "&Delete                      F8"
+#~ msgstr "&Apagar             F8"
+
+#, fuzzy
+#~ msgid "&Next bookmark              M-j"
+#~ msgstr "&Novo             C-n"
+
+#, fuzzy
+#~ msgid "&Undo                       C-u"
+#~ msgstr "&Desfazer         C-u"
+
+#, fuzzy
+#~ msgid "&Beginning               C-PgUp"
+#~ msgstr "&Início        C-PgUp"
+
+#, fuzzy
+#~ msgid "&End                     C-PgDn"
+#~ msgstr "&Final         C-PgDn"
+
+#, fuzzy
+#~ msgid "C&opy to clipfile           M-w"
+#~ msgstr "&Ir para linha...        M-l"
+
+#, fuzzy
+#~ msgid "C&ut to clipfile            C-w"
+#~ msgstr "&Ir para linha...        M-l"
+
+#, fuzzy
+#~ msgid "Toggle bookmar&k               "
+#~ msgstr "al&Ternar Marca    F3"
+
+#, fuzzy
+#~ msgid "&Next bookmark                 "
+#~ msgstr "&Novo             C-n"
+
+#, fuzzy
+#~ msgid "Pre&v bookmark                 "
+#~ msgstr "&Ordenar...              M-t"
+
+#, fuzzy
+#~ msgid "&Flush bookmark                "
+#~ msgstr "E-&Mail...                  "
+
+#~ msgid "&Search...         F7"
+#~ msgstr "&Procurar...       F7"
+
+#~ msgid "&Replace...        F4"
+#~ msgstr "substitui&R...     F4"
+
+#~ msgid "&Go to line...            M-l"
+#~ msgstr "&Ir para linha...        M-l"
+
+#, fuzzy
+#~ msgid "Encod&ing...             M-e"
+#~ msgstr "&Ordenar...              M-t"
+
+#~ msgid "Delete macr&o...            "
+#~ msgstr "apagar macr&O...            "
+
+#~ msgid "Sor&t...                 M-t"
+#~ msgstr "&Ordenar...              M-t"
+
+#~ msgid "&Mail...                    "
+#~ msgstr "E-&Mail...                  "
+
+#~ msgid "&Execute macro... C-x e, KEY"
+#~ msgstr "&Executar macro... C-x e, KEY"
+
+#~ msgid "'ispell' s&pell check    M-$"
+#~ msgstr "verificação ortográfica 'is&Pell' M-$"
+
+#, fuzzy
+#~ msgid "Save setu&p"
+#~ msgstr "&Gravar configuração"
+
+#~ msgid " Edit "
+#~ msgstr " Edit "
+
+#~ msgid " Sear/Repl "
+#~ msgstr " Proc/Subst "
+
+#~ msgid " Command "
+#~ msgstr " Comando "
+
+#~ msgid " Options "
+#~ msgstr " Opções "
+
+#~ msgid "Intuitive"
+#~ msgstr "Intuitivo"
+
+#~ msgid "Emacs"
+#~ msgstr "Emacs"
+
+#, fuzzy
+#~ msgid "User-defined"
+#~ msgstr "Definida pelo &utilizador:"
+
+#~ msgid "Key emulation"
+#~ msgstr "Emulação de teclas"
+
+#~ msgid "Save"
+#~ msgstr "Gravar"
+
+#~ msgid "Mark"
+#~ msgstr "Marca"
+
+#~ msgid "Replac"
+#~ msgstr "Subst"
+
+#~ msgid "Move"
+#~ msgstr "Mover"
+
+#~ msgid "Delete"
+#~ msgstr "Apagar"
+
+#~ msgid "PullDn"
+#~ msgstr "PuxarAbaixo"
+
+#~ msgid " Copy "
+#~ msgstr " Copiar "
+
+#~ msgid " Move "
+#~ msgstr " Mover "
+
+#~ msgid " Delete "
+#~ msgstr " Apagar "
+
+#~ msgid "1Copy"
+#~ msgstr "1Copiar"
+
+#~ msgid "1Move"
+#~ msgstr "1Mover"
+
+#~ msgid "1Delete"
+#~ msgstr "1Apagar"
+
+#~ msgid "Index"
+#~ msgstr "Índice"
+
+#~ msgid "Prev"
+#~ msgstr "Ant"
+
+#~ msgid "&Quick view     C-x q"
+#~ msgstr "Vista &rápida   C-x q"
+
+#~ msgid "&Info           C-x i"
+#~ msgstr "&Info           C-x i"
+
+#~ msgid "&Rescan         C-r"
+#~ msgstr "&Reprocurar     C-r"
+
+#~ msgid "&View               F3"
+#~ msgstr "&Ver                F3"
+
+#~ msgid "Vie&w file...         "
+#~ msgstr "Ver fic&heiro...      "
+
+#~ msgid "&Filtered view     M-!"
+#~ msgstr "Vista &filtrada    M-!"
+
+#~ msgid "&Edit               F4"
+#~ msgstr "&Editar             F4"
+
+#~ msgid "&Copy               F5"
+#~ msgstr "&Copiar             F5"
+
+#~ msgid "c&Hmod           C-x c"
+#~ msgstr "c&Hmod           C-x c"
+
+#~ msgid "&Link            C-x l"
+#~ msgstr "&Ligação         C-x l"
+
+#~ msgid "&SymLink         C-x s"
+#~ msgstr "Ligação &simbólica C-x s"
+
+#~ msgid "edit s&Ymlink  C-x C-s"
+#~ msgstr "editar lig. s&imbólica C-x C-s"
+
+#~ msgid "ch&Own           C-x o"
+#~ msgstr "ch&own           C-x o"
+
+#~ msgid "&Rename/Move        F6"
+#~ msgstr "&Renomear/Mover     F6"
+
+#~ msgid "&Mkdir              F7"
+#~ msgstr "&Mkdir              F7"
+
+#~ msgid "&Delete             F8"
+#~ msgstr "&Apagar             F8"
+
+#~ msgid "&Quick cd          M-c"
+#~ msgstr "cd &Rápido         M-c"
+
+#~ msgid "select &Group      M-+"
+#~ msgstr "seleccionar &Grupo M-+"
+
+#~ msgid "u&Nselect group    M-\\"
+#~ msgstr "Desseleccio&nar grupo M-\\"
+
+#~ msgid "e&Xit              F10"
+#~ msgstr "S&air              F10"
+
+#~ msgid "&User menu          F2"
+#~ msgstr "Menu &utilizador    F2"
+
+#~ msgid "&Find file            M-?"
+#~ msgstr "Encontrar &ficheiro   M-?"
+
+#~ msgid "s&Wap panels          C-u"
+#~ msgstr "Tro&car paineis       C-u"
+
+#~ msgid "&Compare directories  C-x d"
+#~ msgstr "&Comparar directórios C-x d"
+
+#~ msgid "e&Xternal panelize    C-x !"
+#~ msgstr "tornar paineis e&Xternos C-x !"
+
+#, fuzzy
+#~ msgid "Command &history      M-h"
+#~ msgstr " Histórico de comando "
+
+#~ msgid "di&Rectory hotlist    C-\\"
+#~ msgstr "lista-top de di&rectórios C-\\"
+
+#~ msgid "&Background jobs      C-x j"
+#~ msgstr "Trabalhos em &fundo   C-x j"
+
+#~ msgid "learn &Keys..."
+#~ msgstr "aprender &Teclas..."
+
+#~ msgid " &File "
+#~ msgstr " &Ficheiro "
+
+#~ msgid " &Command "
+#~ msgstr " &Commando "
+
+#~ msgid "Menu"
+#~ msgstr "Menu"
+
+#, fuzzy
+#~ msgid "n"
+#~ msgstr "Activo"
+
+#, fuzzy
+#~ msgid "Extension"
+#~ msgstr "Extensão:"
+
+#~ msgid "Size"
+#~ msgstr "Tamanho"
+
+#~ msgid "MTime"
+#~ msgstr "MTime"
+
+#~ msgid "ATime"
+#~ msgstr "ATime"
+
+#~ msgid "CTime"
+#~ msgstr "CTime"
+
+#~ msgid "Inode"
+#~ msgstr "Inode"
+
+#~ msgid "RenMov"
+#~ msgstr "RenMov"
+
+#~ msgid "Static"
+#~ msgstr "Estático"
+
+#~ msgid "Dynamc"
+#~ msgstr "Dinâmico"
+
+#~ msgid "Forget"
+#~ msgstr "Esquecer"
+
+#~ msgid "Rmdir"
+#~ msgstr "Rmdir"
+
+#, fuzzy
+#~ msgid "Escape key"
+#~ msgstr "Barra no teclado numérico"
+
 #, fuzzy
 #~ msgid "bind: Unknown command: `%s'"
 #~ msgstr " Comando chown "
@@ -4044,15 +4330,8 @@ msgstr "Modificações ao ficheiro perdidas"
 #~ msgid "&Delete            F8"
 #~ msgstr "&Apagar            F8"
 
-#, fuzzy
-#~ msgid "Save setu&p..."
-#~ msgstr "&Gravar configuração"
-
 #~ msgid " The command history is empty "
 #~ msgstr " O histórico de comando está vazio "
-
-#~ msgid "command &History"
-#~ msgstr "&Histórico de comandos"
 
 #~ msgid "Edit edi&tor menu file"
 #~ msgstr "Editar edi&tor de menu"
@@ -4089,9 +4368,6 @@ msgstr "Modificações ao ficheiro perdidas"
 
 #~ msgid "&Type"
 #~ msgstr "&Tipo"
-
-#~ msgid "&Links"
-#~ msgstr "Ata&lhos"
 
 #~ msgid "N&GID"
 #~ msgstr "N&GID"

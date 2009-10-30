@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc \n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-09 09:50+0300\n"
+"POT-Creation-Date: 2009-10-30 10:39+0200\n"
 "PO-Revision-Date: 2000-06-22 00:00+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -51,6 +51,30 @@ msgstr " Pogled ni mogoč: ni običajna datoteka "
 msgid " File %s is too large "
 msgstr " Datoteka je prevelika: "
 
+msgid " About "
+msgstr " O "
+
+msgid ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       A user friendly text editor written\n"
+"           for the Midnight Commander.\n"
+msgstr ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+"       Avtorske pravice pridržane (C) 1996\n"
+"          Fundacija za prosto programje\n"
+"\n"
+"       Uporabniku prijazen urejevalnik besedil\n"
+"           za Polnočnega poveljnika.\n"
+
+msgid "&OK"
+msgstr "&V redu"
+
 msgid "Macro recursion is too deep"
 msgstr "Rekurzija makra je pregloboka"
 
@@ -88,23 +112,29 @@ msgstr " Ne morem odpreti cevi za pisanje: "
 msgid " Cannot open file for writing: %s "
 msgstr " Ne morem odpreti cevi za pisanje: "
 
-msgid "Quick save "
+#, fuzzy
+msgid "&Quick save"
 msgstr "Hitra shranitev"
 
-msgid "Safe save "
+#, fuzzy
+msgid "&Safe save"
 msgstr "Varna shranitev"
 
-msgid "Do backups -->"
-msgstr "Delaj varnostne kopije -->"
+msgid "&Do backups with following extension:"
+msgstr ""
 
-msgid "&OK"
-msgstr "&V redu"
-
-msgid "Extension:"
-msgstr "Pripona:"
+msgid "Check &POSIX new line"
+msgstr ""
 
 msgid " Edit Save Mode "
 msgstr " Uredi Shranjevalni Način"
+
+msgid "The file you are saving is not finished with a newline"
+msgstr ""
+
+#, fuzzy
+msgid "C&ontinue"
+msgstr "Nadaljuj"
 
 msgid "&Do not change"
 msgstr ""
@@ -176,10 +206,6 @@ msgid ""
 msgstr ""
 " Trenutno besedilo je bilo spremenjeno, a ne shranjeno. \n"
 " Z Nadaljuj bodo te spremembe zavržene. "
-
-#, fuzzy
-msgid "C&ontinue"
-msgstr "Nadaljuj"
 
 msgid "Syntax file edit"
 msgstr "Urejanje datoteke s sintakso"
@@ -400,239 +426,196 @@ msgstr ""
 msgid "&Ignore lock"
 msgstr ""
 
-msgid " About "
-msgstr " O "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-"       Avtorske pravice pridržane (C) 1996\n"
-"          Fundacija za prosto programje\n"
-"\n"
-"       Uporabniku prijazen urejevalnik besedil\n"
-"           za Polnočnega poveljnika.\n"
-
 msgid "&Open file..."
 msgstr "&Odpri datoteko..."
 
-msgid "&New              C-n"
-msgstr "&Nova             C-n"
+#, fuzzy
+msgid "&New"
+msgstr "&Ime"
 
-msgid "&Save              F2"
-msgstr "&Shrani            F2"
+#, fuzzy
+msgid "Save &as..."
+msgstr "&Shrani nastavitve"
 
-msgid "Save &as...       F12"
-msgstr "shrani &kot...    F12"
-
-msgid "&Insert file...   F15"
+#, fuzzy
+msgid "&Insert file..."
 msgstr "vstav&i datoteko  F15"
 
-msgid "Copy to &file...  C-f"
+#, fuzzy
+msgid "Cop&y to file..."
 msgstr "kopiraj v &datoteko C-f"
 
-msgid "&User menu...     F11"
+#, fuzzy
+msgid "&User menu..."
 msgstr "&Uporabnikov menu F11"
 
-msgid "A&bout...            "
-msgstr "&O...                "
+#, fuzzy
+msgid "A&bout..."
+msgstr "&Postavitev..."
 
-msgid "&Quit             F10"
-msgstr "&Izhod            F10"
-
-msgid "&New            C-x k"
-msgstr "&Novo           C-x k"
-
-msgid "Copy to &file...     "
-msgstr "Kopiraj v &datoteko..."
+msgid "&Quit"
+msgstr "&Končaj"
 
 #, fuzzy
-msgid "&Toggle mark                 F3"
-msgstr "&Preklopi označbo  F3"
+msgid "&Toggle mark"
+msgstr "&Počisti označeno"
+
+msgid "&Mark columns"
+msgstr ""
 
 #, fuzzy
-msgid "Mar&k columns              S-F3"
-msgstr "&Označi stolpce  S-F3"
-
-#, fuzzy
-msgid "Toggle &ins/overw           Ins"
+msgid "Toggle &ins/overw"
 msgstr "Preklopi način &pisanja "
 
 #, fuzzy
-msgid "&Copy                        F5"
-msgstr "&Kopiraj            F5"
+msgid "&Copy"
+msgstr "Kopiraj"
+
+msgid "&Move"
+msgstr "&Prestavi"
+
+msgid "&Delete"
+msgstr "&Zbriši"
 
 #, fuzzy
-msgid "&Move                        F6"
-msgstr "&Prestavi          F6"
-
-#, fuzzy
-msgid "&Delete                      F8"
-msgstr "&Zbriši             F8"
-
-#, fuzzy
-msgid "C&opy to clipfile         C-Ins"
+msgid "C&opy to clipfile"
 msgstr "Kopiraj v &datoteko..."
 
 #, fuzzy
-msgid "C&ut to clipfile          S-Del"
+msgid "C&ut to clipfile"
 msgstr "&Pojdi v vrstico...       M-l"
 
-msgid "&Paste from clipfile      S-Ins"
+msgid "&Paste from clipfile"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k            M-k"
+msgid "Toggle bookmar&k"
 msgstr "&Preklopi označbo  F3"
 
 #, fuzzy
-msgid "&Next bookmark              M-j"
-msgstr "&Nova             C-n"
+msgid "&Next bookmark"
+msgstr "&Nastavi oznako"
 
 #, fuzzy
-msgid "Pre&v bookmark              M-i"
+msgid "Pre&v bookmark"
 msgstr "Sor&tiraj...             M-t"
 
 #, fuzzy
-msgid "&Flush bookmark             M-o"
+msgid "&Flush bookmark"
 msgstr "&Pošlji...                    "
 
-#, fuzzy
-msgid "&Undo                       C-u"
-msgstr "&Razveljavi       C-u"
+msgid "&Undo"
+msgstr ""
 
-#, fuzzy
-msgid "&Beginning               C-PgUp"
-msgstr "&Začetek       C-PgUp"
-
-#, fuzzy
-msgid "&End                     C-PgDn"
-msgstr "&Konec         C-PgDn"
-
-#, fuzzy
-msgid "C&opy to clipfile           M-w"
-msgstr "&Pojdi v vrstico...       M-l"
-
-#, fuzzy
-msgid "C&ut to clipfile            C-w"
-msgstr "&Pojdi v vrstico...       M-l"
-
-msgid "&Paste from clipfile        C-y"
+msgid "&Beginning"
 msgstr ""
 
 #, fuzzy
-msgid "Toggle bookmar&k               "
-msgstr "&Preklopi označbo  F3"
+msgid "&End"
+msgstr "&Inode"
 
 #, fuzzy
-msgid "&Next bookmark                 "
-msgstr "&Nova             C-n"
+msgid "&Search..."
+msgstr "Iskanje"
 
 #, fuzzy
-msgid "Pre&v bookmark                 "
-msgstr "Sor&tiraj...             M-t"
-
-#, fuzzy
-msgid "&Flush bookmark                "
-msgstr "&Pošlji...                    "
-
-msgid "&Search...         F7"
-msgstr "&Iskanje...        F7"
-
-msgid "Search &again     F17"
+msgid "Search &again"
 msgstr "Išči znov&a       F17"
 
-msgid "&Replace...        F4"
-msgstr "&Zamenjaj...       F4"
-
-msgid "&Go to line...            M-l"
-msgstr "&Pojdi v vrstico...       M-l"
+#, fuzzy
+msgid "&Replace..."
+msgstr "&Zamenjaj"
 
 #, fuzzy
-msgid "Toggle li&ne state        M-n"
+msgid "&Go to line..."
+msgstr " Pojdi v vrstico "
+
+#, fuzzy
+msgid "Toggle li&ne state"
 msgstr "&Preklopi označbo  F3"
 
-msgid "Go to matching &bracket   M-b"
+#, fuzzy
+msgid "Go to matching &bracket"
 msgstr "Pojdi na &zaklepaj        M-b"
 
-msgid "Find declaration      A-Enter"
+#, fuzzy
+msgid "Find declaration"
+msgstr "Poišči zavrnjene po patchingu"
+
+msgid "Back from declaration"
 msgstr ""
 
-msgid "Back from declaration     M--"
-msgstr ""
-
-msgid "Forward to declaration    M-+"
+msgid "Forward to declaration"
 msgstr ""
 
 #, fuzzy
-msgid "Encod&ing...             M-e"
+msgid "Encod&ing..."
 msgstr "Sor&tiraj...             M-t"
 
-msgid "Insert &literal...       C-q"
-msgstr "Vstavi &dobesedno...     C-q"
-
-msgid "&Refresh screen          C-l"
+#, fuzzy
+msgid "&Refresh screen"
 msgstr "&Obnovi zaslon"
 
-msgid "&Start record macro      C-r"
+#, fuzzy
+msgid "&Start record macro"
 msgstr "&Začni snemanje makra     C-r"
 
-msgid "&Finish record macro...  C-r"
+#, fuzzy
+msgid "&Finish record macro..."
 msgstr "&Končaj snemanje makra   C-r"
 
-msgid "&Execute macro...   C-a, KEY"
+#, fuzzy
+msgid "&Execute macro..."
 msgstr "&Izvedi makro... C-a, TIPKA"
 
-msgid "Delete macr&o...            "
-msgstr "Zbriši makr&o...            "
+#, fuzzy
+msgid "Delete macr&o..."
+msgstr " Zbriši makro "
 
-msgid "Insert &date/time           "
-msgstr "Vstavi &datum/čas           "
-
-msgid "Format p&aragraph        M-p"
-msgstr "Oblikuj &odstavek        M-p"
-
-msgid "'ispell' s&pell check    C-p"
+#, fuzzy
+msgid "'ispell' s&pell check"
 msgstr "č&rkovalnik ispell       C-p"
 
-msgid "Sor&t...                 M-t"
-msgstr "Sor&tiraj...             M-t"
+#, fuzzy
+msgid "&Mail..."
+msgstr "&Filter..."
 
-msgid "Paste o&utput of...      M-u"
+#, fuzzy
+msgid "Insert &literal..."
+msgstr "Vstavi &dobesedno...     C-q"
+
+#, fuzzy
+msgid "Insert &date/time"
+msgstr "Vstavi &datum/čas           "
+
+#, fuzzy
+msgid "Format p&aragraph"
+msgstr "Oblikuj &odstavek        M-p"
+
+#, fuzzy
+msgid "Sor&t..."
+msgstr "&Vrstni red..."
+
+msgid "Paste o&utput of..."
 msgstr ""
 
-msgid "E&xternal Formatter      F19"
+#, fuzzy
+msgid "E&xternal formatter"
 msgstr "&Zunanji formater        F19"
-
-msgid "&Mail...                    "
-msgstr "&Pošlji...                    "
-
-msgid "&Execute macro... C-x e, KEY"
-msgstr "&Izvedi makro.  C-x e, TIPKA"
-
-msgid "'ispell' s&pell check    M-$"
-msgstr "Č&rkovalnik ispell       M-$"
 
 msgid "&General...  "
 msgstr "&Splošno...  "
 
-msgid "&Save mode..."
+#, fuzzy
+msgid "Save &mode..."
 msgstr "način &Shranjevanja..."
 
 #, fuzzy
-msgid "Learn &Keys..."
+msgid "Learn &keys..."
 msgstr "nauči se &Tipk..."
 
 #, fuzzy
-msgid "Syntax &Highlighting..."
+msgid "Syntax &highlighting..."
 msgstr "Osvetlitev &sintakse"
 
 #, fuzzy
@@ -643,34 +626,32 @@ msgstr "Urejanje datoteke s sintakso"
 msgid "&Menu file"
 msgstr "Uredi &menujsko datoteko"
 
-#, fuzzy
-msgid "Save setu&p"
+msgid "&Save setup"
 msgstr "&Shrani nastavitve"
 
-msgid " File "
-msgstr "Datoteka "
-
-msgid " Edit "
-msgstr " Uredi "
-
-msgid " Sear/Repl "
-msgstr " Išči/Zame"
-
-msgid " Command "
-msgstr " Ukaz "
-
-msgid " Options "
-msgstr " Možnosti "
-
-msgid "Intuitive"
-msgstr "Intuitiven"
-
-msgid "Emacs"
-msgstr "Emacs"
+#, fuzzy
+msgid "&File"
+msgstr "Datoteka"
 
 #, fuzzy
-msgid "User-defined"
-msgstr "&Prikorjeno:"
+msgid "&Edit"
+msgstr "Uredi"
+
+#, fuzzy
+msgid "&Search"
+msgstr "Iskanje"
+
+#, fuzzy
+msgid "&Command"
+msgstr "Ukaz"
+
+#, fuzzy
+msgid "For&mat"
+msgstr "Oblikuj izpis"
+
+#, fuzzy
+msgid "&Options"
+msgstr " &Možnosti "
 
 msgid "None"
 msgstr "Brez"
@@ -683,9 +664,6 @@ msgstr "Prevoj tipkalnega stroja"
 
 msgid "Word wrap line length: "
 msgstr "Dolžina vrstice za lom: "
-
-msgid "Tab spacing: "
-msgstr "Velikost tabulatorja: "
 
 msgid "Cursor beyond end of line"
 msgstr ""
@@ -709,11 +687,14 @@ msgstr " Shrani &mesto datoteke"
 msgid "Confir&m before saving"
 msgstr "&Potrdi pred shranitvijo"
 
-msgid "Fill tabs with &spaces"
-msgstr "Zapolni tabulatorje s pre&sledki"
-
 msgid "&Return does autoindent"
 msgstr "ente&R samodejno zamika"
+
+msgid "Tab spacing: "
+msgstr "Velikost tabulatorja: "
+
+msgid "Fill tabs with &spaces"
+msgstr "Zapolni tabulatorje s pre&sledki"
 
 msgid "&Backspace through tabs"
 msgstr "&Vračalka skozi tabulatorje"
@@ -724,35 +705,38 @@ msgstr "&Ponaredi polovične tabulatorje"
 msgid "Wrap mode"
 msgstr "Način zavijanja"
 
-msgid "Key emulation"
-msgstr "Emulacija tipk"
-
 msgid " Editor options "
 msgstr " Možnosti urejevalnika"
 
-msgid "Help"
-msgstr "Pomoč"
+msgid "ButtonBar|Help"
+msgstr ""
 
-msgid "Save"
-msgstr "Shrani"
+msgid "ButtonBar|Save"
+msgstr ""
 
-msgid "Mark"
-msgstr "Oznaka"
+msgid "ButtonBar|Mark"
+msgstr ""
 
-msgid "Replac"
-msgstr "Zamenj"
+msgid "ButtonBar|Replac"
+msgstr ""
 
-msgid "Copy"
-msgstr "Kopiraj"
+msgid "ButtonBar|Copy"
+msgstr ""
 
-msgid "Move"
-msgstr "Prestavi"
+msgid "ButtonBar|Move"
+msgstr ""
 
-msgid "Delete"
-msgstr "Zbriši"
+msgid "ButtonBar|Search"
+msgstr ""
 
-msgid "PullDn"
-msgstr "Potegni Dol"
+msgid "ButtonBar|Delete"
+msgstr ""
+
+msgid "ButtonBar|PullDn"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
 
 msgid " Load syntax file "
 msgstr " Naloži datoteko s sintakso"
@@ -1215,6 +1199,9 @@ msgstr "in T ali INS za označitev"
 msgid " Permission "
 msgstr " Dovoljenje "
 
+msgid " File "
+msgstr "Datoteka "
+
 msgid "Chmod command"
 msgstr "Chmod ukaz"
 
@@ -1480,14 +1467,14 @@ msgid ""
 "it."
 msgstr ""
 
-msgid " Copy "
-msgstr " Kopiraj "
+msgid "DialogTitle|Copy"
+msgstr ""
 
-msgid " Move "
-msgstr " Prestavi "
+msgid "DialogTitle|Move"
+msgstr ""
 
-msgid " Delete "
-msgstr " Zbriši "
+msgid "DialogTitle|Delete"
+msgstr ""
 
 msgid " Cannot make the hardlink "
 msgstr " Ne morem ustvariti močne povezave "
@@ -1642,9 +1629,6 @@ msgstr ""
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr "Datoteka je bila prenešena nepopolno. Naj ostane?"
 
-msgid "&Delete"
-msgstr "&Zbriši"
-
 msgid "&Keep"
 msgstr "&Obdrži"
 
@@ -1768,14 +1752,14 @@ msgstr ""
 msgid "Directory scanning"
 msgstr "Pot imenika"
 
-msgid "1Copy"
-msgstr "1Kopiraj"
+msgid "FileOperation|Copy"
+msgstr ""
 
-msgid "1Move"
-msgstr "1Prestavi"
+msgid "FileOperation|Move"
+msgstr ""
 
-msgid "1Delete"
-msgstr "1Zbriši"
+msgid "FileOperation|Delete"
+msgstr ""
 
 #, no-c-format
 msgid "%o %f \"%s\"%m"
@@ -1805,6 +1789,10 @@ msgstr " z masko izvira:"
 
 msgid " to:"
 msgstr " v:"
+
+#, c-format
+msgid "%s?"
+msgstr ""
 
 msgid " Cannot operate on \"..\"! "
 msgstr " Ne morem operirati nad \"..\"! "
@@ -1954,9 +1942,6 @@ msgstr "&Chdir"
 msgid "&Again"
 msgstr "&Znova"
 
-msgid "&Quit"
-msgstr "&Končaj"
-
 msgid "Pane&lize"
 msgstr "Daj v Pu&lt"
 
@@ -2042,14 +2027,14 @@ msgstr " Notranja napaka: Dvojni začetek povezav"
 msgid " Cannot find node %s in help file "
 msgstr " V datoteki s pomočjo ne najdem vozlišča %s"
 
-msgid "Index"
-msgstr "Kazalo"
+msgid "Help"
+msgstr "Pomoč"
 
-msgid "Prev"
-msgstr "Nazaj"
+msgid "ButtonBar|Index"
+msgstr ""
 
-msgid "&Move"
-msgstr "&Prestavi"
+msgid "ButtonBar|Prev"
+msgstr ""
 
 msgid "&Remove"
 msgstr "&Odstrani"
@@ -2359,11 +2344,13 @@ msgstr " Zares želite zapreti Polnočnega poveljnika? "
 msgid "&Listing mode..."
 msgstr "&Seznamski način..."
 
-msgid "&Quick view     C-x q"
-msgstr "&Hitri pogled   C-x q"
+#, fuzzy
+msgid "&Quick view"
+msgstr "Hitra shranitev"
 
-msgid "&Info           C-x i"
-msgstr "&Podatki        C-x i"
+#, fuzzy
+msgid "&Info"
+msgstr "&Inode"
 
 msgid "&Sort order..."
 msgstr "&Vrstni red..."
@@ -2372,7 +2359,7 @@ msgid "&Filter..."
 msgstr "&Filter..."
 
 #, fuzzy
-msgid "&Encoding...    M-e"
+msgid "&Encoding..."
 msgstr "Sor&tiraj...             M-t"
 
 msgid "&Network link..."
@@ -2387,102 +2374,117 @@ msgstr "&Lupinska povezava..."
 msgid "SM&B link..."
 msgstr "SM&B povezava..."
 
-msgid "&Rescan         C-r"
-msgstr "&Osveži         C-r"
+#, fuzzy
+msgid "&Rescan"
+msgstr "Osveži"
 
-msgid "&View               F3"
-msgstr "&Pogled             F3"
+#, fuzzy
+msgid "&View"
+msgstr "Pogled"
 
-msgid "Vie&w file...         "
-msgstr "Po&glej datoteko...   "
+#, fuzzy
+msgid "Vie&w file..."
+msgstr " Pogled datoteke"
 
-msgid "&Filtered view     M-!"
-msgstr "&Filtriran pogled  M-!"
+#, fuzzy
+msgid "&Filtered view"
+msgstr " Fitriran pogled"
 
-msgid "&Edit               F4"
-msgstr "ur&Edi              F4"
+msgid "C&hmod"
+msgstr ""
 
-msgid "&Copy               F5"
-msgstr "&Kopiraj            F5"
+#, fuzzy
+msgid "&Link"
+msgstr "&Povezave"
 
-msgid "c&Hmod           C-x c"
-msgstr "c&Hmod           C-x c"
+#, fuzzy
+msgid "&SymLink"
+msgstr "&Povezave"
 
-msgid "&Link            C-x l"
-msgstr "&Povezava        X-x l"
+#, fuzzy
+msgid "Edit s&ymlink"
+msgstr " Uredi simbolično povezavo "
 
-msgid "&SymLink         C-x s"
-msgstr "&Simb. povezava  C-x s"
+msgid "Ch&own"
+msgstr ""
 
-msgid "edit s&Ymlink  C-x C-s"
-msgstr "uredi s&imb. povez. C-x C-s"
-
-msgid "ch&Own           C-x o"
-msgstr "ch&Own           C-x o"
-
-msgid "&Advanced chown       "
+#, fuzzy
+msgid "&Advanced chown"
 msgstr "&Napredni chown"
 
-msgid "&Rename/Move        F6"
-msgstr "p&Reimenuj/Prestavi F6"
+#, fuzzy
+msgid "&Rename/Move"
+msgstr "&Odstrani"
 
-msgid "&Mkdir              F7"
-msgstr "Ustvari &Imenik     F7"
+#, fuzzy
+msgid "&Mkdir"
+msgstr "Mkdir"
 
-msgid "&Delete             F8"
-msgstr "&Zbriši             F8"
+#, fuzzy
+msgid "&Quick cd"
+msgstr "Hitri cd"
 
-msgid "&Quick cd          M-c"
-msgstr "&Hitra sprememba imenika M-c"
+#, fuzzy
+msgid "Select &group"
+msgstr "Nastavi &skupine"
 
-msgid "select &Group      M-+"
-msgstr "izberi &Skupino    M-+"
+#, fuzzy
+msgid "U&nselect group"
+msgstr " Prekliči izbor "
 
-msgid "u&Nselect group    M-\\"
-msgstr "o&Dizberi skupino  M-\\"
-
-msgid "reverse selec&Tion M-*"
+#, fuzzy
+msgid "Reverse selec&tion"
 msgstr "obrni iz&Biro      M-*"
 
-msgid "e&Xit              F10"
-msgstr "&Izhod             F10"
+#, fuzzy
+msgid "E&xit"
+msgstr "Uredi"
 
-msgid "&User menu          F2"
-msgstr "&Uporabnikov menu   F2"
+#, fuzzy
+msgid "&User menu"
+msgstr " Uporabnikov menu "
 
 msgid "&Directory tree"
 msgstr "&Drevo imenikov"
 
-msgid "&Find file            M-?"
-msgstr "&Poišči datoteko      M-?"
+#, fuzzy
+msgid "&Find file"
+msgstr "Poišči datoteko"
 
-msgid "s&Wap panels          C-u"
-msgstr "za&Menjaj pulta       C-u"
+msgid "S&wap panels"
+msgstr ""
 
-msgid "switch &Panels on/off C-o"
+#, fuzzy
+msgid "Switch &panels on/off"
 msgstr "v/izklopi &Pulta      C-o"
 
-msgid "&Compare directories  C-x d"
-msgstr "&Primerjaj imenika    C-x d"
+#, fuzzy
+msgid "&Compare directories"
+msgstr " Primerjaj imenike "
 
-msgid "e&Xternal panelize    C-x !"
-msgstr "&V pult od zunaj      C-x !"
+#, fuzzy
+msgid "E&xternal panelize"
+msgstr "V pult od zunaj"
 
-msgid "show directory s&Izes"
+#, fuzzy
+msgid "Show directory s&izes"
 msgstr "kaži velikosti &Imenikov"
 
 #, fuzzy
-msgid "Command &history      M-h"
-msgstr " Zgodovina ukazov"
+msgid "Command &history"
+msgstr "zgodovina &Ukazov"
 
-msgid "di&Rectory hotlist    C-\\"
-msgstr "v&Roč seznam imenikov  C-\\"
+#, fuzzy
+msgid "Di&rectory hotlist"
+msgstr " Vroča lista imenikov"
 
-msgid "&Active VFS list      C-x a"
+#, fuzzy
+msgid "&Active VFS list"
 msgstr "dej&Avni VFS seznam   C-x a"
 
-msgid "&Background jobs      C-x j"
-msgstr "Posli v &Ozadju       C-x j"
+#, fuzzy
+msgid "&Background jobs"
+msgstr "Posli v ozadju"
 
 msgid "&Undelete files (ext2fs only)"
 msgstr "&Odbriši datoteke (samo ext2fs)"
@@ -2505,40 +2507,30 @@ msgstr "&Nastavitve..."
 msgid "&Layout..."
 msgstr "&Postavitev..."
 
-msgid "c&Onfirmation..."
+#, fuzzy
+msgid "C&onfirmation..."
 msgstr "&Potrditev..."
 
 msgid "&Display bits..."
 msgstr "&Kaži bite..."
 
-msgid "learn &Keys..."
-msgstr "nauči se &Tipk..."
-
 msgid "&Virtual FS..."
 msgstr "&Navidezni Datotečni Sistem..."
 
-msgid "&Save setup"
-msgstr "&Shrani nastavitve"
-
-msgid " &Above "
+#, fuzzy
+msgid "&Above"
 msgstr " &Nad "
 
-msgid " &Left "
+#, fuzzy
+msgid "&Left"
 msgstr " &Levo "
 
-msgid " &File "
-msgstr " &Datoteka "
-
-msgid " &Command "
-msgstr " &Ukaz "
-
-msgid " &Options "
-msgstr " &Možnosti "
-
-msgid " &Below "
+#, fuzzy
+msgid "&Below"
 msgstr " &Pod "
 
-msgid " &Right "
+#, fuzzy
+msgid "&Right"
 msgstr " &Desno "
 
 msgid " Information "
@@ -2555,8 +2547,8 @@ msgstr ""
 " ročno osvežiti imenik. Poglejte si priročnik (man)  \n"
 " za podrobnosti.                                     "
 
-msgid "Menu"
-msgstr "Menu"
+msgid "ButtonBar|Menu"
+msgstr ""
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "TERM okoljska spremenljivka ni nastavljena!\n"
@@ -2708,41 +2700,34 @@ msgid "SUB-DIR"
 msgstr "POD-IMENIK"
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
-msgid "u"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|u"
 msgstr ""
-
-#, fuzzy
-msgid "Unsorted"
-msgstr "ne&Sortirano"
 
 msgid "&Unsorted"
 msgstr "ne&Sortirano"
 
 #. TRANSLATORS: one single character to represent 'name' sort mode
-#, fuzzy
-msgid "n"
-msgstr "Vklopljeno"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|n"
+msgstr ""
 
 msgid "&Name"
 msgstr "&Ime"
 
 #. TRANSLATORS: one single character to represent 'extension' sort mode
-msgid "e"
-msgstr ""
-
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 #, fuzzy
-msgid "Extension"
-msgstr "Pripona:"
+msgid "sort|e"
+msgstr "ne&Sortirano"
 
 msgid "&Extension"
 msgstr "&Pripona"
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
-msgid "s"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|s"
 msgstr ""
-
-msgid "Size"
-msgstr "Velikost"
 
 msgid "&Size"
 msgstr "&Velikost"
@@ -2752,31 +2737,25 @@ msgid "Block Size"
 msgstr " Velikost "
 
 #. TRANSLATORS: one single character to represent 'Modify time' sort mode
-msgid "m"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|m"
 msgstr ""
-
-msgid "MTime"
-msgstr "MČas"
 
 msgid "&Modify time"
 msgstr "Čas &Modifikacije"
 
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
-msgid "a"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|a"
 msgstr ""
-
-msgid "ATime"
-msgstr "DČas"
 
 msgid "&Access time"
 msgstr "čas &Dostopa"
 
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
-msgid "h"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|h"
 msgstr ""
-
-msgid "CTime"
-msgstr "SČas"
 
 msgid "C&Hange time"
 msgstr "Čas &Spremembe"
@@ -2791,11 +2770,9 @@ msgid "Nl"
 msgstr "Nl"
 
 #. TRANSLATORS: one single character to represent 'inode' sort mode
-msgid "i"
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|i"
 msgstr ""
-
-msgid "Inode"
-msgstr "Inode"
 
 msgid "&Inode"
 msgstr "&Inode"
@@ -2837,17 +2814,17 @@ msgstr ""
 msgid " Do you really want to execute? "
 msgstr " Zares želite pognati?"
 
-msgid "View"
-msgstr "Pogled"
+msgid "ButtonBar|View"
+msgstr ""
 
-msgid "Edit"
-msgstr "Uredi"
+msgid "ButtonBar|Edit"
+msgstr ""
 
-msgid "RenMov"
-msgstr "RenMov"
+msgid "ButtonBar|RenMov"
+msgstr ""
 
-msgid "Mkdir"
-msgstr "Mkdir"
+msgid "ButtonBar|Mkdir"
+msgstr ""
 
 msgid " Not implemented yet "
 msgstr ""
@@ -2878,6 +2855,12 @@ msgstr " Izberite vhodni nabor znakov"
 
 msgid "-  < No translation >"
 msgstr "- < Brez prevoda >"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot save file %s:\n"
+"%s"
+msgstr " Ne morem shraniti datoteke. "
 
 #, c-format
 msgid ""
@@ -2980,20 +2963,20 @@ msgstr ""
 msgid "  Delete %s?  "
 msgstr "  Zbriši %s?"
 
-msgid "Static"
-msgstr "Statična"
+msgid "ButtonBar|Static"
+msgstr ""
 
-msgid "Dynamc"
-msgstr "Dinamična"
+msgid "ButtonBar|Dynamc"
+msgstr ""
 
-msgid "Rescan"
-msgstr "Osveži"
+msgid "ButtonBar|Rescan"
+msgstr ""
 
-msgid "Forget"
-msgstr "Pozabi"
+msgid "ButtonBar|Forget"
+msgstr ""
 
-msgid "Rmdir"
-msgstr "Rmdir"
+msgid "ButtonBar|Rmdir"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -3140,10 +3123,6 @@ msgstr "Tipka Insert na številčni tipkovnici"
 
 msgid "Delete on keypad"
 msgstr "Tipka Delete na številčni tipkovnici"
-
-#, fuzzy
-msgid "Escape key"
-msgstr "Poševnica na številčni tipkovnici"
 
 msgid "Enter on keypad"
 msgstr "Enter na številčni tipkovnici"
@@ -3381,12 +3360,6 @@ msgstr " Ne morem pognati podrejenega programa "
 msgid "Empty output from child filter"
 msgstr "Prazen izhod iz podprograma - filtra"
 
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Quit"
-msgstr ""
-
 msgid "ButtonBar|Ascii"
 msgstr ""
 
@@ -3399,15 +3372,6 @@ msgstr ""
 msgid "ButtonBar|Line"
 msgstr ""
 
-msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
 msgid "ButtonBar|UnWrap"
 msgstr ""
 
@@ -3415,9 +3379,6 @@ msgid "ButtonBar|Wrap"
 msgstr ""
 
 msgid "ButtonBar|HxSrch"
-msgstr ""
-
-msgid "ButtonBar|Search"
 msgstr ""
 
 msgid "ButtonBar|Raw"
@@ -3936,6 +3897,331 @@ msgstr "Interna napaka:"
 msgid "Changes to file lost"
 msgstr "Spremembe v datoteki izgubljene"
 
+#~ msgid "Do backups -->"
+#~ msgstr "Delaj varnostne kopije -->"
+
+#~ msgid "Extension:"
+#~ msgstr "Pripona:"
+
+#~ msgid "&New              C-n"
+#~ msgstr "&Nova             C-n"
+
+#~ msgid "&Save              F2"
+#~ msgstr "&Shrani            F2"
+
+#~ msgid "Save &as...       F12"
+#~ msgstr "shrani &kot...    F12"
+
+#~ msgid "A&bout...            "
+#~ msgstr "&O...                "
+
+#~ msgid "&Quit             F10"
+#~ msgstr "&Izhod            F10"
+
+#~ msgid "&New            C-x k"
+#~ msgstr "&Novo           C-x k"
+
+#~ msgid "Copy to &file...     "
+#~ msgstr "Kopiraj v &datoteko..."
+
+#, fuzzy
+#~ msgid "&Toggle mark                 F3"
+#~ msgstr "&Preklopi označbo  F3"
+
+#, fuzzy
+#~ msgid "Mar&k columns              S-F3"
+#~ msgstr "&Označi stolpce  S-F3"
+
+#, fuzzy
+#~ msgid "&Copy                        F5"
+#~ msgstr "&Kopiraj            F5"
+
+#, fuzzy
+#~ msgid "&Move                        F6"
+#~ msgstr "&Prestavi          F6"
+
+#, fuzzy
+#~ msgid "&Delete                      F8"
+#~ msgstr "&Zbriši             F8"
+
+#, fuzzy
+#~ msgid "&Next bookmark              M-j"
+#~ msgstr "&Nova             C-n"
+
+#, fuzzy
+#~ msgid "&Undo                       C-u"
+#~ msgstr "&Razveljavi       C-u"
+
+#, fuzzy
+#~ msgid "&Beginning               C-PgUp"
+#~ msgstr "&Začetek       C-PgUp"
+
+#, fuzzy
+#~ msgid "&End                     C-PgDn"
+#~ msgstr "&Konec         C-PgDn"
+
+#, fuzzy
+#~ msgid "C&opy to clipfile           M-w"
+#~ msgstr "&Pojdi v vrstico...       M-l"
+
+#, fuzzy
+#~ msgid "C&ut to clipfile            C-w"
+#~ msgstr "&Pojdi v vrstico...       M-l"
+
+#, fuzzy
+#~ msgid "Toggle bookmar&k               "
+#~ msgstr "&Preklopi označbo  F3"
+
+#, fuzzy
+#~ msgid "&Next bookmark                 "
+#~ msgstr "&Nova             C-n"
+
+#, fuzzy
+#~ msgid "Pre&v bookmark                 "
+#~ msgstr "Sor&tiraj...             M-t"
+
+#, fuzzy
+#~ msgid "&Flush bookmark                "
+#~ msgstr "&Pošlji...                    "
+
+#~ msgid "&Search...         F7"
+#~ msgstr "&Iskanje...        F7"
+
+#~ msgid "&Replace...        F4"
+#~ msgstr "&Zamenjaj...       F4"
+
+#~ msgid "&Go to line...            M-l"
+#~ msgstr "&Pojdi v vrstico...       M-l"
+
+#, fuzzy
+#~ msgid "Encod&ing...             M-e"
+#~ msgstr "Sor&tiraj...             M-t"
+
+#~ msgid "Delete macr&o...            "
+#~ msgstr "Zbriši makr&o...            "
+
+#~ msgid "Sor&t...                 M-t"
+#~ msgstr "Sor&tiraj...             M-t"
+
+#~ msgid "&Mail...                    "
+#~ msgstr "&Pošlji...                    "
+
+#~ msgid "&Execute macro... C-x e, KEY"
+#~ msgstr "&Izvedi makro.  C-x e, TIPKA"
+
+#~ msgid "'ispell' s&pell check    M-$"
+#~ msgstr "Č&rkovalnik ispell       M-$"
+
+#, fuzzy
+#~ msgid "Save setu&p"
+#~ msgstr "&Shrani nastavitve"
+
+#~ msgid " Edit "
+#~ msgstr " Uredi "
+
+#~ msgid " Sear/Repl "
+#~ msgstr " Išči/Zame"
+
+#~ msgid " Command "
+#~ msgstr " Ukaz "
+
+#~ msgid " Options "
+#~ msgstr " Možnosti "
+
+#~ msgid "Intuitive"
+#~ msgstr "Intuitiven"
+
+#~ msgid "Emacs"
+#~ msgstr "Emacs"
+
+#, fuzzy
+#~ msgid "User-defined"
+#~ msgstr "&Prikorjeno:"
+
+#~ msgid "Key emulation"
+#~ msgstr "Emulacija tipk"
+
+#~ msgid "Save"
+#~ msgstr "Shrani"
+
+#~ msgid "Mark"
+#~ msgstr "Oznaka"
+
+#~ msgid "Replac"
+#~ msgstr "Zamenj"
+
+#~ msgid "Move"
+#~ msgstr "Prestavi"
+
+#~ msgid "Delete"
+#~ msgstr "Zbriši"
+
+#~ msgid "PullDn"
+#~ msgstr "Potegni Dol"
+
+#~ msgid " Copy "
+#~ msgstr " Kopiraj "
+
+#~ msgid " Move "
+#~ msgstr " Prestavi "
+
+#~ msgid " Delete "
+#~ msgstr " Zbriši "
+
+#~ msgid "1Copy"
+#~ msgstr "1Kopiraj"
+
+#~ msgid "1Move"
+#~ msgstr "1Prestavi"
+
+#~ msgid "1Delete"
+#~ msgstr "1Zbriši"
+
+#~ msgid "Index"
+#~ msgstr "Kazalo"
+
+#~ msgid "Prev"
+#~ msgstr "Nazaj"
+
+#~ msgid "&Quick view     C-x q"
+#~ msgstr "&Hitri pogled   C-x q"
+
+#~ msgid "&Info           C-x i"
+#~ msgstr "&Podatki        C-x i"
+
+#~ msgid "&Rescan         C-r"
+#~ msgstr "&Osveži         C-r"
+
+#~ msgid "&View               F3"
+#~ msgstr "&Pogled             F3"
+
+#~ msgid "Vie&w file...         "
+#~ msgstr "Po&glej datoteko...   "
+
+#~ msgid "&Filtered view     M-!"
+#~ msgstr "&Filtriran pogled  M-!"
+
+#~ msgid "&Edit               F4"
+#~ msgstr "ur&Edi              F4"
+
+#~ msgid "&Copy               F5"
+#~ msgstr "&Kopiraj            F5"
+
+#~ msgid "c&Hmod           C-x c"
+#~ msgstr "c&Hmod           C-x c"
+
+#~ msgid "&Link            C-x l"
+#~ msgstr "&Povezava        X-x l"
+
+#~ msgid "&SymLink         C-x s"
+#~ msgstr "&Simb. povezava  C-x s"
+
+#~ msgid "edit s&Ymlink  C-x C-s"
+#~ msgstr "uredi s&imb. povez. C-x C-s"
+
+#~ msgid "ch&Own           C-x o"
+#~ msgstr "ch&Own           C-x o"
+
+#~ msgid "&Rename/Move        F6"
+#~ msgstr "p&Reimenuj/Prestavi F6"
+
+#~ msgid "&Mkdir              F7"
+#~ msgstr "Ustvari &Imenik     F7"
+
+#~ msgid "&Delete             F8"
+#~ msgstr "&Zbriši             F8"
+
+#~ msgid "&Quick cd          M-c"
+#~ msgstr "&Hitra sprememba imenika M-c"
+
+#~ msgid "select &Group      M-+"
+#~ msgstr "izberi &Skupino    M-+"
+
+#~ msgid "u&Nselect group    M-\\"
+#~ msgstr "o&Dizberi skupino  M-\\"
+
+#~ msgid "e&Xit              F10"
+#~ msgstr "&Izhod             F10"
+
+#~ msgid "&User menu          F2"
+#~ msgstr "&Uporabnikov menu   F2"
+
+#~ msgid "&Find file            M-?"
+#~ msgstr "&Poišči datoteko      M-?"
+
+#~ msgid "s&Wap panels          C-u"
+#~ msgstr "za&Menjaj pulta       C-u"
+
+#~ msgid "&Compare directories  C-x d"
+#~ msgstr "&Primerjaj imenika    C-x d"
+
+#~ msgid "e&Xternal panelize    C-x !"
+#~ msgstr "&V pult od zunaj      C-x !"
+
+#, fuzzy
+#~ msgid "Command &history      M-h"
+#~ msgstr " Zgodovina ukazov"
+
+#~ msgid "di&Rectory hotlist    C-\\"
+#~ msgstr "v&Roč seznam imenikov  C-\\"
+
+#~ msgid "&Background jobs      C-x j"
+#~ msgstr "Posli v &Ozadju       C-x j"
+
+#~ msgid "learn &Keys..."
+#~ msgstr "nauči se &Tipk..."
+
+#~ msgid " &File "
+#~ msgstr " &Datoteka "
+
+#~ msgid " &Command "
+#~ msgstr " &Ukaz "
+
+#~ msgid "Menu"
+#~ msgstr "Menu"
+
+#, fuzzy
+#~ msgid "n"
+#~ msgstr "Vklopljeno"
+
+#, fuzzy
+#~ msgid "Extension"
+#~ msgstr "Pripona:"
+
+#~ msgid "Size"
+#~ msgstr "Velikost"
+
+#~ msgid "MTime"
+#~ msgstr "MČas"
+
+#~ msgid "ATime"
+#~ msgstr "DČas"
+
+#~ msgid "CTime"
+#~ msgstr "SČas"
+
+#~ msgid "Inode"
+#~ msgstr "Inode"
+
+#~ msgid "RenMov"
+#~ msgstr "RenMov"
+
+#~ msgid "Static"
+#~ msgstr "Statična"
+
+#~ msgid "Dynamc"
+#~ msgstr "Dinamična"
+
+#~ msgid "Forget"
+#~ msgstr "Pozabi"
+
+#~ msgid "Rmdir"
+#~ msgstr "Rmdir"
+
+#, fuzzy
+#~ msgid "Escape key"
+#~ msgstr "Poševnica na številčni tipkovnici"
+
 #, fuzzy
 #~ msgid "bind: Unknown command: `%s'"
 #~ msgstr " Chown ukaz "
@@ -4037,15 +4323,8 @@ msgstr "Spremembe v datoteki izgubljene"
 #~ msgid "&Delete            F8"
 #~ msgstr "&Zbriši            F8"
 
-#, fuzzy
-#~ msgid "Save setu&p..."
-#~ msgstr "&Shrani nastavitve"
-
 #~ msgid " The command history is empty "
 #~ msgstr " Zgodovina ukazov je prazna "
-
-#~ msgid "command &History"
-#~ msgstr "zgodovina &Ukazov"
 
 #~ msgid "Edit edi&tor menu file"
 #~ msgstr "Uredi menujsko datoteko urejavalnika"
@@ -4082,9 +4361,6 @@ msgstr "Spremembe v datoteki izgubljene"
 
 #~ msgid "&Type"
 #~ msgstr "&Način"
-
-#~ msgid "&Links"
-#~ msgstr "&Povezave"
 
 #~ msgid "N&GID"
 #~ msgstr "N&SID"
