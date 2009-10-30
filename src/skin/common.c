@@ -120,14 +120,13 @@ mc_skin_try_to_load_default (void)
 gboolean
 mc_skin_init (GError ** error)
 {
+    gboolean is_good_init = TRUE;
 
     mc_skin__default.name = mc_skin_get_default_name ();
 
     mc_skin__default.colors = g_hash_table_new_full (g_str_hash, g_str_equal,
                                                      mc_skin_hash_destroy_key,
                                                      mc_skin_hash_destroy_value);
-
-    gboolean is_good_init = TRUE;
 
     if (!mc_skin_ini_file_load (&mc_skin__default)) {
         *error = g_error_new (MC_ERROR, 0,

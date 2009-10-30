@@ -64,7 +64,7 @@ flush_extension_file (void)
 typedef char *(*quote_func_t) (const char *name, int quote_percent);
 
 static void
-exec_extension (const char *filename, const char *data, int *move_dir,
+exec_extension (const char *filename, const char *lc_data, int *move_dir,
 		int start_line)
 {
     char *fn;
@@ -74,7 +74,7 @@ exec_extension (const char *filename, const char *data, int *move_dir,
     char *cmd = NULL;
     int expand_prefix_found = 0;
     int parameter_found = 0;
-    char prompt[80];
+    char lc_prompt[80];
     int run_view = 0;
     int def_hex_mode = mcview_default_hex_mode, changed_hex_mode = 0;
     int def_nroff_flag = mcview_default_nroff_flag, changed_nroff_flag = 0;
@@ -89,7 +89,7 @@ exec_extension (const char *filename, const char *data, int *move_dir,
     quote_func_t quote_func = name_quote;
 
     g_return_if_fail (filename != NULL);
-    g_return_if_fail (data != NULL);
+    g_return_if_fail (lc_data != NULL);
 
     /* Avoid making a local copy if we are doing a cd */
     if (!vfs_file_is_local (filename))
@@ -114,13 +114,13 @@ exec_extension (const char *filename, const char *data, int *move_dir,
     cmd_file = fdopen (cmd_file_fd, "w");
     fputs ("#! /bin/sh\n", cmd_file);
 
-    prompt[0] = 0;
-    for (; *data && *data != '\n'; data++) {
+    lc_prompt[0] = 0;
+    for (; *lc_data && *lc_data != '\n'; lc_data++) {
 	if (parameter_found) {
-	    if (*data == '}') {
+	    if (*lc_data == '}') {
 		char *parameter;
 		parameter_found = 0;
-		parameter = input_dialog (_(" Parameter "), prompt, MC_HISTORY_EXT_PARAMETER, "");
+		parameter = input_dialog (_(" Parameter "), lc_prompt, MC_HISTORY_EXT_PARAMETER, "");
 		if (!parameter) {
 		    /* User canceled */
 		    fclose (cmd_file);
@@ -136,38 +136,38 @@ exec_extension (const char *filename, const char *data, int *move_dir,
 		written_nonspace = 1;
 		g_free (parameter);
 	    } else {
-		size_t len = strlen (prompt);
+		size_t len = strlen (lc_prompt);
 
-		if (len < sizeof (prompt) - 1) {
-		    prompt[len] = *data;
-		    prompt[len + 1] = 0;
+		if (len < sizeof (lc_prompt) - 1) {
+		    lc_prompt[len] = *lc_data;
+		    lc_prompt[len + 1] = 0;
 		}
 	    }
 	} else if (expand_prefix_found) {
 	    expand_prefix_found = 0;
-	    if (*data == '{')
+	    if (*lc_data == '{')
 		parameter_found = 1;
 	    else {
-		int i = check_format_view (data);
+		int i = check_format_view (lc_data);
 		char *v;
 
 		if (i) {
-		    data += i - 1;
+		    lc_data += i - 1;
 		    run_view = 1;
-		} else if ((i = check_format_cd (data)) > 0) {
+		} else if ((i = check_format_cd (lc_data)) > 0) {
 		    is_cd = 1;
 		    quote_func = fake_name_quote;
 		    do_local_copy = 0;
 		    p = buffer;
-		    data += i - 1;
-		} else if ((i = check_format_var (data, &v)) > 0 && v) {
+		    lc_data += i - 1;
+		} else if ((i = check_format_var (lc_data, &v)) > 0 && v) {
 		    fputs (v, cmd_file);
 		    g_free (v);
-		    data += i;
+		    lc_data += i;
 		} else {
 		    char *text;
 
-		    if (*data == 'f') {
+		    if (*lc_data == 'f') {
 			if (do_local_copy) {
 			    localcopy = mc_getlocalcopy (filename);
 			    if (localcopy == NULL) {
@@ -185,7 +185,7 @@ exec_extension (const char *filename, const char *data, int *move_dir,
                             g_free (fn);
 			}
 		    } else {
-			text = expand_format (NULL, *data, !is_cd);
+			text = expand_format (NULL, *lc_data, !is_cd);
                     }
 		    if (!is_cd)
 			fputs (text, cmd_file);
@@ -198,15 +198,15 @@ exec_extension (const char *filename, const char *data, int *move_dir,
 		}
 	    }
 	} else {
-	    if (*data == '%')
+	    if (*lc_data == '%')
 		expand_prefix_found = 1;
 	    else {
-		if (*data != ' ' && *data != '\t')
+		if (*lc_data != ' ' && *lc_data != '\t')
 		    written_nonspace = 1;
 		if (is_cd)
-		    *(p++) = *data;
+		    *(p++) = *lc_data;
 		else
-		    fputc (*data, cmd_file);
+		    fputc (*lc_data, cmd_file);
 	    }
 	}
     }				/* for */

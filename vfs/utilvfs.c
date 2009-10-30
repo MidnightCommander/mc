@@ -234,7 +234,7 @@ vfs_findgid (const char *gname)
  * We also protect stupid scripts agains dangerous names.
  */
 int
-vfs_mkstemps (char **pname, const char *prefix, const char *basename)
+vfs_mkstemps (char **pname, const char *prefix, const char *param_basename)
 {
     const char *p;
     char *suffix, *q;
@@ -242,9 +242,9 @@ vfs_mkstemps (char **pname, const char *prefix, const char *basename)
     int fd;
 
     /* Strip directories */
-    p = strrchr (basename, PATH_SEP);
+    p = strrchr (param_basename, PATH_SEP);
     if (!p)
-	p = basename;
+	p = param_basename;
     else
 	p++;
 
@@ -761,12 +761,12 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename,
 	    s->st_mode |= (S_IRUSR | S_IRGRP | S_IROTH | S_IWUSR);
 	p += 9;
     } else {
-	size_t skipped;
+	size_t lc_skipped;
 	mode_t perms;
 
-	if (!vfs_parse_fileperms (p, &skipped, &perms))
+	if (!vfs_parse_fileperms (p, &lc_skipped, &perms))
 	    goto error;
-	p += skipped;
+	p += lc_skipped;
 	s->st_mode |= perms;
     }
 
@@ -889,11 +889,11 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename,
     }
 
     if (t) {
-	int p = strlen (t);
-	if ((--p > 0) && (t[p] == '\r' || t[p] == '\n'))
-	    t[p] = 0;
-	if ((--p > 0) && (t[p] == '\r' || t[p] == '\n'))
-	    t[p] = 0;
+	int p2 = strlen (t);
+	if ((--p2 > 0) && (t[p2] == '\r' || t[p2] == '\n'))
+	    t[p2] = 0;
+	if ((--p2 > 0) && (t[p2] == '\r' || t[p2] == '\n'))
+	    t[p2] = 0;
     }
 
     g_free (p_copy);

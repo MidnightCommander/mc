@@ -693,17 +693,17 @@ mcfs_loaddir (opendir_info *mcfs_info)
 {
     int status, error;
     mcfs_connection *mc = mcfs_info->conn;
-    int link = mc->sock;
+    int lc_link = mc->sock;
     int first = 1;
 
-    rpc_send (link, RPC_INT, MC_READDIR, RPC_INT, mcfs_info->handle,
+    rpc_send (lc_link, RPC_INT, MC_READDIR, RPC_INT, mcfs_info->handle,
 	      RPC_END);
 
     for (;;) {
 	int entry_len;
 	dir_entry *new_entry;
 
-	if (!rpc_get (link, RPC_INT, &entry_len, RPC_END))
+	if (!rpc_get (lc_link, RPC_INT, &entry_len, RPC_END))
 	    return 0;
 
 	if (entry_len == 0)
@@ -723,11 +723,11 @@ mcfs_loaddir (opendir_info *mcfs_info)
 	}
 
 	if (!rpc_get
-	    (link, RPC_BLOCK, entry_len, new_entry->text, RPC_END))
+	    (lc_link, RPC_BLOCK, entry_len, new_entry->text, RPC_END))
 	    return 0;
 
 	/* Then we get the status from the lstat */
-	if (!rpc_get (link, RPC_INT, &status, RPC_INT, &error, RPC_END))
+	if (!rpc_get (lc_link, RPC_INT, &status, RPC_INT, &error, RPC_END))
 	    return 0;
 
 	if (mcfs_is_error (status, error))
@@ -1252,12 +1252,5 @@ void
 tcp_invalidate_socket (int sock)
 {
     mcfs_invalidate_socket (sock);
-}
-#else
-void mcfs__unused(void)
-{
-/*
-    CFLAGS="-ansi -pedantic -Wall -Wextra -Werror"
-*/
 }
 #endif				/* ENABLE_VFS_MCFS */

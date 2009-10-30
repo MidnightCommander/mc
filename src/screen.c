@@ -770,12 +770,12 @@ display_mini_info (WPanel *panel)
     set_colors (panel);
 
     if (S_ISLNK (panel->dir.list [panel->selected].st.st_mode)){
-	char *link, link_target [MC_MAXPATHLEN];
+	char *lc_link, link_target [MC_MAXPATHLEN];
 	int  len;
 
-	link = concat_dir_and_file (panel->cwd, panel->dir.list [panel->selected].fname);
-	len = mc_readlink (link, link_target, MC_MAXPATHLEN - 1);
-	g_free (link);
+	lc_link = concat_dir_and_file (panel->cwd, panel->dir.list [panel->selected].fname);
+	len = mc_readlink (lc_link, link_target, MC_MAXPATHLEN - 1);
+	g_free (lc_link);
 	if (len > 0){
 	    link_target[len] = 0;
             tty_print_string ("-> ");
@@ -2470,13 +2470,13 @@ static gsize
 panel_get_format_field_count(WPanel *panel)
 {
     format_e *format;
-    gsize index;
+    gsize lc_index;
     for (
-	index=0, format = panel->format;
+	lc_index=0, format = panel->format;
 	format != NULL;
-	format = format->next, index++
+	format = format->next, lc_index++
     );
-    return index;
+    return lc_index;
 }
 
 /*
@@ -2486,38 +2486,38 @@ static gsize
 panel_get_format_field_index_by_name(WPanel *panel, const char *name)
 {
     format_e *format;
-    gsize index;
+    gsize lc_index;
 
     for (
-	index=1, format = panel->format;
+	lc_index=1, format = panel->format;
 	! ( format == NULL || strcmp(format->title, name) == 0 );
-	format = format->next, index++
+	format = format->next, lc_index++
     );
     if (format == NULL)
-	index = 0;
+	lc_index = 0;
 
-    return index;
+    return lc_index;
 }
 
-format_e *
-panel_get_format_field_by_index(WPanel *panel, gsize index)
+static format_e *
+panel_get_format_field_by_index(WPanel *panel, gsize lc_index)
 {
     format_e *format;
     for (
 	format = panel->format;
-	! ( format == NULL || index == 0 );
-	format = format->next, index--
+	! ( format == NULL || lc_index == 0 );
+	format = format->next, lc_index--
     );
     return format;
 }
 
 static const panel_field_t *
-panel_get_sortable_field_by_format(WPanel *panel, gsize index)
+panel_get_sortable_field_by_format(WPanel *panel, gsize lc_index)
 {
     const panel_field_t *pfield;
     format_e *format;
 
-    format = panel_get_format_field_by_index(panel, index);
+    format = panel_get_format_field_by_index(panel, lc_index);
     if (format == NULL)
 	return NULL;
     pfield = panel_get_field_by_title(format->title);
@@ -2531,19 +2531,19 @@ panel_get_sortable_field_by_format(WPanel *panel, gsize index)
 static void
 panel_toggle_sort_order_prev(WPanel *panel)
 {
-    gsize index, i;
+    gsize lc_index, i;
     gchar *title;
 
     const panel_field_t *pfield = NULL;
 
     title = panel_get_title_without_hotkey(panel->current_sort_field->title_hotkey);
-    index = panel_get_format_field_index_by_name(panel, title);
+    lc_index = panel_get_format_field_index_by_name(panel, title);
     g_free(title);
 
-    if (index > 1){
+    if (lc_index > 1){
 	/* search for prev sortable column in panel format */
 	for (
-	    i = index-1 ;
+	    i = lc_index-1 ;
 	    i != 0 && (pfield = panel_get_sortable_field_by_format(panel, i-1)) == NULL ;
 	    i--
 	);
@@ -2567,19 +2567,19 @@ panel_toggle_sort_order_prev(WPanel *panel)
 static void
 panel_toggle_sort_order_next(WPanel *panel)
 {
-    gsize index, i;
+    gsize lc_index, i;
     const panel_field_t *pfield = NULL;
     gsize format_field_count = panel_get_format_field_count(panel);
     gchar *title;
 
     title = panel_get_title_without_hotkey(panel->current_sort_field->title_hotkey);
-    index = panel_get_format_field_index_by_name(panel, title);
+    lc_index = panel_get_format_field_index_by_name(panel, title);
     g_free(title);
 
-    if (index != 0 && index != format_field_count){
+    if (lc_index != 0 && lc_index != format_field_count){
 	/* search for prev sortable column in panel format */
 	for (
-	    i = index;
+	    i = lc_index;
 	    i != format_field_count && (pfield = panel_get_sortable_field_by_format(panel, i)) == NULL ;
 	    i++
 	);
@@ -2885,10 +2885,10 @@ panel_callback (Widget *w, widget_msg_t msg, int parm)
 }
 
 void
-file_mark (WPanel *panel, int index, int val)
+file_mark (WPanel *panel, int lc_index, int val)
 {
-    if (panel->dir.list[index].f.marked != val) {
-	panel->dir.list[index].f.marked = val;
+    if (panel->dir.list[lc_index].f.marked != val) {
+	panel->dir.list[lc_index].f.marked = val;
 	panel->dirty = 1;
     }
 }
@@ -2935,7 +2935,7 @@ static void
 mouse_sort_col(Gpm_Event *event, WPanel *panel)
 {
     int i;
-    const char *sort_name = NULL;
+    const char *lc_sort_name = NULL;
     panel_field_t *col_sort_format = NULL;
     format_e *format;
     gchar *title;
@@ -2944,17 +2944,17 @@ mouse_sort_col(Gpm_Event *event, WPanel *panel)
 	i += format->field_len;
 	if (event->x < i + 1) {
 	    /* found column */
-	    sort_name = format->title;
+	    lc_sort_name = format->title;
 	    break;
 	}
     }
 
-    if (sort_name == NULL)
+    if (lc_sort_name == NULL)
 	return;
 
     for(i = 0; panel_fields[i].id != NULL; i++) {
 	title = panel_get_title_without_hotkey(panel_fields[i].title_hotkey);
-	if (!strcmp (sort_name, title) && panel_fields[i].sort_routine) {
+	if (!strcmp (lc_sort_name, title) && panel_fields[i].sort_routine) {
 	    col_sort_format = &panel_fields[i];
 	    g_free(title);
 	    break;
@@ -3309,10 +3309,10 @@ update_panels (int force_update, const char *current_file)
 gsize
 panel_get_num_of_sortable_fields(void)
 {
-    gsize ret = 0, index;
+    gsize ret = 0, lc_index;
 
-    for(index=0; panel_fields[index].id != NULL; index ++)
-	if (panel_fields[index].is_user_choice)
+    for(lc_index=0; panel_fields[lc_index].id != NULL; lc_index ++)
+	if (panel_fields[lc_index].is_user_choice)
 	    ret++;
     return ret;
 }
@@ -3322,65 +3322,65 @@ const char **
 panel_get_sortable_fields(gsize *array_size)
 {
     char **ret;
-    gsize index, i;
+    gsize lc_index, i;
 
-    index = panel_get_num_of_sortable_fields();
+    lc_index = panel_get_num_of_sortable_fields();
 
-    ret = g_new0 (char *, index + 1);
+    ret = g_new0 (char *, lc_index + 1);
     if (ret == NULL)
         return NULL;
 
     if (array_size != NULL)
-	*array_size = index;
+	*array_size = lc_index;
 
-    index=0;
+    lc_index=0;
 
     for(i=0; panel_fields[i].id != NULL; i ++)
 	if (panel_fields[i].is_user_choice)
-	    ret[index++] = g_strdup(_(panel_fields[i].title_hotkey));
+	    ret[lc_index++] = g_strdup(_(panel_fields[i].title_hotkey));
     return (const char**) ret;
 }
 
 const panel_field_t *
 panel_get_field_by_id(const char *name)
 {
-    gsize index;
-    for(index=0; panel_fields[index].id != NULL; index ++)
+    gsize lc_index;
+    for(lc_index=0; panel_fields[lc_index].id != NULL; lc_index ++)
 	if (
-	    panel_fields[index].id != NULL &&
-	    strcmp(name, panel_fields[index].id) == 0
+	    panel_fields[lc_index].id != NULL &&
+	    strcmp(name, panel_fields[lc_index].id) == 0
 	)
-	    return &panel_fields[index];
+	    return &panel_fields[lc_index];
     return NULL;
 }
 
 const panel_field_t *
 panel_get_field_by_title_hotkey(const char *name)
 {
-    gsize index;
-    for(index=0; panel_fields[index].id != NULL; index ++)
+    gsize lc_index;
+    for(lc_index=0; panel_fields[lc_index].id != NULL; lc_index ++)
 	if (
-	    panel_fields[index].title_hotkey != NULL &&
-	    strcmp(name, _(panel_fields[index].title_hotkey)) == 0
+	    panel_fields[lc_index].title_hotkey != NULL &&
+	    strcmp(name, _(panel_fields[lc_index].title_hotkey)) == 0
 	)
-	    return &panel_fields[index];
+	    return &panel_fields[lc_index];
     return NULL;
 }
 
 const panel_field_t *
 panel_get_field_by_title(const char *name)
 {
-    gsize index;
+    gsize lc_index;
     gchar *title = NULL;
 
-    for(index=0; panel_fields[index].id != NULL; index ++) {
-	title = panel_get_title_without_hotkey(panel_fields[index].title_hotkey);
+    for(lc_index=0; panel_fields[lc_index].id != NULL; lc_index ++) {
+	title = panel_get_title_without_hotkey(panel_fields[lc_index].title_hotkey);
 	if (
-	    panel_fields[index].title_hotkey != NULL &&
+	    panel_fields[lc_index].title_hotkey != NULL &&
 	    strcmp(name, title) == 0
 	) {
 	    g_free(title);
-	    return &panel_fields[index];
+	    return &panel_fields[lc_index];
 	}
     }
     g_free(title);
@@ -3390,10 +3390,10 @@ panel_get_field_by_title(const char *name)
 gsize
 panel_get_num_of_user_possible_fields(void)
 {
-    gsize ret = 0, index;
+    gsize ret = 0, lc_index;
 
-    for(index=0; panel_fields[index].id != NULL; index ++)
-	if (panel_fields[index].use_in_user_format)
+    for(lc_index=0; panel_fields[lc_index].id != NULL; lc_index ++)
+	if (panel_fields[lc_index].use_in_user_format)
 	    ret++;
     return ret;
 }
@@ -3402,22 +3402,22 @@ const char **
 panel_get_user_possible_fields(gsize *array_size)
 {
     char **ret;
-    gsize index, i;
+    gsize lc_index, i;
 
-    index = panel_get_num_of_user_possible_fields();
+    lc_index = panel_get_num_of_user_possible_fields();
 
-    ret = g_new0 (char *, index + 1);
+    ret = g_new0 (char *, lc_index + 1);
     if (ret == NULL)
         return NULL;
 
     if (array_size != NULL)
-	*array_size = index;
+	*array_size = lc_index;
 
-    index=0;
+    lc_index=0;
 
     for(i=0; panel_fields[i].id != NULL; i ++)
 	if (panel_fields[i].use_in_user_format)
-	    ret[index++] = g_strdup(_(panel_fields[i].title_hotkey));
+	    ret[lc_index++] = g_strdup(_(panel_fields[i].title_hotkey));
     return (const char**) ret;
 }
 

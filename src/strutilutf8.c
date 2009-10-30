@@ -1297,7 +1297,7 @@ str_utf8_release_key (char *key, int case_sen)
 }
 
 struct str_class 
-str_utf8_init ()
+str_utf8_init (void)
 {
     struct str_class result;
 

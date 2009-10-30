@@ -629,36 +629,36 @@ static char *next_file (void)
 
 static void apply_advanced_chowns (struct stat *sf)
 {
-    char *fname;
+    char *lc_fname;
     gid_t a_gid = sf->st_gid;
     uid_t a_uid = sf->st_uid;
 
-    fname = current_panel->dir.list[current_file].fname;
+    lc_fname = current_panel->dir.list[current_file].fname;
     need_update = end_chown = 1;
-    if (mc_chmod (fname, get_mode ()) == -1)
+    if (mc_chmod (lc_fname, get_mode ()) == -1)
 	message (D_ERROR, MSG_ERROR, _(" Cannot chmod \"%s\" \n %s "),
-		 fname, unix_error_string (errno));
+		 lc_fname, unix_error_string (errno));
     /* call mc_chown only, if mc_chmod didn't fail */
-    else if (mc_chown (fname, (ch_flags[9] == '+') ? sf->st_uid : (uid_t) -1,
+    else if (mc_chown (lc_fname, (ch_flags[9] == '+') ? sf->st_uid : (uid_t) -1,
 		       (ch_flags[10] == '+') ? sf->st_gid : (gid_t) -1) == -1)
 	message (D_ERROR, MSG_ERROR, _(" Cannot chown \"%s\" \n %s "),
-		 fname, unix_error_string (errno));
+		 lc_fname, unix_error_string (errno));
     do_file_mark (current_panel, current_file, 0);
 
     do {
-	fname = next_file ();
+	lc_fname = next_file ();
 
-	if (mc_stat (fname, sf) != 0)
+	if (mc_stat (lc_fname, sf) != 0)
 	    break;
 	ch_cmode = sf->st_mode;
-	if (mc_chmod (fname, get_mode ()) == -1)
+	if (mc_chmod (lc_fname, get_mode ()) == -1)
 	    message (D_ERROR, MSG_ERROR, _(" Cannot chmod \"%s\" \n %s "),
-		     fname, unix_error_string (errno));
+		     lc_fname, unix_error_string (errno));
 	/* call mc_chown only, if mc_chmod didn't fail */
-	else if (mc_chown (fname, (ch_flags[9] == '+') ? a_uid : (uid_t) -1,
+	else if (mc_chown (lc_fname, (ch_flags[9] == '+') ? a_uid : (uid_t) -1,
 	                   (ch_flags[10] == '+') ? a_gid : (gid_t) -1) == -1)
 	    message (D_ERROR, MSG_ERROR, _(" Cannot chown \"%s\" \n %s "),
-		     fname, unix_error_string (errno));
+		     lc_fname, unix_error_string (errno));
 
 	do_file_mark (current_panel, current_file, 0);
     } while (current_panel->marked);

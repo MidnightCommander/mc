@@ -811,14 +811,14 @@ try_complete (char *text, int *start, int *end, INPUT_COMPLETE_FLAGS flags)
 	SHOW_C_CTX("try_complete:filename_subst_1");
 	matches = completion_matches (word, filename_completion_function, flags);
 	if (!matches && is_cd && *word != PATH_SEP && *word != '~'){
-	    char *p, *q = text + *start;
+	    q = text + *start;
 	    for (p = text; *p && p < q && (*p == ' ' || *p == '\t'); str_next_char (&p));
 	    if (!strncmp (p, "cd", 2))
 	        for (p += 2; *p && p < q && (*p == ' ' || *p == '\t'); str_next_char (&p));
 	    if (p == q){
 		char * const cdpath_ref = g_strdup (getenv ("CDPATH"));
 		char *cdpath = cdpath_ref;
-		char c, *s, *r;
+		char c, *s;
 
 		if (cdpath == NULL)
 		    c = 0;
@@ -1054,8 +1054,8 @@ complete_engine (WInput *in, int what_to_do)
 
     if (in->completions){
 	if (what_to_do & DO_INSERTION || ((what_to_do & DO_QUERY) && !in->completions[1])) {
-	        char * complete = in->completions [0];
-	    if (insert_text (in, complete, strlen (complete))){
+	    char * lc_complete = in->completions [0];
+	    if (insert_text (in, lc_complete, strlen (lc_complete))){
 	        if (in->completions [1])
 		    tty_beep ();
 		else

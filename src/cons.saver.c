@@ -70,16 +70,16 @@ static void
 send_contents (char *buffer, unsigned int columns, unsigned int rows)
 {
   unsigned char begin_line = 0, end_line = 0;
-  unsigned int lastline, index, x;
+  unsigned int lastline, lc_index, x;
   unsigned char message, outbuf[1024], *p;
   unsigned short bytes;
 
-  index = 2 * rows * columns;
+  lc_index = 2 * rows * columns;
   for (lastline = rows; lastline > 0; lastline--)
     for (x = 0; x < columns; x++)
       {
-	index -= 2;
-	if (buffer [index] != ' ')
+	lc_index -= 2;
+	if (buffer [lc_index] != ' ')
 	  goto out;
       }
 out:
@@ -94,20 +94,20 @@ out:
   if (end_line > lastline)
     end_line = lastline;
 
-  index = (end_line - begin_line) * columns;
-  bytes = index;
-  if (index != bytes)
+  lc_index = (end_line - begin_line) * columns;
+  bytes = lc_index;
+  if (lc_index != bytes)
     bytes = 0;
   write (1, &bytes, 2);
   if (! bytes)
     return;
 
   p = outbuf;
-  for (index = 2 * begin_line * columns;
-       index < 2 * end_line * columns;
-       index += 2)
+  for (lc_index = 2 * begin_line * columns;
+       lc_index < 2 * end_line * columns;
+       lc_index += 2)
     {
-      *p++ = buffer [index];
+      *p++ = buffer [lc_index];
       if (p == outbuf + sizeof (outbuf))
 	{
 	  write (1, outbuf, sizeof (outbuf));

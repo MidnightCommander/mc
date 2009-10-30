@@ -1038,16 +1038,16 @@ static void add_new_group_cmd (void)
 
 void add2hotlist_cmd (void)
 {
-    char *prompt, *label;
+    char *lc_prompt, *label;
     const char *cp = _("Label for \"%s\":");
     int l = str_term_width1 (cp);
     char *label_string = g_strdup (current_panel->cwd);
 
     strip_password (label_string, 1);
 
-    prompt = g_strdup_printf (cp, path_trunc (current_panel->cwd, COLS-2*UX-(l+8)));
-    label = input_dialog (_(" Add to hotlist "), prompt, MC_HISTORY_HOTLIST_ADD, label_string);
-    g_free (prompt);
+    lc_prompt = g_strdup_printf (cp, path_trunc (current_panel->cwd, COLS-2*UX-(l+8)));
+    label = input_dialog (_(" Add to hotlist "), lc_prompt, MC_HISTORY_HOTLIST_ADD, label_string);
+    g_free (lc_prompt);
 
     if (!label || !*label) {
 	g_free (label_string);

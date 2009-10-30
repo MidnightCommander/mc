@@ -560,7 +560,7 @@ load_setup_get_full_config_name(const char *subdir, const char *config_file_name
 	      Also, need to rename stupid mc_home and mc_home_alt to mc_sysconfdir and mc_datadir;
 	      home_mc => mc_user_homedir
     */
-    char *basename, *ret;
+    char *lc_basename, *ret;
 
     if (config_file_name == NULL)
 	return NULL;
@@ -569,45 +569,45 @@ load_setup_get_full_config_name(const char *subdir, const char *config_file_name
 	return g_strdup(config_file_name);
 
 
-    basename = g_path_get_basename(config_file_name);
-    if (basename == NULL)
+    lc_basename = g_path_get_basename(config_file_name);
+    if (lc_basename == NULL)
 	return NULL;
 
 
     if (subdir)
-	ret = g_build_filename (home_dir, MC_USERCONF_DIR, subdir, basename, NULL);
+	ret = g_build_filename (home_dir, MC_USERCONF_DIR, subdir, lc_basename, NULL);
     else
-	ret = g_build_filename (home_dir, MC_USERCONF_DIR, basename, NULL);
+	ret = g_build_filename (home_dir, MC_USERCONF_DIR, lc_basename, NULL);
 
     if (exist_file(ret)) {
-	g_free(basename);
+	g_free(lc_basename);
 	return ret;
     }
     g_free(ret);
 
 
     if (subdir)
-	ret = g_build_filename (mc_home, subdir, basename, NULL);
+	ret = g_build_filename (mc_home, subdir, lc_basename, NULL);
     else
-	ret = g_build_filename (mc_home, basename, NULL);
+	ret = g_build_filename (mc_home, lc_basename, NULL);
 
     if (exist_file(ret)) {
-	g_free(basename);
+	g_free(lc_basename);
 	return ret;
     }
     g_free(ret);
 
     if (subdir)
-	ret = g_build_filename (mc_home_alt, subdir, basename, NULL);
+	ret = g_build_filename (mc_home_alt, subdir, lc_basename, NULL);
     else
-	ret = g_build_filename (mc_home_alt, basename, NULL);
+	ret = g_build_filename (mc_home_alt, lc_basename, NULL);
 
     if (exist_file(ret)) {
-	g_free(basename);
+	g_free(lc_basename);
 	return ret;
     }
     g_free(ret);
-    g_free(basename);
+    g_free(lc_basename);
     return NULL;
 
 }

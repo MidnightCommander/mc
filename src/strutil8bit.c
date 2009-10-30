@@ -700,7 +700,7 @@ str_8bit_release_key (char *key, int case_sen)
 }
 
 struct str_class
-str_8bit_init ()
+str_8bit_init (void)
 {
     struct str_class result;
 

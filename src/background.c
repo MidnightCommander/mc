@@ -88,7 +88,7 @@ register_task_running (FileOpContext *ctx, pid_t pid, int fd, int to_child,
     add_select_channel (fd, background_attention, ctx);
 }
 
-int
+static int
 destroy_task_and_return_fd (pid_t pid)
 {
     TaskList *p = task_list;

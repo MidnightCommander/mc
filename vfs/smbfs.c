@@ -182,7 +182,7 @@ smbfs_auth_cmp_host (gconstpointer _a, gconstpointer _b)
 
 static void
 smbfs_auth_add (const char *host, const char *share, const char *domain,
-              const char *user, const char *password)
+              const char *user, const char *param_password)
 {
     struct smb_authinfo *auth = g_new (struct smb_authinfo, 1);
     
@@ -194,7 +194,7 @@ smbfs_auth_add (const char *host, const char *share, const char *domain,
     auth->share = g_strdup (share);
     auth->domain = g_strdup (domain);
     auth->user = g_strdup (user);
-    auth->password = g_strdup (password);
+    auth->password = g_strdup (param_password);
     auth_list = g_slist_prepend (auth_list, auth);
 }
 

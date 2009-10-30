@@ -118,7 +118,7 @@ examine_cd (const char *_path)
     /* CDPATH handling */
     if (*q != PATH_SEP && !result) {
 	char * const cdpath = g_strdup (getenv ("CDPATH"));
-	char *p = cdpath;
+	p = cdpath;
 	if (p == NULL)
 	    c = 0;
 	else
@@ -173,7 +173,7 @@ void do_cd_command (char * orig_cmd)
 	    sync_tree (home_dir);
 	} else if (strcmp (cmd+3, "..") == 0){
 	    char *dir = current_panel->cwd;
-	    int len = strlen (dir);
+	    len = strlen (dir);
 	    while (len && dir [--len] != PATH_SEP);
 	    dir [len] = 0;
 	    if (len)
@@ -201,9 +201,9 @@ void do_cd_command (char * orig_cmd)
 
 /* Handle Enter on the command line */
 static cb_ret_t
-enter (WInput *cmdline)
+enter (WInput *lc_cmdline)
 {
-    char *cmd = cmdline->buffer;
+    char *cmd = lc_cmdline->buffer;
 
     if (!command_prompt)
 	return MSG_HANDLED;
@@ -217,7 +217,7 @@ enter (WInput *cmdline)
 
     if (strncmp (cmd, "cd ", 3) == 0 || strcmp (cmd, "cd") == 0) {
 	do_cd_command (cmd);
-	new_input (cmdline);
+	new_input (lc_cmdline);
 	return MSG_HANDLED;
     } else {
 	char *command, *s;
@@ -261,7 +261,7 @@ enter (WInput *cmdline)
 	    }
 	    command[j] = 0;
 	}
-	new_input (cmdline);
+	new_input (lc_cmdline);
 	shell_execute (command, 0);
 	g_free (command);
 

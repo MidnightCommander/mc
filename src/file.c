@@ -175,15 +175,15 @@ transform_source (FileOpContext *ctx, const char *source)
 }
 
 static void
-free_linklist (struct link **linklist)
+free_linklist (struct link **lc_linklist)
 {
     struct link *lp, *lp2;
 
-    for (lp = *linklist; lp != NULL; lp = lp2) {
+    for (lp = *lc_linklist; lp != NULL; lp = lp2) {
 	lp2 = lp->next;
 	g_free (lp);
     }
-    *linklist = NULL;
+    *lc_linklist = NULL;
 }
 
 static int
@@ -1788,8 +1788,11 @@ panel_operate_generate_prompt (const WPanel *panel, const int operation,
 }
 
 #ifdef WITH_BACKGROUND
-int end_bg_process (FileOpContext *ctx, enum OperationMode mode) {
+static int
+end_bg_process (FileOpContext *ctx, enum OperationMode mode) {
     int pid = ctx->pid;
+
+    (void) mode;
     ctx->pid = 0;
 
     unregister_task_with_pid(pid);

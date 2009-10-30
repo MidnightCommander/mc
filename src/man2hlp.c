@@ -187,7 +187,7 @@ static int
 string_len (const char *buffer)
 {
     static int anchor_flag = 0;	/* Flag: Inside hypertext anchor name */
-    static int link_flag = 0;	/* Flag: Inside hypertext link target name */
+    static int lc_link_flag = 0;	/* Flag: Inside hypertext link target name */
     int backslash_flag = 0;	/* Flag: Backslash quoting */
     int c;			/* Current character */
     int len = 0;		/* Result: the length of the string */
@@ -195,9 +195,9 @@ string_len (const char *buffer)
     while (*(buffer)) {
 	c = *buffer++;
 	if (c == CHAR_LINK_POINTER)
-	    link_flag = 1;	/* Link target name starts */
+	    lc_link_flag = 1;	/* Link target name starts */
 	else if (c == CHAR_LINK_END)
-	    link_flag = 0;	/* Link target name ends */
+	    lc_link_flag = 0;	/* Link target name ends */
 	else if (c == CHAR_NODE_END) {
 	    /* Node anchor name starts */
 	    anchor_flag = 1;
@@ -214,7 +214,7 @@ string_len (const char *buffer)
 	}
 	backslash_flag = 0;
 	/* Increase length if not inside anchor name or link target name */
-	if (!anchor_flag && !link_flag)
+	if (!anchor_flag && !lc_link_flag)
 	    len++;
 	if (anchor_flag && c == ']') {
 	    /* Node anchor name ends */
@@ -671,7 +671,7 @@ main (int argc, char **argv)
     FILE *f_man;		/* Manual file */
     FILE *f_tmpl;		/* Template file */
     char buffer[BUFFER_SIZE];	/* Full input line */
-    char *node = NULL;
+    char *lc_node = NULL;
     char *outfile_buffer;	/* Large buffer to keep the output file */
     long cont_start;		/* Start of [Contents] */
     long file_end;		/* Length of the output file */
@@ -754,21 +754,21 @@ main (int argc, char **argv)
     /* Repeat for each input line */
     /* Read a line */
     while (fgets (buffer, BUFFER_SIZE, f_tmpl)) {
-	if (node) {
+	if (lc_node) {
 	    if (*buffer && *buffer != '\n') {
 		cnode->lname = strdup (buffer);
-		node = strchr (cnode->lname, '\n');
-		if (node)
-		    *node = 0;
+		lc_node = strchr (cnode->lname, '\n');
+		if (lc_node)
+		    *lc_node = 0;
 	    }
-	    node = NULL;
+	    lc_node = NULL;
 	} else {
-	    node = strchr (buffer, CHAR_NODE_END);
-	    if (node && (node[1] == '[')) {
-		char *p = strchr (node, ']');
+	    lc_node = strchr (buffer, CHAR_NODE_END);
+	    if (lc_node && (lc_node[1] == '[')) {
+		char *p = strchr (lc_node, ']');
 		if (p) {
-		    if (strncmp (node + 1, "[main]", 6) == 0) {
-			node = NULL;
+		    if (strncmp (lc_node + 1, "[main]", 6) == 0) {
+			lc_node = NULL;
 		    } else {
 			if (!cnode) {
 			    cnode = &nodes;
@@ -776,16 +776,16 @@ main (int argc, char **argv)
 			    cnode->next = malloc (sizeof (nodes));
 			    cnode = cnode->next;
 			}
-			cnode->node = strdup (node + 2);
-			cnode->node[p - node - 2] = 0;
+			cnode->node = strdup (lc_node + 2);
+			cnode->node[p - lc_node - 2] = 0;
 			cnode->lname = NULL;
 			cnode->next = NULL;
 			cnode->heading_level = 0;
 		    }
 		} else
-		    node = NULL;
+		    lc_node = NULL;
 	    } else
-		node = NULL;
+		lc_node = NULL;
 	}
 	fputs (buffer, f_out);
     }
@@ -829,12 +829,12 @@ main (int argc, char **argv)
     }
 
     for (cnode = &nodes; cnode && cnode->node;) {
-	char *node = cnode->node;
 	struct node *next = cnode->next;
+	lc_node = cnode->node;
 
-	if (*node)
+	if (*lc_node)
 	    fprintf (f_out, "  %*s\001%s\002%s\003", cnode->heading_level,
-		     "", cnode->lname ? cnode->lname : node, node);
+		     "", cnode->lname ? cnode->lname : lc_node, lc_node);
 	fprintf (f_out, "\n");
 
 	free (cnode->node);

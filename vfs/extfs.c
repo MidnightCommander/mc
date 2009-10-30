@@ -615,7 +615,7 @@ extfs_get_archive_name (struct archive *archive)
 
 /* Don't pass localname as NULL */
 static int
-extfs_cmd (const char *extfs_cmd, struct archive *archive,
+extfs_cmd (const char *str_extfs_cmd, struct archive *archive,
 	   struct entry *entry, const char *localname)
 {
     char *file;
@@ -634,7 +634,7 @@ extfs_cmd (const char *extfs_cmd, struct archive *archive,
 
     mc_extfsdir = concat_dir_and_file (mc_home_alt, "extfs" PATH_SEP_STR);
     cmd = g_strconcat (mc_extfsdir, extfs_prefixes[archive->fstype],
-		       extfs_cmd, archive_name, " ", quoted_file, " ",
+		       str_extfs_cmd, archive_name, " ", quoted_file, " ",
 		       quoted_localname, (char *) NULL);
     g_free (quoted_file);
     g_free (quoted_localname);

@@ -112,7 +112,7 @@ do_possible_cd (const char *new_dir)
 #endif				/* HAVE_SUBSHELL_SUPPORT */
 
 static void
-do_execute (const char *shell, const char *command, int flags)
+do_execute (const char *lc_shell, const char *command, int flags)
 {
 #ifdef HAVE_SUBSHELL_SUPPORT
     char *new_dir = NULL;
@@ -146,7 +146,7 @@ do_execute (const char *shell, const char *command, int flags)
 #endif				/* !USE_VFS */
     } else
 #endif				/* HAVE_SUBSHELL_SUPPORT */
-	my_system (flags, shell, command);
+	my_system (flags, lc_shell, command);
 
     if (!(flags & EXECUTE_INTERNAL)) {
 	if ((pause_after_run == pause_always

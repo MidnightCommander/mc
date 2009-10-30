@@ -222,14 +222,14 @@ mcview__get_nroff_real_len (mcview_t * view, off_t start, off_t length)
 /* --------------------------------------------------------------------------------------------- */
 
 mcview_nroff_t *
-mcview_nroff_seq_new_num (mcview_t * view, off_t index)
+mcview_nroff_seq_new_num (mcview_t * view, off_t lc_index)
 {
     mcview_nroff_t *nroff;
 
     nroff = g_malloc0 (sizeof (mcview_nroff_t));
     if (nroff == NULL)
         return NULL;
-    nroff->index = index;
+    nroff->index = lc_index;
     nroff->view = view;
     mcview_nroff_seq_info (nroff);
     return nroff;

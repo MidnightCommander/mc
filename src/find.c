@@ -200,7 +200,7 @@ get_list_info (char **file, char **dir)
 }
 
 /* check regular expression */
-gboolean
+static gboolean
 find_check_regexp (const char *r)
 {
     mc_search_t *search;
@@ -1182,17 +1182,17 @@ find_file (const char *start_dir, const char *pattern, const char *content,
 
 	for (i = 0; entry != NULL && i < find_list->count;
 			entry = entry->next, i++) {
-	    const char *filename = NULL;
+	    const char *lc_filename = NULL;
 
 	    if (!entry->text || !entry->data)
 		continue;
 
 	    if (content_pattern != NULL)
-		filename = strchr (entry->text + 4, ':') + 1;
+		lc_filename = strchr (entry->text + 4, ':') + 1;
 	    else
-		filename = entry->text + 4;
+		lc_filename = entry->text + 4;
 
-	    name = make_fullname (entry->data, filename);
+	    name = make_fullname (entry->data, lc_filename);
 	    status =
 		handle_path (list, name, &st, next_free, &link_to_dir,
 			     &stale_link);

@@ -210,11 +210,4 @@ rpc_get (int sock, ...)
 	}
     }
 }
-#else
-void mcfsutil__unused(void)
-{
-/*
-    CFLAGS="-ansi -pedantic -Wall -Wextra -Werror"
-*/
-}
 #endif				/* ENABLE_VFS_MCFS */

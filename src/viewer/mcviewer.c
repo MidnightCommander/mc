@@ -262,7 +262,7 @@ int
 mcview_viewer (const char *command, const char *file, int *move_dir_p, int start_line)
 {
     gboolean succeeded;
-    mcview_t *mcview_t;
+    mcview_t *lc_mcview;
     WButtonBar *bar;
     Dlg_head *view_dlg;
 
@@ -271,18 +271,18 @@ mcview_viewer (const char *command, const char *file, int *move_dir_p, int start
         create_dlg (0, 0, LINES, COLS, NULL, mcview_dialog_callback,
                     "[Internal File Viewer]", NULL, DLG_WANT_TAB);
 
-    mcview_t = mcview_new (0, 0, COLS, LINES - 1, 0);
+    lc_mcview = mcview_new (0, 0, COLS, LINES - 1, 0);
 
     bar = buttonbar_new (1);
 
     add_widget (view_dlg, bar);
-    add_widget (view_dlg, mcview_t);
+    add_widget (view_dlg, lc_mcview);
 
-    succeeded = mcview_load (mcview_t, command, file, start_line);
+    succeeded = mcview_load (lc_mcview, command, file, start_line);
     if (succeeded) {
         run_dlg (view_dlg);
         if (move_dir_p)
-            *move_dir_p = mcview_t->move_dir;
+            *move_dir_p = lc_mcview->move_dir;
     } else {
         if (move_dir_p)
             *move_dir_p = 0;

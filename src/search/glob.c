@@ -140,7 +140,7 @@ mc_search__translate_replace_glob_to_regex (gchar *str)
 /*** public functions ****************************************************************************/
 
 void
-mc_search__cond_struct_new_init_glob (const char *charset, mc_search_t * mc_search,
+mc_search__cond_struct_new_init_glob (const char *charset, mc_search_t * lc_mc_search,
                                       mc_search_cond_t * mc_search_cond)
 {
     GString *tmp =
@@ -148,33 +148,33 @@ mc_search__cond_struct_new_init_glob (const char *charset, mc_search_t * mc_sear
 
     g_string_free (mc_search_cond->str, TRUE);
 
-    if (mc_search->is_entire_line) {
+    if (lc_mc_search->is_entire_line) {
         g_string_prepend_c (tmp, '^');
         g_string_append_c (tmp, '$');
     }
     mc_search_cond->str = tmp;
 
-    mc_search__cond_struct_new_init_regex (charset, mc_search, mc_search_cond);
+    mc_search__cond_struct_new_init_regex (charset, lc_mc_search, mc_search_cond);
 
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_search__run_glob (mc_search_t * mc_search, const void *user_data,
+mc_search__run_glob (mc_search_t * lc_mc_search, const void *user_data,
                      gsize start_search, gsize end_search, gsize * found_len)
 {
-    return mc_search__run_regex (mc_search, user_data, start_search, end_search, found_len);
+    return mc_search__run_regex (lc_mc_search, user_data, start_search, end_search, found_len);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 
 GString *
-mc_search_glob_prepare_replace_str (mc_search_t * mc_search, GString * replace_str)
+mc_search_glob_prepare_replace_str (mc_search_t * lc_mc_search, GString * replace_str)
 {
     GString *repl = mc_search__translate_replace_glob_to_regex(replace_str->str);
-    GString *res = mc_search_regex_prepare_replace_str (mc_search, repl);
+    GString *res = mc_search_regex_prepare_replace_str (lc_mc_search, repl);
     g_string_free (repl, TRUE);
     return res;
 }

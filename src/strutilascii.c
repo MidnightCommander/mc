@@ -677,7 +677,7 @@ str_ascii_caseprefix (const char *text, const char *prefix)
 
 
 struct str_class
-str_ascii_init ()
+str_ascii_init (void)
 {
     struct str_class result;
 

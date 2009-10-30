@@ -90,15 +90,15 @@ mc_skin_colors_old_t old_colors[] = {
 static gboolean
 mc_skin_colors_old_transform (const char *old_color, const char **group, const char **key)
 {
-    int index;
+    int lc_index;
 
     if (old_color != NULL)
-        for (index = 0; old_colors[index].old_color; index++) {
-            if (strcasecmp (old_color, old_colors[index].old_color) == 0) {
+        for (lc_index = 0; old_colors[lc_index].old_color; lc_index++) {
+            if (strcasecmp (old_color, old_colors[lc_index].old_color) == 0) {
                 if (group != NULL)
-                    *group = old_colors[index].group;
+                    *group = old_colors[lc_index].group;
                 if (key != NULL)
-                    *key = old_colors[index].key;
+                    *key = old_colors[lc_index].key;
                 return TRUE;
             }
         }
