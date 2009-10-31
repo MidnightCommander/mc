@@ -42,6 +42,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <fcntl.h>
 #ifdef HAVE_LIMITS_H
 #    include <limits.h>
 #endif
@@ -297,13 +298,13 @@ do_close (void)
 /* {{{ Stat family routines */
 
 static void
-send_time (int sock, time_t time)
+send_time (int sock, time_t t)
 {
     if (clnt_version == 1) {
 	char *ct;
 	int month;
 
-	ct = ctime (&time);
+	ct = ctime (&t);
 	ct[3] = ct[10] = ct[13] = ct[16] = ct[19] = 0;
 
 	/* Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec */
@@ -326,7 +327,7 @@ send_time (int sock, time_t time)
 	    month = 10;
 	} else
 	    month = 11;
-	rpc_send (msock, RPC_INT, atoi (&ct[17]),	/* sec */
+	rpc_send (sock, RPC_INT, atoi (&ct[17]),	/* sec */
 		  RPC_INT, atoi (&ct[14]),	/* min */
 		  RPC_INT, atoi (&ct[11]),	/* hour */
 		  RPC_INT, atoi (&ct[8]),	/* mday */
@@ -334,11 +335,11 @@ send_time (int sock, time_t time)
 		  RPC_INT, month,	/* month */
 		  RPC_END);
     } else {
-	long ltime = (long) time;
+	long ltime = (long) t;
 	char buf[BUF_SMALL];
 
 	snprintf (buf, sizeof (buf), "%lx", ltime);
-	rpc_send (msock, RPC_STRING, buf, RPC_END);
+	rpc_send (sock, RPC_STRING, buf, RPC_END);
     }
 }
 
@@ -594,16 +595,16 @@ do_mknod (void)
 static void
 do_readlink (void)
 {
-    char buffer[2048];
+    char buf[2048];
     char *file;
     int n;
 
     rpc_get (msock, RPC_STRING, &file, RPC_END);
-    n = readlink (file, buffer, 2048 - 1);
+    n = readlink (file, buf, 2048 - 1);
     send_status (n, errno);
     if (n >= 0) {
-	buffer[n] = 0;
-	rpc_send (msock, RPC_STRING, buffer, RPC_END);
+	buf[n] = 0;
+	rpc_send (msock, RPC_STRING, buf, RPC_END);
     }
     g_free (file);
 }
@@ -818,12 +819,12 @@ mc_pam_auth (const char *username, const char *password)
 
 /* Keep reading until we find a \n */
 static int
-next_line (int socket)
+next_line (int sock)
 {
     char c;
 
     while (1) {
-	if (read (socket, &c, 1) <= 0)
+	if (read (sock, &c, 1) <= 0)
 	    return 0;
 	if (c == '\n')
 	    return 1;
@@ -1048,15 +1049,16 @@ do_rauth (int socket)
 #endif
 
 static int
-do_rauth (int msock)
+do_rauth (int sock)
 {
+    sock = 0;	/* prevent warning */
     return 0;
 }
 
 static void
-login_reply (int logged_in)
+login_reply (int _logged_in)
 {
-    rpc_send (msock, RPC_INT, logged_in ? MC_LOGINOK : MC_INVALID_PASS,
+    rpc_send (msock, RPC_INT, _logged_in ? MC_LOGINOK : MC_INVALID_PASS,
 	      RPC_END);
 }
 
@@ -1168,7 +1170,7 @@ void
 tcp_invalidate_socket (int sock)
 {
     if (verbose)
-	printf ("Connection closed\n");
+	printf ("Connection closed [socket %d]\n", sock);
     DO_QUIT_VOID ();
 }
 
@@ -1193,7 +1195,7 @@ server (int sock)
 /* {{{ Net support code */
 
 static const char *
-get_client (int portnum)
+get_client (int port)
 {
     int sock, newsocket;
     unsigned int clilen;
@@ -1211,7 +1213,7 @@ get_client (int portnum)
     memset ((char *) &server_address, 0, sizeof (server_address));
     server_address.sin_family = AF_INET;
     server_address.sin_addr.s_addr = htonl (INADDR_ANY);
-    server_address.sin_port = htons (portnum);
+    server_address.sin_port = htons (port);
 
     if (bind
 	(sock, (struct sockaddr *) &server_address,
@@ -1285,13 +1287,13 @@ get_port_number (void)
 }
 
 static void
-register_port (int portnum, int abort_if_fail)
+register_port (int port, int abort_if_fail)
 {
 #ifdef HAVE_PMAP_SET
     /* Register our service with the portmapper */
     /* protocol: pmap_set (prognum, versnum, protocol, portp) */
 
-    if (pmap_set (RPC_PROGNUM, RPC_PROGVER, IPPROTO_TCP, portnum))
+    if (pmap_set (RPC_PROGNUM, RPC_PROGVER, IPPROTO_TCP, port))
 	signal (SIGINT, signal_int_handler);
     else {
 	fprintf (stderr, "Cannot register service with portmapper\n");
