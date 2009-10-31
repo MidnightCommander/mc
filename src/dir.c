@@ -27,14 +27,17 @@
 #include <string.h>
 #include <sys/stat.h>
 
-#include "global.h"
 #include "../src/tty/tty.h"
-#include "dir.h"
+
+#include "../src/search/search.h"
+
+#include "global.h"
 #include "wtools.h"
 #include "treestore.h"
 #include "strutil.h"
 #include "fs.h"
-#include "../src/search/search.h"
+#include "util.h"		/* canonicalize_pathname () */
+#include "dir.h"
 
 /* If true show files starting with a dot */
 int show_dot_files = 1;
@@ -334,6 +337,26 @@ handle_dirent (dir_list *list, const char *filter, struct dirent *dp,
     return 1;
 }
 
+/* get info about ".." */
+static gboolean
+get_dotdot_dir_stat (const char *path, struct stat *st)
+{
+    gboolean ret = FALSE;
+
+    if ((path != NULL) && (path[0] != '\0') && (st != NULL)) {
+	char *dotdot_dir;
+	struct stat s;
+
+	dotdot_dir = g_strdup_printf ("%s/../", path);
+	canonicalize_pathname (dotdot_dir);
+	ret = mc_stat (dotdot_dir, &s) == 0;
+	g_free (dotdot_dir);
+	*st = s;
+    }
+
+    return ret;
+}
+
 /* handle_path is a simplified handle_dirent. The difference is that
    handle_path doesn't pay attention to show_dot_files and show_backups.
    Moreover handle_path can't be used with a filemask.
@@ -389,6 +412,9 @@ do_load_dir (const char *path, dir_list *list, sortfn *sort, int lc_reverse,
     /* ".." (if any) must be the first entry in the list */
     if (!set_zero_dir (list))
 	return next_free;
+
+    if (get_dotdot_dir_stat (path, &st))
+	list->list[next_free].st = st;
     next_free++;
 
     dirp = mc_opendir (path);
@@ -396,10 +422,13 @@ do_load_dir (const char *path, dir_list *list, sortfn *sort, int lc_reverse,
 	message (D_ERROR, MSG_ERROR, _("Cannot read directory contents"));
 	return next_free;
     }
+
     tree_store_start_check (path);
+
     /* Do not add a ".." entry to the root directory */
-    if (!strcmp (path, "/"))
+    if ((path[0] == PATH_SEP) && (path[1] == '\0'))
 	next_free--;
+
     while ((dp = mc_readdir (dirp))) {
 	status =
 	    handle_dirent (list, filter, dp, &st, next_free, &link_to_dir,
@@ -421,13 +450,13 @@ do_load_dir (const char *path, dir_list *list, sortfn *sort, int lc_reverse,
         list->list[next_free].sort_key = NULL;
         list->list[next_free].second_sort_key = NULL;
 	next_free++;
-	if (!(next_free % 32))
+
+	if ((next_free & 31) == 0)
 	    rotate_dash ();
     }
 
-    if (next_free) {
+    if (next_free != 0)
 	do_sort (list, sort, next_free - 1, lc_reverse, lc_case_sensitive, exec_ff);
-    }
 
     mc_closedir (dirp);
     tree_store_end_check ();
@@ -524,12 +553,16 @@ do_reload_dir (const char *path, dir_list *list, sortfn *sort, int count,
 
     /* Add ".." except to the root directory. The ".." entry
        (if any) must be the first in the list. */
-    if (strcmp (path, "/") != 0) {
+    if (!((path[0] == PATH_SEP) && (path[1] == '\0'))) {
 	if (!set_zero_dir (list)) {
 	    clean_dir (list, count);
 	    clean_dir (&dir_copy, count);
 	    return next_free;
 	}
+
+	if (get_dotdot_dir_stat (path, &st))
+	    list->list[next_free].st = st;
+
 	next_free++;
     }
 
@@ -576,8 +609,8 @@ do_reload_dir (const char *path, dir_list *list, sortfn *sort, int count,
 	list->list[next_free].f.stale_link = stale_link;
 	list->list[next_free].f.dir_size_computed = 0;
 	list->list[next_free].st = st;
-        list->list[next_free].sort_key = NULL;
-        list->list[next_free].second_sort_key = NULL;
+	list->list[next_free].sort_key = NULL;
+	list->list[next_free].second_sort_key = NULL;
 	next_free++;
 	if (!(next_free % 16))
 	    rotate_dash ();
