@@ -445,7 +445,7 @@ static void do_external_panelize (char *command)
 	    chdir (PATH_SEP_STR);
 	}
     } else {
-	current_panel->count = set_zero_dir (list);
+	current_panel->count = set_zero_dir (list) ? 1 : 0;
     }
     if (pclose (external) < 0)
 	message (D_NORMAL, _("External panelize"), _("Pipe close failed"));

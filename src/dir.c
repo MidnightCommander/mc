@@ -256,34 +256,29 @@ clean_dir (dir_list *list, int count)
     }
 }
 
-static int
-add_dotdot_to_list (dir_list *list, int lc_index)
+/* Used to set up a directory list when there is no access to a directory */
+gboolean
+set_zero_dir (dir_list *list)
 {
     /* Need to grow the *list? */
-    if (lc_index == list->size) {
+    if (list->size == 0) {
 	list->list = g_realloc (list->list, sizeof (file_entry) *
 			      (list->size + RESIZE_STEPS));
-	if (!list->list)
-	    return 0;
+	if (list->list == NULL)
+	    return FALSE;
+
 	list->size += RESIZE_STEPS;
     }
 
-    memset (&(list->list) [lc_index], 0, sizeof(file_entry));
-    (list->list) [lc_index].fnamelen = 2;
-    (list->list) [lc_index].fname = g_strdup ("..");
-    (list->list) [lc_index].f.link_to_dir = 0;
-    (list->list) [lc_index].f.stale_link = 0;
-    (list->list) [lc_index].f.dir_size_computed = 0;
-    (list->list) [lc_index].f.marked = 0;
-    (list->list) [lc_index].st.st_mode = 040755;
-    return 1;
-}
-
-/* Used to set up a directory list when there is no access to a directory */
-int
-set_zero_dir (dir_list *list)
-{
-    return (add_dotdot_to_list (list, 0));
+    memset (&(list->list) [0], 0, sizeof(file_entry));
+    list->list[0].fnamelen = 2;
+    list->list[0].fname = g_strdup ("..");
+    list->list[0].f.link_to_dir = 0;
+    list->list[0].f.stale_link = 0;
+    list->list[0].f.dir_size_computed = 0;
+    list->list[0].f.marked = 0;
+    list->list[0].st.st_mode = 040755;
+    return TRUE;
 }
 
 /* If you change handle_dirent then check also handle_path. */
@@ -392,7 +387,7 @@ do_load_dir (const char *path, dir_list *list, sortfn *sort, int lc_reverse,
     struct stat st;
 
     /* ".." (if any) must be the first entry in the list */
-    if (set_zero_dir (list) == 0)
+    if (!set_zero_dir (list))
 	return next_free;
     next_free++;
 
@@ -504,7 +499,7 @@ do_reload_dir (const char *path, dir_list *list, sortfn *sort, int count,
     if (!dirp) {
 	message (D_ERROR, MSG_ERROR, _("Cannot read directory contents"));
 	clean_dir (list, count);
-	return set_zero_dir (list);
+	return set_zero_dir (list) ? 1 : 0;
     }
 
     tree_store_start_check (path);
@@ -530,7 +525,7 @@ do_reload_dir (const char *path, dir_list *list, sortfn *sort, int count,
     /* Add ".." except to the root directory. The ".." entry
        (if any) must be the first in the list. */
     if (strcmp (path, "/") != 0) {
-	if (set_zero_dir (list) == 0) {
+	if (!set_zero_dir (list)) {
 	    clean_dir (list, count);
 	    clean_dir (&dir_copy, count);
 	    return next_free;

@@ -1338,7 +1338,7 @@ panel_reload (WPanel *panel)
 
 	if (panel->cwd[0] == PATH_SEP && panel->cwd[1] == 0) {
 	    panel_clean_dir (panel);
-	    panel->count = set_zero_dir (&panel->dir);
+	    panel->count = set_zero_dir (&panel->dir) ? 1 : 0;
 	    return;
 	}
 	last_slash = strrchr (panel->cwd, PATH_SEP);
@@ -3227,7 +3227,7 @@ reload_panelized (WPanel *panel)
 	j++;
     }
     if (j == 0)
-	panel->count = set_zero_dir (list);
+	panel->count = set_zero_dir (list) ? 1 : 0;
     else
 	panel->count = j;
 
