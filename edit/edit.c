@@ -1627,7 +1627,7 @@ long edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
 	        if (utf8_display)
 	            col += 1;
 	    } else {
-	        col -= cw;
+	        col -= 2;
 	    }
 	    p += cw - 1;
 	}
