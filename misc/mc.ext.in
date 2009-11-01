@@ -343,6 +343,9 @@ regex/([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])\.xz$
 	Open=case %d/%f in */log/*|*/logs/*) xz -dc %f ;; *) xz -dc %f | nroff @MAN_FLAGS@ @MANDOC@ ;; esac | %var{PAGER:more}
 	View=%view{ascii,nroff} case %d/%f in */log/*|*/logs/*) xz -dc %f ;; *) xz -dc %f | nroff @MAN_FLAGS@ @MANDOC@ ;; esac
 
+# CHM
+regex/\.(chm|CHM)$
+	Open=which kchmviewer > /dev/null 2>&1 && (kchmviewer %f &) || (xchm %f &)
 
 ### Images ###
 
