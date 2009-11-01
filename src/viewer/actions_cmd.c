@@ -284,10 +284,14 @@ mcview_handle_editkey (mcview_t * view, int key)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-mcview_execute_cmd (mcview_t * view, int command, int key)
+mcview_execute_cmd (Widget *sender, Widget *receiver,
+		    int command, const void *data)
 {
+    mcview_t *view = (mcview_t *) receiver;
     int res = MSG_HANDLED;
-    (void) key;
+
+    (void) sender;
+    (void) data;
 
     switch (command) {
     case CK_HexViewToggleNavigationMode:
@@ -390,14 +394,14 @@ mcview_handle_key (mcview_t * view, int key)
                 return MSG_HANDLED;
         for (i = 0; view->hex_map[i].key != 0; i++)
             if ((key == view->hex_map[i].key)
-                && (mcview_execute_cmd (view, view->hex_map[i].command,
-                                        key) == MSG_HANDLED))
+                && (mcview_execute_cmd (NULL, (Widget *) view,
+                            view->hex_map[i].command, (const void *) key) == MSG_HANDLED))
                     return MSG_HANDLED;
     }
     for (i = 0; view->plain_map[i].key != 0; i++)
         if ((key == view->plain_map[i].key)
-            && (mcview_execute_cmd (view, view->plain_map[i].command,
-                                    key) == MSG_HANDLED))
+            && (mcview_execute_cmd (NULL, (Widget *) view,
+                            view->plain_map[i].command, (const void *) key) == MSG_HANDLED))
                 return MSG_HANDLED;
 
     if (mcview_check_left_right_keys (view, key))
