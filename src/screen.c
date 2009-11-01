@@ -300,9 +300,6 @@ static const char *
 string_file_mtime (file_entry *fe, int len)
 {
     (void) len;
-    if (!strcmp (fe->fname, "..")) {
-       return "";
-    }
     return file_date (fe->st.st_mtime);
 }
 
@@ -311,9 +308,6 @@ static const char *
 string_file_atime (file_entry *fe, int len)
 {
     (void) len;
-    if (!strcmp (fe->fname, "..")) {
-       return "";
-    }
     return file_date (fe->st.st_atime);
 }
 
@@ -322,9 +316,6 @@ static const char *
 string_file_ctime (file_entry *fe, int len)
 {
     (void) len;
-    if (!strcmp (fe->fname, "..")) {
-       return "";
-    }
     return file_date (fe->st.st_ctime);
 }
 
