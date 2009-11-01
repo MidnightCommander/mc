@@ -576,6 +576,9 @@ regex/\.(d64|D64)$
 regex/\.([Gg][Ll][Aa][Dd][Ee])$
 	Open=if glade-3 --version >/dev/null 2>&1; then (glade-3 %f >/dev/null 2>&1 &); else (glade-2 %f >/dev/null 2>&1 &); fi
 
+# Gettext Catalogs
+shell/.mo
+	View=%view{ascii} msgunfmt %f || cat %f
 
 ### Plain compressed files ###
 
