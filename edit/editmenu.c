@@ -53,8 +53,11 @@
 #include "edit-widget.h"
 
 cb_ret_t
-edit_menu_execute (int command)
+edit_command_execute (Widget *sender, Widget *receiver, int command, const void *data)
 {
+    (void) sender;
+    (void) receiver;
+    (void) data;
     edit_execute_key_command (wedit, command, -1);
     edit_update_screen (wedit);
     return MSG_HANDLED;

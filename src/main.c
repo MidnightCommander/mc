@@ -1126,9 +1126,14 @@ ctl_x_cmd (void)
 }
 
 static cb_ret_t
-midnight_execute_cmd (int command)
+midnight_execute_cmd (Widget *sender, Widget *receiver,
+			int command, const void *data)
 {
     cb_ret_t res = MSG_HANDLED;
+
+    (void) sender;
+    (void) receiver;
+    (void) data;
 
     switch (command) {
     case CK_AddHotlist:
@@ -1584,7 +1589,7 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	    ctl_x_map_enabled = 0;
 	    for (i = 0; main_x_map[i].key; i++)
 		if (parm == main_x_map[i].key)
-		    return midnight_execute_cmd (main_x_map[i].command);
+		    return midnight_execute_cmd (NULL, NULL, main_x_map[i].command, NULL);
 	}
 
 	/* FIXME: should handle all menu shortcuts before this point */
@@ -1684,12 +1689,11 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	    ctl_x_map_enabled = 0;
 	    for (i = 0; main_x_map[i].key; i++)
 		if (parm == main_x_map[i].key)
-		    return midnight_execute_cmd (main_x_map[i].command);
+		    return midnight_execute_cmd (NULL, NULL, main_x_map[i].command, NULL);
 	} else {
-	    for (i = 0; main_map[i].key; i++) {
+	    for (i = 0; main_map[i].key; i++)
 		if (parm == main_map[i].key)
-		    return midnight_execute_cmd (main_map[i].command);
-	    }
+		    return midnight_execute_cmd (NULL, NULL, main_map[i].command, NULL);
 	}
 	return MSG_NOT_HANDLED;
 
@@ -1781,7 +1785,7 @@ load_hint (int force)
 static void
 setup_panels_and_run_mc (void)
 {
-    midnight_dlg->menu_executor = midnight_execute_cmd;
+    midnight_dlg->execute = midnight_execute_cmd;
     midnight_dlg->get_shortcut = midnight_get_shortcut;
 
     add_widget (midnight_dlg, the_menubar);

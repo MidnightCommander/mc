@@ -440,22 +440,20 @@ int dlg_overlap (Widget *a, Widget *b)
 Widget *
 find_widget_type (Dlg_head *h, callback_fn callback)
 {
-    Widget *w;
-    Widget *item;
-    int i;
+    Widget *w = NULL;
 
-    if (!h)
-	return 0;
-    if (!h->current)
-	return 0;
+    if ((h != NULL) && (h->current != NULL)) {
+	int i;
+	Widget *item;
 
-    w = 0;
-    for (i = 0, item = h->current; i < h->count; i++, item = item->next) {
-	if (item->callback == callback) {
-	    w = item;
-	    break;
+	for (i = 0, item = h->current; i < h->count; i++, item = item->next) {
+	    if (item->callback == callback) {
+		w = item;
+		break;
+	    }
 	}
     }
+
     return w;
 }
 

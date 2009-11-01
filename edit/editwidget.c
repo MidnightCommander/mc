@@ -231,7 +231,7 @@ edit_file (const char *_file, int line)
 
     add_widget (edit_dlg, wedit);
 
-    edit_dlg->menu_executor = edit_menu_execute;
+    edit_dlg->execute = edit_command_execute;
     edit_dlg->get_shortcut = edit_get_shortcut;
     edit_menubar = menubar_new (0, 0, COLS, NULL);
     add_widget (edit_dlg, edit_menubar);

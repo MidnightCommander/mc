@@ -42,6 +42,8 @@
 
 int menubar_visible = 1;	/* This is the new default */
 
+static cb_ret_t menubar_callback (Widget *w, widget_msg_t msg, int parm);
+
 menu_entry_t *
 menu_entry_create (const char *name, int command)
 {
@@ -311,7 +313,9 @@ menubar_execute (WMenuBar *menubar)
     if ((entry != NULL) && (entry->command != 0)) {
 	is_right = (menubar->selected != 0);
 	menubar_finish (menubar);
-	menubar->widget.parent->menu_executor (entry->command);
+	menubar->widget.parent->execute (
+			find_widget_type (menubar->widget.parent, menubar_callback),
+			NULL, entry->command, NULL);
 	do_refresh ();
     }
 }

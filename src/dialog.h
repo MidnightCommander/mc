@@ -33,6 +33,8 @@
 #define B_HELP		3
 #define B_USER          100
 
+typedef struct Widget Widget;
+
 /* Widget messages */
 typedef enum {
     WIDGET_INIT,		/* Initialize widget */
@@ -81,11 +83,19 @@ typedef enum {
 
 
 /* Dialog callback */
-struct Dlg_head;
+typedef struct Dlg_head Dlg_head;
 typedef cb_ret_t (*dlg_cb_fn)(struct Dlg_head *h, dlg_msg_t msg, int parm);
 
-/* menu command execution */
-typedef cb_ret_t (*menu_exec_fn) (int command);
+/* keybinding commands execution
+   sender: the widget that sent the command with data
+           currently only two modes are available:
+           sender == NULL: the command was sent by shortcut
+           sender != NULL: the command was sent by menu
+   receiver: the widget that received command and data
+           should be NULL if sender is menu or buttonbar
+*/
+typedef cb_ret_t (*dlg_exec_fn) (Widget *sender, Widget *receiver,
+		    int command, const void *data);
 
 /* get string representation of shortcut assigned  with command */
 /* as menu is a widget of dialog, ask dialog about shortcut string */
@@ -98,7 +108,7 @@ typedef char * (*dlg_shortcut_str) (int command);
 #define DLG_HOT_NORMALC(h)	((h)->color[2])
 #define DLG_HOT_FOCUSC(h)	((h)->color[3])
 
-typedef struct Dlg_head {
+struct Dlg_head {
     /* Set by the user */
     int flags;				/* User flags */
     const char *help_ctx;		/* Name of the help entry */
@@ -122,16 +132,15 @@ typedef struct Dlg_head {
     struct Widget *current;		/* Curently active widget */
     void *data;				/* Data can be passed to dialog */
     dlg_cb_fn callback;
-    menu_exec_fn menu_executor;		/* Execute menu commands */
+    dlg_exec_fn execute;		/* Execute commands, associated with key bindings  */
     dlg_shortcut_str get_shortcut;	/* Shortcut string */
     struct Dlg_head *parent;		/* Parent dialog */
-} Dlg_head;
+};
 
 /* Color styles for normal and error dialogs */
 extern int dialog_colors[4];
 extern int alarm_colors[4];
 
-typedef struct Widget Widget;
 
 /* Widget callback */
 typedef cb_ret_t (*callback_fn) (Widget *widget, widget_msg_t msg, int parm);
