@@ -448,6 +448,9 @@ regex/\.([aA][sS][fFxX])$
 regex/\.([dD][iI][vV][xX])$
 	Include=video
 
+regex/\.([mM][kK][vV])$
+	Include=video
+
 regex/\.([mM][oO][vV]|[qQ][tT])$
 	Include=video
 
