@@ -203,7 +203,6 @@ edit_file (const char *_file, int line)
 {
     static int made_directory = 0;
     Dlg_head *edit_dlg;
-    WButtonBar *edit_bar;
 
     if (!made_directory) {
 	char *dir = concat_dir_and_file (home_dir, EDIT_DIR);
@@ -221,21 +220,20 @@ edit_file (const char *_file, int line)
 	create_dlg (0, 0, LINES, COLS, NULL, edit_dialog_callback,
 		    "[Internal File Editor]", NULL, DLG_WANT_TAB);
 
-    init_widget (&(wedit->widget), 0, 0, LINES - 1, COLS,
-		 edit_callback, edit_event);
-
-    widget_want_cursor (wedit->widget, 1);
-
-    edit_bar = buttonbar_new (1);
-    add_widget (edit_dlg, edit_bar);
-
-    add_widget (edit_dlg, wedit);
-
     edit_dlg->execute = edit_command_execute;
     edit_dlg->get_shortcut = edit_get_shortcut;
     edit_menubar = menubar_new (0, 0, COLS, NULL);
     add_widget (edit_dlg, edit_menubar);
     edit_init_menu (edit_menubar);
+
+
+    init_widget (&(wedit->widget), 0, 0, LINES - 1, COLS,
+		 edit_callback, edit_event);
+    widget_want_cursor (wedit->widget, 1);
+
+    add_widget (edit_dlg, wedit);
+
+    add_widget (edit_dlg, buttonbar_new (1));
 
     run_dlg (edit_dlg);
 
