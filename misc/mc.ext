@@ -298,18 +298,14 @@ shell/.info
 regex/\.(so|so\.[0-9\.]*)$
 	View=%view{ascii} file %f && nm %f
 
-# Exception - .3gp are video files
-regex/\.(3[gG][pP])$
-	Include=video
-
 regex/(([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])|\.man)$
-	Open=case %d/%f in */log/*|*/logs/*) cat %f ;; *) { zsoelim %f 2>/dev/null || cat %f; } | nroff @MAN_FLAGS@ @MANDOC@ ;; esac | %var{PAGER:more}
-	View=%view{ascii,nroff} case %d/%f in */log/*|*/logs/*) cat %f ;; *) { zsoelim %f 2>/dev/null || cat %f; } | nroff @MAN_FLAGS@ @MANDOC@ ;; esac
+	Open=case %d/%f in */log/*|*/logs/*) cat %f ;; *) { zsoelim %f 2>/dev/null || cat %f; } | nroff -c -Tlatin1 -mandoc ;; esac | %var{PAGER:more}
+	View=%view{ascii,nroff} case %d/%f in */log/*|*/logs/*) cat %f ;; *) { zsoelim %f 2>/dev/null || cat %f; } | nroff -c -Tlatin1 -mandoc ;; esac
 
 # Perl pod page
 shell/.pod
-	Open=pod2man %f | nroff @MAN_FLAGS@ @MANDOC@ | %var{PAGER:more}
-	View=%view{ascii,nroff} pod2man %f | nroff @MAN_FLAGS@ @MANDOC@
+	Open=pod2man %f | nroff -c -Tlatin1 -mandoc | %var{PAGER:more}
+	View=%view{ascii,nroff} pod2man %f | nroff -c -Tlatin1 -mandoc
 
 # Troff with me macros.
 # Exception - "read.me" is not a nroff file.
@@ -318,38 +314,35 @@ shell/read.me
 	View=
 
 shell/.me
-	Open=nroff @MAN_FLAGS@ -me %f | %var{PAGER:more}
-	View=%view{ascii,nroff} nroff @MAN_FLAGS@ -me %f
+	Open=nroff -c -Tlatin1 -me %f | %var{PAGER:more}
+	View=%view{ascii,nroff} nroff -c -Tlatin1 -me %f
 
 # Troff with ms macros.
 shell/.ms
-	Open=nroff @MAN_FLAGS@ -ms %f | %var{PAGER:more}
-	View=%view{ascii,nroff} nroff @MAN_FLAGS@ -ms %f
+	Open=nroff -c -Tlatin1 -ms %f | %var{PAGER:more}
+	View=%view{ascii,nroff} nroff -c -Tlatin1 -ms %f
 
 # Manual page - compressed
 regex/([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])\.g?[Zz]$
-	Open=case %d/%f in */log/*|*/logs/*) gzip -dc %f ;; *) gzip -dc %f | nroff @MAN_FLAGS@ @MANDOC@ ;; esac | %var{PAGER:more}
-	View=%view{ascii,nroff} case %d/%f in */log/*|*/logs/*) gzip -dc %f ;; *) gzip -dc %f | nroff @MAN_FLAGS@ @MANDOC@ ;; esac
+	Open=case %d/%f in */log/*|*/logs/*) gzip -dc %f ;; *) gzip -dc %f | nroff -c -Tlatin1 -mandoc ;; esac | %var{PAGER:more}
+	View=%view{ascii,nroff} case %d/%f in */log/*|*/logs/*) gzip -dc %f ;; *) gzip -dc %f | nroff -c -Tlatin1 -mandoc ;; esac
 
 regex/([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])\.bz$
-	Open=case %d/%f in */log/*|*/logs/*) bzip -dc %f ;; *) bzip -dc %f | nroff @MAN_FLAGS@ @MANDOC@ ;; esac | %var{PAGER:more}
-	View=%view{ascii,nroff} case %d/%f in */log/*|*/logs/*) bzip -dc %f ;; *) bzip -dc %f | nroff @MAN_FLAGS@ @MANDOC@ ;; esac
+	Open=case %d/%f in */log/*|*/logs/*) bzip -dc %f ;; *) bzip -dc %f | nroff -c -Tlatin1 -mandoc ;; esac | %var{PAGER:more}
+	View=%view{ascii,nroff} case %d/%f in */log/*|*/logs/*) bzip -dc %f ;; *) bzip -dc %f | nroff -c -Tlatin1 -mandoc ;; esac
 
 regex/([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])\.bz2$
-	Open=case %d/%f in */log/*|*/logs/*) bzip2 -dc %f ;; *) bzip2 -dc %f | nroff @MAN_FLAGS@ @MANDOC@ ;; esac | %var{PAGER:more}
-	View=%view{ascii,nroff} case %d/%f in */log/*|*/logs/*) bzip2 -dc %f ;; *) bzip2 -dc %f | nroff @MAN_FLAGS@ @MANDOC@ ;; esac
+	Open=case %d/%f in */log/*|*/logs/*) bzip2 -dc %f ;; *) bzip2 -dc %f | nroff -c -Tlatin1 -mandoc ;; esac | %var{PAGER:more}
+	View=%view{ascii,nroff} case %d/%f in */log/*|*/logs/*) bzip2 -dc %f ;; *) bzip2 -dc %f | nroff -c -Tlatin1 -mandoc ;; esac
 
 regex/([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])\.lzma$
-	Open=case %d/%f in */log/*|*/logs/*) lzma -dc %f ;; *) lzma -dc %f | nroff @MAN_FLAGS@ @MANDOC@ ;; esac | %var{PAGER:more}
-	View=%view{ascii,nroff} case %d/%f in */log/*|*/logs/*) lzma -dc %f ;; *) lzma -dc %f | nroff @MAN_FLAGS@ @MANDOC@ ;; esac
+	Open=case %d/%f in */log/*|*/logs/*) lzma -dc %f ;; *) lzma -dc %f | nroff -c -Tlatin1 -mandoc ;; esac | %var{PAGER:more}
+	View=%view{ascii,nroff} case %d/%f in */log/*|*/logs/*) lzma -dc %f ;; *) lzma -dc %f | nroff -c -Tlatin1 -mandoc ;; esac
 
 regex/([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])\.xz$
-	Open=case %d/%f in */log/*|*/logs/*) xz -dc %f ;; *) xz -dc %f | nroff @MAN_FLAGS@ @MANDOC@ ;; esac | %var{PAGER:more}
-	View=%view{ascii,nroff} case %d/%f in */log/*|*/logs/*) xz -dc %f ;; *) xz -dc %f | nroff @MAN_FLAGS@ @MANDOC@ ;; esac
+	Open=case %d/%f in */log/*|*/logs/*) xz -dc %f ;; *) xz -dc %f | nroff -c -Tlatin1 -mandoc ;; esac | %var{PAGER:more}
+	View=%view{ascii,nroff} case %d/%f in */log/*|*/logs/*) xz -dc %f ;; *) xz -dc %f | nroff -c -Tlatin1 -mandoc ;; esac
 
-# CHM
-regex/\.(chm|CHM)$
-	Open=which kchmviewer > /dev/null 2>&1 && (kchmviewer %f &) || (xchm %f &)
 
 ### Images ###
 
@@ -357,7 +350,6 @@ type/^GIF
 	Include=image
 
 type/^JPEG
-	View=%view{ascii} identify %f; test -x /usr/bin/exif && echo && exif %f 2>/dev/null
 	Include=image
 
 type/^PC\ bitmap
@@ -494,7 +486,7 @@ type/^PDF
 
 # html
 regex/\.([hH][tT][mM][lL]?)$
-	Open=(if test -n "@X11_WWW@" && test -n "$DISPLAY"; then (@X11_WWW@ file://%d/%p &) 1>&2; else links %f || lynx -force_html %f || ${PAGER:-more} %f; fi) 2>/dev/null
+	Open=(if test -n "" && test -n "$DISPLAY"; then ( file://%d/%p &) 1>&2; else links %f || lynx -force_html %f || ${PAGER:-more} %f; fi) 2>/dev/null
 	View=%view{ascii} links -dump %f 2>/dev/null || w3m -dump %f 2>/dev/null || lynx -dump -force_html %f
 
 # StarOffice 5.2
@@ -584,9 +576,6 @@ regex/\.(d64|D64)$
 regex/\.([Gg][Ll][Aa][Dd][Ee])$
 	Open=if glade-3 --version >/dev/null 2>&1; then (glade-3 %f >/dev/null 2>&1 &); else (glade-2 %f >/dev/null 2>&1 &); fi
 
-# Gettext Catalogs
-shell/.mo
-	View=%view{ascii} msgunfmt %f || cat %f
 
 ### Plain compressed files ###
 
