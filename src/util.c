@@ -720,17 +720,13 @@ const char *
 unix_error_string (int error_num)
 {
     static char buffer [BUF_LARGE];
-#if GLIB_MAJOR_VERSION >= 2
     gchar *strerror_currentlocale;
-	
+
     strerror_currentlocale = g_locale_from_utf8(g_strerror (error_num), -1, NULL, NULL, NULL);
     g_snprintf (buffer, sizeof (buffer), "%s (%d)",
 		strerror_currentlocale, error_num);
     g_free(strerror_currentlocale);
-#else
-    g_snprintf (buffer, sizeof (buffer), "%s (%d)",
-		g_strerror (error_num), error_num);
-#endif
+
     return buffer;
 }
 

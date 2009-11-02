@@ -281,7 +281,7 @@ mcview_hexedit_save_changes (mcview_t * view)
     }
 
     if (mc_close (fp) == -1) {
-        error = g_strdup (strerror (errno));
+        error = g_strdup (unix_error_string (errno));
         message (D_ERROR, _(" Save file "),
                  _(" Error while closing the file: \n %s \n"
                    " Data may have been written or not. "), error);
@@ -291,7 +291,7 @@ mcview_hexedit_save_changes (mcview_t * view)
     return TRUE;
 
   save_error:
-    error = g_strdup (strerror (errno));
+    error = g_strdup (unix_error_string (errno));
     text = g_strdup_printf (_(" Cannot save file: \n %s "), error);
     g_free (error);
     (void) mc_close (fp);
