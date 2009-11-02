@@ -38,6 +38,9 @@ extern const global_keymap_t default_editor_keymap[];
 extern const global_keymap_t default_editor_x_keymap[];
 #endif
 
+/* tree.c */
+extern const global_keymap_t default_tree_keymap[];
+
 /* screen.c */
 extern const global_keymap_t default_panel_keymap[];
 

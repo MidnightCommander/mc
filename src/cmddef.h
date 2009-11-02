@@ -251,6 +251,26 @@
 #define CK_HexViewToggleNavigationMode  5018
 #define CK_ViewQuit                     5020
 
+/* Tree */
+#define CK_TreeHelp                     6001
+#define CK_TreeForget                   6003
+#define CK_TreeToggleNav                6004
+#define CK_TreeCopy                     6005
+#define CK_TreeMove                     6006
+#define CK_TreeMake                     6007
+#define CK_TreeMoveUp                   6011
+#define CK_TreeMoveDown                 6012
+#define CK_TreeMoveLeft                 6013
+#define CK_TreeMoveRight                6014
+#define CK_TreeMoveHome                 6015
+#define CK_TreeMoveEnd                  6016
+#define CK_TreeMovePgUp                 6017
+#define CK_TreeMovePgDn                 6018
+#define CK_TreeOpen                     6019
+#define CK_TreeRescan                   6020
+#define CK_TreeStartSearch              6021
+#define CK_TreeRemove                   6022
+
 /* main commands */
 #define CK_AddHotlist                   7001
 #define CK_ChmodCmd                     7002

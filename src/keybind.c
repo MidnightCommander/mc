@@ -215,7 +215,7 @@ static name_keymap_t command_names[] = {
     { "EditMaximize",                    CK_Maximize },
 #endif
 
-#endif
+#endif		/* USE_INTERNAL_EDIT */
 
     /* viewer */
     { "ViewSearch",                      CK_ViewSearch },
@@ -237,6 +237,26 @@ static name_keymap_t command_names[] = {
     { "ViewToggleRuler",                 CK_ViewToggleRuler },
     { "HexViewToggleNavigationMode",     CK_HexViewToggleNavigationMode },
     { "ViewQuit",                        CK_ViewQuit },
+
+    /* tree */
+    { "TreeHelp",                        CK_TreeHelp },
+    { "TreeForget",                      CK_TreeForget },
+    { "TreeToggleNav",                   CK_TreeToggleNav },
+    { "TreeCopy",                        CK_TreeCopy },
+    { "TreeMove",                        CK_TreeMove },
+    { "TreeMake",                        CK_TreeMake },
+    { "TreeMoveUp",                      CK_TreeMoveUp },
+    { "TreeMoveDown",                    CK_TreeMoveDown },
+    { "TreeMoveLeft",                    CK_TreeMoveLeft },
+    { "TreeMoveRight",                   CK_TreeMoveRight },
+    { "TreeMoveHome",                    CK_TreeMoveHome },
+    { "TreeMoveEnd",                     CK_TreeMoveEnd },
+    { "TreeMovePgUp",                    CK_TreeMovePgUp },
+    { "TreeMovePgDn",                    CK_TreeMovePgDn },
+    { "TreeOpen",                        CK_TreeOpen },
+    { "TreeRescan",                      CK_TreeRescan },
+    { "TreeStartSearch",                 CK_TreeStartSearch },
+    { "TreeRemove",                      CK_TreeRemove },
 
     /* main commands */
     { "CmdChmod",                        CK_ChmodCmd },
@@ -398,7 +418,7 @@ static name_keymap_t command_names[] = {
     { "ShowCommandLine",                 CK_ShowCommandLine },
     { "SelectCodepage",                  CK_SelectCodepage },
 
-    { NULL,                              0 }
+    { NULL,                              CK_Ignore_Key }
 };
 
 static const size_t num_command_names = sizeof (command_names) /
@@ -458,7 +478,7 @@ const global_keymap_t default_viewer_keymap[] = {
     { ALT ('e'),   CK_SelectCodepage,     "M-e" },
     { XCTRL ('o'), CK_ShowCommandLine,    "C-o" },
 
-    { 0, 0, "" }
+    { 0, CK_Ignore_Key, "" }
 };
 
 const global_keymap_t default_viewer_hex_keymap[] = {
@@ -480,7 +500,7 @@ const global_keymap_t default_viewer_hex_keymap[] = {
     { KEY_DOWN,    CK_ViewMoveDown,                "Down" },
     { KEY_DC,      CK_ViewMoveDown,                "Delete" },
 
-    { 0, 0, "" }
+    { 0, CK_Ignore_Key, "" }
 };
 
 #ifdef USE_INTERNAL_EDIT
@@ -604,16 +624,51 @@ const global_keymap_t default_editor_keymap[] = {
 
     { XCTRL ('x'),                          CK_Ext_Mode,                    "C-x" },
 
-    { 0, 0, "" }
+    { 0, CK_Ignore_Key, "" }
 };
 
 /* emacs keyboard layout emulation */
 const global_keymap_t default_editor_x_keymap[] = {
     { 'k', CK_New,           "k"},
     { 'e', CK_Execute_Macro, "e"},
-    { 0, 0, "" }
+    { 0, CK_Ignore_Key, "" }
 };
 #endif
+
+/* tree */
+const global_keymap_t default_tree_keymap[] = {
+    { KEY_F (1),   CK_TreeHelp,        "F1"},
+    { KEY_F (2),   CK_TreeRescan,      "F2" },
+    { KEY_F (3),   CK_TreeForget,      "F3" },
+    { KEY_F (4),   CK_TreeToggleNav,   "F4" },
+    { KEY_F (5),   CK_TreeCopy,        "F5" },
+    { KEY_F (6),   CK_TreeMove,        "F6" },
+#if 0
+    { KEY_F (7),   CK_TreeMake,        "F7" },
+#endif
+    { KEY_F (8),   CK_TreeRemove,      "F8" },
+    { KEY_UP,      CK_TreeMoveUp,      "Up" },
+    { XCTRL ('p'), CK_TreeMoveUp,      "C-p" },
+    { KEY_DOWN,    CK_TreeMoveDown,    "Down" },
+    { XCTRL ('n'), CK_TreeMoveDown,    "C-n" },
+    { KEY_LEFT,    CK_TreeMoveLeft,    "Left" },
+    { KEY_RIGHT,   CK_TreeMoveRight,   "Right" },
+    { KEY_HOME,    CK_TreeMoveHome,    "Home" },
+    { ALT ('<'),   CK_TreeMoveHome,    "M-<" },
+    { KEY_END,     CK_TreeMoveEnd ,    "End" },
+    { ALT ('>'),   CK_TreeMoveEnd ,    "M->" },
+    { KEY_PPAGE,   CK_TreeMovePgUp,    "PgUp" },
+    { ALT ('v'),   CK_TreeMovePgUp,    "M-v" },
+    { KEY_NPAGE,   CK_TreeMovePgDn,    "PnDn" },
+    { XCTRL ('v'), CK_TreeMovePgDn,    "C-v" },
+    { '\n',        CK_TreeOpen,        "Enter" },
+    { KEY_ENTER,   CK_TreeOpen,        "Enter" },
+    { XCTRL ('r'), CK_TreeRescan,      "C-r" },
+    { XCTRL ('s'), CK_TreeStartSearch, "C-s" },
+    { ALT ('s'),   CK_TreeStartSearch, "M-s" },
+    { KEY_DC,      CK_TreeRemove,      "Delete" },
+    { 0, CK_Ignore_Key, ""}
+};
 
 /* screen.c */
 const global_keymap_t default_panel_keymap[] = {
@@ -651,8 +706,7 @@ const global_keymap_t default_panel_keymap[] = {
     { XCTRL ('s'),            CK_PanelStartSearch,          "C-s" },
     { ALT ('s'),              CK_PanelStartSearch,          "M-s" },
     { ALT ('i'),              CK_PanelSyncOtherPanel,       "M-i" },
-
-    { 0, 0 , "" }
+    { 0, CK_Ignore_Key , "" }
 };
 
 /* main.c */
@@ -696,8 +750,7 @@ const global_keymap_t default_main_map[] = {
     { ALT ('*'),              CK_SelectCmd,           "M-*" },
     { KEY_KP_ADD,             CK_UnselectCmd,         "Gray+" },
     { KEY_KP_SUBTRACT,        CK_ReverseSelectionCmd, "Gray-" },
-
-    { 0, 0, "" }
+    { 0, CK_Ignore_Key, "" }
 };
 
 const global_keymap_t default_main_x_map[] = {
@@ -725,8 +778,7 @@ const global_keymap_t default_main_x_map[] = {
 #ifdef WITH_BACKGROUND
     { 'j',         CK_JobsCmd,             "j" },
 #endif				/* WITH_BACKGROUND */
-
-    { 0, 0, "" }
+    { 0, CK_Ignore_Key, "" }
 };
 
 const global_keymap_t default_input_keymap[] = {
@@ -769,7 +821,7 @@ const global_keymap_t default_input_keymap[] = {
     /* Completion */
     { ALT ('\t'),             CK_InputComplete,         "M-tab" },
 
-    { 0, 0, "" }
+    { 0, CK_Ignore_Key, "" }
 };
 
 static int
@@ -804,7 +856,7 @@ lookup_action (const char *keyname)
     res = bsearch (&key, command_names, num_command_names,
 		    sizeof (command_names[0]), name_keymap_comparator);
 
-    return (res != NULL) ? res->val : 0;
+    return (res != NULL) ? res->val : CK_Ignore_Key;
 }
 
 static void

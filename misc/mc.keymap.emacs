@@ -313,3 +313,22 @@ InputHistoryNext = alt-n; ctrl-up
 InputHistoryShow = alt-h
 InputComplete = alt-tab
 InputClearLine =
+
+[tree]
+TreeHelp = f1
+TreeForget = f3
+TreeToggleNav = f4
+TreeCopy = f5
+TreeMove = f6
+TreeMoveUp = up; ctrl-p
+TreeMoveDown = down; ctrl-n
+TreeMoveLeft = left
+TreeMoveRight = right
+TreeMoveHome = home; alt-lt
+TreeMoveEnd = end; alt-gt
+TreeMovePgUp = pgup; alt-v
+TreeMovePgDn = pgdn; ctrl-v
+TreeOpen = enter
+TreeRescan = f2; ctrl-r
+TreeStartSearch = ctrl-s; alt-s
+TreeRemove = f8; delete

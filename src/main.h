@@ -83,11 +83,13 @@ extern GArray *viewer_keymap;
 extern GArray *viewer_hex_keymap;
 extern GArray *main_keymap;
 extern GArray *main_x_keymap;
+extern GArray *tree_keymap;
 extern GArray *panel_keymap;
 extern GArray *input_keymap;
 
 extern const global_keymap_t *panel_map;
 extern const global_keymap_t *input_map;
+extern const global_keymap_t *tree_map;
 
 #ifdef HAVE_SUBSHELL_SUPPORT
 void do_update_prompt (void);

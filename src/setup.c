@@ -1011,6 +1011,9 @@ load_keymap_defs (void)
         input_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
         load_keymap_from_section ("input", input_keymap, mc_global_keymap);
 
+        tree_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
+        load_keymap_from_section ("tree", tree_keymap, mc_global_keymap);
+
         mc_config_deinit (mc_global_keymap);
     }
 }
@@ -1028,6 +1031,7 @@ free_keymap_defs (void)
         g_array_free (main_x_keymap, TRUE);
         g_array_free (panel_keymap, TRUE);
         g_array_free (input_keymap, TRUE);
+        g_array_free (tree_keymap, TRUE);
 }
 
 void

@@ -316,6 +316,7 @@ GArray *main_keymap = NULL;
 GArray *main_x_keymap = NULL;
 GArray *panel_keymap = NULL;
 GArray *input_keymap = NULL;
+GArray *tree_keymap = NULL;
 
 const global_keymap_t *main_map;
 const global_keymap_t *main_x_map;
@@ -1879,25 +1880,24 @@ do_nc (void)
     check_codeset ();
 
     main_map = default_main_map;
-
     if (main_keymap && main_keymap->len > 0)
         main_map = (global_keymap_t *) main_keymap->data;
 
     main_x_map = default_main_x_map;
-
     if (main_x_keymap && main_x_keymap->len > 0)
         main_x_map = (global_keymap_t *) main_x_keymap->data;
 
     panel_map = default_panel_keymap;
-
-    if (panel_keymap && panel_keymap->len > 0) {
+    if (panel_keymap && panel_keymap->len > 0)
         panel_map = (global_keymap_t *) panel_keymap->data;
-    }
 
     input_map = default_input_keymap;
-
     if (input_keymap && input_keymap->len > 0)
         input_map = (global_keymap_t *) input_keymap->data;
+
+    tree_map = default_tree_keymap;
+    if (tree_keymap && tree_keymap->len > 0)
+        tree_map = (global_keymap_t *) tree_keymap->data;
 
     /* Check if we were invoked as an editor or file viewer */
     if (!mc_maybe_editor_or_viewer ()) {
