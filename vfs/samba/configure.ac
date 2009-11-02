@@ -140,7 +140,7 @@ if test x"$ac_cv_func_connect" = x"no"; then
 fi
 
 AC_CHECK_FUNCS(waitpid getcwd strtoul strerror chown chmod)
-AC_CHECK_FUNCS(fstat strchr utime utimes getrlimit fsync bzero memset)
+AC_CHECK_FUNCS(fstat strchr utime utimes getrlimit fsync memset)
 AC_CHECK_FUNCS(memmove vsnprintf snprintf setsid glob pipe crypt16 getauthuid)
 AC_CHECK_FUNCS(sigprocmask sigblock sigaction innetgr setnetgrent getnetgrent endnetgrent)
 AC_CHECK_FUNCS(initgroups select rdchk getgrnam pathconf)
