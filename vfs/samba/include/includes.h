@@ -454,18 +454,9 @@
 #define MAX(a,b) ((a)>(b)?(a):(b))
 #endif
 
-#ifndef HAVE_STRERROR
-extern char *sys_errlist[];
-#define strerror(i) sys_errlist[i]
-#endif
-
 #ifndef HAVE_STRCHR
 # define strchr                 index
 # define strrchr                rindex
-#endif
-
-#ifndef HAVE_ERRNO_DECL
-extern int errno;
 #endif
 
 #ifdef HAVE_BROKEN_GETGROUPS

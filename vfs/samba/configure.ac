@@ -78,13 +78,6 @@ AC_CHECK_TYPE(ssize_t, int)
 # we need libdl for PAM and the new VFS code
 AC_CHECK_LIB(dl,main)
 
-AC_CACHE_CHECK([for errno in errno.h],samba_cv_errno, [
-    AC_TRY_COMPILE([#include <errno.h>],[int i = errno],
-	samba_cv_errno=yes,samba_cv_have_errno=no)])
-if test x"$samba_cv_errno" = x"yes"; then
-   AC_DEFINE(HAVE_ERRNO_DECL, 1, [Define if errno is declared])
-fi
-
 # stupid glibc has the functions but no declaration. grrrr.
 AC_CACHE_CHECK([for crypt declaration],samba_cv_have_crypt_decl,[
     AC_TRY_COMPILE([#include <unistd.h>],[int i = (int)crypt],
@@ -138,7 +131,7 @@ if test x"$ac_cv_func_connect" = x"no"; then
     fi
 fi
 
-AC_CHECK_FUNCS(waitpid getcwd strtoul strerror chown chmod)
+AC_CHECK_FUNCS(waitpid getcwd strtoul chown chmod)
 AC_CHECK_FUNCS(fstat strchr utime utimes getrlimit fsync memset)
 AC_CHECK_FUNCS(memmove vsnprintf snprintf setsid glob pipe crypt16 getauthuid)
 AC_CHECK_FUNCS(sigprocmask sigblock sigaction innetgr setnetgrent getnetgrent endnetgrent)
