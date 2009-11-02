@@ -22,6 +22,7 @@
 
 #include "includes.h"
 
+const char *unix_error_string (int error_num);
 extern pstring scope;
 extern int DEBUGLEVEL;
 
@@ -228,7 +229,7 @@ FILE *startlmhosts(const char *fname)
   FILE *fp = sys_fopen(fname,"r");
   if (!fp) {
     DEBUG(4,("startlmhosts: Cannot open lmhosts file %s. Error was %s\n",
-             fname, strerror(errno)));
+             fname, unix_error_string (errno)));
     return NULL;
   }
   return fp;

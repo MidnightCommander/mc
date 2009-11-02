@@ -22,6 +22,7 @@
 
 #include "includes.h"
 
+const char *unix_error_string (int error_num);
 extern int DEBUGLEVEL;
 
 int num_good_sends = 0;
@@ -722,7 +723,7 @@ static BOOL send_udp(int fd,char *buf,int len,struct in_addr ip,int port)
 
   if (!ret)
     DEBUG(0,("Packet send failed to %s(%d) ERRNO=%s\n",
-	     inet_ntoa(ip),port,strerror(errno)));
+	     inet_ntoa(ip),port, unix_error_string (errno)));
 
   if (ret)
     num_good_sends++;

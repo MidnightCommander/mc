@@ -80,6 +80,7 @@
  */
 
 #include "includes.h"
+const char *unix_error_string (int error_num);
 
 /* -------------------------------------------------------------------------- **
  * Constants...
@@ -504,7 +505,7 @@ static FILE *OpenConfFile( const char *FileName )
     {
     DEBUG( lvl,
       ("%s Unable to open configuration file \"%s\":\n\t%s\n",
-      func, FileName, strerror(errno)) );
+      func, FileName, unix_error_string (errno)) );
     }
 
   return( OpenedFile );

@@ -22,6 +22,7 @@
 #define CHARSET_C
 #include "includes.h"
 
+const char *unix_error_string (int error_num);
 extern int DEBUGLEVEL;
 
 /*
@@ -238,14 +239,14 @@ code page file (size=%d).\n", codepage_file_name, (int)size));
   if((fp = sys_fopen( codepage_file_name, "r")) == NULL)
   {
     DEBUG(0,("load_client_codepage: cannot open file %s. Error was %s\n",
-              codepage_file_name, strerror(errno)));
+              codepage_file_name, unix_error_string (errno)));
     return NULL;
   }
 
   if(fread( buf, 1, CODEPAGE_HEADER_SIZE, fp)!=CODEPAGE_HEADER_SIZE)
   {
     DEBUG(0,("load_client_codepage: cannot read header from file %s. Error was %s\n",
-              codepage_file_name, strerror(errno)));
+              codepage_file_name, unix_error_string (errno)));
     goto clean_and_exit;
   }
 
@@ -298,7 +299,7 @@ multiple of 4.\n", codepage_file_name));
   if(fread( (char *)cp_p, 1, size, fp)!=size)
   {
     DEBUG(0,("load_client_codepage: read fail on file %s. Error was %s.\n",
-              codepage_file_name, strerror(errno)));
+              codepage_file_name, unix_error_string (errno)));
     goto clean_and_exit;
   }
 

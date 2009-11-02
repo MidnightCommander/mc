@@ -81,7 +81,7 @@ BOOL file_lock(int fd, int type, int secs, int *plock_depth)
   {
     if (!do_file_lock(fd, secs, type)) {
       DEBUG(10,("file_lock: locking file failed, error = %s.\n",
-                 strerror(errno)));
+                 unix_error_string (errno)));
       return False;
     }
   }
@@ -104,7 +104,7 @@ BOOL file_unlock(int fd, int *plock_depth)
 
   if(!ret)
     DEBUG(10,("file_unlock: unlocking file failed, error = %s.\n",
-                 strerror(errno)));
+                 unix_error_string (errno)));
   return ret;
 }
 
