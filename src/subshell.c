@@ -198,9 +198,7 @@ static void
 init_subshell_child (const char *pty_name)
 {
     const char *init_file = NULL;
-#ifdef HAVE_GETSID
     pid_t mc_sid;
-#endif				/* HAVE_GETSID */
 
     (void) pty_name;
     setsid ();			/* Get a fresh terminal session */
@@ -235,7 +233,6 @@ init_subshell_child (const char *pty_name)
     /* and the user's startup file may do a `cd' command anyway   */
     chdir (home_dir);		/* FIXME? What about when we re-run the subshell? */
 
-#ifdef HAVE_GETSID
     /* Set MC_SID to prevent running one mc from another */
     mc_sid = getsid (0);
     if (mc_sid != -1) {
@@ -244,7 +241,6 @@ init_subshell_child (const char *pty_name)
 		    (long) mc_sid);
 	putenv (g_strdup (sid_str));
     }
-#endif				/* HAVE_GETSID */
 
     switch (subshell_type) {
     case BASH:
@@ -320,7 +316,6 @@ init_subshell_child (const char *pty_name)
 }
 
 
-#ifdef HAVE_GETSID
 /*
  * Check MC_SID to prevent running one mc from another.
  * Return:
@@ -362,7 +357,6 @@ check_sid (void)
 
     return 1;
 }
-#endif				/* HAVE_GETSID */
 
 
 /*
@@ -381,7 +375,6 @@ init_subshell (void)
     static char pty_name[BUF_SMALL];
     char precmd[BUF_SMALL];
 
-#ifdef HAVE_GETSID
     switch (check_sid ()) {
     case 1:
 	use_subshell = FALSE;
@@ -391,7 +384,6 @@ init_subshell (void)
 	midnight_shutdown = 1;
 	return;
     }
-#endif				/* HAVE_GETSID */
 
     /* Take the current (hopefully pristine) tty mode and make */
     /* a raw mode based on it now, before we do anything else with it */

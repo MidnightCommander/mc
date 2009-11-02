@@ -1007,13 +1007,8 @@ do_auth (const char *username, const char *password)
 #endif
 #endif
 
-#if defined (HAVE_SETUID)
     if (setuid (this->pw_uid))
 	return 0;
-#elif defined (HAVE_SETREUID)
-    if (setreuid (this->pw_uid, this->pw_uid))
-	return 0;
-#endif
 
     /* If the setuid call failed, then deny access */
     /* This should fix the problem on those machines with strange setups */

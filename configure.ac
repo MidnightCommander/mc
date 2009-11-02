@@ -161,11 +161,10 @@ dnl
 AC_CHECK_FUNCS([\
 	atoll \
 	cfgetospeed \
-	getegid geteuid getgid getsid getuid \
 	initgroups isascii \
 	memcpy memset \
 	putenv \
-	setreuid setuid statfs strerror sysconf \
+	setreuid statfs strerror sysconf \
 	tcgetattr tcsetattr truncate \
 ])
 
