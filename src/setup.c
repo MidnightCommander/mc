@@ -196,6 +196,7 @@ static const struct {
     { "ftpfs_retry_seconds", &ftpfs_retry_seconds },
     { "ftpfs_always_use_proxy", &ftpfs_always_use_proxy },
     { "ftpfs_use_passive_connections", &ftpfs_use_passive_connections },
+    { "ftpfs_use_passive_connections_over_proxy", &ftpfs_use_passive_connections_over_proxy },
     { "ftpfs_use_unix_list_options", &ftpfs_use_unix_list_options },
     { "ftpfs_first_cd_then_ls", &ftpfs_first_cd_then_ls },
     { "fish_directory_timeout", &fish_directory_timeout },
