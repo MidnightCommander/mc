@@ -23,14 +23,14 @@ cb_ret_t check_movement_keys (int key, int page_size, void *data,
                               move_fn backfn, move_fn forfn, move_fn topfn, move_fn bottomfn);
 int lookup_key (const char *keyname, char **label);
 
-typedef const struct {
+typedef struct {
     int code;
     const char *name;
     const char *longname;
     const char *shortcut;
 } key_code_name_t;
 
-extern key_code_name_t key_name_conv_tab[];
+extern const key_code_name_t key_name_conv_tab[];
 
 /* mouse support */
 struct Gpm_Event;

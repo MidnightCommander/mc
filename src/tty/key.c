@@ -93,7 +93,7 @@ int use_8th_bit_as_meta = 0;
  * We use this to allow users to define alternate definitions for
  * certain keys that may be missing from the terminal database
  */
-key_code_name_t key_name_conv_tab[] = {
+const key_code_name_t key_name_conv_tab[] = {
     /* KEY_F(0) is not here, since we are mapping it to f10, so there is no reason
 	to define f0 as well. Also, it makes Learn keys a bunch of problems :( */
     { KEY_F (1),	"f1",		N_("Function key 1"),	"F1" },
@@ -1231,22 +1231,61 @@ check_movement_keys (int key, int page_size, void *data, move_fn backfn,
     return MSG_HANDLED;
 }
 
+
+static const size_t key_name_conv_tab_size = sizeof (key_name_conv_tab) /
+						sizeof (key_name_conv_tab[0]) - 1;
+static key_code_name_t key_name_conv_tab_sorted [sizeof (key_name_conv_tab) /
+						sizeof (key_name_conv_tab[0]) - 1];
+
+static int
+key_code_name_comparator (const void *p1, const void *p2)
+{
+    const key_code_name_t *n1 = (const key_code_name_t *) p1;
+    const key_code_name_t *n2 = (const key_code_name_t *) p2;
+
+    return str_casecmp (n1->name, n2->name);
+}
+
+static void
+sort_key_name_conv_tab (void)
+{
+    static gboolean has_been_sorted = FALSE;
+
+    if (!has_been_sorted) {
+	int i;
+	for (i = 0; key_name_conv_tab[i].code; i++)
+	    key_name_conv_tab_sorted[i] = key_name_conv_tab[i];
+
+	qsort (key_name_conv_tab_sorted, key_name_conv_tab_size,
+		 sizeof (key_name_conv_tab_sorted[0]), &key_code_name_comparator);
+
+	has_been_sorted = TRUE;
+    }
+}
+
 static int
 lookup_keyname (const char *keyname, int *lc_index)
 {
     if (keyname[0] != '\0') {
-	int i;
+	const key_code_name_t key = { 0, keyname, NULL, NULL };
+	key_code_name_t *res;
 
 	if (keyname[1] == '\0') {
 	    *lc_index = -1;
 	    return (int) keyname[0];
 	}
 
-	for (i = 0; key_name_conv_tab[i].code; i++)
-	    if (str_casecmp (key_name_conv_tab[i].name, keyname) == 0) {
-		*lc_index = i;
-		return key_name_conv_tab[i].code;
-	    }
+	sort_key_name_conv_tab ();
+
+	res = bsearch (&key, key_name_conv_tab_sorted,
+			    key_name_conv_tab_size,
+			    sizeof (key_name_conv_tab_sorted[0]),
+			    key_code_name_comparator);
+
+	if (res != NULL) {
+	    *lc_index = (int) (res - key_name_conv_tab_sorted);
+	    return res->code;
+	}
     }
 
     *lc_index = -1;
