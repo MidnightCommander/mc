@@ -32,7 +32,7 @@
 #include "../src/tty/tty.h"
 #include "../src/args.h"
 #include "../src/strutil.h"
-
+#include "../src/textconf.h"
 
 /*** external variables **************************************************************************/
 

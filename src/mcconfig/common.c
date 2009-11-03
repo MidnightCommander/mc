@@ -30,6 +30,7 @@
 #include "global.h"
 
 #include "../../vfs/vfs.h"      /* mc_stat */
+#include "../../src/util.h"
 
 #include "mcconfig.h"
 
