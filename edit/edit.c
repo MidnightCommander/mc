@@ -3121,9 +3121,8 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
     case CK_Edit_Save_Mode:
 	menu_save_mode_cmd ();
     case CK_Date:
-	break;
 	{
-	    char s[1024];
+	    char s[BUF_MEDIUM];
 	    /* fool gcc to prevent a Y2K warning */
 	    char time_format[] = "_c";
 	    time_format[0] = '%';
@@ -3133,6 +3132,7 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	    edit->force |= REDRAW_PAGE;
 	    break;
 	}
+	break;
     case CK_Goto:
 	edit_goto_cmd (edit);
 	break;
