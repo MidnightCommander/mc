@@ -89,6 +89,7 @@ What to do with this?
 #include "../src/main.h"	/* print_vfs_message */
 #include "../src/history.h"
 #include "../src/setup.h"	/* for load_anon_passwd */
+#include "../src/mcconfig/mcconfig.h"
 
 #include "utilvfs.h"
 #include "xdirentry.h"
@@ -1655,9 +1656,18 @@ ftpfs_init_passwd(void)
 static int ftpfs_chmod (struct vfs_class *me, const char *path, int mode)
 {
     char buf[BUF_SMALL];
+    int ret;
 
     g_snprintf(buf, sizeof(buf), "SITE CHMOD %4.4o /%%s", mode & 07777);
-    return ftpfs_send_command(me, path, buf, OPT_FLUSH);
+
+    ret = ftpfs_send_command(me, path, buf, OPT_FLUSH);
+
+    if ( mc_config_get_bool (mc_main_config, CONFIG_APP_SECTION,
+            "ignore_ftp_chattr_errors", TRUE)) {
+        return 0;
+    }
+
+    return ret;
 }
 
 static int ftpfs_chown (struct vfs_class *me, const char *path, int owner, int group)
