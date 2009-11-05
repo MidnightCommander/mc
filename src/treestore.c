@@ -220,7 +220,7 @@ tree_store_load_from(char *name)
 	    lc_name = decode(buffer + 2);
 
 	    len = strlen(lc_name);
-	    if (name[0] != PATH_SEP) {
+	    if (lc_name[0] != PATH_SEP) {
 		/* Clear-text decompression */
 		char *s = strtok(lc_name, " ");
 
