@@ -635,15 +635,10 @@ display_bits_box (void)
 
 #endif /* HAVE_CHARSET */
 
-
-#define TREE_Y 20
-#define TREE_X 60
-
 static cb_ret_t
-tree_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
+tree_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 {
     switch (msg) {
-
     case DLG_POST_KEY:
 	/* The enter key will be processed by the tree widget */
 	if (parm == '\n') {
@@ -651,7 +646,7 @@ tree_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	    dlg_stop (h);
 	}
 	return MSG_HANDLED;
-	
+
     default:
 	return default_dlg_callback (h, msg, parm);
     }
@@ -667,10 +662,13 @@ tree_box (const char *current_dir)
     WButtonBar *bar;
 
     (void) current_dir;
+
     /* Create the components */
-    dlg = create_dlg (0, 0, TREE_Y, TREE_X, dialog_colors,
-		      tree_callback, "[Directory Tree]", NULL, DLG_CENTER | DLG_REVERSE);
-    mytree = tree_new (0, 2, 2, TREE_Y - 6, TREE_X - 5);
+    dlg = create_dlg (0, 0, LINES - 9, COLS - 20, dialog_colors,
+			tree_callback, "[Directory Tree]",
+			NULL, DLG_CENTER | DLG_REVERSE);
+
+    mytree = tree_new (0, 2, 2, dlg->lines - 6, dlg->cols - 5);
     add_widget (dlg, mytree);
     bar = buttonbar_new(1);
     add_widget (dlg, bar);
