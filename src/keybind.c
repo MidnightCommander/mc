@@ -75,6 +75,7 @@ static name_keymap_t command_names[] = {
     { "EditDeleteWordRight",               CK_Delete_Word_Right },
     { "EditParagraphUp",                   CK_Paragraph_Up },
     { "EditParagraphDown",                 CK_Paragraph_Down },
+    { "EditMenu",                          CK_Menu },
     { "EditSave",                          CK_Save },
     { "EditLoad",                          CK_Load },
     { "EditNew",                           CK_New },
@@ -210,7 +211,6 @@ static name_keymap_t command_names[] = {
     { "EditSaveDesktop",                 CK_Save_Desktop },
     { "EditNewWindow",                   CK_New_Window },
     { "EditCycle",                       CK_Cycle },
-    { "EditMenu",                        CK_Menu },
     { "EditSaveAndQuit",                 CK_Save_And_Quit },
     { "EditRunAnother",                  CK_Run_Another },
     { "EditCheckSaveAndQuit",            CK_Check_Save_And_Quit },
@@ -261,6 +261,8 @@ static name_keymap_t command_names[] = {
     { "TreeRemove",                      CK_TreeRemove },
 
     /* main commands */
+    { "CmdHelp",                         CK_HelpCmd },
+    { "CmdMenu",                         CK_MenuCmd },
     { "CmdChmod",                        CK_ChmodCmd },
     { "CmdMenuLastSelected",             CK_MenuLastSelectedCmd },
     { "CmdSingleDirsize",                CK_SingleDirsizeCmd },
@@ -565,6 +567,7 @@ const global_keymap_t default_editor_keymap[] = {
     { KEY_F (6),                            CK_Move,                "F6" },
     { KEY_F (7),                            CK_Find,                "F7" },
     { KEY_F (8),                            CK_Remove,              "F8" },
+    { KEY_F (9),                            CK_Menu,                "F9" },
     { KEY_F (10),                           CK_Quit,                "F10" },
     /* edit user menu */
     { KEY_F (11),                           CK_User_Menu,           "S-F1" },
@@ -713,6 +716,7 @@ const global_keymap_t default_panel_keymap[] = {
 
 /* main.c */
 const global_keymap_t default_main_map[] = {
+    { KEY_F (1),    CK_HelpCmd,                       "F1" },
     { KEY_F (2),    CK_UserMenuCmd,                   "F2" },
     { KEY_F (3),    CK_ViewCmd,                       "F3" },
     { KEY_F (4),    CK_EditCmd,                       "F4" },
@@ -720,6 +724,7 @@ const global_keymap_t default_main_map[] = {
     { KEY_F (6),    CK_RenameCmd,                     "F6" },
     { KEY_F (7),    CK_MkdirCmd,                      "F7" },
     { KEY_F (8),    CK_DeleteCmd,                     "F6" },
+    { KEY_F (9),    CK_MenuCmd,                       "F9" },
     { KEY_F (10),   CK_QuitCmd,                       "F10" },
     { KEY_F (13),   CK_ViewFileCmd,                   "S-F3" },
     { KEY_F (19),   CK_MenuLastSelectedCmd,           "S-F9" },

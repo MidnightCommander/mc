@@ -193,6 +193,7 @@ ViewMoveUp = k; y; up
 ViewMoveDown = j; delete; down
 
 [main]
+CmdHelp = f1
 CmdUserMenu = f2
 CmdView = f3
 CmdViewFile = f13
@@ -201,6 +202,7 @@ CmdCopy = f5
 CmdRename = f6
 CmdMkdir = f7
 CmdDelete = f8
+CmdMenu = f9
 CmdQuit = f10
 CmdMenuLastSelected = f19
 CmdQuietQuit = f20
@@ -297,7 +299,6 @@ InputMoveRight = right; alt-right
 InputWordRight = ctrl-right
 InputForwardChar = ctrl-f
 InputForwardWord = alt-f
-
 InputBackwardDelete = backspace
 InputDeleteChar = delete
 InputKillWord = alt-d

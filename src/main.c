@@ -1226,6 +1226,9 @@ midnight_execute_cmd (Widget *sender, Widget *receiver,
         ftplink_cmd ();
         break;
 #endif
+    case CK_HelpCmd:
+        help_cmd ();
+        break;
     case CK_HistoryCmd:
         history_cmd ();
         break;
@@ -1254,6 +1257,9 @@ midnight_execute_cmd (Widget *sender, Widget *receiver,
         listmode_cmd ();
         break;
 #endif
+    case CK_MenuCmd:
+        menu_cmd ();
+        break;
     case CK_MenuInfoCmd:
         info_cmd ();
         break;
@@ -1579,11 +1585,10 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
     switch (msg) {
 
     case DLG_IDLE:
-	/* We only need the first idle event */
+	/* We only need the first idle event to show user menu after start */
 	set_idle_proc (h, 0);
-	if (auto_menu) {
-	    user_file_menu_cmd ();
-	}
+	if (auto_menu)
+	    midnight_execute_cmd (NULL, NULL, CK_UserMenuCmd, NULL);
 	return MSG_HANDLED;
 
     case DLG_KEY:
@@ -1597,11 +1602,6 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	/* FIXME: should handle all menu shortcuts before this point */
 	if (the_menubar->is_active)
 	    return MSG_NOT_HANDLED;
-
-	if (parm == KEY_F (10)) {
-	    quit_cmd ();
-	    return MSG_HANDLED;
-	}
 
 	if (parm == '\t')
 	    free_completions (cmdline);

@@ -51,6 +51,7 @@
 #define CK_Load_Next_File	112
 #define CK_Load_Syntax_File	121
 #define CK_Load_Menu_File	122
+#define CK_Menu			123
 
 /* block commands */
 #define CK_Mark			201
@@ -121,7 +122,6 @@
 #define CK_Save_Desktop		451
 #define CK_New_Window		452
 #define CK_Cycle		453
-#define CK_Menu			454
 #define CK_Save_And_Quit	455
 #define CK_Run_Another		456
 #define CK_Check_Save_And_Quit	457
@@ -344,6 +344,8 @@
 #define CK_UserMenuCmd                  7069
 #define CK_ViewCmd                      7070
 #define CK_ViewFileCmd                  7071
+#define CK_HelpCmd                      7072
+#define CK_MenuCmd                      7073
 
 /* panels */
 #define CK_PanelChdirOtherPanel         8001
