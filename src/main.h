@@ -24,6 +24,10 @@ enum { pause_never, pause_on_dumb_terminals, pause_always };
 
 void subshell_chdir (const char *command);
 
+struct WButtonBar;
+
+void midnight_set_buttonbar (struct WButtonBar *b);
+
 /* See main.c for details on these variables */
 extern int mark_moves_down;
 extern int auto_menu;

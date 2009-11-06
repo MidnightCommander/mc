@@ -884,16 +884,16 @@ interactive_display (const char *filename, const char *node)
     add_widget (whelp, md);
     add_widget (whelp, help_bar);
 
-    buttonbar_set_label_data (whelp, 1, Q_("ButtonBar|Help"), help_help_cmd, whelp);
-    buttonbar_set_label_data (whelp, 2, Q_("ButtonBar|Index"), help_index_cmd, whelp);
-    buttonbar_set_label_data (whelp, 3, Q_("ButtonBar|Prev"), prev_node_cmd, whelp);
-    buttonbar_clear_label (whelp, 4);
-    buttonbar_clear_label (whelp, 5);
-    buttonbar_clear_label (whelp, 6);
-    buttonbar_clear_label (whelp, 7);
-    buttonbar_clear_label (whelp, 8);
-    buttonbar_clear_label (whelp, 9);
-    buttonbar_set_label_data (whelp, 10, Q_("ButtonBar|Quit"), help_quit_cmd, whelp);
+    buttonbar_set_label_data (help_bar, 1, Q_("ButtonBar|Help"), help_help_cmd, whelp);
+    buttonbar_set_label_data (help_bar, 2, Q_("ButtonBar|Index"), help_index_cmd, whelp);
+    buttonbar_set_label_data (help_bar, 3, Q_("ButtonBar|Prev"), prev_node_cmd, whelp);
+    buttonbar_clear_label (help_bar, 4);
+    buttonbar_clear_label (help_bar, 5);
+    buttonbar_clear_label (help_bar, 6);
+    buttonbar_clear_label (help_bar, 7);
+    buttonbar_clear_label (help_bar, 8);
+    buttonbar_clear_label (help_bar, 9);
+    buttonbar_set_label_data (help_bar, 10, Q_("ButtonBar|Quit"), help_quit_cmd, whelp);
 
     run_dlg (whelp);
     interactive_display_finish ();

@@ -255,12 +255,12 @@ char *listbox_add_item (WListbox *l, enum append_pos pos, int
 
 
 WButtonBar *find_buttonbar (const Dlg_head *h);
-void buttonbar_clear_label (Dlg_head *, int idx);
-void buttonbar_set_label (Dlg_head *, int index, const char *text, voidfn);
-void buttonbar_set_label_data (Dlg_head *h, int idx, const char *text,
+void buttonbar_clear_label (WButtonBar *bb, int idx);
+void buttonbar_set_label (WButtonBar *bb, int index, const char *text, voidfn cback);
+void buttonbar_set_label_data (WButtonBar *bb, int idx, const char *text,
 			       buttonbarfn cback, void *data);
 void buttonbar_set_visible (WButtonBar *bb, gboolean visible);
-void buttonbar_redraw (Dlg_head *h);
+void buttonbar_redraw (WButtonBar *bb);
 
 void free_completions (WInput *in);
 void complete (WInput *in);

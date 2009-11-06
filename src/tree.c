@@ -757,7 +757,7 @@ static void
 tree_toggle_navig (WTree *tree)
 {
     tree_navigation_flag = !tree_navigation_flag;
-    buttonbar_set_label_data (tree->widget.parent, 4,
+    buttonbar_set_label_data (find_buttonbar (tree->widget.parent), 4,
 			tree_navigation_flag ? Q_("ButtonBar|Static")
 						: Q_("ButtonBar|Dynamc"),
 			tree_toggle_f4, tree);
@@ -1022,6 +1022,7 @@ tree_callback (Widget *w, widget_msg_t msg, int parm)
 {
     WTree *tree = (WTree *) w;
     Dlg_head *h = tree->widget.parent;
+    WButtonBar *b = find_buttonbar (h);
 
     switch (msg) {
     case WIDGET_DRAW:
@@ -1034,22 +1035,22 @@ tree_callback (Widget *w, widget_msg_t msg, int parm)
 
     case WIDGET_FOCUS:
 	tree->active = 1;
-	buttonbar_set_label_data (h, 1, Q_("ButtonBar|Help"), tree_help, tree);
-	buttonbar_set_label_data (h, 2, Q_("ButtonBar|Rescan"), tree_rescan, tree);
-	buttonbar_set_label_data (h, 3, Q_("ButtonBar|Forget"), tree_forget, tree);
-	buttonbar_set_label_data (h, 4, tree_navigation_flag ? Q_("ButtonBar|Static")
+	buttonbar_set_label_data (b, 1, Q_("ButtonBar|Help"), tree_help, tree);
+	buttonbar_set_label_data (b, 2, Q_("ButtonBar|Rescan"), tree_rescan, tree);
+	buttonbar_set_label_data (b, 3, Q_("ButtonBar|Forget"), tree_forget, tree);
+	buttonbar_set_label_data (b, 4, tree_navigation_flag ? Q_("ButtonBar|Static")
 								: Q_("ButtonBar|Dynamc"),
 			    tree_toggle_f4, tree);
-	buttonbar_set_label_data (h, 5, Q_("ButtonBar|Copy"), tree_copy_cmd, tree);
-	buttonbar_set_label_data (h, 6, Q_("ButtonBar|RenMov"), tree_move_cmd, tree);
+	buttonbar_set_label_data (b, 5, Q_("ButtonBar|Copy"), tree_copy_cmd, tree);
+	buttonbar_set_label_data (b, 6, Q_("ButtonBar|RenMov"), tree_move_cmd, tree);
 #if 0
 	/* FIXME: mkdir is currently defunct */
-	buttonbar_set_label_data (h, 7, Q_("ButtonBar|Mkdir"), tree_mkdir, tree);
+	buttonbar_set_label_data (b, 7, Q_("ButtonBar|Mkdir"), tree_mkdir, tree);
 #else
-	buttonbar_clear_label (h, 7);
+	buttonbar_clear_label (b, 7);
 #endif
-	buttonbar_set_label_data (h, 8, Q_("ButtonBar|Rmdir"), tree_rmdir, tree);
-	buttonbar_redraw (h);
+	buttonbar_set_label_data (b, 8, Q_("ButtonBar|Rmdir"), tree_rmdir, tree);
+	buttonbar_redraw (b);
 
 	/* FIXME: Should find a better way of only displaying the
 	   currently selected item */

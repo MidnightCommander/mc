@@ -2817,7 +2817,7 @@ static cb_ret_t
 panel_callback (Widget *w, widget_msg_t msg, int parm)
 {
     WPanel *panel = (WPanel *) w;
-    Dlg_head *h = panel->widget.parent;
+    WButtonBar *bb;
 
     switch (msg) {
     case WIDGET_DRAW:
@@ -2841,15 +2841,9 @@ panel_callback (Widget *w, widget_msg_t msg, int parm)
 	paint_dir (panel);
 	panel->dirty = 0;
 
-	buttonbar_set_label (h, 1, Q_("ButtonBar|Help"), help_cmd);
-	buttonbar_set_label (h, 2, Q_("ButtonBar|Menu"), user_file_menu_cmd);
-	buttonbar_set_label (h, 3, Q_("ButtonBar|View"), view_cmd);
-	buttonbar_set_label (h, 4, Q_("ButtonBar|Edit"), edit_cmd);
-	buttonbar_set_label (h, 5, Q_("ButtonBar|Copy"), copy_cmd);
-	buttonbar_set_label (h, 6, Q_("ButtonBar|RenMov"), rename_cmd);
-	buttonbar_set_label (h, 7, Q_("ButtonBar|Mkdir"), mkdir_cmd);
-	buttonbar_set_label (h, 8, Q_("ButtonBar|Delete"), delete_cmd);
-	buttonbar_redraw (h);
+	bb = find_buttonbar (panel->widget.parent);
+	midnight_set_buttonbar (bb);
+	buttonbar_redraw (bb);
 	return MSG_HANDLED;
 
     case WIDGET_UNFOCUS:

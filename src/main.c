@@ -1110,13 +1110,19 @@ copy_other_tagged (void)
     copy_tagged (other_panel);
 }
 
-static void
-init_labels (void)
+void
+midnight_set_buttonbar (WButtonBar *b)
 {
-    buttonbar_set_label (midnight_dlg, 1, Q_("ButtonBar|Help"), help_cmd);
-    buttonbar_set_label (midnight_dlg, 2, Q_("ButtonBar|Menu"), user_file_menu_cmd);
-    buttonbar_set_label (midnight_dlg, 9, Q_("ButtonBar|PullDn"), menu_cmd);
-    buttonbar_set_label (midnight_dlg, 10, Q_("ButtonBar|Quit"), quit_cmd);
+    buttonbar_set_label (b,  1, Q_("ButtonBar|Help"), help_cmd);
+    buttonbar_set_label (b,  2, Q_("ButtonBar|Menu"), user_file_menu_cmd);
+    buttonbar_set_label (b,  3, Q_("ButtonBar|View"), view_cmd);
+    buttonbar_set_label (b,  4, Q_("ButtonBar|Edit"), edit_cmd);
+    buttonbar_set_label (b,  5, Q_("ButtonBar|Copy"), copy_cmd);
+    buttonbar_set_label (b,  6, Q_("ButtonBar|RenMov"), rename_cmd);
+    buttonbar_set_label (b,  7, Q_("ButtonBar|Mkdir"), mkdir_cmd);
+    buttonbar_set_label (b,  8, Q_("ButtonBar|Delete"), delete_cmd);
+    buttonbar_set_label (b,  9, Q_("ButtonBar|PullDn"), menu_cmd);
+    buttonbar_set_label (b, 10, Q_("ButtonBar|Quit"), quit_cmd);
 }
 
 static gboolean ctl_x_map_enabled = FALSE;
@@ -1799,9 +1805,9 @@ setup_panels_and_run_mc (void)
     add_widget (midnight_dlg, the_hint);
     add_widget (midnight_dlg, cmdline);
     add_widget (midnight_dlg, the_prompt);
-    add_widget (midnight_dlg, the_bar);
-    init_labels ();
 
+    add_widget (midnight_dlg, the_bar);
+    midnight_set_buttonbar (the_bar);
 
     if (boot_current_is_left)
 	dlg_select_widget (get_panel_widget (0));

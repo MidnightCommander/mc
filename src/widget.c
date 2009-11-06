@@ -2790,7 +2790,7 @@ buttonbar_new (gboolean visible)
 }
 
 static void
-set_label_text (WButtonBar * bb, int lc_index, const char *text)
+set_label_text (WButtonBar *bb, int lc_index, const char *text)
 {
     g_free (bb->labels[lc_index - 1].text);
     bb->labels[lc_index - 1].text = g_strdup (text);
@@ -2800,52 +2800,40 @@ set_label_text (WButtonBar * bb, int lc_index, const char *text)
 WButtonBar *
 find_buttonbar (const Dlg_head *h)
 {
-    WButtonBar *bb;
-
-    bb = (WButtonBar *) find_widget_type (h, buttonbar_callback);
-    return bb;
+    return (WButtonBar *) find_widget_type (h, buttonbar_callback);
 }
 
 void
-buttonbar_clear_label (Dlg_head *h, int idx)
+buttonbar_clear_label (WButtonBar *bb, int idx)
 {
-    WButtonBar *bb = find_buttonbar (h);
-
-    if (!bb)
-	return;
-
-    set_label_text (bb, idx, "");
-    bb->labels[idx - 1].tag = BBFUNC_NONE;
+    if (bb != NULL) {
+	set_label_text (bb, idx, "");
+	bb->labels[idx - 1].tag = BBFUNC_NONE;
+    }
 }
 
 void
-buttonbar_set_label_data (Dlg_head *h, int idx, const char *text,
+buttonbar_set_label_data (WButtonBar *bb, int idx, const char *text,
                           buttonbarfn cback, void *data)
 {
-    WButtonBar *bb = find_buttonbar (h);
-
-    if (!bb)
-	return;
-
-    assert (cback != (buttonbarfn) NULL);
-    set_label_text (bb, idx, text);
-    bb->labels[idx - 1].tag = BBFUNC_PTR;
-    bb->labels[idx - 1].u.fn_ptr = cback;
-    bb->labels[idx - 1].data = data;
+    if (bb != NULL) {
+	assert (cback != (buttonbarfn) NULL);
+	set_label_text (bb, idx, text);
+	bb->labels[idx - 1].tag = BBFUNC_PTR;
+	bb->labels[idx - 1].u.fn_ptr = cback;
+	bb->labels[idx - 1].data = data;
+    }
 }
 
 void
-buttonbar_set_label (Dlg_head *h, int idx, const char *text, voidfn cback)
+buttonbar_set_label (WButtonBar *bb, int idx, const char *text, voidfn cback)
 {
-    WButtonBar *bb = find_buttonbar (h);
-
-    if (!bb)
-	return;
-
-    assert (cback != (voidfn) NULL);
-    set_label_text (bb, idx, text);
-    bb->labels[idx - 1].tag = BBFUNC_VOID;
-    bb->labels[idx - 1].u.fn_void = cback;
+    if (bb != NULL) {
+	assert (cback != (voidfn) NULL);
+	set_label_text (bb, idx, text);
+	bb->labels[idx - 1].tag = BBFUNC_VOID;
+	bb->labels[idx - 1].u.fn_void = cback;
+    }
 }
 
 void
@@ -2855,14 +2843,10 @@ buttonbar_set_visible (WButtonBar *bb, gboolean visible)
 }
 
 void
-buttonbar_redraw (Dlg_head *h)
+buttonbar_redraw (WButtonBar *bb)
 {
-    WButtonBar *bb = find_buttonbar (h);
-
-    if (!bb)
-	return;
-
-    send_message ((Widget *) bb, WIDGET_DRAW, 0);
+    if (bb != NULL)
+	send_message ((Widget *) bb, WIDGET_DRAW, 0);
 }
 
 static cb_ret_t
