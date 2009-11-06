@@ -53,7 +53,8 @@
 #include "edit-widget.h"
 
 cb_ret_t
-edit_command_execute (Widget *sender, Widget *receiver, int command, const void *data)
+edit_command_execute (Widget *sender, Widget *receiver,
+			unsigned long command, const void *data)
 {
     (void) sender;
     (void) receiver;

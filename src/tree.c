@@ -37,6 +37,7 @@
 #include <errno.h>
 #include <stdio.h>
 #include <string.h>
+#include <sys/types.h>
 
 #include "global.h"
 
@@ -866,7 +867,7 @@ tree_start_search (WTree *tree)
 }
 
 static cb_ret_t
-tree_execute_cmd (WTree *tree, int command)
+tree_execute_cmd (WTree *tree, unsigned long command)
 {
     cb_ret_t res = MSG_HANDLED;
 
@@ -929,25 +930,25 @@ tree_execute_cmd (WTree *tree, int command)
 }
 
 /* temporary wrappers */
-void
+static void
 tree_help (void *data)
 {
     tree_execute_cmd ((WTree *) data, CK_TreeHelp);
 }
 
-void
+static void
 tree_toggle_f4 (void *data)
 {
     tree_execute_cmd ((WTree *) data, CK_TreeToggleNav);
 }
 
-void
+static void
 tree_copy_cmd (void *data)
 {
     tree_execute_cmd ((WTree *) data, CK_TreeCopy);
 }
 
-void
+static void
 tree_move_cmd (void *data)
 {
     tree_execute_cmd ((WTree *) data, CK_TreeMove);
@@ -956,7 +957,7 @@ tree_move_cmd (void *data)
 static cb_ret_t
 tree_key (WTree *tree, int key)
 {
-    int i;
+    size_t i;
 
     for (i = 0; tree_map [i].key != 0; i++)
 	if (key == tree_map [i].key)

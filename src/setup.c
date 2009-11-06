@@ -869,7 +869,7 @@ load_keys_from_section (const char *terminal, mc_config_t *cfg)
     gchar **profile_keys, **keys;
     gchar **values, **curr_values;
     char *valcopy, *value;
-    int  key_code;
+    long key_code;
     gsize len, values_len;
 
     if (!terminal)
@@ -891,7 +891,7 @@ load_keys_from_section (const char *terminal, mc_config_t *cfg)
 	curr_values = values = mc_config_get_string_list (cfg, section_name, *profile_keys, &values_len);
 
 	key_code = lookup_key (*profile_keys, NULL);
-	if (key_code){
+	if (key_code != 0) {
 	    if (curr_values){
 	        while (*curr_values){
 	            valcopy = convert_controls (*curr_values);
@@ -953,8 +953,8 @@ load_keymap_from_section (const char *section_name, GArray *keymap, mc_config_t 
 	curr_values = values = mc_config_get_string_list (cfg, section_name, *profile_keys, &values_len);
 	action = lookup_action (*profile_keys);
 	if (action>0) {
-	    if (curr_values){
-	        while (*curr_values){
+	    if (curr_values) {
+	        while (*curr_values) {
 	            valcopy = convert_controls (*curr_values);
 	            keybind_cmd_bind (keymap, valcopy, action);
 	            g_free (valcopy);
@@ -963,9 +963,9 @@ load_keymap_from_section (const char *section_name, GArray *keymap, mc_config_t 
 	    } else {
 	        value = mc_config_get_string (cfg, section_name, *profile_keys, "");
 	        valcopy = convert_controls (value);
-	        //define_sequence (key_code, valcopy, MCKEY_NOACTION);
+	        /* define_sequence (key_code, valcopy, MCKEY_NOACTION); */
 	        g_free (valcopy);
-	        g_free(value);
+	        g_free (value);
 	    }
 	}
 	profile_keys++;

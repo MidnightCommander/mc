@@ -47,7 +47,7 @@
 #include "edit-impl.h"
 #include "edit-widget.h"
 
-#include "../src/widget.h"		/* buttonbar_redraw() */
+#include "../src/widget.h"		/* ButtonBar */
 #include "../src/menu.h"		/* menubar_new() */
 #include "../src/cmddef.h"
 
@@ -59,7 +59,7 @@ int column_highlighting = 0;
 static cb_ret_t edit_callback (Widget *, widget_msg_t msg, int parm);
 
 static char *
-edit_get_shortcut (int command)
+edit_get_shortcut (unsigned long command)
 {
     const char *ext_map;
     const char *shortcut = NULL;
@@ -201,7 +201,7 @@ edit_dialog_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 int
 edit_file (const char *_file, int line)
 {
-    static int made_directory = 0;
+    static gboolean made_directory = FALSE;
     Dlg_head *edit_dlg;
 
     if (!made_directory) {
@@ -233,7 +233,7 @@ edit_file (const char *_file, int line)
 
     add_widget (edit_dlg, wedit);
 
-    add_widget (edit_dlg, buttonbar_new (1));
+    add_widget (edit_dlg, buttonbar_new (TRUE));
 
     run_dlg (edit_dlg);
 

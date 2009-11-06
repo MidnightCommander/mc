@@ -6,6 +6,7 @@
 #ifndef MC_MAIN_H
 #define MC_MAIN_H
 
+#include "global.h"
 #include "keybind.h"
 
 /* Toggling functions */
@@ -83,9 +84,9 @@ extern GArray *viewer_keymap;
 extern GArray *viewer_hex_keymap;
 extern GArray *main_keymap;
 extern GArray *main_x_keymap;
-extern GArray *tree_keymap;
 extern GArray *panel_keymap;
 extern GArray *input_keymap;
+extern GArray *tree_keymap;
 
 extern const global_keymap_t *panel_map;
 extern const global_keymap_t *input_map;
@@ -131,7 +132,7 @@ char *remove_encoding_from_path (const char *);
 
 struct WPanel;
 
-void directory_history_add   (struct WPanel *panel, const char *dir);
-int  do_panel_cd             (struct WPanel *panel, const char *new_dir, enum cd_enum cd_type);
+void directory_history_add (struct WPanel *panel, const char *dir);
+int do_panel_cd (struct WPanel *panel, const char *new_dir, enum cd_enum cd_type);
 
-#endif
+#endif					/* MC_MAIN_H */

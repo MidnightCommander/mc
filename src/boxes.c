@@ -670,7 +670,7 @@ tree_box (const char *current_dir)
 
     mytree = tree_new (0, 2, 2, dlg->lines - 6, dlg->cols - 5);
     add_widget (dlg, mytree);
-    bar = buttonbar_new(1);
+    bar = buttonbar_new (TRUE);
     add_widget (dlg, bar);
     /* restore ButtonBar coordinates after add_widget() */
     ((Widget *) bar)->x = 0;

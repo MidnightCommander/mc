@@ -47,11 +47,11 @@
 #include "../src/cmddef.h"
 
 #include "../src/tty/color.h"	/* EDITOR_NORMAL_COLOR */
-#include "../src/tty/tty.h"		/* attrset() */
-#include "../src/tty/key.h"		/* is_idle() */
-#include "../src/skin/skin.h"		/* mc_skin_color_get */
+#include "../src/tty/tty.h"	/* attrset() */
+#include "../src/tty/key.h"	/* is_idle() */
+#include "../src/skin/skin.h"	/* mc_skin_color_get */
 
-#include "../src/widget.h"	/* buttonbar_redraw() */
+#include "../src/widget.h"
 #include "../src/cmd.h"		/* view_other_cmd() */
 #include "../src/user.h"	/* user_menu_cmd() */
 #include "../src/wtools.h"	/* query_dialog() */
@@ -2527,7 +2527,8 @@ static void edit_goto_matching_bracket (WEdit *edit)
  * passed as -1.  Commands are executed, and char_for_insertion is
  * inserted at the cursor.
  */
-void edit_execute_key_command (WEdit *edit, int command, int char_for_insertion)
+void
+edit_execute_key_command (WEdit *edit, unsigned long command, int char_for_insertion)
 {
     if (command == CK_Begin_Record_Macro) {
 	edit->macro_i = 0;

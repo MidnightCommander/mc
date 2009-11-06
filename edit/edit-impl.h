@@ -153,7 +153,7 @@ int edit_drop_hotkey_menu (WEdit *e, int key);
 void edit_menu_cmd (WEdit *e);
 void edit_init_menu (struct WMenuBar *menubar);
 cb_ret_t edit_command_execute (struct Widget *sender, struct Widget *receiver,
-				int command, const void *data);
+				unsigned long command, const void *data);
 void menu_save_mode_cmd (void);
 int edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch);
 int edit_get_byte (WEdit * edit, long byte_index);
@@ -229,7 +229,7 @@ void edit_date_cmd (WEdit * edit);
 void edit_goto_cmd (WEdit * edit);
 int eval_marks (WEdit * edit, long *start_mark, long *end_mark);
 void edit_status (WEdit * edit);
-void edit_execute_key_command (WEdit *edit, int command,
+void edit_execute_key_command (WEdit *edit, unsigned long command,
 			       int char_for_insertion);
 void edit_update_screen (WEdit * edit);
 int edit_print_string (WEdit * e, const char *s);

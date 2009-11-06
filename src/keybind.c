@@ -91,6 +91,7 @@ static name_keymap_t command_names[] = {
     { "EditReplace",                       CK_Replace },
     { "EditReplaceAgain",                  CK_Replace_Again },
     { "EditCompleteWord",                  CK_Complete_Word },
+#if 0
     { "EditDebugStart",                    CK_Debug_Start },
     { "EditDebugStop",                     CK_Debug_Stop },
     { "EditDebugToggleBreak",              CK_Debug_Toggle_Break },
@@ -101,6 +102,7 @@ static name_keymap_t command_names[] = {
     { "EditDebugContinue",                 CK_Debug_Continue },
     { "EditDebugEnterCommand",             CK_Debug_Enter_Command },
     { "EditDebugUntilCurser",              CK_Debug_Until_Curser },
+#endif
     { "EditInsertFile",                    CK_Insert_File },
     { "EditQuit",                          CK_Quit },
     { "EditToggleInsert",                  CK_Toggle_Insert },
@@ -633,7 +635,7 @@ const global_keymap_t default_editor_x_keymap[] = {
     { 'e', CK_Execute_Macro, "e"},
     { 0, CK_Ignore_Key, "" }
 };
-#endif
+#endif				/* USE_INTERNAL_EDIT */
 
 /* tree */
 const global_keymap_t default_tree_keymap[] = {
@@ -845,7 +847,31 @@ sort_command_names (void)
     }
 }
 
-int
+static void
+keymap_add (GArray *keymap, long key, unsigned long cmd, const char *caption)
+{
+    if (key != 0 && cmd != CK_Ignore_Key) {
+        global_keymap_t new_bind;
+
+        new_bind.key = key;
+        new_bind.command = cmd;
+        g_snprintf (new_bind.caption, sizeof (new_bind.caption), "%s", caption);
+        g_array_append_val (keymap, new_bind);
+    }
+}
+
+void
+keybind_cmd_bind (GArray *keymap, const char *keybind, unsigned long action)
+{
+    char *caption = NULL;
+    long key;
+
+    key = lookup_key (keybind, &caption);
+    keymap_add (keymap, key, action, caption);
+    g_free (caption);
+}
+
+unsigned long
 lookup_action (const char *keyname)
 {
     const name_keymap_t key = { keyname, 0 };
@@ -859,34 +885,10 @@ lookup_action (const char *keyname)
     return (res != NULL) ? res->val : CK_Ignore_Key;
 }
 
-static void
-keymap_add (GArray *keymap, int key, int cmd, const char *caption)
-{
-    if (key != 0 && cmd != 0) {
-        global_keymap_t new_bind;
-
-        new_bind.key = key;
-        new_bind.command = cmd;
-        g_snprintf (new_bind.caption, sizeof (new_bind.caption), "%s", caption);
-        g_array_append_val (keymap, new_bind);
-    }
-}
-
-void
-keybind_cmd_bind (GArray *keymap, const char *keybind, int action)
-{
-    char *caption = NULL;
-    int key;
-
-    key = lookup_key (keybind, &caption);
-    keymap_add (keymap, key, action, caption);
-    g_free (caption);
-}
-
 const char *
-lookup_keymap_shortcut (const global_keymap_t *keymap, int action)
+lookup_keymap_shortcut (const global_keymap_t *keymap, unsigned long action)
 {
-    unsigned int i;
+    size_t i;
 
     for (i = 0; keymap[i].key != 0; i++)
 	if (keymap[i].command == action)

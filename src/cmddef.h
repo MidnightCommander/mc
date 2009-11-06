@@ -70,6 +70,7 @@
 #define CK_Replace_Again	304
 #define CK_Complete_Word	305
 
+#if 0
 /* debugger commands */
 #define CK_Debug_Start		350
 #define CK_Debug_Stop		351
@@ -81,6 +82,7 @@
 #define CK_Debug_Continue	357
 #define CK_Debug_Enter_Command	358
 #define CK_Debug_Until_Curser	359
+#endif
 
 /* misc */
 #define CK_Insert_File		401

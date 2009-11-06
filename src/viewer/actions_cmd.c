@@ -285,7 +285,7 @@ mcview_handle_editkey (mcview_t * view, int key)
 
 static cb_ret_t
 mcview_execute_cmd (Widget *sender, Widget *receiver,
-		    int command, const void *data)
+		    unsigned long command, const void *data)
 {
     mcview_t *view = (mcview_t *) receiver;
     int res = MSG_HANDLED;

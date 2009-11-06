@@ -1293,7 +1293,7 @@ lookup_keyname (const char *keyname, int *lc_index)
 }
 
 /* Return the code associated with the symbolic name keyname */
-int
+long
 lookup_key (const char *keyname, char **label)
 {
     char **lc_keys, **p;
@@ -1393,7 +1393,7 @@ lookup_key (const char *keyname, char **label)
     if (use_meta != -1)
         k = ALT (k);
 
-    return k;
+    return (long) k;
 }
 
 /*

@@ -56,7 +56,6 @@
 #include "dialog.h"
 #include "menu.h"
 #include "panel.h"
-#include "main.h"
 #include "option.h"
 #include "tree.h"
 #include "treestore.h"
@@ -73,18 +72,20 @@
 #include "execute.h"
 #include "ext.h"		/* For flush_extension_file() */
 #include "strutil.h"
-/* Listbox for the command history feature */
 #include "widget.h"
 #include "command.h"
 #include "wtools.h"
 #include "cmddef.h"		/* CK_ cmd name const */
 #include "fileloc.h"		/* MC_USERCONF_DIR */
+#include "user.h"		/* user_file_menu_cmd() */
 
 #include "../vfs/vfs.h"		/* vfs_translate_url() */
 
 #include "chmod.h"
 #include "chown.h"
 #include "achown.h"
+
+#include "main.h"
 
 #ifdef WITH_SMBFS
 #include "../vfs/smbfs.h"	/* smbfs_set_debug() */
@@ -843,7 +844,7 @@ menu_cmd (void)
 }
 
 static char *
-midnight_get_shortcut (int command)
+midnight_get_shortcut (unsigned long command)
 {
     const char *ext_map;
     const char *shortcut = NULL;
@@ -1118,17 +1119,17 @@ init_labels (void)
     buttonbar_set_label (midnight_dlg, 10, Q_("ButtonBar|Quit"), quit_cmd);
 }
 
-static int ctl_x_map_enabled = 0;
+static gboolean ctl_x_map_enabled = FALSE;
 
 static void
 ctl_x_cmd (void)
 {
-    ctl_x_map_enabled = 1;
+    ctl_x_map_enabled = TRUE;
 }
 
 static cb_ret_t
 midnight_execute_cmd (Widget *sender, Widget *receiver,
-			int command, const void *data)
+			unsigned long command, const void *data)
 {
     cb_ret_t res = MSG_HANDLED;
 
@@ -1587,7 +1588,7 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 
     case DLG_KEY:
 	if (ctl_x_map_enabled) {
-	    ctl_x_map_enabled = 0;
+	    ctl_x_map_enabled = FALSE;
 	    for (i = 0; main_x_map[i].key; i++)
 		if (parm == main_x_map[i].key)
 		    return midnight_execute_cmd (NULL, NULL, main_x_map[i].command, NULL);
@@ -1607,7 +1608,8 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 
 	if (parm == '\n') {
 	    for (i = 0; cmdline->buffer[i] && (cmdline->buffer[i] == ' ' ||
-		cmdline->buffer[i] == '\t'); i++);
+		cmdline->buffer[i] == '\t'); i++)
+		;
 	    if (cmdline->buffer[i]) {
 	        send_message ((Widget *) cmdline, WIDGET_KEY, parm);
 		return MSG_HANDLED;
@@ -1687,7 +1689,7 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 		return MSG_HANDLED;
 	}
 	if (ctl_x_map_enabled) {
-	    ctl_x_map_enabled = 0;
+	    ctl_x_map_enabled = FALSE;
 	    for (i = 0; main_x_map[i].key; i++)
 		if (parm == main_x_map[i].key)
 		    return midnight_execute_cmd (NULL, NULL, main_x_map[i].command, NULL);
@@ -1907,11 +1909,12 @@ do_nc (void)
 	midnight_shutdown = 1;
 
 	/* destroy_dlg destroys even current_panel->cwd, so we have to save a copy :) */
-	if (mc_args__last_wd_file && vfs_current_is_local ()) {
+	if (mc_args__last_wd_file && vfs_current_is_local ())
 	    last_wd_string = g_strdup (current_panel->cwd);
-	}
+
 	done_mc ();
     }
+
     destroy_dlg (midnight_dlg);
     panel_deinit ();
     current_panel = 0;
@@ -1954,7 +1957,6 @@ OS_Setup (void)
 
     if (!home_dir)
 	home_dir = mc_home;
-
 }
 
 static void
@@ -2023,7 +2025,7 @@ init_sigchld (void)
 }
 
 static void
-mc_main__setup_by_args(int argc, char *argv[])
+mc_main__setup_by_args (int argc, char *argv[])
 {
     const char *base;
     char *tmp;
@@ -2032,8 +2034,7 @@ mc_main__setup_by_args(int argc, char *argv[])
 	use_mouse_p = MOUSE_DISABLED;
 
 #ifdef USE_NETCODE
-    if (mc_args__netfs_logfile != NULL)
-    {
+    if (mc_args__netfs_logfile != NULL) {
 	mc_setctl ("/#ftp:", VFS_SETCTL_LOGFILE, (void *) mc_args__netfs_logfile);
 #ifdef WITH_SMBFS
 	smbfs_set_debugf (mc_args__netfs_logfile);
@@ -2042,16 +2043,12 @@ mc_main__setup_by_args(int argc, char *argv[])
 
 #ifdef WITH_SMBFS
     if (mc_args__debug_level != 0)
-    {
 	smbfs_set_debug (mc_args__debug_level);
-    }
 #endif				/* WITH_SMBFS */
 #endif				/* USE_NETCODE */
 
-
     base = x_basename (argv[0]);
-    tmp = (argc > 0)? argv[1] : NULL;
-
+    tmp = (argc > 0) ? argv[1] : NULL;
 
     if (!STRNCOMP (base, "mce", 3) || !STRCOMP (base, "vi")) {
 	edit_one_file = "";
@@ -2112,8 +2109,6 @@ mc_main__setup_by_args(int argc, char *argv[])
 		other_dir = g_strdup (tmp);
 	}
     }
-
-
 }
 
 int
@@ -2148,8 +2143,8 @@ main (int argc, char *argv[])
 
     if ( !mc_args_handle (&argc, &argv, "mc"))
 	return 1;
-    mc_main__setup_by_args(argc,argv);
 
+    mc_main__setup_by_args (argc,argv);
 
     /* NOTE: This has to be called before tty_init or whatever routine
        calls any define_sequence */

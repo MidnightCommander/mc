@@ -60,9 +60,9 @@
 int
 edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
 {
-    int command = CK_Insert_Char;
+    unsigned long command = (unsigned long) CK_Insert_Char;
     int char_for_insertion = -1;
-    int i = 0;
+    size_t i = 0;
     int c;
 
     /* an ordinary insertable character */
@@ -161,8 +161,8 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
         }
     }
   fin:
-    *cmd = command;
+    *cmd = (int) command;		/* FIXME */
     *ch = char_for_insertion;
 
-    return (command == CK_Insert_Char && char_for_insertion == -1) ? 0 : 1;
+    return (command == (unsigned long) CK_Insert_Char && char_for_insertion == -1) ? 0 : 1;
 }

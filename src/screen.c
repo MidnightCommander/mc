@@ -2633,7 +2633,7 @@ static void cmd_unselect(WPanel *wp) { (void) wp; unselect_cmd(); }
 static void cmd_reverse_selection(WPanel *wp) { (void) wp; reverse_selection_cmd(); }
 
 static cb_ret_t
-panel_execute_cmd (WPanel *panel, int command)
+panel_execute_cmd (WPanel *panel, unsigned long command)
 {
     int res = MSG_HANDLED;
 
@@ -2763,10 +2763,10 @@ panel_execute_cmd (WPanel *panel, int command)
 static cb_ret_t
 panel_key (WPanel *panel, int key)
 {
-    int i;
-    int res, command;
+    size_t i;
+    unsigned long res, command;
 
-    for (i = 0; panel_map[i].key; i++) {
+    for (i = 0; panel_map[i].key != 0; i++) {
 	if (key == panel_map[i].key) {
 	    int old_searching = panel->searching;
 

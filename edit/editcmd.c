@@ -2595,16 +2595,13 @@ edit_execute_macro_cmd (WEdit *edit)
 }
 
 void
-edit_begin_end_macro_cmd(WEdit *edit)
+edit_begin_end_macro_cmd (WEdit *edit)
 {
-    int command;
-    
     /* edit is a pointer to the widget */
     if (edit) {
-	    command =
-		edit->macro_i <
-		0 ? CK_Begin_Record_Macro : CK_End_Record_Macro;
-	    edit_execute_key_command (edit, command, -1);
+	unsigned long command = edit->macro_i < 0
+			? CK_Begin_Record_Macro : CK_End_Record_Macro;
+	edit_execute_key_command (edit, command, -1);
     }
 }
 

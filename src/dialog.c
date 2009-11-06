@@ -335,11 +335,6 @@ add_widget (Dlg_head *h, void *w)
     return add_widget_autopos (h, w, WPOS_KEEP_LEFT | WPOS_KEEP_TOP);
 }
 
-enum {
-    REFRESH_COVERS_PART,	/* If the refresh fn convers only a part */
-    REFRESH_COVERS_ALL		/* If the refresh fn convers all the screen */
-};
-
 static void
 do_complete_refresh (Dlg_head *dlg)
 {
@@ -438,7 +433,7 @@ int dlg_overlap (Widget *a, Widget *b)
 
 /* Find the widget with the given callback in the dialog h */
 Widget *
-find_widget_type (Dlg_head *h, callback_fn callback)
+find_widget_type (const Dlg_head *h, callback_fn callback)
 {
     Widget *w = NULL;
 
@@ -459,7 +454,7 @@ find_widget_type (Dlg_head *h, callback_fn callback)
 
 /* Find the widget with the given dialog id in the dialog h and select it */
 void
-dlg_select_by_id (Dlg_head *h, int id)
+dlg_select_by_id (const Dlg_head *h, int id)
 {
     Widget *w, *w_found;
 

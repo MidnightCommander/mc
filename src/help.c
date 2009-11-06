@@ -875,7 +875,7 @@ interactive_display (const char *filename, const char *node)
 	history[history_ptr].link = selected_item;
     }
 
-    help_bar = buttonbar_new (1);
+    help_bar = buttonbar_new (TRUE);
     help_bar->widget.y -= whelp->y;
     help_bar->widget.x -= whelp->x;
 

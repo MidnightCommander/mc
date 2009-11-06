@@ -95,11 +95,11 @@ typedef cb_ret_t (*dlg_cb_fn)(struct Dlg_head *h, dlg_msg_t msg, int parm);
            should be NULL if sender is menu or buttonbar
 */
 typedef cb_ret_t (*dlg_exec_fn) (Widget *sender, Widget *receiver,
-		    int command, const void *data);
+		    unsigned long command, const void *data);
 
 /* get string representation of shortcut assigned  with command */
 /* as menu is a widget of dialog, ask dialog about shortcut string */
-typedef char * (*dlg_shortcut_str) (int command);
+typedef char * (*dlg_shortcut_str) (unsigned long command);
 
 /* Dialog color constants */
 #define DLG_COLOR_NUM		4
@@ -265,8 +265,8 @@ void dlg_select_widget     (void *widget);
 void dlg_one_up            (Dlg_head *h);
 void dlg_one_down          (Dlg_head *h);
 int  dlg_focus             (Dlg_head *h);
-Widget *find_widget_type   (Dlg_head *h, callback_fn callback);
-void dlg_select_by_id (Dlg_head *h, int id);
+Widget *find_widget_type   (const Dlg_head *h, callback_fn callback);
+void dlg_select_by_id (const Dlg_head *h, int id);
 
 /* Redraw all dialogs */
 void do_refresh (void);

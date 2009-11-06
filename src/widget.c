@@ -1771,7 +1771,7 @@ port_region_marked_for_delete (WInput *in)
 }
 
 static cb_ret_t
-input_execute_cmd (WInput *in, int command)
+input_execute_cmd (WInput *in, unsigned long command)
 {
     cb_ret_t res = MSG_HANDLED;
 
@@ -1864,16 +1864,12 @@ input_execute_cmd (WInput *in, int command)
 int
 is_in_input_map (WInput *in, int key)
 {
-    int i;
-    for (i = 0; input_map[i].key; i++) {
+    size_t i;
+    for (i = 0; input_map[i].key != 0; i++)
         if (key == input_map[i].key) {
             input_execute_cmd (in, input_map[i].command);
-            if (input_map[i].command == CK_InputComplete)
-                return 2;
-            else
-                return 1;
+            return (input_map[i].command == CK_InputComplete) ? 2 : 1;
         }
-    }
     return 0;
 }
 
@@ -2692,7 +2688,7 @@ buttonbar_call (WButtonBar *bb, int i)
 
 /* calculate width of one button, width is never lesser than 7 */
 static int
-buttonbat_get_button_width ()
+buttonbat_get_button_width (void)
 {
     int result = COLS / BUTTONBAR_LABELS_NUM;
     return (result >= 7) ? result : 7;
@@ -2725,7 +2721,7 @@ buttonbar_callback (Widget *w, widget_msg_t msg, int parm)
 	    tty_setcolor (DEFAULT_COLOR);
 	    bb->btn_width = buttonbat_get_button_width ();
 	    tty_printf ("%-*s", bb->widget.cols, "");
-	    count_free_positions = COLS - bb->btn_width*BUTTONBAR_LABELS_NUM;
+	    count_free_positions = COLS - bb->btn_width * BUTTONBAR_LABELS_NUM;
 
 	    for (i = 0; i < COLS / bb->btn_width && i < BUTTONBAR_LABELS_NUM; i++) {
 		widget_move (&bb->widget, 0, (i * bb->btn_width) + offset);
@@ -2764,14 +2760,14 @@ buttonbar_event (Gpm_Event *event, void *data)
 	return MOU_NORMAL;
     if (event->y == 2)
 	return MOU_NORMAL;
-    button = (event->x - 1) * BUTTONBAR_LABELS_NUM / (COLS);
+    button = (event->x - 1) * BUTTONBAR_LABELS_NUM / COLS;
     if (button < BUTTONBAR_LABELS_NUM)
 	buttonbar_call (bb, button);
     return MOU_NORMAL;
 }
 
 WButtonBar *
-buttonbar_new (int visible)
+buttonbar_new (gboolean visible)
 {
     WButtonBar *bb;
     int i;
@@ -2797,13 +2793,12 @@ static void
 set_label_text (WButtonBar * bb, int lc_index, const char *text)
 {
     g_free (bb->labels[lc_index - 1].text);
-
     bb->labels[lc_index - 1].text = g_strdup (text);
 }
 
 /* Find ButtonBar widget in the dialog */
 WButtonBar *
-find_buttonbar (Dlg_head *h)
+find_buttonbar (const Dlg_head *h)
 {
     WButtonBar *bb;
 
@@ -2832,7 +2827,7 @@ buttonbar_set_label_data (Dlg_head *h, int idx, const char *text,
     if (!bb)
 	return;
 
-    assert (cback != (buttonbarfn) 0);
+    assert (cback != (buttonbarfn) NULL);
     set_label_text (bb, idx, text);
     bb->labels[idx - 1].tag = BBFUNC_PTR;
     bb->labels[idx - 1].u.fn_ptr = cback;
@@ -2847,7 +2842,7 @@ buttonbar_set_label (Dlg_head *h, int idx, const char *text, voidfn cback)
     if (!bb)
 	return;
 
-    assert (cback != (voidfn) 0);
+    assert (cback != (voidfn) NULL);
     set_label_text (bb, idx, text);
     bb->labels[idx - 1].tag = BBFUNC_VOID;
     bb->labels[idx - 1].u.fn_void = cback;
