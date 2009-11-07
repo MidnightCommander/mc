@@ -162,14 +162,22 @@ EditNew = k
 EditExecuteMacro = e
 
 [viewer]
-ViewSearch = question; slash; f7
+ViewHelp = f1
+ViewToggleWrapMode = f2
+ViewQuit = f3; f10; q; esc; ctrl-g
+ViewToggleHexMode = f4
+ViewGoto = f5
+ViewSearch = f7; question; slash
+ViewToggleMagicMode = f8
+ViewToggleNroffMode = f9
+ViewQuit = f3; f10; q; esc; ctrl-g
 ViewContinueSearch = ctrl-r; ctrl-s; f17
-ViewMoveToBol = home
-ViewMoveToEol = end
+ViewMoveToBol = ctrl-a
+ViewMoveToEol = ctrl-e
 ViewMoveLeft = h; left
 ViewMoveRight = l; right
 ViewMoveUp = k; y; insert; up
-ViewMoveDown = j; e; delete; down
+ViewMoveDown = j; e; delete; down; enter
 ViewMovePgDn = f; space; pgdn
 ViewMovePgUp = b; pgup
 ViewMoveHalfPgDn = d
@@ -178,13 +186,21 @@ ViewGotoBookmark = m
 ViewNewBookmark = r
 ViewNextFile = ctrl-f
 ViewPrevFile = ctrl-b
-ViewQuit = q; esc
 SelectCodepage = alt-e
 ShowCommandLine = ctrl-o
 ViewToggleRuler = alt-r
 
 [viewer:hex]
-HexViewToggleNavigationMode = tab
+ViewHelp = f1
+ViewToggleHexEditMode = f2
+ViewQuit = f3; f10; q; esc; ctrl-g
+ViewToggleHexMode = f4
+ViewGoto = f5
+ViewHexEditSave = f6
+ViewSearch = f7; question; slash
+ViewToggleMagicMode = f8
+ViewToggleNroffMode = f9
+ViewToggleHexNavMode = tab
 ViewMoveToBol = ctrl-a; home
 ViewMoveToEol = ctrl-e; end
 ViewMoveLeft = b; left
@@ -284,7 +300,6 @@ PanelSortOrderByName=
 PanelSortOrderByExt=
 PanelSortOrderBySize=
 PanelSortOrderByMTime=
-
 
 [panel:xmap]
 

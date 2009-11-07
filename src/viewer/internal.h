@@ -1,3 +1,4 @@
+
 #ifndef MC_VIEWER_INTERNAL_H
 #define MC_VIEWER_INTERNAL_H
 
@@ -198,33 +199,29 @@ typedef struct mcview_nroff_struct {
 /*** declarations of public functions **********************************/
 
 /* actions_cmd.c:  */
-cb_ret_t mcview_callback (Widget *, widget_msg_t, int);
-cb_ret_t mcview_dialog_callback (Dlg_head *, dlg_msg_t, int);
 void mcview_help_cmd (void);
-void mcview_quit_cmd (mcview_t *);
-void mcview_toggle_hex_mode_cmd (mcview_t *);
-void mcview_moveto_line_cmd (mcview_t *);
-void mcview_moveto_addr_cmd (mcview_t *);
-void mcview_toggle_hexedit_mode_cmd (mcview_t *);
-void mcview_hexedit_save_changes_cmd (mcview_t *);
-void mcview_toggle_wrap_mode_cmd (mcview_t *);
-void mcview_search_cmd (mcview_t *);
-void mcview_toggle_magic_mode_cmd (mcview_t *);
-void mcview_toggle_nroff_mode_cmd (mcview_t *);
-void mcview_toggle_ruler_cmd (mcview_t *);
-
+void mcview_quit_cmd (mcview_t *view);
+void mcview_goto (mcview_t *view);
+void mcview_toggle_hex_mode_cmd (mcview_t *view);
+void mcview_toggle_hexedit_mode_cmd (mcview_t *view);
+void mcview_hexedit_save_changes_cmd (mcview_t *view);
+void mcview_toggle_wrap_mode_cmd (mcview_t *view);
+void mcview_search_cmd (mcview_t *view);
+void mcview_toggle_magic_mode_cmd (mcview_t *view);
+void mcview_toggle_nroff_mode_cmd (mcview_t *view);
+cb_ret_t mcview_callback (Widget *w, widget_msg_t msg, int parm);
+cb_ret_t mcview_dialog_callback (Dlg_head *h, dlg_msg_t msg, int parm);
 
 /* coord_cache.c: */
 gboolean mcview_coord_cache_entry_less (const struct coord_cache_entry *,
                                         const struct coord_cache_entry *, enum ccache_type,
                                         gboolean);
 #ifdef MC_ENABLE_DEBUGGING_CODE
-void mcview_ccache_dump (mcview_t *);
+void mcview_ccache_dump (mcview_t *view);
 #endif
 
-void
-  mcview_ccache_lookup (mcview_t *, struct coord_cache_entry *, enum ccache_type);
-
+void mcview_ccache_lookup (mcview_t *view, struct coord_cache_entry *coord,
+			    enum ccache_type lookup_what);
 
 /* datasource.c: */
 void mcview_set_datasource_none (mcview_t *);
@@ -246,41 +243,41 @@ void mcview_set_datasource_string (mcview_t *, const char *);
 gboolean mcview_dialog_search (mcview_t *);
 
 /* display.c: */
-void mcview_update (mcview_t *);
-void mcview_display (mcview_t *);
-void mcview_compute_areas (mcview_t *);
-void mcview_update_bytes_per_line (mcview_t *);
-void mcview_display_toggle_ruler (mcview_t *);
-void mcview_display_clean (mcview_t *);
-void mcview_display_ruler (mcview_t *);
-void mcview_adjust_size (Dlg_head *);
-void mcview_percent (mcview_t *, off_t);
+void mcview_update (mcview_t *view);
+void mcview_display (mcview_t *view);
+void mcview_compute_areas (mcview_t *view);
+void mcview_update_bytes_per_line (mcview_t *view);
+void mcview_display_toggle_ruler (mcview_t *view);
+void mcview_display_clean (mcview_t *view);
+void mcview_display_ruler (mcview_t *view);
+void mcview_adjust_size (Dlg_head *h);
+void mcview_percent (mcview_t *view, off_t p);
 
 /* growbuf.c: */
-void mcview_growbuf_init (mcview_t *);
-void mcview_growbuf_free (mcview_t *);
-off_t mcview_growbuf_filesize (mcview_t *);
-void mcview_growbuf_read_until (mcview_t *, off_t);
-gboolean mcview_get_byte_growing_buffer (mcview_t *, off_t, int *);
-char *mcview_get_ptr_growing_buffer (mcview_t *, off_t);
+void mcview_growbuf_init (mcview_t *view);
+void mcview_growbuf_free (mcview_t *view);
+off_t mcview_growbuf_filesize (mcview_t *view);
+void mcview_growbuf_read_until (mcview_t *view, off_t p);
+gboolean mcview_get_byte_growing_buffer (mcview_t *view, off_t p, int *);
+char *mcview_get_ptr_growing_buffer (mcview_t *view, off_t p);
 
 /* hex.c: */
-void mcview_display_hex (mcview_t *);
-gboolean mcview_hexedit_save_changes (mcview_t *);
-void mcview_toggle_hexedit_mode (mcview_t *);
-void mcview_hexedit_free_change_list (mcview_t *);
+void mcview_display_hex (mcview_t *view);
+gboolean mcview_hexedit_save_changes (mcview_t *view);
+void mcview_toggle_hexedit_mode (mcview_t *view);
+void mcview_hexedit_free_change_list (mcview_t *view);
 void mcview_enqueue_change (struct hexedit_change_node **, struct hexedit_change_node *);
 
 /* lib.c: */
-void mcview_toggle_magic_mode (mcview_t *);
-void mcview_toggle_wrap_mode (mcview_t *);
-void mcview_toggle_nroff_mode (mcview_t *);
-void mcview_toggle_hex_mode (mcview_t *);
-gboolean mcview_ok_to_quit (mcview_t *);
-void mcview_done (mcview_t *);
-void mcview_select_encoding (mcview_t *);
-void mcview_set_codeset (mcview_t *);
-void mcview_show_error (mcview_t *, const char *);
+void mcview_toggle_magic_mode (mcview_t *view);
+void mcview_toggle_wrap_mode (mcview_t *view);
+void mcview_toggle_nroff_mode (mcview_t *view);
+void mcview_toggle_hex_mode (mcview_t *view);
+gboolean mcview_ok_to_quit (mcview_t *view);
+void mcview_done (mcview_t *view);
+void mcview_select_encoding (mcview_t *view);
+void mcview_set_codeset (mcview_t *view);
+void mcview_show_error (mcview_t *view, const char *error);
 
 /* move.c */
 void mcview_move_up (mcview_t *, off_t);
@@ -300,10 +297,10 @@ void mcview_place_cursor (mcview_t *);
 void mcview_moveto_match (mcview_t *);
 
 /* nroff.c: */
-void mcview_display_nroff (mcview_t *);
-int mcview__get_nroff_real_len (mcview_t *, off_t, off_t);
+void mcview_display_nroff (mcview_t *view);
+int mcview__get_nroff_real_len (mcview_t *view, off_t, off_t p);
 
-mcview_nroff_t *mcview_nroff_seq_new_num (mcview_t * view, off_t);
+mcview_nroff_t *mcview_nroff_seq_new_num (mcview_t *view, off_t p);
 mcview_nroff_t *mcview_nroff_seq_new (mcview_t * view);
 void mcview_nroff_seq_free (mcview_nroff_t **);
 nroff_type_t mcview_nroff_seq_info (mcview_nroff_t *);
@@ -315,11 +312,11 @@ void mcview_display_text (mcview_t *);
 /* search.c: */
 int mcview_search_cmd_callback (const void *user_data, gsize char_offset);
 int mcview_search_update_cmd_callback (const void *, gsize);
-void mcview_do_search (mcview_t *);
+void mcview_do_search (mcview_t *view);
 
 
 /*** inline functions ****************************************************************************/
 
 #include "inlines.h"
 
-#endif
+#endif					/* MC_VIEWER_INTERNAL_H */

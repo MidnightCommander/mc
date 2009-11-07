@@ -42,6 +42,10 @@
 #include "../src/tty/tty.h"
 #include "../src/tty/key.h"
 #include "../src/strutil.h"
+#include "../src/main.h"
+#include "../src/dialog.h"		/* Dlg_head */
+#include "../src/widget.h"		/* WButtonBar */
+
 #include "internal.h"
 #include "mcviewer.h"
 
@@ -66,7 +70,7 @@ static enum ruler_type {
 
 /* Define labels and handlers for functional keys */
 static void
-mcview_labels (mcview_t * view)
+mcview_set_buttonbar (mcview_t *view)
 {
     const char *text;
     Dlg_head *h = view->widget.parent;
@@ -86,8 +90,6 @@ mcview_labels (mcview_t * view)
 
         buttonbar_set_label_data (b, 4, Q_ ("ButtonBar|Ascii"),
                                     (buttonbarfn) mcview_toggle_hex_mode_cmd, view);
-        buttonbar_set_label_data (b, 5, Q_ ("ButtonBar|Goto"),
-                                    (buttonbarfn) mcview_moveto_addr_cmd, view);
         buttonbar_set_label_data (b, 6, Q_ ("ButtonBar|Save"),
                                     (buttonbarfn) mcview_hexedit_save_changes_cmd, view);
         buttonbar_set_label_data (b, 7, Q_ ("ButtonBar|HxSrch"),
@@ -96,15 +98,15 @@ mcview_labels (mcview_t * view)
         text = view->text_wrap_mode ? Q_ ("ButtonBar|UnWrap") : Q_ ("ButtonBar|Wrap");
         buttonbar_set_label_data (b, 2, text,
                                     (buttonbarfn) mcview_toggle_wrap_mode_cmd, view);
-
         buttonbar_set_label_data (b, 4, Q_ ("ButtonBar|Hex"),
                                     (buttonbarfn) mcview_toggle_hex_mode_cmd, view);
-        buttonbar_set_label_data (b, 5, Q_ ("ButtonBar|Line"),
-                                    (buttonbarfn) mcview_moveto_line_cmd, view);
         buttonbar_clear_label (b, 6);
         buttonbar_set_label_data (b, 7, Q_ ("ButtonBar|Search"),
                                     (buttonbarfn) mcview_search_cmd, view);
     }
+
+    buttonbar_set_label_data (b, 5, Q_ ("ButtonBar|Goto"),
+                                    (buttonbarfn) mcview_goto, view);
 
     /* don't override the key to access the main menu */
     if (!mcview_is_in_panel (view)) {
@@ -201,7 +203,7 @@ mcview_update (mcview_t * view)
 
     if (view->dpy_bbar_dirty) {
         view->dpy_bbar_dirty = FALSE;
-        mcview_labels (view);
+        mcview_set_buttonbar (view);
         buttonbar_redraw (find_buttonbar (view->widget.parent));
     }
 
@@ -336,7 +338,6 @@ mcview_display_toggle_ruler (mcview_t * view)
     assert ((size_t) ruler < 3);
     ruler = next[(size_t) ruler];
     view->dirty++;
-
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -242,7 +242,6 @@ mcview_do_search (mcview_t * view)
     view->dirty++;
     mcview_update (view);
 
-
     tty_disable_interrupt_key ();
     if (verbose) {
         dlg_run_done (d);

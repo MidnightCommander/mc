@@ -220,7 +220,16 @@ static name_keymap_t command_names[] = {
 #endif		/* USE_INTERNAL_EDIT */
 
     /* viewer */
+    { "ViewHelp",                        CK_ViewHelp },
+    { "ViewToggleWrapMode",              CK_ViewToggleWrapMode },
+    { "ViewToggleHexEditMode",           CK_ViewToggleHexEditMode },
+    { "ViewQuit",                        CK_ViewQuit },
+    { "ViewToggleHexMode",               CK_ViewToggleHexMode },
+    { "ViewGoto",                        CK_ViewGoto },
+    { "ViewHexEditSave",                 CK_ViewHexEditSave },
     { "ViewSearch",                      CK_ViewSearch },
+    { "ViewToggleMagicMode",             CK_ViewToggleMagicMode },
+    { "ViewToggleNroffMode",             CK_ViewToggleNroffMode },
     { "ViewContinueSearch",              CK_ViewContinueSearch },
     { "ViewGotoBookmark",                CK_ViewGotoBookmark },
     { "ViewNewBookmark",                 CK_ViewNewBookmark },
@@ -237,8 +246,7 @@ static name_keymap_t command_names[] = {
     { "ViewNextFile",                    CK_ViewNextFile },
     { "ViewPrevFile",                    CK_ViewPrevFile },
     { "ViewToggleRuler",                 CK_ViewToggleRuler },
-    { "HexViewToggleNavigationMode",     CK_HexViewToggleNavigationMode },
-    { "ViewQuit",                        CK_ViewQuit },
+    { "ViewToggleHexNavMode",            CK_ViewToggleHexNavMode },
 
     /* tree */
     { "TreeHelp",                        CK_TreeHelp },
@@ -432,77 +440,112 @@ static const size_t num_command_names = sizeof (command_names) /
 
 /* viewer/actions_cmd.c */
 const global_keymap_t default_viewer_keymap[] = {
-    { '?',         CK_ViewSearch,         "?" },
-    { '/',         CK_ViewSearch,         "/" },
-    { XCTRL ('r'), CK_ViewContinueSearch, "C-r" },
-    { XCTRL ('s'), CK_ViewContinueSearch, "C-s" },
-    { KEY_F (17),  CK_ViewContinueSearch, "S-F7" },
-    { 'n',         CK_ViewContinueSearch, "n" },
-    { ALT ('r'),   CK_ViewToggleRuler,    "M-r" },
+    { KEY_F (1),   CK_ViewHelp,              "F1" },
+    { KEY_F (2),   CK_ViewToggleWrapMode,    "F2" },
+    { KEY_F (3),   CK_ViewQuit,              "F3" },
+    { KEY_F (4),   CK_ViewToggleHexMode,     "F4" },
+    { KEY_F (5),   CK_ViewGoto,              "F5" },
+    { KEY_F (7),   CK_ViewSearch,            "F7" },
+    { KEY_F (8),   CK_ViewToggleMagicMode,   "F8" },
+    { KEY_F (9),   CK_ViewToggleNroffMode,   "F9" },
+    { KEY_F (10),  CK_ViewQuit,              "F10" },
 
-    { XCTRL ('a'), CK_ViewMoveToBol,      "C-a" },
-    { XCTRL ('e'), CK_ViewMoveToEol,      "C-e" },
+    { '?',         CK_ViewSearch,            "?" },
+    { '/',         CK_ViewSearch,            "/" },
+    { XCTRL ('r'), CK_ViewContinueSearch,    "C-r" },
+    { XCTRL ('s'), CK_ViewContinueSearch,    "C-s" },
+    { KEY_F (17),  CK_ViewContinueSearch,    "S-F7" },
+    { 'n',         CK_ViewContinueSearch,    "n" },
+    { ALT ('r'),   CK_ViewToggleRuler,       "M-r" },
 
-    { 'h',         CK_ViewMoveLeft,       "h" },
-    { KEY_LEFT,    CK_ViewMoveLeft,       "Left" },
+    { XCTRL ('a'), CK_ViewMoveToBol,         "C-a" },
+    { XCTRL ('e'), CK_ViewMoveToEol,         "C-e" },
 
-    { 'l',         CK_ViewMoveRight,      "l" },
-    { KEY_RIGHT,   CK_ViewMoveRight,      "Right" },
+    { 'h',         CK_ViewMoveLeft,          "h" },
+    { KEY_LEFT,    CK_ViewMoveLeft,          "Left" },
 
-    { 'k',         CK_ViewMoveUp,         "k" },
-    { 'y',         CK_ViewMoveUp,         "y" },
-    { KEY_IC,      CK_ViewMoveUp,         "Insert" },
-    { KEY_UP,      CK_ViewMoveUp,         "Up" },
+    { 'l',         CK_ViewMoveRight,         "l" },
+    { KEY_RIGHT,   CK_ViewMoveRight,         "Right" },
 
-    { 'j',         CK_ViewMoveDown,       "j" },
-    { 'e',         CK_ViewMoveDown,       "e" },
-    { KEY_DOWN,    CK_ViewMoveDown,       "Down" },
-    { KEY_DC,      CK_ViewMoveDown,       "Delete" },
+    { 'k',         CK_ViewMoveUp,            "k" },
+    { 'y',         CK_ViewMoveUp,            "y" },
+    { KEY_IC,      CK_ViewMoveUp,            "Insert" },
+    { KEY_UP,      CK_ViewMoveUp,            "Up" },
 
-    { ' ',         CK_ViewMovePgDn,       "Space" },
-    { 'f',         CK_ViewMovePgDn,       "f" },
-    { KEY_NPAGE,   CK_ViewMovePgDn,       "PgDn" },
+    { 'j',         CK_ViewMoveDown,          "j" },
+    { 'e',         CK_ViewMoveDown,          "e" },
+    { KEY_DOWN,    CK_ViewMoveDown,          "Down" },
+    { KEY_DC,      CK_ViewMoveDown,          "Delete" },
 
-    { 'b',         CK_ViewMovePgUp,       "b" },
-    { KEY_PPAGE,   CK_ViewMovePgUp,       "PgUp" },
+    { ' ',         CK_ViewMovePgDn,          "Space" },
+    { 'f',         CK_ViewMovePgDn,          "f" },
+    { KEY_NPAGE,   CK_ViewMovePgDn,          "PgDn" },
 
-    { 'd',         CK_ViewMoveHalfPgDn,   "d" },
-    { 'u',         CK_ViewMoveHalfPgUp,   "u" },
+    { 'b',         CK_ViewMovePgUp,          "b" },
+    { KEY_PPAGE,   CK_ViewMovePgUp,          "PgUp" },
 
-    { 'm',         CK_ViewGotoBookmark,   "m" },
-    { 'r',         CK_ViewNewBookmark,    "r" },
+    { 'd',         CK_ViewMoveHalfPgDn,      "d" },
+    { 'u',         CK_ViewMoveHalfPgUp,      "u" },
 
-    { XCTRL ('f'), CK_ViewNextFile,       "C-f" },
-    { XCTRL ('b'), CK_ViewPrevFile,       "C-b" },
+    { 'm',         CK_ViewGotoBookmark,      "m" },
+    { 'r',         CK_ViewNewBookmark,       "r" },
 
-    { 'q',         CK_ViewQuit,           "q" },
-    { XCTRL ('g'), CK_ViewQuit,           "C-q" },
-    { ESC_CHAR,    CK_ViewQuit,           "Esc" },
+    { XCTRL ('f'), CK_ViewNextFile,          "C-f" },
+    { XCTRL ('b'), CK_ViewPrevFile,          "C-b" },
 
-    { ALT ('e'),   CK_SelectCodepage,     "M-e" },
-    { XCTRL ('o'), CK_ShowCommandLine,    "C-o" },
+    { 'q',         CK_ViewQuit,              "q" },
+    { XCTRL ('g'), CK_ViewQuit,              "C-g" },
+    { ESC_CHAR,    CK_ViewQuit,              "Esc" },
+
+    { ALT ('e'),   CK_SelectCodepage,        "M-e" },
+    { XCTRL ('o'), CK_ShowCommandLine,       "C-o" },
 
     { 0, CK_Ignore_Key, "" }
 };
 
 const global_keymap_t default_viewer_hex_keymap[] = {
-    { '\t',        CK_HexViewToggleNavigationMode, "Tab" },
-    { XCTRL ('a'), CK_ViewMoveToBol,               "C-a" },
-    { XCTRL ('e'), CK_ViewMoveToEol,               "C-e" },
+    { KEY_F (1),   CK_ViewHelp,              "F1" },
+    { KEY_F (2),   CK_ViewToggleHexEditMode, "F2" },
+    { KEY_F (3),   CK_ViewQuit,              "F3" },
+    { KEY_F (4),   CK_ViewToggleHexMode,     "F4" },
+    { KEY_F (5),   CK_ViewGoto,              "F5" },
+    { KEY_F (6),   CK_ViewHexEditSave,       "F6" },
+    { KEY_F (7),   CK_ViewSearch,            "F7" },
+    { KEY_F (8),   CK_ViewToggleMagicMode,   "F8" },
+    { KEY_F (9),   CK_ViewToggleNroffMode,   "F9" },
+    { KEY_F (10),  CK_ViewQuit,              "F10" },
 
-    { 'b',         CK_ViewMoveLeft,                "b" },
-    { KEY_LEFT,    CK_ViewMoveLeft,                "Left" },
+    { '?',         CK_ViewSearch,            "?" },
+    { '/',         CK_ViewSearch,            "/" },
+    { XCTRL ('r'), CK_ViewContinueSearch,    "C-r" },
+    { XCTRL ('s'), CK_ViewContinueSearch,    "C-s" },
+    { KEY_F (17),  CK_ViewContinueSearch,    "S-F7" },
+    { 'n',         CK_ViewContinueSearch,    "n" },
 
-    { 'f',         CK_ViewMoveRight,               "f" },
-    { KEY_RIGHT,   CK_ViewMoveRight,               "Right" },
+    { '\t',        CK_ViewToggleHexNavMode,  "Tab" },
+    { XCTRL ('a'), CK_ViewMoveToBol,         "C-a" },
+    { XCTRL ('e'), CK_ViewMoveToEol,         "C-e" },
 
-    { 'k',         CK_ViewMoveUp,                  "k" },
-    { 'y',         CK_ViewMoveUp,                  "y" },
-    { KEY_UP,      CK_ViewMoveUp,                  "Up" },
+    { 'b',         CK_ViewMoveLeft,          "b" },
+    { KEY_LEFT,    CK_ViewMoveLeft,          "Left" },
 
-    { 'j',         CK_ViewMoveDown,                "j" },
-    { KEY_DOWN,    CK_ViewMoveDown,                "Down" },
-    { KEY_DC,      CK_ViewMoveDown,                "Delete" },
+    { 'f',         CK_ViewMoveRight,         "f" },
+    { KEY_RIGHT,   CK_ViewMoveRight,         "Right" },
+
+    { 'k',         CK_ViewMoveUp,            "k" },
+    { 'y',         CK_ViewMoveUp,            "y" },
+    { KEY_UP,      CK_ViewMoveUp,            "Up" },
+
+    { 'j',         CK_ViewMoveDown,          "j" },
+    { KEY_DOWN,    CK_ViewMoveDown,          "Down" },
+    { KEY_DC,      CK_ViewMoveDown,          "Delete" },
+
+    { 'q',         CK_ViewQuit,              "q" },
+    { XCTRL ('g'), CK_ViewQuit,              "C-g" },
+    { ESC_CHAR,    CK_ViewQuit,              "Esc" },
+
+    { ALT ('e'),   CK_SelectCodepage,        "M-e" },
+    { XCTRL ('o'), CK_ShowCommandLine,       "C-o" },
 
     { 0, CK_Ignore_Key, "" }
 };
