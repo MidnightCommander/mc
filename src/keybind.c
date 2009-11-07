@@ -944,3 +944,15 @@ lookup_keymap_shortcut (const global_keymap_t *keymap, unsigned long action)
 
     return NULL;
 }
+
+unsigned long
+lookup_keymap_command (const global_keymap_t *keymap, long key)
+{
+    size_t i;
+
+    for (i = 0; keymap[i].key != 0; i++)
+	if (keymap[i].key == key)
+	    return keymap[i].command;
+
+    return CK_Ignore_Key;
+}

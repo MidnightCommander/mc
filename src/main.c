@@ -1587,7 +1587,8 @@ done_mc_profile (void)
 static cb_ret_t
 midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 {
-    int i;
+    unsigned long command;
+
     switch (msg) {
 
     case DLG_IDLE:
@@ -1600,9 +1601,9 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
     case DLG_KEY:
 	if (ctl_x_map_enabled) {
 	    ctl_x_map_enabled = FALSE;
-	    for (i = 0; main_x_map[i].key; i++)
-		if (parm == main_x_map[i].key)
-		    return midnight_execute_cmd (NULL, NULL, main_x_map[i].command, NULL);
+	    command = lookup_keymap_command (main_x_map, parm);
+	    if (command != CK_Ignore_Key)
+		return midnight_execute_cmd (NULL, NULL, command, NULL);
 	}
 
 	/* FIXME: should handle all menu shortcuts before this point */
@@ -1613,6 +1614,8 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	    free_completions (cmdline);
 
 	if (parm == '\n') {
+	    size_t i;
+
 	    for (i = 0; cmdline->buffer[i] && (cmdline->buffer[i] == ' ' ||
 		cmdline->buffer[i] == '\t'); i++)
 		;
@@ -1694,17 +1697,16 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	    if (v == MSG_HANDLED)
 		return MSG_HANDLED;
 	}
+
 	if (ctl_x_map_enabled) {
 	    ctl_x_map_enabled = FALSE;
-	    for (i = 0; main_x_map[i].key; i++)
-		if (parm == main_x_map[i].key)
-		    return midnight_execute_cmd (NULL, NULL, main_x_map[i].command, NULL);
-	} else {
-	    for (i = 0; main_map[i].key; i++)
-		if (parm == main_map[i].key)
-		    return midnight_execute_cmd (NULL, NULL, main_map[i].command, NULL);
-	}
-	return MSG_NOT_HANDLED;
+	    command = lookup_keymap_command (main_x_map, parm);
+	} else
+	    command = lookup_keymap_command (main_map, parm);
+
+	return (command == CK_Ignore_Key)
+			? MSG_NOT_HANDLED
+			: midnight_execute_cmd (NULL, NULL, command, NULL);
 
     case DLG_DRAW:
 	load_hint (1);

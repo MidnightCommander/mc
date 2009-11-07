@@ -317,22 +317,22 @@ edit_set_buttonbar (WEdit *edit)
     buttonbar_set_label_data (bb, 10, Q_("ButtonBar|Quit"), (buttonbarfn) cmd_F10, edit);
 }
 
-void edit_update_screen (WEdit * e)
+void
+edit_update_screen (WEdit * e)
 {
     edit_scroll_screen_over_cursor (e);
 
     edit_update_curs_col (e);
     edit_status (e);
 
-/* pop all events for this window for internal handling */
-
-    if (!is_idle ()) {
+    /* pop all events for this window for internal handling */
+    if (!is_idle ())
 	e->force |= REDRAW_PAGE;
-	return;
+    else {
+	if (e->force & REDRAW_COMPLETELY)
+	    e->force |= REDRAW_PAGE;
+	edit_render_keypress (e);
     }
-    if (e->force & REDRAW_COMPLETELY)
-	e->force |= REDRAW_PAGE;
-    edit_render_keypress (e);
 }
 
 static cb_ret_t

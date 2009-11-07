@@ -456,25 +456,25 @@ mcview_execute_cmd (Widget *sender, Widget *receiver,
 static cb_ret_t
 mcview_handle_key (mcview_t * view, int key)
 {
-    int i;
+    unsigned long command;
 
     key = convert_from_input_c (key);
 
     if (view->hex_mode) {
-        if (view->hexedit_mode)
-            if (mcview_handle_editkey (view, key) == MSG_HANDLED)
+        if (view->hexedit_mode
+            && (mcview_handle_editkey (view, key) == MSG_HANDLED))
                 return MSG_HANDLED;
-        for (i = 0; view->hex_map[i].key != 0; i++)
-            if ((key == view->hex_map[i].key)
-                && (mcview_execute_cmd (NULL, (Widget *) view,
-                            view->hex_map[i].command, (const void *) key) == MSG_HANDLED))
-                    return MSG_HANDLED;
+
+        command = lookup_keymap_command (view->hex_map, key);
+        if ((command != CK_Ignore_Key)
+            && (mcview_execute_cmd (NULL, &view->widget, command, NULL) == MSG_HANDLED))
+                return MSG_HANDLED;
     }
-    for (i = 0; view->plain_map[i].key != 0; i++)
-        if ((key == view->plain_map[i].key)
-            && (mcview_execute_cmd (NULL, (Widget *) view,
-                            view->plain_map[i].command, (const void *) key) == MSG_HANDLED))
-                return MSG_HANDLED;
+
+    command = lookup_keymap_command (view->plain_map, key);
+    if ((command != CK_Ignore_Key)
+        && (mcview_execute_cmd (NULL, &view->widget, command, NULL) == MSG_HANDLED))
+            return MSG_HANDLED;
 
     if (mcview_check_left_right_keys (view, key))
         return MSG_HANDLED;
