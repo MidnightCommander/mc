@@ -198,6 +198,19 @@
 #define CK_Execute_Macro	852
 #define CK_Begin_End_Macro	853
 
+/* help */
+#define CK_HelpHelp                     1001
+#define CK_HelpIndex                    1002
+#define CK_HelpBack                     1003
+#define CK_HelpQuit                     1004
+#define CK_HelpMoveUp                   1005
+#define CK_HelpMoveDown                 1006
+#define CK_HelpSelectLink               1007
+#define CK_HelpNextLink                 1008
+#define CK_HelpPrevLink                 1009
+#define CK_HelpNextNode                 1010
+#define CK_HelpPrevNode                 1011
+
 /* common */
 #define CK_ShowCommandLine              2001
 #define CK_SelectCodepage               2002

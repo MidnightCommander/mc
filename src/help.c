@@ -58,11 +58,15 @@
 #include "../src/tty/mouse.h"
 #include "../src/tty/key.h"
 
-#include "help.h"
 #include "dialog.h"		/* For Dlg_head */
 #include "widget.h"		/* For Widget */
 #include "wtools.h"		/* For common_dialog_repaint() */
 #include "strutil.h"
+#include "cmddef.h"
+#include "keybind.h"
+#include "help.h"
+
+const global_keymap_t *help_map;
 
 #define MAXLINKNAME 80
 #define HISTORY_SIZE 20
@@ -73,12 +77,13 @@
 #define STRING_LINK_END		"\03"
 #define STRING_NODE_END		"\04"
 
-static char *data = NULL;	/* Pointer to the loaded data file */
-static int help_lines;		/* Lines in help viewer */
-static int  history_ptr;	/* For the history queue */
-static const char *main_node;	/* The main node */
+
+static char *fdata = NULL;		/* Pointer to the loaded data file */
+static int help_lines;			/* Lines in help viewer */
+static int  history_ptr;		/* For the history queue */
+static const char *main_node;		/* The main node */
 static const char *last_shown = NULL;	/* Last byte shown in a screen */
-static int end_of_node = 0;	/* Flag: the last character of the node shown? */
+static gboolean end_of_node = FALSE;	/* Flag: the last character of the node shown? */
 static const char *currentpoint;
 static const char *selected_item;
 
@@ -98,7 +103,7 @@ typedef struct Link_Area {
 } Link_Area;
 
 static Link_Area *link_area = NULL;
-static int inside_link_area = 0;
+static gboolean inside_link_area = FALSE;
 
 static cb_ret_t help_callback (struct Dlg_head *h, dlg_msg_t, int parm);
 
@@ -114,97 +119,99 @@ search_string (const char *start, const char *text)
 
     /* fmt sometimes replaces a space with a newline in the help file */
     /* Replace the newlines in the link name with spaces to correct the situation */
-    while (*d){
+    while (*d != '\0') {
 	if (*d == '\n')
 	    *d = ' ';
 	str_next_char (&d);
     }
+
     /* Do search */
     for (d = local_text; *e; e++){
 	if (*d == *e)
 	    d++;
 	else
 	    d = local_text;
-	if (!*d) {
+	if (*d == '\0') {
 	    result = e + 1;
-	    goto cleanup;
+	    break;
 	}
     }
-cleanup:
+
     g_free (local_text);
     return result;
 }
 
 /* Searches text in the buffer pointed by start.  Search ends */
 /* if the CHAR_NODE_END is found in the text.  Returns 0 on failure */
-static const char *search_string_node (const char *start, const char *text)
+static const char *
+search_string_node (const char *start, const char *text)
 {
     const char *d = text;
     const char *e = start;
 
-    if (!start)
-	return 0;
-    
-    for (; *e && *e != CHAR_NODE_END; e++){
-	if (*d == *e)
-	    d++;
-	else
-	    d = text;
-	if (!*d)
-	    return e+1;
-    }
-    return 0;
+    if (start != NULL)
+	for (; *e && *e != CHAR_NODE_END; e++) {
+	    if (*d == *e)
+		d++;
+	    else
+		d = text;
+	    if (*d == '\0')
+		return e + 1;
+	}
+
+    return NULL;
 }
 
 /* Searches the_char in the buffer pointer by start and searches */
 /* it can search forward (direction = 1) or backward (direction = -1) */
-static const char *search_char_node (const char *start, char the_char, int direction)
+static const char *
+search_char_node (const char *start, char the_char, int direction)
 {
     const char *e;
 
-    e = start;
-    
-    for (; *e && (*e != CHAR_NODE_END); e += direction){
+    for (e = start; (*e != '\0') && (*e != CHAR_NODE_END); e += direction)
 	if (*e == the_char)
 	    return e;
-    }
-    return 0;
+
+    return NULL;
 }
 
 /* Returns the new current pointer when moved lines lines */
-static const char *move_forward2 (const char *c, int lines)
+static const char *
+move_forward2 (const char *c, int lines)
 {
     const char *p;
-    int  line;
+    int line;
 
     currentpoint = c;
-    for (line = 0, p = currentpoint; *p && *p != CHAR_NODE_END; 
-         str_cnext_char (&p)){
-             
+    for (line = 0, p = currentpoint; (*p != '\0') && (*p != CHAR_NODE_END);
+		str_cnext_char (&p)) {
 	if (line == lines)
 	    return currentpoint = p;
+
 	if (*p == '\n')
 	    line++;
     }
     return currentpoint = c;
 }
 
-static const char *move_backward2 (const char *c, int lines)
+static const char *
+move_backward2 (const char *c, int lines)
 {
     const char *p;
     int line;
 
     currentpoint = c;
-    for (line = 0, p = currentpoint; *p && p >= data; 
-         str_cprev_char (&p)) {
-             
-	if (*p == CHAR_NODE_END)
-	{
+    for (line = 0, p = currentpoint; (*p != '\0') && ((int) (p - fdata) >= 0);
+		str_cprev_char (&p)) {
+	if (*p == CHAR_NODE_END) {
 	    /* We reached the beginning of the node */
 	    /* Skip the node headers */
-	    while (*p != ']') str_cnext_char (&p);
+	    while (*p != ']')
+		str_cnext_char (&p);
 	    return currentpoint = p + 2; /* Skip the newline following the start of the node */
 	}
+
 	if (*(p - 1) == '\n')
 	    line++;
 	if (line == lines)
@@ -213,55 +220,60 @@ static const char *move_backward2 (const char *c, int lines)
     return currentpoint = c;
 }
 
-static void move_forward (int i)
+static void
+move_forward (int i)
 {
-    if (end_of_node)
-	return;
-    currentpoint = move_forward2 (currentpoint, i);
+    if (!end_of_node)
+	currentpoint = move_forward2 (currentpoint, i);
 }
 
-static void move_backward (int i)
+static void
+move_backward (int i)
 {
     currentpoint = move_backward2 (currentpoint, ++i);
 }
 
-static void move_to_top (void)
+static void
+move_to_top (void)
 {
-    while (currentpoint > data && *currentpoint != CHAR_NODE_END)
+    while (((int) (currentpoint > fdata) > 0) && (*currentpoint != CHAR_NODE_END))
 	currentpoint--;
+
     while (*currentpoint != ']')
 	currentpoint++;
     currentpoint = currentpoint + 2; /* Skip the newline following the start of the node */
     selected_item = NULL;
 }
 
-static void move_to_bottom (void)
+static void
+move_to_bottom (void)
 {
-    while (*currentpoint && *currentpoint != CHAR_NODE_END)
+    while ((*currentpoint != '\0') && (*currentpoint != CHAR_NODE_END))
 	currentpoint++;
     currentpoint--;
     move_backward (help_lines - 1);
 }
 
-static const char *help_follow_link (const char *start, const char *lc_selected_item)
+static const char *
+help_follow_link (const char *start, const char *lc_selected_item)
 {
     char link_name [MAXLINKNAME];
     const char *p;
-    int  i = 0;
+    int i = 0;
 
-    if (!lc_selected_item)
+    if (lc_selected_item == NULL)
 	return start;
-    
+
     for (p = lc_selected_item; *p && *p != CHAR_NODE_END && *p != CHAR_LINK_POINTER; p++)
 	;
     if (*p == CHAR_LINK_POINTER){
 	link_name [0] = '[';
 	for (i = 1; *p != CHAR_LINK_END && *p && *p != CHAR_NODE_END && i < MAXLINKNAME-3; )
 	    link_name [i++] = *++p;
-	link_name [i-1] = ']';
-	link_name [i] = 0;
-	p = search_string (data, link_name);
-	if (p) {
+	link_name [i - 1] = ']';
+	link_name [i] = '\0';
+	p = search_string (fdata, link_name);
+	if (p != NULL) {
 	    p += 1; /* Skip the newline following the start of the node */
 	    return p;
 	}
@@ -271,31 +283,33 @@ static const char *help_follow_link (const char *start, const char *lc_selected_
     return _(" Help file format error\n");
 }
 
-static const char *select_next_link (const char *current_link)
+static const char *
+select_next_link (const char *current_link)
 {
     const char *p;
 
-    if (!current_link)
-	return 0;
+    if (current_link == NULL)
+	return NULL;
 
     p = search_string_node (current_link, STRING_LINK_END);
-    if (!p)
+    if (p == NULL)
 	return NULL;
     p = search_string_node (p, STRING_LINK_START);
-    if (!p)
+    if (p == NULL)
 	return NULL;
     return p - 1;
 }
 
-static const char *select_prev_link (const char *current_link)
+static const char *
+select_prev_link (const char *current_link)
 {
-    if (!current_link)
-	return 0;
-
-    return search_char_node (current_link - 1, CHAR_LINK_START, -1);
+    return current_link == NULL
+	    ? NULL
+	    : search_char_node (current_link - 1, CHAR_LINK_START, -1);
 }
 
-static void start_link_area (int x, int y, const char *link_name)
+static void
+start_link_area (int x, int y, const char *link_name)
 {
     Link_Area *new;
 
@@ -314,49 +328,53 @@ static void start_link_area (int x, int y, const char *link_name)
     /* Save the name of the destination anchor */
     link_area->link_name = link_name;
 
-    inside_link_area = 1;
+    inside_link_area = TRUE;
 }
 
-static void end_link_area (int x, int y)
+static void
+end_link_area (int x, int y)
 {
-    if (inside_link_area){
+    if (inside_link_area) {
 	/* Save the end coordinates of the link area */
 	link_area->x2 = x;
 	link_area->y2 = y;
-
-	inside_link_area = 0;
+	inside_link_area = FALSE;
     }
 }
 
-static void clear_link_areas (void)
+static void
+clear_link_areas (void)
 {
     Link_Area *current;
 
-    while (link_area){
+    while (link_area != NULL) {
 	current = link_area;
-	link_area = current -> next;
+	link_area = current->next;
 	g_free (current);
     }
-    inside_link_area = 0;
+
+    inside_link_area = FALSE;
 }
 
-static void help_show (Dlg_head *h, const char *paint_start)
+static void
+help_show (Dlg_head *h, const char *paint_start)
 {
     const char *p, *n;
-    int  col, line, c, w;
-    int  painting = 1;
-    int acs;			/* Flag: Alternate character set active? */
-    int repeat_paint;
-    int active_col, active_line;/* Active link position */
+    int col, line, c, w;
+    gboolean painting = TRUE;
+    gboolean acs;			/* Flag: Alternate character set active? */
+    gboolean repeat_paint;
+    int active_col, active_line;	/* Active link position */
     static char buff[MB_LEN_MAX + 1];
 
     tty_setcolor (HELP_NORMAL_COLOR);
     do {
-	
-	line = col = acs = active_col = active_line = repeat_paint = 0;
-    
+	line = col = active_col = active_line = 0;
+	repeat_paint = FALSE;
+	acs = FALSE;
+
 	clear_link_areas ();
-	if (selected_item < paint_start)
+	if ((int) (selected_item - paint_start) < 0)
 	    selected_item = NULL;
 	
         p = paint_start;
@@ -366,8 +384,8 @@ static void help_show (Dlg_head *h, const char *paint_start)
             n = str_cget_next_char (p);
             memcpy (buff, p, n - p);
             buff[n - p] = '\0';
-            c = (unsigned char) buff[0];
-                
+
+	    c = (unsigned char) buff[0];
 	    switch (c){
 	    case CHAR_LINK_START:
 		if (selected_item == NULL)
@@ -384,18 +402,18 @@ static void help_show (Dlg_head *h, const char *paint_start)
 		start_link_area (col, line, p);
 		break;
 	    case CHAR_LINK_POINTER:
-		painting = 0;
+		painting = FALSE;
 		end_link_area (col - 1, line);
 		break;
 	    case CHAR_LINK_END:
-		painting = 1;
+		painting = TRUE;
 		tty_setcolor (HELP_NORMAL_COLOR);
 		break;
 	    case CHAR_ALTERNATE:
-		acs = 1;
+		acs = TRUE;
 		break;
 	    case CHAR_NORMAL:
-		acs = 0;
+		acs = FALSE;
 		break;
 	    case CHAR_VERSION:
 		dlg_move (h, line+2, col+2);
@@ -425,33 +443,32 @@ static void help_show (Dlg_head *h, const char *paint_start)
 		if (col + w > HELP_WINDOW_WIDTH)
 		    continue;
 		
-		dlg_move (h, line+2, col+2);
-		if (acs){
-		    if (c == ' ' || c == '.')
-			tty_print_char (c);
-		    else
-#ifndef HAVE_SLANG
-			tty_print_char (acs_map [c]);
-#else
-			SLsmg_draw_object (h->y + line + 2, h->x + col + 2, c);
-#endif
-		} else {
+		dlg_move (h, line + 2, col + 2);
+		if (!acs)
 		    tty_print_string (buff);
-                }
-                col+= w;
+		else if (c == ' ' || c == '.')
+		    tty_print_char (c);
+		else
+#ifndef HAVE_SLANG
+		    tty_print_char (acs_map [c]);
+#else
+		    SLsmg_draw_object (h->y + line + 2, h->x + col + 2, c);
+#endif
+		col += w;
 		break;
 	    }
 	}
+
 	last_shown = p;
 	end_of_node = line < help_lines;
 	tty_setcolor (HELP_NORMAL_COLOR);
-	if (selected_item >= last_shown){
-	    if (link_area != NULL){
-		selected_item = link_area->link_name;
-		repeat_paint = 1;
-	    }
-	    else
+	if ((int) (selected_item - last_shown) >= 0) {
+	    if (link_area == NULL)
 		selected_item = NULL;
+	    else {
+		selected_item = link_area->link_name;
+		repeat_paint = TRUE;
+	    }
 	}
     } while (repeat_paint);
 
@@ -466,7 +483,7 @@ help_event (Gpm_Event *event, void *vp)
     Widget *w = vp;
     Link_Area *current_area;
 
-    if (! (event->type & GPM_UP))
+    if ((event->type & GPM_UP) == 0)
 	return 0;
 
     /* The event is relative to the dialog window, adjust it: */
@@ -486,7 +503,7 @@ help_event (Gpm_Event *event, void *vp)
 
     /* Test whether the mouse click is inside one of the link areas */
     current_area = link_area;
-    while (current_area)
+    while (current_area != NULL)
     {
 	/* Test one line link area */
 	if (event->y == current_area->y1 && event->x >= current_area->x1 &&
@@ -503,27 +520,25 @@ help_event (Gpm_Event *event, void *vp)
 	}
 	/* Mouse will not work with link areas of more than two lines */
 
-	current_area = current_area -> next;
+	current_area = current_area->next;
     }
 
     /* Test whether a link area was found */
-    if (current_area){
+    if (current_area != NULL) {
 	/* The click was inside a link area -> follow the link */
 	history_ptr = (history_ptr+1) % HISTORY_SIZE;
 	history [history_ptr].page = currentpoint;
 	history [history_ptr].link = current_area->link_name;
 	currentpoint = help_follow_link (currentpoint, current_area->link_name);
 	selected_item = NULL;
-    } else{
-	if (event->y < 0)
-	    move_backward (help_lines - 1);
-	else if (event->y >= help_lines)
-	    move_forward (help_lines - 1);
-	else if (event->y < help_lines/2)
-	    move_backward (1);
-	else
-	    move_forward (1);
-    }
+    } else if (event->y < 0)
+	move_backward (help_lines - 1);
+    else if (event->y >= help_lines)
+	move_forward (help_lines - 1);
+    else if (event->y < help_lines/2)
+	move_backward (1);
+    else
+	move_forward (1);
 
     /* Show the new node */
     help_callback (w->parent, DLG_DRAW, 0);
@@ -533,224 +548,265 @@ help_event (Gpm_Event *event, void *vp)
 
 /* show help */
 static void
-help_help_cmd (void *vp)
+help_help (void *vp)
 {
     Dlg_head *h = vp;
     const char *p;
 
-    history_ptr = (history_ptr+1) % HISTORY_SIZE;
+    history_ptr = (history_ptr + 1) % HISTORY_SIZE;
     history [history_ptr].page = currentpoint;
     history [history_ptr].link = selected_item;
 
-    p = search_string(data, "[How to use help]");
-    if (p == NULL)
-	return;
-
-    currentpoint = p + 1; /* Skip the newline following the start of the node */
-    selected_item = NULL;
-    help_callback (h, DLG_DRAW, 0);
+    p = search_string (fdata, "[How to use help]");
+    if (p != NULL) {
+	currentpoint = p + 1; /* Skip the newline following the start of the node */
+	selected_item = NULL;
+	help_callback (h, DLG_DRAW, 0);
+    }
 }
 
 static void
-help_index_cmd (void *vp)
+help_index (void *vp)
 {
     Dlg_head *h = vp;
     const char *new_item;
 
-    if (!(new_item = search_string (data, "[Contents]"))) {
+    new_item = search_string (fdata, "[Contents]");
+
+    if (new_item == NULL)
 	message (D_ERROR, MSG_ERROR, _(" Cannot find node %s in help file "),
 		 "[Contents]");
-	return;
+    else {
+	history_ptr = (history_ptr + 1) % HISTORY_SIZE;
+	history[history_ptr].page = currentpoint;
+	history[history_ptr].link = selected_item;
+
+	currentpoint = new_item + 1; /* Skip the newline following the start of the node */
+	selected_item = NULL;
+	help_callback (h, DLG_DRAW, 0);
     }
-
-    history_ptr = (history_ptr + 1) % HISTORY_SIZE;
-    history[history_ptr].page = currentpoint;
-    history[history_ptr].link = selected_item;
-
-    currentpoint = new_item + 1; /* Skip the newline following the start of the node */
-    selected_item = NULL;
-    help_callback (h, DLG_DRAW, 0);
 }
 
-static void help_quit_cmd (void *vp)
+static void
+help_quit (void *vp)
 {
     dlg_stop ((Dlg_head *) vp);
 }
 
-static void prev_node_cmd (void *vp)
+static void
+help_back (void *vp)
 {
     Dlg_head *h = vp;
+
     currentpoint = history [history_ptr].page;
     selected_item = history [history_ptr].link;
     history_ptr--;
     if (history_ptr < 0)
-	history_ptr = HISTORY_SIZE-1;
+	history_ptr = HISTORY_SIZE - 1;
 
-    help_callback (h, DLG_DRAW, 0);
+    help_callback (h, DLG_DRAW, 0);	/* FIXME: unneeded? */
 }
 
-static cb_ret_t
-md_callback (Widget *w, widget_msg_t msg, int parm)
+static void
+help_cmk_move_backward(void *vp, int lines)
 {
-    switch (msg) {
-    case WIDGET_RESIZED:
-	w->lines = help_lines;
-	return MSG_HANDLED;
-
-    default:
-	return default_proc (msg, parm);
-    }
+    (void) &vp;
+    move_backward (lines);
 }
 
-static Widget *
-mousedispatch_new (int y, int x, int yl, int xl)
+static void
+help_cmk_move_forward(void *vp, int lines)
 {
-    Widget *w = g_new (Widget, 1);
-
-    init_widget (w, y, x, yl, xl, md_callback, help_event);
-
-    return w;
-}
-
-static void help_cmk_move_backward(void *vp, int lines) {
     (void) &vp;
-    move_backward(lines);
+    move_forward (lines);
 }
-static void help_cmk_move_forward(void *vp, int lines) {
-    (void) &vp;
-    move_forward(lines);
-}
-static void help_cmk_moveto_top(void *vp, int lines) {
+
+static void
+help_cmk_moveto_top(void *vp, int lines)
+{
     (void) &vp;
     (void) &lines;
-    move_to_top();
-}
-static void help_cmk_moveto_bottom(void *vp, int lines) {
-    (void) &vp;
-    (void) &lines;
-    move_to_bottom();
+    move_to_top ();
 }
 
-static cb_ret_t
-help_handle_key (struct Dlg_head *h, int c)
+static void
+help_cmk_moveto_bottom(void *vp, int lines)
+{
+    (void) &vp;
+    (void) &lines;
+    move_to_bottom ();
+}
+
+static void
+help_next_link (gboolean move_down)
+ {
+    const char *new_item;
+
+    new_item = select_next_link (selected_item);
+    if (new_item != NULL) {
+	selected_item = new_item;
+	if ((int) (selected_item - last_shown) >= 0) {
+	    if (move_down)
+		move_forward (1);
+	    else
+		selected_item = NULL;
+	}
+    } else if (move_down)
+	move_forward (1);
+    else
+	selected_item = NULL;
+}
+
+static void
+help_prev_link (gboolean move_up)
 {
     const char *new_item;
 
+    new_item = select_prev_link (selected_item);
+    selected_item = new_item;
+    if ((selected_item == NULL) || (selected_item < currentpoint)) {
+	if (move_up)
+	    move_backward (1);
+	else if (link_area != NULL)
+	    selected_item = link_area->link_name;
+	else
+	    selected_item = NULL;
+    }
+}
+
+static void
+help_next_node (void)
+{
+    const char *new_item;
+
+    new_item = currentpoint;
+    while ((*new_item != '\0') && (*new_item != CHAR_NODE_END))
+	new_item++;
+
+    if (*++new_item == '[')
+	while (*++new_item != '\0')
+	    if ((*new_item == ']') && (*++new_item != '\0')
+		    && (*++new_item != '\0')) {
+		currentpoint = new_item;
+		selected_item = NULL;
+		break;
+	    }
+}
+
+static void
+help_prev_node (void)
+{
+    const char *new_item;
+
+    new_item = currentpoint;
+    while (((int) (new_item - fdata) > 1) && (*new_item != CHAR_NODE_END))
+	new_item--;
+    new_item--;
+    while (((int) (new_item - fdata) > 0) && (*new_item != CHAR_NODE_END))
+	new_item--;
+    while (*new_item != ']')
+	new_item++;
+    currentpoint = new_item + 2;
+    selected_item = NULL;
+}
+
+static void
+help_select_link (void)
+{
+    /* follow link */
+    if (selected_item == NULL) {
+#ifdef WE_WANT_TO_GO_BACKWARD_ON_KEY_RIGHT
+	/* Is there any reason why the right key would take us
+	 * backward if there are no links selected?, I agree
+	 * with Torben than doing nothing in this case is better
+	 */
+	/* If there are no links, go backward in history */
+	history_ptr--;
+	if (history_ptr < 0)
+	    history_ptr = HISTORY_SIZE-1;
+
+	currentpoint = history [history_ptr].page;
+	selected_item = history [history_ptr].link;
+#endif
+    } else {
+	history_ptr = (history_ptr + 1) % HISTORY_SIZE;
+	history [history_ptr].page = currentpoint;
+	history [history_ptr].link = selected_item;
+	currentpoint = help_follow_link (currentpoint, selected_item);
+    }
+
+    selected_item = NULL;
+}
+
+static cb_ret_t
+help_execute_cmd (Widget *sender, Widget *receiver,
+		    unsigned long command, const void *data)
+{
+    cb_ret_t ret = MSG_HANDLED;
+
+    (void) sender;
+    (void) receiver;
+
+    switch (command) {
+    case CK_HelpHelp:
+	help_help ((void *) data);
+	break;
+    case CK_HelpIndex:
+	help_index ((void *) data);
+	break;
+    case CK_HelpBack:
+	help_back ((void *) data);
+	break;
+    case CK_HelpMoveUp:
+	help_prev_link (TRUE);
+	break;
+    case CK_HelpMoveDown:
+	help_next_link (TRUE);
+	break;
+    case CK_HelpSelectLink:
+	help_select_link ();
+	break;
+    case CK_HelpNextLink:
+	help_next_link (FALSE);
+	break;
+    case CK_HelpPrevLink:
+	help_prev_link (FALSE);
+	break;
+    case CK_HelpNextNode:
+	help_next_node ();
+	break;
+    case CK_HelpPrevNode:
+	help_prev_node ();
+	break;
+    case CK_HelpQuit:
+	dlg_stop (whelp);
+	break;
+    default:
+	ret = MSG_NOT_HANDLED;
+    }
+
+    return ret;
+}
+
+static cb_ret_t
+help_handle_key (Dlg_head *h, int c)
+{
     if (c != KEY_UP && c != KEY_DOWN &&
 	check_movement_keys (c, help_lines, NULL,
 			     help_cmk_move_backward,
 			     help_cmk_move_forward,
 			     help_cmk_moveto_top,
-			     help_cmk_moveto_bottom)) {
+			     help_cmk_moveto_bottom) == MSG_HANDLED) {
 	/* Nothing */;
-    } else switch (c){
-    case 'l':
-    case KEY_LEFT:
-	prev_node_cmd (h);
-	break;
+    } else {
+	unsigned long command;
 
-    case '\n':
-    case KEY_RIGHT:
-	/* follow link */
-	if (!selected_item){
-#ifdef WE_WANT_TO_GO_BACKWARD_ON_KEY_RIGHT
-	    /* Is there any reason why the right key would take us
-	     * backward if there are no links selected?, I agree
-	     * with Torben than doing nothing in this case is better
-	     */
-	    /* If there are no links, go backward in history */
-	    history_ptr--;
-	    if (history_ptr < 0)
-		history_ptr = HISTORY_SIZE-1;
-
-	    currentpoint = history [history_ptr].page;
-	    selected_item   = history [history_ptr].link;
-#endif
-	} else {
-	    history_ptr = (history_ptr+1) % HISTORY_SIZE;
-	    history [history_ptr].page = currentpoint;
-	    history [history_ptr].link = selected_item;
-	    currentpoint = help_follow_link (currentpoint, selected_item);
-	}
-	selected_item = NULL;
-	break;
-
-    case KEY_DOWN:
-    case '\t':
-	new_item = select_next_link (selected_item);
-	if (new_item){
-	    selected_item = new_item;
-	    if (selected_item >= last_shown){
-		if (c == KEY_DOWN)
-		    move_forward (1);
-		else
-		    selected_item = NULL;
-	    }
-	} else if (c == KEY_DOWN)
-	    move_forward (1);
-	else
-	    selected_item = NULL;
-	break;
-
-    case KEY_UP:
-    case ALT ('\t'):
-	/* select previous link */
-	new_item = select_prev_link (selected_item);
-	selected_item = new_item;
-	if (selected_item == NULL || selected_item < currentpoint) {
-	    if (c == KEY_UP)
-		move_backward (1);
-	    else{
-		if (link_area != NULL)
-		    selected_item = link_area->link_name;
-		else
-		    selected_item = NULL;
-	    }
-	}
-	break;
-
-    case 'n':
-	/* Next node */
-	new_item = currentpoint;
-	while (*new_item && *new_item != CHAR_NODE_END)
-	    new_item++;
-	if (*++new_item == '['){
-	    while (*++new_item) {
-		if (*new_item == ']' && *++new_item && *++new_item) {
-		    currentpoint = new_item;
-		    selected_item = NULL;
-		    break;
-		}
-	    }
-	}
-	break;
-
-    case 'p':
-	/* Previous node */
-	new_item = currentpoint;
-	while (new_item > data + 1 && *new_item != CHAR_NODE_END)
-	    new_item--;
-	new_item--;
-	while (new_item > data && *new_item != CHAR_NODE_END)
-	    new_item--;
-	while (*new_item != ']')
-	    new_item++;
-	currentpoint = new_item + 2;
-	selected_item = NULL;
-	break;
-
-    case 'c':
-	help_index_cmd (h);
-	break;
-
-    case ESC_CHAR:
-    case XCTRL('g'):
-	dlg_stop (h);
-	break;
-
-    default:
-	return MSG_NOT_HANDLED;
+	command = lookup_keymap_command (help_map, c);
+	if ((command == CK_Ignore_Key)
+	    || (help_execute_cmd (NULL, NULL, command, h) == MSG_NOT_HANDLED))
+		return MSG_NOT_HANDLED;
     }
+
     help_callback (h, DLG_DRAW, 0);
     return MSG_HANDLED;
 }
@@ -788,7 +844,7 @@ interactive_display_finish (void)
 }
 
 /* translate help file into terminal encoding */
-static void 
+static void
 translate_file (char *filedata)
 {
     GIConv conv;
@@ -798,19 +854,41 @@ translate_file (char *filedata)
 
     conv = str_crt_conv_from ("UTF-8");
 
-    if (conv != INVALID_CONV) {
-        g_free (data);
+    if (conv == INVALID_CONV)
+	g_string_free (translated_data, TRUE);
+    else {
+	g_free (fdata);
 
-        if (str_convert (conv, filedata, translated_data) != ESTR_FAILURE) {
-            data = translated_data->str;
-            g_string_free (translated_data, FALSE);
-        } else {
-            data = NULL;
-            g_string_free (translated_data, TRUE);
-        }
-        str_close_conv (conv);
-    } else
-        g_string_free (translated_data, TRUE);
+	if (str_convert (conv, filedata, translated_data) != ESTR_FAILURE) {
+	    fdata = translated_data->str;
+	    g_string_free (translated_data, FALSE);
+	} else {
+	    fdata = NULL;
+	    g_string_free (translated_data, TRUE);
+	}
+	str_close_conv (conv);
+    }
+}
+
+static cb_ret_t
+md_callback (Widget *w, widget_msg_t msg, int parm)
+{
+    switch (msg) {
+    case WIDGET_RESIZED:
+	w->lines = help_lines;
+	return MSG_HANDLED;
+
+    default:
+	return default_proc (msg, parm);
+    }
+}
+
+static Widget *
+mousedispatch_new (int y, int x, int yl, int xl)
+{
+    Widget *w = g_new (Widget, 1);
+    init_widget (w, y, x, yl, xl, md_callback, help_event);
+    return w;
 }
 
 void
@@ -821,18 +899,16 @@ interactive_display (const char *filename, const char *node)
     char *hlpfile = NULL;
     char *filedata;
 
-    if (filename)
+    if (filename != NULL)
 	filedata = load_file (filename);
     else
 	filedata = load_mc_home_file ("mc.hlp", &hlpfile);
 
-    if (filedata == NULL) {
+    if (filedata == NULL)
 	message (D_ERROR, MSG_ERROR, _(" Cannot open file %s \n %s "), filename ? filename : hlpfile,
 		 unix_error_string (errno));
-    }
 
-    if (!filename)
-	g_free (hlpfile);
+    g_free (hlpfile);
 
     if (filedata == NULL)
 	return;
@@ -841,19 +917,21 @@ interactive_display (const char *filename, const char *node)
 
     g_free (filedata);
 
-    if (!data)
+    if (fdata == NULL)
 	return;
 
-    if (!node || !*node)
+    if ((node == NULL) || (*node == '\0'))
 	node = "[main]";
 
-    if (!(main_node = search_string (data, node))) {
+    main_node = search_string (fdata, node);
+
+    if (main_node == NULL) {
 	message (D_ERROR, MSG_ERROR, _(" Cannot find node %s in help file "),
 		 node);
 
 	/* Fallback to [main], return if it also cannot be found */
-	main_node = search_string (data, "[main]");
-	if (!main_node) {
+	main_node = search_string (fdata, "[main]");
+	if (main_node == NULL) {
 	    interactive_display_finish ();
 	    return;
 	}
@@ -884,16 +962,16 @@ interactive_display (const char *filename, const char *node)
     add_widget (whelp, md);
     add_widget (whelp, help_bar);
 
-    buttonbar_set_label_data (help_bar, 1, Q_("ButtonBar|Help"), help_help_cmd, whelp);
-    buttonbar_set_label_data (help_bar, 2, Q_("ButtonBar|Index"), help_index_cmd, whelp);
-    buttonbar_set_label_data (help_bar, 3, Q_("ButtonBar|Prev"), prev_node_cmd, whelp);
+    buttonbar_set_label_data (help_bar, 1, Q_("ButtonBar|Help"), help_help, whelp);
+    buttonbar_set_label_data (help_bar, 2, Q_("ButtonBar|Index"), help_index, whelp);
+    buttonbar_set_label_data (help_bar, 3, Q_("ButtonBar|Prev"), help_back, whelp);
     buttonbar_clear_label (help_bar, 4);
     buttonbar_clear_label (help_bar, 5);
     buttonbar_clear_label (help_bar, 6);
     buttonbar_clear_label (help_bar, 7);
     buttonbar_clear_label (help_bar, 8);
     buttonbar_clear_label (help_bar, 9);
-    buttonbar_set_label_data (help_bar, 10, Q_("ButtonBar|Quit"), help_quit_cmd, whelp);
+    buttonbar_set_label_data (help_bar, 10, Q_("ButtonBar|Quit"), help_quit, whelp);
 
     run_dlg (whelp);
     interactive_display_finish ();

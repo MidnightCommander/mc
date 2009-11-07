@@ -348,3 +348,16 @@ TreeOpen = enter
 TreeRescan = f2; ctrl-r
 TreeStartSearch = ctrl-s; alt-s
 TreeRemove = f8; delete
+
+[help]
+HelpHelp = f1
+HelpIndex = f2; c
+HelpBack = f3; left; l
+HelpQuit = f10; esc; ctrl-g
+HelpMoveUp = up
+HelpMoveDown = down
+HelpSelectLink = right; enter
+HelpNextLink = tab
+HelpPrevLink = alt-tab
+HelpNextNode = n
+HelpPrevNode = p

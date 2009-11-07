@@ -1014,6 +1014,9 @@ load_keymap_defs (void)
         tree_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
         load_keymap_from_section ("tree", tree_keymap, mc_global_keymap);
 
+        help_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
+        load_keymap_from_section ("help", help_keymap, mc_global_keymap);
+
         mc_config_deinit (mc_global_keymap);
     }
 }
@@ -1022,16 +1025,17 @@ void
 free_keymap_defs (void)
 {
 #ifdef USE_INTERNAL_EDIT
-        g_array_free (editor_keymap, TRUE);
-        g_array_free (editor_x_keymap, TRUE);
+    g_array_free (editor_keymap, TRUE);
+    g_array_free (editor_x_keymap, TRUE);
 #endif
-        g_array_free (viewer_keymap, TRUE);
-        g_array_free (viewer_hex_keymap, TRUE);
-        g_array_free (main_keymap, TRUE);
-        g_array_free (main_x_keymap, TRUE);
-        g_array_free (panel_keymap, TRUE);
-        g_array_free (input_keymap, TRUE);
-        g_array_free (tree_keymap, TRUE);
+    g_array_free (viewer_keymap, TRUE);
+    g_array_free (viewer_hex_keymap, TRUE);
+    g_array_free (main_keymap, TRUE);
+    g_array_free (main_x_keymap, TRUE);
+    g_array_free (panel_keymap, TRUE);
+    g_array_free (input_keymap, TRUE);
+    g_array_free (tree_keymap, TRUE);
+    g_array_free (help_keymap, TRUE);
 }
 
 void

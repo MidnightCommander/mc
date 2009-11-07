@@ -318,6 +318,7 @@ GArray *main_x_keymap = NULL;
 GArray *panel_keymap = NULL;
 GArray *input_keymap = NULL;
 GArray *tree_keymap = NULL;
+GArray *help_keymap = NULL;
 
 const global_keymap_t *main_map;
 const global_keymap_t *main_x_map;
@@ -1908,6 +1909,10 @@ do_nc (void)
     tree_map = default_tree_keymap;
     if (tree_keymap && tree_keymap->len > 0)
         tree_map = (global_keymap_t *) tree_keymap->data;
+
+    help_map = default_help_keymap;
+    if (help_keymap && help_keymap->len > 0)
+        help_map = (global_keymap_t *) help_keymap->data;
 
     /* Check if we were invoked as an editor or file viewer */
     if (!mc_maybe_editor_or_viewer ()) {

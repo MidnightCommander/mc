@@ -248,6 +248,19 @@ static name_keymap_t command_names[] = {
     { "ViewToggleRuler",                 CK_ViewToggleRuler },
     { "ViewToggleHexNavMode",            CK_ViewToggleHexNavMode },
 
+    /* help */
+    { "HelpHelp",                        CK_HelpHelp },
+    { "HelpIndex",                       CK_HelpIndex },
+    { "HelpBack",                        CK_HelpBack },
+    { "HelpQuit",                        CK_HelpQuit },
+    { "HelpMoveUp",                      CK_HelpMoveUp },
+    { "HelpMoveDown",                    CK_HelpMoveDown },
+    { "HelpSelectLink",                  CK_HelpSelectLink },
+    { "HelpNextLink",                    CK_HelpNextLink },
+    { "HelpPrevLink",                    CK_HelpPrevLink },
+    { "HelpNextNode",                    CK_HelpNextNode },
+    { "HelpPrevNode",                    CK_HelpPrevNode },
+
     /* tree */
     { "TreeHelp",                        CK_TreeHelp },
     { "TreeForget",                      CK_TreeForget },
@@ -716,6 +729,28 @@ const global_keymap_t default_tree_keymap[] = {
     { ALT ('s'),   CK_TreeStartSearch, "M-s" },
     { KEY_DC,      CK_TreeRemove,      "Delete" },
     { 0, CK_Ignore_Key, ""}
+};
+
+/* help */
+const global_keymap_t default_help_keymap[] = {
+    { KEY_F (1),   CK_HelpHelp,       "F1" },
+    { KEY_F (2),   CK_HelpIndex,      "F2" },
+    { KEY_F (3),   CK_HelpBack,       "F3" },
+    { KEY_F (10),  CK_HelpQuit,       "F10" },
+    { KEY_LEFT,    CK_HelpBack,       "Left" },
+    { 'l',         CK_HelpBack,       "l" },
+    { KEY_DOWN,    CK_HelpMoveDown,   "Down" },
+    { KEY_UP,      CK_HelpMoveUp,     "Up" },
+    { KEY_RIGHT,   CK_HelpSelectLink, "Right" },
+    { KEY_ENTER,   CK_HelpSelectLink, "Enter" },
+    { '\n',        CK_HelpSelectLink, "Enter" },
+    { '\t',        CK_HelpNextLink,   "Tab" },
+    { ALT ('\t'),  CK_HelpPrevLink,   "M-Tab" },
+    { 'n',         CK_HelpNextNode,   "n" },
+    { 'p',         CK_HelpPrevNode,   "p" },
+    { ESC_CHAR,    CK_HelpQuit,       "Esc" },
+    { XCTRL ('g'), CK_HelpQuit,       "C-g" },
+    { 0, CK_Ignore_Key, "" }
 };
 
 /* screen.c */

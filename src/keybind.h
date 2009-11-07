@@ -52,4 +52,7 @@ extern const global_keymap_t default_main_x_map[];
 /* tree.c */
 extern const global_keymap_t default_tree_keymap[];
 
+/* help.c */
+extern const global_keymap_t default_help_keymap[];
+
 #endif					/* MC_KEYBIND_H */
