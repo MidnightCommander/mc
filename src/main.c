@@ -1135,14 +1135,11 @@ ctl_x_cmd (void)
 }
 
 static cb_ret_t
-midnight_execute_cmd (Widget *sender, Widget *receiver,
-			unsigned long command, const void *data)
+midnight_execute_cmd (Widget *sender, unsigned long command)
 {
     cb_ret_t res = MSG_HANDLED;
 
     (void) sender;
-    (void) receiver;
-    (void) data;
 
     switch (command) {
     case CK_AddHotlist:
@@ -1593,11 +1590,20 @@ midnight_callback (Dlg_head *h, Widget *sender,
 
     switch (msg) {
 
+    case DLG_DRAW:
+	load_hint (1);
+	/* We handle the special case of the output lines */
+	if (console_flag && output_lines)
+	    show_console_contents (output_start_y,
+				   LINES - output_lines - keybar_visible -
+				   1, LINES - keybar_visible - 1);
+	return MSG_HANDLED;
+
     case DLG_IDLE:
 	/* We only need the first idle event to show user menu after start */
 	set_idle_proc (h, 0);
 	if (auto_menu)
-	    midnight_execute_cmd (NULL, NULL, CK_UserMenuCmd, NULL);
+	    midnight_execute_cmd (NULL, CK_UserMenuCmd);
 	return MSG_HANDLED;
 
     case DLG_KEY:
@@ -1605,7 +1611,7 @@ midnight_callback (Dlg_head *h, Widget *sender,
 	    ctl_x_map_enabled = FALSE;
 	    command = lookup_keymap_command (main_x_map, parm);
 	    if (command != CK_Ignore_Key)
-		return midnight_execute_cmd (NULL, NULL, command, NULL);
+		return midnight_execute_cmd (NULL, command);
 	}
 
 	/* FIXME: should handle all menu shortcuts before this point */
@@ -1708,20 +1714,20 @@ midnight_callback (Dlg_head *h, Widget *sender,
 
 	return (command == CK_Ignore_Key)
 			? MSG_NOT_HANDLED
-			: midnight_execute_cmd (NULL, NULL, command, NULL);
-
-    case DLG_DRAW:
-	load_hint (1);
-	/* We handle the special case of the output lines */
-	if (console_flag && output_lines)
-	    show_console_contents (output_start_y,
-				   LINES - output_lines - keybar_visible -
-				   1, LINES - keybar_visible - 1);
-	return MSG_HANDLED;
+			: midnight_execute_cmd (NULL, command);
 
     case DLG_POST_KEY:
 	if (!the_menubar->is_active)
 	    update_dirty_panels ();
+	return MSG_HANDLED;
+
+    case DLG_ACTION:
+	/* shortcut */
+	if (sender == NULL)
+	    midnight_execute_cmd (NULL, parm);
+	/* message from menu */
+	else if (sender == &the_menubar->widget)
+	    midnight_execute_cmd (sender, parm);
 	return MSG_HANDLED;
 
     default:
@@ -1798,7 +1804,6 @@ load_hint (int force)
 static void
 setup_panels_and_run_mc (void)
 {
-    midnight_dlg->execute = midnight_execute_cmd;
     midnight_dlg->get_shortcut = midnight_get_shortcut;
 
     add_widget (midnight_dlg, the_menubar);

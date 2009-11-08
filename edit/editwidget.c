@@ -176,12 +176,23 @@ edit_adjust_size (Dlg_head *h)
 #endif
 }
 
+static cb_ret_t
+edit_command_execute (WEdit *edit, unsigned long command)
+{
+    edit_execute_key_command (edit, command, -1);
+    edit_update_screen (edit);
+    return MSG_HANDLED;
+}
+
 /* Callback for the edit dialog */
 static cb_ret_t
 edit_dialog_callback (Dlg_head *h, Widget *sender,
 			dlg_msg_t msg, int parm, void *data)
 {
     WEdit *edit;
+    WMenuBar *menubar;
+
+    edit = (WEdit *) find_widget_type (h, edit_callback);
 
     switch (msg) {
     case DLG_RESIZE:
@@ -189,9 +200,14 @@ edit_dialog_callback (Dlg_head *h, Widget *sender,
 	return MSG_HANDLED;
 
     case DLG_VALIDATE:
-	edit = (WEdit *) find_widget_type (h, edit_callback);
 	if (!edit_ok_to_exit (edit))
 	    h->running = 1;
+	return MSG_HANDLED;
+
+    case DLG_ACTION:
+	menubar = find_menubar (h);
+	if (sender == &menubar->widget)
+	    return edit_command_execute (edit, parm);
 	return MSG_HANDLED;
 
     default:
@@ -221,12 +237,10 @@ edit_file (const char *_file, int line)
 	create_dlg (0, 0, LINES, COLS, NULL, edit_dialog_callback,
 		    "[Internal File Editor]", NULL, DLG_WANT_TAB);
 
-    edit_dlg->execute = edit_command_execute;
     edit_dlg->get_shortcut = edit_get_shortcut;
     edit_menubar = menubar_new (0, 0, COLS, NULL);
     add_widget (edit_dlg, edit_menubar);
     edit_init_menu (edit_menubar);
-
 
     init_widget (&(wedit->widget), 0, 0, LINES - 1, COLS,
 		 edit_callback, edit_event);

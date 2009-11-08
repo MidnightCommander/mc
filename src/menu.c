@@ -314,9 +314,8 @@ menubar_execute (WMenuBar *menubar)
     if ((entry != NULL) && (entry->command != CK_Ignore_Key)) {
 	is_right = (menubar->selected != 0);
 	menubar_finish (menubar);
-	menubar->widget.parent->execute (
-			find_widget_type (menubar->widget.parent, menubar_callback),
-			NULL, entry->command, NULL);
+	menubar->widget.parent->callback (menubar->widget.parent, &menubar->widget,
+					    DLG_ACTION, entry->command, NULL);
 	do_refresh ();
     }
 }
@@ -778,4 +777,11 @@ menubar_arrange (WMenuBar* menubar)
 	start_x += len + gap;
     }
 #endif /* RESIZABLE_MENUBAR */
+}
+
+/* Find MenuBar widget in the dialog */
+WMenuBar *
+find_menubar (const Dlg_head *h)
+{
+    return (WMenuBar *) find_widget_type (h, menubar_callback);
 }

@@ -152,8 +152,6 @@ extern int enable_show_tabs_tws;
 int edit_drop_hotkey_menu (WEdit *e, int key);
 void edit_menu_cmd (WEdit *e);
 void edit_init_menu (struct WMenuBar *menubar);
-cb_ret_t edit_command_execute (struct Widget *sender, struct Widget *receiver,
-				unsigned long command, const void *data);
 void menu_save_mode_cmd (void);
 int edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch);
 int edit_get_byte (WEdit * edit, long byte_index);

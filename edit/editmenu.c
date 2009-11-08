@@ -52,18 +52,6 @@
 #include "edit-impl.h"
 #include "edit-widget.h"
 
-cb_ret_t
-edit_command_execute (Widget *sender, Widget *receiver,
-			unsigned long command, const void *data)
-{
-    (void) sender;
-    (void) receiver;
-    (void) data;
-    edit_execute_key_command (wedit, command, -1);
-    edit_update_screen (wedit);
-    return MSG_HANDLED;
-}
-
 static GList *
 create_file_menu (void)
 {

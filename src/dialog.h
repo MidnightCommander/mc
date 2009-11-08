@@ -87,17 +87,6 @@ typedef struct Dlg_head Dlg_head;
 typedef cb_ret_t (*dlg_cb_fn)(struct Dlg_head *h, Widget *sender,
 				dlg_msg_t msg, int parm, void *data);
 
-/* keybinding commands execution
-   sender: the widget that sent the command with data
-           currently only two modes are available:
-           sender == NULL: the command was sent by shortcut
-           sender != NULL: the command was sent by menu
-   receiver: the widget that received command and data
-           should be NULL if sender is menu or buttonbar
-*/
-typedef cb_ret_t (*dlg_exec_fn) (Widget *sender, Widget *receiver,
-		    unsigned long command, const void *data);
-
 /* get string representation of shortcut assigned  with command */
 /* as menu is a widget of dialog, ask dialog about shortcut string */
 typedef char * (*dlg_shortcut_str) (unsigned long command);
@@ -133,7 +122,6 @@ struct Dlg_head {
     struct Widget *current;		/* Curently active widget */
     void *data;				/* Data can be passed to dialog */
     dlg_cb_fn callback;
-    dlg_exec_fn execute;		/* Execute commands, associated with key bindings  */
     dlg_shortcut_str get_shortcut;	/* Shortcut string */
     struct Dlg_head *parent;		/* Parent dialog */
 };
