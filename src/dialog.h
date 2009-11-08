@@ -65,26 +65,27 @@ typedef enum {
 
 /* Dialog messages */
 typedef enum {
-    DLG_KEY,			/* Key before sending to widget */
-    DLG_INIT,			/* Initialize dialog */
-    DLG_END,			/* Shut down dialog */
-    DLG_ACTION,			/* State of check- and radioboxes has changed
+    DLG_INIT		= 0,	/* Initialize dialog */
+    DLG_IDLE		= 1,	/* The idle state is active */
+    DLG_DRAW		= 2,	/* Draw dialog on screen */
+    DLG_FOCUS		= 3,	/* A widget has got focus */
+    DLG_UNFOCUS		= 4,	/* A widget has been unfocused */
+    DLG_RESIZE		= 5,	/* Window size has changed */
+    DLG_KEY		= 6,	/* Key before sending to widget */
+    DLG_HOTKEY_HANDLED	= 7,	/* A widget has got the hotkey */
+    DLG_POST_KEY	= 8,	/* The key has been handled */
+    DLG_UNHANDLED_KEY	= 9,	/* Key that no widget handled */
+    DLG_ACTION		= 10,	/* State of check- and radioboxes has changed
 				 * and listbox current entry has changed */
-    DLG_DRAW,			/* Draw dialog on screen */
-    DLG_FOCUS,			/* A widget has got focus */
-    DLG_UNFOCUS,		/* A widget has been unfocused */
-    DLG_RESIZE,			/* Window size has changed */
-    DLG_POST_KEY,		/* The key has been handled */
-    DLG_IDLE,			/* The idle state is active */
-    DLG_UNHANDLED_KEY,		/* Key that no widget handled */
-    DLG_HOTKEY_HANDLED,		/* A widget has got the hotkey */
-    DLG_VALIDATE		/* Dialog is to be closed */
+    DLG_VALIDATE	= 11,	/* Dialog is to be closed */
+    DLG_END		= 12	/* Shut down dialog */
 } dlg_msg_t;
 
 
 /* Dialog callback */
 typedef struct Dlg_head Dlg_head;
-typedef cb_ret_t (*dlg_cb_fn)(struct Dlg_head *h, dlg_msg_t msg, int parm);
+typedef cb_ret_t (*dlg_cb_fn)(struct Dlg_head *h, Widget *sender,
+				dlg_msg_t msg, int parm, void *data);
 
 /* keybinding commands execution
    sender: the widget that sent the command with data
@@ -227,7 +228,8 @@ void init_widget (Widget *w, int y, int x, int lines, int cols,
 		  callback_fn callback, mouse_h mouse_handler);
 
 /* Default callback for dialogs */
-cb_ret_t default_dlg_callback (Dlg_head *h, dlg_msg_t msg, int parm);
+cb_ret_t default_dlg_callback (Dlg_head *h, Widget *sender,
+				dlg_msg_t msg, int parm, void *data);
 
 /* Default paint routine for dialogs */
 void common_dialog_repaint (struct Dlg_head *h);

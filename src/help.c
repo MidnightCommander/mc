@@ -105,7 +105,8 @@ typedef struct Link_Area {
 static Link_Area *link_area = NULL;
 static gboolean inside_link_area = FALSE;
 
-static cb_ret_t help_callback (struct Dlg_head *h, dlg_msg_t, int parm);
+static cb_ret_t help_callback (Dlg_head *h, Widget *sender,
+				dlg_msg_t msg, int parm, void *data);
 
 /* returns the position where text was found in the start buffer */
 /* or 0 if not found */
@@ -497,7 +498,7 @@ help_event (Gpm_Event *event, void *vp)
 	if (history_ptr < 0)
 	    history_ptr = HISTORY_SIZE-1;
 	
-	help_callback (w->parent, DLG_DRAW, 0);
+	help_callback (w->parent, NULL, DLG_DRAW, 0, NULL);
 	return 0;
     }
 
@@ -541,7 +542,7 @@ help_event (Gpm_Event *event, void *vp)
 	move_forward (1);
 
     /* Show the new node */
-    help_callback (w->parent, DLG_DRAW, 0);
+    help_callback (w->parent, NULL, DLG_DRAW, 0, NULL);
 
     return 0;
 }
@@ -561,7 +562,7 @@ help_help (void *vp)
     if (p != NULL) {
 	currentpoint = p + 1; /* Skip the newline following the start of the node */
 	selected_item = NULL;
-	help_callback (h, DLG_DRAW, 0);
+	help_callback (h, NULL, DLG_DRAW, 0, NULL);
     }
 }
 
@@ -583,7 +584,7 @@ help_index (void *vp)
 
 	currentpoint = new_item + 1; /* Skip the newline following the start of the node */
 	selected_item = NULL;
-	help_callback (h, DLG_DRAW, 0);
+	help_callback (h, NULL, DLG_DRAW, 0, NULL);
     }
 }
 
@@ -604,7 +605,7 @@ help_back (void *vp)
     if (history_ptr < 0)
 	history_ptr = HISTORY_SIZE - 1;
 
-    help_callback (h, DLG_DRAW, 0);	/* FIXME: unneeded? */
+    help_callback (h, NULL, DLG_DRAW, 0, NULL);	/* FIXME: unneeded? */
 }
 
 static void
@@ -807,12 +808,12 @@ help_handle_key (Dlg_head *h, int c)
 		return MSG_NOT_HANDLED;
     }
 
-    help_callback (h, DLG_DRAW, 0);
+    help_callback (h, NULL, DLG_DRAW, 0, NULL);
     return MSG_HANDLED;
 }
 
 static cb_ret_t
-help_callback (Dlg_head *h, dlg_msg_t msg, int parm)
+help_callback (Dlg_head *h, Widget *sender, dlg_msg_t msg, int parm, void *data)
 {
     WButtonBar *bb;
 
@@ -833,7 +834,7 @@ help_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	return help_handle_key (h, parm);
 
     default:
-	return default_dlg_callback (h, msg, parm);
+	return default_dlg_callback (h, sender, msg, parm, data);
     }
 }
 

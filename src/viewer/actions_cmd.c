@@ -557,7 +557,8 @@ mcview_callback (Widget * w, widget_msg_t msg, int parm)
 /* --------------------------------------------------------------------------------------------- */
 
 cb_ret_t
-mcview_dialog_callback (Dlg_head * h, dlg_msg_t msg, int parm)
+mcview_dialog_callback (Dlg_head *h, Widget *sender,
+			dlg_msg_t msg, int parm, void *data)
 {
     switch (msg) {
     case DLG_RESIZE:
@@ -565,7 +566,7 @@ mcview_dialog_callback (Dlg_head * h, dlg_msg_t msg, int parm)
         return MSG_HANDLED;
 
     default:
-        return default_dlg_callback (h, msg, parm);
+        return default_dlg_callback (h, sender, msg, parm, data);
     }
 }
 

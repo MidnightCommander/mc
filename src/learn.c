@@ -212,7 +212,8 @@ learn_check_key (int c)
 }
 
 static cb_ret_t
-learn_callback (Dlg_head *h, dlg_msg_t msg, int parm)
+learn_callback (Dlg_head *h, Widget *sender,
+		dlg_msg_t msg, int parm, void *data)
 {
     switch (msg) {
     case DLG_DRAW:
@@ -223,7 +224,7 @@ learn_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	return learn_check_key (parm);
 
     default:
-	return default_dlg_callback (h, msg, parm);
+	return default_dlg_callback (h, sender, msg, parm, data);
     }
 }
 

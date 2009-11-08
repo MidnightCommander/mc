@@ -284,11 +284,11 @@ button_event (Gpm_Event *event, void *data)
     WButton *b = data;
 
     if (event->type & (GPM_DOWN|GPM_UP)){
-    	Dlg_head *h=b->widget.parent;
+	Dlg_head *h = b->widget.parent;
 	dlg_select_widget (b);
 	if (event->type & GPM_UP){
 	    button_callback ((Widget *) data, WIDGET_KEY, ' ');
-	    (*h->callback) (h, DLG_POST_KEY, ' ');
+	    h->callback (h, &b->widget, DLG_POST_KEY, ' ', NULL);
 	    return MOU_NORMAL;
 	}
     }
@@ -392,7 +392,7 @@ radio_callback (Widget *w, widget_msg_t msg, int parm)
 	switch (parm) {
 	case ' ':
 	    r->sel = r->pos;
-	    (*h->callback) (h, DLG_ACTION, 0);
+	    h->callback (h, w, DLG_ACTION, 0, NULL);
 	    radio_callback (w, WIDGET_FOCUS, ' ');
 	    return MSG_HANDLED;
 
@@ -414,7 +414,7 @@ radio_callback (Widget *w, widget_msg_t msg, int parm)
 	return MSG_NOT_HANDLED;
 
     case WIDGET_CURSOR:
-	(*h->callback) (h, DLG_ACTION, 0);
+	h->callback (h, w, DLG_ACTION, 0, NULL);
 	radio_callback (w, WIDGET_FOCUS, ' ');
 	widget_move (&r->widget, r->pos, 1);
 	return MSG_HANDLED;
@@ -450,14 +450,14 @@ radio_event (Gpm_Event *event, void *data)
     Widget *w = data;
 
     if (event->type & (GPM_DOWN|GPM_UP)){
-    	Dlg_head *h = r->widget.parent;
+	Dlg_head *h = r->widget.parent;
 
 	r->pos = event->y - 1;
 	dlg_select_widget (r);
 	if (event->type & GPM_UP){
 	    radio_callback (w, WIDGET_KEY, ' ');
 	    radio_callback (w, WIDGET_FOCUS, 0);
-	    (*h->callback) (h, DLG_POST_KEY, ' ');
+	    h->callback (h, w, DLG_POST_KEY, ' ', NULL);
 	    return MOU_NORMAL;
 	}
     }
@@ -519,7 +519,7 @@ check_callback (Widget *w, widget_msg_t msg, int parm)
 	    return MSG_NOT_HANDLED;
 	c->state ^= C_BOOL;
 	c->state ^= C_CHANGE;
-	(*h->callback) (h, DLG_ACTION, 0);
+	h->callback (h, w, DLG_ACTION, 0, NULL);
 	check_callback (w, WIDGET_FOCUS, ' ');
 	return MSG_HANDLED;
 
@@ -552,13 +552,13 @@ check_event (Gpm_Event *event, void *data)
     Widget *w = data;
 
     if (event->type & (GPM_DOWN|GPM_UP)){
-    	Dlg_head *h = c->widget.parent;
+	Dlg_head *h = c->widget.parent;
 
 	dlg_select_widget (c);
 	if (event->type & GPM_UP){
 	    check_callback (w, WIDGET_KEY, ' ');
 	    check_callback (w, WIDGET_FOCUS, 0);
-	    (*h->callback) (h, DLG_POST_KEY, ' ');
+	    h->callback (h, w, DLG_POST_KEY, ' ', NULL);
 	    return MOU_NORMAL;
 	}
     }
@@ -1159,14 +1159,15 @@ dlg_hist_reposition (Dlg_head *dlg_head)
 }
 
 static cb_ret_t
-dlg_hist_callback (Dlg_head *h, dlg_msg_t msg, int parm)
+dlg_hist_callback (Dlg_head *h, Widget *sender,
+		    dlg_msg_t msg, int parm, void *data)
 {
     switch (msg) {
     case DLG_RESIZE:
 	return dlg_hist_reposition (h);
 
     default:
-	return default_dlg_callback (h, msg, parm);
+	return default_dlg_callback (h, sender, msg, parm, data);
     }
 }
 
@@ -1215,7 +1216,7 @@ show_hist (GList *history, Widget *widget)
        The main idea - create 4x4 dialog and add 2x2 list in
        center of it, and let dialog function resize it to needed
        size. */
-    dlg_hist_callback (query_dlg, DLG_RESIZE, 0);
+    dlg_hist_callback (query_dlg, NULL, DLG_RESIZE, 0, NULL);
 
     if (query_dlg->y < widget->y) {
 	/* traverse */
@@ -2415,8 +2416,7 @@ listbox_callback (Widget *w, widget_msg_t msg, int parm)
 	    int action;
 
 	    listbox_select_entry (l, e);
-
-	    (*h->callback) (h, DLG_ACTION, l->pos);
+	    h->callback (h, w, DLG_ACTION, l->pos, NULL);
 
 	    if (l->cback)
 		action = (*l->cback) (l);
@@ -2435,13 +2435,13 @@ listbox_callback (Widget *w, widget_msg_t msg, int parm)
 	ret_code = listbox_key (l, parm);
 	if (ret_code != MSG_NOT_HANDLED) {
 	    listbox_draw (l, TRUE);
-	    (*h->callback) (h, DLG_ACTION, l->pos);
+	    h->callback (h, w, DLG_ACTION, l->pos, NULL);
 	}
 	return ret_code;
 
     case WIDGET_CURSOR:
 	widget_move (&l->widget, l->cursor_y, 0);
-	(*h->callback) (h, DLG_ACTION, l->pos);
+	h->callback (h, w, DLG_ACTION, l->pos, NULL);
 	return MSG_HANDLED;
 
     case WIDGET_FOCUS:

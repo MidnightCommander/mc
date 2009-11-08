@@ -204,9 +204,13 @@ dlg_set_size (Dlg_head *h, int lines, int cols)
 }
 
 /* Default dialog callback */
-cb_ret_t default_dlg_callback (Dlg_head *h, dlg_msg_t msg, int parm)
+cb_ret_t
+default_dlg_callback (Dlg_head *h, Widget *sender,
+			dlg_msg_t msg, int parm, void *data)
 {
+    (void) sender;
     (void) parm;
+    (void) data;
 
     switch (msg) {
     case DLG_DRAW:
@@ -393,28 +397,25 @@ dlg_broadcast_msg (Dlg_head *h, widget_msg_t message, int reverse)
     dlg_broadcast_msg_to (h, message, reverse, 0);
 }
 
-int dlg_focus (Dlg_head *h)
+int
+dlg_focus (Dlg_head *h)
 {
-    if (!h->current)
-        return 0;
-
-    if (send_message (h->current, WIDGET_FOCUS, 0)){
-	(*h->callback) (h, DLG_FOCUS, 0);
-	return 1;
-    }
+    if ((h->current != NULL)
+	&& (send_message (h->current, WIDGET_FOCUS, 0) == MSG_HANDLED)) {
+	    h->callback (h, h->current, DLG_FOCUS, 0, NULL);
+	    return 1;
+	}
     return 0;
 }
 
 static int
 dlg_unfocus (Dlg_head *h)
 {
-    if (!h->current)
-        return 0;
-
-    if (send_message (h->current, WIDGET_UNFOCUS, 0)){
-	(*h->callback) (h, DLG_UNFOCUS, 0);
-	return 1;
-    }
+    if ((h->current != NULL)
+	&& (send_message (h->current, WIDGET_UNFOCUS, 0) == MSG_HANDLED)) {
+	    h->callback (h, h->current, DLG_UNFOCUS, 0, NULL);
+	    return 1;
+	}
     return 0;
 }
 
@@ -568,16 +569,16 @@ void update_cursor (Dlg_head *h)
 /* Redraw the widgets in reverse order, leaving the current widget
  * as the last one
  */
-void dlg_redraw (Dlg_head *h)
+void
+dlg_redraw (Dlg_head *h)
 {
-    (h->callback)(h, DLG_DRAW, 0);
-
+    h->callback (h, NULL, DLG_DRAW, 0, NULL);
     dlg_broadcast_msg (h, WIDGET_DRAW, 1);
-
     update_cursor (h);
 }
 
-void dlg_stop (Dlg_head *h)
+void
+dlg_stop (Dlg_head *h)
 {
     h->running = 0;
 }
@@ -705,26 +706,26 @@ dlg_key_event (Dlg_head *h, int d_key)
     }
 
     /* first can dlg_callback handle the key */
-    handled = (*h->callback) (h, DLG_KEY, d_key);
+    handled = h->callback (h, NULL, DLG_KEY, d_key, NULL);
 
     /* next try the hotkey */
     if (handled == MSG_NOT_HANDLED)
 	handled = dlg_try_hotkey (h, d_key);
 
     if (handled == MSG_HANDLED)
-	(*h->callback) (h, DLG_HOTKEY_HANDLED, 0);
+	h->callback (h, NULL, DLG_HOTKEY_HANDLED, 0, NULL);
     else
 	/* not used - then try widget_callback */
 	handled = send_message (h->current, WIDGET_KEY, d_key);
 
     /* not used- try to use the unhandled case */
     if (handled == MSG_NOT_HANDLED)
-	handled = (*h->callback) (h, DLG_UNHANDLED_KEY, d_key);
+	handled = h->callback (h, NULL, DLG_UNHANDLED_KEY, d_key, NULL);
 
     if (handled == MSG_NOT_HANDLED)
 	dialog_handle_key (h, d_key);
 
-    (*h->callback) (h, DLG_POST_KEY, d_key);
+    h->callback (h, NULL, DLG_POST_KEY, d_key, NULL);
 }
 
 static int
@@ -769,10 +770,11 @@ dlg_mouse_event (Dlg_head * h, Gpm_Event * event)
 /* Run dialog routines */
 
 /* Init the process */
-void init_dlg (Dlg_head *h)
+void
+init_dlg (Dlg_head *h)
 {
     /* Initialize dialog manager and widgets */
-    (*h->callback) (h, DLG_INIT, 0);
+    h->callback (h, NULL, DLG_INIT, 0, NULL);
     dlg_broadcast_msg (h, WIDGET_INIT, 0);
 
     if (h->x == 0 && h->y == 0 && h->cols == COLS && h->lines == LINES)
@@ -796,15 +798,17 @@ void init_dlg (Dlg_head *h)
 }
 
 /* Shutdown the run_dlg */
-void dlg_run_done (Dlg_head *h)
+void
+dlg_run_done (Dlg_head *h)
 {
-    if (h->current)
-	(*h->callback) (h, DLG_END, 0);
+    if (h->current != NULL)
+	h->callback (h, h->current, DLG_END, 0, NULL);
 
     current_dlg = h->parent;
 }
 
-void dlg_process_event (Dlg_head *h, int key, Gpm_Event *event)
+void
+dlg_process_event (Dlg_head *h, int key, Gpm_Event *event)
 {
     if (key == EV_NONE){
 	if (tty_got_interrupt ())
@@ -835,7 +839,7 @@ frontend_run_dlg (Dlg_head *h)
 		execute_hooks (idle_hook);
 
 	    while ((h->flags & DLG_WANT_IDLE) && is_idle ())
-		(*h->callback) (h, DLG_IDLE, 0);
+		h->callback (h, NULL, DLG_IDLE, 0, NULL);
 
 	    /* Allow terminating the dialog from the idle handler */
 	    if (!h->running)
@@ -851,7 +855,7 @@ frontend_run_dlg (Dlg_head *h)
 	dlg_process_event (h, d_key, &event);
 
 	if (!h->running)
-	    (*h->callback) (h, DLG_VALIDATE, 0);
+	    h->callback (h, NULL, DLG_VALIDATE, 0, NULL);
     }
 }
 

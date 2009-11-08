@@ -294,7 +294,8 @@ static int bminus_cback (int action)
 }
 
 static cb_ret_t
-layout_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
+layout_callback (Dlg_head *h, Widget *sender,
+		    dlg_msg_t msg, int parm, void *data)
 {
     switch (msg) {
     case DLG_DRAW:
@@ -366,7 +367,7 @@ layout_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     default:
-        return default_dlg_callback (h, msg, parm);
+        return default_dlg_callback (h, sender, msg, parm, data);
     }
 }
 
@@ -762,7 +763,7 @@ change_screen_size (void)
     /* Inform all running dialogs */
     d = current_dlg;
     while (d != NULL) {
-	(*d->callback) (d, DLG_RESIZE, 0);
+	(*d->callback) (d, NULL, DLG_RESIZE, 0, NULL);
 	d = d->parent;
     }
 

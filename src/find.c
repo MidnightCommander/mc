@@ -222,7 +222,8 @@ find_check_regexp (const char *r)
  * Validate regex, prevent closing the dialog if it's invalid.
  */
 static cb_ret_t
-find_parm_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
+find_parm_callback (Dlg_head *h, Widget *sender,
+		    dlg_msg_t msg, int parm, void *data)
 {
     switch (msg) {
     case DLG_VALIDATE:
@@ -252,7 +253,7 @@ find_parm_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     default:
-	return default_dlg_callback (h, msg, parm);
+	return default_dlg_callback (h, sender, msg, parm, data);
     }
 }
 
@@ -982,7 +983,8 @@ view_edit_currently_selected_file (int unparsed_view, int edit)
 }
 
 static cb_ret_t
-find_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
+find_callback (struct Dlg_head *h, Widget *sender,
+		dlg_msg_t msg, int parm, void *data)
 {
     switch (msg) {
     case DLG_KEY:
@@ -1000,7 +1002,7 @@ find_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     default:
-	return default_dlg_callback (h, msg, parm);
+	return default_dlg_callback (h, sender, msg, parm, data);
     }
 }
 

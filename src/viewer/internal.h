@@ -8,8 +8,10 @@
 
 #include "../src/global.h"
 
-#include "../src/widget.h"
 #include "../src/search/search.h"
+
+#include "../src/dialog.h"
+#include "../src/widget.h"
 #include "../src/keybind.h"		/* global_keymap_t */
 
 /*** typedefs(not structures) and defined constants ********************/
@@ -210,7 +212,8 @@ void mcview_search_cmd (mcview_t *view);
 void mcview_toggle_magic_mode_cmd (mcview_t *view);
 void mcview_toggle_nroff_mode_cmd (mcview_t *view);
 cb_ret_t mcview_callback (Widget *w, widget_msg_t msg, int parm);
-cb_ret_t mcview_dialog_callback (Dlg_head *h, dlg_msg_t msg, int parm);
+cb_ret_t mcview_dialog_callback (Dlg_head *h, Widget *sender,
+				    dlg_msg_t msg, int parm, void *data);
 
 /* coord_cache.c: */
 gboolean mcview_coord_cache_entry_less (const struct coord_cache_entry *,

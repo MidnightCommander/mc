@@ -34,10 +34,10 @@
 
 #include "../src/search/search.h"
 
-#include "../src/strutil.h"
+#include "../src/dialog.h"
 #include "../src/widget.h"
 #include "../src/wtools.h"
-#include "../src/dialog.h"      /* do_refresh() */
+#include "../src/strutil.h"
 #include "../src/main.h"
 #include "../src/history.h"
 #include "../src/charsets.h"
@@ -67,15 +67,16 @@
 /*** file scope functions **********************************************/
 
 static cb_ret_t
-editcmd_dialog_raw_key_query_cb (struct Dlg_head *h, dlg_msg_t msg, int parm)
+editcmd_dialog_raw_key_query_cb (struct Dlg_head *h, Widget *sender,
+				    dlg_msg_t msg, int parm, void *data)
 {
     switch (msg) {
     case DLG_KEY:
-        dlg_stop (h);
         h->ret_value = parm;
+        dlg_stop (h);
         return MSG_HANDLED;
     default:
-        return default_dlg_callback (h, msg, parm);
+        return default_dlg_callback (h, sender, msg, parm, data);
     }
 }
 
@@ -283,8 +284,7 @@ editcmd_dialog_raw_key_query (const char *heading, const char *query, int cancel
     int w = str_term_width1 (query) + 7;
     struct Dlg_head *raw_dlg =
         create_dlg (0, 0, 7, w, dialog_colors, editcmd_dialog_raw_key_query_cb,
-                    NULL, heading,
-                    DLG_CENTER | DLG_TRYUP | DLG_WANT_TAB);
+                    NULL, heading, DLG_CENTER | DLG_TRYUP | DLG_WANT_TAB);
     add_widget (raw_dlg,
                 input_new (3 - cancel, w - 5, INPUT_COLOR, 2, "", 0, INPUT_COMPLETE_DEFAULT));
     add_widget (raw_dlg, label_new (3 - cancel, 2, query));

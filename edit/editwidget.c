@@ -47,6 +47,7 @@
 #include "edit-impl.h"
 #include "edit-widget.h"
 
+#include "../src/dialog.h"
 #include "../src/widget.h"		/* ButtonBar */
 #include "../src/menu.h"		/* menubar_new() */
 #include "../src/cmddef.h"
@@ -177,7 +178,8 @@ edit_adjust_size (Dlg_head *h)
 
 /* Callback for the edit dialog */
 static cb_ret_t
-edit_dialog_callback (Dlg_head *h, dlg_msg_t msg, int parm)
+edit_dialog_callback (Dlg_head *h, Widget *sender,
+			dlg_msg_t msg, int parm, void *data)
 {
     WEdit *edit;
 
@@ -188,13 +190,12 @@ edit_dialog_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 
     case DLG_VALIDATE:
 	edit = (WEdit *) find_widget_type (h, edit_callback);
-	if (!edit_ok_to_exit (edit)) {
+	if (!edit_ok_to_exit (edit))
 	    h->running = 1;
-	}
 	return MSG_HANDLED;
 
     default:
-	return default_dlg_callback (h, msg, parm);
+	return default_dlg_callback (h, sender, msg, parm, data);
     }
 }
 

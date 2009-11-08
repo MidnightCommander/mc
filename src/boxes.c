@@ -78,7 +78,8 @@ static char **displays_status;
 static int display_user_hotkey = 'u';
 
 static cb_ret_t
-display_callback (Dlg_head *h, dlg_msg_t msg, int parm)
+display_callback (Dlg_head *h, Widget *sender,
+		    dlg_msg_t msg, int parm, void *data)
 {
     switch (msg) {
     case DLG_UNFOCUS:
@@ -119,7 +120,7 @@ display_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	return MSG_NOT_HANDLED;
 
     default:
-	return default_dlg_callback (h, msg, parm);
+	return default_dlg_callback (h, sender, msg, parm, data);
     }
 }
 
@@ -636,7 +637,8 @@ display_bits_box (void)
 #endif /* HAVE_CHARSET */
 
 static cb_ret_t
-tree_callback (Dlg_head *h, dlg_msg_t msg, int parm)
+tree_callback (Dlg_head *h, Widget *sender,
+		dlg_msg_t msg, int parm, void *data)
 {
     switch (msg) {
     case DLG_POST_KEY:
@@ -648,7 +650,7 @@ tree_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     default:
-	return default_dlg_callback (h, msg, parm);
+	return default_dlg_callback (h, sender, msg, parm, data);
     }
 }
 
