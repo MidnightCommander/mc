@@ -10,8 +10,6 @@
 
 #define INVALID_TIME_TEXT	"(invalid)"
 
-#ifdef HAVE_STRFTIME
-
 /* safe localtime formatting - strftime()-using version */
 #define FMT_LOCALTIME(buffer, bufsize, fmt, when)			\
     {									\
@@ -27,16 +25,6 @@
 	    strftime(buffer, bufsize, fmt, whentm);			\
 	}								\
     }									\
-
-#else
-
-/* fallback when strftime/localtime not available */
-#define FMT_LOCALTIME(buffer,bufsize,fmt,when)			\
-    {								\
-	ctime_r(when,buffer);					\
-    }								\
-
-#endif
 
 #define FMT_LOCALTIME_CURRENT(buffer, bufsize, fmt)		\
     {								\

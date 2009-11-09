@@ -166,7 +166,7 @@ AC_CHECK_FUNCS([\
 	initgroups isascii \
 	memcpy memset \
 	putenv \
-	setreuid setuid statfs strerror strftime sysconf \
+	setreuid setuid statfs strerror sysconf \
 	tcgetattr tcsetattr truncate \
 ])
 

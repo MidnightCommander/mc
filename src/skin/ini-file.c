@@ -31,6 +31,7 @@
 #include "../src/global.h"
 #include "../src/main.h"
 #include "../src/fileloc.h"
+#include "../../src/util.h"
 #include "skin.h"
 #include "internal.h"
 

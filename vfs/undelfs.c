@@ -158,20 +158,20 @@ undelfs_get_path (const char *dirname, char **fsname, char **file)
 }
 
 static int
-undelfs_lsdel_proc(ext2_filsys fs, blk_t *block_nr, int blockcnt, void *private)
+undelfs_lsdel_proc(ext2_filsys _fs, blk_t *block_nr, int blockcnt, void *private)
 {
-    struct lsdel_struct *lsd = (struct lsdel_struct *) private;
+    struct lsdel_struct *_lsd = (struct lsdel_struct *) private;
     (void) blockcnt;
-    lsd->num_blocks++;
+    _lsd->num_blocks++;
     
-    if (*block_nr < fs->super->s_first_data_block ||
-	*block_nr >= fs->super->s_blocks_count) {
-	lsd->bad_blocks++;
+    if (*block_nr < _fs->super->s_first_data_block ||
+	*block_nr >= _fs->super->s_blocks_count) {
+	_lsd->bad_blocks++;
 	return BLOCK_ABORT;
     }
     
-    if (!ext2fs_test_block_bitmap(fs->block_map,*block_nr))
-	lsd->free_blocks++;
+    if (!ext2fs_test_block_bitmap(_fs->block_map,*block_nr))
+	_lsd->free_blocks++;
     
     return 0;
 }

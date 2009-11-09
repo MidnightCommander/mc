@@ -31,6 +31,7 @@
 
 #include "global.h"
 #include "ecs.h"
+#include "../src/textconf.h"
 
 #ifdef USE_VFS
 static const char *const vfs_supported[] = {

@@ -11,6 +11,8 @@
 
 #include <sys/types.h>
 #include <dirent.h>
+#include <stddef.h>
+#include <utime.h>
 
 #include "../src/fs.h"		/* MC_MAXPATHLEN */
 
