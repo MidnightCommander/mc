@@ -241,11 +241,6 @@ int confirm_view_dir = 0;
 /* This flag indicates if the pull down menus by default drop down */
 int drop_menus = 0;
 
-/* if skip_check_codeset = 1 do not show warning about
- * system and display codeset is different
- */
-int skip_check_codeset = 0;
-
 /* The dialog handle for the main program */
 Dlg_head *midnight_dlg = NULL;
 
@@ -1471,71 +1466,30 @@ setup_dummy_mc (void)
 
 static void check_codeset()
 {
-    const char *_system_codepage = NULL;
+    const char *current_system_codepage = NULL;
+
+    current_system_codepage = str_detect_termencoding();
+
 #ifdef HAVE_CHARSET
-    const char *_source_codepage = NULL;
-    const char *_display_codepage = NULL;
-    int profile_changed = 0;
+    {
+    const char *_display_codepage;
 
-#define CONFY 16
-#define CONFX 54
+    _display_codepage = get_codepage_id (display_codepage);
 
-    if ( !skip_check_codeset ) {
-
-        QuickWidget ecs_widgets [] = {
-	    QUICK_BUTTON (4,  6, 13, CONFY, N_("&Skip"),   B_EXIT,  NULL),
-	    QUICK_BUTTON (1, 11, 13, CONFY, N_("&Fix it"), B_ENTER, NULL),
-	    QUICK_CHECKBOX (1, 13, 11, CONFY, N_("don't ask again"), &skip_check_codeset),
-	    QUICK_LABEL (2, 30, 3, CONFY, N_("Chosen display charset (Settings->Display bits)\n"
-					    "or source codeset (in mcedit ctrl-t) \n"
-					    "does not match one set via locale. \n"
-					    "Set correct codeset manually or press <<Fix it>> \n"
-					    "to set locale default.\n\n"
-					    "Or set \'don't ask again\' and press <<Skip>>")),
-	    QUICK_END
-        };
-
-	QuickDialog ecs =
-	{
-	    CONFX, CONFY, -1, -1, N_(" Confirmation "),
-	    "[Confirmation]", ecs_widgets, FALSE
-	};
-
-
-        _system_codepage = str_detect_termencoding();
-        _source_codepage = get_codepage_id (source_codepage);
-        _display_codepage = get_codepage_id (display_codepage);
-        if ( (strcmp (_system_codepage, _display_codepage)) ||
-             (strcmp (_system_codepage, _source_codepage)) ) {
-            if (quick_dialog (&ecs) == B_ENTER){
-                display_codepage = get_codepage_index (_system_codepage);
-                cp_display = get_codepage_id (display_codepage);
-                if ( !strcmp (cp_display, _system_codepage)) {
-                    mc_config_set_string(mc_main_config, "Misc", "display_codepage", cp_display);
-                    mc_config_set_string(mc_main_config, "Misc", "source_codepage", cp_display);
-                    display_codepage = get_codepage_index ( cp_display );
-                    utf8_display = str_isutf8 (_system_codepage);
-                    source_codepage = display_codepage;
-                    cp_source = cp_display;
-                    profile_changed = 1;
-                } else {
-                    utf8_display = str_isutf8 (_system_codepage);
-                    cp_source = cp_display = _system_codepage;
-                }
-            } else {
-                if ( skip_check_codeset ) {
-                    mc_config_set_int(mc_main_config, "Midnight-Commander", "skip_check_codeset", 1);
-                    profile_changed = 1;
-                }
-            }
-        }
-        if ( profile_changed )
-            save_configure ();
+    if (! strcmp(_display_codepage, current_system_codepage)) {
+	utf8_display = str_isutf8 (current_system_codepage);
+	return;
     }
-#else /* HAVE_CHARSET */
-    _system_codepage = str_detect_termencoding();
-    utf8_display = str_isutf8 (_system_codepage);
-#endif /* HAVE_CHARSET */
+
+    display_codepage = get_codepage_index (current_system_codepage);
+    if (display_codepage == -1) {
+	display_codepage = 0;
+    }
+
+    mc_config_set_string(mc_main_config, "Misc", "display_codepage", cp_display);
+    }
+#endif
+    utf8_display = str_isutf8 (current_system_codepage);
 }
 
 static void
