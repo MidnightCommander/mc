@@ -909,34 +909,30 @@ get_compression_type (int fd, const char * name)
     /* Support for LZMA (only utils format with magic in header).
      * This is the default format of LZMA utils 4.32.1 and later. */
 
-    if (mc_read(fd, (char *) magic+4, 1) == 1)
-    {
-        /* LZMA utils format */
-        if
-        (  magic[0] == 0xFF
-        && magic[1] == 'L'
-        && magic[2] == 'Z'
-        && magic[3] == 'M'
-        && magic[4] == 'A'
-        && magic[5] == 0x00
-        )
-            return COMPRESSION_LZMA;
-    }
+    if (mc_read(fd, (char *) magic+4, 2) != 2)
+	return COMPRESSION_NONE;
+
+    /* LZMA utils format */
+    if (
+	magic[0] == 0xFF
+	&& magic[1] == 'L'
+	&& magic[2] == 'Z'
+	&& magic[3] == 'M'
+	&& magic[4] == 'A'
+	&& magic[5] == 0x00
+    )
+	return COMPRESSION_LZMA;
 
     /* XZ compression magic */
-    if (mc_read(fd, (char *) magic+5, 1) == 1)
-    {
-	if (
-	    magic[0] == 0xFD
-	    && magic[1] == 0x37
-	    && magic[2] == 0x7A
-	    && magic[3] == 0x58
-	    && magic[4] == 0x5A
-	    && magic[5] == 0x00
-	   ){
-	    return COMPRESSION_XZ;
-	}
-    }
+    if (
+	magic[0] == 0xFD
+	&& magic[1] == 0x37
+	&& magic[2] == 0x7A
+	&& magic[3] == 0x58
+	&& magic[4] == 0x5A
+	&& magic[5] == 0x00
+    )
+	return COMPRESSION_XZ;
 
     str_len = strlen(name);
     /* HACK: we must belive to extention of LZMA file :) ...*/
