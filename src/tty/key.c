@@ -134,6 +134,7 @@ const key_code_name_t key_name_conv_tab[] = {
     { KEY_KP_MULTIPLY,	"kpasterisk",	N_("* on keypad"),	"Gray*" },
 
     /* From here on, these won't be shown in Learn keys (no space) */
+    { ESC_CHAR,		"escape",	N_("Escape key"),		"Esc" },
     { KEY_LEFT,		"kpleft",	N_("Left arrow keypad"),	"Left" },
     { KEY_RIGHT,	"kpright",	N_("Right arrow keypad"),	"Right" },
     { KEY_UP,		"kpup",		N_("Up arrow keypad"),		"Up" },
@@ -150,8 +151,8 @@ const key_code_name_t key_name_conv_tab[] = {
     { KEY_F (23),	"f23",		N_("Function key 23"),		"F23" },
     { KEY_F (24),	"f24",		N_("Function key 24"),		"F24" },
 
-
     /* Alternative label */
+    { ESC_CHAR,		"esc",		N_("Escape key"),	"Esc" },
     { KEY_BACKSPACE,	"bs",		N_("Backspace key"),	"Bakspace" },
     { KEY_IC,		"ins",		N_("Insert key"),	"Ins" },
     { KEY_DC,		"del",		N_("Delete key"),	"Del" },

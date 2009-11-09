@@ -1733,7 +1733,7 @@ midnight_callback (Dlg_head *h, Widget *sender,
 	    if (data == NULL)
 		midnight_execute_cmd (sender, parm);
 	    else
-		return send_message ((Widget *) data, WIDGET_COMMAND, parm);
+		send_message ((Widget *) data, WIDGET_COMMAND, parm);
 	}
 	return MSG_HANDLED;
 

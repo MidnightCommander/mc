@@ -585,7 +585,7 @@ mcview_dialog_callback (Dlg_head *h, Widget *sender,
 
     case DLG_ACTION:
         /* command from buttonbar */
-        return send_message (view, WIDGET_COMMAND, parm);
+        return send_message ((Widget *) view, WIDGET_COMMAND, parm);
 
     default:
         return default_dlg_callback (h, sender, msg, parm, data);
