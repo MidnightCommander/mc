@@ -191,6 +191,7 @@ edit_dialog_callback (Dlg_head *h, Widget *sender,
 {
     WEdit *edit;
     WMenuBar *menubar;
+    WButtonBar *buttonbar;
 
     edit = (WEdit *) find_widget_type (h, edit_callback);
 
@@ -206,8 +207,11 @@ edit_dialog_callback (Dlg_head *h, Widget *sender,
 
     case DLG_ACTION:
 	menubar = find_menubar (h);
-	if (sender == &menubar->widget)
-	    return edit_command_execute (edit, parm);
+	if (sender == (Widget *) menubar)
+	    return send_message (wedit, WIDGET_COMMAND, parm);
+	buttonbar = find_buttonbar (h);
+	if (sender == (Widget *) buttonbar)
+	    return send_message (wedit, WIDGET_COMMAND, parm);
 	return MSG_HANDLED;
 
     default:
@@ -263,73 +267,21 @@ edit_get_file_name (const WEdit *edit)
     return edit->filename;
 }
 
-static void cmd_F1 (WEdit * edit)
-{
-    send_message ((Widget *) edit, WIDGET_KEY, KEY_F (1));
-}
-
-static void cmd_F2 (WEdit * edit)
-{
-    send_message ((Widget *) edit, WIDGET_KEY, KEY_F (2));
-}
-
-static void cmd_F3 (WEdit * edit)
-{
-    send_message ((Widget *) edit, WIDGET_KEY, KEY_F (3));
-}
-
-static void cmd_F4 (WEdit * edit)
-{
-    send_message ((Widget *) edit, WIDGET_KEY, KEY_F (4));
-}
-
-static void cmd_F5 (WEdit * edit)
-{
-    send_message ((Widget *) edit, WIDGET_KEY, KEY_F (5));
-}
-
-static void cmd_F6 (WEdit * edit)
-{
-    send_message ((Widget *) edit, WIDGET_KEY, KEY_F (6));
-}
-
-static void cmd_F7 (WEdit * edit)
-{
-    send_message ((Widget *) edit, WIDGET_KEY, KEY_F (7));
-}
-
-static void cmd_F8 (WEdit * edit)
-{
-    send_message ((Widget *) edit, WIDGET_KEY, KEY_F (8));
-}
-
-#if 0
-static void cmd_F9 (WEdit * edit)
-{
-    send_message ((Widget *) edit, WIDGET_KEY, KEY_F (9));
-}
-#endif
-
-static void cmd_F10 (WEdit * edit)
-{
-    send_message ((Widget *) edit, WIDGET_KEY, KEY_F (10));
-}
-
 static void
 edit_set_buttonbar (WEdit *edit)
 {
     WButtonBar *bb = find_buttonbar (edit->widget.parent);
 
-    buttonbar_set_label_data (bb, 1, Q_("ButtonBar|Help"), (buttonbarfn) cmd_F1, edit);
-    buttonbar_set_label_data (bb, 2, Q_("ButtonBar|Save"), (buttonbarfn) cmd_F2, edit);
-    buttonbar_set_label_data (bb, 3, Q_("ButtonBar|Mark"), (buttonbarfn) cmd_F3, edit);
-    buttonbar_set_label_data (bb, 4, Q_("ButtonBar|Replac"), (buttonbarfn) cmd_F4, edit);
-    buttonbar_set_label_data (bb, 5, Q_("ButtonBar|Copy"), (buttonbarfn) cmd_F5, edit);
-    buttonbar_set_label_data (bb, 6, Q_("ButtonBar|Move"), (buttonbarfn) cmd_F6, edit);
-    buttonbar_set_label_data (bb, 7, Q_("ButtonBar|Search"), (buttonbarfn) cmd_F7, edit);
-    buttonbar_set_label_data (bb, 8, Q_("ButtonBar|Delete"), (buttonbarfn) cmd_F8, edit);
-    buttonbar_set_label_data (bb, 9, Q_("ButtonBar|PullDn"), (buttonbarfn) edit_menu_cmd, edit);
-    buttonbar_set_label_data (bb, 10, Q_("ButtonBar|Quit"), (buttonbarfn) cmd_F10, edit);
+    buttonbar_set_label (bb,  1, Q_("ButtonBar|Help"), editor_map, (Widget *) edit);
+    buttonbar_set_label (bb,  2, Q_("ButtonBar|Save"), editor_map, (Widget *) edit);
+    buttonbar_set_label (bb,  3, Q_("ButtonBar|Mark"), editor_map, (Widget *) edit);
+    buttonbar_set_label (bb,  4, Q_("ButtonBar|Replac"), editor_map, (Widget *) edit);
+    buttonbar_set_label (bb,  5, Q_("ButtonBar|Copy"), editor_map, (Widget *) edit);
+    buttonbar_set_label (bb,  6, Q_("ButtonBar|Move"), editor_map, (Widget *) edit);
+    buttonbar_set_label (bb,  7, Q_("ButtonBar|Search"), editor_map, (Widget *) edit);
+    buttonbar_set_label (bb,  8, Q_("ButtonBar|Delete"), editor_map, (Widget *) edit);
+    buttonbar_set_label (bb,  9, Q_("ButtonBar|PullDn"), editor_map, (Widget *) edit);
+    buttonbar_set_label (bb, 10, Q_("ButtonBar|Quit"), editor_map, (Widget *) edit);
 }
 
 void
@@ -386,6 +338,10 @@ edit_callback (Widget *w, widget_msg_t msg, int parm)
 		return MSG_NOT_HANDLED;
 	    }
 	}
+
+    case WIDGET_COMMAND:
+	/* command from menubar or buttonbar */
+	return edit_command_execute (wedit, parm);
 
     case WIDGET_CURSOR:
 	widget_move (&e->widget, e->curs_row + EDIT_TEXT_VERTICAL_OFFSET,

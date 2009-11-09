@@ -549,9 +549,8 @@ help_event (Gpm_Event *event, void *vp)
 
 /* show help */
 static void
-help_help (void *vp)
+help_help (Dlg_head *h)
 {
-    Dlg_head *h = vp;
     const char *p;
 
     history_ptr = (history_ptr + 1) % HISTORY_SIZE;
@@ -567,9 +566,8 @@ help_help (void *vp)
 }
 
 static void
-help_index (void *vp)
+help_index (Dlg_head *h)
 {
-    Dlg_head *h = vp;
     const char *new_item;
 
     new_item = search_string (fdata, "[Contents]");
@@ -589,16 +587,8 @@ help_index (void *vp)
 }
 
 static void
-help_quit (void *vp)
+help_back (Dlg_head *h)
 {
-    dlg_stop ((Dlg_head *) vp);
-}
-
-static void
-help_back (void *vp)
-{
-    Dlg_head *h = vp;
-
     currentpoint = history [history_ptr].page;
     selected_item = history [history_ptr].link;
     history_ptr--;
@@ -740,23 +730,19 @@ help_select_link (void)
 }
 
 static cb_ret_t
-help_execute_cmd (Widget *sender, Widget *receiver,
-		    unsigned long command, const void *data)
+help_execute_cmd (unsigned long command)
 {
     cb_ret_t ret = MSG_HANDLED;
 
-    (void) sender;
-    (void) receiver;
-
     switch (command) {
     case CK_HelpHelp:
-	help_help ((void *) data);
+	help_help (whelp);
 	break;
     case CK_HelpIndex:
-	help_index ((void *) data);
+	help_index (whelp);
 	break;
     case CK_HelpBack:
-	help_back ((void *) data);
+	help_back (whelp);
 	break;
     case CK_HelpMoveUp:
 	help_prev_link (TRUE);
@@ -804,7 +790,7 @@ help_handle_key (Dlg_head *h, int c)
 
 	command = lookup_keymap_command (help_map, c);
 	if ((command == CK_Ignore_Key)
-	    || (help_execute_cmd (NULL, NULL, command, h) == MSG_NOT_HANDLED))
+	    || (help_execute_cmd (command) == MSG_NOT_HANDLED))
 		return MSG_NOT_HANDLED;
     }
 
@@ -813,7 +799,8 @@ help_handle_key (Dlg_head *h, int c)
 }
 
 static cb_ret_t
-help_callback (Dlg_head *h, Widget *sender, dlg_msg_t msg, int parm, void *data)
+help_callback (Dlg_head *h, Widget *sender,
+		dlg_msg_t msg, int parm, void *data)
 {
     WButtonBar *bb;
 
@@ -832,6 +819,10 @@ help_callback (Dlg_head *h, Widget *sender, dlg_msg_t msg, int parm, void *data)
 
     case DLG_KEY:
 	return help_handle_key (h, parm);
+
+    case DLG_ACTION:
+	/* command from buttonbar */
+	return help_execute_cmd (parm);
 
     default:
 	return default_dlg_callback (h, sender, msg, parm, data);
@@ -963,16 +954,16 @@ interactive_display (const char *filename, const char *node)
     add_widget (whelp, md);
     add_widget (whelp, help_bar);
 
-    buttonbar_set_label_data (help_bar, 1, Q_("ButtonBar|Help"), help_help, whelp);
-    buttonbar_set_label_data (help_bar, 2, Q_("ButtonBar|Index"), help_index, whelp);
-    buttonbar_set_label_data (help_bar, 3, Q_("ButtonBar|Prev"), help_back, whelp);
+    buttonbar_set_label (help_bar, 1, Q_("ButtonBar|Help"), help_map, NULL);
+    buttonbar_set_label (help_bar, 2, Q_("ButtonBar|Index"), help_map, NULL);
+    buttonbar_set_label (help_bar, 3, Q_("ButtonBar|Prev"), help_map, NULL);
     buttonbar_clear_label (help_bar, 4);
     buttonbar_clear_label (help_bar, 5);
     buttonbar_clear_label (help_bar, 6);
     buttonbar_clear_label (help_bar, 7);
     buttonbar_clear_label (help_bar, 8);
     buttonbar_clear_label (help_bar, 9);
-    buttonbar_set_label_data (help_bar, 10, Q_("ButtonBar|Quit"), help_quit, whelp);
+    buttonbar_set_label (help_bar, 10, Q_("ButtonBar|Quit"), help_map, NULL);
 
     run_dlg (whelp);
     interactive_display_finish ();

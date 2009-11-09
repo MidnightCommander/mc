@@ -91,7 +91,6 @@ struct WTree {
 
 /* Forwards */
 static void tree_rescan (void *data);
-static void tree_toggle_f4 (void *data);
 
 static tree_entry *
 back_ptr (tree_entry *ptr, int *count)
@@ -753,16 +752,6 @@ tree_rmdir (void *data)
     file_op_context_destroy (ctx);
 }
 
-static void
-tree_toggle_navig (WTree *tree)
-{
-    tree_navigation_flag = !tree_navigation_flag;
-    buttonbar_set_label_data (find_buttonbar (tree->widget.parent), 4,
-			tree_navigation_flag ? Q_("ButtonBar|Static")
-						: Q_("ButtonBar|Dynamc"),
-			tree_toggle_f4, tree);
-}
-
 static inline void
 tree_move_up (WTree *tree)
 {
@@ -866,6 +855,16 @@ tree_start_search (WTree *tree)
     }
 }
 
+static void
+tree_toggle_navig (WTree *tree)
+{
+    tree_navigation_flag = !tree_navigation_flag;
+    buttonbar_set_label (find_buttonbar (tree->widget.parent), 4,
+			tree_navigation_flag ? Q_("ButtonBar|Static")
+						: Q_("ButtonBar|Dynamc"),
+			tree_map, (Widget *) tree);
+}
+
 static cb_ret_t
 tree_execute_cmd (WTree *tree, unsigned long command)
 {
@@ -927,31 +926,6 @@ tree_execute_cmd (WTree *tree, unsigned long command)
     show_tree (tree);
 
     return res;
-}
-
-/* temporary wrappers */
-static void
-tree_help (void *data)
-{
-    tree_execute_cmd ((WTree *) data, CK_TreeHelp);
-}
-
-static void
-tree_toggle_f4 (void *data)
-{
-    tree_execute_cmd ((WTree *) data, CK_TreeToggleNav);
-}
-
-static void
-tree_copy_cmd (void *data)
-{
-    tree_execute_cmd ((WTree *) data, CK_TreeCopy);
-}
-
-static void
-tree_move_cmd (void *data)
-{
-    tree_execute_cmd ((WTree *) data, CK_TreeMove);
 }
 
 static cb_ret_t
@@ -1030,26 +1004,23 @@ tree_callback (Widget *w, widget_msg_t msg, int parm)
 	show_tree (tree);
 	return MSG_HANDLED;
 
-    case WIDGET_KEY:
-	return tree_key (tree, parm);
-
     case WIDGET_FOCUS:
 	tree->active = 1;
-	buttonbar_set_label_data (b, 1, Q_("ButtonBar|Help"), tree_help, tree);
-	buttonbar_set_label_data (b, 2, Q_("ButtonBar|Rescan"), tree_rescan, tree);
-	buttonbar_set_label_data (b, 3, Q_("ButtonBar|Forget"), tree_forget, tree);
-	buttonbar_set_label_data (b, 4, tree_navigation_flag ? Q_("ButtonBar|Static")
+	buttonbar_set_label (b, 1, Q_("ButtonBar|Help"), tree_map, (Widget *) tree);
+	buttonbar_set_label (b, 2, Q_("ButtonBar|Rescan"), tree_map, (Widget *) tree);
+	buttonbar_set_label (b, 3, Q_("ButtonBar|Forget"), tree_map, (Widget *) tree);
+	buttonbar_set_label (b, 4, tree_navigation_flag ? Q_("ButtonBar|Static")
 								: Q_("ButtonBar|Dynamc"),
-			    tree_toggle_f4, tree);
-	buttonbar_set_label_data (b, 5, Q_("ButtonBar|Copy"), tree_copy_cmd, tree);
-	buttonbar_set_label_data (b, 6, Q_("ButtonBar|RenMov"), tree_move_cmd, tree);
+			    tree_map, (Widget *) tree);
+	buttonbar_set_label (b, 5, Q_("ButtonBar|Copy"), tree_map, (Widget *) tree);
+	buttonbar_set_label (b, 6, Q_("ButtonBar|RenMov"), tree_map, (Widget *) tree);
 #if 0
 	/* FIXME: mkdir is currently defunct */
-	buttonbar_set_label_data (b, 7, Q_("ButtonBar|Mkdir"), tree_mkdir, tree);
+	buttonbar_set_label (b, 7, Q_("ButtonBar|Mkdir"), tree_map, (Widget *) tree);
 #else
 	buttonbar_clear_label (b, 7);
 #endif
-	buttonbar_set_label_data (b, 8, Q_("ButtonBar|Rmdir"), tree_rmdir, tree);
+	buttonbar_set_label (b, 8, Q_("ButtonBar|Rmdir"), tree_map, (Widget *) tree);
 	buttonbar_redraw (b);
 
 	/* FIXME: Should find a better way of only displaying the
@@ -1064,6 +1035,13 @@ tree_callback (Widget *w, widget_msg_t msg, int parm)
 	tree->active = 0;
 	show_tree (tree);
 	return MSG_HANDLED;
+
+    case WIDGET_KEY:
+	return tree_key (tree, parm);
+
+    case WIDGET_COMMAND:
+	/* command from buttonbar */
+	return tree_execute_cmd (tree, parm);
 
     case WIDGET_DESTROY:
 	tree_destroy (tree);
@@ -1122,4 +1100,10 @@ void
 sync_tree (const char *path)
 {
     tree_chdir (the_tree, path);
+}
+
+WTree *
+find_tree (struct Dlg_head *h)
+{
+    return (WTree *) find_widget_type (h, tree_callback);
 }

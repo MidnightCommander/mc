@@ -79,6 +79,14 @@
 
 /*** file scope functions ************************************************************************/
 
+/* Both views */
+static void
+mcview_search (mcview_t *view)
+{
+    if (mcview_dialog_search (view))
+        mcview_do_search (view);
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 static void
@@ -102,7 +110,7 @@ mcview_continue_search_cmd (mcview_t * view)
             if (!view->search) {
                 /* if not... then ask for an expression */
                 g_free(view->last_search_string);
-                mcview_search_cmd (view);
+                mcview_search (view);
             } else {
                 view->search->search_type = view->search_type;
                 view->search->is_all_charsets = view->search_all_codepages;
@@ -116,7 +124,7 @@ mcview_continue_search_cmd (mcview_t * view)
         } else {
             /* if not... then ask for an expression */
             g_free(view->last_search_string);
-            mcview_search_cmd (view);
+            mcview_search (view);
         }
     }
 }
@@ -327,14 +335,9 @@ mcview_handle_editkey (mcview_t * view, int key)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-mcview_execute_cmd (Widget *sender, Widget *receiver,
-		    unsigned long command, const void *data)
+mcview_execute_cmd (mcview_t *view, unsigned long command)
 {
-    mcview_t *view = (mcview_t *) receiver;
     int res = MSG_HANDLED;
-
-    (void) sender;
-    (void) data;
 
     switch (command) {
     case CK_ViewHelp:
@@ -356,13 +359,18 @@ mcview_execute_cmd (Widget *sender, Widget *receiver,
         mcview_update (view); /* FIXME: view->dirty++ ? */
         break;
     case CK_ViewGoto:
-        mcview_goto (view);
+        if (view->hex_mode)
+            mcview_moveto_addr_cmd (view);
+        else
+            mcview_moveto_line_cmd (view);
+        view->dirty++;
+        mcview_update (view); /* FIXME: unneeded? */
         break;
     case CK_ViewHexEditSave:
         mcview_hexedit_save_changes (view);
         break;
     case CK_ViewSearch:
-        mcview_search_cmd (view);
+        mcview_search (view);
         break;
     case CK_ViewToggleMagicMode:
         mcview_toggle_magic_mode (view);
@@ -467,13 +475,13 @@ mcview_handle_key (mcview_t * view, int key)
 
         command = lookup_keymap_command (view->hex_map, key);
         if ((command != CK_Ignore_Key)
-            && (mcview_execute_cmd (NULL, &view->widget, command, NULL) == MSG_HANDLED))
+            && (mcview_execute_cmd (view, command) == MSG_HANDLED))
                 return MSG_HANDLED;
     }
 
     command = lookup_keymap_command (view->plain_map, key);
     if ((command != CK_Ignore_Key)
-        && (mcview_execute_cmd (NULL, &view->widget, command, NULL) == MSG_HANDLED))
+        && (mcview_execute_cmd (view, command) == MSG_HANDLED))
             return MSG_HANDLED;
 
     if (mcview_check_left_right_keys (view, key))
@@ -531,7 +539,15 @@ mcview_callback (Widget * w, widget_msg_t msg, int parm)
         return MSG_HANDLED;
 
     case WIDGET_KEY:
-        i = mcview_handle_key ((mcview_t *) view, parm);
+        i = mcview_handle_key (view, parm);
+        if (view->want_to_quit && !mcview_is_in_panel (view))
+            dlg_stop (h);
+        else
+            mcview_update (view);
+        return i;
+
+    case WIDGET_COMMAND:
+        i = mcview_execute_cmd (view, parm);
         if (view->want_to_quit && !mcview_is_in_panel (view))
             dlg_stop (h);
         else
@@ -560,106 +576,20 @@ cb_ret_t
 mcview_dialog_callback (Dlg_head *h, Widget *sender,
 			dlg_msg_t msg, int parm, void *data)
 {
+    mcview_t *view = data;
+
     switch (msg) {
     case DLG_RESIZE:
         mcview_adjust_size (h);
         return MSG_HANDLED;
 
+    case DLG_ACTION:
+        /* command from buttonbar */
+        return send_message (view, WIDGET_COMMAND, parm);
+
     default:
         return default_dlg_callback (h, sender, msg, parm, data);
     }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-mcview_help_cmd (void)
-{
-    mcview_execute_cmd (NULL, NULL, CK_ViewHelp, NULL);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-mcview_goto (mcview_t *view)
-{
-    if (view->hex_mode)
-        mcview_moveto_addr_cmd (view);
-    else
-        mcview_moveto_line_cmd (view);
-
-    view->dirty++;
-    mcview_update (view); /* FIXME: unneeded? */
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-mcview_quit_cmd (mcview_t * view)
-{
-    mcview_execute_cmd (NULL, &view->widget, CK_ViewQuit, NULL);
-    if (view->want_to_quit)
-	dlg_stop (view->widget.parent);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/* Toggle between hex view and text view */
-void
-mcview_toggle_hex_mode_cmd (mcview_t * view)
-{
-    mcview_execute_cmd (NULL, &view->widget, CK_ViewToggleHexMode, NULL);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/* Toggle between hexview and hexedit mode */
-void
-mcview_toggle_hexedit_mode_cmd (mcview_t * view)
-{
-    mcview_execute_cmd (NULL, &view->widget, CK_ViewToggleHexEditMode, NULL);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-mcview_hexedit_save_changes_cmd (mcview_t * view)
-{
-    mcview_execute_cmd (NULL, &view->widget, CK_ViewHexEditSave, NULL);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/* Toggle between wrapped and unwrapped view */
-void
-mcview_toggle_wrap_mode_cmd (mcview_t * view)
-{
-    mcview_execute_cmd (NULL, &view->widget, CK_ViewToggleWrapMode, NULL);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/* Both views */
-void
-mcview_search_cmd (mcview_t * view)
-{
-    mcview_execute_cmd (NULL, &view->widget, CK_ViewToggleMagicMode, NULL);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-mcview_toggle_magic_mode_cmd (mcview_t * view)
-{
-    mcview_execute_cmd (NULL, &view->widget, CK_ViewToggleMagicMode, NULL);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-mcview_toggle_nroff_mode_cmd (mcview_t * view)
-{
-    mcview_execute_cmd (NULL, &view->widget, CK_ViewToggleNroffMode, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */

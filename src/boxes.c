@@ -649,6 +649,10 @@ tree_callback (Dlg_head *h, Widget *sender,
 	}
 	return MSG_HANDLED;
 
+    case DLG_ACTION:
+	/* command from buttonbar */
+	return send_message ((Widget *) find_tree (h), WIDGET_COMMAND, parm);
+
     default:
 	return default_dlg_callback (h, sender, msg, parm, data);
     }

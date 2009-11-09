@@ -18,4 +18,8 @@ char *tree_selected_name (const WTree *tree);
 
 void sync_tree (const char *pathname);
 
+struct Dlg_head;
+
+WTree *find_tree (struct Dlg_head *h);
+
 #endif					/* MC_TREE_H */

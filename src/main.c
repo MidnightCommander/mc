@@ -1114,16 +1114,16 @@ copy_other_tagged (void)
 void
 midnight_set_buttonbar (WButtonBar *b)
 {
-    buttonbar_set_label (b,  1, Q_("ButtonBar|Help"), help_cmd);
-    buttonbar_set_label (b,  2, Q_("ButtonBar|Menu"), user_file_menu_cmd);
-    buttonbar_set_label (b,  3, Q_("ButtonBar|View"), view_cmd);
-    buttonbar_set_label (b,  4, Q_("ButtonBar|Edit"), edit_cmd);
-    buttonbar_set_label (b,  5, Q_("ButtonBar|Copy"), copy_cmd);
-    buttonbar_set_label (b,  6, Q_("ButtonBar|RenMov"), rename_cmd);
-    buttonbar_set_label (b,  7, Q_("ButtonBar|Mkdir"), mkdir_cmd);
-    buttonbar_set_label (b,  8, Q_("ButtonBar|Delete"), delete_cmd);
-    buttonbar_set_label (b,  9, Q_("ButtonBar|PullDn"), menu_cmd);
-    buttonbar_set_label (b, 10, Q_("ButtonBar|Quit"), quit_cmd);
+    buttonbar_set_label (b,  1, Q_("ButtonBar|Help"), main_map, NULL);
+    buttonbar_set_label (b,  2, Q_("ButtonBar|Menu"), main_map, NULL);
+    buttonbar_set_label (b,  3, Q_("ButtonBar|View"), main_map, NULL);
+    buttonbar_set_label (b,  4, Q_("ButtonBar|Edit"), main_map, NULL);
+    buttonbar_set_label (b,  5, Q_("ButtonBar|Copy"), main_map, NULL);
+    buttonbar_set_label (b,  6, Q_("ButtonBar|RenMov"), main_map, NULL);
+    buttonbar_set_label (b,  7, Q_("ButtonBar|Mkdir"), main_map, NULL);
+    buttonbar_set_label (b,  8, Q_("ButtonBar|Delete"), main_map, NULL);
+    buttonbar_set_label (b,  9, Q_("ButtonBar|PullDn"), main_map, NULL);
+    buttonbar_set_label (b, 10, Q_("ButtonBar|Quit"), main_map, NULL);
 }
 
 static gboolean ctl_x_map_enabled = FALSE;
@@ -1726,8 +1726,15 @@ midnight_callback (Dlg_head *h, Widget *sender,
 	if (sender == NULL)
 	    midnight_execute_cmd (NULL, parm);
 	/* message from menu */
-	else if (sender == &the_menubar->widget)
+	else if (sender == (Widget *) the_menubar)
 	    midnight_execute_cmd (sender, parm);
+	/* message from buttonbar */
+	else if (sender == (Widget *) the_bar) {
+	    if (data == NULL)
+		midnight_execute_cmd (sender, parm);
+	    else
+		return send_message ((Widget *) data, WIDGET_COMMAND, parm);
+	}
 	return MSG_HANDLED;
 
     default:

@@ -2673,17 +2673,15 @@ listbox_get_current (WListbox *l, char **string, char **extra)
 static gboolean
 buttonbar_call (WButtonBar *bb, int i)
 {
-    switch (bb->labels[i].tag) {
-	case BBFUNC_NONE:
-	    break;
-	case BBFUNC_VOID:
-	    bb->labels[i].u.fn_void ();
-	    return TRUE;
-	case BBFUNC_PTR:
-	    bb->labels[i].u.fn_ptr (bb->labels[i].data);
-	    return TRUE;
-    }
-    return FALSE;
+    cb_ret_t ret = MSG_NOT_HANDLED;
+
+    if ((bb != NULL) && (bb->labels[i].text != NULL)
+	    && (bb->labels[i].command != CK_Ignore_Key))
+	ret = bb->widget.parent->callback (bb->widget.parent,
+					    &bb->widget, DLG_ACTION,
+					    bb->labels[i].command,
+					    bb->labels[i].receiver);
+    return ret;
 }
 
 /* calculate width of one button, width is never lesser than 7 */
@@ -2693,7 +2691,6 @@ buttonbat_get_button_width (void)
     int result = COLS / BUTTONBAR_LABELS_NUM;
     return (result >= 7) ? result : 7;
 }
-
 
 static cb_ret_t
 buttonbar_callback (Widget *w, widget_msg_t msg, int parm)
@@ -2770,7 +2767,6 @@ WButtonBar *
 buttonbar_new (gboolean visible)
 {
     WButtonBar *bb;
-    int i;
 
     bb = g_new0 (WButtonBar, 1);
 
@@ -2778,10 +2774,6 @@ buttonbar_new (gboolean visible)
 		 buttonbar_callback, buttonbar_event);
     bb->widget.pos_flags = WPOS_KEEP_HORZ | WPOS_KEEP_BOTTOM;
     bb->visible = visible;
-    for (i = 0; i < BUTTONBAR_LABELS_NUM; i++){
-	bb->labels[i].text = NULL;
-	bb->labels[i].tag = BBFUNC_NONE;
-    }
     widget_want_hotkey (bb->widget, 1);
     widget_want_cursor (bb->widget, 0);
     bb->btn_width = buttonbat_get_button_width ();
@@ -2804,35 +2796,24 @@ find_buttonbar (const Dlg_head *h)
 }
 
 void
-buttonbar_clear_label (WButtonBar *bb, int idx)
+buttonbar_set_label (WButtonBar *bb, int idx, const char *text,
+			const struct global_keymap_t *keymap, const Widget *receiver)
 {
-    if (bb != NULL) {
-	set_label_text (bb, idx, "");
-	bb->labels[idx - 1].tag = BBFUNC_NONE;
-    }
-}
+    if ((bb != NULL)  && (idx >= 1) && (idx <= BUTTONBAR_LABELS_NUM)) {
+	unsigned long command = CK_Ignore_Key;
 
-void
-buttonbar_set_label_data (WButtonBar *bb, int idx, const char *text,
-                          buttonbarfn cback, void *data)
-{
-    if (bb != NULL) {
-	assert (cback != (buttonbarfn) NULL);
-	set_label_text (bb, idx, text);
-	bb->labels[idx - 1].tag = BBFUNC_PTR;
-	bb->labels[idx - 1].u.fn_ptr = cback;
-	bb->labels[idx - 1].data = data;
-    }
-}
+	if (keymap != NULL)
+	    command = lookup_keymap_command (keymap, KEY_F (idx));
 
-void
-buttonbar_set_label (WButtonBar *bb, int idx, const char *text, voidfn cback)
-{
-    if (bb != NULL) {
-	assert (cback != (voidfn) NULL);
-	set_label_text (bb, idx, text);
-	bb->labels[idx - 1].tag = BBFUNC_VOID;
-	bb->labels[idx - 1].u.fn_void = cback;
+	if ((text == NULL) || (text[0] == '\0') || (command == CK_Ignore_Key)) {
+	    set_label_text (bb, idx, NULL);
+	    bb->labels[idx - 1].command = CK_Ignore_Key;
+	    bb->labels[idx - 1].receiver = NULL;
+	} else {
+	    set_label_text (bb, idx, text);
+	    bb->labels[idx - 1].command = command;
+	    bb->labels[idx - 1].receiver = receiver;
+	}
     }
 }
 

@@ -162,21 +162,14 @@ struct WListbox {
 /* number of bttons in buttonbar */
 #define BUTTONBAR_LABELS_NUM	10
 
-typedef void (*voidfn)(void);
-typedef void (*buttonbarfn)(void *);
-
 typedef struct WButtonBar {
     Widget widget;
     gboolean visible;		/* Is it visible? */
     int btn_width;		/* width of one button */
     struct {
-	char   *text;
-	enum { BBFUNC_NONE, BBFUNC_VOID, BBFUNC_PTR } tag;
-	union {
-	    voidfn fn_void;
-	    buttonbarfn fn_ptr;
-	} u;
-	void   *data;
+	char *text;
+	unsigned long command;
+	Widget *receiver;
     } labels [BUTTONBAR_LABELS_NUM];
 } WButtonBar;
 
@@ -253,12 +246,12 @@ enum append_pos {
 char *listbox_add_item (WListbox *l, enum append_pos pos, int
 			hotkey, const char *text, void *data);
 
+struct global_keymap_t;
 
 WButtonBar *find_buttonbar (const Dlg_head *h);
-void buttonbar_clear_label (WButtonBar *bb, int idx);
-void buttonbar_set_label (WButtonBar *bb, int index, const char *text, voidfn cback);
-void buttonbar_set_label_data (WButtonBar *bb, int idx, const char *text,
-			       buttonbarfn cback, void *data);
+void buttonbar_set_label (WButtonBar *bb, int index, const char *text,
+			    const struct global_keymap_t *keymap, const Widget *receiver);
+#define buttonbar_clear_label(bb, idx) buttonbar_set_label (bb, idx, NULL, NULL, NULL);
 void buttonbar_set_visible (WButtonBar *bb, gboolean visible);
 void buttonbar_redraw (WButtonBar *bb);
 

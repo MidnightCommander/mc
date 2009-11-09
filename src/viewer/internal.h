@@ -201,16 +201,6 @@ typedef struct mcview_nroff_struct {
 /*** declarations of public functions **********************************/
 
 /* actions_cmd.c:  */
-void mcview_help_cmd (void);
-void mcview_quit_cmd (mcview_t *view);
-void mcview_goto (mcview_t *view);
-void mcview_toggle_hex_mode_cmd (mcview_t *view);
-void mcview_toggle_hexedit_mode_cmd (mcview_t *view);
-void mcview_hexedit_save_changes_cmd (mcview_t *view);
-void mcview_toggle_wrap_mode_cmd (mcview_t *view);
-void mcview_search_cmd (mcview_t *view);
-void mcview_toggle_magic_mode_cmd (mcview_t *view);
-void mcview_toggle_nroff_mode_cmd (mcview_t *view);
 cb_ret_t mcview_callback (Widget *w, widget_msg_t msg, int parm);
 cb_ret_t mcview_dialog_callback (Dlg_head *h, Widget *sender,
 				    dlg_msg_t msg, int parm, void *data);
