@@ -300,9 +300,6 @@ static const char *
 string_file_mtime (file_entry *fe, int len)
 {
     (void) len;
-    if (!strcmp (fe->fname, "..")) {
-       return "";
-    }
     return file_date (fe->st.st_mtime);
 }
 
@@ -311,9 +308,6 @@ static const char *
 string_file_atime (file_entry *fe, int len)
 {
     (void) len;
-    if (!strcmp (fe->fname, "..")) {
-       return "";
-    }
     return file_date (fe->st.st_atime);
 }
 
@@ -322,9 +316,6 @@ static const char *
 string_file_ctime (file_entry *fe, int len)
 {
     (void) len;
-    if (!strcmp (fe->fname, "..")) {
-       return "";
-    }
     return file_date (fe->st.st_ctime);
 }
 
@@ -1338,7 +1329,7 @@ panel_reload (WPanel *panel)
 
 	if (panel->cwd[0] == PATH_SEP && panel->cwd[1] == 0) {
 	    panel_clean_dir (panel);
-	    panel->count = set_zero_dir (&panel->dir);
+	    panel->count = set_zero_dir (&panel->dir) ? 1 : 0;
 	    return;
 	}
 	last_slash = strrchr (panel->cwd, PATH_SEP);
@@ -3227,7 +3218,7 @@ reload_panelized (WPanel *panel)
 	j++;
     }
     if (j == 0)
-	panel->count = set_zero_dir (list);
+	panel->count = set_zero_dir (list) ? 1 : 0;
     else
 	panel->count = j;
 

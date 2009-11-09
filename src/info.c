@@ -70,7 +70,7 @@ static void info_box (Dlg_head *h, struct WInfo *info)
 static void
 info_show_info (struct WInfo *info)
 {
-    static int i18n_adjust=0;
+    static int i18n_adjust = 0;
     static const char *file_label;
     GString *buff;
     struct stat st;
@@ -96,10 +96,10 @@ info_show_info (struct WInfo *info)
 
     /* Print only lines which fit */
 
-    if(!i18n_adjust) {
+    if (i18n_adjust == 0) {
 	/* This printf pattern string is used as a reference for size */
-	file_label=_("File:       %s");
-	i18n_adjust = str_term_width1(file_label) + 2;
+	file_label = _("File:       %s");
+	i18n_adjust = str_term_width1 (file_label) + 2;
     }
 
     buff = g_string_new ("");
@@ -193,30 +193,30 @@ info_show_info (struct WInfo *info)
 	tty_printf (_("Owner:     %s/%s"),
 	    get_owner (st.st_uid),
 	    get_group (st.st_gid));
-	
+
     case 6:
 	widget_move (&info->widget, 6, 3);
 	tty_printf (_("Links:     %d"), (int) st.st_nlink);
-	
+
     case 5:
 	widget_move (&info->widget, 5, 3);
 	tty_printf (_("Mode:      %s (%04o)"),
 		string_perm (st.st_mode), (unsigned) st.st_mode & 07777);
-	
+
     case 4:
 	widget_move (&info->widget, 4, 3);
 	tty_printf (_("Location:  %Xh:%Xh"), (int)st.st_dev, (int)st.st_ino);
-	
+
     case 3:
+    {
+	const char *fname;
+
 	widget_move (&info->widget, 3, 2);
-	/* .ado: fname is invalid if selected == 0 && info called from current panel */
-	if (current_panel->selected){
-            str_printf (buff, file_label, 
-            str_trunc (current_panel->dir.list [current_panel->selected].fname,
-				    info->widget.cols - i18n_adjust));
-            tty_print_string (buff->str);
-	} else
-	    tty_print_string (_("File:       None"));
+	fname = current_panel->dir.list [current_panel->selected].fname;
+	str_printf (buff, file_label,
+		    str_trunc (fname, info->widget.cols - i18n_adjust));
+	tty_print_string (buff->str);
+    }
 
     case 2:
     case 1:
@@ -230,13 +230,13 @@ static void info_hook (void *data)
 {
     struct WInfo *info = (struct WInfo *) data;
     Widget *other_widget;
-    
+
     other_widget = get_panel_widget (get_current_index ());
     if (!other_widget)
 	return;
     if (dlg_overlap (&info->widget, other_widget))
 	return;
-    
+
     info->ready = 1;
     info_show_info (info);
 }
@@ -301,4 +301,3 @@ info_new (void)
 
     return info;
 }
-

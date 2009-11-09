@@ -6,17 +6,17 @@
 #ifndef MC_DIR_H
 #define MC_DIR_H
 
+#include <sys/stat.h>
+
+#include "global.h"
+
 #define MIN_FILES 128
 #define RESIZE_STEPS 128
 
-#include <sys/stat.h>
-
 /* keys are set only during sorting */
 typedef struct {
-
     /* File attributes */
-
-    int  fnamelen;
+    size_t fnamelen;
     char *fname;
     struct stat st;
     /* key used for comparing names */
@@ -47,7 +47,7 @@ void do_sort (dir_list * list, sortfn * sort, int top, int reverse,
 int do_reload_dir (const char *path, dir_list * list, sortfn * sort, int count,
 		   int reverse, int case_sensitive, int exec_ff, const char *filter);
 void clean_dir (dir_list * list, int count);
-int set_zero_dir (dir_list * list);
+gboolean set_zero_dir (dir_list *list);
 int handle_path (dir_list *list, const char *path, struct stat *buf1,
 		 int next_free, int *link_to_dir, int *stale_link);
 
