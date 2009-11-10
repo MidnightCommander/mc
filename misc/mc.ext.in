@@ -298,10 +298,6 @@ shell/.info
 regex/\.(so|so\.[0-9\.]*)$
 	View=%view{ascii} file %f && nm %f
 
-# Exception - .3gp are video files
-regex/\.(3[gG][pP])$
-	Include=video
-
 regex/(([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])|\.man)$
 	Open=case %d/%f in */log/*|*/logs/*) cat %f ;; *) { zsoelim %f 2>/dev/null || cat %f; } | nroff @MAN_FLAGS@ @MANDOC@ ;; esac | %var{PAGER:more}
 	View=%view{ascii,nroff} case %d/%f in */log/*|*/logs/*) cat %f ;; *) { zsoelim %f 2>/dev/null || cat %f; } | nroff @MAN_FLAGS@ @MANDOC@ ;; esac
