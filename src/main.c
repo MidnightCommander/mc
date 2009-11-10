@@ -679,8 +679,8 @@ create_panel_menu (void)
     GList *entries = NULL;
 
     entries = g_list_append (entries, menu_entry_create (_("&Listing mode..."), CK_ListingCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Quick view"),      CK_MenuQuickViewCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Info" ),           CK_MenuInfoCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Quick view"),      CK_QuickViewCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Info" ),           CK_InfoCmd));
     entries = g_list_append (entries, menu_entry_create (_("&Tree"),            CK_TreeCmd));
     entries = g_list_append (entries, menu_separator_create ());
     entries = g_list_append (entries, menu_entry_create (_("&Sort order..."),   CK_Sort));
@@ -1237,7 +1237,10 @@ midnight_execute_cmd (Widget *sender, unsigned long command)
         history_cmd ();
         break;
     case CK_InfoCmd:
-        info_cmd_no_menu ();
+        if (sender == the_menubar)
+            info_cmd ();                /* mwnu */
+        else
+            info_cmd_no_menu ();        /* shortcut or buttonbar */
         break;
 #ifdef WITH_BACKGROUND
     case CK_JobsCmd:
@@ -1264,14 +1267,8 @@ midnight_execute_cmd (Widget *sender, unsigned long command)
     case CK_MenuCmd:
         menu_cmd ();
         break;
-    case CK_MenuInfoCmd:
-        info_cmd ();
-        break;
     case CK_MenuLastSelectedCmd:
         menu_last_selected_cmd ();
-        break;
-    case CK_MenuQuickViewCmd:
-        quick_view_cmd ();
         break;
     case CK_MkdirCmd:
         mkdir_cmd ();
@@ -1293,7 +1290,10 @@ midnight_execute_cmd (Widget *sender, unsigned long command)
         quick_chdir_cmd ();
         break;
     case CK_QuickViewCmd:
-        quick_cmd_no_menu ();
+        if (sender == the_menubar)
+            quick_view_cmd ();          /* menu */
+        else
+            quick_cmd_no_menu ();       /* shortcut or buttonabr */
         break;
     case CK_QuietQuitCmd:
         quiet_quit_cmd ();

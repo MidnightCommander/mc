@@ -328,8 +328,6 @@ static name_keymap_t command_names[] = {
 #ifdef LISTMODE_EDITOR
     { "CmdListmodeCmd",                  CK_ListmodeCmd }.
 #endif
-    { "CmdMenuInfo",                     CK_MenuInfoCmd },
-    { "CmdMenuQuickView",                CK_MenuQuickViewCmd },
     { "CmdMkdir",                        CK_MkdirCmd },
 #if defined (USE_NETCODE) && defined (ENABLE_VFS_MCFS)
     { "CmdNetlink",                      CK_NetlinkCmd },
@@ -855,7 +853,6 @@ const global_keymap_t default_main_x_map[] = {
     { 'l',         CK_LinkCmd,             "l" },
     { 's',         CK_SymlinkCmd,          "s" },
     { XCTRL ('s'), CK_EditSymlinkCmd,      "C-s" },
-    { 'i',         CK_MenuInfoCmd,         "i" },
     { 'i',         CK_InfoCmd,             "i" },
     { 'q',         CK_QuickViewCmd,        "q" },
     { 'h',         CK_AddHotlist,          "h" },

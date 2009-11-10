@@ -333,9 +333,7 @@
 #define CK_LinkCmd                      7037
 #define CK_ListingCmd                   7038
 #define CK_ListmodeCmd                  7039
-#define CK_MenuInfoCmd                  7040
 #define CK_MenuLastSelectedCmd          7042
-#define CK_MenuQuickViewCmd             7043
 #define CK_MkdirCmd                     7044
 #define CK_NetlinkCmd                   7045
 #define CK_QuickCdCmd                   7046
