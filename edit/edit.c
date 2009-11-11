@@ -3120,6 +3120,7 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	break;
     case CK_Edit_Save_Mode:
 	menu_save_mode_cmd ();
+	break;
     case CK_Date:
 	{
 	    char s[BUF_MEDIUM];
