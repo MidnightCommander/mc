@@ -44,7 +44,7 @@ SRC_maintainer=logging.c logging.h
 SRC_charset = charsets.c charsets.h selcodepage.c selcodepage.h
 
 if USE_MAINTAINER_MODE
-    SRC_USE_maintainer=$(SRC_MAINTAINER)
+    SRC_USE_maintainer=$(SRC_maintainer)
 endif
 
 if CHARSET

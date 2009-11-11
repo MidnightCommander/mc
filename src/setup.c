@@ -410,6 +410,9 @@ panel_load_setup (WPanel *panel, const char *section)
     /* Load sort order */
     buffer = mc_config_get_string(mc_panels_config, section, "sort_order", "name");
     panel->current_sort_field = panel_get_field_by_id(buffer);
+    if (panel->current_sort_field == NULL )
+	panel->current_sort_field = panel_get_field_by_id("name");
+
     g_free(buffer);
 
     /* Load the listing mode */
