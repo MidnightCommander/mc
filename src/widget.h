@@ -200,7 +200,6 @@ cb_ret_t handle_char (WInput *in, int c_code);
 int is_in_input_map (WInput *in, int c_code);
 void update_input (WInput *in, int clear_first);
 void new_input (WInput *in);
-int push_history (WInput *in, const char *text);
 void stuff (WInput *in, const char *text, int insert_extra_space);
 void input_disable_update (WInput *in);
 void input_set_prompt (WInput *in, int field_len, const char *prompt);

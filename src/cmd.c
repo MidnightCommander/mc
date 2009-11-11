@@ -66,7 +66,6 @@
 #include "cons.saver.h"		/* console_flag */
 #include "dialog.h"		/* Widget */
 #include "wtools.h"		/* message() */
-#include "widget.h"		/* push_history() */
 #include "main.h"		/* change_panel() */
 #include "panel.h"		/* current_panel */
 #include "help.h"		/* interactive_display() */
