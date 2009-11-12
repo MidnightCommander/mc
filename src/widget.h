@@ -251,7 +251,7 @@ struct global_keymap_t;
 WButtonBar *find_buttonbar (const Dlg_head *h);
 void buttonbar_set_label (WButtonBar *bb, int index, const char *text,
 			    const struct global_keymap_t *keymap, const Widget *receiver);
-#define buttonbar_clear_label(bb, idx) buttonbar_set_label (bb, idx, NULL, NULL, NULL);
+#define buttonbar_clear_label(bb, idx, recv) buttonbar_set_label (bb, idx, "", NULL, recv)
 void buttonbar_set_visible (WButtonBar *bb, gboolean visible);
 void buttonbar_redraw (WButtonBar *bb);
 

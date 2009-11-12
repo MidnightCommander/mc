@@ -85,7 +85,7 @@ mcview_set_buttonbar (mcview_t *view)
          else if (view->datasource == DS_FILE)
             buttonbar_set_label (b, 2, Q_ ("ButtonBar|Edit"), keymap, (Widget *) view);
          else
-            buttonbar_clear_label (b, 2);
+            buttonbar_set_label (b, 2, "", keymap, (Widget *) view);
 
         buttonbar_set_label (b, 4, Q_ ("ButtonBar|Ascii"), keymap, (Widget *) view);
         buttonbar_set_label (b, 5, Q_ ("ButtonBar|Goto"), keymap, (Widget *) view);
@@ -98,22 +98,24 @@ mcview_set_buttonbar (mcview_t *view)
                                 keymap, (Widget *) view);
         buttonbar_set_label (b, 4, Q_ ("ButtonBar|Hex"), keymap, (Widget *) view);
         buttonbar_set_label (b, 5, Q_ ("ButtonBar|Line"), keymap, (Widget *) view);
-        buttonbar_clear_label (b, 6);
+        buttonbar_set_label (b, 6, "", keymap, (Widget *) view);
         buttonbar_set_label (b, 7, Q_ ("ButtonBar|Search"), keymap, (Widget *) view);
-    }
-
-    /* don't override the key to access the main menu */
-    if (!mcview_is_in_panel (view)) {
-        buttonbar_set_label (b, 3, Q_ ("ButtonBar|Quit"), keymap, (Widget *) view);
-        buttonbar_set_label (b, 9, view->text_nroff_mode ? Q_ ("ButtonBar|Unform")
-                                                        : Q_ ("ButtonBar|Format"),
-                                keymap, (Widget *) view);
     }
 
     buttonbar_set_label (b, 8, view->magic_mode ? Q_ ("ButtonBar|Raw")
                                                 : Q_ ("ButtonBar|Parse"),
                                 keymap, (Widget *) view);
-    buttonbar_set_label (b, 10, Q_ ("ButtonBar|Quit"), keymap, (Widget *) view);
+
+    if (mcview_is_in_panel (view))
+        buttonbar_set_label (b, 10, "", keymap, (Widget *) view);
+    else {
+        /* don't override some panel buttonbar keys  */
+        buttonbar_set_label (b, 3, Q_ ("ButtonBar|Quit"), keymap, (Widget *) view);
+        buttonbar_set_label (b, 9, view->text_nroff_mode ? Q_ ("ButtonBar|Unform")
+                                                        : Q_ ("ButtonBar|Format"),
+                                keymap, (Widget *) view);
+        buttonbar_set_label (b, 10, Q_ ("ButtonBar|Quit"), keymap, (Widget *) view);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */

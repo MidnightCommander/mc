@@ -2675,10 +2675,9 @@ buttonbar_call (WButtonBar *bb, int i)
 {
     cb_ret_t ret = MSG_NOT_HANDLED;
 
-    if ((bb != NULL) && (bb->labels[i].text != NULL)
-	    && (bb->labels[i].command != CK_Ignore_Key))
+    if (bb != NULL)
 	ret = bb->widget.parent->callback (bb->widget.parent,
-					    &bb->widget, DLG_ACTION,
+					    (Widget *) bb, DLG_ACTION,
 					    bb->labels[i].command,
 					    bb->labels[i].receiver);
     return ret;
@@ -2805,15 +2804,13 @@ buttonbar_set_label (WButtonBar *bb, int idx, const char *text,
 	if (keymap != NULL)
 	    command = lookup_keymap_command (keymap, KEY_F (idx));
 
-	if ((text == NULL) || (text[0] == '\0') || (command == CK_Ignore_Key)) {
-	    set_label_text (bb, idx, NULL);
-	    bb->labels[idx - 1].command = CK_Ignore_Key;
-	    bb->labels[idx - 1].receiver = NULL;
-	} else {
+	if ((text == NULL) || (text[0] == '\0'))
+	    set_label_text (bb, idx, "");
+	else
 	    set_label_text (bb, idx, text);
-	    bb->labels[idx - 1].command = command;
-	    bb->labels[idx - 1].receiver = receiver;
-	}
+
+	bb->labels[idx - 1].command = command;
+	bb->labels[idx - 1].receiver = (Widget *) receiver;
     }
 }
 

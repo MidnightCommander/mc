@@ -1018,7 +1018,7 @@ tree_callback (Widget *w, widget_msg_t msg, int parm)
 	/* FIXME: mkdir is currently defunct */
 	buttonbar_set_label (b, 7, Q_("ButtonBar|Mkdir"), tree_map, (Widget *) tree);
 #else
-	buttonbar_clear_label (b, 7);
+	buttonbar_clear_label (b, 7, (Widget *) tree);
 #endif
 	buttonbar_set_label (b, 8, Q_("ButtonBar|Rmdir"), tree_map, (Widget *) tree);
 	buttonbar_redraw (b);

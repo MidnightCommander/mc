@@ -1237,7 +1237,7 @@ midnight_execute_cmd (Widget *sender, unsigned long command)
         history_cmd ();
         break;
     case CK_InfoCmd:
-        if (sender == the_menubar)
+        if (sender == (Widget *) the_menubar)
             info_cmd ();                /* mwnu */
         else
             info_cmd_no_menu ();        /* shortcut or buttonbar */
@@ -1290,7 +1290,7 @@ midnight_execute_cmd (Widget *sender, unsigned long command)
         quick_chdir_cmd ();
         break;
     case CK_QuickViewCmd:
-        if (sender == the_menubar)
+        if (sender == (Widget *) the_menubar)
             quick_view_cmd ();          /* menu */
         else
             quick_cmd_no_menu ();       /* shortcut or buttonabr */

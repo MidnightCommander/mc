@@ -957,12 +957,12 @@ interactive_display (const char *filename, const char *node)
     buttonbar_set_label (help_bar, 1, Q_("ButtonBar|Help"), help_map, NULL);
     buttonbar_set_label (help_bar, 2, Q_("ButtonBar|Index"), help_map, NULL);
     buttonbar_set_label (help_bar, 3, Q_("ButtonBar|Prev"), help_map, NULL);
-    buttonbar_clear_label (help_bar, 4);
-    buttonbar_clear_label (help_bar, 5);
-    buttonbar_clear_label (help_bar, 6);
-    buttonbar_clear_label (help_bar, 7);
-    buttonbar_clear_label (help_bar, 8);
-    buttonbar_clear_label (help_bar, 9);
+    buttonbar_set_label (help_bar, 4, "", help_map, NULL);
+    buttonbar_set_label (help_bar, 5, "", help_map, NULL);
+    buttonbar_set_label (help_bar, 6, "", help_map, NULL);
+    buttonbar_set_label (help_bar, 7, "", help_map, NULL);
+    buttonbar_set_label (help_bar, 8, "", help_map, NULL);
+    buttonbar_set_label (help_bar, 9, "", help_map, NULL);
     buttonbar_set_label (help_bar, 10, Q_("ButtonBar|Quit"), help_map, NULL);
 
     run_dlg (whelp);

@@ -208,10 +208,10 @@ edit_dialog_callback (Dlg_head *h, Widget *sender,
     case DLG_ACTION:
 	menubar = find_menubar (h);
 	if (sender == (Widget *) menubar)
-	    return send_message (wedit, WIDGET_COMMAND, parm);
+	    return send_message ((Widget *) edit, WIDGET_COMMAND, parm);
 	buttonbar = find_buttonbar (h);
 	if (sender == (Widget *) buttonbar)
-	    return send_message (wedit, WIDGET_COMMAND, parm);
+	    return send_message ((Widget *) edit, WIDGET_COMMAND, parm);
 	return MSG_HANDLED;
 
     default:
