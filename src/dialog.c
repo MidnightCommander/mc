@@ -834,12 +834,11 @@ init_dlg (Dlg_head * h)
     h->callback (h, NULL, DLG_INIT, 0, NULL);
     dlg_broadcast_msg (h, WIDGET_INIT, 0);
 
+    dlg_redraw (h);
+
     /* Select the first widget that takes focus */
     while (h->current != NULL && !dlg_focus (h))
         h->current = h->current->next;
-
-    /* Redraw the screen */
-    dlg_redraw (h);
 
     h->ret_value = 0;
     h->running = 1;

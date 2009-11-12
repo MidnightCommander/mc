@@ -363,7 +363,6 @@ file_op_context_create_ui (FileOpContext * ctx, gboolean with_eta,
     /* We will manage the dialog without any help, that's why
        we have to call init_dlg */
     init_dlg (ui->op_dlg);
-    ui->op_dlg->running = 1;
 }
 
 void
