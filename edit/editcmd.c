@@ -87,7 +87,7 @@ static void
 edit_search_cmd_search_create_bookmark(WEdit * edit)
 {
     int found = 0, books = 0;
-    int l = 0, l_last = -1;
+    long l = 0, l_last = -1;
     long q = 0;
     gsize len = 0;
 
@@ -1252,7 +1252,8 @@ edit_block_move_cmd (WEdit *edit)
     edit_push_markers (edit);
     current = edit->curs1;
     if (column_highlighting) {
-	int size, c1, c2, line;
+	long line;
+	int size, c1, c2;
 	line = edit->curs_line;
 	if (edit->mark2 < 0)
 	    edit_mark_cmd (edit, 0);
@@ -1313,8 +1314,7 @@ static void
 edit_delete_column_of_text (WEdit * edit)
 {
     long p, q, r, m1, m2;
-    int b, c, d;
-    int n;
+    long b, c, d, n;
 
     eval_marks (edit, &m1, &m2);
     n = edit_move_forward (edit, m1, 0, m2) + 1;
@@ -1856,7 +1856,8 @@ edit_get_block (WEdit *edit, long start, long finish, int *l)
 	*l = 0;
 	/* copy from buffer, excluding chars that are out of the column 'margins' */
 	while (start < finish) {
-	    int c, x;
+	    int c;
+	    long x;
 	    x = edit_move_forward3 (edit, edit_bol (edit, start), 0,
 				    start);
 	    c = edit_get_byte (edit, start);

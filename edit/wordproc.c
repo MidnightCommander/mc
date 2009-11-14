@@ -95,7 +95,7 @@ static int bad_line_start (WEdit * edit, long p)
 static long
 begin_paragraph (WEdit *edit, int force)
 {
-    int i;
+    long i;
     for (i = edit->curs_line - 1; i >= 0; i--) {
 	if (line_is_blank (edit, i)) {
 	    i++;
