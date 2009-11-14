@@ -1233,6 +1233,8 @@ init_fish (void)
 {
     static struct vfs_s_subclass fish_subclass;
 
+    tcp_init();
+
     fish_subclass.flags = VFS_S_REMOTE;
     fish_subclass.archive_same = fish_archive_same;
     fish_subclass.open_archive = fish_open_archive;
