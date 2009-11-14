@@ -183,6 +183,10 @@ expand_format (WEdit *edit_widget, char c, int lc_quote)
     char *result;
     char c_lc;
 
+#ifndef USE_INTERNAL_EDIT
+    (void) edit_widget;
+#endif
+
     if (c == '%')
 	return g_strdup ("%");
 

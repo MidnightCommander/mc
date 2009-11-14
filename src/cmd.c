@@ -304,6 +304,8 @@ do_edit_at_line (const char *what, int start_line)
     if (use_internal_edit)
 	edit_file (what, start_line);
     else
+#else
+    (void) start_line;
 #endif /* USE_INTERNAL_EDIT */
     {
 	if (editor == NULL) {
