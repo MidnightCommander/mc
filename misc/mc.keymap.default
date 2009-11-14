@@ -233,7 +233,7 @@ CmdCopyOtherPathname = alt-shift-a
 CmdFilteredView = alt-exclamation
 CmdSelect = kpplus
 CmdUnselect = kpminus
-CmdReverseSelection = alt-kpasterisk
+CmdReverseSelection = kpasterisk
 ExtMap1 = ctrl-x
 
 [main:xmap]

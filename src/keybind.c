@@ -762,8 +762,8 @@ const global_keymap_t default_panel_keymap[] = {
     { KEY_F (14),             CK_PanelCmdEditNew,           "S-F4" },
     { KEY_F (16),             CK_PanelCmdRenameLocal,       "S-F6" },
     { ALT ('*'),              CK_PanelCmdReverseSelection,  "M-*" },
-    { KEY_KP_ADD,             CK_PanelCmdSelect,            "Gray+" },
-    { KEY_KP_SUBTRACT,        CK_PanelCmdUnselect,          "Gray-" },
+    { KEY_KP_ADD,             CK_PanelCmdSelect,            "M-+" },
+    { KEY_KP_SUBTRACT,        CK_PanelCmdUnselect,          "M--" },
     { KEY_F (13),             CK_PanelCmdViewSimple,        "S-F3" },
     { KEY_M_CTRL | KEY_NPAGE, CK_PanelCtrlNextPage,         "C-PgDn" },
     { KEY_M_CTRL | KEY_PPAGE, CK_PanelCtrlPrevPage,         "C-PgUp" },
@@ -830,14 +830,13 @@ const global_keymap_t default_main_map[] = {
     { ALT ('.'),    CK_ToggleShowHidden,              "M-." },
     { XCTRL ('x'),  CK_StartExtMap1,                  "C-x" },
     /* Select/unselect group */
-    { ALT ('*'),              CK_SelectCmd,           "M-*" },
-    { KEY_KP_ADD,             CK_UnselectCmd,         "Gray+" },
-    { KEY_KP_SUBTRACT,        CK_ReverseSelectionCmd, "Gray-" },
+    { KEY_KP_ADD,       CK_SelectCmd,           "+" },
+    { KEY_KP_SUBTRACT,  CK_UnselectCmd,         "-" },
+    { ALT ('*'),        CK_ReverseSelectionCmd, "*" },
     { 0, CK_Ignore_Key, "" }
 };
 
 const global_keymap_t default_main_x_map[] = {
-    { XCTRL ('c'), CK_QuitCmd,             "C-c" },
     { 'd',         CK_CompareDirsCmd,      "d" },
 #ifdef USE_VFS
     { 'a',         CK_ReselectVfs,         "a"},

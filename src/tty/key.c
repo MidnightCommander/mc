@@ -128,10 +128,10 @@ const key_code_name_t key_name_conv_tab[] = {
     { KEY_IC,		"insert",	N_("Insert key"),	"Ins" },
     { KEY_DC,		"delete",	N_("Delete key"),	"Del" },
     { ALT ('\t'),	"complete",	N_("Completion/M-tab"),	"Meta-Tab" },
-    { KEY_KP_ADD,	"kpplus",	N_("+ on keypad"),	"Gray+" },
-    { KEY_KP_SUBTRACT,	"kpminus",	N_("- on keypad"),	"Gray-" },
+    { KEY_KP_ADD,	"kpplus",	N_("+ on keypad"),	"+" },
+    { KEY_KP_SUBTRACT,	"kpminus",	N_("- on keypad"),	"-" },
     { (int) '/',	"kpslash",	N_("Slash on keypad"),	"/" },
-    { KEY_KP_MULTIPLY,	"kpasterisk",	N_("* on keypad"),	"Gray*" },
+    { KEY_KP_MULTIPLY,	"kpasterisk",	N_("* on keypad"),	"*" },
 
     /* From here on, these won't be shown in Learn keys (no space) */
     { ESC_CHAR,		"escape",	N_("Escape key"),		"Esc" },

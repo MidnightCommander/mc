@@ -60,8 +60,8 @@ EditBeginningOfTextHighlight = ctrl-shift-home
 EditEndOfTextHighlight  = ctrl-shift-end
 EditBeginPageHighlight  = ctrl-shift-pgup
 EditEndPageHighlight = ctrl-shift-pgdn
-EditScrollUpHighlight =
-EditScrollDownHighlight =
+EditScrollUpHighlight = ctrl-shift-up
+EditScrollDownHighlight = ctrl-shift-down
 EditParagraphUpHighlight =
 EditParagraphDownHighlight =
 
@@ -170,8 +170,7 @@ ViewGoto = f5
 ViewSearch = f7; question; slash
 ViewToggleMagicMode = f8
 ViewToggleNroffMode = f9
-ViewQuit = f3; f10; q; esc; ctrl-g
-ViewContinueSearch = ctrl-r; ctrl-s; f17
+ViewContinueSearch = ctrl-r; ctrl-s; f17; n
 ViewMoveToBol = ctrl-a
 ViewMoveToEol = ctrl-e
 ViewMoveLeft = h; left
@@ -238,7 +237,7 @@ CmdCopyOtherPathname = alt-shift-a
 CmdFilteredView = alt-exclamation
 CmdSelect = kpplus
 CmdUnselect = kpminus
-CmdReverseSelection = alt-kpasterisk
+CmdReverseSelection = kpasterisk
 ExtMap1 = ctrl-x
 
 [main:xmap]
