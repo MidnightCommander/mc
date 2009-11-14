@@ -43,10 +43,16 @@ void
 tcp_init (void)
 {
     struct sigaction sa;
+    static char _initialized = 0;
+
+    if (_initialized)
+	return;
 
     got_sigpipe = 0;
     sa.sa_handler = sig_pipe;
     sa.sa_flags = 0;
     sigemptyset (&sa.sa_mask);
     sigaction (SIGPIPE, &sa, NULL);
+
+    _initialized = 1;
 }

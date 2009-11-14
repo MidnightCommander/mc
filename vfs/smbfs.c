@@ -65,6 +65,7 @@
 #include "vfs.h"
 #include "vfs-impl.h"
 #include "smbfs.h"
+#include "vfs/netutil.h"
 
 #define SMBFS_MAX_CONNECTIONS 16
 static const char * const IPC = "IPC$";
@@ -1967,6 +1968,8 @@ smbfs_fstat (void *data, struct stat *buf)
 void
 init_smbfs (void)
 {
+    tcp_init();
+
     vfs_smbfs_ops.name = "smbfs";
     vfs_smbfs_ops.prefix = "smb:";
     vfs_smbfs_ops.flags = VFSF_NOLINKS;
