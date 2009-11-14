@@ -972,7 +972,7 @@ jobs_cmd (void)
 }
 #endif /* WITH_BACKGROUND */
 
-#ifdef WITH_SMBFS
+#ifdef ENABLE_VFS_SMB
 struct smb_authinfo *
 vfs_smb_get_authinfo (const char *host, const char *share, const char *domain,
 		      const char *user)
@@ -1078,4 +1078,4 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain,
              
     return return_value;
 }
-#endif /* WITH_SMBFS */
+#endif /* ENABLE_VFS_SMB */

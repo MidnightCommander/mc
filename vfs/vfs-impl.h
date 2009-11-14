@@ -113,7 +113,7 @@ union vfs_dirent {
 /* Register a file system class */
 int vfs_register_class (struct vfs_class *vfs);
 
-#ifdef WITH_SMBFS
+#ifdef ENABLE_VFS_SMB
 /* Interface for requesting SMB credentials.  */
 struct smb_authinfo {
     char *host;
@@ -127,7 +127,7 @@ struct smb_authinfo *vfs_smb_get_authinfo (const char *host,
 					   const char *share,
 					   const char *domain,
 					   const char *user);
-#endif				/* WITH_SMBFS */
+#endif				/* ENABLE_VFS_SMB */
 
 struct vfs_class *vfs_get_class (const char *path);
 struct vfs_class *vfs_split (char *path, char **inpath, char **op);

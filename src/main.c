@@ -87,9 +87,9 @@
 
 #include "main.h"
 
-#ifdef WITH_SMBFS
+#ifdef ENABLE_VFS_SMB
 #include "../vfs/smbfs.h"	/* smbfs_set_debug() */
-#endif
+#endif /* ENABLE_VFS_SMB */
 
 #ifdef USE_INTERNAL_EDIT
 #   include "../edit/edit.h"
@@ -692,9 +692,9 @@ create_panel_menu (void)
 #endif
     entries = g_list_append (entries, menu_entry_create (_("FT&P link..."),     CK_FtplinkCmd));
     entries = g_list_append (entries, menu_entry_create (_("S&hell link..."),   CK_FishlinkCmd));
-#ifdef WITH_SMBFS
+#ifdef ENABLE_VFS_SMB
     entries = g_list_append (entries, menu_entry_create (_("SM&B link..."),     CK_SmblinkCmd));
-#endif
+#endif /* ENABLE_VFS_SMB */
 #endif
     entries = g_list_append (entries, menu_separator_create ());
     entries = g_list_append (entries, menu_entry_create (_("&Rescan"),          CK_RereadCmd));
@@ -1321,11 +1321,11 @@ midnight_execute_cmd (Widget *sender, unsigned long command)
     case CK_SingleDirsizeCmd:
         smart_dirsize_cmd ();
         break;
-#if defined (USE_NETCODE) && defined (WITH_SMBFS)
+#if defined (USE_NETCODE) && defined (ENABLE_VFS_SMB)
     case CK_SmblinkCmd:
         smblink_cmd ();
         break;
-#endif
+#endif /* USE_NETCODE && ENABLE_VFS_SMB */
     case CK_Sort:
         sort_cmd ();
         break;
@@ -2018,15 +2018,15 @@ mc_main__setup_by_args (int argc, char *argv[])
 #ifdef USE_NETCODE
     if (mc_args__netfs_logfile != NULL) {
 	mc_setctl ("/#ftp:", VFS_SETCTL_LOGFILE, (void *) mc_args__netfs_logfile);
-#ifdef WITH_SMBFS
+#ifdef ENABLE_VFS_SMB
 	smbfs_set_debugf (mc_args__netfs_logfile);
-#endif				/* WITH_SMBFS */
+#endif				/* ENABLE_VFS_SMB */
     }
 
-#ifdef WITH_SMBFS
+#ifdef ENABLE_VFS_SMB
     if (mc_args__debug_level != 0)
 	smbfs_set_debug (mc_args__debug_level);
-#endif				/* WITH_SMBFS */
+#endif				/* ENABLE_VFS_SMB */
 #endif				/* USE_NETCODE */
 
     base = x_basename (argv[0]);

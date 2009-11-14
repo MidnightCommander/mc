@@ -44,9 +44,9 @@ static const char *const vfs_supported[] = {
 #   ifdef ENABLE_VFS_MCFS
     "mcfs",
 #   endif
-#   ifdef WITH_SMBFS
+#   ifdef ENABLE_VFS_SMB
     "smbfs",
-#   endif
+#   endif /* ENABLE_VFS_SMB */
 #endif				/* USE_NETCODE */
 #ifdef USE_EXT2FSLIB
     "undelfs",
