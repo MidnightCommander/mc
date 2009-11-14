@@ -629,7 +629,7 @@ const global_keymap_t default_editor_keymap[] = {
     { KEY_F (13),                           CK_Column_Mark,         "S-F3" },
     { KEY_F (14),                           CK_Replace_Again,       "S-F4" },
     { KEY_F (15),                           CK_Insert_File,         "S-F5" },
-    { KEY_F (17),                           CK_Find_Again,          "S-F6" },
+    { KEY_F (17),                           CK_Find_Again,          "S-F7" },
     /* C formatter */
     { KEY_F (19),                           CK_Pipe_Block (0),      "S-F9" },
 
@@ -799,7 +799,7 @@ const global_keymap_t default_main_map[] = {
     { KEY_F (5),    CK_CopyCmd,                       "F5" },
     { KEY_F (6),    CK_RenameCmd,                     "F6" },
     { KEY_F (7),    CK_MkdirCmd,                      "F7" },
-    { KEY_F (8),    CK_DeleteCmd,                     "F6" },
+    { KEY_F (8),    CK_DeleteCmd,                     "F8" },
     { KEY_F (9),    CK_MenuCmd,                       "F9" },
     { KEY_F (10),   CK_QuitCmd,                       "F10" },
     { KEY_F (13),   CK_ViewFileCmd,                   "S-F3" },
@@ -873,7 +873,7 @@ const global_keymap_t default_input_keymap[] = {
     { KEY_END,                CK_InputEol,              "End" },
     { KEY_C1,                 CK_InputEol,              "End" },
     { ALT ('>'),              CK_InputEol,              "M->" },
-    { KEY_LEFT,               CK_InputMoveLeft,         "left" },
+    { KEY_LEFT,               CK_InputMoveLeft,         "Left" },
     { KEY_M_CTRL | KEY_LEFT,  CK_InputWordLeft,         "C-Left" },
     { KEY_RIGHT,              CK_InputMoveRight,        "Right" },
     { KEY_M_CTRL | KEY_RIGHT, CK_InputWordRight,        "C-Right" },
