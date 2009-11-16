@@ -850,13 +850,6 @@ midnight_get_shortcut (unsigned long command)
     const char *ext_map;
     const char *shortcut = NULL;
 
-    ext_map = lookup_keymap_shortcut (main_map, CK_StartExtMap1);
-
-    if (ext_map != NULL)
-	shortcut = lookup_keymap_shortcut (main_x_map, command);
-    if (shortcut != NULL)
-	return g_strdup_printf ("%s %s", ext_map, shortcut);
-
     shortcut = lookup_keymap_shortcut (main_map, command);
     if (shortcut != NULL)
 	return g_strdup (shortcut);
@@ -864,6 +857,12 @@ midnight_get_shortcut (unsigned long command)
     shortcut = lookup_keymap_shortcut (panel_map, command);
     if (shortcut != NULL)
 	return g_strdup (shortcut);
+
+    ext_map = lookup_keymap_shortcut (main_map, CK_StartExtMap1);
+    if (ext_map != NULL)
+	shortcut = lookup_keymap_shortcut (main_x_map, command);
+    if (shortcut != NULL)
+	return g_strdup_printf ("%s %s", ext_map, shortcut);
 
     return NULL;
 }

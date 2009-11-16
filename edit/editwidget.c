@@ -65,16 +65,15 @@ edit_get_shortcut (unsigned long command)
     const char *ext_map;
     const char *shortcut = NULL;
 
-    ext_map = lookup_keymap_shortcut (editor_map, CK_Ext_Mode);
+    shortcut = lookup_keymap_shortcut (editor_map, command);
+    if (shortcut != NULL)
+	return g_strdup (shortcut);
 
+    ext_map = lookup_keymap_shortcut (editor_map, CK_Ext_Mode);
     if (ext_map != NULL)
 	shortcut = lookup_keymap_shortcut (editor_x_map, command);
     if (shortcut != NULL)
 	return g_strdup_printf ("%s %s", ext_map, shortcut);
-
-    shortcut = lookup_keymap_shortcut (editor_map, command);
-    if (shortcut != NULL)
-	return g_strdup (shortcut);
 
     return NULL;
 }
