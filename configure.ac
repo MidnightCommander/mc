@@ -641,6 +641,10 @@ po/Makefile.in
 
 AC_OUTPUT
 
+if test x$enable_mcserver = x; then
+    enable_mcserver='no'
+fi
+
 echo "
 Configuration:
 
