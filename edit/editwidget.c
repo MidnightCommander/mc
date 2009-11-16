@@ -179,8 +179,12 @@ edit_adjust_size (Dlg_head *h)
 static cb_ret_t
 edit_command_execute (WEdit *edit, unsigned long command)
 {
-    edit_execute_key_command (edit, command, -1);
-    edit_update_screen (edit);
+    if (command == CK_Menu)
+	edit_menu_cmd (edit);
+    else {
+	edit_execute_key_command (edit, command, -1);
+	edit_update_screen (edit);
+    }
     return MSG_HANDLED;
 }
 
