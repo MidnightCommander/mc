@@ -71,10 +71,3 @@ extfsconf_DATA = $(EXTFSCONFFILES)
 endif
 
 EXTRA_DIST = $(EXTFS_MISC) $(EXTFS_CONST) $(EXTFSCONFFILES)
-
-install-exec-local:
-	$(MKDIR_P) $(DESTDIR)$(extfsdir)
-	$(LN_S) rpm $(DESTDIR)$(extfsdir)/srpm
-
-uninstall-local:
-	-rm $(DESTDIR)$(extfsdir)/srpm
