@@ -2012,7 +2012,8 @@ edit_goto_cmd (WEdit *edit)
 	return;
     }
 
-    line = l;
+    /* show prev line number by default */
+    line = edit->curs_line + 1;
     if (l < 0)
 	l = edit->total_lines + l + 2;
     edit_move_display (edit, l - edit->num_widget_lines / 2 - 1);
