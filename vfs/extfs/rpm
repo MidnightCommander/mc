@@ -1,18 +1,45 @@
 #! /bin/sh
+# VFS-wrapper for RPM (and src.rpm) files
 #
-# Written by Erik Troan (ewt@redhat.com) 1996
-#            Jakub Jelinek (jj@sunsite.mff.cuni.cz) 1996,2004
-#            Tomasz K³oczko (kloczek@rudy.mif.pg.gda.pl) 1997
-# minor changes by Wojtek Pilorz (wpilorz@bdk.lublin.pl) 1997
-# minor changes by Michele Marziani (marziani@fe.infn.it) 1997
-# bug files by Marc Merlin (marcsoft@merlins.org) 1998
-# locale bugfix by Michal Svec (rebel@penguin.cz) 2000
-# Whitespace(s) & single quote(s) in filename workaround
-#   by Andrew V. Samoilov <sav@bcs.zp.ua> 2004
-# https://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=64007
+# Copyright (C) 1996-2004,2009
+# Free Software Foundation, Inc.
 #
-# (C) 1996-2004 The Free Software Foundation.
+# Written by
+#  Erik Troan <ewt@redhat.com> 1996
+#  Jakub Jelinek <jj@sunsite.mff.cuni.cz> 1996, 2004
+#  Tomasz KÅ‚oczko <kloczek@rudy.mif.pg.gda.pl> 1997
+#  Wojtek Pilorz <wpilorz@bdk.lublin.pl>
+#	1997: minor changes
+#  Michele Marziani <marziani@fe.infn.it>
+#	1997: minor changes
+#  Marc Merlin <marcsoft@merlins.org> 1998
+#	1998: bug files
+#  Michal Svec <rebel@penguin.cz> 2000
+#	2000: locale bugfix
+#  Andrew V. Samoilov <sav@bcs.zp.ua>
+#	2004: Whitespace(s) & single quote(s) in filename workaround
+#	      https://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=64007
+#  Slava Zanko <slavazanko@gmail.com>
+#	2009: Totally rewrited.
+#	      ALTLinux users have strange artefacts with single quote(s)
 #
+#  This file is part of the Midnight Commander.
+#
+#  The Midnight Commander is free software; you can redistribute it
+#  and/or modify it under the terms of the GNU General Public License as
+#  published by the Free Software Foundation; either version 2 of the
+#  License, or (at your option) any later version.
+#
+#  The Midnight Commander is distributed in the hope that it will be
+#  useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+#  of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+#  General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the Free Software
+#  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+#  MA 02110-1301, USA.
+
 
 # override any locale for dates
 unset LC_ALL
@@ -32,10 +59,135 @@ else
   RPM="rpm"
 fi
 RPM2CPIO="rpm2cpio"
+
+
 SED="sed"
 # Surround the whole filename with single quotes and handle specially
 # \', ' and \ at the end of the string.
-SEDCMD="s/\\(\\\\\\?\\)'/'\\1\\1\\\\''/g;s/\\\\\$/'\\\\\\\\'/;s/^/'/;s/\$/'/"
+SEDCMD="s/ /\\\\ /g;s/'/\\\\'/g;s/\"/\\\\\"/g"
+
+param=$1; shift
+rpm_filename=$1; shift
+
+FILEPREF="-r--r--r--   1 root     root    "
+
+mcrpmfs_getSupportedTags()
+{
+    rpm --querytags
+}
+
+mcrpmfs_getDesription()
+{
+    $RPM -qip "`echo ${rpm_filename}| $SED "${SEDCMD}"`"
+}
+
+mcrpmfs_getAllNeededTags()
+{
+    supportedTags=`mcrpmfs_getSupportedTags`
+    if test "`echo supportedTags | grep -c CONFLICTS`" -eq 1; then
+	tag_CONFLICTS="|CONFLICTS=%{CONFLICTS}"
+    else
+	tag_CONFLICTS=""
+    fi
+
+    $RPM -qp --qf \
+"|NAME=%{NAME}"\
+"|VERSION=%{VERSION}"\
+"|RELEASE=%{RELEASE}"\
+"|DISTRIBUTION=%{DISTRIBUTION}"\
+"|VENDOR=%{VENDOR}"\
+"|DESCRIPTION=%{DESCRIPTION}"\
+"|SUMMARY=%{SUMMARY}"\
+"|URL=%{URL}"\
+"|EPOCH=%{EPOCH}"\
+"|LICENSE=%{LICENSE}"\
+"|REQUIRENAME=%{REQUIRENAME}"\
+"|OBSOLETES=%{OBSOLETES}"\
+"|PROVIDES=%{PROVIDES}"\
+${tag_CONFLICTS}\
+"|PACKAGER=%{PACKAGER}" \
+    "`echo ${rpm_filename}| $SED "${SEDCMD}"`"
+}
+
+mcrpmfs_getRawOneTag()
+{
+    $RPM -qp --qf "$1" "`echo ${rpm_filename}| $SED "${SEDCMD}"`"
+}
+
+mcrpmfs_getOneTag()
+{
+    echo $AllTAGS | sed "s/.*|${1}=//" | cut -d '|' -f 1
+}
+
+AllTAGS=`mcrpmfs_getAllNeededTags "$1"`
+
+mcrpmfs_printOneMetaInfo()
+{
+    if test "$3" = "raw"; then
+	metaInfo=`mcrpmfs_getRawOneTag "%{$2}"`
+    else
+	metaInfo=`mcrpmfs_getOneTag "$2"`
+    fi
+
+    if test -n "${metaInfo}"  -a "${metaInfo}" != "(none)"; then
+	echo "${FILEPREF} 0 ${DATE} ${1}"
+	return 0
+    fi
+    return 1
+}
+
+mcrpmfs_list_fastRPM ()
+{
+    echo "$FILEPREF 0 $DATE INFO/DISTRIBUTION"
+    echo "$FILEPREF 0 $DATE INFO/VENDOR"
+    echo "$FILEPREF 0 $DATE INFO/DESCRIPTION"
+    echo "$FILEPREF 0 $DATE INFO/SUMMARY"
+    echo "dr-xr-xr-x   1 root     root     0 $DATE INFO/SCRIPTS"
+    echo "$FILEPREF 0 $DATE INFO/SCRIPTS/PREIN"
+    echo "$FILEPREF 0 $DATE INFO/SCRIPTS/POSTIN"
+    echo "$FILEPREF 0 $DATE INFO/SCRIPTS/PREUN"
+    echo "$FILEPREF 0 $DATE INFO/SCRIPTS/POSTUN"
+    echo "$FILEPREF 0 $DATE INFO/SCRIPTS/VERIFYSCRIPT"
+    echo "$FILEPREF 0 $DATE INFO/SCRIPTS/ALL"
+    echo "$FILEPREF 0 $DATE INFO/PACKAGER"
+    echo "$FILEPREF 0 $DATE INFO/URL"
+    echo "$FILEPREF 0 $DATE INFO/EPOCH"
+    echo "$FILEPREF 0 $DATE INFO/LICENSE"
+    echo "$FILEPREF 0 $DATE INFO/REQUIRENAME"
+    echo "$FILEPREF 0 $DATE INFO/OBSOLETES"
+    echo "$FILEPREF 0 $DATE INFO/PROVIDES"
+    echo "$FILEPREF 0 $DATE INFO/CONFLICTS"
+    echo "$FILEPREF 0 $DATE INFO/CHANGELOG"
+}
+
+mcrpmfs_list_fullRPM ()
+{
+    mcrpmfs_printOneMetaInfo "INFO/DISTRIBUTION" "DISTRIBUTION"
+    mcrpmfs_printOneMetaInfo "INFO/VENDOR" "VENDOR"
+    mcrpmfs_printOneMetaInfo "INFO/DESCRIPTION" "DESCRIPTION"
+    mcrpmfs_printOneMetaInfo "INFO/SUMMARY" "SUMMARY"
+
+    if test "`mcrpmfs_getRawOneTag \"%{RPMTAG_PREIN}%{RPMTAG_POSTIN}%{RPMTAG_PREUN}%{RPMTAG_POSTUN}%{VERIFYSCRIPT}\"`" != "(none)(none)(none)(none)(none)"; then
+	mcrpmfs_printOneMetaInfo "INFO/SCRIPTS/PREIN" "RPMTAG_PREIN" "raw"
+	mcrpmfs_printOneMetaInfo "INFO/SCRIPTS/POSTIN" "RPMTAG_POSTIN" "raw"
+	mcrpmfs_printOneMetaInfo "INFO/SCRIPTS/PREUN" "RPMTAG_PREUN" "raw"
+	mcrpmfs_printOneMetaInfo "INFO/SCRIPTS/POSTUN" "RPMTAG_POSTUN" "raw"
+	mcrpmfs_printOneMetaInfo "INFO/SCRIPTS/VERIFYSCRIPT" "VERIFYSCRIPT" "raw"
+	echo "$FILEPREF 0 $DATE INFO/SCRIPTS/ALL"
+    fi
+
+    mcrpmfs_printOneMetaInfo "INFO/PACKAGER" "PACKAGER"
+    mcrpmfs_printOneMetaInfo "INFO/URL" "URL"
+    mcrpmfs_printOneMetaInfo "INFO/EPOCH" "EPOCH"
+    mcrpmfs_printOneMetaInfo "INFO/LICENSE" "LICENSE"
+
+
+    mcrpmfs_printOneMetaInfo "INFO/REQUIRENAME" "REQUIRENAME"
+    mcrpmfs_printOneMetaInfo "INFO/OBSOLETES" "OBSOLETES"
+    mcrpmfs_printOneMetaInfo "INFO/PROVIDES" "PROVIDES"
+    mcrpmfs_printOneMetaInfo "INFO/CONFLICTS" "CONFLICTS"
+    mcrpmfs_printOneMetaInfo "INFO/CHANGELOG" "CHANGELOGTEXT" "raw"
+}
 
 mcrpmfs_list ()
 {
@@ -45,101 +197,39 @@ mcrpmfs_list ()
     if test -z "$MCFASTRPM"; then
       MCFASTRPM=$MCFASTRPM_DFLT
     fi
-    f="`echo "$1" | $SED "$SEDCMD"`"
-    FILEPREF="-r--r--r--   1 root     root    "
-    DESC=`$RPM -qip "$f" 2>/dev/null` || {
+
+    DESC=`mcrpmfs_getDesription 2>/dev/null` || {
 	echo "$FILEPREF 0 "`date +"%b %d %H:%M"`" ERROR"
 	exit 1
     }
-    DATE=`$RPM -qp --qf "%{BUILDTIME:date}\n" "$f" | cut -c 5-11,21-24`
+    DATE=`mcrpmfs_getRawOneTag "%{BUILDTIME:date}\n" | cut -c 5-11,21-24`
+
     HEADERSIZE=`echo "$DESC" | wc -c`
-    echo "-r--r--r--   1 root     root  $HEADERSIZE $DATE HEADER"
+    printf '%s %s %s HEADER\n' "${FILEPREF}"  "${HEADERSIZE}" "${DATE}"
     echo "-r-xr-xr-x   1 root     root    39 $DATE INSTALL"
-    case "$f" in
-		*.src.rpm)
-		echo "-r-xr-xr-x   1 root     root    39 $DATE REBUILD"
-		;;
-		*)
-		echo "-r-xr-xr-x   1 root     root    39 $DATE UPGRADE"
-		;;
-	esac
-    echo "dr-xr-xr-x   3 root     root	   0 $DATE INFO"
+    case "${rpm_filename}" in
+	*.src.rpm)
+	    echo "-r-xr-xr-x   1 root     root    39 $DATE REBUILD"
+	;;
+	*)
+	    echo "-r-xr-xr-x   1 root     root    39 $DATE UPGRADE"
+	;;
+    esac
+
+    echo "dr-xr-xr-x   3 root     root     0 $DATE INFO"
     echo "$FILEPREF 0 $DATE INFO/NAME-VERSION-RELEASE"
     echo "$FILEPREF 0 $DATE INFO/GROUP"
     echo "$FILEPREF 0 $DATE INFO/BUILDHOST"
     echo "$FILEPREF 0 $DATE INFO/SOURCERPM"
-    if test "$MCFASTRPM" = 0 ; then
-     test "`$RPM -qp --qf \"%{DISTRIBUTION}\" \"$f\"`" = "(none)" ||
- 	 echo "$FILEPREF 0 $DATE INFO/DISTRIBUTION"
-     test "`$RPM -qp --qf \"%{VENDOR}\" \"$f\"`" = "(none)" ||
-	 echo "$FILEPREF 0 $DATE INFO/VENDOR"
-     test "`$RPM -qp --qf \"%{DESCRIPTION}\" \"$f\"`" = "(none)" ||
-         echo "$FILEPREF 0 $DATE INFO/DESCRIPTION"
-     test "`$RPM -qp --qf \"%{SUMMARY}\" \"$f\"`" = "(none)" ||
-         echo "$FILEPREF 0 $DATE INFO/SUMMARY"
-     if test "`$RPM -qp --qf \"%{RPMTAG_PREIN}%{RPMTAG_POSTIN}%{RPMTAG_PREUN}%{RPMTAG_POSTUN}%{VERIFYSCRIPT}\" \"$f\"`" != "(none)(none)(none)(none)(none)"; then
-	echo "dr-xr-xr-x   1 root     root     0 $DATE INFO/SCRIPTS"
-	test "`$RPM -qp --qf \"%{RPMTAG_PREIN}\" \"$f\"`" = '(none)' ||
-	   echo "$FILEPREF 0 $DATE INFO/SCRIPTS/PREIN"
-	test "`$RPM -qp --qf \"%{RPMTAG_POSTIN}\" \"$f\"`" = '(none)' ||
-	   echo "$FILEPREF 0 $DATE INFO/SCRIPTS/POSTIN"
-	test "`$RPM -qp --qf \"%{RPMTAG_PREUN}\" \"$f\"`" = '(none)' ||
-	   echo "$FILEPREF 0 $DATE INFO/SCRIPTS/PREUN"
-	test "`$RPM -qp --qf \"%{RPMTAG_POSTUN}\" \"$f\"`" = '(none)' ||
-	   echo "$FILEPREF 0 $DATE INFO/SCRIPTS/POSTUN"
-	test "`$RPM -qp --qf \"%{VERIFYSCRIPT}\" \"$f\"`" = '(none)' ||
-	   echo "$FILEPREF 0 $DATE INFO/SCRIPTS/VERIFYSCRIPT"
-        echo "$FILEPREF 0 $DATE INFO/SCRIPTS/ALL"
-     fi
-    else
-     echo "$FILEPREF 0 $DATE INFO/DISTRIBUTION"
-     echo "$FILEPREF 0 $DATE INFO/VENDOR"
-     echo "$FILEPREF 0 $DATE INFO/DESCRIPTION"
-     echo "$FILEPREF 0 $DATE INFO/SUMMARY"
-     echo "dr-xr-xr-x   1 root     root     0 $DATE INFO/SCRIPTS"
-     echo "$FILEPREF 0 $DATE INFO/SCRIPTS/PREIN"
-     echo "$FILEPREF 0 $DATE INFO/SCRIPTS/POSTIN"
-     echo "$FILEPREF 0 $DATE INFO/SCRIPTS/PREUN"
-     echo "$FILEPREF 0 $DATE INFO/SCRIPTS/POSTUN"
-     echo "$FILEPREF 0 $DATE INFO/SCRIPTS/VERIFYSCRIPT"
-     echo "$FILEPREF 0 $DATE INFO/SCRIPTS/ALL"
-    fi
-    if test "$MCFASTRPM" = 0 ; then
-     test "`$RPM -qp --qf \"%{PACKAGER}\" \"$f\"`" = "(none)" ||
-	 echo "$FILEPREF 0 $DATE INFO/PACKAGER"
-     test "`$RPM -qp --qf \"%{URL}\" \"$f\"`" = "(none)" ||
-	 echo "$FILEPREF 0 $DATE INFO/URL"
-     test "`$RPM -qp --qf \"%{EPOCH}\" \"$f\"`" = "(none)" ||
-	 echo "$FILEPREF 0 $DATE INFO/EPOCH"
-     test "`$RPM -qp --qf \"%{LICENSE}\" \"$f\"`" = "(none)" ||
-	 echo "$FILEPREF 0 $DATE INFO/LICENSE"
-    else
-	 echo "$FILEPREF 0 $DATE INFO/PACKAGER"
-	 echo "$FILEPREF 0 $DATE INFO/URL"
-	 echo "$FILEPREF 0 $DATE INFO/EPOCH"
-	 echo "$FILEPREF 0 $DATE INFO/LICENSE"
-    fi
     echo "$FILEPREF 0 $DATE INFO/BUILDTIME"
     echo "$FILEPREF 0 $DATE INFO/RPMVERSION"
     echo "$FILEPREF 0 $DATE INFO/OS"
     echo "$FILEPREF 0 $DATE INFO/SIZE"
-    if test "$MCFASTRPM" != 0 ; then
-    $RPM -qp --qf "[%{REQUIRENAME}\n]" "$f" | grep "(none)" > /dev/null ||
-	echo "$FILEPREF 0 $DATE INFO/REQUIRENAME"
-    $RPM -qp --qf "[%{OBSOLETES}\n]" "$f" | grep "(none)" > /dev/null ||
-	echo "$FILEPREF 0 $DATE INFO/OBSOLETES"
-    $RPM -qp --qf "[%{PROVIDES}\n]" "$f" | grep "(none)" > /dev/null ||
-	echo "$FILEPREF 0 $DATE INFO/PROVIDES"
-    $RPM -qp --qf "[%{CONFLICTS}\n]" "$f" | grep "(none)" > /dev/null ||
-	echo "$FILEPREF 0 $DATE INFO/CONFLICTS"
-    test "`$RPM -qp --qf \"%{CHANGELOGTEXT}\" \"$f\"`" = "(none)" ||
-       echo "$FILEPREF 0 $DATE INFO/CHANGELOG"
-    else 
-	echo "$FILEPREF 0 $DATE INFO/REQUIRENAME"
-	echo "$FILEPREF 0 $DATE INFO/OBSOLETES"
-	echo "$FILEPREF 0 $DATE INFO/PROVIDES"
-	echo "$FILEPREF 0 $DATE INFO/CONFLICTS"
-        echo "$FILEPREF 0 $DATE INFO/CHANGELOG"
+
+    if test "$MCFASTRPM" = 0 ; then
+	mcrpmfs_list_fullRPM
+    else
+	mcrpmfs_list_fastRPM
     fi
 
     echo "$FILEPREF 0 $DATE CONTENTS.cpio"
@@ -147,42 +237,56 @@ mcrpmfs_list ()
 
 mcrpmfs_copyout ()
 {
-    f="`echo "$1" | $SED "$SEDCMD"`"
-    case "$2" in
-	HEADER) $RPM -qip "$f" > "$3"; exit 0;;
-	INSTALL) echo "# Run this to install this RPM package" > "$3"; exit 0;;
-	UPGRADE) echo "# Run this to upgrade this RPM package" > "$3"; exit 0;;
-	REBUILD) echo "# Run this to rebuild this RPM package" > "$3"; exit 0;;
-	ERROR) $RPM -qip "$f" > /dev/null 2> "$3"; exit 0;;
-	INFO/NAME-VERSION-RELEASE)	$RPM -qp --qf "%{NAME}-%{VERSION}-%{RELEASE}\n" "$f" > "$3"; exit 0;;
-	INFO/RELEASE)		$RPM -qp --qf "%{RELEASE}\n" "$f" > "$3"; exit 0;;
-	INFO/GROUP)		$RPM -qp --qf "%{GROUP}\n" "$f" > "$3"; exit 0;;
-	INFO/DISTRIBUTION) 	$RPM -qp --qf "%{DISTRIBUTION}\n" "$f" > "$3"; exit 0;;
-	INFO/VENDOR)		$RPM -qp --qf "%{VENDOR}\n" "$f" > "$3"; exit 0;;
-	INFO/BUILDHOST)		$RPM -qp --qf "%{BUILDHOST}\n" "$f" > "$3"; exit 0;;
-	INFO/SOURCERPM)		$RPM -qp --qf "%{SOURCERPM}\n" "$f" > "$3"; exit 0;;
-	INFO/DESCRIPTION)	$RPM -qp --qf "%{DESCRIPTION}\n" "$f" > "$3"; exit 0;;
-	INFO/PACKAGER)		$RPM -qp --qf "%{PACKAGER}\n" "$f" > "$3"; exit 0;;
-	INFO/URL)		$RPM -qp --qf "%{URL}\n" "$f" >"$3"; exit 0;;
-	INFO/BUILDTIME)		$RPM -qp --qf "%{BUILDTIME:date}\n" "$f" >"$3"; exit 0;;
-	INFO/EPOCH)		$RPM -qp --qf "%{EPOCH}\n" "$f" >"$3"; exit 0;;
-	INFO/LICENSE)		$RPM -qp --qf "%{LICENSE}\n" "$f" >"$3"; exit 0;;
-	INFO/RPMVERSION)	$RPM -qp --qf "%{RPMVERSION}\n" "$f" >"$3"; exit 0;;
-	INFO/REQUIRENAME)	$RPM -qp --qf "[%{REQUIRENAME} %{REQUIREFLAGS:depflags} %{REQUIREVERSION}\n]" "$f" >"$3"; exit 0;;
-	INFO/PROVIDES)		$RPM -qp --qf "[%{PROVIDES}\n]" "$f" >"$3"; exit 0;;
-	INFO/SCRIPTS/PREIN)	$RPM -qp --qf "%{RPMTAG_PREIN}\n" "$f" >"$3"; exit 0;;
-	INFO/SCRIPTS/POSTIN)	$RPM -qp --qf "%{RPMTAG_POSTIN}\n" "$f" >"$3"; exit 0;;
-	INFO/SCRIPTS/PREUN)	$RPM -qp --qf "%{RPMTAG_PREUN}\n" "$f" >"$3"; exit 0;;
-	INFO/SCRIPTS/POSTUN)	$RPM -qp --qf "%{RPMTAG_POSTUN}\n" "$f" >"$3"; exit 0;;
-	INFO/SCRIPTS/VERIFYSCRIPT)	$RPM -qp --qf "%{VERIFYSCRIPT}\n" "$f" >"$3"; exit 0;;
-	INFO/SCRIPTS/ALL)		$RPM -qp --scripts "$f" > "$3"; exit 0;;
-	INFO/SUMMARY)		$RPM -qp --qf "%{SUMMARY}\n" "$f" > "$3"; exit 0;;
-	INFO/OS)		$RPM -qp --qf "%{OS}\n" "$f" > "$3"; exit 0;;
-	INFO/CHANGELOG)		$RPM -qp --qf "[* %{CHANGELOGTIME:date} %{CHANGELOGNAME}\n%{CHANGELOGTEXT}\n\n]\n" "$f" > "$3"; exit 0;;
-	INFO/SIZE)		$RPM -qp --qf "%{SIZE} bytes\n" "$f" > "$3"; exit 0;;
-	INFO/OBSOLETES)		$RPM -qp --qf "[%{OBSOLETENAME} %|OBSOLETEFLAGS?{%{OBSOLETEFLAGS:depflags} %{OBSOLETEVERSION}}:{}|\n]" "$f" > "$3"; exit 0;;
-	INFO/CONFLICTS)		$RPM -qp --qf "[%{CONFLICTNAME} %{CONFLICTFLAGS:depflags} %{CONFLICTVERSION}\n]" "$f" >"$3"; exit 0;;
-	CONTENTS.cpio)		$RPM2CPIO "$1" > "$3"; exit 0;;
+    case "$1" in
+	HEADER) mcrpmfs_getDesription > "$2"; exit 0;;
+	INSTALL)
+	    echo "# Run this script to install this RPM package" > "$2"
+	    echo $RPM -ivh "`echo ${rpm_filename}| $SED "${SEDCMD}"`" >> "$2"
+	    exit 0
+	;;
+	UPGRADE)
+	    echo "# Run this to upgrade this RPM package" > "$2"
+	    echo $RPM -Uvh "`echo ${rpm_filename}| $SED "${SEDCMD}"`" >> "$2"
+	    exit 0
+	;;
+	REBUILD)
+	    echo "# Run this to rebuild this RPM package" > "$2"
+	    echo $RPMBUILD --rebuild "`echo ${rpm_filename}| $SED "${SEDCMD}"`" >> "$2"
+	    exit 0
+	;;
+	ERROR) mcrpmfs_getDesription > /dev/null 2> "$2"; exit 0;;
+	INFO/NAME-VERSION-RELEASE)
+	    echo `mcrpmfs_getOneTag "NAME"`-`mcrpmfs_getOneTag "VERSION"`-`mcrpmfs_getOneTag "RELEASE"` > "$2"
+	    exit 0
+	;;
+	INFO/RELEASE)		mcrpmfs_getOneTag "RELEASE" > "$2"; exit 0;;
+	INFO/GROUP)		mcrpmfs_getRawOneTag "%{GROUP}\n" > "$2"; exit 0;;
+	INFO/DISTRIBUTION) 	mcrpmfs_getOneTag "DISTRIBUTION" > "$2"; exit 0;;
+	INFO/VENDOR)		mcrpmfs_getOneTag "VENDOR" > "$2"; exit 0;;
+	INFO/BUILDHOST)		mcrpmfs_getRawOneTag "%{BUILDHOST}\n" > "$2"; exit 0;;
+	INFO/SOURCERPM)		mcrpmfs_getRawOneTag "%{SOURCERPM}\n" > "$2"; exit 0;;
+	INFO/DESCRIPTION)	mcrpmfs_getRawOneTag "%{DESCRIPTION}\n" > "$2"; exit 0;;
+	INFO/PACKAGER)		mcrpmfs_getOneTag "PACKAGER" > "$2"; exit 0;;
+	INFO/URL)		mcrpmfs_getOneTag "URL" >"$2"; exit 0;;
+	INFO/BUILDTIME)		mcrpmfs_getRawOneTag "%{BUILDTIME:date}\n" >"$2"; exit 0;;
+	INFO/EPOCH)		mcrpmfs_getOneTag "EPOCH" >"$2"; exit 0;;
+	INFO/LICENSE)		mcrpmfs_getOneTag "LICENSE" >"$2"; exit 0;;
+	INFO/RPMVERSION)	mcrpmfs_getRawOneTag "%{RPMVERSION}\n" >"$2"; exit 0;;
+	INFO/REQUIRENAME)	mcrpmfs_getRawOneTag "[%{REQUIRENAME} %{REQUIREFLAGS:depflags} %{REQUIREVERSION}\n]" >"$2"; exit 0;;
+	INFO/PROVIDES)		mcrpmfs_getRawOneTag "[%{PROVIDES}\n]" >"$2"; exit 0;;
+	INFO/SCRIPTS/PREIN)	mcrpmfs_getRawOneTag "%{RPMTAG_PREIN}\n" >"$2"; exit 0;;
+	INFO/SCRIPTS/POSTIN)	mcrpmfs_getRawOneTag "%{RPMTAG_POSTIN}\n" >"$2"; exit 0;;
+	INFO/SCRIPTS/PREUN)	mcrpmfs_getRawOneTag "%{RPMTAG_PREUN}\n" >"$2"; exit 0;;
+	INFO/SCRIPTS/POSTUN)	mcrpmfs_getRawOneTag "%{RPMTAG_POSTUN}\n" >"$2"; exit 0;;
+	INFO/SCRIPTS/VERIFYSCRIPT)	mcrpmfs_getRawOneTag "%{VERIFYSCRIPT}\n" > "$2"; exit 0;;
+	INFO/SCRIPTS/ALL)		$RPM -qp --scripts "`echo ${rpm_filename}| $SED "${SEDCMD}"`" > "$2"; exit 0;;
+	INFO/SUMMARY)		mcrpmfs_getRawOneTag "%{SUMMARY}\n" > "$2"; exit 0;;
+	INFO/OS)		mcrpmfs_getRawOneTag "%{OS}\n" > "$2"; exit 0;;
+	INFO/CHANGELOG)		mcrpmfs_getRawOneTag "[* %{CHANGELOGTIME:date} %{CHANGELOGNAME}\n%{CHANGELOGTEXT}\n\n]\n" > "$2"; exit 0;;
+	INFO/SIZE)		mcrpmfs_getRawOneTag "%{SIZE} bytes\n" > "$2"; exit 0;;
+	INFO/OBSOLETES)		mcrpmfs_getRawOneTag "[%{OBSOLETENAME} %|OBSOLETEFLAGS?{%{OBSOLETEFLAGS:depflags} %{OBSOLETEVERSION}}:{}|\n]" > "$2"; exit 0;;
+	INFO/CONFLICTS)		mcrpmfs_getRawOneTag "[%{CONFLICTNAME} %{CONFLICTFLAGS:depflags} %{CONFLICTVERSION}\n]" >"$2"; exit 0;;
+	CONTENTS.cpio)		$RPM2CPIO "`echo ${rpm_filename}| $SED "${SEDCMD}"`" > "$2"; exit 0;;
 	*)
 	    ;;
     esac
@@ -190,18 +294,17 @@ mcrpmfs_copyout ()
 
 mcrpmfs_run ()
 {
-    f="`echo "$1" | $SED "$SEDCMD"`"
-    case "$2" in
-	INSTALL) echo "Installing \"\"$f\"\""; $RPM -ivh "$f"; exit 0;;
-	UPGRADE) echo "Upgrading \"\"$f\"\""; $RPM -Uvh "$f"; exit 0;;
-	REBUILD) echo "Rebuilding \"$1\""; $RPMBUILD --rebuild "$1"; exit 0;;
+    case "$1" in
+	INSTALL) echo "Installing \"\"$f\"\""; $RPM -ivh "`echo ${rpm_filename}| $SED "${SEDCMD}"`"; exit 0;;
+	UPGRADE) echo "Upgrading \"\"$f\"\""; $RPM -Uvh "`echo ${rpm_filename}| $SED "${SEDCMD}"`"; exit 0;;
+	REBUILD) echo "Rebuilding \"${rpm_filename}\""; $RPMBUILD --rebuild "`echo ${rpm_filename}| $SED "${SEDCMD}"`"; exit 0;;
     esac
 }
 
 umask 077
-case "$1" in
-  list) mcrpmfs_list "$2"; exit 0;;
-  copyout) mcrpmfs_copyout "$2" "$3" "$4"; exit 0;;
-  run) mcrpmfs_run "$2" "$3"; exit 1;;
+case "${param}" in
+  list) mcrpmfs_list; exit 0;;
+  copyout) mcrpmfs_copyout "$1" "$2"; exit 0;;
+  run) mcrpmfs_run "$1"; exit 1;;
 esac
 exit 1
