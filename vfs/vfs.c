@@ -1124,7 +1124,8 @@ static char *
 mc_def_getlocalcopy (const char *filename)
 {
     char *tmp;
-    int fdin, fdout, i;
+    int fdin, fdout;
+    ssize_t i;
     char buffer[8192];
     struct stat mystat;
 
