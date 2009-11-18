@@ -35,6 +35,8 @@ extern int verbose;
 
 extern int mouse_close_dialog;
 extern int reverse_files_only;
+extern int select_flags;
+
 
 extern int setup_copymove_persistent_attr;
 void setup_save_config_show_error(const char *filename, GError **error);

@@ -110,7 +110,7 @@ typedef enum {
     SELECT_SHELL_PATTERNS = 1 << 2
 } select_flags_t;
 
-static select_flags_t select_flags = SELECT_MATCH_CASE | SELECT_SHELL_PATTERNS;
+int select_flags = SELECT_MATCH_CASE | SELECT_SHELL_PATTERNS;
 
 int
 view_file_at_line (const char *filename, int plain_view, int internal,

@@ -230,6 +230,7 @@ static const struct {
     { "auto_fill_mkdir_name", &auto_fill_mkdir_name },
     { "reverse_files_only", &reverse_files_only },
     { "copymove_persistent_attr", &setup_copymove_persistent_attr },
+    { "select_flags", &select_flags },
     { 0, 0 }
 };
 
