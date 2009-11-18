@@ -45,7 +45,7 @@
 
 #include "keybind.h"
 
-static const name_keymap_t command_names[] = {
+static name_keymap_t command_names[] = {
 #ifdef USE_INTERNAL_EDIT
     { "EditNoCommand",                     CK_Ignore_Key },
     { "EditIgnoreKey",                     CK_Ignore_Key },
@@ -400,6 +400,9 @@ static const name_keymap_t command_names[] = {
 
     { NULL,                              0 }
 };
+
+static const size_t num_command_names = sizeof (command_names) /
+					sizeof (command_names[0]) - 1;
 
 /*** global variables ****************************************************************************/
 
@@ -769,17 +772,39 @@ const global_keymap_t default_input_keymap[] = {
     { 0, 0, "" }
 };
 
+static int
+name_keymap_comparator (const void *p1, const void *p2)
+{
+    const name_keymap_t *m1 = (const name_keymap_t *) p1;
+    const name_keymap_t *m2 = (const name_keymap_t *) p2;
+
+    return str_casecmp (m1->name, m2->name);
+}
+
+static void
+sort_command_names (void)
+{
+    static gboolean has_been_sorted = FALSE;
+
+    if (!has_been_sorted) {
+	qsort (command_names, num_command_names,
+		sizeof (command_names[0]), &name_keymap_comparator);
+	has_been_sorted = TRUE;
+    }
+}
 
 int
 lookup_action (const char *keyname)
 {
-    int i;
+    const name_keymap_t key = { keyname, 0 };
+    name_keymap_t *res;
 
-    for (i = 0; command_names [i].name; i++)
-        if (!str_casecmp (command_names [i].name, keyname))
-            return command_names [i].val;
+    sort_command_names ();
 
-    return 0;
+    res = bsearch (&key, command_names, num_command_names,
+		    sizeof (command_names[0]), name_keymap_comparator);
+
+    return (res != NULL) ? res->val : 0;
 }
 
 static void
