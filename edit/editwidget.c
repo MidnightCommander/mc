@@ -120,12 +120,13 @@ edit_event (Gpm_Event *event, void *data)
     if (option_cursor_beyond_eol) {
         long line_len = edit_move_forward3 (edit, edit_bol (edit, edit->curs1), 0,
                                             edit_eol(edit, edit->curs1));
+
         if ( event->x > line_len ) {
-            edit->over_col = event->x - line_len  - option_line_state_width - 1;
+            edit->over_col = event->x - line_len - edit->start_col - option_line_state_width - 1;
             edit->prev_col = line_len;
         } else {
             edit->over_col = 0;
-            edit->prev_col = event->x - option_line_state_width - 1;
+            edit->prev_col = event->x - option_line_state_width - edit->start_col - 1;
         }
     } else {
         edit->prev_col = event->x - edit->start_col - option_line_state_width - 1;
