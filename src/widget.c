@@ -1490,7 +1490,7 @@ backward_word (WInput *in)
     for (
         p = in->buffer + str_offset_to_pos (in->buffer, in->point);
         (p != in->buffer) && (p[0] == '\0');
-        p-- , in->point--
+        str_cprev_char (&p), in->point--
     );
 
     while (p != in->buffer) {
