@@ -460,6 +460,7 @@ static key_define_t qansi_key_defines[] = {
     {KEY_M_ALT | 'e', ESC_STR "Ne", MCKEY_NOACTION},    /* Alt-e     */
     {KEY_M_ALT | 'f', ESC_STR "Nf", MCKEY_NOACTION},    /* Alt-f     */
     {KEY_M_ALT | 'g', ESC_STR "Ng", MCKEY_NOACTION},    /* Alt-g     */
+    {KEY_M_ALT | 'h', ESC_STR "Nh", MCKEY_NOACTION},    /* Alt-h     */
     {KEY_M_ALT | 'i', ESC_STR "Ni", MCKEY_NOACTION},    /* Alt-i     */
     {KEY_M_ALT | 'j', ESC_STR "Nj", MCKEY_NOACTION},    /* Alt-j     */
     {KEY_M_ALT | 'k', ESC_STR "Nk", MCKEY_NOACTION},    /* Alt-k     */
@@ -468,7 +469,8 @@ static key_define_t qansi_key_defines[] = {
     {KEY_M_ALT | 'n', ESC_STR "Nn", MCKEY_NOACTION},    /* Alt-n     */
     {KEY_M_ALT | 'o', ESC_STR "No", MCKEY_NOACTION},    /* Alt-o     */
     {KEY_M_ALT | 'p', ESC_STR "Np", MCKEY_NOACTION},    /* Alt-p     */
-    {KEY_M_ALT | 'q', ESC_STR "Nq", MCKEY_NOACTION},    /* Alt-r     */
+    {KEY_M_ALT | 'q', ESC_STR "Nq", MCKEY_NOACTION},    /* Alt-q     */
+    {KEY_M_ALT | 'r', ESC_STR "Nr", MCKEY_NOACTION},    /* Alt-r     */
     {KEY_M_ALT | 's', ESC_STR "Ns", MCKEY_NOACTION},    /* Alt-s     */
     {KEY_M_ALT | 't', ESC_STR "Nt", MCKEY_NOACTION},    /* Alt-t     */
     {KEY_M_ALT | 'u', ESC_STR "Nu", MCKEY_NOACTION},    /* Alt-u     */
