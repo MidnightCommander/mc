@@ -75,6 +75,7 @@ static name_keymap_t command_names[] = {
     { "EditDeleteWordRight",               CK_Delete_Word_Right },
     { "EditParagraphUp",                   CK_Paragraph_Up },
     { "EditParagraphDown",                 CK_Paragraph_Down },
+    { "EditMenu",                          CK_Menu },
     { "EditSave",                          CK_Save },
     { "EditLoad",                          CK_Load },
     { "EditNew",                           CK_New },
@@ -91,6 +92,7 @@ static name_keymap_t command_names[] = {
     { "EditReplace",                       CK_Replace },
     { "EditReplaceAgain",                  CK_Replace_Again },
     { "EditCompleteWord",                  CK_Complete_Word },
+#if 0
     { "EditDebugStart",                    CK_Debug_Start },
     { "EditDebugStop",                     CK_Debug_Stop },
     { "EditDebugToggleBreak",              CK_Debug_Toggle_Break },
@@ -101,6 +103,7 @@ static name_keymap_t command_names[] = {
     { "EditDebugContinue",                 CK_Debug_Continue },
     { "EditDebugEnterCommand",             CK_Debug_Enter_Command },
     { "EditDebugUntilCurser",              CK_Debug_Until_Curser },
+#endif
     { "EditInsertFile",                    CK_Insert_File },
     { "EditQuit",                          CK_Quit },
     { "EditToggleInsert",                  CK_Toggle_Insert },
@@ -208,17 +211,25 @@ static name_keymap_t command_names[] = {
     { "EditSaveDesktop",                 CK_Save_Desktop },
     { "EditNewWindow",                   CK_New_Window },
     { "EditCycle",                       CK_Cycle },
-    { "EditMenu",                        CK_Menu },
     { "EditSaveAndQuit",                 CK_Save_And_Quit },
     { "EditRunAnother",                  CK_Run_Another },
     { "EditCheckSaveAndQuit",            CK_Check_Save_And_Quit },
     { "EditMaximize",                    CK_Maximize },
 #endif
 
-#endif
+#endif		/* USE_INTERNAL_EDIT */
 
     /* viewer */
+    { "ViewHelp",                        CK_ViewHelp },
+    { "ViewToggleWrapMode",              CK_ViewToggleWrapMode },
+    { "ViewToggleHexEditMode",           CK_ViewToggleHexEditMode },
+    { "ViewQuit",                        CK_ViewQuit },
+    { "ViewToggleHexMode",               CK_ViewToggleHexMode },
+    { "ViewGoto",                        CK_ViewGoto },
+    { "ViewHexEditSave",                 CK_ViewHexEditSave },
     { "ViewSearch",                      CK_ViewSearch },
+    { "ViewToggleMagicMode",             CK_ViewToggleMagicMode },
+    { "ViewToggleNroffMode",             CK_ViewToggleNroffMode },
     { "ViewContinueSearch",              CK_ViewContinueSearch },
     { "ViewGotoBookmark",                CK_ViewGotoBookmark },
     { "ViewNewBookmark",                 CK_ViewNewBookmark },
@@ -235,10 +246,44 @@ static name_keymap_t command_names[] = {
     { "ViewNextFile",                    CK_ViewNextFile },
     { "ViewPrevFile",                    CK_ViewPrevFile },
     { "ViewToggleRuler",                 CK_ViewToggleRuler },
-    { "HexViewToggleNavigationMode",     CK_HexViewToggleNavigationMode },
-    { "ViewQuit",                        CK_ViewQuit },
+    { "ViewToggleHexNavMode",            CK_ViewToggleHexNavMode },
+
+    /* help */
+    { "HelpHelp",                        CK_HelpHelp },
+    { "HelpIndex",                       CK_HelpIndex },
+    { "HelpBack",                        CK_HelpBack },
+    { "HelpQuit",                        CK_HelpQuit },
+    { "HelpMoveUp",                      CK_HelpMoveUp },
+    { "HelpMoveDown",                    CK_HelpMoveDown },
+    { "HelpSelectLink",                  CK_HelpSelectLink },
+    { "HelpNextLink",                    CK_HelpNextLink },
+    { "HelpPrevLink",                    CK_HelpPrevLink },
+    { "HelpNextNode",                    CK_HelpNextNode },
+    { "HelpPrevNode",                    CK_HelpPrevNode },
+
+    /* tree */
+    { "TreeHelp",                        CK_TreeHelp },
+    { "TreeForget",                      CK_TreeForget },
+    { "TreeToggleNav",                   CK_TreeToggleNav },
+    { "TreeCopy",                        CK_TreeCopy },
+    { "TreeMove",                        CK_TreeMove },
+    { "TreeMake",                        CK_TreeMake },
+    { "TreeMoveUp",                      CK_TreeMoveUp },
+    { "TreeMoveDown",                    CK_TreeMoveDown },
+    { "TreeMoveLeft",                    CK_TreeMoveLeft },
+    { "TreeMoveRight",                   CK_TreeMoveRight },
+    { "TreeMoveHome",                    CK_TreeMoveHome },
+    { "TreeMoveEnd",                     CK_TreeMoveEnd },
+    { "TreeMovePgUp",                    CK_TreeMovePgUp },
+    { "TreeMovePgDn",                    CK_TreeMovePgDn },
+    { "TreeOpen",                        CK_TreeOpen },
+    { "TreeRescan",                      CK_TreeRescan },
+    { "TreeStartSearch",                 CK_TreeStartSearch },
+    { "TreeRemove",                      CK_TreeRemove },
 
     /* main commands */
+    { "CmdHelp",                         CK_HelpCmd },
+    { "CmdMenu",                         CK_MenuCmd },
     { "CmdChmod",                        CK_ChmodCmd },
     { "CmdMenuLastSelected",             CK_MenuLastSelectedCmd },
     { "CmdSingleDirsize",                CK_SingleDirsizeCmd },
@@ -283,8 +328,6 @@ static name_keymap_t command_names[] = {
 #ifdef LISTMODE_EDITOR
     { "CmdListmodeCmd",                  CK_ListmodeCmd }.
 #endif
-    { "CmdMenuInfo",                     CK_MenuInfoCmd },
-    { "CmdMenuQuickView",                CK_MenuQuickViewCmd },
     { "CmdMkdir",                        CK_MkdirCmd },
 #if defined (USE_NETCODE) && defined (ENABLE_VFS_MCFS)
     { "CmdNetlink",                      CK_NetlinkCmd },
@@ -398,7 +441,7 @@ static name_keymap_t command_names[] = {
     { "ShowCommandLine",                 CK_ShowCommandLine },
     { "SelectCodepage",                  CK_SelectCodepage },
 
-    { NULL,                              0 }
+    { NULL,                              CK_Ignore_Key }
 };
 
 static const size_t num_command_names = sizeof (command_names) /
@@ -408,181 +451,160 @@ static const size_t num_command_names = sizeof (command_names) /
 
 /* viewer/actions_cmd.c */
 const global_keymap_t default_viewer_keymap[] = {
-    { '?',         CK_ViewSearch,         "?" },
-    { '/',         CK_ViewSearch,         "/" },
-    { XCTRL ('r'), CK_ViewContinueSearch, "C-r" },
-    { XCTRL ('s'), CK_ViewContinueSearch, "C-s" },
-    { KEY_F (17),  CK_ViewContinueSearch, "S-F7" },
-    { 'n',         CK_ViewContinueSearch, "n" },
-    { ALT ('r'),   CK_ViewToggleRuler,    "M-r" },
+    { KEY_F (1),   CK_ViewHelp,              "F1" },
+    { KEY_F (2),   CK_ViewToggleWrapMode,    "F2" },
+    { KEY_F (3),   CK_ViewQuit,              "F3" },
+    { KEY_F (4),   CK_ViewToggleHexMode,     "F4" },
+    { KEY_F (5),   CK_ViewGoto,              "F5" },
+    { KEY_F (7),   CK_ViewSearch,            "F7" },
+    { KEY_F (8),   CK_ViewToggleMagicMode,   "F8" },
+    { KEY_F (9),   CK_ViewToggleNroffMode,   "F9" },
+    { KEY_F (10),  CK_ViewQuit,              "F10" },
 
-    { XCTRL ('a'), CK_ViewMoveToBol,      "C-a" },
-    { XCTRL ('e'), CK_ViewMoveToEol,      "C-e" },
+    { '?',         CK_ViewSearch,            "?" },
+    { '/',         CK_ViewSearch,            "/" },
+    { XCTRL ('r'), CK_ViewContinueSearch,    "C-r" },
+    { XCTRL ('s'), CK_ViewContinueSearch,    "C-s" },
+    { KEY_F (17),  CK_ViewContinueSearch,    "S-F7" },
+    { 'n',         CK_ViewContinueSearch,    "n" },
+    { ALT ('r'),   CK_ViewToggleRuler,       "M-r" },
 
-    { 'h',         CK_ViewMoveLeft,       "h" },
-    { KEY_LEFT,    CK_ViewMoveLeft,       "Left" },
+    { XCTRL ('a'), CK_ViewMoveToBol,         "C-a" },
+    { XCTRL ('e'), CK_ViewMoveToEol,         "C-e" },
 
-    { 'l',         CK_ViewMoveRight,      "l" },
-    { KEY_RIGHT,   CK_ViewMoveRight,      "Right" },
+    { 'h',         CK_ViewMoveLeft,          "h" },
+    { KEY_LEFT,    CK_ViewMoveLeft,          "Left" },
 
-    { 'k',         CK_ViewMoveUp,         "k" },
-    { 'y',         CK_ViewMoveUp,         "y" },
-    { KEY_IC,      CK_ViewMoveUp,         "Insert" },
-    { KEY_UP,      CK_ViewMoveUp,         "Up" },
+    { 'l',         CK_ViewMoveRight,         "l" },
+    { KEY_RIGHT,   CK_ViewMoveRight,         "Right" },
 
-    { 'j',         CK_ViewMoveDown,       "j" },
-    { 'e',         CK_ViewMoveDown,       "e" },
-    { KEY_DOWN,    CK_ViewMoveDown,       "Down" },
-    { KEY_DC,      CK_ViewMoveDown,       "Delete" },
+    { 'k',         CK_ViewMoveUp,            "k" },
+    { 'y',         CK_ViewMoveUp,            "y" },
+    { KEY_IC,      CK_ViewMoveUp,            "Insert" },
+    { KEY_UP,      CK_ViewMoveUp,            "Up" },
 
-    { ' ',         CK_ViewMovePgDn,       "Space" },
-    { 'f',         CK_ViewMovePgDn,       "f" },
-    { KEY_NPAGE,   CK_ViewMovePgDn,       "PgDn" },
+    { 'j',         CK_ViewMoveDown,          "j" },
+    { 'e',         CK_ViewMoveDown,          "e" },
+    { KEY_DOWN,    CK_ViewMoveDown,          "Down" },
+    { KEY_DC,      CK_ViewMoveDown,          "Delete" },
 
-    { 'b',         CK_ViewMovePgUp,       "b" },
-    { KEY_PPAGE,   CK_ViewMovePgUp,       "PgUp" },
+    { ' ',         CK_ViewMovePgDn,          "Space" },
+    { 'f',         CK_ViewMovePgDn,          "f" },
+    { KEY_NPAGE,   CK_ViewMovePgDn,          "PgDn" },
 
-    { 'd',         CK_ViewMoveHalfPgDn,   "d" },
-    { 'u',         CK_ViewMoveHalfPgUp,   "u" },
+    { 'b',         CK_ViewMovePgUp,          "b" },
+    { KEY_PPAGE,   CK_ViewMovePgUp,          "PgUp" },
 
-    { 'm',         CK_ViewGotoBookmark,   "m" },
-    { 'r',         CK_ViewNewBookmark,    "r" },
+    { 'd',         CK_ViewMoveHalfPgDn,      "d" },
+    { 'u',         CK_ViewMoveHalfPgUp,      "u" },
 
-    { XCTRL ('f'), CK_ViewNextFile,       "C-f" },
-    { XCTRL ('b'), CK_ViewPrevFile,       "C-b" },
+    { 'm',         CK_ViewGotoBookmark,      "m" },
+    { 'r',         CK_ViewNewBookmark,       "r" },
 
-    { 'q',         CK_ViewQuit,           "q" },
-    { XCTRL ('g'), CK_ViewQuit,           "C-q" },
-    { ESC_CHAR,    CK_ViewQuit,           "Esc" },
+    { XCTRL ('f'), CK_ViewNextFile,          "C-f" },
+    { XCTRL ('b'), CK_ViewPrevFile,          "C-b" },
 
-    { ALT ('e'),   CK_SelectCodepage,     "M-e" },
-    { XCTRL ('o'), CK_ShowCommandLine,    "C-o" },
+    { 'q',         CK_ViewQuit,              "q" },
+    { XCTRL ('g'), CK_ViewQuit,              "C-g" },
+    { ESC_CHAR,    CK_ViewQuit,              "Esc" },
 
-    { 0, 0, "" }
+    { ALT ('e'),   CK_SelectCodepage,        "M-e" },
+    { XCTRL ('o'), CK_ShowCommandLine,       "C-o" },
+
+    { 0, CK_Ignore_Key, "" }
 };
 
 const global_keymap_t default_viewer_hex_keymap[] = {
-    { '\t',        CK_HexViewToggleNavigationMode, "Tab" },
-    { XCTRL ('a'), CK_ViewMoveToBol,               "C-a" },
-    { XCTRL ('e'), CK_ViewMoveToEol,               "C-e" },
+    { KEY_F (1),   CK_ViewHelp,              "F1" },
+    { KEY_F (2),   CK_ViewToggleHexEditMode, "F2" },
+    { KEY_F (3),   CK_ViewQuit,              "F3" },
+    { KEY_F (4),   CK_ViewToggleHexMode,     "F4" },
+    { KEY_F (5),   CK_ViewGoto,              "F5" },
+    { KEY_F (6),   CK_ViewHexEditSave,       "F6" },
+    { KEY_F (7),   CK_ViewSearch,            "F7" },
+    { KEY_F (8),   CK_ViewToggleMagicMode,   "F8" },
+    { KEY_F (9),   CK_ViewToggleNroffMode,   "F9" },
+    { KEY_F (10),  CK_ViewQuit,              "F10" },
 
-    { 'b',         CK_ViewMoveLeft,                "b" },
-    { KEY_LEFT,    CK_ViewMoveLeft,                "Left" },
+    { '?',         CK_ViewSearch,            "?" },
+    { '/',         CK_ViewSearch,            "/" },
+    { XCTRL ('r'), CK_ViewContinueSearch,    "C-r" },
+    { XCTRL ('s'), CK_ViewContinueSearch,    "C-s" },
+    { KEY_F (17),  CK_ViewContinueSearch,    "S-F7" },
+    { 'n',         CK_ViewContinueSearch,    "n" },
 
-    { 'f',         CK_ViewMoveRight,               "f" },
-    { KEY_RIGHT,   CK_ViewMoveRight,               "Right" },
+    { '\t',        CK_ViewToggleHexNavMode,  "Tab" },
+    { XCTRL ('a'), CK_ViewMoveToBol,         "C-a" },
+    { XCTRL ('e'), CK_ViewMoveToEol,         "C-e" },
 
-    { 'k',         CK_ViewMoveUp,                  "k" },
-    { 'y',         CK_ViewMoveUp,                  "y" },
-    { KEY_UP,      CK_ViewMoveUp,                  "Up" },
+    { 'b',         CK_ViewMoveLeft,          "b" },
+    { KEY_LEFT,    CK_ViewMoveLeft,          "Left" },
 
-    { 'j',         CK_ViewMoveDown,                "j" },
-    { KEY_DOWN,    CK_ViewMoveDown,                "Down" },
-    { KEY_DC,      CK_ViewMoveDown,                "Delete" },
+    { 'f',         CK_ViewMoveRight,         "f" },
+    { KEY_RIGHT,   CK_ViewMoveRight,         "Right" },
 
-    { 0, 0, "" }
+    { 'k',         CK_ViewMoveUp,            "k" },
+    { 'y',         CK_ViewMoveUp,            "y" },
+    { KEY_UP,      CK_ViewMoveUp,            "Up" },
+
+    { 'j',         CK_ViewMoveDown,          "j" },
+    { KEY_DOWN,    CK_ViewMoveDown,          "Down" },
+    { KEY_DC,      CK_ViewMoveDown,          "Delete" },
+
+    { 'q',         CK_ViewQuit,              "q" },
+    { XCTRL ('g'), CK_ViewQuit,              "C-g" },
+    { ESC_CHAR,    CK_ViewQuit,              "Esc" },
+
+    { ALT ('e'),   CK_SelectCodepage,        "M-e" },
+    { XCTRL ('o'), CK_ShowCommandLine,       "C-o" },
+
+    { 0, CK_Ignore_Key, "" }
 };
 
 #ifdef USE_INTERNAL_EDIT
 /* ../edit/editkeys.c */
 const global_keymap_t default_editor_keymap[] = {
-    { '\n',                                 CK_Enter,               "Enter" },
-    { '\t',                                 CK_Tab,                 "Tab" },
+    { '\n',                                 CK_Enter,                       "Enter" },
+    { '\t',                                 CK_Tab,                         "Tab" },
 
-    { ESC_CHAR,                             CK_Quit,                "Esc" },
-    { KEY_BACKSPACE,                        CK_BackSpace,           "BackSpace" },
-    { KEY_DC,                               CK_Delete,              "Delete" },
-    { KEY_DOWN,                             CK_Down,                "Down" },
-    { KEY_END,                              CK_End,                 "End" },
-    { KEY_HOME,                             CK_Home,                "Home" },
-    { KEY_IC,                               CK_Toggle_Insert,       "Insert" },
-    { KEY_LEFT,                             CK_Left,                "Left" },
-    { KEY_NPAGE,                            CK_Page_Down,           "PgDn" },
-    { KEY_PPAGE,                            CK_Page_Up,             "PgUp" },
-    { KEY_RIGHT,                            CK_Right,               "Right" },
-    { KEY_UP,                               CK_Up,                  "Up" },
-
-    { ALT ('\n'),                           CK_Find_Definition,     "M-Enter" },
-    { ALT ('\t'),                           CK_Complete_Word,       "M-Tab" },
-    { ALT ('l'),                            CK_Goto,                "M-l" },
-    { ALT ('L'),                            CK_Goto,                "M-L" },
-    { ALT ('p'),                            CK_Paragraph_Format,    "M-p" },
-    { ALT ('t'),                            CK_Sort,                "M-t" },
-    { ALT ('u'),                            CK_ExtCmd,              "M-u" },
-    { ALT ('<'),                            CK_Beginning_Of_Text,   "M-<" },
-    { ALT ('>'),                            CK_End_Of_Text,         "M->" },
-    { ALT ('-'),                            CK_Load_Prev_File,      "M--" },
-    { ALT ('+'),                            CK_Load_Next_File,      "M-+" },
-    { ALT ('d'),                            CK_Delete_Word_Right,   "M-d" },
-    { ALT (KEY_BACKSPACE),                  CK_Delete_Word_Left,    "M-BackSpace" },
-    { ALT ('n'),                            CK_Toggle_Line_State,   "M-n" },
-    { ALT ('_'),                            CK_Toggle_Tab_TWS,      "M-_" },
-    { ALT ('k'),                            CK_Toggle_Bookmark,     "M-k" },
-    { ALT ('i'),                            CK_Prev_Bookmark,       "M-i" },
-    { ALT ('j'),                            CK_Next_Bookmark,       "M-j" },
-    { ALT ('o'),                            CK_Flush_Bookmarks,     "M-o" },
-
-    { XCTRL ('n'),                          CK_New,                 "C-n" },
-    { XCTRL ('k'),                          CK_Delete_To_Line_End,  "C-k" },
-    { XCTRL ('l'),                          CK_Refresh,             "C-l" },
-    { XCTRL ('o'),                          CK_Shell,               "C-o" },
-    { XCTRL ('s'),                          CK_Toggle_Syntax,       "C-s" },
-    { XCTRL ('u'),                          CK_Undo,                "C-u" },
-    { ALT ('e'),                            CK_SelectCodepage,      "M-e" },
-    { XCTRL ('q'),                          CK_Insert_Literal,      "C-q" },
-    { XCTRL ('r'),                          CK_Begin_End_Macro,     "C-r" },
-    { XCTRL ('r'),                          CK_Begin_Record_Macro,  "C-r" },
-    { XCTRL ('r'),                          CK_End_Record_Macro,    "C-r" },
-    { XCTRL ('a'),                          CK_Execute_Macro,       "C-a" },
-
-    { KEY_F (1),                            CK_Help,                "F1" },
-    { KEY_F (2),                            CK_Save,                "F2" },
-    { KEY_F (3),                            CK_Mark,                "F3" },
-    { KEY_F (4),                            CK_Replace,             "F4" },
-    { KEY_F (5),                            CK_Copy,                "F5" },
-    { KEY_F (6),                            CK_Move,                "F6" },
-    { KEY_F (7),                            CK_Find,                "F7" },
-    { KEY_F (8),                            CK_Remove,              "F8" },
-    { KEY_F (10),                           CK_Quit,                "F10" },
+    { KEY_F (1),                            CK_Help,                        "F1" },
+    { KEY_F (2),                            CK_Save,                        "F2" },
+    { KEY_F (3),                            CK_Mark,                        "F3" },
+    { KEY_F (4),                            CK_Replace,                     "F4" },
+    { KEY_F (5),                            CK_Copy,                        "F5" },
+    { KEY_F (6),                            CK_Move,                        "F6" },
+    { KEY_F (7),                            CK_Find,                        "F7" },
+    { KEY_F (8),                            CK_Remove,                      "F8" },
+    { KEY_F (9),                            CK_Menu,                        "F9" },
+    { KEY_F (10),                           CK_Quit,                        "F10" },
     /* edit user menu */
-    { KEY_F (11),                           CK_User_Menu,           "S-F1" },
-    { KEY_F (12),                           CK_Save_As,             "S-F2" },
-    { KEY_F (13),                           CK_Column_Mark,         "S-F3" },
-    { KEY_F (14),                           CK_Replace_Again,       "S-F4" },
-    { KEY_F (15),                           CK_Insert_File,         "S-F5" },
-    { KEY_F (17),                           CK_Find_Again,          "S-F6" },
+    { KEY_F (11),                           CK_User_Menu,                   "S-F1" },
+    { KEY_F (12),                           CK_Save_As,                     "S-F2" },
+    { KEY_F (13),                           CK_Column_Mark,                 "S-F3" },
+    { KEY_F (14),                           CK_Replace_Again,               "S-F4" },
+    { KEY_F (15),                           CK_Insert_File,                 "S-F5" },
+    { KEY_F (17),                           CK_Find_Again,                  "S-F7" },
     /* C formatter */
-    { KEY_F (19),                           CK_Pipe_Block (0),      "S-F9" },
+    { KEY_F (19),                           CK_Pipe_Block (0),              "S-F9" },
 
-    /* Shift */
-    { KEY_M_SHIFT | KEY_NPAGE,              CK_Page_Down_Highlight, "S-PgDn" },
-    { KEY_M_SHIFT | KEY_PPAGE,              CK_Page_Up_Highlight,   "S-PgUp" },
-    { KEY_M_SHIFT | KEY_LEFT,               CK_Left_Highlight,      "S-Left" },
-    { KEY_M_SHIFT | KEY_RIGHT,              CK_Right_Highlight,     "S-Right" },
-    { KEY_M_SHIFT | KEY_UP,                 CK_Up_Highlight,        "S-Up" },
-    { KEY_M_SHIFT | KEY_DOWN,               CK_Down_Highlight,      "S-Down" },
-    { KEY_M_SHIFT | KEY_HOME,               CK_Home_Highlight,      "S-Home" },
-    { KEY_M_SHIFT | KEY_END,                CK_End_Highlight,       "S-End" },
-    { KEY_M_SHIFT | KEY_IC,                 CK_XPaste,              "S-Insert" },
-    { KEY_M_SHIFT | KEY_DC,                 CK_XCut,                "S-Delete" },
-    /* useful for pasting multiline text */
-    { KEY_M_SHIFT | '\n',                   CK_Return,              "S-Enter" },
-
-    /* Alt */
-    { KEY_M_ALT | KEY_NPAGE,                CK_Page_Down_Alt_Highlight,     "M-PgDn" },
-    { KEY_M_ALT | KEY_PPAGE,                CK_Page_Up_Alt_Highlight,       "M-PgUp" },
-    { KEY_M_ALT | KEY_LEFT,                 CK_Left_Alt_Highlight,          "M-Left" },
-    { KEY_M_ALT | KEY_RIGHT,                CK_Right_Alt_Highlight,         "M-Right" },
-    { KEY_M_ALT | KEY_UP,                   CK_Up_Alt_Highlight,            "M-Up" },
-    { KEY_M_ALT | KEY_DOWN,                 CK_Down_Alt_Highlight,          "M-Down" },
-    { KEY_M_ALT | KEY_HOME,                 CK_Home_Highlight,              "M-Home" },
-    { KEY_M_ALT | KEY_END,                  CK_End_Alt_Highlight,           "M-End" },
+    { ESC_CHAR,                             CK_Quit,                        "Esc" },
+    { KEY_BACKSPACE,                        CK_BackSpace,                   "BackSpace" },
+    { KEY_DC,                               CK_Delete,                      "Delete" },
+    { KEY_DOWN,                             CK_Down,                        "Down" },
+    { KEY_END,                              CK_End,                         "End" },
+    { KEY_HOME,                             CK_Home,                        "Home" },
+    { KEY_IC,                               CK_Toggle_Insert,               "Insert" },
+    { KEY_LEFT,                             CK_Left,                        "Left" },
+    { KEY_NPAGE,                            CK_Page_Down,                   "PgDn" },
+    { KEY_PPAGE,                            CK_Page_Up,                     "PgUp" },
+    { KEY_RIGHT,                            CK_Right,                       "Right" },
+    { KEY_UP,                               CK_Up,                          "Up" },
 
     /* Ctrl */
     { KEY_M_CTRL | (KEY_F (2)),             CK_Save_As,                     "C-F2" },
     { KEY_M_CTRL | (KEY_F (4)),             CK_Replace_Again,               "C-F4" },
     { KEY_M_CTRL | (KEY_F (7)),             CK_Find_Again,                  "C-F7" },
-    { KEY_M_CTRL | KEY_BACKSPACE,           CK_Undo,                        "C-BackSpase" },
+    { KEY_M_CTRL | KEY_BACKSPACE,           CK_Undo,                        "C-BackSpace" },
     { KEY_M_CTRL | KEY_NPAGE,               CK_End_Of_Text,                 "C-PgDn" },
     { KEY_M_CTRL | KEY_PPAGE,               CK_Beginning_Of_Text,           "C-PgUp" },
     { KEY_M_CTRL | KEY_HOME,                CK_Beginning_Of_Text,           "C-Home" },
@@ -594,6 +616,33 @@ const global_keymap_t default_editor_keymap[] = {
     { KEY_M_CTRL | KEY_IC,                  CK_XStore,                      "C-Insert" },
     { KEY_M_CTRL | KEY_DC,                  CK_Remove,                      "C-Delete" },
 
+    { XCTRL ('n'),                          CK_New,                         "C-n" },
+    { XCTRL ('k'),                          CK_Delete_To_Line_End,          "C-k" },
+    { XCTRL ('l'),                          CK_Refresh,                     "C-l" },
+    { XCTRL ('o'),                          CK_Shell,                       "C-o" },
+    { XCTRL ('s'),                          CK_Toggle_Syntax,               "C-s" },
+    { XCTRL ('u'),                          CK_Undo,                        "C-u" },
+    { ALT ('e'),                            CK_SelectCodepage,              "M-e" },
+    { XCTRL ('q'),                          CK_Insert_Literal,              "C-q" },
+    { XCTRL ('r'),                          CK_Begin_End_Macro,             "C-r" },
+    { XCTRL ('r'),                          CK_Begin_Record_Macro,          "C-r" },
+    { XCTRL ('r'),                          CK_End_Record_Macro,            "C-r" },
+    { XCTRL ('a'),                          CK_Execute_Macro,               "C-a" },
+
+    /* Shift */
+    { KEY_M_SHIFT | KEY_NPAGE,              CK_Page_Down_Highlight,         "S-PgDn" },
+    { KEY_M_SHIFT | KEY_PPAGE,              CK_Page_Up_Highlight,           "S-PgUp" },
+    { KEY_M_SHIFT | KEY_LEFT,               CK_Left_Highlight,              "S-Left" },
+    { KEY_M_SHIFT | KEY_RIGHT,              CK_Right_Highlight,             "S-Right" },
+    { KEY_M_SHIFT | KEY_UP,                 CK_Up_Highlight,                "S-Up" },
+    { KEY_M_SHIFT | KEY_DOWN,               CK_Down_Highlight,              "S-Down" },
+    { KEY_M_SHIFT | KEY_HOME,               CK_Home_Highlight,              "S-Home" },
+    { KEY_M_SHIFT | KEY_END,                CK_End_Highlight,               "S-End" },
+    { KEY_M_SHIFT | KEY_IC,                 CK_XPaste,                      "S-Insert" },
+    { KEY_M_SHIFT | KEY_DC,                 CK_XCut,                        "S-Delete" },
+    /* useful for pasting multiline text */
+    { KEY_M_SHIFT | '\n',                   CK_Return,                      "S-Enter" },
+
     /* Ctrl + Shift */
     { KEY_M_SHIFT | KEY_M_CTRL | KEY_NPAGE, CK_End_Of_Text_Highlight,       "C-S-PgDn" },
     { KEY_M_SHIFT | KEY_M_CTRL | KEY_PPAGE, CK_Beginning_Of_Text_Highlight, "C-S-PgUp" },
@@ -602,18 +651,105 @@ const global_keymap_t default_editor_keymap[] = {
     { KEY_M_SHIFT | KEY_M_CTRL | KEY_UP,    CK_Scroll_Up_Highlight,         "C-S-Up" },
     { KEY_M_SHIFT | KEY_M_CTRL | KEY_DOWN,  CK_Scroll_Down_Highlight,       "C-S-Down" },
 
+    /* Alt */
+    { KEY_M_ALT | KEY_NPAGE,                CK_Page_Down_Alt_Highlight,     "M-PgDn" },
+    { KEY_M_ALT | KEY_PPAGE,                CK_Page_Up_Alt_Highlight,       "M-PgUp" },
+    { KEY_M_ALT | KEY_LEFT,                 CK_Left_Alt_Highlight,          "M-Left" },
+    { KEY_M_ALT | KEY_RIGHT,                CK_Right_Alt_Highlight,         "M-Right" },
+    { KEY_M_ALT | KEY_UP,                   CK_Up_Alt_Highlight,            "M-Up" },
+    { KEY_M_ALT | KEY_DOWN,                 CK_Down_Alt_Highlight,          "M-Down" },
+    { KEY_M_ALT | KEY_HOME,                 CK_Home_Highlight,              "M-Home" },
+    { KEY_M_ALT | KEY_END,                  CK_End_Alt_Highlight,           "M-End" },
+
+    { ALT ('\n'),                           CK_Find_Definition,             "M-Enter" },
+    { ALT ('\t'),                           CK_Complete_Word,               "M-Tab" },
+    { ALT ('l'),                            CK_Goto,                        "M-l" },
+    { ALT ('L'),                            CK_Goto,                        "M-L" },
+    { ALT ('p'),                            CK_Paragraph_Format,            "M-p" },
+    { ALT ('t'),                            CK_Sort,                        "M-t" },
+    { ALT ('u'),                            CK_ExtCmd,                      "M-u" },
+    { ALT ('<'),                            CK_Beginning_Of_Text,           "M-<" },
+    { ALT ('>'),                            CK_End_Of_Text,                 "M->" },
+    { ALT ('-'),                            CK_Load_Prev_File,              "M--" },
+    { ALT ('+'),                            CK_Load_Next_File,              "M-+" },
+    { ALT ('d'),                            CK_Delete_Word_Right,           "M-d" },
+    { ALT (KEY_BACKSPACE),                  CK_Delete_Word_Left,            "M-BackSpace" },
+    { ALT ('n'),                            CK_Toggle_Line_State,           "M-n" },
+    { ALT ('_'),                            CK_Toggle_Tab_TWS,              "M-_" },
+    { ALT ('k'),                            CK_Toggle_Bookmark,             "M-k" },
+    { ALT ('i'),                            CK_Prev_Bookmark,               "M-i" },
+    { ALT ('j'),                            CK_Next_Bookmark,               "M-j" },
+    { ALT ('o'),                            CK_Flush_Bookmarks,             "M-o" },
+
     { XCTRL ('x'),                          CK_Ext_Mode,                    "C-x" },
 
-    { 0, 0, "" }
+    { 0, CK_Ignore_Key, "" }
 };
 
 /* emacs keyboard layout emulation */
 const global_keymap_t default_editor_x_keymap[] = {
     { 'k', CK_New,           "k"},
     { 'e', CK_Execute_Macro, "e"},
-    { 0, 0, "" }
+    { 0, CK_Ignore_Key, "" }
 };
+#endif				/* USE_INTERNAL_EDIT */
+
+/* tree */
+const global_keymap_t default_tree_keymap[] = {
+    { KEY_F (1),   CK_TreeHelp,        "F1"},
+    { KEY_F (2),   CK_TreeRescan,      "F2" },
+    { KEY_F (3),   CK_TreeForget,      "F3" },
+    { KEY_F (4),   CK_TreeToggleNav,   "F4" },
+    { KEY_F (5),   CK_TreeCopy,        "F5" },
+    { KEY_F (6),   CK_TreeMove,        "F6" },
+#if 0
+    { KEY_F (7),   CK_TreeMake,        "F7" },
 #endif
+    { KEY_F (8),   CK_TreeRemove,      "F8" },
+    { KEY_UP,      CK_TreeMoveUp,      "Up" },
+    { XCTRL ('p'), CK_TreeMoveUp,      "C-p" },
+    { KEY_DOWN,    CK_TreeMoveDown,    "Down" },
+    { XCTRL ('n'), CK_TreeMoveDown,    "C-n" },
+    { KEY_LEFT,    CK_TreeMoveLeft,    "Left" },
+    { KEY_RIGHT,   CK_TreeMoveRight,   "Right" },
+    { KEY_HOME,    CK_TreeMoveHome,    "Home" },
+    { ALT ('<'),   CK_TreeMoveHome,    "M-<" },
+    { KEY_END,     CK_TreeMoveEnd ,    "End" },
+    { ALT ('>'),   CK_TreeMoveEnd ,    "M->" },
+    { KEY_PPAGE,   CK_TreeMovePgUp,    "PgUp" },
+    { ALT ('v'),   CK_TreeMovePgUp,    "M-v" },
+    { KEY_NPAGE,   CK_TreeMovePgDn,    "PnDn" },
+    { XCTRL ('v'), CK_TreeMovePgDn,    "C-v" },
+    { '\n',        CK_TreeOpen,        "Enter" },
+    { KEY_ENTER,   CK_TreeOpen,        "Enter" },
+    { XCTRL ('r'), CK_TreeRescan,      "C-r" },
+    { XCTRL ('s'), CK_TreeStartSearch, "C-s" },
+    { ALT ('s'),   CK_TreeStartSearch, "M-s" },
+    { KEY_DC,      CK_TreeRemove,      "Delete" },
+    { 0, CK_Ignore_Key, ""}
+};
+
+/* help */
+const global_keymap_t default_help_keymap[] = {
+    { KEY_F (1),   CK_HelpHelp,       "F1" },
+    { KEY_F (2),   CK_HelpIndex,      "F2" },
+    { KEY_F (3),   CK_HelpBack,       "F3" },
+    { KEY_F (10),  CK_HelpQuit,       "F10" },
+    { KEY_LEFT,    CK_HelpBack,       "Left" },
+    { 'l',         CK_HelpBack,       "l" },
+    { KEY_DOWN,    CK_HelpMoveDown,   "Down" },
+    { KEY_UP,      CK_HelpMoveUp,     "Up" },
+    { KEY_RIGHT,   CK_HelpSelectLink, "Right" },
+    { KEY_ENTER,   CK_HelpSelectLink, "Enter" },
+    { '\n',        CK_HelpSelectLink, "Enter" },
+    { '\t',        CK_HelpNextLink,   "Tab" },
+    { ALT ('\t'),  CK_HelpPrevLink,   "M-Tab" },
+    { 'n',         CK_HelpNextNode,   "n" },
+    { 'p',         CK_HelpPrevNode,   "p" },
+    { ESC_CHAR,    CK_HelpQuit,       "Esc" },
+    { XCTRL ('g'), CK_HelpQuit,       "C-g" },
+    { 0, CK_Ignore_Key, "" }
+};
 
 /* screen.c */
 const global_keymap_t default_panel_keymap[] = {
@@ -626,8 +762,8 @@ const global_keymap_t default_panel_keymap[] = {
     { KEY_F (14),             CK_PanelCmdEditNew,           "S-F4" },
     { KEY_F (16),             CK_PanelCmdRenameLocal,       "S-F6" },
     { ALT ('*'),              CK_PanelCmdReverseSelection,  "M-*" },
-    { KEY_KP_ADD,             CK_PanelCmdSelect,            "Gray+" },
-    { KEY_KP_SUBTRACT,        CK_PanelCmdUnselect,          "Gray-" },
+    { KEY_KP_ADD,             CK_PanelCmdSelect,            "M-+" },
+    { KEY_KP_SUBTRACT,        CK_PanelCmdUnselect,          "M--" },
     { KEY_F (13),             CK_PanelCmdViewSimple,        "S-F3" },
     { KEY_M_CTRL | KEY_NPAGE, CK_PanelCtrlNextPage,         "C-PgDn" },
     { KEY_M_CTRL | KEY_PPAGE, CK_PanelCtrlPrevPage,         "C-PgUp" },
@@ -651,19 +787,20 @@ const global_keymap_t default_panel_keymap[] = {
     { XCTRL ('s'),            CK_PanelStartSearch,          "C-s" },
     { ALT ('s'),              CK_PanelStartSearch,          "M-s" },
     { ALT ('i'),              CK_PanelSyncOtherPanel,       "M-i" },
-
-    { 0, 0 , "" }
+    { 0, CK_Ignore_Key , "" }
 };
 
 /* main.c */
 const global_keymap_t default_main_map[] = {
+    { KEY_F (1),    CK_HelpCmd,                       "F1" },
     { KEY_F (2),    CK_UserMenuCmd,                   "F2" },
     { KEY_F (3),    CK_ViewCmd,                       "F3" },
     { KEY_F (4),    CK_EditCmd,                       "F4" },
     { KEY_F (5),    CK_CopyCmd,                       "F5" },
     { KEY_F (6),    CK_RenameCmd,                     "F6" },
     { KEY_F (7),    CK_MkdirCmd,                      "F7" },
-    { KEY_F (8),    CK_DeleteCmd,                     "F6" },
+    { KEY_F (8),    CK_DeleteCmd,                     "F8" },
+    { KEY_F (9),    CK_MenuCmd,                       "F9" },
     { KEY_F (10),   CK_QuitCmd,                       "F10" },
     { KEY_F (13),   CK_ViewFileCmd,                   "S-F3" },
     { KEY_F (19),   CK_MenuLastSelectedCmd,           "S-F9" },
@@ -693,15 +830,13 @@ const global_keymap_t default_main_map[] = {
     { ALT ('.'),    CK_ToggleShowHidden,              "M-." },
     { XCTRL ('x'),  CK_StartExtMap1,                  "C-x" },
     /* Select/unselect group */
-    { ALT ('*'),              CK_SelectCmd,           "M-*" },
-    { KEY_KP_ADD,             CK_UnselectCmd,         "Gray+" },
-    { KEY_KP_SUBTRACT,        CK_ReverseSelectionCmd, "Gray-" },
-
-    { 0, 0, "" }
+    { KEY_KP_ADD,       CK_SelectCmd,           "+" },
+    { KEY_KP_SUBTRACT,  CK_UnselectCmd,         "-" },
+    { ALT ('*'),        CK_ReverseSelectionCmd, "*" },
+    { 0, CK_Ignore_Key, "" }
 };
 
 const global_keymap_t default_main_x_map[] = {
-    { XCTRL ('c'), CK_QuitCmd,             "C-c" },
     { 'd',         CK_CompareDirsCmd,      "d" },
 #ifdef USE_VFS
     { 'a',         CK_ReselectVfs,         "a"},
@@ -717,7 +852,6 @@ const global_keymap_t default_main_x_map[] = {
     { 'l',         CK_LinkCmd,             "l" },
     { 's',         CK_SymlinkCmd,          "s" },
     { XCTRL ('s'), CK_EditSymlinkCmd,      "C-s" },
-    { 'i',         CK_MenuInfoCmd,         "i" },
     { 'i',         CK_InfoCmd,             "i" },
     { 'q',         CK_QuickViewCmd,        "q" },
     { 'h',         CK_AddHotlist,          "h" },
@@ -725,8 +859,7 @@ const global_keymap_t default_main_x_map[] = {
 #ifdef WITH_BACKGROUND
     { 'j',         CK_JobsCmd,             "j" },
 #endif				/* WITH_BACKGROUND */
-
-    { 0, 0, "" }
+    { 0, CK_Ignore_Key, "" }
 };
 
 const global_keymap_t default_input_keymap[] = {
@@ -739,7 +872,7 @@ const global_keymap_t default_input_keymap[] = {
     { KEY_END,                CK_InputEol,              "End" },
     { KEY_C1,                 CK_InputEol,              "End" },
     { ALT ('>'),              CK_InputEol,              "M->" },
-    { KEY_LEFT,               CK_InputMoveLeft,         "left" },
+    { KEY_LEFT,               CK_InputMoveLeft,         "Left" },
     { KEY_M_CTRL | KEY_LEFT,  CK_InputWordLeft,         "C-Left" },
     { KEY_RIGHT,              CK_InputMoveRight,        "Right" },
     { KEY_M_CTRL | KEY_RIGHT, CK_InputWordRight,        "C-Right" },
@@ -769,7 +902,7 @@ const global_keymap_t default_input_keymap[] = {
     /* Completion */
     { ALT ('\t'),             CK_InputComplete,         "M-tab" },
 
-    { 0, 0, "" }
+    { 0, CK_Ignore_Key, "" }
 };
 
 static int
@@ -793,24 +926,10 @@ sort_command_names (void)
     }
 }
 
-int
-lookup_action (const char *keyname)
-{
-    const name_keymap_t key = { keyname, 0 };
-    name_keymap_t *res;
-
-    sort_command_names ();
-
-    res = bsearch (&key, command_names, num_command_names,
-		    sizeof (command_names[0]), name_keymap_comparator);
-
-    return (res != NULL) ? res->val : 0;
-}
-
 static void
-keymap_add (GArray *keymap, int key, int cmd, const char *caption)
+keymap_add (GArray *keymap, long key, unsigned long cmd, const char *caption)
 {
-    if (key != 0 && cmd != 0) {
+    if (key != 0 && cmd != CK_Ignore_Key) {
         global_keymap_t new_bind;
 
         new_bind.key = key;
@@ -821,24 +940,50 @@ keymap_add (GArray *keymap, int key, int cmd, const char *caption)
 }
 
 void
-keybind_cmd_bind (GArray *keymap, const char *keybind, int action)
+keybind_cmd_bind (GArray *keymap, const char *keybind, unsigned long action)
 {
     char *caption = NULL;
-    int key;
+    long key;
 
     key = lookup_key (keybind, &caption);
     keymap_add (keymap, key, action, caption);
     g_free (caption);
 }
 
-const char *
-lookup_keymap_shortcut (const global_keymap_t *keymap, int action)
+unsigned long
+lookup_action (const char *keyname)
 {
-    unsigned int i;
+    const name_keymap_t key = { keyname, 0 };
+    name_keymap_t *res;
+
+    sort_command_names ();
+
+    res = bsearch (&key, command_names, num_command_names,
+		    sizeof (command_names[0]), name_keymap_comparator);
+
+    return (res != NULL) ? res->val : CK_Ignore_Key;
+}
+
+const char *
+lookup_keymap_shortcut (const global_keymap_t *keymap, unsigned long action)
+{
+    size_t i;
 
     for (i = 0; keymap[i].key != 0; i++)
 	if (keymap[i].command == action)
 	    return (keymap[i].caption[0] != '\0') ? keymap[i].caption : NULL;
 
     return NULL;
+}
+
+unsigned long
+lookup_keymap_command (const global_keymap_t *keymap, long key)
+{
+    size_t i;
+
+    for (i = 0; keymap[i].key != 0; i++)
+	if (keymap[i].key == key)
+	    return keymap[i].command;
+
+    return CK_Ignore_Key;
 }

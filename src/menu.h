@@ -32,11 +32,11 @@ extern int menubar_visible;
 typedef struct menu_entry_t {
     unsigned char first_letter;
     struct hotkey_t text;
-    int command;
+    unsigned long command;
     char *shortcut;
 } menu_entry_t;
 
-menu_entry_t *menu_entry_create (const char *name, int command);
+menu_entry_t *menu_entry_create (const char *name, unsigned long command);
 void menu_entry_free (menu_entry_t *me);
 #define menu_separator_create() NULL
 
@@ -71,4 +71,6 @@ void menubar_set_menu (WMenuBar *menubar, GList *menu);
 void menubar_add_menu (WMenuBar *menubar, Menu *menu);
 void menubar_arrange (WMenuBar *menubar);
 
-#endif				/* MC_MENU_H */
+WMenuBar *find_menubar (const Dlg_head *h);
+
+#endif					/* MC_MENU_H */

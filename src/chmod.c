@@ -160,7 +160,8 @@ static void chmod_refresh (Dlg_head *h)
 }
 
 static cb_ret_t
-chmod_callback (Dlg_head *h, dlg_msg_t msg, int parm)
+chmod_callback (Dlg_head *h, Widget *sender,
+		dlg_msg_t msg, int parm, void *data)
 {
     char buffer[BUF_TINY];
     int id = h->current->dlg_id - BUTTONS + single_set * 2;
@@ -190,7 +191,7 @@ chmod_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     default:
-	return default_dlg_callback (h, msg, parm);
+	return default_dlg_callback (h, sender, msg, parm, data);
     }
 }
 

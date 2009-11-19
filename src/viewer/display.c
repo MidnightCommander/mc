@@ -42,6 +42,10 @@
 #include "../src/tty/tty.h"
 #include "../src/tty/key.h"
 #include "../src/strutil.h"
+#include "../src/main.h"
+#include "../src/dialog.h"		/* Dlg_head */
+#include "../src/widget.h"		/* WButtonBar */
+
 #include "internal.h"
 #include "mcviewer.h"
 
@@ -64,54 +68,53 @@ static enum ruler_type {
 
 /* --------------------------------------------------------------------------------------------- */
 
-static inline void
-mcview_my_define (Dlg_head * h, int idx, const char *text, void (*fn) (mcview_t *), mcview_t * view)
-{
-    buttonbar_set_label_data (h, idx, text, (buttonbarfn) fn, view);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 /* Define labels and handlers for functional keys */
 static void
-mcview_labels (mcview_t * view)
+mcview_set_buttonbar (mcview_t *view)
 {
     const char *text;
     Dlg_head *h = view->widget.parent;
+    WButtonBar *b = find_buttonbar (h);
+    const global_keymap_t *keymap = view->hex_mode ? view->hex_map : view->plain_map;
 
-    buttonbar_set_label (h, 1, Q_ ("ButtonBar|Help"), mcview_help_cmd);
-
-    mcview_my_define (h, 10, Q_ ("ButtonBar|Quit"), mcview_quit_cmd, view);
-    text = view->hex_mode ? Q_ ("ButtonBar|Ascii") : Q_ ("ButtonBar|Hex");
-    mcview_my_define (h, 4, text, mcview_toggle_hex_mode_cmd, view);
-    text = view->hex_mode ? Q_ ("ButtonBar|Goto") : Q_ ("ButtonBar|Line");
-    mcview_my_define (h, 5, text,
-                      view->hex_mode ? mcview_moveto_addr_cmd : mcview_moveto_line_cmd, view);
+    buttonbar_set_label (b, 1, Q_ ("ButtonBar|Help"), keymap, (Widget *) view);
 
     if (view->hex_mode) {
-        if (view->hexedit_mode) {
-            mcview_my_define (h, 2, Q_ ("ButtonBar|View"), mcview_toggle_hexedit_mode_cmd, view);
-        } else if (view->datasource == DS_FILE) {
-            mcview_my_define (h, 2, Q_ ("ButtonBar|Edit"), mcview_toggle_hexedit_mode_cmd, view);
-        } else {
-            buttonbar_clear_label (h, 2);
-        }
-        mcview_my_define (h, 6, Q_ ("ButtonBar|Save"), mcview_hexedit_save_changes_cmd, view);
+         if (view->hexedit_mode)
+            buttonbar_set_label (b, 2, Q_ ("ButtonBar|View"), keymap, (Widget *) view);
+         else if (view->datasource == DS_FILE)
+            buttonbar_set_label (b, 2, Q_ ("ButtonBar|Edit"), keymap, (Widget *) view);
+         else
+            buttonbar_set_label (b, 2, "", keymap, (Widget *) view);
+
+        buttonbar_set_label (b, 4, Q_ ("ButtonBar|Ascii"), keymap, (Widget *) view);
+        buttonbar_set_label (b, 5, Q_ ("ButtonBar|Goto"), keymap, (Widget *) view);
+        buttonbar_set_label (b, 6, Q_ ("ButtonBar|Save"), keymap, (Widget *) view);
+        buttonbar_set_label (b, 7, Q_ ("ButtonBar|HxSrch"), keymap, (Widget *) view);
+
     } else {
-        text = view->text_wrap_mode ? Q_ ("ButtonBar|UnWrap") : Q_ ("ButtonBar|Wrap");
-        mcview_my_define (h, 2, text, mcview_toggle_wrap_mode_cmd, view);
+        buttonbar_set_label (b, 2, view->text_wrap_mode ? Q_ ("ButtonBar|UnWrap")
+                                                        : Q_ ("ButtonBar|Wrap"),
+                                keymap, (Widget *) view);
+        buttonbar_set_label (b, 4, Q_ ("ButtonBar|Hex"), keymap, (Widget *) view);
+        buttonbar_set_label (b, 5, Q_ ("ButtonBar|Line"), keymap, (Widget *) view);
+        buttonbar_set_label (b, 6, "", keymap, (Widget *) view);
+        buttonbar_set_label (b, 7, Q_ ("ButtonBar|Search"), keymap, (Widget *) view);
     }
 
-    text = view->hex_mode ? Q_ ("ButtonBar|HxSrch") : Q_ ("ButtonBar|Search");
-    mcview_my_define (h, 7, text, mcview_search_cmd, view);
-    text = view->magic_mode ? Q_ ("ButtonBar|Raw") : Q_ ("ButtonBar|Parse");
-    mcview_my_define (h, 8, text, mcview_toggle_magic_mode_cmd, view);
+    buttonbar_set_label (b, 8, view->magic_mode ? Q_ ("ButtonBar|Raw")
+                                                : Q_ ("ButtonBar|Parse"),
+                                keymap, (Widget *) view);
 
-    /* don't override the key to access the main menu */
-    if (!mcview_is_in_panel (view)) {
-        text = view->text_nroff_mode ? Q_ ("ButtonBar|Unform") : Q_ ("ButtonBar|Format");
-        mcview_my_define (h, 9, text, mcview_toggle_nroff_mode_cmd, view);
-        mcview_my_define (h, 3, Q_ ("ButtonBar|Quit"), mcview_quit_cmd, view);
+    if (mcview_is_in_panel (view))
+        buttonbar_set_label (b, 10, "", keymap, (Widget *) view);
+    else {
+        /* don't override some panel buttonbar keys  */
+        buttonbar_set_label (b, 3, Q_ ("ButtonBar|Quit"), keymap, (Widget *) view);
+        buttonbar_set_label (b, 9, view->text_nroff_mode ? Q_ ("ButtonBar|Unform")
+                                                        : Q_ ("ButtonBar|Format"),
+                                keymap, (Widget *) view);
+        buttonbar_set_label (b, 10, Q_ ("ButtonBar|Quit"), keymap, (Widget *) view);
     }
 }
 
@@ -192,8 +195,8 @@ mcview_update (mcview_t * view)
 
     if (view->dpy_bbar_dirty) {
         view->dpy_bbar_dirty = FALSE;
-        mcview_labels (view);
-        buttonbar_redraw (view->widget.parent);
+        mcview_set_buttonbar (view);
+        buttonbar_redraw (find_buttonbar (view->widget.parent));
     }
 
     if (view->dirty > dirt_limit) {
@@ -327,7 +330,6 @@ mcview_display_toggle_ruler (mcview_t * view)
     assert ((size_t) ruler < 3);
     ruler = next[(size_t) ruler];
     view->dirty++;
-
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -386,16 +388,17 @@ mcview_display_ruler (mcview_t * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_adjust_size (Dlg_head * h)
+mcview_adjust_size (Dlg_head *h)
 {
     mcview_t *view;
-    WButtonBar *bar;
+    WButtonBar *b;
 
     /* Look up the viewer and the buttonbar, we assume only two widgets here */
     view = (mcview_t *) find_widget_type (h, mcview_callback);
-    bar = find_buttonbar (h);
+    b = find_buttonbar (h);
+
     widget_set_size (&view->widget, 0, 0, LINES - 1, COLS);
-    widget_set_size ((Widget *) bar, LINES - 1, 0, 1, COLS);
+    widget_set_size (&b->widget , LINES - 1, 0, 1, COLS);
 
     mcview_compute_areas (view);
     mcview_update_bytes_per_line (view);

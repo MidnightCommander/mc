@@ -225,7 +225,8 @@ static void update_mode (Dlg_head * h)
 }
 
 static cb_ret_t
-chl_callback (Dlg_head *h, dlg_msg_t msg, int parm)
+chl_callback (Dlg_head *h, Widget *sender,
+		dlg_msg_t msg, int parm, void *data)
 {
     switch (msg) {
     case DLG_KEY:
@@ -237,7 +238,7 @@ chl_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	}
 
     default:
-	return default_dlg_callback (h, msg, parm);
+	return default_dlg_callback (h, sender, msg, parm, data);
     }
 }
 
@@ -398,7 +399,8 @@ static void b_setpos (int f_pos) {
 }
 
 static cb_ret_t
-advanced_chown_callback (Dlg_head *h, dlg_msg_t msg, int parm)
+advanced_chown_callback (Dlg_head *h, Widget *sender,
+			    dlg_msg_t msg, int parm, void *data)
 {
     int i = 0, f_pos = BUTTONS - h->current->dlg_id - single_set - 1;
 
@@ -525,20 +527,19 @@ advanced_chown_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 
 	case '=':
 	case '+':
-	    if (f_pos > 4)
-		break;
-	    ch_flags[flag_pos] = parm;
-	    update_mode (h);
-	    advanced_chown_callback (h, DLG_KEY, KEY_RIGHT);
-	    if (flag_pos > 8 || !(flag_pos % 3))
-		dlg_one_down (h);
-
+	    if (f_pos <= 4) {
+		ch_flags[flag_pos] = parm;
+		update_mode (h);
+		advanced_chown_callback (h, sender, DLG_KEY, KEY_RIGHT, NULL);
+		if (flag_pos > 8 || !(flag_pos % 3))
+		    dlg_one_down (h);
+	    }
 	    break;
 	}
 	return MSG_NOT_HANDLED;
 
     default:
-	return default_dlg_callback (h, msg, parm);
+	return default_dlg_callback (h, sender, msg, parm, data);
     }
 }
 

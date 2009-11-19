@@ -137,7 +137,8 @@ next_file (void)
 }
 
 static cb_ret_t
-chown_callback (Dlg_head *h, dlg_msg_t msg, int parm)
+chown_callback (Dlg_head *h, Widget *sender,
+		dlg_msg_t msg, int parm, void *data)
 {
     switch (msg) {
     case DLG_DRAW:
@@ -145,7 +146,7 @@ chown_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     default:
-	return default_dlg_callback (h, msg, parm);
+	return default_dlg_callback (h, sender, msg, parm, data);
     }
 }
 

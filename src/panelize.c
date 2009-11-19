@@ -99,24 +99,24 @@ update_command (void)
 }
 
 static cb_ret_t
-panelize_callback (Dlg_head *h, dlg_msg_t msg, int parm)
+panelize_callback (Dlg_head *h, Widget *sender,
+		    dlg_msg_t msg, int parm, void *data)
 {
     switch (msg) {
+    case DLG_INIT:
+    case DLG_POST_KEY:
+	tty_setcolor (MENU_ENTRY_COLOR);
+	update_command ();
+	return MSG_HANDLED;
+
     case DLG_DRAW:
 	common_dialog_repaint (h);
 	tty_setcolor (COLOR_NORMAL);
 	draw_box (h, UY, UX, h->lines - 10, h->cols - 10);
 	return MSG_HANDLED;
 
-    case DLG_POST_KEY:
-	/* fall */
-    case DLG_INIT:
-	tty_setcolor (MENU_ENTRY_COLOR);
-	update_command ();
-	return MSG_HANDLED;
-
     default:
-	return default_dlg_callback (h, msg, parm);
+	return default_dlg_callback (h, sender, msg, parm, data);
     }
 }
 

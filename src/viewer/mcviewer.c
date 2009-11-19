@@ -48,6 +48,7 @@
 #include "../src/charsets.h"
 #include "../src/main-widgets.h"	/* the_menubar */
 #include "../src/menu.h"		/* menubar_visible */
+#include "../src/widget.h"
 
 #include "internal.h"
 #include "mcviewer.h"
@@ -263,20 +264,16 @@ mcview_viewer (const char *command, const char *file, int *move_dir_p, int start
 {
     gboolean succeeded;
     mcview_t *lc_mcview;
-    WButtonBar *bar;
     Dlg_head *view_dlg;
 
     /* Create dialog and widgets, put them on the dialog */
-    view_dlg =
-        create_dlg (0, 0, LINES, COLS, NULL, mcview_dialog_callback,
-                    "[Internal File Viewer]", NULL, DLG_WANT_TAB);
+    view_dlg = create_dlg (0, 0, LINES, COLS, NULL, mcview_dialog_callback,
+                            "[Internal File Viewer]", NULL, DLG_WANT_TAB);
 
     lc_mcview = mcview_new (0, 0, COLS, LINES - 1, 0);
-
-    bar = buttonbar_new (1);
-
-    add_widget (view_dlg, bar);
     add_widget (view_dlg, lc_mcview);
+
+    add_widget (view_dlg, buttonbar_new (TRUE));
 
     succeeded = mcview_load (lc_mcview, command, file, start_line);
     if (succeeded) {

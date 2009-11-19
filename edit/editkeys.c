@@ -47,8 +47,9 @@
 
 #include "../src/tty/tty.h"	/* keys */
 #include "../src/tty/key.h"	/* KEY_M_SHIFT */
-#include "../src/cmddef.h"		/* list of commands */
 
+#include "../src/cmddef.h"	/* list of commands */
+#include "../src/keybind.h"	/* lookup_keymap_command() */
 #include "../src/charsets.h"	/* convert_from_input_c() */
 #include "../src/main.h"	/* display_codepage */
 #include "../src/strutil.h"	/* str_isutf8 () */
@@ -60,9 +61,8 @@
 int
 edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
 {
-    int command = CK_Insert_Char;
+    unsigned long command = (unsigned long) CK_Insert_Char;
     int char_for_insertion = -1;
-    int i = 0;
     int c;
 
     /* an ordinary insertable character */
@@ -146,23 +146,16 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
     /* Commands specific to the key emulation */
     if (edit->extmod) {
         edit->extmod = 0;
-        for (i = 0; editor_x_map[i].key; i++) {
-            if (x_key == editor_x_map[i].key) {
-                command = editor_x_map[i].command;
-                break;
-            }
-        }
-    } else {
-        for (i = 0; editor_map[i].key != 0; i++) {
-            if (x_key == editor_map[i].key) {
-                command = editor_map[i].command;
-                break;
-            }
-        }
-    }
+        command = lookup_keymap_command (editor_x_map, x_key);
+    } else
+        command = lookup_keymap_command (editor_map, x_key);
+
+    if (command == CK_Ignore_Key)
+        command = CK_Insert_Char;
+
   fin:
-    *cmd = command;
+    *cmd = (int) command;		/* FIXME */
     *ch = char_for_insertion;
 
-    return (command == CK_Insert_Char && char_for_insertion == -1) ? 0 : 1;
+    return (command == (unsigned long) CK_Insert_Char && char_for_insertion == -1) ? 0 : 1;
 }

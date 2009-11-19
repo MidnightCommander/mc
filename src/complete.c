@@ -900,11 +900,12 @@ static int insert_text (WInput *in, char *text, ssize_t size)
 }
 
 static cb_ret_t
-query_callback (Dlg_head *h, dlg_msg_t msg, int parm)
+query_callback (Dlg_head *h, Widget *sender,
+		dlg_msg_t msg, int parm, void *data)
 {
     static char buff[MB_LEN_MAX] = "";
     static int bl = 0;
-    
+
     switch (msg) {
     case DLG_KEY:
 	switch (parm) {
@@ -1023,7 +1024,7 @@ query_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	break;
 
     default:
-	return default_dlg_callback (h, msg, parm);
+	return default_dlg_callback (h, sender, msg, parm, data);
     }
 }
 

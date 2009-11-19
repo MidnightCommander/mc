@@ -23,8 +23,8 @@ EditHome = home
 EditEnd = end
 EditTab = tab
 EditUndo = ctrl-u
-EditBeginningOfText = ctrl-pgup
-EditEndOfText = ctrl-pgdn
+EditBeginningOfText = ctrl-pgup; alt-lt
+EditEndOfText = ctrl-pgdn; alt-gt
 EditScrollUp = ctrl-up
 EditScrollDown = ctrl-down
 EditBeginPage = ctrl-home
@@ -60,8 +60,8 @@ EditBeginningOfTextHighlight = ctrl-shift-home
 EditEndOfTextHighlight  = ctrl-shift-end
 EditBeginPageHighlight  = ctrl-shift-pgup
 EditEndPageHighlight = ctrl-shift-pgdn
-EditScrollUpHighlight =
-EditScrollDownHighlight =
+EditScrollUpHighlight = ctrl-shift-up
+EditScrollDownHighlight = ctrl-shift-down
 EditParagraphUpHighlight =
 EditParagraphDownHighlight =
 
@@ -162,14 +162,21 @@ EditNew = k
 EditExecuteMacro = e
 
 [viewer]
-ViewSearch = question; slash; f7
-ViewContinueSearch = ctrl-r; ctrl-s; f17
-ViewMoveToBol = home
-ViewMoveToEol = end
+ViewHelp = f1
+ViewToggleWrapMode = f2
+ViewQuit = f3; f10; q; esc; ctrl-g
+ViewToggleHexMode = f4
+ViewGoto = f5
+ViewSearch = f7; question; slash
+ViewToggleMagicMode = f8
+ViewToggleNroffMode = f9
+ViewContinueSearch = ctrl-r; ctrl-s; f17; n
+ViewMoveToBol = ctrl-a
+ViewMoveToEol = ctrl-e
 ViewMoveLeft = h; left
 ViewMoveRight = l; right
 ViewMoveUp = k; y; insert; up
-ViewMoveDown = j; e; delete; down
+ViewMoveDown = j; e; delete; down; enter
 ViewMovePgDn = f; space; pgdn
 ViewMovePgUp = b; pgup
 ViewMoveHalfPgDn = d
@@ -178,13 +185,21 @@ ViewGotoBookmark = m
 ViewNewBookmark = r
 ViewNextFile = ctrl-f
 ViewPrevFile = ctrl-b
-ViewQuit = q; esc
 SelectCodepage = alt-e
 ShowCommandLine = ctrl-o
 ViewToggleRuler = alt-r
 
 [viewer:hex]
-HexViewToggleNavigationMode = tab
+ViewHelp = f1
+ViewToggleHexEditMode = f2
+ViewQuit = f3; f10; q; esc; ctrl-g
+ViewToggleHexMode = f4
+ViewGoto = f5
+ViewHexEditSave = f6
+ViewSearch = f7; question; slash
+ViewToggleMagicMode = f8
+ViewToggleNroffMode = f9
+ViewToggleHexNavMode = tab
 ViewMoveToBol = ctrl-a; home
 ViewMoveToEol = ctrl-e; end
 ViewMoveLeft = b; left
@@ -193,6 +208,7 @@ ViewMoveUp = k; y; up
 ViewMoveDown = j; delete; down
 
 [main]
+CmdHelp = f1
 CmdUserMenu = f2
 CmdView = f3
 CmdViewFile = f13
@@ -201,6 +217,7 @@ CmdCopy = f5
 CmdRename = f6
 CmdMkdir = f7
 CmdDelete = f8
+CmdMenu = f9
 CmdQuit = f10
 CmdMenuLastSelected = f19
 CmdQuietQuit = f20
@@ -220,7 +237,7 @@ CmdCopyOtherPathname = alt-shift-a
 CmdFilteredView = alt-exclamation
 CmdSelect = kpplus
 CmdUnselect = kpminus
-CmdReverseSelection = alt-kpasterisk
+CmdReverseSelection = kpasterisk
 ExtMap1 = ctrl-x
 
 [main:xmap]
@@ -232,8 +249,6 @@ CmdLink = l
 CmdSymlink = s
 CmdInfo = i
 CmdQuickView = q
-CmdMenuInfo = i
-CmdMenuQuickView = q
 CmdExternalPanelize = exclamation
 CmdReselectVfs = a
 CmdJobs = j
@@ -283,7 +298,6 @@ PanelSortOrderByExt=
 PanelSortOrderBySize=
 PanelSortOrderByMTime=
 
-
 [panel:xmap]
 
 [input]
@@ -297,12 +311,11 @@ InputMoveRight = right; alt-right
 InputWordRight = ctrl-right
 InputForwardChar = ctrl-f
 InputForwardWord = alt-f
-
 InputBackwardDelete = backspace
 InputDeleteChar = delete
 InputKillWord = alt-d
 InputBackwardKillWord = alt-backspace
-InputSetMark = 
+InputSetMark =
 InputKillRegion = ctrl-w
 InputXStore = alt-w
 InputXPaste =
@@ -313,3 +326,35 @@ InputHistoryNext = alt-n; ctrl-up
 InputHistoryShow = alt-h
 InputComplete = alt-tab
 InputClearLine =
+
+[tree]
+TreeHelp = f1
+TreeForget = f3
+TreeToggleNav = f4
+TreeCopy = f5
+TreeMove = f6
+TreeMoveUp = up; ctrl-p
+TreeMoveDown = down; ctrl-n
+TreeMoveLeft = left
+TreeMoveRight = right
+TreeMoveHome = home; alt-lt
+TreeMoveEnd = end; alt-gt
+TreeMovePgUp = pgup; alt-v
+TreeMovePgDn = pgdn; ctrl-v
+TreeOpen = enter
+TreeRescan = f2; ctrl-r
+TreeStartSearch = ctrl-s; alt-s
+TreeRemove = f8; delete
+
+[help]
+HelpHelp = f1
+HelpIndex = f2; c
+HelpBack = f3; left; l
+HelpQuit = f10; esc; ctrl-g
+HelpMoveUp = up
+HelpMoveDown = down
+HelpSelectLink = right; enter
+HelpNextLink = tab
+HelpPrevLink = alt-tab
+HelpNextNode = n
+HelpPrevNode = p

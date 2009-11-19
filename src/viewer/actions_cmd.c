@@ -66,7 +66,6 @@
 #include "../src/keybind.h"
 #include "../src/cmddef.h"	/* CK_ cmd name const */
 
-
 #include "internal.h"
 #include "mcviewer.h"
 
@@ -80,12 +79,19 @@
 
 /*** file scope functions ************************************************************************/
 
+/* Both views */
+static void
+mcview_search (mcview_t *view)
+{
+    if (mcview_dialog_search (view))
+        mcview_do_search (view);
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 static void
 mcview_continue_search_cmd (mcview_t * view)
 {
-
     if (view->last_search_string != NULL) {
         mcview_do_search (view);
     } else {
@@ -104,7 +110,7 @@ mcview_continue_search_cmd (mcview_t * view)
             if (!view->search) {
                 /* if not... then ask for an expression */
                 g_free(view->last_search_string);
-                mcview_search_cmd (view);
+                mcview_search (view);
             } else {
                 view->search->search_type = view->search_type;
                 view->search->is_all_charsets = view->search_all_codepages;
@@ -118,7 +124,7 @@ mcview_continue_search_cmd (mcview_t * view)
         } else {
             /* if not... then ask for an expression */
             g_free(view->last_search_string);
-            mcview_search_cmd (view);
+            mcview_search (view);
         }
     }
 }
@@ -200,6 +206,50 @@ mcview_cmk_moveto_bottom (void *w, int n)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static inline void
+mcview_moveto_line_cmd (mcview_t *view)
+{
+    char *answer, *answer_end, prompt[BUF_SMALL];
+    off_t line, col;
+
+    mcview_offset_to_coord (view, &line, &col, view->dpy_start);
+
+    g_snprintf (prompt, sizeof (prompt),
+                _(" The current line number is %lld.\n"
+                  " Enter the new line number:"), (line + 1));
+    answer = input_dialog (_(" Goto line "), prompt, MC_HISTORY_VIEW_GOTO_LINE, "");
+    if (answer != NULL && answer[0] != '\0') {
+        errno = 0;
+        line = strtoul (answer, &answer_end, 10);
+        if (errno == 0 && *answer_end == '\0' && line >= 1)
+            mcview_moveto (view, line - 1, 0);
+    }
+    g_free (answer);
+}
+
+static inline void
+mcview_moveto_addr_cmd (mcview_t *view)
+{
+    char *line, *error, prompt[BUF_SMALL], prompt_format[BUF_SMALL];
+
+    g_snprintf (prompt_format, sizeof (prompt_format),
+                _(" The current address is %s.\n"
+                  " Enter the new address:"), "0x%08" OFFSETTYPE_PRIX "");
+    g_snprintf (prompt, sizeof (prompt), prompt_format, view->hex_cursor);
+    line = input_dialog (_(" Goto Address "), prompt, MC_HISTORY_VIEW_GOTO_ADDR, "");
+    if ((line != NULL) && (*line != '\0')) {
+        off_t addr;
+        addr = strtoul (line, &error, 0);
+        if ((*error == '\0') && mcview_get_byte (view, addr, NULL))
+            mcview_moveto_offset (view, addr);
+        else
+            message (D_ERROR, _("Warning"), _(" Invalid address "));
+    }
+    g_free (line);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 mcview_hook (void *v)
 {
@@ -228,6 +278,7 @@ mcview_hook (void *v)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
 static cb_ret_t
 mcview_handle_editkey (mcview_t * view, int key)
 {
@@ -284,13 +335,52 @@ mcview_handle_editkey (mcview_t * view, int key)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-mcview_execute_cmd (mcview_t * view, int command, int key)
+mcview_execute_cmd (mcview_t *view, unsigned long command)
 {
     int res = MSG_HANDLED;
-    (void) key;
 
     switch (command) {
-    case CK_HexViewToggleNavigationMode:
+    case CK_ViewHelp:
+        interactive_display (NULL, "[Internal File Viewer]");
+        break;
+    case CK_ViewToggleWrapMode:
+        /* Toggle between wrapped and unwrapped view */
+        mcview_toggle_wrap_mode (view);
+        mcview_update (view); /* FIXME: view->dirty++ ? */
+        break;
+    case CK_ViewToggleHexEditMode:
+        /* Toggle between hexview and hexedit mode */
+        mcview_toggle_hexedit_mode (view);
+        mcview_update (view); /* FIXME: view->dirty++ ? */
+        break;
+    case CK_ViewToggleHexMode:
+        /* Toggle between hex view and text view */
+        mcview_toggle_hex_mode (view);
+        mcview_update (view); /* FIXME: view->dirty++ ? */
+        break;
+    case CK_ViewGoto:
+        if (view->hex_mode)
+            mcview_moveto_addr_cmd (view);
+        else
+            mcview_moveto_line_cmd (view);
+        view->dirty++;
+        mcview_update (view); /* FIXME: unneeded? */
+        break;
+    case CK_ViewHexEditSave:
+        mcview_hexedit_save_changes (view);
+        break;
+    case CK_ViewSearch:
+        mcview_search (view);
+        break;
+    case CK_ViewToggleMagicMode:
+        mcview_toggle_magic_mode (view);
+        mcview_update (view); /* FIXME: view->dirty++ ? */
+        break;
+    case CK_ViewToggleNroffMode:
+        mcview_toggle_nroff_mode (view);
+        mcview_update (view); /* FIXME: view->dirty++ ? */
+        break;
+    case CK_ViewToggleHexNavMode:
         view->hexview_in_text = !view->hexview_in_text;
         view->dirty++;
         break;
@@ -307,17 +397,12 @@ mcview_execute_cmd (mcview_t * view, int command, int key)
     case CK_ViewMoveRight:
         mcview_move_right (view, 1);
         break;
-    case CK_ViewSearch:
-        view->search_type = MC_SEARCH_T_REGEX;
-        mcview_search_cmd (view);
-        break;
         /* Continue search */
     case CK_ViewContinueSearch:
         mcview_continue_search_cmd (view);
         break;
-        /* toggle ruler */
     case CK_ViewToggleRuler:
-        mcview_toggle_ruler_cmd (view);
+        mcview_display_toggle_ruler (view);
         break;
     case CK_ViewMoveUp:
         mcview_move_up (view, 1);
@@ -360,7 +445,7 @@ mcview_execute_cmd (mcview_t * view, int command, int key)
         break;
     case CK_ViewNextFile:
     case CK_ViewPrevFile:
-        /*  Use to indicate parent that we want to see the next/previous file */
+        /* Use to indicate parent that we want to see the next/previous file */
         /* Does not work in panel mode */
         if (!mcview_is_in_panel (view))
             view->move_dir = (command == CK_ViewNextFile) ? 1 : -1;
@@ -375,30 +460,29 @@ mcview_execute_cmd (mcview_t * view, int command, int key)
     return res;
 }
 
-
 /* Both views */
 static cb_ret_t
 mcview_handle_key (mcview_t * view, int key)
 {
-    int i;
+    unsigned long command;
 
     key = convert_from_input_c (key);
 
     if (view->hex_mode) {
-        if (view->hexedit_mode)
-            if (mcview_handle_editkey (view, key) == MSG_HANDLED)
+        if (view->hexedit_mode
+            && (mcview_handle_editkey (view, key) == MSG_HANDLED))
                 return MSG_HANDLED;
-        for (i = 0; view->hex_map[i].key != 0; i++)
-            if ((key == view->hex_map[i].key)
-                && (mcview_execute_cmd (view, view->hex_map[i].command,
-                                        key) == MSG_HANDLED))
-                    return MSG_HANDLED;
+
+        command = lookup_keymap_command (view->hex_map, key);
+        if ((command != CK_Ignore_Key)
+            && (mcview_execute_cmd (view, command) == MSG_HANDLED))
+                return MSG_HANDLED;
     }
-    for (i = 0; view->plain_map[i].key != 0; i++)
-        if ((key == view->plain_map[i].key)
-            && (mcview_execute_cmd (view, view->plain_map[i].command,
-                                    key) == MSG_HANDLED))
-                return MSG_HANDLED;
+
+    command = lookup_keymap_command (view->plain_map, key);
+    if ((command != CK_Ignore_Key)
+        && (mcview_execute_cmd (view, command) == MSG_HANDLED))
+            return MSG_HANDLED;
 
     if (mcview_check_left_right_keys (view, key))
         return MSG_HANDLED;
@@ -455,12 +539,19 @@ mcview_callback (Widget * w, widget_msg_t msg, int parm)
         return MSG_HANDLED;
 
     case WIDGET_KEY:
-        i = mcview_handle_key ((mcview_t *) view, parm);
+        i = mcview_handle_key (view, parm);
         if (view->want_to_quit && !mcview_is_in_panel (view))
             dlg_stop (h);
-        else {
+        else
             mcview_update (view);
-        }
+        return i;
+
+    case WIDGET_COMMAND:
+        i = mcview_execute_cmd (view, parm);
+        if (view->want_to_quit && !mcview_is_in_panel (view))
+            dlg_stop (h);
+        else
+            mcview_update (view);
         return i;
 
     case WIDGET_FOCUS:
@@ -482,160 +573,23 @@ mcview_callback (Widget * w, widget_msg_t msg, int parm)
 /* --------------------------------------------------------------------------------------------- */
 
 cb_ret_t
-mcview_dialog_callback (Dlg_head * h, dlg_msg_t msg, int parm)
+mcview_dialog_callback (Dlg_head *h, Widget *sender,
+			dlg_msg_t msg, int parm, void *data)
 {
+    mcview_t *view = data;
+
     switch (msg) {
     case DLG_RESIZE:
         mcview_adjust_size (h);
         return MSG_HANDLED;
 
+    case DLG_ACTION:
+        /* command from buttonbar */
+        return send_message ((Widget *) view, WIDGET_COMMAND, parm);
+
     default:
-        return default_dlg_callback (h, msg, parm);
+        return default_dlg_callback (h, sender, msg, parm, data);
     }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-mcview_help_cmd (void)
-{
-    interactive_display (NULL, "[Internal File Viewer]");
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-mcview_quit_cmd (mcview_t * view)
-{
-    if (mcview_ok_to_quit (view))
-        dlg_stop (view->widget.parent);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/* Toggle between hex view and text view */
-void
-mcview_toggle_hex_mode_cmd (mcview_t * view)
-{
-    mcview_toggle_hex_mode (view);
-    mcview_update (view);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-mcview_moveto_line_cmd (mcview_t * view)
-{
-    char *answer, *answer_end, prompt[BUF_SMALL];
-    off_t line, col;
-
-    mcview_offset_to_coord (view, &line, &col, view->dpy_start);
-
-    g_snprintf (prompt, sizeof (prompt),
-                _(" The current line number is %lld.\n"
-                  " Enter the new line number:"), (line + 1));
-    answer = input_dialog (_(" Goto line "), prompt, MC_HISTORY_VIEW_GOTO_LINE, "");
-    if (answer != NULL && answer[0] != '\0') {
-        errno = 0;
-        line = strtoul (answer, &answer_end, 10);
-        if (*answer_end == '\0' && errno == 0 && line >= 1)
-            mcview_moveto (view, line - 1, 0);
-    }
-    g_free (answer);
-    view->dirty++;
-    mcview_update (view);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-mcview_moveto_addr_cmd (mcview_t * view)
-{
-    char *line, *error, prompt[BUF_SMALL], prompt_format[BUF_SMALL];
-    off_t addr;
-
-    g_snprintf (prompt_format, sizeof (prompt_format),
-                _(" The current address is %s.\n"
-                  " Enter the new address:"), "0x%08" OFFSETTYPE_PRIX "");
-    g_snprintf (prompt, sizeof (prompt), prompt_format, view->hex_cursor);
-    line = input_dialog (_(" Goto Address "), prompt, MC_HISTORY_VIEW_GOTO_ADDR, "");
-    if (line != NULL) {
-        if (*line != '\0') {
-            addr = strtoul (line, &error, 0);
-            if ((*error == '\0') && mcview_get_byte (view, addr, NULL) == TRUE) {
-                mcview_moveto_offset (view, addr);
-            } else {
-                message (D_ERROR, _("Warning"), _(" Invalid address "));
-            }
-        }
-        g_free (line);
-    }
-    view->dirty++;
-    mcview_update (view);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/* Toggle between hexview and hexedit mode */
-void
-mcview_toggle_hexedit_mode_cmd (mcview_t * view)
-{
-    mcview_toggle_hexedit_mode (view);
-    mcview_update (view);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-mcview_hexedit_save_changes_cmd (mcview_t * view)
-{
-    (void) mcview_hexedit_save_changes (view);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/* Toggle between wrapped and unwrapped view */
-void
-mcview_toggle_wrap_mode_cmd (mcview_t * view)
-{
-    mcview_toggle_wrap_mode (view);
-    mcview_update (view);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/* Both views */
-void
-mcview_search_cmd (mcview_t * view)
-{
-    if (mcview_dialog_search (view))
-        mcview_do_search (view);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-mcview_toggle_magic_mode_cmd (mcview_t * view)
-{
-    mcview_toggle_magic_mode (view);
-    mcview_update (view);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-mcview_toggle_nroff_mode_cmd (mcview_t * view)
-{
-    mcview_toggle_nroff_mode (view);
-    mcview_update (view);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-mcview_toggle_ruler_cmd (mcview_t * view)
-{
-    mcview_display_toggle_ruler (view);
 }
 
 /* --------------------------------------------------------------------------------------------- */

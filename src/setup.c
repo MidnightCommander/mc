@@ -869,7 +869,7 @@ load_keys_from_section (const char *terminal, mc_config_t *cfg)
     gchar **profile_keys, **keys;
     gchar **values, **curr_values;
     char *valcopy, *value;
-    int  key_code;
+    long key_code;
     gsize len, values_len;
 
     if (!terminal)
@@ -891,7 +891,7 @@ load_keys_from_section (const char *terminal, mc_config_t *cfg)
 	curr_values = values = mc_config_get_string_list (cfg, section_name, *profile_keys, &values_len);
 
 	key_code = lookup_key (*profile_keys, NULL);
-	if (key_code){
+	if (key_code != 0) {
 	    if (curr_values){
 	        while (*curr_values){
 	            valcopy = convert_controls (*curr_values);
@@ -953,8 +953,8 @@ load_keymap_from_section (const char *section_name, GArray *keymap, mc_config_t 
 	curr_values = values = mc_config_get_string_list (cfg, section_name, *profile_keys, &values_len);
 	action = lookup_action (*profile_keys);
 	if (action>0) {
-	    if (curr_values){
-	        while (*curr_values){
+	    if (curr_values) {
+	        while (*curr_values) {
 	            valcopy = convert_controls (*curr_values);
 	            keybind_cmd_bind (keymap, valcopy, action);
 	            g_free (valcopy);
@@ -963,9 +963,9 @@ load_keymap_from_section (const char *section_name, GArray *keymap, mc_config_t 
 	    } else {
 	        value = mc_config_get_string (cfg, section_name, *profile_keys, "");
 	        valcopy = convert_controls (value);
-	        //define_sequence (key_code, valcopy, MCKEY_NOACTION);
+	        /* define_sequence (key_code, valcopy, MCKEY_NOACTION); */
 	        g_free (valcopy);
-	        g_free(value);
+	        g_free (value);
 	    }
 	}
 	profile_keys++;
@@ -1011,6 +1011,12 @@ load_keymap_defs (void)
         input_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
         load_keymap_from_section ("input", input_keymap, mc_global_keymap);
 
+        tree_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
+        load_keymap_from_section ("tree", tree_keymap, mc_global_keymap);
+
+        help_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
+        load_keymap_from_section ("help", help_keymap, mc_global_keymap);
+
         mc_config_deinit (mc_global_keymap);
     }
 }
@@ -1019,15 +1025,17 @@ void
 free_keymap_defs (void)
 {
 #ifdef USE_INTERNAL_EDIT
-        g_array_free (editor_keymap, TRUE);
-        g_array_free (editor_x_keymap, TRUE);
+    g_array_free (editor_keymap, TRUE);
+    g_array_free (editor_x_keymap, TRUE);
 #endif
-        g_array_free (viewer_keymap, TRUE);
-        g_array_free (viewer_hex_keymap, TRUE);
-        g_array_free (main_keymap, TRUE);
-        g_array_free (main_x_keymap, TRUE);
-        g_array_free (panel_keymap, TRUE);
-        g_array_free (input_keymap, TRUE);
+    g_array_free (viewer_keymap, TRUE);
+    g_array_free (viewer_hex_keymap, TRUE);
+    g_array_free (main_keymap, TRUE);
+    g_array_free (main_x_keymap, TRUE);
+    g_array_free (panel_keymap, TRUE);
+    g_array_free (input_keymap, TRUE);
+    g_array_free (tree_keymap, TRUE);
+    g_array_free (help_keymap, TRUE);
 }
 
 void

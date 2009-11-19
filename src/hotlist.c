@@ -436,7 +436,8 @@ hotlist_button_callback (int action)
 }
 
 static cb_ret_t
-hotlist_callback (Dlg_head *h, dlg_msg_t msg, int parm)
+hotlist_callback (Dlg_head *h, Widget *sender,
+		    dlg_msg_t msg, int parm, void *data)
 {
     switch (msg) {
     case DLG_DRAW:
@@ -511,7 +512,7 @@ hotlist_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     default:
-	return default_dlg_callback (h, msg, parm);
+	return default_dlg_callback (h, sender, msg, parm, data);
     }
 }
 
@@ -528,7 +529,7 @@ static int l_call (WListbox *list)
 		return LISTBOX_DONE;
 	    } else {
 		hotlist_button_callback (B_ENTER);
-		hotlist_callback (dlg, DLG_POST_KEY, '\n');
+		hotlist_callback (dlg, NULL, DLG_POST_KEY, '\n', NULL);
 		return LISTBOX_CONT;
 	    }
 	} else {
@@ -539,7 +540,7 @@ static int l_call (WListbox *list)
     }
 
     hotlist_button_callback (B_UP_GROUP);
-    hotlist_callback (dlg, DLG_POST_KEY, 'u');
+    hotlist_callback (dlg, NULL, DLG_POST_KEY, 'u', NULL);
     return LISTBOX_CONT;
 }
 

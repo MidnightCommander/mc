@@ -33,6 +33,8 @@
 #define B_HELP		3
 #define B_USER          100
 
+typedef struct Widget Widget;
+
 /* Widget messages */
 typedef enum {
     WIDGET_INIT,		/* Initialize widget */
@@ -63,33 +65,31 @@ typedef enum {
 
 /* Dialog messages */
 typedef enum {
-    DLG_KEY,			/* Key before sending to widget */
-    DLG_INIT,			/* Initialize dialog */
-    DLG_END,			/* Shut down dialog */
-    DLG_ACTION,			/* State of check- and radioboxes has changed
+    DLG_INIT		= 0,	/* Initialize dialog */
+    DLG_IDLE		= 1,	/* The idle state is active */
+    DLG_DRAW		= 2,	/* Draw dialog on screen */
+    DLG_FOCUS		= 3,	/* A widget has got focus */
+    DLG_UNFOCUS		= 4,	/* A widget has been unfocused */
+    DLG_RESIZE		= 5,	/* Window size has changed */
+    DLG_KEY		= 6,	/* Key before sending to widget */
+    DLG_HOTKEY_HANDLED	= 7,	/* A widget has got the hotkey */
+    DLG_POST_KEY	= 8,	/* The key has been handled */
+    DLG_UNHANDLED_KEY	= 9,	/* Key that no widget handled */
+    DLG_ACTION		= 10,	/* State of check- and radioboxes has changed
 				 * and listbox current entry has changed */
-    DLG_DRAW,			/* Draw dialog on screen */
-    DLG_FOCUS,			/* A widget has got focus */
-    DLG_UNFOCUS,		/* A widget has been unfocused */
-    DLG_RESIZE,			/* Window size has changed */
-    DLG_POST_KEY,		/* The key has been handled */
-    DLG_IDLE,			/* The idle state is active */
-    DLG_UNHANDLED_KEY,		/* Key that no widget handled */
-    DLG_HOTKEY_HANDLED,		/* A widget has got the hotkey */
-    DLG_VALIDATE		/* Dialog is to be closed */
+    DLG_VALIDATE	= 11,	/* Dialog is to be closed */
+    DLG_END		= 12	/* Shut down dialog */
 } dlg_msg_t;
 
 
 /* Dialog callback */
-struct Dlg_head;
-typedef cb_ret_t (*dlg_cb_fn)(struct Dlg_head *h, dlg_msg_t msg, int parm);
-
-/* menu command execution */
-typedef cb_ret_t (*menu_exec_fn) (int command);
+typedef struct Dlg_head Dlg_head;
+typedef cb_ret_t (*dlg_cb_fn)(struct Dlg_head *h, Widget *sender,
+				dlg_msg_t msg, int parm, void *data);
 
 /* get string representation of shortcut assigned  with command */
 /* as menu is a widget of dialog, ask dialog about shortcut string */
-typedef char * (*dlg_shortcut_str) (int command);
+typedef char * (*dlg_shortcut_str) (unsigned long command);
 
 /* Dialog color constants */
 #define DLG_COLOR_NUM		4
@@ -98,7 +98,7 @@ typedef char * (*dlg_shortcut_str) (int command);
 #define DLG_HOT_NORMALC(h)	((h)->color[2])
 #define DLG_HOT_FOCUSC(h)	((h)->color[3])
 
-typedef struct Dlg_head {
+struct Dlg_head {
     /* Set by the user */
     int flags;				/* User flags */
     const char *help_ctx;		/* Name of the help entry */
@@ -122,16 +122,14 @@ typedef struct Dlg_head {
     struct Widget *current;		/* Curently active widget */
     void *data;				/* Data can be passed to dialog */
     dlg_cb_fn callback;
-    menu_exec_fn menu_executor;		/* Execute menu commands */
     dlg_shortcut_str get_shortcut;	/* Shortcut string */
     struct Dlg_head *parent;		/* Parent dialog */
-} Dlg_head;
+};
 
 /* Color styles for normal and error dialogs */
 extern int dialog_colors[4];
 extern int alarm_colors[4];
 
-typedef struct Widget Widget;
 
 /* Widget callback */
 typedef cb_ret_t (*callback_fn) (Widget *widget, widget_msg_t msg, int parm);
@@ -218,7 +216,8 @@ void init_widget (Widget *w, int y, int x, int lines, int cols,
 		  callback_fn callback, mouse_h mouse_handler);
 
 /* Default callback for dialogs */
-cb_ret_t default_dlg_callback (Dlg_head *h, dlg_msg_t msg, int parm);
+cb_ret_t default_dlg_callback (Dlg_head *h, Widget *sender,
+				dlg_msg_t msg, int parm, void *data);
 
 /* Default paint routine for dialogs */
 void common_dialog_repaint (struct Dlg_head *h);
@@ -256,8 +255,8 @@ void dlg_select_widget     (void *widget);
 void dlg_one_up            (Dlg_head *h);
 void dlg_one_down          (Dlg_head *h);
 int  dlg_focus             (Dlg_head *h);
-Widget *find_widget_type   (Dlg_head *h, callback_fn callback);
-void dlg_select_by_id (Dlg_head *h, int id);
+Widget *find_widget_type   (const Dlg_head *h, callback_fn callback);
+void dlg_select_by_id (const Dlg_head *h, int id);
 
 /* Redraw all dialogs */
 void do_refresh (void);

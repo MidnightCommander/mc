@@ -52,14 +52,6 @@
 #include "edit-impl.h"
 #include "edit-widget.h"
 
-cb_ret_t
-edit_menu_execute (int command)
-{
-    edit_execute_key_command (wedit, command, -1);
-    edit_update_screen (wedit);
-    return MSG_HANDLED;
-}
-
 static GList *
 create_file_menu (void)
 {

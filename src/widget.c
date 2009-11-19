@@ -284,11 +284,11 @@ button_event (Gpm_Event *event, void *data)
     WButton *b = data;
 
     if (event->type & (GPM_DOWN|GPM_UP)){
-    	Dlg_head *h=b->widget.parent;
+	Dlg_head *h = b->widget.parent;
 	dlg_select_widget (b);
 	if (event->type & GPM_UP){
 	    button_callback ((Widget *) data, WIDGET_KEY, ' ');
-	    (*h->callback) (h, DLG_POST_KEY, ' ');
+	    h->callback (h, &b->widget, DLG_POST_KEY, ' ', NULL);
 	    return MOU_NORMAL;
 	}
     }
@@ -392,7 +392,7 @@ radio_callback (Widget *w, widget_msg_t msg, int parm)
 	switch (parm) {
 	case ' ':
 	    r->sel = r->pos;
-	    (*h->callback) (h, DLG_ACTION, 0);
+	    h->callback (h, w, DLG_ACTION, 0, NULL);
 	    radio_callback (w, WIDGET_FOCUS, ' ');
 	    return MSG_HANDLED;
 
@@ -414,7 +414,7 @@ radio_callback (Widget *w, widget_msg_t msg, int parm)
 	return MSG_NOT_HANDLED;
 
     case WIDGET_CURSOR:
-	(*h->callback) (h, DLG_ACTION, 0);
+	h->callback (h, w, DLG_ACTION, 0, NULL);
 	radio_callback (w, WIDGET_FOCUS, ' ');
 	widget_move (&r->widget, r->pos, 1);
 	return MSG_HANDLED;
@@ -450,14 +450,14 @@ radio_event (Gpm_Event *event, void *data)
     Widget *w = data;
 
     if (event->type & (GPM_DOWN|GPM_UP)){
-    	Dlg_head *h = r->widget.parent;
+	Dlg_head *h = r->widget.parent;
 
 	r->pos = event->y - 1;
 	dlg_select_widget (r);
 	if (event->type & GPM_UP){
 	    radio_callback (w, WIDGET_KEY, ' ');
 	    radio_callback (w, WIDGET_FOCUS, 0);
-	    (*h->callback) (h, DLG_POST_KEY, ' ');
+	    h->callback (h, w, DLG_POST_KEY, ' ', NULL);
 	    return MOU_NORMAL;
 	}
     }
@@ -519,7 +519,7 @@ check_callback (Widget *w, widget_msg_t msg, int parm)
 	    return MSG_NOT_HANDLED;
 	c->state ^= C_BOOL;
 	c->state ^= C_CHANGE;
-	(*h->callback) (h, DLG_ACTION, 0);
+	h->callback (h, w, DLG_ACTION, 0, NULL);
 	check_callback (w, WIDGET_FOCUS, ' ');
 	return MSG_HANDLED;
 
@@ -552,13 +552,13 @@ check_event (Gpm_Event *event, void *data)
     Widget *w = data;
 
     if (event->type & (GPM_DOWN|GPM_UP)){
-    	Dlg_head *h = c->widget.parent;
+	Dlg_head *h = c->widget.parent;
 
 	dlg_select_widget (c);
 	if (event->type & GPM_UP){
 	    check_callback (w, WIDGET_KEY, ' ');
 	    check_callback (w, WIDGET_FOCUS, 0);
-	    (*h->callback) (h, DLG_POST_KEY, ' ');
+	    h->callback (h, w, DLG_POST_KEY, ' ', NULL);
 	    return MOU_NORMAL;
 	}
     }
@@ -1159,14 +1159,15 @@ dlg_hist_reposition (Dlg_head *dlg_head)
 }
 
 static cb_ret_t
-dlg_hist_callback (Dlg_head *h, dlg_msg_t msg, int parm)
+dlg_hist_callback (Dlg_head *h, Widget *sender,
+		    dlg_msg_t msg, int parm, void *data)
 {
     switch (msg) {
     case DLG_RESIZE:
 	return dlg_hist_reposition (h);
 
     default:
-	return default_dlg_callback (h, msg, parm);
+	return default_dlg_callback (h, sender, msg, parm, data);
     }
 }
 
@@ -1215,7 +1216,7 @@ show_hist (GList *history, Widget *widget)
        The main idea - create 4x4 dialog and add 2x2 list in
        center of it, and let dialog function resize it to needed
        size. */
-    dlg_hist_callback (query_dlg, DLG_RESIZE, 0);
+    dlg_hist_callback (query_dlg, NULL, DLG_RESIZE, 0, NULL);
 
     if (query_dlg->y < widget->y) {
 	/* traverse */
@@ -1771,7 +1772,7 @@ port_region_marked_for_delete (WInput *in)
 }
 
 static cb_ret_t
-input_execute_cmd (WInput *in, int command)
+input_execute_cmd (WInput *in, unsigned long command)
 {
     cb_ret_t res = MSG_HANDLED;
 
@@ -1864,16 +1865,12 @@ input_execute_cmd (WInput *in, int command)
 int
 is_in_input_map (WInput *in, int key)
 {
-    int i;
-    for (i = 0; input_map[i].key; i++) {
+    size_t i;
+    for (i = 0; input_map[i].key != 0; i++)
         if (key == input_map[i].key) {
             input_execute_cmd (in, input_map[i].command);
-            if (input_map[i].command == CK_InputComplete)
-                return 2;
-            else
-                return 1;
+            return (input_map[i].command == CK_InputComplete) ? 2 : 1;
         }
-    }
     return 0;
 }
 
@@ -2419,8 +2416,7 @@ listbox_callback (Widget *w, widget_msg_t msg, int parm)
 	    int action;
 
 	    listbox_select_entry (l, e);
-
-	    (*h->callback) (h, DLG_ACTION, l->pos);
+	    h->callback (h, w, DLG_ACTION, l->pos, NULL);
 
 	    if (l->cback)
 		action = (*l->cback) (l);
@@ -2439,13 +2435,13 @@ listbox_callback (Widget *w, widget_msg_t msg, int parm)
 	ret_code = listbox_key (l, parm);
 	if (ret_code != MSG_NOT_HANDLED) {
 	    listbox_draw (l, TRUE);
-	    (*h->callback) (h, DLG_ACTION, l->pos);
+	    h->callback (h, w, DLG_ACTION, l->pos, NULL);
 	}
 	return ret_code;
 
     case WIDGET_CURSOR:
 	widget_move (&l->widget, l->cursor_y, 0);
-	(*h->callback) (h, DLG_ACTION, l->pos);
+	h->callback (h, w, DLG_ACTION, l->pos, NULL);
 	return MSG_HANDLED;
 
     case WIDGET_FOCUS:
@@ -2677,27 +2673,23 @@ listbox_get_current (WListbox *l, char **string, char **extra)
 static gboolean
 buttonbar_call (WButtonBar *bb, int i)
 {
-    switch (bb->labels[i].tag) {
-	case BBFUNC_NONE:
-	    break;
-	case BBFUNC_VOID:
-	    bb->labels[i].u.fn_void ();
-	    return TRUE;
-	case BBFUNC_PTR:
-	    bb->labels[i].u.fn_ptr (bb->labels[i].data);
-	    return TRUE;
-    }
-    return FALSE;
+    cb_ret_t ret = MSG_NOT_HANDLED;
+
+    if (bb != NULL)
+	ret = bb->widget.parent->callback (bb->widget.parent,
+					    (Widget *) bb, DLG_ACTION,
+					    bb->labels[i].command,
+					    bb->labels[i].receiver);
+    return ret;
 }
 
 /* calculate width of one button, width is never lesser than 7 */
 static int
-buttonbat_get_button_width ()
+buttonbat_get_button_width (void)
 {
     int result = COLS / BUTTONBAR_LABELS_NUM;
     return (result >= 7) ? result : 7;
 }
-
 
 static cb_ret_t
 buttonbar_callback (Widget *w, widget_msg_t msg, int parm)
@@ -2725,7 +2717,7 @@ buttonbar_callback (Widget *w, widget_msg_t msg, int parm)
 	    tty_setcolor (DEFAULT_COLOR);
 	    bb->btn_width = buttonbat_get_button_width ();
 	    tty_printf ("%-*s", bb->widget.cols, "");
-	    count_free_positions = COLS - bb->btn_width*BUTTONBAR_LABELS_NUM;
+	    count_free_positions = COLS - bb->btn_width * BUTTONBAR_LABELS_NUM;
 
 	    for (i = 0; i < COLS / bb->btn_width && i < BUTTONBAR_LABELS_NUM; i++) {
 		widget_move (&bb->widget, 0, (i * bb->btn_width) + offset);
@@ -2764,17 +2756,16 @@ buttonbar_event (Gpm_Event *event, void *data)
 	return MOU_NORMAL;
     if (event->y == 2)
 	return MOU_NORMAL;
-    button = (event->x - 1) * BUTTONBAR_LABELS_NUM / (COLS);
+    button = (event->x - 1) * BUTTONBAR_LABELS_NUM / COLS;
     if (button < BUTTONBAR_LABELS_NUM)
 	buttonbar_call (bb, button);
     return MOU_NORMAL;
 }
 
 WButtonBar *
-buttonbar_new (int visible)
+buttonbar_new (gboolean visible)
 {
     WButtonBar *bb;
-    int i;
 
     bb = g_new0 (WButtonBar, 1);
 
@@ -2782,10 +2773,6 @@ buttonbar_new (int visible)
 		 buttonbar_callback, buttonbar_event);
     bb->widget.pos_flags = WPOS_KEEP_HORZ | WPOS_KEEP_BOTTOM;
     bb->visible = visible;
-    for (i = 0; i < BUTTONBAR_LABELS_NUM; i++){
-	bb->labels[i].text = NULL;
-	bb->labels[i].tag = BBFUNC_NONE;
-    }
     widget_want_hotkey (bb->widget, 1);
     widget_want_cursor (bb->widget, 0);
     bb->btn_width = buttonbat_get_button_width ();
@@ -2794,63 +2781,37 @@ buttonbar_new (int visible)
 }
 
 static void
-set_label_text (WButtonBar * bb, int lc_index, const char *text)
+set_label_text (WButtonBar *bb, int lc_index, const char *text)
 {
     g_free (bb->labels[lc_index - 1].text);
-
     bb->labels[lc_index - 1].text = g_strdup (text);
 }
 
 /* Find ButtonBar widget in the dialog */
 WButtonBar *
-find_buttonbar (Dlg_head *h)
+find_buttonbar (const Dlg_head *h)
 {
-    WButtonBar *bb;
-
-    bb = (WButtonBar *) find_widget_type (h, buttonbar_callback);
-    return bb;
+    return (WButtonBar *) find_widget_type (h, buttonbar_callback);
 }
 
 void
-buttonbar_clear_label (Dlg_head *h, int idx)
+buttonbar_set_label (WButtonBar *bb, int idx, const char *text,
+			const struct global_keymap_t *keymap, const Widget *receiver)
 {
-    WButtonBar *bb = find_buttonbar (h);
+    if ((bb != NULL)  && (idx >= 1) && (idx <= BUTTONBAR_LABELS_NUM)) {
+	unsigned long command = CK_Ignore_Key;
 
-    if (!bb)
-	return;
+	if (keymap != NULL)
+	    command = lookup_keymap_command (keymap, KEY_F (idx));
 
-    set_label_text (bb, idx, "");
-    bb->labels[idx - 1].tag = BBFUNC_NONE;
-}
+	if ((text == NULL) || (text[0] == '\0'))
+	    set_label_text (bb, idx, "");
+	else
+	    set_label_text (bb, idx, text);
 
-void
-buttonbar_set_label_data (Dlg_head *h, int idx, const char *text,
-                          buttonbarfn cback, void *data)
-{
-    WButtonBar *bb = find_buttonbar (h);
-
-    if (!bb)
-	return;
-
-    assert (cback != (buttonbarfn) 0);
-    set_label_text (bb, idx, text);
-    bb->labels[idx - 1].tag = BBFUNC_PTR;
-    bb->labels[idx - 1].u.fn_ptr = cback;
-    bb->labels[idx - 1].data = data;
-}
-
-void
-buttonbar_set_label (Dlg_head *h, int idx, const char *text, voidfn cback)
-{
-    WButtonBar *bb = find_buttonbar (h);
-
-    if (!bb)
-	return;
-
-    assert (cback != (voidfn) 0);
-    set_label_text (bb, idx, text);
-    bb->labels[idx - 1].tag = BBFUNC_VOID;
-    bb->labels[idx - 1].u.fn_void = cback;
+	bb->labels[idx - 1].command = command;
+	bb->labels[idx - 1].receiver = (Widget *) receiver;
+    }
 }
 
 void
@@ -2860,14 +2821,10 @@ buttonbar_set_visible (WButtonBar *bb, gboolean visible)
 }
 
 void
-buttonbar_redraw (Dlg_head *h)
+buttonbar_redraw (WButtonBar *bb)
 {
-    WButtonBar *bb = find_buttonbar (h);
-
-    if (!bb)
-	return;
-
-    send_message ((Widget *) bb, WIDGET_DRAW, 0);
+    if (bb != NULL)
+	send_message ((Widget *) bb, WIDGET_DRAW, 0);
 }
 
 static cb_ret_t

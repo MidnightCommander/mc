@@ -51,6 +51,7 @@
 #define CK_Load_Next_File	112
 #define CK_Load_Syntax_File	121
 #define CK_Load_Menu_File	122
+#define CK_Menu			123
 
 /* block commands */
 #define CK_Mark			201
@@ -70,6 +71,7 @@
 #define CK_Replace_Again	304
 #define CK_Complete_Word	305
 
+#if 0
 /* debugger commands */
 #define CK_Debug_Start		350
 #define CK_Debug_Stop		351
@@ -81,6 +83,7 @@
 #define CK_Debug_Continue	357
 #define CK_Debug_Enter_Command	358
 #define CK_Debug_Until_Curser	359
+#endif
 
 /* misc */
 #define CK_Insert_File		401
@@ -119,7 +122,6 @@
 #define CK_Save_Desktop		451
 #define CK_New_Window		452
 #define CK_Cycle		453
-#define CK_Menu			454
 #define CK_Save_And_Quit	455
 #define CK_Run_Another		456
 #define CK_Check_Save_And_Quit	457
@@ -196,6 +198,19 @@
 #define CK_Execute_Macro	852
 #define CK_Begin_End_Macro	853
 
+/* help */
+#define CK_HelpHelp                     1001
+#define CK_HelpIndex                    1002
+#define CK_HelpBack                     1003
+#define CK_HelpQuit                     1004
+#define CK_HelpMoveUp                   1005
+#define CK_HelpMoveDown                 1006
+#define CK_HelpSelectLink               1007
+#define CK_HelpNextLink                 1008
+#define CK_HelpPrevLink                 1009
+#define CK_HelpNextNode                 1010
+#define CK_HelpPrevNode                 1011
+
 /* common */
 #define CK_ShowCommandLine              2001
 #define CK_SelectCodepage               2002
@@ -229,27 +244,54 @@
 #define CK_InputPaste                  4025
 #define CK_InputClearLine              4026
 
-
 /* Viewer */
-#define CK_ViewSearch                   5001
-#define CK_ViewContinueSearch           5002
-#define CK_ViewGotoBookmark             5003
-#define CK_ViewNewBookmark              5004
-#define CK_ViewMoveUp                   5005
-#define CK_ViewMoveDown                 5006
-#define CK_ViewMoveLeft                 5007
-#define CK_ViewMoveRight                5008
-#define CK_ViewMovePgDn                 5009
-#define CK_ViewMovePgUp                 5010
-#define CK_ViewMoveHalfPgDn             5011
-#define CK_ViewMoveHalfPgUp             5012
-#define CK_ViewMoveToBol                5013
-#define CK_ViewMoveToEol                5014
-#define CK_ViewNextFile                 5015
-#define CK_ViewPrevFile                 5016
-#define CK_ViewToggleRuler              5017
-#define CK_HexViewToggleNavigationMode  5018
-#define CK_ViewQuit                     5020
+#define CK_ViewHelp                     5001
+#define CK_ViewToggleWrapMode           5002
+#define CK_ViewToggleHexEditMode        5003
+#define CK_ViewToggleHexMode            5004
+#define CK_ViewGoto                     5005
+#define CK_ViewHexEditSave              5006
+#define CK_ViewSearch                   5007
+#define CK_ViewToggleMagicMode          5008
+#define CK_ViewToggleNroffMode          5009
+#define CK_ViewQuit                     5010
+#define CK_ViewContinueSearch           5011
+#define CK_ViewGotoBookmark             5012
+#define CK_ViewNewBookmark              5013
+#define CK_ViewMoveUp                   5014
+#define CK_ViewMoveDown                 5015
+#define CK_ViewMoveLeft                 5016
+#define CK_ViewMoveRight                5017
+#define CK_ViewMovePgDn                 5018
+#define CK_ViewMovePgUp                 5019
+#define CK_ViewMoveHalfPgDn             5020
+#define CK_ViewMoveHalfPgUp             5021
+#define CK_ViewMoveToBol                5022
+#define CK_ViewMoveToEol                5023
+#define CK_ViewNextFile                 5024
+#define CK_ViewPrevFile                 5025
+#define CK_ViewToggleRuler              5026
+#define CK_ViewToggleHexNavMode         5027
+
+/* Tree */
+#define CK_TreeHelp                     6001
+#define CK_TreeForget                   6003
+#define CK_TreeToggleNav                6004
+#define CK_TreeCopy                     6005
+#define CK_TreeMove                     6006
+#define CK_TreeMake                     6007
+#define CK_TreeMoveUp                   6011
+#define CK_TreeMoveDown                 6012
+#define CK_TreeMoveLeft                 6013
+#define CK_TreeMoveRight                6014
+#define CK_TreeMoveHome                 6015
+#define CK_TreeMoveEnd                  6016
+#define CK_TreeMovePgUp                 6017
+#define CK_TreeMovePgDn                 6018
+#define CK_TreeOpen                     6019
+#define CK_TreeRescan                   6020
+#define CK_TreeStartSearch              6021
+#define CK_TreeRemove                   6022
 
 /* main commands */
 #define CK_AddHotlist                   7001
@@ -291,9 +333,7 @@
 #define CK_LinkCmd                      7037
 #define CK_ListingCmd                   7038
 #define CK_ListmodeCmd                  7039
-#define CK_MenuInfoCmd                  7040
 #define CK_MenuLastSelectedCmd          7042
-#define CK_MenuQuickViewCmd             7043
 #define CK_MkdirCmd                     7044
 #define CK_NetlinkCmd                   7045
 #define CK_QuickCdCmd                   7046
@@ -322,6 +362,8 @@
 #define CK_UserMenuCmd                  7069
 #define CK_ViewCmd                      7070
 #define CK_ViewFileCmd                  7071
+#define CK_HelpCmd                      7072
+#define CK_MenuCmd                      7073
 
 /* panels */
 #define CK_PanelChdirOtherPanel         8001

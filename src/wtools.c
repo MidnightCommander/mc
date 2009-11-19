@@ -130,7 +130,8 @@ run_listbox (Listbox *l)
 
 /* default query callback, used to reposition query */
 static cb_ret_t
-default_query_callback (Dlg_head *h, dlg_msg_t msg, int parm)
+default_query_callback (Dlg_head *h, Widget *sender,
+			dlg_msg_t msg, int parm, void *data)
 {
     switch (msg) {
     case DLG_RESIZE:
@@ -144,7 +145,7 @@ default_query_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     default:
-	return default_dlg_callback (h, msg, parm);
+	return default_dlg_callback (h, sender, msg, parm, data);
     }
 }
 
@@ -216,7 +217,7 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
 	add_widget (query_dlg, label_new (2, 3, text));
 
 	/* do resize before running and selecting any widget */
-	default_query_callback (query_dlg, DLG_RESIZE, 0);
+	default_query_callback (query_dlg, NULL, DLG_RESIZE, 0, NULL);
 
 	if (defbutton)
 	    dlg_select_widget (defbutton);
@@ -260,7 +261,7 @@ do_create_message (int flags, const char *title, const char *text)
     d = last_query_dlg;
 
     /* do resize before initing and running */
-    default_query_callback (d, DLG_RESIZE, 0);
+    default_query_callback (d, NULL, DLG_RESIZE, 0, NULL);
 
     init_dlg (d);
     g_free (p);

@@ -56,7 +56,6 @@
 #include "dialog.h"
 #include "menu.h"
 #include "panel.h"
-#include "main.h"
 #include "option.h"
 #include "tree.h"
 #include "treestore.h"
@@ -73,18 +72,20 @@
 #include "execute.h"
 #include "ext.h"		/* For flush_extension_file() */
 #include "strutil.h"
-/* Listbox for the command history feature */
 #include "widget.h"
 #include "command.h"
 #include "wtools.h"
 #include "cmddef.h"		/* CK_ cmd name const */
 #include "fileloc.h"		/* MC_USERCONF_DIR */
+#include "user.h"		/* user_file_menu_cmd() */
 
 #include "../vfs/vfs.h"		/* vfs_translate_url() */
 
 #include "chmod.h"
 #include "chown.h"
 #include "achown.h"
+
+#include "main.h"
 
 #ifdef WITH_SMBFS
 #include "../vfs/smbfs.h"	/* smbfs_set_debug() */
@@ -316,6 +317,8 @@ GArray *main_keymap = NULL;
 GArray *main_x_keymap = NULL;
 GArray *panel_keymap = NULL;
 GArray *input_keymap = NULL;
+GArray *tree_keymap = NULL;
+GArray *help_keymap = NULL;
 
 const global_keymap_t *main_map;
 const global_keymap_t *main_x_map;
@@ -676,8 +679,8 @@ create_panel_menu (void)
     GList *entries = NULL;
 
     entries = g_list_append (entries, menu_entry_create (_("&Listing mode..."), CK_ListingCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Quick view"),      CK_MenuQuickViewCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Info" ),           CK_MenuInfoCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Quick view"),      CK_QuickViewCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Info" ),           CK_InfoCmd));
     entries = g_list_append (entries, menu_entry_create (_("&Tree"),            CK_TreeCmd));
     entries = g_list_append (entries, menu_separator_create ());
     entries = g_list_append (entries, menu_entry_create (_("&Sort order..."),   CK_Sort));
@@ -842,17 +845,10 @@ menu_cmd (void)
 }
 
 static char *
-midnight_get_shortcut (int command)
+midnight_get_shortcut (unsigned long command)
 {
     const char *ext_map;
     const char *shortcut = NULL;
-
-    ext_map = lookup_keymap_shortcut (main_map, CK_StartExtMap1);
-
-    if (ext_map != NULL)
-	shortcut = lookup_keymap_shortcut (main_x_map, command);
-    if (shortcut != NULL)
-	return g_strdup_printf ("%s %s", ext_map, shortcut);
 
     shortcut = lookup_keymap_shortcut (main_map, command);
     if (shortcut != NULL)
@@ -861,6 +857,12 @@ midnight_get_shortcut (int command)
     shortcut = lookup_keymap_shortcut (panel_map, command);
     if (shortcut != NULL)
 	return g_strdup (shortcut);
+
+    ext_map = lookup_keymap_shortcut (main_map, CK_StartExtMap1);
+    if (ext_map != NULL)
+	shortcut = lookup_keymap_shortcut (main_x_map, command);
+    if (shortcut != NULL)
+	return g_strdup_printf ("%s %s", ext_map, shortcut);
 
     return NULL;
 }
@@ -1108,27 +1110,35 @@ copy_other_tagged (void)
     copy_tagged (other_panel);
 }
 
-static void
-init_labels (void)
+void
+midnight_set_buttonbar (WButtonBar *b)
 {
-    buttonbar_set_label (midnight_dlg, 1, Q_("ButtonBar|Help"), help_cmd);
-    buttonbar_set_label (midnight_dlg, 2, Q_("ButtonBar|Menu"), user_file_menu_cmd);
-    buttonbar_set_label (midnight_dlg, 9, Q_("ButtonBar|PullDn"), menu_cmd);
-    buttonbar_set_label (midnight_dlg, 10, Q_("ButtonBar|Quit"), quit_cmd);
+    buttonbar_set_label (b,  1, Q_("ButtonBar|Help"), main_map, NULL);
+    buttonbar_set_label (b,  2, Q_("ButtonBar|Menu"), main_map, NULL);
+    buttonbar_set_label (b,  3, Q_("ButtonBar|View"), main_map, NULL);
+    buttonbar_set_label (b,  4, Q_("ButtonBar|Edit"), main_map, NULL);
+    buttonbar_set_label (b,  5, Q_("ButtonBar|Copy"), main_map, NULL);
+    buttonbar_set_label (b,  6, Q_("ButtonBar|RenMov"), main_map, NULL);
+    buttonbar_set_label (b,  7, Q_("ButtonBar|Mkdir"), main_map, NULL);
+    buttonbar_set_label (b,  8, Q_("ButtonBar|Delete"), main_map, NULL);
+    buttonbar_set_label (b,  9, Q_("ButtonBar|PullDn"), main_map, NULL);
+    buttonbar_set_label (b, 10, Q_("ButtonBar|Quit"), main_map, NULL);
 }
 
-static int ctl_x_map_enabled = 0;
+static gboolean ctl_x_map_enabled = FALSE;
 
 static void
 ctl_x_cmd (void)
 {
-    ctl_x_map_enabled = 1;
+    ctl_x_map_enabled = TRUE;
 }
 
 static cb_ret_t
-midnight_execute_cmd (int command)
+midnight_execute_cmd (Widget *sender, unsigned long command)
 {
     cb_ret_t res = MSG_HANDLED;
+
+    (void) sender;
 
     switch (command) {
     case CK_AddHotlist:
@@ -1219,11 +1229,17 @@ midnight_execute_cmd (int command)
         ftplink_cmd ();
         break;
 #endif
+    case CK_HelpCmd:
+        help_cmd ();
+        break;
     case CK_HistoryCmd:
         history_cmd ();
         break;
     case CK_InfoCmd:
-        info_cmd_no_menu ();
+        if (sender == (Widget *) the_menubar)
+            info_cmd ();                /* mwnu */
+        else
+            info_cmd_no_menu ();        /* shortcut or buttonbar */
         break;
 #ifdef WITH_BACKGROUND
     case CK_JobsCmd:
@@ -1247,14 +1263,11 @@ midnight_execute_cmd (int command)
         listmode_cmd ();
         break;
 #endif
-    case CK_MenuInfoCmd:
-        info_cmd ();
+    case CK_MenuCmd:
+        menu_cmd ();
         break;
     case CK_MenuLastSelectedCmd:
         menu_last_selected_cmd ();
-        break;
-    case CK_MenuQuickViewCmd:
-        quick_view_cmd ();
         break;
     case CK_MkdirCmd:
         mkdir_cmd ();
@@ -1276,7 +1289,10 @@ midnight_execute_cmd (int command)
         quick_chdir_cmd ();
         break;
     case CK_QuickViewCmd:
-        quick_cmd_no_menu ();
+        if (sender == (Widget *) the_menubar)
+            quick_view_cmd ();          /* menu */
+        else
+            quick_cmd_no_menu ();       /* shortcut or buttonabr */
         break;
     case CK_QuietQuitCmd:
         quiet_quit_cmd ();
@@ -1566,42 +1582,50 @@ done_mc_profile (void)
 }
 
 static cb_ret_t
-midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
+midnight_callback (Dlg_head *h, Widget *sender,
+		    dlg_msg_t msg, int parm, void *data)
 {
-    int i;
+    unsigned long command;
+
     switch (msg) {
 
+    case DLG_DRAW:
+	load_hint (1);
+	/* We handle the special case of the output lines */
+	if (console_flag && output_lines)
+	    show_console_contents (output_start_y,
+				   LINES - output_lines - keybar_visible -
+				   1, LINES - keybar_visible - 1);
+	return MSG_HANDLED;
+
     case DLG_IDLE:
-	/* We only need the first idle event */
+	/* We only need the first idle event to show user menu after start */
 	set_idle_proc (h, 0);
-	if (auto_menu) {
-	    user_file_menu_cmd ();
-	}
+	if (auto_menu)
+	    midnight_execute_cmd (NULL, CK_UserMenuCmd);
 	return MSG_HANDLED;
 
     case DLG_KEY:
 	if (ctl_x_map_enabled) {
-	    ctl_x_map_enabled = 0;
-	    for (i = 0; main_x_map[i].key; i++)
-		if (parm == main_x_map[i].key)
-		    return midnight_execute_cmd (main_x_map[i].command);
+	    ctl_x_map_enabled = FALSE;
+	    command = lookup_keymap_command (main_x_map, parm);
+	    if (command != CK_Ignore_Key)
+		return midnight_execute_cmd (NULL, command);
 	}
 
 	/* FIXME: should handle all menu shortcuts before this point */
 	if (the_menubar->is_active)
 	    return MSG_NOT_HANDLED;
 
-	if (parm == KEY_F (10)) {
-	    quit_cmd ();
-	    return MSG_HANDLED;
-	}
-
 	if (parm == '\t')
 	    free_completions (cmdline);
 
 	if (parm == '\n') {
+	    size_t i;
+
 	    for (i = 0; cmdline->buffer[i] && (cmdline->buffer[i] == ' ' ||
-		cmdline->buffer[i] == '\t'); i++);
+		cmdline->buffer[i] == '\t'); i++)
+		;
 	    if (cmdline->buffer[i]) {
 	        send_message ((Widget *) cmdline, WIDGET_KEY, parm);
 		return MSG_HANDLED;
@@ -1680,35 +1704,40 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	    if (v == MSG_HANDLED)
 		return MSG_HANDLED;
 	}
-	if (ctl_x_map_enabled) {
-	    ctl_x_map_enabled = 0;
-	    for (i = 0; main_x_map[i].key; i++)
-		if (parm == main_x_map[i].key)
-		    return midnight_execute_cmd (main_x_map[i].command);
-	} else {
-	    for (i = 0; main_map[i].key; i++) {
-		if (parm == main_map[i].key)
-		    return midnight_execute_cmd (main_map[i].command);
-	    }
-	}
-	return MSG_NOT_HANDLED;
 
-    case DLG_DRAW:
-	load_hint (1);
-	/* We handle the special case of the output lines */
-	if (console_flag && output_lines)
-	    show_console_contents (output_start_y,
-				   LINES - output_lines - keybar_visible -
-				   1, LINES - keybar_visible - 1);
-	return MSG_HANDLED;
+	if (ctl_x_map_enabled) {
+	    ctl_x_map_enabled = FALSE;
+	    command = lookup_keymap_command (main_x_map, parm);
+	} else
+	    command = lookup_keymap_command (main_map, parm);
+
+	return (command == CK_Ignore_Key)
+			? MSG_NOT_HANDLED
+			: midnight_execute_cmd (NULL, command);
 
     case DLG_POST_KEY:
 	if (!the_menubar->is_active)
 	    update_dirty_panels ();
 	return MSG_HANDLED;
 
+    case DLG_ACTION:
+	/* shortcut */
+	if (sender == NULL)
+	    midnight_execute_cmd (NULL, parm);
+	/* message from menu */
+	else if (sender == (Widget *) the_menubar)
+	    midnight_execute_cmd (sender, parm);
+	/* message from buttonbar */
+	else if (sender == (Widget *) the_bar) {
+	    if (data == NULL)
+		midnight_execute_cmd (sender, parm);
+	    else
+		send_message ((Widget *) data, WIDGET_COMMAND, parm);
+	}
+	return MSG_HANDLED;
+
     default:
-	return default_dlg_callback (h, msg, parm);
+	return default_dlg_callback (h, sender, msg, parm, data);
     }
 }
 
@@ -1781,7 +1810,6 @@ load_hint (int force)
 static void
 setup_panels_and_run_mc (void)
 {
-    midnight_dlg->menu_executor = midnight_execute_cmd;
     midnight_dlg->get_shortcut = midnight_get_shortcut;
 
     add_widget (midnight_dlg, the_menubar);
@@ -1792,9 +1820,9 @@ setup_panels_and_run_mc (void)
     add_widget (midnight_dlg, the_hint);
     add_widget (midnight_dlg, cmdline);
     add_widget (midnight_dlg, the_prompt);
-    add_widget (midnight_dlg, the_bar);
-    init_labels ();
 
+    add_widget (midnight_dlg, the_bar);
+    midnight_set_buttonbar (the_bar);
 
     if (boot_current_is_left)
 	dlg_select_widget (get_panel_widget (0));
@@ -1875,25 +1903,28 @@ do_nc (void)
     check_codeset ();
 
     main_map = default_main_map;
-
     if (main_keymap && main_keymap->len > 0)
         main_map = (global_keymap_t *) main_keymap->data;
 
     main_x_map = default_main_x_map;
-
     if (main_x_keymap && main_x_keymap->len > 0)
         main_x_map = (global_keymap_t *) main_x_keymap->data;
 
     panel_map = default_panel_keymap;
-
-    if (panel_keymap && panel_keymap->len > 0) {
+    if (panel_keymap && panel_keymap->len > 0)
         panel_map = (global_keymap_t *) panel_keymap->data;
-    }
 
     input_map = default_input_keymap;
-
     if (input_keymap && input_keymap->len > 0)
         input_map = (global_keymap_t *) input_keymap->data;
+
+    tree_map = default_tree_keymap;
+    if (tree_keymap && tree_keymap->len > 0)
+        tree_map = (global_keymap_t *) tree_keymap->data;
+
+    help_map = default_help_keymap;
+    if (help_keymap && help_keymap->len > 0)
+        help_map = (global_keymap_t *) help_keymap->data;
 
     /* Check if we were invoked as an editor or file viewer */
     if (!mc_maybe_editor_or_viewer ()) {
@@ -1903,11 +1934,12 @@ do_nc (void)
 	midnight_shutdown = 1;
 
 	/* destroy_dlg destroys even current_panel->cwd, so we have to save a copy :) */
-	if (mc_args__last_wd_file && vfs_current_is_local ()) {
+	if (mc_args__last_wd_file && vfs_current_is_local ())
 	    last_wd_string = g_strdup (current_panel->cwd);
-	}
+
 	done_mc ();
     }
+
     destroy_dlg (midnight_dlg);
     panel_deinit ();
     current_panel = 0;
@@ -1950,7 +1982,6 @@ OS_Setup (void)
 
     if (!home_dir)
 	home_dir = mc_home;
-
 }
 
 static void
@@ -2019,7 +2050,7 @@ init_sigchld (void)
 }
 
 static void
-mc_main__setup_by_args(int argc, char *argv[])
+mc_main__setup_by_args (int argc, char *argv[])
 {
     const char *base;
     char *tmp;
@@ -2028,8 +2059,7 @@ mc_main__setup_by_args(int argc, char *argv[])
 	use_mouse_p = MOUSE_DISABLED;
 
 #ifdef USE_NETCODE
-    if (mc_args__netfs_logfile != NULL)
-    {
+    if (mc_args__netfs_logfile != NULL) {
 	mc_setctl ("/#ftp:", VFS_SETCTL_LOGFILE, (void *) mc_args__netfs_logfile);
 #ifdef WITH_SMBFS
 	smbfs_set_debugf (mc_args__netfs_logfile);
@@ -2038,16 +2068,12 @@ mc_main__setup_by_args(int argc, char *argv[])
 
 #ifdef WITH_SMBFS
     if (mc_args__debug_level != 0)
-    {
 	smbfs_set_debug (mc_args__debug_level);
-    }
 #endif				/* WITH_SMBFS */
 #endif				/* USE_NETCODE */
 
-
     base = x_basename (argv[0]);
-    tmp = (argc > 0)? argv[1] : NULL;
-
+    tmp = (argc > 0) ? argv[1] : NULL;
 
     if (!STRNCOMP (base, "mce", 3) || !STRCOMP (base, "vi")) {
 	edit_one_file = "";
@@ -2108,8 +2134,6 @@ mc_main__setup_by_args(int argc, char *argv[])
 		other_dir = g_strdup (tmp);
 	}
     }
-
-
 }
 
 int
@@ -2144,8 +2168,8 @@ main (int argc, char *argv[])
 
     if ( !mc_args_handle (&argc, &argv, "mc"))
 	return 1;
-    mc_main__setup_by_args(argc,argv);
 
+    mc_main__setup_by_args (argc,argv);
 
     /* NOTE: This has to be called before tty_init or whatever routine
        calls any define_sequence */

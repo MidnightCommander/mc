@@ -6,6 +6,7 @@
 #ifndef MC_MAIN_H
 #define MC_MAIN_H
 
+#include "global.h"
 #include "keybind.h"
 
 /* Toggling functions */
@@ -22,6 +23,10 @@ extern volatile int quit;
 enum { pause_never, pause_on_dumb_terminals, pause_always };
 
 void subshell_chdir (const char *command);
+
+struct WButtonBar;
+
+void midnight_set_buttonbar (struct WButtonBar *b);
 
 /* See main.c for details on these variables */
 extern int mark_moves_down;
@@ -85,9 +90,13 @@ extern GArray *main_keymap;
 extern GArray *main_x_keymap;
 extern GArray *panel_keymap;
 extern GArray *input_keymap;
+extern GArray *tree_keymap;
+extern GArray *help_keymap;
 
 extern const global_keymap_t *panel_map;
 extern const global_keymap_t *input_map;
+extern const global_keymap_t *tree_map;
+extern const global_keymap_t *help_map;
 
 #ifdef HAVE_SUBSHELL_SUPPORT
 void do_update_prompt (void);
@@ -129,7 +138,7 @@ char *remove_encoding_from_path (const char *);
 
 struct WPanel;
 
-void directory_history_add   (struct WPanel *panel, const char *dir);
-int  do_panel_cd             (struct WPanel *panel, const char *new_dir, enum cd_enum cd_type);
+void directory_history_add (struct WPanel *panel, const char *dir);
+int do_panel_cd (struct WPanel *panel, const char *new_dir, enum cd_enum cd_type);
 
-#endif
+#endif					/* MC_MAIN_H */

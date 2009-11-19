@@ -6,6 +6,7 @@
 #ifndef MC_WIDGET_H
 #define MC_WIDGET_H
 
+#include "global.h"
 #include "dialog.h"		/* Widget */
 
 /* Completion stuff */
@@ -161,21 +162,14 @@ struct WListbox {
 /* number of bttons in buttonbar */
 #define BUTTONBAR_LABELS_NUM	10
 
-typedef void (*voidfn)(void);
-typedef void (*buttonbarfn)(void *);
-
 typedef struct WButtonBar {
     Widget widget;
-    int visible;		/* Is it visible? */
+    gboolean visible;		/* Is it visible? */
     int btn_width;		/* width of one button */
     struct {
-	char   *text;
-	enum { BBFUNC_NONE, BBFUNC_VOID, BBFUNC_PTR } tag;
-	union {
-	    voidfn fn_void;
-	    buttonbarfn fn_ptr;
-	} u;
-	void   *data;
+	char *text;
+	unsigned long command;
+	Widget *receiver;
     } labels [BUTTONBAR_LABELS_NUM];
 } WButtonBar;
 
@@ -197,7 +191,7 @@ WInput  *input_new    (int y, int x, int color, int len, const char *text, const
 WLabel  *label_new    (int y, int x, const char *text);
 WGauge  *gauge_new    (int y, int x, int shown, int max, int current);
 WListbox *listbox_new (int y, int x, int height, int width, lcback callback);
-WButtonBar *buttonbar_new (int visible);
+WButtonBar *buttonbar_new (gboolean visible);
 WGroupbox *groupbox_new (int y, int x, int height, int width, const char *title);
 
 /* Input lines */
@@ -252,16 +246,16 @@ enum append_pos {
 char *listbox_add_item (WListbox *l, enum append_pos pos, int
 			hotkey, const char *text, void *data);
 
+struct global_keymap_t;
 
-WButtonBar *find_buttonbar (Dlg_head *h);
-void buttonbar_clear_label (Dlg_head *, int idx);
-void buttonbar_set_label (Dlg_head *, int index, const char *text, voidfn);
-void buttonbar_set_label_data (Dlg_head *h, int idx, const char *text,
-			       buttonbarfn cback, void *data);
-void buttonbar_set_visible (WButtonBar *, gboolean);
-void buttonbar_redraw (Dlg_head *h);
+WButtonBar *find_buttonbar (const Dlg_head *h);
+void buttonbar_set_label (WButtonBar *bb, int index, const char *text,
+			    const struct global_keymap_t *keymap, const Widget *receiver);
+#define buttonbar_clear_label(bb, idx, recv) buttonbar_set_label (bb, idx, "", NULL, recv)
+void buttonbar_set_visible (WButtonBar *bb, gboolean visible);
+void buttonbar_redraw (WButtonBar *bb);
 
-void free_completions (WInput *);
-void complete (WInput *);
+void free_completions (WInput *in);
+void complete (WInput *in);
 
-#endif
+#endif					/* MC_WIDGET_H */
