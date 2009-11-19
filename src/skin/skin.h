@@ -61,15 +61,16 @@
 #define EDITOR_BOLD_COLOR       mc_skin_color__cache[26]
 #define EDITOR_MARKED_COLOR     mc_skin_color__cache[27]
 #define EDITOR_WHITESPACE_COLOR mc_skin_color__cache[28]
+#define EDITOR_RIGHT_MARGIN_COLOR mc_skin_color__cache[29]
 /* color of left 8 char status per line */
-#define LINE_STATE_COLOR        mc_skin_color__cache[29]
-#define BOOK_MARK_COLOR         mc_skin_color__cache[30]
-#define BOOK_MARK_FOUND_COLOR   mc_skin_color__cache[31]
+#define LINE_STATE_COLOR        mc_skin_color__cache[30]
+#define BOOK_MARK_COLOR         mc_skin_color__cache[31]
+#define BOOK_MARK_FOUND_COLOR   mc_skin_color__cache[32]
 
-#define BUTTONBAR_HOTKEY_COLOR   mc_skin_color__cache[32]
-#define BUTTONBAR_BUTTON_COLOR   mc_skin_color__cache[33]
+#define BUTTONBAR_HOTKEY_COLOR   mc_skin_color__cache[33]
+#define BUTTONBAR_BUTTON_COLOR   mc_skin_color__cache[34]
 
-#define MC_SKIN_COLOR_CACHE_COUNT 34
+#define MC_SKIN_COLOR_CACHE_COUNT 35
 
 
 /*** enums ***************************************************************************************/
