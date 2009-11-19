@@ -1578,9 +1578,6 @@ long edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
     long p, q;
     int col = 0;
     int cw = 1;
-#ifdef HAVE_CHARSET
-	int utf_ch = 0;
-#endif
     if (upto) {
 	q = upto;
 	cols = -10;
@@ -1591,7 +1588,6 @@ long edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
 	int c;
 #ifdef HAVE_CHARSET
 	cw = 1;
-	utf_ch = 0;
 #endif
 	if (cols != -10) {
 	    if (col == cols)
@@ -1600,13 +1596,13 @@ long edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
 		return p - 1;
 	}
 #ifdef HAVE_CHARSET
-	if ( !edit->utf8 ) {
+	if (!edit->utf8) {
 #endif
 	    c = edit_get_byte (edit, p);
 #ifdef HAVE_CHARSET
 	} else {
 	    cw = 1;
-	    c = utf_ch = edit_get_utf (edit, p, &cw);
+	    c = edit_get_utf (edit, p, &cw);
 	}
 #endif
 	if (c == '\t')
@@ -1616,26 +1612,22 @@ long edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
 		return col;
 	    else
 		return p;
-	} else if (c < 32 || c == 127)
-	    col += 2; /* Caret notation for control characters */
-	else
-	    col++;
+	} else if (c < 32 || c == 127) {
+	     /* Caret notation for control characters */
+	     col++;
+	}
+	col++;
+	p++;
 #ifdef HAVE_CHARSET
-	if ( cw > 1 ) {
-	    if (edit->utf8 && g_unichar_iswide(utf_ch)) {
-                col -= cw - 1;
+	if (cw > 1) {
+	    if (edit->utf8 && g_unichar_iswide (c)) {
 	        if (utf8_display)
-	            col += 1;
-	    } else {
-	        col -= 2;
+	            col++;
 	    }
 	    p += cw - 1;
-	}
-	else
+	} else if (edit->utf8 && !g_unichar_isprint (c))
+	    col--;
 #endif
-	{
-	    p++;
-	}
     }
     return col;
 }
