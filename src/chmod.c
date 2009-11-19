@@ -207,7 +207,7 @@ init_chmod (void)
     single_set = (current_panel->marked < 2) ? 2 : 0;
 
     ch_dlg =
-        create_dlg (0, 0, 22 - single_set, 70, dialog_colors,
+        create_dlg (TRUE, 0, 0, 22 - single_set, 70, dialog_colors,
                     chmod_callback, "[Chmod]", _("Chmod command"), DLG_CENTER | DLG_REVERSE);
 
     for (i = 0; i < BUTTONS; i++)

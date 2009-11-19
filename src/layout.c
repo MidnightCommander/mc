@@ -456,7 +456,7 @@ init_layout (void)
     }
 
     layout_dlg =
-        create_dlg (0, 0, 14, first_width * 2 + 9,
+        create_dlg (TRUE, 0, 0, 14, first_width * 2 + 9,
                     dialog_colors, layout_callback, "[Layout]",
                     _("Layout"), DLG_CENTER | DLG_REVERSE);
 

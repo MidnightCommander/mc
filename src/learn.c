@@ -252,7 +252,7 @@ init_learn (void)
     do_refresh ();
 
     learn_dlg =
-	create_dlg (0, 0, 23, 78, dialog_colors, learn_callback,
+	create_dlg (TRUE, 0, 0, 23, 78, dialog_colors, learn_callback,
 		    "[Learn keys]", learn_title, DLG_CENTER | DLG_REVERSE);
 
     for (i = 0; i < BUTTONS; i++)

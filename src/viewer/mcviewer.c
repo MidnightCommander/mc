@@ -245,7 +245,7 @@ mcview_viewer (const char *command, const char *file, int *move_dir_p, int start
     Dlg_head *view_dlg;
 
     /* Create dialog and widgets, put them on the dialog */
-    view_dlg = create_dlg (0, 0, LINES, COLS, NULL, mcview_dialog_callback,
+    view_dlg = create_dlg (FALSE, 0, 0, LINES, COLS, NULL, mcview_dialog_callback,
                            "[Internal File Viewer]", NULL, DLG_WANT_TAB);
 
     lc_mcview = mcview_new (0, 0, LINES - 1, COLS, FALSE);

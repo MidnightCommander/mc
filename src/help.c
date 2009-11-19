@@ -1027,7 +1027,7 @@ interactive_display (const char *filename, const char *node)
     help_lines = min (LINES - 4, max (2 * LINES / 3, 18));
 
     whelp =
-        create_dlg (0, 0, help_lines + 4, HELP_WINDOW_WIDTH + 4,
+        create_dlg (TRUE, 0, 0, help_lines + 4, HELP_WINDOW_WIDTH + 4,
                     help_colors, help_callback, "[Help]", _("Help"),
                     DLG_TRYUP | DLG_CENTER | DLG_WANT_TAB);
 

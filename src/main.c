@@ -1898,7 +1898,7 @@ do_nc (void)
 
     panel_init ();
 
-    midnight_dlg = create_dlg (0, 0, LINES, COLS, midnight_colors, midnight_callback,
+    midnight_dlg = create_dlg (FALSE, 0, 0, LINES, COLS, midnight_colors, midnight_callback,
                                "[main]", NULL, DLG_WANT_IDLE);
 
     if (mc_run_mode == MC_RUN_FULL)

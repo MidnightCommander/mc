@@ -1570,7 +1570,7 @@ compute_dir_size_create_ui (void)
 
     ui = g_new (ComputeDirSizeUI, 1);
 
-    ui->dlg = create_dlg (0, 0, 8, COLS / 2, dialog_colors, NULL,
+    ui->dlg = create_dlg (TRUE, 0, 0, 8, COLS / 2, dialog_colors, NULL,
                           NULL, _("Directory scanning"), DLG_CENTER);
     ui->dirname = label_new (3, 3, "");
     add_widget (ui->dlg, ui->dirname);

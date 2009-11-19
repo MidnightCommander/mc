@@ -298,7 +298,7 @@ file_op_context_create_ui_without_init (FileOpContext * ctx, gboolean with_eta,
     ui->showing_bps = with_eta;
 
     ui->op_dlg =
-        create_dlg (0, 0, WY - minus + 1 + total_reserve, dlg_width,
+        create_dlg (TRUE, 0, 0, WY - minus + 1 + total_reserve, dlg_width,
                     dialog_colors, NULL, NULL, op_names[ctx->operation], DLG_CENTER | DLG_REVERSE);
 
     last_hint_line = the_hint->widget.y;
@@ -777,7 +777,7 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
 
     /* FIXME - missing help node */
     ui->replace_dlg =
-        create_dlg (0, 0, rd_ylen, rd_xlen, alarm_colors, NULL, "[Replace]",
+        create_dlg (TRUE, 0, 0, rd_ylen, rd_xlen, alarm_colors, NULL, "[Replace]",
                     title, DLG_CENTER | DLG_REVERSE);
 
     /* prompt -- centered */

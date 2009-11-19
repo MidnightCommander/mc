@@ -320,7 +320,7 @@ editcmd_dialog_raw_key_query (const char *heading, const char *query, int cancel
     };
 
     struct Dlg_head *raw_dlg =
-        create_dlg (0, 0, 7, w, dialog_colors, editcmd_dialog_raw_key_query_cb,
+        create_dlg (TRUE, 0, 0, 7, w, dialog_colors, editcmd_dialog_raw_key_query_cb,
                     NULL, heading, DLG_CENTER | DLG_TRYUP | DLG_WANT_TAB);
     add_widget (raw_dlg, input_new (3 - cancel, w - 5, (int *) input_colors,
                                     2, "", 0, INPUT_COMPLETE_DEFAULT));
@@ -376,7 +376,7 @@ editcmd_dialog_completion_show (WEdit * edit, int max_len, int word_len,
 
     /* create the dialog */
     compl_dlg =
-        create_dlg (start_y, start_x, compl_dlg_h, compl_dlg_w,
+        create_dlg (TRUE, start_y, start_x, compl_dlg_h, compl_dlg_w,
                     dialog_colors, NULL, "[Completion]", NULL, DLG_COMPACT);
 
     /* create the listbox */
@@ -464,7 +464,7 @@ editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, int max_l
         start_y -= (offset + 1);
 
     /* create the dialog */
-    def_dlg = create_dlg (start_y, start_x, def_dlg_h, def_dlg_w,
+    def_dlg = create_dlg (TRUE, start_y, start_x, def_dlg_h, def_dlg_w,
                           dialog_colors, NULL, "[Definitions]", match_expr, DLG_COMPACT);
 
     /* create the listbox */

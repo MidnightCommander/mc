@@ -258,12 +258,14 @@ default_dlg_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, vo
 }
 
 Dlg_head *
-create_dlg (int y1, int x1, int lines, int cols, const int *colors,
-            dlg_cb_fn callback, const char *help_ctx, const char *title, dlg_flags_t flags)
+create_dlg (gboolean modal, int y1, int x1, int lines, int cols,
+            const int *colors, dlg_cb_fn callback, const char *help_ctx,
+            const char *title, dlg_flags_t flags)
 {
     Dlg_head *new_d;
 
     new_d = g_new0 (Dlg_head, 1);
+    new_d->modal = modal;
     if (colors != NULL)
     {
         new_d->color = g_new (int, DLG_COLOR_NUM);
@@ -880,6 +882,9 @@ dlg_key_event (Dlg_head * h, int d_key)
 void
 init_dlg (Dlg_head * h)
 {
+    if ((top_dlg != NULL) && ((Dlg_head *) top_dlg->data)->modal)
+        h->modal = TRUE;
+
     /* add dialog to the stack */
     current_dlg = g_list_prepend (current_dlg, h);
 

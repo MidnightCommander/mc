@@ -25,7 +25,7 @@
 
 #include "lib/global.h"
 #include "lib/tty/mouse.h"
-#include "lib/util.h"		/* Hook */
+#include "lib/util.h"           /* Hook */
 
 /* Common return values */
 #define B_EXIT		0
@@ -127,6 +127,7 @@ typedef char *(*dlg_shortcut_str) (unsigned long command);
 struct Dlg_head
 {
     /* Set by the user */
+    gboolean modal;             /* type of dialog: modal or not */
     dlg_flags_t flags;          /* User flags */
     const char *help_ctx;       /* Name of the help entry */
     int *color;                 /* Color set. Unused in viewer and editor */
@@ -199,7 +200,7 @@ struct Widget
 void draw_box (Dlg_head * h, int y, int x, int ys, int xs, gboolean single);
 
 /* Creates a dialog head  */
-Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
+Dlg_head *create_dlg (gboolean modal, int y1, int x1, int lines, int cols,
                       const int *colors, dlg_cb_fn callback,
                       const char *help_ctx, const char *title, dlg_flags_t flags);
 

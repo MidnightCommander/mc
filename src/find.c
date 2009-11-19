@@ -425,7 +425,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
 
   find_par_start:
     find_dlg =
-        create_dlg (0, 0, FIND_Y, FIND_X, dialog_colors,
+        create_dlg (TRUE, 0, 0, FIND_Y, FIND_X, dialog_colors,
                     find_parm_callback, "[Find File]", _("Find File"), DLG_CENTER | DLG_REVERSE);
 
     add_widget (find_dlg,
@@ -1226,7 +1226,7 @@ setup_gui (void)
     }
 
     find_dlg =
-        create_dlg (0, 0, FIND2_Y, FIND2_X, dialog_colors, find_callback,
+        create_dlg (TRUE, 0, 0, FIND2_Y, FIND2_X, dialog_colors, find_callback,
                     "[Find File]", _("Find File"), DLG_CENTER | DLG_REVERSE);
 
     add_widget (find_dlg,

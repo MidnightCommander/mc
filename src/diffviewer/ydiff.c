@@ -2748,6 +2748,8 @@ dview_redo (WDiff * dview)
 static void
 dview_edit (WDiff * dview, int ord)
 {
+    Dlg_head *h;
+    gboolean h_modal;
     int linenum, lineofs;
 
     if (dview->dsrc == DATA_SRC_TMP)
@@ -2756,8 +2758,13 @@ dview_edit (WDiff * dview, int ord)
         return;
     }
 
+    h = ((Widget *) dview)->owner;
+    h_modal = h->modal;
+
     get_line_numbers (dview->a[ord], dview->skip_rows, &linenum, &lineofs);
+    h->modal = TRUE; /* not allow edit file in several editors */
     do_edit_at_line (dview->file[ord], linenum);
+    h->modal = h_modal;
     dview_redo (dview);
     dview_update (dview);
 }
@@ -3229,7 +3236,7 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
 
     /* Create dialog and widgets, put them on the dialog */
     dview_dlg =
-        create_dlg (0, 0, LINES, COLS, NULL, dview_dialog_callback,
+        create_dlg (FALSE, 0, 0, LINES, COLS, NULL, dview_dialog_callback,
                     "[Diff Viewer]", NULL, DLG_WANT_TAB);
 
     dview = g_new0 (WDiff, 1);

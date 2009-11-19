@@ -1236,7 +1236,7 @@ complete_engine (WInput * in, int what_to_do)
             min_end = end;
             query_height = h;
             query_width = w;
-            query_dlg = create_dlg (y, x, query_height, query_width,
+            query_dlg = create_dlg (TRUE, y, x, query_height, query_width,
                                     dialog_colors, query_callback,
                                     "[Completion]", NULL, DLG_COMPACT);
             query_list = listbox_new (1, 1, h - 2, w - 2, FALSE, NULL);

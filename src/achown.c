@@ -264,7 +264,7 @@ do_enter_key (Dlg_head * h, int f_pos)
 	chl_end = 0;
 
 	chl_dlg =
-	    create_dlg (lyy, lxx, 13, 17, dialog_colors, chl_callback,
+	    create_dlg (TRUE, lyy, lxx, 13, 17, dialog_colors, chl_callback,
 			"[Advanced Chown]", title, DLG_COMPACT | DLG_REVERSE);
 
 	/* get new listboxes */
@@ -581,7 +581,7 @@ init_chown_advanced (void)
     x_toggle = 070;
 
     ch_dlg =
-	create_dlg (0, 0, dlg_h, dlg_w, dialog_colors, advanced_chown_callback,
+	create_dlg (TRUE, 0, 0, dlg_h, dlg_w, dialog_colors, advanced_chown_callback,
 		    "[Advanced Chown]", _("Chown advanced command"),
 		    DLG_CENTER | DLG_REVERSE);
 
