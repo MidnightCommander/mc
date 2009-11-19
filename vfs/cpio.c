@@ -331,7 +331,10 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super,
     tn = strrchr (name, PATH_SEP);
     if (tn == NULL)
 	tn = name;
-    else {
+    else if (tn == name + 1) {
+	/* started with "./" -- directory in the root of archive */
+	tn++;
+    } else {
 	*tn = '\0';
 	root = vfs_s_find_inode (me, super, name, LINK_FOLLOW, FL_MKDIR);
 	*tn = PATH_SEP;
@@ -341,7 +344,7 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super,
     entry = MEDATA->find_entry (me, root, tn, LINK_FOLLOW, FL_NONE);	/* In case entry is already there */
 
     if (entry != NULL) {
-	/* This shouldn't happen! (well, it can happen if there is a record for a 
+	/* This shouldn't happen! (well, it can happen if there is a record for a
 	   file and than a record for a directory it is in; cpio would die with
 	   'No such file or directory' is such case) */
 
