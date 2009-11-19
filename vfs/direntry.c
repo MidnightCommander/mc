@@ -400,12 +400,12 @@ vfs_s_find_inode (struct vfs_class *me, const struct vfs_s_super *super,
 		  const char *path, int follow, int flags)
 {
     struct vfs_s_entry *ent;
-    if (!(MEDATA->flags & VFS_S_REMOTE) && (!*path))
+
+    if (((MEDATA->flags & VFS_S_REMOTE) == 0) && (*path == '\0'))
 	return super->root;
+
     ent = (MEDATA->find_entry) (me, super->root, path, follow, flags);
-    if (!ent)
-	return NULL;
-    return ent->ino;
+    return (ent != NULL) ? ent->ino : NULL;
 }
 
 /* Ook, these were functions around directory entries / inodes */
@@ -488,9 +488,8 @@ vfs_s_get_path_mangle (struct vfs_class *me, char *inname,
 
     for (super = MEDATA->supers; super != NULL; super = super->next) {
 	/* 0 == other, 1 == same, return it, 2 == other but stop scanning */
-	int i;
-	if ((i =
-	     MEDATA->archive_same (me, super, archive_name, op, cookie))) {
+	int i = MEDATA->archive_same (me, super, archive_name, op, cookie);
+	if (i != 0) {
 	    if (i == 1)
 		goto return_success;
 	    else
