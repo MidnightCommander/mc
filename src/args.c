@@ -420,9 +420,10 @@ mc_args_handle(int *argc, char ***argv, const gchar *translation_domain)
     GError *error = NULL;
     const gchar *_system_codepage = str_detect_termencoding();
 
-    if ( !str_isutf8 (_system_codepage))
+#ifdef ENABLE_NLS
+    if (!str_isutf8 (_system_codepage))
 	bind_textdomain_codeset ("mc", "UTF-8");
-
+#endif
 
     context = g_option_context_new (mc_args_add_usage_info());
 
@@ -482,8 +483,10 @@ mc_args_handle(int *argc, char ***argv, const gchar *translation_domain)
     g_option_context_free (context);
     mc_args_clean_temp_help_strings();
 
-    if ( !str_isutf8 (_system_codepage))
+#ifdef ENABLE_NLS
+    if (!str_isutf8 (_system_codepage))
 	bind_textdomain_codeset ("mc", _system_codepage);
+#endif
 
     return mc_args_process();
 }

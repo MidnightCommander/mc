@@ -232,7 +232,7 @@ static void
 init_learn (void)
 {
     int x, y, i, j;
-    key_code_name_t *key;
+    const key_code_name_t *key;
     char buffer[BUF_TINY];
 
 #ifdef ENABLE_NLS
@@ -264,7 +264,9 @@ init_learn (void)
     x = UX;
     y = UY;
     for (key = key_name_conv_tab, j = 0;
-	 key->name != NULL && strcmp (key->name, "kpleft"); key++, j++);
+	    key->name != NULL && strcmp (key->name, "kpleft");
+	    key++, j++)
+	;
     learnkeys = g_new (learnkey, j);
     x += ((j - 1) / ROWS) * COLSHIFT;
     y += (j - 1) % ROWS;

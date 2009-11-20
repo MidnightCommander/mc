@@ -281,14 +281,18 @@ find_parameters (char **start_dir, char **pattern, char **content)
     const char *file_pattern_label = N_("&Using shell patterns");
     const char *file_recurs_label = N_("&Find recursively");
     const char *file_skip_hidden_label = N_("S&kip hidden");
+#ifdef HAVE_CHARSET
     const char *file_all_charsets_label = N_("&All charsets");
+#endif
 
     /* file content */
     const char *content_case_label = N_("Case sens&itive");
     const char *content_regexp_label = N_("Re&gular expression");
     const char *content_first_hit_label = N_("Fir&st hit");
     const char *content_whole_words_label = N_("&Whole words");
+#ifdef HAVE_CHARSET
     const char *content_all_charsets_label = N_("All cha&rsets");
+#endif
 
     const char *buts[] = { N_("&OK"), N_("&Cancel"), N_("&Tree") };
 
@@ -304,12 +308,14 @@ find_parameters (char **start_dir, char **pattern, char **content)
 	file_pattern_label = _(file_pattern_label);
 	file_recurs_label = _(file_recurs_label);
 	file_skip_hidden_label = _(file_skip_hidden_label);
+#ifdef HAVE_CHARSET
 	file_all_charsets_label = _(file_all_charsets_label);
+	content_all_charsets_label = _(content_all_charsets_label);
+#endif
 	content_case_label = _(content_case_label);
 	content_regexp_label = _(content_regexp_label);
 	content_first_hit_label = _(content_first_hit_label);
 	content_whole_words_label = _(content_whole_words_label);
-	content_all_charsets_label = _(content_all_charsets_label);
     }
 #endif				/* ENABLE_NLS */
 

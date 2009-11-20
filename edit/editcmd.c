@@ -2539,7 +2539,6 @@ edit_complete_word_cmd (WEdit *edit)
     /* release memory before return */
     for (i = 0; i < num_compl; i++)
 	g_free (compl[i].text);
-
 }
 
 void
@@ -2561,13 +2560,14 @@ edit_select_codepage_cmd (WEdit *edit)
             }
         }
 
-
 	if (cp_id != NULL)
 	    edit->utf8 = str_isutf8 (cp_id);
     }
 
     edit->force = REDRAW_COMPLETELY;
     edit_refresh_cmd (edit);
+#else
+    (void) edit;
 #endif
 }
 

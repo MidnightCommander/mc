@@ -72,7 +72,6 @@ static enum ruler_type {
 static void
 mcview_set_buttonbar (mcview_t *view)
 {
-    const char *text;
     Dlg_head *h = view->widget.parent;
     WButtonBar *b = find_buttonbar (h);
     const global_keymap_t *keymap = view->hex_mode ? view->hex_map : view->plain_map;

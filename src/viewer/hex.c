@@ -92,9 +92,7 @@ mcview_display_hex (mcview_t * view)
     mark_t boldflag = MARK_NORMAL;
     struct hexedit_change_node *curr = view->change_list;
     size_t i;
-    int cw = 1;
     int ch = 0;
-    gboolean read_res = TRUE;
 
     char hex_buff[10];          /* A temporary buffer for sprintf and mvwaddstr */
     int bytes;                  /* Number of bytes already printed on the line */
@@ -126,6 +124,8 @@ mcview_display_hex (mcview_t * view)
 
 #ifdef HAVE_CHARSET
             if (view->utf8) {
+                int cw = 1;
+                gboolean read_res = TRUE;
                 ch = mcview_get_utf (view, from, &cw, &read_res);
                 if (!read_res)
                     break;

@@ -1577,7 +1577,6 @@ long edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
 {
     long p, q;
     int col = 0;
-    int cw = 1;
     if (upto) {
 	q = upto;
 	cols = -10;
@@ -1587,7 +1586,7 @@ long edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
     while (p < q) {
 	int c;
 #ifdef HAVE_CHARSET
-	cw = 1;
+	int cw = 1;
 #endif
 	if (cols != -10) {
 	    if (col == cols)
@@ -1596,14 +1595,12 @@ long edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
 		return p - 1;
 	}
 #ifdef HAVE_CHARSET
-	if (!edit->utf8) {
-#endif
+	if (!edit->utf8)
 	    c = edit_get_byte (edit, p);
-#ifdef HAVE_CHARSET
-	} else {
-	    cw = 1;
+	else
 	    c = edit_get_utf (edit, p, &cw);
-	}
+#else
+	c = edit_get_byte (edit, p);
 #endif
 	if (c == '\t')
 	    col += TAB_SIZE - col % TAB_SIZE;

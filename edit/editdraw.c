@@ -560,12 +560,9 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 			col += 2;
 			break;
 		    }
-#ifndef HAVE_CHARSET
-                    int utf8_display = 0;
-#endif
 		    if (!edit->utf8) {
 		        if ( ( utf8_display && g_unichar_isprint (c) ) ||
-		             ( utf8_display == 0 && is_printable (c) ) ) {
+		             ( !utf8_display && is_printable (c) ) ) {
 			        p->ch = c;
 			        p++;
 			} else {
