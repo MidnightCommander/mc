@@ -1021,7 +1021,7 @@ history_get (const char *input_name)
 	g_snprintf (key_name, sizeof (key_name), "%lu", (unsigned long)i);
 	this_entry = mc_config_get_string (cfg, input_name, key_name, "");
 
-	if (this_entry && *this_entry)
+	if (this_entry != NULL)
 	    hist = list_append_unique (hist, this_entry);
     }
 
@@ -1076,12 +1076,10 @@ history_put (const char *input_name, GList *h)
 
     /* dump histories into profile */
     for (i = 0; h; h = g_list_next (h)) {
-	char *text;
-
-	text = (char *) h->data;
+	char *text = (char *) h->data;
 
 	/* We shouldn't have null entries, but let's be sure */
-	if (text && *text) {
+	if (text != NULL) {
 	    char key_name[BUF_TINY];
 	    g_snprintf (key_name, sizeof (key_name), "%d", i++);
 	    mc_config_set_string(cfg,input_name, key_name, text);
@@ -1296,67 +1294,56 @@ input_enable_update (WInput *in)
     update_input (in, 0);
 }
 
-#define ELEMENTS(a)    (sizeof(a)/sizeof(a[0]))
 
-int
+static void
 push_history (WInput *in, const char *text)
 {
-    static int i18n;
     /* input widget where urls with passwords are entered without any
        vfs prefix */
-    static const char *password_input_fields[] = {
+    const char *password_input_fields[] = {
 	N_(" Link to a remote machine "),
 	N_(" FTP to machine "),
 	N_(" SMB link to machine ")
     };
+    const size_t ELEMENTS = (sizeof (password_input_fields) /
+				sizeof (password_input_fields[0]));
+
     char *t;
-    const char *p;
     size_t i;
+    gboolean empty;
 
-    if (!i18n) {
-	i18n = 1;
-	for (i = 0; i < ELEMENTS (password_input_fields); i++)
-	    password_input_fields[i] = _(password_input_fields[i]);
-    }
+    if (text == NULL)
+	return;
 
-    for (p = text; *p == ' ' || *p == '\t'; p++);
-    if (!*p)
-	return 0;
+#ifdef ENABLE_NLS
+    for (i = 0; i < ELEMENTS; i++)
+	password_input_fields[i] = _(password_input_fields[i]);
+#endif
 
-    if (in->history) {
-	/* Avoid duplicated entries */
-	in->history = g_list_last (in->history);
-	if (!strcmp ((char *) in->history->data, text))
-	    return 1;
-    }
+    t = g_strstrip (g_strdup (text));
+    empty = *t == '\0';
+    g_free (t);
+    t = g_strdup (empty ? "" : text);
 
-    t = g_strdup (text);
+    if (in->history_name != NULL) {
+	const char *p = in->history_name + 3;
 
-    if (in->history_name) {
-	p = in->history_name + 3;
-	for (i = 0; i < ELEMENTS (password_input_fields); i++)
+	for (i = 0; i < ELEMENTS; i++)
 	    if (strcmp (p, password_input_fields[i]) == 0)
 		break;
-	if (i < ELEMENTS (password_input_fields))
-	    strip_password (t, 0);
-	else
-	    strip_password (t, 1);
+
+	strip_password (t, i >= ELEMENTS);
     }
 
     in->history = list_append_unique (in->history, t);
     in->need_push = 0;
-
-    return 2;
 }
-
-#undef ELEMENTS
 
 /* Cleans the input line and adds the current text to the history */
 void
 new_input (WInput *in)
 {
-    if (in->buffer)
-	push_history (in, in->buffer);
+    push_history (in, in->buffer);
     in->need_push = 1;
     in->buffer[0] = '\0';
     in->point = 0;
@@ -1717,17 +1704,8 @@ hist_prev (WInput *in)
 	return;
 
     if (in->need_push) {
-	switch (push_history (in, in->buffer)) {
-	case 2:
-	    in->history = g_list_previous (in->history);
-	    break;
-	case 1:
-	    if (in->history->prev)
-		in->history = g_list_previous (in->history);
-	    break;
-	case 0:
-	    break;
-	}
+	push_history (in, in->buffer);
+	in->history = g_list_previous (in->history);
     } else if (in->history->prev)
 	in->history = g_list_previous (in->history);
     else
@@ -1740,13 +1718,9 @@ static void
 hist_next (WInput *in)
 {
     if (in->need_push) {
-        switch (push_history (in, in->buffer)) {
-         case 2:
-            assign_text (in, "");
-            return;
-         case 0:
-            return;
-        }
+        push_history (in, in->buffer);
+        assign_text (in, "");
+        return;
     }
 
     if (!in->history)
