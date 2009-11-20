@@ -2067,6 +2067,11 @@ edit_left_word_move (WEdit *edit, int s)
 {
     for (;;) {
 	int c1, c2;
+	if (column_highlighting
+	    && edit->mark1 != edit->mark2
+	    && edit->over_col == 0
+	    && edit->curs1 == edit_bol(edit, edit->curs1))
+	    break;
 	edit_cursor_move (edit, -1);
 	if (!edit->curs1)
 	    break;
@@ -2093,6 +2098,12 @@ edit_right_word_move (WEdit *edit, int s)
 {
     for (;;) {
 	int c1, c2;
+	if (column_highlighting
+	    && edit->mark1 != edit->mark2
+	    && edit->over_col == 0
+	    && edit->curs1 == edit_eol(edit, edit->curs1)
+	    )
+	    break;
 	edit_cursor_move (edit, 1);
 	if (edit->curs1 >= edit->last_byte)
 	    break;
@@ -2135,6 +2146,11 @@ static void edit_right_char_move_cmd (WEdit * edit)
 static void edit_left_char_move_cmd (WEdit * edit)
 {
     int cw = 1;
+    if (column_highlighting
+        && edit->mark1 != edit->mark2
+        && edit->over_col == 0
+        && edit->curs1 == edit_bol(edit, edit->curs1))
+        return;
     if ( edit->utf8 ) {
         edit_get_prev_utf (edit, edit->curs1, &cw);
         if ( cw < 1 )
@@ -2146,7 +2162,6 @@ static void edit_left_char_move_cmd (WEdit * edit)
         edit_cursor_move (edit, -cw);
     }
 }
-
 
 static void edit_right_delete_word (WEdit * edit)
 {
