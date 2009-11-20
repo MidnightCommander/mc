@@ -154,7 +154,7 @@ get_codepage_index (const char *id)
 	return -1;
     if (codepages == NULL)
 	return -1;
-    for (i = 0; codepages[i].id; ++i)
+    for (i = 0; i < n_codepages; i++)
 	if (strcmp (id, codepages[i].id) == 0)
 	    return i;
     return -1;
