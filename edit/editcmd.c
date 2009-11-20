@@ -1046,11 +1046,13 @@ int eval_marks (WEdit * edit, long *start_mark, long *end_mark)
 	    int diff;
 	    *start_mark = min (edit->mark1, edit->curs1);
 	    *end_mark = max (edit->mark1, edit->curs1);
-	    diff = (*start_mark - edit_bol (edit, *start_mark)) -
-	           (*end_mark - edit_bol (edit, *end_mark));
-	    if (diff > 0) {
-	        *start_mark -= diff;
-	        *end_mark += diff;
+	    if (column_highlighting) {
+		diff = (*start_mark - edit_bol (edit, *start_mark)) -
+		       (*end_mark - edit_bol (edit, *end_mark));
+		if (diff > 0) {
+		    *start_mark -= diff;
+		    *end_mark += diff;
+		}
 	    }
 	    edit->column2 = edit->curs_col + edit->over_col;
 	}
