@@ -193,7 +193,7 @@ const key_code_name_t key_name_conv_tab[] = {
     { KEY_M_ALT,	"ralt",		N_("Alt"),	"M" },
     { KEY_M_SHIFT,	"shift",	N_("Shift"),	"S" },
 
-    {0, NULL, NULL, NULL }
+    { 0, NULL, NULL, NULL }
 };
 
 
@@ -1253,13 +1253,11 @@ sort_key_name_conv_tab (void)
     static gboolean has_been_sorted = FALSE;
 
     if (!has_been_sorted) {
-	int i;
-	for (i = 0; key_name_conv_tab[i].code; i++)
-	    key_name_conv_tab_sorted[i] = key_name_conv_tab[i];
-
-	qsort (key_name_conv_tab_sorted, key_name_conv_tab_size,
-		 sizeof (key_name_conv_tab_sorted[0]), &key_code_name_comparator);
-
+	memcpy (key_name_conv_tab_sorted, key_name_conv_tab,
+		sizeof (key_name_conv_tab_sorted));
+	qsort (key_name_conv_tab_sorted,
+		key_name_conv_tab_size, sizeof (key_name_conv_tab_sorted[0]),
+		&key_code_name_comparator);
 	has_been_sorted = TRUE;
     }
 }
@@ -1348,29 +1346,29 @@ lookup_key (const char *keyname, char **label)
 	s = g_string_new ("");
 
 	if (use_meta != -1) {
-	    g_string_append (s, key_name_conv_tab[use_meta].shortcut);
+	    g_string_append (s, key_name_conv_tab_sorted[use_meta].shortcut);
 	    g_string_append_c (s, '-');
 	}
 	if (use_ctrl != -1) {
-	    g_string_append (s, key_name_conv_tab[use_ctrl].shortcut);
+	    g_string_append (s, key_name_conv_tab_sorted[use_ctrl].shortcut);
 	    g_string_append_c (s, '-');
 	}
 	if (use_shift != -1) {
 	    if (k < 127)
 		g_string_append_c (s, (gchar) g_ascii_toupper ((gchar) k));
 	    else {
-		g_string_append (s, key_name_conv_tab[use_shift].shortcut);
+		g_string_append (s, key_name_conv_tab_sorted[use_shift].shortcut);
 		g_string_append_c (s, '-');
-		g_string_append (s, key_name_conv_tab[lc_index].shortcut);
+		g_string_append (s, key_name_conv_tab_sorted[lc_index].shortcut);
 	    }
 	} else if (k < 128) {
 	    if ((k >= 'A') || (lc_index < 0)
-		|| (key_name_conv_tab[lc_index].shortcut == NULL))
+		|| (key_name_conv_tab_sorted[lc_index].shortcut == NULL))
 		g_string_append_c (s, (gchar) g_ascii_tolower ((gchar) k));
 	    else
-		g_string_append (s, key_name_conv_tab[lc_index].shortcut);
-	} else if ((lc_index != -1) && (key_name_conv_tab[lc_index].shortcut != NULL))
-	    g_string_append (s, key_name_conv_tab[lc_index].shortcut);
+		g_string_append (s, key_name_conv_tab_sorted[lc_index].shortcut);
+	} else if ((lc_index != -1) && (key_name_conv_tab_sorted[lc_index].shortcut != NULL))
+	    g_string_append (s, key_name_conv_tab_sorted[lc_index].shortcut);
 	else
 	    g_string_append_c (s, (gchar) g_ascii_tolower ((gchar) key));
 
