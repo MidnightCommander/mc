@@ -1706,7 +1706,6 @@ panel_operate_generate_prompt (const WPanel *panel, const int operation,
 			       const struct stat *src_stat)
 {
     const char *sp, *cp;
-    int i;
     char format_string[BUF_MEDIUM];
     char *dp = format_string;
     gboolean build_question = FALSE;
@@ -1714,6 +1713,8 @@ panel_operate_generate_prompt (const WPanel *panel, const int operation,
 #ifdef ENABLE_NLS
     static gboolean i18n_flag = FALSE;
     if (!i18n_flag) {
+	int i;
+
 	for (i = sizeof (op_names1) / sizeof (op_names1[0]); i--;)
 	    op_names1[i] = Q_(op_names1[i]);
 

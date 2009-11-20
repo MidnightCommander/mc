@@ -923,8 +923,6 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation,
 	i18n = TRUE;
     }
 
-    fmd_xlen = max (FMDX, (size_t) COLS * 2/3);
-
     /* buttons */
     for (i = 0; i <= 2 - OFFSET; i++)
 	fmd_widgets[i].u.button.text = _(fmd_widgets[i].u.button.text);
@@ -934,6 +932,8 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation,
 	if (i != 7 - OFFSET)
 	    fmd_widgets[i].u.checkbox.text = _(fmd_widgets[i].u.checkbox.text);
 #endif				/* !ENABLE_NLS */
+
+    fmd_xlen = max (FMDX, (size_t) COLS * 2/3);
 
     len = str_term_width1 (fmd_widgets[6 - OFFSET].u.checkbox.text)
 	+ str_term_width1 (fmd_widgets[4 - OFFSET].u.checkbox.text) + 15;

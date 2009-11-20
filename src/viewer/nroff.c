@@ -72,7 +72,6 @@ mcview_display_nroff (mcview_t * view)
     int c;
     int c_prev = 0;
     int c_next = 0;
-    gboolean read_res = TRUE;
     struct hexedit_change_node *curr = view->change_list;
 
     mcview_display_clean (view);
@@ -88,6 +87,7 @@ mcview_display_nroff (mcview_t * view)
     for (row = 0, col = 0; row < height;) {
 #ifdef HAVE_CHARSET
         if (view->utf8) {
+            gboolean read_res = TRUE;
             c = mcview_get_utf (view, from, &cw, &read_res);
             if (!read_res)
                 break;

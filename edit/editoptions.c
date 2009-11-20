@@ -49,6 +49,7 @@ static const char *wrap_str[] =
     NULL
 };
 
+#ifdef ENABLE_NLS
 static void
 i18n_translate_array (const char *array[])
 {
@@ -57,6 +58,7 @@ i18n_translate_array (const char *array[])
         array++;
     }
 }
+#endif			/* ENABLE_NLS */
 
 void
 edit_options_dialog (void)
@@ -116,7 +118,7 @@ edit_options_dialog (void)
 	i18n_translate_array (wrap_str);
 	i18n_flag = TRUE;
     }
-#endif
+#endif			/* ENABLE_NLS */
 
     g_snprintf (wrap_length, sizeof (wrap_length), "%d",
 		option_word_wrap_line_length);

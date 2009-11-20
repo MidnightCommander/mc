@@ -94,6 +94,8 @@ mc_search__get_one_symbol (const char *charset, const char *str, gsize str_len,
 
     converted_str = mc_search__recode_str (str, str_len, charset, cp_display, &converted_str_len);
 #else
+    (void) charset;
+
     converted_str = g_strndup (str, str_len);
 #endif
 
@@ -175,6 +177,8 @@ mc_search__tolower_case_str (const char *charset, const char *str, gsize str_len
     gchar *converted_str, *tmp_str2;
     gsize converted_str_len = str_len + 1;
 
+    (void) charset;
+
     tmp_str2 = converted_str = g_strndup (str, str_len);
 
     while (str_tolower (tmp_str1, &tmp_str2, &converted_str_len))
@@ -224,9 +228,12 @@ mc_search__toupper_case_str (const char *charset, const char *str, gsize str_len
     g_free (tmp_str2);
     return ret;
 #else
+
     const gchar *tmp_str1 = str;
     gchar *converted_str, *tmp_str2;
     gsize converted_str_len = str_len + 1;
+
+    (void) charset;
 
     tmp_str2 = converted_str = g_strndup (str, str_len);
 
