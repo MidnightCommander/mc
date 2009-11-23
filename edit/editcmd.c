@@ -1039,28 +1039,35 @@ edit_load_cmd (WEdit *edit, edit_current_file_t what)
 int eval_marks (WEdit * edit, long *start_mark, long *end_mark)
 {
     if (edit->mark1 != edit->mark2) {
-	if (edit->mark2 >= 0) {
-	    *start_mark = min (edit->mark1, edit->mark2);
-	    *end_mark = max (edit->mark1, edit->mark2);
-	} else {
-	    int diff;
-	    *start_mark = min (edit->mark1, edit->curs1);
-	    *end_mark = max (edit->mark1, edit->curs1);
-	    if (column_highlighting) {
-		diff = (*start_mark - edit_bol (edit, *start_mark)) -
-		       (*end_mark - edit_bol (edit, *end_mark));
-		if (diff > 0) {
-		    *start_mark -= diff;
-		    *end_mark += diff;
-		}
-	    }
-	    edit->column2 = edit->curs_col + edit->over_col;
-	}
-	return 0;
+        int diff;
+        long start_bol, start_eol;
+        long end_bol, end_eol;
+        if (edit->mark2 >= 0) {
+            *start_mark = min (edit->mark1, edit->mark2);
+            *end_mark = max (edit->mark1, edit->mark2);
+        } else {
+            *start_mark = min (edit->mark1, edit->curs1);
+            *end_mark = max (edit->mark1, edit->curs1);
+            edit->column2 = edit->curs_col + edit->over_col;
+        }
+        if (column_highlighting) {
+            start_bol = edit_bol (edit, *start_mark);
+            start_eol = edit_eol (edit, start_bol - 1) + 1;
+            end_bol = edit_bol (edit, *end_mark);
+            end_eol = edit_eol (edit, *end_mark);
+            diff = *start_mark + edit->column2 - start_bol - *end_mark + end_bol;
+            if (diff > 0) {
+                *start_mark -= diff;
+                *end_mark += diff;
+                *start_mark = max (*start_mark, start_eol);
+                *end_mark = min (*end_mark, end_eol);
+            }
+        }
+        return 0;
     } else {
-	*start_mark = *end_mark = 0;
-	edit->column2 = edit->column1 = 0;
-	return 1;
+        *start_mark = *end_mark = 0;
+        edit->column2 = edit->column1 = 0;
+        return 1;
     }
 }
 
