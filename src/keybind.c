@@ -914,7 +914,7 @@ name_keymap_comparator (const void *p1, const void *p2)
     return str_casecmp (m1->name, m2->name);
 }
 
-static void
+static inline void
 sort_command_names (void)
 {
     static gboolean has_been_sorted = FALSE;
