@@ -1235,26 +1235,28 @@ check_movement_keys (int key, int page_size, void *data, move_fn backfn,
 
 static const size_t key_name_conv_tab_size = sizeof (key_name_conv_tab) /
 						sizeof (key_name_conv_tab[0]) - 1;
-static key_code_name_t key_name_conv_tab_sorted [sizeof (key_name_conv_tab) /
+static const key_code_name_t *key_name_conv_tab_sorted[sizeof (key_name_conv_tab) /
 						sizeof (key_name_conv_tab[0]) - 1];
 
 static int
 key_code_name_comparator (const void *p1, const void *p2)
 {
-    const key_code_name_t *n1 = (const key_code_name_t *) p1;
-    const key_code_name_t *n2 = (const key_code_name_t *) p2;
+    const key_code_name_t *n1 = *(const key_code_name_t **) p1;
+    const key_code_name_t *n2 = *(const key_code_name_t **) p2;
 
     return str_casecmp (n1->name, n2->name);
 }
 
-static void
+static inline void
 sort_key_name_conv_tab (void)
 {
     static gboolean has_been_sorted = FALSE;
 
     if (!has_been_sorted) {
-	memcpy (key_name_conv_tab_sorted, key_name_conv_tab,
-		sizeof (key_name_conv_tab_sorted));
+	size_t i;
+	for (i = 0; i <= key_name_conv_tab_size; i++)
+	    key_name_conv_tab_sorted[i] = &key_name_conv_tab[i];
+
 	qsort (key_name_conv_tab_sorted,
 		key_name_conv_tab_size, sizeof (key_name_conv_tab_sorted[0]),
 		&key_code_name_comparator);
@@ -1267,7 +1269,8 @@ lookup_keyname (const char *keyname, int *lc_index)
 {
     if (keyname[0] != '\0') {
 	const key_code_name_t key = { 0, keyname, NULL, NULL };
-	key_code_name_t *res;
+	const key_code_name_t *keyp = &key;
+	key_code_name_t **res;
 
 	if (keyname[1] == '\0') {
 	    *lc_index = -1;
@@ -1276,14 +1279,14 @@ lookup_keyname (const char *keyname, int *lc_index)
 
 	sort_key_name_conv_tab ();
 
-	res = bsearch (&key, key_name_conv_tab_sorted,
+	res = bsearch (&keyp, key_name_conv_tab_sorted,
 			    key_name_conv_tab_size,
 			    sizeof (key_name_conv_tab_sorted[0]),
 			    key_code_name_comparator);
 
 	if (res != NULL) {
-	    *lc_index = (int) (res - key_name_conv_tab_sorted);
-	    return res->code;
+	    *lc_index = (int) (res - (key_code_name_t **) key_name_conv_tab_sorted);
+	    return (*res)->code;
 	}
     }
 
@@ -1346,29 +1349,29 @@ lookup_key (const char *keyname, char **label)
 	s = g_string_new ("");
 
 	if (use_meta != -1) {
-	    g_string_append (s, key_name_conv_tab_sorted[use_meta].shortcut);
+	    g_string_append (s, key_name_conv_tab_sorted[use_meta]->shortcut);
 	    g_string_append_c (s, '-');
 	}
 	if (use_ctrl != -1) {
-	    g_string_append (s, key_name_conv_tab_sorted[use_ctrl].shortcut);
+	    g_string_append (s, key_name_conv_tab_sorted[use_ctrl]->shortcut);
 	    g_string_append_c (s, '-');
 	}
 	if (use_shift != -1) {
 	    if (k < 127)
 		g_string_append_c (s, (gchar) g_ascii_toupper ((gchar) k));
 	    else {
-		g_string_append (s, key_name_conv_tab_sorted[use_shift].shortcut);
+		g_string_append (s, key_name_conv_tab_sorted[use_shift]->shortcut);
 		g_string_append_c (s, '-');
-		g_string_append (s, key_name_conv_tab_sorted[lc_index].shortcut);
+		g_string_append (s, key_name_conv_tab_sorted[lc_index]->shortcut);
 	    }
 	} else if (k < 128) {
 	    if ((k >= 'A') || (lc_index < 0)
-		|| (key_name_conv_tab_sorted[lc_index].shortcut == NULL))
+		|| (key_name_conv_tab_sorted[lc_index]->shortcut == NULL))
 		g_string_append_c (s, (gchar) g_ascii_tolower ((gchar) k));
 	    else
-		g_string_append (s, key_name_conv_tab_sorted[lc_index].shortcut);
-	} else if ((lc_index != -1) && (key_name_conv_tab_sorted[lc_index].shortcut != NULL))
-	    g_string_append (s, key_name_conv_tab_sorted[lc_index].shortcut);
+		g_string_append (s, key_name_conv_tab_sorted[lc_index]->shortcut);
+	} else if ((lc_index != -1) && (key_name_conv_tab_sorted[lc_index]->shortcut != NULL))
+	    g_string_append (s, key_name_conv_tab_sorted[lc_index]->shortcut);
 	else
 	    g_string_append_c (s, (gchar) g_ascii_tolower ((gchar) key));
 
