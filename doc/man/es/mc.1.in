@@ -374,7 +374,7 @@ cambia el panel actual. El panel activo deja de serlo y el no activo
 pasa a ser el nuevo panel activo. La barra de selección se mueve del
 antiguo panel al nuevo, desaparece de aquel y aparece en éste.
 .TP
-.B Insertar
+.B Insertar, C\-t
 para marcar archivos (y/o directorios) como seleccionados podemos usar
 la tecla
 .I insertar
@@ -382,7 +382,7 @@ la tecla
 basta repetir la operación sobre los archivos y/o directorios antes
 marcados.
 .TP
-.B C\-t
+.B M\-e
 permite mostrar nombres en el panel con otra codificación de caracteres.
 Los nombres se convierten a la codificación del sistema para mostrarlos.
 Para desactivar esta recodificación basta seleccionar la entrada (..)

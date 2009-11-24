@@ -377,8 +377,8 @@ megszüntetéséhez csak újra ki kell jelölni a kijelölt fájlt.
 to tag files you may use the Insert key (the kich1 terminfo sequence). 
 To untag files, just retag a tagged file.
 .TP
-.B C\-t
-to change charset of panel you may use C\-t (Control\-t).
+.B M\-e
+to change charset of panel you may use M\-e (Alt\-e).
 Recoding is made from selected codepage into system codepage. To
 cancel the recoding you may select "directory up" (..) in active panel.
 To cancel the charsets in all directories, select "No translation " in 
