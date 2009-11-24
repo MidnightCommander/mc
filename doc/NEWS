@@ -1,3 +1,197 @@
+Version 4.7.0-pre4
+    Major changes since 4.7.0-pre3
+
+Core
+
+    * Added feature of sort files by mouse click on column header
+    * Added keybindings to change files sort type via shortcuts
+      (PanelSelectSortOrder, PanelToggleSortOrderPrev, PanelToggleSortOrderNext,
+      PanelReverseSort, PanelSortOrderByName, PanelSortOrderByExt,
+      PanelSortOrderBySize, PanelSortOrderByMTime)
+    * Now the letter of sort type and sort direction is always drawn in panel
+      header (direction of sort is drown near the current sort column in long
+      file list mode only)
+    * Skin-files: added new parameters 'sort-sign-up' and 'sort-sign-down' in
+      the section '[widget-common]' to draw sign of sort direction
+    * Added option 'extensions_case' in filehighlight.ini file.
+    * Menu engine was reimplemented: 1) now menu is build dynamically, 2)
+      shortcut displayed in menu item is not a part of menu item text and it is
+      synchronized with keybinding defined in mc.keymap file (#1563).
+
+VFS
+
+    * Fixed view *.tar files with a colon in name
+    * Allow 'exit' command on non-local filesystems
+    * Added partial support of Microsoft CAB-archives
+    * Added support of ico files
+    * Added support of *.djvu files
+    * Fix segfaults in various cases while browsing various VFSs
+    * Fixed warnings when file copy inside archive.
+
+Editor
+
+    * Added scrolled percentage in status bar (only in "simple statusbar" mode)
+    * Fixed Misbehaving rectangular select in editor (wrong when selected from
+      right to left and/or bottom to top)
+    * Split editor menu 'Command' to 'Command' and 'Format'
+    * Added option 'Check POSIX new line' into 'Save mode...' dialog, add notification
+      before save when no newline at EOF (#46)
+    * Added bindings ('EditShiftBlockLeft', 'EditShiftBlockRight') for shift block
+    * Fixed incorrect drawing CJK (double width) character
+
+Viewer
+
+    * Fixed tabs alignment (#1664)
+    * Fixed view of next/prev file (#1750)
+
+Misc
+
+    * Shared clipboard for the mc editor, form fields, panel and command prompt
+    * Refactoring: now all filename constants are placed in src/fileloc.h file
+    * Testing & development: added ability for change user config dir. For example,
+      type make CFLAGS='-DMC_USERCONF_DIR=\".mc2\"'
+    * Changed Alt+Backspace behavior in command line
+
+Fixes
+
+    * Fixed broken building under uclibc <0.9.29
+    * Autoindent regression
+    * Viewer Hex editor regression
+    * Incorrect indentation block when selecting with F3 + keys
+    * Fixed ownership of config files
+    * Configure.ac: fix broken check of option '--disable-vfs-undelfs'
+    * Learn keys: fixed incorrect save of keys configuration
+    * Fixed bug with 'The shell is already running a command'
+    * Fixed 'B' artefact into OpenSuse console of root user
+
+
+Version 4.7.0-pre3
+    Major changes since 4.7.0-pre2
+
+Core
+
+    * removed own popt stuff (command line options parser). Now used glib parser
+    * added feature for filenames highlighting in panels
+    * Copy/Move overwrite query dialog is more friendly for long file names
+    * at first run find file dialog now contain latest item from history
+    * charset support enabled by default (--enable-charset option)
+    * added support of skins
+    * added support of key bindings
+
+VFS
+
+    * fixed recognize of tar.xz archives
+    * added recognize of lzma archives by extention
+
+Editor
+
+    * 'Save as' dialog enhancement: select line break type: Windows/UNIX/Mac
+      (CR LF/LF/CR)
+    * syntax hightlighting updated: VerilogHDL, Shell script
+    * Added syntax highlighting for *.repo files of yum
+    * Added syntax highlighting of pacman's PKGBUILD and .install files
+
+Viewer
+
+    * Fixed showing Windows/Mac (CR LF/CR) line terminator
+
+Misc
+
+    * hotlist: support for environment variables ($HOME, ~username, etc.)
+    * hotlist: support for completion in path input
+    * all list widgets: support for fast navigation by number keys (i.e. 1 -
+      first list item, 2 - second)
+
+Fixes
+
+    * restored action of 'ctrl-t' keybinding (mark files&dirs). For selecting
+      charset use 'alt-e'
+    * segfault on incorrect color pair in [Color] section
+    * incorrect position of panel codeset dialog
+    * limit of 9 digits for of file size display
+    * lines drawing in -a stickchars mode
+    * segfault when you try to use non-anonymous FTP
+    * Ctrl-O handling under GNU Screen in altscreen mode
+    * support of CP866 (IBM866) locale
+    * configure.ac: checking for minimal version of glib and exit if version less
+      than 2.6
+    * segfault by mouse wheel action in history list and menu
+    * Fixed behvior with Meta+PgDn? in editor
+    * Fixed behvior with cursor movement by Ctrl+arrows when cursor besides EOL
+    * Fixed editor autocompleting
+    * Fixed Copy/Move dialogs steal Kill Word shortcut
+    * Fixed autoconf issue when configure with --with-gpm-mouse option
+
+
+Version 4.7.0-pre2
+    Major changes since 4.7.0-pre1
+
+Core
+
+    * cycle menu navigation
+    * change behaviour of C-space, now it calculate size on "..", and for selected
+      dirs if there is one.
+    * new find file option: find only first hit in file (make search faster)
+    * new find file option: Whole words - find whole words only
+    * scalable TUI
+
+VFS
+
+    * FTPFS: support of IPv6 protocol
+    * extfs/iso9660 updated to support Joliet "UCS level 1"
+
+Editor
+
+    * new search/replace flag added "In selection"
+    * new hotkeys for bookmarks, now bookmark displayed in state line and editor
+    * new cursor behavior. Option "Cursor beyond end of line" - allow moving cursor
+      beyond the end of line
+    * new syntax hightlights added: erlang, ebuild, named, strace, j
+    * syntax hightlights updated: mail, vhdl, html
+
+Viewer
+
+    * Reworked for improve perfomance
+    * Implemented interruptable long-distance movements
+    * splitted src/view.[ch] into many files in src/viewer/ subdir for more simple
+      support of code
+    * fixed build of format string in runtime (for better i18n)
+    * add 'Whole words' option into the viewer 'Search' dialog
+
+Misc
+
+    * new option mouse_close_dialog, if mouse_close_dialog=1 click on outside the
+      dialog close them
+    * new: SI-based size show
+    * make shared history for find file, editor search/replace, viever
+
+Fixes
+
+    * linking error with --enable-vfs-undelfs
+    * external editor won't open if there are spaces in EDITOR variable
+    * C-c kill mc if mc built with --without-subshell option is run with -d option
+    * directory hotlist rendering
+    * segfault on empty replace string
+    * fixes for vfs/tarfs
+    * removing bashizm from vfs/extfs/u7z
+    * crash mc on create new file (Shift-F4) in external editor
+    * File copy/move dialog: in replacement field now handled asterisks as search groups
+    * VFS: Fixed SIGSERV(or heap corruption) on large filenames
+    * Fixed broken backward search
+    * Fixed uninitialised value for mouse event in in find.c#check_find_events() function
+    * Fixed ctrl+z signal handling
+    * Fixed incorrect showing prompt
+    * Fixed incorrect vertical selection (if line state swiched on)
+    * Fixed screen resize handle if mouse support is disabled
+    * Restore correct current directory after switch from Info panel to List one
+    * Fixed mouse support in 'konsole-256color' terminal
+    * Fixed keycodes in 'xterm-256color' terminal
+    * Fixed incorrect regexp search by content in 'file find' dialog
+    * Fixed incorrect backwards search
+    * Fixed incorrect detection of compressed patchfs
+    * Fixed incorrect detecting codeset when <no translation> codeset selected
+
+
 Version 4.7.0-pre1
 
 Core changes:
