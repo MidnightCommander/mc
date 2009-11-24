@@ -982,7 +982,7 @@ again:
     memset (&data_addr, 0, sizeof (struct sockaddr_storage));
     data_addrlen = sizeof (struct sockaddr_storage);
 
-    if (getpeername (SUP.sock, (struct sockaddr *) &data_addr, &data_addrlen) == -1)
+    if (getsockname (SUP.sock, (struct sockaddr *) &data_addr, &data_addrlen) == -1)
 	return -1;
 
     switch (data_addr.ss_family) {
