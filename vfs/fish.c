@@ -417,7 +417,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 		   "if (opendir ( DIR, $dirname )) {\n"
 		   "while( (my $filename = readdir(DIR))){\n"
 		   "my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,$atime,$mtime,$ctime,$blksize,$blocks) = lstat(\"$dirname/$filename\");\n"
-		   "my $mloctime= scalar localtime $mtime;\n"
+		   "my $mloctime= strftime(\"%%m-%%d-%%Y %%H:%%M\", localtime $mtime);\n"
 	,
 		   "my $strutils_shell_escape_regex= s/([;<>\\*\\|`&\\$!#\\(\\)\\[\\]\\{\\}:'\\''\"\\ \\\\])/\\\\$1/g;\n"
 		   "my $e_filename = $filename;\n"
