@@ -2643,6 +2643,12 @@ Jump to the previous file.
 .B Alt\-r
 Toggle the ruler.
 .PP
+.B Alt\-e
+to change charset of displayed text may use M\-e (Alt\-e).
+Recoding is made from selected codepage into system codepage. To
+cancel the recoding you may select "<No translation>" in charset
+selection dialog.
+.PP
 It's possible to instruct the file viewer how to display a file, look
 at the
 .\"LINK2"
@@ -2709,6 +2715,13 @@ commands go into the file
 .B .mc/cedit/cooledit.macros
 in your home directory. You can delete a macro by deleting the
 appropriate line in this file.
+
+.PP
+To change charset of displayed text may use M\-e (Alt\-e).
+Recoding is made from selected codepage into system codepage. To
+cancel the recoding you may select "<No translation>" in charset
+selection dialog.
+
 .PP
 .B F19
 will format the currently highlighted block (plain text or
