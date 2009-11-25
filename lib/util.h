@@ -108,7 +108,7 @@ void init_uid_gid_cache (void);
 char *get_group (int);
 char *get_owner (int);
 
-#define MAX_I18NTIMELENGTH 14
+#define MAX_I18NTIMELENGTH 20
 #define MIN_I18NTIMELENGTH 10
 #define STD_I18NTIMELENGTH 12
 

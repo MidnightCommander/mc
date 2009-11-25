@@ -3714,6 +3714,18 @@ When you use the C\-o keystroke to go back to the user screen, if this
 one is set, you will get a fresh shell.  Otherwise, pressing any key
 will bring you back to the Midnight Commander.
 .TP
+.I timeformat_recent
+Change the time format used to display dates less than 6 months from
+now.
+See strftime or date man page for the format specification. If this
+option is absent, default timeformat is used.
+.TP
+.I timeformat_old
+Change the time format used to display  dates older than 6 months from
+now or for dates in the future.
+See strftime or date man page for the format specification. If this
+option is absent, default timeformat is used.
+.TP
 .I torben_fj_mode
 If this flag is set, then the home and end keys will work slightly
 different on the panels, instead of moving the selection to the first

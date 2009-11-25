@@ -234,6 +234,16 @@ static const struct {
     { 0, 0 }
 };
 
+extern char *user_recent_timeformat;
+extern char *user_old_timeformat;
+
+/*
+  In order to use everywhere the same setup
+  for the locale we use defines
+*/
+#define FMTYEAR		_("%b %e  %Y")
+#define FMTTIME		_("%b %e %H:%M")
+
 static const struct {
     const char *opt_name;
     char **opt_addr;
@@ -787,6 +797,10 @@ load_setup (void)
     boot_current_is_left =
         mc_config_get_int (mc_panels_config, "Dirs", "current_is_left", 1);
 
+    /* Load time formats */
+    user_recent_timeformat = mc_config_get_string (mc_main_config, "Misc", "timeformat_recent", FMTTIME);
+    user_old_timeformat = mc_config_get_string (mc_main_config, "Misc", "timeformat_old", FMTYEAR);
+
 #ifdef USE_NETCODE
     ftpfs_proxy_host = mc_config_get_string (mc_main_config, "Misc", "ftp_proxy_host", "gate");
 #endif
@@ -858,6 +872,9 @@ done_setup (void)
     g_free (panels_profile_name);
     mc_config_deinit (mc_main_config);
     mc_config_deinit (mc_panels_config);
+
+    g_free(user_recent_timeformat);
+    g_free(user_old_timeformat);
 
     for (i = 0; str_options[i].opt_name != NULL; i++)
 	g_free (*str_options[i].opt_addr);
