@@ -88,9 +88,7 @@ mc_fhl_is_link_to_dir (file_entry * fe)
 inline static gboolean
 mc_fhl_is_stale_link (file_entry * fe)
 {
-    gboolean is_link = mc_fhl_is_link (fe);
-
-    return (!is_link && !mc_fhl_is_file (fe)) || (is_link && (fe->f.stale_link));
+    return mc_fhl_is_link (fe) ? fe->f.stale_link : !mc_fhl_is_file (fe);
 }
 
 inline static gboolean
