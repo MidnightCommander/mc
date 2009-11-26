@@ -160,26 +160,28 @@ get_paragraph (WEdit *edit, long p, long q, int indent, int *size)
     return t;
 }
 
-static void strip_newlines (unsigned char *t, int size)
+static inline void
+strip_newlines (unsigned char *t, int size)
 {
     unsigned char *p = t;
-    while (size--) {
-	*p = *p == '\n' ? ' ' : *p;
+    while (size-- != 0) {
+	if (*p == '\n')
+	    *p = ' ';
 	p++;
     }
 }
 
 /*
-   This is a copy of the function
-   int calc_text_pos (WEdit * edit, long b, long *q, int l)
-   in propfont.c  :(
-   It calculates the number of chars in a line specified to length l in pixels
+   This function calculates the number of chars in a line specified to length l in pixels
  */
-static inline int next_tab_pos (int x)
+static inline int
+next_tab_pos (int x)
 {
     return x += tab_width - x % tab_width;
 }
-static int line_pixel_length (unsigned char *t, long b, int l)
+
+static inline int
+line_pixel_length (unsigned char *t, long b, int l)
 {
     int x = 0, c, xn = 0;
     for (;;) {
@@ -226,7 +228,7 @@ next_word_start (unsigned char *t, int q, int size)
 }
 
 /* find the start of a word */
-static int
+static inline int
 word_start (unsigned char *t, int q, int size)
 {
     int i = q;
@@ -246,7 +248,8 @@ word_start (unsigned char *t, int q, int size)
 }
 
 /* replaces ' ' with '\n' to properly format a paragraph */
-static void format_this (unsigned char *t, int size, int indent)
+static inline void
+format_this (unsigned char *t, int size, int indent)
 {
     int q = 0, ww;
     strip_newlines (t, size);
@@ -274,7 +277,8 @@ static void format_this (unsigned char *t, int size, int indent)
     }
 }
 
-static void replace_at (WEdit * edit, long q, int c)
+static inline void
+replace_at (WEdit * edit, long q, int c)
 {
     edit_cursor_move (edit, q - edit->curs1);
     edit_delete (edit, 1);
@@ -282,7 +286,7 @@ static void replace_at (WEdit * edit, long q, int c)
 }
 
 /* replaces a block of text */
-static void
+static inline void
 put_paragraph (WEdit * edit, unsigned char *t, long p, int indent, int size)
 {
     long cursor;
@@ -321,7 +325,8 @@ put_paragraph (WEdit * edit, unsigned char *t, long p, int indent, int size)
     edit_cursor_move (edit, cursor - edit->curs1);	/* restore cursor position */
 }
 
-static int test_indent (WEdit * edit, long p, long q)
+static inline int
+test_indent (WEdit * edit, long p, long q)
 {
     int indent;
     indent = edit_indent_width (edit, p++);

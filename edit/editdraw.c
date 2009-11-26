@@ -70,7 +70,8 @@
 /* Toggles statusbar draw style */
 int simple_statusbar = 0;
 
-static void status_string (WEdit * edit, char *s, int w)
+static inline void
+status_string (WEdit * edit, char *s, int w)
 {
     char byte_str[16];
     unsigned char cur_byte = 0;
@@ -276,7 +277,7 @@ struct line_s {
     unsigned int style;
 };
 
-static void
+static inline void
 print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
 		 long end_col, struct line_s line[], char *status)
 {
@@ -599,14 +600,15 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 
 #define key_pending(x) (!is_idle())
 
-static void edit_draw_this_char (WEdit * edit, long curs, long row)
+static inline void
+edit_draw_this_char (WEdit * edit, long curs, long row)
 {
     int b = edit_bol (edit, curs);
     edit_draw_this_line (edit, b, row, 0, edit->num_widget_columns - 1);
 }
 
 /* cursor must be in screen for other than REDRAW_PAGE passed in force */
-static void
+static inline void
 render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 		  long end_column)
 {
@@ -714,7 +716,7 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
     return;
 }
 
-static void
+static inline void
 edit_render (WEdit * edit, int page, int row_start, int col_start, int row_end, int col_end)
 {
     if (page)			/* if it was an expose event, 'page' would be set */

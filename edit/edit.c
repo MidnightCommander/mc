@@ -2377,7 +2377,8 @@ edit_auto_indent (WEdit * edit)
     }
 }
 
-static void edit_double_newline (WEdit * edit)
+static inline void
+edit_double_newline (WEdit * edit)
 {
     edit_insert (edit, '\n');
     if (edit_get_byte (edit, edit->curs1) == '\n')
@@ -2388,7 +2389,8 @@ static void edit_double_newline (WEdit * edit)
     edit_insert (edit, '\n');
 }
 
-static void edit_tab_cmd (WEdit * edit)
+static inline void
+edit_tab_cmd (WEdit * edit)
 {
     int i;
 
@@ -2412,7 +2414,6 @@ static void edit_tab_cmd (WEdit * edit)
     } else {
 	edit_insert (edit, '\t');
     }
-    return;
 }
 
 static void check_and_wrap_line (WEdit * edit)
@@ -2441,7 +2442,7 @@ static void check_and_wrap_line (WEdit * edit)
     }
 }
 
-static void edit_execute_macro (WEdit *edit, struct macro macro[], int n);
+static inline void edit_execute_macro (WEdit *edit, struct macro macro[], int n);
 
 void edit_push_key_press (WEdit * edit)
 {
@@ -2508,15 +2509,17 @@ void edit_find_bracket (WEdit * edit)
     last_bracket = edit->bracket;
 }
 
-static void edit_goto_matching_bracket (WEdit *edit)
+static inline void
+edit_goto_matching_bracket (WEdit *edit)
 {
     long q;
+
     q = edit_get_bracket (edit, 0, 0);
-    if (q < 0)
-	return;
-    edit->bracket = edit->curs1;
-    edit->force |= REDRAW_PAGE;
-    edit_cursor_move (edit, q - edit->curs1);
+    if (q >= 0) {
+        edit->bracket = edit->curs1;
+        edit->force |= REDRAW_PAGE;
+        edit_cursor_move (edit, q - edit->curs1);
+    }
 }
 
 /*

@@ -490,7 +490,8 @@ static struct syntax_rule edit_get_rule (WEdit * edit, long byte_index)
     return edit->rule;
 }
 
-static void translate_rule_to_color (WEdit * edit, struct syntax_rule rule, int *color)
+static inline void
+translate_rule_to_color (WEdit * edit, struct syntax_rule rule, int *color)
 {
     struct key_word *k;
 
@@ -1149,20 +1150,21 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
 
 static char *get_first_editor_line (WEdit * edit)
 {
-    int i;
+    size_t i;
     static char s[256];
 
     s[0] = '\0';
-    if (!edit)
+    if (edit == NULL)
 	return s;
-    for (i = 0; i < 255; i++) {
+
+    for (i = 0; i < sizeof (s) - 1; i++) {
 	s[i] = edit_get_byte (edit, i);
 	if (s[i] == '\n') {
 	    s[i] = '\0';
 	    break;
 	}
     }
-    s[255] = '\0';
+    s[sizeof(s) - 1] = '\0';
     return s;
 }
 
