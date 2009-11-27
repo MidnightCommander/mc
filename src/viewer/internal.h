@@ -70,12 +70,12 @@ struct area {
  * line and column of that cache entry. cc_nroff_column is the column
  * corresponding to cc_offset in nroff mode.
  */
-struct coord_cache_entry {
+typedef struct {
     off_t cc_offset;
     off_t cc_line;
     off_t cc_column;
     off_t cc_nroff_column;
-};
+} coord_cache_entry_t;
 
 struct mcview_nroff_struct;
 
@@ -205,14 +205,14 @@ cb_ret_t mcview_dialog_callback (Dlg_head *h, Widget *sender,
 				    dlg_msg_t msg, int parm, void *data);
 
 /* coord_cache.c: */
-gboolean mcview_coord_cache_entry_less (const struct coord_cache_entry *,
-                                        const struct coord_cache_entry *, enum ccache_type,
+gboolean mcview_coord_cache_entry_less (const coord_cache_entry_t *,
+                                        const coord_cache_entry_t *, enum ccache_type,
                                         gboolean);
 #ifdef MC_ENABLE_DEBUGGING_CODE
 void mcview_ccache_dump (mcview_t *view);
 #endif
 
-void mcview_ccache_lookup (mcview_t *view, struct coord_cache_entry *coord,
+void mcview_ccache_lookup (mcview_t *view, coord_cache_entry_t *coord,
 			    enum ccache_type lookup_what);
 
 /* datasource.c: */

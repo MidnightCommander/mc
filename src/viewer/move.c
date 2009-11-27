@@ -370,7 +370,7 @@ mcview_moveto (mcview_t * view, off_t line, off_t col)
 void
 mcview_coord_to_offset (mcview_t * view, off_t * ret_offset, off_t line, off_t column)
 {
-    struct coord_cache_entry coord;
+    coord_cache_entry_t coord;
 
     coord.cc_line = line;
     coord.cc_column = column;
@@ -384,7 +384,7 @@ mcview_coord_to_offset (mcview_t * view, off_t * ret_offset, off_t line, off_t c
 void
 mcview_offset_to_coord (mcview_t * view, off_t * ret_line, off_t * ret_column, off_t offset)
 {
-    struct coord_cache_entry coord;
+    coord_cache_entry_t coord;
 
     coord.cc_offset = offset;
     mcview_ccache_lookup (view, &coord, CCACHE_LINECOL);

@@ -72,8 +72,8 @@
 /* Find and return the index of the last cache entry that is
  * smaller than ''coord'', according to the criterion ''sort_by''. */
 static guint
-mcview_ccache_find (mcview_t * view, const struct coord_cache_entry *cache,
-                    const struct coord_cache_entry *coord, enum ccache_type sort_by)
+mcview_ccache_find (mcview_t * view, const coord_cache_entry_t *cache,
+                    const coord_cache_entry_t *coord, enum ccache_type sort_by)
 {
     guint base, i, limit;
 
@@ -102,8 +102,8 @@ mcview_ccache_find (mcview_t * view, const struct coord_cache_entry *cache,
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mcview_coord_cache_entry_less (const struct coord_cache_entry *a,
-                               const struct coord_cache_entry *b, enum ccache_type crit,
+mcview_coord_cache_entry_less (const coord_cache_entry_t *a,
+                               const coord_cache_entry_t *b, enum ccache_type crit,
                                gboolean nroff_mode)
 {
     if (crit == CCACHE_OFFSET)
@@ -132,12 +132,12 @@ mcview_ccache_dump (mcview_t * view)
     FILE *f;
     off_t offset, line, column, nextline_offset, filesize;
     guint i;
-    const struct coord_cache_entry *cache;
+    const coord_cache_entry_t *cache;
 
     assert (view->coord_cache != NULL);
 
     filesize = mcview_get_filesize (view);
-    cache = &(g_array_index (view->coord_cache, struct coord_cache_entry, 0));
+    cache = &(g_array_index (view->coord_cache, coord_cache_entry, 0));
 
     f = fopen ("mcview-ccache.out", "w");
     if (f == NULL)
@@ -197,11 +197,11 @@ mcview_ccache_dump (mcview_t * view)
  * matches the existing components of ''coord''.
  */
 void
-mcview_ccache_lookup (mcview_t * view, struct coord_cache_entry *coord,
+mcview_ccache_lookup (mcview_t * view, coord_cache_entry_t *coord,
                       enum ccache_type lookup_what)
 {
     guint i;
-    struct coord_cache_entry *cache, current, next, entry;
+    coord_cache_entry_t *cache, current, next, entry;
     enum ccache_type sorter;
     off_t limit;
     enum {
@@ -211,7 +211,7 @@ mcview_ccache_lookup (mcview_t * view, struct coord_cache_entry *coord,
     } nroff_state;
 
     if (!view->coord_cache) {
-        view->coord_cache = g_array_new (FALSE, FALSE, sizeof (struct coord_cache_entry));
+        view->coord_cache = g_array_new (FALSE, FALSE, sizeof (coord_cache_entry_t));
         current.cc_offset = 0;
         current.cc_line = 0;
         current.cc_column = 0;
@@ -225,7 +225,7 @@ mcview_ccache_lookup (mcview_t * view, struct coord_cache_entry *coord,
 
   retry:
     /* find the two neighbor entries in the cache */
-    cache = &(g_array_index (view->coord_cache, struct coord_cache_entry, 0));
+    cache = &(g_array_index (view->coord_cache, coord_cache_entry_t, 0));
     i = mcview_ccache_find (view, cache, coord, sorter);
     /* now i points to the lower neighbor in the cache */
 
