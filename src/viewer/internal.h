@@ -77,6 +77,12 @@ typedef struct {
     off_t cc_nroff_column;
 } coord_cache_entry_t;
 
+typedef struct {
+    size_t size;
+    size_t capacity;
+    coord_cache_entry_t **cache;
+} coord_cache_t;
+
 struct mcview_nroff_struct;
 
 typedef struct mcview_struct {
@@ -123,7 +129,7 @@ typedef struct mcview_struct {
 
     /* Additional editor state */
     gboolean hexedit_lownibble; /* Are we editing the last significant nibble? */
-    GArray *coord_cache;        /* Cache for mapping offsets to cursor positions */
+    coord_cache_t *coord_cache; /* Cache for mapping offsets to cursor positions */
 
     /* Display information */
     screen_dimen dpy_frame_size;        /* Size of the frame surrounding the real viewer */
@@ -205,9 +211,9 @@ cb_ret_t mcview_dialog_callback (Dlg_head *h, Widget *sender,
 				    dlg_msg_t msg, int parm, void *data);
 
 /* coord_cache.c: */
-gboolean mcview_coord_cache_entry_less (const coord_cache_entry_t *,
-                                        const coord_cache_entry_t *, enum ccache_type,
-                                        gboolean);
+coord_cache_t *coord_cache_new (void);
+void coord_cache_free (coord_cache_t *cache);
+
 #ifdef MC_ENABLE_DEBUGGING_CODE
 void mcview_ccache_dump (mcview_t *view);
 #endif

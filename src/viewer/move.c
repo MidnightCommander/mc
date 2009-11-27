@@ -389,12 +389,9 @@ mcview_offset_to_coord (mcview_t * view, off_t * ret_line, off_t * ret_column, o
     coord.cc_offset = offset;
     mcview_ccache_lookup (view, &coord, CCACHE_LINECOL);
 
-    if (ret_line)
-        *ret_line = coord.cc_line;
-
-    if (ret_column)
-        *ret_column = (view->text_nroff_mode)
-            ? coord.cc_nroff_column : coord.cc_column;
+    *ret_line = coord.cc_line;
+    *ret_column = (view->text_nroff_mode)
+                    ? coord.cc_nroff_column : coord.cc_column;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -404,9 +401,7 @@ mcview_place_cursor (mcview_t * view)
 {
     const screen_dimen top = view->data_area.top;
     const screen_dimen left = view->data_area.left;
-    screen_dimen col;
-
-    col = view->cursor_col;
+    screen_dimen col = view->cursor_col;
     if (!view->hexview_in_text && view->hexedit_lownibble)
         col++;
     widget_move (&view->widget, top + view->cursor_row, left + col);

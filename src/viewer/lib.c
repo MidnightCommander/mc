@@ -193,9 +193,7 @@ mcview_done (mcview_t * view)
     mcview_close_datasource (view);
     /* the growing buffer is freed with the datasource */
 
-    if (view->coord_cache) {
-        g_array_free (view->coord_cache, TRUE), view->coord_cache = NULL;
-    }
+    coord_cache_free (view->coord_cache), view->coord_cache = NULL;
 
     if (!(view->converter == INVALID_CONV || view->converter != str_cnv_from_term)) {
         str_close_conv (view->converter);
