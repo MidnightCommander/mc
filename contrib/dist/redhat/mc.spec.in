@@ -1,39 +1,50 @@
 # Note that this is NOT a relocatable package
 
-%if 0%{?el4}%{?el3}
+%define legacy_rhel 0%{?el4}%{?el3}
+
+%if %{legacy_rhel}
         %define _with_screen --with-screen=ncurses
         %define _with_glib_static --with-glib-static
-        %define glib_version glib-2.12.3
+        %define glib_version 2.12
+        %define glib_stepping .3
 %else
         %define _with_screen --with-screen=slang
 %endif
 
-Summary:   User-friendly text console file manager and visual shell
-Name:      mc
-Version:   @RPM_VERSION@
-Release:   1%{?dist}
-Epoch:     1
-License:   GPLv2
-Group:     System Environment/Shells
-Source0:   %{name}-@VERSION@.tar.gz
+%define mc_version @RPM_VERSION@
+%define mc_tarball @VERSION@
 
-%if 0%{?el4}%{?el3}
-Source1:   http://ftp.gnome.org/pub/gnome/sources/glib/2.12/%{glib_version}.tar.bz2
-Patch0:    glib2-CVE-2008-4316.patch
+Summary:        User-friendly text console file manager and visual shell
+Name:           mc
+Version:        %{mc_version}
+Release:        1%{?dist}
+Epoch:          1
+License:        GPLv2
+Group:          System Environment/Shells
+Source0:        %{name}-%{mc_tarball}.tar.gz
+
+%if %{legacy_rhel}
+Source1:        http://ftp.gnome.org/pub/gnome/sources/glib/%{glib_version}/glib-%{glib_version}%{?glib_stepping}.tar.bz2
+Patch0:         glib2-CVE-2008-4316.patch
 %endif
 
-URL:       http://www.midnight-commander.org/
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires: glib2-devel e2fsprogs-devel gpm-devel
+URL:            http://www.midnight-commander.org/
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildRequires:  e2fsprogs-devel gpm-devel
 
-%if 0%{?el5}%{?el4}%{?el3}
-BuildRequires: pcre-devel
+%if %{legacy_rhel}%{?el5}
+BuildRequires:  pcre-devel
 %endif
 
-%if 0%{?el4}%{?el3}
-BuildRequires: gettext pkgconfig >= 0.8 ncurses-devel
+%if %{legacy_rhel}
+
+BuildRequires:  ncurses-devel
+
+# From Glib
+BuildRequires:  pkgconfig gettext
+
 %else
-BuildRequires: slang-devel
+BuildRequires:  glib2-devel slang-devel
 %endif
 
 %description
@@ -45,44 +56,37 @@ is supported on Linux console. VFS (Virtual Filesystem) allows you to
 view archives and files on remote servers (via SAMBA, FTP or SSH).
 
 %prep
-%if 0%{?el4}%{?el3}
 
-%setup -q -T -c -a 0
-%setup -q -T -D -a 1
+%setup -q -n %{name}-%{mc_tarball}
 
-cd %{glib_version}
+%if %{legacy_rhel}
+
+%setup -q -T -D -a 1 -n %{name}-%{mc_tarball}
+
+cd glib-%{glib_version}%{?glib_stepping}
 %patch0 -p1 -b .CVE-2008-4316
-
-%else
-
-%setup -q -n %{name}-@VERSION@
 
 %endif
 
 %build
-%if 0%{?el4}%{?el3}
 
-        cd %{glib_version}
+%if %{legacy_rhel}
 
-        RESULT_DIR=`pwd`/result
+pushd glib-%{glib_version}%{?glib_stepping}
+RESULT_DIR=`pwd`/result
 
-        CFLAGS="%optflags -fno-strict-aliasing" \
-        ./configure \
-                --disable-gtk-doc \
-                --disable-shared \
-                --enable-static \
-                --prefix="$RESULT_DIR" \
-                --exec-prefix="$RESULT_DIR" \
-                --libdir="$RESULT_DIR/usr/%{_lib}"
+./configure \
+        --disable-gtk-doc \
+        --disable-shared \
+        --enable-static \
+        --prefix="$RESULT_DIR" \
+        --exec-prefix="$RESULT_DIR" \
+        --libdir="$RESULT_DIR/usr/%{_lib}"
 
-        make install %{?_smp_mflags}
+%{__make} %{?_smp_mflags} CFLAGS="%{optflags} -fno-strict-aliasing" install
+popd
 
-        cd ../%{name}-@VERSION@
-
-%endif
-
-%if 0%{?el4}%{?el3}
-        PKG_CONFIG_PATH="$RESULT_DIR/usr/%{_lib}/pkgconfig:$PKG_CONFIG_PATH" ; export PKG_CONFIG_PATH;
+PKG_CONFIG_PATH="$RESULT_DIR/usr/%{_lib}/pkgconfig:$PKG_CONFIG_PATH" ; export PKG_CONFIG_PATH ;
 %endif
 
 %configure \
@@ -94,21 +98,12 @@ cd %{glib_version}
         --with-gpm-mouse \
         --disable-doxygen-doc
 
-make %{?_smp_mflags}
+%{__make} %{?_smp_mflags} CFLAGS="%{optflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%if 0%{?el4}%{?el3}
-        cd %{name}-@VERSION@
-%endif
-
 make install DESTDIR="$RPM_BUILD_ROOT"
-
-%if 0%{?el4}%{?el3}
-        mv ./* ./../ && cd ./../
-        rm -rf %{name}-@VERSION@ %{glib_version}
-%endif
 
 install -d -m 755 $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 install contrib/{mc.sh,mc.csh} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
@@ -157,15 +152,19 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libexecdir}/mc
 
 %changelog
+* Fri Nov 27 2009 Yury V. Zaytsev <yury@shurup.com>
+- Fixed debug info generation for legacy distros
+- Rewritten and simplified static build procedure
+
 * Mon Oct 26 2009 Andrew Borodin <aborodin@vmail.ru>
-- Add new %%{_sysconfdir}/mc/mc.keymap.* files.
+- Added new %%{_sysconfdir}/mc/mc.keymap.* files
 
 * Fri Sep 04 2009 Slava Zanko <slavazanko@gmail.com>
 - Add new file %%{_sysconfdir}/mc/filehighlight.ini
 
 * Sat Aug 01 2009 Yury V. Zaytsev <yury@shurup.com>
 - Fixed EL4 (and supposedly EL3) builds
-- Fixed some of rpmlint warnings
+- Fixed some of the rpmlint warnings
 
 * Sat Jul 04 2009 Yury V. Zaytsev <yury@shurup.com>
 - Fix the issue when wrappers were left unpackaged
@@ -174,12 +173,12 @@ rm -rf $RPM_BUILD_ROOT
 - Fix install patches: use %%{_sysconfdir}/mc directory
 
 * Fri May 8 2009 Slava Zanko <slavazanko@gmail.com>
-- Review spec-file to build on the current distributions
-- Change build rules
-- Fix install pathes
+- Reviewed spec-file to build on the current distributions
+- Changed build rules
+- Fixed install paths
 
 * Fri Jun 22 2007 Pavel Roskin <proski@gnu.org>
-- Make cons.saver suid vcsa, it's needed for Fedora 7
+- Made cons.saver suid vcsa, it's needed for Fedora 7
 
 * Thu Dec 21 2006 Pavel Roskin <proski@gnu.org>
 - Don't rely on brace expansion, it may be disabled
