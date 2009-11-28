@@ -1577,16 +1577,20 @@ long edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
 {
     long p, q;
     int col = 0;
+#ifdef HAVE_CHARSET
+	int cw = 1;
+	int utf_ch = 0;
+#endif
     if (upto) {
 	q = upto;
 	cols = -10;
     } else
 	q = edit->last_byte + 2;
-    p = current;
-    while (p < q) {
+    for (col = 0, p = current; p < q; p++) {
 	int c;
 #ifdef HAVE_CHARSET
-	int cw = 1;
+	cw = 1;
+	utf_ch = 0;
 #endif
 	if (cols != -10) {
 	    if (col == cols)
@@ -1594,14 +1598,15 @@ long edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
 	    if (col > cols)
 		return p - 1;
 	}
-#ifdef HAVE_CHARSET
-	if (!edit->utf8)
-	    c = edit_get_byte (edit, p);
-	else
-	    c = edit_get_utf (edit, p, &cw);
-#else
 	c = edit_get_byte (edit, p);
+#ifdef HAVE_CHARSET
+	if (edit->utf8) {
+	    utf_ch = edit_get_utf (edit, p, &cw);
+	    if (utf8_display && g_unichar_iswide(utf_ch))
+	        col++;
+	}
 #endif
+        c = convert_to_display_c (c);
 	if (c == '\t')
 	    col += TAB_SIZE - col % TAB_SIZE;
 	else if (c == '\n') {
@@ -1609,21 +1614,15 @@ long edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
 		return col;
 	    else
 		return p;
-	} else if (c < 32 || c == 127) {
-	     /* Caret notation for control characters */
-	     col++;
-	}
-	col++;
-	p++;
+	} else if (c < 32 || c == 127)
+	    /* '\r' is shown as ^M, so we must advance 2 characters */
+	    /* Caret notation for control characters */
+	    col += 2;
+	else
+	    col++;
 #ifdef HAVE_CHARSET
-	if (cw > 1) {
-	    if (edit->utf8 && g_unichar_iswide (c)) {
-	        if (utf8_display)
-	            col++;
-	    }
-	    p += cw - 1;
-	} else if (edit->utf8 && !g_unichar_isprint (c))
-	    col--;
+	if (cw > 1)
+	    col -= cw - 1;
 #endif
     }
     return col;
