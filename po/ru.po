@@ -116,7 +116,7 @@ msgid "&Cancel"
 msgstr "&Прервать"
 
 msgid "The file has been modified in the meantime. Save anyway?"
-msgstr "Файл был изменен внешней программой. Сохраить поверх?"
+msgstr "Файл был изменен внешней программой. Сохранить поверх?"
 
 msgid " Error writing to pipe: "
 msgstr " Ошибка записи в канал: "
@@ -135,7 +135,7 @@ msgid "&Safe save"
 msgstr "Бе&зопасное сохранение"
 
 msgid "&Do backups with following extension:"
-msgstr "Д&елать резервые копии с расширением:"
+msgstr "Д&елать резервные копии с расширением:"
 
 msgid "Check &POSIX new line"
 msgstr "П&роверка перевода строки в конце файла"
@@ -763,7 +763,7 @@ msgstr "УдКтлог"
 
 
 msgid " Load syntax file "
-msgstr " Загрузить файл синдаксиса "
+msgstr " Загрузить файл синтаксиса "
 
 #, c-format
 msgid ""
@@ -3358,7 +3358,7 @@ msgid " Cannot view: not a regular file "
 msgstr " Просмотр невозможен: необычный файл "
 
 msgid "Seeking to search result"
-msgstr "Переход к найденому"
+msgstr "Переход к найденному"
 
 msgid " History "
 msgstr "История команд"
@@ -3522,13 +3522,13 @@ msgstr "ftpfs: посылается пароль пользователя"
 
 #, c-format
 msgid "FTP: Account required for user %s"
-msgstr "FTP: Tребуется счет для пользователя %s"
+msgstr "FTP: Необходима учётная запись для пользователя %s"
 
 msgid "Account:"
 msgstr "Счет:"
 
 msgid "ftpfs: sending user account"
-msgstr "ftpfs: посылается счет пользователя"
+msgstr "ftpfs: посылается учётная запись пользователя"
 
 msgid "ftpfs: logged in"
 msgstr "ftpfs: зарегистрирован"
@@ -3697,7 +3697,7 @@ msgstr " %s при удалении файла %s с удаленной маши
 
 #, c-format
 msgid " %s renaming files\n"
-msgstr " %s при переименовывании файлa\n"
+msgstr " %s при переименовывании файла\n"
 
 #, c-format
 msgid ""
