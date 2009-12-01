@@ -1254,7 +1254,7 @@ sort_key_name_conv_tab (void)
 
     if (!has_been_sorted) {
 	size_t i;
-	for (i = 0; i <= key_name_conv_tab_size; i++)
+	for (i = 0; i < key_name_conv_tab_size; i++)
 	    key_name_conv_tab_sorted[i] = &key_name_conv_tab[i];
 
 	qsort (key_name_conv_tab_sorted,
