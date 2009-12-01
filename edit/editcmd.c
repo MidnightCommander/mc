@@ -1135,7 +1135,7 @@ edit_insert_column_of_text_from_file (WEdit * edit, int file)
     unsigned char *data;
     cursor = edit->curs1;
     col = edit_get_col (edit);
-    data = g_malloc (TEMP_BUF_LEN);
+    data = g_malloc0 (TEMP_BUF_LEN);
     while ((blocklen = mc_read (file, (char *) data, TEMP_BUF_LEN)) > 0) {
         for (width = 0; width < blocklen; width++) {
             if (data[width] == '\n')
@@ -1287,7 +1287,7 @@ edit_block_move_cmd (WEdit *edit)
 	edit_push_action (edit, COLUMN_ON);
 	column_highlighting = 0;
     } else {
-	copy_buf = g_malloc (end_mark - start_mark);
+	copy_buf = g_malloc0 (end_mark - start_mark);
 	edit_cursor_move (edit, start_mark - edit->curs1);
 	edit_scroll_screen_over_cursor (edit);
 	count = start_mark;
@@ -1855,7 +1855,7 @@ static unsigned char *
 edit_get_block (WEdit *edit, long start, long finish, int *l)
 {
     unsigned char *s, *r;
-    r = s = g_malloc (finish - start + 1);
+    r = s = g_malloc0 (finish - start + 1);
     if (column_highlighting) {
 	*l = 0;
 	/* copy from buffer, excluding chars that are out of the column 'margins' */
@@ -1911,7 +1911,7 @@ edit_save_block (WEdit * edit, const char *filename, long start,
 	unsigned char *buf;
 	int i = start, end;
 	len = finish - start;
-	buf = g_malloc (TEMP_BUF_LEN);
+	buf = g_malloc0 (TEMP_BUF_LEN);
 	while (start != finish) {
 	    end = min (finish, start + TEMP_BUF_LEN);
 	    for (; i < end; i++)

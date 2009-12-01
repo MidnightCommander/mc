@@ -270,7 +270,7 @@ edit_init_buffers (WEdit *edit)
 
     edit->curs1 = 0;
     edit->curs2 = 0;
-    edit->buffers2[0] = g_malloc (EDIT_BUF_SIZE);
+    edit->buffers2[0] = g_malloc0 (EDIT_BUF_SIZE);
 }
 
 /*
@@ -294,7 +294,7 @@ edit_load_file_fast (WEdit *edit, const char *filename)
     }
 
     if (!edit->buffers2[buf2])
-	edit->buffers2[buf2] = g_malloc (EDIT_BUF_SIZE);
+	edit->buffers2[buf2] = g_malloc0 (EDIT_BUF_SIZE);
 
     mc_read (file,
 	     (char *) edit->buffers2[buf2] + EDIT_BUF_SIZE -
@@ -304,7 +304,7 @@ edit_load_file_fast (WEdit *edit, const char *filename)
     for (buf = buf2 - 1; buf >= 0; buf--) {
 	/* edit->buffers2[0] is already allocated */
 	if (!edit->buffers2[buf])
-	    edit->buffers2[buf] = g_malloc (EDIT_BUF_SIZE);
+	    edit->buffers2[buf] = g_malloc0 (EDIT_BUF_SIZE);
 	mc_read (file, (char *) edit->buffers2[buf], EDIT_BUF_SIZE);
     }
 
@@ -352,7 +352,7 @@ edit_get_filter (const char *filename)
 	return 0;
     quoted_name = name_quote (filename, 0);
     l = str_term_width1 (quoted_name);
-    p = g_malloc (str_term_width1 (all_filters[i].read) + l + 2);
+    p = g_malloc0 (str_term_width1 (all_filters[i].read) + l + 2);
     sprintf (p, all_filters[i].read, quoted_name);
     g_free (quoted_name);
     return p;
@@ -368,7 +368,7 @@ edit_get_write_filter (const char *write_name, const char *filename)
 	return 0;
     writename = name_quote (write_name, 0);
     l = str_term_width1 (writename);
-    p = g_malloc (str_term_width1 (all_filters[i].write) + l + 2);
+    p = g_malloc0 (str_term_width1 (all_filters[i].write) + l + 2);
     sprintf (p, all_filters[i].write, writename);
     g_free (writename);
     return p;
@@ -509,7 +509,7 @@ edit_insert_file (WEdit *edit, const char *filename)
 	char *buf;
 	if ((file = mc_open (filename, O_RDONLY | O_BINARY)) == -1)
 	    return 0;
-	buf = g_malloc (TEMP_BUF_LEN);
+	buf = g_malloc0 (TEMP_BUF_LEN);
         blocklen = mc_read (file, buf, sizeof(VERTICAL_MAGIC));
         if (blocklen > 0) {
             /* if contain signature VERTICAL_MAGIC tnen it vertical block */
@@ -793,7 +793,7 @@ edit_init (WEdit *edit, int lines, int columns, const char *filename,
     edit_set_filename (edit, filename);
     edit->stack_size = START_STACK_SIZE;
     edit->stack_size_mask = START_STACK_SIZE - 1;
-    edit->undo_stack = g_malloc ((edit->stack_size + 10) * sizeof (long));
+    edit->undo_stack = g_malloc0 ((edit->stack_size + 10) * sizeof (long));
     if (edit_load_file (edit)) {
 	/* edit_load_file already gives an error message */
 	if (to_free)
@@ -1174,7 +1174,7 @@ edit_insert (WEdit *edit, int c)
     /* add a new buffer if we've reached the end of the last one */
     if (!(edit->curs1 & M_EDIT_BUF_SIZE))
 	edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE] =
-	    g_malloc (EDIT_BUF_SIZE);
+	    g_malloc0 (EDIT_BUF_SIZE);
 
     /* perform the insertion */
     edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE][edit->
@@ -1223,7 +1223,7 @@ void edit_insert_ahead (WEdit * edit, int c)
     edit->last_get_rule += (edit->last_get_rule >= edit->curs1);
 
     if (!((edit->curs2 + 1) & M_EDIT_BUF_SIZE))
-	edit->buffers2[(edit->curs2 + 1) >> S_EDIT_BUF_SIZE] = g_malloc (EDIT_BUF_SIZE);
+	edit->buffers2[(edit->curs2 + 1) >> S_EDIT_BUF_SIZE] = g_malloc0 (EDIT_BUF_SIZE);
     edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE][EDIT_BUF_SIZE - (edit->curs2 & M_EDIT_BUF_SIZE) - 1] = c;
 
     edit->last_byte++;
@@ -1386,7 +1386,7 @@ edit_move_backward_lots (WEdit *edit, long increment)
 	    edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE] = p;
 	else
 	    edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE] =
-		g_malloc (EDIT_BUF_SIZE);
+		g_malloc0 (EDIT_BUF_SIZE);
     } else {
 	g_free (p);
     }
@@ -1424,7 +1424,7 @@ edit_move_backward_lots (WEdit *edit, long increment)
 		edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE] = p;
 	    else
 		edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE] =
-		    g_malloc (EDIT_BUF_SIZE);
+		    g_malloc0 (EDIT_BUF_SIZE);
 	} else {
 	    g_free (p);
 	}
@@ -1456,7 +1456,7 @@ void edit_cursor_move (WEdit * edit, long increment)
 
 	    c = edit_get_byte (edit, edit->curs1 - 1);
 	    if (!((edit->curs2 + 1) & M_EDIT_BUF_SIZE))
-		edit->buffers2[(edit->curs2 + 1) >> S_EDIT_BUF_SIZE] = g_malloc (EDIT_BUF_SIZE);
+		edit->buffers2[(edit->curs2 + 1) >> S_EDIT_BUF_SIZE] = g_malloc0 (EDIT_BUF_SIZE);
 	    edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE][EDIT_BUF_SIZE - (edit->curs2 & M_EDIT_BUF_SIZE) - 1] = c;
 	    edit->curs2++;
 	    c = edit->buffers1[(edit->curs1 - 1) >> S_EDIT_BUF_SIZE][(edit->curs1 - 1) & M_EDIT_BUF_SIZE];
@@ -1480,7 +1480,7 @@ void edit_cursor_move (WEdit * edit, long increment)
 
 	    c = edit_get_byte (edit, edit->curs1);
 	    if (!(edit->curs1 & M_EDIT_BUF_SIZE))
-		edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE] = g_malloc (EDIT_BUF_SIZE);
+		edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE] = g_malloc0 (EDIT_BUF_SIZE);
 	    edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE][edit->curs1 & M_EDIT_BUF_SIZE] = c;
 	    edit->curs1++;
 	    c = edit->buffers2[(edit->curs2 - 1) >> S_EDIT_BUF_SIZE][EDIT_BUF_SIZE - ((edit->curs2 - 1) & M_EDIT_BUF_SIZE) - 1];
