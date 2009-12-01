@@ -1580,7 +1580,8 @@ delete_region (WInput *in, int x_first, int x_last)
     size_t len;
 
     in->point = first;
-    in->mark  = first;
+    if (in->mark > first)
+        in->mark  = first;
     last = str_offset_to_pos (in->buffer, last);
     first = str_offset_to_pos (in->buffer, first);
     len = strlen (&in->buffer[last]) + 1;
