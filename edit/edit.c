@@ -3279,43 +3279,41 @@ edit_execute_macro (WEdit *edit, struct macro macro[], int n)
 static void
 user_menu (WEdit * edit)
 {
-    FILE *fd;
+    char *block_file;
     int nomark;
-    struct stat status;
     long start_mark, end_mark;
-    char *block_file = concat_dir_and_file (home_dir, EDIT_BLOCK_FILE);
-    int rc = 0;
+    struct stat status;
+
+    block_file = concat_dir_and_file (home_dir, EDIT_BLOCK_FILE);
 
     nomark = eval_marks (edit, &start_mark, &end_mark);
-    if (!nomark)		/* remember marked or not */
+    if (nomark == 0)
 	edit_save_block (edit, block_file, start_mark, end_mark);
 
     /* run shell scripts from menu */
     user_menu_cmd (edit);
 
-    if (mc_stat (block_file, &status) != 0 || !status.st_size) {
-	/* no block messages */
-	goto cleanup;
+    if ((mc_stat (block_file, &status) == 0) && (status.st_size != 0)) {
+	int rc = 0;
+	FILE *fd;
+
+	if (nomark == 0) {
+	    /* i.e. we have marked block */
+	    rc = edit_block_delete_cmd (edit);
+	}
+
+	if (rc == 0)
+	    edit_insert_file (edit, block_file);
+
+	/* truncate block file */
+	fd = fopen (block_file, "w");
+	if (fd != NULL)
+	    fclose (fd);
+
+	edit_refresh_cmd (edit);
+	edit->force |= REDRAW_COMPLETELY;
     }
 
-    if (!nomark) {
-	/* i.e. we have marked block */
-	rc = edit_block_delete_cmd (edit);
-    }
-
-    if (!rc) {
-	edit_insert_file (edit, block_file);
-    }
-
-    /* truncate block file */
-    if ((fd = fopen (block_file, "w"))) {
-	fclose (fd);
-    }
-
-    edit_refresh_cmd (edit);
-    edit->force |= REDRAW_COMPLETELY;
-
-cleanup:
     g_free (block_file);
 }
 
