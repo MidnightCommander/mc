@@ -1487,14 +1487,11 @@ edit_replace_cmd__conv_to_display(char *str)
     tmp = str_convert_to_display (str);
 
     if (tmp && tmp->len){
-	g_free(str);
-	str = tmp->str;
+	return g_string_free (tmp, FALSE);
     }
-    g_string_free (tmp, FALSE);
-    return str;
-#else
-    return g_strdup(str);
+    g_string_free (tmp, TRUE);
 #endif
+    return g_strdup(str);
 }
 
 static char *
@@ -1505,14 +1502,12 @@ edit_replace_cmd__conv_to_input(char *str)
     tmp = str_convert_to_input (str);
 
     if (tmp && tmp->len){
-	g_free(str);
-	str = tmp->str;
+	return g_string_free (tmp, FALSE);
     }
-    g_string_free (tmp, FALSE);
-    return str;
-#else
+    g_string_free (tmp, TRUE);
     return g_strdup(str);
 #endif
+    return g_strdup(str);
 }
 /* call with edit = 0 before shutdown to close memory leaks */
 void
@@ -1544,8 +1539,9 @@ edit_replace_cmd (WEdit *edit, int again)
 	input1 = g_strdup (saved1 ? saved1 : "");
 	input2 = g_strdup (saved2 ? saved2 : "");
     } else {
-	char *disp1 = edit_replace_cmd__conv_to_display(g_strdup (saved1 ? saved1 : ""));
-	char *disp2 = edit_replace_cmd__conv_to_display(g_strdup (saved2 ? saved2 : ""));
+	char *disp1 = edit_replace_cmd__conv_to_display(saved1 ? saved1 : "");
+	char *disp2 = edit_replace_cmd__conv_to_display(saved2 ? saved2 : "");
+	char *tmp_inp1, *tmp_inp2;
 
 	edit_push_action (edit, KEY_PRESS + edit->start_display);
 
@@ -1559,8 +1555,10 @@ edit_replace_cmd (WEdit *edit, int again)
 	    goto cleanup;
 	}
 
+	tmp_inp1 = input1; tmp_inp2 = input2;
 	input1 = edit_replace_cmd__conv_to_input(input1);
 	input2 = edit_replace_cmd__conv_to_input(input2);
+	g_free(tmp_inp1); g_free(tmp_inp2);
 
 	g_free (saved1), saved1 = g_strdup (input1);
 	g_free (saved2), saved2 = g_strdup (input2);
