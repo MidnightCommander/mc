@@ -67,11 +67,19 @@ mc_search__recode_str (const char *str, gsize str_len,
     }
 
     conv = g_iconv_open (charset_to, charset_from);
-    if (conv == INVALID_CONV)
-        return NULL;
+    if (conv == INVALID_CONV) {
+        *bytes_written = str_len;
+        return g_strndup (str, str_len);
+    }
 
     ret = g_convert_with_iconv (str, str_len, conv, &bytes_read, bytes_written, NULL);
     g_iconv_close (conv);
+
+    if (ret == NULL) {
+        *bytes_written = str_len;
+        return g_strndup (str, str_len);
+    }
+
     return ret;
 }
 
@@ -152,8 +160,6 @@ mc_search__tolower_case_str (const char *charset, const char *str, gsize str_len
 
     tmp_str2 = converted_str =
         mc_search__recode_str (str, str_len, charset, cp_display, &converted_str_len);
-    if (converted_str == NULL)
-        return NULL;
 
     tmp_len = converted_str_len + 1;
 
@@ -166,8 +172,6 @@ mc_search__tolower_case_str (const char *charset, const char *str, gsize str_len
     tmp_str2 =
         mc_search__recode_str (converted_str, converted_str_len, cp_display, charset, &tmp_len);
     g_free (converted_str);
-    if (tmp_str2 == NULL)
-        return NULL;
 
     ret = g_string_new_len (tmp_str2, tmp_len);
     g_free (tmp_str2);
@@ -206,8 +210,6 @@ mc_search__toupper_case_str (const char *charset, const char *str, gsize str_len
 
     tmp_str2 = converted_str =
         mc_search__recode_str (str, str_len, charset, cp_display, &converted_str_len);
-    if (converted_str == NULL)
-        return NULL;
 
     tmp_len = converted_str_len + 1;
 
@@ -221,8 +223,6 @@ mc_search__toupper_case_str (const char *charset, const char *str, gsize str_len
     tmp_str2 =
         mc_search__recode_str (converted_str, converted_str_len, cp_display, charset, &tmp_len);
     g_free (converted_str);
-    if (tmp_str2 == NULL)
-        return NULL;
 
     ret = g_string_new_len (tmp_str2, tmp_len);
     g_free (tmp_str2);
