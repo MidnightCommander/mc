@@ -1042,6 +1042,8 @@ int eval_marks (WEdit * edit, long *start_mark, long *end_mark)
         int diff;
         long start_bol, start_eol;
         long end_bol, end_eol;
+        long col1, col2;
+        long diff1, diff2;
         if (edit->mark2 >= 0) {
             *start_mark = min (edit->mark1, edit->mark2);
             *end_mark = max (edit->mark1, edit->mark2);
@@ -1050,18 +1052,24 @@ int eval_marks (WEdit * edit, long *start_mark, long *end_mark)
             *end_mark = max (edit->mark1, edit->curs1);
             edit->column2 = edit->curs_col + edit->over_col;
         }
-        if (column_highlighting) {
+        if (column_highlighting
+            && (((edit->mark1 > edit->curs1) && (edit->column1 < edit->column2))
+            || ((edit->mark1 < edit->curs1) && (edit->column1 > edit->column2)))) {
+
             start_bol = edit_bol (edit, *start_mark);
             start_eol = edit_eol (edit, start_bol - 1) + 1;
             end_bol = edit_bol (edit, *end_mark);
             end_eol = edit_eol (edit, *end_mark);
-            diff = *start_mark + edit->column2 - start_bol - *end_mark + end_bol;
-            if (diff > 0) {
-                *start_mark -= diff;
-                *end_mark += diff;
-                *start_mark = max (*start_mark, start_eol);
-                *end_mark = min (*end_mark, end_eol);
-            }
+            col1 = min (edit->column1, edit->column2);
+            col2 = max (edit->column1, edit->column2);
+
+            diff1 = edit_move_forward3 (edit, start_bol, col2, 0) - edit_move_forward3 (edit, start_bol, col1, 0);
+            diff2 = edit_move_forward3 (edit, end_bol, col2, 0) - edit_move_forward3 (edit, end_bol, col1, 0);
+
+            *start_mark -= diff1;
+            *end_mark += diff2;
+            *start_mark = max (*start_mark, start_eol);
+            *end_mark = min (*end_mark, end_eol);
         }
         return 0;
     } else {
@@ -1314,9 +1322,8 @@ edit_delete_column_of_text (WEdit * edit)
     n = edit_move_forward (edit, m1, 0, m2) + 1;
     c = edit_move_forward3 (edit, edit_bol (edit, m1), 0, m1);
     d = edit_move_forward3 (edit, edit_bol (edit, m2), 0, m2);
-
-    b = max(min (c, d), min (edit->column1, edit->column2));
-    c = max (c, d + edit->over_col);
+    b = max (min (c, d), min (edit->column1, edit->column2));
+    c = max (c, max (edit->column1, edit->column2));
 
     while (n--) {
 	r = edit_bol (edit, edit->curs1);
@@ -1327,12 +1334,14 @@ edit_delete_column_of_text (WEdit * edit)
 	if (q > m2)
 	    q = m2;
 	edit_cursor_move (edit, p - edit->curs1);
-	while (q > p) {		/* delete line between margins */
+	while (q > p) {
+	    /* delete line between margins */
 	    if (edit_get_byte (edit, edit->curs1) != '\n')
 		edit_delete (edit, 1);
 	    q--;
 	}
-	if (n)			/* move to next line except on the last delete */
+	if (n)
+	    /* move to next line except on the last delete */
 	    edit_cursor_move (edit, edit_move_forward (edit, edit->curs1, 1, 0) - edit->curs1);
     }
 }
@@ -1343,6 +1352,9 @@ edit_block_delete (WEdit *edit)
 {
     long count;
     long start_mark, end_mark;
+    int curs_pos, line_width;
+    long curs_line, c1, c2;
+
     if (eval_marks (edit, &start_mark, &end_mark))
 	return 0;
     if (column_highlighting && edit->mark2 < 0)
@@ -1357,7 +1369,21 @@ edit_block_delete (WEdit *edit)
 	    return 1;
 	}
     }
+    c1 = min (edit->column1, edit->column2);
+    c2 = max (edit->column1, edit->column2);
+    edit->column1 = c1;
+    edit->column2 = c2;
+
     edit_push_markers (edit);
+
+    curs_line = edit->curs_line;
+
+    /* calculate line width and cursor position before cut */
+    line_width = edit_move_forward3 (edit, edit_bol (edit, edit->curs1), 0,
+                                     edit_eol (edit, edit->curs1));
+    curs_pos = edit->curs_col + edit->over_col;
+
+    /* move cursor to start of selection */
     edit_cursor_move (edit, start_mark - edit->curs1);
     edit_scroll_screen_over_cursor (edit);
     count = start_mark;
@@ -1366,6 +1392,13 @@ edit_block_delete (WEdit *edit)
 	    if (edit->mark2 < 0)
 		edit_mark_cmd (edit, 0);
 	    edit_delete_column_of_text (edit);
+	    /* move cursor to the saved position */
+	    edit_move_to_line (edit, curs_line);
+	    /* calculate line width after cut */
+	    line_width = edit_move_forward3 (edit, edit_bol (edit, edit->curs1), 0,
+                                             edit_eol (edit, edit->curs1));
+	    if (option_cursor_beyond_eol && curs_pos > line_width)
+		edit->over_col = curs_pos - line_width;
 	} else {
 	    while (count < end_mark) {
 		edit_delete (edit, 1);
