@@ -3309,10 +3309,9 @@ user_menu (WEdit * edit)
 	fd = fopen (block_file, "w");
 	if (fd != NULL)
 	    fclose (fd);
-
-	edit_refresh_cmd (edit);
-	edit->force |= REDRAW_COMPLETELY;
     }
+    edit_refresh_cmd (edit);
+    edit->force |= REDRAW_COMPLETELY;
 
     g_free (block_file);
 }
