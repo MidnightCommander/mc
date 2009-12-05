@@ -1573,24 +1573,23 @@ long edit_move_backward (WEdit * edit, long current, int lines)
 
 /* If cols is zero this returns the count of columns from current to upto. */
 /* If upto is zero returns index of cols across from current. */
-long edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
+long
+edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
 {
     long p, q;
-    int col = 0;
-#ifdef HAVE_CHARSET
-	int cw = 1;
-	int utf_ch = 0;
-#endif
+    int col;
+
     if (upto) {
 	q = upto;
 	cols = -10;
     } else
 	q = edit->last_byte + 2;
+
     for (col = 0, p = current; p < q; p++) {
-	int c;
+	int c, orig_c;
+	int utf_ch = 0;
 #ifdef HAVE_CHARSET
-	cw = 1;
-	utf_ch = 0;
+	int cw = 1;
 #endif
 	if (cols != -10) {
 	    if (col == cols)
@@ -1598,15 +1597,20 @@ long edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
 	    if (col > cols)
 		return p - 1;
 	}
-	c = edit_get_byte (edit, p);
+	orig_c = c = edit_get_byte (edit, p);
 #ifdef HAVE_CHARSET
 	if (edit->utf8) {
 	    utf_ch = edit_get_utf (edit, p, &cw);
-	    if (utf8_display && g_unichar_iswide(utf_ch))
-	        col++;
+	    if (utf8_display) {
+	        if (cw > 1)
+	            col -= cw - 1;
+		if (g_unichar_iswide (utf_ch))
+		    col++;
+	    } else if (cw > 1 && g_unichar_isprint (utf_ch))
+		col -= cw - 1;
 	}
 #endif
-        c = convert_to_display_c (c);
+	c = convert_to_display_c (c);
 	if (c == '\t')
 	    col += TAB_SIZE - col % TAB_SIZE;
 	else if (c == '\n') {
@@ -1614,16 +1618,12 @@ long edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
 		return col;
 	    else
 		return p;
-	} else if (c < 32 || c == 127)
-	    /* '\r' is shown as ^M, so we must advance 2 characters */
-	    /* Caret notation for control characters */
-	    col += 2;
+	} else if ((c < 32 || c == 127) && (orig_c == c || (!utf8_display && !edit->utf8)))
+		/* '\r' is shown as ^M, so we must advance 2 characters */
+		/* Caret notation for control characters */
+		col += 2;
 	else
 	    col++;
-#ifdef HAVE_CHARSET
-	if (cw > 1)
-	    col -= cw - 1;
-#endif
     }
     return col;
 }
