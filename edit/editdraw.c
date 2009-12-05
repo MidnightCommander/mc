@@ -365,7 +365,6 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 
     long m1 = 0, m2 = 0, q, c1, c2;
     int col, start_col_real;
-    int cw;
     unsigned int c;
     int color;
     int abn_style;
@@ -413,7 +412,7 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 	eval_marks (edit, &m1, &m2);
 
 	if (row <= edit->total_lines - edit->start_line) {
-		long tws = 0;
+	    long tws = 0;
 	    if (tty_use_colors () && visible_tws) {
 		tws = edit_eol (edit, b);
 		while (tws > b && ((c = edit_get_byte (edit, tws - 1)) == ' '
@@ -422,6 +421,8 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 	    }
 
 	    while (col <= end_col - edit->start_col) {
+		int cw = 1;
+
 		p->ch = 0;
 		p->style = 0;
 		if (q == edit->curs1)
@@ -442,7 +443,7 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 		if (q >= edit->found_start
 		    && q < edit->found_start + edit->found_len)
 		    p->style |= MOD_BOLD;
-		cw = 1;
+
 		if ( !edit->utf8 ) {
 		    c = edit_get_byte (edit, q);
 		} else {
@@ -530,16 +531,12 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 		        if ( !edit->utf8 ) {
 		            c = convert_from_8bit_to_utf_c ((unsigned char) c, edit->converter);
 		        }
-		    } else {
-		        if ( edit->utf8 ) {
-		            c = convert_from_utf_to_current_c (c, edit->converter);
-		        } else {
+		    } else if ( edit->utf8 )
+		        c = convert_from_utf_to_current_c (c, edit->converter);
+		    else
 #endif
-		            c = convert_to_display_c (c);
-#ifdef HAVE_CHARSET
-		        }
-		    }
-#endif
+		        c = convert_to_display_c (c);
+
 		    /* Caret notation for control characters */
 		    if (c < 32) {
 			p->ch = '^';
@@ -583,7 +580,8 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 		    }
 		    col++;
 		    break;
-		}
+		} /* case */
+
 		q++;
 		if ( cw > 1) {
 		  q += cw - 1;
@@ -593,7 +591,8 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
     } else {
 	start_col_real = start_col = 0;
     }
-    p->ch = 0;
+
+    p->ch = '\0';
 
     print_to_widget (edit, row, start_col, start_col_real, end_col, line, line_stat);
 }
@@ -713,7 +712,6 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 
   exit_render:
     edit->screen_modified = 0;
-    return;
 }
 
 static inline void

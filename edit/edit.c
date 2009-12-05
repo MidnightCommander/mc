@@ -158,7 +158,7 @@ char *edit_get_buf_ptr (WEdit * edit, long byte_index)
 
     if (byte_index >= (edit->curs1 + edit->curs2) ) {
         byte_index -= 1;
-    };
+    }
 
     if ( byte_index < 0 ) {
         return NULL;
@@ -590,7 +590,6 @@ check_file_access (WEdit *edit, const char *filename, struct stat *st)
     if (st->st_size >= SIZE_LIMIT) {
         g_string_sprintf (errmsg = g_string_new (NULL),
 	    _(" File %s is too large "), filename);
-	goto cleanup;
     }
 
 cleanup:
@@ -711,7 +710,7 @@ edit_save_position (WEdit *edit)
 static void
 edit_purge_widget (WEdit *edit)
 {
-    int len = sizeof (WEdit) - sizeof (Widget);
+    size_t len = sizeof (WEdit) - sizeof (Widget);
     char *start = (char *) edit + sizeof (Widget);
     memset (start, 0, len);
     edit->macro_i = -1;		/* not recording a macro */
@@ -888,18 +887,15 @@ edit_clean (WEdit *edit)
     return 1;
 }
 
-
 /* returns 1 on success */
-int edit_renew (WEdit * edit)
+int
+edit_renew (WEdit * edit)
 {
     int lines = edit->num_widget_lines;
     int columns = edit->num_widget_columns;
-    int retval = 1;
 
     edit_clean (edit);
-    if (!edit_init (edit, lines, columns, "", 0))
-	retval = 0;
-    return retval;
+    return (edit_init (edit, lines, columns, "", 0) != NULL);
 }
 
 /*
@@ -1068,8 +1064,8 @@ void edit_push_action (WEdit * edit, long c,...)
 	}
     }
     edit->undo_stack[sp] = c;
-  check_bottom:
 
+  check_bottom:
     edit->stack_pointer = (edit->stack_pointer + 1) & edit->stack_size_mask;
 
     /* if the sp wraps round and catches the stack_bottom then erase
@@ -1346,7 +1342,7 @@ int
 edit_move_backward_lots (WEdit *edit, long increment)
 {
     int r, s, t;
-    unsigned char *p;
+    unsigned char *p = NULL;
 
     if (increment > edit->curs1)
 	increment = edit->curs1;
@@ -1359,7 +1355,6 @@ edit_move_backward_lots (WEdit *edit, long increment)
 	r = increment;
     s = edit->curs1 & M_EDIT_BUF_SIZE;
 
-    p = 0;
     if (s > r) {
 	memqcpy (edit,
 		 edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE] + t - r,
@@ -1820,10 +1815,8 @@ int line_is_blank (WEdit * edit, long line)
    before a non-blank line is reached */
 static void edit_move_up_paragraph (WEdit * edit, int scroll)
 {
-    int i;
-    if (edit->curs_line <= 1) {
-	i = 0;
-    } else {
+    int i = 0;
+    if (edit->curs_line > 1) {
 	if (line_is_blank (edit, edit->curs_line)) {
 	    if (line_is_blank (edit, edit->curs_line - 1)) {
 		for (i = edit->curs_line - 1; i; i--)
@@ -2298,7 +2291,7 @@ edit_delete_line (WEdit *edit)
      */
     while (edit_get_byte (edit, edit->curs1 - 1) != '\n') {
 	(void) edit_backspace (edit, 1);
-    };
+    }
 }
 
 void insert_spaces_tab (WEdit * edit, int half)
@@ -2315,9 +2308,8 @@ void insert_spaces_tab (WEdit * edit, int half)
 static int is_aligned_on_a_tab (WEdit * edit)
 {
     edit_update_curs_col (edit);
-    if ((edit->curs_col % (TAB_SIZE * space_width)) && edit->curs_col % (TAB_SIZE * space_width) != (HALF_TAB_SIZE * space_width))
-	return 0;		/* not alligned on a tab */
-    return 1;
+    return !((edit->curs_col % (TAB_SIZE * space_width))
+		 && edit->curs_col % (TAB_SIZE * space_width) != (HALF_TAB_SIZE * space_width));
 }
 
 static int right_of_four_spaces (WEdit *edit)
@@ -2623,12 +2615,10 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	        edit_insert (edit, char_for_insertion);
 	        i++;
 	    }
-	} else {
+	} else
 #endif
 	    edit_insert (edit, char_for_insertion);
-#ifdef HAVE_CHARSET
-	}
-#endif
+
 	if (option_auto_para_formatting) {
 	    format_paragraph (edit, 0);
 	    edit->force |= REDRAW_PAGE;
