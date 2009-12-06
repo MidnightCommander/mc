@@ -37,6 +37,7 @@ AC_DEFUN([MC_CHECK_CFLAGS],[
     mc_configured_cflags=""
 
 dnl Sorted -f options:
+    MC_CHECK_ONE_CFLAG([-fdiagnostics-show-option])
 dnl    MC_CHECK_ONE_CFLAG([-fno-stack-protector])
 
 dnl Sorted -W options:
