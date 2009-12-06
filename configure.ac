@@ -517,7 +517,7 @@ MC_CHECK_CFLAGS
 
 CFLAGS_OPTS=""
 
-if test x$CFLAGS = x; then
+if test "x$CFLAGS" = "x"; then
     CFLAGS_OPTS=" -O2 "
 fi
 
