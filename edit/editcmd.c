@@ -2547,7 +2547,7 @@ edit_complete_word_cmd (WEdit *edit)
 	[word_start & M_EDIT_BUF_SIZE];
 
     /* match_expr = g_strdup_printf ("\\b%.*s[a-zA-Z_0-9]+", word_len, bufpos); */
-    match_expr = g_strdup_printf ("(^|\\s+|\\b)%.*s[^\\s\\.=\\+\\[\\]\\(\\)\\,\\;\\:\\\"\\'\\-\\?\\/\\|\\\\\\{\\}\\*\\&\\^\\%%\\$#@\\!]+", word_len, bufpos);
+    match_expr = g_strdup_printf ("(^|\\s+|\\b)%.*s[^\\s\\.=\\+\\[\\]\\(\\)\\,\\;\\:\\\"\\'\\-\\?\\/\\|\\\\\\{\\}\\*\\&\\^\\%%\\$#@\\!]+", (int)word_len, bufpos);
 
     /* collect the possible completions              */
     /* start search from begin to end of file */
@@ -2728,7 +2728,7 @@ edit_get_match_keyword_cmd (WEdit *edit)
     /* prepare match expression */
     bufpos = &edit->buffers1[word_start >> S_EDIT_BUF_SIZE]
                             [word_start & M_EDIT_BUF_SIZE];
-    match_expr = g_strdup_printf ("%.*s", word_len, bufpos);
+    match_expr = g_strdup_printf ("%.*s", (int)word_len, bufpos);
 
     ptr = g_get_current_dir ();
     path = g_strconcat (ptr, G_DIR_SEPARATOR_S, (char *) NULL);

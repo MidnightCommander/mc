@@ -2162,7 +2162,7 @@ main (int argc, char *argv[])
     dlg_set_default_colors ();
 
     if ( ! isInitialized ) {
-        message (D_ERROR, _("Warning"), error->message);
+        message (D_ERROR, _("Warning"), "%s", error->message);
         g_error_free(error);
         error = NULL;
     }
