@@ -1969,7 +1969,7 @@ panel_operate (void *source_panel, FileOperation operation,
 
 	v = do_background (ctx,
 			   g_strconcat (op_names[operation], ": ",
-					panel->cwd, NULL));
+					panel->cwd, (char *) NULL));
 	if (v == -1) {
 	    message (D_ERROR, MSG_ERROR,
 		     _(" Sorry, I could not put the job in background "));

@@ -368,8 +368,7 @@ smbfs_fill_names (struct vfs_class *me, fill_names_f func)
 	    path = g_strconcat (URL_HEADER,
 		smbfs_connections[i].user, "@",
 		smbfs_connections[i].host,
-		"/", smbfs_connections[i].service,
-		NULL);
+		"/", smbfs_connections[i].service, (char *) NULL);
 	    (*func)(path);
 	    g_free (path);
 	}

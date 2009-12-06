@@ -366,7 +366,7 @@ edit_save_file (WEdit *edit, const char *filename)
 
     if (this_save_mode == EDIT_DO_BACKUP) {
 	assert (option_backup_ext != NULL);
-	tmp = g_strconcat (real_filename, option_backup_ext,(char *) NULL);
+	tmp = g_strconcat (real_filename, option_backup_ext, (char *) NULL);
 	if (mc_rename (real_filename, tmp) == -1){
 	    g_free(tmp);
 	    goto error_save;
@@ -835,7 +835,7 @@ int edit_save_confirm_cmd (WEdit * edit)
         return 0;
 
     if (edit_confirm_save) {
-	f = g_strconcat (_(" Confirm save file? : "), edit->filename, " ", NULL);
+	f = g_strconcat (_(" Confirm save file? : "), edit->filename, " ", (char *) NULL);
 	if (edit_query_dialog2 (_(" Save file "), f, _("&Save"), _("&Cancel"))){
 	    g_free(f);
 	    return 0;

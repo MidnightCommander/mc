@@ -342,7 +342,7 @@ button_get_text (const WButton *b)
 {
     if (b->text.hotkey != NULL)
         return g_strconcat (b->text.start, "&", b->text.hotkey,
-                            b->text.end, NULL);
+                            b->text.end, (char *) NULL);
     else
         return g_strdup (b->text.start);
 }

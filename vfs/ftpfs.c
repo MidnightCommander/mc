@@ -475,8 +475,8 @@ ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super,
     } else {			/* ask user */
 	char *p;
 
-	p = g_strconcat (_(" FTP: Password required for "), SUP.user, " ",
-			 NULL);
+	p = g_strconcat (_(" FTP: Password required for "),
+                        SUP.user, " ", (char *) NULL);
 	op = vfs_get_password (p);
 	g_free (p);
 	if (op == NULL)
@@ -496,7 +496,7 @@ ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super,
 	name =
 	    g_strconcat (SUP.user, "@",
 			 SUP.host[0] == '!' ? SUP.host + 1 : SUP.host,
-			 NULL);
+                         (char *) NULL);
     } else
 	name = g_strdup (SUP.user);
 
@@ -890,7 +890,7 @@ ftpfs_get_current_directory (struct vfs_class *me, struct vfs_s_super *super)
 			    /* If the remote server is an Amiga a leading slash
 			       might be missing. MC needs it because it is used
 			       as separator between hostname and path internally. */
-			    return g_strconcat( "/", bufp, NULL);
+			    return g_strconcat( "/", bufp, (char *) NULL);
 			}
 		    } else {
 			ftpfs_errno = EIO;

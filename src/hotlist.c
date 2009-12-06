@@ -1089,8 +1089,7 @@ static void remove_from_hotlist (struct hotlist *entry)
 
 	title = g_strconcat (_(" Remove: "),
 				   str_trunc (entry->label, 30),
-				   " ",
-				   NULL);
+				   " ", (char *) NULL);
 
 	if (safe_delete)
 	    query_set_sel (1);
@@ -1111,8 +1110,7 @@ static void remove_from_hotlist (struct hotlist *entry)
 
 	    header = g_strconcat (_(" Remove: "),
 				   str_trunc (entry->label, 30),
-				   " ",
-				   NULL);
+				   " ", (char *) NULL);
 	    result = query_dialog (header, _("\n Group not empty.\n Remove it?"),
 				   D_ERROR, 2,
 				   _("&Yes"), _("&No"));

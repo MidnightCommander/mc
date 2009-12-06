@@ -310,7 +310,7 @@ get_file_type_local (const char *filename, char *buf, int buflen)
     int read_bytes = 0;
 
     char *tmp = name_quote (filename, 0);
-    char *command = g_strconcat (FILE_CMD, tmp, " 2>/dev/null", (char *) 0);
+    char *command = g_strconcat (FILE_CMD, tmp, " 2>/dev/null", (char *) NULL);
     FILE *f = popen (command, "r");
 
     g_free (tmp);

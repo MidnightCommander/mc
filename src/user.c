@@ -702,7 +702,7 @@ execute_menu_command (WEdit *edit_widget, const char *commands)
     } else {
 	/* execute the command indirectly to allow execution even
 	 * on no-exec filesystems. */
-	char *cmd = g_strconcat("/bin/sh ", file_name, (char *)NULL);
+	char *cmd = g_strconcat("/bin/sh ", file_name, (char *) NULL);
 	shell_execute (cmd, EXECUTE_HIDE);
 	g_free(cmd);
     }

@@ -492,8 +492,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 	"else\n"
 		  "echo '### 500'\n"
 	"fi\n"
-	,
-	NULL
+	, (char *) NULL
     );
 
     fish_command (me, super, NONE, shell_commands,

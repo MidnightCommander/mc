@@ -1004,14 +1004,14 @@ static char
     if (semi != NULL) {
         slash = strchr (semi, PATH_SEP);
         if (slash != NULL) {
-            result = g_strconcat (path, "/#enc:", encoding, NULL);
+            result = g_strconcat (path, "/#enc:", encoding, (char *) NULL);
         } else {
             *semi = 0;
-            result = g_strconcat (path, "/#enc:", encoding, NULL);
+            result = g_strconcat (path, "/#enc:", encoding, (char *) NULL);
             *semi = '#';
         }
     } else {
-        result = g_strconcat (path, "/#enc:", encoding, NULL);
+        result = g_strconcat (path, "/#enc:", encoding, (char *) NULL);
     }
 
     return result;

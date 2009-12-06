@@ -237,7 +237,7 @@ vfs_s_resolve_symlink (struct vfs_class *me, struct vfs_s_entry *entry,
     if (*linkname != PATH_SEP) {
 	char *fullpath = vfs_s_fullpath (me, entry->dir);
 	if (fullpath) {
-	    fullname = g_strconcat (fullpath, "/", linkname, NULL);
+	    fullname = g_strconcat (fullpath, "/", linkname, (char *) NULL);
 	    linkname = fullname;
 	    g_free (fullpath);
 	}
@@ -1017,7 +1017,8 @@ vfs_s_fill_names (struct vfs_class *me, fill_names_f func)
     char *name;
     
     while (a){
-	name = g_strconcat ( a->name, "#", me->prefix, "/", /* a->current_dir->name, */ NULL);
+	name = g_strconcat ( a->name, "#", me->prefix, "/",
+                            /* a->current_dir->name, */ (char *) NULL);
 	(*func)(name);
 	g_free (name);
 	a = a->next;
