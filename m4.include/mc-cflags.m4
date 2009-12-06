@@ -66,5 +66,5 @@ AC_DEFUN([MC_CHECK_CFLAGS],[
 dnl    MC_CHECK_ONE_CFLAG([-fno-stack-protector])
 dnl    MC_CHECK_ONE_CFLAG([-Wsequence-point])
 dnl    MC_CHECK_ONE_CFLAG([-Wstrict-aliasing])
-dnl    MC_CHECK_ONE_CFLAG([-Wformat])
+    MC_CHECK_ONE_CFLAG([-Wformat])
 ])
