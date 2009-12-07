@@ -1508,8 +1508,6 @@ done_mc (void)
 {
     disable_mouse ();
 
-    done_menu ();
-
     /* Setup shutdown
      *
      * We sync the profiles since the hotlist may have changed, while
