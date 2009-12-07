@@ -71,5 +71,6 @@ mc_log(const char *fmt, ...)
 			(void)fclose(f);
 		}
 		g_free(logfilename);
+		va_end(args);
 	}
 }
