@@ -1552,6 +1552,11 @@ midnight_callback (Dlg_head *h, Widget *sender,
 				   1, LINES - keybar_visible - 1);
 	return MSG_HANDLED;
 
+    case DLG_RESIZE:
+	setup_panels ();
+	menubar_arrange (the_menubar);
+	return MSG_HANDLED;
+
     case DLG_IDLE:
 	/* We only need the first idle event to show user menu after start */
 	set_idle_proc (h, 0);

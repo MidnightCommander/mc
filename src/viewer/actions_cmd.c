@@ -505,6 +505,27 @@ mcview_handle_key (mcview_t * view, int key)
     return MSG_NOT_HANDLED;
 }
 
+
+/* --------------------------------------------------------------------------------------------- */
+
+static inline void
+mcview_adjust_size (Dlg_head *h)
+{
+    mcview_t *view;
+    WButtonBar *b;
+
+    /* Look up the viewer and the buttonbar, we assume only two widgets here */
+    view = (mcview_t *) find_widget_type (h, mcview_callback);
+    b = find_buttonbar (h);
+
+    widget_set_size (&view->widget, 0, 0, LINES - 1, COLS);
+    widget_set_size (&b->widget , LINES - 1, 0, 1, COLS);
+
+    mcview_compute_areas (view);
+    mcview_update_bytes_per_line (view);
+}
+
+
 /* --------------------------------------------------------------------------------------------- */
 
 /*** public functions ****************************************************************************/

@@ -157,24 +157,6 @@ edit_event (Gpm_Event *event, void *data)
     return MOU_NORMAL;
 }
 
-static void
-edit_adjust_size (Dlg_head *h)
-{
-    WEdit *edit;
-    WButtonBar *b;
-
-    edit = (WEdit *) find_widget_type (h, edit_callback);
-    b = find_buttonbar (h);
-
-    widget_set_size (&edit->widget, 0, 0, LINES - 1, COLS);
-    widget_set_size (&b->widget , LINES - 1, 0, 1, COLS);
-    widget_set_size (&edit_menubar->widget, 0, 0, 1, COLS);
-
-#ifdef RESIZABLE_MENUBAR
-    menubar_arrange (edit_menubar);
-#endif
-}
-
 static cb_ret_t
 edit_command_execute (WEdit *edit, unsigned long command)
 {
@@ -187,11 +169,9 @@ edit_command_execute (WEdit *edit, unsigned long command)
     return MSG_HANDLED;
 }
 
-static void
-edit_set_buttonbar (WEdit *edit)
+static inline void
+edit_set_buttonbar (WEdit *edit, WButtonBar *bb)
 {
-    WButtonBar *bb = find_buttonbar (edit->widget.parent);
-
     buttonbar_set_label (bb,  1, Q_("ButtonBar|Help"),   editor_map, (Widget *) edit);
     buttonbar_set_label (bb,  2, Q_("ButtonBar|Save"),   editor_map, (Widget *) edit);
     buttonbar_set_label (bb,  3, Q_("ButtonBar|Mark"),   editor_map, (Widget *) edit);
@@ -214,28 +194,31 @@ edit_dialog_callback (Dlg_head *h, Widget *sender,
     WButtonBar *buttonbar;
 
     edit = (WEdit *) find_widget_type (h, edit_callback);
+    menubar = find_menubar (h);
+    buttonbar = find_buttonbar (h);
 
     switch (msg) {
     case DLG_INIT:
-	edit_set_buttonbar (edit);
+	edit_set_buttonbar (edit, buttonbar);
 	return MSG_HANDLED;
 
     case DLG_RESIZE:
-	edit_adjust_size (h);
+	widget_set_size (&edit->widget, 0, 0, LINES - 1, COLS);
+	widget_set_size (&buttonbar->widget , LINES - 1, 0, 1, COLS);
+	widget_set_size (&menubar->widget, 0, 0, 1, COLS);
+	menubar_arrange (menubar);
+	return MSG_HANDLED;
+
+    case DLG_ACTION:
+	if (sender == (Widget *) menubar)
+	    return send_message ((Widget *) edit, WIDGET_COMMAND, parm);
+	if (sender == (Widget *) buttonbar)
+	    return send_message ((Widget *) edit, WIDGET_COMMAND, parm);
 	return MSG_HANDLED;
 
     case DLG_VALIDATE:
 	if (!edit_ok_to_exit (edit))
 	    h->running = 1;
-	return MSG_HANDLED;
-
-    case DLG_ACTION:
-	menubar = find_menubar (h);
-	if (sender == (Widget *) menubar)
-	    return send_message ((Widget *) edit, WIDGET_COMMAND, parm);
-	buttonbar = find_buttonbar (h);
-	if (sender == (Widget *) buttonbar)
-	    return send_message ((Widget *) edit, WIDGET_COMMAND, parm);
 	return MSG_HANDLED;
 
     default:
