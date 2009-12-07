@@ -265,7 +265,13 @@ path_magic (const char *path)
 }
 
 /**
- * Splits path '/p1#op/inpath' into inpath,op; returns which vfs it is.
+ * Splits path extracting vfs part.
+ *
+ * Splits path
+ * \verbatim /p1#op/inpath \endverbatim
+ * into
+ * \verbatim inpath,op; \endverbatim
+ * returns which vfs it is.
  * What is left in path is p1. You still want to g_free(path), you DON'T
  * want to free neither *inpath nor *op
  */

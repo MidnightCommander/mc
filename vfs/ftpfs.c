@@ -44,11 +44,14 @@ What to do with this?
 
 
      * NOTE: Usage of tildes is deprecated, consider:
-     * cd /#ftp:pavel@hobit
-     * cd ~
+     * \verbatim
+         cd /#ftp:pavel@hobit
+         cd ~
+       \endverbatim
      * And now: what do I want to do? Do I want to go to /home/pavel or to
      * /#ftp:hobit/home/pavel? I think first has better sense...
      *
+    \verbatim
     {
         int f = !strcmp( remote_path, "/~" );
 	if (f || !strncmp( remote_path, "/~/", 3 )) {
@@ -58,8 +61,7 @@ What to do with this?
 	    remote_path = s;
 	}
     }
-
-
+    \endverbatim
  */
 
 /* \todo Fix: Namespace pollution: horrible */

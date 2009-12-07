@@ -27,7 +27,7 @@
  * inside. It is somehow similar to extfs, except that extfs makes
  * whole virtual trees and we do only single virtual files.
  *
- * If you want to gunzip something, you should open it with #ugz
+ * If you want to gunzip something, you should open it with \verbatim #ugz \endverbatim
  * suffix, DON'T try to gunzip it yourself.
  *
  * Namespace: exports vfs_sfs_ops

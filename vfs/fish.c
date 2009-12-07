@@ -34,7 +34,7 @@
  * Derived from ftpfs.c
  * Read README.fish for protocol specification.
  *
- * Syntax of path is: /#sh:user@host[:Cr]/path
+ * Syntax of path is: \verbatim /#sh:user@host[:Cr]/path \endverbatim
  *      where C means you want compressed connection,
  *      and r means you want to use rsh
  *
