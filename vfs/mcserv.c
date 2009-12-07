@@ -338,7 +338,7 @@ send_time (int sock, time_t t)
 	long ltime = (long) t;
 	char buf[BUF_SMALL];
 
-	snprintf (buf, sizeof (buf), "%lx", ltime);
+	g_snprintf (buf, sizeof (buf), "%lx", ltime);
 	rpc_send (sock, RPC_STRING, buf, RPC_END);
     }
 }
@@ -515,7 +515,7 @@ do_readdir (void)
 	fname_len =
 	    strlen (mcfs_DIR.names[handle]) + strlen (dirent->d_name) + 2;
 	fname = malloc (fname_len);
-	snprintf (fname, fname_len, "%s/%s", mcfs_DIR.names[handle],
+	g_snprintf (fname, fname_len, "%s/%s", mcfs_DIR.names[handle],
 		  dirent->d_name);
 	n = lstat (fname, &st);
 	g_free (fname);
