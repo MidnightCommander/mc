@@ -197,8 +197,6 @@ mc_search_prepare (mc_search_t * lc_mc_search)
             buffer =
                 mc_search__recode_str (lc_mc_search->original, lc_mc_search->original_len, cp_source,
                                        codepages[loop1].id, &recoded_str_len);
-            if (buffer == NULL)
-                continue;
 
             g_ptr_array_add (ret,
                              mc_search__cond_struct_new (lc_mc_search, buffer,
