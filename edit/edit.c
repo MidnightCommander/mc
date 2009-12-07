@@ -122,6 +122,8 @@ const global_keymap_t *editor_map;
 const global_keymap_t *editor_x_map;
 
 static void user_menu (WEdit *edit);
+static void edit_right_char_move_cmd (WEdit * edit);
+static void edit_left_char_move_cmd (WEdit * edit);
 
 int edit_get_byte (WEdit * edit, long byte_index)
 {
@@ -1881,7 +1883,9 @@ void edit_move_down (WEdit * edit, int i, int scroll)
 	p = edit_bol (edit, edit->curs1);
 	edit_cursor_move (edit, (p = edit_move_forward (edit, p, i, 0)) - edit->curs1);
 	edit_move_to_prev_col (edit, p);
-
+	/* search start of current multibyte char (like CJK) */
+	edit_right_char_move_cmd (edit);
+	edit_left_char_move_cmd (edit);
 	edit->search_start = edit->curs1;
 	edit->found_len = 0;
     }
