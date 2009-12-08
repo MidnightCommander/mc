@@ -122,8 +122,6 @@ const global_keymap_t *editor_map;
 const global_keymap_t *editor_x_map;
 
 static void user_menu (WEdit *edit);
-static void edit_right_char_move_cmd (WEdit * edit);
-static void edit_left_char_move_cmd (WEdit * edit);
 
 int edit_get_byte (WEdit * edit, long byte_index)
 {
@@ -1754,28 +1752,6 @@ edit_move_to_prev_col (WEdit * edit, long p)
     }
 }
 
-/* move i lines */
-void edit_move_up (WEdit * edit, unsigned long i, int scroll)
-{
-    unsigned long p, l = edit->curs_line;
-
-    if (i > l)
-	i = l;
-    if (i) {
-	if (i > 1)
-	    edit->force |= REDRAW_PAGE;
-	if (scroll)
-	    edit_scroll_upward (edit, i);
-
-	p = edit_bol (edit, edit->curs1);
-	edit_cursor_move (edit, (p = edit_move_backward (edit, p, i)) - edit->curs1);
-	edit_move_to_prev_col (edit, p);
-
-	edit->search_start = edit->curs1;
-	edit->found_len = 0;
-    }
-}
-
 static int
 is_blank (WEdit *edit, long offset)
 {
@@ -1867,28 +1843,6 @@ static void edit_move_up_paragraph (WEdit * edit, int scroll)
 	}
     }
     edit_move_up (edit, edit->curs_line - i, scroll);
-}
-
-/* move i lines */
-void edit_move_down (WEdit * edit, int i, int scroll)
-{
-    long p, l = edit->total_lines - edit->curs_line;
-    if (i > l)
-	i = l;
-    if (i) {
-	if (i > 1)
-	    edit->force |= REDRAW_PAGE;
-	if (scroll)
-	    edit_scroll_downward (edit, i);
-	p = edit_bol (edit, edit->curs1);
-	edit_cursor_move (edit, (p = edit_move_forward (edit, p, i, 0)) - edit->curs1);
-	edit_move_to_prev_col (edit, p);
-	/* search start of current multibyte char (like CJK) */
-	edit_right_char_move_cmd (edit);
-	edit_left_char_move_cmd (edit);
-	edit->search_start = edit->curs1;
-	edit->found_len = 0;
-    }
 }
 
 /* moves down until a blank line is reached, or until just
@@ -2164,6 +2118,46 @@ static void edit_left_char_move_cmd (WEdit * edit)
     } else {
         edit_cursor_move (edit, -cw);
     }
+}
+
+/** Up or down cursor moving.
+ direction = TRUE - move up
+           = FALSE - move down
+*/
+static void
+edit_move_updown (WEdit * edit, unsigned long i, int scroll, gboolean direction) {
+    unsigned long p;
+    unsigned long l = (direction)
+			? edit->curs_line
+			: edit->total_lines - edit->curs_line;
+
+    if (i > l)
+	i = l;
+
+    if (i == 0)
+	return;
+
+    if (i > 1)
+	edit->force |= REDRAW_PAGE;
+    if (scroll)
+	edit_scroll_upward (edit, i);
+
+    p = edit_bol (edit, edit->curs1);
+
+    p = (direction)
+	    ? edit_move_backward (edit, p, i)
+	    : edit_move_forward (edit, p, i, 0);
+
+    edit_cursor_move (edit, p - edit->curs1);
+
+    edit_move_to_prev_col (edit, p);
+
+    /* search start of current multibyte char (like CJK) */
+    edit_right_char_move_cmd (edit);
+    edit_left_char_move_cmd (edit);
+
+    edit->search_start = edit->curs1;
+    edit->found_len = 0;
 }
 
 static void edit_right_delete_word (WEdit * edit)
@@ -3341,3 +3335,16 @@ edit_stack_free (void)
 	    edit_stack_iterator++)
 	g_free (edit_history_moveto[edit_stack_iterator].filename);
 }
+
+/* move i lines */
+void edit_move_up (WEdit * edit, unsigned long i, int scroll)
+{
+    edit_move_updown (edit, i, scroll, TRUE);
+}
+
+/* move i lines */
+void edit_move_down (WEdit * edit, unsigned long i, int scroll)
+{
+    edit_move_updown (edit, i, scroll, FALSE);
+}
+
