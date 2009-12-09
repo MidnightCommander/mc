@@ -244,7 +244,7 @@ msgid " Load "
 msgstr " Загрузить "
 
 msgid " Block is large, you may not be able to undo this action. "
-msgstr " Блок слишком велик, вам может не удастся отменить эту операцию. "
+msgstr " Блок слишком велик, вам может не удаться отменить эту операцию. "
 
 msgid "Replace"
 msgstr "&Заменить"
@@ -420,7 +420,7 @@ msgstr ""
 "Идентификатор процесса: %d"
 
 msgid "File locked"
-msgstr "Файл закрыт"
+msgstr "Файл заблокирован"
 
 msgid "&Grab lock"
 msgstr "Захватить замок"
@@ -642,7 +642,7 @@ msgid "Confir&m before saving"
 msgstr "П&одтверждать запись файла"
 
 msgid "&Return does autoindent"
-msgstr "&Автовыравнивание \"Вводом\""
+msgstr "&Автоотступ \"Вводом\""
 
 msgid "Tab spacing: "
 msgstr "Шаг табуляции: "
@@ -729,7 +729,7 @@ msgid "ButtonBar|Menu"
 msgstr "Меню"
 
 msgid "ButtonBar|Index"
-msgstr "Index"
+msgstr "Разделы"
 
 msgid "ButtonBar|Prev"
 msgstr "Пред"
@@ -907,7 +907,7 @@ msgstr ""
 "{ТЕКСТ} и {ФОН} можно опустить, чтобы использовать значения по умолчанию\n"
 "\n"
 "Ключевые слова:\n"
-"   Обшие:              errors, reverse, gauge, input, viewunderline\n"
+"   Общие:              errors, reverse, gauge, input, viewunderline\n"
 "   Отображение файлов: normal, selected, marked, markselect\n"
 "   Диалоги:            dnormal, dfocus, dhotnormal, dhotfocus, "
 "errdhotnormal,\n"
@@ -1547,7 +1547,7 @@ msgstr ""
 " `%s' \n"
 " и \n"
 " `%s' \n"
-" один и тот же file "
+" один и тот же файл "
 
 #, c-format
 msgid ""
@@ -3697,7 +3697,7 @@ msgstr " %s при удалении файла %s с удаленной маши
 
 #, c-format
 msgid " %s renaming files\n"
-msgstr " %s при переименовывании файла\n"
+msgstr " %s при переименовании файла\n"
 
 #, c-format
 msgid ""
