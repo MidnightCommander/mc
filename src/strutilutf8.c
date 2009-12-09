@@ -1346,7 +1346,13 @@ str_utf8_init (void)
     result.prefix = str_utf8_prefix;
     result.caseprefix = str_utf8_caseprefix;
     result.create_key = str_utf8_create_key;
+#if 0
+    /* case insensitive sort files in "a1 a2 a10" order */
     result.create_key_for_filename = str_utf8_create_key_for_filename;
+#else
+    /* case insensitive sort files in "a1 a10 a2" order */
+    result.create_key_for_filename = str_utf8_create_key;
+#endif
     result.key_collate = str_utf8_key_collate;
     result.release_key = str_utf8_release_key;
 
