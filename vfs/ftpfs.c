@@ -976,13 +976,18 @@ ftpfs_initconn (struct vfs_class *me, struct vfs_s_super *super)
 {
     struct sockaddr_storage data_addr;
     socklen_t data_addrlen;
-    int data_sock;
+    int data_sock, result;
 
 again:
     memset (&data_addr, 0, sizeof (struct sockaddr_storage));
     data_addrlen = sizeof (struct sockaddr_storage);
 
-    if (getsockname (SUP.sock, (struct sockaddr *) &data_addr, &data_addrlen) == -1)
+    if (SUP.use_passive_connection)
+	result = getpeername (SUP.sock, (struct sockaddr *) &data_addr, &data_addrlen);
+    else
+	result = getsockname (SUP.sock, (struct sockaddr *) &data_addr, &data_addrlen);
+
+    if (result == -1 )
 	return -1;
 
     switch (data_addr.ss_family) {
