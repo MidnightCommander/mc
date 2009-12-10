@@ -2566,7 +2566,7 @@ static const char * const shell_cmd[] = SHELL_COMMANDS_i;
    all of them. It also does not check for the Undo command.
  */
 void
-edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
+edit_execute_cmd (WEdit *edit, unsigned long command, int char_for_insertion)
 {
     edit->force |= REDRAW_LINE;
 

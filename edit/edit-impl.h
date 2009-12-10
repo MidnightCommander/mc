@@ -123,8 +123,8 @@ typedef struct edit_stack_type {
 } edit_stack_type;
 
 struct macro {
-    short command;
-    short ch;
+    unsigned long command;
+    int ch;
 };
 
 /* type for file which is currently being edited */
@@ -278,7 +278,7 @@ void edit_mail_dialog (WEdit *edit);
 void format_paragraph (WEdit *edit, int force);
 
 /* either command or char_for_insertion must be passed as -1 */
-void edit_execute_cmd (WEdit *edit, int command, int char_for_insertion);
+void edit_execute_cmd (WEdit *edit, unsigned long command, int char_for_insertion);
 
 #define get_sys_error(s) (s)
 

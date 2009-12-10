@@ -708,13 +708,13 @@ edit_delete_macro (WEdit * edit, int k)
 	if (!n || n == EOF)
 	    break;
 	n = 0;
-	while (fscanf (f, "%hd %hd, ", &macro[n].command, &macro[n].ch))
+	while (fscanf (f, "%lu %d, ", &macro[n].command, &macro[n].ch))
 	    n++;
 	fscanf (f, ";\n");
 	if (s != k) {
 	    fprintf (g, ("key '%d 0': "), s);
 	    for (i = 0; i < n; i++)
-		fprintf (g, "%hd %hd, ", macro[i].command, macro[i].ch);
+		fprintf (g, "%lu %d, ", macro[i].command, macro[i].ch);
 	    fprintf (g, ";\n");
 	}
     }
@@ -754,7 +754,7 @@ int edit_save_macro_cmd (WEdit * edit, struct macro macro[], int n)
 	if (f) {
 	    fprintf (f, ("key '%d 0': "), s);
 	    for (i = 0; i < n; i++)
-		fprintf (f, "%hd %hd, ", macro[i].command, macro[i].ch);
+		fprintf (f, "%lu %d, ", macro[i].command, macro[i].ch);
 	    fprintf (f, ";\n");
 	    fclose (f);
 	    if (saved_macros_loaded) {
@@ -768,17 +768,16 @@ int edit_save_macro_cmd (WEdit * edit, struct macro macro[], int n)
     return 0;
 }
 
-void edit_delete_macro_cmd (WEdit * edit)
+void
+edit_delete_macro_cmd (WEdit * edit)
 {
     int command;
 
     command = editcmd_dialog_raw_key_query (_ (" Delete macro "),
 				  _ (" Press macro hotkey: "), 1);
 
-    if (!command)
-	return;
-
-    edit_delete_macro (edit, command);
+    if (command != 0)
+	edit_delete_macro (edit, command);
 }
 
 /* return 0 on error */
@@ -804,10 +803,10 @@ int edit_load_macro_cmd (WEdit * edit, struct macro macro[], int *n, int k)
 		saved_macro[i++] = s;
 	    if (!found) {
 		*n = 0;
-		while (*n < MAX_MACRO_LENGTH && 2 == fscanf (f, "%hd %hd, ", &macro[*n].command, &macro[*n].ch))
+		while (*n < MAX_MACRO_LENGTH && 2 == fscanf (f, "%lu %d, ", &macro[*n].command, &macro[*n].ch))
 		    (*n)++;
 	    } else {
-		while (2 == fscanf (f, "%hd %hd, ", &dummy.command, &dummy.ch));
+		while (2 == fscanf (f, "%lu %d, ", &dummy.command, &dummy.ch));
 	    }
 	    fscanf (f, ";\n");
 	    if (s == k)
@@ -1480,7 +1479,7 @@ editcmd_find (WEdit *edit, gsize *len)
 #define is_digit(x) ((x) >= '0' && (x) <= '9')
 
 static char *
-edit_replace_cmd__conv_to_display(char *str)
+edit_replace_cmd__conv_to_display (char *str)
 {
 #ifdef HAVE_CHARSET
     GString *tmp;
@@ -1539,8 +1538,8 @@ edit_replace_cmd (WEdit *edit, int again)
 	input1 = g_strdup (saved1 ? saved1 : "");
 	input2 = g_strdup (saved2 ? saved2 : "");
     } else {
-	char *disp1 = edit_replace_cmd__conv_to_display(saved1 ? saved1 : "");
-	char *disp2 = edit_replace_cmd__conv_to_display(saved2 ? saved2 : "");
+	char *disp1 = edit_replace_cmd__conv_to_display (saved1 ? saved1 : (char *) "");
+	char *disp2 = edit_replace_cmd__conv_to_display (saved2 ? saved2 : (char *) "");
 	char *tmp_inp1, *tmp_inp2;
 
 	edit_push_action (edit, KEY_PRESS + edit->start_display);
@@ -2273,28 +2272,26 @@ edit_block_process_cmd (WEdit *edit, const char *shell_cmd, int block)
     edit->force |= REDRAW_COMPLETELY;
 
     /* insert result block */
-    if (block) {
-	if (edit_block_delete_cmd (edit))
-	    goto edit_block_process_cmd__EXIT;
+    if (block && !edit_block_delete_cmd (edit)) {
 	edit_insert_file (edit, b);
-	if ((block_file = fopen (b, "w")))
+	block_file = fopen (b, "w");
+	if (block_file != NULL)
 	    fclose (block_file);
-	goto edit_block_process_cmd__EXIT;
     }
+
 edit_block_process_cmd__EXIT:
-    g_free(b);
-    g_free(h);
-    g_free(o);
-    return;
+    g_free (b);
+    g_free (h);
+    g_free (o);
 }
 
 /* prints at the cursor */
 /* returns the number of chars printed */
 int edit_print_string (WEdit * e, const char *s)
 {
-    int i = 0;
-    while (s[i])
-	edit_execute_cmd (e, -1, (unsigned char) s[i++]);
+    size_t i = 0;
+    while (s[i] != '\0')
+	edit_execute_cmd (e, CK_Insert_Char, (unsigned char) s[i++]);
     e->force |= REDRAW_COMPLETELY;
     edit_update_screen (e);
     return i;
