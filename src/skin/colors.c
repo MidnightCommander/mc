@@ -250,13 +250,12 @@ mc_skin_color_check_inisection (const gchar * group)
 static void
 mc_skin_color_check_bw_mode (mc_skin_t * mc_skin)
 {
-    gsize items_count;
     gchar **groups, **orig_groups;
 
     if (!mc_args__disable_colors)
         return;
 
-    orig_groups = groups = mc_config_get_groups (mc_skin->config, &items_count);
+    orig_groups = groups = mc_config_get_groups (mc_skin->config, NULL);
 
     if (groups == NULL)
         return;

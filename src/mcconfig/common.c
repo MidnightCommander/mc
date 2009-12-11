@@ -209,6 +209,9 @@ mc_config_read_file (mc_config_t * mc_config, const gchar * ini_path)
 
     groups = mc_config_get_groups (tmp_config, NULL);
 
+    if (groups == NULL)
+        return FALSE;
+
     for (curr_grp = groups; *curr_grp != NULL; curr_grp++) {
         keys = mc_config_get_keys (tmp_config, *curr_grp, NULL);
         for (curr_key = keys; *curr_key != NULL; curr_key++) {
