@@ -284,9 +284,11 @@ mc_skin_color_parse_ini_file (mc_skin_t * mc_skin)
 
     orig_groups = groups = mc_config_get_groups (mc_skin->config, &items_count);
 
-    if (groups == NULL || *groups == NULL) {
-        if (groups != NULL)
-            g_strfreev (groups);
+    if (groups == NULL)
+	return FALSE;
+
+    if (*groups == NULL) {
+        g_strfreev (groups);
         return FALSE;
     }
 
@@ -304,9 +306,11 @@ mc_skin_color_parse_ini_file (mc_skin_t * mc_skin)
             continue;
 
         orig_keys = keys = mc_config_get_keys (mc_skin->config, *groups, &items_count);
-        if (keys == NULL || *keys == NULL) {
-            if (keys != NULL)
-                g_strfreev (keys);
+        if (keys == NULL)
+            continue;
+
+        if(*keys == NULL) {
+            g_strfreev (keys);
             continue;
         }
 
