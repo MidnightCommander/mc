@@ -90,7 +90,7 @@ endif
 if ENABLE_MCSERVER
 sbin_PROGRAMS = mcserv
 mcserv_SOURCES = mcserv.c mcfsutil.c
-mcserv_LDADD = $(MCSERVLIBS)
+mcserv_LDADD = $(MCSERVLIBS) $(GLIB_LIBS)
 endif
 
 
