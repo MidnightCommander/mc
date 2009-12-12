@@ -1038,7 +1038,6 @@ edit_load_cmd (WEdit *edit, edit_current_file_t what)
 int eval_marks (WEdit * edit, long *start_mark, long *end_mark)
 {
     if (edit->mark1 != edit->mark2) {
-        int diff;
         long start_bol, start_eol;
         long end_bol, end_eol;
         long col1, col2;
