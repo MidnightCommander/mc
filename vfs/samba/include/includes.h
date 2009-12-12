@@ -616,10 +616,6 @@ time_t mktime(struct tm *t);
 unsigned long strtoul(const char *nptr, char **endptr, int base);
 #endif
 
-#if !defined(HAVE_BZERO) && defined(HAVE_MEMSET)
-#define bzero(a,b) memset((a),'\0',(b))
-#endif
-
 #ifdef REPLACE_GETPASS
 #define getpass(prompt) getsmbpass((prompt))
 #endif
