@@ -1355,10 +1355,6 @@ void dfs_unlogin(void);
 extern int dcelogin_atmost_once;
 #endif
 
-#ifdef NOSTRDUP
-char *strdup(char *s);
-#endif
-
 #ifndef MIN
 #define MIN(a,b) ((a)<(b)?(a):(b))
 #endif
