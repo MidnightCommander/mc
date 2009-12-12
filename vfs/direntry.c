@@ -57,8 +57,8 @@ vfs_s_new_inode (struct vfs_class *me, struct vfs_s_super *super, struct stat *i
 {
     struct vfs_s_inode *ino;
 
-    ino = g_new0 (struct vfs_s_inode, 1);
-    if (!ino)
+    ino = g_try_new0 (struct vfs_s_inode, 1);
+    if (ino == NULL)
 	return NULL;
 
     if (initstat)
@@ -70,7 +70,7 @@ vfs_s_new_inode (struct vfs_class *me, struct vfs_s_super *super, struct stat *i
 
     super->ino_usage++;
     total_inodes++;
-    
+
     CALL (init_inode) (me, ino);
 
     return ino;

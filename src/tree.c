@@ -235,10 +235,8 @@ show_tree (WTree *tree)
     }
 
     g_free (tree->tree_shown);
-    tree->tree_shown = g_new (tree_entry*, tree_lines);
+    tree->tree_shown = g_new0 (tree_entry *, tree_lines);
 
-    for (i = 0; i < tree_lines; i++)
-	tree->tree_shown [i] = NULL;
     if (tree->store->tree_first)
 	topsublevel = tree->store->tree_first->sublevel;
     else

@@ -634,7 +634,7 @@ putenv (char *string)
     
     if (*ep == NULL){
 	static char **last_environ = NULL;
-	char **new_environ = g_new (char *, size + 2);
+	char **new_environ = g_try_new (char *, size + 2);
 	if (new_environ == NULL)
 	    return -1;
 	(void) memcpy ((void *) new_environ, (void *) __environ,

@@ -134,7 +134,7 @@ mc_skin_color_get_from_ini_file (mc_skin_t * mc_skin, const gchar * group, const
             g_strfreev (values);
         return NULL;
     }
-    mc_skin_color = g_new0 (mc_skin_color_t, 1);
+    mc_skin_color = g_try_new0 (mc_skin_color_t, 1);
     if (mc_skin_color == NULL) {
         g_strfreev (values);
         return NULL;
@@ -176,15 +176,14 @@ static void
 mc_skin_color_set_default_for_terminal (mc_skin_t * mc_skin)
 {
     mc_skin_color_t *mc_skin_color;
-    mc_skin_color = g_new0 (mc_skin_color_t, 1);
-    if (mc_skin_color == NULL)
-        return;
-
-    mc_skin_color->fgcolor = g_strdup ("default");
-    mc_skin_color->bgcolor = g_strdup ("default");
-    mc_skin_color->pair_index =
-        tty_try_alloc_color_pair2 (mc_skin_color->fgcolor, mc_skin_color->bgcolor, FALSE);
-    mc_skin_color_add_to_hash (mc_skin, "skin", "terminal_default_color", mc_skin_color);
+    mc_skin_color = g_try_new0 (mc_skin_color_t, 1);
+    if (mc_skin_color != NULL) {
+	mc_skin_color->fgcolor = g_strdup ("default");
+	mc_skin_color->bgcolor = g_strdup ("default");
+	mc_skin_color->pair_index =
+	    tty_try_alloc_color_pair2 (mc_skin_color->fgcolor, mc_skin_color->bgcolor, FALSE);
+	mc_skin_color_add_to_hash (mc_skin, "skin", "terminal_default_color", mc_skin_color);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */

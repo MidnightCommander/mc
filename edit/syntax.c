@@ -1090,11 +1090,10 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
 /* 1: just collecting a list of names of rule sets */
 /* Reallocate the list if required */
 	    if (count % NENTRIES == 0) {
-		if ((tmpnames = (char**) g_realloc (*pnames, (count + NENTRIES
-		    + 1) * sizeof (char*))) != NULL)
-		    *pnames = tmpnames;
-		else
-		    abort ();
+		tmpnames = (char**) g_try_realloc (*pnames, (count + NENTRIES + 1) * sizeof (char*));
+		if (tmpnames == NULL)
+		    break;
+		*pnames = tmpnames;
 	    }
 	    (*pnames)[count++] = g_strdup (args[2]);
 	    (*pnames)[count] = NULL;

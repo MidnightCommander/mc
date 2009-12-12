@@ -141,13 +141,13 @@ get_paragraph (WEdit *edit, long p, long q, int indent, int *size)
 {
     unsigned char *s, *t;
 #if 0
-    t = g_malloc ((q - p) + 2 * (q - p) / option_word_wrap_line_length +
+    t = g_try_malloc ((q - p) + 2 * (q - p) / option_word_wrap_line_length +
 		  10);
 #else
-    t = g_malloc (2 * (q - p) + 100);
+    t = g_try_malloc (2 * (q - p) + 100);
 #endif
-    if (!t)
-	return 0;
+    if (t == NULL)
+	return NULL;
     for (s = t; p < q; p++, s++) {
 	if (indent)
 	    if (edit_get_byte (edit, p - 1) == '\n')

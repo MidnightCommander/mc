@@ -240,10 +240,10 @@ check_hardlinks (const char *src_name, const char *dst_name, struct stat *pstat)
 	    message (D_ERROR, MSG_ERROR, _(" Cannot make the hardlink "));
 	    return 0;
 	}
-    lp = (struct link *) g_malloc (sizeof (struct link) + strlen (src_name)
-				   + strlen (dst_name) + 1);
+    lp = (struct link *) g_try_malloc (sizeof (struct link) + strlen (src_name)
+					+ strlen (dst_name) + 1);
     if (lp) {
-    	char *lpdstname;
+	char *lpdstname;
 	lp->vfs = my_vfs;
 	lp->ino = ino;
 	lp->dev = dev;

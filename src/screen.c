@@ -3311,7 +3311,7 @@ panel_get_sortable_fields(gsize *array_size)
 
     lc_index = panel_get_num_of_sortable_fields();
 
-    ret = g_new0 (char *, lc_index + 1);
+    ret = g_try_new0 (char *, lc_index + 1);
     if (ret == NULL)
         return NULL;
 
@@ -3391,7 +3391,7 @@ panel_get_user_possible_fields(gsize *array_size)
 
     lc_index = panel_get_num_of_user_possible_fields();
 
-    ret = g_new0 (char *, lc_index + 1);
+    ret = g_try_new0 (char *, lc_index + 1);
     if (ret == NULL)
         return NULL;
 

@@ -749,29 +749,29 @@ mc_opendir (const char *dirname)
 
     if (dname != NULL) {
         vfs = vfs_get_class (dname);
-    info = vfs->opendir ? (*vfs->opendir)(vfs, dname) : NULL;
-    g_free (dname);
-    
-    if (!info){
-        errno = vfs->opendir ? ferrno (vfs) : E_NOTSUPP;
+        info = vfs->opendir ? (*vfs->opendir)(vfs, dname) : NULL;
+        g_free (dname);
+
+        if (info == NULL) {
+            errno = vfs->opendir ? ferrno (vfs) : E_NOTSUPP;
             g_free (canon);
-	return NULL;
-    }
-    
+            return NULL;
+        }
+
         dirinfo = g_new (struct vfs_dirinfo, 1);
         dirinfo->info = info;
-    
+
         encoding = vfs_get_encoding (canon);
         g_free (canon);
         dirinfo->converter = (encoding != NULL) ? str_crt_conv_from (encoding) :
                 str_cnv_from_term;
         if (dirinfo->converter == INVALID_CONV) dirinfo->converter =str_cnv_from_term;
-    
+
         handle = vfs_new_handle (vfs, dirinfo);
 
-    handlep = g_new (int, 1);
-    *handlep = handle;
-    return (DIR *) handlep;
+        handlep = g_new (int, 1);
+        *handlep = handle;
+        return (DIR *) handlep;
     } else {
         g_free (canon);
         return NULL;
@@ -801,7 +801,7 @@ mc_readdir (DIR *dirp)
          * structures, holding dirent size. But we don't use it in libc infrastructure.
          * TODO: to make simpler homemade dirent-alike structure.
          */
-        mc_readdir_result = (struct dirent *)malloc(sizeof(struct dirent) + NAME_MAX + 1);
+        mc_readdir_result = (struct dirent *) g_malloc (sizeof(struct dirent) + NAME_MAX + 1);
     }
 
     if (!dirp) {

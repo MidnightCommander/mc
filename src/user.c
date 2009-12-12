@@ -801,15 +801,15 @@ user_menu_cmd (WEdit *edit_widget)
 	    char ** new_entries;
 
 	    menu_limit += MAX_ENTRIES;
-	    new_entries = g_realloc (entries, sizeof (new_entries[0]) * menu_limit);
+	    new_entries = g_try_realloc (entries, sizeof (new_entries[0]) * menu_limit);
 
-	    if (new_entries == 0)
+	    if (new_entries == NULL)
 		break;
 
 	    entries = new_entries;
 	    new_entries += menu_limit;
 	    while (--new_entries >= &entries[menu_lines])
-		*new_entries = 0;
+		*new_entries = NULL;
 	}
 	if (col == 0 && !entries [menu_lines]){
 	    if (*p == '#'){

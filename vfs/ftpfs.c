@@ -1053,7 +1053,7 @@ again:
 
 	port = ntohs (port);
 
-	addr = g_malloc (NI_MAXHOST);
+	addr = g_try_malloc (NI_MAXHOST);
 	if (addr == NULL)
 	    ERRNOR (ENOMEM, -1);
 
