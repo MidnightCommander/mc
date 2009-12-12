@@ -612,10 +612,6 @@ int rename(const char *zfrom, const char *zto);
 time_t mktime(struct tm *t);
 #endif
 
-#ifndef HAVE_FTRUNCATE
-int ftruncate(int f,long l);
-#endif
-
 #ifndef HAVE_STRTOUL
 unsigned long strtoul(const char *nptr, char **endptr, int base);
 #endif

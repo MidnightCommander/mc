@@ -144,7 +144,7 @@ AC_CHECK_FUNCS(fstat strchr utime utimes getrlimit fsync bzero memset)
 AC_CHECK_FUNCS(memmove vsnprintf snprintf setsid glob pipe crypt16 getauthuid)
 AC_CHECK_FUNCS(sigprocmask sigblock sigaction innetgr setnetgrent getnetgrent endnetgrent)
 AC_CHECK_FUNCS(initgroups select rdchk getgrnam pathconf)
-AC_CHECK_FUNCS(setpriv setgidx setuidx setgroups mktime rename ftruncate)
+AC_CHECK_FUNCS(setpriv setgidx setuidx setgroups mktime rename)
 AC_CHECK_FUNCS(grantpt dup2 yp_get_default_domain getpwanam)
 AC_CHECK_FUNCS(srandom random srand rand setenv usleep strcasecmp)
 
