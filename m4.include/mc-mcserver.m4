@@ -7,19 +7,18 @@ dnl    If PAM is found, other methods are not checked.
 AC_DEFUN([MC_MCSERVER_CHECKS], [
 
     dnl
-    dnl mcfs support
+    dnl mcfs server support
     dnl
     AC_ARG_ENABLE([mcserver],
         [  --enable-mcserver       Support mc-specific networking file system server [[no]]],
-        [if test "x$enableval" != "xno"; then
-            AC_DEFINE(ENABLE_MCSERVER, 1, [Define to enable mc-specific networking file system server])
-            AC_MC_VFS_ADDNAME([mcfs])
-            enable_mcserver=yes
-        fi]
+        [enable_mcserver="$enableval"]
       )
 
     if test x"$enable_mcserver" = "xyes"; then
-        AC_MC_VFS_MCFS_SET
+        AC_DEFINE(ENABLE_MCSERVER, 1, [Define to enable mc-specific networking file system server])
+        AC_REQUIRE_SOCKET
+        AC_CHECK_RPC
+        use_net_code=true
 
         dnl Check if PAM can be used for mcserv
         AC_CHECK_LIB(dl, dlopen, [LIB_DL="-ldl"])
@@ -65,5 +64,6 @@ AC_DEFUN([MC_MCSERVER_CHECKS], [
             fi
         fi
     fi
+    AM_CONDITIONAL(ENABLE_MCSERVER, [test x"$enable_mcserver" = "xyes"])
     AC_SUBST(MCSERVLIBS)
 ])
