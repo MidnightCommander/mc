@@ -585,22 +585,22 @@ mc_search__run_regex (mc_search_t * lc_mc_search, const void *user_data,
             return FALSE;
             break;
         }
-        if (lc_mc_search->update_fn != NULL) {
-            if ((lc_mc_search->update_fn) (user_data, current_pos) == MC_SEARCH_CB_SKIP) {
-                g_string_free (lc_mc_search->regex_buffer, TRUE);
-                lc_mc_search->regex_buffer = NULL;
-                lc_mc_search->error = MC_SEARCH_E_NOTFOUND;
-                lc_mc_search->error_str = NULL;
-                return FALSE;
-            }
-        }
+        if (( lc_mc_search->update_fn != NULL ) && 
+            ( (lc_mc_search->update_fn) (user_data, current_pos) == MC_SEARCH_CB_ABORT))
+            current_chr = MC_SEARCH_CB_ABORT;
+
         if (current_chr == MC_SEARCH_CB_ABORT)
             break;
     }
     g_string_free (lc_mc_search->regex_buffer, TRUE);
     lc_mc_search->regex_buffer = NULL;
     lc_mc_search->error = MC_SEARCH_E_NOTFOUND;
-    lc_mc_search->error_str = g_strdup (_(STR_E_NOTFOUND));
+
+    if (current_chr != MC_SEARCH_CB_ABORT)
+        lc_mc_search->error_str = g_strdup (_(STR_E_NOTFOUND));
+    else
+        lc_mc_search->error_str = NULL;
+
     return FALSE;
 }
 

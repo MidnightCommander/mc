@@ -107,8 +107,7 @@ typedef struct mcview_struct {
 
     /* Growing buffers information */
     gboolean growbuf_in_use;    /* Use the growing buffers? */
-    byte **growbuf_blockptr;    /* Pointer to the block pointers */
-    size_t growbuf_blocks;      /* The number of blocks in *block_ptr */
+    GPtrArray *growbuf_blockptr;    /* Pointer to the block pointers */
     size_t growbuf_lastindex;   /* Number of bytes in the last page of the
                                    growing buffer */
     gboolean growbuf_finished;  /* TRUE when all data has been read. */
