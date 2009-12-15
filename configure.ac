@@ -147,7 +147,6 @@ AC_CHECK_HEADERS([unistd.h string.h memory.h grp.h limits.h malloc.h \
 	sys/mkdev.h wchar.h wctype.h])
 
 AC_HEADER_TIME
-AC_HEADER_SYS_WAIT
 AC_HEADER_DIRENT
 AC_HEADER_STDC
 
