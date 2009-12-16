@@ -18,6 +18,4 @@
 #   include <ncursesw/curses.h>
 #endif /* USE_NCURSESW */
 
-void init_curses (void);
-
 #endif /* MC_TTY_NCURSES_H */

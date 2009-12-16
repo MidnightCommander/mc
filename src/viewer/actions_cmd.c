@@ -216,7 +216,7 @@ mcview_moveto_line_cmd (mcview_t *view)
 
     g_snprintf (prompt, sizeof (prompt),
                 _(" The current line number is %lld.\n"
-                  " Enter the new line number:"), (line + 1));
+                  " Enter the new line number:"), (long long)(line + 1));
     answer = input_dialog (_(" Goto line "), prompt, MC_HISTORY_VIEW_GOTO_LINE, "");
     if (answer != NULL && answer[0] != '\0') {
         errno = 0;
@@ -504,6 +504,27 @@ mcview_handle_key (mcview_t * view, int key)
     /* Key not used */
     return MSG_NOT_HANDLED;
 }
+
+
+/* --------------------------------------------------------------------------------------------- */
+
+static inline void
+mcview_adjust_size (Dlg_head *h)
+{
+    mcview_t *view;
+    WButtonBar *b;
+
+    /* Look up the viewer and the buttonbar, we assume only two widgets here */
+    view = (mcview_t *) find_widget_type (h, mcview_callback);
+    b = find_buttonbar (h);
+
+    widget_set_size (&view->widget, 0, 0, LINES - 1, COLS);
+    widget_set_size (&b->widget , LINES - 1, 0, 1, COLS);
+
+    mcview_compute_areas (view);
+    mcview_update_bytes_per_line (view);
+}
+
 
 /* --------------------------------------------------------------------------------------------- */
 

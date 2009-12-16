@@ -157,24 +157,6 @@ edit_event (Gpm_Event *event, void *data)
     return MOU_NORMAL;
 }
 
-static void
-edit_adjust_size (Dlg_head *h)
-{
-    WEdit *edit;
-    WButtonBar *b;
-
-    edit = (WEdit *) find_widget_type (h, edit_callback);
-    b = find_buttonbar (h);
-
-    widget_set_size (&edit->widget, 0, 0, LINES - 1, COLS);
-    widget_set_size (&b->widget , LINES - 1, 0, 1, COLS);
-    widget_set_size (&edit_menubar->widget, 0, 0, 1, COLS);
-
-#ifdef RESIZABLE_MENUBAR
-    menubar_arrange (edit_menubar);
-#endif
-}
-
 static cb_ret_t
 edit_command_execute (WEdit *edit, unsigned long command)
 {
@@ -187,6 +169,21 @@ edit_command_execute (WEdit *edit, unsigned long command)
     return MSG_HANDLED;
 }
 
+static inline void
+edit_set_buttonbar (WEdit *edit, WButtonBar *bb)
+{
+    buttonbar_set_label (bb,  1, Q_("ButtonBar|Help"),   editor_map, (Widget *) edit);
+    buttonbar_set_label (bb,  2, Q_("ButtonBar|Save"),   editor_map, (Widget *) edit);
+    buttonbar_set_label (bb,  3, Q_("ButtonBar|Mark"),   editor_map, (Widget *) edit);
+    buttonbar_set_label (bb,  4, Q_("ButtonBar|Replac"), editor_map, (Widget *) edit);
+    buttonbar_set_label (bb,  5, Q_("ButtonBar|Copy"),   editor_map, (Widget *) edit);
+    buttonbar_set_label (bb,  6, Q_("ButtonBar|Move"),   editor_map, (Widget *) edit);
+    buttonbar_set_label (bb,  7, Q_("ButtonBar|Search"), editor_map, (Widget *) edit);
+    buttonbar_set_label (bb,  8, Q_("ButtonBar|Delete"), editor_map, (Widget *) edit);
+    buttonbar_set_label (bb,  9, Q_("ButtonBar|PullDn"), editor_map, (Widget *) edit);
+    buttonbar_set_label (bb, 10, Q_("ButtonBar|Quit"),   editor_map, (Widget *) edit);
+}
+
 /* Callback for the edit dialog */
 static cb_ret_t
 edit_dialog_callback (Dlg_head *h, Widget *sender,
@@ -197,24 +194,31 @@ edit_dialog_callback (Dlg_head *h, Widget *sender,
     WButtonBar *buttonbar;
 
     edit = (WEdit *) find_widget_type (h, edit_callback);
+    menubar = find_menubar (h);
+    buttonbar = find_buttonbar (h);
 
     switch (msg) {
+    case DLG_INIT:
+	edit_set_buttonbar (edit, buttonbar);
+	return MSG_HANDLED;
+
     case DLG_RESIZE:
-	edit_adjust_size (h);
+	widget_set_size (&edit->widget, 0, 0, LINES - 1, COLS);
+	widget_set_size (&buttonbar->widget , LINES - 1, 0, 1, COLS);
+	widget_set_size (&menubar->widget, 0, 0, 1, COLS);
+	menubar_arrange (menubar);
+	return MSG_HANDLED;
+
+    case DLG_ACTION:
+	if (sender == (Widget *) menubar)
+	    return send_message ((Widget *) edit, WIDGET_COMMAND, parm);
+	if (sender == (Widget *) buttonbar)
+	    return send_message ((Widget *) edit, WIDGET_COMMAND, parm);
 	return MSG_HANDLED;
 
     case DLG_VALIDATE:
 	if (!edit_ok_to_exit (edit))
 	    h->running = 1;
-	return MSG_HANDLED;
-
-    case DLG_ACTION:
-	menubar = find_menubar (h);
-	if (sender == (Widget *) menubar)
-	    return send_message ((Widget *) edit, WIDGET_COMMAND, parm);
-	buttonbar = find_buttonbar (h);
-	if (sender == (Widget *) buttonbar)
-	    return send_message ((Widget *) edit, WIDGET_COMMAND, parm);
 	return MSG_HANDLED;
 
     default:
@@ -270,23 +274,6 @@ edit_get_file_name (const WEdit *edit)
     return edit->filename;
 }
 
-static void
-edit_set_buttonbar (WEdit *edit)
-{
-    WButtonBar *bb = find_buttonbar (edit->widget.parent);
-
-    buttonbar_set_label (bb,  1, Q_("ButtonBar|Help"), editor_map, (Widget *) edit);
-    buttonbar_set_label (bb,  2, Q_("ButtonBar|Save"), editor_map, (Widget *) edit);
-    buttonbar_set_label (bb,  3, Q_("ButtonBar|Mark"), editor_map, (Widget *) edit);
-    buttonbar_set_label (bb,  4, Q_("ButtonBar|Replac"), editor_map, (Widget *) edit);
-    buttonbar_set_label (bb,  5, Q_("ButtonBar|Copy"), editor_map, (Widget *) edit);
-    buttonbar_set_label (bb,  6, Q_("ButtonBar|Move"), editor_map, (Widget *) edit);
-    buttonbar_set_label (bb,  7, Q_("ButtonBar|Search"), editor_map, (Widget *) edit);
-    buttonbar_set_label (bb,  8, Q_("ButtonBar|Delete"), editor_map, (Widget *) edit);
-    buttonbar_set_label (bb,  9, Q_("ButtonBar|PullDn"), editor_map, (Widget *) edit);
-    buttonbar_set_label (bb, 10, Q_("ButtonBar|Quit"), editor_map, (Widget *) edit);
-}
-
 void
 edit_update_screen (WEdit * e)
 {
@@ -311,11 +298,6 @@ edit_callback (Widget *w, widget_msg_t msg, int parm)
     WEdit *e = (WEdit *) w;
 
     switch (msg) {
-    case WIDGET_INIT:
-	e->force |= REDRAW_COMPLETELY;
-	edit_set_buttonbar (e);
-	return MSG_HANDLED;
-
     case WIDGET_DRAW:
 	e->force |= REDRAW_COMPLETELY;
 	e->num_widget_lines = LINES - 2;
@@ -329,22 +311,22 @@ edit_callback (Widget *w, widget_msg_t msg, int parm)
     case WIDGET_KEY:
 	{
 	    int cmd, ch;
+	    cb_ret_t ret = MSG_NOT_HANDLED;
 
 	    /* The user may override the access-keys for the menu bar. */
 	    if (edit_translate_key (e, parm, &cmd, &ch)) {
 		edit_execute_key_command (e, cmd, ch);
 		edit_update_screen (e);
-		return MSG_HANDLED;
-	    } else  if (edit_drop_hotkey_menu (e, parm)) {
-		return MSG_HANDLED;
-	    } else {
-		return MSG_NOT_HANDLED;
-	    }
+		ret = MSG_HANDLED;
+	    } else  if (edit_drop_hotkey_menu (e, parm))
+		ret =  MSG_HANDLED;
+
+	    return ret;
 	}
 
     case WIDGET_COMMAND:
 	/* command from menubar or buttonbar */
-	return edit_command_execute (wedit, parm);
+	return edit_command_execute (e, parm);
 
     case WIDGET_CURSOR:
 	widget_move (&e->widget, e->curs_row + EDIT_TEXT_VERTICAL_OFFSET,

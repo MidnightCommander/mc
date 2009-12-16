@@ -61,16 +61,17 @@ static int
 mc_tty_color_save_attr_lib (int color_pair, int color_attr)
 {
     int *attr, *key;
-    attr = g_new0 (int, 1);
+    attr = g_try_new0 (int, 1);
     if (attr == NULL)
         return color_attr;
 
-    key = g_new0 (int, 1);
+    key = g_try_new (int, 1);
     if (key == NULL) {
         g_free (attr);
         return color_attr;
     }
-    memcpy (key, &color_pair, sizeof (int));
+
+    *key = color_pair;
 
     if (color_attr != -1)
         *attr = color_attr & (A_BOLD | A_REVERSE | A_UNDERLINE);
@@ -83,12 +84,10 @@ mc_tty_color_save_attr_lib (int color_pair, int color_attr)
 static int
 color_get_attr (int color_pair)
 {
-    int *fnd;
+    int *fnd = NULL;
 
-    if (mc_tty_color_color_pair_attrs == NULL)
-        return 0;
-
-    fnd = (int *) g_hash_table_lookup (mc_tty_color_color_pair_attrs, (gpointer) & color_pair);
+    if (mc_tty_color_color_pair_attrs != NULL)
+	fnd = (int *) g_hash_table_lookup (mc_tty_color_color_pair_attrs, (gpointer) & color_pair);
     return (fnd != NULL) ? *fnd : 0;
 }
 

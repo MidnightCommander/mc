@@ -1,4 +1,4 @@
-/** \file view.h
+/** \file mcviewer.h
  *  \brief Header: internal file viewer
  */
 

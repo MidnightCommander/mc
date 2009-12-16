@@ -57,8 +57,8 @@ vfs_s_new_inode (struct vfs_class *me, struct vfs_s_super *super, struct stat *i
 {
     struct vfs_s_inode *ino;
 
-    ino = g_new0 (struct vfs_s_inode, 1);
-    if (!ino)
+    ino = g_try_new0 (struct vfs_s_inode, 1);
+    if (ino == NULL)
 	return NULL;
 
     if (initstat)
@@ -70,7 +70,7 @@ vfs_s_new_inode (struct vfs_class *me, struct vfs_s_super *super, struct stat *i
 
     super->ino_usage++;
     total_inodes++;
-    
+
     CALL (init_inode) (me, ino);
 
     return ino;
@@ -237,7 +237,7 @@ vfs_s_resolve_symlink (struct vfs_class *me, struct vfs_s_entry *entry,
     if (*linkname != PATH_SEP) {
 	char *fullpath = vfs_s_fullpath (me, entry->dir);
 	if (fullpath) {
-	    fullname = g_strconcat (fullpath, "/", linkname, NULL);
+	    fullname = g_strconcat (fullpath, "/", linkname, (char *) NULL);
 	    linkname = fullname;
 	    g_free (fullpath);
 	}
@@ -1017,7 +1017,8 @@ vfs_s_fill_names (struct vfs_class *me, fill_names_f func)
     char *name;
     
     while (a){
-	name = g_strconcat ( a->name, "#", me->prefix, "/", /* a->current_dir->name, */ NULL);
+	name = g_strconcat ( a->name, "#", me->prefix, "/",
+                            /* a->current_dir->name, */ (char *) NULL);
 	(*func)(name);
 	g_free (name);
 	a = a->next;

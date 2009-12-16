@@ -738,9 +738,9 @@ subshell_name_quote (const char *s)
     }
 
     /* Factor 5 because we need \, 0 and 3 other digits per character. */
-    d = ret = g_malloc (1 + (5 * strlen (s)) + (strlen(quote_cmd_start))
+    d = ret = g_try_malloc (1 + (5 * strlen (s)) + (strlen(quote_cmd_start))
 				+ (strlen(quote_cmd_end)));
-    if (!d)
+    if (d == NULL)
 	return NULL;
 
     /* Prevent interpreting leading `-' as a switch for `cd' */

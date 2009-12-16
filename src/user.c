@@ -702,7 +702,7 @@ execute_menu_command (WEdit *edit_widget, const char *commands)
     } else {
 	/* execute the command indirectly to allow execution even
 	 * on no-exec filesystems. */
-	char *cmd = g_strconcat("/bin/sh ", file_name, (char *)NULL);
+	char *cmd = g_strconcat("/bin/sh ", file_name, (char *) NULL);
 	shell_execute (cmd, EXECUTE_HIDE);
 	g_free(cmd);
     }
@@ -801,15 +801,15 @@ user_menu_cmd (WEdit *edit_widget)
 	    char ** new_entries;
 
 	    menu_limit += MAX_ENTRIES;
-	    new_entries = g_realloc (entries, sizeof (new_entries[0]) * menu_limit);
+	    new_entries = g_try_realloc (entries, sizeof (new_entries[0]) * menu_limit);
 
-	    if (new_entries == 0)
+	    if (new_entries == NULL)
 		break;
 
 	    entries = new_entries;
 	    new_entries += menu_limit;
 	    while (--new_entries >= &entries[menu_lines])
-		*new_entries = 0;
+		*new_entries = NULL;
 	}
 	if (col == 0 && !entries [menu_lines]){
 	    if (*p == '#'){

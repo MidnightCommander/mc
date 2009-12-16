@@ -492,7 +492,6 @@ setup__move_panels_config_into_separate_file(const char*profile)
     mc_config_t *tmp_cfg;
     char **groups, **curr_grp;
     const char *need_grp;
-    gsize groups_count;
 
     if (!exist_file(profile))
         return;
@@ -501,7 +500,7 @@ setup__move_panels_config_into_separate_file(const char*profile)
     if (!tmp_cfg)
         return;
 
-    curr_grp = groups = mc_config_get_groups (tmp_cfg, &groups_count);
+    curr_grp = groups = mc_config_get_groups (tmp_cfg, NULL);
     if (!groups)
     {
         mc_config_deinit(tmp_cfg);

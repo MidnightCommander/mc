@@ -366,7 +366,7 @@ edit_save_file (WEdit *edit, const char *filename)
 
     if (this_save_mode == EDIT_DO_BACKUP) {
 	assert (option_backup_ext != NULL);
-	tmp = g_strconcat (real_filename, option_backup_ext,(char *) NULL);
+	tmp = g_strconcat (real_filename, option_backup_ext, (char *) NULL);
 	if (mc_rename (real_filename, tmp) == -1){
 	    g_free(tmp);
 	    goto error_save;
@@ -708,13 +708,13 @@ edit_delete_macro (WEdit * edit, int k)
 	if (!n || n == EOF)
 	    break;
 	n = 0;
-	while (fscanf (f, "%hd %hd, ", &macro[n].command, &macro[n].ch))
+	while (fscanf (f, "%lu %d, ", &macro[n].command, &macro[n].ch))
 	    n++;
 	fscanf (f, ";\n");
 	if (s != k) {
 	    fprintf (g, ("key '%d 0': "), s);
 	    for (i = 0; i < n; i++)
-		fprintf (g, "%hd %hd, ", macro[i].command, macro[i].ch);
+		fprintf (g, "%lu %d, ", macro[i].command, macro[i].ch);
 	    fprintf (g, ";\n");
 	}
     }
@@ -754,7 +754,7 @@ int edit_save_macro_cmd (WEdit * edit, struct macro macro[], int n)
 	if (f) {
 	    fprintf (f, ("key '%d 0': "), s);
 	    for (i = 0; i < n; i++)
-		fprintf (f, "%hd %hd, ", macro[i].command, macro[i].ch);
+		fprintf (f, "%lu %d, ", macro[i].command, macro[i].ch);
 	    fprintf (f, ";\n");
 	    fclose (f);
 	    if (saved_macros_loaded) {
@@ -768,17 +768,16 @@ int edit_save_macro_cmd (WEdit * edit, struct macro macro[], int n)
     return 0;
 }
 
-void edit_delete_macro_cmd (WEdit * edit)
+void
+edit_delete_macro_cmd (WEdit * edit)
 {
     int command;
 
     command = editcmd_dialog_raw_key_query (_ (" Delete macro "),
 				  _ (" Press macro hotkey: "), 1);
 
-    if (!command)
-	return;
-
-    edit_delete_macro (edit, command);
+    if (command != 0)
+	edit_delete_macro (edit, command);
 }
 
 /* return 0 on error */
@@ -804,10 +803,10 @@ int edit_load_macro_cmd (WEdit * edit, struct macro macro[], int *n, int k)
 		saved_macro[i++] = s;
 	    if (!found) {
 		*n = 0;
-		while (*n < MAX_MACRO_LENGTH && 2 == fscanf (f, "%hd %hd, ", &macro[*n].command, &macro[*n].ch))
+		while (*n < MAX_MACRO_LENGTH && 2 == fscanf (f, "%lu %d, ", &macro[*n].command, &macro[*n].ch))
 		    (*n)++;
 	    } else {
-		while (2 == fscanf (f, "%hd %hd, ", &dummy.command, &dummy.ch));
+		while (2 == fscanf (f, "%lu %d, ", &dummy.command, &dummy.ch));
 	    }
 	    fscanf (f, ";\n");
 	    if (s == k)
@@ -836,7 +835,7 @@ int edit_save_confirm_cmd (WEdit * edit)
         return 0;
 
     if (edit_confirm_save) {
-	f = g_strconcat (_(" Confirm save file? : "), edit->filename, " ", NULL);
+	f = g_strconcat (_(" Confirm save file? : "), edit->filename, " ", (char *) NULL);
 	if (edit_query_dialog2 (_(" Save file "), f, _("&Save"), _("&Cancel"))){
 	    g_free(f);
 	    return 0;
@@ -1039,7 +1038,6 @@ edit_load_cmd (WEdit *edit, edit_current_file_t what)
 int eval_marks (WEdit * edit, long *start_mark, long *end_mark)
 {
     if (edit->mark1 != edit->mark2) {
-        int diff;
         long start_bol, start_eol;
         long end_bol, end_eol;
         long col1, col2;
@@ -1135,7 +1133,7 @@ edit_insert_column_of_text_from_file (WEdit * edit, int file)
     unsigned char *data;
     cursor = edit->curs1;
     col = edit_get_col (edit);
-    data = g_malloc (TEMP_BUF_LEN);
+    data = g_malloc0 (TEMP_BUF_LEN);
     while ((blocklen = mc_read (file, (char *) data, TEMP_BUF_LEN)) > 0) {
         for (width = 0; width < blocklen; width++) {
             if (data[width] == '\n')
@@ -1287,7 +1285,7 @@ edit_block_move_cmd (WEdit *edit)
 	edit_push_action (edit, COLUMN_ON);
 	column_highlighting = 0;
     } else {
-	copy_buf = g_malloc (end_mark - start_mark);
+	copy_buf = g_malloc0 (end_mark - start_mark);
 	edit_cursor_move (edit, start_mark - edit->curs1);
 	edit_scroll_screen_over_cursor (edit);
 	count = start_mark;
@@ -1480,21 +1478,18 @@ editcmd_find (WEdit *edit, gsize *len)
 #define is_digit(x) ((x) >= '0' && (x) <= '9')
 
 static char *
-edit_replace_cmd__conv_to_display(char *str)
+edit_replace_cmd__conv_to_display (char *str)
 {
 #ifdef HAVE_CHARSET
     GString *tmp;
     tmp = str_convert_to_display (str);
 
     if (tmp && tmp->len){
-	g_free(str);
-	str = tmp->str;
+	return g_string_free (tmp, FALSE);
     }
-    g_string_free (tmp, FALSE);
-    return str;
-#else
-    return g_strdup(str);
+    g_string_free (tmp, TRUE);
 #endif
+    return g_strdup(str);
 }
 
 static char *
@@ -1505,14 +1500,12 @@ edit_replace_cmd__conv_to_input(char *str)
     tmp = str_convert_to_input (str);
 
     if (tmp && tmp->len){
-	g_free(str);
-	str = tmp->str;
+	return g_string_free (tmp, FALSE);
     }
-    g_string_free (tmp, FALSE);
-    return str;
-#else
+    g_string_free (tmp, TRUE);
     return g_strdup(str);
 #endif
+    return g_strdup(str);
 }
 /* call with edit = 0 before shutdown to close memory leaks */
 void
@@ -1544,8 +1537,9 @@ edit_replace_cmd (WEdit *edit, int again)
 	input1 = g_strdup (saved1 ? saved1 : "");
 	input2 = g_strdup (saved2 ? saved2 : "");
     } else {
-	char *disp1 = edit_replace_cmd__conv_to_display(g_strdup (saved1 ? saved1 : ""));
-	char *disp2 = edit_replace_cmd__conv_to_display(g_strdup (saved2 ? saved2 : ""));
+	char *disp1 = edit_replace_cmd__conv_to_display (saved1 ? saved1 : (char *) "");
+	char *disp2 = edit_replace_cmd__conv_to_display (saved2 ? saved2 : (char *) "");
+	char *tmp_inp1, *tmp_inp2;
 
 	edit_push_action (edit, KEY_PRESS + edit->start_display);
 
@@ -1559,8 +1553,10 @@ edit_replace_cmd (WEdit *edit, int again)
 	    goto cleanup;
 	}
 
+	tmp_inp1 = input1; tmp_inp2 = input2;
 	input1 = edit_replace_cmd__conv_to_input(input1);
 	input2 = edit_replace_cmd__conv_to_input(input2);
+	g_free(tmp_inp1); g_free(tmp_inp2);
 
 	g_free (saved1), saved1 = g_strdup (input1);
 	g_free (saved2), saved2 = g_strdup (input2);
@@ -1855,7 +1851,7 @@ static unsigned char *
 edit_get_block (WEdit *edit, long start, long finish, int *l)
 {
     unsigned char *s, *r;
-    r = s = g_malloc (finish - start + 1);
+    r = s = g_malloc0 (finish - start + 1);
     if (column_highlighting) {
 	*l = 0;
 	/* copy from buffer, excluding chars that are out of the column 'margins' */
@@ -1911,7 +1907,7 @@ edit_save_block (WEdit * edit, const char *filename, long start,
 	unsigned char *buf;
 	int i = start, end;
 	len = finish - start;
-	buf = g_malloc (TEMP_BUF_LEN);
+	buf = g_malloc0 (TEMP_BUF_LEN);
 	while (start != finish) {
 	    end = min (finish, start + TEMP_BUF_LEN);
 	    for (; i < end; i++)
@@ -2275,28 +2271,26 @@ edit_block_process_cmd (WEdit *edit, const char *shell_cmd, int block)
     edit->force |= REDRAW_COMPLETELY;
 
     /* insert result block */
-    if (block) {
-	if (edit_block_delete_cmd (edit))
-	    goto edit_block_process_cmd__EXIT;
+    if (block && !edit_block_delete_cmd (edit)) {
 	edit_insert_file (edit, b);
-	if ((block_file = fopen (b, "w")))
+	block_file = fopen (b, "w");
+	if (block_file != NULL)
 	    fclose (block_file);
-	goto edit_block_process_cmd__EXIT;
     }
+
 edit_block_process_cmd__EXIT:
-    g_free(b);
-    g_free(h);
-    g_free(o);
-    return;
+    g_free (b);
+    g_free (h);
+    g_free (o);
 }
 
 /* prints at the cursor */
 /* returns the number of chars printed */
 int edit_print_string (WEdit * e, const char *s)
 {
-    int i = 0;
-    while (s[i])
-	edit_execute_cmd (e, -1, (unsigned char) s[i++]);
+    size_t i = 0;
+    while (s[i] != '\0')
+	edit_execute_cmd (e, CK_Insert_Char, (unsigned char) s[i++]);
     e->force |= REDRAW_COMPLETELY;
     edit_update_screen (e);
     return i;
@@ -2549,7 +2543,7 @@ edit_complete_word_cmd (WEdit *edit)
 	[word_start & M_EDIT_BUF_SIZE];
 
     /* match_expr = g_strdup_printf ("\\b%.*s[a-zA-Z_0-9]+", word_len, bufpos); */
-    match_expr = g_strdup_printf ("(^|\\s+|\\b)%.*s[^\\s\\.=\\+\\[\\]\\(\\)\\,\\;\\:\\\"\\'\\-\\?\\/\\|\\\\\\{\\}\\*\\&\\^\\%%\\$#@\\!]+", word_len, bufpos);
+    match_expr = g_strdup_printf ("(^|\\s+|\\b)%.*s[^\\s\\.=\\+\\[\\]\\(\\)\\,\\;\\:\\\"\\'\\-\\?\\/\\|\\\\\\{\\}\\*\\&\\^\\%%\\$#@\\!]+", (int)word_len, bufpos);
 
     /* collect the possible completions              */
     /* start search from begin to end of file */
@@ -2730,7 +2724,7 @@ edit_get_match_keyword_cmd (WEdit *edit)
     /* prepare match expression */
     bufpos = &edit->buffers1[word_start >> S_EDIT_BUF_SIZE]
                             [word_start & M_EDIT_BUF_SIZE];
-    match_expr = g_strdup_printf ("%.*s", word_len, bufpos);
+    match_expr = g_strdup_printf ("%.*s", (int)word_len, bufpos);
 
     ptr = g_get_current_dir ();
     path = g_strconcat (ptr, G_DIR_SEPARATOR_S, (char *) NULL);

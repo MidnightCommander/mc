@@ -711,7 +711,7 @@ extfs_open (struct vfs_class *me, const char *file, int flags, int mode)
 	if (!created && !(flags & O_TRUNC)
 	    && extfs_cmd (" copyout ", archive, entry, local_filename)) {
 	    unlink (local_filename);
-	    free (local_filename);
+	    g_free (local_filename);
 	    my_errno = EIO;
 	    return NULL;
 	}
@@ -1223,7 +1223,7 @@ static void extfs_remove_entry (struct entry *e)
     if (i <= 0) {
         if (e->inode->local_filename != NULL) {
             unlink (e->inode->local_filename);
-            free (e->inode->local_filename);
+            g_free (e->inode->local_filename);
         }
         g_free (e->inode->linkname);
         g_free (e->inode);
@@ -1238,14 +1238,14 @@ static void extfs_free_entry (struct entry *e)
     int i = --(e->inode->nlink);
     if (S_ISDIR (e->inode->mode) && e->inode->first_in_subdir != NULL) {
         struct entry *f = e->inode->first_in_subdir;
-        
+
         e->inode->first_in_subdir = NULL;
         extfs_free_entry (f);
     }
     if (i <= 0) {
         if (e->inode->local_filename != NULL) {
             unlink (e->inode->local_filename);
-            free (e->inode->local_filename);
+            g_free (e->inode->local_filename);
         }
         g_free (e->inode->linkname);
         g_free (e->inode);

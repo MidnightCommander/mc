@@ -1508,8 +1508,6 @@ done_mc (void)
 {
     disable_mouse ();
 
-    done_menu ();
-
     /* Setup shutdown
      *
      * We sync the profiles since the hotlist may have changed, while
@@ -1550,6 +1548,11 @@ midnight_callback (Dlg_head *h, Widget *sender,
 	    show_console_contents (output_start_y,
 				   LINES - output_lines - keybar_visible -
 				   1, LINES - keybar_visible - 1);
+	return MSG_HANDLED;
+
+    case DLG_RESIZE:
+	setup_panels ();
+	menubar_arrange (the_menubar);
 	return MSG_HANDLED;
 
     case DLG_IDLE:
@@ -2162,7 +2165,7 @@ main (int argc, char *argv[])
     dlg_set_default_colors ();
 
     if ( ! isInitialized ) {
-        message (D_ERROR, _("Warning"), error->message);
+        message (D_ERROR, _("Warning"), "%s", error->message);
         g_error_free(error);
         error = NULL;
     }

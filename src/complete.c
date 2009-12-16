@@ -866,16 +866,17 @@ static WInput *input;
 static int min_end;
 static int start, end;
 
-static int insert_text (WInput *in, char *text, ssize_t size)
+static int
+insert_text (WInput *in, char *text, ssize_t size)
 {
     int buff_len = str_length (in->buffer);
-    
+
     size = min (size, (ssize_t) strlen (text)) + start - end;
     if (strlen (in->buffer) + size >= (size_t) in->current_max_size){
     /* Expand the buffer */
-    	char *narea = g_realloc (in->buffer, in->current_max_size 
-                + size + in->field_width);
-	if (narea){
+	char *narea = g_try_realloc (in->buffer, in->current_max_size
+					+ size + in->field_width);
+	if (narea != NULL) {
 	    in->buffer = narea;
 	    in->current_max_size += size + in->field_width;
 	}

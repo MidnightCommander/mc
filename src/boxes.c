@@ -743,7 +743,7 @@ configure_vfs (void)
 	"[Virtual FS]", confvfs_widgets, FALSE
     };
 
-#ifdef SE_NETCODE
+#ifdef USE_NETCODE
     g_snprintf (buffer3, sizeof (buffer3), "%i", ftpfs_directory_timeout);
 #endif
     g_snprintf (buffer2, sizeof (buffer2), "%i", vfs_timeout);
@@ -1064,7 +1064,7 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain,
         return_value = 0;
         break;
     default:
-        return_value = g_new (struct smb_authinfo, 1);
+        return_value = g_try_new (struct smb_authinfo, 1);
         if (return_value) {
             return_value->host = g_strdup (host);
             return_value->share = g_strdup (share);

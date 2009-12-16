@@ -46,7 +46,8 @@ mc_config_get_groups (mc_config_t * mc_config, gsize * len)
     if (!mc_config)
     {
 	ret = g_try_malloc0 (sizeof (gchar **));
-	*len=0;
+	if (len != NULL)
+	    *len=0;
 	return ret;
     }
     ret = g_key_file_get_groups (mc_config->handle, len);
@@ -67,7 +68,8 @@ mc_config_get_keys (mc_config_t * mc_config, const gchar * group, gsize * len)
     if (!mc_config || !group)
     {
 	ret = g_try_malloc0 (sizeof (gchar **));
-	*len=0;
+	if (len != NULL)
+	    *len=0;
 	return ret;
     }
     ret = g_key_file_get_keys (mc_config->handle, group, len, NULL);

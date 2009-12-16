@@ -240,10 +240,10 @@ check_hardlinks (const char *src_name, const char *dst_name, struct stat *pstat)
 	    message (D_ERROR, MSG_ERROR, _(" Cannot make the hardlink "));
 	    return 0;
 	}
-    lp = (struct link *) g_malloc (sizeof (struct link) + strlen (src_name)
-				   + strlen (dst_name) + 1);
+    lp = (struct link *) g_try_malloc (sizeof (struct link) + strlen (src_name)
+					+ strlen (dst_name) + 1);
     if (lp) {
-    	char *lpdstname;
+	char *lpdstname;
 	lp->vfs = my_vfs;
 	lp->ino = ino;
 	lp->dev = dev;
@@ -1713,7 +1713,7 @@ panel_operate_generate_prompt (const WPanel *panel, const int operation,
 #ifdef ENABLE_NLS
     static gboolean i18n_flag = FALSE;
     if (!i18n_flag) {
-	int i;
+	size_t i;
 
 	for (i = sizeof (op_names1) / sizeof (op_names1[0]); i--;)
 	    op_names1[i] = Q_(op_names1[i]);
@@ -1818,7 +1818,10 @@ int
 panel_operate (void *source_panel, FileOperation operation,
 	       int force_single)
 {
-    WPanel *panel = source_panel;
+    WPanel *panel = (WPanel *) source_panel;
+    const gboolean single_entry = force_single || (panel->marked <= 1)
+			 || (get_current_type () == view_tree);
+
     char *source = NULL;
 #ifdef WITH_FULL_PATHS
     char *source_with_path = NULL;
@@ -1828,8 +1831,6 @@ panel_operate (void *source_panel, FileOperation operation,
     char *dest = NULL;
     char *temp = NULL;
     char *save_cwd = NULL, *save_dest = NULL;
-    int single_entry = (get_current_type () == view_tree)
-	|| (panel->marked <= 1) || force_single;
     struct stat src_stat, dst_stat;
     int i;
     FileProgressStatus value;
@@ -1840,6 +1841,15 @@ panel_operate (void *source_panel, FileOperation operation,
 
     int dst_result;
     int do_bg = 0;		/* do background operation? */
+
+#ifdef ENABLE_NLS
+    static gboolean i18n_flag = FALSE;
+    if (!i18n_flag) {
+	for (i = sizeof (op_names1) / sizeof (op_names1[0]); i--;)
+	    op_names[i] = Q_(op_names[i]);
+	i18n_flag = TRUE;
+    }
+#endif				/* ENABLE_NLS */
 
     free_linklist (&linklist);
     free_linklist (&dest_dirs);
@@ -1937,7 +1947,7 @@ panel_operate (void *source_panel, FileOperation operation,
 	if (safe_delete)
 	    query_set_sel (1);
 
-	i = query_dialog (Q_(op_names[operation]), fmd_buf, D_ERROR, 2,
+	i = query_dialog (op_names[operation], fmd_buf, D_ERROR, 2,
 				_("&Yes"), _("&No"));
 
 	if (i != 0) {
@@ -1959,7 +1969,7 @@ panel_operate (void *source_panel, FileOperation operation,
 
 	v = do_background (ctx,
 			   g_strconcat (op_names[operation], ": ",
-					panel->cwd, NULL));
+					panel->cwd, (char *) NULL));
 	if (v == -1) {
 	    message (D_ERROR, MSG_ERROR,
 		     _(" Sorry, I could not put the job in background "));

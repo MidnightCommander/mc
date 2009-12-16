@@ -34,7 +34,7 @@
  * Derived from ftpfs.c
  * Read README.fish for protocol specification.
  *
- * Syntax of path is: /#sh:user@host[:Cr]/path
+ * Syntax of path is: \verbatim /#sh:user@host[:Cr]/path \endverbatim
  *      where C means you want compressed connection,
  *      and r means you want to use rsh
  *
@@ -492,8 +492,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 	"else\n"
 		  "echo '### 500'\n"
 	"fi\n"
-	,
-	NULL
+	, (char *) NULL
     );
 
     fish_command (me, super, NONE, shell_commands,

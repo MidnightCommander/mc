@@ -243,12 +243,11 @@ gboolean
 mc_fhl_parse_ini_file (mc_fhl_t * fhl)
 {
     gchar **group_names, **orig_group_names;
-    gsize ftype_names_size;
 
     mc_fhl_array_free (fhl);
     fhl->filters = g_ptr_array_new ();
 
-    orig_group_names = group_names = mc_config_get_groups (fhl->config, &ftype_names_size);
+    orig_group_names = group_names = mc_config_get_groups (fhl->config, NULL);
 
     if (group_names == NULL)
         return FALSE;

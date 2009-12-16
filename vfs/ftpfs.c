@@ -44,11 +44,14 @@ What to do with this?
 
 
      * NOTE: Usage of tildes is deprecated, consider:
-     * cd /#ftp:pavel@hobit
-     * cd ~
+     * \verbatim
+         cd /#ftp:pavel@hobit
+         cd ~
+       \endverbatim
      * And now: what do I want to do? Do I want to go to /home/pavel or to
      * /#ftp:hobit/home/pavel? I think first has better sense...
      *
+    \verbatim
     {
         int f = !strcmp( remote_path, "/~" );
 	if (f || !strncmp( remote_path, "/~/", 3 )) {
@@ -58,8 +61,7 @@ What to do with this?
 	    remote_path = s;
 	}
     }
-
-
+    \endverbatim
  */
 
 /* \todo Fix: Namespace pollution: horrible */
@@ -473,8 +475,8 @@ ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super,
     } else {			/* ask user */
 	char *p;
 
-	p = g_strconcat (_(" FTP: Password required for "), SUP.user, " ",
-			 NULL);
+	p = g_strconcat (_(" FTP: Password required for "),
+                        SUP.user, " ", (char *) NULL);
 	op = vfs_get_password (p);
 	g_free (p);
 	if (op == NULL)
@@ -494,7 +496,7 @@ ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super,
 	name =
 	    g_strconcat (SUP.user, "@",
 			 SUP.host[0] == '!' ? SUP.host + 1 : SUP.host,
-			 NULL);
+                         (char *) NULL);
     } else
 	name = g_strdup (SUP.user);
 
@@ -888,7 +890,7 @@ ftpfs_get_current_directory (struct vfs_class *me, struct vfs_s_super *super)
 			    /* If the remote server is an Amiga a leading slash
 			       might be missing. MC needs it because it is used
 			       as separator between hostname and path internally. */
-			    return g_strconcat( "/", bufp, NULL);
+			    return g_strconcat( "/", bufp, (char *) NULL);
 			}
 		    } else {
 			ftpfs_errno = EIO;
@@ -1051,7 +1053,7 @@ again:
 
 	port = ntohs (port);
 
-	addr = g_malloc (NI_MAXHOST);
+	addr = g_try_malloc (NI_MAXHOST);
 	if (addr == NULL)
 	    ERRNOR (ENOMEM, -1);
 

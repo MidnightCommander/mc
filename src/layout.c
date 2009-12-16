@@ -198,9 +198,6 @@ static const char *output_lines_label;
 
 static WButton *bleft_widget, *bright_widget;
 
-/* Declarations for static functions */
-static void low_level_change_screen_size (void);
-
 static void _check_split (void)
 {
     if (_horizontal_split){
@@ -696,17 +693,7 @@ setup_panels (void)
     update_xterm_title_path ();
 }
 
-void
-sigwinch_handler (int dummy)
-{
-    (void) dummy;
-#if !(defined(USE_NCURSES) || defined(USE_NCURSESW))	/* don't do malloc in a signal handler */
-    low_level_change_screen_size ();
-#endif
-    winch_flag = 1;
-}
-
-static void
+static inline void
 low_level_change_screen_size (void)
 {
 #if defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4
@@ -730,6 +717,16 @@ low_level_change_screen_size (void)
     }
 #endif /* TIOCGWINSZ */
 #endif /* defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4 */
+}
+
+void
+sigwinch_handler (int dummy)
+{
+    (void) dummy;
+#if !(defined(USE_NCURSES) || defined(USE_NCURSESW))	/* don't do malloc in a signal handler */
+    low_level_change_screen_size ();
+#endif
+    winch_flag = 1;
 }
 
 void
@@ -758,7 +755,6 @@ change_screen_size (void)
     tty_keypad (TRUE);
     tty_nodelay (FALSE);
 #endif
-    setup_panels ();
 
     /* Inform all running dialogs */
     d = current_dlg;
@@ -766,10 +762,6 @@ change_screen_size (void)
 	(*d->callback) (d, NULL, DLG_RESIZE, 0, NULL);
 	d = d->parent;
     }
-
-#ifdef RESIZABLE_MENUBAR
-    menubar_arrange (the_menubar);
-#endif
 
     /* Now, force the redraw */
     repaint_screen ();
@@ -800,7 +792,6 @@ void print_vfs_message (const char *msg, ...)
     char str [128];
 
     va_start (ap, msg);
-
     g_vsnprintf (str, sizeof (str), msg, ap);
     va_end (ap);
 

@@ -258,7 +258,7 @@ mc_search_get_types_strings_array (size_t *num)
     const mc_search_type_str_t *type_str;
     const mc_search_type_str_t *types_str = mc_search_types_list_get (&n);
 
-    ret = g_new0 (char *, n + 1);
+    ret = g_try_new0 (char *, n + 1);
     if (ret == NULL)
         return NULL;
 

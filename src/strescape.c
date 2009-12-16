@@ -153,7 +153,7 @@ strutils_unescape (const char *src, gsize src_len, const char *unescaped_chars,
 /** To be compatible with the general posix command lines we have to escape
  strings for the command line
 
- \params in
+ \param src
  string for escaping
 
  \returns
@@ -187,7 +187,7 @@ strutils_regex_escape (const char *src)
 /** Unescape paths or other strings for e.g the internal cd
     shell-unescape within a given buffer (writing to it!)
 
- \params src
+ \param text
  string for unescaping
 
  \returns
@@ -218,8 +218,11 @@ strutils_regex_unescape (const char *text)
 
 /** Check if char in pointer contain escape'd chars
 
- \params in
+ \param start
  string for checking
+
+ \param current
+ pointer to checked character
 
  \returns
  return TRUE if string contain escaped chars

@@ -77,7 +77,7 @@ mc_fhl_new (gboolean need_auto_fill)
 
     mc_fhl_t *fhl;
 
-    fhl = g_new0 (mc_fhl_t, 1);
+    fhl = g_try_new0 (mc_fhl_t, 1);
     if (fhl == NULL)
         return NULL;
 

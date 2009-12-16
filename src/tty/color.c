@@ -196,7 +196,7 @@ tty_try_alloc_color_pair2 (const char *fg, const char *bg, gboolean is_temp_colo
         return mc_color_pair->pair_index;
     }
 
-    mc_color_pair = g_new0 (tty_color_pair_t, 1);
+    mc_color_pair = g_try_new0 (tty_color_pair_t, 1);
     if (mc_color_pair == NULL) {
         g_free (color_pair);
         return 0;

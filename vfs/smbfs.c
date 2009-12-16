@@ -184,9 +184,9 @@ static void
 smbfs_auth_add (const char *host, const char *share, const char *domain,
               const char *user, const char *param_password)
 {
-    struct smb_authinfo *auth = g_new (struct smb_authinfo, 1);
-    
-    if (!auth)
+    struct smb_authinfo *auth = g_try_new (struct smb_authinfo, 1);
+
+    if (auth == NULL)
         return;
 
     /* Don't check for NULL, g_strdup already does. */
@@ -368,8 +368,7 @@ smbfs_fill_names (struct vfs_class *me, fill_names_f func)
 	    path = g_strconcat (URL_HEADER,
 		smbfs_connections[i].user, "@",
 		smbfs_connections[i].host,
-		"/", smbfs_connections[i].service,
-		NULL);
+		"/", smbfs_connections[i].service, (char *) NULL);
 	    (*func)(path);
 	    g_free (path);
 	}

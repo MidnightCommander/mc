@@ -265,8 +265,8 @@ set_zero_dir (dir_list *list)
 {
     /* Need to grow the *list? */
     if (list->size == 0) {
-	list->list = g_realloc (list->list, sizeof (file_entry) *
-			      (list->size + RESIZE_STEPS));
+	list->list = g_try_realloc (list->list, sizeof (file_entry) *
+						(list->size + RESIZE_STEPS));
 	if (list->list == NULL)
 	    return FALSE;
 
@@ -327,10 +327,9 @@ handle_dirent (dir_list *list, const char *filter, struct dirent *dp,
 
     /* Need to grow the *list? */
     if (next_free == list->size) {
-	list->list =
-	    g_realloc (list->list,
-		       sizeof (file_entry) * (list->size + RESIZE_STEPS));
-	if (!list->list)
+	list->list = g_try_realloc (list->list, sizeof (file_entry) *
+						(list->size + RESIZE_STEPS));
+	if (list->list == NULL)
 	    return -1;
 	list->size += RESIZE_STEPS;
     }
@@ -390,9 +389,9 @@ handle_path (dir_list *list, const char *path,
 
     /* Need to grow the *list? */
     if (next_free == list->size){
-	list->list = g_realloc (list->list, sizeof (file_entry) *
-			      (list->size + RESIZE_STEPS));
-	if (!list->list)
+	list->list = g_try_realloc (list->list, sizeof (file_entry) *
+						(list->size + RESIZE_STEPS));
+	if (list->list == NULL)
 	    return -1;
 	list->size += RESIZE_STEPS;
     }
@@ -488,25 +487,15 @@ static dir_list dir_copy = { 0, 0 };
 static void
 alloc_dir_copy (int size)
 {
-    int i;
-
-    if (dir_copy.size < size){
-	if (dir_copy.list){
-
-	    for (i = 0; i < dir_copy.size; i++) {
+    if (dir_copy.size < size) {
+	if (dir_copy.list) {
+	    int i;
+	    for (i = 0; i < dir_copy.size; i++)
 		g_free (dir_copy.list [i].fname);
-	    }
 	    g_free (dir_copy.list);
-	    dir_copy.list = 0;
 	}
 
-	dir_copy.list = g_new (file_entry, size);
-	for (i = 0; i < size; i++) {
-	    dir_copy.list [i].fname = NULL;
-            dir_copy.list [i].sort_key = NULL;
-            dir_copy.list [i].second_sort_key = NULL;
-        }
-
+	dir_copy.list = g_new0 (file_entry, size);
 	dir_copy.size = size;
     }
 }
