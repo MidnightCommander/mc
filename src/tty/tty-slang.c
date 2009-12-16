@@ -264,7 +264,8 @@ tty_init (gboolean slow, gboolean ugly_lines)
 
     tcgetattr (fileno (stdin), &boot_mode);
     /* 255 = ignore abort char; XCTRL('g') for abort char = ^g */
-    SLang_init_tty (XCTRL ('c'), 1, 0);
+    /* SLang_init_tty (XCTRL ('c'), 1, 0); */
+    SLang_init_tty (255, 1, 0);
 
     if (ugly_lines)
         SLtt_Has_Alt_Charset = 0;
