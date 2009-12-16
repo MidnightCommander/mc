@@ -1929,7 +1929,7 @@ msgid "&Background"
 msgstr "В &фоне"
 
 msgid "&Stable Symlinks"
-msgstr "&Сохранять символические ссылки"
+msgstr "Изменять относительные &ссылки"
 
 msgid "di&Ve into subdir if exists"
 msgstr "&Внутрь подкаталога, если есть"
