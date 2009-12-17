@@ -2509,6 +2509,16 @@ will be converted to have initial upper case and otherwise lower case.
 .PP
 You can also use '\\' as a quote character. For example, '\\\\' is
 a backslash and '\\*' is an asterisk.
+.PP
+.B Stable symlinks
+.PP
+commands Midnight Commander, that it should change symlinks in the target,
+so that they'll point to the same location as it did before. With absolute
+symbolic links this does nothing, but if you have a relative one, it will
+recompute its value, adding necessary ../ and other directory parts and making
+the value as short as possible (most modern filesystems keep short symlinks
+inside inodes and thus don't waste much disk space).
+
 .\"NODE "Select/Unselect Files"
 .SH "Select/Unselect Files"
 The dialog of group of files and directories selection or uselection.
