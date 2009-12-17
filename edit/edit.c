@@ -2139,9 +2139,12 @@ edit_move_updown (WEdit * edit, unsigned long i, int scroll, gboolean direction)
 
     if (i > 1)
 	edit->force |= REDRAW_PAGE;
-    if (scroll)
-	edit_scroll_upward (edit, i);
-
+    if (scroll) {
+	if (direction)
+	    edit_scroll_upward (edit, i);
+	else
+	    edit_scroll_downward (edit, i);
+    }
     p = edit_bol (edit, edit->curs1);
 
     p = (direction)
