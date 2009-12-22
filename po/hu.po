@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-30 10:39+0200\n"
+"POT-Creation-Date: 2009-12-17 11:36+0100\n"
 "PO-Revision-Date: 2005-10-01 00:47+0200\n"
 "Last-Translator: SZABO Gergely <szg@subogero.com>\n"
 "Language-Team: Hungarian <debian-l10n-hungarian@lists.debian.org>\n"
@@ -468,7 +468,7 @@ msgid "&Move"
 msgstr "Át&helyezés"
 
 msgid "&Delete"
-msgstr "&Törlés"
+msgstr "&Töröl"
 
 msgid "C&opy to clipfile"
 msgstr "Máso&lás vágólapra"
@@ -592,10 +592,10 @@ msgid "&Save setup"
 msgstr "Beállítások m&entése"
 
 msgid "&File"
-msgstr "Fájl"
+msgstr "&Fájl"
 
 msgid "&Edit"
-msgstr "Szerk"
+msgstr "Szerkeszt"
 
 # a gombsorban is szerepel (F7)
 msgid "&Search"
@@ -603,13 +603,13 @@ msgstr "Keresés"
 
 # ez is egy prompt (azert a ":")
 msgid "&Command"
-msgstr "Parancs:"
+msgstr "&Parancs"
 
 msgid "For&mat"
 msgstr "For&mátum"
 
 msgid "&Options"
-msgstr "Beállí&tások"
+msgstr "&Beállítások"
 
 msgid "None"
 msgstr "Nincs"
@@ -670,31 +670,31 @@ msgid "ButtonBar|Help"
 msgstr "Súgó"
 
 msgid "ButtonBar|Save"
-msgstr "Mentés"
+msgstr "Ment"
 
 msgid "ButtonBar|Mark"
-msgstr "Gombsor|Kijelöl"
+msgstr "Jelöl"
 
 msgid "ButtonBar|Replac"
-msgstr "Gombsor|Csere"
+msgstr "Csere"
 
 msgid "ButtonBar|Copy"
-msgstr "Gombsor|Másol"
+msgstr "Másol"
 
 msgid "ButtonBar|Move"
-msgstr "Gombsor|Mozgat"
+msgstr "Mozgat"
 
 msgid "ButtonBar|Search"
-msgstr "Gombsor|Keres"
+msgstr "Keres"
 
 msgid "ButtonBar|Delete"
-msgstr "Gombsor|Töröl"
+msgstr "Töröl"
 
 msgid "ButtonBar|PullDn"
-msgstr "Gombsor|Menü"
+msgstr "Főmenü"
 
 msgid "ButtonBar|Quit"
-msgstr "Gombsor|Kilép"
+msgstr "Kilép"
 
 msgid " Load syntax file "
 msgstr " Szintaxisfájl betöltése "
@@ -1005,7 +1005,7 @@ msgid "Input / display codepage:"
 msgstr "Beviteli/kijelzési kódlap:"
 
 msgid "&Select"
-msgstr "&Kijelölés"
+msgstr "&Kiválaszt"
 
 msgid "Use passive mode over pro&xy"
 msgstr "Passzív mód használata pro&xy-n"
@@ -1441,13 +1441,13 @@ msgstr ""
 "\"%smc.ext\" fájlból, vagy elkészítheti az alapján."
 
 msgid "DialogTitle|Copy"
-msgstr "DialógusCím|Másol"
+msgstr "Másol"
 
 msgid "DialogTitle|Move"
-msgstr "DialógusCím|Mozgat"
+msgstr "Mozgat"
 
 msgid "DialogTitle|Delete"
-msgstr "DialógusCím|Töröl"
+msgstr "Töröl"
 
 msgid " Cannot make the hardlink "
 msgstr " Nem sikerült létrehozni a hard linket "
@@ -1738,13 +1738,13 @@ msgid "Directory scanning"
 msgstr "Könyvtárak átfésülése"
 
 msgid "FileOperation|Copy"
-msgstr "Fájlművelet|Másol"
+msgstr "Másol"
 
 msgid "FileOperation|Move"
-msgstr "Fájlművelet|Mozgat"
+msgstr "Mozgat"
 
 msgid "FileOperation|Delete"
-msgstr "Fájlművelet|Töröl"
+msgstr "Töröl"
 
 # pl.: "dfdsfds" nevű fájl törlése?
 # (Copy, Move, Delete)
@@ -2024,10 +2024,10 @@ msgid "Help"
 msgstr "Súgó"
 
 msgid "ButtonBar|Index"
-msgstr "Gombsor|Tartalom"
+msgstr "Tartalom"
 
 msgid "ButtonBar|Prev"
-msgstr "Gombsor|Előző"
+msgstr "Előző"
 
 msgid "&Remove"
 msgstr "&Törlés"
@@ -2215,9 +2215,6 @@ msgstr "Típus+jogok:  %s (%04o)"
 msgid "Location:  %Xh:%Xh"
 msgstr "Hely:         %Xh:%Xh"
 
-msgid "File:       None"
-msgstr "Fájl:         Nincs"
-
 msgid "&Vertical"
 msgstr "&Függőleges"
 
@@ -2390,10 +2387,10 @@ msgid "&Link"
 msgstr "&Link"
 
 msgid "&SymLink"
-msgstr "&Szimb.Link"
+msgstr "&Szim.Link"
 
 msgid "Edit s&ymlink"
-msgstr "Szimbolikus link módosítása"
+msgstr "Szim.Link módosítása"
 
 msgid "Ch&own"
 msgstr "Ch&own"
@@ -2405,7 +2402,7 @@ msgid "&Rename/Move"
 msgstr "&Átnevez/Mozgat"
 
 msgid "&Mkdir"
-msgstr "ÚjKvtr"
+msgstr "Új Könyvtár"
 
 msgid "&Quick cd"
 msgstr "Gyors könyvtárváltás (cd)"
@@ -2492,13 +2489,13 @@ msgid "&Above"
 msgstr " Fe&nt "
 
 msgid "&Left"
-msgstr " &Bal "
+msgstr "&Bal"
 
 msgid "&Below"
-msgstr " &Lent "
+msgstr "&Lent"
 
 msgid "&Right"
-msgstr " &Jobb "
+msgstr "&Jobb"
 
 msgid " Information "
 msgstr " Információ "
@@ -2515,33 +2512,22 @@ msgstr ""
 " a \"man mc\" paranccsal jeleníthető meg). "
 
 msgid "ButtonBar|Menu"
-msgstr "Gombsor|Menü"
+msgstr "Menü"
+
+msgid "ButtonBar|View"
+msgstr "Megnéz"
+
+msgid "ButtonBar|Edit"
+msgstr "Szerk"
+
+msgid "ButtonBar|RenMov"
+msgstr "Mozgat"
+
+msgid "ButtonBar|Mkdir"
+msgstr "ÚjKvt"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "Nincs beállítva a TERM környezeti változó.\n"
-
-msgid "&Fix it"
-msgstr "&Javítsd ki"
-
-msgid "don't ask again"
-msgstr "ne kérdezz többet"
-
-msgid ""
-"Chosen display charset (Settings->Display bits)\n"
-"or source codeset (in mcedit ctrl-t) \n"
-"does not match one set via locale. \n"
-"Set correct codeset manually or press <<Fix it>> \n"
-"to set locale default.\n"
-"\n"
-"Or set 'don't ask again' and press <<Skip>>"
-msgstr ""
-"A kijelzőhöz válaszott- (Beállítások->Kivitel és bevitel)\n"
-"vagy a forrás karaketerkészlet (in mcedit ctrl-t) \n"
-"nem egyezik a helyi beállítással. \n"
-"Válassza ki kézzel vagy a <<Javítsd ki>> gombbal\n"
-"automatikusan a helyi beállításnak megfelelőt. \n"
-"\n"
-"Vagy 'ne kérdezz többet' és <<Kihagyás>>"
 
 #, c-format
 msgid "Cannot create %s directory"
@@ -2795,18 +2781,6 @@ msgstr "A beállított formátum hibás; az alapértelmezés lép életbe."
 msgid " Do you really want to execute? "
 msgstr " Biztosan futtatni kívánja a programot? "
 
-msgid "ButtonBar|View"
-msgstr "Megnéz"
-
-msgid "ButtonBar|Edit"
-msgstr "Szerk"
-
-msgid "ButtonBar|RenMov"
-msgstr "Gombsor|ÁtnevMozg"
-
-msgid "ButtonBar|Mkdir"
-msgstr "Gombsor|Újkönyvt"
-
 msgid " Not implemented yet "
 msgstr " Még nincs megvalósítva "
 
@@ -2847,14 +2821,16 @@ msgstr ""
 msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
-msgstr "Az '%s' borítás nem betölthető.\n"
+msgstr ""
+"Az '%s' borítás nem betölthető.\n"
 "Alapértelmezett borítás betöltve"
 
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
-msgstr "Az '%s' borítás nem értelmezhető.\n"
+msgstr ""
+"Az '%s' borítás nem értelmezhető.\n"
 "Alapértelmezett borítás betöltve"
 
 msgid ""
@@ -2949,19 +2925,19 @@ msgid "  Delete %s?  "
 msgstr "  %s törlése?  "
 
 msgid "ButtonBar|Static"
-msgstr "Gombsor|Statikus"
+msgstr "Statikus"
 
 msgid "ButtonBar|Dynamc"
-msgstr "Gombsor|Dinamikus"
+msgstr "Dinamikus"
 
 msgid "ButtonBar|Rescan"
-msgstr "Gombsor|Frissít"
+msgstr "Frissít"
 
 msgid "ButtonBar|Forget"
-msgstr "Gombsor|Felejt"
+msgstr "Felejt"
 
 msgid "ButtonBar|Rmdir"
-msgstr "Gombsor|KönyvtTöröl"
+msgstr "KönyvtTöröl"
 
 #, c-format
 msgid ""
@@ -3078,6 +3054,9 @@ msgstr "\"/\" - numerikus"
 
 msgid "* on keypad"
 msgstr "\"*\" - numerikus"
+
+msgid "Escape key"
+msgstr "Escape Bill."
 
 msgid "Left arrow keypad"
 msgstr "<Jobbra> - numer."
@@ -3328,37 +3307,37 @@ msgid "Empty output from child filter"
 msgstr "A szűrő kimenete üres."
 
 msgid "ButtonBar|Ascii"
-msgstr "Gombsor|ASCII"
-
-msgid "ButtonBar|Hex"
-msgstr "Gombsor|Hex"
+msgstr "ASCII"
 
 msgid "ButtonBar|Goto"
-msgstr "Gombsor|Ugrás"
-
-msgid "ButtonBar|Line"
-msgstr "Gombsor|UgrSor"
-
-msgid "ButtonBar|UnWrap"
-msgstr "Gombsor|NemTör"
-
-msgid "ButtonBar|Wrap"
-msgstr "Gombsor|SorTör"
+msgstr "Ugrás"
 
 msgid "ButtonBar|HxSrch"
-msgstr "Gombsor|HexKer"
+msgstr "HexKer"
+
+msgid "ButtonBar|UnWrap"
+msgstr "NemTör"
+
+msgid "ButtonBar|Wrap"
+msgstr "SorTör"
+
+msgid "ButtonBar|Hex"
+msgstr "Hex"
+
+msgid "ButtonBar|Line"
+msgstr "UgrSor"
 
 msgid "ButtonBar|Raw"
-msgstr "Gombsor|Nyers"
+msgstr "Nyers"
 
 msgid "ButtonBar|Parse"
-msgstr "Gombsor|Értelm"
+msgstr "Értelm"
 
 msgid "ButtonBar|Unform"
-msgstr "Gombsor|NemForm"
+msgstr "NemForm"
 
 msgid "ButtonBar|Format"
-msgstr "Gombsor|Formáz"
+msgstr "Formáz"
 
 #, c-format
 msgid "File: %s"
@@ -3444,14 +3423,6 @@ msgstr ""
 "Rendellenesen végződő Cpio-archívum:\n"
 "%s"
 
-#, c-format
-msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"Sérült Cpio-fejléc az archívumban:\n"
-"%s"
-
 # !! ...
 #, c-format
 msgid ""
@@ -3468,6 +3439,14 @@ msgstr ""
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr "\"%s\"-ben ismétlődő bejegyzések! Kihagyva!"
+
+#, c-format
+msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"Sérült Cpio-fejléc az archívumban:\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -3868,6 +3847,32 @@ msgstr "Belső programhiba:"
 msgid "Changes to file lost"
 msgstr "A fájl módosításai elvesztek"
 
+#~ msgid "File:       None"
+#~ msgstr "Fájl:         Nincs"
+
+#~ msgid "&Fix it"
+#~ msgstr "&Javítsd ki"
+
+#~ msgid "don't ask again"
+#~ msgstr "ne kérdezz többet"
+
+#~ msgid ""
+#~ "Chosen display charset (Settings->Display bits)\n"
+#~ "or source codeset (in mcedit ctrl-t) \n"
+#~ "does not match one set via locale. \n"
+#~ "Set correct codeset manually or press <<Fix it>> \n"
+#~ "to set locale default.\n"
+#~ "\n"
+#~ "Or set 'don't ask again' and press <<Skip>>"
+#~ msgstr ""
+#~ "A kijelzőhöz válaszott- (Beállítások->Kivitel és bevitel)\n"
+#~ "vagy a forrás karaketerkészlet (in mcedit ctrl-t) \n"
+#~ "nem egyezik a helyi beállítással. \n"
+#~ "Válassza ki kézzel vagy a <<Javítsd ki>> gombbal\n"
+#~ "automatikusan a helyi beállításnak megfelelőt. \n"
+#~ "\n"
+#~ "Vagy 'ne kérdezz többet' és <<Kihagyás>>"
+
 #~ msgid "Do backups -->"
 #~ msgstr "Másolatok készítése -->"
 
@@ -4183,9 +4188,6 @@ msgstr "A fájl módosításai elvesztek"
 # 7 karakteres még lehet (funkciógomb-sor)
 #~ msgid "Rmdir"
 #~ msgstr "KvtTörl"
-
-#~ msgid "Escape key"
-#~ msgstr "Escape Bill."
 
 #~ msgid "bind: Wrong argument number, bind <key> <command>"
 #~ msgstr "Bind: helytelen argumentumszám, bind <kulcs> <parancs>"
