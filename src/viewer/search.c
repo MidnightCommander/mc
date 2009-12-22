@@ -154,7 +154,7 @@ mcview_search_cmd_callback (const void *user_data, gsize char_offset)
     /*    view_read_continue (view, &view->search_onechar_info); *//* AB:FIXME */
     if (!view->text_nroff_mode) {
         if (! mcview_get_byte (view, char_offset, &lc_byte))
-            return MC_SEARCH_CB_ABORT;
+            return MC_SEARCH_CB_INVALID;
 
         return lc_byte;
     }
@@ -167,7 +167,7 @@ mcview_search_cmd_callback (const void *user_data, gsize char_offset)
     lc_byte = view->search_nroff_seq->current_char;
 
     if (lc_byte == -1)
-        return MC_SEARCH_CB_ABORT;
+        return MC_SEARCH_CB_INVALID;
 
     mcview_nroff_seq_next (view->search_nroff_seq);
 

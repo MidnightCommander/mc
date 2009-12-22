@@ -43,8 +43,9 @@ typedef enum {
 
 typedef enum {
     MC_SEARCH_CB_OK = 0,
-    MC_SEARCH_CB_ABORT = -1,
-    MC_SEARCH_CB_SKIP = -2
+    MC_SEARCH_CB_INVALID = -1,
+    MC_SEARCH_CB_ABORT = -2,
+    MC_SEARCH_CB_SKIP = -3
 } mc_search_cbret_t;
 
 
