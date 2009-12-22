@@ -1904,10 +1904,9 @@ static void edit_move_to_top (WEdit * edit)
 static void edit_move_to_bottom (WEdit * edit)
 {
     if (edit->curs_line < edit->total_lines) {
-	edit_cursor_move (edit, edit->curs2);
+	edit_move_down (edit, edit->total_lines - edit->curs_row, 0);
 	edit->start_display = edit->last_byte;
 	edit->start_line = edit->total_lines;
-	edit_update_curs_row(edit);
 	edit_scroll_upward (edit, edit->num_widget_lines - 1);
 	edit->force |= REDRAW_PAGE;
     }
