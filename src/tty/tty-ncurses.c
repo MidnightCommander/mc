@@ -149,14 +149,17 @@ tty_init (gboolean slow, gboolean ugly_lines)
     ESCDELAY = 200;
 #endif /* HAVE_ESCDELAY */
 
+    /* use Ctrl-g to generate SIGINT */
+    cur_term->Nttyb.c_cc[VINTR] = CTRL ('g'); /* ^g */
+    tcsetattr (cur_term->Filedes, TCSANOW, &cur_term->Nttyb);
+
     tty_start_interrupt_key ();
 
     do_enter_ca_mode ();
-    raw ();
+    tty_raw_mode ();
     noecho ();
     keypad (stdscr, TRUE);
     nodelay (stdscr, FALSE);
-
 }
 
 void
@@ -180,12 +183,14 @@ tty_reset_shell_mode (void)
 void
 tty_raw_mode (void)
 {
-    raw ();
+    raw (); /* FIXME: uneeded? */
+    cbreak ();
 }
 
 void
 tty_noraw_mode (void)
 {
+    nocbreak (); /* FIXME: unneeded? */
     noraw ();
 }
 
