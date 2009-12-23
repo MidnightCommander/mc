@@ -106,6 +106,41 @@ mcview_find (mcview_t * view, gsize search_start, gsize * len)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+mcview_search_show_result(mcview_t * view, Dlg_head **d, size_t match_len)
+{
+
+        view->search_start = view->search->normal_offset +
+                mcview__get_nroff_real_len (view,
+                                            view->search->start_buffer,
+                                            view->search->normal_offset -
+                                            view->search->start_buffer);
+
+        if (!view->hex_mode)
+            view->search_start++;
+
+        view->search_end = view->search_start + match_len +
+            mcview__get_nroff_real_len (view, view->search_start - 1, match_len);
+
+        if (view->hex_mode) {
+            view->hex_cursor = view->search_start;
+            view->hexedit_lownibble = FALSE;
+            view->dpy_start = view->search_start - view->search_start % view->bytes_per_line;
+            view->dpy_end = view->search_end - view->search_end % view->bytes_per_line;
+        }
+
+        if (verbose) {
+            dlg_run_done (*d);
+            destroy_dlg (*d);
+            *d = create_message (D_NORMAL, _("Search"), _("Seeking to search result"));
+            tty_refresh ();
+        }
+        mcview_moveto_match (view);
+
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 /*** public functions ****************************************************************************/
 
 /* --------------------------------------------------------------------------------------------- */
@@ -119,7 +154,7 @@ mcview_search_cmd_callback (const void *user_data, gsize char_offset)
     /*    view_read_continue (view, &view->search_onechar_info); *//* AB:FIXME */
     if (!view->text_nroff_mode) {
         if (! mcview_get_byte (view, char_offset, &lc_byte))
-            return MC_SEARCH_CB_ABORT;
+            return MC_SEARCH_CB_INVALID;
 
         return lc_byte;
     }
@@ -132,7 +167,7 @@ mcview_search_cmd_callback (const void *user_data, gsize char_offset)
     lc_byte = view->search_nroff_seq->current_char;
 
     if (lc_byte == -1)
-        return MC_SEARCH_CB_ABORT;
+        return MC_SEARCH_CB_INVALID;
 
     mcview_nroff_seq_next (view->search_nroff_seq);
 
@@ -161,7 +196,7 @@ mcview_search_update_cmd_callback (const void *user_data, gsize char_offset)
     /* may be in future return from this callback will change current position
      * in searching block. Now this just constant return value.
      */
-    return 1;
+    return MC_SEARCH_CB_OK;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -169,7 +204,7 @@ mcview_search_update_cmd_callback (const void *user_data, gsize char_offset)
 void
 mcview_do_search (mcview_t * view)
 {
-    off_t search_start;
+    off_t search_start, growbufsize;
     gboolean isFound = FALSE;
 
     Dlg_head *d = NULL;
@@ -201,38 +236,32 @@ mcview_do_search (mcview_t * view)
     tty_enable_interrupt_key ();
 
     do {
-        if (mcview_find (view, search_start, &match_len)) {
-            view->search_start = view->search->normal_offset +
-                mcview__get_nroff_real_len (view,
-                                            view->search->start_buffer,
-                                            view->search->normal_offset -
-                                            view->search->start_buffer);
+        if (view->growbuf_in_use)
+            growbufsize = mcview_growbuf_filesize (view);
+        else
+            growbufsize = view->search->original_len;
 
-            if (!view->hex_mode)
-                view->search_start++;
+        if (! mcview_find (view, search_start, &match_len)) {
 
-            view->search_end = view->search_start + match_len +
-                mcview__get_nroff_real_len (view, view->search_start - 1, match_len);
+            if (view->search->error_str == NULL)
+                break;
 
-            if (view->hex_mode) {
-                view->hex_cursor = view->search_start;
-                view->hexedit_lownibble = FALSE;
-                view->dpy_start = view->search_start - view->search_start % view->bytes_per_line;
-                view->dpy_end = view->search_end - view->search_end % view->bytes_per_line;
-            }
+            search_start = growbufsize - view->search->original_len;
+            if (search_start < 0 )
+                search_start = 0;
 
-            if (verbose) {
-                dlg_run_done (d);
-                destroy_dlg (d);
-                d = create_message (D_NORMAL, _("Search"), _("Seeking to search result"));
-                tty_refresh ();
-            }
-
-            mcview_moveto_match (view);
-            isFound = TRUE;
-            break;
+            continue;
         }
+
+        mcview_search_show_result(view, &d, match_len);
+        isFound = TRUE;
+        break;
     } while (mcview_may_still_grow (view));
+
+    if (!isFound && view->search->error_str != NULL && mcview_find (view, search_start, &match_len)) {
+        mcview_search_show_result(view, &d, match_len);
+        isFound = TRUE;
+    }
 
     if (!isFound) {
         if (view->search->error_str)
