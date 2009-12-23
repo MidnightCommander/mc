@@ -2188,7 +2188,6 @@ edit_block_process_cmd (WEdit *edit, const char *shell_cmd, int block)
     long start_mark, end_mark;
     char buf[BUFSIZ];
     FILE *script_home = NULL;
-    FILE *script_src = NULL;
     FILE *block_file = NULL;
     gchar *o, *h, *b, *tmp;
     char *quoted_name = NULL;
@@ -2197,16 +2196,23 @@ edit_block_process_cmd (WEdit *edit, const char *shell_cmd, int block)
     h = g_strconcat (home_dir, PATH_SEP_STR EDIT_DIR, shell_cmd, (char *) NULL);	/* home script */
     b = concat_dir_and_file (home_dir, EDIT_BLOCK_FILE);				/* block file */
 
-    if (!(script_home = fopen (h, "r"))) {
-	if (!(script_home = fopen (h, "w"))) {
+    script_home = fopen (h, "r");
+    if (script_home == NULL) {
+	FILE *script_src = NULL;
+
+	script_home = fopen (h, "w");
+	if (script_home == NULL) {
 	    tmp = g_strconcat (_("Error creating script:"), h, (char *) NULL);
 	    edit_error_dialog ("", get_sys_error (tmp));
 	    g_free(tmp);
 	    goto edit_block_process_cmd__EXIT;
 	}
-	if (!(script_src = fopen (o, "r"))) {
+
+	script_src = fopen (o, "r");
+	if (script_src == NULL) {
 	    o = g_strconcat (mc_home_alt, shell_cmd, (char *) NULL);
-	    if (!(script_src = fopen (o, "r"))) {
+	    script_src = fopen (o, "r");
+	    if (script_src == NULL) {
 		fclose (script_home);
 		unlink (h);
 		tmp = g_strconcat (_("Error reading script:"), o, (char *) NULL);
@@ -2217,6 +2223,8 @@ edit_block_process_cmd (WEdit *edit, const char *shell_cmd, int block)
 	}
 	while (fgets (buf, sizeof (buf), script_src))
 	    fputs (buf, script_home);
+	fclose (script_src);
+
 	if (fclose (script_home)) {
 	    tmp = g_strconcat (_("Error closing script:"), h, (char *) NULL);
 	    edit_error_dialog ("", get_sys_error (tmp));

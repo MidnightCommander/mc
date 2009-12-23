@@ -148,7 +148,7 @@ int etags_set_definition_hash(const char *tagfile, const char *start_path,
 
     /* open file with positions */
     f = fopen (tagfile, "r");
-    if (!f)
+    if (f == NULL)
         return 0;
 
     while (fgets (buf, sizeof (buf), f)) {
@@ -197,5 +197,6 @@ int etags_set_definition_hash(const char *tagfile, const char *start_path,
     }
 
     g_free(filename);
+    fclose (f);
     return num;
 }
