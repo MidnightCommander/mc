@@ -1,28 +1,26 @@
-# translation of mc.master.po to Dutch
 # mc nl.po
-# Copyright (C) 1994-1999, 2009 Free Software Foundation, Inc.
+# Copyright (C) 1994-1999 Free Software Foundation, Inc.
 # Dirk-Jan C. Binnema <djcb@dds.nl>
-#
 # Gert Dewit <Gert.Dewit@sos.be>, 2001.
 # Vincent van Adrighem <V.vanAdrighem@dirck.mine.nu>, 2001.
 # Leonard den Ottolander <leonard den ottolander nl>, 2005.
-# Richard van der Luit <nippur@fedoraproject.org>, 2009.
+# Marcel Pol <mpol@gmx.net>, 2009.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: mc.master\n"
+"Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-30 10:39+0200\n"
-"PO-Revision-Date: 2009-12-08 16:00+0100\n"
-"Last-Translator: Richard van der Luit <nippur@fedoraproject.org>\n"
-"Language-Team: Dutch <nl@li.org>\n"
+"POT-Creation-Date: 2009-12-23 21:25+0200\n"
+"PO-Revision-Date: 2009-12-23\n"
+"Last-Translator: Marcel Pol <mpol@gmx.net>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
-"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
 msgid " Choose syntax highlighting "
-msgstr " Kies syntax kleuring "
+msgstr " Kies syntax oplichting "
 
 msgid "< Auto >"
 msgstr "< Auto >"
@@ -93,7 +91,7 @@ msgid "Warning"
 msgstr "Waarschuwing"
 
 msgid " File has hard-links. Detach before saving? "
-msgstr " Bestand heeft hard-links. Loskoppelen voordat opgeslagen wordt?"
+msgstr " Bestand heeft harde links. Verwijderen voor het opslaan? "
 
 msgid "&Yes"
 msgstr "&Ja"
@@ -115,43 +113,43 @@ msgstr " Openen van pijp voor lezen mislukt: "
 
 #, c-format
 msgid " Cannot open file for writing: %s "
-msgstr " Kan het bestand niet openen om te schrijven: %s "
+msgstr " Openen van bestand voor schrijven mislukt: %s "
 
 msgid "&Quick save"
-msgstr "Sn&el opslaan "
+msgstr "&Snel opslaan "
 
 msgid "&Safe save"
-msgstr "Veilig op&slaan "
+msgstr "&Veilig opslaan "
 
 msgid "&Do backups with following extension:"
-msgstr "&Doe backups met de volgende extentie:"
+msgstr "&Maak backups met de volgende extensie:"
 
 msgid "Check &POSIX new line"
-msgstr "Check &POSIX new line"
+msgstr "Controleer &POSIX nieuwe regel"
 
 msgid " Edit Save Mode "
 msgstr " Editor Bewaarmodus "
 
 msgid "The file you are saving is not finished with a newline"
-msgstr "Het bestand dat je wilt opslaan eindigt niet met een nieuwe regel"
+msgstr "Het bestand wat u opslaat eindigt niet met een nieuwe regel"
 
 msgid "C&ontinue"
 msgstr "D&oorgaan"
 
 msgid "&Do not change"
-msgstr "Veran&der niet"
+msgstr "&Niet veranderen"
 
 msgid "&Unix format (LF)"
-msgstr "&Unix format (LF)"
+msgstr "&Unix formaat (LF)"
 
 msgid "&Windows/DOS format (CR LF)"
-msgstr "&Windows/DOS format (CR LF)"
+msgstr "&Windows/DOS formaat (CR LF)"
 
 msgid "&Macintosh format (CR)"
-msgstr "&Macintosh format (CR)"
+msgstr "&Macintosh formaat (CR)"
 
 msgid "Change line breaks to:"
-msgstr "Verander regel afbrekers in:"
+msgstr "Verander regeleindes naar:"
 
 msgid " Enter file name: "
 msgstr " Geef bestandsnaam: "
@@ -187,7 +185,7 @@ msgid " Press the macro's new hotkey: "
 msgstr " Druk op de nieuwe sneltoets voor de macro: "
 
 msgid " Press macro hotkey: "
-msgstr " Druk op een macro-toets "
+msgstr " Druk op een macro sneltoets "
 
 msgid " Load macro "
 msgstr " Macro laden "
@@ -215,13 +213,13 @@ msgid " Which syntax file you want to edit? "
 msgstr " Welk uitbreidingsbestand wilt u bewerken? "
 
 msgid "&User"
-msgstr "Gebruiker"
+msgstr "&Gebruiker"
 
 msgid "&System Wide"
 msgstr "&Systeembreed"
 
 msgid " Menu edit "
-msgstr "Menubestand bewerken"
+msgstr " Menubestand bewerken "
 
 msgid " Which menu file do you want to edit? "
 msgstr " Welk menubestand wilt u bewerken? "
@@ -258,10 +256,10 @@ msgid " Error "
 msgstr " Fout "
 
 msgid " This function is not implemented. "
-msgstr " Deze functie is niet geÃ¯mplementeerd. "
+msgstr " Deze functie is niet geïmplementeerd. "
 
 msgid " Copy to clipboard "
-msgstr " KopiÃ«er naar prikbord "
+msgstr " Kopiëer naar prikbord "
 
 msgid " Unable to save to file. "
 msgstr " Kan niet opslaan naar bestand. "
@@ -333,7 +331,7 @@ msgid "Process block"
 msgstr "Bewerk blok"
 
 msgid " Copies to"
-msgstr " KopiÃ«ert naar"
+msgstr " Kopiëert naar"
 
 msgid " Subject"
 msgstr " Onderwerp"
@@ -357,7 +355,7 @@ msgid " Execute Macro "
 msgstr " Macro uitvoeren "
 
 msgid "All charsets"
-msgstr "Alle charsets"
+msgstr "Alle karaktersets"
 
 msgid "&Whole words"
 msgstr "Hele &Woorden"
@@ -378,7 +376,7 @@ msgid " Enter search string:"
 msgstr " Geef de zoekstring:"
 
 msgid "&Find all"
-msgstr "&Vind alles"
+msgstr "&Vind allemaal"
 
 msgid "Cancel"
 msgstr "Annuleren"
@@ -427,142 +425,142 @@ msgid "&New"
 msgstr "&Nieuw"
 
 msgid "Save &as..."
-msgstr "Opslaan &als..."
+msgstr "&Opslaan als..."
 
 msgid "&Insert file..."
 msgstr "Bestand &Invoegen..."
 
 msgid "Cop&y to file..."
-msgstr "&KopiÃ«er naar bestand..."
+msgstr "&Kopiëer naar bestand..."
 
 msgid "&User menu..."
 msgstr "Gebr&uikersmenu..."
 
 msgid "A&bout..."
-msgstr "O&ver...."
+msgstr "&Over..."
 
 msgid "&Quit"
-msgstr "BeÃ«indigen"
+msgstr "Beëindigen"
 
 msgid "&Toggle mark"
-msgstr "&Toggle markering"
+msgstr "Markering aan/ui&t"
 
 msgid "&Mark columns"
 msgstr "&Markeer kolommen"
 
 msgid "Toggle &ins/overw"
-msgstr "Toggle &ins/overs"
+msgstr "&Inv aan/uit"
 
 msgid "&Copy"
-msgstr "&KopieÃ«ren"
+msgstr "&Kopiëer"
 
 msgid "&Move"
-msgstr "Ver&plaatsen"
+msgstr "&Verplaatsen"
 
 msgid "&Delete"
-msgstr "Verwij&deren"
+msgstr "&Verwijderen"
 
 msgid "C&opy to clipfile"
-msgstr "K&opieer naar bestand"
+msgstr "&Kopiëer naar prikbord"
 
 msgid "C&ut to clipfile"
-msgstr "Verplaat&s naar bestand"
+msgstr "Kn&ippen naar prikbord"
 
 msgid "&Paste from clipfile"
-msgstr "&Plak vanuit bestand"
+msgstr "&Plakken van prikbord"
 
 msgid "Toggle bookmar&k"
-msgstr "Toggle bla&dwijzer"
+msgstr "&Bladwijzer aan/uit"
 
 msgid "&Next bookmark"
-msgstr "Volge&nde bladwijzer"
+msgstr "&Volgende bladwijzer"
 
 msgid "Pre&v bookmark"
-msgstr "&Vorige bladwijzer"
+msgstr "Vo&rige bladwijzer"
 
 msgid "&Flush bookmark"
-msgstr "Bladwijzers &Flushen"
+msgstr "Ver&wijder bladwijzer"
 
 msgid "&Undo"
-msgstr "&Ongedaan maken"
+msgstr "&Herstellen"
 
 msgid "&Beginning"
 msgstr "&Begin"
 
 msgid "&End"
-msgstr "&Eind"
+msgstr "&Einde"
 
 msgid "&Search..."
 msgstr "&Zoeken..."
 
 msgid "Search &again"
-msgstr "Nogm&aals Zoeken"
+msgstr "Nogmaals Z&oeken"
 
 msgid "&Replace..."
-msgstr "Ve&rvangen"
+msgstr "Ve&rvangen..."
 
 msgid "&Go to line..."
-msgstr " &Ga naar regel... "
+msgstr "&Ga naar regel..."
 
 msgid "Toggle li&ne state"
-msgstr "Toggle li&jn status"
+msgstr "&Inv aan/uit"
 
 msgid "Go to matching &bracket"
 msgstr "Ga naar corresponderend &Haakje"
 
 msgid "Find declaration"
-msgstr "Zoek declaraties"
+msgstr "Zoek declaratie"
 
 msgid "Back from declaration"
-msgstr "Terug vanaf declaratie"
+msgstr "Ga terug vanaf declaratie"
 
 msgid "Forward to declaration"
-msgstr "Voorwaards vanaf declaratie"
+msgstr "Ga vooruit vanaf declaratie"
 
 msgid "Encod&ing..."
-msgstr "Encod&ing..."
+msgstr "Encoder&ing..."
 
 msgid "&Refresh screen"
-msgstr "Scherm ve&rversen"
+msgstr "Scherm verversen"
 
 msgid "&Start record macro"
 msgstr "&Start opnemen macro"
 
 msgid "&Finish record macro..."
-msgstr "Voltooi opnemen macro...C+F"
+msgstr "&Voltooi opnemen macro..."
 
 msgid "&Execute macro..."
-msgstr "Macro uitvoeren...C+E"
+msgstr "&Macro uitvoeren..."
 
 msgid "Delete macr&o..."
-msgstr " Macr&o verwijderen "
+msgstr "Macro ver&wijderen..."
 
 msgid "'ispell' s&pell check"
-msgstr "`ispell'-s&pellingcheck.  C-p"
+msgstr "`ispell'-s&pellingcontrole"
 
 msgid "&Mail..."
-msgstr "&Mail..."
+msgstr "&Mail...              "
 
 msgid "Insert &literal..."
-msgstr "&Letterlijk invoegen...C-q"
+msgstr "&Letterlijk invoegen..."
 
 msgid "Insert &date/time"
 msgstr "&Datum/Tijd invoegen"
 
 msgid "Format p&aragraph"
-msgstr "P&aragraaf format      M-p"
+msgstr "P&aragraaf opmaken"
 
 msgid "Sor&t..."
 msgstr "&Sorteer..."
 
 msgid "Paste o&utput of..."
-msgstr "Plak &Uitvoer van...   M-u"
+msgstr "Plak &Uitvoer van..."
 
 msgid "E&xternal formatter"
-msgstr "E&xterne Formatteerder  F19"
+msgstr "E&xterne formatteerder"
 
 msgid "&General...  "
-msgstr "Algemeen..."
+msgstr "&Algemeen..."
 
 msgid "Save &mode..."
 msgstr "&Opslagmodus..."
@@ -571,7 +569,7 @@ msgid "Learn &keys..."
 msgstr "&Leer toetsen..."
 
 msgid "Syntax &highlighting..."
-msgstr "Synta&X Kleuring...."
+msgstr "Synta&X oplichting..."
 
 msgid "S&yntax file"
 msgstr "S&yntax bestand"
@@ -586,13 +584,13 @@ msgid "&File"
 msgstr "&Bestand"
 
 msgid "&Edit"
-msgstr "B&ewerk"
+msgstr "Be&werk"
 
 msgid "&Search"
 msgstr "&Zoeken"
 
 msgid "&Command"
-msgstr "Opdra&cht"
+msgstr "&Opdracht"
 
 msgid "For&mat"
 msgstr "For&mat"
@@ -613,19 +611,19 @@ msgid "Word wrap line length: "
 msgstr "Regellengte voor afbreking: "
 
 msgid "Cursor beyond end of line"
-msgstr "Cursor voorbij einde regel"
+msgstr "Cursor voorbij einde van de regel"
 
 msgid "Pers&istent selection"
-msgstr "Pers&istente selectie"
+msgstr "Vastliggende s&electie"
 
 msgid "Synta&x highlighting"
-msgstr "Synta&X kleuring"
+msgstr "Synta&X oplichting"
 
 msgid "Visible tabs"
 msgstr "Zichtbare tabs"
 
 msgid "Visible trailing spaces"
-msgstr "Zichtbare voorlopende spaties"
+msgstr "Zichtbare spaties aan einde regel"
 
 msgid "Save file &position"
 msgstr "Bestand &positie opslaan"
@@ -655,34 +653,34 @@ msgid " Editor options "
 msgstr " Editoropties "
 
 msgid "ButtonBar|Help"
-msgstr "ButtonBar|Help"
+msgstr "Help"
 
 msgid "ButtonBar|Save"
-msgstr "ButtonBar|Opsln"
+msgstr "Opsln"
 
 msgid "ButtonBar|Mark"
-msgstr "ButtonBar|Markrn"
+msgstr "Markr"
 
 msgid "ButtonBar|Replac"
-msgstr "ButtonBar|Verv"
+msgstr "Vervang"
 
 msgid "ButtonBar|Copy"
-msgstr "ButtonBar|Kopie"
+msgstr "Kopie"
 
 msgid "ButtonBar|Move"
-msgstr "ButtonBar|Verpl"
+msgstr "Verplts"
 
 msgid "ButtonBar|Search"
-msgstr "ButtonBar|Zoek"
+msgstr "Zoek"
 
 msgid "ButtonBar|Delete"
-msgstr "ButtonBar|Verw"
+msgstr "Verwder"
 
 msgid "ButtonBar|PullDn"
-msgstr "ButtonBar|Uitkl"
+msgstr "Menu"
 
 msgid "ButtonBar|Quit"
-msgstr "ButtonBar|Afsltn"
+msgstr "Afsltn"
 
 msgid " Load syntax file "
 msgstr " Laad syntaxbestand "
@@ -795,7 +793,7 @@ msgid "Resets soft keys on HP terminals"
 msgstr "Zet soft-key bij HP terminals terug"
 
 msgid "Load definitions of key bindings from specified file"
-msgstr "Laad definities van toetsbindingen vanuit bestand"
+msgstr "Laad definities van sneltoetsen van aangegeven bestand"
 
 msgid "Requests to run in black and white"
 msgstr "Verzoek om in zwart/wit te werken"
@@ -807,7 +805,7 @@ msgid "Specifies a color configuration"
 msgstr "Geef een kleurconfiguratie aan"
 
 msgid "Show mc with specified skin"
-msgstr "Toon mc met aangegeven skin"
+msgstr "Laad mc met aangegeven skin"
 
 #. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
@@ -824,18 +822,19 @@ msgid ""
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
-"--colors KEYWORD={FORE},{BACK}\n"
+"--colors KEYWORD={VOOR},{ACHTER}\n"
 "\n"
-"{FORE} and {BACK} can be omitted, and the default will be used\n"
+"{VOOR} en {ACHTER} kunnen worden weggelaten, en de defaultwaarde wordt\n"
+"gebruikt\n"
 "\n"
-"Keywords:\n"
-"   Global:       errors, reverse, gauge, input, viewunderline\n"
-"   File display: normal, selected, marked, markselect\n"
-"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate\n"
+"Sleutelwoorden:\n"
+"   Globaal:          errors, reverse, gauge, input, viewunderline\n"
+"   Bestandsweergave: normal, selected, marked, markselect\n"
+"   Dialogen:         dnormal, dfocus, dhotnormal, dhotfocus,\n"
+"                     errdhotnormal, errdhotfocus\n"
+"   Menu's:           menu, menuhot, menusel, menuhotsel\n"
+"   Editor:           editnormal, editbold, editmarked,\n"
+"                     editwhitespace, editlinestate\n"
 
 #. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
@@ -847,22 +846,23 @@ msgid ""
 "   brightcyan, lightgray and white\n"
 "\n"
 msgstr ""
-"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   Help:             helpnormal, helpitalic, helpbold, helplink,\n"
+"                     helpslink\n"
 "\n"
-"Colors:\n"
+"Kleuren:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
 "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
 "   brightcyan, lightgray and white\n"
 "\n"
 
 msgid "Color options"
-msgstr "Kleuropties"
+msgstr "Kleur instellingen"
 
 msgid "+number"
 msgstr "+number"
 
 msgid "[this_dir] [other_panel_dir]"
-msgstr "[deze_dir] [andere_paneel_dir]"
+msgstr ""
 
 msgid "Set initial line number for the internal editor"
 msgstr "Regelnummer instellen om de interne editor mee te starten"
@@ -881,10 +881,10 @@ msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander  %s\n"
 
 msgid "Main options"
-msgstr "Hoofdopties "
+msgstr "Hoofd opties"
 
 msgid "Terminal options"
-msgstr "Terminal opties "
+msgstr "Terminal opties"
 
 msgid " Background process error "
 msgstr " Fout in achtergrondproces "
@@ -930,7 +930,7 @@ msgid "Case sensi&tive"
 msgstr "Hoofd-/kleine le&tters"
 
 msgid "Executable &first"
-msgstr "Uitvoerbare &bestanden eerst"
+msgstr "&Uitvoerbare bestanden eerst"
 
 msgid "Sort order"
 msgstr "Sortering"
@@ -939,7 +939,7 @@ msgid " Confirmation "
 msgstr " Bevestiging "
 
 msgid " confirm di&Rectory hotlist delete "
-msgstr " bevestig verwijderen mappen &Snellijst "
+msgstr " bevestig verwijderen mappen &Favolijst "
 
 msgid " confirm &Exit "
 msgstr " B&Evestig afsluiten "
@@ -954,10 +954,10 @@ msgid " confirm &Delete "
 msgstr " Bevestig verwij&Deren "
 
 msgid "UTF-8 output"
-msgstr "Volledige &8-bit uitvoer"
+msgstr "UTF-8 uitvoer"
 
 msgid "Full 8 bits output"
-msgstr "Volledige &8-bit uitvoer"
+msgstr "Volledige 8-bit uitvoer"
 
 msgid "ISO 8859-1"
 msgstr "ISO 8859-1"
@@ -966,7 +966,7 @@ msgid "7 bits"
 msgstr "7-bit"
 
 msgid "F&ull 8 bits input"
-msgstr "Volledige 8-bit invoer"
+msgstr "&Volledige 8-bit invoer"
 
 msgid " Display bits "
 msgstr " Weergave bits "
@@ -996,7 +996,7 @@ msgid "sec"
 msgstr "sec"
 
 msgid "ftpfs directory cache timeout:"
-msgstr "ftpfs buffer is te oud:"
+msgstr "ftpfs map-cache timeout:"
 
 msgid "ftp anonymous password:"
 msgstr "Anonieme-ftp wachtwoord:"
@@ -1023,7 +1023,7 @@ msgid "Symbolic link"
 msgstr "Symbolische Link"
 
 msgid "Running "
-msgstr "Loopt... "
+msgstr "Loopt "
 
 msgid "Stopped"
 msgstr "Angehalten"
@@ -1035,7 +1035,7 @@ msgid "&Resume"
 msgstr "&Doorgaan"
 
 msgid "&Kill"
-msgstr "&BeÃ«ndigen"
+msgstr "&Beëndigen"
 
 msgid "Background Jobs"
 msgstr "Achtergrondtaken"
@@ -1206,7 +1206,7 @@ msgid "&Using shell patterns"
 msgstr "Shell Patroon gebr&Uiken"
 
 msgid "&Case sensitive"
-msgstr "Hoofd-/kleine le&tters gevoelig"
+msgstr "Hoofd-/kleine le&tters"
 
 msgid "&Files only"
 msgstr "Alleen &Bestanden"
@@ -1224,10 +1224,10 @@ msgid " Which extension file you want to edit? "
 msgstr " Welk uitbreidingsbestand wilt u bewerken? "
 
 msgid "Highlighting groups file edit"
-msgstr "Markeren groep bestanden te wijzigen"
+msgstr "Oplichten groups bestand aanpassing"
 
 msgid " Which highlighting file you want to edit? "
-msgstr " Welk gemarkeerd bestand wilt u bewerken? "
+msgstr " Welk oplichtings-bestand wilt u bewerken? "
 
 msgid " Compare directories "
 msgstr " Mappen vergelijken"
@@ -1253,7 +1253,7 @@ msgid ""
 " Not an xterm or Linux console; \n"
 " the panels cannot be toggled. "
 msgstr ""
-" Geen XTerm en geen Linux console; \n"
+" Geen xterm en geen Linux console; \n"
 " de vensters kunnen niet geschakeld worden. "
 
 #, c-format
@@ -1349,8 +1349,8 @@ msgid ""
 " deleted your working directory, or given yourself \n"
 " extra access permissions with the \"su\" command? "
 msgstr ""
-" De Commander kan niet zich niet verplaatsen naar de directorie\n"
-" waarin u zich volgens de subshell bevindt.  Heeft u de werkdirectorie \n"
+" De Commander kan niet zich niet verplaatsen naar de map\n"
+" waarin u zich volgens de subshell bevindt.  Heeft u de werkmap \n"
 " verwijderd, of  \"su\" gebruikt? "
 
 #, c-format
@@ -1400,17 +1400,17 @@ msgid ""
 "it."
 msgstr ""
 "De opmaak van het ~/%s bestand is veranderd met versie 3.0. Je kunt het of "
-"kopiÃ«ren van %smc.ext of dat bestand gebruiken als een voorbeeld hoe het te "
+"kopiëren van %smc.ext of dat bestand gebruiken als een voorbeeld hoe het te "
 "schrijven."
 
 msgid "DialogTitle|Copy"
 msgstr "Kopie"
 
 msgid "DialogTitle|Move"
-msgstr "Verplaatsen"
+msgstr "Verplts"
 
 msgid "DialogTitle|Delete"
-msgstr "Verwijderen"
+msgstr "Verwdr"
 
 msgid " Cannot make the hardlink "
 msgstr " Harde link maken mislukt "
@@ -1457,7 +1457,7 @@ msgid ""
 " Cannot stat source file \"%s\" \n"
 " %s "
 msgstr ""
-" Bronbestand \"%s\" kan niet geÃ¯nspecteerd worden \n"
+" Bronbestand \"%s\" kan niet geïnspecteerd worden \n"
 " %s "
 
 #, c-format
@@ -1468,9 +1468,9 @@ msgid ""
 " are the same file "
 msgstr ""
 " `%s' \n"
-" en\n"
+" en \n"
 " `%s' \n"
-" zijn het zelfde bestand "
+" zijn hetzelfde bestand "
 
 #, c-format
 msgid ""
@@ -1512,7 +1512,7 @@ msgid ""
 " Cannot fstat source file \"%s\" \n"
 " %s "
 msgstr ""
-" Bronbestand \"%s\" kan niet geÃ¯nspecteerd worden \n"
+" Bronbestand \"%s\" kan niet geïnspecteerd worden \n"
 " %s "
 
 #, c-format
@@ -1520,7 +1520,7 @@ msgid ""
 " Cannot create target file \"%s\" \n"
 " %s "
 msgstr ""
-" Doelbestand \"%s\" kan niet gecreÃ«erd worden \n"
+" Doelbestand \"%s\" kan niet gecreëerd worden \n"
 " %s "
 
 #, c-format
@@ -1528,7 +1528,7 @@ msgid ""
 " Cannot fstat target file \"%s\" \n"
 " %s "
 msgstr ""
-" Bronbestand \"%s\" kan niet geÃ¯nspecteerd worden \n"
+" Bronbestand \"%s\" kan niet geïnspecteerd worden \n"
 " %s "
 
 #, c-format
@@ -1577,7 +1577,7 @@ msgid ""
 " Cannot stat source directory \"%s\" \n"
 " %s "
 msgstr ""
-" Doelmap \"%s\" kan niet geÃ¯nspecteerd worden\n"
+" Bronmap \"%s\" kan niet geïnspecteerd worden\n"
 " %s "
 
 #, c-format
@@ -1593,7 +1593,7 @@ msgid ""
 " Cannot copy cyclic symbolic link \n"
 " `%s' "
 msgstr ""
-" Een cyclische symbolische link kan niet gekopiÃ«erd worden \n"
+" Een cyclische symbolische link kan niet gekopiëerd worden \n"
 " `%s' "
 
 #, c-format
@@ -1609,7 +1609,7 @@ msgid ""
 " Cannot create target directory \"%s\" \n"
 " %s "
 msgstr ""
-" Doelmap \"%s\" kan niet gecreÃ«erd worden \n"
+" Doelmap \"%s\" kan niet gecreëerd worden \n"
 " %s "
 
 #, c-format
@@ -1625,7 +1625,7 @@ msgid ""
 " Cannot stat file \"%s\" \n"
 " %s "
 msgstr ""
-" Bestand \"%s\" kan niet geÃ¯nspecteerd worden \n"
+" Bestand \"%s\" kan niet geïnspecteerd worden \n"
 " %s "
 
 #, c-format
@@ -1658,7 +1658,7 @@ msgstr ""
 " `%s' \n"
 " en \n"
 " `%s' \n"
-" is dezelfde map "
+" zijn dezelfde map "
 
 #, c-format
 msgid " Cannot overwrite directory \"%s\" %s "
@@ -1693,16 +1693,16 @@ msgstr ""
 " %s "
 
 msgid "Directory scanning"
-msgstr "Directory scannen"
+msgstr "Map scannen"
 
 msgid "FileOperation|Copy"
-msgstr "FileOperation|Kopie"
+msgstr "Kopieer"
 
 msgid "FileOperation|Move"
-msgstr "FileOperation|Verplaatsen"
+msgstr "Verplaats"
 
 msgid "FileOperation|Delete"
-msgstr "FileOperation|Verwijderen"
+msgstr "Verwijder"
 
 #, no-c-format
 msgid "%o %f \"%s\"%m"
@@ -1744,7 +1744,7 @@ msgid " Sorry, I could not put the job in background "
 msgstr " De job kon niet in de achtergrond geplaatst worden "
 
 msgid "&Retry"
-msgstr "Nogmaals"
+msgstr "&Nogmaals"
 
 msgid ""
 "\n"
@@ -1761,7 +1761,7 @@ msgid ""
 "   Delete it recursively? "
 msgstr ""
 "\n"
-"   Achtergrondproces: map is niet leeg \n"
+"   Achtergrondproces: Map is niet leeg \n"
 "   Recursief verwijderen? "
 
 msgid " Delete: "
@@ -1805,7 +1805,7 @@ msgid "Deleting"
 msgstr "Aan het verwijderen"
 
 msgid "Target file already exists!"
-msgstr "Doelbestand bestaat reeds!"
+msgstr "Doelbestand  bestaat reeds!"
 
 #, c-format
 msgid "Source date: %s, size %llu"
@@ -1854,7 +1854,7 @@ msgid "&Stable Symlinks"
 msgstr "&Stabiele symbolische links"
 
 msgid "di&Ve into subdir if exists"
-msgstr "Duik in sub&Map, als deze bestaat"
+msgstr "Ga naar sub&Map, als deze bestaat"
 
 msgid "preserve &Attributes"
 msgstr "&Attributen behouden"
@@ -1867,13 +1867,13 @@ msgstr "naar:"
 
 #, c-format
 msgid "Invalid source pattern `%s'"
-msgstr "Ongeldig bronpatroon `%s' "
+msgstr "Ongeldig bronpatroon `%s'"
 
 msgid "&Suspend"
-msgstr "Opschorten"
+msgstr "&Opschorten"
 
 msgid "Con&tinue"
-msgstr "Doorgaan"
+msgstr "&Doorgaan"
 
 msgid "&Chdir"
 msgstr "&Chdir"
@@ -1882,7 +1882,7 @@ msgid "&Again"
 msgstr "Herh&Alen"
 
 msgid "Pane&lize"
-msgstr "In venster plaaten"
+msgstr "In &venster plaaten"
 
 msgid "&View - F3"
 msgstr "Weerga&Ve - F3"
@@ -1898,28 +1898,28 @@ msgid " Malformed regular expression "
 msgstr " Incorrecte reguliere expressie "
 
 msgid "Cas&e sensitive"
-msgstr "Hoofd-/kleine le&tters gevoelig"
+msgstr "Hoofd-/kleine le&tters"
 
 msgid "&Find recursively"
 msgstr "&Vind recursief"
 
 msgid "S&kip hidden"
-msgstr "Sla verborgen over"
+msgstr "S&la verborgen over"
 
 msgid "&All charsets"
-msgstr "&Alle charsets"
+msgstr "&Alle karaktersets"
 
 msgid "Case sens&itive"
-msgstr "Hoofd-/kleine le&tters gevoelig"
+msgstr "Hoofd-/kleine le&tters"
 
 msgid "Re&gular expression"
 msgstr "&Reguliere expressie"
 
 msgid "Fir&st hit"
-msgstr "Eer&st gevonden"
+msgstr "Eerste &item"
 
 msgid "All cha&rsets"
-msgstr "Alle cha&rsets"
+msgstr "Alle &karaktersets"
 
 msgid "&Tree"
 msgstr "&Boom"
@@ -1967,37 +1967,37 @@ msgid "ButtonBar|Index"
 msgstr "Index"
 
 msgid "ButtonBar|Prev"
-msgstr "Vorig"
+msgstr "Vorige"
 
 msgid "&Remove"
-msgstr "Verwijderen"
+msgstr "Ver&wijderen"
 
 msgid "&Append"
-msgstr "Toevoegen"
+msgstr "&Toevoegen"
 
 msgid "&Insert"
 msgstr "&Invoegen"
 
 msgid "New &Entry"
-msgstr "Nieuw item"
+msgstr "Nieuw &Item"
 
 msgid "New &Group"
 msgstr "Nieuwe &Groep"
 
 msgid "&Up"
-msgstr "Naar boven"
+msgstr "Naar &boven"
 
 msgid "&Add current"
-msgstr "Huidige toevoegen"
+msgstr "&Huidige toevoegen"
 
 msgid "&Refresh"
 msgstr "Ve&rversen"
 
 msgid "Fr&ee VFSs now"
-msgstr "Maak VFS'en nu vrij"
+msgstr "&Maak VFS'en nu vrij"
 
 msgid "Change &To"
-msgstr "Verander in"
+msgstr "Ver&ander in"
 
 msgid "Subgroup - press ENTER to see list"
 msgstr "Subgroep - druk ENTER om de lijst te zien"
@@ -2006,29 +2006,29 @@ msgid "Active VFS directories"
 msgstr "Aktieve VFS-directories"
 
 msgid "Directory hotlist"
-msgstr "Mappen Favolijst"
+msgstr "Map favolijst"
 
 msgid " Directory path "
-msgstr " Directory-pad "
+msgstr " Map pad "
 
 msgid " Directory label "
-msgstr " Directory-label "
+msgstr " Map label "
 
 #, c-format
 msgid "Moving %s"
 msgstr "%s wordt verplaatst"
 
 msgid "New hotlist entry"
-msgstr "Nieuw hotlist item"
+msgstr "Nieuw favolijst item"
 
 msgid "Directory label"
-msgstr "Directory-label"
+msgstr "Map label"
 
 msgid "Directory path"
-msgstr "Directory-pad"
+msgstr "Map pad"
 
 msgid " New hotlist group "
-msgstr " Nieuwe hotlist-groep "
+msgstr " Nieuwe favolijst-groep "
 
 msgid "Name of new group"
 msgstr "Naam van de nieuwe groep"
@@ -2038,7 +2038,7 @@ msgid "Label for \"%s\":"
 msgstr "Naam voor \"%s\":"
 
 msgid " Add to hotlist "
-msgstr " Toevoegen aan hotlist "
+msgstr " Toevoegen aan favolijst "
 
 msgid " Remove: "
 msgstr " Verwijderen "
@@ -2063,11 +2063,13 @@ msgid " Top level group "
 msgstr " Startgroep "
 
 msgid " Hotlist Load "
-msgstr " Hotlist laden "
+msgstr " Favolijst laden "
 
 #, c-format
-msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
-msgstr "MC kon niet schrijven naar ~/%s bestand, uw oude hotlist is niet verwijderd"
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr ""
+"MC kon niet schrijven naar ~/%s bestand, uw oude favolijst is niet verwijderd"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -2149,9 +2151,6 @@ msgstr "Modus:      %s (%04o)"
 msgid "Location:  %Xh:%Xh"
 msgstr "Locatie:       %Xh:%Xh"
 
-msgid "File:       None"
-msgstr "Bestand:      Keine"
-
 msgid "&Vertical"
 msgstr "&Verticaal"
 
@@ -2159,7 +2158,7 @@ msgid "&Horizontal"
 msgstr "&Horizontaal"
 
 msgid "show free sp&Ace"
-msgstr "Toon vrije ruimte"
+msgstr "&Geef vrije ruimte weer"
 
 msgid "&Xterm window title"
 msgstr "&Xterm titelbalk"
@@ -2248,7 +2247,7 @@ msgstr ""
 "Prima."
 
 msgid "&Discard"
-msgstr "Vergeten"
+msgstr "&Vergeten"
 
 msgid ""
 "Great! You have a complete terminal database!\n"
@@ -2264,7 +2263,7 @@ msgid "which keys are not marked with OK.  Press space on the missing"
 msgstr "welke toetsen niet met 'OK' gemarkeerd zijn. Geef een spatie "
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
-msgstr "of klik met de muis om ze te definiÃ«ren. Navigeer met Tab."
+msgstr "of klik met de muis om ze te definiëren. Navigeer met Tab."
 
 msgid " The Midnight Commander "
 msgstr " De Midnight Commander "
@@ -2276,7 +2275,7 @@ msgid "&Listing mode..."
 msgstr "&Lijstmodus...          "
 
 msgid "&Quick view"
-msgstr "Snel bekijken"
+msgstr "&Koerte lijst"
 
 msgid "&Info"
 msgstr "&Info"
@@ -2288,7 +2287,7 @@ msgid "&Filter..."
 msgstr "&Filter...              "
 
 msgid "&Encoding..."
-msgstr "&Encoding..."
+msgstr "&Encodering"
 
 msgid "&Network link..."
 msgstr "&Netwerkverbinding..."
@@ -2303,16 +2302,16 @@ msgid "SM&B link..."
 msgstr "SM&B-Verbinding..."
 
 msgid "&Rescan"
-msgstr "He&rlezen"
+msgstr "&Herlezen"
 
 msgid "&View"
-msgstr "Bekijk"
+msgstr "&Weergv"
 
 msgid "Vie&w file..."
-msgstr "Bekijk bestand.."
+msgstr "&Toon bestand..."
 
 msgid "&Filtered view"
-msgstr " Gefilterde weergave"
+msgstr "&Gefilterde weergave"
 
 msgid "C&hmod"
 msgstr "C&hmod"
@@ -2321,10 +2320,10 @@ msgid "&Link"
 msgstr "&Link"
 
 msgid "&SymLink"
-msgstr "&SymLink"
+msgstr "&Symlink"
 
 msgid "Edit s&ymlink"
-msgstr " S&ymbolische link bewerken"
+msgstr "S&ymbolische link bewerken"
 
 msgid "Ch&own"
 msgstr "Ch&own"
@@ -2333,61 +2332,61 @@ msgid "&Advanced chown"
 msgstr "&Uitgebreide chown"
 
 msgid "&Rename/Move"
-msgstr "He&rnoemen/Verplaatsen"
+msgstr "&Hernoemen"
 
 msgid "&Mkdir"
-msgstr "&Mkdir"
+msgstr "&Mk map"
 
 msgid "&Quick cd"
 msgstr "&Snelle cd"
 
 msgid "Select &group"
-msgstr "Selecteer &groepen"
+msgstr "Instellen &groep"
 
 msgid "U&nselect group"
-msgstr " Deselecteer groep"
+msgstr "&Deselecteer groep"
 
 msgid "Reverse selec&tion"
 msgstr "S&Electie omkeren"
 
 msgid "E&xit"
-msgstr "Be&werk"
+msgstr "&Afsluiten"
 
 msgid "&User menu"
-msgstr " Gebr&uikersmenu"
+msgstr "&Gebruikersmenu"
 
 msgid "&Directory tree"
-msgstr "&MappenhiÃ«rarchie                 "
+msgstr "&Mappenhiërarchie                 "
 
 msgid "&Find file"
 msgstr "Bestand &zoeken"
 
 msgid "S&wap panels"
-msgstr "Panelen om&wisselen"
+msgstr "&Wissel vensters"
 
 msgid "Switch &panels on/off"
-msgstr "Panelen &Aan/uit"
+msgstr "Vensters &Aan/uit              C-o"
 
 msgid "&Compare directories"
-msgstr " Mappen vergelijken"
+msgstr "&Mappen vergelijken"
 
 msgid "E&xternal panelize"
-msgstr "Plaats in extern venster"
+msgstr "&Plaats in extern venster"
 
 msgid "Show directory s&izes"
-msgstr "Toon map&Groottes"
+msgstr "Toon map&Groottes                 "
 
 msgid "Command &history"
-msgstr "&Opdrachthistorie"
+msgstr "&Opdrachtengeschiedenis"
 
 msgid "Di&rectory hotlist"
-msgstr "Mappen Favolijst"
+msgstr "&Mappen favolijst"
 
 msgid "&Active VFS list"
 msgstr "Actieve &VFS-lijst"
 
 msgid "&Background jobs"
-msgstr "Achtergrondtaken"
+msgstr "&Achtergrondtaken"
 
 msgid "&Undelete files (ext2fs only)"
 msgstr "&Herstel bestanden (alleen ext2fs)"
@@ -2402,34 +2401,34 @@ msgid "Edit &menu file"
 msgstr "&Bewerk menubestand               "
 
 msgid "Edit hi&ghlighting group file"
-msgstr "Bewerk gemarkeerd groepbestand"
+msgstr "Pas &oplichten groep bestand aan"
 
 msgid "&Configuration..."
-msgstr "&Configuratie...     "
+msgstr "&Configuratie..."
 
 msgid "&Layout..."
-msgstr "&Vormgeving...       "
+msgstr "&Vormgeving..."
 
 msgid "C&onfirmation..."
 msgstr "&Bevestiging..."
 
 msgid "&Display bits..."
-msgstr "&Weergavebits...     "
+msgstr "&Weergavebits..."
 
 msgid "&Virtual FS..."
-msgstr "&Virtueel FS...      "
+msgstr "&Virtueel FS..."
 
 msgid "&Above"
-msgstr " Boven "
+msgstr "&Boven"
 
 msgid "&Left"
-msgstr " &Links"
+msgstr "&Links"
 
 msgid "&Below"
-msgstr " Onder  "
+msgstr "&Onder"
 
 msgid "&Right"
-msgstr " &Rechts"
+msgstr "&Rechts"
 
 msgid " Information "
 msgstr " Informatie "
@@ -2447,31 +2446,20 @@ msgstr ""
 msgid "ButtonBar|Menu"
 msgstr "Menu"
 
+msgid "ButtonBar|View"
+msgstr "Bekijk"
+
+msgid "ButtonBar|Edit"
+msgstr "Bewerk"
+
+msgid "ButtonBar|RenMov"
+msgstr "Hernoem"
+
+msgid "ButtonBar|Mkdir"
+msgstr "Mkdir"
+
 msgid "The TERM environment variable is unset!\n"
 msgstr "De TERM omgevingsvariabele is niet gezet!\n"
-
-msgid "&Fix it"
-msgstr "Maak het!"
-
-msgid "don't ask again"
-msgstr "vraag niet nog eens"
-
-msgid ""
-"Chosen display charset (Settings->Display bits)\n"
-"or source codeset (in mcedit ctrl-t) \n"
-"does not match one set via locale. \n"
-"Set correct codeset manually or press <<Fix it>> \n"
-"to set locale default.\n"
-"\n"
-"Or set 'don't ask again' and press <<Skip>>"
-msgstr ""
-"Chosen display charset (Settings->Display bits)\n"
-"or source codeset (in mcedit ctrl-t) \n"
-"does not match one set via locale. \n"
-"Set correct codeset manually or press <<Fix it>> \n"
-"to set locale default.\n"
-"\n"
-"Or set 'don't ask again' and press <<Skip>>"
 
 #, c-format
 msgid "Cannot create %s directory"
@@ -2514,7 +2502,7 @@ msgid "&Verbose operation"
 msgstr "Uitvoering met &Weergave"
 
 msgid "Mkdir autoname"
-msgstr "Mkdir autoname"
+msgstr "Mkdie automatisch noemen"
 
 msgid "&Fast dir reload"
 msgstr "Snel herle&Zen"
@@ -2535,7 +2523,7 @@ msgid "show &Backup files"
 msgstr "Toon r&Eservebestanden"
 
 msgid "Use SI si&ze units"
-msgstr "Gebruik SI si&ze units"
+msgstr "Gebruik SI grootte eenheden"
 
 msgid "&Never"
 msgstr "&Nooit"
@@ -2544,7 +2532,7 @@ msgid "on dumb &Terminals"
 msgstr "op domme &Terminals"
 
 msgid "Alwa&ys"
-msgstr "Altijd"
+msgstr "Al&tijd"
 
 msgid " Panel options "
 msgstr " Vensteropties "
@@ -2606,7 +2594,7 @@ msgstr "SUB-DIR"
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|u"
-msgstr "sort|u"
+msgstr "u"
 
 msgid "&Unsorted"
 msgstr "&Ongesorteerd"
@@ -2614,7 +2602,7 @@ msgstr "&Ongesorteerd"
 #. TRANSLATORS: one single character to represent 'name' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|n"
-msgstr "sort|n"
+msgstr "n"
 
 msgid "&Name"
 msgstr "&Naam"
@@ -2622,7 +2610,7 @@ msgstr "&Naam"
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|e"
-msgstr "sort|e"
+msgstr "e"
 
 msgid "&Extension"
 msgstr "&Extensie"
@@ -2630,18 +2618,18 @@ msgstr "&Extensie"
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|s"
-msgstr "sort|s"
+msgstr "s"
 
 msgid "&Size"
 msgstr "&Grootte"
 
 msgid "Block Size"
-msgstr "Blok Grootte "
+msgstr "Blok Grootte"
 
 #. TRANSLATORS: one single character to represent 'Modify time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|m"
-msgstr "sort|m"
+msgstr "m"
 
 msgid "&Modify time"
 msgstr "&Wijzigingstijd"
@@ -2649,7 +2637,7 @@ msgstr "&Wijzigingstijd"
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|a"
-msgstr "sort|a"
+msgstr "a"
 
 msgid "&Access time"
 msgstr "Toegang&Stijd"
@@ -2657,7 +2645,7 @@ msgstr "Toegang&Stijd"
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|h"
-msgstr "sort|h"
+msgstr "h"
 
 msgid "C&Hange time"
 msgstr "&Veranderingstijd"
@@ -2674,7 +2662,7 @@ msgstr "Nl"
 #. TRANSLATORS: one single character to represent 'inode' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|i"
-msgstr "sort|i"
+msgstr "i"
 
 msgid "&Inode"
 msgstr "&Inode"
@@ -2710,32 +2698,21 @@ msgid "Unknown tag on display format: "
 msgstr "Onbekend label in weergaveformaat: "
 
 msgid "User supplied format looks invalid, reverting to default."
-msgstr "Door gebruiker gedefinieerde formaat lijkt onjuist, gebruik de standaard."
+msgstr ""
+"Door gebruiker gedefinieerde formaat lijkt onjuist, gebruik de standaard."
 
 msgid " Do you really want to execute? "
 msgstr " Wilt u die opdracht echt uitvoeren? "
 
-msgid "ButtonBar|View"
-msgstr "Bekijk"
-
-msgid "ButtonBar|Edit"
-msgstr "Bewerk"
-
-msgid "ButtonBar|RenMov"
-msgstr "ButtonBar|HernVerpl"
-
-msgid "ButtonBar|Mkdir"
-msgstr "ButtonBar|Mkdir"
-
 msgid " Not implemented yet "
-msgstr " Nog niet geÃ¯mplementeerd"
+msgstr " Nog niet geimplementeerd "
 
 msgid " Num of replace tokens not equal to num of found tokens "
-msgstr " Aantal vervangende tokens niet gelijk aan aantal gevonden tokens"
+msgstr ""
 
 #, c-format
 msgid " Invalid token number %d "
-msgstr " Ongeldig token nummer %d "
+msgstr ""
 
 msgid "Normal"
 msgstr "Normaal"
@@ -2747,10 +2724,10 @@ msgid "Hexadecimal"
 msgstr "Hexadecimaal"
 
 msgid "Wildcard search"
-msgstr "Zoeken met wildcard"
+msgstr ""
 
 msgid "Choose codepage"
-msgstr " Kies codepagina"
+msgstr "Kies invoerkarakterset"
 
 msgid "-  < No translation >"
 msgstr "- < Geen vertaling >"
@@ -2768,16 +2745,16 @@ msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
 msgstr ""
-"Niet instaat '%s' skin te laden.\n"
-"Default skin wordt gebruikt.."
+"Laden van skin %s mislukt.\n"
+"Standaard skin is geladen"
 
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
 msgstr ""
-"Niet instaat '%s' skin te parsen.\n"
-"Default skin wordt gebruikt.."
+"Verwerken van skin %s mislukt.\n"
+"Standaard skin is geladen"
 
 msgid ""
 "GNU Midnight Commander is already\n"
@@ -2803,16 +2780,16 @@ msgid "With builtin Editor\n"
 msgstr "Met ingebouwde editor\n"
 
 msgid "Using system-installed S-Lang library"
-msgstr "Door het systeem geÃ¯nstalleerd S-Lang bibliotheek zal gebruikt worden."
+msgstr "Door het systeem geïnstalleerd S-Lang bibliotheek zal gebruikt worden."
 
 msgid "with terminfo database"
 msgstr "met terminfo database"
 
 msgid "Using the ncurses library"
-msgstr "De ncurses-bibliotheek wordt gebruikt"
+msgstr "De ncurses-bibliotheek"
 
 msgid "Using the ncursesw library"
-msgstr "De ncurses-bibliotheek wordt gebruikt"
+msgstr "De ncursesw-bibliotheek"
 
 msgid "With optional subshell support"
 msgstr "Met optionele subshell-ondersteuning"
@@ -2852,7 +2829,7 @@ msgstr ""
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
-msgstr "KopiÃ«er de map \"%s\" naar:"
+msgstr "Kopiëer de map \"%s\" naar:"
 
 #, c-format
 msgid "Move \"%s\" directory to:"
@@ -2871,19 +2848,19 @@ msgid "  Delete %s?  "
 msgstr "  %s verwijderen?  "
 
 msgid "ButtonBar|Static"
-msgstr "ButtonBar|Statisch"
+msgstr "Statisch"
 
 msgid "ButtonBar|Dynamc"
-msgstr "ButtonBar|Dynamisch"
+msgstr "Dynam."
 
 msgid "ButtonBar|Rescan"
-msgstr "ButtonBar|Herscan"
+msgstr "Herldn"
 
 msgid "ButtonBar|Forget"
-msgstr "ButtonBar|Vergeet"
+msgstr "Vergeet"
 
 msgid "ButtonBar|Rmdir"
-msgstr "ButtonBar|Rmdir"
+msgstr "Rmdir"
 
 #, c-format
 msgid ""
@@ -3001,6 +2978,9 @@ msgstr "Numeriek /"
 msgid "* on keypad"
 msgstr "Numeriek *"
 
+msgid "Escape key"
+msgstr "Escape"
+
 msgid "Left arrow keypad"
 msgstr "Numeriek pijl links"
 
@@ -3062,16 +3042,16 @@ msgid "Less than"
 msgstr "Minder dan"
 
 msgid "Great than"
-msgstr "Groter dan"
+msgstr "Meer dan"
 
 msgid "Equal"
-msgstr "Gelijk"
+msgstr "Is"
 
 msgid "Comma"
 msgstr "Komma"
 
 msgid "Apostrophe"
-msgstr "Apostrophe"
+msgstr "Apostroph"
 
 msgid "Colon"
 msgstr "Dubbele punt"
@@ -3083,28 +3063,29 @@ msgid "Question mark"
 msgstr "Vraagteken"
 
 msgid "Ampersand"
-msgstr "Ampersand"
+msgstr "En-teken"
 
 msgid "Dollar sign"
-msgstr "Dollar teken"
+msgstr "Dollar"
 
 msgid "Quotation mark"
 msgstr "Aanhalingsteken"
 
 msgid "Caret"
-msgstr "Caret"
+msgstr "Dakje"
 
 msgid "Tilda"
 msgstr "Tilde"
 
+# Enkel aanhalingsteken, terugvallend?
 msgid "Prime"
-msgstr "Accent"
+msgstr ""
 
 msgid "Underline"
-msgstr "Onderlijn"
+msgstr "Onderstreping"
 
 msgid "Understrike"
-msgstr "Underscore"
+msgstr ""
 
 msgid "Pipe"
 msgstr "Pipe"
@@ -3113,19 +3094,19 @@ msgid "Enter"
 msgstr "Enter"
 
 msgid "Tab key"
-msgstr "Tab toets"
+msgstr "Tab"
 
 msgid "Space key"
-msgstr "Spatiebalk"
+msgstr "Spatie"
 
 msgid "Slash key"
-msgstr "Slash key"
+msgstr "Slash /"
 
 msgid "Backslash key"
-msgstr "Backslash"
+msgstr "Backslash \\"
 
 msgid "Number sign #"
-msgstr "Nummer teken #"
+msgstr "Hekje"
 
 msgid "Ctrl"
 msgstr "Ctrl"
@@ -3206,7 +3187,7 @@ msgstr "Kan de rechten niet corrigeren voor de map %s\n"
 
 #, c-format
 msgid "Cannot create temporary directory %s: %s\n"
-msgstr "Tijdelijke map \"%s\" kan niet gecreÃ«erd worden: %s\n"
+msgstr "Tijdelijke map \"%s\" kan niet gecreëerd worden: %s\n"
 
 #, c-format
 msgid "Temporary files will be created in %s\n"
@@ -3253,14 +3234,11 @@ msgstr "Geen uitvoer van kindfilter"
 msgid "ButtonBar|Ascii"
 msgstr "Ascii"
 
-msgid "ButtonBar|Hex"
-msgstr "Hex"
-
 msgid "ButtonBar|Goto"
 msgstr "GaNaar"
 
-msgid "ButtonBar|Line"
-msgstr "Regel"
+msgid "ButtonBar|HxSrch"
+msgstr "HxZoek"
 
 msgid "ButtonBar|UnWrap"
 msgstr "GnOmsl"
@@ -3268,8 +3246,11 @@ msgstr "GnOmsl"
 msgid "ButtonBar|Wrap"
 msgstr "RglOms"
 
-msgid "ButtonBar|HxSrch"
-msgstr "HxZoek"
+msgid "ButtonBar|Hex"
+msgstr "Hex"
+
+msgid "ButtonBar|Line"
+msgstr "Regel"
 
 msgid "ButtonBar|Raw"
 msgstr "Rauw"
@@ -3341,7 +3322,7 @@ msgid " Cannot view: not a regular file "
 msgstr " Bekijken niet mogelijk: geen normaal bestand "
 
 msgid "Seeking to search result"
-msgstr "Onderzoeken zoekresultaat"
+msgstr ""
 
 msgid " History "
 msgstr " Opdrachthistorie "
@@ -3367,14 +3348,6 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"Beschadigde cpio-header gevonden in\n"
-"%s"
-
-#, c-format
-msgid ""
 "Inconsistent hardlinks of\n"
 "%s\n"
 "in cpio archive\n"
@@ -3388,6 +3361,14 @@ msgstr ""
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s bevat duplicaten! Sla over!"
+
+#, c-format
+msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"Beschadigde cpio-header gevonden in\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -3431,7 +3412,7 @@ msgid "fish: Disconnecting from %s"
 msgstr "fish: Verbinding verbreken met %s"
 
 msgid "fish: Waiting for initial line..."
-msgstr "fish: Wachten op initiÃ«le lijn..."
+msgstr "fish: Wachten op initiële lijn..."
 
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Helaas, wachtwoordbeveiligde verbindingen niet mogelijk."
@@ -3443,7 +3424,7 @@ msgid "fish: Sending password..."
 msgstr "fish: wachtwoord wordt verstuurd..."
 
 msgid "fish: Sending initial line..."
-msgstr "fish: initiÃ«le lijn wordt verstuurd..."
+msgstr "fish: initiële lijn wordt verstuurd..."
 
 msgid "fish: Handshaking version..."
 msgstr "fish: versie handshaking..."
@@ -3543,7 +3524,7 @@ msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Aan het wachten op nieuwe poging... %d (Control-C om af te breken)"
 
 msgid "ftpfs: invalid address family"
-msgstr "ftpfs: Ongeldige adresgroep."
+msgstr "ftpfs: Ongeldige adres familie"
 
 #, c-format
 msgid "ftpfs: could not setup passive mode: %s"
@@ -3551,7 +3532,7 @@ msgstr "ftpfs: instellen passieve modus mislukt: %s"
 
 #, c-format
 msgid "ftpfs: could not create socket: %s"
-msgstr "ftpfs: kan socket niet creÃ«ren: %s "
+msgstr "ftpfs: Kan socket niet creëren: %s"
 
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: instellen passieve modus mislukt"
@@ -3626,7 +3607,7 @@ msgstr " Kan machinenaam niet vinden: %s "
 
 #, c-format
 msgid " Cannot create socket: %s "
-msgstr " Kan socket niet creÃ«ren: %s "
+msgstr " Kan socket niet creëren: %s "
 
 #, c-format
 msgid " Cannot connect to server: %s "
@@ -3664,11 +3645,11 @@ msgstr " Authenticatie mislukt "
 
 #, c-format
 msgid " Error %s creating directory %s "
-msgstr " %s mkdir uitvoeren %s "
+msgstr " Fout %s bij aanmaken map %s "
 
 #, c-format
 msgid " Error %s removing directory %s "
-msgstr " %s rmdir uitvoeren %s "
+msgstr " Fout %s bij verwijderen map %s "
 
 #, c-format
 msgid " %s opening remote file %s "
@@ -3680,7 +3661,7 @@ msgstr " %s bestand %s wordt op afstand verwijderd"
 
 #, c-format
 msgid " %s renaming files\n"
-msgstr " %s bestanden herbenoemen\n"
+msgstr " %s bestanden hernoemen\n"
 
 #, c-format
 msgid ""
@@ -3787,4 +3768,3 @@ msgstr "Interne fout:"
 
 msgid "Changes to file lost"
 msgstr "Wijzigingen zijn verloren"
-
