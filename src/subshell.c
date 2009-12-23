@@ -213,10 +213,7 @@ init_subshell_child (const char *pty_name)
 
     /* Configure its terminal modes and window size */
 
-    /* Set up the pty with the same termios flags as our own tty, plus  */
-    /* TOSTOP, which keeps background processes from writing to the pty */
-
-    shell_mode.c_lflag |= TOSTOP;	/* So background writers get SIGTTOU */
+    /* Set up the pty with the same termios flags as our own tty */
     if (tcsetattr (subshell_pty_slave, TCSANOW, &shell_mode)) {
 	fprintf (stderr, "Cannot set pty terminal modes: %s\r\n",
 		 unix_error_string (errno));
