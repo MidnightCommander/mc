@@ -225,7 +225,7 @@ do_read (void)
 
     rpc_get (msock, RPC_INT, &handle, RPC_INT, &count, RPC_END);
     data = malloc (count);
-    if (!data) {
+    if (data == NULL) {
 	send_status (-1, ENOMEM);
 	return;
     }
@@ -234,12 +234,12 @@ do_read (void)
     n = read (handle, data, count);
     if (verbose)
 	printf ("result=%d\n", n);
-    if (n < 0) {
+    if (n < 0)
 	send_status (-1, errno);
-	return;
+    else {
+	send_status (n, 0);
+	rpc_send (msock, RPC_BLOCK, n, data, RPC_END);
     }
-    send_status (n, 0);
-    rpc_send (msock, RPC_BLOCK, n, data, RPC_END);
 
     g_free (data);
 }
