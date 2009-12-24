@@ -332,6 +332,9 @@ save_panel_types (void)
 {
     int type;
 
+    if (! mc_config_get_int(mc_main_config,CONFIG_APP_SECTION,"auto_save_setup_panels",auto_save_setup))
+	return;
+
     type = get_display_type (0);
     panel_save_type ("New Left Panel", type);
     if (type == view_listing)
