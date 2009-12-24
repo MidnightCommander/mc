@@ -48,19 +48,16 @@
 
 #include "../src/global.h"
 
-#include "edit-impl.h"
-#include "edit-widget.h"
-
 #include "../src/search/search.h"	/* search engine */
 
 #include "../src/skin/skin.h"
 
-#include "edit-impl.h"
-#include "edit-widget.h"
-
 #include "../src/main.h"		/* mc_home */
 #include "../src/wtools.h"		/* message() */
 #include "../src/strutil.h"		/* utf string functions */
+
+#include "edit-impl.h"
+#include "edit-widget.h"
 
 /* bytes */
 #define SYNTAX_MARKER_DENSITY 512

@@ -50,6 +50,10 @@
 #include "../src/tty/tty.h"
 #include "../src/tty/key.h"	/* XCTRL */
 
+#include "../src/mcconfig/mcconfig.h"
+
+#include "../src/skin/skin.h"
+
 #include "../src/history.h"
 #include "../src/widget.h"	/* listbox_new() */
 #include "../src/layout.h"	/* clr_scr() */
@@ -59,15 +63,13 @@
 #include "../src/charsets.h"
 #include "../src/selcodepage.h"
 #include "../src/strutil.h"	/* utf string functions */
-#include "../src/mcconfig/mcconfig.h"
-#include "../src/skin/skin.h"		/* mc_skin_color_get */
+#include "../src/cmddef.h"
 
 #include "../vfs/vfs.h"
 
 #include "../edit/edit-impl.h"
 #include "../edit/edit.h"
 #include "../edit/editlock.h"
-#include "../src/cmddef.h"
 #include "../edit/edit-widget.h"
 #include "../edit/editcmd_dialogs.h"
 #include "../edit/etags.h"
