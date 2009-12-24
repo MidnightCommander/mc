@@ -12,6 +12,7 @@ AC_DEFUN([MC_CHECK_SEARCH_TYPE_PCRE],[
     if test x"${PCRE_LIBS}" = x; then
 	AC_MSG_ERROR([Your system don't have pcre library (or pcre devel stuff)])
     else
+	SEARCH_TYPE="pcre"
 	AC_DEFINE(SEARCH_TYPE_PCRE, 1, [Define to select 'pcre' search type])
     fi
 ])
@@ -39,7 +40,6 @@ AC_DEFUN([MC_CHECK_SEARCH_TYPE],[
 	SEARCH_TYPE="glib-regexp"
 	;;
     xpcre)
-	SEARCH_TYPE="pcre"
 	MC_CHECK_SEARCH_TYPE_PCRE
 	;;
     x)
