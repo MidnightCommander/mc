@@ -1891,8 +1891,8 @@ void
 stuff (WInput *in, const char *text, int insert_extra_space)
 {
     input_disable_update (in);
-    while (*text)
-	handle_char (in, *text++);
+    while (*text != '\0')
+	handle_char (in, (unsigned char) *text++); /* unsigned extension char->int */
     if (insert_extra_space)
 	handle_char (in, ' ');
     input_enable_update (in);
