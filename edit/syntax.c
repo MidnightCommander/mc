@@ -133,7 +133,7 @@ destroy_defines (GTree **defines)
 {
     g_tree_traverse (*defines, mc_defines_destroy, G_POST_ORDER, NULL);
     g_tree_destroy (*defines);
-    *defines = 0;
+    *defines = NULL;
 }
 
 static void
@@ -456,7 +456,7 @@ static struct syntax_rule edit_get_rule (WEdit * edit, long byte_index)
 		struct _syntax_marker *s;
 
 		s = edit->syntax_marker;
-		edit->syntax_marker = g_malloc0 (sizeof (struct _syntax_marker));
+		edit->syntax_marker = g_malloc (sizeof (struct _syntax_marker));
 		edit->syntax_marker->next = s;
 		edit->syntax_marker->offset = i;
 		edit->syntax_marker->rule = edit->rule;
@@ -479,7 +479,7 @@ static struct syntax_rule edit_get_rule (WEdit * edit, long byte_index)
 		break;
 	    }
 	    s = edit->syntax_marker->next;
-	    MC_PTR_FREE (edit->syntax_marker);
+	    g_free (edit->syntax_marker);
 	    edit->syntax_marker = s;
 	}
     }
@@ -490,20 +490,19 @@ static struct syntax_rule edit_get_rule (WEdit * edit, long byte_index)
 static inline void
 translate_rule_to_color (WEdit * edit, struct syntax_rule rule, int *color)
 {
-    struct key_word *k;
-
-    k = edit->rules[rule.context]->keyword[rule.keyword];
-    *color = k->color;
+    *color = edit->rules[rule.context]->keyword[rule.keyword]->color;
 }
 
-void edit_get_syntax_color (WEdit * edit, long byte_index, int *color)
+void
+edit_get_syntax_color (WEdit * edit, long byte_index, int *color)
 {
-    if (edit->rules && byte_index < edit->last_byte &&
-                         option_syntax_highlighting && tty_use_colors ()) {
+    if (!tty_use_colors ())
+	*color = 0;
+    else if (edit->rules && byte_index < edit->last_byte &&
+		 option_syntax_highlighting)
 	translate_rule_to_color (edit, edit_get_rule (edit, byte_index), color);
-    } else {
-	*color = tty_use_colors () ? mc_skin_color_get("editor", "_default_") : 0;
-    }
+    else
+	*color = EDITOR_NORMAL_COLOR;
 }
 
 
@@ -512,12 +511,18 @@ void edit_get_syntax_color (WEdit * edit, long byte_index, int *color)
    including the newline. Result must be free'd.
    In case of an error, *line will not be modified.
  */
-static int read_one_line (char **line, FILE * f)
+static size_t
+read_one_line (char **line, FILE *f)
 {
-    GString *p = g_string_new ("");
-    int c, r = 0;
+    GString *p;
+    size_t r = 0;
+
+    /* not reallocate string too often */
+    p = g_string_sized_new (64);
 
     for (;;) {
+	int c;
+
 	c = fgetc (f);
 	if (c == EOF) {
 	    if (ferror (f)) {
@@ -528,25 +533,26 @@ static int read_one_line (char **line, FILE * f)
 	    break;
 	}
 	r++;
+
 	/* handle all of \r\n, \r, \n correctly. */
+	if (c == '\n')
+	    break;
 	if (c == '\r') {
-	    if ( (c = fgetc (f)) == '\n')
+	    c = fgetc (f);
+	    if (c == '\n')
 		r++;
 	    else
 		ungetc (c, f);
 	    break;
 	}
-	if (c == '\n')
-	    break;
 
 	g_string_append_c (p, c);
     }
-    if (r != 0) {
-	*line = p->str;
-	g_string_free (p, FALSE);
-    } else {
+    if (r != 0)
+	*line = g_string_free (p, FALSE);
+    else
 	g_string_free (p, TRUE);
-    }
+
     return r;
 }
 
@@ -705,14 +711,14 @@ static FILE *open_include_file (const char *filename)
 static int
 edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
 {
-    FILE *g = 0;
+    FILE *g = NULL;
     char *fg, *bg;
     char last_fg[32] = "", last_bg[32] = "";
     char whole_right[512];
     char whole_left[512];
     char *l = 0;
     int save_line = 0, line = 0;
-    struct context_rule **r, *c = 0;
+    struct context_rule **r, *c = NULL;
     int num_words = -1, num_contexts = -1;
     int result = 0;
     int argc;
@@ -736,7 +742,7 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
 
 	line++;
 	l = 0;
-	if (!read_one_line (&l, f)) {
+	if (read_one_line (&l, f) == 0) {
 	    if (g) {
 		fclose (f);
 		f = g;
@@ -744,7 +750,7 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
 		line = save_line + 1;
 		MC_PTR_FREE (error_file_name);
 		MC_PTR_FREE (l);
-		if (!read_one_line (&l, f))
+		if (read_one_line (&l, f) == 0)
 		    break;
 	    } else {
 		break;
@@ -963,7 +969,7 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
     {
 	char *first_chars, *p;
 
-	first_chars = g_malloc (max_alloc_words_per_context + 2);
+	first_chars = g_malloc0 (max_alloc_words_per_context + 2);
 
 	for (i = 0; edit->rules[i]; i++) {
 	    c = edit->rules[i];
@@ -981,9 +987,10 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
     return result;
 }
 
-void edit_free_syntax_rules (WEdit * edit)
+void
+edit_free_syntax_rules (WEdit * edit)
 {
-    int i, j;
+    size_t i, j;
 
     if (!edit)
 	return;
@@ -994,7 +1001,6 @@ void edit_free_syntax_rules (WEdit * edit)
 
     edit_get_rule (edit, -1);
     MC_PTR_FREE (edit->syntax_type);
-    edit->syntax_type = 0;
 
     for (i = 0; edit->rules[i]; i++) {
 	if (edit->rules[i]->keyword) {
@@ -1016,7 +1022,7 @@ void edit_free_syntax_rules (WEdit * edit)
 
     while (edit->syntax_marker) {
 	struct _syntax_marker *s = edit->syntax_marker->next;
-	MC_PTR_FREE (edit->syntax_marker);
+	g_free (edit->syntax_marker);
 	edit->syntax_marker = s;
     }
 
@@ -1032,7 +1038,7 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
 {
 #define NENTRIES 30
     FILE *f, *g = NULL;
-    char *args[1024], *l = 0;
+    char *args[1024], *l = NULL;
     int line = 0;
     int result = 0;
     int count = 0;
@@ -1053,7 +1059,7 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
     for (;;) {
 	line++;
 	MC_PTR_FREE (l);
-	if (!read_one_line (&l, f))
+	if (read_one_line (&l, f) == 0)
 	    break;
 	(void)get_args (l, args, 1023);	/* Final NULL */
 	if (!args[0])
