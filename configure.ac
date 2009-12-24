@@ -605,6 +605,7 @@ vfs/extfs/lslR
 vfs/extfs/mailfs
 vfs/extfs/patchfs
 vfs/extfs/rpms
+vfs/extfs/s3
 vfs/extfs/uace
 vfs/extfs/ualz
 vfs/extfs/uar

@@ -23,6 +23,7 @@ EXTFS_IN    = 			\
 	mailfs.in		\
 	patchfs.in		\
 	rpms.in			\
+	s3.in			\
 	uace.in			\
 	ualz.in			\
 	uar.in			\
@@ -50,6 +51,7 @@ EXTFS_OUT = 			\
 	mailfs			\
 	patchfs			\
 	rpms			\
+	s3			\
 	uace			\
 	ualz			\
 	uar			\
