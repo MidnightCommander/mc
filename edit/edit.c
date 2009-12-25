@@ -1526,9 +1526,9 @@ long edit_bol (WEdit * edit, long current)
 }
 
 
-int edit_count_lines (WEdit * edit, long current, int upto)
+long edit_count_lines (WEdit * edit, long current, long upto)
 {
-    int lines = 0;
+    long lines = 0;
     if (upto > edit->last_byte)
 	upto = edit->last_byte;
     if (current < 0)
@@ -1542,12 +1542,12 @@ int edit_count_lines (WEdit * edit, long current, int upto)
 
 /* If lines is zero this returns the count of lines from current to upto. */
 /* If upto is zero returns index of lines forward current. */
-long edit_move_forward (WEdit * edit, long current, int lines, long upto)
+long edit_move_forward (WEdit * edit, long current, long lines, long upto)
 {
     if (upto) {
 	return edit_count_lines (edit, current, upto);
     } else {
-	int next;
+	long next;
 	if (lines < 0)
 	    lines = 0;
 	while (lines--) {
@@ -1563,7 +1563,7 @@ long edit_move_forward (WEdit * edit, long current, int lines, long upto)
 
 
 /* Returns offset of 'lines' lines up from current */
-long edit_move_backward (WEdit * edit, long current, int lines)
+long edit_move_backward (WEdit * edit, long current, long lines)
 {
     if (lines < 0)
 	lines = 0;

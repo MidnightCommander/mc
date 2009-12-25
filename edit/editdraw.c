@@ -612,7 +612,7 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 		  long end_column)
 {
     long row = 0, curs_row;
-    static int prev_curs_row = 0;
+    static long prev_curs_row = 0;
     static long prev_curs = 0;
 
     int force = edit->force;
