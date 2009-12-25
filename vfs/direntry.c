@@ -1,4 +1,3 @@
-
 /** \file
  *  \brief Source: directory cache support
  *
@@ -264,7 +263,7 @@ vfs_s_find_entry_tree (struct vfs_class *me, struct vfs_s_inode *root,
     char *path = pathref;
 
     /* canonicalize as well, but don't remove '../' from path */
-    custom_canonicalize_pathname (path, CANON_PATH_ALL & (~CANON_PATH_RMDBLDT));
+    custom_canonicalize_pathname (path, CANON_PATH_ALL & (~CANON_PATH_REMDOUBLEDOTS));
 
     while (root) {
 	while (*path == PATH_SEP)	/* Strip leading '/' */
@@ -338,7 +337,7 @@ vfs_s_find_entry_linear (struct vfs_class *me, struct vfs_s_inode *root,
 	vfs_die ("We have to use _real_ root. Always. Sorry.");
 
     /* canonicalize as well, but don't remove '../' from path */
-    custom_canonicalize_pathname (path, CANON_PATH_ALL & (~CANON_PATH_RMDBLDT));
+    custom_canonicalize_pathname (path, CANON_PATH_ALL & (~CANON_PATH_REMDOUBLEDOTS));
 
     if (!(flags & FL_DIR)) {
 	char *dirname, *name, *save;
