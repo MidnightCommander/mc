@@ -1806,7 +1806,7 @@ usando el color indicado por medio de la palabra clave
 .I selected.
 Si se activa el resaltado de tipos de archivos, los nombres aparecerán
 coloreados según las reglas almacenadas en el archivo
-@prefix@/etc/mc/filehighlight.ini. Para más información, véase la
+@prefix@/share/mc/filehighlight.ini. Para más información, véase la
 sección sobre
 .\"LINK2"
 Resaltado de nombres\&.
@@ -3148,11 +3148,11 @@ al ejecutar mc.
 3) El parámetro
 .B skin
 en la sección
-.B \[Midnight Commander\]
+.B [Midnight Commander]
 del archivo de configuración.
 .br
 4) El archivo
-.BR @prefix@/etc/mc/skins/default.ini .
+.BR @sysconfdir@/mc/skins/default.ini .
 .br
 5) El archivo
 .BR @prefix@/share/mc/skins/default.ini .
@@ -3167,7 +3167,7 @@ en orden, en:
 .BR ~/.mc/skins/ .
 .br
 2)
-.BR @prefix@/etc/mc/skins/ .
+.BR @sysconfdir@/mc/skins/ .
 .br
 3)
 .BR @prefix@/share/mc/skins/ .
@@ -3460,7 +3460,7 @@ en la sección
 Skins\&.
 .\"Skins"
 .PP
-Reglas de resaltado de nombres en el archivo @prefix@/etc/mc/filehighlight.ini.
+Reglas de resaltado de nombres en el archivo @prefix@/share/mc/filehighlight.ini.
 Los nombres de sección en este archivo tienen que ser iguales a los nombres
 empleados en la sección [filehighlight] del archivo de skin en uso.
 PP.
@@ -3475,7 +3475,7 @@ expresión regular. Si existe se ignora la opción 'extensions'.
 .I extensions
 lista de extensiones de archivos. Separadas por punto y coma.
 .PP
-'type' puede tomar los valores:
+`type' puede tomar los valores:
 .nf
 \- FILE (todos los archivos)
   \- FILE_EXE

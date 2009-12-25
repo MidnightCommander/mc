@@ -335,14 +335,13 @@ or
 3) In config file parameter
 .BR keymap
 in section
-.BR \[Midhight
-.BR Commander\]
+.BR [Midhight Commander]
 .br
 4) File
 .BR ~/.mc/mc.keymap
 .br
 5) File
-.BR @prefix@/etc/mc/mc.keymap
+.BR @sysconfdir@/mc/mc.keymap
 .br
 6) File
 .BR @prefix@/share/mc/mc.keymap
@@ -356,7 +355,7 @@ or without it). Search of keymap\-file will occur in (to the first one found):
 .BR ~/.mc/
 .br
 2)
-.BR @prefix@/etc/mc/
+.BR @sysconfdir@/mc/
 .br
 3)
 .BR @prefix@/share/mc/
@@ -1914,7 +1913,7 @@ which apply to the user running Midnight Commander are highlighted with
 the color defined by the
 .I selected
 keyword.  If the file type highlighting is enabled, file names are colored
-according to rules described in @prefix@/etc/mc/filehighlight.ini file.  See
+according to rules described in @sysconfdir@/mc/filehighlight.ini file. See
 .\"LINK2"
 Filenames Highlight
 .\"Filenames Highlight"
@@ -3284,10 +3283,10 @@ or
 3) In config file parameter
 .B skin
 in section
-.B \[Midnight Commander\]
+.B [Midnight Commander]
 .br
 4) File
-.B @prefix@/etc/mc/skins/default.ini
+.B @sysconfdir@/mc/skins/default.ini
 .br
 5) File
 .B @prefix@/share/mc/skins/default.ini
@@ -3301,7 +3300,7 @@ or without it). Search of skin\-file will occur in (to the first one found):
 .B ~/.mc/skins/
 .br
 2)
-.B @prefix@/etc/mc/skins/
+.B @sysconfdir@/mc/skins/
 .br
 3)
 .B @prefix@/share/mc/skins/
@@ -3593,7 +3592,7 @@ Skins
 .\"Skins"
 section.
 .PP
-Rules of filenames highlight placed in @prefix@/etc/mc/filehighlight.ini file
+Rules of filenames highlight placed in @prefix@/share/mc/filehighlight.ini file
 (~/.mc/filehighlight.ini).
 Name of section in this file must be equal to parameters names into
 [filehighlight] section (in current skin\-file)
@@ -3613,7 +3612,7 @@ list of extensions of files. Separated by ';' sign.
 (make sense only with 'extensions' parameter) make 'extensions'
 rule case sentitive (true) or not (false).
 .PP
-'type' key may have values:
+`type' key may have values:
 .nf
 \- FILE (all files)
   \- FILE_EXE

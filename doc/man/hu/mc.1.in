@@ -1363,7 +1363,7 @@ nem talál ilyen fájlt, az
 keresése a következő lépés, egyébként pedig az mc az alapértelmezett
 rendszerszintű menüt használja, pl.:
 .IR @prefix@/share/mc/mc.menu ,
-esetleg /etc/mc/mc.menu.
+esetleg @sysconfdir@/mc/mc.menu.
 .PP
 A menü fájl formátuma nagyon egyszerű. A sorok, amelyek bármivel
 kezdődhetnek, de a space, vagy a tab megkülönböztetett menübejegyzések
