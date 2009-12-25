@@ -948,7 +948,7 @@ msgid " Confirmation "
 msgstr " Запрос подтверждения "
 
 msgid " confirm di&Rectory hotlist delete "
-msgstr " подтвердите удаление из списка быстрого доступа"
+msgstr "перед удалением из &списка быстрого доступа"
 
 msgid " confirm &Exit "
 msgstr "перед &выходом"
@@ -957,7 +957,7 @@ msgid " confirm e&Xecute "
 msgstr "перед выполнен&ием"
 
 msgid " confirm o&Verwrite "
-msgstr "перед &перезаписью"
+msgstr "перед пере&записью"
 
 msgid " confirm &Delete "
 msgstr "перед &удалением"
@@ -2513,7 +2513,7 @@ msgid "&Verbose operation"
 msgstr "Детали операци&й"
 
 msgid "Mkdir autoname"
-msgstr "Автоимя каталога"
+msgstr "Автоим&я каталога"
 
 msgid "&Fast dir reload"
 msgstr "&Быстрая загрузка каталога"
@@ -2991,9 +2991,8 @@ msgstr "/ доп.клавиатуры "
 msgid "* on keypad"
 msgstr "* доп.клавиатуры "
 
-#, fuzzy
 msgid "Escape key"
-msgstr "Пробел"
+msgstr "Клавиша Esc      "
 
 msgid "Left arrow keypad"
 msgstr "Left доп.клавиатуры"
@@ -3242,7 +3241,7 @@ msgid " Cannot spawn child process "
 msgstr " Невозможно породить дочерний процесс "
 
 msgid "Empty output from child filter"
-msgstr "Дочерний фильтр не вернул данных"
+msgstr "Дочерний фильтр не вернул данные"
 
 msgid "ButtonBar|Ascii"
 msgstr "Ascii"
