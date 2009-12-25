@@ -202,6 +202,9 @@ include debian-description.syntax
 file ..\*\\.([hH][sS][cC]?)$ Haskell\sprogram
 include haskell.syntax
 
+file ..\*\\.([cC][aA][bB][aA][lL])$ Cabal\sconfig\sfile
+include cabal.syntax
+
 file ..\*\\.(n|N)$ Nemerle\sProgram
 include nemerle.syntax
 

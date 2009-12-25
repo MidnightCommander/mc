@@ -5,6 +5,7 @@ SYNTAXFILES =			\
 	assembler.syntax	\
 	awk.syntax		\
 	c.syntax		\
+	cabal.syntax		\
 	changelog.syntax	\
 	cs.syntax		\
 	css.syntax		\

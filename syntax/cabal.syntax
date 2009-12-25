@@ -1,0 +1,257 @@
+# Author   : Mikhail S. Pobolovets
+# Language : cabal
+#
+# haskell.syntax is taken as base
+#
+
+context default
+
+# cabal keywords
+
+#   reserved keywords:
+
+#comments
+    keyword -- brown
+
+#   unused symbols
+    keyword whole _\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] magenta
+
+#   known fields
+    keyword whole author cyan
+    keyword whole bug-reports cyan
+    keyword whole buildable cyan
+    keyword whole build-depends cyan
+    keyword whole build-tools cyan
+    keyword whole build-type cyan
+    keyword whole cabal-version cyan
+    keyword whole category cyan
+    keyword whole cc-options cyan
+    keyword whole copyright cyan
+    keyword whole cpp-options cyan
+    keyword whole c-sources cyan
+    keyword whole data-dir cyan
+    keyword whole data-files cyan
+    keyword whole description cyan
+    keyword whole executable cyan
+    keyword whole exposed-modules cyan
+    keyword whole exposed cyan
+    keyword whole extensions cyan
+    keyword whole extra-lib-dirs cyan
+    keyword whole extra-libraries cyan
+    keyword whole extra-source-files cyan
+    keyword whole extra-tmp-files cyan
+    keyword whole frameworks cyan
+    keyword whole ghc-options cyan
+    keyword whole ghc-prof-options cyan
+    keyword whole ghc-shared-options cyan
+    keyword whole homepage cyan
+    keyword whole hs-source-dirs cyan
+    keyword whole hugs-options cyan
+    keyword whole include-dirs cyan
+    keyword whole includes cyan
+    keyword whole install-includes cyan
+    keyword whole jhc-options cyan
+    keyword whole ld-options cyan
+    keyword whole library cyan
+    keyword whole license-file cyan
+    keyword whole license cyan
+    keyword whole main-is cyan
+    keyword whole maintainer cyan
+    keyword whole name cyan
+    keyword whole nhc98-options cyan
+    keyword whole other-modules cyan
+    keyword whole package-url cyan
+    keyword whole pkgconfig-depends cyan
+    keyword whole stability cyan
+    keyword whole synopsis cyan
+    keyword whole tested-with cyan
+    keyword whole version cyan
+
+#   extended fields
+    keyword whole x\-\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] cyan
+
+#   version wildcard
+    keyword whole -any red
+
+#   commandline keys
+    keyword whole -\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz_0123456789\] brightred
+
+#   known extensions
+    keyword whole Arrows                      brightmagenta
+    keyword whole BangPatterns                brightmagenta
+    keyword whole ConstrainedClassMethods     brightmagenta
+    keyword whole DeriveDataTypeable          brightmagenta
+    keyword whole DisambiguateRecordFields    brightmagenta
+    keyword whole EmptyDataDecls              brightmagenta
+    keyword whole CPP                         brightmagenta
+    keyword whole ExistentialQuantification   brightmagenta
+    keyword whole ExtendedDefaultRules        brightmagenta
+    keyword whole ExtensibleRecords           brightmagenta
+    keyword whole FlexibleContexts            brightmagenta
+    keyword whole FlexibleInstances           brightmagenta
+    keyword whole ForeignFunctionInterface    brightmagenta
+    keyword whole FunctionalDependencies      brightmagenta
+    keyword whole GADTs                       brightmagenta
+    keyword whole GeneralizedNewtypeDeriving  brightmagenta
+    keyword whole Generics                    brightmagenta
+    keyword whole HereDocuments               brightmagenta
+    keyword whole ImplicitParams              brightmagenta
+    keyword whole ImpredicativeTypes          brightmagenta
+    keyword whole IncoherentInstances         brightmagenta
+    keyword whole KindSignatures              brightmagenta
+    keyword whole LiberalTypeSynonyms         brightmagenta
+    keyword whole MagicHash                   brightmagenta
+    keyword whole MultiParamTypeClasses       brightmagenta
+    keyword whole NamedFieldPuns              brightmagenta
+    keyword whole NewQualifiedOperators       brightmagenta
+    keyword whole NoImplicitPrelude           brightmagenta
+    keyword whole NoMonomorphismRestriction   brightmagenta
+    keyword whole NoMonoPatBinds              brightmagenta
+    keyword whole OverlappingInstances        brightmagenta
+    keyword whole OverloadedStrings           brightmagenta
+    keyword whole PackageImports              brightmagenta
+    keyword whole ParallelListComp            brightmagenta
+    keyword whole PatternGuards               brightmagenta
+    keyword whole PatternSignatures           brightmagenta
+    keyword whole PolymorphicComponents       brightmagenta
+    keyword whole PostfixOperators            brightmagenta
+    keyword whole QuasiQuotes                 brightmagenta
+    keyword whole Rank2Types                  brightmagenta
+    keyword whole RankNTypes                  brightmagenta
+    keyword whole RecordPuns                  brightmagenta
+    keyword whole RecordWildCards             brightmagenta
+    keyword whole RecursiveDo                 brightmagenta
+    keyword whole RelaxedPolyRec              brightmagenta
+    keyword whole RestrictedTypeSynonyms      brightmagenta
+    keyword whole ScopedTypeVariables         brightmagenta
+    keyword whole StandaloneDeriving          brightmagenta
+    keyword whole TemplateHaskell             brightmagenta
+    keyword whole TransformListComp           brightmagenta
+    keyword whole TypeFamilies                brightmagenta
+    keyword whole TypeOperators               brightmagenta
+    keyword whole TypeSynonymInstances        brightmagenta
+    keyword whole UnboxedTuples               brightmagenta
+    keyword whole UndecidableInstances        brightmagenta
+    keyword whole UnicodeSyntax               brightmagenta
+    keyword whole UnliftedFFITypes            brightmagenta
+    keyword whole ViewPatterns                brightmagenta
+
+#   links
+    keyword http://+  blue
+    keyword ftp://+   blue
+    keyword git://+   blue
+    keyword cvs://+   blue
+    keyword svn://+   blue
+    keyword darcs://+ blue
+#   emails
+    keyword \<+\>     red
+
+#   build types
+    keyword whole Configure white
+    keyword whole Custom    white
+    keyword whole Make      white
+#   with hack
+    keyword whole Simple\n  white
+    keyword whole Simple\s  white
+
+#   licenses
+    keyword whole AllRightsReserved white
+    keyword whole OtherLicense      white
+    keyword whole PublicDomain      white
+    keyword whole LGPL              white
+    keyword whole GPL               white
+    keyword whole LGPL2             white
+    keyword whole GPL2              white
+    keyword whole LGPL3             white
+    keyword whole GPL3              white
+    keyword whole BSD               white
+    keyword whole BSD3              white
+    keyword whole BSD4              white
+    keyword whole MIT               white
+
+#   compillers
+    keyword whole GHC            white
+    keyword whole NHC            white
+    keyword whole JHC            white
+    keyword whole HBC            white
+    keyword whole Helium         white
+    keyword whole Hugs           white
+
+#   types
+    keyword whole True  white
+    keyword whole False white
+
+#   unboxed (started from upcase)
+#    keyword whole \{ABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]# white
+#   types/modules
+#    keyword whole \{ABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] white
+
+#digits
+    keyword whole 0\{xX\}\{0123456789abcdefABCDEF\}\[0123456789abcdefABCDEF\]       brightgreen
+    keyword whole \{0123456789\}\[0123456789\]      brightgreen
+    keyword whole \[0123456789\]\.\{0123456789\}\[0123456789\]      brightgreen
+    keyword whole \{0123456789\}\[0123456789\]\.\[0123456789\]      brightgreen
+    keyword whole \{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\]    brightgreen
+    keyword whole \{0123456789\}\[0123456789\]\{eE\}\{\-\+\}\{0123456789\}\[0123456789\]    brightgreen
+    keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\]      brightgreen
+    keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{\-\+\}\{0123456789\}\[0123456789\]      brightgreen
+
+
+# some punctuation characters
+    keyword whole $ yellow
+    keyword whole ! white
+    keyword whole && white
+    keyword whole \* yellow
+    keyword whole \+ yellow
+    keyword whole / yellow
+    keyword whole ^ white
+    keyword whole || white
+    keyword whole | white
+
+    keyword ~ white
+    keyword , brightcyan
+    keyword - yellow
+    keyword : brightcyan
+    keyword ; yellow
+    keyword = yellow
+    keyword < yellow
+    keyword > yellow
+    keyword { white
+    keyword } white
+    keyword [ brightcyan
+    keyword ] brightcyan
+    keyword ( brightcyan
+    keyword ) brightcyan
+
+# comments
+context exclusive /\* \*/ brown
+    spellcheck
+
+context exclusive {- -} brown
+    spellcheck
+
+context exclusive // \n brown
+    spellcheck
+
+context exclusive \-\- \n brown
+    spellcheck
+
+context " " green
+    spellcheck
+
+    keyword \\" brightgreen
+    keyword %% brightgreen
+    keyword %\[#0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[L\]\{eEfgGoxX\} brightgreen
+    keyword %\[0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[hl\]\{diuxX\} brightgreen
+    keyword %\[hl\]n brightgreen
+    keyword %\[-\]\[0123456789\*\]\[.\]\[0123456789\*\]s brightgreen
+    keyword %[*] brightgreen
+    keyword %c brightgreen
+    keyword %p brightgreen
+    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
+    keyword \\\\ brightgreen
+    keyword \\' brightgreen
+    keyword \\\{abtnvfr\} brightgreen
+
+# infix binop
+context exclusive ` ` white
