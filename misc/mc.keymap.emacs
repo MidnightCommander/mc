@@ -140,8 +140,8 @@ EditSelectionHistory =
 EditShell = ctrl-o
 EditInsertLiteral = ctrl-q
 
-EditBeginRecordMacro = ctrl-r
-EditEndRecordMacro = ctrl-r
+EditBeginRecordMacro =
+EditEndRecordMacro =
 EditBeginOrEndMacro = ctrl-r
 EditDeleteMacro =
 
