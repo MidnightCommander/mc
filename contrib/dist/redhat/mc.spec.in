@@ -18,7 +18,7 @@ Summary:        User-friendly text console file manager and visual shell
 Name:           mc
 Version:        %{mc_version}
 Release:        1%{?dist}
-Epoch:          1
+Epoch:          2
 License:        GPLv2
 Group:          System Environment/Shells
 Source0:        %{name}-%{mc_tarball}.tar.gz
@@ -152,36 +152,39 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libexecdir}/mc
 
 %changelog
+* Fri Dec 25 2009 Yury V. Zaytsev <yury@shurup.com>
+- Had to bump the epoch because of the braindead versioning scheme used.
+
 * Fri Nov 27 2009 Yury V. Zaytsev <yury@shurup.com>
-- Fixed debug info generation for legacy distros
-- Rewritten and simplified static build procedure
+- Fixed debug info generation for legacy distros.
+- Rewritten and simplified static build procedure.
 
 * Mon Oct 26 2009 Andrew Borodin <aborodin@vmail.ru>
-- Added new %%{_sysconfdir}/mc/mc.keymap.* files
+- Added new %%{_sysconfdir}/mc/mc.keymap.* files.
 
 * Fri Sep 04 2009 Slava Zanko <slavazanko@gmail.com>
-- Add new file %%{_sysconfdir}/mc/filehighlight.ini
+- Add new file %%{_sysconfdir}/mc/filehighlight.ini.
 
 * Sat Aug 01 2009 Yury V. Zaytsev <yury@shurup.com>
-- Fixed EL4 (and supposedly EL3) builds
-- Fixed some of the rpmlint warnings
+- Fixed EL4 (and supposedly EL3) builds.
+- Fixed some of the rpmlint warnings.
 
 * Sat Jul 04 2009 Yury V. Zaytsev <yury@shurup.com>
-- Fix the issue when wrappers were left unpackaged
+- Fix the issue when wrappers were left unpackaged.
 
 * Thu May 21 2009 Slava Zanko <slavazanko@gmail.com>
-- Fix install patches: use %%{_sysconfdir}/mc directory
+- Fix install patches: use %%{_sysconfdir}/mc directory.
 
 * Fri May 8 2009 Slava Zanko <slavazanko@gmail.com>
-- Reviewed spec-file to build on the current distributions
-- Changed build rules
-- Fixed install paths
+- Reviewed spec-file to build on the current distributions.
+- Changed build rules.
+- Fixed install paths.
 
 * Fri Jun 22 2007 Pavel Roskin <proski@gnu.org>
-- Made cons.saver suid vcsa, it's needed for Fedora 7
+- Made cons.saver suid vcsa, it's needed for Fedora 7.
 
 * Thu Dec 21 2006 Pavel Roskin <proski@gnu.org>
-- Don't rely on brace expansion, it may be disabled
+- Don't rely on brace expansion, it may be disabled.
 
 * Mon Jan 30 2006 Pavel Roskin <proski@gnu.org>
 - Avoid using %%{_prefix} where more specialized macros are available.
@@ -292,12 +295,12 @@ rm -rf $RPM_BUILD_ROOT
 - Don't install old icons - they don't exist
 
 * Sat Sep 23 2000 Pavel Roskin <proski@gnu.org>
-- Include translations with mc, not gmc
-- chkconfig --del in %%preun, not %%postun
-- --without-debug not needed
-- /etc/X11/wmconfig not needed
-- /etc/pam.d/mcserv shouldn't be executable
-- New files in %%{prefix}/lib/mc/ - translated hints, editor files
+- Include translations with mc, not gmc.
+- chkconfig --del in %%preun, not %%postun.
+- --without-debug not needed.
+- /etc/X11/wmconfig not needed.
+- /etc/pam.d/mcserv shouldn't be executable.
+- New files in %%{prefix}/lib/mc/ - translated hints, editor files.
 
 * Thu Sep 09 1999 Elliot Lee <sopwith@redhat.com>
 - Include .idl files in the package.
@@ -306,27 +309,27 @@ rm -rf $RPM_BUILD_ROOT
 - Added a build prereq so that rpms get built with documentation ;)
 
 * Mon Jul 12 1999 Kjartan Maraas  <kmaraas@online.no>
-- added help and locale files to %%files
+- Added help and locale files to %%files.
 
 * Tue Jun 22 1999 Vladimir Kondratiev <vkondra@iil.intel.com>
-- added syntax files to %%files
+- Added syntax files to %%files.
 
 * Wed May 26 1999 Cody Russell <bratsche@dfw.net>
-- chmod cons.saver at $RPM_BUILD_ROOT%%{prefix}/lib rather than at
+- Chmod cons.saver at $RPM_BUILD_ROOT%%{prefix}/lib rather than at
   $RPM_BUILD_ROOT/usr/lib. We can now install to somewhere other than /usr.
 
 * Sun Apr 18 1999 Gregory McLean <gregm@comstar.net>
 - Updated the specfile, removed some kludges.
 
 * Thu Aug 20 1998 Michael Fulbright <msf@redhat.com>
-- rebuilt against gnome-libs 0.27 and gtk+-1.1
+- Rebuilt against gnome-libs 0.27 and gtk+-1.1.
 
 * Thu Jul 09 1998 Michael Fulbright <msf@redhat.com>
-- made cons.saver not setuid
+- Made cons.saver not setuid.
 
 * Sun Apr 19 1998 Marc Ewing <marc@redhat.com>
-- removed tkmc
+- Removed tkmc.
 
 * Wed Apr 8 1998 Marc Ewing <marc@redhat.com>
-- add /usr/lib/mc/layout to gmc
+- Add /usr/lib/mc/layout to gmc.
 
