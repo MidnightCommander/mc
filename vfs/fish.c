@@ -248,8 +248,23 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 	    argv[i++] = gbuf;
 	}
 
-	argv[i++] = "-l";
-	argv[i++] = SUP.user;
+	/*
+	 * Add the user name to the ssh command line only if it was explicitly
+	 * set in vfs URL. rsh/ssh will get current user by default
+	 * plus we can set convenient overrides in  ~/.ssh/config (explicit -l
+	 * option breaks it for some)
+	 */
+
+	if (SUP.user) {
+		argv[i++] = "-l";
+		argv[i++] = SUP.user;
+	}
+	else
+	{
+		/* The rest of the code assumes it to be a valid username */
+		SUP.user = vfs_get_local_username();
+	}
+
 	argv[i++] = SUP.host;
 	argv[i++] = "echo FISH:; /bin/sh";
 	argv[i++] = NULL;
@@ -337,7 +352,7 @@ fish_open_archive (struct vfs_class *me, struct vfs_s_super *super,
     (void) archive_name;
 
     p = vfs_split_url (strchr (op, ':') + 1, &host, &user, &flags,
-		       &password, 0, URL_NOSLASH);
+		       &password, 0, URL_NOSLASH | URL_USE_ANONYMOUS);
 
     g_free (p);
 
@@ -358,22 +373,28 @@ fish_archive_same (struct vfs_class *me, struct vfs_s_super *super,
 {
     char *host, *user;
     int flags;
+    int result;
 
     (void) me;
     (void) archive_name;
     (void) cookie;
 
     op = vfs_split_url (strchr (op, ':') + 1, &host, &user, &flags, 0, 0,
-			URL_NOSLASH);
+                        URL_NOSLASH | URL_USE_ANONYMOUS);
 
     g_free (op);
 
-    flags = ((strcmp (host, SUP.host) == 0)
-	     && (strcmp (user, SUP.user) == 0) && (flags == SUP.flags));
+    if (user == NULL)
+        user = vfs_get_local_username();
+
+    result = ((strcmp (host, SUP.host) == 0)
+              && (strcmp (user, SUP.user) == 0)
+              && (flags == SUP.flags));
+
     g_free (host);
     g_free (user);
 
-    return flags;
+    return result;
 }
 
 static int

@@ -249,7 +249,7 @@ ftpfs_split_url(char *path, char **host, char **user, int *port, char **pass)
     char *p;
 
     p = vfs_split_url (path, host, user, port, pass, FTP_COMMAND_PORT,
-		       URL_ALLOW_ANON);
+		       URL_USE_ANONYMOUS);
 
     if (!*user) {
 	/* Look up user and password in netrc */
@@ -656,7 +656,7 @@ ftpfs_get_proxy_host_and_port (const char *proxy, char **host, int *port)
 
     dir =
 	vfs_split_url (proxy, host, &user, port, 0, FTP_COMMAND_PORT,
-		       URL_ALLOW_ANON);
+		       URL_USE_ANONYMOUS);
     g_free (user);
     g_free (dir);
 }
