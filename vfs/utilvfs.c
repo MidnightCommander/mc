@@ -43,8 +43,28 @@
 #include "vfs.h"
 #include "utilvfs.h"
 
-/* Extract the hostname and username from the path */
-/* path is in the form: [user@]hostname:port/remote-dir, e.g.:
+/** Get current username
+ *
+ * @return g_malloc()ed string with the name of the currently logged in
+ *         user ("anonymous" if uid is not registered in the system)
+ */
+char *
+vfs_get_local_username(void)
+{
+    struct passwd * p_i;
+
+    p_i = getpwuid (geteuid ());
+
+    return (p_i && p_i->pw_name)
+           ? g_strdup (p_i->pw_name)
+           : g_strdup ("anonymous"); /* Unknown UID, strange */
+}
+
+#ifdef USE_NETCODE
+
+/**  Extract the hostname and username from the path
+ *
+ * Format of the path is [user@]hostname:port/remote-dir, e.g.:
  *
  * ftp://sunsite.unc.edu/pub/linux
  * ftp://miguel@sphinx.nuclecu.unam.mx/c/nc
@@ -52,20 +72,25 @@
  * ftp://joe@foo.edu:11321/private
  * ftp://joe:password@foo.se
  *
- * Returns g_malloc()ed host, user and pass they are present.
- * If the user is empty, e.g. ftp://@roxanne/private, and URL_ALLOW_ANON
- * is not set, then the current login name is supplied.
+ * @param path is an input string to be parsed
+ * @param host is an outptun g_malloc()ed hostname
+ * @param user is an outptut g_malloc()ed username
+ *             (NULL if not specified)
+ * @param port is an outptut integer port number
+ * @param pass is an outptut g_malloc()ed password
+ * @param default_port is an input default port
+ * @param flags are parsing modifier flags (@see VFS_URL_FLAGS)
  *
- * Return value is a g_malloc()ed string with the pathname relative to the
- * host.
+ * @return g_malloc()ed host, user and pass if they are present.
+ *         If the user is empty, e.g. ftp://@roxanne/private, and URL_USE_ANONYMOUS
+ *         is not set, then the current login name is supplied.
+ *         Return value is a g_malloc()ed string with the pathname relative to the
+ *         host.
  */
-
-#ifdef USE_NETCODE
 char *
 vfs_split_url (const char *path, char **host, char **user, int *port,
-	       char **pass, int default_port, int flags)
+	       char **pass, int default_port, enum VFS_URL_FLAGS flags)
 {
-    struct passwd *passwd_info;
     char *dir, *colon, *inner_colon, *at, *rest;
     char *retval;
     char * const pcopy = g_strdup (path);
@@ -112,16 +137,8 @@ vfs_split_url (const char *path, char **host, char **user, int *port,
     } else
 	rest = pcopy;
 
-    if (!*user && !(flags & URL_ALLOW_ANON)) {
-	passwd_info = getpwuid (geteuid ());
-	if (passwd_info && passwd_info->pw_name)
-	    *user = g_strdup (passwd_info->pw_name);
-	else {
-	    /* This is very unlikely to happen */
-	    *user = g_strdup ("anonymous");
-	}
-	endpwent ();
-    }
+    if (!*user && !(flags & URL_USE_ANONYMOUS))
+        *user = vfs_get_local_username();
 
     /* Check if the host comes with a port spec, if so, chop it */
     if ('[' == *rest) {
