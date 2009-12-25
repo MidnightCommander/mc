@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 4.7.0pre4\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-30 00:55+0100\n"
-"PO-Revision-Date: 2009-10-28 01:40+0200\n"
+"Project-Id-Version: 4.7.0\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-12-25 19:06+0200\n"
+"PO-Revision-Date: 2009-12-24 09:40+0100\n"
 "Last-Translator: David Martín <dmartina@excite.com\n"
 "Language-Team: Spanish <debian-l10n-spanish@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -2147,9 +2147,6 @@ msgstr "Modo:       %s (%04o)"
 msgid "Location:  %Xh:%Xh"
 msgstr "Ubicado:    %Xh:%Xh"
 
-msgid "File:       None"
-msgstr "Archivo:     Ninguno"
-
 msgid "&Vertical"
 msgstr "&Vertical"
 
@@ -2446,31 +2443,20 @@ msgstr ""
 msgid "ButtonBar|Menu"
 msgstr "Menú"
 
+msgid "ButtonBar|View"
+msgstr "Ver"
+
+msgid "ButtonBar|Edit"
+msgstr "Editar"
+
+msgid "ButtonBar|RenMov"
+msgstr "RenMov"
+
+msgid "ButtonBar|Mkdir"
+msgstr "Mkdir"
+
 msgid "The TERM environment variable is unset!\n"
 msgstr "¡La variable de entorno TERM está sin definir!\n"
-
-msgid "&Fix it"
-msgstr "&Reparar"
-
-msgid "don't ask again"
-msgstr "no preguntar de nuevo"
-
-msgid ""
-"Chosen display charset (Settings->Display bits)\n"
-"or source codeset (in mcedit ctrl-t) \n"
-"does not match one set via locale. \n"
-"Set correct codeset manually or press <<Fix it>> \n"
-"to set locale default.\n"
-"\n"
-"Or set 'don't ask again' and press <<Skip>>"
-msgstr ""
-"La codificación de caracteres en pantalla (ver\n"
-"Opciones->Juego de caracteres) o en edición (en\n"
-"mcedit, Ctrl-t) no coinciden con la localización\n"
-"del sistema. Corríjalo a mano o pulse «Reparar»\n"
-"para ajustarlos a la localización.\n"
-"\n"
-"También puede elegir \"no preguntar\" y «Saltar»."
 
 #, c-format
 msgid "Cannot create %s directory"
@@ -2713,18 +2699,6 @@ msgstr "Formato no parece válido. Recuperando el predeterminado."
 
 msgid " Do you really want to execute? "
 msgstr " ¿Realmente quiere ejecutar?"
-
-msgid "ButtonBar|View"
-msgstr "Ver"
-
-msgid "ButtonBar|Edit"
-msgstr "Editar"
-
-msgid "ButtonBar|RenMov"
-msgstr "RenMov"
-
-msgid "ButtonBar|Mkdir"
-msgstr "Mkdir"
 
 msgid " Not implemented yet "
 msgstr " No implementado todavía "
@@ -3000,6 +2974,9 @@ msgstr "Diagonal, pad"
 msgid "* on keypad"
 msgstr "* en el pad"
 
+msgid "Escape key"
+msgstr "Tecla Escape"
+
 msgid "Left arrow keypad"
 msgstr "Flecha izquierda, pad"
 
@@ -3251,14 +3228,11 @@ msgstr "Salida del filtro vacía"
 msgid "ButtonBar|Ascii"
 msgstr "Ascii"
 
-msgid "ButtonBar|Hex"
-msgstr "Hex"
-
 msgid "ButtonBar|Goto"
 msgstr "Ir a"
 
-msgid "ButtonBar|Line"
-msgstr "Línea"
+msgid "ButtonBar|HxSrch"
+msgstr "BúsqHx"
 
 msgid "ButtonBar|UnWrap"
 msgstr "Desple"
@@ -3266,8 +3240,11 @@ msgstr "Desple"
 msgid "ButtonBar|Wrap"
 msgstr "Plegar"
 
-msgid "ButtonBar|HxSrch"
-msgstr "BúsqHx"
+msgid "ButtonBar|Hex"
+msgstr "Hex"
+
+msgid "ButtonBar|Line"
+msgstr "Línea"
 
 msgid "ButtonBar|Raw"
 msgstr "Crudo"
@@ -3367,14 +3344,6 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"Cabecera cpio corrupta encontrada en\n"
-"%s"
-
-#, c-format
-msgid ""
 "Inconsistent hardlinks of\n"
 "%s\n"
 "in cpio archive\n"
@@ -3388,6 +3357,14 @@ msgstr ""
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr "¡%s contiene entradas duplicadas! ¡Ignorando!"
+
+#, c-format
+msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"Cabecera cpio corrupta encontrada en\n"
+"%s"
 
 #, c-format
 msgid ""
