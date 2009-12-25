@@ -263,7 +263,8 @@ vfs_s_find_entry_tree (struct vfs_class *me, struct vfs_s_inode *root,
     char * const pathref = g_strdup (a_path);
     char *path = pathref;
 
-    canonicalize_pathname (path);
+    /* canonicalize as well, but don't remove '../' from path */
+    custom_canonicalize_pathname (path, CANON_PATH_ALL & (~CANON_PATH_RMDBLDT));
 
     while (root) {
 	while (*path == PATH_SEP)	/* Strip leading '/' */
@@ -336,7 +337,8 @@ vfs_s_find_entry_linear (struct vfs_class *me, struct vfs_s_inode *root,
     if (root->super->root != root)
 	vfs_die ("We have to use _real_ root. Always. Sorry.");
 
-    canonicalize_pathname (path);
+    /* canonicalize as well, but don't remove '../' from path */
+    custom_canonicalize_pathname (path, CANON_PATH_ALL & (~CANON_PATH_RMDBLDT));
 
     if (!(flags & FL_DIR)) {
 	char *dirname, *name, *save;

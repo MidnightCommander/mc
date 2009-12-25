@@ -457,14 +457,14 @@ close_error_pipe (int error, const char *text)
  * Well formed UNC paths are modified only in the local part.
  */
 void
-canonicalize_pathname (char *path)
+custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
 {
     char *p, *s;
     int len;
     char *lpath = path;	/* path without leading UNC part */
 
     /* Detect and preserve UNC paths: //server/... */
-    if (path[0] == PATH_SEP && path[1] == PATH_SEP) {
+    if ( ( flags & CANON_PATH_GUARDUNC ) && path[0] == PATH_SEP && path[1] == PATH_SEP) {
 	p = path + 2;
 	while (p[0] && p[0] != '/')
 	    p++;
@@ -475,110 +475,124 @@ canonicalize_pathname (char *path)
     if (!lpath[0] || !lpath[1])
 	return;
 
-    /* Collapse multiple slashes */
-    p = lpath;
-    while (*p) {
-	if (p[0] == PATH_SEP && p[1] == PATH_SEP) {
-	    s = p + 1;
-	    while (*(++s) == PATH_SEP);
-	    str_move (p + 1, s);
-	}
-	p++;
-    }
-
-    /* Collapse "/./" -> "/" */
-    p = lpath;
-    while (*p) {
-	if (p[0] == PATH_SEP && p[1] == '.' && p[2] == PATH_SEP)
-	    str_move (p, p + 2);
-	else
+    if ( flags & CANON_PATH_JOINSLASHES ) {
+	/* Collapse multiple slashes */
+	p = lpath;
+	while (*p) {
+	    if (p[0] == PATH_SEP && p[1] == PATH_SEP) {
+		s = p + 1;
+		while (*(++s) == PATH_SEP);
+		str_move (p + 1, s);
+	    }
 	    p++;
-    }
-
-    /* Remove trailing slashes */
-    p = lpath + strlen (lpath) - 1;
-    while (p > lpath && *p == PATH_SEP)
-	*p-- = 0;
-
-    /* Remove leading "./" */
-    if (lpath[0] == '.' && lpath[1] == PATH_SEP) {
-	if (lpath[2] == 0) {
-	    lpath[1] = 0;
-	    return;
-	} else {
-	    str_move (lpath, lpath + 2);
 	}
     }
 
-    /* Remove trailing "/" or "/." */
-    len = strlen (lpath);
-    if (len < 2)
-	return;
-    if (lpath[len - 1] == PATH_SEP) {
-	lpath[len - 1] = 0;
-    } else {
-	if (lpath[len - 1] == '.' && lpath[len - 2] == PATH_SEP) {
-	    if (len == 2) {
+    if ( flags & CANON_PATH_JOINSLASHES ) {
+	/* Collapse "/./" -> "/" */
+	p = lpath;
+	while (*p) {
+	    if (p[0] == PATH_SEP && p[1] == '.' && p[2] == PATH_SEP)
+		str_move (p, p + 2);
+	    else
+		p++;
+	}
+    }
+
+    if ( flags & CANON_PATH_REMSLASHDOTS ) {
+	/* Remove trailing slashes */
+	p = lpath + strlen (lpath) - 1;
+	while (p > lpath && *p == PATH_SEP)
+	    *p-- = 0;
+
+	/* Remove leading "./" */
+	if (lpath[0] == '.' && lpath[1] == PATH_SEP) {
+	    if (lpath[2] == 0) {
 		lpath[1] = 0;
 		return;
 	    } else {
-		lpath[len - 2] = 0;
+		str_move (lpath, lpath + 2);
+	    }
+	}
+
+	/* Remove trailing "/" or "/." */
+	len = strlen (lpath);
+	if (len < 2)
+	    return;
+	if (lpath[len - 1] == PATH_SEP) {
+	    lpath[len - 1] = 0;
+	} else {
+	    if (lpath[len - 1] == '.' && lpath[len - 2] == PATH_SEP) {
+		if (len == 2) {
+		    lpath[1] = 0;
+		    return;
+		} else {
+		    lpath[len - 2] = 0;
+		}
 	    }
 	}
     }
 
-    /* Collapse "/.." with the previous part of path */
-    p = lpath;
-    while (p[0] && p[1] && p[2]) {
-	if ((p[0] != PATH_SEP || p[1] != '.' || p[2] != '.')
-	    || (p[3] != PATH_SEP && p[3] != 0)) {
-	    p++;
-	    continue;
-	}
+    if ( flags & CANON_PATH_REMDOUBLEDOTS ) {
+	/* Collapse "/.." with the previous part of path */
+	p = lpath;
+	while (p[0] && p[1] && p[2]) {
+	    if ((p[0] != PATH_SEP || p[1] != '.' || p[2] != '.')
+		|| (p[3] != PATH_SEP && p[3] != 0)) {
+		p++;
+		continue;
+	    }
 
-	/* search for the previous token */
-	s = p - 1;
-	while (s >= lpath && *s != PATH_SEP)
-	    s--;
+	    /* search for the previous token */
+	    s = p - 1;
+	    while (s >= lpath && *s != PATH_SEP)
+		s--;
 
-	s++;
+	    s++;
 
-	/* If the previous token is "..", we cannot collapse it */
-	if (s[0] == '.' && s[1] == '.' && s + 2 == p) {
-	    p += 3;
-	    continue;
-	}
+	    /* If the previous token is "..", we cannot collapse it */
+	    if (s[0] == '.' && s[1] == '.' && s + 2 == p) {
+		p += 3;
+		continue;
+	    }
 
-	if (p[3] != 0) {
-	    if (s == lpath && *s == PATH_SEP) {
-		/* "/../foo" -> "/foo" */
-		str_move (s + 1, p + 4);
+	    if (p[3] != 0) {
+		if (s == lpath && *s == PATH_SEP) {
+		    /* "/../foo" -> "/foo" */
+		    str_move (s + 1, p + 4);
+		} else {
+		    /* "token/../foo" -> "foo" */
+		    str_move (s, p + 4);
+		}
+		p = (s > lpath) ? s - 1 : s;
+		continue;
+	    }
+
+	    /* trailing ".." */
+	    if (s == lpath) {
+		/* "token/.." -> "." */
+		if (lpath[0] != PATH_SEP) {
+		    lpath[0] = '.';
+		}
+		lpath[1] = 0;
 	    } else {
-		/* "token/../foo" -> "foo" */
-		str_move (s, p + 4);
+		/* "foo/token/.." -> "foo" */
+		if (s == lpath + 1)
+		    s[0] = 0;
+		else
+		    s[-1] = 0;
+		break;
 	    }
-	    p = (s > lpath) ? s - 1 : s;
-	    continue;
-	}
 
-	/* trailing ".." */
-	if (s == lpath) {
-	    /* "token/.." -> "." */
-	    if (lpath[0] != PATH_SEP) {
-		lpath[0] = '.';
-	    }
-	    lpath[1] = 0;
-	} else {
-	    /* "foo/token/.." -> "foo" */
-	    if (s == lpath + 1)
-		s[0] = 0;
-	    else
-		s[-1] = 0;
 	    break;
 	}
-
-	break;
     }
+}
+
+void
+canonicalize_pathname (char *path)
+{
+    custom_canonicalize_pathname (path, CANON_PATH_ALL);
 }
 
 #ifdef HAVE_GET_PROCESS_STATS
