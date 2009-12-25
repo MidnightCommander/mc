@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-30 10:39+0200\n"
+"POT-Creation-Date: 2009-12-25 19:06+0200\n"
 "PO-Revision-Date: 2001-05-25 13:35+0200\n"
 "Last-Translator: Mari Susperregi <mari@elhuyar.com>\n"
 "Language-Team: Euskara <debian-l10n-basque@lists.debian.org>\n"
@@ -2229,9 +2229,6 @@ msgstr "Modua:     %s (%04o)"
 msgid "Location:  %Xh:%Xh"
 msgstr "Kokalekua:  %Xh:%Xh"
 
-msgid "File:       None"
-msgstr "Fitxategia: Bat ere ez"
-
 msgid "&Vertical"
 msgstr "&Bertikalki"
 
@@ -2565,24 +2562,20 @@ msgstr ""
 msgid "ButtonBar|Menu"
 msgstr ""
 
+msgid "ButtonBar|View"
+msgstr ""
+
+msgid "ButtonBar|Edit"
+msgstr ""
+
+msgid "ButtonBar|RenMov"
+msgstr ""
+
+msgid "ButtonBar|Mkdir"
+msgstr ""
+
 msgid "The TERM environment variable is unset!\n"
 msgstr "TERM ingurune-aldagaia ez dago konfiguratuta!\n"
-
-msgid "&Fix it"
-msgstr ""
-
-msgid "don't ask again"
-msgstr ""
-
-msgid ""
-"Chosen display charset (Settings->Display bits)\n"
-"or source codeset (in mcedit ctrl-t) \n"
-"does not match one set via locale. \n"
-"Set correct codeset manually or press <<Fix it>> \n"
-"to set locale default.\n"
-"\n"
-"Or set 'don't ask again' and press <<Skip>>"
-msgstr ""
 
 #, fuzzy, c-format
 msgid "Cannot create %s directory"
@@ -2829,18 +2822,6 @@ msgstr "Erabiltzaileak emandako formatua baliogabea da, lehenetsira itzultzen."
 
 msgid " Do you really want to execute? "
 msgstr "Ziur zaude exekutatu nahi duzula? "
-
-msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
-msgstr ""
-
-msgid "ButtonBar|RenMov"
-msgstr ""
-
-msgid "ButtonBar|Mkdir"
-msgstr ""
 
 msgid " Not implemented yet "
 msgstr ""
@@ -3109,6 +3090,10 @@ msgstr "Barra zenbakizko teklatuan"
 
 msgid "* on keypad"
 msgstr "* zenbakizko teklatuan"
+
+#, fuzzy
+msgid "Escape key"
+msgstr "Barra zenbakizko teklatuan"
 
 msgid "Left arrow keypad"
 msgstr "Ezker-gezia, zenbakizko teklatuan "
@@ -3384,13 +3369,10 @@ msgstr ""
 msgid "ButtonBar|Ascii"
 msgstr ""
 
-msgid "ButtonBar|Hex"
-msgstr ""
-
 msgid "ButtonBar|Goto"
 msgstr ""
 
-msgid "ButtonBar|Line"
+msgid "ButtonBar|HxSrch"
 msgstr ""
 
 msgid "ButtonBar|UnWrap"
@@ -3399,7 +3381,10 @@ msgstr ""
 msgid "ButtonBar|Wrap"
 msgstr ""
 
-msgid "ButtonBar|HxSrch"
+msgid "ButtonBar|Hex"
+msgstr ""
+
+msgid "ButtonBar|Line"
 msgstr ""
 
 msgid "ButtonBar|Raw"
@@ -3493,14 +3478,6 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"cpio-ren goiburukoa hondatuta aurkitu da\n"
-"%s(e)n"
-
-#, c-format
-msgid ""
 "Inconsistent hardlinks of\n"
 "%s\n"
 "in cpio archive\n"
@@ -3514,6 +3491,14 @@ msgstr ""
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s(e)k sarrera bikoiztuak ditu! Saltatzen!"
+
+#, c-format
+msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"cpio-ren goiburukoa hondatuta aurkitu da\n"
+"%s(e)n"
 
 #, c-format
 msgid ""
@@ -3917,6 +3902,9 @@ msgstr "Barne-errorea:"
 msgid "Changes to file lost"
 msgstr "Fitxategiko aldaketak galdu egin dira"
 
+#~ msgid "File:       None"
+#~ msgstr "Fitxategia: Bat ere ez"
+
 #~ msgid "Do backups -->"
 #~ msgstr "Egin babeskopiak -->"
 
@@ -4237,10 +4225,6 @@ msgstr "Fitxategiko aldaketak galdu egin dira"
 
 #~ msgid "Rmdir"
 #~ msgstr "Rmdir"
-
-#, fuzzy
-#~ msgid "Escape key"
-#~ msgstr "Barra zenbakizko teklatuan"
 
 #, fuzzy
 #~ msgid "bind: Unknown command: `%s'"

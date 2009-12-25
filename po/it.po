@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.6.2\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-30 10:39+0200\n"
+"POT-Creation-Date: 2009-12-25 19:06+0200\n"
 "PO-Revision-Date: 2008-04-07 17:25+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian <debian-l10n-italian@lists.debian.org>\n"
@@ -2233,9 +2233,6 @@ msgstr "Permessi:   %s (%04o)"
 msgid "Location:  %Xh:%Xh"
 msgstr "Posizione:  %Xh:%Xh"
 
-msgid "File:       None"
-msgstr "File:       nessuno"
-
 msgid "&Vertical"
 msgstr "&Verticale"
 
@@ -2566,24 +2563,22 @@ msgstr ""
 msgid "ButtonBar|Menu"
 msgstr "Esadec"
 
+msgid "ButtonBar|View"
+msgstr "Mostra"
+
+msgid "ButtonBar|Edit"
+msgstr "Modif"
+
+#, fuzzy
+msgid "ButtonBar|RenMov"
+msgstr "Esadec"
+
+#, fuzzy
+msgid "ButtonBar|Mkdir"
+msgstr "Modif"
+
 msgid "The TERM environment variable is unset!\n"
 msgstr "La variabile TERM non è definita!\n"
-
-msgid "&Fix it"
-msgstr ""
-
-msgid "don't ask again"
-msgstr ""
-
-msgid ""
-"Chosen display charset (Settings->Display bits)\n"
-"or source codeset (in mcedit ctrl-t) \n"
-"does not match one set via locale. \n"
-"Set correct codeset manually or press <<Fix it>> \n"
-"to set locale default.\n"
-"\n"
-"Or set 'don't ask again' and press <<Skip>>"
-msgstr ""
 
 #, fuzzy, c-format
 msgid "Cannot create %s directory"
@@ -2829,20 +2824,6 @@ msgstr "Il formato utente fornito è errato, uso il default."
 
 msgid " Do you really want to execute? "
 msgstr " Vuoi veramente eseguirlo?"
-
-msgid "ButtonBar|View"
-msgstr "Mostra"
-
-msgid "ButtonBar|Edit"
-msgstr "Modif"
-
-#, fuzzy
-msgid "ButtonBar|RenMov"
-msgstr "Esadec"
-
-#, fuzzy
-msgid "ButtonBar|Mkdir"
-msgstr "Modif"
 
 msgid " Not implemented yet "
 msgstr ""
@@ -3121,6 +3102,10 @@ msgstr "/ sul tastierino"
 msgid "* on keypad"
 msgstr "* sul tastierino "
 
+#, fuzzy
+msgid "Escape key"
+msgstr "/ sul tastierino"
+
 msgid "Left arrow keypad"
 msgstr "Freccia a sinistra sul tastierino"
 
@@ -3388,14 +3373,11 @@ msgstr "Risultato vuoto da filtro figlio"
 msgid "ButtonBar|Ascii"
 msgstr "Testo"
 
-msgid "ButtonBar|Hex"
-msgstr "Esadec"
-
 msgid "ButtonBar|Goto"
 msgstr "Vai.."
 
-msgid "ButtonBar|Line"
-msgstr "Riga"
+msgid "ButtonBar|HxSrch"
+msgstr "CercE"
 
 msgid "ButtonBar|UnWrap"
 msgstr "NoACapo"
@@ -3403,8 +3385,11 @@ msgstr "NoACapo"
 msgid "ButtonBar|Wrap"
 msgstr "ACapo"
 
-msgid "ButtonBar|HxSrch"
-msgstr "CercE"
+msgid "ButtonBar|Hex"
+msgstr "Esadec"
+
+msgid "ButtonBar|Line"
+msgstr "Riga"
 
 msgid "ButtonBar|Raw"
 msgstr "Normale"
@@ -3502,14 +3487,6 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"Trovata intestazione cpio rovinata in\n"
-"%s"
-
-#, c-format
-msgid ""
 "Inconsistent hardlinks of\n"
 "%s\n"
 "in cpio archive\n"
@@ -3523,6 +3500,14 @@ msgstr ""
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s contiene voci duplicate! Saltato!"
+
+#, c-format
+msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"Trovata intestazione cpio rovinata in\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -3924,6 +3909,9 @@ msgstr " Errore interno:"
 msgid "Changes to file lost"
 msgstr "Cambiamenti al file persi"
 
+#~ msgid "File:       None"
+#~ msgstr "File:       nessuno"
+
 #~ msgid "Do backups -->"
 #~ msgstr "Fai i salvataggi -->"
 
@@ -4240,10 +4228,6 @@ msgstr "Cambiamenti al file persi"
 
 #~ msgid "Rmdir"
 #~ msgstr "CancDir"
-
-#, fuzzy
-#~ msgid "Escape key"
-#~ msgstr "/ sul tastierino"
 
 #~ msgid "bind: Wrong argument number, bind <key> <command>"
 #~ msgstr "bind: errato numero di argomenti, bind <tasto> <comando>"

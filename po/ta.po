@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-30 10:39+0200\n"
+"POT-Creation-Date: 2009-12-25 19:06+0200\n"
 "PO-Revision-Date: 2000-10-26 11:00 CST\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil <ubuntu-l10n-tam@lists.ubuntu.com>\n"
@@ -2076,9 +2076,6 @@ msgstr ""
 msgid "Location:  %Xh:%Xh"
 msgstr ""
 
-msgid "File:       None"
-msgstr ""
-
 msgid "&Vertical"
 msgstr ""
 
@@ -2373,23 +2370,19 @@ msgstr ""
 msgid "ButtonBar|Menu"
 msgstr ""
 
+msgid "ButtonBar|View"
+msgstr ""
+
+msgid "ButtonBar|Edit"
+msgstr ""
+
+msgid "ButtonBar|RenMov"
+msgstr ""
+
+msgid "ButtonBar|Mkdir"
+msgstr ""
+
 msgid "The TERM environment variable is unset!\n"
-msgstr ""
-
-msgid "&Fix it"
-msgstr ""
-
-msgid "don't ask again"
-msgstr ""
-
-msgid ""
-"Chosen display charset (Settings->Display bits)\n"
-"or source codeset (in mcedit ctrl-t) \n"
-"does not match one set via locale. \n"
-"Set correct codeset manually or press <<Fix it>> \n"
-"to set locale default.\n"
-"\n"
-"Or set 'don't ask again' and press <<Skip>>"
 msgstr ""
 
 #, fuzzy, c-format
@@ -2632,18 +2625,6 @@ msgid "User supplied format looks invalid, reverting to default."
 msgstr ""
 
 msgid " Do you really want to execute? "
-msgstr ""
-
-msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
-msgstr ""
-
-msgid "ButtonBar|RenMov"
-msgstr ""
-
-msgid "ButtonBar|Mkdir"
 msgstr ""
 
 msgid " Not implemented yet "
@@ -2907,6 +2888,9 @@ msgstr ""
 msgid "* on keypad"
 msgstr ""
 
+msgid "Escape key"
+msgstr ""
+
 msgid "Left arrow keypad"
 msgstr ""
 
@@ -3154,13 +3138,10 @@ msgstr ""
 msgid "ButtonBar|Ascii"
 msgstr ""
 
-msgid "ButtonBar|Hex"
-msgstr ""
-
 msgid "ButtonBar|Goto"
 msgstr ""
 
-msgid "ButtonBar|Line"
+msgid "ButtonBar|HxSrch"
 msgstr ""
 
 msgid "ButtonBar|UnWrap"
@@ -3169,7 +3150,10 @@ msgstr ""
 msgid "ButtonBar|Wrap"
 msgstr ""
 
-msgid "ButtonBar|HxSrch"
+msgid "ButtonBar|Hex"
+msgstr ""
+
+msgid "ButtonBar|Line"
 msgstr ""
 
 msgid "ButtonBar|Raw"
@@ -3255,12 +3239,6 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-
-#, c-format
-msgid ""
 "Inconsistent hardlinks of\n"
 "%s\n"
 "in cpio archive\n"
@@ -3269,6 +3247,12 @@ msgstr ""
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
+msgstr ""
+
+#, c-format
+msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
 msgstr ""
 
 #, c-format

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-30 10:39+0200\n"
+"POT-Creation-Date: 2009-12-25 19:06+0200\n"
 "PO-Revision-Date: 2001-11-06 05:50+0200\n"
 "Last-Translator: Nilgün Belma Bugüner <nilgun@fide.org>\n"
 "Language-Team: Turkish <debian-l10n-turkish@lists.debian.org>\n"
@@ -2225,9 +2225,6 @@ msgstr "Kip:           %s (%04o)"
 msgid "Location:  %Xh:%Xh"
 msgstr "Konum:         %Xh:%Xh"
 
-msgid "File:       None"
-msgstr " Dosya ismi:    Yok"
-
 msgid "&Vertical"
 msgstr "Di&key"
 
@@ -2560,24 +2557,20 @@ msgstr ""
 msgid "ButtonBar|Menu"
 msgstr ""
 
+msgid "ButtonBar|View"
+msgstr ""
+
+msgid "ButtonBar|Edit"
+msgstr ""
+
+msgid "ButtonBar|RenMov"
+msgstr ""
+
+msgid "ButtonBar|Mkdir"
+msgstr ""
+
 msgid "The TERM environment variable is unset!\n"
 msgstr "TERM çevre değişkeni atanmamış!\n"
-
-msgid "&Fix it"
-msgstr ""
-
-msgid "don't ask again"
-msgstr ""
-
-msgid ""
-"Chosen display charset (Settings->Display bits)\n"
-"or source codeset (in mcedit ctrl-t) \n"
-"does not match one set via locale. \n"
-"Set correct codeset manually or press <<Fix it>> \n"
-"to set locale default.\n"
-"\n"
-"Or set 'don't ask again' and press <<Skip>>"
-msgstr ""
 
 #, fuzzy, c-format
 msgid "Cannot create %s directory"
@@ -2822,18 +2815,6 @@ msgstr "Kullanıcı tanımlı biçim geçersiz: öntanımlısı kullanılacak."
 
 msgid " Do you really want to execute? "
 msgstr "Gerçekten çalıştırmak istiyor musunuz?"
-
-msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
-msgstr ""
-
-msgid "ButtonBar|RenMov"
-msgstr ""
-
-msgid "ButtonBar|Mkdir"
-msgstr ""
 
 msgid " Not implemented yet "
 msgstr ""
@@ -3102,6 +3083,10 @@ msgstr "Sayılarda / tuşu"
 
 msgid "* on keypad"
 msgstr "Gri *"
+
+#, fuzzy
+msgid "Escape key"
+msgstr "Sayılarda / tuşu"
 
 msgid "Left arrow keypad"
 msgstr "Sayılarda sola ok"
@@ -3376,13 +3361,10 @@ msgstr ""
 msgid "ButtonBar|Ascii"
 msgstr ""
 
-msgid "ButtonBar|Hex"
-msgstr ""
-
 msgid "ButtonBar|Goto"
 msgstr ""
 
-msgid "ButtonBar|Line"
+msgid "ButtonBar|HxSrch"
 msgstr ""
 
 msgid "ButtonBar|UnWrap"
@@ -3391,7 +3373,10 @@ msgstr ""
 msgid "ButtonBar|Wrap"
 msgstr ""
 
-msgid "ButtonBar|HxSrch"
+msgid "ButtonBar|Hex"
+msgstr ""
+
+msgid "ButtonBar|Line"
 msgstr ""
 
 msgid "ButtonBar|Raw"
@@ -3485,14 +3470,6 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"%s'de\n"
-"bozuk cpio başlığı saptandı"
-
-#, c-format
-msgid ""
 "Inconsistent hardlinks of\n"
 "%s\n"
 "in cpio archive\n"
@@ -3506,6 +3483,14 @@ msgstr ""
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s ikiyüzlü girdiler içeriyor! Atlanıyor"
+
+#, c-format
+msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"%s'de\n"
+"bozuk cpio başlığı saptandı"
 
 #, c-format
 msgid ""
@@ -3910,6 +3895,9 @@ msgstr "İç hata:"
 msgid "Changes to file lost"
 msgstr "Değişiklikler kayıp"
 
+#~ msgid "File:       None"
+#~ msgstr " Dosya ismi:    Yok"
+
 #~ msgid "Do backups -->"
 #~ msgstr "Yedekle -->"
 
@@ -4230,10 +4218,6 @@ msgstr "Değişiklikler kayıp"
 
 #~ msgid "Rmdir"
 #~ msgstr "Dizini sil"
-
-#, fuzzy
-#~ msgid "Escape key"
-#~ msgstr "Sayılarda / tuşu"
 
 #, fuzzy
 #~ msgid "bind: Unknown command: `%s'"

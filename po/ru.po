@@ -17,8 +17,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-29 20:49+0000\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-12-25 19:06+0200\n"
 "PO-Revision-Date: 2009-10-29  23:37+0300\n"
 "Last-Translator: Ilia Maslakov <il.smind@gmail.com>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
@@ -37,9 +37,6 @@ msgstr "< Автоматически >"
 
 msgid "< Reload Current Syntax >"
 msgstr "Перезагрузить текущее цветовыделение"
-
-msgid "&Dismiss"
-msgstr "&Закрыть"
 
 #, c-format
 msgid " Cannot open %s for reading "
@@ -409,6 +406,9 @@ msgstr " Заменить на: "
 msgid " Confirm replace "
 msgstr " Подтвердить замену "
 
+msgid "&Dismiss"
+msgstr "&Закрыть"
+
 #, c-format
 msgid ""
 "File \"%s\" is already being edited\n"
@@ -662,39 +662,6 @@ msgstr "Режим переноса строк"
 msgid " Editor options "
 msgstr " Настройки редактора "
 
-msgid "ButtonBar|Ascii"
-msgstr "Ascii"
-
-msgid "ButtonBar|Hex"
-msgstr "Hex"
-
-msgid "ButtonBar|Goto"
-msgstr "Перейти"
-
-msgid "ButtonBar|Line"
-msgstr "К строке"
-
-msgid "ButtonBar|UnWrap"
-msgstr "Разверн"
-
-msgid "ButtonBar|Wrap"
-msgstr "Сверн"
-
-msgid "ButtonBar|HxSrch"
-msgstr "Поиск"
-
-msgid "ButtonBar|Raw"
-msgstr "Исходный"
-
-msgid "ButtonBar|Parse"
-msgstr "Фильтр"
-
-msgid "ButtonBar|Unform"
-msgstr "Не форм"
-
-msgid "ButtonBar|Format"
-msgstr "Формат"
-
 msgid "ButtonBar|Help"
 msgstr "Помощь"
 
@@ -724,43 +691,6 @@ msgstr "МенюMC"
 
 msgid "ButtonBar|Quit"
 msgstr "Выход"
-
-msgid "ButtonBar|Menu"
-msgstr "Меню"
-
-msgid "ButtonBar|Index"
-msgstr "Разделы"
-
-msgid "ButtonBar|Prev"
-msgstr "Пред"
-
-msgid "ButtonBar|View"
-msgstr "Просмотр"
-
-msgid "ButtonBar|Edit"
-msgstr "Правка"
-
-msgid "ButtonBar|RenMov"
-msgstr "Перенос"
-
-msgid "ButtonBar|Mkdir"
-msgstr "НвКтлог"
-
-msgid "ButtonBar|Static"
-msgstr "Статич"
-
-msgid "ButtonBar|Dynamc"
-msgstr "Динамч"
-
-msgid "ButtonBar|Rescan"
-msgstr "Пересм"
-
-msgid "ButtonBar|Forget"
-msgstr "Забыть"
-
-msgid "ButtonBar|Rmdir"
-msgstr "УдКтлог"
-
 
 msgid " Load syntax file "
 msgstr " Загрузить файл синтаксиса "
@@ -2041,6 +1971,12 @@ msgstr " Невозможно найти узел %s в файле помощи 
 msgid "Help"
 msgstr "Помощь"
 
+msgid "ButtonBar|Index"
+msgstr "Разделы"
+
+msgid "ButtonBar|Prev"
+msgstr "Пред"
+
 msgid "&Remove"
 msgstr "&Удалить"
 
@@ -2224,9 +2160,6 @@ msgstr "Права:     %s (%04o)"
 #, c-format
 msgid "Location:  %Xh:%Xh"
 msgstr "Положение: %Xh:%Xh"
-
-msgid "File:       None"
-msgstr "Файл:      Отсутствует"
 
 msgid "&Vertical"
 msgstr "&Вертикальное"
@@ -2521,31 +2454,23 @@ msgstr ""
 " перезагрузить каталог. Для дополнительной информации смотрите  \n"
 " руководство (man)."
 
+msgid "ButtonBar|Menu"
+msgstr "Меню"
+
+msgid "ButtonBar|View"
+msgstr "Просмотр"
+
+msgid "ButtonBar|Edit"
+msgstr "Правка"
+
+msgid "ButtonBar|RenMov"
+msgstr "Перенос"
+
+msgid "ButtonBar|Mkdir"
+msgstr "НвКтлог"
+
 msgid "The TERM environment variable is unset!\n"
 msgstr "Переменная среды TERM не определена!\n"
-
-msgid "&Fix it"
-msgstr "&Исправить"
-
-msgid "don't ask again"
-msgstr "больше не спрашивать"
-
-msgid ""
-"Chosen display charset (Settings->Display bits)\n"
-"or source codeset (in mcedit ctrl-t) \n"
-"does not match one set via locale. \n"
-"Set correct codeset manually or press <<Fix it>> \n"
-"to set locale default.\n"
-"\n"
-"Or set 'don't ask again' and press <<Skip>>"
-msgstr ""
-"Кодировка вывода (Настройки->Биты символов)\n"
-"или кодировка источника (ctrl-t в редакторе)\n"
-"не соответствует текущей локали.\n"
-"Для автоматического разрешения проблемы \n"
-"нажмите <<Исправить>>\n"
-"Или пометьте \"больше не спрашивать\"\n"
-"и нажмите <<Пропустить>>"
 
 #, c-format
 msgid "Cannot create %s directory"
@@ -2695,7 +2620,6 @@ msgstr "&Имя"
 
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-
 msgid "sort|e"
 msgstr "р"
 
@@ -2821,6 +2745,7 @@ msgstr "Выберите кодировку"
 msgid "-  < No translation >"
 msgstr "-  < Без перекодировки >"
 
+#, c-format
 msgid ""
 "Cannot save file %s:\n"
 "%s"
@@ -2934,6 +2859,21 @@ msgstr ""
 #, c-format
 msgid "  Delete %s?  "
 msgstr "  Удалить %s?  "
+
+msgid "ButtonBar|Static"
+msgstr "Статич"
+
+msgid "ButtonBar|Dynamc"
+msgstr "Динамч"
+
+msgid "ButtonBar|Rescan"
+msgstr "Пересм"
+
+msgid "ButtonBar|Forget"
+msgstr "Забыть"
+
+msgid "ButtonBar|Rmdir"
+msgstr "УдКтлог"
 
 #, c-format
 msgid ""
@@ -3050,6 +2990,10 @@ msgstr "/ доп.клавиатуры "
 
 msgid "* on keypad"
 msgstr "* доп.клавиатуры "
+
+#, fuzzy
+msgid "Escape key"
+msgstr "Пробел"
 
 msgid "Left arrow keypad"
 msgstr "Left доп.клавиатуры"
@@ -3300,6 +3244,39 @@ msgstr " Невозможно породить дочерний процесс "
 msgid "Empty output from child filter"
 msgstr "Дочерний фильтр не вернул данных"
 
+msgid "ButtonBar|Ascii"
+msgstr "Ascii"
+
+msgid "ButtonBar|Goto"
+msgstr "Перейти"
+
+msgid "ButtonBar|HxSrch"
+msgstr "Поиск"
+
+msgid "ButtonBar|UnWrap"
+msgstr "Разверн"
+
+msgid "ButtonBar|Wrap"
+msgstr "Сверн"
+
+msgid "ButtonBar|Hex"
+msgstr "Hex"
+
+msgid "ButtonBar|Line"
+msgstr "К строке"
+
+msgid "ButtonBar|Raw"
+msgstr "Исходный"
+
+msgid "ButtonBar|Parse"
+msgstr "Фильтр"
+
+msgid "ButtonBar|Unform"
+msgstr "Не форм"
+
+msgid "ButtonBar|Format"
+msgstr "Формат"
+
 #, c-format
 msgid "File: %s"
 msgstr "Файл: %s"
@@ -3384,14 +3361,6 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"Поврежденный заголовок cpio обнаружен в\n"
-"%s"
-
-#, c-format
-msgid ""
 "Inconsistent hardlinks of\n"
 "%s\n"
 "in cpio archive\n"
@@ -3405,6 +3374,14 @@ msgstr ""
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s содержит сдвоенные элементы! Пропущено!"
+
+#, c-format
+msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"Поврежденный заголовок cpio обнаружен в\n"
+"%s"
 
 #, c-format
 msgid ""

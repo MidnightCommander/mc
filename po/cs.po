@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.0-pre4\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-30 10:39+0200\n"
+"POT-Creation-Date: 2009-12-25 19:06+0200\n"
 "PO-Revision-Date: 2009-12-19 14:20+0100\n"
 "Last-Translator: Martin Zoubek <zoubek@seznam.cz>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
@@ -2082,7 +2082,8 @@ msgstr " Čtení seznamu pro rychlý přístup "
 msgid ""
 "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr ""
-"MC nemohl zapsat soubor ~/%s, vaše staré seznamy pro rychlý přístup nebyly smazány"
+"MC nemohl zapsat soubor ~/%s, vaše staré seznamy pro rychlý přístup nebyly "
+"smazány"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -2164,9 +2165,6 @@ msgstr "Práva:     %s (%04o)"
 #, c-format
 msgid "Location:  %Xh:%Xh"
 msgstr "Poloha:    %Xh:%Xh"
-
-msgid "File:       None"
-msgstr "Soubor:    Žádný"
 
 msgid "&Vertical"
 msgstr "&Vertikální"
@@ -2464,30 +2462,20 @@ msgstr ""
 msgid "ButtonBar|Menu"
 msgstr "ButtonBar|Menu"
 
+msgid "ButtonBar|View"
+msgstr "TlačítkováLišta|Zobraz"
+
+msgid "ButtonBar|Edit"
+msgstr "TlačítkováLišta|Edituj"
+
+msgid "ButtonBar|RenMov"
+msgstr "TlačítkováLišta|PřejPřes"
+
+msgid "ButtonBar|Mkdir"
+msgstr "TlačítkováLišta|VytvAdr"
+
 msgid "The TERM environment variable is unset!\n"
 msgstr "Proměnná prostředí TERM není nastavena!\n"
-
-msgid "&Fix it"
-msgstr "&Opravit"
-
-msgid "don't ask again"
-msgstr "znova se neptat"
-
-msgid ""
-"Chosen display charset (Settings->Display bits)\n"
-"or source codeset (in mcedit ctrl-t) \n"
-"does not match one set via locale. \n"
-"Set correct codeset manually or press <<Fix it>> \n"
-"to set locale default.\n"
-"\n"
-"Or set 'don't ask again' and press <<Skip>>"
-msgstr ""
-"Zvolená znaková sada (Settings->Display bits)\n"
-"nebo zdrovová kódova sada (v mcedit ctrl-t) \n"
-"neodpovídá znakové sadě nastavené v locale. \n"
-"Opravte znakovou sadu manuálně, nebo stiskněte <<Opravit>> \n"
-"pro nastavení výchozí znakové sady.\n"
-"Nebo nastavte <<znova se neptat>> a stiskněte <<Přeskočit>>"
 
 #, c-format
 msgid "Cannot create %s directory"
@@ -2735,18 +2723,6 @@ msgstr "Chybný formát zadaný uživatelem, bude použit standardní."
 
 msgid " Do you really want to execute? "
 msgstr " Opravdu spustit? "
-
-msgid "ButtonBar|View"
-msgstr "TlačítkováLišta|Zobraz"
-
-msgid "ButtonBar|Edit"
-msgstr "TlačítkováLišta|Edituj"
-
-msgid "ButtonBar|RenMov"
-msgstr "TlačítkováLišta|PřejPřes"
-
-msgid "ButtonBar|Mkdir"
-msgstr "TlačítkováLišta|VytvAdr"
 
 msgid " Not implemented yet "
 msgstr " Zatím neimplementované "
@@ -3022,6 +2998,10 @@ msgstr "/ na num. klávesnici"
 msgid "* on keypad"
 msgstr "* na num. klávesnici"
 
+#, fuzzy
+msgid "Escape key"
+msgstr "Mezerník"
+
 msgid "Left arrow keypad"
 msgstr "Šipka vlevo na numerické klávesnici"
 
@@ -3275,14 +3255,11 @@ msgstr "Prázdný výstup z filtru potomka"
 msgid "ButtonBar|Ascii"
 msgstr "TlačítkováLišta|Ascii"
 
-msgid "ButtonBar|Hex"
-msgstr "TlačítkováLišta|Hex"
-
 msgid "ButtonBar|Goto"
 msgstr "TlačítkováLišta|JdiNa"
 
-msgid "ButtonBar|Line"
-msgstr "TlačítkováLišta|Řádek"
+msgid "ButtonBar|HxSrch"
+msgstr "TlačítkováLišta|HxHled"
 
 msgid "ButtonBar|UnWrap"
 msgstr "TlačítkováLišta|Nezal."
@@ -3290,8 +3267,11 @@ msgstr "TlačítkováLišta|Nezal."
 msgid "ButtonBar|Wrap"
 msgstr "TlačítkováLišta|Zalam."
 
-msgid "ButtonBar|HxSrch"
-msgstr "TlačítkováLišta|HxHled"
+msgid "ButtonBar|Hex"
+msgstr "TlačítkováLišta|Hex"
+
+msgid "ButtonBar|Line"
+msgstr "TlačítkováLišta|Řádek"
 
 msgid "ButtonBar|Raw"
 msgstr "TlačítkováLišta|Hrubě"
@@ -3389,14 +3369,6 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"Poškozená hlavička cpio v souboru\n"
-"%s"
-
-#, c-format
-msgid ""
 "Inconsistent hardlinks of\n"
 "%s\n"
 "in cpio archive\n"
@@ -3410,6 +3382,14 @@ msgstr ""
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s obsahuje duplicitní položky! Přeskakují se!"
+
+#, c-format
+msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"Poškozená hlavička cpio v souboru\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -3811,3 +3791,27 @@ msgstr "Interní chyba:"
 msgid "Changes to file lost"
 msgstr "Změny souboru byly ztraceny"
 
+#~ msgid "File:       None"
+#~ msgstr "Soubor:    Žádný"
+
+#~ msgid "&Fix it"
+#~ msgstr "&Opravit"
+
+#~ msgid "don't ask again"
+#~ msgstr "znova se neptat"
+
+#~ msgid ""
+#~ "Chosen display charset (Settings->Display bits)\n"
+#~ "or source codeset (in mcedit ctrl-t) \n"
+#~ "does not match one set via locale. \n"
+#~ "Set correct codeset manually or press <<Fix it>> \n"
+#~ "to set locale default.\n"
+#~ "\n"
+#~ "Or set 'don't ask again' and press <<Skip>>"
+#~ msgstr ""
+#~ "Zvolená znaková sada (Settings->Display bits)\n"
+#~ "nebo zdrovová kódova sada (v mcedit ctrl-t) \n"
+#~ "neodpovídá znakové sadě nastavené v locale. \n"
+#~ "Opravte znakovou sadu manuálně, nebo stiskněte <<Opravit>> \n"
+#~ "pro nastavení výchozí znakové sady.\n"
+#~ "Nebo nastavte <<znova se neptat>> a stiskněte <<Přeskočit>>"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: be\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-30 10:39+0200\n"
+"POT-Creation-Date: 2009-12-25 19:06+0200\n"
 "PO-Revision-Date: 2008-12-21 23:28+0200\n"
 "Last-Translator: Pavel Piatruk <piatruk.p@gmail.com>\n"
 "Language-Team: Belarusian <debian-l10n-belarusian@lists.debian.org>\n"
@@ -2220,9 +2220,6 @@ msgstr "Правы:         %s (%04o)"
 msgid "Location:  %Xh:%Xh"
 msgstr "Месца:         %Xh:%Xh"
 
-msgid "File:       None"
-msgstr "Файл:          Адсутнічае"
-
 msgid "&Vertical"
 msgstr "&Вертыкальнае"
 
@@ -2552,24 +2549,20 @@ msgstr ""
 msgid "ButtonBar|Menu"
 msgstr ""
 
+msgid "ButtonBar|View"
+msgstr ""
+
+msgid "ButtonBar|Edit"
+msgstr ""
+
+msgid "ButtonBar|RenMov"
+msgstr ""
+
+msgid "ButtonBar|Mkdir"
+msgstr ""
+
 msgid "The TERM environment variable is unset!\n"
 msgstr "Пераменная асяродку TERM не вызначана!\n"
-
-msgid "&Fix it"
-msgstr ""
-
-msgid "don't ask again"
-msgstr ""
-
-msgid ""
-"Chosen display charset (Settings->Display bits)\n"
-"or source codeset (in mcedit ctrl-t) \n"
-"does not match one set via locale. \n"
-"Set correct codeset manually or press <<Fix it>> \n"
-"to set locale default.\n"
-"\n"
-"Or set 'don't ask again' and press <<Skip>>"
-msgstr ""
 
 #, fuzzy, c-format
 msgid "Cannot create %s directory"
@@ -2816,18 +2809,6 @@ msgstr "Фармат карыстальніка выглядае памылко�
 
 msgid " Do you really want to execute? "
 msgstr " Вы сапраўды жадаеце выканаць гэта? "
-
-msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
-msgstr ""
-
-msgid "ButtonBar|RenMov"
-msgstr ""
-
-msgid "ButtonBar|Mkdir"
-msgstr ""
 
 msgid " Not implemented yet "
 msgstr ""
@@ -3101,6 +3082,10 @@ msgstr "Slash на keypad'е"
 msgid "* on keypad"
 msgstr "* на лічбавых клавішах"
 
+#, fuzzy
+msgid "Escape key"
+msgstr "Slash на keypad'е"
+
 msgid "Left arrow keypad"
 msgstr "Стрэлка ўлева на keypad'e"
 
@@ -3369,13 +3354,10 @@ msgstr "Пусты вывад ад працэса-нашчадка фільтр�
 msgid "ButtonBar|Ascii"
 msgstr ""
 
-msgid "ButtonBar|Hex"
-msgstr ""
-
 msgid "ButtonBar|Goto"
 msgstr ""
 
-msgid "ButtonBar|Line"
+msgid "ButtonBar|HxSrch"
 msgstr ""
 
 msgid "ButtonBar|UnWrap"
@@ -3384,7 +3366,10 @@ msgstr ""
 msgid "ButtonBar|Wrap"
 msgstr ""
 
-msgid "ButtonBar|HxSrch"
+msgid "ButtonBar|Hex"
+msgstr ""
+
+msgid "ButtonBar|Line"
 msgstr ""
 
 msgid "ButtonBar|Raw"
@@ -3483,14 +3468,6 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"Пашкоджаны загаловак cpio знойдзены ў\n"
-"%s"
-
-#, c-format
-msgid ""
 "Inconsistent hardlinks of\n"
 "%s\n"
 "in cpio archive\n"
@@ -3504,6 +3481,14 @@ msgstr ""
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s утрымлівае падвойныя запісы! Пропуск!"
+
+#, c-format
+msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"Пашкоджаны загаловак cpio знойдзены ў\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -3904,6 +3889,9 @@ msgstr "Унутраная памылка:"
 msgid "Changes to file lost"
 msgstr "Змены для файла страчаны"
 
+#~ msgid "File:       None"
+#~ msgstr "Файл:          Адсутнічае"
+
 #~ msgid "Do backups -->"
 #~ msgstr "Зрабіць рэзервовыя копіі -->"
 
@@ -4220,10 +4208,6 @@ msgstr "Змены для файла страчаны"
 
 #~ msgid "Rmdir"
 #~ msgstr "ВдКтлог"
-
-#, fuzzy
-#~ msgid "Escape key"
-#~ msgstr "Slash на keypad'е"
 
 #~ msgid "bind: Wrong argument number, bind <key> <command>"
 #~ msgstr "bind: Памылковая кольскасць параметраў, bind <клавіша> <каманда>"

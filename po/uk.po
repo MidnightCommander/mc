@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: uk\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-10-30 10:39+0200\n"
+"POT-Creation-Date: 2009-12-25 19:06+0200\n"
 "PO-Revision-Date: 2009-10-31 19:01+0200\n"
 "Last-Translator: Oleksandr Natalenko <pfactum@gmail.com>\n"
 "Language-Team: uk <kde-i18n-doc@kde.org>\n"
@@ -111,6 +111,7 @@ msgid " Cannot open pipe for writing: "
 msgstr " Збій при спробі відкрити канал для запису: "
 
 # , c-format
+#, c-format
 msgid " Cannot open file for writing: %s "
 msgstr " Збій при спробі відкрити файл для запису: %s "
 
@@ -2153,9 +2154,6 @@ msgstr "Права:     %s (%04o)"
 msgid "Location:  %Xh:%Xh"
 msgstr "Розташування: %Xh:%Xh"
 
-msgid "File:       None"
-msgstr " Файл:      Немає"
-
 msgid "&Vertical"
 msgstr "&Вертикальне"
 
@@ -2452,31 +2450,20 @@ msgstr ""
 msgid "ButtonBar|Menu"
 msgstr "Нижня панель|Меню"
 
+msgid "ButtonBar|View"
+msgstr "Нижня панель|Вид"
+
+msgid "ButtonBar|Edit"
+msgstr "Нижня панель|Редагувати"
+
+msgid "ButtonBar|RenMov"
+msgstr "Нижня панель|Переміст."
+
+msgid "ButtonBar|Mkdir"
+msgstr "Нижня панель|СтвКат"
+
 msgid "The TERM environment variable is unset!\n"
 msgstr "Змінна середовища TERM не встановлена!\n"
-
-msgid "&Fix it"
-msgstr "Виправити"
-
-msgid "don't ask again"
-msgstr "не питати знову"
-
-msgid ""
-"Chosen display charset (Settings->Display bits)\n"
-"or source codeset (in mcedit ctrl-t) \n"
-"does not match one set via locale. \n"
-"Set correct codeset manually or press <<Fix it>> \n"
-"to set locale default.\n"
-"\n"
-"Or set 'don't ask again' and press <<Skip>>"
-msgstr ""
-"Вибране кодування відображення (Параметри->Відображення символів...)\n"
-"або кодування джерела (ctrl-t у mcedit) \n"
-"не відповідає локалі. \n"
-"Встановіть правильне кодування вручну або натисніть <<Виправити>> \n"
-"для встановлення локалі за змовчуванням.\n"
-"\n"
-"Або оберіть \"не питати знову\" та натисніть <<Пропустити>>"
 
 # , c-format
 #, c-format
@@ -2724,18 +2711,6 @@ msgstr "Формат користувача виглядає неправиль�
 msgid " Do you really want to execute? "
 msgstr " Ви дійсно хочете виконати? "
 
-msgid "ButtonBar|View"
-msgstr "Нижня панель|Вид"
-
-msgid "ButtonBar|Edit"
-msgstr "Нижня панель|Редагувати"
-
-msgid "ButtonBar|RenMov"
-msgstr "Нижня панель|Переміст."
-
-msgid "ButtonBar|Mkdir"
-msgstr "Нижня панель|СтвКат"
-
 msgid " Not implemented yet "
 msgstr " Ще не реалізовано "
 
@@ -2766,6 +2741,7 @@ msgid "-  < No translation >"
 msgstr "-  < Без перекодування >"
 
 # , c-format
+#, c-format
 msgid ""
 "Cannot save file %s:\n"
 "%s"
@@ -3011,6 +2987,10 @@ msgstr "Додатковий /"
 msgid "* on keypad"
 msgstr "Додаткова *"
 
+#, fuzzy
+msgid "Escape key"
+msgstr "Додатковий /"
+
 msgid "Left arrow keypad"
 msgstr "Дод. стрілка вліво"
 
@@ -3232,6 +3212,7 @@ msgid " Dup failed "
 msgstr " Збій дублювання дескриптора "
 
 # , c-format, c-format
+#, c-format
 msgid ""
 " The current line number is %lld.\n"
 " Enter the new line number:"
@@ -3240,6 +3221,7 @@ msgstr ""
 " Введіть номер нового рядка:"
 
 # , c-format, c-format
+#, c-format
 msgid ""
 " The current address is %s.\n"
 " Enter the new address:"
@@ -3262,14 +3244,11 @@ msgstr "Фільтр-нащадок не повернув даних"
 msgid "ButtonBar|Ascii"
 msgstr "Нижня панель|Ascii"
 
-msgid "ButtonBar|Hex"
-msgstr "Нижня панель|Hex"
-
 msgid "ButtonBar|Goto"
 msgstr "Нижня панель|Перехід"
 
-msgid "ButtonBar|Line"
-msgstr "Нижня панель|Рядок"
+msgid "ButtonBar|HxSrch"
+msgstr "Нижня панель|HxПошук"
 
 msgid "ButtonBar|UnWrap"
 msgstr "Нижня панель|НеПеренос."
@@ -3277,8 +3256,11 @@ msgstr "Нижня панель|НеПеренос."
 msgid "ButtonBar|Wrap"
 msgstr "Нижня панель|Перенос."
 
-msgid "ButtonBar|HxSrch"
-msgstr "Нижня панель|HxПошук"
+msgid "ButtonBar|Hex"
+msgstr "Нижня панель|Hex"
+
+msgid "ButtonBar|Line"
+msgstr "Нижня панель|Рядок"
 
 msgid "ButtonBar|Raw"
 msgstr "Нижня панель|Як є"
@@ -3376,14 +3358,6 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"Знайдено пошкоджений заголовок cpio у\n"
-"%s"
-
-#, c-format
-msgid ""
 "Inconsistent hardlinks of\n"
 "%s\n"
 "in cpio archive\n"
@@ -3397,6 +3371,14 @@ msgstr ""
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s містить подвоєні записи! Пропущено!"
+
+#, c-format
+msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"Знайдено пошкоджений заголовок cpio у\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -3555,10 +3537,12 @@ msgid "ftpfs: invalid address family"
 msgstr "ftpfs: неправильний рід адреси"
 
 # , c-format
+#, c-format
 msgid "ftpfs: could not setup passive mode: %s"
 msgstr "ftpfs: не зміг встановити пасивний режим: %s"
 
 # , c-format
+#, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr "ftpfs: не вдається створити сокет: %s "
 
@@ -3796,6 +3780,32 @@ msgstr "Внутрішня помилка:"
 
 msgid "Changes to file lost"
 msgstr "Зміни у файлі втрачені"
+
+#~ msgid "File:       None"
+#~ msgstr " Файл:      Немає"
+
+#~ msgid "&Fix it"
+#~ msgstr "Виправити"
+
+#~ msgid "don't ask again"
+#~ msgstr "не питати знову"
+
+#~ msgid ""
+#~ "Chosen display charset (Settings->Display bits)\n"
+#~ "or source codeset (in mcedit ctrl-t) \n"
+#~ "does not match one set via locale. \n"
+#~ "Set correct codeset manually or press <<Fix it>> \n"
+#~ "to set locale default.\n"
+#~ "\n"
+#~ "Or set 'don't ask again' and press <<Skip>>"
+#~ msgstr ""
+#~ "Вибране кодування відображення (Параметри->Відображення символів...)\n"
+#~ "або кодування джерела (ctrl-t у mcedit) \n"
+#~ "не відповідає локалі. \n"
+#~ "Встановіть правильне кодування вручну або натисніть <<Виправити>> \n"
+#~ "для встановлення локалі за змовчуванням.\n"
+#~ "\n"
+#~ "Або оберіть \"не питати знову\" та натисніть <<Пропустити>>"
 
 #~ msgid "Do backups -->"
 #~ msgstr "Резервні копії -->"
@@ -4103,10 +4113,6 @@ msgstr "Зміни у файлі втрачені"
 
 #~ msgid "Rmdir"
 #~ msgstr "ВидКтлг"
-
-#, fuzzy
-#~ msgid "Escape key"
-#~ msgstr "Додатковий /"
 
 #~ msgid "bind: Wrong argument number, bind <key> <command>"
 #~ msgstr "bind: Помилкова кількість аргументів bind <key> <command>"
