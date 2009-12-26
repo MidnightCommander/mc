@@ -454,11 +454,6 @@
 #define MAX(a,b) ((a)>(b)?(a):(b))
 #endif
 
-#ifndef HAVE_STRCHR
-# define strchr                 index
-# define strrchr                rindex
-#endif
-
 #ifdef HAVE_BROKEN_GETGROUPS
 #define GID_T int
 #else
