@@ -185,8 +185,8 @@ init_chown (void)
     l_group = listbox_new (GY + 1, GX + 1, 10, 19, NULL);
 
     /* add fields for unknown names (numbers) */
-    listbox_add_item (l_user, 0, 0, _("<Unknown user>"), NULL);
-    listbox_add_item (l_group, 0, 0, _("<Unknown group>"), NULL);
+    listbox_add_item (l_user, LISTBOX_APPEND_AT_END, 0, _("<Unknown user>"), NULL);
+    listbox_add_item (l_group, LISTBOX_APPEND_AT_END, 0, _("<Unknown group>"), NULL);
 
     /* get and put user names in the listbox */
     setpwent ();
@@ -270,44 +270,41 @@ chown_cmd (void)
 	}
 	
 	/* select in listboxes */
-	fe = listbox_search_text (l_user, get_owner(sf_stat.st_uid));
-	if (fe)
-	    listbox_select_entry (l_user, fe);
-    
-	fe = listbox_search_text (l_group, get_group(sf_stat.st_gid));
-	if (fe)
-	    listbox_select_entry (l_group, fe);
+	listbox_select_entry (l_user, listbox_search_text (l_user, get_owner(sf_stat.st_uid)));
+	listbox_select_entry (l_group, listbox_search_text (l_group, get_group(sf_stat.st_gid)));
 
-        chown_label (0, str_trunc (fname, 15));
-        chown_label (1, str_trunc (get_owner (sf_stat.st_uid), 15));
+	chown_label (0, str_trunc (fname, 15));
+	chown_label (1, str_trunc (get_owner (sf_stat.st_uid), 15));
 	chown_label (2, str_trunc (get_group (sf_stat.st_gid), 15));
 	size_trunc_len (buffer, 15, sf_stat.st_size, 0);
 	chown_label (3, buffer);
 	chown_label (4, string_perm (sf_stat.st_mode));
 
-	run_dlg (ch_dlg);
-    
-	switch (ch_dlg->ret_value) {
+	switch (run_dlg (ch_dlg)) {
 	case B_CANCEL:
 	    end_chown = 1;
 	    break;
-	    
+
 	case B_SETUSR:
 	{
 	    struct passwd *user;
+	    char *text;
 
-	    user = getpwnam (l_user->current->text);
+	    listbox_get_current (l_user, &text, NULL);
+	    user = getpwnam (text);
 	    if (user){
 		new_user = user->pw_uid;
 		apply_chowns (new_user, new_group);
 	    }
 	    break;
-	}   
+	}
 	case B_SETGRP:
 	{
 	    struct group *grp;
+	    char *text;
 
-	    grp = getgrnam (l_group->current->text);
+	    listbox_get_current (l_group, &text, NULL);
+	    grp = getgrnam (text);
 	    if (grp){
 		new_group = grp->gr_gid;
 		apply_chowns (new_user, new_group);
@@ -319,14 +316,17 @@ chown_cmd (void)
 	{
 	    struct group *grp;
 	    struct passwd *user;
-	    
-	    grp = getgrnam (l_group->current->text);
+	    char *text;
+
+	    listbox_get_current (l_group, &text, NULL);
+	    grp = getgrnam (text);
 	    if (grp)
 		new_group = grp->gr_gid;
-	    user = getpwnam (l_user->current->text);
+	    listbox_get_current (l_user, &text, NULL);
+	    user = getpwnam (text);
 	    if (user)
 		new_user = user->pw_uid;
-	    if (ch_dlg->ret_value==B_ENTER) {
+	    if (ch_dlg->ret_value == B_ENTER) {
 		need_update = 1;
 		if (mc_chown (fname, new_user, new_group) == -1)
 		    message (D_ERROR, MSG_ERROR, _(" Cannot chown \"%s\" \n %s "),
@@ -335,8 +335,8 @@ chown_cmd (void)
 		apply_chowns (new_user, new_group);
 	    break;
 	}
-	}
-	
+	} /* switch */
+
 	if (current_panel->marked && ch_dlg->ret_value != B_CANCEL){
 	    do_file_mark (current_panel, current_file, 0);
 	    need_update = 1;
