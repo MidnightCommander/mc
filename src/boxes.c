@@ -882,7 +882,7 @@ task_cb (int action)
         return 0;
 
     /* Get this instance information */
-    tl = (TaskList *) bg_list->current->data;
+    listbox_get_current (bg_list, NULL, (void **) &tl);
 
 #  ifdef SIGTSTP
     if (action == B_STOP)

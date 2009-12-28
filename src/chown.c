@@ -75,7 +75,8 @@ static int single_set;
 static WListbox *l_user, *l_group;
 
 /* *INDENT-OFF* */
-static struct {
+static struct
+{
     int ret_cmd, flags, y, x;
     const char *text;
 } chown_but[BUTTONS] = {
@@ -85,26 +86,20 @@ static struct {
     { B_SETGRP, NORMAL_BUTTON,  0, 11, N_("Set &groups") },
     { B_SETALL, NORMAL_BUTTON,  0, 0,  N_("Set &all") },
 };
-/* *INDENT-ON* */
 
 #define LABELS 5
 static struct
 {
     int y, x;
     WLabel *l;
-} chown_label[LABELS] =
-{
-    {
-    TY + 2, TX + 2, NULL},
-    {
-    TY + 4, TX + 2, NULL},
-    {
-    TY + 6, TX + 2, NULL},
-    {
-    TY + 8, TX + 2, NULL},
-    {
-    TY + 10, TX + 2, NULL}
+} chown_label[LABELS] = {
+    { TY + 2, TX + 2, NULL },
+    { TY + 4, TX + 2, NULL },
+    { TY + 6, TX + 2, NULL },
+    { TY + 8, TX + 2, NULL },
+    { TY + 10, TX + 2, NULL }
 };
+/* *INDENT-ON* */
 
 static void
 chown_refresh (Dlg_head * h)
@@ -193,8 +188,8 @@ init_chown (void)
     l_group = listbox_new (GY + 1, GX + 1, 10, 19, NULL);
 
     /* add fields for unknown names (numbers) */
-    listbox_add_item (l_user, 0, 0, _("<Unknown user>"), NULL);
-    listbox_add_item (l_group, 0, 0, _("<Unknown group>"), NULL);
+    listbox_add_item (l_user, LISTBOX_APPEND_AT_END, 0, _("<Unknown user>"), NULL);
+    listbox_add_item (l_group, LISTBOX_APPEND_AT_END, 0, _("<Unknown group>"), NULL);
 
     /* get and put user names in the listbox */
     setpwent ();
@@ -284,13 +279,8 @@ chown_cmd (void)
         }
 
         /* select in listboxes */
-        fe = listbox_search_text (l_user, get_owner (sf_stat.st_uid));
-        if (fe)
-            listbox_select_entry (l_user, fe);
-
-        fe = listbox_search_text (l_group, get_group (sf_stat.st_gid));
-        if (fe)
-            listbox_select_entry (l_group, fe);
+        listbox_select_entry (l_user, listbox_search_text (l_user, get_owner(sf_stat.st_uid)));
+        listbox_select_entry (l_group, listbox_search_text (l_group, get_group(sf_stat.st_gid)));
 
         chown_label (0, str_trunc (fname, 15));
         chown_label (1, str_trunc (get_owner (sf_stat.st_uid), 15));
@@ -299,9 +289,7 @@ chown_cmd (void)
         chown_label (3, buffer);
         chown_label (4, string_perm (sf_stat.st_mode));
 
-        run_dlg (ch_dlg);
-
-        switch (ch_dlg->ret_value)
+        switch (run_dlg (ch_dlg))
         {
         case B_CANCEL:
             end_chown = 1;
@@ -310,8 +298,10 @@ chown_cmd (void)
         case B_SETUSR:
             {
                 struct passwd *user;
+                char *text;
 
-                user = getpwnam (l_user->current->text);
+                listbox_get_current (l_user, &text, NULL);
+                user = getpwnam (text);
                 if (user)
                 {
                     new_user = user->pw_uid;
@@ -322,8 +312,10 @@ chown_cmd (void)
         case B_SETGRP:
             {
                 struct group *grp;
+                char *text;
 
-                grp = getgrnam (l_group->current->text);
+                listbox_get_current (l_group, &text, NULL);
+                grp = getgrnam (text);
                 if (grp)
                 {
                     new_group = grp->gr_gid;
@@ -336,11 +328,14 @@ chown_cmd (void)
             {
                 struct group *grp;
                 struct passwd *user;
+                char *text;
 
-                grp = getgrnam (l_group->current->text);
+                listbox_get_current (l_group, &text, NULL);
+                grp = getgrnam (text);
                 if (grp)
                     new_group = grp->gr_gid;
-                user = getpwnam (l_user->current->text);
+                listbox_get_current (l_user, &text, NULL);
+                user = getpwnam (text);
                 if (user)
                     new_user = user->pw_uid;
                 if (ch_dlg->ret_value == B_ENTER)
@@ -354,7 +349,7 @@ chown_cmd (void)
                     apply_chowns (new_user, new_group);
                 break;
             }
-        }
+        } /* switch */
 
         if (current_panel->marked && ch_dlg->ret_value != B_CANCEL)
         {

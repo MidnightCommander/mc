@@ -132,8 +132,6 @@ typedef struct WLEntry {
     char *text;			/* Text to display */
     int  hotkey;
     void *data;			/* Client information */
-    struct WLEntry *next;
-    struct WLEntry *prev;
 } WLEntry;
 
 struct WListbox;
@@ -148,13 +146,12 @@ enum {
 
 struct WListbox {
     Widget widget;
-    WLEntry *list;		/* Pointer to the circular double linked list. */
-    WLEntry *top;		/* The first element displayed */
-    WLEntry *current;		/* The current element displayed */
-    int pos;			/* Cur. pos, must be kept in sync with current */
+    GList *list;		/* Pointer to the double linked list */
+    int pos;			/* The current element displayed */
+    int top;			/* The first element displayed */
     int count;			/* Number of items in the listbox */
-    int allow_duplicates;	/* Do we allow duplicates on the list? */
-    int scrollbar;		/* Draw a scrollbar? */
+    gboolean allow_duplicates;	/* Do we allow duplicates on the list? */
+    gboolean scrollbar;		/* Draw a scrollbar? */
     lcback cback;		/* The callback function */
     int cursor_x, cursor_y;	/* Cache the values */
 };
@@ -226,24 +223,23 @@ int button_get_len (const WButton *b);
 WLEntry *listbox_get_data (WListbox *l, int pos);
 
 /* search text int listbox entries */
-WLEntry *listbox_search_text (WListbox *l, const char *text);
-void listbox_select_entry (WListbox *l, WLEntry *dest);
-void listbox_select_by_number (WListbox *l, int n);
-void listbox_select_last (WListbox *l);
+int listbox_search_text (WListbox *l, const char *text);
+void listbox_select_entry (WListbox *l, int dest);
 void listbox_select_first (WListbox *l);
+void listbox_select_last (WListbox *l);
 void listbox_remove_current (WListbox *l);
 void listbox_remove_list (WListbox *l);
-void listbox_get_current (WListbox *l, char **string, char **extra);
+void listbox_get_current (WListbox *l, char **string, void **extra);
 
-enum append_pos {
+typedef enum {
     LISTBOX_APPEND_AT_END = 0,	/* append at the end */
     LISTBOX_APPEND_BEFORE,	/* insert before current */
     LISTBOX_APPEND_AFTER,	/* insert after current */
     LISTBOX_APPEND_SORTED	/* insert alphabetically */
-};
+} listbox_append_t;
 
-char *listbox_add_item (WListbox *l, enum append_pos pos, int
-			hotkey, const char *text, void *data);
+char *listbox_add_item (WListbox *l, listbox_append_t pos,
+			int hotkey, const char *text, void *data);
 
 struct global_keymap_t;
 
