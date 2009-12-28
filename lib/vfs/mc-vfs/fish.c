@@ -159,8 +159,9 @@ fish_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, c
 
     if (logfile)
     {
-        fwrite (str, strlen (str), 1, logfile);
-        fflush (logfile);
+	size_t ret;
+        ret = fwrite (str, strlen (str), 1, logfile);
+        ret = fflush (logfile);
     }
 
     tty_enable_interrupt_key ();
@@ -217,15 +218,13 @@ fish_pipeopen (struct vfs_s_super *super, const char *path, const char *argv[])
     }
     else
     {
-        close (0);
-        dup (fileset1[0]);
+        res = dup2 (fileset1[0], 0);
         close (fileset1[0]);
         close (fileset1[1]);
-        close (1);
+        res = dup2 (fileset2[1], 1);
         close (2);
-        dup (fileset2[1]);
         /* stderr to /dev/null */
-        open ("/dev/null", O_WRONLY);
+        res = open ("/dev/null", O_WRONLY);
         close (fileset2[0]);
         close (fileset2[1]);
         execvp (path, const_cast (char **, argv));
@@ -294,7 +293,6 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
         print_vfs_message ("%s", answer);
         if (strstr (answer, "assword"))
         {
-
             /* Currently, this does not work. ssh reads passwords from
                /dev/tty, not from stdin :-(. */
 
@@ -312,8 +310,16 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
                 SUP.password = op;
             }
             print_vfs_message (_("fish: Sending password..."));
-            write (SUP.sockw, SUP.password, strlen (SUP.password));
-            write (SUP.sockw, "\n", 1);
+
+            {
+                size_t str_len;
+                str_len = strlen (SUP.password);
+                if ((write (SUP.sockw, SUP.password, str_len ) != (ssize_t) str_len)
+                    || (write (SUP.sockw, "\n", 1) != 1))
+                {
+                    ERRNOR(EIO, -1);
+                }
+            }
         }
     }
 

@@ -1261,8 +1261,10 @@ vfs_s_get_line (struct vfs_class *me, int sock, char *buf, int buf_len, char ter
             return 0;
         if (logfile)
         {
-            fwrite (buf, 1, 1, logfile);
-            fflush (logfile);
+            size_t ret1;
+            int ret2;
+            ret1 = fwrite (buf, 1, 1, logfile);
+            ret2 = fflush (logfile);
         }
         if (*buf == term)
         {
@@ -1277,8 +1279,10 @@ vfs_s_get_line (struct vfs_class *me, int sock, char *buf, int buf_len, char ter
     {
         if (logfile)
         {
-            fwrite (&c, 1, 1, logfile);
-            fflush (logfile);
+            size_t ret1;
+            int ret2;
+            ret1 = fwrite (&c, 1, 1, logfile);
+            ret2 = fflush (logfile);
         }
         if (c == '\n')
             return 1;

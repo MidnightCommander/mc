@@ -706,7 +706,7 @@ extfs_resolve_symlinks_int (struct entry *entry, GSList * list)
 
         looping = g_slist_prepend (list, entry);
         pent = extfs_find_entry_int (entry->dir, entry->inode->linkname, looping, FALSE, FALSE);
-        g_slist_delete_link (looping, looping);
+        looping = g_slist_delete_link (looping, looping);
 
         if (pent == NULL)
             my_errno = ENOENT;

@@ -113,7 +113,11 @@ rpc_send (int sock, ...)
 
 	case RPC_INT:
 	    tmp = htonl (va_arg (ap, int));
-	    write (sock, &tmp, sizeof (tmp));
+	    if (write (sock, &tmp, sizeof (tmp)) != sizeof(tmp))
+	    {
+		vfs_die ( "RPC: write failed (RPC_INT)" );
+		break;
+	    }
 	    CHECK_SIG_PIPE (sock);
 	    break;
 
@@ -121,9 +125,17 @@ rpc_send (int sock, ...)
 	    text = va_arg (ap, char *);
 	    len = strlen (text);
 	    tmp = htonl (len);
-	    write (sock, &tmp, sizeof (tmp));
+	    if (write (sock, &tmp, sizeof (tmp)) != sizeof(tmp))
+	    {
+		vfs_die ( "RPC: write failed (RPC_STRING)" );
+		break;
+	    }
 	    CHECK_SIG_PIPE (sock);
-	    write (sock, text, len);
+	    if (write (sock, text, len) != len)
+	    {
+		vfs_die ( "RPC: write failed (RPC_STRING)" );
+		break;
+	    }
 	    CHECK_SIG_PIPE (sock);
 	    break;
 
@@ -131,7 +143,11 @@ rpc_send (int sock, ...)
 	    len = va_arg (ap, int);
 	    text = va_arg (ap, char *);
 	    tmp = htonl (len);
-	    write (sock, text, len);
+	    if (write (sock, text, len) != len)
+	    {
+		vfs_die ( "RPC: write failed (RPC_BLOCK)" );
+		break;
+	    }
 	    CHECK_SIG_PIPE (sock);
 	    break;
 

@@ -2330,7 +2330,9 @@ void smb_panic(const char *why)
 {
 	const char *cmd = lp_panic_action();
 	if (cmd && *cmd) {
-		system(cmd);
+		if (system(cmd)) {
+		    DEBUG(0,("PANIC: cannot run panic handler command \"%s\"\n", cmd));
+		}
 	}
 	DEBUG(0,("PANIC: %s\n", why));
 	dbgflush();

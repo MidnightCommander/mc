@@ -410,8 +410,11 @@ close_error_pipe (int error, const char *text)
     else
 	title = _("Warning");
     if (old_error >= 0){
-	close (2);
-	dup (old_error);
+	if (dup2 (old_error, 2))
+	{
+	    message (error, MSG_ERROR, "%s", _("Error dup'ing old error pipe"));
+	    return 1;
+	}
 	close (old_error);
 	len = read (error_pipe[0], msg, MAX_PIPE_SIZE - 1);
 
@@ -617,13 +620,20 @@ mc_realpath (const char *path, char resolved_path[])
     max_path = copy_path + PATH_MAX - 2;
     /* If it's a relative pathname use getwd for starters. */
     if (*path != '/') {
-	/* Ohoo... */
-#ifdef HAVE_GETCWD
-	getcwd (new_path, PATH_MAX - 1);
-#else
-	getwd (new_path);
-#endif
-	new_path += strlen (new_path);
+
+	new_path = g_get_current_dir ();
+	if (new_path == NULL)
+	{
+	    strcpy(got_path, "");
+	}
+	else
+	{
+	    g_snprintf(got_path, PATH_MAX, "%s", new_path);
+	    g_free(new_path);
+            new_path = got_path;
+	}
+
+	new_path += strlen (got_path);
 	if (new_path[-1] != '/')
 	    *new_path++ = '/';
     } else {

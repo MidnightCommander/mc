@@ -361,8 +361,10 @@ ftpfs_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, 
     if (MEDATA->logfile) {
 	if (strncmp (cmdstr, "PASS ", 5) == 0) {
 	    fputs ("PASS <Password not logged>\r\n", MEDATA->logfile);
-	} else
-	    fwrite (cmdstr, cmdlen, 1, MEDATA->logfile);
+	} else {
+	    size_t ret;
+	    ret = fwrite (cmdstr, cmdlen, 1, MEDATA->logfile);
+	}
 
 	fflush (MEDATA->logfile);
     }
