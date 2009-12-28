@@ -324,7 +324,7 @@ hotlist_button_callback (int action)
 		return MSG_NOT_HANDLED;	/* If we insert/append a before/after a
 					   it hardly changes anything ;) */
 	    unlink_entry (item);
-	    listbox_remove_current (l_hotlist, 1);
+	    listbox_remove_current (l_hotlist);
 	    item->up = moveto_group;
 	    if (!moveto_group->head)
 		moveto_group->head = item;
@@ -1128,7 +1128,7 @@ static void remove_from_hotlist (struct hotlist *entry)
     g_free (entry->directory);
     g_free (entry);
     /* now remove list entry from screen */
-    listbox_remove_current (l_hotlist, 1);
+    listbox_remove_current (l_hotlist);
     hotlist_state.modified = 1;
 }
 
