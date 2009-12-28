@@ -2204,18 +2204,12 @@ listbox_remove_list (WListbox *l)
     l->list = l->top = l->current = 0;
 }
 
-/*
- * bor 30.10.96: added force flag to remove *last* entry as well
- * bor 30.10.96: corrected selection bug if last entry was removed
- */
-
 void
-listbox_remove_current (WListbox *l, int force)
+listbox_remove_current (WListbox *l)
 {
     WLEntry *p;
 
-    /* Ok, note: this won't allow for emtpy lists */
-    if (!force && (!l->count || l->count == 1))
+    if ((l == NULL) || (l->count == 0))
 	return;
 
     l->count--;
@@ -2227,15 +2221,14 @@ listbox_remove_current (WListbox *l, int force)
 	if (p->next == l->list) {
 	    l->current = p->prev;
 	    l->pos--;
-	}
-	else
+	} else
 	    l->current = p->next;
 
 	if (p == l->list)
 	    l->list = l->top = p->next;
     } else {
 	l->pos = 0;
-	l->list = l->top = l->current = 0;
+	l->list = l->top = l->current = NULL;
     }
 
     g_free (p->text);
@@ -2642,14 +2635,13 @@ listbox_search_text (WListbox *l, const char *text)
 void
 listbox_get_current (WListbox *l, char **string, char **extra)
 {
-    if (!l->current){
-	*string = 0;
-	*extra  = 0;
-    }
-    if (string && l->current)
-	*string = l->current->text;
-    if (extra && l->current)
-	*extra = l->current->data;
+    gboolean ok = (l != NULL) && (l->current != NULL);
+
+    if (string != NULL)
+	*string = ok ? l->current->text : NULL;
+
+    if (extra != NULL)
+	*extra = ok ? l->current->data : NULL;
 }
 
 /* returns TRUE if a function has been called, FALSE otherwise. */

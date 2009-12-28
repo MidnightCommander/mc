@@ -231,7 +231,7 @@ void listbox_select_entry (WListbox *l, WLEntry *dest);
 void listbox_select_by_number (WListbox *l, int n);
 void listbox_select_last (WListbox *l);
 void listbox_select_first (WListbox *l);
-void listbox_remove_current (WListbox *l, int force);
+void listbox_remove_current (WListbox *l);
 void listbox_remove_list (WListbox *l);
 void listbox_get_current (WListbox *l, char **string, char **extra);
 

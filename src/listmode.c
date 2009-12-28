@@ -142,7 +142,7 @@ badd_cback (int action)
 static int
 bremove_cback (int action)
 {
-    listbox_remove_current (l_listmode, 0);
+    listbox_remove_current (l_listmode);
     return 0;
 }
 
