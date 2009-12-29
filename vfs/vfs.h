@@ -22,6 +22,7 @@ ssize_t mc_read (int handle, void *buffer, int count);
 ssize_t mc_write (int handle, const void *buffer, int count);
 int mc_utime (const char *path, struct utimbuf *times);
 int mc_readlink (const char *path, char *buf, int bufsiz);
+int mc_ungetlocalcopy (const char *pathname, const char *local, int has_changed);
 
 #else /* USE_VFS */
 
@@ -33,6 +34,7 @@ int mc_readlink (const char *path, char *buf, int bufsiz);
 #define mc_write write
 #define mc_utime utime
 #define mc_readlink readlink
+#define mc_ungetlocalcopy(x,y,z) do { } while (0)
 
 #endif /* USE_VFS */
 
@@ -80,7 +82,6 @@ int mc_rmdir (const char *path);
 int mc_mkdir (const char *path, mode_t mode);
 
 char *mc_getlocalcopy (const char *pathname);
-int mc_ungetlocalcopy (const char *pathname, const char *local, int has_changed);
 int mc_ctl (int fd, int ctlop, void *arg);
 int mc_setctl (const char *path, int ctlop, void *arg);
 
