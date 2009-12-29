@@ -16,7 +16,6 @@
 #define O_LINEAR 0
 
 #define mc_close close
-#define mc_read read
 #define mc_write write
 #define mc_lseek lseek
 #define mc_opendir opendir

@@ -18,6 +18,7 @@ void vfs_shut (void);
 
 int vfs_current_is_local (void);
 int vfs_file_is_local (const char *filename);
+ssize_t mc_read (int handle, void *buffer, int count);
 
 #else /* USE_VFS */
 
@@ -25,6 +26,7 @@ int vfs_file_is_local (const char *filename);
 #define vfs_shut() do { } while (0)
 #define vfs_current_is_local() (1)
 #define vfs_file_is_local(x) (1)
+#define mc_read read
 
 #endif /* USE_VFS */
 
@@ -50,7 +52,6 @@ char *vfs_translate_url (const char *url);
 
 int mc_open (const char *filename, int flags, ...);
 int mc_close (int handle);
-ssize_t mc_read (int handle, void *buffer, int count);
 ssize_t mc_write (int handle, const void *buffer, int count);
 off_t mc_lseek (int fd, off_t offset, int whence);
 int mc_chdir (const char *path);
