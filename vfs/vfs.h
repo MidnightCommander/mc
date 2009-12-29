@@ -28,6 +28,9 @@ int mc_ungetlocalcopy (const char *pathname, const char *local, int has_changed)
  * return static buffer */
 const char *vfs_get_encoding (const char *path);
 
+/* return new string */
+char *vfs_translate_path_n (const char *path);
+
 #else /* USE_VFS */
 
 #define vfs_init() do { } while (0)
@@ -46,6 +49,12 @@ static inline const char *vfs_get_encoding (const char *path)
     return NULL;
 }
 
+/* return new string */
+static inline char *vfs_translate_path_n (const char *path)
+{
+    return ((path == NULL) ? g_strdup ("") : g_strdup (path));
+}
+
 #endif /* USE_VFS */
 
 char *vfs_strip_suffix_from_filename (const char *filename);
@@ -56,8 +65,6 @@ char *vfs_get_current_dir (void);
  * every invalid character is replaced with question mark
  * return static buffer */
 char *vfs_translate_path (const char *path);
-/* return new string */
-char *vfs_translate_path_n (const char *path);
 /* canonize and translate path, return new string */
 char *vfs_canon_and_translate (const char *path);
 
