@@ -40,6 +40,9 @@
 
 #include "../src/global.h"
 #include "../src/wtools.h"
+
+#include "../../vfs/vfs.h"
+
 #include "internal.h"
 
 /* Block size for reading files in parts */

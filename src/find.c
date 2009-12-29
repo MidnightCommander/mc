@@ -37,8 +37,9 @@
 #include "../src/tty/tty.h"
 #include "../src/skin/skin.h"
 #include "../src/tty/key.h"
-
 #include "../src/search/search.h"
+
+#include "../vfs/vfs.h"
 
 #include "setup.h"
 #include "find.h"

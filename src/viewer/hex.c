@@ -46,6 +46,9 @@
 #include "../src/main.h"
 #include "../src/wtools.h"
 #include "../src/charsets.h"
+
+#include "../../vfs/vfs.h"
+
 #include "internal.h"
 
 /*** global variables ****************************************************************************/

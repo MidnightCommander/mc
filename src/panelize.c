@@ -37,6 +37,8 @@
 
 #include "../src/skin/skin.h"
 
+#include "../vfs/vfs.h"
+
 #include "dialog.h"
 #include "widget.h"
 #include "wtools.h"		/* For common_dialog_repaint() */

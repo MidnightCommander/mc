@@ -57,6 +57,8 @@
 #include "dir.h"
 #include "fileloc.h"
 
+#include "../vfs/vfs.h"
+
 #ifdef HAVE_CHARSET
 #include "charsets.h"
 #endif

@@ -46,8 +46,9 @@
 #include "../src/skin/skin.h"
 #include "../src/tty/mouse.h"
 #include "../src/tty/key.h"	/* XCTRL and ALT macros  */
-
 #include "../src/mcconfig/mcconfig.h"	/* for history loading and saving */
+
+#include "../vfs/vfs.h"
 
 #include "dialog.h"
 #include "widget.h"

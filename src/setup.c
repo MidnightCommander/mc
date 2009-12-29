@@ -33,6 +33,7 @@
 #include "../src/tty/tty.h"
 #include "../src/tty/key.h"
 #include "../src/tty/mouse.h"		/* To make view.h happy */
+#include "../vfs/vfs.h"
 
 #include "args.h"
 #include "dir.h"

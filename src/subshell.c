@@ -60,6 +60,8 @@
 #include "strutil.h"
 #include "fileloc.h"
 
+#include "../vfs/vfs.h"
+
 #ifndef WEXITSTATUS
 #   define WEXITSTATUS(stat_val) ((unsigned)(stat_val) >> 8)
 #endif

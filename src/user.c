@@ -42,6 +42,8 @@
 #include "strutil.h"
 #include "../src/search/search.h"
 
+#include "../vfs/vfs.h"
+
 #include "../edit/edit.h"		/* WEdit, BLOCK_FILE */
 
 /* For the simple listbox manager */

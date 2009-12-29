@@ -81,6 +81,7 @@
 #include "filegui.h"
 #include "tree.h"
 #include "../vfs/vfs-impl.h"
+#include "../vfs/vfs.h"
 
 /* }}} */
 

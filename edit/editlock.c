@@ -60,6 +60,8 @@
 #include "../src/wtools.h"	/* edit_query_dialog () */
 #include "../src/strutil.h"	/* utf string functions */
 
+#include "../vfs/vfs.h"
+
 #define BUF_SIZE 255
 #define PID_BUF_SIZE 10
 
