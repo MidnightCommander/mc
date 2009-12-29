@@ -11,8 +11,17 @@
 #include <dirent.h>
 #include <utime.h>
 
+#ifdef USE_VFS
+
 void vfs_init (void);
 void vfs_shut (void);
+
+#else /* USE_VFS */
+
+#define vfs_init() do { } while (0)
+#define vfs_shut() do { } while (0)
+
+#endif /* USE_VFS */
 
 char *vfs_strip_suffix_from_filename (const char *filename);
 char *vfs_canon (const char *path);
