@@ -13,8 +13,6 @@
 #define VFSF_LOCAL 1		/* Class is local (not virtual) filesystem */
 #define VFSF_NOLINKS 2		/* Hard links not supported */
 
-#define O_LINEAR 0
-
 #define mc_close close
 #define mc_lseek lseek
 #define mc_opendir opendir
