@@ -24,6 +24,10 @@ int mc_utime (const char *path, struct utimbuf *times);
 int mc_readlink (const char *path, char *buf, int bufsiz);
 int mc_ungetlocalcopy (const char *pathname, const char *local, int has_changed);
 
+/* return encoding after last #enc: or NULL, if part does not contain #enc:
+ * return static buffer */
+const char *vfs_get_encoding (const char *path);
+
 #else /* USE_VFS */
 
 #define vfs_init() do { } while (0)
@@ -35,6 +39,12 @@ int mc_ungetlocalcopy (const char *pathname, const char *local, int has_changed)
 #define mc_utime utime
 #define mc_readlink readlink
 #define mc_ungetlocalcopy(x,y,z) do { } while (0)
+
+static inline const char *vfs_get_encoding (const char *path)
+{
+    (void) path;
+    return NULL;
+}
 
 #endif /* USE_VFS */
 
@@ -48,9 +58,6 @@ char *vfs_get_current_dir (void);
 char *vfs_translate_path (const char *path);
 /* return new string */
 char *vfs_translate_path_n (const char *path);
-/* return encoding after last #enc: or NULL, if part does not contain #enc:
- * return static buffer */
-const char *vfs_get_encoding (const char *path);
 /* canonize and translate path, return new string */
 char *vfs_canon_and_translate (const char *path);
 
