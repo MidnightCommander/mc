@@ -83,20 +83,21 @@ send_contents (char *buffer, unsigned int columns, unsigned int rows)
 out:
 
   message = CONSOLE_CONTENTS;
-  write (1, &message, 1);
-
-  read (0, &begin_line, 1);
-  read (0, &end_line, 1);
+  if (write (1, &message, 1) != 1)
+	return;
+  if (read (0, &begin_line, 1) != 1)
+	return;
+  if (read (0, &end_line, 1) != 1)
+	return;
   if (begin_line > lastline)
     begin_line = lastline;
   if (end_line > lastline)
     end_line = lastline;
 
   lc_index = (end_line - begin_line) * columns;
-  bytes = lc_index;
-  if (lc_index != bytes)
-    bytes = 0;
-  write (1, &bytes, 2);
+
+  if (write (1, &bytes, 2) != 2)
+	return;
   if (! bytes)
     return;
 
@@ -108,20 +109,23 @@ out:
       *p++ = buffer [lc_index];
       if (p == outbuf + sizeof (outbuf))
 	{
-	  write (1, outbuf, sizeof (outbuf));
+	  if (write (1, outbuf, sizeof (outbuf)) != sizeof (outbuf))
+	    return;
 	  p = outbuf;
 	}
     }
 
   if (p != outbuf)
-    write (1, outbuf, p - outbuf);
+    if (write (1, outbuf, p - outbuf) < (p - outbuf))
+	return;
 }
 
 static void __attribute__ ((noreturn))
 die (void)
 {
   unsigned char zero = 0;
-  write (1, &zero, 1);
+  ssize_t ret;
+  ret = write (1, &zero, 1);
   exit (3);
 }
 
@@ -202,7 +206,8 @@ main (int argc, char **argv)
   if (buffer == NULL)
     die ();
 
-  write (1, &console_flag, 1);
+  if (write (1, &console_flag, 1) != 1)
+    die ();
 
   while (console_flag && read (0, &action, 1) == 1)
     {
@@ -225,7 +230,8 @@ main (int argc, char **argv)
 	  if (seteuid (euid) >= 0
 	      && lseek (vcsa_fd, 0, 0) == 0
 	      && fstat (console_fd, &st) >= 0 && st.st_uid == uid)
-	    write (vcsa_fd, buffer, buffer_size);
+	    if (write (vcsa_fd, buffer, buffer_size) != buffer_size)
+		die ();
 	  if (seteuid (uid) < 0)
 	    die ();
 	  break;
@@ -234,7 +240,8 @@ main (int argc, char **argv)
 	  break;
 	}
 
-      write (1, &console_flag, 1);
+      if (write (1, &console_flag, 1) != 1)
+	die ();
     }
 
   exit (0);
