@@ -55,7 +55,6 @@ return_zero (void)
 #define mc_getlocalcopy(x) vfs_canon(x)
 #define mc_ungetlocalcopy(x,y,z) do { } while (0)
 
-#define vfs_file_is_local(x) 1
 #define vfs_strip_suffix_from_filename(x) g_strdup(x)
 
 #define vfs_file_class_flags(x) (VFSF_LOCAL)

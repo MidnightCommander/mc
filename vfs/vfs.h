@@ -17,12 +17,14 @@ void vfs_init (void);
 void vfs_shut (void);
 
 int vfs_current_is_local (void);
+int vfs_file_is_local (const char *filename);
 
 #else /* USE_VFS */
 
 #define vfs_init() do { } while (0)
 #define vfs_shut() do { } while (0)
 #define vfs_current_is_local() (1)
+#define vfs_file_is_local(x) (1)
 
 #endif /* USE_VFS */
 
@@ -30,7 +32,6 @@ char *vfs_strip_suffix_from_filename (const char *filename);
 char *vfs_canon (const char *path);
 char *mc_get_current_wd (char *buffer, int bufsize);
 char *vfs_get_current_dir (void);
-int vfs_file_is_local (const char *filename);
 /* translate path back to terminal encoding, remove all #enc: 
  * every invalid character is replaced with question mark
  * return static buffer */
