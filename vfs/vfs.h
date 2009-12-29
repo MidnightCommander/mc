@@ -20,6 +20,7 @@ int vfs_current_is_local (void);
 int vfs_file_is_local (const char *filename);
 ssize_t mc_read (int handle, void *buffer, int count);
 ssize_t mc_write (int handle, const void *buffer, int count);
+int mc_utime (const char *path, struct utimbuf *times);
 
 #else /* USE_VFS */
 
@@ -29,6 +30,7 @@ ssize_t mc_write (int handle, const void *buffer, int count);
 #define vfs_file_is_local(x) (1)
 #define mc_read read
 #define mc_write write
+#define mc_utime utime
 
 #endif /* USE_VFS */
 
@@ -67,7 +69,6 @@ int mc_fstat (int fd, struct stat *buf);
 
 int mc_chmod (const char *path, mode_t mode);
 int mc_chown (const char *path, uid_t owner, gid_t group);
-int mc_utime (const char *path, struct utimbuf *times);
 int mc_readlink (const char *path, char *buf, int bufsiz);
 int mc_unlink (const char *path);
 int mc_symlink (const char *name1, const char *name2);

@@ -34,7 +34,6 @@
 #define mc_rename rename
 
 #define mc_open open
-#define mc_utime utime
 #define mc_chmod chmod
 #define mc_chown chown
 #define mc_chdir chdir
