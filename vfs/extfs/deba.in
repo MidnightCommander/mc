@@ -16,7 +16,7 @@ sub list
 {
        my($qarchive)=@_;
        $qarchive = quote($qarchive);
-       chop($date=`LC_ALL=C date "+%b %d %Y %H:%M"`);
+       chop($date=`LC_ALL=C date "+%m-%d-%Y %H:%M"`);
        chop($info_size=`apt-cache show $qarchive | wc -c`);
        $install_size=length($pressinstall);
        $upgrade_size=length($pressupgrade);
