@@ -29,7 +29,6 @@
 #define mc_fstat fstat
 #define mc_lstat lstat
 
-#define mc_readlink readlink
 #define mc_symlink symlink
 #define mc_rename rename
 
