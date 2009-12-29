@@ -12,7 +12,7 @@
 #include <utime.h>
 #include <stdio.h>
 
-#ifdef USE_VFS
+#ifdef ENABLE_VFS
 
 void vfs_init (void);
 void vfs_shut (void);
@@ -32,7 +32,7 @@ const char *vfs_get_encoding (const char *path);
 /* return new string */
 char *vfs_translate_path_n (const char *path);
 
-#else /* USE_VFS */
+#else /* ENABLE_VFS */
 
 #define vfs_init() do { } while (0)
 #define vfs_shut() do { } while (0)
@@ -78,7 +78,7 @@ static inline char* vfs_canon_and_translate(const char* path)
     return strdup (buf);
 }
 
-#endif /* USE_VFS */
+#endif /* ENABLE_VFS */
 
 char *vfs_strip_suffix_from_filename (const char *filename);
 char *vfs_canon (const char *path);

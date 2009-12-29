@@ -2335,7 +2335,7 @@ do_enter_on_file_entry (file_entry *fe)
 	     _("&No")) != 0)
 	    return 1;
     }
-#ifdef USE_VFS
+#ifdef ENABLE_VFS
     if (!vfs_current_is_local ()) {
 	char *tmp;
 	int ret;

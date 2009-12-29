@@ -25,7 +25,7 @@ dnl   Check for various functions needed by libvfs.
 dnl   This has various effects:
 dnl     Sets MC_VFS_LIBS to libraries required
 dnl     Sets vfs_flags to "pretty" list of vfs implementations we include.
-dnl     Sets shell variable use_vfs to yes (default, --with-vfs) or
+dnl     Sets shell variable enable_vfs to yes (default, --with-vfs) or
 dnl        "no" (--without-vfs).
 
 dnl Private define
@@ -56,7 +56,7 @@ AC_DEFUN([MC_WITH_VFS],
   fi
 
 
-  AC_DEFINE(USE_VFS, 1, [Define to enable VFS support])
+  AC_DEFINE(ENABLE_VFS, 1, [Define to enable VFS support])
   if $use_net_code; then
     AC_DEFINE(USE_NETCODE, 1, [Define to use networked VFS])
   fi
@@ -68,7 +68,6 @@ AC_DEFUN([AC_MC_VFS_CHECKS],[
     if test x"$enable_vfs" != x"no" ; then
 	enable_vfs="yes"
 	vfs_type="Midnight Commander Virtual Filesystem"
-	use_vfs=yes
 
 	AC_MSG_NOTICE([Enabling VFS code])
 

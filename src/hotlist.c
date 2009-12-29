@@ -78,7 +78,7 @@
 #define B_APPEND	(B_USER + 6)
 #define B_MOVE		(B_USER + 7)
 
-#ifdef USE_VFS
+#ifdef ENABLE_VFS
 #include "../vfs/gc.h"
 #define B_FREE_ALL_VFS	(B_USER + 8)
 #define B_REFRESH_VFS	(B_USER + 9)
@@ -145,7 +145,7 @@ static struct _hotlist_but {
       LIST_HOTLIST | LIST_MOVELIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
     { B_ADD_CURRENT, NORMAL_BUTTON,  0,   20, N_("&Add current"),
       LIST_HOTLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
-#ifdef	USE_VFS
+#ifdef	ENABLE_VFS
     { B_REFRESH_VFS, NORMAL_BUTTON,  0,   43, N_("&Refresh"),
       LIST_VFSLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
     { B_FREE_ALL_VFS, NORMAL_BUTTON, 0,   20, N_("Fr&ee VFSs now"),
@@ -287,12 +287,12 @@ unlink_entry (struct hotlist *entry)
 	entry->up = 0;
 }
 
-#ifdef USE_VFS
+#ifdef ENABLE_VFS
 static void add_name_to_list (const char *path)
 {
     listbox_add_item (l_hotlist, 0, 0, path, 0);
 }
-#endif /* !USE_VFS */
+#endif /* !ENABLE_VFS */
 
 static int
 hotlist_button_callback (int action)
@@ -416,7 +416,7 @@ hotlist_button_callback (int action)
 	    break;
 	}
 
-#ifdef	USE_VFS
+#ifdef	ENABLE_VFS
     case B_FREE_ALL_VFS:
 	vfs_expire (1);
 	/* fall through */
@@ -426,7 +426,7 @@ hotlist_button_callback (int action)
 	listbox_add_item (l_hotlist, 0, 0, home_dir, 0);
 	vfs_fill_names (add_name_to_list);
 	return MSG_NOT_HANDLED;
-#endif				/* USE_VFS */
+#endif				/* ENABLE_VFS */
 
     default:
 	return MSG_HANDLED;
@@ -686,12 +686,12 @@ init_hotlist (int list_type)
 		     l_call);
 
     /* Fill the hotlist with the active VFS or the hotlist */
-#ifdef USE_VFS
+#ifdef ENABLE_VFS
     if (list_type == LIST_VFSLIST) {
 	listbox_add_item (l_hotlist, 0, 0, home_dir, 0);
 	vfs_fill_names (add_name_to_list);
     } else
-#endif				/* !USE_VFS */
+#endif				/* !ENABLE_VFS */
 	fill_listbox ();
 
     add_widget_autopos (hotlist_dlg, l_hotlist, WPOS_KEEP_ALL);

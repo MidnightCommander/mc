@@ -213,7 +213,7 @@ src/
 
   file.c:
 
-    'do_reget' can be extern if (USE_VFS && USE_NETCODE), not if (USE_VFS).
+    'do_reget' can be extern if (ENABLE_VFS && USE_NETCODE), not if (ENABLE_VFS).
 
   find.c:
 

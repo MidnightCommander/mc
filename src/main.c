@@ -99,7 +99,7 @@
 #include "charsets.h"
 #endif				/* HAVE_CHARSET */
 
-#ifdef USE_VFS
+#ifdef ENABLE_VFS
 #include "../vfs/gc.h"
 #endif
 
@@ -752,7 +752,7 @@ create_command_menu (void)
     entries = g_list_append (entries, menu_separator_create ());
     entries = g_list_append (entries, menu_entry_create (_("Command &history"),              CK_HistoryCmd));
     entries = g_list_append (entries, menu_entry_create (_("Di&rectory hotlist"),            CK_QuickChdirCmd));
-#ifdef USE_VFS
+#ifdef ENABLE_VFS
     entries = g_list_append (entries, menu_entry_create (_("&Active VFS list"),              CK_ReselectVfs));
 #endif
 #ifdef WITH_BACKGROUND
@@ -785,7 +785,7 @@ create_options_menu (void)
     entries = g_list_append (entries, menu_entry_create (_("C&onfirmation..."),  CK_ConfirmBox));
     entries = g_list_append (entries, menu_entry_create (_("&Display bits..."),  CK_DisplayBitsBox));
     entries = g_list_append (entries, menu_entry_create (_("Learn &keys..."),    CK_LearnKeys));
-#ifdef USE_VFS
+#ifdef ENABLE_VFS
     entries = g_list_append (entries, menu_entry_create (_("&Virtual FS..."),    CK_ConfigureVfs));
 #endif
     entries = g_list_append (entries, menu_separator_create ());
@@ -1154,7 +1154,7 @@ midnight_execute_cmd (Widget *sender, unsigned long command)
     case CK_ConfigureBox:
         configure_box ();
         break;
-#ifdef USE_VFS
+#ifdef ENABLE_VFS
     case CK_ConfigureVfs:
         configure_vfs ();
         break;
@@ -1301,7 +1301,7 @@ midnight_execute_cmd (Widget *sender, unsigned long command)
     case CK_RereadCmd:
         reread_cmd ();
         break;
-#ifdef USE_VFS
+#ifdef ENABLE_VFS
     case CK_ReselectVfs:
         reselect_vfs ();
         break;

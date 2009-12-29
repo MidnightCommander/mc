@@ -92,7 +92,7 @@
 
 #include "textconf.h"
 
-#ifdef USE_VFS
+#ifdef ENABLE_VFS
 #include "../vfs/vfs.h"
 #else
 #include "vfsdummy.h"

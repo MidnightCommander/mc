@@ -474,11 +474,11 @@ edit_set_filename (WEdit *edit, const char *f)
 	f = "";
     edit->filename = g_strdup (f);
     if (edit->dir == NULL && *f != PATH_SEP)
-#ifdef USE_VFS
+#ifdef ENABLE_VFS
 	edit->dir = g_strdup (vfs_get_current_dir ());
-#else
+#else /* ENABLE_VFS */
 	edit->dir = g_get_current_dir ();
-#endif
+#endif /* ENABLE_VFS */
 }
 
 static gboolean

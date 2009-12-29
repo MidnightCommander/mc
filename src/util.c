@@ -837,7 +837,7 @@ strip_ctrl_codes (char *s)
 }
 
 
-#ifndef USE_VFS
+#ifndef ENABLE_VFS
 char *
 get_current_wd (char *buffer, int size)
 {
@@ -857,7 +857,7 @@ get_current_wd (char *buffer, int size)
 
     return buffer;
 }
-#endif /* !USE_VFS */
+#endif /* !ENABLE_VFS */
 
 enum compression_type
 get_compression_type (int fd, const char * name)

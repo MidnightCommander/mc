@@ -7,7 +7,7 @@
 #ifndef MC_VFS_IMPL_H
 #define MC_VFS_IMPL_H
 
-#ifdef USE_VFS
+#ifdef ENABLE_VFS
 
 #include <sys/types.h>
 #include <dirent.h>
@@ -150,6 +150,6 @@ void init_sfs (void);
 void init_tarfs (void);
 void init_undelfs (void);
 
-#endif /* USE_VFS */
+#endif /* ENABLE_VFS */
 
 #endif /* MC_VFS_IMPL_H */
