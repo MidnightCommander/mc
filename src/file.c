@@ -196,6 +196,8 @@ is_in_linklist (struct link *lp, const char *path, struct stat *sb)
     struct vfs_class *vfs = vfs_get_class (path);
 #endif				/* USE_VFS */
 
+    (void) path;
+
     while (lp) {
 #ifdef USE_VFS
 	if (lp->vfs == vfs)
