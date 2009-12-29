@@ -10,6 +10,7 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include <utime.h>
+#include <stdio.h>
 
 #ifdef USE_VFS
 
@@ -53,6 +54,28 @@ static inline const char *vfs_get_encoding (const char *path)
 static inline char *vfs_translate_path_n (const char *path)
 {
     return ((path == NULL) ? g_strdup ("") : g_strdup (path));
+}
+
+static inline char* vfs_canon_and_translate(const char* path)
+{
+    char buf[MC_MAXPATHLEN];
+
+    if (path == NULL)
+	return strdup("");
+
+    if (path[0] == PATH_SEP)
+    {
+	char cwd[MC_MAXPATHLEN];
+	if (getcwd (cwd, sizeof (cwd)))
+	    snprintf (buf, sizeof (buf), "%s" PATH_SEP_STR "%s", cwd, path);
+	else
+	    return strdup ("[MC_MAXPATHLEN TOO SMALL]");
+    }
+    else
+	snprintf (buf, sizeof (buf), "%s", path);
+
+    canonicalize_pathname (buf);
+    return strdup (buf);
 }
 
 #endif /* USE_VFS */
