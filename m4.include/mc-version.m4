@@ -1,9 +1,9 @@
 dnl @synopsis MC_VERSION
 dnl
-dnl get current version of Midnight Commander from git tags
+dnl Get current version of Midnight Commander from git tags
 dnl
 dnl @author Slava Zanko <slavazanko@gmail.com>
-dnl @version 2009-06-02
+dnl @version 2009-12-30
 dnl @license GPL
 dnl @copyright Free Software Foundation, Inc.
 
@@ -17,4 +17,22 @@ AC_DEFUN([MC_VERSION],[
         VERSION="unknown"
     fi
     AC_SUBST(VERSION)
+
+    dnl Version and Release without dashes for the distro packages
+    DISTR_VERSION=`echo $VERSION | sed 's/^\([[^\-]]*\).*/\1/'`
+    DISTR_RELEASE=`echo $VERSION | sed 's/^[[^\-]]*\-\(.*\)/\1/' | sed 's/-/./g'`
+
+    if `echo $VERSION | grep -c '\-pre'`; then
+        DISTR_RELEASE="0.$DISTR_RELEASE"
+    else
+        if test `echo $VERSION | grep -c '\-'` -eq 0; then
+            DISTR_RELEASE=1
+        else
+            DISTR_RELEASE="2.$DISTR_RELEASE"
+        fi
+    fi
+
+    AC_SUBST(DISTR_VERSION)
+    AC_SUBST(DISTR_RELEASE)
+
 ])

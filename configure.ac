@@ -544,10 +544,6 @@ AC_SUBST(LIBS)
 dnl Libraries used only when building the mc binary
 AC_SUBST(MCLIBS)
 
-dnl Version for the RedHat package, without dashes
-RPM_VERSION=`echo $VERSION | sed 's/-/./g'`
-AC_SUBST(RPM_VERSION)
-
 if test -n "$use_smbfs"; then
   AC_CONFIG_SUBDIRS([vfs/samba])
 fi

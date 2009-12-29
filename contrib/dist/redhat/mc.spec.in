@@ -11,14 +11,15 @@
         %define _with_screen --with-screen=slang
 %endif
 
-%define mc_version @RPM_VERSION@
+%define mc_version @DISTR_VERSION@
+%define mc_release @DISTR_RELEASE@
 %define mc_tarball @VERSION@
 
 Summary:        User-friendly text console file manager and visual shell
 Name:           mc
 Version:        %{mc_version}
-Release:        1%{?dist}
-Epoch:          2
+Release:        %{mc_release}%{?dist}
+Epoch:          3
 License:        GPLv2
 Group:          System Environment/Shells
 Source0:        %{name}-%{mc_tarball}.tar.gz
@@ -152,6 +153,10 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libexecdir}/mc
 
 %changelog
+* Wed Dec 30 2009 Yury V. Zaytsev <yury@shurup.com>
+- Bumped the epoch again and changed the versioning scheme.
+- Thanks to Slava Zanko for all his hard work on m4 vodoo!
+
 * Fri Dec 25 2009 Yury V. Zaytsev <yury@shurup.com>
 - Had to bump the epoch because of the braindead versioning scheme used.
 
