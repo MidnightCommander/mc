@@ -1275,12 +1275,14 @@ str_utf8_create_key (const char *text, int case_sen)
     return str_utf8_create_key_gen (text, case_sen, g_utf8_collate_key);
 }
 
+#ifdef MC__USE_STR_UTF8_CREATE_KEY_FOR_FILENAME
 static char *
 str_utf8_create_key_for_filename (const char *text, int case_sen)
 {
     return str_utf8_create_key_gen (text, case_sen,
 				    g_utf8_collate_key_for_filename);
 }
+#endif
 
 static int
 str_utf8_key_collate (const char *t1, const char *t2, int case_sen)
@@ -1346,7 +1348,7 @@ str_utf8_init (void)
     result.prefix = str_utf8_prefix;
     result.caseprefix = str_utf8_caseprefix;
     result.create_key = str_utf8_create_key;
-#if 0
+#ifdef MC__USE_STR_UTF8_CREATE_KEY_FOR_FILENAME
     /* case insensitive sort files in "a1 a2 a10" order */
     result.create_key_for_filename = str_utf8_create_key_for_filename;
 #else
