@@ -11,10 +11,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.7.0-pre4\n"
+"Project-Id-Version: mc 4.7.0\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
 "POT-Creation-Date: 2009-12-25 19:06+0200\n"
-"PO-Revision-Date: 2009-12-19 14:20+0100\n"
+"PO-Revision-Date: 2009-12-29 12:11+0100\n"
 "Last-Translator: Martin Zoubek <zoubek@seznam.cz>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -660,7 +660,7 @@ msgid "ButtonBar|Help"
 msgstr "TlačítkováLišta|Pomoc"
 
 msgid "ButtonBar|Save"
-msgstr "TlačítkováLišta|Ulož"
+msgstr "TlačítkováLišta|Uložit"
 
 msgid "ButtonBar|Mark"
 msgstr "TlačítkováLišta|Označ"
@@ -669,13 +669,13 @@ msgid "ButtonBar|Replac"
 msgstr "TlačítkováLišta|Nahraď"
 
 msgid "ButtonBar|Copy"
-msgstr "TlačítkováLišta|Kopíru"
+msgstr "TlačítkováLišta|Kopie"
 
 msgid "ButtonBar|Move"
-msgstr "TlačítkováLišta|Přesuň"
+msgstr "TlačítkováLišta|Přesun"
 
 msgid "ButtonBar|Search"
-msgstr "TlačítkováLišta|Hledej"
+msgstr "TlačítkováLišta|Hledat"
 
 msgid "ButtonBar|Delete"
 msgstr "TlačítkováLišta|Smazat"
@@ -684,7 +684,7 @@ msgid "ButtonBar|PullDn"
 msgstr "TlačítkováLišta|H.Menu"
 
 msgid "ButtonBar|Quit"
-msgstr "TlačítkováLišta|Ukončit"
+msgstr "TlačítkováLišta|Konec"
 
 msgid " Load syntax file "
 msgstr " Načíst soubor se syntaxí "
@@ -1711,7 +1711,7 @@ msgid "FileOperation|Copy"
 msgstr "FileOperation|Kopírovat"
 
 msgid "FileOperation|Move"
-msgstr "FileOperation|Presunouť"
+msgstr "FileOperation|Přesunout"
 
 msgid "FileOperation|Delete"
 msgstr "FileOperation|Smazat"
@@ -2466,13 +2466,13 @@ msgid "ButtonBar|View"
 msgstr "TlačítkováLišta|Zobraz"
 
 msgid "ButtonBar|Edit"
-msgstr "TlačítkováLišta|Edituj"
+msgstr "TlačítkováLišta|Uprav"
 
 msgid "ButtonBar|RenMov"
-msgstr "TlačítkováLišta|PřejPřes"
+msgstr "TlačítkováLišta|Přesun"
 
 msgid "ButtonBar|Mkdir"
-msgstr "TlačítkováLišta|VytvAdr"
+msgstr "TlačítkováLišta|NovAdr"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "Proměnná prostředí TERM není nastavena!\n"
@@ -2871,16 +2871,16 @@ msgid "ButtonBar|Static"
 msgstr "TlačítkováLišta|Static"
 
 msgid "ButtonBar|Dynamc"
-msgstr "TlačítkováLišta|Dynamic"
+msgstr "TlačítkováLišta|Dynamc"
 
 msgid "ButtonBar|Rescan"
-msgstr "TlačítkováLišta|Obnovit"
+msgstr "TlačítkováLišta|Obnov"
 
 msgid "ButtonBar|Forget"
-msgstr "TlačítkováLišta|Zapomen"
+msgstr "TlačítkováLišta|Zapomn"
 
 msgid "ButtonBar|Rmdir"
-msgstr "TlačítkováLišta|OdstAdr"
+msgstr "TlačítkováLišta|OdsAdr"
 
 #, c-format
 msgid ""
@@ -2998,9 +2998,8 @@ msgstr "/ na num. klávesnici"
 msgid "* on keypad"
 msgstr "* na num. klávesnici"
 
-#, fuzzy
 msgid "Escape key"
-msgstr "Mezerník"
+msgstr "Klávesa Escape"
 
 msgid "Left arrow keypad"
 msgstr "Šipka vlevo na numerické klávesnici"
@@ -3280,10 +3279,10 @@ msgid "ButtonBar|Parse"
 msgstr "TlačítkováLišta|Rozeb."
 
 msgid "ButtonBar|Unform"
-msgstr "TlačítkováLišta|Odform."
+msgstr "TlačítkováLišta|Odform"
 
 msgid "ButtonBar|Format"
-msgstr "TlačítkováLišta|Formát."
+msgstr "TlačítkováLišta|Formát"
 
 #, c-format
 msgid "File: %s"
@@ -3790,28 +3789,3 @@ msgstr "Interní chyba:"
 
 msgid "Changes to file lost"
 msgstr "Změny souboru byly ztraceny"
-
-#~ msgid "File:       None"
-#~ msgstr "Soubor:    Žádný"
-
-#~ msgid "&Fix it"
-#~ msgstr "&Opravit"
-
-#~ msgid "don't ask again"
-#~ msgstr "znova se neptat"
-
-#~ msgid ""
-#~ "Chosen display charset (Settings->Display bits)\n"
-#~ "or source codeset (in mcedit ctrl-t) \n"
-#~ "does not match one set via locale. \n"
-#~ "Set correct codeset manually or press <<Fix it>> \n"
-#~ "to set locale default.\n"
-#~ "\n"
-#~ "Or set 'don't ask again' and press <<Skip>>"
-#~ msgstr ""
-#~ "Zvolená znaková sada (Settings->Display bits)\n"
-#~ "nebo zdrovová kódova sada (v mcedit ctrl-t) \n"
-#~ "neodpovídá znakové sadě nastavené v locale. \n"
-#~ "Opravte znakovou sadu manuálně, nebo stiskněte <<Opravit>> \n"
-#~ "pro nastavení výchozí znakové sady.\n"
-#~ "Nebo nastavte <<znova se neptat>> a stiskněte <<Přeskočit>>"
