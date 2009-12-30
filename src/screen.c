@@ -62,6 +62,7 @@
 #include "charsets.h"		/* get_codepage_id () */
 #include "cmddef.h"		/* CK_ cmd name const */
 #include "keybind.h"		/* global_keymap_t */
+#include "../vfs/vfs.h"
 
 #define ELEMENTS(arr) ( sizeof(arr) / sizeof((arr)[0]) )
 
@@ -2334,7 +2335,7 @@ do_enter_on_file_entry (file_entry *fe)
 	     _("&No")) != 0)
 	    return 1;
     }
-#ifdef USE_VFS
+#ifdef ENABLE_VFS
     if (!vfs_current_is_local ()) {
 	char *tmp;
 	int ret;

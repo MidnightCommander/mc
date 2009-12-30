@@ -33,7 +33,7 @@
 #include "ecs.h"
 #include "../src/textconf.h"
 
-#ifdef USE_VFS
+#ifdef ENABLE_VFS
 static const char *const vfs_supported[] = {
     "tarfs",
     "extfs",
@@ -53,7 +53,7 @@ static const char *const vfs_supported[] = {
 #endif
     NULL
 };
-#endif				/* USE_VFS */
+#endif				/* ENABLE_VFS */
 
 
 static const char *const features[] = {
@@ -120,7 +120,7 @@ show_version (void)
 
     printf (_("GNU Midnight Commander %s\n"), VERSION);
 
-#ifdef USE_VFS
+#ifdef ENABLE_VFS
     printf (_("Virtual File System:"));
     for (i = 0; vfs_supported[i]; i++) {
 	if (i == 0)
@@ -131,7 +131,7 @@ show_version (void)
 	printf ("%s", _(vfs_supported[i]));
     }
     printf ("\n");
-#endif				/* USE_VFS */
+#endif				/* ENABLE_VFS */
 
     for (i = 0; features[i]; i++)
 	printf ("%s", _(features[i]));

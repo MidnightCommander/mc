@@ -33,6 +33,7 @@
 #include "../src/tty/tty.h"
 #include "../src/tty/key.h"
 #include "../src/tty/mouse.h"		/* To make view.h happy */
+#include "../vfs/vfs.h"
 
 #include "args.h"
 #include "dir.h"
@@ -52,7 +53,7 @@
 #include "fileloc.h"
 #include "wtools.h"
 
-#ifdef USE_VFS
+#ifdef ENABLE_VFS
 #include "../vfs/gc.h"
 #endif
 
@@ -187,7 +188,7 @@ static const struct {
     { "xtree_mode", &xtree_mode },
     { "num_history_items_recorded", &num_history_items_recorded },
     { "file_op_compute_totals", &file_op_compute_totals },
-#ifdef USE_VFS
+#ifdef ENABLE_VFS
     { "vfs_timeout", &vfs_timeout },
 #ifdef USE_NETCODE
     { "ftpfs_directory_timeout", &ftpfs_directory_timeout },
@@ -200,7 +201,7 @@ static const struct {
     { "ftpfs_first_cd_then_ls", &ftpfs_first_cd_then_ls },
     { "fish_directory_timeout", &fish_directory_timeout },
 #endif /* USE_NETCODE */
-#endif /* USE_VFS */
+#endif /* ENABLE_VFS */
 #ifdef USE_INTERNAL_EDIT
     { "editor_word_wrap_line_length", &option_word_wrap_line_length },
     { "editor_tab_spacing", &option_tab_spacing },
@@ -378,13 +379,13 @@ save_setup (void)
     save_panel_types ();
 /*     directory_history_save (); */
 
-#if defined(USE_VFS) && defined (USE_NETCODE)
+#if defined(ENABLE_VFS) && defined (USE_NETCODE)
     mc_config_set_string(mc_main_config, "Misc" , "ftpfs_password",
 			       ftpfs_anonymous_passwd);
     if (ftpfs_proxy_host)
 	mc_config_set_string(mc_main_config, "Misc" , "ftp_proxy_host",
 				   ftpfs_proxy_host);
-#endif /* USE_VFS && USE_NETCODE */
+#endif /* ENABLE_VFS && USE_NETCODE */
 
 #ifdef HAVE_CHARSET
     mc_config_set_string(mc_main_config, "Misc" , "display_codepage",
@@ -799,9 +800,9 @@ load_setup (void)
     /* Load the directory history */
 /*    directory_history_load (); */
     /* Remove the temporal entries */
-#if defined(USE_VFS) && defined (USE_NETCODE)
+#if defined(ENABLE_VFS) && defined (USE_NETCODE)
     ftpfs_init_passwd ();
-#endif /* USE_VFS && USE_NETCODE */
+#endif /* ENABLE_VFS && USE_NETCODE */
 
 #ifdef HAVE_CHARSET
     if ( load_codepages_list() > 0 ) {
@@ -826,7 +827,7 @@ load_setup (void)
 #endif /* HAVE_CHARSET */
 }
 
-#if defined(USE_VFS) && defined (USE_NETCODE)
+#if defined(ENABLE_VFS) && defined (USE_NETCODE)
 char *
 load_anon_passwd ()
 {
@@ -839,7 +840,7 @@ load_anon_passwd ()
     g_free(buffer);
     return NULL;
 }
-#endif /* USE_VFS && USE_NETCODE */
+#endif /* ENABLE_VFS && USE_NETCODE */
 
 void
 done_setup (void)

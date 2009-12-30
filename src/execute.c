@@ -118,12 +118,12 @@ do_execute (const char *lc_shell, const char *command, int flags)
     char *new_dir = NULL;
 #endif				/* HAVE_SUBSHELL_SUPPORT */
 
-#ifdef USE_VFS
+#ifdef ENABLE_VFS
     char *old_vfs_dir = 0;
 
     if (!vfs_current_is_local ())
 	old_vfs_dir = g_strdup (vfs_get_current_dir ());
-#endif				/* USE_VFS */
+#endif				/* ENABLE_VFS */
 
     save_cwds_stat ();
     pre_exec ();
@@ -139,11 +139,11 @@ do_execute (const char *lc_shell, const char *command, int flags)
 	do_update_prompt ();
 
 	/* We don't care if it died, higher level takes care of this */
-#ifdef USE_VFS
+#ifdef ENABLE_VFS
 	invoke_subshell (command, VISIBLY, old_vfs_dir ? NULL : &new_dir);
 #else
 	invoke_subshell (command, VISIBLY, &new_dir);
-#endif				/* !USE_VFS */
+#endif				/* !ENABLE_VFS */
     } else
 #endif				/* HAVE_SUBSHELL_SUPPORT */
 	my_system (flags, lc_shell, command);
@@ -181,12 +181,12 @@ do_execute (const char *lc_shell, const char *command, int flags)
 
 #endif				/* HAVE_SUBSHELL_SUPPORT */
 
-#ifdef USE_VFS
+#ifdef ENABLE_VFS
     if (old_vfs_dir) {
 	mc_chdir (old_vfs_dir);
 	g_free (old_vfs_dir);
     }
-#endif				/* USE_VFS */
+#endif				/* ENABLE_VFS */
 
     update_panels (UP_OPTIMIZE, UP_KEEPSEL);
     update_xterm_title_path ();

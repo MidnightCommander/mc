@@ -65,7 +65,7 @@
 #   include "../vfs/ftpfs.h"
 #endif
 
-#ifdef USE_VFS
+#ifdef ENABLE_VFS
 #include "../vfs/gc.h"
 #endif
 
@@ -689,7 +689,7 @@ tree_box (const char *current_dir)
     return val;
 }
 
-#ifdef USE_VFS
+#ifdef ENABLE_VFS
 
 static char *ret_timeout;
 
@@ -768,7 +768,7 @@ configure_vfs (void)
 #undef VFSY
 }
 
-#endif				/* USE_VFS */
+#endif				/* ENABLE_VFS */
 
 char *
 cd_dialog (void)

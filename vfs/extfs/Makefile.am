@@ -64,7 +64,7 @@ EXTFS_OUT = 			\
 	uzip			\
 	uzoo
 
-if USE_VFS
+if ENABLE_VFS
 extfs_DATA = $(EXTFS_MISC)
 extfs_SCRIPTS = $(EXTFS_CONST) $(EXTFS_OUT)
 

@@ -25,7 +25,7 @@ dnl   Check for various functions needed by libvfs.
 dnl   This has various effects:
 dnl     Sets MC_VFS_LIBS to libraries required
 dnl     Sets vfs_flags to "pretty" list of vfs implementations we include.
-dnl     Sets shell variable use_vfs to yes (default, --with-vfs) or
+dnl     Sets shell variable enable_vfs to yes (default, --with-vfs) or
 dnl        "no" (--without-vfs).
 
 dnl Private define
@@ -56,7 +56,7 @@ AC_DEFUN([MC_WITH_VFS],
   fi
 
 
-  AC_DEFINE(USE_VFS, 1, [Define to enable VFS support])
+  AC_DEFINE(ENABLE_VFS, 1, [Define to enable VFS support])
   if $use_net_code; then
     AC_DEFINE(USE_NETCODE, 1, [Define to use networked VFS])
   fi
@@ -64,15 +64,12 @@ AC_DEFUN([MC_WITH_VFS],
 
 AC_DEFUN([AC_MC_VFS_CHECKS],[
     AC_ARG_ENABLE([vfs],
-                  [  --disable-vfs           Compile with VFS code])
+                  [  --disable-vfs           Disable VFS])
     if test x"$enable_vfs" != x"no" ; then
 	enable_vfs="yes"
 	vfs_type="Midnight Commander Virtual Filesystem"
-	use_vfs=yes
 
 	AC_MSG_NOTICE([Enabling VFS code])
-
-	AC_MC_MVFS_FILESYSTEMS
 
 	AC_MC_VFS_CPIOFS
 	AC_MC_VFS_TARFS
@@ -88,6 +85,13 @@ AC_DEFUN([AC_MC_VFS_CHECKS],[
 
     else
 	vfs_type="Plain OS filesystem"
+	AM_CONDITIONAL(ENABLE_VFS_CPIO, [false])
+	AM_CONDITIONAL(ENABLE_VFS_TAR, [false])
+	AM_CONDITIONAL(ENABLE_VFS_FTP, [false])
+	AM_CONDITIONAL(ENABLE_VFS_FISH, [false])
+	AM_CONDITIONAL(ENABLE_VFS_EXTFS, [false])
+	AM_CONDITIONAL(ENABLE_VFS_SFS, [false])
+	AM_CONDITIONAL(ENABLE_VFS_UNDELFS, [false])
     fi
 
     AM_CONDITIONAL(ENABLE_VFS, [test x"$enable_vfs" = x"yes"])

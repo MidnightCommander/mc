@@ -301,7 +301,7 @@ have to use that instead of gettimeofday])])
 AC_MC_VFS_CHECKS
 
 vfs_type="normal"
-if test x$use_vfs = xyes; then
+if test x$enable_vfs = xyes; then
 	AC_MSG_NOTICE([enabling VFS code])
 	vfs_type="Midnight Commander Virtual File System"
 fi
@@ -555,8 +555,7 @@ fi
 AM_CONDITIONAL(USE_MAINTAINER_MODE, [test x"$USE_MAINTAINER_MODE" = xyes])
 AM_CONDITIONAL(USE_SCREEN_SLANG, [test x"$with_screen" = xslang])
 AM_CONDITIONAL(USE_EDIT, [test -n "$use_edit"])
-AM_CONDITIONAL(USE_VFS, [test "x$use_vfs" = xyes])
-AM_CONDITIONAL(USE_VFS_NET, [test x"$use_net_code" = xtrue])
+AM_CONDITIONAL(ENABLE_VFS_NET, [test x"$use_net_code" = xtrue])
 AM_CONDITIONAL(USE_SAMBA_FS, [test -n "$use_smbfs"])
 AM_CONDITIONAL(ENABLE_MCSERVER, [test x"$enable_mcserver" = "xyes"])
 AM_CONDITIONAL(CHARSET, [test -n "$have_charset"])

@@ -62,6 +62,8 @@
 #include "../src/mcconfig/mcconfig.h"
 #include "../src/skin/skin.h"		/* mc_skin_color_get */
 
+#include "../vfs/vfs.h"
+
 #include "../edit/edit-impl.h"
 #include "../edit/edit.h"
 #include "../edit/editlock.h"
@@ -472,11 +474,11 @@ edit_set_filename (WEdit *edit, const char *f)
 	f = "";
     edit->filename = g_strdup (f);
     if (edit->dir == NULL && *f != PATH_SEP)
-#ifdef USE_VFS
+#ifdef ENABLE_VFS
 	edit->dir = g_strdup (vfs_get_current_dir ());
-#else
+#else /* ENABLE_VFS */
 	edit->dir = g_get_current_dir ();
-#endif
+#endif /* ENABLE_VFS */
 }
 
 static gboolean

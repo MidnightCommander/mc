@@ -723,7 +723,7 @@ void quick_chdir_cmd (void)
     g_free (target);
 }
 
-#ifdef USE_VFS
+#ifdef ENABLE_VFS
 void reselect_vfs (void)
 {
     char *target;
@@ -736,7 +736,7 @@ void reselect_vfs (void)
         message (D_ERROR, MSG_ERROR, _("Cannot change directory") );
     g_free (target);
 }
-#endif /* USE_VFS */
+#endif /* ENABLE_VFS */
 
 static int compare_files (char *name1, char *name2, off_t size)
 {

@@ -38,6 +38,8 @@
 #include "fs.h"
 #include "util.h"
 
+#include "../vfs/vfs.h"
+
 static char *
 get_absolute_name (const char *file)
 {

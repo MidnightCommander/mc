@@ -81,6 +81,7 @@
 #include "filegui.h"
 #include "tree.h"
 #include "../vfs/vfs-impl.h"
+#include "../vfs/vfs.h"
 
 /* }}} */
 
@@ -191,14 +192,16 @@ is_in_linklist (struct link *lp, const char *path, struct stat *sb)
 {
     ino_t ino = sb->st_ino;
     dev_t dev = sb->st_dev;
-#ifdef USE_VFS
+#ifdef ENABLE_VFS
     struct vfs_class *vfs = vfs_get_class (path);
-#endif				/* USE_VFS */
+#endif				/* ENABLE_VFS */
+
+    (void) path;
 
     while (lp) {
-#ifdef USE_VFS
+#ifdef ENABLE_VFS
 	if (lp->vfs == vfs)
-#endif				/* USE_VFS */
+#endif				/* ENABLE_VFS */
 	    if (lp->ino == ino && lp->dev == dev)
 		return 1;
 	lp = lp->next;

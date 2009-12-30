@@ -75,13 +75,13 @@ distclean-local:
 	  (cd samba && $(MAKE) distclean) \
 	else :; fi
 
-if USE_VFS
+if ENABLE_VFS
 noinst_LIBRARIES = libvfs-mc.a
 else
 noinst_LIBRARIES =
 endif
 
-if USE_VFS_NET
+if ENABLE_VFS_NET
 libvfs_mc_a_SOURCES = $(NETFILES) $(NONETFILES)
 else
 libvfs_mc_a_SOURCES = $(NONETFILES)

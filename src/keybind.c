@@ -838,9 +838,9 @@ const global_keymap_t default_main_map[] = {
 
 const global_keymap_t default_main_x_map[] = {
     { 'd',         CK_CompareDirsCmd,      "d" },
-#ifdef USE_VFS
+#ifdef ENABLE_VFS
     { 'a',         CK_ReselectVfs,         "a"},
-#endif				/* USE_VFS */
+#endif				/* ENABLE_VFS */
     { 'p',         CK_CopyCurrentPathname, "p" },
     { XCTRL ('p'), CK_CopyOtherPathname,   "C-p" },
     { 't',         CK_CopyCurrentTagged,   "t" },

@@ -50,9 +50,9 @@
 #include "../../src/cons.saver.h"
 #include "../../src/strutil.h"  /* str_casecmp */
 
-#ifdef USE_VFS
+#ifdef ENABLE_VFS
 #include "../../vfs/gc.h"
-#endif
+#endif /* ENABLE_VFS */
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
 #include "../src/tty/x11conn.h"

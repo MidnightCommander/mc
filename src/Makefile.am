@@ -32,7 +32,7 @@ if USE_EDIT
 EDITLIB = ../edit/libedit.a
 endif
 
-if USE_VFS
+if ENABLE_VFS
 if USE_SAMBA_FS
 VFSLIB = ../vfs/libvfs-mc.a ../vfs/samba/libsamba.a
 else

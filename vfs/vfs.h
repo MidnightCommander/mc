@@ -10,25 +10,82 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include <utime.h>
+#include <stdio.h>
+
+#ifdef ENABLE_VFS
 
 void vfs_init (void);
 void vfs_shut (void);
+
+int vfs_current_is_local (void);
+int vfs_file_is_local (const char *filename);
+ssize_t mc_read (int handle, void *buffer, int count);
+ssize_t mc_write (int handle, const void *buffer, int count);
+int mc_utime (const char *path, struct utimbuf *times);
+int mc_readlink (const char *path, char *buf, int bufsiz);
+int mc_ungetlocalcopy (const char *pathname, const char *local, int has_changed);
+
+/* return encoding after last #enc: or NULL, if part does not contain #enc:
+ * return static buffer */
+const char *vfs_get_encoding (const char *path);
+
+/* return new string */
+char *vfs_translate_path_n (const char *path);
+
+#else /* ENABLE_VFS */
+
+#define vfs_init() do { } while (0)
+#define vfs_shut() do { } while (0)
+#define vfs_current_is_local() (1)
+#define vfs_file_is_local(x) (1)
+#define mc_read read
+#define mc_write write
+#define mc_utime utime
+#define mc_readlink readlink
+#define mc_ungetlocalcopy(x,y,z) do { } while (0)
+
+static inline const char *vfs_get_encoding (const char *path)
+{
+    (void) path;
+    return NULL;
+}
+
+/* return new string */
+static inline char *vfs_translate_path_n (const char *path)
+{
+    return ((path == NULL) ? g_strdup ("") : g_strdup (path));
+}
+
+static inline char* vfs_canon_and_translate(const char* path)
+{
+    char *ret_str;
+
+    if (path == NULL)
+	return g_strdup("");
+
+    if (path[0] == PATH_SEP)
+    {
+	char *curr_dir = g_get_current_dir();
+	ret_str = g_strdup_printf("%s" PATH_SEP_STR "%s", curr_dir, path);
+	g_free(curr_dir);
+    }
+    else
+	ret_str = g_strdup(path);
+
+    canonicalize_pathname (ret_str);
+    return ret_str;
+}
+
+#endif /* ENABLE_VFS */
 
 char *vfs_strip_suffix_from_filename (const char *filename);
 char *vfs_canon (const char *path);
 char *mc_get_current_wd (char *buffer, int bufsize);
 char *vfs_get_current_dir (void);
-int vfs_current_is_local (void);
-int vfs_file_is_local (const char *filename);
 /* translate path back to terminal encoding, remove all #enc: 
  * every invalid character is replaced with question mark
  * return static buffer */
 char *vfs_translate_path (const char *path);
-/* return new string */
-char *vfs_translate_path_n (const char *path);
-/* return encoding after last #enc: or NULL, if part does not contain #enc:
- * return static buffer */
-const char *vfs_get_encoding (const char *path);
 /* canonize and translate path, return new string */
 char *vfs_canon_and_translate (const char *path);
 
@@ -38,8 +95,6 @@ char *vfs_translate_url (const char *url);
 
 int mc_open (const char *filename, int flags, ...);
 int mc_close (int handle);
-ssize_t mc_read (int handle, void *buffer, int count);
-ssize_t mc_write (int handle, const void *buffer, int count);
 off_t mc_lseek (int fd, off_t offset, int whence);
 int mc_chdir (const char *path);
 
@@ -53,8 +108,6 @@ int mc_fstat (int fd, struct stat *buf);
 
 int mc_chmod (const char *path, mode_t mode);
 int mc_chown (const char *path, uid_t owner, gid_t group);
-int mc_utime (const char *path, struct utimbuf *times);
-int mc_readlink (const char *path, char *buf, int bufsiz);
 int mc_unlink (const char *path);
 int mc_symlink (const char *name1, const char *name2);
 int mc_link (const char *name1, const char *name2);
@@ -64,7 +117,6 @@ int mc_rmdir (const char *path);
 int mc_mkdir (const char *path, mode_t mode);
 
 char *mc_getlocalcopy (const char *pathname);
-int mc_ungetlocalcopy (const char *pathname, const char *local, int has_changed);
 int mc_ctl (int fd, int ctlop, void *arg);
 int mc_setctl (const char *path, int ctlop, void *arg);
 
