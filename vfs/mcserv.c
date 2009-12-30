@@ -1296,6 +1296,7 @@ register_port (int port, int abort_if_fail)
 	    exit (1);
     }
 #else
+    (void) port;
     if (abort_if_fail) {
 	fprintf (stderr,
 		 "This system lacks port registration, try using the -p\n"
