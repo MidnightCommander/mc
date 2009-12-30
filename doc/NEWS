@@ -1,3 +1,14 @@
+Version 4.7.0.1
+
+    Major changes since 4.7.0
+
+Fixes
+
+    * Fixed double free of memory in editor;
+    * Fixed build with --disable-vfs option;
+    * Fixed compile warnings about unused variables;
+    * Fixed Fedora/RH RPM versioning scheme.
+
 Version 4.7.0
 
     Major changes since 4.6.2
