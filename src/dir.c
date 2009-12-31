@@ -28,8 +28,8 @@
 #include <sys/stat.h>
 
 #include "../src/tty/tty.h"
-
 #include "../src/search/search.h"
+#include "../vfs/vfs.h"
 
 #include "global.h"
 #include "wtools.h"

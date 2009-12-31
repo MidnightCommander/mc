@@ -35,6 +35,7 @@
 
 #include "../src/tty/tty.h"
 #include "../src/skin/skin.h"
+#include "../vfs/vfs.h"
 
 #include "dialog.h"	/* add_widget() */
 #include "widget.h"	/* NORMAL_BUTTON */

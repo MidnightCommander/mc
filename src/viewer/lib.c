@@ -45,6 +45,8 @@
 #include "../src/main.h"
 #include "../src/charsets.h"
 #include "../src/selcodepage.h"
+#include "../vfs/vfs.h"
+
 #include "internal.h"
 #include "mcviewer.h"
 
