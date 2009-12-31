@@ -34,7 +34,7 @@ extern int mcview_mouse_move_pages;
 
 /* Creates a new mcview_t object with the given properties. Caveat: the
  * origin is in y-x order, while the extent is in x-y order. */
-extern struct mcview_struct *mcview_new (int, int, int, int, int);
+extern struct mcview_struct *mcview_new (int y, int x, int lines, int cols, int is_panel);
 
 
 /* Shows {file} or the output of {command} in the internal viewer,

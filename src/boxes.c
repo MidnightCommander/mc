@@ -218,13 +218,14 @@ display_init (int radio_sel, char *init_text, int _check_status,
     return dd;
 }
 
+/* return list type */
 int
 display_box (WPanel *panel, char **userp, char **minip, int *use_msformat, int num)
 {
     int result = -1;
     Dlg_head *dd;
     char *section = NULL;
-    int i;
+    size_t i;
 
     if (panel == NULL) {
         const char *p = get_nth_panel_name (num);

@@ -137,7 +137,7 @@ mcview_display_status (mcview_t * view)
 
     tty_setcolor (SELECTED_COLOR);
     widget_move (view, top, left);
-    tty_draw_hline (top, left, ' ', width);
+    tty_draw_hline (-1, -1, ' ', width);
 
     file_label = _("File: %s");
     file_label_width = str_term_width1 (file_label) - 2;
@@ -230,7 +230,6 @@ mcview_update (mcview_t * view)
 void
 mcview_display (mcview_t * view)
 {
-    mcview_compute_areas (view);
     if (view->hex_mode) {
         mcview_display_hex (view);
     } else if (view->text_nroff_mode) {
@@ -291,10 +290,8 @@ mcview_compute_areas (mcview_t * view)
     view->data_area.top = y;
     y += view->data_area.height;
 
-    if (ruler == RULER_BOTTOM) {
+    if (ruler == RULER_BOTTOM)
         view->ruler_area.top = y;
-        y += view->ruler_area.height;
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */

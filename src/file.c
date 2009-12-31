@@ -1818,8 +1818,7 @@ end_bg_process (FileOpContext *ctx, enum OperationMode mode) {
  * default destination.  Current filename is used as default.
  */
 int
-panel_operate (void *source_panel, FileOperation operation,
-	       int force_single)
+panel_operate (void *source_panel, FileOperation operation, int force_single)
 {
     WPanel *panel = (WPanel *) source_panel;
     const gboolean single_entry = force_single || (panel->marked <= 1)

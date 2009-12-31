@@ -140,11 +140,9 @@ set_colors (WPanel *panel)
 static void
 delete_format (format_e *format)
 {
-    format_e *next;
-
-    while (format){
-        next = format->next;
-        g_free(format->title);
+    while (format != NULL) {
+        format_e *next = format->next;
+        g_free (format->title);
         g_free (format);
         format = next;
      }
@@ -1182,7 +1180,7 @@ panel_clean_dir (WPanel *panel)
 static void
 panel_destroy (WPanel *p)
 {
-    int i;
+    size_t i;
 
     char *name = panel_save_name (p);
 
@@ -1293,11 +1291,9 @@ panel_new_with_dir (const char *panel_name, const char *wpath)
 
     /* Load format strings */
     err = set_panel_formats (panel);
-    if (err) {
+    if (err != 0)
 	set_panel_formats (panel);
-    }
 
-    
     /* Because do_load_dir lists files in current directory */
     if (wpath)
 	mc_chdir(wpath);
@@ -1701,34 +1697,27 @@ int
 set_panel_formats (WPanel *p)
 {
     format_e *form;
-    char *err;
+    char *err = NULL;
     int retcode = 0;
 
     form = use_display_format (p, panel_format (p), &err, 0);
 
-    if (err){
+    if (err != NULL) {
         g_free (err);
         retcode = 1;
-    }
-    else {
-        if (p->format)
-    	    delete_format (p->format);
-
-	p->format = form;
+    } else {
+        delete_format (p->format);
+        p->format = form;
     }
 
-    if (show_mini_info){
-
+    if (show_mini_info) {
 	form = use_display_format (p, mini_status_format (p), &err, 1);
 
-	if (err){
+	if (err != NULL) {
 	    g_free (err);
 	    retcode += 2;
-	}
-	else {
-	    if (p->status_format)
-		delete_format (p->status_format);
-
+	} else {
+	    delete_format (p->status_format);
 	    p->status_format = form;
 	}
     }
@@ -1737,14 +1726,14 @@ set_panel_formats (WPanel *p)
     panel_update_cols (&(p->widget), p->frame_size);
 
     if (retcode)
-      message (D_ERROR, _("Warning" ), _( "User supplied format looks invalid, reverting to default." ) );
+        message (D_ERROR, _("Warning" ), _( "User supplied format looks invalid, reverting to default." ) );
     if (retcode & 0x01){
-      g_free (p->user_format);
-      p->user_format = g_strdup (DEFAULT_USER_FORMAT);
+        g_free (p->user_format);
+        p->user_format = g_strdup (DEFAULT_USER_FORMAT);
     }
     if (retcode & 0x02){
-      g_free (p->user_status_format [p->list_type]);
-      p->user_status_format [p->list_type] = g_strdup (DEFAULT_USER_FORMAT);
+        g_free (p->user_status_format [p->list_type]);
+        p->user_status_format [p->list_type] = g_strdup (DEFAULT_USER_FORMAT);
     }
 
     return retcode;
@@ -3257,13 +3246,11 @@ update_one_panel_widget (WPanel *panel, int force_update,
 static void
 update_one_panel (int which, int force_update, const char *current_file)
 {
-    WPanel *panel;
-
-    if (get_display_type (which) != view_listing)
-	return;
-
-    panel = (WPanel *) get_panel_widget (which);
-    update_one_panel_widget (panel, force_update, current_file);
+    if (get_display_type (which) == view_listing) {
+	WPanel *panel;
+	panel = (WPanel *) get_panel_widget (which);
+	update_one_panel_widget (panel, force_update, current_file);
+    }
 }
 
 /* This routine reloads the directory in both panels. It tries to
