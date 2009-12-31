@@ -45,6 +45,7 @@
 #include "../src/skin/skin.h"
 #include "../src/tty/mouse.h"
 #include "../src/tty/key.h"
+#include "../vfs/vfs.h"
 
 #include "wtools.h"	/* message() */
 #include "dir.h"

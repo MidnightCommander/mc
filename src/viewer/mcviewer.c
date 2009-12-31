@@ -40,15 +40,14 @@
 #include <fcntl.h>
 
 #include "../src/global.h"
-
 #include "../src/tty/tty.h"
-
 #include "../src/strutil.h"
 #include "../src/main.h"
 #include "../src/charsets.h"
 #include "../src/main-widgets.h"	/* the_menubar */
 #include "../src/menu.h"		/* menubar_visible */
 #include "../src/widget.h"
+#include "../vfs/vfs.h"
 
 #include "internal.h"
 #include "mcviewer.h"

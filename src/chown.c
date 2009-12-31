@@ -36,6 +36,7 @@
 
 #include "../src/tty/tty.h"
 #include "../src/skin/skin.h"
+#include "../vfs/vfs.h"
 
 #include "dialog.h"
 #include "widget.h"
