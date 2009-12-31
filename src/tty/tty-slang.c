@@ -34,9 +34,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#ifdef HAVE_TERMIOS_H
 #include <termios.h>
-#endif
 #include <sys/types.h>          /* size_t */
 #include <unistd.h>
 #include <signal.h>
