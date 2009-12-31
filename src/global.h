@@ -92,12 +92,6 @@
 
 #include "textconf.h"
 
-#ifdef ENABLE_VFS
-#include "../vfs/vfs.h"
-#else
-#include "vfsdummy.h"
-#endif
-
 extern const char *home_dir;
 
 #ifdef min
