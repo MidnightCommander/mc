@@ -119,7 +119,7 @@ int output_start_y = 0;
 #define MAX_VIEWS 2
 
 static struct {
-    int    type;
+    panel_view_mode_t type;
     Widget *widget;
     char *last_saved_dir;  /* last view_list working directory */
 } panels [MAX_VIEWS] = {
@@ -609,9 +609,8 @@ panel_do_cols (int lc_index)
 {
     if (get_display_type (lc_index) == view_listing)
 	set_panel_formats ((WPanel *) panels [lc_index].widget);
-    else {
+    else
 	panel_update_cols (panels [lc_index].widget, frame_half);
-    }
 }
 
 void
@@ -865,7 +864,7 @@ const char *get_nth_panel_name (int num)
 /* This routine also keeps at least one WPanel object in the screen */
 /* since a lot of routines depend on the current_panel variable */
 void
-set_display_type (int num, int type)
+set_display_type (int num, panel_view_mode_t type)
 {
     int x = 0, y = 0, cols = 0, lines = 0;
     int the_other = 0;		/* Index to the other panel */
@@ -878,7 +877,7 @@ set_display_type (int num, int type)
 	abort ();
     }
     /* Check that we will have a WPanel * at least */
-    if (type != view_listing){
+    if (type != view_listing) {
 	the_other = num == 0 ? 1 : 0;
 
 	if (panels [the_other].type != view_listing)
@@ -886,7 +885,7 @@ set_display_type (int num, int type)
     }
 
     /* Get rid of it */
-    if (panels [num].widget){
+    if (panels [num].widget) {
 	Widget *w = panels [num].widget;
 	WPanel *panel = (WPanel *) panels [num].widget;
 
@@ -896,8 +895,8 @@ set_display_type (int num, int type)
 	lines = w->lines;
 	old_widget = panels [num].widget;
 
-	if (panels [num].type == view_listing){
-	    if (panel->frame_size == frame_full && type != view_listing){
+	if (panels [num].type == view_listing) {
+	    if (panel->frame_size == frame_full && type != view_listing) {
 		cols = COLS - first_panel_size;
 		if (num == 1)
 		    x = first_panel_size;
@@ -908,14 +907,14 @@ set_display_type (int num, int type)
     /* Restoring saved path from panels.ini for nonlist panel */
     /* when it's first creation (for example view_info) */
     if (old_widget == NULL && type != view_listing) {
-	char panel_dir[MC_MAXPATHLEN];
+	char panel_dir [MC_MAXPATHLEN];
 	mc_get_current_wd (panel_dir, sizeof (panel_dir));
 	panels[num].last_saved_dir = g_strdup (panel_dir);
     }
 
-    switch (type){
+    switch (type) {
     case view_listing:
-	new_widget = restore_into_right_dir_panel(num, old_widget);
+	new_widget = restore_into_right_dir_panel (num, old_widget);
 	break;
 	
     case view_info:
@@ -930,8 +929,7 @@ set_display_type (int num, int type)
 	new_widget = (Widget *) mcview_new (0, 0, 0, 0, 1);
 	the_other_panel = (WPanel *) panels [the_other].widget;
 	if (the_other_panel)
-	    file_name =
-		the_other_panel->dir.list[the_other_panel->selected].fname;
+	    file_name = the_other_panel->dir.list[the_other_panel->selected].fname;
 	else
 	    file_name = "";
 	
@@ -942,7 +940,7 @@ set_display_type (int num, int type)
     if (type != view_listing)
 	/* Must save dir, for restoring after change type to */
 	/* view_listing */
-	save_panel_dir(num);
+	save_panel_dir (num);
 
     panels [num].type = type;
     panels [num].widget = new_widget;
@@ -952,10 +950,10 @@ set_display_type (int num, int type)
 
     /* We use replace to keep the circular list of the dialog in the */
     /* same state.  Maybe we could just kill it and then replace it  */
-    if (midnight_dlg && old_widget){
+    if ((midnight_dlg != NULL) && (old_widget != NULL))
 	dlg_replace_widget (old_widget, panels [num].widget);
-    }
-    if (type == view_listing){
+
+    if (type == view_listing) {
 	if (num == 0)
 	    left_panel = (WPanel *) new_widget;
 	else
@@ -974,8 +972,8 @@ set_display_type (int num, int type)
      *   current_panel causes segfault, e.g. C-Enter, C-x c, ...
      */
 
-    if (type != view_listing)
-	if (current_panel == (WPanel *) old_widget)
+    if ((type != view_listing)
+	&& (current_panel == (WPanel *) old_widget))
 	    current_panel = num == 0 ? right_panel : left_panel;
 }
 
@@ -989,7 +987,7 @@ void swap_panels ()
     WPanel panel;
     WPanel *panel1, *panel2;
     int tmp_type;
-    
+
 #define panelswap(x) panel. x = panel1-> x; panel1-> x = panel2-> x; panel2-> x = panel. x;
 
 #define panelswapstr(e) strcpy (panel. e, panel1-> e); \
@@ -1011,7 +1009,7 @@ void swap_panels ()
         panelswap (selected);
         panelswap (is_panelized);
         panelswap (dir_stat);
-	
+
         panel1->searching = 0;
         panel2->searching = 0;
         if (current_panel == panel1)
@@ -1026,9 +1024,9 @@ void swap_panels ()
     } else {
 	WPanel *tmp_panel;
 	
-	tmp_panel=right_panel;
-	right_panel=left_panel;
-	left_panel=tmp_panel;
+	tmp_panel = right_panel;
+	right_panel = left_panel;
+	left_panel = tmp_panel;
 	
 	if (panels [0].type == view_listing) {
             if (!strcmp (panel1->panel_name, get_nth_panel_name (0))) {
@@ -1042,7 +1040,7 @@ void swap_panels ()
                 panel2->panel_name = g_strdup (get_nth_panel_name (0));
             }
         }
-        
+
         tmp.x = panels [0].widget->x;
         tmp.y = panels [0].widget->y;
         tmp.cols = panels [0].widget->cols;
@@ -1057,7 +1055,7 @@ void swap_panels ()
         panels [1].widget->y = tmp.y;
         panels [1].widget->cols = tmp.cols;
         panels [1].widget->lines = tmp.lines;
-        
+
         tmp_widget = panels [0].widget;
         panels [0].widget = panels [1].widget;
         panels [1].widget = tmp_widget;
@@ -1067,7 +1065,8 @@ void swap_panels ()
     }
 }
 
-int get_display_type (int lc_index)
+panel_view_mode_t
+get_display_type (int lc_index)
 {
     return panels [lc_index].type;
 }
@@ -1098,7 +1097,8 @@ get_other_panel (void)
 }
 
 /* Returns the view type for the current panel/view */
-int get_current_type (void)
+panel_view_mode_t
+get_current_type (void)
 {
     if (panels [0].widget == (Widget *) current_panel)
 	return panels [0].type;
@@ -1107,7 +1107,8 @@ int get_current_type (void)
 }
 
 /* Returns the view type of the unselected panel */
-int get_other_type (void)
+panel_view_mode_t
+get_other_type (void)
 {
     if (panels [0].widget == (Widget *) current_panel)
 	return panels [1].type;
@@ -1119,7 +1120,7 @@ int get_other_type (void)
 void
 save_panel_dir (int lc_index)
 {
-    int type = get_display_type (lc_index);
+    panel_view_mode_t type = get_display_type (lc_index);
     Widget *widget = get_panel_widget (lc_index);
 
     if ((type == view_listing) && (widget != NULL)) {
@@ -1136,7 +1137,7 @@ save_panel_dir (int lc_index)
 Widget *
 restore_into_right_dir_panel (int lc_index, Widget *from_widget)
 {
-    Widget *new_widget = 0;
+    Widget *new_widget = NULL;
     const char *saved_dir = panels [lc_index].last_saved_dir;
     gboolean last_was_panel = (from_widget &&
 				get_display_type(lc_index) != view_listing);

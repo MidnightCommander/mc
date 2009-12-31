@@ -869,8 +869,8 @@ compare_dirs_cmd (void)
 
     if (choice < 0 || choice > 2)
 	return;
-    else
-	thorough_flag = choice;
+
+    thorough_flag = choice;
 
     if (get_current_type () == view_listing
 	&& get_other_type () == view_listing) {
@@ -1311,21 +1311,20 @@ save_setup_cmd (void)
 }
 
 static void
-configure_panel_listing (WPanel *p, int view_type, int use_msformat, char *user, char *status)
+configure_panel_listing (WPanel *p, int list_type, int use_msformat, char *user, char *status)
 {
     p->user_mini_status = use_msformat;
-    p->list_type = view_type;
+    p->list_type = list_type;
 
-    if (view_type == list_user || use_msformat){
+    if (list_type == list_user || use_msformat) {
 	g_free (p->user_format);
 	p->user_format = user;
 
-	g_free (p->user_status_format [view_type]);
-	p->user_status_format [view_type] = status;
+	g_free (p->user_status_format [list_type]);
+	p->user_status_format [list_type] = status;
 
 	set_panel_formats (p);
-    }
-    else {
+    } else {
         g_free (user);
         g_free (status);
     }
@@ -1366,27 +1365,21 @@ switch_to_listing (int panel_index)
 void
 listing_cmd (void)
 {
-    int   view_type, use_msformat;
+    int list_type;
+    int use_msformat;
     char  *user, *status;
-    WPanel *p;
-    int   display_type;
+    WPanel *p = NULL;
 
-    display_type = get_display_type (MENU_PANEL_IDX);
-    if (display_type == view_listing)
+    if (get_display_type (MENU_PANEL_IDX) == view_listing)
 	p = MENU_PANEL_IDX == 0 ? left_panel : right_panel;
-    else
-	p = 0;
 
-    view_type = display_box (p, &user, &status, &use_msformat, MENU_PANEL_IDX);
+    list_type = display_box (p, &user, &status, &use_msformat, MENU_PANEL_IDX);
 
-    if (view_type == -1)
-	return;
-
-    switch_to_listing (MENU_PANEL_IDX);
-
-    p = MENU_PANEL_IDX == 0 ? left_panel : right_panel;
-
-    configure_panel_listing (p, view_type, use_msformat, user, status);
+    if (list_type != -1) {
+	switch_to_listing (MENU_PANEL_IDX);
+	p = MENU_PANEL_IDX == 0 ? left_panel : right_panel;
+	configure_panel_listing (p, list_type, use_msformat, user, status);
+    }
 }
 
 void
@@ -1410,18 +1403,21 @@ quick_view_cmd (void)
 }
 
 /* Handle the tree internal listing modes switching */
-static int
+static gboolean
 set_basic_panel_listing_to (int panel_index, int listing_mode)
 {
     WPanel *p = (WPanel *) get_panel_widget (panel_index);
+    gboolean ok;
 
     switch_to_listing (panel_index);
     p->list_type = listing_mode;
-    if (set_panel_formats (p))
-	return 0;
 
-    do_refresh ();
-    return 1;
+    ok = set_panel_formats (p) == 0;
+
+    if (ok)
+	do_refresh ();
+
+    return ok;
 }
 
 void

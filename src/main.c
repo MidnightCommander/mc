@@ -925,8 +925,7 @@ create_panels (void)
 {
     int current_index;
     int other_index;
-    int current_mode;
-    int other_mode;
+    panel_view_mode_t current_mode, other_mode;
     char original_dir[1024];
 
     original_dir[0] = 0;
@@ -1049,9 +1048,8 @@ copy_current_readlink (void)
 static void
 copy_other_readlink (void)
 {
-    if (get_other_type () != view_listing)
-	return;
-    copy_readlink (other_panel);
+    if (get_other_type () == view_listing)
+	copy_readlink (other_panel);
 }
 
 /* Insert the selected file name into the input line */
@@ -1100,9 +1098,8 @@ copy_current_tagged (void)
 static void
 copy_other_tagged (void)
 {
-    if (get_other_type () != view_listing)
-	return;
-    copy_tagged (other_panel);
+    if (get_other_type () == view_listing)
+	copy_tagged (other_panel);
 }
 
 void
