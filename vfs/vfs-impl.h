@@ -19,10 +19,6 @@
 typedef void *vfsid;
 struct vfs_stamping;
 
-/* Flags of VFS classes */
-#define VFSF_LOCAL 1		/* Class is local (not virtual) filesystem */
-#define VFSF_NOLINKS 2		/* Hard links not supported */
-
 /**
  * This is the type of callback function passed to vfs_fill_names.
  * It gets the name of the virtual file system as its first argument.
