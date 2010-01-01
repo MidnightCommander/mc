@@ -230,7 +230,6 @@ mcview_update (mcview_t * view)
 void
 mcview_display (mcview_t * view)
 {
-    mcview_compute_areas (view);
     if (view->hex_mode) {
         mcview_display_hex (view);
     } else if (view->text_nroff_mode) {
@@ -291,10 +290,8 @@ mcview_compute_areas (mcview_t * view)
     view->data_area.top = y;
     y += view->data_area.height;
 
-    if (ruler == RULER_BOTTOM) {
+    if (ruler == RULER_BOTTOM)
         view->ruler_area.top = y;
-        y += view->ruler_area.height;
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */

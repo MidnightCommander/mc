@@ -376,7 +376,8 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
     view->dpy_text_column = 0;
 
     mcview_compute_areas (view);
-    assert (view->bytes_per_line != 0);
+    mcview_update_bytes_per_line (view);
+
     if (mcview_remember_file_position && view->filename != NULL && start_line == 0) {
         long line, col;
 
