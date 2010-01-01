@@ -65,7 +65,7 @@ mcview_display_text (mcview_t * view)
     const screen_dimen top = view->data_area.top;
     const screen_dimen width = view->data_area.width;
     const screen_dimen height = view->data_area.height;
-    screen_dimen row, col;
+    screen_dimen row = 0, col = 0;
     off_t from;
     int cw = 1;
     int c, prev_ch = 0;
@@ -76,43 +76,53 @@ mcview_display_text (mcview_t * view)
 
     /* Find the first displayable changed byte */
     from = view->dpy_start;
-    while (curr && (curr->offset < from)) {
+    while ((curr != NULL) && (curr->offset < from))
         curr = curr->next;
-    }
 
-    tty_setcolor (NORMAL_COLOR);
-    for (row = 0, col = 0; row < height;) {
+    while (TRUE) {
+        if (row >= height)
+            break;
+
+        tty_setcolor (NORMAL_COLOR);
 #ifdef HAVE_CHARSET
         if (view->utf8) {
             gboolean read_res = TRUE;
+
             c = mcview_get_utf (view, from, &cw, &read_res);
             if (!read_res)
                 break;
         } else
 #endif
-        {
-            if (! mcview_get_byte (view, from, &c))
+            if (!mcview_get_byte (view, from, &c))
                 break;
-        }
+
         from++;
         if (cw > 1)
             from += cw - 1;
 
         if (c != '\n' && prev_ch == '\r') {
+            if (++row >= height)
+                break;
+
             col = 0;
-            row++;
-            tty_print_anychar ('\n');
+            /* tty_print_anychar ('\n'); */
         }
 
         prev_ch = c;
         if (c == '\r')
             continue;
 
-        if ((c == '\n') || (col >= width && view->text_wrap_mode)) {
+        if (c == '\n') {
             col = 0;
             row++;
-            if (c == '\n' || row >= height)
-                continue;
+            continue;
+        }
+
+        if (col >= width && view->text_wrap_mode) {
+            col = 0;
+            row++;
+            if (++row >= height)
+                break;
         }
 
         if (c == '\t') {
@@ -126,42 +136,38 @@ mcview_display_text (mcview_t * view)
             continue;
         }
 
-        if (view->search_start <= from && from < view->search_end) {
+        if (view->search_start <= from && from < view->search_end)
             tty_setcolor (SELECTED_COLOR);
-        }
 
-        if (col >= view->dpy_text_column && col - view->dpy_text_column < width) {
+        if ((col >= view->dpy_text_column) && (col - view->dpy_text_column < width)) {
             widget_move (view, top + row, left + (col - view->dpy_text_column));
 #ifdef HAVE_CHARSET
             if (utf8_display) {
-                if (!view->utf8) {
+                if (!view->utf8)
                     c = convert_from_8bit_to_utf_c (c, view->converter);
-                }
                 if (!g_unichar_isprint (c))
                     c = '.';
-            } else {
-                if (view->utf8) {
-                    c = convert_from_utf_to_current_c (c, view->converter);
-                } else {
+            } else if (view->utf8)
+                c = convert_from_utf_to_current_c (c, view->converter);
+            else
 #endif
-                    c = convert_to_display_c (c);
-#ifdef HAVE_CHARSET
-                }
-            }
-#endif
+                c = convert_to_display_c (c);
+
             tty_print_anychar (c);
         }
+
         col++;
+
 #ifdef HAVE_CHARSET
         if (view->utf8) {
-            if (g_unichar_iswide(c))
+            if (g_unichar_iswide (c))
                 col++;
-            else if (g_unichar_iszerowidth(c))
+            else if (g_unichar_iszerowidth (c))
                 col--;
         }
 #endif
-        tty_setcolor (NORMAL_COLOR);
     }
+
     view->dpy_end = from;
 }
 
