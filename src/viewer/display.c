@@ -137,7 +137,7 @@ mcview_display_status (mcview_t * view)
 
     tty_setcolor (SELECTED_COLOR);
     widget_move (view, top, left);
-    tty_draw_hline (top, left, ' ', width);
+    tty_draw_hline (-1, -1, ' ', width);
 
     file_label = _("File: %s");
     file_label_width = str_term_width1 (file_label) - 2;
