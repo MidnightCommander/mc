@@ -1,203 +1,104 @@
 Version 4.7.0.1
 
-    Major changes since 4.7.0
-
-Fixes
+- Fixes
 
     * Fixed double free of memory in editor;
     * Fixed build with --disable-vfs option;
     * Fixed compile warnings about unused variables;
     * Fixed Fedora/RH RPM versioning scheme.
 
+
 Version 4.7.0
 
-    Major changes since 4.6.2
+- Core
 
-Core
+    * Removed charset confirmation on startup and added the automatic recognize
+      of system charset (#1613)
+    * Some startup speed up (#1781)
+    * Save flags of select/unselet file group (#1776)
+    * Don't set TOSTOP attribute on slave terminal (#1637)
+    * Keybindings for button bars (F1-F10 keys) (#212)
+    * Keybindings for Tree widget
+    * Enlarged sizes of Directory Tree dialog window
+    * Added missed esc sequencies for qansi terminals (#1803)
+    * New file type bindings:
+      + adeed mkv, 3gp video types
+      + use exif(1) output when viewing jpeg files
+      + opening .chm with kchmviewer with fallback to xchm
+      + viewing .mo files with msgunfmt
 
-    * Native UTF-8 support;
-    * Scalable TUI;
-    * Added support for skins;
-    * Added support for key bindings;
-    * Added the ability to sort files by mouse click on column header;
-    * Added keybindings to change files sorting order via shortcuts
-      (PanelSelectSortOrder, PanelToggleSortOrderPrev, PanelToggleSortOrderNext,
-      PanelReverseSort, PanelSortOrderByName, PanelSortOrderByExt,
-      PanelSortOrderBySize, PanelSortOrderByMTime);
-    * Now the indicator of the sorting type and sorting direction is always
-      drawn on the panel header (sorting direction indicator is drawn near the
-      current column in the long file list mode only);
-    * Skin files: added new parameters 'sort-sign-up' and 'sort-sign-down' in
-      the section '[widget-common]' to change the indicator of the sorting order
-    * Added option 'extensions_case' to the filehighlight.ini file;
-    * Menu engine was reimplemented:
-       1) now the menu is built dynamically
-       2) the shortcut displayed in the menu item is not a part of the menu item
-          text and it is synchronized with the keybindings defined in mc.keymap
-          file;
-    * Removed own popt stuff (command line options parser), now using glib parser
-    * Added filename highlighting in the panels
-    * Copy/Move overwrite query dialog is more friendly to the long file names;
-    * On the first run the find file dialog now contains latest item from history;
-    * Charset support enabled by default (--enable-charset option);
-    * Added cyclic menu navigation;
-    * Changed the behavior of C-space: now it calculate size on "..",
-      and for selected dirs if there are any;
-    * New find file option: find only first hit in file (make search faster);
-    * New find file option: whole words (find whole words only);
-    * Support for the filename charset selection in panels;
-    * Reworked 'Find File' dialog;
-    * New unified search/replace engine with multiple search types: plain,
-      wildcard, regexp and hex;
-    * Extended 'Learn Keys' capability;
-    * Locale-based codepage autodetection;
-    * Initial support for Doxygen generated docs;
-    * Build system updates (autoconf);
-    * Translation updates;
-    * Multiple x86_64 fixes. 
+- VFS
 
-VFS
+    * FISH: add the user name to the ssh command line only if it's not the same as
+      the local logged-in user (#1867)
+    * FTP: support active mode (#1796)
+    * FTP: improved symlink handling
+    * FTP: some FTP-servers don't have chmon support. Ignore FTP errors related
+      to chmod operations (#1708)
+    * EXTFS: added S3 backend by Jakob Kemi (#272)
+    * SFS: use single script for RPM and SRPM packets handling (#1590)
 
-    * Fixed viewing the *.tar files with a colon in the name;
-    * Now 'exit' command on non-local filesystems is allowed;
-    * Added partial support for Microsoft CAB archives;
-    * Added support for *.ico files;
-    * Added support for *.djvu files;
-    * Fixed segfaults in various cases while browsing various VFSs;
-    * Fixed warnings when file is copied inside the archive;
-    * Fixed the recognition of the *.tar.xz archives;
-    * Added the recognition of the lzma archives by extension;
-    * Added support for IPv6 protocol in FTPFS;
-    * Updated extfs/iso9660 to support Joliet "UCS level 1". 
+- Editor
 
-Editor
+    * New syntax files: Cabal
+    * Updated syntax files: Python, PHP
+    * Syntax highlighting: added '.hh' and '.hpp' file extensions as C++ sources
 
-    * Added scrolled percentage in status bar (only in "simple statusbar" mode);
-    * Fixed misbehaving rectangular selection in the editor (when selecting from
-      right to left and/or bottom to top) (#1553);
-    * Split editor menu 'Command' to 'Command' and 'Format';
-    * Added option 'Check POSIX new line' into 'Save mode...' dialog, add notifi-
-      cation before save when no newline at EOF (#46);
-    * Added keybindings ('EditShiftBlockLeft', 'EditShiftBlockRight') for shift
-      block;
-    * Fixed incorrect drawing CJK (double width) characters;
-    * Enhanced 'Save as' dialog by allowing to select the line breaks type:
-      Windows/UNIX/Mac (CR LF/LF/CR);
-    * Updated syntax highlighting for VerilogHDL, Shell script, mail, html;
-    * Added syntax highlighting for yum *.repo files, pacman's PKGBUILD and 
-      .install files, erlang, ebuild, named, strace, j;
-    * New search/replace flag added "In selection";
-    * New hotkeys for bookmarks, now bookmark is displayed in status line and editor;
-    * New cursor behavior: option "Cursor beyond end of line" allows moving the cursor
-      beyond the end of line.
-    * Various editor enhancements (mark/move/copy/paste vertical blocks);
-    * Source code navigation through ctags/etags TAGS files;
-    * New option: 'Persistent selection';
-    * Delete/Backspace deletes selected block if 'Persistent selection' is off;
-    * Ability to shift blocks to the right with Tab key and to the left with
-      Complete key if 'Persistent selection' is off;
-    * Show line numbers (optional);
-    * Highlighting of tabs and trailing spaces (optional);
-    * Added some hotkeys. 
+- Misc
 
-Viewer
+    * Lots of code cleanup and optimization
+    * Workaround for SunStudio compiler bug #6888373 (#1749)
+    * Removed obsolete checks in configuration scripts
+    * Allow save empty value in history (#1814)
+    * Use ctrl-g instead of ctrl-c for SIGINT signal (#1876).
+    * RPM spec: rewritten and simplified static build procedure for legacy distros (#1848)
+    * Translation updated
+    * Documentation updates
+    * Added skin: darker color style (#1659)
 
-    * Fixed tabs alignment (#1664);
-    * Fixed view of next/prev file (#1750);
-    * Fixed showing Windows/Mac (CR LF/CR) line terminator;
-    * Reworked to improve the performance;
-    * Implemented interruptible long-distance movements;
-    * Splitted src/view.[ch] into many files in src/viewer/ subdir to simplify
-      the support of the codebase;
-    * Fixed building of the format string at runtime (for better i18n);
-    * Added 'Whole words' option to the viewer 'Search' dialog. 
+- Fixes
 
-Misc
+    * Memory and file descriptors leaks
+    * Crash on start if ~/.mc/panels.ini contains incorrect value of 'sort_order' key (#1790)
+    * MC aborts when ctrl-c is pressed (#1793)
+    * Build w/o internal editor (#1826)
+    * Compilation warings of --disable-nls and --disable-charset options (#1831)
+    * Incorrect handling of '--with-search-engine' configure option (#1396)
+    * Segmentation fault when search in different encodings (#1858)
+    * C-w does not delete whole command line (#407)
+    * Wrong shortcuts in menu items (#1836)
+    * Panels state saves and restores despite disabled 'Auto save setup' (#1663)
+    * Case insensitive file sorting in UTF-8 locales (#1536)
+    * Incorrect handling of 0xFF char that is valid char in CP1251 locale (#1883)
+    * Segfault in TreeView loading (#1794)
+    * Incorect stat info of ".." directory in file panel (#1757)
+    * Incorect stat info of ".." directory in info panel (#1757)
+    * Setting "Use passive mode over proxy" is not remembered (#1746)
+    * CK_Edit_Save_Mode command handling in editor (#1810)
+    * Incorrect calculation of some utf-8 characters width (#1768)
+    * Handling CJK chars in editor (#1628)
+    * Incorrect cursor positioning in editor (#1809, #1884)
+    * Vertical block handling in editor (#1839)
+    * Incorrect text scrolling in editor (#1877)
+    * Incorrect mouse movement in editor when text scrolled to the right (#1792)
+    * Newlines are lost when pasting multiline text in editor (#1710)
+    * Mismatched hotkeys EditBeginRecordMacro, EditEndRecordMacro in editor
+    * íismatched hotkeys EditBeginningOfText, EditEndOfText, EditBeginPage, EditEndPage (#1724)
+    * Some syntax files are not installable (#1779)
+    * Date & time insertion in editor (#1759)
+    * "Matches not found" message is not shown in viewer
+    * Hangup after search in archive in viewer (#1873)
+    * SFS: CPIO VFS skips empty directories in the root of archive (#1732)
+    * Incorrect parsing FTP-string (#1605)
+    * LZMA files detect (#1798)
+    * FISH: broken filenames and timestamps on really poor busybox devices (#1450)
+    * Minor mistakes and mistypes in man files
+    * Various doxygen warnings
 
-    * Shared clipboard for the mc editor, form fields, panel and command prompt;
-    * Refactoring: now all filename constants are placed in src/fileloc.h file;
-    * Testing & development: added ability for change user config dir. For
-      example, type make CFLAGS='-DMC_USERCONF_DIR=\".mc2\"';
-    * Changed Alt+Backspace behavior in command line;
-    * Hotlist: support for the environment variables ($HOME, ~username, etc.);
-    * Hotlist: support for the completion in path input;
-    * All list widgets: support for the fast navigation by number keys (i.e. 1 -
-      first list item, 2 - second item etc.);
-    * New option mouse_close_dialog, if mouse_close_dialog=1 clicking outside
-      of the dialog closes them;
-    * New: SI-based size display;
-    * Shared history for find file, editor search/replace, viewer;
-    * Show free space on the current file system;
-    * Show size of the selected files in the mini-status bar.
-
-Fixes
-
-    * Fixed broken building under uclibc < 0.9.29;
-    * Autoindent regression;
-    * Viewer Hex editor regression;
-    * Incorrect indentation block when selecting with F3 + keys;
-    * Fixed ownership of the config files;
-    * Configure.ac: fixed broken option check '--disable-vfs-undelfs';
-    * Learn keys: fixed incorrect save of keys configuration;
-    * Fixed bug with 'The shell is already running a command';
-    * Fixed 'B' artefact into OpenSuse root user console;
-    * Segfault on incorrect color pair in [Color] section;
-    * Incorrect position of panel codeset dialog;
-    * Limit file size display to 9 digits only;
-    * Lines drawing in -a stickchars mode (#1497);
-    * Segfault when you try to use non-anonymous FTP;
-    * Ctrl-O handling under GNU Screen in altscreen mode;
-    * Support for CP866 (IBM866) locale;
-    * Configure.ac: checking for minimal version of glib and exit if version
-      less than 2.6;
-    * Segfault by mouse wheel action in history list and menu (#1564);
-    * Fixed behavior of Meta+PgDn? in editor (#1598);
-    * Fixed behavior of the cursor movement by Ctrl+arrows when cursor is
-      beyond EOL;
-    * Fixed editor autocompletion;
-    * Fixed stealing the Kill Word shortcut by the Copy/Move dialog;
-    * Fixed autoconf issue when configure with --with-gpm-mouse option;
-    * Linking error with --enable-vfs-undelfs;
-    * External editor won't open if there are spaces in EDITOR variable;
-    * C-c kill mc if mc built with --without-subshell option and is run
-      with -d option;
-    * Directory hotlist rendering;
-    * Segfault on empty replace string;
-    * Fixes for vfs/tarfs;
-    * Removed bashizm from vfs/extfs/u7z;
-    * Crash mc on create new file (Shift-F4) in external editor;
-    * File copy/move dialog: asterisks are now handled as search groups in the
-      in replacement field;
-    * VFS: Fixed SIGSERV (or heap corruption) on long filenames;
-    * Restore correct current directory after switching from the Info panel to
-      List panel;
-    * Fixed broken backwards search (#1496);
-    * Fixed uninitialized value for mouse event in in find.c#check_find_events()
-      function;
-    * Fixed Ctrl+Z signal handling;
-    * Fixed incorrect prompt display;
-    * Fixed incorrect vertical selection (if status line is switched on);
-    * Fixed screen resize handle if mouse support is disabled;
-    * Fixed mouse support in 'konsole-256color' terminal;
-    * Fixed keycodes in 'xterm-256color' terminal;
-    * Fixed incorrect regexp search by content in 'file find' dialog;
-    * Fixed incorrect backwards search (#1558);
-    * Fixed incorrect detection of the compressed patchfs;
-    * Fixed incorrect detection of the codeset when <no translation> codeset is
-      selected;
-    * Editor undo fixes;
-    * Upstreamed many fixes from the distributions (Debian, ...);
-    * Fixed segfaults on fish permission checks;
-    * Fixed fish symlinks handling and fancy names escaping;
-    * Various mc.ext fixes;
-    * Command line completion fixes (mainly escaping);
-    * Small fixes in history handling (locale independent .mc/history entries);
-    * Code cleanups, various memleaks fixed (many thanks to valgrind). 
 
 Version 4.7.0-pre4
-    Major changes since 4.7.0-pre3
 
-Core
+- Core
 
     * Added feature of sort files by mouse click on column header
     * Added keybindings to change files sort type via shortcuts
@@ -214,7 +115,7 @@ Core
       shortcut displayed in menu item is not a part of menu item text and it is
       synchronized with keybinding defined in mc.keymap file (#1563).
 
-VFS
+- VFS
 
     * Fixed view *.tar files with a colon in name
     * Allow 'exit' command on non-local filesystems
@@ -224,7 +125,7 @@ VFS
     * Fix segfaults in various cases while browsing various VFSs
     * Fixed warnings when file copy inside archive.
 
-Editor
+- Editor
 
     * Added scrolled percentage in status bar (only in "simple statusbar" mode)
     * Fixed Misbehaving rectangular select in editor (wrong when selected from
@@ -235,12 +136,12 @@ Editor
     * Added bindings ('EditShiftBlockLeft', 'EditShiftBlockRight') for shift block
     * Fixed incorrect drawing CJK (double width) character
 
-Viewer
+- Viewer
 
     * Fixed tabs alignment (#1664)
     * Fixed view of next/prev file (#1750)
 
-Misc
+- Misc
 
     * Shared clipboard for the mc editor, form fields, panel and command prompt
     * Refactoring: now all filename constants are placed in src/fileloc.h file
@@ -248,7 +149,7 @@ Misc
       type make CFLAGS='-DMC_USERCONF_DIR=\".mc2\"'
     * Changed Alt+Backspace behavior in command line
 
-Fixes
+- Fixes
 
     * Fixed broken building under uclibc <0.9.29
     * Autoindent regression
@@ -262,9 +163,8 @@ Fixes
 
 
 Version 4.7.0-pre3
-    Major changes since 4.7.0-pre2
 
-Core
+- Core
 
     * removed own popt stuff (command line options parser). Now used glib parser
     * added feature for filenames highlighting in panels
@@ -274,12 +174,12 @@ Core
     * added support of skins
     * added support of key bindings
 
-VFS
+- VFS
 
     * fixed recognize of tar.xz archives
     * added recognize of lzma archives by extention
 
-Editor
+- Editor
 
     * 'Save as' dialog enhancement: select line break type: Windows/UNIX/Mac
       (CR LF/LF/CR)
@@ -287,18 +187,18 @@ Editor
     * Added syntax highlighting for *.repo files of yum
     * Added syntax highlighting of pacman's PKGBUILD and .install files
 
-Viewer
+- Viewer
 
     * Fixed showing Windows/Mac (CR LF/CR) line terminator
 
-Misc
+- Misc
 
     * hotlist: support for environment variables ($HOME, ~username, etc.)
     * hotlist: support for completion in path input
     * all list widgets: support for fast navigation by number keys (i.e. 1 -
       first list item, 2 - second)
 
-Fixes
+- Fixes
 
     * restored action of 'ctrl-t' keybinding (mark files&dirs). For selecting
       charset use 'alt-e'
@@ -320,9 +220,8 @@ Fixes
 
 
 Version 4.7.0-pre2
-    Major changes since 4.7.0-pre1
 
-Core
+- Core
 
     * cycle menu navigation
     * change behaviour of C-space, now it calculate size on "..", and for selected
@@ -331,12 +230,12 @@ Core
     * new find file option: Whole words - find whole words only
     * scalable TUI
 
-VFS
+- VFS
 
     * FTPFS: support of IPv6 protocol
     * extfs/iso9660 updated to support Joliet "UCS level 1"
 
-Editor
+- Editor
 
     * new search/replace flag added "In selection"
     * new hotkeys for bookmarks, now bookmark displayed in state line and editor
@@ -345,7 +244,7 @@ Editor
     * new syntax hightlights added: erlang, ebuild, named, strace, j
     * syntax hightlights updated: mail, vhdl, html
 
-Viewer
+- Viewer
 
     * Reworked for improve perfomance
     * Implemented interruptable long-distance movements
@@ -354,14 +253,14 @@ Viewer
     * fixed build of format string in runtime (for better i18n)
     * add 'Whole words' option into the viewer 'Search' dialog
 
-Misc
+- Misc
 
     * new option mouse_close_dialog, if mouse_close_dialog=1 click on outside the
       dialog close them
     * new: SI-based size show
     * make shared history for find file, editor search/replace, viever
 
-Fixes
+- Fixes
 
     * linking error with --enable-vfs-undelfs
     * external editor won't open if there are spaces in EDITOR variable
@@ -390,7 +289,7 @@ Fixes
 
 Version 4.7.0-pre1
 
-Core changes:
+- Core
 
     * native UTF-8 support
     * filenames charset selection support in panels
@@ -403,7 +302,7 @@ Core changes:
     * translation updates
     * x86_64 fixes
 
-Editor:
+- Editor
 
     * various editor enchancements (vertical block marking/moving/copy/paste)
     * navigate across source code through ctags/etags TAGS file
@@ -416,12 +315,12 @@ Editor:
     * optional highlighting of the tabs and trailing spaces
     * add some hot-keys
 
-Misc:
+- Misc
 
     * showing of the free space on current file system
     * showing of the size selected files in mini-status bar
 
-Bug fixes:
+- Fixes
 
     * editor's undo fixes
     * many fixes from other distributions are included
