@@ -344,7 +344,7 @@ static name_keymap_t command_names[] = {
     { "CmdSelect",                       CK_SelectCmd },
 #if defined (USE_NETCODE) && defined (ENABLE_VFS_SMB)
     { "CmdSmblinkCmd",                   CK_SmblinkCmd },
-#endif /* USE_NETCODE || ENABLE_VFS_SMB
+#endif /* USE_NETCODE || ENABLE_VFS_SMB */
     { "CmdSwapPanel",                    CK_SwapCmd },
     { "CmdSymlink",                      CK_SymlinkCmd },
     { "CmdTree",                         CK_TreeCmd },
