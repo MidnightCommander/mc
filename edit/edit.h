@@ -61,6 +61,7 @@ extern int visible_tws;
 
 extern int simple_statusbar;
 extern int option_check_nl_at_eof;
+extern int show_right_margin;
 
 /* used in main() */
 void edit_stack_init (void);

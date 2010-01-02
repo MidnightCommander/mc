@@ -288,18 +288,23 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
     int y = row + EDIT_TEXT_VERTICAL_OFFSET;
     int cols_to_skip = abs (x);
 
-    if (-edit->start_col < option_word_wrap_line_length) {
     tty_setcolor (EDITOR_NORMAL_COLOR);
-    tty_draw_hline (edit->widget.y + y,
-                    edit->widget.x + x1,
-                    ' ',
-                    option_word_wrap_line_length - edit->start_col);
+
+    if (!show_right_margin && -edit->start_col < option_word_wrap_line_length) {
+        tty_draw_hline (edit->widget.y + y, edit->widget.x + x1,
+                       ' ', end_col + 1 - start_col);
+    } else {
+        tty_draw_hline (edit->widget.y + y,
+                        edit->widget.x + x1,
+                        ' ',
+                        option_word_wrap_line_length - edit->start_col);
+
+        tty_setcolor (EDITOR_RIGHT_MARGIN_COLOR);
+        tty_draw_hline (edit->widget.y + y,
+                        edit->widget.x + x1 + option_word_wrap_line_length + edit->start_col,
+                        ' ',
+                        end_col + 1 - start_col);
     }
-    tty_setcolor (EDITOR_RIGHT_MARGIN_COLOR);
-    tty_draw_hline (edit->widget.y + y,
-                    edit->widget.x + x1 + option_word_wrap_line_length + edit->start_col,
-                    ' ',
-                    end_col + 1 - start_col);
 
     if (option_line_state) {
         int i;
@@ -357,11 +362,13 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
 		tty_lowlevel_setcolor (color);
 	    }
 	}
-	if (i > option_word_wrap_line_length + edit->start_col)
-	    tty_setcolor (EDITOR_RIGHT_MARGIN_COLOR);
+	if (show_right_margin) {
+	    if (i > option_word_wrap_line_length + edit->start_col)
+	        tty_setcolor (EDITOR_RIGHT_MARGIN_COLOR);
+	    i++;
+	}
 	tty_print_anychar (textchar);
 	p++;
-	i++;
     }
 }
 
