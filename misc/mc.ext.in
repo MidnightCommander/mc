@@ -587,6 +587,11 @@ regex/\.([Gg][Ll][Aa][Dd][Ee])$
 shell/.mo
 	View=%view{ascii} msgunfmt %f || cat %f
 
+# lyx
+regex/\.(lyx|LYX)$
+	Open=lyx %f
+	View=%view{ascii} lyxcat %f
+
 ### Plain compressed files ###
 
 # ace
