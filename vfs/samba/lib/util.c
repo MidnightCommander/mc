@@ -2607,7 +2607,7 @@ BOOL fcntl_lock(int fd, int op, SMB_OFF_T offset, SMB_OFF_T count, int type)
   }
 
   if (errno != 0)
-    DEBUG(3,("fcntl lock gave errno %d (%s)\n",errno,strerror(errno)));
+    DEBUG(3,("fcntl lock gave errno %d (%s)\n",errno, unix_error_string(errno)));
 
   /* a lock query */
   if (op == SMB_F_GETLK)
@@ -2629,7 +2629,7 @@ BOOL fcntl_lock(int fd, int op, SMB_OFF_T offset, SMB_OFF_T count, int type)
   if (ret == -1)
   {
     DEBUG(3,("lock failed at offset %.0f count %.0f op %d type %d (%s)\n",
-          (double)offset,(double)count,op,type,strerror(errno)));
+          (double)offset,(double)count,op,type, unix_error_string (errno)));
 
     /* perhaps it doesn't support this sort of locking?? */
     if (errno == EINVAL)
@@ -2859,7 +2859,7 @@ int set_maxfiles(int requested_max)
 
 	if(getrlimit(RLIMIT_NOFILE, &rlp)) {
 		DEBUG(0,("set_maxfiles: getrlimit (1) for RLIMIT_NOFILE failed with error %s\n",
-			strerror(errno) ));
+			unix_error_string (errno) ));
 		/* just guess... */
 		return requested_max;
 	}
@@ -2877,14 +2877,14 @@ int set_maxfiles(int requested_max)
 
 	if(setrlimit(RLIMIT_NOFILE, &rlp)) {
 		DEBUG(0,("set_maxfiles: setrlimit for RLIMIT_NOFILE for %d files failed with error %s\n", 
-			(int)rlp.rlim_cur, strerror(errno) ));
+			(int)rlp.rlim_cur, unix_error_string (errno) ));
 		/* just guess... */
 		return saved_current_limit;
 	}
 
 	if(getrlimit(RLIMIT_NOFILE, &rlp)) {
 		DEBUG(0,("set_maxfiles: getrlimit (2) for RLIMIT_NOFILE failed with error %s\n",
-			strerror(errno) ));
+			unix_error_string (errno) ));
 		/* just guess... */
 		return saved_current_limit;
     }

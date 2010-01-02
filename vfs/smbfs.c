@@ -434,7 +434,7 @@ smbfs_errno (struct vfs_class *me)
 {
     (void) me;
 
-    DEBUG(3, ("smbfs_errno: %s\n", g_strerror(my_errno)));
+    DEBUG(3, ("smbfs_errno: %s\n", unix_error_string (my_errno)));
     return my_errno;
 }
 
@@ -699,7 +699,7 @@ smbfs_chkpath(struct cli_state *cli, const char *path, BOOL send_only)
 	if ((my_errno = cli_error(cli, NULL, NULL, NULL))) {
 		if (my_errno == 20 || my_errno == 13)
 			return True;	/* ignore if 'not a directory' error */
-		DEBUG(3, ("smbfs_chkpath: cli_error: %s\n", g_strerror(my_errno)));
+		DEBUG(3, ("smbfs_chkpath: cli_error: %s\n", unix_error_string (my_errno)));
 		return False;
 	}
 

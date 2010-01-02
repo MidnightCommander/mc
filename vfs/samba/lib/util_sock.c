@@ -21,6 +21,8 @@
 
 #include "includes.h"
 
+const char *unix_error_string (int error_num);
+
 #ifdef WITH_SSL
 #include <ssl.h>
 #undef Realloc  /* SSLeay defines this and samba has a function of this name */
@@ -189,7 +191,7 @@ ssize_t write_socket(int fd,char *buf,size_t len)
   DEBUG(6,("write_socket(%d,%d) wrote %d\n",fd,(int)len,(int)ret));
   if(ret <= 0)
     DEBUG(1,("write_socket: Error writing %d bytes to socket %d: ERRNO = %s\n", 
-       (int)len, fd, strerror(errno) ));
+       (int)len, fd, unix_error_string (errno) ));
 
   return(ret);
 }
@@ -208,7 +210,7 @@ ssize_t read_udp_socket(int fd,char *buf,size_t len)
   memset((char *)&lastip,'\0',sizeof(lastip));
   ret = (ssize_t)recvfrom(fd,buf,len,0,(struct sockaddr *)&sock,&socklen);
   if (ret <= 0) {
-    DEBUG(2,("read socket failed. ERRNO=%s\n",strerror(errno)));
+    DEBUG(2,("read socket failed. ERRNO=%s\n", unix_error_string (errno)));
     return(0);
   }
 
@@ -264,7 +266,7 @@ ssize_t read_with_timeout(int fd,char *buf,size_t mincnt,size_t maxcnt,unsigned 
       }
 
       if (readret == -1) {
-        DEBUG(0,("read_with_timeout: read error = %s.\n", strerror(errno) ));
+        DEBUG(0,("read_with_timeout: read error = %s.\n", unix_error_string (errno) ));
         smb_read_error = READ_ERROR;
         return -1;
       }
@@ -293,7 +295,7 @@ ssize_t read_with_timeout(int fd,char *buf,size_t mincnt,size_t maxcnt,unsigned 
     /* Check if error */
     if(selrtn == -1) {
       /* something is wrong. Maybe the socket is dead? */
-      DEBUG(0,("read_with_timeout: timeout read. select error = %s.\n", strerror(errno) ));
+      DEBUG(0,("read_with_timeout: timeout read. select error = %s.\n", unix_error_string (errno) ));
       smb_read_error = READ_ERROR;
       return -1;
     }
@@ -324,7 +326,7 @@ ssize_t read_with_timeout(int fd,char *buf,size_t mincnt,size_t maxcnt,unsigned 
 
     if (readret == -1) {
       /* the descriptor is probably dead */
-      DEBUG(0,("read_with_timeout: timeout read. read error = %s.\n", strerror(errno) ));
+      DEBUG(0,("read_with_timeout: timeout read. read error = %s.\n", unix_error_string (errno) ));
       smb_read_error = READ_ERROR;
       return -1;
     }
@@ -376,13 +378,13 @@ ssize_t read_data(int fd,char *buffer,size_t N)
 
     if (ret == 0)
     {
-      DEBUG(10,("read_data: read of %d returned 0. Error = %s\n", (int)(N - total), strerror(errno) ));
+      DEBUG(10,("read_data: read of %d returned 0. Error = %s\n", (int)(N - total), unix_error_string (errno) ));
       smb_read_error = READ_EOF;
       return 0;
     }
     if (ret == -1)
     {
-      DEBUG(0,("read_data: read failure for %d. Error = %s\n", (int)(N - total), strerror(errno) ));
+      DEBUG(0,("read_data: read failure for %d. Error = %s\n", (int)(N - total), unix_error_string (errno) ));
       smb_read_error = READ_ERROR;
       return -1;
     }
@@ -413,7 +415,7 @@ ssize_t write_data(int fd,char *buffer,size_t N)
 #endif /* WITH_SSL */
 
     if (ret == -1) {
-      DEBUG(1,("write_data: write failure. Error = %s\n", strerror(errno) ));
+      DEBUG(1,("write_data: write failure. Error = %s\n", unix_error_string (errno) ));
       return -1;
     }
     if (ret == 0) return total;
@@ -651,7 +653,7 @@ BOOL send_one_packet(char *buf,int len,struct in_addr ip,int port,int type)
 
   if (!ret)
     DEBUG(0,("Packet send to %s(%d) failed ERRNO=%s\n",
-	     inet_ntoa(ip),port,strerror(errno)));
+	     inet_ntoa(ip),port,unix_error_string (errno)));
 
   close(out_fd);
   return(ret);
@@ -707,7 +709,7 @@ int open_socket_in(int type, int port, int dlevel,uint32 socket_addr, BOOL rebin
       if (port) {
 	if (port == SMB_PORT || port == NMB_PORT)
 	  DEBUG(dlevel,("bind failed on port %d socket_addr=%s (%s)\n",
-			port,inet_ntoa(sock.sin_addr),strerror(errno))); 
+			port,inet_ntoa(sock.sin_addr),unix_error_string (errno))); 
 	close(res); 
 
 	if (dlevel > 0 && port < 1000)
@@ -780,7 +782,7 @@ connect_again:
 
   if (ret < 0) {
     DEBUG(1,("error connecting to %s:%d (%s)\n",
-	     inet_ntoa(*addr),port,strerror(errno)));
+	     inet_ntoa(*addr),port,unix_error_string (errno)));
     close(res);
     return -1;
   }
@@ -826,7 +828,7 @@ char *client_name(int fd)
 	}
 	
 	if (getpeername(fd, &sa, &length) < 0) {
-		DEBUG(0,("getpeername failed. Error was %s\n", strerror(errno) ));
+		DEBUG(0,("getpeername failed. Error was %s\n", unix_error_string (errno) ));
 		return name_buf;
 	}
 	
@@ -871,7 +873,7 @@ char *client_addr(int fd)
 	}
 	
 	if (getpeername(fd, &sa, &length) < 0) {
-		DEBUG(0,("getpeername failed. Error was %s\n", strerror(errno) ));
+		DEBUG(0,("getpeername failed. Error was %s\n", unix_error_string (errno) ));
 		return addr_buf;
 	}
 	
