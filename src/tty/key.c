@@ -63,7 +63,7 @@
 #ifdef __linux__
 #if defined(__GLIBC__) && (__GLIBC__ < 2)
 #   include <linux/termios.h>   /* TIOCLINUX */
-#elif defined HAVE_TERMIOS_H
+#else
 #   include <termios.h>
 #endif
 #include <sys/ioctl.h>
