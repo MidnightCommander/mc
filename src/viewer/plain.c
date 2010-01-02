@@ -37,11 +37,15 @@
 
 #include <config.h>
 
+#include "../src/tty/tty.h"
+
+#include "../src/skin/skin.h"
+
 #include "../src/global.h"
 #include "../src/main.h"
 #include "../src/charsets.h"
-#include "../src/tty/tty.h"
-#include "../src/skin/skin.h"
+#include "../src/util.h"	/* is_printable() */
+
 #include "internal.h"
 
 /*** global variables ****************************************************************************/
@@ -80,10 +84,11 @@ mcview_display_text (mcview_t * view)
         curr = curr->next;
 
     while (TRUE) {
+        tty_setcolor (NORMAL_COLOR);
+
         if (row >= height)
             break;
 
-        tty_setcolor (NORMAL_COLOR);
 #ifdef HAVE_CHARSET
         if (view->utf8) {
             gboolean read_res = TRUE;
@@ -144,14 +149,19 @@ mcview_display_text (mcview_t * view)
 #ifdef HAVE_CHARSET
             if (utf8_display) {
                 if (!view->utf8)
-                    c = convert_from_8bit_to_utf_c (c, view->converter);
+                    c = convert_from_8bit_to_utf_c ((unsigned char) c, view->converter);
                 if (!g_unichar_isprint (c))
                     c = '.';
             } else if (view->utf8)
                 c = convert_from_utf_to_current_c (c, view->converter);
             else
 #endif
+            {
                 c = convert_to_display_c (c);
+
+                if (!is_printable (c))
+                    c = '.';
+            }
 
             tty_print_anychar (c);
         }
