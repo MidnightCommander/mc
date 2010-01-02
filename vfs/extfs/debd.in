@@ -109,7 +109,7 @@ sub list
 {
        my($archive)=@_;
        my $qarchive = quote($archive);
-       chop($date=`LC_ALL=C date "+%b %d %Y %H:%M"`);
+       chop($date=`LC_ALL=C date "+%m-%d-%Y %H:%M"`);
        chop($info_size=`dpkg -s $qarchive | wc -c`);
        $repack_size=length($pressrepack);
        $reinstall_size=length($pressreinstall);
@@ -183,7 +183,7 @@ sub copyout
                system("chmod a+x $qdestfile");
            }
         } elsif($filename =~ /^DEBIAN/) {
-            $filename=~s!^DEBIAN/!!;
+            $qfilename=~s!^DEBIAN/!!;
             system("cat /var/lib/dpkg/info/$qarchive.$qfilename > $qdestfile");
        } elsif($filename eq "DPKG-REMOVE" || $filename eq "APT-REMOVE") {
            if ( open(FILEOUT,">$destfile") ) {
@@ -251,7 +251,7 @@ sub run
        } elsif($filename eq "DPKG-RECONFIGURE") {
            system("dpkg-reconfigure $qarchive");
        } elsif($filename=~/^DEBIAN/) {
-           $filename=~s!^DEBIAN!!;
+           $qfilename=~s!^DEBIAN!!;
            system("/var/lib/dpkg/info/$qarchive.$qfilename");
        } else {
            $qfilename=~s!^CONTENTS!!;
