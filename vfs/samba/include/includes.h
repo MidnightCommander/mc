@@ -454,11 +454,6 @@
 #define MAX(a,b) ((a)>(b)?(a):(b))
 #endif
 
-#ifndef HAVE_STRCHR
-# define strchr                 index
-# define strrchr                rindex
-#endif
-
 #ifdef HAVE_BROKEN_GETGROUPS
 #define GID_T int
 #else
@@ -483,16 +478,6 @@
 
 /***** automatically generated prototypes *****/
 #include "proto.h"
-
-#ifdef strcpy
-#undef strcpy
-#endif /* strcpy */
-#define strcpy(dest,src) __ERROR__XX__NEVER_USE_STRCPY___;
-
-#ifdef strcat
-#undef strcat
-#endif /* strcat */
-#define strcat(dest,src) __ERROR__XX__NEVER_USE_STRCAT___;
 
 #ifdef sprintf
 #undef sprintf

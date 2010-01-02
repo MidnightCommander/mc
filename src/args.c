@@ -145,14 +145,14 @@ static const GOptionEntry argument_main_table[] = {
      N_("Log ftp dialog to specified file"),
      "<file>"
     },
-#ifdef WITH_SMBFS
+#ifdef ENABLE_VFS_SMB
     {
      "debuglevel", 'D', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_INT,
      &mc_args__debug_level,
      N_("Set debug level"),
      "<integer>"
     },
-#endif
+#endif /* ENABLE_VFS_SMB */
 #endif
 
     /* single file operations */

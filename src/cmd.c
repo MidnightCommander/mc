@@ -1171,14 +1171,14 @@ void fishlink_cmd (void)
 	     "/#sh:", 1);
 }
 
-#ifdef WITH_SMBFS
+#ifdef ENABLE_VFS_SMB
 void smblink_cmd (void)
 {
     nice_cd (_(" SMB link to machine "), _(machine_str),
 	     "[SMB File System]", ":smblink_cmd: SMB link to machine ",
 	     "/#smb:", 0);
 }
-#endif /* WITH_SMBFS */
+#endif /* ENABLE_VFS_SMB */
 #endif /* USE_NETCODE */
 
 #ifdef USE_EXT2FSLIB

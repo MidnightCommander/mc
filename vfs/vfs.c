@@ -1287,9 +1287,9 @@ vfs_init (void)
     tcp_init();
     init_ftpfs ();
     init_fish ();
-#ifdef WITH_SMBFS
+#ifdef ENABLE_VFS_SMB
     init_smbfs ();
-#endif /* WITH_SMBFS */
+#endif /* ENABLE_VFS_SMB */
 #ifdef ENABLE_VFS_MCFS
     init_mcfs ();
 #endif /* ENABLE_VFS_MCFS */

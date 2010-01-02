@@ -132,7 +132,7 @@ if test x"$ac_cv_func_connect" = x"no"; then
 fi
 
 AC_CHECK_FUNCS(waitpid getcwd strtoul chown chmod)
-AC_CHECK_FUNCS(fstat strchr utime utimes getrlimit fsync memset)
+AC_CHECK_FUNCS(fstat utime utimes getrlimit fsync memset)
 AC_CHECK_FUNCS(memmove vsnprintf snprintf setsid glob pipe crypt16 getauthuid)
 AC_CHECK_FUNCS(sigprocmask sigblock sigaction innetgr setnetgrent getnetgrent endnetgrent)
 AC_CHECK_FUNCS(initgroups select rdchk getgrnam pathconf)
@@ -228,7 +228,9 @@ esac
 ################
 
 AC_CACHE_CHECK([for long long],samba_cv_have_longlong,[
-AC_TRY_RUN([#include <stdio.h>
+AC_TRY_RUN([
+#include <stdio.h>
+#include <stdlib.h>
 main() { long long x = 1000000; x *= x; exit(((x/1000000) == 1000000)? 0: 1); }],
 samba_cv_have_longlong=yes,samba_cv_have_longlong=no,samba_cv_have_longlong=cross)])
 if test x"$samba_cv_have_longlong" = x"yes"; then
@@ -263,6 +265,7 @@ AC_CACHE_CHECK([if gettimeofday takes tz argument],samba_cv_HAVE_GETTIMEOFDAY_TZ
 AC_TRY_RUN([
 #include <sys/time.h>
 #include <unistd.h>
+#include <stdlib.h>
 main() { struct timeval tv; exit(gettimeofday(&tv, NULL));}],
            samba_cv_HAVE_GETTIMEOFDAY_TZ=yes,samba_cv_HAVE_GETTIMEOFDAY_TZ=no,samba_cv_HAVE_GETTIMEOFDAY_TZ=cross)])
 if test x"$samba_cv_HAVE_GETTIMEOFDAY_TZ" = x"yes"; then
@@ -271,7 +274,9 @@ fi
 
 
 AC_CACHE_CHECK([for broken readdir],samba_cv_HAVE_BROKEN_READDIR,[
-AC_TRY_RUN([#include <sys/types.h>
+AC_TRY_RUN([
+#include <sys/types.h>
+#include <stdlib.h>
 #include <dirent.h>
 main() { struct dirent *di; DIR *d = opendir("."); di = readdir(d);
 if (di && di->d_name[-2] == '.' && di->d_name[-1] == 0 &&
@@ -559,6 +564,8 @@ AC_ARG_WITH(codepagedir,
 AC_MSG_CHECKING([configure summary])
 AC_TRY_RUN([
 #include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 main()
 {
