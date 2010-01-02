@@ -40,11 +40,6 @@
 #define DEFAULT_PRINTING PRINT_QNX
 #endif
 
-#ifdef SUNOS4
-/* on SUNOS4 termios.h conflicts with sys/ioctl.h */
-#undef HAVE_TERMIOS_H
-#endif
-
 #include <sys/types.h>
 #include <fcntl.h>
 #include <sys/stat.h>
@@ -173,16 +168,8 @@
 #include <netinet/ip.h>
 #endif
 
-#if defined(HAVE_TERMIOS_H)
 /* POSIX terminal handling. */
 #include <termios.h>
-#elif defined(HAVE_TERMIO_H)
-/* Older SYSV terminal handling - don't use if we can avoid it. */
-#include <termio.h>
-#elif defined(HAVE_SYS_TERMIO_H)
-/* Older SYSV terminal handling - don't use if we can avoid it. */
-#include <sys/termio.h>
-#endif
 
 # include <dirent.h>
 
