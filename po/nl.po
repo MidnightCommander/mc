@@ -4,18 +4,18 @@
 # Gert Dewit <Gert.Dewit@sos.be>, 2001.
 # Vincent van Adrighem <V.vanAdrighem@dirck.mine.nu>, 2001.
 # Leonard den Ottolander <leonard den ottolander nl>, 2005.
-# Marcel Pol <mpol@gmx.net>, 2009.
+# Marcel Pol <mpol@gmx.net>, 2009-2010.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.6.1\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-12-25 19:06+0200\n"
-"PO-Revision-Date: 2009-12-23\n"
+"Project-Id-Version: mc 4.7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-01-03 16:04+0100\n"
+"PO-Revision-Date: 2010-01-03\n"
 "Last-Translator: Marcel Pol <mpol@gmx.net>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
@@ -134,7 +134,7 @@ msgid "The file you are saving is not finished with a newline"
 msgstr "Het bestand wat u opslaat eindigt niet met een nieuwe regel"
 
 msgid "C&ontinue"
-msgstr "D&oorgaan"
+msgstr "D&Oorgaan"
 
 msgid "&Do not change"
 msgstr "&Niet veranderen"
@@ -256,10 +256,10 @@ msgid " Error "
 msgstr " Fout "
 
 msgid " This function is not implemented. "
-msgstr " Deze functie is niet geïmplementeerd. "
+msgstr " Deze functie is niet geÃ¯mplementeerd. "
 
 msgid " Copy to clipboard "
-msgstr " Kopiëer naar prikbord "
+msgstr " KopiÃ«er naar prikbord "
 
 msgid " Unable to save to file. "
 msgstr " Kan niet opslaan naar bestand. "
@@ -331,7 +331,7 @@ msgid "Process block"
 msgstr "Bewerk blok"
 
 msgid " Copies to"
-msgstr " Kopiëert naar"
+msgstr " KopiÃ«ert naar"
 
 msgid " Subject"
 msgstr " Onderwerp"
@@ -361,7 +361,7 @@ msgid "&Whole words"
 msgstr "Hele &Woorden"
 
 msgid "In se&lection"
-msgstr "In se&lectie"
+msgstr "In se&Lectie"
 
 msgid "&Backwards"
 msgstr "&Terug"
@@ -382,13 +382,13 @@ msgid "Cancel"
 msgstr "Annuleren"
 
 msgid "&Skip"
-msgstr "Over&slaan"
+msgstr "Over&Slaan"
 
 msgid "A&ll"
-msgstr "A&lle"
+msgstr "A&Lle"
 
 msgid "&Replace"
-msgstr "Ve&rvangen"
+msgstr "Ve&Rvangen"
 
 msgid " Replace with: "
 msgstr " Vervangen door: "
@@ -413,10 +413,10 @@ msgid "File locked"
 msgstr "Bestand vergrendeld"
 
 msgid "&Grab lock"
-msgstr "Ver&grendel"
+msgstr "Ver&Grendel"
 
 msgid "&Ignore lock"
-msgstr "Negeer vergrendel&ing"
+msgstr "Negeer vergrendel&Ing"
 
 msgid "&Open file..."
 msgstr "&Open bestand..."
@@ -431,19 +431,19 @@ msgid "&Insert file..."
 msgstr "Bestand &Invoegen..."
 
 msgid "Cop&y to file..."
-msgstr "&Kopiëer naar bestand..."
+msgstr "&KopiÃ«er naar bestand..."
 
 msgid "&User menu..."
-msgstr "Gebr&uikersmenu..."
+msgstr "Gebr&Uikersmenu..."
 
 msgid "A&bout..."
 msgstr "&Over..."
 
 msgid "&Quit"
-msgstr "Beëindigen"
+msgstr "BeÃ«indigen"
 
 msgid "&Toggle mark"
-msgstr "Markering aan/ui&t"
+msgstr "Markering aan/ui&T"
 
 msgid "&Mark columns"
 msgstr "&Markeer kolommen"
@@ -452,7 +452,7 @@ msgid "Toggle &ins/overw"
 msgstr "&Inv aan/uit"
 
 msgid "&Copy"
-msgstr "&Kopiëer"
+msgstr "&KopiÃ«er"
 
 msgid "&Move"
 msgstr "&Verplaatsen"
@@ -461,10 +461,10 @@ msgid "&Delete"
 msgstr "&Verwijderen"
 
 msgid "C&opy to clipfile"
-msgstr "&Kopiëer naar prikbord"
+msgstr "&KopiÃ«er naar prikbord"
 
 msgid "C&ut to clipfile"
-msgstr "Kn&ippen naar prikbord"
+msgstr "Kn&Ippen naar prikbord"
 
 msgid "&Paste from clipfile"
 msgstr "&Plakken van prikbord"
@@ -476,10 +476,10 @@ msgid "&Next bookmark"
 msgstr "&Volgende bladwijzer"
 
 msgid "Pre&v bookmark"
-msgstr "Vo&rige bladwijzer"
+msgstr "Vo&Rige bladwijzer"
 
 msgid "&Flush bookmark"
-msgstr "Ver&wijder bladwijzer"
+msgstr "Ver&Wijder bladwijzer"
 
 msgid "&Undo"
 msgstr "&Herstellen"
@@ -494,10 +494,10 @@ msgid "&Search..."
 msgstr "&Zoeken..."
 
 msgid "Search &again"
-msgstr "Nogmaals Z&oeken"
+msgstr "Nogmaals z&Oeken"
 
 msgid "&Replace..."
-msgstr "Ve&rvangen..."
+msgstr "Ve&Rvangen..."
 
 msgid "&Go to line..."
 msgstr "&Ga naar regel..."
@@ -518,7 +518,7 @@ msgid "Forward to declaration"
 msgstr "Ga vooruit vanaf declaratie"
 
 msgid "Encod&ing..."
-msgstr "Encoder&ing..."
+msgstr "Encoder&Ing..."
 
 msgid "&Refresh screen"
 msgstr "Scherm verversen"
@@ -533,10 +533,10 @@ msgid "&Execute macro..."
 msgstr "&Macro uitvoeren..."
 
 msgid "Delete macr&o..."
-msgstr "Macro ver&wijderen..."
+msgstr "Macro ver&Wijderen..."
 
 msgid "'ispell' s&pell check"
-msgstr "`ispell'-s&pellingcontrole"
+msgstr "`ispell'-s&Pellingcontrole"
 
 msgid "&Mail..."
 msgstr "&Mail...              "
@@ -548,7 +548,7 @@ msgid "Insert &date/time"
 msgstr "&Datum/Tijd invoegen"
 
 msgid "Format p&aragraph"
-msgstr "P&aragraaf opmaken"
+msgstr "P&Aragraaf opmaken"
 
 msgid "Sor&t..."
 msgstr "&Sorteer..."
@@ -557,7 +557,7 @@ msgid "Paste o&utput of..."
 msgstr "Plak &Uitvoer van..."
 
 msgid "E&xternal formatter"
-msgstr "E&xterne formatteerder"
+msgstr "E&Xterne formatteerder"
 
 msgid "&General...  "
 msgstr "&Algemeen..."
@@ -572,7 +572,7 @@ msgid "Syntax &highlighting..."
 msgstr "Synta&X oplichting..."
 
 msgid "S&yntax file"
-msgstr "S&yntax bestand"
+msgstr "S&Yntax bestand"
 
 msgid "&Menu file"
 msgstr "&Menu bestand"
@@ -584,7 +584,7 @@ msgid "&File"
 msgstr "&Bestand"
 
 msgid "&Edit"
-msgstr "Be&werk"
+msgstr "Be&Werk"
 
 msgid "&Search"
 msgstr "&Zoeken"
@@ -593,7 +593,7 @@ msgid "&Command"
 msgstr "&Opdracht"
 
 msgid "For&mat"
-msgstr "For&mat"
+msgstr "For&Mat"
 
 msgid "&Options"
 msgstr "&Opties"
@@ -614,7 +614,7 @@ msgid "Cursor beyond end of line"
 msgstr "Cursor voorbij einde van de regel"
 
 msgid "Pers&istent selection"
-msgstr "Vastliggende s&electie"
+msgstr "Vastliggende s&Electie"
 
 msgid "Synta&x highlighting"
 msgstr "Synta&X oplichting"
@@ -626,10 +626,10 @@ msgid "Visible trailing spaces"
 msgstr "Zichtbare spaties aan einde regel"
 
 msgid "Save file &position"
-msgstr "Bestand &positie opslaan"
+msgstr "Bestand &Positie opslaan"
 
 msgid "Confir&m before saving"
-msgstr "Be&vestigen voor opslaan"
+msgstr "Be&Vestigen voor opslaan"
 
 msgid "&Return does autoindent"
 msgstr "&Return springt automatisch in"
@@ -638,13 +638,13 @@ msgid "Tab spacing: "
 msgstr "Tabgrootte: "
 
 msgid "Fill tabs with &spaces"
-msgstr "Tabs met &spaties vullen"
+msgstr "Tabs met &Spaties vullen"
 
 msgid "&Backspace through tabs"
 msgstr "&Backspace door Tabs"
 
 msgid "&Fake half tabs"
-msgstr "Simuleer &halve tabs"
+msgstr "Simuleer &Halve tabs"
 
 msgid "Wrap mode"
 msgstr "Woordafbrekingsmodus"
@@ -704,7 +704,7 @@ msgid "S&kip"
 msgstr "&Overslaan"
 
 msgid "Set &all"
-msgstr "Zet &alles"
+msgstr "Zet &Alles"
 
 msgid "owner"
 msgstr "eigenaar"
@@ -924,10 +924,10 @@ msgid "user &Mini status"
 msgstr "Gebruiker &Mini-status"
 
 msgid "&Reverse"
-msgstr "Omd&raaien"
+msgstr "Omd&Raaien"
 
 msgid "Case sensi&tive"
-msgstr "Hoofd-/kleine le&tters"
+msgstr "Hoofd-/kleine le&Tters"
 
 msgid "Executable &first"
 msgstr "&Uitvoerbare bestanden eerst"
@@ -939,7 +939,7 @@ msgid " Confirmation "
 msgstr " Bevestiging "
 
 msgid " confirm di&Rectory hotlist delete "
-msgstr " bevestig verwijderen mappen &Favolijst "
+msgstr " Bevestig verwijderen mappen &Favolijst "
 
 msgid " confirm &Exit "
 msgstr " B&Evestig afsluiten "
@@ -981,7 +981,7 @@ msgid "&Select"
 msgstr "&Selecteer"
 
 msgid "Use passive mode over pro&xy"
-msgstr "Gebruik passieve modus over pro&xy"
+msgstr "Gebruik passieve modus over pro&Xy"
 
 msgid "Use &passive mode"
 msgstr "&Passieve modus gebruiken"
@@ -1035,7 +1035,7 @@ msgid "&Resume"
 msgstr "&Doorgaan"
 
 msgid "&Kill"
-msgstr "&Beëndigen"
+msgstr "&BeÃ«ndigen"
 
 msgid "Background Jobs"
 msgstr "Achtergrondtaken"
@@ -1101,10 +1101,10 @@ msgid "set user ID on execution"
 msgstr "zet gebruikers-ID(UID) bij uitvoering"
 
 msgid "C&lear marked"
-msgstr "Markering opheffen"
+msgstr "Mar&kering opheffen"
 
 msgid "S&et marked"
-msgstr "Zet gemarkeerd"
+msgstr "Z&Et gemarkeerd"
 
 msgid "&Marked all"
 msgstr "Alle gemarkeerden"
@@ -1146,7 +1146,7 @@ msgid "Set &users"
 msgstr "Instellen gebruikers"
 
 msgid "Set &groups"
-msgstr "Instellen &groepen"
+msgstr "Instellen &Groepen"
 
 msgid " Name "
 msgstr " Naam "
@@ -1206,7 +1206,7 @@ msgid "&Using shell patterns"
 msgstr "Shell Patroon gebr&Uiken"
 
 msgid "&Case sensitive"
-msgstr "Hoofd-/kleine le&tters"
+msgstr "Hoofd-/kleine le&Tters"
 
 msgid "&Files only"
 msgstr "Alleen &Bestanden"
@@ -1400,7 +1400,7 @@ msgid ""
 "it."
 msgstr ""
 "De opmaak van het ~/%s bestand is veranderd met versie 3.0. Je kunt het of "
-"kopiëren van %smc.ext of dat bestand gebruiken als een voorbeeld hoe het te "
+"kopiÃ«ren van %smc.ext of dat bestand gebruiken als een voorbeeld hoe het te "
 "schrijven."
 
 msgid "DialogTitle|Copy"
@@ -1457,7 +1457,7 @@ msgid ""
 " Cannot stat source file \"%s\" \n"
 " %s "
 msgstr ""
-" Bronbestand \"%s\" kan niet geïnspecteerd worden \n"
+" Bronbestand \"%s\" kan niet geÃ¯nspecteerd worden \n"
 " %s "
 
 #, c-format
@@ -1512,7 +1512,7 @@ msgid ""
 " Cannot fstat source file \"%s\" \n"
 " %s "
 msgstr ""
-" Bronbestand \"%s\" kan niet geïnspecteerd worden \n"
+" Bronbestand \"%s\" kan niet geÃ¯nspecteerd worden \n"
 " %s "
 
 #, c-format
@@ -1520,7 +1520,7 @@ msgid ""
 " Cannot create target file \"%s\" \n"
 " %s "
 msgstr ""
-" Doelbestand \"%s\" kan niet gecreëerd worden \n"
+" Doelbestand \"%s\" kan niet gecreÃ«erd worden \n"
 " %s "
 
 #, c-format
@@ -1528,7 +1528,7 @@ msgid ""
 " Cannot fstat target file \"%s\" \n"
 " %s "
 msgstr ""
-" Bronbestand \"%s\" kan niet geïnspecteerd worden \n"
+" Bronbestand \"%s\" kan niet geÃ¯nspecteerd worden \n"
 " %s "
 
 #, c-format
@@ -1577,7 +1577,7 @@ msgid ""
 " Cannot stat source directory \"%s\" \n"
 " %s "
 msgstr ""
-" Bronmap \"%s\" kan niet geïnspecteerd worden\n"
+" Bronmap \"%s\" kan niet geÃ¯nspecteerd worden\n"
 " %s "
 
 #, c-format
@@ -1593,7 +1593,7 @@ msgid ""
 " Cannot copy cyclic symbolic link \n"
 " `%s' "
 msgstr ""
-" Een cyclische symbolische link kan niet gekopiëerd worden \n"
+" Een cyclische symbolische link kan niet gekopiÃ«erd worden \n"
 " `%s' "
 
 #, c-format
@@ -1609,7 +1609,7 @@ msgid ""
 " Cannot create target directory \"%s\" \n"
 " %s "
 msgstr ""
-" Doelmap \"%s\" kan niet gecreëerd worden \n"
+" Doelmap \"%s\" kan niet gecreÃ«erd worden \n"
 " %s "
 
 #, c-format
@@ -1625,7 +1625,7 @@ msgid ""
 " Cannot stat file \"%s\" \n"
 " %s "
 msgstr ""
-" Bestand \"%s\" kan niet geïnspecteerd worden \n"
+" Bestand \"%s\" kan niet geÃ¯nspecteerd worden \n"
 " %s "
 
 #, c-format
@@ -1836,7 +1836,7 @@ msgid "&Reget"
 msgstr "&Reget"
 
 msgid "A&ppend"
-msgstr "Toevoegen"
+msgstr "&Toevoegen"
 
 msgid "Overwrite this target?"
 msgstr "Dit doel overschrijven?"
@@ -1882,7 +1882,7 @@ msgid "&Again"
 msgstr "Herh&Alen"
 
 msgid "Pane&lize"
-msgstr "In &venster plaaten"
+msgstr "In &Venster plaaten"
 
 msgid "&View - F3"
 msgstr "Weerga&Ve - F3"
@@ -1898,28 +1898,28 @@ msgid " Malformed regular expression "
 msgstr " Incorrecte reguliere expressie "
 
 msgid "Cas&e sensitive"
-msgstr "Hoofd-/kleine le&tters"
+msgstr "Hoofd-/kleine le&Tters"
 
 msgid "&Find recursively"
 msgstr "&Vind recursief"
 
 msgid "S&kip hidden"
-msgstr "S&la verborgen over"
+msgstr "S&La verborgen over"
 
 msgid "&All charsets"
 msgstr "&Alle karaktersets"
 
 msgid "Case sens&itive"
-msgstr "Hoofd-/kleine le&tters"
+msgstr "Hoofd-/kleine le&Tters"
 
 msgid "Re&gular expression"
 msgstr "&Reguliere expressie"
 
 msgid "Fir&st hit"
-msgstr "Eerste &item"
+msgstr "Eerste &Item"
 
 msgid "All cha&rsets"
-msgstr "Alle &karaktersets"
+msgstr "Alle &Karaktersets"
 
 msgid "&Tree"
 msgstr "&Boom"
@@ -1970,7 +1970,7 @@ msgid "ButtonBar|Prev"
 msgstr "Vorige"
 
 msgid "&Remove"
-msgstr "Ver&wijderen"
+msgstr "Ver&Wijderen"
 
 msgid "&Append"
 msgstr "&Toevoegen"
@@ -1985,19 +1985,19 @@ msgid "New &Group"
 msgstr "Nieuwe &Groep"
 
 msgid "&Up"
-msgstr "Naar &boven"
+msgstr "Naar &Boven"
 
 msgid "&Add current"
 msgstr "&Huidige toevoegen"
 
 msgid "&Refresh"
-msgstr "Ve&rversen"
+msgstr "Ve&Rversen"
 
 msgid "Fr&ee VFSs now"
 msgstr "&Maak VFS'en nu vrij"
 
 msgid "Change &To"
-msgstr "Ver&ander in"
+msgstr "Ver&Ander in"
 
 msgid "Subgroup - press ENTER to see list"
 msgstr "Subgroep - druk ENTER om de lijst te zien"
@@ -2176,7 +2176,7 @@ msgid "show &Mini status"
 msgstr "&Mini-Status tonen"
 
 msgid "menu&Bar visible"
-msgstr "Menu&Balk zichtbaarr"
+msgstr "Menu&Balk zichtbaar"
 
 msgid "&Equal split"
 msgstr "Gelijkmatig verd&Elen"
@@ -2185,7 +2185,7 @@ msgid "pe&Rmissions"
 msgstr "&Rechten"
 
 msgid "&File types"
-msgstr "Bestand&Formaten"
+msgstr "Bestands&Formaten"
 
 msgid " Panel split "
 msgstr " Vensterverdeling "
@@ -2263,7 +2263,7 @@ msgid "which keys are not marked with OK.  Press space on the missing"
 msgstr "welke toetsen niet met 'OK' gemarkeerd zijn. Geef een spatie "
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
-msgstr "of klik met de muis om ze te definiëren. Navigeer met Tab."
+msgstr "of klik met de muis om ze te definiÃ«ren. Navigeer met Tab."
 
 msgid " The Midnight Commander "
 msgstr " De Midnight Commander "
@@ -2275,7 +2275,7 @@ msgid "&Listing mode..."
 msgstr "&Lijstmodus...          "
 
 msgid "&Quick view"
-msgstr "&Koerte lijst"
+msgstr "&Korte lijst"
 
 msgid "&Info"
 msgstr "&Info"
@@ -2296,7 +2296,7 @@ msgid "FT&P link..."
 msgstr "FT&P-Verbinding...      "
 
 msgid "S&hell link..."
-msgstr "S&hell-verbinding...    "
+msgstr "S&Hell-verbinding...    "
 
 msgid "SM&B link..."
 msgstr "SM&B-Verbinding..."
@@ -2305,7 +2305,7 @@ msgid "&Rescan"
 msgstr "&Herlezen"
 
 msgid "&View"
-msgstr "&Weergv"
+msgstr "&Weergave"
 
 msgid "Vie&w file..."
 msgstr "&Toon bestand..."
@@ -2314,7 +2314,7 @@ msgid "&Filtered view"
 msgstr "&Gefilterde weergave"
 
 msgid "C&hmod"
-msgstr "C&hmod"
+msgstr "C&Hmod"
 
 msgid "&Link"
 msgstr "&Link"
@@ -2323,10 +2323,10 @@ msgid "&SymLink"
 msgstr "&Symlink"
 
 msgid "Edit s&ymlink"
-msgstr "S&ymbolische link bewerken"
+msgstr "S&Ymlink bewerken"
 
 msgid "Ch&own"
-msgstr "Ch&own"
+msgstr "Ch&Own"
 
 msgid "&Advanced chown"
 msgstr "&Uitgebreide chown"
@@ -2335,13 +2335,13 @@ msgid "&Rename/Move"
 msgstr "&Hernoemen"
 
 msgid "&Mkdir"
-msgstr "&Mk map"
+msgstr "&Maak map"
 
 msgid "&Quick cd"
 msgstr "&Snelle cd"
 
 msgid "Select &group"
-msgstr "Instellen &groep"
+msgstr "Selecteer &Groep"
 
 msgid "U&nselect group"
 msgstr "&Deselecteer groep"
@@ -2356,16 +2356,16 @@ msgid "&User menu"
 msgstr "&Gebruikersmenu"
 
 msgid "&Directory tree"
-msgstr "&Mappenhiërarchie                 "
+msgstr "&MappenhiÃ«rarchie                 "
 
 msgid "&Find file"
-msgstr "Bestand &zoeken"
+msgstr "Bestand &Zoeken"
 
 msgid "S&wap panels"
 msgstr "&Wissel vensters"
 
 msgid "Switch &panels on/off"
-msgstr "Vensters &Aan/uit              C-o"
+msgstr "Vensters &Aan/uit"
 
 msgid "&Compare directories"
 msgstr "&Mappen vergelijken"
@@ -2392,7 +2392,7 @@ msgid "&Undelete files (ext2fs only)"
 msgstr "&Herstel bestanden (alleen ext2fs)"
 
 msgid "&Listing format edit"
-msgstr "&lijstformaat bewerken"
+msgstr "&Lijstformaat bewerken"
 
 msgid "Edit &extension file"
 msgstr "Bewerk &Extensie                  "
@@ -2401,7 +2401,7 @@ msgid "Edit &menu file"
 msgstr "&Bewerk menubestand               "
 
 msgid "Edit hi&ghlighting group file"
-msgstr "Pas &oplichten groep bestand aan"
+msgstr "Pas &Oplichten groep bestand aan"
 
 msgid "&Configuration..."
 msgstr "&Configuratie..."
@@ -2472,13 +2472,13 @@ msgid "cd follows lin&Ks"
 msgstr "&Cd volgt links"
 
 msgid "L&ynx-like motion"
-msgstr "'L&ynx'-achtige bewegingen"
+msgstr "'L&Ynx'-achtige bewegingen"
 
 msgid "rotatin&G dash"
 msgstr "Roterend stree&Pje"
 
 msgid "co&Mplete: show all"
-msgstr "volledig&: toon alles"
+msgstr "&Volledig: toon alles"
 
 msgid "&Use internal view"
 msgstr "Gebruik in&Terne weergave"
@@ -2502,7 +2502,7 @@ msgid "&Verbose operation"
 msgstr "Uitvoering met &Weergave"
 
 msgid "Mkdir autoname"
-msgstr "Mkdie automatisch noemen"
+msgstr "Mkdir automatisch noemen"
 
 msgid "&Fast dir reload"
 msgstr "Snel herle&Zen"
@@ -2532,7 +2532,7 @@ msgid "on dumb &Terminals"
 msgstr "op domme &Terminals"
 
 msgid "Alwa&ys"
-msgstr "Al&tijd"
+msgstr "Al&Tijd"
 
 msgid " Panel options "
 msgstr " Vensteropties "
@@ -2724,7 +2724,7 @@ msgid "Hexadecimal"
 msgstr "Hexadecimaal"
 
 msgid "Wildcard search"
-msgstr ""
+msgstr "Joker zoeken"
 
 msgid "Choose codepage"
 msgstr "Kies invoerkarakterset"
@@ -2780,7 +2780,7 @@ msgid "With builtin Editor\n"
 msgstr "Met ingebouwde editor\n"
 
 msgid "Using system-installed S-Lang library"
-msgstr "Door het systeem geïnstalleerd S-Lang bibliotheek zal gebruikt worden."
+msgstr "Door het systeem geÃ¯nstalleerd S-Lang bibliotheek zal gebruikt worden."
 
 msgid "with terminfo database"
 msgstr "met terminfo database"
@@ -2829,7 +2829,7 @@ msgstr ""
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
-msgstr "Kopiëer de map \"%s\" naar:"
+msgstr "KopiÃ«er de map \"%s\" naar:"
 
 #, c-format
 msgid "Move \"%s\" directory to:"
@@ -3187,7 +3187,7 @@ msgstr "Kan de rechten niet corrigeren voor de map %s\n"
 
 #, c-format
 msgid "Cannot create temporary directory %s: %s\n"
-msgstr "Tijdelijke map \"%s\" kan niet gecreëerd worden: %s\n"
+msgstr "Tijdelijke map \"%s\" kan niet gecreÃ«erd worden: %s\n"
 
 #, c-format
 msgid "Temporary files will be created in %s\n"
@@ -3412,7 +3412,7 @@ msgid "fish: Disconnecting from %s"
 msgstr "fish: Verbinding verbreken met %s"
 
 msgid "fish: Waiting for initial line..."
-msgstr "fish: Wachten op initiële lijn..."
+msgstr "fish: Wachten op initiÃ«le lijn..."
 
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Helaas, wachtwoordbeveiligde verbindingen niet mogelijk."
@@ -3424,7 +3424,7 @@ msgid "fish: Sending password..."
 msgstr "fish: wachtwoord wordt verstuurd..."
 
 msgid "fish: Sending initial line..."
-msgstr "fish: initiële lijn wordt verstuurd..."
+msgstr "fish: initiÃ«le lijn wordt verstuurd..."
 
 msgid "fish: Handshaking version..."
 msgstr "fish: versie handshaking..."
@@ -3532,7 +3532,7 @@ msgstr "ftpfs: instellen passieve modus mislukt: %s"
 
 #, c-format
 msgid "ftpfs: could not create socket: %s"
-msgstr "ftpfs: Kan socket niet creëren: %s"
+msgstr "ftpfs: Kan socket niet creÃ«ren: %s"
 
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: instellen passieve modus mislukt"
@@ -3607,7 +3607,7 @@ msgstr " Kan machinenaam niet vinden: %s "
 
 #, c-format
 msgid " Cannot create socket: %s "
-msgstr " Kan socket niet creëren: %s "
+msgstr " Kan socket niet creÃ«ren: %s "
 
 #, c-format
 msgid " Cannot connect to server: %s "
