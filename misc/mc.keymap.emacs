@@ -148,6 +148,7 @@ EditDeleteMacro =
 EditToggleLineState = alt-n
 EditToggleTabTWS = alt-underline
 EditToggleSyntax = ctrl-s
+EditToggleShowMargin =
 
 EditFindDefinition = alt-enter
 EditLoadPrevFile = alt-minus

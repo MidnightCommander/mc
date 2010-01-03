@@ -2936,6 +2936,11 @@ edit_execute_cmd (WEdit *edit, unsigned long command, int char_for_insertion)
 	edit->force |= REDRAW_PAGE;
 	break;
 
+    case CK_Toggle_Show_Margin:
+	show_right_margin = !show_right_margin;
+	edit->force |= REDRAW_PAGE;
+	break;
+
     case CK_Toggle_Bookmark:
 	book_mark_clear (edit, edit->curs_line, BOOK_MARK_FOUND_COLOR);
 	if (book_mark_query_color (edit, edit->curs_line, BOOK_MARK_COLOR))
