@@ -51,7 +51,7 @@ AC_CHECK_HEADERS(sys/termio.h sys/statfs.h sys/dustat.h sys/statvfs.h stdarg.h s
 AC_CHECK_HEADERS(netinet/tcp.h netinet/in_systm.h netinet/in_ip.h)
 AC_CHECK_HEADERS(sys/security.h security/pam_appl.h)
 AC_CHECK_HEADERS(stropts.h poll.h syscall.h sys/syscall.h)
-AC_CHECK_HEADERS(sys/acl.h sys/cdefs.h glob.h)
+AC_CHECK_HEADERS(sys/acl.h sys/cdefs.h)
 
 AC_CHECK_SIZEOF(int)
 AC_CHECK_SIZEOF(long)
@@ -133,7 +133,7 @@ fi
 
 AC_CHECK_FUNCS(waitpid getcwd strtoul chown chmod)
 AC_CHECK_FUNCS(fstat utime utimes getrlimit fsync memset)
-AC_CHECK_FUNCS(memmove vsnprintf snprintf setsid glob pipe crypt16 getauthuid)
+AC_CHECK_FUNCS(memmove vsnprintf snprintf setsid pipe crypt16 getauthuid)
 AC_CHECK_FUNCS(sigprocmask sigblock sigaction innetgr setnetgrent getnetgrent endnetgrent)
 AC_CHECK_FUNCS(initgroups select rdchk getgrnam pathconf)
 AC_CHECK_FUNCS(setpriv setgidx setuidx setgroups mktime rename)
