@@ -1202,16 +1202,16 @@ egrep(1). Ово значи да морате да наводите знаков
 .PP
 Директоријуме које би требало избегавати би требало навести у
 променљивој
-.B find_ignore_dirs
+.B ignore_dirs
 у одељку
-.B Misc
+.B FindFile
 ваше датотеке ~/.mc/ini.
 .PP
 Директоријуме би требало раздвајати двотачком; ево примера:
 .PP
 .nf
-[Misc]
-find_ignore_dirs=/cdrom:/nfs/wuarchive:/afs
+[FindFile]
+ignore_dirs=/cdrom:/nfs/wuarchive:/afs
 .fi
 .PP
 Можете да размотрите и употребу наредбе

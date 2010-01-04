@@ -1019,17 +1019,17 @@ powinno uwzględniać (na przykład możesz chcieć ominąć przeszukiwanie CDRO
 i innych podmontowanych systemów plików).
 .PP
 Katalogi do omijania powinny być umieszczone w zmiennej
-.B find_ignore_dirs
+.B ignore_dirs
 w sekcji
-.B Misc
+.B FindFile
 twojego pliku ~/.mc/ini.
 .PP
 Składowe katalogów powinny być oddzielone od siebie przez średniki, to jest
 przykład:
 .PP
 .nf
-[Misc]
-find_ignore_dirs=/cdrom:/nfs/wuarchive:/afs
+[FindFile]
+ignore_dirs=/cdrom:/nfs/wuarchive:/afs
 .fi
 .PP
 Możesz woleć używać panelu zewnętrznego do wykonywania niektórych operacji.

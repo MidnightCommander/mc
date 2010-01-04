@@ -1363,17 +1363,17 @@ searches on a CD\-ROM or on a NFS directory that is mounted across a slow
 link).
 .PP
 Directories to be skipped should be set on the variable
-.B find_ignore_dirs
+.B ignore_dirs
 in the
-.B Misc
+.B FindFile
 section of your ~/.mc/ini file.
 .PP
 Directory components should be separated with a colon, here is an
 example:
 .PP
 .nf
-[Misc]
-find_ignore_dirs=/cdrom:/nfs/wuarchive:/afs
+[FindFile]
+ignore_dirs=/cdrom:/nfs/wuarchive:/afs
 .fi
 .PP
 You may consider using the

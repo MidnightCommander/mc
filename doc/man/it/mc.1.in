@@ -1234,16 +1234,16 @@ saltare durante la ricerca (per esempio, si può evitare di fare ricerche su
 un CDROM o su una directory NFS montata attraverso un collegamento lento).
 .PP
 Le directory che devono essere saltate devono essere impostate nella variabile
-.B find_ignore_dirs 
+.B ignore_dirs 
 nella sezione
-.B Misc
+.B FindFile
 del file ~/.mc/ini.
 .PP
 Le directory devono essere separate da una virgola, come nell'esempio:
 .PP
 .nf
-[Misc]
-find_ignore_dirs=/cdrom:/nfs/wuarchive:/afs
+[FindFile]
+ignore_dirs=/cdrom:/nfs/wuarchive:/afs
 .fi
 .PP
 Si può prendere in considerazione l'uso del comando
