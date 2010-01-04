@@ -151,21 +151,35 @@ static struct {
 	{ N_("&Edit - F4"), 13, 38 }
 };
 
+/* find file options */
+typedef struct
+{
+    /* file name options */
+    gboolean file_case_sens;
+    gboolean file_pattern;
+    gboolean find_recurs;
+    gboolean skip_hidden;
+    gboolean file_all_charsets;
+
+    /* file content options */
+    gboolean content_case_sens;
+    gboolean content_regexp;
+    gboolean content_first_hit;
+    gboolean content_whole_words;
+    gboolean content_all_charsets;
+} find_file_options_t;
+
+static find_file_options_t options =
+{
+    TRUE, TRUE, TRUE, FALSE, FALSE,
+    TRUE, FALSE, FALSE, FALSE, FALSE
+};
+
 static char *in_start_dir = INPUT_LAST_TEXT;
 
 static mc_search_t *search_file_handle = NULL;
-static gboolean skip_hidden_flag = FALSE;
-static gboolean file_pattern_flag = TRUE;
-static gboolean file_all_charsets_flag = FALSE;
-static gboolean file_case_sens_flag = TRUE;
-static gboolean find_recurs_flag = TRUE;
-
 static mc_search_t *search_content_handle = NULL;
-static gboolean content_regexp_flag = FALSE;
-static gboolean content_all_charsets_flag = FALSE;
-static gboolean content_case_sens_flag = TRUE;
-static gboolean content_first_hit_flag = FALSE;
-static gboolean content_whole_words = FALSE;
+
 
 static inline char *
 add_to_list (const char *text, void *data)
@@ -339,38 +353,38 @@ find_parameters (char **start_dir, char **pattern, char **content)
 
 #ifdef HAVE_CHARSET
     content_all_charsets_cbox = check_new (11, FIND_X / 2 + 1,
-		content_all_charsets_flag, content_all_charsets_label);
+		options.content_all_charsets, content_all_charsets_label);
     add_widget (find_dlg, content_all_charsets_cbox);
 #endif
 
-    content_whole_words_cbox = check_new (10, FIND_X / 2 + 1, content_whole_words, content_whole_words_label);
+    content_whole_words_cbox = check_new (10, FIND_X / 2 + 1, options.content_whole_words, content_whole_words_label);
     add_widget (find_dlg, content_whole_words_cbox);
 
-    content_first_hit_cbox = check_new (9, FIND_X / 2 + 1, content_first_hit_flag, content_first_hit_label);
+    content_first_hit_cbox = check_new (9, FIND_X / 2 + 1, options.content_first_hit, content_first_hit_label);
     add_widget (find_dlg, content_first_hit_cbox);
 
-    content_regexp_cbox = check_new (8, FIND_X / 2 + 1, content_regexp_flag, content_regexp_label);
+    content_regexp_cbox = check_new (8, FIND_X / 2 + 1, options.content_regexp, content_regexp_label);
     add_widget (find_dlg, content_regexp_cbox);
 
-    content_case_sens_cbox = check_new (7, FIND_X / 2 + 1, content_case_sens_flag, content_case_label);
+    content_case_sens_cbox = check_new (7, FIND_X / 2 + 1, options.content_case_sens, content_case_label);
     add_widget (find_dlg, content_case_sens_cbox);
 
 #ifdef HAVE_CHARSET
     file_all_charsets_cbox = check_new (11, 3,
-		file_all_charsets_flag, file_all_charsets_label);
+		options.file_all_charsets, file_all_charsets_label);
     add_widget (find_dlg, file_all_charsets_cbox);
 #endif
 
-    skip_hidden_cbox = check_new (10, 3, skip_hidden_flag, file_skip_hidden_label);
+    skip_hidden_cbox = check_new (10, 3, options.skip_hidden, file_skip_hidden_label);
     add_widget (find_dlg, skip_hidden_cbox);
 
-    recursively_cbox = check_new (9, 3, find_recurs_flag, file_recurs_label);
+    recursively_cbox = check_new (9, 3, options.find_recurs, file_recurs_label);
     add_widget (find_dlg, recursively_cbox);
 
-    file_pattern_cbox = check_new (8, 3, file_pattern_flag, file_pattern_label);
+    file_pattern_cbox = check_new (8, 3, options.file_pattern, file_pattern_label);
     add_widget (find_dlg, file_pattern_cbox);
 
-    file_case_sens_cbox = check_new (7, 3, file_case_sens_flag, file_case_label);
+    file_case_sens_cbox = check_new (7, 3, options.file_case_sens, file_case_label);
     add_widget (find_dlg, file_case_sens_cbox);
 
     in_with = input_new (6, FIND_X / 2 + 1, INPUT_COLOR, FIND_X / 2 - 4, INPUT_LAST_TEXT,
@@ -400,17 +414,17 @@ find_parameters (char **start_dir, char **pattern, char **content)
 
     case B_TREE:
 #ifdef HAVE_CHARSET
-	file_all_charsets_flag = file_all_charsets_cbox->state & C_BOOL;
-	content_all_charsets_flag = content_all_charsets_cbox->state & C_BOOL;
+	options.file_all_charsets = file_all_charsets_cbox->state & C_BOOL;
+	options.content_all_charsets = content_all_charsets_cbox->state & C_BOOL;
 #endif
-	content_case_sens_flag = content_case_sens_cbox->state & C_BOOL;
-	content_regexp_flag = content_regexp_cbox->state & C_BOOL;
-	content_first_hit_flag = content_first_hit_cbox->state & C_BOOL;
-	content_whole_words = content_whole_words_cbox->state & C_BOOL;
-	file_pattern_flag = file_pattern_cbox->state & C_BOOL;
-	file_case_sens_flag = file_case_sens_cbox->state & C_BOOL;
-	find_recurs_flag = recursively_cbox->state & C_BOOL;
-	skip_hidden_flag = skip_hidden_cbox->state & C_BOOL;
+	options.content_case_sens = content_case_sens_cbox->state & C_BOOL;
+	options.content_regexp = content_regexp_cbox->state & C_BOOL;
+	options.content_first_hit = content_first_hit_cbox->state & C_BOOL;
+	options.content_whole_words = content_whole_words_cbox->state & C_BOOL;
+	options.file_pattern = file_pattern_cbox->state & C_BOOL;
+	options.file_case_sens = file_case_sens_cbox->state & C_BOOL;
+	options.find_recurs = recursively_cbox->state & C_BOOL;
+	options.skip_hidden = skip_hidden_cbox->state & C_BOOL;
 
 	destroy_dlg (find_dlg);
 	if (in_start_dir != INPUT_LAST_TEXT)
@@ -431,17 +445,17 @@ find_parameters (char **start_dir, char **pattern, char **content)
 
     default:
 #ifdef HAVE_CHARSET
-	file_all_charsets_flag = file_all_charsets_cbox->state & C_BOOL;
-	content_all_charsets_flag = content_all_charsets_cbox->state & C_BOOL;
+	options.file_all_charsets = file_all_charsets_cbox->state & C_BOOL;
+	options.content_all_charsets = content_all_charsets_cbox->state & C_BOOL;
 #endif
-	content_case_sens_flag = content_case_sens_cbox->state & C_BOOL;
-	content_regexp_flag = content_regexp_cbox->state & C_BOOL;
-	content_first_hit_flag = content_first_hit_cbox->state & C_BOOL;
-	content_whole_words = content_whole_words_cbox->state & C_BOOL;
-	find_recurs_flag = recursively_cbox->state & C_BOOL;
-	file_pattern_flag = file_pattern_cbox->state & C_BOOL;
-	file_case_sens_flag = file_case_sens_cbox->state & C_BOOL;
-	skip_hidden_flag = skip_hidden_cbox->state & C_BOOL;
+	options.content_case_sens = content_case_sens_cbox->state & C_BOOL;
+	options.content_regexp = content_regexp_cbox->state & C_BOOL;
+	options.content_first_hit = content_first_hit_cbox->state & C_BOOL;
+	options.content_whole_words = content_whole_words_cbox->state & C_BOOL;
+	options.find_recurs = recursively_cbox->state & C_BOOL;
+	options.file_pattern = file_pattern_cbox->state & C_BOOL;
+	options.file_case_sens = file_case_sens_cbox->state & C_BOOL;
+	options.skip_hidden = skip_hidden_cbox->state & C_BOOL;
 
 	*content = (in_with->buffer[0] != '\0') ? g_strdup (in_with->buffer) : NULL;
 	*start_dir = g_strdup ((in_start->buffer[0] != '\0') ? in_start->buffer : ".");
@@ -704,7 +718,7 @@ search_content (Dlg_head *h, const char *directory, const char *filename)
 	    }
 	    g_free (p);
 
-	    if (found && content_first_hit_flag)
+	    if (found && options.content_first_hit)
 		break;
 
 	    if (has_newline) {
@@ -763,16 +777,16 @@ do_search (struct Dlg_head *h)
 
     search_content_handle = mc_search_new(content_pattern, -1);
     if (search_content_handle) {
-        search_content_handle->search_type = (content_regexp_flag) ? MC_SEARCH_T_REGEX : MC_SEARCH_T_NORMAL;
-        search_content_handle->is_case_sentitive = content_case_sens_flag;
-        search_content_handle->whole_words = content_whole_words;
-        search_content_handle->is_all_charsets = content_all_charsets_flag;
+        search_content_handle->search_type = options.content_regexp ? MC_SEARCH_T_REGEX : MC_SEARCH_T_NORMAL;
+        search_content_handle->is_case_sentitive = options.content_case_sens;
+        search_content_handle->whole_words = options.content_whole_words;
+        search_content_handle->is_all_charsets = options.content_all_charsets;
     }
     search_file_handle = mc_search_new(find_pattern, -1);
-    search_file_handle->search_type = (file_pattern_flag) ?  MC_SEARCH_T_GLOB : MC_SEARCH_T_REGEX;
-    search_file_handle->is_case_sentitive = file_case_sens_flag;
-    search_file_handle->is_all_charsets = file_all_charsets_flag;
-    search_file_handle->is_entire_line = file_pattern_flag;
+    search_file_handle->search_type = options.file_pattern ?  MC_SEARCH_T_GLOB : MC_SEARCH_T_REGEX;
+    search_file_handle->is_case_sentitive = options.file_case_sens;
+    search_file_handle->is_all_charsets = options.file_all_charsets;
+    search_file_handle->is_entire_line = options.file_pattern;
 
     count = 0;
 
@@ -857,10 +871,10 @@ do_search (struct Dlg_head *h)
 	return 1;
     }
 
-    if (!(skip_hidden_flag && (dp->d_name[0] == '.'))) {
+    if (!(options.skip_hidden && (dp->d_name[0] == '.'))) {
 	gboolean search_ok;
 
-        if ((subdirs_left != 0) && find_recurs_flag
+        if ((subdirs_left != 0) && options.find_recurs
 		&& (directory != NULL)) { /* Can directory be NULL ? */
             char *tmp_name = concat_dir_and_file (directory, dp->d_name);
             if (!mc_lstat (tmp_name, &tmp_stat)
