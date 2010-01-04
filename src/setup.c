@@ -73,8 +73,6 @@
 #include "../src/strutil.h"	/* str_isutf8 () */
 
 
-extern char *find_ignore_dirs;
-
 extern int num_history_items_recorded;
 
 char *profile_name;		/* .mc/ini */
@@ -788,10 +786,6 @@ load_setup (void)
 #ifdef USE_NETCODE
     ftpfs_proxy_host = mc_config_get_string(mc_main_config, "Misc", "ftp_proxy_host", "gate");
 #endif
-    setup_color_string = mc_config_get_string(mc_main_config, "Misc", "find_ignore_dirs", "");
-    if (setup_color_string [0])
-	find_ignore_dirs = g_strconcat (":", setup_color_string, ":", (char *) NULL);
-    g_free(setup_color_string);
 
     /* The default color and the terminal dependent color */
     setup_color_string = mc_config_get_string(mc_main_config, "Colors", "base_color", "");

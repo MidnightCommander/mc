@@ -35,14 +35,14 @@
 #include "global.h"
 
 #include "../src/tty/tty.h"
-#include "../src/skin/skin.h"
 #include "../src/tty/key.h"
+#include "../src/skin/skin.h"
 #include "../src/search/search.h"
+#include "../src/mcconfig/mcconfig.h"
 
 #include "../vfs/vfs.h"
 
-#include "setup.h"
-#include "find.h"
+#include "setup.h"		/* verbose */
 #include "strutil.h"
 #include "dialog.h"
 #include "widget.h"
@@ -54,6 +54,8 @@
 #include "boxes.h"
 #include "history.h"		/* MC_HISTORY_SHARED_SEARCH */
 #include "layout.h"		/* mc_refresh() */
+
+#include "find.h"
 
 /* Size of the find parameters window */
 #if HAVE_CHARSET
@@ -180,6 +182,60 @@ static char *in_start_dir = INPUT_LAST_TEXT;
 static mc_search_t *search_file_handle = NULL;
 static mc_search_t *search_content_handle = NULL;
 
+static void
+find_load_options (void)
+{
+    static gboolean loaded = FALSE;
+    char *ignore_dirs;
+
+    if (loaded)
+	return;
+
+    loaded = TRUE;
+
+    /* Back compatibility: try load old parameter at first */
+    ignore_dirs = mc_config_get_string (mc_main_config, "Misc", "find_ignore_dirs", "");
+    if (ignore_dirs [0] != '\0') {
+	find_ignore_dirs = g_strconcat (":", ignore_dirs, ":", (char *) NULL);
+	mc_config_set_string (mc_main_config, "FindFile", "ignore_dirs", ignore_dirs);
+    }
+    g_free (ignore_dirs);
+    mc_config_del_param (mc_main_config, "Misc", "find_ignore_dirs");
+
+    /* Then load new parameters */
+    ignore_dirs = mc_config_get_string (mc_main_config, "FindFile", "ignore_dirs", "");
+    if (ignore_dirs [0] != '\0') {
+	g_free (find_ignore_dirs);
+	find_ignore_dirs = g_strconcat (":", ignore_dirs, ":", (char *) NULL);
+    }
+    g_free (ignore_dirs);
+
+    options.file_case_sens = mc_config_get_bool (mc_main_config, "FindFile", "file_case_sens", TRUE);
+    options.file_pattern = mc_config_get_bool (mc_main_config, "FindFile", "file_shell_pattern", TRUE);
+    options.find_recurs = mc_config_get_bool (mc_main_config, "FindFile", "file_find_recurs", TRUE);
+    options.skip_hidden = mc_config_get_bool (mc_main_config, "FindFile", "file_skip_hidden", FALSE);
+    options.file_all_charsets = mc_config_get_bool (mc_main_config, "FindFile", "file_all_charsets", FALSE);
+    options.content_case_sens = mc_config_get_bool (mc_main_config, "FindFile", "content_case_sens", TRUE);
+    options.content_regexp = mc_config_get_bool (mc_main_config, "FindFile", "content_regexp", FALSE);
+    options.content_first_hit = mc_config_get_bool (mc_main_config, "FindFile", "content_first_hit", FALSE);
+    options.content_whole_words = mc_config_get_bool (mc_main_config, "FindFile", "content_whole_words", FALSE);
+    options.content_all_charsets = mc_config_get_bool (mc_main_config, "FindFile", "content_all_charsets", FALSE);
+}
+
+static void
+find_save_options (void)
+{
+    mc_config_set_bool (mc_main_config, "FindFile", "file_case_sens", options.file_case_sens);
+    mc_config_set_bool (mc_main_config, "FindFile", "file_shell_pattern", options.file_pattern);
+    mc_config_set_bool (mc_main_config, "FindFile", "file_find_recurs", options.find_recurs);
+    mc_config_set_bool (mc_main_config, "FindFile", "file_skip_hidden", options.skip_hidden);
+    mc_config_set_bool (mc_main_config, "FindFile", "file_all_charsets", options.file_all_charsets);
+    mc_config_set_bool (mc_main_config, "FindFile", "content_case_sens", options.content_case_sens);
+    mc_config_set_bool (mc_main_config, "FindFile", "content_regexp", options.content_regexp);
+    mc_config_set_bool (mc_main_config, "FindFile", "content_first_hit", options.content_first_hit);
+    mc_config_set_bool (mc_main_config, "FindFile", "content_whole_words", options.content_whole_words);
+    mc_config_set_bool (mc_main_config, "FindFile", "content_all_charsets", options.content_all_charsets);
+}
 
 static inline char *
 add_to_list (const char *text, void *data)
@@ -274,7 +330,7 @@ find_parm_callback (Dlg_head *h, Widget *sender,
 /*
  * find_parameters: gets information from the user
  *
- * If the return value is true, then the following holds:
+ * If the return value is TRUE, then the following holds:
  *
  * START_DIR and PATTERN are pointers to char * and upon return they
  * contain the information provided by the user.
@@ -284,10 +340,10 @@ find_parm_callback (Dlg_head *h, Widget *sender,
  * behavior for the other two parameters.
  *
  */
-static int
+static gboolean
 find_parameters (char **start_dir, char **pattern, char **content)
 {
-    int return_value;
+    gboolean return_value;
     char *temp_dir = NULL;
 
     /* file name */
@@ -337,7 +393,9 @@ find_parameters (char **start_dir, char **pattern, char **content)
     b1 = str_term_width1 (buts[1]) + 4;
     b2 = str_term_width1 (buts[2]) + 4;
 
-  find_par_start:
+    find_load_options ();
+
+find_par_start:
     if (in_start_dir == NULL)
 	in_start_dir = g_strdup (".");
 
@@ -409,7 +467,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
 
     switch (run_dlg (find_dlg)) {
     case B_CANCEL:
-	return_value = 0;
+	return_value = FALSE;
 	break;
 
     case B_TREE:
@@ -463,7 +521,10 @@ find_parameters (char **start_dir, char **pattern, char **content)
 	if (in_start_dir != INPUT_LAST_TEXT)
 	    g_free (in_start_dir);
 	in_start_dir = g_strdup (*start_dir);
-	return_value = 1;
+
+	find_save_options ();
+
+	return_value = TRUE;
     }
 
     destroy_dlg (find_dlg);
