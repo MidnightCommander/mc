@@ -41,15 +41,11 @@
 
 #include "../src/global.h"
 
-#include "edit-impl.h"
-#include "editlock.h"
-#include "edit-widget.h"
-#include "../src/cmddef.h"
-
-#include "../src/tty/color.h"	/* EDITOR_NORMAL_COLOR */
+#include "../src/tty/color.h"	
 #include "../src/tty/tty.h"	/* attrset() */
 #include "../src/tty/key.h"	/* is_idle() */
-#include "../src/skin/skin.h"	/* mc_skin_color_get */
+
+#include "../src/skin/skin.h"	/* EDITOR_NORMAL_COLOR */
 
 #include "../src/widget.h"
 #include "../src/cmd.h"		/* view_other_cmd() */
@@ -60,6 +56,11 @@
 #include "../src/charsets.h"	/* get_codepage_id */
 #include "../src/main.h"	/* source_codepage */
 #include "../src/learn.h"	/* learn_keys */
+#include "../src/cmddef.h"
+
+#include "edit-impl.h"
+#include "editlock.h"
+#include "edit-widget.h"
 
 #include "../vfs/vfs.h"
 
