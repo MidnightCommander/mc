@@ -1169,7 +1169,7 @@ msgid " Group name "
 msgstr " Jméno skupiny "
 
 msgid " Size "
-msgstr " Velikost "
+msgstr " Délka "
 
 msgid " User name "
 msgstr " Jméno uživatele "
@@ -2636,10 +2636,10 @@ msgstr "&Přípona"
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|s"
-msgstr "sort|v"
+msgstr "sort|d"
 
 msgid "&Size"
-msgstr "&Velikost"
+msgstr "&Délka"
 
 msgid "Block Size"
 msgstr "Velikost bloků"
@@ -2650,7 +2650,7 @@ msgid "sort|m"
 msgstr "sort|m"
 
 msgid "&Modify time"
-msgstr "Čas &modifikace"
+msgstr "&Modifikace"
 
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
