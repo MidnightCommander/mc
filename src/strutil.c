@@ -404,7 +404,8 @@ str_init_strings (const char *termenc)
 void
 str_uninit_strings (void)
 {
-    g_iconv_close (str_cnv_not_convert);
+    if (str_cnv_not_convert != INVALID_CONV)
+	g_iconv_close (str_cnv_not_convert);
     g_free (codeset);
 }
 
