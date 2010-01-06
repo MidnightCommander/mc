@@ -545,7 +545,7 @@ dnl Libraries used only when building the mc binary
 AC_SUBST(MCLIBS)
 
 if test -n "$use_smbfs"; then
-  AC_CONFIG_SUBDIRS([vfs/samba])
+  AC_CONFIG_SUBDIRS([src/vfs/mc-vfs/samba])
 fi
 
 AM_CONDITIONAL(USE_MAINTAINER_MODE, [test x"$USE_MAINTAINER_MODE" = xyes])
@@ -583,35 +583,37 @@ src/skin/Makefile
 src/tty/Makefile
 src/viewer/Makefile
 
-syntax/Makefile
+lib/Makefile
+lib/vfs/Makefile
+lib/vfs/mc-vfs/Makefile
+lib/vfs/mc-vfs/extfs/Makefile
+lib/vfs/mc-vfs/extfs/a
+lib/vfs/mc-vfs/extfs/apt
+lib/vfs/mc-vfs/extfs/audio
+lib/vfs/mc-vfs/extfs/deb
+lib/vfs/mc-vfs/extfs/deba
+lib/vfs/mc-vfs/extfs/debd
+lib/vfs/mc-vfs/extfs/dpkg
+lib/vfs/mc-vfs/extfs/iso9660
+lib/vfs/mc-vfs/extfs/hp48
+lib/vfs/mc-vfs/extfs/lslR
+lib/vfs/mc-vfs/extfs/mailfs
+lib/vfs/mc-vfs/extfs/patchfs
+lib/vfs/mc-vfs/extfs/rpms
+lib/vfs/mc-vfs/extfs/s3
+lib/vfs/mc-vfs/extfs/uace
+lib/vfs/mc-vfs/extfs/ualz
+lib/vfs/mc-vfs/extfs/uar
+lib/vfs/mc-vfs/extfs/uarc
+lib/vfs/mc-vfs/extfs/uarj
+lib/vfs/mc-vfs/extfs/uc1541
+lib/vfs/mc-vfs/extfs/uha
+lib/vfs/mc-vfs/extfs/ulha
+lib/vfs/mc-vfs/extfs/urar
+lib/vfs/mc-vfs/extfs/uzip
+lib/vfs/mc-vfs/extfs/uzoo
 
-vfs/Makefile
-vfs/extfs/Makefile
-vfs/extfs/a
-vfs/extfs/apt
-vfs/extfs/audio
-vfs/extfs/deb
-vfs/extfs/deba
-vfs/extfs/debd
-vfs/extfs/dpkg
-vfs/extfs/iso9660
-vfs/extfs/hp48
-vfs/extfs/lslR
-vfs/extfs/mailfs
-vfs/extfs/patchfs
-vfs/extfs/rpms
-vfs/extfs/s3
-vfs/extfs/uace
-vfs/extfs/ualz
-vfs/extfs/uar
-vfs/extfs/uarc
-vfs/extfs/uarj
-vfs/extfs/uc1541
-vfs/extfs/uha
-vfs/extfs/ulha
-vfs/extfs/urar
-vfs/extfs/uzip
-vfs/extfs/uzoo
+syntax/Makefile
 
 doc/Makefile
 doc/hints/Makefile
