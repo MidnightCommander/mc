@@ -128,6 +128,7 @@
 #define CK_Maximize		458
 #endif
 
+#define CK_Toggle_Show_Margin	460
 #define CK_Toggle_Tab_TWS	470
 #define CK_Toggle_Syntax	480
 #define CK_Toggle_Line_State	490

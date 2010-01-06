@@ -85,6 +85,7 @@ int option_edit_top_extreme = 0;
 int option_edit_bottom_extreme = 0;
 int enable_show_tabs_tws = 1;
 int option_check_nl_at_eof = 0;
+int show_right_margin = 0;
 
 const char *option_whole_chars_search = "0123456789abcdefghijklmnopqrstuvwxyz_";
 char *option_backup_ext = NULL;
@@ -2932,6 +2933,11 @@ edit_execute_cmd (WEdit *edit, unsigned long command, int char_for_insertion)
 	} else {
 	    option_line_state_width = 0;
 	}
+	edit->force |= REDRAW_PAGE;
+	break;
+
+    case CK_Toggle_Show_Margin:
+	show_right_margin = !show_right_margin;
 	edit->force |= REDRAW_PAGE;
 	break;
 

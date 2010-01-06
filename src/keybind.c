@@ -189,6 +189,7 @@ static name_keymap_t command_names[] = {
     { "EditToggleLineState",               CK_Toggle_Line_State },
     { "EditToggleTabTWS",                  CK_Toggle_Tab_TWS },
     { "EditToggleSyntax",                  CK_Toggle_Syntax },
+    { "EditToggleShowMargin",              CK_Toggle_Show_Margin },
     { "EditFindDefinition",                CK_Find_Definition },
     { "EditLoadPrevFile",                  CK_Load_Prev_File },
     { "EditLoadNextFile",                  CK_Load_Next_File },
