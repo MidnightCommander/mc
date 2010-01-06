@@ -6,7 +6,7 @@
 #ifndef MC_USER_H
 #define MC_USER_H
 
-#include "../edit/edit.h"
+#include "../src/editor/edit.h"
 
 void user_menu_cmd (WEdit *edit_widget);
 char *expand_format (WEdit *edit_widget, char c, int quote);

@@ -92,7 +92,7 @@
 #endif /* ENABLE_VFS_SMB */
 
 #ifdef USE_INTERNAL_EDIT
-#   include "../edit/edit.h"
+#   include "../src/editor/edit.h"
 #endif
 
 #ifdef	HAVE_CHARSET

@@ -42,9 +42,9 @@
 #include "../src/history.h"
 #include "../src/charsets.h"
 
-#include "../edit/edit-widget.h"
-#include "../edit/etags.h"
-#include "../edit/editcmd_dialogs.h"
+#include "../src/editor/edit-widget.h"
+#include "../src/editor/etags.h"
+#include "../src/editor/editcmd_dialogs.h"
 
 
 /*** global variables **************************************************/

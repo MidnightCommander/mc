@@ -87,7 +87,7 @@
 #endif
 
 #ifdef USE_INTERNAL_EDIT
-#   include "../edit/edit.h"
+#   include "../src/editor/edit.h"
 #endif
 
 /* If set and you don't have subshell support,then C-o will give you a shell */
