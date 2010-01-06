@@ -1,6 +1,6 @@
 ## Process this file with automake to create Makefile.in.
 
-SUBDIRS = skins
+SUBDIRS = skins syntax
 
 LIBFILES_OUT = mc.ext
 
