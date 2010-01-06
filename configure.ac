@@ -576,14 +576,14 @@ misc/mc.ext
 
 src/Makefile
 src/editor/Makefile
-src/filehighlight/Makefile
-src/mcconfig/Makefile
-src/search/Makefile
-src/skin/Makefile
-src/tty/Makefile
 src/viewer/Makefile
 
 lib/Makefile
+lib/filehighlight/Makefile
+lib/mcconfig/Makefile
+lib/search/Makefile
+lib/skin/Makefile
+lib/tty/Makefile
 lib/vfs/Makefile
 lib/vfs/mc-vfs/Makefile
 lib/vfs/mc-vfs/extfs/Makefile

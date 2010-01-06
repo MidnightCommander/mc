@@ -1,4 +1,4 @@
-SUBDIRS = mcconfig search tty viewer filehighlight skin
+SUBDIRS = viewer
 
 if USE_EDIT
 SUBDIRS += editor
@@ -50,11 +50,6 @@ endif
 mc_LDADD = \
 	../lib/libmc.la \
 	$(EDITLIB) \
-	filehighlight/libmcfilehighlight.la \
-	mcconfig/libmcconfig.la \
-	search/libsearch.la \
-	skin/libmcskin.la \
-	tty/libmctty.la \
 	viewer/libmcviewer.la \
 	$(INTLLIBS) $(MCLIBS) $(SLANGLIB) $(LIBICONV) $(GLIB_LIBS)
 
