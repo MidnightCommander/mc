@@ -575,6 +575,7 @@ misc/skins/Makefile
 misc/mc.ext
 
 src/Makefile
+src/editor/Makefile
 src/filehighlight/Makefile
 src/mcconfig/Makefile
 src/search/Makefile
@@ -582,7 +583,6 @@ src/skin/Makefile
 src/tty/Makefile
 src/viewer/Makefile
 
-edit/Makefile
 syntax/Makefile
 
 vfs/Makefile

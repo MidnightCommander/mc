@@ -1,5 +1,9 @@
 SUBDIRS = mcconfig search tty viewer filehighlight skin
 
+if USE_EDIT
+SUBDIRS += editor
+endif
+
 AM_CFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir) $(PCRE_CFLAGS)
 
 localedir = $(datadir)/locale
@@ -29,7 +33,7 @@ cons_saver_SOURCES = cons.saver.c
 man2hlp_SOURCES = man2hlp.c glibcompat.c
 
 if USE_EDIT
-EDITLIB = ../edit/libedit.a
+EDITLIB = editor/libedit.a
 endif
 
 if ENABLE_VFS
