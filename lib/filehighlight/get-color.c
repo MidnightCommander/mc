@@ -31,8 +31,8 @@
 
 #include "../src/global.h"
 #include "../src/util.h"
-#include "../src/skin/skin.h"
-#include "../src/filehighlight/fhl.h"
+#include "../lib/skin/skin.h"
+#include "../lib/filehighlight/fhl.h"
 #include "internal.h"
 
 /*** global variables ****************************************************************************/

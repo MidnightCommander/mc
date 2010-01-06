@@ -32,9 +32,9 @@
 
 #include "../../src/global.h"
 
-#include "../../src/tty/tty-slang.h"
-#include "../../src/tty/color.h"        /* variables */
-#include "../../src/tty/color-internal.h"
+#include "tty-slang.h"
+#include "color.h"        /* variables */
+#include "color-internal.h"
 
 #include "../../src/setup.h"    /* color_terminal_string */
 

@@ -52,7 +52,7 @@
 #include <config.h>
 
 #include "../src/global.h"
-#include "../src/tty/tty.h"
+#include "../lib/tty/tty.h"
 #include "internal.h"
 
 #define VIEW_COORD_CACHE_GRANUL	1024

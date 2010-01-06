@@ -29,8 +29,8 @@
 #include <string.h>
 
 #include "global.h"
-#include "../src/tty/tty.h"
-#include "../src/skin/skin.h"
+#include "../lib/tty/tty.h"
+#include "../lib/skin/skin.h"
 #include "dir.h"
 #include "panel.h"
 #include "main.h"
@@ -40,7 +40,7 @@
 #include "setup.h"
 #include "history.h"
 #include "strutil.h"
-#include "../src/search/search.h"
+#include "../lib/search/search.h"
 
 #include "../../lib/vfs/mc-vfs/vfs.h"
 

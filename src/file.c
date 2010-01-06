@@ -58,10 +58,10 @@
 
 #include "global.h"
 
-#include "../src/tty/tty.h"
-#include "../src/tty/key.h"
+#include "../lib/tty/tty.h"
+#include "../lib/tty/key.h"
 
-#include "../src/search/search.h"
+#include "../lib/search/search.h"
 
 #include "setup.h"
 #include "dialog.h"

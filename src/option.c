@@ -32,13 +32,13 @@
 
 #include "global.h"
 
-#include "../src/tty/tty.h"
+#include "../lib/tty/tty.h"
 
 #include "dialog.h"
 #include "widget.h"
 #include "setup.h"		/* For save_setup() */
 #include "main.h"
-#include "../src/mcconfig/mcconfig.h"	/* For mc_config_save_file */
+#include "../lib/mcconfig/mcconfig.h"	/* For mc_config_save_file */
 #include "strutil.h"
 #include "panel.h"		/* Needed for the externs */
 #include "file.h"		/* safe_delete */

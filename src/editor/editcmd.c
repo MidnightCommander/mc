@@ -47,12 +47,12 @@
 
 #include "../src/global.h"
 
-#include "../src/tty/tty.h"
-#include "../src/tty/key.h"	/* XCTRL */
+#include "../lib/tty/tty.h"
+#include "../lib/tty/key.h"	/* XCTRL */
 
-#include "../src/mcconfig/mcconfig.h"
+#include "../lib/mcconfig/mcconfig.h"
 
-#include "../src/skin/skin.h"
+#include "../lib/skin/skin.h"
 
 #include "../src/history.h"
 #include "../src/widget.h"	/* listbox_new() */

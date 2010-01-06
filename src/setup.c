@@ -30,9 +30,9 @@
 
 #include "global.h"
 
-#include "../src/tty/tty.h"
-#include "../src/tty/key.h"
-#include "../src/tty/mouse.h"		/* To make view.h happy */
+#include "../lib/tty/tty.h"
+#include "../lib/tty/key.h"
+#include "../lib/tty/mouse.h"		/* To make view.h happy */
 #include "../../lib/vfs/mc-vfs/vfs.h"
 
 #include "args.h"
@@ -40,7 +40,7 @@
 #include "panel.h"
 #include "main.h"
 #include "tree.h"		/* xtree_mode */
-#include "../src/mcconfig/mcconfig.h"
+#include "../lib/mcconfig/mcconfig.h"
 #include "setup.h"
 #include "../src/viewer/mcviewer.h" /* For the externs */
 #include "hotlist.h"		/* load/save/done hotlist */

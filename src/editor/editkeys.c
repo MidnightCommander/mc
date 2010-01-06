@@ -45,8 +45,8 @@
 #include "edit-widget.h"	/* edit->macro_i */
 #include "editcmd_dialogs.h"
 
-#include "../src/tty/tty.h"	/* keys */
-#include "../src/tty/key.h"	/* KEY_M_SHIFT */
+#include "../lib/tty/tty.h"	/* keys */
+#include "../lib/tty/key.h"	/* KEY_M_SHIFT */
 
 #include "../src/cmddef.h"	/* list of commands */
 #include "../src/keybind.h"	/* lookup_keymap_command() */

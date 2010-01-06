@@ -41,16 +41,15 @@
 
 #include "global.h"
 
-#include "../src/tty/tty.h"
-#include "../src/skin/skin.h"
-#include "../src/tty/mouse.h"
-#include "../src/tty/key.h"		/* For init_key() */
-#include "../src/tty/win.h"		/* xterm_flag */
+#include "../lib/tty/tty.h"
+#include "../lib/skin/skin.h"
+#include "../lib/tty/mouse.h"
+#include "../lib/tty/key.h"		/* For init_key() */
+#include "../lib/tty/win.h"		/* xterm_flag */
 
-#include "../src/mcconfig/mcconfig.h"
+#include "../lib/mcconfig/mcconfig.h"
 #include "../src/args.h"
-#include "../src/skin/skin.h"
-#include "../src/filehighlight/fhl.h"
+#include "../lib/filehighlight/fhl.h"
 
 #include "dir.h"
 #include "dialog.h"

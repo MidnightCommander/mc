@@ -6,7 +6,7 @@
 #ifndef MC_COLOR_SLANG_H
 #define MC_COLOR_SLANG_H
 
-#include "../../src/tty/tty-slang.h"    /* S-Lang headers */
+#include "tty-slang.h"    /* S-Lang headers */
 
 enum {
     COLOR_BLACK = 0,

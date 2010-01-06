@@ -36,11 +36,11 @@
 
 #include "global.h"
 
-#include "../src/tty/tty.h"
-#include "../src/skin/skin.h"		/* INPUT_COLOR */
-#include "../src/tty/key.h"		/* XCTRL and ALT macros  */
+#include "../lib/tty/tty.h"
+#include "../lib/skin/skin.h"		/* INPUT_COLOR */
+#include "../lib/tty/key.h"		/* XCTRL and ALT macros  */
 
-#include "../src/mcconfig/mcconfig.h"	/* Load/save user formats */
+#include "../lib/mcconfig/mcconfig.h"	/* Load/save user formats */
 
 #include "dialog.h"		/* The nice dialog manager */
 #include "widget.h"		/* The widgets for the nice dialog manager */

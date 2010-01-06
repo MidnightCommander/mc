@@ -35,10 +35,10 @@
 
 #include "../../src/global.h"
 
-#include "../../src/tty/tty.h"
-#include "../../src/tty/color.h"
+#include "tty.h"
+#include "color.h"
 
-#include "../../src/tty/color-internal.h"
+#include "color-internal.h"
 
 /*** global variables ****************************************************************************/
 

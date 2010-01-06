@@ -85,13 +85,13 @@ What to do with this?
 
 #include "../src/global.h"
 
-#include "../src/tty/tty.h"	/* enable/disable interrupt key */
+#include "../lib/tty/tty.h"	/* enable/disable interrupt key */
 
 #include "../src/wtools.h"	/* message() */
 #include "../src/main.h"	/* print_vfs_message */
 #include "../src/history.h"
 #include "../src/setup.h"	/* for load_anon_passwd */
-#include "../src/mcconfig/mcconfig.h"
+#include "../lib/mcconfig/mcconfig.h"
 
 #include "utilvfs.h"
 #include "xdirentry.h"

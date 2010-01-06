@@ -3,9 +3,9 @@
 
 #include "../../src/global.h"
 
-#include "../../src/mcconfig/mcconfig.h"
+#include "../../lib/mcconfig/mcconfig.h"
 
-#include "../src/tty/color.h"
+#include "../lib/tty/color.h"
 
 /*** typedefs(not structures) and defined constants **********************************************/
 

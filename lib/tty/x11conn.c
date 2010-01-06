@@ -40,7 +40,7 @@ typedef int dummy;              /* C99 forbids empty compilation unit */
 #endif
 
 #include "../../src/global.h"
-#include "../../src/tty/x11conn.h"
+#include "x11conn.h"
 
 /*** file scope type declarations **************************************/
 

@@ -42,16 +42,16 @@
 
 #include "global.h"
 
-#include "../src/tty/win.h"		/* xterm_flag */
+#include "../lib/tty/win.h"		/* xterm_flag */
 
-#include "../src/search/search.h"
+#include "../lib/search/search.h"
 
 #include "main.h"		/* mc_home */
 #include "cmd.h"		/* guess_message_value */
 #include "mountlist.h"
 #include "timefmt.h"
 #include "strutil.h"
-#include "./src/mcconfig/mcconfig.h"
+#include "./lib/mcconfig/mcconfig.h"
 #include "fileopctx.h"
 #include "file.h"		/* copy_file_file() */
 #include "dir.h"

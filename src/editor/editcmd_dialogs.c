@@ -28,11 +28,11 @@
 
 #include "../src/global.h"
 
-#include "../src/tty/tty.h"
-#include "../src/skin/skin.h"		/* INPUT_COLOR */
-#include "../src/tty/key.h"
+#include "../lib/tty/tty.h"
+#include "../lib/skin/skin.h"		/* INPUT_COLOR */
+#include "../lib/tty/key.h"
 
-#include "../src/search/search.h"
+#include "../lib/search/search.h"
 
 #include "../src/dialog.h"
 #include "../src/widget.h"

@@ -40,7 +40,7 @@
 #include "../src/global.h"
 #include "../src/setup.h"
 #include "../src/wtools.h"
-#include "../src/tty/tty.h"
+#include "../lib/tty/tty.h"
 #include "internal.h"
 
 /*** global variables ****************************************************************************/

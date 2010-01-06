@@ -39,11 +39,11 @@
 
 #include "../../src/global.h"
 
-#include "../../src/tty/tty.h"
-#include "../../src/tty/tty-internal.h" /* mouse_enabled */
-#include "../../src/tty/mouse.h"
-#include "../../src/tty/key.h"
-#include "../../src/tty/win.h"  /* xterm_flag */
+#include "tty.h"
+#include "tty-internal.h" /* mouse_enabled */
+#include "mouse.h"
+#include "key.h"
+#include "win.h"  /* xterm_flag */
 
 #include "../../src/main.h"
 #include "../../src/layout.h"   /* winch_flag, mc_refresh() */
@@ -57,7 +57,7 @@
 #endif /* ENABLE_VFS */
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
-#include "../src/tty/x11conn.h"
+#include "x11conn.h"
 #endif
 
 #ifdef __linux__

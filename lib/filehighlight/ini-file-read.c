@@ -32,7 +32,7 @@
 #include "../src/main.h"
 #include "../src/fileloc.h"
 #include "../src/strescape.h"
-#include "../src/skin/skin.h"
+#include "../lib/skin/skin.h"
 #include "../../src/util.h"
 #include "fhl.h"
 #include "internal.h"
