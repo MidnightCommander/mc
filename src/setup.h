@@ -29,8 +29,8 @@ extern char *setup_color_string;
 extern char *term_color_string;
 extern char *color_terminal_string;
 
-extern int startup_left_mode;
-extern int startup_right_mode;
+extern panel_view_mode_t startup_left_mode;
+extern panel_view_mode_t startup_right_mode;
 extern int verbose;
 
 extern int mouse_close_dialog;

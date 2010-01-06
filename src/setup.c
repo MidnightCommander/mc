@@ -82,8 +82,8 @@ char *setup_color_string;
 char *term_color_string;
 char *color_terminal_string;
 
-int startup_left_mode;
-int startup_right_mode;
+panel_view_mode_t startup_left_mode;
+panel_view_mode_t startup_right_mode;
 
 /* Ugly hack to allow panel_save_setup to work as a place holder for */
 /* default panel values */
@@ -105,13 +105,13 @@ static const struct {
 
 static const struct {
     const char *opt_name;
-    int  opt_type;
+    panel_view_mode_t opt_type;
 } panel_types [] = {
     { "listing",   view_listing },
-    { "quickview", view_quick   },
+    { "quickview", view_quick },
     { "info",      view_info },
     { "tree",      view_tree },
-    { 0, 0 }
+    { NULL,        view_listing }
 };
 
 static const struct {
@@ -248,7 +248,7 @@ void
 panel_save_setup (struct WPanel *panel, const char *section)
 {
     char *buffer;
-    int  i;
+    size_t i;
 
     mc_config_set_int(mc_panels_config, section, "reverse", panel->reverse);
     mc_config_set_int(mc_panels_config, section, "case_sensitive", panel->case_sensitive);
@@ -315,14 +315,14 @@ save_configure (void)
 }
 
 static void
-panel_save_type (const char *section, int type)
+panel_save_type (const char *section, panel_view_mode_t type)
 {
     int i;
 
-    for (i = 0; panel_types [i].opt_name; i++)
-	if (panel_types [i].opt_type == type){
-	    mc_config_set_string(mc_panels_config, section,
-	                "display", panel_types [i].opt_name);
+    for (i = 0; panel_types [i].opt_name != NULL; i++)
+	if (panel_types [i].opt_type == type) {
+	    mc_config_set_string (mc_panels_config, section,
+				    "display", panel_types [i].opt_name);
 	    break;
 	}
 }
@@ -330,9 +330,10 @@ panel_save_type (const char *section, int type)
 void
 save_panel_types (void)
 {
-    int type;
+    panel_view_mode_t type;
 
-    if (! mc_config_get_int(mc_main_config,CONFIG_APP_SECTION,"auto_save_setup_panels",auto_save_setup))
+    if (!mc_config_get_int (mc_main_config, CONFIG_APP_SECTION,
+			    "auto_save_setup_panels", auto_save_setup))
 	return;
 
     type = get_display_type (0);
@@ -352,7 +353,7 @@ save_panel_types (void)
 				get_current_index () == 0 ? "1" : "0");
 
     if (mc_panels_config->ini_path == NULL)
-        mc_panels_config->ini_path = g_strdup(panels_profile_name);
+        mc_panels_config->ini_path = g_strdup (panels_profile_name);
 
     mc_config_del_group (mc_panels_config, "Temporal:New Left Panel");
     mc_config_del_group (mc_panels_config, "Temporal:New Right Panel");
@@ -403,7 +404,7 @@ save_setup (void)
 void
 panel_load_setup (WPanel *panel, const char *section)
 {
-    int i;
+    size_t i;
     char *buffer;
 
     panel->reverse = mc_config_get_int(mc_panels_config, section, "reverse", 0);
@@ -455,23 +456,22 @@ load_layout ()
 	    mc_config_get_int(mc_main_config,"Layout", layout [i].opt_name, *layout [i].opt_addr);
 }
 
-static int
+static panel_view_mode_t
 setup__load_panel_state (const char *section)
 {
     char *buffer;
-    int  i;
-
-    int mode = view_listing;
+    size_t i;
+    panel_view_mode_t mode = view_listing;
 
     /* Load the display mode */
-    buffer = mc_config_get_string(mc_panels_config, section, "display", "listing");
+    buffer = mc_config_get_string (mc_panels_config, section, "display", "listing");
 
-    for (i = 0; panel_types [i].opt_name; i++)
-	if ( g_strcasecmp (panel_types [i].opt_name, buffer) == 0){
+    for (i = 0; panel_types [i].opt_name != NULL; i++)
+	if (g_strcasecmp (panel_types [i].opt_name, buffer) == 0) {
 	    mode = panel_types [i].opt_type;
 	    break;
 	}
-    g_free(buffer);
+    g_free (buffer);
     return mode;
 }
 
@@ -769,7 +769,7 @@ load_setup (void)
     startup_right_mode = setup__load_panel_state ("New Right Panel");
 
     /* At least one of the panels is a listing panel */
-    if (startup_left_mode != view_listing && startup_right_mode!=view_listing)
+    if (startup_left_mode != view_listing && startup_right_mode != view_listing)
 	startup_left_mode = view_listing;
 
     if (!other_dir){
