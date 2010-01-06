@@ -29,7 +29,7 @@ fi
 cd "$srcdir"
 
 # The autoconf cache (version after 2.52) is not reliable yet.
-rm -rf autom4te.cache vfs/samba/autom4te.cache
+rm -rf autom4te.cache lib/vfs/mc-vfs/samba/autom4te.cache
 
 if test ! -d config; then
   mkdir config
@@ -72,16 +72,16 @@ $AUTOMAKE -a
 test -f Makefile.in || \
   { echo "automake failed to generate Makefile.in" >&2; exit 1; }
 
-cd vfs/samba
+cd lib/vfs/mc-vfs/samba
 date -u >include/stamp-h.in
 
 $AUTOHEADER
 test -f include/config.h.in || \
-  { echo "autoheader failed to generate vfs/samba/include/config.h.in" >&2; exit 1; }
+  { echo "autoheader failed to generate lib/vfs/mc-vfs/samba/include/config.h.in" >&2; exit 1; }
 
 $AUTOCONF
 test -f configure || \
-  { echo "autoconf failed to generate vfs/samba/configure" >&2; exit 1; }
+  { echo "autoconf failed to generate lib/vfs/mc-vfs/samba/configure" >&2; exit 1; }
 ) || exit 1
 
 $srcdir/maint/version.sh "$srcdir"

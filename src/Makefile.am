@@ -36,14 +36,6 @@ if USE_EDIT
 EDITLIB = editor/libedit.a
 endif
 
-if ENABLE_VFS
-if USE_SAMBA_FS
-VFSLIB = ../vfs/libvfs-mc.a ../vfs/samba/libsamba.a
-else
-VFSLIB = ../vfs/libvfs-mc.a
-endif
-endif
-
 SRC_maintainer=logging.c logging.h
 SRC_charset = charsets.c charsets.h selcodepage.c selcodepage.h
 
@@ -56,7 +48,8 @@ if CHARSET
 endif
 
 mc_LDADD = \
-	$(EDITLIB) $(VFSLIB) \
+	../lib/libmc.la \
+	$(EDITLIB) \
 	filehighlight/libmcfilehighlight.la \
 	mcconfig/libmcconfig.la \
 	search/libsearch.la \
