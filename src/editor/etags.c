@@ -40,7 +40,7 @@
 
 #include "../src/global.h"
 #include "../src/util.h"	/* canonicalize_pathname() */
-#include "../edit/etags.h"
+#include "../src/editor/etags.h"
 
 /*** file scope functions **********************************************/
 

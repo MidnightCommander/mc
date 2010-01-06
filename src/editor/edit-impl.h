@@ -35,7 +35,7 @@
 #include "../src/dialog.h"	/* cb_ret_t */
 #include "../src/keybind.h"	/* global_keymap_t */
 
-#include "../edit/edit.h"
+#include "../src/editor/edit.h"
 
 #define SEARCH_DIALOG_OPTION_NO_SCANF	(1 << 0)
 #define SEARCH_DIALOG_OPTION_NO_REGEX	(1 << 1)

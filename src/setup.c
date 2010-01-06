@@ -67,7 +67,7 @@
 #endif
 
 #ifdef USE_INTERNAL_EDIT
-#   include "../edit/edit.h"
+#   include "../src/editor/edit.h"
 #endif
 
 #include "../src/strutil.h"	/* str_isutf8 () */

@@ -67,12 +67,12 @@
 
 #include "../vfs/vfs.h"
 
-#include "../edit/edit-impl.h"
-#include "../edit/edit.h"
-#include "../edit/editlock.h"
-#include "../edit/edit-widget.h"
-#include "../edit/editcmd_dialogs.h"
-#include "../edit/etags.h"
+#include "../src/editor/edit-impl.h"
+#include "../src/editor/edit.h"
+#include "../src/editor/editlock.h"
+#include "../src/editor/edit-widget.h"
+#include "../src/editor/editcmd_dialogs.h"
+#include "../src/editor/etags.h"
 
 /* globals: */
 

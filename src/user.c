@@ -44,7 +44,7 @@
 
 #include "../vfs/vfs.h"
 
-#include "../edit/edit.h"		/* WEdit, BLOCK_FILE */
+#include "../src/editor/edit.h"		/* WEdit, BLOCK_FILE */
 
 /* For the simple listbox manager */
 #include "dialog.h"
