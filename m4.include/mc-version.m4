@@ -22,7 +22,7 @@ AC_DEFUN([MC_VERSION],[
     DISTR_VERSION=`echo $VERSION | sed 's/^\([[^\-]]*\).*/\1/'`
     DISTR_RELEASE=`echo $VERSION | sed 's/^[[^\-]]*\-\(.*\)/\1/' | sed 's/-/./g'`
 
-    if `echo $VERSION | grep -c '\-pre'`; then
+    if test `echo $VERSION | grep -c '\-pre'` -ne 0; then
         DISTR_RELEASE="0.$DISTR_RELEASE"
     else
         if test `echo $VERSION | grep -c '\-'` -eq 0; then
