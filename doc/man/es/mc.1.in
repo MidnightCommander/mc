@@ -1286,17 +1286,17 @@ evitar búsquedas en un CDROM o en un directorio NFS que está montado a través
 enlace lento).
 .PP
 Los directorios a ser omitidos deberían ser enumerados en la variable
-.B find_ignore_dirs
+.B ignore_dirs
 en la sección
-.B Misc
+.B FindFile
 de nuestro archivo ~/.mc/ini.
 .PP
 Los componentes del directorio deberían ser separados por dos puntos, como en
 el ejemplo que sigue:
 .PP
 .nf
-[Misc]
-find_ignore_dirs=/cdrom:/nfs/wuarchive:/afs
+[FindFile]
+ignore_dirs=/cdrom:/nfs/wuarchive:/afs
 .fi
 .PP
 Debemos valorar la utilización de
