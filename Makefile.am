@@ -1,7 +1,7 @@
 ## Process this file with automake to create Makefile.in.
 AUTOMAKE_OPTIONS = 1.5
 
-SUBDIRS = intl po lib src doc syntax contrib misc
+SUBDIRS = intl po lib src doc contrib misc
 
 EXTRA_DIST = 
 

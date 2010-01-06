@@ -613,7 +613,7 @@ lib/vfs/mc-vfs/extfs/urar
 lib/vfs/mc-vfs/extfs/uzip
 lib/vfs/mc-vfs/extfs/uzoo
 
-syntax/Makefile
+misc/syntax/Makefile
 
 doc/Makefile
 doc/hints/Makefile
