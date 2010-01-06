@@ -2769,8 +2769,8 @@ msgstr[1] " %s bájt"
 #, c-format
 msgid "%s in %d file"
 msgid_plural "%s in %d files"
-msgstr[0] "%s bájt %d fájlban"
-msgstr[1] "%s bájt %d fájlban"
+msgstr[0] "%s %d fájlban"
+msgstr[1] "%s %d fájlban"
 
 msgid "Unknown tag on display format: "
 msgstr "Ismeretlen címke a megjelenítési formátumban: "
