@@ -48,12 +48,12 @@
 #endif /* HAVE_STROPTS_H */
 
 #include "global.h"
-#include "../src/tty/tty.h"	/* LINES */
+#include "../lib/tty/tty.h"	/* LINES */
 #include "panel.h"	/* current_panel */
 #include "wtools.h"	/* query_dialog() */
 #include "main.h"	/* do_update_prompt() */
 #include "cons.saver.h"	/* handle_console() */
-#include "../src/tty/key.h"	/* XCTRL */
+#include "../lib/tty/key.h"	/* XCTRL */
 #include "subshell.h"
 #include "strutil.h"
 #include "fileloc.h"

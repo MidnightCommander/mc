@@ -46,13 +46,13 @@
 
 #include "global.h"
 
-#include "../src/tty/tty.h"
-#include "../src/skin/skin.h"
-#include "../src/tty/key.h"
-#include "../src/tty/mouse.h"
-#include "../src/tty/win.h"	/* do_enter_ca_mode() */
+#include "../lib/tty/tty.h"
+#include "../lib/skin/skin.h"
+#include "../lib/tty/key.h"
+#include "../lib/tty/mouse.h"
+#include "../lib/tty/win.h"	/* do_enter_ca_mode() */
 
-#include "../src/mcconfig/mcconfig.h"
+#include "../lib/mcconfig/mcconfig.h"
 
 #include "dialog.h"
 #include "widget.h"

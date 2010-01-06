@@ -23,7 +23,7 @@
 #ifndef MC_DIALOG_H
 #define MC_DIALOG_H
 
-#include "../src/tty/mouse.h"
+#include "../lib/tty/mouse.h"
 #include "util.h" /* Hook */
 
 /* Common return values */

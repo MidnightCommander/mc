@@ -11,9 +11,9 @@
 #include "../../src/global.h"
 
 #ifdef HAVE_SLANG
-#   include "../../src/tty/tty-slang.h"
+#   include "tty-slang.h"
 #else
-#   include "../../src/tty/tty-ncurses.h"
+#   include "tty-ncurses.h"
 #endif /* HAVE_SLANG */
 
 extern gboolean use_colors;

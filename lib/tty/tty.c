@@ -36,8 +36,8 @@
 
 #include "../../src/global.h"
 
-#include "../../src/tty/tty.h"
-#include "../../src/tty/tty-internal.h"
+#include "tty.h"
+#include "tty-internal.h"
 
 #include "../../src/strutil.h"
 

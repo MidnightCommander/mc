@@ -28,8 +28,8 @@
 
 #include <string.h>             /* strcmp */
 
-#include "../../src/tty/color.h"        /* colors and attributes */
-#include "../../src/tty/color-internal.h"
+#include "color.h"        /* colors and attributes */
+#include "color-internal.h"
 
 /*** global variables ****************************************************************************/
 

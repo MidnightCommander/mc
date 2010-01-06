@@ -48,9 +48,9 @@
 
 #include "../src/global.h"
 
-#include "../src/search/search.h"	/* search engine */
+#include "../lib/search/search.h"	/* search engine */
 
-#include "../src/skin/skin.h"
+#include "../lib/skin/skin.h"
 
 #include "../src/main.h"		/* mc_home */
 #include "../src/wtools.h"		/* message() */

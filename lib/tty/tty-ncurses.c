@@ -42,10 +42,10 @@
 #   define WANT_TERM_H
 #endif
 
-#include "../../src/tty/tty-internal.h" /* slow_tty */
-#include "../../src/tty/tty.h"
-#include "../../src/tty/color-internal.h"
-#include "../../src/tty/win.h"
+#include "tty-internal.h" /* slow_tty */
+#include "tty.h"
+#include "color-internal.h"
+#include "win.h"
 #include "../../src/main.h"
 
 #include "../../src/strutil.h"  /* str_term_form */

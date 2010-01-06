@@ -35,10 +35,10 @@
 
 #include "global.h"
 
-#include "../src/tty/tty.h"
-#include "../src/tty/key.h"		/* tty_getch() */
+#include "../lib/tty/tty.h"
+#include "../lib/tty/key.h"		/* tty_getch() */
 
-#include "../src/skin/skin.h"		/* INPUT_COLOR */
+#include "../lib/skin/skin.h"		/* INPUT_COLOR */
 
 #include "dialog.h"
 #include "widget.h"

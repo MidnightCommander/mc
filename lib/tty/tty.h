@@ -14,9 +14,9 @@
 #include "../../src/global.h"   /* include <glib.h> */
 
 #ifdef HAVE_SLANG
-#   include "../../src/tty/tty-slang.h"
+#   include "tty-slang.h"
 #else
-#   include "../../src/tty/tty-ncurses.h"
+#   include "tty-ncurses.h"
 #endif
 
 /* {{{ Input }}} */

@@ -41,8 +41,8 @@
 
 #include "../src/global.h"
 
-#include "../src/tty/tty.h"		/* LINES, COLS */
-#include "../src/tty/key.h"		/* is_idle() */
+#include "../lib/tty/tty.h"		/* LINES, COLS */
+#include "../lib/tty/key.h"		/* is_idle() */
 
 #include "edit-impl.h"
 #include "edit-widget.h"

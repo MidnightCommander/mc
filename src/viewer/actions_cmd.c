@@ -51,8 +51,8 @@
 
 #include "../src/global.h"
 
-#include "../src/tty/tty.h"
-#include "../src/tty/key.h"
+#include "../lib/tty/tty.h"
+#include "../lib/tty/key.h"
 
 #include "../src/dialog.h"	/* cb_ret_t */
 #include "../src/panel.h"

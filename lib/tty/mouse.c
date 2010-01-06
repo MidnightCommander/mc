@@ -33,10 +33,10 @@
 
 #include "../../src/global.h"
 
-#include "../../src/tty/tty.h"
-#include "../../src/tty/tty-internal.h" /* mouse_enabled */
-#include "../../src/tty/mouse.h"
-#include "../../src/tty/key.h"  /* define sequence */
+#include "tty.h"
+#include "tty-internal.h" /* mouse_enabled */
+#include "mouse.h"
+#include "key.h"  /* define sequence */
 
 gboolean mouse_enabled = FALSE;
 const char *xmouse_seq;

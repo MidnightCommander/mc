@@ -9,7 +9,7 @@
 #include "../../src/global.h"   /* <glib.h> */
 #include "../../src/dialog.h"   /* cb_ret_t */
 
-#include "../../src/tty/tty.h"  /* KEY_F macro */
+#include "tty.h"  /* KEY_F macro */
 
 gboolean define_sequence (int code, const char *seq, int action);
 

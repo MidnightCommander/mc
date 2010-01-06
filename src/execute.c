@@ -27,9 +27,9 @@
 
 #include "global.h"
 
-#include "../src/tty/tty.h"
-#include "../src/tty/key.h"
-#include "../src/tty/win.h"
+#include "../lib/tty/tty.h"
+#include "../lib/tty/key.h"
+#include "../lib/tty/win.h"
 
 #include "main.h"
 #include "cons.saver.h"

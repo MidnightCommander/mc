@@ -36,12 +36,12 @@
 
 #include "global.h"
 
-#include "../src/tty/tty.h"
-#include "../src/tty/key.h"
+#include "../lib/tty/tty.h"
+#include "../lib/tty/key.h"
 
 #include "dialog.h"
 #include "widget.h"
-#include "../src/mcconfig/mcconfig.h"	/* Save profile */
+#include "../lib/mcconfig/mcconfig.h"	/* Save profile */
 #include "setup.h"
 #include "layout.h"			/* repaint_screen() */
 #include "learn.h"

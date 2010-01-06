@@ -34,11 +34,11 @@
 
 #include "global.h"
 
-#include "../src/tty/tty.h"
-#include "../src/tty/key.h"
-#include "../src/skin/skin.h"
-#include "../src/search/search.h"
-#include "../src/mcconfig/mcconfig.h"
+#include "../lib/tty/tty.h"
+#include "../lib/tty/key.h"
+#include "../lib/skin/skin.h"
+#include "../lib/search/search.h"
+#include "../lib/mcconfig/mcconfig.h"
 
 #include "../../lib/vfs/mc-vfs/vfs.h"
 

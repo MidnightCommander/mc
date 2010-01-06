@@ -41,13 +41,13 @@
 
 #include "../../src/global.h"
 
-#include "../../src/tty/tty-internal.h" /* slow_tty */
-#include "../../src/tty/tty.h"
-#include "../../src/tty/color-slang.h"
-#include "../../src/tty/color-internal.h"
-#include "../../src/tty/mouse.h"        /* Gpm_Event is required in key.h */
-#include "../../src/tty/key.h"  /* define_sequence */
-#include "../../src/tty/win.h"
+#include "tty-internal.h" /* slow_tty */
+#include "tty.h"
+#include "color-slang.h"
+#include "color-internal.h"
+#include "mouse.h"        /* Gpm_Event is required in key.h */
+#include "key.h"  /* define_sequence */
+#include "win.h"
 
 #include "../../src/strutil.h"  /* str_term_form */
 

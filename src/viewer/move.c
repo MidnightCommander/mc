@@ -54,7 +54,7 @@
 #include <config.h>
 
 #include "../src/global.h"
-#include "../src/tty/tty.h"
+#include "../lib/tty/tty.h"
 #include "internal.h"
 
 /*** global variables ****************************************************************************/

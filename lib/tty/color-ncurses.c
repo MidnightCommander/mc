@@ -32,9 +32,9 @@
 
 #include "../../src/global.h"
 
-#include "../../src/tty/tty-ncurses.h"
-#include "../../src/tty/color.h"        /* variables */
-#include "../../src/tty/color-internal.h"
+#include "tty-ncurses.h"
+#include "color.h"        /* variables */
+#include "color-internal.h"
 
 /*** global variables ****************************************************************************/
 

@@ -49,7 +49,7 @@
 
 #include "global.h"
 #include "treestore.h"
-#include "../src/mcconfig/mcconfig.h"
+#include "../lib/mcconfig/mcconfig.h"
 #include "../../lib/vfs/mc-vfs/vfs.h"
 #include "setup.h"
 #include "fileloc.h"

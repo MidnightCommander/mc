@@ -41,11 +41,11 @@
 
 #include "global.h"
 
-#include "../src/tty/tty.h"
-#include "../src/skin/skin.h"
-#include "../src/tty/mouse.h"
-#include "../src/tty/key.h"
-#include "../vfs/vfs.h"
+#include "../lib/tty/tty.h"
+#include "../lib/skin/skin.h"
+#include "../lib/tty/mouse.h"
+#include "../lib/tty/key.h"
+#include "../lib/vfs/mc-vfs/vfs.h"
 
 #include "wtools.h"	/* message() */
 #include "dir.h"

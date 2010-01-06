@@ -41,8 +41,8 @@
 
 #include "../src/global.h"
 
-#include "../src/tty/tty.h"	/* KEY_F */
-#include "../src/tty/key.h"	/* XCTRL */
+#include "../lib/tty/tty.h"	/* KEY_F */
+#include "../lib/tty/key.h"	/* XCTRL */
 
 #include "../src/menu.h"	/* menu_entry */
 #include "../src/main.h"	/* drop_menus */

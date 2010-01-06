@@ -15,9 +15,9 @@
 #include "../../src/global.h"   /* glib.h */
 
 #ifdef HAVE_SLANG
-#   include "../../src/tty/color-slang.h"
+#   include "color-slang.h"
 #else
-#   include "../../src/tty/tty-ncurses.h"
+#   include "tty-ncurses.h"
 #endif
 
 extern char *command_line_colors;

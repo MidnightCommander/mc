@@ -41,11 +41,11 @@
 
 #include "../src/global.h"
 
-#include "../src/tty/color.h"	
-#include "../src/tty/tty.h"	/* attrset() */
-#include "../src/tty/key.h"	/* is_idle() */
+#include "../lib/tty/color.h"	
+#include "../lib/tty/tty.h"	/* attrset() */
+#include "../lib/tty/key.h"	/* is_idle() */
 
-#include "../src/skin/skin.h"	/* EDITOR_NORMAL_COLOR */
+#include "../lib/skin/skin.h"	/* EDITOR_NORMAL_COLOR */
 
 #include "../src/widget.h"
 #include "../src/cmd.h"		/* view_other_cmd() */

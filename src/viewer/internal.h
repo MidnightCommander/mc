@@ -8,7 +8,7 @@
 
 #include "../src/global.h"
 
-#include "../src/search/search.h"
+#include "../lib/search/search.h"
 
 #include "../src/dialog.h"
 #include "../src/widget.h"

@@ -31,8 +31,8 @@
 #include <sys/types.h>
 
 #include "../src/global.h"
-#include "../src/search/search.h"
-#include "../src/search/internal.h"
+#include "search.h"
+#include "internal.h"
 #include "../src/strutil.h"
 #include "../src/charsets.h"
 

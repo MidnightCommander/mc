@@ -47,14 +47,14 @@
 
 #include "global.h"
 
-#include "../src/tty/tty.h"		/* LINES, tty_touch_screen() */
-#include "../src/tty/key.h"		/* ALT() macro */
-#include "../src/tty/win.h"		/* do_enter_ca_mode() */
-#include "../src/mcconfig/mcconfig.h"
-#include "../src/search/search.h"
+#include "../lib/tty/tty.h"		/* LINES, tty_touch_screen() */
+#include "../lib/tty/key.h"		/* ALT() macro */
+#include "../lib/tty/win.h"		/* do_enter_ca_mode() */
+#include "../lib/mcconfig/mcconfig.h"
+#include "../lib/search/search.h"
 #include "../src/viewer/mcviewer.h"
-#include "../src/filehighlight/fhl.h"	/* MC_FHL_INI_FILE */
-#include "../vfs/vfs.h"
+#include "../lib/filehighlight/fhl.h"	/* MC_FHL_INI_FILE */
+#include "../lib/vfs/mc-vfs/vfs.h"
 
 #include "cmd.h"		/* Our definitions */
 #include "fileopctx.h"

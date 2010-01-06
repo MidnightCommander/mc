@@ -78,9 +78,9 @@
 
 #include "global.h"
 
-#include "../src/tty/key.h"		/* tty_get_event */
-#include "../src/search/search.h"
-#include "../vfs/vfs.h"
+#include "../lib/tty/key.h"		/* tty_get_event */
+#include "../lib/search/search.h"
+#include "../lib/vfs/mc-vfs/vfs/vfs.h"
 
 #include "setup.h"		/* verbose */
 #include "dialog.h"		/* do_refresh() */

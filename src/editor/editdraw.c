@@ -45,9 +45,9 @@
 
 #define MAX_LINE_LEN 1024
 
-#include "../src/tty/tty.h"		/* tty_printf() */
-#include "../src/skin/skin.h"
-#include "../src/tty/key.h"		/* is_idle() */
+#include "../lib/tty/tty.h"		/* tty_printf() */
+#include "../lib/skin/skin.h"
+#include "../lib/tty/key.h"		/* is_idle() */
 
 #include "../src/widget.h"		/* buttonbar_redraw() */
 #include "../src/charsets.h"

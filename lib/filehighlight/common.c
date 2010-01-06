@@ -29,7 +29,7 @@
 
 
 #include "../src/global.h"
-#include "../src/filehighlight/fhl.h"
+#include "../lib/filehighlight/fhl.h"
 #include "internal.h"
 
 /*** global variables ****************************************************************************/

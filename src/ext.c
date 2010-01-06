@@ -33,7 +33,7 @@
 #include <unistd.h>
 
 #include "global.h"
-#include "../src/tty/tty.h"
+#include "../lib/tty/tty.h"
 #include "user.h"
 #include "main.h"
 #include "wtools.h"
@@ -42,7 +42,7 @@
 #include "history.h"
 #include "cons.saver.h"
 #include "layout.h"
-#include "../src/search/search.h"
+#include "../lib/search/search.h"
 #include "../src/viewer/mcviewer.h"
 
 #include "../../lib/vfs/mc-vfs/vfs.h"

@@ -42,14 +42,14 @@
 
 #include "global.h"
 
-#include "../src/tty/tty.h"		/* COLS */
-#include "../src/skin/skin.h"
-#include "../src/tty/key.h"		/* KEY_M_CTRL */
+#include "../lib/tty/tty.h"		/* COLS */
+#include "../lib/skin/skin.h"
+#include "../lib/tty/key.h"		/* KEY_M_CTRL */
 
 #include "dialog.h"
 #include "widget.h"
 #include "setup.h"		/* For profile_bname */
-#include "../src/mcconfig/mcconfig.h"	/* Load/save directories hotlist */
+#include "../lib/mcconfig/mcconfig.h"	/* Load/save directories hotlist */
 #include "wtools.h"		/* QuickDialog */
 #include "panel.h"		/* current_panel */
 #include "main.h"		/* update_panels() */

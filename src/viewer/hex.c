@@ -41,8 +41,8 @@
 #include <fcntl.h>
 
 #include "../src/global.h"
-#include "../src/tty/tty.h"
-#include "../src/skin/skin.h"
+#include "../lib/tty/tty.h"
+#include "../lib/skin/skin.h"
 #include "../src/main.h"
 #include "../src/wtools.h"
 #include "../src/charsets.h"

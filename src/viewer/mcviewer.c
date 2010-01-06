@@ -40,7 +40,7 @@
 #include <fcntl.h>
 
 #include "../src/global.h"
-#include "../src/tty/tty.h"
+#include "../lib/tty/tty.h"
 #include "../src/strutil.h"
 #include "../src/main.h"
 #include "../src/charsets.h"
