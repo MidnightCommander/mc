@@ -58,7 +58,7 @@
 
 #include "../src/global.h"
 #include "../src/wtools.h"
-#include "../../vfs/vfs.h"
+#include "../../lib/vfs/mc-vfs/vfs.h"
 
 #include "internal.h"
 

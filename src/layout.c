@@ -73,7 +73,7 @@
 #include "../src/viewer/mcviewer.h"     /* The view widget */
 
 #include "setup.h"		/* For save_setup() */
-#include "../vfs/vfs.h"		/* For vfs_translate_url() */
+#include "../../lib/vfs/mc-vfs/vfs.h"		/* For vfs_translate_url() */
 
 /* Controls the display of the rotating dash on the verbose mode */
 int nice_rotating_dash = 1;

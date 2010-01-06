@@ -39,7 +39,7 @@
 #include "wtools.h"
 #include "panel.h"		/* update_panels() */
 #include "execute.h"
-#include "../vfs/vfs.h"
+#include "../../lib/vfs/mc-vfs/vfs.h"
 
 
 static void

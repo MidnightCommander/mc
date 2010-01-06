@@ -62,7 +62,7 @@
 #include "editlock.h"
 #include "edit-widget.h"
 
-#include "../vfs/vfs.h"
+#include "../../lib/vfs/mc-vfs/vfs.h"
 
 int option_word_wrap_line_length = 72;
 int option_typewriter_wrap = 0;

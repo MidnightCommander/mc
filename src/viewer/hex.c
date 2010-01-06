@@ -47,7 +47,7 @@
 #include "../src/wtools.h"
 #include "../src/charsets.h"
 
-#include "../../vfs/vfs.h"
+#include "../../lib/vfs/mc-vfs/vfs.h"
 
 #include "internal.h"
 

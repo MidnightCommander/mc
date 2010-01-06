@@ -80,8 +80,8 @@
 #include "file.h"
 #include "filegui.h"
 #include "tree.h"
-#include "../vfs/vfs-impl.h"
-#include "../vfs/vfs.h"
+#include "../../lib/vfs/mc-vfs/vfs-impl.h"
+#include "../../lib/vfs/mc-vfs/vfs.h"
 
 /* }}} */
 

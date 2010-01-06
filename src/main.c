@@ -79,7 +79,7 @@
 #include "fileloc.h"		/* MC_USERCONF_DIR */
 #include "user.h"		/* user_file_menu_cmd() */
 
-#include "../vfs/vfs.h"		/* vfs_translate_url() */
+#include "../../lib/vfs/mc-vfs/vfs.h"		/* vfs_translate_url() */
 
 #include "chmod.h"
 #include "chown.h"

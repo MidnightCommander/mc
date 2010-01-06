@@ -34,7 +34,7 @@
 
 #include "global.h"		/* home_dir */
 #include "../src/tty/tty.h"
-#include "../vfs/vfs.h"
+#include "../../lib/vfs/mc-vfs/vfs.h"
 #include "widget.h"		/* WInput */
 #include "command.h"
 #include "wtools.h"		/* message () */

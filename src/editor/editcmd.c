@@ -65,7 +65,7 @@
 #include "../src/strutil.h"	/* utf string functions */
 #include "../src/cmddef.h"
 
-#include "../vfs/vfs.h"
+#include "../../lib/vfs/mc-vfs/vfs.h"
 
 #include "../src/editor/edit-impl.h"
 #include "../src/editor/edit.h"
