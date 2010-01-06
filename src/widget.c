@@ -1702,18 +1702,20 @@ assign_text (WInput *in, const char *text)
 static void
 hist_prev (WInput *in)
 {
+    GList *prev;
+
     if (!in->history)
 	return;
 
-    if (in->need_push) {
+    if (in->need_push)
 	push_history (in, in->buffer);
-	in->history = g_list_previous (in->history);
-    } else if (in->history->prev)
-	in->history = g_list_previous (in->history);
-    else
-	return;
-    assign_text (in, (char *) in->history->data);
-    in->need_push = 0;
+
+    prev = g_list_previous (in->history);
+    if (prev != NULL) {
+	in->history = prev;
+	assign_text (in, (char *) prev->data);
+	in->need_push = 0;
+    }
 }
 
 static void
