@@ -40,7 +40,7 @@
 #include "../src/search/search.h"
 #include "../src/mcconfig/mcconfig.h"
 
-#include "../vfs/vfs.h"
+#include "../../lib/vfs/mc-vfs/vfs.h"
 
 #include "setup.h"		/* verbose */
 #include "strutil.h"

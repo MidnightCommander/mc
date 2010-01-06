@@ -62,7 +62,7 @@
 #include "charsets.h"		/* get_codepage_id () */
 #include "cmddef.h"		/* CK_ cmd name const */
 #include "keybind.h"		/* global_keymap_t */
-#include "../vfs/vfs.h"
+#include "../../lib/vfs/mc-vfs/vfs.h"
 
 #define ELEMENTS(arr) ( sizeof(arr) / sizeof((arr)[0]) )
 

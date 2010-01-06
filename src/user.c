@@ -42,7 +42,7 @@
 #include "strutil.h"
 #include "../src/search/search.h"
 
-#include "../vfs/vfs.h"
+#include "../../lib/vfs/mc-vfs/vfs.h"
 
 #include "../src/editor/edit.h"		/* WEdit, BLOCK_FILE */
 
