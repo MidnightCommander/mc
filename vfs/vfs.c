@@ -801,12 +801,12 @@ mc_readdir (DIR *dirp)
          * d_name in it. Moreover, linux's glibc-2.9 allocates dirents _less_,
          * than 'sizeof (struct dirent)' making full bitwise (sizeof dirent) copy
          * heap corrupter. So, allocate longliving dirent with at least
-         * (NAME_MAX + 1) for d_name in it.
+         * (MAXNAMLEN + 1) for d_name in it.
          * Strictly saying resulting dirent is unusable as we don't adjust internal
          * structures, holding dirent size. But we don't use it in libc infrastructure.
          * TODO: to make simpler homemade dirent-alike structure.
          */
-        mc_readdir_result = (struct dirent *) g_malloc (sizeof(struct dirent) + NAME_MAX + 1);
+        mc_readdir_result = (struct dirent *) g_malloc (sizeof(struct dirent) + MAXNAMLEN + 1);
     }
 
     if (!dirp) {
@@ -827,7 +827,7 @@ mc_readdir (DIR *dirp)
         state = str_vfs_convert_from (dirinfo->converter,
                                           entry->d_name, vfs_str_buffer);
         mc_readdir_result->d_ino = entry->d_ino;
-        g_strlcpy (mc_readdir_result->d_name, vfs_str_buffer->str, NAME_MAX + 1);
+        g_strlcpy (mc_readdir_result->d_name, vfs_str_buffer->str, MAXNAMLEN + 1);
     }
     if (entry == NULL) errno = vfs->readdir ? ferrno (vfs) : E_NOTSUPP;
     return (entry != NULL) ? mc_readdir_result : NULL;
