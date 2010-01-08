@@ -2147,13 +2147,25 @@ listbox_select_first (WListbox *l)
 }
 
 void
+listbox_set_list (WListbox *l, GList *list)
+{
+    listbox_remove_list (l);
+
+    if (l != NULL) {
+	l->list = list;
+	l->top = l->pos = 0;
+	l->count = g_list_length (list);
+    }
+}
+
+void
 listbox_remove_list (WListbox *l)
 {
     if ((l != NULL) && (l->count != 0)) {
 	g_list_foreach (l->list, (GFunc) listbox_entry_free, NULL);
 	g_list_free (l->list);
 	l->list = NULL;
-	l->pos = l->top = 0;
+	l->count = l->pos = l->top = 0;
     }
 }
 
