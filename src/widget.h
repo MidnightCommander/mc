@@ -95,7 +95,7 @@ GList *history_get (const char *input_name);
 void history_put (const char *input_name, GList *h);
 /* for repositioning of history dialog we should pass widget to this
  * function, as position of history dialog depends on widget's position */
-char *show_hist (GList *history, Widget *widget);
+char *show_hist (GList **history, Widget *widget);
 
 typedef struct {
     Widget widget;
