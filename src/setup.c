@@ -30,19 +30,19 @@
 
 #include "global.h"
 
-#include "../lib/tty/tty.h"
-#include "../lib/tty/key.h"
-#include "../lib/tty/mouse.h"		/* To make view.h happy */
-#include "../../lib/vfs/mc-vfs/vfs.h"
+#include "lib/tty/tty.h"
+#include "lib/tty/key.h"
+#include "lib/tty/mouse.h"		/* To make view.h happy */
+#include "lib/vfs/mc-vfs/vfs.h"
 
 #include "args.h"
 #include "dir.h"
 #include "panel.h"
 #include "main.h"
 #include "tree.h"		/* xtree_mode */
-#include "../lib/mcconfig/mcconfig.h"
+#include "lib/mcconfig/mcconfig.h"
 #include "setup.h"
-#include "../src/viewer/mcviewer.h" /* For the externs */
+#include "src/viewer/mcviewer.h" /* For the externs */
 #include "hotlist.h"		/* load/save/done hotlist */
 #include "panelize.h"		/* load/save/done panelize */
 #include "layout.h"
@@ -54,7 +54,7 @@
 #include "wtools.h"
 
 #ifdef ENABLE_VFS
-#include "../vfs/gc.h"
+#include "lib/vfs/mc-vfs/gc.h"
 #endif
 
 #ifdef HAVE_CHARSET
@@ -62,15 +62,15 @@
 #endif
 
 #ifdef USE_NETCODE
-#   include "../vfs/ftpfs.h"
-#   include "../vfs/fish.h"
+#   include "lib/vfs/mc-vfs/ftpfs.h"
+#   include "lib/vfs/mc-vfs/fish.h"
 #endif
 
 #ifdef USE_INTERNAL_EDIT
-#   include "../src/editor/edit.h"
+#   include "src/editor/edit.h"
 #endif
 
-#include "../src/strutil.h"	/* str_isutf8 () */
+#include "src/strutil.h"	/* str_isutf8 () */
 
 
 extern char *find_ignore_dirs;

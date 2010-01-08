@@ -37,9 +37,9 @@
 #include "global.h"
 
 #include "cmddef.h"		/* CK_ cmd name const */
-#include "../lib/tty/win.h"
-#include "../lib/tty/key.h"		/* KEY_M_ */
-#include "../lib/tty/tty.h"		/* keys */
+#include "lib/tty/win.h"
+#include "lib/tty/key.h"		/* KEY_M_ */
+#include "lib/tty/tty.h"		/* keys */
 #include "wtools.h"
 #include "strutil.h"
 

@@ -40,11 +40,11 @@
 #include <sys/mknod.h>
 #endif
 
-#include "../src/global.h"
+#include "src/global.h"
 
-#include "../src/wtools.h"	/* message() */
-#include "../src/main.h"	/* print_vfs_message */
-#include "../vfs/vfs.h"
+#include "src/wtools.h"	/* message() */
+#include "src/main.h"	/* print_vfs_message */
+#include "vfs.h"
 
 #include "utilvfs.h"
 #include "gc.h"		/* vfs_rmstamp */

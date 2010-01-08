@@ -110,10 +110,10 @@
  * a native printf(3) capable of all POSIX features.
  */
 #undef ENABLE_NLS
-#include "../src/global.h"
+#include "src/global.h"
 
-#include "../src/wtools.h"	/* message() */
-#include "../src/main.h"	/* print_vfs_message */
+#include "src/wtools.h"	/* message() */
+#include "src/main.h"	/* print_vfs_message */
 #include "utilvfs.h"
 #include "vfs.h"
 #include "mcfs.h"

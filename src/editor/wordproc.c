@@ -37,11 +37,11 @@
 
 #include <stdlib.h>
 
-#include "../src/global.h"
+#include "src/global.h"
 
 #include "edit-impl.h"
 #include "edit-widget.h"
-#include "../src/main.h"	/* option_tab_spacing */
+#include "src/main.h"	/* option_tab_spacing */
 
 #define tab_width option_tab_spacing
 

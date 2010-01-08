@@ -31,10 +31,10 @@
 
 #include "global.h"
 
-#include "../lib/tty/tty.h"
-#include "../lib/skin/skin.h"
-#include "../lib/tty/mouse.h"
-#include "../lib/tty/key.h"
+#include "lib/tty/tty.h"
+#include "lib/skin/skin.h"
+#include "lib/tty/mouse.h"
+#include "lib/tty/key.h"
 
 #include "help.h"	/* interactive_display() */
 #include "dialog.h"

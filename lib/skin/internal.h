@@ -1,7 +1,7 @@
 #ifndef MC__SKIN_INTERNAL_H
 #define MC__SKIN_INTERNAL_H
 
-#include "../../src/global.h"
+#include "src/global.h"
 
 #include "skin.h"
 

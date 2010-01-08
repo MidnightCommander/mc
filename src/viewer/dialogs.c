@@ -40,12 +40,14 @@
 #include <stdlib.h>
 #include <sys/types.h>
 
-#include "../src/search/search.h"
+#include "src/global.h"
 
-#include "../src/global.h"
-#include "../src/wtools.h"
-#include "../src/history.h"
-#include "../src/charsets.h"
+#include "lib/search/search.h"
+
+#include "src/wtools.h"
+#include "src/history.h"
+#include "src/charsets.h"
+#include "src/strutil.h"
 
 #include "internal.h"
 

@@ -29,8 +29,8 @@
 #include <string.h>
 
 
-#include "../src/global.h"
-#include "../src/util.h"
+#include "src/global.h"
+#include "src/util.h"
 #include "../lib/skin/skin.h"
 #include "../lib/filehighlight/fhl.h"
 #include "internal.h"

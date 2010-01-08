@@ -31,9 +31,9 @@
 #include <unistd.h>
 #include <string.h>
 
-#include "../src/global.h"
-#include "../vfs/utilvfs.h"
-#include "../vfs/netutil.h"
+#include "src/global.h"
+#include "utilvfs.h"
+#include "netutil.h"
 
 int got_sigpipe;
 

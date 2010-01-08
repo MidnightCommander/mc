@@ -3,7 +3,7 @@
 
 #include <config.h>
 
-#include "../src/global.h"      /* <glib.h> */
+#include "src/global.h"      /* <glib.h> */
 
 #include <sys/types.h>
 

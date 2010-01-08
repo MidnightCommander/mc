@@ -26,10 +26,10 @@
 #include <errno.h> /* extern int errno */
 
 
-#include "global.h"
+#include "src/global.h"
 
 #include "../../lib/vfs/mc-vfs/vfs.h"      /* mc_stat */
-#include "../../src/util.h"
+#include "src/util.h"
 
 #include "mcconfig.h"
 

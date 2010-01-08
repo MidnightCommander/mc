@@ -38,14 +38,15 @@
 
 #include <config.h>
 
-#include "../lib/tty/tty.h"
+#include "lib/tty/tty.h"
 
-#include "../lib/skin/skin.h"
+#include "lib/skin/skin.h"
 
-#include "../src/global.h"
-#include "../src/main.h"
-#include "../src/charsets.h"
-#include "../src/util.h"	/* is_printable() */
+#include "src/global.h"
+#include "src/main.h"
+#include "src/charsets.h"
+#include "src/util.h"	/* is_printable() */
+#include "mcviewer.h"		/* mcview_show_eof */
 
 #include "internal.h"
 

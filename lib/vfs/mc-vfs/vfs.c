@@ -50,11 +50,11 @@
 #include <unistd.h>
 #include <dirent.h>
 
-#include "../src/global.h"
+#include "src/global.h"
 
-#include "../src/wtools.h"	/* message() */
-#include "../src/main.h"	/* print_vfs_message */
-#include "../src/strutil.h"
+#include "src/wtools.h"	/* message() */
+#include "src/main.h"	/* print_vfs_message */
+#include "src/strutil.h"
 
 #include "utilvfs.h"
 #include "gc.h"

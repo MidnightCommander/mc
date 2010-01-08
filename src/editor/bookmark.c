@@ -39,7 +39,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include "../src/global.h"
+#include "src/global.h"
 
 #include "edit-impl.h"
 #include "edit-widget.h"

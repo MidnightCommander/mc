@@ -39,7 +39,7 @@ typedef int dummy;              /* C99 forbids empty compilation unit */
 #  include <gmodule.h>
 #endif
 
-#include "../../src/global.h"
+#include "src/global.h"
 #include "x11conn.h"
 
 /*** file scope type declarations **************************************/

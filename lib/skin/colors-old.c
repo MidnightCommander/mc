@@ -30,8 +30,8 @@
 #include <sys/types.h>          /* size_t */
 #include "../tty/color.h"
 
-#include "../src/global.h"
-#include "../src/setup.h"
+#include "src/global.h"
+#include "src/setup.h"
 #include "skin.h"
 #include "internal.h"
 

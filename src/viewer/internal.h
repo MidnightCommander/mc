@@ -6,13 +6,13 @@
 #include <stdio.h>
 #include <sys/types.h>
 
-#include "../src/global.h"
+#include "src/global.h"
 
-#include "../lib/search/search.h"
+#include "lib/search/search.h"
 
-#include "../src/dialog.h"
-#include "../src/widget.h"
-#include "../src/keybind.h"		/* global_keymap_t */
+#include "src/dialog.h"
+#include "src/widget.h"
+#include "src/keybind.h"		/* global_keymap_t */
 
 /*** typedefs(not structures) and defined constants ********************/
 

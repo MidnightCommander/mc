@@ -28,8 +28,8 @@
 #include <config.h>
 #include <stdlib.h>
 
-#include "../src/global.h"
-#include "../src/args.h"
+#include "src/global.h"
+#include "src/args.h"
 #include "../tty/tty.h"
 #include "skin.h"
 #include "internal.h"

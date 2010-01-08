@@ -1,7 +1,7 @@
 #ifndef MC__SKIN_H
 #define MC__SKIN_H
 
-#include "../../src/global.h"
+#include "src/global.h"
 
 #include "../../lib/mcconfig/mcconfig.h"
 

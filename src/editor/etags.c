@@ -38,9 +38,9 @@
 #include <string.h>
 #include <ctype.h>
 
-#include "../src/global.h"
-#include "../src/util.h"	/* canonicalize_pathname() */
-#include "../src/editor/etags.h"
+#include "src/global.h"
+#include "src/util.h"	/* canonicalize_pathname() */
+#include "src/editor/etags.h"
 
 /*** file scope functions **********************************************/
 

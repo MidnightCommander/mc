@@ -28,7 +28,7 @@
 #include <config.h>
 
 
-#include "../src/global.h"
+#include "src/global.h"
 #include "../lib/filehighlight/fhl.h"
 #include "internal.h"
 

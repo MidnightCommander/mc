@@ -76,21 +76,23 @@ distclean-local:
 	else :; fi
 
 if ENABLE_VFS
-noinst_LIBRARIES = libvfs-mc.a
+noinst_LTLIBRARIES = libvfs-mc.la
 else
-noinst_LIBRARIES =
+noinst_LTLIBRARIES =
 endif
 
 if ENABLE_VFS_NET
-libvfs_mc_a_SOURCES = $(NETFILES) $(NONETFILES)
+libvfs_mc_la_SOURCES = $(NETFILES) $(NONETFILES)
 else
-libvfs_mc_a_SOURCES = $(NONETFILES)
+libvfs_mc_la_SOURCES = $(NONETFILES)
 endif
 
+if ENABLE_VFS
 if ENABLE_MCSERVER
 sbin_PROGRAMS = mcserv
-mcserv_SOURCES = mcserv.c mcfsutil.c
-mcserv_LDADD = $(MCSERVLIBS) $(GLIB_LIBS)
+mcserv_SOURCES = mcserv.c
+mcserv_LDADD = $(MCSERVLIBS) $(GLIB_LIBS) libvfs-mc.la
+endif
 endif
 
 

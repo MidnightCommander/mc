@@ -29,11 +29,11 @@
 #include <errno.h>
 #include <fcntl.h>
 
-#include "../src/global.h"
-#include "../src/wtools.h"	/* message() */
-#include "../src/main.h"	/* print_vfs_message */
-#include "../src/unixcompat.h"
-#include "../vfs/vfs.h"
+#include "src/global.h"
+#include "src/wtools.h"	/* message() */
+#include "src/main.h"	/* print_vfs_message */
+#include "src/unixcompat.h"
+#include "vfs.h"
 
 #include "utilvfs.h"
 #include "vfs-impl.h"

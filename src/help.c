@@ -53,10 +53,10 @@
 
 #include "global.h"
 
-#include "../lib/tty/tty.h"
-#include "../lib/skin/skin.h"
-#include "../lib/tty/mouse.h"
-#include "../lib/tty/key.h"
+#include "lib/tty/tty.h"
+#include "lib/skin/skin.h"
+#include "lib/tty/mouse.h"
+#include "lib/tty/key.h"
 
 #include "dialog.h"		/* For Dlg_head */
 #include "widget.h"		/* For Widget */

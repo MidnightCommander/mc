@@ -51,8 +51,10 @@
 
 #include <config.h>
 
-#include "../src/global.h"
-#include "../lib/tty/tty.h"
+#include <string.h>		/* for g_memmove() */
+
+#include "src/global.h"
+#include "lib/tty/tty.h"
 #include "internal.h"
 
 #define VIEW_COORD_CACHE_GRANUL	1024

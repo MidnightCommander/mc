@@ -28,10 +28,10 @@
 
 #include "global.h"
 
-#include "../lib/tty/tty.h"
-#include "../lib/skin/skin.h"
-#include "../lib/tty/mouse.h"
-#include "../lib/tty/key.h"	/* key macros */
+#include "lib/tty/tty.h"
+#include "lib/skin/skin.h"
+#include "lib/tty/mouse.h"
+#include "lib/tty/key.h"	/* key macros */
 
 #include "cmddef.h"		/* CK_Ignore_Key */
 #include "help.h"

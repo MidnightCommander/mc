@@ -26,7 +26,7 @@
  */
 
 #include <config.h>
-#include "../src/strescape.h"
+#include "src/strescape.h"
 
 
 /*** global variables ****************************************************************************/

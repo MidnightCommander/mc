@@ -41,15 +41,15 @@
 
 #include "global.h"
 
-#include "../lib/tty/tty.h"
-#include "../lib/skin/skin.h"
-#include "../lib/tty/mouse.h"
-#include "../lib/tty/key.h"		/* For init_key() */
-#include "../lib/tty/win.h"		/* xterm_flag */
+#include "lib/tty/tty.h"
+#include "lib/skin/skin.h"
+#include "lib/tty/mouse.h"
+#include "lib/tty/key.h"		/* For init_key() */
+#include "lib/tty/win.h"		/* xterm_flag */
 
-#include "../lib/mcconfig/mcconfig.h"
-#include "../src/args.h"
-#include "../lib/filehighlight/fhl.h"
+#include "lib/mcconfig/mcconfig.h"
+#include "src/args.h"
+#include "lib/filehighlight/fhl.h"
 
 #include "dir.h"
 #include "dialog.h"
@@ -78,7 +78,7 @@
 #include "fileloc.h"		/* MC_USERCONF_DIR */
 #include "user.h"		/* user_file_menu_cmd() */
 
-#include "../../lib/vfs/mc-vfs/vfs.h"		/* vfs_translate_url() */
+#include "lib/vfs/mc-vfs/vfs.h"		/* vfs_translate_url() */
 
 #include "chmod.h"
 #include "chown.h"
@@ -87,11 +87,11 @@
 #include "main.h"
 
 #ifdef ENABLE_VFS_SMB
-#include "../vfs/smbfs.h"	/* smbfs_set_debug() */
+#include "lib/vfs/mc-vfs/smbfs.h"	/* smbfs_set_debug() */
 #endif /* ENABLE_VFS_SMB */
 
 #ifdef USE_INTERNAL_EDIT
-#   include "../src/editor/edit.h"
+#   include "src/editor/edit.h"
 #endif
 
 #ifdef	HAVE_CHARSET
@@ -99,7 +99,7 @@
 #endif				/* HAVE_CHARSET */
 
 #ifdef ENABLE_VFS
-#include "../vfs/gc.h"
+#include "lib/vfs/mc-vfs/gc.h"
 #endif
 
 #include "keybind.h"		/* type global_keymap_t */

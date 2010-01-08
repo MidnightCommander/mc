@@ -35,15 +35,15 @@
 
 #include "global.h"
 
-#include "../lib/skin/skin.h"
+#include "lib/skin/skin.h"
 
-#include "../../lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/mc-vfs/vfs.h"
 
 #include "dialog.h"
 #include "widget.h"
 #include "wtools.h"		/* For common_dialog_repaint() */
 #include "setup.h"		/* For profile_bname */
-#include "../lib/mcconfig/mcconfig.h"	/* Load/save directories panelize */
+#include "lib/mcconfig/mcconfig.h"	/* Load/save directories panelize */
 #include "dir.h"
 #include "panel.h"		/* current_panel */
 #include "layout.h"		/* repaint_screen() */

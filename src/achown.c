@@ -35,10 +35,10 @@
 
 #include "global.h"
 
-#include "../lib/tty/tty.h"
-#include "../lib/tty/key.h"		/* XCTRL and ALT macros */
-#include "../lib/skin/skin.h"
-#include "../lib/vfs/mc-vfs/vfs/vfs.h"
+#include "lib/tty/tty.h"
+#include "lib/tty/key.h"		/* XCTRL and ALT macros */
+#include "lib/skin/skin.h"
+#include "lib/vfs/mc-vfs/vfs.h"
 
 #include "dialog.h"
 #include "widget.h"

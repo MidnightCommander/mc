@@ -46,15 +46,15 @@
 #include <sys/stat.h>
 #include <stdlib.h>
 
-#include "../src/global.h"
+#include "src/global.h"
 
-#include "../lib/search/search.h"	/* search engine */
+#include "lib/search/search.h"	/* search engine */
 
-#include "../lib/skin/skin.h"
+#include "lib/skin/skin.h"
 
-#include "../src/main.h"		/* mc_home */
-#include "../src/wtools.h"		/* message() */
-#include "../src/strutil.h"		/* utf string functions */
+#include "src/main.h"		/* mc_home */
+#include "src/wtools.h"		/* message() */
+#include "src/strutil.h"		/* utf string functions */
 
 #include "edit-impl.h"
 #include "edit-widget.h"
