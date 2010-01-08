@@ -567,7 +567,7 @@ directory_history_list (WPanel *panel)
     if (panel->dir_history == NULL)
 	return;
 
-    s = show_hist (panel->dir_history, &panel->widget);
+    s = show_hist (&panel->dir_history, &panel->widget);
 
     if (s == NULL)
 	return;

@@ -1156,26 +1156,31 @@ dlg_hist_callback (Dlg_head *h, Widget *sender,
 }
 
 char *
-show_hist (GList *history, Widget *widget)
+show_hist (GList **history, Widget *widget)
 {
-    GList *hi, *z;
+    GList *z, *hlist = NULL, *hi;
     size_t maxlen, i, count = 0;
-    char *q, *r = NULL;
+    char *r = NULL;
     Dlg_head *query_dlg;
     WListbox *query_list;
     dlg_hist_data hist_data;
 
-    if (history == NULL)
+    if (*history == NULL)
 	return NULL;
 
     maxlen = str_term_width1 (i18n_htitle ()) + 2;
 
-    z = g_list_first (history);
+    for (z = *history; z != NULL; z = g_list_previous (z)) {
+	WLEntry *entry;
 
-    for (hi = z; hi != NULL; hi = g_list_next (hi)) {
-	i = str_term_width1 ((char *) hi->data);
+	i = str_term_width1 ((char *) z->data);
 	maxlen = max (maxlen, i);
 	count++;
+
+	entry = g_new0 (WLEntry, 1);
+	/* history is being reverted here */
+	entry->text = g_strdup ((char *) z->data);
+	hlist = g_list_prepend (hlist, entry);
     }
 
     hist_data.widget = widget;
@@ -1202,24 +1207,45 @@ show_hist (GList *history, Widget *widget)
     dlg_hist_callback (query_dlg, NULL, DLG_RESIZE, 0, NULL);
 
     if (query_dlg->y < widget->y) {
-	/* traverse */
-	for (hi = z; hi != NULL; hi = g_list_next (hi))
-	    listbox_add_item (query_list, LISTBOX_APPEND_AT_END,
-				0, (char *) hi->data, NULL);
+	/* draw list entries from bottom upto top */
+	listbox_set_list (query_list, hlist);
 	listbox_select_last (query_list);
     } else {
-	/* traverse backwards */
-	for (hi = g_list_last (history); hi != NULL; hi = g_list_previous (hi))
-	    listbox_add_item (query_list, LISTBOX_APPEND_AT_END,
-				0, (char *) hi->data, NULL);
+	/* draw list entries from top downto bottom */
+	/* revert history direction */
+	hlist = g_list_reverse (hlist);
+	listbox_set_list (query_list, hlist);
     }
 
     if (run_dlg (query_dlg) != B_CANCEL) {
+	char *q;
+
 	listbox_get_current (query_list, &q, NULL);
 	if (q != NULL)
 	    r = g_strdup (q);
     }
+
+    /* get modified history from dialog */
+    z = NULL;
+    for (hi = query_list->list; hi != NULL; hi = g_list_next (hi)) {
+	WLEntry *entry;
+
+	entry = (WLEntry *) hi->data;
+	/* history is being reverted here again */
+	z = g_list_prepend (z, entry->text);
+	entry->text = NULL;
+    }
+
     destroy_dlg (query_dlg);
+
+    /* restore history direction */
+    if (query_dlg->y < widget->y)
+	z = g_list_reverse (z);
+
+    g_list_foreach (*history, (GFunc) g_free, NULL);
+    g_list_free (*history);
+    *history = g_list_last (z);
+
     return r;
 }
 
@@ -1228,7 +1254,7 @@ do_show_hist (WInput *in)
 {
     char *r;
 
-    r = show_hist (in->history, &in->widget);
+    r = show_hist (&in->history, &in->widget);
     if (r != NULL) {
 	assign_text (in, r);
 	g_free (r);
@@ -2317,7 +2343,9 @@ listbox_key (WListbox *l, int key)
 static inline void
 listbox_destroy (WListbox *l)
 {
-    listbox_remove_list (l);
+    /* don't delete list in modifable listbox */
+    if (!l->deletable)
+	listbox_remove_list (l);
 }
 
 static cb_ret_t
