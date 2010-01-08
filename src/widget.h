@@ -152,6 +152,7 @@ struct WListbox {
     int count;			/* Number of items in the listbox */
     gboolean allow_duplicates;	/* Do we allow duplicates on the list? */
     gboolean scrollbar;		/* Draw a scrollbar? */
+    gboolean deletable;		/* Can list entries be deleted? */
     lcback cback;		/* The callback function */
     int cursor_x, cursor_y;	/* Cache the values */
 };
@@ -187,7 +188,7 @@ WCheck  *check_new    (int y, int x, int state,  const char *text);
 WInput  *input_new    (int y, int x, int color, int len, const char *text, const char *histname, INPUT_COMPLETE_FLAGS completion_flags);
 WLabel  *label_new    (int y, int x, const char *text);
 WGauge  *gauge_new    (int y, int x, int shown, int max, int current);
-WListbox *listbox_new (int y, int x, int height, int width, lcback callback);
+WListbox *listbox_new (int y, int x, int height, int width, gboolean deletable, lcback callback);
 WButtonBar *buttonbar_new (gboolean visible);
 WGroupbox *groupbox_new (int y, int x, int height, int width, const char *title);
 
