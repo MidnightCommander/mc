@@ -564,12 +564,12 @@ directory_history_list (WPanel *panel)
 {
     char *s;
 
-    if (!panel->dir_history)
+    if (panel->dir_history == NULL)
 	return;
 
     s = show_hist (panel->dir_history, &panel->widget);
 
-    if (!s)
+    if (s == NULL)
 	return;
 
     if (_do_panel_cd (panel, s, cd_exact))

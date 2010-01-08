@@ -1004,9 +1004,9 @@ history_get (const char *input_name)
     size_t keys_num = 0;
     char *this_entry;
 
-    if (!num_history_items_recorded)	/* this is how to disable */
+    if (num_history_items_recorded == 0)	/* this is how to disable */
 	return NULL;
-    if (!input_name || !*input_name)
+    if ((input_name == NULL) || (*input_name == '\0'))
 	return NULL;
 
     profile = g_build_filename (home_dir, MC_USERCONF_DIR, MC_HISTORY_FILE, NULL);
@@ -1039,21 +1039,17 @@ history_put (const char *input_name, GList *h)
     char *profile;
     mc_config_t *cfg;
 
-    if (!input_name)
+    if (num_history_items_recorded == 0)	/* this is how to disable */
 	return;
-
-    if (!*input_name)
+    if ((input_name == NULL) || (*input_name == '\0'))
 	return;
-
-    if (!h)
-	return;
-
-    if (!num_history_items_recorded)	/* this is how to disable */
+    if (h == NULL)
 	return;
 
     profile = g_build_filename (home_dir, MC_USERCONF_DIR, MC_HISTORY_FILE, NULL);
 
-    if ((i = open (profile, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR)) != -1)
+    i = open (profile, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR);
+    if (i != -1)
 	close (i);
 
     /* Make sure the history is only readable by the user */
@@ -1066,16 +1062,16 @@ history_put (const char *input_name, GList *h)
     h = g_list_last (h);
 
     /* go back 60 places */
-    for (i = 0; i < num_history_items_recorded - 1 && h->prev; i++)
+    for (i = 0; (i < num_history_items_recorded - 1) && (h->prev != NULL); i++)
 	h = g_list_previous (h);
 
-    cfg = mc_config_init(profile);
+    cfg = mc_config_init (profile);
 
-    if (input_name)
-	mc_config_del_group(cfg,input_name);
+    if (input_name != NULL)
+	mc_config_del_group (cfg, input_name);
 
-    /* dump histories into profile */
-    for (i = 0; h; h = g_list_next (h)) {
+    /* dump history into profile */
+    for (i = 0; h != NULL; h = g_list_next (h)) {
 	char *text = (char *) h->data;
 
 	/* We shouldn't have null entries, but let's be sure */
@@ -1104,7 +1100,7 @@ i18n_htitle (void)
 
 typedef struct {
     Widget *widget;
-    int count;
+    size_t count;
     size_t maxlen;
 } dlg_hist_data;
 
@@ -1115,8 +1111,7 @@ dlg_hist_reposition (Dlg_head *dlg_head)
     int x = 0, y, he, wi;
 
     /* guard checks */
-    if ((dlg_head == NULL)
-	|| (dlg_head->data == NULL))
+    if ((dlg_head == NULL) || (dlg_head->data == NULL))
 	return MSG_NOT_HANDLED;
 
     data = (dlg_hist_data *) dlg_head->data;
@@ -1173,20 +1168,19 @@ show_hist (GList *history, Widget *widget)
     if (history == NULL)
 	return NULL;
 
-    maxlen = str_term_width1 (i18n_htitle ());
+    maxlen = str_term_width1 (i18n_htitle ()) + 2;
 
     z = g_list_first (history);
-    hi = z;
-    while (hi) {
+
+    for (hi = z; hi != NULL; hi = g_list_next (hi)) {
 	i = str_term_width1 ((char *) hi->data);
 	maxlen = max (maxlen, i);
 	count++;
-	hi = g_list_next (hi);
     }
 
-    hist_data.maxlen = maxlen;
     hist_data.widget = widget;
     hist_data.count = count;
+    hist_data.maxlen = maxlen;
 
     query_dlg =
 	create_dlg (0, 0, 4, 4, dialog_colors, dlg_hist_callback,
@@ -1209,21 +1203,15 @@ show_hist (GList *history, Widget *widget)
 
     if (query_dlg->y < widget->y) {
 	/* traverse */
-	hi = z;
-	while (hi) {
+	for (hi = z; hi != NULL; hi = g_list_next (hi))
 	    listbox_add_item (query_list, LISTBOX_APPEND_AT_END,
 				0, (char *) hi->data, NULL);
-	    hi = g_list_next (hi);
-	}
 	listbox_select_last (query_list);
     } else {
 	/* traverse backwards */
-	hi = g_list_last (history);
-	while (hi) {
+	for (hi = g_list_last (history); hi != NULL; hi = g_list_previous (hi))
 	    listbox_add_item (query_list, LISTBOX_APPEND_AT_END,
 				0, (char *) hi->data, NULL);
-	    hi = g_list_previous (hi);
-	}
     }
 
     if (run_dlg (query_dlg) != B_CANCEL) {
@@ -1239,8 +1227,9 @@ static void
 do_show_hist (WInput *in)
 {
     char *r;
+
     r = show_hist (in->history, &in->widget);
-    if (r) {
+    if (r != NULL) {
 	assign_text (in, r);
 	g_free (r);
     }
@@ -1972,12 +1961,9 @@ input_event (Gpm_Event * event, void *data)
 	    do_show_hist (in);
 	} else {
             in->point = str_length (in->buffer);
-            if (event->x + in->term_first_shown - 1 <
-                str_term_width1 (in->buffer))
-
+            if (event->x + in->term_first_shown - 1 < str_term_width1 (in->buffer))
                 in->point = str_column_to_pos (in->buffer, event->x
                            + in->term_first_shown - 1);
-
 	}
 	update_input (in, 1);
     }
@@ -1989,29 +1975,27 @@ input_new (int y, int x, int color, int width, const char *def_text,
 	   const char *histname, INPUT_COMPLETE_FLAGS completion_flags)
 {
     WInput *in = g_new (WInput, 1);
-    int initial_buffer_len;
+    size_t initial_buffer_len;
 
     init_widget (&in->widget, y, x, 1, width, input_callback, input_event);
 
     /* history setup */
+    in->history_name = NULL;
     in->history = NULL;
-    in->history_name = 0;
-    if (histname) {
-	if (*histname) {
-	    in->history_name = g_strdup (histname);
-	    in->history = history_get (histname);
-	}
+    if ((histname != NULL) && (*histname != '\0')) {
+	in->history_name = g_strdup (histname);
+	in->history = history_get (histname);
     }
 
     if (def_text == NULL)
 	def_text = "";
-
-    if (def_text == INPUT_LAST_TEXT) {
-	def_text = "";
-	if (in->history)
-	    if (in->history->data)
-		def_text = (char *) in->history->data;
+    else if (def_text == INPUT_LAST_TEXT) {
+	if ((in->history != NULL) && (in->history->data != NULL))
+	    def_text = (char *) in->history->data;
+	else
+	    def_text = "";
     }
+
     initial_buffer_len = 1 + max ((size_t) width, strlen (def_text));
     in->widget.options |= W_IS_INPUT;
     in->completions = NULL;
@@ -2030,6 +2014,7 @@ input_new (int y, int x, int color, int width, const char *def_text,
     strcpy (in->buffer, def_text);
     in->point = str_length (in->buffer);
     in->charpoint = 0;
+
     return in;
 }
 
