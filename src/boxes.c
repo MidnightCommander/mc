@@ -952,7 +952,7 @@ jobs_cmd (void)
 			   "[Background jobs]", _("Background Jobs"),
 			   DLG_CENTER | DLG_REVERSE);
 
-    bg_list = listbox_new (2, 3, JOBS_Y - 9, JOBS_X - 7, NULL);
+    bg_list = listbox_new (2, 3, JOBS_Y - 9, JOBS_X - 7, FALSE, NULL);
     add_widget (jobs_dlg, bg_list);
 
 	i = n_buttons;

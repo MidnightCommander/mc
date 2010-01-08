@@ -1187,7 +1187,7 @@ show_hist (GList *history, Widget *widget)
 			"[History-query]", i18n_htitle (), DLG_COMPACT);
     query_dlg->data = &hist_data;
 
-    query_list = listbox_new (1, 1, 2, 2, NULL);
+    query_list = listbox_new (1, 1, 2, 2, TRUE, NULL);
 
     /* this call makes list stick to all sides of dialog, effectively make
        it be resized with dialog */
@@ -2454,7 +2454,7 @@ listbox_event (Gpm_Event *event, void *data)
 }
 
 WListbox *
-listbox_new (int y, int x, int height, int width, lcback callback)
+listbox_new (int y, int x, int height, int width, gboolean deletable, lcback callback)
 {
     WListbox *l = g_new (WListbox, 1);
 
@@ -2467,6 +2467,7 @@ listbox_new (int y, int x, int height, int width, lcback callback)
     l->list = NULL;
     l->top = l->pos = 0;
     l->count = 0;
+    l->deletable = deletable;
     l->cback = callback;
     l->allow_duplicates = TRUE;
     l->scrollbar = !tty_is_slow ();

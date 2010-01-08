@@ -1192,7 +1192,7 @@ setup_gui (void)
     add_widget (find_dlg, found_num_label);
 
     find_list =
-	listbox_new (2, 2, FIND2_Y - 10, FIND2_X - 4, NULL);
+	listbox_new (2, 2, FIND2_Y - 10, FIND2_X - 4, FALSE, NULL);
     add_widget (find_dlg, find_list);
 }
 

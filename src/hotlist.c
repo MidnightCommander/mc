@@ -701,7 +701,7 @@ init_hotlist (int list_type)
     /* get new listbox */
     l_hotlist =
 	listbox_new (UY + 1, UX + 1, LINES - 14, COLS - 2 * UX - 8,
-		     l_call);
+			FALSE, l_call);
 
     /* Fill the hotlist with the active VFS or the hotlist */
 #ifdef ENABLE_VFS
@@ -749,7 +749,7 @@ init_movelist (int list_type, struct hotlist *item)
     /* get new listbox */
     l_movelist =
 	listbox_new (UY + 1, UX + 1, movelist_dlg->lines - 8,
-			movelist_dlg->cols - 2 * UX - 2, l_call);
+			movelist_dlg->cols - 2 * UX - 2, FALSE, l_call);
 
     fill_listbox ();
 
