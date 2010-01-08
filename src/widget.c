@@ -2323,7 +2323,7 @@ listbox_key (WListbox *l, int key)
 
     case KEY_NPAGE:
     case XCTRL('v'):
-	for (i = 0; ((i < l->widget.lines - 1) && (l->pos < l->count - 1)); i++) {
+	for (i = 0; (i < l->widget.lines - 1) && (l->pos < l->count - 1); i++) {
 	    listbox_fwd (l);
 	    j = MSG_HANDLED;
 	}
@@ -2331,12 +2331,21 @@ listbox_key (WListbox *l, int key)
 
     case KEY_PPAGE:
     case ALT('v'):
-	for (i = 0; ((i < l->widget.lines - 1) && (l->pos > 0)); i++) {
+	for (i = 0; (i < l->widget.lines - 1) && (l->pos > 0); i++) {
 	    listbox_back (l);
 	    j = MSG_HANDLED;
 	}
 	return j;
+
+    case KEY_DC:
+	if (l->deletable)
+	    listbox_remove_current (l);
+	return MSG_HANDLED;
+
+    default:
+	break;
     }
+
     return MSG_NOT_HANDLED;
 }
 
