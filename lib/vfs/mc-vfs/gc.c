@@ -42,12 +42,12 @@
 #include <ctype.h>		/* is_digit() */
 #include <sys/time.h>		/* gettimeofday() */
 
-#include "../src/global.h"
+#include "src/global.h"
 
-#include "../src/wtools.h"	/* message() */
-#include "../src/main.h"	/* print_vfs_message */
-#include "../src/panel.h"	/* get_current_panel() */
-#include "../src/layout.h"	/* get_current_type() */
+#include "src/wtools.h"	/* message() */
+#include "src/main.h"	/* print_vfs_message */
+#include "src/panel.h"	/* get_current_panel() */
+#include "src/layout.h"	/* get_current_type() */
 
 #include "utilvfs.h"
 #include "vfs-impl.h"

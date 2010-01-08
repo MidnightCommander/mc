@@ -52,16 +52,16 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../src/global.h"
+#include "src/global.h"
 
-#include "../tty/tty.h"	/* enable/disable interrupt key */
+#include "lib/tty/tty.h"	/* enable/disable interrupt key */
 
-#include "../src/wtools.h"	/* message() */
-#include "../src/main.h"	/* print_vfs_message */
-#include "../src/util.h"
-#include "../src/strescape.h"
-#include "../src/unixcompat.h"
-#include "../src/fs.h"
+#include "src/wtools.h"	/* message() */
+#include "src/main.h"	/* print_vfs_message */
+#include "src/util.h"
+#include "src/strescape.h"
+#include "src/unixcompat.h"
+#include "src/fs.h"
 #include "utilvfs.h"
 #include "xdirentry.h"
 #include "vfs.h"

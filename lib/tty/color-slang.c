@@ -30,13 +30,13 @@
 #include <string.h>
 #include <sys/types.h>          /* size_t */
 
-#include "../../src/global.h"
+#include "src/global.h"
 
 #include "tty-slang.h"
 #include "color.h"        /* variables */
 #include "color-internal.h"
 
-#include "../../src/setup.h"    /* color_terminal_string */
+#include "src/setup.h"    /* color_terminal_string */
 
 static int
 has_colors (gboolean disable, gboolean force)

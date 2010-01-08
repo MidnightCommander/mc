@@ -42,22 +42,22 @@
 
 #include "global.h"
 
-#include "../lib/tty/win.h"		/* xterm_flag */
+#include "lib/tty/win.h"		/* xterm_flag */
 
-#include "../lib/search/search.h"
+#include "lib/search/search.h"
 
 #include "main.h"		/* mc_home */
 #include "cmd.h"		/* guess_message_value */
 #include "mountlist.h"
 #include "timefmt.h"
 #include "strutil.h"
-#include "./lib/mcconfig/mcconfig.h"
+#include "lib/mcconfig/mcconfig.h"
 #include "fileopctx.h"
 #include "file.h"		/* copy_file_file() */
 #include "dir.h"
 #include "fileloc.h"
 
-#include "../../lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/mc-vfs/vfs.h"
 
 #ifdef HAVE_CHARSET
 #include "charsets.h"

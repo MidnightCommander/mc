@@ -41,11 +41,11 @@
 #include <string.h>
 #include <fcntl.h>
 
-#include "../src/global.h"
+#include "src/global.h"
 
-#include "../src/wtools.h"	/* message() */
-#include "../src/main.h"	/* print_vfs_message */
-#include "../src/execute.h"	/* EXECUTE_AS_SHELL */
+#include "src/wtools.h"	/* message() */
+#include "src/main.h"	/* print_vfs_message */
+#include "src/execute.h"	/* EXECUTE_AS_SHELL */
 
 #include "utilvfs.h"
 #include "vfs.h"

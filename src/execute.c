@@ -27,9 +27,9 @@
 
 #include "global.h"
 
-#include "../lib/tty/tty.h"
-#include "../lib/tty/key.h"
-#include "../lib/tty/win.h"
+#include "lib/tty/tty.h"
+#include "lib/tty/key.h"
+#include "lib/tty/win.h"
 
 #include "main.h"
 #include "cons.saver.h"
@@ -39,7 +39,7 @@
 #include "wtools.h"
 #include "panel.h"		/* update_panels() */
 #include "execute.h"
-#include "../../lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/mc-vfs/vfs.h"
 
 
 static void

@@ -33,9 +33,9 @@
 
 #include "global.h"
 
-#include "../lib/tty/tty.h"
-#include "../lib/skin/skin.h"
-#include "../lib/vfs/mc-vfs/vfs/vfs.h"
+#include "lib/tty/tty.h"
+#include "lib/skin/skin.h"
+#include "lib/vfs/mc-vfs/vfs.h"
 
 #include "dialog.h"	/* add_widget() */
 #include "widget.h"	/* NORMAL_BUTTON */

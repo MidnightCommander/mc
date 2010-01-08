@@ -36,7 +36,7 @@
 #include <stdarg.h>
 #include <signal.h>
 
-#include "../../src/global.h"
+#include "src/global.h"
 
 #ifndef WANT_TERM_H
 #   define WANT_TERM_H
@@ -46,9 +46,9 @@
 #include "tty.h"
 #include "color-internal.h"
 #include "win.h"
-#include "../../src/main.h"
+#include "src/main.h"
 
-#include "../../src/strutil.h"  /* str_term_form */
+#include "src/strutil.h"  /* str_term_form */
 
 /* include at last !!! */
 #ifdef WANT_TERM_H

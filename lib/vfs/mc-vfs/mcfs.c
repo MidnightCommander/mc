@@ -57,9 +57,9 @@
 #endif
 #endif
 
-#include "../src/global.h"
-#include "../src/wtools.h"	/* message() */
-#include "../src/main.h"	/* print_vfs_message */
+#include "src/global.h"
+#include "src/wtools.h"	/* message() */
+#include "src/main.h"	/* print_vfs_message */
 #include "utilvfs.h"
 #include "vfs.h"
 #include "vfs-impl.h"

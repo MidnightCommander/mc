@@ -33,8 +33,8 @@
 #include <string.h>
 
 #include "global.h"		/* home_dir */
-#include "../lib/tty/tty.h"
-#include "../../lib/vfs/mc-vfs/vfs.h"
+#include "lib/tty/tty.h"
+#include "lib/vfs/mc-vfs/vfs.h"
 #include "widget.h"		/* WInput */
 #include "command.h"
 #include "wtools.h"		/* message () */
@@ -44,9 +44,9 @@
 #include "user.h"		/* expand_format */
 #include "subshell.h"		/* SUBSHELL_EXIT */
 #include "tree.h"		/* for tree_chdir */
-#include "../lib/skin/skin.h"		/* DEFAULT_COLOR */
+#include "lib/skin/skin.h"		/* DEFAULT_COLOR */
 #include "execute.h"		/* shell_execute */
-#include "../src/strescape.h"
+#include "src/strescape.h"
 
 /* This holds the command line */
 WInput *cmdline;

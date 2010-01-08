@@ -53,6 +53,12 @@ mc_LDADD = \
 	viewer/libmcviewer.la \
 	$(INTLLIBS) $(MCLIBS) $(SLANGLIB) $(LIBICONV) $(GLIB_LIBS)
 
+if USE_SAMBA_FS
+# this is a hack for linking with own samba library in simple way
+mc_LDADD += ../lib/vfs/mc-vfs/samba/libsamba.a
+endif
+
+
 SRC_mc_widgets = \
 	dialog.c dialog.h \
 	menu.c menu.h \

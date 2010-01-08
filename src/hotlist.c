@@ -42,14 +42,14 @@
 
 #include "global.h"
 
-#include "../lib/tty/tty.h"		/* COLS */
-#include "../lib/skin/skin.h"
-#include "../lib/tty/key.h"		/* KEY_M_CTRL */
+#include "lib/tty/tty.h"		/* COLS */
+#include "lib/skin/skin.h"
+#include "lib/tty/key.h"		/* KEY_M_CTRL */
 
 #include "dialog.h"
 #include "widget.h"
 #include "setup.h"		/* For profile_bname */
-#include "../lib/mcconfig/mcconfig.h"	/* Load/save directories hotlist */
+#include "lib/mcconfig/mcconfig.h"	/* Load/save directories hotlist */
 #include "wtools.h"		/* QuickDialog */
 #include "panel.h"		/* current_panel */
 #include "main.h"		/* update_panels() */
@@ -79,7 +79,7 @@
 #define B_MOVE		(B_USER + 7)
 
 #ifdef ENABLE_VFS
-#include "../vfs/gc.h"
+#include "lib/vfs/mc-vfs/gc.h"
 #define B_FREE_ALL_VFS	(B_USER + 8)
 #define B_REFRESH_VFS	(B_USER + 9)
 #endif

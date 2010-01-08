@@ -35,7 +35,7 @@
 #include "global.h"
 #include "logging.h"
 #include "setup.h"
-#include "../lib/mcconfig/mcconfig.h"
+#include "lib/mcconfig/mcconfig.h"
 #include "fileloc.h"
 
 /*** file scope functions **********************************************/

@@ -34,13 +34,13 @@
 
 #include "global.h"
 
-#include "../lib/tty/tty.h"
-#include "../lib/tty/key.h"
-#include "../lib/skin/skin.h"
-#include "../lib/search/search.h"
-#include "../lib/mcconfig/mcconfig.h"
+#include "lib/tty/tty.h"
+#include "lib/tty/key.h"
+#include "lib/skin/skin.h"
+#include "lib/search/search.h"
+#include "lib/mcconfig/mcconfig.h"
 
-#include "../../lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/mc-vfs/vfs.h"
 
 #include "setup.h"		/* verbose */
 #include "strutil.h"

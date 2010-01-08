@@ -14,7 +14,7 @@
 #include <stddef.h>
 #include <utime.h>
 
-#include "../src/fs.h"		/* MC_MAXPATHLEN */
+#include "src/fs.h"		/* MC_MAXPATHLEN */
 
 typedef void *vfsid;
 struct vfs_stamping;

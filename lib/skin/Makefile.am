@@ -10,7 +10,7 @@ libmcskin_la_SOURCES = \
 	skin.h \
 	internal.h
 
-libmcskin_la_CFLAGS=-I../ -I$(top_srcdir)/src \
+libmcskin_la_CFLAGS = -I$(top_srcdir) \
 	$(GLIB_CFLAGS) $(PCRE_CFLAGS) \
 	-DDATADIR=\""$(pkgdatadir)/"\" -DLOCALEDIR=\""$(localedir)"\"
 

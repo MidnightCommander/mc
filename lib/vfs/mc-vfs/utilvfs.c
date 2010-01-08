@@ -33,12 +33,12 @@
 #include <grp.h>
 #include <stdlib.h>
 
-#include "../src/global.h"
+#include "src/global.h"
 
-#include "../src/wtools.h"	/* message() */
-#include "../src/main.h"	/* print_vfs_message */
-#include "../src/unixcompat.h"
-#include "../src/history.h"
+#include "src/wtools.h"	/* message() */
+#include "src/main.h"	/* print_vfs_message */
+#include "src/unixcompat.h"
+#include "src/history.h"
 
 #include "vfs.h"
 #include "utilvfs.h"

@@ -58,10 +58,10 @@
 
 #include "global.h"
 
-#include "../lib/tty/tty.h"
-#include "../lib/tty/key.h"
+#include "lib/tty/tty.h"
+#include "lib/tty/key.h"
 
-#include "../lib/search/search.h"
+#include "lib/search/search.h"
 
 #include "setup.h"
 #include "dialog.h"
@@ -71,7 +71,7 @@
 #include "widget.h"
 #include "wtools.h"
 #include "background.h"		/* we_are_background */
-#include "../src/strescape.h"
+#include "src/strescape.h"
 #include "strutil.h"
 
 /* Needed for current_panel, other_panel and WTree */
@@ -80,8 +80,8 @@
 #include "file.h"
 #include "filegui.h"
 #include "tree.h"
-#include "../../lib/vfs/mc-vfs/vfs-impl.h"
-#include "../../lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/mc-vfs/vfs-impl.h"
+#include "lib/vfs/mc-vfs/vfs.h"
 
 /* }}} */
 

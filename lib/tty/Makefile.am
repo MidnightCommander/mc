@@ -22,6 +22,6 @@ TTY_SRC = \
 
 libmctty_la_SOURCES = $(TTY_SRC) $(TTY_SCREEN_SRC)
 
-libmctty_la_CFLAGS = -I../ -I$(top_srcdir)/src \
+libmctty_la_CFLAGS = -I$(top_srcdir) \
 	$(GLIB_CFLAGS) \
 	-DDATADIR=\""$(pkgdatadir)/"\" -DLOCALEDIR=\""$(localedir)"\"

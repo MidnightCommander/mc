@@ -12,10 +12,10 @@
 #include <string.h>
 #include <fcntl.h>
 
-#include "../src/global.h"
+#include "src/global.h"
 
-#include "../src/wtools.h"	/* message() */
-#include "../src/main.h"	/* print_vfs_message */
+#include "src/wtools.h"	/* message() */
+#include "src/main.h"	/* print_vfs_message */
 
 #include "utilvfs.h"
 #include "vfs.h"

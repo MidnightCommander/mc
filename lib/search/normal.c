@@ -28,11 +28,11 @@
 #include <config.h>
 
 
-#include "../src/global.h"
+#include "src/global.h"
 #include "search.h"
 #include "internal.h"
-#include "../src/strutil.h"
-#include "../src/charsets.h"
+#include "src/strutil.h"
+#include "src/charsets.h"
 
 /*** global variables ****************************************************************************/
 

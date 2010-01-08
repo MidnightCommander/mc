@@ -27,9 +27,9 @@
 #include <string.h>
 #include <sys/stat.h>
 
-#include "../lib/tty/tty.h"
-#include "../lib/search/search.h"
-#include "../lib/vfs/mc-vfs/vfs/vfs.h"
+#include "lib/tty/tty.h"
+#include "lib/search/search.h"
+#include "lib/vfs/mc-vfs/vfs.h"
 
 #include "global.h"
 #include "wtools.h"

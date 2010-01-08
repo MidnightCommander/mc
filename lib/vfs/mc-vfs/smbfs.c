@@ -38,10 +38,10 @@
 #undef USE_NCURSES	/* Don't include *curses.h */
 #undef  USE_NCURSESW
 
-#include "../src/global.h"
+#include "src/global.h"
 
-#include "../src/wtools.h"	/* message() */
-#include "../src/main.h"	/* print_vfs_message */
+#include "src/wtools.h"	/* message() */
+#include "src/main.h"	/* print_vfs_message */
 
 #include "utilvfs.h"
 
@@ -65,7 +65,7 @@
 #include "vfs.h"
 #include "vfs-impl.h"
 #include "smbfs.h"
-#include "vfs/netutil.h"
+#include "netutil.h"
 
 #define SMBFS_MAX_CONNECTIONS 16
 static const char * const IPC = "IPC$";

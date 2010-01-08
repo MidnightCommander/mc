@@ -45,11 +45,11 @@
 #include <errno.h>
 #include <sys/wait.h>
 
-#include "../src/global.h"
+#include "src/global.h"
 
-#include "../src/wtools.h"	/* message() */
-#include "../src/main.h"	/* print_vfs_message */
-#include "../src/execute.h"	/* For shell_execute */
+#include "src/wtools.h"	/* message() */
+#include "src/main.h"	/* print_vfs_message */
+#include "src/execute.h"	/* For shell_execute */
 
 #include "utilvfs.h"
 #include "vfs.h"

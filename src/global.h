@@ -87,7 +87,7 @@
 #include "util.h"
 
 #ifdef USE_MAINTAINER_MODE
-#include "../src/logging.h"
+#include "src/logging.h"
 #endif
 
 #include "textconf.h"

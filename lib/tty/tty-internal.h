@@ -6,7 +6,7 @@
 #ifndef MC_TTY_INTERNAL_H
 #define MC_TTY_INTERNAL_H
 
-#include "../../src/global.h"   /* include <glib.h> */
+#include "src/global.h"   /* include <glib.h> */
 
 /* If true lines are shown by spaces */
 extern gboolean slow_tty;

@@ -26,25 +26,25 @@
 
 #include <config.h>
 
-#include "../src/global.h"
+#include "src/global.h"
 
-#include "../lib/tty/tty.h"
-#include "../lib/skin/skin.h"		/* INPUT_COLOR */
-#include "../lib/tty/key.h"
+#include "lib/tty/tty.h"
+#include "lib/skin/skin.h"		/* INPUT_COLOR */
+#include "lib/tty/key.h"
 
-#include "../lib/search/search.h"
+#include "lib/search/search.h"
 
-#include "../src/dialog.h"
-#include "../src/widget.h"
-#include "../src/wtools.h"
-#include "../src/strutil.h"
-#include "../src/main.h"
-#include "../src/history.h"
-#include "../src/charsets.h"
+#include "src/dialog.h"
+#include "src/widget.h"
+#include "src/wtools.h"
+#include "src/strutil.h"
+#include "src/main.h"
+#include "src/history.h"
+#include "src/charsets.h"
 
-#include "../src/editor/edit-widget.h"
-#include "../src/editor/etags.h"
-#include "../src/editor/editcmd_dialogs.h"
+#include "src/editor/edit-widget.h"
+#include "src/editor/etags.h"
+#include "src/editor/editcmd_dialogs.h"
 
 
 /*** global variables **************************************************/

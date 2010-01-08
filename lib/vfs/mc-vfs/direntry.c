@@ -35,13 +35,13 @@
 #include <time.h>
 #include <sys/time.h>		/* gettimeofday() */
 
-#include "../src/global.h"
+#include "src/global.h"
 
-#include "../tty/tty.h"	/* enable/disable interrupt key */
+#include "lib/tty/tty.h"	/* enable/disable interrupt key */
 
-#include "../src/wtools.h"	/* message() */
-#include "../src/main.h"	/* print_vfs_message */
-#include "../vfs/vfs.h"
+#include "src/wtools.h"	/* message() */
+#include "src/main.h"	/* print_vfs_message */
+#include "vfs.h"
 
 #include "utilvfs.h"
 #include "vfs-impl.h"

@@ -49,22 +49,22 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#include "../src/global.h"
+#include "src/global.h"
 
-#include "../lib/tty/tty.h"
-#include "../lib/tty/key.h"
+#include "lib/tty/tty.h"
+#include "lib/tty/key.h"
 
-#include "../src/dialog.h"	/* cb_ret_t */
-#include "../src/panel.h"
-#include "../src/layout.h"
-#include "../src/wtools.h"
-#include "../src/history.h"
-#include "../src/charsets.h"
-#include "../src/cmd.h"
-#include "../src/execute.h"
-#include "../src/help.h"
-#include "../src/keybind.h"
-#include "../src/cmddef.h"	/* CK_ cmd name const */
+#include "src/dialog.h"	/* cb_ret_t */
+#include "src/panel.h"
+#include "src/layout.h"
+#include "src/wtools.h"
+#include "src/history.h"
+#include "src/charsets.h"
+#include "src/cmd.h"
+#include "src/execute.h"
+#include "src/help.h"
+#include "src/keybind.h"
+#include "src/cmddef.h"	/* CK_ cmd name const */
 
 #include "internal.h"
 #include "mcviewer.h"

@@ -39,30 +39,30 @@
 #include <stdlib.h>
 #include <fcntl.h>
 
-#include "../src/global.h"
+#include "src/global.h"
 
-#include "../lib/tty/color.h"	
-#include "../lib/tty/tty.h"	/* attrset() */
-#include "../lib/tty/key.h"	/* is_idle() */
+#include "lib/tty/color.h"	
+#include "lib/tty/tty.h"	/* attrset() */
+#include "lib/tty/key.h"	/* is_idle() */
 
-#include "../lib/skin/skin.h"	/* EDITOR_NORMAL_COLOR */
+#include "lib/skin/skin.h"	/* EDITOR_NORMAL_COLOR */
 
-#include "../src/widget.h"
-#include "../src/cmd.h"		/* view_other_cmd() */
-#include "../src/user.h"	/* user_menu_cmd() */
-#include "../src/wtools.h"	/* query_dialog() */
-#include "../src/timefmt.h"	/* time formatting */
-#include "../src/strutil.h"	/* utf string functions */
-#include "../src/charsets.h"	/* get_codepage_id */
-#include "../src/main.h"	/* source_codepage */
-#include "../src/learn.h"	/* learn_keys */
-#include "../src/cmddef.h"
+#include "src/widget.h"
+#include "src/cmd.h"		/* view_other_cmd() */
+#include "src/user.h"	/* user_menu_cmd() */
+#include "src/wtools.h"	/* query_dialog() */
+#include "src/timefmt.h"	/* time formatting */
+#include "src/strutil.h"	/* utf string functions */
+#include "src/charsets.h"	/* get_codepage_id */
+#include "src/main.h"	/* source_codepage */
+#include "src/learn.h"	/* learn_keys */
+#include "src/cmddef.h"
 
 #include "edit-impl.h"
 #include "editlock.h"
 #include "edit-widget.h"
 
-#include "../../lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/mc-vfs/vfs.h"
 
 int option_word_wrap_line_length = 72;
 int option_typewriter_wrap = 0;

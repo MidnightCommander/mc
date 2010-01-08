@@ -26,10 +26,10 @@
 
 #include "global.h"
 
-#include "../lib/tty/tty.h"
-#include "../lib/tty/key.h"		/* is_idle() */
-#include "../lib/tty/mouse.h"		/* Gpm_Event */
-#include "../lib/skin/skin.h"
+#include "lib/tty/tty.h"
+#include "lib/tty/key.h"		/* is_idle() */
+#include "lib/tty/mouse.h"		/* Gpm_Event */
+#include "lib/skin/skin.h"
 
 #include "dialog.h"
 #include "widget.h"		/* default_proc*/

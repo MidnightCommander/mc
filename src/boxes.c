@@ -36,11 +36,11 @@
 
 #include "global.h"
 
-#include "../lib/tty/tty.h"
-#include "../lib/skin/skin.h"		/* INPUT_COLOR */
-#include "../lib/tty/key.h"		/* XCTRL and ALT macros  */
+#include "lib/tty/tty.h"
+#include "lib/skin/skin.h"		/* INPUT_COLOR */
+#include "lib/tty/key.h"		/* XCTRL and ALT macros  */
 
-#include "../lib/mcconfig/mcconfig.h"	/* Load/save user formats */
+#include "lib/mcconfig/mcconfig.h"	/* Load/save user formats */
 
 #include "dialog.h"		/* The nice dialog manager */
 #include "widget.h"		/* The widgets for the nice dialog manager */
@@ -62,11 +62,11 @@
 #endif
 
 #ifdef USE_NETCODE
-#   include "../vfs/ftpfs.h"
+#   include "lib/vfs/mc-vfs/ftpfs.h"
 #endif
 
 #ifdef ENABLE_VFS
-#include "../vfs/gc.h"
+#include "lib/vfs/mc-vfs/gc.h"
 #endif
 
 

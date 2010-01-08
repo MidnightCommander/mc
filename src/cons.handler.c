@@ -36,9 +36,9 @@
 
 #include "global.h"
 
-#include "../lib/tty/tty.h"
-#include "../lib/skin/skin.h"		/* tty_set_normal_attrs */
-#include "../lib/tty/win.h"
+#include "lib/tty/tty.h"
+#include "lib/skin/skin.h"		/* tty_set_normal_attrs */
+#include "lib/tty/win.h"
 
 #include "cons.saver.h"
 

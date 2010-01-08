@@ -545,7 +545,7 @@ dnl Libraries used only when building the mc binary
 AC_SUBST(MCLIBS)
 
 if test -n "$use_smbfs"; then
-  AC_CONFIG_SUBDIRS([src/vfs/mc-vfs/samba])
+  AC_CONFIG_SUBDIRS([lib/vfs/mc-vfs/samba])
 fi
 
 AM_CONDITIONAL(USE_MAINTAINER_MODE, [test x"$USE_MAINTAINER_MODE" = xyes])

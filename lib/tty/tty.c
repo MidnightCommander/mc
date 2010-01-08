@@ -34,12 +34,12 @@
 #include <signal.h>
 #include <stdarg.h>
 
-#include "../../src/global.h"
+#include "src/global.h"
 
 #include "tty.h"
 #include "tty-internal.h"
 
-#include "../../src/strutil.h"
+#include "src/strutil.h"
 
 /*** global variables **************************************************/
 

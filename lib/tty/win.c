@@ -34,8 +34,8 @@
 
 #include "tty.h"  /* tty_gotoyx, tty_print_char */
 #include "win.h"
-#include "../../src/util.h"
-#include "../../src/cons.saver.h"       /* console_flag */
+#include "src/util.h"
+#include "src/cons.saver.h"       /* console_flag */
 
 /*** global variables **************************************************/
 

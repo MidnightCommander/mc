@@ -19,10 +19,10 @@
 
 #include <config.h>
 
-#include "global.h"
+#include "src/global.h"
 
 #include "mcconfig.h"
-#include "../src/strutil.h"
+#include "src/strutil.h"
 
 /*** global variables **************************************************/
 

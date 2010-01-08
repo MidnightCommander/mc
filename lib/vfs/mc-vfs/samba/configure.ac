@@ -2,7 +2,7 @@ dnl Process this file with autoconf to produce a configure script.
 AC_INIT(include/includes.h)
 AC_PREREQ(2.52)
 AC_CONFIG_HEADER(include/config.h)
-AC_CONFIG_AUX_DIR(../../config)
+AC_CONFIG_AUX_DIR(../../../../config)
 # we want to be compatibe with older versions of Samba
 AC_PREFIX_DEFAULT(/usr/local/samba)
 AC_SYS_LARGEFILE

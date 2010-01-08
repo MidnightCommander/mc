@@ -62,7 +62,7 @@
 
 #define LINUX_CONS_SAVER_C
 #include "cons.saver.h"
-#include "../lib/tty/win.h"
+#include "lib/tty/win.h"
 
 static void
 send_contents (char *buffer, unsigned int columns, unsigned int rows)

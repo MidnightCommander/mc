@@ -7,7 +7,7 @@ libmcfilehighlight_la_SOURCES = \
 	ini-file-read.c \
 	internal.h
 
-libmcfilehighlight_la_CFLAGS=-I../ -I$(top_srcdir)/src \
+libmcfilehighlight_la_CFLAGS = -I$(top_srcdir) \
 	$(GLIB_CFLAGS) $(PCRE_CFLAGS) \
 	-DDATADIR=\""$(pkgdatadir)/"\" -DLOCALEDIR=\""$(localedir)"\" 
 

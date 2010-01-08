@@ -39,20 +39,20 @@
 
 #include <stdlib.h>
 
-#include "../src/global.h"
+#include "src/global.h"
 
 #include "edit-impl.h"
 #include "edit-widget.h"	/* edit->macro_i */
 #include "editcmd_dialogs.h"
 
-#include "../lib/tty/tty.h"	/* keys */
-#include "../lib/tty/key.h"	/* KEY_M_SHIFT */
+#include "lib/tty/tty.h"	/* keys */
+#include "lib/tty/key.h"	/* KEY_M_SHIFT */
 
-#include "../src/cmddef.h"	/* list of commands */
-#include "../src/keybind.h"	/* lookup_keymap_command() */
-#include "../src/charsets.h"	/* convert_from_input_c() */
-#include "../src/main.h"	/* display_codepage */
-#include "../src/strutil.h"	/* str_isutf8 () */
+#include "src/cmddef.h"	/* list of commands */
+#include "src/keybind.h"	/* lookup_keymap_command() */
+#include "src/charsets.h"	/* convert_from_input_c() */
+#include "src/main.h"	/* display_codepage */
+#include "src/strutil.h"	/* str_isutf8 () */
 
 /*
  * Translate the keycode into either 'command' or 'char_for_insertion'.

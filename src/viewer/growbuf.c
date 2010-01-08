@@ -38,10 +38,10 @@
 #include <config.h>
 #include <errno.h>
 
-#include "../src/global.h"
-#include "../src/wtools.h"
+#include "src/global.h"
+#include "src/wtools.h"
 
-#include "../../lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/mc-vfs/vfs.h"
 
 #include "internal.h"
 

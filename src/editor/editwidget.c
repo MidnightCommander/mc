@@ -39,18 +39,18 @@
 #include <sys/stat.h>
 #include <stdlib.h>
 
-#include "../src/global.h"
+#include "src/global.h"
 
-#include "../lib/tty/tty.h"		/* LINES, COLS */
-#include "../lib/tty/key.h"		/* is_idle() */
+#include "lib/tty/tty.h"		/* LINES, COLS */
+#include "lib/tty/key.h"		/* is_idle() */
 
 #include "edit-impl.h"
 #include "edit-widget.h"
 
-#include "../src/dialog.h"
-#include "../src/widget.h"		/* ButtonBar */
-#include "../src/menu.h"		/* menubar_new() */
-#include "../src/cmddef.h"
+#include "src/dialog.h"
+#include "src/widget.h"		/* ButtonBar */
+#include "src/menu.h"		/* menubar_new() */
+#include "src/cmddef.h"
 
 WEdit *wedit;
 struct WMenuBar *edit_menubar;

@@ -83,15 +83,15 @@ What to do with this?
 #include <fcntl.h>
 #include <sys/time.h>		/* gettimeofday() */
 
-#include "../src/global.h"
+#include "src/global.h"
 
-#include "../lib/tty/tty.h"	/* enable/disable interrupt key */
+#include "lib/tty/tty.h"	/* enable/disable interrupt key */
 
-#include "../src/wtools.h"	/* message() */
-#include "../src/main.h"	/* print_vfs_message */
-#include "../src/history.h"
-#include "../src/setup.h"	/* for load_anon_passwd */
-#include "../lib/mcconfig/mcconfig.h"
+#include "src/wtools.h"	/* message() */
+#include "src/main.h"	/* print_vfs_message */
+#include "src/history.h"
+#include "src/setup.h"	/* for load_anon_passwd */
+#include "lib/mcconfig/mcconfig.h"
 
 #include "utilvfs.h"
 #include "xdirentry.h"
