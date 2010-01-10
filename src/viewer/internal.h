@@ -275,6 +275,8 @@ void mcview_done (mcview_t *view);
 void mcview_select_encoding (mcview_t *view);
 void mcview_set_codeset (mcview_t *view);
 void mcview_show_error (mcview_t *view, const char *error);
+off_t mcview_bol (mcview_t *view, off_t current);
+off_t mcview_eol (mcview_t *view, off_t current);
 
 /* move.c */
 void mcview_move_up (mcview_t *, off_t);
