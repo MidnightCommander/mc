@@ -1413,7 +1413,7 @@ save_file_position (const char *filename, long line, long column)
 
     fn =  g_build_filename (home_dir, MC_USERCONF_DIR, MC_FILEPOS_FILE, NULL);
     if (fn == NULL)
-	return;
+        goto early_error;
 
     len = strlen (filename);
 
@@ -1421,30 +1421,18 @@ save_file_position (const char *filename, long line, long column)
 
     /* open file */
     f = fopen (fn, "w");
-    if (f == NULL) {
-	g_free (fn);
-	return;
-    }
+    if (f == NULL)
+        goto open_target_error;
 
     tmp_fn = g_strdup_printf("%s" TMP_SUFFIX ,fn);
     tmp_f = fopen (tmp_fn, "r");
-    if (tmp_f == NULL) {
-        g_free(tmp_fn);
-        mc_util_restore_from_backup_if_possible (fn, TMP_SUFFIX);
-        g_free (fn);
-        return;
-    }
+    if (tmp_f == NULL)
+        goto open_source_error;
 
     /* put the new record */
     if (line != 1 || column != 0) {
-	if (fprintf (f, "%s %ld;%ld\n", filename, line, column) < 0) {
-	    g_free(tmp_fn);
-	    fclose (tmp_f);
-	    fclose (f);
-	    mc_util_restore_from_backup_if_possible (fn, TMP_SUFFIX);
-	    g_free (fn);
-	    return;
-	}
+        if (fprintf (f, "%s %ld;%ld\n", filename, line, column) < 0)
+            goto write_position_error;
     }
 
     while (fgets (buf, sizeof (buf), tmp_f)) {
@@ -1464,6 +1452,18 @@ save_file_position (const char *filename, long line, long column)
     fclose (f);
     mc_util_unlink_backup_if_possible (fn, TMP_SUFFIX);
     g_free (fn);
+    return;
+
+  write_position_error:
+    fclose (tmp_f);
+  open_source_error:
+    g_free(tmp_fn);
+    fclose (f);
+    mc_util_restore_from_backup_if_possible (fn, TMP_SUFFIX);
+  open_target_error:
+    g_free (fn);
+  early_error:
+    return;
 }
 #undef TMP_SUFFIX
 extern const char *
