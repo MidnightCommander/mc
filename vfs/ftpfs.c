@@ -679,6 +679,7 @@ ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super)
     if (!host || !*host){
 	print_vfs_message (_("ftpfs: Invalid host name."));
         ftpfs_errno = EINVAL;
+        g_free (host);
 	return -1;
     }
 
