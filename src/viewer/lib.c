@@ -161,11 +161,8 @@ mcview_done (mcview_t * view)
     /* Save current file position */
     if (mcview_remember_file_position && view->filename != NULL) {
         char *canon_fname;
-        off_t line, col;
-
         canon_fname = vfs_canon (view->filename);
-        mcview_offset_to_coord (view, &line, &col, view->dpy_start);
-        save_file_position (canon_fname, line + 1, col);
+        save_file_position (canon_fname, -1, 0, view->dpy_start);
         g_free (canon_fname);
     }
 

@@ -379,11 +379,12 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
 
     if (mcview_remember_file_position && view->filename != NULL && start_line == 0) {
         long line, col;
-
+        off_t new_offset;
         canon_fname = vfs_canon (view->filename);
-        load_file_position (canon_fname, &line, &col);
+        load_file_position (canon_fname, &line, &col, &new_offset);
+        new_offset = min (new_offset, mcview_get_filesize (view));
+        view->dpy_start = mcview_bol (view, new_offset);
         g_free (canon_fname);
-        mcview_moveto (view, mcview_offset_doz (line, 1), col);
     } else if (start_line > 0) {
         mcview_moveto (view, start_line - 1, 0);
     }

@@ -1349,7 +1349,7 @@ mc_mkstemps (char **pname, const char *prefix, const char *suffix)
  * If there is no stored data, return line 1 and col 0.
  */
 void
-load_file_position (const char *filename, long *line, long *column)
+load_file_position (const char *filename, long *line, long *column, off_t *offset)
 {
     char *fn;
     FILE *f;
@@ -1359,6 +1359,7 @@ load_file_position (const char *filename, long *line, long *column)
     /* defaults */
     *line = 1;
     *column = 0;
+    *offset = 0;
 
     /* open file with positions */
     fn =  g_build_filename (home_dir, MC_USERCONF_DIR, MC_FILEPOS_FILE, NULL);
@@ -1371,6 +1372,7 @@ load_file_position (const char *filename, long *line, long *column)
 
     while (fgets (buf, sizeof (buf), f)) {
 	const char *p;
+	gchar **pos_tokens;
 
 	/* check if the filename matches the beginning of string */
 	if (strncmp (buf, filename, len) != 0)
@@ -1384,14 +1386,26 @@ load_file_position (const char *filename, long *line, long *column)
 	p = &buf[len + 1];
 	if (strchr (p, ' '))
 	    continue;
-
-	*line = strtol(p, const_cast(char **, &p), 10);
-	if (*p == ';') {
-	    *column = strtol(p+1, const_cast(char **, &p), 10);
-	    if (*p != '\n')
-	        *column = 0;
-	} else
+	
+	pos_tokens = g_strsplit_set (p, ";", 3);
+	if (pos_tokens[0] != NULL) {
+	    *line = strtol (pos_tokens[0], NULL, 10);
+	    if (pos_tokens[1] != NULL) {
+		*column = strtol (pos_tokens[1], NULL, 10);
+		if (pos_tokens[2] != NULL)
+		    *offset = strtoll (pos_tokens[2], NULL, 10);
+		else
+		    *offset = 0;
+	    } else {
+		*column = 0;
+		*offset = 0;
+	    }
+	} else {
 	    *line = 1;
+	    *column = 0;
+	    *offset = 0;
+	}
+	g_strfreev(pos_tokens);
     }
     fclose (f);
 }
@@ -1399,7 +1413,7 @@ load_file_position (const char *filename, long *line, long *column)
 /* Save position for the given file */
 #define TMP_SUFFIX ".tmp"
 void
-save_file_position (const char *filename, long line, long column)
+save_file_position (const char *filename, long line, long column, off_t offset)
 {
     static int filepos_max_saved_entries = 0;
     char *fn, *tmp_fn;
@@ -1431,7 +1445,7 @@ save_file_position (const char *filename, long line, long column)
 
     /* put the new record */
     if (line != 1 || column != 0) {
-        if (fprintf (f, "%s %ld;%ld\n", filename, line, column) < 0)
+        if (fprintf (f, "%s %ld;%ld;%lli\n", filename, line, column, offset) < 0)
             goto write_position_error;
     }
 
