@@ -56,6 +56,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
+#include <error.h>
 #include <errno.h>
 #include <signal.h>
 #ifdef HAVE_GETOPT_H
@@ -1015,8 +1016,14 @@ do_auth (const char *username, const char *password)
     if (getuid () != this->pw_uid)
 	return 0;
 
-    if (strcmp (username, "ftp") == 0)
-	chroot (this->pw_dir);
+    if (strncmp(username, "ftp", 3) == 0) {
+	errno = 0;
+	if (chroot(this->pw_dir) != 0 || errno != 0) {
+	auth = errno;
+	    error(0, errno, strerror(errno));
+	    return (-auth);
+	}
+    }
 
     endpwent ();
     return auth;
