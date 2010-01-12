@@ -1022,17 +1022,27 @@ void
 free_keymap_defs (void)
 {
 #ifdef USE_INTERNAL_EDIT
-    g_array_free (editor_keymap, TRUE);
-    g_array_free (editor_x_keymap, TRUE);
+    if (editor_keymap != NULL)
+	g_array_free (editor_keymap, TRUE);
+    if (editor_x_keymap != NULL)
+	g_array_free (editor_x_keymap, TRUE);
 #endif
-    g_array_free (viewer_keymap, TRUE);
-    g_array_free (viewer_hex_keymap, TRUE);
-    g_array_free (main_keymap, TRUE);
-    g_array_free (main_x_keymap, TRUE);
-    g_array_free (panel_keymap, TRUE);
-    g_array_free (input_keymap, TRUE);
-    g_array_free (tree_keymap, TRUE);
-    g_array_free (help_keymap, TRUE);
+    if (viewer_keymap != NULL)
+	g_array_free (viewer_keymap, TRUE);
+    if (viewer_hex_keymap != NULL)
+	g_array_free (viewer_hex_keymap, TRUE);
+    if (main_keymap != NULL)
+	g_array_free (main_keymap, TRUE);
+    if (main_x_keymap != NULL)
+	g_array_free (main_x_keymap, TRUE);
+    if (panel_keymap != NULL)
+	g_array_free (panel_keymap, TRUE);
+    if (input_keymap != NULL)
+	g_array_free (input_keymap, TRUE);
+    if (tree_keymap != NULL)
+	g_array_free (tree_keymap, TRUE);
+    if (help_keymap != NULL)
+	g_array_free (help_keymap, TRUE);
 }
 
 void
