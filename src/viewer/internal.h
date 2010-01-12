@@ -38,7 +38,6 @@ enum view_ds {
     DS_STRING                   /* Data comes from a string in memory */
 };
 
-
 enum ccache_type {
     CCACHE_OFFSET,
     CCACHE_LINECOL
@@ -63,7 +62,6 @@ struct area {
     screen_dimen top, left;
     screen_dimen height, width;
 };
-
 
 /* A cache entry for mapping offsets into line/column pairs and vice versa.
  * cc_offset, cc_line, and cc_column are the 0-based values of the offset,
@@ -238,7 +236,8 @@ void mcview_set_datasource_vfs_pipe (mcview_t *, int);
 void mcview_set_datasource_string (mcview_t *, const char *);
 
 /* dialog.c: */
-gboolean mcview_dialog_search (mcview_t *);
+gboolean mcview_dialog_search (mcview_t *view);
+gboolean mcview_dialog_goto (mcview_t *view, off_t *offset);
 
 /* display.c: */
 void mcview_update (mcview_t *view);
