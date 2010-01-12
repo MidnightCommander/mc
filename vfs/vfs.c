@@ -279,7 +279,7 @@ struct vfs_class *
 vfs_split (char *path, char **inpath, char **op)
 {
     char *semi;
-    char *slash, *at_chr;
+    char *slash;
     struct vfs_class *ret;
 
     if (!path)
@@ -289,12 +289,7 @@ vfs_split (char *path, char **inpath, char **op)
     if (!semi || !path_magic(path))
 	return NULL;
 
-    at_chr = strrchr (semi, '@');
-    if (at_chr)
-	slash = strchr (at_chr, PATH_SEP);
-    else
-	slash = strchr (semi, PATH_SEP);
-
+    slash = strchr (semi, PATH_SEP);
     *semi = 0;
 
     if (op)
