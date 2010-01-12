@@ -510,8 +510,8 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
     QuickWidget quick_widgets[] = {
 	/* 0 */ QUICK_BUTTON (6, 10, 1, 0, N_("&Cancel"), B_CANCEL, NULL),
 	/* 1 */ QUICK_BUTTON (3, 10, 1, 0, N_("&OK"),     B_ENTER,  NULL),
-	/* 2 */ QUICK_INPUT (4, 80, 0, 0, def_text, 58, 0, NULL, &my_str),
-	/* 3 */ QUICK_LABEL (4, 80, 2, 0, ""),
+	/* 2 */ QUICK_INPUT (3, 80, 0, 0, def_text, 58, 0, NULL, &my_str),
+	/* 3 */ QUICK_LABEL (3, 80, 2, 0, ""),
 	QUICK_END
     };
 
@@ -561,11 +561,16 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
 	    help, quick_widgets, TRUE
 	};
 
-	for (i = 0; i < 4; i++)
+	for (i = 0; i < 4; i++) {
+	    quick_widgets[i].x_divisions = Quick_input.xlen;
 	    quick_widgets[i].y_divisions = Quick_input.ylen;
+	}
 
 	for (i = 0; i < 3; i++)
 	    quick_widgets[i].relative_y += 2 + lines;
+
+	/* input line length */
+	quick_widgets[2].u.input.len = Quick_input.xlen - 6;
 
 	ret = quick_dialog (&Quick_input);
     }
