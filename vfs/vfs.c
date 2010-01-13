@@ -60,7 +60,7 @@
 #include "gc.h"
 #include "vfs.h"
 #ifdef USE_NETCODE
-#   include "tcputil.h"
+#   include "netutil.h"
 #endif
 #include "ftpfs.h"
 #include "mcfs.h"
@@ -1279,7 +1279,6 @@ vfs_init (void)
 #endif /* USE_EXT2FSLIB */
 
 #ifdef USE_NETCODE
-    tcp_init();
     init_ftpfs ();
     init_fish ();
 #ifdef ENABLE_VFS_SMB

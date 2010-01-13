@@ -91,7 +91,6 @@ SRC_mc_keybind = \
 SRC_mc_utils = \
 	util.c util.h \
 	utilunix.c \
-	vfsdummy.h \
 	unixcompat.h
 
 SRC_mc_extended_charset = \

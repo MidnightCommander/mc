@@ -67,7 +67,7 @@
 #include "vfs.h"
 #include "vfs-impl.h"
 #include "gc.h"		/* vfs_stamp_create */
-#include "tcputil.h"
+#include "netutil.h"
 #include "fish.h"
 
 int fish_directory_timeout = 900;
@@ -1232,6 +1232,8 @@ void
 init_fish (void)
 {
     static struct vfs_s_subclass fish_subclass;
+
+    tcp_init();
 
     fish_subclass.flags = VFS_S_REMOTE;
     fish_subclass.archive_same = fish_archive_same;

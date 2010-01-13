@@ -55,7 +55,7 @@
 #include "../src/main.h"	/* print_vfs_message */
 #include "utilvfs.h"
 #include "mcfsutil.h"
-#include "tcputil.h"
+#include "netutil.h"
 #include "mcfs.h"	/* tcp_invalidate_socket() */
 
 #define CHECK_SIG_PIPE(sock) if (got_sigpipe) \

@@ -50,6 +50,8 @@
 #include "../../src/cons.saver.h"
 #include "../../src/strutil.h"  /* str_casecmp */
 
+#include "../../vfs/vfs.h"
+
 #ifdef ENABLE_VFS
 #include "../../vfs/gc.h"
 #endif /* ENABLE_VFS */

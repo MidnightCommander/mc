@@ -65,7 +65,7 @@
 #include "vfs-impl.h"
 #include "mcfs.h"
 #include "mcfsutil.h"
-#include "tcputil.h"
+#include "netutil.h"
 
 #ifndef INADDR_NONE
 #  define INADDR_NONE (0xffffffffU)
@@ -1186,6 +1186,8 @@ mcfs_setctl (struct vfs_class *me, const char *path, int ctlop, void *arg)
 void
 init_mcfs (void)
 {
+    tcp_init();
+
     vfs_mcfs_ops.name = "mcfs";
     vfs_mcfs_ops.prefix = "mc:";
     vfs_mcfs_ops.fill_names = mcfs_fill_names;

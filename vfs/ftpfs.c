@@ -98,7 +98,7 @@ What to do with this?
 #include "vfs.h"
 #include "vfs-impl.h"
 #include "gc.h"		/* vfs_stamp_create */
-#include "tcputil.h"
+#include "netutil.h"
 #include "ftpfs.h"
 #ifndef MAXHOSTNAMELEN
 #    define MAXHOSTNAMELEN 64
@@ -1953,6 +1953,9 @@ static int ftpfs_find_machine (const char *host, const char *domain)
 {
     keyword_t keyword;
 
+    if (!host) host = "";
+    if (!domain) domain = "";
+
     while ((keyword = ftpfs_netrc_next ()) != NETRC_NONE) {
 	if (keyword == NETRC_DEFAULT)
 	    return 0;
@@ -2137,6 +2140,8 @@ void
 init_ftpfs (void)
 {
     static struct vfs_s_subclass ftpfs_subclass;
+
+    tcp_init();
 
     ftpfs_subclass.flags = VFS_S_REMOTE;
     ftpfs_subclass.archive_same = ftpfs_archive_same;
