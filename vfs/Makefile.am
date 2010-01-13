@@ -26,8 +26,8 @@ VFSHDRS = 			\
 	local.h			\
 	mcfs.h 			\
 	mcfsutil.h 		\
+	netutil.h 		\
 	smbfs.h			\
-	tcputil.h 		\
 	utilvfs.h		\
 	vfs.h			\
 	vfs-impl.h		\

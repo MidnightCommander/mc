@@ -60,7 +60,7 @@
 #include "gc.h"
 #include "vfs.h"
 #ifdef USE_NETCODE
-#   include "tcputil.h"
+#   include "netutil.h"
 #endif
 #include "ftpfs.h"
 #include "mcfs.h"
