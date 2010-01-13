@@ -65,7 +65,7 @@
 #include "vfs-impl.h"
 #include "mcfs.h"
 #include "mcfsutil.h"
-#include "tcputil.h"
+#include "netutil.h"
 
 #ifndef INADDR_NONE
 #  define INADDR_NONE (0xffffffffU)

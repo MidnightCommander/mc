@@ -67,7 +67,7 @@
 #include "vfs.h"
 #include "vfs-impl.h"
 #include "gc.h"		/* vfs_stamp_create */
-#include "tcputil.h"
+#include "netutil.h"
 #include "fish.h"
 
 int fish_directory_timeout = 900;

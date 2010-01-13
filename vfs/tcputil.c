@@ -28,7 +28,7 @@
 #include <signal.h>
 #include <sys/types.h>
 
-#include "tcputil.h"
+#include "netutil.h"
 
 int got_sigpipe;
 
