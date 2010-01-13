@@ -87,7 +87,6 @@ mcview_set_buttonbar (mcview_t *view)
             buttonbar_set_label (b, 2, "", keymap, (Widget *) view);
 
         buttonbar_set_label (b, 4, Q_ ("ButtonBar|Ascii"), keymap, (Widget *) view);
-        buttonbar_set_label (b, 5, Q_ ("ButtonBar|Goto"), keymap, (Widget *) view);
         buttonbar_set_label (b, 6, Q_ ("ButtonBar|Save"), keymap, (Widget *) view);
         buttonbar_set_label (b, 7, Q_ ("ButtonBar|HxSrch"), keymap, (Widget *) view);
 
@@ -96,11 +95,11 @@ mcview_set_buttonbar (mcview_t *view)
                                                         : Q_ ("ButtonBar|Wrap"),
                                 keymap, (Widget *) view);
         buttonbar_set_label (b, 4, Q_ ("ButtonBar|Hex"), keymap, (Widget *) view);
-        buttonbar_set_label (b, 5, Q_ ("ButtonBar|Line"), keymap, (Widget *) view);
         buttonbar_set_label (b, 6, "", keymap, (Widget *) view);
         buttonbar_set_label (b, 7, Q_ ("ButtonBar|Search"), keymap, (Widget *) view);
     }
 
+    buttonbar_set_label (b, 5, Q_ ("ButtonBar|Goto"), keymap, (Widget *) view);
     buttonbar_set_label (b, 8, view->magic_mode ? Q_ ("ButtonBar|Raw")
                                                 : Q_ ("ButtonBar|Parse"),
                                 keymap, (Widget *) view);
