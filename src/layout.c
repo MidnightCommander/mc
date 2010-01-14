@@ -41,9 +41,7 @@
 #ifdef HAVE_SYS_IOCTL_H
 #   include <sys/ioctl.h>
 #endif
-#ifdef HAVE_TERMIOS_H
 #include <termios.h>
-#endif
 #include <unistd.h>
 
 #include "global.h"
