@@ -16,6 +16,7 @@
 	       2009 Slava Zanko <slavazanko@google.com>
 	       2009 Andrew Borodin <aborodin@vmail.ru>
 	       2009 Ilia Maslakov <il.smind@gmail.com>
+	       2010 Andrew Borodin <aborodin@vmail.ru>
 
    This file is part of the Midnight Commander.
 
@@ -125,7 +126,6 @@ mcview_display_text (mcview_t * view)
 
         if (col >= width && view->text_wrap_mode) {
             col = 0;
-            row++;
             if (++row >= height)
                 break;
         }
