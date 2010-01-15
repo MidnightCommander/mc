@@ -171,10 +171,13 @@ tty_color_try_alloc_pair_lib (tty_color_pair_t * mc_color_pair)
             break;
         }
     } else {
+        int mask_fg = (mc_color_pair->ifg == -1) ? mc_color_pair->ifg : 0xff;
+        int mask_bg = (mc_color_pair->ibg == -1) ? mc_color_pair->ibg : 0xff;
+
         init_pair (mc_color_pair->pair_index,
                    mc_tty_color_save_attr_lib (mc_color_pair->pair_index,
-                                               mc_color_pair->ifg) & COLOR_WHITE,
-                   mc_color_pair->ibg & COLOR_WHITE);
+                                               mc_color_pair->ifg) & mask_fg,
+                   mc_color_pair->ibg & mask_bg);
     }
 }
 
