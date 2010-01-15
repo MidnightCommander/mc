@@ -344,7 +344,6 @@ static gboolean
 find_parameters (char **start_dir, char **pattern, char **content)
 {
     gboolean return_value;
-    char *temp_dir = NULL;
 
     /* file name */
     const char *file_case_label = N_("Cas&e sensitive");
@@ -395,10 +394,10 @@ find_parameters (char **start_dir, char **pattern, char **content)
 
     find_load_options ();
 
-find_par_start:
     if (in_start_dir == NULL)
 	in_start_dir = g_strdup (".");
 
+find_par_start:
     find_dlg =
 	create_dlg (0, 0, FIND_Y, FIND_X, dialog_colors,
 		    find_parm_callback, "[Find File]", _("Find File"),
@@ -471,6 +470,10 @@ find_par_start:
 	break;
 
     case B_TREE:
+    {
+	char temp_dir[MC_MAXPATHLEN];
+
+	g_strlcpy (temp_dir, in_start->buffer, sizeof (temp_dir));
 #ifdef HAVE_CHARSET
 	options.file_all_charsets = file_all_charsets_cbox->state & C_BOOL;
 	options.content_all_charsets = content_all_charsets_cbox->state & C_BOOL;
@@ -483,23 +486,21 @@ find_par_start:
 	options.file_case_sens = file_case_sens_cbox->state & C_BOOL;
 	options.find_recurs = recursively_cbox->state & C_BOOL;
 	options.skip_hidden = skip_hidden_cbox->state & C_BOOL;
-
 	destroy_dlg (find_dlg);
+
+	if ((temp_dir[0] == '\0')
+		|| ((temp_dir[0] == '.') && (temp_dir[1] == '\0')))
+	    g_strlcpy (temp_dir, current_panel->cwd, sizeof (temp_dir));
+
 	if (in_start_dir != INPUT_LAST_TEXT)
 	    g_free (in_start_dir);
-	temp_dir = g_strdup (in_start->buffer);
-	if ((temp_dir[0] == '.') && (temp_dir[1] == '\0')) {
-	    g_free (temp_dir);
-	    temp_dir = g_strdup (current_panel->cwd);
-	}
 	in_start_dir = tree_box (temp_dir);
-	if (in_start_dir != NULL)
-	    g_free (temp_dir);
-	else
-	    in_start_dir = temp_dir;
+	if (in_start_dir == NULL)
+	    in_start_dir = g_strdup (temp_dir);
 	/* Warning: Dreadful goto */
 	goto find_par_start;
 	break;
+    }
 
     default:
 #ifdef HAVE_CHARSET
