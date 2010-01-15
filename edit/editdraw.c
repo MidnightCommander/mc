@@ -290,10 +290,10 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
 
     tty_setcolor (EDITOR_NORMAL_COLOR);
 
-    if (!show_right_margin && -edit->start_col < option_word_wrap_line_length) {
+    if (!show_right_margin) {
         tty_draw_hline (edit->widget.y + y, edit->widget.x + x1,
                        ' ', end_col + 1 - start_col);
-    } else {
+    } else if (edit->start_col < option_word_wrap_line_length) {
         tty_draw_hline (edit->widget.y + y,
                         edit->widget.x + x1,
                         ' ',
