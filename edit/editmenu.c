@@ -83,6 +83,9 @@ create_edit_menu (void)
     entries = g_list_append (entries, menu_entry_create (_("&Toggle mark"),         CK_Mark));
     entries = g_list_append (entries, menu_entry_create (_("&Mark columns"),        CK_Column_Mark));
     entries = g_list_append (entries, menu_separator_create ());
+    entries = g_list_append (entries, menu_entry_create (_("Mark &all"),            CK_Mark_All));
+    entries = g_list_append (entries, menu_entry_create (_("Unmar&k"),              CK_Unmark));
+    entries = g_list_append (entries, menu_separator_create ());
     entries = g_list_append (entries, menu_entry_create (_("Toggle &ins/overw"),    CK_Toggle_Insert));
     entries = g_list_append (entries, menu_separator_create ());
     entries = g_list_append (entries, menu_entry_create (_("&Copy"),                CK_Copy));
@@ -92,11 +95,6 @@ create_edit_menu (void)
     entries = g_list_append (entries, menu_entry_create (_("C&opy to clipfile"),    CK_XStore));
     entries = g_list_append (entries, menu_entry_create (_("C&ut to clipfile"),     CK_XCut));
     entries = g_list_append (entries, menu_entry_create (_("&Paste from clipfile"), CK_XPaste));
-    entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("Toggle bookmar&k"),     CK_Toggle_Bookmark));
-    entries = g_list_append (entries, menu_entry_create (_("&Next bookmark"),       CK_Next_Bookmark));
-    entries = g_list_append (entries, menu_entry_create (_("Pre&v bookmark"),       CK_Prev_Bookmark));
-    entries = g_list_append (entries, menu_entry_create (_("&Flush bookmark"),      CK_Flush_Bookmarks));
     entries = g_list_append (entries, menu_separator_create ());
     entries = g_list_append (entries, menu_entry_create (_("&Undo"),                CK_Undo));
     entries = g_list_append (entries, menu_separator_create ());
@@ -111,9 +109,14 @@ create_search_replace_menu (void)
 {
     GList *entries = NULL;
 
-    entries = g_list_append (entries, menu_entry_create (_("&Search..."),    CK_Find));
-    entries = g_list_append (entries, menu_entry_create (_("Search &again"), CK_Find_Again));
-    entries = g_list_append (entries, menu_entry_create (_("&Replace..."),   CK_Replace));
+    entries = g_list_append (entries, menu_entry_create (_("&Search..."),           CK_Find));
+    entries = g_list_append (entries, menu_entry_create (_("Search &again"),        CK_Find_Again));
+    entries = g_list_append (entries, menu_entry_create (_("&Replace..."),          CK_Replace));
+    entries = g_list_append (entries, menu_separator_create ());
+    entries = g_list_append (entries, menu_entry_create (_("Toggle bookmar&k"),     CK_Toggle_Bookmark));
+    entries = g_list_append (entries, menu_entry_create (_("&Next bookmark"),       CK_Next_Bookmark));
+    entries = g_list_append (entries, menu_entry_create (_("Pre&v bookmark"),       CK_Prev_Bookmark));
+    entries = g_list_append (entries, menu_entry_create (_("&Flush bookmark"),      CK_Flush_Bookmarks));
 
     return entries;
 }
