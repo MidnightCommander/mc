@@ -2918,6 +2918,10 @@ edit_execute_cmd (WEdit *edit, unsigned long command, int char_for_insertion)
 	column_highlighting = 1;
 	edit_mark_cmd (edit, 0);
 	break;
+    case CK_Mark_All:
+	edit_set_markers (edit, 0, edit->last_byte, 0, 0);
+	edit->force |= REDRAW_PAGE;
+	break;
     case CK_Unmark:
 	if (column_highlighting)
 	    edit_push_action (edit, COLUMN_ON);
