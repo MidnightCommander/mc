@@ -3322,7 +3322,7 @@ Draw lines
 .\"Skins lines"
 .br
 .\"LINK2"
-Compability
+Compatibility
 .\"Skins oldcolors"
 .br
 
@@ -3331,7 +3331,7 @@ Compability
 
 Section
 .B [skin]
-contain metainfo for skin\-file. Paramter
+contain metainfo for skin\-file. Parameter
 .I description
 contain short text about skin.
 
