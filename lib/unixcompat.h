@@ -20,6 +20,10 @@
 # include <sys/sysmacros.h>	/* AIX */
 #endif
 
+#if defined(_AIX)
+# include <time.h>		/* AIX for tm */
+#endif
+
 #ifndef major
 # warning major() is undefined. Device numbers will not be shown correctly.
 # define major(devnum) (((devnum) >> 8) & 0xff)

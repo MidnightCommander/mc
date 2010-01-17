@@ -52,12 +52,19 @@
 
 /* include at last !!! */
 #ifdef WANT_TERM_H
+#ifdef HAVE_NCURSES_TERM_H
+#   include <ncurses/term.h>
+#else
 #   include <term.h>
+#endif /* HAVE_NCURSES_TERM_H */
 #endif /* WANT_TERM_H */
 
 /*** global variables **************************************************/
 
 /*** file scope macro definitions **************************************/
+#if defined(_AIX) && !defined(CTRL)
+#   define CTRL(x) ((x) & 0x1f)
+#endif
 
 /*** global variables **************************************************/
 

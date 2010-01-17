@@ -67,6 +67,10 @@
 #include "smbfs.h"
 #include "local.h"
 
+#if defined(_AIX) && !defined(NAME_MAX)
+#  define NAME_MAX FILENAME_MAX
+#endif
+
 /** They keep track of the current directory */
 static struct vfs_class *current_vfs;
 static char *current_dir;

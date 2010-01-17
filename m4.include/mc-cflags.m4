@@ -9,7 +9,7 @@ dnl @copyright Free Software Foundation, Inc.
 
 AC_DEFUN([MC_CHECK_ONE_CFLAG],[
 
-    AC_MSG_CHECKING([if gcc accepts $1])
+  AC_MSG_CHECKING([if gcc accepts $1])
 
   safe_CFLAGS=$CFLAGS
   CFLAGS="$1"
@@ -37,8 +37,15 @@ AC_DEFUN([MC_CHECK_CFLAGS],[
     mc_configured_cflags=""
 
 dnl Sorted -f options:
+dnl AC_MSG_CHECKING([CC is $CC])
+case "$CC" in
+  gcc*)
     MC_CHECK_ONE_CFLAG([-fdiagnostics-show-option])
 dnl    MC_CHECK_ONE_CFLAG([-fno-stack-protector])
+    ;;
+  *)
+    ;;
+esac
 
 dnl Sorted -W options:
     MC_CHECK_ONE_CFLAG([-Wcomment])
