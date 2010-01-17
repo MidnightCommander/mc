@@ -224,10 +224,27 @@ ncurses):
      by default if found, otherwise the included S-Lang library is
      used.
 
+`--with-slang-includes=[DIR]'
+     Set path to SLANG includes [default=/usr/include]; make sense
+     only if --with-screen=slang is used.
+
+`--with-slang-libs=[DIR]'
+     Set path to SLANG library [default=/usr/lib]; mke sense only
+     if --with-screen=slang is used.
+
 `--with-termcap'
      If the included S-Lang library is used, this option forces it to
      use the termcap database, as opposed to the default terminfo
      database.
+
+`--with-ncurses-includes=[DIR]'
+     Set path to ncurses includes [default=/usr/include]; make
+     sense only if --with-screen=ncurses is used;
+     for /usr/local/include/ncurses specify /usr/local/include.
+
+`--with-ncurses-libs=[DIR]'
+     Set path to ncurses library [default=/usr/lib]; make sense
+     only if --with-screen=ncurses is used.
 
 Compiler options:
 - - - - - - - - -
@@ -320,7 +337,7 @@ mips-dec-ultrix4.3
 mips-dec-{open,net}bsd1.0
 mips-sgi-irix5.2
 mips-sgi-irix5.3
-rs6000-ibm-aix3.2.5
+powerpc-ibm-aix5.3.0.0 (IBM XL C, IBM XL C/C++)
 sparc-sun-sunos4.1
 sparc-sun-netbsd1.0
 sparc-sun-solaris2.3
@@ -435,3 +452,33 @@ team.  Sometimes there is no solution than upgrading to a modern and
 free compiler - GCC (Compiler Collection):
 
 http://gcc.gnu.org/
+
+AIX
+---
+Currently you can not use gcc 4.2.4 (and probably other versions) on
+AIX to compiler the S-Lang version. Please use IBM XL C or IBM XL C/C++
+instead.
+
+If you compile a ncurses version you need to set TERM=dtterm to get
+working color support. Furthermore it is important to specify the
+--with-ncurses-includes/--with-ncurses-lib parameters because otherwise
+mc will pick up term.h from AIX which does not work with the ncurses
+library.
+
+The AIX S-Lang build was tested with S-Lang 2.0.7. Later versions may
+also work but are not tested yet.
+
+Here is an example for S-Lang, it is assumed that the S-Lang library
+is installed under /user/local and that you also want want to install
+to /usr/local:
+
+  export CC=cc_r
+  export CXX=xlC_r
+  export CONFIG_SHELL=/usr/bin/bash (if installed)
+  export SHELL=/usr/bin/bash        (if installed)
+
+  ./configure \
+     --prefix=/usr/local \
+     --with-screen=slang \
+     --with-slang-includes=/usr/local/include \
+     --with-slang-libs=/usr/local/lib
