@@ -148,13 +148,15 @@ void
 mcview_move_left (mcview_t * view, off_t columns)
 {
     if (view->hex_mode) {
+        off_t old_cursor = view->hex_cursor;
         assert (columns == 1);
         if (view->hexview_in_text || !view->hexedit_lownibble) {
             if (view->hex_cursor > 0)
                 view->hex_cursor--;
         }
         if (!view->hexview_in_text)
-            view->hexedit_lownibble = !view->hexedit_lownibble;
+            if (old_cursor > 0 || view->hexedit_lownibble)
+                view->hexedit_lownibble = !view->hexedit_lownibble;
     } else if (view->text_wrap_mode) {
         /* nothing to do */
     } else {
@@ -172,12 +174,17 @@ void
 mcview_move_right (mcview_t * view, off_t columns)
 {
     if (view->hex_mode) {
+        off_t last_byte;
+        off_t old_cursor = view->hex_cursor;
+        last_byte = mcview_offset_doz(mcview_get_filesize (view), 1);
         assert (columns == 1);
         if (view->hexview_in_text || view->hexedit_lownibble) {
-            view->hex_cursor++;
+            if (view->hex_cursor < last_byte)
+                view->hex_cursor++;
         }
         if (!view->hexview_in_text)
-            view->hexedit_lownibble = !view->hexedit_lownibble;
+            if (old_cursor < last_byte || !view->hexedit_lownibble)
+                view->hexedit_lownibble = !view->hexedit_lownibble;
     } else if (view->text_wrap_mode) {
         /* nothing to do */
     } else {
