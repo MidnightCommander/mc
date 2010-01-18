@@ -71,6 +71,8 @@ int mcview_max_dirt_limit = 10;
 /* Scrolling is done in pages or line increments */
 int mcview_mouse_move_pages = 1;
 
+/* end of file will be showen from mcview_show_eof */
+char *mcview_show_eof = NULL;
 
 /*** file scope macro definitions ****************************************************************/
 

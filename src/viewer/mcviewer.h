@@ -28,6 +28,7 @@ extern int mcview_remember_file_position;
 extern int mcview_max_dirt_limit;
 
 extern int mcview_mouse_move_pages;
+extern char *mcview_show_eof;
 
 /*** declarations of public functions **********************************/
 

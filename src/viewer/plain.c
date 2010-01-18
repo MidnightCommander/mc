@@ -46,6 +46,7 @@
 #include "../src/main.h"
 #include "../src/charsets.h"
 #include "../src/util.h"	/* is_printable() */
+#include "mcviewer.h"		/* mcview_show_eof */
 
 #include "internal.h"
 
@@ -74,6 +75,7 @@ mcview_display_text (mcview_t * view)
     off_t from;
     int cw = 1;
     int c, prev_ch = 0;
+    gboolean last_row = TRUE;
     struct hexedit_change_node *curr = view->change_list;
 
     mcview_display_clean (view);
@@ -102,6 +104,7 @@ mcview_display_text (mcview_t * view)
             if (!mcview_get_byte (view, from, &c))
                 break;
 
+        last_row = FALSE;
         from++;
         if (cw > 1)
             from += cw - 1;
@@ -177,6 +180,15 @@ mcview_display_text (mcview_t * view)
     }
 
     view->dpy_end = from;
+    if (mcview_show_eof != NULL && mcview_show_eof[0] != '\0') {
+        if (last_row && mcview_get_byte (view, from - 1, &c))
+            if (c != '\n')
+                row--;
+        while (++row < height) {
+            widget_move (view, top + row, left);
+            tty_print_string (mcview_show_eof);
+        }
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */

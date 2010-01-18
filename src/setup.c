@@ -241,6 +241,7 @@ static const struct {
 #ifdef USE_INTERNAL_EDIT
     { "editor_backup_extension", &option_backup_ext, "~" },
 #endif
+    { "mcview_eof", &mcview_show_eof, "" },
     { NULL, NULL, NULL }
 };
 
