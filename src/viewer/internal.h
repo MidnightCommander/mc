@@ -222,6 +222,7 @@ void mcview_ccache_lookup (mcview_t *view, coord_cache_entry_t *coord,
 /* datasource.c: */
 void mcview_set_datasource_none (mcview_t *);
 off_t mcview_get_filesize (mcview_t *);
+void mcview_update_filesize (mcview_t * view);
 char *mcview_get_ptr_file (mcview_t *, off_t);
 char *mcview_get_ptr_string (mcview_t *, off_t);
 int mcview_get_utf (mcview_t *, off_t, int *, gboolean *);

@@ -15,7 +15,7 @@
 	       2005 Roland Illig <roland.illig@gmx.de>
 	       2009 Slava Zanko <slavazanko@google.com>
 	       2009 Andrew Borodin <aborodin@vmail.ru>
-	       2009 Ilia Maslakov <il.smind@gmail.com>
+	       2009, 2010 Ilia Maslakov <il.smind@gmail.com>
 
    This file is part of the Midnight Commander.
 
@@ -231,6 +231,8 @@ mcview_moveto_bottom (mcview_t * view)
 {
     off_t datalines, lines_up, filesize, last_offset;
 
+    mcview_update_filesize (view);
+
     if (view->growbuf_in_use)
         mcview_growbuf_read_until (view, OFFSETTYPE_MAX);
 
@@ -245,6 +247,7 @@ mcview_moveto_bottom (mcview_t * view)
         view->hex_cursor = last_offset;
     } else {
         view->dpy_start = filesize;
+        mcview_move_up (view, 1);
     }
 }
 
