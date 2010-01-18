@@ -190,8 +190,7 @@ mcview_update (mcview_t * view)
         dirt_limit++;
         if (dirt_limit > mcview_max_dirt_limit)
             dirt_limit = mcview_max_dirt_limit;
-    }
-    if (view->dirty) {
+    } else if (view->dirty > 0) {
         if (is_idle ()) {
             /* We have time to update the screen properly */
             mcview_display (view);

@@ -283,7 +283,6 @@ mcview_handle_editkey (mcview_t * view, int key)
         node->value = byte_val;
     }
     view->dirty++;
-    mcview_update (view);
     mcview_move_right (view, 1);
     return MSG_HANDLED;
 }
@@ -302,31 +301,30 @@ mcview_execute_cmd (mcview_t *view, unsigned long command)
     case CK_ViewToggleWrapMode:
         /* Toggle between wrapped and unwrapped view */
         mcview_toggle_wrap_mode (view);
-        mcview_update (view); /* FIXME: view->dirty++ ? */
+        view->dirty++;
         break;
     case CK_ViewToggleHexEditMode:
         /* Toggle between hexview and hexedit mode */
         mcview_toggle_hexedit_mode (view);
-        mcview_update (view); /* FIXME: view->dirty++ ? */
+        view->dirty++;
         break;
     case CK_ViewToggleHexMode:
         /* Toggle between hex view and text view */
         mcview_toggle_hex_mode (view);
-        mcview_update (view); /* FIXME: view->dirty++ ? */
+        view->dirty++;
         break;
     case CK_ViewGoto:
     {
         off_t addr;
 
         if (mcview_dialog_goto (view, &addr)) {
-            if (addr < 0)
-                message (D_ERROR, _("Warning"), _("Invalid value"));
-            else
+            if (addr >= 0)
                 mcview_moveto_offset (view, addr);
+            else {
+                message (D_ERROR, _("Warning"), _("Invalid value"));
+                view->dirty++;
+            }
         }
-
-        view->dirty++;
-        mcview_update (view); /* FIXME: unneeded? */
         break;
     }
     case CK_ViewHexEditSave:
@@ -337,11 +335,11 @@ mcview_execute_cmd (mcview_t *view, unsigned long command)
         break;
     case CK_ViewToggleMagicMode:
         mcview_toggle_magic_mode (view);
-        mcview_update (view); /* FIXME: view->dirty++ ? */
+        view->dirty++;
         break;
     case CK_ViewToggleNroffMode:
         mcview_toggle_nroff_mode (view);
-        mcview_update (view); /* FIXME: view->dirty++ ? */
+        view->dirty++;
         break;
     case CK_ViewToggleHexNavMode:
         view->hexview_in_text = !view->hexview_in_text;
@@ -349,7 +347,6 @@ mcview_execute_cmd (mcview_t *view, unsigned long command)
         break;
     case CK_ViewMoveToBol:
         mcview_moveto_bol (view);
-        view->dirty++;
         break;
     case CK_ViewMoveToEol:
         mcview_moveto_eol (view);
@@ -404,7 +401,6 @@ mcview_execute_cmd (mcview_t *view, unsigned long command)
     case CK_SelectCodepage:
         mcview_select_encoding (view);
         view->dirty++;
-        mcview_update (view);
         break;
     case CK_ViewNextFile:
     case CK_ViewPrevFile:
