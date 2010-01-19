@@ -206,50 +206,6 @@ mcview_cmk_moveto_bottom (void *w, int n)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static inline void
-mcview_moveto_line_cmd (mcview_t *view)
-{
-    char *answer, *answer_end, prompt[BUF_SMALL];
-    off_t line, col;
-
-    mcview_offset_to_coord (view, &line, &col, view->dpy_start);
-
-    g_snprintf (prompt, sizeof (prompt),
-                _(" The current line number is %lld.\n"
-                  " Enter the new line number:"), (long long)(line + 1));
-    answer = input_dialog (_(" Goto line "), prompt, MC_HISTORY_VIEW_GOTO_LINE, "");
-    if (answer != NULL && answer[0] != '\0') {
-        errno = 0;
-        line = strtoul (answer, &answer_end, 10);
-        if (errno == 0 && *answer_end == '\0' && line >= 1)
-            mcview_moveto (view, line - 1, 0);
-    }
-    g_free (answer);
-}
-
-static inline void
-mcview_moveto_addr_cmd (mcview_t *view)
-{
-    char *line, *error, prompt[BUF_SMALL], prompt_format[BUF_SMALL];
-
-    g_snprintf (prompt_format, sizeof (prompt_format),
-                _(" The current address is %s.\n"
-                  " Enter the new address:"), "0x%08" OFFSETTYPE_PRIX "");
-    g_snprintf (prompt, sizeof (prompt), prompt_format, view->hex_cursor);
-    line = input_dialog (_(" Goto Address "), prompt, MC_HISTORY_VIEW_GOTO_ADDR, "");
-    if ((line != NULL) && (*line != '\0')) {
-        off_t addr;
-        addr = strtoul (line, &error, 0);
-        if ((*error == '\0') && mcview_get_byte (view, addr, NULL))
-            mcview_moveto_offset (view, addr);
-        else
-            message (D_ERROR, _("Warning"), _(" Invalid address "));
-    }
-    g_free (line);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static void
 mcview_hook (void *v)
 {
@@ -327,7 +283,6 @@ mcview_handle_editkey (mcview_t * view, int key)
         node->value = byte_val;
     }
     view->dirty++;
-    mcview_update (view);
     mcview_move_right (view, 1);
     return MSG_HANDLED;
 }
@@ -346,26 +301,32 @@ mcview_execute_cmd (mcview_t *view, unsigned long command)
     case CK_ViewToggleWrapMode:
         /* Toggle between wrapped and unwrapped view */
         mcview_toggle_wrap_mode (view);
-        mcview_update (view); /* FIXME: view->dirty++ ? */
+        view->dirty++;
         break;
     case CK_ViewToggleHexEditMode:
         /* Toggle between hexview and hexedit mode */
         mcview_toggle_hexedit_mode (view);
-        mcview_update (view); /* FIXME: view->dirty++ ? */
+        view->dirty++;
         break;
     case CK_ViewToggleHexMode:
         /* Toggle between hex view and text view */
         mcview_toggle_hex_mode (view);
-        mcview_update (view); /* FIXME: view->dirty++ ? */
+        view->dirty++;
         break;
     case CK_ViewGoto:
-        if (view->hex_mode)
-            mcview_moveto_addr_cmd (view);
-        else
-            mcview_moveto_line_cmd (view);
-        view->dirty++;
-        mcview_update (view); /* FIXME: unneeded? */
+    {
+        off_t addr;
+
+        if (mcview_dialog_goto (view, &addr)) {
+            if (addr >= 0)
+                mcview_moveto_offset (view, addr);
+            else {
+                message (D_ERROR, _("Warning"), _("Invalid value"));
+                view->dirty++;
+            }
+        }
         break;
+    }
     case CK_ViewHexEditSave:
         mcview_hexedit_save_changes (view);
         break;
@@ -374,11 +335,11 @@ mcview_execute_cmd (mcview_t *view, unsigned long command)
         break;
     case CK_ViewToggleMagicMode:
         mcview_toggle_magic_mode (view);
-        mcview_update (view); /* FIXME: view->dirty++ ? */
+        view->dirty++;
         break;
     case CK_ViewToggleNroffMode:
         mcview_toggle_nroff_mode (view);
-        mcview_update (view); /* FIXME: view->dirty++ ? */
+        view->dirty++;
         break;
     case CK_ViewToggleHexNavMode:
         view->hexview_in_text = !view->hexview_in_text;
@@ -386,7 +347,6 @@ mcview_execute_cmd (mcview_t *view, unsigned long command)
         break;
     case CK_ViewMoveToBol:
         mcview_moveto_bol (view);
-        view->dirty++;
         break;
     case CK_ViewMoveToEol:
         mcview_moveto_eol (view);
@@ -441,7 +401,6 @@ mcview_execute_cmd (mcview_t *view, unsigned long command)
     case CK_SelectCodepage:
         mcview_select_encoding (view);
         view->dirty++;
-        mcview_update (view);
         break;
     case CK_ViewNextFile:
     case CK_ViewPrevFile:

@@ -15,7 +15,7 @@
 	       2005 Roland Illig <roland.illig@gmx.de>
 	       2009 Slava Zanko <slavazanko@google.com>
 	       2009 Andrew Borodin <aborodin@vmail.ru>
-	       2009 Ilia Maslakov <il.smind@gmail.com>
+	       2009, 2010 Ilia Maslakov <il.smind@gmail.com>
 
    This file is part of the Midnight Commander.
 
@@ -87,7 +87,6 @@ mcview_set_buttonbar (mcview_t *view)
             buttonbar_set_label (b, 2, "", keymap, (Widget *) view);
 
         buttonbar_set_label (b, 4, Q_ ("ButtonBar|Ascii"), keymap, (Widget *) view);
-        buttonbar_set_label (b, 5, Q_ ("ButtonBar|Goto"), keymap, (Widget *) view);
         buttonbar_set_label (b, 6, Q_ ("ButtonBar|Save"), keymap, (Widget *) view);
         buttonbar_set_label (b, 7, Q_ ("ButtonBar|HxSrch"), keymap, (Widget *) view);
 
@@ -96,11 +95,11 @@ mcview_set_buttonbar (mcview_t *view)
                                                         : Q_ ("ButtonBar|Wrap"),
                                 keymap, (Widget *) view);
         buttonbar_set_label (b, 4, Q_ ("ButtonBar|Hex"), keymap, (Widget *) view);
-        buttonbar_set_label (b, 5, Q_ ("ButtonBar|Line"), keymap, (Widget *) view);
         buttonbar_set_label (b, 6, "", keymap, (Widget *) view);
         buttonbar_set_label (b, 7, Q_ ("ButtonBar|Search"), keymap, (Widget *) view);
     }
 
+    buttonbar_set_label (b, 5, Q_ ("ButtonBar|Goto"), keymap, (Widget *) view);
     buttonbar_set_label (b, 8, view->magic_mode ? Q_ ("ButtonBar|Raw")
                                                 : Q_ ("ButtonBar|Parse"),
                                 keymap, (Widget *) view);
@@ -127,10 +126,8 @@ mcview_display_status (mcview_t * view)
     const screen_dimen left = view->status_area.left;
     const screen_dimen width = view->status_area.width;
     const screen_dimen height = view->status_area.height;
-    const char *file_label, *file_name;
-    screen_dimen file_label_width;
-    int i;
-    char *tmp;
+    const char *file_label;
+    screen_dimen file_label_width, i = 0;
 
     if (height < 1)
         return;
@@ -139,46 +136,33 @@ mcview_display_status (mcview_t * view)
     widget_move (view, top, left);
     tty_draw_hline (-1, -1, ' ', width);
 
-    file_label = _("File: %s");
+    file_label = view->filename ? view->filename : view->command ? view->command : "";
     file_label_width = str_term_width1 (file_label) - 2;
-    file_name = view->filename ? view->filename : view->command ? view->command : "";
-
-    if (width < file_label_width + 6)
-        tty_print_string (str_fit_to_term (file_name, width, J_LEFT_FIT));
-    else {
-        i = (width > 22 ? 22 : width) - file_label_width;
-
-        tmp = g_strdup_printf (file_label, str_fit_to_term (file_name, i, J_LEFT_FIT));
-        tty_print_string (tmp);
-        g_free (tmp);
-        if (width > 46) {
-            widget_move (view, top, left + 24);
-            /* FIXME: the format strings need to be changed when off_t changes */
-            if (view->hex_mode)
-                tty_printf (_("Offset 0x%08lx"), (unsigned long) view->hex_cursor);
-            else {
-                off_t line, col;
-                mcview_offset_to_coord (view, &line, &col, view->dpy_start);
-                tty_printf (_("Line %lu Col %lu"),
-                            (unsigned long) line + 1,
-                            (unsigned long) (view->text_wrap_mode ? col : view->dpy_text_column));
-            }
-        }
-        if (width > 62) {
-            off_t filesize;
-            filesize = mcview_get_filesize (view);
-            widget_move (view, top, left + 43);
-            if (!mcview_may_still_grow (view)) {
-                tty_printf (_("%s bytes"), size_trunc (filesize));
-            } else {
-                tty_printf (_(">= %s bytes"), size_trunc (filesize));
-            }
-        }
-        if (width > 26) {
-            mcview_percent (view, view->hex_mode ? view->hex_cursor : view->dpy_end);
+    if (width > 40) {
+        char buffer [BUF_TINY];
+        widget_move (view, top, width - 32);
+        if (view->hex_mode) {
+            tty_printf ("0x%08lx", (unsigned long) view->hex_cursor);
+        } else {
+            size_trunc_len (buffer, 5, mcview_get_filesize (view), 0);
+            tty_printf ("%9lli/%s%s %s", view->dpy_end,
+                        buffer,
+                        mcview_may_still_grow (view) ? "+" : " ",
+#ifdef HAVE_CHARSET
+                        source_codepage >= 0 ? get_codepage_id (source_codepage) : ""
+#else
+                        ""
+#endif
+                        );
         }
     }
-    tty_setcolor (SELECTED_COLOR);
+    widget_move (view, top, left);
+    if (width > 40)
+        tty_print_string (str_fit_to_term (file_label, width - 34, J_LEFT_FIT));
+    else
+        tty_print_string (str_fit_to_term (file_label, width - 5, J_LEFT_FIT));
+    if (width > 26)
+        mcview_percent (view, view->hex_mode ? view->hex_cursor : view->dpy_end);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -206,8 +190,7 @@ mcview_update (mcview_t * view)
         dirt_limit++;
         if (dirt_limit > mcview_max_dirt_limit)
             dirt_limit = mcview_max_dirt_limit;
-    }
-    if (view->dirty) {
+    } else if (view->dirty > 0) {
         if (is_idle ()) {
             /* We have time to update the screen properly */
             mcview_display (view);

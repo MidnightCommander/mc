@@ -27,6 +27,7 @@
 #define MC_HISTORY_FM_PANEL_FILTER	"mc.fm.panel-filter"
 #define MC_HISTORY_FM_MENU_EXEC_PARAM	"mc.fm.menu.exec.parameter"
 
+#define MC_HISTORY_VIEW_GOTO		"mc.view.goto"
 #define MC_HISTORY_VIEW_GOTO_LINE	"mc.view.goto-line"
 #define MC_HISTORY_VIEW_GOTO_ADDR	"mc.view.goto-addr"
 #define MC_HISTORY_VIEW_SEARCH_REGEX	"mc.view.search.regex"

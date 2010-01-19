@@ -117,6 +117,18 @@ mcview_get_filesize (mcview_t * view)
 
 /* --------------------------------------------------------------------------------------------- */
 
+void
+mcview_update_filesize (mcview_t * view)
+{
+    if (view->datasource == DS_FILE) {
+        struct stat st;
+        if (mc_fstat (view->ds_file_fd, &st) != -1)
+            view->ds_file_filesize = st.st_size;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 char *
 mcview_get_ptr_file (mcview_t * view, off_t byte_index)
 {

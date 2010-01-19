@@ -92,14 +92,6 @@ void
 mcview_toggle_wrap_mode (mcview_t * view)
 {
     view->text_wrap_mode = !view->text_wrap_mode;
-    if (view->text_wrap_mode) {
-        mcview_scroll_to_cursor (view);
-    } else {
-        off_t line;
-
-        mcview_offset_to_coord (view, &line, &(view->dpy_text_column), view->dpy_start);
-        mcview_coord_to_offset (view, &(view->dpy_start), line, 0);
-    }
     view->dpy_bbar_dirty = TRUE;
     view->dirty++;
 }
@@ -169,11 +161,8 @@ mcview_done (mcview_t * view)
     /* Save current file position */
     if (mcview_remember_file_position && view->filename != NULL) {
         char *canon_fname;
-        off_t line, col;
-
         canon_fname = vfs_canon (view->filename);
-        mcview_offset_to_coord (view, &line, &col, view->dpy_start);
-        save_file_position (canon_fname, line + 1, col);
+        save_file_position (canon_fname, -1, 0, view->dpy_start);
         g_free (canon_fname);
     }
 
@@ -193,9 +182,7 @@ mcview_done (mcview_t * view)
     mcview_close_datasource (view);
     /* the growing buffer is freed with the datasource */
 
-    if (view->coord_cache) {
-        g_array_free (view->coord_cache, TRUE), view->coord_cache = NULL;
-    }
+    coord_cache_free (view->coord_cache), view->coord_cache = NULL;
 
     if (!(view->converter == INVALID_CONV || view->converter != str_cnv_from_term)) {
         str_close_conv (view->converter);
@@ -258,3 +245,60 @@ mcview_show_error (mcview_t * view, const char *msg)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+/* returns index of the first char in the line */
+/* it is constant for all line characters */
+off_t
+mcview_bol (mcview_t * view, off_t current)
+{
+    int c;
+    off_t filesize;
+    filesize = mcview_get_filesize (view);
+    if (current <= 0)
+        return 0;
+    if (current > filesize)
+        return filesize;
+    if (!mcview_get_byte (view, current, &c))
+        return current;
+    if (c == '\n') {
+        if (!mcview_get_byte (view, current - 1, &c))
+            return current;
+        if (c == '\r')
+            current--;
+    }
+    while (current > 0) {
+        if (!mcview_get_byte (view, current - 1, &c))
+            break;
+        if (c == '\r' || c == '\n')
+            break;
+        current--;
+    }
+    return current;
+}
+
+/* returns index of last char on line + width EOL */
+/* mcview_eol of the current line == mcview_bol next line */
+off_t
+mcview_eol (mcview_t * view, off_t current)
+{
+    int c, prev_ch = 0;
+    off_t filesize;
+    filesize = mcview_get_filesize (view);
+    if (current < 0)
+        return 0;
+    if (current >= filesize)
+        return filesize;
+    while (current < filesize) {
+        if (!mcview_get_byte (view, current, &c))
+            break;
+        if (c == '\n') {
+            current++;
+            break;
+        } else if (prev_ch == '\r') {
+            break;
+        }
+        current++;
+        prev_ch = c;
+    }
+    return current;
+}

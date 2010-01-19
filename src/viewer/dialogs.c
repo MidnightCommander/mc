@@ -40,12 +40,14 @@
 #include <stdlib.h>
 #include <sys/types.h>
 
+#include "../src/global.h"
+
 #include "../src/search/search.h"
 
-#include "../src/global.h"
 #include "../src/wtools.h"
 #include "../src/history.h"
 #include "../src/charsets.h"
+#include "../src/strutil.h"
 
 #include "internal.h"
 
@@ -109,7 +111,7 @@ mcview_dialog_search (mcview_t * view)
     qd_result = quick_dialog (&Quick_input);
     g_strfreev (list_of_types);
 
-    if ((qd_result == B_CANCEL) ||(exp == NULL) || (exp[0] == '\0')) {
+    if ((qd_result == B_CANCEL) || (exp == NULL) || (exp[0] == '\0')) {
         g_free (exp);
         return FALSE;
     }
@@ -127,28 +129,154 @@ mcview_dialog_search (mcview_t * view)
 
     g_free (view->last_search_string);
     view->last_search_string = exp;
-    exp = NULL;
 
-    if (view->search_nroff_seq)
+    if (view->search_nroff_seq != NULL)
         mcview_nroff_seq_free (&(view->search_nroff_seq));
 
-    if (view->search)
+    if (view->search != NULL)
         mc_search_free (view->search);
 
     view->search = mc_search_new (view->last_search_string, -1);
     view->search_nroff_seq = mcview_nroff_seq_new (view);
-    if (!view->search) {
-        g_free (exp);
-        return FALSE;
+    if (view->search != NULL) {
+	view->search->search_type = view->search_type;
+	view->search->is_all_charsets = view->search_all_codepages;
+	view->search->is_case_sentitive = view->search_case;
+	view->search->search_fn = mcview_search_cmd_callback;
+	view->search->update_fn = mcview_search_update_cmd_callback;
+	view->search->whole_words = view->whole_words;
     }
 
-    view->search->search_type = view->search_type;
-    view->search->is_all_charsets = view->search_all_codepages;
-    view->search->is_case_sentitive = view->search_case;
-    view->search->search_fn = mcview_search_cmd_callback;
-    view->search->update_fn = mcview_search_update_cmd_callback;
-    view->search->whole_words = view->whole_words;
+    return (view->search != NULL);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+gboolean
+mcview_dialog_goto (mcview_t *view, off_t *offset)
+{
+    typedef enum {
+        MC_VIEW_GOTO_LINENUM = 0,
+        MC_VIEW_GOTO_PERCENT = 1,
+        MC_VIEW_GOTO_OFFSET_DEC = 2,
+        MC_VIEW_GOTO_OFFSET_HEX = 3
+    } mcview_goto_type_t;
+
+    const char *mc_view_goto_str[] =
+    {
+	N_("&Line number (decimal)"),
+	N_("Pe&rcents"),
+	N_("&Decimal offset"),
+	N_("He&xadecimal offset")
+    };
+
+    const int goto_dlg_height = 12;
+    int goto_dlg_width = 40;
+
+    static mcview_goto_type_t current_goto_type = MC_VIEW_GOTO_LINENUM;
+
+    size_t i;
+
+    size_t num_of_types = sizeof (mc_view_goto_str) /sizeof (mc_view_goto_str[0]);
+    char *exp = NULL;
+    int qd_result;
+    gboolean res = FALSE;
+
+    QuickWidget quick_widgets[] =
+    {
+	QUICK_BUTTON (6, 10, goto_dlg_height - 3, goto_dlg_height, N_("&Cancel"), B_CANCEL, NULL),
+	QUICK_BUTTON (2, 10, goto_dlg_height - 3, goto_dlg_height, N_("&OK"), B_ENTER, NULL),
+	QUICK_RADIO (3, goto_dlg_width, 4, goto_dlg_height,
+			num_of_types, (const char **) mc_view_goto_str, (int *) &current_goto_type),
+	QUICK_INPUT (3, goto_dlg_width, 2, goto_dlg_height,
+			INPUT_LAST_TEXT, goto_dlg_width - 6, 0, MC_HISTORY_VIEW_GOTO, &exp),
+	QUICK_END
+    };
+
+    QuickDialog Quick_input =
+    {
+	goto_dlg_width, goto_dlg_height, -1, -1,
+	N_("Goto"), "[Input Line Keys]",
+	quick_widgets, FALSE
+    };
+
+#ifdef ENABLE_NLS
+    for (i = 0; i < num_of_types; i++)
+	mc_view_goto_str [i] = _(mc_view_goto_str [i]);
+
+    quick_widgets[0].u.button.text = _(quick_widgets[0].u.button.text);
+    quick_widgets[1].u.button.text = _(quick_widgets[1].u.button.text);
+#endif
+
+    /* calculate widget coordinates */
+    {
+	int b0_len, b1_len, len;
+	const int button_gap = 2;
+
+	/* preliminary dialog width */
+	goto_dlg_width = max (goto_dlg_width, str_term_width1 (Quick_input.title) + 4);
+
+	/* length of radiobuttons */
+	for (i = 0; i < num_of_types; i++)
+	    goto_dlg_width = max (goto_dlg_width, str_term_width1 (mc_view_goto_str [i]) + 10);
+
+	/* length of buttons */
+	b0_len = str_term_width1 (quick_widgets[0].u.button.text) + 3;
+	b1_len = str_term_width1 (quick_widgets[1].u.button.text) + 5; /* default button */
+	len = b0_len + b1_len + button_gap * 2;
+
+	/* dialog width */
+	Quick_input.xlen = max (goto_dlg_width, len + 6);
+
+	/* correct widget coordinates */
+	for (i = sizeof (quick_widgets)/sizeof (quick_widgets[0]); i > 0; i--)
+	    quick_widgets[i - 1].x_divisions = Quick_input.xlen;
+
+	/* input length */
+	quick_widgets[3].u.input.len = Quick_input.xlen - 6;
+
+	/* button positions */
+        quick_widgets[1].relative_x = Quick_input.xlen/2 - len/2;
+        quick_widgets[0].relative_x = quick_widgets[1].relative_x + b1_len + button_gap;
+    }
+
+    /* run dialog*/
+    qd_result = quick_dialog (&Quick_input);
+
+    *offset = -1;
+
+    /* check input line value */
+    if ((qd_result != B_CANCEL) && (exp != NULL) && (exp[0] != '\0')) {
+	int base = (current_goto_type == MC_VIEW_GOTO_OFFSET_HEX) ? 16 : 10;
+	off_t addr;
+	char *error;
+
+	res = TRUE;
+
+	addr = strtoll (exp, &error, base);
+	if ((*error == '\0') && (addr >= 0)) {
+	    switch (current_goto_type) {
+	    case MC_VIEW_GOTO_LINENUM:
+		mcview_coord_to_offset (view, offset, addr, 0);
+		break;
+	    case MC_VIEW_GOTO_PERCENT:
+		if (addr > 100)
+		    addr = 100;
+		*offset = addr * mcview_get_filesize (view) / 100;
+		break;
+	    case MC_VIEW_GOTO_OFFSET_DEC:
+		*offset = addr;
+		break;
+	    case MC_VIEW_GOTO_OFFSET_HEX:
+		*offset = addr;
+		break;
+	    default:
+		break;
+	    }
+	    *offset = mcview_bol (view, *offset);
+	}
+    }
 
     g_free (exp);
-    return TRUE;
+    return res;
 }

@@ -38,7 +38,6 @@ enum view_ds {
     DS_STRING                   /* Data comes from a string in memory */
 };
 
-
 enum ccache_type {
     CCACHE_OFFSET,
     CCACHE_LINECOL
@@ -64,18 +63,23 @@ struct area {
     screen_dimen height, width;
 };
 
-
 /* A cache entry for mapping offsets into line/column pairs and vice versa.
  * cc_offset, cc_line, and cc_column are the 0-based values of the offset,
  * line and column of that cache entry. cc_nroff_column is the column
  * corresponding to cc_offset in nroff mode.
  */
-struct coord_cache_entry {
+typedef struct {
     off_t cc_offset;
     off_t cc_line;
     off_t cc_column;
     off_t cc_nroff_column;
-};
+} coord_cache_entry_t;
+
+typedef struct {
+    size_t size;
+    size_t capacity;
+    coord_cache_entry_t **cache;
+} coord_cache_t;
 
 struct mcview_nroff_struct;
 
@@ -123,7 +127,7 @@ typedef struct mcview_struct {
 
     /* Additional editor state */
     gboolean hexedit_lownibble; /* Are we editing the last significant nibble? */
-    GArray *coord_cache;        /* Cache for mapping offsets to cursor positions */
+    coord_cache_t *coord_cache; /* Cache for mapping offsets to cursor positions */
 
     /* Display information */
     screen_dimen dpy_frame_size;        /* Size of the frame surrounding the real viewer */
@@ -205,19 +209,20 @@ cb_ret_t mcview_dialog_callback (Dlg_head *h, Widget *sender,
 				    dlg_msg_t msg, int parm, void *data);
 
 /* coord_cache.c: */
-gboolean mcview_coord_cache_entry_less (const struct coord_cache_entry *,
-                                        const struct coord_cache_entry *, enum ccache_type,
-                                        gboolean);
+coord_cache_t *coord_cache_new (void);
+void coord_cache_free (coord_cache_t *cache);
+
 #ifdef MC_ENABLE_DEBUGGING_CODE
 void mcview_ccache_dump (mcview_t *view);
 #endif
 
-void mcview_ccache_lookup (mcview_t *view, struct coord_cache_entry *coord,
+void mcview_ccache_lookup (mcview_t *view, coord_cache_entry_t *coord,
 			    enum ccache_type lookup_what);
 
 /* datasource.c: */
 void mcview_set_datasource_none (mcview_t *);
 off_t mcview_get_filesize (mcview_t *);
+void mcview_update_filesize (mcview_t * view);
 char *mcview_get_ptr_file (mcview_t *, off_t);
 char *mcview_get_ptr_string (mcview_t *, off_t);
 int mcview_get_utf (mcview_t *, off_t, int *, gboolean *);
@@ -232,7 +237,8 @@ void mcview_set_datasource_vfs_pipe (mcview_t *, int);
 void mcview_set_datasource_string (mcview_t *, const char *);
 
 /* dialog.c: */
-gboolean mcview_dialog_search (mcview_t *);
+gboolean mcview_dialog_search (mcview_t *view);
+gboolean mcview_dialog_goto (mcview_t *view, off_t *offset);
 
 /* display.c: */
 void mcview_update (mcview_t *view);
@@ -269,6 +275,8 @@ void mcview_done (mcview_t *view);
 void mcview_select_encoding (mcview_t *view);
 void mcview_set_codeset (mcview_t *view);
 void mcview_show_error (mcview_t *view, const char *error);
+off_t mcview_bol (mcview_t *view, off_t current);
+off_t mcview_eol (mcview_t *view, off_t current);
 
 /* move.c */
 void mcview_move_up (mcview_t *, off_t);
