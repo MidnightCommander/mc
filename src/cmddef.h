@@ -63,6 +63,7 @@
 #define CK_Column_Mark		208
 #define CK_Shift_Block_Left	211
 #define CK_Shift_Block_Right	212
+#define CK_Mark_All		213
 
 /* search and replace */
 #define CK_Find			301

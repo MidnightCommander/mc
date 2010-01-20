@@ -40,6 +40,7 @@ EditMark = f3
 EditCopy = f5
 EditMove = f6
 EditRemove = f8
+EditMarkAll =
 EditUnmark =
 EditFind = f7
 
