@@ -2126,7 +2126,8 @@ static void edit_left_char_move_cmd (WEdit * edit)
            = FALSE - move down
 */
 static void
-edit_move_updown (WEdit * edit, unsigned long i, int scroll, gboolean direction) {
+edit_move_updown (WEdit * edit, unsigned long i, int scroll, gboolean direction)
+{
     unsigned long p;
     unsigned long l = (direction)
 			? edit->curs_line
@@ -2157,8 +2158,10 @@ edit_move_updown (WEdit * edit, unsigned long i, int scroll, gboolean direction)
     edit_move_to_prev_col (edit, p);
 
     /* search start of current multibyte char (like CJK) */
-    edit_right_char_move_cmd (edit);
-    edit_left_char_move_cmd (edit);
+    if (edit->curs1 + 1 < edit->last_byte) {
+        edit_right_char_move_cmd (edit);
+        edit_left_char_move_cmd (edit);
+    }
 
     edit->search_start = edit->curs1;
     edit->found_len = 0;
