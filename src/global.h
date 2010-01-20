@@ -90,8 +90,6 @@
 #include "src/logging.h"
 #endif
 
-#include "textconf.h"
-
 extern const char *home_dir;
 
 #ifdef min
