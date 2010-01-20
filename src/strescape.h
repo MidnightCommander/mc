@@ -3,7 +3,7 @@
 
 #include <config.h>
 
-#include "src/global.h"      /* <glib.h> */
+#include "lib/global.h"      /* <glib.h> */
 
 /*** typedefs(not structures) and defined constants **********************************************/
 

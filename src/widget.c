@@ -40,7 +40,7 @@
 #include <fcntl.h>
 #include <sys/types.h>
 
-#include "global.h"
+#include "lib/global.h"
 
 #include "lib/tty/tty.h"
 #include "lib/skin/skin.h"

@@ -48,7 +48,7 @@
 #include <pwd.h>
 #include <grp.h>
 
-#include "global.h"
+#include "lib/global.h"
 #include "execute.h"
 #include "wtools.h"		/* message() */
 

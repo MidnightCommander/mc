@@ -25,7 +25,7 @@
 #include <sys/stat.h>
 #include <sys/time.h>
 
-#include "global.h"
+#include "lib/global.h"
 
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"

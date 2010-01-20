@@ -2,7 +2,7 @@
 #ifndef MC_KEYBIND_H
 #define MC_KEYBIND_H
 
-#include "global.h"
+#include "lib/global.h"
 
 typedef struct name_keymap_t {
     const char *name;

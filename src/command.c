@@ -32,7 +32,7 @@
 #include <errno.h>
 #include <string.h>
 
-#include "global.h"		/* home_dir */
+#include "lib/global.h"		/* home_dir */
 #include "lib/tty/tty.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "widget.h"		/* WInput */

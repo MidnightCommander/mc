@@ -53,7 +53,7 @@
 
 #include <string.h>		/* for g_memmove() */
 
-#include "src/global.h"
+#include "lib/global.h"
 #include "lib/tty/tty.h"
 #include "internal.h"
 

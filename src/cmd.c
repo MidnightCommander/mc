@@ -45,7 +45,7 @@
 #include <grp.h>
 #include <sys/time.h>
 
-#include "global.h"
+#include "lib/global.h"
 
 #include "lib/tty/tty.h"		/* LINES, tty_touch_screen() */
 #include "lib/tty/key.h"		/* ALT() macro */

@@ -30,12 +30,12 @@
 #include "lib/tty/tty.h"
 #include "lib/search/search.h"
 #include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/fs.h"
 
-#include "global.h"
+#include "lib/global.h"
 #include "wtools.h"
 #include "treestore.h"
 #include "strutil.h"
-#include "fs.h"
 #include "util.h"		/* canonicalize_pathname () */
 #include "dir.h"
 

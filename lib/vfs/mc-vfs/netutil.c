@@ -31,7 +31,7 @@
 #include <unistd.h>
 #include <string.h>
 
-#include "src/global.h"
+#include "lib/global.h"
 #include "utilvfs.h"
 #include "netutil.h"
 

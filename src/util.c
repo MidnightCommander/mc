@@ -40,13 +40,13 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include "global.h"
+#include "lib/global.h"
 
 #include "lib/tty/win.h"		/* xterm_flag */
 
 #include "lib/search/search.h"
 
-#include "main.h"		/* mc_home */
+#include "main.h"              /* mc_home */
 #include "cmd.h"		/* guess_message_value */
 #include "mountlist.h"
 #include "timefmt.h"

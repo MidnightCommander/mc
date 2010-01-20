@@ -30,7 +30,7 @@
 #include <errno.h>
 #include <stdarg.h>
 
-#include "global.h"
+#include "lib/global.h"
 #include "strutil.h"
 
 /*names, that are used for utf-8 */

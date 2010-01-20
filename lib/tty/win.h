@@ -6,7 +6,7 @@
 #ifndef MC_WIN_H
 #define MC_WIN_H
 
-#include "src/global.h"   /* <glib.h> */
+#include "lib/global.h"   /* <glib.h> */
 
 extern int xterm_flag;
 

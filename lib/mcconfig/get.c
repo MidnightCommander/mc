@@ -19,7 +19,7 @@
 
 #include <config.h>
 
-#include "src/global.h"
+#include "lib/global.h"
 
 #include "mcconfig.h"
 #include "src/strutil.h"

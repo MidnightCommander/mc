@@ -29,7 +29,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "global.h"
+#include "lib/global.h"
 
 #include "lib/tty/tty.h"
 #include "lib/skin/skin.h"

@@ -2,7 +2,7 @@
 #define MC_EDIT_ETAGS_H 1
 
 #include <sys/types.h>		/* size_t */
-#include "src/global.h"	/* include <glib.h> */
+#include "lib/global.h"	/* include <glib.h> */
 
 #define MAX_WIDTH_DEF_DIALOG 60	/* max width def dialog */
 #define MAX_DEFINITIONS 60	/* count found entries show */

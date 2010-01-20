@@ -46,7 +46,7 @@
 #include <sys/stat.h>
 #include <stdlib.h>
 
-#include "src/global.h"
+#include "lib/global.h"
 
 #include "lib/search/search.h"	/* search engine */
 

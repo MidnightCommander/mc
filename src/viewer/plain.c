@@ -42,7 +42,7 @@
 
 #include "lib/skin/skin.h"
 
-#include "src/global.h"
+#include "lib/global.h"
 #include "src/main.h"
 #include "src/charsets.h"
 #include "src/util.h"	/* is_printable() */

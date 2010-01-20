@@ -84,7 +84,7 @@
 #endif /* !ENABLE_NLS */
 
 #include "fs.h"
-#include "util.h"
+#include "src/util.h"
 
 #ifdef USE_MAINTAINER_MODE
 #include "src/logging.h"

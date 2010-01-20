@@ -39,7 +39,7 @@
 #include <unistd.h>
 #include <pwd.h>		/* for username in xterm title */
 
-#include "global.h"
+#include "lib/global.h"
 
 #include "lib/tty/tty.h"
 #include "lib/skin/skin.h"

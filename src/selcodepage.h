@@ -8,7 +8,7 @@
 
 #ifdef HAVE_CHARSET
 
-#include "global.h"
+#include "lib/global.h"
 
 int select_charset (int center_y, int center_x, int current_charset, gboolean seldisplay);
 gboolean do_select_codepage (void);

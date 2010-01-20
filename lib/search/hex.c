@@ -29,7 +29,7 @@
 
 #include <stdio.h>
 
-#include "src/global.h"
+#include "lib/global.h"
 #include "search.h"
 #include "internal.h"
 #include "src/strutil.h"

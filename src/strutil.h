@@ -1,7 +1,7 @@
 #ifndef MC_STRUTIL_H
 #define MC_STRUTIL_H
 
-#include "global.h"	/* include glib.h */
+#include "lib/global.h"	/* include glib.h */
 
 /* Header file for strutil.c, strutilascii.c, strutil8bit.c, strutilutf8.c.
  * There are two sort of functions:

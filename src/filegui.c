@@ -76,7 +76,7 @@
 
 #include <unistd.h>
 
-#include "global.h"
+#include "lib/global.h"
 
 #include "lib/tty/key.h"		/* tty_get_event */
 #include "lib/search/search.h"

@@ -31,7 +31,7 @@
 
 #include <stdlib.h> /* atoi(), NULL */
 
-#include "src/global.h"
+#include "lib/global.h"
 
 #include "edit-impl.h"
 #include "src/dialog.h"	/* B_CANCEL */

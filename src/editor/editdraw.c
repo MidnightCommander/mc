@@ -38,7 +38,7 @@
 #include <errno.h>
 #include <sys/stat.h>
 
-#include "src/global.h"
+#include "lib/global.h"
 
 #include "edit-impl.h"
 #include "edit-widget.h"

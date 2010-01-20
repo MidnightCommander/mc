@@ -28,8 +28,8 @@
 #include <config.h>
 
 
-#include "src/global.h"
-#include "../lib/filehighlight/fhl.h"
+#include "lib/global.h"
+#include "lib/filehighlight/fhl.h"
 #include "internal.h"
 
 /*** global variables ****************************************************************************/

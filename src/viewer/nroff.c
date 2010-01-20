@@ -37,7 +37,7 @@
 
 #include <config.h>
 
-#include "src/global.h"
+#include "lib/global.h"
 #include "src/main.h"
 #include "src/charsets.h"
 #include "lib/tty/tty.h"

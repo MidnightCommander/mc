@@ -35,7 +35,7 @@
 #include <time.h>
 #include <sys/time.h>		/* gettimeofday() */
 
-#include "src/global.h"
+#include "lib/global.h"
 
 #include "lib/tty/tty.h"	/* enable/disable interrupt key */
 

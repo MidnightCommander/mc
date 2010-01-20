@@ -26,7 +26,7 @@
 
 #include <config.h>
 
-#include "src/global.h"
+#include "lib/global.h"
 
 #include "lib/tty/tty.h"
 #include "lib/skin/skin.h"		/* INPUT_COLOR */

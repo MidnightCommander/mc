@@ -6,7 +6,7 @@
 #ifndef MC_MAIN_H
 #define MC_MAIN_H
 
-#include "global.h"
+#include "lib/global.h"
 #include "keybind.h"
 
 /* Toggling functions */

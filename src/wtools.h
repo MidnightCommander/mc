@@ -6,7 +6,7 @@
 #ifndef MC_WTOOLS_H
 #define MC_WTOOLS_H
 
-#include "global.h"
+#include "lib/global.h"
 #include "dialog.h"
 #include "widget.h"
 

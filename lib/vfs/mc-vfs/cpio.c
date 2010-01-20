@@ -29,7 +29,7 @@
 #include <errno.h>
 #include <fcntl.h>
 
-#include "src/global.h"
+#include "lib/global.h"
 #include "src/wtools.h"	/* message() */
 #include "src/main.h"	/* print_vfs_message */
 #include "src/unixcompat.h"

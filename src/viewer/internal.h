@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <sys/types.h>
 
-#include "src/global.h"
+#include "lib/global.h"
 
 #include "lib/search/search.h"
 

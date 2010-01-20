@@ -6,7 +6,7 @@
 #ifndef MC_KEY_H
 #define MC_KEY_H
 
-#include "src/global.h"   /* <glib.h> */
+#include "lib/global.h"   /* <glib.h> */
 #include "src/dialog.h"   /* cb_ret_t */
 
 #include "tty.h"  /* KEY_F macro */

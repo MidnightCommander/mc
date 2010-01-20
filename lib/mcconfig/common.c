@@ -26,10 +26,9 @@
 #include <errno.h> /* extern int errno */
 
 
-#include "src/global.h"
+#include "lib/global.h"
 
-#include "../../lib/vfs/mc-vfs/vfs.h"      /* mc_stat */
-#include "src/util.h"
+#include "lib/vfs/mc-vfs/vfs.h"      /* mc_stat */
 
 #include "mcconfig.h"
 

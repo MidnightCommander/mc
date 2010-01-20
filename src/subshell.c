@@ -47,7 +47,7 @@
 #  include <stropts.h> /* For I_PUSH */
 #endif /* HAVE_STROPTS_H */
 
-#include "global.h"
+#include "lib/global.h"
 #include "lib/tty/tty.h"	/* LINES */
 #include "panel.h"	/* current_panel */
 #include "wtools.h"	/* query_dialog() */

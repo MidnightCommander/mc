@@ -12,7 +12,7 @@
 #ifndef MC_COLOR_H
 #define MC_COLOR_H
 
-#include "src/global.h"   /* glib.h */
+#include "lib/global.h"   /* glib.h */
 
 #ifdef HAVE_SLANG
 #   include "color-slang.h"

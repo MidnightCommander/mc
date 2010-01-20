@@ -32,7 +32,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 
-#include "global.h"
+#include "lib/global.h"
 #include "logging.h"
 #include "setup.h"
 #include "lib/mcconfig/mcconfig.h"

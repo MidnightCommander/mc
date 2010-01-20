@@ -37,7 +37,7 @@
 
 #include <config.h>
 
-#include "src/global.h"
+#include "lib/global.h"
 #include "src/setup.h"
 #include "src/wtools.h"
 #include "lib/tty/tty.h"

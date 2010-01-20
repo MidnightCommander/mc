@@ -29,7 +29,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "global.h"
+#include "lib/global.h"
 #include "charsets.h"
 #include "strutil.h"		/* utf-8 functions */
 #include "main.h"
