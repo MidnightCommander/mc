@@ -39,7 +39,7 @@
 #include <errno.h>
 #include <fcntl.h>
 
-#include "src/global.h"
+#include "lib/global.h"
 #include "lib/tty/tty.h"
 #include "src/strutil.h"
 #include "src/main.h"

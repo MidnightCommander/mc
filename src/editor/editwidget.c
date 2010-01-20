@@ -39,7 +39,7 @@
 #include <sys/stat.h>
 #include <stdlib.h>
 
-#include "src/global.h"
+#include "lib/global.h"
 
 #include "lib/tty/tty.h"		/* LINES, COLS */
 #include "lib/tty/key.h"		/* is_idle() */

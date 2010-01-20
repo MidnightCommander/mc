@@ -34,7 +34,7 @@
 #include <signal.h>
 #include <stdarg.h>
 
-#include "src/global.h"
+#include "lib/global.h"
 
 #include "tty.h"
 #include "tty-internal.h"

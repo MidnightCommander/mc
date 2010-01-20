@@ -47,7 +47,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include "global.h"
+#include "lib/global.h"
 #include "treestore.h"
 #include "lib/mcconfig/mcconfig.h"
 #include "lib/vfs/mc-vfs/vfs.h"

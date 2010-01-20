@@ -23,3 +23,4 @@ libmcviewer_la_CFLAGS = -I$(top_srcdir) \
 	$(GLIB_CFLAGS) $(PCRE_CFLAGS) \
 	-DDATADIR=\""$(pkgdatadir)/"\" -DLOCALEDIR=\""$(localedir)"\"
 
+libmcviewer_la_LIBADD = ../../lib/libmc.la

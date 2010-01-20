@@ -52,7 +52,7 @@
 #include <pwd.h>
 #include <stdlib.h>
 
-#include "src/global.h"
+#include "lib/global.h"
 
 #include "edit-impl.h"
 #include "editlock.h"

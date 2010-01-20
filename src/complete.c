@@ -36,7 +36,7 @@
 #include <pwd.h>
 #include <unistd.h>
 
-#include "global.h"
+#include "lib/global.h"
 
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"		/* XCTRL and ALT macros */

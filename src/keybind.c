@@ -34,7 +34,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include "global.h"
+#include "lib/global.h"
 
 #include "cmddef.h"		/* CK_ cmd name const */
 #include "lib/tty/win.h"

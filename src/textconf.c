@@ -29,7 +29,7 @@
 
 #include <sys/types.h>
 
-#include "global.h"
+#include "lib/global.h"
 #include "ecs.h"
 #include "src/textconf.h"
 

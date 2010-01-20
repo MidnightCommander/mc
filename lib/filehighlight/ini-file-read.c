@@ -28,12 +28,11 @@
 #include <config.h>
 #include <string.h>
 
-#include "src/global.h"
+#include "lib/global.h"
 #include "src/main.h"
 #include "src/fileloc.h"
 #include "src/strescape.h"
-#include "../lib/skin/skin.h"
-#include "src/util.h"
+#include "lib/skin/skin.h"
 #include "fhl.h"
 #include "internal.h"
 

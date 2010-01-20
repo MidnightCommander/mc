@@ -8,7 +8,7 @@
 
 #include <sys/types.h>          /* size_t */
 
-#include "src/global.h"
+#include "lib/global.h"
 
 #ifdef HAVE_SLANG
 #   include "tty-slang.h"

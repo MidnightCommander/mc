@@ -41,7 +41,7 @@
 
 #include <config.h>
 
-#include "src/global.h"
+#include "lib/global.h"
 
 #include "tty.h"
 #include "mouse.h"        /* required before key.h */

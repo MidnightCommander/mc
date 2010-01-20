@@ -36,7 +36,7 @@
 #include <stdarg.h>
 #include <signal.h>
 
-#include "src/global.h"
+#include "lib/global.h"
 
 #ifndef WANT_TERM_H
 #   define WANT_TERM_H

@@ -6,7 +6,7 @@
 #ifndef MC_UTIL_H
 #define MC_UTIL_H
 
-#include "global.h"		/* include <glib.h> */
+#include "lib/global.h"		/* include <glib.h> */
 
 #include <string.h>
 #include <assert.h>

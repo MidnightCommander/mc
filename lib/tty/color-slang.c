@@ -30,7 +30,7 @@
 #include <string.h>
 #include <sys/types.h>          /* size_t */
 
-#include "src/global.h"
+#include "lib/global.h"
 
 #include "tty-slang.h"
 #include "color.h"        /* variables */

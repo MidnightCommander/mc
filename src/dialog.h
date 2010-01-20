@@ -24,7 +24,6 @@
 #define MC_DIALOG_H
 
 #include "lib/tty/mouse.h"
-#include "util.h" /* Hook */
 
 /* Common return values */
 #define B_EXIT		0

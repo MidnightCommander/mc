@@ -39,7 +39,7 @@
 #include <unistd.h>
 #include <signal.h>
 
-#include "src/global.h"
+#include "lib/global.h"
 
 #include "tty-internal.h" /* slow_tty */
 #include "tty.h"

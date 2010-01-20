@@ -39,7 +39,7 @@
 #include <sys/stat.h>
 #include <stdlib.h>
 
-#include "src/global.h"
+#include "lib/global.h"
 
 #include "lib/tty/tty.h"	/* KEY_F */
 #include "lib/tty/key.h"	/* XCTRL */

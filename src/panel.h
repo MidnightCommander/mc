@@ -8,7 +8,7 @@
 
 #include "dir.h"		/* dir_list */
 #include "dialog.h"		/* Widget */
-#include "fs.h"			/* MC_MAXPATHLEN */
+#include "lib/fs.h"			/* MC_MAXPATHLEN */
 #include "strutil.h"
 
 #define selection(p) (&(p->dir.list[p->selected]))

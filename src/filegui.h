@@ -6,7 +6,7 @@
 #ifndef MC_FILEGUI_H
 #define MC_FILEGUI_H
 
-#include "global.h"
+#include "lib/global.h"
 #include "fileopctx.h"
 
 char *file_mask_dialog (FileOpContext *ctx, FileOperation operation,

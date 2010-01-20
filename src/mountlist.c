@@ -109,7 +109,7 @@
 #include <sys/statvfs.h>
 #endif
 
-#include "global.h"
+#include "lib/global.h"
 #include "mountlist.h"
 #include "util.h"
 

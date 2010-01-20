@@ -24,7 +24,7 @@
 #ifndef MC_MENU_H
 #define MC_MENU_H
 
-#include "global.h"
+#include "lib/global.h"
 #include "widget.h"
 
 extern int menubar_visible;

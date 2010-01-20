@@ -45,7 +45,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 
-#include "src/global.h"
+#include "lib/global.h"
 
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"	/* XCTRL */

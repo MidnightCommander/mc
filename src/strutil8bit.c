@@ -27,9 +27,8 @@
 #include <ctype.h>
 #include <errno.h>
 
-#include "global.h"
+#include "lib/global.h"
 #include "strutil.h"
-#include "fs.h"
 
 /* functions for singlebyte encodings, all characters have width 1
  * using standard system functions

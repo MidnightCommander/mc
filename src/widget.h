@@ -6,7 +6,7 @@
 #ifndef MC_WIDGET_H
 #define MC_WIDGET_H
 
-#include "global.h"
+#include "lib/global.h"
 #include "dialog.h"		/* Widget */
 
 /* Completion stuff */

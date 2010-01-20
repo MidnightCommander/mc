@@ -27,7 +27,7 @@
 #include <ctype.h>
 #include <config.h>
 #include <errno.h>
-#include "global.h"
+#include "lib/global.h"
 #include "strutil.h"
 
 /* using g_ascii function from glib

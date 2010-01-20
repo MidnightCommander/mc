@@ -28,9 +28,9 @@
 #include <config.h>
 #include <stdlib.h>
 
-#include "src/global.h"
+#include "lib/global.h"
 #include "src/args.h"
-#include "../tty/tty.h"
+#include "lib/tty/tty.h"
 #include "skin.h"
 #include "internal.h"
 

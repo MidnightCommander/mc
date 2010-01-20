@@ -32,7 +32,7 @@
 #ifndef MC_EDIT_H
 #define MC_EDIT_H
 
-#include "src/global.h"	/* PATH_SEP_STR */
+#include "lib/global.h"	/* PATH_SEP_STR */
 #include "src/fileloc.h"
 
 /* Editor widget */

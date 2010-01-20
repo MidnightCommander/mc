@@ -24,16 +24,16 @@ AM_CPPFLAGS = -DDATADIR=\""$(pkgdatadir)/"\" \
 endif
 
 noinst_PROGRAMS = man2hlp
-man2hlp_LDADD = $(GLIB_LIBS)
 
 mcmfmt_SOURCES = mfmt.c
 
 cons_saver_SOURCES = cons.saver.c
 
-man2hlp_SOURCES = man2hlp.c glibcompat.c
+man2hlp_SOURCES = man2hlp.c
+man2hlp_LDADD = $(GLIB_LIBS) ../lib/libmc.la
 
 if USE_EDIT
-EDITLIB = editor/libedit.a
+EDITLIB = editor/libedit.la
 endif
 
 SRC_maintainer=logging.c logging.h
@@ -87,9 +87,9 @@ SRC_mc_keybind = \
 	cmddef.h
 
 SRC_mc_utils = \
-	util.c util.h \
 	utilunix.c \
-	unixcompat.h
+	unixcompat.h \
+	util.c util.h
 
 SRC_mc_extended_charset = \
 	ecs.c ecs.h
@@ -122,9 +122,6 @@ mc_SOURCES = \
 	filenot.c \
 	fileopctx.c fileopctx.h \
 	find.c find.h \
-	fs.h \
-	glibcompat.c glibcompat.h \
-	global.h \
 	help.c help.h \
 	history.h \
 	hotlist.c hotlist.h \

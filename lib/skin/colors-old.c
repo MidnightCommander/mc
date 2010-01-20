@@ -28,9 +28,9 @@
 #include <config.h>
 #include <stdlib.h>
 #include <sys/types.h>          /* size_t */
-#include "../tty/color.h"
+#include "lib/tty/color.h"
 
-#include "src/global.h"
+#include "lib/global.h"
 #include "src/setup.h"
 #include "skin.h"
 #include "internal.h"

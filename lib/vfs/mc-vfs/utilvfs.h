@@ -11,7 +11,7 @@
 
 #include <sys/stat.h>
 
-#include "src/global.h"
+#include "lib/global.h"
 
 /** Bit flags for vfs_split_url()
  *

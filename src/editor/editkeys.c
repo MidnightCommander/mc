@@ -39,7 +39,7 @@
 
 #include <stdlib.h>
 
-#include "src/global.h"
+#include "lib/global.h"
 
 #include "edit-impl.h"
 #include "edit-widget.h"	/* edit->macro_i */

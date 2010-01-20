@@ -28,9 +28,9 @@
 #include <config.h>
 #include <string.h>
 
-#include "src/global.h"
+#include "lib/global.h"
 #include "src/args.h"
-#include "../tty/color.h"
+#include "lib/tty/color.h"
 #include "skin.h"
 #include "internal.h"
 

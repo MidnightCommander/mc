@@ -43,7 +43,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-#include "global.h"
+#include "lib/global.h"
 #include "background.h"
 #include "wtools.h"
 #include "layout.h"	/* repaint_screen() */
