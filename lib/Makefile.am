@@ -24,6 +24,10 @@ libmc_la_SOURCES = \
 	global.h \
 	timefmt.h
 
+if USE_MAINTAINER_MODE
+libmc_la_SOURCES += logging.c logging.h
+endif
+
 
 libmc_la_CFLAGS= $(GLIB_CFLAGS) -I$(top_srcdir) $(PCRE_CFLAGS)
 

@@ -39,12 +39,7 @@ if USE_EDIT
 EDITLIB = editor/libedit.la
 endif
 
-SRC_maintainer=logging.c logging.h
 SRC_charset = charsets.c charsets.h selcodepage.c selcodepage.h
-
-if USE_MAINTAINER_MODE
-    SRC_USE_maintainer=$(SRC_maintainer)
-endif
 
 if CHARSET
     SRC_USE_charset=$(SRC_charset)
@@ -87,7 +82,6 @@ SRC_mc_extended_charset = \
 	ecs.c ecs.h
 
 mc_SOURCES = \
-	$(SRC_USE_maintainer) \
 	$(SRC_USE_charset) \
 	$(SRC_mc_widgets) \
 	$(SRC_mc_conssaver) \

@@ -87,7 +87,7 @@
 #include "util.h"
 
 #ifdef USE_MAINTAINER_MODE
-#include "src/logging.h"
+#include "lib/logging.h"
 #endif
 
 extern const char *home_dir;
