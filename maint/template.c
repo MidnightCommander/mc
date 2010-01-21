@@ -37,7 +37,7 @@
 
 #include <System Headers> /* see maint/headers.txt for details */
 
-#include "../src/global.h"
+#include "lib/global.h"
 #include "..."
 
 /*** global variables **************************************************/
