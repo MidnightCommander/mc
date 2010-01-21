@@ -31,8 +31,8 @@
 #include "lib/global.h"
 #include "lib/strutil.h"
 #include "lib/search.h"
+#include "lib/strescape.h"
 
-#include "src/strescape.h"
 #include "src/charsets.h"
 
 #include "internal.h"

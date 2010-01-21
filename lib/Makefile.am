@@ -6,6 +6,7 @@ SUBLIB_includes = \
 	filehighlight.h \
 	mcconfig.h \
 	search.h \
+	strescape.h \
 	strutil.h
 
 SRC_mc_utils = \

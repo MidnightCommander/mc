@@ -55,11 +55,11 @@
 #include "lib/global.h"
 #include "lib/fs.h"
 #include "lib/tty/tty.h"	/* enable/disable interrupt key */
+#include "lib/strescape.h"
 #include "lib/unixcompat.h"
 
 #include "src/wtools.h"	/* message() */
 #include "src/main.h"	/* print_vfs_message */
-#include "src/strescape.h"
 #include "utilvfs.h"
 #include "xdirentry.h"
 #include "vfs.h"

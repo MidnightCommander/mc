@@ -62,6 +62,7 @@
 #include "lib/search.h"
 #include "lib/vfs/mc-vfs/vfs-impl.h"
 #include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/strescape.h"
 #include "lib/strutil.h"
 
 #include "setup.h"
@@ -72,7 +73,6 @@
 #include "widget.h"
 #include "wtools.h"
 #include "background.h"		/* we_are_background */
-#include "src/strescape.h"
 
 /* Needed for current_panel, other_panel and WTree */
 #include "dir.h"
