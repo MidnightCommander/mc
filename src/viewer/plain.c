@@ -45,7 +45,6 @@
 #include "lib/global.h"
 #include "src/main.h"
 #include "src/charsets.h"
-#include "src/util.h"	/* is_printable() */
 #include "mcviewer.h"		/* mcview_show_eof */
 
 #include "internal.h"

@@ -86,11 +86,6 @@ SRC_mc_keybind = \
 	keybind.c keybind.h \
 	cmddef.h
 
-SRC_mc_utils = \
-	utilunix.c \
-	unixcompat.h \
-	util.c util.h
-
 SRC_mc_extended_charset = \
 	ecs.c ecs.h
 
@@ -102,7 +97,6 @@ mc_SOURCES = \
 	$(SRC_mc_conssaver) \
 	$(SRC_mc_options) \
 	$(SRC_mc_keybind) \
-	$(SRC_mc_utils) \
 	$(SRC_mc_extended_charset) \
 	achown.c achown.h \
 	args.c args.h \

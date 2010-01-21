@@ -91,7 +91,6 @@
 #include "panel.h"		/* current_panel */
 #include "fileopctx.h"		/* FILE_CONT */
 #include "filegui.h"
-#include "util.h"		/* strip_password() */
 #include "strutil.h"
 #include "src/strescape.h"
 

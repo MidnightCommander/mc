@@ -34,10 +34,10 @@
 #include <stdlib.h>
 
 #include "lib/global.h"
+#include "lib/unixcompat.h"
 
 #include "src/wtools.h"	/* message() */
 #include "src/main.h"	/* print_vfs_message */
-#include "src/unixcompat.h"
 #include "src/history.h"
 
 #include "vfs.h"
