@@ -30,7 +30,10 @@ mcmfmt_SOURCES = mfmt.c
 cons_saver_SOURCES = cons.saver.c
 
 man2hlp_SOURCES = man2hlp.c
-man2hlp_LDADD = $(GLIB_LIBS) ../lib/libmc.la
+
+man2hlp_LDADD = \
+    ../lib/libmc.la \
+    $(GLIB_LIBS) $(PCRE_LIBS)
 
 if USE_EDIT
 EDITLIB = editor/libedit.la
@@ -51,7 +54,8 @@ mc_LDADD = \
 	../lib/libmc.la \
 	$(EDITLIB) \
 	viewer/libmcviewer.la \
-	$(INTLLIBS) $(MCLIBS) $(SLANGLIB) $(LIBICONV) $(GLIB_LIBS)
+	$(INTLLIBS) $(MCLIBS) $(SLANGLIB) $(LIBICONV) \
+	$(GLIB_LIBS) $(PCRE_LIBS)
 
 if USE_SAMBA_FS
 # this is a hack for linking with own samba library in simple way

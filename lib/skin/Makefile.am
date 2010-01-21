@@ -13,5 +13,3 @@ libmcskin_la_SOURCES = \
 libmcskin_la_CFLAGS = -I$(top_srcdir) \
 	$(GLIB_CFLAGS) $(PCRE_CFLAGS) \
 	-DDATADIR=\""$(pkgdatadir)/"\" -DLOCALEDIR=\""$(localedir)"\"
-
-libmcskin_la_LIBADD = $(PCRE_LIBS)

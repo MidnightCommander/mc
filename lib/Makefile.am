@@ -26,8 +26,7 @@ libmc_la_LIBADD = \
 	search/libsearch.la \
 	strutil/libmcstrutil.la \
 	skin/libmcskin.la \
-	tty/libmctty.la \
-	$(INTLLIBS) $(MCLIBS) $(SLANGLIB) $(LIBICONV) $(GLIB_LIBS)
+	tty/libmctty.la
 
 if ENABLE_VFS
 libmc_la_LIBADD += vfs/mc-vfs/libvfs-mc.la

@@ -10,5 +10,3 @@ libmcfilehighlight_la_SOURCES = \
 libmcfilehighlight_la_CFLAGS = -I$(top_srcdir) \
 	$(GLIB_CFLAGS) $(PCRE_CFLAGS) \
 	-DDATADIR=\""$(pkgdatadir)/"\" -DLOCALEDIR=\""$(localedir)"\" 
-
-libmcfilehighlight_la_LIBADD = $(PCRE_LIBS)
