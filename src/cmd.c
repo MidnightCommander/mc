@@ -65,7 +65,7 @@
 #include "hotlist.h"		/* hotlist_cmd() */
 #include "tree.h"		/* tree_chdir() */
 #include "subshell.h"		/* use_subshell */
-#include "cons.saver.h"		/* console_flag */
+#include "consaver/cons.saver.h"		/* console_flag */
 #include "dialog.h"		/* Widget */
 #include "wtools.h"		/* message() */
 #include "main.h"		/* change_panel() */

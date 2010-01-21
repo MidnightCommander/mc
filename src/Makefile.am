@@ -4,6 +4,17 @@ if USE_EDIT
 SUBDIRS += editor
 endif
 
+
+AM_CPPFLAGS = -DDATADIR=\""$(pkgdatadir)/"\" \
+	-DLOCALEDIR=\""$(localedir)"\" \
+	-DSYSCONFDIR=\""$(sysconfdir)/@PACKAGE@/"\"
+
+
+if CONS_SAVER
+SUBDIRS += consaver
+AM_CPPFLAGS += -DSAVERDIR=\""$(pkglibexecdir)"\"
+endif
+
 AM_CFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir) $(PCRE_CFLAGS)
 
 localedir = $(datadir)/locale
@@ -11,23 +22,9 @@ pkglibexecdir =		$(libexecdir)/@PACKAGE@
 
 bin_PROGRAMS = mc mcmfmt
 
-
-if CONS_SAVER
-pkglibexec_PROGRAMS = cons.saver
-AM_CPPFLAGS = -DDATADIR=\""$(pkgdatadir)/"\" -DLOCALEDIR=\""$(localedir)"\" \
-	-DSAVERDIR=\""$(pkglibexecdir)"\" \
-	-DSYSCONFDIR=\""$(sysconfdir)/@PACKAGE@/"\"
-else
-AM_CPPFLAGS = -DDATADIR=\""$(pkgdatadir)/"\" \
-	-DLOCALEDIR=\""$(localedir)"\" \
-	-DSYSCONFDIR=\""$(sysconfdir)/@PACKAGE@/"\"
-endif
-
 noinst_PROGRAMS = man2hlp
 
 mcmfmt_SOURCES = mfmt.c
-
-cons_saver_SOURCES = cons.saver.c
 
 man2hlp_SOURCES = man2hlp.c
 
@@ -67,7 +64,7 @@ SRC_mc_widgets = \
 	wtools.c wtools.h
 
 SRC_mc_conssaver = \
-	cons.handler.c cons.saver.h
+	cons.handler.c consaver/cons.saver.h
 
 SRC_mc_options = \
 	learn.c learn.h \

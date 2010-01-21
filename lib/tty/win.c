@@ -35,7 +35,7 @@
 #include "lib/global.h"
 #include "tty.h"  /* tty_gotoyx, tty_print_char */
 #include "win.h"
-#include "src/cons.saver.h"       /* console_flag */
+#include "src/consaver/cons.saver.h"       /* console_flag */
 
 /*** global variables **************************************************/
 

@@ -66,7 +66,7 @@
 /* Needed for the extern declarations of integer parameters */
 #include "dir.h"
 #include "panel.h"		/* The Panel widget */
-#include "cons.saver.h"
+#include "consaver/cons.saver.h"
 #include "layout.h"
 #include "info.h"		/* The Info widget */
 #include "src/viewer/mcviewer.h"     /* The view widget */
