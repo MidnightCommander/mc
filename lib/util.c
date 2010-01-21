@@ -47,9 +47,9 @@
 #include "lib/timefmt.h"
 #include "lib/fileloc.h"
 #include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/strutil.h"
 
 #include "src/file.h"		/* copy_file_file() */
-#include "src/strutil.h"
 
 /*In order to use everywhere the same setup 
   for the locale we use defines               */

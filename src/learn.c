@@ -38,15 +38,15 @@
 
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"
+#include "lib/mcconfig/mcconfig.h"	/* Save profile */
+#include "lib/strutil.h"
 
 #include "dialog.h"
 #include "widget.h"
-#include "lib/mcconfig/mcconfig.h"	/* Save profile */
 #include "setup.h"
 #include "layout.h"			/* repaint_screen() */
 #include "learn.h"
 #include "wtools.h"
-#include "strutil.h"
 #include "strescape.h"
 
 #define UX		4

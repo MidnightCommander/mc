@@ -37,10 +37,10 @@
 #include "lib/tty/tty.h"
 #include "lib/skin/skin.h"
 #include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/strutil.h"
 
 #include "dialog.h"
 #include "widget.h"
-#include "strutil.h"
 
 /* Needed for the extern declarations of integer parameters */
 #include "dir.h"

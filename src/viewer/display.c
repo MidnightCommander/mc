@@ -41,7 +41,8 @@
 #include "lib/skin/skin.h"
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"
-#include "src/strutil.h"
+#include "lib/strutil.h"
+
 #include "src/main.h"
 #include "src/dialog.h"		/* Dlg_head */
 #include "src/widget.h"		/* WButtonBar */

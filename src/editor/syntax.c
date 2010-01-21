@@ -47,14 +47,12 @@
 #include <stdlib.h>
 
 #include "lib/global.h"
-
 #include "lib/search/search.h"	/* search engine */
-
 #include "lib/skin/skin.h"
+#include "lib/strutil.h"		/* utf string functions */
 
 #include "src/main.h"		/* mc_home */
 #include "src/wtools.h"		/* message() */
-#include "src/strutil.h"		/* utf string functions */
 
 #include "edit-impl.h"
 #include "edit-widget.h"

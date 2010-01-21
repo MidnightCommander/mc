@@ -31,15 +31,14 @@
 #include <unistd.h>
 
 #include "lib/global.h"
-
 #include "lib/tty/tty.h"
+#include "lib/mcconfig/mcconfig.h"	/* For mc_config_save_file */
+#include "lib/strutil.h"
 
 #include "dialog.h"
 #include "widget.h"
 #include "setup.h"		/* For save_setup() */
 #include "main.h"
-#include "lib/mcconfig/mcconfig.h"	/* For mc_config_save_file */
-#include "strutil.h"
 #include "panel.h"		/* Needed for the externs */
 #include "file.h"		/* safe_delete */
 #include "layout.h"		/* For nice_rotating_dash */

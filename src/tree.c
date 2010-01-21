@@ -47,6 +47,7 @@
 #include "lib/tty/key.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/fileloc.h"
+#include "lib/strutil.h"
 
 #include "wtools.h"	/* message() */
 #include "dir.h"
@@ -64,7 +65,6 @@
 #include "cmddef.h"
 #include "keybind.h"
 #include "history.h"
-#include "strutil.h"
 #include "tree.h"
 
 const global_keymap_t *tree_map;

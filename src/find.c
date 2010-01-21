@@ -39,11 +39,10 @@
 #include "lib/skin/skin.h"
 #include "lib/search/search.h"
 #include "lib/mcconfig/mcconfig.h"
-
 #include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/strutil.h"
 
 #include "setup.h"		/* verbose */
-#include "strutil.h"
 #include "dialog.h"
 #include "widget.h"
 #include "dir.h"

@@ -28,7 +28,7 @@
 #include <config.h>
 #include <errno.h>
 #include "lib/global.h"
-#include "strutil.h"
+#include "lib/strutil.h"
 
 /* using g_ascii function from glib
  * on terminal are showed only ascii characters (lower then 0x80) 

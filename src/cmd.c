@@ -56,6 +56,7 @@
 #include "lib/filehighlight/fhl.h"	/* MC_FHL_INI_FILE */
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/fileloc.h"
+#include "lib/strutil.h"
 
 #include "cmd.h"		/* Our definitions */
 #include "fileopctx.h"
@@ -78,7 +79,6 @@
 #include "setup.h"
 #include "execute.h"		/* toggle_panels() */
 #include "history.h"
-#include "strutil.h"
 #include "dir.h"
 #include "cmddef.h"		/* CK_InputHistoryShow */
 

@@ -35,13 +35,13 @@
 #include "lib/skin/skin.h"
 #include "lib/tty/mouse.h"
 #include "lib/tty/key.h"
+#include "lib/strutil.h"
 
 #include "help.h"	/* interactive_display() */
 #include "dialog.h"
 #include "layout.h"
 #include "execute.h"	/* suspend_cmd() */
 #include "main.h"	/* fast_refresh */
-#include "strutil.h"
 #include "setup.h"	/* mouse_close_dialog */
 
 /* Color styles for normal and error dialogs */

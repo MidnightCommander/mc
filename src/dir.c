@@ -32,10 +32,10 @@
 #include "lib/search/search.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/fs.h"
+#include "lib/strutil.h"
 
 #include "wtools.h"
 #include "treestore.h"
-#include "strutil.h"
 #include "dir.h"
 
 /* If true show files starting with a dot */

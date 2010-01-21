@@ -30,8 +30,9 @@
 
 #include "lib/global.h"
 #include "lib/tty/tty.h"
+#include "lib/strutil.h"
+
 #include "src/args.h"
-#include "src/strutil.h"
 #include "src/textconf.h"
 
 /*** external variables **************************************************************************/

@@ -583,6 +583,7 @@ lib/filehighlight/Makefile
 lib/mcconfig/Makefile
 lib/search/Makefile
 lib/skin/Makefile
+lib/strutil/Makefile
 lib/tty/Makefile
 lib/vfs/Makefile
 lib/vfs/mc-vfs/Makefile

@@ -31,7 +31,7 @@
 #include <string.h>
 
 #include "lib/global.h"
-#include "strutil.h"
+#include "lib/strutil.h"
 
 /* using function for utf-8 from glib */
 
