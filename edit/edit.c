@@ -75,7 +75,7 @@ int option_save_mode = EDIT_QUICK_SAVE;
 int option_save_position = 1;
 int option_max_undo = 32768;
 int option_persistent_selections = 1;
-int option_cursor_beyond_eol = 1;
+int option_cursor_beyond_eol = 0;
 int option_line_state = 0;
 int option_line_state_width = 0;
 
