@@ -72,7 +72,7 @@
 #include "option.h"
 #include "tree.h"
 #include "treestore.h"
-#include "cons.saver.h"
+#include "consaver/cons.saver.h"
 #include "subshell.h"
 #include "setup.h"		/* save_setup() */
 #include "boxes.h"		/* sort_box() */

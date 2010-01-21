@@ -57,7 +57,7 @@
 #include "panel.h"	/* current_panel */
 #include "wtools.h"	/* query_dialog() */
 #include "main.h"	/* do_update_prompt() */
-#include "cons.saver.h"	/* handle_console() */
+#include "consaver/cons.saver.h"	/* handle_console() */
 #include "subshell.h"
 
 #ifndef WEXITSTATUS

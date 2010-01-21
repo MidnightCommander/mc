@@ -40,7 +40,7 @@
 #include "lib/skin.h"		/* tty_set_normal_attrs */
 #include "lib/tty/win.h"
 
-#include "cons.saver.h"
+#include "consaver/cons.saver.h"
 
 signed char console_flag = 0;
 

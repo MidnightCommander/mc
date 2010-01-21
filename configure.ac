@@ -575,6 +575,7 @@ misc/skins/Makefile
 misc/mc.ext
 
 src/Makefile
+src/consaver/Makefile
 src/editor/Makefile
 src/viewer/Makefile
 

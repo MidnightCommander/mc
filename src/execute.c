@@ -32,7 +32,7 @@
 #include "lib/tty/win.h"
 
 #include "main.h"
-#include "cons.saver.h"
+#include "consaver/cons.saver.h"
 #include "subshell.h"
 #include "layout.h"
 #include "dialog.h"

@@ -54,7 +54,7 @@
 
 #include "src/main.h"
 #include "src/layout.h"   /* winch_flag, mc_refresh() */
-#include "src/cons.saver.h"
+#include "src/consaver/cons.saver.h"
 
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT

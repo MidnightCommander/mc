@@ -40,7 +40,7 @@
 #include "ext.h"
 #include "execute.h"
 #include "history.h"
-#include "cons.saver.h"
+#include "consaver/cons.saver.h"
 #include "layout.h"
 #include "lib/search.h"
 #include "src/viewer/mcviewer.h"
