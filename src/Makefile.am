@@ -71,9 +71,6 @@ SRC_mc_widgets = \
 	widget.c widget.h \
 	wtools.c wtools.h
 
-SRC_mc_strutils = \
-	strescape.c strescape.h
-
 SRC_mc_conssaver = \
 	cons.handler.c cons.saver.h
 
@@ -93,7 +90,6 @@ mc_SOURCES = \
 	$(SRC_USE_maintainer) \
 	$(SRC_USE_charset) \
 	$(SRC_mc_widgets) \
-	$(SRC_mc_strutils) \
 	$(SRC_mc_conssaver) \
 	$(SRC_mc_options) \
 	$(SRC_mc_keybind) \

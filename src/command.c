@@ -35,6 +35,8 @@
 #include "lib/global.h"		/* home_dir */
 #include "lib/tty/tty.h"
 #include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/strescape.h"
+
 #include "widget.h"		/* WInput */
 #include "command.h"
 #include "wtools.h"		/* message () */
@@ -46,7 +48,6 @@
 #include "tree.h"		/* for tree_chdir */
 #include "lib/skin.h"		/* DEFAULT_COLOR */
 #include "execute.h"		/* shell_execute */
-#include "src/strescape.h"
 
 /* This holds the command line */
 WInput *cmdline;
