@@ -13,5 +13,3 @@ libsearch_la_SOURCES = \
 libsearch_la_CFLAGS = -I$(top_srcdir) \
 	$(GLIB_CFLAGS) \
 	-DDATADIR=\""$(pkgdatadir)/"\" -DLOCALEDIR=\""$(localedir)"\" $(PCRE_CFLAGS)
-
-libsearch_la_LIBADD = $(PCRE_LIBS)
