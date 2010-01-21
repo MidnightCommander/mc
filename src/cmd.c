@@ -55,6 +55,7 @@
 #include "src/viewer/mcviewer.h"
 #include "lib/filehighlight/fhl.h"	/* MC_FHL_INI_FILE */
 #include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/fileloc.h"
 
 #include "cmd.h"		/* Our definitions */
 #include "fileopctx.h"
@@ -80,7 +81,6 @@
 #include "strutil.h"
 #include "dir.h"
 #include "cmddef.h"		/* CK_InputHistoryShow */
-#include "fileloc.h"
 
 #ifndef MAP_FILE
 #   define MAP_FILE 0
@@ -1025,38 +1025,6 @@ user_file_menu_cmd (void)
     user_menu_cmd (NULL);
 }
 
-/* partly taken from dcigettext.c, returns "" for default locale */
-/* value should be freed by calling function g_free() */
-char *guess_message_value (void)
-{
-    static const char * const var[] = {
-	/* Setting of LC_ALL overwrites all other.  */
-	/* Do not use LANGUAGE for check user locale and drowing hints */
-	"LC_ALL",
-	/* Next comes the name of the desired category.  */
-	"LC_MESSAGES",
-        /* Last possibility is the LANG environment variable.  */
-	"LANG",
-	/* NULL exit loops */
-	NULL
-    };
-
-    unsigned i = 0;
-    const char *locale = NULL;
-
-    while (var[i] != NULL) {
-	locale = getenv (var[i]);
-	if (locale != NULL && locale[0] != '\0')
-	    break;
-	i++;
-    }
-
-    if (locale == NULL)
-	locale = "";
-
-    return g_strdup (locale);
-}
-
 /*
  * Return a random hint.  If force is not 0, ignore the timeout.
  */
@@ -1077,7 +1045,7 @@ get_random_hint (int force)
 	return g_strdup ("");
     last_sec = tv.tv_sec;
 
-    data = load_mc_home_file (MC_HINT, NULL);
+    data = load_mc_home_file (mc_home, mc_home_alt, MC_HINT, NULL);
     if (!data)
 	return 0;
 

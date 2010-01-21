@@ -45,6 +45,7 @@
 #include "lib/tty/tty.h"		/* COLS */
 #include "lib/skin/skin.h"
 #include "lib/tty/key.h"		/* KEY_M_CTRL */
+#include "lib/fileloc.h"
 
 #include "dialog.h"
 #include "widget.h"
@@ -59,7 +60,6 @@
 #include "history.h"
 #include "strutil.h"
 #include "util.h"
-#include "fileloc.h"
 
 #define UX		5
 #define UY		2

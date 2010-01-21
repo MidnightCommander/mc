@@ -30,7 +30,7 @@
 
 #include "lib/global.h"
 #include "src/main.h"
-#include "src/fileloc.h"
+#include "lib/fileloc.h"
 #include "skin.h"
 #include "internal.h"
 

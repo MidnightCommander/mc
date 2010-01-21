@@ -47,6 +47,7 @@
 #include "lib/tty/mouse.h"
 #include "lib/tty/key.h"	/* XCTRL and ALT macros  */
 #include "lib/mcconfig/mcconfig.h"	/* for history loading and saving */
+#include "lib/fileloc.h"
 
 #include "lib/vfs/mc-vfs/vfs.h"
 
@@ -57,7 +58,6 @@
 
 #include "cmddef.h"		/* CK_ cmd name const */
 #include "keybind.h"		/* global_keymap_t */
-#include "fileloc.h"
 #include "panel.h"		/* current_panel */
 
 const global_keymap_t *input_map;

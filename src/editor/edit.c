@@ -51,7 +51,7 @@
 #include "src/cmd.h"		/* view_other_cmd() */
 #include "src/user.h"	/* user_menu_cmd() */
 #include "src/wtools.h"	/* query_dialog() */
-#include "src/timefmt.h"	/* time formatting */
+#include "lib/timefmt.h"	/* time formatting */
 #include "src/strutil.h"	/* utf string functions */
 #include "src/charsets.h"	/* get_codepage_id */
 #include "src/main.h"	/* source_codepage */

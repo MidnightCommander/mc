@@ -97,7 +97,7 @@ char *diff_two_paths (const char *first, const char *second);
 const char *x_basename (const char *fname);
 
 char *load_file (const char *filename);
-char *load_mc_home_file (const char *filename, char ** allocated_filename);
+char *load_mc_home_file (const char *, const char *, const char *filename, char ** allocated_filename);
 
 /* uid/gid managing */
 void init_groups (void);
@@ -294,6 +294,8 @@ static inline char * str_move(char * dest, const char * src)
 gboolean mc_util_make_backup_if_possible (const char *, const char *);
 gboolean mc_util_restore_from_backup_if_possible (const char *, const char *);
 gboolean mc_util_unlink_backup_if_possible (const char *, const char *);
+
+char *guess_message_value (void);
 
 #define MC_PTR_FREE(ptr) do { g_free(ptr); (ptr) = NULL; } while (0)
 

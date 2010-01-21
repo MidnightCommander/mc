@@ -65,6 +65,7 @@
 #include "cmddef.h"
 #include "keybind.h"
 #include "help.h"
+#include "main.h"
 
 const global_keymap_t *help_map;
 
@@ -894,7 +895,7 @@ interactive_display (const char *filename, const char *node)
     if (filename != NULL)
 	filedata = load_file (filename);
     else
-	filedata = load_mc_home_file ("mc.hlp", &hlpfile);
+	filedata = load_mc_home_file (mc_home, mc_home_alt, "mc.hlp", &hlpfile);
 
     if (filedata == NULL)
 	message (D_ERROR, MSG_ERROR, _(" Cannot open file %s \n %s "), filename ? filename : hlpfile,
