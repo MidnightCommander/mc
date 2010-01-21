@@ -59,7 +59,6 @@
 #include "command.h"		/* cmdline */
 #include "history.h"
 #include "strutil.h"
-#include "util.h"
 
 #define UX		5
 #define UY		2

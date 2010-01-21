@@ -30,9 +30,10 @@
 #include <fcntl.h>
 
 #include "lib/global.h"
+#include "lib/unixcompat.h"
+
 #include "src/wtools.h"	/* message() */
 #include "src/main.h"	/* print_vfs_message */
-#include "src/unixcompat.h"
 #include "vfs.h"
 
 #include "utilvfs.h"

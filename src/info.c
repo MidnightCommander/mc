@@ -30,6 +30,7 @@
 #include "lib/tty/key.h"		/* is_idle() */
 #include "lib/tty/mouse.h"		/* Gpm_Event */
 #include "lib/skin/skin.h"
+#include "lib/unixcompat.h"
 
 #include "dialog.h"
 #include "widget.h"		/* default_proc*/
@@ -38,10 +39,8 @@
 #include "panel.h"		/* for the panel structure */
 #include "main.h"		/* other_panel, current_panel definitions */
 #include "menu.h"		/* menubar_visible */
-#include "util.h"		/* size_trunc_len */
 #include "layout.h"
 #include "mountlist.h"
-#include "unixcompat.h"
 #include "strutil.h"
 #include "info.h"
 

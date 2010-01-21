@@ -49,8 +49,8 @@
 #include <grp.h>
 
 #include "lib/global.h"
-#include "execute.h"
-#include "wtools.h"		/* message() */
+#include "src/execute.h"
+#include "src/wtools.h"		/* message() */
 
 struct sigaction startup_handler;
 

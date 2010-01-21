@@ -111,7 +111,6 @@
 
 #include "lib/global.h"
 #include "mountlist.h"
-#include "util.h"
 
 #ifdef DOLPHIN
 /* So special that it's not worth putting this in autoconf.  */

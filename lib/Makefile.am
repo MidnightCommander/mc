@@ -2,7 +2,15 @@ SUBDIRS = filehighlight mcconfig search skin tty vfs
 
 noinst_LTLIBRARIES = libmc.la
 
+
+SRC_mc_utils = \
+	utilunix.c \
+	unixcompat.h \
+	util.c util.h
+
+
 libmc_la_SOURCES = \
+	$(SRC_mc_utils) \
 	fileloc.h \
 	fs.h \
 	glibcompat.c glibcompat.h \

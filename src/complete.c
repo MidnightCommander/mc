@@ -46,7 +46,6 @@
 #include "widget.h"
 #include "wtools.h"
 #include "main.h"		/* show_all_if_ambiguous */
-#include "util.h"
 #include "src/strescape.h"
 #include "strutil.h"
 

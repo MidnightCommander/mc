@@ -39,7 +39,6 @@
 
 #include "lib/vfs/mc-vfs/vfs.h"
 
-#include "util.h"
 
 
 static char *
