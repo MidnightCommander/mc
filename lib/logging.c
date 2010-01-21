@@ -34,9 +34,10 @@
 
 #include "lib/global.h"
 #include "logging.h"
-#include "setup.h"
 #include "lib/mcconfig.h"
 #include "lib/fileloc.h"
+
+#include "src/setup.h"
 
 /*** file scope functions **********************************************/
 
