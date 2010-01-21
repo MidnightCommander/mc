@@ -3,9 +3,11 @@ SUBDIRS = filehighlight mcconfig search skin tty vfs
 noinst_LTLIBRARIES = libmc.la
 
 libmc_la_SOURCES = \
+	fileloc.h \
 	fs.h \
 	glibcompat.c glibcompat.h \
-	global.h
+	global.h \
+	timefmt.h
 
 
 libmc_la_CFLAGS= $(GLIB_CFLAGS) -I$(top_srcdir) $(PCRE_CFLAGS)

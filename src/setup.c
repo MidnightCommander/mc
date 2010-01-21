@@ -34,13 +34,14 @@
 #include "lib/tty/key.h"
 #include "lib/tty/mouse.h"		/* To make view.h happy */
 #include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/mcconfig/mcconfig.h"
+#include "lib/fileloc.h"
 
 #include "args.h"
 #include "dir.h"
 #include "panel.h"
 #include "main.h"
 #include "tree.h"		/* xtree_mode */
-#include "lib/mcconfig/mcconfig.h"
 #include "setup.h"
 #include "src/viewer/mcviewer.h" /* For the externs */
 #include "hotlist.h"		/* load/save/done hotlist */
@@ -50,7 +51,6 @@
 #include "cmd.h"
 #include "file.h"		/* safe_delete */
 #include "keybind.h"		/* lookup_action */
-#include "fileloc.h"
 #include "wtools.h"
 
 #ifdef ENABLE_VFS

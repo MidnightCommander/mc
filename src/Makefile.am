@@ -118,7 +118,6 @@ mc_SOURCES = \
 	ext.c ext.h \
 	file.c file.h \
 	filegui.c filegui.h \
-	fileloc.h \
 	filenot.c \
 	fileopctx.c fileopctx.h \
 	find.c find.h \
@@ -134,7 +133,6 @@ mc_SOURCES = \
 	panelize.c panelize.h \
 	subshell.c subshell.h \
 	textconf.c textconf.h \
-	timefmt.h \
 	treestore.c treestore.h \
 	user.c user.h
 

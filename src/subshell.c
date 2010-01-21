@@ -56,7 +56,6 @@
 #include "lib/tty/key.h"	/* XCTRL */
 #include "subshell.h"
 #include "strutil.h"
-#include "fileloc.h"
 
 #include "lib/vfs/mc-vfs/vfs.h"
 

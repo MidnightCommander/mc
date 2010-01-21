@@ -33,7 +33,7 @@
 #define MC_EDIT_H
 
 #include "lib/global.h"	/* PATH_SEP_STR */
-#include "src/fileloc.h"
+#include "lib/fileloc.h"
 
 /* Editor widget */
 struct WEdit;

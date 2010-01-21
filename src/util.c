@@ -41,27 +41,17 @@
 #include <unistd.h>
 
 #include "lib/global.h"
-
 #include "lib/tty/win.h"		/* xterm_flag */
-
 #include "lib/search/search.h"
-
-#include "main.h"              /* mc_home */
-#include "cmd.h"		/* guess_message_value */
-#include "mountlist.h"
-#include "timefmt.h"
-#include "strutil.h"
 #include "lib/mcconfig/mcconfig.h"
-#include "fileopctx.h"
-#include "file.h"		/* copy_file_file() */
-#include "dir.h"
-#include "fileloc.h"
+#include "lib/timefmt.h"
+
+#include "strutil.h"
+
+#include "src/file.h"		/* copy_file_file() */
+#include "lib/fileloc.h"
 
 #include "lib/vfs/mc-vfs/vfs.h"
-
-#ifdef HAVE_CHARSET
-#include "charsets.h"
-#endif
 
 /*In order to use everywhere the same setup 
   for the locale we use defines               */
@@ -70,6 +60,15 @@
 
 
 int easy_patterns = 1;
+
+/*
+ * If true, SI units (1000 based) will be used for
+ * larger units (kilobyte, megabyte, ...).
+ * If false binary units (1024 based) will be used.
+ */
+int kilobyte_si = 0;
+
+
 
 extern void str_replace(char *s, char from, char to)
 {
@@ -590,13 +589,13 @@ load_file (const char *filename)
 }
 
 char *
-load_mc_home_file (const char *filename, char **allocated_filename)
+load_mc_home_file (const char *_mc_home, const char *_mc_home_alt, const char *filename, char **allocated_filename)
 {
     char *hintfile_base, *hintfile;
     char *lang;
     char *data;
 
-    hintfile_base = concat_dir_and_file (mc_home, filename);
+    hintfile_base = concat_dir_and_file (_mc_home, filename);
     lang = guess_message_value ();
 
     hintfile = g_strconcat (hintfile_base, ".", lang, (char *) NULL);
@@ -605,7 +604,7 @@ load_mc_home_file (const char *filename, char **allocated_filename)
     if (!data) {
 	g_free (hintfile);
 	g_free (hintfile_base);
-	hintfile_base = concat_dir_and_file (mc_home_alt, filename);
+	hintfile_base = concat_dir_and_file (_mc_home_alt, filename);
 
 	hintfile = g_strconcat (hintfile_base, ".", lang, (char *) NULL);
 	data = load_file (hintfile);
@@ -1572,4 +1571,36 @@ mc_util_unlink_backup_if_possible (const char *file_name, const char *backup_suf
 
     g_free(backup_path);
     return TRUE;
+}
+
+/* partly taken from dcigettext.c, returns "" for default locale */
+/* value should be freed by calling function g_free() */
+char *guess_message_value (void)
+{
+    static const char * const var[] = {
+	/* Setting of LC_ALL overwrites all other.  */
+	/* Do not use LANGUAGE for check user locale and drowing hints */
+	"LC_ALL",
+	/* Next comes the name of the desired category.  */
+	"LC_MESSAGES",
+        /* Last possibility is the LANG environment variable.  */
+	"LANG",
+	/* NULL exit loops */
+	NULL
+    };
+
+    unsigned i = 0;
+    const char *locale = NULL;
+
+    while (var[i] != NULL) {
+	locale = getenv (var[i]);
+	if (locale != NULL && locale[0] != '\0')
+	    break;
+	i++;
+    }
+
+    if (locale == NULL)
+	locale = "";
+
+    return g_strdup (locale);
 }
