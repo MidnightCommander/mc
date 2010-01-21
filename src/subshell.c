@@ -52,6 +52,7 @@
 #include "lib/tty/key.h"	/* XCTRL */
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/strutil.h"
+#include "lib/fileloc.h"
 
 #include "panel.h"	/* current_panel */
 #include "wtools.h"	/* query_dialog() */
