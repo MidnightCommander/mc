@@ -32,10 +32,10 @@
 
 #include "lib/global.h"
 #include "lib/strutil.h"
+#include "lib/search.h"
 
 #include "src/charsets.h"
 
-#include "search.h"
 #include "internal.h"
 
 /*** global variables ****************************************************************************/

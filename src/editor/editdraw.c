@@ -40,7 +40,7 @@
 
 #include "lib/global.h"
 #include "lib/tty/tty.h"		/* tty_printf() */
-#include "lib/skin/skin.h"
+#include "lib/skin.h"
 #include "lib/tty/key.h"		/* is_idle() */
 #include "lib/strutil.h"		/* utf string functions */
 

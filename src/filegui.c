@@ -79,7 +79,7 @@
 #include "lib/global.h"
 
 #include "lib/tty/key.h"		/* tty_get_event */
-#include "lib/search/search.h"
+#include "lib/search.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/strutil.h"
 

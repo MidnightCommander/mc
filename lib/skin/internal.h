@@ -2,8 +2,7 @@
 #define MC__SKIN_INTERNAL_H
 
 #include "lib/global.h"
-
-#include "skin.h"
+#include "lib/skin.h"
 
 /*** typedefs(not structures) and defined constants **********************************************/
 

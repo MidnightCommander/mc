@@ -40,7 +40,7 @@
 
 #include "lib/tty/tty.h"
 
-#include "lib/skin/skin.h"
+#include "lib/skin.h"
 
 #include "lib/global.h"
 #include "src/main.h"

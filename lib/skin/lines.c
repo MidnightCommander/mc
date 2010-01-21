@@ -28,11 +28,11 @@
 #include <config.h>
 #include <stdlib.h>
 
-#include "lib/global.h"
-#include "src/args.h"
-#include "lib/tty/tty.h"
-#include "skin.h"
 #include "internal.h"
+#include "lib/tty/tty.h"
+
+#include "src/args.h"
+
 
 
 /*** global variables ****************************************************************************/

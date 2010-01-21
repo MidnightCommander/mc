@@ -3,7 +3,7 @@
 
 #include "lib/global.h"
 
-#include "lib/mcconfig/mcconfig.h"
+#include "lib/mcconfig.h"
 
 #include "lib/tty/color.h"
 

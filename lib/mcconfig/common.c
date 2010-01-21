@@ -25,12 +25,9 @@
 #include <fcntl.h>
 #include <errno.h> /* extern int errno */
 
-
 #include "lib/global.h"
-
 #include "lib/vfs/mc-vfs/vfs.h"      /* mc_stat */
-
-#include "mcconfig.h"
+#include "lib/mcconfig.h"
 
 /*** global variables **************************************************/
 

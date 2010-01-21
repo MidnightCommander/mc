@@ -32,8 +32,8 @@
 #include "src/main.h"
 #include "lib/fileloc.h"
 #include "src/strescape.h"
-#include "lib/skin/skin.h"
-#include "fhl.h"
+#include "lib/skin.h"
+#include "lib/filehighlight.h"
 #include "internal.h"
 
 /*** global variables ****************************************************************************/

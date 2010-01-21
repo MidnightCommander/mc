@@ -26,9 +26,7 @@
  */
 
 #include <config.h>
-#include "lib/global.h"
 
-#include "skin.h"
 #include "internal.h"
 
 

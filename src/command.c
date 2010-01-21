@@ -44,7 +44,7 @@
 #include "user.h"		/* expand_format */
 #include "subshell.h"		/* SUBSHELL_EXIT */
 #include "tree.h"		/* for tree_chdir */
-#include "lib/skin/skin.h"		/* DEFAULT_COLOR */
+#include "lib/skin.h"		/* DEFAULT_COLOR */
 #include "execute.h"		/* shell_execute */
 #include "src/strescape.h"
 

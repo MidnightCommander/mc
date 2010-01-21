@@ -21,8 +21,7 @@
 
 #include "lib/global.h"
 #include "lib/strutil.h"
-
-#include "mcconfig.h"
+#include "lib/mcconfig.h"
 
 /*** global variables **************************************************/
 

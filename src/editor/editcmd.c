@@ -48,8 +48,8 @@
 #include "lib/global.h"
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"	/* XCTRL */
-#include "lib/mcconfig/mcconfig.h"
-#include "lib/skin/skin.h"
+#include "lib/mcconfig.h"
+#include "lib/skin.h"
 #include "lib/strutil.h"	/* utf string functions */
 
 #include "src/history.h"

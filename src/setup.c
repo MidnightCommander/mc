@@ -34,7 +34,7 @@
 #include "lib/tty/key.h"
 #include "lib/tty/mouse.h"		/* To make view.h happy */
 #include "lib/vfs/mc-vfs/vfs.h"
-#include "lib/mcconfig/mcconfig.h"
+#include "lib/mcconfig.h"
 #include "lib/fileloc.h"
 
 #ifdef ENABLE_VFS

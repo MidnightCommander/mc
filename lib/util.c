@@ -42,8 +42,8 @@
 
 #include "lib/global.h"
 #include "lib/tty/win.h"		/* xterm_flag */
-#include "lib/search/search.h"
-#include "lib/mcconfig/mcconfig.h"
+#include "lib/search.h"
+#include "lib/mcconfig.h"
 #include "lib/timefmt.h"
 #include "lib/fileloc.h"
 #include "lib/vfs/mc-vfs/vfs.h"

@@ -7,7 +7,7 @@
 #define MC_EDIT_WIDGET_H
 
 #include "src/dialog.h"		/* Widget */
-#include "lib/search/search.h"		/* mc_search_t */
+#include "lib/search.h"		/* mc_search_t */
 
 #include "edit-impl.h"
 #include "src/keybind.h"

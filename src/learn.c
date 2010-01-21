@@ -38,7 +38,7 @@
 
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"
-#include "lib/mcconfig/mcconfig.h"	/* Save profile */
+#include "lib/mcconfig.h"	/* Save profile */
 #include "lib/strutil.h"
 
 #include "dialog.h"

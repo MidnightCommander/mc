@@ -35,9 +35,9 @@
 
 #include "lib/global.h"
 
-#include "lib/skin/skin.h"
+#include "lib/skin.h"
 #include "lib/vfs/mc-vfs/vfs.h"
-#include "lib/mcconfig/mcconfig.h"	/* Load/save directories panelize */
+#include "lib/mcconfig.h"	/* Load/save directories panelize */
 #include "lib/strutil.h"
 
 #include "dialog.h"

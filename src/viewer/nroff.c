@@ -41,7 +41,7 @@
 #include "src/main.h"
 #include "src/charsets.h"
 #include "lib/tty/tty.h"
-#include "lib/skin/skin.h"
+#include "lib/skin.h"
 #include "internal.h"
 
 

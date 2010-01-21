@@ -41,7 +41,7 @@
 #include <sys/types.h>
 
 #include "lib/global.h"
-#include "lib/search/search.h"
+#include "lib/search.h"
 #include "lib/strutil.h"
 
 #include "src/wtools.h"

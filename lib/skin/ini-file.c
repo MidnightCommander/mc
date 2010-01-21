@@ -28,11 +28,11 @@
 #include <config.h>
 #include <string.h>
 
-#include "lib/global.h"
-#include "src/main.h"
-#include "lib/fileloc.h"
-#include "skin.h"
 #include "internal.h"
+#include "lib/fileloc.h"
+
+#include "src/main.h"
+
 
 /*** global variables ****************************************************************************/
 

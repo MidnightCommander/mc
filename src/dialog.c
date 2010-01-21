@@ -32,7 +32,7 @@
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"
-#include "lib/skin/skin.h"
+#include "lib/skin.h"
 #include "lib/tty/mouse.h"
 #include "lib/tty/key.h"
 #include "lib/strutil.h"

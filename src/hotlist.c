@@ -43,9 +43,9 @@
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"		/* COLS */
-#include "lib/skin/skin.h"
+#include "lib/skin.h"
 #include "lib/tty/key.h"		/* KEY_M_CTRL */
-#include "lib/mcconfig/mcconfig.h"	/* Load/save directories hotlist */
+#include "lib/mcconfig.h"	/* Load/save directories hotlist */
 #include "lib/fileloc.h"
 #include "lib/strutil.h"
 

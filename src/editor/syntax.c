@@ -47,8 +47,8 @@
 #include <stdlib.h>
 
 #include "lib/global.h"
-#include "lib/search/search.h"	/* search engine */
-#include "lib/skin/skin.h"
+#include "lib/search.h"	/* search engine */
+#include "lib/skin.h"
 #include "lib/strutil.h"		/* utf string functions */
 
 #include "src/main.h"		/* mc_home */
