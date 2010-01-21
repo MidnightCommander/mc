@@ -30,10 +30,9 @@
 #include <sys/types.h>          /* size_t */
 #include "lib/tty/color.h"
 
-#include "lib/global.h"
-#include "src/setup.h"
-#include "skin.h"
 #include "internal.h"
+
+#include "src/setup.h"
 
 
 /*** global variables ****************************************************************************/

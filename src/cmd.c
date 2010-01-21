@@ -50,10 +50,10 @@
 #include "lib/tty/tty.h"		/* LINES, tty_touch_screen() */
 #include "lib/tty/key.h"		/* ALT() macro */
 #include "lib/tty/win.h"		/* do_enter_ca_mode() */
-#include "lib/mcconfig/mcconfig.h"
-#include "lib/search/search.h"
+#include "lib/mcconfig.h"
+#include "lib/search.h"
 #include "src/viewer/mcviewer.h"
-#include "lib/filehighlight/fhl.h"	/* MC_FHL_INI_FILE */
+#include "lib/filehighlight.h"	/* MC_FHL_INI_FILE */
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/fileloc.h"
 #include "lib/strutil.h"

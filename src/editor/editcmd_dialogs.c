@@ -28,9 +28,9 @@
 
 #include "lib/global.h"
 #include "lib/tty/tty.h"
-#include "lib/skin/skin.h"		/* INPUT_COLOR */
+#include "lib/skin.h"		/* INPUT_COLOR */
 #include "lib/tty/key.h"
-#include "lib/search/search.h"
+#include "lib/search.h"
 #include "lib/strutil.h"
 
 #include "src/dialog.h"

@@ -34,11 +34,11 @@
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"
-#include "lib/skin/skin.h"
+#include "lib/skin.h"
 #include "lib/tty/mouse.h"		/* For Gpm_Event */
 #include "lib/tty/key.h"		/* XCTRL and ALT macros  */
-#include "lib/filehighlight/fhl.h"
-#include "lib/mcconfig/mcconfig.h"
+#include "lib/filehighlight.h"
+#include "lib/mcconfig.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/unixcompat.h"
 

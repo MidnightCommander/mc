@@ -30,8 +30,8 @@
 
 
 #include "lib/global.h"
-#include "lib/skin/skin.h"
-#include "lib/filehighlight/fhl.h"
+#include "lib/skin.h"
+#include "lib/filehighlight.h"
 #include "internal.h"
 
 /*** global variables ****************************************************************************/

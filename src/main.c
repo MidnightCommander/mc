@@ -42,13 +42,13 @@
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"
-#include "lib/skin/skin.h"
+#include "lib/skin.h"
 #include "lib/tty/mouse.h"
 #include "lib/tty/key.h"		/* For init_key() */
 #include "lib/tty/win.h"		/* xterm_flag */
 
-#include "lib/mcconfig/mcconfig.h"
-#include "lib/filehighlight/fhl.h"
+#include "lib/mcconfig.h"
+#include "lib/filehighlight.h"
 #include "lib/fileloc.h"		/* MC_USERCONF_DIR */
 
 #include "lib/vfs/mc-vfs/vfs.h"		/* vfs_translate_url() */

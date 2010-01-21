@@ -48,7 +48,7 @@
 #include <unistd.h>
 
 #include "lib/global.h"
-#include "lib/mcconfig/mcconfig.h"
+#include "lib/mcconfig.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/fileloc.h"
 

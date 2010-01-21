@@ -43,10 +43,10 @@
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"
-#include "lib/skin/skin.h"
+#include "lib/skin.h"
 #include "lib/tty/mouse.h"
 #include "lib/tty/key.h"	/* XCTRL and ALT macros  */
-#include "lib/mcconfig/mcconfig.h"	/* for history loading and saving */
+#include "lib/mcconfig.h"	/* for history loading and saving */
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/fileloc.h"
 #include "lib/strutil.h"

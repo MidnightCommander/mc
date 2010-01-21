@@ -2,6 +2,11 @@ SUBDIRS = filehighlight mcconfig search skin tty vfs strutil
 
 noinst_LTLIBRARIES = libmc.la
 
+SUBLIB_includes = \
+	filehighlight.h \
+	mcconfig.h \
+	search.h \
+	strutil.h
 
 SRC_mc_utils = \
 	utilunix.c \
@@ -10,6 +15,7 @@ SRC_mc_utils = \
 
 
 libmc_la_SOURCES = \
+	$(SUBLIB_includes) \
 	$(SRC_mc_utils) \
 	fileloc.h \
 	fs.h \

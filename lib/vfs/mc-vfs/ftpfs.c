@@ -91,7 +91,7 @@ What to do with this?
 #include "src/main.h"	/* print_vfs_message */
 #include "src/history.h"
 #include "src/setup.h"	/* for load_anon_passwd */
-#include "lib/mcconfig/mcconfig.h"
+#include "lib/mcconfig.h"
 
 #include "utilvfs.h"
 #include "xdirentry.h"

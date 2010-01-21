@@ -37,9 +37,9 @@
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"
-#include "lib/skin/skin.h"		/* INPUT_COLOR */
+#include "lib/skin.h"		/* INPUT_COLOR */
 #include "lib/tty/key.h"		/* XCTRL and ALT macros  */
-#include "lib/mcconfig/mcconfig.h"	/* Load/save user formats */
+#include "lib/mcconfig.h"	/* Load/save user formats */
 #include "lib/strutil.h"
 
 #ifdef USE_NETCODE

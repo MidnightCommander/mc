@@ -59,7 +59,7 @@
 #include "lib/global.h"
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"
-#include "lib/search/search.h"
+#include "lib/search.h"
 #include "lib/vfs/mc-vfs/vfs-impl.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/strutil.h"

@@ -32,7 +32,7 @@
 
 #include "lib/global.h"
 #include "lib/tty/tty.h"
-#include "lib/mcconfig/mcconfig.h"	/* For mc_config_save_file */
+#include "lib/mcconfig.h"	/* For mc_config_save_file */
 #include "lib/strutil.h"
 
 #include "dialog.h"

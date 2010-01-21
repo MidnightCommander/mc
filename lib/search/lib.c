@@ -32,8 +32,8 @@
 
 #include "lib/global.h"
 #include "lib/strutil.h"
+#include "lib/search.h"
 
-#include "search.h"
 #include "internal.h"
 #include "src/charsets.h"
 

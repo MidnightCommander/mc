@@ -7,7 +7,6 @@ libmcskin_la_SOURCES = \
 	hc-skins.c \
 	ini-file.c \
 	lines.c \
-	skin.h \
 	internal.h
 
 libmcskin_la_CFLAGS = -I$(top_srcdir) \

@@ -42,7 +42,7 @@
 #include "history.h"
 #include "cons.saver.h"
 #include "layout.h"
-#include "lib/search/search.h"
+#include "lib/search.h"
 #include "src/viewer/mcviewer.h"
 
 #include "lib/vfs/mc-vfs/vfs.h"

@@ -42,7 +42,7 @@
 
 #include "lib/global.h"
 #include "lib/tty/tty.h"
-#include "lib/skin/skin.h"
+#include "lib/skin.h"
 #include "src/main.h"
 #include "src/wtools.h"
 #include "src/charsets.h"

@@ -28,11 +28,10 @@
 #include <config.h>
 #include <string.h>
 
-#include "lib/global.h"
-#include "src/args.h"
-#include "lib/tty/color.h"
-#include "skin.h"
 #include "internal.h"
+#include "lib/tty/color.h"
+
+#include "src/args.h"
 
 /*** global variables ****************************************************************************/
 
