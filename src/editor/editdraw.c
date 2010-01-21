@@ -39,19 +39,19 @@
 #include <sys/stat.h>
 
 #include "lib/global.h"
+#include "lib/tty/tty.h"		/* tty_printf() */
+#include "lib/skin/skin.h"
+#include "lib/tty/key.h"		/* is_idle() */
+#include "lib/strutil.h"		/* utf string functions */
 
 #include "edit-impl.h"
 #include "edit-widget.h"
 
 #define MAX_LINE_LEN 1024
 
-#include "lib/tty/tty.h"		/* tty_printf() */
-#include "lib/skin/skin.h"
-#include "lib/tty/key.h"		/* is_idle() */
 
 #include "src/widget.h"		/* buttonbar_redraw() */
 #include "src/charsets.h"
-#include "src/strutil.h"		/* utf string functions */
 #include "src/main.h"		/* source_codepage */
 
 /* Text styles */

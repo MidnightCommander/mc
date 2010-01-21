@@ -30,11 +30,13 @@
 #include <stdio.h>
 
 #include "lib/global.h"
-#include "search.h"
-#include "internal.h"
-#include "src/strutil.h"
+#include "lib/strutil.h"
+
 #include "src/strescape.h"
 #include "src/charsets.h"
+
+#include "search.h"
+#include "internal.h"
 
 /*** global variables ****************************************************************************/
 

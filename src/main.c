@@ -61,6 +61,8 @@
 #include "lib/vfs/mc-vfs/gc.h"
 #endif
 
+#include "lib/strutil.h"
+
 #include "src/args.h"
 
 #include "dir.h"
@@ -82,7 +84,6 @@
 #include "listmode.h"
 #include "execute.h"
 #include "ext.h"		/* For flush_extension_file() */
-#include "strutil.h"
 #include "widget.h"
 #include "command.h"
 #include "wtools.h"

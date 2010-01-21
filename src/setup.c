@@ -37,6 +37,16 @@
 #include "lib/mcconfig/mcconfig.h"
 #include "lib/fileloc.h"
 
+#ifdef ENABLE_VFS
+#include "lib/vfs/mc-vfs/gc.h"
+#endif
+
+#ifdef USE_NETCODE
+#   include "lib/vfs/mc-vfs/ftpfs.h"
+#   include "lib/vfs/mc-vfs/fish.h"
+#endif
+#include "lib/strutil.h"	/* str_isutf8 () */
+
 #include "args.h"
 #include "dir.h"
 #include "panel.h"
@@ -53,24 +63,14 @@
 #include "keybind.h"		/* lookup_action */
 #include "wtools.h"
 
-#ifdef ENABLE_VFS
-#include "lib/vfs/mc-vfs/gc.h"
-#endif
-
 #ifdef HAVE_CHARSET
 #include "charsets.h"
-#endif
-
-#ifdef USE_NETCODE
-#   include "lib/vfs/mc-vfs/ftpfs.h"
-#   include "lib/vfs/mc-vfs/fish.h"
 #endif
 
 #ifdef USE_INTERNAL_EDIT
 #   include "src/editor/edit.h"
 #endif
 
-#include "src/strutil.h"	/* str_isutf8 () */
 
 
 extern char *find_ignore_dirs;

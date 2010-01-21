@@ -51,10 +51,10 @@
 #include <dirent.h>
 
 #include "lib/global.h"
+#include "lib/strutil.h"
 
 #include "src/wtools.h"	/* message() */
 #include "src/main.h"	/* print_vfs_message */
-#include "src/strutil.h"
 
 #include "utilvfs.h"
 #include "gc.h"

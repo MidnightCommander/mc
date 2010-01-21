@@ -46,13 +46,11 @@
 #include <fcntl.h>
 
 #include "lib/global.h"
-
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"	/* XCTRL */
-
 #include "lib/mcconfig/mcconfig.h"
-
 #include "lib/skin/skin.h"
+#include "lib/strutil.h"	/* utf string functions */
 
 #include "src/history.h"
 #include "src/widget.h"	/* listbox_new() */
@@ -62,7 +60,6 @@
 #include "src/wtools.h"	/* message() */
 #include "src/charsets.h"
 #include "src/selcodepage.h"
-#include "src/strutil.h"	/* utf string functions */
 #include "src/cmddef.h"
 
 #include "lib/vfs/mc-vfs/vfs.h"

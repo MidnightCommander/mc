@@ -68,11 +68,7 @@ SRC_mc_widgets = \
 	wtools.c wtools.h
 
 SRC_mc_strutils = \
-	strescape.c strescape.h \
-	strutil8bit.c \
-	strutilascii.c \
-	strutil.c strutil.h \
-	strutilutf8.c
+	strescape.c strescape.h
 
 SRC_mc_conssaver = \
 	cons.handler.c cons.saver.h

@@ -29,10 +29,12 @@
 
 
 #include "lib/global.h"
+#include "lib/strutil.h"
+
+#include "src/charsets.h"
+
 #include "search.h"
 #include "internal.h"
-#include "src/strutil.h"
-#include "src/charsets.h"
 
 /*** global variables ****************************************************************************/
 

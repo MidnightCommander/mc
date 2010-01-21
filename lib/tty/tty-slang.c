@@ -40,6 +40,7 @@
 #include <signal.h>
 
 #include "lib/global.h"
+#include "lib/strutil.h"  /* str_term_form */
 
 #include "tty-internal.h" /* slow_tty */
 #include "tty.h"
@@ -49,7 +50,6 @@
 #include "key.h"  /* define_sequence */
 #include "win.h"
 
-#include "src/strutil.h"  /* str_term_form */
 
 /*** global variables **************************************************/
 extern int reset_hp_softkeys;

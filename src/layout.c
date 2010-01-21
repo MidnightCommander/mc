@@ -45,14 +45,14 @@
 #include <unistd.h>
 
 #include "lib/global.h"
-
 #include "lib/tty/tty.h"
 #include "lib/skin/skin.h"
 #include "lib/tty/key.h"
 #include "lib/tty/mouse.h"
 #include "lib/tty/win.h"	/* do_enter_ca_mode() */
-
 #include "lib/mcconfig/mcconfig.h"
+#include "lib/vfs/mc-vfs/vfs.h"		/* For vfs_translate_url() */
+#include "lib/strutil.h"
 
 #include "dialog.h"
 #include "widget.h"
@@ -62,7 +62,6 @@
 #include "subshell.h"	/* For use_subshell and resize_subshell() */
 #include "tree.h"
 #include "menu.h"
-#include "strutil.h"
 #include "background.h"         /* we_are_background */
 /* Needed for the extern declarations of integer parameters */
 #include "dir.h"
@@ -73,7 +72,6 @@
 #include "src/viewer/mcviewer.h"     /* The view widget */
 
 #include "setup.h"		/* For save_setup() */
-#include "lib/vfs/mc-vfs/vfs.h"		/* For vfs_translate_url() */
 
 /* Controls the display of the rotating dash on the verbose mode */
 int nice_rotating_dash = 1;

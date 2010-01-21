@@ -81,6 +81,7 @@
 #include "lib/tty/key.h"		/* tty_get_event */
 #include "lib/search/search.h"
 #include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/strutil.h"
 
 #include "setup.h"		/* verbose */
 #include "dialog.h"		/* do_refresh() */
@@ -91,7 +92,6 @@
 #include "panel.h"		/* current_panel */
 #include "fileopctx.h"		/* FILE_CONT */
 #include "filegui.h"
-#include "strutil.h"
 #include "src/strescape.h"
 
 /* }}} */

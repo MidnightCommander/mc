@@ -53,14 +53,14 @@
 #include <stdlib.h>
 
 #include "lib/global.h"
+#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/strutil.h"	/* utf string functions */
+
 
 #include "edit-impl.h"
 #include "editlock.h"
 
 #include "src/wtools.h"	/* edit_query_dialog () */
-#include "src/strutil.h"	/* utf string functions */
-
-#include "lib/vfs/mc-vfs/vfs.h"
 
 #define BUF_SIZE 255
 #define PID_BUF_SIZE 10

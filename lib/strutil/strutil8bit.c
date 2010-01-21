@@ -28,7 +28,7 @@
 #include <errno.h>
 
 #include "lib/global.h"
-#include "strutil.h"
+#include "lib/strutil.h"
 
 /* functions for singlebyte encodings, all characters have width 1
  * using standard system functions

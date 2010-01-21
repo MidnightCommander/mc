@@ -36,6 +36,7 @@
 #include "lib/tty/tty.h"
 #include "lib/skin/skin.h"
 #include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/strutil.h"
 
 #include "dialog.h"	/* add_widget() */
 #include "widget.h"	/* NORMAL_BUTTON */
@@ -44,7 +45,6 @@
 #include "main.h"	/* update_panels() */
 #include "layout.h"	/* repaint_screen() */
 #include "chmod.h"
-#include "strutil.h"
 
 static int single_set;
 

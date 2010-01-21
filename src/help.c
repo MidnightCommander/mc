@@ -57,11 +57,11 @@
 #include "lib/skin/skin.h"
 #include "lib/tty/mouse.h"
 #include "lib/tty/key.h"
+#include "lib/strutil.h"
 
 #include "dialog.h"		/* For Dlg_head */
 #include "widget.h"		/* For Widget */
 #include "wtools.h"		/* For common_dialog_repaint() */
-#include "strutil.h"
 #include "cmddef.h"
 #include "keybind.h"
 #include "help.h"

@@ -45,12 +45,13 @@
 #include "lib/tty/tty.h"		/* COLS */
 #include "lib/skin/skin.h"
 #include "lib/tty/key.h"		/* KEY_M_CTRL */
+#include "lib/mcconfig/mcconfig.h"	/* Load/save directories hotlist */
 #include "lib/fileloc.h"
+#include "lib/strutil.h"
 
 #include "dialog.h"
 #include "widget.h"
 #include "setup.h"		/* For profile_bname */
-#include "lib/mcconfig/mcconfig.h"	/* Load/save directories hotlist */
 #include "wtools.h"		/* QuickDialog */
 #include "panel.h"		/* current_panel */
 #include "main.h"		/* update_panels() */
@@ -58,7 +59,6 @@
 #include "hotlist.h"
 #include "command.h"		/* cmdline */
 #include "history.h"
-#include "strutil.h"
 
 #define UX		5
 #define UY		2

@@ -34,17 +34,15 @@
 #include <string.h>
 
 #include "lib/global.h"
-
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"		/* tty_getch() */
-
 #include "lib/skin/skin.h"		/* INPUT_COLOR */
+#include "lib/strutil.h"
 
 #include "dialog.h"
 #include "widget.h"
 #include "wtools.h"
 #include "background.h"		/* parent_call */
-#include "strutil.h"
 
 
 Listbox *

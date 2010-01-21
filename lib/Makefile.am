@@ -1,4 +1,4 @@
-SUBDIRS = filehighlight mcconfig search skin tty vfs
+SUBDIRS = filehighlight mcconfig search skin tty vfs strutil
 
 noinst_LTLIBRARIES = libmc.la
 
@@ -24,6 +24,7 @@ libmc_la_LIBADD = \
 	filehighlight/libmcfilehighlight.la \
 	mcconfig/libmcconfig.la \
 	search/libsearch.la \
+	strutil/libmcstrutil.la \
 	skin/libmcskin.la \
 	tty/libmctty.la \
 	$(INTLLIBS) $(MCLIBS) $(SLANGLIB) $(LIBICONV) $(GLIB_LIBS)

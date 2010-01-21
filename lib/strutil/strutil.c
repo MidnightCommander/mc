@@ -31,7 +31,7 @@
 #include <stdarg.h>
 
 #include "lib/global.h"
-#include "strutil.h"
+#include "lib/strutil.h"
 
 /*names, that are used for utf-8 */
 static const char *str_utf8_encodings[] = {

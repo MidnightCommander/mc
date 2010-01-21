@@ -38,6 +38,13 @@
 #include <unistd.h>
 
 #include "lib/global.h"
+#include "lib/strutil.h"  /* str_casecmp */
+
+#include "lib/vfs/mc-vfs/vfs.h"
+
+#ifdef ENABLE_VFS
+#include "lib/vfs/mc-vfs/gc.h"
+#endif /* ENABLE_VFS */
 
 #include "tty.h"
 #include "tty-internal.h" /* mouse_enabled */
@@ -48,13 +55,7 @@
 #include "src/main.h"
 #include "src/layout.h"   /* winch_flag, mc_refresh() */
 #include "src/cons.saver.h"
-#include "src/strutil.h"  /* str_casecmp */
 
-#include "lib/vfs/mc-vfs/vfs.h"
-
-#ifdef ENABLE_VFS
-#include "lib/vfs/mc-vfs/gc.h"
-#endif /* ENABLE_VFS */
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
 #include "x11conn.h"

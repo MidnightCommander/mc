@@ -31,6 +31,7 @@
 #include "lib/tty/mouse.h"		/* Gpm_Event */
 #include "lib/skin/skin.h"
 #include "lib/unixcompat.h"
+#include "lib/strutil.h"
 
 #include "dialog.h"
 #include "widget.h"		/* default_proc*/
@@ -41,7 +42,6 @@
 #include "menu.h"		/* menubar_visible */
 #include "layout.h"
 #include "mountlist.h"
-#include "strutil.h"
 #include "info.h"
 
 #ifndef VERSION

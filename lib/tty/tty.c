@@ -35,11 +35,11 @@
 #include <stdarg.h>
 
 #include "lib/global.h"
+#include "lib/strutil.h"
 
 #include "tty.h"
 #include "tty-internal.h"
 
-#include "src/strutil.h"
 
 /*** global variables **************************************************/
 

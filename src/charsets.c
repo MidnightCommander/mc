@@ -30,10 +30,11 @@
 #include <string.h>
 
 #include "lib/global.h"
-#include "charsets.h"
-#include "strutil.h"		/* utf-8 functions */
-#include "main.h"
+#include "lib/strutil.h"		/* utf-8 functions */
 #include "lib/fileloc.h"
+
+#include "charsets.h"
+#include "main.h"
 
 int n_codepages = 0;
 
