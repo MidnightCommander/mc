@@ -149,6 +149,7 @@ vfs_split_url (const char *path, char **host, char **user, int *port,
 	    colon++;
 	} else {
 	    g_free (pcopy);
+	    g_free (retval);
 	    *host = NULL;
 	    *port = 0;
 	    return NULL;
