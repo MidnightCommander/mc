@@ -1526,7 +1526,7 @@ parse_display_format (WPanel *panel, const char *format, char **error, int issta
     while (*format){           /* format can be an empty string */
 	int found = 0;
 
-        darr = g_new (format_e, 1);
+        darr = g_new0 (format_e, 1);
 
         /* I'm so ugly, don't look at me :-) */
         if (!home)
