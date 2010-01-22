@@ -45,6 +45,7 @@
 
 #include "src/main.h"
 #include "src/dialog.h"		/* Dlg_head */
+#include "src/charsets.h"
 #include "src/widget.h"		/* WButtonBar */
 
 #include "internal.h"
