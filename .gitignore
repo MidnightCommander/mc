@@ -38,3 +38,7 @@ Doxyfile
 mc.kdevelop
 version.h
 TAGS
+doc/devel/
+doc/html/
+.deps
+libtool
