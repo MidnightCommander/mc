@@ -8,7 +8,7 @@
 
 #include <sys/types.h>		/* off_t */
 
-#include "global.h"
+#include "lib/global.h"
 #include "dialog.h"		/* Dlg_head */
 #include "widget.h"		/* WLabel */
 #include "fileopctx.h"

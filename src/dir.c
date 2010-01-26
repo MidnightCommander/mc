@@ -27,16 +27,15 @@
 #include <string.h>
 #include <sys/stat.h>
 
-#include "../src/tty/tty.h"
-#include "../src/search/search.h"
-#include "../vfs/vfs.h"
+#include "lib/global.h"
+#include "lib/tty/tty.h"
+#include "lib/search.h"
+#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/fs.h"
+#include "lib/strutil.h"
 
-#include "global.h"
 #include "wtools.h"
 #include "treestore.h"
-#include "strutil.h"
-#include "fs.h"
-#include "util.h"		/* canonicalize_pathname () */
 #include "dir.h"
 
 /* If true show files starting with a dot */
@@ -47,13 +46,6 @@ int show_backups = 1;
 
 /* If false then directories are shown separately from files */
 int mix_all_files = 0;
-
-/*
- * If true, SI units (1000 based) will be used for
- * larger units (kilobyte, megabyte, ...).
- * If false binary units (1024 based) will be used.
- */
-int kilobyte_si = 0;
 
 /* Reverse flag */
 static int reverse = 1;

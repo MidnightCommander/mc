@@ -32,10 +32,10 @@
 
 #include <unistd.h>
 
-#include "global.h"
+#include "lib/global.h"
 #include "fileopctx.h"
-#include "../src/search/search.h"
-#include "../vfs/vfs.h"
+#include "lib/search.h"
+#include "lib/vfs/mc-vfs/vfs.h"
 
 /**
  * \fn FileOpContext * file_op_context_new (FileOperation op)

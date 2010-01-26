@@ -33,24 +33,23 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include "global.h"
+#include "lib/global.h"
 
-#include "../src/skin/skin.h"
-
-#include "../vfs/vfs.h"
+#include "lib/skin.h"
+#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/mcconfig.h"	/* Load/save directories panelize */
+#include "lib/strutil.h"
 
 #include "dialog.h"
 #include "widget.h"
 #include "wtools.h"		/* For common_dialog_repaint() */
 #include "setup.h"		/* For profile_bname */
-#include "../src/mcconfig/mcconfig.h"	/* Load/save directories panelize */
 #include "dir.h"
 #include "panel.h"		/* current_panel */
 #include "layout.h"		/* repaint_screen() */
 #include "main.h"
 #include "panelize.h"
 #include "history.h"
-#include "strutil.h"
 
 #define UX		5
 #define UY		2

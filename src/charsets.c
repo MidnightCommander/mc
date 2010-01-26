@@ -29,12 +29,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "global.h"
+#include "lib/global.h"
+#include "lib/strutil.h"		/* utf-8 functions */
+#include "lib/fileloc.h"
+
 #include "charsets.h"
-#include "strutil.h"		/* utf-8 functions */
 #include "main.h"
-#include "util.h"		/* concat_dir_and_file() */
-#include "fileloc.h"
 
 int n_codepages = 0;
 

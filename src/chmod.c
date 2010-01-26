@@ -31,11 +31,12 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include "global.h"
+#include "lib/global.h"
 
-#include "../src/tty/tty.h"
-#include "../src/skin/skin.h"
-#include "../vfs/vfs.h"
+#include "lib/tty/tty.h"
+#include "lib/skin.h"
+#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/strutil.h"
 
 #include "dialog.h"	/* add_widget() */
 #include "widget.h"	/* NORMAL_BUTTON */
@@ -44,7 +45,6 @@
 #include "main.h"	/* update_panels() */
 #include "layout.h"	/* repaint_screen() */
 #include "chmod.h"
-#include "strutil.h"
 
 static int single_set;
 

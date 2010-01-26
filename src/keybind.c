@@ -34,15 +34,14 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include "global.h"
+#include "lib/global.h"
+#include "lib/tty/win.h"
+#include "lib/tty/key.h"		/* KEY_M_ */
+#include "lib/tty/tty.h"		/* keys */
+#include "lib/strutil.h"
 
 #include "cmddef.h"		/* CK_ cmd name const */
-#include "tty/win.h"
-#include "tty/key.h"		/* KEY_M_ */
-#include "tty/tty.h"		/* keys */
 #include "wtools.h"
-#include "strutil.h"
-
 #include "keybind.h"
 
 static name_keymap_t command_names[] = {

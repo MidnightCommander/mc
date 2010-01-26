@@ -31,7 +31,7 @@
 #include <assert.h>
 #include <ctype.h>
 
-#include "global.h"
+#include "lib/global.h"
 #include "ecs.h"
 
 /*

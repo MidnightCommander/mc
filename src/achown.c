@@ -33,17 +33,17 @@
 #include <pwd.h>
 #include <grp.h>
 
-#include "global.h"
+#include "lib/global.h"
 
-#include "../src/tty/tty.h"
-#include "../src/tty/key.h"		/* XCTRL and ALT macros */
-#include "../src/skin/skin.h"
-#include "../vfs/vfs.h"
+#include "lib/tty/tty.h"
+#include "lib/tty/key.h"		/* XCTRL and ALT macros */
+#include "lib/skin.h"
+#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/strutil.h"
 
 #include "dialog.h"
 #include "widget.h"
 #include "wtools.h"		/* For init_box_colors() */
-#include "strutil.h"
 
 #include "dir.h"
 #include "panel.h"		/* Needed for the externs */

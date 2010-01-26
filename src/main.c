@@ -39,18 +39,31 @@
 #include <unistd.h>
 #include <pwd.h>		/* for username in xterm title */
 
-#include "global.h"
+#include "lib/global.h"
 
-#include "../src/tty/tty.h"
-#include "../src/skin/skin.h"
-#include "../src/tty/mouse.h"
-#include "../src/tty/key.h"		/* For init_key() */
-#include "../src/tty/win.h"		/* xterm_flag */
+#include "lib/tty/tty.h"
+#include "lib/skin.h"
+#include "lib/tty/mouse.h"
+#include "lib/tty/key.h"		/* For init_key() */
+#include "lib/tty/win.h"		/* xterm_flag */
 
-#include "../src/mcconfig/mcconfig.h"
-#include "../src/args.h"
-#include "../src/skin/skin.h"
-#include "../src/filehighlight/fhl.h"
+#include "lib/mcconfig.h"
+#include "lib/filehighlight.h"
+#include "lib/fileloc.h"		/* MC_USERCONF_DIR */
+
+#include "lib/vfs/mc-vfs/vfs.h"		/* vfs_translate_url() */
+
+#ifdef ENABLE_VFS_SMB
+#include "lib/vfs/mc-vfs/smbfs.h"	/* smbfs_set_debug() */
+#endif /* ENABLE_VFS_SMB */
+
+#ifdef ENABLE_VFS
+#include "lib/vfs/mc-vfs/gc.h"
+#endif
+
+#include "lib/strutil.h"
+
+#include "src/args.h"
 
 #include "dir.h"
 #include "dialog.h"
@@ -59,7 +72,7 @@
 #include "option.h"
 #include "tree.h"
 #include "treestore.h"
-#include "cons.saver.h"
+#include "consaver/cons.saver.h"
 #include "subshell.h"
 #include "setup.h"		/* save_setup() */
 #include "boxes.h"		/* sort_box() */
@@ -71,15 +84,12 @@
 #include "listmode.h"
 #include "execute.h"
 #include "ext.h"		/* For flush_extension_file() */
-#include "strutil.h"
 #include "widget.h"
 #include "command.h"
 #include "wtools.h"
 #include "cmddef.h"		/* CK_ cmd name const */
-#include "fileloc.h"		/* MC_USERCONF_DIR */
 #include "user.h"		/* user_file_menu_cmd() */
 
-#include "../vfs/vfs.h"		/* vfs_translate_url() */
 
 #include "chmod.h"
 #include "chown.h"
@@ -87,21 +97,15 @@
 
 #include "main.h"
 
-#ifdef ENABLE_VFS_SMB
-#include "../vfs/smbfs.h"	/* smbfs_set_debug() */
-#endif /* ENABLE_VFS_SMB */
 
 #ifdef USE_INTERNAL_EDIT
-#   include "../edit/edit.h"
+#   include "src/editor/edit.h"
 #endif
 
 #ifdef	HAVE_CHARSET
 #include "charsets.h"
 #endif				/* HAVE_CHARSET */
 
-#ifdef ENABLE_VFS
-#include "../vfs/gc.h"
-#endif
 
 #include "keybind.h"		/* type global_keymap_t */
 

@@ -32,20 +32,20 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "global.h"
-#include "../src/tty/tty.h"
+#include "lib/global.h"
+#include "lib/tty/tty.h"
 #include "user.h"
 #include "main.h"
 #include "wtools.h"
 #include "ext.h"
 #include "execute.h"
 #include "history.h"
-#include "cons.saver.h"
+#include "consaver/cons.saver.h"
 #include "layout.h"
-#include "../src/search/search.h"
-#include "../src/viewer/mcviewer.h"
+#include "lib/search.h"
+#include "src/viewer/mcviewer.h"
 
-#include "../vfs/vfs.h"
+#include "lib/vfs/mc-vfs/vfs.h"
 
 /* If set, we execute the file command to check the file type */
 int use_file_to_check_type = 1;

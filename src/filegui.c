@@ -76,11 +76,13 @@
 
 #include <unistd.h>
 
-#include "global.h"
+#include "lib/global.h"
 
-#include "../src/tty/key.h"		/* tty_get_event */
-#include "../src/search/search.h"
-#include "../vfs/vfs.h"
+#include "lib/tty/key.h"		/* tty_get_event */
+#include "lib/search.h"
+#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/strescape.h"
+#include "lib/strutil.h"
 
 #include "setup.h"		/* verbose */
 #include "dialog.h"		/* do_refresh() */
@@ -91,9 +93,6 @@
 #include "panel.h"		/* current_panel */
 #include "fileopctx.h"		/* FILE_CONT */
 #include "filegui.h"
-#include "util.h"		/* strip_password() */
-#include "strutil.h"
-#include "../src/strescape.h"
 
 /* }}} */
 typedef enum {

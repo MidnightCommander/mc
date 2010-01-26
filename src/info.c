@@ -24,12 +24,14 @@
 
 #include <stdio.h>
 
-#include "global.h"
+#include "lib/global.h"
 
-#include "../src/tty/tty.h"
-#include "../src/tty/key.h"		/* is_idle() */
-#include "../src/tty/mouse.h"		/* Gpm_Event */
-#include "../src/skin/skin.h"
+#include "lib/tty/tty.h"
+#include "lib/tty/key.h"		/* is_idle() */
+#include "lib/tty/mouse.h"		/* Gpm_Event */
+#include "lib/skin.h"
+#include "lib/unixcompat.h"
+#include "lib/strutil.h"
 
 #include "dialog.h"
 #include "widget.h"		/* default_proc*/
@@ -38,11 +40,8 @@
 #include "panel.h"		/* for the panel structure */
 #include "main.h"		/* other_panel, current_panel definitions */
 #include "menu.h"		/* menubar_visible */
-#include "util.h"		/* size_trunc_len */
 #include "layout.h"
 #include "mountlist.h"
-#include "unixcompat.h"
-#include "strutil.h"
 #include "info.h"
 
 #ifndef VERSION

@@ -28,21 +28,32 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-#include "global.h"
+#include "lib/global.h"
 
-#include "../src/tty/tty.h"
-#include "../src/tty/key.h"
-#include "../src/tty/mouse.h"		/* To make view.h happy */
-#include "../vfs/vfs.h"
+#include "lib/tty/tty.h"
+#include "lib/tty/key.h"
+#include "lib/tty/mouse.h"		/* To make view.h happy */
+#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/mcconfig.h"
+#include "lib/fileloc.h"
+
+#ifdef ENABLE_VFS
+#include "lib/vfs/mc-vfs/gc.h"
+#endif
+
+#ifdef USE_NETCODE
+#   include "lib/vfs/mc-vfs/ftpfs.h"
+#   include "lib/vfs/mc-vfs/fish.h"
+#endif
+#include "lib/strutil.h"	/* str_isutf8 () */
 
 #include "args.h"
 #include "dir.h"
 #include "panel.h"
 #include "main.h"
 #include "tree.h"		/* xtree_mode */
-#include "../src/mcconfig/mcconfig.h"
 #include "setup.h"
-#include "../src/viewer/mcviewer.h" /* For the externs */
+#include "src/viewer/mcviewer.h" /* For the externs */
 #include "hotlist.h"		/* load/save/done hotlist */
 #include "panelize.h"		/* load/save/done panelize */
 #include "layout.h"
@@ -50,27 +61,16 @@
 #include "cmd.h"
 #include "file.h"		/* safe_delete */
 #include "keybind.h"		/* lookup_action */
-#include "fileloc.h"
 #include "wtools.h"
-
-#ifdef ENABLE_VFS
-#include "../vfs/gc.h"
-#endif
 
 #ifdef HAVE_CHARSET
 #include "charsets.h"
 #endif
 
-#ifdef USE_NETCODE
-#   include "../vfs/ftpfs.h"
-#   include "../vfs/fish.h"
-#endif
-
 #ifdef USE_INTERNAL_EDIT
-#   include "../edit/edit.h"
+#   include "src/editor/edit.h"
 #endif
 
-#include "../src/strutil.h"	/* str_isutf8 () */
 
 
 extern int num_history_items_recorded;

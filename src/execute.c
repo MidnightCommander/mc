@@ -25,21 +25,21 @@
 #include <sys/stat.h>
 #include <sys/time.h>
 
-#include "global.h"
+#include "lib/global.h"
 
-#include "../src/tty/tty.h"
-#include "../src/tty/key.h"
-#include "../src/tty/win.h"
+#include "lib/tty/tty.h"
+#include "lib/tty/key.h"
+#include "lib/tty/win.h"
 
 #include "main.h"
-#include "cons.saver.h"
+#include "consaver/cons.saver.h"
 #include "subshell.h"
 #include "layout.h"
 #include "dialog.h"
 #include "wtools.h"
 #include "panel.h"		/* update_panels() */
 #include "execute.h"
-#include "../vfs/vfs.h"
+#include "lib/vfs/mc-vfs/vfs.h"
 
 
 static void

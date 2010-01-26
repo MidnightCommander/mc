@@ -26,19 +26,19 @@
 #include <string.h>
 #include <sys/types.h>
 
-#include "global.h"
+#include "lib/global.h"
 
-#include "../src/tty/tty.h"
-#include "../src/skin/skin.h"
-#include "../src/tty/mouse.h"
-#include "../src/tty/key.h"	/* key macros */
+#include "lib/tty/tty.h"
+#include "lib/skin.h"
+#include "lib/tty/mouse.h"
+#include "lib/tty/key.h"	/* key macros */
+#include "lib/strutil.h"
 
 #include "cmddef.h"		/* CK_Ignore_Key */
 #include "help.h"
 #include "dialog.h"
 #include "widget.h"
 #include "main.h"		/* is_right */
-#include "strutil.h"
 #include "menu.h"
 
 int menubar_visible = 1;	/* This is the new default */

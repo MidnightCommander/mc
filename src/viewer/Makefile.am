@@ -19,7 +19,8 @@ libmcviewer_la_SOURCES = \
 	plain.c \
 	search.c
 
-libmcviewer_la_CFLAGS=-I../ -I$(top_srcdir)/src \
+libmcviewer_la_CFLAGS = -I$(top_srcdir) \
 	$(GLIB_CFLAGS) $(PCRE_CFLAGS) \
 	-DDATADIR=\""$(pkgdatadir)/"\" -DLOCALEDIR=\""$(localedir)"\"
 
+libmcviewer_la_LIBADD = ../../lib/libmc.la

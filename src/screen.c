@@ -31,13 +31,16 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "global.h"
+#include "lib/global.h"
 
-#include "../src/tty/tty.h"
-#include "../src/skin/skin.h"
-#include "../src/tty/mouse.h"		/* For Gpm_Event */
-#include "../src/tty/key.h"		/* XCTRL and ALT macros  */
-#include "../src/filehighlight/fhl.h"
+#include "lib/tty/tty.h"
+#include "lib/skin.h"
+#include "lib/tty/mouse.h"		/* For Gpm_Event */
+#include "lib/tty/key.h"		/* XCTRL and ALT macros  */
+#include "lib/filehighlight.h"
+#include "lib/mcconfig.h"
+#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/unixcompat.h"
 
 #include "dir.h"
 #include "panel.h"
@@ -50,19 +53,16 @@
 #include "command.h"		/* cmdline */
 #include "setup.h"		/* For loading/saving panel options */
 #include "user.h"
-#include "../src/mcconfig/mcconfig.h"
 #include "execute.h"
 #include "widget.h"
 #include "menu.h"		/* menubar_visible */
 #include "main-widgets.h"
 #include "main.h"
-#include "unixcompat.h"
 #include "mountlist.h"		/* my_statfs */
 #include "selcodepage.h"	/* select_charset () */
 #include "charsets.h"		/* get_codepage_id () */
 #include "cmddef.h"		/* CK_ cmd name const */
 #include "keybind.h"		/* global_keymap_t */
-#include "../vfs/vfs.h"
 
 #define ELEMENTS(arr) ( sizeof(arr) / sizeof((arr)[0]) )
 

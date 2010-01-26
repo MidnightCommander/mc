@@ -40,24 +40,23 @@
 #include <fcntl.h>
 #include <sys/types.h>
 
-#include "global.h"
+#include "lib/global.h"
 
-#include "../src/tty/tty.h"
-#include "../src/skin/skin.h"
-#include "../src/tty/mouse.h"
-#include "../src/tty/key.h"	/* XCTRL and ALT macros  */
-#include "../src/mcconfig/mcconfig.h"	/* for history loading and saving */
-
-#include "../vfs/vfs.h"
+#include "lib/tty/tty.h"
+#include "lib/skin.h"
+#include "lib/tty/mouse.h"
+#include "lib/tty/key.h"	/* XCTRL and ALT macros  */
+#include "lib/mcconfig.h"	/* for history loading and saving */
+#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/fileloc.h"
+#include "lib/strutil.h"
 
 #include "dialog.h"
 #include "widget.h"
 #include "wtools.h"
-#include "strutil.h"
 
 #include "cmddef.h"		/* CK_ cmd name const */
 #include "keybind.h"		/* global_keymap_t */
-#include "fileloc.h"
 #include "panel.h"		/* current_panel */
 
 const global_keymap_t *input_map;

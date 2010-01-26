@@ -28,9 +28,16 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "global.h"
-#include "../src/tty/tty.h"
-#include "../src/skin/skin.h"
+#include "lib/global.h"
+#include "lib/tty/tty.h"
+#include "lib/skin.h"
+#include "lib/search.h"
+#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/strutil.h"
+
+#include "src/editor/edit.h"		/* WEdit, BLOCK_FILE */
+#include "src/viewer/mcviewer.h" /* for default_* externs */
+
 #include "dir.h"
 #include "panel.h"
 #include "main.h"
@@ -39,18 +46,12 @@
 #include "execute.h"
 #include "setup.h"
 #include "history.h"
-#include "strutil.h"
-#include "../src/search/search.h"
 
-#include "../vfs/vfs.h"
-
-#include "../edit/edit.h"		/* WEdit, BLOCK_FILE */
 
 /* For the simple listbox manager */
 #include "dialog.h"
 #include "widget.h"
 #include "wtools.h"
-#include "../src/viewer/mcviewer.h" /* for default_* externs */
 
 #define MAX_ENTRIES 16
 #define MAX_ENTRY_LEN 60

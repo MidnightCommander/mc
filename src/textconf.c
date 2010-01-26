@@ -29,9 +29,9 @@
 
 #include <sys/types.h>
 
-#include "global.h"
+#include "lib/global.h"
 #include "ecs.h"
-#include "../src/textconf.h"
+#include "src/textconf.h"
 
 #ifdef ENABLE_VFS
 static const char *const vfs_supported[] = {

@@ -34,20 +34,20 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include "global.h"
+#include "lib/global.h"
 
-#include "../src/tty/tty.h"
-#include "../src/tty/key.h"
+#include "lib/tty/tty.h"
+#include "lib/tty/key.h"
+#include "lib/mcconfig.h"	/* Save profile */
+#include "lib/strescape.h"
+#include "lib/strutil.h"
 
 #include "dialog.h"
 #include "widget.h"
-#include "../src/mcconfig/mcconfig.h"	/* Save profile */
 #include "setup.h"
 #include "layout.h"			/* repaint_screen() */
 #include "learn.h"
 #include "wtools.h"
-#include "strutil.h"
-#include "strescape.h"
 
 #define UX		4
 #define UY		3

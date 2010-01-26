@@ -47,18 +47,18 @@
 #  include <stropts.h> /* For I_PUSH */
 #endif /* HAVE_STROPTS_H */
 
-#include "global.h"
-#include "../src/tty/tty.h"	/* LINES */
+#include "lib/global.h"
+#include "lib/tty/tty.h"	/* LINES */
+#include "lib/tty/key.h"	/* XCTRL */
+#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/strutil.h"
+#include "lib/fileloc.h"
+
 #include "panel.h"	/* current_panel */
 #include "wtools.h"	/* query_dialog() */
 #include "main.h"	/* do_update_prompt() */
-#include "cons.saver.h"	/* handle_console() */
-#include "../src/tty/key.h"	/* XCTRL */
+#include "consaver/cons.saver.h"	/* handle_console() */
 #include "subshell.h"
-#include "strutil.h"
-#include "fileloc.h"
-
-#include "../vfs/vfs.h"
 
 #ifndef WEXITSTATUS
 #   define WEXITSTATUS(stat_val) ((unsigned)(stat_val) >> 8)

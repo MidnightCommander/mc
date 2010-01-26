@@ -6,10 +6,11 @@
 #ifndef MC_PANEL_H
 #define MC_PANEL_H
 
+#include "lib/fs.h"			/* MC_MAXPATHLEN */
+#include "lib/strutil.h"
+
 #include "dir.h"		/* dir_list */
 #include "dialog.h"		/* Widget */
-#include "fs.h"			/* MC_MAXPATHLEN */
-#include "strutil.h"
 
 #define selection(p) (&(p->dir.list[p->selected]))
 #define DEFAULT_USER_FORMAT "half type name | size | perm"

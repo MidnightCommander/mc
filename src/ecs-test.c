@@ -33,7 +33,7 @@
 #include <locale.h>
 #include <stdio.h>
 
-#include "global.h"
+#include "lib/global.h"
 #include "ecs.h"
 
 #ifdef EXTCHARSET_ENABLED

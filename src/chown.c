@@ -32,15 +32,15 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include "global.h"
+#include "lib/global.h"
 
-#include "../src/tty/tty.h"
-#include "../src/skin/skin.h"
-#include "../vfs/vfs.h"
+#include "lib/tty/tty.h"
+#include "lib/skin.h"
+#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/strutil.h"
 
 #include "dialog.h"
 #include "widget.h"
-#include "strutil.h"
 
 /* Needed for the extern declarations of integer parameters */
 #include "dir.h"

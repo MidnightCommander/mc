@@ -47,12 +47,13 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include "global.h"
+#include "lib/global.h"
+#include "lib/mcconfig.h"
+#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/fileloc.h"
+
 #include "treestore.h"
-#include "../src/mcconfig/mcconfig.h"
-#include "../vfs/vfs.h"
 #include "setup.h"
-#include "fileloc.h"
 
 #define TREE_SIGNATURE "Midnight Commander TreeStore v 2.0"
 

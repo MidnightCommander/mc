@@ -34,11 +34,12 @@
 #include <errno.h>
 #include <string.h>
 
-#include "global.h"
-#include "fs.h"
-#include "util.h"
+#include "lib/global.h"
+#include "lib/fs.h"
 
-#include "../vfs/vfs.h"
+#include "lib/vfs/mc-vfs/vfs.h"
+
+
 
 static char *
 get_absolute_name (const char *file)

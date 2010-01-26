@@ -1,4 +1,19 @@
-SUBDIRS = mcconfig search tty viewer filehighlight skin
+SUBDIRS = viewer
+
+if USE_EDIT
+SUBDIRS += editor
+endif
+
+
+AM_CPPFLAGS = -DDATADIR=\""$(pkgdatadir)/"\" \
+	-DLOCALEDIR=\""$(localedir)"\" \
+	-DSYSCONFDIR=\""$(sysconfdir)/@PACKAGE@/"\"
+
+
+if CONS_SAVER
+SUBDIRS += consaver
+AM_CPPFLAGS += -DSAVERDIR=\""$(pkglibexecdir)"\"
+endif
 
 AM_CFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir) $(PCRE_CFLAGS)
 
@@ -7,59 +22,38 @@ pkglibexecdir =		$(libexecdir)/@PACKAGE@
 
 bin_PROGRAMS = mc mcmfmt
 
-
-if CONS_SAVER
-pkglibexec_PROGRAMS = cons.saver
-AM_CPPFLAGS = -DDATADIR=\""$(pkgdatadir)/"\" -DLOCALEDIR=\""$(localedir)"\" \
-	-DSAVERDIR=\""$(pkglibexecdir)"\" \
-	-DSYSCONFDIR=\""$(sysconfdir)/@PACKAGE@/"\"
-else
-AM_CPPFLAGS = -DDATADIR=\""$(pkgdatadir)/"\" \
-	-DLOCALEDIR=\""$(localedir)"\" \
-	-DSYSCONFDIR=\""$(sysconfdir)/@PACKAGE@/"\"
-endif
-
 noinst_PROGRAMS = man2hlp
-man2hlp_LDADD = $(GLIB_LIBS)
 
 mcmfmt_SOURCES = mfmt.c
 
-cons_saver_SOURCES = cons.saver.c
+man2hlp_SOURCES = man2hlp.c
 
-man2hlp_SOURCES = man2hlp.c glibcompat.c
+man2hlp_LDADD = \
+    ../lib/libmc.la \
+    $(GLIB_LIBS) $(PCRE_LIBS)
 
 if USE_EDIT
-EDITLIB = ../edit/libedit.a
+EDITLIB = editor/libedit.la
 endif
 
-if ENABLE_VFS
-if USE_SAMBA_FS
-VFSLIB = ../vfs/libvfs-mc.a ../vfs/samba/libsamba.a
-else
-VFSLIB = ../vfs/libvfs-mc.a
-endif
-endif
-
-SRC_maintainer=logging.c logging.h
 SRC_charset = charsets.c charsets.h selcodepage.c selcodepage.h
-
-if USE_MAINTAINER_MODE
-    SRC_USE_maintainer=$(SRC_maintainer)
-endif
 
 if CHARSET
     SRC_USE_charset=$(SRC_charset)
 endif
 
 mc_LDADD = \
-	$(EDITLIB) $(VFSLIB) \
-	filehighlight/libmcfilehighlight.la \
-	mcconfig/libmcconfig.la \
-	search/libsearch.la \
-	skin/libmcskin.la \
-	tty/libmctty.la \
+	../lib/libmc.la \
+	$(EDITLIB) \
 	viewer/libmcviewer.la \
-	$(INTLLIBS) $(MCLIBS) $(SLANGLIB) $(LIBICONV) $(GLIB_LIBS)
+	$(INTLLIBS) $(MCLIBS) $(SLANGLIB) $(LIBICONV) \
+	$(GLIB_LIBS) $(PCRE_LIBS)
+
+if USE_SAMBA_FS
+# this is a hack for linking with own samba library in simple way
+mc_LDADD += ../lib/vfs/mc-vfs/samba/libsamba.a
+endif
+
 
 SRC_mc_widgets = \
 	dialog.c dialog.h \
@@ -69,15 +63,8 @@ SRC_mc_widgets = \
 	widget.c widget.h \
 	wtools.c wtools.h
 
-SRC_mc_strutils = \
-	strescape.c strescape.h \
-	strutil8bit.c \
-	strutilascii.c \
-	strutil.c strutil.h \
-	strutilutf8.c
-
 SRC_mc_conssaver = \
-	cons.handler.c cons.saver.h
+	cons.handler.c consaver/cons.saver.h
 
 SRC_mc_options = \
 	learn.c learn.h \
@@ -88,23 +75,15 @@ SRC_mc_keybind = \
 	keybind.c keybind.h \
 	cmddef.h
 
-SRC_mc_utils = \
-	util.c util.h \
-	utilunix.c \
-	unixcompat.h
-
 SRC_mc_extended_charset = \
 	ecs.c ecs.h
 
 mc_SOURCES = \
-	$(SRC_USE_maintainer) \
 	$(SRC_USE_charset) \
 	$(SRC_mc_widgets) \
-	$(SRC_mc_strutils) \
 	$(SRC_mc_conssaver) \
 	$(SRC_mc_options) \
 	$(SRC_mc_keybind) \
-	$(SRC_mc_utils) \
 	$(SRC_mc_extended_charset) \
 	achown.c achown.h \
 	args.c args.h \
@@ -120,13 +99,9 @@ mc_SOURCES = \
 	ext.c ext.h \
 	file.c file.h \
 	filegui.c filegui.h \
-	fileloc.h \
 	filenot.c \
 	fileopctx.c fileopctx.h \
 	find.c find.h \
-	fs.h \
-	glibcompat.c glibcompat.h \
-	global.h \
 	help.c help.h \
 	history.h \
 	hotlist.c hotlist.h \
@@ -139,7 +114,6 @@ mc_SOURCES = \
 	panelize.c panelize.h \
 	subshell.c subshell.h \
 	textconf.c textconf.h \
-	timefmt.h \
 	treestore.c treestore.h \
 	user.c user.h
 

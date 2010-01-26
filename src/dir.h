@@ -8,7 +8,7 @@
 
 #include <sys/stat.h>
 
-#include "global.h"
+#include "lib/global.h"
 
 #define MIN_FILES 128
 #define RESIZE_STEPS 128

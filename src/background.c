@@ -43,12 +43,12 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-#include "global.h"
+#include "lib/global.h"
 #include "background.h"
 #include "wtools.h"
 #include "layout.h"	/* repaint_screen() */
 #include "fileopctx.h"	/* FileOpContext */
-#include "../src/tty/key.h"	/* add_select_channel(), delete_select_channel() */
+#include "lib/tty/key.h"	/* add_select_channel(), delete_select_channel() */
 
 enum ReturnType {
     Return_String,

@@ -39,13 +39,14 @@
 
 #include <limits.h>
 
-#include "../src/global.h"
-#include "../src/wtools.h"
-#include "../src/strutil.h"
-#include "../src/main.h"
-#include "../src/charsets.h"
-#include "../src/selcodepage.h"
-#include "../vfs/vfs.h"
+#include "lib/global.h"
+#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/strutil.h"
+
+#include "src/wtools.h"
+#include "src/main.h"
+#include "src/charsets.h"
+#include "src/selcodepage.h"
 
 #include "internal.h"
 #include "mcviewer.h"

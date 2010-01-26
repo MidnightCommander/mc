@@ -40,16 +40,18 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include "global.h"
+#include "lib/global.h"
 
-#include "../src/tty/tty.h"		/* COLS */
-#include "../src/skin/skin.h"
-#include "../src/tty/key.h"		/* KEY_M_CTRL */
+#include "lib/tty/tty.h"		/* COLS */
+#include "lib/skin.h"
+#include "lib/tty/key.h"		/* KEY_M_CTRL */
+#include "lib/mcconfig.h"	/* Load/save directories hotlist */
+#include "lib/fileloc.h"
+#include "lib/strutil.h"
 
 #include "dialog.h"
 #include "widget.h"
 #include "setup.h"		/* For profile_bname */
-#include "../src/mcconfig/mcconfig.h"	/* Load/save directories hotlist */
 #include "wtools.h"		/* QuickDialog */
 #include "panel.h"		/* current_panel */
 #include "main.h"		/* update_panels() */
@@ -57,9 +59,6 @@
 #include "hotlist.h"
 #include "command.h"		/* cmdline */
 #include "history.h"
-#include "strutil.h"
-#include "util.h"
-#include "fileloc.h"
 
 #define UX		5
 #define UY		2
@@ -79,7 +78,7 @@
 #define B_MOVE		(B_USER + 7)
 
 #ifdef ENABLE_VFS
-#include "../vfs/gc.h"
+#include "lib/vfs/mc-vfs/gc.h"
 #define B_FREE_ALL_VFS	(B_USER + 8)
 #define B_REFRESH_VFS	(B_USER + 9)
 #endif

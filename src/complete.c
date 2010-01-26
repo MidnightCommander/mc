@@ -36,19 +36,18 @@
 #include <pwd.h>
 #include <unistd.h>
 
-#include "global.h"
+#include "lib/global.h"
 
-#include "../src/tty/tty.h"
-#include "../src/tty/key.h"		/* XCTRL and ALT macros */
-#include "../vfs/vfs.h"
+#include "lib/tty/tty.h"
+#include "lib/tty/key.h"		/* XCTRL and ALT macros */
+#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/strescape.h"
+#include "lib/strutil.h"
 
 #include "dialog.h"
 #include "widget.h"
 #include "wtools.h"
 #include "main.h"		/* show_all_if_ambiguous */
-#include "util.h"
-#include "../src/strescape.h"
-#include "strutil.h"
 
 typedef char *CompletionFunction (const char * text, int state, INPUT_COMPLETE_FLAGS flags);
 

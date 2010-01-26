@@ -32,18 +32,17 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 
-#include "global.h"
+#include "lib/global.h"
 
-#include "../src/tty/tty.h"
-#include "../src/tty/key.h"
-#include "../src/skin/skin.h"
-#include "../src/search/search.h"
-#include "../src/mcconfig/mcconfig.h"
-
-#include "../vfs/vfs.h"
+#include "lib/tty/tty.h"
+#include "lib/tty/key.h"
+#include "lib/skin.h"
+#include "lib/search.h"
+#include "lib/mcconfig.h"
+#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/strutil.h"
 
 #include "setup.h"		/* verbose */
-#include "strutil.h"
 #include "dialog.h"
 #include "widget.h"
 #include "dir.h"

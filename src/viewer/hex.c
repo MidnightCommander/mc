@@ -40,14 +40,14 @@
 #include <errno.h>
 #include <fcntl.h>
 
-#include "../src/global.h"
-#include "../src/tty/tty.h"
-#include "../src/skin/skin.h"
-#include "../src/main.h"
-#include "../src/wtools.h"
-#include "../src/charsets.h"
+#include "lib/global.h"
+#include "lib/tty/tty.h"
+#include "lib/skin.h"
+#include "src/main.h"
+#include "src/wtools.h"
+#include "src/charsets.h"
 
-#include "../../vfs/vfs.h"
+#include "lib/vfs/mc-vfs/vfs.h"
 
 #include "internal.h"
 

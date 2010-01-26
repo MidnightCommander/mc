@@ -34,13 +34,21 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-#include "global.h"
+#include "lib/global.h"
 
-#include "../src/tty/tty.h"
-#include "../src/skin/skin.h"		/* INPUT_COLOR */
-#include "../src/tty/key.h"		/* XCTRL and ALT macros  */
+#include "lib/tty/tty.h"
+#include "lib/skin.h"		/* INPUT_COLOR */
+#include "lib/tty/key.h"		/* XCTRL and ALT macros  */
+#include "lib/mcconfig.h"	/* Load/save user formats */
+#include "lib/strutil.h"
 
-#include "../src/mcconfig/mcconfig.h"	/* Load/save user formats */
+#ifdef USE_NETCODE
+#   include "lib/vfs/mc-vfs/ftpfs.h"
+#endif
+
+#ifdef ENABLE_VFS
+#include "lib/vfs/mc-vfs/gc.h"
+#endif
 
 #include "dialog.h"		/* The nice dialog manager */
 #include "widget.h"		/* The widgets for the nice dialog manager */
@@ -54,19 +62,10 @@
 #include "tree.h"
 #include "layout.h"		/* for get_nth_panel_name proto */
 #include "background.h"		/* task_list */
-#include "strutil.h"
 
 #ifdef HAVE_CHARSET
 #include "charsets.h"
 #include "selcodepage.h"
-#endif
-
-#ifdef USE_NETCODE
-#   include "../vfs/ftpfs.h"
-#endif
-
-#ifdef ENABLE_VFS
-#include "../vfs/gc.h"
 #endif
 
 
