@@ -240,7 +240,8 @@ static gboolean
 mc_skin_color_check_inisection (const gchar * group)
 {
     return !((strcasecmp ("skin", group) == 0)
-        || (strcasecmp ("lines", group) == 0));
+        || (strcasecmp ("lines", group) == 0)
+        || (strncasecmp ("widget-", group, 7) == 0));
 }
 
 /* --------------------------------------------------------------------------------------------- */
