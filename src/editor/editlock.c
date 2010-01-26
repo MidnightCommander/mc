@@ -117,12 +117,14 @@ lock_build_symlink_name (const char *fname)
 static struct lock_s *
 lock_extract_info (const char *str)
 {
-    int i;
+    size_t i, len;
     const char *p, *s;
     static char pid[PID_BUF_SIZE], who[BUF_SIZE];
     static struct lock_s lock;
 
-    for (p = str + str_term_width1 (str) - 1; p >= str; p--)
+    len = strlen (str);
+
+    for (p = str + len - 1; p >= str; p--)
 	if (*p == '.')
 	    break;
 
@@ -134,8 +136,7 @@ lock_extract_info (const char *str)
 
     /* Treat text between '.' and ':' or '\0' as pid */
     i = 0;
-    for (p = p + 1;
-	 p < str + str_term_width1 (str) && *p != ':' && i < PID_BUF_SIZE; p++)
+    for (p = p + 1; (p < str + len) && (*p != ':') && (i < PID_BUF_SIZE); p++)
 	pid[i++] = *p;
     pid[i] = '\0';
 
