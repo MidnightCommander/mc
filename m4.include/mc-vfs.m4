@@ -49,12 +49,9 @@ AC_DEFUN([MC_WITH_VFS],
 	    AC_CHECK_RPC
 	    AC_REQUIRE_SOCKET
 
-      MC_MCSERVER_CHECKS
-
       use_net_code=true
     fi
   fi
-
 
   AC_DEFINE(ENABLE_VFS, 1, [Define to enable VFS support])
   if $use_net_code; then
@@ -93,6 +90,8 @@ AC_DEFUN([AC_MC_VFS_CHECKS],[
 	AM_CONDITIONAL(ENABLE_VFS_SFS, [false])
 	AM_CONDITIONAL(ENABLE_VFS_UNDELFS, [false])
     fi
+
+    MC_MCSERVER_CHECKS
 
     AM_CONDITIONAL(ENABLE_VFS, [test x"$enable_vfs" = x"yes"])
 ])

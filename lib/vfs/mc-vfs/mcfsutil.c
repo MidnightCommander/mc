@@ -25,7 +25,7 @@
 
 #include <config.h>
 
-#ifdef	ENABLE_VFS_MCFS
+#if defined(ENABLE_VFS_MCFS) || defined(ENABLE_MCSERVER)
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdarg.h>
@@ -210,4 +210,4 @@ rpc_get (int sock, ...)
 	}
     }
 }
-#endif				/* ENABLE_VFS_MCFS */
+#endif				/* ENABLE_VFS_MCFS || ENABLE_MCSERVER */
