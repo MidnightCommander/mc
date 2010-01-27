@@ -1,29 +1,29 @@
-extfsdir = $(pkgdatadir)/extfs
+extfsdir = $(libexecdir)/@PACKAGE@/extfs.d
 
-EXTFSCONFFILES = extfs.ini sfs.ini
+EXTFSCONFFILES = sfs.ini
 
 # Files to install and distribute other than extfs scripts
-EXTFS_MISC  = README
+EXTFS_MISC  = README README.extfs
 
 # Scripts hat don't need adaptation to the local system
 EXTFS_CONST = bpp rpm trpm u7z ucab
 
 # Scripts that need adaptation to the local system - source files
 EXTFS_IN    = 			\
-	a.in			\
-	apt.in			\
+	a+.in			\
+	apt+.in			\
 	audio.in		\
 	deb.in			\
 	deba.in			\
 	debd.in			\
-	dpkg.in			\
+	dpkg+.in		\
 	iso9660.in		\
-	hp48.in			\
+	hp48+.in		\
 	lslR.in			\
 	mailfs.in		\
 	patchfs.in		\
-	rpms.in			\
-	s3.in			\
+	rpms+.in		\
+	s3+.in			\
 	uace.in			\
 	ualz.in			\
 	uar.in			\
@@ -38,20 +38,20 @@ EXTFS_IN    = 			\
 
 # Scripts that need adaptation to the local system - files to install
 EXTFS_OUT = 			\
-	a			\
-	apt			\
+	a+			\
+	apt+			\
 	audio			\
 	deb			\
 	deba			\
 	debd			\
-	dpkg			\
+	dpkg+			\
 	iso9660			\
-	hp48			\
+	hp48+			\
 	lslR			\
 	mailfs			\
 	patchfs			\
-	rpms			\
-	s3			\
+	rpms+			\
+	s3+			\
 	uace			\
 	ualz			\
 	uar			\
@@ -68,7 +68,7 @@ if ENABLE_VFS
 extfs_DATA = $(EXTFS_MISC)
 extfs_SCRIPTS = $(EXTFS_CONST) $(EXTFS_OUT)
 
-extfsconfdir = $(sysconfdir)/@PACKAGE@/extfs
+extfsconfdir = $(sysconfdir)/@PACKAGE@
 extfsconf_DATA = $(EXTFSCONFFILES)
 endif
 

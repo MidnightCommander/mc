@@ -44,11 +44,13 @@
 #include <fcntl.h>
 #include <errno.h>
 #include <sys/wait.h>
+#include <unistd.h>
 
 #include "lib/global.h"
+#include "lib/fileloc.h"
 
-#include "src/wtools.h"	/* message() */
-#include "src/main.h"	/* print_vfs_message */
+#include "src/wtools.h"		/* message() */
+#include "src/main.h"		/* print_vfs_message */
 #include "src/execute.h"	/* For shell_execute */
 
 #include "utilvfs.h"
@@ -353,7 +355,7 @@ extfs_open_archive (int fstype, const char *name, struct archive **pparc)
 	tmp = name_quote (name, 0);
     }
 
-    mc_extfsdir = concat_dir_and_file (mc_home_alt, "extfs" PATH_SEP_STR);
+    mc_extfsdir = g_build_path (PATH_SEP_STR, LIBEXECDIR, MC_EXTFS_DIR PATH_SEP_STR, (char *) NULL);
     cmd = g_strconcat (mc_extfsdir, info->prefix, " list ",
 			local_name != NULL ? local_name : tmp, (char *) NULL);
     g_free (tmp);
@@ -722,7 +724,7 @@ extfs_cmd (const char *str_extfs_cmd, struct archive *archive,
     archive_name = name_quote (extfs_get_archive_name (archive), 0);
     quoted_localname = name_quote (localname, 0);
     info = &g_array_index (extfs_plugins, extfs_plugin_info_t, archive->fstype);
-    mc_extfsdir = concat_dir_and_file (mc_home_alt, "extfs" PATH_SEP_STR);
+    mc_extfsdir = g_build_path (PATH_SEP_STR, LIBEXECDIR, MC_EXTFS_DIR PATH_SEP_STR, (char *) NULL);
     cmd = g_strconcat (mc_extfsdir, info->prefix, str_extfs_cmd,
 			archive_name, " ", quoted_file, " ",
 			quoted_localname, (char *) NULL);
@@ -753,7 +755,7 @@ extfs_run (struct vfs_class *me, const char *file)
     g_free (p);
 
     archive_name = name_quote (extfs_get_archive_name (archive), 0);
-    mc_extfsdir = concat_dir_and_file (mc_home_alt, "extfs" PATH_SEP_STR);
+    mc_extfsdir = g_build_path (PATH_SEP_STR, LIBEXECDIR, MC_EXTFS_DIR PATH_SEP_STR, (char *) NULL);
     info = &g_array_index (extfs_plugins, extfs_plugin_info_t, archive->fstype);
     cmd = g_strconcat (mc_extfsdir, info->prefix,
 			" run ", archive_name, " ", q, (char *) NULL);
@@ -1361,61 +1363,78 @@ extfs_ungetlocalcopy (struct vfs_class *me, const char *path,
 static int
 extfs_init (struct vfs_class *me)
 {
-    FILE *cfg;
-    char *mc_extfsini;
-    char key[256];
+    char *dirname;
+    GDir *dir;
+    const char *filename;
 
     (void) me;
 
-    mc_extfsini = concat_dir_and_file (mc_home, "extfs" PATH_SEP_STR "extfs.ini");
-    cfg = fopen (mc_extfsini, "r");
+    dirname = g_build_path (PATH_SEP_STR, LIBEXECDIR, MC_EXTFS_DIR, (char *) NULL);
+    dir = g_dir_open (dirname, 0, NULL);
 
     /* We may not use vfs_die() message or message or similar,
      * UI is not initialized at this time and message would not
      * appear on screen. */
-    if (cfg == NULL) {
-	fprintf (stderr, _("Warning: file %s not found\n"), mc_extfsini);
-	g_free (mc_extfsini);
+    if (dir == NULL) {
+	fprintf (stderr, _("Warning: cannot open %s directory\n"), dirname);
+	g_free (dirname);
 	return 0;
     }
 
     extfs_plugins = g_array_sized_new (FALSE, TRUE, sizeof (extfs_plugin_info_t), 32);
 
-    while (fgets (key, sizeof (key), cfg) != NULL) {
-	extfs_plugin_info_t info;
-	char *c;
+    while ((filename = g_dir_read_name (dir)) != NULL) {
+	char fullname[MC_MAXPATHLEN];
+	struct stat s;
 
-	/* Handle those with a trailing ':', those flag that the
-	 * file system does not require an archive to work
-	 */
+	g_snprintf (fullname, sizeof (fullname), "%s" PATH_SEP_STR "%s", dirname, filename);
 
-	if (*key == '[') {
-	    fprintf (stderr, "Warning: You need to update your %s file.\n",
-		    mc_extfsini);
-	    fclose (cfg);
-	    g_free (mc_extfsini);
-	    return 0;
+	if ((stat (fullname, &s) == 0)
+	    && S_ISREG (s.st_mode) && !S_ISDIR (s.st_mode)
+	    && (((s.st_mode & S_IXOTH) != 0) ||
+		((s.st_mode & S_IXUSR) != 0) ||
+		((s.st_mode & S_IXGRP) != 0))) {
+	    int f;
+
+	    f = open (fullname, O_RDONLY);
+
+	    if (f > 0) {
+		size_t len;
+		extfs_plugin_info_t info;
+
+		close (f);
+
+		/* Handle those with a trailing '+', those flag that the
+		 * file system does not require an archive to work
+		 */
+		len = strlen (filename);
+		if (filename [len - 1] != '+')
+		    info.need_archive = TRUE;
+		else {
+		    info.need_archive = FALSE;
+		    len--;
+		}
+		info.prefix = g_strndup (filename, len);
+		g_array_append_val (extfs_plugins, info);
+	    }
 	}
-
-	if (*key == '#' || *key == '\n')
-	    continue;
-
-	c = strchr (key, '\n');
-	if (c != '\0')
-	    *c-- = '\0';
-	 else	/* Last line without newline or strlen (key) > 255 */
-	    c = &key [strlen (key) - 1];
-
-	info.need_archive = !(*c == ':');
-	if (*c == ':')
-	    *c = '\0';
-	if (*key != '\0')
-	    info.prefix = g_strdup (key);
-
-	g_array_append_val (extfs_plugins, info);
     }
-    fclose (cfg);
-    g_free (mc_extfsini);
+
+    g_dir_close (dir);
+    g_free (dirname);
+
+#if 0
+    {
+	size_t i;
+
+	for (i = 0; i < extfs_plugins->len; i++) {
+	    extfs_plugin_info_t *info;
+	    info = &g_array_index (extfs_plugins, extfs_plugin_info_t, i);
+	    mc_log ("%s %d\n", info->prefix, info->need_archive ? 1 : 0);
+	}
+    }
+#endif
+
     return 1;
 }
 

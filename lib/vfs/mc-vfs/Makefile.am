@@ -8,6 +8,8 @@ DIST_SUBDIRS = extfs
 SUBDIRS   = extfs $(SAMBA_SUBDIRS)
 AM_CFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir) $(SAMBA_CFLAGS)
 
+AM_CPPFLAGS = -DLIBEXECDIR=\""$(libexecdir)/@PACKAGE@/"\"
+
 BASICFILES = 			\
 	cpio.c			\
 	direntry.c		\
