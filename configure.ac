@@ -48,9 +48,9 @@ AC_ARG_WITH([glib_static],
 
 glib_found=no
 
-PKG_CHECK_MODULES(GLIB, [glib-2.0 >= 2.6], [glib_found=yes], [:])
+PKG_CHECK_MODULES(GLIB, [glib-2.0 >= 2.8], [glib_found=yes], [:])
 if test x"$glib_found" = xno; then
-    AC_MSG_ERROR([glib-2.0 not found or version too old (must be >= 2.6)])
+    AC_MSG_ERROR([glib-2.0 not found or version too old (must be >= 2.8)])
 fi
 
 PKG_CHECK_MODULES(GMODULE, [gmodule-2.0], [gmodule_found=yes])
