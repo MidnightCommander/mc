@@ -395,7 +395,7 @@ get glib from
 
 ftp://ftp.gtk.org/pub/glib/
 
-Minimal version of glib: 2.6.x
+Minimal version of glib: 2.8.x
 Recommended version: 2.14.x and higher.
 
 Newer versions may work, but haven't been tested.

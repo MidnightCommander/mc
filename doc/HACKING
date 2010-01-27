@@ -19,7 +19,7 @@ required:
 Autoconf 2.52 and above (latest is recommended)
 Automake 1.5 and above (latest is recommended)
 Gettext 0.11.5 and above
-Glib 2.6 and above (2.14 and higher is recommended)
+Glib 2.8 and above (2.14 and higher is recommended)
 
 Full list of requirements you can see at:
 http://www.midnight-commander.org/wiki/doc/buildAndInstall/req

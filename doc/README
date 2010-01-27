@@ -29,7 +29,7 @@ Dependencies
 ------------
 
 To compile the GNU Midnight Commander, you need to have a copy of the
-glib library version 2.6.x or newer, available at
+glib library version 2.8.x or newer, available at
 
 ftp://ftp.gtk.org/pub/glib/
 
