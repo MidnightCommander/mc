@@ -344,10 +344,10 @@ static int sfs_init (struct vfs_class *me)
 
     (void) me;
 
-    mc_sfsini = concat_dir_and_file (mc_home, "extfs" PATH_SEP_STR "sfs.ini");
+    mc_sfsini = g_build_filename (mc_home, "sfs.ini", (char *) NULL);
     cfg = fopen (mc_sfsini, "r");
 
-    if (!cfg){
+    if (cfg == NULL) {
 	fprintf (stderr, _("Warning: file %s not found\n"), mc_sfsini);
 	g_free (mc_sfsini);
 	return 0;

@@ -29,6 +29,7 @@
 #define CHARSETS_INDEX		"mc.charsets"
 #define MC_LIB_EXT		"mc.ext"
 
+#define MC_EXTFS_DIR		"extfs.d"
 
 #define MC_BASHRC_FILE		"bashrc"
 #define MC_CONFIG_FILE		"ini"
