@@ -104,6 +104,11 @@ struct archive {
     struct archive *next;
 };
 
+typedef struct {
+    char *prefix;
+    gboolean need_archive;
+} extfs_plugin_info_t;
+
 static gboolean errloop;
 static gboolean notadir;
 
@@ -116,10 +121,7 @@ static struct vfs_class vfs_extfs_ops;
 static struct archive *first_archive = NULL;
 static int my_errno = 0;
 
-#define MAXEXTFS 32
-static char *extfs_prefixes [MAXEXTFS];
-static char extfs_need_archive [MAXEXTFS];
-static int extfs_no = 0;
+GArray *extfs_plugins = NULL;
 
 static void
 extfs_make_dots (struct entry *ent)
@@ -295,10 +297,11 @@ extfs_fill_names (struct vfs_class *me, fill_names_f func)
     (void) me;
 
     while (a != NULL) {
+	extfs_plugin_info_t *info;
 	char *name;
 
-	name = g_strconcat (a->name ? a->name : "", "#",
-			    extfs_prefixes[a->fstype], (char *) NULL);
+	info = &g_array_index (extfs_plugins, extfs_plugin_info_t, a->fstype);
+	name = g_strconcat (a->name ? a->name : "", "#", info->prefix, (char *) NULL);
 	func (name);
 	g_free (name);
 	a = a->next;
@@ -324,6 +327,7 @@ extfs_free_archive (struct archive *archive)
 static FILE *
 extfs_open_archive (int fstype, const char *name, struct archive **pparc)
 {
+    const extfs_plugin_info_t *info;
     static dev_t archive_counter = 0;
     FILE *result;
     mode_t mode;
@@ -333,25 +337,28 @@ extfs_open_archive (int fstype, const char *name, struct archive **pparc)
     struct archive *current_archive;
     struct entry *root_entry;
     char *local_name = NULL, *tmp = NULL;
-    int uses_archive;
 
-    uses_archive = extfs_need_archive[fstype];
-    if (uses_archive != 0) {
+    info = &g_array_index (extfs_plugins, extfs_plugin_info_t, fstype);
+
+    if (info->need_archive) {
 	if (mc_stat (name, &mystat) == -1)
 	    return NULL;
+
 	if (!vfs_file_is_local (name)) {
 	    local_name = mc_getlocalcopy (name);
 	    if (local_name == NULL)
 		return NULL;
 	}
+
 	tmp = name_quote (name, 0);
     }
 
     mc_extfsdir = concat_dir_and_file (mc_home_alt, "extfs" PATH_SEP_STR);
-    cmd = g_strconcat (mc_extfsdir, extfs_prefixes[fstype], " list ",
+    cmd = g_strconcat (mc_extfsdir, info->prefix, " list ",
 			local_name != NULL ? local_name : tmp, (char *) NULL);
     g_free (tmp);
     g_free (mc_extfsdir);
+
     open_error_pipe ();
     result = popen (cmd, "r");
     g_free (cmd);
@@ -359,7 +366,7 @@ extfs_open_archive (int fstype, const char *name, struct archive **pparc)
 	close_error_pipe (D_ERROR, NULL);
 	if (local_name != NULL) {
 	    mc_ungetlocalcopy (name, local_name, 0);
-	    g_free(local_name);
+	    g_free (local_name);
 	}
 	return NULL;
     }
@@ -409,14 +416,18 @@ static int
 extfs_read_archive (int fstype, const char *name, struct archive **pparc)
 {
     FILE *extfsd;
+    const extfs_plugin_info_t *info;
     char *buffer;
     struct archive *current_archive;
     char *current_file_name, *current_link_name;
 
-    extfsd =  extfs_open_archive (fstype, name, &current_archive);
+    info = &g_array_index (extfs_plugins, extfs_plugin_info_t, fstype);
+
+    extfsd = extfs_open_archive (fstype, name, &current_archive);
+
     if (extfsd == NULL) {
 	message (D_ERROR, MSG_ERROR, _("Cannot open %s archive\n%s"),
-		 extfs_prefixes[fstype], name);
+			info->prefix, name);
 	return -1;
     }
 
@@ -536,13 +547,17 @@ read_extfs_continue:
 static int
 extfs_which (struct vfs_class *me, const char *path)
 {
-    int i;
+    size_t i;
 
     (void) me;
 
-    for (i = 0; i < extfs_no; i++)
-        if (!strcmp (path, extfs_prefixes [i]))
+    for (i = 0; i < extfs_plugins->len; i++) {
+        extfs_plugin_info_t *info;
+
+        info = &g_array_index (extfs_plugins, extfs_plugin_info_t, i);
+        if (strcmp (path, info->prefix) == 0)
             return i;
+    }
     return -1;
 }
 
@@ -695,6 +710,7 @@ extfs_cmd (const char *str_extfs_cmd, struct archive *archive,
     char *quoted_file;
     char *quoted_localname;
     char *archive_name;
+    const extfs_plugin_info_t *info;
     char *mc_extfsdir;
     char *cmd;
     int retval;
@@ -702,13 +718,14 @@ extfs_cmd (const char *str_extfs_cmd, struct archive *archive,
     file = extfs_get_path_from_entry (entry);
     quoted_file = name_quote (file, 0);
     g_free (file);
+
     archive_name = name_quote (extfs_get_archive_name (archive), 0);
     quoted_localname = name_quote (localname, 0);
-
+    info = &g_array_index (extfs_plugins, extfs_plugin_info_t, archive->fstype);
     mc_extfsdir = concat_dir_and_file (mc_home_alt, "extfs" PATH_SEP_STR);
-    cmd = g_strconcat (mc_extfsdir, extfs_prefixes[archive->fstype],
-		       str_extfs_cmd, archive_name, " ", quoted_file, " ",
-		       quoted_localname, (char *) NULL);
+    cmd = g_strconcat (mc_extfsdir, info->prefix, str_extfs_cmd,
+			archive_name, " ", quoted_file, " ",
+			quoted_localname, (char *) NULL);
     g_free (quoted_file);
     g_free (quoted_localname);
     g_free (mc_extfsdir);
@@ -727,6 +744,7 @@ extfs_run (struct vfs_class *me, const char *file)
     struct archive *archive = NULL;
     char *p, *q, *archive_name, *mc_extfsdir;
     char *cmd;
+    const extfs_plugin_info_t *info;
 
     p = extfs_get_path (me, file, &archive, FALSE);
     if (p == NULL)
@@ -736,7 +754,8 @@ extfs_run (struct vfs_class *me, const char *file)
 
     archive_name = name_quote (extfs_get_archive_name (archive), 0);
     mc_extfsdir = concat_dir_and_file (mc_home_alt, "extfs" PATH_SEP_STR);
-    cmd = g_strconcat (mc_extfsdir, extfs_prefixes[archive->fstype],
+    info = &g_array_index (extfs_plugins, extfs_plugin_info_t, archive->fstype);
+    cmd = g_strconcat (mc_extfsdir, info->prefix,
 			" run ", archive_name, " ", q, (char *) NULL);
     g_free (mc_extfsdir);
     g_free (archive_name);
@@ -1360,8 +1379,10 @@ extfs_init (struct vfs_class *me)
 	return 0;
     }
 
-    extfs_no = 0;
-    while (extfs_no < MAXEXTFS && fgets (key, sizeof (key), cfg)) {
+    extfs_plugins = g_array_sized_new (FALSE, TRUE, sizeof (extfs_plugin_info_t), 32);
+
+    while (fgets (key, sizeof (key), cfg) != NULL) {
+	extfs_plugin_info_t info;
 	char *c;
 
 	/* Handle those with a trailing ':', those flag that the
@@ -1369,12 +1390,13 @@ extfs_init (struct vfs_class *me)
 	 */
 
 	if (*key == '[') {
-	    fprintf(stderr, "Warning: You need to update your %s file.\n",
+	    fprintf (stderr, "Warning: You need to update your %s file.\n",
 		    mc_extfsini);
 	    fclose (cfg);
 	    g_free (mc_extfsini);
 	    return 0;
 	}
+
 	if (*key == '#' || *key == '\n')
 	    continue;
 
@@ -1384,13 +1406,13 @@ extfs_init (struct vfs_class *me)
 	 else	/* Last line without newline or strlen (key) > 255 */
 	    c = &key [strlen (key) - 1];
 
-	extfs_need_archive [extfs_no] = !(*c == ':');
+	info.need_archive = !(*c == ':');
 	if (*c == ':')
 	    *c = '\0';
-	if (*key == '\0')
-	    continue;
+	if (*key != '\0')
+	    info.prefix = g_strdup (key);
 
-	extfs_prefixes [extfs_no++] = g_strdup (key);
+	g_array_append_val (extfs_plugins, info);
     }
     fclose (cfg);
     g_free (mc_extfsini);
@@ -1400,7 +1422,7 @@ extfs_init (struct vfs_class *me)
 static void
 extfs_done (struct vfs_class *me)
 {
-    int i;
+    size_t i;
     struct archive *ar;
 
     (void) me;
@@ -1410,9 +1432,13 @@ extfs_done (struct vfs_class *me)
 	ar = first_archive;
     }
 
-    for (i = 0; i < extfs_no; i++ )
-	g_free (extfs_prefixes [i]);
-    extfs_no = 0;
+    for (i = 0; i < extfs_plugins->len; i++) {
+	extfs_plugin_info_t *info;
+
+	info = &g_array_index (extfs_plugins, extfs_plugin_info_t, i);
+	g_free (info->prefix);
+    }
+    g_array_free (extfs_plugins, TRUE);
 }
 
 static int
