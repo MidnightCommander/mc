@@ -104,19 +104,13 @@ struct archive {
     struct archive *next;
 };
 
-struct loop_protect {
-    struct entry *entry;
-    struct loop_protect *next;
-};
-
 static gboolean errloop;
 static gboolean notadir;
 
 static void extfs_remove_entry (struct entry *e);
 static void extfs_free (vfsid id);
 static void extfs_free_entry (struct entry *e);
-static struct entry * extfs_resolve_symlinks_int (struct entry *entry,
-						    struct loop_protect *list);
+static struct entry * extfs_resolve_symlinks_int (struct entry *entry, GSList *list);
 
 static struct vfs_class vfs_extfs_ops;
 static struct archive *first_archive = NULL;
@@ -202,7 +196,7 @@ extfs_generate_entry (struct archive *archive,
 }
 
 static struct entry *
-extfs_find_entry_int (struct entry *dir, char *name, struct loop_protect *list,
+extfs_find_entry_int (struct entry *dir, char *name, GSList *list,
 			gboolean make_dirs, gboolean make_file)
 {
     struct entry *pent, *pdir;
@@ -634,30 +628,28 @@ extfs_get_path_from_entry (struct entry *entry)
 }
 
 static struct entry *
-extfs_resolve_symlinks_int (struct entry *entry, struct loop_protect *list)
+extfs_resolve_symlinks_int (struct entry *entry, GSList *list)
 {
-    struct entry *pent;
-    struct loop_protect *looping;
+    struct entry *pent = NULL;
 
     if (!S_ISLNK (entry->inode->mode))
 	return entry;
 
-    for (looping = list; looping != NULL; looping = looping->next)
-	if (entry == looping->entry) {
-	    /* Here we protect us against symlink looping */
-	    errloop = TRUE;
-	    return NULL;
-	}
+    if (g_slist_find (list, entry) != NULL) {
+	/* Here we protect us against symlink looping */
+	errloop = TRUE;
+    } else {
+	GSList *looping;
 
-    looping = g_new (struct loop_protect, 1);
-    looping->entry = entry;
-    looping->next = list;
-    pent = extfs_find_entry_int (entry->dir, entry->inode->linkname,
-				    looping, FALSE, FALSE);
-    g_free (looping);
+	looping = g_slist_prepend (list, entry);
+	pent = extfs_find_entry_int (entry->dir, entry->inode->linkname,
+					looping, FALSE, FALSE);
+	g_free (looping); /* It is OK here, no any leaks */
 
-    if (pent == NULL)
-	my_errno = ENOENT;
+	if (pent == NULL)
+	    my_errno = ENOENT;
+    }
+
     return pent;
 }
 
