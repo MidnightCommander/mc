@@ -619,35 +619,18 @@ extfs_get_path (struct vfs_class *me, const char *inname,
 static char *
 extfs_get_path_from_entry (struct entry *entry)
 {
-    struct list {
-	struct list *next;
-	char *name;
-    } *head, *p;
-    char *localpath;
-    size_t len;
+    GString *localpath;
 
-    for (len = 0, head = 0; entry->dir; entry = entry->dir) {
-	p = g_new (struct list, 1);
-        p->next = head;
-	p->name = entry->name;
-	head = p;
-	len += strlen (entry->name) + 1;
+    localpath = g_string_new ("");
+
+    while (entry->dir != NULL) {
+	g_string_prepend (localpath, entry->name);
+	if (entry->dir->dir != NULL)
+	    g_string_prepend_c (localpath, PATH_SEP);
+	entry = entry->dir;
     }
 
-    if (len == 0)
-	return g_strdup ("");
-
-    localpath = g_malloc (len);
-    *localpath = '\0';
-    while (head) {
-	strcat (localpath, head->name);
-	if (head->next)
-	    strcat (localpath, "/");
-	p = head;
-	head = head->next;
-	g_free (p);
-    }
-    return (localpath);
+    return g_string_free (localpath, FALSE);
 }
 
 static struct entry *
