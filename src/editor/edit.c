@@ -340,8 +340,10 @@ static const struct edit_filters {
 static int edit_find_filter (const char *filename)
 {
     size_t i, l, e;
-    if (!filename)
+
+    if (filename == NULL)
 	return -1;
+
     l = strlen (filename);
     for (i = 0; i < sizeof (all_filters) / sizeof (all_filters[0]); i++) {
 	e = strlen (all_filters[i].extension);
@@ -357,9 +359,11 @@ edit_get_filter (const char *filename)
 {
     int i;
     char *p, *quoted_name;
+
     i = edit_find_filter (filename);
     if (i < 0)
-	return 0;
+	return NULL;
+
     quoted_name = name_quote (filename, 0);
     p = g_strdup_printf(all_filters[i].read, quoted_name);
     g_free (quoted_name);
@@ -371,9 +375,11 @@ edit_get_write_filter (const char *write_name, const char *filename)
 {
     int i;
     char *p, *writename;
+
     i = edit_find_filter (filename);
     if (i < 0)
-	return 0;
+	return NULL;
+
     writename = name_quote (write_name, 0);
     p = g_strdup_printf(all_filters[i].write, writename);
     g_free (writename);
@@ -484,26 +490,28 @@ int
 edit_insert_file (WEdit *edit, const char *filename)
 {
     char *p;
-    if ((p = edit_get_filter (filename))) {
+
+    p = edit_get_filter (filename);
+    if (p != NULL) {
 	FILE *f;
 	long current = edit->curs1;
 	f = (FILE *) popen (p, "r");
-	if (f) {
+	if (f != NULL) {
 	    edit_insert_stream (edit, f);
 	    edit_cursor_move (edit, current - edit->curs1);
 	    if (pclose (f) > 0) {
-	        GString *errmsg = g_string_new (NULL);
-		g_string_sprintf (errmsg, _(" Error reading from pipe: %s "), p);
-		edit_error_dialog (_("Error"), errmsg->str);
-		g_string_free (errmsg, TRUE);
+		char *errmsg;
+		errmsg = g_strdup_printf(_(" Error reading from pipe: %s "), p);
+		edit_error_dialog (_("Error"), errmsg);
+		g_free (errmsg);
 		g_free (p);
 		return 0;
 	    }
 	} else {
-	    GString *errmsg = g_string_new (NULL);
-	    g_string_sprintf (errmsg, _(" Cannot open pipe for reading: %s "), p);
-	    edit_error_dialog (_("Error"), errmsg->str);
-	    g_string_free (errmsg, TRUE);
+	    char *errmsg;
+	    errmsg = g_strdup_printf (_(" Cannot open pipe for reading: %s "), p);
+	    edit_error_dialog (_("Error"), errmsg);
+	    g_free (errmsg);
 	    g_free (p);
 	    return 0;
 	}
