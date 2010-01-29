@@ -354,15 +354,13 @@ static int edit_find_filter (const char *filename)
 static char *
 edit_get_filter (const char *filename)
 {
-    int i, l;
+    int i;
     char *p, *quoted_name;
     i = edit_find_filter (filename);
     if (i < 0)
 	return 0;
     quoted_name = name_quote (filename, 0);
-    l = str_term_width1 (quoted_name);
-    p = g_malloc0 (str_term_width1 (all_filters[i].read) + l + 2);
-    sprintf (p, all_filters[i].read, quoted_name);
+    p = g_strdup_printf(all_filters[i].read, quoted_name);
     g_free (quoted_name);
     return p;
 }
@@ -370,15 +368,13 @@ edit_get_filter (const char *filename)
 char *
 edit_get_write_filter (const char *write_name, const char *filename)
 {
-    int i, l;
+    int i;
     char *p, *writename;
     i = edit_find_filter (filename);
     if (i < 0)
 	return 0;
     writename = name_quote (write_name, 0);
-    l = str_term_width1 (writename);
-    p = g_malloc0 (str_term_width1 (all_filters[i].write) + l + 2);
-    sprintf (p, all_filters[i].write, writename);
+    p = g_strdup_printf(all_filters[i].write, writename);
     g_free (writename);
     return p;
 }
