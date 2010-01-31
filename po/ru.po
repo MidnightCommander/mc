@@ -18,9 +18,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-12-25 19:06+0200\n"
+"POT-Creation-Date: 2010-01-31 12:59+0300\n"
 "PO-Revision-Date: 2009-10-29  23:37+0300\n"
-"Last-Translator: Ilia Maslakov <il.smind@gmail.com>\n"
+"Last-Translator: Andrew Borodin <aborodin@vmail.ru>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,79 +29,616 @@ msgstr ""
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: mcedit 4.7.0\n"
 
-msgid " Choose syntax highlighting "
-msgstr "\tВыбор цветовыделения синтаксиса"
-
-msgid "< Auto >"
-msgstr "< Автоматически >"
-
-msgid "< Reload Current Syntax >"
-msgstr "Перезагрузить текущее цветовыделение"
-
-#, c-format
-msgid " Cannot open %s for reading "
-msgstr " Невозможно открыть файл %s для чтения "
-
-msgid "Error"
-msgstr "Ошибка"
-
-#, c-format
-msgid " Error reading from pipe: %s "
-msgstr " Ошибка чтения из канала: %s "
-
-#, c-format
-msgid " Cannot open pipe for reading: %s "
-msgstr " Невозможно открыть канал для чтения: %s "
-
-#, c-format
-msgid " Cannot get size/permissions for %s "
-msgstr " Невозможно получить размер/права доступа для файла %s "
-
-#, c-format
-msgid " %s is not a regular file "
-msgstr " %s не является обычным файлом "
-
-#, c-format
-msgid " File %s is too large "
-msgstr " Файл %s слишком большой "
-
-msgid " About "
-msgstr " О программе "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                     Cooledit  v3.11.5\n"
-"\n"
-"       Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-" Текстовый редактор с дружественным интерфейсом пользователя.\n"
-"               Создан для Midnight Commander.\n"
-
-msgid "&OK"
-msgstr "&Дальше"
-
-msgid "Macro recursion is too deep"
-msgstr "Слишком глубокая рекурсия макросов"
-
-msgid "Search"
-msgstr "Поиск"
-
 msgid " Search string not found "
 msgstr " Искомая строка не найдена "
+
+msgid " Not implemented yet "
+msgstr " Пока не реализовано "
+
+msgid " Num of replace tokens not equal to num of found tokens "
+msgstr ""
+" Количество шаблонных полей не соответствует количеству полей для замены "
+
+#, c-format
+msgid " Invalid token number %d "
+msgstr " Неправильный шаблон цели %d "
+
+msgid "Normal"
+msgstr "Обычный"
+
+msgid "&Regular expression"
+msgstr "&Регулярное выражение"
+
+msgid "Hexadecimal"
+msgstr "Шестнадцатеричный"
+
+msgid "Wildcard search"
+msgstr "По шаблону"
+
+#, c-format
+msgid ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+"Невозможно загрузить скин '%s'.\n"
+"Используется скин по умолчанию"
+
+#, c-format
+msgid ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+"Невозможно произвести синтаксический разбор файла '%s'.\n"
+"Используется скин по умолчанию"
+
+msgid "Function key 1"
+msgstr "Функциональная 1 "
+
+msgid "Function key 2"
+msgstr "Функциональная 2 "
+
+msgid "Function key 3"
+msgstr "Функциональная 3 "
+
+msgid "Function key 4"
+msgstr "Функциональная 4 "
+
+msgid "Function key 5"
+msgstr "Функциональная 5 "
+
+msgid "Function key 6"
+msgstr "Функциональная 6 "
+
+msgid "Function key 7"
+msgstr "Функциональная 7 "
+
+msgid "Function key 8"
+msgstr "Функциональная 8 "
+
+msgid "Function key 9"
+msgstr "Функциональная 9 "
+
+msgid "Function key 10"
+msgstr "Функциональная 10"
+
+msgid "Function key 11"
+msgstr "Функциональная 11"
+
+msgid "Function key 12"
+msgstr "Функциональная 12"
+
+msgid "Function key 13"
+msgstr "Функциональная 13"
+
+msgid "Function key 14"
+msgstr "Функциональная 14"
+
+msgid "Function key 15"
+msgstr "Функциональная 15"
+
+msgid "Function key 16"
+msgstr "Функциональная 16"
+
+msgid "Function key 17"
+msgstr "Функциональная 17"
+
+msgid "Function key 18"
+msgstr "Функциональная 18"
+
+msgid "Function key 19"
+msgstr "Функциональная 19"
+
+msgid "Function key 20"
+msgstr "Функциональная 20"
+
+msgid "Backspace key"
+msgstr "Клавиша Backspace"
+
+msgid "End key"
+msgstr "Клавиша End      "
+
+msgid "Up arrow key"
+msgstr "Стрелка вверх    "
+
+msgid "Down arrow key"
+msgstr "Стрелка вниз     "
+
+msgid "Left arrow key"
+msgstr "Стрелка влево    "
+
+msgid "Right arrow key"
+msgstr "Стрелка вправо   "
+
+msgid "Home key"
+msgstr "Клавиша Home     "
+
+msgid "Page Down key"
+msgstr "Клавиша Page Down"
+
+msgid "Page Up key"
+msgstr "Клавиша Page Up  "
+
+msgid "Insert key"
+msgstr "Клавиша Insert   "
+
+msgid "Delete key"
+msgstr "Клавиша Delete   "
+
+msgid "Completion/M-tab"
+msgstr "Завершение/M-Tab "
+
+msgid "+ on keypad"
+msgstr "+ доп.клавиатуры "
+
+msgid "- on keypad"
+msgstr "- доп.клавиатуры "
+
+msgid "Slash on keypad"
+msgstr "/ доп.клавиатуры "
+
+msgid "* on keypad"
+msgstr "* доп.клавиатуры "
+
+msgid "Escape key"
+msgstr "Клавиша Esc      "
+
+msgid "Left arrow keypad"
+msgstr "Left доп.клавиатуры"
+
+msgid "Right arrow keypad"
+msgstr "Right доп.клавиатуры"
+
+msgid "Up arrow keypad"
+msgstr "Up доп.клавиатуры"
+
+msgid "Down arrow keypad"
+msgstr "Down доп.клавиатуры"
+
+msgid "Home on keypad"
+msgstr "Home доп.клавиатуры"
+
+msgid "End on keypad"
+msgstr "End доп.клавиатуры"
+
+msgid "Page Down keypad"
+msgstr "Page Down доп.клавиатуры"
+
+msgid "Page Up keypad"
+msgstr "Page Up доп.клавиатуры"
+
+msgid "Insert on keypad"
+msgstr "Insert доп.клавиатуры"
+
+msgid "Delete on keypad"
+msgstr "Delete доп.клавиатуры"
+
+msgid "Enter on keypad"
+msgstr "Enter доп.клавиатуры"
+
+msgid "Function key 21"
+msgstr "Функциональная 21"
+
+msgid "Function key 22"
+msgstr "Функциональная 22"
+
+msgid "Function key 23"
+msgstr "Функциональная 23"
+
+msgid "Function key 24"
+msgstr "Функциональная 24"
+
+msgid "Plus"
+msgstr "Плюс"
+
+msgid "Minus"
+msgstr "Минус"
+
+msgid "Asterisk"
+msgstr "Звёздочка"
+
+msgid "Dot"
+msgstr "Точка"
+
+msgid "Less than"
+msgstr "Меньше"
+
+msgid "Great than"
+msgstr "Больше"
+
+msgid "Equal"
+msgstr "Равно"
+
+msgid "Comma"
+msgstr "Запятая"
+
+msgid "Apostrophe"
+msgstr "Апостроф"
+
+msgid "Colon"
+msgstr "Двоеточие"
+
+msgid "Exclamation mark"
+msgstr "Восклицательный знак"
+
+msgid "Question mark"
+msgstr "Вопросительный знак"
+
+msgid "Ampersand"
+msgstr "Амперсанд"
+
+msgid "Dollar sign"
+msgstr "Знак доллара"
+
+msgid "Quotation mark"
+msgstr "Знак цитирования"
+
+msgid "Caret"
+msgstr "Каретка"
+
+msgid "Tilda"
+msgstr "Тильда"
+
+msgid "Prime"
+msgstr "Обратный апостроф"
+
+msgid "Underline"
+msgstr "Подчёркивание"
+
+msgid "Understrike"
+msgstr "Подчёркивание"
+
+msgid "Pipe"
+msgstr "Прямая черта"
+
+msgid "Enter"
+msgstr "Ввод"
+
+msgid "Tab key"
+msgstr "Клавиша TAB"
+
+msgid "Space key"
+msgstr "Пробел"
+
+msgid "Slash key"
+msgstr "Знак деления (слэш)"
+
+msgid "Backslash key"
+msgstr "Клавиша Backspace"
+
+msgid "Number sign #"
+msgstr "Знак номера"
+
+msgid "Ctrl"
+msgstr "Ctrl"
+
+msgid "Alt"
+msgstr "Alt"
+
+msgid "Shift"
+msgstr "Shift"
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"Размер экрана %dx%d не поддерживается.\n"
+"Проверьте переменную окружения TERM.\n"
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
+
+#, c-format
+msgid "%s is not a directory\n"
+msgstr "%s не является каталогом\n"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr "Вы не владеете каталогом %s\n"
+
+#, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr "Невозможно установить правильные права доступа к каталогу %s\n"
+
+#, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr "Невозможно создать временный каталог %s: %s\n"
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr "Временные файлы будут создаваться в каталоге %s\n"
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr "Временные файлы не будут создаваться\n"
+
+#, c-format
+msgid "Press any key to continue..."
+msgstr "Для продолжения нажмите любую клавишу..."
 
 msgid "Warning"
 msgstr "Предупреждение"
 
-msgid " File has hard-links. Detach before saving? "
-msgstr " Файл имеет жесткие ссылки. Отсоединить перед сохранением? "
+msgid " Pipe failed "
+msgstr " Сбой канала "
+
+msgid " Dup failed "
+msgstr " Сбой дублирования дескриптора "
+
+#, c-format
+msgid ""
+"Cannot open cpio archive\n"
+"%s"
+msgstr ""
+"Невозможно открыть cpio-архив\n"
+"%s"
+
+#, c-format
+msgid ""
+"Premature end of cpio archive\n"
+"%s"
+msgstr ""
+"Преждевременный конец архива cpio\n"
+"%s"
+
+#, c-format
+msgid ""
+"Inconsistent hardlinks of\n"
+"%s\n"
+"in cpio archive\n"
+"%s"
+msgstr ""
+"Несогласованная жесткая ссылка\n"
+"%s\n"
+"в архиве cpio\n"
+"%s"
+
+#, c-format
+msgid "%s contains duplicate entries! Skipping!"
+msgstr "%s содержит сдвоенные элементы! Пропущено!"
+
+#, c-format
+msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"Поврежденный заголовок cpio обнаружен в\n"
+"%s"
+
+#, c-format
+msgid ""
+"Unexpected end of file\n"
+"%s"
+msgstr ""
+"Неожиданный конец файла\n"
+"%s"
+
+#, c-format
+msgid "Directory cache expired for %s"
+msgstr "Кэш каталога устарел для %s"
+
+msgid "Starting linear transfer..."
+msgstr "Запуск линейной передачи..."
+
+#, c-format
+msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+msgstr "%s: %s: %s %3d%% (%lu байт перенесено)"
+
+#, c-format
+msgid "%s: %s: %s %lu bytes transferred"
+msgstr "%s: %s: %s %lu байт перенесено"
+
+msgid "Getting file"
+msgstr "Получение файла"
+
+#, c-format
+msgid ""
+"Cannot open %s archive\n"
+"%s"
+msgstr ""
+"Невозможно открыть %s-архив\n"
+"%s"
+
+msgid "Inconsistent extfs archive"
+msgstr "Несогласованный архив extfs"
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Предупреждение: файл %s не найден\n"
+
+#, c-format
+msgid "fish: Disconnecting from %s"
+msgstr "fish: отсоединение от %s"
+
+msgid "fish: Waiting for initial line..."
+msgstr "fish: ожидается начальная строка..."
+
+msgid "Sorry, we cannot do password authenticated connections for now."
+msgstr "Извините, сейчас невозможно создать авторизованные паролем соединения."
+
+msgid " fish: Password required for "
+msgstr "fish: требуется пароль для "
+
+msgid "fish: Sending password..."
+msgstr "fish: посылается пароль..."
+
+msgid "fish: Sending initial line..."
+msgstr "fish: посылается начальная строка..."
+
+msgid "fish: Handshaking version..."
+msgstr "fish: версия подтверждения связи..."
+
+msgid "fish: Setting up current directory..."
+msgstr "fish: устанавливается текущий каталог..."
+
+#, c-format
+msgid "fish: Connected, home %s."
+msgstr "fish: соединение успешно, персональный каталог %s."
+
+#, c-format
+msgid "fish: Reading directory %s..."
+msgstr "fish: чтение каталога %s..."
+
+#, c-format
+msgid "%s: done."
+msgstr "%s: готово."
+
+#, c-format
+msgid "%s: failure"
+msgstr "%s: ошибка"
+
+#, c-format
+msgid "fish: store %s: sending command..."
+msgstr "fish: запись %s: посылается команда..."
+
+msgid "fish: Local read failed, sending zeros"
+msgstr "fish: сбой локального чтения, посылаются нули"
+
+#, c-format
+msgid "fish: storing %s %d (%lu)"
+msgstr "fish: запись %s %d (%lu)"
+
+msgid "zeros"
+msgstr "нули"
+
+msgid "file"
+msgstr "файл"
+
+msgid "Aborting transfer..."
+msgstr "Прерывание передачи..."
+
+msgid "Error reported after abort."
+msgstr "Отмечена ошибка после прерывания."
+
+msgid "Aborted transfer would be successful."
+msgstr "Передача успешно прервана."
+
+#, c-format
+msgid "ftpfs: Disconnecting from %s"
+msgstr "ftpfs: отсоединение от %s"
+
+msgid " FTP: Password required for "
+msgstr " FTP: требуется пароль для "
+
+msgid "ftpfs: sending login name"
+msgstr "ftpfs: посылается имя пользователя"
+
+msgid "ftpfs: sending user password"
+msgstr "ftpfs: посылается пароль пользователя"
+
+#, c-format
+msgid "FTP: Account required for user %s"
+msgstr "FTP: Необходима учётная запись для пользователя %s"
+
+msgid "Account:"
+msgstr "Счет:"
+
+msgid "ftpfs: sending user account"
+msgstr "ftpfs: посылается учётная запись пользователя"
+
+msgid "ftpfs: logged in"
+msgstr "ftpfs: зарегистрирован"
+
+#, c-format
+msgid "ftpfs: Login incorrect for user %s "
+msgstr "ftpfs: ошибка регистрации пользователя %s "
+
+msgid "ftpfs: Invalid host name."
+msgstr "ftpfs: неверное имя системы."
+
+#, c-format
+msgid "ftpfs: %s"
+msgstr "ftpfs: %s"
+
+#, c-format
+msgid "ftpfs: making connection to %s"
+msgstr "ftpfs: осуществляется соединение с %s"
+
+msgid "ftpfs: connection interrupted by user"
+msgstr "ftpfs: соединение прервано пользователем"
+
+#, c-format
+msgid "ftpfs: connection to server failed: %s"
+msgstr "ftpfs: сбой соединения с сервером: %s"
+
+#, c-format
+msgid "Waiting to retry... %d (Control-C to cancel)"
+msgstr "Ожидание повтора попытки... %d (Control-C для отмены)"
+
+msgid "ftpfs: invalid address family"
+msgstr "ftpfs: неверный адрес системы."
+
+#, c-format
+msgid "ftpfs: could not setup passive mode: %s"
+msgstr "ftpfs: невозможно установить пассивный режим: %s"
+
+#, c-format
+msgid "ftpfs: could not create socket: %s"
+msgstr " Невозможно создать сокет: %s "
+
+msgid "ftpfs: could not setup passive mode"
+msgstr "ftpfs: невозможно установить пассивный режим"
+
+msgid "ftpfs: aborting transfer."
+msgstr "ftpfs: прерывание передачи."
+
+#, c-format
+msgid "ftpfs: abort error: %s"
+msgstr "ftpfs: ошибка прерывания: %s"
+
+msgid "ftpfs: abort failed"
+msgstr "ftpfs: сбой прерывания"
+
+msgid "ftpfs: CWD failed."
+msgstr "ftpfs: невозможно изменить текущий рабочий каталог."
+
+msgid "ftpfs: couldn't resolve symlink"
+msgstr "ftpfs: невозможно распознать символическую ссылку"
+
+msgid "Resolving symlink..."
+msgstr "Распознается символическая ссылка..."
+
+#, c-format
+msgid "ftpfs: Reading FTP directory %s... %s%s"
+msgstr "ftpfs: чтение каталога FTP %s... %s%s"
+
+msgid "(strict rfc959)"
+msgstr "(ограничение rfc959)"
+
+msgid "(chdir first)"
+msgstr "(сначала chdir)"
+
+msgid "ftpfs: failed; nowhere to fallback to"
+msgstr "ftpfs: ошибка; некуда перейти на аварийный режим"
+
+#, c-format
+msgid "ftpfs: storing file %lu (%lu)"
+msgstr "ftpfs: запись файла %lu (%lu)"
+
+msgid ""
+"~/.netrc file has incorrect mode.\n"
+"Remove password or correct mode."
+msgstr ""
+"Файл ~/.netrc имеет неверный режим доступа/владения.\n"
+"Удалите пароль или исправьте режим доступа/владения."
+
+msgid " MCFS "
+msgstr " MCFS "
+
+msgid " The server does not support this version "
+msgstr " Сервер не поддерживает данную версию "
+
+msgid ""
+" The remote server is not running on a system port \n"
+" you need a password to log in, but the information may \n"
+" not be safe on the remote side.  Continue? \n"
+msgstr ""
+" Удаленный сервер запущен не на системном порту. \n"
+" Требуется пароль для входа в систему, но это может быть \n"
+" небезопасно для информации на удаленной стороне. Продолжать?\n"
 
 msgid "&Yes"
 msgstr "&Да"
@@ -109,603 +646,185 @@ msgstr "&Да"
 msgid "&No"
 msgstr "&Нет"
 
+msgid " MCFS Password required "
+msgstr " Требуется пароль MCFS "
+
+msgid " Invalid password "
+msgstr " Неверный пароль "
+
+#, c-format
+msgid " Cannot locate hostname: %s "
+msgstr " Невозможно определить имя машины: %s"
+
+#, c-format
+msgid " Cannot create socket: %s "
+msgstr " Невозможно создать сокет: %s "
+
+#, c-format
+msgid " Cannot connect to server: %s "
+msgstr "Невозможно соединиться с сервером: %s "
+
+msgid " Too many open connections "
+msgstr " Слишком много открытых соединений "
+
+#, c-format
+msgid ""
+"Warning: Invalid line in %s:\n"
+"%s\n"
+msgstr ""
+"Предупреждение: неправильная строка в %s:\n"
+"%s\n"
+
+#, c-format
+msgid ""
+"Warning: Invalid flag %c in %s:\n"
+"%s\n"
+msgstr ""
+"Предупреждение: неправильный флаг %c в %s:\n"
+"%s\n"
+
+#, c-format
+msgid ""
+" reconnect to %s failed\n"
+" "
+msgstr ""
+" Сбой повторного соединения к %s\n"
+" "
+
+msgid " Authentication failed "
+msgstr " Сбой идентификации "
+
+#, c-format
+msgid " Error %s creating directory %s "
+msgstr " %s при создании каталога %s "
+
+#, c-format
+msgid " Error %s removing directory %s "
+msgstr " %s при удалении каталога %s "
+
+#, c-format
+msgid " %s opening remote file %s "
+msgstr " %s при открытии файла %s с удаленной машины "
+
+#, c-format
+msgid " %s removing remote file %s "
+msgstr " %s при удалении файла %s с удаленной машины "
+
+#, c-format
+msgid " %s renaming files\n"
+msgstr " %s при переименовании файла\n"
+
+#, c-format
+msgid ""
+"Cannot open tar archive\n"
+"%s"
+msgstr ""
+"Невозможно открыть tar-архив\n"
+"%s"
+
+msgid "Inconsistent tar archive"
+msgstr "Несогласованный архив tar"
+
+msgid "Unexpected EOF on archive file"
+msgstr "Неожиданный конец архивного файла"
+
+#, c-format
+msgid ""
+"Hmm,...\n"
+"%s\n"
+"doesn't look like a tar archive."
+msgstr ""
+"Хмм,...\n"
+"%s\n"
+"не похож на tar-архив."
+
+msgid " undelfs: error "
+msgstr " undelfs: ошибка "
+
+msgid " not enough memory "
+msgstr " недостаточно памяти "
+
+msgid " while allocating block buffer "
+msgstr " при получении блока буферов "
+
+#, c-format
+msgid " open_inode_scan: %d "
+msgstr " open_inode_scan: %d "
+
+#, c-format
+msgid " while starting inode scan %d "
+msgstr " при начале сканирования узла %d "
+
+#, c-format
+msgid "undelfs: loading deleted files information %d inodes"
+msgstr "undelfs: загрузка информации об удаленных файлах %d inodes"
+
+#, c-format
+msgid " while calling ext2_block_iterate %d "
+msgstr " при вызове ext2_block_iterate %d "
+
+msgid " no more memory while reallocating array "
+msgstr " не хватило памяти при переоткрытии массива "
+
+#, c-format
+msgid " while doing inode scan %d "
+msgstr " при сканировании узла %d "
+
+msgid " Ext2lib error "
+msgstr " Сбой Ext2lib "
+
+#, c-format
+msgid " Cannot open file %s "
+msgstr " Невозможно открыть файл %s "
+
+msgid "undelfs: reading inode bitmap..."
+msgstr "undelfs: чтение битовой карты узлов..."
+
+#, c-format
+msgid ""
+" Cannot load inode bitmap from: \n"
+" %s \n"
+msgstr ""
+" Невозможно загрузить битовую карту узлов с:\n"
+" %s \n"
+
+msgid "undelfs: reading block bitmap..."
+msgstr "undelfs: чтение блока битовой карты..."
+
+#, c-format
+msgid ""
+" Cannot load block bitmap from: \n"
+" %s \n"
+msgstr ""
+"  Невозможно загрузить блок битовой карты с:\n"
+" %s \n"
+
+msgid " vfs_info is not fs! "
+msgstr " vfs_info - не файловая система! "
+
+msgid " You have to chdir to extract files first "
+msgstr " Вы должны сначала сменить каталог, чтобы извлечь файлы "
+
+msgid " while iterating over blocks "
+msgstr " при переборе блоков "
+
+msgid "Cannot parse:"
+msgstr "Невозможно проанализировать:"
+
+msgid "More parsing errors will be ignored."
+msgstr "Остальные ошибки анализа будут проигнорированы."
+
+msgid "Internal error:"
+msgstr "Внутренняя ошибка:"
+
+msgid "Password:"
+msgstr "Пароль:"
+
+msgid "Changes to file lost"
+msgstr "Изменения для файла потеряны"
+
 msgid "&Cancel"
 msgstr "&Прервать"
-
-msgid "The file has been modified in the meantime. Save anyway?"
-msgstr "Файл был изменен внешней программой. Сохранить поверх?"
-
-msgid " Error writing to pipe: "
-msgstr " Ошибка записи в канал: "
-
-msgid " Cannot open pipe for writing: "
-msgstr " Невозможно открыть канал для записи: "
-
-#, c-format
-msgid " Cannot open file for writing: %s "
-msgstr " Невозможно открыть файл для записи: %s "
-
-msgid "&Quick save"
-msgstr "&Быстрое сохранение"
-
-msgid "&Safe save"
-msgstr "Бе&зопасное сохранение"
-
-msgid "&Do backups with following extension:"
-msgstr "Д&елать резервные копии с расширением:"
-
-msgid "Check &POSIX new line"
-msgstr "П&роверка перевода строки в конце файла"
-
-msgid " Edit Save Mode "
-msgstr " Режим сохранения "
-
-msgid "The file you are saving is not finished with a newline"
-msgstr "Сохраняемый файл не имеет символа перевода строки в конце файла"
-
-msgid "C&ontinue"
-msgstr "П&родолжить"
-
-msgid "&Do not change"
-msgstr "&Не изменять"
-
-msgid "&Unix format (LF)"
-msgstr "Формат &UNIX (LF)"
-
-msgid "&Windows/DOS format (CR LF)"
-msgstr "Формат &Windows/DOS (CR LF)"
-
-msgid "&Macintosh format (CR)"
-msgstr "Формат &Macintosh (CR)"
-
-msgid "Change line breaks to:"
-msgstr "Изменить окончания строк на:"
-
-msgid " Enter file name: "
-msgstr " Введите имя файла: "
-
-msgid " Save As "
-msgstr " Сохранить как "
-
-msgid " A file already exists with this name. "
-msgstr " Файл с таким именем уже существует. "
-
-msgid "&Overwrite"
-msgstr "Пе&реписать"
-
-msgid " Cannot save file. "
-msgstr " Невозможно сохранить файл "
-
-msgid " Delete macro "
-msgstr " Удалить макрос "
-
-msgid " Cannot open temp file "
-msgstr " Невозможно открыть временный файл "
-
-msgid " Cannot open macro file "
-msgstr " Невозможно открыть файл макросов "
-
-msgid " Cannot overwrite macro file "
-msgstr " Невозможно перезаписать файл макросов "
-
-msgid " Save macro "
-msgstr " Сохранить макрос "
-
-msgid " Press the macro's new hotkey: "
-msgstr " Нажмите новую клавишу макроса: "
-
-msgid " Press macro hotkey: "
-msgstr " Нажмите горячую клавишу для макроса: "
-
-msgid " Load macro "
-msgstr " Загрузить макрос "
-
-msgid " Confirm save file? : "
-msgstr " Подтверждаете запись файла?: "
-
-msgid " Save file "
-msgstr " Сохранить файл "
-
-msgid "&Save"
-msgstr "&Сохранить"
-
-msgid ""
-" Current text was modified without a file save. \n"
-" Continue discards these changes. "
-msgstr ""
-" Текущий текст был модифицирован и не сохранен. \n"
-" Продолжение операции приведет к потере изменений. "
-
-msgid "Syntax file edit"
-msgstr "Редактирование файла синтаксиса"
-
-msgid " Which syntax file you want to edit? "
-msgstr " Какой файл синтаксиса Вы хотите редактировать? "
-
-msgid "&User"
-msgstr "&Пользовательский"
-
-msgid "&System Wide"
-msgstr "&Общесистемный"
-
-msgid " Menu edit "
-msgstr " Редактирование файла меню "
-
-msgid " Which menu file do you want to edit? "
-msgstr " Какой файл меню Вы хотите редактировать? "
-
-msgid "&Local"
-msgstr "&Местный"
-
-msgid " Load "
-msgstr " Загрузить "
-
-msgid " Block is large, you may not be able to undo this action. "
-msgstr " Блок слишком велик, вам может не удаться отменить эту операцию. "
-
-msgid "Replace"
-msgstr "&Заменить"
-
-msgid " Replace "
-msgstr " Заменить "
-
-#, c-format
-msgid " %ld replacements made. "
-msgstr " Осуществлено подстановок: %ld "
-
-msgid "Quit"
-msgstr "Выход"
-
-msgid " File was modified, Save with exit? "
-msgstr " Файл был изменен, сохранить при выходе? "
-
-msgid "&Cancel quit"
-msgstr "&Прервать выход"
-
-msgid " Error "
-msgstr " Ошибка "
-
-msgid " This function is not implemented. "
-msgstr " Эта функция не реализована. "
-
-msgid " Copy to clipboard "
-msgstr " Копировать в буфер "
-
-msgid " Unable to save to file. "
-msgstr " Невозможно сохранить в файл. "
-
-msgid " Cut to clipboard "
-msgstr " Вырезать в буфер "
-
-msgid " Goto line "
-msgstr " Перейти к строке "
-
-msgid " Enter line: "
-msgstr " Введите номер строки: "
-
-msgid " Save Block "
-msgstr " Сохранить блок "
-
-msgid " Insert File "
-msgstr " Вставить файл "
-
-msgid " Cannot insert file. "
-msgstr " Невозможно вставить файл. "
-
-msgid " Sort block "
-msgstr " Сортировать блок "
-
-msgid " You must first highlight a block of text. "
-msgstr " Вы должны сначала выделить блок текста. "
-
-msgid " Run Sort "
-msgstr " Выполнить сортировку "
-
-msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr " Введите параметры сортировки (man sort(1)), разделенные пробелами: "
-
-msgid " Sort "
-msgstr " Сортировка "
-
-msgid " Cannot execute sort command "
-msgstr " Невозможно выполнить команду sort "
-
-msgid " Sort returned non-zero: "
-msgstr " Сортировка вернула ненулевой код: "
-
-msgid "Paste output of external command"
-msgstr "Вставить вывод внешней команды"
-
-msgid "Enter shell command(s):"
-msgstr "Введите команду оболочки:"
-
-msgid "External command"
-msgstr "Внешняя команда"
-
-msgid "Cannot execute command"
-msgstr "Невозможно выполнить команду"
-
-msgid "Error creating script:"
-msgstr "Ошибка создания скрипта:"
-
-msgid "Error reading script:"
-msgstr "Ошибка чтения скрипта:"
-
-msgid "Error closing script:"
-msgstr "Ошибка закрытия скрипта:"
-
-msgid "Script created:"
-msgstr "Скрипт создан:"
-
-msgid "Process block"
-msgstr "Обработать блок"
-
-msgid " Copies to"
-msgstr " Отправить копии адресатам"
-
-msgid " Subject"
-msgstr " Тема"
-
-msgid " To"
-msgstr " Кому"
-
-msgid " mail -s <subject> -c <cc> <to>"
-msgstr " mail -s <Тема> -c <Копии> <Кому>"
-
-msgid " Mail "
-msgstr " Почта "
-
-msgid " Insert Literal "
-msgstr " Вставить литерал "
-
-msgid " Press any key: "
-msgstr " Нажмите любую клавишу: "
-
-msgid " Execute Macro "
-msgstr " Выполнить макрос "
-
-msgid "All charsets"
-msgstr "Все кодировки"
-
-msgid "&Whole words"
-msgstr "&Слово целиком"
-
-msgid "In se&lection"
-msgstr "В вы&деленном"
-
-msgid "&Backwards"
-msgstr "&Назад"
-
-msgid "case &Sensitive"
-msgstr "Учет ре&гистра"
-
-msgid " Enter replacement string:"
-msgstr " Введите текст для замены: "
-
-msgid " Enter search string:"
-msgstr " Введите строку для поиска:"
-
-msgid "&Find all"
-msgstr "На&йти всё"
-
-msgid "Cancel"
-msgstr "Прервать"
-
-msgid "&Skip"
-msgstr "П&ропустить"
-
-msgid "A&ll"
-msgstr "&Все"
-
-msgid "&Replace"
-msgstr "&Заменить"
-
-msgid " Replace with: "
-msgstr " Заменить на: "
-
-msgid " Confirm replace "
-msgstr " Подтвердить замену "
-
-msgid "&Dismiss"
-msgstr "&Закрыть"
-
-#, c-format
-msgid ""
-"File \"%s\" is already being edited\n"
-"User: %s\n"
-"Process ID: %d"
-msgstr ""
-"Файл \"%s\" уже редактируется\n"
-"Пользователь: %s\n"
-"Идентификатор процесса: %d"
-
-msgid "File locked"
-msgstr "Файл заблокирован"
-
-msgid "&Grab lock"
-msgstr "Захватить замок"
-
-msgid "&Ignore lock"
-msgstr "Игнорировать замок"
-
-msgid "&Open file..."
-msgstr "&Открыть файл..."
-
-msgid "&New"
-msgstr "&Новый"
-
-msgid "Save &as..."
-msgstr "Сохранить &как..."
-
-msgid "&Insert file..."
-msgstr "&Вставить файл..."
-
-msgid "Cop&y to file..."
-msgstr "&Копировать в файл..."
-
-msgid "&User menu..."
-msgstr "&Меню пользователя..."
-
-msgid "A&bout..."
-msgstr "О &программе..."
-
-msgid "&Quit"
-msgstr "&Выход"
-
-msgid "&Toggle mark"
-msgstr "&Переключить в режим пометки"
-
-msgid "&Mark columns"
-msgstr "Выделить &столбцы"
-
-msgid "Toggle &ins/overw"
-msgstr "&Режим вставки/замены"
-
-msgid "&Copy"
-msgstr "&Копировать блок"
-
-msgid "&Move"
-msgstr "Пере&местить блок"
-
-msgid "&Delete"
-msgstr "&Удалить"
-
-msgid "C&opy to clipfile"
-msgstr "Копировать в файл буфера обмена"
-
-msgid "C&ut to clipfile"
-msgstr "Вырезать в файл буфера обмена"
-
-msgid "&Paste from clipfile"
-msgstr "Вставить из файла буфера обмена"
-
-msgid "Toggle bookmar&k"
-msgstr "Ус&тановить/снять закладку"
-
-msgid "&Next bookmark"
-msgstr "К следу&ющей закладке"
-
-msgid "Pre&v bookmark"
-msgstr "К пре&дыдущей закладке"
-
-msgid "&Flush bookmark"
-msgstr "У&брать все закладки"
-
-msgid "&Undo"
-msgstr "&Отмена"
-
-msgid "&Beginning"
-msgstr "&Начало файла"
-
-msgid "&End"
-msgstr "Конец &файла"
-
-msgid "&Search..."
-msgstr "&Поиск..."
-
-msgid "Search &again"
-msgstr "П&родолжить поиск"
-
-msgid "&Replace..."
-msgstr "&Заменить..."
-
-msgid "&Go to line..."
-msgstr "Перейти к &строке..."
-
-msgid "Toggle li&ne state"
-msgstr "Отобра&зить/скрыть номера строк"
-
-msgid "Go to matching &bracket"
-msgstr "Перейти к парной ско&бке"
-
-msgid "Find declaration"
-msgstr "Перейти к опре&делению"
-
-msgid "Back from declaration"
-msgstr "Назад к то&чке вызова"
-
-msgid "Forward to declaration"
-msgstr "Впер&ёд к определению"
-
-msgid "Encod&ing..."
-msgstr "Выбор &кодировки..."
-
-msgid "&Refresh screen"
-msgstr "Пере&рисовать экран"
-
-msgid "&Start record macro"
-msgstr "&Начать запись макроса"
-
-msgid "&Finish record macro..."
-msgstr "&Окончить запись макроса..."
-
-msgid "&Execute macro..."
-msgstr "&Выполнить макрос..."
-
-msgid "Delete macr&o..."
-msgstr "&Удалить макрос..."
-
-msgid "'ispell' s&pell check"
-msgstr "Проверка ор&фографии (ispell)"
-
-msgid "&Mail..."
-msgstr "&Электронная почта..."
-
-msgid "Insert &literal..."
-msgstr "Вставить &литерал..."
-
-msgid "Insert &date/time"
-msgstr "Вставить &дату/время"
-
-msgid "Format p&aragraph"
-msgstr "Форматировать &абзац"
-
-msgid "Sor&t..."
-msgstr "&Сортировать..."
-
-msgid "Paste o&utput of..."
-msgstr "Вставить в&ывод команды..."
-
-msgid "E&xternal formatter"
-msgstr "&Форматировать"
-
-msgid "&General...  "
-msgstr "&Общая..."
-
-msgid "Save &mode..."
-msgstr "Ре&жим сохранения..."
-
-msgid "Learn &keys..."
-msgstr "&Распознавание клавиш..."
-
-msgid "Syntax &highlighting..."
-msgstr "&Цветовыделение синтаксиса..."
-
-msgid "S&yntax file"
-msgstr "Ре&дактирование файла синтаксиса"
-
-msgid "&Menu file"
-msgstr "Файл &меню"
-
-msgid "&Save setup"
-msgstr "&Сохранить настройки"
-
-msgid "&File"
-msgstr "&Файл"
-
-msgid "&Edit"
-msgstr "&Правка"
-
-msgid "&Search"
-msgstr "&Поиск"
-
-msgid "&Command"
-msgstr "&Команда"
-
-msgid "For&mat"
-msgstr "Фор&матирование"
-
-msgid "&Options"
-msgstr "&Настройки"
-
-msgid "None"
-msgstr "Отключен"
-
-msgid "Dynamic paragraphing"
-msgstr "Динамический"
-
-msgid "Type writer wrap"
-msgstr "Автоматический перенос"
-
-msgid "Word wrap line length: "
-msgstr "Позиция переноса строк:"
-
-msgid "Cursor beyond end of line"
-msgstr "&Курсор за пределами строки"
-
-msgid "Pers&istent selection"
-msgstr "Посто&янные блоки"
-
-msgid "Synta&x highlighting"
-msgstr "&Цветовыделение синтаксиса"
-
-msgid "Visible tabs"
-msgstr "Отображать таб&уляции"
-
-msgid "Visible trailing spaces"
-msgstr "Отображать проб&елы"
-
-msgid "Save file &position"
-msgstr "Со&хранять позицию в файле"
-
-msgid "Confir&m before saving"
-msgstr "П&одтверждать запись файла"
-
-msgid "&Return does autoindent"
-msgstr "&Автоотступ \"Вводом\""
-
-msgid "Tab spacing: "
-msgstr "Шаг табуляции: "
-
-msgid "Fill tabs with &spaces"
-msgstr "&Заполнять табуляцию пробелами"
-
-msgid "&Backspace through tabs"
-msgstr "За&бой в обход табуляции"
-
-msgid "&Fake half tabs"
-msgstr "&Симулировать неполн.табуляцию"
-
-msgid "Wrap mode"
-msgstr "Режим переноса строк"
-
-msgid " Editor options "
-msgstr " Настройки редактора "
-
-msgid "ButtonBar|Help"
-msgstr "Помощь"
-
-msgid "ButtonBar|Save"
-msgstr "Сохранить"
-
-msgid "ButtonBar|Mark"
-msgstr "Блок"
-
-msgid "ButtonBar|Replac"
-msgstr "Замена"
-
-msgid "ButtonBar|Copy"
-msgstr "Копия"
-
-msgid "ButtonBar|Move"
-msgstr "Переместить"
-
-msgid "ButtonBar|Search"
-msgstr "Поиск"
-
-msgid "ButtonBar|Delete"
-msgstr "Удалить"
-
-msgid "ButtonBar|PullDn"
-msgstr "МенюMC"
-
-msgid "ButtonBar|Quit"
-msgstr "Выход"
-
-msgid " Load syntax file "
-msgstr " Загрузить файл синтаксиса "
-
-#, c-format
-msgid ""
-" Cannot open file %s \n"
-" %s "
-msgstr ""
-" Невозможно открыть файл %s \n"
-" %s "
-
-#, c-format
-msgid " Error in file %s on line %d "
-msgstr " Ошибка в файле %s в строке %d "
 
 msgid "&Set"
 msgstr "&Установить"
@@ -932,6 +1051,9 @@ msgstr "Формат списка файлов"
 msgid "user &Mini status"
 msgstr "Строка &мини-статуса в формате пользователя"
 
+msgid "&OK"
+msgstr "&Дальше"
+
 msgid "&Reverse"
 msgstr "&Обратный"
 
@@ -1055,16 +1177,9 @@ msgstr "Домен:"
 msgid "Username:"
 msgstr "Имя пользователя:"
 
-msgid "Password:"
-msgstr "Пароль:"
-
 #, c-format
 msgid "Password for \\\\%s\\%s"
 msgstr "Пароль для \\\\%s\\%s"
-
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Предупреждение: файл %s не найден\n"
 
 msgid "7-bit ASCII"
 msgstr "7-битный ASCII"
@@ -1232,6 +1347,21 @@ msgstr " Редактирование файла расширений "
 msgid " Which extension file you want to edit? "
 msgstr " Какой файл расширений Вы хотите редактировать? "
 
+msgid "&User"
+msgstr "&Пользовательский"
+
+msgid "&System Wide"
+msgstr "&Общесистемный"
+
+msgid " Menu edit "
+msgstr " Редактирование файла меню "
+
+msgid " Which menu file do you want to edit? "
+msgstr " Какой файл меню Вы хотите редактировать? "
+
+msgid "&Local"
+msgstr "&Местный"
+
 msgid "Highlighting groups file edit"
 msgstr "Редактирование файла подсветки имён"
 
@@ -1350,6 +1480,657 @@ msgstr " Интерпретатор занят выполнением коман
 msgid "Cannot read directory contents"
 msgstr "Невозможно прочесть содержимое каталога"
 
+msgid " Choose syntax highlighting "
+msgstr "\tВыбор цветовыделения синтаксиса"
+
+msgid "< Auto >"
+msgstr "< Автоматически >"
+
+msgid "< Reload Current Syntax >"
+msgstr "Перезагрузить текущее цветовыделение"
+
+#, c-format
+msgid " Cannot open %s for reading "
+msgstr " Невозможно открыть файл %s для чтения "
+
+msgid "Error"
+msgstr "Ошибка"
+
+#, c-format
+msgid " Error reading from pipe: %s "
+msgstr " Ошибка чтения из канала: %s "
+
+#, c-format
+msgid " Cannot open pipe for reading: %s "
+msgstr " Невозможно открыть канал для чтения: %s "
+
+#, c-format
+msgid " Cannot get size/permissions for %s "
+msgstr " Невозможно получить размер/права доступа для файла %s "
+
+#, c-format
+msgid " %s is not a regular file "
+msgstr " %s не является обычным файлом "
+
+#, c-format
+msgid " File %s is too large "
+msgstr " Файл %s слишком большой "
+
+msgid " About "
+msgstr " О программе "
+
+msgid ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       A user friendly text editor written\n"
+"           for the Midnight Commander.\n"
+msgstr ""
+"\n"
+"                     Cooledit  v3.11.5\n"
+"\n"
+"       Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+" Текстовый редактор с дружественным интерфейсом пользователя.\n"
+"               Создан для Midnight Commander.\n"
+
+msgid "Macro recursion is too deep"
+msgstr "Слишком глубокая рекурсия макросов"
+
+msgid "Search"
+msgstr "Поиск"
+
+msgid " File has hard-links. Detach before saving? "
+msgstr " Файл имеет жесткие ссылки. Отсоединить перед сохранением? "
+
+msgid "The file has been modified in the meantime. Save anyway?"
+msgstr "Файл был изменен внешней программой. Сохранить поверх?"
+
+msgid " Error writing to pipe: "
+msgstr " Ошибка записи в канал: "
+
+msgid " Cannot open pipe for writing: "
+msgstr " Невозможно открыть канал для записи: "
+
+#, c-format
+msgid " Cannot open file for writing: %s "
+msgstr " Невозможно открыть файл для записи: %s "
+
+msgid "&Quick save"
+msgstr "&Быстрое сохранение"
+
+msgid "&Safe save"
+msgstr "Бе&зопасное сохранение"
+
+msgid "&Do backups with following extension:"
+msgstr "Д&елать резервные копии с расширением:"
+
+msgid "Check &POSIX new line"
+msgstr "П&роверка перевода строки в конце файла"
+
+msgid " Edit Save Mode "
+msgstr " Режим сохранения "
+
+msgid "The file you are saving is not finished with a newline"
+msgstr "Сохраняемый файл не имеет символа перевода строки в конце файла"
+
+msgid "C&ontinue"
+msgstr "П&родолжить"
+
+msgid "&Do not change"
+msgstr "&Не изменять"
+
+msgid "&Unix format (LF)"
+msgstr "Формат &UNIX (LF)"
+
+msgid "&Windows/DOS format (CR LF)"
+msgstr "Формат &Windows/DOS (CR LF)"
+
+msgid "&Macintosh format (CR)"
+msgstr "Формат &Macintosh (CR)"
+
+msgid "Change line breaks to:"
+msgstr "Изменить окончания строк на:"
+
+msgid " Enter file name: "
+msgstr " Введите имя файла: "
+
+msgid " Save As "
+msgstr " Сохранить как "
+
+msgid " A file already exists with this name. "
+msgstr " Файл с таким именем уже существует. "
+
+msgid "&Overwrite"
+msgstr "Пе&реписать"
+
+msgid " Cannot save file. "
+msgstr " Невозможно сохранить файл "
+
+msgid " Delete macro "
+msgstr " Удалить макрос "
+
+msgid " Cannot open temp file "
+msgstr " Невозможно открыть временный файл "
+
+msgid " Cannot open macro file "
+msgstr " Невозможно открыть файл макросов "
+
+msgid " Cannot overwrite macro file "
+msgstr " Невозможно перезаписать файл макросов "
+
+msgid " Save macro "
+msgstr " Сохранить макрос "
+
+msgid " Press the macro's new hotkey: "
+msgstr " Нажмите новую клавишу макроса: "
+
+msgid " Press macro hotkey: "
+msgstr " Нажмите горячую клавишу для макроса: "
+
+msgid " Load macro "
+msgstr " Загрузить макрос "
+
+msgid " Confirm save file? : "
+msgstr " Подтверждаете запись файла?: "
+
+msgid " Save file "
+msgstr " Сохранить файл "
+
+msgid "&Save"
+msgstr "&Сохранить"
+
+msgid ""
+" Current text was modified without a file save. \n"
+" Continue discards these changes. "
+msgstr ""
+" Текущий текст был модифицирован и не сохранен. \n"
+" Продолжение операции приведет к потере изменений. "
+
+msgid "Syntax file edit"
+msgstr "Редактирование файла синтаксиса"
+
+msgid " Which syntax file you want to edit? "
+msgstr " Какой файл синтаксиса Вы хотите редактировать? "
+
+msgid " Load "
+msgstr " Загрузить "
+
+msgid " Block is large, you may not be able to undo this action. "
+msgstr " Блок слишком велик, вам может не удаться отменить эту операцию. "
+
+msgid "Replace"
+msgstr "&Заменить"
+
+msgid " Replace "
+msgstr " Заменить "
+
+#, c-format
+msgid " %ld replacements made. "
+msgstr " Осуществлено подстановок: %ld "
+
+msgid "Quit"
+msgstr "Выход"
+
+msgid " File was modified, Save with exit? "
+msgstr " Файл был изменен, сохранить при выходе? "
+
+msgid "&Cancel quit"
+msgstr "&Прервать выход"
+
+msgid " Error "
+msgstr " Ошибка "
+
+msgid " This function is not implemented. "
+msgstr " Эта функция не реализована. "
+
+msgid " Copy to clipboard "
+msgstr " Копировать в буфер "
+
+msgid " Unable to save to file. "
+msgstr " Невозможно сохранить в файл. "
+
+msgid " Cut to clipboard "
+msgstr " Вырезать в буфер "
+
+msgid " Goto line "
+msgstr " Перейти к строке "
+
+msgid " Enter line: "
+msgstr " Введите номер строки: "
+
+msgid " Save Block "
+msgstr " Сохранить блок "
+
+msgid " Insert File "
+msgstr " Вставить файл "
+
+msgid " Cannot insert file. "
+msgstr " Невозможно вставить файл. "
+
+msgid " Sort block "
+msgstr " Сортировать блок "
+
+msgid " You must first highlight a block of text. "
+msgstr " Вы должны сначала выделить блок текста. "
+
+msgid " Run Sort "
+msgstr " Выполнить сортировку "
+
+msgid " Enter sort options (see manpage) separated by whitespace: "
+msgstr " Введите параметры сортировки (man sort(1)), разделенные пробелами: "
+
+msgid " Sort "
+msgstr " Сортировка "
+
+msgid " Cannot execute sort command "
+msgstr " Невозможно выполнить команду sort "
+
+msgid " Sort returned non-zero: "
+msgstr " Сортировка вернула ненулевой код: "
+
+msgid "Paste output of external command"
+msgstr "Вставить вывод внешней команды"
+
+msgid "Enter shell command(s):"
+msgstr "Введите команду оболочки:"
+
+msgid "External command"
+msgstr "Внешняя команда"
+
+msgid "Cannot execute command"
+msgstr "Невозможно выполнить команду"
+
+msgid "Error creating script:"
+msgstr "Ошибка создания скрипта:"
+
+msgid "Error reading script:"
+msgstr "Ошибка чтения скрипта:"
+
+msgid "Error closing script:"
+msgstr "Ошибка закрытия скрипта:"
+
+msgid "Script created:"
+msgstr "Скрипт создан:"
+
+msgid "Process block"
+msgstr "Обработать блок"
+
+msgid " Copies to"
+msgstr " Отправить копии адресатам"
+
+msgid " Subject"
+msgstr " Тема"
+
+msgid " To"
+msgstr " Кому"
+
+msgid " mail -s <subject> -c <cc> <to>"
+msgstr " mail -s <Тема> -c <Копии> <Кому>"
+
+msgid " Mail "
+msgstr " Почта "
+
+msgid " Insert Literal "
+msgstr " Вставить литерал "
+
+msgid " Press any key: "
+msgstr " Нажмите любую клавишу: "
+
+msgid " Execute Macro "
+msgstr " Выполнить макрос "
+
+msgid "All charsets"
+msgstr "Все кодировки"
+
+msgid "&Whole words"
+msgstr "&Слово целиком"
+
+msgid "In se&lection"
+msgstr "В вы&деленном"
+
+msgid "&Backwards"
+msgstr "&Назад"
+
+msgid "case &Sensitive"
+msgstr "Учет ре&гистра"
+
+msgid " Enter replacement string:"
+msgstr " Введите текст для замены: "
+
+msgid " Enter search string:"
+msgstr " Введите строку для поиска:"
+
+msgid "&Find all"
+msgstr "На&йти всё"
+
+msgid "Cancel"
+msgstr "Прервать"
+
+msgid "&Skip"
+msgstr "П&ропустить"
+
+msgid "A&ll"
+msgstr "&Все"
+
+msgid "&Replace"
+msgstr "&Заменить"
+
+msgid " Replace with: "
+msgstr " Заменить на: "
+
+msgid " Confirm replace "
+msgstr " Подтвердить замену "
+
+msgid "&Dismiss"
+msgstr "&Закрыть"
+
+#, c-format
+msgid ""
+"File \"%s\" is already being edited\n"
+"User: %s\n"
+"Process ID: %d"
+msgstr ""
+"Файл \"%s\" уже редактируется\n"
+"Пользователь: %s\n"
+"Идентификатор процесса: %d"
+
+msgid "File locked"
+msgstr "Файл заблокирован"
+
+msgid "&Grab lock"
+msgstr "Захватить замок"
+
+msgid "&Ignore lock"
+msgstr "Игнорировать замок"
+
+msgid "&Open file..."
+msgstr "&Открыть файл..."
+
+msgid "&New"
+msgstr "&Новый"
+
+msgid "Save &as..."
+msgstr "Сохранить &как..."
+
+msgid "&Insert file..."
+msgstr "&Вставить файл..."
+
+msgid "Cop&y to file..."
+msgstr "&Копировать в файл..."
+
+msgid "&User menu..."
+msgstr "&Меню пользователя..."
+
+msgid "A&bout..."
+msgstr "О &программе..."
+
+msgid "&Quit"
+msgstr "&Выход"
+
+msgid "&Undo"
+msgstr "&Отмена"
+
+msgid "&Toggle ins/overw"
+msgstr "&Режим вставки/замены"
+
+msgid "To&ggle mark"
+msgstr "&Переключить в режим пометки"
+
+msgid "&Mark columns"
+msgstr "Выделить &столбцы"
+
+msgid "Mark &all"
+msgstr "О&тметить всё"
+
+msgid "Unmar&k"
+msgstr "Сн&ять отметку"
+
+msgid "Cop&y"
+msgstr "&Копировать блок"
+
+msgid "Mo&ve"
+msgstr "Пере&местить блок"
+
+msgid "&Delete"
+msgstr "&Удалить"
+
+msgid "Co&py to clipfile"
+msgstr "Коп&ировать в файл буфера обмена"
+
+msgid "&Cut to clipfile"
+msgstr "Выре&зать в файл буфера обмена"
+
+msgid "Pa&ste from clipfile"
+msgstr "&Вставить из файла буфера обмена"
+
+msgid "&Beginning"
+msgstr "&Начало файла"
+
+msgid "&End"
+msgstr "Конец &файла"
+
+msgid "&Search..."
+msgstr "&Поиск..."
+
+msgid "Search &again"
+msgstr "П&родолжить поиск"
+
+msgid "&Replace..."
+msgstr "&Заменить..."
+
+msgid "&Toggle bookmark"
+msgstr "&Установить/снять закладку"
+
+msgid "&Next bookmark"
+msgstr "&К следующей закладке"
+
+msgid "&Prev bookmark"
+msgstr "К пре&дыдущей закладке"
+
+msgid "&Flush bookmark"
+msgstr "У&брать все закладки"
+
+msgid "&Go to line..."
+msgstr "Перейти к &строке..."
+
+msgid "&Toggle line state"
+msgstr "Отобра&зить/скрыть номера строк"
+
+msgid "Go to matching &bracket"
+msgstr "Перейти к парной ско&бке"
+
+msgid "&Find declaration"
+msgstr "Перейти к опре&делению"
+
+msgid "Back from &declaration"
+msgstr "Назад к то&чке вызова"
+
+msgid "For&ward to declaration"
+msgstr "Впер&ёд к определению"
+
+msgid "Encod&ing..."
+msgstr "Выбор &кодировки..."
+
+msgid "&Refresh screen"
+msgstr "Пере&рисовать экран"
+
+msgid "&Start record macro"
+msgstr "&Начать запись макроса"
+
+msgid "Finis&h record macro..."
+msgstr "&Закончить запись макроса..."
+
+msgid "&Execute macro..."
+msgstr "&Выполнить макрос..."
+
+msgid "Delete macr&o..."
+msgstr "&Удалить макрос..."
+
+msgid "'ispell' s&pell check"
+msgstr "Проверка ор&фографии (ispell)"
+
+msgid "&Mail..."
+msgstr "&Электронная почта..."
+
+msgid "Insert &literal..."
+msgstr "Вставить &литерал..."
+
+msgid "Insert &date/time"
+msgstr "Вставить &дату/время"
+
+msgid "&Format paragraph"
+msgstr "Форматировать &абзац"
+
+msgid "&Sort..."
+msgstr "&Сортировать..."
+
+msgid "&Paste output of..."
+msgstr "Вставить в&ывод команды..."
+
+msgid "&External formatter"
+msgstr "&Форматировать"
+
+msgid "&General...  "
+msgstr "&Общая..."
+
+msgid "Save &mode..."
+msgstr "Ре&жим сохранения..."
+
+msgid "Learn &keys..."
+msgstr "&Распознавание клавиш..."
+
+msgid "Syntax &highlighting..."
+msgstr "&Цветовыделение синтаксиса..."
+
+msgid "S&yntax file"
+msgstr "Ре&дактирование файла синтаксиса"
+
+msgid "&Menu file"
+msgstr "Файл &меню"
+
+msgid "&Save setup"
+msgstr "&Сохранить настройки"
+
+msgid "&File"
+msgstr "&Файл"
+
+msgid "&Edit"
+msgstr "&Правка"
+
+msgid "&Search"
+msgstr "&Поиск"
+
+msgid "&Command"
+msgstr "&Команда"
+
+msgid "For&mat"
+msgstr "Фор&матирование"
+
+msgid "&Options"
+msgstr "&Настройки"
+
+msgid "None"
+msgstr "Отключен"
+
+msgid "Dynamic paragraphing"
+msgstr "Динамический"
+
+msgid "Type writer wrap"
+msgstr "Автоматический перенос"
+
+msgid "Word wrap line length: "
+msgstr "Позиция переноса строк:"
+
+msgid "Cursor beyond end of line"
+msgstr "&Курсор за пределами строки"
+
+msgid "Pers&istent selection"
+msgstr "Посто&янные блоки"
+
+msgid "Synta&x highlighting"
+msgstr "&Цветовыделение синтаксиса"
+
+msgid "Visible tabs"
+msgstr "Отображать таб&уляции"
+
+msgid "Visible trailing spaces"
+msgstr "Отображать проб&елы"
+
+msgid "Save file &position"
+msgstr "Со&хранять позицию в файле"
+
+msgid "Confir&m before saving"
+msgstr "П&одтверждать запись файла"
+
+msgid "&Return does autoindent"
+msgstr "&Автоотступ \"Вводом\""
+
+msgid "Tab spacing: "
+msgstr "Шаг табуляции: "
+
+msgid "Fill tabs with &spaces"
+msgstr "&Заполнять табуляцию пробелами"
+
+msgid "&Backspace through tabs"
+msgstr "За&бой в обход табуляции"
+
+msgid "&Fake half tabs"
+msgstr "&Симулировать неполн.табуляцию"
+
+msgid "Wrap mode"
+msgstr "Режим переноса строк"
+
+msgid " Editor options "
+msgstr " Настройки редактора "
+
+msgid "ButtonBar|Help"
+msgstr "Помощь"
+
+msgid "ButtonBar|Save"
+msgstr "Сохранить"
+
+msgid "ButtonBar|Mark"
+msgstr "Блок"
+
+msgid "ButtonBar|Replac"
+msgstr "Замена"
+
+msgid "ButtonBar|Copy"
+msgstr "Копия"
+
+msgid "ButtonBar|Move"
+msgstr "Переместить"
+
+msgid "ButtonBar|Search"
+msgstr "Поиск"
+
+msgid "ButtonBar|Delete"
+msgstr "Удалить"
+
+msgid "ButtonBar|PullDn"
+msgstr "МенюMC"
+
+msgid "ButtonBar|Quit"
+msgstr "Выход"
+
+msgid " Load syntax file "
+msgstr " Загрузить файл синтаксиса "
+
+#, c-format
+msgid ""
+" Cannot open file %s \n"
+" %s "
+msgstr ""
+" Невозможно открыть файл %s \n"
+" %s "
+
+#, c-format
+msgid " Error in file %s on line %d "
+msgstr " Ошибка в файле %s в строке %d "
+
 msgid ""
 " The Commander can't change to the directory that \n"
 " the subshell claims you are in.  Perhaps you have \n"
@@ -1360,10 +2141,6 @@ msgstr ""
 " сообщил дочерний процесс интерпретатора. Может, вы \n"
 " удалили рабочий каталог или дали себе дополнительные \n"
 " привилегии доступа при помощи команды \"su\"? "
-
-#, c-format
-msgid "Press any key to continue..."
-msgstr "Для продолжения нажмите любую клавишу..."
 
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
@@ -1720,9 +2497,6 @@ msgstr "%o %f \"%s\"%m"
 msgid "%o %d %f%m"
 msgstr "%o эти %f (%d шт.)%m"
 
-msgid "file"
-msgstr "файл"
-
 msgid "files"
 msgstr "файлы"
 
@@ -1976,6 +2750,9 @@ msgstr "Разделы"
 
 msgid "ButtonBar|Prev"
 msgstr "Пред"
+
+msgid "&Move"
+msgstr "Пере&местить блок"
 
 msgid "&Remove"
 msgstr "&Удалить"
@@ -2322,6 +3099,9 @@ msgstr "Просмотр &файла..."
 
 msgid "&Filtered view"
 msgstr "Просмотр вывода команд&ы"
+
+msgid "&Copy"
+msgstr "&Копировать блок"
 
 msgid "C&hmod"
 msgstr "Права &доступа"
@@ -2716,29 +3496,6 @@ msgstr "Пользовательский формат выглядит неве�
 msgid " Do you really want to execute? "
 msgstr " Вы действительно хотите выполнить это? "
 
-msgid " Not implemented yet "
-msgstr " Пока не реализовано "
-
-msgid " Num of replace tokens not equal to num of found tokens "
-msgstr ""
-" Количество шаблонных полей не соответствует количеству полей для замены "
-
-#, c-format
-msgid " Invalid token number %d "
-msgstr " Неправильный шаблон цели %d "
-
-msgid "Normal"
-msgstr "Обычный"
-
-msgid "&Regular expression"
-msgstr "&Регулярное выражение"
-
-msgid "Hexadecimal"
-msgstr "Шестнадцатеричный"
-
-msgid "Wildcard search"
-msgstr "По шаблону"
-
 msgid "Choose codepage"
 msgstr "Выберите кодировку"
 
@@ -2752,22 +3509,6 @@ msgid ""
 msgstr ""
 " Невозможно сохранить файл %s: \n"
 "%s"
-
-#, c-format
-msgid ""
-"Unable to load '%s' skin.\n"
-"Default skin has been loaded"
-msgstr ""
-"Невозможно загрузить скин '%s'.\n"
-"Используется скин по умолчанию"
-
-#, c-format
-msgid ""
-"Unable to parse '%s' skin.\n"
-"Default skin has been loaded"
-msgstr ""
-"Невозможно произвести синтаксический разбор файла '%s'.\n"
-"Используется скин по умолчанию"
 
 msgid ""
 "GNU Midnight Commander is already\n"
@@ -2883,260 +3624,6 @@ msgstr ""
 "Невозможно писать в файл %s:\n"
 "%s\n"
 
-msgid "Function key 1"
-msgstr "Функциональная 1 "
-
-msgid "Function key 2"
-msgstr "Функциональная 2 "
-
-msgid "Function key 3"
-msgstr "Функциональная 3 "
-
-msgid "Function key 4"
-msgstr "Функциональная 4 "
-
-msgid "Function key 5"
-msgstr "Функциональная 5 "
-
-msgid "Function key 6"
-msgstr "Функциональная 6 "
-
-msgid "Function key 7"
-msgstr "Функциональная 7 "
-
-msgid "Function key 8"
-msgstr "Функциональная 8 "
-
-msgid "Function key 9"
-msgstr "Функциональная 9 "
-
-msgid "Function key 10"
-msgstr "Функциональная 10"
-
-msgid "Function key 11"
-msgstr "Функциональная 11"
-
-msgid "Function key 12"
-msgstr "Функциональная 12"
-
-msgid "Function key 13"
-msgstr "Функциональная 13"
-
-msgid "Function key 14"
-msgstr "Функциональная 14"
-
-msgid "Function key 15"
-msgstr "Функциональная 15"
-
-msgid "Function key 16"
-msgstr "Функциональная 16"
-
-msgid "Function key 17"
-msgstr "Функциональная 17"
-
-msgid "Function key 18"
-msgstr "Функциональная 18"
-
-msgid "Function key 19"
-msgstr "Функциональная 19"
-
-msgid "Function key 20"
-msgstr "Функциональная 20"
-
-msgid "Backspace key"
-msgstr "Клавиша Backspace"
-
-msgid "End key"
-msgstr "Клавиша End      "
-
-msgid "Up arrow key"
-msgstr "Стрелка вверх    "
-
-msgid "Down arrow key"
-msgstr "Стрелка вниз     "
-
-msgid "Left arrow key"
-msgstr "Стрелка влево    "
-
-msgid "Right arrow key"
-msgstr "Стрелка вправо   "
-
-msgid "Home key"
-msgstr "Клавиша Home     "
-
-msgid "Page Down key"
-msgstr "Клавиша Page Down"
-
-msgid "Page Up key"
-msgstr "Клавиша Page Up  "
-
-msgid "Insert key"
-msgstr "Клавиша Insert   "
-
-msgid "Delete key"
-msgstr "Клавиша Delete   "
-
-msgid "Completion/M-tab"
-msgstr "Завершение/M-Tab "
-
-msgid "+ on keypad"
-msgstr "+ доп.клавиатуры "
-
-msgid "- on keypad"
-msgstr "- доп.клавиатуры "
-
-msgid "Slash on keypad"
-msgstr "/ доп.клавиатуры "
-
-msgid "* on keypad"
-msgstr "* доп.клавиатуры "
-
-msgid "Escape key"
-msgstr "Клавиша Esc      "
-
-msgid "Left arrow keypad"
-msgstr "Left доп.клавиатуры"
-
-msgid "Right arrow keypad"
-msgstr "Right доп.клавиатуры"
-
-msgid "Up arrow keypad"
-msgstr "Up доп.клавиатуры"
-
-msgid "Down arrow keypad"
-msgstr "Down доп.клавиатуры"
-
-msgid "Home on keypad"
-msgstr "Home доп.клавиатуры"
-
-msgid "End on keypad"
-msgstr "End доп.клавиатуры"
-
-msgid "Page Down keypad"
-msgstr "Page Down доп.клавиатуры"
-
-msgid "Page Up keypad"
-msgstr "Page Up доп.клавиатуры"
-
-msgid "Insert on keypad"
-msgstr "Insert доп.клавиатуры"
-
-msgid "Delete on keypad"
-msgstr "Delete доп.клавиатуры"
-
-msgid "Enter on keypad"
-msgstr "Enter доп.клавиатуры"
-
-msgid "Function key 21"
-msgstr "Функциональная 21"
-
-msgid "Function key 22"
-msgstr "Функциональная 22"
-
-msgid "Function key 23"
-msgstr "Функциональная 23"
-
-msgid "Function key 24"
-msgstr "Функциональная 24"
-
-msgid "Plus"
-msgstr "Плюс"
-
-msgid "Minus"
-msgstr "Минус"
-
-msgid "Asterisk"
-msgstr "Звёздочка"
-
-msgid "Dot"
-msgstr "Точка"
-
-msgid "Less than"
-msgstr "Меньше"
-
-msgid "Great than"
-msgstr "Больше"
-
-msgid "Equal"
-msgstr "Равно"
-
-msgid "Comma"
-msgstr "Запятая"
-
-msgid "Apostrophe"
-msgstr "Апостроф"
-
-msgid "Colon"
-msgstr "Двоеточие"
-
-msgid "Exclamation mark"
-msgstr "Восклицательный знак"
-
-msgid "Question mark"
-msgstr "Вопросительный знак"
-
-msgid "Ampersand"
-msgstr "Амперсанд"
-
-msgid "Dollar sign"
-msgstr "Знак доллара"
-
-msgid "Quotation mark"
-msgstr "Знак цитирования"
-
-msgid "Caret"
-msgstr "Каретка"
-
-msgid "Tilda"
-msgstr "Тильда"
-
-msgid "Prime"
-msgstr "Обратный апостроф"
-
-msgid "Underline"
-msgstr "Подчёркивание"
-
-msgid "Understrike"
-msgstr "Подчёркивание"
-
-msgid "Pipe"
-msgstr "Прямая черта"
-
-msgid "Enter"
-msgstr "Ввод"
-
-msgid "Tab key"
-msgstr "Клавиша TAB"
-
-msgid "Space key"
-msgstr "Пробел"
-
-msgid "Slash key"
-msgstr "Знак деления (слэш)"
-
-msgid "Backslash key"
-msgstr "Клавиша Backspace"
-
-msgid "Number sign #"
-msgstr "Знак номера"
-
-msgid "Ctrl"
-msgstr "Ctrl"
-
-msgid "Alt"
-msgstr "Alt"
-
-msgid "Shift"
-msgstr "Shift"
-
-#, c-format
-msgid ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-msgstr ""
-"Размер экрана %dx%d не поддерживается.\n"
-"Проверьте переменную окружения TERM.\n"
-
 msgid " Format error on file Extensions File "
 msgstr " Ошибка в формате файла Расширений файлов "
 
@@ -3178,42 +3665,6 @@ msgstr " Не найдено подходящих элементов в %s"
 
 msgid " User menu "
 msgstr " Меню пользователя "
-
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s не является каталогом\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "Вы не владеете каталогом %s\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "Невозможно установить правильные права доступа к каталогу %s\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr "Невозможно создать временный каталог %s: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Временные файлы будут создаваться в каталоге %s\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Временные файлы не будут создаваться\n"
-
-msgid " Pipe failed "
-msgstr " Сбой канала "
-
-msgid " Dup failed "
-msgstr " Сбой дублирования дескриптора "
 
 #, c-format
 msgid ""
@@ -3341,442 +3792,3 @@ msgstr "История команд"
 
 msgid "Background process:"
 msgstr "Фоновый процесс:"
-
-#, c-format
-msgid ""
-"Cannot open cpio archive\n"
-"%s"
-msgstr ""
-"Невозможно открыть cpio-архив\n"
-"%s"
-
-#, c-format
-msgid ""
-"Premature end of cpio archive\n"
-"%s"
-msgstr ""
-"Преждевременный конец архива cpio\n"
-"%s"
-
-#, c-format
-msgid ""
-"Inconsistent hardlinks of\n"
-"%s\n"
-"in cpio archive\n"
-"%s"
-msgstr ""
-"Несогласованная жесткая ссылка\n"
-"%s\n"
-"в архиве cpio\n"
-"%s"
-
-#, c-format
-msgid "%s contains duplicate entries! Skipping!"
-msgstr "%s содержит сдвоенные элементы! Пропущено!"
-
-#, c-format
-msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"Поврежденный заголовок cpio обнаружен в\n"
-"%s"
-
-#, c-format
-msgid ""
-"Unexpected end of file\n"
-"%s"
-msgstr ""
-"Неожиданный конец файла\n"
-"%s"
-
-#, c-format
-msgid "Directory cache expired for %s"
-msgstr "Кэш каталога устарел для %s"
-
-msgid "Starting linear transfer..."
-msgstr "Запуск линейной передачи..."
-
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
-msgstr "%s: %s: %s %3d%% (%lu байт перенесено)"
-
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
-msgstr "%s: %s: %s %lu байт перенесено"
-
-msgid "Getting file"
-msgstr "Получение файла"
-
-#, c-format
-msgid ""
-"Cannot open %s archive\n"
-"%s"
-msgstr ""
-"Невозможно открыть %s-архив\n"
-"%s"
-
-msgid "Inconsistent extfs archive"
-msgstr "Несогласованный архив extfs"
-
-#, c-format
-msgid "fish: Disconnecting from %s"
-msgstr "fish: отсоединение от %s"
-
-msgid "fish: Waiting for initial line..."
-msgstr "fish: ожидается начальная строка..."
-
-msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr "Извините, сейчас невозможно создать авторизованные паролем соединения."
-
-msgid " fish: Password required for "
-msgstr "fish: требуется пароль для "
-
-msgid "fish: Sending password..."
-msgstr "fish: посылается пароль..."
-
-msgid "fish: Sending initial line..."
-msgstr "fish: посылается начальная строка..."
-
-msgid "fish: Handshaking version..."
-msgstr "fish: версия подтверждения связи..."
-
-msgid "fish: Setting up current directory..."
-msgstr "fish: устанавливается текущий каталог..."
-
-#, c-format
-msgid "fish: Connected, home %s."
-msgstr "fish: соединение успешно, персональный каталог %s."
-
-#, c-format
-msgid "fish: Reading directory %s..."
-msgstr "fish: чтение каталога %s..."
-
-#, c-format
-msgid "%s: done."
-msgstr "%s: готово."
-
-#, c-format
-msgid "%s: failure"
-msgstr "%s: ошибка"
-
-#, c-format
-msgid "fish: store %s: sending command..."
-msgstr "fish: запись %s: посылается команда..."
-
-msgid "fish: Local read failed, sending zeros"
-msgstr "fish: сбой локального чтения, посылаются нули"
-
-#, c-format
-msgid "fish: storing %s %d (%lu)"
-msgstr "fish: запись %s %d (%lu)"
-
-msgid "zeros"
-msgstr "нули"
-
-msgid "Aborting transfer..."
-msgstr "Прерывание передачи..."
-
-msgid "Error reported after abort."
-msgstr "Отмечена ошибка после прерывания."
-
-msgid "Aborted transfer would be successful."
-msgstr "Передача успешно прервана."
-
-#, c-format
-msgid "ftpfs: Disconnecting from %s"
-msgstr "ftpfs: отсоединение от %s"
-
-msgid " FTP: Password required for "
-msgstr " FTP: требуется пароль для "
-
-msgid "ftpfs: sending login name"
-msgstr "ftpfs: посылается имя пользователя"
-
-msgid "ftpfs: sending user password"
-msgstr "ftpfs: посылается пароль пользователя"
-
-#, c-format
-msgid "FTP: Account required for user %s"
-msgstr "FTP: Необходима учётная запись для пользователя %s"
-
-msgid "Account:"
-msgstr "Счет:"
-
-msgid "ftpfs: sending user account"
-msgstr "ftpfs: посылается учётная запись пользователя"
-
-msgid "ftpfs: logged in"
-msgstr "ftpfs: зарегистрирован"
-
-#, c-format
-msgid "ftpfs: Login incorrect for user %s "
-msgstr "ftpfs: ошибка регистрации пользователя %s "
-
-msgid "ftpfs: Invalid host name."
-msgstr "ftpfs: неверное имя системы."
-
-#, c-format
-msgid "ftpfs: %s"
-msgstr "ftpfs: %s"
-
-#, c-format
-msgid "ftpfs: making connection to %s"
-msgstr "ftpfs: осуществляется соединение с %s"
-
-msgid "ftpfs: connection interrupted by user"
-msgstr "ftpfs: соединение прервано пользователем"
-
-#, c-format
-msgid "ftpfs: connection to server failed: %s"
-msgstr "ftpfs: сбой соединения с сервером: %s"
-
-#, c-format
-msgid "Waiting to retry... %d (Control-C to cancel)"
-msgstr "Ожидание повтора попытки... %d (Control-C для отмены)"
-
-msgid "ftpfs: invalid address family"
-msgstr "ftpfs: неверный адрес системы."
-
-#, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: невозможно установить пассивный режим: %s"
-
-#, c-format
-msgid "ftpfs: could not create socket: %s"
-msgstr " Невозможно создать сокет: %s "
-
-msgid "ftpfs: could not setup passive mode"
-msgstr "ftpfs: невозможно установить пассивный режим"
-
-msgid "ftpfs: aborting transfer."
-msgstr "ftpfs: прерывание передачи."
-
-#, c-format
-msgid "ftpfs: abort error: %s"
-msgstr "ftpfs: ошибка прерывания: %s"
-
-msgid "ftpfs: abort failed"
-msgstr "ftpfs: сбой прерывания"
-
-msgid "ftpfs: CWD failed."
-msgstr "ftpfs: невозможно изменить текущий рабочий каталог."
-
-msgid "ftpfs: couldn't resolve symlink"
-msgstr "ftpfs: невозможно распознать символическую ссылку"
-
-msgid "Resolving symlink..."
-msgstr "Распознается символическая ссылка..."
-
-#, c-format
-msgid "ftpfs: Reading FTP directory %s... %s%s"
-msgstr "ftpfs: чтение каталога FTP %s... %s%s"
-
-msgid "(strict rfc959)"
-msgstr "(ограничение rfc959)"
-
-msgid "(chdir first)"
-msgstr "(сначала chdir)"
-
-msgid "ftpfs: failed; nowhere to fallback to"
-msgstr "ftpfs: ошибка; некуда перейти на аварийный режим"
-
-#, c-format
-msgid "ftpfs: storing file %lu (%lu)"
-msgstr "ftpfs: запись файла %lu (%lu)"
-
-msgid ""
-"~/.netrc file has incorrect mode.\n"
-"Remove password or correct mode."
-msgstr ""
-"Файл ~/.netrc имеет неверный режим доступа/владения.\n"
-"Удалите пароль или исправьте режим доступа/владения."
-
-msgid " MCFS "
-msgstr " MCFS "
-
-msgid " The server does not support this version "
-msgstr " Сервер не поддерживает данную версию "
-
-msgid ""
-" The remote server is not running on a system port \n"
-" you need a password to log in, but the information may \n"
-" not be safe on the remote side.  Continue? \n"
-msgstr ""
-" Удаленный сервер запущен не на системном порту. \n"
-" Требуется пароль для входа в систему, но это может быть \n"
-" небезопасно для информации на удаленной стороне. Продолжать?\n"
-
-msgid " MCFS Password required "
-msgstr " Требуется пароль MCFS "
-
-msgid " Invalid password "
-msgstr " Неверный пароль "
-
-#, c-format
-msgid " Cannot locate hostname: %s "
-msgstr " Невозможно определить имя машины: %s"
-
-#, c-format
-msgid " Cannot create socket: %s "
-msgstr " Невозможно создать сокет: %s "
-
-#, c-format
-msgid " Cannot connect to server: %s "
-msgstr "Невозможно соединиться с сервером: %s "
-
-msgid " Too many open connections "
-msgstr " Слишком много открытых соединений "
-
-#, c-format
-msgid ""
-"Warning: Invalid line in %s:\n"
-"%s\n"
-msgstr ""
-"Предупреждение: неправильная строка в %s:\n"
-"%s\n"
-
-#, c-format
-msgid ""
-"Warning: Invalid flag %c in %s:\n"
-"%s\n"
-msgstr ""
-"Предупреждение: неправильный флаг %c в %s:\n"
-"%s\n"
-
-#, c-format
-msgid ""
-" reconnect to %s failed\n"
-" "
-msgstr ""
-" Сбой повторного соединения к %s\n"
-" "
-
-msgid " Authentication failed "
-msgstr " Сбой идентификации "
-
-#, c-format
-msgid " Error %s creating directory %s "
-msgstr " %s при создании каталога %s "
-
-#, c-format
-msgid " Error %s removing directory %s "
-msgstr " %s при удалении каталога %s "
-
-#, c-format
-msgid " %s opening remote file %s "
-msgstr " %s при открытии файла %s с удаленной машины "
-
-#, c-format
-msgid " %s removing remote file %s "
-msgstr " %s при удалении файла %s с удаленной машины "
-
-#, c-format
-msgid " %s renaming files\n"
-msgstr " %s при переименовании файла\n"
-
-#, c-format
-msgid ""
-"Cannot open tar archive\n"
-"%s"
-msgstr ""
-"Невозможно открыть tar-архив\n"
-"%s"
-
-msgid "Inconsistent tar archive"
-msgstr "Несогласованный архив tar"
-
-msgid "Unexpected EOF on archive file"
-msgstr "Неожиданный конец архивного файла"
-
-#, c-format
-msgid ""
-"Hmm,...\n"
-"%s\n"
-"doesn't look like a tar archive."
-msgstr ""
-"Хмм,...\n"
-"%s\n"
-"не похож на tar-архив."
-
-msgid " undelfs: error "
-msgstr " undelfs: ошибка "
-
-msgid " not enough memory "
-msgstr " недостаточно памяти "
-
-msgid " while allocating block buffer "
-msgstr " при получении блока буферов "
-
-#, c-format
-msgid " open_inode_scan: %d "
-msgstr " open_inode_scan: %d "
-
-#, c-format
-msgid " while starting inode scan %d "
-msgstr " при начале сканирования узла %d "
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: загрузка информации об удаленных файлах %d inodes"
-
-#, c-format
-msgid " while calling ext2_block_iterate %d "
-msgstr " при вызове ext2_block_iterate %d "
-
-msgid " no more memory while reallocating array "
-msgstr " не хватило памяти при переоткрытии массива "
-
-#, c-format
-msgid " while doing inode scan %d "
-msgstr " при сканировании узла %d "
-
-msgid " Ext2lib error "
-msgstr " Сбой Ext2lib "
-
-#, c-format
-msgid " Cannot open file %s "
-msgstr " Невозможно открыть файл %s "
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: чтение битовой карты узлов..."
-
-#, c-format
-msgid ""
-" Cannot load inode bitmap from: \n"
-" %s \n"
-msgstr ""
-" Невозможно загрузить битовую карту узлов с:\n"
-" %s \n"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: чтение блока битовой карты..."
-
-#, c-format
-msgid ""
-" Cannot load block bitmap from: \n"
-" %s \n"
-msgstr ""
-"  Невозможно загрузить блок битовой карты с:\n"
-" %s \n"
-
-msgid " vfs_info is not fs! "
-msgstr " vfs_info - не файловая система! "
-
-msgid " You have to chdir to extract files first "
-msgstr " Вы должны сначала сменить каталог, чтобы извлечь файлы "
-
-msgid " while iterating over blocks "
-msgstr " при переборе блоков "
-
-msgid "Cannot parse:"
-msgstr "Невозможно проанализировать:"
-
-msgid "More parsing errors will be ignored."
-msgstr "Остальные ошибки анализа будут проигнорированы."
-
-msgid "Internal error:"
-msgstr "Внутренняя ошибка:"
-
-msgid "Changes to file lost"
-msgstr "Изменения для файла потеряны"
