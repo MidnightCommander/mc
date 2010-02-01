@@ -2,13 +2,13 @@ shell_patterns=0
 + ! t t
 @       Do something on the current file
 	CMD=%{Enter command}
-	"$CMD" %f
+	$CMD %f
 
 + t t
 @       Do something on the tagged files
 	set %t; CMD=%{Enter command}
 	while [ -n "$1" ]; do
-	  "$CMD" "$1"
+	  $CMD "$1"
 	  shift
 	done
 	
@@ -248,7 +248,7 @@ x       Extract the contents of a compressed tar file
 		exit 1
 		;;
 	esac
-	"$PRG" | tar xvf -
+	$PRG | tar xvf -
 
 = t r
 + ! t t
