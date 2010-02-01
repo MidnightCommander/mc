@@ -242,7 +242,8 @@ static gboolean
 mc_skin_color_check_inisection (const gchar * group)
 {
     return !((strcasecmp ("skin", group) == 0)
-        || (strcasecmp ("lines", group) == 0));
+        || (strcasecmp ("lines", group) == 0)
+        || (strncasecmp ("widget-", group, 7) == 0));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -252,7 +253,7 @@ mc_skin_color_check_bw_mode (mc_skin_t * mc_skin)
 {
     gchar **groups, **orig_groups;
 
-    if (!mc_args__disable_colors)
+    if ( tty_use_colors () && !mc_args__disable_colors)
         return;
 
     orig_groups = groups = mc_config_get_groups (mc_skin->config, NULL);
