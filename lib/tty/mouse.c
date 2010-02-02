@@ -47,6 +47,9 @@ show_mouse_pointer (int x, int y)
 #ifdef HAVE_LIBGPM
     if (use_mouse_p == MOUSE_GPM)
         Gpm_DrawPointer (x, y, gpm_consolefd);
+#else
+    (void) x;
+    (void) y;
 #endif /* HAVE_LIBGPM */
 }
 
