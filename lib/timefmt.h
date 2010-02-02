@@ -6,6 +6,7 @@
 #ifndef __UTIL_TIMEFMT_H
 #define __UTIL_TIMEFMT_H
 
+#include <sys/time.h>
 #include <sys/types.h>
 
 #define INVALID_TIME_TEXT	"(invalid)"
