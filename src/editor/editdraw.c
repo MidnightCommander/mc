@@ -287,6 +287,7 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
     int x1 = start_col + EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
     int y = row + EDIT_TEXT_VERTICAL_OFFSET;
     int cols_to_skip = abs (x);
+    int i;
 
     tty_setcolor (EDITOR_NORMAL_COLOR);
 
@@ -307,7 +308,6 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
     }
 
     if (option_line_state) {
-        int i;
         for (i = 0; i < LINE_STATE_WIDTH; i++)
             if (status[i] == '\0')
                 status[i] = ' ';
@@ -319,7 +319,7 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
 
     edit_move (x1 + FONT_OFFSET_X, y + FONT_OFFSET_Y);
     p = line;
-    int i = 1;
+    i = 1;
     while (p->ch) {
 	int style;
 	unsigned int textchar;
