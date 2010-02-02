@@ -131,7 +131,7 @@ do_execute (const char *lc_shell, const char *command, int flags)
 	handle_console (CONSOLE_RESTORE);
 
     if (!use_subshell && command && !(flags & EXECUTE_INTERNAL)) {
-	printf ("%s%s\n", prompt, command);
+	printf ("%s%s\n", mc_prompt, command);
 	fflush (stdout);
     }
 #ifdef HAVE_SUBSHELL_SUPPORT

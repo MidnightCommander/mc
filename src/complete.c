@@ -979,20 +979,20 @@ query_callback (Dlg_head *h, Widget *sender,
                         if (strncmp (&e1->text[end - start], buff, bl) == 0) {
 			    if (need_redraw) {
 				char *si, *sl;
-				char *ni, *nl;
+				char *nexti, *nextl;
                                 si = &(e1->text[end - start]);
                                 sl = &(last_text[end - start]);
                                 
 				for (; si[0] != '\0' && sl[0] != '\0';) {
                                     
-                                    ni = str_get_next_char (si);
-                                    nl = str_get_next_char (sl);
+                                    nexti = str_get_next_char (si);
+                                    nextl = str_get_next_char (sl);
                                     
-                                    if (ni - si != nl - sl) break;
-                                    if (strncmp (si, sl, ni - si) != 0) break;
+                                    if (nexti - si != nextl - sl) break;
+                                    if (strncmp (si, sl, nexti - si) != 0) break;
                                     
-                                    si = ni;
-                                    sl = nl;
+                                    si = nexti;
+                                    sl = nextl;
                                 }
                                 
 				if (low > si - &e1->text[end - start])

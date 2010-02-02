@@ -279,7 +279,7 @@ set_zero_dir (dir_list *list)
 /* If you change handle_dirent then check also handle_path. */
 /* Return values: -1 = failure, 0 = don't add, 1 = add to the list */
 static int
-handle_dirent (dir_list *list, const char *filter, struct dirent *dp,
+handle_dirent (dir_list *list, const char *fltr, struct dirent *dp,
 	       struct stat *buf1, int next_free, int *link_to_dir,
 	       int *stale_link)
 {
@@ -313,8 +313,8 @@ handle_dirent (dir_list *list, const char *filter, struct dirent *dp,
 	else
 	    *stale_link = 1;
     }
-    if (!(S_ISDIR (buf1->st_mode) || *link_to_dir) && filter
-	&& !mc_search(filter, dp->d_name, MC_SEARCH_T_GLOB) )
+    if (!(S_ISDIR (buf1->st_mode) || *link_to_dir) && (fltr != NULL)
+	&& !mc_search (fltr, dp->d_name, MC_SEARCH_T_GLOB))
 	    return 0;
 
     /* Need to grow the *list? */
@@ -392,7 +392,7 @@ handle_path (dir_list *list, const char *path,
 
 int
 do_load_dir (const char *path, dir_list *list, sortfn *sort, int lc_reverse,
-	     int lc_case_sensitive, int exec_ff, const char *filter)
+	     int lc_case_sensitive, int exec_ff, const char *fltr)
 {
     DIR *dirp;
     struct dirent *dp;
@@ -422,7 +422,7 @@ do_load_dir (const char *path, dir_list *list, sortfn *sort, int lc_reverse,
 
     while ((dp = mc_readdir (dirp))) {
 	status =
-	    handle_dirent (list, filter, dp, &st, next_free, &link_to_dir,
+	    handle_dirent (list, fltr, dp, &st, next_free, &link_to_dir,
 			   &stale_link);
 	if (status == 0)
 	    continue;
@@ -492,10 +492,10 @@ alloc_dir_copy (int size)
     }
 }
 
-/* If filter is null, then it is a match */
+/* If fltr is null, then it is a match */
 int
 do_reload_dir (const char *path, dir_list *list, sortfn *sort, int count,
-	       int rev, int lc_case_sensitive, int exec_ff, const char *filter)
+	       int rev, int lc_case_sensitive, int exec_ff, const char *fltr)
 {
     DIR *dirp;
     struct dirent *dp;
@@ -549,7 +549,7 @@ do_reload_dir (const char *path, dir_list *list, sortfn *sort, int count,
 
     while ((dp = mc_readdir (dirp))) {
 	status =
-	    handle_dirent (list, filter, dp, &st, next_free, &link_to_dir,
+	    handle_dirent (list, fltr, dp, &st, next_free, &link_to_dir,
 			   &stale_link);
 	if (status == 0)
 	    continue;

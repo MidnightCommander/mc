@@ -1017,9 +1017,9 @@ history_get (const char *input_name)
     g_strfreev (keys);
 
     for (i = 0; i < keys_num; i++) {
-	char key_name[BUF_TINY];
-	g_snprintf (key_name, sizeof (key_name), "%lu", (unsigned long)i);
-	this_entry = mc_config_get_string (cfg, input_name, key_name, "");
+	char key[BUF_TINY];
+	g_snprintf (key, sizeof (key), "%lu", (unsigned long)i);
+	this_entry = mc_config_get_string (cfg, input_name, key, "");
 
 	if (this_entry != NULL)
 	    hist = list_append_unique (hist, this_entry);
@@ -1080,9 +1080,9 @@ history_put (const char *input_name, GList *h)
 
 	/* We shouldn't have null entries, but let's be sure */
 	if (text != NULL) {
-	    char key_name[BUF_TINY];
-	    g_snprintf (key_name, sizeof (key_name), "%d", i++);
-	    mc_config_set_string(cfg,input_name, key_name, text);
+	    char key[BUF_TINY];
+	    g_snprintf (key, sizeof (key), "%d", i++);
+	    mc_config_set_string (cfg, input_name, key, text);
 	}
     }
 

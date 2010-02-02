@@ -120,7 +120,7 @@ void load_hint      (int force);
 void print_vfs_message(const char *msg, ...)
     __attribute__ ((format (__printf__, 1, 2)));
 
-extern const char *prompt;
+extern const char *mc_prompt;
 extern const char *edit_one_file;
 extern char *mc_home;
 extern char *mc_home_alt;

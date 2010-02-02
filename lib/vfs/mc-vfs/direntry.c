@@ -1184,16 +1184,16 @@ int
 vfs_s_select_on_two (int fd1, int fd2)
 {
     fd_set set;
-    struct timeval timeout;
+    struct timeval time_out;
     int v;
     int maxfd = (fd1 > fd2 ? fd1 : fd2) + 1;
 
-    timeout.tv_sec  = 1;
-    timeout.tv_usec = 0;
+    time_out.tv_sec  = 1;
+    time_out.tv_usec = 0;
     FD_ZERO (&set);
     FD_SET (fd1, &set);
     FD_SET (fd2, &set);
-    v = select (maxfd, &set, 0, 0, &timeout);
+    v = select (maxfd, &set, 0, 0, &time_out);
     if (v <= 0)
 	return v;
     if (FD_ISSET (fd1, &set))
