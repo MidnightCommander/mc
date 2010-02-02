@@ -953,9 +953,9 @@ keybind_cmd_bind (GArray *keymap, const char *keybind, unsigned long action)
 }
 
 unsigned long
-lookup_action (const char *keyname)
+lookup_action (const char *name)
 {
-    const name_keymap_t key = { keyname, 0 };
+    const name_keymap_t key = { name, 0 };
     name_keymap_t *res;
 
     sort_command_names ();

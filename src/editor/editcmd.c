@@ -140,6 +140,8 @@ edit_refresh_cmd (WEdit * edit)
     tty_touch_screen ();
     mc_refresh ();
 #else
+    (void) edit;
+
     clr_scr ();
     repaint_screen ();
 #endif /* !HAVE_SLANG */

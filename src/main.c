@@ -203,7 +203,7 @@ int navigate_with_arrows = 0;
 int reset_hp_softkeys = 0;
 
 /* The prompt */
-const char *prompt = NULL;
+const char *mc_prompt = NULL;
 
 /* The widget where we draw the prompt */
 WLabel *the_prompt;
@@ -602,8 +602,8 @@ load_prompt (int fd, void *unused)
 	    tmp_prompt[COLS - 8] = '\0';
 	    prompt_len = COLS - 8;
 	}
-	prompt = tmp_prompt;
-	label_set_text (the_prompt, prompt);
+	mc_prompt = tmp_prompt;
+	label_set_text (the_prompt, mc_prompt);
 	winput_set_origin ((WInput *) cmdline, prompt_len,
 			   COLS - prompt_len);
 
@@ -977,7 +977,7 @@ create_panels (void)
 
     /* Create the nice widgets */
     cmdline = command_new (0, 0, 0);
-    the_prompt = label_new (0, 0, prompt);
+    the_prompt = label_new (0, 0, mc_prompt);
     the_prompt->transparent = 1;
     the_bar = buttonbar_new (keybar_visible);
 
@@ -2203,12 +2203,12 @@ main (int argc, char *argv[])
 
 #ifdef HAVE_SUBSHELL_SUPPORT
     if (use_subshell) {
-	prompt = strip_ctrl_codes (subshell_prompt);
-	if (!prompt)
-	    prompt = "";
+	mc_prompt = strip_ctrl_codes (subshell_prompt);
+	if (mc_prompt == NULL)
+	    mc_prompt = "";
     } else
 #endif				/* HAVE_SUBSHELL_SUPPORT */
-	prompt = (geteuid () == 0) ? "# " : "$ ";
+	mc_prompt = (geteuid () == 0) ? "# " : "$ ";
 
 
     /* Program main loop */

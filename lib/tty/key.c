@@ -560,7 +560,7 @@ check_selects (fd_set * select_set)
 static void
 try_channels (int set_timeout)
 {
-    struct timeval timeout;
+    struct timeval time_out;
     static fd_set select_set;
     struct timeval *timeptr;
     int v;
@@ -573,9 +573,9 @@ try_channels (int set_timeout)
 
         timeptr = NULL;
         if (set_timeout) {
-            timeout.tv_sec = 0;
-            timeout.tv_usec = 100000;
-            timeptr = &timeout;
+            time_out.tv_sec = 0;
+            time_out.tv_usec = 100000;
+            timeptr = &time_out;
         }
 
         v = select (maxfdp + 1, &select_set, NULL, NULL, timeptr);
@@ -981,14 +981,14 @@ xgetch_second (void)
 {
     fd_set Read_FD_Set;
     int c;
-    struct timeval timeout;
+    struct timeval time_out;
 
-    timeout.tv_sec = keyboard_key_timeout / 1000000;
-    timeout.tv_usec = keyboard_key_timeout % 1000000;
+    time_out.tv_sec = keyboard_key_timeout / 1000000;
+    time_out.tv_usec = keyboard_key_timeout % 1000000;
     tty_nodelay (TRUE);
     FD_ZERO (&Read_FD_Set);
     FD_SET (input_fd, &Read_FD_Set);
-    select (input_fd + 1, &Read_FD_Set, NULL, NULL, &timeout);
+    select (input_fd + 1, &Read_FD_Set, NULL, NULL, &time_out);
     c = tty_lowlevel_getch ();
     tty_nodelay (FALSE);
     return c;
@@ -1268,16 +1268,16 @@ sort_key_name_conv_tab (void)
 }
 
 static int
-lookup_keyname (const char *keyname, int *lc_index)
+lookup_keyname (const char *name, int *idx)
 {
-    if (keyname[0] != '\0') {
-	const key_code_name_t key = { 0, keyname, NULL, NULL };
+    if (name[0] != '\0') {
+	const key_code_name_t key = { 0, name, NULL, NULL };
 	const key_code_name_t *keyp = &key;
 	key_code_name_t **res;
 
-	if (keyname[1] == '\0') {
-	    *lc_index = -1;
-	    return (int) keyname[0];
+	if (name[1] == '\0') {
+	    *idx = -1;
+	    return (int) name[0];
 	}
 
 	sort_key_name_conv_tab ();
@@ -1288,18 +1288,18 @@ lookup_keyname (const char *keyname, int *lc_index)
 			    key_code_name_comparator);
 
 	if (res != NULL) {
-	    *lc_index = (int) (res - (key_code_name_t **) key_name_conv_tab_sorted);
+	    *idx = (int) (res - (key_code_name_t **) key_name_conv_tab_sorted);
 	    return (*res)->code;
 	}
     }
 
-    *lc_index = -1;
+    *idx = -1;
     return 0;
 }
 
 /* Return the code associated with the symbolic name keyname */
 long
-lookup_key (const char *keyname, char **label)
+lookup_key (const char *name, char **label)
 {
     char **lc_keys, **p;
     int k = -1;
@@ -1310,12 +1310,12 @@ lookup_key (const char *keyname, char **label)
     int use_ctrl = -1;
     int use_shift = -1;
 
-    if (keyname == NULL)
+    if (name == NULL)
 	return 0;
 
-    keyname = g_strstrip (g_strdup (keyname));
-    p = lc_keys = g_strsplit_set (keyname, "-+ ", -1);
-    g_free ((char *) keyname);
+    name = g_strstrip (g_strdup (name));
+    p = lc_keys = g_strsplit_set (name, "-+ ", -1);
+    g_free ((char *) name);
 
     while ((p != NULL) && (*p != NULL)) {
 	if ((*p)[0] != '\0') {
@@ -1455,7 +1455,7 @@ is_idle (void)
 {
     int maxfdp;
     fd_set select_set;
-    struct timeval timeout;
+    struct timeval time_out;
 
     FD_ZERO (&select_set);
     FD_SET (input_fd, &select_set);
@@ -1466,9 +1466,9 @@ is_idle (void)
         maxfdp = max (maxfdp, gpm_fd);
     }
 #endif
-    timeout.tv_sec = 0;
-    timeout.tv_usec = 0;
-    return (select (maxfdp + 1, &select_set, 0, 0, &timeout) <= 0);
+    time_out.tv_sec = 0;
+    time_out.tv_usec = 0;
+    return (select (maxfdp + 1, &select_set, 0, 0, &time_out) <= 0);
 }
 
 int
@@ -1515,20 +1515,20 @@ get_key_code (int no_delay)
         tty_nodelay (FALSE);
         if (c == -1) {
             if (this != NULL && parent != NULL && parent->action == MCKEY_ESCAPE && old_esc_mode) {
-                struct timeval current, timeout;
+                struct timeval current, time_out;
 
                 if (esctime.tv_sec == -1)
                     return -1;
                 GET_TIME (current);
-                timeout.tv_sec = keyboard_key_timeout / 1000000 + esctime.tv_sec;
-                timeout.tv_usec = keyboard_key_timeout % 1000000 + esctime.tv_usec;
-                if (timeout.tv_usec > 1000000) {
-                    timeout.tv_usec -= 1000000;
-                    timeout.tv_sec++;
+                time_out.tv_sec = keyboard_key_timeout / 1000000 + esctime.tv_sec;
+                time_out.tv_usec = keyboard_key_timeout % 1000000 + esctime.tv_usec;
+                if (time_out.tv_usec > 1000000) {
+                    time_out.tv_usec -= 1000000;
+                    time_out.tv_sec++;
                 }
-                if (current.tv_sec < timeout.tv_sec)
+                if (current.tv_sec < time_out.tv_sec)
                     return -1;
-                if (current.tv_sec == timeout.tv_sec && current.tv_usec < timeout.tv_usec)
+                if (current.tv_sec == time_out.tv_sec && current.tv_usec < time_out.tv_usec)
                     return -1;
                 this = NULL;
                 pending_keys = seq_append = NULL;
@@ -1643,7 +1643,7 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
 #ifdef HAVE_LIBGPM
     static struct Gpm_Event ev; /* Mouse event */
 #endif
-    struct timeval timeout;
+    struct timeval time_out;
     struct timeval *time_addr = NULL;
     static int dirty = 3;
 
@@ -1689,10 +1689,10 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
 #endif
 
         if (redo_event) {
-            timeout.tv_usec = mou_auto_repeat * 1000;
-            timeout.tv_sec = 0;
+            time_out.tv_usec = mou_auto_repeat * 1000;
+            time_out.tv_sec = 0;
 
-            time_addr = &timeout;
+            time_addr = &time_out;
         } else {
             int seconds;
 
@@ -1705,16 +1705,16 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
                  * timeouts in the stamp list.
                  */
 
-                timeout.tv_sec = seconds;
-                timeout.tv_usec = 0;
-                time_addr = &timeout;
+                time_out.tv_sec = seconds;
+                time_out.tv_usec = 0;
+                time_addr = &time_out;
             }
         }
 
         if (!block || winch_flag) {
-            time_addr = &timeout;
-            timeout.tv_sec = 0;
-            timeout.tv_usec = 0;
+            time_addr = &time_out;
+            time_out.tv_sec = 0;
+            time_out.tv_usec = 0;
         }
 
         tty_enable_interrupt_key ();
@@ -1795,7 +1795,7 @@ learn_key (void)
 
     fd_set Read_FD_Set;
     struct timeval endtime;
-    struct timeval timeout;
+    struct timeval time_out;
     int c;
     char buffer[256];
     char *p = buffer;
@@ -1814,15 +1814,15 @@ learn_key (void)
     tty_nodelay (TRUE);
     for (;;) {
         while ((c = tty_lowlevel_getch ()) == -1) {
-            GET_TIME (timeout);
-            timeout.tv_usec = endtime.tv_usec - timeout.tv_usec;
-            if (timeout.tv_usec < 0)
-                timeout.tv_sec++;
-            timeout.tv_sec = endtime.tv_sec - timeout.tv_sec;
-            if (timeout.tv_sec >= 0 && timeout.tv_usec > 0) {
+            GET_TIME (time_out);
+            time_out.tv_usec = endtime.tv_usec - time_out.tv_usec;
+            if (time_out.tv_usec < 0)
+                time_out.tv_sec++;
+            time_out.tv_sec = endtime.tv_sec - time_out.tv_sec;
+            if (time_out.tv_sec >= 0 && time_out.tv_usec > 0) {
                 FD_ZERO (&Read_FD_Set);
                 FD_SET (input_fd, &Read_FD_Set);
-                select (input_fd + 1, &Read_FD_Set, NULL, NULL, &timeout);
+                select (input_fd + 1, &Read_FD_Set, NULL, NULL, &time_out);
             } else
                 break;
         }

@@ -48,7 +48,7 @@ int mc_skin_color__cache[MC_SKIN_COLOR_CACHE_COUNT];
 static mc_skin_color_t *
 mc_skin_color_get_from_hash (mc_skin_t * mc_skin, const gchar * group, const gchar * key)
 {
-    gchar key_name[BUF_TINY];
+    gchar kname[BUF_TINY];
     mc_skin_color_t *mc_skin_color;
 
     if (group == NULL || key == NULL)
@@ -57,8 +57,8 @@ mc_skin_color_get_from_hash (mc_skin_t * mc_skin, const gchar * group, const gch
     if (mc_skin == NULL)
         mc_skin = &mc_skin__default;
 
-    g_snprintf (key_name, sizeof (key_name), "%s.%s", group, key);
-    mc_skin_color = (mc_skin_color_t *) g_hash_table_lookup (mc_skin->colors, (gpointer) key_name);
+    g_snprintf (kname, sizeof (kname), "%s.%s", group, key);
+    mc_skin_color = (mc_skin_color_t *) g_hash_table_lookup (mc_skin->colors, (gpointer) kname);
 
     return mc_skin_color;
 }
@@ -69,15 +69,15 @@ mc_skin_color_get_from_hash (mc_skin_t * mc_skin, const gchar * group, const gch
 static void
 mc_skin_color_remove_from_hash (mc_skin_t * mc_skin, const gchar * group, const gchar * key)
 {
-    gchar key_name[BUF_TINY];
+    gchar kname[BUF_TINY];
     if (group == NULL || key == NULL)
         return;
 
     if (mc_skin == NULL)
         mc_skin = &mc_skin__default;
 
-    g_snprintf (key_name, sizeof (key_name), "%s.%s", group, key);
-    g_hash_table_remove (mc_skin->colors, (gpointer) key_name);
+    g_snprintf (kname, sizeof (kname), "%s.%s", group, key);
+    g_hash_table_remove (mc_skin->colors, (gpointer) kname);
 }
 #endif
 /* --------------------------------------------------------------------------------------------- */
@@ -86,16 +86,15 @@ static void
 mc_skin_color_add_to_hash (mc_skin_t * mc_skin, const gchar * group, const gchar * key,
                            mc_skin_color_t * mc_skin_color)
 {
-    gchar *key_name;
+    gchar *kname;
 
-    key_name = g_strdup_printf ("%s.%s", group, key);
-    if (key_name == NULL)
-        return;
+    kname = g_strdup_printf ("%s.%s", group, key);
+    if (kname != NULL) {
+        if (g_hash_table_lookup (mc_skin->colors, (gpointer) kname) != NULL)
+            g_hash_table_remove (mc_skin->colors, (gpointer) kname);
 
-    if (g_hash_table_lookup (mc_skin->colors, (gpointer) key_name) != NULL)
-        g_hash_table_remove (mc_skin->colors, (gpointer) key_name);
-
-    g_hash_table_insert (mc_skin->colors, (gpointer) key_name, (gpointer) mc_skin_color);
+        g_hash_table_insert (mc_skin->colors, (gpointer) kname, (gpointer) mc_skin_color);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */

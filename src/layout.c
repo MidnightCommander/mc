@@ -601,12 +601,12 @@ mc_refresh (void)
 }
 
 static void
-panel_do_cols (int lc_index)
+panel_do_cols (int idx)
 {
-    if (get_display_type (lc_index) == view_listing)
-	set_panel_formats ((WPanel *) panels [lc_index].widget);
+    if (get_display_type (idx) == view_listing)
+	set_panel_formats ((WPanel *) panels [idx].widget);
     else
-	panel_update_cols (panels [lc_index].widget, frame_half);
+	panel_update_cols (panels [idx].widget, frame_half);
 }
 
 void
@@ -653,7 +653,7 @@ setup_panels (void)
     panel_do_cols (0);
     panel_do_cols (1);
 
-    promptl = str_term_width1 (prompt);
+    promptl = str_term_width1 (mc_prompt);
 
     widget_set_size (&the_menubar->widget, 0, 0, 1, COLS);
 
@@ -909,6 +909,7 @@ set_display_type (int num, panel_view_mode_t type)
     }
 
     switch (type) {
+    case view_nothing:
     case view_listing:
 	new_widget = restore_into_right_dir_panel (num, old_widget);
 	break;
@@ -1062,15 +1063,15 @@ void swap_panels ()
 }
 
 panel_view_mode_t
-get_display_type (int lc_index)
+get_display_type (int idx)
 {
-    return panels [lc_index].type;
+    return panels [idx].type;
 }
 
 struct Widget *
-get_panel_widget (int lc_index)
+get_panel_widget (int idx)
 {
-    return panels[lc_index].widget;
+    return panels[idx].widget;
 }
 
 int get_current_index (void)
@@ -1114,30 +1115,30 @@ get_other_type (void)
 
 /* Save current list_view widget directory into panel */
 void
-save_panel_dir (int lc_index)
+save_panel_dir (int idx)
 {
-    panel_view_mode_t type = get_display_type (lc_index);
-    Widget *widget = get_panel_widget (lc_index);
+    panel_view_mode_t type = get_display_type (idx);
+    Widget *widget = get_panel_widget (idx);
 
     if ((type == view_listing) && (widget != NULL)) {
 	WPanel *w = (WPanel *) widget;
 	char *widget_work_dir = w->cwd;
 
-	g_free(panels [lc_index].last_saved_dir);  /* last path no needed */
+	g_free(panels [idx].last_saved_dir);  /* last path no needed */
         /* Because path can be nonlocal */
-	panels [lc_index].last_saved_dir = vfs_translate_url(widget_work_dir);
+	panels [idx].last_saved_dir = vfs_translate_url (widget_work_dir);
     }
 }
 
 /* Save current list_view widget directory into panel */
 Widget *
-restore_into_right_dir_panel (int lc_index, Widget *from_widget)
+restore_into_right_dir_panel (int idx, Widget *from_widget)
 {
     Widget *new_widget = NULL;
-    const char *saved_dir = panels [lc_index].last_saved_dir;
+    const char *saved_dir = panels [idx].last_saved_dir;
     gboolean last_was_panel = (from_widget &&
-				get_display_type(lc_index) != view_listing);
-    const char *p_name = get_nth_panel_name (lc_index);
+				get_display_type(idx) != view_listing);
+    const char *p_name = get_nth_panel_name (idx);
 
     if (last_was_panel)
 	new_widget = (Widget *) panel_new_with_dir (p_name, saved_dir);

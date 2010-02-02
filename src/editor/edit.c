@@ -1833,7 +1833,8 @@ int line_is_blank (WEdit * edit, long line)
 
 /* moves up until a blank line is reached, or until just
    before a non-blank line is reached */
-static void edit_move_up_paragraph (WEdit * edit, int scroll)
+static void
+edit_move_up_paragraph (WEdit * edit, int do_scroll)
 {
     int i = 0;
     if (edit->curs_line > 1) {
@@ -1855,12 +1856,13 @@ static void edit_move_up_paragraph (WEdit * edit, int scroll)
 		    break;
 	}
     }
-    edit_move_up (edit, edit->curs_line - i, scroll);
+    edit_move_up (edit, edit->curs_line - i, do_scroll);
 }
 
 /* moves down until a blank line is reached, or until just
    before a non-blank line is reached */
-static void edit_move_down_paragraph (WEdit * edit, int scroll)
+static void
+edit_move_down_paragraph (WEdit * edit, int do_scroll)
 {
     int i;
     if (edit->curs_line >= edit->total_lines - 1) {
@@ -1884,7 +1886,7 @@ static void edit_move_down_paragraph (WEdit * edit, int scroll)
 		    break;
 	}
     }
-    edit_move_down (edit, i - edit->curs_line, scroll);
+    edit_move_down (edit, i - edit->curs_line, do_scroll);
 }
 
 static void edit_begin_page (WEdit *edit)
@@ -2137,7 +2139,7 @@ static void edit_left_char_move_cmd (WEdit * edit)
            = FALSE - move down
 */
 static void
-edit_move_updown (WEdit * edit, unsigned long i, int scroll, gboolean direction)
+edit_move_updown (WEdit * edit, unsigned long i, int do_scroll, gboolean direction)
 {
     unsigned long p;
     unsigned long l = (direction)
@@ -2152,7 +2154,7 @@ edit_move_updown (WEdit * edit, unsigned long i, int scroll, gboolean direction)
 
     if (i > 1)
 	edit->force |= REDRAW_PAGE;
-    if (scroll) {
+    if (do_scroll) {
 	if (direction)
 	    edit_scroll_upward (edit, i);
 	else
@@ -3364,14 +3366,16 @@ edit_stack_free (void)
 }
 
 /* move i lines */
-void edit_move_up (WEdit * edit, unsigned long i, int scroll)
+void
+edit_move_up (WEdit * edit, unsigned long i, int do_scroll)
 {
-    edit_move_updown (edit, i, scroll, TRUE);
+    edit_move_updown (edit, i, do_scroll, TRUE);
 }
 
 /* move i lines */
-void edit_move_down (WEdit * edit, unsigned long i, int scroll)
+void
+edit_move_down (WEdit * edit, unsigned long i, int do_scroll)
 {
-    edit_move_updown (edit, i, scroll, FALSE);
+    edit_move_updown (edit, i, do_scroll, FALSE);
 }
 
