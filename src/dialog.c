@@ -241,16 +241,16 @@ default_dlg_callback (Dlg_head *h, Widget *sender,
 }
 
 Dlg_head *
-create_dlg (int y1, int x1, int lines, int cols, const int *color_set,
+create_dlg (int y1, int x1, int lines, int cols, const int *colors,
 	    dlg_cb_fn callback, const char *help_ctx, const char *title,
 	    int flags)
 {
     Dlg_head *new_d;
 
     new_d = g_new0 (Dlg_head, 1);
-    if (color_set != NULL) {
+    if (colors != NULL) {
 	new_d->color = g_new (int, DLG_COLOR_NUM);
-	memmove (new_d->color, color_set, sizeof (int) * DLG_COLOR_NUM);
+	memmove (new_d->color, colors, sizeof (int) * DLG_COLOR_NUM);
     }
     new_d->help_ctx = help_ctx;
     new_d->callback = (callback != NULL) ? callback : default_dlg_callback;

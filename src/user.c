@@ -178,7 +178,7 @@ strip_ext(char *ss)
 }
 
 char *
-expand_format (WEdit *edit_widget, char c, int lc_quote)
+expand_format (struct WEdit *edit_widget, char c, gboolean do_quote)
 {
     WPanel *panel = NULL;
     char *(*quote_func) (const char *, int);
@@ -208,7 +208,7 @@ expand_format (WEdit *edit_widget, char c, int lc_quote)
 	fname = str_unconst (edit_get_file_name (edit_widget));
 #endif
 
-    if (lc_quote)
+    if (do_quote)
 	quote_func = name_quote;
     else
 	quote_func = fake_name_quote;
@@ -610,7 +610,7 @@ execute_menu_command (WEdit *edit_widget, const char *commands)
     int  cmd_file_fd;
     int  expand_prefix_found = 0;
     char *parameter = 0;
-    int  do_quote = 0;
+    gboolean do_quote = FALSE;
     char lc_prompt [80];
     int  col;
     char *file_name;
@@ -658,7 +658,8 @@ execute_menu_command (WEdit *edit_widget, const char *commands)
 		    return;
 		}
 		if (do_quote) {
-    		    fputs (tmp = name_quote (parameter, 0), cmd_file);
+		    tmp = name_quote (parameter, 0);
+		    fputs (tmp, cmd_file);
 		    g_free (tmp);
 		} else
 		    fputs (parameter, cmd_file);
@@ -672,7 +673,7 @@ execute_menu_command (WEdit *edit_widget, const char *commands)
 	} else if (expand_prefix_found){
 	    expand_prefix_found = 0;
 	    if (g_ascii_isdigit ((gchar) *commands)) {
-		do_quote = atoi (commands);
+		do_quote = (atoi (commands) != 0);
 		while (g_ascii_isdigit ((gchar) *commands))
 		    commands++;
 	    }
@@ -690,7 +691,7 @@ execute_menu_command (WEdit *edit_widget, const char *commands)
 		    commands += i;
 		    run_view = 1;
 		} else {
-		    do_quote = 1; /* Default: Quote expanded macro */
+		    do_quote = TRUE; /* Default: Quote expanded macro */
 		    expand_prefix_found = 1;
 		}
 	    } else
@@ -747,7 +748,7 @@ menu_file_own(char* path)
  * otherwise we are called from the mcedit menu.
  */
 void
-user_menu_cmd (WEdit *edit_widget)
+user_menu_cmd (struct WEdit *edit_widget)
 {
     char *p;
     char *data, **entries;

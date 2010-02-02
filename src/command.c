@@ -252,7 +252,7 @@ enter (WInput *lc_cmdline)
 	for (i = j = 0; i < cmd_len; i++) {
 	    if (cmd[i] == '%') {
 		i++;
-		s = expand_format (NULL, cmd[i], 1);
+		s = expand_format (NULL, cmd[i], TRUE);
 		command = g_realloc (command, j + strlen (s) + cmd_len - i + 1);
 		strcpy (command + j, s);
 		g_free (s);
