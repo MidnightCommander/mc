@@ -1,3 +1,51 @@
+Version 4.7.0.2
+
+- Core
+    * Minimal required GLib version is 2.8 (#1980)
+    * Reorganizing of directory structure (#1866)
+    * States of all 'Find File' dialog checkboxes are saved in user configuration file (#1874, #1965)
+    * New file type bindings:
+        - viewing .lyx with lyxcat, opening with lyx (#1693)
+
+- VFS
+    * Small reorganizing (#1931)
+
+- Editor
+    * Some simple optimization of syntax highlighting engine (#1843)
+    * New editor action 'Mark all', new keybind EditMarkAll (#1945)
+    * Changed default for 'Cursor beyond EOL', now it switched off by default (#1946)
+    * Changed default color pair for 'editbold' (search result) to be more sensible (#1559). 
+
+- Misc
+    * Lots of code cleanup (#1780, #1915, #1990)
+    * Removed obsolete checks in configuration scripts (#262, #1932)
+    * Documentation updates
+    * Translation updates 
+
+- Fixes
+    * MC won't compile on Solaris due to undefined constant NAME_MAX (#1943)
+    * MC won't compile on AIX (#1957)
+    * Missing includes (#1930)
+    * Missing printf format (#1960)
+    * Memory and file descriptors leaks (#1953)
+    * Small error in versioning (#1905)
+    * Segfault in input line history (#1936)
+    * MC crashes on exit when using C locale (#1942)
+    * Assertion failed for g_array_free (#1954)
+    * Broken transparency if MC is built with NCurses (#1657)
+    * Selections not visible on monochrome terminals (#1972)
+    * Colors of visible inactive menu (#1702)
+    * Incorrect input line length in 'Edit symlink' dialog window (#1955)
+    * Unquoted shell variables in used menus (#1967)
+    * Incorrecy movement in last line in editor (moving cursor to the empty last line) (#1956)
+    * Incorrect editor lock files check (#1935)
+    * Segfault at try of edit (F4) archives with utf-8 names (x86_64 specified) (#1982)
+    * Viewer in QuickView mode corrupts screen (#1918, #1944)
+    * MC crashes if file name in archves contain '@' symbol (#1605)
+    * deba and debd VFS: items from DEBIAN directory are not accessible (#1920)
+    * Samba is not built with tcc (#1933)
+    * Incorrect conditional compilation of mcserver (#1925) 
+
 Version 4.7.0.1
 
 - Fixes
@@ -83,7 +131,7 @@ Version 4.7.0
     * Incorrect mouse movement in editor when text scrolled to the right (#1792)
     * Newlines are lost when pasting multiline text in editor (#1710)
     * Mismatched hotkeys EditBeginRecordMacro, EditEndRecordMacro in editor
-    * íismatched hotkeys EditBeginningOfText, EditEndOfText, EditBeginPage, EditEndPage (#1724)
+    * Mismatched hotkeys EditBeginningOfText, EditEndOfText, EditBeginPage, EditEndPage (#1724)
     * Some syntax files are not installable (#1779)
     * Date & time insertion in editor (#1759)
     * "Matches not found" message is not shown in viewer
