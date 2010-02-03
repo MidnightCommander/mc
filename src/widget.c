@@ -2338,8 +2338,13 @@ listbox_key (WListbox *l, int key)
 	return j;
 
     case KEY_DC:
-	if (l->deletable)
+	if (l->deletable) {
+	    gboolean is_last = (l->pos + 1 == l->count);
+
 	    listbox_remove_current (l);
+	    if (is_last && (l->top > 0))
+		l->top--;
+	}
 	return MSG_HANDLED;
 
     default:
