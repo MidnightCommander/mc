@@ -59,7 +59,7 @@ Display the compiled\-in search paths for Midnight Commander files.
 Reset softkeys to their default from the termcap/terminfo
 database. Only useful on HP terminals when the function keys don't work.
 .TP
-.I \-K файл
+.I \-K file
 Specify a name of keymap file in the command line.
 .TP
 .I \-l file, \-\-ftplog=file
