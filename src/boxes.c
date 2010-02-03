@@ -376,19 +376,20 @@ sort_box (const panel_field_t * sort_format, int *reverse, int *case_sensitive, 
 void
 confirm_box (void)
 {
-    const char *title = _(" Confirmation ");
+    const char *title = _("Confirmation");
 
     QuickWidget conf_widgets [] = {
         /* 0 */ QUICK_BUTTON  (29, 46, 10, 13, N_("&Cancel"), B_CANCEL, NULL),
         /* 1 */ QUICK_BUTTON  (12, 46, 10, 13, N_("&OK"),     B_ENTER,  NULL),
-        /* 2 */ QUICK_CHECKBOX (3, 46, 8, 13, N_(" confirm &History cleanup "),
+/* TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix */
+        /* 2 */ QUICK_CHECKBOX (3, 46, 8, 13, N_("Confirmation|&History cleanup"),
                                 &confirm_history_cleanup),
-        /* 3 */ QUICK_CHECKBOX (3, 46, 7, 13, N_(" confirm di&Rectory hotlist delete "),
+        /* 3 */ QUICK_CHECKBOX (3, 46, 7, 13, N_("Confirmation|&Directory hotlist delete"),
                                 &confirm_directory_hotlist_delete),
-        /* 4 */ QUICK_CHECKBOX (3, 46, 6, 13, N_(" confirm &Exit "), &confirm_exit),
-        /* 5 */ QUICK_CHECKBOX (3, 46, 5, 13, N_(" confirm e&Xecute "), &confirm_execute),
-        /* 6 */ QUICK_CHECKBOX (3, 46, 4, 13, N_(" confirm o&Verwrite "), &confirm_overwrite),
-        /* 7 */ QUICK_CHECKBOX (3, 46, 3, 13, N_(" confirm &Delete "), &confirm_delete),
+        /* 4 */ QUICK_CHECKBOX (3, 46, 6, 13, N_("Confirmation|E&xit"), &confirm_exit),
+        /* 5 */ QUICK_CHECKBOX (3, 46, 5, 13, N_("Confirmation|&Execute"), &confirm_execute),
+        /* 6 */ QUICK_CHECKBOX (3, 46, 4, 13, N_("Confirmation|O&verwrite"), &confirm_overwrite),
+        /* 7 */ QUICK_CHECKBOX (3, 46, 3, 13, N_("Confirmation|&Delete"), &confirm_delete),
         QUICK_END
     };
 
