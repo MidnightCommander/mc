@@ -43,9 +43,9 @@
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"
-#include "lib/skin.h"
 #include "lib/tty/mouse.h"
 #include "lib/tty/key.h"	/* XCTRL and ALT macros  */
+#include "lib/skin.h"
 #include "lib/mcconfig.h"	/* for history loading and saving */
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/fileloc.h"
@@ -58,6 +58,7 @@
 #include "cmddef.h"		/* CK_ cmd name const */
 #include "keybind.h"		/* global_keymap_t */
 #include "panel.h"		/* current_panel */
+#include "main.h"		/* confirm_history_cleanup */
 
 const global_keymap_t *input_map;
 
@@ -2338,6 +2339,7 @@ listbox_key (WListbox *l, int key)
 	return j;
 
     case KEY_DC:
+    case 'd':
 	if (l->deletable) {
 	    gboolean is_last = (l->pos + 1 == l->count);
 
@@ -2345,6 +2347,15 @@ listbox_key (WListbox *l, int key)
 	    if (is_last && (l->top > 0))
 		l->top--;
 	}
+	return MSG_HANDLED;
+
+    case (KEY_M_SHIFT | KEY_DC):
+    case 'D':
+	if (l->deletable && confirm_history_cleanup
+		&& (query_dialog (Q_("DialogTitle|Clean history"),
+			_("Do you want clean this history?"),
+			D_ERROR, 2, _("&Yes"), _("&No")) == 0))
+	    listbox_remove_list (l);
 	return MSG_HANDLED;
 
     default:
