@@ -238,6 +238,9 @@ int confirm_execute = 0;
 /* Asks for confirmation before leaving the program */
 int confirm_exit = 1;
 
+/* Asks for confirmation before clean up of history */
+int confirm_history_cleanup = 1;
+
 /* Asks for confirmation when using F3 to view a directory and there
    are tagged files */
 int confirm_view_dir = 0;

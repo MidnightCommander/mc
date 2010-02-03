@@ -369,27 +369,28 @@ sort_box (const panel_field_t *sort_format, int *reverse, int *case_sensitive, i
 void
 confirm_box (void)
 {
-    const int w_num = 7;
-
-    /* dialog sizes */
-    int dlg_width = 46;
-    int dlg_height = 12;
-
     const char *title = _(" Confirmation ");
 
     QuickWidget conf_widgets [] =
     {
-	/* 0 */ QUICK_BUTTON (29, dlg_width, 9, dlg_height, N_("&Cancel"), B_CANCEL, NULL),
-	/* 1 */ QUICK_BUTTON (12, dlg_width, 9, dlg_height, N_("&OK"),     B_ENTER,  NULL),
-	/* 2 */ QUICK_CHECKBOX (3, dlg_width, 7, dlg_height, N_(" confirm di&Rectory hotlist delete "), &confirm_directory_hotlist_delete),
-	/* 3 */ QUICK_CHECKBOX (3, dlg_width, 6, dlg_height, N_(" confirm &Exit "), &confirm_exit),
-	/* 4 */ QUICK_CHECKBOX (3, dlg_width, 5, dlg_height, N_(" confirm e&Xecute "), &confirm_execute),
-	/* 5 */ QUICK_CHECKBOX (3, dlg_width, 4, dlg_height, N_(" confirm o&Verwrite "), &confirm_overwrite),
-	/* 6 */ QUICK_CHECKBOX (3, dlg_width, 3, dlg_height, N_(" confirm &Delete "), &confirm_delete),
+	/* 0 */ QUICK_BUTTON  (29, 46, 10, 13, N_("&Cancel"), B_CANCEL, NULL),
+	/* 1 */ QUICK_BUTTON  (12, 46, 10, 13, N_("&OK"),     B_ENTER,  NULL),
+	/* 2 */ QUICK_CHECKBOX (3, 46, 8, 13, N_(" confirm &History cleanup "), &confirm_history_cleanup),
+	/* 3 */ QUICK_CHECKBOX (3, 46, 7, 13, N_(" confirm di&Rectory hotlist delete "), &confirm_directory_hotlist_delete),
+	/* 4 */ QUICK_CHECKBOX (3, 46, 6, 13, N_(" confirm &Exit "), &confirm_exit),
+	/* 5 */ QUICK_CHECKBOX (3, 46, 5, 13, N_(" confirm e&Xecute "), &confirm_execute),
+	/* 6 */ QUICK_CHECKBOX (3, 46, 4, 13, N_(" confirm o&Verwrite "), &confirm_overwrite),
+	/* 7 */ QUICK_CHECKBOX (3, 46, 3, 13, N_(" confirm &Delete "), &confirm_delete),
 	QUICK_END
     };
 
-    int i;
+    const size_t w_num = sizeof (conf_widgets) / sizeof (conf_widgets[0]) - 1;
+
+    /* dialog sizes */
+    int dlg_width = 46;
+    int dlg_height = w_num + 5;
+
+    size_t i;
     int maxlen = 0;
     int cancel_len, ok_len, blen;
 
@@ -405,11 +406,11 @@ confirm_box (void)
 
     /* maximumr length of checkboxes */
     for (i = 2; i < w_num; i++)
-        maxlen = max (maxlen, str_term_width1 (conf_widgets [i].u.checkbox.text) + 3);
+        maxlen = max (maxlen, str_term_width1 (conf_widgets [i].u.checkbox.text) + 4);
 
     /* length of buttons */
-    cancel_len = str_term_width1 (conf_widgets [0].u.button.text) + 2;
-    ok_len = str_term_width1 (conf_widgets [0].u.button.text) + 4; /* default button */
+    cancel_len = str_term_width1 (conf_widgets [0].u.button.text) + 3;
+    ok_len = str_term_width1 (conf_widgets [1].u.button.text) + 5; /* default button */
 
     blen = cancel_len + ok_len + 2;
 
@@ -417,11 +418,13 @@ confirm_box (void)
     dlg_width = max (dlg_width, str_term_width1 (title) + 4);
 
     /* correct widget parameters */
-    for (i = 0; i < w_num; i++)
+    for (i = 0; i < w_num; i++) {
 	conf_widgets[i].x_divisions = dlg_width;
+	conf_widgets[i].y_divisions = dlg_height;
+    }
 
-    conf_widgets[0].relative_x = dlg_width * 2/3 - cancel_len/2;
-    conf_widgets[1].relative_x = dlg_width/3 - ok_len/2;
+    conf_widgets[1].relative_x = dlg_width/2 - blen/2;
+    conf_widgets[0].relative_x = conf_widgets[1].relative_x + ok_len + 2;
 
     {
 	QuickDialog confirmation =
