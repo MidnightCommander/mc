@@ -509,7 +509,7 @@ init_layout (void)
     radio_widget->sel = horizontal_split;
 }
 
-static void
+void
 layout_change (void)
 {
     setup_panels ();

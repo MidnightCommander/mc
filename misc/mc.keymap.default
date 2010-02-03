@@ -229,6 +229,7 @@ CmdSwapPanel = ctrl-u
 CmdHistory = alt-h
 CmdToggleListing = alt-t
 CmdToggleShowHidden = alt-dot
+CmdTogglePanelsSplit = alt-comma
 ShowCommandLine = ctrl-o
 CmdCopyCurrentPathname = alt-a
 CmdCopyOtherPathname = alt-shift-a

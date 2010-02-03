@@ -903,6 +903,14 @@ toggle_show_hidden (void)
     update_panels (UP_RELOAD, UP_KEEPSEL);
 }
 
+static void
+toggle_panels_split (void)
+{
+    horizontal_split = !horizontal_split;
+    layout_change ();
+    do_refresh();
+}
+
 void
 toggle_kilobyte_si (void)
 {
@@ -1347,6 +1355,9 @@ midnight_execute_cmd (Widget *sender, unsigned long command)
         break;
     case CK_ToggleShowHidden:
         toggle_show_hidden ();
+        break;
+    case CK_TogglePanelsSplit:
+        toggle_panels_split ();
         break;
     case CK_TreeCmd:
         tree_cmd ();
