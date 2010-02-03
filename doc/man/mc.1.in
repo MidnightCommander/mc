@@ -1932,9 +1932,10 @@ incorrect output on startup and directory change, turn off the
 option.
 .\"NODE "    Confirmation"
 .SH "    Confirmation"
-In this menu you configure the confirmation options for file deletion,
-directory hotlist entries deletion, overwriting, execution by pressing
-enter and quitting the program.
+In this dialog you configure the confirmation options for file deletion,
+overwriting files, execution by pressing enter, quitting the program,
+directory hotlist entries deletion and history cleanup.
+ and.
 .\"NODE "    Display bits"
 .SH "    Display bits"
 This is used to configure the range of visible characters on the

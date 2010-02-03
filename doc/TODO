@@ -48,8 +48,6 @@ Dynamic loading for libgpm, libext2fs.
 Check if the archive was changed for extfs, tar and cpio.  Free the data
 associated with the old archive.
 
-Use Del to remove items from history.
-
 Ctrl-q Ctrl-m in input dialog should enter \r, not a newline.
 
 Interpret C literals in regular expressions entered by the user, e.g. \r
