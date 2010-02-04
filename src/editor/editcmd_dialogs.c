@@ -340,7 +340,7 @@ editcmd_dialog_completion_show (WEdit * edit, int max_len, int word_len,
                     dialog_colors, NULL, "[Completion]", NULL, DLG_COMPACT);
 
     /* create the listbox */
-    compl_list = listbox_new (1, 1, compl_dlg_h - 2, compl_dlg_w - 2, NULL);
+    compl_list = listbox_new (1, 1, compl_dlg_h - 2, compl_dlg_w - 2, FALSE, NULL);
 
     /* add the dialog */
     add_widget (compl_dlg, compl_list);
@@ -425,11 +425,10 @@ editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, int max_l
                           dialog_colors, NULL, "[Definitions]", match_expr, DLG_COMPACT);
 
     /* create the listbox */
-    def_list = listbox_new (1, 1, def_dlg_h - 2, def_dlg_w - 2, NULL);
+    def_list = listbox_new (1, 1, def_dlg_h - 2, def_dlg_w - 2, FALSE, NULL);
 
     /* add the dialog */
     add_widget (def_dlg, def_list);
-
 
     /* fill the listbox with the completions */
     for (i = 0; i < num_lines; i++) {
@@ -439,11 +438,9 @@ editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, int max_l
         listbox_add_item (def_list, LISTBOX_APPEND_AT_END, 0, label_def, &def_hash[i]);
         g_free (label_def);
     }
-    /* pop up the dialog */
-    run_dlg (def_dlg);
 
-    /* apply the choosen completion */
-    if (def_dlg->ret_value == B_ENTER) {
+    /* pop up the dialog and apply the choosen completion */
+    if (run_dlg (def_dlg) == B_ENTER) {
         char *tmp_curr_def = (char *) curr_def;
         int do_moveto = 0;
 
@@ -460,6 +457,7 @@ editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, int max_l
         } else {
             do_moveto = 1;
         }
+
         if (curr && do_moveto) {
             if (edit_stack_iterator + 1 < MAX_HISTORY_MOVETO) {
                 g_free (edit_history_moveto[edit_stack_iterator].filename);

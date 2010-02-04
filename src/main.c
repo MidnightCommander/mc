@@ -238,6 +238,9 @@ int confirm_execute = 0;
 /* Asks for confirmation before leaving the program */
 int confirm_exit = 1;
 
+/* Asks for confirmation before clean up of history */
+int confirm_history_cleanup = 1;
+
 /* Asks for confirmation when using F3 to view a directory and there
    are tagged files */
 int confirm_view_dir = 0;
@@ -564,19 +567,15 @@ directory_history_list (WPanel *panel)
 {
     char *s;
 
-    if (!panel->dir_history)
-	return;
+    s = show_hist (&panel->dir_history, &panel->widget);
 
-    s = show_hist (panel->dir_history, &panel->widget);
-
-    if (!s)
-	return;
-
-    if (_do_panel_cd (panel, s, cd_exact))
-	directory_history_add (panel, panel->cwd);
-    else
-	message (D_ERROR, MSG_ERROR, _("Cannot change directory"));
-    g_free (s);
+    if (s != NULL) {
+	if (_do_panel_cd (panel, s, cd_exact))
+	    directory_history_add (panel, panel->cwd);
+	else
+	    message (D_ERROR, MSG_ERROR, _("Cannot change directory"));
+	g_free (s);
+    }
 }
 
 #ifdef HAVE_SUBSHELL_SUPPORT

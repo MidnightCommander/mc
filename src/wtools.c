@@ -101,7 +101,7 @@ create_listbox_window_centered (int center_y, int center_x, int lines, int cols,
 		    listbox_colors, NULL,
 		    help, title, DLG_REVERSE | DLG_TRYUP);
 
-    listbox->list = listbox_new (2, 2, lines, cols, NULL);
+    listbox->list = listbox_new (2, 2, lines, cols, FALSE, NULL);
     add_widget (listbox->dlg, listbox->list);
 
     return listbox;

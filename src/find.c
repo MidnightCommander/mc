@@ -265,7 +265,7 @@ found_num_update (void)
 static void
 get_list_info (char **file, char **dir)
 {
-    listbox_get_current (find_list, file, dir);
+    listbox_get_current (find_list, file, (void **) dir);
 }
 
 /* check regular expression */
@@ -626,7 +626,7 @@ find_add_match (const char *dir, const char *file)
 
     /* Don't scroll */
     if (matches == 0)
-	listbox_select_by_number (find_list, 0);
+	listbox_select_first (find_list);
     send_message (&find_list->widget, WIDGET_DRAW, 0);
 
     matches++;
@@ -1038,18 +1038,15 @@ find_do_view_edit (int unparsed_view, int edit, char *dir, char *file)
 static cb_ret_t
 view_edit_currently_selected_file (int unparsed_view, int edit)
 {
-    WLEntry *entry = find_list->current;
     char *dir = NULL;
+    char *text = NULL;
 
-    if (!entry)
-        return MSG_NOT_HANDLED;
+    listbox_get_current (find_list, &text, (void **) &dir);
 
-    dir = entry->data;
-
-    if (!entry->text || !dir)
+    if ((text == NULL) || (dir == NULL))
 	return MSG_NOT_HANDLED;
 
-    find_do_view_edit (unparsed_view, edit, dir, entry->text);
+    find_do_view_edit (unparsed_view, edit, dir, text);
     return MSG_HANDLED;
 }
 
@@ -1195,7 +1192,7 @@ setup_gui (void)
     add_widget (find_dlg, found_num_label);
 
     find_list =
-	listbox_new (2, 2, FIND2_Y - 10, FIND2_X - 4, NULL);
+	listbox_new (2, 2, FIND2_Y - 10, FIND2_X - 4, FALSE, NULL);
     add_widget (find_dlg, find_list);
 }
 
@@ -1249,23 +1246,24 @@ find_file (const char *start_dir, const char *pattern, const char *content,
 	int next_free = 0;
 	int i;
 	struct stat st;
-	WLEntry *entry = find_list->list;
+	GList *entry;
 	dir_list *list = &current_panel->dir;
 	char *name = NULL;
 
-	for (i = 0; entry != NULL && i < find_list->count;
-			entry = entry->next, i++) {
+	for (i = 0, entry = find_list->list; entry != NULL;
+		i++, entry = g_list_next (entry)) {
 	    const char *lc_filename = NULL;
+	    WLEntry *le = (WLEntry *) entry->data;
 
-	    if (!entry->text || !entry->data)
+	    if ((le->text == NULL) || (entry->data == NULL))
 		continue;
 
 	    if (content_pattern != NULL)
-		lc_filename = strchr (entry->text + 4, ':') + 1;
+		lc_filename = strchr (le->text + 4, ':') + 1;
 	    else
-		lc_filename = entry->text + 4;
+		lc_filename = le->text + 4;
 
-	    name = make_fullname (entry->data, lc_filename);
+	    name = make_fullname (le->data, lc_filename);
 	    status =
 		handle_path (list, name, &st, next_free, &link_to_dir,
 			     &stale_link);

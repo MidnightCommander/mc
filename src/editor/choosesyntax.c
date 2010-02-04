@@ -52,9 +52,9 @@ exec_edit_syntax_dialog (const char **names) {
 
     for (i = 0; names[i]; i++) {
 	LISTBOX_APPEND_TEXT (syntaxlist, 0, names[i], NULL);
-	if (! option_auto_syntax && option_syntax_type &&
-	    (strcmp (names[i], option_syntax_type) == 0))
-    	    listbox_select_by_number (syntaxlist->list, i + N_DFLT_ENTRIES);
+	if (! option_auto_syntax && option_syntax_type
+		&& (strcmp (names[i], option_syntax_type) == 0))
+	    listbox_select_entry (syntaxlist->list, i + N_DFLT_ENTRIES);
     }
 
     return run_listbox (syntaxlist);

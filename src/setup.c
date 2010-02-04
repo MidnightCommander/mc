@@ -155,6 +155,7 @@ static const struct {
     { "confirm_delete", &confirm_delete },
     { "confirm_overwrite", &confirm_overwrite },
     { "confirm_execute", &confirm_execute },
+    { "confirm_history_cleanup", &confirm_history_cleanup },
     { "confirm_exit", &confirm_exit },
     { "confirm_directory_hotlist_delete", &confirm_directory_hotlist_delete },
     { "safe_delete", &safe_delete },

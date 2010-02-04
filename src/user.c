@@ -880,7 +880,7 @@ user_menu_cmd (struct WEdit *edit_widget)
 				extract_line (p, p + MAX_ENTRY_LEN), p);
 	}
 	/* Select the default entry */
-	listbox_select_by_number (listbox->list, selected);
+	listbox_select_entry (listbox->list, selected);
 
 	selected = run_listbox (listbox);
 	if (selected >= 0)
