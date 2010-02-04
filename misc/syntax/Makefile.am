@@ -7,6 +7,7 @@ SYNTAXFILES =			\
 	c.syntax		\
 	cabal.syntax		\
 	changelog.syntax	\
+	cobol.syntax		\
 	cs.syntax		\
 	css.syntax		\
 	cxx.syntax		\
