@@ -1016,13 +1016,9 @@ do_auth (const char *username, const char *password)
     if (getuid () != this->pw_uid)
 	return 0;
 
-    if (strncmp(username, "ftp", 3) == 0) {
-	errno = 0;
-	if (chroot(this->pw_dir) != 0 || errno != 0) {
-	auth = errno;
-	    error(0, errno, strerror(errno));
-	    return (-auth);
-	}
+    if ( (strcmp(username, "ftp") == 0) && (chroot(this->pw_dir) != 0) ) {
+	error(0, errno, strerror(errno));
+	return 0;
     }
 
     endpwent ();
