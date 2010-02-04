@@ -2290,6 +2290,9 @@ listbox_key (WListbox *l, int key)
 
     cb_ret_t j = MSG_NOT_HANDLED;
 
+    if (l->list == NULL)
+	return MSG_NOT_HANDLED;
+
     /* focus on listbox item N by '0'..'9' keys */
     if (key >= '0' && key <= '9') {
 	int oldpos = l->pos;
@@ -2301,9 +2304,6 @@ listbox_key (WListbox *l, int key)
 
 	return MSG_HANDLED;
     }
-
-    if (l->list == NULL)
-	return MSG_NOT_HANDLED;
 
     switch (key){
     case KEY_HOME:
@@ -2334,7 +2334,7 @@ listbox_key (WListbox *l, int key)
 	    listbox_fwd (l);
 	    j = MSG_HANDLED;
 	}
-	return j;
+	break;
 
     case KEY_PPAGE:
     case ALT('v'):
@@ -2342,7 +2342,7 @@ listbox_key (WListbox *l, int key)
 	    listbox_back (l);
 	    j = MSG_HANDLED;
 	}
-	return j;
+	break;
 
     case KEY_DC:
     case 'd':
@@ -2358,17 +2358,20 @@ listbox_key (WListbox *l, int key)
     case (KEY_M_SHIFT | KEY_DC):
     case 'D':
 	if (l->deletable && confirm_history_cleanup
-		&& (query_dialog (Q_("DialogTitle|Clean history"),
+	    /* TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix */
+	    && (query_dialog (Q_("DialogTitle|History cleanup"),
 			_("Do you want clean this history?"),
-			D_ERROR, 2, _("&Yes"), _("&No")) == 0))
+			D_ERROR, 2, _("&Yes"), _("&No")) == 0)) {
 	    listbox_remove_list (l);
-	return MSG_HANDLED;
+	    j = MSG_HANDLED;
+	}
+	break;
 
     default:
 	break;
     }
 
-    return MSG_NOT_HANDLED;
+    return j;
 }
 
 static inline void
