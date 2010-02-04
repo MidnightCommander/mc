@@ -2341,10 +2341,11 @@ listbox_key (WListbox *l, int key)
     case KEY_DC:
     case 'd':
 	if (l->deletable) {
-	    gboolean is_last = (l->pos + 1 == l->count);
+	    gboolean is_last = (l->pos + 1 >= l->count);
+	    gboolean is_more = (l->top + l->widget.lines >= l->count);
 
 	    listbox_remove_current (l);
-	    if (is_last && (l->top > 0))
+	    if ((l->top > 0) && (is_last || is_more))
 		l->top--;
 	}
 	return MSG_HANDLED;
