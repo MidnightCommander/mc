@@ -9,6 +9,7 @@
 #include "panel.h"
 #include "widget.h"
 
+void layout_change (void);
 void layout_cmd (void);
 void setup_panels (void);
 void destroy_panels (void);

@@ -366,6 +366,7 @@
 #define CK_ViewFileCmd                  7071
 #define CK_HelpCmd                      7072
 #define CK_MenuCmd                      7073
+#define CK_TogglePanelsSplit            7074
 
 /* panels */
 #define CK_PanelChdirOtherPanel         8001

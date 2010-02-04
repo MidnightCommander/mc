@@ -366,6 +366,7 @@ static name_keymap_t command_names[] = {
     { "CmdCopyCurrentTagged",            CK_CopyCurrentTagged },
     { "CmdCopyOtherTagged",              CK_CopyOtherTagged },
     { "CmdToggleShowHidden",             CK_ToggleShowHidden },
+    { "CmdTogglePanelsSplit",            CK_TogglePanelsSplit },
 
     /* panel */
     { "PanelChdirOtherPanel",            CK_PanelChdirOtherPanel },
@@ -830,6 +831,7 @@ const global_keymap_t default_main_map[] = {
     /* View output */
     { XCTRL ('o'),  CK_ShowCommandLine,               "C-o" },
     { ALT ('.'),    CK_ToggleShowHidden,              "M-." },
+    { ALT (','),    CK_TogglePanelsSplit,             "M-," },
     { XCTRL ('x'),  CK_StartExtMap1,                  "C-x" },
     /* Select/unselect group */
     { KEY_KP_ADD,       CK_SelectCmd,           "+" },
