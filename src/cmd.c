@@ -334,6 +334,9 @@ edit_cmd (void)
 void
 edit_cmd_new (void)
 {
+#if HAVE_CHARSET
+    source_codepage = default_source_codepage;
+#endif
     do_edit (NULL);
 }
 
