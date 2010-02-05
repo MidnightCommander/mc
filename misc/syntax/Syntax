@@ -43,9 +43,6 @@ include sh.syntax
 file ..\*\\.(pl|PL|pm|PM)$ Perl\sProgram ^#!.\*([\s/]perl|@PERL@)
 include perl.syntax
 
-file ..\*\\.(cbl|CBL)$ Cobol\sProgram ^ PHASE.\*)
-include cobol.syntax
-
 file ..\*\\.(py|PY)$ Python\sProgram ^#!.\*([\s/]python|@PYTHON@)
 include python.syntax
 
