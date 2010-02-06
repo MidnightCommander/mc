@@ -2111,6 +2111,7 @@ static void edit_left_char_move_cmd (WEdit * edit)
 {
     int cw = 1;
     if (column_highlighting
+        && option_cursor_beyond_eol
         && edit->mark1 != edit->mark2
         && edit->over_col == 0
         && edit->curs1 == edit_bol(edit, edit->curs1))
