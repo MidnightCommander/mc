@@ -62,6 +62,7 @@
 /*** global variables **************************************************/
 
 /*** file scope macro definitions **************************************/
+
 #if defined(_AIX) && !defined(CTRL)
 #   define CTRL(x) ((x) & 0x1f)
 #endif
@@ -158,6 +159,8 @@ tty_init (gboolean slow, gboolean ugly_lines)
 
     /* use Ctrl-g to generate SIGINT */
     cur_term->Nttyb.c_cc[VINTR] = CTRL ('g'); /* ^g */
+    /* disable SIGQUIT to allow use Ctrl-\ key */
+    cur_term->Nttyb.c_cc[VQUIT] = NULL_VALUE;
     tcsetattr (cur_term->Filedes, TCSANOW, &cur_term->Nttyb);
 
     tty_start_interrupt_key ();
