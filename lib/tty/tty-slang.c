@@ -52,20 +52,10 @@
 
 
 /*** global variables **************************************************/
+
 extern int reset_hp_softkeys;
 
 /*** file scope macro definitions **************************************/
-
-/* Taken from S-Lang's slutty.c */
-#ifdef ultrix                   /* Ultrix gets _POSIX_VDISABLE wrong! */
-#   define NULL_VALUE -1
-#else
-#   ifdef _POSIX_VDISABLE
-#	define NULL_VALUE _POSIX_VDISABLE
-#   else
-#	define NULL_VALUE 255
-#   endif
-#endif /* ultrix */
 
 #ifndef SA_RESTART
 #   define SA_RESTART 0
@@ -78,7 +68,6 @@ extern int reset_hp_softkeys;
 #ifndef SLTT_MAX_SCREEN_ROWS
 #define SLTT_MAX_SCREEN_ROWS 512
 #endif
-
 
 /*** file scope type declarations **************************************/
 
