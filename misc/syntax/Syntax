@@ -139,7 +139,7 @@ include sql.syntax
 file ..\*\\.(spec|spec\.in)$ RPM\sSpecfile
 include spec.syntax
 
-file ..\*\\.repo$ YUM\sRepo File
+file ..\*\\.repo$ YUM\sRepo\sFile
 include yum-repo.syntax
 
 file ..\*\\.(awk)$ AWK\sFile
