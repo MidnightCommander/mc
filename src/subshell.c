@@ -121,14 +121,13 @@ char *subshell_prompt = NULL;
 /* Used by the child process to indicate failure to start the subshell */
 #define FORK_FAILURE 69  /* Arbitrary */
 
-/* Initial length of the buffer for all I/O with the subshell */
-#define INITIAL_PTY_BUFFER_SIZE 100  /* Arbitrary; but keep it >= 80 */
+/* Length of the buffer for all I/O with the subshell */
+#define PTY_BUFFER_SIZE BUF_SMALL  /* Arbitrary; but keep it >= 80 */
 
 /* For pipes */
 enum {READ=0, WRITE=1};
 
-static char *pty_buffer;	/* For reading/writing on the subshell's pty */
-static int pty_buffer_size;	/* The buffer grows as needed */
+static char pty_buffer[PTY_BUFFER_SIZE] = "\0";	/* For reading/writing on the subshell's pty */
 static int subshell_pipe[2];	/* To pass CWD info from the subshell to MC */
 static pid_t subshell_pid = 1;	/* The subshell's process ID */
 static char subshell_cwd[MC_MAXPATHLEN+1];  /* One extra char for final '\n' */
@@ -423,11 +422,6 @@ init_subshell (void)
 	    return;
 	}
 
-	/* Initialise the pty's I/O buffer */
-
-	pty_buffer_size = INITIAL_PTY_BUFFER_SIZE;
-	pty_buffer = g_malloc (pty_buffer_size);
-
 	/* Create a pipe for receiving the subshell's CWD */
 
 	if (subshell_type == TCSH) {
@@ -625,7 +619,7 @@ read_subshell_prompt (void)
 	    }
 	}
 
-	bytes = read (subshell_pty, pty_buffer, pty_buffer_size);
+	bytes = read (subshell_pty, pty_buffer, sizeof (pty_buffer));
 
 	/* Extract the prompt from the shell output */
 
@@ -693,9 +687,8 @@ exit_subshell (void)
 	}
 
 	g_free (subshell_prompt);
-	g_free (pty_buffer);
 	subshell_prompt = NULL;
-	pty_buffer = NULL;
+	pty_buffer[0] = '\0';
     }
 
     return subshell_quit;
@@ -979,7 +972,7 @@ feed_subshell (int how, int fail_on_error)
 	       randomly, because of an apparent Linux bug.  Investigate. */
 	    /* for (i=0; i<5; ++i)  * FIXME -- experimental */
 	{
-	    bytes = read (subshell_pty, pty_buffer, pty_buffer_size);
+	    bytes = read (subshell_pty, pty_buffer, sizeof (pty_buffer));
 
 	    /* The subshell has died */
 	    if (bytes == -1 && errno == EIO && !subshell_alive)
@@ -1024,7 +1017,7 @@ feed_subshell (int how, int fail_on_error)
 	else if (FD_ISSET (STDIN_FILENO, &read_set))
 	    /* Read from stdin, write to the subshell */
 	{
-	    bytes = read (STDIN_FILENO, pty_buffer, pty_buffer_size);
+	    bytes = read (STDIN_FILENO, pty_buffer, sizeof (pty_buffer));
 	    if (bytes <= 0) {
 		tcsetattr (STDOUT_FILENO, TCSANOW, &shell_mode);
 		fprintf (stderr,
