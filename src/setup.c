@@ -390,10 +390,12 @@ save_setup (void)
 #endif /* ENABLE_VFS && USE_NETCODE */
 
 #ifdef HAVE_CHARSET
-    mc_config_set_string(mc_main_config, "Misc" , "display_codepage",
+    mc_config_set_string (mc_main_config, "Misc" , "display_codepage",
 		 get_codepage_id( display_codepage ));
-    mc_config_set_string(mc_main_config, "Misc" , "source_codepage",
-		 get_codepage_id( source_codepage ));
+    mc_config_set_string (mc_main_config, "Misc" , "source_codepage",
+		 get_codepage_id( default_source_codepage ));
+    mc_config_set_string (mc_main_config, "Misc" , "autodetect_codeset",
+		 autodetect_codeset );
 #endif /* HAVE_CHARSET */
     tmp_profile = g_build_filename (home_dir, MC_USERCONF_DIR, MC_CONFIG_FILE, NULL);
     ret = mc_config_save_to_file (mc_main_config, tmp_profile, NULL);
@@ -739,19 +741,19 @@ load_setup (void)
     /* mc.lib is common for all users, but has priority lower than
        ~/.mc/ini.  FIXME: it's only used for keys and treestore now */
     global_profile_name = concat_dir_and_file (mc_home, MC_GLOBAL_CONFIG_FILE);
-    if (!exist_file(global_profile_name)) {
+    if (!exist_file (global_profile_name)) {
 	g_free (global_profile_name);
 	global_profile_name = concat_dir_and_file (mc_home_alt, MC_GLOBAL_CONFIG_FILE);
     }
 
     panels_profile_name = g_build_filename (home_dir, MC_USERCONF_DIR, MC_PANELS_FILE, NULL);
 
-    mc_main_config = mc_config_init(profile);
+    mc_main_config = mc_config_init (profile);
 
     if (!exist_file(panels_profile_name))
-        setup__move_panels_config_into_separate_file(profile);
+        setup__move_panels_config_into_separate_file (profile);
 
-    mc_panels_config = mc_config_init(panels_profile_name);
+    mc_panels_config = mc_config_init (panels_profile_name);
 
     /* Load integer boolean options */
     for (i = 0; int_options[i].opt_name; i++)
@@ -775,7 +777,7 @@ load_setup (void)
 	startup_left_mode = view_listing;
 
     if (!other_dir){
-	buffer = mc_config_get_string(mc_panels_config, "Dirs", "other_dir", ".");
+	buffer = mc_config_get_string (mc_panels_config, "Dirs", "other_dir", ".");
 	if (vfs_file_is_local (buffer))
 	    other_dir = buffer;
 	else
@@ -783,16 +785,16 @@ load_setup (void)
     }
 
     boot_current_is_left =
-        mc_config_get_int(mc_panels_config, "Dirs", "current_is_left", 1);
+        mc_config_get_int (mc_panels_config, "Dirs", "current_is_left", 1);
 
 #ifdef USE_NETCODE
-    ftpfs_proxy_host = mc_config_get_string(mc_main_config, "Misc", "ftp_proxy_host", "gate");
+    ftpfs_proxy_host = mc_config_get_string (mc_main_config, "Misc", "ftp_proxy_host", "gate");
 #endif
 
     /* The default color and the terminal dependent color */
-    setup_color_string = mc_config_get_string(mc_main_config, "Colors", "base_color", "");
-    term_color_string = mc_config_get_string(mc_main_config, "Colors", getenv ("TERM"), "");
-    color_terminal_string = mc_config_get_string(mc_main_config, "Colors", "color_terminals", "");
+    setup_color_string = mc_config_get_string (mc_main_config, "Colors", "base_color", "");
+    term_color_string = mc_config_get_string (mc_main_config, "Colors", getenv ("TERM"), "");
+    color_terminal_string = mc_config_get_string (mc_main_config, "Colors", "color_terminals", "");
 
     /* Load the directory history */
 /*    directory_history_load (); */
@@ -802,25 +804,29 @@ load_setup (void)
 #endif /* ENABLE_VFS && USE_NETCODE */
 
 #ifdef HAVE_CHARSET
-    if ( load_codepages_list() > 0 ) {
-	buffer = mc_config_get_string(mc_main_config, "Misc", "display_codepage", "");
-	if ( buffer[0] != '\0' )
-	{
-	    display_codepage = get_codepage_index( buffer );
+    if (load_codepages_list () > 0) {
+	buffer = mc_config_get_string (mc_main_config, "Misc", "display_codepage", "");
+	if (buffer[0] != '\0') {
+	    display_codepage = get_codepage_index (buffer);
 	    cp_display = get_codepage_id (display_codepage);
 	}
 	g_free(buffer);
 	buffer = mc_config_get_string(mc_main_config, "Misc", "source_codepage", "");
-	if ( buffer[0] != '\0' )
-	{
-	    source_codepage = get_codepage_index( buffer );
+	if (buffer[0] != '\0') {
+	    default_source_codepage = get_codepage_index (buffer);
+	    source_codepage = default_source_codepage; /* May be source_codepage don't needed this */
 	    cp_source = get_codepage_id (source_codepage);
 	}
 	g_free(buffer);
     }
-    init_translation_table( source_codepage, display_codepage );
-    if ( get_codepage_id( display_codepage ) )
-        utf8_display = str_isutf8 (get_codepage_id( display_codepage ));
+
+    autodetect_codeset = mc_config_get_string (mc_main_config, "Misc", "autodetect_codeset", "");
+    if ((autodetect_codeset[0] != '\0') && (strcmp(autodetect_codeset, "off")))
+	is_autodetect_codeset_enabled=TRUE;
+
+    init_translation_table (source_codepage, display_codepage);
+    if (get_codepage_id (display_codepage))
+        utf8_display = str_isutf8 (get_codepage_id (display_codepage));
 #endif /* HAVE_CHARSET */
 }
 

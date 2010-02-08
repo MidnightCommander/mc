@@ -45,10 +45,12 @@
 #include "user.h"
 #include "main.h"
 #include "wtools.h"
-#include "ext.h"
 #include "execute.h"
 #include "history.h"
 #include "layout.h"
+#include "charsets.h"		/* get_codepage_index */
+#include "selcodepage.h"	/* do_set_codepage */
+#include "ext.h"
 
 /* If set, we execute the file command to check the file type */
 int use_file_to_check_type = 1;
@@ -306,39 +308,83 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir,
 #endif
 
 /*
+ * Run cmd_file with args, put result into buf.
+ * If error, put '\0' into buf[0]
+ * Return 1 if the data is valid, 0 otherwise, -1 for fatal errors.
+ *
+ * NOTES: buf is null-terminated string.
+ */
+static int
+get_popen_information (const char *cmd_file, const char *args, char *buf, int buflen)
+{
+    gboolean read_bytes = FALSE;
+    char *command;
+    FILE *f;
+
+    command = g_strconcat (cmd_file, args, " 2>/dev/null", (char *) NULL);
+    f = popen (command, "r");
+    g_free (command);
+
+    if (f != NULL) {
+#ifdef __QNXNTO__
+	if (setvbuf (f, NULL, _IOFBF, 0) != 0) {
+	    (void) pclose (f);
+	    return -1;
+	}
+#endif
+	read_bytes = (fgets (buf, buflen, f) != NULL);
+	if (!read_bytes)
+	    buf[0] = '\0'; /* Paranoid termination */
+	pclose (f);
+    } else {
+	buf[0] = '\0'; /* Paranoid termination */
+	return -1;
+    }
+
+    buf[buflen - 1] = '\0';
+
+    return read_bytes ? 1 : 0;
+}
+
+/*
  * Run the "file" command on the local file.
  * Return 1 if the data is valid, 0 otherwise, -1 for fatal errors.
  */
 static int
 get_file_type_local (const char *filename, char *buf, int buflen)
 {
-    int read_bytes = 0;
+    char *tmp;
+    int ret;
 
-    char *tmp = name_quote (filename, 0);
-    char *command = g_strconcat (FILE_CMD, tmp, " 2>/dev/null", (char *) NULL);
-    FILE *f = popen (command, "r");
-
+    tmp = name_quote (filename, 0);
+    ret = get_popen_information (FILE_CMD, tmp, buf, buflen);
     g_free (tmp);
-    g_free (command);
-    if (f != NULL) {
-#ifdef __QNXNTO__
-	if (setvbuf (f, NULL, _IOFBF, 0) != 0) {
-	    (void)pclose (f);
-	    return -1;
-	}
-#endif
-	read_bytes = (fgets (buf, buflen, f)
-		      != NULL);
-	if (read_bytes == 0)
-	    buf[0] = 0;
-	pclose (f);
-    } else {
-	return -1;
-    }
 
-    return (read_bytes > 0);
+    return ret;
 }
 
+/*
+ * Run the "enca" command on the local file.
+ * Return 1 if the data is valid, 0 otherwise, -1 for fatal errors.
+ */
+static int
+get_file_encoding_local (const char *filename, char *buf, int buflen)
+{
+    char *tmp, *lang, *args;
+    int ret;
+
+    tmp = name_quote (filename, 0);
+    lang = name_quote (autodetect_codeset, 0);
+    args= g_strconcat (" -L", lang, " -i ", tmp, (char *) NULL);
+
+    ret = get_popen_information ("enca", args, buf, buflen);
+
+    g_free (args);
+    g_free (lang);
+    g_free (tmp);
+
+    return ret;
+}
 
 /*
  * Invoke the "file" command on the file and match its output against PTR.
@@ -353,39 +399,58 @@ regex_check_type (const char *filename, const char *ptr, int *have_type)
 
     /* Following variables are valid if *have_type is 1 */
     static char content_string[2048];
-    static int content_shift = 0;
+    static char encoding_id[21]; /* CSISO51INISCYRILLIC -- 20 */
+    static size_t content_shift = 0;
     static int got_data = 0;
 
-    if (!use_file_to_check_type) {
+    if (!use_file_to_check_type)
 	return 0;
-    }
 
-    if (!*have_type) {
+    if (*have_type == 0) {
 	char *realname;		/* name used with "file" */
 	char *localfile;
+	int got_encoding_data;
+
 	/* Don't repeate even unsuccessful checks */
 	*have_type = 1;
 
 	localfile = mc_getlocalcopy (filename);
-	if (!localfile)
+	if (localfile == NULL)
 	    return -1;
 
 	realname = localfile;
-	got_data =
-	    get_file_type_local (localfile, content_string,
-				 sizeof (content_string));
+
+	got_encoding_data = is_autodetect_codeset_enabled
+		? get_file_encoding_local (localfile, encoding_id, sizeof (encoding_id))
+		: 0;
+
 	mc_ungetlocalcopy (filename, localfile, 0);
+
+	if (got_encoding_data > 0) {
+	    char *pp;
+	    int cp_id;
+
+	    pp = strchr (encoding_id, '\n');
+	    if (pp != NULL)
+		*pp = '\0';
+
+	    cp_id = get_codepage_index (encoding_id);
+	    if (cp_id == -1)
+		cp_id = default_source_codepage;
+
+	    do_set_codepage (cp_id);
+	}
+
+	got_data = get_file_type_local (localfile, content_string, sizeof (content_string));
 
 	if (got_data > 0) {
 	    char *pp;
 
-	    /* Paranoid termination */
-	    content_string[sizeof (content_string) - 1] = 0;
+	    pp = strchr (content_string, '\n');
+	    if (pp != NULL)
+		*pp = '\0';
 
-	    if ((pp = strchr (content_string, '\n')) != 0)
-		*pp = 0;
-
-	    if (!strncmp (content_string, realname, strlen (realname))) {
+	    if (strncmp (content_string, realname, strlen (realname)) == 0) {
 		/* Skip "realname: " */
 		content_shift = strlen (realname);
 		if (content_string[content_shift] == ':') {
@@ -393,21 +458,21 @@ regex_check_type (const char *filename, const char *ptr, int *have_type)
 		    for (content_shift++;
 			 content_string[content_shift] == ' '
 			 || content_string[content_shift] == '\t';
-			 content_shift++);
+			 content_shift++)
+			;
 		}
 	    }
 	} else {
 	    /* No data */
-	    content_string[0] = 0;
+	    content_string[0] = '\0';
 	}
 	g_free (realname);
     }
 
-    if (got_data == -1) {
+    if (got_data == -1)
 	return -1;
-    }
 
-    if (content_string[0]
+    if (content_string[0] != '\0'
 	&& mc_search (ptr, content_string + content_shift, MC_SEARCH_T_REGEX)) {
 	found = 1;
     }

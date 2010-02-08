@@ -40,7 +40,10 @@
 
 /* Numbers of (file I/O) and (input/display) codepages. -1 if not selected */
 int source_codepage = -1;
+int default_source_codepage = -1;
 int display_codepage = -1;
+char* autodetect_codeset = NULL;
+gboolean is_autodetect_codeset_enabled = FALSE;
 
 static unsigned char
 get_hotkey (int n)
@@ -108,25 +111,35 @@ select_charset (int center_y, int center_x, int current_charset, gboolean seldis
     }
 }
 
+/* Set codepage */
 gboolean
-do_select_codepage (void)
+do_set_codepage (int codepage)
 {
     const char *errmsg = NULL;
-    int r;
 
-    r = select_charset (-1, -1, source_codepage, FALSE);
-    if (r == SELECT_CHARSET_CANCEL)
-	return FALSE;
-
-    source_codepage = r;
-
-    errmsg = init_translation_table (r == SELECT_CHARSET_NO_TRANSLATE ?
+    source_codepage = codepage;
+    errmsg = init_translation_table (codepage == SELECT_CHARSET_NO_TRANSLATE ?
 					display_codepage : source_codepage,
 					display_codepage);
     if (errmsg != NULL)
         message (D_ERROR, MSG_ERROR, "%s", errmsg);
 
     return (errmsg == NULL);
+}
+
+/* Show menu selecting codepage */
+
+gboolean
+do_select_codepage (void)
+{
+    int r;
+
+    r = select_charset (-1, -1, default_source_codepage, FALSE);
+    if (r == SELECT_CHARSET_CANCEL)
+	return FALSE;
+
+    default_source_codepage = r;
+    return do_set_codepage (default_source_codepage);
 }
 
 #endif				/* HAVE_CHARSET */

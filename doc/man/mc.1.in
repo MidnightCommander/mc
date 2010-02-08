@@ -3571,7 +3571,7 @@ thin vertical line
 
 
 .\"NODE "  Skins oldcolors"
-.SH "  Compability"
+.SH "  Compatibility"
 
 Appointment of color  by skin\-files fully compatible with
 the appointment of the colors described in
@@ -3580,31 +3580,31 @@ Colors\&.
 .\"Colors"
 section.
 .PP
-In this case, reassignment of colors has priority over the skin files and is
+In this case, reassignment of colors has priority over the skin file and is
 complementary.
 
 .\"NODE "Filenames Highlight"
 .SH "Filenames Highlight"
-Section [filehighlight] from current skin\-file contain key names as
+Section [filehighlight] in current skin\-file contains key names as
 highlight groups and values as color pairs. Color pairs is documented
-into
+in
 .\"LINK2"
 Skins
 .\"Skins"
 section.
 .PP
-Rules of filenames highlight placed in @prefix@/share/mc/filehighlight.ini file
+Rules of filenames highlight are placed in @prefix@/share/mc/filehighlight.ini file
 (~/.mc/filehighlight.ini).
-Name of section in this file must be equal to parameters names into
-[filehighlight] section (in current skin\-file)
+Name of section in this file must be equal to parameters names in
+[filehighlight] section (in current skin\-file).
 .PP
-Keys in these groups:
+Keys in these groups are:
 .TP
 .I type
-file type. if present, all other option ignored
+file type. If present, all other options are ignored.
 .TP
 .I regexp
-regular expression. If present, 'extensions' option ignored
+regular expression. If present, 'extensions' option is ignored.
 .TP
 .I extensions
 list of extensions of files. Separated by ';' sign.
@@ -3635,7 +3635,7 @@ rule case sentitive (true) or not (false).
 
 .\"NODE "Special Settings"
 .SH "Special Settings"
-Most of the settings of the Midnight Commander can be changed from the
+Most of the Midnight Commander settings can be changed from the
 menus. However, there are a small number of settings which can only be
 changed by editing the setup file.
 .PP
@@ -3736,6 +3736,18 @@ contents of the selected directory.
 .I fish_directory_timeout
 This variable holds the lifetime of a directory cache entry in seconds. The
 default value is 900 seconds.
+.TP
+.I autodetect_codeset
+This option allows use the `enca' command to autodetect codeset of text files
+in internal viewer and editor. List of valid values can be obtain by the
+`enca \-\-list languages | cut \-d : \-f1' command. Option must be located
+in the [Misc] section.
+.PP
+For example:
+.PP
+.nf
+autodetect_codeset=russian
+.fi
 .\"NODE "Terminal databases"
 .SH "Terminal databases"
 The Midnight Commander provides a way to fix your system terminal

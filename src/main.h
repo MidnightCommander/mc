@@ -44,7 +44,10 @@ extern int option_tab_spacing;
 
 #ifdef HAVE_CHARSET
 extern int source_codepage;
+extern int default_source_codepage;
 extern int display_codepage;
+extern char* autodetect_codeset;
+extern gboolean is_autodetect_codeset_enabled;
 #else
 extern int eight_bit_clean;
 extern int full_eight_bits;
