@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-12-25 19:06+0200\n"
+"POT-Creation-Date: 2010-02-09 12:01+0200\n"
 "PO-Revision-Date: 2009-02-16 19:45+0300\n"
 "Last-Translator: Andrius Štikonas <stikonas@gmail.com>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -17,79 +17,629 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%"
 "100<10 || n%100>=20) ? 1 : 2;\n"
 
-msgid " Choose syntax highlighting "
-msgstr " Parinkite sintaksės ryškinimą "
-
-msgid "< Auto >"
-msgstr "< Auto >"
-
-msgid "< Reload Current Syntax >"
-msgstr "< Įkelti esamą sintaksę iš naujo >"
-
-#, c-format
-msgid " Cannot open %s for reading "
-msgstr " Nepavyko atverti %s skaitymui "
-
-msgid "Error"
-msgstr "Klaida"
-
-#, c-format
-msgid " Error reading from pipe: %s "
-msgstr " Klaida skaitant iš konvejerio: %s "
-
-#, c-format
-msgid " Cannot open pipe for reading: %s "
-msgstr " Nepavyko atverti konvejerio skaitymui: %s "
-
-#, c-format
-msgid " Cannot get size/permissions for %s "
-msgstr " Nepavyko sužinoti %s dydžio/leidimų "
-
-#, c-format
-msgid " %s is not a regular file "
-msgstr " %s nėra įprastinis failas "
-
-#, c-format
-msgid " File %s is too large "
-msgstr " Failas %s yra per didelis "
-
-msgid " About "
-msgstr " Apie "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       Naudotojui draugiškas redaktorius, \n"
-"         parašytas „Midnight Commander“.\n"
-
-msgid "&OK"
-msgstr "&Gerai"
-
-msgid "Macro recursion is too deep"
-msgstr "Makrokomandų rekursija yra per gili"
-
-msgid "Search"
-msgstr "Paieška"
-
 msgid " Search string not found "
 msgstr " Ieškoma eilutė nerasta "
+
+msgid " Not implemented yet "
+msgstr ""
+
+msgid " Num of replace tokens not equal to num of found tokens "
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Invalid token number %d "
+msgstr " Netaisyklingas paskirties formatas "
+
+msgid "Normal"
+msgstr ""
+
+msgid "&Regular expression"
+msgstr "Reguliari &išraiška"
+
+msgid "Hexadecimal"
+msgstr ""
+
+msgid "Wildcard search"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+msgid "Function key 1"
+msgstr "Funkcinis klav. 1"
+
+msgid "Function key 2"
+msgstr "Funkcinis klav. 2"
+
+msgid "Function key 3"
+msgstr "Funkcinis klav. 3"
+
+msgid "Function key 4"
+msgstr "Funkcinis klav. 4"
+
+msgid "Function key 5"
+msgstr "Funkcinis klav. 5"
+
+msgid "Function key 6"
+msgstr "Funkcinis klav. 6"
+
+msgid "Function key 7"
+msgstr "Funkcinis klav. 7"
+
+msgid "Function key 8"
+msgstr "Funkcinis klav. 8"
+
+msgid "Function key 9"
+msgstr "Funkcinis klav. 9"
+
+msgid "Function key 10"
+msgstr "Funkcinis klav. 10"
+
+msgid "Function key 11"
+msgstr "Funkcinis klav. 11"
+
+msgid "Function key 12"
+msgstr "Funkcinis klav. 12"
+
+msgid "Function key 13"
+msgstr "Funkcinis klav. 13"
+
+msgid "Function key 14"
+msgstr "Funkcinis klav. 14"
+
+msgid "Function key 15"
+msgstr "Funkcinis klav. 15"
+
+msgid "Function key 16"
+msgstr "Funkcinis klav. 16"
+
+msgid "Function key 17"
+msgstr "Funkcinis klav. 17"
+
+msgid "Function key 18"
+msgstr "Funkcinis klav. 18"
+
+msgid "Function key 19"
+msgstr "Funkcinis klav. 19"
+
+msgid "Function key 20"
+msgstr "Funkcinis klav. 20"
+
+msgid "Backspace key"
+msgstr "„Backspace“"
+
+msgid "End key"
+msgstr "„End“"
+
+msgid "Up arrow key"
+msgstr "„Aukštyn“"
+
+msgid "Down arrow key"
+msgstr "„Žemyn“"
+
+msgid "Left arrow key"
+msgstr "„Kairėn“"
+
+msgid "Right arrow key"
+msgstr "„Dešinėn“"
+
+msgid "Home key"
+msgstr "„Home“"
+
+msgid "Page Down key"
+msgstr "„Page Down“"
+
+msgid "Page Up key"
+msgstr "„Page Up“"
+
+msgid "Insert key"
+msgstr "„Insert“"
+
+msgid "Delete key"
+msgstr "„Delete“"
+
+msgid "Completion/M-tab"
+msgstr "Užbaig./„M-Tab“"
+
+msgid "+ on keypad"
+msgstr "Skaitm. +"
+
+msgid "- on keypad"
+msgstr "Skaitm. -"
+
+msgid "Slash on keypad"
+msgstr "Skaitm. /"
+
+msgid "* on keypad"
+msgstr "Skaitm. *"
+
+#, fuzzy
+msgid "Escape key"
+msgstr "Skaitm. /"
+
+msgid "Left arrow keypad"
+msgstr "Skaitm. „kairėn“"
+
+msgid "Right arrow keypad"
+msgstr "Skaitm. „dešinėn“"
+
+msgid "Up arrow keypad"
+msgstr "Skaitm. „aukštyn“"
+
+msgid "Down arrow keypad"
+msgstr "Skaitm. „žemyn“"
+
+msgid "Home on keypad"
+msgstr "Skaitm. „Home“"
+
+msgid "End on keypad"
+msgstr "Skaitm. „End“"
+
+msgid "Page Down keypad"
+msgstr "Skaitm. „Page Down“"
+
+msgid "Page Up keypad"
+msgstr "Skaitm. „Page Up“"
+
+msgid "Insert on keypad"
+msgstr "Skaitm. „Insert“"
+
+msgid "Delete on keypad"
+msgstr "Skaitm. „Delete“"
+
+msgid "Enter on keypad"
+msgstr "Skaitm. „Enter“"
+
+#, fuzzy
+msgid "Function key 21"
+msgstr "Funkcinis klav. 1"
+
+#, fuzzy
+msgid "Function key 22"
+msgstr "Funkcinis klav. 2"
+
+#, fuzzy
+msgid "Function key 23"
+msgstr "Funkcinis klav. 2"
+
+#, fuzzy
+msgid "Function key 24"
+msgstr "Funkcinis klav. 2"
+
+msgid "Plus"
+msgstr ""
+
+#, fuzzy
+msgid "Minus"
+msgstr "Meniu"
+
+msgid "Asterisk"
+msgstr ""
+
+msgid "Dot"
+msgstr ""
+
+msgid "Less than"
+msgstr ""
+
+msgid "Great than"
+msgstr ""
+
+msgid "Equal"
+msgstr ""
+
+#, fuzzy
+msgid "Comma"
+msgstr "Komanda"
+
+msgid "Apostrophe"
+msgstr ""
+
+#, fuzzy
+msgid "Colon"
+msgstr "Kiekis"
+
+msgid "Exclamation mark"
+msgstr ""
+
+msgid "Question mark"
+msgstr ""
+
+#, fuzzy
+msgid "Ampersand"
+msgstr "&Papildyti"
+
+msgid "Dollar sign"
+msgstr ""
+
+msgid "Quotation mark"
+msgstr ""
+
+#, fuzzy
+msgid "Caret"
+msgstr "Į"
+
+msgid "Tilda"
+msgstr ""
+
+#, fuzzy
+msgid "Prime"
+msgstr "Atgal"
+
+#, fuzzy
+msgid "Underline"
+msgstr " Įveskite eilutę: "
+
+msgid "Understrike"
+msgstr ""
+
+msgid "Pipe"
+msgstr ""
+
+#, fuzzy
+msgid "Enter"
+msgstr "savin."
+
+#, fuzzy
+msgid "Tab key"
+msgstr "Skaitm. +"
+
+#, fuzzy
+msgid "Space key"
+msgstr "Skaitm. /"
+
+#, fuzzy
+msgid "Slash key"
+msgstr "Skaitm. /"
+
+#, fuzzy
+msgid "Backslash key"
+msgstr "„Backspace“"
+
+msgid "Number sign #"
+msgstr ""
+
+msgid "Ctrl"
+msgstr ""
+
+msgid "Alt"
+msgstr ""
+
+msgid "Shift"
+msgstr ""
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"Ekrano dydis %dx%d nepalaikomas.\n"
+"Patikrinkite TERM aplinkos kintamąjį.\n"
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
+
+#, c-format
+msgid "%s is not a directory\n"
+msgstr "%s nėra aplankas\n"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr "Aplankas %s jums nepriklauso\n"
+
+#, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr " Nepavyko nustatyti reikiamų teisių aplankui %s\n"
+
+#, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr "Nepavyko sukurti laikino aplanko %s: %s\n"
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr "Laikinieji failai bus talpinami aplanke %s\n"
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr "Laikinieji failai nebus kuriami\n"
+
+#, c-format
+msgid "Press any key to continue..."
+msgstr "Paspauskite bet kurį klavišą..."
 
 msgid "Warning"
 msgstr "Įspėjimas"
 
-msgid " File has hard-links. Detach before saving? "
-msgstr " Failas turi nuorodų. Atjungti prieš išsaugant? "
+msgid " Pipe failed "
+msgstr " Konvejeris nepavyko "
+
+msgid " Dup failed "
+msgstr " „Dup“ nepavyko "
+
+#, c-format
+msgid ""
+"Cannot open cpio archive\n"
+"%s"
+msgstr ""
+"Nepvyko atverti „cpio“ archyvo\n"
+"%s"
+
+#, c-format
+msgid ""
+"Premature end of cpio archive\n"
+"%s"
+msgstr ""
+"Ankstyva „cpio“ archyvo pabaiga\n"
+"%s"
+
+#, c-format
+msgid ""
+"Inconsistent hardlinks of\n"
+"%s\n"
+"in cpio archive\n"
+"%s"
+msgstr ""
+"Nesutampančios nuorodos:\n"
+"%s\n"
+"„cpio“ archyve\n"
+"%s"
+
+#, c-format
+msgid "%s contains duplicate entries! Skipping!"
+msgstr "Faile „%s“ turi dvigubų įrašų! Praleidžiama!"
+
+#, c-format
+msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"Sugadinta „cpio“ archyvo antraštė:\n"
+"%s"
+
+#, c-format
+msgid ""
+"Unexpected end of file\n"
+"%s"
+msgstr ""
+"Netikėta failo pabaiga\n"
+"%s"
+
+#, c-format
+msgid "Directory cache expired for %s"
+msgstr "Aplanko „%s“ podėlis nebegalioja"
+
+msgid "Starting linear transfer..."
+msgstr "Pradedamas siuntimas..."
+
+#, c-format
+msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+msgstr "%s: %s: %s %3d%% (%lu baitų persiųsta)"
+
+#, c-format
+msgid "%s: %s: %s %lu bytes transferred"
+msgstr "%s: %s: %s %lu baitų persiųsta"
+
+msgid "Getting file"
+msgstr "Parsiunčiamas failas"
+
+#, c-format
+msgid ""
+"Cannot open %s archive\n"
+"%s"
+msgstr ""
+"Nepavyko atverti „%s“ archyvo\n"
+"%s"
+
+msgid "Inconsistent extfs archive"
+msgstr "Prieštaringas „extfs“ archyvas"
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Įspėjimas: failas %s nerasta\n"
+
+#, c-format
+msgid "fish: Disconnecting from %s"
+msgstr "fish: atsijungiama nuo %s"
+
+msgid "fish: Waiting for initial line..."
+msgstr "fish: laukiama pradinės eilutės..."
+
+msgid "Sorry, we cannot do password authenticated connections for now."
+msgstr "Šiuo metu slaptažodžių apsaugotų prisijungimų atlikti negalima."
+
+msgid " fish: Password required for "
+msgstr "fish: reikia slaptažodžio "
+
+msgid "fish: Sending password..."
+msgstr "fish: siunčiamas slaptažodis..."
+
+msgid "fish: Sending initial line..."
+msgstr "fish: siunčiama pradinė linija..."
+
+msgid "fish: Handshaking version..."
+msgstr "fish: derinamos versijos..."
+
+msgid "fish: Setting up current directory..."
+msgstr "fish: nustatomas esamas aplankas..."
+
+#, c-format
+msgid "fish: Connected, home %s."
+msgstr "fish: prisijungta, namai %s. "
+
+#, c-format
+msgid "fish: Reading directory %s..."
+msgstr "fish: atveriamas aplankas %s..."
+
+#, c-format
+msgid "%s: done."
+msgstr "%s: atlikta."
+
+#, c-format
+msgid "%s: failure"
+msgstr "%s: nepavyko"
+
+#, c-format
+msgid "fish: store %s: sending command..."
+msgstr "fish: „%s“ siuntimas: siunčiamas slaptažodis..."
+
+msgid "fish: Local read failed, sending zeros"
+msgstr "fish: vietinis skaitymas nepavyko, siunčiami nuliai"
+
+#, c-format
+msgid "fish: storing %s %d (%lu)"
+msgstr "fish: siunčiama %s %d (%lu)"
+
+msgid "zeros"
+msgstr "nuliai"
+
+msgid "file"
+msgstr "failą"
+
+msgid "Aborting transfer..."
+msgstr "Nutraukiamas siuntimas..."
+
+msgid "Error reported after abort."
+msgstr "Po nutraukties pranešta klaida."
+
+msgid "Aborted transfer would be successful."
+msgstr "Nutrauktas siuntimas būtų sėkmingas."
+
+#, c-format
+msgid "ftpfs: Disconnecting from %s"
+msgstr "ftpfs: atsijungiama nuo %s"
+
+msgid " FTP: Password required for "
+msgstr " FTP: reikia slaptažodžio "
+
+msgid "ftpfs: sending login name"
+msgstr "ftpfs: siunčiamas naudotojo vardas"
+
+msgid "ftpfs: sending user password"
+msgstr "ftpfs: siunčiamas slaptažodis"
+
+#, c-format
+msgid "FTP: Account required for user %s"
+msgstr "FTP: %s naudotojui reikia prisijungimo vardo"
+
+msgid "Account:"
+msgstr "Paskyra:"
+
+msgid "ftpfs: sending user account"
+msgstr "ftpfs: siunčiamas naudotojo vardas"
+
+msgid "ftpfs: logged in"
+msgstr "ftpfs: prisijungta"
+
+#, c-format
+msgid "ftpfs: Login incorrect for user %s "
+msgstr "ftpfs: Neteisingas naudotojo „%s“ jungimasis "
+
+msgid "ftpfs: Invalid host name."
+msgstr "ftpfs: Neteisingas kompiuterio vardas."
+
+#, c-format
+msgid "ftpfs: %s"
+msgstr ""
+
+#, c-format
+msgid "ftpfs: making connection to %s"
+msgstr "ftpfs: jungiamasi į %s"
+
+msgid "ftpfs: connection interrupted by user"
+msgstr "ftpfs: jungiamasis nutrauktas"
+
+#, c-format
+msgid "ftpfs: connection to server failed: %s"
+msgstr "ftpfs: jungimasis į serverį nepavyko: %s"
+
+#, c-format
+msgid "Waiting to retry... %d (Control-C to cancel)"
+msgstr "Laukiama... %d (Control-C nutraukti)"
+
+#, fuzzy
+msgid "ftpfs: invalid address family"
+msgstr "ftpfs: Neteisingas adresas."
+
+#, fuzzy, c-format
+msgid "ftpfs: could not setup passive mode: %s"
+msgstr "ftpfs: nepavyko nustatyti pasyvaus režimo"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not create socket: %s"
+msgstr " Nepavyko sukurti lizdo: %s "
+
+msgid "ftpfs: could not setup passive mode"
+msgstr "ftpfs: nepavyko nustatyti pasyvaus režimo"
+
+msgid "ftpfs: aborting transfer."
+msgstr "ftpfs: nutraukiamas siuntimas."
+
+#, c-format
+msgid "ftpfs: abort error: %s"
+msgstr "ftpfs: nutraukti nepavyko: %s"
+
+msgid "ftpfs: abort failed"
+msgstr "ftpfs: nutraukti nepavyko"
+
+msgid "ftpfs: CWD failed."
+msgstr "ftpfs: CWD nepavyko"
+
+msgid "ftpfs: couldn't resolve symlink"
+msgstr "ftpfs: nepavyko išspręsti simb. nuorodos"
+
+msgid "Resolving symlink..."
+msgstr "Sprendžiama simb. nuoroda..."
+
+#, c-format
+msgid "ftpfs: Reading FTP directory %s... %s%s"
+msgstr "ftpfs: atveriamas FTP aplankas %s... %s%s"
+
+msgid "(strict rfc959)"
+msgstr "(griežtas rfc959)"
+
+msgid "(chdir first)"
+msgstr "(keičiamas katalogas)"
+
+msgid "ftpfs: failed; nowhere to fallback to"
+msgstr "ftpfs: nepavyko; nėra kur grįžti"
+
+#, c-format
+msgid "ftpfs: storing file %lu (%lu)"
+msgstr "ftpfs: siunčiamas failas %lu (%lu)"
+
+msgid ""
+"~/.netrc file has incorrect mode.\n"
+"Remove password or correct mode."
+msgstr ""
+"~/.netrc yra netinkamo režimo.\n"
+"Pašalinkite slaptažodį arba pataisykite režimą."
+
+msgid " MCFS "
+msgstr " MCFS "
+
+msgid " The server does not support this version "
+msgstr " Serveris šios versijos nepalaiko "
+
+msgid ""
+" The remote server is not running on a system port \n"
+" you need a password to log in, but the information may \n"
+" not be safe on the remote side.  Continue? \n"
+msgstr ""
+" Serveris paleistas ant neįprastos jungties. \n"
+" Reikia slaptažodžio, bet informacija kitoje pusėje \n"
+" gali būti nesaugi. Tęsti? \n"
 
 msgid "&Yes"
 msgstr "&Taip"
@@ -97,664 +647,185 @@ msgstr "&Taip"
 msgid "&No"
 msgstr "&Ne"
 
+msgid " MCFS Password required "
+msgstr " MCFS reikia slaptažodžio "
+
+msgid " Invalid password "
+msgstr " Neteisingas slaptažodis "
+
+#, c-format
+msgid " Cannot locate hostname: %s "
+msgstr " Nepavyko rasti „%s“ adreso "
+
+#, c-format
+msgid " Cannot create socket: %s "
+msgstr " Nepavyko sukurti lizdo: %s "
+
+#, c-format
+msgid " Cannot connect to server: %s "
+msgstr " Nepavyko prisijungti prie serverio: %s "
+
+msgid " Too many open connections "
+msgstr " Per daug prisijungimų "
+
+#, c-format
+msgid ""
+"Warning: Invalid line in %s:\n"
+"%s\n"
+msgstr ""
+"Įspėjimas: klaidinga eilutė faile %s:\n"
+"%s\n"
+
+#, c-format
+msgid ""
+"Warning: Invalid flag %c in %s:\n"
+"%s\n"
+msgstr ""
+"Įspėjimas: klaidingas parametras %c faile %s:\n"
+"%s\n"
+
+#, c-format
+msgid ""
+" reconnect to %s failed\n"
+" "
+msgstr ""
+" prisijungti iš naujo prie „%s“ nepavyko\n"
+" "
+
+msgid " Authentication failed "
+msgstr " Autentifikacija nepavyko "
+
+#, c-format
+msgid " Error %s creating directory %s "
+msgstr " Klaida „%s“ kuriant aplanką „%s“ "
+
+#, c-format
+msgid " Error %s removing directory %s "
+msgstr " Klaida „%s“ šalinant aplanką „%s“ "
+
+#, c-format
+msgid " %s opening remote file %s "
+msgstr " %s atveriant nutolusį failą %s "
+
+#, c-format
+msgid " %s removing remote file %s "
+msgstr " %s šalinant nutolusį failą %s "
+
+#, c-format
+msgid " %s renaming files\n"
+msgstr " %s pervadinant failus\n"
+
+#, c-format
+msgid ""
+"Cannot open tar archive\n"
+"%s"
+msgstr ""
+"Nepavyko atverti tar archyvo\n"
+"%s"
+
+msgid "Inconsistent tar archive"
+msgstr "Nevientisas tar archyvas"
+
+msgid "Unexpected EOF on archive file"
+msgstr "Netikėta archyvo failo pabaiga"
+
+#, c-format
+msgid ""
+"Hmm,...\n"
+"%s\n"
+"doesn't look like a tar archive."
+msgstr ""
+"Hmm,...\n"
+"%s\n"
+"nepanašus į „tar“ archyvą."
+
+msgid " undelfs: error "
+msgstr " undelfs: klaida "
+
+msgid " not enough memory "
+msgstr " nepakanka atminties "
+
+msgid " while allocating block buffer "
+msgstr " išskiriant blokų buferį "
+
+#, c-format
+msgid " open_inode_scan: %d "
+msgstr " open_inode_scan: %d "
+
+#, c-format
+msgid " while starting inode scan %d "
+msgstr " pradedant %d „inode“ skenavimą "
+
+#, c-format
+msgid "undelfs: loading deleted files information %d inodes"
+msgstr "undelfs: įkeliama pašalintų failų informacija (%d „inodes“)"
+
+#, c-format
+msgid " while calling ext2_block_iterate %d "
+msgstr " iškviečiant ext2_block_iterate %d "
+
+msgid " no more memory while reallocating array "
+msgstr " nepakanka atminties perkeliant masyvą "
+
+#, c-format
+msgid " while doing inode scan %d "
+msgstr " atlienkant „inode“ skenavimą %d "
+
+msgid " Ext2lib error "
+msgstr " „Ext2lib“ klaida "
+
+#, c-format
+msgid " Cannot open file %s "
+msgstr " Nepavyko atverti failo %s "
+
+msgid "undelfs: reading inode bitmap..."
+msgstr "undelfs: skaitomas bloko bitų laukas..."
+
+#, c-format
+msgid ""
+" Cannot load inode bitmap from: \n"
+" %s \n"
+msgstr ""
+" Nepavyko įkelti bitų lauko iš: \n"
+" %s \n"
+
+msgid "undelfs: reading block bitmap..."
+msgstr "undel: skaitomas bloko bitų laukas..."
+
+#, c-format
+msgid ""
+" Cannot load block bitmap from: \n"
+" %s \n"
+msgstr ""
+" Nepavyko įkelti bitų lauko iš: \n"
+" %s \n"
+
+msgid " vfs_info is not fs! "
+msgstr " vfs_info nėra failų sistema! "
+
+msgid " You have to chdir to extract files first "
+msgstr " Reikia pakeisti katalogą, norint išpakuoti "
+
+msgid " while iterating over blocks "
+msgstr " einant per blokus "
+
+msgid "Cannot parse:"
+msgstr "Nepavyko apdoroti:"
+
+msgid "More parsing errors will be ignored."
+msgstr "Kitos apdorojimo klaidos bus ignoruojamos."
+
+msgid "Internal error:"
+msgstr "Vidinė klaida:"
+
+msgid "Password:"
+msgstr "Slaptažodis:"
+
+msgid "Changes to file lost"
+msgstr "Failo pakeitimai prarasti"
+
 msgid "&Cancel"
 msgstr "&Atsisakyti"
-
-msgid "The file has been modified in the meantime. Save anyway?"
-msgstr "Tuo tarpu failas buvo pakeistas. Vis tiek jį išsaugoti?"
-
-msgid " Error writing to pipe: "
-msgstr " Klaida rašant į konvejerį: "
-
-msgid " Cannot open pipe for writing: "
-msgstr " Nepavyko atverti konvejerio rašymui: "
-
-#, fuzzy, c-format
-msgid " Cannot open file for writing: %s "
-msgstr " Nepavyko atverti konvejerio rašymui: "
-
-#, fuzzy
-msgid "&Quick save"
-msgstr "Greitas įrašymas "
-
-#, fuzzy
-msgid "&Safe save"
-msgstr "Saugus įrašymas "
-
-msgid "&Do backups with following extension:"
-msgstr ""
-
-msgid "Check &POSIX new line"
-msgstr ""
-
-msgid " Edit Save Mode "
-msgstr " Keisti įrašymo režimą "
-
-msgid "The file you are saving is not finished with a newline"
-msgstr ""
-
-msgid "C&ontinue"
-msgstr "&Tęsti"
-
-msgid "&Do not change"
-msgstr ""
-
-msgid "&Unix format (LF)"
-msgstr ""
-
-msgid "&Windows/DOS format (CR LF)"
-msgstr ""
-
-msgid "&Macintosh format (CR)"
-msgstr ""
-
-msgid "Change line breaks to:"
-msgstr ""
-
-msgid " Enter file name: "
-msgstr " Įveskite failo pavadinimą: "
-
-msgid " Save As "
-msgstr " Įrašyti kaip "
-
-msgid " A file already exists with this name. "
-msgstr " Failas šiuo pavadinimu jau yra. "
-
-msgid "&Overwrite"
-msgstr "Perraš&yti"
-
-msgid " Cannot save file. "
-msgstr " Nepavyko išsaugoti failo. "
-
-msgid " Delete macro "
-msgstr " Pašalinti makrokomandą "
-
-msgid " Cannot open temp file "
-msgstr " Nepavyko atverti laikino failo "
-
-msgid " Cannot open macro file "
-msgstr " Nepavyko atverti makrokomandos failo "
-
-msgid " Cannot overwrite macro file "
-msgstr " Nepavyko perrašyti makrokomandos failo "
-
-msgid " Save macro "
-msgstr " Įrašyti makrokomandą "
-
-msgid " Press the macro's new hotkey: "
-msgstr " Nuspauskite naują greitųjų klavišų kombinaciją makrokomandai: "
-
-msgid " Press macro hotkey: "
-msgstr " Nuspauskite greituosius makrokomandų klavišus: "
-
-msgid " Load macro "
-msgstr " Įkelti makrokomandą "
-
-msgid " Confirm save file? : "
-msgstr " Patvirtinti failo įrašymą? : "
-
-msgid " Save file "
-msgstr " Įrašyti failą "
-
-msgid "&Save"
-msgstr "Į&rašyti"
-
-msgid ""
-" Current text was modified without a file save. \n"
-" Continue discards these changes. "
-msgstr ""
-" Dabartinis tekstas buvo pakeistas ir neįrašytas į failą. \n"
-" Tęsdami atmesite visus pakeitimus. "
-
-msgid "Syntax file edit"
-msgstr "Sintaksės failo keitimas"
-
-msgid " Which syntax file you want to edit? "
-msgstr " Kurį sintaksės failą norite keisti? "
-
-msgid "&User"
-msgstr "&Naudotojo"
-
-msgid "&System Wide"
-msgstr "&Sisteminį"
-
-msgid " Menu edit "
-msgstr " Meniu keitimas "
-
-msgid " Which menu file do you want to edit? "
-msgstr " Kurį meniu failą norite keisti? "
-
-msgid "&Local"
-msgstr "&Vietinį"
-
-msgid " Load "
-msgstr " Įkelti "
-
-msgid " Block is large, you may not be able to undo this action. "
-msgstr " Blokas didelis, gali nepavykti atšaukti šio veiksmo. "
-
-#, fuzzy
-msgid "Replace"
-msgstr "Pa&keisti"
-
-msgid " Replace "
-msgstr " Pakeisti "
-
-#, c-format
-msgid " %ld replacements made. "
-msgstr " Atlikta %ld pakeitimų. "
-
-msgid "Quit"
-msgstr "Išeiti"
-
-msgid " File was modified, Save with exit? "
-msgstr " Failas buvo pakeistas, įrašyti išeinant? "
-
-msgid "&Cancel quit"
-msgstr "&Neišeiti"
-
-msgid " Error "
-msgstr " Klaida "
-
-msgid " This function is not implemented. "
-msgstr " Ši funkcija nerealizuota. "
-
-msgid " Copy to clipboard "
-msgstr " Kopijuoti į krepšį "
-
-msgid " Unable to save to file. "
-msgstr " Nepavyko įrašyti į failą. "
-
-msgid " Cut to clipboard "
-msgstr " Iškirpti į krepšį "
-
-msgid " Goto line "
-msgstr " Eiti į eilutę "
-
-msgid " Enter line: "
-msgstr " Įveskite eilutę: "
-
-msgid " Save Block "
-msgstr " Įrašyti bloką "
-
-msgid " Insert File "
-msgstr " Įterpti failą "
-
-msgid " Cannot insert file. "
-msgstr " Nepavyko įterpti failo. "
-
-msgid " Sort block "
-msgstr " Rikiuoti bloką "
-
-msgid " You must first highlight a block of text. "
-msgstr " Pažymėkite teksto bloką. "
-
-msgid " Run Sort "
-msgstr " Rikiuoti "
-
-msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr " Nurodykite rikiavimo nustatymus, atskirtus tarpu: "
-
-msgid " Sort "
-msgstr " Rikiuoti "
-
-msgid " Cannot execute sort command "
-msgstr " Nepavyko įvykdyti „sort“ komandos "
-
-msgid " Sort returned non-zero: "
-msgstr " „Sort“ grąžino nenulinę reikšmę: "
-
-msgid "Paste output of external command"
-msgstr "Įdėti išorinės komandos išvestį"
-
-msgid "Enter shell command(s):"
-msgstr "Įveskite aplinkos komandą (-as):"
-
-msgid "External command"
-msgstr "Išorinė komanda"
-
-msgid "Cannot execute command"
-msgstr "Nepavyko įvykdyti išorinės komandos"
-
-msgid "Error creating script:"
-msgstr "Klaida kuriant skriptą:"
-
-msgid "Error reading script:"
-msgstr "Klaida skaitant skriptą:"
-
-msgid "Error closing script:"
-msgstr "Klaida užveriant skriptą:"
-
-msgid "Script created:"
-msgstr "Skriptas sukurtas:"
-
-msgid "Process block"
-msgstr "Apdoroti bloką"
-
-msgid " Copies to"
-msgstr " Kopijos"
-
-msgid " Subject"
-msgstr " Tema"
-
-msgid " To"
-msgstr " Kam"
-
-msgid " mail -s <subject> -c <cc> <to>"
-msgstr " mail -s <tema> -c <kopija> <kam>"
-
-msgid " Mail "
-msgstr " Laiškas "
-
-msgid " Insert Literal "
-msgstr " Įterpti simbolį "
-
-msgid " Press any key: "
-msgstr " Paspauskite bet kurį klavišą: "
-
-msgid " Execute Macro "
-msgstr " Įvykdyti makrokomandą "
-
-msgid "All charsets"
-msgstr ""
-
-#, fuzzy
-msgid "&Whole words"
-msgstr "&Tik žodžius"
-
-#, fuzzy
-msgid "In se&lection"
-msgstr "Žymėti at&virkščiai M-*"
-
-msgid "&Backwards"
-msgstr "At&bulai"
-
-msgid "case &Sensitive"
-msgstr "&Skirti ABC nuo abc"
-
-msgid " Enter replacement string:"
-msgstr " Įveskite pakeitimo eilutę:"
-
-msgid " Enter search string:"
-msgstr " Įveskite ieškomą eilutę:"
-
-#, fuzzy
-msgid "&Find all"
-msgstr "Rasti failą"
-
-msgid "Cancel"
-msgstr "Atsisakyti"
-
-msgid "&Skip"
-msgstr "Pralei&sti"
-
-msgid "A&ll"
-msgstr "&Visi"
-
-msgid "&Replace"
-msgstr "Pa&keisti"
-
-msgid " Replace with: "
-msgstr " Pakeisti su: "
-
-msgid " Confirm replace "
-msgstr " Patvirtinti pakeitimą "
-
-msgid "&Dismiss"
-msgstr "At&mesti"
-
-#, c-format
-msgid ""
-"File \"%s\" is already being edited\n"
-"User: %s\n"
-"Process ID: %d"
-msgstr ""
-"Failas „%s“ jau taisoma\n"
-"Naudotojas: %s\n"
-"Proceso ID: %d"
-
-msgid "File locked"
-msgstr "Failas užrakintas"
-
-msgid "&Grab lock"
-msgstr "&Paimti užraktą"
-
-msgid "&Ignore lock"
-msgstr "&Ignoruoti užraktą"
-
-msgid "&Open file..."
-msgstr "At&verti failą..."
-
-#, fuzzy
-msgid "&New"
-msgstr "Pavadi&nimas"
-
-#, fuzzy
-msgid "Save &as..."
-msgstr "Įrašyti nu&statymus..."
-
-#, fuzzy
-msgid "&Insert file..."
-msgstr "Įterpt&i failą...  F15"
-
-#, fuzzy
-msgid "Cop&y to file..."
-msgstr "Kopijuoti į &failą C-f"
-
-#, fuzzy
-msgid "&User menu..."
-msgstr "Naudotojo meni&u      F11"
-
-#, fuzzy
-msgid "A&bout..."
-msgstr "&Išdėstymas..."
-
-msgid "&Quit"
-msgstr "&Išeiti"
-
-#, fuzzy
-msgid "&Toggle mark"
-msgstr "Išva&lyti pažymėtus"
-
-msgid "&Mark columns"
-msgstr ""
-
-#, fuzzy
-msgid "Toggle &ins/overw"
-msgstr "Keisti įterpimo rež.     "
-
-#, fuzzy
-msgid "&Copy"
-msgstr "Kopij."
-
-msgid "&Move"
-msgstr "&Perkelti"
-
-msgid "&Delete"
-msgstr "Š&alinti"
-
-#, fuzzy
-msgid "C&opy to clipfile"
-msgstr "Kopijuoti į &failą... "
-
-#, fuzzy
-msgid "C&ut to clipfile"
-msgstr "&Eiti į eilutę...         M-l"
-
-msgid "&Paste from clipfile"
-msgstr ""
-
-#, fuzzy
-msgid "Toggle bookmar&k"
-msgstr "Keis&ti žymėjimą       F3"
-
-#, fuzzy
-msgid "&Next bookmark"
-msgstr "Nustat&yti pažymėtus"
-
-#, fuzzy
-msgid "Pre&v bookmark"
-msgstr "Rikiuo&ti...             M-t"
-
-#, fuzzy
-msgid "&Flush bookmark"
-msgstr "Paš&tas..."
-
-msgid "&Undo"
-msgstr ""
-
-msgid "&Beginning"
-msgstr ""
-
-#, fuzzy
-msgid "&End"
-msgstr "„&Inode“"
-
-#, fuzzy
-msgid "&Search..."
-msgstr "Paieška"
-
-#, fuzzy
-msgid "Search &again"
-msgstr "Iešk&oti vėl          F17"
-
-#, fuzzy
-msgid "&Replace..."
-msgstr "Pa&keisti"
-
-#, fuzzy
-msgid "&Go to line..."
-msgstr " Eiti į eilutę "
-
-#, fuzzy
-msgid "Toggle li&ne state"
-msgstr "Keis&ti žymėjimą       F3"
-
-#, fuzzy
-msgid "Go to matching &bracket"
-msgstr "Eiti į porinį skliaustelį M-b"
-
-#, fuzzy
-msgid "Find declaration"
-msgstr "Rasti atmetimus po „patch“"
-
-msgid "Back from declaration"
-msgstr ""
-
-msgid "Forward to declaration"
-msgstr ""
-
-#, fuzzy
-msgid "Encod&ing..."
-msgstr "Rikiuo&ti...             M-t"
-
-#, fuzzy
-msgid "&Refresh screen"
-msgstr "Atnau&jinti ekraną       C-l"
-
-#, fuzzy
-msgid "&Start record macro"
-msgstr "Pradėti makroko&mandos įrašą   C-r"
-
-#, fuzzy
-msgid "&Finish record macro..."
-msgstr "&Baigti makrokomandos įrašą...  C-r"
-
-#, fuzzy
-msgid "&Execute macro..."
-msgstr "Pal&eisti makrokomandą... C-a, KLV"
-
-#, fuzzy
-msgid "Delete macr&o..."
-msgstr " Pašalinti makrokomandą "
-
-#, fuzzy
-msgid "'ispell' s&pell check"
-msgstr "„ispell“ rašybos patikra C-p"
-
-#, fuzzy
-msgid "&Mail..."
-msgstr "&Filtras..."
-
-#, fuzzy
-msgid "Insert &literal..."
-msgstr "Įterpti simbo&lį...      C-q"
-
-#, fuzzy
-msgid "Insert &date/time"
-msgstr "Įterpti &datą/laiką         "
-
-#, fuzzy
-msgid "Format p&aragraph"
-msgstr "Formuoti p&astraipą      M-p"
-
-#, fuzzy
-msgid "Sor&t..."
-msgstr "Rik. t&varka..."
-
-#, fuzzy
-msgid "Paste o&utput of..."
-msgstr "Įdėti iš&vestį...        M-u"
-
-#, fuzzy
-msgid "E&xternal formatter"
-msgstr "Išo&rinis formatas       F19"
-
-msgid "&General...  "
-msgstr "&Bendrosios..."
-
-#, fuzzy
-msgid "Save &mode..."
-msgstr "Įrašymo režima&s..."
-
-#, fuzzy
-msgid "Learn &keys..."
-msgstr "Mokyti &klavišų..."
-
-#, fuzzy
-msgid "Syntax &highlighting..."
-msgstr "Sintak&sės ryškinimas..."
-
-#, fuzzy
-msgid "S&yntax file"
-msgstr "Sintaksės failo keitimas"
-
-#, fuzzy
-msgid "&Menu file"
-msgstr "Keisti &meniu failą"
-
-msgid "&Save setup"
-msgstr "Įrašyti nu&statymus"
-
-#, fuzzy
-msgid "&File"
-msgstr "Failas"
-
-#, fuzzy
-msgid "&Edit"
-msgstr "Taisyti"
-
-#, fuzzy
-msgid "&Search"
-msgstr "Paieška"
-
-#, fuzzy
-msgid "&Command"
-msgstr "Komanda"
-
-#, fuzzy
-msgid "For&mat"
-msgstr "Pamiršt"
-
-#, fuzzy
-msgid "&Options"
-msgstr " N&ustatymai "
-
-msgid "None"
-msgstr "Joks"
-
-msgid "Dynamic paragraphing"
-msgstr "Dinamiškos pastraipos"
-
-msgid "Type writer wrap"
-msgstr "Kaip rašom. mašinėlėje"
-
-msgid "Word wrap line length: "
-msgstr "Laužyti eilutes ties: "
-
-msgid "Cursor beyond end of line"
-msgstr ""
-
-#, fuzzy
-msgid "Pers&istent selection"
-msgstr "Žymėti at&virkščiai M-*"
-
-msgid "Synta&x highlighting"
-msgstr "Sintak&sės ryškinimas"
-
-msgid "Visible tabs"
-msgstr ""
-
-msgid "Visible trailing spaces"
-msgstr ""
-
-msgid "Save file &position"
-msgstr "Išsaugoti &vietą faile"
-
-msgid "Confir&m before saving"
-msgstr "Patvirtinti pri&eš įrašant"
-
-msgid "&Return does autoindent"
-msgstr "„&Return“ autom. įtraukia"
-
-msgid "Tab spacing: "
-msgstr "Tabuliacijos ilgis: "
-
-msgid "Fill tabs with &spaces"
-msgstr "Tabuliacija tarpai&s"
-
-msgid "&Backspace through tabs"
-msgstr "Trinti ta&buliaciją"
-
-msgid "&Fake half tabs"
-msgstr "Netikra pusinė tabuliacija"
-
-msgid "Wrap mode"
-msgstr "Eilučių laužymas"
-
-msgid " Editor options "
-msgstr " Nustatymai "
-
-msgid "ButtonBar|Help"
-msgstr "ButtonBar|Pagalb"
-
-msgid "ButtonBar|Save"
-msgstr "ButtonBar|Įrašy"
-
-#, fuzzy
-msgid "ButtonBar|Mark"
-msgstr "ButtonBar|Apdorot."
-
-#, fuzzy
-msgid "ButtonBar|Replac"
-msgstr "ButtonBar|Pradin"
-
-#, fuzzy
-msgid "ButtonBar|Copy"
-msgstr "ButtonBar|Pagalb"
-
-#, fuzzy
-msgid "ButtonBar|Move"
-msgstr "ButtonBar|Įrašy"
-
-msgid "ButtonBar|Search"
-msgstr "ButtonBar|Ieškot"
-
-#, fuzzy
-msgid "ButtonBar|Delete"
-msgstr "ButtonBar|Pagalb"
-
-#, fuzzy
-msgid "ButtonBar|PullDn"
-msgstr "ButtonBar|Pagalb"
-
-msgid "ButtonBar|Quit"
-msgstr "ButtonBar|Išeit"
-
-msgid " Load syntax file "
-msgstr " Įkelti sintaksės failą "
-
-#, c-format
-msgid ""
-" Cannot open file %s \n"
-" %s "
-msgstr ""
-" Nepavyko atverti failo %s \n"
-" %s "
-
-#, c-format
-msgid " Error in file %s on line %d "
-msgstr " Klaida failo %s eilutėje %d "
 
 msgid "&Set"
 msgstr "&Nustatyti"
@@ -987,6 +1058,9 @@ msgstr "Režimas"
 msgid "user &Mini status"
 msgstr "Sutraukta būs&ena"
 
+msgid "&OK"
+msgstr "&Gerai"
+
 msgid "&Reverse"
 msgstr "A&tbulai"
 
@@ -1000,23 +1074,35 @@ msgstr ""
 msgid "Sort order"
 msgstr "Rikiavimo tvarka"
 
-msgid " Confirmation "
+#, fuzzy
+msgid "Confirmation"
 msgstr " Patvirtinimas "
 
-msgid " confirm di&Rectory hotlist delete "
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+#, fuzzy
+msgid "Confirmation|&History cleanup"
+msgstr " Patvirtinimas "
+
+#, fuzzy
+msgid "Confirmation|&Directory hotlist delete"
 msgstr " patvirtinti katalogų są&rašo šalinimą "
 
-msgid " confirm &Exit "
-msgstr " patvirtinti išė&jimą "
+#, fuzzy
+msgid "Confirmation|E&xit"
+msgstr " Patvirtinimas "
 
-msgid " confirm e&Xecute "
-msgstr " patvirtinti &vykdymą "
+#, fuzzy
+msgid "Confirmation|&Execute"
+msgstr " Patvirtinimas "
 
-msgid " confirm o&Verwrite "
+#, fuzzy
+msgid "Confirmation|O&verwrite"
 msgstr " patvirtinti perrašy&mą "
 
-msgid " confirm &Delete "
-msgstr " patvirtinti ša&linimą "
+#, fuzzy
+msgid "Confirmation|&Delete"
+msgstr " Patvirtinimas "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1112,16 +1198,9 @@ msgstr "Domenas:"
 msgid "Username:"
 msgstr "Prisijungimo vardas:"
 
-msgid "Password:"
-msgstr "Slaptažodis:"
-
 #, c-format
 msgid "Password for \\\\%s\\%s"
 msgstr "\\\\%s\\%s slaptažodis"
-
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Įspėjimas: failas %s nerasta\n"
 
 msgid "7-bit ASCII"
 msgstr ""
@@ -1238,6 +1317,9 @@ msgstr "<Nežinomas naud.>"
 msgid "<Unknown group>"
 msgstr "<Nežnoma grupė>"
 
+msgid " Confirmation "
+msgstr " Patvirtinimas "
+
 msgid "Files tagged, want to cd?"
 msgstr "Failai pažymėti, norite įvykdyti „cd“?"
 
@@ -1290,6 +1372,21 @@ msgstr "Plėtinių failo keitimas"
 
 msgid " Which extension file you want to edit? "
 msgstr " Kurį plėtinių failą norite keisti? "
+
+msgid "&User"
+msgstr "&Naudotojo"
+
+msgid "&System Wide"
+msgstr "&Sisteminį"
+
+msgid " Menu edit "
+msgstr " Meniu keitimas "
+
+msgid " Which menu file do you want to edit? "
+msgstr " Kurį meniu failą norite keisti? "
+
+msgid "&Local"
+msgstr "&Vietinį"
 
 msgid "Highlighting groups file edit"
 msgstr ""
@@ -1410,6 +1507,723 @@ msgstr " Aplinkoje jau vykdoma komanda "
 msgid "Cannot read directory contents"
 msgstr "Nepavyko perskaityti aplanko turinio"
 
+msgid " Choose syntax highlighting "
+msgstr " Parinkite sintaksės ryškinimą "
+
+msgid "< Auto >"
+msgstr "< Auto >"
+
+msgid "< Reload Current Syntax >"
+msgstr "< Įkelti esamą sintaksę iš naujo >"
+
+#, c-format
+msgid " Cannot open %s for reading "
+msgstr " Nepavyko atverti %s skaitymui "
+
+msgid "Error"
+msgstr "Klaida"
+
+#, c-format
+msgid " Error reading from pipe: %s "
+msgstr " Klaida skaitant iš konvejerio: %s "
+
+#, c-format
+msgid " Cannot open pipe for reading: %s "
+msgstr " Nepavyko atverti konvejerio skaitymui: %s "
+
+#, c-format
+msgid " Cannot get size/permissions for %s "
+msgstr " Nepavyko sužinoti %s dydžio/leidimų "
+
+#, c-format
+msgid " %s is not a regular file "
+msgstr " %s nėra įprastinis failas "
+
+#, c-format
+msgid " File %s is too large "
+msgstr " Failas %s yra per didelis "
+
+msgid " About "
+msgstr " Apie "
+
+msgid ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       A user friendly text editor written\n"
+"           for the Midnight Commander.\n"
+msgstr ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       Naudotojui draugiškas redaktorius, \n"
+"         parašytas „Midnight Commander“.\n"
+
+msgid "Macro recursion is too deep"
+msgstr "Makrokomandų rekursija yra per gili"
+
+msgid "Search"
+msgstr "Paieška"
+
+msgid " File has hard-links. Detach before saving? "
+msgstr " Failas turi nuorodų. Atjungti prieš išsaugant? "
+
+msgid "The file has been modified in the meantime. Save anyway?"
+msgstr "Tuo tarpu failas buvo pakeistas. Vis tiek jį išsaugoti?"
+
+msgid " Error writing to pipe: "
+msgstr " Klaida rašant į konvejerį: "
+
+msgid " Cannot open pipe for writing: "
+msgstr " Nepavyko atverti konvejerio rašymui: "
+
+#, fuzzy, c-format
+msgid " Cannot open file for writing: %s "
+msgstr " Nepavyko atverti konvejerio rašymui: "
+
+#, fuzzy
+msgid "&Quick save"
+msgstr "Greitas įrašymas "
+
+#, fuzzy
+msgid "&Safe save"
+msgstr "Saugus įrašymas "
+
+msgid "&Do backups with following extension:"
+msgstr ""
+
+msgid "Check &POSIX new line"
+msgstr ""
+
+msgid " Edit Save Mode "
+msgstr " Keisti įrašymo režimą "
+
+msgid "The file you are saving is not finished with a newline"
+msgstr ""
+
+msgid "C&ontinue"
+msgstr "&Tęsti"
+
+msgid "&Do not change"
+msgstr ""
+
+msgid "&Unix format (LF)"
+msgstr ""
+
+msgid "&Windows/DOS format (CR LF)"
+msgstr ""
+
+msgid "&Macintosh format (CR)"
+msgstr ""
+
+msgid "Change line breaks to:"
+msgstr ""
+
+msgid " Enter file name: "
+msgstr " Įveskite failo pavadinimą: "
+
+msgid " Save As "
+msgstr " Įrašyti kaip "
+
+msgid " A file already exists with this name. "
+msgstr " Failas šiuo pavadinimu jau yra. "
+
+msgid "&Overwrite"
+msgstr "Perraš&yti"
+
+msgid " Cannot save file. "
+msgstr " Nepavyko išsaugoti failo. "
+
+msgid " Delete macro "
+msgstr " Pašalinti makrokomandą "
+
+msgid " Cannot open temp file "
+msgstr " Nepavyko atverti laikino failo "
+
+msgid " Cannot open macro file "
+msgstr " Nepavyko atverti makrokomandos failo "
+
+msgid " Cannot overwrite macro file "
+msgstr " Nepavyko perrašyti makrokomandos failo "
+
+msgid " Save macro "
+msgstr " Įrašyti makrokomandą "
+
+msgid " Press the macro's new hotkey: "
+msgstr " Nuspauskite naują greitųjų klavišų kombinaciją makrokomandai: "
+
+msgid " Press macro hotkey: "
+msgstr " Nuspauskite greituosius makrokomandų klavišus: "
+
+msgid " Load macro "
+msgstr " Įkelti makrokomandą "
+
+msgid " Confirm save file? : "
+msgstr " Patvirtinti failo įrašymą? : "
+
+msgid " Save file "
+msgstr " Įrašyti failą "
+
+msgid "&Save"
+msgstr "Į&rašyti"
+
+msgid ""
+" Current text was modified without a file save. \n"
+" Continue discards these changes. "
+msgstr ""
+" Dabartinis tekstas buvo pakeistas ir neįrašytas į failą. \n"
+" Tęsdami atmesite visus pakeitimus. "
+
+msgid "Syntax file edit"
+msgstr "Sintaksės failo keitimas"
+
+msgid " Which syntax file you want to edit? "
+msgstr " Kurį sintaksės failą norite keisti? "
+
+msgid " Load "
+msgstr " Įkelti "
+
+msgid " Block is large, you may not be able to undo this action. "
+msgstr " Blokas didelis, gali nepavykti atšaukti šio veiksmo. "
+
+#, fuzzy
+msgid "Replace"
+msgstr "Pa&keisti"
+
+msgid " Replace "
+msgstr " Pakeisti "
+
+#, c-format
+msgid " %ld replacements made. "
+msgstr " Atlikta %ld pakeitimų. "
+
+msgid "Quit"
+msgstr "Išeiti"
+
+msgid " File was modified, Save with exit? "
+msgstr " Failas buvo pakeistas, įrašyti išeinant? "
+
+msgid "&Cancel quit"
+msgstr "&Neišeiti"
+
+msgid " Error "
+msgstr " Klaida "
+
+msgid " This function is not implemented. "
+msgstr " Ši funkcija nerealizuota. "
+
+msgid " Copy to clipboard "
+msgstr " Kopijuoti į krepšį "
+
+msgid " Unable to save to file. "
+msgstr " Nepavyko įrašyti į failą. "
+
+msgid " Cut to clipboard "
+msgstr " Iškirpti į krepšį "
+
+msgid " Goto line "
+msgstr " Eiti į eilutę "
+
+msgid " Enter line: "
+msgstr " Įveskite eilutę: "
+
+msgid " Save Block "
+msgstr " Įrašyti bloką "
+
+msgid " Insert File "
+msgstr " Įterpti failą "
+
+msgid " Cannot insert file. "
+msgstr " Nepavyko įterpti failo. "
+
+msgid " Sort block "
+msgstr " Rikiuoti bloką "
+
+msgid " You must first highlight a block of text. "
+msgstr " Pažymėkite teksto bloką. "
+
+msgid " Run Sort "
+msgstr " Rikiuoti "
+
+msgid " Enter sort options (see manpage) separated by whitespace: "
+msgstr " Nurodykite rikiavimo nustatymus, atskirtus tarpu: "
+
+msgid " Sort "
+msgstr " Rikiuoti "
+
+msgid " Cannot execute sort command "
+msgstr " Nepavyko įvykdyti „sort“ komandos "
+
+msgid " Sort returned non-zero: "
+msgstr " „Sort“ grąžino nenulinę reikšmę: "
+
+msgid "Paste output of external command"
+msgstr "Įdėti išorinės komandos išvestį"
+
+msgid "Enter shell command(s):"
+msgstr "Įveskite aplinkos komandą (-as):"
+
+msgid "External command"
+msgstr "Išorinė komanda"
+
+msgid "Cannot execute command"
+msgstr "Nepavyko įvykdyti išorinės komandos"
+
+msgid "Error creating script:"
+msgstr "Klaida kuriant skriptą:"
+
+msgid "Error reading script:"
+msgstr "Klaida skaitant skriptą:"
+
+msgid "Error closing script:"
+msgstr "Klaida užveriant skriptą:"
+
+msgid "Script created:"
+msgstr "Skriptas sukurtas:"
+
+msgid "Process block"
+msgstr "Apdoroti bloką"
+
+msgid " Copies to"
+msgstr " Kopijos"
+
+msgid " Subject"
+msgstr " Tema"
+
+msgid " To"
+msgstr " Kam"
+
+msgid " mail -s <subject> -c <cc> <to>"
+msgstr " mail -s <tema> -c <kopija> <kam>"
+
+msgid " Mail "
+msgstr " Laiškas "
+
+msgid " Insert Literal "
+msgstr " Įterpti simbolį "
+
+msgid " Press any key: "
+msgstr " Paspauskite bet kurį klavišą: "
+
+msgid " Execute Macro "
+msgstr " Įvykdyti makrokomandą "
+
+msgid "All charsets"
+msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "&Tik žodžius"
+
+#, fuzzy
+msgid "In se&lection"
+msgstr "Žymėti at&virkščiai M-*"
+
+msgid "&Backwards"
+msgstr "At&bulai"
+
+msgid "case &Sensitive"
+msgstr "&Skirti ABC nuo abc"
+
+msgid " Enter replacement string:"
+msgstr " Įveskite pakeitimo eilutę:"
+
+msgid " Enter search string:"
+msgstr " Įveskite ieškomą eilutę:"
+
+#, fuzzy
+msgid "&Find all"
+msgstr "Rasti failą"
+
+msgid "Cancel"
+msgstr "Atsisakyti"
+
+msgid "&Skip"
+msgstr "Pralei&sti"
+
+msgid "A&ll"
+msgstr "&Visi"
+
+msgid "&Replace"
+msgstr "Pa&keisti"
+
+msgid " Replace with: "
+msgstr " Pakeisti su: "
+
+msgid " Confirm replace "
+msgstr " Patvirtinti pakeitimą "
+
+msgid "&Dismiss"
+msgstr "At&mesti"
+
+#, c-format
+msgid ""
+"File \"%s\" is already being edited\n"
+"User: %s\n"
+"Process ID: %d"
+msgstr ""
+"Failas „%s“ jau taisoma\n"
+"Naudotojas: %s\n"
+"Proceso ID: %d"
+
+msgid "File locked"
+msgstr "Failas užrakintas"
+
+msgid "&Grab lock"
+msgstr "&Paimti užraktą"
+
+msgid "&Ignore lock"
+msgstr "&Ignoruoti užraktą"
+
+msgid "&Open file..."
+msgstr "At&verti failą..."
+
+#, fuzzy
+msgid "&New"
+msgstr "Pavadi&nimas"
+
+#, fuzzy
+msgid "Save &as..."
+msgstr "Įrašyti nu&statymus..."
+
+#, fuzzy
+msgid "&Insert file..."
+msgstr "Įterpt&i failą...  F15"
+
+#, fuzzy
+msgid "Cop&y to file..."
+msgstr "Kopijuoti į &failą C-f"
+
+#, fuzzy
+msgid "&User menu..."
+msgstr "Naudotojo meni&u      F11"
+
+#, fuzzy
+msgid "A&bout..."
+msgstr "&Išdėstymas..."
+
+msgid "&Quit"
+msgstr "&Išeiti"
+
+msgid "&Undo"
+msgstr ""
+
+#, fuzzy
+msgid "&Toggle ins/overw"
+msgstr "Keisti įterpimo rež.     "
+
+#, fuzzy
+msgid "To&ggle mark"
+msgstr "Išva&lyti pažymėtus"
+
+msgid "&Mark columns"
+msgstr ""
+
+#, fuzzy
+msgid "Mark &all"
+msgstr "Pažy&mėti visi"
+
+msgid "Unmar&k"
+msgstr ""
+
+#, fuzzy
+msgid "Cop&y"
+msgstr "Kopij."
+
+#, fuzzy
+msgid "Mo&ve"
+msgstr "Perkelti"
+
+msgid "&Delete"
+msgstr "Š&alinti"
+
+#, fuzzy
+msgid "Co&py to clipfile"
+msgstr "Kopijuoti į &failą... "
+
+#, fuzzy
+msgid "&Cut to clipfile"
+msgstr "&Eiti į eilutę...         M-l"
+
+#, fuzzy
+msgid "Pa&ste from clipfile"
+msgstr "&Eiti į eilutę...         M-l"
+
+msgid "&Beginning"
+msgstr ""
+
+#, fuzzy
+msgid "&End"
+msgstr "„&Inode“"
+
+#, fuzzy
+msgid "&Search..."
+msgstr "Paieška"
+
+#, fuzzy
+msgid "Search &again"
+msgstr "Iešk&oti vėl          F17"
+
+#, fuzzy
+msgid "&Replace..."
+msgstr "Pa&keisti"
+
+#, fuzzy
+msgid "&Toggle bookmark"
+msgstr "Keis&ti žymėjimą       F3"
+
+#, fuzzy
+msgid "&Next bookmark"
+msgstr "Nustat&yti pažymėtus"
+
+#, fuzzy
+msgid "&Prev bookmark"
+msgstr "Rikiuo&ti...             M-t"
+
+#, fuzzy
+msgid "&Flush bookmark"
+msgstr "Paš&tas..."
+
+#, fuzzy
+msgid "&Go to line..."
+msgstr " Eiti į eilutę "
+
+#, fuzzy
+msgid "&Toggle line state"
+msgstr "Keis&ti žymėjimą       F3"
+
+#, fuzzy
+msgid "Go to matching &bracket"
+msgstr "Eiti į porinį skliaustelį M-b"
+
+#, fuzzy
+msgid "&Find declaration"
+msgstr "Rasti atmetimus po „patch“"
+
+#, fuzzy
+msgid "Back from &declaration"
+msgstr "Rasti atmetimus po „patch“"
+
+#, fuzzy
+msgid "For&ward to declaration"
+msgstr "Rasti atmetimus po „patch“"
+
+#, fuzzy
+msgid "Encod&ing..."
+msgstr "Rikiuo&ti...             M-t"
+
+#, fuzzy
+msgid "&Refresh screen"
+msgstr "Atnau&jinti ekraną       C-l"
+
+#, fuzzy
+msgid "&Start record macro"
+msgstr "Pradėti makroko&mandos įrašą   C-r"
+
+#, fuzzy
+msgid "Finis&h record macro..."
+msgstr "&Baigti makrokomandos įrašą...  C-r"
+
+#, fuzzy
+msgid "&Execute macro..."
+msgstr "Pal&eisti makrokomandą... C-a, KLV"
+
+#, fuzzy
+msgid "Delete macr&o..."
+msgstr " Pašalinti makrokomandą "
+
+#, fuzzy
+msgid "'ispell' s&pell check"
+msgstr "„ispell“ rašybos patikra C-p"
+
+#, fuzzy
+msgid "&Mail..."
+msgstr "&Filtras..."
+
+#, fuzzy
+msgid "Insert &literal..."
+msgstr "Įterpti simbo&lį...      C-q"
+
+#, fuzzy
+msgid "Insert &date/time"
+msgstr "Įterpti &datą/laiką         "
+
+#, fuzzy
+msgid "&Format paragraph"
+msgstr "Formuoti p&astraipą      M-p"
+
+#, fuzzy
+msgid "&Sort..."
+msgstr "Rik. t&varka..."
+
+#, fuzzy
+msgid "&Paste output of..."
+msgstr "Įdėti iš&vestį...        M-u"
+
+#, fuzzy
+msgid "&External formatter"
+msgstr "Išo&rinis formatas       F19"
+
+msgid "&General...  "
+msgstr "&Bendrosios..."
+
+#, fuzzy
+msgid "Save &mode..."
+msgstr "Įrašymo režima&s..."
+
+#, fuzzy
+msgid "Learn &keys..."
+msgstr "Mokyti &klavišų..."
+
+#, fuzzy
+msgid "Syntax &highlighting..."
+msgstr "Sintak&sės ryškinimas..."
+
+#, fuzzy
+msgid "S&yntax file"
+msgstr "Sintaksės failo keitimas"
+
+#, fuzzy
+msgid "&Menu file"
+msgstr "Keisti &meniu failą"
+
+msgid "&Save setup"
+msgstr "Įrašyti nu&statymus"
+
+#, fuzzy
+msgid "&File"
+msgstr "Failas"
+
+#, fuzzy
+msgid "&Edit"
+msgstr "Taisyti"
+
+#, fuzzy
+msgid "&Search"
+msgstr "Paieška"
+
+#, fuzzy
+msgid "&Command"
+msgstr "Komanda"
+
+#, fuzzy
+msgid "For&mat"
+msgstr "Pamiršt"
+
+#, fuzzy
+msgid "&Options"
+msgstr " N&ustatymai "
+
+msgid "None"
+msgstr "Joks"
+
+msgid "Dynamic paragraphing"
+msgstr "Dinamiškos pastraipos"
+
+msgid "Type writer wrap"
+msgstr "Kaip rašom. mašinėlėje"
+
+msgid "Word wrap line length: "
+msgstr "Laužyti eilutes ties: "
+
+msgid "Cursor beyond end of line"
+msgstr ""
+
+#, fuzzy
+msgid "Pers&istent selection"
+msgstr "Žymėti at&virkščiai M-*"
+
+msgid "Synta&x highlighting"
+msgstr "Sintak&sės ryškinimas"
+
+msgid "Visible tabs"
+msgstr ""
+
+msgid "Visible trailing spaces"
+msgstr ""
+
+msgid "Save file &position"
+msgstr "Išsaugoti &vietą faile"
+
+msgid "Confir&m before saving"
+msgstr "Patvirtinti pri&eš įrašant"
+
+msgid "&Return does autoindent"
+msgstr "„&Return“ autom. įtraukia"
+
+msgid "Tab spacing: "
+msgstr "Tabuliacijos ilgis: "
+
+msgid "Fill tabs with &spaces"
+msgstr "Tabuliacija tarpai&s"
+
+msgid "&Backspace through tabs"
+msgstr "Trinti ta&buliaciją"
+
+msgid "&Fake half tabs"
+msgstr "Netikra pusinė tabuliacija"
+
+msgid "Wrap mode"
+msgstr "Eilučių laužymas"
+
+msgid " Editor options "
+msgstr " Nustatymai "
+
+msgid "ButtonBar|Help"
+msgstr "ButtonBar|Pagalb"
+
+msgid "ButtonBar|Save"
+msgstr "ButtonBar|Įrašy"
+
+#, fuzzy
+msgid "ButtonBar|Mark"
+msgstr "ButtonBar|Apdorot."
+
+#, fuzzy
+msgid "ButtonBar|Replac"
+msgstr "ButtonBar|Pradin"
+
+#, fuzzy
+msgid "ButtonBar|Copy"
+msgstr "ButtonBar|Pagalb"
+
+#, fuzzy
+msgid "ButtonBar|Move"
+msgstr "ButtonBar|Įrašy"
+
+msgid "ButtonBar|Search"
+msgstr "ButtonBar|Ieškot"
+
+#, fuzzy
+msgid "ButtonBar|Delete"
+msgstr "ButtonBar|Pagalb"
+
+#, fuzzy
+msgid "ButtonBar|PullDn"
+msgstr "ButtonBar|Pagalb"
+
+msgid "ButtonBar|Quit"
+msgstr "ButtonBar|Išeit"
+
+msgid " Load syntax file "
+msgstr " Įkelti sintaksės failą "
+
+#, c-format
+msgid ""
+" Cannot open file %s \n"
+" %s "
+msgstr ""
+" Nepavyko atverti failo %s \n"
+" %s "
+
+#, c-format
+msgid " Error in file %s on line %d "
+msgstr " Klaida failo %s eilutėje %d "
+
 msgid ""
 " The Commander can't change to the directory that \n"
 " the subshell claims you are in.  Perhaps you have \n"
@@ -1419,10 +2233,6 @@ msgstr ""
 " Nepavyko įeiti į aplanką, kurį aplinka nurodo kaip \n"
 " esamąjį. Galbūt jį ištrynėte arba naudojotės „su“ \n"
 " komanda, norėdami gauti platesnius leidimus? "
-
-#, c-format
-msgid "Press any key to continue..."
-msgstr "Paspauskite bet kurį klavišą..."
 
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
@@ -1772,9 +2582,6 @@ msgstr "%o %f „%s“%m"
 msgid "%o %d %f%m"
 msgstr "%o %d %f%m"
 
-msgid "file"
-msgstr "failą"
-
 msgid "files"
 msgstr "failus"
 
@@ -2040,6 +2847,9 @@ msgstr "ButtonBar|Šešiol"
 #, fuzzy
 msgid "ButtonBar|Prev"
 msgstr "ButtonBar|Apdorot."
+
+msgid "&Move"
+msgstr "&Perkelti"
 
 msgid "&Remove"
 msgstr "Ša&linti"
@@ -2391,6 +3201,10 @@ msgstr " Rodyti failą "
 #, fuzzy
 msgid "&Filtered view"
 msgstr " Filtruotas vaizdas "
+
+#, fuzzy
+msgid "&Copy"
+msgstr "Kopij."
 
 msgid "C&hmod"
 msgstr ""
@@ -2815,28 +3629,6 @@ msgstr "Naudotojo formatas atrodo netaisyklingai, grįžtu prie pradinio."
 msgid " Do you really want to execute? "
 msgstr " Ar tikrai norite paleisti? "
 
-msgid " Not implemented yet "
-msgstr ""
-
-msgid " Num of replace tokens not equal to num of found tokens "
-msgstr ""
-
-#, fuzzy, c-format
-msgid " Invalid token number %d "
-msgstr " Netaisyklingas paskirties formatas "
-
-msgid "Normal"
-msgstr ""
-
-msgid "&Regular expression"
-msgstr "Reguliari &išraiška"
-
-msgid "Hexadecimal"
-msgstr ""
-
-msgid "Wildcard search"
-msgstr ""
-
 #, fuzzy
 msgid "Choose codepage"
 msgstr " Parinkite įvesties koduotę "
@@ -2851,18 +3643,6 @@ msgid ""
 msgstr ""
 " Nepavyko įrašyti failo: \n"
 " %s "
-
-#, c-format
-msgid ""
-"Unable to load '%s' skin.\n"
-"Default skin has been loaded"
-msgstr ""
-
-#, c-format
-msgid ""
-"Unable to parse '%s' skin.\n"
-"Default skin has been loaded"
-msgstr ""
 
 msgid ""
 "GNU Midnight Commander is already\n"
@@ -2984,277 +3764,6 @@ msgstr ""
 "Nepavyko įrašyti į failą %s:\n"
 "%s\n"
 
-msgid "Function key 1"
-msgstr "Funkcinis klav. 1"
-
-msgid "Function key 2"
-msgstr "Funkcinis klav. 2"
-
-msgid "Function key 3"
-msgstr "Funkcinis klav. 3"
-
-msgid "Function key 4"
-msgstr "Funkcinis klav. 4"
-
-msgid "Function key 5"
-msgstr "Funkcinis klav. 5"
-
-msgid "Function key 6"
-msgstr "Funkcinis klav. 6"
-
-msgid "Function key 7"
-msgstr "Funkcinis klav. 7"
-
-msgid "Function key 8"
-msgstr "Funkcinis klav. 8"
-
-msgid "Function key 9"
-msgstr "Funkcinis klav. 9"
-
-msgid "Function key 10"
-msgstr "Funkcinis klav. 10"
-
-msgid "Function key 11"
-msgstr "Funkcinis klav. 11"
-
-msgid "Function key 12"
-msgstr "Funkcinis klav. 12"
-
-msgid "Function key 13"
-msgstr "Funkcinis klav. 13"
-
-msgid "Function key 14"
-msgstr "Funkcinis klav. 14"
-
-msgid "Function key 15"
-msgstr "Funkcinis klav. 15"
-
-msgid "Function key 16"
-msgstr "Funkcinis klav. 16"
-
-msgid "Function key 17"
-msgstr "Funkcinis klav. 17"
-
-msgid "Function key 18"
-msgstr "Funkcinis klav. 18"
-
-msgid "Function key 19"
-msgstr "Funkcinis klav. 19"
-
-msgid "Function key 20"
-msgstr "Funkcinis klav. 20"
-
-msgid "Backspace key"
-msgstr "„Backspace“"
-
-msgid "End key"
-msgstr "„End“"
-
-msgid "Up arrow key"
-msgstr "„Aukštyn“"
-
-msgid "Down arrow key"
-msgstr "„Žemyn“"
-
-msgid "Left arrow key"
-msgstr "„Kairėn“"
-
-msgid "Right arrow key"
-msgstr "„Dešinėn“"
-
-msgid "Home key"
-msgstr "„Home“"
-
-msgid "Page Down key"
-msgstr "„Page Down“"
-
-msgid "Page Up key"
-msgstr "„Page Up“"
-
-msgid "Insert key"
-msgstr "„Insert“"
-
-msgid "Delete key"
-msgstr "„Delete“"
-
-msgid "Completion/M-tab"
-msgstr "Užbaig./„M-Tab“"
-
-msgid "+ on keypad"
-msgstr "Skaitm. +"
-
-msgid "- on keypad"
-msgstr "Skaitm. -"
-
-msgid "Slash on keypad"
-msgstr "Skaitm. /"
-
-msgid "* on keypad"
-msgstr "Skaitm. *"
-
-#, fuzzy
-msgid "Escape key"
-msgstr "Skaitm. /"
-
-msgid "Left arrow keypad"
-msgstr "Skaitm. „kairėn“"
-
-msgid "Right arrow keypad"
-msgstr "Skaitm. „dešinėn“"
-
-msgid "Up arrow keypad"
-msgstr "Skaitm. „aukštyn“"
-
-msgid "Down arrow keypad"
-msgstr "Skaitm. „žemyn“"
-
-msgid "Home on keypad"
-msgstr "Skaitm. „Home“"
-
-msgid "End on keypad"
-msgstr "Skaitm. „End“"
-
-msgid "Page Down keypad"
-msgstr "Skaitm. „Page Down“"
-
-msgid "Page Up keypad"
-msgstr "Skaitm. „Page Up“"
-
-msgid "Insert on keypad"
-msgstr "Skaitm. „Insert“"
-
-msgid "Delete on keypad"
-msgstr "Skaitm. „Delete“"
-
-msgid "Enter on keypad"
-msgstr "Skaitm. „Enter“"
-
-#, fuzzy
-msgid "Function key 21"
-msgstr "Funkcinis klav. 1"
-
-#, fuzzy
-msgid "Function key 22"
-msgstr "Funkcinis klav. 2"
-
-#, fuzzy
-msgid "Function key 23"
-msgstr "Funkcinis klav. 2"
-
-#, fuzzy
-msgid "Function key 24"
-msgstr "Funkcinis klav. 2"
-
-msgid "Plus"
-msgstr ""
-
-#, fuzzy
-msgid "Minus"
-msgstr "Meniu"
-
-msgid "Asterisk"
-msgstr ""
-
-msgid "Dot"
-msgstr ""
-
-msgid "Less than"
-msgstr ""
-
-msgid "Great than"
-msgstr ""
-
-msgid "Equal"
-msgstr ""
-
-#, fuzzy
-msgid "Comma"
-msgstr "Komanda"
-
-msgid "Apostrophe"
-msgstr ""
-
-#, fuzzy
-msgid "Colon"
-msgstr "Kiekis"
-
-msgid "Exclamation mark"
-msgstr ""
-
-msgid "Question mark"
-msgstr ""
-
-#, fuzzy
-msgid "Ampersand"
-msgstr "&Papildyti"
-
-msgid "Dollar sign"
-msgstr ""
-
-msgid "Quotation mark"
-msgstr ""
-
-#, fuzzy
-msgid "Caret"
-msgstr "Į"
-
-msgid "Tilda"
-msgstr ""
-
-#, fuzzy
-msgid "Prime"
-msgstr "Atgal"
-
-#, fuzzy
-msgid "Underline"
-msgstr " Įveskite eilutę: "
-
-msgid "Understrike"
-msgstr ""
-
-msgid "Pipe"
-msgstr ""
-
-#, fuzzy
-msgid "Enter"
-msgstr "savin."
-
-#, fuzzy
-msgid "Tab key"
-msgstr "Skaitm. +"
-
-#, fuzzy
-msgid "Space key"
-msgstr "Skaitm. /"
-
-#, fuzzy
-msgid "Slash key"
-msgstr "Skaitm. /"
-
-#, fuzzy
-msgid "Backslash key"
-msgstr "„Backspace“"
-
-msgid "Number sign #"
-msgstr ""
-
-msgid "Ctrl"
-msgstr ""
-
-msgid "Alt"
-msgstr ""
-
-msgid "Shift"
-msgstr ""
-
-#, c-format
-msgid ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-msgstr ""
-"Ekrano dydis %dx%d nepalaikomas.\n"
-"Patikrinkite TERM aplinkos kintamąjį.\n"
-
 msgid " Format error on file Extensions File "
 msgstr " Formato klaida failų plėtinių faile"
 
@@ -3296,63 +3805,9 @@ msgstr " Tinkamų įrašų „%s“ nerasta "
 msgid " User menu "
 msgstr " Naudotojo meniu "
 
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s nėra aplankas\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "Aplankas %s jums nepriklauso\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr " Nepavyko nustatyti reikiamų teisių aplankui %s\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr "Nepavyko sukurti laikino aplanko %s: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Laikinieji failai bus talpinami aplanke %s\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Laikinieji failai nebus kuriami\n"
-
-msgid " Pipe failed "
-msgstr " Konvejeris nepavyko "
-
-msgid " Dup failed "
-msgstr " „Dup“ nepavyko "
-
-#, fuzzy, c-format
-msgid ""
-" The current line number is %lld.\n"
-" Enter the new line number:"
-msgstr ""
-" Esamos eilutės numeris: %d.\n"
-" Įveskite naują numerį:"
-
-#, fuzzy, c-format
-msgid ""
-" The current address is %s.\n"
-" Enter the new address:"
-msgstr ""
-" Esamos eilutės numeris: %d.\n"
-" Įveskite naują numerį:"
-
-msgid " Goto Address "
-msgstr " Eiti adresu "
-
-msgid " Invalid address "
-msgstr " Neteisingas adresas "
+#, fuzzy
+msgid "Invalid value"
+msgstr "netinkama skaitmeninė reikšmė"
 
 msgid " Cannot spawn child process "
 msgstr " Nepavyko sukurti vaiko "
@@ -3360,11 +3815,23 @@ msgstr " Nepavyko sukurti vaiko "
 msgid "Empty output from child filter"
 msgstr "Filtras nepateikė informacijos"
 
+msgid "&Line number (decimal)"
+msgstr ""
+
+msgid "Pe&rcents"
+msgstr ""
+
+msgid "&Decimal offset"
+msgstr ""
+
+msgid "He&xadecimal offset"
+msgstr ""
+
+msgid "Goto"
+msgstr ""
+
 msgid "ButtonBar|Ascii"
 msgstr "ButtonBar|ASCII"
-
-msgid "ButtonBar|Goto"
-msgstr "ButtonBar|Eiti į"
 
 msgid "ButtonBar|HxSrch"
 msgstr "ButtonBar|ŠšlIeš"
@@ -3378,8 +3845,8 @@ msgstr "ButtonBar|Lauž"
 msgid "ButtonBar|Hex"
 msgstr "ButtonBar|Šešiol"
 
-msgid "ButtonBar|Line"
-msgstr "ButtonBar|Eilutė"
+msgid "ButtonBar|Goto"
+msgstr "ButtonBar|Eiti į"
 
 msgid "ButtonBar|Raw"
 msgstr "ButtonBar|Pradin"
@@ -3392,26 +3859,6 @@ msgstr "ButtonBar|Išform."
 
 msgid "ButtonBar|Format"
 msgstr "ButtonBar|Formuot."
-
-#, c-format
-msgid "File: %s"
-msgstr "Failas: %s"
-
-#, c-format
-msgid "Offset 0x%08lx"
-msgstr "Poslinkis 0x%08lx"
-
-#, c-format
-msgid "Line %lu Col %lu"
-msgstr " Eil. %lu Stulp. %lu"
-
-#, c-format
-msgid "%s bytes"
-msgstr "%s baitų"
-
-#, c-format
-msgid ">= %s bytes"
-msgstr ">= %s baitų"
 
 #, c-format
 msgid ""
@@ -3456,448 +3903,64 @@ msgstr ""
 msgid " History "
 msgstr " Istorija "
 
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+msgid "DialogTitle|History cleanup"
+msgstr ""
+
+msgid "Do you want clean this history?"
+msgstr ""
+
 msgid "Background process:"
 msgstr "Foninis procesas:"
 
-#, c-format
-msgid ""
-"Cannot open cpio archive\n"
-"%s"
-msgstr ""
-"Nepvyko atverti „cpio“ archyvo\n"
-"%s"
+#~ msgid " confirm &Exit "
+#~ msgstr " patvirtinti išė&jimą "
 
-#, c-format
-msgid ""
-"Premature end of cpio archive\n"
-"%s"
-msgstr ""
-"Ankstyva „cpio“ archyvo pabaiga\n"
-"%s"
+#~ msgid " confirm e&Xecute "
+#~ msgstr " patvirtinti &vykdymą "
 
-#, c-format
-msgid ""
-"Inconsistent hardlinks of\n"
-"%s\n"
-"in cpio archive\n"
-"%s"
-msgstr ""
-"Nesutampančios nuorodos:\n"
-"%s\n"
-"„cpio“ archyve\n"
-"%s"
-
-#, c-format
-msgid "%s contains duplicate entries! Skipping!"
-msgstr "Faile „%s“ turi dvigubų įrašų! Praleidžiama!"
-
-#, c-format
-msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"Sugadinta „cpio“ archyvo antraštė:\n"
-"%s"
-
-#, c-format
-msgid ""
-"Unexpected end of file\n"
-"%s"
-msgstr ""
-"Netikėta failo pabaiga\n"
-"%s"
-
-#, c-format
-msgid "Directory cache expired for %s"
-msgstr "Aplanko „%s“ podėlis nebegalioja"
-
-msgid "Starting linear transfer..."
-msgstr "Pradedamas siuntimas..."
-
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
-msgstr "%s: %s: %s %3d%% (%lu baitų persiųsta)"
-
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
-msgstr "%s: %s: %s %lu baitų persiųsta"
-
-msgid "Getting file"
-msgstr "Parsiunčiamas failas"
-
-#, c-format
-msgid ""
-"Cannot open %s archive\n"
-"%s"
-msgstr ""
-"Nepavyko atverti „%s“ archyvo\n"
-"%s"
-
-msgid "Inconsistent extfs archive"
-msgstr "Prieštaringas „extfs“ archyvas"
-
-#, c-format
-msgid "fish: Disconnecting from %s"
-msgstr "fish: atsijungiama nuo %s"
-
-msgid "fish: Waiting for initial line..."
-msgstr "fish: laukiama pradinės eilutės..."
-
-msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr "Šiuo metu slaptažodžių apsaugotų prisijungimų atlikti negalima."
-
-msgid " fish: Password required for "
-msgstr "fish: reikia slaptažodžio "
-
-msgid "fish: Sending password..."
-msgstr "fish: siunčiamas slaptažodis..."
-
-msgid "fish: Sending initial line..."
-msgstr "fish: siunčiama pradinė linija..."
-
-msgid "fish: Handshaking version..."
-msgstr "fish: derinamos versijos..."
-
-msgid "fish: Setting up current directory..."
-msgstr "fish: nustatomas esamas aplankas..."
-
-#, c-format
-msgid "fish: Connected, home %s."
-msgstr "fish: prisijungta, namai %s. "
-
-#, c-format
-msgid "fish: Reading directory %s..."
-msgstr "fish: atveriamas aplankas %s..."
-
-#, c-format
-msgid "%s: done."
-msgstr "%s: atlikta."
-
-#, c-format
-msgid "%s: failure"
-msgstr "%s: nepavyko"
-
-#, c-format
-msgid "fish: store %s: sending command..."
-msgstr "fish: „%s“ siuntimas: siunčiamas slaptažodis..."
-
-msgid "fish: Local read failed, sending zeros"
-msgstr "fish: vietinis skaitymas nepavyko, siunčiami nuliai"
-
-#, c-format
-msgid "fish: storing %s %d (%lu)"
-msgstr "fish: siunčiama %s %d (%lu)"
-
-msgid "zeros"
-msgstr "nuliai"
-
-msgid "Aborting transfer..."
-msgstr "Nutraukiamas siuntimas..."
-
-msgid "Error reported after abort."
-msgstr "Po nutraukties pranešta klaida."
-
-msgid "Aborted transfer would be successful."
-msgstr "Nutrauktas siuntimas būtų sėkmingas."
-
-#, c-format
-msgid "ftpfs: Disconnecting from %s"
-msgstr "ftpfs: atsijungiama nuo %s"
-
-msgid " FTP: Password required for "
-msgstr " FTP: reikia slaptažodžio "
-
-msgid "ftpfs: sending login name"
-msgstr "ftpfs: siunčiamas naudotojo vardas"
-
-msgid "ftpfs: sending user password"
-msgstr "ftpfs: siunčiamas slaptažodis"
-
-#, c-format
-msgid "FTP: Account required for user %s"
-msgstr "FTP: %s naudotojui reikia prisijungimo vardo"
-
-msgid "Account:"
-msgstr "Paskyra:"
-
-msgid "ftpfs: sending user account"
-msgstr "ftpfs: siunčiamas naudotojo vardas"
-
-msgid "ftpfs: logged in"
-msgstr "ftpfs: prisijungta"
-
-#, c-format
-msgid "ftpfs: Login incorrect for user %s "
-msgstr "ftpfs: Neteisingas naudotojo „%s“ jungimasis "
-
-msgid "ftpfs: Invalid host name."
-msgstr "ftpfs: Neteisingas kompiuterio vardas."
-
-#, c-format
-msgid "ftpfs: %s"
-msgstr ""
-
-#, c-format
-msgid "ftpfs: making connection to %s"
-msgstr "ftpfs: jungiamasi į %s"
-
-msgid "ftpfs: connection interrupted by user"
-msgstr "ftpfs: jungiamasis nutrauktas"
-
-#, c-format
-msgid "ftpfs: connection to server failed: %s"
-msgstr "ftpfs: jungimasis į serverį nepavyko: %s"
-
-#, c-format
-msgid "Waiting to retry... %d (Control-C to cancel)"
-msgstr "Laukiama... %d (Control-C nutraukti)"
+#~ msgid " confirm &Delete "
+#~ msgstr " patvirtinti ša&linimą "
 
 #, fuzzy
-msgid "ftpfs: invalid address family"
-msgstr "ftpfs: Neteisingas adresas."
+#~ msgid ""
+#~ " The current line number is %lld.\n"
+#~ " Enter the new line number:"
+#~ msgstr ""
+#~ " Esamos eilutės numeris: %d.\n"
+#~ " Įveskite naują numerį:"
 
-#, fuzzy, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: nepavyko nustatyti pasyvaus režimo"
+#, fuzzy
+#~ msgid ""
+#~ " The current address is %s.\n"
+#~ " Enter the new address:"
+#~ msgstr ""
+#~ " Esamos eilutės numeris: %d.\n"
+#~ " Įveskite naują numerį:"
 
-#, fuzzy, c-format
-msgid "ftpfs: could not create socket: %s"
-msgstr " Nepavyko sukurti lizdo: %s "
+#~ msgid " Goto Address "
+#~ msgstr " Eiti adresu "
 
-msgid "ftpfs: could not setup passive mode"
-msgstr "ftpfs: nepavyko nustatyti pasyvaus režimo"
+#~ msgid " Invalid address "
+#~ msgstr " Neteisingas adresas "
 
-msgid "ftpfs: aborting transfer."
-msgstr "ftpfs: nutraukiamas siuntimas."
+#~ msgid "ButtonBar|Line"
+#~ msgstr "ButtonBar|Eilutė"
 
-#, c-format
-msgid "ftpfs: abort error: %s"
-msgstr "ftpfs: nutraukti nepavyko: %s"
+#~ msgid "File: %s"
+#~ msgstr "Failas: %s"
 
-msgid "ftpfs: abort failed"
-msgstr "ftpfs: nutraukti nepavyko"
+#~ msgid "Offset 0x%08lx"
+#~ msgstr "Poslinkis 0x%08lx"
 
-msgid "ftpfs: CWD failed."
-msgstr "ftpfs: CWD nepavyko"
+#~ msgid "Line %lu Col %lu"
+#~ msgstr " Eil. %lu Stulp. %lu"
 
-msgid "ftpfs: couldn't resolve symlink"
-msgstr "ftpfs: nepavyko išspręsti simb. nuorodos"
+#~ msgid "%s bytes"
+#~ msgstr "%s baitų"
 
-msgid "Resolving symlink..."
-msgstr "Sprendžiama simb. nuoroda..."
-
-#, c-format
-msgid "ftpfs: Reading FTP directory %s... %s%s"
-msgstr "ftpfs: atveriamas FTP aplankas %s... %s%s"
-
-msgid "(strict rfc959)"
-msgstr "(griežtas rfc959)"
-
-msgid "(chdir first)"
-msgstr "(keičiamas katalogas)"
-
-msgid "ftpfs: failed; nowhere to fallback to"
-msgstr "ftpfs: nepavyko; nėra kur grįžti"
-
-#, c-format
-msgid "ftpfs: storing file %lu (%lu)"
-msgstr "ftpfs: siunčiamas failas %lu (%lu)"
-
-msgid ""
-"~/.netrc file has incorrect mode.\n"
-"Remove password or correct mode."
-msgstr ""
-"~/.netrc yra netinkamo režimo.\n"
-"Pašalinkite slaptažodį arba pataisykite režimą."
-
-msgid " MCFS "
-msgstr " MCFS "
-
-msgid " The server does not support this version "
-msgstr " Serveris šios versijos nepalaiko "
-
-msgid ""
-" The remote server is not running on a system port \n"
-" you need a password to log in, but the information may \n"
-" not be safe on the remote side.  Continue? \n"
-msgstr ""
-" Serveris paleistas ant neįprastos jungties. \n"
-" Reikia slaptažodžio, bet informacija kitoje pusėje \n"
-" gali būti nesaugi. Tęsti? \n"
-
-msgid " MCFS Password required "
-msgstr " MCFS reikia slaptažodžio "
-
-msgid " Invalid password "
-msgstr " Neteisingas slaptažodis "
-
-#, c-format
-msgid " Cannot locate hostname: %s "
-msgstr " Nepavyko rasti „%s“ adreso "
-
-#, c-format
-msgid " Cannot create socket: %s "
-msgstr " Nepavyko sukurti lizdo: %s "
-
-#, c-format
-msgid " Cannot connect to server: %s "
-msgstr " Nepavyko prisijungti prie serverio: %s "
-
-msgid " Too many open connections "
-msgstr " Per daug prisijungimų "
-
-#, c-format
-msgid ""
-"Warning: Invalid line in %s:\n"
-"%s\n"
-msgstr ""
-"Įspėjimas: klaidinga eilutė faile %s:\n"
-"%s\n"
-
-#, c-format
-msgid ""
-"Warning: Invalid flag %c in %s:\n"
-"%s\n"
-msgstr ""
-"Įspėjimas: klaidingas parametras %c faile %s:\n"
-"%s\n"
-
-#, c-format
-msgid ""
-" reconnect to %s failed\n"
-" "
-msgstr ""
-" prisijungti iš naujo prie „%s“ nepavyko\n"
-" "
-
-msgid " Authentication failed "
-msgstr " Autentifikacija nepavyko "
-
-#, c-format
-msgid " Error %s creating directory %s "
-msgstr " Klaida „%s“ kuriant aplanką „%s“ "
-
-#, c-format
-msgid " Error %s removing directory %s "
-msgstr " Klaida „%s“ šalinant aplanką „%s“ "
-
-#, c-format
-msgid " %s opening remote file %s "
-msgstr " %s atveriant nutolusį failą %s "
-
-#, c-format
-msgid " %s removing remote file %s "
-msgstr " %s šalinant nutolusį failą %s "
-
-#, c-format
-msgid " %s renaming files\n"
-msgstr " %s pervadinant failus\n"
-
-#, c-format
-msgid ""
-"Cannot open tar archive\n"
-"%s"
-msgstr ""
-"Nepavyko atverti tar archyvo\n"
-"%s"
-
-msgid "Inconsistent tar archive"
-msgstr "Nevientisas tar archyvas"
-
-msgid "Unexpected EOF on archive file"
-msgstr "Netikėta archyvo failo pabaiga"
-
-#, c-format
-msgid ""
-"Hmm,...\n"
-"%s\n"
-"doesn't look like a tar archive."
-msgstr ""
-"Hmm,...\n"
-"%s\n"
-"nepanašus į „tar“ archyvą."
-
-msgid " undelfs: error "
-msgstr " undelfs: klaida "
-
-msgid " not enough memory "
-msgstr " nepakanka atminties "
-
-msgid " while allocating block buffer "
-msgstr " išskiriant blokų buferį "
-
-#, c-format
-msgid " open_inode_scan: %d "
-msgstr " open_inode_scan: %d "
-
-#, c-format
-msgid " while starting inode scan %d "
-msgstr " pradedant %d „inode“ skenavimą "
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: įkeliama pašalintų failų informacija (%d „inodes“)"
-
-#, c-format
-msgid " while calling ext2_block_iterate %d "
-msgstr " iškviečiant ext2_block_iterate %d "
-
-msgid " no more memory while reallocating array "
-msgstr " nepakanka atminties perkeliant masyvą "
-
-#, c-format
-msgid " while doing inode scan %d "
-msgstr " atlienkant „inode“ skenavimą %d "
-
-msgid " Ext2lib error "
-msgstr " „Ext2lib“ klaida "
-
-#, c-format
-msgid " Cannot open file %s "
-msgstr " Nepavyko atverti failo %s "
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: skaitomas bloko bitų laukas..."
-
-#, c-format
-msgid ""
-" Cannot load inode bitmap from: \n"
-" %s \n"
-msgstr ""
-" Nepavyko įkelti bitų lauko iš: \n"
-" %s \n"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undel: skaitomas bloko bitų laukas..."
-
-#, c-format
-msgid ""
-" Cannot load block bitmap from: \n"
-" %s \n"
-msgstr ""
-" Nepavyko įkelti bitų lauko iš: \n"
-" %s \n"
-
-msgid " vfs_info is not fs! "
-msgstr " vfs_info nėra failų sistema! "
-
-msgid " You have to chdir to extract files first "
-msgstr " Reikia pakeisti katalogą, norint išpakuoti "
-
-msgid " while iterating over blocks "
-msgstr " einant per blokus "
-
-msgid "Cannot parse:"
-msgstr "Nepavyko apdoroti:"
-
-msgid "More parsing errors will be ignored."
-msgstr "Kitos apdorojimo klaidos bus ignoruojamos."
-
-msgid "Internal error:"
-msgstr "Vidinė klaida:"
-
-msgid "Changes to file lost"
-msgstr "Failo pakeitimai prarasti"
+#~ msgid ">= %s bytes"
+#~ msgstr ">= %s baitų"
 
 #~ msgid "File:       None"
 #~ msgstr "Rikmena:    nėra"
@@ -4053,9 +4116,6 @@ msgstr "Failo pakeitimai prarasti"
 
 #~ msgid "Replac"
 #~ msgstr "Keisti"
-
-#~ msgid "Move"
-#~ msgstr "Perkelti"
 
 #~ msgid "Delete"
 #~ msgstr "Šalinti"
@@ -4275,9 +4335,6 @@ msgstr "Failo pakeitimai prarasti"
 
 #~ msgid "unknown option"
 #~ msgstr "nežinomas nustatymas"
-
-#~ msgid "invalid numeric value"
-#~ msgstr "netinkama skaitmeninė reikšmė"
 
 #~ msgid "Show this help message"
 #~ msgstr "Rodyti ši pagalbos pranešimą"

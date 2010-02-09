@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-12-25 19:06+0200\n"
+"POT-Creation-Date: 2010-02-09 12:01+0200\n"
 "PO-Revision-Date: 2001-11-20 15:15+0200\n"
 "Last-Translator: Artis Trops <hornet@navigators.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -14,81 +14,637 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#, fuzzy
-msgid " Choose syntax highlighting "
-msgstr "sinta&Kses izgaismošana"
-
-#, fuzzy
-msgid "< Auto >"
-msgstr " Par "
-
-msgid "< Reload Current Syntax >"
-msgstr ""
-
-#, fuzzy, c-format
-msgid " Cannot open %s for reading "
-msgstr " Nevar atvērt programkanālu lasīšanai: "
-
-msgid "Error"
-msgstr "Kļūda"
-
-#, fuzzy, c-format
-msgid " Error reading from pipe: %s "
-msgstr " Kļūda lasot no programkanāla: "
-
-#, fuzzy, c-format
-msgid " Cannot open pipe for reading: %s "
-msgstr " Nevar atvērt programkanālu lasīšanai: "
-
-#, fuzzy, c-format
-msgid " Cannot get size/permissions for %s "
-msgstr " Nevar dabūt lielumu/atļauju informāciju failam: "
-
-#, fuzzy, c-format
-msgid " %s is not a regular file "
-msgstr " Nevar skatīt: nav regulārs fails "
-
-#, fuzzy, c-format
-msgid " File %s is too large "
-msgstr " Fails ir par lielu: "
-
-msgid " About "
-msgstr " Par "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Kopēšanas tiesības (C) 1996 the Free Software Foundation\n"
-"\n"
-"       Lietotājam draudzīgs teksta redaktors, uzrakstīts\n"
-"           priekš Pusnakts Komandiera.\n"
-
-msgid "&OK"
-msgstr "&Labi"
-
-msgid "Macro recursion is too deep"
-msgstr ""
-
-msgid "Search"
-msgstr "Meklēt"
-
 msgid " Search string not found "
 msgstr " Meklējamā rinda nav atrasta "
+
+msgid " Not implemented yet "
+msgstr ""
+
+msgid " Num of replace tokens not equal to num of found tokens "
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Invalid token number %d "
+msgstr " Nepareiza mērķa maska "
+
+#, fuzzy
+msgid "Normal"
+msgstr "Formatēt"
+
+msgid "&Regular expression"
+msgstr "&Regulāra izteiksme"
+
+msgid "Hexadecimal"
+msgstr ""
+
+msgid "Wildcard search"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+msgid "Function key 1"
+msgstr "Funkc. taustiņš 1"
+
+msgid "Function key 2"
+msgstr "Funkc. taustiņš 2"
+
+msgid "Function key 3"
+msgstr "Funkc. taustiņš 3"
+
+msgid "Function key 4"
+msgstr "Funkc. taustiņš 4"
+
+msgid "Function key 5"
+msgstr "Funkc. taustiņš 5"
+
+msgid "Function key 6"
+msgstr "Funkc. taustiņš 6"
+
+msgid "Function key 7"
+msgstr "Funkc. taustiņš 7"
+
+msgid "Function key 8"
+msgstr "Funkc. taustiņš 8"
+
+msgid "Function key 9"
+msgstr "Funkc. taustiņš 9"
+
+msgid "Function key 10"
+msgstr "Funkc. taustiņš 10"
+
+msgid "Function key 11"
+msgstr "Funkc. taustiņš 11"
+
+msgid "Function key 12"
+msgstr "Funkc. taustiņš 12"
+
+msgid "Function key 13"
+msgstr "Funkc. taustiņš 13"
+
+msgid "Function key 14"
+msgstr "Funkc. taustiņš 14"
+
+msgid "Function key 15"
+msgstr "Funkc. taustiņš 15"
+
+msgid "Function key 16"
+msgstr "Funkc. taustiņš 16"
+
+msgid "Function key 17"
+msgstr "Funkc. taustiņš 17"
+
+msgid "Function key 18"
+msgstr "Funkc. taustiņš 18"
+
+msgid "Function key 19"
+msgstr "Funkc. taustiņš 19"
+
+msgid "Function key 20"
+msgstr "Funkc. taustiņš 20"
+
+msgid "Backspace key"
+msgstr "Backspace taustiņš"
+
+msgid "End key"
+msgstr "End taustiņš"
+
+msgid "Up arrow key"
+msgstr "Taustiņš ar būltiņu uz augšu"
+
+msgid "Down arrow key"
+msgstr "Taustiņš ar būltiņu uz leju"
+
+msgid "Left arrow key"
+msgstr "Taustiņš ar būltiņu pa kreisi"
+
+msgid "Right arrow key"
+msgstr "Taustiņš ar būltiņu pa labi"
+
+msgid "Home key"
+msgstr "Home taustiņš"
+
+msgid "Page Down key"
+msgstr "Page Down taustiņš"
+
+msgid "Page Up key"
+msgstr "Page Up taustiņš"
+
+msgid "Insert key"
+msgstr "Insert taustiņš"
+
+msgid "Delete key"
+msgstr "Delete taustiņš"
+
+msgid "Completion/M-tab"
+msgstr "Pabeigšana/M-tab"
+
+msgid "+ on keypad"
+msgstr "+ uz klaviatūras"
+
+msgid "- on keypad"
+msgstr "- uz klaviatūras"
+
+msgid "Slash on keypad"
+msgstr "/ (Slash) uz klaviatūras"
+
+msgid "* on keypad"
+msgstr "* uz klaviatūras"
+
+#, fuzzy
+msgid "Escape key"
+msgstr "/ (Slash) uz klaviatūras"
+
+msgid "Left arrow keypad"
+msgstr "Būltiņa pa kreisi uz klaviatūras"
+
+msgid "Right arrow keypad"
+msgstr "Būltiņa pa labi uz klaviatūras"
+
+msgid "Up arrow keypad"
+msgstr "Būltiņa uz augšu uz klaviatūras"
+
+msgid "Down arrow keypad"
+msgstr "Būltiņa uz leju uz klaviatūras"
+
+msgid "Home on keypad"
+msgstr "Home uz klaviatūras"
+
+msgid "End on keypad"
+msgstr "End uz klaviatūras"
+
+msgid "Page Down keypad"
+msgstr "Page Down uz klaviatūras"
+
+msgid "Page Up keypad"
+msgstr "Page Up uz klaviatūras"
+
+msgid "Insert on keypad"
+msgstr "Insert uz klaviatūras"
+
+msgid "Delete on keypad"
+msgstr "Delete uz klaviatūras"
+
+msgid "Enter on keypad"
+msgstr "Enter uz klaviatūras"
+
+#, fuzzy
+msgid "Function key 21"
+msgstr "Funkc. taustiņš 1"
+
+#, fuzzy
+msgid "Function key 22"
+msgstr "Funkc. taustiņš 2"
+
+#, fuzzy
+msgid "Function key 23"
+msgstr "Funkc. taustiņš 2"
+
+#, fuzzy
+msgid "Function key 24"
+msgstr "Funkc. taustiņš 2"
+
+msgid "Plus"
+msgstr ""
+
+#, fuzzy
+msgid "Minus"
+msgstr "Izvēlne"
+
+msgid "Asterisk"
+msgstr ""
+
+msgid "Dot"
+msgstr ""
+
+msgid "Less than"
+msgstr ""
+
+msgid "Great than"
+msgstr ""
+
+msgid "Equal"
+msgstr ""
+
+#, fuzzy
+msgid "Comma"
+msgstr "Komanda"
+
+msgid "Apostrophe"
+msgstr ""
+
+#, fuzzy
+msgid "Colon"
+msgstr "Skaitīt"
+
+msgid "Exclamation mark"
+msgstr ""
+
+msgid "Question mark"
+msgstr ""
+
+#, fuzzy
+msgid "Ampersand"
+msgstr "pie&Vienot"
+
+msgid "Dollar sign"
+msgstr ""
+
+msgid "Quotation mark"
+msgstr ""
+
+#, fuzzy
+msgid "Caret"
+msgstr "Mērķis"
+
+msgid "Tilda"
+msgstr ""
+
+#, fuzzy
+msgid "Prime"
+msgstr "Iepr"
+
+#, fuzzy
+msgid "Underline"
+msgstr " Ievadīet līniju: "
+
+msgid "Understrike"
+msgstr ""
+
+msgid "Pipe"
+msgstr ""
+
+#, fuzzy
+msgid "Enter"
+msgstr "īpašnieks"
+
+#, fuzzy
+msgid "Tab key"
+msgstr "+ uz klaviatūras"
+
+#, fuzzy
+msgid "Space key"
+msgstr "/ (Slash) uz klaviatūras"
+
+#, fuzzy
+msgid "Slash key"
+msgstr "/ (Slash) uz klaviatūras"
+
+#, fuzzy
+msgid "Backslash key"
+msgstr "Backspace taustiņš"
+
+msgid "Number sign #"
+msgstr ""
+
+msgid "Ctrl"
+msgstr ""
+
+msgid "Alt"
+msgstr ""
+
+msgid "Shift"
+msgstr ""
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"Ekrāna izmērs %dx%d nav atbalstīts.\n"
+"Pārbaudi TERM vides mainīgo.\n"
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
+
+#, fuzzy, c-format
+msgid "%s is not a directory\n"
+msgstr "direktoriju"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr ""
+" Nevar izveidot mērķa direktoriju \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr ""
+" Nevar izveidot mērķa direktoriju \"%s\" \n"
+" %s "
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr ""
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr ""
+
+#, c-format
+msgid "Press any key to continue..."
+msgstr "Nospied jebkuru taustiņu, lai turpinātu..."
 
 msgid "Warning"
 msgstr "Brīdinājums"
 
-msgid " File has hard-links. Detach before saving? "
+msgid " Pipe failed "
+msgstr " Kanāls neizdevās "
+
+msgid " Dup failed "
+msgstr " Dup neizdevās "
+
+#, c-format
+msgid ""
+"Cannot open cpio archive\n"
+"%s"
 msgstr ""
+"Nevarēja atvērt cpio arhīvu\n"
+"%s"
+
+#, c-format
+msgid ""
+"Premature end of cpio archive\n"
+"%s"
+msgstr ""
+"Negaidītas cpio arhīva beigas\n"
+"%s"
+
+#, c-format
+msgid ""
+"Inconsistent hardlinks of\n"
+"%s\n"
+"in cpio archive\n"
+"%s"
+msgstr ""
+"Nekonsekventas cietsaites\n"
+"%s\n"
+"iekš cpio archīva\n"
+"%s"
+
+#, c-format
+msgid "%s contains duplicate entries! Skipping!"
+msgstr "%s satur dubultus ierakstus! Izlaižu!"
+
+#, c-format
+msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"Samaitājusies cpio galvene iekš\n"
+"%s"
+
+#, c-format
+msgid ""
+"Unexpected end of file\n"
+"%s"
+msgstr ""
+"Negaidītas faila beigas\n"
+"%s"
+
+#, c-format
+msgid "Directory cache expired for %s"
+msgstr "Direktorija kešs priekš %s izbeidzās"
+
+msgid "Starting linear transfer..."
+msgstr "Sākam lineāro pārraidi..."
+
+#, c-format
+msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+msgstr "%s: %s: %s %3d%% (%lu baiti pārsūtīti)"
+
+#, c-format
+msgid "%s: %s: %s %lu bytes transferred"
+msgstr "%s: %s: %s %lu baiti pārsūtīti"
+
+msgid "Getting file"
+msgstr "Dabūjam failu"
+
+#, c-format
+msgid ""
+"Cannot open %s archive\n"
+"%s"
+msgstr ""
+"Nevar atvērt %s arhīvu\n"
+"%s"
+
+msgid "Inconsistent extfs archive"
+msgstr "Nepatstāvīgs extfs arhīvs"
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Brīdinājums: fails %s nav atrasts\n"
+
+#, c-format
+msgid "fish: Disconnecting from %s"
+msgstr "fish: Atvienojamies no %s"
+
+msgid "fish: Waiting for initial line..."
+msgstr "fish: Gaidām sākotnējo līniju..."
+
+msgid "Sorry, we cannot do password authenticated connections for now."
+msgstr ""
+"Piedodiet, mēs patreiz nevaram veikt ar paroli autorizētus savienojumus."
+
+msgid " fish: Password required for "
+msgstr " fish: Parole pieprasīta "
+
+msgid "fish: Sending password..."
+msgstr "fish: Sūtam paroli..."
+
+msgid "fish: Sending initial line..."
+msgstr "fish: Sūtam sākotnējo līniju..."
+
+msgid "fish: Handshaking version..."
+msgstr "fish: Rokspiešanas versija..."
+
+msgid "fish: Setting up current directory..."
+msgstr "fish: Uzstādam pašreizējo direktoriju..."
+
+#, c-format
+msgid "fish: Connected, home %s."
+msgstr "fish: Savienojies, mājas %s."
+
+#, c-format
+msgid "fish: Reading directory %s..."
+msgstr "fish: Lasām direktoriju %s..."
+
+#, c-format
+msgid "%s: done."
+msgstr "%s: izdarīts."
+
+#, c-format
+msgid "%s: failure"
+msgstr "%s: neveiksme"
+
+#, c-format
+msgid "fish: store %s: sending command..."
+msgstr "fish: glabājam %s: sutām komandu..."
+
+msgid "fish: Local read failed, sending zeros"
+msgstr "fish: Lokālā lasīšana kļūdaina, sūtam nulles"
+
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%lu)"
+msgstr "fish: glabājam %s %d (%d)"
+
+msgid "zeros"
+msgstr "nulles"
+
+msgid "file"
+msgstr "failu"
+
+msgid "Aborting transfer..."
+msgstr "Pātraucam pārraidīšanu..."
+
+msgid "Error reported after abort."
+msgstr "Kļūda paziņota pēc pātraukšanas."
+
+msgid "Aborted transfer would be successful."
+msgstr "Pātraukā pārraidīšana varētu būt veiksmīga"
+
+#, c-format
+msgid "ftpfs: Disconnecting from %s"
+msgstr "ftpfs: Atvienošanās no %s"
+
+msgid " FTP: Password required for "
+msgstr " FTP: Parole tiek pieprasīta "
+
+msgid "ftpfs: sending login name"
+msgstr "ftpfs: sūtam pieteikumvārdu"
+
+msgid "ftpfs: sending user password"
+msgstr "ftpfs: sūtam lietotāja paroli"
+
+#, fuzzy, c-format
+msgid "FTP: Account required for user %s"
+msgstr " FTP: Parole tiek pieprasīta "
+
+#, fuzzy
+msgid "Account:"
+msgstr "Skaitīt"
+
+#, fuzzy
+msgid "ftpfs: sending user account"
+msgstr "ftpfs: sūtam lietotāja paroli"
+
+msgid "ftpfs: logged in"
+msgstr "ftpfs: pieteikšanās veiksmīga"
+
+#, c-format
+msgid "ftpfs: Login incorrect for user %s "
+msgstr "ftpfs: lietotāja nepareiza %s pieteikšanās "
+
+msgid "ftpfs: Invalid host name."
+msgstr "ftpfs: Nepareizs resursdatora nosaukums."
+
+#, c-format
+msgid "ftpfs: %s"
+msgstr ""
+
+#, c-format
+msgid "ftpfs: making connection to %s"
+msgstr "ftpfs: veidojam savienojumu ar %s"
+
+msgid "ftpfs: connection interrupted by user"
+msgstr "ftpfs: savienojumu pātrauca lietotājs"
+
+#, c-format
+msgid "ftpfs: connection to server failed: %s"
+msgstr "ftpfs: savienojums ar serveri neizdevās: %s"
+
+#, c-format
+msgid "Waiting to retry... %d (Control-C to cancel)"
+msgstr "Gaidam atbildi... %d (Control-C lai atsauktu)"
+
+#, fuzzy
+msgid "ftpfs: invalid address family"
+msgstr "ftpfs: Nepareiza resursdatora adrese."
+
+#, fuzzy, c-format
+msgid "ftpfs: could not setup passive mode: %s"
+msgstr "ftpfs: nevar uzstādīt pasīvo režīmu"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not create socket: %s"
+msgstr " Nevar izveidot kontaktu: %s "
+
+msgid "ftpfs: could not setup passive mode"
+msgstr "ftpfs: nevar uzstādīt pasīvo režīmu"
+
+msgid "ftpfs: aborting transfer."
+msgstr "ftpfs: patraucu pārraidi."
+
+#, c-format
+msgid "ftpfs: abort error: %s"
+msgstr "ftpfs: pātraukšanas kļūda: %s"
+
+msgid "ftpfs: abort failed"
+msgstr "ftpfs: pātraukšana neizdevās"
+
+msgid "ftpfs: CWD failed."
+msgstr "ftpfs: CWD neizdevās."
+
+msgid "ftpfs: couldn't resolve symlink"
+msgstr "ftpfs: nevar iet par simbolsaiti"
+
+msgid "Resolving symlink..."
+msgstr "eju pa simbolsaiti"
+
+#, c-format
+msgid "ftpfs: Reading FTP directory %s... %s%s"
+msgstr "ftpfs: Lasu FTP direktoriju %s... %s%s"
+
+msgid "(strict rfc959)"
+msgstr "(strict rfc959)"
+
+msgid "(chdir first)"
+msgstr "(chdir vispirms)"
+
+msgid "ftpfs: failed; nowhere to fallback to"
+msgstr "ftpfs: neizdevās; nav kur atkrist"
+
+#, fuzzy, c-format
+msgid "ftpfs: storing file %lu (%lu)"
+msgstr "ftpfs: glabājam failu %d (%d)"
+
+msgid ""
+"~/.netrc file has incorrect mode.\n"
+"Remove password or correct mode."
+msgstr ""
+"~/.netrc failam nav pareizs režīms.\n"
+"Noņem paroli vai izlabo režīmu."
+
+msgid " MCFS "
+msgstr " MCFS "
+
+msgid " The server does not support this version "
+msgstr " Serveris neatbalsta šo versiju "
+
+msgid ""
+" The remote server is not running on a system port \n"
+" you need a password to log in, but the information may \n"
+" not be safe on the remote side.  Continue? \n"
+msgstr ""
+" Attālinātais serveris nestrādā ar sistēmas portu, \n"
+" uz kuru jūms būtu jāpiesakās, taču informācija \n"
+" var nebūt droša attālinātajā galā.  Turpināt? \n"
 
 msgid "&Yes"
 msgstr "&Jā"
@@ -96,666 +652,185 @@ msgstr "&Jā"
 msgid "&No"
 msgstr "&Nē"
 
+msgid " MCFS Password required "
+msgstr " pieprasīta MCFS Parole "
+
+msgid " Invalid password "
+msgstr " Nepareiza parole "
+
+#, c-format
+msgid " Cannot locate hostname: %s "
+msgstr " Nevar atrast resursdatoru: %s "
+
+#, c-format
+msgid " Cannot create socket: %s "
+msgstr " Nevar izveidot kontaktu: %s "
+
+#, c-format
+msgid " Cannot connect to server: %s "
+msgstr " Nevar savienoties ar serveri: %s "
+
+msgid " Too many open connections "
+msgstr " Par daudz atvērtu konekciju "
+
+#, c-format
+msgid ""
+"Warning: Invalid line in %s:\n"
+"%s\n"
+msgstr ""
+"Brīdinājums: Nepareiza rindiņa iekš %s:\n"
+"%s\n"
+
+#, c-format
+msgid ""
+"Warning: Invalid flag %c in %s:\n"
+"%s\n"
+msgstr ""
+"Brīdinājums: Nepareizs karodziņš %c iekš %s:\n"
+"%s\n"
+
+#, c-format
+msgid ""
+" reconnect to %s failed\n"
+" "
+msgstr ""
+" neizdevās pārslēgties uz %s\n"
+" "
+
+msgid " Authentication failed "
+msgstr " Autentificēšana neizdevās"
+
+#, c-format
+msgid " Error %s creating directory %s "
+msgstr " %s izvdir'oju %s "
+
+#, c-format
+msgid " Error %s removing directory %s "
+msgstr " %s izdzdir'oju %s "
+
+#, c-format
+msgid " %s opening remote file %s "
+msgstr " %s attālinātās faila atvēršana %s "
+
+#, c-format
+msgid " %s removing remote file %s "
+msgstr " %s dzēšu attālināto failu %s "
+
+#, c-format
+msgid " %s renaming files\n"
+msgstr " %s failu pārsaukšana\n"
+
+#, c-format
+msgid ""
+"Cannot open tar archive\n"
+"%s"
+msgstr ""
+"Nevar atvērt tar arhīvu\n"
+"%s"
+
+msgid "Inconsistent tar archive"
+msgstr "Neatbilstīgs tar arhīvs"
+
+msgid "Unexpected EOF on archive file"
+msgstr "Negaidītas arhīva faila beigas (EOF)"
+
+#, c-format
+msgid ""
+"Hmm,...\n"
+"%s\n"
+"doesn't look like a tar archive."
+msgstr ""
+"Hmm,...\n"
+"%s\n"
+"neizskatās pēc tar arhīva."
+
+msgid " undelfs: error "
+msgstr " undelfs: kļūda "
+
+msgid " not enough memory "
+msgstr " par maz atmiņas "
+
+msgid " while allocating block buffer "
+msgstr " piešķirot bloka buferi "
+
+#, c-format
+msgid " open_inode_scan: %d "
+msgstr " open_inode_scan: %d "
+
+#, c-format
+msgid " while starting inode scan %d "
+msgstr " sāknējot inode skenāšanu %d "
+
+#, c-format
+msgid "undelfs: loading deleted files information %d inodes"
+msgstr "undelfs: lādēju izdzēsto failu informāciju %d inodes"
+
+#, c-format
+msgid " while calling ext2_block_iterate %d "
+msgstr " kamēr sauca ext2_block_iterate %d "
+
+msgid " no more memory while reallocating array "
+msgstr " nav vairāk atmiņas kamēr piešķir ietērpus "
+
+#, c-format
+msgid " while doing inode scan %d "
+msgstr " veicot inode skenēšanu %d "
+
+msgid " Ext2lib error "
+msgstr " Ext2lib kļūda "
+
+#, c-format
+msgid " Cannot open file %s "
+msgstr " Nevar atvērt failu %s "
+
+msgid "undelfs: reading inode bitmap..."
+msgstr "undelfs: lasu inode bitkarti..."
+
+#, c-format
+msgid ""
+" Cannot load inode bitmap from: \n"
+" %s \n"
+msgstr ""
+" Nevarēju ielādēt inode bitkarti no: \n"
+" %s \n"
+
+msgid "undelfs: reading block bitmap..."
+msgstr "undelfs: lasu bloka bitkarti..."
+
+#, c-format
+msgid ""
+" Cannot load block bitmap from: \n"
+" %s \n"
+msgstr ""
+" Nevarēja ielādēt bloka bitkarti no: \n"
+" %s \n"
+
+msgid " vfs_info is not fs! "
+msgstr " vfs_info nav fs! "
+
+msgid " You have to chdir to extract files first "
+msgstr " Tev papriekšu vajag chdir, lai atkompresētu failus "
+
+msgid " while iterating over blocks "
+msgstr " kamēr atkārto blokus"
+
+msgid "Cannot parse:"
+msgstr "Nevar izanalizēt:"
+
+msgid "More parsing errors will be ignored."
+msgstr "Turpmākās analīzes kļūdas tiks ignorētas."
+
+msgid "Internal error:"
+msgstr "Iekšējā kļūda:"
+
+msgid "Password:"
+msgstr "Parole:"
+
+msgid "Changes to file lost"
+msgstr "Izmaiņas failā pazudušas"
+
 msgid "&Cancel"
 msgstr "&Atsaukt"
-
-msgid "The file has been modified in the meantime. Save anyway?"
-msgstr ""
-
-msgid " Error writing to pipe: "
-msgstr " Kļūda rakstot programkanālā: "
-
-msgid " Cannot open pipe for writing: "
-msgstr " Nevar atvērt programkanālu ierkastīšanai: "
-
-#, fuzzy, c-format
-msgid " Cannot open file for writing: %s "
-msgstr " Nevar atvērt programkanālu ierkastīšanai: "
-
-#, fuzzy
-msgid "&Quick save"
-msgstr "Ātra saglabāšana "
-
-#, fuzzy
-msgid "&Safe save"
-msgstr "Droša saglabāšana "
-
-msgid "&Do backups with following extension:"
-msgstr ""
-
-msgid "Check &POSIX new line"
-msgstr ""
-
-msgid " Edit Save Mode "
-msgstr " Rediģēt Glabāšanas Režīmu "
-
-msgid "The file you are saving is not finished with a newline"
-msgstr ""
-
-#, fuzzy
-msgid "C&ontinue"
-msgstr "Turpināt"
-
-msgid "&Do not change"
-msgstr ""
-
-msgid "&Unix format (LF)"
-msgstr ""
-
-msgid "&Windows/DOS format (CR LF)"
-msgstr ""
-
-msgid "&Macintosh format (CR)"
-msgstr ""
-
-msgid "Change line breaks to:"
-msgstr ""
-
-#, fuzzy
-msgid " Enter file name: "
-msgstr " Ievadīet līniju: "
-
-msgid " Save As "
-msgstr " Glabāt Kā "
-
-msgid " A file already exists with this name. "
-msgstr " Fails ar tādu nosaukumu jau eksistē. "
-
-#, fuzzy
-msgid "&Overwrite"
-msgstr "Pārrakstīt"
-
-msgid " Cannot save file. "
-msgstr " Kļūda mēģinot saglabāt failu. "
-
-msgid " Delete macro "
-msgstr " Dzēst makro "
-
-msgid " Cannot open temp file "
-msgstr " Kļūda mēģinot atvērt temp failu "
-
-msgid " Cannot open macro file "
-msgstr " Kļūda mēģinot atvērt makro failu "
-
-msgid " Cannot overwrite macro file "
-msgstr " Kļūda mēģinot pārrakstīt makro failu "
-
-msgid " Save macro "
-msgstr " Glabāt makro "
-
-msgid " Press the macro's new hotkey: "
-msgstr " Spied makro jauno karsto taustiņu: "
-
-msgid " Press macro hotkey: "
-msgstr " Spied makro karsto taustiņu: "
-
-msgid " Load macro "
-msgstr " Ielādēt makro "
-
-msgid " Confirm save file? : "
-msgstr " Apstiprināt faila saglabāšanu? : "
-
-msgid " Save file "
-msgstr " Saglabāt failu "
-
-msgid "&Save"
-msgstr "&Saglabāt"
-
-msgid ""
-" Current text was modified without a file save. \n"
-" Continue discards these changes. "
-msgstr ""
-" Pašreizējais teksts tika modificēts bez faila saglabāšanas. \n"
-" Ja turpināsiet, izmaiņs tiks atsauktas. "
-
-#, fuzzy
-msgid "Syntax file edit"
-msgstr "&Izvēlnes faila rediģēšana"
-
-#, fuzzy
-msgid " Which syntax file you want to edit? "
-msgstr " Kuru paplašinājuma failu jūs vēlaties rediģēt? "
-
-msgid "&User"
-msgstr "&Lietotājs"
-
-msgid "&System Wide"
-msgstr "&Sistēmas Mēroga"
-
-msgid " Menu edit "
-msgstr " Izvēlņu rediģēšana "
-
-msgid " Which menu file do you want to edit? "
-msgstr " Kuru izvēlnes failu jūs rediģēsiet ? "
-
-msgid "&Local"
-msgstr "&Vietēji"
-
-msgid " Load "
-msgstr " Ielādēt "
-
-msgid " Block is large, you may not be able to undo this action. "
-msgstr " Bloks ir liels, jūs iespējams nevarēsiet atsaukt šo darbību. "
-
-#, fuzzy
-msgid "Replace"
-msgstr "&Aizvietot"
-
-msgid " Replace "
-msgstr " Aizvietot "
-
-#, c-format
-msgid " %ld replacements made. "
-msgstr " %ld aizstāšanas režīms. "
-
-msgid "Quit"
-msgstr "Iziet"
-
-msgid " File was modified, Save with exit? "
-msgstr " Fails tika mainīts, saglabāt izejot?"
-
-#, fuzzy
-msgid "&Cancel quit"
-msgstr "Atcelt iziešanu"
-
-#, fuzzy
-msgid " Error "
-msgstr "Kļūda"
-
-msgid " This function is not implemented. "
-msgstr ""
-
-msgid " Copy to clipboard "
-msgstr " Kopēt uz starpliktuvi "
-
-msgid " Unable to save to file. "
-msgstr " Nevar saglabāt failu. "
-
-msgid " Cut to clipboard "
-msgstr " Aiznest uz starpliktuvi "
-
-msgid " Goto line "
-msgstr " Iet uz līniju "
-
-msgid " Enter line: "
-msgstr " Ievadīet līniju: "
-
-msgid " Save Block "
-msgstr " Saglabāt Bloku "
-
-msgid " Insert File "
-msgstr " Ievietot Failu "
-
-msgid " Cannot insert file. "
-msgstr " Kļūda mēģinot ievietot failu. "
-
-msgid " Sort block "
-msgstr " Sakārtot bloku "
-
-msgid " You must first highlight a block of text. "
-msgstr " Jums pa priekšu ir jāiezīmē teksta bloks. "
-
-msgid " Run Sort "
-msgstr " Palaist Kārtošanu "
-
-msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr ""
-" Ievadi kārtošanas opcijas (apskati man lapas) atdalītas ar tukšumiem: "
-
-msgid " Sort "
-msgstr " Kārtot "
-
-msgid " Cannot execute sort command "
-msgstr " Kļūda mēģinot palaist sort komandu "
-
-msgid " Sort returned non-zero: "
-msgstr " Kārtošana atgrieza ne-nulli: "
-
-msgid "Paste output of external command"
-msgstr ""
-
-#, fuzzy
-msgid "Enter shell command(s):"
-msgstr " Ievadi komandas nosaukumu: "
-
-#, fuzzy
-msgid "External command"
-msgstr "Cita omanda"
-
-#, fuzzy
-msgid "Cannot execute command"
-msgstr " Kļūda mēģinot palaist sort komandu "
-
-msgid "Error creating script:"
-msgstr "Kļūda izveidojot skriptu:"
-
-msgid "Error reading script:"
-msgstr "Kļūda lasot skriptu:"
-
-msgid "Error closing script:"
-msgstr "Kļūda aizverot skriptu:"
-
-msgid "Script created:"
-msgstr "Skripts izveidots:"
-
-msgid "Process block"
-msgstr "Procesa bloks"
-
-msgid " Copies to"
-msgstr " Kopét uz"
-
-msgid " Subject"
-msgstr " Subjekts"
-
-msgid " To"
-msgstr " Uz"
-
-msgid " mail -s <subject> -c <cc> <to>"
-msgstr " mail -s <subjekts> -c <cc> <kam>"
-
-msgid " Mail "
-msgstr " Pasts"
-
-msgid " Insert Literal "
-msgstr " Ievietot Burtu "
-
-msgid " Press any key: "
-msgstr " Spiest jebkuru taustiņu: "
-
-msgid " Execute Macro "
-msgstr " Palaist Makro "
-
-msgid "All charsets"
-msgstr ""
-
-#, fuzzy
-msgid "&Whole words"
-msgstr "&Tikai veselus vārdus"
-
-#, fuzzy
-msgid "In se&lection"
-msgstr "pretēji izvēlē&Tajam M-*"
-
-msgid "&Backwards"
-msgstr "at&Pakaļ"
-
-msgid "case &Sensitive"
-msgstr "lielo/mazo burtu &Jūtigs"
-
-msgid " Enter replacement string:"
-msgstr " Ievadiet aizvietotājvirkni:"
-
-msgid " Enter search string:"
-msgstr " Ievadiet meklējamo virkni:"
-
-#, fuzzy
-msgid "&Find all"
-msgstr "Atrast Failu"
-
-msgid "Cancel"
-msgstr "Atsaukt"
-
-msgid "&Skip"
-msgstr "&Izlaist"
-
-msgid "A&ll"
-msgstr "vi&Si"
-
-msgid "&Replace"
-msgstr "&Aizvietot"
-
-msgid " Replace with: "
-msgstr " Aizvietot ar: "
-
-msgid " Confirm replace "
-msgstr " Apstirpināt aizvietošanu "
-
-msgid "&Dismiss"
-msgstr "&Atcelt"
-
-#, c-format
-msgid ""
-"File \"%s\" is already being edited\n"
-"User: %s\n"
-"Process ID: %d"
-msgstr ""
-
-msgid "File locked"
-msgstr ""
-
-msgid "&Grab lock"
-msgstr ""
-
-msgid "&Ignore lock"
-msgstr ""
-
-msgid "&Open file..."
-msgstr "&Atvērt failu..."
-
-#, fuzzy
-msgid "&New"
-msgstr "&Vārds"
-
-#, fuzzy
-msgid "Save &as..."
-msgstr "&Saglabāt uzstādījumus"
-
-#, fuzzy
-msgid "&Insert file..."
-msgstr "&Ievietot failu.. F15"
-
-#, fuzzy
-msgid "Cop&y to file..."
-msgstr "kopēt uz &Failu.. C-f"
-
-#, fuzzy
-msgid "&User menu..."
-msgstr "&Lietotāja izvēlne F11"
-
-#, fuzzy
-msgid "A&bout..."
-msgstr "&Izkārtojums..."
-
-msgid "&Quit"
-msgstr "I&Ziet"
-
-#, fuzzy
-msgid "&Toggle mark"
-msgstr "A&ttīrīt izvēlēto"
-
-msgid "&Mark columns"
-msgstr ""
-
-#, fuzzy
-msgid "Toggle &ins/overw"
-msgstr "slēgt &Iev/pārr"
-
-#, fuzzy
-msgid "&Copy"
-msgstr "Kopēt"
-
-msgid "&Move"
-msgstr "&Pārvietot"
-
-msgid "&Delete"
-msgstr "&Dzēst"
-
-#, fuzzy
-msgid "C&opy to clipfile"
-msgstr "kopēt uz &Failu...   "
-
-#, fuzzy
-msgid "C&ut to clipfile"
-msgstr "&Iet uz līniju...            M-l"
-
-msgid "&Paste from clipfile"
-msgstr ""
-
-#, fuzzy
-msgid "Toggle bookmar&k"
-msgstr "&Ieslēgt Iezīmēšanau       F3"
-
-#, fuzzy
-msgid "&Next bookmark"
-msgstr "U&zstādīt izvēlēto"
-
-#, fuzzy
-msgid "Pre&v bookmark"
-msgstr "kārto&T...                 M-t"
-
-#, fuzzy
-msgid "&Flush bookmark"
-msgstr "&Pasts..."
-
-msgid "&Undo"
-msgstr ""
-
-msgid "&Beginning"
-msgstr ""
-
-#, fuzzy
-msgid "&End"
-msgstr "&Inode"
-
-#, fuzzy
-msgid "&Search..."
-msgstr "Meklēt"
-
-#, fuzzy
-msgid "Search &again"
-msgstr "meklēt &Vēlreiz   F17"
-
-#, fuzzy
-msgid "&Replace..."
-msgstr "&Aizvietot"
-
-#, fuzzy
-msgid "&Go to line..."
-msgstr " Iet uz līniju "
-
-#, fuzzy
-msgid "Toggle li&ne state"
-msgstr "&Ieslēgt Iezīmēšanau       F3"
-
-#, fuzzy
-msgid "Go to matching &bracket"
-msgstr "iet uz atbilstošo ie&Kavu M-b"
-
-#, fuzzy
-msgid "Find declaration"
-msgstr "Atrast atraidījumus pēc ielāpošanas"
-
-msgid "Back from declaration"
-msgstr ""
-
-msgid "Forward to declaration"
-msgstr ""
-
-#, fuzzy
-msgid "Encod&ing..."
-msgstr "kārto&T...                 M-t"
-
-#, fuzzy
-msgid "&Refresh screen"
-msgstr "&Atsvaidzināt ekrānu          C-l"
-
-#, fuzzy
-msgid "&Start record macro"
-msgstr "&Sākt macro rakstīšanu      C-r"
-
-#, fuzzy
-msgid "&Finish record macro..."
-msgstr "&Pabeigt makro rakstīšanu...  C-r"
-
-#, fuzzy
-msgid "&Execute macro..."
-msgstr "&Palaist makro...   C-a, KEY"
-
-#, fuzzy
-msgid "Delete macr&o..."
-msgstr " Dzēst makro "
-
-#, fuzzy
-msgid "'ispell' s&pell check"
-msgstr "'ispell'&Pareizrakst. pārb. C-p"
-
-#, fuzzy
-msgid "&Mail..."
-msgstr "&Filtrs..."
-
-#, fuzzy
-msgid "Insert &literal..."
-msgstr "ievietot &Burtu...       C-q"
-
-#, fuzzy
-msgid "Insert &date/time"
-msgstr "ievietot &Datumu/laiku           "
-
-#, fuzzy
-msgid "Format p&aragraph"
-msgstr "formatēt p&Aragrāfu        M-p"
-
-#, fuzzy
-msgid "Sor&t..."
-msgstr "&Kārtotā secībā..."
-
-msgid "Paste o&utput of..."
-msgstr ""
-
-#, fuzzy
-msgid "E&xternal formatter"
-msgstr "Ā&rējais Formatētājs      F19"
-
-msgid "&General...  "
-msgstr "&Galvenais...  "
-
-#, fuzzy
-msgid "Save &mode..."
-msgstr "&Saglabāt veidu..."
-
-#, fuzzy
-msgid "Learn &keys..."
-msgstr "mācību &Taustiņi..."
-
-#, fuzzy
-msgid "Syntax &highlighting..."
-msgstr "sinta&Kses izgaismošana"
-
-#, fuzzy
-msgid "S&yntax file"
-msgstr "&Izvēlnes faila rediģēšana"
-
-#, fuzzy
-msgid "&Menu file"
-msgstr "&Izvēlnes faila rediģēšana"
-
-msgid "&Save setup"
-msgstr "&Saglabāt uzstādījumus"
-
-#, fuzzy
-msgid "&File"
-msgstr "Fails"
-
-#, fuzzy
-msgid "&Edit"
-msgstr "Rediģēt"
-
-#, fuzzy
-msgid "&Search"
-msgstr "Meklēt"
-
-#, fuzzy
-msgid "&Command"
-msgstr "Komanda"
-
-#, fuzzy
-msgid "For&mat"
-msgstr "Formatēt"
-
-#, fuzzy
-msgid "&Options"
-msgstr " &Opcijas "
-
-msgid "None"
-msgstr "Nekas"
-
-msgid "Dynamic paragraphing"
-msgstr "Dinamiska paragrāfošana"
-
-msgid "Type writer wrap"
-msgstr "Mašīnrakstīšanas iekļaušana"
-
-msgid "Word wrap line length: "
-msgstr "Vārdu iekļaušanas līnijas garums: "
-
-msgid "Cursor beyond end of line"
-msgstr ""
-
-#, fuzzy
-msgid "Pers&istent selection"
-msgstr "pretēji izvēlē&Tajam M-*"
-
-msgid "Synta&x highlighting"
-msgstr "sinta&Kses izgaismošana"
-
-msgid "Visible tabs"
-msgstr ""
-
-msgid "Visible trailing spaces"
-msgstr ""
-
-#, fuzzy
-msgid "Save file &position"
-msgstr " Saglabāt failu "
-
-msgid "Confir&m before saving"
-msgstr "a&Pstiprināt pirms saglabāšanas"
-
-msgid "&Return does autoindent"
-msgstr "&Enter veido autom.atkāpi"
-
-msgid "Tab spacing: "
-msgstr "Tab atstarpes : "
-
-msgid "Fill tabs with &spaces"
-msgstr "piepildīt tabulācijas ar at&Starpēm"
-
-msgid "&Backspace through tabs"
-msgstr ""
-
-msgid "&Fake half tabs"
-msgstr ""
-
-msgid "Wrap mode"
-msgstr "Iekļaušanas režīms"
-
-msgid " Editor options "
-msgstr " Redaktora opcijas "
-
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
-msgid "ButtonBar|Mark"
-msgstr ""
-
-msgid "ButtonBar|Replac"
-msgstr ""
-
-msgid "ButtonBar|Copy"
-msgstr ""
-
-msgid "ButtonBar|Move"
-msgstr ""
-
-msgid "ButtonBar|Search"
-msgstr ""
-
-msgid "ButtonBar|Delete"
-msgstr ""
-
-msgid "ButtonBar|PullDn"
-msgstr ""
-
-msgid "ButtonBar|Quit"
-msgstr ""
-
-msgid " Load syntax file "
-msgstr " Ielādēt sintakses failu "
-
-#, c-format
-msgid ""
-" Cannot open file %s \n"
-" %s "
-msgstr ""
-" Nevar atvērt failu %s \n"
-" %s "
-
-#, c-format
-msgid " Error in file %s on line %d "
-msgstr " Kļūda faila %s %d rindiņā "
 
 msgid "&Set"
 msgstr "&Uzstādīt"
@@ -988,6 +1063,9 @@ msgstr "Saraksta režīms"
 msgid "user &Mini status"
 msgstr "lietotāja &Mini statuss"
 
+msgid "&OK"
+msgstr "&Labi"
+
 msgid "&Reverse"
 msgstr "&Pretēji"
 
@@ -1001,24 +1079,35 @@ msgstr ""
 msgid "Sort order"
 msgstr "Kārtošanas secība"
 
-msgid " Confirmation "
+#, fuzzy
+msgid "Confirmation"
+msgstr " Apstiprināšana "
+
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+#, fuzzy
+msgid "Confirmation|&History cleanup"
 msgstr " Apstiprināšana "
 
 #, fuzzy
-msgid " confirm di&Rectory hotlist delete "
+msgid "Confirmation|&Directory hotlist delete"
 msgstr "di&Rektoriju karstais saraksts    C-\\"
 
-msgid " confirm &Exit "
-msgstr " apstiprināt I&Ziešanu "
+#, fuzzy
+msgid "Confirmation|E&xit"
+msgstr " Apstiprināšana "
 
-msgid " confirm e&Xecute "
-msgstr " apstiprināt pa&Laišanu "
+#, fuzzy
+msgid "Confirmation|&Execute"
+msgstr " Apstiprināšana "
 
-msgid " confirm o&Verwrite "
+#, fuzzy
+msgid "Confirmation|O&verwrite"
 msgstr " apstiprināt pā&Rrakstīšanu "
 
-msgid " confirm &Delete "
-msgstr " apstiprināt i&Zdzēšanu "
+#, fuzzy
+msgid "Confirmation|&Delete"
+msgstr " Apstiprināšana "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1117,16 +1206,9 @@ msgstr "Domēns:"
 msgid "Username:"
 msgstr "Lietotājvārds:"
 
-msgid "Password:"
-msgstr "Parole:"
-
 #, c-format
 msgid "Password for \\\\%s\\%s"
 msgstr "\\\\%s\\%s Parole"
-
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Brīdinājums: fails %s nav atrasts\n"
 
 msgid "7-bit ASCII"
 msgstr ""
@@ -1243,6 +1325,9 @@ msgstr "<Nezināms lietotājs>"
 msgid "<Unknown group>"
 msgstr "<Nezināma grupa>"
 
+msgid " Confirmation "
+msgstr " Apstiprināšana "
+
 msgid "Files tagged, want to cd?"
 msgstr "Faili tagoti, gribat cd?"
 
@@ -1295,6 +1380,21 @@ msgstr "Paplašinājuma faila rediģēšana"
 
 msgid " Which extension file you want to edit? "
 msgstr " Kuru paplašinājuma failu jūs vēlaties rediģēt? "
+
+msgid "&User"
+msgstr "&Lietotājs"
+
+msgid "&System Wide"
+msgstr "&Sistēmas Mēroga"
+
+msgid " Menu edit "
+msgstr " Izvēlņu rediģēšana "
+
+msgid " Which menu file do you want to edit? "
+msgstr " Kuru izvēlnes failu jūs rediģēsiet ? "
+
+msgid "&Local"
+msgstr "&Vietēji"
 
 msgid "Highlighting groups file edit"
 msgstr ""
@@ -1417,6 +1517,727 @@ msgstr " Čaulā jau ir palaista komanda "
 msgid "Cannot read directory contents"
 msgstr "Nevar nomainīt direktoriju"
 
+#, fuzzy
+msgid " Choose syntax highlighting "
+msgstr "sinta&Kses izgaismošana"
+
+#, fuzzy
+msgid "< Auto >"
+msgstr " Par "
+
+msgid "< Reload Current Syntax >"
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Cannot open %s for reading "
+msgstr " Nevar atvērt programkanālu lasīšanai: "
+
+msgid "Error"
+msgstr "Kļūda"
+
+#, fuzzy, c-format
+msgid " Error reading from pipe: %s "
+msgstr " Kļūda lasot no programkanāla: "
+
+#, fuzzy, c-format
+msgid " Cannot open pipe for reading: %s "
+msgstr " Nevar atvērt programkanālu lasīšanai: "
+
+#, fuzzy, c-format
+msgid " Cannot get size/permissions for %s "
+msgstr " Nevar dabūt lielumu/atļauju informāciju failam: "
+
+#, fuzzy, c-format
+msgid " %s is not a regular file "
+msgstr " Nevar skatīt: nav regulārs fails "
+
+#, fuzzy, c-format
+msgid " File %s is too large "
+msgstr " Fails ir par lielu: "
+
+msgid " About "
+msgstr " Par "
+
+msgid ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       A user friendly text editor written\n"
+"           for the Midnight Commander.\n"
+msgstr ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Kopēšanas tiesības (C) 1996 the Free Software Foundation\n"
+"\n"
+"       Lietotājam draudzīgs teksta redaktors, uzrakstīts\n"
+"           priekš Pusnakts Komandiera.\n"
+
+msgid "Macro recursion is too deep"
+msgstr ""
+
+msgid "Search"
+msgstr "Meklēt"
+
+msgid " File has hard-links. Detach before saving? "
+msgstr ""
+
+msgid "The file has been modified in the meantime. Save anyway?"
+msgstr ""
+
+msgid " Error writing to pipe: "
+msgstr " Kļūda rakstot programkanālā: "
+
+msgid " Cannot open pipe for writing: "
+msgstr " Nevar atvērt programkanālu ierkastīšanai: "
+
+#, fuzzy, c-format
+msgid " Cannot open file for writing: %s "
+msgstr " Nevar atvērt programkanālu ierkastīšanai: "
+
+#, fuzzy
+msgid "&Quick save"
+msgstr "Ātra saglabāšana "
+
+#, fuzzy
+msgid "&Safe save"
+msgstr "Droša saglabāšana "
+
+msgid "&Do backups with following extension:"
+msgstr ""
+
+msgid "Check &POSIX new line"
+msgstr ""
+
+msgid " Edit Save Mode "
+msgstr " Rediģēt Glabāšanas Režīmu "
+
+msgid "The file you are saving is not finished with a newline"
+msgstr ""
+
+#, fuzzy
+msgid "C&ontinue"
+msgstr "Turpināt"
+
+msgid "&Do not change"
+msgstr ""
+
+msgid "&Unix format (LF)"
+msgstr ""
+
+msgid "&Windows/DOS format (CR LF)"
+msgstr ""
+
+msgid "&Macintosh format (CR)"
+msgstr ""
+
+msgid "Change line breaks to:"
+msgstr ""
+
+#, fuzzy
+msgid " Enter file name: "
+msgstr " Ievadīet līniju: "
+
+msgid " Save As "
+msgstr " Glabāt Kā "
+
+msgid " A file already exists with this name. "
+msgstr " Fails ar tādu nosaukumu jau eksistē. "
+
+#, fuzzy
+msgid "&Overwrite"
+msgstr "Pārrakstīt"
+
+msgid " Cannot save file. "
+msgstr " Kļūda mēģinot saglabāt failu. "
+
+msgid " Delete macro "
+msgstr " Dzēst makro "
+
+msgid " Cannot open temp file "
+msgstr " Kļūda mēģinot atvērt temp failu "
+
+msgid " Cannot open macro file "
+msgstr " Kļūda mēģinot atvērt makro failu "
+
+msgid " Cannot overwrite macro file "
+msgstr " Kļūda mēģinot pārrakstīt makro failu "
+
+msgid " Save macro "
+msgstr " Glabāt makro "
+
+msgid " Press the macro's new hotkey: "
+msgstr " Spied makro jauno karsto taustiņu: "
+
+msgid " Press macro hotkey: "
+msgstr " Spied makro karsto taustiņu: "
+
+msgid " Load macro "
+msgstr " Ielādēt makro "
+
+msgid " Confirm save file? : "
+msgstr " Apstiprināt faila saglabāšanu? : "
+
+msgid " Save file "
+msgstr " Saglabāt failu "
+
+msgid "&Save"
+msgstr "&Saglabāt"
+
+msgid ""
+" Current text was modified without a file save. \n"
+" Continue discards these changes. "
+msgstr ""
+" Pašreizējais teksts tika modificēts bez faila saglabāšanas. \n"
+" Ja turpināsiet, izmaiņs tiks atsauktas. "
+
+#, fuzzy
+msgid "Syntax file edit"
+msgstr "&Izvēlnes faila rediģēšana"
+
+#, fuzzy
+msgid " Which syntax file you want to edit? "
+msgstr " Kuru paplašinājuma failu jūs vēlaties rediģēt? "
+
+msgid " Load "
+msgstr " Ielādēt "
+
+msgid " Block is large, you may not be able to undo this action. "
+msgstr " Bloks ir liels, jūs iespējams nevarēsiet atsaukt šo darbību. "
+
+#, fuzzy
+msgid "Replace"
+msgstr "&Aizvietot"
+
+msgid " Replace "
+msgstr " Aizvietot "
+
+#, c-format
+msgid " %ld replacements made. "
+msgstr " %ld aizstāšanas režīms. "
+
+msgid "Quit"
+msgstr "Iziet"
+
+msgid " File was modified, Save with exit? "
+msgstr " Fails tika mainīts, saglabāt izejot?"
+
+#, fuzzy
+msgid "&Cancel quit"
+msgstr "Atcelt iziešanu"
+
+#, fuzzy
+msgid " Error "
+msgstr "Kļūda"
+
+msgid " This function is not implemented. "
+msgstr ""
+
+msgid " Copy to clipboard "
+msgstr " Kopēt uz starpliktuvi "
+
+msgid " Unable to save to file. "
+msgstr " Nevar saglabāt failu. "
+
+msgid " Cut to clipboard "
+msgstr " Aiznest uz starpliktuvi "
+
+msgid " Goto line "
+msgstr " Iet uz līniju "
+
+msgid " Enter line: "
+msgstr " Ievadīet līniju: "
+
+msgid " Save Block "
+msgstr " Saglabāt Bloku "
+
+msgid " Insert File "
+msgstr " Ievietot Failu "
+
+msgid " Cannot insert file. "
+msgstr " Kļūda mēģinot ievietot failu. "
+
+msgid " Sort block "
+msgstr " Sakārtot bloku "
+
+msgid " You must first highlight a block of text. "
+msgstr " Jums pa priekšu ir jāiezīmē teksta bloks. "
+
+msgid " Run Sort "
+msgstr " Palaist Kārtošanu "
+
+msgid " Enter sort options (see manpage) separated by whitespace: "
+msgstr ""
+" Ievadi kārtošanas opcijas (apskati man lapas) atdalītas ar tukšumiem: "
+
+msgid " Sort "
+msgstr " Kārtot "
+
+msgid " Cannot execute sort command "
+msgstr " Kļūda mēģinot palaist sort komandu "
+
+msgid " Sort returned non-zero: "
+msgstr " Kārtošana atgrieza ne-nulli: "
+
+msgid "Paste output of external command"
+msgstr ""
+
+#, fuzzy
+msgid "Enter shell command(s):"
+msgstr " Ievadi komandas nosaukumu: "
+
+#, fuzzy
+msgid "External command"
+msgstr "Cita omanda"
+
+#, fuzzy
+msgid "Cannot execute command"
+msgstr " Kļūda mēģinot palaist sort komandu "
+
+msgid "Error creating script:"
+msgstr "Kļūda izveidojot skriptu:"
+
+msgid "Error reading script:"
+msgstr "Kļūda lasot skriptu:"
+
+msgid "Error closing script:"
+msgstr "Kļūda aizverot skriptu:"
+
+msgid "Script created:"
+msgstr "Skripts izveidots:"
+
+msgid "Process block"
+msgstr "Procesa bloks"
+
+msgid " Copies to"
+msgstr " Kopét uz"
+
+msgid " Subject"
+msgstr " Subjekts"
+
+msgid " To"
+msgstr " Uz"
+
+msgid " mail -s <subject> -c <cc> <to>"
+msgstr " mail -s <subjekts> -c <cc> <kam>"
+
+msgid " Mail "
+msgstr " Pasts"
+
+msgid " Insert Literal "
+msgstr " Ievietot Burtu "
+
+msgid " Press any key: "
+msgstr " Spiest jebkuru taustiņu: "
+
+msgid " Execute Macro "
+msgstr " Palaist Makro "
+
+msgid "All charsets"
+msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "&Tikai veselus vārdus"
+
+#, fuzzy
+msgid "In se&lection"
+msgstr "pretēji izvēlē&Tajam M-*"
+
+msgid "&Backwards"
+msgstr "at&Pakaļ"
+
+msgid "case &Sensitive"
+msgstr "lielo/mazo burtu &Jūtigs"
+
+msgid " Enter replacement string:"
+msgstr " Ievadiet aizvietotājvirkni:"
+
+msgid " Enter search string:"
+msgstr " Ievadiet meklējamo virkni:"
+
+#, fuzzy
+msgid "&Find all"
+msgstr "Atrast Failu"
+
+msgid "Cancel"
+msgstr "Atsaukt"
+
+msgid "&Skip"
+msgstr "&Izlaist"
+
+msgid "A&ll"
+msgstr "vi&Si"
+
+msgid "&Replace"
+msgstr "&Aizvietot"
+
+msgid " Replace with: "
+msgstr " Aizvietot ar: "
+
+msgid " Confirm replace "
+msgstr " Apstirpināt aizvietošanu "
+
+msgid "&Dismiss"
+msgstr "&Atcelt"
+
+#, c-format
+msgid ""
+"File \"%s\" is already being edited\n"
+"User: %s\n"
+"Process ID: %d"
+msgstr ""
+
+msgid "File locked"
+msgstr ""
+
+msgid "&Grab lock"
+msgstr ""
+
+msgid "&Ignore lock"
+msgstr ""
+
+msgid "&Open file..."
+msgstr "&Atvērt failu..."
+
+#, fuzzy
+msgid "&New"
+msgstr "&Vārds"
+
+#, fuzzy
+msgid "Save &as..."
+msgstr "&Saglabāt uzstādījumus"
+
+#, fuzzy
+msgid "&Insert file..."
+msgstr "&Ievietot failu.. F15"
+
+#, fuzzy
+msgid "Cop&y to file..."
+msgstr "kopēt uz &Failu.. C-f"
+
+#, fuzzy
+msgid "&User menu..."
+msgstr "&Lietotāja izvēlne F11"
+
+#, fuzzy
+msgid "A&bout..."
+msgstr "&Izkārtojums..."
+
+msgid "&Quit"
+msgstr "I&Ziet"
+
+msgid "&Undo"
+msgstr ""
+
+#, fuzzy
+msgid "&Toggle ins/overw"
+msgstr "slēgt &Iev/pārr"
+
+#, fuzzy
+msgid "To&ggle mark"
+msgstr "A&ttīrīt izvēlēto"
+
+msgid "&Mark columns"
+msgstr ""
+
+#, fuzzy
+msgid "Mark &all"
+msgstr "&Izvēlēti visi"
+
+msgid "Unmar&k"
+msgstr ""
+
+#, fuzzy
+msgid "Cop&y"
+msgstr "Kopēt"
+
+#, fuzzy
+msgid "Mo&ve"
+msgstr "Pārvietot"
+
+msgid "&Delete"
+msgstr "&Dzēst"
+
+#, fuzzy
+msgid "Co&py to clipfile"
+msgstr "kopēt uz &Failu...   "
+
+#, fuzzy
+msgid "&Cut to clipfile"
+msgstr "&Iet uz līniju...            M-l"
+
+#, fuzzy
+msgid "Pa&ste from clipfile"
+msgstr "&Iet uz līniju...            M-l"
+
+msgid "&Beginning"
+msgstr ""
+
+#, fuzzy
+msgid "&End"
+msgstr "&Inode"
+
+#, fuzzy
+msgid "&Search..."
+msgstr "Meklēt"
+
+#, fuzzy
+msgid "Search &again"
+msgstr "meklēt &Vēlreiz   F17"
+
+#, fuzzy
+msgid "&Replace..."
+msgstr "&Aizvietot"
+
+#, fuzzy
+msgid "&Toggle bookmark"
+msgstr "&Ieslēgt Iezīmēšanau       F3"
+
+#, fuzzy
+msgid "&Next bookmark"
+msgstr "U&zstādīt izvēlēto"
+
+#, fuzzy
+msgid "&Prev bookmark"
+msgstr "kārto&T...                 M-t"
+
+#, fuzzy
+msgid "&Flush bookmark"
+msgstr "&Pasts..."
+
+#, fuzzy
+msgid "&Go to line..."
+msgstr " Iet uz līniju "
+
+#, fuzzy
+msgid "&Toggle line state"
+msgstr "&Ieslēgt Iezīmēšanau       F3"
+
+#, fuzzy
+msgid "Go to matching &bracket"
+msgstr "iet uz atbilstošo ie&Kavu M-b"
+
+#, fuzzy
+msgid "&Find declaration"
+msgstr "Atrast atraidījumus pēc ielāpošanas"
+
+#, fuzzy
+msgid "Back from &declaration"
+msgstr "Atrast atraidījumus pēc ielāpošanas"
+
+#, fuzzy
+msgid "For&ward to declaration"
+msgstr "Atrast atraidījumus pēc ielāpošanas"
+
+#, fuzzy
+msgid "Encod&ing..."
+msgstr "kārto&T...                 M-t"
+
+#, fuzzy
+msgid "&Refresh screen"
+msgstr "&Atsvaidzināt ekrānu          C-l"
+
+#, fuzzy
+msgid "&Start record macro"
+msgstr "&Sākt macro rakstīšanu      C-r"
+
+#, fuzzy
+msgid "Finis&h record macro..."
+msgstr "&Pabeigt makro rakstīšanu...  C-r"
+
+#, fuzzy
+msgid "&Execute macro..."
+msgstr "&Palaist makro...   C-a, KEY"
+
+#, fuzzy
+msgid "Delete macr&o..."
+msgstr " Dzēst makro "
+
+#, fuzzy
+msgid "'ispell' s&pell check"
+msgstr "'ispell'&Pareizrakst. pārb. C-p"
+
+#, fuzzy
+msgid "&Mail..."
+msgstr "&Filtrs..."
+
+#, fuzzy
+msgid "Insert &literal..."
+msgstr "ievietot &Burtu...       C-q"
+
+#, fuzzy
+msgid "Insert &date/time"
+msgstr "ievietot &Datumu/laiku           "
+
+#, fuzzy
+msgid "&Format paragraph"
+msgstr "formatēt p&Aragrāfu        M-p"
+
+#, fuzzy
+msgid "&Sort..."
+msgstr "&Kārtotā secībā..."
+
+msgid "&Paste output of..."
+msgstr ""
+
+#, fuzzy
+msgid "&External formatter"
+msgstr "Ā&rējais Formatētājs      F19"
+
+msgid "&General...  "
+msgstr "&Galvenais...  "
+
+#, fuzzy
+msgid "Save &mode..."
+msgstr "&Saglabāt veidu..."
+
+#, fuzzy
+msgid "Learn &keys..."
+msgstr "mācību &Taustiņi..."
+
+#, fuzzy
+msgid "Syntax &highlighting..."
+msgstr "sinta&Kses izgaismošana"
+
+#, fuzzy
+msgid "S&yntax file"
+msgstr "&Izvēlnes faila rediģēšana"
+
+#, fuzzy
+msgid "&Menu file"
+msgstr "&Izvēlnes faila rediģēšana"
+
+msgid "&Save setup"
+msgstr "&Saglabāt uzstādījumus"
+
+#, fuzzy
+msgid "&File"
+msgstr "Fails"
+
+#, fuzzy
+msgid "&Edit"
+msgstr "Rediģēt"
+
+#, fuzzy
+msgid "&Search"
+msgstr "Meklēt"
+
+#, fuzzy
+msgid "&Command"
+msgstr "Komanda"
+
+#, fuzzy
+msgid "For&mat"
+msgstr "Formatēt"
+
+#, fuzzy
+msgid "&Options"
+msgstr " &Opcijas "
+
+msgid "None"
+msgstr "Nekas"
+
+msgid "Dynamic paragraphing"
+msgstr "Dinamiska paragrāfošana"
+
+msgid "Type writer wrap"
+msgstr "Mašīnrakstīšanas iekļaušana"
+
+msgid "Word wrap line length: "
+msgstr "Vārdu iekļaušanas līnijas garums: "
+
+msgid "Cursor beyond end of line"
+msgstr ""
+
+#, fuzzy
+msgid "Pers&istent selection"
+msgstr "pretēji izvēlē&Tajam M-*"
+
+msgid "Synta&x highlighting"
+msgstr "sinta&Kses izgaismošana"
+
+msgid "Visible tabs"
+msgstr ""
+
+msgid "Visible trailing spaces"
+msgstr ""
+
+#, fuzzy
+msgid "Save file &position"
+msgstr " Saglabāt failu "
+
+msgid "Confir&m before saving"
+msgstr "a&Pstiprināt pirms saglabāšanas"
+
+msgid "&Return does autoindent"
+msgstr "&Enter veido autom.atkāpi"
+
+msgid "Tab spacing: "
+msgstr "Tab atstarpes : "
+
+msgid "Fill tabs with &spaces"
+msgstr "piepildīt tabulācijas ar at&Starpēm"
+
+msgid "&Backspace through tabs"
+msgstr ""
+
+msgid "&Fake half tabs"
+msgstr ""
+
+msgid "Wrap mode"
+msgstr "Iekļaušanas režīms"
+
+msgid " Editor options "
+msgstr " Redaktora opcijas "
+
+msgid "ButtonBar|Help"
+msgstr ""
+
+msgid "ButtonBar|Save"
+msgstr ""
+
+msgid "ButtonBar|Mark"
+msgstr ""
+
+msgid "ButtonBar|Replac"
+msgstr ""
+
+msgid "ButtonBar|Copy"
+msgstr ""
+
+msgid "ButtonBar|Move"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Delete"
+msgstr ""
+
+msgid "ButtonBar|PullDn"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
+
+msgid " Load syntax file "
+msgstr " Ielādēt sintakses failu "
+
+#, c-format
+msgid ""
+" Cannot open file %s \n"
+" %s "
+msgstr ""
+" Nevar atvērt failu %s \n"
+" %s "
+
+#, c-format
+msgid " Error in file %s on line %d "
+msgstr " Kļūda faila %s %d rindiņā "
+
 msgid ""
 " The Commander can't change to the directory that \n"
 " the subshell claims you are in.  Perhaps you have \n"
@@ -1427,10 +2248,6 @@ msgstr ""
 "zemčaula paziņo, ka tajā atrodaties.  Iespējams, ka esat \n"
 "izdzēsis savu darba direktoriju vai arī esat iedevis sev \n"
 "papildus pieejas atļaujas ar \"su\" komandu? "
-
-#, c-format
-msgid "Press any key to continue..."
-msgstr "Nospied jebkuru taustiņu, lai turpinātu..."
 
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
@@ -1778,9 +2595,6 @@ msgstr "%o %f \"%s\"%m"
 msgid "%o %d %f%m"
 msgstr "%o %d %f%m"
 
-msgid "file"
-msgstr "failu"
-
 msgid "files"
 msgstr "failus"
 
@@ -2044,6 +2858,9 @@ msgstr ""
 
 msgid "ButtonBar|Prev"
 msgstr ""
+
+msgid "&Move"
+msgstr "&Pārvietot"
 
 msgid "&Remove"
 msgstr "&Izņemt"
@@ -2398,6 +3215,10 @@ msgstr " Skatīt failu "
 #, fuzzy
 msgid "&Filtered view"
 msgstr " Filtrēts skatījums "
+
+#, fuzzy
+msgid "&Copy"
+msgstr "Kopēt"
 
 msgid "C&hmod"
 msgstr ""
@@ -2821,29 +3642,6 @@ msgstr ""
 msgid " Do you really want to execute? "
 msgstr " Vai tu patiešām vēlies palaist? "
 
-msgid " Not implemented yet "
-msgstr ""
-
-msgid " Num of replace tokens not equal to num of found tokens "
-msgstr ""
-
-#, fuzzy, c-format
-msgid " Invalid token number %d "
-msgstr " Nepareiza mērķa maska "
-
-#, fuzzy
-msgid "Normal"
-msgstr "Formatēt"
-
-msgid "&Regular expression"
-msgstr "&Regulāra izteiksme"
-
-msgid "Hexadecimal"
-msgstr ""
-
-msgid "Wildcard search"
-msgstr ""
-
 #, fuzzy
 msgid "Choose codepage"
 msgstr " Izvēlies ievades kodu tabulu "
@@ -2856,18 +3654,6 @@ msgid ""
 "Cannot save file %s:\n"
 "%s"
 msgstr " Kļūda mēģinot saglabāt failu. "
-
-#, c-format
-msgid ""
-"Unable to load '%s' skin.\n"
-"Default skin has been loaded"
-msgstr ""
-
-#, c-format
-msgid ""
-"Unable to parse '%s' skin.\n"
-"Default skin has been loaded"
-msgstr ""
 
 msgid ""
 "GNU Midnight Commander is already\n"
@@ -2981,277 +3767,6 @@ msgstr ""
 "Nevar ierakstīt failā %s:\n"
 "%s\n"
 
-msgid "Function key 1"
-msgstr "Funkc. taustiņš 1"
-
-msgid "Function key 2"
-msgstr "Funkc. taustiņš 2"
-
-msgid "Function key 3"
-msgstr "Funkc. taustiņš 3"
-
-msgid "Function key 4"
-msgstr "Funkc. taustiņš 4"
-
-msgid "Function key 5"
-msgstr "Funkc. taustiņš 5"
-
-msgid "Function key 6"
-msgstr "Funkc. taustiņš 6"
-
-msgid "Function key 7"
-msgstr "Funkc. taustiņš 7"
-
-msgid "Function key 8"
-msgstr "Funkc. taustiņš 8"
-
-msgid "Function key 9"
-msgstr "Funkc. taustiņš 9"
-
-msgid "Function key 10"
-msgstr "Funkc. taustiņš 10"
-
-msgid "Function key 11"
-msgstr "Funkc. taustiņš 11"
-
-msgid "Function key 12"
-msgstr "Funkc. taustiņš 12"
-
-msgid "Function key 13"
-msgstr "Funkc. taustiņš 13"
-
-msgid "Function key 14"
-msgstr "Funkc. taustiņš 14"
-
-msgid "Function key 15"
-msgstr "Funkc. taustiņš 15"
-
-msgid "Function key 16"
-msgstr "Funkc. taustiņš 16"
-
-msgid "Function key 17"
-msgstr "Funkc. taustiņš 17"
-
-msgid "Function key 18"
-msgstr "Funkc. taustiņš 18"
-
-msgid "Function key 19"
-msgstr "Funkc. taustiņš 19"
-
-msgid "Function key 20"
-msgstr "Funkc. taustiņš 20"
-
-msgid "Backspace key"
-msgstr "Backspace taustiņš"
-
-msgid "End key"
-msgstr "End taustiņš"
-
-msgid "Up arrow key"
-msgstr "Taustiņš ar būltiņu uz augšu"
-
-msgid "Down arrow key"
-msgstr "Taustiņš ar būltiņu uz leju"
-
-msgid "Left arrow key"
-msgstr "Taustiņš ar būltiņu pa kreisi"
-
-msgid "Right arrow key"
-msgstr "Taustiņš ar būltiņu pa labi"
-
-msgid "Home key"
-msgstr "Home taustiņš"
-
-msgid "Page Down key"
-msgstr "Page Down taustiņš"
-
-msgid "Page Up key"
-msgstr "Page Up taustiņš"
-
-msgid "Insert key"
-msgstr "Insert taustiņš"
-
-msgid "Delete key"
-msgstr "Delete taustiņš"
-
-msgid "Completion/M-tab"
-msgstr "Pabeigšana/M-tab"
-
-msgid "+ on keypad"
-msgstr "+ uz klaviatūras"
-
-msgid "- on keypad"
-msgstr "- uz klaviatūras"
-
-msgid "Slash on keypad"
-msgstr "/ (Slash) uz klaviatūras"
-
-msgid "* on keypad"
-msgstr "* uz klaviatūras"
-
-#, fuzzy
-msgid "Escape key"
-msgstr "/ (Slash) uz klaviatūras"
-
-msgid "Left arrow keypad"
-msgstr "Būltiņa pa kreisi uz klaviatūras"
-
-msgid "Right arrow keypad"
-msgstr "Būltiņa pa labi uz klaviatūras"
-
-msgid "Up arrow keypad"
-msgstr "Būltiņa uz augšu uz klaviatūras"
-
-msgid "Down arrow keypad"
-msgstr "Būltiņa uz leju uz klaviatūras"
-
-msgid "Home on keypad"
-msgstr "Home uz klaviatūras"
-
-msgid "End on keypad"
-msgstr "End uz klaviatūras"
-
-msgid "Page Down keypad"
-msgstr "Page Down uz klaviatūras"
-
-msgid "Page Up keypad"
-msgstr "Page Up uz klaviatūras"
-
-msgid "Insert on keypad"
-msgstr "Insert uz klaviatūras"
-
-msgid "Delete on keypad"
-msgstr "Delete uz klaviatūras"
-
-msgid "Enter on keypad"
-msgstr "Enter uz klaviatūras"
-
-#, fuzzy
-msgid "Function key 21"
-msgstr "Funkc. taustiņš 1"
-
-#, fuzzy
-msgid "Function key 22"
-msgstr "Funkc. taustiņš 2"
-
-#, fuzzy
-msgid "Function key 23"
-msgstr "Funkc. taustiņš 2"
-
-#, fuzzy
-msgid "Function key 24"
-msgstr "Funkc. taustiņš 2"
-
-msgid "Plus"
-msgstr ""
-
-#, fuzzy
-msgid "Minus"
-msgstr "Izvēlne"
-
-msgid "Asterisk"
-msgstr ""
-
-msgid "Dot"
-msgstr ""
-
-msgid "Less than"
-msgstr ""
-
-msgid "Great than"
-msgstr ""
-
-msgid "Equal"
-msgstr ""
-
-#, fuzzy
-msgid "Comma"
-msgstr "Komanda"
-
-msgid "Apostrophe"
-msgstr ""
-
-#, fuzzy
-msgid "Colon"
-msgstr "Skaitīt"
-
-msgid "Exclamation mark"
-msgstr ""
-
-msgid "Question mark"
-msgstr ""
-
-#, fuzzy
-msgid "Ampersand"
-msgstr "pie&Vienot"
-
-msgid "Dollar sign"
-msgstr ""
-
-msgid "Quotation mark"
-msgstr ""
-
-#, fuzzy
-msgid "Caret"
-msgstr "Mērķis"
-
-msgid "Tilda"
-msgstr ""
-
-#, fuzzy
-msgid "Prime"
-msgstr "Iepr"
-
-#, fuzzy
-msgid "Underline"
-msgstr " Ievadīet līniju: "
-
-msgid "Understrike"
-msgstr ""
-
-msgid "Pipe"
-msgstr ""
-
-#, fuzzy
-msgid "Enter"
-msgstr "īpašnieks"
-
-#, fuzzy
-msgid "Tab key"
-msgstr "+ uz klaviatūras"
-
-#, fuzzy
-msgid "Space key"
-msgstr "/ (Slash) uz klaviatūras"
-
-#, fuzzy
-msgid "Slash key"
-msgstr "/ (Slash) uz klaviatūras"
-
-#, fuzzy
-msgid "Backslash key"
-msgstr "Backspace taustiņš"
-
-msgid "Number sign #"
-msgstr ""
-
-msgid "Ctrl"
-msgstr ""
-
-msgid "Alt"
-msgstr ""
-
-msgid "Shift"
-msgstr ""
-
-#, c-format
-msgid ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-msgstr ""
-"Ekrāna izmērs %dx%d nav atbalstīts.\n"
-"Pārbaudi TERM vides mainīgo.\n"
-
 msgid " Format error on file Extensions File "
 msgstr " Formatējuma kļūda Paplašinājumu Failā "
 
@@ -3293,67 +3808,8 @@ msgstr " Neviens atbilstošs ieraksts netika atrasts iekš %s "
 msgid " User menu "
 msgstr " Lietotāja izvēlne "
 
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
-#, fuzzy, c-format
-msgid "%s is not a directory\n"
-msgstr "direktoriju"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr ""
-" Nevar izveidot mērķa direktoriju \"%s\" \n"
-" %s "
-
-#, fuzzy, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr ""
-" Nevar izveidot mērķa direktoriju \"%s\" \n"
-" %s "
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr ""
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr ""
-
-msgid " Pipe failed "
-msgstr " Kanāls neizdevās "
-
-msgid " Dup failed "
-msgstr " Dup neizdevās "
-
-#, fuzzy, c-format
-msgid ""
-" The current line number is %lld.\n"
-" Enter the new line number:"
-msgstr ""
-" Pašreizējai līnijas nummurs ir %d.\n"
-" Ievadi jaunu līnijas numuru:"
-
-#, fuzzy, c-format
-msgid ""
-" The current address is %s.\n"
-" Enter the new address:"
-msgstr ""
-" Pašreizējai līnijas nummurs ir %d.\n"
-" Ievadi jaunu līnijas numuru:"
-
-msgid " Goto Address "
-msgstr " Iet uz adresi "
-
 #, fuzzy
-msgid " Invalid address "
+msgid "Invalid value"
 msgstr " Nepareiza parole "
 
 #, fuzzy
@@ -3363,10 +3819,22 @@ msgstr " Nevar pavairot bērna programmu "
 msgid "Empty output from child filter"
 msgstr ""
 
-msgid "ButtonBar|Ascii"
+msgid "&Line number (decimal)"
 msgstr ""
 
-msgid "ButtonBar|Goto"
+msgid "Pe&rcents"
+msgstr ""
+
+msgid "&Decimal offset"
+msgstr ""
+
+msgid "He&xadecimal offset"
+msgstr ""
+
+msgid "Goto"
+msgstr "Ietuz"
+
+msgid "ButtonBar|Ascii"
 msgstr ""
 
 msgid "ButtonBar|HxSrch"
@@ -3381,7 +3849,7 @@ msgstr ""
 msgid "ButtonBar|Hex"
 msgstr ""
 
-msgid "ButtonBar|Line"
+msgid "ButtonBar|Goto"
 msgstr ""
 
 msgid "ButtonBar|Raw"
@@ -3395,26 +3863,6 @@ msgstr ""
 
 msgid "ButtonBar|Format"
 msgstr ""
-
-#, c-format
-msgid "File: %s"
-msgstr "Fails: %s"
-
-#, c-format
-msgid "Offset 0x%08lx"
-msgstr "Nobīde 0x%08lx"
-
-#, c-format
-msgid "Line %lu Col %lu"
-msgstr ""
-
-#, c-format
-msgid "%s bytes"
-msgstr "%s baiti"
-
-#, fuzzy, c-format
-msgid ">= %s bytes"
-msgstr "%s baiti"
 
 #, c-format
 msgid ""
@@ -3454,451 +3902,56 @@ msgstr ""
 msgid " History "
 msgstr " Vēsture "
 
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+msgid "DialogTitle|History cleanup"
+msgstr ""
+
+msgid "Do you want clean this history?"
+msgstr ""
+
 msgid "Background process:"
 msgstr "Fona process:"
 
-#, c-format
-msgid ""
-"Cannot open cpio archive\n"
-"%s"
-msgstr ""
-"Nevarēja atvērt cpio arhīvu\n"
-"%s"
+#~ msgid " confirm &Exit "
+#~ msgstr " apstiprināt I&Ziešanu "
 
-#, c-format
-msgid ""
-"Premature end of cpio archive\n"
-"%s"
-msgstr ""
-"Negaidītas cpio arhīva beigas\n"
-"%s"
+#~ msgid " confirm e&Xecute "
+#~ msgstr " apstiprināt pa&Laišanu "
 
-#, c-format
-msgid ""
-"Inconsistent hardlinks of\n"
-"%s\n"
-"in cpio archive\n"
-"%s"
-msgstr ""
-"Nekonsekventas cietsaites\n"
-"%s\n"
-"iekš cpio archīva\n"
-"%s"
-
-#, c-format
-msgid "%s contains duplicate entries! Skipping!"
-msgstr "%s satur dubultus ierakstus! Izlaižu!"
-
-#, c-format
-msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"Samaitājusies cpio galvene iekš\n"
-"%s"
-
-#, c-format
-msgid ""
-"Unexpected end of file\n"
-"%s"
-msgstr ""
-"Negaidītas faila beigas\n"
-"%s"
-
-#, c-format
-msgid "Directory cache expired for %s"
-msgstr "Direktorija kešs priekš %s izbeidzās"
-
-msgid "Starting linear transfer..."
-msgstr "Sākam lineāro pārraidi..."
-
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
-msgstr "%s: %s: %s %3d%% (%lu baiti pārsūtīti)"
-
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
-msgstr "%s: %s: %s %lu baiti pārsūtīti"
-
-msgid "Getting file"
-msgstr "Dabūjam failu"
-
-#, c-format
-msgid ""
-"Cannot open %s archive\n"
-"%s"
-msgstr ""
-"Nevar atvērt %s arhīvu\n"
-"%s"
-
-msgid "Inconsistent extfs archive"
-msgstr "Nepatstāvīgs extfs arhīvs"
-
-#, c-format
-msgid "fish: Disconnecting from %s"
-msgstr "fish: Atvienojamies no %s"
-
-msgid "fish: Waiting for initial line..."
-msgstr "fish: Gaidām sākotnējo līniju..."
-
-msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr ""
-"Piedodiet, mēs patreiz nevaram veikt ar paroli autorizētus savienojumus."
-
-msgid " fish: Password required for "
-msgstr " fish: Parole pieprasīta "
-
-msgid "fish: Sending password..."
-msgstr "fish: Sūtam paroli..."
-
-msgid "fish: Sending initial line..."
-msgstr "fish: Sūtam sākotnējo līniju..."
-
-msgid "fish: Handshaking version..."
-msgstr "fish: Rokspiešanas versija..."
-
-msgid "fish: Setting up current directory..."
-msgstr "fish: Uzstādam pašreizējo direktoriju..."
-
-#, c-format
-msgid "fish: Connected, home %s."
-msgstr "fish: Savienojies, mājas %s."
-
-#, c-format
-msgid "fish: Reading directory %s..."
-msgstr "fish: Lasām direktoriju %s..."
-
-#, c-format
-msgid "%s: done."
-msgstr "%s: izdarīts."
-
-#, c-format
-msgid "%s: failure"
-msgstr "%s: neveiksme"
-
-#, c-format
-msgid "fish: store %s: sending command..."
-msgstr "fish: glabājam %s: sutām komandu..."
-
-msgid "fish: Local read failed, sending zeros"
-msgstr "fish: Lokālā lasīšana kļūdaina, sūtam nulles"
-
-#, fuzzy, c-format
-msgid "fish: storing %s %d (%lu)"
-msgstr "fish: glabājam %s %d (%d)"
-
-msgid "zeros"
-msgstr "nulles"
-
-msgid "Aborting transfer..."
-msgstr "Pātraucam pārraidīšanu..."
-
-msgid "Error reported after abort."
-msgstr "Kļūda paziņota pēc pātraukšanas."
-
-msgid "Aborted transfer would be successful."
-msgstr "Pātraukā pārraidīšana varētu būt veiksmīga"
-
-#, c-format
-msgid "ftpfs: Disconnecting from %s"
-msgstr "ftpfs: Atvienošanās no %s"
-
-msgid " FTP: Password required for "
-msgstr " FTP: Parole tiek pieprasīta "
-
-msgid "ftpfs: sending login name"
-msgstr "ftpfs: sūtam pieteikumvārdu"
-
-msgid "ftpfs: sending user password"
-msgstr "ftpfs: sūtam lietotāja paroli"
-
-#, fuzzy, c-format
-msgid "FTP: Account required for user %s"
-msgstr " FTP: Parole tiek pieprasīta "
+#~ msgid " confirm &Delete "
+#~ msgstr " apstiprināt i&Zdzēšanu "
 
 #, fuzzy
-msgid "Account:"
-msgstr "Skaitīt"
+#~ msgid ""
+#~ " The current line number is %lld.\n"
+#~ " Enter the new line number:"
+#~ msgstr ""
+#~ " Pašreizējai līnijas nummurs ir %d.\n"
+#~ " Ievadi jaunu līnijas numuru:"
 
 #, fuzzy
-msgid "ftpfs: sending user account"
-msgstr "ftpfs: sūtam lietotāja paroli"
+#~ msgid ""
+#~ " The current address is %s.\n"
+#~ " Enter the new address:"
+#~ msgstr ""
+#~ " Pašreizējai līnijas nummurs ir %d.\n"
+#~ " Ievadi jaunu līnijas numuru:"
 
-msgid "ftpfs: logged in"
-msgstr "ftpfs: pieteikšanās veiksmīga"
+#~ msgid " Goto Address "
+#~ msgstr " Iet uz adresi "
 
-#, c-format
-msgid "ftpfs: Login incorrect for user %s "
-msgstr "ftpfs: lietotāja nepareiza %s pieteikšanās "
+#~ msgid "File: %s"
+#~ msgstr "Fails: %s"
 
-msgid "ftpfs: Invalid host name."
-msgstr "ftpfs: Nepareizs resursdatora nosaukums."
+#~ msgid "Offset 0x%08lx"
+#~ msgstr "Nobīde 0x%08lx"
 
-#, c-format
-msgid "ftpfs: %s"
-msgstr ""
-
-#, c-format
-msgid "ftpfs: making connection to %s"
-msgstr "ftpfs: veidojam savienojumu ar %s"
-
-msgid "ftpfs: connection interrupted by user"
-msgstr "ftpfs: savienojumu pātrauca lietotājs"
-
-#, c-format
-msgid "ftpfs: connection to server failed: %s"
-msgstr "ftpfs: savienojums ar serveri neizdevās: %s"
-
-#, c-format
-msgid "Waiting to retry... %d (Control-C to cancel)"
-msgstr "Gaidam atbildi... %d (Control-C lai atsauktu)"
+#~ msgid "%s bytes"
+#~ msgstr "%s baiti"
 
 #, fuzzy
-msgid "ftpfs: invalid address family"
-msgstr "ftpfs: Nepareiza resursdatora adrese."
-
-#, fuzzy, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: nevar uzstādīt pasīvo režīmu"
-
-#, fuzzy, c-format
-msgid "ftpfs: could not create socket: %s"
-msgstr " Nevar izveidot kontaktu: %s "
-
-msgid "ftpfs: could not setup passive mode"
-msgstr "ftpfs: nevar uzstādīt pasīvo režīmu"
-
-msgid "ftpfs: aborting transfer."
-msgstr "ftpfs: patraucu pārraidi."
-
-#, c-format
-msgid "ftpfs: abort error: %s"
-msgstr "ftpfs: pātraukšanas kļūda: %s"
-
-msgid "ftpfs: abort failed"
-msgstr "ftpfs: pātraukšana neizdevās"
-
-msgid "ftpfs: CWD failed."
-msgstr "ftpfs: CWD neizdevās."
-
-msgid "ftpfs: couldn't resolve symlink"
-msgstr "ftpfs: nevar iet par simbolsaiti"
-
-msgid "Resolving symlink..."
-msgstr "eju pa simbolsaiti"
-
-#, c-format
-msgid "ftpfs: Reading FTP directory %s... %s%s"
-msgstr "ftpfs: Lasu FTP direktoriju %s... %s%s"
-
-msgid "(strict rfc959)"
-msgstr "(strict rfc959)"
-
-msgid "(chdir first)"
-msgstr "(chdir vispirms)"
-
-msgid "ftpfs: failed; nowhere to fallback to"
-msgstr "ftpfs: neizdevās; nav kur atkrist"
-
-#, fuzzy, c-format
-msgid "ftpfs: storing file %lu (%lu)"
-msgstr "ftpfs: glabājam failu %d (%d)"
-
-msgid ""
-"~/.netrc file has incorrect mode.\n"
-"Remove password or correct mode."
-msgstr ""
-"~/.netrc failam nav pareizs režīms.\n"
-"Noņem paroli vai izlabo režīmu."
-
-msgid " MCFS "
-msgstr " MCFS "
-
-msgid " The server does not support this version "
-msgstr " Serveris neatbalsta šo versiju "
-
-msgid ""
-" The remote server is not running on a system port \n"
-" you need a password to log in, but the information may \n"
-" not be safe on the remote side.  Continue? \n"
-msgstr ""
-" Attālinātais serveris nestrādā ar sistēmas portu, \n"
-" uz kuru jūms būtu jāpiesakās, taču informācija \n"
-" var nebūt droša attālinātajā galā.  Turpināt? \n"
-
-msgid " MCFS Password required "
-msgstr " pieprasīta MCFS Parole "
-
-msgid " Invalid password "
-msgstr " Nepareiza parole "
-
-#, c-format
-msgid " Cannot locate hostname: %s "
-msgstr " Nevar atrast resursdatoru: %s "
-
-#, c-format
-msgid " Cannot create socket: %s "
-msgstr " Nevar izveidot kontaktu: %s "
-
-#, c-format
-msgid " Cannot connect to server: %s "
-msgstr " Nevar savienoties ar serveri: %s "
-
-msgid " Too many open connections "
-msgstr " Par daudz atvērtu konekciju "
-
-#, c-format
-msgid ""
-"Warning: Invalid line in %s:\n"
-"%s\n"
-msgstr ""
-"Brīdinājums: Nepareiza rindiņa iekš %s:\n"
-"%s\n"
-
-#, c-format
-msgid ""
-"Warning: Invalid flag %c in %s:\n"
-"%s\n"
-msgstr ""
-"Brīdinājums: Nepareizs karodziņš %c iekš %s:\n"
-"%s\n"
-
-#, c-format
-msgid ""
-" reconnect to %s failed\n"
-" "
-msgstr ""
-" neizdevās pārslēgties uz %s\n"
-" "
-
-msgid " Authentication failed "
-msgstr " Autentificēšana neizdevās"
-
-#, c-format
-msgid " Error %s creating directory %s "
-msgstr " %s izvdir'oju %s "
-
-#, c-format
-msgid " Error %s removing directory %s "
-msgstr " %s izdzdir'oju %s "
-
-#, c-format
-msgid " %s opening remote file %s "
-msgstr " %s attālinātās faila atvēršana %s "
-
-#, c-format
-msgid " %s removing remote file %s "
-msgstr " %s dzēšu attālināto failu %s "
-
-#, c-format
-msgid " %s renaming files\n"
-msgstr " %s failu pārsaukšana\n"
-
-#, c-format
-msgid ""
-"Cannot open tar archive\n"
-"%s"
-msgstr ""
-"Nevar atvērt tar arhīvu\n"
-"%s"
-
-msgid "Inconsistent tar archive"
-msgstr "Neatbilstīgs tar arhīvs"
-
-msgid "Unexpected EOF on archive file"
-msgstr "Negaidītas arhīva faila beigas (EOF)"
-
-#, c-format
-msgid ""
-"Hmm,...\n"
-"%s\n"
-"doesn't look like a tar archive."
-msgstr ""
-"Hmm,...\n"
-"%s\n"
-"neizskatās pēc tar arhīva."
-
-msgid " undelfs: error "
-msgstr " undelfs: kļūda "
-
-msgid " not enough memory "
-msgstr " par maz atmiņas "
-
-msgid " while allocating block buffer "
-msgstr " piešķirot bloka buferi "
-
-#, c-format
-msgid " open_inode_scan: %d "
-msgstr " open_inode_scan: %d "
-
-#, c-format
-msgid " while starting inode scan %d "
-msgstr " sāknējot inode skenāšanu %d "
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: lādēju izdzēsto failu informāciju %d inodes"
-
-#, c-format
-msgid " while calling ext2_block_iterate %d "
-msgstr " kamēr sauca ext2_block_iterate %d "
-
-msgid " no more memory while reallocating array "
-msgstr " nav vairāk atmiņas kamēr piešķir ietērpus "
-
-#, c-format
-msgid " while doing inode scan %d "
-msgstr " veicot inode skenēšanu %d "
-
-msgid " Ext2lib error "
-msgstr " Ext2lib kļūda "
-
-#, c-format
-msgid " Cannot open file %s "
-msgstr " Nevar atvērt failu %s "
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: lasu inode bitkarti..."
-
-#, c-format
-msgid ""
-" Cannot load inode bitmap from: \n"
-" %s \n"
-msgstr ""
-" Nevarēju ielādēt inode bitkarti no: \n"
-" %s \n"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: lasu bloka bitkarti..."
-
-#, c-format
-msgid ""
-" Cannot load block bitmap from: \n"
-" %s \n"
-msgstr ""
-" Nevarēja ielādēt bloka bitkarti no: \n"
-" %s \n"
-
-msgid " vfs_info is not fs! "
-msgstr " vfs_info nav fs! "
-
-msgid " You have to chdir to extract files first "
-msgstr " Tev papriekšu vajag chdir, lai atkompresētu failus "
-
-msgid " while iterating over blocks "
-msgstr " kamēr atkārto blokus"
-
-msgid "Cannot parse:"
-msgstr "Nevar izanalizēt:"
-
-msgid "More parsing errors will be ignored."
-msgstr "Turpmākās analīzes kļūdas tiks ignorētas."
-
-msgid "Internal error:"
-msgstr "Iekšējā kļūda:"
-
-msgid "Changes to file lost"
-msgstr "Izmaiņas failā pazudušas"
+#~ msgid ">= %s bytes"
+#~ msgstr "%s baiti"
 
 #~ msgid "File:       None"
 #~ msgstr "Fails:       Nekas"
@@ -4055,9 +4108,6 @@ msgstr "Izmaiņas failā pazudušas"
 
 #~ msgid "Replac"
 #~ msgstr "Aizvietot"
-
-#~ msgid "Move"
-#~ msgstr "Pārvietot"
 
 #~ msgid "Delete"
 #~ msgstr "Dzēst"
@@ -4433,9 +4483,6 @@ msgstr "Izmaiņas failā pazudušas"
 
 #~ msgid "Hex"
 #~ msgstr "Hex"
-
-#~ msgid "Goto"
-#~ msgstr "Ietuz"
 
 #~ msgid "Line"
 #~ msgstr "Līnija"

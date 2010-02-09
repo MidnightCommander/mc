@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.6.2\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-12-25 19:06+0200\n"
+"POT-Creation-Date: 2010-02-09 12:01+0200\n"
 "PO-Revision-Date: 2008-04-07 17:25+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian <debian-l10n-italian@lists.debian.org>\n"
@@ -19,79 +19,629 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid " Choose syntax highlighting "
-msgstr " Scegli la sintassi evidenziata "
-
-msgid "< Auto >"
-msgstr "< Auto >"
-
-msgid "< Reload Current Syntax >"
-msgstr "< Ricarica la sintassi corrente >"
-
-#, c-format
-msgid " Cannot open %s for reading "
-msgstr " Impossibile aprire %s in lettura "
-
-msgid "Error"
-msgstr "Errore"
-
-#, c-format
-msgid " Error reading from pipe: %s "
-msgstr " Errore leggendo dalla pipe: %s "
-
-#, c-format
-msgid " Cannot open pipe for reading: %s "
-msgstr " Impossibile aprire la pipe in lettura: %s "
-
-#, c-format
-msgid " Cannot get size/permissions for %s "
-msgstr " Impossibile ottenere dimensioni/permessi per %s "
-
-#, c-format
-msgid " %s is not a regular file "
-msgstr " %s non è un file regolare "
-
-#, c-format
-msgid " File %s is too large "
-msgstr " Il file %s è troppo grande "
-
-msgid " About "
-msgstr " Informazioni"
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                 Cooledit  v3.11.5\n"
-"\n"
-"   Copyright (C) 1996 Free Software Foundation  \n"
-"\n"
-"      Un editor semplice da usare scritto per\n"
-"              il Midnight Commander.\n"
-
-msgid "&OK"
-msgstr "&OK"
-
-msgid "Macro recursion is too deep"
-msgstr "La ricorsione macro è troppo profonda"
-
-msgid "Search"
-msgstr "Cerca"
-
 msgid " Search string not found "
 msgstr " La stringa cercata non è disponibile "
+
+msgid " Not implemented yet "
+msgstr ""
+
+msgid " Num of replace tokens not equal to num of found tokens "
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Invalid token number %d "
+msgstr " La maschera di destinazione è errata"
+
+msgid "Normal"
+msgstr ""
+
+msgid "&Regular expression"
+msgstr "Espressione &regolare"
+
+msgid "Hexadecimal"
+msgstr ""
+
+msgid "Wildcard search"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+msgid "Function key 1"
+msgstr "Tasto funzione  1"
+
+msgid "Function key 2"
+msgstr "Tasto funzione  2"
+
+msgid "Function key 3"
+msgstr "Tasto funzione  3"
+
+msgid "Function key 4"
+msgstr "Tasto funzione  4"
+
+msgid "Function key 5"
+msgstr "Tasto funzione  5"
+
+msgid "Function key 6"
+msgstr "Tasto funzione  6"
+
+msgid "Function key 7"
+msgstr "Tasto funzione  7"
+
+msgid "Function key 8"
+msgstr "Tasto funzione  8"
+
+msgid "Function key 9"
+msgstr "Tasto funzione  9"
+
+msgid "Function key 10"
+msgstr "Tasto funzione 10"
+
+msgid "Function key 11"
+msgstr "Tasto funzione 11"
+
+msgid "Function key 12"
+msgstr "Tasto funzione 12"
+
+msgid "Function key 13"
+msgstr "Tasto funzione 13"
+
+msgid "Function key 14"
+msgstr "Tasto funzione 14"
+
+msgid "Function key 15"
+msgstr "Tasto funzione 15"
+
+msgid "Function key 16"
+msgstr "Tasto funzione 16"
+
+msgid "Function key 17"
+msgstr "Tasto funzione 17"
+
+msgid "Function key 18"
+msgstr "Tasto funzione 18"
+
+msgid "Function key 19"
+msgstr "Tasto funzione 19"
+
+msgid "Function key 20"
+msgstr "Tasto funzione 20"
+
+msgid "Backspace key"
+msgstr "Tasto Backspace  "
+
+msgid "End key"
+msgstr "Tasto fine       "
+
+msgid "Up arrow key"
+msgstr "Freccia su       "
+
+msgid "Down arrow key"
+msgstr "Freccia giù      "
+
+msgid "Left arrow key"
+msgstr "Freccia sinistra "
+
+msgid "Right arrow key"
+msgstr "Freccia destra   "
+
+msgid "Home key"
+msgstr "Tasto inizio     "
+
+msgid "Page Down key"
+msgstr "Tasto pagina giù "
+
+msgid "Page Up key"
+msgstr "Tasto pagina su  "
+
+msgid "Insert key"
+msgstr "Tasto Ins        "
+
+msgid "Delete key"
+msgstr "Tasto Canc       "
+
+msgid "Completion/M-tab"
+msgstr "Completam./M-Tab "
+
+msgid "+ on keypad"
+msgstr "+ sul tastierino "
+
+msgid "- on keypad"
+msgstr "- sul tastierino "
+
+msgid "Slash on keypad"
+msgstr "/ sul tastierino"
+
+msgid "* on keypad"
+msgstr "* sul tastierino "
+
+#, fuzzy
+msgid "Escape key"
+msgstr "/ sul tastierino"
+
+msgid "Left arrow keypad"
+msgstr "Freccia a sinistra sul tastierino"
+
+msgid "Right arrow keypad"
+msgstr "Freccia a destra sul tastierino"
+
+msgid "Up arrow keypad"
+msgstr "Freccia su sul tastierino"
+
+msgid "Down arrow keypad"
+msgstr "Freccia giù sul tastierino"
+
+msgid "Home on keypad"
+msgstr "Inizio sul tastierino"
+
+msgid "End on keypad"
+msgstr "Fine sul tastierino"
+
+msgid "Page Down keypad"
+msgstr "Pagina giù sul tastierino"
+
+msgid "Page Up keypad"
+msgstr "Pagina su sul tastierino"
+
+msgid "Insert on keypad"
+msgstr "Ins sul tastierino"
+
+msgid "Delete on keypad"
+msgstr "Canc sul tastierino"
+
+msgid "Enter on keypad"
+msgstr "Invio sul tastierino"
+
+#, fuzzy
+msgid "Function key 21"
+msgstr "Tasto funzione  1"
+
+#, fuzzy
+msgid "Function key 22"
+msgstr "Tasto funzione  2"
+
+#, fuzzy
+msgid "Function key 23"
+msgstr "Tasto funzione  2"
+
+#, fuzzy
+msgid "Function key 24"
+msgstr "Tasto funzione  2"
+
+msgid "Plus"
+msgstr ""
+
+#, fuzzy
+msgid "Minus"
+msgstr "Menu"
+
+msgid "Asterisk"
+msgstr ""
+
+msgid "Dot"
+msgstr ""
+
+msgid "Less than"
+msgstr ""
+
+msgid "Great than"
+msgstr ""
+
+msgid "Equal"
+msgstr ""
+
+#, fuzzy
+msgid "Comma"
+msgstr "Comando"
+
+msgid "Apostrophe"
+msgstr ""
+
+#, fuzzy
+msgid "Colon"
+msgstr "Totale"
+
+msgid "Exclamation mark"
+msgstr ""
+
+msgid "Question mark"
+msgstr ""
+
+#, fuzzy
+msgid "Ampersand"
+msgstr "Atta&cca"
+
+msgid "Dollar sign"
+msgstr ""
+
+msgid "Quotation mark"
+msgstr ""
+
+#, fuzzy
+msgid "Caret"
+msgstr "Destinaz"
+
+msgid "Tilda"
+msgstr ""
+
+#, fuzzy
+msgid "Prime"
+msgstr "Precedente"
+
+#, fuzzy
+msgid "Underline"
+msgstr " Riga: "
+
+msgid "Understrike"
+msgstr ""
+
+msgid "Pipe"
+msgstr ""
+
+#, fuzzy
+msgid "Enter"
+msgstr "propr."
+
+#, fuzzy
+msgid "Tab key"
+msgstr "+ sul tastierino "
+
+#, fuzzy
+msgid "Space key"
+msgstr "/ sul tastierino"
+
+#, fuzzy
+msgid "Slash key"
+msgstr "/ sul tastierino"
+
+#, fuzzy
+msgid "Backslash key"
+msgstr "Tasto Backspace  "
+
+msgid "Number sign #"
+msgstr ""
+
+msgid "Ctrl"
+msgstr ""
+
+msgid "Alt"
+msgstr ""
+
+msgid "Shift"
+msgstr ""
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"Schermo di dimensione %dx%d non supportato.\n"
+"Controllare la variabile ambiente TERM.\n"
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
+
+#, c-format
+msgid "%s is not a directory\n"
+msgstr "%s non è una directory\n"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr "La directory %s non è di Vostra proprietà\n"
+
+#, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr "Impossibile impostare correttamente i permessi per la directory %s\n"
+
+#, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr "Non posso creare la directory temporanea %s: %s\n"
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr "I file temporanei verranno creati in %s\n"
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr "I file temporanei non verranno creati\n"
+
+#, c-format
+msgid "Press any key to continue..."
+msgstr "Premi un tasto per continuare..."
 
 msgid "Warning"
 msgstr "Attenzione"
 
-msgid " File has hard-links. Detach before saving? "
-msgstr "Il file ha collegamenti (link) hard. Scollegarli prima di salvare?"
+msgid " Pipe failed "
+msgstr " Pipe fallita "
+
+msgid " Dup failed "
+msgstr " Dup fallita "
+
+#, c-format
+msgid ""
+"Cannot open cpio archive\n"
+"%s"
+msgstr ""
+"Non posso aprire l'archivio cpio\n"
+"%s"
+
+#, c-format
+msgid ""
+"Premature end of cpio archive\n"
+"%s"
+msgstr ""
+"Fine prematura di un archivio cpio\n"
+"%s"
+
+#, c-format
+msgid ""
+"Inconsistent hardlinks of\n"
+"%s\n"
+"in cpio archive\n"
+"%s"
+msgstr ""
+"Collegamenti fisici inconsistenti di\n"
+"%s\n"
+"in archivio cpio\n"
+"%s"
+
+#, c-format
+msgid "%s contains duplicate entries! Skipping!"
+msgstr "%s contiene voci duplicate! Saltato!"
+
+#, c-format
+msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"Trovata intestazione cpio rovinata in\n"
+"%s"
+
+#, c-format
+msgid ""
+"Unexpected end of file\n"
+"%s"
+msgstr ""
+"Inattesa fine del file\n"
+"%s"
+
+#, c-format
+msgid "Directory cache expired for %s"
+msgstr "Cache dir scaduta per %s"
+
+msgid "Starting linear transfer..."
+msgstr "Inizio trasferimento lineare..."
+
+#, c-format
+msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+msgstr "%s: %s: %s %3d%% (%lu byte trasferiti)"
+
+#, c-format
+msgid "%s: %s: %s %lu bytes transferred"
+msgstr "%s: %s: %s %lu byte trasferiti"
+
+msgid "Getting file"
+msgstr "Ottenuto file "
+
+#, c-format
+msgid ""
+"Cannot open %s archive\n"
+"%s"
+msgstr ""
+"Non posso aprire l'archivio %s\n"
+"%s"
+
+msgid "Inconsistent extfs archive"
+msgstr "Archivio extfs inconsistente"
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Attenzione: file %s non trovato\n"
+
+#, c-format
+msgid "fish: Disconnecting from %s"
+msgstr "fish: disconnessione da %s"
+
+msgid "fish: Waiting for initial line..."
+msgstr "fish: attesa riga iniziale..."
+
+msgid "Sorry, we cannot do password authenticated connections for now."
+msgstr "Spiacente, non posso fare connessioni autenticate per adesso."
+
+msgid " fish: Password required for "
+msgstr " fish: password richiesta per "
+
+msgid "fish: Sending password..."
+msgstr "fish: spedizione password..."
+
+msgid "fish: Sending initial line..."
+msgstr "fish: spedizione riga iniziale..."
+
+msgid "fish: Handshaking version..."
+msgstr "fish: versione handshaking..."
+
+msgid "fish: Setting up current directory..."
+msgstr "fish: impostazione directory corrente..."
+
+#, c-format
+msgid "fish: Connected, home %s."
+msgstr "fish: connesso a %s"
+
+#, c-format
+msgid "fish: Reading directory %s..."
+msgstr "fish: lettura directory FTP %s..."
+
+#, c-format
+msgid "%s: done."
+msgstr "%s: fatto."
+
+#, c-format
+msgid "%s: failure"
+msgstr "%s: errore"
+
+#, c-format
+msgid "fish: store %s: sending command..."
+msgstr "fish: memorizza %s: spedizione comando..."
+
+msgid "fish: Local read failed, sending zeros"
+msgstr "fish: lettura locale fallita, spedizione zeri"
+
+#, c-format
+msgid "fish: storing %s %d (%lu)"
+msgstr "fish: memorizzazione %s %d (%lu)"
+
+msgid "zeros"
+msgstr "zeri"
+
+msgid "file"
+msgstr "file"
+
+msgid "Aborting transfer..."
+msgstr "Interruzione trasferimento..."
+
+msgid "Error reported after abort."
+msgstr "Errori dopo l'interruzione."
+
+msgid "Aborted transfer would be successful."
+msgstr "L'interruzione trasferimento sarebbe riuscita."
+
+#, c-format
+msgid "ftpfs: Disconnecting from %s"
+msgstr "ftpfs: disconnessione da %s"
+
+msgid " FTP: Password required for "
+msgstr " FTP: password richiesta per "
+
+msgid "ftpfs: sending login name"
+msgstr "ftpfs: spedizione nome utente"
+
+msgid "ftpfs: sending user password"
+msgstr "ftpfs: spedizione password utente"
+
+#, c-format
+msgid "FTP: Account required for user %s"
+msgstr "FTP: si richiede un account per l'utente %s"
+
+msgid "Account:"
+msgstr "Account:"
+
+msgid "ftpfs: sending user account"
+msgstr "ftpfs: spedizione account utente"
+
+msgid "ftpfs: logged in"
+msgstr "ftpfs: connessione effettuata"
+
+#, c-format
+msgid "ftpfs: Login incorrect for user %s "
+msgstr "ftpfs: login errato per utente %s "
+
+msgid "ftpfs: Invalid host name."
+msgstr "ftpfs: nome host non valido."
+
+#, c-format
+msgid "ftpfs: %s"
+msgstr ""
+
+#, c-format
+msgid "ftpfs: making connection to %s"
+msgstr "ftpfs: mi sto connettendo a %s"
+
+msgid "ftpfs: connection interrupted by user"
+msgstr "ftpfs: connessione interrotta dall'utente"
+
+#, c-format
+msgid "ftpfs: connection to server failed: %s"
+msgstr "ftpfs: connessione al server fallita: %s"
+
+#, c-format
+msgid "Waiting to retry... %d (Control-C to cancel)"
+msgstr "In attesa di riprovare...%d (Control-C per annullare)"
+
+#, fuzzy
+msgid "ftpfs: invalid address family"
+msgstr "ftpfs: indirizzo host non valido."
+
+#, fuzzy, c-format
+msgid "ftpfs: could not setup passive mode: %s"
+msgstr "ftpfs: non è possibile impostare la modalità passiva"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not create socket: %s"
+msgstr " Non riesco a creare il socket: %s "
+
+msgid "ftpfs: could not setup passive mode"
+msgstr "ftpfs: non è possibile impostare la modalità passiva"
+
+msgid "ftpfs: aborting transfer."
+msgstr "ftpfs: interruzione del trasferimento."
+
+#, c-format
+msgid "ftpfs: abort error: %s"
+msgstr "ftpfs: errore di interruzione: %s"
+
+msgid "ftpfs: abort failed"
+msgstr "ftpfs: interruzione fallita"
+
+msgid "ftpfs: CWD failed."
+msgstr "ftpfs: CWD fallito."
+
+msgid "ftpfs: couldn't resolve symlink"
+msgstr "ftpfs: non posso risolvere i collegamenti simbolici"
+
+msgid "Resolving symlink..."
+msgstr "Sto risolvendo il collegamenti simbolici..."
+
+#, c-format
+msgid "ftpfs: Reading FTP directory %s... %s%s"
+msgstr "ftpfs: lettura directory FTP %s... %s%s"
+
+msgid "(strict rfc959)"
+msgstr "(strettamente rfc959)"
+
+msgid "(chdir first)"
+msgstr "(antepone chdir)"
+
+msgid "ftpfs: failed; nowhere to fallback to"
+msgstr "ftpfs: fallito; non so dove rileggere"
+
+#, c-format
+msgid "ftpfs: storing file %lu (%lu)"
+msgstr "ftpfs: memorizzazione file %lu (%lu)"
+
+msgid ""
+"~/.netrc file has incorrect mode.\n"
+"Remove password or correct mode."
+msgstr ""
+"il file ~/.netrc è impostato male.\n"
+"Rimuovere la password o correggere i permessi."
+
+msgid " MCFS "
+msgstr " MCFS "
+
+msgid " The server does not support this version "
+msgstr " Il server non supporta questa versione"
+
+msgid ""
+" The remote server is not running on a system port \n"
+" you need a password to log in, but the information may \n"
+" not be safe on the remote side.  Continue? \n"
+msgstr ""
+" Il server remoto non sta funzionando su una porta di sistema \n"
+" è necessaria una password per entrare, ma la trasmissione \n"
+" potrebbe non essere sicura sul lato remoto. Continuare? \n"
 
 msgid "&Yes"
 msgstr " &Si"
@@ -99,664 +649,185 @@ msgstr " &Si"
 msgid "&No"
 msgstr "&No"
 
+msgid " MCFS Password required "
+msgstr "Richiesta password MCFS "
+
+msgid " Invalid password "
+msgstr " Password errata"
+
+#, c-format
+msgid " Cannot locate hostname: %s "
+msgstr "Nome host irraggiungibile: %s "
+
+#, c-format
+msgid " Cannot create socket: %s "
+msgstr " Non riesco a creare il socket: %s "
+
+#, c-format
+msgid " Cannot connect to server: %s "
+msgstr " Non riesco a connettermi al server: %s "
+
+msgid " Too many open connections "
+msgstr " Troppe connessioni aperte "
+
+#, c-format
+msgid ""
+"Warning: Invalid line in %s:\n"
+"%s\n"
+msgstr ""
+"Attenzione: riga non valida in %s:\n"
+"%s\n"
+
+#, c-format
+msgid ""
+"Warning: Invalid flag %c in %s:\n"
+"%s\n"
+msgstr ""
+"Attenzione: flag %c non valida in %s:\n"
+"%s\n"
+
+#, c-format
+msgid ""
+" reconnect to %s failed\n"
+" "
+msgstr ""
+" riconnessione a %s fallita\n"
+" "
+
+msgid " Authentication failed "
+msgstr " Autenticazione fallita "
+
+#, c-format
+msgid " Error %s creating directory %s "
+msgstr " Errore %s nella creazione dir %s "
+
+#, c-format
+msgid " Error %s removing directory %s "
+msgstr " Errore %s nella rimozione dir %s "
+
+#, c-format
+msgid " %s opening remote file %s "
+msgstr " %s apertura file remoto %s "
+
+#, c-format
+msgid " %s removing remote file %s "
+msgstr " %s rimozione file remoto %s "
+
+#, c-format
+msgid " %s renaming files\n"
+msgstr " %s rinomina file\n"
+
+#, c-format
+msgid ""
+"Cannot open tar archive\n"
+"%s"
+msgstr ""
+"Non posso aprire l'archivio tar\n"
+"%s"
+
+msgid "Inconsistent tar archive"
+msgstr "Archivio tar inconsistente"
+
+msgid "Unexpected EOF on archive file"
+msgstr "Inatteso EOF in file archivio"
+
+#, c-format
+msgid ""
+"Hmm,...\n"
+"%s\n"
+"doesn't look like a tar archive."
+msgstr ""
+"Hmm,...\n"
+"%s\n"
+"non sembra un archivio tar."
+
+msgid " undelfs: error "
+msgstr " undelfs: errore "
+
+msgid " not enough memory "
+msgstr " memoria insufficente "
+
+msgid " while allocating block buffer "
+msgstr " durante l'allocazione buffer blocchi "
+
+#, c-format
+msgid " open_inode_scan: %d "
+msgstr " open_inode_scan: %d "
+
+#, c-format
+msgid " while starting inode scan %d "
+msgstr " durante inizio scansione inode %d "
+
+#, c-format
+msgid "undelfs: loading deleted files information %d inodes"
+msgstr "undelfs: caricamento informazioni file eliminati %d inode"
+
+#, c-format
+msgid " while calling ext2_block_iterate %d "
+msgstr " durante la chiamata ext2_block_iterate %d "
+
+msgid " no more memory while reallocating array "
+msgstr " memoria esaurita durante riallocazione array "
+
+#, c-format
+msgid " while doing inode scan %d "
+msgstr " durante scansione inode %d "
+
+msgid " Ext2lib error "
+msgstr " Errore ext2lib "
+
+#, c-format
+msgid " Cannot open file %s "
+msgstr " Non posso aprire il file %s "
+
+msgid "undelfs: reading inode bitmap..."
+msgstr "undelfs: lettura bitmap inode..."
+
+#, c-format
+msgid ""
+" Cannot load inode bitmap from: \n"
+" %s \n"
+msgstr ""
+" Impossibile caricare bitmap inode da: \n"
+" %s \n"
+
+msgid "undelfs: reading block bitmap..."
+msgstr "undelfs: lettura bitmap blocchi..."
+
+#, c-format
+msgid ""
+" Cannot load block bitmap from: \n"
+" %s \n"
+msgstr ""
+" Impossibile caricare bitmap blocchi da: \n"
+" %s \n"
+
+msgid " vfs_info is not fs! "
+msgstr " vfs_info non è fs! "
+
+msgid " You have to chdir to extract files first "
+msgstr " Devi prima fare chdir per estrarre i file "
+
+msgid " while iterating over blocks "
+msgstr " durante l'iterazione sui blocchi "
+
+msgid "Cannot parse:"
+msgstr "Non riesco ad analizzare:"
+
+msgid "More parsing errors will be ignored."
+msgstr "Più errori di analisi saranno ignorati."
+
+msgid "Internal error:"
+msgstr " Errore interno:"
+
+msgid "Password:"
+msgstr "Password:"
+
+msgid "Changes to file lost"
+msgstr "Cambiamenti al file persi"
+
 msgid "&Cancel"
 msgstr "&Annulla"
-
-msgid "The file has been modified in the meantime. Save anyway?"
-msgstr "Il file è stato modificato nel frattempo. Salvare comunque?"
-
-msgid " Error writing to pipe: "
-msgstr " Errore nello scrivere sulla pipe: "
-
-msgid " Cannot open pipe for writing: "
-msgstr " Impossibile aprire la pipe in scrittura: "
-
-#, fuzzy, c-format
-msgid " Cannot open file for writing: %s "
-msgstr " Impossibile aprire la pipe in scrittura: "
-
-#, fuzzy
-msgid "&Quick save"
-msgstr "Salva veloce"
-
-#, fuzzy
-msgid "&Safe save"
-msgstr "Salva sicuro"
-
-msgid "&Do backups with following extension:"
-msgstr ""
-
-msgid "Check &POSIX new line"
-msgstr ""
-
-msgid " Edit Save Mode "
-msgstr " Modifica modo salvataggio"
-
-msgid "The file you are saving is not finished with a newline"
-msgstr ""
-
-msgid "C&ontinue"
-msgstr "C&ontinua"
-
-msgid "&Do not change"
-msgstr ""
-
-msgid "&Unix format (LF)"
-msgstr ""
-
-msgid "&Windows/DOS format (CR LF)"
-msgstr ""
-
-msgid "&Macintosh format (CR)"
-msgstr ""
-
-msgid "Change line breaks to:"
-msgstr ""
-
-msgid " Enter file name: "
-msgstr " Inserire nome file: "
-
-msgid " Save As "
-msgstr " Salva come "
-
-msgid " A file already exists with this name. "
-msgstr " Un file con lo stesso nome esiste già. "
-
-msgid "&Overwrite"
-msgstr "S&ovrascrivi"
-
-msgid " Cannot save file. "
-msgstr " Errore nel salvataggio del file. "
-
-msgid " Delete macro "
-msgstr " Elimina macro "
-
-msgid " Cannot open temp file "
-msgstr " Impossibile aprirefile temporaneo "
-
-msgid " Cannot open macro file "
-msgstr " Impossibile aprire il file delle macro "
-
-msgid " Cannot overwrite macro file "
-msgstr " Impossibile sovrascrivere il file delle macro "
-
-msgid " Save macro "
-msgstr " Salva macro "
-
-msgid " Press the macro's new hotkey: "
-msgstr " Premi nuovo tasto veloce macro: "
-
-msgid " Press macro hotkey: "
-msgstr " Premere tasto macro: "
-
-msgid " Load macro "
-msgstr " Carica macro "
-
-msgid " Confirm save file? : "
-msgstr " Conferma salvataggio file? "
-
-msgid " Save file "
-msgstr " Salva il file "
-
-msgid "&Save"
-msgstr "&Salva"
-
-msgid ""
-" Current text was modified without a file save. \n"
-" Continue discards these changes. "
-msgstr ""
-" Il testo corrente è stato modificato senza salvare \n"
-" Continuando si perdono tutte le modifiche. "
-
-msgid "Syntax file edit"
-msgstr "Modifica il file della sintassi"
-
-msgid " Which syntax file you want to edit? "
-msgstr " Quale file della sintassi vuoi modificare? "
-
-msgid "&User"
-msgstr "&Utente"
-
-msgid "&System Wide"
-msgstr "di &Sistema"
-
-msgid " Menu edit "
-msgstr " Modifica menu "
-
-msgid " Which menu file do you want to edit? "
-msgstr " Quale file menu vuoi modificare? "
-
-msgid "&Local"
-msgstr "&Locale"
-
-msgid " Load "
-msgstr " Carica "
-
-msgid " Block is large, you may not be able to undo this action. "
-msgstr " Il blocco è grande, potresti non riuscire ad annullare l'azione. "
-
-#, fuzzy
-msgid "Replace"
-msgstr "&Rimpiazza"
-
-msgid " Replace "
-msgstr " Rimpiazza "
-
-#, c-format
-msgid " %ld replacements made. "
-msgstr " Eseguite %ld sostituzioni. "
-
-msgid "Quit"
-msgstr "Esci"
-
-msgid " File was modified, Save with exit? "
-msgstr " Il file è stato modificato. Lo salvo uscendo? "
-
-msgid "&Cancel quit"
-msgstr "Annulla l'us&cita"
-
-msgid " Error "
-msgstr " Errore "
-
-msgid " This function is not implemented. "
-msgstr " Questa funzione non è stata implementata. "
-
-msgid " Copy to clipboard "
-msgstr " Copia negli appunti "
-
-msgid " Unable to save to file. "
-msgstr " Impossibile salvare il file. "
-
-msgid " Cut to clipboard "
-msgstr " Taglia negli appunti "
-
-msgid " Goto line "
-msgstr " Vai alla riga "
-
-msgid " Enter line: "
-msgstr " Riga: "
-
-msgid " Save Block "
-msgstr " Salva blocco evidenziato "
-
-msgid " Insert File "
-msgstr " Inserisci file "
-
-msgid " Cannot insert file. "
-msgstr " Errore nell'inserimento del file "
-
-msgid " Sort block "
-msgstr " Ordina "
-
-msgid " You must first highlight a block of text. "
-msgstr " Seleziona prima una parte di testo "
-
-msgid " Run Sort "
-msgstr " Ordina il testo "
-
-msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr " Inserisci opzioni di ordinamento (vedi man sort) separate da spazi: "
-
-msgid " Sort "
-msgstr " Ordina "
-
-msgid " Cannot execute sort command "
-msgstr " Impossibile eseguire il comando sort "
-
-msgid " Sort returned non-zero: "
-msgstr " Il comando sort è uscito con valore non-zero: "
-
-msgid "Paste output of external command"
-msgstr "Incolla l'uscita del comando esterno"
-
-msgid "Enter shell command(s):"
-msgstr "Inserire comandi shell:"
-
-msgid "External command"
-msgstr "Comando esterno"
-
-msgid "Cannot execute command"
-msgstr "Impossibile eseguire il comando"
-
-msgid "Error creating script:"
-msgstr "Errore durante la creazione dello script:"
-
-msgid "Error reading script:"
-msgstr "Errore durante la lettura dello script:"
-
-msgid "Error closing script:"
-msgstr "Errore durante la chiusura dello script:"
-
-msgid "Script created:"
-msgstr "Script creato:"
-
-msgid "Process block"
-msgstr "Elabora blocco"
-
-msgid " Copies to"
-msgstr " Copie a"
-
-msgid " Subject"
-msgstr " Soggetto"
-
-msgid " To"
-msgstr " A"
-
-msgid " mail -s <subject> -c <cc> <to>"
-msgstr " mail -s <soggetto> -c <cc> <a>"
-
-msgid " Mail "
-msgstr " Posta "
-
-msgid " Insert Literal "
-msgstr " Ins. letteralmente "
-
-msgid " Press any key: "
-msgstr " Premere un tasto: "
-
-msgid " Execute Macro "
-msgstr " Esegue macro "
-
-msgid "All charsets"
-msgstr ""
-
-#, fuzzy
-msgid "&Whole words"
-msgstr "Solo &parole intere"
-
-#, fuzzy
-msgid "In se&lection"
-msgstr "Inver&ti selezione      M-*"
-
-msgid "&Backwards"
-msgstr "&Indietro"
-
-msgid "case &Sensitive"
-msgstr "Controllo &maiuscole/minuscole"
-
-msgid " Enter replacement string:"
-msgstr " Inserire stringa di sostituzione:"
-
-msgid " Enter search string:"
-msgstr " Inserire la stringa di ricerca:"
-
-#, fuzzy
-msgid "&Find all"
-msgstr " Trova file "
-
-msgid "Cancel"
-msgstr "Annulla"
-
-msgid "&Skip"
-msgstr "&Salta"
-
-msgid "A&ll"
-msgstr "&Tutti"
-
-msgid "&Replace"
-msgstr "&Rimpiazza"
-
-msgid " Replace with: "
-msgstr " Sostituisci con: "
-
-msgid " Confirm replace "
-msgstr " Conferma sostituzione"
-
-msgid "&Dismiss"
-msgstr "&Chiudi"
-
-#, c-format
-msgid ""
-"File \"%s\" is already being edited\n"
-"User: %s\n"
-"Process ID: %d"
-msgstr ""
-"Il file \"%s\" è già stato modificato\n"
-"Utente: %s\n"
-"ID Processo: %d"
-
-msgid "File locked"
-msgstr "File bloccato da lock"
-
-msgid "&Grab lock"
-msgstr "&Cattura lock"
-
-msgid "&Ignore lock"
-msgstr "&Ignora lock"
-
-msgid "&Open file..."
-msgstr "&Apri file..."
-
-#, fuzzy
-msgid "&New"
-msgstr "&Nome"
-
-#, fuzzy
-msgid "Save &as..."
-msgstr "Sal&va configurazione..."
-
-#, fuzzy
-msgid "&Insert file..."
-msgstr "Inserisci &file..  F15"
-
-#, fuzzy
-msgid "Cop&y to file..."
-msgstr "&Copia su file...  C-f"
-
-#, fuzzy
-msgid "&User menu..."
-msgstr "&Menu utente       F11"
-
-#, fuzzy
-msgid "A&bout..."
-msgstr "&Aspetto..."
-
-msgid "&Quit"
-msgstr "&Uscita"
-
-#, fuzzy
-msgid "&Toggle mark"
-msgstr "&Canc. marc."
-
-msgid "&Mark columns"
-msgstr ""
-
-#, fuzzy
-msgid "Toggle &ins/overw"
-msgstr "&Attiva/disattiva Ins"
-
-#, fuzzy
-msgid "&Copy"
-msgstr "Copia"
-
-msgid "&Move"
-msgstr "&Sposta"
-
-msgid "&Delete"
-msgstr "&Elimina"
-
-#, fuzzy
-msgid "C&opy to clipfile"
-msgstr "Copia su &file...    "
-
-#, fuzzy
-msgid "C&ut to clipfile"
-msgstr "Vai a&lla riga...               M-l"
-
-msgid "&Paste from clipfile"
-msgstr ""
-
-#, fuzzy
-msgid "Toggle bookmar&k"
-msgstr "Se&leziona/deselez.  F3"
-
-#, fuzzy
-msgid "&Next bookmark"
-msgstr "&Imp. marc."
-
-#, fuzzy
-msgid "Pre&v bookmark"
-msgstr "&Ordina...                      M-t"
-
-#, fuzzy
-msgid "&Flush bookmark"
-msgstr "&Posta..."
-
-msgid "&Undo"
-msgstr ""
-
-msgid "&Beginning"
-msgstr ""
-
-#, fuzzy
-msgid "&End"
-msgstr "&Inode"
-
-#, fuzzy
-msgid "&Search..."
-msgstr "Cerca"
-
-#, fuzzy
-msgid "Search &again"
-msgstr "&Ripeti cerca     F17"
-
-#, fuzzy
-msgid "&Replace..."
-msgstr "&Rimpiazza"
-
-#, fuzzy
-msgid "&Go to line..."
-msgstr " Vai alla riga "
-
-#, fuzzy
-msgid "Toggle li&ne state"
-msgstr "Se&leziona/deselez.  F3"
-
-#, fuzzy
-msgid "Go to matching &bracket"
-msgstr "&Vai alla parentesi relativa    M-b"
-
-#, fuzzy
-msgid "Find declaration"
-msgstr "Trova respinti dopo il patching"
-
-msgid "Back from declaration"
-msgstr ""
-
-msgid "Forward to declaration"
-msgstr ""
-
-#, fuzzy
-msgid "Encod&ing..."
-msgstr "&Ordina...                      M-t"
-
-#, fuzzy
-msgid "&Refresh screen"
-msgstr "&Aggiorna lo schermo            C-l"
-
-#, fuzzy
-msgid "&Start record macro"
-msgstr "&Registra nuova macro           C-r"
-
-#, fuzzy
-msgid "&Finish record macro..."
-msgstr "&Blocca registrazione macro...  C-r"
-
-#, fuzzy
-msgid "&Execute macro..."
-msgstr "&Esegui macro...         C-a, TASTO"
-
-#, fuzzy
-msgid "Delete macr&o..."
-msgstr " Elimina macro "
-
-#, fuzzy
-msgid "'ispell' s&pell check"
-msgstr "&Controllo ortografico          C-p"
-
-#, fuzzy
-msgid "&Mail..."
-msgstr "&Filtro"
-
-#, fuzzy
-msgid "Insert &literal..."
-msgstr "&Inserisci letteralmente        C-q"
-
-#, fuzzy
-msgid "Insert &date/time"
-msgstr "Inserisci &data/ora"
-
-#, fuzzy
-msgid "Format p&aragraph"
-msgstr "&Formatta paragrafo             M-p"
-
-#, fuzzy
-msgid "Sor&t..."
-msgstr "&Ordina per..."
-
-#, fuzzy
-msgid "Paste o&utput of..."
-msgstr "Incolla l'&uscita di...         M-u"
-
-#, fuzzy
-msgid "E&xternal formatter"
-msgstr "Forma&ttatore Esterno           F19"
-
-msgid "&General...  "
-msgstr "&Generale...  "
-
-#, fuzzy
-msgid "Save &mode..."
-msgstr "&Modalità di salvataggio..."
-
-#, fuzzy
-msgid "Learn &keys..."
-msgstr "&Impara tasti..."
-
-#, fuzzy
-msgid "Syntax &highlighting..."
-msgstr "&Sintassi evidenziata..."
-
-#, fuzzy
-msgid "S&yntax file"
-msgstr "Modifica il file della sintassi"
-
-#, fuzzy
-msgid "&Menu file"
-msgstr "Modifica file &menu"
-
-msgid "&Save setup"
-msgstr "&Salva configurazione"
-
-#, fuzzy
-msgid "&File"
-msgstr "File"
-
-#, fuzzy
-msgid "&Edit"
-msgstr "Cambia"
-
-#, fuzzy
-msgid "&Search"
-msgstr "Cerca"
-
-#, fuzzy
-msgid "&Command"
-msgstr "Comando"
-
-#, fuzzy
-msgid "For&mat"
-msgstr "Scorda"
-
-#, fuzzy
-msgid "&Options"
-msgstr " &Opzioni "
-
-msgid "None"
-msgstr "Niente"
-
-msgid "Dynamic paragraphing"
-msgstr "Paragrafi dinamici"
-
-msgid "Type writer wrap"
-msgstr "A capo automatico"
-
-msgid "Word wrap line length: "
-msgstr "Auto a capo colonna: "
-
-msgid "Cursor beyond end of line"
-msgstr ""
-
-#, fuzzy
-msgid "Pers&istent selection"
-msgstr "Inver&ti selezione      M-*"
-
-msgid "Synta&x highlighting"
-msgstr "Sintassi &evidenziata"
-
-msgid "Visible tabs"
-msgstr ""
-
-msgid "Visible trailing spaces"
-msgstr ""
-
-msgid "Save file &position"
-msgstr "&Salva posizione file"
-
-msgid "Confir&m before saving"
-msgstr "Confer&ma prima di salvare"
-
-msgid "&Return does autoindent"
-msgstr "Invio a&utoindenta"
-
-msgid "Tab spacing: "
-msgstr "Spaziatura tabulatori: "
-
-msgid "Fill tabs with &spaces"
-msgstr "&Riempie i tabulatori di spazi"
-
-msgid "&Backspace through tabs"
-msgstr "&Backspace attraverso i tab"
-
-msgid "&Fake half tabs"
-msgstr "&Imbroglia i mezzi tab"
-
-msgid "Wrap mode"
-msgstr "Modalità a capo"
-
-msgid " Editor options "
-msgstr " Opzioni editor"
-
-msgid "ButtonBar|Help"
-msgstr "Aiuto"
-
-msgid "ButtonBar|Save"
-msgstr "Salva"
-
-#, fuzzy
-msgid "ButtonBar|Mark"
-msgstr "Filtrat"
-
-#, fuzzy
-msgid "ButtonBar|Replac"
-msgstr "Normale"
-
-#, fuzzy
-msgid "ButtonBar|Copy"
-msgstr "Aiuto"
-
-#, fuzzy
-msgid "ButtonBar|Move"
-msgstr "Salva"
-
-msgid "ButtonBar|Search"
-msgstr "Cerca"
-
-#, fuzzy
-msgid "ButtonBar|Delete"
-msgstr "Aiuto"
-
-#, fuzzy
-msgid "ButtonBar|PullDn"
-msgstr "Aiuto"
-
-msgid "ButtonBar|Quit"
-msgstr "Esci"
-
-msgid " Load syntax file "
-msgstr " Carica file sintassi "
-
-#, c-format
-msgid ""
-" Cannot open file %s \n"
-" %s "
-msgstr ""
-" Non posso aprire il file %s \n"
-" %s "
-
-#, c-format
-msgid " Error in file %s on line %d "
-msgstr " Errore nel file %s alla riga %d "
 
 msgid "&Set"
 msgstr "&Imposta"
@@ -988,6 +1059,9 @@ msgstr "Modalità lista"
 msgid "user &Mini status"
 msgstr "&Mini stato utente"
 
+msgid "&OK"
+msgstr "&OK"
+
 msgid "&Reverse"
 msgstr "Inve&rso"
 
@@ -1001,23 +1075,35 @@ msgstr ""
 msgid "Sort order"
 msgstr "Modalità ordinamento"
 
-msgid " Confirmation "
+#, fuzzy
+msgid "Confirmation"
 msgstr " Conferme "
 
-msgid " confirm di&Rectory hotlist delete "
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+#, fuzzy
+msgid "Confirmation|&History cleanup"
+msgstr " Conferme "
+
+#, fuzzy
+msgid "Confirmation|&Directory hotlist delete"
 msgstr " conferma cancellazione di&r favorite "
 
-msgid " confirm &Exit "
-msgstr "&Uscita"
+#, fuzzy
+msgid "Confirmation|E&xit"
+msgstr " Conferme "
 
-msgid " confirm e&Xecute "
-msgstr "&Esecuzione "
+#, fuzzy
+msgid "Confirmation|&Execute"
+msgstr " Conferme "
 
-msgid " confirm o&Verwrite "
+#, fuzzy
+msgid "Confirmation|O&verwrite"
 msgstr "&Sovrascrittura "
 
-msgid " confirm &Delete "
-msgstr "E&liminazione "
+#, fuzzy
+msgid "Confirmation|&Delete"
+msgstr " Conferme "
 
 #, fuzzy
 msgid "UTF-8 output"
@@ -1113,16 +1199,9 @@ msgstr "Dominio:"
 msgid "Username:"
 msgstr "Nome utente:"
 
-msgid "Password:"
-msgstr "Password:"
-
 #, c-format
 msgid "Password for \\\\%s\\%s"
 msgstr "Password per \\\\%s\\%s"
-
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Attenzione: file %s non trovato\n"
 
 msgid "7-bit ASCII"
 msgstr ""
@@ -1239,6 +1318,9 @@ msgstr "<Utente ignoto>"
 msgid "<Unknown group>"
 msgstr "<Gruppo ignoto>"
 
+msgid " Confirmation "
+msgstr " Conferme "
+
 msgid "Files tagged, want to cd?"
 msgstr " File selezionati, cambio directory?"
 
@@ -1291,6 +1373,21 @@ msgstr "Modifica file delle estensioni"
 
 msgid " Which extension file you want to edit? "
 msgstr " Quale file delle estensioni vuoi modificare? "
+
+msgid "&User"
+msgstr "&Utente"
+
+msgid "&System Wide"
+msgstr "di &Sistema"
+
+msgid " Menu edit "
+msgstr " Modifica menu "
+
+msgid " Which menu file do you want to edit? "
+msgstr " Quale file menu vuoi modificare? "
+
+msgid "&Local"
+msgstr "&Locale"
 
 msgid "Highlighting groups file edit"
 msgstr ""
@@ -1417,6 +1514,723 @@ msgstr " La shell sta già eseguendo un comando "
 msgid "Cannot read directory contents"
 msgstr "Impossibile leggere il contenuto della directory"
 
+msgid " Choose syntax highlighting "
+msgstr " Scegli la sintassi evidenziata "
+
+msgid "< Auto >"
+msgstr "< Auto >"
+
+msgid "< Reload Current Syntax >"
+msgstr "< Ricarica la sintassi corrente >"
+
+#, c-format
+msgid " Cannot open %s for reading "
+msgstr " Impossibile aprire %s in lettura "
+
+msgid "Error"
+msgstr "Errore"
+
+#, c-format
+msgid " Error reading from pipe: %s "
+msgstr " Errore leggendo dalla pipe: %s "
+
+#, c-format
+msgid " Cannot open pipe for reading: %s "
+msgstr " Impossibile aprire la pipe in lettura: %s "
+
+#, c-format
+msgid " Cannot get size/permissions for %s "
+msgstr " Impossibile ottenere dimensioni/permessi per %s "
+
+#, c-format
+msgid " %s is not a regular file "
+msgstr " %s non è un file regolare "
+
+#, c-format
+msgid " File %s is too large "
+msgstr " Il file %s è troppo grande "
+
+msgid " About "
+msgstr " Informazioni"
+
+msgid ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       A user friendly text editor written\n"
+"           for the Midnight Commander.\n"
+msgstr ""
+"\n"
+"                 Cooledit  v3.11.5\n"
+"\n"
+"   Copyright (C) 1996 Free Software Foundation  \n"
+"\n"
+"      Un editor semplice da usare scritto per\n"
+"              il Midnight Commander.\n"
+
+msgid "Macro recursion is too deep"
+msgstr "La ricorsione macro è troppo profonda"
+
+msgid "Search"
+msgstr "Cerca"
+
+msgid " File has hard-links. Detach before saving? "
+msgstr "Il file ha collegamenti (link) hard. Scollegarli prima di salvare?"
+
+msgid "The file has been modified in the meantime. Save anyway?"
+msgstr "Il file è stato modificato nel frattempo. Salvare comunque?"
+
+msgid " Error writing to pipe: "
+msgstr " Errore nello scrivere sulla pipe: "
+
+msgid " Cannot open pipe for writing: "
+msgstr " Impossibile aprire la pipe in scrittura: "
+
+#, fuzzy, c-format
+msgid " Cannot open file for writing: %s "
+msgstr " Impossibile aprire la pipe in scrittura: "
+
+#, fuzzy
+msgid "&Quick save"
+msgstr "Salva veloce"
+
+#, fuzzy
+msgid "&Safe save"
+msgstr "Salva sicuro"
+
+msgid "&Do backups with following extension:"
+msgstr ""
+
+msgid "Check &POSIX new line"
+msgstr ""
+
+msgid " Edit Save Mode "
+msgstr " Modifica modo salvataggio"
+
+msgid "The file you are saving is not finished with a newline"
+msgstr ""
+
+msgid "C&ontinue"
+msgstr "C&ontinua"
+
+msgid "&Do not change"
+msgstr ""
+
+msgid "&Unix format (LF)"
+msgstr ""
+
+msgid "&Windows/DOS format (CR LF)"
+msgstr ""
+
+msgid "&Macintosh format (CR)"
+msgstr ""
+
+msgid "Change line breaks to:"
+msgstr ""
+
+msgid " Enter file name: "
+msgstr " Inserire nome file: "
+
+msgid " Save As "
+msgstr " Salva come "
+
+msgid " A file already exists with this name. "
+msgstr " Un file con lo stesso nome esiste già. "
+
+msgid "&Overwrite"
+msgstr "S&ovrascrivi"
+
+msgid " Cannot save file. "
+msgstr " Errore nel salvataggio del file. "
+
+msgid " Delete macro "
+msgstr " Elimina macro "
+
+msgid " Cannot open temp file "
+msgstr " Impossibile aprirefile temporaneo "
+
+msgid " Cannot open macro file "
+msgstr " Impossibile aprire il file delle macro "
+
+msgid " Cannot overwrite macro file "
+msgstr " Impossibile sovrascrivere il file delle macro "
+
+msgid " Save macro "
+msgstr " Salva macro "
+
+msgid " Press the macro's new hotkey: "
+msgstr " Premi nuovo tasto veloce macro: "
+
+msgid " Press macro hotkey: "
+msgstr " Premere tasto macro: "
+
+msgid " Load macro "
+msgstr " Carica macro "
+
+msgid " Confirm save file? : "
+msgstr " Conferma salvataggio file? "
+
+msgid " Save file "
+msgstr " Salva il file "
+
+msgid "&Save"
+msgstr "&Salva"
+
+msgid ""
+" Current text was modified without a file save. \n"
+" Continue discards these changes. "
+msgstr ""
+" Il testo corrente è stato modificato senza salvare \n"
+" Continuando si perdono tutte le modifiche. "
+
+msgid "Syntax file edit"
+msgstr "Modifica il file della sintassi"
+
+msgid " Which syntax file you want to edit? "
+msgstr " Quale file della sintassi vuoi modificare? "
+
+msgid " Load "
+msgstr " Carica "
+
+msgid " Block is large, you may not be able to undo this action. "
+msgstr " Il blocco è grande, potresti non riuscire ad annullare l'azione. "
+
+#, fuzzy
+msgid "Replace"
+msgstr "&Rimpiazza"
+
+msgid " Replace "
+msgstr " Rimpiazza "
+
+#, c-format
+msgid " %ld replacements made. "
+msgstr " Eseguite %ld sostituzioni. "
+
+msgid "Quit"
+msgstr "Esci"
+
+msgid " File was modified, Save with exit? "
+msgstr " Il file è stato modificato. Lo salvo uscendo? "
+
+msgid "&Cancel quit"
+msgstr "Annulla l'us&cita"
+
+msgid " Error "
+msgstr " Errore "
+
+msgid " This function is not implemented. "
+msgstr " Questa funzione non è stata implementata. "
+
+msgid " Copy to clipboard "
+msgstr " Copia negli appunti "
+
+msgid " Unable to save to file. "
+msgstr " Impossibile salvare il file. "
+
+msgid " Cut to clipboard "
+msgstr " Taglia negli appunti "
+
+msgid " Goto line "
+msgstr " Vai alla riga "
+
+msgid " Enter line: "
+msgstr " Riga: "
+
+msgid " Save Block "
+msgstr " Salva blocco evidenziato "
+
+msgid " Insert File "
+msgstr " Inserisci file "
+
+msgid " Cannot insert file. "
+msgstr " Errore nell'inserimento del file "
+
+msgid " Sort block "
+msgstr " Ordina "
+
+msgid " You must first highlight a block of text. "
+msgstr " Seleziona prima una parte di testo "
+
+msgid " Run Sort "
+msgstr " Ordina il testo "
+
+msgid " Enter sort options (see manpage) separated by whitespace: "
+msgstr " Inserisci opzioni di ordinamento (vedi man sort) separate da spazi: "
+
+msgid " Sort "
+msgstr " Ordina "
+
+msgid " Cannot execute sort command "
+msgstr " Impossibile eseguire il comando sort "
+
+msgid " Sort returned non-zero: "
+msgstr " Il comando sort è uscito con valore non-zero: "
+
+msgid "Paste output of external command"
+msgstr "Incolla l'uscita del comando esterno"
+
+msgid "Enter shell command(s):"
+msgstr "Inserire comandi shell:"
+
+msgid "External command"
+msgstr "Comando esterno"
+
+msgid "Cannot execute command"
+msgstr "Impossibile eseguire il comando"
+
+msgid "Error creating script:"
+msgstr "Errore durante la creazione dello script:"
+
+msgid "Error reading script:"
+msgstr "Errore durante la lettura dello script:"
+
+msgid "Error closing script:"
+msgstr "Errore durante la chiusura dello script:"
+
+msgid "Script created:"
+msgstr "Script creato:"
+
+msgid "Process block"
+msgstr "Elabora blocco"
+
+msgid " Copies to"
+msgstr " Copie a"
+
+msgid " Subject"
+msgstr " Soggetto"
+
+msgid " To"
+msgstr " A"
+
+msgid " mail -s <subject> -c <cc> <to>"
+msgstr " mail -s <soggetto> -c <cc> <a>"
+
+msgid " Mail "
+msgstr " Posta "
+
+msgid " Insert Literal "
+msgstr " Ins. letteralmente "
+
+msgid " Press any key: "
+msgstr " Premere un tasto: "
+
+msgid " Execute Macro "
+msgstr " Esegue macro "
+
+msgid "All charsets"
+msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "Solo &parole intere"
+
+#, fuzzy
+msgid "In se&lection"
+msgstr "Inver&ti selezione      M-*"
+
+msgid "&Backwards"
+msgstr "&Indietro"
+
+msgid "case &Sensitive"
+msgstr "Controllo &maiuscole/minuscole"
+
+msgid " Enter replacement string:"
+msgstr " Inserire stringa di sostituzione:"
+
+msgid " Enter search string:"
+msgstr " Inserire la stringa di ricerca:"
+
+#, fuzzy
+msgid "&Find all"
+msgstr " Trova file "
+
+msgid "Cancel"
+msgstr "Annulla"
+
+msgid "&Skip"
+msgstr "&Salta"
+
+msgid "A&ll"
+msgstr "&Tutti"
+
+msgid "&Replace"
+msgstr "&Rimpiazza"
+
+msgid " Replace with: "
+msgstr " Sostituisci con: "
+
+msgid " Confirm replace "
+msgstr " Conferma sostituzione"
+
+msgid "&Dismiss"
+msgstr "&Chiudi"
+
+#, c-format
+msgid ""
+"File \"%s\" is already being edited\n"
+"User: %s\n"
+"Process ID: %d"
+msgstr ""
+"Il file \"%s\" è già stato modificato\n"
+"Utente: %s\n"
+"ID Processo: %d"
+
+msgid "File locked"
+msgstr "File bloccato da lock"
+
+msgid "&Grab lock"
+msgstr "&Cattura lock"
+
+msgid "&Ignore lock"
+msgstr "&Ignora lock"
+
+msgid "&Open file..."
+msgstr "&Apri file..."
+
+#, fuzzy
+msgid "&New"
+msgstr "&Nome"
+
+#, fuzzy
+msgid "Save &as..."
+msgstr "Sal&va configurazione..."
+
+#, fuzzy
+msgid "&Insert file..."
+msgstr "Inserisci &file..  F15"
+
+#, fuzzy
+msgid "Cop&y to file..."
+msgstr "&Copia su file...  C-f"
+
+#, fuzzy
+msgid "&User menu..."
+msgstr "&Menu utente       F11"
+
+#, fuzzy
+msgid "A&bout..."
+msgstr "&Aspetto..."
+
+msgid "&Quit"
+msgstr "&Uscita"
+
+msgid "&Undo"
+msgstr ""
+
+#, fuzzy
+msgid "&Toggle ins/overw"
+msgstr "&Attiva/disattiva Ins"
+
+#, fuzzy
+msgid "To&ggle mark"
+msgstr "&Canc. marc."
+
+msgid "&Mark columns"
+msgstr ""
+
+#, fuzzy
+msgid "Mark &all"
+msgstr "M&od. tut."
+
+msgid "Unmar&k"
+msgstr ""
+
+#, fuzzy
+msgid "Cop&y"
+msgstr "Copia"
+
+#, fuzzy
+msgid "Mo&ve"
+msgstr "Sposta"
+
+msgid "&Delete"
+msgstr "&Elimina"
+
+#, fuzzy
+msgid "Co&py to clipfile"
+msgstr "Copia su &file...    "
+
+#, fuzzy
+msgid "&Cut to clipfile"
+msgstr "Vai a&lla riga...               M-l"
+
+#, fuzzy
+msgid "Pa&ste from clipfile"
+msgstr "Vai a&lla riga...               M-l"
+
+msgid "&Beginning"
+msgstr ""
+
+#, fuzzy
+msgid "&End"
+msgstr "&Inode"
+
+#, fuzzy
+msgid "&Search..."
+msgstr "Cerca"
+
+#, fuzzy
+msgid "Search &again"
+msgstr "&Ripeti cerca     F17"
+
+#, fuzzy
+msgid "&Replace..."
+msgstr "&Rimpiazza"
+
+#, fuzzy
+msgid "&Toggle bookmark"
+msgstr "Se&leziona/deselez.  F3"
+
+#, fuzzy
+msgid "&Next bookmark"
+msgstr "&Imp. marc."
+
+#, fuzzy
+msgid "&Prev bookmark"
+msgstr "&Ordina...                      M-t"
+
+#, fuzzy
+msgid "&Flush bookmark"
+msgstr "&Posta..."
+
+#, fuzzy
+msgid "&Go to line..."
+msgstr " Vai alla riga "
+
+#, fuzzy
+msgid "&Toggle line state"
+msgstr "Se&leziona/deselez.  F3"
+
+#, fuzzy
+msgid "Go to matching &bracket"
+msgstr "&Vai alla parentesi relativa    M-b"
+
+#, fuzzy
+msgid "&Find declaration"
+msgstr "Trova respinti dopo il patching"
+
+#, fuzzy
+msgid "Back from &declaration"
+msgstr "Trova respinti dopo il patching"
+
+#, fuzzy
+msgid "For&ward to declaration"
+msgstr "Trova respinti dopo il patching"
+
+#, fuzzy
+msgid "Encod&ing..."
+msgstr "&Ordina...                      M-t"
+
+#, fuzzy
+msgid "&Refresh screen"
+msgstr "&Aggiorna lo schermo            C-l"
+
+#, fuzzy
+msgid "&Start record macro"
+msgstr "&Registra nuova macro           C-r"
+
+#, fuzzy
+msgid "Finis&h record macro..."
+msgstr "&Blocca registrazione macro...  C-r"
+
+#, fuzzy
+msgid "&Execute macro..."
+msgstr "&Esegui macro...         C-a, TASTO"
+
+#, fuzzy
+msgid "Delete macr&o..."
+msgstr " Elimina macro "
+
+#, fuzzy
+msgid "'ispell' s&pell check"
+msgstr "&Controllo ortografico          C-p"
+
+#, fuzzy
+msgid "&Mail..."
+msgstr "&Filtro"
+
+#, fuzzy
+msgid "Insert &literal..."
+msgstr "&Inserisci letteralmente        C-q"
+
+#, fuzzy
+msgid "Insert &date/time"
+msgstr "Inserisci &data/ora"
+
+#, fuzzy
+msgid "&Format paragraph"
+msgstr "&Formatta paragrafo             M-p"
+
+#, fuzzy
+msgid "&Sort..."
+msgstr "&Ordina per..."
+
+#, fuzzy
+msgid "&Paste output of..."
+msgstr "Incolla l'&uscita di...         M-u"
+
+#, fuzzy
+msgid "&External formatter"
+msgstr "Forma&ttatore Esterno           F19"
+
+msgid "&General...  "
+msgstr "&Generale...  "
+
+#, fuzzy
+msgid "Save &mode..."
+msgstr "&Modalità di salvataggio..."
+
+#, fuzzy
+msgid "Learn &keys..."
+msgstr "&Impara tasti..."
+
+#, fuzzy
+msgid "Syntax &highlighting..."
+msgstr "&Sintassi evidenziata..."
+
+#, fuzzy
+msgid "S&yntax file"
+msgstr "Modifica il file della sintassi"
+
+#, fuzzy
+msgid "&Menu file"
+msgstr "Modifica file &menu"
+
+msgid "&Save setup"
+msgstr "&Salva configurazione"
+
+#, fuzzy
+msgid "&File"
+msgstr "File"
+
+#, fuzzy
+msgid "&Edit"
+msgstr "Cambia"
+
+#, fuzzy
+msgid "&Search"
+msgstr "Cerca"
+
+#, fuzzy
+msgid "&Command"
+msgstr "Comando"
+
+#, fuzzy
+msgid "For&mat"
+msgstr "Scorda"
+
+#, fuzzy
+msgid "&Options"
+msgstr " &Opzioni "
+
+msgid "None"
+msgstr "Niente"
+
+msgid "Dynamic paragraphing"
+msgstr "Paragrafi dinamici"
+
+msgid "Type writer wrap"
+msgstr "A capo automatico"
+
+msgid "Word wrap line length: "
+msgstr "Auto a capo colonna: "
+
+msgid "Cursor beyond end of line"
+msgstr ""
+
+#, fuzzy
+msgid "Pers&istent selection"
+msgstr "Inver&ti selezione      M-*"
+
+msgid "Synta&x highlighting"
+msgstr "Sintassi &evidenziata"
+
+msgid "Visible tabs"
+msgstr ""
+
+msgid "Visible trailing spaces"
+msgstr ""
+
+msgid "Save file &position"
+msgstr "&Salva posizione file"
+
+msgid "Confir&m before saving"
+msgstr "Confer&ma prima di salvare"
+
+msgid "&Return does autoindent"
+msgstr "Invio a&utoindenta"
+
+msgid "Tab spacing: "
+msgstr "Spaziatura tabulatori: "
+
+msgid "Fill tabs with &spaces"
+msgstr "&Riempie i tabulatori di spazi"
+
+msgid "&Backspace through tabs"
+msgstr "&Backspace attraverso i tab"
+
+msgid "&Fake half tabs"
+msgstr "&Imbroglia i mezzi tab"
+
+msgid "Wrap mode"
+msgstr "Modalità a capo"
+
+msgid " Editor options "
+msgstr " Opzioni editor"
+
+msgid "ButtonBar|Help"
+msgstr "Aiuto"
+
+msgid "ButtonBar|Save"
+msgstr "Salva"
+
+#, fuzzy
+msgid "ButtonBar|Mark"
+msgstr "Filtrat"
+
+#, fuzzy
+msgid "ButtonBar|Replac"
+msgstr "Normale"
+
+#, fuzzy
+msgid "ButtonBar|Copy"
+msgstr "Aiuto"
+
+#, fuzzy
+msgid "ButtonBar|Move"
+msgstr "Salva"
+
+msgid "ButtonBar|Search"
+msgstr "Cerca"
+
+#, fuzzy
+msgid "ButtonBar|Delete"
+msgstr "Aiuto"
+
+#, fuzzy
+msgid "ButtonBar|PullDn"
+msgstr "Aiuto"
+
+msgid "ButtonBar|Quit"
+msgstr "Esci"
+
+msgid " Load syntax file "
+msgstr " Carica file sintassi "
+
+#, c-format
+msgid ""
+" Cannot open file %s \n"
+" %s "
+msgstr ""
+" Non posso aprire il file %s \n"
+" %s "
+
+#, c-format
+msgid " Error in file %s on line %d "
+msgstr " Errore nel file %s alla riga %d "
+
 msgid ""
 " The Commander can't change to the directory that \n"
 " the subshell claims you are in.  Perhaps you have \n"
@@ -1427,10 +2241,6 @@ msgstr ""
 " quale la subshell dichiara di operare. Forse avete \n"
 " eliminato la directory in questione o vi siete entrati \n"
 " usando il comando \"su\"?"
-
-#, c-format
-msgid "Press any key to continue..."
-msgstr "Premi un tasto per continuare..."
 
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
@@ -1781,9 +2591,6 @@ msgstr "%o %f \"%s\"%m"
 msgid "%o %d %f%m"
 msgstr "%o %d %f%m"
 
-msgid "file"
-msgstr "file"
-
 msgid "files"
 msgstr "file"
 
@@ -2049,6 +2856,9 @@ msgstr "Esadec"
 #, fuzzy
 msgid "ButtonBar|Prev"
 msgstr "Filtrat"
+
+msgid "&Move"
+msgstr "&Sposta"
 
 msgid "&Remove"
 msgstr "&Elimina"
@@ -2401,6 +3211,10 @@ msgstr " Visualizza file "
 #, fuzzy
 msgid "&Filtered view"
 msgstr " Vista filtrata "
+
+#, fuzzy
+msgid "&Copy"
+msgstr "Copia"
 
 msgid "C&hmod"
 msgstr ""
@@ -2825,28 +3639,6 @@ msgstr "Il formato utente fornito è errato, uso il default."
 msgid " Do you really want to execute? "
 msgstr " Vuoi veramente eseguirlo?"
 
-msgid " Not implemented yet "
-msgstr ""
-
-msgid " Num of replace tokens not equal to num of found tokens "
-msgstr ""
-
-#, fuzzy, c-format
-msgid " Invalid token number %d "
-msgstr " La maschera di destinazione è errata"
-
-msgid "Normal"
-msgstr ""
-
-msgid "&Regular expression"
-msgstr "Espressione &regolare"
-
-msgid "Hexadecimal"
-msgstr ""
-
-msgid "Wildcard search"
-msgstr ""
-
 #, fuzzy
 msgid "Choose codepage"
 msgstr " Scegli la codepage "
@@ -2861,18 +3653,6 @@ msgid ""
 msgstr ""
 " Impossibile salvare il file: \n"
 " %s "
-
-#, c-format
-msgid ""
-"Unable to load '%s' skin.\n"
-"Default skin has been loaded"
-msgstr ""
-
-#, c-format
-msgid ""
-"Unable to parse '%s' skin.\n"
-"Default skin has been loaded"
-msgstr ""
 
 msgid ""
 "GNU Midnight Commander is already\n"
@@ -2994,277 +3774,6 @@ msgstr ""
 "Non posso scrivere sul file `%s':\n"
 "%s\n"
 
-msgid "Function key 1"
-msgstr "Tasto funzione  1"
-
-msgid "Function key 2"
-msgstr "Tasto funzione  2"
-
-msgid "Function key 3"
-msgstr "Tasto funzione  3"
-
-msgid "Function key 4"
-msgstr "Tasto funzione  4"
-
-msgid "Function key 5"
-msgstr "Tasto funzione  5"
-
-msgid "Function key 6"
-msgstr "Tasto funzione  6"
-
-msgid "Function key 7"
-msgstr "Tasto funzione  7"
-
-msgid "Function key 8"
-msgstr "Tasto funzione  8"
-
-msgid "Function key 9"
-msgstr "Tasto funzione  9"
-
-msgid "Function key 10"
-msgstr "Tasto funzione 10"
-
-msgid "Function key 11"
-msgstr "Tasto funzione 11"
-
-msgid "Function key 12"
-msgstr "Tasto funzione 12"
-
-msgid "Function key 13"
-msgstr "Tasto funzione 13"
-
-msgid "Function key 14"
-msgstr "Tasto funzione 14"
-
-msgid "Function key 15"
-msgstr "Tasto funzione 15"
-
-msgid "Function key 16"
-msgstr "Tasto funzione 16"
-
-msgid "Function key 17"
-msgstr "Tasto funzione 17"
-
-msgid "Function key 18"
-msgstr "Tasto funzione 18"
-
-msgid "Function key 19"
-msgstr "Tasto funzione 19"
-
-msgid "Function key 20"
-msgstr "Tasto funzione 20"
-
-msgid "Backspace key"
-msgstr "Tasto Backspace  "
-
-msgid "End key"
-msgstr "Tasto fine       "
-
-msgid "Up arrow key"
-msgstr "Freccia su       "
-
-msgid "Down arrow key"
-msgstr "Freccia giù      "
-
-msgid "Left arrow key"
-msgstr "Freccia sinistra "
-
-msgid "Right arrow key"
-msgstr "Freccia destra   "
-
-msgid "Home key"
-msgstr "Tasto inizio     "
-
-msgid "Page Down key"
-msgstr "Tasto pagina giù "
-
-msgid "Page Up key"
-msgstr "Tasto pagina su  "
-
-msgid "Insert key"
-msgstr "Tasto Ins        "
-
-msgid "Delete key"
-msgstr "Tasto Canc       "
-
-msgid "Completion/M-tab"
-msgstr "Completam./M-Tab "
-
-msgid "+ on keypad"
-msgstr "+ sul tastierino "
-
-msgid "- on keypad"
-msgstr "- sul tastierino "
-
-msgid "Slash on keypad"
-msgstr "/ sul tastierino"
-
-msgid "* on keypad"
-msgstr "* sul tastierino "
-
-#, fuzzy
-msgid "Escape key"
-msgstr "/ sul tastierino"
-
-msgid "Left arrow keypad"
-msgstr "Freccia a sinistra sul tastierino"
-
-msgid "Right arrow keypad"
-msgstr "Freccia a destra sul tastierino"
-
-msgid "Up arrow keypad"
-msgstr "Freccia su sul tastierino"
-
-msgid "Down arrow keypad"
-msgstr "Freccia giù sul tastierino"
-
-msgid "Home on keypad"
-msgstr "Inizio sul tastierino"
-
-msgid "End on keypad"
-msgstr "Fine sul tastierino"
-
-msgid "Page Down keypad"
-msgstr "Pagina giù sul tastierino"
-
-msgid "Page Up keypad"
-msgstr "Pagina su sul tastierino"
-
-msgid "Insert on keypad"
-msgstr "Ins sul tastierino"
-
-msgid "Delete on keypad"
-msgstr "Canc sul tastierino"
-
-msgid "Enter on keypad"
-msgstr "Invio sul tastierino"
-
-#, fuzzy
-msgid "Function key 21"
-msgstr "Tasto funzione  1"
-
-#, fuzzy
-msgid "Function key 22"
-msgstr "Tasto funzione  2"
-
-#, fuzzy
-msgid "Function key 23"
-msgstr "Tasto funzione  2"
-
-#, fuzzy
-msgid "Function key 24"
-msgstr "Tasto funzione  2"
-
-msgid "Plus"
-msgstr ""
-
-#, fuzzy
-msgid "Minus"
-msgstr "Menu"
-
-msgid "Asterisk"
-msgstr ""
-
-msgid "Dot"
-msgstr ""
-
-msgid "Less than"
-msgstr ""
-
-msgid "Great than"
-msgstr ""
-
-msgid "Equal"
-msgstr ""
-
-#, fuzzy
-msgid "Comma"
-msgstr "Comando"
-
-msgid "Apostrophe"
-msgstr ""
-
-#, fuzzy
-msgid "Colon"
-msgstr "Totale"
-
-msgid "Exclamation mark"
-msgstr ""
-
-msgid "Question mark"
-msgstr ""
-
-#, fuzzy
-msgid "Ampersand"
-msgstr "Atta&cca"
-
-msgid "Dollar sign"
-msgstr ""
-
-msgid "Quotation mark"
-msgstr ""
-
-#, fuzzy
-msgid "Caret"
-msgstr "Destinaz"
-
-msgid "Tilda"
-msgstr ""
-
-#, fuzzy
-msgid "Prime"
-msgstr "Precedente"
-
-#, fuzzy
-msgid "Underline"
-msgstr " Riga: "
-
-msgid "Understrike"
-msgstr ""
-
-msgid "Pipe"
-msgstr ""
-
-#, fuzzy
-msgid "Enter"
-msgstr "propr."
-
-#, fuzzy
-msgid "Tab key"
-msgstr "+ sul tastierino "
-
-#, fuzzy
-msgid "Space key"
-msgstr "/ sul tastierino"
-
-#, fuzzy
-msgid "Slash key"
-msgstr "/ sul tastierino"
-
-#, fuzzy
-msgid "Backslash key"
-msgstr "Tasto Backspace  "
-
-msgid "Number sign #"
-msgstr ""
-
-msgid "Ctrl"
-msgstr ""
-
-msgid "Alt"
-msgstr ""
-
-msgid "Shift"
-msgstr ""
-
-#, c-format
-msgid ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-msgstr ""
-"Schermo di dimensione %dx%d non supportato.\n"
-"Controllare la variabile ambiente TERM.\n"
-
 msgid " Format error on file Extensions File "
 msgstr " Errore formato nel file estensioni "
 
@@ -3306,63 +3815,9 @@ msgstr " Non trovo voci appropriate in %s "
 msgid " User menu "
 msgstr " Menu utente "
 
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s non è una directory\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "La directory %s non è di Vostra proprietà\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "Impossibile impostare correttamente i permessi per la directory %s\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr "Non posso creare la directory temporanea %s: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "I file temporanei verranno creati in %s\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "I file temporanei non verranno creati\n"
-
-msgid " Pipe failed "
-msgstr " Pipe fallita "
-
-msgid " Dup failed "
-msgstr " Dup fallita "
-
-#, fuzzy, c-format
-msgid ""
-" The current line number is %lld.\n"
-" Enter the new line number:"
-msgstr ""
-" La riga corrente è %d.\n"
-" Inserisci un nuovo numero di riga:"
-
-#, fuzzy, c-format
-msgid ""
-" The current address is %s.\n"
-" Enter the new address:"
-msgstr ""
-" La riga corrente è %d.\n"
-" Inserisci un nuovo numero di riga:"
-
-msgid " Goto Address "
-msgstr " Vai all'indirizzo "
-
-msgid " Invalid address "
-msgstr " Indirizzo non valido"
+#, fuzzy
+msgid "Invalid value"
+msgstr "valore numerico errato"
 
 msgid " Cannot spawn child process "
 msgstr " Impossibile fare lo spawn del processo figlio "
@@ -3370,11 +3825,23 @@ msgstr " Impossibile fare lo spawn del processo figlio "
 msgid "Empty output from child filter"
 msgstr "Risultato vuoto da filtro figlio"
 
+msgid "&Line number (decimal)"
+msgstr ""
+
+msgid "Pe&rcents"
+msgstr ""
+
+msgid "&Decimal offset"
+msgstr ""
+
+msgid "He&xadecimal offset"
+msgstr ""
+
+msgid "Goto"
+msgstr ""
+
 msgid "ButtonBar|Ascii"
 msgstr "Testo"
-
-msgid "ButtonBar|Goto"
-msgstr "Vai.."
 
 msgid "ButtonBar|HxSrch"
 msgstr "CercE"
@@ -3388,8 +3855,8 @@ msgstr "ACapo"
 msgid "ButtonBar|Hex"
 msgstr "Esadec"
 
-msgid "ButtonBar|Line"
-msgstr "Riga"
+msgid "ButtonBar|Goto"
+msgstr "Vai.."
 
 msgid "ButtonBar|Raw"
 msgstr "Normale"
@@ -3402,26 +3869,6 @@ msgstr "NonForm"
 
 msgid "ButtonBar|Format"
 msgstr "Formatt"
-
-#, c-format
-msgid "File: %s"
-msgstr "File: %s"
-
-#, c-format
-msgid "Offset 0x%08lx"
-msgstr "Offset 0x%08lx"
-
-#, c-format
-msgid "Line %lu Col %lu"
-msgstr "Riga %lu Col %lu"
-
-#, c-format
-msgid "%s bytes"
-msgstr "%s byte"
-
-#, c-format
-msgid ">= %s bytes"
-msgstr ">= %s byte"
 
 #, c-format
 msgid ""
@@ -3466,448 +3913,64 @@ msgstr ""
 msgid " History "
 msgstr " Cronologia "
 
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+msgid "DialogTitle|History cleanup"
+msgstr ""
+
+msgid "Do you want clean this history?"
+msgstr ""
+
 msgid "Background process:"
 msgstr "Processo in background"
 
-#, c-format
-msgid ""
-"Cannot open cpio archive\n"
-"%s"
-msgstr ""
-"Non posso aprire l'archivio cpio\n"
-"%s"
+#~ msgid " confirm &Exit "
+#~ msgstr "&Uscita"
 
-#, c-format
-msgid ""
-"Premature end of cpio archive\n"
-"%s"
-msgstr ""
-"Fine prematura di un archivio cpio\n"
-"%s"
+#~ msgid " confirm e&Xecute "
+#~ msgstr "&Esecuzione "
 
-#, c-format
-msgid ""
-"Inconsistent hardlinks of\n"
-"%s\n"
-"in cpio archive\n"
-"%s"
-msgstr ""
-"Collegamenti fisici inconsistenti di\n"
-"%s\n"
-"in archivio cpio\n"
-"%s"
-
-#, c-format
-msgid "%s contains duplicate entries! Skipping!"
-msgstr "%s contiene voci duplicate! Saltato!"
-
-#, c-format
-msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"Trovata intestazione cpio rovinata in\n"
-"%s"
-
-#, c-format
-msgid ""
-"Unexpected end of file\n"
-"%s"
-msgstr ""
-"Inattesa fine del file\n"
-"%s"
-
-#, c-format
-msgid "Directory cache expired for %s"
-msgstr "Cache dir scaduta per %s"
-
-msgid "Starting linear transfer..."
-msgstr "Inizio trasferimento lineare..."
-
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
-msgstr "%s: %s: %s %3d%% (%lu byte trasferiti)"
-
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
-msgstr "%s: %s: %s %lu byte trasferiti"
-
-msgid "Getting file"
-msgstr "Ottenuto file "
-
-#, c-format
-msgid ""
-"Cannot open %s archive\n"
-"%s"
-msgstr ""
-"Non posso aprire l'archivio %s\n"
-"%s"
-
-msgid "Inconsistent extfs archive"
-msgstr "Archivio extfs inconsistente"
-
-#, c-format
-msgid "fish: Disconnecting from %s"
-msgstr "fish: disconnessione da %s"
-
-msgid "fish: Waiting for initial line..."
-msgstr "fish: attesa riga iniziale..."
-
-msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr "Spiacente, non posso fare connessioni autenticate per adesso."
-
-msgid " fish: Password required for "
-msgstr " fish: password richiesta per "
-
-msgid "fish: Sending password..."
-msgstr "fish: spedizione password..."
-
-msgid "fish: Sending initial line..."
-msgstr "fish: spedizione riga iniziale..."
-
-msgid "fish: Handshaking version..."
-msgstr "fish: versione handshaking..."
-
-msgid "fish: Setting up current directory..."
-msgstr "fish: impostazione directory corrente..."
-
-#, c-format
-msgid "fish: Connected, home %s."
-msgstr "fish: connesso a %s"
-
-#, c-format
-msgid "fish: Reading directory %s..."
-msgstr "fish: lettura directory FTP %s..."
-
-#, c-format
-msgid "%s: done."
-msgstr "%s: fatto."
-
-#, c-format
-msgid "%s: failure"
-msgstr "%s: errore"
-
-#, c-format
-msgid "fish: store %s: sending command..."
-msgstr "fish: memorizza %s: spedizione comando..."
-
-msgid "fish: Local read failed, sending zeros"
-msgstr "fish: lettura locale fallita, spedizione zeri"
-
-#, c-format
-msgid "fish: storing %s %d (%lu)"
-msgstr "fish: memorizzazione %s %d (%lu)"
-
-msgid "zeros"
-msgstr "zeri"
-
-msgid "Aborting transfer..."
-msgstr "Interruzione trasferimento..."
-
-msgid "Error reported after abort."
-msgstr "Errori dopo l'interruzione."
-
-msgid "Aborted transfer would be successful."
-msgstr "L'interruzione trasferimento sarebbe riuscita."
-
-#, c-format
-msgid "ftpfs: Disconnecting from %s"
-msgstr "ftpfs: disconnessione da %s"
-
-msgid " FTP: Password required for "
-msgstr " FTP: password richiesta per "
-
-msgid "ftpfs: sending login name"
-msgstr "ftpfs: spedizione nome utente"
-
-msgid "ftpfs: sending user password"
-msgstr "ftpfs: spedizione password utente"
-
-#, c-format
-msgid "FTP: Account required for user %s"
-msgstr "FTP: si richiede un account per l'utente %s"
-
-msgid "Account:"
-msgstr "Account:"
-
-msgid "ftpfs: sending user account"
-msgstr "ftpfs: spedizione account utente"
-
-msgid "ftpfs: logged in"
-msgstr "ftpfs: connessione effettuata"
-
-#, c-format
-msgid "ftpfs: Login incorrect for user %s "
-msgstr "ftpfs: login errato per utente %s "
-
-msgid "ftpfs: Invalid host name."
-msgstr "ftpfs: nome host non valido."
-
-#, c-format
-msgid "ftpfs: %s"
-msgstr ""
-
-#, c-format
-msgid "ftpfs: making connection to %s"
-msgstr "ftpfs: mi sto connettendo a %s"
-
-msgid "ftpfs: connection interrupted by user"
-msgstr "ftpfs: connessione interrotta dall'utente"
-
-#, c-format
-msgid "ftpfs: connection to server failed: %s"
-msgstr "ftpfs: connessione al server fallita: %s"
-
-#, c-format
-msgid "Waiting to retry... %d (Control-C to cancel)"
-msgstr "In attesa di riprovare...%d (Control-C per annullare)"
+#~ msgid " confirm &Delete "
+#~ msgstr "E&liminazione "
 
 #, fuzzy
-msgid "ftpfs: invalid address family"
-msgstr "ftpfs: indirizzo host non valido."
+#~ msgid ""
+#~ " The current line number is %lld.\n"
+#~ " Enter the new line number:"
+#~ msgstr ""
+#~ " La riga corrente è %d.\n"
+#~ " Inserisci un nuovo numero di riga:"
 
-#, fuzzy, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: non è possibile impostare la modalità passiva"
+#, fuzzy
+#~ msgid ""
+#~ " The current address is %s.\n"
+#~ " Enter the new address:"
+#~ msgstr ""
+#~ " La riga corrente è %d.\n"
+#~ " Inserisci un nuovo numero di riga:"
 
-#, fuzzy, c-format
-msgid "ftpfs: could not create socket: %s"
-msgstr " Non riesco a creare il socket: %s "
+#~ msgid " Goto Address "
+#~ msgstr " Vai all'indirizzo "
 
-msgid "ftpfs: could not setup passive mode"
-msgstr "ftpfs: non è possibile impostare la modalità passiva"
+#~ msgid " Invalid address "
+#~ msgstr " Indirizzo non valido"
 
-msgid "ftpfs: aborting transfer."
-msgstr "ftpfs: interruzione del trasferimento."
+#~ msgid "ButtonBar|Line"
+#~ msgstr "Riga"
 
-#, c-format
-msgid "ftpfs: abort error: %s"
-msgstr "ftpfs: errore di interruzione: %s"
+#~ msgid "File: %s"
+#~ msgstr "File: %s"
 
-msgid "ftpfs: abort failed"
-msgstr "ftpfs: interruzione fallita"
+#~ msgid "Offset 0x%08lx"
+#~ msgstr "Offset 0x%08lx"
 
-msgid "ftpfs: CWD failed."
-msgstr "ftpfs: CWD fallito."
+#~ msgid "Line %lu Col %lu"
+#~ msgstr "Riga %lu Col %lu"
 
-msgid "ftpfs: couldn't resolve symlink"
-msgstr "ftpfs: non posso risolvere i collegamenti simbolici"
+#~ msgid "%s bytes"
+#~ msgstr "%s byte"
 
-msgid "Resolving symlink..."
-msgstr "Sto risolvendo il collegamenti simbolici..."
-
-#, c-format
-msgid "ftpfs: Reading FTP directory %s... %s%s"
-msgstr "ftpfs: lettura directory FTP %s... %s%s"
-
-msgid "(strict rfc959)"
-msgstr "(strettamente rfc959)"
-
-msgid "(chdir first)"
-msgstr "(antepone chdir)"
-
-msgid "ftpfs: failed; nowhere to fallback to"
-msgstr "ftpfs: fallito; non so dove rileggere"
-
-#, c-format
-msgid "ftpfs: storing file %lu (%lu)"
-msgstr "ftpfs: memorizzazione file %lu (%lu)"
-
-msgid ""
-"~/.netrc file has incorrect mode.\n"
-"Remove password or correct mode."
-msgstr ""
-"il file ~/.netrc è impostato male.\n"
-"Rimuovere la password o correggere i permessi."
-
-msgid " MCFS "
-msgstr " MCFS "
-
-msgid " The server does not support this version "
-msgstr " Il server non supporta questa versione"
-
-msgid ""
-" The remote server is not running on a system port \n"
-" you need a password to log in, but the information may \n"
-" not be safe on the remote side.  Continue? \n"
-msgstr ""
-" Il server remoto non sta funzionando su una porta di sistema \n"
-" è necessaria una password per entrare, ma la trasmissione \n"
-" potrebbe non essere sicura sul lato remoto. Continuare? \n"
-
-msgid " MCFS Password required "
-msgstr "Richiesta password MCFS "
-
-msgid " Invalid password "
-msgstr " Password errata"
-
-#, c-format
-msgid " Cannot locate hostname: %s "
-msgstr "Nome host irraggiungibile: %s "
-
-#, c-format
-msgid " Cannot create socket: %s "
-msgstr " Non riesco a creare il socket: %s "
-
-#, c-format
-msgid " Cannot connect to server: %s "
-msgstr " Non riesco a connettermi al server: %s "
-
-msgid " Too many open connections "
-msgstr " Troppe connessioni aperte "
-
-#, c-format
-msgid ""
-"Warning: Invalid line in %s:\n"
-"%s\n"
-msgstr ""
-"Attenzione: riga non valida in %s:\n"
-"%s\n"
-
-#, c-format
-msgid ""
-"Warning: Invalid flag %c in %s:\n"
-"%s\n"
-msgstr ""
-"Attenzione: flag %c non valida in %s:\n"
-"%s\n"
-
-#, c-format
-msgid ""
-" reconnect to %s failed\n"
-" "
-msgstr ""
-" riconnessione a %s fallita\n"
-" "
-
-msgid " Authentication failed "
-msgstr " Autenticazione fallita "
-
-#, c-format
-msgid " Error %s creating directory %s "
-msgstr " Errore %s nella creazione dir %s "
-
-#, c-format
-msgid " Error %s removing directory %s "
-msgstr " Errore %s nella rimozione dir %s "
-
-#, c-format
-msgid " %s opening remote file %s "
-msgstr " %s apertura file remoto %s "
-
-#, c-format
-msgid " %s removing remote file %s "
-msgstr " %s rimozione file remoto %s "
-
-#, c-format
-msgid " %s renaming files\n"
-msgstr " %s rinomina file\n"
-
-#, c-format
-msgid ""
-"Cannot open tar archive\n"
-"%s"
-msgstr ""
-"Non posso aprire l'archivio tar\n"
-"%s"
-
-msgid "Inconsistent tar archive"
-msgstr "Archivio tar inconsistente"
-
-msgid "Unexpected EOF on archive file"
-msgstr "Inatteso EOF in file archivio"
-
-#, c-format
-msgid ""
-"Hmm,...\n"
-"%s\n"
-"doesn't look like a tar archive."
-msgstr ""
-"Hmm,...\n"
-"%s\n"
-"non sembra un archivio tar."
-
-msgid " undelfs: error "
-msgstr " undelfs: errore "
-
-msgid " not enough memory "
-msgstr " memoria insufficente "
-
-msgid " while allocating block buffer "
-msgstr " durante l'allocazione buffer blocchi "
-
-#, c-format
-msgid " open_inode_scan: %d "
-msgstr " open_inode_scan: %d "
-
-#, c-format
-msgid " while starting inode scan %d "
-msgstr " durante inizio scansione inode %d "
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: caricamento informazioni file eliminati %d inode"
-
-#, c-format
-msgid " while calling ext2_block_iterate %d "
-msgstr " durante la chiamata ext2_block_iterate %d "
-
-msgid " no more memory while reallocating array "
-msgstr " memoria esaurita durante riallocazione array "
-
-#, c-format
-msgid " while doing inode scan %d "
-msgstr " durante scansione inode %d "
-
-msgid " Ext2lib error "
-msgstr " Errore ext2lib "
-
-#, c-format
-msgid " Cannot open file %s "
-msgstr " Non posso aprire il file %s "
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: lettura bitmap inode..."
-
-#, c-format
-msgid ""
-" Cannot load inode bitmap from: \n"
-" %s \n"
-msgstr ""
-" Impossibile caricare bitmap inode da: \n"
-" %s \n"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: lettura bitmap blocchi..."
-
-#, c-format
-msgid ""
-" Cannot load block bitmap from: \n"
-" %s \n"
-msgstr ""
-" Impossibile caricare bitmap blocchi da: \n"
-" %s \n"
-
-msgid " vfs_info is not fs! "
-msgstr " vfs_info non è fs! "
-
-msgid " You have to chdir to extract files first "
-msgstr " Devi prima fare chdir per estrarre i file "
-
-msgid " while iterating over blocks "
-msgstr " durante l'iterazione sui blocchi "
-
-msgid "Cannot parse:"
-msgstr "Non riesco ad analizzare:"
-
-msgid "More parsing errors will be ignored."
-msgstr "Più errori di analisi saranno ignorati."
-
-msgid "Internal error:"
-msgstr " Errore interno:"
-
-msgid "Changes to file lost"
-msgstr "Cambiamenti al file persi"
+#~ msgid ">= %s bytes"
+#~ msgstr ">= %s byte"
 
 #~ msgid "File:       None"
 #~ msgstr "File:       nessuno"
@@ -4063,9 +4126,6 @@ msgstr "Cambiamenti al file persi"
 
 #~ msgid "Replac"
 #~ msgstr "Sostit"
-
-#~ msgid "Move"
-#~ msgstr "Sposta"
 
 #~ msgid "Delete"
 #~ msgstr "Elimina"
@@ -4285,9 +4345,6 @@ msgstr "Cambiamenti al file persi"
 
 #~ msgid "unknown option"
 #~ msgstr "opzione sconosciuta"
-
-#~ msgid "invalid numeric value"
-#~ msgstr "valore numerico errato"
 
 #~ msgid "Show this help message"
 #~ msgstr "Mostra questo messaggio di aiuto."

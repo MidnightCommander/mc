@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-01-31 10:45+0300\n"
+"POT-Creation-Date: 2010-02-09 12:01+0200\n"
 "PO-Revision-Date: 2009-10-29  23:37+0300\n"
 "Last-Translator: Andrew Borodin <aborodin@vmail.ru>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
@@ -1066,23 +1066,35 @@ msgstr "Исполняемые &вначале"
 msgid "Sort order"
 msgstr "Порядок сортировки"
 
-msgid " Confirmation "
+#, fuzzy
+msgid "Confirmation"
 msgstr " Запрос подтверждения "
 
-msgid " confirm di&Rectory hotlist delete "
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. 2
+#, fuzzy
+msgid "Confirmation|&History cleanup"
+msgstr " Запрос подтверждения "
+
+#, fuzzy
+msgid "Confirmation|&Directory hotlist delete"
 msgstr "перед удалением из &списка быстрого доступа"
 
-msgid " confirm &Exit "
-msgstr "перед &выходом"
+#, fuzzy
+msgid "Confirmation|E&xit"
+msgstr " Запрос подтверждения "
 
-msgid " confirm e&Xecute "
-msgstr "перед выполнен&ием"
+#, fuzzy
+msgid "Confirmation|&Execute"
+msgstr " Запрос подтверждения "
 
-msgid " confirm o&Verwrite "
+#, fuzzy
+msgid "Confirmation|O&verwrite"
 msgstr "перед пере&записью"
 
-msgid " confirm &Delete "
-msgstr "перед &удалением"
+#, fuzzy
+msgid "Confirmation|&Delete"
+msgstr " Запрос подтверждения "
 
 msgid "UTF-8 output"
 msgstr "UTF-8 вывод"
@@ -1295,6 +1307,9 @@ msgstr "<Неизвестный>"
 
 msgid "<Unknown group>"
 msgstr "<Неизвестная>"
+
+msgid " Confirmation "
+msgstr " Запрос подтверждения "
 
 msgid "Files tagged, want to cd?"
 msgstr "Файлы помечены, сменить каталог?"
@@ -3763,5 +3778,22 @@ msgstr "Переход к найденному"
 msgid " History "
 msgstr "История команд"
 
+#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
+#, fuzzy
+msgid "DialogTitle|History cleanup"
+msgstr "Копировать"
+
+msgid "Do you want clean this history?"
+msgstr ""
+
 msgid "Background process:"
 msgstr "Фоновый процесс:"
+
+#~ msgid " confirm &Exit "
+#~ msgstr "перед &выходом"
+
+#~ msgid " confirm e&Xecute "
+#~ msgstr "перед выполнен&ием"
+
+#~ msgid " confirm &Delete "
+#~ msgstr "перед &удалением"
