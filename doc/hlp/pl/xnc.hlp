@@ -7,25 +7,19 @@
  v   v v mqv v v v mqu v v mj
      qqqqqqCommanderqj 
 
-To główny ekran pomocy Midnight Commandera.
+Główny ekran pomocy programu GNU Midnight Commander.
 
-Aby dowiedzieć się, jak korzystać z interaktywnej pomocy
-naciśnij EnterHow to use help. Możesz też przejść bezpośrednio do spisu
-treściContents pomocy.
+Aby dowiedzieć się, jak używać interaktywnej pomocy,
+należy nacisnąć klawisz EnterHow to use help. Można też
+przejść bezpośrednio do spisu treściContents.
 
-GNU Midnight Commander został napisany przez autorówAUTHORS.
+Program GNU Midnight Commander został napisany przez jego
+autorówAUTHORS.
 
-GNU Midnight Commander jest dostarczany ABSOLUTNIE BEZ
-ŻADNEJ GWARANCJIWarranty. Jest on wolnym oprogramowaniem, 
-więc dozwolona jest jego redystrybucja na zasadach 
-GNU General Public LicenseLicense (jej nieoficjalne tłumaczenie
-znajdziesz tutajLicense-pl).
-
-[License]
-Licencja
-
-Nieoficjalne polskie tłumacznie znajdziesz tutajLicense-pl.
-
+Program GNU Midnight Commander jest dostarczany BEZ
+JAKIEJKOLWIEK GWARANCJIWarranty. Niniejszy program jest
+wolnym oprogramowaniem; można go rozprowadzać dalej na
+warunkach GNU General Public LicenseLicense.[License]
 
                 GNU GENERAL PUBLIC LICENSE
                    Version 2, June 1991
@@ -436,526 +430,51 @@ to permit linking proprietary applications with the
 library.  If this is what you want to do, use the GNU
 Library General Public License instead of this License.
 
-[License-pl]
-Nieoficjalne tłumaczenie licencji
-
-Uwaga: To jest nieoficjalne tłumaczenie Powszechnej
-Licencji Publicznej GNU na język polski. Nie zostało
-opublikowane przez Free Software Foundation i pod względem
-prawnym nie stanowi warunków rozpowszechniania
-oprogramowania stosującego GNU GPL -- ustanawia je
-wyłącznie oryginalny angielski tekst licencji GNU
-GPLLicense. Tłumaczenie pochodzi ze strony
-http://www.linux.org.pl/
-
-
-           Powszechna Licencja Publiczna GNU
-                Wersja 2, czerwiec 1991
-
- Copyright (C) 1989, 1991 Free Software Foundation, Inc.
- 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-
-  Zezwala się na kopiowanie i rozpowszechnianie wiernych
-kopii niniejszego dokumentu licencyjnego, jednak bez prawa
-wprowadzania zmian. 
-
-                     Preambuła
-
-  Większość licencji na oprogramowanie pomyślana jest po
-to, aby odebrać użytkownikowi możliwość swobodnego
-udostępniania innym i zmieniania danego software'u.
-Natomiast w wypadku Powszechnej Licencji Publicznej GNU
-(GNU General Public License, GPL) celem jest
-zagwarantowanie użytkownikowi swobody udostępniania i
-zmieniania tego bezpłatnego oprogramowania, a więc danie
-pewności, iż oprogramowanie jest wolno dostępne dla
-wszystkich użytkowników. Niniejsza Powszechna Licencja
-Publiczna dotyczy większości oprogramowania wydawanego
-przez Fundację Wolnego Oprogramowania (Free Software
-Foundation) oraz wszelkich innych programów, których
-autorzy zobowiązują się do jej stosowania. (Niektóre
-rodzaje oprogramowania wydawanego przez Fundację objęte są
-Powszechną Licencją Publiczną GNU dla Bibliotek, GNU
-Library General Public License). Użytkownik może stosować
-ją również do swoich programów.
-
-  Mówiąc o wolnym oprogramowaniu mamy na myśli swobodę, a
-nie cenę. Nasze Powszechne Licencje Publiczne wprowadzono
-po to, aby zapewnić Państwu swobodę rozpowszechniania
-kopii tego oprogramowania (i - jeśli ktoś chce -
-pobierania za tę usługę opłaty), jak również aby
-udostępnić kod źródłowy oraz umożliwić dokonywanie zmian
-tego oprogramowania lub wykorzystywania jego fragmentów w
-nowych, wolnych programach. Nie bez znaczenia jest też
-sama możliwość dotarcia do Państwa z informacją o
-wszystkich tych udogodnieniach.
-
-  W celu ochrony praw użytkownika jesteśmy zmuszeni
-wprowadzać ograniczenia zabraniające komukolwiek
-kwestionowanie jego praw albo sugerowanie rezygnacji z
-tych praw. Ograniczenia te sprowadzają się do pewnych dla
-Państwa obowiązków w przypadku rozpowszechniania przez Was
-kopii naszego oprogramowania bądź dokonywania w nim zmian.
-
-  Na przykład, jeśli rozprowadzacie Państwo kopie takiego
-programu, niezależnie czy gratisowo, czy za opłatą,
-musicie Państwo odbiorcy udzielić wszelkich tych praw,
-jakie mieliście sami. Musicie zapewnić mu również
-otrzymanie kodu źródłowego (lub możliwość otrzymania) oraz
-przedstawić niniejsze Warunki, aby mógł on poznać swoje
-prawa.
-
-  Ochrona Państwa praw przebiega w dwóch etapach:
-
-  1. zastrzegamy prawo własności autorskiej do
-oprogramowania,
-  
-  2. oferujemy Państwu niniejszą licencję, która daje Wam
-sankcjonowane prawem zezwolenie na kopiowanie,
-rozpowszechnianie i/lub modyfikowanie tego oprogramowania.
-
-  Ponadto dla ochrony tak autora, jak i naszej, pragniemy
-mieć pewność, że każdy zrozumie, iż na niniejsze wolne
-oprogramowanie nie udziela się gwarancji. W razie
-dokonania w nim przez kogoś modyfikacji i puszczenia dalej
-do obrotu, pragniemy, aby dalsi odbiorcy zdawali sobie
-sprawę z tego, że problemy wprowadzone przez inne osoby
-nie są wyrazem oryginalnych działań twórców.
-
-  I rzecz ostatnia: każdemu wolnemu programowi stale
-zagrażają patenty na oprogramowanie. Naszym pragnieniem
-jest unikanie takiego niebezpieczeństwa, kiedy
-redystrybutorzy wolnego programu indywidualnie uzyskują
-prawa patentowe, nadając tym samym programowi charakter
-prawnie zastrzeżony. W celu zapobieżenia takim zjawiskom
-jednoznacznie wyjaśniliśmy, że każdy patent musi być
-wydawany albo dla swobodnego użytku przez wszystkich, albo
-nie wydawany wcale.
-
-  Poniżej podajemy dokładne zasady i warunki kopiowania,
-rozpowszechniania i modyfikowania.
-
-
-            ZASADY I WARUNKI KOPIOWANIA,
-          ROZPOWSZECHNIANIA I MODYFIKOWANIA
-
-  0. Niniejsza Licencja dotyczy programów i innych prac,
-na których umieszczona jest pochodząca od właściciela praw
-autorskich informacja, że dany program lub praca może być
-rozpowszechniana na warunkach niniejszej Powszechnej
-Licencji Publicznej. Używane poniżej słowo "Program"
-oznacza właśnie takie programy lub prace, zaś określenie
-"praca oparta na Programie" dotyczy albo Programu, albo
-pochodzącej od niego pracy w rozumieniu prawa autorskiego,
-to jest pracy zawierającej Program lub jego część
-dosłowną, bądź zmodyfikowaną i/lub przełożoną na inny
-język. (W dalszym ciągu niniejszego, pojęcie przekładu
-włącza się bez ograniczeń do terminu "modyfikacja"). Do
-każdego licencjobiorcy będziemy zwracać się "per Ty".
-
-  Niniejsza Licencja nie obejmuje działań innych niż
-kopiowanie, rozprowadzanie i modyfikowanie - nie mieszczą
-się one w jej zakresie. Czynność używania Programu nie
-jest poddana ograniczeniom, a produkty uzyskane z Programu
-objęte są Licencją tylko wtedy, gdy ich treść stanowi
-pracę opartą na Programie (niezależnie od stworzenia jej
-przy użyciu Programu). To, czy fakt taki jest prawdą,
-zależy od tego, co dany Program wykonuje.
-
-  1. Możesz kopiować i rozprowadzać w dowolnych mediach
-wierne kopie kodu źródłowego Programu w otrzymanej formie
-pod warunkiem, że w widoczny sposób i odpowiednio podasz
-na każdej kopii właściwą informację o prawie autorskim i
-zrzeczenie się uprawnień z tytułu gwarancji; wszelkie
-napisy informacyjne na temat Licencji i faktu
-nieudzielania gwarancji musisz chronić przed uszkodzeniem,
-zaś wszystkim innym odbiorcom Programu musisz wraz z
-Programem wręczać egzemplarz niniejszej Licencji. 
-
-  Możesz pobierać opłatę za fizyczną czynność przekazania
-kopii i według własnej decyzji możesz za opłatą proponować
-ochronę gwarancyjną.
-
-  2. Możesz modyfikować swoją kopię czy kopie Programu
-oraz dowolne jego części, tworząc przez to pracę opartą na
-Programie, jak również kopiować i rozprowadzać takie
-modyfikacje i pracę na warunkach podanych w pkt.1 powyżej
-- pod warunkiem przestrzegania całości poniższych wymogów:
-
-    a) Musisz spowodować umieszczenie na zmodyfikowanych
-plikach widocznej informacji o tym, że dane pliki zostały
-przez ciebie zmienione, wraz z datą dokonania zmian.
-
-    b) Musisz doprowadzić do tego, aby każda
-rozpowszechniana lub publikowana przez ciebie praca, która
-w całości lub części zawiera Program, albo pochodzi od
-niego lub jego części, była w całości i bezpłatnie
-licencjonowana dla wszelkich stron trzecich na warunkach
-niniejszej Licencji.
-
-    c) Jeżeli zmodyfikowany program podczas korzystania z
-niego w normalnym trybie odczytuje polecenia
-interaktywnie, musisz spowodować, aby po uruchomieniu
-(użyty w interaktywny sposób w najzwyklejszym trybie),
-wydrukowywał on lub wyświetlał powiadomienie o odnośnym
-prawie autorskim i braku gwarancji (ewentualnie o
-zapewnianiu gwarancji przez ciebie), oraz o tym, że
-użytkownicy mogą redystrybuować ten program na niniejszych
-warunkach wraz z informacją, jak użytkownik może zapoznać
-się z treścią niniejszej Licencji. (Wyjątek: jeśli sam
-Program jest interaktywny, ale normalnie nie drukuje
-takiego powiadomienia, twoja praca oparta na nim też nie
-musi wydrukowywać takiego powiadomienia).
-
-  Niniejsze wymogi odnoszą się do zmodyfikowanej pracy
-jako całości. Jeśli dające się ustalić sekcje danej pracy
-nie pochodzą od Programu i mogą być racjonalnie uważane za
-samodzielne i odrębne same w sobie, to niniejsza Licencja
-i jej warunki nie mają zastosowania do takich sekcji przy
-rozprowadzaniu ich przez ciebie jako odrębne prace. Jeśli
-jednak rozprowadzasz je jako część całości, będącej pracą
-opartą na Programie, rozpowszechnianie tej całości musi
-być dokonywane na warunkach niniejszej Licencji, której
-zezwolenia dla innych licencjobiorców rozciągają się w
-całej szerokości na tę całość, a tym samym i na każdą
-indywidualną jej część, niezależnie od jej autorstwa.
-
-  Dlatego też intencją tego fragmentu nie jest roszczenie
-sobie praw albo podważanie twych praw do pracy napisanej w
-całości przez ciebie. Chodzi nam raczej o korzystanie z
-prawa kontrolowania dystrybucji pochodnych i zbiorowych
-prac opartych na Programie. 
-
-  I jeszcze jedno: samo tylko połączenie z Programem (lub
-z pracą opartą na Programie) innej pracy - nie opartej na
-Programie, w ramach wolumenu nośnika przechowywania lub
-dystrybucji, nie powoduje objęcia takiej pracy zakresem
-niniejszej Licencji.
-
-  3. Możesz kopiować i rozprowadzać Program (lub opartą na
-nim pracę - zgodnie z pkt.2 w kodzie wynikowym lub w
-formie wykonywalnej w myśl postanowień pkt.1 i 2 powyżej,
-pod warunkiem zrealizowania również poniższych wymogów:
-
-    a) Musisz dołączyć do niego odpowiadający mu,
-kompletny i możliwy do odczytania przez urządzenia cyfrowe
-kod źródłowy, który musi być rozpowszechniany na warunkach
-pkt.1 i 2 powyżej i na nośniku zwyczajowo używanym dla
-wzajemnej wymiany oprogramowania; lub
-
-    b) dołączyć do niego pisemną ofertę, ważną co najmniej
-3 lata, przyznającą każdej stronie trzeciej - za opłatą
-nie przekraczającą twego kosztu fizycznego wykonywania
-dystrybucji źródła - kompletną, odczytywalną przez
-urządzenia cyfrowe kopię odpowiadającego mu kodu
-źródłowego, rozprowadzaną na warunkach pkt.1 i 2 powyżej,
-na nośniku zwyczajowo używanym do wzajemnej wymiany
-oprogramowania; lub
-
-     c) dołączyć do niego informację, jaką otrzymałeś na
-temat oferty rozprowadzania odpowiedniego kodu źródłowego.
-(Ta możliwość dozwolona jest tylko dla dystrybucji
-niehandlowej i jedynie wtedy, gdy otrzymałeś dany program
-w kodzie wynikowym lub formie wykonywalnej wraz z
-wymienioną ofertą - zgodnie z podpunktem "b" powyżej).
-
-  Określenie kod źródłowy dla pracy oznacza formę pracy
-preferowaną dla wprowadzania do niej modyfikacji. Dla
-wykonanej pracy, kompletny kod źródłowy oznacza cały kod
-źródłowy wszystkich modułów, wszelkie sprzężone z nią
-pośredniczące pliki opisujące oraz zbiory komend stosowane
-do sterowania kompilacją i instalowaniem programów.
-Niemniej jednak, jako wyjątek specjalny, dystrybuowany (w
-formie źródłowej albo binarnej) kod źródłowy nie musi
-obejmować niczego, co jest normalnie rozprowadzane przy
-pomocy głównych komponentów (kompilator, jądro itd.)
-systemu operacyjnego, na którym pracuje część wykonywalna,
-o ile sam taki komponent towarzyszy tej części.
-
-  Jeśli dystrybucja części wykonywalnej albo kodu
-wynikowego realizowana jest poprzez oferowanie dostępu do
-kopii z wyznaczonego miejsca, to oferowanie równoważnego
-dostępu dla kopiowania kodu źródłowego z tego samego
-miejsca liczy się jako rozpowszechnianie kodu źródłowego,
-nawet gdy strony trzecie nie są zmuszone do kopiowania
-źródła wraz z kodem wynikowym.
-
-  4. Poza przypadkami jednoznacznie dozwolonymi w
-niniejszej Licencji, nie możesz kopiować, modyfikować,
-sublicencjonować ani rozpowszechniać Programu. We
-wszystkich pozostałych wypadkach, każda próba skopiowania,
-sublicencjonowania lub rozpowszechnienia Programu jest
-nieważna i powoduje automatyczne wygaśnięcie twoich praw z
-tytułu Licencji. Niemniej jednak, stronom, które już
-otrzymały od ciebie kopie albo prawa w ramach niniejszej
-Licencji, licencje nie wygasają tak długo, jak długo
-strony te w pełni stosują się do nich.
-
-  5. Nie musisz akceptować niniejszej Licencji, jeżeli jej
-nie podpisałeś. Niemniej jednak, nic innego nie zapewni ci
-zezwolenia na modyfikowanie lub rozprowadzanie Programu i
-pochodzących od niego prac. Działania takie są prawnie
-zabronione, jeżeli nie przyjmujesz niniejszej Licencji.
-Dlatego też, poprzez modyfikowanie bądź rozpowszechnianie
-Programu (lub pracy na nim opartej) dajesz wyraz swojej
-akceptacji dla Licencji i wszelkich jej postanowień i
-warunków dotyczących kopiowania, rozprowadzania i
-modyfikowania Programu lub opartych na nim prac.
-
-  6. W każdym przypadku redystrybucji przez ciebie
-Programu (albo opartej na nim pracy), odbiorca
-automatycznie otrzymuje od pierwotnego licencjodawcy
-licencję na kopiowanie, rozpowszechnianie i modyfikowanie
-Programu na niniejszych zasadach i warunkach. Na
-korzystanie przez odbiorcę z udzielonych w niniejszej
-Licencji praw nie możesz narzucać już dalszych ograniczeń.
-Nie jesteś stroną odpowiedzialną za kontrolę
-przestrzegania Licencji przez osoby trzecie.
-
-  7. Jeśli na skutek wyroku sądowego lub zarzutu
-naruszenia patentu, jak też z każdej innej przyczyny (nie
-ograniczonej do kwestii patentowych) zostaną narzucone na
-ciebie (niezależnie czy to mocą wyroku sądowego, umowy,
-czy w inny sposób) warunki sprzeczne z warunkami
-niniejszej Licencji, to nie zwalniają one ciebie z
-warunków Licencji. Jeśli nie możesz prowadzić dystrybucji
-tak, aby wypełniać jednocześnie swoje obowiązki z tytułu
-niniejszej Licencji i inne odnośne obowiązki, to w
-rezultacie nie możesz wcale rozprowadzać Programu. Na
-przykład, gdyby licencja patentowa nie zezwalała na wolną
-od opłat licencyjnych redystrybucję Programu przez
-wszystkie osoby, które otrzymały kopie bezpośrednio lub
-pośrednio od ciebie, to jedynym sposobem pozwalającym ci
-na przestrzeganie i licencji patentowej, i Licencji
-niniejszej, byłoby całkowite powstrzymanie się od
-jakiejkolwiek dystrybucji Programu.
-
-  Jeżeli w jakichś szczególnych okolicznościach któryś
-fragment niniejszego punktu stałby się nieważny lub
-niewykonywalny, to intencją jest, aby znajdowała
-zastosowanie pozostała część punktu, a treść całego punktu
-była stosowana w pozostałych okolicznościach. 
-
-  Celem niniejszego punktu nie jest zachęcanie do
-naruszania patentów czy innych praw własności, albo też do
-podważania ich ważności; niniejszy punkt za swój jedyny
-cel ma ochronę integralności systemu rozpowszechniania
-wolnego oprogramowania, realizowanego za pomocą
-publicznych licencji. Wielu ludzi bezinteresownie wniosło
-swój wkład do stworzenia szerokiego zakresu oprogramowania
-upowszechnianego w tym systemie, mając zaufanie do
-konsekwentnego jego stosowania; wyłącznie do
-autora/ofiarodawcy należy decyzja, czy życzy on sobie
-rozprowadzania oprogramowania za pośrednictwem innego
-systemu i licencjobiorca nie może tego prawa wyboru
-ograniczać. 
-
-  Intencją niniejszego punktu jest jasne i wyraźne
-przedstawienie tego, co uważa się za skutki, jakie rodzi
-pozostała część niniejszej Licencji.
-
-  8. W przypadku, gdy dystrybucja i/lub używanie Programu
-w niektórych krajach poddane jest ograniczeniom patentowym
-lub zastrzeżeniom prawami autorskimi, początkowy posiadacz
-praw autorskich, który poddaje Program pod oddziaływanie
-niniejszej Licencji, może dodać wyraźnie zakreślone
-geograficzne ograniczenie rozpowszechniania wyłączające te
-kraje, dzięki czemu dystrybucja dozwolona będzie wyłącznie
-w krajach czy wśród krajów nie objętych takim wyłączeniem.
-W przypadku takim, niniejsza Licencja obejmuje dane
-ograniczenie tak, jakby było ono wpisane w jej treść.
-
-  9. W miarę potrzeby Fundacja Wolnego Oprogramowania może
-publikować poprawione i/lub nowe wersje Powszechnej
-Licencji Publicznej. Takie nowe wersje będą napisane w
-duchu podobnym do obecnej wersji, ale mogą różnić się w
-szczegółach poruszających nowe problemy czy zagadnienia.
-
-  Każdej wersji nadaje się wyróżniający ją numer. Jeżeli
-Program podaje numer wersji niniejszej Licencji, odnoszący
-się do tej wersji i "wszelkich wersji następnych", masz do
-wyboru albo stosować się do postanowień i warunków tej
-wersji, albo którejkolwiek wersji późniejszej wydanej
-przez Fundację Wolnego Oprogramowania. O ile Program nie
-podaje numeru wersji niniejszej Licencji, możesz wybrać
-dowolną wersję kiedykolwiek opublikowaną przez Fundację.
-
-  10. Jeśli chcesz włączyć części Programu do innych
-wolnych programów, których warunki rozpowszechniania są
-inne, zwróć się pisemnie do autora z prośbą o pozwolenie.
-W przypadku oprogramowania objętego przez Fundację prawem
-autorskim, napisz do Fundacji; czasami czynimy od tego
-odstępstwa. W naszej decyzji kierujemy się dwoma celami:
-utrzymania wolnego statusu wszystkich pochodnych naszego
-wolnego oprogramowania oraz - generalnie - promowania
-współudziału i wielokrotnego stosowania oprogramowania.
-
-
-                  WYRÓB BEZ GWARANCJI
-
-  11. PONIEWAŻ PROGRAM JEST LICENCJONOWANY BEZPŁATNIE, NIE
-JEST OBJĘTY GWARANCJĄ W ZAKRESIE DOZWOLONYM PRZEZ
-OBOWIĄZUJĄCE PRZEPISY. O ILE NA PIŚMIE NIE STANOWI SIĘ
-INACZEJ, POSIADACZE PRAW AUTORSKICH I/LUB INNE STRONY
-ZAPEWNIAJĄ PROGRAM W STANIE, W JAKIM JEST ("JAK WIDAĆ")
-BEZ JAKIEJKOLWIEK GWARANCJI, ANI WYRAŹNEJ, ANI DOMYŚLNEJ,
-W TYM MIĘDZY INNYMI DOMYŚLNYCH GWARANCJI CO DO
-PRZYDATNOŚCI HANDLOWEJ I PRZYDATNOŚCI DO OKREŚLONYCH
-ZASTOSOWAŃ. CAŁOŚĆ RYZYKA W ZAKRESIE JAKOŚCI I
-SKUTECZNOŚCI DZIAŁANIA PROGRAMU PONOSISZ SAM. W RAZIE
-GDYBY PROGRAM OKAZAŁ SIĘ WADLIWY, PONOSISZ KOSZT CAŁEGO
-NIEZBĘDNEGO SERWISU, NAPRAWY I KORYGOWANIA.
-
-  12. O ILE OBOWIĄZUJĄCE PRAWO NIE STANOWI INACZEJ ALBO
-CZEGOŚ INNEGO NIE UZGODNIONO W FORMIE PISEMNEJ, ŻADEN
-POSIADACZ PRAW AUTORSKICH ANI INNA STRONA MODYFIKUJĄCA
-I/LUB REDYSTRYBUJĄCA PROGRAM ZGODNIE Z POWYŻSZYMI
-ZEZWOLENIAMI, W ŻADNYM WYPADKU NIE JEST ODPOWIEDZIALNA
-WOBEC CIEBIE ZA SZKODY, W TYM SZKODY OGÓLNE, SPECJALNE,
-UBOCZNE LUB SKUTKOWE, WYNIKŁE Z UŻYCIA BĄDŹ NIEMOŻLIWOŚCI
-UŻYCIA PROGRAMU (W TYM, MIĘDZY INNYMI, ZA UTRATĘ DANYCH
-LUB POWSTANIE DANYCH NIEDOKŁADNYCH, ALBO ZA STRATY
-PONIESIONE PRZEZ CIEBIE LUB STRONY TRZECIE, JAK TEŻ
-NIEDZIAŁANIE PROGRAMU Z INNYMI PROGRAMAMI), NAWET JEŚLI
-DANY POSIADACZ BĄDŹ INNA STRONA ZOSTALI POWIADOMIENI O
-MOŻLIWOŚCI POWSTANIA TAKICH SZKÓD.
-
-
-              KONIEC ZASAD I WARUNKÓW
-
-  Jak stosować niniejsze Warunki do Twoich nowych
-programów
-
-  Jeśli opracowujesz nowy program i chciałbyś, aby stał
-się on przydatny dla szerokiego ogółu, najlepszą drogą do
-osiągnięcia tego będzie nadanie twemu programowi
-charakteru wolnego oprogramowania, które każdy może
-redystrybuować i zmieniać na niniejszych warunkach.
-
-  W tym celu do programu dołącz poniższe informacje.
-Bezpieczniej jest dołączyć je na początku każdego pliku
-źródłowego, dzięki czemu najskuteczniej można przekazać
-fakt nieistnienia gwarancji; każdy plik powinien przy tym
-nosić uwagę "copyright" i odnośnik, gdzie można znaleźć
-pełną informację.
-
-    nazwa programu i informacja, do czego on służy.
-    Copyright (C) 19../20.. nazwisko autora
-
-    Niniejszy program jest wolnym oprogramowaniem;
-    możesz go rozprowadzać dalej i/lub modyfikować na
-    warunkach Powszechnej Licencji Publicznej GNU,
-    wydanej przez Fundację Wolnego Oprogramowania -
-    według wersji 2-giej tej Licencji lub którejś z
-    późniejszych wersji.
-
-    Niniejszy program rozpowszechniany jest z nadzieją,
-    iż będzie on użyteczny - jednak BEZ JAKIEJKOLWIEK
-    GWARANCJI, nawet domyślnej gwarancji PRZYDATNOŚCI
-    HANDLOWEJ albo PRZYDATNOŚCI DO OKREŚLONYCH
-    ZASTOSOWAŃ. W celu uzyskania bliższych informacji -
-    Powszechna Licencja Publiczna GNU.
-
-    Z pewnością wraz z niniejszym programem otrzymałeś
-    też egzemplarz Powszechnej Licencji Publicznej GNU
-    (GNU General Public License); jeśli nie - napisz do
-    Free Software Foundation, Inc., 51 Franklin Street,
-    Fifth Floor, Boston, MA  02110-1301  USA
-
-  Podaj też informacje o sposobie kontaktowania się z
-tobą pocztą elektroniczną lub zwykłą.
-
-  Jeśli dany program jest interaktywny, spraw, aby w
-momencie wchodzenia w tryb interaktywny wyświetlał on
-komunikat jak w poniższym przykładzie:
-
-    Gnomovision wersja 69, Copyright C 19.. nazwisko
-
-    Gnomovision wydawany jest ABSOLUTNIE BEZ ŻADNEJ
-    GWARANCJI - w celu uzyskania dalszych szczegółów
-    wpisz "show w". To jest wolne oprogramowanie i mile
-    widziane jest dalsze rozpowszechnianie go przez
-    ciebie na określonych warunkach - w celu uzyskania
-    bliższych szczegółów wpisz "show c".
-
-  Powyższe hipotetyczne polecenia "show w" i "show c"
-winny powodować wyświetlenie odpowiednich części
-Powszechnej Licencji Publicznej. Oczywiście możesz używać
-innych poleceń niż "show w" i "show c"; mogą to być nawet
-kliknięcia myszą lub pozycje menu - co tylko sobie uznasz
-za stosowne.
-
-  Powinieneś też poprosić swego pracodawcę (jeśli
-pracujesz jako programista) czy też swoją szkołę (jeśli
-jesteś uczniem), o podpisanie, w razie potrzeby,
-"Rezygnacji z praw autorskich" do programu. Poniżej
-podajemy przykład (zmień nazwy/nazwiska):
-
-    My, firma Jojodyne Sp. z o.o. niniejszym zrzekamy
-    się i rezygnujemy z wszelkich interesów prawnych w
-    zakresie praw autorskich do programu "Gnomovision"
-    (który realizuje następujące funkcje...), napisanego
-    przez p.Jana Kowalskiego.
-
-    Podpis: /-/ Gniewosław Wielkoważny
-
-    Gniewosław Wielkoważny, Prezes...itp
-
-  Powszechna Licencja Publiczna nie zezwala na włączanie
-twego programu do programów prawnie zastrzeżonych. Jeśli
-twój program jest biblioteką podprogramów, możesz
-rozważyć, czy nie będzie korzystniej zezwolić na
-powiązanie prawnie zastrzeżonych aplikacji z biblioteką.
-Jeśli chciałbyś właśnie tego dokonać, zamiast niniejszej
-Licencji zastosuj Powszechną Licencję Publiczną GNU dla
-Bibliotek.
-
 [QueryBox]
-Okna zapytania
+Okna zapytań
 
-W oknach dialogowych użyj kursorów lub naciśnij
-podświetloną literę aby wybrać opcję. Możesz też kliknąć
-myszą na odpowiednim przycisku.
+W oknach dialogowych zapytań można używać klawiszy
+strzałek lub pierwszych liter, aby wybrać element albo
+kliknąć na przycisku.
 
 [How to use help]
-Jak korzystać z pomocy
+Jak używać pomocy
 
-Do obsługi przeglądarki pomocy możesz użyć kursorów lub
-myszy. Naciśnij strzałkę w dół aby przejść do
-następnej pozycji lub przewinąć ekran w dół. Naciśnij
-strzałkę w górę aby przejść do poprzedniej pozycji lub
-przewinąć ekran w górę. Naciśnij strzałkę w prawo aby
-podążyć za zaznaczonym odnośnikiem. Naciśnij strzałkę w
-lewo aby powrócić do poprzedniego odwiedzonego węzła w
-historii.
+Do obsługi przeglądarki można używać klawiszy kursora lub
+myszy. Naciśnięcie strzałki w dół przeniesie do następnego
+elementu lub przewinie w dół. Naciśnięcie strzałki w górę
+przeniesie do poprzedniego elementu lub przewinie w górę,
+Naciśnięcie strzałki w prawo podąży za zaznaczonym
+odnośnikiem. Naciśnięcie strzałki w lewo powróci do
+poprzednio odwiedzonego węzła.
 
-Jeśli twój terminal nie obsługuje klawiszy kursorów,
-możesz użyć spacji aby przewinąć do przodu i klawisza
-b aby przewinąć do tyłu. Użyj TAB aby przejść do
-następnej pozycji i ENTER aby odwiedzić zaznaczony
-odnośnik. Klawisz l wraca do poprzedniego odwiedzonego
-węzła w historii. Naciśnij ESC aby wyjść z
-przeglądarki pomocy.
+Jeśli terminal nie obsługuje klawiszy kursora, można używać
+spacji do przewijania do przodu i klawisz B, aby przewijać
+do tyłu. Można używać klawisza Tab, aby przechodzić do
+następnego elementu i klawisza Enter, aby podążyć za
+zaznaczonym odnośnikiem. Klawisz L może być używany do
+przechodzenia do poprzednio odwiedzonego węzła.
+Naciśnięcie klawisza Esc zakończy przeglądarkę pomocy.
 
-Lewy przycisk myszy uaktywnia odnośnik lub przewija ekran.
-Prawy wraca do poprzedniego węzła w historii.
+Lewy przycisk myszy podąży za odnośnikiem lub przewinie
+ekran. Prawy przycisk myszy może być używany, aby
+przechodzić do poprzednio odwiedzonego węzła.
 
 Pełna lista klawiszy przeglądarki pomocy:
 
-Podstawowe klawisze ruchuGeneral Movement Keys także
-działają.
+Ogólne klawisze ruchuGeneral Movement Keys są akceptowane.
 
-tab           Następna pozycja.
-M-tab         Poprzednia pozycja.
-dół           Następna pozycja lub przewiń ekran w dół.
-góra          Poprzednia pozycja lub przewiń w górę.
-prawo, enter  Uaktywnia odnośnik.
-lewo, l       Poprzedni węzeł w historii.
+Tab           Następny element.
+M-Tab         Poprzedni element.
+Dół           Następny element lub przewijanie o wiersz w dół.
+Góra          Poprzedni element lub przewijanie o wiersz w górę.
+Prawo, Enter  Podążanie za zaznaczonym odnośnikiem.
+Lewo, l       Ostatnio odwiedzony węzeł.
 F1            Pomoc dla przeglądarki pomocy.
-n             Następny węzeł.
-p             Poprzedni węzeł.
-c             Przejście do Spisu treści.
-F10, esc      Wyjście z przeglądarki pomocy.
+N             Następny węzeł.
+P             Poprzedni węzeł.
+C             Przejście do Spisu treści.
+F10, Esc      Zakończenie działanie przeglądarki pomocy.
 
 Local variables:
 fill-column: 58
