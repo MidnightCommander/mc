@@ -397,21 +397,22 @@ mkdir_cmd (void)
     if (!dir)
 	return;
 
-    if (dir[0] == '/' || dir[0] == '~')
-	absdir = g_strdup (dir);
-    else
-	absdir = concat_dir_and_file (current_panel->cwd, dir);
+    if (*dir) {
+        if (dir[0] == '/' || dir[0] == '~')
+            absdir = g_strdup (dir);
+        else
+            absdir = concat_dir_and_file (current_panel->cwd, dir);
 
-    save_cwds_stat ();
-    if (my_mkdir (absdir, 0777) == 0) {
-	update_panels (UP_OPTIMIZE, dir);
-	repaint_screen ();
-	select_item (current_panel);
-    } else {
-	message (D_ERROR, MSG_ERROR, "  %s  ", unix_error_string (errno));
+        save_cwds_stat ();
+        if (my_mkdir (absdir, 0777) == 0) {
+            update_panels (UP_OPTIMIZE, dir);
+            repaint_screen ();
+            select_item (current_panel);
+        } else {
+            message (D_ERROR, MSG_ERROR, "  %s  ", unix_error_string (errno));
+        }
+        g_free (absdir);
     }
-
-    g_free (absdir);
     g_free (dir);
 }
 
