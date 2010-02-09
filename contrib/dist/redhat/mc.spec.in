@@ -122,8 +122,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/mcedit
 %{_bindir}/mcview
 %{_bindir}/mcmfmt
+
+%dir %{_libexecdir}/mc
+%dir %{_libexecdir}/mc/extfs.d
 %attr(4511, vcsa, tty) %{_libexecdir}/mc/cons.saver
 %{_libexecdir}/mc/mc*sh
+%{_libexecdir}/mc/extfs.d/*
+
 %{_mandir}/man1/*
 %lang(es) %{_mandir}/es/man1/mc.1*
 %lang(hu) %{_mandir}/hu/man1/mc.1*
@@ -142,17 +147,18 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %{_sysconfdir}/mc/mc.ext
 %config(noreplace) %{_sysconfdir}/mc/mc.menu
 %config(noreplace) %{_sysconfdir}/mc/mc.menu.*
-%config(noreplace) %{_sysconfdir}/mc/extfs/extfs.ini
-%config(noreplace) %{_sysconfdir}/mc/extfs/sfs.ini
+%config(noreplace) %{_sysconfdir}/mc/sfs.ini
 %config(noreplace) %{_sysconfdir}/mc/mc.keymap
 %config(noreplace) %{_sysconfdir}/mc/mc.keymap.*
 
 %dir %{_datadir}/mc
 %{_datadir}/mc/*
 
-%dir %{_libexecdir}/mc
 
 %changelog
+* Tue Feb 09 2010 Andrew Borodin <aborodin@vmail.ru>
+- Fixed file list because of EXTFS VFS reorganizing.
+
 * Wed Dec 30 2009 Yury V. Zaytsev <yury@shurup.com>
 - Bumped the epoch again and changed the versioning scheme.
 - Thanks to Slava Zanko for all his hard work on m4 vodoo!
