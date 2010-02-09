@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc CVS-20011220\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-12-25 19:06+0200\n"
+"POT-Creation-Date: 2010-02-09 12:08+0200\n"
 "PO-Revision-Date: 2001-12-20 18:33+0900\n"
 "Last-Translator: Akira TAGOH <tagoh@gnome.gr.jp>\n"
 "Language-Team: Japanese <debian-japanese@lists.debian.org>\n"
@@ -15,81 +15,633 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#, fuzzy
-msgid " Choose syntax highlighting "
-msgstr "文法ハイライト(&S)"
-
-#, fuzzy
-msgid "< Auto >"
-msgstr " Cooledit について "
-
-msgid "< Reload Current Syntax >"
-msgstr ""
-
-#, fuzzy, c-format
-msgid " Cannot open %s for reading "
-msgstr "読みだし用のパイプのオープンに失敗しました: "
-
-msgid "Error"
-msgstr "エラー"
-
-#, fuzzy, c-format
-msgid " Error reading from pipe: %s "
-msgstr " パイプからの読み込みエラー: "
-
-#, fuzzy, c-format
-msgid " Cannot open pipe for reading: %s "
-msgstr "読みだし用のパイプのオープンに失敗しました: "
-
-#, fuzzy, c-format
-msgid " Cannot get size/permissions for %s "
-msgstr "ファイルの大きさ・パーミッションの情報を取得できませんでした: "
-
-#, fuzzy, c-format
-msgid " %s is not a regular file "
-msgstr " 表示できません: 通常ファイルではありません "
-
-#, fuzzy, c-format
-msgid " File %s is too large "
-msgstr "ファイルが大きすぎます: "
-
-msgid " About "
-msgstr " Cooledit について "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"             Midnight Commander 用の\n"
-"            ユーザに親切なエディタです\n"
-
-msgid "&OK"
-msgstr "はい(&O)"
-
-msgid "Macro recursion is too deep"
-msgstr ""
-
-msgid "Search"
-msgstr "検索"
-
 msgid " Search string not found "
 msgstr " 検索文字列が見付かりません "
+
+msgid " Not implemented yet "
+msgstr ""
+
+msgid " Num of replace tokens not equal to num of found tokens "
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Invalid token number %d "
+msgstr " 不正なターゲットマスクです "
+
+#, fuzzy
+msgid "Normal"
+msgstr "Format"
+
+msgid "&Regular expression"
+msgstr "正規表現(&R)"
+
+msgid "Hexadecimal"
+msgstr ""
+
+msgid "Wildcard search"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+msgid "Function key 1"
+msgstr "Functionキー 1"
+
+msgid "Function key 2"
+msgstr "Functionキー 2"
+
+msgid "Function key 3"
+msgstr "Functionキー 3"
+
+msgid "Function key 4"
+msgstr "Functionキー 4"
+
+msgid "Function key 5"
+msgstr "Functionキー 5"
+
+msgid "Function key 6"
+msgstr "Functionキー 6"
+
+msgid "Function key 7"
+msgstr "Functionキー 7"
+
+msgid "Function key 8"
+msgstr "Functionキー 8"
+
+msgid "Function key 9"
+msgstr "Functionキー 9"
+
+msgid "Function key 10"
+msgstr "Functionキー 10"
+
+msgid "Function key 11"
+msgstr "Functionキー 11"
+
+msgid "Function key 12"
+msgstr "Functionキー 12"
+
+msgid "Function key 13"
+msgstr "Functionキー 13"
+
+msgid "Function key 14"
+msgstr "Functionキー 14"
+
+msgid "Function key 15"
+msgstr "Functionキー 15"
+
+msgid "Function key 16"
+msgstr "Functionキー 16"
+
+msgid "Function key 17"
+msgstr "Functionキー 17"
+
+msgid "Function key 18"
+msgstr "Functionキー 18"
+
+msgid "Function key 19"
+msgstr "Functionキー 19"
+
+msgid "Function key 20"
+msgstr "Functionキー 20"
+
+msgid "Backspace key"
+msgstr "Backspaeceキー"
+
+msgid "End key"
+msgstr "Endキー"
+
+msgid "Up arrow key"
+msgstr "上矢印"
+
+msgid "Down arrow key"
+msgstr "下矢印"
+
+msgid "Left arrow key"
+msgstr "左矢印"
+
+msgid "Right arrow key"
+msgstr "右矢印"
+
+msgid "Home key"
+msgstr "Homeキー"
+
+msgid "Page Down key"
+msgstr "PageDownキー"
+
+msgid "Page Up key"
+msgstr "PageUpキー"
+
+msgid "Insert key"
+msgstr "Insertキー"
+
+msgid "Delete key"
+msgstr "Deleteキー"
+
+msgid "Completion/M-tab"
+msgstr "Completion/M-tab"
+
+msgid "+ on keypad"
+msgstr "10キーの +"
+
+msgid "- on keypad"
+msgstr "10キーの -"
+
+msgid "Slash on keypad"
+msgstr "10キーの /"
+
+msgid "* on keypad"
+msgstr "10キーの *"
+
+#, fuzzy
+msgid "Escape key"
+msgstr "10キーの /"
+
+msgid "Left arrow keypad"
+msgstr "10キーの 左矢印"
+
+msgid "Right arrow keypad"
+msgstr "10キーの 右矢印"
+
+msgid "Up arrow keypad"
+msgstr "10キーの 上矢印"
+
+msgid "Down arrow keypad"
+msgstr "10キーの 下矢印"
+
+msgid "Home on keypad"
+msgstr "10キーの Home"
+
+msgid "End on keypad"
+msgstr "10キーの End"
+
+msgid "Page Down keypad"
+msgstr "10キーの PageDown"
+
+msgid "Page Up keypad"
+msgstr "10キーの PageUp"
+
+msgid "Insert on keypad"
+msgstr "10キーの Insert"
+
+msgid "Delete on keypad"
+msgstr "10キーの Delete"
+
+msgid "Enter on keypad"
+msgstr "10キーの Enter"
+
+#, fuzzy
+msgid "Function key 21"
+msgstr "Functionキー 1"
+
+#, fuzzy
+msgid "Function key 22"
+msgstr "Functionキー 2"
+
+#, fuzzy
+msgid "Function key 23"
+msgstr "Functionキー 2"
+
+#, fuzzy
+msgid "Function key 24"
+msgstr "Functionキー 2"
+
+msgid "Plus"
+msgstr ""
+
+#, fuzzy
+msgid "Minus"
+msgstr "メニュ"
+
+msgid "Asterisk"
+msgstr ""
+
+msgid "Dot"
+msgstr ""
+
+msgid "Less than"
+msgstr ""
+
+msgid "Great than"
+msgstr ""
+
+msgid "Equal"
+msgstr ""
+
+#, fuzzy
+msgid "Comma"
+msgstr "コマンド"
+
+msgid "Apostrophe"
+msgstr ""
+
+#, fuzzy
+msgid "Colon"
+msgstr "カウント"
+
+msgid "Exclamation mark"
+msgstr ""
+
+msgid "Question mark"
+msgstr ""
+
+#, fuzzy
+msgid "Ampersand"
+msgstr "追加(&P)"
+
+msgid "Dollar sign"
+msgstr ""
+
+msgid "Quotation mark"
+msgstr ""
+
+#, fuzzy
+msgid "Caret"
+msgstr "ターゲット"
+
+msgid "Tilda"
+msgstr ""
+
+#, fuzzy
+msgid "Prime"
+msgstr "前へ"
+
+#, fuzzy
+msgid "Underline"
+msgstr " 行番号を入力してください: "
+
+msgid "Understrike"
+msgstr ""
+
+msgid "Pipe"
+msgstr ""
+
+#, fuzzy
+msgid "Enter"
+msgstr "所有者"
+
+#, fuzzy
+msgid "Tab key"
+msgstr "10キーの +"
+
+#, fuzzy
+msgid "Space key"
+msgstr "10キーの /"
+
+#, fuzzy
+msgid "Slash key"
+msgstr "10キーの /"
+
+#, fuzzy
+msgid "Backslash key"
+msgstr "Backspaeceキー"
+
+msgid "Number sign #"
+msgstr ""
+
+msgid "Ctrl"
+msgstr ""
+
+msgid "Alt"
+msgstr ""
+
+msgid "Shift"
+msgstr ""
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"スクリーンサイズ %dx%d はサポートされていません\n"
+"TERM環境変数の値をチェックしてください\n"
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
+
+#, fuzzy, c-format
+msgid "%s is not a directory\n"
+msgstr "directory"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr ""
+" ターゲットディレクトリ \"%s\" を作成できません\n"
+" %s "
+
+#, fuzzy, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr ""
+" ターゲットディレクトリ \"%s\" を作成できません\n"
+" %s "
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr ""
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr ""
+
+#, c-format
+msgid "Press any key to continue..."
+msgstr "なにかキーを押せば続行します..."
 
 msgid "Warning"
 msgstr "警告"
 
-msgid " File has hard-links. Detach before saving? "
+msgid " Pipe failed "
+msgstr "pipe 失敗 "
+
+msgid " Dup failed "
+msgstr " dup 失敗 "
+
+#, c-format
+msgid ""
+"Cannot open cpio archive\n"
+"%s"
 msgstr ""
+"cpio アーカイブを開けません\n"
+"%s"
+
+#, c-format
+msgid ""
+"Premature end of cpio archive\n"
+"%s"
+msgstr ""
+"cpio アーカイブの終りが早すぎます\n"
+"%s"
+
+#, c-format
+msgid ""
+"Inconsistent hardlinks of\n"
+"%s\n"
+"in cpio archive\n"
+"%s"
+msgstr ""
+"cpio アーカイブ内 %s のハードリンクが\n"
+"矛盾しています\n"
+"%s"
+
+#, c-format
+msgid "%s contains duplicate entries! Skipping!"
+msgstr "%s 不正なエントリが含まれます! スキップ!"
+
+#, c-format
+msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr "%s の中で壊れた cpio ヘッダに遭遇した"
+
+#, c-format
+msgid ""
+"Unexpected end of file\n"
+"%s"
+msgstr ""
+"予期しない EOF です\n"
+"%s"
+
+#, c-format
+msgid "Directory cache expired for %s"
+msgstr "'%s' の Dir キャッシュが終了しました"
+
+msgid "Starting linear transfer..."
+msgstr "リニア転送を開始します..."
+
+#, c-format
+msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+msgstr "%s: %s: %s %3d%% (%lu バイト転送)"
+
+#, c-format
+msgid "%s: %s: %s %lu bytes transferred"
+msgstr "%s: %s: %s %lu バイト転送しました"
+
+msgid "Getting file"
+msgstr "ファイル取得中"
+
+#, c-format
+msgid ""
+"Cannot open %s archive\n"
+"%s"
+msgstr ""
+"%s アーカイブを開くことが出来ません\n"
+"%s"
+
+msgid "Inconsistent extfs archive"
+msgstr "不整合な extfs アーカイブです"
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "警告: ファイル %s は見つかりませんでした\n"
+
+#, c-format
+msgid "fish: Disconnecting from %s"
+msgstr "fish: %s から切断しています"
+
+msgid "fish: Waiting for initial line..."
+msgstr "fish: 最初の行を待っています..."
+
+msgid "Sorry, we cannot do password authenticated connections for now."
+msgstr "すいませんが，今のところパスワードを証明することが出来ません"
+
+msgid " fish: Password required for "
+msgstr "fish: パスワードが必要です "
+
+msgid "fish: Sending password..."
+msgstr "fish: パスワード送信中..."
+
+msgid "fish: Sending initial line..."
+msgstr "fish: 最初の行を送信..."
+
+msgid "fish: Handshaking version..."
+msgstr "fish: バージョンのハンドシェイク..."
+
+msgid "fish: Setting up current directory..."
+msgstr "fish: カレントディレクトリを設定します..."
+
+#, c-format
+msgid "fish: Connected, home %s."
+msgstr "fish: 接続しました。ホームディレクトリは %s です。"
+
+#, c-format
+msgid "fish: Reading directory %s..."
+msgstr "fish: ディレクトリ%sを読み込み中... "
+
+#, c-format
+msgid "%s: done."
+msgstr "%s: 完了"
+
+#, c-format
+msgid "%s: failure"
+msgstr "%s: 失敗"
+
+#, c-format
+msgid "fish: store %s: sending command..."
+msgstr "fish: store %s: コマンドを送信中..."
+
+msgid "fish: Local read failed, sending zeros"
+msgstr "fish: 局部読み込みに失敗しました。zeroを送信します"
+
+#, c-format
+msgid "fish: storing %s %d (%lu)"
+msgstr "fish: %s を保存中 %d (%lu)"
+
+msgid "zeros"
+msgstr "zeros"
+
+msgid "file"
+msgstr "file"
+
+msgid "Aborting transfer..."
+msgstr "転送を中断します..."
+
+msgid "Error reported after abort."
+msgstr "中断後にエラーが報告されました"
+
+msgid "Aborted transfer would be successful."
+msgstr "転送中断に成功しました"
+
+#, c-format
+msgid "ftpfs: Disconnecting from %s"
+msgstr "ftpfs: %s から切断中です"
+
+msgid " FTP: Password required for "
+msgstr " FTP: パスワードが必要です "
+
+msgid "ftpfs: sending login name"
+msgstr "ftpfs: ログイン名を送信中"
+
+msgid "ftpfs: sending user password"
+msgstr "ftpfs: パスワードを送信中"
+
+#, fuzzy, c-format
+msgid "FTP: Account required for user %s"
+msgstr " FTP: パスワードが必要です "
+
+#, fuzzy
+msgid "Account:"
+msgstr "カウント"
+
+#, fuzzy
+msgid "ftpfs: sending user account"
+msgstr "ftpfs: パスワードを送信中"
+
+msgid "ftpfs: logged in"
+msgstr "ftpfs: ログインしました"
+
+#, c-format
+msgid "ftpfs: Login incorrect for user %s "
+msgstr "ftpfs: ユーザ %s のログインが失敗しました "
+
+msgid "ftpfs: Invalid host name."
+msgstr "ftpfs: 不正なホスト名です"
+
+#, c-format
+msgid "ftpfs: %s"
+msgstr ""
+
+#, c-format
+msgid "ftpfs: making connection to %s"
+msgstr "ftpfs: %s へ接続中"
+
+msgid "ftpfs: connection interrupted by user"
+msgstr "ftpfs: ユーザによって接続が断たれました"
+
+#, c-format
+msgid "ftpfs: connection to server failed: %s"
+msgstr "ftpfs: サーバへの接続に失敗しました: %s"
+
+#, c-format
+msgid "Waiting to retry... %d (Control-C to cancel)"
+msgstr "再試行するのでお待ちください... %d (Control-C で中止)"
+
+#, fuzzy
+msgid "ftpfs: invalid address family"
+msgstr "ftpfs: 不正なホストのアドレスです"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not setup passive mode: %s"
+msgstr "ftpfs: パッシブモードに失敗しました"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not create socket: %s"
+msgstr "ソケットを作成できませんでした: %s"
+
+msgid "ftpfs: could not setup passive mode"
+msgstr "ftpfs: パッシブモードに失敗しました"
+
+msgid "ftpfs: aborting transfer."
+msgstr "ftpfs: 転送を中断します"
+
+#, c-format
+msgid "ftpfs: abort error: %s"
+msgstr "ftpfs: 中断: %s"
+
+msgid "ftpfs: abort failed"
+msgstr "ftpfs: 中断に失敗"
+
+msgid "ftpfs: CWD failed."
+msgstr "ftpfs: CWD 失敗"
+
+msgid "ftpfs: couldn't resolve symlink"
+msgstr "ftpfs: シンボリックリンクの展開に失敗"
+
+msgid "Resolving symlink..."
+msgstr "シンボリックリンクを展開する..."
+
+#, c-format
+msgid "ftpfs: Reading FTP directory %s... %s%s"
+msgstr "ftpfs: FTPディレクトリ %s を読み込み中... %s%s"
+
+msgid "(strict rfc959)"
+msgstr "(厳密な rfc959)"
+
+msgid "(chdir first)"
+msgstr "(初めに chdir)"
+
+msgid "ftpfs: failed; nowhere to fallback to"
+msgstr "ftpfs: 失敗しました。フォールバックできません"
+
+#, fuzzy, c-format
+msgid "ftpfs: storing file %lu (%lu)"
+msgstr "ftpfs: ファイルの保存中 %d (%lu)"
+
+msgid ""
+"~/.netrc file has incorrect mode.\n"
+"Remove password or correct mode."
+msgstr ""
+"~/.netrcファイルが正しいモードではありません.\n"
+"パスワードを削除するかモードを訂正してください."
+
+msgid " MCFS "
+msgstr " MCFS "
+
+msgid " The server does not support this version "
+msgstr " サーバはこのバージョンをサポートしていません "
+
+msgid ""
+" The remote server is not running on a system port \n"
+" you need a password to log in, but the information may \n"
+" not be safe on the remote side.  Continue? \n"
+msgstr ""
+" リモート・サーバはシステムポートで起動していません.\n"
+" パスワードがログインのため必要です, しかしこの情報は\n"
+" 安全な方法で転送されません.  継続しますか? \n"
 
 msgid "&Yes"
 msgstr "はい(&Y)"
@@ -97,666 +649,181 @@ msgstr "はい(&Y)"
 msgid "&No"
 msgstr "いいえ(&N)"
 
+msgid " MCFS Password required "
+msgstr " MCFS パスワードの要求 "
+
+msgid " Invalid password "
+msgstr " 間違ったパスワード "
+
+#, c-format
+msgid " Cannot locate hostname: %s "
+msgstr "hostname の場所を見つけられませんでした: %s"
+
+#, c-format
+msgid " Cannot create socket: %s "
+msgstr "ソケットを作成できませんでした: %s"
+
+#, c-format
+msgid " Cannot connect to server: %s "
+msgstr "サーバに接続できませんでした: %s"
+
+msgid " Too many open connections "
+msgstr " 接続が多すぎます "
+
+#, c-format
+msgid ""
+"Warning: Invalid line in %s:\n"
+"%s\n"
+msgstr ""
+"警告: %s に無効な行があります:\n"
+"%s\n"
+
+#, c-format
+msgid ""
+"Warning: Invalid flag %c in %s:\n"
+"%s\n"
+msgstr ""
+"警告: %2$s に無効なフラグ %1$c があります:\n"
+"%3$s\n"
+
+#, c-format
+msgid ""
+" reconnect to %s failed\n"
+" "
+msgstr ""
+" %s への再接続に失敗しました\n"
+" "
+
+msgid " Authentication failed "
+msgstr " 認証に失敗しました "
+
+#, c-format
+msgid " Error %s creating directory %s "
+msgstr " %s: mkdir %s "
+
+#, c-format
+msgid " Error %s removing directory %s "
+msgstr " %s: rmdir %s "
+
+#, c-format
+msgid " %s opening remote file %s "
+msgstr " %s: リモートファイル %s を開く際に "
+
+#, c-format
+msgid " %s removing remote file %s "
+msgstr "リモートファイル %s を削除中に %s "
+
+#, c-format
+msgid " %s renaming files\n"
+msgstr "ファイル名変更中に %s\n"
+
+#, c-format
+msgid ""
+"Cannot open tar archive\n"
+"%s"
+msgstr ""
+"tarアーカイブ%sを\n"
+"開けません"
+
+msgid "Inconsistent tar archive"
+msgstr "tar アーカイブに不整合"
+
+msgid "Unexpected EOF on archive file"
+msgstr "予期しないEOFがアーカイブファイルにあります"
+
+#, c-format
+msgid ""
+"Hmm,...\n"
+"%s\n"
+"doesn't look like a tar archive."
+msgstr ""
+"んー,‥‥\n"
+"%s\n"
+"これはtarアーカイブではないようです"
+
+msgid " undelfs: error "
+msgstr " undelfs: エラー "
+
+msgid " not enough memory "
+msgstr " 十分なメモリがありません "
+
+msgid " while allocating block buffer "
+msgstr " ブロックバッファを割り当てる間に "
+
+#, c-format
+msgid " open_inode_scan: %d "
+msgstr " open_inode_scan: %d "
+
+#, c-format
+msgid " while starting inode scan %d "
+msgstr " iノードスキャン %d を開始している間に "
+
+#, c-format
+msgid "undelfs: loading deleted files information %d inodes"
+msgstr "undelfs: %d iノードの削除ファイル情報をロード中です"
+
+#, c-format
+msgid " while calling ext2_block_iterate %d "
+msgstr " ext2_block_iterate %d を呼んでいる間に "
+
+msgid " no more memory while reallocating array "
+msgstr " メモリの間に再配分している配列はありません "
+
+#, c-format
+msgid " while doing inode scan %d "
+msgstr "iノードスキャン %d をする間に "
+
+msgid " Ext2lib error "
+msgstr " Ext2lib エラー "
+
+#, c-format
+msgid " Cannot open file %s "
+msgstr " ファイル '%s' を開けません "
+
+msgid "undelfs: reading inode bitmap..."
+msgstr "undelfs: iノードビットマップをロード中です..."
+
+#, c-format
+msgid ""
+" Cannot load inode bitmap from: \n"
+" %s \n"
+msgstr "'%s' からiノードビットマップをロード出来ません \n"
+
+msgid "undelfs: reading block bitmap..."
+msgstr "undelfs: ブロックビットマップを読み込み中です..."
+
+#, c-format
+msgid ""
+" Cannot load block bitmap from: \n"
+" %s \n"
+msgstr " '%s' からブロックビットマップをロード出来ませんでした\n"
+
+msgid " vfs_info is not fs! "
+msgstr " vfs_info はファイルシステムではありません! "
+
+msgid " You have to chdir to extract files first "
+msgstr "初めに抽出したファイルへ chdir しなければなりません"
+
+msgid " while iterating over blocks "
+msgstr " ブロックの終わりまでを繰り返す間に "
+
+msgid "Cannot parse:"
+msgstr "構文解析が出来ません:"
+
+msgid "More parsing errors will be ignored."
+msgstr "多くの構文解析エラーがでましたが無視します"
+
+msgid "Internal error:"
+msgstr "内部エラー:"
+
+msgid "Password:"
+msgstr "パスワード:"
+
+msgid "Changes to file lost"
+msgstr "紛失したファイルに変更します"
+
 msgid "&Cancel"
 msgstr "キャンセル(&C)"
-
-msgid "The file has been modified in the meantime. Save anyway?"
-msgstr ""
-
-msgid " Error writing to pipe: "
-msgstr " パイプへの書き出しエラー: "
-
-msgid " Cannot open pipe for writing: "
-msgstr "書き込み用のパイプのオープンに失敗しました: "
-
-#, fuzzy, c-format
-msgid " Cannot open file for writing: %s "
-msgstr "書き込み用のパイプのオープンに失敗しました: "
-
-#, fuzzy
-msgid "&Quick save"
-msgstr "クイックセーブ "
-
-#, fuzzy
-msgid "&Safe save"
-msgstr "セーフセーブ "
-
-msgid "&Do backups with following extension:"
-msgstr ""
-
-msgid "Check &POSIX new line"
-msgstr ""
-
-msgid " Edit Save Mode "
-msgstr "保存方法を変更 "
-
-msgid "The file you are saving is not finished with a newline"
-msgstr ""
-
-#, fuzzy
-msgid "C&ontinue"
-msgstr "継続"
-
-msgid "&Do not change"
-msgstr ""
-
-msgid "&Unix format (LF)"
-msgstr ""
-
-msgid "&Windows/DOS format (CR LF)"
-msgstr ""
-
-msgid "&Macintosh format (CR)"
-msgstr ""
-
-msgid "Change line breaks to:"
-msgstr ""
-
-#, fuzzy
-msgid " Enter file name: "
-msgstr " 行番号を入力してください: "
-
-msgid " Save As "
-msgstr " 別名で保存 "
-
-msgid " A file already exists with this name. "
-msgstr "同名のファイルが存在します"
-
-#, fuzzy
-msgid "&Overwrite"
-msgstr "上書き"
-
-msgid " Cannot save file. "
-msgstr "ファイルの保存時にエラーが発生しました"
-
-msgid " Delete macro "
-msgstr " マクロを削除 "
-
-msgid " Cannot open temp file "
-msgstr " テンポラリ・ファイルを開くのにエラーが発生しました "
-
-msgid " Cannot open macro file "
-msgstr "マクロ・ファイルを開くのにエラーが発生しました "
-
-msgid " Cannot overwrite macro file "
-msgstr "マクロファイルを上書きしようとしてエラーが発生しました "
-
-msgid " Save macro "
-msgstr " マクロを保存 "
-
-msgid " Press the macro's new hotkey: "
-msgstr "マクロの新しいホットキーを押してください: "
-
-msgid " Press macro hotkey: "
-msgstr " マクロホットキーを押して下さい: "
-
-msgid " Load macro "
-msgstr " マクロを読み込む "
-
-msgid " Confirm save file? : "
-msgstr "ファイルを保存して良いですか? : "
-
-msgid " Save file "
-msgstr " ファイル保存 "
-
-msgid "&Save"
-msgstr "保存(&S)"
-
-msgid ""
-" Current text was modified without a file save. \n"
-" Continue discards these changes. "
-msgstr ""
-"テキストに変更が加えられていますが保存されていません。\n"
-"変更を破棄して続けます。"
-
-#, fuzzy
-msgid "Syntax file edit"
-msgstr "メニューファイル編集(&M)"
-
-#, fuzzy
-msgid " Which syntax file you want to edit? "
-msgstr " どの拡張ファイルを編集しますか? "
-
-msgid "&User"
-msgstr "ユーザ(&U)"
-
-msgid "&System Wide"
-msgstr "システム全体(&S)"
-
-msgid " Menu edit "
-msgstr " メニューの編集 "
-
-msgid " Which menu file do you want to edit? "
-msgstr " どのメニューファイルを編集しますか? "
-
-msgid "&Local"
-msgstr "ローカル(&L)"
-
-msgid " Load "
-msgstr " 読み込み "
-
-msgid " Block is large, you may not be able to undo this action. "
-msgstr "大きなブロックです。この操作はやり直せないかもしれません"
-
-#, fuzzy
-msgid "Replace"
-msgstr "置換(&R)"
-
-msgid " Replace "
-msgstr " 置換 "
-
-#, c-format
-msgid " %ld replacements made. "
-msgstr "%ld 個置換しました"
-
-msgid "Quit"
-msgstr "終了"
-
-msgid " File was modified, Save with exit? "
-msgstr "ファイルに変更が加えられています。保存して終了しますか?"
-
-#, fuzzy
-msgid "&Cancel quit"
-msgstr "終了を中止"
-
-#, fuzzy
-msgid " Error "
-msgstr "エラー"
-
-msgid " This function is not implemented. "
-msgstr ""
-
-msgid " Copy to clipboard "
-msgstr " クリップボードへコピー "
-
-msgid " Unable to save to file. "
-msgstr " ファイル保存ができませんでした "
-
-msgid " Cut to clipboard "
-msgstr " クリップボードへ切り出し "
-
-msgid " Goto line "
-msgstr " 指定行へ移動 "
-
-msgid " Enter line: "
-msgstr " 行番号を入力してください: "
-
-msgid " Save Block "
-msgstr " ブロックを保存 "
-
-msgid " Insert File "
-msgstr " ファイルを挿入 "
-
-msgid " Cannot insert file. "
-msgstr " ファイルを挿入しようとしてエラーが発生しました "
-
-msgid " Sort block "
-msgstr " ブロックで並べ替え "
-
-msgid " You must first highlight a block of text. "
-msgstr " まずテキストブロックをハイライトする必要があります "
-
-msgid " Run Sort "
-msgstr "ソートを実行 "
-
-msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr ""
-" ソートのオプション (マニュアル参照) を空白で区切って入力してください: "
-
-msgid " Sort "
-msgstr " ソート "
-
-msgid " Cannot execute sort command "
-msgstr " ソートコマンドを実行しようとしてエラーが発生しました "
-
-msgid " Sort returned non-zero: "
-msgstr " ソートコマンドがゼロ以外の返り値: "
-
-msgid "Paste output of external command"
-msgstr ""
-
-#, fuzzy
-msgid "Enter shell command(s):"
-msgstr " コマンドラベルを入力してください: "
-
-#, fuzzy
-msgid "External command"
-msgstr "その他のコマンド"
-
-#, fuzzy
-msgid "Cannot execute command"
-msgstr " ソートコマンドを実行しようとしてエラーが発生しました "
-
-msgid "Error creating script:"
-msgstr "スクリプト作成でエラー:"
-
-msgid "Error reading script:"
-msgstr "スクリプト読み込みでエラー:"
-
-msgid "Error closing script:"
-msgstr "スクリプトクローズエラー:"
-
-msgid "Script created:"
-msgstr "スクリプトは作成されました:"
-
-msgid "Process block"
-msgstr "プロセスブロック"
-
-msgid " Copies to"
-msgstr " コピー"
-
-msgid " Subject"
-msgstr " 件名"
-
-msgid " To"
-msgstr " To"
-
-msgid " mail -s <subject> -c <cc> <to>"
-msgstr " mail -s <subject> -c <cc> <to>"
-
-msgid " Mail "
-msgstr " メイル "
-
-msgid " Insert Literal "
-msgstr " 文字を入力してください "
-
-msgid " Press any key: "
-msgstr " キーを押してください: "
-
-msgid " Execute Macro "
-msgstr " マクロを実行 "
-
-msgid "All charsets"
-msgstr ""
-
-#, fuzzy
-msgid "&Whole words"
-msgstr "単語のみ(&W)"
-
-#, fuzzy
-msgid "In se&lection"
-msgstr "選択反転(&N)                     M-*"
-
-msgid "&Backwards"
-msgstr "後方(&B)"
-
-msgid "case &Sensitive"
-msgstr "大文字・小文字を区別(&S)"
-
-msgid " Enter replacement string:"
-msgstr "置換文字列を入力してください:"
-
-msgid " Enter search string:"
-msgstr "検索文字列を入力してください:"
-
-#, fuzzy
-msgid "&Find all"
-msgstr "ファイル検索"
-
-msgid "Cancel"
-msgstr "キャンセル"
-
-msgid "&Skip"
-msgstr "スキップ(&S)"
-
-msgid "A&ll"
-msgstr "全部(&L)"
-
-msgid "&Replace"
-msgstr "置換(&R)"
-
-msgid " Replace with: "
-msgstr " 置き換える文字列: "
-
-msgid " Confirm replace "
-msgstr " 確認置換 "
-
-msgid "&Dismiss"
-msgstr "消去(&D)"
-
-#, c-format
-msgid ""
-"File \"%s\" is already being edited\n"
-"User: %s\n"
-"Process ID: %d"
-msgstr ""
-
-msgid "File locked"
-msgstr ""
-
-msgid "&Grab lock"
-msgstr ""
-
-msgid "&Ignore lock"
-msgstr ""
-
-msgid "&Open file..."
-msgstr "ファイルを開く(&O)..."
-
-#, fuzzy
-msgid "&New"
-msgstr "名前(&N)"
-
-#, fuzzy
-msgid "Save &as..."
-msgstr "設定保存(&S)"
-
-#, fuzzy
-msgid "&Insert file..."
-msgstr "ファイル挿入(&I)...     F15"
-
-#, fuzzy
-msgid "Cop&y to file..."
-msgstr "ファイルへコピー(&F)... C-f"
-
-#, fuzzy
-msgid "&User menu..."
-msgstr "ユーザメニュー(&U)...   F11"
-
-#, fuzzy
-msgid "A&bout..."
-msgstr "レイアウト(&L)..."
-
-msgid "&Quit"
-msgstr "終了 (&Q)"
-
-#, fuzzy
-msgid "&Toggle mark"
-msgstr "マークをクリア(&l)"
-
-msgid "&Mark columns"
-msgstr ""
-
-#, fuzzy
-msgid "Toggle &ins/overw"
-msgstr "挿入・上書きを切替え(&I) Ins"
-
-#, fuzzy
-msgid "&Copy"
-msgstr "コピー"
-
-msgid "&Move"
-msgstr "移動(&M)"
-
-msgid "&Delete"
-msgstr "削除(&D)"
-
-#, fuzzy
-msgid "C&opy to clipfile"
-msgstr "ファイルへコピー(&F)...    "
-
-#, fuzzy
-msgid "C&ut to clipfile"
-msgstr "行移動(&G)...              M-l"
-
-msgid "&Paste from clipfile"
-msgstr ""
-
-#, fuzzy
-msgid "Toggle bookmar&k"
-msgstr "マークを切替え(&T)       F3"
-
-#, fuzzy
-msgid "&Next bookmark"
-msgstr "マークを設定(&e)"
-
-#, fuzzy
-msgid "Pre&v bookmark"
-msgstr "並べ替え(&T)               M-t"
-
-#, fuzzy
-msgid "&Flush bookmark"
-msgstr "メイル(&M)...                 "
-
-msgid "&Undo"
-msgstr ""
-
-msgid "&Beginning"
-msgstr ""
-
-#, fuzzy
-msgid "&End"
-msgstr "Iノード(&I)"
-
-#, fuzzy
-msgid "&Search..."
-msgstr "検索"
-
-#, fuzzy
-msgid "Search &again"
-msgstr "再検索(&A)              F17"
-
-#, fuzzy
-msgid "&Replace..."
-msgstr "置換(&R)"
-
-#, fuzzy
-msgid "&Go to line..."
-msgstr " 指定行へ移動 "
-
-#, fuzzy
-msgid "Toggle li&ne state"
-msgstr "マークを切替え(&T)       F3"
-
-#, fuzzy
-msgid "Go to matching &bracket"
-msgstr "対の括弧へ移動             M-b"
-
-#, fuzzy
-msgid "Find declaration"
-msgstr "パッチを当てた後のrejectファイルを検索"
-
-msgid "Back from declaration"
-msgstr ""
-
-msgid "Forward to declaration"
-msgstr ""
-
-#, fuzzy
-msgid "Encod&ing..."
-msgstr "並べ替え(&T)               M-t"
-
-#, fuzzy
-msgid "&Refresh screen"
-msgstr "画面を再描画(&R)           C-l"
-
-#, fuzzy
-msgid "&Start record macro"
-msgstr "マクロの記録を開始(&S)     C-r"
-
-#, fuzzy
-msgid "&Finish record macro..."
-msgstr "マクロの記録を終了(&F)...  C-r"
-
-#, fuzzy
-msgid "&Execute macro..."
-msgstr "マクロを実行(&E)...   C-a, KEY"
-
-#, fuzzy
-msgid "Delete macr&o..."
-msgstr " マクロを削除 "
-
-#, fuzzy
-msgid "'ispell' s&pell check"
-msgstr "'ispell'スペルチェック(&P) C-p"
-
-#, fuzzy
-msgid "&Mail..."
-msgstr "フィルタ(&F)..."
-
-#, fuzzy
-msgid "Insert &literal..."
-msgstr "文字を挿入(&L)...          C-q"
-
-#, fuzzy
-msgid "Insert &date/time"
-msgstr "日付・時間を挿入(&D)          "
-
-#, fuzzy
-msgid "Format p&aragraph"
-msgstr "段落を整形(&A)             M-p"
-
-#, fuzzy
-msgid "Sor&t..."
-msgstr "整列順(&S)..."
-
-msgid "Paste o&utput of..."
-msgstr ""
-
-#, fuzzy
-msgid "E&xternal formatter"
-msgstr "外部フォーマッタ(&x)       F19"
-
-msgid "&General...  "
-msgstr "一般(&G)...   "
-
-#, fuzzy
-msgid "Save &mode..."
-msgstr "保存方法(&S)..."
-
-#, fuzzy
-msgid "Learn &keys..."
-msgstr "キーの学習(&K)..."
-
-#, fuzzy
-msgid "Syntax &highlighting..."
-msgstr "文法ハイライト(&S)"
-
-#, fuzzy
-msgid "S&yntax file"
-msgstr "メニューファイル編集(&M)"
-
-#, fuzzy
-msgid "&Menu file"
-msgstr "メニューファイル編集(&M)"
-
-msgid "&Save setup"
-msgstr "設定保存(&S)"
-
-#, fuzzy
-msgid "&File"
-msgstr "ファイル"
-
-#, fuzzy
-msgid "&Edit"
-msgstr "編集"
-
-#, fuzzy
-msgid "&Search"
-msgstr "検索"
-
-#, fuzzy
-msgid "&Command"
-msgstr "コマンド"
-
-#, fuzzy
-msgid "For&mat"
-msgstr "Format"
-
-#, fuzzy
-msgid "&Options"
-msgstr " オプション(&O) "
-
-msgid "None"
-msgstr "なし"
-
-msgid "Dynamic paragraphing"
-msgstr "動的段落作成"
-
-msgid "Type writer wrap"
-msgstr "タイプライター風折返し"
-
-msgid "Word wrap line length: "
-msgstr "折り返しする行の長さ : "
-
-msgid "Cursor beyond end of line"
-msgstr ""
-
-#, fuzzy
-msgid "Pers&istent selection"
-msgstr "選択反転(&N)                     M-*"
-
-msgid "Synta&x highlighting"
-msgstr "文法ハイライト(&S)"
-
-msgid "Visible tabs"
-msgstr ""
-
-msgid "Visible trailing spaces"
-msgstr ""
-
-#, fuzzy
-msgid "Save file &position"
-msgstr " ファイル保存 "
-
-msgid "Confir&m before saving"
-msgstr "保存前に確認(&M)"
-
-msgid "&Return does autoindent"
-msgstr "リターンで自動的にインデント(&R)"
-
-msgid "Tab spacing: "
-msgstr "タブの空白数 : "
-
-msgid "Fill tabs with &spaces"
-msgstr "タブを空白で埋める(&S)"
-
-msgid "&Backspace through tabs"
-msgstr "バックスペースでTABを一気に消去(&B)"
-
-msgid "&Fake half tabs"
-msgstr "疑似半タブ(&F)"
-
-msgid "Wrap mode"
-msgstr "折り返し方法"
-
-msgid " Editor options "
-msgstr " エディタ・オプション "
-
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
-msgid "ButtonBar|Mark"
-msgstr ""
-
-msgid "ButtonBar|Replac"
-msgstr ""
-
-msgid "ButtonBar|Copy"
-msgstr ""
-
-msgid "ButtonBar|Move"
-msgstr ""
-
-msgid "ButtonBar|Search"
-msgstr ""
-
-msgid "ButtonBar|Delete"
-msgstr ""
-
-msgid "ButtonBar|PullDn"
-msgstr ""
-
-msgid "ButtonBar|Quit"
-msgstr ""
-
-msgid " Load syntax file "
-msgstr " 文法ファイルをロード "
-
-#, c-format
-msgid ""
-" Cannot open file %s \n"
-" %s "
-msgstr ""
-" ファイル %s を開くことができません \n"
-" %s "
-
-#, c-format
-msgid " Error in file %s on line %d "
-msgstr " ファイル %s の %d 行目でエラー "
 
 msgid "&Set"
 msgstr "設定(&S)"
@@ -989,6 +1056,9 @@ msgstr "一覧形式"
 msgid "user &Mini status"
 msgstr "ユーザミニステータス(&M)"
 
+msgid "&OK"
+msgstr "はい(&O)"
+
 msgid "&Reverse"
 msgstr "反転(&R)"
 
@@ -1117,16 +1187,9 @@ msgstr "ドメイン:"
 msgid "Username:"
 msgstr "ユーザ名:"
 
-msgid "Password:"
-msgstr "パスワード:"
-
 #, c-format
 msgid "Password for \\\\%s\\%s"
 msgstr "\\\\%s\\%sのパスワード"
-
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "警告: ファイル %s は見つかりませんでした\n"
 
 msgid "7-bit ASCII"
 msgstr ""
@@ -1296,6 +1359,21 @@ msgstr "拡張ファイルの編集"
 msgid " Which extension file you want to edit? "
 msgstr " どの拡張ファイルを編集しますか? "
 
+msgid "&User"
+msgstr "ユーザ(&U)"
+
+msgid "&System Wide"
+msgstr "システム全体(&S)"
+
+msgid " Menu edit "
+msgstr " メニューの編集 "
+
+msgid " Which menu file do you want to edit? "
+msgstr " どのメニューファイルを編集しますか? "
+
+msgid "&Local"
+msgstr "ローカル(&L)"
+
 msgid "Highlighting groups file edit"
 msgstr ""
 
@@ -1418,6 +1496,727 @@ msgstr " シェルはすでにコマンドを実行中です "
 msgid "Cannot read directory contents"
 msgstr "ディレクトリを変更できません"
 
+#, fuzzy
+msgid " Choose syntax highlighting "
+msgstr "文法ハイライト(&S)"
+
+#, fuzzy
+msgid "< Auto >"
+msgstr " Cooledit について "
+
+msgid "< Reload Current Syntax >"
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Cannot open %s for reading "
+msgstr "読みだし用のパイプのオープンに失敗しました: "
+
+msgid "Error"
+msgstr "エラー"
+
+#, fuzzy, c-format
+msgid " Error reading from pipe: %s "
+msgstr " パイプからの読み込みエラー: "
+
+#, fuzzy, c-format
+msgid " Cannot open pipe for reading: %s "
+msgstr "読みだし用のパイプのオープンに失敗しました: "
+
+#, fuzzy, c-format
+msgid " Cannot get size/permissions for %s "
+msgstr "ファイルの大きさ・パーミッションの情報を取得できませんでした: "
+
+#, fuzzy, c-format
+msgid " %s is not a regular file "
+msgstr " 表示できません: 通常ファイルではありません "
+
+#, fuzzy, c-format
+msgid " File %s is too large "
+msgstr "ファイルが大きすぎます: "
+
+msgid " About "
+msgstr " Cooledit について "
+
+msgid ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       A user friendly text editor written\n"
+"           for the Midnight Commander.\n"
+msgstr ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"             Midnight Commander 用の\n"
+"            ユーザに親切なエディタです\n"
+
+msgid "Macro recursion is too deep"
+msgstr ""
+
+msgid "Search"
+msgstr "検索"
+
+msgid " File has hard-links. Detach before saving? "
+msgstr ""
+
+msgid "The file has been modified in the meantime. Save anyway?"
+msgstr ""
+
+msgid " Error writing to pipe: "
+msgstr " パイプへの書き出しエラー: "
+
+msgid " Cannot open pipe for writing: "
+msgstr "書き込み用のパイプのオープンに失敗しました: "
+
+#, fuzzy, c-format
+msgid " Cannot open file for writing: %s "
+msgstr "書き込み用のパイプのオープンに失敗しました: "
+
+#, fuzzy
+msgid "&Quick save"
+msgstr "クイックセーブ "
+
+#, fuzzy
+msgid "&Safe save"
+msgstr "セーフセーブ "
+
+msgid "&Do backups with following extension:"
+msgstr ""
+
+msgid "Check &POSIX new line"
+msgstr ""
+
+msgid " Edit Save Mode "
+msgstr "保存方法を変更 "
+
+msgid "The file you are saving is not finished with a newline"
+msgstr ""
+
+#, fuzzy
+msgid "C&ontinue"
+msgstr "継続"
+
+msgid "&Do not change"
+msgstr ""
+
+msgid "&Unix format (LF)"
+msgstr ""
+
+msgid "&Windows/DOS format (CR LF)"
+msgstr ""
+
+msgid "&Macintosh format (CR)"
+msgstr ""
+
+msgid "Change line breaks to:"
+msgstr ""
+
+#, fuzzy
+msgid " Enter file name: "
+msgstr " 行番号を入力してください: "
+
+msgid " Save As "
+msgstr " 別名で保存 "
+
+msgid " A file already exists with this name. "
+msgstr "同名のファイルが存在します"
+
+#, fuzzy
+msgid "&Overwrite"
+msgstr "上書き"
+
+msgid " Cannot save file. "
+msgstr "ファイルの保存時にエラーが発生しました"
+
+msgid " Delete macro "
+msgstr " マクロを削除 "
+
+msgid " Cannot open temp file "
+msgstr " テンポラリ・ファイルを開くのにエラーが発生しました "
+
+msgid " Cannot open macro file "
+msgstr "マクロ・ファイルを開くのにエラーが発生しました "
+
+msgid " Cannot overwrite macro file "
+msgstr "マクロファイルを上書きしようとしてエラーが発生しました "
+
+msgid " Save macro "
+msgstr " マクロを保存 "
+
+msgid " Press the macro's new hotkey: "
+msgstr "マクロの新しいホットキーを押してください: "
+
+msgid " Press macro hotkey: "
+msgstr " マクロホットキーを押して下さい: "
+
+msgid " Load macro "
+msgstr " マクロを読み込む "
+
+msgid " Confirm save file? : "
+msgstr "ファイルを保存して良いですか? : "
+
+msgid " Save file "
+msgstr " ファイル保存 "
+
+msgid "&Save"
+msgstr "保存(&S)"
+
+msgid ""
+" Current text was modified without a file save. \n"
+" Continue discards these changes. "
+msgstr ""
+"テキストに変更が加えられていますが保存されていません。\n"
+"変更を破棄して続けます。"
+
+#, fuzzy
+msgid "Syntax file edit"
+msgstr "メニューファイル編集(&M)"
+
+#, fuzzy
+msgid " Which syntax file you want to edit? "
+msgstr " どの拡張ファイルを編集しますか? "
+
+msgid " Load "
+msgstr " 読み込み "
+
+msgid " Block is large, you may not be able to undo this action. "
+msgstr "大きなブロックです。この操作はやり直せないかもしれません"
+
+#, fuzzy
+msgid "Replace"
+msgstr "置換(&R)"
+
+msgid " Replace "
+msgstr " 置換 "
+
+#, c-format
+msgid " %ld replacements made. "
+msgstr "%ld 個置換しました"
+
+msgid "Quit"
+msgstr "終了"
+
+msgid " File was modified, Save with exit? "
+msgstr "ファイルに変更が加えられています。保存して終了しますか?"
+
+#, fuzzy
+msgid "&Cancel quit"
+msgstr "終了を中止"
+
+#, fuzzy
+msgid " Error "
+msgstr "エラー"
+
+msgid " This function is not implemented. "
+msgstr ""
+
+msgid " Copy to clipboard "
+msgstr " クリップボードへコピー "
+
+msgid " Unable to save to file. "
+msgstr " ファイル保存ができませんでした "
+
+msgid " Cut to clipboard "
+msgstr " クリップボードへ切り出し "
+
+msgid " Goto line "
+msgstr " 指定行へ移動 "
+
+msgid " Enter line: "
+msgstr " 行番号を入力してください: "
+
+msgid " Save Block "
+msgstr " ブロックを保存 "
+
+msgid " Insert File "
+msgstr " ファイルを挿入 "
+
+msgid " Cannot insert file. "
+msgstr " ファイルを挿入しようとしてエラーが発生しました "
+
+msgid " Sort block "
+msgstr " ブロックで並べ替え "
+
+msgid " You must first highlight a block of text. "
+msgstr " まずテキストブロックをハイライトする必要があります "
+
+msgid " Run Sort "
+msgstr "ソートを実行 "
+
+msgid " Enter sort options (see manpage) separated by whitespace: "
+msgstr ""
+" ソートのオプション (マニュアル参照) を空白で区切って入力してください: "
+
+msgid " Sort "
+msgstr " ソート "
+
+msgid " Cannot execute sort command "
+msgstr " ソートコマンドを実行しようとしてエラーが発生しました "
+
+msgid " Sort returned non-zero: "
+msgstr " ソートコマンドがゼロ以外の返り値: "
+
+msgid "Paste output of external command"
+msgstr ""
+
+#, fuzzy
+msgid "Enter shell command(s):"
+msgstr " コマンドラベルを入力してください: "
+
+#, fuzzy
+msgid "External command"
+msgstr "その他のコマンド"
+
+#, fuzzy
+msgid "Cannot execute command"
+msgstr " ソートコマンドを実行しようとしてエラーが発生しました "
+
+msgid "Error creating script:"
+msgstr "スクリプト作成でエラー:"
+
+msgid "Error reading script:"
+msgstr "スクリプト読み込みでエラー:"
+
+msgid "Error closing script:"
+msgstr "スクリプトクローズエラー:"
+
+msgid "Script created:"
+msgstr "スクリプトは作成されました:"
+
+msgid "Process block"
+msgstr "プロセスブロック"
+
+msgid " Copies to"
+msgstr " コピー"
+
+msgid " Subject"
+msgstr " 件名"
+
+msgid " To"
+msgstr " To"
+
+msgid " mail -s <subject> -c <cc> <to>"
+msgstr " mail -s <subject> -c <cc> <to>"
+
+msgid " Mail "
+msgstr " メイル "
+
+msgid " Insert Literal "
+msgstr " 文字を入力してください "
+
+msgid " Press any key: "
+msgstr " キーを押してください: "
+
+msgid " Execute Macro "
+msgstr " マクロを実行 "
+
+msgid "All charsets"
+msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "単語のみ(&W)"
+
+#, fuzzy
+msgid "In se&lection"
+msgstr "選択反転(&N)                     M-*"
+
+msgid "&Backwards"
+msgstr "後方(&B)"
+
+msgid "case &Sensitive"
+msgstr "大文字・小文字を区別(&S)"
+
+msgid " Enter replacement string:"
+msgstr "置換文字列を入力してください:"
+
+msgid " Enter search string:"
+msgstr "検索文字列を入力してください:"
+
+#, fuzzy
+msgid "&Find all"
+msgstr "ファイル検索"
+
+msgid "Cancel"
+msgstr "キャンセル"
+
+msgid "&Skip"
+msgstr "スキップ(&S)"
+
+msgid "A&ll"
+msgstr "全部(&L)"
+
+msgid "&Replace"
+msgstr "置換(&R)"
+
+msgid " Replace with: "
+msgstr " 置き換える文字列: "
+
+msgid " Confirm replace "
+msgstr " 確認置換 "
+
+msgid "&Dismiss"
+msgstr "消去(&D)"
+
+#, c-format
+msgid ""
+"File \"%s\" is already being edited\n"
+"User: %s\n"
+"Process ID: %d"
+msgstr ""
+
+msgid "File locked"
+msgstr ""
+
+msgid "&Grab lock"
+msgstr ""
+
+msgid "&Ignore lock"
+msgstr ""
+
+msgid "&Open file..."
+msgstr "ファイルを開く(&O)..."
+
+#, fuzzy
+msgid "&New"
+msgstr "名前(&N)"
+
+#, fuzzy
+msgid "Save &as..."
+msgstr "設定保存(&S)"
+
+#, fuzzy
+msgid "&Insert file..."
+msgstr "ファイル挿入(&I)...     F15"
+
+#, fuzzy
+msgid "Cop&y to file..."
+msgstr "ファイルへコピー(&F)... C-f"
+
+#, fuzzy
+msgid "&User menu..."
+msgstr "ユーザメニュー(&U)...   F11"
+
+#, fuzzy
+msgid "A&bout..."
+msgstr "レイアウト(&L)..."
+
+msgid "&Quit"
+msgstr "終了 (&Q)"
+
+msgid "&Undo"
+msgstr ""
+
+#, fuzzy
+msgid "&Toggle ins/overw"
+msgstr "挿入・上書きを切替え(&I) Ins"
+
+#, fuzzy
+msgid "To&ggle mark"
+msgstr "マークをクリア(&l)"
+
+msgid "&Mark columns"
+msgstr ""
+
+#, fuzzy
+msgid "Mark &all"
+msgstr "全マーク(&M)"
+
+msgid "Unmar&k"
+msgstr ""
+
+#, fuzzy
+msgid "Cop&y"
+msgstr "コピー"
+
+#, fuzzy
+msgid "Mo&ve"
+msgstr "移動"
+
+msgid "&Delete"
+msgstr "削除(&D)"
+
+#, fuzzy
+msgid "Co&py to clipfile"
+msgstr "ファイルへコピー(&F)...    "
+
+#, fuzzy
+msgid "&Cut to clipfile"
+msgstr "行移動(&G)...              M-l"
+
+#, fuzzy
+msgid "Pa&ste from clipfile"
+msgstr "行移動(&G)...              M-l"
+
+msgid "&Beginning"
+msgstr ""
+
+#, fuzzy
+msgid "&End"
+msgstr "Iノード(&I)"
+
+#, fuzzy
+msgid "&Search..."
+msgstr "検索"
+
+#, fuzzy
+msgid "Search &again"
+msgstr "再検索(&A)              F17"
+
+#, fuzzy
+msgid "&Replace..."
+msgstr "置換(&R)"
+
+#, fuzzy
+msgid "&Toggle bookmark"
+msgstr "マークを切替え(&T)       F3"
+
+#, fuzzy
+msgid "&Next bookmark"
+msgstr "マークを設定(&e)"
+
+#, fuzzy
+msgid "&Prev bookmark"
+msgstr "並べ替え(&T)               M-t"
+
+#, fuzzy
+msgid "&Flush bookmark"
+msgstr "メイル(&M)...                 "
+
+#, fuzzy
+msgid "&Go to line..."
+msgstr " 指定行へ移動 "
+
+#, fuzzy
+msgid "&Toggle line state"
+msgstr "マークを切替え(&T)       F3"
+
+#, fuzzy
+msgid "Go to matching &bracket"
+msgstr "対の括弧へ移動             M-b"
+
+#, fuzzy
+msgid "&Find declaration"
+msgstr "パッチを当てた後のrejectファイルを検索"
+
+#, fuzzy
+msgid "Back from &declaration"
+msgstr "パッチを当てた後のrejectファイルを検索"
+
+#, fuzzy
+msgid "For&ward to declaration"
+msgstr "パッチを当てた後のrejectファイルを検索"
+
+#, fuzzy
+msgid "Encod&ing..."
+msgstr "並べ替え(&T)               M-t"
+
+#, fuzzy
+msgid "&Refresh screen"
+msgstr "画面を再描画(&R)           C-l"
+
+#, fuzzy
+msgid "&Start record macro"
+msgstr "マクロの記録を開始(&S)     C-r"
+
+#, fuzzy
+msgid "Finis&h record macro..."
+msgstr "マクロの記録を終了(&F)...  C-r"
+
+#, fuzzy
+msgid "&Execute macro..."
+msgstr "マクロを実行(&E)...   C-a, KEY"
+
+#, fuzzy
+msgid "Delete macr&o..."
+msgstr " マクロを削除 "
+
+#, fuzzy
+msgid "'ispell' s&pell check"
+msgstr "'ispell'スペルチェック(&P) C-p"
+
+#, fuzzy
+msgid "&Mail..."
+msgstr "フィルタ(&F)..."
+
+#, fuzzy
+msgid "Insert &literal..."
+msgstr "文字を挿入(&L)...          C-q"
+
+#, fuzzy
+msgid "Insert &date/time"
+msgstr "日付・時間を挿入(&D)          "
+
+#, fuzzy
+msgid "&Format paragraph"
+msgstr "段落を整形(&A)             M-p"
+
+#, fuzzy
+msgid "&Sort..."
+msgstr "整列順(&S)..."
+
+msgid "&Paste output of..."
+msgstr ""
+
+#, fuzzy
+msgid "&External formatter"
+msgstr "外部フォーマッタ(&x)       F19"
+
+msgid "&General...  "
+msgstr "一般(&G)...   "
+
+#, fuzzy
+msgid "Save &mode..."
+msgstr "保存方法(&S)..."
+
+#, fuzzy
+msgid "Learn &keys..."
+msgstr "キーの学習(&K)..."
+
+#, fuzzy
+msgid "Syntax &highlighting..."
+msgstr "文法ハイライト(&S)"
+
+#, fuzzy
+msgid "S&yntax file"
+msgstr "メニューファイル編集(&M)"
+
+#, fuzzy
+msgid "&Menu file"
+msgstr "メニューファイル編集(&M)"
+
+msgid "&Save setup"
+msgstr "設定保存(&S)"
+
+#, fuzzy
+msgid "&File"
+msgstr "ファイル"
+
+#, fuzzy
+msgid "&Edit"
+msgstr "編集"
+
+#, fuzzy
+msgid "&Search"
+msgstr "検索"
+
+#, fuzzy
+msgid "&Command"
+msgstr "コマンド"
+
+#, fuzzy
+msgid "For&mat"
+msgstr "Format"
+
+#, fuzzy
+msgid "&Options"
+msgstr " オプション(&O) "
+
+msgid "None"
+msgstr "なし"
+
+msgid "Dynamic paragraphing"
+msgstr "動的段落作成"
+
+msgid "Type writer wrap"
+msgstr "タイプライター風折返し"
+
+msgid "Word wrap line length: "
+msgstr "折り返しする行の長さ : "
+
+msgid "Cursor beyond end of line"
+msgstr ""
+
+#, fuzzy
+msgid "Pers&istent selection"
+msgstr "選択反転(&N)                     M-*"
+
+msgid "Synta&x highlighting"
+msgstr "文法ハイライト(&S)"
+
+msgid "Visible tabs"
+msgstr ""
+
+msgid "Visible trailing spaces"
+msgstr ""
+
+#, fuzzy
+msgid "Save file &position"
+msgstr " ファイル保存 "
+
+msgid "Confir&m before saving"
+msgstr "保存前に確認(&M)"
+
+msgid "&Return does autoindent"
+msgstr "リターンで自動的にインデント(&R)"
+
+msgid "Tab spacing: "
+msgstr "タブの空白数 : "
+
+msgid "Fill tabs with &spaces"
+msgstr "タブを空白で埋める(&S)"
+
+msgid "&Backspace through tabs"
+msgstr "バックスペースでTABを一気に消去(&B)"
+
+msgid "&Fake half tabs"
+msgstr "疑似半タブ(&F)"
+
+msgid "Wrap mode"
+msgstr "折り返し方法"
+
+msgid " Editor options "
+msgstr " エディタ・オプション "
+
+msgid "ButtonBar|Help"
+msgstr ""
+
+msgid "ButtonBar|Save"
+msgstr ""
+
+msgid "ButtonBar|Mark"
+msgstr ""
+
+msgid "ButtonBar|Replac"
+msgstr ""
+
+msgid "ButtonBar|Copy"
+msgstr ""
+
+msgid "ButtonBar|Move"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Delete"
+msgstr ""
+
+msgid "ButtonBar|PullDn"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
+
+msgid " Load syntax file "
+msgstr " 文法ファイルをロード "
+
+#, c-format
+msgid ""
+" Cannot open file %s \n"
+" %s "
+msgstr ""
+" ファイル %s を開くことができません \n"
+" %s "
+
+#, c-format
+msgid " Error in file %s on line %d "
+msgstr " ファイル %s の %d 行目でエラー "
+
 msgid ""
 " The Commander can't change to the directory that \n"
 " the subshell claims you are in.  Perhaps you have \n"
@@ -1428,10 +2227,6 @@ msgstr ""
 "ません。おそらくそのディレクトリを削除したか、\n"
 "\"su\" コマンドで特別な権限を行使したのではないで\n"
 "すか?"
-
-#, c-format
-msgid "Press any key to continue..."
-msgstr "なにかキーを押せば続行します..."
 
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
@@ -1779,9 +2574,6 @@ msgstr "%o %f \"%s\"%m"
 msgid "%o %d %f%m"
 msgstr "%o %d %f%m"
 
-msgid "file"
-msgstr "file"
-
 msgid "files"
 msgstr "files"
 
@@ -2045,6 +2837,9 @@ msgstr ""
 
 msgid "ButtonBar|Prev"
 msgstr ""
+
+msgid "&Move"
+msgstr "移動(&M)"
 
 msgid "&Remove"
 msgstr "削除(&R)"
@@ -2396,6 +3191,10 @@ msgstr " ファイルを見る "
 #, fuzzy
 msgid "&Filtered view"
 msgstr " フィルタされた一覧 "
+
+#, fuzzy
+msgid "&Copy"
+msgstr "コピー"
 
 msgid "C&hmod"
 msgstr ""
@@ -2816,29 +3615,6 @@ msgstr "ユーザの指定した形式は不正なようです. デフォルト�
 msgid " Do you really want to execute? "
 msgstr " 本当に実行しますか? "
 
-msgid " Not implemented yet "
-msgstr ""
-
-msgid " Num of replace tokens not equal to num of found tokens "
-msgstr ""
-
-#, fuzzy, c-format
-msgid " Invalid token number %d "
-msgstr " 不正なターゲットマスクです "
-
-#, fuzzy
-msgid "Normal"
-msgstr "Format"
-
-msgid "&Regular expression"
-msgstr "正規表現(&R)"
-
-msgid "Hexadecimal"
-msgstr ""
-
-msgid "Wildcard search"
-msgstr ""
-
 #, fuzzy
 msgid "Choose codepage"
 msgstr " 入力コードページを選択 "
@@ -2851,18 +3627,6 @@ msgid ""
 "Cannot save file %s:\n"
 "%s"
 msgstr "ファイルの保存時にエラーが発生しました"
-
-#, c-format
-msgid ""
-"Unable to load '%s' skin.\n"
-"Default skin has been loaded"
-msgstr ""
-
-#, c-format
-msgid ""
-"Unable to parse '%s' skin.\n"
-"Default skin has been loaded"
-msgstr ""
 
 msgid ""
 "GNU Midnight Commander is already\n"
@@ -2976,277 +3740,6 @@ msgstr ""
 "ファイル %s に書き込めません:\n"
 "%s\n"
 
-msgid "Function key 1"
-msgstr "Functionキー 1"
-
-msgid "Function key 2"
-msgstr "Functionキー 2"
-
-msgid "Function key 3"
-msgstr "Functionキー 3"
-
-msgid "Function key 4"
-msgstr "Functionキー 4"
-
-msgid "Function key 5"
-msgstr "Functionキー 5"
-
-msgid "Function key 6"
-msgstr "Functionキー 6"
-
-msgid "Function key 7"
-msgstr "Functionキー 7"
-
-msgid "Function key 8"
-msgstr "Functionキー 8"
-
-msgid "Function key 9"
-msgstr "Functionキー 9"
-
-msgid "Function key 10"
-msgstr "Functionキー 10"
-
-msgid "Function key 11"
-msgstr "Functionキー 11"
-
-msgid "Function key 12"
-msgstr "Functionキー 12"
-
-msgid "Function key 13"
-msgstr "Functionキー 13"
-
-msgid "Function key 14"
-msgstr "Functionキー 14"
-
-msgid "Function key 15"
-msgstr "Functionキー 15"
-
-msgid "Function key 16"
-msgstr "Functionキー 16"
-
-msgid "Function key 17"
-msgstr "Functionキー 17"
-
-msgid "Function key 18"
-msgstr "Functionキー 18"
-
-msgid "Function key 19"
-msgstr "Functionキー 19"
-
-msgid "Function key 20"
-msgstr "Functionキー 20"
-
-msgid "Backspace key"
-msgstr "Backspaeceキー"
-
-msgid "End key"
-msgstr "Endキー"
-
-msgid "Up arrow key"
-msgstr "上矢印"
-
-msgid "Down arrow key"
-msgstr "下矢印"
-
-msgid "Left arrow key"
-msgstr "左矢印"
-
-msgid "Right arrow key"
-msgstr "右矢印"
-
-msgid "Home key"
-msgstr "Homeキー"
-
-msgid "Page Down key"
-msgstr "PageDownキー"
-
-msgid "Page Up key"
-msgstr "PageUpキー"
-
-msgid "Insert key"
-msgstr "Insertキー"
-
-msgid "Delete key"
-msgstr "Deleteキー"
-
-msgid "Completion/M-tab"
-msgstr "Completion/M-tab"
-
-msgid "+ on keypad"
-msgstr "10キーの +"
-
-msgid "- on keypad"
-msgstr "10キーの -"
-
-msgid "Slash on keypad"
-msgstr "10キーの /"
-
-msgid "* on keypad"
-msgstr "10キーの *"
-
-#, fuzzy
-msgid "Escape key"
-msgstr "10キーの /"
-
-msgid "Left arrow keypad"
-msgstr "10キーの 左矢印"
-
-msgid "Right arrow keypad"
-msgstr "10キーの 右矢印"
-
-msgid "Up arrow keypad"
-msgstr "10キーの 上矢印"
-
-msgid "Down arrow keypad"
-msgstr "10キーの 下矢印"
-
-msgid "Home on keypad"
-msgstr "10キーの Home"
-
-msgid "End on keypad"
-msgstr "10キーの End"
-
-msgid "Page Down keypad"
-msgstr "10キーの PageDown"
-
-msgid "Page Up keypad"
-msgstr "10キーの PageUp"
-
-msgid "Insert on keypad"
-msgstr "10キーの Insert"
-
-msgid "Delete on keypad"
-msgstr "10キーの Delete"
-
-msgid "Enter on keypad"
-msgstr "10キーの Enter"
-
-#, fuzzy
-msgid "Function key 21"
-msgstr "Functionキー 1"
-
-#, fuzzy
-msgid "Function key 22"
-msgstr "Functionキー 2"
-
-#, fuzzy
-msgid "Function key 23"
-msgstr "Functionキー 2"
-
-#, fuzzy
-msgid "Function key 24"
-msgstr "Functionキー 2"
-
-msgid "Plus"
-msgstr ""
-
-#, fuzzy
-msgid "Minus"
-msgstr "メニュ"
-
-msgid "Asterisk"
-msgstr ""
-
-msgid "Dot"
-msgstr ""
-
-msgid "Less than"
-msgstr ""
-
-msgid "Great than"
-msgstr ""
-
-msgid "Equal"
-msgstr ""
-
-#, fuzzy
-msgid "Comma"
-msgstr "コマンド"
-
-msgid "Apostrophe"
-msgstr ""
-
-#, fuzzy
-msgid "Colon"
-msgstr "カウント"
-
-msgid "Exclamation mark"
-msgstr ""
-
-msgid "Question mark"
-msgstr ""
-
-#, fuzzy
-msgid "Ampersand"
-msgstr "追加(&P)"
-
-msgid "Dollar sign"
-msgstr ""
-
-msgid "Quotation mark"
-msgstr ""
-
-#, fuzzy
-msgid "Caret"
-msgstr "ターゲット"
-
-msgid "Tilda"
-msgstr ""
-
-#, fuzzy
-msgid "Prime"
-msgstr "前へ"
-
-#, fuzzy
-msgid "Underline"
-msgstr " 行番号を入力してください: "
-
-msgid "Understrike"
-msgstr ""
-
-msgid "Pipe"
-msgstr ""
-
-#, fuzzy
-msgid "Enter"
-msgstr "所有者"
-
-#, fuzzy
-msgid "Tab key"
-msgstr "10キーの +"
-
-#, fuzzy
-msgid "Space key"
-msgstr "10キーの /"
-
-#, fuzzy
-msgid "Slash key"
-msgstr "10キーの /"
-
-#, fuzzy
-msgid "Backslash key"
-msgstr "Backspaeceキー"
-
-msgid "Number sign #"
-msgstr ""
-
-msgid "Ctrl"
-msgstr ""
-
-msgid "Alt"
-msgstr ""
-
-msgid "Shift"
-msgstr ""
-
-#, c-format
-msgid ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-msgstr ""
-"スクリーンサイズ %dx%d はサポートされていません\n"
-"TERM環境変数の値をチェックしてください\n"
-
 msgid " Format error on file Extensions File "
 msgstr "拡張子ファイル上のフォーマットエラーです"
 
@@ -3287,46 +3780,6 @@ msgstr " %s に特定のエントリーは見つかりませんでした "
 
 msgid " User menu "
 msgstr " ユーザー・メニュー "
-
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
-#, fuzzy, c-format
-msgid "%s is not a directory\n"
-msgstr "directory"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr ""
-" ターゲットディレクトリ \"%s\" を作成できません\n"
-" %s "
-
-#, fuzzy, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr ""
-" ターゲットディレクトリ \"%s\" を作成できません\n"
-" %s "
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr ""
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr ""
-
-msgid " Pipe failed "
-msgstr "pipe 失敗 "
-
-msgid " Dup failed "
-msgstr " dup 失敗 "
 
 #, fuzzy, c-format
 msgid ""
@@ -3451,441 +3904,6 @@ msgstr "履歴"
 
 msgid "Background process:"
 msgstr "バックグラウンド処理:"
-
-#, c-format
-msgid ""
-"Cannot open cpio archive\n"
-"%s"
-msgstr ""
-"cpio アーカイブを開けません\n"
-"%s"
-
-#, c-format
-msgid ""
-"Premature end of cpio archive\n"
-"%s"
-msgstr ""
-"cpio アーカイブの終りが早すぎます\n"
-"%s"
-
-#, c-format
-msgid ""
-"Inconsistent hardlinks of\n"
-"%s\n"
-"in cpio archive\n"
-"%s"
-msgstr ""
-"cpio アーカイブ内 %s のハードリンクが\n"
-"矛盾しています\n"
-"%s"
-
-#, c-format
-msgid "%s contains duplicate entries! Skipping!"
-msgstr "%s 不正なエントリが含まれます! スキップ!"
-
-#, c-format
-msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr "%s の中で壊れた cpio ヘッダに遭遇した"
-
-#, c-format
-msgid ""
-"Unexpected end of file\n"
-"%s"
-msgstr ""
-"予期しない EOF です\n"
-"%s"
-
-#, c-format
-msgid "Directory cache expired for %s"
-msgstr "'%s' の Dir キャッシュが終了しました"
-
-msgid "Starting linear transfer..."
-msgstr "リニア転送を開始します..."
-
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
-msgstr "%s: %s: %s %3d%% (%lu バイト転送)"
-
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
-msgstr "%s: %s: %s %lu バイト転送しました"
-
-msgid "Getting file"
-msgstr "ファイル取得中"
-
-#, c-format
-msgid ""
-"Cannot open %s archive\n"
-"%s"
-msgstr ""
-"%s アーカイブを開くことが出来ません\n"
-"%s"
-
-msgid "Inconsistent extfs archive"
-msgstr "不整合な extfs アーカイブです"
-
-#, c-format
-msgid "fish: Disconnecting from %s"
-msgstr "fish: %s から切断しています"
-
-msgid "fish: Waiting for initial line..."
-msgstr "fish: 最初の行を待っています..."
-
-msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr "すいませんが，今のところパスワードを証明することが出来ません"
-
-msgid " fish: Password required for "
-msgstr "fish: パスワードが必要です "
-
-msgid "fish: Sending password..."
-msgstr "fish: パスワード送信中..."
-
-msgid "fish: Sending initial line..."
-msgstr "fish: 最初の行を送信..."
-
-msgid "fish: Handshaking version..."
-msgstr "fish: バージョンのハンドシェイク..."
-
-msgid "fish: Setting up current directory..."
-msgstr "fish: カレントディレクトリを設定します..."
-
-#, c-format
-msgid "fish: Connected, home %s."
-msgstr "fish: 接続しました。ホームディレクトリは %s です。"
-
-#, c-format
-msgid "fish: Reading directory %s..."
-msgstr "fish: ディレクトリ%sを読み込み中... "
-
-#, c-format
-msgid "%s: done."
-msgstr "%s: 完了"
-
-#, c-format
-msgid "%s: failure"
-msgstr "%s: 失敗"
-
-#, c-format
-msgid "fish: store %s: sending command..."
-msgstr "fish: store %s: コマンドを送信中..."
-
-msgid "fish: Local read failed, sending zeros"
-msgstr "fish: 局部読み込みに失敗しました。zeroを送信します"
-
-#, c-format
-msgid "fish: storing %s %d (%lu)"
-msgstr "fish: %s を保存中 %d (%lu)"
-
-msgid "zeros"
-msgstr "zeros"
-
-msgid "Aborting transfer..."
-msgstr "転送を中断します..."
-
-msgid "Error reported after abort."
-msgstr "中断後にエラーが報告されました"
-
-msgid "Aborted transfer would be successful."
-msgstr "転送中断に成功しました"
-
-#, c-format
-msgid "ftpfs: Disconnecting from %s"
-msgstr "ftpfs: %s から切断中です"
-
-msgid " FTP: Password required for "
-msgstr " FTP: パスワードが必要です "
-
-msgid "ftpfs: sending login name"
-msgstr "ftpfs: ログイン名を送信中"
-
-msgid "ftpfs: sending user password"
-msgstr "ftpfs: パスワードを送信中"
-
-#, fuzzy, c-format
-msgid "FTP: Account required for user %s"
-msgstr " FTP: パスワードが必要です "
-
-#, fuzzy
-msgid "Account:"
-msgstr "カウント"
-
-#, fuzzy
-msgid "ftpfs: sending user account"
-msgstr "ftpfs: パスワードを送信中"
-
-msgid "ftpfs: logged in"
-msgstr "ftpfs: ログインしました"
-
-#, c-format
-msgid "ftpfs: Login incorrect for user %s "
-msgstr "ftpfs: ユーザ %s のログインが失敗しました "
-
-msgid "ftpfs: Invalid host name."
-msgstr "ftpfs: 不正なホスト名です"
-
-#, c-format
-msgid "ftpfs: %s"
-msgstr ""
-
-#, c-format
-msgid "ftpfs: making connection to %s"
-msgstr "ftpfs: %s へ接続中"
-
-msgid "ftpfs: connection interrupted by user"
-msgstr "ftpfs: ユーザによって接続が断たれました"
-
-#, c-format
-msgid "ftpfs: connection to server failed: %s"
-msgstr "ftpfs: サーバへの接続に失敗しました: %s"
-
-#, c-format
-msgid "Waiting to retry... %d (Control-C to cancel)"
-msgstr "再試行するのでお待ちください... %d (Control-C で中止)"
-
-#, fuzzy
-msgid "ftpfs: invalid address family"
-msgstr "ftpfs: 不正なホストのアドレスです"
-
-#, fuzzy, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: パッシブモードに失敗しました"
-
-#, fuzzy, c-format
-msgid "ftpfs: could not create socket: %s"
-msgstr "ソケットを作成できませんでした: %s"
-
-msgid "ftpfs: could not setup passive mode"
-msgstr "ftpfs: パッシブモードに失敗しました"
-
-msgid "ftpfs: aborting transfer."
-msgstr "ftpfs: 転送を中断します"
-
-#, c-format
-msgid "ftpfs: abort error: %s"
-msgstr "ftpfs: 中断: %s"
-
-msgid "ftpfs: abort failed"
-msgstr "ftpfs: 中断に失敗"
-
-msgid "ftpfs: CWD failed."
-msgstr "ftpfs: CWD 失敗"
-
-msgid "ftpfs: couldn't resolve symlink"
-msgstr "ftpfs: シンボリックリンクの展開に失敗"
-
-msgid "Resolving symlink..."
-msgstr "シンボリックリンクを展開する..."
-
-#, c-format
-msgid "ftpfs: Reading FTP directory %s... %s%s"
-msgstr "ftpfs: FTPディレクトリ %s を読み込み中... %s%s"
-
-msgid "(strict rfc959)"
-msgstr "(厳密な rfc959)"
-
-msgid "(chdir first)"
-msgstr "(初めに chdir)"
-
-msgid "ftpfs: failed; nowhere to fallback to"
-msgstr "ftpfs: 失敗しました。フォールバックできません"
-
-#, fuzzy, c-format
-msgid "ftpfs: storing file %lu (%lu)"
-msgstr "ftpfs: ファイルの保存中 %d (%lu)"
-
-msgid ""
-"~/.netrc file has incorrect mode.\n"
-"Remove password or correct mode."
-msgstr ""
-"~/.netrcファイルが正しいモードではありません.\n"
-"パスワードを削除するかモードを訂正してください."
-
-msgid " MCFS "
-msgstr " MCFS "
-
-msgid " The server does not support this version "
-msgstr " サーバはこのバージョンをサポートしていません "
-
-msgid ""
-" The remote server is not running on a system port \n"
-" you need a password to log in, but the information may \n"
-" not be safe on the remote side.  Continue? \n"
-msgstr ""
-" リモート・サーバはシステムポートで起動していません.\n"
-" パスワードがログインのため必要です, しかしこの情報は\n"
-" 安全な方法で転送されません.  継続しますか? \n"
-
-msgid " MCFS Password required "
-msgstr " MCFS パスワードの要求 "
-
-msgid " Invalid password "
-msgstr " 間違ったパスワード "
-
-#, c-format
-msgid " Cannot locate hostname: %s "
-msgstr "hostname の場所を見つけられませんでした: %s"
-
-#, c-format
-msgid " Cannot create socket: %s "
-msgstr "ソケットを作成できませんでした: %s"
-
-#, c-format
-msgid " Cannot connect to server: %s "
-msgstr "サーバに接続できませんでした: %s"
-
-msgid " Too many open connections "
-msgstr " 接続が多すぎます "
-
-#, c-format
-msgid ""
-"Warning: Invalid line in %s:\n"
-"%s\n"
-msgstr ""
-"警告: %s に無効な行があります:\n"
-"%s\n"
-
-#, c-format
-msgid ""
-"Warning: Invalid flag %c in %s:\n"
-"%s\n"
-msgstr ""
-"警告: %2$s に無効なフラグ %1$c があります:\n"
-"%3$s\n"
-
-#, c-format
-msgid ""
-" reconnect to %s failed\n"
-" "
-msgstr ""
-" %s への再接続に失敗しました\n"
-" "
-
-msgid " Authentication failed "
-msgstr " 認証に失敗しました "
-
-#, c-format
-msgid " Error %s creating directory %s "
-msgstr " %s: mkdir %s "
-
-#, c-format
-msgid " Error %s removing directory %s "
-msgstr " %s: rmdir %s "
-
-#, c-format
-msgid " %s opening remote file %s "
-msgstr " %s: リモートファイル %s を開く際に "
-
-#, c-format
-msgid " %s removing remote file %s "
-msgstr "リモートファイル %s を削除中に %s "
-
-#, c-format
-msgid " %s renaming files\n"
-msgstr "ファイル名変更中に %s\n"
-
-#, c-format
-msgid ""
-"Cannot open tar archive\n"
-"%s"
-msgstr ""
-"tarアーカイブ%sを\n"
-"開けません"
-
-msgid "Inconsistent tar archive"
-msgstr "tar アーカイブに不整合"
-
-msgid "Unexpected EOF on archive file"
-msgstr "予期しないEOFがアーカイブファイルにあります"
-
-#, c-format
-msgid ""
-"Hmm,...\n"
-"%s\n"
-"doesn't look like a tar archive."
-msgstr ""
-"んー,‥‥\n"
-"%s\n"
-"これはtarアーカイブではないようです"
-
-msgid " undelfs: error "
-msgstr " undelfs: エラー "
-
-msgid " not enough memory "
-msgstr " 十分なメモリがありません "
-
-msgid " while allocating block buffer "
-msgstr " ブロックバッファを割り当てる間に "
-
-#, c-format
-msgid " open_inode_scan: %d "
-msgstr " open_inode_scan: %d "
-
-#, c-format
-msgid " while starting inode scan %d "
-msgstr " iノードスキャン %d を開始している間に "
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: %d iノードの削除ファイル情報をロード中です"
-
-#, c-format
-msgid " while calling ext2_block_iterate %d "
-msgstr " ext2_block_iterate %d を呼んでいる間に "
-
-msgid " no more memory while reallocating array "
-msgstr " メモリの間に再配分している配列はありません "
-
-#, c-format
-msgid " while doing inode scan %d "
-msgstr "iノードスキャン %d をする間に "
-
-msgid " Ext2lib error "
-msgstr " Ext2lib エラー "
-
-#, c-format
-msgid " Cannot open file %s "
-msgstr " ファイル '%s' を開けません "
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: iノードビットマップをロード中です..."
-
-#, c-format
-msgid ""
-" Cannot load inode bitmap from: \n"
-" %s \n"
-msgstr "'%s' からiノードビットマップをロード出来ません \n"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: ブロックビットマップを読み込み中です..."
-
-#, c-format
-msgid ""
-" Cannot load block bitmap from: \n"
-" %s \n"
-msgstr " '%s' からブロックビットマップをロード出来ませんでした\n"
-
-msgid " vfs_info is not fs! "
-msgstr " vfs_info はファイルシステムではありません! "
-
-msgid " You have to chdir to extract files first "
-msgstr "初めに抽出したファイルへ chdir しなければなりません"
-
-msgid " while iterating over blocks "
-msgstr " ブロックの終わりまでを繰り返す間に "
-
-msgid "Cannot parse:"
-msgstr "構文解析が出来ません:"
-
-msgid "More parsing errors will be ignored."
-msgstr "多くの構文解析エラーがでましたが無視します"
-
-msgid "Internal error:"
-msgstr "内部エラー:"
-
-msgid "Changes to file lost"
-msgstr "紛失したファイルに変更します"
 
 #~ msgid "File:       None"
 #~ msgstr "ファイル:   なし"
@@ -4042,9 +4060,6 @@ msgstr "紛失したファイルに変更します"
 
 #~ msgid "Replac"
 #~ msgstr "置換"
-
-#~ msgid "Move"
-#~ msgstr "移動"
 
 #~ msgid "Delete"
 #~ msgstr "削除"

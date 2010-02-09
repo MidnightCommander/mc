@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.55\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-12-25 19:06+0200\n"
+"POT-Creation-Date: 2010-02-09 12:08+0200\n"
 "PO-Revision-Date: 2002-06-24 02:15+0300\n"
 "Last-Translator: Todor Buyukliev <adrez@mail.bg>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -11,81 +11,636 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.9.6\n"
 
-#, fuzzy
-msgid " Choose syntax highlighting "
-msgstr "Осветяване на синтаксиса"
-
-#, fuzzy
-msgid "< Auto >"
-msgstr " За "
-
-msgid "< Reload Current Syntax >"
-msgstr ""
-
-#, fuzzy, c-format
-msgid " Cannot open %s for reading "
-msgstr " Грешка при отваряне на канала за четене: "
-
-msgid "Error"
-msgstr "Грешка"
-
-#, fuzzy, c-format
-msgid " Error reading from pipe: %s "
-msgstr "Грешка при четене от канала: "
-
-#, fuzzy, c-format
-msgid " Cannot open pipe for reading: %s "
-msgstr " Грешка при отваряне на канала за четене: "
-
-#, fuzzy, c-format
-msgid " Cannot get size/permissions for %s "
-msgstr " Не мога да получа информация за размер/режим на файла: "
-
-#, fuzzy, c-format
-msgid " %s is not a regular file "
-msgstr " Не може да се разглежда: не е обикновен файл "
-
-#, fuzzy, c-format
-msgid " File %s is too large "
-msgstr " Файлът е прекалено голям: "
-
-msgid " About "
-msgstr " За "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       Лесен за използване текстов редактор,\n"
-"          написан за Midnight Commander.\n"
-
-msgid "&OK"
-msgstr "ОК"
-
-msgid "Macro recursion is too deep"
-msgstr ""
-
-msgid "Search"
-msgstr "Търси"
-
 msgid " Search string not found "
 msgstr " Търсеният низ не е намерен "
+
+msgid " Not implemented yet "
+msgstr ""
+
+msgid " Num of replace tokens not equal to num of found tokens "
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Invalid token number %d "
+msgstr " Невалидна маска на назначението "
+
+#, fuzzy
+msgid "Normal"
+msgstr "Формат"
+
+msgid "&Regular expression"
+msgstr "Регулярен израз"
+
+msgid "Hexadecimal"
+msgstr ""
+
+msgid "Wildcard search"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+msgid "Function key 1"
+msgstr "F1"
+
+msgid "Function key 2"
+msgstr "F2"
+
+msgid "Function key 3"
+msgstr "F3"
+
+msgid "Function key 4"
+msgstr "F4"
+
+msgid "Function key 5"
+msgstr "F5"
+
+msgid "Function key 6"
+msgstr "F6"
+
+msgid "Function key 7"
+msgstr "F7"
+
+msgid "Function key 8"
+msgstr "F8"
+
+msgid "Function key 9"
+msgstr "F9"
+
+msgid "Function key 10"
+msgstr "F10"
+
+msgid "Function key 11"
+msgstr "F11"
+
+msgid "Function key 12"
+msgstr "F12"
+
+msgid "Function key 13"
+msgstr "F13"
+
+msgid "Function key 14"
+msgstr "F14"
+
+msgid "Function key 15"
+msgstr "F15"
+
+msgid "Function key 16"
+msgstr "F16"
+
+msgid "Function key 17"
+msgstr "F17"
+
+msgid "Function key 18"
+msgstr "F18"
+
+msgid "Function key 19"
+msgstr "F19"
+
+msgid "Function key 20"
+msgstr "F20"
+
+msgid "Backspace key"
+msgstr "Backspace"
+
+msgid "End key"
+msgstr "End"
+
+msgid "Up arrow key"
+msgstr "Горна стрелка"
+
+msgid "Down arrow key"
+msgstr "Долна стрелка"
+
+msgid "Left arrow key"
+msgstr "Лява стрелка"
+
+msgid "Right arrow key"
+msgstr "Дясна стрелка"
+
+msgid "Home key"
+msgstr "Home"
+
+msgid "Page Down key"
+msgstr "Page Down"
+
+msgid "Page Up key"
+msgstr "Page Up"
+
+msgid "Insert key"
+msgstr "Insert"
+
+msgid "Delete key"
+msgstr "Delete"
+
+msgid "Completion/M-tab"
+msgstr "Допълване/M-tab"
+
+msgid "+ on keypad"
+msgstr "+ от доп. клв."
+
+msgid "- on keypad"
+msgstr "- от доп. клв."
+
+msgid "Slash on keypad"
+msgstr "Накл. черта от доп. клв."
+
+msgid "* on keypad"
+msgstr "* от доп. клв."
+
+#, fuzzy
+msgid "Escape key"
+msgstr "Накл. черта от доп. клв."
+
+msgid "Left arrow keypad"
+msgstr "Лява стрелка от доп. клв."
+
+msgid "Right arrow keypad"
+msgstr "Дясна стрелка от доп. клв."
+
+msgid "Up arrow keypad"
+msgstr "Горна стрелка от доп. клв."
+
+msgid "Down arrow keypad"
+msgstr "Долна стрелка от доп. клв."
+
+msgid "Home on keypad"
+msgstr "Home от доп. клв."
+
+msgid "End on keypad"
+msgstr "End от доп. клв."
+
+msgid "Page Down keypad"
+msgstr "Page Down от доп. клв."
+
+msgid "Page Up keypad"
+msgstr "Page Up от доп. клв."
+
+msgid "Insert on keypad"
+msgstr "Insert от доп. клв."
+
+msgid "Delete on keypad"
+msgstr "Delete от доп. клв."
+
+msgid "Enter on keypad"
+msgstr "Enter от доп. клв."
+
+#, fuzzy
+msgid "Function key 21"
+msgstr "F1"
+
+#, fuzzy
+msgid "Function key 22"
+msgstr "F2"
+
+#, fuzzy
+msgid "Function key 23"
+msgstr "F2"
+
+#, fuzzy
+msgid "Function key 24"
+msgstr "F2"
+
+msgid "Plus"
+msgstr ""
+
+#, fuzzy
+msgid "Minus"
+msgstr "Меню"
+
+msgid "Asterisk"
+msgstr ""
+
+msgid "Dot"
+msgstr ""
+
+msgid "Less than"
+msgstr ""
+
+msgid "Great than"
+msgstr ""
+
+msgid "Equal"
+msgstr ""
+
+#, fuzzy
+msgid "Comma"
+msgstr "Команда"
+
+msgid "Apostrophe"
+msgstr ""
+
+#, fuzzy
+msgid "Colon"
+msgstr "Брой"
+
+msgid "Exclamation mark"
+msgstr ""
+
+msgid "Question mark"
+msgstr ""
+
+#, fuzzy
+msgid "Ampersand"
+msgstr "добави"
+
+msgid "Dollar sign"
+msgstr ""
+
+msgid "Quotation mark"
+msgstr ""
+
+#, fuzzy
+msgid "Caret"
+msgstr "Назначение"
+
+msgid "Tilda"
+msgstr ""
+
+#, fuzzy
+msgid "Prime"
+msgstr "Преди"
+
+#, fuzzy
+msgid "Underline"
+msgstr " Въведете ред: "
+
+msgid "Understrike"
+msgstr ""
+
+msgid "Pipe"
+msgstr ""
+
+#, fuzzy
+msgid "Enter"
+msgstr "собст."
+
+#, fuzzy
+msgid "Tab key"
+msgstr "+ от доп. клв."
+
+#, fuzzy
+msgid "Space key"
+msgstr "Накл. черта от доп. клв."
+
+#, fuzzy
+msgid "Slash key"
+msgstr "Накл. черта от доп. клв."
+
+#, fuzzy
+msgid "Backslash key"
+msgstr "Backspace"
+
+msgid "Number sign #"
+msgstr ""
+
+msgid "Ctrl"
+msgstr ""
+
+msgid "Alt"
+msgstr ""
+
+msgid "Shift"
+msgstr ""
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"Размер на екрана %dx%d не е поддържан.\n"
+"Проверете променливата на средата TERM.\n"
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
+
+#, fuzzy, c-format
+msgid "%s is not a directory\n"
+msgstr "директорията"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr ""
+" Не може да се създаде директорията назначение \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr ""
+" Не може да се създаде директорията назначение \"%s\" \n"
+" %s "
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr ""
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr ""
+
+#, c-format
+msgid "Press any key to continue..."
+msgstr "Натиснете клавиш, за да продължите..."
 
 msgid "Warning"
 msgstr "Внимание"
 
-msgid " File has hard-links. Detach before saving? "
+msgid " Pipe failed "
+msgstr " Канала пропадна "
+
+msgid " Dup failed "
+msgstr " Дублирането на дескриптора пропадна "
+
+#, c-format
+msgid ""
+"Cannot open cpio archive\n"
+"%s"
 msgstr ""
+"Не може да се отвори cpio архива\n"
+"%s"
+
+#, c-format
+msgid ""
+"Premature end of cpio archive\n"
+"%s"
+msgstr ""
+"Преждевременен край на cpio архива\n"
+"%s"
+
+#, c-format
+msgid ""
+"Inconsistent hardlinks of\n"
+"%s\n"
+"in cpio archive\n"
+"%s"
+msgstr ""
+"Невалидни твърди връзки към\n"
+"%s\n"
+"в cpio архивa\n"
+"%s"
+
+#, c-format
+msgid "%s contains duplicate entries! Skipping!"
+msgstr "%s съдържа дублирани елементи! Пропускам го!"
+
+#, c-format
+msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"Повредено cpio заглавие срещнато в\n"
+"%s"
+
+#, c-format
+msgid ""
+"Unexpected end of file\n"
+"%s"
+msgstr ""
+"Неочакван край на файла\n"
+"%s"
+
+#, c-format
+msgid "Directory cache expired for %s"
+msgstr "Кеша за %s остаря"
+
+msgid "Starting linear transfer..."
+msgstr "Започвам линеен трансфер..."
+
+#, c-format
+msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+msgstr "%s: %s: %s %3d%% (%lu байта предадени)"
+
+#, c-format
+msgid "%s: %s: %s %lu bytes transferred"
+msgstr "%s: %s: %s %lu байта предадени"
+
+msgid "Getting file"
+msgstr "Получавам файл"
+
+#, c-format
+msgid ""
+"Cannot open %s archive\n"
+"%s"
+msgstr ""
+"Не може да се отвори архива %s\n"
+"%s"
+
+msgid "Inconsistent extfs archive"
+msgstr "Повреден extfs архив"
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Внимание: файлът %s не е намерен\n"
+
+#, c-format
+msgid "fish: Disconnecting from %s"
+msgstr "fish: Изключвам се от %s"
+
+msgid "fish: Waiting for initial line..."
+msgstr "fish: Чакам начален ред..."
+
+msgid "Sorry, we cannot do password authenticated connections for now."
+msgstr "Съжалявам, не можем да правим връзки с парола засега."
+
+msgid " fish: Password required for "
+msgstr " fish: Необходима е парола за "
+
+msgid "fish: Sending password..."
+msgstr "fish: Изпращам парола..."
+
+msgid "fish: Sending initial line..."
+msgstr "fish: Изпращам начален ред..."
+
+msgid "fish: Handshaking version..."
+msgstr "fish: Потвърждавм версията..."
+
+msgid "fish: Setting up current directory..."
+msgstr "fish: Установявам текуща директория..."
+
+#, c-format
+msgid "fish: Connected, home %s."
+msgstr "fish: Има връзка, домашна директория %s."
+
+#, c-format
+msgid "fish: Reading directory %s..."
+msgstr "fish: Чета директорията %s..."
+
+#, c-format
+msgid "%s: done."
+msgstr "%s: готово."
+
+#, c-format
+msgid "%s: failure"
+msgstr "%s: неуспех"
+
+#, c-format
+msgid "fish: store %s: sending command..."
+msgstr "fish: запис на %s: изпращам командата..."
+
+msgid "fish: Local read failed, sending zeros"
+msgstr "fish: Локалното четене пропадна, изпращам нули"
+
+#, c-format
+msgid "fish: storing %s %d (%lu)"
+msgstr "fish: записвам %s %d (%lu)"
+
+msgid "zeros"
+msgstr "нули"
+
+msgid "file"
+msgstr "файла"
+
+msgid "Aborting transfer..."
+msgstr "Отменям трнсфера..."
+
+msgid "Error reported after abort."
+msgstr "Грешка след отняната."
+
+msgid "Aborted transfer would be successful."
+msgstr "Трансфера отменен успешно."
+
+#, c-format
+msgid "ftpfs: Disconnecting from %s"
+msgstr "ftpfs: Изключвам се от %s"
+
+msgid " FTP: Password required for "
+msgstr " FTP: Необходима е парола за "
+
+msgid "ftpfs: sending login name"
+msgstr "ftpfs: изпращам потребителско име"
+
+msgid "ftpfs: sending user password"
+msgstr "ftpfs: изпращам потребителска парола"
+
+#, fuzzy, c-format
+msgid "FTP: Account required for user %s"
+msgstr " FTP: Необходима е парола за "
+
+#, fuzzy
+msgid "Account:"
+msgstr "Брой"
+
+#, fuzzy
+msgid "ftpfs: sending user account"
+msgstr "ftpfs: изпращам потребителска парола"
+
+msgid "ftpfs: logged in"
+msgstr "ftpfs: вътре сме"
+
+#, c-format
+msgid "ftpfs: Login incorrect for user %s "
+msgstr "ftpfs: Отказ на връзка за потребителя %s "
+
+msgid "ftpfs: Invalid host name."
+msgstr "ftpfs: Невалидно име на машина"
+
+#, c-format
+msgid "ftpfs: %s"
+msgstr ""
+
+#, c-format
+msgid "ftpfs: making connection to %s"
+msgstr "ftpfs: установявам връзка с %s"
+
+msgid "ftpfs: connection interrupted by user"
+msgstr "ftpfs: връзката прекъсната от потребителя"
+
+#, c-format
+msgid "ftpfs: connection to server failed: %s"
+msgstr "ftpfs: връзката със сървъра пропадна: %s"
+
+#, c-format
+msgid "Waiting to retry... %d (Control-C to cancel)"
+msgstr "Изчакване за нов опит... %d (Control-C за отказ)"
+
+#, fuzzy
+msgid "ftpfs: invalid address family"
+msgstr "ftpfs: Невалиден адрес на машина"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not setup passive mode: %s"
+msgstr "ftpfs: не може да се установи пасивен режим"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not create socket: %s"
+msgstr " Не може да се създаде сокет: %s "
+
+msgid "ftpfs: could not setup passive mode"
+msgstr "ftpfs: не може да се установи пасивен режим"
+
+msgid "ftpfs: aborting transfer."
+msgstr "ftpfs: отменям трнсфера."
+
+#, c-format
+msgid "ftpfs: abort error: %s"
+msgstr "ftpfs: грешка при отмяната: %s"
+
+msgid "ftpfs: abort failed"
+msgstr "ftpfs: отмяната пропадна"
+
+msgid "ftpfs: CWD failed."
+msgstr "ftpfs: CWD не успя."
+
+msgid "ftpfs: couldn't resolve symlink"
+msgstr "ftpfs: не може да се проследи връзката"
+
+msgid "Resolving symlink..."
+msgstr "Проследявам връзката..."
+
+#, c-format
+msgid "ftpfs: Reading FTP directory %s... %s%s"
+msgstr "ftpfs: Чете се FTP директорията %s... %s%s"
+
+msgid "(strict rfc959)"
+msgstr "(стриктно rfc959)"
+
+msgid "(chdir first)"
+msgstr "(първо cd)"
+
+msgid "ftpfs: failed; nowhere to fallback to"
+msgstr "ftpfs: неуспех; няма къде да се върна"
+
+#, c-format
+msgid "ftpfs: storing file %lu (%lu)"
+msgstr "ftpfs: записвам файла %lu (%lu)"
+
+msgid ""
+"~/.netrc file has incorrect mode.\n"
+"Remove password or correct mode."
+msgstr ""
+"Файлът ~/.netrc няма верен режим.\n"
+"Махнете паролата или поправете режима."
+
+msgid " MCFS "
+msgstr " MCFS "
+
+msgid " The server does not support this version "
+msgstr " Сървърът не поддържа тази версия "
+
+msgid ""
+" The remote server is not running on a system port \n"
+" you need a password to log in, but the information may \n"
+" not be safe on the remote side.  Continue? \n"
+msgstr ""
+" Далечният сървър не върви на системен порт. \n"
+" Трябва Ви парола, за да се свържете, но информацията може \n"
+" да не е в безопасност от другата страна. Продължавате ли? \n"
 
 msgid "&Yes"
 msgstr "Да"
@@ -93,665 +648,185 @@ msgstr "Да"
 msgid "&No"
 msgstr "Не"
 
+msgid " MCFS Password required "
+msgstr " Необходима е MCFS парола "
+
+msgid " Invalid password "
+msgstr " Невалидна парола "
+
+#, c-format
+msgid " Cannot locate hostname: %s "
+msgstr " Не мога да открия име на машината: %s "
+
+#, c-format
+msgid " Cannot create socket: %s "
+msgstr " Не може да се създаде сокет: %s "
+
+#, c-format
+msgid " Cannot connect to server: %s "
+msgstr " Не мога да се свържа със сървъра: %s "
+
+msgid " Too many open connections "
+msgstr " Прекалено много отворени връзки "
+
+#, c-format
+msgid ""
+"Warning: Invalid line in %s:\n"
+"%s\n"
+msgstr ""
+"Внимание: Невалиден ред в %s:\n"
+"%s\n"
+
+#, c-format
+msgid ""
+"Warning: Invalid flag %c in %s:\n"
+"%s\n"
+msgstr ""
+"Внимание: Невалиден флаг %c в %s:\n"
+"%s\n"
+
+#, c-format
+msgid ""
+" reconnect to %s failed\n"
+" "
+msgstr ""
+" повторното свързване с %s не успя\n"
+" "
+
+msgid " Authentication failed "
+msgstr " Легитимацията на успя "
+
+#, c-format
+msgid " Error %s creating directory %s "
+msgstr " %s създава директорията %s "
+
+#, c-format
+msgid " Error %s removing directory %s "
+msgstr " %s изтрива директорията %s"
+
+#, c-format
+msgid " %s opening remote file %s "
+msgstr " %s отваря отдалечения файл %s"
+
+#, c-format
+msgid " %s removing remote file %s "
+msgstr " %s премахва отдалечения файл %s"
+
+#, c-format
+msgid " %s renaming files\n"
+msgstr " %s преименува файлове\n"
+
+#, c-format
+msgid ""
+"Cannot open tar archive\n"
+"%s"
+msgstr ""
+"Не може да се отвори tar архива\n"
+"%s"
+
+msgid "Inconsistent tar archive"
+msgstr "Несъгласуван tar архив"
+
+msgid "Unexpected EOF on archive file"
+msgstr "Неочакван край на архивния файл"
+
+#, c-format
+msgid ""
+"Hmm,...\n"
+"%s\n"
+"doesn't look like a tar archive."
+msgstr ""
+"Хмм,...\n"
+"%s\n"
+"не изглежда като tar архив."
+
+msgid " undelfs: error "
+msgstr " undelfs: грешка "
+
+msgid " not enough memory "
+msgstr " няма достатъчно памет "
+
+msgid " while allocating block buffer "
+msgstr " за заделяне на блоков буфер "
+
+#, c-format
+msgid " open_inode_scan: %d "
+msgstr " open_inode_scan: %d "
+
+#, c-format
+msgid " while starting inode scan %d "
+msgstr " за начало на сканиране на i-възлите %d "
+
+#, c-format
+msgid "undelfs: loading deleted files information %d inodes"
+msgstr "undelfs: зареждане на информация за изтритите файлове, %d i-възела"
+
+#, c-format
+msgid " while calling ext2_block_iterate %d "
+msgstr " за извикване на ext2_block_iterate %d "
+
+msgid " no more memory while reallocating array "
+msgstr " няма повече памет за ново заделяне на масив "
+
+#, c-format
+msgid " while doing inode scan %d "
+msgstr " при сканиране на i-възлите %d "
+
+msgid " Ext2lib error "
+msgstr " Грешка в ext2lib "
+
+#, c-format
+msgid " Cannot open file %s "
+msgstr " Не може да се отвори файла %s "
+
+msgid "undelfs: reading inode bitmap..."
+msgstr "undelfs: четене на битовата карта на i-възлите..."
+
+#, c-format
+msgid ""
+" Cannot load inode bitmap from: \n"
+" %s \n"
+msgstr ""
+" Не може да се зареди битовата карта на i-възела: \n"
+" %s \n"
+
+msgid "undelfs: reading block bitmap..."
+msgstr "undelfs: четене на блоковата битова карта..."
+
+#, c-format
+msgid ""
+" Cannot load block bitmap from: \n"
+" %s \n"
+msgstr ""
+" Не може да се зареди блоковата битова карта: \n"
+" %s \n"
+
+msgid " vfs_info is not fs! "
+msgstr "vfs_info не е файлова система! "
+
+msgid " You have to chdir to extract files first "
+msgstr " Трябва първо да смените директорията, за да извлечете файлове "
+
+msgid " while iterating over blocks "
+msgstr " за обхождане на блоковете "
+
+msgid "Cannot parse:"
+msgstr "Не мога да анализирам:"
+
+msgid "More parsing errors will be ignored."
+msgstr "Останалите грешки при анализа ще бъдат пренебрегнати."
+
+msgid "Internal error:"
+msgstr "Вътрешна грешка:"
+
+msgid "Password:"
+msgstr "Парола:"
+
+msgid "Changes to file lost"
+msgstr "Промените във файла изгубени"
+
 msgid "&Cancel"
 msgstr "Отказ"
-
-msgid "The file has been modified in the meantime. Save anyway?"
-msgstr ""
-
-msgid " Error writing to pipe: "
-msgstr " Грешка при писане в канала: "
-
-msgid " Cannot open pipe for writing: "
-msgstr " Грешка при отваряне на канала за четене: "
-
-#, fuzzy, c-format
-msgid " Cannot open file for writing: %s "
-msgstr " Грешка при отваряне на канала за четене: "
-
-#, fuzzy
-msgid "&Quick save"
-msgstr "Бързо"
-
-#, fuzzy
-msgid "&Safe save"
-msgstr "Сигурно"
-
-msgid "&Do backups with following extension:"
-msgstr ""
-
-msgid "Check &POSIX new line"
-msgstr ""
-
-msgid " Edit Save Mode "
-msgstr " Промени начина на запазване "
-
-msgid "The file you are saving is not finished with a newline"
-msgstr ""
-
-#, fuzzy
-msgid "C&ontinue"
-msgstr "Продължи"
-
-msgid "&Do not change"
-msgstr ""
-
-msgid "&Unix format (LF)"
-msgstr ""
-
-msgid "&Windows/DOS format (CR LF)"
-msgstr ""
-
-msgid "&Macintosh format (CR)"
-msgstr ""
-
-msgid "Change line breaks to:"
-msgstr ""
-
-#, fuzzy
-msgid " Enter file name: "
-msgstr " Въведете ред: "
-
-msgid " Save As "
-msgstr " Запази като "
-
-msgid " A file already exists with this name. "
-msgstr " Файл с това има вече съществува. "
-
-#, fuzzy
-msgid "&Overwrite"
-msgstr "Презапиши"
-
-msgid " Cannot save file. "
-msgstr " Грешка при запазване на файла. "
-
-msgid " Delete macro "
-msgstr " Изтрий макрос "
-
-msgid " Cannot open temp file "
-msgstr " Грешка при зареждане на временния файл "
-
-msgid " Cannot open macro file "
-msgstr " Грешка при зареждане на файла с макроси "
-
-msgid " Cannot overwrite macro file "
-msgstr " Грешка при презаписване на файла с макроси "
-
-msgid " Save macro "
-msgstr " Запази макроса "
-
-msgid " Press the macro's new hotkey: "
-msgstr " Натиснете новия 'горещ клавиш' на макроса: "
-
-msgid " Press macro hotkey: "
-msgstr " Натиснете клавиш за макроса: "
-
-msgid " Load macro "
-msgstr " Зареди макрос "
-
-msgid " Confirm save file? : "
-msgstr " Потвърждавате ли запазването? "
-
-msgid " Save file "
-msgstr " Запази файла "
-
-msgid "&Save"
-msgstr "Запази"
-
-msgid ""
-" Current text was modified without a file save. \n"
-" Continue discards these changes. "
-msgstr ""
-" Текущият текст е променен, без да е запазван. \n"
-" 'Продължи' отменя тези промени. "
-
-msgid "Syntax file edit"
-msgstr "Редактирай файл със синтаксис"
-
-msgid " Which syntax file you want to edit? "
-msgstr " Кой файл със синтаксис искате да редактирате? "
-
-msgid "&User"
-msgstr "Потребителски"
-
-msgid "&System Wide"
-msgstr "Системен"
-
-msgid " Menu edit "
-msgstr "Редактирай меню"
-
-msgid " Which menu file do you want to edit? "
-msgstr " Кой меню-файл ще редактирате? "
-
-msgid "&Local"
-msgstr "Локален"
-
-msgid " Load "
-msgstr " Зареди "
-
-msgid " Block is large, you may not be able to undo this action. "
-msgstr ""
-" Блокът е голям. Възможно е това действие да не може да бъде отменено. "
-
-#, fuzzy
-msgid "Replace"
-msgstr "Замести"
-
-msgid " Replace "
-msgstr " Замяна "
-
-#, c-format
-msgid " %ld replacements made. "
-msgstr " %ld замени направени. "
-
-msgid "Quit"
-msgstr "Изход"
-
-msgid " File was modified, Save with exit? "
-msgstr " Файлът е модифициран, да го запазя ли? "
-
-#, fuzzy
-msgid "&Cancel quit"
-msgstr "Отмени изхода"
-
-#, fuzzy
-msgid " Error "
-msgstr "Грешка"
-
-msgid " This function is not implemented. "
-msgstr ""
-
-msgid " Copy to clipboard "
-msgstr " Копирай в буфера "
-
-msgid " Unable to save to file. "
-msgstr " Не мога за запазя във файла. "
-
-msgid " Cut to clipboard "
-msgstr " Премести в буфера "
-
-msgid " Goto line "
-msgstr " Отиди на ред "
-
-msgid " Enter line: "
-msgstr " Въведете ред: "
-
-msgid " Save Block "
-msgstr " Запази блока "
-
-msgid " Insert File "
-msgstr " Вмъкни файл "
-
-msgid " Cannot insert file. "
-msgstr " Грешка при вмъкването на файл. "
-
-msgid " Sort block "
-msgstr " Сортирай блока "
-
-msgid " You must first highlight a block of text. "
-msgstr " Трябва да изберете текстов блок. "
-
-msgid " Run Sort "
-msgstr " Стартирай Sort "
-
-msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr ""
-" Въведете опции за sort, разделени от интервали (вижте man-страницата): "
-
-msgid " Sort "
-msgstr " Сортирай "
-
-msgid " Cannot execute sort command "
-msgstr " Грешка при изпълнение на sort "
-
-msgid " Sort returned non-zero: "
-msgstr " Sort върна не нулев код: "
-
-msgid "Paste output of external command"
-msgstr ""
-
-#, fuzzy
-msgid "Enter shell command(s):"
-msgstr " Въведете име на командата: "
-
-#, fuzzy
-msgid "External command"
-msgstr "Друга команда"
-
-#, fuzzy
-msgid "Cannot execute command"
-msgstr " Грешка при изпълнение на sort "
-
-msgid "Error creating script:"
-msgstr "Грешка при създаване на скрипт:"
-
-msgid "Error reading script:"
-msgstr "Грешка при четене на скрипт:"
-
-msgid "Error closing script:"
-msgstr "Грешка при затваряне на скрипт:"
-
-msgid "Script created:"
-msgstr "Създаден скрипт:"
-
-msgid "Process block"
-msgstr "Обработи блока"
-
-msgid " Copies to"
-msgstr " Копия до"
-
-msgid " Subject"
-msgstr " Тема"
-
-msgid " To"
-msgstr " До"
-
-msgid " mail -s <subject> -c <cc> <to>"
-msgstr " mail -s <тема> -c <cc> <до>"
-
-msgid " Mail "
-msgstr " Изпрати по пощата "
-
-msgid " Insert Literal "
-msgstr " Вмъкни символ "
-
-msgid " Press any key: "
-msgstr " Натиснете клавиш: "
-
-msgid " Execute Macro "
-msgstr " Изпълни Макрос "
-
-msgid "All charsets"
-msgstr ""
-
-#, fuzzy
-msgid "&Whole words"
-msgstr "Само цели думи"
-
-#, fuzzy
-msgid "In se&lection"
-msgstr "Обърни маркирането       M-*"
-
-msgid "&Backwards"
-msgstr "Назад"
-
-msgid "case &Sensitive"
-msgstr "Различавай главни/малки"
-
-msgid " Enter replacement string:"
-msgstr " Въведете заместващия низ:"
-
-msgid " Enter search string:"
-msgstr " Въведете търсения низ:"
-
-#, fuzzy
-msgid "&Find all"
-msgstr "Търси файл"
-
-msgid "Cancel"
-msgstr "Отказ"
-
-msgid "&Skip"
-msgstr "Пропусни"
-
-msgid "A&ll"
-msgstr "Всички"
-
-msgid "&Replace"
-msgstr "Замести"
-
-msgid " Replace with: "
-msgstr " Замести с:"
-
-msgid " Confirm replace "
-msgstr " Потвърдете замяната "
-
-msgid "&Dismiss"
-msgstr "Затвори"
-
-#, c-format
-msgid ""
-"File \"%s\" is already being edited\n"
-"User: %s\n"
-"Process ID: %d"
-msgstr ""
-
-msgid "File locked"
-msgstr ""
-
-msgid "&Grab lock"
-msgstr ""
-
-msgid "&Ignore lock"
-msgstr ""
-
-msgid "&Open file..."
-msgstr "Отвори файл..."
-
-#, fuzzy
-msgid "&New"
-msgstr "Име"
-
-#, fuzzy
-msgid "Save &as..."
-msgstr "Запази настройките"
-
-#, fuzzy
-msgid "&Insert file..."
-msgstr "Вмъкни файл...     F15"
-
-#, fuzzy
-msgid "Cop&y to file..."
-msgstr "Копирай във файл   C-f"
-
-#, fuzzy
-msgid "&User menu..."
-msgstr "Потребителско меню  F2"
-
-#, fuzzy
-msgid "A&bout..."
-msgstr "Разположение..."
-
-msgid "&Quit"
-msgstr "Изход"
-
-#, fuzzy
-msgid "&Toggle mark"
-msgstr "Изтр марк"
-
-msgid "&Mark columns"
-msgstr ""
-
-#, fuzzy
-msgid "Toggle &ins/overw"
-msgstr "Вмъкване/презапис  Ins"
-
-#, fuzzy
-msgid "&Copy"
-msgstr "Копирай"
-
-msgid "&Move"
-msgstr "Премести"
-
-msgid "&Delete"
-msgstr "Изтрий"
-
-#, fuzzy
-msgid "C&opy to clipfile"
-msgstr "Копирай във файл...  "
-
-#, fuzzy
-msgid "C&ut to clipfile"
-msgstr "Отиди на ред...            M-l"
-
-msgid "&Paste from clipfile"
-msgstr ""
-
-#, fuzzy
-msgid "Toggle bookmar&k"
-msgstr "Маркирай            F3"
-
-#, fuzzy
-msgid "&Next bookmark"
-msgstr "Уст марк"
-
-#, fuzzy
-msgid "Pre&v bookmark"
-msgstr "Сортирай...                M-t"
-
-#, fuzzy
-msgid "&Flush bookmark"
-msgstr "Пусни по пощата...            "
-
-msgid "&Undo"
-msgstr ""
-
-msgid "&Beginning"
-msgstr ""
-
-#, fuzzy
-msgid "&End"
-msgstr "I-възел"
-
-#, fuzzy
-msgid "&Search..."
-msgstr "Търси"
-
-#, fuzzy
-msgid "Search &again"
-msgstr "Търси пак        F17"
-
-#, fuzzy
-msgid "&Replace..."
-msgstr "Замести"
-
-#, fuzzy
-msgid "&Go to line..."
-msgstr " Отиди на ред "
-
-#, fuzzy
-msgid "Toggle li&ne state"
-msgstr "Маркирай            F3"
-
-#, fuzzy
-msgid "Go to matching &bracket"
-msgstr "При съответстващата скоба  M-b"
-
-#, fuzzy
-msgid "Find declaration"
-msgstr "Намери отказите след патч"
-
-msgid "Back from declaration"
-msgstr ""
-
-msgid "Forward to declaration"
-msgstr ""
-
-#, fuzzy
-msgid "Encod&ing..."
-msgstr "Сортирай...                M-t"
-
-#, fuzzy
-msgid "&Refresh screen"
-msgstr "Опресни екрана             C-l"
-
-#, fuzzy
-msgid "&Start record macro"
-msgstr "Започни запис на макрос    C-r"
-
-#, fuzzy
-msgid "&Finish record macro..."
-msgstr "Спри запис на макрос...    C-r"
-
-#, fuzzy
-msgid "&Execute macro..."
-msgstr "Изпълни макрос...     C-a, клв"
-
-#, fuzzy
-msgid "Delete macr&o..."
-msgstr " Изтрий макрос "
-
-#, fuzzy
-msgid "'ispell' s&pell check"
-msgstr "Провери с 'ispell'         C-p"
-
-#, fuzzy
-msgid "&Mail..."
-msgstr "Филтър..."
-
-#, fuzzy
-msgid "Insert &literal..."
-msgstr "Вмъкни символ              C-q"
-
-#, fuzzy
-msgid "Insert &date/time"
-msgstr "Вмъкни дата/час               "
-
-#, fuzzy
-msgid "Format p&aragraph"
-msgstr "Форматирай абзац           M-p"
-
-#, fuzzy
-msgid "Sor&t..."
-msgstr "Ред на сортиране..."
-
-msgid "Paste o&utput of..."
-msgstr ""
-
-#, fuzzy
-msgid "E&xternal formatter"
-msgstr "Външно форматиране         F19"
-
-msgid "&General...  "
-msgstr "Общи..."
-
-#, fuzzy
-msgid "Save &mode..."
-msgstr "Начин на запазване..."
-
-#, fuzzy
-msgid "Learn &keys..."
-msgstr "Научи клавиши..."
-
-#, fuzzy
-msgid "Syntax &highlighting..."
-msgstr "Осветяване на синтаксиса"
-
-#, fuzzy
-msgid "S&yntax file"
-msgstr "Редактирай файл със синтаксис"
-
-#, fuzzy
-msgid "&Menu file"
-msgstr "Редактирай меню-файл"
-
-msgid "&Save setup"
-msgstr "Запази настройките"
-
-#, fuzzy
-msgid "&File"
-msgstr "Файл"
-
-#, fuzzy
-msgid "&Edit"
-msgstr "Редактирай"
-
-#, fuzzy
-msgid "&Search"
-msgstr "Търси"
-
-#, fuzzy
-msgid "&Command"
-msgstr "Команда"
-
-#, fuzzy
-msgid "For&mat"
-msgstr "Формат"
-
-#, fuzzy
-msgid "&Options"
-msgstr " Опции "
-
-msgid "None"
-msgstr "Няма"
-
-msgid "Dynamic paragraphing"
-msgstr "Динамични абзаци"
-
-msgid "Type writer wrap"
-msgstr "Пишеща машина"
-
-msgid "Word wrap line length: "
-msgstr "Дължина на ред : "
-
-msgid "Cursor beyond end of line"
-msgstr ""
-
-#, fuzzy
-msgid "Pers&istent selection"
-msgstr "Обърни маркирането       M-*"
-
-msgid "Synta&x highlighting"
-msgstr "Осветяване на синтаксиса"
-
-msgid "Visible tabs"
-msgstr ""
-
-msgid "Visible trailing spaces"
-msgstr ""
-
-#, fuzzy
-msgid "Save file &position"
-msgstr " Запази файла "
-
-msgid "Confir&m before saving"
-msgstr "Питай преди запазване"
-
-msgid "&Return does autoindent"
-msgstr "Return спазва полето"
-
-msgid "Tab spacing: "
-msgstr "Размер на tab-овете: "
-
-msgid "Fill tabs with &spaces"
-msgstr "Tab-овете са интервали"
-
-msgid "&Backspace through tabs"
-msgstr "Backspace между tab-овете"
-
-msgid "&Fake half tabs"
-msgstr "Фалшиви полу-tab-ове"
-
-msgid "Wrap mode"
-msgstr "Режим на пренасяне"
-
-msgid " Editor options "
-msgstr " Опции на редактора "
-
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
-msgid "ButtonBar|Mark"
-msgstr ""
-
-msgid "ButtonBar|Replac"
-msgstr ""
-
-msgid "ButtonBar|Copy"
-msgstr ""
-
-msgid "ButtonBar|Move"
-msgstr ""
-
-msgid "ButtonBar|Search"
-msgstr ""
-
-msgid "ButtonBar|Delete"
-msgstr ""
-
-msgid "ButtonBar|PullDn"
-msgstr ""
-
-msgid "ButtonBar|Quit"
-msgstr ""
-
-msgid " Load syntax file "
-msgstr " Зареди файл със синтаксис "
-
-#, c-format
-msgid ""
-" Cannot open file %s \n"
-" %s "
-msgstr ""
-" Не може да се отвори файлът %s \n"
-" %s "
-
-#, c-format
-msgid " Error in file %s on line %d "
-msgstr " Грешка във файла %s на ред %d "
 
 msgid "&Set"
 msgstr "Промени"
@@ -984,6 +1059,9 @@ msgstr "Режим на списък"
 msgid "user &Mini status"
 msgstr "мини статус"
 
+msgid "&OK"
+msgstr "ОК"
+
 msgid "&Reverse"
 msgstr "Обратен ред"
 
@@ -1112,16 +1190,9 @@ msgstr "Домейн:"
 msgid "Username:"
 msgstr "Потребителско име:"
 
-msgid "Password:"
-msgstr "Парола:"
-
 #, c-format
 msgid "Password for \\\\%s\\%s"
 msgstr "Парола за \\\\%s\\%s"
-
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Внимание: файлът %s не е намерен\n"
 
 msgid "7-bit ASCII"
 msgstr ""
@@ -1291,6 +1362,21 @@ msgstr "Редактирай файл с разширения"
 msgid " Which extension file you want to edit? "
 msgstr " Кой файл с разширения искате да редактирате? "
 
+msgid "&User"
+msgstr "Потребителски"
+
+msgid "&System Wide"
+msgstr "Системен"
+
+msgid " Menu edit "
+msgstr "Редактирай меню"
+
+msgid " Which menu file do you want to edit? "
+msgstr " Кой меню-файл ще редактирате? "
+
+msgid "&Local"
+msgstr "Локален"
+
 msgid "Highlighting groups file edit"
 msgstr ""
 
@@ -1413,6 +1499,726 @@ msgstr " Обвивката вече изпълнява команда "
 msgid "Cannot read directory contents"
 msgstr "Не може да се смени директорията"
 
+#, fuzzy
+msgid " Choose syntax highlighting "
+msgstr "Осветяване на синтаксиса"
+
+#, fuzzy
+msgid "< Auto >"
+msgstr " За "
+
+msgid "< Reload Current Syntax >"
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Cannot open %s for reading "
+msgstr " Грешка при отваряне на канала за четене: "
+
+msgid "Error"
+msgstr "Грешка"
+
+#, fuzzy, c-format
+msgid " Error reading from pipe: %s "
+msgstr "Грешка при четене от канала: "
+
+#, fuzzy, c-format
+msgid " Cannot open pipe for reading: %s "
+msgstr " Грешка при отваряне на канала за четене: "
+
+#, fuzzy, c-format
+msgid " Cannot get size/permissions for %s "
+msgstr " Не мога да получа информация за размер/режим на файла: "
+
+#, fuzzy, c-format
+msgid " %s is not a regular file "
+msgstr " Не може да се разглежда: не е обикновен файл "
+
+#, fuzzy, c-format
+msgid " File %s is too large "
+msgstr " Файлът е прекалено голям: "
+
+msgid " About "
+msgstr " За "
+
+msgid ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       A user friendly text editor written\n"
+"           for the Midnight Commander.\n"
+msgstr ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       Лесен за използване текстов редактор,\n"
+"          написан за Midnight Commander.\n"
+
+msgid "Macro recursion is too deep"
+msgstr ""
+
+msgid "Search"
+msgstr "Търси"
+
+msgid " File has hard-links. Detach before saving? "
+msgstr ""
+
+msgid "The file has been modified in the meantime. Save anyway?"
+msgstr ""
+
+msgid " Error writing to pipe: "
+msgstr " Грешка при писане в канала: "
+
+msgid " Cannot open pipe for writing: "
+msgstr " Грешка при отваряне на канала за четене: "
+
+#, fuzzy, c-format
+msgid " Cannot open file for writing: %s "
+msgstr " Грешка при отваряне на канала за четене: "
+
+#, fuzzy
+msgid "&Quick save"
+msgstr "Бързо"
+
+#, fuzzy
+msgid "&Safe save"
+msgstr "Сигурно"
+
+msgid "&Do backups with following extension:"
+msgstr ""
+
+msgid "Check &POSIX new line"
+msgstr ""
+
+msgid " Edit Save Mode "
+msgstr " Промени начина на запазване "
+
+msgid "The file you are saving is not finished with a newline"
+msgstr ""
+
+#, fuzzy
+msgid "C&ontinue"
+msgstr "Продължи"
+
+msgid "&Do not change"
+msgstr ""
+
+msgid "&Unix format (LF)"
+msgstr ""
+
+msgid "&Windows/DOS format (CR LF)"
+msgstr ""
+
+msgid "&Macintosh format (CR)"
+msgstr ""
+
+msgid "Change line breaks to:"
+msgstr ""
+
+#, fuzzy
+msgid " Enter file name: "
+msgstr " Въведете ред: "
+
+msgid " Save As "
+msgstr " Запази като "
+
+msgid " A file already exists with this name. "
+msgstr " Файл с това има вече съществува. "
+
+#, fuzzy
+msgid "&Overwrite"
+msgstr "Презапиши"
+
+msgid " Cannot save file. "
+msgstr " Грешка при запазване на файла. "
+
+msgid " Delete macro "
+msgstr " Изтрий макрос "
+
+msgid " Cannot open temp file "
+msgstr " Грешка при зареждане на временния файл "
+
+msgid " Cannot open macro file "
+msgstr " Грешка при зареждане на файла с макроси "
+
+msgid " Cannot overwrite macro file "
+msgstr " Грешка при презаписване на файла с макроси "
+
+msgid " Save macro "
+msgstr " Запази макроса "
+
+msgid " Press the macro's new hotkey: "
+msgstr " Натиснете новия 'горещ клавиш' на макроса: "
+
+msgid " Press macro hotkey: "
+msgstr " Натиснете клавиш за макроса: "
+
+msgid " Load macro "
+msgstr " Зареди макрос "
+
+msgid " Confirm save file? : "
+msgstr " Потвърждавате ли запазването? "
+
+msgid " Save file "
+msgstr " Запази файла "
+
+msgid "&Save"
+msgstr "Запази"
+
+msgid ""
+" Current text was modified without a file save. \n"
+" Continue discards these changes. "
+msgstr ""
+" Текущият текст е променен, без да е запазван. \n"
+" 'Продължи' отменя тези промени. "
+
+msgid "Syntax file edit"
+msgstr "Редактирай файл със синтаксис"
+
+msgid " Which syntax file you want to edit? "
+msgstr " Кой файл със синтаксис искате да редактирате? "
+
+msgid " Load "
+msgstr " Зареди "
+
+msgid " Block is large, you may not be able to undo this action. "
+msgstr ""
+" Блокът е голям. Възможно е това действие да не може да бъде отменено. "
+
+#, fuzzy
+msgid "Replace"
+msgstr "Замести"
+
+msgid " Replace "
+msgstr " Замяна "
+
+#, c-format
+msgid " %ld replacements made. "
+msgstr " %ld замени направени. "
+
+msgid "Quit"
+msgstr "Изход"
+
+msgid " File was modified, Save with exit? "
+msgstr " Файлът е модифициран, да го запазя ли? "
+
+#, fuzzy
+msgid "&Cancel quit"
+msgstr "Отмени изхода"
+
+#, fuzzy
+msgid " Error "
+msgstr "Грешка"
+
+msgid " This function is not implemented. "
+msgstr ""
+
+msgid " Copy to clipboard "
+msgstr " Копирай в буфера "
+
+msgid " Unable to save to file. "
+msgstr " Не мога за запазя във файла. "
+
+msgid " Cut to clipboard "
+msgstr " Премести в буфера "
+
+msgid " Goto line "
+msgstr " Отиди на ред "
+
+msgid " Enter line: "
+msgstr " Въведете ред: "
+
+msgid " Save Block "
+msgstr " Запази блока "
+
+msgid " Insert File "
+msgstr " Вмъкни файл "
+
+msgid " Cannot insert file. "
+msgstr " Грешка при вмъкването на файл. "
+
+msgid " Sort block "
+msgstr " Сортирай блока "
+
+msgid " You must first highlight a block of text. "
+msgstr " Трябва да изберете текстов блок. "
+
+msgid " Run Sort "
+msgstr " Стартирай Sort "
+
+msgid " Enter sort options (see manpage) separated by whitespace: "
+msgstr ""
+" Въведете опции за sort, разделени от интервали (вижте man-страницата): "
+
+msgid " Sort "
+msgstr " Сортирай "
+
+msgid " Cannot execute sort command "
+msgstr " Грешка при изпълнение на sort "
+
+msgid " Sort returned non-zero: "
+msgstr " Sort върна не нулев код: "
+
+msgid "Paste output of external command"
+msgstr ""
+
+#, fuzzy
+msgid "Enter shell command(s):"
+msgstr " Въведете име на командата: "
+
+#, fuzzy
+msgid "External command"
+msgstr "Друга команда"
+
+#, fuzzy
+msgid "Cannot execute command"
+msgstr " Грешка при изпълнение на sort "
+
+msgid "Error creating script:"
+msgstr "Грешка при създаване на скрипт:"
+
+msgid "Error reading script:"
+msgstr "Грешка при четене на скрипт:"
+
+msgid "Error closing script:"
+msgstr "Грешка при затваряне на скрипт:"
+
+msgid "Script created:"
+msgstr "Създаден скрипт:"
+
+msgid "Process block"
+msgstr "Обработи блока"
+
+msgid " Copies to"
+msgstr " Копия до"
+
+msgid " Subject"
+msgstr " Тема"
+
+msgid " To"
+msgstr " До"
+
+msgid " mail -s <subject> -c <cc> <to>"
+msgstr " mail -s <тема> -c <cc> <до>"
+
+msgid " Mail "
+msgstr " Изпрати по пощата "
+
+msgid " Insert Literal "
+msgstr " Вмъкни символ "
+
+msgid " Press any key: "
+msgstr " Натиснете клавиш: "
+
+msgid " Execute Macro "
+msgstr " Изпълни Макрос "
+
+msgid "All charsets"
+msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "Само цели думи"
+
+#, fuzzy
+msgid "In se&lection"
+msgstr "Обърни маркирането       M-*"
+
+msgid "&Backwards"
+msgstr "Назад"
+
+msgid "case &Sensitive"
+msgstr "Различавай главни/малки"
+
+msgid " Enter replacement string:"
+msgstr " Въведете заместващия низ:"
+
+msgid " Enter search string:"
+msgstr " Въведете търсения низ:"
+
+#, fuzzy
+msgid "&Find all"
+msgstr "Търси файл"
+
+msgid "Cancel"
+msgstr "Отказ"
+
+msgid "&Skip"
+msgstr "Пропусни"
+
+msgid "A&ll"
+msgstr "Всички"
+
+msgid "&Replace"
+msgstr "Замести"
+
+msgid " Replace with: "
+msgstr " Замести с:"
+
+msgid " Confirm replace "
+msgstr " Потвърдете замяната "
+
+msgid "&Dismiss"
+msgstr "Затвори"
+
+#, c-format
+msgid ""
+"File \"%s\" is already being edited\n"
+"User: %s\n"
+"Process ID: %d"
+msgstr ""
+
+msgid "File locked"
+msgstr ""
+
+msgid "&Grab lock"
+msgstr ""
+
+msgid "&Ignore lock"
+msgstr ""
+
+msgid "&Open file..."
+msgstr "Отвори файл..."
+
+#, fuzzy
+msgid "&New"
+msgstr "Име"
+
+#, fuzzy
+msgid "Save &as..."
+msgstr "Запази настройките"
+
+#, fuzzy
+msgid "&Insert file..."
+msgstr "Вмъкни файл...     F15"
+
+#, fuzzy
+msgid "Cop&y to file..."
+msgstr "Копирай във файл   C-f"
+
+#, fuzzy
+msgid "&User menu..."
+msgstr "Потребителско меню  F2"
+
+#, fuzzy
+msgid "A&bout..."
+msgstr "Разположение..."
+
+msgid "&Quit"
+msgstr "Изход"
+
+msgid "&Undo"
+msgstr ""
+
+#, fuzzy
+msgid "&Toggle ins/overw"
+msgstr "Вмъкване/презапис  Ins"
+
+#, fuzzy
+msgid "To&ggle mark"
+msgstr "Изтр марк"
+
+msgid "&Mark columns"
+msgstr ""
+
+#, fuzzy
+msgid "Mark &all"
+msgstr "Само марк"
+
+msgid "Unmar&k"
+msgstr ""
+
+#, fuzzy
+msgid "Cop&y"
+msgstr "Копирай"
+
+#, fuzzy
+msgid "Mo&ve"
+msgstr "Мести"
+
+msgid "&Delete"
+msgstr "Изтрий"
+
+#, fuzzy
+msgid "Co&py to clipfile"
+msgstr "Копирай във файл...  "
+
+#, fuzzy
+msgid "&Cut to clipfile"
+msgstr "Отиди на ред...            M-l"
+
+#, fuzzy
+msgid "Pa&ste from clipfile"
+msgstr "Отиди на ред...            M-l"
+
+msgid "&Beginning"
+msgstr ""
+
+#, fuzzy
+msgid "&End"
+msgstr "I-възел"
+
+#, fuzzy
+msgid "&Search..."
+msgstr "Търси"
+
+#, fuzzy
+msgid "Search &again"
+msgstr "Търси пак        F17"
+
+#, fuzzy
+msgid "&Replace..."
+msgstr "Замести"
+
+#, fuzzy
+msgid "&Toggle bookmark"
+msgstr "Маркирай            F3"
+
+#, fuzzy
+msgid "&Next bookmark"
+msgstr "Уст марк"
+
+#, fuzzy
+msgid "&Prev bookmark"
+msgstr "Сортирай...                M-t"
+
+#, fuzzy
+msgid "&Flush bookmark"
+msgstr "Пусни по пощата...            "
+
+#, fuzzy
+msgid "&Go to line..."
+msgstr " Отиди на ред "
+
+#, fuzzy
+msgid "&Toggle line state"
+msgstr "Маркирай            F3"
+
+#, fuzzy
+msgid "Go to matching &bracket"
+msgstr "При съответстващата скоба  M-b"
+
+#, fuzzy
+msgid "&Find declaration"
+msgstr "Намери отказите след патч"
+
+#, fuzzy
+msgid "Back from &declaration"
+msgstr "Намери отказите след патч"
+
+#, fuzzy
+msgid "For&ward to declaration"
+msgstr "Намери отказите след патч"
+
+#, fuzzy
+msgid "Encod&ing..."
+msgstr "Сортирай...                M-t"
+
+#, fuzzy
+msgid "&Refresh screen"
+msgstr "Опресни екрана             C-l"
+
+#, fuzzy
+msgid "&Start record macro"
+msgstr "Започни запис на макрос    C-r"
+
+#, fuzzy
+msgid "Finis&h record macro..."
+msgstr "Спри запис на макрос...    C-r"
+
+#, fuzzy
+msgid "&Execute macro..."
+msgstr "Изпълни макрос...     C-a, клв"
+
+#, fuzzy
+msgid "Delete macr&o..."
+msgstr " Изтрий макрос "
+
+#, fuzzy
+msgid "'ispell' s&pell check"
+msgstr "Провери с 'ispell'         C-p"
+
+#, fuzzy
+msgid "&Mail..."
+msgstr "Филтър..."
+
+#, fuzzy
+msgid "Insert &literal..."
+msgstr "Вмъкни символ              C-q"
+
+#, fuzzy
+msgid "Insert &date/time"
+msgstr "Вмъкни дата/час               "
+
+#, fuzzy
+msgid "&Format paragraph"
+msgstr "Форматирай абзац           M-p"
+
+#, fuzzy
+msgid "&Sort..."
+msgstr "Ред на сортиране..."
+
+msgid "&Paste output of..."
+msgstr ""
+
+#, fuzzy
+msgid "&External formatter"
+msgstr "Външно форматиране         F19"
+
+msgid "&General...  "
+msgstr "Общи..."
+
+#, fuzzy
+msgid "Save &mode..."
+msgstr "Начин на запазване..."
+
+#, fuzzy
+msgid "Learn &keys..."
+msgstr "Научи клавиши..."
+
+#, fuzzy
+msgid "Syntax &highlighting..."
+msgstr "Осветяване на синтаксиса"
+
+#, fuzzy
+msgid "S&yntax file"
+msgstr "Редактирай файл със синтаксис"
+
+#, fuzzy
+msgid "&Menu file"
+msgstr "Редактирай меню-файл"
+
+msgid "&Save setup"
+msgstr "Запази настройките"
+
+#, fuzzy
+msgid "&File"
+msgstr "Файл"
+
+#, fuzzy
+msgid "&Edit"
+msgstr "Редактирай"
+
+#, fuzzy
+msgid "&Search"
+msgstr "Търси"
+
+#, fuzzy
+msgid "&Command"
+msgstr "Команда"
+
+#, fuzzy
+msgid "For&mat"
+msgstr "Формат"
+
+#, fuzzy
+msgid "&Options"
+msgstr " Опции "
+
+msgid "None"
+msgstr "Няма"
+
+msgid "Dynamic paragraphing"
+msgstr "Динамични абзаци"
+
+msgid "Type writer wrap"
+msgstr "Пишеща машина"
+
+msgid "Word wrap line length: "
+msgstr "Дължина на ред : "
+
+msgid "Cursor beyond end of line"
+msgstr ""
+
+#, fuzzy
+msgid "Pers&istent selection"
+msgstr "Обърни маркирането       M-*"
+
+msgid "Synta&x highlighting"
+msgstr "Осветяване на синтаксиса"
+
+msgid "Visible tabs"
+msgstr ""
+
+msgid "Visible trailing spaces"
+msgstr ""
+
+#, fuzzy
+msgid "Save file &position"
+msgstr " Запази файла "
+
+msgid "Confir&m before saving"
+msgstr "Питай преди запазване"
+
+msgid "&Return does autoindent"
+msgstr "Return спазва полето"
+
+msgid "Tab spacing: "
+msgstr "Размер на tab-овете: "
+
+msgid "Fill tabs with &spaces"
+msgstr "Tab-овете са интервали"
+
+msgid "&Backspace through tabs"
+msgstr "Backspace между tab-овете"
+
+msgid "&Fake half tabs"
+msgstr "Фалшиви полу-tab-ове"
+
+msgid "Wrap mode"
+msgstr "Режим на пренасяне"
+
+msgid " Editor options "
+msgstr " Опции на редактора "
+
+msgid "ButtonBar|Help"
+msgstr ""
+
+msgid "ButtonBar|Save"
+msgstr ""
+
+msgid "ButtonBar|Mark"
+msgstr ""
+
+msgid "ButtonBar|Replac"
+msgstr ""
+
+msgid "ButtonBar|Copy"
+msgstr ""
+
+msgid "ButtonBar|Move"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Delete"
+msgstr ""
+
+msgid "ButtonBar|PullDn"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
+
+msgid " Load syntax file "
+msgstr " Зареди файл със синтаксис "
+
+#, c-format
+msgid ""
+" Cannot open file %s \n"
+" %s "
+msgstr ""
+" Не може да се отвори файлът %s \n"
+" %s "
+
+#, c-format
+msgid " Error in file %s on line %d "
+msgstr " Грешка във файла %s на ред %d "
+
 msgid ""
 " The Commander can't change to the directory that \n"
 " the subshell claims you are in.  Perhaps you have \n"
@@ -1423,10 +2229,6 @@ msgstr ""
 " твърди, че се намирате. Може да сте изтрили работната\n"
 " си директория, или да сте си дали допълнителни права\n"
 " за достъп с командата \"su\". "
-
-#, c-format
-msgid "Press any key to continue..."
-msgstr "Натиснете клавиш, за да продължите..."
 
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
@@ -1774,9 +2576,6 @@ msgstr "%o %f \"%s\"%m"
 msgid "%o %d %f%m"
 msgstr "%o %d %f%m"
 
-msgid "file"
-msgstr "файла"
-
 msgid "files"
 msgstr "файла"
 
@@ -2040,6 +2839,9 @@ msgstr ""
 
 msgid "ButtonBar|Prev"
 msgstr ""
+
+msgid "&Move"
+msgstr "Премести"
 
 msgid "&Remove"
 msgstr "Изтрий"
@@ -2391,6 +3193,10 @@ msgstr " Покажи файл "
 #, fuzzy
 msgid "&Filtered view"
 msgstr " Филтриран изглед "
+
+#, fuzzy
+msgid "&Copy"
+msgstr "Копирай"
 
 msgid "C&hmod"
 msgstr ""
@@ -2811,29 +3617,6 @@ msgstr "Потребителският формат изглежда невал�
 msgid " Do you really want to execute? "
 msgstr " Наистина ли искате да изпълните това? "
 
-msgid " Not implemented yet "
-msgstr ""
-
-msgid " Num of replace tokens not equal to num of found tokens "
-msgstr ""
-
-#, fuzzy, c-format
-msgid " Invalid token number %d "
-msgstr " Невалидна маска на назначението "
-
-#, fuzzy
-msgid "Normal"
-msgstr "Формат"
-
-msgid "&Regular expression"
-msgstr "Регулярен израз"
-
-msgid "Hexadecimal"
-msgstr ""
-
-msgid "Wildcard search"
-msgstr ""
-
 #, fuzzy
 msgid "Choose codepage"
 msgstr " Изберете входна кодова страница "
@@ -2846,18 +3629,6 @@ msgid ""
 "Cannot save file %s:\n"
 "%s"
 msgstr " Грешка при запазване на файла. "
-
-#, c-format
-msgid ""
-"Unable to load '%s' skin.\n"
-"Default skin has been loaded"
-msgstr ""
-
-#, c-format
-msgid ""
-"Unable to parse '%s' skin.\n"
-"Default skin has been loaded"
-msgstr ""
 
 msgid ""
 "GNU Midnight Commander is already\n"
@@ -2971,277 +3742,6 @@ msgstr ""
 "Не може да се пише във файла %s:\n"
 "%s\n"
 
-msgid "Function key 1"
-msgstr "F1"
-
-msgid "Function key 2"
-msgstr "F2"
-
-msgid "Function key 3"
-msgstr "F3"
-
-msgid "Function key 4"
-msgstr "F4"
-
-msgid "Function key 5"
-msgstr "F5"
-
-msgid "Function key 6"
-msgstr "F6"
-
-msgid "Function key 7"
-msgstr "F7"
-
-msgid "Function key 8"
-msgstr "F8"
-
-msgid "Function key 9"
-msgstr "F9"
-
-msgid "Function key 10"
-msgstr "F10"
-
-msgid "Function key 11"
-msgstr "F11"
-
-msgid "Function key 12"
-msgstr "F12"
-
-msgid "Function key 13"
-msgstr "F13"
-
-msgid "Function key 14"
-msgstr "F14"
-
-msgid "Function key 15"
-msgstr "F15"
-
-msgid "Function key 16"
-msgstr "F16"
-
-msgid "Function key 17"
-msgstr "F17"
-
-msgid "Function key 18"
-msgstr "F18"
-
-msgid "Function key 19"
-msgstr "F19"
-
-msgid "Function key 20"
-msgstr "F20"
-
-msgid "Backspace key"
-msgstr "Backspace"
-
-msgid "End key"
-msgstr "End"
-
-msgid "Up arrow key"
-msgstr "Горна стрелка"
-
-msgid "Down arrow key"
-msgstr "Долна стрелка"
-
-msgid "Left arrow key"
-msgstr "Лява стрелка"
-
-msgid "Right arrow key"
-msgstr "Дясна стрелка"
-
-msgid "Home key"
-msgstr "Home"
-
-msgid "Page Down key"
-msgstr "Page Down"
-
-msgid "Page Up key"
-msgstr "Page Up"
-
-msgid "Insert key"
-msgstr "Insert"
-
-msgid "Delete key"
-msgstr "Delete"
-
-msgid "Completion/M-tab"
-msgstr "Допълване/M-tab"
-
-msgid "+ on keypad"
-msgstr "+ от доп. клв."
-
-msgid "- on keypad"
-msgstr "- от доп. клв."
-
-msgid "Slash on keypad"
-msgstr "Накл. черта от доп. клв."
-
-msgid "* on keypad"
-msgstr "* от доп. клв."
-
-#, fuzzy
-msgid "Escape key"
-msgstr "Накл. черта от доп. клв."
-
-msgid "Left arrow keypad"
-msgstr "Лява стрелка от доп. клв."
-
-msgid "Right arrow keypad"
-msgstr "Дясна стрелка от доп. клв."
-
-msgid "Up arrow keypad"
-msgstr "Горна стрелка от доп. клв."
-
-msgid "Down arrow keypad"
-msgstr "Долна стрелка от доп. клв."
-
-msgid "Home on keypad"
-msgstr "Home от доп. клв."
-
-msgid "End on keypad"
-msgstr "End от доп. клв."
-
-msgid "Page Down keypad"
-msgstr "Page Down от доп. клв."
-
-msgid "Page Up keypad"
-msgstr "Page Up от доп. клв."
-
-msgid "Insert on keypad"
-msgstr "Insert от доп. клв."
-
-msgid "Delete on keypad"
-msgstr "Delete от доп. клв."
-
-msgid "Enter on keypad"
-msgstr "Enter от доп. клв."
-
-#, fuzzy
-msgid "Function key 21"
-msgstr "F1"
-
-#, fuzzy
-msgid "Function key 22"
-msgstr "F2"
-
-#, fuzzy
-msgid "Function key 23"
-msgstr "F2"
-
-#, fuzzy
-msgid "Function key 24"
-msgstr "F2"
-
-msgid "Plus"
-msgstr ""
-
-#, fuzzy
-msgid "Minus"
-msgstr "Меню"
-
-msgid "Asterisk"
-msgstr ""
-
-msgid "Dot"
-msgstr ""
-
-msgid "Less than"
-msgstr ""
-
-msgid "Great than"
-msgstr ""
-
-msgid "Equal"
-msgstr ""
-
-#, fuzzy
-msgid "Comma"
-msgstr "Команда"
-
-msgid "Apostrophe"
-msgstr ""
-
-#, fuzzy
-msgid "Colon"
-msgstr "Брой"
-
-msgid "Exclamation mark"
-msgstr ""
-
-msgid "Question mark"
-msgstr ""
-
-#, fuzzy
-msgid "Ampersand"
-msgstr "добави"
-
-msgid "Dollar sign"
-msgstr ""
-
-msgid "Quotation mark"
-msgstr ""
-
-#, fuzzy
-msgid "Caret"
-msgstr "Назначение"
-
-msgid "Tilda"
-msgstr ""
-
-#, fuzzy
-msgid "Prime"
-msgstr "Преди"
-
-#, fuzzy
-msgid "Underline"
-msgstr " Въведете ред: "
-
-msgid "Understrike"
-msgstr ""
-
-msgid "Pipe"
-msgstr ""
-
-#, fuzzy
-msgid "Enter"
-msgstr "собст."
-
-#, fuzzy
-msgid "Tab key"
-msgstr "+ от доп. клв."
-
-#, fuzzy
-msgid "Space key"
-msgstr "Накл. черта от доп. клв."
-
-#, fuzzy
-msgid "Slash key"
-msgstr "Накл. черта от доп. клв."
-
-#, fuzzy
-msgid "Backslash key"
-msgstr "Backspace"
-
-msgid "Number sign #"
-msgstr ""
-
-msgid "Ctrl"
-msgstr ""
-
-msgid "Alt"
-msgstr ""
-
-msgid "Shift"
-msgstr ""
-
-#, c-format
-msgid ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-msgstr ""
-"Размер на екрана %dx%d не е поддържан.\n"
-"Проверете променливата на средата TERM.\n"
-
 msgid " Format error on file Extensions File "
 msgstr " Грешка във формата на Файла с Разширения "
 
@@ -3282,46 +3782,6 @@ msgstr " Не са открити подходящи елементи в %s "
 
 msgid " User menu "
 msgstr " Поребителско меню "
-
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
-#, fuzzy, c-format
-msgid "%s is not a directory\n"
-msgstr "директорията"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr ""
-" Не може да се създаде директорията назначение \"%s\" \n"
-" %s "
-
-#, fuzzy, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr ""
-" Не може да се създаде директорията назначение \"%s\" \n"
-" %s "
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr ""
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr ""
-
-msgid " Pipe failed "
-msgstr " Канала пропадна "
-
-msgid " Dup failed "
-msgstr " Дублирането на дескриптора пропадна "
 
 #, fuzzy, c-format
 msgid ""
@@ -3446,448 +3906,6 @@ msgstr " История "
 
 msgid "Background process:"
 msgstr "Фонов процес:"
-
-#, c-format
-msgid ""
-"Cannot open cpio archive\n"
-"%s"
-msgstr ""
-"Не може да се отвори cpio архива\n"
-"%s"
-
-#, c-format
-msgid ""
-"Premature end of cpio archive\n"
-"%s"
-msgstr ""
-"Преждевременен край на cpio архива\n"
-"%s"
-
-#, c-format
-msgid ""
-"Inconsistent hardlinks of\n"
-"%s\n"
-"in cpio archive\n"
-"%s"
-msgstr ""
-"Невалидни твърди връзки към\n"
-"%s\n"
-"в cpio архивa\n"
-"%s"
-
-#, c-format
-msgid "%s contains duplicate entries! Skipping!"
-msgstr "%s съдържа дублирани елементи! Пропускам го!"
-
-#, c-format
-msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"Повредено cpio заглавие срещнато в\n"
-"%s"
-
-#, c-format
-msgid ""
-"Unexpected end of file\n"
-"%s"
-msgstr ""
-"Неочакван край на файла\n"
-"%s"
-
-#, c-format
-msgid "Directory cache expired for %s"
-msgstr "Кеша за %s остаря"
-
-msgid "Starting linear transfer..."
-msgstr "Започвам линеен трансфер..."
-
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
-msgstr "%s: %s: %s %3d%% (%lu байта предадени)"
-
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
-msgstr "%s: %s: %s %lu байта предадени"
-
-msgid "Getting file"
-msgstr "Получавам файл"
-
-#, c-format
-msgid ""
-"Cannot open %s archive\n"
-"%s"
-msgstr ""
-"Не може да се отвори архива %s\n"
-"%s"
-
-msgid "Inconsistent extfs archive"
-msgstr "Повреден extfs архив"
-
-#, c-format
-msgid "fish: Disconnecting from %s"
-msgstr "fish: Изключвам се от %s"
-
-msgid "fish: Waiting for initial line..."
-msgstr "fish: Чакам начален ред..."
-
-msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr "Съжалявам, не можем да правим връзки с парола засега."
-
-msgid " fish: Password required for "
-msgstr " fish: Необходима е парола за "
-
-msgid "fish: Sending password..."
-msgstr "fish: Изпращам парола..."
-
-msgid "fish: Sending initial line..."
-msgstr "fish: Изпращам начален ред..."
-
-msgid "fish: Handshaking version..."
-msgstr "fish: Потвърждавм версията..."
-
-msgid "fish: Setting up current directory..."
-msgstr "fish: Установявам текуща директория..."
-
-#, c-format
-msgid "fish: Connected, home %s."
-msgstr "fish: Има връзка, домашна директория %s."
-
-#, c-format
-msgid "fish: Reading directory %s..."
-msgstr "fish: Чета директорията %s..."
-
-#, c-format
-msgid "%s: done."
-msgstr "%s: готово."
-
-#, c-format
-msgid "%s: failure"
-msgstr "%s: неуспех"
-
-#, c-format
-msgid "fish: store %s: sending command..."
-msgstr "fish: запис на %s: изпращам командата..."
-
-msgid "fish: Local read failed, sending zeros"
-msgstr "fish: Локалното четене пропадна, изпращам нули"
-
-#, c-format
-msgid "fish: storing %s %d (%lu)"
-msgstr "fish: записвам %s %d (%lu)"
-
-msgid "zeros"
-msgstr "нули"
-
-msgid "Aborting transfer..."
-msgstr "Отменям трнсфера..."
-
-msgid "Error reported after abort."
-msgstr "Грешка след отняната."
-
-msgid "Aborted transfer would be successful."
-msgstr "Трансфера отменен успешно."
-
-#, c-format
-msgid "ftpfs: Disconnecting from %s"
-msgstr "ftpfs: Изключвам се от %s"
-
-msgid " FTP: Password required for "
-msgstr " FTP: Необходима е парола за "
-
-msgid "ftpfs: sending login name"
-msgstr "ftpfs: изпращам потребителско име"
-
-msgid "ftpfs: sending user password"
-msgstr "ftpfs: изпращам потребителска парола"
-
-#, fuzzy, c-format
-msgid "FTP: Account required for user %s"
-msgstr " FTP: Необходима е парола за "
-
-#, fuzzy
-msgid "Account:"
-msgstr "Брой"
-
-#, fuzzy
-msgid "ftpfs: sending user account"
-msgstr "ftpfs: изпращам потребителска парола"
-
-msgid "ftpfs: logged in"
-msgstr "ftpfs: вътре сме"
-
-#, c-format
-msgid "ftpfs: Login incorrect for user %s "
-msgstr "ftpfs: Отказ на връзка за потребителя %s "
-
-msgid "ftpfs: Invalid host name."
-msgstr "ftpfs: Невалидно име на машина"
-
-#, c-format
-msgid "ftpfs: %s"
-msgstr ""
-
-#, c-format
-msgid "ftpfs: making connection to %s"
-msgstr "ftpfs: установявам връзка с %s"
-
-msgid "ftpfs: connection interrupted by user"
-msgstr "ftpfs: връзката прекъсната от потребителя"
-
-#, c-format
-msgid "ftpfs: connection to server failed: %s"
-msgstr "ftpfs: връзката със сървъра пропадна: %s"
-
-#, c-format
-msgid "Waiting to retry... %d (Control-C to cancel)"
-msgstr "Изчакване за нов опит... %d (Control-C за отказ)"
-
-#, fuzzy
-msgid "ftpfs: invalid address family"
-msgstr "ftpfs: Невалиден адрес на машина"
-
-#, fuzzy, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: не може да се установи пасивен режим"
-
-#, fuzzy, c-format
-msgid "ftpfs: could not create socket: %s"
-msgstr " Не може да се създаде сокет: %s "
-
-msgid "ftpfs: could not setup passive mode"
-msgstr "ftpfs: не може да се установи пасивен режим"
-
-msgid "ftpfs: aborting transfer."
-msgstr "ftpfs: отменям трнсфера."
-
-#, c-format
-msgid "ftpfs: abort error: %s"
-msgstr "ftpfs: грешка при отмяната: %s"
-
-msgid "ftpfs: abort failed"
-msgstr "ftpfs: отмяната пропадна"
-
-msgid "ftpfs: CWD failed."
-msgstr "ftpfs: CWD не успя."
-
-msgid "ftpfs: couldn't resolve symlink"
-msgstr "ftpfs: не може да се проследи връзката"
-
-msgid "Resolving symlink..."
-msgstr "Проследявам връзката..."
-
-#, c-format
-msgid "ftpfs: Reading FTP directory %s... %s%s"
-msgstr "ftpfs: Чете се FTP директорията %s... %s%s"
-
-msgid "(strict rfc959)"
-msgstr "(стриктно rfc959)"
-
-msgid "(chdir first)"
-msgstr "(първо cd)"
-
-msgid "ftpfs: failed; nowhere to fallback to"
-msgstr "ftpfs: неуспех; няма къде да се върна"
-
-#, c-format
-msgid "ftpfs: storing file %lu (%lu)"
-msgstr "ftpfs: записвам файла %lu (%lu)"
-
-msgid ""
-"~/.netrc file has incorrect mode.\n"
-"Remove password or correct mode."
-msgstr ""
-"Файлът ~/.netrc няма верен режим.\n"
-"Махнете паролата или поправете режима."
-
-msgid " MCFS "
-msgstr " MCFS "
-
-msgid " The server does not support this version "
-msgstr " Сървърът не поддържа тази версия "
-
-msgid ""
-" The remote server is not running on a system port \n"
-" you need a password to log in, but the information may \n"
-" not be safe on the remote side.  Continue? \n"
-msgstr ""
-" Далечният сървър не върви на системен порт. \n"
-" Трябва Ви парола, за да се свържете, но информацията може \n"
-" да не е в безопасност от другата страна. Продължавате ли? \n"
-
-msgid " MCFS Password required "
-msgstr " Необходима е MCFS парола "
-
-msgid " Invalid password "
-msgstr " Невалидна парола "
-
-#, c-format
-msgid " Cannot locate hostname: %s "
-msgstr " Не мога да открия име на машината: %s "
-
-#, c-format
-msgid " Cannot create socket: %s "
-msgstr " Не може да се създаде сокет: %s "
-
-#, c-format
-msgid " Cannot connect to server: %s "
-msgstr " Не мога да се свържа със сървъра: %s "
-
-msgid " Too many open connections "
-msgstr " Прекалено много отворени връзки "
-
-#, c-format
-msgid ""
-"Warning: Invalid line in %s:\n"
-"%s\n"
-msgstr ""
-"Внимание: Невалиден ред в %s:\n"
-"%s\n"
-
-#, c-format
-msgid ""
-"Warning: Invalid flag %c in %s:\n"
-"%s\n"
-msgstr ""
-"Внимание: Невалиден флаг %c в %s:\n"
-"%s\n"
-
-#, c-format
-msgid ""
-" reconnect to %s failed\n"
-" "
-msgstr ""
-" повторното свързване с %s не успя\n"
-" "
-
-msgid " Authentication failed "
-msgstr " Легитимацията на успя "
-
-#, c-format
-msgid " Error %s creating directory %s "
-msgstr " %s създава директорията %s "
-
-#, c-format
-msgid " Error %s removing directory %s "
-msgstr " %s изтрива директорията %s"
-
-#, c-format
-msgid " %s opening remote file %s "
-msgstr " %s отваря отдалечения файл %s"
-
-#, c-format
-msgid " %s removing remote file %s "
-msgstr " %s премахва отдалечения файл %s"
-
-#, c-format
-msgid " %s renaming files\n"
-msgstr " %s преименува файлове\n"
-
-#, c-format
-msgid ""
-"Cannot open tar archive\n"
-"%s"
-msgstr ""
-"Не може да се отвори tar архива\n"
-"%s"
-
-msgid "Inconsistent tar archive"
-msgstr "Несъгласуван tar архив"
-
-msgid "Unexpected EOF on archive file"
-msgstr "Неочакван край на архивния файл"
-
-#, c-format
-msgid ""
-"Hmm,...\n"
-"%s\n"
-"doesn't look like a tar archive."
-msgstr ""
-"Хмм,...\n"
-"%s\n"
-"не изглежда като tar архив."
-
-msgid " undelfs: error "
-msgstr " undelfs: грешка "
-
-msgid " not enough memory "
-msgstr " няма достатъчно памет "
-
-msgid " while allocating block buffer "
-msgstr " за заделяне на блоков буфер "
-
-#, c-format
-msgid " open_inode_scan: %d "
-msgstr " open_inode_scan: %d "
-
-#, c-format
-msgid " while starting inode scan %d "
-msgstr " за начало на сканиране на i-възлите %d "
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: зареждане на информация за изтритите файлове, %d i-възела"
-
-#, c-format
-msgid " while calling ext2_block_iterate %d "
-msgstr " за извикване на ext2_block_iterate %d "
-
-msgid " no more memory while reallocating array "
-msgstr " няма повече памет за ново заделяне на масив "
-
-#, c-format
-msgid " while doing inode scan %d "
-msgstr " при сканиране на i-възлите %d "
-
-msgid " Ext2lib error "
-msgstr " Грешка в ext2lib "
-
-#, c-format
-msgid " Cannot open file %s "
-msgstr " Не може да се отвори файла %s "
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: четене на битовата карта на i-възлите..."
-
-#, c-format
-msgid ""
-" Cannot load inode bitmap from: \n"
-" %s \n"
-msgstr ""
-" Не може да се зареди битовата карта на i-възела: \n"
-" %s \n"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: четене на блоковата битова карта..."
-
-#, c-format
-msgid ""
-" Cannot load block bitmap from: \n"
-" %s \n"
-msgstr ""
-" Не може да се зареди блоковата битова карта: \n"
-" %s \n"
-
-msgid " vfs_info is not fs! "
-msgstr "vfs_info не е файлова система! "
-
-msgid " You have to chdir to extract files first "
-msgstr " Трябва първо да смените директорията, за да извлечете файлове "
-
-msgid " while iterating over blocks "
-msgstr " за обхождане на блоковете "
-
-msgid "Cannot parse:"
-msgstr "Не мога да анализирам:"
-
-msgid "More parsing errors will be ignored."
-msgstr "Останалите грешки при анализа ще бъдат пренебрегнати."
-
-msgid "Internal error:"
-msgstr "Вътрешна грешка:"
-
-msgid "Changes to file lost"
-msgstr "Промените във файла изгубени"
 
 #~ msgid "File:       None"
 #~ msgstr "Файл:          не е"
@@ -4044,9 +4062,6 @@ msgstr "Промените във файла изгубени"
 
 #~ msgid "Replac"
 #~ msgstr "Замести"
-
-#~ msgid "Move"
-#~ msgstr "Мести"
 
 #~ msgid "Delete"
 #~ msgstr "Изтрий"

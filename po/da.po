@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.41\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-12-25 19:06+0200\n"
+"POT-Creation-Date: 2010-02-09 12:08+0200\n"
 "PO-Revision-Date: 2001-10-20 21:37+02:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -21,81 +21,635 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#, fuzzy
-msgid " Choose syntax highlighting "
-msgstr "synta&X farvning"
-
-#, fuzzy
-msgid "< Auto >"
-msgstr " Om... "
-
-msgid "< Reload Current Syntax >"
-msgstr ""
-
-#, fuzzy, c-format
-msgid " Cannot open %s for reading "
-msgstr " Fejl ved forsøg på åbning af rør for læsning: "
-
-msgid "Error"
-msgstr "Fejl"
-
-#, fuzzy, c-format
-msgid " Error reading from pipe: %s "
-msgstr " Problem under læsning fra rør: "
-
-#, fuzzy, c-format
-msgid " Cannot open pipe for reading: %s "
-msgstr " Fejl ved forsøg på åbning af rør for læsning: "
-
-#, fuzzy, c-format
-msgid " Cannot get size/permissions for %s "
-msgstr " Kan ikke finde størrelse-/rettighedsinformation for filen: "
-
-#, fuzzy, c-format
-msgid " %s is not a regular file "
-msgstr " Kan ikke vise: ikke en normal fil "
-
-#, fuzzy, c-format
-msgid " File %s is too large "
-msgstr " Filen er for stor: "
-
-msgid " About "
-msgstr " Om... "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                 Cooledit  v3.11.5\n"
-"\n"
-" Ophavsret (C) 1996 the Free Software Foundation\n"
-"\n"
-"       En brugervenlig teksteditor skrevet\n"
-"             til Midnight Commander.\n"
-
-msgid "&OK"
-msgstr "&OK"
-
-msgid "Macro recursion is too deep"
-msgstr ""
-
-msgid "Search"
-msgstr "Søg"
-
 msgid " Search string not found "
 msgstr " Søgetekst ikke fundet "
+
+msgid " Not implemented yet "
+msgstr ""
+
+msgid " Num of replace tokens not equal to num of found tokens "
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Invalid token number %d "
+msgstr " Ugyldig målmaske "
+
+#, fuzzy
+msgid "Normal"
+msgstr "Format"
+
+msgid "&Regular expression"
+msgstr "&Regulært udtryk"
+
+msgid "Hexadecimal"
+msgstr ""
+
+msgid "Wildcard search"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+msgid "Function key 1"
+msgstr "Funktionstast 1"
+
+msgid "Function key 2"
+msgstr "Funktionstast 2"
+
+msgid "Function key 3"
+msgstr "Funktionstast 3"
+
+msgid "Function key 4"
+msgstr "Funktionstast 4"
+
+msgid "Function key 5"
+msgstr "Funktionstast 5"
+
+msgid "Function key 6"
+msgstr "Funktionstast 6"
+
+msgid "Function key 7"
+msgstr "Funktionstast 7"
+
+msgid "Function key 8"
+msgstr "Funktionstast 8"
+
+msgid "Function key 9"
+msgstr "Funktionstast 9"
+
+msgid "Function key 10"
+msgstr "Funktionstast 10"
+
+msgid "Function key 11"
+msgstr "Funktionstast 11"
+
+msgid "Function key 12"
+msgstr "Funktionstast 12"
+
+msgid "Function key 13"
+msgstr "Funktionstast 13"
+
+msgid "Function key 14"
+msgstr "Funktionstast 14"
+
+msgid "Function key 15"
+msgstr "Funktionstast 15"
+
+msgid "Function key 16"
+msgstr "Funktionstast 16"
+
+msgid "Function key 17"
+msgstr "Funktionstast 17"
+
+msgid "Function key 18"
+msgstr "Funktionstast 18"
+
+msgid "Function key 19"
+msgstr "Funktionstast 19"
+
+msgid "Function key 20"
+msgstr "Funktionstast 20"
+
+msgid "Backspace key"
+msgstr "Backspace-tast"
+
+msgid "End key"
+msgstr "End-tast"
+
+msgid "Up arrow key"
+msgstr "Pil op"
+
+msgid "Down arrow key"
+msgstr "Pil ned"
+
+msgid "Left arrow key"
+msgstr "Venstrepil"
+
+msgid "Right arrow key"
+msgstr "Højrepil"
+
+msgid "Home key"
+msgstr "Home-tast"
+
+msgid "Page Down key"
+msgstr "Page Down-tast"
+
+msgid "Page Up key"
+msgstr "Page up-tast"
+
+msgid "Insert key"
+msgstr "Insert-tast"
+
+msgid "Delete key"
+msgstr "Delete-tast"
+
+msgid "Completion/M-tab"
+msgstr "Fuldfør navn/M-tab"
+
+msgid "+ on keypad"
+msgstr "+ på numerisk tastatur"
+
+msgid "- on keypad"
+msgstr "- på numerisk tastatur"
+
+msgid "Slash on keypad"
+msgstr "Slash på numerisk tastatur"
+
+msgid "* on keypad"
+msgstr "* på numerisk tastatur"
+
+#, fuzzy
+msgid "Escape key"
+msgstr "Slash på numerisk tastatur"
+
+msgid "Left arrow keypad"
+msgstr "Venstrepil på numerisk tastatur"
+
+msgid "Right arrow keypad"
+msgstr "Højrepil på numerisk tastatur"
+
+msgid "Up arrow keypad"
+msgstr "Pil op på numerisk tastatur"
+
+msgid "Down arrow keypad"
+msgstr "Pil ned på numerisk tastatur"
+
+msgid "Home on keypad"
+msgstr "Hjem på numerisk tastatur"
+
+msgid "End on keypad"
+msgstr "Slut på numerisk tastatur"
+
+msgid "Page Down keypad"
+msgstr "Side ned på numerisk tastatur"
+
+msgid "Page Up keypad"
+msgstr "Side op på numerisk tastatur"
+
+msgid "Insert on keypad"
+msgstr "Indsæt på numerisk tastatur"
+
+msgid "Delete on keypad"
+msgstr "Slet på numerisk tastatur"
+
+msgid "Enter on keypad"
+msgstr "Enter på numerisk tastatur"
+
+#, fuzzy
+msgid "Function key 21"
+msgstr "Funktionstast 1"
+
+#, fuzzy
+msgid "Function key 22"
+msgstr "Funktionstast 2"
+
+#, fuzzy
+msgid "Function key 23"
+msgstr "Funktionstast 2"
+
+#, fuzzy
+msgid "Function key 24"
+msgstr "Funktionstast 2"
+
+msgid "Plus"
+msgstr ""
+
+#, fuzzy
+msgid "Minus"
+msgstr "Menu"
+
+msgid "Asterisk"
+msgstr ""
+
+msgid "Dot"
+msgstr ""
+
+msgid "Less than"
+msgstr ""
+
+msgid "Great than"
+msgstr ""
+
+msgid "Equal"
+msgstr ""
+
+#, fuzzy
+msgid "Comma"
+msgstr "Kommando"
+
+msgid "Apostrophe"
+msgstr ""
+
+#, fuzzy
+msgid "Colon"
+msgstr "Tæl"
+
+msgid "Exclamation mark"
+msgstr ""
+
+msgid "Question mark"
+msgstr ""
+
+#, fuzzy
+msgid "Ampersand"
+msgstr "Tilføj"
+
+msgid "Dollar sign"
+msgstr ""
+
+msgid "Quotation mark"
+msgstr ""
+
+#, fuzzy
+msgid "Caret"
+msgstr "Mål"
+
+msgid "Tilda"
+msgstr ""
+
+#, fuzzy
+msgid "Prime"
+msgstr "Forr."
+
+#, fuzzy
+msgid "Underline"
+msgstr " Indtast linje: "
+
+msgid "Understrike"
+msgstr ""
+
+msgid "Pipe"
+msgstr ""
+
+#, fuzzy
+msgid "Enter"
+msgstr "ejer"
+
+#, fuzzy
+msgid "Tab key"
+msgstr "+ på numerisk tastatur"
+
+#, fuzzy
+msgid "Space key"
+msgstr "Slash på numerisk tastatur"
+
+#, fuzzy
+msgid "Slash key"
+msgstr "Slash på numerisk tastatur"
+
+#, fuzzy
+msgid "Backslash key"
+msgstr "Backspace-tast"
+
+msgid "Number sign #"
+msgstr ""
+
+msgid "Ctrl"
+msgstr ""
+
+msgid "Alt"
+msgstr ""
+
+msgid "Shift"
+msgstr ""
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"Skærmstørrelse %dx%d er ikke understøttet.\n"
+"Tjek TERM-miljøvariabelen.\n"
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
+
+#, fuzzy, c-format
+msgid "%s is not a directory\n"
+msgstr "mappe"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr ""
+" Kan ikke oprette målmappen \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr ""
+" Kan ikke oprette målmappen \"%s\" \n"
+" %s "
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr ""
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr ""
+
+#, c-format
+msgid "Press any key to continue..."
+msgstr "Tryk på en tast for at fortsætte..."
 
 msgid "Warning"
 msgstr "Advarsel"
 
-msgid " File has hard-links. Detach before saving? "
+msgid " Pipe failed "
+msgstr " Pibe fejlede "
+
+msgid " Dup failed "
+msgstr " Dup fejlede "
+
+#, c-format
+msgid ""
+"Cannot open cpio archive\n"
+"%s"
 msgstr ""
+"Kunne ikke åbne cpio arkiv\n"
+"%s"
+
+#, c-format
+msgid ""
+"Premature end of cpio archive\n"
+"%s"
+msgstr ""
+"Præmatur slutning på cpio arkiv\n"
+"%s"
+
+#, c-format
+msgid ""
+"Inconsistent hardlinks of\n"
+"%s\n"
+"in cpio archive\n"
+"%s"
+msgstr ""
+"Inkonsistent tar-arkiv%s\n"
+"i cpio arkiv\n"
+"%s"
+
+#, c-format
+msgid "%s contains duplicate entries! Skipping!"
+msgstr "%s indeholder duplikerede indgange! Hopper over!"
+
+#, c-format
+msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"Korrupt cpio header fundet i\n"
+"%s"
+
+#, c-format
+msgid ""
+"Unexpected end of file\n"
+"%s"
+msgstr ""
+"Uventet EOF\n"
+"%s"
+
+#, c-format
+msgid "Directory cache expired for %s"
+msgstr "Katalog-cache udløbet for %s"
+
+msgid "Starting linear transfer..."
+msgstr "Begynder lineær overførsel..."
+
+#, c-format
+msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+msgstr "%s: %s: %s %3d%% (%lu byte overført)"
+
+#, c-format
+msgid "%s: %s: %s %lu bytes transferred"
+msgstr "%s: %s: %s %lu byte overført"
+
+msgid "Getting file"
+msgstr "Henter fil: "
+
+#, c-format
+msgid ""
+"Cannot open %s archive\n"
+"%s"
+msgstr ""
+"Kunne ikke åbne %s arkiv\n"
+"%s"
+
+msgid "Inconsistent extfs archive"
+msgstr "Inkonsistent extfs-arkiv"
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Advarsel: fil %s ikke fundet\n"
+
+#, c-format
+msgid "fish: Disconnecting from %s"
+msgstr "fisk: Afkobler fra %s"
+
+msgid "fish: Waiting for initial line..."
+msgstr "fisk: Venter på begyndelseslinie..."
+
+msgid "Sorry, we cannot do password authenticated connections for now."
+msgstr "Beklager, vi kan ikke lave adgangskodebekræftede forbindelser endnu."
+
+msgid " fish: Password required for "
+msgstr " fisk: Behøver adgangskode til"
+
+msgid "fish: Sending password..."
+msgstr "fisk: Sender adgangskode..."
+
+msgid "fish: Sending initial line..."
+msgstr "fisk: Sender begyndelseslinie..."
+
+msgid "fish: Handshaking version..."
+msgstr "fisk: Håndrystende version..."
+
+msgid "fish: Setting up current directory..."
+msgstr "fisk: Indstiller den aktive mappe..."
+
+#, c-format
+msgid "fish: Connected, home %s."
+msgstr "fisk: forbundet, hjem %s"
+
+#, c-format
+msgid "fish: Reading directory %s..."
+msgstr "fisk: Læser mappe %s..."
+
+#, c-format
+msgid "%s: done."
+msgstr "%s: færdig."
+
+#, c-format
+msgid "%s: failure"
+msgstr "%s: fejl "
+
+#, c-format
+msgid "fish: store %s: sending command..."
+msgstr "fisk: gem %s: sender kommando..."
+
+msgid "fish: Local read failed, sending zeros"
+msgstr "fisk: Lokal læsning fejlede, sender nuller"
+
+#, c-format
+msgid "fish: storing %s %d (%lu)"
+msgstr "fisk: gemmer fil %s %d (%lu)"
+
+msgid "zeros"
+msgstr "nuller"
+
+msgid "file"
+msgstr "fil"
+
+msgid "Aborting transfer..."
+msgstr "Afbryder overførsel..."
+
+msgid "Error reported after abort."
+msgstr "Fejl meldt tilbage efter afbrydelse."
+
+msgid "Aborted transfer would be successful."
+msgstr "Afbrudt overførsel ville være lykkedes."
+
+#, c-format
+msgid "ftpfs: Disconnecting from %s"
+msgstr "ftpfs: Afkobler fra %s"
+
+msgid " FTP: Password required for "
+msgstr " FTP: Behøver adgangskode til"
+
+msgid "ftpfs: sending login name"
+msgstr "ftpfs: sender loginnavn"
+
+msgid "ftpfs: sending user password"
+msgstr "ftpfs: sender brugeradgangskode"
+
+#, fuzzy, c-format
+msgid "FTP: Account required for user %s"
+msgstr " FTP: Behøver adgangskode til"
+
+#, fuzzy
+msgid "Account:"
+msgstr "Tæl"
+
+#, fuzzy
+msgid "ftpfs: sending user account"
+msgstr "ftpfs: sender brugeradgangskode"
+
+msgid "ftpfs: logged in"
+msgstr "ftpfs: logget ind"
+
+#, c-format
+msgid "ftpfs: Login incorrect for user %s "
+msgstr "ftpfs: Forkert login for bruger %s "
+
+msgid "ftpfs: Invalid host name."
+msgstr "ftpfs: Ugyldig værtsnavn."
+
+#, c-format
+msgid "ftpfs: %s"
+msgstr ""
+
+#, c-format
+msgid "ftpfs: making connection to %s"
+msgstr "ftpfs: laver forbindelse til %s"
+
+msgid "ftpfs: connection interrupted by user"
+msgstr "ftpfs: forbindelse afbrudt af bruger"
+
+#, c-format
+msgid "ftpfs: connection to server failed: %s"
+msgstr "ftpfs: forbindelse til server mislykkedes: %s"
+
+#, c-format
+msgid "Waiting to retry... %d (Control-C to cancel)"
+msgstr "Venter på at forsøge igen... %d (Ctrl-C annullerer)"
+
+#, fuzzy
+msgid "ftpfs: invalid address family"
+msgstr "ftpfs: Ugyldig værtsadresse."
+
+#, fuzzy, c-format
+msgid "ftpfs: could not setup passive mode: %s"
+msgstr "ftpfs: kunne ikke indstille passiv måde"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not create socket: %s"
+msgstr " Kan ikke oprette sokkel %s "
+
+msgid "ftpfs: could not setup passive mode"
+msgstr "ftpfs: kunne ikke indstille passiv måde"
+
+msgid "ftpfs: aborting transfer."
+msgstr "ftpfs: afbryder overførsel."
+
+#, c-format
+msgid "ftpfs: abort error: %s"
+msgstr "ftpfs: afbrydelsesfejl: %s"
+
+msgid "ftpfs: abort failed"
+msgstr "ftpfs: afbryd mislykkedes"
+
+msgid "ftpfs: CWD failed."
+msgstr "ftpfs: CWD mislykkedes"
+
+msgid "ftpfs: couldn't resolve symlink"
+msgstr "ftpfs: kunne ikke læse symlænke"
+
+msgid "Resolving symlink..."
+msgstr "Læser symlænke..."
+
+#, c-format
+msgid "ftpfs: Reading FTP directory %s... %s%s"
+msgstr "ftpfs: Læser FTP-mappe %s... %s%s"
+
+msgid "(strict rfc959)"
+msgstr "(følg rfc959)"
+
+msgid "(chdir first)"
+msgstr "(chdir først)"
+
+msgid "ftpfs: failed; nowhere to fallback to"
+msgstr "ftpfs: fejlede; ingen steder at falde tilbage på"
+
+#, fuzzy, c-format
+msgid "ftpfs: storing file %lu (%lu)"
+msgstr "ftpfs: gemmer fil %d (%lu)"
+
+msgid ""
+"~/.netrc file has incorrect mode.\n"
+"Remove password or correct mode."
+msgstr ""
+"~/.netrc-filen har ikke korrekt modus.\n"
+"Fjern adgangskode eller korriger modus."
+
+msgid " MCFS "
+msgstr " MCFS "
+
+msgid " The server does not support this version "
+msgstr " Serveren understøtter ikke denne version "
+
+msgid ""
+" The remote server is not running on a system port \n"
+" you need a password to log in, but the information may \n"
+" not be safe on the remote side.  Continue? \n"
+msgstr ""
+" Den fremmede server kører ikke på en systemport, \n"
+" du skal bruge en adgangskode for at logge ind, men informationen \n"
+" er ikke nødvendigvis sikker på den anden side.  Fortsæt? \n"
 
 msgid "&Yes"
 msgstr "&Ja"
@@ -103,665 +657,185 @@ msgstr "&Ja"
 msgid "&No"
 msgstr "&Nej"
 
+msgid " MCFS Password required "
+msgstr " MCFS-adgangskode påkrævet"
+
+msgid " Invalid password "
+msgstr " Ugyldig adgangskode "
+
+#, c-format
+msgid " Cannot locate hostname: %s "
+msgstr " Kan ikke finde værtsnavn: %s "
+
+#, c-format
+msgid " Cannot create socket: %s "
+msgstr " Kan ikke oprette sokkel %s "
+
+#, c-format
+msgid " Cannot connect to server: %s "
+msgstr "Kan ikke forbinde til server %s"
+
+msgid " Too many open connections "
+msgstr " For mange åbne forbindelser "
+
+#, c-format
+msgid ""
+"Warning: Invalid line in %s:\n"
+"%s\n"
+msgstr ""
+"Advarsel: Ugyldig linje i %s.\n"
+"%s\n"
+
+#, c-format
+msgid ""
+"Warning: Invalid flag %c in %s:\n"
+"%s\n"
+msgstr ""
+"Advarsel: Ugyldig flag %c i %s:\n"
+"%s\n"
+
+#, c-format
+msgid ""
+" reconnect to %s failed\n"
+" "
+msgstr ""
+" genopkobling til %s mislykkedes\n"
+" "
+
+msgid " Authentication failed "
+msgstr " Autentisering fejlet "
+
+#, c-format
+msgid " Error %s creating directory %s "
+msgstr " %s mkdir'er %s "
+
+#, c-format
+msgid " Error %s removing directory %s "
+msgstr " %s rmdir'er %s "
+
+#, c-format
+msgid " %s opening remote file %s "
+msgstr " %s åbner fremmed fil %s "
+
+#, c-format
+msgid " %s removing remote file %s "
+msgstr " %s fjerner ekstern fil %s "
+
+#, c-format
+msgid " %s renaming files\n"
+msgstr "  %s omdøber filer\n"
+
+#, c-format
+msgid ""
+"Cannot open tar archive\n"
+"%s"
+msgstr ""
+"Kunne ikke åbne tar-arkiv\n"
+"%s"
+
+msgid "Inconsistent tar archive"
+msgstr "Inkonsistent tar-arkiv"
+
+msgid "Unexpected EOF on archive file"
+msgstr "Uventet EOF i arkivfilen"
+
+#, c-format
+msgid ""
+"Hmm,...\n"
+"%s\n"
+"doesn't look like a tar archive."
+msgstr ""
+"Hmm,...\n"
+"%s\n"
+"ser ikke ud til at være et tar-arkiv."
+
+msgid " undelfs: error "
+msgstr " undelfs: fejl "
+
+msgid " not enough memory "
+msgstr " ikke nok lager "
+
+msgid " while allocating block buffer "
+msgstr " under allokering af blokbuffer "
+
+#, c-format
+msgid " open_inode_scan: %d "
+msgstr " open_inode_scan: %d "
+
+#, c-format
+msgid " while starting inode scan %d "
+msgstr " under start af inodeskan %d "
+
+#, c-format
+msgid "undelfs: loading deleted files information %d inodes"
+msgstr "undelfs: henter information om slettede filer %d inoder"
+
+#, c-format
+msgid " while calling ext2_block_iterate %d "
+msgstr " ved kald til ext2_block_iterate %d "
+
+msgid " no more memory while reallocating array "
+msgstr " ikke mere lager ved reallokering af matrice "
+
+#, c-format
+msgid " while doing inode scan %d "
+msgstr " under skanning af inode %d "
+
+msgid " Ext2lib error "
+msgstr " Ext2lib fejl "
+
+#, c-format
+msgid " Cannot open file %s "
+msgstr " Kunne ikke åbne filen %s "
+
+msgid "undelfs: reading inode bitmap..."
+msgstr "undelfs: læser inode bitmap..."
+
+#, c-format
+msgid ""
+" Cannot load inode bitmap from: \n"
+" %s \n"
+msgstr ""
+" Kunne ikke hente bitmap fra: \n"
+" %s \n"
+
+msgid "undelfs: reading block bitmap..."
+msgstr "undelfs: læser blok bitmap..."
+
+#, c-format
+msgid ""
+" Cannot load block bitmap from: \n"
+" %s \n"
+msgstr ""
+" Kunne ikke hente blok bitmap fra: \n"
+" %s \n"
+
+msgid " vfs_info is not fs! "
+msgstr "vfs_info er ikke fs! "
+
+msgid " You have to chdir to extract files first "
+msgstr "Du må ændre katalog før du henter filerne "
+
+msgid " while iterating over blocks "
+msgstr " ved iteration over blokke "
+
+msgid "Cannot parse:"
+msgstr "Kunne ikke fortolke:"
+
+msgid "More parsing errors will be ignored."
+msgstr "Flere fortolkningsfejl vil blive ignoreret."
+
+msgid "Internal error:"
+msgstr " Intern fejl:"
+
+msgid "Password:"
+msgstr "Adgangskode:"
+
+msgid "Changes to file lost"
+msgstr "Ændringer til fil tabt"
+
 msgid "&Cancel"
 msgstr "&Annullér"
-
-msgid "The file has been modified in the meantime. Save anyway?"
-msgstr ""
-
-msgid " Error writing to pipe: "
-msgstr " Fejl ved skrivning af fil "
-
-msgid " Cannot open pipe for writing: "
-msgstr " Fejl ved forsøg på åbning af rør for skrivning: "
-
-#, fuzzy, c-format
-msgid " Cannot open file for writing: %s "
-msgstr " Fejl ved forsøg på åbning af rør for skrivning: "
-
-#, fuzzy
-msgid "&Quick save"
-msgstr "Gem hurtigt "
-
-#, fuzzy
-msgid "&Safe save"
-msgstr "Gem sikkert "
-
-msgid "&Do backups with following extension:"
-msgstr ""
-
-msgid "Check &POSIX new line"
-msgstr ""
-
-msgid " Edit Save Mode "
-msgstr " Redigér gemmemåde "
-
-msgid "The file you are saving is not finished with a newline"
-msgstr ""
-
-#, fuzzy
-msgid "C&ontinue"
-msgstr "Forsæt"
-
-msgid "&Do not change"
-msgstr ""
-
-msgid "&Unix format (LF)"
-msgstr ""
-
-msgid "&Windows/DOS format (CR LF)"
-msgstr ""
-
-msgid "&Macintosh format (CR)"
-msgstr ""
-
-msgid "Change line breaks to:"
-msgstr ""
-
-#, fuzzy
-msgid " Enter file name: "
-msgstr " Indtast linje: "
-
-msgid " Save As "
-msgstr " Gem som "
-
-msgid " A file already exists with this name. "
-msgstr " En fil med dette navn eksisterer allerede. "
-
-#, fuzzy
-msgid "&Overwrite"
-msgstr "Overskriv"
-
-msgid " Cannot save file. "
-msgstr " Fejl under gemning af fil. "
-
-msgid " Delete macro "
-msgstr " Slet makro "
-
-msgid " Cannot open temp file "
-msgstr " Fejl under åbning af midlertidig fil "
-
-msgid " Cannot open macro file "
-msgstr " Fejl under åbning af makrofil "
-
-msgid " Cannot overwrite macro file "
-msgstr " Fejl under overskriving af makrofil "
-
-msgid " Save macro "
-msgstr " Gem makro "
-
-msgid " Press the macro's new hotkey: "
-msgstr " Tryk makroens nye hurtigtast: "
-
-msgid " Press macro hotkey: "
-msgstr " Tryk makro genvejstast: "
-
-msgid " Load macro "
-msgstr " Hent makro "
-
-msgid " Confirm save file? : "
-msgstr " Bekræft gem fil? : "
-
-msgid " Save file "
-msgstr " Gem fil "
-
-msgid "&Save"
-msgstr "&Gem"
-
-msgid ""
-" Current text was modified without a file save. \n"
-" Continue discards these changes. "
-msgstr ""
-" Teksten er ændret uden at have været gemt. \n"
-" Fortsæt vil forkaste disse ændringer. "
-
-#, fuzzy
-msgid "Syntax file edit"
-msgstr "&Menufilsredigering"
-
-#, fuzzy
-msgid " Which syntax file you want to edit? "
-msgstr " Hvilken udvidelsesfil vil du redigere? "
-
-msgid "&User"
-msgstr "&Bruger"
-
-msgid "&System Wide"
-msgstr "Hele &Systemet"
-
-msgid " Menu edit "
-msgstr " Redigér menu"
-
-msgid " Which menu file do you want to edit? "
-msgstr " Hvilken menufil vil du redigere? "
-
-msgid "&Local"
-msgstr "&Lokal"
-
-msgid " Load "
-msgstr " Hent "
-
-msgid " Block is large, you may not be able to undo this action. "
-msgstr " Blokken er stor, du kan muligvis ikke fortryde denne handling. "
-
-#, fuzzy
-msgid "Replace"
-msgstr "&Erstat"
-
-msgid " Replace "
-msgstr " Erstat "
-
-#, c-format
-msgid " %ld replacements made. "
-msgstr " %ld erstatninger udført. "
-
-msgid "Quit"
-msgstr "Slut"
-
-msgid " File was modified, Save with exit? "
-msgstr " Filen blev ændret, Gem ved afslutning? "
-
-#, fuzzy
-msgid "&Cancel quit"
-msgstr "Annullér afslut"
-
-#, fuzzy
-msgid " Error "
-msgstr "Fejl"
-
-msgid " This function is not implemented. "
-msgstr ""
-
-msgid " Copy to clipboard "
-msgstr " Kopiér til klipbord "
-
-msgid " Unable to save to file. "
-msgstr " Kunne ikke gemme filen. "
-
-msgid " Cut to clipboard "
-msgstr " Klip til klipbord "
-
-msgid " Goto line "
-msgstr " Gå til linje "
-
-msgid " Enter line: "
-msgstr " Indtast linje: "
-
-msgid " Save Block "
-msgstr " Gem blok "
-
-msgid " Insert File "
-msgstr " Indsæt fil "
-
-msgid " Cannot insert file. "
-msgstr " Fejl under indsætning af fil. "
-
-msgid " Sort block "
-msgstr " Sortér blok "
-
-msgid " You must first highlight a block of text. "
-msgstr " Du skal først markere en tekstblok. "
-
-msgid " Run Sort "
-msgstr " Kør sortering "
-
-msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr " Indtast sorteringsmuligheder (se manside) adskilt af mellemrum: "
-
-msgid " Sort "
-msgstr " Sortér "
-
-msgid " Cannot execute sort command "
-msgstr " Fejl under kørsel af sorteringskommando "
-
-msgid " Sort returned non-zero: "
-msgstr " Sortering returnede ikke-nul: "
-
-msgid "Paste output of external command"
-msgstr ""
-
-#, fuzzy
-msgid "Enter shell command(s):"
-msgstr " Indtast kommandoetiket: "
-
-#, fuzzy
-msgid "External command"
-msgstr "Andre kommandoer"
-
-#, fuzzy
-msgid "Cannot execute command"
-msgstr " Fejl under kørsel af sorteringskommando "
-
-msgid "Error creating script:"
-msgstr "Fejl ved oprettelse af skript:"
-
-msgid "Error reading script:"
-msgstr "Fejl ved læsning af skript:"
-
-msgid "Error closing script:"
-msgstr "Fejl ved lukning af skript"
-
-msgid "Script created:"
-msgstr "Skript oprettet:"
-
-msgid "Process block"
-msgstr "Procesblok"
-
-msgid " Copies to"
-msgstr " Kopiér til"
-
-msgid " Subject"
-msgstr " Emne"
-
-msgid " To"
-msgstr " Til"
-
-msgid " mail -s <subject> -c <cc> <to>"
-msgstr " mail -s <emne> -c <cc> <til>"
-
-msgid " Mail "
-msgstr " Send "
-
-msgid " Insert Literal "
-msgstr " Indsæt bogstaveligt "
-
-msgid " Press any key: "
-msgstr " Tryk på en tast: "
-
-msgid " Execute Macro "
-msgstr " Kør makro "
-
-msgid "All charsets"
-msgstr ""
-
-#, fuzzy
-msgid "&Whole words"
-msgstr "&Kun hele ord"
-
-#, fuzzy
-msgid "In se&lection"
-msgstr "Omvendt valg      M-*"
-
-msgid "&Backwards"
-msgstr "&Baglæns"
-
-msgid "case &Sensitive"
-msgstr "forskel på &Store og små bogstaver"
-
-msgid " Enter replacement string:"
-msgstr " Indtast erstatningstekst:"
-
-msgid " Enter search string:"
-msgstr " Indtast søgetekst:"
-
-#, fuzzy
-msgid "&Find all"
-msgstr "Find fil"
-
-msgid "Cancel"
-msgstr "Annullér"
-
-msgid "&Skip"
-msgstr "&Spring over"
-
-msgid "A&ll"
-msgstr "A&lle"
-
-msgid "&Replace"
-msgstr "&Erstat"
-
-msgid " Replace with: "
-msgstr " Erstat med: "
-
-msgid " Confirm replace "
-msgstr " Bekræft erstat "
-
-msgid "&Dismiss"
-msgstr "&Forkast"
-
-#, c-format
-msgid ""
-"File \"%s\" is already being edited\n"
-"User: %s\n"
-"Process ID: %d"
-msgstr ""
-
-msgid "File locked"
-msgstr ""
-
-msgid "&Grab lock"
-msgstr ""
-
-msgid "&Ignore lock"
-msgstr ""
-
-msgid "&Open file..."
-msgstr "&Åbn fil..."
-
-#, fuzzy
-msgid "&New"
-msgstr "&Navn"
-
-#, fuzzy
-msgid "Save &as..."
-msgstr "&Gem opsætning"
-
-#, fuzzy
-msgid "&Insert file..."
-msgstr "&Indsæt fil...    F15"
-
-#, fuzzy
-msgid "Cop&y to file..."
-msgstr "kopiér til &Fil...C-f"
-
-#, fuzzy
-msgid "&User menu..."
-msgstr "&Brugermenu...    F11"
-
-#, fuzzy
-msgid "A&bout..."
-msgstr "&Udseende..."
-
-msgid "&Quit"
-msgstr "A&fslut"
-
-#, fuzzy
-msgid "&Toggle mark"
-msgstr "F&jern markerede"
-
-msgid "&Mark columns"
-msgstr ""
-
-#, fuzzy
-msgid "Toggle &ins/overw"
-msgstr "&Indsæt/overskriv Ins"
-
-#, fuzzy
-msgid "&Copy"
-msgstr "Kopiér"
-
-msgid "&Move"
-msgstr "&Flyt"
-
-msgid "&Delete"
-msgstr "&Slet"
-
-#, fuzzy
-msgid "C&opy to clipfile"
-msgstr "kopiér til &Fil...   "
-
-#, fuzzy
-msgid "C&ut to clipfile"
-msgstr "&Gå til linie...         M-l"
-
-msgid "&Paste from clipfile"
-msgstr ""
-
-#, fuzzy
-msgid "Toggle bookmar&k"
-msgstr "Slå &Mærke til/fra F3"
-
-#, fuzzy
-msgid "&Next bookmark"
-msgstr "Sæ&t markerede"
-
-#, fuzzy
-msgid "Pre&v bookmark"
-msgstr "Sor&tér...               M-t"
-
-#, fuzzy
-msgid "&Flush bookmark"
-msgstr "&Send...                    "
-
-msgid "&Undo"
-msgstr ""
-
-msgid "&Beginning"
-msgstr ""
-
-#, fuzzy
-msgid "&End"
-msgstr "&Inode"
-
-#, fuzzy
-msgid "&Search..."
-msgstr "Søg"
-
-#, fuzzy
-msgid "Search &again"
-msgstr "&Gentag søgning   F17"
-
-#, fuzzy
-msgid "&Replace..."
-msgstr "&Erstat"
-
-#, fuzzy
-msgid "&Go to line..."
-msgstr " Gå til linje "
-
-#, fuzzy
-msgid "Toggle li&ne state"
-msgstr "Slå &Mærke til/fra F3"
-
-#, fuzzy
-msgid "Go to matching &bracket"
-msgstr "gå til passende &Klamme  M-b"
-
-#, fuzzy
-msgid "Find declaration"
-msgstr "Find rester efter lapning"
-
-msgid "Back from declaration"
-msgstr ""
-
-msgid "Forward to declaration"
-msgstr ""
-
-#, fuzzy
-msgid "Encod&ing..."
-msgstr "Sor&tér...               M-t"
-
-#, fuzzy
-msgid "&Refresh screen"
-msgstr "&Opdatér skærmen         C-l"
-
-#, fuzzy
-msgid "&Start record macro"
-msgstr "&Start makroindspilning  C-r"
-
-#, fuzzy
-msgid "&Finish record macro..."
-msgstr "S&top makroindspilning   C-r"
-
-#, fuzzy
-msgid "&Execute macro..."
-msgstr "&Kør makro...       C-a, TAST"
-
-#, fuzzy
-msgid "Delete macr&o..."
-msgstr " Slet makro "
-
-#, fuzzy
-msgid "'ispell' s&pell check"
-msgstr "'&Ispell' stavekontrol   C-p"
-
-#, fuzzy
-msgid "&Mail..."
-msgstr "&Filter..."
-
-#, fuzzy
-msgid "Insert &literal..."
-msgstr "indsæt &Bogstavelig...   C-q"
-
-#, fuzzy
-msgid "Insert &date/time"
-msgstr "indsæt &Dato/tid            "
-
-#, fuzzy
-msgid "Format p&aragraph"
-msgstr "formatér &Afsnit         M-p"
-
-#, fuzzy
-msgid "Sor&t..."
-msgstr "&Sorteringsrækkefølge..."
-
-msgid "Paste o&utput of..."
-msgstr ""
-
-#, fuzzy
-msgid "E&xternal formatter"
-msgstr "E&kstern formatering     F19"
-
-msgid "&General...  "
-msgstr "&Generelt... "
-
-#, fuzzy
-msgid "Save &mode..."
-msgstr "Gemme&måde..."
-
-#, fuzzy
-msgid "Learn &keys..."
-msgstr "lær &Taster..."
-
-#, fuzzy
-msgid "Syntax &highlighting..."
-msgstr "synta&X farvning"
-
-#, fuzzy
-msgid "S&yntax file"
-msgstr "&Menufilsredigering"
-
-#, fuzzy
-msgid "&Menu file"
-msgstr "&Menufilsredigering"
-
-msgid "&Save setup"
-msgstr "&Gem opsætning"
-
-#, fuzzy
-msgid "&File"
-msgstr "Fil"
-
-#, fuzzy
-msgid "&Edit"
-msgstr "Redigér"
-
-#, fuzzy
-msgid "&Search"
-msgstr "Søg"
-
-#, fuzzy
-msgid "&Command"
-msgstr "Kommando"
-
-#, fuzzy
-msgid "For&mat"
-msgstr "Format"
-
-#, fuzzy
-msgid "&Options"
-msgstr " &Indstillinger "
-
-msgid "None"
-msgstr "Ingen"
-
-msgid "Dynamic paragraphing"
-msgstr "Dynamiske paragraffer"
-
-msgid "Type writer wrap"
-msgstr "Skrivemaskineombrydning"
-
-msgid "Word wrap line length: "
-msgstr "Indtast linielængde: "
-
-msgid "Cursor beyond end of line"
-msgstr ""
-
-#, fuzzy
-msgid "Pers&istent selection"
-msgstr "Omvendt valg      M-*"
-
-msgid "Synta&x highlighting"
-msgstr "synta&X farvning"
-
-msgid "Visible tabs"
-msgstr ""
-
-msgid "Visible trailing spaces"
-msgstr ""
-
-#, fuzzy
-msgid "Save file &position"
-msgstr " Gem fil "
-
-msgid "Confir&m before saving"
-msgstr "&Bekræft før gemning"
-
-msgid "&Return does autoindent"
-msgstr "&Return laver autoindryk"
-
-msgid "Tab spacing: "
-msgstr "Tabulatorafstand : "
-
-msgid "Fill tabs with &spaces"
-msgstr "fyld tabs med &Mellemrum"
-
-msgid "&Backspace through tabs"
-msgstr "&Baglæns slet gennem tabs"
-
-msgid "&Fake half tabs"
-msgstr "&Falske halve tabs"
-
-msgid "Wrap mode"
-msgstr "Ombrydningsmåde"
-
-msgid " Editor options "
-msgstr " Editorindstillinger "
-
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
-msgid "ButtonBar|Mark"
-msgstr ""
-
-msgid "ButtonBar|Replac"
-msgstr ""
-
-msgid "ButtonBar|Copy"
-msgstr ""
-
-msgid "ButtonBar|Move"
-msgstr ""
-
-msgid "ButtonBar|Search"
-msgstr ""
-
-msgid "ButtonBar|Delete"
-msgstr ""
-
-msgid "ButtonBar|PullDn"
-msgstr ""
-
-msgid "ButtonBar|Quit"
-msgstr ""
-
-msgid " Load syntax file "
-msgstr " Hent syntaksfil "
-
-#, c-format
-msgid ""
-" Cannot open file %s \n"
-" %s "
-msgstr ""
-" Kan ikke åbne filen %s \n"
-" %s "
-
-#, c-format
-msgid " Error in file %s on line %d "
-msgstr " Syntaksfejl i filen %s ved linie %d "
 
 msgid "&Set"
 msgstr "&Sæt"
@@ -994,6 +1068,9 @@ msgstr "Listemåde"
 msgid "user &Mini status"
 msgstr "brugers &Ministatus"
 
+msgid "&OK"
+msgstr "&OK"
+
 msgid "&Reverse"
 msgstr "&Omvendt"
 
@@ -1122,16 +1199,9 @@ msgstr "Domæne:"
 msgid "Username:"
 msgstr "Brugernavn:"
 
-msgid "Password:"
-msgstr "Adgangskode:"
-
 #, c-format
 msgid "Password for \\\\%s\\%s"
 msgstr "Adgangskode for \\\\%s\\%s"
-
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Advarsel: fil %s ikke fundet\n"
 
 msgid "7-bit ASCII"
 msgstr ""
@@ -1301,6 +1371,21 @@ msgstr "Redigér udvidelsesfil"
 msgid " Which extension file you want to edit? "
 msgstr " Hvilken udvidelsesfil vil du redigere? "
 
+msgid "&User"
+msgstr "&Bruger"
+
+msgid "&System Wide"
+msgstr "Hele &Systemet"
+
+msgid " Menu edit "
+msgstr " Redigér menu"
+
+msgid " Which menu file do you want to edit? "
+msgstr " Hvilken menufil vil du redigere? "
+
+msgid "&Local"
+msgstr "&Lokal"
+
 msgid "Highlighting groups file edit"
 msgstr ""
 
@@ -1423,6 +1508,726 @@ msgstr " Skallen kører allerede en kommando "
 msgid "Cannot read directory contents"
 msgstr " Kunne ikke skifte mappe"
 
+#, fuzzy
+msgid " Choose syntax highlighting "
+msgstr "synta&X farvning"
+
+#, fuzzy
+msgid "< Auto >"
+msgstr " Om... "
+
+msgid "< Reload Current Syntax >"
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Cannot open %s for reading "
+msgstr " Fejl ved forsøg på åbning af rør for læsning: "
+
+msgid "Error"
+msgstr "Fejl"
+
+#, fuzzy, c-format
+msgid " Error reading from pipe: %s "
+msgstr " Problem under læsning fra rør: "
+
+#, fuzzy, c-format
+msgid " Cannot open pipe for reading: %s "
+msgstr " Fejl ved forsøg på åbning af rør for læsning: "
+
+#, fuzzy, c-format
+msgid " Cannot get size/permissions for %s "
+msgstr " Kan ikke finde størrelse-/rettighedsinformation for filen: "
+
+#, fuzzy, c-format
+msgid " %s is not a regular file "
+msgstr " Kan ikke vise: ikke en normal fil "
+
+#, fuzzy, c-format
+msgid " File %s is too large "
+msgstr " Filen er for stor: "
+
+msgid " About "
+msgstr " Om... "
+
+msgid ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       A user friendly text editor written\n"
+"           for the Midnight Commander.\n"
+msgstr ""
+"\n"
+"                 Cooledit  v3.11.5\n"
+"\n"
+" Ophavsret (C) 1996 the Free Software Foundation\n"
+"\n"
+"       En brugervenlig teksteditor skrevet\n"
+"             til Midnight Commander.\n"
+
+msgid "Macro recursion is too deep"
+msgstr ""
+
+msgid "Search"
+msgstr "Søg"
+
+msgid " File has hard-links. Detach before saving? "
+msgstr ""
+
+msgid "The file has been modified in the meantime. Save anyway?"
+msgstr ""
+
+msgid " Error writing to pipe: "
+msgstr " Fejl ved skrivning af fil "
+
+msgid " Cannot open pipe for writing: "
+msgstr " Fejl ved forsøg på åbning af rør for skrivning: "
+
+#, fuzzy, c-format
+msgid " Cannot open file for writing: %s "
+msgstr " Fejl ved forsøg på åbning af rør for skrivning: "
+
+#, fuzzy
+msgid "&Quick save"
+msgstr "Gem hurtigt "
+
+#, fuzzy
+msgid "&Safe save"
+msgstr "Gem sikkert "
+
+msgid "&Do backups with following extension:"
+msgstr ""
+
+msgid "Check &POSIX new line"
+msgstr ""
+
+msgid " Edit Save Mode "
+msgstr " Redigér gemmemåde "
+
+msgid "The file you are saving is not finished with a newline"
+msgstr ""
+
+#, fuzzy
+msgid "C&ontinue"
+msgstr "Forsæt"
+
+msgid "&Do not change"
+msgstr ""
+
+msgid "&Unix format (LF)"
+msgstr ""
+
+msgid "&Windows/DOS format (CR LF)"
+msgstr ""
+
+msgid "&Macintosh format (CR)"
+msgstr ""
+
+msgid "Change line breaks to:"
+msgstr ""
+
+#, fuzzy
+msgid " Enter file name: "
+msgstr " Indtast linje: "
+
+msgid " Save As "
+msgstr " Gem som "
+
+msgid " A file already exists with this name. "
+msgstr " En fil med dette navn eksisterer allerede. "
+
+#, fuzzy
+msgid "&Overwrite"
+msgstr "Overskriv"
+
+msgid " Cannot save file. "
+msgstr " Fejl under gemning af fil. "
+
+msgid " Delete macro "
+msgstr " Slet makro "
+
+msgid " Cannot open temp file "
+msgstr " Fejl under åbning af midlertidig fil "
+
+msgid " Cannot open macro file "
+msgstr " Fejl under åbning af makrofil "
+
+msgid " Cannot overwrite macro file "
+msgstr " Fejl under overskriving af makrofil "
+
+msgid " Save macro "
+msgstr " Gem makro "
+
+msgid " Press the macro's new hotkey: "
+msgstr " Tryk makroens nye hurtigtast: "
+
+msgid " Press macro hotkey: "
+msgstr " Tryk makro genvejstast: "
+
+msgid " Load macro "
+msgstr " Hent makro "
+
+msgid " Confirm save file? : "
+msgstr " Bekræft gem fil? : "
+
+msgid " Save file "
+msgstr " Gem fil "
+
+msgid "&Save"
+msgstr "&Gem"
+
+msgid ""
+" Current text was modified without a file save. \n"
+" Continue discards these changes. "
+msgstr ""
+" Teksten er ændret uden at have været gemt. \n"
+" Fortsæt vil forkaste disse ændringer. "
+
+#, fuzzy
+msgid "Syntax file edit"
+msgstr "&Menufilsredigering"
+
+#, fuzzy
+msgid " Which syntax file you want to edit? "
+msgstr " Hvilken udvidelsesfil vil du redigere? "
+
+msgid " Load "
+msgstr " Hent "
+
+msgid " Block is large, you may not be able to undo this action. "
+msgstr " Blokken er stor, du kan muligvis ikke fortryde denne handling. "
+
+#, fuzzy
+msgid "Replace"
+msgstr "&Erstat"
+
+msgid " Replace "
+msgstr " Erstat "
+
+#, c-format
+msgid " %ld replacements made. "
+msgstr " %ld erstatninger udført. "
+
+msgid "Quit"
+msgstr "Slut"
+
+msgid " File was modified, Save with exit? "
+msgstr " Filen blev ændret, Gem ved afslutning? "
+
+#, fuzzy
+msgid "&Cancel quit"
+msgstr "Annullér afslut"
+
+#, fuzzy
+msgid " Error "
+msgstr "Fejl"
+
+msgid " This function is not implemented. "
+msgstr ""
+
+msgid " Copy to clipboard "
+msgstr " Kopiér til klipbord "
+
+msgid " Unable to save to file. "
+msgstr " Kunne ikke gemme filen. "
+
+msgid " Cut to clipboard "
+msgstr " Klip til klipbord "
+
+msgid " Goto line "
+msgstr " Gå til linje "
+
+msgid " Enter line: "
+msgstr " Indtast linje: "
+
+msgid " Save Block "
+msgstr " Gem blok "
+
+msgid " Insert File "
+msgstr " Indsæt fil "
+
+msgid " Cannot insert file. "
+msgstr " Fejl under indsætning af fil. "
+
+msgid " Sort block "
+msgstr " Sortér blok "
+
+msgid " You must first highlight a block of text. "
+msgstr " Du skal først markere en tekstblok. "
+
+msgid " Run Sort "
+msgstr " Kør sortering "
+
+msgid " Enter sort options (see manpage) separated by whitespace: "
+msgstr " Indtast sorteringsmuligheder (se manside) adskilt af mellemrum: "
+
+msgid " Sort "
+msgstr " Sortér "
+
+msgid " Cannot execute sort command "
+msgstr " Fejl under kørsel af sorteringskommando "
+
+msgid " Sort returned non-zero: "
+msgstr " Sortering returnede ikke-nul: "
+
+msgid "Paste output of external command"
+msgstr ""
+
+#, fuzzy
+msgid "Enter shell command(s):"
+msgstr " Indtast kommandoetiket: "
+
+#, fuzzy
+msgid "External command"
+msgstr "Andre kommandoer"
+
+#, fuzzy
+msgid "Cannot execute command"
+msgstr " Fejl under kørsel af sorteringskommando "
+
+msgid "Error creating script:"
+msgstr "Fejl ved oprettelse af skript:"
+
+msgid "Error reading script:"
+msgstr "Fejl ved læsning af skript:"
+
+msgid "Error closing script:"
+msgstr "Fejl ved lukning af skript"
+
+msgid "Script created:"
+msgstr "Skript oprettet:"
+
+msgid "Process block"
+msgstr "Procesblok"
+
+msgid " Copies to"
+msgstr " Kopiér til"
+
+msgid " Subject"
+msgstr " Emne"
+
+msgid " To"
+msgstr " Til"
+
+msgid " mail -s <subject> -c <cc> <to>"
+msgstr " mail -s <emne> -c <cc> <til>"
+
+msgid " Mail "
+msgstr " Send "
+
+msgid " Insert Literal "
+msgstr " Indsæt bogstaveligt "
+
+msgid " Press any key: "
+msgstr " Tryk på en tast: "
+
+msgid " Execute Macro "
+msgstr " Kør makro "
+
+msgid "All charsets"
+msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "&Kun hele ord"
+
+#, fuzzy
+msgid "In se&lection"
+msgstr "Omvendt valg      M-*"
+
+msgid "&Backwards"
+msgstr "&Baglæns"
+
+msgid "case &Sensitive"
+msgstr "forskel på &Store og små bogstaver"
+
+msgid " Enter replacement string:"
+msgstr " Indtast erstatningstekst:"
+
+msgid " Enter search string:"
+msgstr " Indtast søgetekst:"
+
+#, fuzzy
+msgid "&Find all"
+msgstr "Find fil"
+
+msgid "Cancel"
+msgstr "Annullér"
+
+msgid "&Skip"
+msgstr "&Spring over"
+
+msgid "A&ll"
+msgstr "A&lle"
+
+msgid "&Replace"
+msgstr "&Erstat"
+
+msgid " Replace with: "
+msgstr " Erstat med: "
+
+msgid " Confirm replace "
+msgstr " Bekræft erstat "
+
+msgid "&Dismiss"
+msgstr "&Forkast"
+
+#, c-format
+msgid ""
+"File \"%s\" is already being edited\n"
+"User: %s\n"
+"Process ID: %d"
+msgstr ""
+
+msgid "File locked"
+msgstr ""
+
+msgid "&Grab lock"
+msgstr ""
+
+msgid "&Ignore lock"
+msgstr ""
+
+msgid "&Open file..."
+msgstr "&Åbn fil..."
+
+#, fuzzy
+msgid "&New"
+msgstr "&Navn"
+
+#, fuzzy
+msgid "Save &as..."
+msgstr "&Gem opsætning"
+
+#, fuzzy
+msgid "&Insert file..."
+msgstr "&Indsæt fil...    F15"
+
+#, fuzzy
+msgid "Cop&y to file..."
+msgstr "kopiér til &Fil...C-f"
+
+#, fuzzy
+msgid "&User menu..."
+msgstr "&Brugermenu...    F11"
+
+#, fuzzy
+msgid "A&bout..."
+msgstr "&Udseende..."
+
+msgid "&Quit"
+msgstr "A&fslut"
+
+msgid "&Undo"
+msgstr ""
+
+#, fuzzy
+msgid "&Toggle ins/overw"
+msgstr "&Indsæt/overskriv Ins"
+
+#, fuzzy
+msgid "To&ggle mark"
+msgstr "F&jern markerede"
+
+msgid "&Mark columns"
+msgstr ""
+
+#, fuzzy
+msgid "Mark &all"
+msgstr "&Markér alle"
+
+msgid "Unmar&k"
+msgstr ""
+
+#, fuzzy
+msgid "Cop&y"
+msgstr "Kopiér"
+
+#, fuzzy
+msgid "Mo&ve"
+msgstr "Flyt"
+
+msgid "&Delete"
+msgstr "&Slet"
+
+#, fuzzy
+msgid "Co&py to clipfile"
+msgstr "kopiér til &Fil...   "
+
+#, fuzzy
+msgid "&Cut to clipfile"
+msgstr "&Gå til linie...         M-l"
+
+#, fuzzy
+msgid "Pa&ste from clipfile"
+msgstr "&Gå til linie...         M-l"
+
+msgid "&Beginning"
+msgstr ""
+
+#, fuzzy
+msgid "&End"
+msgstr "&Inode"
+
+#, fuzzy
+msgid "&Search..."
+msgstr "Søg"
+
+#, fuzzy
+msgid "Search &again"
+msgstr "&Gentag søgning   F17"
+
+#, fuzzy
+msgid "&Replace..."
+msgstr "&Erstat"
+
+#, fuzzy
+msgid "&Toggle bookmark"
+msgstr "Slå &Mærke til/fra F3"
+
+#, fuzzy
+msgid "&Next bookmark"
+msgstr "Sæ&t markerede"
+
+#, fuzzy
+msgid "&Prev bookmark"
+msgstr "Sor&tér...               M-t"
+
+#, fuzzy
+msgid "&Flush bookmark"
+msgstr "&Send...                    "
+
+#, fuzzy
+msgid "&Go to line..."
+msgstr " Gå til linje "
+
+#, fuzzy
+msgid "&Toggle line state"
+msgstr "Slå &Mærke til/fra F3"
+
+#, fuzzy
+msgid "Go to matching &bracket"
+msgstr "gå til passende &Klamme  M-b"
+
+#, fuzzy
+msgid "&Find declaration"
+msgstr "Find rester efter lapning"
+
+#, fuzzy
+msgid "Back from &declaration"
+msgstr "Find rester efter lapning"
+
+#, fuzzy
+msgid "For&ward to declaration"
+msgstr "Find rester efter lapning"
+
+#, fuzzy
+msgid "Encod&ing..."
+msgstr "Sor&tér...               M-t"
+
+#, fuzzy
+msgid "&Refresh screen"
+msgstr "&Opdatér skærmen         C-l"
+
+#, fuzzy
+msgid "&Start record macro"
+msgstr "&Start makroindspilning  C-r"
+
+#, fuzzy
+msgid "Finis&h record macro..."
+msgstr "S&top makroindspilning   C-r"
+
+#, fuzzy
+msgid "&Execute macro..."
+msgstr "&Kør makro...       C-a, TAST"
+
+#, fuzzy
+msgid "Delete macr&o..."
+msgstr " Slet makro "
+
+#, fuzzy
+msgid "'ispell' s&pell check"
+msgstr "'&Ispell' stavekontrol   C-p"
+
+#, fuzzy
+msgid "&Mail..."
+msgstr "&Filter..."
+
+#, fuzzy
+msgid "Insert &literal..."
+msgstr "indsæt &Bogstavelig...   C-q"
+
+#, fuzzy
+msgid "Insert &date/time"
+msgstr "indsæt &Dato/tid            "
+
+#, fuzzy
+msgid "&Format paragraph"
+msgstr "formatér &Afsnit         M-p"
+
+#, fuzzy
+msgid "&Sort..."
+msgstr "&Sorteringsrækkefølge..."
+
+msgid "&Paste output of..."
+msgstr ""
+
+#, fuzzy
+msgid "&External formatter"
+msgstr "E&kstern formatering     F19"
+
+msgid "&General...  "
+msgstr "&Generelt... "
+
+#, fuzzy
+msgid "Save &mode..."
+msgstr "Gemme&måde..."
+
+#, fuzzy
+msgid "Learn &keys..."
+msgstr "lær &Taster..."
+
+#, fuzzy
+msgid "Syntax &highlighting..."
+msgstr "synta&X farvning"
+
+#, fuzzy
+msgid "S&yntax file"
+msgstr "&Menufilsredigering"
+
+#, fuzzy
+msgid "&Menu file"
+msgstr "&Menufilsredigering"
+
+msgid "&Save setup"
+msgstr "&Gem opsætning"
+
+#, fuzzy
+msgid "&File"
+msgstr "Fil"
+
+#, fuzzy
+msgid "&Edit"
+msgstr "Redigér"
+
+#, fuzzy
+msgid "&Search"
+msgstr "Søg"
+
+#, fuzzy
+msgid "&Command"
+msgstr "Kommando"
+
+#, fuzzy
+msgid "For&mat"
+msgstr "Format"
+
+#, fuzzy
+msgid "&Options"
+msgstr " &Indstillinger "
+
+msgid "None"
+msgstr "Ingen"
+
+msgid "Dynamic paragraphing"
+msgstr "Dynamiske paragraffer"
+
+msgid "Type writer wrap"
+msgstr "Skrivemaskineombrydning"
+
+msgid "Word wrap line length: "
+msgstr "Indtast linielængde: "
+
+msgid "Cursor beyond end of line"
+msgstr ""
+
+#, fuzzy
+msgid "Pers&istent selection"
+msgstr "Omvendt valg      M-*"
+
+msgid "Synta&x highlighting"
+msgstr "synta&X farvning"
+
+msgid "Visible tabs"
+msgstr ""
+
+msgid "Visible trailing spaces"
+msgstr ""
+
+#, fuzzy
+msgid "Save file &position"
+msgstr " Gem fil "
+
+msgid "Confir&m before saving"
+msgstr "&Bekræft før gemning"
+
+msgid "&Return does autoindent"
+msgstr "&Return laver autoindryk"
+
+msgid "Tab spacing: "
+msgstr "Tabulatorafstand : "
+
+msgid "Fill tabs with &spaces"
+msgstr "fyld tabs med &Mellemrum"
+
+msgid "&Backspace through tabs"
+msgstr "&Baglæns slet gennem tabs"
+
+msgid "&Fake half tabs"
+msgstr "&Falske halve tabs"
+
+msgid "Wrap mode"
+msgstr "Ombrydningsmåde"
+
+msgid " Editor options "
+msgstr " Editorindstillinger "
+
+msgid "ButtonBar|Help"
+msgstr ""
+
+msgid "ButtonBar|Save"
+msgstr ""
+
+msgid "ButtonBar|Mark"
+msgstr ""
+
+msgid "ButtonBar|Replac"
+msgstr ""
+
+msgid "ButtonBar|Copy"
+msgstr ""
+
+msgid "ButtonBar|Move"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Delete"
+msgstr ""
+
+msgid "ButtonBar|PullDn"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
+
+msgid " Load syntax file "
+msgstr " Hent syntaksfil "
+
+#, c-format
+msgid ""
+" Cannot open file %s \n"
+" %s "
+msgstr ""
+" Kan ikke åbne filen %s \n"
+" %s "
+
+#, c-format
+msgid " Error in file %s on line %d "
+msgstr " Syntaksfejl i filen %s ved linie %d "
+
 msgid ""
 " The Commander can't change to the directory that \n"
 " the subshell claims you are in.  Perhaps you have \n"
@@ -1433,10 +2238,6 @@ msgstr ""
 " underskallen påstår at du står i. Måske har du \n"
 " slettet den aktuelle mappe eller givet dig selv \n"
 " ekstra adgangstilladelser med \"su\" kommandoen? "
-
-#, c-format
-msgid "Press any key to continue..."
-msgstr "Tryk på en tast for at fortsætte..."
 
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
@@ -1784,9 +2585,6 @@ msgstr "%o %f \"%s\"%m"
 msgid "%o %d %f%m"
 msgstr "%o %d %f%m"
 
-msgid "file"
-msgstr "fil"
-
 msgid "files"
 msgstr "filer"
 
@@ -2050,6 +2848,9 @@ msgstr ""
 
 msgid "ButtonBar|Prev"
 msgstr ""
+
+msgid "&Move"
+msgstr "&Flyt"
 
 msgid "&Remove"
 msgstr "&Fjern"
@@ -2402,6 +3203,10 @@ msgstr " Se på fil "
 #, fuzzy
 msgid "&Filtered view"
 msgstr " Filtreret visning "
+
+#, fuzzy
+msgid "&Copy"
+msgstr "Kopiér"
 
 msgid "C&hmod"
 msgstr ""
@@ -2822,29 +3627,6 @@ msgstr "Brugerdefineret format ser ugyldigt ud, bruger standard."
 msgid " Do you really want to execute? "
 msgstr " Vil du virkelig køre? "
 
-msgid " Not implemented yet "
-msgstr ""
-
-msgid " Num of replace tokens not equal to num of found tokens "
-msgstr ""
-
-#, fuzzy, c-format
-msgid " Invalid token number %d "
-msgstr " Ugyldig målmaske "
-
-#, fuzzy
-msgid "Normal"
-msgstr "Format"
-
-msgid "&Regular expression"
-msgstr "&Regulært udtryk"
-
-msgid "Hexadecimal"
-msgstr ""
-
-msgid "Wildcard search"
-msgstr ""
-
 #, fuzzy
 msgid "Choose codepage"
 msgstr " Vælg kodning for inddata "
@@ -2857,18 +3639,6 @@ msgid ""
 "Cannot save file %s:\n"
 "%s"
 msgstr " Fejl under gemning af fil. "
-
-#, c-format
-msgid ""
-"Unable to load '%s' skin.\n"
-"Default skin has been loaded"
-msgstr ""
-
-#, c-format
-msgid ""
-"Unable to parse '%s' skin.\n"
-"Default skin has been loaded"
-msgstr ""
 
 msgid ""
 "GNU Midnight Commander is already\n"
@@ -2982,277 +3752,6 @@ msgstr ""
 "Kan ikke skrive til %s filen::\n"
 "%s\n"
 
-msgid "Function key 1"
-msgstr "Funktionstast 1"
-
-msgid "Function key 2"
-msgstr "Funktionstast 2"
-
-msgid "Function key 3"
-msgstr "Funktionstast 3"
-
-msgid "Function key 4"
-msgstr "Funktionstast 4"
-
-msgid "Function key 5"
-msgstr "Funktionstast 5"
-
-msgid "Function key 6"
-msgstr "Funktionstast 6"
-
-msgid "Function key 7"
-msgstr "Funktionstast 7"
-
-msgid "Function key 8"
-msgstr "Funktionstast 8"
-
-msgid "Function key 9"
-msgstr "Funktionstast 9"
-
-msgid "Function key 10"
-msgstr "Funktionstast 10"
-
-msgid "Function key 11"
-msgstr "Funktionstast 11"
-
-msgid "Function key 12"
-msgstr "Funktionstast 12"
-
-msgid "Function key 13"
-msgstr "Funktionstast 13"
-
-msgid "Function key 14"
-msgstr "Funktionstast 14"
-
-msgid "Function key 15"
-msgstr "Funktionstast 15"
-
-msgid "Function key 16"
-msgstr "Funktionstast 16"
-
-msgid "Function key 17"
-msgstr "Funktionstast 17"
-
-msgid "Function key 18"
-msgstr "Funktionstast 18"
-
-msgid "Function key 19"
-msgstr "Funktionstast 19"
-
-msgid "Function key 20"
-msgstr "Funktionstast 20"
-
-msgid "Backspace key"
-msgstr "Backspace-tast"
-
-msgid "End key"
-msgstr "End-tast"
-
-msgid "Up arrow key"
-msgstr "Pil op"
-
-msgid "Down arrow key"
-msgstr "Pil ned"
-
-msgid "Left arrow key"
-msgstr "Venstrepil"
-
-msgid "Right arrow key"
-msgstr "Højrepil"
-
-msgid "Home key"
-msgstr "Home-tast"
-
-msgid "Page Down key"
-msgstr "Page Down-tast"
-
-msgid "Page Up key"
-msgstr "Page up-tast"
-
-msgid "Insert key"
-msgstr "Insert-tast"
-
-msgid "Delete key"
-msgstr "Delete-tast"
-
-msgid "Completion/M-tab"
-msgstr "Fuldfør navn/M-tab"
-
-msgid "+ on keypad"
-msgstr "+ på numerisk tastatur"
-
-msgid "- on keypad"
-msgstr "- på numerisk tastatur"
-
-msgid "Slash on keypad"
-msgstr "Slash på numerisk tastatur"
-
-msgid "* on keypad"
-msgstr "* på numerisk tastatur"
-
-#, fuzzy
-msgid "Escape key"
-msgstr "Slash på numerisk tastatur"
-
-msgid "Left arrow keypad"
-msgstr "Venstrepil på numerisk tastatur"
-
-msgid "Right arrow keypad"
-msgstr "Højrepil på numerisk tastatur"
-
-msgid "Up arrow keypad"
-msgstr "Pil op på numerisk tastatur"
-
-msgid "Down arrow keypad"
-msgstr "Pil ned på numerisk tastatur"
-
-msgid "Home on keypad"
-msgstr "Hjem på numerisk tastatur"
-
-msgid "End on keypad"
-msgstr "Slut på numerisk tastatur"
-
-msgid "Page Down keypad"
-msgstr "Side ned på numerisk tastatur"
-
-msgid "Page Up keypad"
-msgstr "Side op på numerisk tastatur"
-
-msgid "Insert on keypad"
-msgstr "Indsæt på numerisk tastatur"
-
-msgid "Delete on keypad"
-msgstr "Slet på numerisk tastatur"
-
-msgid "Enter on keypad"
-msgstr "Enter på numerisk tastatur"
-
-#, fuzzy
-msgid "Function key 21"
-msgstr "Funktionstast 1"
-
-#, fuzzy
-msgid "Function key 22"
-msgstr "Funktionstast 2"
-
-#, fuzzy
-msgid "Function key 23"
-msgstr "Funktionstast 2"
-
-#, fuzzy
-msgid "Function key 24"
-msgstr "Funktionstast 2"
-
-msgid "Plus"
-msgstr ""
-
-#, fuzzy
-msgid "Minus"
-msgstr "Menu"
-
-msgid "Asterisk"
-msgstr ""
-
-msgid "Dot"
-msgstr ""
-
-msgid "Less than"
-msgstr ""
-
-msgid "Great than"
-msgstr ""
-
-msgid "Equal"
-msgstr ""
-
-#, fuzzy
-msgid "Comma"
-msgstr "Kommando"
-
-msgid "Apostrophe"
-msgstr ""
-
-#, fuzzy
-msgid "Colon"
-msgstr "Tæl"
-
-msgid "Exclamation mark"
-msgstr ""
-
-msgid "Question mark"
-msgstr ""
-
-#, fuzzy
-msgid "Ampersand"
-msgstr "Tilføj"
-
-msgid "Dollar sign"
-msgstr ""
-
-msgid "Quotation mark"
-msgstr ""
-
-#, fuzzy
-msgid "Caret"
-msgstr "Mål"
-
-msgid "Tilda"
-msgstr ""
-
-#, fuzzy
-msgid "Prime"
-msgstr "Forr."
-
-#, fuzzy
-msgid "Underline"
-msgstr " Indtast linje: "
-
-msgid "Understrike"
-msgstr ""
-
-msgid "Pipe"
-msgstr ""
-
-#, fuzzy
-msgid "Enter"
-msgstr "ejer"
-
-#, fuzzy
-msgid "Tab key"
-msgstr "+ på numerisk tastatur"
-
-#, fuzzy
-msgid "Space key"
-msgstr "Slash på numerisk tastatur"
-
-#, fuzzy
-msgid "Slash key"
-msgstr "Slash på numerisk tastatur"
-
-#, fuzzy
-msgid "Backslash key"
-msgstr "Backspace-tast"
-
-msgid "Number sign #"
-msgstr ""
-
-msgid "Ctrl"
-msgstr ""
-
-msgid "Alt"
-msgstr ""
-
-msgid "Shift"
-msgstr ""
-
-#, c-format
-msgid ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-msgstr ""
-"Skærmstørrelse %dx%d er ikke understøttet.\n"
-"Tjek TERM-miljøvariabelen.\n"
-
 msgid " Format error on file Extensions File "
 msgstr " Formatfejl på fil-udvidelses fil "
 
@@ -3293,46 +3792,6 @@ msgstr " Ingen passende indgange fundet i %s "
 
 msgid " User menu "
 msgstr " Brugermenu "
-
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
-#, fuzzy, c-format
-msgid "%s is not a directory\n"
-msgstr "mappe"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr ""
-" Kan ikke oprette målmappen \"%s\" \n"
-" %s "
-
-#, fuzzy, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr ""
-" Kan ikke oprette målmappen \"%s\" \n"
-" %s "
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr ""
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr ""
-
-msgid " Pipe failed "
-msgstr " Pibe fejlede "
-
-msgid " Dup failed "
-msgstr " Dup fejlede "
 
 #, fuzzy, c-format
 msgid ""
@@ -3457,447 +3916,6 @@ msgstr " Historie "
 
 msgid "Background process:"
 msgstr "Baggrundsproces:"
-
-#, c-format
-msgid ""
-"Cannot open cpio archive\n"
-"%s"
-msgstr ""
-"Kunne ikke åbne cpio arkiv\n"
-"%s"
-
-#, c-format
-msgid ""
-"Premature end of cpio archive\n"
-"%s"
-msgstr ""
-"Præmatur slutning på cpio arkiv\n"
-"%s"
-
-#, c-format
-msgid ""
-"Inconsistent hardlinks of\n"
-"%s\n"
-"in cpio archive\n"
-"%s"
-msgstr ""
-"Inkonsistent tar-arkiv%s\n"
-"i cpio arkiv\n"
-"%s"
-
-#, c-format
-msgid "%s contains duplicate entries! Skipping!"
-msgstr "%s indeholder duplikerede indgange! Hopper over!"
-
-#, c-format
-msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"Korrupt cpio header fundet i\n"
-"%s"
-
-#, c-format
-msgid ""
-"Unexpected end of file\n"
-"%s"
-msgstr ""
-"Uventet EOF\n"
-"%s"
-
-#, c-format
-msgid "Directory cache expired for %s"
-msgstr "Katalog-cache udløbet for %s"
-
-msgid "Starting linear transfer..."
-msgstr "Begynder lineær overførsel..."
-
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
-msgstr "%s: %s: %s %3d%% (%lu byte overført)"
-
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
-msgstr "%s: %s: %s %lu byte overført"
-
-msgid "Getting file"
-msgstr "Henter fil: "
-
-#, c-format
-msgid ""
-"Cannot open %s archive\n"
-"%s"
-msgstr ""
-"Kunne ikke åbne %s arkiv\n"
-"%s"
-
-msgid "Inconsistent extfs archive"
-msgstr "Inkonsistent extfs-arkiv"
-
-#, c-format
-msgid "fish: Disconnecting from %s"
-msgstr "fisk: Afkobler fra %s"
-
-msgid "fish: Waiting for initial line..."
-msgstr "fisk: Venter på begyndelseslinie..."
-
-msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr "Beklager, vi kan ikke lave adgangskodebekræftede forbindelser endnu."
-
-msgid " fish: Password required for "
-msgstr " fisk: Behøver adgangskode til"
-
-msgid "fish: Sending password..."
-msgstr "fisk: Sender adgangskode..."
-
-msgid "fish: Sending initial line..."
-msgstr "fisk: Sender begyndelseslinie..."
-
-msgid "fish: Handshaking version..."
-msgstr "fisk: Håndrystende version..."
-
-msgid "fish: Setting up current directory..."
-msgstr "fisk: Indstiller den aktive mappe..."
-
-#, c-format
-msgid "fish: Connected, home %s."
-msgstr "fisk: forbundet, hjem %s"
-
-#, c-format
-msgid "fish: Reading directory %s..."
-msgstr "fisk: Læser mappe %s..."
-
-#, c-format
-msgid "%s: done."
-msgstr "%s: færdig."
-
-#, c-format
-msgid "%s: failure"
-msgstr "%s: fejl "
-
-#, c-format
-msgid "fish: store %s: sending command..."
-msgstr "fisk: gem %s: sender kommando..."
-
-msgid "fish: Local read failed, sending zeros"
-msgstr "fisk: Lokal læsning fejlede, sender nuller"
-
-#, c-format
-msgid "fish: storing %s %d (%lu)"
-msgstr "fisk: gemmer fil %s %d (%lu)"
-
-msgid "zeros"
-msgstr "nuller"
-
-msgid "Aborting transfer..."
-msgstr "Afbryder overførsel..."
-
-msgid "Error reported after abort."
-msgstr "Fejl meldt tilbage efter afbrydelse."
-
-msgid "Aborted transfer would be successful."
-msgstr "Afbrudt overførsel ville være lykkedes."
-
-#, c-format
-msgid "ftpfs: Disconnecting from %s"
-msgstr "ftpfs: Afkobler fra %s"
-
-msgid " FTP: Password required for "
-msgstr " FTP: Behøver adgangskode til"
-
-msgid "ftpfs: sending login name"
-msgstr "ftpfs: sender loginnavn"
-
-msgid "ftpfs: sending user password"
-msgstr "ftpfs: sender brugeradgangskode"
-
-#, fuzzy, c-format
-msgid "FTP: Account required for user %s"
-msgstr " FTP: Behøver adgangskode til"
-
-#, fuzzy
-msgid "Account:"
-msgstr "Tæl"
-
-#, fuzzy
-msgid "ftpfs: sending user account"
-msgstr "ftpfs: sender brugeradgangskode"
-
-msgid "ftpfs: logged in"
-msgstr "ftpfs: logget ind"
-
-#, c-format
-msgid "ftpfs: Login incorrect for user %s "
-msgstr "ftpfs: Forkert login for bruger %s "
-
-msgid "ftpfs: Invalid host name."
-msgstr "ftpfs: Ugyldig værtsnavn."
-
-#, c-format
-msgid "ftpfs: %s"
-msgstr ""
-
-#, c-format
-msgid "ftpfs: making connection to %s"
-msgstr "ftpfs: laver forbindelse til %s"
-
-msgid "ftpfs: connection interrupted by user"
-msgstr "ftpfs: forbindelse afbrudt af bruger"
-
-#, c-format
-msgid "ftpfs: connection to server failed: %s"
-msgstr "ftpfs: forbindelse til server mislykkedes: %s"
-
-#, c-format
-msgid "Waiting to retry... %d (Control-C to cancel)"
-msgstr "Venter på at forsøge igen... %d (Ctrl-C annullerer)"
-
-#, fuzzy
-msgid "ftpfs: invalid address family"
-msgstr "ftpfs: Ugyldig værtsadresse."
-
-#, fuzzy, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: kunne ikke indstille passiv måde"
-
-#, fuzzy, c-format
-msgid "ftpfs: could not create socket: %s"
-msgstr " Kan ikke oprette sokkel %s "
-
-msgid "ftpfs: could not setup passive mode"
-msgstr "ftpfs: kunne ikke indstille passiv måde"
-
-msgid "ftpfs: aborting transfer."
-msgstr "ftpfs: afbryder overførsel."
-
-#, c-format
-msgid "ftpfs: abort error: %s"
-msgstr "ftpfs: afbrydelsesfejl: %s"
-
-msgid "ftpfs: abort failed"
-msgstr "ftpfs: afbryd mislykkedes"
-
-msgid "ftpfs: CWD failed."
-msgstr "ftpfs: CWD mislykkedes"
-
-msgid "ftpfs: couldn't resolve symlink"
-msgstr "ftpfs: kunne ikke læse symlænke"
-
-msgid "Resolving symlink..."
-msgstr "Læser symlænke..."
-
-#, c-format
-msgid "ftpfs: Reading FTP directory %s... %s%s"
-msgstr "ftpfs: Læser FTP-mappe %s... %s%s"
-
-msgid "(strict rfc959)"
-msgstr "(følg rfc959)"
-
-msgid "(chdir first)"
-msgstr "(chdir først)"
-
-msgid "ftpfs: failed; nowhere to fallback to"
-msgstr "ftpfs: fejlede; ingen steder at falde tilbage på"
-
-#, fuzzy, c-format
-msgid "ftpfs: storing file %lu (%lu)"
-msgstr "ftpfs: gemmer fil %d (%lu)"
-
-msgid ""
-"~/.netrc file has incorrect mode.\n"
-"Remove password or correct mode."
-msgstr ""
-"~/.netrc-filen har ikke korrekt modus.\n"
-"Fjern adgangskode eller korriger modus."
-
-msgid " MCFS "
-msgstr " MCFS "
-
-msgid " The server does not support this version "
-msgstr " Serveren understøtter ikke denne version "
-
-msgid ""
-" The remote server is not running on a system port \n"
-" you need a password to log in, but the information may \n"
-" not be safe on the remote side.  Continue? \n"
-msgstr ""
-" Den fremmede server kører ikke på en systemport, \n"
-" du skal bruge en adgangskode for at logge ind, men informationen \n"
-" er ikke nødvendigvis sikker på den anden side.  Fortsæt? \n"
-
-msgid " MCFS Password required "
-msgstr " MCFS-adgangskode påkrævet"
-
-msgid " Invalid password "
-msgstr " Ugyldig adgangskode "
-
-#, c-format
-msgid " Cannot locate hostname: %s "
-msgstr " Kan ikke finde værtsnavn: %s "
-
-#, c-format
-msgid " Cannot create socket: %s "
-msgstr " Kan ikke oprette sokkel %s "
-
-#, c-format
-msgid " Cannot connect to server: %s "
-msgstr "Kan ikke forbinde til server %s"
-
-msgid " Too many open connections "
-msgstr " For mange åbne forbindelser "
-
-#, c-format
-msgid ""
-"Warning: Invalid line in %s:\n"
-"%s\n"
-msgstr ""
-"Advarsel: Ugyldig linje i %s.\n"
-"%s\n"
-
-#, c-format
-msgid ""
-"Warning: Invalid flag %c in %s:\n"
-"%s\n"
-msgstr ""
-"Advarsel: Ugyldig flag %c i %s:\n"
-"%s\n"
-
-#, c-format
-msgid ""
-" reconnect to %s failed\n"
-" "
-msgstr ""
-" genopkobling til %s mislykkedes\n"
-" "
-
-msgid " Authentication failed "
-msgstr " Autentisering fejlet "
-
-#, c-format
-msgid " Error %s creating directory %s "
-msgstr " %s mkdir'er %s "
-
-#, c-format
-msgid " Error %s removing directory %s "
-msgstr " %s rmdir'er %s "
-
-#, c-format
-msgid " %s opening remote file %s "
-msgstr " %s åbner fremmed fil %s "
-
-#, c-format
-msgid " %s removing remote file %s "
-msgstr " %s fjerner ekstern fil %s "
-
-#, c-format
-msgid " %s renaming files\n"
-msgstr "  %s omdøber filer\n"
-
-#, c-format
-msgid ""
-"Cannot open tar archive\n"
-"%s"
-msgstr ""
-"Kunne ikke åbne tar-arkiv\n"
-"%s"
-
-msgid "Inconsistent tar archive"
-msgstr "Inkonsistent tar-arkiv"
-
-msgid "Unexpected EOF on archive file"
-msgstr "Uventet EOF i arkivfilen"
-
-#, c-format
-msgid ""
-"Hmm,...\n"
-"%s\n"
-"doesn't look like a tar archive."
-msgstr ""
-"Hmm,...\n"
-"%s\n"
-"ser ikke ud til at være et tar-arkiv."
-
-msgid " undelfs: error "
-msgstr " undelfs: fejl "
-
-msgid " not enough memory "
-msgstr " ikke nok lager "
-
-msgid " while allocating block buffer "
-msgstr " under allokering af blokbuffer "
-
-#, c-format
-msgid " open_inode_scan: %d "
-msgstr " open_inode_scan: %d "
-
-#, c-format
-msgid " while starting inode scan %d "
-msgstr " under start af inodeskan %d "
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: henter information om slettede filer %d inoder"
-
-#, c-format
-msgid " while calling ext2_block_iterate %d "
-msgstr " ved kald til ext2_block_iterate %d "
-
-msgid " no more memory while reallocating array "
-msgstr " ikke mere lager ved reallokering af matrice "
-
-#, c-format
-msgid " while doing inode scan %d "
-msgstr " under skanning af inode %d "
-
-msgid " Ext2lib error "
-msgstr " Ext2lib fejl "
-
-#, c-format
-msgid " Cannot open file %s "
-msgstr " Kunne ikke åbne filen %s "
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: læser inode bitmap..."
-
-#, c-format
-msgid ""
-" Cannot load inode bitmap from: \n"
-" %s \n"
-msgstr ""
-" Kunne ikke hente bitmap fra: \n"
-" %s \n"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: læser blok bitmap..."
-
-#, c-format
-msgid ""
-" Cannot load block bitmap from: \n"
-" %s \n"
-msgstr ""
-" Kunne ikke hente blok bitmap fra: \n"
-" %s \n"
-
-msgid " vfs_info is not fs! "
-msgstr "vfs_info er ikke fs! "
-
-msgid " You have to chdir to extract files first "
-msgstr "Du må ændre katalog før du henter filerne "
-
-msgid " while iterating over blocks "
-msgstr " ved iteration over blokke "
-
-msgid "Cannot parse:"
-msgstr "Kunne ikke fortolke:"
-
-msgid "More parsing errors will be ignored."
-msgstr "Flere fortolkningsfejl vil blive ignoreret."
-
-msgid "Internal error:"
-msgstr " Intern fejl:"
-
-msgid "Changes to file lost"
-msgstr "Ændringer til fil tabt"
 
 #~ msgid "File:       None"
 #~ msgstr "Fil:       Ingen"
@@ -4054,9 +4072,6 @@ msgstr "Ændringer til fil tabt"
 
 #~ msgid "Replac"
 #~ msgstr "Erstat"
-
-#~ msgid "Move"
-#~ msgstr "Flyt"
 
 #~ msgid "Delete"
 #~ msgstr "Slet"

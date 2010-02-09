@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-12-25 19:06+0200\n"
+"POT-Creation-Date: 2010-02-09 12:08+0200\n"
 "PO-Revision-Date: 2003-01-22 18:10+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <debian-l10n-swedish@lists.debian.org>\n"
@@ -20,81 +20,637 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#, fuzzy
-msgid " Choose syntax highlighting "
-msgstr "Markera synta&x"
-
-#, fuzzy
-msgid "< Auto >"
-msgstr " Om "
-
-msgid "< Reload Current Syntax >"
-msgstr ""
-
-#, fuzzy, c-format
-msgid " Cannot open %s for reading "
-msgstr " Kan inte öppna rör för läsning: "
-
-msgid "Error"
-msgstr "Fel"
-
-#, fuzzy, c-format
-msgid " Error reading from pipe: %s "
-msgstr " Problem att läsa från rör: "
-
-#, fuzzy, c-format
-msgid " Cannot open pipe for reading: %s "
-msgstr " Kan inte öppna rör för läsning: "
-
-#, fuzzy, c-format
-msgid " Cannot get size/permissions for %s "
-msgstr " Kan inte hämta information om storlek/rättigheter för fil: "
-
-#, fuzzy, c-format
-msgid " %s is not a regular file "
-msgstr " Kan inte visa: inte en vanlig fil "
-
-#, fuzzy, c-format
-msgid " File %s is too large "
-msgstr " Filen är för stor: "
-
-msgid " About "
-msgstr " Om "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright © 1996 Free Software Foundation\n"
-"\n"
-"       En användarvänlig texteditor skriven för \n"
-"               Midnight Commander. \n"
-
-msgid "&OK"
-msgstr "&OK"
-
-msgid "Macro recursion is too deep"
-msgstr "Makrorekursion är för djup"
-
-msgid "Search"
-msgstr "Sök"
-
 msgid " Search string not found "
 msgstr " Söksträngen kunde inte hittas "
+
+msgid " Not implemented yet "
+msgstr ""
+
+msgid " Num of replace tokens not equal to num of found tokens "
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Invalid token number %d "
+msgstr " Ogiltig målmask "
+
+#, fuzzy
+msgid "Normal"
+msgstr "Formera"
+
+msgid "&Regular expression"
+msgstr "&Reguljära uttryck"
+
+msgid "Hexadecimal"
+msgstr ""
+
+msgid "Wildcard search"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+msgid "Function key 1"
+msgstr "Funktionstangent 1"
+
+msgid "Function key 2"
+msgstr "Funktionstangent 2"
+
+msgid "Function key 3"
+msgstr "Funktionstangent 3"
+
+msgid "Function key 4"
+msgstr "Funktionstangent 4"
+
+msgid "Function key 5"
+msgstr "Funktionstangent 5"
+
+msgid "Function key 6"
+msgstr "Funktionstangent 6"
+
+msgid "Function key 7"
+msgstr "Funktionstangent 7"
+
+msgid "Function key 8"
+msgstr "Funktionstangent 8"
+
+msgid "Function key 9"
+msgstr "Funktionstangent 9"
+
+msgid "Function key 10"
+msgstr "Funktionstangent 10"
+
+msgid "Function key 11"
+msgstr "Funktionstangent 11"
+
+msgid "Function key 12"
+msgstr "Funktionstangent 12"
+
+msgid "Function key 13"
+msgstr "Funktionstangent 13"
+
+msgid "Function key 14"
+msgstr "Funktionstangent 14"
+
+msgid "Function key 15"
+msgstr "Funktionstangent 15"
+
+msgid "Function key 16"
+msgstr "Funktionstangent 16"
+
+msgid "Function key 17"
+msgstr "Funktionstangent 17"
+
+msgid "Function key 18"
+msgstr "Funktionstangent 18"
+
+msgid "Function key 19"
+msgstr "Funktionstangent 19"
+
+msgid "Function key 20"
+msgstr "Funktionstangent 20"
+
+msgid "Backspace key"
+msgstr "Backspace"
+
+msgid "End key"
+msgstr "End"
+
+msgid "Up arrow key"
+msgstr "Upppåtpil"
+
+msgid "Down arrow key"
+msgstr "Neråtpil"
+
+msgid "Left arrow key"
+msgstr "Vänsterpil"
+
+msgid "Right arrow key"
+msgstr "Högerpil"
+
+msgid "Home key"
+msgstr "Home"
+
+msgid "Page Down key"
+msgstr "Page Down"
+
+msgid "Page Up key"
+msgstr "Page Up"
+
+msgid "Insert key"
+msgstr "Insert"
+
+msgid "Delete key"
+msgstr "Delete"
+
+msgid "Completion/M-tab"
+msgstr "Kompletera/M-tab"
+
+msgid "+ on keypad"
+msgstr "+ på numeriska tangentbordet"
+
+msgid "- on keypad"
+msgstr "- på numeriska tangentbordet"
+
+msgid "Slash on keypad"
+msgstr "Snedstreck, numeriska"
+
+msgid "* on keypad"
+msgstr "* på numeriska tangentbordet"
+
+#, fuzzy
+msgid "Escape key"
+msgstr "Snedstreck, numeriska"
+
+msgid "Left arrow keypad"
+msgstr "Vänsterpil, numeriska"
+
+msgid "Right arrow keypad"
+msgstr "Högerpil, numeriska"
+
+msgid "Up arrow keypad"
+msgstr "Uppåtpil, numeriska"
+
+msgid "Down arrow keypad"
+msgstr "Neråtpil, numeriska"
+
+msgid "Home on keypad"
+msgstr "Home, numeriska"
+
+msgid "End on keypad"
+msgstr "End, numeriska"
+
+msgid "Page Down keypad"
+msgstr "Page Down, numeriska"
+
+msgid "Page Up keypad"
+msgstr "Page Up, numeriska"
+
+msgid "Insert on keypad"
+msgstr "Insert, numeriska"
+
+msgid "Delete on keypad"
+msgstr "Delete, numeriska"
+
+msgid "Enter on keypad"
+msgstr "Enter, numeriska"
+
+#, fuzzy
+msgid "Function key 21"
+msgstr "Funktionstangent 1"
+
+#, fuzzy
+msgid "Function key 22"
+msgstr "Funktionstangent 2"
+
+#, fuzzy
+msgid "Function key 23"
+msgstr "Funktionstangent 2"
+
+#, fuzzy
+msgid "Function key 24"
+msgstr "Funktionstangent 2"
+
+msgid "Plus"
+msgstr ""
+
+#, fuzzy
+msgid "Minus"
+msgstr "Meny"
+
+msgid "Asterisk"
+msgstr ""
+
+msgid "Dot"
+msgstr ""
+
+msgid "Less than"
+msgstr ""
+
+msgid "Great than"
+msgstr ""
+
+msgid "Equal"
+msgstr ""
+
+#, fuzzy
+msgid "Comma"
+msgstr "Kommando"
+
+msgid "Apostrophe"
+msgstr ""
+
+#, fuzzy
+msgid "Colon"
+msgstr "Summa"
+
+msgid "Exclamation mark"
+msgstr ""
+
+msgid "Question mark"
+msgstr ""
+
+#, fuzzy
+msgid "Ampersand"
+msgstr "b&Ifoga"
+
+msgid "Dollar sign"
+msgstr ""
+
+msgid "Quotation mark"
+msgstr ""
+
+#, fuzzy
+msgid "Caret"
+msgstr "Mål"
+
+msgid "Tilda"
+msgstr ""
+
+#, fuzzy
+msgid "Prime"
+msgstr "Tidigare"
+
+#, fuzzy
+msgid "Underline"
+msgstr " Ange radnummer: "
+
+msgid "Understrike"
+msgstr ""
+
+msgid "Pipe"
+msgstr ""
+
+#, fuzzy
+msgid "Enter"
+msgstr "ägare"
+
+#, fuzzy
+msgid "Tab key"
+msgstr "+ på numeriska tangentbordet"
+
+#, fuzzy
+msgid "Space key"
+msgstr "Snedstreck, numeriska"
+
+#, fuzzy
+msgid "Slash key"
+msgstr "Snedstreck, numeriska"
+
+#, fuzzy
+msgid "Backslash key"
+msgstr "Backspace"
+
+msgid "Number sign #"
+msgstr ""
+
+msgid "Ctrl"
+msgstr ""
+
+msgid "Alt"
+msgstr ""
+
+msgid "Shift"
+msgstr ""
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"Skärmstorleken %d×%d stöds inte.\n"
+"Kontrollera miljövariabeln TERM.\n"
+
+msgid "%b %e  %Y"
+msgstr "%e %b  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%e %b %H.%M"
+
+#, c-format
+msgid "%s is not a directory\n"
+msgstr "%s är inte en katalog\n"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr "Katalogen %s ägs inte av dig\n"
+
+#, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr "Kan inte ställa in rätt rättigheter för katalogen %s\n"
+
+#, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr "Kan inte skapa temporär katalog %s: %s\n"
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr "Temporära filer kommer att skapas i %s\n"
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr "Temporära filer kommer inte att skapas\n"
+
+#, c-format
+msgid "Press any key to continue..."
+msgstr "Tryck valfri tangent för att fortsätta..."
 
 msgid "Warning"
 msgstr "Varning"
 
-msgid " File has hard-links. Detach before saving? "
+msgid " Pipe failed "
+msgstr " Pipe misslyckades"
+
+msgid " Dup failed "
+msgstr " Dup misslyckades"
+
+#, c-format
+msgid ""
+"Cannot open cpio archive\n"
+"%s"
 msgstr ""
+"Kan inte öppna cpio-arkivet\n"
+"%s"
+
+#, c-format
+msgid ""
+"Premature end of cpio archive\n"
+"%s"
+msgstr ""
+"För tidigt slut på cpio-arkivet\n"
+"%s"
+
+#, c-format
+msgid ""
+"Inconsistent hardlinks of\n"
+"%s\n"
+"in cpio archive\n"
+"%s"
+msgstr ""
+"Felaktiga hårda länkar för\n"
+"%s\n"
+"i cpio-arkivet\n"
+"%s"
+
+#, c-format
+msgid "%s contains duplicate entries! Skipping!"
+msgstr "%s innehåller dubbla poster! Hoppar över den!"
+
+#, c-format
+msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"Felaktig cpio-header påträffad i\n"
+"%s"
+
+# ?
+#, c-format
+msgid ""
+"Unexpected end of file\n"
+"%s"
+msgstr ""
+"Oväntat filslut\n"
+"%s"
+
+#, c-format
+msgid "Directory cache expired for %s"
+msgstr "Katalogcache för gammal för %s"
+
+msgid "Starting linear transfer..."
+msgstr "Startar linjär överföring..."
+
+#, c-format
+msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+msgstr "%s: %s: %s %3d%% (%lu byte överförda)"
+
+#, c-format
+msgid "%s: %s: %s %lu bytes transferred"
+msgstr "%s: %s: %s %lu byte överförda"
+
+msgid "Getting file"
+msgstr "Hämtar fil: "
+
+#, c-format
+msgid ""
+"Cannot open %s archive\n"
+"%s"
+msgstr ""
+"Kan inte öppna %s arkivet\n"
+"%s"
+
+msgid "Inconsistent extfs archive"
+msgstr "Inkonsistent extfsfil"
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Varning: filen %s kunde inte hittas\n"
+
+#, c-format
+msgid "fish: Disconnecting from %s"
+msgstr "fish: Kopplar ned från %s"
+
+msgid "fish: Waiting for initial line..."
+msgstr "fish: Väntar på första raden..."
+
+msgid "Sorry, we cannot do password authenticated connections for now."
+msgstr "Kan inte göra lösenords autenticerade anslutningar för närvarande."
+
+msgid " fish: Password required for "
+msgstr " fish: Lösenord behövs för "
+
+msgid "fish: Sending password..."
+msgstr "fish: Sänder lösenord..."
+
+msgid "fish: Sending initial line..."
+msgstr "fish: Sänder första raden..."
+
+msgid "fish: Handshaking version..."
+msgstr "fish: Handskakning version..."
+
+msgid "fish: Setting up current directory..."
+msgstr "fish: Sätter upp aktuell katalog..."
+
+#, c-format
+msgid "fish: Connected, home %s."
+msgstr "fish: Ansluten, hem %s."
+
+#, c-format
+msgid "fish: Reading directory %s..."
+msgstr "fish: Läser katalog %s..."
+
+#, c-format
+msgid "%s: done."
+msgstr "%s: klar."
+
+#, c-format
+msgid "%s: failure"
+msgstr "%s: fel"
+
+#, c-format
+msgid "fish: store %s: sending command..."
+msgstr "fish: lagrar %s: sänder kommando..."
+
+msgid "fish: Local read failed, sending zeros"
+msgstr "fish: Lokal läsning misslyckades, sänder nollor"
+
+#, c-format
+msgid "fish: storing %s %d (%lu)"
+msgstr "fish: lagrar %s %d (%lu)"
+
+msgid "zeros"
+msgstr "nollor"
+
+msgid "file"
+msgstr "fil"
+
+msgid "Aborting transfer..."
+msgstr "Avbryter överföringen..."
+
+msgid "Error reported after abort."
+msgstr "Fel rapporterades efter avslutningen."
+
+msgid "Aborted transfer would be successful."
+msgstr "Avbruten överföring skulle ha varit lyckad."
+
+# ???
+#, c-format
+msgid "ftpfs: Disconnecting from %s"
+msgstr "ftpfs: Kopplar ned från %s"
+
+msgid " FTP: Password required for "
+msgstr " FTP: Lösenord behövs för "
+
+msgid "ftpfs: sending login name"
+msgstr "ftpfs: sänder loginnamn"
+
+msgid "ftpfs: sending user password"
+msgstr "ftpfs: sänder användarlösenord"
+
+#, fuzzy, c-format
+msgid "FTP: Account required for user %s"
+msgstr " FTP: Lösenord behövs för "
+
+#, fuzzy
+msgid "Account:"
+msgstr "Summa"
+
+#, fuzzy
+msgid "ftpfs: sending user account"
+msgstr "ftpfs: sänder användarlösenord"
+
+msgid "ftpfs: logged in"
+msgstr "ftpfs: Inloggad"
+
+#, c-format
+msgid "ftpfs: Login incorrect for user %s "
+msgstr "ftpfs: Inloggningen felaktig för användare %s "
+
+# incomplete
+msgid "ftpfs: Invalid host name."
+msgstr "ftpfs: Ogiltigt värdnamn."
+
+#, c-format
+msgid "ftpfs: %s"
+msgstr ""
+
+#, c-format
+msgid "ftpfs: making connection to %s"
+msgstr "ftpfs: skapar anslutning till %s"
+
+msgid "ftpfs: connection interrupted by user"
+msgstr "ftpfs: anslutningen har avbrutits av användaren"
+
+#, c-format
+msgid "ftpfs: connection to server failed: %s"
+msgstr "ftpfs: misslyckades att ansluta till servern: %s"
+
+#, c-format
+msgid "Waiting to retry... %d (Control-C to cancel)"
+msgstr "Försöker igen... %d (Control-C för att avbryta)"
+
+#, fuzzy
+msgid "ftpfs: invalid address family"
+msgstr "ftpfs: Ogiltig värdadress."
+
+# incomplete
+#, fuzzy, c-format
+msgid "ftpfs: could not setup passive mode: %s"
+msgstr "ftpfs: kan inte sätta upp passivt läge"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not create socket: %s"
+msgstr " Kan inte skapa uttag: %s "
+
+# incomplete
+msgid "ftpfs: could not setup passive mode"
+msgstr "ftpfs: kan inte sätta upp passivt läge"
+
+msgid "ftpfs: aborting transfer."
+msgstr "ftpfs: avbryter överföringen."
+
+#, c-format
+msgid "ftpfs: abort error: %s"
+msgstr "ftpfs: abort fel: %s"
+
+msgid "ftpfs: abort failed"
+msgstr "ftpfs: abort kommandot misslyckades"
+
+msgid "ftpfs: CWD failed."
+msgstr "ftpfs: CWD kommandot misslyckades."
+
+msgid "ftpfs: couldn't resolve symlink"
+msgstr "ftpfs: kunde inte hitta filen som den symboliska länken pekar på"
+
+msgid "Resolving symlink..."
+msgstr "Analyserar en symbolisk länk..."
+
+#, c-format
+msgid "ftpfs: Reading FTP directory %s... %s%s"
+msgstr "ftpfs: Läser FTP-katalogen %s... %s%s"
+
+msgid "(strict rfc959)"
+msgstr "(strikt rfc959)"
+
+msgid "(chdir first)"
+msgstr "(chdir först)"
+
+msgid "ftpfs: failed; nowhere to fallback to"
+msgstr "ftpfs: misslyckades: det finns ingenstans att falla tillbaka på"
+
+#, c-format
+msgid "ftpfs: storing file %lu (%lu)"
+msgstr "ftpfs: lagrar fil %lu (%lu)"
+
+msgid ""
+"~/.netrc file has incorrect mode.\n"
+"Remove password or correct mode."
+msgstr ""
+"~/.netrc filen har inte korrekt rättigheter. \n"
+"Ta bort lösenordet från filen, eller ge filen korrekta rättigheter."
+
+msgid " MCFS "
+msgstr " MCFS "
+
+msgid " The server does not support this version "
+msgstr " Servern stöder inte den här versionen"
+
+msgid ""
+" The remote server is not running on a system port \n"
+" you need a password to log in, but the information may \n"
+" not be safe on the remote side.  Continue? \n"
+msgstr ""
+" Fjärrservern är inte aktiv på en systemport. \n"
+" För att kunna logga in måste du ange ett lösenord, men det går inte \n"
+" att garantera att detta är säkert. Vill du fortsätta? \n"
 
 msgid "&Yes"
 msgstr "&Ja"
@@ -102,670 +658,186 @@ msgstr "&Ja"
 msgid "&No"
 msgstr "&Nej"
 
-msgid "&Cancel"
-msgstr "&Avbryt"
+msgid " MCFS Password required "
+msgstr " Behöver MCFS lösenord "
 
-msgid "The file has been modified in the meantime. Save anyway?"
-msgstr ""
-
-msgid " Error writing to pipe: "
-msgstr " Fel vid skrivning till rör: "
-
-msgid " Cannot open pipe for writing: "
-msgstr " Kan inte öppna rör för skrivning: "
-
-#, fuzzy, c-format
-msgid " Cannot open file for writing: %s "
-msgstr " Kan inte öppna rör för skrivning: "
-
-#, fuzzy
-msgid "&Quick save"
-msgstr "Snabbspara"
-
-#, fuzzy
-msgid "&Safe save"
-msgstr "Säkert sparande "
-
-msgid "&Do backups with following extension:"
-msgstr ""
-
-msgid "Check &POSIX new line"
-msgstr ""
-
-msgid " Edit Save Mode "
-msgstr " Redigera sparläge "
-
-msgid "The file you are saving is not finished with a newline"
-msgstr ""
-
-#, fuzzy
-msgid "C&ontinue"
-msgstr "Fortsätt"
-
-msgid "&Do not change"
-msgstr ""
-
-msgid "&Unix format (LF)"
-msgstr ""
-
-msgid "&Windows/DOS format (CR LF)"
-msgstr ""
-
-msgid "&Macintosh format (CR)"
-msgstr ""
-
-msgid "Change line breaks to:"
-msgstr ""
-
-msgid " Enter file name: "
-msgstr " Ange filnamn: "
-
-msgid " Save As "
-msgstr " Spara som "
-
-msgid " A file already exists with this name. "
-msgstr " Det finns redan en fil med det namnet. "
-
-#, fuzzy
-msgid "&Overwrite"
-msgstr "Skriv över"
-
-msgid " Cannot save file. "
-msgstr " Fel vid försök att spara fil. "
-
-msgid " Delete macro "
-msgstr " Ta bort makro "
-
-msgid " Cannot open temp file "
-msgstr " Kan inte öppna temporär fil "
-
-msgid " Cannot open macro file "
-msgstr " Kan inte öppna makrofil "
-
-msgid " Cannot overwrite macro file "
-msgstr " Kan inte skriva över makrofil "
-
-msgid " Save macro "
-msgstr " Spara makro "
-
-msgid " Press the macro's new hotkey: "
-msgstr " Tryck ned makrots nya snabbtangent: "
-
-msgid " Press macro hotkey: "
-msgstr " Tryck snabbtangent för makro: "
-
-msgid " Load macro "
-msgstr " Ladda makro "
-
-msgid " Confirm save file? : "
-msgstr " Bekräfta spara? : "
-
-msgid " Save file "
-msgstr " Spara fil "
-
-msgid "&Save"
-msgstr "&Spara"
-
-msgid ""
-" Current text was modified without a file save. \n"
-" Continue discards these changes. "
-msgstr ""
-" Den aktuella texten har modifierats men inte sparats. \n"
-" Fortsätt och förlora de ändringar som gjorts."
-
-msgid "Syntax file edit"
-msgstr "Redigera filsyntax"
-
-msgid " Which syntax file you want to edit? "
-msgstr " Vilken syntaxfil vill du redigera? "
-
-msgid "&User"
-msgstr "&Användare"
-
-msgid "&System Wide"
-msgstr "Global &System"
-
-msgid " Menu edit "
-msgstr " Menyredigering "
-
-msgid " Which menu file do you want to edit? "
-msgstr " Vilken menyfil vill du redigera? "
-
-msgid "&Local"
-msgstr "&Lokal"
-
-msgid " Load "
-msgstr " Öppna "
-
-msgid " Block is large, you may not be able to undo this action. "
-msgstr " Blocket är stort, det kanske inte går att ångra operationen. "
-
-#, fuzzy
-msgid "Replace"
-msgstr "&Ersätt"
-
-msgid " Replace "
-msgstr " Ersätt "
+msgid " Invalid password "
+msgstr " Ogiltigt lösenord "
 
 #, c-format
-msgid " %ld replacements made. "
-msgstr " %ld strängar ersattes. "
+msgid " Cannot locate hostname: %s "
+msgstr " Kan inte hitta värden: %s "
+
+#, c-format
+msgid " Cannot create socket: %s "
+msgstr " Kan inte skapa uttag: %s "
+
+#, c-format
+msgid " Cannot connect to server: %s "
+msgstr "Kan inte ansluta till värd: %s"
+
+msgid " Too many open connections "
+msgstr " För många aktiva anslutningar "
+
+#, c-format
+msgid ""
+"Warning: Invalid line in %s:\n"
+"%s\n"
+msgstr ""
+"Varning: Ogiltig rad i %s:\n"
+"%s\n"
+
+#, c-format
+msgid ""
+"Warning: Invalid flag %c in %s:\n"
+"%s\n"
+msgstr ""
+"Varning: Flaggan %c i %s är ogiltig:\n"
+"%s\n"
+
+#, c-format
+msgid ""
+" reconnect to %s failed\n"
+" "
+msgstr ""
+" misslyckades att koppla upp till %s\n"
+" "
+
+msgid " Authentication failed "
+msgstr " Autentisering misslyckades "
+
+#, c-format
+msgid " Error %s creating directory %s "
+msgstr " %s skapar katalog %s"
+
+#, c-format
+msgid " Error %s removing directory %s "
+msgstr " %s raderar %s"
+
+#, c-format
+msgid " %s opening remote file %s "
+msgstr " %s öppnar fjärrfil %s "
+
+#, c-format
+msgid " %s removing remote file %s "
+msgstr " %s tar bort fjärrfil %s "
+
+#, c-format
+msgid " %s renaming files\n"
+msgstr " %s byter namn på filerna\n"
+
+#, c-format
+msgid ""
+"Cannot open tar archive\n"
+"%s"
+msgstr ""
+"Kan inte öppna tarfilen\n"
+"%s"
+
+msgid "Inconsistent tar archive"
+msgstr "Inkonsistensfel i tararkivet"
 
 # ?
-# får plats
-msgid "Quit"
-msgstr "Avsluta"
-
-# stämmer detta semantiskt i sammanhanget alltså?
-msgid " File was modified, Save with exit? "
-msgstr " Filen har modifierats, spara och avsluta? "
-
-# stämmer detta semantiskt i sammanhanget?
-#, fuzzy
-msgid "&Cancel quit"
-msgstr "Avbryt avsluta"
-
-#, fuzzy
-msgid " Error "
-msgstr "Fel"
-
-msgid " This function is not implemented. "
-msgstr ""
-
-msgid " Copy to clipboard "
-msgstr " Kopiera till klippbordet "
-
-msgid " Unable to save to file. "
-msgstr " Kunde inte spara till filen. "
-
-msgid " Cut to clipboard "
-msgstr " Klipp ut till klippbordet "
-
-msgid " Goto line "
-msgstr " Gå till rad "
-
-msgid " Enter line: "
-msgstr " Ange radnummer: "
-
-msgid " Save Block "
-msgstr " Spara block "
-
-msgid " Insert File "
-msgstr " Infoga fil "
-
-msgid " Cannot insert file. "
-msgstr " Kan inte infoga fil. "
-
-msgid " Sort block "
-msgstr " Sortera block "
-
-# varför är texten lokaliserad om den inte skall översättas?
-msgid " You must first highlight a block of text. "
-msgstr " Du måste först markera ett textblock. "
-
-msgid " Run Sort "
-msgstr " Kör \"sort\" "
-
-msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr " Ange in flaggor för 'sort' (see mansidan) skilda av blanktecken: "
-
-msgid " Sort "
-msgstr " Sortera "
-
-msgid " Cannot execute sort command "
-msgstr " Kan inte köra kommandot \"sort\" "
-
-msgid " Sort returned non-zero: "
-msgstr " Sortera returnerade icke-nollor: "
-
-msgid "Paste output of external command"
-msgstr ""
-
-#, fuzzy
-msgid "Enter shell command(s):"
-msgstr " Ange kommandoetikett: "
-
-#, fuzzy
-msgid "External command"
-msgstr "Annat kommando"
-
-#, fuzzy
-msgid "Cannot execute command"
-msgstr " Kan inte köra kommandot \"sort\" "
-
-msgid "Error creating script:"
-msgstr "Fel vid skapande av skript:"
-
-msgid "Error reading script:"
-msgstr "Fel vid läsning av skript:"
-
-msgid "Error closing script:"
-msgstr "Fel vid stängning av skript:"
-
-msgid "Script created:"
-msgstr "Skript skapat:"
-
-msgid "Process block"
-msgstr "Processblock"
-
-msgid " Copies to"
-msgstr " Kopior till"
-
-msgid " Subject"
-msgstr " Ämne"
-
-msgid " To"
-msgstr " Till"
-
-msgid " mail -s <subject> -c <cc> <to>"
-msgstr " mail -s <ämne> -c <cc> <mottagare>"
-
-msgid " Mail "
-msgstr " Brev "
-
-msgid " Insert Literal "
-msgstr " Klistra in bokstavlig "
-
-msgid " Press any key: "
-msgstr " Tryck valfri tangent:"
-
-msgid " Execute Macro "
-msgstr " Kör makro "
-
-msgid "All charsets"
-msgstr ""
-
-#, fuzzy
-msgid "&Whole words"
-msgstr "Endast &Hela ord"
-
-#, fuzzy
-msgid "In se&lection"
-msgstr "omvänt &Urval      M-*"
-
-msgid "&Backwards"
-msgstr "&Bakåt"
-
-msgid "case &Sensitive"
-msgstr "&Skilj gemener/versaler"
-
-msgid " Enter replacement string:"
-msgstr " Ange ersättningssträng:"
-
-msgid " Enter search string:"
-msgstr " Ange söksträng:"
-
-#, fuzzy
-msgid "&Find all"
-msgstr "Sök Fil"
-
-msgid "Cancel"
-msgstr "Avbryt"
-
-msgid "&Skip"
-msgstr "&Hoppa över"
-
-msgid "A&ll"
-msgstr "a&Lla"
-
-msgid "&Replace"
-msgstr "&Ersätt"
-
-msgid " Replace with: "
-msgstr " Ersätt med: "
-
-msgid " Confirm replace "
-msgstr " Bekräfta ersättningar "
-
-msgid "&Dismiss"
-msgstr "&Försvinn"
+msgid "Unexpected EOF on archive file"
+msgstr "Oväntad EOF i arkivfilen"
 
 #, c-format
 msgid ""
-"File \"%s\" is already being edited\n"
-"User: %s\n"
-"Process ID: %d"
+"Hmm,...\n"
+"%s\n"
+"doesn't look like a tar archive."
 msgstr ""
+"Hmm,...\n"
+"%s\n"
+"ser inte ut att vara en tarfil"
 
-msgid "File locked"
-msgstr ""
+msgid " undelfs: error "
+msgstr " undelfs: fel "
 
-msgid "&Grab lock"
-msgstr ""
+msgid " not enough memory "
+msgstr " för lite minne "
 
-msgid "&Ignore lock"
-msgstr ""
+msgid " while allocating block buffer "
+msgstr " vid allokerandet av blockbuffer"
 
-msgid "&Open file..."
-msgstr "&Öppna med..."
+#, c-format
+msgid " open_inode_scan: %d "
+msgstr " open_inode_scan: %d "
 
-#, fuzzy
-msgid "&New"
-msgstr "&Namn"
+#, c-format
+msgid " while starting inode scan %d "
+msgstr " vid startandet av inodsökning %d"
 
-#, fuzzy
-msgid "Save &as..."
-msgstr "&Spara inställningar"
+#, c-format
+msgid "undelfs: loading deleted files information %d inodes"
+msgstr "undelfs: laddar information för raderade filer %d inoder"
 
-#, fuzzy
-msgid "&Insert file..."
-msgstr "&Infoga fil...    F15"
+#, c-format
+msgid " while calling ext2_block_iterate %d "
+msgstr " vid anrop av ext2_block_iterate %d "
 
-#, fuzzy
-msgid "Cop&y to file..."
-msgstr "kopiera till &Fil... C-f"
+msgid " no more memory while reallocating array "
+msgstr " slut på minne vid allokering av fält "
 
-# #>>--<<
-#, fuzzy
-msgid "&User menu..."
-msgstr "anv&Ändarmeny...  F11"
+#, c-format
+msgid " while doing inode scan %d "
+msgstr " under inodsökning %d"
 
-#, fuzzy
-msgid "A&bout..."
-msgstr "&Layout..."
+msgid " Ext2lib error "
+msgstr " Ext2lib-fel "
 
-msgid "&Quit"
-msgstr "&Avsluta"
+#, c-format
+msgid " Cannot open file %s "
+msgstr " Kan inte öppna fil %s"
 
-#, fuzzy
-msgid "&Toggle mark"
-msgstr "&Nollställ markerad"
-
-msgid "&Mark columns"
-msgstr ""
-
-#, fuzzy
-msgid "Toggle &ins/overw"
-msgstr "&Infoga/skriv över Ins"
-
-#, fuzzy
-msgid "&Copy"
-msgstr "Kopiera"
-
-# >>---<<
-msgid "&Move"
-msgstr "fl&Ytta"
-
-msgid "&Delete"
-msgstr "&Ta bort"
-
-#, fuzzy
-msgid "C&opy to clipfile"
-msgstr "kopiera till &Fil... "
-
-#, fuzzy
-msgid "C&ut to clipfile"
-msgstr "&Gå till rad...             M-l"
-
-msgid "&Paste from clipfile"
-msgstr ""
-
-#, fuzzy
-msgid "Toggle bookmar&k"
-msgstr "&Markera av/på      F3"
-
-#, fuzzy
-msgid "&Next bookmark"
-msgstr "S&Ätt markerad"
-
-#, fuzzy
-msgid "Pre&v bookmark"
-msgstr "Sor&tera...                 M-t"
-
-#, fuzzy
-msgid "&Flush bookmark"
-msgstr "&Brev...                       "
-
-msgid "&Undo"
-msgstr ""
-
-msgid "&Beginning"
-msgstr ""
-
-#, fuzzy
-msgid "&End"
-msgstr "&Inod"
-
-#, fuzzy
-msgid "&Search..."
-msgstr "Sök"
-
-#, fuzzy
-msgid "Search &again"
-msgstr "sök i&Gen          F17"
-
-#, fuzzy
-msgid "&Replace..."
-msgstr "&Ersätt"
-
-#, fuzzy
-msgid "&Go to line..."
-msgstr " Gå till rad "
-
-#, fuzzy
-msgid "Toggle li&ne state"
-msgstr "&Markera av/på      F3"
-
-#, fuzzy
-msgid "Go to matching &bracket"
-msgstr "gå till matchande &parentes   M-b"
-
-#, fuzzy
-msgid "Find declaration"
-msgstr "Sök efter ratade patchdelar"
-
-msgid "Back from declaration"
-msgstr ""
-
-msgid "Forward to declaration"
-msgstr ""
-
-#, fuzzy
-msgid "Encod&ing..."
-msgstr "Sor&tera...                 M-t"
-
-#, fuzzy
-msgid "&Refresh screen"
-msgstr "&Rita om skärmen            C-l"
-
-#, fuzzy
-msgid "&Start record macro"
-msgstr "&Starta makroinspelning     C-r"
-
-#, fuzzy
-msgid "&Finish record macro..."
-msgstr "&Avsluta makroinspelning... C-r"
-
-#, fuzzy
-msgid "&Execute macro..."
-msgstr "&Exekvera makro...     C-a, KEY"
-
-#, fuzzy
-msgid "Delete macr&o..."
-msgstr " Ta bort makro "
-
-#, fuzzy
-msgid "'ispell' s&pell check"
-msgstr "\"ispell\"-sta&Vningskontroll C-p"
-
-#, fuzzy
-msgid "&Mail..."
-msgstr "&Filter"
-
-#, fuzzy
-msgid "Insert &literal..."
-msgstr "klistra in &Bokstavlig...   C-q"
-
-#, fuzzy
-msgid "Insert &date/time"
-msgstr "klistra in &Datum/tid          "
-
-#, fuzzy
-msgid "Format p&aragraph"
-msgstr "formatera &Paragraf         M-p"
-
-#, fuzzy
-msgid "Sor&t..."
-msgstr "&Sorteringsordning"
-
-msgid "Paste o&utput of..."
-msgstr ""
-
-#, fuzzy
-msgid "E&xternal formatter"
-msgstr "E&xtern textformaterare  F19"
-
-msgid "&General...  "
-msgstr "&Generellt..."
-
-#, fuzzy
-msgid "Save &mode..."
-msgstr "&Sparläge..."
-
-#, fuzzy
-msgid "Learn &keys..."
-msgstr "lär MC dina &Tangenter..."
-
-#, fuzzy
-msgid "Syntax &highlighting..."
-msgstr "Markera synta&x"
-
-#, fuzzy
-msgid "S&yntax file"
-msgstr "Redigera filsyntax"
-
-#, fuzzy
-msgid "&Menu file"
-msgstr "Redigera &menyfilen"
-
-msgid "&Save setup"
-msgstr "&Spara inställningar"
-
-#, fuzzy
-msgid "&File"
-msgstr "Fil"
-
-#, fuzzy
-msgid "&Edit"
-msgstr "Redigera"
-
-#, fuzzy
-msgid "&Search"
-msgstr "Sök"
-
-#, fuzzy
-msgid "&Command"
-msgstr "Kommando"
-
-#, fuzzy
-msgid "For&mat"
-msgstr "Formera"
-
-#, fuzzy
-msgid "&Options"
-msgstr " &Inställningar "
-
-msgid "None"
-msgstr "Ingen"
-
-msgid "Dynamic paragraphing"
-msgstr "Dynamiska paragrafer"
-
-msgid "Type writer wrap"
-msgstr "Radbrytning som på skrivmaskiner"
-
-# får plats?
-msgid "Word wrap line length: "
-msgstr "Linjelängd vid radbrytning : "
-
-msgid "Cursor beyond end of line"
-msgstr ""
-
-#, fuzzy
-msgid "Pers&istent selection"
-msgstr "omvänt &Urval      M-*"
-
-msgid "Synta&x highlighting"
-msgstr "Markera synta&x"
-
-msgid "Visible tabs"
-msgstr ""
-
-msgid "Visible trailing spaces"
-msgstr ""
-
-msgid "Save file &position"
-msgstr "Spara fil&position"
-
-msgid "Confir&m before saving"
-msgstr "Fr&åga innan sparande"
-
-msgid "&Return does autoindent"
-msgstr "&Retur gör automatiska indrag"
-
-# får plats?
-msgid "Tab spacing: "
-msgstr "Flikstorlek: "
-
-msgid "Fill tabs with &spaces"
-msgstr "Fyll tabbar med &blanksteg"
-
-msgid "&Backspace through tabs"
-msgstr "&Backsteg växlar mellan flikar"
-
-msgid "&Fake half tabs"
-msgstr "&Falska halva tabbar"
-
-msgid "Wrap mode"
-msgstr "Automatisk radbrytning"
-
-msgid " Editor options "
-msgstr " Redigeraralternativ "
-
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
-msgid "ButtonBar|Mark"
-msgstr ""
-
-msgid "ButtonBar|Replac"
-msgstr ""
-
-msgid "ButtonBar|Copy"
-msgstr ""
-
-msgid "ButtonBar|Move"
-msgstr ""
-
-msgid "ButtonBar|Search"
-msgstr ""
-
-msgid "ButtonBar|Delete"
-msgstr ""
-
-msgid "ButtonBar|PullDn"
-msgstr ""
-
-msgid "ButtonBar|Quit"
-msgstr ""
-
-msgid " Load syntax file "
-msgstr " Ladda syntaxfil "
+msgid "undelfs: reading inode bitmap..."
+msgstr "undelfs: läser inodbitmap..."
 
 #, c-format
 msgid ""
-" Cannot open file %s \n"
-" %s "
+" Cannot load inode bitmap from: \n"
+" %s \n"
 msgstr ""
-" Kan inte öppna fil %s \n"
-" %s "
+" Kunde inte ladda inodbitmap från: \n"
+" %s \n"
+
+msgid "undelfs: reading block bitmap..."
+msgstr "undelfs: läser blockbitmap..."
 
 #, c-format
-msgid " Error in file %s on line %d "
-msgstr " Fel i fil \"%s\" på rad %d "
+msgid ""
+" Cannot load block bitmap from: \n"
+" %s \n"
+msgstr ""
+"Kunde inte ladda in blockbitmap från: \n"
+" %s \n"
+
+msgid " vfs_info is not fs! "
+msgstr " vsf_info är inte fs! "
+
+msgid " You have to chdir to extract files first "
+msgstr " Du måste göra chdir först för att hämta filer "
+
+msgid " while iterating over blocks "
+msgstr " vid genomsökning av block "
+
+msgid "Cannot parse:"
+msgstr "Kunde inte tolka:"
+
+msgid "More parsing errors will be ignored."
+msgstr "Resten av tolkningsfelen ignoreras."
+
+msgid "Internal error:"
+msgstr " Internt fel:"
+
+msgid "Password:"
+msgstr "Lösenord:"
+
+msgid "Changes to file lost"
+msgstr "Ändringar i filen förlorade"
+
+msgid "&Cancel"
+msgstr "&Avbryt"
 
 msgid "&Set"
 msgstr "&Sätt"
@@ -1000,6 +1072,9 @@ msgstr "Listningsläge"
 msgid "user &Mini status"
 msgstr "&Ministatus"
 
+msgid "&OK"
+msgstr "&OK"
+
 msgid "&Reverse"
 msgstr "&Omvänd"
 
@@ -1128,16 +1203,9 @@ msgstr "Domän:"
 msgid "Username:"
 msgstr "Användarnamn:"
 
-msgid "Password:"
-msgstr "Lösenord:"
-
 #, c-format
 msgid "Password for \\\\%s\\%s"
 msgstr "Lösenord för \\\\%s\\%s"
-
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Varning: filen %s kunde inte hittas\n"
 
 msgid "7-bit ASCII"
 msgstr ""
@@ -1308,6 +1376,21 @@ msgstr "Redigera utökningsfilen"
 msgid " Which extension file you want to edit? "
 msgstr " Vilken utökningsfil vill du redigera? "
 
+msgid "&User"
+msgstr "&Användare"
+
+msgid "&System Wide"
+msgstr "Global &System"
+
+msgid " Menu edit "
+msgstr " Menyredigering "
+
+msgid " Which menu file do you want to edit? "
+msgstr " Vilken menyfil vill du redigera? "
+
+msgid "&Local"
+msgstr "&Lokal"
+
 msgid "Highlighting groups file edit"
 msgstr ""
 
@@ -1428,6 +1511,730 @@ msgstr " Skalet kör redan ett kommando "
 msgid "Cannot read directory contents"
 msgstr "Kan inte läsa kataloginnehåll"
 
+#, fuzzy
+msgid " Choose syntax highlighting "
+msgstr "Markera synta&x"
+
+#, fuzzy
+msgid "< Auto >"
+msgstr " Om "
+
+msgid "< Reload Current Syntax >"
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Cannot open %s for reading "
+msgstr " Kan inte öppna rör för läsning: "
+
+msgid "Error"
+msgstr "Fel"
+
+#, fuzzy, c-format
+msgid " Error reading from pipe: %s "
+msgstr " Problem att läsa från rör: "
+
+#, fuzzy, c-format
+msgid " Cannot open pipe for reading: %s "
+msgstr " Kan inte öppna rör för läsning: "
+
+#, fuzzy, c-format
+msgid " Cannot get size/permissions for %s "
+msgstr " Kan inte hämta information om storlek/rättigheter för fil: "
+
+#, fuzzy, c-format
+msgid " %s is not a regular file "
+msgstr " Kan inte visa: inte en vanlig fil "
+
+#, fuzzy, c-format
+msgid " File %s is too large "
+msgstr " Filen är för stor: "
+
+msgid " About "
+msgstr " Om "
+
+msgid ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       A user friendly text editor written\n"
+"           for the Midnight Commander.\n"
+msgstr ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright © 1996 Free Software Foundation\n"
+"\n"
+"       En användarvänlig texteditor skriven för \n"
+"               Midnight Commander. \n"
+
+msgid "Macro recursion is too deep"
+msgstr "Makrorekursion är för djup"
+
+msgid "Search"
+msgstr "Sök"
+
+msgid " File has hard-links. Detach before saving? "
+msgstr ""
+
+msgid "The file has been modified in the meantime. Save anyway?"
+msgstr ""
+
+msgid " Error writing to pipe: "
+msgstr " Fel vid skrivning till rör: "
+
+msgid " Cannot open pipe for writing: "
+msgstr " Kan inte öppna rör för skrivning: "
+
+#, fuzzy, c-format
+msgid " Cannot open file for writing: %s "
+msgstr " Kan inte öppna rör för skrivning: "
+
+#, fuzzy
+msgid "&Quick save"
+msgstr "Snabbspara"
+
+#, fuzzy
+msgid "&Safe save"
+msgstr "Säkert sparande "
+
+msgid "&Do backups with following extension:"
+msgstr ""
+
+msgid "Check &POSIX new line"
+msgstr ""
+
+msgid " Edit Save Mode "
+msgstr " Redigera sparläge "
+
+msgid "The file you are saving is not finished with a newline"
+msgstr ""
+
+#, fuzzy
+msgid "C&ontinue"
+msgstr "Fortsätt"
+
+msgid "&Do not change"
+msgstr ""
+
+msgid "&Unix format (LF)"
+msgstr ""
+
+msgid "&Windows/DOS format (CR LF)"
+msgstr ""
+
+msgid "&Macintosh format (CR)"
+msgstr ""
+
+msgid "Change line breaks to:"
+msgstr ""
+
+msgid " Enter file name: "
+msgstr " Ange filnamn: "
+
+msgid " Save As "
+msgstr " Spara som "
+
+msgid " A file already exists with this name. "
+msgstr " Det finns redan en fil med det namnet. "
+
+#, fuzzy
+msgid "&Overwrite"
+msgstr "Skriv över"
+
+msgid " Cannot save file. "
+msgstr " Fel vid försök att spara fil. "
+
+msgid " Delete macro "
+msgstr " Ta bort makro "
+
+msgid " Cannot open temp file "
+msgstr " Kan inte öppna temporär fil "
+
+msgid " Cannot open macro file "
+msgstr " Kan inte öppna makrofil "
+
+msgid " Cannot overwrite macro file "
+msgstr " Kan inte skriva över makrofil "
+
+msgid " Save macro "
+msgstr " Spara makro "
+
+msgid " Press the macro's new hotkey: "
+msgstr " Tryck ned makrots nya snabbtangent: "
+
+msgid " Press macro hotkey: "
+msgstr " Tryck snabbtangent för makro: "
+
+msgid " Load macro "
+msgstr " Ladda makro "
+
+msgid " Confirm save file? : "
+msgstr " Bekräfta spara? : "
+
+msgid " Save file "
+msgstr " Spara fil "
+
+msgid "&Save"
+msgstr "&Spara"
+
+msgid ""
+" Current text was modified without a file save. \n"
+" Continue discards these changes. "
+msgstr ""
+" Den aktuella texten har modifierats men inte sparats. \n"
+" Fortsätt och förlora de ändringar som gjorts."
+
+msgid "Syntax file edit"
+msgstr "Redigera filsyntax"
+
+msgid " Which syntax file you want to edit? "
+msgstr " Vilken syntaxfil vill du redigera? "
+
+msgid " Load "
+msgstr " Öppna "
+
+msgid " Block is large, you may not be able to undo this action. "
+msgstr " Blocket är stort, det kanske inte går att ångra operationen. "
+
+#, fuzzy
+msgid "Replace"
+msgstr "&Ersätt"
+
+msgid " Replace "
+msgstr " Ersätt "
+
+#, c-format
+msgid " %ld replacements made. "
+msgstr " %ld strängar ersattes. "
+
+# ?
+# får plats
+msgid "Quit"
+msgstr "Avsluta"
+
+# stämmer detta semantiskt i sammanhanget alltså?
+msgid " File was modified, Save with exit? "
+msgstr " Filen har modifierats, spara och avsluta? "
+
+# stämmer detta semantiskt i sammanhanget?
+#, fuzzy
+msgid "&Cancel quit"
+msgstr "Avbryt avsluta"
+
+#, fuzzy
+msgid " Error "
+msgstr "Fel"
+
+msgid " This function is not implemented. "
+msgstr ""
+
+msgid " Copy to clipboard "
+msgstr " Kopiera till klippbordet "
+
+msgid " Unable to save to file. "
+msgstr " Kunde inte spara till filen. "
+
+msgid " Cut to clipboard "
+msgstr " Klipp ut till klippbordet "
+
+msgid " Goto line "
+msgstr " Gå till rad "
+
+msgid " Enter line: "
+msgstr " Ange radnummer: "
+
+msgid " Save Block "
+msgstr " Spara block "
+
+msgid " Insert File "
+msgstr " Infoga fil "
+
+msgid " Cannot insert file. "
+msgstr " Kan inte infoga fil. "
+
+msgid " Sort block "
+msgstr " Sortera block "
+
+# varför är texten lokaliserad om den inte skall översättas?
+msgid " You must first highlight a block of text. "
+msgstr " Du måste först markera ett textblock. "
+
+msgid " Run Sort "
+msgstr " Kör \"sort\" "
+
+msgid " Enter sort options (see manpage) separated by whitespace: "
+msgstr " Ange in flaggor för 'sort' (see mansidan) skilda av blanktecken: "
+
+msgid " Sort "
+msgstr " Sortera "
+
+msgid " Cannot execute sort command "
+msgstr " Kan inte köra kommandot \"sort\" "
+
+msgid " Sort returned non-zero: "
+msgstr " Sortera returnerade icke-nollor: "
+
+msgid "Paste output of external command"
+msgstr ""
+
+#, fuzzy
+msgid "Enter shell command(s):"
+msgstr " Ange kommandoetikett: "
+
+#, fuzzy
+msgid "External command"
+msgstr "Annat kommando"
+
+#, fuzzy
+msgid "Cannot execute command"
+msgstr " Kan inte köra kommandot \"sort\" "
+
+msgid "Error creating script:"
+msgstr "Fel vid skapande av skript:"
+
+msgid "Error reading script:"
+msgstr "Fel vid läsning av skript:"
+
+msgid "Error closing script:"
+msgstr "Fel vid stängning av skript:"
+
+msgid "Script created:"
+msgstr "Skript skapat:"
+
+msgid "Process block"
+msgstr "Processblock"
+
+msgid " Copies to"
+msgstr " Kopior till"
+
+msgid " Subject"
+msgstr " Ämne"
+
+msgid " To"
+msgstr " Till"
+
+msgid " mail -s <subject> -c <cc> <to>"
+msgstr " mail -s <ämne> -c <cc> <mottagare>"
+
+msgid " Mail "
+msgstr " Brev "
+
+msgid " Insert Literal "
+msgstr " Klistra in bokstavlig "
+
+msgid " Press any key: "
+msgstr " Tryck valfri tangent:"
+
+msgid " Execute Macro "
+msgstr " Kör makro "
+
+msgid "All charsets"
+msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "Endast &Hela ord"
+
+#, fuzzy
+msgid "In se&lection"
+msgstr "omvänt &Urval      M-*"
+
+msgid "&Backwards"
+msgstr "&Bakåt"
+
+msgid "case &Sensitive"
+msgstr "&Skilj gemener/versaler"
+
+msgid " Enter replacement string:"
+msgstr " Ange ersättningssträng:"
+
+msgid " Enter search string:"
+msgstr " Ange söksträng:"
+
+#, fuzzy
+msgid "&Find all"
+msgstr "Sök Fil"
+
+msgid "Cancel"
+msgstr "Avbryt"
+
+msgid "&Skip"
+msgstr "&Hoppa över"
+
+msgid "A&ll"
+msgstr "a&Lla"
+
+msgid "&Replace"
+msgstr "&Ersätt"
+
+msgid " Replace with: "
+msgstr " Ersätt med: "
+
+msgid " Confirm replace "
+msgstr " Bekräfta ersättningar "
+
+msgid "&Dismiss"
+msgstr "&Försvinn"
+
+#, c-format
+msgid ""
+"File \"%s\" is already being edited\n"
+"User: %s\n"
+"Process ID: %d"
+msgstr ""
+
+msgid "File locked"
+msgstr ""
+
+msgid "&Grab lock"
+msgstr ""
+
+msgid "&Ignore lock"
+msgstr ""
+
+msgid "&Open file..."
+msgstr "&Öppna med..."
+
+#, fuzzy
+msgid "&New"
+msgstr "&Namn"
+
+#, fuzzy
+msgid "Save &as..."
+msgstr "&Spara inställningar"
+
+#, fuzzy
+msgid "&Insert file..."
+msgstr "&Infoga fil...    F15"
+
+#, fuzzy
+msgid "Cop&y to file..."
+msgstr "kopiera till &Fil... C-f"
+
+# #>>--<<
+#, fuzzy
+msgid "&User menu..."
+msgstr "anv&Ändarmeny...  F11"
+
+#, fuzzy
+msgid "A&bout..."
+msgstr "&Layout..."
+
+msgid "&Quit"
+msgstr "&Avsluta"
+
+msgid "&Undo"
+msgstr ""
+
+#, fuzzy
+msgid "&Toggle ins/overw"
+msgstr "&Infoga/skriv över Ins"
+
+#, fuzzy
+msgid "To&ggle mark"
+msgstr "&Nollställ markerad"
+
+msgid "&Mark columns"
+msgstr ""
+
+#, fuzzy
+msgid "Mark &all"
+msgstr "&Markera"
+
+msgid "Unmar&k"
+msgstr ""
+
+#, fuzzy
+msgid "Cop&y"
+msgstr "Kopiera"
+
+#, fuzzy
+msgid "Mo&ve"
+msgstr "Flytta"
+
+msgid "&Delete"
+msgstr "&Ta bort"
+
+#, fuzzy
+msgid "Co&py to clipfile"
+msgstr "kopiera till &Fil... "
+
+#, fuzzy
+msgid "&Cut to clipfile"
+msgstr "&Gå till rad...             M-l"
+
+#, fuzzy
+msgid "Pa&ste from clipfile"
+msgstr "&Gå till rad...             M-l"
+
+msgid "&Beginning"
+msgstr ""
+
+#, fuzzy
+msgid "&End"
+msgstr "&Inod"
+
+#, fuzzy
+msgid "&Search..."
+msgstr "Sök"
+
+#, fuzzy
+msgid "Search &again"
+msgstr "sök i&Gen          F17"
+
+#, fuzzy
+msgid "&Replace..."
+msgstr "&Ersätt"
+
+#, fuzzy
+msgid "&Toggle bookmark"
+msgstr "&Markera av/på      F3"
+
+#, fuzzy
+msgid "&Next bookmark"
+msgstr "S&Ätt markerad"
+
+#, fuzzy
+msgid "&Prev bookmark"
+msgstr "Sor&tera...                 M-t"
+
+#, fuzzy
+msgid "&Flush bookmark"
+msgstr "&Brev...                       "
+
+#, fuzzy
+msgid "&Go to line..."
+msgstr " Gå till rad "
+
+#, fuzzy
+msgid "&Toggle line state"
+msgstr "&Markera av/på      F3"
+
+#, fuzzy
+msgid "Go to matching &bracket"
+msgstr "gå till matchande &parentes   M-b"
+
+#, fuzzy
+msgid "&Find declaration"
+msgstr "Sök efter ratade patchdelar"
+
+#, fuzzy
+msgid "Back from &declaration"
+msgstr "Sök efter ratade patchdelar"
+
+#, fuzzy
+msgid "For&ward to declaration"
+msgstr "Sök efter ratade patchdelar"
+
+#, fuzzy
+msgid "Encod&ing..."
+msgstr "Sor&tera...                 M-t"
+
+#, fuzzy
+msgid "&Refresh screen"
+msgstr "&Rita om skärmen            C-l"
+
+#, fuzzy
+msgid "&Start record macro"
+msgstr "&Starta makroinspelning     C-r"
+
+#, fuzzy
+msgid "Finis&h record macro..."
+msgstr "&Avsluta makroinspelning... C-r"
+
+#, fuzzy
+msgid "&Execute macro..."
+msgstr "&Exekvera makro...     C-a, KEY"
+
+#, fuzzy
+msgid "Delete macr&o..."
+msgstr " Ta bort makro "
+
+#, fuzzy
+msgid "'ispell' s&pell check"
+msgstr "\"ispell\"-sta&Vningskontroll C-p"
+
+#, fuzzy
+msgid "&Mail..."
+msgstr "&Filter"
+
+#, fuzzy
+msgid "Insert &literal..."
+msgstr "klistra in &Bokstavlig...   C-q"
+
+#, fuzzy
+msgid "Insert &date/time"
+msgstr "klistra in &Datum/tid          "
+
+#, fuzzy
+msgid "&Format paragraph"
+msgstr "formatera &Paragraf         M-p"
+
+#, fuzzy
+msgid "&Sort..."
+msgstr "&Sorteringsordning"
+
+msgid "&Paste output of..."
+msgstr ""
+
+#, fuzzy
+msgid "&External formatter"
+msgstr "E&xtern textformaterare  F19"
+
+msgid "&General...  "
+msgstr "&Generellt..."
+
+#, fuzzy
+msgid "Save &mode..."
+msgstr "&Sparläge..."
+
+#, fuzzy
+msgid "Learn &keys..."
+msgstr "lär MC dina &Tangenter..."
+
+#, fuzzy
+msgid "Syntax &highlighting..."
+msgstr "Markera synta&x"
+
+#, fuzzy
+msgid "S&yntax file"
+msgstr "Redigera filsyntax"
+
+#, fuzzy
+msgid "&Menu file"
+msgstr "Redigera &menyfilen"
+
+msgid "&Save setup"
+msgstr "&Spara inställningar"
+
+#, fuzzy
+msgid "&File"
+msgstr "Fil"
+
+#, fuzzy
+msgid "&Edit"
+msgstr "Redigera"
+
+#, fuzzy
+msgid "&Search"
+msgstr "Sök"
+
+#, fuzzy
+msgid "&Command"
+msgstr "Kommando"
+
+#, fuzzy
+msgid "For&mat"
+msgstr "Formera"
+
+#, fuzzy
+msgid "&Options"
+msgstr " &Inställningar "
+
+msgid "None"
+msgstr "Ingen"
+
+msgid "Dynamic paragraphing"
+msgstr "Dynamiska paragrafer"
+
+msgid "Type writer wrap"
+msgstr "Radbrytning som på skrivmaskiner"
+
+# får plats?
+msgid "Word wrap line length: "
+msgstr "Linjelängd vid radbrytning : "
+
+msgid "Cursor beyond end of line"
+msgstr ""
+
+#, fuzzy
+msgid "Pers&istent selection"
+msgstr "omvänt &Urval      M-*"
+
+msgid "Synta&x highlighting"
+msgstr "Markera synta&x"
+
+msgid "Visible tabs"
+msgstr ""
+
+msgid "Visible trailing spaces"
+msgstr ""
+
+msgid "Save file &position"
+msgstr "Spara fil&position"
+
+msgid "Confir&m before saving"
+msgstr "Fr&åga innan sparande"
+
+msgid "&Return does autoindent"
+msgstr "&Retur gör automatiska indrag"
+
+# får plats?
+msgid "Tab spacing: "
+msgstr "Flikstorlek: "
+
+msgid "Fill tabs with &spaces"
+msgstr "Fyll tabbar med &blanksteg"
+
+msgid "&Backspace through tabs"
+msgstr "&Backsteg växlar mellan flikar"
+
+msgid "&Fake half tabs"
+msgstr "&Falska halva tabbar"
+
+msgid "Wrap mode"
+msgstr "Automatisk radbrytning"
+
+msgid " Editor options "
+msgstr " Redigeraralternativ "
+
+msgid "ButtonBar|Help"
+msgstr ""
+
+msgid "ButtonBar|Save"
+msgstr ""
+
+msgid "ButtonBar|Mark"
+msgstr ""
+
+msgid "ButtonBar|Replac"
+msgstr ""
+
+msgid "ButtonBar|Copy"
+msgstr ""
+
+msgid "ButtonBar|Move"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Delete"
+msgstr ""
+
+msgid "ButtonBar|PullDn"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
+
+msgid " Load syntax file "
+msgstr " Ladda syntaxfil "
+
+#, c-format
+msgid ""
+" Cannot open file %s \n"
+" %s "
+msgstr ""
+" Kan inte öppna fil %s \n"
+" %s "
+
+#, c-format
+msgid " Error in file %s on line %d "
+msgstr " Fel i fil \"%s\" på rad %d "
+
 # ändra inte översättningen om raderna blir längre.
 msgid ""
 " The Commander can't change to the directory that \n"
@@ -1440,10 +2247,6 @@ msgstr ""
 " En tänkbar förklaring är att du har raderat din   \n"
 " arbetskatalog, eller gett dig själv extra         \n"
 " rättigheter mha \"su\"-kommandot?                 "
-
-#, c-format
-msgid "Press any key to continue..."
-msgstr "Tryck valfri tangent för att fortsätta..."
 
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
@@ -1793,9 +2596,6 @@ msgstr "%o %f \"%s\"%m"
 msgid "%o %d %f%m"
 msgstr "%o %d %f%m"
 
-msgid "file"
-msgstr "fil"
-
 msgid "files"
 msgstr "filer"
 
@@ -2065,6 +2865,10 @@ msgstr ""
 
 msgid "ButtonBar|Prev"
 msgstr ""
+
+# >>---<<
+msgid "&Move"
+msgstr "fl&Ytta"
 
 msgid "&Remove"
 msgstr "ta b&Ort"
@@ -2416,6 +3220,10 @@ msgstr " Visa fil "
 #, fuzzy
 msgid "&Filtered view"
 msgstr " Filtrerad vy "
+
+#, fuzzy
+msgid "&Copy"
+msgstr "Kopiera"
 
 msgid "C&hmod"
 msgstr ""
@@ -2843,29 +3651,6 @@ msgstr "Det angivna formatet ser ogiltigt ut, faller tillbaka till standard."
 msgid " Do you really want to execute? "
 msgstr " Vill du verkligen exekvera? "
 
-msgid " Not implemented yet "
-msgstr ""
-
-msgid " Num of replace tokens not equal to num of found tokens "
-msgstr ""
-
-#, fuzzy, c-format
-msgid " Invalid token number %d "
-msgstr " Ogiltig målmask "
-
-#, fuzzy
-msgid "Normal"
-msgstr "Formera"
-
-msgid "&Regular expression"
-msgstr "&Reguljära uttryck"
-
-msgid "Hexadecimal"
-msgstr ""
-
-msgid "Wildcard search"
-msgstr ""
-
 #, fuzzy
 msgid "Choose codepage"
 msgstr " Välj teckentabell för inmatning "
@@ -2878,18 +3663,6 @@ msgid ""
 "Cannot save file %s:\n"
 "%s"
 msgstr " Fel vid försök att spara fil. "
-
-#, c-format
-msgid ""
-"Unable to load '%s' skin.\n"
-"Default skin has been loaded"
-msgstr ""
-
-#, c-format
-msgid ""
-"Unable to parse '%s' skin.\n"
-"Default skin has been loaded"
-msgstr ""
 
 msgid ""
 "GNU Midnight Commander is already\n"
@@ -3003,277 +3776,6 @@ msgstr ""
 "Kan inte skriva till filen %s:\n"
 "%s\n"
 
-msgid "Function key 1"
-msgstr "Funktionstangent 1"
-
-msgid "Function key 2"
-msgstr "Funktionstangent 2"
-
-msgid "Function key 3"
-msgstr "Funktionstangent 3"
-
-msgid "Function key 4"
-msgstr "Funktionstangent 4"
-
-msgid "Function key 5"
-msgstr "Funktionstangent 5"
-
-msgid "Function key 6"
-msgstr "Funktionstangent 6"
-
-msgid "Function key 7"
-msgstr "Funktionstangent 7"
-
-msgid "Function key 8"
-msgstr "Funktionstangent 8"
-
-msgid "Function key 9"
-msgstr "Funktionstangent 9"
-
-msgid "Function key 10"
-msgstr "Funktionstangent 10"
-
-msgid "Function key 11"
-msgstr "Funktionstangent 11"
-
-msgid "Function key 12"
-msgstr "Funktionstangent 12"
-
-msgid "Function key 13"
-msgstr "Funktionstangent 13"
-
-msgid "Function key 14"
-msgstr "Funktionstangent 14"
-
-msgid "Function key 15"
-msgstr "Funktionstangent 15"
-
-msgid "Function key 16"
-msgstr "Funktionstangent 16"
-
-msgid "Function key 17"
-msgstr "Funktionstangent 17"
-
-msgid "Function key 18"
-msgstr "Funktionstangent 18"
-
-msgid "Function key 19"
-msgstr "Funktionstangent 19"
-
-msgid "Function key 20"
-msgstr "Funktionstangent 20"
-
-msgid "Backspace key"
-msgstr "Backspace"
-
-msgid "End key"
-msgstr "End"
-
-msgid "Up arrow key"
-msgstr "Upppåtpil"
-
-msgid "Down arrow key"
-msgstr "Neråtpil"
-
-msgid "Left arrow key"
-msgstr "Vänsterpil"
-
-msgid "Right arrow key"
-msgstr "Högerpil"
-
-msgid "Home key"
-msgstr "Home"
-
-msgid "Page Down key"
-msgstr "Page Down"
-
-msgid "Page Up key"
-msgstr "Page Up"
-
-msgid "Insert key"
-msgstr "Insert"
-
-msgid "Delete key"
-msgstr "Delete"
-
-msgid "Completion/M-tab"
-msgstr "Kompletera/M-tab"
-
-msgid "+ on keypad"
-msgstr "+ på numeriska tangentbordet"
-
-msgid "- on keypad"
-msgstr "- på numeriska tangentbordet"
-
-msgid "Slash on keypad"
-msgstr "Snedstreck, numeriska"
-
-msgid "* on keypad"
-msgstr "* på numeriska tangentbordet"
-
-#, fuzzy
-msgid "Escape key"
-msgstr "Snedstreck, numeriska"
-
-msgid "Left arrow keypad"
-msgstr "Vänsterpil, numeriska"
-
-msgid "Right arrow keypad"
-msgstr "Högerpil, numeriska"
-
-msgid "Up arrow keypad"
-msgstr "Uppåtpil, numeriska"
-
-msgid "Down arrow keypad"
-msgstr "Neråtpil, numeriska"
-
-msgid "Home on keypad"
-msgstr "Home, numeriska"
-
-msgid "End on keypad"
-msgstr "End, numeriska"
-
-msgid "Page Down keypad"
-msgstr "Page Down, numeriska"
-
-msgid "Page Up keypad"
-msgstr "Page Up, numeriska"
-
-msgid "Insert on keypad"
-msgstr "Insert, numeriska"
-
-msgid "Delete on keypad"
-msgstr "Delete, numeriska"
-
-msgid "Enter on keypad"
-msgstr "Enter, numeriska"
-
-#, fuzzy
-msgid "Function key 21"
-msgstr "Funktionstangent 1"
-
-#, fuzzy
-msgid "Function key 22"
-msgstr "Funktionstangent 2"
-
-#, fuzzy
-msgid "Function key 23"
-msgstr "Funktionstangent 2"
-
-#, fuzzy
-msgid "Function key 24"
-msgstr "Funktionstangent 2"
-
-msgid "Plus"
-msgstr ""
-
-#, fuzzy
-msgid "Minus"
-msgstr "Meny"
-
-msgid "Asterisk"
-msgstr ""
-
-msgid "Dot"
-msgstr ""
-
-msgid "Less than"
-msgstr ""
-
-msgid "Great than"
-msgstr ""
-
-msgid "Equal"
-msgstr ""
-
-#, fuzzy
-msgid "Comma"
-msgstr "Kommando"
-
-msgid "Apostrophe"
-msgstr ""
-
-#, fuzzy
-msgid "Colon"
-msgstr "Summa"
-
-msgid "Exclamation mark"
-msgstr ""
-
-msgid "Question mark"
-msgstr ""
-
-#, fuzzy
-msgid "Ampersand"
-msgstr "b&Ifoga"
-
-msgid "Dollar sign"
-msgstr ""
-
-msgid "Quotation mark"
-msgstr ""
-
-#, fuzzy
-msgid "Caret"
-msgstr "Mål"
-
-msgid "Tilda"
-msgstr ""
-
-#, fuzzy
-msgid "Prime"
-msgstr "Tidigare"
-
-#, fuzzy
-msgid "Underline"
-msgstr " Ange radnummer: "
-
-msgid "Understrike"
-msgstr ""
-
-msgid "Pipe"
-msgstr ""
-
-#, fuzzy
-msgid "Enter"
-msgstr "ägare"
-
-#, fuzzy
-msgid "Tab key"
-msgstr "+ på numeriska tangentbordet"
-
-#, fuzzy
-msgid "Space key"
-msgstr "Snedstreck, numeriska"
-
-#, fuzzy
-msgid "Slash key"
-msgstr "Snedstreck, numeriska"
-
-#, fuzzy
-msgid "Backslash key"
-msgstr "Backspace"
-
-msgid "Number sign #"
-msgstr ""
-
-msgid "Ctrl"
-msgstr ""
-
-msgid "Alt"
-msgstr ""
-
-msgid "Shift"
-msgstr ""
-
-#, c-format
-msgid ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-msgstr ""
-"Skärmstorleken %d×%d stöds inte.\n"
-"Kontrollera miljövariabeln TERM.\n"
-
 msgid " Format error on file Extensions File "
 msgstr " Felaktigt format på filen \"Extensions File\""
 
@@ -3314,42 +3816,6 @@ msgstr "Inga lämpliga poster funna i %s "
 
 msgid " User menu "
 msgstr " Användarmeny "
-
-msgid "%b %e  %Y"
-msgstr "%e %b  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%e %b %H.%M"
-
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s är inte en katalog\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "Katalogen %s ägs inte av dig\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "Kan inte ställa in rätt rättigheter för katalogen %s\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr "Kan inte skapa temporär katalog %s: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "Temporära filer kommer att skapas i %s\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "Temporära filer kommer inte att skapas\n"
-
-msgid " Pipe failed "
-msgstr " Pipe misslyckades"
-
-msgid " Dup failed "
-msgstr " Dup misslyckades"
 
 #, fuzzy, c-format
 msgid ""
@@ -3474,454 +3940,6 @@ msgstr " Historik "
 
 msgid "Background process:"
 msgstr "Bakgrundsprocess:"
-
-#, c-format
-msgid ""
-"Cannot open cpio archive\n"
-"%s"
-msgstr ""
-"Kan inte öppna cpio-arkivet\n"
-"%s"
-
-#, c-format
-msgid ""
-"Premature end of cpio archive\n"
-"%s"
-msgstr ""
-"För tidigt slut på cpio-arkivet\n"
-"%s"
-
-#, c-format
-msgid ""
-"Inconsistent hardlinks of\n"
-"%s\n"
-"in cpio archive\n"
-"%s"
-msgstr ""
-"Felaktiga hårda länkar för\n"
-"%s\n"
-"i cpio-arkivet\n"
-"%s"
-
-#, c-format
-msgid "%s contains duplicate entries! Skipping!"
-msgstr "%s innehåller dubbla poster! Hoppar över den!"
-
-#, c-format
-msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"Felaktig cpio-header påträffad i\n"
-"%s"
-
-# ?
-#, c-format
-msgid ""
-"Unexpected end of file\n"
-"%s"
-msgstr ""
-"Oväntat filslut\n"
-"%s"
-
-#, c-format
-msgid "Directory cache expired for %s"
-msgstr "Katalogcache för gammal för %s"
-
-msgid "Starting linear transfer..."
-msgstr "Startar linjär överföring..."
-
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
-msgstr "%s: %s: %s %3d%% (%lu byte överförda)"
-
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
-msgstr "%s: %s: %s %lu byte överförda"
-
-msgid "Getting file"
-msgstr "Hämtar fil: "
-
-#, c-format
-msgid ""
-"Cannot open %s archive\n"
-"%s"
-msgstr ""
-"Kan inte öppna %s arkivet\n"
-"%s"
-
-msgid "Inconsistent extfs archive"
-msgstr "Inkonsistent extfsfil"
-
-#, c-format
-msgid "fish: Disconnecting from %s"
-msgstr "fish: Kopplar ned från %s"
-
-msgid "fish: Waiting for initial line..."
-msgstr "fish: Väntar på första raden..."
-
-msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr "Kan inte göra lösenords autenticerade anslutningar för närvarande."
-
-msgid " fish: Password required for "
-msgstr " fish: Lösenord behövs för "
-
-msgid "fish: Sending password..."
-msgstr "fish: Sänder lösenord..."
-
-msgid "fish: Sending initial line..."
-msgstr "fish: Sänder första raden..."
-
-msgid "fish: Handshaking version..."
-msgstr "fish: Handskakning version..."
-
-msgid "fish: Setting up current directory..."
-msgstr "fish: Sätter upp aktuell katalog..."
-
-#, c-format
-msgid "fish: Connected, home %s."
-msgstr "fish: Ansluten, hem %s."
-
-#, c-format
-msgid "fish: Reading directory %s..."
-msgstr "fish: Läser katalog %s..."
-
-#, c-format
-msgid "%s: done."
-msgstr "%s: klar."
-
-#, c-format
-msgid "%s: failure"
-msgstr "%s: fel"
-
-#, c-format
-msgid "fish: store %s: sending command..."
-msgstr "fish: lagrar %s: sänder kommando..."
-
-msgid "fish: Local read failed, sending zeros"
-msgstr "fish: Lokal läsning misslyckades, sänder nollor"
-
-#, c-format
-msgid "fish: storing %s %d (%lu)"
-msgstr "fish: lagrar %s %d (%lu)"
-
-msgid "zeros"
-msgstr "nollor"
-
-msgid "Aborting transfer..."
-msgstr "Avbryter överföringen..."
-
-msgid "Error reported after abort."
-msgstr "Fel rapporterades efter avslutningen."
-
-msgid "Aborted transfer would be successful."
-msgstr "Avbruten överföring skulle ha varit lyckad."
-
-# ???
-#, c-format
-msgid "ftpfs: Disconnecting from %s"
-msgstr "ftpfs: Kopplar ned från %s"
-
-msgid " FTP: Password required for "
-msgstr " FTP: Lösenord behövs för "
-
-msgid "ftpfs: sending login name"
-msgstr "ftpfs: sänder loginnamn"
-
-msgid "ftpfs: sending user password"
-msgstr "ftpfs: sänder användarlösenord"
-
-#, fuzzy, c-format
-msgid "FTP: Account required for user %s"
-msgstr " FTP: Lösenord behövs för "
-
-#, fuzzy
-msgid "Account:"
-msgstr "Summa"
-
-#, fuzzy
-msgid "ftpfs: sending user account"
-msgstr "ftpfs: sänder användarlösenord"
-
-msgid "ftpfs: logged in"
-msgstr "ftpfs: Inloggad"
-
-#, c-format
-msgid "ftpfs: Login incorrect for user %s "
-msgstr "ftpfs: Inloggningen felaktig för användare %s "
-
-# incomplete
-msgid "ftpfs: Invalid host name."
-msgstr "ftpfs: Ogiltigt värdnamn."
-
-#, c-format
-msgid "ftpfs: %s"
-msgstr ""
-
-#, c-format
-msgid "ftpfs: making connection to %s"
-msgstr "ftpfs: skapar anslutning till %s"
-
-msgid "ftpfs: connection interrupted by user"
-msgstr "ftpfs: anslutningen har avbrutits av användaren"
-
-#, c-format
-msgid "ftpfs: connection to server failed: %s"
-msgstr "ftpfs: misslyckades att ansluta till servern: %s"
-
-#, c-format
-msgid "Waiting to retry... %d (Control-C to cancel)"
-msgstr "Försöker igen... %d (Control-C för att avbryta)"
-
-#, fuzzy
-msgid "ftpfs: invalid address family"
-msgstr "ftpfs: Ogiltig värdadress."
-
-# incomplete
-#, fuzzy, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: kan inte sätta upp passivt läge"
-
-#, fuzzy, c-format
-msgid "ftpfs: could not create socket: %s"
-msgstr " Kan inte skapa uttag: %s "
-
-# incomplete
-msgid "ftpfs: could not setup passive mode"
-msgstr "ftpfs: kan inte sätta upp passivt läge"
-
-msgid "ftpfs: aborting transfer."
-msgstr "ftpfs: avbryter överföringen."
-
-#, c-format
-msgid "ftpfs: abort error: %s"
-msgstr "ftpfs: abort fel: %s"
-
-msgid "ftpfs: abort failed"
-msgstr "ftpfs: abort kommandot misslyckades"
-
-msgid "ftpfs: CWD failed."
-msgstr "ftpfs: CWD kommandot misslyckades."
-
-msgid "ftpfs: couldn't resolve symlink"
-msgstr "ftpfs: kunde inte hitta filen som den symboliska länken pekar på"
-
-msgid "Resolving symlink..."
-msgstr "Analyserar en symbolisk länk..."
-
-#, c-format
-msgid "ftpfs: Reading FTP directory %s... %s%s"
-msgstr "ftpfs: Läser FTP-katalogen %s... %s%s"
-
-msgid "(strict rfc959)"
-msgstr "(strikt rfc959)"
-
-msgid "(chdir first)"
-msgstr "(chdir först)"
-
-msgid "ftpfs: failed; nowhere to fallback to"
-msgstr "ftpfs: misslyckades: det finns ingenstans att falla tillbaka på"
-
-#, c-format
-msgid "ftpfs: storing file %lu (%lu)"
-msgstr "ftpfs: lagrar fil %lu (%lu)"
-
-msgid ""
-"~/.netrc file has incorrect mode.\n"
-"Remove password or correct mode."
-msgstr ""
-"~/.netrc filen har inte korrekt rättigheter. \n"
-"Ta bort lösenordet från filen, eller ge filen korrekta rättigheter."
-
-msgid " MCFS "
-msgstr " MCFS "
-
-msgid " The server does not support this version "
-msgstr " Servern stöder inte den här versionen"
-
-msgid ""
-" The remote server is not running on a system port \n"
-" you need a password to log in, but the information may \n"
-" not be safe on the remote side.  Continue? \n"
-msgstr ""
-" Fjärrservern är inte aktiv på en systemport. \n"
-" För att kunna logga in måste du ange ett lösenord, men det går inte \n"
-" att garantera att detta är säkert. Vill du fortsätta? \n"
-
-msgid " MCFS Password required "
-msgstr " Behöver MCFS lösenord "
-
-msgid " Invalid password "
-msgstr " Ogiltigt lösenord "
-
-#, c-format
-msgid " Cannot locate hostname: %s "
-msgstr " Kan inte hitta värden: %s "
-
-#, c-format
-msgid " Cannot create socket: %s "
-msgstr " Kan inte skapa uttag: %s "
-
-#, c-format
-msgid " Cannot connect to server: %s "
-msgstr "Kan inte ansluta till värd: %s"
-
-msgid " Too many open connections "
-msgstr " För många aktiva anslutningar "
-
-#, c-format
-msgid ""
-"Warning: Invalid line in %s:\n"
-"%s\n"
-msgstr ""
-"Varning: Ogiltig rad i %s:\n"
-"%s\n"
-
-#, c-format
-msgid ""
-"Warning: Invalid flag %c in %s:\n"
-"%s\n"
-msgstr ""
-"Varning: Flaggan %c i %s är ogiltig:\n"
-"%s\n"
-
-#, c-format
-msgid ""
-" reconnect to %s failed\n"
-" "
-msgstr ""
-" misslyckades att koppla upp till %s\n"
-" "
-
-msgid " Authentication failed "
-msgstr " Autentisering misslyckades "
-
-#, c-format
-msgid " Error %s creating directory %s "
-msgstr " %s skapar katalog %s"
-
-#, c-format
-msgid " Error %s removing directory %s "
-msgstr " %s raderar %s"
-
-#, c-format
-msgid " %s opening remote file %s "
-msgstr " %s öppnar fjärrfil %s "
-
-#, c-format
-msgid " %s removing remote file %s "
-msgstr " %s tar bort fjärrfil %s "
-
-#, c-format
-msgid " %s renaming files\n"
-msgstr " %s byter namn på filerna\n"
-
-#, c-format
-msgid ""
-"Cannot open tar archive\n"
-"%s"
-msgstr ""
-"Kan inte öppna tarfilen\n"
-"%s"
-
-msgid "Inconsistent tar archive"
-msgstr "Inkonsistensfel i tararkivet"
-
-# ?
-msgid "Unexpected EOF on archive file"
-msgstr "Oväntad EOF i arkivfilen"
-
-#, c-format
-msgid ""
-"Hmm,...\n"
-"%s\n"
-"doesn't look like a tar archive."
-msgstr ""
-"Hmm,...\n"
-"%s\n"
-"ser inte ut att vara en tarfil"
-
-msgid " undelfs: error "
-msgstr " undelfs: fel "
-
-msgid " not enough memory "
-msgstr " för lite minne "
-
-msgid " while allocating block buffer "
-msgstr " vid allokerandet av blockbuffer"
-
-#, c-format
-msgid " open_inode_scan: %d "
-msgstr " open_inode_scan: %d "
-
-#, c-format
-msgid " while starting inode scan %d "
-msgstr " vid startandet av inodsökning %d"
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: laddar information för raderade filer %d inoder"
-
-#, c-format
-msgid " while calling ext2_block_iterate %d "
-msgstr " vid anrop av ext2_block_iterate %d "
-
-msgid " no more memory while reallocating array "
-msgstr " slut på minne vid allokering av fält "
-
-#, c-format
-msgid " while doing inode scan %d "
-msgstr " under inodsökning %d"
-
-msgid " Ext2lib error "
-msgstr " Ext2lib-fel "
-
-#, c-format
-msgid " Cannot open file %s "
-msgstr " Kan inte öppna fil %s"
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: läser inodbitmap..."
-
-#, c-format
-msgid ""
-" Cannot load inode bitmap from: \n"
-" %s \n"
-msgstr ""
-" Kunde inte ladda inodbitmap från: \n"
-" %s \n"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: läser blockbitmap..."
-
-#, c-format
-msgid ""
-" Cannot load block bitmap from: \n"
-" %s \n"
-msgstr ""
-"Kunde inte ladda in blockbitmap från: \n"
-" %s \n"
-
-msgid " vfs_info is not fs! "
-msgstr " vsf_info är inte fs! "
-
-msgid " You have to chdir to extract files first "
-msgstr " Du måste göra chdir först för att hämta filer "
-
-msgid " while iterating over blocks "
-msgstr " vid genomsökning av block "
-
-msgid "Cannot parse:"
-msgstr "Kunde inte tolka:"
-
-msgid "More parsing errors will be ignored."
-msgstr "Resten av tolkningsfelen ignoreras."
-
-msgid "Internal error:"
-msgstr " Internt fel:"
-
-msgid "Changes to file lost"
-msgstr "Ändringar i filen förlorade"
 
 #~ msgid "File:       None"
 #~ msgstr "Fil:        Ingen"
@@ -4084,9 +4102,6 @@ msgstr "Ändringar i filen förlorade"
 
 #~ msgid "Replac"
 #~ msgstr "Ersätt"
-
-#~ msgid "Move"
-#~ msgstr "Flytta"
 
 #~ msgid "Delete"
 #~ msgstr "Ta bort"

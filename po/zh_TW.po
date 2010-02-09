@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-12-25 19:06+0200\n"
+"POT-Creation-Date: 2010-02-09 12:08+0200\n"
 "PO-Revision-Date: 2001-07-27 03:02+0800\n"
 "Last-Translator: Jing-Jong Shyue <shyue@sonoma.com.tw>\n"
 "Language-Team: Chinese Traditional <zh-l10n@linux.org.tw>\n"
@@ -15,80 +15,636 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#, fuzzy
-msgid " Choose syntax highlighting "
-msgstr "依語法改變顏色"
-
-#, fuzzy
-msgid "< Auto >"
-msgstr " 關於 "
-
-msgid "< Reload Current Syntax >"
-msgstr ""
-
-#, fuzzy, c-format
-msgid " Cannot open %s for reading "
-msgstr " 在開啟管線用來讀取時失敗： "
-
-msgid "Error"
-msgstr "錯誤"
-
-#, fuzzy, c-format
-msgid " Error reading from pipe: %s "
-msgstr " 從管線讀取資料時發生錯誤: "
-
-#, fuzzy, c-format
-msgid " Cannot open pipe for reading: %s "
-msgstr " 在開啟管線用來讀取時失敗： "
-
-#, fuzzy, c-format
-msgid " Cannot get size/permissions for %s "
-msgstr " 無法獲得檔案的大小/權限資訊： "
-
-#, fuzzy, c-format
-msgid " %s is not a regular file "
-msgstr " 無法檢視：並非一常規檔案 "
-
-#, fuzzy, c-format
-msgid " File %s is too large "
-msgstr " 檔案太大了： "
-
-msgid " About "
-msgstr " 關於 "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"          Midnight Commander的文字編輯程式.\n"
-
-msgid "&OK"
-msgstr "確定 (&O)"
-
-msgid "Macro recursion is too deep"
-msgstr ""
-
-msgid "Search"
-msgstr "搜尋"
-
 msgid " Search string not found "
 msgstr " 找不到要搜尋的字串 "
+
+msgid " Not implemented yet "
+msgstr ""
+
+msgid " Num of replace tokens not equal to num of found tokens "
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Invalid token number %d "
+msgstr " 無效的目標遮罩 "
+
+#, fuzzy
+msgid "Normal"
+msgstr "格式"
+
+msgid "&Regular expression"
+msgstr " 正規表示式 "
+
+msgid "Hexadecimal"
+msgstr ""
+
+msgid "Wildcard search"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+msgid "Function key 1"
+msgstr "功能鍵 1"
+
+msgid "Function key 2"
+msgstr "功能鍵 2"
+
+msgid "Function key 3"
+msgstr "功能鍵 3"
+
+msgid "Function key 4"
+msgstr "功能鍵 4"
+
+msgid "Function key 5"
+msgstr "功能鍵 5"
+
+msgid "Function key 6"
+msgstr "功能鍵 6"
+
+msgid "Function key 7"
+msgstr "功能鍵 7"
+
+msgid "Function key 8"
+msgstr "功能鍵 8"
+
+msgid "Function key 9"
+msgstr "功能鍵 9"
+
+msgid "Function key 10"
+msgstr "功能鍵 10"
+
+msgid "Function key 11"
+msgstr "功能鍵 11"
+
+msgid "Function key 12"
+msgstr "功能鍵 12"
+
+msgid "Function key 13"
+msgstr "功能鍵 13"
+
+msgid "Function key 14"
+msgstr "功能鍵 14"
+
+msgid "Function key 15"
+msgstr "功能鍵 15"
+
+msgid "Function key 16"
+msgstr "功能鍵 16"
+
+msgid "Function key 17"
+msgstr "功能鍵 17"
+
+msgid "Function key 18"
+msgstr "功能鍵 18"
+
+msgid "Function key 19"
+msgstr "功能鍵 19"
+
+msgid "Function key 20"
+msgstr "功能鍵 20"
+
+msgid "Backspace key"
+msgstr "Backspace 鍵"
+
+msgid "End key"
+msgstr "End 鍵"
+
+msgid "Up arrow key"
+msgstr "向上鍵"
+
+msgid "Down arrow key"
+msgstr "向下鍵"
+
+msgid "Left arrow key"
+msgstr "向左鍵"
+
+msgid "Right arrow key"
+msgstr "向右鍵"
+
+msgid "Home key"
+msgstr "Home 鍵"
+
+msgid "Page Down key"
+msgstr "Page Down 鍵"
+
+msgid "Page Up key"
+msgstr "Page Up 鍵"
+
+msgid "Insert key"
+msgstr "Insert 鍵"
+
+msgid "Delete key"
+msgstr "Delete 鍵"
+
+msgid "Completion/M-tab"
+msgstr "Completion/M-tab 鍵"
+
+msgid "+ on keypad"
+msgstr "數字區的 +"
+
+msgid "- on keypad"
+msgstr "數字區的 -"
+
+msgid "Slash on keypad"
+msgstr "數字區的 / 鍵"
+
+msgid "* on keypad"
+msgstr "數字區的 *"
+
+#, fuzzy
+msgid "Escape key"
+msgstr "數字區的 / 鍵"
+
+msgid "Left arrow keypad"
+msgstr "數字區的向左鍵"
+
+msgid "Right arrow keypad"
+msgstr "數字區的向右鍵"
+
+msgid "Up arrow keypad"
+msgstr "數字區的向上鍵"
+
+msgid "Down arrow keypad"
+msgstr "數字區的向下鍵"
+
+msgid "Home on keypad"
+msgstr "數字區的 Home 鍵"
+
+msgid "End on keypad"
+msgstr "數字區的 End 鍵"
+
+msgid "Page Down keypad"
+msgstr "數字區的 Page Down 鍵"
+
+msgid "Page Up keypad"
+msgstr "數字區的 Page Up鍵"
+
+msgid "Insert on keypad"
+msgstr "數字區的 Insert 鍵"
+
+msgid "Delete on keypad"
+msgstr "數字區的 Del 鍵"
+
+msgid "Enter on keypad"
+msgstr "數字區的 Enter 鍵"
+
+#, fuzzy
+msgid "Function key 21"
+msgstr "功能鍵 1"
+
+#, fuzzy
+msgid "Function key 22"
+msgstr "功能鍵 2"
+
+#, fuzzy
+msgid "Function key 23"
+msgstr "功能鍵 2"
+
+#, fuzzy
+msgid "Function key 24"
+msgstr "功能鍵 2"
+
+msgid "Plus"
+msgstr ""
+
+#, fuzzy
+msgid "Minus"
+msgstr "選單"
+
+msgid "Asterisk"
+msgstr ""
+
+msgid "Dot"
+msgstr ""
+
+msgid "Less than"
+msgstr ""
+
+msgid "Great than"
+msgstr ""
+
+msgid "Equal"
+msgstr ""
+
+#, fuzzy
+msgid "Comma"
+msgstr "指令"
+
+msgid "Apostrophe"
+msgstr ""
+
+#, fuzzy
+msgid "Colon"
+msgstr "計數"
+
+msgid "Exclamation mark"
+msgstr ""
+
+msgid "Question mark"
+msgstr ""
+
+#, fuzzy
+msgid "Ampersand"
+msgstr "追加"
+
+msgid "Dollar sign"
+msgstr ""
+
+msgid "Quotation mark"
+msgstr ""
+
+#, fuzzy
+msgid "Caret"
+msgstr "目標"
+
+msgid "Tilda"
+msgstr ""
+
+#, fuzzy
+msgid "Prime"
+msgstr "往前"
+
+#, fuzzy
+msgid "Underline"
+msgstr " 輸入行號： "
+
+msgid "Understrike"
+msgstr ""
+
+msgid "Pipe"
+msgstr ""
+
+#, fuzzy
+msgid "Enter"
+msgstr "擁有者"
+
+#, fuzzy
+msgid "Tab key"
+msgstr "數字區的 +"
+
+#, fuzzy
+msgid "Space key"
+msgstr "數字區的 / 鍵"
+
+#, fuzzy
+msgid "Slash key"
+msgstr "數字區的 / 鍵"
+
+#, fuzzy
+msgid "Backslash key"
+msgstr "Backspace 鍵"
+
+msgid "Number sign #"
+msgstr ""
+
+msgid "Ctrl"
+msgstr ""
+
+msgid "Alt"
+msgstr ""
+
+msgid "Shift"
+msgstr ""
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"不支援 %dx%d 的螢幕大小。\n"
+"請檢查 TERM 環境變數。\n"
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
+
+#, fuzzy, c-format
+msgid "%s is not a directory\n"
+msgstr "建立新目錄"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr ""
+" 無法建立目標目錄 \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr ""
+" 無法建立目標目錄 \"%s\" \n"
+" %s "
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr ""
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr ""
+
+#, c-format
+msgid "Press any key to continue..."
+msgstr "按任意鍵繼續..."
 
 msgid "Warning"
 msgstr "警告"
 
-msgid " File has hard-links. Detach before saving? "
+msgid " Pipe failed "
+msgstr " 管線失敗 "
+
+msgid " Dup failed "
+msgstr " 抄寫失敗 "
+
+#, c-format
+msgid ""
+"Cannot open cpio archive\n"
+"%s"
 msgstr ""
+"無法開啟 cpio 檔案集\n"
+"%s"
+
+#, c-format
+msgid ""
+"Premature end of cpio archive\n"
+"%s"
+msgstr ""
+"cpio 檔案集的結尾過早出現\n"
+"%s"
+
+#, c-format
+msgid ""
+"Inconsistent hardlinks of\n"
+"%s\n"
+"in cpio archive\n"
+"%s"
+msgstr ""
+"錯誤的硬連結\n"
+"%s\n"
+"在 cpio 檔案集\n"
+"%s"
+
+#, c-format
+msgid "%s contains duplicate entries! Skipping!"
+msgstr "%s 有重複的進入點! 放棄中!"
+
+#, c-format
+msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"發現不完整的 cpio 標頭\n"
+"%s"
+
+#, c-format
+msgid ""
+"Unexpected end of file\n"
+"%s"
+msgstr ""
+"未預期的檔案結束\n"
+"%s"
+
+#, c-format
+msgid "Directory cache expired for %s"
+msgstr "%s 的路徑快取過期"
+
+msgid "Starting linear transfer..."
+msgstr "開始線性傳輸...."
+
+#, c-format
+msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+msgstr "%s: %s: %s %3d%% (已傳送 %lu 位元組)"
+
+#, c-format
+msgid "%s: %s: %s %lu bytes transferred"
+msgstr "%s: %s: %s 已傳送 %lu 位元組"
+
+msgid "Getting file"
+msgstr "取得檔案中"
+
+#, c-format
+msgid ""
+"Cannot open %s archive\n"
+"%s"
+msgstr ""
+"無法開啟 %s 檔案集\n"
+"%s"
+
+msgid "Inconsistent extfs archive"
+msgstr "不完整的 extfs 檔案集"
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "警告：找不到檔案 %s\n"
+
+#, c-format
+msgid "fish: Disconnecting from %s"
+msgstr "fish: 結束至 %s 的連線"
+
+msgid "fish: Waiting for initial line..."
+msgstr "fish: 等待起始化訊息"
+
+msgid "Sorry, we cannot do password authenticated connections for now."
+msgstr "不好意思，目前無法進行經過密碼認證的連線。"
+
+msgid " fish: Password required for "
+msgstr " fish: 必需有密碼 "
+
+msgid "fish: Sending password..."
+msgstr "fish: 正在送出登入密碼"
+
+msgid "fish: Sending initial line..."
+msgstr "fish: 送出起始化訊息"
+
+msgid "fish: Handshaking version..."
+msgstr "fish: 交握版本"
+
+msgid "fish: Setting up current directory..."
+msgstr "fish: 設定讀取目錄內容"
+
+#, c-format
+msgid "fish: Connected, home %s."
+msgstr "fisk: 連結至 %s"
+
+#, c-format
+msgid "fish: Reading directory %s..."
+msgstr "fisk: 讀取目錄 %s..."
+
+#, c-format
+msgid "%s: done."
+msgstr "%s: 完成."
+
+#, c-format
+msgid "%s: failure"
+msgstr "%s: 失敗"
+
+#, c-format
+msgid "fish: store %s: sending command..."
+msgstr "fish: 儲存%s: 送出命令"
+
+msgid "fish: Local read failed, sending zeros"
+msgstr "fish: 本地端讀取錯誤, 沒有送出"
+
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%lu)"
+msgstr "fish: 儲存%s %d(%d)"
+
+msgid "zeros"
+msgstr "0"
+
+msgid "file"
+msgstr "檔案"
+
+msgid "Aborting transfer..."
+msgstr "放棄傳輸...."
+
+msgid "Error reported after abort."
+msgstr "放棄後回報錯誤"
+
+msgid "Aborted transfer would be successful."
+msgstr "將成功放棄傳輸"
+
+#, c-format
+msgid "ftpfs: Disconnecting from %s"
+msgstr "ftpfs: 結束至 %s 的連線"
+
+msgid " FTP: Password required for "
+msgstr " FTP: 必需有密碼 -> "
+
+msgid "ftpfs: sending login name"
+msgstr "ftpfs: 正在送出登入名稱"
+
+msgid "ftpfs: sending user password"
+msgstr "ftpfs: 正在送出登入密碼"
+
+#, fuzzy, c-format
+msgid "FTP: Account required for user %s"
+msgstr " FTP: 必需有密碼 -> "
+
+#, fuzzy
+msgid "Account:"
+msgstr "計數"
+
+#, fuzzy
+msgid "ftpfs: sending user account"
+msgstr "ftpfs: 正在送出登入密碼"
+
+msgid "ftpfs: logged in"
+msgstr "ftpfs: 登入"
+
+#, c-format
+msgid "ftpfs: Login incorrect for user %s "
+msgstr "ftpfs: 使用者 %s 登入錯誤"
+
+msgid "ftpfs: Invalid host name."
+msgstr "ftpfs: 無效的主機名稱。"
+
+#, c-format
+msgid "ftpfs: %s"
+msgstr ""
+
+#, c-format
+msgid "ftpfs: making connection to %s"
+msgstr "ftpfs: 建立至 %s 的連線"
+
+msgid "ftpfs: connection interrupted by user"
+msgstr "ftpfs: 使用者中斷連線"
+
+#, c-format
+msgid "ftpfs: connection to server failed: %s"
+msgstr "ftpfs: 連結到伺服器發生錯誤: %s"
+
+#, c-format
+msgid "Waiting to retry... %d (Control-C to cancel)"
+msgstr "等候重試... %d (Control-C 結束)"
+
+#, fuzzy
+msgid "ftpfs: invalid address family"
+msgstr "ftpfs: 無效的主機位址。"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not setup passive mode: %s"
+msgstr "ftpfs: 無法設定 passive mode"
+
+#, fuzzy, c-format
+msgid "ftpfs: could not create socket: %s"
+msgstr " 無法建立插座: %s"
+
+msgid "ftpfs: could not setup passive mode"
+msgstr "ftpfs: 無法設定 passive mode"
+
+msgid "ftpfs: aborting transfer."
+msgstr "ftpfs: 傳輸中斷"
+
+#, c-format
+msgid "ftpfs: abort error: %s"
+msgstr "ftpfs: 造成中斷的錯誤: %s"
+
+msgid "ftpfs: abort failed"
+msgstr "ftpfs: 中斷失敗"
+
+msgid "ftpfs: CWD failed."
+msgstr "ftpfs: 改變目錄失敗"
+
+msgid "ftpfs: couldn't resolve symlink"
+msgstr "FTPFS: 無法解讀符號連結"
+
+msgid "Resolving symlink..."
+msgstr "解讀符號連結..."
+
+#, c-format
+msgid "ftpfs: Reading FTP directory %s... %s%s"
+msgstr "ftpfs: 讀取 FTP 目錄 %s... %s%s"
+
+msgid "(strict rfc959)"
+msgstr "(嚴謹的 rfc959)"
+
+msgid "(chdir first)"
+msgstr "(先切換路徑)"
+
+msgid "ftpfs: failed; nowhere to fallback to"
+msgstr "ftpfs: 失敗; 無法轉移到其它目錄"
+
+#, fuzzy, c-format
+msgid "ftpfs: storing file %lu (%lu)"
+msgstr "ftpfs: 儲存檔案 %d (%d)"
+
+msgid ""
+"~/.netrc file has incorrect mode.\n"
+"Remove password or correct mode."
+msgstr ""
+"~/.netrc 檔案的模式不正確。移除寫在裡面 \n"
+"的密碼或修正 ~/.netrc 檔案的模式。 "
+
+msgid " MCFS "
+msgstr " MCFS "
+
+msgid " The server does not support this version "
+msgstr " 伺服器並不支援此一版本 "
+
+msgid ""
+" The remote server is not running on a system port \n"
+" you need a password to log in, but the information may \n"
+" not be safe on the remote side.  Continue? \n"
+msgstr ""
+" 遠端主機並未在正常 port 上執行伺服軟體， \n"
+" 您必須輸入密碼以登入主機，可是密碼資訊經過 \n"
+" 網路傳輸可能不太安全，還要繼續嗎？ \n"
 
 msgid "&Yes"
 msgstr "是(&Y)"
@@ -96,665 +652,185 @@ msgstr "是(&Y)"
 msgid "&No"
 msgstr "否(&N)"
 
-msgid "&Cancel"
-msgstr "取消"
+msgid " MCFS Password required "
+msgstr " 必需有 MCFS 密碼 "
 
-msgid "The file has been modified in the meantime. Save anyway?"
+msgid " Invalid password "
+msgstr " 密碼無效 "
+
+#, c-format
+msgid " Cannot locate hostname: %s "
+msgstr " 找不到主機: %s"
+
+#, c-format
+msgid " Cannot create socket: %s "
+msgstr " 無法建立插座: %s"
+
+#, c-format
+msgid " Cannot connect to server: %s "
+msgstr " 無法連結到伺服器: %s"
+
+msgid " Too many open connections "
+msgstr " 太多開啟的連結了 "
+
+#, c-format
+msgid ""
+"Warning: Invalid line in %s:\n"
+"%s\n"
 msgstr ""
+"警告：%s 中此行不正確：\n"
+"%s\n"
 
-msgid " Error writing to pipe: "
-msgstr " 寫入管線時發生錯誤 "
+#, c-format
+msgid ""
+"Warning: Invalid flag %c in %s:\n"
+"%s\n"
+msgstr ""
+"警告：%2$s 中的旗標 %1$c 不正確：\n"
+"%3$s\n"
 
-msgid " Cannot open pipe for writing: "
-msgstr " 在開啟管線用來寫入時失敗： "
+#, c-format
+msgid ""
+" reconnect to %s failed\n"
+" "
+msgstr ""
+" 重新連結到 %s 失敗\n"
+" "
+
+msgid " Authentication failed "
+msgstr " 認證錯誤 "
+
+#, c-format
+msgid " Error %s creating directory %s "
+msgstr "%s 建立 %s 目錄中"
+
+#, c-format
+msgid " Error %s removing directory %s "
+msgstr "%s 刪除 %s 目錄中"
+
+#, c-format
+msgid " %s opening remote file %s "
+msgstr "%s 開啟遠端檔案 %s 中"
 
 #, fuzzy, c-format
-msgid " Cannot open file for writing: %s "
-msgstr " 在開啟管線用來寫入時失敗： "
-
-#, fuzzy
-msgid "&Quick save"
-msgstr "快速存檔"
-
-#, fuzzy
-msgid "&Safe save"
-msgstr "安全存檔"
-
-msgid "&Do backups with following extension:"
-msgstr ""
-
-msgid "Check &POSIX new line"
-msgstr ""
-
-msgid " Edit Save Mode "
-msgstr " 改變存檔模式 "
-
-msgid "The file you are saving is not finished with a newline"
-msgstr ""
-
-#, fuzzy
-msgid "C&ontinue"
-msgstr "繼續"
-
-msgid "&Do not change"
-msgstr ""
-
-msgid "&Unix format (LF)"
-msgstr ""
-
-msgid "&Windows/DOS format (CR LF)"
-msgstr ""
-
-msgid "&Macintosh format (CR)"
-msgstr ""
-
-msgid "Change line breaks to:"
-msgstr ""
-
-msgid " Enter file name: "
-msgstr " 輸入檔名： "
-
-msgid " Save As "
-msgstr " 另存新檔 "
-
-msgid " A file already exists with this name. "
-msgstr " 同名的檔案已經存在。 "
-
-#, fuzzy
-msgid "&Overwrite"
-msgstr "蓋寫"
-
-msgid " Cannot save file. "
-msgstr " 試著存檔時發生錯誤。 "
-
-msgid " Delete macro "
-msgstr " 刪除巨集 "
-
-msgid " Cannot open temp file "
-msgstr " 嘗試開啟暫存檔時發生錯誤 "
-
-msgid " Cannot open macro file "
-msgstr " 嘗試開啟巨集檔時發生錯誤 "
-
-msgid " Cannot overwrite macro file "
-msgstr " 嘗試蓋寫巨集檔時發生錯誤 "
-
-msgid " Save macro "
-msgstr " 儲存巨集 "
-
-msgid " Press the macro's new hotkey: "
-msgstr " 請按下啟動此一巨集的熱鍵： "
-
-msgid " Press macro hotkey: "
-msgstr " 按下巨集熱鍵： "
-
-msgid " Load macro "
-msgstr " 載入巨集 "
-
-msgid " Confirm save file? : "
-msgstr " 確定要儲存檔案？: "
-
-msgid " Save file "
-msgstr " 儲存檔案 "
-
-msgid "&Save"
-msgstr "存檔"
-
-msgid ""
-" Current text was modified without a file save. \n"
-" Continue discards these changes. "
-msgstr ""
-" 目前的文件內容已經被更動過，而且尚未存檔。 \n"
-" 忽略作過的改變並繼續工作。 "
-
-#, fuzzy
-msgid "Syntax file edit"
-msgstr "編輯選單檔"
-
-#, fuzzy
-msgid " Which syntax file you want to edit? "
-msgstr " 您想要編輯哪個擴充檔案？ "
-
-msgid "&User"
-msgstr "使用者"
-
-msgid "&System Wide"
-msgstr "全系統的"
-
-msgid " Menu edit "
-msgstr " 選單檔編輯"
-
-msgid " Which menu file do you want to edit? "
-msgstr " 您準備編輯哪個選單檔？ "
-
-msgid "&Local"
-msgstr "本地"
-
-msgid " Load "
-msgstr " 載入 "
-
-msgid " Block is large, you may not be able to undo this action. "
-msgstr " 區塊太大了，您可能無法復原這個動作。 "
-
-#, fuzzy
-msgid "Replace"
-msgstr "替換"
-
-msgid " Replace "
-msgstr " 替換 "
+msgid " %s removing remote file %s "
+msgstr "%s 開啟遠端檔案 %s 中"
 
 #, c-format
-msgid " %ld replacements made. "
-msgstr " 執行了 %ld 次替換。 "
+msgid " %s renaming files\n"
+msgstr " %s 剩下的檔案\n"
 
-msgid "Quit"
-msgstr "結束"
-
-msgid " File was modified, Save with exit? "
-msgstr " 檔案已經有更動過，在離開前先存檔？ "
-
-#, fuzzy
-msgid "&Cancel quit"
-msgstr "取消結束"
-
-#, fuzzy
-msgid " Error "
-msgstr "錯誤"
-
-msgid " This function is not implemented. "
+#, c-format
+msgid ""
+"Cannot open tar archive\n"
+"%s"
 msgstr ""
+"無法開啟 tar 檔案集\n"
+"%s"
 
-msgid " Copy to clipboard "
-msgstr " 複製到剪貼簿 "
+msgid "Inconsistent tar archive"
+msgstr "不完整的 tar 檔案集"
 
-msgid " Unable to save to file. "
-msgstr " 無法儲存至檔案。 "
+msgid "Unexpected EOF on archive file"
+msgstr "檔案集的檔案結尾不正常"
 
-msgid " Cut to clipboard "
-msgstr " 剪下到剪貼簿 "
-
-msgid " Goto line "
-msgstr " 跳至某行 "
-
-msgid " Enter line: "
-msgstr " 輸入行號： "
-
-msgid " Save Block "
-msgstr " 儲存區塊 "
-
-msgid " Insert File "
-msgstr " 插入檔案 "
-
-msgid " Cannot insert file. "
-msgstr " 嘗試插入檔案時發生錯誤。 "
-
-msgid " Sort block "
-msgstr " 排序區塊 "
-
-msgid " You must first highlight a block of text. "
-msgstr " 您必須先選取一個文字區塊。 "
-
-msgid " Run Sort "
-msgstr " 進行排序 "
-
-msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr " 輸入 sort 的選項，以空白字元分隔 (參考 sort 的 man page): "
-
-msgid " Sort "
-msgstr " 排序 "
-
-msgid " Cannot execute sort command "
-msgstr " 嘗試執行 sort 指令時發生錯誤 "
-
-msgid " Sort returned non-zero: "
-msgstr " sort 傳回非零的值： "
-
-msgid "Paste output of external command"
+#, c-format
+msgid ""
+"Hmm,...\n"
+"%s\n"
+"doesn't look like a tar archive."
 msgstr ""
+"嗯...\n"
+"%s\n"
+"看起來不像是一個 tar 檔案集。"
 
-#, fuzzy
-msgid "Enter shell command(s):"
-msgstr " 請輸入指令標籤： "
+msgid " undelfs: error "
+msgstr " undelfs: 錯誤 "
 
-#, fuzzy
-msgid "External command"
-msgstr "其它指令"
+msgid " not enough memory "
+msgstr " 不足的記憶體 "
 
-#, fuzzy
-msgid "Cannot execute command"
-msgstr " 嘗試執行 sort 指令時發生錯誤 "
+msgid " while allocating block buffer "
+msgstr " 檔配置區塊緩衝區時 "
 
-msgid "Error creating script:"
-msgstr "建立指令稿時發生錯誤: "
+#, c-format
+msgid " open_inode_scan: %d "
+msgstr " 開啟 inode 掃描: %d "
 
-msgid "Error reading script:"
-msgstr "讀取指令稿時時發生錯誤: "
+#, c-format
+msgid " while starting inode scan %d "
+msgstr " 當啟動 inode 掃描時 %d"
 
-msgid "Error closing script:"
-msgstr "關閉指令稿錯誤:"
+#, c-format
+msgid "undelfs: loading deleted files information %d inodes"
+msgstr "undelfs: 載入刪除的檔案資訊 %d inode"
 
-msgid "Script created:"
-msgstr "建立的指令稿:"
+#, c-format
+msgid " while calling ext2_block_iterate %d "
+msgstr " 當呼叫 ext2 區塊覆合時 %d "
 
-msgid "Process block"
-msgstr "處理區塊 "
+msgid " no more memory while reallocating array "
+msgstr " 當重新配置陣列時沒有更多的記憶體"
 
-msgid " Copies to"
-msgstr " 複製到 "
+#, c-format
+msgid " while doing inode scan %d "
+msgstr " 當進行 inode 掃描時 %d"
 
-msgid " Subject"
-msgstr " 標題 "
+msgid " Ext2lib error "
+msgstr " ext2lib 錯誤 "
 
-msgid " To"
-msgstr " 到 "
+#, c-format
+msgid " Cannot open file %s "
+msgstr " 無法開啟檔案 %s "
 
-msgid " mail -s <subject> -c <cc> <to>"
-msgstr " mail -s <標題> -c <副本> <目地>"
+msgid "undelfs: reading inode bitmap..."
+msgstr "undelfs: 讀取 inode 點陣圖..."
 
-msgid " Mail "
-msgstr " 郵件 "
-
-msgid " Insert Literal "
-msgstr " 逐字插入 "
-
-msgid " Press any key: "
-msgstr " 按下任意鍵："
-
-msgid " Execute Macro "
-msgstr " 執行巨集 "
-
-msgid "All charsets"
+#, c-format
+msgid ""
+" Cannot load inode bitmap from: \n"
+" %s \n"
 msgstr ""
+" 無法從 %s 中 \n"
+" 載入 inode 點陣圖 \n"
 
-#, fuzzy
-msgid "&Whole words"
-msgstr " 只匹配整個單字 "
+msgid "undelfs: reading block bitmap..."
+msgstr "undelfs: 讀取區塊點陣圖中..."
 
-#, fuzzy
-msgid "In se&lection"
-msgstr "反向選取            M-*"
+#, c-format
+msgid ""
+" Cannot load block bitmap from: \n"
+" %s \n"
+msgstr ""
+" 無法從 %s 中 \n"
+" 載入區塊點陣圖 \n"
 
-msgid "&Backwards"
-msgstr " 向後 "
+msgid " vfs_info is not fs! "
+msgstr " vfs_info 不是檔案系統! "
 
-msgid "case &Sensitive"
-msgstr "大小寫不同"
+msgid " You have to chdir to extract files first "
+msgstr " 您必須先變換路徑到解開的檔案 "
 
-msgid " Enter replacement string:"
-msgstr " 輸入要替換的字串:"
+msgid " while iterating over blocks "
+msgstr " 當由 block 覆合時"
 
-msgid " Enter search string:"
-msgstr " 輸入要搜尋的字串： "
+msgid "Cannot parse:"
+msgstr "無法分析:"
 
-#, fuzzy
-msgid "&Find all"
-msgstr "尋找檔案"
+msgid "More parsing errors will be ignored."
+msgstr "更多的分析錯誤將會被忽略"
 
-msgid "Cancel"
+msgid "Internal error:"
+msgstr "內部錯誤:"
+
+msgid "Password:"
+msgstr "密碼："
+
+msgid "Changes to file lost"
+msgstr "改變到檔案遺失"
+
+msgid "&Cancel"
 msgstr "取消"
-
-msgid "&Skip"
-msgstr "跳過"
-
-msgid "A&ll"
-msgstr "全部"
-
-msgid "&Replace"
-msgstr "替換"
-
-msgid " Replace with: "
-msgstr " 以此替換：　"
-
-msgid " Confirm replace "
-msgstr " 確定替換 "
-
-msgid "&Dismiss"
-msgstr "關閉"
-
-#, c-format
-msgid ""
-"File \"%s\" is already being edited\n"
-"User: %s\n"
-"Process ID: %d"
-msgstr ""
-
-msgid "File locked"
-msgstr ""
-
-msgid "&Grab lock"
-msgstr ""
-
-msgid "&Ignore lock"
-msgstr ""
-
-#, fuzzy
-msgid "&Open file..."
-msgstr " 以此開啟..."
-
-#, fuzzy
-msgid "&New"
-msgstr "名稱"
-
-#, fuzzy
-msgid "Save &as..."
-msgstr "儲存設定"
-
-#, fuzzy
-msgid "&Insert file..."
-msgstr "插入檔案...       F15"
-
-#, fuzzy
-msgid "Cop&y to file..."
-msgstr "複製到檔案...     C-f"
-
-#, fuzzy
-msgid "&User menu..."
-msgstr "使用者選單(&U)         F11"
-
-#, fuzzy
-msgid "A&bout..."
-msgstr "樣式"
-
-msgid "&Quit"
-msgstr "結束"
-
-#, fuzzy
-msgid "&Toggle mark"
-msgstr "清除標示區"
-
-msgid "&Mark columns"
-msgstr ""
-
-#, fuzzy
-msgid "Toggle &ins/overw"
-msgstr "切換蓋寫/插入     Ins"
-
-#, fuzzy
-msgid "&Copy"
-msgstr "複製"
-
-msgid "&Move"
-msgstr "移動"
-
-msgid "&Delete"
-msgstr "刪除"
-
-#, fuzzy
-msgid "C&opy to clipfile"
-msgstr "複製到檔案...        "
-
-#, fuzzy
-msgid "C&ut to clipfile"
-msgstr "跳至某行...              M-l"
-
-msgid "&Paste from clipfile"
-msgstr ""
-
-#, fuzzy
-msgid "Toggle bookmar&k"
-msgstr "切換標示區域       F3"
-
-#, fuzzy
-msgid "&Next bookmark"
-msgstr "標示區設定"
-
-#, fuzzy
-msgid "Pre&v bookmark"
-msgstr "排序...                  M-t"
-
-#, fuzzy
-msgid "&Flush bookmark"
-msgstr "郵件                        "
-
-msgid "&Undo"
-msgstr ""
-
-msgid "&Beginning"
-msgstr ""
-
-#, fuzzy
-msgid "&End"
-msgstr "節點"
-
-#, fuzzy
-msgid "&Search..."
-msgstr "搜尋"
-
-#, fuzzy
-msgid "Search &again"
-msgstr "再次搜尋          F17"
-
-#, fuzzy
-msgid "&Replace..."
-msgstr "替換"
-
-#, fuzzy
-msgid "&Go to line..."
-msgstr " 跳至某行 "
-
-#, fuzzy
-msgid "Toggle li&ne state"
-msgstr "切換標示區域       F3"
-
-#, fuzzy
-msgid "Go to matching &bracket"
-msgstr "跳到符合的括號"
-
-#, fuzzy
-msgid "Find declaration"
-msgstr "在補強後找出被拒絕的補強檔 (patch)"
-
-msgid "Back from declaration"
-msgstr ""
-
-msgid "Forward to declaration"
-msgstr ""
-
-#, fuzzy
-msgid "Encod&ing..."
-msgstr "排序...                  M-t"
-
-#, fuzzy
-msgid "&Refresh screen"
-msgstr "重繪螢幕                 C-l"
-
-#, fuzzy
-msgid "&Start record macro"
-msgstr "開始巨集錄製             C-r"
-
-#, fuzzy
-msgid "&Finish record macro..."
-msgstr "完成巨集錄製...          C-r"
-
-#, fuzzy
-msgid "&Execute macro..."
-msgstr "執行巨集...         C-a, KEY"
-
-#, fuzzy
-msgid "Delete macr&o..."
-msgstr " 刪除巨集 "
-
-#, fuzzy
-msgid "'ispell' s&pell check"
-msgstr "'ispell' 拼字檢查        C-p"
-
-#, fuzzy
-msgid "&Mail..."
-msgstr "過濾器..."
-
-#, fuzzy
-msgid "Insert &literal..."
-msgstr "逐字插入...              C-q"
-
-#, fuzzy
-msgid "Insert &date/time"
-msgstr "插入日期/時間               "
-
-#, fuzzy
-msgid "Format p&aragraph"
-msgstr "將段落格式化             M-p"
-
-#, fuzzy
-msgid "Sor&t..."
-msgstr "排列順序..."
-
-msgid "Paste o&utput of..."
-msgstr ""
-
-#, fuzzy
-msgid "E&xternal formatter"
-msgstr "外部格式器(&X)       F19"
-
-msgid "&General...  "
-msgstr "一般"
-
-#, fuzzy
-msgid "Save &mode..."
-msgstr "儲存模式"
-
-#, fuzzy
-msgid "Learn &keys..."
-msgstr "認識按鍵..."
-
-#, fuzzy
-msgid "Syntax &highlighting..."
-msgstr "依語法改變顏色"
-
-#, fuzzy
-msgid "S&yntax file"
-msgstr "編輯選單檔"
-
-#, fuzzy
-msgid "&Menu file"
-msgstr "編輯選單檔"
-
-msgid "&Save setup"
-msgstr "儲存設定"
-
-#, fuzzy
-msgid "&File"
-msgstr "檔案"
-
-#, fuzzy
-msgid "&Edit"
-msgstr "編輯"
-
-#, fuzzy
-msgid "&Search"
-msgstr "搜尋"
-
-#, fuzzy
-msgid "&Command"
-msgstr "指令"
-
-#, fuzzy
-msgid "For&mat"
-msgstr "格式"
-
-#, fuzzy
-msgid "&Options"
-msgstr " 選項 "
-
-msgid "None"
-msgstr "無"
-
-msgid "Dynamic paragraphing"
-msgstr "動態分段"
-
-msgid "Type writer wrap"
-msgstr "打字輸入換行"
-
-msgid "Word wrap line length: "
-msgstr " 輸入每行長度： "
-
-msgid "Cursor beyond end of line"
-msgstr ""
-
-#, fuzzy
-msgid "Pers&istent selection"
-msgstr "反向選取            M-*"
-
-msgid "Synta&x highlighting"
-msgstr "依語法改變顏色"
-
-msgid "Visible tabs"
-msgstr ""
-
-msgid "Visible trailing spaces"
-msgstr ""
-
-#, fuzzy
-msgid "Save file &position"
-msgstr " 儲存檔案 "
-
-msgid "Confir&m before saving"
-msgstr "存檔前先確認"
-
-msgid "&Return does autoindent"
-msgstr "換行時自動縮排"
-
-msgid "Tab spacing: "
-msgstr "Tab 空格 : "
-
-msgid "Fill tabs with &spaces"
-msgstr "以空白填滿移位鍵 (tab)"
-
-msgid "&Backspace through tabs"
-msgstr "Backspace 刪除移位鍵"
-
-msgid "&Fake half tabs"
-msgstr "半個 TAB"
-
-msgid "Wrap mode"
-msgstr "換行模式"
-
-msgid " Editor options "
-msgstr " 編輯器選項 "
-
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
-msgid "ButtonBar|Mark"
-msgstr ""
-
-msgid "ButtonBar|Replac"
-msgstr ""
-
-msgid "ButtonBar|Copy"
-msgstr ""
-
-msgid "ButtonBar|Move"
-msgstr ""
-
-msgid "ButtonBar|Search"
-msgstr ""
-
-msgid "ButtonBar|Delete"
-msgstr ""
-
-msgid "ButtonBar|PullDn"
-msgstr ""
-
-msgid "ButtonBar|Quit"
-msgstr ""
-
-msgid " Load syntax file "
-msgstr " 載入語法檔案 "
-
-#, c-format
-msgid ""
-" Cannot open file %s \n"
-" %s "
-msgstr ""
-" 無法開啟檔案 %s \n"
-" %s "
-
-#, c-format
-msgid " Error in file %s on line %d "
-msgstr " 檔案 %s 的第 %d 行有語法錯誤 "
 
 msgid "&Set"
 msgstr "設定"
@@ -988,6 +1064,9 @@ msgstr "列表模式"
 msgid "user &Mini status"
 msgstr "使用者迷你狀態"
 
+msgid "&OK"
+msgstr "確定 (&O)"
+
 msgid "&Reverse"
 msgstr "反向"
 
@@ -1116,16 +1195,9 @@ msgstr "網域: "
 msgid "Username:"
 msgstr "使用者名稱: "
 
-msgid "Password:"
-msgstr "密碼："
-
 #, c-format
 msgid "Password for \\\\%s\\%s"
 msgstr "\\\\%s\\%s 的密碼"
-
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "警告：找不到檔案 %s\n"
 
 msgid "7-bit ASCII"
 msgstr ""
@@ -1295,6 +1367,21 @@ msgstr "擴充檔案編輯"
 msgid " Which extension file you want to edit? "
 msgstr " 您想要編輯哪個擴充檔案？ "
 
+msgid "&User"
+msgstr "使用者"
+
+msgid "&System Wide"
+msgstr "全系統的"
+
+msgid " Menu edit "
+msgstr " 選單檔編輯"
+
+msgid " Which menu file do you want to edit? "
+msgstr " 您準備編輯哪個選單檔？ "
+
+msgid "&Local"
+msgstr "本地"
+
 msgid "Highlighting groups file edit"
 msgstr ""
 
@@ -1416,6 +1503,725 @@ msgstr " 此系統殼正在執行指令中 "
 msgid "Cannot read directory contents"
 msgstr "無法改變目錄"
 
+#, fuzzy
+msgid " Choose syntax highlighting "
+msgstr "依語法改變顏色"
+
+#, fuzzy
+msgid "< Auto >"
+msgstr " 關於 "
+
+msgid "< Reload Current Syntax >"
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Cannot open %s for reading "
+msgstr " 在開啟管線用來讀取時失敗： "
+
+msgid "Error"
+msgstr "錯誤"
+
+#, fuzzy, c-format
+msgid " Error reading from pipe: %s "
+msgstr " 從管線讀取資料時發生錯誤: "
+
+#, fuzzy, c-format
+msgid " Cannot open pipe for reading: %s "
+msgstr " 在開啟管線用來讀取時失敗： "
+
+#, fuzzy, c-format
+msgid " Cannot get size/permissions for %s "
+msgstr " 無法獲得檔案的大小/權限資訊： "
+
+#, fuzzy, c-format
+msgid " %s is not a regular file "
+msgstr " 無法檢視：並非一常規檔案 "
+
+#, fuzzy, c-format
+msgid " File %s is too large "
+msgstr " 檔案太大了： "
+
+msgid " About "
+msgstr " 關於 "
+
+msgid ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       A user friendly text editor written\n"
+"           for the Midnight Commander.\n"
+msgstr ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"          Midnight Commander的文字編輯程式.\n"
+
+msgid "Macro recursion is too deep"
+msgstr ""
+
+msgid "Search"
+msgstr "搜尋"
+
+msgid " File has hard-links. Detach before saving? "
+msgstr ""
+
+msgid "The file has been modified in the meantime. Save anyway?"
+msgstr ""
+
+msgid " Error writing to pipe: "
+msgstr " 寫入管線時發生錯誤 "
+
+msgid " Cannot open pipe for writing: "
+msgstr " 在開啟管線用來寫入時失敗： "
+
+#, fuzzy, c-format
+msgid " Cannot open file for writing: %s "
+msgstr " 在開啟管線用來寫入時失敗： "
+
+#, fuzzy
+msgid "&Quick save"
+msgstr "快速存檔"
+
+#, fuzzy
+msgid "&Safe save"
+msgstr "安全存檔"
+
+msgid "&Do backups with following extension:"
+msgstr ""
+
+msgid "Check &POSIX new line"
+msgstr ""
+
+msgid " Edit Save Mode "
+msgstr " 改變存檔模式 "
+
+msgid "The file you are saving is not finished with a newline"
+msgstr ""
+
+#, fuzzy
+msgid "C&ontinue"
+msgstr "繼續"
+
+msgid "&Do not change"
+msgstr ""
+
+msgid "&Unix format (LF)"
+msgstr ""
+
+msgid "&Windows/DOS format (CR LF)"
+msgstr ""
+
+msgid "&Macintosh format (CR)"
+msgstr ""
+
+msgid "Change line breaks to:"
+msgstr ""
+
+msgid " Enter file name: "
+msgstr " 輸入檔名： "
+
+msgid " Save As "
+msgstr " 另存新檔 "
+
+msgid " A file already exists with this name. "
+msgstr " 同名的檔案已經存在。 "
+
+#, fuzzy
+msgid "&Overwrite"
+msgstr "蓋寫"
+
+msgid " Cannot save file. "
+msgstr " 試著存檔時發生錯誤。 "
+
+msgid " Delete macro "
+msgstr " 刪除巨集 "
+
+msgid " Cannot open temp file "
+msgstr " 嘗試開啟暫存檔時發生錯誤 "
+
+msgid " Cannot open macro file "
+msgstr " 嘗試開啟巨集檔時發生錯誤 "
+
+msgid " Cannot overwrite macro file "
+msgstr " 嘗試蓋寫巨集檔時發生錯誤 "
+
+msgid " Save macro "
+msgstr " 儲存巨集 "
+
+msgid " Press the macro's new hotkey: "
+msgstr " 請按下啟動此一巨集的熱鍵： "
+
+msgid " Press macro hotkey: "
+msgstr " 按下巨集熱鍵： "
+
+msgid " Load macro "
+msgstr " 載入巨集 "
+
+msgid " Confirm save file? : "
+msgstr " 確定要儲存檔案？: "
+
+msgid " Save file "
+msgstr " 儲存檔案 "
+
+msgid "&Save"
+msgstr "存檔"
+
+msgid ""
+" Current text was modified without a file save. \n"
+" Continue discards these changes. "
+msgstr ""
+" 目前的文件內容已經被更動過，而且尚未存檔。 \n"
+" 忽略作過的改變並繼續工作。 "
+
+#, fuzzy
+msgid "Syntax file edit"
+msgstr "編輯選單檔"
+
+#, fuzzy
+msgid " Which syntax file you want to edit? "
+msgstr " 您想要編輯哪個擴充檔案？ "
+
+msgid " Load "
+msgstr " 載入 "
+
+msgid " Block is large, you may not be able to undo this action. "
+msgstr " 區塊太大了，您可能無法復原這個動作。 "
+
+#, fuzzy
+msgid "Replace"
+msgstr "替換"
+
+msgid " Replace "
+msgstr " 替換 "
+
+#, c-format
+msgid " %ld replacements made. "
+msgstr " 執行了 %ld 次替換。 "
+
+msgid "Quit"
+msgstr "結束"
+
+msgid " File was modified, Save with exit? "
+msgstr " 檔案已經有更動過，在離開前先存檔？ "
+
+#, fuzzy
+msgid "&Cancel quit"
+msgstr "取消結束"
+
+#, fuzzy
+msgid " Error "
+msgstr "錯誤"
+
+msgid " This function is not implemented. "
+msgstr ""
+
+msgid " Copy to clipboard "
+msgstr " 複製到剪貼簿 "
+
+msgid " Unable to save to file. "
+msgstr " 無法儲存至檔案。 "
+
+msgid " Cut to clipboard "
+msgstr " 剪下到剪貼簿 "
+
+msgid " Goto line "
+msgstr " 跳至某行 "
+
+msgid " Enter line: "
+msgstr " 輸入行號： "
+
+msgid " Save Block "
+msgstr " 儲存區塊 "
+
+msgid " Insert File "
+msgstr " 插入檔案 "
+
+msgid " Cannot insert file. "
+msgstr " 嘗試插入檔案時發生錯誤。 "
+
+msgid " Sort block "
+msgstr " 排序區塊 "
+
+msgid " You must first highlight a block of text. "
+msgstr " 您必須先選取一個文字區塊。 "
+
+msgid " Run Sort "
+msgstr " 進行排序 "
+
+msgid " Enter sort options (see manpage) separated by whitespace: "
+msgstr " 輸入 sort 的選項，以空白字元分隔 (參考 sort 的 man page): "
+
+msgid " Sort "
+msgstr " 排序 "
+
+msgid " Cannot execute sort command "
+msgstr " 嘗試執行 sort 指令時發生錯誤 "
+
+msgid " Sort returned non-zero: "
+msgstr " sort 傳回非零的值： "
+
+msgid "Paste output of external command"
+msgstr ""
+
+#, fuzzy
+msgid "Enter shell command(s):"
+msgstr " 請輸入指令標籤： "
+
+#, fuzzy
+msgid "External command"
+msgstr "其它指令"
+
+#, fuzzy
+msgid "Cannot execute command"
+msgstr " 嘗試執行 sort 指令時發生錯誤 "
+
+msgid "Error creating script:"
+msgstr "建立指令稿時發生錯誤: "
+
+msgid "Error reading script:"
+msgstr "讀取指令稿時時發生錯誤: "
+
+msgid "Error closing script:"
+msgstr "關閉指令稿錯誤:"
+
+msgid "Script created:"
+msgstr "建立的指令稿:"
+
+msgid "Process block"
+msgstr "處理區塊 "
+
+msgid " Copies to"
+msgstr " 複製到 "
+
+msgid " Subject"
+msgstr " 標題 "
+
+msgid " To"
+msgstr " 到 "
+
+msgid " mail -s <subject> -c <cc> <to>"
+msgstr " mail -s <標題> -c <副本> <目地>"
+
+msgid " Mail "
+msgstr " 郵件 "
+
+msgid " Insert Literal "
+msgstr " 逐字插入 "
+
+msgid " Press any key: "
+msgstr " 按下任意鍵："
+
+msgid " Execute Macro "
+msgstr " 執行巨集 "
+
+msgid "All charsets"
+msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr " 只匹配整個單字 "
+
+#, fuzzy
+msgid "In se&lection"
+msgstr "反向選取            M-*"
+
+msgid "&Backwards"
+msgstr " 向後 "
+
+msgid "case &Sensitive"
+msgstr "大小寫不同"
+
+msgid " Enter replacement string:"
+msgstr " 輸入要替換的字串:"
+
+msgid " Enter search string:"
+msgstr " 輸入要搜尋的字串： "
+
+#, fuzzy
+msgid "&Find all"
+msgstr "尋找檔案"
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "&Skip"
+msgstr "跳過"
+
+msgid "A&ll"
+msgstr "全部"
+
+msgid "&Replace"
+msgstr "替換"
+
+msgid " Replace with: "
+msgstr " 以此替換：　"
+
+msgid " Confirm replace "
+msgstr " 確定替換 "
+
+msgid "&Dismiss"
+msgstr "關閉"
+
+#, c-format
+msgid ""
+"File \"%s\" is already being edited\n"
+"User: %s\n"
+"Process ID: %d"
+msgstr ""
+
+msgid "File locked"
+msgstr ""
+
+msgid "&Grab lock"
+msgstr ""
+
+msgid "&Ignore lock"
+msgstr ""
+
+#, fuzzy
+msgid "&Open file..."
+msgstr " 以此開啟..."
+
+#, fuzzy
+msgid "&New"
+msgstr "名稱"
+
+#, fuzzy
+msgid "Save &as..."
+msgstr "儲存設定"
+
+#, fuzzy
+msgid "&Insert file..."
+msgstr "插入檔案...       F15"
+
+#, fuzzy
+msgid "Cop&y to file..."
+msgstr "複製到檔案...     C-f"
+
+#, fuzzy
+msgid "&User menu..."
+msgstr "使用者選單(&U)         F11"
+
+#, fuzzy
+msgid "A&bout..."
+msgstr "樣式"
+
+msgid "&Quit"
+msgstr "結束"
+
+msgid "&Undo"
+msgstr ""
+
+#, fuzzy
+msgid "&Toggle ins/overw"
+msgstr "切換蓋寫/插入     Ins"
+
+#, fuzzy
+msgid "To&ggle mark"
+msgstr "清除標示區"
+
+msgid "&Mark columns"
+msgstr ""
+
+#, fuzzy
+msgid "Mark &all"
+msgstr "標示全部"
+
+msgid "Unmar&k"
+msgstr ""
+
+#, fuzzy
+msgid "Cop&y"
+msgstr "複製"
+
+#, fuzzy
+msgid "Mo&ve"
+msgstr "搬移"
+
+msgid "&Delete"
+msgstr "刪除"
+
+#, fuzzy
+msgid "Co&py to clipfile"
+msgstr "複製到檔案...        "
+
+#, fuzzy
+msgid "&Cut to clipfile"
+msgstr "跳至某行...              M-l"
+
+#, fuzzy
+msgid "Pa&ste from clipfile"
+msgstr "跳至某行...              M-l"
+
+msgid "&Beginning"
+msgstr ""
+
+#, fuzzy
+msgid "&End"
+msgstr "節點"
+
+#, fuzzy
+msgid "&Search..."
+msgstr "搜尋"
+
+#, fuzzy
+msgid "Search &again"
+msgstr "再次搜尋          F17"
+
+#, fuzzy
+msgid "&Replace..."
+msgstr "替換"
+
+#, fuzzy
+msgid "&Toggle bookmark"
+msgstr "切換標示區域       F3"
+
+#, fuzzy
+msgid "&Next bookmark"
+msgstr "標示區設定"
+
+#, fuzzy
+msgid "&Prev bookmark"
+msgstr "排序...                  M-t"
+
+#, fuzzy
+msgid "&Flush bookmark"
+msgstr "郵件                        "
+
+#, fuzzy
+msgid "&Go to line..."
+msgstr " 跳至某行 "
+
+#, fuzzy
+msgid "&Toggle line state"
+msgstr "切換標示區域       F3"
+
+#, fuzzy
+msgid "Go to matching &bracket"
+msgstr "跳到符合的括號"
+
+#, fuzzy
+msgid "&Find declaration"
+msgstr "在補強後找出被拒絕的補強檔 (patch)"
+
+#, fuzzy
+msgid "Back from &declaration"
+msgstr "在補強後找出被拒絕的補強檔 (patch)"
+
+#, fuzzy
+msgid "For&ward to declaration"
+msgstr "在補強後找出被拒絕的補強檔 (patch)"
+
+#, fuzzy
+msgid "Encod&ing..."
+msgstr "排序...                  M-t"
+
+#, fuzzy
+msgid "&Refresh screen"
+msgstr "重繪螢幕                 C-l"
+
+#, fuzzy
+msgid "&Start record macro"
+msgstr "開始巨集錄製             C-r"
+
+#, fuzzy
+msgid "Finis&h record macro..."
+msgstr "完成巨集錄製...          C-r"
+
+#, fuzzy
+msgid "&Execute macro..."
+msgstr "執行巨集...         C-a, KEY"
+
+#, fuzzy
+msgid "Delete macr&o..."
+msgstr " 刪除巨集 "
+
+#, fuzzy
+msgid "'ispell' s&pell check"
+msgstr "'ispell' 拼字檢查        C-p"
+
+#, fuzzy
+msgid "&Mail..."
+msgstr "過濾器..."
+
+#, fuzzy
+msgid "Insert &literal..."
+msgstr "逐字插入...              C-q"
+
+#, fuzzy
+msgid "Insert &date/time"
+msgstr "插入日期/時間               "
+
+#, fuzzy
+msgid "&Format paragraph"
+msgstr "將段落格式化             M-p"
+
+#, fuzzy
+msgid "&Sort..."
+msgstr "排列順序..."
+
+msgid "&Paste output of..."
+msgstr ""
+
+#, fuzzy
+msgid "&External formatter"
+msgstr "外部格式器(&X)       F19"
+
+msgid "&General...  "
+msgstr "一般"
+
+#, fuzzy
+msgid "Save &mode..."
+msgstr "儲存模式"
+
+#, fuzzy
+msgid "Learn &keys..."
+msgstr "認識按鍵..."
+
+#, fuzzy
+msgid "Syntax &highlighting..."
+msgstr "依語法改變顏色"
+
+#, fuzzy
+msgid "S&yntax file"
+msgstr "編輯選單檔"
+
+#, fuzzy
+msgid "&Menu file"
+msgstr "編輯選單檔"
+
+msgid "&Save setup"
+msgstr "儲存設定"
+
+#, fuzzy
+msgid "&File"
+msgstr "檔案"
+
+#, fuzzy
+msgid "&Edit"
+msgstr "編輯"
+
+#, fuzzy
+msgid "&Search"
+msgstr "搜尋"
+
+#, fuzzy
+msgid "&Command"
+msgstr "指令"
+
+#, fuzzy
+msgid "For&mat"
+msgstr "格式"
+
+#, fuzzy
+msgid "&Options"
+msgstr " 選項 "
+
+msgid "None"
+msgstr "無"
+
+msgid "Dynamic paragraphing"
+msgstr "動態分段"
+
+msgid "Type writer wrap"
+msgstr "打字輸入換行"
+
+msgid "Word wrap line length: "
+msgstr " 輸入每行長度： "
+
+msgid "Cursor beyond end of line"
+msgstr ""
+
+#, fuzzy
+msgid "Pers&istent selection"
+msgstr "反向選取            M-*"
+
+msgid "Synta&x highlighting"
+msgstr "依語法改變顏色"
+
+msgid "Visible tabs"
+msgstr ""
+
+msgid "Visible trailing spaces"
+msgstr ""
+
+#, fuzzy
+msgid "Save file &position"
+msgstr " 儲存檔案 "
+
+msgid "Confir&m before saving"
+msgstr "存檔前先確認"
+
+msgid "&Return does autoindent"
+msgstr "換行時自動縮排"
+
+msgid "Tab spacing: "
+msgstr "Tab 空格 : "
+
+msgid "Fill tabs with &spaces"
+msgstr "以空白填滿移位鍵 (tab)"
+
+msgid "&Backspace through tabs"
+msgstr "Backspace 刪除移位鍵"
+
+msgid "&Fake half tabs"
+msgstr "半個 TAB"
+
+msgid "Wrap mode"
+msgstr "換行模式"
+
+msgid " Editor options "
+msgstr " 編輯器選項 "
+
+msgid "ButtonBar|Help"
+msgstr ""
+
+msgid "ButtonBar|Save"
+msgstr ""
+
+msgid "ButtonBar|Mark"
+msgstr ""
+
+msgid "ButtonBar|Replac"
+msgstr ""
+
+msgid "ButtonBar|Copy"
+msgstr ""
+
+msgid "ButtonBar|Move"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Delete"
+msgstr ""
+
+msgid "ButtonBar|PullDn"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
+
+msgid " Load syntax file "
+msgstr " 載入語法檔案 "
+
+#, c-format
+msgid ""
+" Cannot open file %s \n"
+" %s "
+msgstr ""
+" 無法開啟檔案 %s \n"
+" %s "
+
+#, c-format
+msgid " Error in file %s on line %d "
+msgstr " 檔案 %s 的第 %d 行有語法錯誤 "
+
 msgid ""
 " The Commander can't change to the directory that \n"
 " the subshell claims you are in.  Perhaps you have \n"
@@ -1426,10 +2232,6 @@ msgstr ""
 " 所在的地方，您可能刪除了您的工作 \n"
 " 目錄，或者因為執行過 \"su\" 指令 \n"
 " 而改變了權限狀態？ "
-
-#, c-format
-msgid "Press any key to continue..."
-msgstr "按任意鍵繼續..."
 
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
@@ -1777,9 +2579,6 @@ msgstr "%o %f \"%s\"%m"
 msgid "%o %d %f%m"
 msgstr "%o %d %f%m"
 
-msgid "file"
-msgstr "檔案"
-
 msgid "files"
 msgstr "檔案"
 
@@ -2043,6 +2842,9 @@ msgstr ""
 
 msgid "ButtonBar|Prev"
 msgstr ""
+
+msgid "&Move"
+msgstr "移動"
 
 msgid "&Remove"
 msgstr "移除"
@@ -2394,6 +3196,10 @@ msgstr " 檢視檔案 "
 #, fuzzy
 msgid "&Filtered view"
 msgstr " 選擇性的顯示 "
+
+#, fuzzy
+msgid "&Copy"
+msgstr "複製"
 
 msgid "C&hmod"
 msgstr ""
@@ -2815,29 +3621,6 @@ msgstr "使用者提供的格式似乎是錯誤的, 回復到預設值."
 msgid " Do you really want to execute? "
 msgstr "您確定要執行？ "
 
-msgid " Not implemented yet "
-msgstr ""
-
-msgid " Num of replace tokens not equal to num of found tokens "
-msgstr ""
-
-#, fuzzy, c-format
-msgid " Invalid token number %d "
-msgstr " 無效的目標遮罩 "
-
-#, fuzzy
-msgid "Normal"
-msgstr "格式"
-
-msgid "&Regular expression"
-msgstr " 正規表示式 "
-
-msgid "Hexadecimal"
-msgstr ""
-
-msgid "Wildcard search"
-msgstr ""
-
 #, fuzzy
 msgid "Choose codepage"
 msgstr " 選擇輸入頁碼 "
@@ -2850,18 +3633,6 @@ msgid ""
 "Cannot save file %s:\n"
 "%s"
 msgstr " 試著存檔時發生錯誤。 "
-
-#, c-format
-msgid ""
-"Unable to load '%s' skin.\n"
-"Default skin has been loaded"
-msgstr ""
-
-#, c-format
-msgid ""
-"Unable to parse '%s' skin.\n"
-"Default skin has been loaded"
-msgstr ""
 
 msgid ""
 "GNU Midnight Commander is already\n"
@@ -2976,277 +3747,6 @@ msgstr ""
 "無法寫入到檔案 %s :\n"
 "%s\n"
 
-msgid "Function key 1"
-msgstr "功能鍵 1"
-
-msgid "Function key 2"
-msgstr "功能鍵 2"
-
-msgid "Function key 3"
-msgstr "功能鍵 3"
-
-msgid "Function key 4"
-msgstr "功能鍵 4"
-
-msgid "Function key 5"
-msgstr "功能鍵 5"
-
-msgid "Function key 6"
-msgstr "功能鍵 6"
-
-msgid "Function key 7"
-msgstr "功能鍵 7"
-
-msgid "Function key 8"
-msgstr "功能鍵 8"
-
-msgid "Function key 9"
-msgstr "功能鍵 9"
-
-msgid "Function key 10"
-msgstr "功能鍵 10"
-
-msgid "Function key 11"
-msgstr "功能鍵 11"
-
-msgid "Function key 12"
-msgstr "功能鍵 12"
-
-msgid "Function key 13"
-msgstr "功能鍵 13"
-
-msgid "Function key 14"
-msgstr "功能鍵 14"
-
-msgid "Function key 15"
-msgstr "功能鍵 15"
-
-msgid "Function key 16"
-msgstr "功能鍵 16"
-
-msgid "Function key 17"
-msgstr "功能鍵 17"
-
-msgid "Function key 18"
-msgstr "功能鍵 18"
-
-msgid "Function key 19"
-msgstr "功能鍵 19"
-
-msgid "Function key 20"
-msgstr "功能鍵 20"
-
-msgid "Backspace key"
-msgstr "Backspace 鍵"
-
-msgid "End key"
-msgstr "End 鍵"
-
-msgid "Up arrow key"
-msgstr "向上鍵"
-
-msgid "Down arrow key"
-msgstr "向下鍵"
-
-msgid "Left arrow key"
-msgstr "向左鍵"
-
-msgid "Right arrow key"
-msgstr "向右鍵"
-
-msgid "Home key"
-msgstr "Home 鍵"
-
-msgid "Page Down key"
-msgstr "Page Down 鍵"
-
-msgid "Page Up key"
-msgstr "Page Up 鍵"
-
-msgid "Insert key"
-msgstr "Insert 鍵"
-
-msgid "Delete key"
-msgstr "Delete 鍵"
-
-msgid "Completion/M-tab"
-msgstr "Completion/M-tab 鍵"
-
-msgid "+ on keypad"
-msgstr "數字區的 +"
-
-msgid "- on keypad"
-msgstr "數字區的 -"
-
-msgid "Slash on keypad"
-msgstr "數字區的 / 鍵"
-
-msgid "* on keypad"
-msgstr "數字區的 *"
-
-#, fuzzy
-msgid "Escape key"
-msgstr "數字區的 / 鍵"
-
-msgid "Left arrow keypad"
-msgstr "數字區的向左鍵"
-
-msgid "Right arrow keypad"
-msgstr "數字區的向右鍵"
-
-msgid "Up arrow keypad"
-msgstr "數字區的向上鍵"
-
-msgid "Down arrow keypad"
-msgstr "數字區的向下鍵"
-
-msgid "Home on keypad"
-msgstr "數字區的 Home 鍵"
-
-msgid "End on keypad"
-msgstr "數字區的 End 鍵"
-
-msgid "Page Down keypad"
-msgstr "數字區的 Page Down 鍵"
-
-msgid "Page Up keypad"
-msgstr "數字區的 Page Up鍵"
-
-msgid "Insert on keypad"
-msgstr "數字區的 Insert 鍵"
-
-msgid "Delete on keypad"
-msgstr "數字區的 Del 鍵"
-
-msgid "Enter on keypad"
-msgstr "數字區的 Enter 鍵"
-
-#, fuzzy
-msgid "Function key 21"
-msgstr "功能鍵 1"
-
-#, fuzzy
-msgid "Function key 22"
-msgstr "功能鍵 2"
-
-#, fuzzy
-msgid "Function key 23"
-msgstr "功能鍵 2"
-
-#, fuzzy
-msgid "Function key 24"
-msgstr "功能鍵 2"
-
-msgid "Plus"
-msgstr ""
-
-#, fuzzy
-msgid "Minus"
-msgstr "選單"
-
-msgid "Asterisk"
-msgstr ""
-
-msgid "Dot"
-msgstr ""
-
-msgid "Less than"
-msgstr ""
-
-msgid "Great than"
-msgstr ""
-
-msgid "Equal"
-msgstr ""
-
-#, fuzzy
-msgid "Comma"
-msgstr "指令"
-
-msgid "Apostrophe"
-msgstr ""
-
-#, fuzzy
-msgid "Colon"
-msgstr "計數"
-
-msgid "Exclamation mark"
-msgstr ""
-
-msgid "Question mark"
-msgstr ""
-
-#, fuzzy
-msgid "Ampersand"
-msgstr "追加"
-
-msgid "Dollar sign"
-msgstr ""
-
-msgid "Quotation mark"
-msgstr ""
-
-#, fuzzy
-msgid "Caret"
-msgstr "目標"
-
-msgid "Tilda"
-msgstr ""
-
-#, fuzzy
-msgid "Prime"
-msgstr "往前"
-
-#, fuzzy
-msgid "Underline"
-msgstr " 輸入行號： "
-
-msgid "Understrike"
-msgstr ""
-
-msgid "Pipe"
-msgstr ""
-
-#, fuzzy
-msgid "Enter"
-msgstr "擁有者"
-
-#, fuzzy
-msgid "Tab key"
-msgstr "數字區的 +"
-
-#, fuzzy
-msgid "Space key"
-msgstr "數字區的 / 鍵"
-
-#, fuzzy
-msgid "Slash key"
-msgstr "數字區的 / 鍵"
-
-#, fuzzy
-msgid "Backslash key"
-msgstr "Backspace 鍵"
-
-msgid "Number sign #"
-msgstr ""
-
-msgid "Ctrl"
-msgstr ""
-
-msgid "Alt"
-msgstr ""
-
-msgid "Shift"
-msgstr ""
-
-#, c-format
-msgid ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-msgstr ""
-"不支援 %dx%d 的螢幕大小。\n"
-"請檢查 TERM 環境變數。\n"
-
 msgid " Format error on file Extensions File "
 msgstr "現存的檔案中有格式錯誤"
 
@@ -3287,46 +3787,6 @@ msgstr "沒有在 %s 中找到符合的項目"
 
 msgid " User menu "
 msgstr " 使用者選單 "
-
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
-#, fuzzy, c-format
-msgid "%s is not a directory\n"
-msgstr "建立新目錄"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr ""
-" 無法建立目標目錄 \"%s\" \n"
-" %s "
-
-#, fuzzy, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr ""
-" 無法建立目標目錄 \"%s\" \n"
-" %s "
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr ""
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr ""
-
-msgid " Pipe failed "
-msgstr " 管線失敗 "
-
-msgid " Dup failed "
-msgstr " 抄寫失敗 "
 
 #, fuzzy, c-format
 msgid ""
@@ -3451,448 +3911,6 @@ msgstr " 歷史紀錄 "
 
 msgid "Background process:"
 msgstr "背景程序："
-
-#, c-format
-msgid ""
-"Cannot open cpio archive\n"
-"%s"
-msgstr ""
-"無法開啟 cpio 檔案集\n"
-"%s"
-
-#, c-format
-msgid ""
-"Premature end of cpio archive\n"
-"%s"
-msgstr ""
-"cpio 檔案集的結尾過早出現\n"
-"%s"
-
-#, c-format
-msgid ""
-"Inconsistent hardlinks of\n"
-"%s\n"
-"in cpio archive\n"
-"%s"
-msgstr ""
-"錯誤的硬連結\n"
-"%s\n"
-"在 cpio 檔案集\n"
-"%s"
-
-#, c-format
-msgid "%s contains duplicate entries! Skipping!"
-msgstr "%s 有重複的進入點! 放棄中!"
-
-#, c-format
-msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"發現不完整的 cpio 標頭\n"
-"%s"
-
-#, c-format
-msgid ""
-"Unexpected end of file\n"
-"%s"
-msgstr ""
-"未預期的檔案結束\n"
-"%s"
-
-#, c-format
-msgid "Directory cache expired for %s"
-msgstr "%s 的路徑快取過期"
-
-msgid "Starting linear transfer..."
-msgstr "開始線性傳輸...."
-
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
-msgstr "%s: %s: %s %3d%% (已傳送 %lu 位元組)"
-
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
-msgstr "%s: %s: %s 已傳送 %lu 位元組"
-
-msgid "Getting file"
-msgstr "取得檔案中"
-
-#, c-format
-msgid ""
-"Cannot open %s archive\n"
-"%s"
-msgstr ""
-"無法開啟 %s 檔案集\n"
-"%s"
-
-msgid "Inconsistent extfs archive"
-msgstr "不完整的 extfs 檔案集"
-
-#, c-format
-msgid "fish: Disconnecting from %s"
-msgstr "fish: 結束至 %s 的連線"
-
-msgid "fish: Waiting for initial line..."
-msgstr "fish: 等待起始化訊息"
-
-msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr "不好意思，目前無法進行經過密碼認證的連線。"
-
-msgid " fish: Password required for "
-msgstr " fish: 必需有密碼 "
-
-msgid "fish: Sending password..."
-msgstr "fish: 正在送出登入密碼"
-
-msgid "fish: Sending initial line..."
-msgstr "fish: 送出起始化訊息"
-
-msgid "fish: Handshaking version..."
-msgstr "fish: 交握版本"
-
-msgid "fish: Setting up current directory..."
-msgstr "fish: 設定讀取目錄內容"
-
-#, c-format
-msgid "fish: Connected, home %s."
-msgstr "fisk: 連結至 %s"
-
-#, c-format
-msgid "fish: Reading directory %s..."
-msgstr "fisk: 讀取目錄 %s..."
-
-#, c-format
-msgid "%s: done."
-msgstr "%s: 完成."
-
-#, c-format
-msgid "%s: failure"
-msgstr "%s: 失敗"
-
-#, c-format
-msgid "fish: store %s: sending command..."
-msgstr "fish: 儲存%s: 送出命令"
-
-msgid "fish: Local read failed, sending zeros"
-msgstr "fish: 本地端讀取錯誤, 沒有送出"
-
-#, fuzzy, c-format
-msgid "fish: storing %s %d (%lu)"
-msgstr "fish: 儲存%s %d(%d)"
-
-msgid "zeros"
-msgstr "0"
-
-msgid "Aborting transfer..."
-msgstr "放棄傳輸...."
-
-msgid "Error reported after abort."
-msgstr "放棄後回報錯誤"
-
-msgid "Aborted transfer would be successful."
-msgstr "將成功放棄傳輸"
-
-#, c-format
-msgid "ftpfs: Disconnecting from %s"
-msgstr "ftpfs: 結束至 %s 的連線"
-
-msgid " FTP: Password required for "
-msgstr " FTP: 必需有密碼 -> "
-
-msgid "ftpfs: sending login name"
-msgstr "ftpfs: 正在送出登入名稱"
-
-msgid "ftpfs: sending user password"
-msgstr "ftpfs: 正在送出登入密碼"
-
-#, fuzzy, c-format
-msgid "FTP: Account required for user %s"
-msgstr " FTP: 必需有密碼 -> "
-
-#, fuzzy
-msgid "Account:"
-msgstr "計數"
-
-#, fuzzy
-msgid "ftpfs: sending user account"
-msgstr "ftpfs: 正在送出登入密碼"
-
-msgid "ftpfs: logged in"
-msgstr "ftpfs: 登入"
-
-#, c-format
-msgid "ftpfs: Login incorrect for user %s "
-msgstr "ftpfs: 使用者 %s 登入錯誤"
-
-msgid "ftpfs: Invalid host name."
-msgstr "ftpfs: 無效的主機名稱。"
-
-#, c-format
-msgid "ftpfs: %s"
-msgstr ""
-
-#, c-format
-msgid "ftpfs: making connection to %s"
-msgstr "ftpfs: 建立至 %s 的連線"
-
-msgid "ftpfs: connection interrupted by user"
-msgstr "ftpfs: 使用者中斷連線"
-
-#, c-format
-msgid "ftpfs: connection to server failed: %s"
-msgstr "ftpfs: 連結到伺服器發生錯誤: %s"
-
-#, c-format
-msgid "Waiting to retry... %d (Control-C to cancel)"
-msgstr "等候重試... %d (Control-C 結束)"
-
-#, fuzzy
-msgid "ftpfs: invalid address family"
-msgstr "ftpfs: 無效的主機位址。"
-
-#, fuzzy, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: 無法設定 passive mode"
-
-#, fuzzy, c-format
-msgid "ftpfs: could not create socket: %s"
-msgstr " 無法建立插座: %s"
-
-msgid "ftpfs: could not setup passive mode"
-msgstr "ftpfs: 無法設定 passive mode"
-
-msgid "ftpfs: aborting transfer."
-msgstr "ftpfs: 傳輸中斷"
-
-#, c-format
-msgid "ftpfs: abort error: %s"
-msgstr "ftpfs: 造成中斷的錯誤: %s"
-
-msgid "ftpfs: abort failed"
-msgstr "ftpfs: 中斷失敗"
-
-msgid "ftpfs: CWD failed."
-msgstr "ftpfs: 改變目錄失敗"
-
-msgid "ftpfs: couldn't resolve symlink"
-msgstr "FTPFS: 無法解讀符號連結"
-
-msgid "Resolving symlink..."
-msgstr "解讀符號連結..."
-
-#, c-format
-msgid "ftpfs: Reading FTP directory %s... %s%s"
-msgstr "ftpfs: 讀取 FTP 目錄 %s... %s%s"
-
-msgid "(strict rfc959)"
-msgstr "(嚴謹的 rfc959)"
-
-msgid "(chdir first)"
-msgstr "(先切換路徑)"
-
-msgid "ftpfs: failed; nowhere to fallback to"
-msgstr "ftpfs: 失敗; 無法轉移到其它目錄"
-
-#, fuzzy, c-format
-msgid "ftpfs: storing file %lu (%lu)"
-msgstr "ftpfs: 儲存檔案 %d (%d)"
-
-msgid ""
-"~/.netrc file has incorrect mode.\n"
-"Remove password or correct mode."
-msgstr ""
-"~/.netrc 檔案的模式不正確。移除寫在裡面 \n"
-"的密碼或修正 ~/.netrc 檔案的模式。 "
-
-msgid " MCFS "
-msgstr " MCFS "
-
-msgid " The server does not support this version "
-msgstr " 伺服器並不支援此一版本 "
-
-msgid ""
-" The remote server is not running on a system port \n"
-" you need a password to log in, but the information may \n"
-" not be safe on the remote side.  Continue? \n"
-msgstr ""
-" 遠端主機並未在正常 port 上執行伺服軟體， \n"
-" 您必須輸入密碼以登入主機，可是密碼資訊經過 \n"
-" 網路傳輸可能不太安全，還要繼續嗎？ \n"
-
-msgid " MCFS Password required "
-msgstr " 必需有 MCFS 密碼 "
-
-msgid " Invalid password "
-msgstr " 密碼無效 "
-
-#, c-format
-msgid " Cannot locate hostname: %s "
-msgstr " 找不到主機: %s"
-
-#, c-format
-msgid " Cannot create socket: %s "
-msgstr " 無法建立插座: %s"
-
-#, c-format
-msgid " Cannot connect to server: %s "
-msgstr " 無法連結到伺服器: %s"
-
-msgid " Too many open connections "
-msgstr " 太多開啟的連結了 "
-
-#, c-format
-msgid ""
-"Warning: Invalid line in %s:\n"
-"%s\n"
-msgstr ""
-"警告：%s 中此行不正確：\n"
-"%s\n"
-
-#, c-format
-msgid ""
-"Warning: Invalid flag %c in %s:\n"
-"%s\n"
-msgstr ""
-"警告：%2$s 中的旗標 %1$c 不正確：\n"
-"%3$s\n"
-
-#, c-format
-msgid ""
-" reconnect to %s failed\n"
-" "
-msgstr ""
-" 重新連結到 %s 失敗\n"
-" "
-
-msgid " Authentication failed "
-msgstr " 認證錯誤 "
-
-#, c-format
-msgid " Error %s creating directory %s "
-msgstr "%s 建立 %s 目錄中"
-
-#, c-format
-msgid " Error %s removing directory %s "
-msgstr "%s 刪除 %s 目錄中"
-
-#, c-format
-msgid " %s opening remote file %s "
-msgstr "%s 開啟遠端檔案 %s 中"
-
-#, fuzzy, c-format
-msgid " %s removing remote file %s "
-msgstr "%s 開啟遠端檔案 %s 中"
-
-#, c-format
-msgid " %s renaming files\n"
-msgstr " %s 剩下的檔案\n"
-
-#, c-format
-msgid ""
-"Cannot open tar archive\n"
-"%s"
-msgstr ""
-"無法開啟 tar 檔案集\n"
-"%s"
-
-msgid "Inconsistent tar archive"
-msgstr "不完整的 tar 檔案集"
-
-msgid "Unexpected EOF on archive file"
-msgstr "檔案集的檔案結尾不正常"
-
-#, c-format
-msgid ""
-"Hmm,...\n"
-"%s\n"
-"doesn't look like a tar archive."
-msgstr ""
-"嗯...\n"
-"%s\n"
-"看起來不像是一個 tar 檔案集。"
-
-msgid " undelfs: error "
-msgstr " undelfs: 錯誤 "
-
-msgid " not enough memory "
-msgstr " 不足的記憶體 "
-
-msgid " while allocating block buffer "
-msgstr " 檔配置區塊緩衝區時 "
-
-#, c-format
-msgid " open_inode_scan: %d "
-msgstr " 開啟 inode 掃描: %d "
-
-#, c-format
-msgid " while starting inode scan %d "
-msgstr " 當啟動 inode 掃描時 %d"
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: 載入刪除的檔案資訊 %d inode"
-
-#, c-format
-msgid " while calling ext2_block_iterate %d "
-msgstr " 當呼叫 ext2 區塊覆合時 %d "
-
-msgid " no more memory while reallocating array "
-msgstr " 當重新配置陣列時沒有更多的記憶體"
-
-#, c-format
-msgid " while doing inode scan %d "
-msgstr " 當進行 inode 掃描時 %d"
-
-msgid " Ext2lib error "
-msgstr " ext2lib 錯誤 "
-
-#, c-format
-msgid " Cannot open file %s "
-msgstr " 無法開啟檔案 %s "
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: 讀取 inode 點陣圖..."
-
-#, c-format
-msgid ""
-" Cannot load inode bitmap from: \n"
-" %s \n"
-msgstr ""
-" 無法從 %s 中 \n"
-" 載入 inode 點陣圖 \n"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: 讀取區塊點陣圖中..."
-
-#, c-format
-msgid ""
-" Cannot load block bitmap from: \n"
-" %s \n"
-msgstr ""
-" 無法從 %s 中 \n"
-" 載入區塊點陣圖 \n"
-
-msgid " vfs_info is not fs! "
-msgstr " vfs_info 不是檔案系統! "
-
-msgid " You have to chdir to extract files first "
-msgstr " 您必須先變換路徑到解開的檔案 "
-
-msgid " while iterating over blocks "
-msgstr " 當由 block 覆合時"
-
-msgid "Cannot parse:"
-msgstr "無法分析:"
-
-msgid "More parsing errors will be ignored."
-msgstr "更多的分析錯誤將會被忽略"
-
-msgid "Internal error:"
-msgstr "內部錯誤:"
-
-msgid "Changes to file lost"
-msgstr "改變到檔案遺失"
 
 #~ msgid "File:       None"
 #~ msgstr "檔案：       無"
@@ -4049,9 +4067,6 @@ msgstr "改變到檔案遺失"
 
 #~ msgid "Replac"
 #~ msgstr "替換"
-
-#~ msgid "Move"
-#~ msgstr "搬移"
 
 #~ msgid "Delete"
 #~ msgstr "刪除..."
