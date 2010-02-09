@@ -54,6 +54,7 @@ int handle_path (dir_list *list, const char *path, struct stat *buf1,
 /* Sorting functions */
 int unsorted   (file_entry *a, file_entry *b);
 int sort_name  (file_entry *a, file_entry *b);
+int sort_vers  (file_entry *a, file_entry *b);
 int sort_ext   (file_entry *a, file_entry *b);
 int sort_time  (file_entry *a, file_entry *b);
 int sort_atime (file_entry *a, file_entry *b);

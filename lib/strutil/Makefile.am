@@ -5,7 +5,8 @@ libmcstrutil_la_SOURCES = \
 	strutil8bit.c \
 	strutilascii.c \
 	strutil.c \
-	strutilutf8.c
+	strutilutf8.c \
+	strverscmp.c
 
 
 

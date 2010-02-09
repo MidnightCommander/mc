@@ -449,6 +449,15 @@ panel_field_t panel_fields [] = {
 	(sortfn *) sort_name
     },
     {
+	"version", 12, 1, J_LEFT_FIT,
+	/* TRANSLATORS: one single character to represent 'version' sort mode  */
+	/* TRANSLATORS: no need to translate 'sort', it's just a context prefix  */
+	N_("sort|v"),
+	N_("&Version"), TRUE, FALSE,
+	string_file_name,
+	(sortfn *) sort_vers
+    },
+    {
 	"extension", 12, 1, J_LEFT_FIT,
 	/* TRANSLATORS: one single character to represent 'extension' sort mode  */
 	/* TRANSLATORS: no need to translate 'sort', it's just a context prefix  */
