@@ -208,8 +208,9 @@ extfs_find_entry_int (struct entry *dir, char *name, GSList *list,
     char *p, *q, *name_end;
     char c = PATH_SEP;
 
-    if (*name == '/') { /* Handle absolute paths */
-	name++;
+    if (g_path_is_absolute (name)) {
+	/* Handle absolute paths */
+	name = g_path_skip_root (name);
 	dir = dir->inode->archive->root_entry;
     }
 
@@ -217,7 +218,7 @@ extfs_find_entry_int (struct entry *dir, char *name, GSList *list,
     p = name;
     name_end = name + strlen (name);
 
-    q = strchr (p, '/');
+    q = strchr (p, PATH_SEP);
     if (q == '\0')
 	q = strchr (p, '\0');
 
@@ -265,7 +266,7 @@ extfs_find_entry_int (struct entry *dir, char *name, GSList *list,
 	/* Next iteration */
 	*q = c;
 	p = q + 1;
-	q = strchr (p, '/');
+	q = strchr (p, PATH_SEP);
 	if (q == '\0')
 	    q = strchr (p, '\0');
     }
@@ -395,7 +396,7 @@ extfs_open_archive (int fstype, const char *name, struct archive **pparc)
     if (mode & 0004)
 	mode |= 0001;
     mode |= S_IFDIR;
-    root_entry = extfs_generate_entry (current_archive, "/", NULL, mode);
+    root_entry = extfs_generate_entry (current_archive, PATH_SEP_STR, NULL, mode);
     root_entry->inode->uid = mystat.st_uid;
     root_entry->inode->gid = mystat.st_gid;
     root_entry->inode->atime = mystat.st_atime;
@@ -443,12 +444,12 @@ extfs_read_archive (int fstype, const char *name, struct archive **pparc)
 	    char *p, *q, *cfn = current_file_name;
 
 	    if (*cfn != '\0') {
-		if (*cfn == '/')
+		if (*cfn == PATH_SEP)
 		    cfn++;
 		p = strchr (cfn, '\0');
-		if (p != cfn && *(p - 1) == '/')
+		if (p != cfn && *(p - 1) == PATH_SEP)
 		    *(p - 1) = '\0';
-		p = strrchr (cfn, '/');
+		p = strrchr (cfn, PATH_SEP);
 		if (p == NULL) {
 		    p = cfn;
 		    q = strchr (cfn, '\0');
@@ -587,7 +588,7 @@ extfs_get_path_mangle (struct vfs_class *me, char *inname, struct archive **arch
 
     /*
      * All filesystems should have some local archive, at least
-     * it can be '/'.
+     * it can be PATH_SEP ('/').
      */
     for (parc = first_archive; parc != NULL; parc = parc->next)
 	if (parc->name != NULL) {
