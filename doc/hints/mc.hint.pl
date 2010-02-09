@@ -1,45 +1,44 @@
-Porada: Za pomocą C-x t kopiuje się nazwy zaznaczoych plików do wiersza poleceń.
-Porada: Za pomocą C-x p kopiuje się nazwę bieżącej ścieżki do wiersza poleceń.
-Porada: Uzupełnianie: M-Tab (lub Esc+Tab). Podwójne wciśnięcie wywołuje listę.
-Porada: M-p i M-n udostępnia historię poleceń.
-Porada: Cytowanie znaku można uzyskać naciskając Contrl-q i odpowiedni znak.
-Porada: Zmęczony poradami? Wyłącz je w menu Opcje|Układ...
-Porada: Wybieranie katalogów: dodaj ukośnik na końcu wzorca dopasowania.
-Porada: Jeśli w twoim terminalu brak klawiszy funkcyjnych, użyj Esc+numer.
-Porada: Witryna Midnight Commandera jest pod adresem http://www.midnight-commander.org/
-Porada: Strona domowa Midnight Commandera pod adresem http://www.midnight-commander.org/
-Porada: Opis błędów (w języku angielskim) wysyłaj na mc-devel@gnome.org
-Porada: Za pomocą klawisza Tab zmienia się bieżący panel.
-Porada: VFS: naciśnij Enter na archiwum tar, aby obejrzeć jego zawartość.
-Porada: Na stronę podręcznikową też warto zajrzeć.
-Porada: Chcesz się poruszać tak jak w lynksie? Ustaw to w menu Konfiguracja...
-Porada: Makra % działają nawet w wierszu poleceń.
-Porada: M-! pozwala na podgląd wyjścia uruchamianych programów w przeglądarce.
-Porada: Tryb wyświetlania listy plików można dostosowywać: zobacz "man mc".
-Porada: %D/%T oznacza zazanaczone pliki w drugim panelu.
-Porada: Dostęp do zwykłej powłoki przez C-o. Powrót do MC przez ponowne C-o.
-Porada: Ustawienie zmiennej CDPATH może ci zaoszczędzić pisania.
-Porada: Jeśli chcesz zobaczyć pliki .*, zmień ustawienie w menu Konfiguracja...
-Porada: Jeśli chcesz zobaczyć pliki .*~, zmień ustawienie w menu Konfiguracja...
-Porada: Uzupełnianie działa wszędzie. Po prostu naciśnij M-Tab.
-Porada: Jeśli masz powolny terminal, spróbuj użyć opcji -s.
-Porada: Znajdź plik: na znalezionych plikach wykonujemy operacje poprzez Filtruj.
-Porada: Chcesz użyć złożonego wyszukiwania? Użyj polecenia Filtr zewnętrzny.
-Porada: Jeśli chcesz szybciej zmieniać ścieżkę, użyj M-c (szybka zmiana katalogu).
-Porada: Polecenia powłoki działają tylko w lokalnym systemie plików.
-Porada: Przywróć skasowany tekst za pomocą C-y.
-Porada: Niektóre klawisze nie działają? Patrz menu Opcje|Definiuj klawisze...
-Porada: Aby obejrzeć wyjście polecenia w przeglądarce użyj M-!
-Porada: F13 (lub Shift-F3) wywołuje przeglądarkę w trybie surowym.
-Porada: Możesz określić edytor pod F4 przez zmienną powłoki EDITOR.
-Porada: Możesz określić zewnętrzną przeglądarkę przez zmienną powłoki PAGER.
-Porada: Możesz wyłączyć żądania potwierdzenia przez menu Opcje|Potwierdzanie...
-Porada: Przejdź do listy najczęściej używanych katalogów przez C-\.
-Porada: Z anonimowego FTP korzystamy pisząc 'cd /#ftp:machine.edu'
-Porada: MC ma wbudowaną obsługę FTP; patrz menu Plik, Połączenie FTP...
-Porada: M-t przełącza tryby wyświetlania listy plików.
-Porada: Użytkownika FTP określamy przez: 'cd /#ftp:user@machine.edu'
-Porada: Pakiety RPM przeglądamy naciskając na nich Enter.
-Porada: Aby zazanaczyć katalogi w oknie dialogowym zaznaczania dodaj ukośnik.
-Porada: Używanie kopiowania i wklejania za pomocą myszy może wymagać Shifta.
-Porada: Klawiszem C-\ dopisz do podręcznej listy często odwiedzane zasoby FTP.
+Porada: C-x t skopiuje nazwy zaznaczonych plików do wiersza poleceń.
+Porada: C-x p skopiuje nazwę bieżącej ścieżki do wiersza poleceń.
+Porada: uzupełnianie: M-Tab (lub Esc+Tab). Dwukrotne naciśnięcie wywołuje listę.
+Porada: M-p i M-n udostępni historię poleceń.
+Porada: cytowanie znaku można uzyskać przez Ctrl-q i odpowiedni znak.
+Porada: te komunikaty można wyłączyć w menu Opcje/Układ.
+Porada: zaznaczanie katalogów: należy dodać ukośnik na końcu wzorca dopasowania.
+Porada: jeśli w terminalu nie ma klawiszy funkcyjnych, można użyć Esc+numer.
+Porada: strona domowa GNU Midnight Commander: http://www.midnight-commander.org
+Porada: raporty błędów (w języku angielskim) proszę wysłać na mc-devel@gnome.org
+Porada: klawisz Tab zmienia bieżący panel.
+Porada: VFS: naciśnięcie klawisza Enter na pliku tar wyświetli jego zawartość.
+Porada: warto zajrzeć także na stronę podręcznika.
+Porada: nawigację w stylu programu Lynx można ustawić w oknie konfiguracji.
+Porada: makra % działają także w wierszu poleceń.
+Porada: M-! umożliwia wyświetlenie wyjścia wykonywanych programów w podglądzie.
+Porada: format wyświetlania listy plików można dostosować (więcej w "man mc").
+Porada: %D/%T oznacza zaznaczone pliki w drugim panelu.
+Porada: dostęp do zwykłej powłoki można uzyskać przez C-o, a powrót tak samo.
+Porada: ustawienie zmiennej CDPATH może zaoszczędzić pisania przy cd.
+Porada: wyświetlanie plików .* można wybrać w oknie konfiguracji.
+Porada: wyświetlanie plików zapasowych *~ można ustawić w oknie konfiguracji.
+Porada: uzupełnianie działa wszędzie. Wystarczy nacisnąć M-Tab.
+Porada: na powolnych terminalach może pomóc flaga -s.
+Porada: wyszukanie plików: można pracować na znalezionych plikach przez Filtruj.
+Porada: złożone wyszukiwanie można wykonać używając polecenia Filtr zewnętrzny.
+Porada: można zmienić katalog w połowie podawania polecenia, używając M-c.
+Uwaga: polecenia powłoki działają tylko na lokalnych systemach plików.
+Porada: można przywrócić usunięty tekst za pomocą C-y.
+Porada: jeśli jakiś klawisz nie działa, należy zobaczyć Opcje/Określ klawisze.
+Porada: aby zobaczyć wyjście polecenia w podglądzie, należy użyć M-!.
+Porada: F13 (lub Shift-F3) wywołuje podgląd w trybie oryginalnym.
+Porada: można określić edytor dla klawisza F4 za pomocą zmiennej powłoki EDITOR.
+Porada: można określić zewnętrzny podgląd za pomocą zmiennych VIEWER lub PAGER.
+Porada: można wyłączyć wszystkie żądania potwierdzenia w Opcje/Potwierdzenia.
+Porada: do listy często używanych katalogów można przejść za pomocą C-\.
+Porada: można połączyć się z anonimowym FTP wpisując "cd /#ftp:komputer.edu".
+Porada: FTP jest wbudowane w mc, proszę zobaczyć menu Plik/Połączenie FTP.
+Porada: M-t szybko zmienia tryb wyświetlania.
+Porada: można podać użytkownika dla ftps: "cd /#ftp:użytkownik@komputer.edu".
+Porada: można przeglądać pakiety RPM naciskając na nich klawisz Enter.
+Porada: aby zaznaczyć katalogi w oknie zaznaczania, należy dodać ukośnik.
+Porada: użycie wycinania i wklejania za pomocą myszy wymaga klawisza Shift.
+Porada: wpisując C-\ można dodać często używane zasoby FTP do listy podręcznej.
