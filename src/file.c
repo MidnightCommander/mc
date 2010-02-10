@@ -1610,7 +1610,7 @@ compute_dir_size (const char *dirname, const void *ui,
  * overwrite any files by doing the copy.
  */
 static FileProgressStatus
-panel_compute_totals (WPanel *panel, const void *ui,
+panel_compute_totals (const WPanel *panel, const void *ui,
 			compute_dir_size_callback cback,
 			off_t *ret_marked, double *ret_total)
 {
@@ -1636,7 +1636,7 @@ panel_compute_totals (WPanel *panel, const void *ui,
 	    dir_name =
 		concat_dir_and_file (panel->cwd, panel->dir.list[i].fname);
 
-	    status  = compute_dir_size (dir_name, ui, cback,
+	    status = compute_dir_size (dir_name, ui, cback,
 					&subdir_count, &subdir_bytes);
 	    g_free (dir_name);
 
@@ -1652,6 +1652,39 @@ panel_compute_totals (WPanel *panel, const void *ui,
     }
 
     return FILE_CONT;
+}
+
+/* Initialize variables for progress bars */
+static FileProgressStatus
+panel_operate_init_totals (FileOperation operation,
+			    const WPanel *panel, const char *source,
+			    FileOpContext *ctx)
+{
+    FileProgressStatus status;
+
+    if (operation != OP_MOVE && verbose && file_op_compute_totals) {
+	ComputeDirSizeUI *ui;
+
+	ui = compute_dir_size_create_ui ();
+
+	if (source != NULL)
+	    status = compute_dir_size (source, ui, compute_dir_size_update_ui,
+					&ctx->progress_count, &ctx->progress_bytes);
+	else
+	    status = panel_compute_totals (panel, ui, compute_dir_size_update_ui,
+					&ctx->progress_count, &ctx->progress_bytes);
+
+	compute_dir_size_destroy_ui (ui);
+
+	ctx->progress_totals_computed = (status == FILE_CONT);
+    } else {
+	status = FILE_CONT;
+	ctx->progress_count = panel->marked;
+	ctx->progress_bytes = panel->total;
+	ctx->progress_totals_computed = 0;
+    }
+
+    return status;
 }
 
 /*
@@ -1702,7 +1735,7 @@ static const char *question_format = N_("%s?");
  * src_stat is only used when single_source is not NULL.
  */
 static char *
-panel_operate_generate_prompt (const WPanel *panel, const int operation,
+panel_operate_generate_prompt (const WPanel *panel, FileOperation operation,
 			       gboolean single_source,
 			       const struct stat *src_stat)
 {
@@ -2013,6 +2046,11 @@ panel_operate (void *source_panel, FileOperation operation, int force_single)
 	source_with_path = concat_dir_and_file (panel->cwd, source);
 #endif				/* WITH_FULL_PATHS */
 
+	/* Initialize variables for progress bars */
+	if (panel_operate_init_totals (operation, panel,
+					source_with_path, ctx) != FILE_CONT)
+	    goto clean_up;
+
 	if (operation == OP_DELETE) {
 	    if (S_ISDIR (src_stat.st_mode))
 		value = erase_dir (ctx, source_with_path, &count, &bytes);
@@ -2085,25 +2123,8 @@ panel_operate (void *source_panel, FileOperation operation, int force_single)
 	}
 
 	/* Initialize variables for progress bars */
-	if (operation != OP_MOVE && verbose && file_op_compute_totals) {
-	    ComputeDirSizeUI *ui;
-	    FileProgressStatus status;
-
-	    ui = compute_dir_size_create_ui ();
-	    status = panel_compute_totals (panel,
-				ui, compute_dir_size_update_ui,
-				&ctx->progress_count, &ctx->progress_bytes);
-	    compute_dir_size_destroy_ui (ui);
-
-	    if (status != FILE_CONT)
-		goto clean_up;
-
-	    ctx->progress_totals_computed = 1;
-	} else {
-	    ctx->progress_totals_computed = 0;
-	    ctx->progress_count = panel->marked;
-	    ctx->progress_bytes = panel->total;
-	}
+	if (panel_operate_init_totals (operation, panel, NULL, ctx) != FILE_CONT)
+	    goto clean_up;
 
 	/* Loop for every file, perform the actual copy operation */
 	for (i = 0; i < panel->count; i++) {
@@ -2124,8 +2145,7 @@ panel_operate (void *source_panel, FileOperation operation, int force_single)
 			erase_dir (ctx, source_with_path, &count, &bytes);
 		else
 		    value =
-			erase_file (ctx, source_with_path, &count, &bytes,
-				    1);
+			erase_file (ctx, source_with_path, &count, &bytes, 1);
 	    } else {
 		temp = transform_source (ctx, source_with_path);
 		if (temp == NULL)
