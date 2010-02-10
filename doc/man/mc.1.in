@@ -2937,9 +2937,15 @@ elements are optional.  If you specify the
 element, the Midnight Commander will try to login on the remote
 machine as that user, otherwise it will use your login name.
 .PP
-The
+The available
 .I options
-are 'C' \- use compression and 'rsh' use rsh instead of ssh.  If the
+are:
+.nf
+  'C' \- use compression;
+  'r' \- use rsh instead of ssh;
+  port \- specify the port used by remote server.
+.fi
+If the
 .I remote\-dir
 element is present, your current directory on the remote machine will be
 set to this one.
@@ -2950,6 +2956,7 @@ Examples:
     /#sh:onlyrsh.mx:r/linux/local
     /#sh:joe@want.compression.edu:C/private
     /#sh:joe@noncompressed.ssh.edu/private
+    /#sh:joe@somehost.ssh.edu:2222/private
 .fi
 .\"NODE "  Network File System"
 .SH "  Network File System"

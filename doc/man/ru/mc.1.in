@@ -3320,8 +3320,10 @@ bash\-совместимая оболочка shell.
 .I options
 могут использоваться:
 .nf
-  'C' \- использовать сжатие и
-  'r' \- использовать rsh вместо ssh.
+  'C' \- использовать сжатие;
+  'r' \- использовать rsh вместо ssh;
+  port \- использовать данный порт для поключения
+к удалённому компьютеру.
 .fi
 Если задан элемент
 .IR remote\-dir ,
@@ -3334,6 +3336,7 @@ bash\-совместимая оболочка shell.
     /#sh:onlyrsh.mx:r/linux/local
     /#sh:joe@want.compression.edu:C/private
     /#sh:joe@noncompressed.ssh.edu/private
+    /#sh:joe@somehost.ssh.edu:2222/private
 .fi
 .\"NODE "  Network File System"
 .SH "  Файловая система NFS (Network File System)"
