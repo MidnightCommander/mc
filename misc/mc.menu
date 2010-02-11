@@ -222,33 +222,33 @@ U       Uudecode marked news articles (needs work)
 	fi
 	echo "Please test the output file before deleting anything."
 
-=+ f \.tar\.gz$ | f \.tar\.z$ | f \.tgz$ | f \.tpz$ | f \.tar\.lz$ | f \.tar\.lzma$ | f \.tar\.lz$ | f \.tar\.7z$ | f \.tar\.xz$ | f \.tar\.Z$| f \.tar\.bz2$ & t r
+=+ f \.tar\.gz$ | f \.tar\.z$ | f \.tgz$ | f \.tpz$ | f \.tar\.lz$ | f \.tar\.lzma$ | f \.tar\.7z$ | f \.tar\.xz$ | f \.tar\.Z$ | f \.tar\.bz2$ & t r
 x       Extract the contents of a compressed tar file
 	unset PRG
 	case %f in
 	    *.tar.bz2)
-		PRG="bunzip2 -c %f"
+		PRG="bunzip2 -c"
 		;;
 	    *.tar.gz|*.tar.z|*.tgz|*.tpz|*.tar.Z)
-		PRG="gzip -dc %f"
+		PRG="gzip -dc"
 		;;
 	    *.tar.lzma)
-		PRG="lzma -dc %f"
+		PRG="lzma -dc"
 		;;
 	    *.tar.lz)
-		PRG="lzip -dc %f"
+		PRG="lzip -dc"
 		;;
 	    *.tar.xz)
-		PRG="xz -dc %f"
+		PRG="xz -dc"
 		;;
 	    *.tar.7z)
-		PRG="7za e -so %f"
+		PRG="7za e -so"
 		;;
 	    *)
 		exit 1
 		;;
 	esac
-	$PRG | tar xvf -
+	$PRG %f | tar xvf -
 
 = t r
 + ! t t
