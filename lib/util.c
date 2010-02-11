@@ -50,6 +50,9 @@
 #include "lib/strutil.h"
 
 #include "src/file.h"		/* copy_file_file() */
+#ifndef HAVE_CHARSET
+#include "src/main.h"		/* eight_bit_clean */
+#endif
 
 /*In order to use everywhere the same setup 
   for the locale we use defines               */
