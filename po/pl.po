@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-09 12:08+0200\n"
-"PO-Revision-Date: 2010-02-08 21:22+0100\n"
+"POT-Creation-Date: 2010-02-12 16:19+0200\n"
+"PO-Revision-Date: 2010-02-10 22:03+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <trans-pl@lists.fedoraproject.org>\n"
 "MIME-Version: 1.0\n"
@@ -1723,7 +1723,7 @@ msgid " Sort returned non-zero: "
 msgstr " Polecenie sort zwróciło kod błędu: "
 
 msgid "Paste output of external command"
-msgstr "Wklej wyjście zewnętrznego polecenia"
+msgstr "Wklejenie wyjście zewnętrznego polecenia"
 
 msgid "Enter shell command(s):"
 msgstr "Proszę podać polecenia powłoki:"
@@ -1864,44 +1864,36 @@ msgstr "&Zakończ"
 msgid "&Undo"
 msgstr "Co&fnij"
 
-#, fuzzy
 msgid "&Toggle ins/overw"
 msgstr "P&rzełącz wst/nad"
 
-#, fuzzy
 msgid "To&ggle mark"
-msgstr "&Przełącz zaznaczone"
+msgstr "&Przełącz zaznaczenie"
 
 msgid "&Mark columns"
 msgstr "Zaznacz kolu&mny"
 
-#, fuzzy
 msgid "Mark &all"
-msgstr "Wszystkie zaz&naczone"
+msgstr "Zazn&acz wszystko"
 
 msgid "Unmar&k"
-msgstr ""
+msgstr "O&dznacz"
 
-#, fuzzy
 msgid "Cop&y"
 msgstr "&Skopiuj"
 
-#, fuzzy
 msgid "Mo&ve"
 msgstr "Prze&nieś"
 
 msgid "&Delete"
 msgstr "&Usuń"
 
-#, fuzzy
 msgid "Co&py to clipfile"
 msgstr "Sk&opiuj do pliku schowka"
 
-#, fuzzy
 msgid "&Cut to clipfile"
 msgstr "Wytnij do pliku s&chowka"
 
-#, fuzzy
 msgid "Pa&ste from clipfile"
 msgstr "&Wklej z pliku schowka"
 
@@ -1915,21 +1907,19 @@ msgid "&Search..."
 msgstr "Wy&szukaj..."
 
 msgid "Search &again"
-msgstr "Wyszuk&aj ponownie"
+msgstr "Wyszuka&j ponownie"
 
 msgid "&Replace..."
 msgstr "&Zastąp..."
 
-#, fuzzy
 msgid "&Toggle bookmark"
 msgstr "Przełącz za&kładkę"
 
 msgid "&Next bookmark"
-msgstr "N&astępna zakładka"
+msgstr "Następna &zakładka"
 
-#, fuzzy
 msgid "&Prev bookmark"
-msgstr "P&oprzednia zakładka"
+msgstr "Poprzedn&ia zakładka"
 
 msgid "&Flush bookmark"
 msgstr "Wycz&yść zakładkę"
@@ -1937,24 +1927,20 @@ msgstr "Wycz&yść zakładkę"
 msgid "&Go to line..."
 msgstr "&Przejdź do wiersza..."
 
-#, fuzzy
 msgid "&Toggle line state"
 msgstr "Przełącz sta&n wiersza"
 
 msgid "Go to matching &bracket"
 msgstr "Prze&jdź do pasującego nawiasu"
 
-#, fuzzy
 msgid "&Find declaration"
-msgstr "Znajdź deklarację"
+msgstr "&Znajdź deklarację"
 
-#, fuzzy
 msgid "Back from &declaration"
-msgstr "Poprzednia deklaracja"
+msgstr "Poprzednia &deklaracja"
 
-#, fuzzy
 msgid "For&ward to declaration"
-msgstr "Następna deklaracja"
+msgstr "Następna de&klaracja"
 
 msgid "Encod&ing..."
 msgstr "Kodowan&ie..."
@@ -1965,15 +1951,14 @@ msgstr "Odśwież ek&ran"
 msgid "&Start record macro"
 msgstr "Rozpocznij zapi&s makra"
 
-#, fuzzy
 msgid "Finis&h record macro..."
-msgstr "&Zakończ zapis makra..."
+msgstr "Zak&ończ zapis makra..."
 
 msgid "&Execute macro..."
 msgstr "Wykonaj &makro..."
 
 msgid "Delete macr&o..."
-msgstr "Usuń makr&o..."
+msgstr "&Usuń makro..."
 
 msgid "'ispell' s&pell check"
 msgstr "Spr&awdzanie pisowni \"ispell\""
@@ -1987,21 +1972,17 @@ msgstr "Wstaw symbo&l..."
 msgid "Insert &date/time"
 msgstr "Wstaw &datę/godzinę"
 
-#, fuzzy
 msgid "&Format paragraph"
-msgstr "Sformatuj &akapit"
+msgstr "S&formatuj akapit"
 
-#, fuzzy
 msgid "&Sort..."
-msgstr "Posor&tuj..."
+msgstr "Po&sortuj..."
 
-#, fuzzy
 msgid "&Paste output of..."
-msgstr "Wklej &wynik polecenia..."
+msgstr "Wklej wynik &polecenia..."
 
-#, fuzzy
 msgid "&External formatter"
-msgstr "&Zewnętrzny formater"
+msgstr "Z&ewnętrzny formater"
 
 msgid "&General...  "
 msgstr "&Ogólne...  "
