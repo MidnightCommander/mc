@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-09 12:01+0200\n"
-"PO-Revision-Date: 2010-02-08 21:22+0100\n"
+"POT-Creation-Date: 2010-02-12 16:16+0200\n"
+"PO-Revision-Date: 2010-02-10 22:10+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <trans-pl@lists.fedoraproject.org>\n"
 "MIME-Version: 1.0\n"
@@ -1053,35 +1053,28 @@ msgstr "Najpierw &pliki wykonywalne"
 msgid "Sort order"
 msgstr "Porządek sortowania"
 
-#, fuzzy
 msgid "Confirmation"
-msgstr " Potwierdzenia "
+msgstr "Potwierdzenia"
 
 #. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
-#, fuzzy
 msgid "Confirmation|&History cleanup"
-msgstr " Potwierdzenia "
+msgstr "Wyczyszczenie &historii"
 
-#, fuzzy
 msgid "Confirmation|&Directory hotlist delete"
-msgstr " Potwierdź usunięcie listy podręcznych &katalogów "
+msgstr "Usunięcie listy po&dręcznych katalogów"
 
-#, fuzzy
 msgid "Confirmation|E&xit"
-msgstr " Potwierdzenia "
+msgstr "&Zakończenie"
 
-#, fuzzy
 msgid "Confirmation|&Execute"
-msgstr " Potwierdzenia "
+msgstr "Wykonani&e"
 
-#, fuzzy
 msgid "Confirmation|O&verwrite"
-msgstr " Pot&wierdź zastąpienie "
+msgstr "Za&stąpienie"
 
-#, fuzzy
 msgid "Confirmation|&Delete"
-msgstr " Potwierdzenia "
+msgstr "&Usunięcie"
 
 msgid "UTF-8 output"
 msgstr "Wyjście UTF-8"
@@ -1879,44 +1872,36 @@ msgstr "&Zakończ"
 msgid "&Undo"
 msgstr "Co&fnij"
 
-#, fuzzy
 msgid "&Toggle ins/overw"
 msgstr "P&rzełącz wst/nad"
 
-#, fuzzy
 msgid "To&ggle mark"
-msgstr "&Przełącz zaznaczone"
+msgstr "&Przełącz zaznaczenie"
 
 msgid "&Mark columns"
 msgstr "Zaznacz kolu&mny"
 
-#, fuzzy
 msgid "Mark &all"
-msgstr "Wszystkie zaz&naczone"
+msgstr "Zazn&acz wszystko"
 
 msgid "Unmar&k"
-msgstr ""
+msgstr "O&dznacz"
 
-#, fuzzy
 msgid "Cop&y"
 msgstr "&Skopiuj"
 
-#, fuzzy
 msgid "Mo&ve"
 msgstr "Prze&nieś"
 
 msgid "&Delete"
 msgstr "&Usuń"
 
-#, fuzzy
 msgid "Co&py to clipfile"
 msgstr "Sk&opiuj do pliku schowka"
 
-#, fuzzy
 msgid "&Cut to clipfile"
 msgstr "Wytnij do pliku s&chowka"
 
-#, fuzzy
 msgid "Pa&ste from clipfile"
 msgstr "&Wklej z pliku schowka"
 
@@ -1930,21 +1915,19 @@ msgid "&Search..."
 msgstr "Wy&szukaj..."
 
 msgid "Search &again"
-msgstr "Wyszuk&aj ponownie"
+msgstr "Wyszuka&j ponownie"
 
 msgid "&Replace..."
 msgstr "&Zastąp..."
 
-#, fuzzy
 msgid "&Toggle bookmark"
 msgstr "Przełącz za&kładkę"
 
 msgid "&Next bookmark"
-msgstr "N&astępna zakładka"
+msgstr "Następna &zakładka"
 
-#, fuzzy
 msgid "&Prev bookmark"
-msgstr "P&oprzednia zakładka"
+msgstr "Poprzedn&ia zakładka"
 
 msgid "&Flush bookmark"
 msgstr "Wycz&yść zakładkę"
@@ -1952,24 +1935,20 @@ msgstr "Wycz&yść zakładkę"
 msgid "&Go to line..."
 msgstr "&Przejdź do wiersza..."
 
-#, fuzzy
 msgid "&Toggle line state"
 msgstr "Przełącz sta&n wiersza"
 
 msgid "Go to matching &bracket"
 msgstr "Prze&jdź do pasującego nawiasu"
 
-#, fuzzy
 msgid "&Find declaration"
-msgstr "Znajdź deklarację"
+msgstr "&Znajdź deklarację"
 
-#, fuzzy
 msgid "Back from &declaration"
-msgstr "Poprzednia deklaracja"
+msgstr "Poprzednia &deklaracja"
 
-#, fuzzy
 msgid "For&ward to declaration"
-msgstr "Następna deklaracja"
+msgstr "Następna de&klaracja"
 
 msgid "Encod&ing..."
 msgstr "Kodowan&ie..."
@@ -1980,15 +1959,14 @@ msgstr "Odśwież ek&ran"
 msgid "&Start record macro"
 msgstr "Rozpocznij zapi&s makra"
 
-#, fuzzy
 msgid "Finis&h record macro..."
-msgstr "&Zakończ zapis makra..."
+msgstr "Zak&ończ zapis makra..."
 
 msgid "&Execute macro..."
 msgstr "Wykonaj &makro..."
 
 msgid "Delete macr&o..."
-msgstr "Usuń makr&o..."
+msgstr "&Usuń makro..."
 
 msgid "'ispell' s&pell check"
 msgstr "Spr&awdzanie pisowni \"ispell\""
@@ -2002,21 +1980,17 @@ msgstr "Wstaw symbo&l..."
 msgid "Insert &date/time"
 msgstr "Wstaw &datę/godzinę"
 
-#, fuzzy
 msgid "&Format paragraph"
-msgstr "Sformatuj &akapit"
+msgstr "S&formatuj akapit"
 
-#, fuzzy
 msgid "&Sort..."
-msgstr "Posor&tuj..."
+msgstr "Po&sortuj..."
 
-#, fuzzy
 msgid "&Paste output of..."
-msgstr "Wklej &wynik polecenia..."
+msgstr "Wklej wynik &polecenia..."
 
-#, fuzzy
 msgid "&External formatter"
-msgstr "&Zewnętrzny formater"
+msgstr "Z&ewnętrzny formater"
 
 msgid "&General...  "
 msgstr "&Ogólne...  "
@@ -3688,9 +3662,8 @@ msgstr " Nie odnaleziono odpowiednich wpisów w %s "
 msgid " User menu "
 msgstr " Menu użytkownika "
 
-#, fuzzy
 msgid "Invalid value"
-msgstr " Nieprawidłowy adres "
+msgstr "Nieprawidłowa wartość"
 
 msgid " Cannot spawn child process "
 msgstr " Nie można utworzyć procesu potomnego "
@@ -3699,20 +3672,19 @@ msgid "Empty output from child filter"
 msgstr "Puste wyjście filtru potomnego"
 
 msgid "&Line number (decimal)"
-msgstr ""
+msgstr "&Numer wiersza (dziesiętny)"
 
 msgid "Pe&rcents"
-msgstr ""
+msgstr "P&rocenty"
 
 msgid "&Decimal offset"
-msgstr ""
+msgstr "Wyrównanie &dziesiętne"
 
-#, fuzzy
 msgid "He&xadecimal offset"
-msgstr "Ósemkowo"
+msgstr "&Wyrównanie ósemkowe"
 
 msgid "Goto"
-msgstr ""
+msgstr "Idź do"
 
 msgid "ButtonBar|Ascii"
 msgstr "ASCII"
@@ -3788,56 +3760,11 @@ msgid " History "
 msgstr " Historia "
 
 #. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
-#, fuzzy
 msgid "DialogTitle|History cleanup"
-msgstr "Skopiowanie"
+msgstr "Czyszczenie historii"
 
 msgid "Do you want clean this history?"
-msgstr ""
+msgstr "Wyczyścić tę historię?"
 
 msgid "Background process:"
 msgstr "Proces w tle:"
-
-#~ msgid " confirm &Exit "
-#~ msgstr " Potwi&erdź zakończenie "
-
-#~ msgid " confirm e&Xecute "
-#~ msgstr " Potwierdź w&ykonanie "
-
-#~ msgid " confirm &Delete "
-#~ msgstr " Potwierdź &usunięcie "
-
-#~ msgid ""
-#~ " The current line number is %lld.\n"
-#~ " Enter the new line number:"
-#~ msgstr ""
-#~ " Bieżący numer wiersza to %lld.\n"
-#~ " Proszę podać nowy numer wiersza:"
-
-#~ msgid ""
-#~ " The current address is %s.\n"
-#~ " Enter the new address:"
-#~ msgstr ""
-#~ " Bieżący adres to %s.\n"
-#~ " Proszę podać nowy adres:"
-
-#~ msgid " Goto Address "
-#~ msgstr " Przejdź do adresu "
-
-#~ msgid "ButtonBar|Line"
-#~ msgstr "Wiersz"
-
-#~ msgid "File: %s"
-#~ msgstr "Plik: %s"
-
-#~ msgid "Offset 0x%08lx"
-#~ msgstr "Przesunięcie 0x%08lx"
-
-#~ msgid "Line %lu Col %lu"
-#~ msgstr "Wiersz %lu Kolumna %lu"
-
-#~ msgid "%s bytes"
-#~ msgstr "%s bajtów"
-
-#~ msgid ">= %s bytes"
-#~ msgstr ">= %s bajtów"
