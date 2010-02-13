@@ -1864,7 +1864,7 @@ panel_operate (void *source_panel, FileOperation operation, int force_single)
     char *dest = NULL;
     char *temp = NULL;
     char *save_cwd = NULL, *save_dest = NULL;
-    struct stat src_stat, dst_stat;
+    struct stat src_stat;
     int i;
     FileProgressStatus value;
     FileOpContext *ctx;
@@ -1872,8 +1872,7 @@ panel_operate (void *source_panel, FileOperation operation, int force_single)
     off_t count = 0;
     double bytes = 0;
 
-    int dst_result;
-    int do_bg = 0;		/* do background operation? */
+    gboolean do_bg = FALSE;		/* do background operation? */
 
 #ifdef ENABLE_NLS
     static gboolean i18n_flag = FALSE;
@@ -2022,14 +2021,13 @@ panel_operate (void *source_panel, FileOperation operation, int force_single)
     /* We do not want to trash cache every time file is
        created/touched. However, this will make our cache contain
        invalid data. */
-    if (dest) {
-	if (mc_setctl (dest, VFS_SETCTL_STALE_DATA, (void *) 1))
-	    save_dest = g_strdup (dest);
-    }
-    if (panel->cwd) {
-	if (mc_setctl (panel->cwd, VFS_SETCTL_STALE_DATA, (void *) 1))
-	    save_cwd = g_strdup (panel->cwd);
-    }
+    if ((dest != NULL)
+	    && (mc_setctl (dest, VFS_SETCTL_STALE_DATA, (void *) 1)))
+	save_dest = g_strdup (dest);
+
+    if ((panel->cwd[0] != '\0')
+	    && (mc_setctl (panel->cwd, VFS_SETCTL_STALE_DATA, (void *) 1)))
+	save_cwd = g_strdup (panel->cwd);
 
     /* Now, let's do the job */
 
@@ -2046,192 +2044,179 @@ panel_operate (void *source_panel, FileOperation operation, int force_single)
 	source_with_path = concat_dir_and_file (panel->cwd, source);
 #endif				/* WITH_FULL_PATHS */
 
-	/* Initialize variables for progress bars */
 	if (panel_operate_init_totals (operation, panel,
-					source_with_path, ctx) != FILE_CONT)
-	    goto clean_up;
-
-	if (operation == OP_DELETE) {
-	    if (S_ISDIR (src_stat.st_mode))
-		value = erase_dir (ctx, source_with_path, &count, &bytes);
-	    else
-		value =
-		    erase_file (ctx, source_with_path, &count, &bytes, 1);
-	} else {
-	    temp = transform_source (ctx, source_with_path);
-	    if (temp == NULL) {
-		value = transform_error;
-	    } else {
-		char *repl_dest = mc_search_prepare_replace_str2 (ctx->search_handle, dest);
-		char *temp2 = concat_dir_and_file (repl_dest, temp);
-		g_free (repl_dest);
-		g_free (temp);
-		g_free(dest);
-		dest = temp2;
-		
-		switch (operation) {
-		case OP_COPY:
-		    /*
-		     * we use file_mask_op_follow_links only with OP_COPY,
-		     */
-		    (*ctx->stat_func) (source_with_path, &src_stat);
-
-		    if (S_ISDIR (src_stat.st_mode)) {
-			value =
-			    copy_dir_dir (ctx, source_with_path, dest, 1,
-					  0, 0, 0, &count, &bytes);
-		    } else {
-			value =
-			    copy_file_file (ctx, source_with_path, dest, 1,
-					    &count, &bytes, 1);
-                    }
-		    break;
-
-		case OP_MOVE:
-		    if (S_ISDIR (src_stat.st_mode))
-			value =
-			    move_dir_dir (ctx, source_with_path, dest,
-					  &count, &bytes);
-		    else
-			value =
-			    move_file_file (ctx, source_with_path, dest,
-					    &count, &bytes);
-		    break;
-
-		default:
-		    /* Unknown file operation */
-		    abort ();
-		}
-	    }
-	}			/* Copy or move operation */
-
-	if ((value == FILE_CONT) && !force_single)
-	    unmark_files (panel);
-    } else {
-	/* Many files */
-	/* Check destination for copy or move operation */
-	if (operation != OP_DELETE) {
-	  retry_many_dst_stat:
-	    dst_result = mc_stat (dest, &dst_stat);
-	    if (dst_result == 0 && !S_ISDIR (dst_stat.st_mode)) {
-		if (file_error
-		    (_(" Destination \"%s\" must be a directory \n %s "),
-		     dest) == FILE_RETRY)
-		    goto retry_many_dst_stat;
-		goto clean_up;
-	    }
-	}
-
-	/* Initialize variables for progress bars */
-	if (panel_operate_init_totals (operation, panel, NULL, ctx) != FILE_CONT)
-	    goto clean_up;
-
-	/* Loop for every file, perform the actual copy operation */
-	for (i = 0; i < panel->count; i++) {
-	    if (!panel->dir.list[i].f.marked)
-		continue;	/* Skip the unmarked ones */
-
-	    source = panel->dir.list[i].fname;
-	    src_stat = panel->dir.list[i].st;
-
-#ifdef WITH_FULL_PATHS
-	    g_free (source_with_path);
-	    source_with_path = concat_dir_and_file (panel->cwd, source);
-#endif				/* WITH_FULL_PATHS */
-
+					source_with_path, ctx) == FILE_CONT) {
 	    if (operation == OP_DELETE) {
 		if (S_ISDIR (src_stat.st_mode))
-		    value =
-			erase_dir (ctx, source_with_path, &count, &bytes);
+		    value = erase_dir (ctx, source_with_path, &count, &bytes);
 		else
-		    value =
-			erase_file (ctx, source_with_path, &count, &bytes, 1);
+		    value = erase_file (ctx, source_with_path, &count, &bytes, 1);
 	    } else {
 		temp = transform_source (ctx, source_with_path);
 		if (temp == NULL)
 		    value = transform_error;
 		else {
-		    char *temp3;
-		    char *repl_dest = mc_search_prepare_replace_str2 (ctx->search_handle, dest);
-		    char *temp2 = concat_dir_and_file (repl_dest, temp);
-		    g_free(repl_dest);
+		    char *repl_dest, *temp2;
 
-		    g_free(temp);
-		    temp3 = source_with_path;
-		    source_with_path = strutils_shell_unescape(source_with_path);
-		    g_free(temp3);
-		    temp3 = temp2;
-		    temp2 = strutils_shell_unescape(temp2);
-		    g_free(temp3);
-
+		    repl_dest = mc_search_prepare_replace_str2 (ctx->search_handle, dest);
+		    temp2 = concat_dir_and_file (repl_dest, temp);
+		    g_free (temp);
+		    g_free (repl_dest);
+		    g_free (dest);
+		    dest = temp2;
+		
 		    switch (operation) {
 		    case OP_COPY:
-			/*
-			 * we use file_mask_op_follow_links only with OP_COPY
-			 */
-			(*ctx->stat_func) (source_with_path, &src_stat);
+			/* we use file_mask_op_follow_links only with OP_COPY */
+			ctx->stat_func (source_with_path, &src_stat);
+
 			if (S_ISDIR (src_stat.st_mode))
-			    value =
-				copy_dir_dir (ctx, source_with_path, temp2,
-					      1, 0, 0, 0, &count, &bytes);
+			    value = copy_dir_dir (ctx, source_with_path, dest, 1,
+						    0, 0, 0, &count, &bytes);
 			else
-			    value =
-				copy_file_file (ctx, source_with_path,
-						temp2, 1, &count, &bytes,
-						1);
-			free_linklist (&dest_dirs);
+			    value = copy_file_file (ctx, source_with_path, dest, 1,
+						    &count, &bytes, 1);
 			break;
 
 		    case OP_MOVE:
 			if (S_ISDIR (src_stat.st_mode))
-			    value =
-				move_dir_dir (ctx, source_with_path, temp2,
-					      &count, &bytes);
+			    value = move_dir_dir (ctx, source_with_path, dest,
+						    &count, &bytes);
 			else
-			    value =
-				move_file_file (ctx, source_with_path,
-						temp2, &count, &bytes);
+			    value = move_file_file (ctx, source_with_path, dest,
+						    &count, &bytes);
 			break;
 
 		    default:
 			/* Unknown file operation */
 			abort ();
 		    }
-		    g_free (temp2);
 		}
 	    }			/* Copy or move operation */
 
-	    if (value == FILE_ABORT)
+	    if ((value == FILE_CONT) && !force_single)
+		unmark_files (panel);
+	}
+    } else {
+	/* Many files */
+
+	/* Check destination for copy or move operation */
+	while (operation != OP_DELETE) {
+	    int dst_result;
+	    struct stat dst_stat;
+
+	    dst_result = mc_stat (dest, &dst_stat);
+
+	    if ((dst_result != 0) || S_ISDIR (dst_stat.st_mode))
+		break;
+
+	    if (file_error (_(" Destination \"%s\" must be a directory \n %s "),
+					dest) != FILE_RETRY)
 		goto clean_up;
+	}
 
-	    if (value == FILE_CONT)
-		do_file_mark (panel, i, 0);
+	if (panel_operate_init_totals (operation, panel, NULL, ctx) == FILE_CONT) {
+	    /* Loop for every file, perform the actual copy operation */
+	    for (i = 0; i < panel->count; i++) {
+		if (!panel->dir.list[i].f.marked)
+		    continue;		/* Skip the unmarked ones */
 
-	    if (file_progress_show_count (ctx, count, ctx->progress_count)
-		== FILE_ABORT)
-		goto clean_up;
+		source = panel->dir.list[i].fname;
+		src_stat = panel->dir.list[i].st;
 
-	    if (verbose
-		&& file_progress_show_bytes (ctx, bytes,
-					     ctx->progress_bytes) ==
-		FILE_ABORT)
-		goto clean_up;
+#ifdef WITH_FULL_PATHS
+		g_free (source_with_path);
+		source_with_path = concat_dir_and_file (panel->cwd, source);
+#endif				/* WITH_FULL_PATHS */
 
-	    if (operation != OP_DELETE && verbose
-		&& file_progress_show (ctx, 0, 0) == FILE_ABORT)
-		goto clean_up;
+		if (operation == OP_DELETE) {
+		    if (S_ISDIR (src_stat.st_mode))
+			value = erase_dir (ctx, source_with_path, &count, &bytes);
+		    else
+			value = erase_file (ctx, source_with_path, &count, &bytes, 1);
+		} else {
+		    temp = transform_source (ctx, source_with_path);
 
-	    mc_refresh ();
-	}			/* Loop for every file */
+		    if (temp == NULL)
+			value = transform_error;
+		    else {
+			char *temp2, *temp3, *repl_dest;
+
+			repl_dest = mc_search_prepare_replace_str2 (ctx->search_handle, dest);
+			temp2 = concat_dir_and_file (repl_dest, temp);
+			g_free (temp);
+			g_free (repl_dest);
+			temp3 = source_with_path;
+			source_with_path = strutils_shell_unescape (source_with_path);
+			g_free (temp3);
+			temp3 = temp2;
+			temp2 = strutils_shell_unescape (temp2);
+			g_free (temp3);
+
+			switch (operation) {
+			case OP_COPY:
+			    /* we use file_mask_op_follow_links only with OP_COPY */
+			    ctx->stat_func (source_with_path, &src_stat);
+			    if (S_ISDIR (src_stat.st_mode))
+				value = copy_dir_dir (ctx, source_with_path, temp2,
+							1, 0, 0, 0, &count, &bytes);
+			    else
+				value = copy_file_file (ctx, source_with_path,
+							temp2, 1, &count, &bytes, 1);
+			    free_linklist (&dest_dirs);
+			    break;
+
+			case OP_MOVE:
+			    if (S_ISDIR (src_stat.st_mode))
+				value = move_dir_dir (ctx, source_with_path, temp2,
+							&count, &bytes);
+			    else
+				value = move_file_file (ctx, source_with_path,
+							temp2, &count, &bytes);
+			    break;
+
+			default:
+			    /* Unknown file operation */
+			    abort ();
+			}
+
+			g_free (temp2);
+		    }
+		}			/* Copy or move operation */
+
+		if (value == FILE_ABORT)
+		    break;
+
+		if (value == FILE_CONT)
+		    do_file_mark (panel, i, 0);
+
+		if (file_progress_show_count (ctx, count,
+						ctx->progress_count) == FILE_ABORT)
+		    break;
+
+		if (verbose) {
+		    if (file_progress_show_bytes (ctx, bytes,
+						ctx->progress_bytes) == FILE_ABORT)
+			break;
+
+		    if ((operation != OP_DELETE)
+			    && (file_progress_show (ctx, 0, 0) == FILE_ABORT))
+			break;
+		}
+
+		mc_refresh ();
+	    }			/* Loop for every file */
+	}
     }				/* Many entries */
+
   clean_up:
     /* Clean up */
-
-    if (save_cwd) {
+    if (save_cwd != NULL) {
 	mc_setctl (save_cwd, VFS_SETCTL_STALE_DATA, NULL);
 	g_free (save_cwd);
     }
-    if (save_dest) {
+
+    if (save_dest != NULL) {
 	mc_setctl (save_dest, VFS_SETCTL_STALE_DATA, NULL);
 	g_free (save_dest);
     }
@@ -2244,6 +2229,7 @@ panel_operate (void *source_panel, FileOperation operation, int force_single)
     g_free (dest);
     g_free (ctx->dest_mask);
     ctx->dest_mask = NULL;
+
 #ifdef WITH_BACKGROUND
     /* Let our parent know we are saying bye bye */
     if (we_are_background) {
