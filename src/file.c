@@ -359,14 +359,11 @@ progress_update_one (FileOpContext *ctx,
     }
 
     /* Apply some heuristic here to not call the update stuff very often */
-    ret =
-	file_progress_show_count (ctx, *progress_count,
-				  ctx->progress_count);
-    if (ret != FILE_CONT)
-	return ret;
-    ret =
-	file_progress_show_bytes (ctx, *progress_bytes,
-				  ctx->progress_bytes);
+    ret = file_progress_show_count (ctx, *progress_count,
+				    ctx->progress_count);
+    if (ret == FILE_CONT)
+	ret = file_progress_show_bytes (ctx, *progress_bytes,
+					ctx->progress_bytes);
 
     return ret;
 }
@@ -705,12 +702,19 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 	    }
 
 	    file_progress_set_stalled_label (ctx, stalled_msg);
-	    return_status = file_progress_show_bytes (ctx, *progress_bytes +
-		    n_read_total + ctx->do_reget, ctx->progress_bytes);
-	    if (return_status == FILE_CONT) {
+
+	    return_status =
+		     file_progress_show_count (ctx, *progress_count,
+						ctx->progress_count);
+	    if (return_status == FILE_CONT)
+		return_status =
+		    file_progress_show_bytes (ctx, *progress_bytes +
+						n_read_total + ctx->do_reget,
+						ctx->progress_bytes);
+	    if (return_status == FILE_CONT)
 		return_status =
 		    file_progress_show (ctx, n_read_total + ctx->do_reget, file_size);
-	    }
+
 	    mc_refresh ();
 	    if (return_status != FILE_CONT)
 		goto ret;
