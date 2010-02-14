@@ -433,8 +433,6 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
     uid_t src_uid = (uid_t) -1;
     gid_t src_gid = (gid_t) -1;
 
-    char *buf = NULL;
-    int buf_size = BUF_8K;
     int src_desc, dest_desc = -1;
     int n_read, n_written;
     mode_t src_mode = 0;		/* The mode of the source file */
@@ -605,7 +603,6 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 	    continue;
 	goto ret;
     }
-    buf = g_malloc (buf_size);
 
     ctx->eta_secs = 0.0;
     ctx->bps = 0;
@@ -626,11 +623,13 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 	tv_last_update = tv_transfer_start;
 
 	for (;;) {
+	    char buf[BUF_8K];
+
 	    /* src_read */
 	    if (mc_ctl (src_desc, VFS_CTL_IS_NOTREADY, 0))
 		n_read = -1;
 	    else
-		while ((n_read = mc_read (src_desc, buf, buf_size)) < 0) {
+		while ((n_read = mc_read (src_desc, buf, sizeof (buf))) < 0) {
 		    return_status = file_error (
 			_(" Cannot read source file \"%s\" \n %s "), src_path);
 		    if (return_status == FILE_RETRY)
@@ -721,8 +720,6 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
     dst_status = DEST_FULL;	/* copy successful, don't remove target file */
 
   ret:
-    g_free (buf);
-
     while (src_desc != -1 && mc_close (src_desc) < 0) {
 	temp_status = file_error (
 		_(" Cannot close source file \"%s\" \n %s "), src_path);
