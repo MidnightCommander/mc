@@ -55,10 +55,10 @@ file_op_context_new (FileOperation op)
     ctx->eta_secs = 0.0;
     ctx->progress_bytes = 0.0;
     ctx->op_preserve = TRUE;
-    ctx->do_reget = TRUE;
+    ctx->do_reget = 1;
     ctx->stat_func = mc_lstat;
     ctx->preserve = TRUE;
-    ctx->preserve_uidgid = (geteuid () == 0) ? TRUE : FALSE;
+    ctx->preserve_uidgid = (geteuid () == 0);
     ctx->umask_kill = 0777777;
     ctx->erase_at_end = TRUE;
 

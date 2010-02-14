@@ -18,12 +18,23 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
+#include "lib/global.h"
+
 struct mc_search_struct;
+
 typedef enum {
-	OP_COPY,
-	OP_MOVE,
-	OP_DELETE
+	OP_COPY   = 0,
+	OP_MOVE   = 1,
+	OP_DELETE = 2
 } FileOperation;
+
+typedef enum {
+    RECURSIVE_YES    = 0,
+    RECURSIVE_NO     = 1,
+    RECURSIVE_ALWAYS = 2,
+    RECURSIVE_NEVER  = 3,
+    RECURSIVE_ABORT  = 4
+} FileCopyMode;
 
 typedef int (*mc_stat_fn) (const char *filename, struct stat *buf);
 
@@ -44,7 +55,7 @@ typedef struct FileOpContext {
 	long bps_time;
 
 	/* Whether the panel total has been computed */
-	int progress_totals_computed;
+	gboolean progress_totals_computed;
 
 	/* Counters for progress indicators */
 	off_t progress_count;
@@ -55,25 +66,25 @@ typedef struct FileOpContext {
 	 * to preserve file attributs when moving files across filesystem boundaries
 	 * (we want to keep the value of the checkbox between copy operations).
 	 */
-	int op_preserve;
+	gboolean op_preserve;
 
 	/* Result from the recursive query */
-	int recursive_result;
+	FileCopyMode recursive_result;
 
 	/* Whether to do a reget */
 	off_t do_reget;
 
 	/* Controls appending to files */
-	int do_append;
+	gboolean do_append;
 
 	/* Whether to stat or lstat */
-	int follow_links;
+	gboolean follow_links;
 
 	/* Pointer to the stat function we will use */
 	mc_stat_fn stat_func;
 
 	/* Whether to recompute symlinks */
-	int stable_symlinks;
+	gboolean stable_symlinks;
 
 	/* Preserve the original files' owner, group, permissions, and
 	 * timestamps (owner, group only as root).
@@ -83,7 +94,7 @@ typedef struct FileOpContext {
 	/* If running as root, preserve the original uid/gid (we don't want to
 	 * try chown for non root) preserve_uidgid = preserve && uid == 0
 	 */
-	int preserve_uidgid;
+	gboolean preserve_uidgid;
 
 	/* The bits to preserve in created files' modes on file copy */
 	int umask_kill;
@@ -91,7 +102,9 @@ typedef struct FileOpContext {
 	/* The mask of files to actually operate on */
 	char *dest_mask;
 
-        struct mc_search_struct *search_handle;
+	/* search handler */
+	struct mc_search_struct *search_handle;
+
 	/* Whether to dive into subdirectories for recursive operations */
 	int dive_into_subdirs;
 
@@ -99,17 +112,16 @@ typedef struct FileOpContext {
 	 * successfully copied files when all files below the directory and its
 	 * subdirectories were processed.
 	 *
-	 * If erase_at_end is zero files will be deleted immediately after their
+	 * If erase_at_end is FALSE files will be deleted immediately after their
 	 * successful copy (Note: this behavior is not tested and at the moment
 	 * it can't be changed at runtime).
 	 */
-	int erase_at_end;
+	gboolean erase_at_end;
 
 	/* PID of the child for background operations */
 	pid_t pid;
 
 	/* User interface data goes here */
-
 	void *ui;
 } FileOpContext;
 
@@ -127,14 +139,6 @@ typedef enum {
 	FILE_ABORT = 3
 } FileProgressStatus;
 
-typedef enum {
-    RECURSIVE_YES,
-    RECURSIVE_NO,
-    RECURSIVE_ALWAYS,
-    RECURSIVE_NEVER,
-    RECURSIVE_ABORT
-} FileCopyMode;
-
 /* First argument passed to real functions */
 enum OperationMode {
     Foreground,
@@ -143,8 +147,8 @@ enum OperationMode {
 
 /* The following functions are implemented separately by each port */
 
-void file_op_context_create_ui (FileOpContext *ctx, int with_eta);
-void file_op_context_create_ui_without_init (FileOpContext *ctx, int with_eta);
+void file_op_context_create_ui (FileOpContext *ctx, gboolean with_eta);
+void file_op_context_create_ui_without_init (FileOpContext *ctx, gboolean with_eta);
 void file_op_context_destroy_ui (FileOpContext *ctx);
 
 FileProgressStatus file_progress_show (FileOpContext *ctx, off_t done, off_t total);

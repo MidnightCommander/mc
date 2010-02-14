@@ -16,17 +16,18 @@
 struct link;
 
 FileProgressStatus copy_file_file (FileOpContext *ctx, const char *s, const char *d,
-				    int ask_overwrite, off_t *progress_count,
-				    double *progress_bytes, int is_toplevel_file);
+				    gboolean ask_overwrite, off_t *progress_count,
+				    double *progress_bytes, gboolean is_toplevel_file);
 FileProgressStatus move_dir_dir (FileOpContext *ctx, const char *s, const char *d,
 				    off_t *progress_count, double *progress_bytes);
-FileProgressStatus copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
-				    int move_over, int delete, struct link *parent_dirs,
+FileProgressStatus copy_dir_dir (FileOpContext *ctx, const char *s, const char *d,
+				    gboolean toplevel, gboolean move_over,
+				    gboolean do_delete, struct link *parent_dirs,
 				    off_t *progress_count, double *progress_bytes);
 FileProgressStatus erase_dir (FileOpContext *ctx, const char *s, off_t *progress_count,
 				    double *progress_bytes);
 
-int panel_operate (void *source_panel, FileOperation op, int force_single);
+gboolean panel_operate (void *source_panel, FileOperation op, gboolean force_single);
 
 extern int file_op_compute_totals;
 

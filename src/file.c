@@ -140,7 +140,7 @@ static FileProgressStatus do_file_error (const char *str);
 static FileProgressStatus erase_dir_iff_empty (FileOpContext *ctx, const char *s);
 static FileProgressStatus erase_file (FileOpContext *ctx, const char *s,
 					off_t *progress_count, double *progress_bytes,
-					int is_toplevel_file);
+					gboolean is_toplevel_file);
 static FileProgressStatus files_error (const char *format, const char *file1,
 					const char *file2);
 
@@ -271,12 +271,9 @@ make_symlink (FileOpContext *ctx, const char *src_path, const char *dst_path)
     int len;
     FileProgressStatus return_status;
     struct stat sb;
-    int dst_is_symlink;
+    gboolean dst_is_symlink;
 
-    if (mc_lstat (dst_path, &sb) == 0 && S_ISLNK (sb.st_mode))
-	dst_is_symlink = 1;
-    else
-	dst_is_symlink = 0;
+    dst_is_symlink = (mc_lstat (dst_path, &sb) == 0) && S_ISLNK (sb.st_mode);
 
   retry_src_readlink:
     len = mc_readlink (src_path, link_target, MC_MAXPATHLEN - 1);
@@ -296,17 +293,17 @@ make_symlink (FileOpContext *ctx, const char *src_path, const char *dst_path)
 			_(" Cannot make stable symlinks across "
 			  "non-local filesystems: \n\n"
 			  " Option Stable Symlinks will be disabled "));
-	    ctx->stable_symlinks = 0;
+	    ctx->stable_symlinks = FALSE;
 	}
 
-    if (ctx->stable_symlinks && *link_target != PATH_SEP) {
+    if (ctx->stable_symlinks && !g_path_is_absolute (link_target)) {
 	char *p, *q, *s;
 
 	const char *r = strrchr (src_path, PATH_SEP);
 
 	if (r) {
 	    p = g_strndup (src_path, r - src_path + 1);
-	    if (*dst_path == PATH_SEP)
+	    if (g_path_is_absolute (dst_path))
 		q = g_strdup (dst_path);
 	    else
 		q = g_strconcat (p, dst_path, (char *) NULL);
@@ -351,8 +348,8 @@ make_symlink (FileOpContext *ctx, const char *src_path, const char *dst_path)
 
 static int
 progress_update_one (FileOpContext *ctx,
-		     off_t *progress_count,
-		     double *progress_bytes, off_t add, int is_toplevel_file)
+		    off_t *progress_count, double *progress_bytes,
+		    off_t add, gboolean is_toplevel_file)
 {
     int ret;
 
@@ -375,11 +372,11 @@ progress_update_one (FileOpContext *ctx,
 }
 
 /* Status of the destination file */
-enum {
-    DEST_NONE,			/* Not created */
-    DEST_SHORT,			/* Created, not fully copied */
-    DEST_FULL			/* Created, fully copied */
-};
+typedef enum {
+    DEST_NONE	= 0,		/* Not created */
+    DEST_SHORT	= 1,		/* Created, not fully copied */
+    DEST_FULL	= 2		/* Created, fully copied */
+} dest_status_t;
 
 static FileProgressStatus
 real_warn_same_file (enum OperationMode mode, const char *fmt,
@@ -430,11 +427,11 @@ warn_same_file (const char *fmt, const char *a, const char *b)
 
 FileProgressStatus
 copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
-		int ask_overwrite, off_t *progress_count,
-		double *progress_bytes, int is_toplevel_file)
+		gboolean ask_overwrite, off_t *progress_count,
+		double *progress_bytes, gboolean is_toplevel_file)
 {
-    uid_t src_uid = (uid_t) - 1;
-    gid_t src_gid = (gid_t) - 1;
+    uid_t src_uid = (uid_t) -1;
+    gid_t src_gid = (gid_t) -1;
 
     char *buf = NULL;
     int buf_size = BUF_8K;
@@ -443,11 +440,11 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
     mode_t src_mode = 0;		/* The mode of the source file */
     struct stat sb, sb2;
     struct utimbuf utb;
-    int dst_exists = 0, appending = 0;
+    gboolean dst_exists = FALSE, appending = FALSE;
     off_t n_read_total = 0, file_size = -1;
     FileProgressStatus return_status, temp_status;
     struct timeval tv_transfer_start;
-    int dst_status = DEST_NONE;	/* 1 if the file is not fully copied */
+    dest_status_t dst_status = DEST_NONE;
     int open_flags;
 
     /* FIXME: We should not be using global variables! */
@@ -469,7 +466,7 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 		continue;
 	    return return_status;
 	}
-	dst_exists = 1;
+	dst_exists = TRUE;
 	break;
     }
 
@@ -550,11 +547,12 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 	return return_status;
     }
 
-    if (ctx->do_reget) {
+    if (ctx->do_reget != 0) {
 	if (mc_lseek (src_desc, ctx->do_reget, SEEK_SET) != ctx->do_reget) {
 	    message (D_ERROR, _("Warning"),
 			_(" Reget failed, about to overwrite file "));
-	    ctx->do_reget = ctx->do_append = 0;
+	    ctx->do_reget = 0;
+	    ctx->do_append = FALSE;
 	}
     }
 
@@ -563,7 +561,7 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 		_(" Cannot fstat source file \"%s\" \n %s "), src_path);
 	if (return_status == FILE_RETRY)
 	    continue;
-	ctx->do_append = 0;
+	ctx->do_append = FALSE;
 	goto ret;
     }
     src_mode = sb.st_mode;
@@ -574,7 +572,7 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
     file_size = sb.st_size;
 
     open_flags = O_WRONLY;
-    if (dst_exists != 0) {
+    if (dst_exists) {
 	if (ctx->do_append != 0)
 	    open_flags |= O_APPEND;
 	else
@@ -582,6 +580,7 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
     } else {
 	open_flags |= O_CREAT | O_EXCL;
     }
+
     while ((dest_desc = mc_open (dst_path, open_flags, src_mode)) < 0) {
 	if (errno == EEXIST) {
 	    goto ret;
@@ -590,13 +589,13 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 		_(" Cannot create target file \"%s\" \n %s "), dst_path);
 	if (return_status == FILE_RETRY)
 	    continue;
-	ctx->do_append = 0;
+	ctx->do_append = FALSE;
 	goto ret;
     }
     dst_status = DEST_SHORT;	/* file opened, but not fully copied */
 
     appending = ctx->do_append;
-    ctx->do_append = 0;
+    ctx->do_append = FALSE;
 
     /* Find out the optimal buffer size.  */
     while (mc_fstat (dest_desc, &sb)) {
@@ -651,7 +650,7 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 		 * permissions: -------, so if we happen to have actually
 		 * read something, we should fix the permissions.
 		 */
-		if (!(src_mode & (S_IRWXU | S_IRWXG | S_IRWXO)))
+		if ((src_mode & (S_IRWXU | S_IRWXG | S_IRWXO)) == 0)
 		    src_mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
 		gettimeofday (&tv_last_input, NULL);
 
@@ -749,7 +748,7 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 	result = query_dialog (Q_("DialogTitle|Copy"),
 		_("Incomplete file was retrieved. Keep it?"),
 		D_ERROR, 2, _("&Delete"), _("&Keep"));
-	if (!result)
+	if (result == 0)
 	    mc_unlink (dst_path);
     } else if (dst_status == DEST_FULL) {
 	/* Copy has succeeded */
@@ -799,9 +798,10 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 /* FIXME: This function needs to check the return values of the
    function calls */
 FileProgressStatus
-copy_dir_dir (FileOpContext *ctx, const char *s, const char *_d, int toplevel,
-	      int move_over, int delete, struct link *parent_dirs,
-	      off_t *progress_count, double *progress_bytes)
+copy_dir_dir (FileOpContext *ctx, const char *s, const char *_d,
+		gboolean toplevel, gboolean move_over, gboolean do_delete,
+		struct link *parent_dirs,
+		off_t *progress_count, double *progress_bytes)
 {
     struct dirent *next;
     struct stat buf, cbuf;
@@ -956,18 +956,18 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *_d, int toplevel,
 	     * dir already exists. So, we give the recursive call the flag 0
 	     * meaning no toplevel.
 	     */
-	    return_status = copy_dir_dir (ctx, path, mdpath, 0, 0, delete,
+	    return_status = copy_dir_dir (ctx, path, mdpath, FALSE, FALSE, do_delete,
 				parent_dirs, progress_count, progress_bytes);
 	    g_free (mdpath);
 	} else {
 	    char *dest_file;
 
 	    dest_file = concat_dir_and_file (dest_dir, x_basename (path));
-	    return_status = copy_file_file (ctx, path, dest_file, 1,
-					    progress_count, progress_bytes, 0);
+	    return_status = copy_file_file (ctx, path, dest_file, TRUE,
+					    progress_count, progress_bytes, FALSE);
 	    g_free (dest_file);
 	}
-	if (delete && return_status == FILE_CONT) {
+	if (do_delete && return_status == FILE_CONT) {
 	    if (ctx->erase_at_end) {
 		static struct link *tail;
 		size_t len = strlen (path);
@@ -984,7 +984,7 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *_d, int toplevel,
 		if (S_ISDIR (buf.st_mode)) {
 		    return_status = erase_dir_iff_empty (ctx, path);
 		} else
-		    return_status = erase_file (ctx, path, 0, 0, 0);
+		    return_status = erase_file (ctx, path, 0, 0, FALSE);
 	    }
 	}
 	g_free (path);
@@ -1068,7 +1068,7 @@ move_file_file (FileOpContext *ctx, const char *s, const char *d,
 	if (mc_rename (s, d) == 0) {
 	    return progress_update_one (ctx, progress_count,
 	    				progress_bytes,
-	    				src_stats.st_size, 1);
+	    				src_stats.st_size, TRUE);
 	}
     }
 #if 0
@@ -1091,7 +1091,7 @@ move_file_file (FileOpContext *ctx, const char *s, const char *d,
 
     /* Failed because filesystem boundary -> copy the file instead */
     return_status =
-	copy_file_file (ctx, s, d, 0, progress_count, progress_bytes, 1);
+	copy_file_file (ctx, s, d, FALSE, progress_count, progress_bytes, TRUE);
     if (return_status != FILE_CONT)
 	return return_status;
 
@@ -1117,7 +1117,7 @@ move_file_file (FileOpContext *ctx, const char *s, const char *d,
 	return_status = progress_update_one (ctx,
 					     progress_count,
 					     progress_bytes,
-					     src_stats.st_size, 1);
+					     src_stats.st_size, TRUE);
     }
 
     return return_status;
@@ -1158,8 +1158,8 @@ move_dir_dir (FileOpContext *ctx, const char *s, const char *d,
   retry_dst_stat:
     if (!mc_stat (destdir, &destbuf)) {
 	if (move_over) {
-	    return_status = copy_dir_dir (ctx, s, destdir, 0, 1, 1, 0,
-					  progress_count, progress_bytes);
+	    return_status = copy_dir_dir (ctx, s, destdir, FALSE, TRUE, TRUE,
+					    NULL, progress_count, progress_bytes);
 
 	    if (return_status != FILE_CONT)
 		goto ret;
@@ -1198,8 +1198,8 @@ move_dir_dir (FileOpContext *ctx, const char *s, const char *d,
     }
     /* Failed because of filesystem boundary -> copy dir instead */
     return_status =
-	copy_dir_dir (ctx, s, destdir, 0, 0, 1, 0, progress_count,
-		      progress_bytes);
+	copy_dir_dir (ctx, s, destdir, FALSE, FALSE, TRUE,
+			NULL, progress_count, progress_bytes);
 
     if (return_status != FILE_CONT)
 	goto ret;
@@ -1217,7 +1217,7 @@ move_dir_dir (FileOpContext *ctx, const char *s, const char *d,
 		    erase_dir_iff_empty (ctx, erase_list->name);
 	    } else
 		return_status =
-		    erase_file (ctx, erase_list->name, 0, 0, 0);
+		    erase_file (ctx, erase_list->name, 0, 0, FALSE);
 	    lp = erase_list;
 	    erase_list = erase_list->next;
 	    g_free (lp);
@@ -1241,7 +1241,7 @@ move_dir_dir (FileOpContext *ctx, const char *s, const char *d,
 /* Don't update progress status if progress_count==NULL */
 static FileProgressStatus
 erase_file (FileOpContext *ctx, const char *s, off_t *progress_count,
-	    double *progress_bytes, int is_toplevel_file)
+	    double *progress_bytes, gboolean is_toplevel_file)
 {
     int return_status;
     struct stat buf;
@@ -1681,7 +1681,7 @@ panel_operate_init_totals (FileOperation operation,
 	status = FILE_CONT;
 	ctx->progress_count = panel->marked;
 	ctx->progress_bytes = panel->total;
-	ctx->progress_totals_computed = 0;
+	ctx->progress_totals_computed = FALSE;
     }
 
     return status;
@@ -1842,14 +1842,14 @@ end_bg_process (FileOpContext *ctx, enum OperationMode mode) {
  * Performs one of the operations on the selection on the source_panel
  * (copy, delete, move).
  *
- * Returns 1 if did change the directory
- * structure, Returns 0 if user aborted
+ * Returns TRUE if did change the directory
+ * structure, Returns FALSE if user aborted
  *
  * force_single forces operation on the current entry and affects
  * default destination.  Current filename is used as default.
  */
-int
-panel_operate (void *source_panel, FileOperation operation, int force_single)
+gboolean
+panel_operate (void *source_panel, FileOperation operation, gboolean force_single)
 {
     WPanel *panel = (WPanel *) source_panel;
     const gboolean single_entry = force_single || (panel->marked <= 1)
@@ -1902,7 +1902,7 @@ panel_operate (void *source_panel, FileOperation operation, int force_single)
 
 	if (!strcmp (source, "..")) {
 	    message (D_ERROR, MSG_ERROR, _(" Cannot operate on \"..\"! "));
-	    return 0;
+	    return FALSE;
 	}
     }
 
@@ -1937,7 +1937,7 @@ panel_operate (void *source_panel, FileOperation operation, int force_single)
 	}
 	if (dest_dir_ == NULL) {
 	    file_op_context_destroy (ctx);
-	    return 0;
+	    return FALSE;
 	}
 
 	/* Generate confirmation prompt */
@@ -1955,7 +1955,7 @@ panel_operate (void *source_panel, FileOperation operation, int force_single)
 	if (dest == NULL || dest[0] == '\0') {
 	    file_op_context_destroy (ctx);
 	    g_free (dest);
-	    return 0;
+	    return FALSE;
 	}
     } else if (confirm_delete) {
 	char *format;
@@ -1984,7 +1984,7 @@ panel_operate (void *source_panel, FileOperation operation, int force_single)
 
 	if (i != 0) {
 	    file_op_context_destroy (ctx);
-	    return 0;
+	    return FALSE;
 	}
     }
 
@@ -2012,7 +2012,7 @@ panel_operate (void *source_panel, FileOperation operation, int force_single)
 	    mc_setctl (panel->cwd, VFS_SETCTL_FORGET, NULL);
 	    mc_setctl (dest, VFS_SETCTL_FORGET, NULL);
 /*  	    file_op_context_destroy (ctx); */
-	    return 0;
+	    return FALSE;
 	}
     }
 #endif				/* WITH_BACKGROUND */
@@ -2071,11 +2071,12 @@ panel_operate (void *source_panel, FileOperation operation, int force_single)
 			ctx->stat_func (source_with_path, &src_stat);
 
 			if (S_ISDIR (src_stat.st_mode))
-			    value = copy_dir_dir (ctx, source_with_path, dest, 1,
-						    0, 0, 0, &count, &bytes);
+			    value = copy_dir_dir (ctx, source_with_path, dest,
+						    TRUE, FALSE, FALSE,
+						    NULL, &count, &bytes);
 			else
-			    value = copy_file_file (ctx, source_with_path, dest, 1,
-						    &count, &bytes, 1);
+			    value = copy_file_file (ctx, source_with_path, dest, TRUE,
+						    &count, &bytes, TRUE);
 			break;
 
 		    case OP_MOVE:
@@ -2159,10 +2160,11 @@ panel_operate (void *source_panel, FileOperation operation, int force_single)
 			    ctx->stat_func (source_with_path, &src_stat);
 			    if (S_ISDIR (src_stat.st_mode))
 				value = copy_dir_dir (ctx, source_with_path, temp2,
-							1, 0, 0, 0, &count, &bytes);
+							TRUE, FALSE, FALSE,
+							NULL, &count, &bytes);
 			    else
-				value = copy_file_file (ctx, source_with_path,
-							temp2, 1, &count, &bytes, 1);
+				value = copy_file_file (ctx, source_with_path, temp2,
+							TRUE, &count, &bytes, TRUE);
 			    free_linklist (&dest_dirs);
 			    break;
 
@@ -2245,7 +2247,7 @@ panel_operate (void *source_panel, FileOperation operation, int force_single)
 #endif				/* WITH_BACKGROUND */
 
     file_op_context_destroy (ctx);
-    return 1;
+    return TRUE;
 }
 
 /* }}} */
@@ -2313,21 +2315,21 @@ real_query_recursive (FileOpContext *ctx, enum OperationMode mode, const char *s
     gchar *text;
 
     if (ctx->recursive_result < RECURSIVE_ALWAYS) {
-	const char *msg =
-	    mode ==
-	    Foreground ?
-	    _("\n   Directory not empty.   \n"
-	      "   Delete it recursively? ")
+	const char *msg = mode == Foreground
+	    ? _("\n   Directory not empty.   \n"
+		"   Delete it recursively? ")
 	    : _("\n   Background process: Directory not empty \n"
 		"   Delete it recursively? ");
 	text = g_strconcat (_(" Delete: "), path_trunc (s, 30), " ", (char *) NULL);
 
 	if (safe_delete)
 	    query_set_sel (1);
-	ctx->recursive_result = query_dialog (text, msg, D_ERROR, 5,
-					      _("&Yes"), _("&No"),
-					      _("A&ll"), _("Non&e"),
-					      _("&Abort"));
+
+	ctx->recursive_result =
+		(FileCopyMode) query_dialog (text, msg, D_ERROR, 5,
+						_("&Yes"), _("&No"),
+						_("A&ll"), _("Non&e"),
+						_("&Abort"));
 
 	if (ctx->recursive_result != RECURSIVE_ABORT)
 	    do_refresh ();
@@ -2344,7 +2346,6 @@ real_query_recursive (FileOpContext *ctx, enum OperationMode mode, const char *s
 	return FILE_SKIP;
 
     case RECURSIVE_ABORT:
-
     default:
 	return FILE_ABORT;
     }

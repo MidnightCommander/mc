@@ -108,20 +108,30 @@ typedef enum {
 /* Hack: the vfs code should not rely on this */
 #define WITH_FULL_PATHS 1
 
+/* Used for button result values */
+typedef enum {
+    REPLACE_YES = B_USER,
+    REPLACE_NO,
+    REPLACE_APPEND,
+    REPLACE_ALWAYS,
+    REPLACE_UPDATE,
+    REPLACE_NEVER,
+    REPLACE_ABORT,
+    REPLACE_SIZE,
+    REPLACE_REGET
+} replace_action_t;
+
 /* This structure describes the UI and internal data required by a file
  * operation context.
  */
 typedef struct {
     /* ETA and bps */
-
-    int showing_eta;
-    int showing_bps;
+    gboolean showing_eta;
+    gboolean showing_bps;
     int eta_extra;
 
     /* Dialog and widgets for the operation progress window */
-
     Dlg_head *op_dlg;
-
     WLabel *file_label[2];
     WLabel *file_string[2];
     WLabel *progress_label[3];
@@ -131,10 +141,10 @@ typedef struct {
     WLabel *stalled_label;
 
     /* Query replace dialog */
-
     Dlg_head *replace_dlg;
     const char *replace_filename;
-    int replace_result;
+    replace_action_t replace_result;
+
     struct stat *s_stat, *d_stat;
 } FileOpContextUI;
 
@@ -151,30 +161,17 @@ static int last_hint_line;
 #define FCOPY_GAUGE_X 14
 #define FCOPY_LABEL_X 5
 
-/* Used for button result values */
-enum {
-    REPLACE_YES = B_USER,
-    REPLACE_NO,
-    REPLACE_APPEND,
-    REPLACE_ALWAYS,
-    REPLACE_UPDATE,
-    REPLACE_NEVER,
-    REPLACE_ABORT,
-    REPLACE_SIZE,
-    REPLACE_REGET
-};
-
-static int
-filegui__check_attrs_on_fs(const char *fs_path)
+static gboolean
+filegui__check_attrs_on_fs (const char *fs_path)
 {
 #ifdef STATFS
     STRUCT_STATFS stfs;
 
     if (!setup_copymove_persistent_attr)
-        return 0;
+        return FALSE;
 
-    if (STATFS(fs_path, &stfs)!=0)
-        return 1;
+    if (STATFS (fs_path, &stfs) != 0)
+        return TRUE;
 
 # ifdef __linux__
     switch ((filegui_nonattrs_fs_t) stfs.f_type)
@@ -186,8 +183,7 @@ filegui__check_attrs_on_fs(const char *fs_path)
     case SMB_SUPER_MAGIC:
     case NCP_SUPER_MAGIC:
     case USBDEVICE_SUPER_MAGIC:
-        return 0;
-        break;
+        return FALSE;
     }
 # elif defined(HAVE_STRUCT_STATFS_F_FSTYPENAME) \
       || defined(HAVE_STRUCT_STATVFS_F_FSTYPENAME)
@@ -197,18 +193,18 @@ filegui__check_attrs_on_fs(const char *fs_path)
         || !strcmp(stfs.f_fstypename, "procfs")
         || !strcmp(stfs.f_fstypename, "smbfs")
         || strstr(stfs.f_fstypename, "fusefs"))
-        return 0;
+        return FALSE;
 # elif defined(HAVE_STRUCT_STATVFS_F_BASETYPE)
     if (!strcmp(stfs.f_basetype, "pcfs")
         || !strcmp(stfs.f_basetype, "ntfs")
         || !strcmp(stfs.f_basetype, "proc")
         || !strcmp(stfs.f_basetype, "smbfs")
         || !strcmp(stfs.f_basetype, "fuse"))
-        return 0;
+        return FALSE;
 # endif
 #endif /* STATFS */
 
-    return 1;
+    return TRUE;
 }
 
 static FileProgressStatus
@@ -236,11 +232,9 @@ check_progress_buttons (FileOpContext *ctx)
     switch (ui->op_dlg->ret_value) {
     case FILE_SKIP:
 	return FILE_SKIP;
-	break;
     case B_CANCEL:
     case FILE_ABORT:
 	return FILE_ABORT;
-	break;
     default:
 	return FILE_CONT;
     }
@@ -249,7 +243,7 @@ check_progress_buttons (FileOpContext *ctx)
 /* {{{ File progress display routines */
 
 void
-file_op_context_create_ui_without_init (FileOpContext *ctx, int with_eta)
+file_op_context_create_ui_without_init (FileOpContext *ctx, gboolean with_eta)
 {
     FileOpContextUI *ui;
     int x_size;
@@ -270,9 +264,9 @@ file_op_context_create_ui_without_init (FileOpContext *ctx, int with_eta)
     sixty = "";
     fifteen = "";
 
-    ctx->recursive_result = 0;
+    ctx->recursive_result = RECURSIVE_YES;
 
-    ui->replace_result = 0;
+    ui->replace_result = REPLACE_YES;
     ui->showing_eta = with_eta;
     ui->showing_bps = with_eta;
     ui->eta_extra = with_eta ? WX_ETA_EXTRA : 0;
@@ -323,14 +317,14 @@ file_op_context_create_ui_without_init (FileOpContext *ctx, int with_eta)
 }
 
 void
-file_op_context_create_ui (FileOpContext *ctx, int with_eta)
+file_op_context_create_ui (FileOpContext *ctx, gboolean with_eta)
 {
     FileOpContextUI *ui;
 
     g_return_if_fail (ctx != NULL);
     g_return_if_fail (ctx->ui == NULL);
 
-    file_op_context_create_ui_without_init(ctx, with_eta);
+    file_op_context_create_ui_without_init (ctx, with_eta);
     ui = ctx->ui;
 
     /* We will manage the dialog without any help, that's why
@@ -600,9 +594,7 @@ file_progress_show_deleting (FileOpContext *ctx, const char *s)
  * but actually I'm not familiar with it and have not much time :(
  *   alex
  */
-
-
-static int
+static replace_action_t
 overwrite_query_dialog (FileOpContext *ctx, enum OperationMode mode)
 {
 #define ADD_RD_BUTTON(i)\
@@ -767,7 +759,7 @@ overwrite_query_dialog (FileOpContext *ctx, enum OperationMode mode)
 
     g_free (widgets_len);
 
-    return result;
+    return (result == B_CANCEL) ? REPLACE_ABORT : (replace_action_t) result;
 #undef ADD_RD_LABEL
 #undef ADD_RD_BUTTON
 }
@@ -802,8 +794,6 @@ file_progress_real_query_replace (FileOpContext *ctx,
 	ui->s_stat = _s_stat;
 	ui->d_stat = _d_stat;
 	ui->replace_result = overwrite_query_dialog (ctx, mode);
-	if (ui->replace_result == B_CANCEL)
-	    ui->replace_result = REPLACE_ABORT;
     }
 
     switch (ui->replace_result) {
@@ -826,7 +816,7 @@ file_progress_real_query_replace (FileOpContext *ctx,
 	ctx->do_reget = _d_stat->st_size;
 
     case REPLACE_APPEND:
-	ctx->do_append = 1;
+	ctx->do_append = TRUE;
 
     case REPLACE_YES:
     case REPLACE_ALWAYS:
@@ -992,7 +982,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation,
     /* destination */
     fmd_widgets[7 - OFFSET].u.input.text = def_text_secure;
 
-    ctx->stable_symlinks = 0;
+    ctx->stable_symlinks = FALSE;
     *do_background = FALSE;
 
     {
@@ -1018,18 +1008,18 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation,
 	    ctx->stat_func = mc_lstat;
 
 	if (ctx->op_preserve) {
-	    ctx->preserve = 1;
+	    ctx->preserve = TRUE;
 	    ctx->umask_kill = 0777777;
-	    ctx->preserve_uidgid = (geteuid () == 0) ? 1 : 0;
+	    ctx->preserve_uidgid = (geteuid () == 0);
 	} else {
 	    int i2;
-	    ctx->preserve = ctx->preserve_uidgid = 0;
+	    ctx->preserve = ctx->preserve_uidgid = FALSE;
 	    i2 = umask (0);
 	    umask (i2);
 	    ctx->umask_kill = i2 ^ 0777777;
 	}
 
-	if (!dest_dir || !*dest_dir) {
+	if ((dest_dir == NULL) || (*dest_dir == '\0')) {
 	    g_free (def_text_secure);
 	    g_free (source_mask);
 	    return dest_dir;

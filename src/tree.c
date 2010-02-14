@@ -643,12 +643,14 @@ tree_copy (WTree *tree, const char *default_dest)
 
     g_snprintf (msg, sizeof (msg), _("Copy \"%s\" directory to:"),
 			str_trunc (tree->selected_ptr->name, 50));
-    dest = input_expand_dialog (Q_("DialogTitle|Copy"), msg, MC_HISTORY_FM_TREE_COPY, default_dest);
+    dest = input_expand_dialog (Q_("DialogTitle|Copy"),
+				msg, MC_HISTORY_FM_TREE_COPY, default_dest);
 
     if (dest != NULL && *dest != '\0') {
 	ctx = file_op_context_new (OP_COPY);
 	file_op_context_create_ui (ctx, FALSE);
-	copy_dir_dir (ctx, tree->selected_ptr->name, dest, 1, 0, 0, 0, &count, &bytes);
+	copy_dir_dir (ctx, tree->selected_ptr->name, dest,
+			TRUE, FALSE, FALSE, NULL, &count, &bytes);
 	file_op_context_destroy (ctx);
     }
 

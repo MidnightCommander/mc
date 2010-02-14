@@ -547,7 +547,7 @@ check_for_default (const char *default_file, const char *file)
 
 	ctx = file_op_context_new (OP_COPY);
 	file_op_context_create_ui (ctx, 0);
-	copy_file_file (ctx, default_file, file, 1, &count, &bytes, 1);
+	copy_file_file (ctx, default_file, file, TRUE, &count, &bytes, TRUE);
 	file_op_context_destroy (ctx);
     }
 
