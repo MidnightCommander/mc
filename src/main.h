@@ -29,6 +29,8 @@ struct WButtonBar;
 void midnight_set_buttonbar (struct WButtonBar *b);
 
 /* See main.c for details on these variables */
+extern const char *edit_one_file;
+extern const char *view_one_file;
 extern int mark_moves_down;
 extern int auto_menu;
 extern int pause_after_run;

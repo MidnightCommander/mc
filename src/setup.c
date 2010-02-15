@@ -344,6 +344,9 @@ save_panel_types (void)
 {
     panel_view_mode_t type;
 
+    if ((view_one_file != NULL) || (edit_one_file != NULL))
+	return;
+
     if (!mc_config_get_int (mc_main_config, CONFIG_APP_SECTION,
 			    "auto_save_setup_panels", auto_save_setup))
 	return;
