@@ -54,12 +54,6 @@
 #include "src/main.h"		/* eight_bit_clean */
 #endif
 
-/*In order to use everywhere the same setup 
-  for the locale we use defines               */
-#define FMTYEAR 		_("%b %e  %Y")
-#define FMTTIME			_("%b %e %H:%M")
-
-
 int easy_patterns = 1;
 
 /*
@@ -69,7 +63,8 @@ int easy_patterns = 1;
  */
 int kilobyte_si = 0;
 
-
+char *user_recent_timeformat = NULL; /* time format string for recent dates */
+char *user_old_timeformat = NULL;    /* time format string for older dates */
 
 extern void str_replace(char *s, char from, char to)
 {
@@ -654,9 +649,9 @@ i18n_checktimelength (void)
 	char buf [MB_LEN_MAX * MAX_I18NTIMELENGTH + 1];
 	size_t a, b;
 
-	strftime (buf, sizeof(buf) - 1, FMTTIME, lt);
+	strftime (buf, sizeof(buf) - 1, user_recent_timeformat, lt);
 	a = str_term_width1 (buf);
-	strftime (buf, sizeof(buf) - 1, FMTYEAR, lt);
+	strftime (buf, sizeof(buf) - 1, user_old_timeformat, lt);
 	b = str_term_width1 (buf);
 
 	length = max (a, b);
@@ -686,9 +681,9 @@ file_date (time_t when)
 	   to allow for NFS server/client clock disagreement.
 	   Show the year instead of the time of day.  */
 
-	fmt = FMTYEAR;
+	fmt = user_old_timeformat;
     else
-	fmt = FMTTIME;
+	fmt = user_recent_timeformat;
 
     FMT_LOCALTIME(timebuf, sizeof (timebuf), fmt, when);
 
