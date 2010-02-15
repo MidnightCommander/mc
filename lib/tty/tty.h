@@ -21,6 +21,8 @@
 
 /* {{{ Input }}} */
 
+extern int reset_hp_softkeys;
+
 extern void tty_init (gboolean slow, gboolean ugly_lines);
 extern void tty_shutdown (void);
 

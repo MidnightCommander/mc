@@ -20,6 +20,7 @@
 #   include "tty-ncurses.h"
 #endif
 
+/* colors specified on the command line: they override any other setting */
 extern char *command_line_colors;
 
 void tty_init_colors (gboolean disable, gboolean force);

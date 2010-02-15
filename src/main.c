@@ -42,10 +42,11 @@
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"
-#include "lib/skin.h"
 #include "lib/tty/mouse.h"
 #include "lib/tty/key.h"		/* For init_key() */
 #include "lib/tty/win.h"		/* xterm_flag */
+
+#include "lib/skin.h"
 
 #include "lib/mcconfig.h"
 #include "lib/filehighlight.h"
@@ -196,11 +197,6 @@ int mouse_move_pages = 1;
 
 /* If true: l&r arrows are used to chdir if the input line is empty */
 int navigate_with_arrows = 0;
-
-/* If true program softkeys (HP terminals only) on startup and after every
-   command ran in the subshell to the description found in the termcap/terminfo
-   database */
-int reset_hp_softkeys = 0;
 
 /* The prompt */
 const char *mc_prompt = NULL;
