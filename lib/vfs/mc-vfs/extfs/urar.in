@@ -40,7 +40,7 @@ flag==1 {
     else
 	if (index($6, ".") != 0)
 	    $6="-rw-r--r--"
-    printf "%s 1 %s %s %d %02d/%02d/%02d %s %s\n", $6, uid, gid, $1, a[2], a[1], a[3], $5, str
+    printf "%s 1 %s %s %d %02d/%02d/%02d %s ./%s\n", $6, uid, gid, $1, a[2], a[1], a[3], $5, str
 }'
 }
 
