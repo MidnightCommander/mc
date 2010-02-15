@@ -25,29 +25,22 @@
  */
 
 #include <config.h>
+#include <stdlib.h>
 #include <stdio.h>
-
 
 #include "lib/global.h"
 #include "lib/tty/tty.h"
+#include "lib/tty/color.h"	/* command_line_colors */
 #include "lib/strutil.h"
 
-#include "src/args.h"
+#include "src/main.h"
 #include "src/textconf.h"
+#include "subshell.h"		/* use_subshell */
+
+#include "src/args.h"
 
 /*** external variables **************************************************************************/
 
-extern int reset_hp_softkeys;
-extern int use_subshell;
-
-extern char *mc_home;
-extern char *mc_home_alt;
-
-/* colors specified on the command line: they override any other setting */
-extern char *command_line_colors;
-
-extern const char *edit_one_file;
-extern const char *view_one_file;
 /*** global variables ****************************************************************************/
 
 /* If true, show version info and exit */
@@ -93,11 +86,11 @@ int mc_args__debug_level = 0;
 
 static GOptionContext *context;
 
-
 static gboolean mc_args__nouse_subshell = FALSE;
 static gboolean mc_args__show_datadirs = FALSE;
 
-GOptionGroup *main_group;
+static GOptionGroup *main_group;
+
 static const GOptionEntry argument_main_table[] = {
     /* generic options */
     {

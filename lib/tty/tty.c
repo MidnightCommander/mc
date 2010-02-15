@@ -43,6 +43,11 @@
 
 /*** global variables **************************************************/
 
+/* If true program softkeys (HP terminals only) on startup and after every
+   command ran in the subshell to the description found in the termcap/terminfo
+   database */
+int reset_hp_softkeys = 0;
+
 /* If true lines are drown by spaces */
 gboolean slow_tty = FALSE;
 
