@@ -930,9 +930,7 @@ create_panels (void)
     int current_index;
     int other_index;
     panel_view_mode_t current_mode, other_mode;
-    char original_dir[1024];
-
-    original_dir[0] = 0;
+    char original_dir[BUF_1K] = "\0";
 
     if (boot_current_is_left) {
 	current_index = 0;
@@ -960,7 +958,7 @@ create_panels (void)
 
     /* The other panel */
     if (other_dir) {
-	if (original_dir[0])
+	if (original_dir[0] != '\0')
 	    translated_mc_chdir (original_dir);
 	translated_mc_chdir (other_dir);
     }
@@ -1379,18 +1377,6 @@ midnight_execute_cmd (Widget *sender, unsigned long command)
 }
 
 static void
-setup_pre (void)
-{
-    /* Call all the inits */
-
-#ifdef HAVE_SLANG
-    tty_display_8bit (full_eight_bits != 0);
-#else
-    tty_display_8bit (eight_bit_clean != 0);
-#endif
-}
-
-static void
 init_xterm_support (void)
 {
     const char *termvalue;
@@ -1438,9 +1424,11 @@ init_xterm_support (void)
 static void
 setup_mc (void)
 {
-    setup_pre ();
-    create_panels ();
-    setup_panels ();
+#ifdef HAVE_SLANG
+    tty_display_8bit (full_eight_bits != 0);
+#else
+    tty_display_8bit (eight_bit_clean != 0);
+#endif
 
 #ifdef HAVE_SUBSHELL_SUPPORT
     if (use_subshell)
@@ -1542,6 +1530,9 @@ midnight_callback (Dlg_head *h, Widget *sender,
     unsigned long command;
 
     switch (msg) {
+    case DLG_INIT:
+	setup_panels ();
+	return MSG_HANDLED;
 
     case DLG_DRAW:
 	load_hint (1);
@@ -1560,6 +1551,12 @@ midnight_callback (Dlg_head *h, Widget *sender,
     case DLG_IDLE:
 	/* We only need the first idle event to show user menu after start */
 	set_idle_proc (h, 0);
+
+	if (boot_current_is_left)
+	    dlg_select_widget (get_panel_widget (0));
+	else
+	    dlg_select_widget (get_panel_widget (1));
+
 	if (auto_menu)
 	    midnight_execute_cmd (NULL, CK_UserMenuCmd);
 	return MSG_HANDLED;
@@ -1767,26 +1764,24 @@ load_hint (int force)
 }
 
 static void
-setup_panels_and_run_mc (void)
+create_panels_and_run_mc (void)
 {
     midnight_dlg->get_shortcut = midnight_get_shortcut;
+
+    create_panels ();
 
     add_widget (midnight_dlg, the_menubar);
     init_menu ();
 
     add_widget (midnight_dlg, get_panel_widget (0));
     add_widget (midnight_dlg, get_panel_widget (1));
+
     add_widget (midnight_dlg, the_hint);
     add_widget (midnight_dlg, cmdline);
     add_widget (midnight_dlg, the_prompt);
 
     add_widget (midnight_dlg, the_bar);
     midnight_set_buttonbar (the_bar);
-
-    if (boot_current_is_left)
-	dlg_select_widget (get_panel_widget (0));
-    else
-	dlg_select_widget (get_panel_widget (1));
 
     /* Run the Midnight Commander if no file was specified in the command line */
     run_dlg (midnight_dlg);
@@ -1797,45 +1792,39 @@ static char *
 prepend_cwd_on_local (const char *filename)
 {
     char *d;
-    int l;
+    size_t l;
 
-    if (vfs_file_is_local (filename)) {
-	if (*filename == PATH_SEP)	/* an absolute pathname */
-	    return g_strdup (filename);
-	d = g_malloc (MC_MAXPATHLEN + strlen (filename) + 2);
-	mc_get_current_wd (d, MC_MAXPATHLEN);
-	l = strlen (d);
-	d[l++] = PATH_SEP;
-	strcpy (d + l, filename);
-	canonicalize_pathname (d);
-	return d;
-    } else
+    if (!vfs_file_is_local (filename)
+	|| g_path_is_absolute (filename))
 	return g_strdup (filename);
+
+    d = g_malloc (MC_MAXPATHLEN + strlen (filename) + 2);
+    mc_get_current_wd (d, MC_MAXPATHLEN);
+    l = strlen (d);
+    d[l++] = PATH_SEP;
+    strcpy (d + l, filename);
+    canonicalize_pathname (d);
+    return d;
 }
 
-static int
+/* Invoke the internal view/edit routine with:
+ * the default processing and forcing the internal viewer/editor
+ */
+static void
 mc_maybe_editor_or_viewer (void)
 {
-    if (!(view_one_file || edit_one_file))
-	return 0;
-
-    /* Invoke the internal view/edit routine with:
-     * the default processing and forcing the internal viewer/editor
-     */
-    if (view_one_file) {
-	char *path = NULL;
+    if (view_one_file != NULL) {
+	char *path;
 	path = prepend_cwd_on_local (view_one_file);
 	view_file (path, 0, 1);
 	g_free (path);
     }
 #ifdef USE_INTERNAL_EDIT
-    else {
+    else
 	edit_file (edit_one_file, edit_one_file_start_line);
-    }
 #endif				/* USE_INTERNAL_EDIT */
     midnight_shutdown = 1;
     done_mc ();
-    return 1;
 }
 
 /* Run the main dialog that occupies the whole screen */
@@ -1853,7 +1842,7 @@ do_nc (void)
     midnight_dlg = create_dlg (0, 0, LINES, COLS, midnight_colors, midnight_callback,
 			       "[main]", NULL, DLG_WANT_IDLE);
 
-    if (view_one_file || edit_one_file)
+    if ((view_one_file != NULL) || (edit_one_file != NULL))
 	setup_dummy_mc ();
     else
 	setup_mc ();
@@ -1886,8 +1875,10 @@ do_nc (void)
         help_map = (global_keymap_t *) help_keymap->data;
 
     /* Check if we were invoked as an editor or file viewer */
-    if (!mc_maybe_editor_or_viewer ()) {
-	setup_panels_and_run_mc ();
+    if ((view_one_file != NULL) || (edit_one_file != NULL))
+	mc_maybe_editor_or_viewer ();
+    else {
+	create_panels_and_run_mc ();
 
 	/* Program end */
 	midnight_shutdown = 1;
@@ -2139,7 +2130,7 @@ main (int argc, char *argv[])
 
 #ifdef HAVE_SUBSHELL_SUPPORT
     /* Don't use subshell when invoked as viewer or editor */
-    if (edit_one_file || view_one_file)
+    if ((view_one_file != NULL) || (edit_one_file != NULL))
 	use_subshell = 0;
 
     if (use_subshell)
@@ -2206,11 +2197,10 @@ main (int argc, char *argv[])
     if (use_subshell) {
 	mc_prompt = strip_ctrl_codes (subshell_prompt);
 	if (mc_prompt == NULL)
-	    mc_prompt = "";
+	    mc_prompt = (geteuid () == 0) ? "# " : "$ ";
     } else
 #endif				/* HAVE_SUBSHELL_SUPPORT */
 	mc_prompt = (geteuid () == 0) ? "# " : "$ ";
-
 
     /* Program main loop */
     if (!midnight_shutdown)
