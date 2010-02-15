@@ -206,6 +206,7 @@ mcview_do_search (mcview_t * view)
 {
     off_t search_start, growbufsize;
     gboolean isFound = FALSE;
+    gboolean need_search_again = TRUE;
 
     Dlg_head *d = NULL;
 
@@ -247,16 +248,33 @@ mcview_do_search (mcview_t * view)
                 break;
 
             search_start = growbufsize - view->search->original_len;
-            if (search_start < 0 )
+            if ( search_start <= 0 ) {
                 search_start = 0;
+                break;
+            }
 
             continue;
         }
 
         mcview_search_show_result(view, &d, match_len);
+        need_search_again = FALSE;
         isFound = TRUE;
         break;
     } while (mcview_may_still_grow (view));
+
+    if (!isFound && need_search_again && !view->search_backwards) {
+        int result;
+        mcview_update (view);
+
+        result =
+            query_dialog (_("Search done"), _("Continue from begining?"), D_NORMAL, 2, _("&Yes"), _("&No"));
+
+        if (result != 0) {
+            isFound=TRUE;
+        } else {
+            search_start = 0;
+        }
+    }
 
     if (!isFound && view->search->error_str != NULL && mcview_find (view, search_start, &match_len)) {
         mcview_search_show_result(view, &d, match_len);
