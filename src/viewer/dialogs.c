@@ -52,6 +52,15 @@
 
 /*** global variables ****************************************************************************/
 
+mcview_search_options_t mcview_search_options =
+{
+    .type = MC_SEARCH_T_NORMAL,
+    .case_sens = FALSE,
+    .backwards = FALSE,
+    .whole_words = FALSE,
+    .all_codepages = FALSE
+};
+
 /*** file scope macro definitions ****************************************************************/
 
 /*** file scope type declarations ****************************************************************/
@@ -84,16 +93,17 @@ mcview_dialog_search (mcview_t * view)
 	QUICK_BUTTON (2, 10, SEARCH_DLG_HEIGHT - 3, SEARCH_DLG_HEIGHT, N_("&OK"), B_ENTER, NULL),
 #ifdef HAVE_CHARSET
 	QUICK_CHECKBOX (SEARCH_DLG_WIDTH / 2 + 3, SEARCH_DLG_WIDTH, 8, SEARCH_DLG_HEIGHT,
-			N_("All charsets"), &view->search_all_codepages),
+			N_("All charsets"), &mcview_search_options.all_codepages),
 #endif
 	QUICK_CHECKBOX (SEARCH_DLG_WIDTH / 2 + 3, SEARCH_DLG_WIDTH, 7, SEARCH_DLG_HEIGHT,
-			N_("&Whole words"), &view->whole_words),
+			N_("&Whole words"), &mcview_search_options.whole_words),
 	QUICK_CHECKBOX (SEARCH_DLG_WIDTH / 2 + 3, SEARCH_DLG_WIDTH, 6, SEARCH_DLG_HEIGHT,
-			N_("&Backwards"), &view->search_backwards),
+			N_("&Backwards"), &mcview_search_options.backwards),
 	QUICK_CHECKBOX (SEARCH_DLG_WIDTH / 2 + 3, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT,
-			N_("case &Sensitive"),  &view->search_case),
+			N_("case &Sensitive"),  &mcview_search_options.case_sens),
 	QUICK_RADIO (3, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT,
-			num_of_types, (const char **) list_of_types, (int *) &view->search_type),
+			num_of_types, (const char **) list_of_types,
+			(int *) &mcview_search_options.type),
 	QUICK_INPUT (3, SEARCH_DLG_WIDTH, 3, SEARCH_DLG_HEIGHT,
 			INPUT_LAST_TEXT, SEARCH_DLG_WIDTH - 6, 0, MC_HISTORY_SHARED_SEARCH, &exp),
 	QUICK_LABEL (2, SEARCH_DLG_WIDTH, 2, SEARCH_DLG_HEIGHT, N_(" Enter search string:")),
@@ -138,12 +148,12 @@ mcview_dialog_search (mcview_t * view)
     view->search = mc_search_new (view->last_search_string, -1);
     view->search_nroff_seq = mcview_nroff_seq_new (view);
     if (view->search != NULL) {
-	view->search->search_type = view->search_type;
-	view->search->is_all_charsets = view->search_all_codepages;
-	view->search->is_case_sentitive = view->search_case;
+	view->search->search_type = mcview_search_options.type;
+	view->search->is_all_charsets = mcview_search_options.all_codepages;
+	view->search->is_case_sentitive = mcview_search_options.case_sens;
+	view->search->whole_words = mcview_search_options.whole_words;
 	view->search->search_fn = mcview_search_cmd_callback;
 	view->search->update_fn = mcview_search_update_cmd_callback;
-	view->search->whole_words = view->whole_words;
     }
 
     return (view->search != NULL);

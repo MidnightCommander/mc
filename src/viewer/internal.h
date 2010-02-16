@@ -180,11 +180,6 @@ typedef struct mcview_struct {
     /* handle of search engine */
     mc_search_t *search;
     gchar *last_search_string;
-    mc_search_type_t search_type;
-    gboolean search_all_codepages;
-    gboolean whole_words;
-    gboolean search_case;
-    gboolean search_backwards;
     struct mcview_nroff_struct *search_nroff_seq;
 
     int search_numNeedSkipChar;
@@ -199,7 +194,17 @@ typedef struct mcview_nroff_struct {
     nroff_type_t prev_type;
 } mcview_nroff_t;
 
+typedef struct mcview_search_options_t {
+    mc_search_type_t type;
+    gboolean case_sens;
+    gboolean backwards;
+    gboolean whole_words;
+    gboolean all_codepages;
+} mcview_search_options_t;
+
 /*** global variables defined in .c file *******************************/
+
+extern mcview_search_options_t mcview_search_options;
 
 /*** declarations of public functions **********************************/
 

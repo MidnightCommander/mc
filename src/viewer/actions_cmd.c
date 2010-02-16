@@ -113,12 +113,12 @@ mcview_continue_search_cmd (mcview_t * view)
                 view->last_search_string = NULL;
                 mcview_search (view);
             } else {
-                view->search->search_type = view->search_type;
-                view->search->is_all_charsets = view->search_all_codepages;
-                view->search->is_case_sentitive = view->search_case;
+                view->search->search_type = mcview_search_options.type;
+                view->search->is_all_charsets = mcview_search_options.all_codepages;
+                view->search->is_case_sentitive = mcview_search_options.case_sens;
+                view->search->whole_words = mcview_search_options.whole_words;
                 view->search->search_fn = mcview_search_cmd_callback;
                 view->search->update_fn = mcview_search_update_cmd_callback;
-                view->search->whole_words = view->whole_words;
 
                 mcview_do_search (view);
             }
