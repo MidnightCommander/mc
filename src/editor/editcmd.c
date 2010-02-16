@@ -1434,14 +1434,14 @@ editcmd_find (WEdit *edit, gsize *len)
     long end_mark = edit->last_byte;
     int mark_res = 0;
 
-    if (edit->only_in_selection) {
+    if (edit_search_options.only_in_selection) {
         mark_res = eval_marks(edit, &start_mark, &end_mark);
         if (mark_res != 0) {
             edit->search->error = MC_SEARCH_E_NOTFOUND;
             edit->search->error_str = g_strdup(_(" Search string not found "));
             return FALSE;
         }
-        if (edit->replace_backwards) {
+        if (edit_search_options.backwards) {
             if (search_start > end_mark || search_start <= start_mark) {
                 search_start = end_mark;
             }
@@ -1451,10 +1451,10 @@ editcmd_find (WEdit *edit, gsize *len)
             }
         }
     } else {
-        if (edit->replace_backwards)
+        if (edit_search_options.backwards)
             end_mark = max(1, edit->curs1) - 1;
     }
-    if (edit->replace_backwards) {
+    if (edit_search_options.backwards) {
         search_end = end_mark;
         while ((int) search_start >= start_mark) {
             if (search_end > search_start + edit->search->original_len
@@ -1576,19 +1576,19 @@ edit_replace_cmd (WEdit *edit, int again)
 	    edit->search_start = edit->curs1;
 	    return;
 	}
-	edit->search->search_type = edit->search_type;
-	edit->search->is_all_charsets = edit->all_codepages;
-	edit->search->is_case_sentitive = edit->replace_case;
-	edit->search->whole_words = edit->whole_words;
+	edit->search->search_type = edit_search_options.type;
+	edit->search->is_all_charsets = edit_search_options.all_codepages;
+	edit->search->is_case_sentitive = edit_search_options.case_sens;
+	edit->search->whole_words = edit_search_options.whole_words;
 	edit->search->search_fn = edit_search_cmd_callback;
     }
 
     if (edit->found_len && edit->search_start == edit->found_start + 1
-	&& edit->replace_backwards)
+	&& edit_search_options.backwards)
 	edit->search_start--;
 
     if (edit->found_len && edit->search_start == edit->found_start - 1
-	&& !edit->replace_backwards)
+	&& !edit_search_options.backwards)
 	edit->search_start++;
 
     do {
@@ -1672,7 +1672,7 @@ edit_replace_cmd (WEdit *edit, int again)
 		edit->found_len = i;
 	    }
 	    /* so that we don't find the same string again */
-	    if (edit->replace_backwards) {
+	    if (edit_search_options.backwards) {
 		last_search = edit->search_start;
 		edit->search_start--;
 	    } else {
@@ -1778,30 +1778,31 @@ void edit_search_cmd (WEdit * edit, int again)
 	    edit->search_start = edit->curs1;
 	    return;
 	}
-	edit->search->search_type = edit->search_type;
-	edit->search->is_all_charsets = edit->all_codepages;
-	edit->search->is_case_sentitive = edit->replace_case;
-	edit->search->whole_words = edit->whole_words;
+	edit->search->search_type = edit_search_options.type;
+	edit->search->is_all_charsets = edit_search_options.all_codepages;
+	edit->search->is_case_sentitive = edit_search_options.case_sens;
+	edit->search->whole_words = edit_search_options.whole_words;
 	edit->search->search_fn = edit_search_cmd_callback;
     }
 
     if (search_create_bookmark) {
 	edit_search_cmd_search_create_bookmark(edit);
     } else {
-	if (edit->found_len && edit->search_start == edit->found_start + 1 && edit->replace_backwards)
+	if (edit->found_len && edit->search_start == edit->found_start + 1
+	    && edit_search_options.backwards)
 	    edit->search_start--;
 
-	if (edit->found_len && edit->search_start == edit->found_start - 1 && !edit->replace_backwards)
+	if (edit->found_len && edit->search_start == edit->found_start - 1
+	    && !edit_search_options.backwards)
 	    edit->search_start++;
 
-	
 	if (editcmd_find(edit, &len)) {
 	    edit->found_start = edit->search_start = edit->search->normal_offset;
 	    edit->found_len = len;
 	    edit->over_col = 0;
 	    edit_cursor_move (edit, edit->search_start - edit->curs1);
 	    edit_scroll_screen_over_cursor (edit);
-	    if (edit->replace_backwards)
+	    if (edit_search_options.backwards)
 		edit->search_start--;
 	    else
 		edit->search_start++;

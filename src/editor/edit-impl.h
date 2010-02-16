@@ -32,7 +32,9 @@
 
 #include <stdio.h>
 
-#include "src/dialog.h"	/* cb_ret_t */
+#include "lib/search.h"		/* mc_search_type_t */
+
+#include "src/dialog.h"		/* cb_ret_t */
 #include "src/keybind.h"	/* global_keymap_t */
 
 #include "src/editor/edit.h"
@@ -116,6 +118,16 @@
 /* max count stack files */
 #define MAX_HISTORY_MOVETO     50
 #define LINE_STATE_WIDTH	8
+
+/* search/replace options */
+typedef struct edit_search_options_t {
+    mc_search_type_t type;
+    gboolean case_sens;
+    gboolean backwards;
+    gboolean only_in_selection;
+    gboolean whole_words;
+    gboolean all_codepages;
+} edit_search_options_t;
 
 typedef struct edit_stack_type {
     long line;
@@ -298,6 +310,8 @@ void edit_execute_cmd (WEdit *edit, unsigned long command, int char_for_insertio
 #define MAX_PATH_LEN 1024
 #endif
 #endif
+
+extern edit_search_options_t edit_search_options;
 
 extern int edit_stack_iterator;
 extern edit_stack_type edit_history_moveto [MAX_HISTORY_MOVETO];

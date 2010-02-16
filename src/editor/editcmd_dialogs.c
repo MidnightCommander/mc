@@ -47,6 +47,16 @@
 
 /*** global variables **************************************************/
 
+edit_search_options_t edit_search_options =
+{
+    .type = MC_SEARCH_T_NORMAL,
+    .case_sens = FALSE,
+    .backwards = FALSE,
+    .only_in_selection = FALSE,
+    .whole_words = FALSE,
+    .all_codepages = FALSE
+};
+
 /*** file scope macro definitions **************************************/
 
 #define SEARCH_DLG_WIDTH 58
@@ -60,7 +70,6 @@
 /*** file scope type declarations **************************************/
 
 /*** file scope variables **********************************************/
-
 
 /*** file scope functions **********************************************/
 
@@ -97,14 +106,20 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
 	    /*  0 */ QUICK_BUTTON (6, 10, 13, REPLACE_DLG_HEIGHT, N_("&Cancel"), B_CANCEL, NULL),
 	    /*  1 */ QUICK_BUTTON (2, 10, 13, REPLACE_DLG_HEIGHT, N_("&OK"),     B_ENTER,  NULL),
 #ifdef HAVE_CHARSET
-	    /*  2 */ QUICK_CHECKBOX (33, REPLACE_DLG_WIDTH, 11, REPLACE_DLG_HEIGHT, N_("All charsets"), &edit->all_codepages),
+	    /*  2 */ QUICK_CHECKBOX (33, REPLACE_DLG_WIDTH, 11, REPLACE_DLG_HEIGHT, N_("All charsets"),
+				&edit_search_options.all_codepages),
 #endif
-	    /*  3 */ QUICK_CHECKBOX (33, REPLACE_DLG_WIDTH, 10, REPLACE_DLG_HEIGHT, N_("&Whole words"), &edit->whole_words),
-	    /*  4 */ QUICK_CHECKBOX (33, REPLACE_DLG_WIDTH,  9, REPLACE_DLG_HEIGHT, N_("In se&lection"), &edit->only_in_selection),
-	    /*  5 */ QUICK_CHECKBOX (33, REPLACE_DLG_WIDTH,  8, REPLACE_DLG_HEIGHT, N_("&Backwards"), &edit->replace_backwards),
-	    /*  6 */ QUICK_CHECKBOX (33, REPLACE_DLG_WIDTH,  7, REPLACE_DLG_HEIGHT, N_("case &Sensitive"), &edit->replace_case),
+	    /*  3 */ QUICK_CHECKBOX (33, REPLACE_DLG_WIDTH, 10, REPLACE_DLG_HEIGHT, N_("&Whole words"),
+				&edit_search_options.whole_words),
+	    /*  4 */ QUICK_CHECKBOX (33, REPLACE_DLG_WIDTH,  9, REPLACE_DLG_HEIGHT, N_("In se&lection"),
+				&edit_search_options.only_in_selection),
+	    /*  5 */ QUICK_CHECKBOX (33, REPLACE_DLG_WIDTH,  8, REPLACE_DLG_HEIGHT, N_("&Backwards"),
+				&edit_search_options.backwards),
+	    /*  6 */ QUICK_CHECKBOX (33, REPLACE_DLG_WIDTH,  7, REPLACE_DLG_HEIGHT, N_("case &Sensitive"),
+				&edit_search_options.case_sens),
 	    /*  7 */ QUICK_RADIO (3, REPLACE_DLG_WIDTH,   7, REPLACE_DLG_HEIGHT,
-				num_of_types, (const char **) list_of_types, (int *) &edit->search_type),
+				num_of_types, (const char **) list_of_types,
+				(int *) &edit_search_options.type),
 	    /*  8 */ QUICK_LABEL (2, REPLACE_DLG_WIDTH,   4, REPLACE_DLG_HEIGHT, N_(" Enter replacement string:")),
 	    /*  9 */ QUICK_INPUT (3, REPLACE_DLG_WIDTH,   5, REPLACE_DLG_HEIGHT,
 				replace_default, REPLACE_DLG_WIDTH - 6, 0, "replace", replace_text),
@@ -157,22 +172,29 @@ editcmd_dialog_search_show (WEdit * edit, char **search_text)
 	    QUICK_BUTTON (2, 10, 11, SEARCH_DLG_HEIGHT, N_("&OK"),     B_ENTER,  NULL),
 #ifdef HAVE_CHARSET
 	    /* 3 */
-	    QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 9, SEARCH_DLG_HEIGHT, N_("All charsets"), &edit->all_codepages),
+	    QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 9, SEARCH_DLG_HEIGHT, N_("All charsets"),
+				    &edit_search_options.all_codepages),
 #endif
 	    /* 4 */
-	    QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 8, SEARCH_DLG_HEIGHT, N_("&Whole words"), &edit->whole_words),
+	    QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 8, SEARCH_DLG_HEIGHT, N_("&Whole words"),
+				    &edit_search_options.whole_words),
 	    /* 5 */
-	    QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 7, SEARCH_DLG_HEIGHT, N_("In se&lection"), &edit->only_in_selection),
+	    QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 7, SEARCH_DLG_HEIGHT, N_("In se&lection"),
+				    &edit_search_options.only_in_selection),
 	    /* 6 */
-	    QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 6, SEARCH_DLG_HEIGHT, N_("&Backwards"), &edit->replace_backwards),
+	    QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 6, SEARCH_DLG_HEIGHT, N_("&Backwards"),
+				    &edit_search_options.backwards),
 	    /* 7 */
-	    QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT, N_("case &Sensitive"), &edit->replace_case),
+	    QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT, N_("case &Sensitive"),
+				    &edit_search_options.case_sens),
 	    /* 8 */
 	    QUICK_RADIO ( 3, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT,
-				    num_of_types, (const char **) list_of_types, (int *) &edit->search_type),
+				    num_of_types, (const char **) list_of_types,
+				    (int *) &edit_search_options.type),
 	    /* 9 */
 	    QUICK_INPUT (3, SEARCH_DLG_WIDTH, 3, SEARCH_DLG_HEIGHT,
-				    *search_text, SEARCH_DLG_WIDTH - 6, 0, MC_HISTORY_SHARED_SEARCH, search_text),
+				    *search_text, SEARCH_DLG_WIDTH - 6, 0,
+				    MC_HISTORY_SHARED_SEARCH, search_text),
 	    /* 10 */
 	    QUICK_LABEL (2, SEARCH_DLG_WIDTH, 2, SEARCH_DLG_HEIGHT, N_(" Enter search string:")),
 	    QUICK_END
