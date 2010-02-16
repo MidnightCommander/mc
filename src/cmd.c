@@ -385,7 +385,7 @@ mkdir_cmd (void)
     const char *name = "";
 
     /* If 'on' then automatically fills name with current selected item name */
-    if (auto_fill_mkdir_name)
+    if (auto_fill_mkdir_name && strcmp (selection (current_panel)->fname, "..") != 0)
         name = selection (current_panel)->fname;
 
     dir =
