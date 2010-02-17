@@ -1449,7 +1449,8 @@ setup_mc (void)
 
     tty_setup_sigwinch (sigwinch_handler);
 
-    verbose = !((tty_baudrate () < 9600) || tty_is_slow ());
+    if ((tty_baudrate () < 9600) || tty_is_slow ())
+	verbose = 0;
 
     init_xterm_support ();
     init_mouse ();
