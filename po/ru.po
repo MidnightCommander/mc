@@ -25,8 +25,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: mcedit 4.7.0\n"
 
 msgid " Search string not found "
@@ -36,8 +35,7 @@ msgid " Not implemented yet "
 msgstr " Пока не реализовано "
 
 msgid " Num of replace tokens not equal to num of found tokens "
-msgstr ""
-" Количество шаблонных полей не соответствует количеству полей для замены "
+msgstr " Количество шаблонных полей не соответствует количеству полей для замены "
 
 #, c-format
 msgid " Invalid token number %d "
@@ -958,8 +956,7 @@ msgstr ""
 "Ключевые слова:\n"
 "   Общие:              errors, reverse, gauge, input, viewunderline\n"
 "   Отображение файлов: normal, selected, marked, markselect\n"
-"   Диалоги:            dnormal, dfocus, dhotnormal, dhotfocus, "
-"errdhotnormal,\n"
+"   Диалоги:            dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                       errdhotfocus\n"
 "   Меню:               menu, menuhot, menusel, menuhotsel\n"
 "   Редактор:           editnormal, editbold, editmarked, editwhitespace,\n"
@@ -1070,7 +1067,8 @@ msgstr "Порядок сортировки"
 msgid "Confirmation"
 msgstr " Запрос подтверждения "
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 #, fuzzy
 msgid "Confirmation|&History cleanup"
@@ -2181,26 +2179,16 @@ msgid " %s%s file error"
 msgstr " %s%s ошибка файла "
 
 #, c-format
-msgid ""
-"The format of the %smc.ext file has changed with version 3.0.  It seems that "
-"the installation failed.  Please fetch a fresh copy from the Midnight "
-"Commander package."
-msgstr ""
-"формат %smc.ext изменён с версии 3.0. Возможно, произошёл сбой при установке."
-"Пожалуйста, возьмите свежую копию из пакета Midnight Commander."
+msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
+msgstr "формат %smc.ext изменён с версии 3.0. Возможно, произошёл сбой при установке.Пожалуйста, возьмите свежую копию из пакета Midnight Commander."
 
 #, c-format
 msgid " ~/%s file error "
 msgstr " ошибка файла ~/%s"
 
 #, c-format
-msgid ""
-"The format of the ~/%s file has changed with version 3.0.  You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write "
-"it."
-msgstr ""
-"формат файла %smc.ext изменён с версии 3.0. Вы можете либо скопировать его с "
-"%smc.ext либо использовать этот файл как пример и написать свой."
+msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
+msgstr "формат файла %smc.ext изменён с версии 3.0. Вы можете либо скопировать его с %smc.ext либо использовать этот файл как пример и написать свой."
 
 msgid "DialogTitle|Copy"
 msgstr "Копировать"
@@ -2227,8 +2215,7 @@ msgid ""
 "\n"
 " Option Stable Symlinks will be disabled "
 msgstr ""
-" Невозможно создать устойчивые симв. ссылки через не локальные файловые "
-"системы:\n"
+" Невозможно создать устойчивые симв. ссылки через не локальные файловые системы:\n"
 "\n"
 " Опция \"Устойчивые символические ссылки\" будет отменена "
 
@@ -2866,11 +2853,8 @@ msgid " Hotlist Load "
 msgstr " Загрузка списка быстрого доступа "
 
 #, c-format
-msgid ""
-"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
-msgstr ""
-"MC не смог удалить файл ~/%s, ваши старые элементы быстрого доступа не были "
-"удалены"
+msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr "MC не смог удалить файл ~/%s, ваши старые элементы быстрого доступа не были удалены"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -3779,12 +3763,11 @@ msgid " History "
 msgstr "История команд"
 
 #. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
-#, fuzzy
 msgid "DialogTitle|History cleanup"
-msgstr "Копировать"
+msgstr "Очистка истории"
 
 msgid "Do you want clean this history?"
-msgstr ""
+msgstr "Желаете очистить историю?"
 
 msgid "Background process:"
 msgstr "Фоновый процесс:"
