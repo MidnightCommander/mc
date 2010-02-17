@@ -255,7 +255,7 @@ msgid "Exclamation mark"
 msgstr "Point d'exclamation"
 
 msgid "Question mark"
-msgstr "Point d'intérogation"
+msgstr "Point d'interrogation"
 
 msgid "Ampersand"
 msgstr "Esperluette"
@@ -385,7 +385,7 @@ msgid ""
 "in cpio archive\n"
 "%s"
 msgstr ""
-"Lien physique inonsistant de\n"
+"Lien physique inconsistant de\n"
 "%s\n"
 "dans l'archive cpio\n"
 "%s"
@@ -758,7 +758,7 @@ msgid " while calling ext2_block_iterate %d "
 msgstr " lors de l'appel de ext2_block_iterate %d "
 
 msgid " no more memory while reallocating array "
-msgstr " pas plus de mémoire lors de la réallocation du tableau "
+msgstr " pas plus de mémoire lors de la ré-allocation du tableau "
 
 #, c-format
 msgid " while doing inode scan %d "
@@ -1029,7 +1029,7 @@ msgid ""
 msgstr "Une tâche de fond a passé plus de paramètres que je ne peux en gérer. \n"
 
 msgid "&Full file list"
-msgstr "Liste &Ccomplète des fichiers"
+msgstr "Liste &Complète des fichiers"
 
 msgid "&Brief file list"
 msgstr "Liste &Brève des fichiers"
@@ -1078,21 +1078,17 @@ msgstr " Confirmation "
 msgid "Confirmation|&Directory hotlist delete"
 msgstr "&Répertoire hotlist              C-\\"
 
-#, fuzzy
 msgid "Confirmation|E&xit"
-msgstr " Confirmation "
+msgstr " Confirmation|&Quitter"
 
-#, fuzzy
 msgid "Confirmation|&Execute"
-msgstr " Confirmation "
+msgstr " Confirmation|Éxecuter"
 
-#, fuzzy
 msgid "Confirmation|O&verwrite"
-msgstr " confirmer l'é&Crasement "
+msgstr " Confirmation|É&Crasement "
 
-#, fuzzy
 msgid "Confirmation|&Delete"
-msgstr " Confirmation "
+msgstr " Confirmation|&Supprimer"
 
 msgid "UTF-8 output"
 msgstr "Sortie UTF-8"
@@ -1116,7 +1112,7 @@ msgid "Other 8 bit"
 msgstr "Autre 8 bits"
 
 msgid "Input / display codepage:"
-msgstr "Entrée / codepage d'affichage :"
+msgstr "Entrée / affichage d'encodage :"
 
 msgid "&Select"
 msgstr "&Sélectionner"
@@ -1208,7 +1204,7 @@ msgid "read by others"
 msgstr "lecture par les autres"
 
 msgid "execute/search by group"
-msgstr "exéc./rech. par le groupe"
+msgstr "exécuter/rechercher par le groupe"
 
 msgid "write by group"
 msgstr "écriture par le groupe"
@@ -1261,7 +1257,7 @@ msgid "Use SPACE to change"
 msgstr "Tapez ESPACE pour changer"
 
 msgid "an option, ARROW KEYS"
-msgstr "une option, une FLECHE pour"
+msgstr "une option, une FLÈCHE pour"
 
 msgid "to move between options"
 msgstr "naviguer entre les options,"
