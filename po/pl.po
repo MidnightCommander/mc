@@ -1,7 +1,7 @@
 # translation of pl.po to Polish
 # Andrzej Zaborowski <balrog@zabor.org>, 2003.
 # Piotr Drąg <piotrdrag@gmail.com>, 2010.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
@@ -13,8 +13,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 msgid " Search string not found "
 msgstr " Nie odnaleziono wyszukiwanego napisu "
@@ -23,8 +22,7 @@ msgid " Not implemented yet "
 msgstr " Jeszcze nie zaimplementowane "
 
 msgid " Num of replace tokens not equal to num of found tokens "
-msgstr ""
-" Liczba tokenów zastąpienia nie jest równa liczbie odnalezionych tokenów "
+msgstr " Liczba tokenów zastąpienia nie jest równa liczbie odnalezionych tokenów "
 
 #, c-format
 msgid " Invalid token number %d "
@@ -1371,9 +1369,7 @@ msgid "&Thorough"
 msgstr "&Dokładna"
 
 msgid " Both panels should be in the listing mode to use this command "
-msgstr ""
-" Aby wykorzystać to polecenie, należy ustawić oba okna na wyświetlanie listy "
-"plików "
+msgstr " Aby wykorzystać to polecenie, należy ustawić oba okna na wyświetlanie listy plików "
 
 msgid ""
 " Not an xterm or Linux console; \n"
@@ -1709,9 +1705,7 @@ msgid " Run Sort "
 msgstr " Uruchomienie polecenia sort "
 
 msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr ""
-" Proszę podać opcje polecenia sort (zobacz stronę man), rozdzielone "
-"spacjami: "
+msgstr " Proszę podać opcje polecenia sort (zobacz stronę man), rozdzielone spacjami: "
 
 msgid " Sort "
 msgstr " Posortuj "
@@ -2156,27 +2150,16 @@ msgid " %s%s file error"
 msgstr " Błąd pliku %s%s"
 
 #, c-format
-msgid ""
-"The format of the %smc.ext file has changed with version 3.0.  It seems that "
-"the installation failed.  Please fetch a fresh copy from the Midnight "
-"Commander package."
-msgstr ""
-"Format pliku %smc.ext uległ zmianie wraz z wersją 3.0. Wygląda na to, że "
-"instalacja się nie powiodła. Proszę pobrać nową wersję tego pliku z pakietu "
-"programu Midnight Commander."
+msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
+msgstr "Format pliku %smc.ext uległ zmianie wraz z wersją 3.0. Wygląda na to, że instalacja się nie powiodła. Proszę pobrać nową wersję tego pliku z pakietu programu Midnight Commander."
 
 #, c-format
 msgid " ~/%s file error "
 msgstr " Błąd pliku ~/%s "
 
 #, c-format
-msgid ""
-"The format of the ~/%s file has changed with version 3.0.  You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write "
-"it."
-msgstr ""
-"Format pliku ~/%s uległ zmianie wraz z wersją 3.0. Można teraz skopiować go "
-"z %smc.ext lub napisać samemu, opierając się na zawartości tego pliku."
+msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
+msgstr "Format pliku ~/%s uległ zmianie wraz z wersją 3.0. Można teraz skopiować go z %smc.ext lub napisać samemu, opierając się na zawartości tego pliku."
 
 msgid "DialogTitle|Copy"
 msgstr "Skopiowanie"
@@ -2840,11 +2823,8 @@ msgid " Hotlist Load "
 msgstr " Wczytaj listę podręcznych katalogów "
 
 #, c-format
-msgid ""
-"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
-msgstr ""
-"Program MC nie może zapisać do pliku ~/%s. Poprzednie wpisy listy "
-"podręcznych katalogów nie zostały usunięte"
+msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr "Program MC nie może zapisać do pliku ~/%s. Poprzednie wpisy listy podręcznych katalogów nie zostały usunięte"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -3374,7 +3354,7 @@ msgstr "PODKAT"
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|u"
-msgstr "e"
+msgstr "u"
 
 msgid "&Unsorted"
 msgstr "Nie&uporządkowane"
@@ -3417,10 +3397,10 @@ msgstr "Czas &modyfikacji"
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|a"
-msgstr "a"
+msgstr "d"
 
 msgid "&Access time"
-msgstr "Cz&as dostępu"
+msgstr "Czas &dostępu"
 
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
