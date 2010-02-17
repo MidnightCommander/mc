@@ -1063,36 +1063,29 @@ msgstr "Исполняемые &вначале"
 msgid "Sort order"
 msgstr "Порядок сортировки"
 
-#, fuzzy
 msgid "Confirmation"
-msgstr " Запрос подтверждения "
+msgstr "Подтверждение"
 
 #. TRANSLATORS: no need to translate 'Confirmation', it's just a context
 #. prefix
 #. 2
-#, fuzzy
 msgid "Confirmation|&History cleanup"
-msgstr " Запрос подтверждения "
+msgstr "&Очистка истории"
 
-#, fuzzy
 msgid "Confirmation|&Directory hotlist delete"
-msgstr "перед удалением из &списка быстрого доступа"
+msgstr "Удаление списка &каталогов"
 
-#, fuzzy
 msgid "Confirmation|E&xit"
-msgstr " Запрос подтверждения "
+msgstr " В&ыход"
 
-#, fuzzy
 msgid "Confirmation|&Execute"
-msgstr " Запрос подтверждения "
+msgstr "&Исполнить"
 
-#, fuzzy
 msgid "Confirmation|O&verwrite"
-msgstr "перед пере&записью"
+msgstr "Пере&записать"
 
-#, fuzzy
 msgid "Confirmation|&Delete"
-msgstr " Запрос подтверждения "
+msgstr "&Удалить"
 
 msgid "UTF-8 output"
 msgstr "UTF-8 вывод"
