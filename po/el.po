@@ -1,7 +1,7 @@
 # mc Greek PO file
 # Copyright (C) 1999 Free Software Foundation, Inc.
 # Spiros Papadimitriou <spapadim+@cs.cmu.edu>, 1999.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.38\n"
@@ -18,7 +18,7 @@ msgid " Search string not found "
 msgstr ""
 
 msgid " Not implemented yet "
-msgstr ""
+msgstr "Δεν έχει ακόμη υλοποιηθεί"
 
 msgid " Num of replace tokens not equal to num of found tokens "
 msgstr ""
@@ -28,13 +28,13 @@ msgid " Invalid token number %d "
 msgstr " Άκυρος κωδικός "
 
 msgid "Normal"
-msgstr ""
+msgstr "Κανονικό"
 
 msgid "&Regular expression"
 msgstr "&Κανονική έκφραση"
 
 msgid "Hexadecimal"
-msgstr ""
+msgstr "Δεκαεξαδικό"
 
 msgid "Wildcard search"
 msgstr ""
@@ -52,34 +52,34 @@ msgid ""
 msgstr ""
 
 msgid "Function key 1"
-msgstr ""
+msgstr "Πλήκτρο λειτουργίας 1"
 
 msgid "Function key 2"
-msgstr ""
+msgstr "Πλήκτρο λειτουργίας 2"
 
 msgid "Function key 3"
-msgstr ""
+msgstr "Πλήκτρο λειτουργίας 3"
 
 msgid "Function key 4"
-msgstr ""
+msgstr "Πλήκτρο λειτουργίας 4"
 
 msgid "Function key 5"
-msgstr ""
+msgstr "Πλήκτρο λειτουργίας 5"
 
 msgid "Function key 6"
-msgstr ""
+msgstr "Πλήκτρο λειτουργίας 6"
 
 msgid "Function key 7"
-msgstr ""
+msgstr "Πλήκτρο λειτουργίας 7"
 
 msgid "Function key 8"
-msgstr ""
+msgstr "Πλήκτρο λειτουργίας 8"
 
 msgid "Function key 9"
-msgstr ""
+msgstr "Πλήκτρο λειτουργίας 9"
 
 msgid "Function key 10"
-msgstr ""
+msgstr "Πλήκτρο λειτουργίας 10"
 
 msgid "Function key 11"
 msgstr ""
@@ -430,9 +430,7 @@ msgid "fish: Waiting for initial line..."
 msgstr ""
 
 msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr ""
-"Με συγχωρείτε, αλλά προς το παρόν συνδέσεις με χρήση κωδικού δεν "
-"υποστηρίζονται."
+msgstr "Με συγχωρείτε, αλλά προς το παρόν συνδέσεις με χρήση κωδικού δεν υποστηρίζονται."
 
 #, fuzzy
 msgid " fish: Password required for "
@@ -1016,7 +1014,8 @@ msgstr ""
 msgid "Confirmation"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr ""
@@ -2149,10 +2148,7 @@ msgid " %s%s file error"
 msgstr ""
 
 #, c-format
-msgid ""
-"The format of the %smc.ext file has changed with version 3.0.  It seems that "
-"the installation failed.  Please fetch a fresh copy from the Midnight "
-"Commander package."
+msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
 msgstr ""
 
 #, c-format
@@ -2160,10 +2156,7 @@ msgid " ~/%s file error "
 msgstr ""
 
 #, c-format
-msgid ""
-"The format of the ~/%s file has changed with version 3.0.  You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write "
-"it."
+msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
 msgstr ""
 
 msgid "DialogTitle|Copy"
@@ -2757,8 +2750,7 @@ msgid " Hotlist Load "
 msgstr ""
 
 #, c-format
-msgid ""
-"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr ""
 
 #, c-format
@@ -3657,7 +3649,6 @@ msgstr ""
 #~ msgid "%s bytes"
 #~ msgstr "%s byte"
 
-#, fuzzy
 #~ msgid ">= %s bytes"
 #~ msgstr "%s byte"
 
@@ -3682,59 +3673,45 @@ msgstr ""
 #~ msgid "Copy to &file...     "
 #~ msgstr "αντιγραφή σε αρ&χείο       "
 
-#, fuzzy
 #~ msgid "&Toggle mark                 F3"
 #~ msgstr "Απο&θήκευση             F2"
 
-#, fuzzy
 #~ msgid "Mar&k columns              S-F3"
 #~ msgstr "&Νέο                    C-n"
 
-#, fuzzy
 #~ msgid "&Copy                        F5"
 #~ msgstr "Απο&θήκευση             F2"
 
-#, fuzzy
 #~ msgid "&Move                        F6"
 #~ msgstr "Απο&θήκευση             F2"
 
-#, fuzzy
 #~ msgid "&Delete                      F8"
 #~ msgstr "Απο&θήκευση             F2"
 
-#, fuzzy
 #~ msgid "&Undo                       C-u"
 #~ msgstr "&Νέο                    C-n"
 
-#, fuzzy
 #~ msgid "&Beginning               C-PgUp"
 #~ msgstr "&Νέο                    C-n"
 
-#, fuzzy
 #~ msgid "&End                     C-PgDn"
 #~ msgstr "&Νέο                    C-n"
 
-#, fuzzy
 #~ msgid "C&opy to clipfile           M-w"
 #~ msgstr "αντιγραφή σε αρ&χείο       "
 
-#, fuzzy
 #~ msgid "&Next bookmark                 "
 #~ msgstr "&Νέο                    C-n"
 
-#, fuzzy
 #~ msgid "Pre&v bookmark                 "
 #~ msgstr "Απο&θήκευση             F2"
 
-#, fuzzy
 #~ msgid "&Flush bookmark                "
 #~ msgstr "Απο&θήκευση             F2"
 
-#, fuzzy
 #~ msgid "Encod&ing...             M-e"
 #~ msgstr "&Νέο                    C-n"
 
-#, fuzzy
 #~ msgid "Save setu&p"
 #~ msgstr " Αποθήκευση ως "
 
@@ -3753,7 +3730,6 @@ msgstr ""
 #~ msgid "Delete"
 #~ msgstr "Διαγραφή"
 
-#, fuzzy
 #~ msgid "Extension"
 #~ msgstr "Επέκταση:"
 
@@ -3763,7 +3739,6 @@ msgstr ""
 #~ msgid " Emacs key: "
 #~ msgstr " Πλήκτρο Emacs: "
 
-#, fuzzy
 #~ msgid "Usage:"
 #~ msgstr "Χρήστης"
 
@@ -3773,11 +3748,9 @@ msgstr ""
 #~ msgid "O&ne"
 #~ msgstr "έ&Να"
 
-#, fuzzy
 #~ msgid " Replacement too long. "
 #~ msgstr " Εισαγωγή ακολουθίας αντικατάστασης:"
 
-#, fuzzy
 #~ msgid "Invalid hex search expression"
 #~ msgstr " Κανονική έκφραση "
 
