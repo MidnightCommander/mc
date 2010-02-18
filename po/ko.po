@@ -1,640 +1,88 @@
-# mc ko.po
-# Copyright (C) 2000 Free Software Foundation, Inc.
-# Nam SungHyun <namsh@kldp.org>, 2000
+# mc ko.po 4.7.0.2
+# Copyright (C) 1998-2001 Free Software Foundation, Inc.
+# Kang Bundo <bundo@bundo.biz>, 2010
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.6.0-pre3\n"
+"Project-Id-Version: mc CVS-20011220\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-09 12:01+0200\n"
-"PO-Revision-Date: 2003-01-22 17:31+0900\n"
-"Last-Translator: Nam SungHyun <namsh@kldp.org>\n"
-"Language-Team: Korean <debian-l10n-korean@lists.debian.org>\n"
+"POT-Creation-Date: 2010-02-02 16:36+0200\n"
+"PO-Revision-Date: 2010-02-15 20:58+0900\n"
+"Last-Translator: Kang Bundo <bundo@bundo.biz>\n"
+"Language-Team: ubuntu korea <admin@ubuntu.or.kr>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Korean\n"
+"X-Poedit-Country: KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+msgid " Choose syntax highlighting "
+msgstr "구문 강조를 선택하세요"
+
+msgid "< Auto >"
+msgstr "< 자동 > "
+
+msgid "< Reload Current Syntax >"
+msgstr ""
+
+msgid " Cannot open %s for reading "
+msgstr " 읽을 파이프 열기 실패: "
+
+msgid "Error"
+msgstr "에러"
+
+msgid " Error reading from pipe: %s "
+msgstr " 파이프 읽기 에러: "
+
+msgid " Cannot open pipe for reading: %s "
+msgstr " 읽을 파이프 열기 실패: "
+
+msgid " Cannot get size/permissions for %s "
+msgstr " 파일 크기/허용 정보 얻기 실패: "
+
+msgid " %s is not a regular file "
+msgstr " 일반파일이 아니라 볼 수 없습니다 "
+
+msgid " File %s is too large "
+msgstr " 파일 크기가 너무 큼: "
+
+msgid " About "
+msgstr " 이 프로그램은 "
+
+msgid ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       A user friendly text editor written\n"
+"           for the Midnight Commander.\n"
+msgstr ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"         Midnight Commander를 위해 개발된\n"
+"          사용자와 친근한 텍스트 편집기.\n"
+
+msgid "&OK"
+msgstr "확인(&O)"
+
+msgid "Macro recursion is too deep"
+msgstr "매크로가 너무 많이 반복되어 불려졌습니다"
+
+msgid "Search"
+msgstr "찾기"
 
 msgid " Search string not found "
 msgstr " 글월을 찾을 수 없군요 "
 
-msgid " Not implemented yet "
-msgstr ""
-
-msgid " Num of replace tokens not equal to num of found tokens "
-msgstr ""
-
-#, fuzzy, c-format
-msgid " Invalid token number %d "
-msgstr " Invalid target mask "
-
-#, fuzzy
-msgid "Normal"
-msgstr "Format"
-
-msgid "&Regular expression"
-msgstr "정규표현식(&R)"
-
-msgid "Hexadecimal"
-msgstr ""
-
-msgid "Wildcard search"
-msgstr ""
-
-#, c-format
-msgid ""
-"Unable to load '%s' skin.\n"
-"Default skin has been loaded"
-msgstr ""
-
-#, c-format
-msgid ""
-"Unable to parse '%s' skin.\n"
-"Default skin has been loaded"
-msgstr ""
-
-msgid "Function key 1"
-msgstr "Function key 1"
-
-msgid "Function key 2"
-msgstr "Function key 2"
-
-msgid "Function key 3"
-msgstr "Function key 3"
-
-msgid "Function key 4"
-msgstr "Function key 4"
-
-msgid "Function key 5"
-msgstr "Function key 5"
-
-msgid "Function key 6"
-msgstr "Function key 6"
-
-msgid "Function key 7"
-msgstr "Function key 7"
-
-msgid "Function key 8"
-msgstr "Function key 8"
-
-msgid "Function key 9"
-msgstr "Function key 9"
-
-msgid "Function key 10"
-msgstr "Function key 10"
-
-msgid "Function key 11"
-msgstr "Function key 11"
-
-msgid "Function key 12"
-msgstr "Function key 12"
-
-msgid "Function key 13"
-msgstr "Function key 13"
-
-msgid "Function key 14"
-msgstr "Function key 14"
-
-msgid "Function key 15"
-msgstr "Function key 15"
-
-msgid "Function key 16"
-msgstr "Function key 16"
-
-msgid "Function key 17"
-msgstr "Function key 17"
-
-msgid "Function key 18"
-msgstr "Function key 18"
-
-msgid "Function key 19"
-msgstr "Function key 19"
-
-msgid "Function key 20"
-msgstr "Function key 20"
-
-msgid "Backspace key"
-msgstr "Backspace key"
-
-msgid "End key"
-msgstr "End key"
-
-msgid "Up arrow key"
-msgstr "Up arrow key"
-
-msgid "Down arrow key"
-msgstr "Down arrow key"
-
-msgid "Left arrow key"
-msgstr "Left arrow key"
-
-msgid "Right arrow key"
-msgstr "Right arrow key"
-
-msgid "Home key"
-msgstr "Home key"
-
-msgid "Page Down key"
-msgstr "Page Down key"
-
-msgid "Page Up key"
-msgstr "Page Up key"
-
-msgid "Insert key"
-msgstr "Insert key"
-
-msgid "Delete key"
-msgstr "Delete key"
-
-msgid "Completion/M-tab"
-msgstr "Completion/M-tab"
-
-msgid "+ on keypad"
-msgstr "+ on keypad"
-
-msgid "- on keypad"
-msgstr "- on keypad"
-
-msgid "Slash on keypad"
-msgstr "Slash on keypad"
-
-msgid "* on keypad"
-msgstr "* on keypad"
-
-#, fuzzy
-msgid "Escape key"
-msgstr "Slash on keypad"
-
-msgid "Left arrow keypad"
-msgstr "Left arrow keypad"
-
-msgid "Right arrow keypad"
-msgstr "Right arrow keypad"
-
-msgid "Up arrow keypad"
-msgstr "Up arrow keypad"
-
-msgid "Down arrow keypad"
-msgstr "Down arrow keypad"
-
-msgid "Home on keypad"
-msgstr "Home on keypad"
-
-msgid "End on keypad"
-msgstr "End on keypad"
-
-msgid "Page Down keypad"
-msgstr "Page Down keypad"
-
-msgid "Page Up keypad"
-msgstr "Page Up keypad"
-
-msgid "Insert on keypad"
-msgstr "Insert on keypad"
-
-msgid "Delete on keypad"
-msgstr "Delete on keypad"
-
-msgid "Enter on keypad"
-msgstr "Enter on keypad"
-
-#, fuzzy
-msgid "Function key 21"
-msgstr "Function key 1"
-
-#, fuzzy
-msgid "Function key 22"
-msgstr "Function key 2"
-
-#, fuzzy
-msgid "Function key 23"
-msgstr "Function key 2"
-
-#, fuzzy
-msgid "Function key 24"
-msgstr "Function key 2"
-
-msgid "Plus"
-msgstr ""
-
-#, fuzzy
-msgid "Minus"
-msgstr "메뉴"
-
-msgid "Asterisk"
-msgstr ""
-
-msgid "Dot"
-msgstr ""
-
-msgid "Less than"
-msgstr ""
-
-msgid "Great than"
-msgstr ""
-
-msgid "Equal"
-msgstr ""
-
-#, fuzzy
-msgid "Comma"
-msgstr "명령어"
-
-msgid "Apostrophe"
-msgstr ""
-
-#, fuzzy
-msgid "Colon"
-msgstr "갯수"
-
-msgid "Exclamation mark"
-msgstr ""
-
-msgid "Question mark"
-msgstr ""
-
-#, fuzzy
-msgid "Ampersand"
-msgstr "덧붙임(&p)"
-
-msgid "Dollar sign"
-msgstr ""
-
-msgid "Quotation mark"
-msgstr ""
-
-#, fuzzy
-msgid "Caret"
-msgstr "대상"
-
-msgid "Tilda"
-msgstr ""
-
-#, fuzzy
-msgid "Prime"
-msgstr "이전"
-
-#, fuzzy
-msgid "Underline"
-msgstr " 줄 번호 입력: "
-
-msgid "Understrike"
-msgstr ""
-
-msgid "Pipe"
-msgstr ""
-
-#, fuzzy
-msgid "Enter"
-msgstr "소유자"
-
-#, fuzzy
-msgid "Tab key"
-msgstr "+ on keypad"
-
-#, fuzzy
-msgid "Space key"
-msgstr "Slash on keypad"
-
-#, fuzzy
-msgid "Slash key"
-msgstr "Slash on keypad"
-
-#, fuzzy
-msgid "Backslash key"
-msgstr "Backspace key"
-
-msgid "Number sign #"
-msgstr ""
-
-msgid "Ctrl"
-msgstr ""
-
-msgid "Alt"
-msgstr ""
-
-msgid "Shift"
-msgstr ""
-
-#, c-format
-msgid ""
-"Screen size %dx%d is not supported.\n"
-"Check the TERM environment variable.\n"
-msgstr ""
-"화면크기 %dx%d은(는) 지원되지 않습니다.\n"
-"TERM 환경변수를 확인해 보세요.\n"
-
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
-#, c-format
-msgid "%s is not a directory\n"
-msgstr "%s은(는) 디렉토리가 아닙니다\n"
-
-#, c-format
-msgid "Directory %s is not owned by you\n"
-msgstr "디렉토리 %s은(는) 당신 소유가 아닙니다\n"
-
-#, c-format
-msgid "Cannot set correct permissions for directory %s\n"
-msgstr "%s 임시 디렉토리에 대한 맞는 퍼미션을 설정할 수 없습니다\n"
-
-#, c-format
-msgid "Cannot create temporary directory %s: %s\n"
-msgstr "%s 임시 디렉토리를 만들 수 없습니다: %s\n"
-
-#, c-format
-msgid "Temporary files will be created in %s\n"
-msgstr "임시 파일이 %s에 만들어질 것입니다\n"
-
-#, c-format
-msgid "Temporary files will not be created\n"
-msgstr "임시 파일은 만들어지지 않을 것입니다\n"
-
-#, c-format
-msgid "Press any key to continue..."
-msgstr "계속하려면 아무 글쇠나 누르십시오..."
-
 msgid "Warning"
 msgstr "경고"
 
-msgid " Pipe failed "
-msgstr " 파이프 실패 "
-
-msgid " Dup failed "
-msgstr " 복제 실패 "
-
-#, c-format
-msgid ""
-"Cannot open cpio archive\n"
-"%s"
+msgid " File has hard-links. Detach before saving? "
 msgstr ""
-"cpio 아카이브를 열 수 없습니다\n"
-"%s"
-
-#, c-format
-msgid ""
-"Premature end of cpio archive\n"
-"%s"
-msgstr ""
-"cpio 아카이브의 생각지 못한 끝\n"
-"%s"
-
-#, c-format
-msgid ""
-"Inconsistent hardlinks of\n"
-"%s\n"
-"in cpio archive\n"
-"%s"
-msgstr ""
-
-#, c-format
-msgid "%s contains duplicate entries! Skipping!"
-msgstr "%s이(가) 중복된 항목을 포함하고 있습니다! 건너뜀!"
-
-#, c-format
-msgid ""
-"Corrupted cpio header encountered in\n"
-"%s"
-msgstr ""
-"%s에서\n"
-"깨진 cpio 헤더를 만났습니다"
-
-#, c-format
-msgid ""
-"Unexpected end of file\n"
-"%s"
-msgstr ""
-"파일 %s에서\n"
-"기대되지 않은 EOF"
-
-#, c-format
-msgid "Directory cache expired for %s"
-msgstr "%s의 디렉토리 캐쉬 만료됨"
-
-msgid "Starting linear transfer..."
-msgstr "Linear 전송 시작함..."
-
-#, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
-msgstr "%s: %s: %s %3d%% (%lu 바이트 송신)"
-
-#, c-format
-msgid "%s: %s: %s %lu bytes transferred"
-msgstr "%s: %s: %s %lu 바이트 송신됨"
-
-msgid "Getting file"
-msgstr "파일 받음"
-
-#, c-format
-msgid ""
-"Cannot open %s archive\n"
-"%s"
-msgstr ""
-"%s 아카이브 파일을 열 수 없습니다\n"
-"%s"
-
-msgid "Inconsistent extfs archive"
-msgstr "모순된 extfs 아카이브"
-
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "경고: 파일 %s을(를) 찾을 수 없습니다\n"
-
-#, c-format
-msgid "fish: Disconnecting from %s"
-msgstr "fish: %s(으)로부터 연결 끊어짐"
-
-msgid "fish: Waiting for initial line..."
-msgstr "fish: 초기 라인을 기다리는 중..."
-
-msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr "미안합니다. 아직 비밀번호 인증 연결은 할 수 없습니다."
-
-msgid " fish: Password required for "
-msgstr " fish: Password required for "
-
-msgid "fish: Sending password..."
-msgstr "fish: 사용자 비밀번호 보냄..."
-
-msgid "fish: Sending initial line..."
-msgstr "fish: 초기 라인 보냄..."
-
-msgid "fish: Handshaking version..."
-msgstr "fish: 핸드쉐이킹 버젼..."
-
-msgid "fish: Setting up current directory..."
-msgstr "fish: 현재 디렉토리 설정중..."
-
-#, c-format
-msgid "fish: Connected, home %s."
-msgstr "fish: 연결됨, 홈은 %s."
-
-#, c-format
-msgid "fish: Reading directory %s..."
-msgstr "fish: 디렉토리 %s 읽는 중..."
-
-#, c-format
-msgid "%s: done."
-msgstr "%s: 끝남."
-
-#, c-format
-msgid "%s: failure"
-msgstr "%s: 실패"
-
-#, c-format
-msgid "fish: store %s: sending command..."
-msgstr "fish: %s 저장: 명령 보냄..."
-
-msgid "fish: Local read failed, sending zeros"
-msgstr "fish: 로컬 읽기 실패. 0을 보냄"
-
-#, c-format
-msgid "fish: storing %s %d (%lu)"
-msgstr "fish: %s %d 저장 (%lu)"
-
-msgid "zeros"
-msgstr "zeros"
-
-msgid "file"
-msgstr "file"
-
-msgid "Aborting transfer..."
-msgstr "송신 중단..."
-
-msgid "Error reported after abort."
-msgstr "중단 후에 에러 보고됨."
-
-msgid "Aborted transfer would be successful."
-msgstr "송신이 성공적으로 중단되었습니다."
-
-#, c-format
-msgid "ftpfs: Disconnecting from %s"
-msgstr "ftpfs: %s(으)로부터 연결 끊어짐"
-
-msgid " FTP: Password required for "
-msgstr " FTP: Password required for "
-
-msgid "ftpfs: sending login name"
-msgstr "ftpfs: 로그인 이름 보냄"
-
-msgid "ftpfs: sending user password"
-msgstr "ftpfs: 사용자 비밀번호 보냄"
-
-#, fuzzy, c-format
-msgid "FTP: Account required for user %s"
-msgstr " FTP: Password required for "
-
-#, fuzzy
-msgid "Account:"
-msgstr "갯수"
-
-#, fuzzy
-msgid "ftpfs: sending user account"
-msgstr "ftpfs: 사용자 비밀번호 보냄"
-
-msgid "ftpfs: logged in"
-msgstr "ftpfs: 로그 인"
-
-#, c-format
-msgid "ftpfs: Login incorrect for user %s "
-msgstr "ftpfs: Login incorrect for user %s "
-
-msgid "ftpfs: Invalid host name."
-msgstr "ftpfs: 유효하지 않은 호스트 이름."
-
-#, c-format
-msgid "ftpfs: %s"
-msgstr ""
-
-#, c-format
-msgid "ftpfs: making connection to %s"
-msgstr "ftpfs: %s(으)로 연결 시도중"
-
-msgid "ftpfs: connection interrupted by user"
-msgstr "ftpfs: 사용자에 의해 연결 중단됨"
-
-#, c-format
-msgid "ftpfs: connection to server failed: %s"
-msgstr "ftpfs: 서버로 연결 실패: %s"
-
-#, c-format
-msgid "Waiting to retry... %d (Control-C to cancel)"
-msgstr "재시도 기다림... %d (취소하려면 Control-C)"
-
-#, fuzzy
-msgid "ftpfs: invalid address family"
-msgstr "ftpfs: 유효하지 않은 호스트 주소."
-
-#, fuzzy, c-format
-msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: 수동 모드로 설정할 수 없습니다"
-
-#, fuzzy, c-format
-msgid "ftpfs: could not create socket: %s"
-msgstr " 소켓을 만들 수 없음: %s "
-
-msgid "ftpfs: could not setup passive mode"
-msgstr "ftpfs: 수동 모드로 설정할 수 없습니다"
-
-msgid "ftpfs: aborting transfer."
-msgstr "ftpfs: 송신 중단됨."
-
-#, c-format
-msgid "ftpfs: abort error: %s"
-msgstr "ftpfs: 중단 에러: %s"
-
-msgid "ftpfs: abort failed"
-msgstr "ftpfs: 중단 실패"
-
-msgid "ftpfs: CWD failed."
-msgstr "ftpfs: CWD 실패."
-
-msgid "ftpfs: couldn't resolve symlink"
-msgstr "ftpfs: 심볼릭링크를 해석할 수 없습니다"
-
-msgid "Resolving symlink..."
-msgstr "심볼릭링크 해석..."
-
-#, c-format
-msgid "ftpfs: Reading FTP directory %s... %s%s"
-msgstr "ftpfs: FTP 디렉토리 %s 읽는 중... %s%s"
-
-msgid "(strict rfc959)"
-msgstr "(strict rfc959)"
-
-msgid "(chdir first)"
-msgstr "(chdir first)"
-
-msgid "ftpfs: failed; nowhere to fallback to"
-msgstr "ftpfs: 실패; nowhere to fallback to"
-
-#, c-format
-msgid "ftpfs: storing file %lu (%lu)"
-msgstr "ftpfs: 파일 %lu 저장 (%lu)"
-
-msgid ""
-"~/.netrc file has incorrect mode.\n"
-"Remove password or correct mode."
-msgstr ""
-"~/.netrc 파일의 모드가 잘못되었습니다.\n"
-"비밀번호를 지우거나 모드를 고치십시오."
-
-msgid " MCFS "
-msgstr " MCFS "
-
-msgid " The server does not support this version "
-msgstr " 서버가 이 판번호을 지원하지 않습니다 "
-
-msgid ""
-" The remote server is not running on a system port \n"
-" you need a password to log in, but the information may \n"
-" not be safe on the remote side.  Continue? \n"
-msgstr ""
-" 원격 서버가 시스템 포트를 사용하고 있지 않습니다 \n"
-" 로그인하려면 비밀번호가 필요합니다만 비밀번호의 사용은 \n"
-" 원격 서버쪽에서는 안전하지 않습니다. 계속할까요? \n"
 
 msgid "&Yes"
 msgstr "예(&Y)"
@@ -642,185 +90,632 @@ msgstr "예(&Y)"
 msgid "&No"
 msgstr "아니오(&N)"
 
-msgid " MCFS Password required "
-msgstr " MCFS 비밀번호 요구됨 "
-
-msgid " Invalid password "
-msgstr " 틀린 비밀번호 "
-
-#, c-format
-msgid " Cannot locate hostname: %s "
-msgstr " 호스트 위치를 알 수 없음: %s "
-
-#, c-format
-msgid " Cannot create socket: %s "
-msgstr " 소켓을 만들 수 없음: %s "
-
-#, c-format
-msgid " Cannot connect to server: %s "
-msgstr " 서버로 연결할 수 없음: %s "
-
-msgid " Too many open connections "
-msgstr " 너무 많은 연결이 이루어짐 "
-
-#, c-format
-msgid ""
-"Warning: Invalid line in %s:\n"
-"%s\n"
-msgstr ""
-"경고: %s에 잘못된 라인:\n"
-"%s\n"
-
-#, c-format
-msgid ""
-"Warning: Invalid flag %c in %s:\n"
-"%s\n"
-msgstr ""
-"경고: 잘못된 플래그 %c이(가) %s에 있음:\n"
-"%s\n"
-
-#, c-format
-msgid ""
-" reconnect to %s failed\n"
-" "
-msgstr ""
-" %s로의 재연결 실패\n"
-" "
-
-msgid " Authentication failed "
-msgstr " 인증 실패 "
-
-#, c-format
-msgid " Error %s creating directory %s "
-msgstr ""
-
-#, c-format
-msgid " Error %s removing directory %s "
-msgstr ""
-
-#, c-format
-msgid " %s opening remote file %s "
-msgstr ""
-
-#, c-format
-msgid " %s removing remote file %s "
-msgstr ""
-
-#, c-format
-msgid " %s renaming files\n"
-msgstr ""
-
-#, c-format
-msgid ""
-"Cannot open tar archive\n"
-"%s"
-msgstr ""
-"tar 아카이브를 열 수 없습니다\n"
-"%s"
-
-msgid "Inconsistent tar archive"
-msgstr "잘못된 테잎 아카이브"
-
-msgid "Unexpected EOF on archive file"
-msgstr "아카이브 파일에서 기대되지 않은 EOF"
-
-#, c-format
-msgid ""
-"Hmm,...\n"
-"%s\n"
-"doesn't look like a tar archive."
-msgstr ""
-"흠,...\n"
-"%s\n"
-"테잎 아카이브 파일같지 않습니다."
-
-msgid " undelfs: error "
-msgstr " undelfs: 에러 "
-
-msgid " not enough memory "
-msgstr " not enough memory "
-
-msgid " while allocating block buffer "
-msgstr " while allocating block buffer "
-
-#, c-format
-msgid " open_inode_scan: %d "
-msgstr " open_inode_scan: %d "
-
-#, c-format
-msgid " while starting inode scan %d "
-msgstr " while starting inode scan %d "
-
-#, c-format
-msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: loading deleted files information %d inodes"
-
-#, c-format
-msgid " while calling ext2_block_iterate %d "
-msgstr " while calling ext2_block_iterate %d "
-
-msgid " no more memory while reallocating array "
-msgstr " no more memory while reallocating array "
-
-#, c-format
-msgid " while doing inode scan %d "
-msgstr " while doing inode scan %d "
-
-msgid " Ext2lib error "
-msgstr " Ext2lib 에러 "
-
-#, c-format
-msgid " Cannot open file %s "
-msgstr " %s 파일을 열 수 없습니다 "
-
-msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: inode 비트맵을 읽는 중..."
-
-#, c-format
-msgid ""
-" Cannot load inode bitmap from: \n"
-" %s \n"
-msgstr ""
-" 다음에서 inode 비트맵을 읽을 수 없음: \n"
-" %s \n"
-
-msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: 블럭 비트맵 읽는 중..."
-
-#, c-format
-msgid ""
-" Cannot load block bitmap from: \n"
-" %s \n"
-msgstr ""
-" 다음에서 블럭 비트맵을 읽을 수 없음: \n"
-" %s \n"
-
-msgid " vfs_info is not fs! "
-msgstr " vfs_info가 fs가 아닙니다! "
-
-msgid " You have to chdir to extract files first "
-msgstr " 파일을 풀기 위해서 chdir을 먼저 해야 합니다 "
-
-msgid " while iterating over blocks "
-msgstr " while iterating over blocks "
-
-msgid "Cannot parse:"
-msgstr "분석할 수 없음:"
-
-msgid "More parsing errors will be ignored."
-msgstr "앞으로의 분석에러는 무시될 것입니다."
-
-msgid "Internal error:"
-msgstr "내부 오류:"
-
-msgid "Password:"
-msgstr "비밀번호:"
-
-msgid "Changes to file lost"
-msgstr "수정 내용 잃어버림"
-
 msgid "&Cancel"
 msgstr "취소(&C)"
+
+msgid "The file has been modified in the meantime. Save anyway?"
+msgstr ""
+
+msgid " Error writing to pipe: "
+msgstr " 파이프 쓰기 에러: "
+
+msgid " Cannot open pipe for writing: "
+msgstr " 쓰기위한 파이프 열기 실패: "
+
+msgid " Cannot open file for writing: %s "
+msgstr " 쓰기위한 파이프 열기 실패: %s"
+
+msgid "&Quick save"
+msgstr "빠른 저장(&Q)"
+
+msgid "&Safe save"
+msgstr "안전한 저장(&S)"
+
+msgid "&Do backups with following extension:"
+msgstr ""
+
+msgid "Check &POSIX new line"
+msgstr ""
+
+msgid " Edit Save Mode "
+msgstr " 편집 저장 모드 "
+
+msgid "The file you are saving is not finished with a newline"
+msgstr ""
+
+msgid "C&ontinue"
+msgstr "계속(&o)"
+
+msgid "&Do not change"
+msgstr ""
+
+msgid "&Unix format (LF)"
+msgstr "유닉스 포멧(&U) (LF)"
+
+msgid "&Windows/DOS format (CR LF)"
+msgstr "MS 도스/윈도우즈 포멧(&W) (CR LF)"
+
+msgid "&Macintosh format (CR)"
+msgstr "메캔토시 포멧(&M) (CR)"
+
+msgid "Change line breaks to:"
+msgstr ""
+
+msgid " Enter file name: "
+msgstr " 파일명 입력: "
+
+msgid " Save As "
+msgstr " 새이름으로 저장 "
+
+msgid " A file already exists with this name. "
+msgstr " 같은 이름의 파일이 이미 있습니다. "
+
+msgid "&Overwrite"
+msgstr "겹쳐쓰기(&O)"
+
+msgid " Cannot save file. "
+msgstr "파일을 저장할 수 없습니다. "
+
+msgid " Delete macro "
+msgstr "매크로 지우기"
+
+msgid " Cannot open temp file "
+msgstr " 임시 파일을 열 수 없습니다 "
+
+msgid " Cannot open macro file "
+msgstr " 매크로 파일을 열 수 없습니다 "
+
+msgid " Cannot overwrite macro file "
+msgstr " 매크로 파일을 겹쳐쓸 수 없습니다 "
+
+msgid " Save macro "
+msgstr "매크로 저장"
+
+msgid " Press the macro's new hotkey: "
+msgstr " 새로운 매크로 단축글쇠를 누르십시오: "
+
+msgid " Press macro hotkey: "
+msgstr " 매크로 단축글쇠를 누르십시오: "
+
+msgid " Load macro "
+msgstr "매크로 불러오기"
+
+msgid " Confirm save file? : "
+msgstr " 저장하시겠습니까? "
+
+msgid " Save file "
+msgstr "파일 저장"
+
+msgid "&Save"
+msgstr "저장(&S)"
+
+msgid ""
+" Current text was modified without a file save. \n"
+" Continue discards these changes. "
+msgstr ""
+" 파일이 바뀌었습니다. \n"
+" 저장 않하고 계속하실 겁니까? "
+
+msgid "Syntax file edit"
+msgstr "문법 파일 수정(&M)"
+
+msgid " Which syntax file you want to edit? "
+msgstr " 수정하기를 원하는 문법 파일은? "
+
+msgid "&User"
+msgstr "사용자(&U)"
+
+msgid "&System Wide"
+msgstr "체계 전체(&S)"
+
+msgid " Menu edit "
+msgstr " 메뉴 편집 "
+
+msgid " Which menu file do you want to edit? "
+msgstr " 어떤 메뉴 파일을 편집하고 싶으세요? "
+
+msgid "&Local"
+msgstr "로컬(&L)"
+
+msgid " Load "
+msgstr " 불러오기 "
+
+msgid " Block is large, you may not be able to undo this action. "
+msgstr " 구역이 너무 커서 나중에 무를 수 없습니다. "
+
+msgid "Replace"
+msgstr "바꿈(&R)"
+
+msgid " Replace "
+msgstr " 바꿈 "
+
+#, c-format
+msgid " %ld replacements made. "
+msgstr " %ld 개가 바뀌었습니다. "
+
+msgid "Quit"
+msgstr "끝내기"
+
+msgid " File was modified, Save with exit? "
+msgstr " 파일이 바뀌었는 데, 저장하고 끝낼까요? "
+
+msgid "&Cancel quit"
+msgstr "끝내기 취소(&C)"
+
+msgid " Error "
+msgstr "에러"
+
+msgid " This function is not implemented. "
+msgstr ""
+
+msgid " Copy to clipboard "
+msgstr " 클립보드로 복사하기 "
+
+msgid " Unable to save to file. "
+msgstr " 파일 저장 실패. "
+
+msgid " Cut to clipboard "
+msgstr " 클립보드로 오려두기 "
+
+msgid " Goto line "
+msgstr "줄찾기"
+
+msgid " Enter line: "
+msgstr "줄 번호 입력:"
+
+msgid " Save Block "
+msgstr "구역 저장"
+
+msgid " Insert File "
+msgstr "파일 끼워넣기"
+
+msgid " Cannot insert file. "
+msgstr "파일을 삽입할 수 없습니다."
+
+msgid " Sort block "
+msgstr "구역 정렬"
+
+msgid " You must first highlight a block of text. "
+msgstr " 당신은 먼저 문서에서 블럭을 표시해야 합니다. "
+
+msgid " Run Sort "
+msgstr "정렬 시작"
+
+msgid " Enter sort options (see manpage) separated by whitespace: "
+msgstr " 공백문자로 구분된 정렬 선택항목 입력: "
+
+msgid " Sort "
+msgstr "정렬"
+
+msgid " Cannot execute sort command "
+msgstr " 정렬 명령을 실행할 수 없습니다 "
+
+msgid " Sort returned non-zero: "
+msgstr " 정렬이 0아닌 값을 리턴했습니다: "
+
+msgid "Paste output of external command"
+msgstr ""
+
+msgid "Enter shell command(s):"
+msgstr " 명령어 꼬리표 입력: "
+
+msgid "External command"
+msgstr "기타 명령어"
+
+msgid "Cannot execute command"
+msgstr " 정렬 명령을 실행할 수 없습니다 "
+
+msgid "Error creating script:"
+msgstr "스크립트 생성 에러:"
+
+msgid "Error reading script:"
+msgstr "스크립트 읽기 에러:"
+
+msgid "Error closing script:"
+msgstr "스크립트 닫기 에러:"
+
+msgid "Script created:"
+msgstr "스크립트 만듬:"
+
+msgid "Process block"
+msgstr "Process block"
+
+msgid " Copies to"
+msgstr " Copies to"
+
+msgid " Subject"
+msgstr "제목"
+
+msgid " To"
+msgstr " To"
+
+msgid " mail -s <subject> -c <cc> <to>"
+msgstr " mail -s <subject> -c <cc> <to>"
+
+msgid " Mail "
+msgstr " 전자우편 "
+
+msgid " Insert Literal "
+msgstr " Literal 입력 "
+
+msgid " Press any key: "
+msgstr " 아무 글쇠나 누르십시오: "
+
+msgid " Execute Macro "
+msgstr " 매크로 실행 "
+
+msgid "All charsets"
+msgstr "모든 문자셋"
+
+msgid "&Whole words"
+msgstr "단어 단위로(&W)"
+
+msgid "In se&lection"
+msgstr "선택반전(&T)              M-*"
+
+msgid "&Backwards"
+msgstr "뒤로(&B)"
+
+msgid "case &Sensitive"
+msgstr "대소문자 구분(&S)"
+
+msgid " Enter replacement string:"
+msgstr " 바꿀 글월 입력:"
+
+msgid " Enter search string:"
+msgstr " 찾을 글월 입력:"
+
+msgid "&Find all"
+msgstr "파일 찾기"
+
+msgid "Cancel"
+msgstr "취소"
+
+msgid "&Skip"
+msgstr "건너뜀(&S)"
+
+msgid "A&ll"
+msgstr "모두(&l)"
+
+msgid "&Replace"
+msgstr "바꿈(&R)"
+
+msgid " Replace with: "
+msgstr " ...로 바꿈: "
+
+msgid " Confirm replace "
+msgstr "바꾸기 확인 "
+
+msgid "&Dismiss"
+msgstr "취소(&D)"
+
+#, c-format
+msgid ""
+"File \"%s\" is already being edited\n"
+"User: %s\n"
+"Process ID: %d"
+msgstr ""
+
+msgid "File locked"
+msgstr "파일 잠금"
+
+msgid "&Grab lock"
+msgstr ""
+
+msgid "&Ignore lock"
+msgstr ""
+
+msgid "&Open file..."
+msgstr "파일 열기(&O)..."
+
+msgid "&New"
+msgstr "새 파일(&N)"
+
+msgid "Save &as..."
+msgstr "다른 이름으로 저장(&a)"
+
+msgid "&Insert file..."
+msgstr "파일 끼워넣기(&I)..."
+
+msgid "Cop&y to file..."
+msgstr "파일로 복사(&f)... "
+
+msgid "&User menu..."
+msgstr "사용자 메뉴(&U)... "
+
+msgid "A&bout..."
+msgstr "이 프로그램은(&b)..."
+
+msgid "&Quit"
+msgstr "종료(&Q)"
+
+msgid "&Toggle mark"
+msgstr "토글 선택(&T)"
+
+msgid "&Mark columns"
+msgstr "줄 선택(&M)"
+
+msgid "Toggle &ins/overw"
+msgstr "삽입/겹침 선택(&i)"
+
+msgid "&Toggle ins/overw"
+msgstr "삽입/겹침 선택(&T)"
+
+msgid "Mark &all"
+msgstr "모두 선택(&a)"
+
+msgid "Unmar&k"
+msgstr "선택 최소(&k)"
+
+msgid "&Copy"
+msgstr "복사(&C)"
+
+msgid "Cop&y"
+msgstr "복사(&y)"
+
+msgid "&Move"
+msgstr "이동(&M)"
+
+msgid "Mo&ve"
+msgstr "이동(&v)"
+
+msgid "&Delete"
+msgstr "지우기(&D)"
+
+msgid "Co&py to clipfile"
+msgstr "클립파일에서 복사(&p)"
+
+msgid "C&opy to clipfile"
+msgstr "클립파일에서 복사(&o)"
+
+msgid "C&ut to clipfile"
+msgstr "클립파일에서 자르기(&u)"
+
+msgid "&Cut to clipfile"
+msgstr "클립파일에서 자르기(&C)"
+
+msgid "&Paste from clipfile"
+msgstr "클립파일에서 붙이기(&P)"
+
+msgid "Pa&ste from clipfile"
+msgstr "클립파일에서 붙이기(&s)"
+
+msgid "Toggle bookmar&k"
+msgstr "북마크 토글(&k)"
+
+msgid "&Toggle bookmark"
+msgstr "북마크 토글(&T)"
+
+msgid "&Next bookmark"
+msgstr "다음  북마크(&N)"
+
+msgid "Pre&v bookmark"
+msgstr "이전 북마크(&v)"
+
+msgid "&Prev bookmark"
+msgstr "이전 북마크(&P)"
+
+msgid "&Flush bookmark"
+msgstr "북마크 갱신(&M)...              "
+
+msgid "&Undo"
+msgstr "취소(&U)"
+
+msgid "&Beginning"
+msgstr "시작(&B)"
+
+msgid "&End"
+msgstr "끝(&E)"
+
+msgid "&Search..."
+msgstr "찾기(&S)"
+
+msgid "Search &again"
+msgstr "다시 찾기(&a)"
+
+msgid "&Replace..."
+msgstr "바꾸기(&R)"
+
+msgid "&Go to line..."
+msgstr "줄찾기(&G)"
+
+msgid "&Toggle line state"
+msgstr "토글 선 상황(&T)"
+
+msgid "Go to matching &bracket"
+msgstr "맞는 bracket으로 가기(&b)"
+
+msgid "&Find declaration"
+msgstr "기운 후 거부파일이 생겼습니다"
+
+msgid "Back from &declaration"
+msgstr ""
+
+msgid "For&ward to declaration"
+msgstr ""
+
+msgid "Encod&ing..."
+msgstr "인코딩(&i)"
+
+msgid "&Refresh screen"
+msgstr "화면 갱신(&R)"
+
+msgid "&Start record macro"
+msgstr "매크로 저장 시작(&S)"
+
+msgid "Finis&h record macro..."
+msgstr "매크로 저장 끝(&h)"
+
+msgid "&Execute macro..."
+msgstr "매크로 실행(&E)..."
+
+msgid "Delete macr&o..."
+msgstr "매크로 지우기(&o) "
+
+msgid "'ispell' s&pell check"
+msgstr "'ispell' 철자 검사(&p)"
+
+msgid "&Mail..."
+msgstr "메일(&M)..."
+
+msgid "Insert &literal..."
+msgstr "문자의 입력(&l)..."
+
+msgid "Insert &date/time"
+msgstr "날짜/시간 삽입(&d)           "
+
+msgid "&Format paragraph"
+msgstr "단락 포맷(&F) "
+
+msgid "Sor&t..."
+msgstr "정렬순서(&t)..."
+
+msgid "&Sort..."
+msgstr "정렬(&S)..."
+
+msgid "&Paste output of..."
+msgstr "붙여넣기를 출력(&P)..."
+
+msgid "&External formatter"
+msgstr "외부 포맷터(&E)"
+
+msgid "&General...  "
+msgstr "일반(&G)...  "
+
+msgid "Save &mode..."
+msgstr "모드 저장(&S)..."
+
+msgid "Learn &keys..."
+msgstr "글쇠 배우기(&K)..."
+
+msgid "Syntax &highlighting..."
+msgstr "문법 강조(&h)... "
+
+msgid "S&yntax file"
+msgstr "문법 파일 수정(&M)"
+
+msgid "&Menu file"
+msgstr "메뉴 파일 편집(&m)"
+
+msgid "&Save setup"
+msgstr "환경 저장(&S)"
+
+msgid "&File"
+msgstr "파일(&F)"
+
+msgid "&Edit"
+msgstr "편집(&E)"
+
+msgid "&Search"
+msgstr "찾기(&S)"
+
+msgid "&Command"
+msgstr "명령어(&C)"
+
+msgid "For&mat"
+msgstr "포멧(&m)"
+
+msgid "&Options"
+msgstr "선택항목(&O) "
+
+msgid "None"
+msgstr "없음"
+
+msgid "Dynamic paragraphing"
+msgstr "동적 단락 만들기"
+
+msgid "Type writer wrap"
+msgstr ""
+
+msgid "Word wrap line length: "
+msgstr ""
+
+msgid "Cursor beyond end of line"
+msgstr ""
+
+msgid "Pers&istent selection"
+msgstr "선택 반전(&i)"
+
+msgid "Synta&x highlighting"
+msgstr "문법 강조(&x)"
+
+msgid "Visible tabs"
+msgstr "눈에 보이는 탭"
+
+msgid "Visible trailing spaces"
+msgstr ""
+
+msgid "Save file &position"
+msgstr "파일 위치 저장(&p)"
+
+msgid "Confir&m before saving"
+msgstr "저장 전 확인(&m)"
+
+msgid "&Return does autoindent"
+msgstr "반환에서는 자동으로 들여쓰기(&R)"
+
+msgid "Tab spacing: "
+msgstr "탭 공백수: "
+
+msgid "Fill tabs with &spaces"
+msgstr "탭을 공백으로 채우기(&s)"
+
+msgid "&Backspace through tabs"
+msgstr "백스페이스에 탭간격 사용(&B)"
+
+msgid "&Fake half tabs"
+msgstr "가짜 반쪽 탭(&F)"
+
+msgid "Wrap mode"
+msgstr "배치 방법"
+
+msgid " Editor options "
+msgstr " 편집기 옵션 "
+
+msgid "ButtonBar|Help"
+msgstr "ButtonBar|도움말"
+
+msgid "ButtonBar|Save"
+msgstr "ButtonBar|저장"
+
+msgid "ButtonBar|Mark"
+msgstr "ButtonBar|표시"
+
+msgid "ButtonBar|Replac"
+msgstr "ButtonBar|바꾸기"
+
+msgid "ButtonBar|Copy"
+msgstr "ButtonBar|복사"
+
+msgid "ButtonBar|Move"
+msgstr "ButtonBar|이동"
+
+msgid "ButtonBar|Search"
+msgstr "ButtonBar|찾기"
+
+msgid "ButtonBar|Delete"
+msgstr "ButtonBar|삭제"
+
+msgid "ButtonBar|PullDn"
+msgstr "ButtonBar|풀다운"
+
+msgid "ButtonBar|Quit"
+msgstr "ButtonBar|종료"
+
+msgid " Load syntax file "
+msgstr " 구문 파일 읽어오기 "
+
+#, c-format
+msgid ""
+" Cannot open file %s \n"
+" %s "
+msgstr ""
+" %s 파일을 열 수 없어요 \n"
+" %s "
+
+#, c-format
+msgid " Error in file %s on line %d "
+msgstr " 파일 %s의 %d 라인에 에러 "
 
 msgid "&Set"
 msgstr "설정(&S)"
@@ -917,7 +812,6 @@ msgstr "Use stickchars to draw"
 msgid "Resets soft keys on HP terminals"
 msgstr "HP 터미널에서 소프트 글쇠 리셋"
 
-#, fuzzy
 msgid "Load definitions of key bindings from specified file"
 msgstr "주어진 파일로 ftp 다이알로그 로깅"
 
@@ -934,7 +828,6 @@ msgid "Show mc with specified skin"
 msgstr ""
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -959,8 +852,7 @@ msgstr ""
 "   대화상자:      dnormal, dfocus, dhotnormal, dhotfocus\n"
 "   메뉴:          menu, menuhot, menusel, menuhotsel\n"
 "   도움말:        helpnormal, helpitalic, helplink, helpslink\n"
-"   파일형식:      directory, executable, link, stalelink, device, special, "
-"core\n"
+"   파일형식:      directory, executable, link, stalelink, device, special, core\n"
 "\n"
 "색상:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -979,16 +871,14 @@ msgid ""
 "\n"
 msgstr ""
 
-#, fuzzy
 msgid "Color options"
 msgstr "환경설정 선택항목"
 
 msgid "+number"
 msgstr "+number"
 
-#, fuzzy
 msgid "[this_dir] [other_panel_dir]"
-msgstr "[플래그] [이 디렉토리] [다른 패널 디렉토리]\n"
+msgstr "[이 디렉토리] [다른 패널 디렉토리]"
 
 msgid "Set initial line number for the internal editor"
 msgstr "내장 편집기를 위한 초기 줄 번호 설정"
@@ -1006,16 +896,14 @@ msgstr ""
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-#, fuzzy
 msgid "Main options"
 msgstr " 패널 선택항목 "
 
-#, fuzzy
 msgid "Terminal options"
 msgstr " 기타 선택항목 "
 
 msgid " Background process error "
-msgstr " Background 프로세스 에러 "
+msgstr " 배경 프로세스 에러 "
 
 msgid " Unknown error in child "
 msgstr " 자식(child) 프로세스에서 모르는 오류 발생 "
@@ -1024,13 +912,13 @@ msgid " Child died unexpectedly "
 msgstr " 예기치 않은 자식(child) 프로세스의 죽음 "
 
 msgid " Background protocol error "
-msgstr " Background 프로토콜 에러 "
+msgstr "배경 프로토콜 에러 "
 
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
 msgstr ""
-" Background process가 우리가 처리할 수 있는 것 보다 많은 \n"
+"배경 프로세스가 우리가 처리할 수 있는 것 보다 많은 \n"
 " 인자를 요구합니다. \n"
 
 msgid "&Full file list"
@@ -1051,53 +939,36 @@ msgstr "목록보기 설정"
 msgid "user &Mini status"
 msgstr "미니 상태바(&M)"
 
-msgid "&OK"
-msgstr "확인(&O)"
-
 msgid "&Reverse"
 msgstr "반대로(&R)"
 
-#, fuzzy
 msgid "Case sensi&tive"
 msgstr "대소문자 구분(&t)"
 
 msgid "Executable &first"
-msgstr ""
+msgstr "실행 &처음"
 
 msgid "Sort order"
 msgstr "정렬 순서"
 
-#, fuzzy
-msgid "Confirmation"
+msgid " Confirmation "
 msgstr " 확인 "
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
-#. 2
-#, fuzzy
-msgid "Confirmation|&History cleanup"
-msgstr " 확인 "
-
-#, fuzzy
-msgid "Confirmation|&Directory hotlist delete"
+msgid " confirm di&Rectory hotlist delete "
 msgstr "디렉토리 단축목록(&R)        C-\\"
 
-#, fuzzy
-msgid "Confirmation|E&xit"
-msgstr " 확인 "
+msgid " confirm &Exit "
+msgstr "끝내기 확인(&E) "
 
-#, fuzzy
-msgid "Confirmation|&Execute"
-msgstr " 확인 "
+msgid " confirm e&Xecute "
+msgstr "실행 확인(&X) "
 
-#, fuzzy
-msgid "Confirmation|O&verwrite"
-msgstr " 덮어쓰기 확인(&V) "
+msgid " confirm o&Verwrite "
+msgstr "덮어쓰기 확인(&V) "
 
-#, fuzzy
-msgid "Confirmation|&Delete"
-msgstr " 확인 "
+msgid " confirm &Delete "
+msgstr "지우기 확인(&D) "
 
-#, fuzzy
 msgid "UTF-8 output"
 msgstr "8 bits 출력"
 
@@ -1125,7 +996,6 @@ msgstr "입출력 코드페이지:"
 msgid "&Select"
 msgstr "선택(&S)"
 
-#, fuzzy
 msgid "Use passive mode over pro&xy"
 msgstr "passive 모드 사용(&p)..."
 
@@ -1157,7 +1027,7 @@ msgid "cd"
 msgstr "cd"
 
 msgid "Quick cd"
-msgstr "Quick cd"
+msgstr "빠른 cd"
 
 msgid "Symbolic link filename:"
 msgstr "심볼릭링크 파일명:"
@@ -1184,7 +1054,7 @@ msgid "&Kill"
 msgstr "죽임(&K)"
 
 msgid "Background Jobs"
-msgstr "Background Jobs"
+msgstr "배경 작업"
 
 msgid "Domain:"
 msgstr "도메인:"
@@ -1192,12 +1062,19 @@ msgstr "도메인:"
 msgid "Username:"
 msgstr "사용자명:"
 
+msgid "Password:"
+msgstr "비밀번호:"
+
 #, c-format
 msgid "Password for \\\\%s\\%s"
 msgstr "\\\\%s\\%s의 비밀번호"
 
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "경고: 파일 %s을(를) 찾을 수 없습니다\n"
+
 msgid "7-bit ASCII"
-msgstr ""
+msgstr "7-bit ASCII"
 
 #, c-format
 msgid "Cannot translate from %s to %s"
@@ -1311,9 +1188,6 @@ msgstr "<모르는 사용자>"
 msgid "<Unknown group>"
 msgstr "<모르는 집단>"
 
-msgid " Confirmation "
-msgstr " 확인 "
-
 msgid "Files tagged, want to cd?"
 msgstr "선택된 파일이 있는 데, 그래도 디렉토리을 바꿀까요?"
 
@@ -1347,13 +1221,11 @@ msgstr " 필터링할 파일명 설정 "
 msgid "&Using shell patterns"
 msgstr "명령해석기 패턴 사용(&U)"
 
-#, fuzzy
 msgid "&Case sensitive"
 msgstr "대소문자 구분(&t)"
 
-#, fuzzy
 msgid "&Files only"
-msgstr "크기로만(&S)"
+msgstr "크기로만(&F)"
 
 msgid " Select "
 msgstr " 선택 "
@@ -1362,30 +1234,14 @@ msgid " Unselect "
 msgstr " 선택해제 "
 
 msgid "Extension file edit"
-msgstr "Extension 파일 수정"
+msgstr "파일의 확장자 수정"
 
 msgid " Which extension file you want to edit? "
 msgstr " 수정하기를 원하는 extension 파일은? "
 
-msgid "&User"
-msgstr "사용자(&U)"
-
-msgid "&System Wide"
-msgstr "체계 전체(&S)"
-
-msgid " Menu edit "
-msgstr " 메뉴 편집 "
-
-msgid " Which menu file do you want to edit? "
-msgstr " 어떤 메뉴 파일을 편집하고 싶으세요? "
-
-msgid "&Local"
-msgstr "로컬(&L)"
-
 msgid "Highlighting groups file edit"
 msgstr ""
 
-#, fuzzy
 msgid " Which highlighting file you want to edit? "
 msgstr " 수정하기를 원하는 extension 파일은? "
 
@@ -1416,7 +1272,7 @@ msgstr ""
 
 #, c-format
 msgid "Link %s to:"
-msgstr ""
+msgstr "링크 %s 로:"
 
 msgid " Link "
 msgstr " 링크 "
@@ -1462,7 +1318,7 @@ msgid " FTP to machine "
 msgstr " FTP 연결 "
 
 msgid " Shell link to machine "
-msgstr " 쉘 연결 "
+msgstr " SSH 쉘 연결 "
 
 msgid " SMB link to machine "
 msgstr " SMB 연결 "
@@ -1480,16 +1336,15 @@ msgstr ""
 msgid " Setup "
 msgstr " 환경설정 "
 
-#, fuzzy, c-format
 msgid " Setup saved to ~/%s"
-msgstr " Setup saved to ~/"
+msgstr "~/%s 로 설정 저장"
 
 #, c-format
 msgid ""
 " Cannot chdir to \"%s\" \n"
 " %s "
 msgstr ""
-" \"%s\"(으)로 디렉토리을 바꿀 수 없어요 \n"
+" \"%s\"(으)로 디렉토리를 바꿀 수 없어요 \n"
 " %s "
 
 msgid " Cannot execute commands on non-local filesystems"
@@ -1500,721 +1355,6 @@ msgstr " 명령해석기가 이미 명령을 수행중입니다 "
 
 msgid "Cannot read directory contents"
 msgstr "디렉토리 내용을 읽을 수 없습니다"
-
-msgid " Choose syntax highlighting "
-msgstr ""
-
-#, fuzzy
-msgid "< Auto >"
-msgstr " 이 프로그램은 "
-
-msgid "< Reload Current Syntax >"
-msgstr ""
-
-#, fuzzy, c-format
-msgid " Cannot open %s for reading "
-msgstr " 읽을 파이프 열기 실패: "
-
-msgid "Error"
-msgstr "에러"
-
-#, fuzzy, c-format
-msgid " Error reading from pipe: %s "
-msgstr " 파이프 읽기 에러: "
-
-#, fuzzy, c-format
-msgid " Cannot open pipe for reading: %s "
-msgstr " 읽을 파이프 열기 실패: "
-
-#, fuzzy, c-format
-msgid " Cannot get size/permissions for %s "
-msgstr " 파일 크기/허용 정보 얻기 실패: "
-
-#, fuzzy, c-format
-msgid " %s is not a regular file "
-msgstr " 일반파일이 아니라 볼 수 없습니다 "
-
-#, fuzzy, c-format
-msgid " File %s is too large "
-msgstr " 파일 크기가 너무 큼: "
-
-msgid " About "
-msgstr " 이 프로그램은 "
-
-msgid ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                Cooledit  v3.11.5\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"         Midnight Commander를 위해 개발된\n"
-"          사용자와 친근한 텍스트 편집기.\n"
-
-msgid "Macro recursion is too deep"
-msgstr "매크로가 너무 많이 반복되어 불려졌습니다"
-
-msgid "Search"
-msgstr "찾기"
-
-msgid " File has hard-links. Detach before saving? "
-msgstr ""
-
-msgid "The file has been modified in the meantime. Save anyway?"
-msgstr ""
-
-msgid " Error writing to pipe: "
-msgstr " 파이프 쓰기 에러: "
-
-msgid " Cannot open pipe for writing: "
-msgstr " 쓰기위한 파이프 열기 실패: "
-
-#, fuzzy, c-format
-msgid " Cannot open file for writing: %s "
-msgstr " 쓰기위한 파이프 열기 실패: "
-
-#, fuzzy
-msgid "&Quick save"
-msgstr "빠른 저장 "
-
-#, fuzzy
-msgid "&Safe save"
-msgstr "안전한 저장 "
-
-msgid "&Do backups with following extension:"
-msgstr ""
-
-msgid "Check &POSIX new line"
-msgstr ""
-
-msgid " Edit Save Mode "
-msgstr " 편집 저장 모드 "
-
-msgid "The file you are saving is not finished with a newline"
-msgstr ""
-
-#, fuzzy
-msgid "C&ontinue"
-msgstr "계속"
-
-msgid "&Do not change"
-msgstr ""
-
-msgid "&Unix format (LF)"
-msgstr ""
-
-msgid "&Windows/DOS format (CR LF)"
-msgstr ""
-
-msgid "&Macintosh format (CR)"
-msgstr ""
-
-msgid "Change line breaks to:"
-msgstr ""
-
-msgid " Enter file name: "
-msgstr " 파일명 입력: "
-
-msgid " Save As "
-msgstr " 새이름으로 저장 "
-
-msgid " A file already exists with this name. "
-msgstr " 같은 이름의 파일이 이미 있습니다. "
-
-#, fuzzy
-msgid "&Overwrite"
-msgstr "겹쳐쓰기"
-
-msgid " Cannot save file. "
-msgstr " 파일을 저장할 수 없습니다. "
-
-msgid " Delete macro "
-msgstr " 매크로 지우기 "
-
-msgid " Cannot open temp file "
-msgstr " 임시 파일을 열 수 없습니다 "
-
-msgid " Cannot open macro file "
-msgstr " 매크로 파일을 열 수 없습니다 "
-
-msgid " Cannot overwrite macro file "
-msgstr " 매크로 파일을 겹쳐쓸 수 없습니다 "
-
-msgid " Save macro "
-msgstr " 매크로 저장 "
-
-msgid " Press the macro's new hotkey: "
-msgstr " 새로운 매크로 단축글쇠를 누르십시오: "
-
-msgid " Press macro hotkey: "
-msgstr " 매크로 단축글쇠를 누르십시오: "
-
-msgid " Load macro "
-msgstr " 매크로 불러오기 "
-
-msgid " Confirm save file? : "
-msgstr " 저장하시겠습니까? "
-
-msgid " Save file "
-msgstr " 파일 저장 "
-
-msgid "&Save"
-msgstr "저장(&S)"
-
-msgid ""
-" Current text was modified without a file save. \n"
-" Continue discards these changes. "
-msgstr ""
-" 파일이 바뀌었습니다. \n"
-" 저장 않하고 계속하실 겁니까? "
-
-msgid "Syntax file edit"
-msgstr "문법 파일 수정(&M)"
-
-msgid " Which syntax file you want to edit? "
-msgstr " 수정하기를 원하는 문법 파일은? "
-
-msgid " Load "
-msgstr " 불러오기 "
-
-msgid " Block is large, you may not be able to undo this action. "
-msgstr " 구역이 너무 커서 나중에 무를 수 없습니다. "
-
-#, fuzzy
-msgid "Replace"
-msgstr "바꿈(&R)"
-
-msgid " Replace "
-msgstr " 바꿈 "
-
-#, c-format
-msgid " %ld replacements made. "
-msgstr " %ld 개가 바뀌었습니다. "
-
-msgid "Quit"
-msgstr "끝내기"
-
-msgid " File was modified, Save with exit? "
-msgstr " 파일이 바뀌었는 데, 저장하고 끝낼까요? "
-
-#, fuzzy
-msgid "&Cancel quit"
-msgstr "끝내기 취소"
-
-#, fuzzy
-msgid " Error "
-msgstr "에러"
-
-msgid " This function is not implemented. "
-msgstr ""
-
-msgid " Copy to clipboard "
-msgstr " 클립보드로 복사하기 "
-
-msgid " Unable to save to file. "
-msgstr " 파일 저장 실패. "
-
-msgid " Cut to clipboard "
-msgstr " 클립보드로 오려두기 "
-
-msgid " Goto line "
-msgstr " 줄찾기 "
-
-msgid " Enter line: "
-msgstr " 줄 번호 입력: "
-
-msgid " Save Block "
-msgstr " 구역 저장 "
-
-msgid " Insert File "
-msgstr " 파일 끼워넣기 "
-
-msgid " Cannot insert file. "
-msgstr " 파일을 삽입할 수 없습니다. "
-
-msgid " Sort block "
-msgstr " 구역 정렬 "
-
-msgid " You must first highlight a block of text. "
-msgstr " You must first highlight a block of text. "
-
-msgid " Run Sort "
-msgstr " 정렬 시작 "
-
-msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr " 공백문자로 구분된 정렬 선택항목 입력: "
-
-msgid " Sort "
-msgstr " 정렬 "
-
-msgid " Cannot execute sort command "
-msgstr " 정렬 명령을 실행할 수 없습니다 "
-
-msgid " Sort returned non-zero: "
-msgstr " 정렬이 0아닌 값을 리턴했습니다: "
-
-msgid "Paste output of external command"
-msgstr ""
-
-#, fuzzy
-msgid "Enter shell command(s):"
-msgstr " 명령어 꼬리표 입력: "
-
-#, fuzzy
-msgid "External command"
-msgstr "기타 명령어"
-
-#, fuzzy
-msgid "Cannot execute command"
-msgstr " 정렬 명령을 실행할 수 없습니다 "
-
-msgid "Error creating script:"
-msgstr "스크립트 생성 에러:"
-
-msgid "Error reading script:"
-msgstr "스크립트 읽기 에러:"
-
-msgid "Error closing script:"
-msgstr "스크립트 닫기 에러:"
-
-msgid "Script created:"
-msgstr "스크립트 만듬:"
-
-msgid "Process block"
-msgstr "Process block"
-
-msgid " Copies to"
-msgstr " Copies to"
-
-msgid " Subject"
-msgstr " 제목"
-
-msgid " To"
-msgstr " To"
-
-msgid " mail -s <subject> -c <cc> <to>"
-msgstr " mail -s <subject> -c <cc> <to>"
-
-msgid " Mail "
-msgstr " 전자우편 "
-
-msgid " Insert Literal "
-msgstr " Literal 입력 "
-
-msgid " Press any key: "
-msgstr " 아무 글쇠나 누르십시오: "
-
-msgid " Execute Macro "
-msgstr " 매크로 실행 "
-
-msgid "All charsets"
-msgstr ""
-
-#, fuzzy
-msgid "&Whole words"
-msgstr "단어 단위로(&W)"
-
-#, fuzzy
-msgid "In se&lection"
-msgstr "선택반전(&T)              M-*"
-
-msgid "&Backwards"
-msgstr "뒤로(&B)"
-
-msgid "case &Sensitive"
-msgstr "대소문자 구분(&S)"
-
-msgid " Enter replacement string:"
-msgstr " 바꿀 글월 입력:"
-
-msgid " Enter search string:"
-msgstr " 찾을 글월 입력:"
-
-#, fuzzy
-msgid "&Find all"
-msgstr "파일 찾기"
-
-msgid "Cancel"
-msgstr "취소"
-
-msgid "&Skip"
-msgstr "건너뜀(&S)"
-
-msgid "A&ll"
-msgstr "모두(&l)"
-
-msgid "&Replace"
-msgstr "바꿈(&R)"
-
-msgid " Replace with: "
-msgstr " ...로 바꿈: "
-
-msgid " Confirm replace "
-msgstr " 바꾸기 확인 "
-
-msgid "&Dismiss"
-msgstr "취소(&D)"
-
-#, c-format
-msgid ""
-"File \"%s\" is already being edited\n"
-"User: %s\n"
-"Process ID: %d"
-msgstr ""
-
-msgid "File locked"
-msgstr ""
-
-msgid "&Grab lock"
-msgstr ""
-
-msgid "&Ignore lock"
-msgstr ""
-
-msgid "&Open file..."
-msgstr "파일 열기(&O)..."
-
-#, fuzzy
-msgid "&New"
-msgstr "이름(&N)"
-
-#, fuzzy
-msgid "Save &as..."
-msgstr "환경 저장(&S)"
-
-#, fuzzy
-msgid "&Insert file..."
-msgstr "파일 끼워넣기(&I)...      F15"
-
-#, fuzzy
-msgid "Cop&y to file..."
-msgstr "파일로 복사(&f)...        C-f"
-
-#, fuzzy
-msgid "&User menu..."
-msgstr "사용자 메뉴(&U)...        F11"
-
-#, fuzzy
-msgid "A&bout..."
-msgstr "배치(&L)..."
-
-msgid "&Quit"
-msgstr "종료(&Q)"
-
-msgid "&Undo"
-msgstr ""
-
-#, fuzzy
-msgid "&Toggle ins/overw"
-msgstr "삽입/겹침 토글(&i)        Ins"
-
-#, fuzzy
-msgid "To&ggle mark"
-msgstr "선택 해제(&l)"
-
-msgid "&Mark columns"
-msgstr ""
-
-#, fuzzy
-msgid "Mark &all"
-msgstr "모두 선택(&M)"
-
-msgid "Unmar&k"
-msgstr ""
-
-#, fuzzy
-msgid "Cop&y"
-msgstr "복사"
-
-#, fuzzy
-msgid "Mo&ve"
-msgstr "이동"
-
-msgid "&Delete"
-msgstr "지우기(&D)"
-
-#, fuzzy
-msgid "Co&py to clipfile"
-msgstr "파일로 복사(&f)...           "
-
-#, fuzzy
-msgid "&Cut to clipfile"
-msgstr "라인 찾아가기(&G)...      M-l"
-
-#, fuzzy
-msgid "Pa&ste from clipfile"
-msgstr "라인 찾아가기(&G)...      M-l"
-
-msgid "&Beginning"
-msgstr ""
-
-#, fuzzy
-msgid "&End"
-msgstr "Inode(&I)"
-
-#, fuzzy
-msgid "&Search..."
-msgstr "찾기"
-
-#, fuzzy
-msgid "Search &again"
-msgstr "다시 찾기(&a)             F17"
-
-#, fuzzy
-msgid "&Replace..."
-msgstr "바꿈(&R)"
-
-#, fuzzy
-msgid "&Toggle bookmark"
-msgstr "마크 토글(&T)              F3"
-
-#, fuzzy
-msgid "&Next bookmark"
-msgstr "선택(&e)"
-
-#, fuzzy
-msgid "&Prev bookmark"
-msgstr "정렬(&t)                  M-t"
-
-#, fuzzy
-msgid "&Flush bookmark"
-msgstr "전자우편(&M)...              "
-
-#, fuzzy
-msgid "&Go to line..."
-msgstr " 줄찾기 "
-
-#, fuzzy
-msgid "&Toggle line state"
-msgstr "마크 토글(&T)              F3"
-
-#, fuzzy
-msgid "Go to matching &bracket"
-msgstr "맞는 bracket으로 가기(&b) M-b"
-
-#, fuzzy
-msgid "&Find declaration"
-msgstr "기운 후 거부파일이 생겼습니다"
-
-#, fuzzy
-msgid "Back from &declaration"
-msgstr "기운 후 거부파일이 생겼습니다"
-
-#, fuzzy
-msgid "For&ward to declaration"
-msgstr "기운 후 거부파일이 생겼습니다"
-
-#, fuzzy
-msgid "Encod&ing..."
-msgstr "정렬(&t)                  M-t"
-
-#, fuzzy
-msgid "&Refresh screen"
-msgstr "화면 갱신(&R)             C-l"
-
-#, fuzzy
-msgid "&Start record macro"
-msgstr "매크로 저장 시작(&S)      C-r"
-
-#, fuzzy
-msgid "Finis&h record macro..."
-msgstr "매크로 저장 끝(&F)        C-r"
-
-#, fuzzy
-msgid "&Execute macro..."
-msgstr "매크로 실행(&E)...   C-a, KEY"
-
-#, fuzzy
-msgid "Delete macr&o..."
-msgstr " 매크로 지우기 "
-
-#, fuzzy
-msgid "'ispell' s&pell check"
-msgstr "'ispell' 철자 검사(&p)    C-p"
-
-#, fuzzy
-msgid "&Mail..."
-msgstr "필터(&F)..."
-
-#, fuzzy
-msgid "Insert &literal..."
-msgstr "Literal 입력(&l)          C-q"
-
-#, fuzzy
-msgid "Insert &date/time"
-msgstr "날짜/시간 삽입(&d)           "
-
-#, fuzzy
-msgid "&Format paragraph"
-msgstr "단락 포맷(&a)             M-p"
-
-#, fuzzy
-msgid "&Sort..."
-msgstr "정렬 순서(&S)..."
-
-msgid "&Paste output of..."
-msgstr ""
-
-#, fuzzy
-msgid "&External formatter"
-msgstr "외부 Formatter(&x)        F19"
-
-msgid "&General...  "
-msgstr "일반(&G)...  "
-
-#, fuzzy
-msgid "Save &mode..."
-msgstr "모드 저장(&S)..."
-
-#, fuzzy
-msgid "Learn &keys..."
-msgstr "글쇠 배우기(&K)..."
-
-#, fuzzy
-msgid "Syntax &highlighting..."
-msgstr " 하이라이트... "
-
-#, fuzzy
-msgid "S&yntax file"
-msgstr "문법 파일 수정(&M)"
-
-#, fuzzy
-msgid "&Menu file"
-msgstr "메뉴 파일 편집(&m)"
-
-msgid "&Save setup"
-msgstr "환경 저장(&S)"
-
-#, fuzzy
-msgid "&File"
-msgstr "파일"
-
-#, fuzzy
-msgid "&Edit"
-msgstr "편집"
-
-#, fuzzy
-msgid "&Search"
-msgstr "찾기"
-
-#, fuzzy
-msgid "&Command"
-msgstr "명령어"
-
-#, fuzzy
-msgid "For&mat"
-msgstr "Format"
-
-#, fuzzy
-msgid "&Options"
-msgstr " 선택항목(&O) "
-
-msgid "None"
-msgstr "없음"
-
-msgid "Dynamic paragraphing"
-msgstr ""
-
-msgid "Type writer wrap"
-msgstr ""
-
-msgid "Word wrap line length: "
-msgstr ""
-
-msgid "Cursor beyond end of line"
-msgstr ""
-
-#, fuzzy
-msgid "Pers&istent selection"
-msgstr "선택반전(&T)              M-*"
-
-msgid "Synta&x highlighting"
-msgstr ""
-
-msgid "Visible tabs"
-msgstr ""
-
-msgid "Visible trailing spaces"
-msgstr ""
-
-msgid "Save file &position"
-msgstr "파일 위치 저장(&p)"
-
-msgid "Confir&m before saving"
-msgstr "저장 전 확인(&m)"
-
-msgid "&Return does autoindent"
-msgstr "리턴키 입력시 autoindent(&R)"
-
-msgid "Tab spacing: "
-msgstr "탭 간격: "
-
-msgid "Fill tabs with &spaces"
-msgstr "탭을 공백으로 채움(&s)"
-
-msgid "&Backspace through tabs"
-msgstr "백스페이스에 탭간격 사용(&B)"
-
-msgid "&Fake half tabs"
-msgstr "&Fake half tabs"
-
-msgid "Wrap mode"
-msgstr "Wrap 모드"
-
-msgid " Editor options "
-msgstr " 편집기 선택항목 "
-
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
-msgid "ButtonBar|Mark"
-msgstr ""
-
-msgid "ButtonBar|Replac"
-msgstr ""
-
-msgid "ButtonBar|Copy"
-msgstr ""
-
-msgid "ButtonBar|Move"
-msgstr ""
-
-msgid "ButtonBar|Search"
-msgstr ""
-
-msgid "ButtonBar|Delete"
-msgstr ""
-
-msgid "ButtonBar|PullDn"
-msgstr ""
-
-msgid "ButtonBar|Quit"
-msgstr ""
-
-msgid " Load syntax file "
-msgstr " 구문 파일 읽어오기 "
-
-#, c-format
-msgid ""
-" Cannot open file %s \n"
-" %s "
-msgstr ""
-" %s 파일을 열 수 없어요 \n"
-" %s "
-
-#, c-format
-msgid " Error in file %s on line %d "
-msgstr " 파일 %s의 %d 라인에 에러 "
 
 msgid ""
 " The Commander can't change to the directory that \n"
@@ -2228,8 +1368,12 @@ msgstr ""
 " 사용하여 특별한 액세스 권한을 가진 것 아녜요? "
 
 #, c-format
+msgid "Press any key to continue..."
+msgstr "계속하려면 아무 글쇠나 누르십시오..."
+
+#, c-format
 msgid "Type `exit' to return to the Midnight Commander"
-msgstr "The Midnight Commander로 돌아가려면 'exit'을 입력하십시오"
+msgstr "Midnight Commander로 돌아가려면 'exit'을 입력하십시오"
 
 #, c-format
 msgid " Cannot fetch a local copy of %s "
@@ -2244,42 +1388,33 @@ msgstr ""
 " %s "
 
 msgid " Parameter "
-msgstr " Parameter "
+msgstr "파라메터"
 
-#, fuzzy, c-format
 msgid " %s%s file error"
-msgstr " 파일 에러 "
+msgstr " %s%s 파일 에러 "
 
-#, fuzzy, c-format
-msgid ""
-"The format of the %smc.ext file has changed with version 3.0.  It seems that "
-"the installation failed.  Please fetch a fresh copy from the Midnight "
-"Commander package."
+msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
 msgstr ""
 "버전 3.0 이후에 mc.ext 파일이\n"
 "바뀌었습니다. 인스톨이 실패한 것으로 보입니다.\n"
 "Midnight Commander 패키지에서 새로운 mc.ext\n"
 "파일을 가져오시기 바랍니다."
 
-#, fuzzy, c-format
 msgid " ~/%s file error "
-msgstr " 파일 에러 "
+msgstr "  ~/%s 파일 에러 "
 
 #, c-format
-msgid ""
-"The format of the ~/%s file has changed with version 3.0.  You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write "
-"it."
+msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
 msgstr ""
 
 msgid "DialogTitle|Copy"
-msgstr ""
+msgstr "DialogTitle|복사"
 
 msgid "DialogTitle|Move"
-msgstr ""
+msgstr "DialogTitle|이동"
 
 msgid "DialogTitle|Delete"
-msgstr ""
+msgstr "DialogTitle|지우기"
 
 msgid " Cannot make the hardlink "
 msgstr " 하드링크를 만들 수 없습니다 "
@@ -2328,7 +1463,6 @@ msgstr ""
 " \"%s\" 파일 정보를 얻을 수 없습니다 \n"
 " %s "
 
-#, fuzzy, c-format
 msgid ""
 " `%s' \n"
 " and \n"
@@ -2512,7 +1646,6 @@ msgstr ""
 " \"%s\" 파일을 지울 수 없습니다 \n"
 " %s "
 
-#, fuzzy, c-format
 msgid ""
 " `%s' \n"
 " and \n"
@@ -2552,7 +1685,6 @@ msgstr ""
 " \"%s\" 디렉토리을 지울 수 없습니다 \n"
 " %s "
 
-#, fuzzy
 msgid "Directory scanning"
 msgstr "디렉토리 경로"
 
@@ -2573,17 +1705,20 @@ msgstr "%o %f \"%s\"%m"
 msgid "%o %d %f%m"
 msgstr "%o %d %f%m"
 
+msgid "file"
+msgstr "파일"
+
 msgid "files"
-msgstr "files"
+msgstr "파일들"
 
 msgid "directory"
-msgstr "directory"
+msgstr "디렉토리"
 
 msgid "directories"
-msgstr "directories"
+msgstr "디렉토리(들)"
 
 msgid "files/directories"
-msgstr "files/directories"
+msgstr "파일/디렉토리"
 
 msgid " with source mask:"
 msgstr " with source mask:"
@@ -2593,13 +1728,13 @@ msgstr " 대상:"
 
 #, c-format
 msgid "%s?"
-msgstr ""
+msgstr "%s?"
 
 msgid " Cannot operate on \"..\"! "
 msgstr " \"..\"에 대해서는 작업할 수 없습니다! "
 
 msgid " Sorry, I could not put the job in background "
-msgstr " 미안, 백그라운드로 일을 수행할 수 없네요 "
+msgstr " 미안, 배경로 일을 수행할 수 없네요 "
 
 msgid "&Retry"
 msgstr "재시도(&R)"
@@ -2619,7 +1754,7 @@ msgid ""
 "   Delete it recursively? "
 msgstr ""
 "\n"
-"   백그라운드 프로세스: 디렉토리이 비지 않았음 \n"
+"   배경 프로세스: 디렉토리이 비지 않았음 \n"
 "   그래도 지울까요? "
 
 msgid " Delete: "
@@ -2662,23 +1797,18 @@ msgstr "대상"
 msgid "Deleting"
 msgstr "지우기"
 
-#, fuzzy
 msgid "Target file already exists!"
 msgstr "대상 파일 \"%s\"이(가) 이미 있는데요!"
 
-#, fuzzy, c-format
 msgid "Source date: %s, size %llu"
 msgstr "원본 날짜: %s, 크기 %llu"
 
-#, fuzzy, c-format
 msgid "Target date: %s, size %llu"
 msgstr "대상 날짜: %s, 크기 %llu"
 
-#, fuzzy, c-format
 msgid "Source date: %s, size %u"
 msgstr "원본 날짜: %s, 크기 %u"
 
-#, fuzzy, c-format
 msgid "Target date: %s, size %u"
 msgstr "대상 날짜: %s, 크기 %u"
 
@@ -2704,15 +1834,14 @@ msgid " File exists "
 msgstr " 파일 있음 "
 
 msgid " Background process: File exists "
-msgstr " 백그라운드 프로세스: 파일 있음 "
+msgstr " 배경 프로세스: 파일 있음 "
 
 msgid "&Background"
-msgstr "&Background"
+msgstr "배경(&B)"
 
 msgid "&Stable Symlinks"
-msgstr "&Stable 심볼릭링크"
+msgstr "안정 심볼릭링크(&S)"
 
-#, fuzzy
 msgid "di&Ve into subdir if exists"
 msgstr "같은 디렉토리 존재시 그 밑으로(&D)"
 
@@ -2725,7 +1854,6 @@ msgstr "링크 따르기(&L)"
 msgid "to:"
 msgstr "대상:"
 
-#, fuzzy, c-format
 msgid "Invalid source pattern `%s'"
 msgstr ""
 "원본 패턴 `%s'이(가) 잘못되었습니다 \n"
@@ -2738,7 +1866,7 @@ msgid "Con&tinue"
 msgstr "계속(&t)"
 
 msgid "&Chdir"
-msgstr "&Chdir"
+msgstr "디렉토리 이동(&C)"
 
 msgid "&Again"
 msgstr "다시(&A)"
@@ -2754,13 +1882,11 @@ msgstr "편집(&E) - F4"
 
 #, c-format
 msgid "Found: %ld"
-msgstr ""
+msgstr "찾기: %ld"
 
-#, fuzzy
 msgid " Malformed regular expression "
 msgstr "  이해할 수 없는 정규표현식  "
 
-#, fuzzy
 msgid "Cas&e sensitive"
 msgstr "대소문자 구분(&t)"
 
@@ -2773,11 +1899,9 @@ msgstr ""
 msgid "&All charsets"
 msgstr ""
 
-#, fuzzy
 msgid "Case sens&itive"
 msgstr "대소문자 구분(&t)"
 
-#, fuzzy
 msgid "Re&gular expression"
 msgstr "정규표현식(&R)"
 
@@ -2793,11 +1917,9 @@ msgstr "나무꼴(&T)"
 msgid "Find File"
 msgstr "파일 찾기"
 
-#, fuzzy
 msgid "Content:"
 msgstr "내용: "
 
-#, fuzzy
 msgid "File name:"
 msgstr "파일명:"
 
@@ -2822,7 +1944,7 @@ msgid " Help file format error\n"
 msgstr " 도움말 파일 형식 에러\n"
 
 msgid " Internal bug: Double start of link area "
-msgstr " 내부 버그: Double start of link area "
+msgstr " 내부 버그: 더블 링크 영역을 시작합니다"
 
 #, c-format
 msgid " Cannot find node %s in help file "
@@ -2832,13 +1954,10 @@ msgid "Help"
 msgstr "도움말"
 
 msgid "ButtonBar|Index"
-msgstr ""
+msgstr "ButtonBar|목차"
 
 msgid "ButtonBar|Prev"
-msgstr ""
-
-msgid "&Move"
-msgstr "이동(&M)"
+msgstr "ButtonBar|앞"
 
 msgid "&Remove"
 msgstr "지우기(&R)"
@@ -2861,7 +1980,6 @@ msgstr "위로(&U)"
 msgid "&Add current"
 msgstr "현재 패널 더하기(&A)"
 
-#, fuzzy
 msgid "&Refresh"
 msgstr "반대로(&R)"
 
@@ -2935,9 +2053,7 @@ msgstr " 최상위 집단 "
 msgid " Hotlist Load "
 msgstr " 단축목록 불러오기 "
 
-#, fuzzy, c-format
-msgid ""
-"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr " file, your old hotlist entries were not deleted"
 
 #, c-format
@@ -2986,7 +2102,6 @@ msgid "Modified:  %s"
 msgstr "수정일:    %s"
 
 #. TRANSLATORS: "Status changed", like in the stat(2) man page
-#, fuzzy, c-format
 msgid "Status:    %s"
 msgstr "만든날:    %s"
 
@@ -2998,11 +2113,8 @@ msgstr ""
 msgid "Size:      %s"
 msgstr "크기:      %s"
 
-#, fuzzy, c-format
 msgid " (%ld block)"
-msgid_plural " (%ld blocks)"
-msgstr[0] " (%ld 구역)"
-msgstr[1] " (%ld 구역)"
+msgstr " (%ld 구역)"
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -3027,7 +2139,7 @@ msgid "&Horizontal"
 msgstr "수평(&H)"
 
 msgid "show free sp&Ace"
-msgstr ""
+msgstr "남는 공간 보기(&A)"
 
 msgid "&Xterm window title"
 msgstr "X 터미널 창 제목(&X)"
@@ -3066,7 +2178,7 @@ msgid " Other options "
 msgstr " 기타 선택항목 "
 
 msgid "output lines"
-msgstr "output lines"
+msgstr "출력 라인"
 
 msgid "Layout"
 msgstr "배치"
@@ -3135,21 +2247,19 @@ msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "나 마우스로 클릭한 후 글쇠를 정의하십시오. 탭글쇠로 이동하십시오"
 
 msgid " The Midnight Commander "
-msgstr " The Midnight Commander "
+msgstr "Midnight Commander"
 
 msgid " Do you really want to quit the Midnight Commander? "
-msgstr " 정말로 Midnight Commander를 종료하시겠읍니까? "
+msgstr " 정말로 Midnight Commander를 종료하시겠습니까? "
 
 msgid "&Listing mode..."
 msgstr "파일목록보기 설정(&L)..."
 
-#, fuzzy
 msgid "&Quick view"
-msgstr "빠른 저장 "
+msgstr "빠르게 보기(&Q) "
 
-#, fuzzy
 msgid "&Info"
-msgstr "Inode(&I)"
+msgstr "정보(&I)"
 
 msgid "&Sort order..."
 msgstr "정렬 순서(&S)..."
@@ -3157,9 +2267,8 @@ msgstr "정렬 순서(&S)..."
 msgid "&Filter..."
 msgstr "필터(&F)..."
 
-#, fuzzy
 msgid "&Encoding..."
-msgstr "정렬(&t)                  M-t"
+msgstr "인코딩(&E)..."
 
 msgid "&Network link..."
 msgstr "네트워크 연결(&N)..."
@@ -3173,121 +2282,92 @@ msgstr "쉘 연결(&h)..."
 msgid "SM&B link..."
 msgstr "SMB 연결(&B)..."
 
-#, fuzzy
 msgid "&Rescan"
-msgstr "Rescan"
+msgstr "다시읽기(&R)"
 
-#, fuzzy
 msgid "&View"
-msgstr "보기"
+msgstr "보기(&V)"
 
-#, fuzzy
 msgid "Vie&w file..."
-msgstr " 파일 보기 "
+msgstr "파일 보기 (&w)"
 
-#, fuzzy
 msgid "&Filtered view"
-msgstr " 필터로 보기 "
-
-#, fuzzy
-msgid "&Copy"
-msgstr "복사"
+msgstr "필터로 보기(&F)"
 
 msgid "C&hmod"
-msgstr ""
+msgstr "퍼미션(chmod) (&h)"
 
-#, fuzzy
 msgid "&Link"
-msgstr "&Links"
+msgstr "링크(&L)"
 
-#, fuzzy
 msgid "&SymLink"
-msgstr "&Links"
+msgstr "심볼릭링크(&S)"
 
-#, fuzzy
 msgid "Edit s&ymlink"
-msgstr " 심볼릭링크 수정 "
+msgstr "심볼릭링크 수정(&y) "
 
 msgid "Ch&own"
-msgstr ""
+msgstr "소유권(chown) (&o)"
 
-#, fuzzy
 msgid "&Advanced chown"
-msgstr "고급 소유자 바꾸기(&A)       "
+msgstr "고급 소유권 바꾸기(&A)       "
 
-#, fuzzy
 msgid "&Rename/Move"
-msgstr "지우기(&R)"
+msgstr "이름바꾸기/이동(&R)"
 
-#, fuzzy
 msgid "&Mkdir"
-msgstr "Mkdir"
+msgstr "디렉만들기(&M)"
 
-#, fuzzy
 msgid "&Quick cd"
-msgstr "Quick cd"
+msgstr "빠른cd(&Q)"
 
-#, fuzzy
 msgid "Select &group"
 msgstr "집단 설정(&g)"
 
-#, fuzzy
 msgid "U&nselect group"
-msgstr " 선택해제 "
+msgstr "집단 선택해제(&n)"
 
-#, fuzzy
 msgid "Reverse selec&tion"
-msgstr "선택반전(&T)              M-*"
+msgstr "선택반전(&T)"
 
-#, fuzzy
 msgid "E&xit"
-msgstr "편집"
+msgstr "종료(&x)"
 
-#, fuzzy
 msgid "&User menu"
-msgstr " 사용자 메뉴 "
+msgstr "사용자 메뉴(&U)"
 
 msgid "&Directory tree"
 msgstr "디렉토리 나무꼴(&D)"
 
-#, fuzzy
 msgid "&Find file"
-msgstr "파일 찾기"
+msgstr "파일 찾기(&F)"
 
 msgid "S&wap panels"
-msgstr ""
+msgstr "스왑 패널(S&)"
 
-#, fuzzy
 msgid "Switch &panels on/off"
-msgstr "패널 열기/닫기(&P)         C-o"
+msgstr "패널 열기/닫기(&P)"
 
-#, fuzzy
 msgid "&Compare directories"
-msgstr " 디렉토리 비교 "
+msgstr "디렉토리 비교(&C)"
 
-#, fuzzy
 msgid "E&xternal panelize"
-msgstr "외부 패널화"
+msgstr "확장 패널(&x)"
 
-#, fuzzy
 msgid "Show directory s&izes"
 msgstr "디렉토리 크기 보기(&I)"
 
-#, fuzzy
 msgid "Command &history"
-msgstr "명령 히스토리(&H)"
+msgstr "명령 히스토리(&h)"
 
-#, fuzzy
 msgid "Di&rectory hotlist"
-msgstr "디렉토리 단축목록"
+msgstr "디렉토리 단축목록(&r)"
 
-#, fuzzy
 msgid "&Active VFS list"
-msgstr "활성 VFS 목록(&A)        C-x a"
+msgstr "활성 VFS 목록(&A)"
 
-#, fuzzy
 msgid "&Background jobs"
-msgstr "Background Jobs"
+msgstr "배경 작업(&B)"
 
 msgid "&Undelete files (ext2fs only)"
 msgstr "파일 되살림 (est2fs만 가능)"
@@ -3296,13 +2376,13 @@ msgid "&Listing format edit"
 msgstr "파일 목록 형식 편집(&L)"
 
 msgid "Edit &extension file"
-msgstr "Extension 파일 편집(&e)"
+msgstr "파일 확장자 편집(&e)"
 
 msgid "Edit &menu file"
 msgstr "메뉴 파일 편집(&m)"
 
 msgid "Edit hi&ghlighting group file"
-msgstr ""
+msgstr "집단 파일의 강조 편집(&g)"
 
 msgid "&Configuration..."
 msgstr "환경설정(&C)..."
@@ -3310,9 +2390,8 @@ msgstr "환경설정(&C)..."
 msgid "&Layout..."
 msgstr "배치(&L)..."
 
-#, fuzzy
 msgid "C&onfirmation..."
-msgstr "확인(&O)..."
+msgstr "확인(&o)..."
 
 msgid "&Display bits..."
 msgstr "출력 비트(&D)..."
@@ -3320,24 +2399,20 @@ msgstr "출력 비트(&D)..."
 msgid "&Virtual FS..."
 msgstr "가상 파일체계(&V)..."
 
-#, fuzzy
 msgid "&Above"
-msgstr " 위(&A) "
+msgstr "위(&A) "
 
-#, fuzzy
 msgid "&Left"
-msgstr " 왼쪽(&L) "
+msgstr "왼쪽(&L) "
 
-#, fuzzy
 msgid "&Below"
-msgstr " 아래(&B) "
+msgstr "아래(&B)"
 
-#, fuzzy
 msgid "&Right"
-msgstr " 오른쪽(&R) "
+msgstr "오른쪽(&R)"
 
 msgid " Information "
-msgstr " 정보 "
+msgstr "정보"
 
 msgid ""
 " Using the fast reload option may not reflect the exact \n"
@@ -3351,24 +2426,23 @@ msgstr ""
 " 자세한 내용을 알고 싶으시면 설명서를 보십시오.         "
 
 msgid "ButtonBar|Menu"
-msgstr ""
+msgstr "ButtonBar|메뉴"
 
 msgid "ButtonBar|View"
-msgstr ""
+msgstr "ButtonBar|보기"
 
 msgid "ButtonBar|Edit"
-msgstr ""
+msgstr "ButtonBar|편집"
 
 msgid "ButtonBar|RenMov"
-msgstr ""
+msgstr "ButtonBar|이동"
 
 msgid "ButtonBar|Mkdir"
-msgstr ""
+msgstr "ButtonBar|디렉만들기"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "TERM 환경변수가 설정되어있지 않습니다!\n"
 
-#, fuzzy, c-format
 msgid "Cannot create %s directory"
 msgstr "디렉토리을 바꿀 수 없습니다"
 
@@ -3409,7 +2483,7 @@ msgid "&Verbose operation"
 msgstr "동작할 때 말을 많이(&V)"
 
 msgid "Mkdir autoname"
-msgstr ""
+msgstr "자동이름으로 디렉 만들기"
 
 msgid "&Fast dir reload"
 msgstr "디렉토리 빨리 다시읽기(&F)"
@@ -3427,16 +2501,16 @@ msgid "show &Hidden files"
 msgstr "숨은 파일 보기(&H)"
 
 msgid "show &Backup files"
-msgstr "여벌 파일 보기(&B)"
+msgstr "백업 파일 보기(&B)"
 
 msgid "Use SI si&ze units"
-msgstr ""
+msgstr "Use SI si&ze units"
 
 msgid "&Never"
 msgstr "결코(&N)"
 
 msgid "on dumb &Terminals"
-msgstr "dumb 터미널에서만"
+msgstr "터미널에서만 출력"
 
 msgid "Alwa&ys"
 msgstr "항상(&y)"
@@ -3501,7 +2575,7 @@ msgstr "SUB-DIR"
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|u"
-msgstr ""
+msgstr "sort|정렬없음"
 
 msgid "&Unsorted"
 msgstr "정렬 안함(&U)"
@@ -3509,16 +2583,15 @@ msgstr "정렬 안함(&U)"
 #. TRANSLATORS: one single character to represent 'name' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|n"
-msgstr ""
+msgstr "sort|이름순"
 
 msgid "&Name"
 msgstr "이름(&N)"
 
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#, fuzzy
 msgid "sort|e"
-msgstr "정렬 안함(&U)"
+msgstr "sort|확장자순"
 
 msgid "&Extension"
 msgstr "확장자(&E)"
@@ -3526,19 +2599,18 @@ msgstr "확장자(&E)"
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|s"
-msgstr ""
+msgstr "sort|크기순"
 
 msgid "&Size"
 msgstr "크기(&S)"
 
-#, fuzzy
 msgid "Block Size"
-msgstr " 크기 "
+msgstr "블럭 크기"
 
 #. TRANSLATORS: one single character to represent 'Modify time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|m"
-msgstr ""
+msgstr "sort|수정시간순"
 
 msgid "&Modify time"
 msgstr "수정 시간(&M)"
@@ -3546,7 +2618,7 @@ msgstr "수정 시간(&M)"
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|a"
-msgstr ""
+msgstr "sort|접근시간순"
 
 msgid "&Access time"
 msgstr "접근 시간(&A)"
@@ -3554,7 +2626,7 @@ msgstr "접근 시간(&A)"
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|h"
-msgstr ""
+msgstr "sort|바꾼시간순 "
 
 msgid "C&Hange time"
 msgstr "바꾼 시간(&C)"
@@ -3571,10 +2643,10 @@ msgstr "Nl"
 #. TRANSLATORS: one single character to represent 'inode' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|i"
-msgstr ""
+msgstr "sort|이노드순"
 
 msgid "&Inode"
-msgstr "Inode(&I)"
+msgstr "이노드(&I)"
 
 msgid "UID"
 msgstr "UID"
@@ -3591,17 +2663,11 @@ msgstr "집단"
 msgid "<readlink failed>"
 msgstr "<readlink 실패>"
 
-#, fuzzy, c-format
 msgid "%s byte"
-msgid_plural "%s bytes"
-msgstr[0] "%s 바이트"
-msgstr[1] "%s 바이트"
+msgstr "%s 바이트"
 
-#, fuzzy, c-format
 msgid "%s in %d file"
-msgid_plural "%s in %d files"
-msgstr[0] "%s bytes in %d file"
-msgstr[1] "%s bytes in %d file"
+msgstr "%s in %d 파일"
 
 msgid "Unknown tag on display format: "
 msgstr "출력 형식에 모르는 태그: "
@@ -3612,24 +2678,58 @@ msgstr "사용자가 제공한 형식은 잘못되었습니다. 기본값 사용
 msgid " Do you really want to execute? "
 msgstr " 정말로 실행하시겠읍니까? "
 
-#, fuzzy
+msgid " Not implemented yet "
+msgstr ""
+
+msgid " Num of replace tokens not equal to num of found tokens "
+msgstr ""
+
+msgid " Invalid token number %d "
+msgstr " Invalid target mask "
+
+msgid "Normal"
+msgstr "일반"
+
+msgid "&Regular expression"
+msgstr "정규표현식(&R)"
+
+msgid "Hexadecimal"
+msgstr ""
+
+msgid "Wildcard search"
+msgstr ""
+
 msgid "Choose codepage"
-msgstr " 입력 코드페이지 선택 "
+msgstr "입력 코드페이지 선택 "
 
 msgid "-  < No translation >"
 msgstr "-  < 변환 안함 >"
 
-#, fuzzy, c-format
 msgid ""
 "Cannot save file %s:\n"
 "%s"
 msgstr " 파일을 저장할 수 없습니다. "
+
+#, c-format
+msgid ""
+"Unable to load '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unable to parse '%s' skin.\n"
+"Default skin has been loaded"
+msgstr ""
 
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
+"GNU Midnight Commander는 이미\n"
+"터미널에서 실행 중입니다.\n"
+"Subshell 지원이 비활성화 됩니다."
 
 #, c-format
 msgid "Cannot open named pipe %s\n"
@@ -3654,7 +2754,6 @@ msgstr "terminfo 데이타베이스 사용"
 msgid "Using the ncurses library"
 msgstr "ncurses 라이브러리 사용"
 
-#, fuzzy
 msgid "Using the ncursesw library"
 msgstr "ncurses 라이브러리 사용"
 
@@ -3665,7 +2764,7 @@ msgid "With subshell support as default"
 msgstr "subshell을 기본으로 지원"
 
 msgid "With support for background operations\n"
-msgstr "백그라운드 동작 지원\n"
+msgstr "배경 동작 지원\n"
 
 msgid "With mouse support on xterm and Linux console\n"
 msgstr "xterm과 리눅스 콘솔에서 마우스 사용\n"
@@ -3721,13 +2820,13 @@ msgid "ButtonBar|Dynamc"
 msgstr ""
 
 msgid "ButtonBar|Rescan"
-msgstr ""
+msgstr "ButtonBar|다시읽기"
 
 msgid "ButtonBar|Forget"
 msgstr ""
 
 msgid "ButtonBar|Rmdir"
-msgstr ""
+msgstr "ButtonBar|디렉지우기"
 
 #, c-format
 msgid ""
@@ -3737,8 +2836,262 @@ msgstr ""
 "%s 파일에 쓸 수 없습니다:\n"
 "%s\n"
 
+msgid "Function key 1"
+msgstr "Function key 1"
+
+msgid "Function key 2"
+msgstr "Function key 2"
+
+msgid "Function key 3"
+msgstr "Function key 3"
+
+msgid "Function key 4"
+msgstr "Function key 4"
+
+msgid "Function key 5"
+msgstr "Function key 5"
+
+msgid "Function key 6"
+msgstr "Function key 6"
+
+msgid "Function key 7"
+msgstr "Function key 7"
+
+msgid "Function key 8"
+msgstr "Function key 8"
+
+msgid "Function key 9"
+msgstr "Function key 9"
+
+msgid "Function key 10"
+msgstr "Function key 10"
+
+msgid "Function key 11"
+msgstr "Function key 11"
+
+msgid "Function key 12"
+msgstr "Function key 12"
+
+msgid "Function key 13"
+msgstr "Function key 13"
+
+msgid "Function key 14"
+msgstr "Function key 14"
+
+msgid "Function key 15"
+msgstr "Function key 15"
+
+msgid "Function key 16"
+msgstr "Function key 16"
+
+msgid "Function key 17"
+msgstr "Function key 17"
+
+msgid "Function key 18"
+msgstr "Function key 18"
+
+msgid "Function key 19"
+msgstr "Function key 19"
+
+msgid "Function key 20"
+msgstr "Function key 20"
+
+msgid "Backspace key"
+msgstr "Backspace key"
+
+msgid "End key"
+msgstr "End key"
+
+msgid "Up arrow key"
+msgstr "Up arrow key"
+
+msgid "Down arrow key"
+msgstr "Down arrow key"
+
+msgid "Left arrow key"
+msgstr "Left arrow key"
+
+msgid "Right arrow key"
+msgstr "Right arrow key"
+
+msgid "Home key"
+msgstr "Home key"
+
+msgid "Page Down key"
+msgstr "Page Down key"
+
+msgid "Page Up key"
+msgstr "Page Up key"
+
+msgid "Insert key"
+msgstr "Insert key"
+
+msgid "Delete key"
+msgstr "Delete key"
+
+msgid "Completion/M-tab"
+msgstr "Completion/M-tab"
+
+msgid "+ on keypad"
+msgstr "+ on keypad"
+
+msgid "- on keypad"
+msgstr "- on keypad"
+
+msgid "Slash on keypad"
+msgstr "Slash on keypad"
+
+msgid "* on keypad"
+msgstr "* on keypad"
+
+msgid "Escape key"
+msgstr "Slash on keypad"
+
+msgid "Left arrow keypad"
+msgstr "Left arrow keypad"
+
+msgid "Right arrow keypad"
+msgstr "Right arrow keypad"
+
+msgid "Up arrow keypad"
+msgstr "Up arrow keypad"
+
+msgid "Down arrow keypad"
+msgstr "Down arrow keypad"
+
+msgid "Home on keypad"
+msgstr "Home on keypad"
+
+msgid "End on keypad"
+msgstr "End on keypad"
+
+msgid "Page Down keypad"
+msgstr "Page Down keypad"
+
+msgid "Page Up keypad"
+msgstr "Page Up keypad"
+
+msgid "Insert on keypad"
+msgstr "Insert on keypad"
+
+msgid "Delete on keypad"
+msgstr "Delete on keypad"
+
+msgid "Enter on keypad"
+msgstr "Enter on keypad"
+
+msgid "Function key 21"
+msgstr "Function key 1"
+
+msgid "Function key 22"
+msgstr "Function key 2"
+
+msgid "Function key 23"
+msgstr "Function key 2"
+
+msgid "Function key 24"
+msgstr "Function key 2"
+
+msgid "Plus"
+msgstr ""
+
+msgid "Minus"
+msgstr "마이너스"
+
+msgid "Asterisk"
+msgstr ""
+
+msgid "Dot"
+msgstr ""
+
+msgid "Less than"
+msgstr ""
+
+msgid "Great than"
+msgstr ""
+
+msgid "Equal"
+msgstr ""
+
+msgid "Comma"
+msgstr "콤마"
+
+msgid "Apostrophe"
+msgstr ""
+
+msgid "Colon"
+msgstr "콜론"
+
+msgid "Exclamation mark"
+msgstr ""
+
+msgid "Question mark"
+msgstr ""
+
+msgid "Ampersand"
+msgstr "앰퍼샌드"
+
+msgid "Dollar sign"
+msgstr ""
+
+msgid "Quotation mark"
+msgstr ""
+
+msgid "Caret"
+msgstr "캐럿"
+
+msgid "Tilda"
+msgstr ""
+
+msgid "Prime"
+msgstr "프라임"
+
+msgid "Underline"
+msgstr "언더라인"
+
+msgid "Understrike"
+msgstr ""
+
+msgid "Pipe"
+msgstr ""
+
+msgid "Enter"
+msgstr "소유자"
+
+msgid "Tab key"
+msgstr "탭키"
+
+msgid "Space key"
+msgstr "스페이스키"
+
+msgid "Slash key"
+msgstr "슬러쉬키"
+
+msgid "Backslash key"
+msgstr "백슬러쉬키"
+
+msgid "Number sign #"
+msgstr ""
+
+msgid "Ctrl"
+msgstr "콘트롤"
+
+msgid "Alt"
+msgstr "알트"
+
+msgid "Shift"
+msgstr "쉬프트"
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"화면크기 %dx%d은(는) 지원되지 않습니다.\n"
+"TERM 환경변수를 확인해 보세요.\n"
+
 msgid " Format error on file Extensions File "
-msgstr " 확장자 파일의 형식 에러 "
+msgstr "확장자 파일의 형식 에러 "
 
 #, c-format
 msgid " The %%var macro has no default "
@@ -3778,33 +3131,72 @@ msgstr " %s에서 적당한 항목을 찾을 수 없습니다 "
 msgid " User menu "
 msgstr " 사용자 메뉴 "
 
-#, fuzzy
-msgid "Invalid value"
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
+
+#, c-format
+msgid "%s is not a directory\n"
+msgstr "%s은(는) 디렉토리가 아닙니다\n"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr "디렉토리 %s은(는) 당신 소유가 아닙니다\n"
+
+#, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr "%s 임시 디렉토리에 대한 맞는 퍼미션을 설정할 수 없습니다\n"
+
+#, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr "%s 임시 디렉토리를 만들 수 없습니다: %s\n"
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr "임시 파일이 %s에 만들어질 것입니다\n"
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr "임시 파일은 만들어지지 않을 것입니다\n"
+
+msgid " Pipe failed "
+msgstr " 파이프 실패 "
+
+msgid " Dup failed "
+msgstr " 복제 실패 "
+
+msgid ""
+" The current line number is %lld.\n"
+" Enter the new line number:"
+msgstr ""
+" 현재 줄 번호는 %d입니다.\n"
+" 새로운 줄 번호을 입력:"
+
+msgid ""
+" The current address is %s.\n"
+" Enter the new address:"
+msgstr ""
+" 현재 줄 번호는 %d입니다.\n"
+" 새로운 줄 번호을 입력:"
+
+msgid " Goto Address "
+msgstr " 주소 찾기 "
+
+msgid " Invalid address "
 msgstr " 틀린 비밀번호 "
 
-#, fuzzy
 msgid " Cannot spawn child process "
 msgstr " 자식(child) 풀그림을 실행할 수 없습니다 "
 
 msgid "Empty output from child filter"
 msgstr "자식 필터에서 결과가 없습니다"
 
-msgid "&Line number (decimal)"
-msgstr ""
-
-msgid "Pe&rcents"
-msgstr ""
-
-msgid "&Decimal offset"
-msgstr ""
-
-msgid "He&xadecimal offset"
-msgstr ""
-
-msgid "Goto"
-msgstr "Goto"
-
 msgid "ButtonBar|Ascii"
+msgstr "ButtonBar|아스키"
+
+msgid "ButtonBar|Goto"
 msgstr ""
 
 msgid "ButtonBar|HxSrch"
@@ -3819,7 +3211,7 @@ msgstr ""
 msgid "ButtonBar|Hex"
 msgstr ""
 
-msgid "ButtonBar|Goto"
+msgid "ButtonBar|Line"
 msgstr ""
 
 msgid "ButtonBar|Raw"
@@ -3832,7 +3224,26 @@ msgid "ButtonBar|Unform"
 msgstr ""
 
 msgid "ButtonBar|Format"
+msgstr "ButtonBar|포멧"
+
+#, c-format
+msgid "File: %s"
+msgstr "파일: %s"
+
+#, c-format
+msgid "Offset 0x%08lx"
+msgstr "옵셋 0x%08lx"
+
+#, c-format
+msgid "Line %lu Col %lu"
 msgstr ""
+
+#, c-format
+msgid "%s bytes"
+msgstr "%s 바이트"
+
+msgid ">= %s bytes"
+msgstr "%s 바이트"
 
 #, c-format
 msgid ""
@@ -3841,7 +3252,6 @@ msgid ""
 " Data may have been written or not. "
 msgstr ""
 
-#, fuzzy, c-format
 msgid ""
 " Cannot save file: \n"
 " %s "
@@ -3872,480 +3282,445 @@ msgstr ""
 msgid " History "
 msgstr " 히스토리 "
 
-#. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
-msgid "DialogTitle|History cleanup"
-msgstr ""
-
-msgid "Do you want clean this history?"
-msgstr ""
-
 msgid "Background process:"
-msgstr "Background 프로세스:"
+msgstr "배경 프로세스:"
+
+#, c-format
+msgid ""
+"Cannot open cpio archive\n"
+"%s"
+msgstr ""
+"cpio 아카이브를 열 수 없습니다\n"
+"%s"
+
+#, c-format
+msgid ""
+"Premature end of cpio archive\n"
+"%s"
+msgstr ""
+"cpio 아카이브의 생각지 못한 끝\n"
+"%s"
+
+#, c-format
+msgid ""
+"Inconsistent hardlinks of\n"
+"%s\n"
+"in cpio archive\n"
+"%s"
+msgstr ""
+
+#, c-format
+msgid "%s contains duplicate entries! Skipping!"
+msgstr "%s이(가) 중복된 항목을 포함하고 있습니다! 건너뜀!"
+
+#, c-format
+msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"%s에서\n"
+"깨진 cpio 헤더를 만났습니다"
+
+#, c-format
+msgid ""
+"Unexpected end of file\n"
+"%s"
+msgstr ""
+"파일 %s에서\n"
+"기대되지 않은 EOF"
+
+#, c-format
+msgid "Directory cache expired for %s"
+msgstr "%s의 디렉토리 캐쉬 만료됨"
+
+msgid "Starting linear transfer..."
+msgstr "선의 전송 시작함..."
+
+#, c-format
+msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+msgstr "%s: %s: %s %3d%% (%lu 바이트 송신)"
+
+#, c-format
+msgid "%s: %s: %s %lu bytes transferred"
+msgstr "%s: %s: %s %lu 바이트 송신됨"
+
+msgid "Getting file"
+msgstr "파일 받음"
+
+#, c-format
+msgid ""
+"Cannot open %s archive\n"
+"%s"
+msgstr ""
+"%s 아카이브 파일을 열 수 없습니다\n"
+"%s"
 
-#~ msgid " confirm &Exit "
-#~ msgstr " 끝내기 확인(&E) "
+msgid "Inconsistent extfs archive"
+msgstr "모순된 extfs 아카이브"
+
+#, c-format
+msgid "fish: Disconnecting from %s"
+msgstr "fish: %s(으)로부터 연결 끊어짐"
+
+msgid "fish: Waiting for initial line..."
+msgstr "fish: 초기 라인을 기다리는 중..."
+
+msgid "Sorry, we cannot do password authenticated connections for now."
+msgstr "미안합니다. 아직 비밀번호 인증 연결은 할 수 없습니다."
 
-#~ msgid " confirm e&Xecute "
-#~ msgstr " 실행 확인(&X) "
+msgid " fish: Password required for "
+msgstr " fish: Password required for "
 
-#~ msgid " confirm &Delete "
-#~ msgstr " 지우기 확인(&D) "
+msgid "fish: Sending password..."
+msgstr "fish: 사용자 비밀번호 보냄..."
 
-#, fuzzy
-#~ msgid ""
-#~ " The current line number is %lld.\n"
-#~ " Enter the new line number:"
-#~ msgstr ""
-#~ " 현재 줄 번호는 %d입니다.\n"
-#~ " 새로운 줄 번호을 입력:"
+msgid "fish: Sending initial line..."
+msgstr "fish: 초기 라인 보냄..."
 
-#, fuzzy
-#~ msgid ""
-#~ " The current address is %s.\n"
-#~ " Enter the new address:"
-#~ msgstr ""
-#~ " 현재 줄 번호는 %d입니다.\n"
-#~ " 새로운 줄 번호을 입력:"
+msgid "fish: Handshaking version..."
+msgstr "fish: 핸드쉐이킹 버젼..."
 
-#~ msgid " Goto Address "
-#~ msgstr " 주소 찾기 "
+msgid "fish: Setting up current directory..."
+msgstr "fish: 현재 디렉토리 설정중..."
 
-#~ msgid "File: %s"
-#~ msgstr "파일: %s"
+#, c-format
+msgid "fish: Connected, home %s."
+msgstr "fish: 연결됨, 홈은 %s."
 
-#~ msgid "Offset 0x%08lx"
-#~ msgstr "옵셋 0x%08lx"
+#, c-format
+msgid "fish: Reading directory %s..."
+msgstr "fish: 디렉토리 %s 읽는 중..."
 
-#~ msgid "%s bytes"
-#~ msgstr "%s 바이트"
+#, c-format
+msgid "%s: done."
+msgstr "%s: 끝남."
 
-#, fuzzy
-#~ msgid ">= %s bytes"
-#~ msgstr "%s 바이트"
+#, c-format
+msgid "%s: failure"
+msgstr "%s: 실패"
 
-#~ msgid "File:       None"
-#~ msgstr "파일:     아님"
+#, c-format
+msgid "fish: store %s: sending command..."
+msgstr "fish: %s 저장: 명령 보냄..."
 
-#~ msgid "Do backups -->"
-#~ msgstr "백업 -->"
+msgid "fish: Local read failed, sending zeros"
+msgstr "fish: 로컬 읽기 실패. 0을 보냄"
 
-#~ msgid "Extension:"
-#~ msgstr "확장자:"
+#, c-format
+msgid "fish: storing %s %d (%lu)"
+msgstr "fish: %s %d 저장 (%lu)"
 
-#~ msgid "&New              C-n"
-#~ msgstr "새 파일(&N)               C-n"
+msgid "zeros"
+msgstr "제로"
 
-#~ msgid "&Save              F2"
-#~ msgstr "저장(_S)                   F3"
+msgid "Aborting transfer..."
+msgstr "송신 중단..."
 
-#~ msgid "Save &as...       F12"
-#~ msgstr "다른 이름으로 저장(&a)... F12"
+msgid "Error reported after abort."
+msgstr "중단 후에 에러 보고됨."
 
-#~ msgid "A&bout...            "
-#~ msgstr "이 프로그램은(&b)...         "
+msgid "Aborted transfer would be successful."
+msgstr "송신이 성공적으로 중단되었습니다."
 
-#~ msgid "&Quit             F10"
-#~ msgstr "종료(&Q)                  F10"
+#, c-format
+msgid "ftpfs: Disconnecting from %s"
+msgstr "ftpfs: %s(으)로부터 연결 끊어짐"
 
-#~ msgid "&New            C-x k"
-#~ msgstr "새 파일(&N)             C-x l"
+msgid " FTP: Password required for "
+msgstr " FTP: Password required for "
 
-#~ msgid "Copy to &file...     "
-#~ msgstr "파일로 복사(&f)...           "
+msgid "ftpfs: sending login name"
+msgstr "ftpfs: 로그인 이름 보냄"
 
-#, fuzzy
-#~ msgid "&Toggle mark                 F3"
-#~ msgstr "마크 토글(&T)              F3"
+msgid "ftpfs: sending user password"
+msgstr "ftpfs: 사용자 비밀번호 보냄"
 
-#, fuzzy
-#~ msgid "Mar&k columns              S-F3"
-#~ msgstr "컬럼 마크(&M)            S-F3"
+msgid "FTP: Account required for user %s"
+msgstr " FTP: Password required for  %s"
 
-#, fuzzy
-#~ msgid "&Copy                        F5"
-#~ msgstr "복사(&C)                   F5"
+msgid "Account:"
+msgstr "갯수"
 
-#, fuzzy
-#~ msgid "&Move                        F6"
-#~ msgstr "이동(&M)                   F6"
+msgid "ftpfs: sending user account"
+msgstr "ftpfs: 사용자 비밀번호 보냄"
 
-#, fuzzy
-#~ msgid "&Delete                      F8"
-#~ msgstr "지우기(&D)                 F8"
+msgid "ftpfs: logged in"
+msgstr "ftpfs: 로그 인"
 
-#, fuzzy
-#~ msgid "&Next bookmark              M-j"
-#~ msgstr "새 파일(&N)               C-n"
+#, c-format
+msgid "ftpfs: Login incorrect for user %s "
+msgstr "ftpfs: Login incorrect for user %s "
 
-#, fuzzy
-#~ msgid "&Undo                       C-u"
-#~ msgstr "취소(&U)                  C-u"
+msgid "ftpfs: Invalid host name."
+msgstr "ftpfs: 유효하지 않은 호스트 이름."
 
-#, fuzzy
-#~ msgid "&Beginning               C-PgUp"
-#~ msgstr "파일 처음(&B)          C-PgUp"
+#, c-format
+msgid "ftpfs: %s"
+msgstr "ftpfs: %s"
 
-#, fuzzy
-#~ msgid "&End                     C-PgDn"
-#~ msgstr "파일 끝(&E)            C-PgDn"
+#, c-format
+msgid "ftpfs: making connection to %s"
+msgstr "ftpfs: %s(으)로 연결 시도중"
 
-#, fuzzy
-#~ msgid "C&opy to clipfile           M-w"
-#~ msgstr "라인 찾아가기(&G)...      M-l"
+msgid "ftpfs: connection interrupted by user"
+msgstr "ftpfs: 사용자에 의해 연결 중단됨"
 
-#, fuzzy
-#~ msgid "C&ut to clipfile            C-w"
-#~ msgstr "라인 찾아가기(&G)...      M-l"
+#, c-format
+msgid "ftpfs: connection to server failed: %s"
+msgstr "ftpfs: 서버로 연결 실패: %s"
 
-#, fuzzy
-#~ msgid "Toggle bookmar&k               "
-#~ msgstr "마크 토글(&T)              F3"
+#, c-format
+msgid "Waiting to retry... %d (Control-C to cancel)"
+msgstr "재시도 기다림... %d (취소하려면 Control-C)"
 
-#, fuzzy
-#~ msgid "&Next bookmark                 "
-#~ msgstr "새 파일(&N)               C-n"
+msgid "ftpfs: invalid address family"
+msgstr "ftpfs: 유효하지 않은 호스트 주소."
 
-#, fuzzy
-#~ msgid "Pre&v bookmark                 "
-#~ msgstr "정렬(&t)                  M-t"
+msgid "ftpfs: could not setup passive mode: %s"
+msgstr "ftpfs: 수동 모드로 설정할 수 없습니다"
 
-#, fuzzy
-#~ msgid "&Flush bookmark                "
-#~ msgstr "전자우편(&M)...              "
+msgid "ftpfs: could not create socket: %s"
+msgstr " 소켓을 만들 수 없음: %s "
 
-#~ msgid "&Search...         F7"
-#~ msgstr "찾기(&S)...                F7"
+msgid "ftpfs: could not setup passive mode"
+msgstr "ftpfs: 수동 모드로 설정할 수 없습니다"
 
-#~ msgid "&Replace...        F4"
-#~ msgstr "바꾸기(&R)...              F4"
+msgid "ftpfs: aborting transfer."
+msgstr "ftpfs: 송신 중단됨."
 
-#~ msgid "&Go to line...            M-l"
-#~ msgstr "라인 찾아가기(&G)...      M-l"
+#, c-format
+msgid "ftpfs: abort error: %s"
+msgstr "ftpfs: 중단 에러: %s"
 
-#, fuzzy
-#~ msgid "Encod&ing...             M-e"
-#~ msgstr "정렬(&t)                  M-t"
+msgid "ftpfs: abort failed"
+msgstr "ftpfs: 중단 실패"
 
-#~ msgid "Delete macr&o...            "
-#~ msgstr "매크로 지우기(&o)...           "
+msgid "ftpfs: CWD failed."
+msgstr "ftpfs: CWD 실패."
 
-#~ msgid "Sor&t...                 M-t"
-#~ msgstr "정렬(&t)                  M-t"
+msgid "ftpfs: couldn't resolve symlink"
+msgstr "ftpfs: 심볼릭링크를 해석할 수 없습니다"
 
-#~ msgid "&Mail...                    "
-#~ msgstr "전자우편(&M)...              "
+msgid "Resolving symlink..."
+msgstr "심볼릭링크 해석..."
 
-#~ msgid "&Execute macro... C-x e, KEY"
-#~ msgstr "매크로 실행(&E)... C-x e, KEY"
+#, c-format
+msgid "ftpfs: Reading FTP directory %s... %s%s"
+msgstr "ftpfs: FTP 디렉토리 %s 읽는 중... %s%s"
 
-#~ msgid "'ispell' s&pell check    M-$"
-#~ msgstr "'ispell' 철자 검사(&p)    M-$"
+msgid "(strict rfc959)"
+msgstr "(strict rfc959)"
 
-#, fuzzy
-#~ msgid "Save setu&p"
-#~ msgstr "환경 저장(&S)"
+msgid "(chdir first)"
+msgstr "(chdir first)"
 
-#~ msgid " Edit "
-#~ msgstr " 편집 "
+msgid "ftpfs: failed; nowhere to fallback to"
+msgstr "ftpfs: 실패; nowhere to fallback to"
 
-#~ msgid " Sear/Repl "
-#~ msgstr " 찾기/바꿈 "
+#, c-format
+msgid "ftpfs: storing file %lu (%lu)"
+msgstr "ftpfs: 파일 %lu 저장 (%lu)"
 
-#~ msgid " Command "
-#~ msgstr " 명령 "
+msgid ""
+"~/.netrc file has incorrect mode.\n"
+"Remove password or correct mode."
+msgstr ""
+"~/.netrc 파일의 모드가 잘못되었습니다.\n"
+"비밀번호를 지우거나 모드를 고치십시오."
 
-#~ msgid " Options "
-#~ msgstr " 선택항목 "
+msgid " MCFS "
+msgstr " MCFS "
 
-#~ msgid "Intuitive"
-#~ msgstr "직관적"
+msgid " The server does not support this version "
+msgstr " 서버가 이 판번호을 지원하지 않습니다 "
 
-#~ msgid "Emacs"
-#~ msgstr "이맥스"
+msgid ""
+" The remote server is not running on a system port \n"
+" you need a password to log in, but the information may \n"
+" not be safe on the remote side.  Continue? \n"
+msgstr ""
+" 원격 서버가 시스템 포트를 사용하고 있지 않습니다 \n"
+" 로그인하려면 비밀번호가 필요합니다만 비밀번호의 사용은 \n"
+" 원격 서버쪽에서는 안전하지 않습니다. 계속할까요? \n"
 
-#, fuzzy
-#~ msgid "User-defined"
-#~ msgstr "사용자 정의(&U):"
+msgid " MCFS Password required "
+msgstr " MCFS 비밀번호 요구됨 "
 
-#~ msgid "Key emulation"
-#~ msgstr "글쇠 에뮬레이션"
+msgid " Invalid password "
+msgstr " 틀린 비밀번호 "
 
-#~ msgid "Save"
-#~ msgstr "저장"
+#, c-format
+msgid " Cannot locate hostname: %s "
+msgstr " 호스트 위치를 알 수 없음: %s "
 
-#~ msgid "Mark"
-#~ msgstr "선택"
+#, c-format
+msgid " Cannot create socket: %s "
+msgstr " 소켓을 만들 수 없음: %s "
 
-#~ msgid "Replac"
-#~ msgstr "바꿈"
+#, c-format
+msgid " Cannot connect to server: %s "
+msgstr " 서버로 연결할 수 없음: %s "
 
-#~ msgid "Delete"
-#~ msgstr "지우기"
+msgid " Too many open connections "
+msgstr " 너무 많은 연결이 이루어짐 "
 
-#~ msgid "PullDn"
-#~ msgstr "풀다운"
+#, c-format
+msgid ""
+"Warning: Invalid line in %s:\n"
+"%s\n"
+msgstr ""
+"경고: %s에 잘못된 라인:\n"
+"%s\n"
 
-#~ msgid " Copy "
-#~ msgstr " 복사 "
+#, c-format
+msgid ""
+"Warning: Invalid flag %c in %s:\n"
+"%s\n"
+msgstr ""
+"경고: 잘못된 플래그 %c이(가) %s에 있음:\n"
+"%s\n"
 
-#~ msgid " Move "
-#~ msgstr " 이동 "
+#, c-format
+msgid ""
+" reconnect to %s failed\n"
+" "
+msgstr ""
+" %s로의 재연결 실패\n"
+" "
 
-#~ msgid " Delete "
-#~ msgstr " 지우기 "
+msgid " Authentication failed "
+msgstr " 인증 실패 "
 
-#~ msgid "1Copy"
-#~ msgstr "1Copy"
+#, c-format
+msgid " Error %s creating directory %s "
+msgstr ""
 
-#~ msgid "1Move"
-#~ msgstr "1Move"
+#, c-format
+msgid " Error %s removing directory %s "
+msgstr ""
 
-#~ msgid "1Delete"
-#~ msgstr "1Delete"
+#, c-format
+msgid " %s opening remote file %s "
+msgstr ""
 
-#~ msgid "Index"
-#~ msgstr "색인"
+#, c-format
+msgid " %s removing remote file %s "
+msgstr ""
 
-#~ msgid "Prev"
-#~ msgstr "이전"
+#, c-format
+msgid " %s renaming files\n"
+msgstr " %s 파일이름 바꾸는 중\n"
 
-#~ msgid "&Quick view     C-x q"
-#~ msgstr "빠르게 보기(&Q)        C-x q"
+#, c-format
+msgid ""
+"Cannot open tar archive\n"
+"%s"
+msgstr ""
+"tar 아카이브를 열 수 없습니다\n"
+"%s"
 
-#~ msgid "&Info           C-x i"
-#~ msgstr "정보(&I)               C-x i"
+msgid "Inconsistent tar archive"
+msgstr "잘못된 테잎 아카이브"
 
-#~ msgid "&Rescan         C-r"
-#~ msgstr "다시 읽기(&R)            C-r"
-
-#~ msgid "&View               F3"
-#~ msgstr "보기(&V)                   F3"
-
-#~ msgid "Vie&w file...         "
-#~ msgstr "파일 보기(&w)...      "
-
-#~ msgid "&Filtered view     M-!"
-#~ msgstr "필터로 보기(&F)           M-!"
-
-#~ msgid "&Edit               F4"
-#~ msgstr "편집(&E)                   F4"
-
-#~ msgid "&Copy               F5"
-#~ msgstr "복사(&C)                   F5"
-
-#~ msgid "c&Hmod           C-x c"
-#~ msgstr "파일 모드 바꾸기(&H)    C-x c"
-
-#~ msgid "&Link            C-x l"
-#~ msgstr "링크(&L)                C-x l"
-
-#~ msgid "&SymLink         C-x s"
-#~ msgstr "심볼릭링크(&S)          C-x s"
-
-#~ msgid "edit s&Ymlink  C-x C-s"
-#~ msgstr "심볼릭링크 수정(&Y)   C-x C-s"
-
-#~ msgid "ch&Own           C-x o"
-#~ msgstr "소유자 바꾸기(&O)       C-x o"
-
-#~ msgid "&Rename/Move        F6"
-#~ msgstr "바꾸기/이동(&R)            F6"
-
-#~ msgid "&Mkdir              F7"
-#~ msgstr "디렉토리 생성(&M)            F7"
-
-#~ msgid "&Delete             F8"
-#~ msgstr "지우기(&D)                 F8"
-
-#~ msgid "&Quick cd          M-c"
-#~ msgstr "디렉토리 빨리 바꾸기(&Q)    M-c"
-
-#~ msgid "select &Group      M-+"
-#~ msgstr "집단선택(&G)              M-+"
-
-#~ msgid "u&Nselect group    M-\\"
-#~ msgstr "집단선택 해제(&N)         M-\\"
-
-#~ msgid "e&Xit              F10"
-#~ msgstr "끝내기(&X)                F10"
-
-#~ msgid "&User menu          F2"
-#~ msgstr "사용자 메뉴(&U)            F2"
-
-#~ msgid "&Find file            M-?"
-#~ msgstr "파일 찾기(&F)              M-?"
-
-#~ msgid "s&Wap panels          C-u"
-#~ msgstr "패널 바꾸기(&W)            C-u"
-
-#~ msgid "&Compare directories  C-x d"
-#~ msgstr "디렉토리 비교(&C)          C-x d"
-
-#~ msgid "e&Xternal panelize    C-x !"
-#~ msgstr "외부명령 패널화하기(&X)  C-x !"
-
-#, fuzzy
-#~ msgid "Command &history      M-h"
-#~ msgstr " 명령 히스토리 "
-
-#~ msgid "di&Rectory hotlist    C-\\"
-#~ msgstr "디렉토리 단축목록(&R)        C-\\"
-
-#~ msgid "&Background jobs      C-x j"
-#~ msgstr "백그라운드 jobs(&B)      C-x j"
+msgid "Unexpected EOF on archive file"
+msgstr "Unexpected EOF on archive file"
 
 #~ msgid "learn &Keys..."
 #~ msgstr "글쇠 배우기(&K)..."
-
 #~ msgid " &File "
 #~ msgstr " 파일(&F) "
-
 #~ msgid " &Command "
 #~ msgstr " 명령(&C) "
-
 #~ msgid "Menu"
 #~ msgstr "메뉴"
-
-#, fuzzy
 #~ msgid "n"
 #~ msgstr "On"
-
-#, fuzzy
 #~ msgid "Extension"
 #~ msgstr "확장자:"
-
 #~ msgid "Size"
 #~ msgstr "크기"
-
 #~ msgid "MTime"
 #~ msgstr "MTime"
-
 #~ msgid "ATime"
 #~ msgstr "ATime"
-
 #~ msgid "CTime"
 #~ msgstr "CTime"
-
 #~ msgid "Inode"
 #~ msgstr "Inode"
-
 #~ msgid "RenMov"
 #~ msgstr "RenMov"
-
 #~ msgid "Static"
 #~ msgstr "Static"
-
 #~ msgid "Dynamc"
 #~ msgstr "Dynamc"
-
 #~ msgid "Forget"
 #~ msgstr "Forget"
-
 #~ msgid "Rmdir"
 #~ msgstr "Rmdir"
-
-#, fuzzy
 #~ msgid "bind: Unknown command: `%s'"
 #~ msgstr " Chown 명령 "
-
-#, fuzzy
 #~ msgid "%s: Unknown command: `%s'"
 #~ msgstr " Chown 명령 "
-
-#, fuzzy
 #~ msgid "%s:%d: unknown command `%s'"
 #~ msgstr " Chown 명령 "
-
-#, fuzzy
 #~ msgid "%s not found!"
 #~ msgstr "경고: 파일 %s을(를) 찾을 수 없습니다\n"
-
 #~ msgid "NumLock on keypad"
 #~ msgstr "NumLock on keypad"
-
 #~ msgid " Emacs key: "
 #~ msgstr " Emacs 글쇠: "
-
 #~ msgid " %d items found, %d bookmarks added "
 #~ msgstr " %d이(가) 찾아짐, %d 책갈피 더함 "
-
 #~ msgid "Displays this help message"
 #~ msgstr "이 도움말 보여주기"
-
 #~ msgid "Displays a help screen on how to change the color scheme"
 #~ msgstr "컬러를 어떻게 바꿀 수 있는 지 도움말 화면 출력"
-
 #~ msgid "unknown option"
 #~ msgstr "모르는 옵션"
-
 #~ msgid "Show this help message"
 #~ msgstr "이 도움말 보여주기"
-
 #~ msgid "Display brief usage message"
 #~ msgstr "간단한 사용 메시지 출력"
-
 #~ msgid "ARG"
 #~ msgstr "ARG"
-
 #~ msgid "Usage:"
 #~ msgstr "사용법:"
-
 #~ msgid "pro&Mpt on replace"
 #~ msgstr "바꿀 때마다 물어봄(&O)"
-
 #~ msgid "replace &All"
 #~ msgstr "모두 바꿈(&A)"
-
 #~ msgid "O&ne"
 #~ msgstr "하나(&n)"
-
-#, fuzzy
 #~ msgid "%b %d %H:%M"
 #~ msgstr "%b %e %H:%M"
-
-#, fuzzy
 #~ msgid "%b %d %Y"
 #~ msgstr "%b %e  %Y"
-
-#, fuzzy
 #~ msgid " The current address is 0x%08"
 #~ msgstr ""
 #~ " 현재 주소는 0x%lx입니다.\n"
 #~ " 새로운 주소 입력:"
-
 #~ msgid "scanf &Expression"
 #~ msgstr "scanf 표현(&E)"
-
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr " 인자 순서 입력 (가령: 3,2,1,4): "
-
 #~ msgid ""
 #~ " Invalid regular expression, or scanf expression with too many "
 #~ "conversions "
 #~ msgstr " 이상한 정규표현식 혹은 너무 많이 바꿔야 하는 scanf 표현 "
-
 #~ msgid " Error in replacement format string. "
 #~ msgstr " 바꿀 형식 문자열 에러. "
-
-#, fuzzy
 #~ msgid " Replacement too long. "
 #~ msgstr " 바꿀 글월 입력:"
-
 #~ msgid "&Copy              F5"
 #~ msgstr "복사(&C)                   F5"
-
 #~ msgid "&Delete            F8"
 #~ msgstr "지우기(&D)                 F8"
-
 #~ msgid " The command history is empty "
 #~ msgstr " 명령 히스토리가 비었습니다 "
-
 #~ msgid "Edit edi&tor menu file"
 #~ msgstr "편집기 메뉴 파일 편집(&t)"
-
 #~ msgid "Edit &syntax file"
 #~ msgstr "구문 파일 편집(&s) "
-
 #~ msgid ""
 #~ "To use this feature select your codepage in\n"
 #~ "Setup / Display Bits dialog!\n"
@@ -4354,49 +3729,34 @@ msgstr "Background 프로세스:"
 #~ "이 기능을 사용하려면 선택항목 / 출력비트\n"
 #~ "대화상자에서 코드페이지를 선택하세요!\n"
 #~ "옵션 저장하는 거 잊지마세요."
-
 #~ msgid "Invalid hex search expression"
 #~ msgstr " 알 수 없는 hex 찾기 표현식 "
-
 #~ msgid " Invalid regular expression "
 #~ msgstr " 알 수 없는 정규 표현식 "
-
 #~ msgid " Enter regexp:"
 #~ msgstr " 정규표현식 입력:"
-
 #~ msgid "Using included S-Lang library"
 #~ msgstr "내장된 S-Lang 라이브러리 사용"
-
 #~ msgid "with termcap database"
 #~ msgstr "termcap 데이타베이스 사용"
-
 #~ msgid "&Home"
 #~ msgstr "홈(&H)"
-
 #~ msgid "&Type"
 #~ msgstr "&Type"
-
 #~ msgid "N&GID"
 #~ msgstr "N&GID"
-
 #~ msgid "N&UID"
 #~ msgstr "N&UID"
-
 #~ msgid "&Owner"
 #~ msgstr "소유자(&O)"
-
 #~ msgid "&Group"
 #~ msgstr "집단(&G)"
-
 #~ msgid "MC was unable to write ~/"
 #~ msgstr "MC was unable to write ~/"
-
 #~ msgid " (%ld blocks)"
 #~ msgstr " (%ld 구역)"
-
 #~ msgid " Notice "
 #~ msgstr " Notice "
-
 #~ msgid ""
 #~ " The Midnight Commander configuration files \n"
 #~ " are now stored in the ~/.mc directory, the \n"
@@ -4405,19 +3765,14 @@ msgstr "Background 프로세스:"
 #~ " The Midnight Commander 환경설정 파일은 이제 ~/mc \n"
 #~ " 디렉토리에 저장됩니다. 모든 파일이 그쪽 \n"
 #~ " 으로 옮겨졌습니다.\n"
-
 #~ msgid "%s bytes in %d files"
 #~ msgstr "%s bytes in %d files"
-
 #~ msgid " Cannot open file for reading: "
 #~ msgstr " 읽을 파일 열기 실패: "
-
 #~ msgid " Not an ordinary file: "
 #~ msgstr " 일반 파일 아님: "
-
 #~ msgid "Format of the "
 #~ msgstr "Format of the "
-
 #~ msgid ""
 #~ " file has changed\n"
 #~ "with version 3.0. You may want either to\n"
@@ -4426,77 +3781,56 @@ msgstr "Background 프로세스:"
 #~ " file has changed\n"
 #~ "with version 3.0. You may want either to\n"
 #~ "copy it from "
-
 #~ msgid ""
 #~ "mc.ext or use that\n"
 #~ "file as an example of how to write it.\n"
 #~ msgstr ""
 #~ "mc.ext를 그대로 사용하거나\n"
 #~ "이 파일을 수정해서 사용하십시오.\n"
-
 #~ msgid "mc.ext will be used for this moment."
 #~ msgstr "지금은 mc.ext를 사용하실 수 있습니다."
-
 #~ msgid " Cannot open file "
 #~ msgstr " 파일을 열 수 없습니다 "
-
 #~ msgid "Col %d"
 #~ msgstr "Col %d"
-
 #~ msgid "  [grow]"
 #~ msgstr "  [grow]"
-
 #~ msgid "Ascii"
 #~ msgstr "아스키"
-
 #~ msgid "Hex"
 #~ msgstr "십육진"
-
+#~ msgid "Goto"
+#~ msgstr "Goto"
 #~ msgid "Line"
 #~ msgstr "줄"
-
 #~ msgid "RxSrch"
 #~ msgstr "RxSrch"
-
 #~ msgid "EdHex"
 #~ msgstr "EdHex"
-
 #~ msgid "EdText"
 #~ msgstr "EdText"
-
 #~ msgid "UnWrap"
 #~ msgstr "UnWrap"
-
 #~ msgid "Wrap"
 #~ msgstr "Wrap"
-
 #~ msgid "HxSrch"
 #~ msgstr "HxSrch"
-
 #~ msgid "Raw"
 #~ msgstr "Raw"
-
 #~ msgid "Parse"
 #~ msgstr "Parse"
-
 #~ msgid "Unform"
 #~ msgstr "Unform"
-
 #~ msgid "User menu available only in mcedit invoked from mc"
 #~ msgstr "사용자 메뉴는 mcedit이 mc에 의해 불려진 경우에만 사용가능합니다"
-
 #~ msgid " Socket source routing setup "
 #~ msgstr " 소켓 소스 라우팅 설정 "
-
 #~ msgid " Enter host name to use as a source routing hop: "
 #~ msgstr " 원천 라우팅 홉을 사용하기 위한 호스트 이름: "
-
 #~ msgid " Host name "
 #~ msgstr " 호스트 이름 "
-
 #~ msgid " Error while looking up IP address "
 #~ msgstr " IP 주소 찾는 중 오류 발생 "
-
 #~ msgid ""
 #~ "\n"
 #~ "\n"
@@ -4511,24 +3845,18 @@ msgstr "Background 프로세스:"
 #~ "재생 스택 아래넘침\n"
 #~ "\n"
 #~ "\n"
-
 #~ msgid " Listing format edit "
 #~ msgstr " 목록 형식 편집 "
-
 #~ msgid " New mode is \"%s\" "
 #~ msgstr " 새 모드는 \"%s\"입니다 "
-
 #~ msgid "&Drive...       M-d"
 #~ msgstr "드라이브(&D)...          M-d"
-
 #~ msgid "Use to debug the background code"
-#~ msgstr "백그라운드 코드를 디버깅할 때 사용"
-
+#~ msgstr "배경 코드를 디버깅할 때 사용"
 #~ msgid "Force subshell execution"
 #~ msgstr "무조건 subshell 실행"
-
 #~ msgid " No action taken "
 #~ msgstr " No action taken "
-
 #~ msgid " Cannot set source routing (%s)"
 #~ msgstr " 소스 라우팅(%s)을 설정할 수 없습니다"
+
