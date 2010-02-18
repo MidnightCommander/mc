@@ -11,10 +11,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.7.0\n"
+"Project-Id-Version: mc 4.7.0.2\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
 "POT-Creation-Date: 2010-02-09 12:08+0200\n"
-"PO-Revision-Date: 2009-12-29 12:11+0100\n"
+"PO-Revision-Date: 2010-02-18 18:24+0100\n"
 "Last-Translator: Martin Zoubek <zoubek@seznam.cz>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -1050,7 +1050,7 @@ msgid "&OK"
 msgstr "&OK"
 
 msgid "&Reverse"
-msgstr "&Pozpátku"
+msgstr "Po&zpátku"
 
 msgid "Case sensi&tive"
 msgstr "Všímat si velikos&ti písmen"
@@ -1876,44 +1876,36 @@ msgstr "&Konec"
 msgid "&Undo"
 msgstr "&Zpět"
 
-#, fuzzy
 msgid "&Toggle ins/overw"
 msgstr "Přepnout &vkládání/přepis"
 
-#, fuzzy
 msgid "To&ggle mark"
 msgstr "&Přepnout označení"
 
 msgid "&Mark columns"
 msgstr "&Označit sloupce"
 
-#, fuzzy
 msgid "Mark &all"
-msgstr "&Nastavit vše na označených souborech"
+msgstr "Ozn&ačit vše"
 
 msgid "Unmar&k"
-msgstr ""
+msgstr "Zr&ušit označení"
 
-#, fuzzy
 msgid "Cop&y"
 msgstr "&Kopírovat"
 
-#, fuzzy
 msgid "Mo&ve"
 msgstr "&Přesun"
 
 msgid "&Delete"
 msgstr "&Smazat"
 
-#, fuzzy
 msgid "Co&py to clipfile"
 msgstr "&Zkopírovat do ústřižku"
 
-#, fuzzy
 msgid "&Cut to clipfile"
 msgstr "&Vyjmout do ústřižku"
 
-#, fuzzy
 msgid "Pa&ste from clipfile"
 msgstr "V&ložit z ústřižku"
 
@@ -1932,14 +1924,12 @@ msgstr "Hledat &znovu"
 msgid "&Replace..."
 msgstr "&Nahradit..."
 
-#, fuzzy
 msgid "&Toggle bookmark"
 msgstr "Přepnout zá&ložku"
 
 msgid "&Next bookmark"
 msgstr "&Další záložka"
 
-#, fuzzy
 msgid "&Prev bookmark"
 msgstr "&Předchozí záložka"
 
@@ -1949,27 +1939,23 @@ msgstr "&Zrušit záložku"
 msgid "&Go to line..."
 msgstr "&Jdi na řádek..."
 
-#, fuzzy
 msgid "&Toggle line state"
 msgstr "Přepnout &zobrazení řádků"
 
 msgid "Go to matching &bracket"
 msgstr "Přejít na pá&rovou závorku"
 
-#, fuzzy
 msgid "&Find declaration"
 msgstr "Najít deklaraci"
 
-#, fuzzy
 msgid "Back from &declaration"
 msgstr "Zpět z deklarace"
 
-#, fuzzy
 msgid "For&ward to declaration"
 msgstr "Přejít k deklaraci"
 
 msgid "Encod&ing..."
-msgstr "&Kódování"
+msgstr "&Kódování..."
 
 msgid "&Refresh screen"
 msgstr "&Obnovit obrazovku"
@@ -1977,7 +1963,6 @@ msgstr "&Obnovit obrazovku"
 msgid "&Start record macro"
 msgstr "Z&ačít zaznamenávat makro"
 
-#, fuzzy
 msgid "Finis&h record macro..."
 msgstr "&Ukončit záznam makra..."
 
@@ -1999,19 +1984,15 @@ msgstr "Vložit &znak..."
 msgid "Insert &date/time"
 msgstr "Vložit &datum/čas"
 
-#, fuzzy
 msgid "&Format paragraph"
 msgstr "Pře&formátovat odstavec"
 
-#, fuzzy
 msgid "&Sort..."
 msgstr "&Pořadí..."
 
-#, fuzzy
 msgid "&Paste output of..."
 msgstr "Vložit &výstup..."
 
-#, fuzzy
 msgid "&External formatter"
 msgstr "E&xterní formátovač"
 
@@ -2710,10 +2691,10 @@ msgid "&Find recursively"
 msgstr "Najít re&kurzivně"
 
 msgid "S&kip hidden"
-msgstr "Přes&kočit skryté"
+msgstr "Přeskočit skr&yté"
 
 msgid "&All charsets"
-msgstr "Všechny &znakové sady"
+msgstr "Všechny z&nakové sady"
 
 msgid "Case sens&itive"
 msgstr "Všímat si velikos&ti písmen"
@@ -2725,7 +2706,7 @@ msgid "Fir&st hit"
 msgstr "&První výskyt"
 
 msgid "All cha&rsets"
-msgstr "Všechny &znakové sady"
+msgstr "Všechny z&nakové sady"
 
 msgid "&Tree"
 msgstr "&Strom"
@@ -3119,10 +3100,10 @@ msgid "&View"
 msgstr "&Prohlížet"
 
 msgid "Vie&w file..."
-msgstr " Pro&hlížet soubor "
+msgstr "Pro&hlížet soubor..."
 
 msgid "&Filtered view"
-msgstr " &Filtrovaný pohled "
+msgstr "&Filtrovaný pohled"
 
 msgid "&Copy"
 msgstr "&Kopírovat"
@@ -3527,7 +3508,7 @@ msgid "Choose codepage"
 msgstr "Zvolte znakovou sadu"
 
 msgid "-  < No translation >"
-msgstr "- < Bez převodu >"
+msgstr "-  < Bez převodu >"
 
 #, c-format
 msgid ""
