@@ -218,8 +218,9 @@ ftpfs_translate_path (struct vfs_class *me, struct vfs_s_super *super, const cha
 	ret = g_strdup (remote_path);
 
 	/* replace first occurance of ":/" with ":" */
-	if ((p = strchr (ret, ':')) && *(p + 1) == '/')
-	    strcpy (p + 1, p + 2);
+	p = strchr (ret, ':');
+	if ((p != NULL) && (*(p + 1) == '/'))
+	    memmove (p + 1, p + 2, strlen (p + 2) + 1);
 
 	/* strip trailing "/." */
 	if ((p = strrchr (ret, '/')) && *(p + 1) == '.' && *(p + 2) == '\0')
