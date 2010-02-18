@@ -2199,6 +2199,7 @@ do_search (WPanel *panel, int c_code)
     char *act;
     mc_search_t *search;
     char *reg_exp;
+    gboolean is_found = FALSE;
 
     l = strlen (panel->search_buffer);
     if (c_code == KEY_BACKSPACE) {
@@ -2249,8 +2250,19 @@ do_search (WPanel *panel, int c_code)
         if (mc_search_run (search, panel->dir.list[i].fname,
                            0, panel->dir.list[i].fnamelen, NULL)) {
             sel = i;
+            is_found = TRUE;
             break;
 	}
+    }
+    if (! is_found) {
+        if (c_code != KEY_BACKSPACE) {
+            act = panel->search_buffer + l;
+            str_prev_noncomb_char (&act, panel->search_buffer);
+            act[0] = '\0';
+        }
+        mc_search_free (search);
+        g_free (reg_exp);
+        return;
     }
     
 	    unselect_item (panel);
