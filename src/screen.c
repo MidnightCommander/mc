@@ -2193,10 +2193,12 @@ mark_file (WPanel *panel)
 static void
 do_search (WPanel *panel, int c_code)
 {
-    size_t l, max, buf_max;
+    size_t l;
     int i, sel;
     int wrapped = 0;
     char *act;
+    mc_search_t *search;
+    char *reg_exp;
 
     l = strlen (panel->search_buffer);
     if (c_code == KEY_BACKSPACE) {
@@ -2230,11 +2232,12 @@ do_search (WPanel *panel, int c_code)
 	   }
 	}
     }
+    reg_exp = g_strdup_printf ("%s*", panel->search_buffer);
+    search = mc_search_new (reg_exp, -1);
+    search->search_type = MC_SEARCH_T_GLOB;
+    search->is_entire_line = TRUE;
+    search->is_case_sentitive = 0;
 
-    buf_max = panel->case_sensitive ? 
-            str_prefix (panel->search_buffer, panel->search_buffer) :
-            str_caseprefix (panel->search_buffer, panel->search_buffer);
-    max = 0;
     sel = panel->selected;
     for (i = panel->selected; !wrapped || i != panel->selected; i++) {
 	if (i >= panel->count) {
@@ -2243,13 +2246,10 @@ do_search (WPanel *panel, int c_code)
 		break;
 	    wrapped = 1;
 	}
-        l = panel->case_sensitive ? 
-            str_prefix (panel->dir.list[i].fname, panel->search_buffer) :
-            str_caseprefix (panel->dir.list[i].fname, panel->search_buffer);
-        if (l > max) {
-            max = l;
+        if (mc_search_run (search, panel->dir.list[i].fname,
+                           0, panel->dir.list[i].fnamelen, NULL)) {
             sel = i;
-            if (max == buf_max) break;
+            break;
 	}
     }
     
@@ -2258,15 +2258,11 @@ do_search (WPanel *panel, int c_code)
 	    select_item (panel);
     
     act = panel->search_buffer + strlen (panel->search_buffer);
-    while (max < buf_max) {
-        str_prev_char_safe (&act);
-        act[0] = '\0';
-        buf_max = panel->case_sensitive ? 
-            str_prefix (panel->search_buffer, panel->search_buffer) :
-            str_caseprefix (panel->search_buffer, panel->search_buffer);
-    }
-
+    select_item (panel);
     paint_panel (panel);
+    mc_search_free (search);
+    g_free (reg_exp);
+
 }
 
 static void
