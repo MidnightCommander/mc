@@ -1019,7 +1019,10 @@ void edit_symlink_cmd (void)
 
 void help_cmd (void)
 {
-   interactive_display (NULL, "[main]");
+    if (current_panel->searching)
+       interactive_display (NULL, "[Quick search]");
+    else
+       interactive_display (NULL, "[main]");
 }
 
 void
