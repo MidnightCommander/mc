@@ -1,6 +1,6 @@
+# 
 msgid ""
 msgstr ""
-"ftpfs: 파일 %lu 저장 (%lu)\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
@@ -9,6 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"ftpfs: 파일 %lu 저장 (%lu)\n"
 
 msgid " Choose syntax highlighting "
 msgstr "구문 강조를 선택하세요"
@@ -17,10 +18,10 @@ msgid "< Auto >"
 msgstr "< 자동 > "
 
 msgid "< Reload Current Syntax >"
-msgstr "< 현재 구문 새로 고침 >"
+msgstr "<현재 구문 새로 고침>"
 
 msgid " Cannot open %s for reading "
-msgstr " 읽을 파이프 열기 실패: "
+msgstr " %s 읽는 중  열 수 없습니다."
 
 msgid "Error"
 msgstr "에러"
@@ -35,10 +36,10 @@ msgid " Cannot get size/permissions for %s "
 msgstr " 파일 크기/허용 정보 얻기 실패: "
 
 msgid " %s is not a regular file "
-msgstr " 일반파일이 아니라 볼 수 없습니다 "
+msgstr "%s 일반파일이 아닙니다."
 
 msgid " File %s is too large "
-msgstr " 파일 크기가 너무 큼: "
+msgstr "%s 파일 크기가 너무 큼니다."
 
 msgid " About "
 msgstr " 이 프로그램은 "
@@ -70,13 +71,13 @@ msgid "Search"
 msgstr "찾기"
 
 msgid " Search string not found "
-msgstr " 글월을 찾을 수 없군요 "
+msgstr "글월을 찾을 수 없군요 "
 
 msgid "Warning"
 msgstr "경고"
 
 msgid " File has hard-links. Detach before saving? "
-msgstr "파일에 하드링크가 있습니다. 분리를 저장하겠습니까?"
+msgstr "분리를 저장하기 전에 파일을 하드-링크했습니다"
 
 msgid "&Yes"
 msgstr "예(&Y)"
@@ -88,16 +89,16 @@ msgid "&Cancel"
 msgstr "취소(&C)"
 
 msgid "The file has been modified in the meantime. Save anyway?"
-msgstr "파일이 외부 프로그램에 의해 변경되었습니다. 어째든 저장?"
+msgstr "파일이  어쨋든 수정되었습니다. 어쨌든 저장하겠습니까?"
 
 msgid " Error writing to pipe: "
-msgstr " 파이프 쓰기 에러: "
+msgstr "파이프 쓰기 에러: "
 
 msgid " Cannot open pipe for writing: "
-msgstr " 쓰기위한 파이프 열기 실패: "
+msgstr "쓰기 위한 파이프 열기 실패: "
 
 msgid " Cannot open file for writing: %s "
-msgstr " 쓰기위한 파이프 열기 실패: %s"
+msgstr "쓰기 위한 파이프 열기 실패: %s"
 
 msgid "&Quick save"
 msgstr "빠른 저장(&Q)"
@@ -106,22 +107,22 @@ msgid "&Safe save"
 msgstr "안전한 저장(&S)"
 
 msgid "&Do backups with following extension:"
-msgstr "확장명이 다음과 같으면 백업하지 않음:"
+msgstr "확장명을 다음과 같이 백업하지 않음(&D) :"
 
 msgid "Check &POSIX new line"
-msgstr "POSIX의 새로운 라인 체크(&P)"
+msgstr "체크 POSIX의 새로운 라인(&P)"
 
 msgid " Edit Save Mode "
-msgstr " 편집 저장 모드 "
+msgstr "편집 저장 모드 "
 
 msgid "The file you are saving is not finished with a newline"
-msgstr "당신은 새라인과 끝내지 않은 파일을 저장 중입니다."
+msgstr "줄 바꿈과 완료되지 않은 파일을 저장 중 입니다."
 
 msgid "C&ontinue"
 msgstr "계속(&o)"
 
 msgid "&Do not change"
-msgstr "변경 불가(&D)"
+msgstr "변경하지 마십시오(&D)"
 
 msgid "&Unix format (LF)"
 msgstr "유닉스 포멧(&U) (LF)"
@@ -133,16 +134,16 @@ msgid "&Macintosh format (CR)"
 msgstr "메캔토시 포멧(&M) (CR)"
 
 msgid "Change line breaks to:"
-msgstr "깨진 선 변경:"
+msgstr "깨진 라인 변경:"
 
 msgid " Enter file name: "
-msgstr " 파일명 입력: "
+msgstr "파일명 입력: "
 
 msgid " Save As "
-msgstr " 새이름으로 저장 "
+msgstr "새이름으로 저장 "
 
 msgid " A file already exists with this name. "
-msgstr " 같은 이름의 파일이 이미 있습니다. "
+msgstr "같은 이름의 파일이 이미 있습니다. "
 
 msgid "&Overwrite"
 msgstr "겹쳐쓰기(&O)"
@@ -154,28 +155,28 @@ msgid " Delete macro "
 msgstr "매크로 지우기"
 
 msgid " Cannot open temp file "
-msgstr " 임시 파일을 열 수 없습니다 "
+msgstr "임시 파일을 열 수 없습니다 "
 
 msgid " Cannot open macro file "
-msgstr " 매크로 파일을 열 수 없습니다 "
+msgstr "매크로 파일을 열 수 없습니다 "
 
 msgid " Cannot overwrite macro file "
-msgstr " 매크로 파일을 겹쳐쓸 수 없습니다 "
+msgstr "매크로 파일을 겹쳐쓸 수 없습니다 "
 
 msgid " Save macro "
 msgstr "매크로 저장"
 
 msgid " Press the macro's new hotkey: "
-msgstr " 새로운 매크로 단축글쇠를 누르십시오: "
+msgstr "새로운 매크로 단축글쇠를 누르십시오: "
 
 msgid " Press macro hotkey: "
-msgstr " 매크로 단축글쇠를 누르십시오: "
+msgstr "매크로 단축글쇠를 누르십시오: "
 
 msgid " Load macro "
 msgstr "매크로 불러오기"
 
 msgid " Confirm save file? : "
-msgstr " 저장하시겠습니까? "
+msgstr "저장하시겠습니까? "
 
 msgid " Save file "
 msgstr "파일 저장"
@@ -187,14 +188,14 @@ msgid ""
 " Current text was modified without a file save. \n"
 " Continue discards these changes. "
 msgstr ""
-" 파일이 바뀌었습니다. \n"
-" 저장 않하고 계속하실 겁니까? "
+"파일이 바뀌었습니다. \n"
+" 저장 안하고 계속하실 겁니까? "
 
 msgid "Syntax file edit"
 msgstr "문법 파일 수정(&M)"
 
 msgid " Which syntax file you want to edit? "
-msgstr " 수정하기를 원하는 문법 파일은? "
+msgstr "수정하기를 원하는 문법 파일은? "
 
 msgid "&User"
 msgstr "사용자(&U)"
@@ -203,10 +204,10 @@ msgid "&System Wide"
 msgstr "체계 전체(&S)"
 
 msgid " Menu edit "
-msgstr " 메뉴 편집 "
+msgstr "메뉴 편집 "
 
 msgid " Which menu file do you want to edit? "
-msgstr " 어떤 메뉴 파일을 편집하고 싶으세요? "
+msgstr "어떤 메뉴 파일을 편집하고 싶으세요? "
 
 msgid "&Local"
 msgstr "로컬(&L)"
@@ -221,17 +222,17 @@ msgid "Replace"
 msgstr "바꿈(&R)"
 
 msgid " Replace "
-msgstr " 바꿈 "
+msgstr "바꿈 "
 
 #, c-format
 msgid " %ld replacements made. "
-msgstr " %ld 개가 바뀌었습니다. "
+msgstr "%ld 개가 바뀌었습니다. "
 
 msgid "Quit"
 msgstr "끝내기"
 
 msgid " File was modified, Save with exit? "
-msgstr " 파일이 바뀌었는 데, 저장하고 끝낼까요? "
+msgstr "파일이 바뀌었는 데, 저장하고 끝낼까요? "
 
 msgid "&Cancel quit"
 msgstr "끝내기 취소(&C)"
@@ -243,13 +244,13 @@ msgid " This function is not implemented. "
 msgstr "이 기능은 구현되지 않습니다."
 
 msgid " Copy to clipboard "
-msgstr " 클립보드로 복사하기 "
+msgstr "클립보드로 복사하기 "
 
 msgid " Unable to save to file. "
-msgstr " 파일 저장 실패. "
+msgstr "파일 저장 실패. "
 
 msgid " Cut to clipboard "
-msgstr " 클립보드로 오려두기 "
+msgstr "클립보드로 오려두기 "
 
 msgid " Goto line "
 msgstr "줄찾기"
@@ -276,7 +277,7 @@ msgid " Run Sort "
 msgstr "정렬 시작"
 
 msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr " 공백문자로 구분된 정렬 선택항목 입력: "
+msgstr "공백문자로 구분된 정렬 선택 항목 입력: "
 
 msgid " Sort "
 msgstr "정렬"
@@ -285,19 +286,19 @@ msgid " Cannot execute sort command "
 msgstr " 정렬 명령을 실행할 수 없습니다 "
 
 msgid " Sort returned non-zero: "
-msgstr " 정렬이 0아닌 값을 리턴했습니다: "
+msgstr "정렬이 0아닌 값을 리턴했습니다: "
 
 msgid "Paste output of external command"
-msgstr "외부 명령에 출력 붙여넣기"
+msgstr "외부 명령의 출력 붙여넣기"
 
 msgid "Enter shell command(s):"
-msgstr " 명령어 꼬리표 입력: "
+msgstr "명령어 꼬리표 입력: "
 
 msgid "External command"
 msgstr "기타 명령어"
 
 msgid "Cannot execute command"
-msgstr " 정렬 명령을 실행할 수 없습니다 "
+msgstr "정렬 명령을 실행할 수 없습니다 "
 
 msgid "Error creating script:"
 msgstr "스크립트 생성 에러:"
@@ -315,7 +316,7 @@ msgid "Process block"
 msgstr "Process block"
 
 msgid " Copies to"
-msgstr " Copies to"
+msgstr "Copies to"
 
 msgid " Subject"
 msgstr "제목"
@@ -389,9 +390,9 @@ msgid ""
 "User: %s\n"
 "Process ID: %d"
 msgstr ""
-"파일 \"%s\" 이미 편집되고 있습니다.\n"
-"사용자: %s\n"
-"프로세스 ID: %d"
+"파일 \\ \"%s \"는 이미 편집되고있습니다 \n"
+"사용자 : %s을 \n"
+"프로세스 ID : %d 개"
 
 msgid "File locked"
 msgstr "파일 잠금"
@@ -529,7 +530,7 @@ msgid "Back from &declaration"
 msgstr "위로부터 선언(&d)"
 
 msgid "For&ward to declaration"
-msgstr "앞으로  선언(&w)"
+msgstr "앞으로부터 선언(&w) "
 
 msgid "Encod&ing..."
 msgstr "인코딩(&i)"
@@ -622,13 +623,13 @@ msgid "Dynamic paragraphing"
 msgstr "동적 단락 만들기"
 
 msgid "Type writer wrap"
-msgstr "쓰기 타입 유형"
+msgstr "랩 쓰기 유형"
 
 msgid "Word wrap line length: "
-msgstr "워드랩 줄의 최대 길이:"
+msgstr "워드 랩 줄의 최대 길이 :"
 
 msgid "Cursor beyond end of line"
-msgstr "커서를 선의 끝을 넘어"
+msgstr "끝을 넘은 커서의 선"
 
 msgid "Pers&istent selection"
 msgstr "선택 반전(&i)"
@@ -700,19 +701,19 @@ msgid "ButtonBar|Quit"
 msgstr "ButtonBar|종료"
 
 msgid " Load syntax file "
-msgstr " 구문 파일 읽어오기 "
+msgstr "구문 파일 읽어오기 "
 
 #, c-format
 msgid ""
 " Cannot open file %s \n"
 " %s "
 msgstr ""
-" %s 파일을 열 수 없어요 \n"
+"%s 파일을 열 수 없어요 \n"
 " %s "
 
 #, c-format
 msgid " Error in file %s on line %d "
-msgstr " 파일 %s의 %d 라인에 에러 "
+msgstr "파일 %s의 %d 라인에 에러 "
 
 msgid "&Set"
 msgstr "설정(&S)"
@@ -765,13 +766,13 @@ msgstr ""
 " %s "
 
 msgid "Displays the current version"
-msgstr "현재 버젼 출력"
+msgstr "현재 버전 출력"
 
 msgid "Print data directory"
-msgstr "데이타 디렉토리 출력"
+msgstr "데이터 디렉토리 출력"
 
 msgid "Print last working directory to specified file"
-msgstr "프로그램 종료시 마지막 작업 디렉토리를 주어진 파일로 출력"
+msgstr "프로그램 종료 시 마지막 작업 디렉토리를 주어진 파일로 출력"
 
 msgid "Enables subshell support (default)"
 msgstr "subshell 지원함 (기본값)"
@@ -822,7 +823,7 @@ msgid "Specifies a color configuration"
 msgstr "컬러 환경을 명세"
 
 msgid "Show mc with specified skin"
-msgstr "지정된 스킨으로 MC 보기"
+msgstr "특별한 스킨으로 MC 보기"
 
 #. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
@@ -867,16 +868,16 @@ msgid ""
 "   brightcyan, lightgray and white\n"
 "\n"
 msgstr ""
-"도움말 :, helpbold, helpitalic helpnormal helplink, helpslink\n"
+"Help: helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 "\n"
-"색상 옵션 :\n"
-"   검정, 회색, 빨간색, 주황, 녹색, 밝은녹색, 갈색,\n"
-"   brightblue, 파랑 노랑 마젠타, brightmagenta, 시안,\n"
-"   밝은 시안, 라이트그레이와 흰색\n"
+"Colors:\n"
+" black, gray, red, brightred, green, brightgreen, brown,\n"
+" yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+" brightcyan, lightgray and white\n"
 "\n"
 
 msgid "Color options"
-msgstr "환경설정 선택항목"
+msgstr "색 설정"
 
 msgid "+number"
 msgstr "+number"
@@ -1232,10 +1233,10 @@ msgid "&Files only"
 msgstr "크기로만(&F)"
 
 msgid " Select "
-msgstr " 선택 "
+msgstr "선택 "
 
 msgid " Unselect "
-msgstr " 선택해제 "
+msgstr "선택해제 "
 
 msgid "Extension file edit"
 msgstr "파일의 확장자 수정"
@@ -1244,13 +1245,13 @@ msgid " Which extension file you want to edit? "
 msgstr " 수정하기를 원하는 extension 파일은? "
 
 msgid "Highlighting groups file edit"
-msgstr "강조 그룹을 파일을 수정"
+msgstr "선택 표시된 그룹 파일을 수정"
 
 msgid " Which highlighting file you want to edit? "
-msgstr " 수정하기를 원하는 extension 파일은? "
+msgstr "선택 표시된 파일을 수정하기를 원합니까?"
 
 msgid " Compare directories "
-msgstr " 디렉토리 비교 "
+msgstr "디렉토리 비교 "
 
 msgid " Select compare method: "
 msgstr " 비교 방법 선택: "
@@ -1409,7 +1410,7 @@ msgstr "  ~/%s 파일 에러 "
 
 #, c-format
 msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
-msgstr "~/%s 버전 3.0과 변화된 파일 형식입니다. 당신은 어느 %smc.ext에서 복사하거나 작성하는 방법의 예제 파일을 사용할 수 있습니다."
+msgstr "~ /%s 파일은 버전 3.0에서 바꿀수 있습니다. 당신은 어느 %smc.ext에서 복사하거나 작성하는 방법의 예제 파일을 사용할 수있습니다"
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|복사"
@@ -1699,7 +1700,7 @@ msgid "FileOperation|Move"
 msgstr "FileOperation|이동"
 
 msgid "FileOperation|Delete"
-msgstr "FileOperation|삭제"
+msgstr "FileOperation|지우기"
 
 #, no-c-format
 msgid "%o %f \"%s\"%m"
@@ -1889,7 +1890,7 @@ msgid "Found: %ld"
 msgstr "찾기: %ld"
 
 msgid " Malformed regular expression "
-msgstr "  이해할 수 없는 정규표현식  "
+msgstr "이해할 수 없는 정규 표현식  "
 
 msgid "Cas&e sensitive"
 msgstr "대소문자 구분(&t)"
@@ -1904,7 +1905,7 @@ msgid "&All charsets"
 msgstr "모든 문자셋(&A)"
 
 msgid "Case sens&itive"
-msgstr "대소문자 구분(&t)"
+msgstr "대소문자 구분(&i)"
 
 msgid "Re&gular expression"
 msgstr "정규표현식(&R)"
@@ -3265,98 +3266,144 @@ msgstr "Unexpected EOF on archive file"
 
 #~ msgid "learn &Keys..."
 #~ msgstr "글쇠 배우기(&K)..."
+
 #~ msgid " &File "
 #~ msgstr " 파일(&F) "
+
 #~ msgid " &Command "
 #~ msgstr " 명령(&C) "
+
 #~ msgid "Menu"
 #~ msgstr "메뉴"
+
 #~ msgid "n"
 #~ msgstr "On"
+
 #~ msgid "Extension"
 #~ msgstr "확장자:"
+
 #~ msgid "Size"
 #~ msgstr "크기"
+
 #~ msgid "MTime"
 #~ msgstr "MTime"
+
 #~ msgid "ATime"
 #~ msgstr "ATime"
+
 #~ msgid "CTime"
 #~ msgstr "CTime"
+
 #~ msgid "Inode"
 #~ msgstr "Inode"
+
 #~ msgid "RenMov"
 #~ msgstr "RenMov"
+
 #~ msgid "Static"
 #~ msgstr "Static"
+
 #~ msgid "Dynamc"
 #~ msgstr "Dynamc"
+
 #~ msgid "Forget"
 #~ msgstr "Forget"
+
 #~ msgid "Rmdir"
 #~ msgstr "Rmdir"
+
 #~ msgid "bind: Unknown command: `%s'"
 #~ msgstr " Chown 명령 "
+
 #~ msgid "%s: Unknown command: `%s'"
 #~ msgstr " Chown 명령 "
+
 #~ msgid "%s:%d: unknown command `%s'"
 #~ msgstr " Chown 명령 "
+
 #~ msgid "%s not found!"
 #~ msgstr "경고: 파일 %s을(를) 찾을 수 없습니다\n"
+
 #~ msgid "NumLock on keypad"
 #~ msgstr "NumLock on keypad"
+
 #~ msgid " Emacs key: "
 #~ msgstr " Emacs 글쇠: "
+
 #~ msgid " %d items found, %d bookmarks added "
 #~ msgstr " %d이(가) 찾아짐, %d 책갈피 더함 "
+
 #~ msgid "Displays this help message"
 #~ msgstr "이 도움말 보여주기"
+
 #~ msgid "Displays a help screen on how to change the color scheme"
 #~ msgstr "컬러를 어떻게 바꿀 수 있는 지 도움말 화면 출력"
+
 #~ msgid "unknown option"
 #~ msgstr "모르는 옵션"
+
 #~ msgid "Show this help message"
 #~ msgstr "이 도움말 보여주기"
+
 #~ msgid "Display brief usage message"
 #~ msgstr "간단한 사용 메시지 출력"
+
 #~ msgid "ARG"
 #~ msgstr "ARG"
+
 #~ msgid "Usage:"
 #~ msgstr "사용법:"
+
 #~ msgid "pro&Mpt on replace"
 #~ msgstr "바꿀 때마다 물어봄(&O)"
+
 #~ msgid "replace &All"
 #~ msgstr "모두 바꿈(&A)"
+
 #~ msgid "O&ne"
 #~ msgstr "하나(&n)"
+
 #~ msgid "%b %d %H:%M"
 #~ msgstr "%b %e %H:%M"
+
 #~ msgid "%b %d %Y"
 #~ msgstr "%b %e  %Y"
+
 #~ msgid " The current address is 0x%08"
 #~ msgstr ""
 #~ " 현재 주소는 0x%lx입니다.\n"
 #~ " 새로운 주소 입력:"
+
 #~ msgid "scanf &Expression"
 #~ msgstr "scanf 표현(&E)"
+
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr " 인자 순서 입력 (가령: 3,2,1,4): "
+
 #~ msgid " Invalid regular expression, or scanf expression with too many conversions "
 #~ msgstr " 이상한 정규표현식 혹은 너무 많이 바꿔야 하는 scanf 표현 "
+
 #~ msgid " Error in replacement format string. "
 #~ msgstr " 바꿀 형식 문자열 에러. "
+
 #~ msgid " Replacement too long. "
 #~ msgstr " 바꿀 글월 입력:"
+
 #~ msgid "&Copy              F5"
 #~ msgstr "복사(&C)                   F5"
+
 #~ msgid "&Delete            F8"
 #~ msgstr "지우기(&D)                 F8"
+
 #~ msgid " The command history is empty "
 #~ msgstr " 명령 히스토리가 비었습니다 "
+
 #~ msgid "Edit edi&tor menu file"
 #~ msgstr "편집기 메뉴 파일 편집(&t)"
+
 #~ msgid "Edit &syntax file"
 #~ msgstr "구문 파일 편집(&s) "
+
 #~ msgid ""
 #~ "To use this feature select your codepage in\n"
 #~ "Setup / Display Bits dialog!\n"
@@ -3365,34 +3412,49 @@ msgstr "Unexpected EOF on archive file"
 #~ "이 기능을 사용하려면 선택항목 / 출력비트\n"
 #~ "대화상자에서 코드페이지를 선택하세요!\n"
 #~ "옵션 저장하는 거 잊지마세요."
+
 #~ msgid "Invalid hex search expression"
 #~ msgstr " 알 수 없는 hex 찾기 표현식 "
+
 #~ msgid " Invalid regular expression "
 #~ msgstr " 알 수 없는 정규 표현식 "
+
 #~ msgid " Enter regexp:"
 #~ msgstr " 정규표현식 입력:"
+
 #~ msgid "Using included S-Lang library"
 #~ msgstr "내장된 S-Lang 라이브러리 사용"
+
 #~ msgid "with termcap database"
 #~ msgstr "termcap 데이타베이스 사용"
+
 #~ msgid "&Home"
 #~ msgstr "홈(&H)"
+
 #~ msgid "&Type"
 #~ msgstr "&Type"
+
 #~ msgid "N&GID"
 #~ msgstr "N&GID"
+
 #~ msgid "N&UID"
 #~ msgstr "N&UID"
+
 #~ msgid "&Owner"
 #~ msgstr "소유자(&O)"
+
 #~ msgid "&Group"
 #~ msgstr "집단(&G)"
+
 #~ msgid "MC was unable to write ~/"
 #~ msgstr "MC was unable to write ~/"
+
 #~ msgid " (%ld blocks)"
 #~ msgstr " (%ld 구역)"
+
 #~ msgid " Notice "
 #~ msgstr " Notice "
+
 #~ msgid ""
 #~ " The Midnight Commander configuration files \n"
 #~ " are now stored in the ~/.mc directory, the \n"
@@ -3401,14 +3463,19 @@ msgstr "Unexpected EOF on archive file"
 #~ " The Midnight Commander 환경설정 파일은 이제 ~/mc \n"
 #~ " 디렉토리에 저장됩니다. 모든 파일이 그쪽 \n"
 #~ " 으로 옮겨졌습니다.\n"
+
 #~ msgid "%s bytes in %d files"
 #~ msgstr "%s bytes in %d files"
+
 #~ msgid " Cannot open file for reading: "
 #~ msgstr " 읽을 파일 열기 실패: "
+
 #~ msgid " Not an ordinary file: "
 #~ msgstr " 일반 파일 아님: "
+
 #~ msgid "Format of the "
 #~ msgstr "Format of the "
+
 #~ msgid ""
 #~ " file has changed\n"
 #~ "with version 3.0. You may want either to\n"
@@ -3417,56 +3484,80 @@ msgstr "Unexpected EOF on archive file"
 #~ " file has changed\n"
 #~ "with version 3.0. You may want either to\n"
 #~ "copy it from "
+
 #~ msgid ""
 #~ "mc.ext or use that\n"
 #~ "file as an example of how to write it.\n"
 #~ msgstr ""
 #~ "mc.ext를 그대로 사용하거나\n"
 #~ "이 파일을 수정해서 사용하십시오.\n"
+
 #~ msgid "mc.ext will be used for this moment."
 #~ msgstr "지금은 mc.ext를 사용하실 수 있습니다."
+
 #~ msgid " Cannot open file "
 #~ msgstr " 파일을 열 수 없습니다 "
+
 #~ msgid "Col %d"
 #~ msgstr "Col %d"
+
 #~ msgid "  [grow]"
 #~ msgstr "  [grow]"
+
 #~ msgid "Ascii"
 #~ msgstr "아스키"
+
 #~ msgid "Hex"
 #~ msgstr "십육진"
+
 #~ msgid "Goto"
 #~ msgstr "Goto"
+
 #~ msgid "Line"
 #~ msgstr "줄"
+
 #~ msgid "RxSrch"
 #~ msgstr "RxSrch"
+
 #~ msgid "EdHex"
 #~ msgstr "EdHex"
+
 #~ msgid "EdText"
 #~ msgstr "EdText"
+
 #~ msgid "UnWrap"
 #~ msgstr "UnWrap"
+
 #~ msgid "Wrap"
 #~ msgstr "Wrap"
+
 #~ msgid "HxSrch"
 #~ msgstr "HxSrch"
+
 #~ msgid "Raw"
 #~ msgstr "Raw"
+
 #~ msgid "Parse"
 #~ msgstr "Parse"
+
 #~ msgid "Unform"
 #~ msgstr "Unform"
+
 #~ msgid "User menu available only in mcedit invoked from mc"
 #~ msgstr "사용자 메뉴는 mcedit이 mc에 의해 불려진 경우에만 사용가능합니다"
+
 #~ msgid " Socket source routing setup "
 #~ msgstr " 소켓 소스 라우팅 설정 "
+
 #~ msgid " Enter host name to use as a source routing hop: "
 #~ msgstr " 원천 라우팅 홉을 사용하기 위한 호스트 이름: "
+
 #~ msgid " Host name "
 #~ msgstr " 호스트 이름 "
+
 #~ msgid " Error while looking up IP address "
 #~ msgstr " IP 주소 찾는 중 오류 발생 "
+
 #~ msgid ""
 #~ "\n"
 #~ "\n"
@@ -3481,18 +3572,24 @@ msgstr "Unexpected EOF on archive file"
 #~ "재생 스택 아래넘침\n"
 #~ "\n"
 #~ "\n"
+
 #~ msgid " Listing format edit "
 #~ msgstr " 목록 형식 편집 "
+
 #~ msgid " New mode is \"%s\" "
 #~ msgstr " 새 모드는 \"%s\"입니다 "
+
 #~ msgid "&Drive...       M-d"
 #~ msgstr "드라이브(&D)...          M-d"
+
 #~ msgid "Use to debug the background code"
 #~ msgstr "배경 코드를 디버깅할 때 사용"
+
 #~ msgid "Force subshell execution"
 #~ msgstr "무조건 subshell 실행"
+
 #~ msgid " No action taken "
 #~ msgstr " No action taken "
+
 #~ msgid " Cannot set source routing (%s)"
 #~ msgstr " 소스 라우팅(%s)을 설정할 수 없습니다"
-
