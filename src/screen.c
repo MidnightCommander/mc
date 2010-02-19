@@ -2203,7 +2203,7 @@ do_search (WPanel *panel, int c_code)
 
     l = strlen (panel->search_buffer);
     if (c_code == KEY_BACKSPACE) {
-	if (l != 0) {
+        if (l != 0) {
             act = panel->search_buffer + l;
             str_prev_noncomb_char (&act, panel->search_buffer);
             act[0] = '\0';
@@ -2213,25 +2213,25 @@ do_search (WPanel *panel, int c_code)
         if (c_code != 0 && (gsize) panel->search_chpoint < sizeof (panel->search_char)) {
             panel->search_char[panel->search_chpoint] = c_code;
             panel->search_chpoint++;
-	}
-        
+        }
+
         if (panel->search_chpoint > 0) {
             switch (str_is_valid_char (panel->search_char, panel->search_chpoint)) {
-                case -2:
-                    return;
-                case -1:
+            case -2:
+                return;
+            case -1:
+                panel->search_chpoint = 0;
+                return;
+            default:
+                if (l + panel->search_chpoint < sizeof (panel->search_buffer)) {
+                    memcpy (panel->search_buffer + l, panel->search_char,
+                            panel->search_chpoint);
+                    l+= panel->search_chpoint;
+                    (panel->search_buffer + l)[0] = '\0';
                     panel->search_chpoint = 0;
-                    return;
-                default:
-                    if (l + panel->search_chpoint < sizeof (panel->search_buffer)) { 
-                        memcpy (panel->search_buffer + l, panel->search_char, 
-                                panel->search_chpoint);
-                        l+= panel->search_chpoint;
-                        (panel->search_buffer + l)[0] = '\0';
-                        panel->search_chpoint = 0;
                 }
-	   }
-	}
+            }
+        }
     }
 
     reg_exp = g_strdup_printf ("%s*", panel->search_buffer);
@@ -2243,18 +2243,18 @@ do_search (WPanel *panel, int c_code)
 
     sel = panel->selected;
     for (i = panel->selected; !wrapped || i != panel->selected; i++) {
-	if (i >= panel->count) {
-	    i = 0;
-	    if (wrapped)
-		break;
-	    wrapped = TRUE;
-	}
+        if (i >= panel->count) {
+            i = 0;
+            if (wrapped)
+                break;
+            wrapped = TRUE;
+        }
         if (mc_search_run (search, panel->dir.list[i].fname,
                            0, panel->dir.list[i].fnamelen, NULL)) {
             sel = i;
             is_found = TRUE;
             break;
-	}
+        }
     }
     if (is_found) {
         unselect_item (panel);
