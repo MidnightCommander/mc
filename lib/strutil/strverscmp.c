@@ -19,6 +19,10 @@
    02111-1307 USA.  */
 
 #include <ctype.h>
+#ifdef HAVE_STRVERSCMP
+#include <string.h>
+#endif /* HAVE_STRVERSCMP */
+
 #include "lib/strutil.h"
 
 /* states: S_N: normal, S_I: comparing integral part, S_F: comparing
@@ -40,6 +44,9 @@
 
 int str_verscmp (const char *s1, const char *s2)
 {
+#ifdef HAVE_STRVERSCMP
+    return strverscmp(s1, s2);
+#else /* HAVE_STRVERSCMP */
   unsigned char *p1 = (unsigned char *) s1;
   unsigned char *p2 = (unsigned char *) s2;
   unsigned char c1, c2;
@@ -105,4 +112,6 @@ int str_verscmp (const char *s1, const char *s2)
     default:
       return state;
   }
+#endif /* HAVE_STRVERSCMP */
+
 }
