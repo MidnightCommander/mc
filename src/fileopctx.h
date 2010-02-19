@@ -17,6 +17,7 @@
 
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <sys/time.h>
 
 #include "lib/global.h"
 
@@ -56,6 +57,7 @@ typedef struct FileOpContext {
 
 	/* Whether the panel total has been computed */
 	gboolean progress_totals_computed;
+	gboolean show_total;
 
 	/* Counters for progress indicators */
 	off_t progress_count;
@@ -125,9 +127,26 @@ typedef struct FileOpContext {
 	void *ui;
 } FileOpContext;
 
+typedef struct {
+	off_t progress_count;
+	double progress_bytes;
+	double copyed_bytes;
+	size_t bps;
+	size_t bps_count;
+	struct timeval transfer_start;
+	double eta_secs;
+
+	gboolean ask_overwrite;
+	gboolean is_toplevel_file;
+
+} FileOpTotalContext;
+
 
 FileOpContext *file_op_context_new (FileOperation op);
 void file_op_context_destroy (FileOpContext *ctx);
+
+FileOpTotalContext *file_op_total_context_new (void);
+void file_op_total_context_destroy (FileOpTotalContext *tctx);
 
 
 extern const char *op_names [3];
@@ -147,16 +166,9 @@ enum OperationMode {
 
 /* The following functions are implemented separately by each port */
 
-void file_op_context_create_ui (FileOpContext *ctx, gboolean with_eta);
-void file_op_context_create_ui_without_init (FileOpContext *ctx, gboolean with_eta);
+void file_op_context_create_ui (FileOpContext *ctx, gboolean with_eta, gboolean show_total);
+void file_op_context_create_ui_without_init (FileOpContext *ctx, gboolean with_eta, gboolean show_total);
 void file_op_context_destroy_ui (FileOpContext *ctx);
-
-FileProgressStatus file_progress_show (FileOpContext *ctx, off_t done, off_t total);
-FileProgressStatus file_progress_show_count (FileOpContext *ctx, off_t done, off_t total);
-FileProgressStatus file_progress_show_bytes (FileOpContext *ctx, double done, double total);
-FileProgressStatus file_progress_show_source (FileOpContext *ctx, const char *path);
-FileProgressStatus file_progress_show_target (FileOpContext *ctx, const char *path);
-FileProgressStatus file_progress_show_deleting (FileOpContext *ctx, const char *path);
 
 void file_progress_set_stalled_label (FileOpContext *ctx, const char *stalled_msg);
 

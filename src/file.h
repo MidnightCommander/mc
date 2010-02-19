@@ -7,6 +7,7 @@
 #define MC_FILE_H
 
 #include <sys/types.h>		/* off_t */
+#include <sys/time.h>
 
 #include "lib/global.h"
 #include "dialog.h"		/* Dlg_head */
@@ -15,17 +16,16 @@
 
 struct link;
 
-FileProgressStatus copy_file_file (FileOpContext *ctx, const char *s, const char *d,
-				    gboolean ask_overwrite, off_t *progress_count,
-				    double *progress_bytes, gboolean is_toplevel_file);
-FileProgressStatus move_dir_dir (FileOpContext *ctx, const char *s, const char *d,
-				    off_t *progress_count, double *progress_bytes);
-FileProgressStatus copy_dir_dir (FileOpContext *ctx, const char *s, const char *d,
-				    gboolean toplevel, gboolean move_over,
-				    gboolean do_delete, struct link *parent_dirs,
-				    off_t *progress_count, double *progress_bytes);
-FileProgressStatus erase_dir (FileOpContext *ctx, const char *s, off_t *progress_count,
-				    double *progress_bytes);
+FileProgressStatus copy_file_file (FileOpTotalContext *tctx, FileOpContext *ctx,
+				   const char *src_path, const char *dst_path);
+FileProgressStatus move_dir_dir (FileOpTotalContext *tctx, FileOpContext *ctx,
+				 const char *s, const char *d);
+FileProgressStatus copy_dir_dir (FileOpTotalContext *tctx, FileOpContext *ctx,
+				 const char *s, const char *d, 
+				 gboolean toplevel, gboolean move_over, gboolean do_delete,
+				 struct link *parent_dirs);
+FileProgressStatus erase_dir (FileOpTotalContext *tctx, FileOpContext *ctx,
+			      const char *s);
 
 gboolean panel_operate (void *source_panel, FileOperation op, gboolean force_single);
 

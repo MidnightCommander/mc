@@ -634,9 +634,6 @@ tree_copy (WTree *tree, const char *default_dest)
 {
     char   msg [BUF_MEDIUM];
     char   *dest;
-    off_t  count = 0;
-    double bytes = 0;
-    FileOpContext *ctx;
 
     if (tree->selected_ptr == NULL)
 	return;
@@ -647,10 +644,16 @@ tree_copy (WTree *tree, const char *default_dest)
 				msg, MC_HISTORY_FM_TREE_COPY, default_dest);
 
     if (dest != NULL && *dest != '\0') {
+	FileOpContext *ctx;
+	FileOpTotalContext *tctx;
+
 	ctx = file_op_context_new (OP_COPY);
-	file_op_context_create_ui (ctx, FALSE);
-	copy_dir_dir (ctx, tree->selected_ptr->name, dest,
-			TRUE, FALSE, FALSE, NULL, &count, &bytes);
+	tctx = file_op_total_context_new ();
+	file_op_context_create_ui (ctx, FALSE, TRUE);
+	tctx->ask_overwrite = FALSE;
+	tctx->is_toplevel_file = FALSE;
+	copy_dir_dir (tctx, ctx, tree->selected_ptr->name, dest, TRUE, FALSE, FALSE, NULL);
+	file_op_total_context_destroy (tctx);
 	file_op_context_destroy (ctx);
     }
 
@@ -663,9 +666,8 @@ tree_move (WTree *tree, const char *default_dest)
     char   msg [BUF_MEDIUM];
     char   *dest;
     struct stat buf;
-    double bytes = 0;
-    off_t  count = 0;
     FileOpContext *ctx;
+    FileOpTotalContext *tctx;
 
     if (tree->selected_ptr == NULL)
 	return;
@@ -694,8 +696,10 @@ tree_move (WTree *tree, const char *default_dest)
     }
 
     ctx = file_op_context_new (OP_MOVE);
-    file_op_context_create_ui (ctx, FALSE);
-    move_dir_dir (ctx, tree->selected_ptr->name, dest, &count, &bytes);
+    tctx = file_op_total_context_new ();
+    file_op_context_create_ui (ctx, FALSE, FALSE);
+    move_dir_dir (tctx, ctx, tree->selected_ptr->name, dest);
+    file_op_total_context_destroy (tctx);
     file_op_context_destroy (ctx);
 
     g_free (dest);
@@ -725,9 +729,8 @@ static void
 tree_rmdir (void *data)
 {
     WTree *tree = data;
-    off_t count = 0;
-    double bytes = 0;
     FileOpContext *ctx;
+    FileOpTotalContext *tctx;
 
     if (!tree->selected_ptr)
 	return;
@@ -747,9 +750,12 @@ tree_rmdir (void *data)
     }
 
     ctx = file_op_context_new (OP_DELETE);
-    file_op_context_create_ui (ctx, FALSE);
-    if (erase_dir (ctx, tree->selected_ptr->name, &count, &bytes) == FILE_CONT)
+    tctx = file_op_total_context_new ();
+
+    file_op_context_create_ui (ctx, FALSE, FALSE);
+    if (erase_dir (tctx, ctx, tree->selected_ptr->name) == FILE_CONT)
 	tree_forget (tree);
+    file_op_total_context_destroy (tctx);
     file_op_context_destroy (ctx);
 }
 

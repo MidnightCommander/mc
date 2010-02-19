@@ -54,7 +54,6 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <fcntl.h>
-#include <sys/time.h>
 
 #include "lib/global.h"
 #include "lib/tty/tty.h"
@@ -138,9 +137,8 @@ static FileProgressStatus query_replace (FileOpContext * ctx, const char *destna
 static FileProgressStatus query_recursive (FileOpContext * ctx, const char *s);
 static FileProgressStatus do_file_error (const char *str);
 static FileProgressStatus erase_dir_iff_empty (FileOpContext *ctx, const char *s);
-static FileProgressStatus erase_file (FileOpContext *ctx, const char *s,
-					off_t *progress_count, double *progress_bytes,
-					gboolean is_toplevel_file);
+static FileProgressStatus erase_file (FileOpTotalContext *tctx, FileOpContext *ctx,
+					const char *s, gboolean is_toplevel_file);
 static FileProgressStatus files_error (const char *format, const char *file1,
 					const char *file2);
 
@@ -346,26 +344,20 @@ make_symlink (FileOpContext *ctx, const char *src_path, const char *dst_path)
     return return_status;
 }
 
-static int
-progress_update_one (FileOpContext *ctx,
-		    off_t *progress_count, double *progress_bytes,
-		    off_t add, gboolean is_toplevel_file)
+static FileProgressStatus
+progress_update_one (FileOpTotalContext *tctx, FileOpContext *ctx, off_t add, gboolean is_toplevel_file)
 {
-    int ret;
 
     if (is_toplevel_file || ctx->progress_totals_computed) {
-	(*progress_count)++;
-	(*progress_bytes) += add;
+	tctx->progress_count++;
+	tctx->progress_bytes += add;
     }
 
     /* Apply some heuristic here to not call the update stuff very often */
-    ret = file_progress_show_count (ctx, *progress_count,
-				    ctx->progress_count);
-    if (ret == FILE_CONT)
-	ret = file_progress_show_bytes (ctx, *progress_bytes,
-					ctx->progress_bytes);
+    file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
+    file_progress_show_bytes (ctx, tctx->progress_bytes, ctx->progress_bytes);
 
-    return ret;
+    return check_progress_buttons (ctx);
 }
 
 /* Status of the destination file */
@@ -422,10 +414,59 @@ warn_same_file (const char *fmt, const char *a, const char *b)
 }
 #endif
 
+#define FILEOP_UPDATE_INTERVAL 2
+#define FILEOP_STALLING_INTERVAL 4
+static void
+copy_file_file_display_progress (FileOpTotalContext *tctx, FileOpContext *ctx,
+				struct timeval tv_current, struct timeval tv_transfer_start,
+				off_t file_size, off_t n_read_total)
+{
+    long dt;
+
+    /* 1. Update rotating dash after some time */
+    rotate_dash ();
+
+    /* 3. Compute ETA */
+	dt = (tv_current.tv_sec - tv_transfer_start.tv_sec);
+
+    if (n_read_total) {
+	ctx->eta_secs = ((dt / (double) n_read_total) * file_size) - dt;
+	ctx->bps = n_read_total / ((dt < 1) ? 1 : dt);
+    } else
+	ctx->eta_secs = 0.0;
+
+    /* 4. Compute BPS rate */
+    ctx->bps_time = (tv_current.tv_sec - tv_transfer_start.tv_sec);
+    if (ctx->bps_time < 1)
+	ctx->bps_time = 1;
+    ctx->bps = n_read_total / ctx->bps_time;
+
+    /* 5. Compute total ETA and BPS*/
+    if (ctx->progress_bytes != 0) {
+	double remain_bytes;
+	tctx->copyed_bytes = tctx->progress_bytes + n_read_total + ctx->do_reget;
+	remain_bytes = ctx->progress_bytes - tctx->copyed_bytes;
+#if 1
+	{
+	int total_secs = tv_current.tv_sec - tctx->transfer_start.tv_sec;
+
+	if (total_secs < 1)
+	    total_secs = 1;
+	tctx->bps = tctx->copyed_bytes / total_secs;
+	tctx->eta_secs = remain_bytes / tctx->bps;
+	}
+#else
+	/* broken on lot of little files */
+	tctx->bps_count++;
+	tctx->bps =  ( tctx->bps * (tctx->bps_count - 1) + ctx->bps) / tctx->bps_count;
+	tctx->eta_secs = remain_bytes / tctx->bps;
+#endif
+    }
+}
+
 FileProgressStatus
-copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
-		gboolean ask_overwrite, off_t *progress_count,
-		double *progress_bytes, gboolean is_toplevel_file)
+copy_file_file (FileOpTotalContext *tctx, FileOpContext *ctx,
+		const char *src_path, const char *dst_path)
 {
     uid_t src_uid = (uid_t) -1;
     gid_t src_gid = (gid_t) -1;
@@ -441,13 +482,15 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
     struct timeval tv_transfer_start;
     dest_status_t dst_status = DEST_NONE;
     int open_flags;
+    gboolean is_first_time=TRUE;
 
     /* FIXME: We should not be using global variables! */
     ctx->do_reget = 0;
     return_status = FILE_RETRY;
 
-    if (file_progress_show_source (ctx, src_path) == FILE_ABORT ||
-	file_progress_show_target (ctx, dst_path) == FILE_ABORT)
+    file_progress_show_source (ctx, src_path);
+    file_progress_show_target (ctx, dst_path);
+    if (check_progress_buttons (ctx) == FILE_ABORT)
 	return FILE_ABORT;
 
     mc_refresh ();
@@ -479,7 +522,7 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
             return warn_same_file (_(" `%s' \n and \n `%s' \n are the same file "),
                                 src_path, dst_path);
 	/* Should we replace destination? */
-	if (ask_overwrite) {
+	if (tctx->ask_overwrite) {
 	    ctx->do_reget = 0;
 	    return_status = query_replace (ctx, dst_path, &sb, &sb2);
 	    if (return_status != FILE_CONT)
@@ -604,8 +647,12 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
     ctx->eta_secs = 0.0;
     ctx->bps = 0;
 
-    return_status = file_progress_show (ctx, 0, file_size);
-
+    if (tctx->bps == 0 ||  (file_size/(tctx->bps)) > FILEOP_UPDATE_INTERVAL) {
+	file_progress_show (ctx, 0, file_size);
+    } else {
+	file_progress_show (ctx, 1, 1);
+    }
+    return_status = check_progress_buttons (ctx);
     mc_refresh ();
 
     if (return_status != FILE_CONT)
@@ -614,8 +661,7 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
     {
 	struct timeval tv_current, tv_last_update, tv_last_input;
 	int secs, update_secs;
-	long dt;
-	const char *stalled_msg;
+	const char *stalled_msg="";
 
 	tv_last_update = tv_transfer_start;
 
@@ -665,59 +711,43 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 			goto ret;
 		}
 	    }
-
-	    /* 1. Update rotating dash after some time (hardcoded to 2 seconds) */
 	    secs = (tv_current.tv_sec - tv_last_update.tv_sec);
-	    if (secs > 2) {
-		rotate_dash ();
+	    update_secs = (tv_current.tv_sec - tv_last_input.tv_sec);
+
+	    if (is_first_time || secs > FILEOP_UPDATE_INTERVAL )
+	    {
+		copy_file_file_display_progress(tctx, ctx,
+						tv_current,
+						tv_transfer_start,
+						file_size,
+						n_read_total);
 		tv_last_update = tv_current;
 	    }
+	    is_first_time = FALSE;
 
-	    /* 2. Check for a stalled condition */
-	    update_secs = (tv_current.tv_sec - tv_last_input.tv_sec);
-	    stalled_msg = "";
-	    if (update_secs > 4) {
-		stalled_msg = _("(stalled)");
-	    }
+	if (update_secs > FILEOP_STALLING_INTERVAL) {
+	    stalled_msg = _("(stalled)");
+	}
 
-	    /* 3. Compute ETA */
-	    if (secs > 2) {
-		dt = (tv_current.tv_sec - tv_transfer_start.tv_sec);
 
-		if (n_read_total) {
-		    ctx->eta_secs =
-			((dt / (double) n_read_total) * file_size) - dt;
-		    ctx->bps = n_read_total / ((dt < 1) ? 1 : dt);
-		} else
-		    ctx->eta_secs = 0.0;
-	    }
+	file_progress_set_stalled_label (ctx, stalled_msg);
+	file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
+	file_progress_show_bytes (ctx, tctx->progress_bytes + n_read_total + ctx->do_reget,
+				  ctx->progress_bytes);
 
-	    /* 4. Compute BPS rate */
-	    if (secs > 2) {
-		ctx->bps_time =
-		    (tv_current.tv_sec - tv_transfer_start.tv_sec);
-		if (ctx->bps_time < 1)
-		    ctx->bps_time = 1;
-		ctx->bps = n_read_total / ctx->bps_time;
-	    }
+	if ((ctx->progress_bytes != 0) && (tv_current.tv_sec - tctx->transfer_start.tv_sec) > FILEOP_UPDATE_INTERVAL) {
+	    file_progress_show_total (tctx, ctx);
+	}
 
-	    file_progress_set_stalled_label (ctx, stalled_msg);
+	file_progress_show (ctx, n_read_total + ctx->do_reget, file_size);
+	mc_refresh ();
 
-	    return_status =
-		     file_progress_show_count (ctx, *progress_count,
-						ctx->progress_count);
-	    if (return_status == FILE_CONT)
-		return_status =
-		    file_progress_show_bytes (ctx, *progress_bytes +
-						n_read_total + ctx->do_reget,
-						ctx->progress_bytes);
-	    if (return_status == FILE_CONT)
-		return_status =
-		    file_progress_show (ctx, n_read_total + ctx->do_reget, file_size);
+	    return_status = check_progress_buttons (ctx);
 
-	    mc_refresh ();
-	    if (return_status != FILE_CONT)
+	    if (return_status != FILE_CONT) {
+		mc_refresh ();
 		goto ret;
+	    }
 	}
     }
 
@@ -785,13 +815,11 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
     }
 
     if (return_status == FILE_CONT)
-	return_status =
-	    progress_update_one (ctx, progress_count, progress_bytes,
-				 file_size, is_toplevel_file);
+	return_status = progress_update_one (tctx, ctx, file_size, tctx->is_toplevel_file);
 
     return return_status;
 }
-
+#undef FILEOP_UPDATE_INTERVAL
 /*
  * I think these copy_*_* functions should have a return type.
  * anyway, this function *must* have two directories as arguments.
@@ -799,10 +827,9 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 /* FIXME: This function needs to check the return values of the
    function calls */
 FileProgressStatus
-copy_dir_dir (FileOpContext *ctx, const char *s, const char *_d,
+copy_dir_dir (FileOpTotalContext *tctx, FileOpContext *ctx, const char *s, const char *_d,
 		gboolean toplevel, gboolean move_over, gboolean do_delete,
-		struct link *parent_dirs,
-		off_t *progress_count, double *progress_bytes)
+		struct link *parent_dirs)
 {
     struct dirent *next;
     struct stat buf, cbuf;
@@ -957,15 +984,13 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *_d,
 	     * dir already exists. So, we give the recursive call the flag 0
 	     * meaning no toplevel.
 	     */
-	    return_status = copy_dir_dir (ctx, path, mdpath, FALSE, FALSE, do_delete,
-				parent_dirs, progress_count, progress_bytes);
+	    return_status = copy_dir_dir (tctx, ctx, path, mdpath, FALSE, FALSE, do_delete, parent_dirs);
 	    g_free (mdpath);
 	} else {
 	    char *dest_file;
 
 	    dest_file = concat_dir_and_file (dest_dir, x_basename (path));
-	    return_status = copy_file_file (ctx, path, dest_file, TRUE,
-					    progress_count, progress_bytes, FALSE);
+	    return_status = copy_file_file (tctx, ctx, path, dest_file);
 	    g_free (dest_file);
 	}
 	if (do_delete && return_status == FILE_CONT) {
@@ -985,7 +1010,7 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *_d,
 		if (S_ISDIR (buf.st_mode)) {
 		    return_status = erase_dir_iff_empty (ctx, path);
 		} else
-		    return_status = erase_file (ctx, path, 0, 0, FALSE);
+		    return_status = erase_file (tctx, ctx, path, FALSE);
 	    }
 	}
 	g_free (path);
@@ -1017,15 +1042,15 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *_d,
 /* {{{ Move routines */
 
 static FileProgressStatus
-move_file_file (FileOpContext *ctx, const char *s, const char *d,
-		off_t *progress_count, double *progress_bytes)
+move_file_file (FileOpTotalContext *tctx, FileOpContext *ctx, const char *s, const char *d)
 {
     struct stat src_stats, dst_stats;
     FileProgressStatus return_status = FILE_CONT;
     gboolean copy_done = FALSE;
 
-    if (file_progress_show_source (ctx, s) == FILE_ABORT
-	|| file_progress_show_target (ctx, d) == FILE_ABORT)
+    file_progress_show_source (ctx, s);
+    file_progress_show_target (ctx, d);
+    if (check_progress_buttons (ctx) == FILE_ABORT)
 	return FILE_ABORT;
 
     mc_refresh ();
@@ -1067,9 +1092,7 @@ move_file_file (FileOpContext *ctx, const char *s, const char *d,
 	}
 
 	if (mc_rename (s, d) == 0) {
-	    return progress_update_one (ctx, progress_count,
-	    				progress_bytes,
-	    				src_stats.st_size, TRUE);
+	    return progress_update_one (tctx, ctx, src_stats.st_size, TRUE);
 	}
     }
 #if 0
@@ -1091,16 +1114,17 @@ move_file_file (FileOpContext *ctx, const char *s, const char *d,
 #endif
 
     /* Failed because filesystem boundary -> copy the file instead */
-    return_status =
-	copy_file_file (ctx, s, d, FALSE, progress_count, progress_bytes, TRUE);
+    return_status = copy_file_file (tctx, ctx, s, d);
     if (return_status != FILE_CONT)
 	return return_status;
 
     copy_done = TRUE;
 
-    if ((return_status =
-	 file_progress_show_source (ctx, NULL)) != FILE_CONT
-	|| (return_status = file_progress_show (ctx, 0, 0)) != FILE_CONT)
+    file_progress_show_source (ctx, NULL);
+    file_progress_show (ctx, 0, 0);
+
+    return_status = check_progress_buttons (ctx);
+    if (return_status != FILE_CONT)
 	return return_status;
 
     mc_refresh ();
@@ -1115,18 +1139,14 @@ move_file_file (FileOpContext *ctx, const char *s, const char *d,
     }
 
     if (!copy_done) {
-	return_status = progress_update_one (ctx,
-					     progress_count,
-					     progress_bytes,
-					     src_stats.st_size, TRUE);
+	return_status = progress_update_one (tctx, ctx, src_stats.st_size, TRUE);
     }
 
     return return_status;
 }
 
 FileProgressStatus
-move_dir_dir (FileOpContext *ctx, const char *s, const char *d,
-	      off_t *progress_count, double *progress_bytes)
+move_dir_dir (FileOpTotalContext *tctx, FileOpContext *ctx, const char *s, const char *d)
 {
     struct stat sbuf, dbuf, destbuf;
     struct link *lp;
@@ -1135,8 +1155,9 @@ move_dir_dir (FileOpContext *ctx, const char *s, const char *d,
     gboolean move_over = FALSE;
     gboolean dstat_ok;
 
-    if (file_progress_show_source (ctx, s) == FILE_ABORT ||
-	file_progress_show_target (ctx, d) == FILE_ABORT)
+    file_progress_show_source (ctx, s);
+    file_progress_show_target (ctx, d);
+    if (check_progress_buttons (ctx) == FILE_ABORT)
 	return FILE_ABORT;
 
     mc_refresh ();
@@ -1159,8 +1180,7 @@ move_dir_dir (FileOpContext *ctx, const char *s, const char *d,
   retry_dst_stat:
     if (!mc_stat (destdir, &destbuf)) {
 	if (move_over) {
-	    return_status = copy_dir_dir (ctx, s, destdir, FALSE, TRUE, TRUE,
-					    NULL, progress_count, progress_bytes);
+	    return_status = copy_dir_dir (tctx, ctx, s, destdir, FALSE, TRUE, TRUE, NULL);
 
 	    if (return_status != FILE_CONT)
 		goto ret;
@@ -1199,15 +1219,16 @@ move_dir_dir (FileOpContext *ctx, const char *s, const char *d,
     }
     /* Failed because of filesystem boundary -> copy dir instead */
     return_status =
-	copy_dir_dir (ctx, s, destdir, FALSE, FALSE, TRUE,
-			NULL, progress_count, progress_bytes);
+	copy_dir_dir (tctx, ctx, s, destdir, FALSE, FALSE, TRUE, NULL);
 
     if (return_status != FILE_CONT)
 	goto ret;
   oktoret:
-    if ((return_status =
-	 file_progress_show_source (ctx, NULL)) != FILE_CONT
-	|| (return_status = file_progress_show (ctx, 0, 0)) != FILE_CONT)
+    file_progress_show_source (ctx, NULL);
+    file_progress_show (ctx, 0, 0);
+
+    return_status = check_progress_buttons (ctx);
+    if (return_status != FILE_CONT)
 	goto ret;
 
     mc_refresh ();
@@ -1218,7 +1239,7 @@ move_dir_dir (FileOpContext *ctx, const char *s, const char *d,
 		    erase_dir_iff_empty (ctx, erase_list->name);
 	    } else
 		return_status =
-		    erase_file (ctx, erase_list->name, 0, 0, FALSE);
+		    erase_file (tctx, ctx, erase_list->name, FALSE);
 	    lp = erase_list;
 	    erase_list = erase_list->next;
 	    g_free (lp);
@@ -1241,17 +1262,17 @@ move_dir_dir (FileOpContext *ctx, const char *s, const char *d,
 /* {{{ Erase routines */
 /* Don't update progress status if progress_count==NULL */
 static FileProgressStatus
-erase_file (FileOpContext *ctx, const char *s, off_t *progress_count,
-	    double *progress_bytes, gboolean is_toplevel_file)
+erase_file (FileOpTotalContext *tctx, FileOpContext *ctx, const char *s, gboolean is_toplevel_file)
 {
     int return_status;
     struct stat buf;
 
-    if (file_progress_show_deleting (ctx, s) == FILE_ABORT)
+    file_progress_show_deleting (ctx, s);
+    if (check_progress_buttons (ctx) == FILE_ABORT)
 	return FILE_ABORT;
     mc_refresh ();
 
-    if (progress_count && mc_lstat (s, &buf)) {
+    if (tctx->progress_count && mc_lstat (s, &buf)) {
 	/* ignore, most likely the mc_unlink fails, too */
 	buf.st_size = 0;
     }
@@ -1263,16 +1284,14 @@ erase_file (FileOpContext *ctx, const char *s, off_t *progress_count,
 	    return return_status;
     }
 
-    if (progress_count)
-	return progress_update_one (ctx, progress_count, progress_bytes,
-				    buf.st_size, is_toplevel_file);
+    if (tctx->progress_count)
+	return progress_update_one (tctx, ctx, buf.st_size, is_toplevel_file);
     else
 	return FILE_CONT;
 }
 
 static FileProgressStatus
-recursive_erase (FileOpContext *ctx, const char *s, off_t *progress_count,
-		 double *progress_bytes)
+recursive_erase (FileOpTotalContext *tctx, FileOpContext *ctx, const char *s)
 {
     struct dirent *next;
     struct stat buf;
@@ -1301,18 +1320,17 @@ recursive_erase (FileOpContext *ctx, const char *s, off_t *progress_count,
 	}
 	if (S_ISDIR (buf.st_mode))
 	    return_status =
-		(recursive_erase
-		 (ctx, path, progress_count, progress_bytes)
-		 != FILE_CONT) ? FILE_RETRY : FILE_CONT;
+		(recursive_erase (tctx, ctx, path) != FILE_CONT) ? FILE_RETRY : FILE_CONT;
 	else
 	    return_status =
-		erase_file (ctx, path, progress_count, progress_bytes, 0);
+		erase_file (tctx, ctx, path, 0);
 	g_free (path);
     }
     mc_closedir (reading);
     if (return_status != FILE_CONT)
 	return return_status;
-    if (file_progress_show_deleting (ctx, s) == FILE_ABORT)
+    file_progress_show_deleting (ctx, s);
+    if (check_progress_buttons (ctx) == FILE_ABORT)
 	return FILE_ABORT;
     mc_refresh ();
 
@@ -1353,8 +1371,7 @@ check_dir_is_empty (const char *path)
 }
 
 FileProgressStatus
-erase_dir (FileOpContext *ctx, const char *s, off_t *progress_count,
-	   double *progress_bytes)
+erase_dir (FileOpTotalContext *tctx, FileOpContext *ctx, const char *s)
 {
     FileProgressStatus error;
 
@@ -1364,7 +1381,8 @@ erase_dir (FileOpContext *ctx, const char *s, off_t *progress_count,
     if (strcmp (s, ".") == 0)
 	return FILE_SKIP;
 
-    if (file_progress_show_deleting (ctx, s) == FILE_ABORT)
+    file_progress_show_deleting (ctx, s);
+    if (check_progress_buttons (ctx) == FILE_ABORT)
 	return FILE_ABORT;
     mc_refresh ();
 
@@ -1379,8 +1397,7 @@ erase_dir (FileOpContext *ctx, const char *s, off_t *progress_count,
     if (error == 0) {		/* not empty */
 	error = query_recursive (ctx, s);
 	if (error == FILE_CONT)
-	    return recursive_erase (ctx, s, progress_count,
-				    progress_bytes);
+	    return recursive_erase (tctx, ctx, s);
 	else
 	    return error;
     }
@@ -1406,7 +1423,8 @@ erase_dir_iff_empty (FileOpContext *ctx, const char *s)
     if (strcmp (s, ".") == 0)
 	return FILE_SKIP;
 
-    if (file_progress_show_deleting (ctx, s) == FILE_ABORT)
+    file_progress_show_deleting (ctx, s);
+    if (check_progress_buttons (ctx) == FILE_ABORT)
 	return FILE_ABORT;
     mc_refresh ();
 
@@ -1869,9 +1887,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     int i;
     FileProgressStatus value;
     FileOpContext *ctx;
-
-    off_t count = 0;
-    double bytes = 0;
+    FileOpTotalContext *tctx;
 
     gboolean do_bg = FALSE;		/* do background operation? */
 
@@ -1908,6 +1924,8 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     }
 
     ctx = file_op_context_new (operation);
+    tctx = file_op_total_context_new ();
+    gettimeofday (&(tctx->transfer_start), (struct timezone *) NULL);
 
     /* Show confirmation dialog */
     if (operation != OP_DELETE) {
@@ -1937,6 +1955,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
 	    dest_dir_ = g_strdup (dest_dir);
 	}
 	if (dest_dir_ == NULL) {
+	    file_op_total_context_destroy (tctx);
 	    file_op_context_destroy (ctx);
 	    return FALSE;
 	}
@@ -1954,6 +1973,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
 	g_free (dest_dir_);
 
 	if (dest == NULL || dest[0] == '\0') {
+	    file_op_total_context_destroy (tctx);
 	    file_op_context_destroy (ctx);
 	    g_free (dest);
 	    return FALSE;
@@ -1984,16 +2004,23 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
 				_("&Yes"), _("&No"));
 
 	if (i != 0) {
+	    file_op_total_context_destroy (tctx);
 	    file_op_context_destroy (ctx);
 	    return FALSE;
 	}
     }
 
+    {
+    gboolean show_total = !((operation != OP_COPY) || (single_entry) || (force_single));
+
+    if ((single_entry) && (operation == OP_COPY) && S_ISDIR (selection (panel)->st.st_mode))
+	show_total = TRUE;
     /* Background also need ctx->ui, but not full */
     if (do_bg)
-	file_op_context_create_ui_without_init (ctx, 1);
+	file_op_context_create_ui_without_init (ctx, 1, show_total);
     else
-	file_op_context_create_ui (ctx, 1);
+	file_op_context_create_ui (ctx, 1, show_total);
+    }
 
 #ifdef WITH_BACKGROUND
     /* Did the user select to do a background operation? */
@@ -2049,9 +2076,9 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
 					source_with_path, ctx) == FILE_CONT) {
 	    if (operation == OP_DELETE) {
 		if (S_ISDIR (src_stat.st_mode))
-		    value = erase_dir (ctx, source_with_path, &count, &bytes);
+		    value = erase_dir (tctx, ctx, source_with_path);
 		else
-		    value = erase_file (ctx, source_with_path, &count, &bytes, 1);
+		    value = erase_file (tctx, ctx, source_with_path, 1);
 	    } else {
 		temp = transform_source (ctx, source_with_path);
 		if (temp == NULL)
@@ -2072,21 +2099,17 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
 			ctx->stat_func (source_with_path, &src_stat);
 
 			if (S_ISDIR (src_stat.st_mode))
-			    value = copy_dir_dir (ctx, source_with_path, dest,
-						    TRUE, FALSE, FALSE,
-						    NULL, &count, &bytes);
+			    value = copy_dir_dir (tctx, ctx, source_with_path, dest,
+						    TRUE, FALSE, FALSE, NULL);
 			else
-			    value = copy_file_file (ctx, source_with_path, dest, TRUE,
-						    &count, &bytes, TRUE);
+			    value = copy_file_file (tctx, ctx, source_with_path, dest);
 			break;
 
 		    case OP_MOVE:
 			if (S_ISDIR (src_stat.st_mode))
-			    value = move_dir_dir (ctx, source_with_path, dest,
-						    &count, &bytes);
+			    value = move_dir_dir (tctx, ctx, source_with_path, dest);
 			else
-			    value = move_file_file (ctx, source_with_path, dest,
-						    &count, &bytes);
+			    value = move_file_file (tctx, ctx, source_with_path, dest);
 			break;
 
 		    default:
@@ -2133,9 +2156,9 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
 
 		if (operation == OP_DELETE) {
 		    if (S_ISDIR (src_stat.st_mode))
-			value = erase_dir (ctx, source_with_path, &count, &bytes);
+			value = erase_dir (tctx, ctx, source_with_path);
 		    else
-			value = erase_file (ctx, source_with_path, &count, &bytes, 1);
+			value = erase_file (tctx, ctx, source_with_path, 1);
 		} else {
 		    temp = transform_source (ctx, source_with_path);
 
@@ -2160,22 +2183,18 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
 			    /* we use file_mask_op_follow_links only with OP_COPY */
 			    ctx->stat_func (source_with_path, &src_stat);
 			    if (S_ISDIR (src_stat.st_mode))
-				value = copy_dir_dir (ctx, source_with_path, temp2,
-							TRUE, FALSE, FALSE,
-							NULL, &count, &bytes);
+				value = copy_dir_dir (tctx, ctx, source_with_path, temp2,
+							TRUE, FALSE, FALSE, NULL);
 			    else
-				value = copy_file_file (ctx, source_with_path, temp2,
-							TRUE, &count, &bytes, TRUE);
+				value = copy_file_file (tctx, ctx, source_with_path, temp2);
 			    free_linklist (&dest_dirs);
 			    break;
 
 			case OP_MOVE:
 			    if (S_ISDIR (src_stat.st_mode))
-				value = move_dir_dir (ctx, source_with_path, temp2,
-							&count, &bytes);
+				value = move_dir_dir (tctx, ctx, source_with_path, temp2);
 			    else
-				value = move_file_file (ctx, source_with_path,
-							temp2, &count, &bytes);
+				value = move_file_file (tctx, ctx, source_with_path, temp2);
 			    break;
 
 			default:
@@ -2193,19 +2212,18 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
 		if (value == FILE_CONT)
 		    do_file_mark (panel, i, 0);
 
-		if (file_progress_show_count (ctx, count,
-						ctx->progress_count) == FILE_ABORT)
-		    break;
+		file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
+
 
 		if (verbose) {
-		    if (file_progress_show_bytes (ctx, bytes,
-						ctx->progress_bytes) == FILE_ABORT)
-			break;
+		    file_progress_show_bytes (ctx, tctx->progress_bytes, ctx->progress_bytes);
 
-		    if ((operation != OP_DELETE)
-			    && (file_progress_show (ctx, 0, 0) == FILE_ABORT))
-			break;
+		    if (operation != OP_DELETE)
+			file_progress_show (ctx, 0, 0);
 		}
+
+		if (check_progress_buttons (ctx) == FILE_ABORT)
+		    break;
 
 		mc_refresh ();
 	    }			/* Loop for every file */

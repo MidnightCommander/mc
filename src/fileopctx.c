@@ -87,3 +87,20 @@ file_op_context_destroy (FileOpContext *ctx)
 
     g_free (ctx);
 }
+
+FileOpTotalContext *
+file_op_total_context_new (void)
+{
+    FileOpTotalContext *tctx;
+    tctx = g_new0 (FileOpTotalContext, 1);
+    tctx->ask_overwrite = TRUE;
+    tctx->is_toplevel_file = TRUE;
+    return tctx;
+}
+
+void
+file_op_total_context_destroy (FileOpTotalContext *tctx)
+{
+    g_return_if_fail (tctx != NULL);
+    g_free (tctx);
+}
