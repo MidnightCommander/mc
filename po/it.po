@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.6.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-12 19:03+0100\n"
-"PO-Revision-Date: 2010-02-11 18:41+0100\n"
+"POT-Creation-Date: 2010-02-19 15:09+0100\n"
+"PO-Revision-Date: 2010-02-19 15:10+0100\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian <debian-l10n-italian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -273,7 +273,6 @@ msgstr "Primo"
 msgid "Underline"
 msgstr "Sottolineato"
 
-#, fuzzy
 msgid "Understrike"
 msgstr "Sottolineato"
 
@@ -314,12 +313,6 @@ msgid ""
 msgstr ""
 "Schermo di dimensione %dx%d non supportato.\n"
 "Controllare la variabile ambiente TERM.\n"
-
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -436,8 +429,8 @@ msgid "Inconsistent extfs archive"
 msgstr "Archivio extfs inconsistente"
 
 #, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Attenzione: file %s non trovato\n"
+msgid "Warning: cannot open %s directory\n"
+msgstr "Attenzione: impossibile aprire la directory %s\n"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -656,6 +649,10 @@ msgstr " Non riesco a connettermi al server: %s "
 
 msgid " Too many open connections "
 msgstr " Troppe connessioni aperte "
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Attenzione: file %s non trovato\n"
 
 #, c-format
 msgid ""
@@ -3505,6 +3502,12 @@ msgstr " Scegli la codepage "
 msgid "-  < No translation >"
 msgstr "-  < Non tradotto >"
 
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
+
 #, c-format
 msgid ""
 "Cannot save file %s:\n"
@@ -3761,6 +3764,12 @@ msgstr " Non posso vederlo: non è un file regolare "
 
 msgid "Seeking to search result"
 msgstr "In fase di ricerca"
+
+msgid "Search done"
+msgstr "Ricerca conclusa"
+
+msgid "Continue from begining?"
+msgstr "Continuare dall'inizio?"
 
 msgid " History "
 msgstr " Cronologia "
