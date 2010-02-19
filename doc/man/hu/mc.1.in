@@ -389,20 +389,6 @@ A panel legfelső, középső és alsó fájljának kiválasztásához használd
 sorban a megfelelő billentyű\-kombinációt. Linuxban M\-h a "history"
 bekapcsolására szolgál.
 .PP
-.B C\-s, M\-s
-Elindítja a fájl keresést a könyvtár listában.  Amikor a keresés
-aktív, a billentyűlenyomások hozzáadódnak a keresett szöveghez a
-parancssorban. Ha a
-.I Mini fájlinfó
-opció engedélyezve van, a kereső szöveg a mini\-fájlinfó sorban jelenik
-meg. Amikor gépelsz, a mini kiválasztó sáv átlép a következő fájlra,
-amely a begépelt szöveggel egyezik. A
-.IR backspace ,
-vagy a
-.I DEL
-gombokat használhatod a gépelési hibák javítására. Ha a C\-s gombokat
-használod újra, új keresés kezdhető.
-.PP
 .B M\-t
 Vált a jelenlegi lista megjelenítési módról a következő megjelenítési
 módra. Ezzel gyorsan át tudsz váltani a hosszú listáról a rendezett
@@ -472,6 +458,22 @@ egérrel történő lenyomásával.
 .B M\-S\-h, M\-H
 Megjeleníti a könyvtár előzményeket, azonos a 'v' egérrel történő
 lenyomásával.
+.\"NODE "  Quick search"
+.SH "  Quick search"
+.PP
+.B C\-s, M\-s
+Elindítja a fájl keresést a könyvtár listában.  Amikor a keresés
+aktív, a billentyűlenyomások hozzáadódnak a keresett szöveghez a
+parancssorban. Ha a
+.I Mini fájlinfó
+opció engedélyezve van, a kereső szöveg a mini\-fájlinfó sorban jelenik
+meg. Amikor gépelsz, a mini kiválasztó sáv átlép a következő fájlra,
+amely a begépelt szöveggel egyezik. A
+.IR backspace ,
+vagy a
+.I DEL
+gombokat használhatod a gépelési hibák javítására. Ha a C\-s gombokat
+használod újra, új keresés kezdhető.
 .\"NODE "  Shell Command Line"
 .SH "  Shell parancssor"
 Ez a rész tartalamazza azokat a billentyű\-kombinációkat,
