@@ -395,22 +395,6 @@ en el diálogo de selección de código.
 usadas para seleccionar el archivo superior en un panel, el archivo central y el inferior del
 panel, respectivamente.
 .TP
-.B Ctrl\-s, Alt\-s
-inicia la búsqueda de un archivo en la lista de directorios (panel activo).  A
-partir de ese momento las teclas pulsadas se van añadiendo a la cadena en búsqueda
-y no a la línea de órdenes. Si la opción de
-.I Mostrar Mini\-estado
-está habilitada, la cadena a buscar se podrá ver en la línea de mini\-estado.
-Conforme tecleemos, dentro del panel activo la barra de selección se desplazará
-al siguiente archivo o directorio cuyo nombre coincida con las letras
-introducidas.  Se pueden usar las teclas
-.I borrar
-o
-.I suprimir
-para corregir errores de escritura.  Si pulsamos
-.I Ctrl\-s
-de nuevo, se busca la siguiente coincidencia.
-.TP
 .B Alt\-t
 rota el listado de pantalla actual para mostrar el siguiente modo
 de listado. Con esto es posible intercambiar rápidamente de un listado
@@ -509,6 +493,24 @@ con el ratón.
 muestra el historial de directorios visitados, equivale a pulsar la
 .I v
 con el ratón.
+.\"NODE "  Quick search"
+.SH "  Quick search"
+.TP
+.B Ctrl\-s, Alt\-s
+inicia la búsqueda de un archivo en la lista de directorios (panel activo).  A
+partir de ese momento las teclas pulsadas se van añadiendo a la cadena en búsqueda
+y no a la línea de órdenes. Si la opción de
+.I Mostrar Mini\-estado
+está habilitada, la cadena a buscar se podrá ver en la línea de mini\-estado.
+Conforme tecleemos, dentro del panel activo la barra de selección se desplazará
+al siguiente archivo o directorio cuyo nombre coincida con las letras
+introducidas.  Se pueden usar las teclas
+.I borrar
+o
+.I suprimir
+para corregir errores de escritura.  Si pulsamos
+.I Ctrl\-s
+de nuevo, se busca la siguiente coincidencia.
 .\"NODE "  Shell Command Line"
 .SH "  Línea de Órdenes del Sistema"
 Esta sección enumera las teclas útiles para evitar la excesiva escritura

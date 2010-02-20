@@ -486,20 +486,6 @@ the dialog of encodings.
 used to select the top file in a panel, the middle file and the bottom one,
 respectively.
 .TP
-.B C\-s, Alt\-s
-start a filename search in the directory listing. When the search is
-active, the user input will be added to the search string instead of
-the command line. If the
-.I Show mini\-status
-option is enabled the search string is shown on the mini\-status
-line. When typing, the selection bar will move to the next file
-starting with the typed letters. The
-.I backspace
-or
-.I DEL
-keys can be used to correct typing mistakes. If C\-s is pressed
-again, the next match is searched for.
-.TP
 .B Alt\-t
 toggle the current display listing to show the next display listing
 mode.
@@ -586,6 +572,29 @@ with the mouse.
 .B Alt\-Shift\-h, Alt\-H
 displays the directory history, equivalent to depressing the 'v' with
 the mouse.
+.\"NODE "  Quick search"
+.SH "  Quick search"
+The Quick search mode allows to perform fast file search in file panel.
+Press
+.I C\-s
+or
+.I Alt\-s
+to start a filename search in the directory listing.
+.P
+When the search is active, the user input will be added to the search string
+instead of the command line. If the
+.I Show mini\-status
+option is enabled the search string is shown on the mini\-status
+line. When typing, the selection bar will move to the next file
+starting with the typed letters. The
+.I backspace
+or
+.I DEL
+keys can be used to correct typing mistakes. If C\-s is pressed
+again, the next match is searched for.
+.P
+Besides the filename characters, you can also use wildcard
+characters '*' and '?'.
 .\"NODE "  Shell Command Line"
 .SH "  Shell Command Line"
 This section lists keys which are useful to avoid excessive typing when

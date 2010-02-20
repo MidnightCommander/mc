@@ -2193,80 +2193,82 @@ mark_file (WPanel *panel)
 static void
 do_search (WPanel *panel, int c_code)
 {
-    size_t l, max, buf_max;
+    size_t l;
     int i, sel;
-    int wrapped = 0;
+    gboolean wrapped = FALSE;
     char *act;
+    mc_search_t *search;
+    char *reg_exp, *esc_str;
+    gboolean is_found = FALSE;
 
     l = strlen (panel->search_buffer);
     if (c_code == KEY_BACKSPACE) {
-	if (l != 0) {
+        if (l != 0) {
             act = panel->search_buffer + l;
             str_prev_noncomb_char (&act, panel->search_buffer);
             act[0] = '\0';
         }
         panel->search_chpoint = 0;
     } else {
-        if (c_code && (gsize) panel->search_chpoint < sizeof (panel->search_char)) {
+        if (c_code != 0 && (gsize) panel->search_chpoint < sizeof (panel->search_char)) {
             panel->search_char[panel->search_chpoint] = c_code;
             panel->search_chpoint++;
-	}
-        
+        }
+
         if (panel->search_chpoint > 0) {
             switch (str_is_valid_char (panel->search_char, panel->search_chpoint)) {
-                case -2:
-                    return;
-                case -1:
+            case -2:
+                return;
+            case -1:
+                panel->search_chpoint = 0;
+                return;
+            default:
+                if (l + panel->search_chpoint < sizeof (panel->search_buffer)) {
+                    memcpy (panel->search_buffer + l, panel->search_char,
+                            panel->search_chpoint);
+                    l+= panel->search_chpoint;
+                    (panel->search_buffer + l)[0] = '\0';
                     panel->search_chpoint = 0;
-                    return;
-                default:
-                    if (l + panel->search_chpoint < sizeof (panel->search_buffer)) { 
-                        memcpy (panel->search_buffer + l, panel->search_char, 
-                                panel->search_chpoint);
-                        l+= panel->search_chpoint;
-                        (panel->search_buffer + l)[0] = '\0';
-                        panel->search_chpoint = 0;
                 }
-	   }
-	}
+            }
+        }
     }
 
-    buf_max = panel->case_sensitive ? 
-            str_prefix (panel->search_buffer, panel->search_buffer) :
-            str_caseprefix (panel->search_buffer, panel->search_buffer);
-    max = 0;
+    reg_exp = g_strdup_printf ("%s*", panel->search_buffer);
+    esc_str = strutils_escape (reg_exp, -1, ",|\\{}[]", TRUE);
+    search = mc_search_new (esc_str, -1);
+    search->search_type = MC_SEARCH_T_GLOB;
+    search->is_entire_line = TRUE;
+    search->is_case_sentitive = 0;
+
     sel = panel->selected;
     for (i = panel->selected; !wrapped || i != panel->selected; i++) {
-	if (i >= panel->count) {
-	    i = 0;
-	    if (wrapped)
-		break;
-	    wrapped = 1;
-	}
-        l = panel->case_sensitive ? 
-            str_prefix (panel->dir.list[i].fname, panel->search_buffer) :
-            str_caseprefix (panel->dir.list[i].fname, panel->search_buffer);
-        if (l > max) {
-            max = l;
+        if (i >= panel->count) {
+            i = 0;
+            if (wrapped)
+                break;
+            wrapped = TRUE;
+        }
+        if (mc_search_run (search, panel->dir.list[i].fname,
+                           0, panel->dir.list[i].fnamelen, NULL)) {
             sel = i;
-            if (max == buf_max) break;
-	}
+            is_found = TRUE;
+            break;
+        }
     }
-    
-	    unselect_item (panel);
-    panel->selected = sel;
-	    select_item (panel);
-    
-    act = panel->search_buffer + strlen (panel->search_buffer);
-    while (max < buf_max) {
-        str_prev_char_safe (&act);
+    if (is_found) {
+        unselect_item (panel);
+        panel->selected = sel;
+        select_item (panel);
+        paint_panel (panel);
+    } else if (c_code != KEY_BACKSPACE) {
+        act = panel->search_buffer + l;
+        str_prev_noncomb_char (&act, panel->search_buffer);
         act[0] = '\0';
-        buf_max = panel->case_sensitive ? 
-            str_prefix (panel->search_buffer, panel->search_buffer) :
-            str_caseprefix (panel->search_buffer, panel->search_buffer);
     }
-
-    paint_panel (panel);
+    mc_search_free (search);
+    g_free (reg_exp);
+    g_free (esc_str);
 }
 
 static void

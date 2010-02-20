@@ -400,20 +400,6 @@ the dialog of encodings.
 usato per selezionare rispettivamente il file superiore, il file centrale o 
 quello inferiore in un pannello.
 .TP
-.B C\-s, M\-s
-inizia una ricerca nella directory. Quando la ricerca è attiva i dati
-immessi dall'utente vengono aggiunti alla stringa di ricerca invece
-della riga di comando. Se l'opzione
-.I Mostra mini\-stato
-è abilitata, la stringa di ricerca viene mostrata nella riga di
-mini\-stato. Scrivendo, la barra di selezione si muove al prossimo
-file che comincia con le lettere battute. I tasti
-.I backspace
-o
-.I canc 
-possono essere utilizzati per correggere errori di battitura. Se viene premuto
-nuovamente, viene ricercata la corrispondenza successiva.
-.TP
 .B M\-t
 cambia il modo di visualizzazione corrente per mostrare la modalità
 successiva. In questo modo è possibile cambiare velocemente da listati
@@ -479,6 +465,22 @@ premere '>' con il mouse.
 .TP
 .B M\-S\-h, M\-H
 mostra la cronologia directory, equivalente a premere 'v' con il mouse.
+.\"NODE "  Quick search"
+.SH "  Quick search"
+.TP
+.B C\-s, M\-s
+inizia una ricerca nella directory. Quando la ricerca è attiva i dati
+immessi dall'utente vengono aggiunti alla stringa di ricerca invece
+della riga di comando. Se l'opzione
+.I Mostra mini\-stato
+è abilitata, la stringa di ricerca viene mostrata nella riga di
+mini\-stato. Scrivendo, la barra di selezione si muove al prossimo
+file che comincia con le lettere battute. I tasti
+.I backspace
+o
+.I canc 
+possono essere utilizzati per correggere errori di battitura. Se viene premuto
+nuovamente, viene ricercata la corrispondenza successiva.
 .\"NODE "  Shell Command Line"
 .SH "  Shell a riga di comando"
 Questa sezione elenca i tasti utili ad evitare troppe battiture

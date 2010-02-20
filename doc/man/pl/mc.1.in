@@ -317,21 +317,6 @@ the dialog of encodings.
 .BR M\-g ", " M\-r ", " M\-j .
 Używane do wybierania najwyższego, środkowego i najniższego pliku w panelu.
 .PP
-.BR C\-s ", " M\-s .
-Uruchamia szukanie pliku w katalogu na podstawie jego nazwy. Kiedy szukanie
-jest aktywne, każde naciśnięcie klawisza doda jeden znak do poszukiwania
-zamiast wypisania go linii poleceń. Jeśli opcja
-.I "Show mini\-status"
-jest włączona, szukany ciąg znaków pojawia się w linii mini\-statusu. Kiedy
-wpisujemy znak, linia wyboru przemieszcza się do następnego pliku zaczynającego
-się od podanych liter. Klawisze
-.I backspace
-lub
-.I del
-mogą być używane do poprawiania błędów. Jeśli C\-s zostanie naciśnięte ponownie,
-Midnight Commander rozpoczyna szukanie następnego pliku
-zaczynającego się od podanych znaków.
-.PP
 .BR M\-t .
 Przełącza tryb wyświetlania do następnego możliwego. Używając tej opcji
 łatwo jest przejść szybko z długiego do krótkiego trybu wyświetlania
@@ -399,6 +384,23 @@ w '>'.
 .BR M\-S\-h ", " M\-H .
 Wyświetla historię katalogów, podobne działanie do kliknięcia myszką 'v'.
 .PP
+.\"NODE "  Quick search"
+.SH "  Quick search"
+.PP
+.BR C\-s ", " M\-s .
+Uruchamia szukanie pliku w katalogu na podstawie jego nazwy. Kiedy szukanie
+jest aktywne, każde naciśnięcie klawisza doda jeden znak do poszukiwania
+zamiast wypisania go linii poleceń. Jeśli opcja
+.I "Show mini\-status"
+jest włączona, szukany ciąg znaków pojawia się w linii mini\-statusu. Kiedy
+wpisujemy znak, linia wyboru przemieszcza się do następnego pliku zaczynającego
+się od podanych liter. Klawisze
+.I backspace
+lub
+.I del
+mogą być używane do poprawiania błędów. Jeśli C\-s zostanie naciśnięte ponownie,
+Midnight Commander rozpoczyna szukanie następnego pliku
+zaczynającego się od podanych znaków.
 .\"NODE "  Shell Command Line"
 .SH "  Linia Powłoki"
 Ta sekcja opisuje klawisze, które są użyteczne do efektywniejszego
