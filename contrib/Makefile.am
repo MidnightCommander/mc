@@ -2,12 +2,6 @@
 
 SUBDIRS = dist
 
-if CHARSET
-LIBFILES_ADD = mc.charsets
-else
-LIBFILES_ADD =
-endif
-
 noinst_DATA = README.xterm mcserv.init mcserv.pamd
 
 SCRIPTS_IN = mc.csh.in mc.sh.in mc-wrapper.csh.in mc-wrapper.sh.in
@@ -25,8 +19,7 @@ CLEANFILES = $(SCRIPTS_OUT)
 # Files processed by configure don't need to be here
 EXTRA_DIST = \
 	$(SCRIPTS_IN) \
-	$(noinst_DATA) \
-	mc.charsets
+	$(noinst_DATA)
 
 mc.csh: $(srcdir)/mc.csh.in
 	sed "s%@""pkglibexecdir@%$(pkglibexecdir)%" $(srcdir)/mc.csh.in > mc.csh
