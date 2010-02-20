@@ -2,13 +2,13 @@ shell_patterns=0
 + ! t t
 @       Ради нешто над текућом датотеком
 	CMD=%{Унесите наредбу}
-	"$CMD" %f
+	$CMD %f
 
 + t t
 @       Ради нешто над означеним датотекама
 	set %t; CMD=%{Унесите наредбу}
 	while [ -n "$1" ]; do
-	  "$CMD" "$1"
+	  $CMD "$1"
 	  shift
 	done
 	
@@ -184,17 +184,33 @@ U       Уудекодирај означени чланак вести (тре�
 	fi
 	echo "Молим да проверите излазну датотеку пре било каквог брисања."
 
-=+ f \.tar\.gz$ | f \.tar\.z$ | f \.tgz$ | f \.tpz$ | f \.tar\.Z$| f \.tar\.bz2$ & t r
+=+ f \.tar\.gz$ | f \.tar\.z$ | f \.tgz$ | f \.tpz$ | f \.tar\.lz$ | f \.tar\.lzma$ | f \.tar\.7z$ | f \.tar\.xz$ | f \.tar\.Z$ | f \.tar\.bz2$ & t r
 x       Издвој садржај компримоване датотеке врсте `tar'
-	unset EXT
-	case %f in 
-	    *.tar.bz2) EXT=tar_bz2;;
+	unset PRG
+	case %f in
+	    *.tar.bz2)
+		PRG="bunzip2 -c"
+		;;
+	    *.tar.gz|*.tar.z|*.tgz|*.tpz|*.tar.Z)
+		PRG="gzip -dc"
+		;;
+	    *.tar.lzma)
+		PRG="lzma -dc"
+		;;
+	    *.tar.lz)
+		PRG="lzip -dc"
+		;;
+	    *.tar.xz)
+		PRG="xz -dc"
+		;;
+	    *.tar.7z)
+		PRG="7za e -so"
+		;;
+	    *)
+		exit 1
+		;;
 	esac
-	if [ "$EXT" = "tar_bz2" ]; then
-	  bunzip2 -c %f | tar xvf -
-	else
-	  gzip -dc %f | tar xvf -
-	fi
+	$PRG %f | tar xvf -
 
 = t r
 + ! t t
