@@ -35,6 +35,7 @@
 
 #include "lib/tty/tty.h"
 #include "lib/skin.h"
+#include "lib/strescape.h"
 #include "lib/tty/mouse.h"		/* For Gpm_Event */
 #include "lib/tty/key.h"		/* XCTRL and ALT macros  */
 #include "lib/filehighlight.h"
