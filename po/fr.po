@@ -40,7 +40,7 @@ msgid "&Regular expression"
 msgstr "Expression &régulière"
 
 msgid "Hexadecimal"
-msgstr "Hexadecimal"
+msgstr "Hexadécimal"
 
 msgid "Wildcard search"
 msgstr ""
@@ -54,12 +54,12 @@ msgstr ""
 "Le thème par défaut a été chargé"
 
 # XXX: trad "parser"
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
 msgstr ""
-"Impossible de parser le thème '%s'.\n"
+"Impossible d'analyser le thème '%s'.\n"
 "Le thème par défaut a été chargé"
 
 # Les 2 espaces après les ":" sont pour l'alignement
@@ -990,7 +990,7 @@ msgid "[this_dir] [other_panel_dir]"
 msgstr "[ce_rép] [autre_rép_panneau]"
 
 msgid "Set initial line number for the internal editor"
-msgstr ""
+msgstr "Définit le numéro de ligne initial pour l'éditeur interne"
 
 msgid ""
 "\n"
@@ -1053,7 +1053,6 @@ msgid "&Reverse"
 msgstr "Inve&Rsé"
 
 # XXX: "sensible à la casse"
-#, fuzzy
 msgid "Case sensi&tive"
 msgstr "Respec&t de la casse "
 
@@ -1063,16 +1062,14 @@ msgstr "Exécutable en &premier"
 msgid "Sort order"
 msgstr "Ordre de tri"
 
-#, fuzzy
 msgid "Confirmation"
 msgstr " Confirmation "
 
 #. TRANSLATORS: no need to translate 'Confirmation', it's just a context
 #. prefix
 #. 2
-#, fuzzy
 msgid "Confirmation|&History cleanup"
-msgstr " Confirmation "
+msgstr " Confirmation|Nettoyage de l'&Historique"
 
 #, fuzzy
 msgid "Confirmation|&Directory hotlist delete"
@@ -1082,7 +1079,7 @@ msgid "Confirmation|E&xit"
 msgstr " Confirmation|&Quitter"
 
 msgid "Confirmation|&Execute"
-msgstr " Confirmation|Éxecuter"
+msgstr " Confirmation|Exécuter"
 
 msgid "Confirmation|O&verwrite"
 msgstr " Confirmation|É&Crasement "
@@ -1816,7 +1813,7 @@ msgid "&Whole words"
 msgstr "&Mots entiers"
 
 msgid "In se&lection"
-msgstr "Dans sé&lection"
+msgstr "Dans la sé&lection"
 
 msgid "&Backwards"
 msgstr "Vers le &haut"
@@ -1913,20 +1910,17 @@ msgstr "Ra&Z marqué"
 msgid "&Mark columns"
 msgstr "&Marquer colonne"
 
-#, fuzzy
 msgid "Mark &all"
-msgstr "Tous &Marqués"
+msgstr "&Marquer tous"
 
 msgid "Unmar&k"
 msgstr ""
 
-#, fuzzy
 msgid "Cop&y"
 msgstr "&Copier"
 
-#, fuzzy
 msgid "Mo&ve"
-msgstr "Déplacer"
+msgstr "&Déplacer"
 
 msgid "&Delete"
 msgstr "&Effacer"
@@ -1959,14 +1953,12 @@ msgstr "Chercher à nouve&au"
 msgid "&Replace..."
 msgstr "&Remplacer..."
 
-#, fuzzy
 msgid "&Toggle bookmark"
 msgstr "&Inverser le marque-page"
 
 msgid "&Next bookmark"
 msgstr "Marque-page suivant"
 
-#, fuzzy
 msgid "&Prev bookmark"
 msgstr "Marque-page précédent"
 
@@ -1983,17 +1975,15 @@ msgstr "I&nverser l'état de la ligne"
 msgid "Go to matching &bracket"
 msgstr "Aller au &crochet correspondant"
 
-#, fuzzy
 msgid "&Find declaration"
-msgstr "Trouver la declaration"
+msgstr "&Trouver la déclaration"
 
-#, fuzzy
 msgid "Back from &declaration"
-msgstr "Trouver la declaration"
+msgstr "Trouver la &déclaration"
 
 #, fuzzy
 msgid "For&ward to declaration"
-msgstr "Trouver la declaration"
+msgstr "Trouver la déclaration"
 
 msgid "Encod&ing..."
 msgstr "&Encodage..."
@@ -2006,7 +1996,6 @@ msgid "&Start record macro"
 msgstr "&Commencer à enregistrer une macro"
 
 # XXX problème &
-#, fuzzy
 msgid "Finis&h record macro..."
 msgstr "&Achever d'enregistrer la macro..."
 
@@ -2029,7 +2018,6 @@ msgstr "Insérer un &littéral..."
 msgid "Insert &date/time"
 msgstr "Insérer &date/heure"
 
-#, fuzzy
 msgid "&Format paragraph"
 msgstr "Formater le p&aragraphe"
 
