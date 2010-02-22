@@ -785,6 +785,66 @@ label_new (int y, int x, const char *text)
     return l;
 }
 
+static cb_ret_t
+hline_callback (Widget *w, widget_msg_t msg, int parm)
+{
+    WHLine *l = (WHLine *) w;
+    Dlg_head *h = l->widget.parent;
+
+    switch (msg) {
+    case WIDGET_INIT:
+    case WIDGET_RESIZED:
+	if (l->auto_adjust_cols) {
+	    if (((w->parent->flags & DLG_COMPACT) != 0)) {
+		w->x = w->parent->x;
+		w->cols = w->parent->cols;
+	    } else {
+		w->x = w->parent->x + 1;
+		w->cols = w->parent->cols - 2;
+	    }
+	}
+
+    case WIDGET_FOCUS:
+	/* We don't want to get the focus */
+	return MSG_NOT_HANDLED;
+
+    case WIDGET_DRAW:
+	if (l->transparent)
+	    tty_setcolor (DEFAULT_COLOR);
+	else
+	    tty_setcolor (DLG_NORMALC (h));
+
+	tty_draw_hline (w->y, w->x + 1, ACS_HLINE, w->cols - 2);
+
+	if (l->auto_adjust_cols) {
+	    widget_move (w, 0, 0);
+	    tty_print_alt_char (ACS_LTEE);
+	    widget_move (w, 0, w->cols - 1);
+	    tty_print_alt_char (ACS_RTEE);
+	}
+	return MSG_HANDLED;
+
+    default:
+	return default_proc (msg, parm);
+    }
+}
+
+
+WHLine *
+hline_new (int y, int x, int width)
+{
+    WHLine *l;
+    int cols = width;
+    int lines = 1;
+
+    l = g_new (WHLine, 1);
+    init_widget (&l->widget, y, x, lines, cols, hline_callback, NULL);
+    l->auto_adjust_cols = (width < 0);
+    l->transparent = FALSE;
+    widget_want_cursor (l->widget, 0);
+    return l;
+}
+
 
 /* Gauge widget (progress indicator) */
 /* Currently width is hardcoded here for text mode */
