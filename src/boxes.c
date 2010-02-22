@@ -268,7 +268,7 @@ display_box (WPanel *panel, char **userp, char **minip, int *use_msformat, int n
 const panel_field_t *
 sort_box (const panel_field_t *sort_format, int *reverse, int *case_sensitive, int *exec_first)
 {
-    int dlg_width = 40, dlg_height = 15;
+    int dlg_width = 40, dlg_height = 7;
 
     const char **sort_orders_names;
     gsize sort_names_num;
@@ -276,6 +276,9 @@ sort_box (const panel_field_t *sort_format, int *reverse, int *case_sensitive, i
     int sort_idx = 0;
 
     const panel_field_t *result = sort_format;
+
+    sort_orders_names = panel_get_sortable_fields(&sort_names_num);
+    dlg_height += sort_names_num;
 
     {
 	int max_radio = 0, max_check = 0;
@@ -307,7 +310,6 @@ sort_box (const panel_field_t *sort_format, int *reverse, int *case_sensitive, i
 	    quick_widgets, TRUE
 	};
 
-	sort_orders_names = panel_get_sortable_fields(&sort_names_num);
 	quick_widgets[5].u.radio.items = sort_orders_names;
 	quick_widgets[5].u.radio.count = sort_names_num;
 

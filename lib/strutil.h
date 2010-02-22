@@ -508,4 +508,5 @@ int str_isutf8 (const char *codeset_name);
 
 const char *str_detect_termencoding (void);
 
+int str_verscmp(const char *s1, const char *s2);
 #endif				/* MC_STRUTIL_H*/

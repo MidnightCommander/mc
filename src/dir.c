@@ -98,6 +98,19 @@ sort_name (file_entry *a, file_entry *b)
 }
 
 int
+sort_vers (file_entry *a, file_entry *b)
+{
+    int ad = MY_ISDIR (a);
+    int bd = MY_ISDIR (b);
+
+    if (ad == bd || mix_all_files) {
+        return str_verscmp(a->fname, b->fname) * reverse;
+    } else {
+        return bd - ad;
+    }
+}
+
+int
 sort_ext (file_entry *a, file_entry *b)
 {
     int r;
