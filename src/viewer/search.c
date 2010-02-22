@@ -78,7 +78,7 @@ mcview_find (mcview_t * view, gsize search_start, gsize * len)
 
     view->search_numNeedSkipChar = 0;
 
-    if (view->search_backwards) {
+    if (mcview_search_options.backwards) {
         search_end = mcview_get_filesize (view);
         while ((int) search_start >= 0) {
             view->search_nroff_seq->index = search_start;
@@ -220,14 +220,14 @@ mcview_do_search (mcview_t * view)
     /*for avoid infinite search loop we need to increase or decrease start offset of search */
 
     if (view->search_start) {
-        search_start = (view->search_backwards) ? -2 : 2;
+        search_start = (mcview_search_options.backwards) ? -2 : 2;
         search_start = view->search_start + search_start +
             mcview__get_nroff_real_len (view, view->search_start, 2) * search_start;
     } else {
         search_start = view->search_start;
     }
 
-    if (view->search_backwards && (int) search_start < 0)
+    if (mcview_search_options.backwards && (int) search_start < 0)
         search_start = 0;
 
     /* Compute the percent steps */
@@ -262,7 +262,7 @@ mcview_do_search (mcview_t * view)
         break;
     } while (mcview_may_still_grow (view));
 
-    if (!isFound && need_search_again && !view->search_backwards) {
+    if (!isFound && need_search_again && !mcview_search_options.backwards) {
         int result;
         mcview_update (view);
 

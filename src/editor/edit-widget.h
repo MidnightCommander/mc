@@ -48,16 +48,10 @@ struct WEdit {
     /* UTF8 */
     char charbuf[4 + 1];
     int charpoint;
-    /* search variables */
-    mc_search_t *search;
 
-    unsigned int search_type;
+    /* search handler */
+    mc_search_t *search;
     int replace_mode;
-    int replace_backwards;
-    int replace_case;
-    int only_in_selection;
-    int whole_words;
-    int all_codepages;
 
     long search_start;		/* First character to start searching from */
     int found_len;		/* Length of found string or 0 if none was found */
