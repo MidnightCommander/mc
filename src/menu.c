@@ -208,10 +208,12 @@ menubar_draw_drop (WMenuBar *menubar)
 static void
 menubar_set_color (WMenuBar *menubar, gboolean current, gboolean hotkey)
 {
-    if (!menubar->is_active || !current)
-	tty_setcolor (hotkey ? MENU_HOT_COLOR : MENU_ENTRY_COLOR);
-    else
+    if (!menubar->is_active)
+	tty_setcolor (MENU_INACTIVE_COLOR);
+    else if (current)
 	tty_setcolor (hotkey ? MENU_HOTSEL_COLOR : MENU_SELECTED_COLOR);
+    else
+	tty_setcolor (hotkey ? MENU_HOT_COLOR : MENU_ENTRY_COLOR);
 }
 
 static void
@@ -220,7 +222,7 @@ menubar_draw (WMenuBar *menubar)
     GList *i;
 
     /* First draw the complete menubar */
-    tty_setcolor (MENU_ENTRY_COLOR);
+    tty_setcolor (menubar->is_active ? MENU_ENTRY_COLOR : MENU_INACTIVE_COLOR);
     tty_draw_hline (menubar->widget.y, menubar->widget.x, ' ', menubar->widget.cols);
 
     /* Now each one of the entries */
