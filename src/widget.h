@@ -89,6 +89,7 @@ typedef struct WGauge {
     int shown;
     int max;
     int current;
+    gboolean from_left_to_right;
 } WGauge;
 
 GList *history_get (const char *input_name);

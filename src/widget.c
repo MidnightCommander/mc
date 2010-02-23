@@ -885,10 +885,19 @@ gauge_callback (Widget *w, widget_msg_t msg, int parm)
 	    percentage = (200 * done / total + 1) / 2;
 	    columns = (2 * (gauge_len - 7) * done / total + 1) / 2;
 	    tty_print_char ('[');
-	    tty_setcolor (GAUGE_COLOR);
-	    tty_printf ("%*s", (int) columns, "");
-	    tty_setcolor (DLG_NORMALC (h));
-	    tty_printf ("%*s] %3d%%", (int)(gauge_len - 7 - columns), "", (int) percentage);
+	    if (g->from_left_to_right) {
+		tty_setcolor (GAUGE_COLOR);
+		tty_printf ("%*s", (int) columns, "");
+		tty_setcolor (DLG_NORMALC (h));
+		tty_printf ("%*s] %3d%%", (int)(gauge_len - 7 - columns), "", (int) percentage);
+	    } else {
+		tty_setcolor (DLG_NORMALC (h));
+		tty_printf ("%*s", gauge_len - columns - 7, "");
+		tty_setcolor (GAUGE_COLOR);
+		tty_printf ("%*s", columns, "");
+		tty_setcolor (DLG_NORMALC (h));
+		tty_printf ("] %3d%%", 100 * columns / (gauge_len - 7), percentage);
+	    }
 	}
 	return MSG_HANDLED;
     }
@@ -929,6 +938,7 @@ gauge_new (int y, int x, int shown, int max, int current)
         max = 1; /* I do not like division by zero :) */
     g->max = max;
     g->current = current;
+    g->from_left_to_right = TRUE;
     widget_want_cursor (g->widget, 0);
     return g;
 }

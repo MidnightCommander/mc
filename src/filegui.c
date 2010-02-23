@@ -79,6 +79,7 @@
 #include "lib/global.h"
 
 #include "lib/tty/key.h"		/* tty_get_event */
+#include "lib/mcconfig.h"
 #include "lib/search.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/strescape.h"
@@ -332,6 +333,14 @@ file_op_context_create_ui_without_init (FileOpContext *ctx, gboolean with_eta, g
 		label_new (3, FCOPY_GAUGE_X, sixty));
     add_widget (ui->op_dlg, ui->file_label[0] =
 		label_new (3, FCOPY_LABEL_X, fifteen));
+
+    if (
+	! mc_config_get_bool (mc_main_config,"Layout", "progressbar_always_left2right", TRUE) &&
+	right_panel == current_panel
+    ) {
+	ui->progress_gauge[0]->from_left_to_right = FALSE;
+	ui->progress_gauge[1]->from_left_to_right = FALSE;
+    }
 }
 
 void
