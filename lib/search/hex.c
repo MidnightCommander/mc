@@ -87,6 +87,9 @@ mc_search__hex_translate_to_regex (gchar * str, gsize * len)
         }
         loop++;
     }
+
+    g_free (tmp_str);
+
     *len = buff->len;
     return buff;
 }
