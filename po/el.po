@@ -7,12 +7,13 @@ msgstr ""
 "Project-Id-Version: mc 4.5.38\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
 "POT-Creation-Date: 2010-02-09 12:08+0200\n"
-"PO-Revision-Date: 1997-07-23 00:04-0400\n"
-"Last-Translator: Spiros Papadimitriou <spapadim+@cs.cmu.edu>\n"
+"PO-Revision-Date: 2010-02-23 16:49+0200\n"
+"Last-Translator: Alex-P. Natsios <root@drakevr.gr>\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid " Search string not found "
 msgstr ""
@@ -28,7 +29,7 @@ msgid " Invalid token number %d "
 msgstr " Άκυρος κωδικός "
 
 msgid "Normal"
-msgstr ""
+msgstr "Κανονικό"
 
 msgid "&Regular expression"
 msgstr "&Κανονική έκφραση"
@@ -262,15 +263,15 @@ msgstr ""
 msgid "Prime"
 msgstr ""
 
-#, fuzzy
 msgid "Underline"
-msgstr " Γραμμή: "
+msgstr "Υπογράμμιση"
 
 msgid "Understrike"
 msgstr ""
 
+#, fuzzy
 msgid "Pipe"
-msgstr ""
+msgstr "Αγωγός"
 
 #, fuzzy
 msgid "Enter"
@@ -292,13 +293,13 @@ msgid "Number sign #"
 msgstr ""
 
 msgid "Ctrl"
-msgstr ""
+msgstr "Ctrl"
 
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 msgid "Shift"
-msgstr ""
+msgstr "Shift"
 
 #, c-format
 msgid ""
@@ -312,9 +313,9 @@ msgstr ""
 msgid "%b %e %H:%M"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s is not a directory\n"
-msgstr "Δημηουργία νέου καταλόγου"
+msgstr "Το %s δεν είναι κατάλογος\n"
 
 #, c-format
 msgid "Directory %s is not owned by you\n"
@@ -381,19 +382,20 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
-msgstr "Απρόσμενο τέλος αρχείου tar"
+msgstr ""
+"Απρόσμενο τέλος αρχείου\n"
+"%s"
 
 #, c-format
 msgid "Directory cache expired for %s"
 msgstr ""
 
-#, fuzzy
 msgid "Starting linear transfer..."
-msgstr "ftpfs: ακύρωση μεταφοράς."
+msgstr "Εκκίνηση γραμμικής μεταφοράς..."
 
 #, c-format
 msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
@@ -403,9 +405,8 @@ msgstr ""
 msgid "%s: %s: %s %lu bytes transferred"
 msgstr ""
 
-#, fuzzy
 msgid "Getting file"
-msgstr "Διαγραφή αρχείου: "
+msgstr "Παραλαβή αρχείου..."
 
 #, c-format
 msgid ""
@@ -422,25 +423,21 @@ msgstr "Χαλασμένο αρχείο extfs"
 msgid "Warning: file %s not found\n"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "fish: Disconnecting from %s"
-msgstr "ftpfs: Αποσύνδεση από το %s"
+msgstr "fish: Αποσύνδεση από %s"
 
 msgid "fish: Waiting for initial line..."
 msgstr ""
 
 msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr ""
-"Με συγχωρείτε, αλλά προς το παρόν συνδέσεις με χρήση κωδικού δεν "
-"υποστηρίζονται."
+msgstr "Με συγχωρείτε, αλλά προς το παρόν συνδέσεις με χρήση κωδικού δεν υποστηρίζονται."
 
-#, fuzzy
 msgid " fish: Password required for "
-msgstr " FTP: Απαιτείται κωδικός για το "
+msgstr " fish: Απαιτείται κωδικός για το "
 
-#, fuzzy
 msgid "fish: Sending password..."
-msgstr "ftpfs: αποστολή κωδικού χρήστη"
+msgstr " fish: Aποστολή κωδικού..."
 
 msgid "fish: Sending initial line..."
 msgstr ""
@@ -448,25 +445,24 @@ msgstr ""
 msgid "fish: Handshaking version..."
 msgstr ""
 
-#, fuzzy
 msgid "fish: Setting up current directory..."
-msgstr "ftpfs: Ανάγνωση καταλόγου FTP %s..."
+msgstr "fish: Προσαρμογή τρέχοντος καταλόγου..."
 
-#, fuzzy, c-format
+#, c-format
 msgid "fish: Connected, home %s."
-msgstr "ftpfs: σύνδεση με το %s ολοκληρώθηκε"
+msgstr "fish: Συνδέθηκε, κατάλογος χρήστη %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "fish: Reading directory %s..."
-msgstr "ftpfs: Ανάγνωση καταλόγου FTP %s..."
+msgstr "fish: Ανάγνωση καταλόγου %s..."
 
 #, c-format
 msgid "%s: done."
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: failure"
-msgstr "ftpfs: αποτυχία"
+msgstr "%s: αποτυχία"
 
 #, c-format
 msgid "fish: store %s: sending command..."
@@ -475,9 +471,9 @@ msgstr ""
 msgid "fish: Local read failed, sending zeros"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "fish: storing %s %d (%lu)"
-msgstr "ftpfs: αποθήκευση αρχείου %d (%d)"
+msgstr "fish: αποθήκευση %s %d (%lu)"
 
 msgid "zeros"
 msgstr ""
@@ -485,9 +481,8 @@ msgstr ""
 msgid "file"
 msgstr ""
 
-#, fuzzy
 msgid "Aborting transfer..."
-msgstr "ftpfs: ακύρωση μεταφοράς."
+msgstr "ftpfs: Ακύρωση μεταφοράς..."
 
 msgid "Error reported after abort."
 msgstr ""
@@ -508,16 +503,15 @@ msgstr "ftpfs: αποστολή ονόματος χρήστη"
 msgid "ftpfs: sending user password"
 msgstr "ftpfs: αποστολή κωδικού χρήστη"
 
-#, fuzzy, c-format
+#, c-format
 msgid "FTP: Account required for user %s"
-msgstr " FTP: Απαιτείται κωδικός για το "
+msgstr " FTP: Απαιτείται λογαριασμός για τον χρήστη %s"
 
 msgid "Account:"
 msgstr ""
 
-#, fuzzy
 msgid "ftpfs: sending user account"
-msgstr "ftpfs: αποστολή κωδικού χρήστη"
+msgstr "ftpfs: αποστολή λογαριασμού χρήστη..."
 
 msgid "ftpfs: logged in"
 msgstr "ftpfs: επιτυχής είσοδος στο σύστημα"
@@ -548,13 +542,12 @@ msgstr "ftpfs: ανεπιτυχής σύνδεση με τον εξυπηρέτ�
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Αναμονή επανάληψης... %d (Control-C για ακύρωση)"
 
-#, fuzzy
 msgid "ftpfs: invalid address family"
-msgstr "ftpfs: Άκυρη διεύθυνση συστήματος."
+msgstr "ftpfs: Άκυρη οικογένεια διευθύνσεων."
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs: ανεπιτυχής σύνδεση με τον εξυπηρέτη: %s"
+msgstr "ftpfs: αδυναμία προσαρμογής passive mode: %s"
 
 #, c-format
 msgid "ftpfs: could not create socket: %s"
@@ -582,9 +575,9 @@ msgstr ""
 msgid "Resolving symlink..."
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
-msgstr "ftpfs: Ανάγνωση καταλόγου FTP %s..."
+msgstr "ftpfs: Ανάγνωση καταλόγου FTP %s... %s%s"
 
 msgid "(strict rfc959)"
 msgstr ""
@@ -595,9 +588,9 @@ msgstr ""
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: storing file %lu (%lu)"
-msgstr "ftpfs: αποθήκευση αρχείου %d (%d)"
+msgstr "ftpfs: αποθήκευση αρχείου %lu (%lu)"
 
 msgid ""
 "~/.netrc file has incorrect mode.\n"
@@ -610,7 +603,7 @@ msgid " MCFS "
 msgstr ""
 
 msgid " The server does not support this version "
-msgstr " Ο εξυπηρέτησ δεν υποστηρίζει την παρούσα έκδοση "
+msgstr " Ο εξυπηρέτης δεν υποστηρίζει την παρούσα έκδοση "
 
 msgid ""
 " The remote server is not running on a system port \n"
@@ -638,9 +631,9 @@ msgstr ""
 msgid " Cannot create socket: %s "
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid " Cannot connect to server: %s "
-msgstr "ftpfs: ανεπιτυχής σύνδεση με τον εξυπηρέτη: %s"
+msgstr "ftpfs: Αδυναμία σύνδεσης με τον εξυπηρέτη: %s"
 
 msgid " Too many open connections "
 msgstr " Υπέρβαση ορίου συνδέσεων "
@@ -657,11 +650,10 @@ msgid ""
 "%s\n"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " reconnect to %s failed\n"
-" "
-msgstr "ftpfs: ανεπιτυχής σύνδεση με τον εξυπηρέτη: %s"
+msgstr "ανεπιτυχής επανασύνδεση με τον εξυπηρέτη: %s \n"
 
 msgid " Authentication failed "
 msgstr ""
@@ -678,13 +670,13 @@ msgstr ""
 msgid " %s opening remote file %s "
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid " %s removing remote file %s "
-msgstr "%s byte σε %d αρχεία"
+msgstr "%s διαγραφή απομακρυσμένου αρχείου %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid " %s renaming files\n"
-msgstr "%s byte σε %d αρχεία"
+msgstr "%s εναπομένοντα αρχεία\n"
 
 #, c-format
 msgid ""
@@ -742,15 +734,12 @@ msgstr ""
 msgid " while doing inode scan %d "
 msgstr ""
 
-#, fuzzy
 msgid " Ext2lib error "
-msgstr " Σφάλμα "
+msgstr " Σφάλμα βιβλιοθήκης Ext2lib"
 
-#, fuzzy, c-format
+#, c-format
 msgid " Cannot open file %s "
-msgstr ""
-"Άνοιγμα αρχείου %s ανεπιτυχές\n"
-"%s"
+msgstr "Αδυναμία ανοίγματος αρχείου %s"
 
 msgid "undelfs: reading inode bitmap..."
 msgstr ""
@@ -819,7 +808,7 @@ msgid "On"
 msgstr ""
 
 msgid "Flag"
-msgstr ""
+msgstr "Σημαία"
 
 msgid "Mode"
 msgstr ""
@@ -846,9 +835,8 @@ msgstr ""
 msgid "Displays the current version"
 msgstr ""
 
-#, fuzzy
 msgid "Print data directory"
-msgstr "Δημηουργία νέου καταλόγου"
+msgstr "Τύπωμα καταλόγου δεδομένων"
 
 msgid "Print last working directory to specified file"
 msgstr ""
@@ -931,9 +919,8 @@ msgid ""
 "\n"
 msgstr ""
 
-#, fuzzy
 msgid "Color options"
-msgstr " Επιλογές επεξεργαστή "
+msgstr "Ρυθμίσεις χρωμάτων"
 
 #, fuzzy
 msgid "+number"
@@ -951,13 +938,12 @@ msgid ""
 "to mc-devel@gnome.org\n"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "GNU Midnight Commander %s\n"
-msgstr "Η ομάδα του Midnight Commander"
+msgstr "GNU Midnight Commander %s\n"
 
-#, fuzzy
 msgid "Main options"
-msgstr "Επιλογές "
+msgstr "Βασικές επιλογές "
 
 msgid "Terminal options"
 msgstr ""
@@ -1124,9 +1110,8 @@ msgstr ""
 msgid "Domain:"
 msgstr "Εντολή:"
 
-#, fuzzy
 msgid "Username:"
-msgstr "Χρήστης"
+msgstr "Χρήστης:"
 
 #, c-format
 msgid "Password for \\\\%s\\%s"
@@ -1427,47 +1412,44 @@ msgstr ""
 msgid "Cannot read directory contents"
 msgstr ""
 
-#, fuzzy
 msgid " Choose syntax highlighting "
-msgstr "τονισμός σύντα&ξης"
+msgstr " Επιλογή τονισμού σύνταξης"
 
-#, fuzzy
 msgid "< Auto >"
-msgstr " Τέλος "
+msgstr "< Αυτόματα >"
 
 msgid "< Reload Current Syntax >"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid " Cannot open %s for reading "
-msgstr " Άνοιγμα αρχείου προς ανάγνωση ανεπιτυχής: "
+msgstr " Αδυναμία ανοίγματος του %s για ανάγνωση"
 
 msgid "Error"
 msgstr "Σφάλμα"
 
-#, fuzzy, c-format
+#, c-format
 msgid " Error reading from pipe: %s "
-msgstr " Σφάλμα αποθήκευσης αρχείου. "
+msgstr " Σφάλμα ανάγνωσης αγωγού: %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid " Cannot open pipe for reading: %s "
-msgstr " Άνοιγμα αρχείου προς ανάγνωση ανεπιτυχής: "
+msgstr " Αδυναμία ανοίγματος για ανάγνωση του αγωγού: %s"
 
 #, c-format
 msgid " Cannot get size/permissions for %s "
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid " %s is not a regular file "
-msgstr "Δημηουργία νέου καταλόγου"
+msgstr " Το %s δεν είναι σύνηθες αρχείο"
 
-#, fuzzy, c-format
+#, c-format
 msgid " File %s is too large "
-msgstr " Αρχείο πολύ μεγάλο: "
+msgstr " Υπερβολικό μέγεθος αρχείου %s "
 
-#, fuzzy
 msgid " About "
-msgstr " Τέλος "
+msgstr " Περί... "
 
 msgid ""
 "\n"
@@ -1491,17 +1473,15 @@ msgstr ""
 msgid "The file has been modified in the meantime. Save anyway?"
 msgstr ""
 
-#, fuzzy
 msgid " Error writing to pipe: "
-msgstr " Σφάλμα αποθήκευσης αρχείου. "
+msgstr " Σφάλμα κατα την εγγραφή στον αγωγό: "
 
-#, fuzzy
 msgid " Cannot open pipe for writing: "
-msgstr " Άνοιγμα αρχείου προς ανάγνωση ανεπιτυχής: "
+msgstr " Αδυναμία ανοίγματος για εγγραφή του αγωγού: "
 
-#, fuzzy, c-format
+#, c-format
 msgid " Cannot open file for writing: %s "
-msgstr " Άνοιγμα αρχείου προς ανάγνωση ανεπιτυχής: "
+msgstr " Αδυναμία ανοίγματος για εγγραφή του αρχείου: %s "
 
 #, fuzzy
 msgid "&Quick save"
@@ -1608,9 +1588,8 @@ msgstr " Ανάγνωση "
 msgid " Block is large, you may not be able to undo this action. "
 msgstr ""
 
-#, fuzzy
 msgid "Replace"
-msgstr "&Αντικατάσταση"
+msgstr "Αντικατάσταση"
 
 msgid " Replace "
 msgstr " Αντικατάσταση "
@@ -1629,7 +1608,6 @@ msgstr " Το αρχείο τροποποιήθηκε, Αποθήκευση κα
 msgid "&Cancel quit"
 msgstr "Ακύρωση τέλους"
 
-#, fuzzy
 msgid " Error "
 msgstr "Σφάλμα"
 
@@ -1637,13 +1615,13 @@ msgid " This function is not implemented. "
 msgstr ""
 
 msgid " Copy to clipboard "
-msgstr " Αντιγραφή στο τεμάχιο "
+msgstr " Αντιγραφή στο πρόχειρο"
 
 msgid " Unable to save to file. "
 msgstr " Αποθήκευση αρχείου ανεπιτυχής. "
 
 msgid " Cut to clipboard "
-msgstr " Αποκοπή στο τεμάχιο "
+msgstr " Αποκοπή στο πρόχειρο"
 
 msgid " Goto line "
 msgstr " Επίσκεψη γραμμής "
@@ -1690,9 +1668,8 @@ msgstr ""
 msgid "External command"
 msgstr ""
 
-#, fuzzy
 msgid "Cannot execute command"
-msgstr " Εκτέλεση εντολής `sort' ανεπιτυχής "
+msgstr "Αδυναμία εκτέλεσης εντολής"
 
 msgid "Error creating script:"
 msgstr ""
@@ -1718,6 +1695,7 @@ msgstr " Θέμα "
 msgid " To"
 msgstr " Προς"
 
+#, fuzzy
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <θέμα> -c <αντίγραφα> <προς>"
 
@@ -2141,10 +2119,7 @@ msgid " %s%s file error"
 msgstr ""
 
 #, c-format
-msgid ""
-"The format of the %smc.ext file has changed with version 3.0.  It seems that "
-"the installation failed.  Please fetch a fresh copy from the Midnight "
-"Commander package."
+msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
 msgstr ""
 
 #, c-format
@@ -2152,10 +2127,7 @@ msgid " ~/%s file error "
 msgstr ""
 
 #, c-format
-msgid ""
-"The format of the ~/%s file has changed with version 3.0.  You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write "
-"it."
+msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
 msgstr ""
 
 msgid "DialogTitle|Copy"
@@ -2574,9 +2546,8 @@ msgstr ""
 msgid "Found: %ld"
 msgstr ""
 
-#, fuzzy
 msgid " Malformed regular expression "
-msgstr "&Κανονική έκφραση"
+msgstr " Παραποιημένη κανονική έκφραση"
 
 #, fuzzy
 msgid "Cas&e sensitive"
@@ -2614,9 +2585,8 @@ msgstr ""
 msgid "Content:"
 msgstr ""
 
-#, fuzzy
 msgid "File name:"
-msgstr "Χρήστης"
+msgstr "Όνομα αρχείου:"
 
 msgid "Start at:"
 msgstr ""
@@ -2749,8 +2719,7 @@ msgid " Hotlist Load "
 msgstr ""
 
 #, c-format
-msgid ""
-"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr ""
 
 #, c-format
@@ -3144,9 +3113,9 @@ msgstr ""
 msgid "The TERM environment variable is unset!\n"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot create %s directory"
-msgstr "Δημηουργία νέου καταλόγου"
+msgstr "Αδυναμία δημιουργίας καταλόγου %s"
 
 msgid "safe de&Lete"
 msgstr ""
@@ -3365,17 +3334,17 @@ msgstr "Ομάδα"
 msgid "<readlink failed>"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
 msgstr[0] "%s byte"
-msgstr[1] "%s byte"
+msgstr[1] "%s bytes"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s in %d file"
 msgid_plural "%s in %d files"
-msgstr[0] "%s byte se %d αρχείο"
-msgstr[1] "%s byte se %d αρχείο"
+msgstr[0] "%s στο αρχείο %d"
+msgstr[1] "%s στα αρχεία %d"
 
 msgid "Unknown tag on display format: "
 msgstr ""
@@ -3520,7 +3489,7 @@ msgid " Debug "
 msgstr ""
 
 msgid " ERROR: "
-msgstr ""
+msgstr "ΣΦΑΛΜΑ:"
 
 msgid " True:  "
 msgstr ""
@@ -3619,7 +3588,7 @@ msgstr ""
 
 #, c-format
 msgid "%s bytes"
-msgstr "%s byte"
+msgstr "%s bytes"
 
 #, fuzzy, c-format
 msgid ">= %s bytes"
@@ -3657,29 +3626,23 @@ msgid "Seeking to search result"
 msgstr ""
 
 msgid " History "
-msgstr ""
+msgstr "Ιστορικό"
 
 msgid "Background process:"
 msgstr ""
 
 #~ msgid "Extension:"
 #~ msgstr "Επέκταση:"
-
 #~ msgid "&New              C-n"
 #~ msgstr "&Νέο                    C-n"
-
 #~ msgid "&Save              F2"
 #~ msgstr "Απο&θήκευση             F2"
-
 #~ msgid "A&bout...            "
 #~ msgstr "Πε&ρί...                   "
-
 #~ msgid "&Quit             F10"
 #~ msgstr "&Τέλος                  F10"
-
 #~ msgid "&New            C-x k"
 #~ msgstr "&Νέο                  C-x k"
-
 #~ msgid "Copy to &file...     "
 #~ msgstr "αντιγραφή σε αρ&χείο       "
 
@@ -3738,39 +3701,30 @@ msgstr ""
 #, fuzzy
 #~ msgid "Save setu&p"
 #~ msgstr " Αποθήκευση ως "
-
 #~ msgid " Edit "
 #~ msgstr " Επεξεργασία "
-
 #~ msgid " Sear/Repl "
 #~ msgstr " Αναζήτηση/Αντικατάσταση"
-
 #~ msgid "Key emulation"
 #~ msgstr "Εξομοίοση πληκτρολογίου"
-
 #~ msgid "Save"
 #~ msgstr "Αποθήκευση"
-
 #~ msgid "Delete"
 #~ msgstr "Διαγραφή"
 
 #, fuzzy
 #~ msgid "Extension"
 #~ msgstr "Επέκταση:"
-
 #~ msgid "Size"
 #~ msgstr "Μέγεθος"
-
 #~ msgid " Emacs key: "
 #~ msgstr " Πλήκτρο Emacs: "
 
 #, fuzzy
 #~ msgid "Usage:"
 #~ msgstr "Χρήστης"
-
 #~ msgid "replace &All"
 #~ msgstr "αντικατάσταση ό&λων"
-
 #~ msgid "O&ne"
 #~ msgstr "έ&Να"
 
@@ -3781,15 +3735,12 @@ msgstr ""
 #, fuzzy
 #~ msgid "Invalid hex search expression"
 #~ msgstr " Κανονική έκφραση "
-
 #~ msgid "%s bytes in %d files"
 #~ msgstr "%s byte σε %d αρχεία"
-
 #~ msgid " Cannot open file for reading: "
 #~ msgstr " Άνοιγμα αρχείου προς ανάγνωση ανεπιτυχής: "
-
 #~ msgid " Not an ordinary file: "
 #~ msgstr " Μη κανονικό αρχείο: "
-
 #~ msgid "Col %d"
 #~ msgstr "Στήλη %d"
+
