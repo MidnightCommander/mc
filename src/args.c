@@ -314,7 +314,7 @@ mc_args_new_color_group(void)
 	    "   File display: normal, selected, marked, markselect\n"
 	    "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 	    "                 errdhotfocus\n"
-	    "   Menus:        menu, menuhot, menusel, menuhotsel\n"
+	    "   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
 	    "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 	    "                 editlinestate\n"),
 	/* TRANSLATORS: don't translate keywords and names of colors */

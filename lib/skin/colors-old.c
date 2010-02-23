@@ -66,6 +66,7 @@ mc_skin_colors_old_t old_colors[] = {
     {"menuhot", "menu", "menuhot"},
     {"menusel", "menu", "menusel"},
     {"menuhotsel", "menu", "menuhotsel"},
+    {"menuinactive", "menu", "menuinactive"},
     {"gauge", "core", "gauge"},
     {"input", "core", "input"},
     {"helpnormal", "help", "_default_"},
