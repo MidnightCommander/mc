@@ -131,11 +131,6 @@ Some more high-level functions, e.g. to display a message box, are
 located in wtools.c.  This file also contains the Quick Dialog code,
 which makes it easier to create complex dialogs.
 
-Files findme.c, popt.c, poptconfig.c, popthelp.c and poptparse.c come
-from the popt library used to parse the command line.  They should not
-be modified unless absolutely necessary. At near time these stuff will
-removed.
-
 The files util.c and utilunix.c have a lot of utility functions.  Get
 familiar with them, they are very simple.
 
@@ -343,10 +338,6 @@ g_strdup: When you use g_strdup to create a local copy of a string, use
 
 	The "const" will make the pointer unmodifiable (pathref++
 	is not possible), but you can still modify the string contents.
-	
-g_strlcpy: Whenever you use this function, be sure to add "glibcompat.h"
-	to the included headers. This is because in glib-1.2 there is
-	no such function.
 
 NULL: When you pass NULL as an argument of a varargs function, cast the
 	0 to the appropriate data type. If a system #defines NULL to
