@@ -85,6 +85,9 @@
 /* Hack: the vfs code should not rely on this */
 #define WITH_FULL_PATHS 1
 
+#define FILEOP_UPDATE_INTERVAL 2
+#define FILEOP_STALLING_INTERVAL 4
+
 int verbose = 1;
 
 /*
@@ -347,15 +350,23 @@ make_symlink (FileOpContext *ctx, const char *src_path, const char *dst_path)
 static FileProgressStatus
 progress_update_one (FileOpTotalContext *tctx, FileOpContext *ctx, off_t add, gboolean is_toplevel_file)
 {
+    struct timeval tv_current;
+    static struct timeval tv_start = {};
 
     if (is_toplevel_file || ctx->progress_totals_computed) {
 	tctx->progress_count++;
 	tctx->progress_bytes += add;
     }
-
-    /* Apply some heuristic here to not call the update stuff very often */
-    file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
-    file_progress_show_bytes (ctx, tctx->progress_bytes, ctx->progress_bytes);
+    if (tv_start.tv_sec == 0) {
+	gettimeofday (&tv_start, (struct timezone *) NULL);
+    }
+    gettimeofday (&tv_current, (struct timezone *) NULL);
+    if ((tv_current.tv_sec - tv_start.tv_sec) > FILEOP_UPDATE_INTERVAL)
+    {
+	file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
+	file_progress_show_total (tctx, ctx, tctx->progress_bytes, TRUE);
+	tv_start.tv_sec = tv_current.tv_sec;
+    }
 
     return check_progress_buttons (ctx);
 }
@@ -414,8 +425,6 @@ warn_same_file (const char *fmt, const char *a, const char *b)
 }
 #endif
 
-#define FILEOP_UPDATE_INTERVAL 2
-#define FILEOP_STALLING_INTERVAL 4
 static void
 copy_file_file_display_progress (FileOpTotalContext *tctx, FileOpContext *ctx,
 				struct timeval tv_current, struct timeval tv_transfer_start,
@@ -648,9 +657,9 @@ copy_file_file (FileOpTotalContext *tctx, FileOpContext *ctx,
     ctx->bps = 0;
 
     if (tctx->bps == 0 ||  (file_size/(tctx->bps)) > FILEOP_UPDATE_INTERVAL) {
-	file_progress_show (ctx, 0, file_size);
+	file_progress_show (ctx, 0, file_size, "", TRUE);
     } else {
-	file_progress_show (ctx, 1, 1);
+	file_progress_show (ctx, 1, 1, "", TRUE);
     }
     return_status = check_progress_buttons (ctx);
     mc_refresh ();
@@ -728,18 +737,17 @@ copy_file_file (FileOpTotalContext *tctx, FileOpContext *ctx,
 	if (update_secs > FILEOP_STALLING_INTERVAL) {
 	    stalled_msg = _("(stalled)");
 	}
-
-
-	file_progress_set_stalled_label (ctx, stalled_msg);
+	{
+	gboolean force_update =
+	    (tv_current.tv_sec - tctx->transfer_start.tv_sec) > FILEOP_UPDATE_INTERVAL;
 	file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
-	file_progress_show_bytes (ctx, tctx->progress_bytes + n_read_total + ctx->do_reget,
-				  ctx->progress_bytes);
+	file_progress_show_total (tctx, ctx, tctx->progress_bytes + n_read_total + ctx->do_reget,
+				  force_update);
 
-	if ((ctx->progress_bytes != 0) && (tv_current.tv_sec - tctx->transfer_start.tv_sec) > FILEOP_UPDATE_INTERVAL) {
-	    file_progress_show_total (tctx, ctx);
+
+	file_progress_show (ctx, n_read_total + ctx->do_reget, file_size, stalled_msg,
+			    force_update);
 	}
-
-	file_progress_show (ctx, n_read_total + ctx->do_reget, file_size);
 	mc_refresh ();
 
 	    return_status = check_progress_buttons (ctx);
@@ -819,7 +827,6 @@ copy_file_file (FileOpTotalContext *tctx, FileOpContext *ctx,
 
     return return_status;
 }
-#undef FILEOP_UPDATE_INTERVAL
 /*
  * I think these copy_*_* functions should have a return type.
  * anyway, this function *must* have two directories as arguments.
@@ -1121,7 +1128,7 @@ move_file_file (FileOpTotalContext *tctx, FileOpContext *ctx, const char *s, con
     copy_done = TRUE;
 
     file_progress_show_source (ctx, NULL);
-    file_progress_show (ctx, 0, 0);
+    file_progress_show (ctx, 0, 0, "", FALSE);
 
     return_status = check_progress_buttons (ctx);
     if (return_status != FILE_CONT)
@@ -1225,7 +1232,7 @@ move_dir_dir (FileOpTotalContext *tctx, FileOpContext *ctx, const char *s, const
 	goto ret;
   oktoret:
     file_progress_show_source (ctx, NULL);
-    file_progress_show (ctx, 0, 0);
+    file_progress_show (ctx, 0, 0, "", FALSE);
 
     return_status = check_progress_buttons (ctx);
     if (return_status != FILE_CONT)
@@ -2011,15 +2018,24 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     }
 
     {
-    gboolean show_total = !((operation != OP_COPY) || (single_entry) || (force_single));
+    filegui_dialog_type_t dialog_type;
 
-    if ((single_entry) && (operation == OP_COPY) && S_ISDIR (selection (panel)->st.st_mode))
-	show_total = TRUE;
+    if (operation == OP_DELETE) {
+	dialog_type = FILEGUI_DIALOG_DELETE_ITEM;
+    } else {
+	dialog_type = !((operation != OP_COPY) || (single_entry) || (force_single))
+			? FILEGUI_DIALOG_MULTI_ITEM
+			: FILEGUI_DIALOG_ONE_ITEM;
+
+	if ((single_entry) && (operation == OP_COPY) && S_ISDIR (selection (panel)->st.st_mode))
+	    dialog_type = FILEGUI_DIALOG_MULTI_ITEM;
+    }
+
     /* Background also need ctx->ui, but not full */
     if (do_bg)
-	file_op_context_create_ui_without_init (ctx, 1, show_total);
+	file_op_context_create_ui_without_init (ctx, 1, dialog_type);
     else
-	file_op_context_create_ui (ctx, 1, show_total);
+	file_op_context_create_ui (ctx, 1, dialog_type);
     }
 
 #ifdef WITH_BACKGROUND
@@ -2214,12 +2230,11 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
 
 		file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
 
-
 		if (verbose) {
-		    file_progress_show_bytes (ctx, tctx->progress_bytes, ctx->progress_bytes);
+		    file_progress_show_total (tctx, ctx, tctx->progress_bytes, FALSE);
 
 		    if (operation != OP_DELETE)
-			file_progress_show (ctx, 0, 0);
+			file_progress_show (ctx, 0, 0, "", FALSE);
 		}
 
 		if (check_progress_buttons (ctx) == FILE_ABORT)

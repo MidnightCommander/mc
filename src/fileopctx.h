@@ -57,7 +57,7 @@ typedef struct FileOpContext {
 
 	/* Whether the panel total has been computed */
 	gboolean progress_totals_computed;
-	gboolean show_total;
+	int dialog_type;
 
 	/* Counters for progress indicators */
 	off_t progress_count;
@@ -165,12 +165,6 @@ enum OperationMode {
 };
 
 /* The following functions are implemented separately by each port */
-
-void file_op_context_create_ui (FileOpContext *ctx, gboolean with_eta, gboolean show_total);
-void file_op_context_create_ui_without_init (FileOpContext *ctx, gboolean with_eta, gboolean show_total);
-void file_op_context_destroy_ui (FileOpContext *ctx);
-
-void file_progress_set_stalled_label (FileOpContext *ctx, const char *stalled_msg);
 
 FileProgressStatus file_progress_real_query_replace (FileOpContext *ctx,
 						     enum OperationMode mode,

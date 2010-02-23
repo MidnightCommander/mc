@@ -49,6 +49,7 @@
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/strutil.h"
 
+#include "src/filegui.h"
 #include "src/file.h"		/* copy_file_file() */
 #ifndef HAVE_CHARSET
 #include "src/main.h"		/* eight_bit_clean */
@@ -1445,7 +1446,7 @@ save_file_position (const char *filename, long line, long column, off_t offset)
 
     /* put the new record */
     if (line != 1 || column != 0) {
-        if (fprintf (f, "%s %ld;%ld;%li\n", filename, line, column, offset) < 0)
+        if (fprintf (f, "%s %ld;%ld;%llu\n", filename, line, column, offset) < 0)
             goto write_position_error;
     }
 
