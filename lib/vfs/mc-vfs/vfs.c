@@ -617,7 +617,8 @@ mc_symlink (const char *name1, const char *path)
             vfs = vfs_get_class (mpath); 
             result = vfs->symlink ? (*vfs->symlink) (vfs, lpath, mpath) : -1;
             g_free (lpath);
-    
+            g_free (mpath);
+
             if (result == -1) 
                 errno = vfs->symlink ? ferrno (vfs) : E_NOTSUPP; 
             return result; 
