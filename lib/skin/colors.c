@@ -208,6 +208,7 @@ mc_skin_color_cache_init (void)
     MENU_SELECTED_COLOR = mc_skin_color_get ("menu", "menusel");
     MENU_HOT_COLOR = mc_skin_color_get ("menu", "menuhot");
     MENU_HOTSEL_COLOR = mc_skin_color_get ("menu", "menuhotsel");
+    MENU_INACTIVE_COLOR = mc_skin_color_get ("menu", "menuinactive");
 
     GAUGE_COLOR = mc_skin_color_get ("core", "gauge");
     INPUT_COLOR = mc_skin_color_get ("core", "input");
@@ -229,8 +230,6 @@ mc_skin_color_cache_init (void)
     BOOK_MARK_FOUND_COLOR = mc_skin_color_get ("editor", "bookmarkfound");
     BUTTONBAR_HOTKEY_COLOR = mc_skin_color_get ("buttonbar", "hotkey");
     BUTTONBAR_BUTTON_COLOR = mc_skin_color_get ("buttonbar", "button");
-
-
 }
 
 /* --------------------------------------------------------------------------------------------- */
