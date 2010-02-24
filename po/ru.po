@@ -1345,7 +1345,7 @@ msgid " Select "
 msgstr " Отметить группу "
 
 msgid " Unselect "
-msgstr " Сн&ять отметку "
+msgstr " Снять отметку "
 
 msgid "Extension file edit"
 msgstr " Редактирование файла расширений "
@@ -2580,7 +2580,7 @@ msgstr "%ld б/с"
 
 #, c-format
 msgid "Files processed: %llu of %llu"
-msgstr "Обработано файлов^ %llu из %llu"
+msgstr "Обработано файлов: %llu из %llu"
 
 #, c-format
 msgid "Time: %s  %s (%s)"
