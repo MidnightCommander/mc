@@ -29,6 +29,8 @@ struct WButtonBar;
 void midnight_set_buttonbar (struct WButtonBar *b);
 
 /* See main.c for details on these variables */
+extern const char *edit_one_file;
+extern const char *view_one_file;
 extern int mark_moves_down;
 extern int auto_menu;
 extern int pause_after_run;
@@ -103,6 +105,7 @@ extern const global_keymap_t *help_map;
 
 #ifdef HAVE_SUBSHELL_SUPPORT
 void do_update_prompt (void);
+int load_prompt (int fd, void *unused);
 #endif
 
 enum cd_enum {
@@ -113,7 +116,6 @@ enum cd_enum {
 int do_cd           (const char *new_dir, enum cd_enum cd_type); /* For find.c */
 void sort_cmd (void);
 void change_panel   (void);
-int load_prompt     (int, void *);
 void save_cwds_stat (void);
 void quiet_quit_cmd (void);	/* For cmd.c and command.c */
 
