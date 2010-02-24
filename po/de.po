@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.x\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-09 12:01+0200\n"
+"POT-Creation-Date: 2010-02-24 13:14+0200\n"
 "PO-Revision-Date: 2009-01-25 17:50-0000\n"
 "Last-Translator: Patrick Winnertz <winnie@der-winnie.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -329,12 +329,6 @@ msgstr ""
 "Bildschirmgröße %dx%d wird nicht unterstützt.\n"
 "Überprüfen Sie die TERM-Umgebungsvariable.\n"
 
-msgid "%b %e  %Y"
-msgstr "%e. %b %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%e. %b %H.%M"
-
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s ist kein Verzeichnis\n"
@@ -450,9 +444,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Inkonsistentes extfs-Archiv"
 
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Warnung: Datei %s nicht gefunden\n"
+#, fuzzy, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr "Konnte Verzeichnis nicht wechseln"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -674,6 +668,10 @@ msgstr " Kann nicht mit Server %s verbinden "
 
 msgid " Too many open connections "
 msgstr " Zuviele offene Verbindungen "
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Warnung: Datei %s nicht gefunden\n"
 
 #, c-format
 msgid ""
@@ -957,7 +955,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -2655,9 +2653,13 @@ msgstr " Löschen: "
 msgid "Non&e"
 msgstr "kein&e"
 
-#, c-format
-msgid "ETA %d:%02d.%02d"
+#, fuzzy, c-format
+msgid "%d:%02d.%02d"
 msgstr "noch %d:%02d.%02d"
+
+#, c-format
+msgid "ETA %s"
+msgstr ""
 
 #, c-format
 msgid "%.2f MB/s"
@@ -2671,14 +2673,17 @@ msgstr "%.2f kB/s"
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-msgid "File"
-msgstr "Datei"
+#, c-format
+msgid "Files processed: %llu of %llu"
+msgstr ""
 
-msgid "Count"
-msgstr "Anzahl"
+#, fuzzy, c-format
+msgid "Time: %s  %s (%s)"
+msgstr "Größe:     %s"
 
-msgid "Bytes"
-msgstr "Bytes"
+#, c-format
+msgid " Total: %s of %s "
+msgstr ""
 
 msgid "Source"
 msgstr "Quelle"
@@ -3548,6 +3553,16 @@ msgstr ""
 msgid "&Name"
 msgstr "&Name"
 
+#. TRANSLATORS: one single character to represent 'version' sort mode
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+#, fuzzy
+msgid "sort|v"
+msgstr "&Unsortiert"
+
+#, fuzzy
+msgid "&Version"
+msgstr "Zugriffsrechte"
+
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 #, fuzzy
@@ -3652,6 +3667,12 @@ msgstr " Wählen Sie die Eingabe-Codepage"
 
 msgid "-  < No translation >"
 msgstr "- < Keine Übersetzung >"
+
+msgid "%b %e  %Y"
+msgstr "%e. %b %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%e. %b %H.%M"
 
 #, fuzzy, c-format
 msgid ""
@@ -3914,6 +3935,13 @@ msgstr " Kann es nicht anzeigen: Keine normale Datei "
 msgid "Seeking to search result"
 msgstr ""
 
+#, fuzzy
+msgid "Search done"
+msgstr "Suchen"
+
+msgid "Continue from begining?"
+msgstr ""
+
 msgid " History "
 msgstr " Chronik "
 
@@ -3926,6 +3954,15 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Hintergrundprozeß:"
+
+#~ msgid "File"
+#~ msgstr "Datei"
+
+#~ msgid "Count"
+#~ msgstr "Anzahl"
+
+#~ msgid "Bytes"
+#~ msgstr "Bytes"
 
 #~ msgid " confirm &Exit "
 #~ msgstr " bestätige &Beenden "

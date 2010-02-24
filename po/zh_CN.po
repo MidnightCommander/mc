@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-09 12:01+0200\n"
+"POT-Creation-Date: 2010-02-24 13:14+0200\n"
 "PO-Revision-Date: 2002-01-29 22:05+0800\n"
 "Last-Translator: Wang Jian <lark@linux.net.cn>\n"
 "Language-Team: Chinese Simplified <i18n-translation@lists.linux.net.cn>\n"
@@ -323,12 +323,6 @@ msgstr ""
 "不支持屏幕大小 %dx%d。\n"
 "检查 TERM 环境变量。\n"
 
-msgid "%b %e  %Y"
-msgstr "%b %e %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
 msgstr "目录"
@@ -448,9 +442,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "不完整的 extfs 归档"
 
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "警告：没有找到文件 %s\n"
+#, fuzzy, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr "无法改变目录"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -672,6 +666,10 @@ msgstr " 无法连接到服务器：%s "
 
 msgid " Too many open connections "
 msgstr " 太多打开的连接 "
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "警告：没有找到文件 %s\n"
 
 #, c-format
 msgid ""
@@ -956,7 +954,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -2640,9 +2638,13 @@ msgstr " 删除："
 msgid "Non&e"
 msgstr "无(&E)"
 
-#, c-format
-msgid "ETA %d:%02d.%02d"
+#, fuzzy, c-format
+msgid "%d:%02d.%02d"
 msgstr "预计 %d:%02d.%02d"
+
+#, c-format
+msgid "ETA %s"
+msgstr ""
 
 #, c-format
 msgid "%.2f MB/s"
@@ -2656,14 +2658,17 @@ msgstr "%.2f KB/s"
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-msgid "File"
-msgstr "文件"
+#, c-format
+msgid "Files processed: %llu of %llu"
+msgstr ""
 
-msgid "Count"
-msgstr "计数"
+#, fuzzy, c-format
+msgid "Time: %s  %s (%s)"
+msgstr "大小：     %s"
 
-msgid "Bytes"
-msgstr "字节"
+#, c-format
+msgid " Total: %s of %s "
+msgstr ""
 
 msgid "Source"
 msgstr "源"
@@ -3519,6 +3524,16 @@ msgstr ""
 msgid "&Name"
 msgstr "名字(&N)"
 
+#. TRANSLATORS: one single character to represent 'version' sort mode
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+#, fuzzy
+msgid "sort|v"
+msgstr "未排序(&U)"
+
+#, fuzzy
+msgid "&Version"
+msgstr "权限"
+
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 #, fuzzy
@@ -3623,6 +3638,12 @@ msgstr " 选择输入代码页"
 
 msgid "-  < No translation >"
 msgstr "-  < 没有翻译 >"
+
+msgid "%b %e  %Y"
+msgstr "%b %e %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
 
 #, fuzzy, c-format
 msgid ""
@@ -3874,6 +3895,13 @@ msgstr " 无法查看：不是常规文件 "
 msgid "Seeking to search result"
 msgstr ""
 
+#, fuzzy
+msgid "Search done"
+msgstr "搜索"
+
+msgid "Continue from begining?"
+msgstr ""
+
 msgid " History "
 msgstr " 历史 "
 
@@ -3886,6 +3914,15 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "后台进程："
+
+#~ msgid "File"
+#~ msgstr "文件"
+
+#~ msgid "Count"
+#~ msgstr "计数"
+
+#~ msgid "Bytes"
+#~ msgstr "字节"
 
 #~ msgid " confirm &Exit "
 #~ msgstr " 退出时确认(&E) "

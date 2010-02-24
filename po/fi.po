@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gmc finnish 0.01\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-09 12:01+0200\n"
+"POT-Creation-Date: 2010-02-24 13:14+0200\n"
 "PO-Revision-Date: 1999-08-23 17:30+0200\n"
 "Last-Translator: Mikko Rauhala <mjr@iki.fi>\n"
 "Language-Team: Finnish <debian-l10n-finnish@lists.debian.org>\n"
@@ -306,12 +306,6 @@ msgid ""
 "Check the TERM environment variable.\n"
 msgstr ""
 
-msgid "%b %e  %Y"
-msgstr ""
-
-msgid "%b %e %H:%M"
-msgstr ""
-
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
 msgstr "Luo uusi hakemisto"
@@ -417,9 +411,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr ""
 
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr ""
+#, fuzzy, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr "Ei voitu vaihtaa hakemistoa"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -642,6 +636,10 @@ msgstr ""
 " %s "
 
 msgid " Too many open connections "
+msgstr ""
+
+#, c-format
+msgid "Warning: file %s not found\n"
 msgstr ""
 
 #, c-format
@@ -916,7 +914,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -2530,7 +2528,11 @@ msgid "Non&e"
 msgstr ""
 
 #, c-format
-msgid "ETA %d:%02d.%02d"
+msgid "%d:%02d.%02d"
+msgstr ""
+
+#, c-format
+msgid "ETA %s"
 msgstr ""
 
 #, c-format
@@ -2545,13 +2547,16 @@ msgstr ""
 msgid "%ld B/s"
 msgstr ""
 
-msgid "File"
+#, c-format
+msgid "Files processed: %llu of %llu"
 msgstr ""
 
-msgid "Count"
+#, c-format
+msgid "Time: %s  %s (%s)"
 msgstr ""
 
-msgid "Bytes"
+#, c-format
+msgid " Total: %s of %s "
 msgstr ""
 
 msgid "Source"
@@ -3386,6 +3391,16 @@ msgstr ""
 msgid "&Name"
 msgstr "&Nimi"
 
+#. TRANSLATORS: one single character to represent 'version' sort mode
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+#, fuzzy
+msgid "sort|v"
+msgstr "&Järjestämätön"
+
+#, fuzzy
+msgid "&Version"
+msgstr "Oikeudet"
+
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 #, fuzzy
@@ -3488,6 +3503,12 @@ msgid "Choose codepage"
 msgstr ""
 
 msgid "-  < No translation >"
+msgstr ""
+
+msgid "%b %e  %Y"
+msgstr ""
+
+msgid "%b %e %H:%M"
 msgstr ""
 
 #, fuzzy, c-format
@@ -3731,6 +3752,13 @@ msgid " Cannot view: not a regular file "
 msgstr ""
 
 msgid "Seeking to search result"
+msgstr ""
+
+#, fuzzy
+msgid "Search done"
+msgstr "Etsi"
+
+msgid "Continue from begining?"
 msgstr ""
 
 #, fuzzy

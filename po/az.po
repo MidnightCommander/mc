@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-09 12:01+0200\n"
+"POT-Creation-Date: 2010-02-24 13:14+0200\n"
 "PO-Revision-Date: 2001-09-26 16:43GMT +0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
@@ -324,12 +324,6 @@ msgstr ""
 "%dx%d ekran böyüklüyü dəstəklənmir.\n"
 "TERM sistem dəyişgənini yoxla.\n"
 
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
 msgstr "qovluq"
@@ -447,9 +441,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "extfs arxivi xəsərlidir"
 
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Xəbərdarlıq: %s faylı tapılmadı\n"
+#, fuzzy, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr "Qovluq dəyişdirilə bilmir"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -671,6 +665,10 @@ msgstr " Vericiyə bağlana bilmədim : %s "
 
 msgid " Too many open connections "
 msgstr " Çox miqdarda açıq bağlantı var "
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Xəbərdarlıq: %s faylı tapılmadı\n"
 
 #, c-format
 msgid ""
@@ -956,7 +954,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -2648,7 +2646,11 @@ msgid "Non&e"
 msgstr "heç&biri"
 
 #, c-format
-msgid "ETA %d:%02d.%02d"
+msgid "%d:%02d.%02d"
+msgstr ""
+
+#, c-format
+msgid "ETA %s"
 msgstr ""
 
 #, c-format
@@ -2663,14 +2665,17 @@ msgstr ""
 msgid "%ld B/s"
 msgstr ""
 
-msgid "File"
-msgstr "Fayl"
+#, c-format
+msgid "Files processed: %llu of %llu"
+msgstr ""
 
-msgid "Count"
-msgstr "Rəqəm"
+#, fuzzy, c-format
+msgid "Time: %s  %s (%s)"
+msgstr "Böyüklük:    %s"
 
-msgid "Bytes"
-msgstr "Byte"
+#, c-format
+msgid " Total: %s of %s "
+msgstr ""
 
 msgid "Source"
 msgstr "Qaynaq"
@@ -3535,6 +3540,16 @@ msgstr ""
 msgid "&Name"
 msgstr "&Ad"
 
+#. TRANSLATORS: one single character to represent 'version' sort mode
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+#, fuzzy
+msgid "sort|v"
+msgstr "&Süzülməmiş"
+
+#, fuzzy
+msgid "&Version"
+msgstr "İstifadəhaqları"
+
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 #, fuzzy
@@ -3640,6 +3655,12 @@ msgstr " Giriş kod səhifəsini seç "
 
 msgid "-  < No translation >"
 msgstr "-  < Tərcüməsiz >"
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
 
 #, fuzzy, c-format
 msgid ""
@@ -3891,6 +3912,13 @@ msgstr " Göstərə bilmirəm : vnormal bir fayl deyildir"
 msgid "Seeking to search result"
 msgstr ""
 
+#, fuzzy
+msgid "Search done"
+msgstr "Axtar"
+
+msgid "Continue from begining?"
+msgstr ""
+
 msgid " History "
 msgstr " Tarix "
 
@@ -3903,6 +3931,15 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Arxaplan gedişatı:"
+
+#~ msgid "File"
+#~ msgstr "Fayl"
+
+#~ msgid "Count"
+#~ msgstr "Rəqəm"
+
+#~ msgid "Bytes"
+#~ msgstr "Byte"
 
 #~ msgid " confirm &Exit "
 #~ msgstr " &Çıxış üçün icazə istə "

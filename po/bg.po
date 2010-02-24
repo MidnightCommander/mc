@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.55\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-09 12:01+0200\n"
+"POT-Creation-Date: 2010-02-24 13:14+0200\n"
 "PO-Revision-Date: 2002-06-24 02:15+0300\n"
 "Last-Translator: Todor Buyukliev <adrez@mail.bg>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -320,12 +320,6 @@ msgstr ""
 "Размер на екрана %dx%d не е поддържан.\n"
 "Проверете променливата на средата TERM.\n"
 
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
 msgstr "директорията"
@@ -444,9 +438,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Повреден extfs архив"
 
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Внимание: файлът %s не е намерен\n"
+#, fuzzy, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr "Не може да се смени директорията"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -668,6 +662,10 @@ msgstr " Не мога да се свържа със сървъра: %s "
 
 msgid " Too many open connections "
 msgstr " Прекалено много отворени връзки "
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Внимание: файлът %s не е намерен\n"
 
 #, c-format
 msgid ""
@@ -953,7 +951,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -2645,9 +2643,13 @@ msgstr " Изтрий: "
 msgid "Non&e"
 msgstr "никой"
 
-#, c-format
-msgid "ETA %d:%02d.%02d"
+#, fuzzy, c-format
+msgid "%d:%02d.%02d"
 msgstr "още %d:%02d.%02d"
+
+#, c-format
+msgid "ETA %s"
+msgstr ""
 
 #, c-format
 msgid "%.2f MB/s"
@@ -2661,14 +2663,17 @@ msgstr "%.2f КБ/с"
 msgid "%ld B/s"
 msgstr "%ld Б/с"
 
-msgid "File"
-msgstr "Файл"
+#, c-format
+msgid "Files processed: %llu of %llu"
+msgstr ""
 
-msgid "Count"
-msgstr "Брой"
+#, fuzzy, c-format
+msgid "Time: %s  %s (%s)"
+msgstr "Размер:       %s"
 
-msgid "Bytes"
-msgstr "Байтове"
+#, c-format
+msgid " Total: %s of %s "
+msgstr ""
 
 msgid "Source"
 msgstr "Източник"
@@ -3533,6 +3538,16 @@ msgstr ""
 msgid "&Name"
 msgstr "Име"
 
+#. TRANSLATORS: one single character to represent 'version' sort mode
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+#, fuzzy
+msgid "sort|v"
+msgstr "Неподредени"
+
+#, fuzzy
+msgid "&Version"
+msgstr "Режим"
+
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 #, fuzzy
@@ -3637,6 +3652,12 @@ msgstr " Изберете входна кодова страница "
 
 msgid "-  < No translation >"
 msgstr "-  < Няма превод >"
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
 
 #, fuzzy, c-format
 msgid ""
@@ -3888,6 +3909,13 @@ msgstr " Не може да се разглежда: не е обикновен 
 msgid "Seeking to search result"
 msgstr ""
 
+#, fuzzy
+msgid "Search done"
+msgstr "Търси"
+
+msgid "Continue from begining?"
+msgstr ""
+
 msgid " History "
 msgstr " История "
 
@@ -3900,6 +3928,15 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Фонов процес:"
+
+#~ msgid "File"
+#~ msgstr "Файл"
+
+#~ msgid "Count"
+#~ msgstr "Брой"
+
+#~ msgid "Bytes"
+#~ msgstr "Байтове"
 
 #~ msgid " confirm &Exit "
 #~ msgstr " Потвърждавай изход "

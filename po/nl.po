@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.0\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-09 12:01+0200\n"
+"POT-Creation-Date: 2010-02-24 13:14+0200\n"
 "PO-Revision-Date: 2010-01-03\n"
 "Last-Translator: Marcel Pol <mpol@gmx.net>\n"
 "Language-Team: \n"
@@ -315,12 +315,6 @@ msgstr ""
 "Schermgrootte %dx%d wordt niet ondersteund.\n"
 "Controleer omgevingsvariabele TERM ( opdr: set).\n"
 
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s is geen map\n"
@@ -435,9 +429,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Inconsistent extfs archief"
 
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Waarschuwing: bestand %s niet gevonden\n"
+#, fuzzy, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr "Aanmaken van map %s mislukt"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -656,6 +650,10 @@ msgstr " Kan niet verbinden met server: %s "
 
 msgid " Too many open connections "
 msgstr " Teveel open verbindingen "
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Waarschuwing: bestand %s niet gevonden\n"
 
 #, c-format
 msgid ""
@@ -927,6 +925,7 @@ msgid "Show mc with specified skin"
 msgstr "Laad mc met aangegeven skin"
 
 #. TRANSLATORS: don't translate keywords and names of colors
+#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -937,7 +936,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -2578,9 +2577,13 @@ msgstr " Verwijderen: "
 msgid "Non&e"
 msgstr "ge&En"
 
-#, c-format
-msgid "ETA %d:%02d.%02d"
+#, fuzzy, c-format
+msgid "%d:%02d.%02d"
 msgstr "ETA %d:%02d.%02d"
+
+#, c-format
+msgid "ETA %s"
+msgstr ""
 
 #, c-format
 msgid "%.2f MB/s"
@@ -2594,14 +2597,17 @@ msgstr "%.2f KB/s"
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-msgid "File"
-msgstr "Bestand"
+#, c-format
+msgid "Files processed: %llu of %llu"
+msgstr ""
 
-msgid "Count"
-msgstr "Aantal"
+#, fuzzy, c-format
+msgid "Time: %s  %s (%s)"
+msgstr "Grootte:     %s"
 
-msgid "Bytes"
-msgstr "Bytes"
+#, c-format
+msgid " Total: %s of %s "
+msgstr ""
 
 msgid "Source"
 msgstr "Bron"
@@ -3421,6 +3427,16 @@ msgstr "n"
 msgid "&Name"
 msgstr "&Naam"
 
+#. TRANSLATORS: one single character to represent 'version' sort mode
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+#, fuzzy
+msgid "sort|v"
+msgstr "u"
+
+#, fuzzy
+msgid "&Version"
+msgstr "Rechten"
+
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|e"
@@ -3523,6 +3539,12 @@ msgstr "Kies invoerkarakterset"
 
 msgid "-  < No translation >"
 msgstr "- < Geen vertaling >"
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
 
 #, c-format
 msgid ""
@@ -3784,6 +3806,13 @@ msgstr " Bekijken niet mogelijk: geen normaal bestand "
 msgid "Seeking to search result"
 msgstr ""
 
+#, fuzzy
+msgid "Search done"
+msgstr "Zoeken"
+
+msgid "Continue from begining?"
+msgstr ""
+
 msgid " History "
 msgstr " Opdrachthistorie "
 
@@ -3797,6 +3826,15 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Achtergrondproces:"
+
+#~ msgid "File"
+#~ msgstr "Bestand"
+
+#~ msgid "Count"
+#~ msgstr "Aantal"
+
+#~ msgid "Bytes"
+#~ msgstr "Bytes"
 
 #~ msgid " confirm &Exit "
 #~ msgstr " B&Evestig afsluiten "

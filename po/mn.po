@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mn\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-09 12:01+0200\n"
+"POT-Creation-Date: 2010-02-24 13:14+0200\n"
 "PO-Revision-Date: 2003-03-04 21:16+0100\n"
 "Last-Translator: Sanlig Badral <badral@chinggis.com>\n"
 "Language-Team: Mongolian <mn@li.org>\n"
@@ -327,12 +327,6 @@ msgstr ""
 "Дэлгэцийн %dx%d хэмжээсийг сонгох боломжгүй байна.\n"
 "TERM хувьсагчийн утгыг шалгана уу.\n"
 
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s нь лавлах биш байна\n"
@@ -447,9 +441,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Алдаатай архив extfs"
 
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Анхааруулга: файл %s алга байна\n"
+#, fuzzy, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr "Хавтас руу шилжиж чадсангүй"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -671,6 +665,10 @@ msgstr "Сервер рүү холбогдож чадсангүй %s "
 
 msgid " Too many open connections "
 msgstr " Маш олон холболтууд "
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Анхааруулга: файл %s алга байна\n"
 
 #, c-format
 msgid ""
@@ -955,7 +953,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -2641,9 +2639,13 @@ msgstr " Устгах: "
 msgid "Non&e"
 msgstr "&үгүй"
 
-#, c-format
-msgid "ETA %d:%02d.%02d"
+#, fuzzy, c-format
+msgid "%d:%02d.%02d"
 msgstr "ETA %d:%02d.%02d"
+
+#, c-format
+msgid "ETA %s"
+msgstr ""
 
 #, c-format
 msgid "%.2f MB/s"
@@ -2657,14 +2659,17 @@ msgstr "%.2f кб/с"
 msgid "%ld B/s"
 msgstr "%ld б/с"
 
-msgid "File"
-msgstr "Файл"
+#, c-format
+msgid "Files processed: %llu of %llu"
+msgstr ""
 
-msgid "Count"
-msgstr "Тоо"
+#, fuzzy, c-format
+msgid "Time: %s  %s (%s)"
+msgstr "Хэмжээ:    %s"
 
-msgid "Bytes"
-msgstr "Байт"
+#, c-format
+msgid " Total: %s of %s "
+msgstr ""
 
 msgid "Source"
 msgstr "Эх"
@@ -3528,6 +3533,16 @@ msgstr ""
 msgid "&Name"
 msgstr "&Нэр"
 
+#. TRANSLATORS: one single character to represent 'version' sort mode
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+#, fuzzy
+msgid "sort|v"
+msgstr "&Эрэмбэлэгдээгүй"
+
+#, fuzzy
+msgid "&Version"
+msgstr "Зөвшөөрөл"
+
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 #, fuzzy
@@ -3632,6 +3647,12 @@ msgstr " Оролтын кодлогч хуудасаа сонгоно уу "
 
 msgid "-  < No translation >"
 msgstr "-  < Хөрвүүлэгдэхгүй >"
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
 
 #, fuzzy, c-format
 msgid ""
@@ -3883,6 +3904,13 @@ msgstr " Харж чадсангүй: хэвийн бус файл "
 msgid "Seeking to search result"
 msgstr ""
 
+#, fuzzy
+msgid "Search done"
+msgstr "Хайх"
+
+msgid "Continue from begining?"
+msgstr ""
+
 msgid " History "
 msgstr "Бүртгэл"
 
@@ -3895,6 +3923,15 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Арын процесс:"
+
+#~ msgid "File"
+#~ msgstr "Файл"
+
+#~ msgid "Count"
+#~ msgstr "Тоо"
+
+#~ msgid "Bytes"
+#~ msgstr "Байт"
 
 #~ msgid " confirm &Exit "
 #~ msgstr " Баталгаажуулж &гарах "

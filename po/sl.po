@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc \n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-09 12:01+0200\n"
+"POT-Creation-Date: 2010-02-24 13:14+0200\n"
 "PO-Revision-Date: 2000-06-22 00:00+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -322,12 +322,6 @@ msgstr ""
 "Velikost zaslona %dx%d ni podprta.\n"
 "Preverite okoljsko spremenljivko TERM.\n"
 
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s ni imenik\n"
@@ -442,9 +436,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Nekonsistenten extfs arhiv"
 
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Opozorilo: datoteka %s ni bila najdena\n"
+#, fuzzy, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr "Ne morem spremeniti imenika"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -667,6 +661,10 @@ msgstr " Ne morem se povezati s strežnikom: %s "
 
 msgid " Too many open connections "
 msgstr " Preveč odprtih povezav "
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Opozorilo: datoteka %s ni bila najdena\n"
 
 #, c-format
 msgid ""
@@ -950,7 +948,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -2637,9 +2635,13 @@ msgstr " Zbriši: "
 msgid "Non&e"
 msgstr "&Brez"
 
-#, c-format
-msgid "ETA %d:%02d.%02d"
+#, fuzzy, c-format
+msgid "%d:%02d.%02d"
 msgstr "Čas do konca %d:%02d.%02d"
+
+#, c-format
+msgid "ETA %s"
+msgstr ""
 
 #, c-format
 msgid "%.2f MB/s"
@@ -2653,14 +2655,17 @@ msgstr "%.2f KB/s"
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-msgid "File"
-msgstr "Datoteka"
+#, c-format
+msgid "Files processed: %llu of %llu"
+msgstr ""
 
-msgid "Count"
-msgstr "Števec"
+#, fuzzy, c-format
+msgid "Time: %s  %s (%s)"
+msgstr "Velikost:  %s"
 
-msgid "Bytes"
-msgstr "Bajtov"
+#, c-format
+msgid " Total: %s of %s "
+msgstr ""
 
 msgid "Source"
 msgstr "Izvor"
@@ -3525,6 +3530,16 @@ msgstr ""
 msgid "&Name"
 msgstr "&Ime"
 
+#. TRANSLATORS: one single character to represent 'version' sort mode
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+#, fuzzy
+msgid "sort|v"
+msgstr "ne&Sortirano"
+
+#, fuzzy
+msgid "&Version"
+msgstr "Dovoljenje"
+
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 #, fuzzy
@@ -3630,6 +3645,12 @@ msgstr " Izberite vhodni nabor znakov"
 
 msgid "-  < No translation >"
 msgstr "- < Brez prevoda >"
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
 
 #, fuzzy, c-format
 msgid ""
@@ -3881,6 +3902,13 @@ msgstr " Pogled ni mogoč: ni običajna datoteka "
 msgid "Seeking to search result"
 msgstr ""
 
+#, fuzzy
+msgid "Search done"
+msgstr "Iskanje"
+
+msgid "Continue from begining?"
+msgstr ""
+
 msgid " History "
 msgstr " Zgodovina "
 
@@ -3893,6 +3921,15 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Proces v ozadju:"
+
+#~ msgid "File"
+#~ msgstr "Datoteka"
+
+#~ msgid "Count"
+#~ msgstr "Števec"
+
+#~ msgid "Bytes"
+#~ msgstr "Bajtov"
 
 #~ msgid " confirm &Exit "
 #~ msgstr " potrdi &Izhod "

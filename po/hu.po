@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-09 12:01+0200\n"
+"POT-Creation-Date: 2010-02-24 13:14+0200\n"
 "PO-Revision-Date: 2005-10-01 00:47+0200\n"
 "Last-Translator: SZABO Gergely <szg@subogero.com>\n"
 "Language-Team: Hungarian <debian-l10n-hungarian@lists.debian.org>\n"
@@ -314,12 +314,6 @@ msgstr ""
 "A(z) %dx%d képernyőméret nem támogatott.\n"
 "Ellenőrizze a TERM környezeti változót.\n"
 
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H.%M"
-
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "\"%s\" nem könyvtár\n"
@@ -436,9 +430,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Inkonzisztens Extfs-archívum."
 
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Figyelem: \"%s\" fájl nem található\n"
+#, fuzzy, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr "A(z) %s könyvtár nem létrehozható"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -657,6 +651,10 @@ msgstr " Nem sikerült kapcsolódni a kiszolgálóhoz: %s "
 
 msgid " Too many open connections "
 msgstr " Túl sok megnyitott kapcsolat. "
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Figyelem: \"%s\" fájl nem található\n"
 
 #, c-format
 msgid ""
@@ -934,6 +932,7 @@ msgid "Show mc with specified skin"
 msgstr "MC a megadott borítással"
 
 #. TRANSLATORS: don't translate keywords and names of colors
+#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -944,7 +943,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -2630,9 +2629,13 @@ msgstr "&Egyiket sem"
 
 # ETA: Estimated time of arrival
 # a hátralevő időt jelzi: óra, perc, másodperc
-#, c-format
-msgid "ETA %d:%02d.%02d"
+#, fuzzy, c-format
+msgid "%d:%02d.%02d"
 msgstr "MÉG %d:%02d:%02d"
+
+#, c-format
+msgid "ETA %s"
+msgstr ""
 
 #, c-format
 msgid "%.2f MB/s"
@@ -2646,15 +2649,17 @@ msgstr "%.2f KB/s"
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-msgid "File"
-msgstr "Fájl"
+#, c-format
+msgid "Files processed: %llu of %llu"
+msgstr ""
 
-msgid "Count"
-msgstr "Darab"
+#, fuzzy, c-format
+msgid "Time: %s  %s (%s)"
+msgstr "Méret:        %s"
 
-# fájlmásolási progress bar-on jelenik meg
-msgid "Bytes"
-msgstr "Bájt"
+#, c-format
+msgid " Total: %s of %s "
+msgstr ""
 
 msgid "Source"
 msgstr "Forrás"
@@ -3493,6 +3498,17 @@ msgstr "sort|n"
 msgid "&Name"
 msgstr "&Név"
 
+#. TRANSLATORS: one single character to represent 'version' sort mode
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+#, fuzzy
+msgid "sort|v"
+msgstr "surt|u"
+
+# jogok, mnemonikkal
+#, fuzzy
+msgid "&Version"
+msgstr "Jogok"
+
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|e"
@@ -3600,6 +3616,12 @@ msgstr "Válasszon kódlapot"
 
 msgid "-  < No translation >"
 msgstr "-  < Nincs konverzió >"
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H.%M"
 
 #, c-format
 msgid ""
@@ -3860,6 +3882,14 @@ msgstr " Nem lehet megjeleníteni - speciális fájl. "
 msgid "Seeking to search result"
 msgstr "Találat keresése"
 
+# a gombsorban is szerepel (F7)
+#, fuzzy
+msgid "Search done"
+msgstr "Keresés"
+
+msgid "Continue from begining?"
+msgstr ""
+
 msgid " History "
 msgstr " Előzmények "
 
@@ -3873,6 +3903,16 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Háttérfolyamat:"
+
+#~ msgid "File"
+#~ msgstr "Fájl"
+
+#~ msgid "Count"
+#~ msgstr "Darab"
+
+# fájlmásolási progress bar-on jelenik meg
+#~ msgid "Bytes"
+#~ msgstr "Bájt"
 
 #~ msgid " confirm &Exit "
 #~ msgstr " &Kilépés előtt "

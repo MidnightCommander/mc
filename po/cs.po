@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.0.2\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-09 12:01+0200\n"
+"POT-Creation-Date: 2010-02-24 13:14+0200\n"
 "PO-Revision-Date: 2010-02-14 15:16+0100\n"
 "Last-Translator: Martin Zoubek <zoubek@seznam.cz>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
@@ -317,12 +317,6 @@ msgstr ""
 "Velikost obrazovky %d×%d není podporovaná.\n"
 "Prověřte nastavení proměnné prostředí TERM.\n"
 
-msgid "%b %e  %Y"
-msgstr "%e.%b  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%e.%b %H:%M"
-
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s není adresář\n"
@@ -437,9 +431,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Poškozený extfs archiv"
 
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Varování: soubor %s nebyl nalezen\n"
+#, fuzzy, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr "Není možné vytvořit adresář %s"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -658,6 +652,10 @@ msgstr " Nelze se připojit k serveru: %s "
 
 msgid " Too many open connections "
 msgstr " Příliš mnoho otevřených spojení "
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Varování: soubor %s nebyl nalezen\n"
 
 #, c-format
 msgid ""
@@ -932,6 +930,7 @@ msgid "Show mc with specified skin"
 msgstr "Zobrazit mc se zadaným tématem vzhledu"
 
 #. TRANSLATORS: don't translate keywords and names of colors
+#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -942,7 +941,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -2564,9 +2563,13 @@ msgstr " Smazat: "
 msgid "Non&e"
 msgstr "Žá&dné"
 
-#, c-format
-msgid "ETA %d:%02d.%02d"
+#, fuzzy, c-format
+msgid "%d:%02d.%02d"
 msgstr "ČAS %d:%02d.%02d"
+
+#, c-format
+msgid "ETA %s"
+msgstr ""
 
 #, c-format
 msgid "%.2f MB/s"
@@ -2580,14 +2583,17 @@ msgstr "%.2f KB/s"
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-msgid "File"
-msgstr "Soubor"
+#, c-format
+msgid "Files processed: %llu of %llu"
+msgstr ""
 
-msgid "Count"
-msgstr "Počet"
+#, fuzzy, c-format
+msgid "Time: %s  %s (%s)"
+msgstr "Velikost:  %s"
 
-msgid "Bytes"
-msgstr "Bajtů"
+#, c-format
+msgid " Total: %s of %s "
+msgstr ""
 
 msgid "Source"
 msgstr "Zdroj"
@@ -3413,6 +3419,16 @@ msgstr "sort|n"
 msgid "&Name"
 msgstr "&Jméno"
 
+#. TRANSLATORS: one single character to represent 'version' sort mode
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+#, fuzzy
+msgid "sort|v"
+msgstr "sort|s"
+
+#, fuzzy
+msgid "&Version"
+msgstr "Práva"
+
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|e"
@@ -3517,6 +3533,12 @@ msgstr "Zvolte znakovou sadu"
 
 msgid "-  < No translation >"
 msgstr "-  < Bez převodu >"
+
+msgid "%b %e  %Y"
+msgstr "%e.%b  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%e.%b %H:%M"
 
 #, c-format
 msgid ""
@@ -3777,6 +3799,13 @@ msgstr " Nelze prohlížet: není to normální soubor "
 msgid "Seeking to search result"
 msgstr "Přesouvá se na pozici výsledku vyhledávání"
 
+#, fuzzy
+msgid "Search done"
+msgstr "Hledat"
+
+msgid "Continue from begining?"
+msgstr ""
+
 msgid " History "
 msgstr " Historie "
 
@@ -3789,3 +3818,12 @@ msgstr "Chcete smazat tuto historii?"
 
 msgid "Background process:"
 msgstr "Procesy na pozadí:"
+
+#~ msgid "File"
+#~ msgstr "Soubor"
+
+#~ msgid "Count"
+#~ msgstr "Počet"
+
+#~ msgid "Bytes"
+#~ msgstr "Bajtů"

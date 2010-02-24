@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-09 12:01+0200\n"
+"POT-Creation-Date: 2010-02-24 13:14+0200\n"
 "PO-Revision-Date: 2003-01-31 00:11+0200\n"
 "Last-Translator: Mişu Moldovan <dumol@go.ro>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
@@ -325,12 +325,6 @@ msgstr ""
 "Mărimea %dx%d a ecranului nu este suportată.\n"
 "Verificaţi variabila e mediu TERM.\n"
 
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s nu este un director\n"
@@ -444,9 +438,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Arhivă extfs inconsistentă"
 
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Atenţie: nu am găsit fişierul %s\n"
+#, fuzzy, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr "Nu pot deschide directorul %s"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -668,6 +662,10 @@ msgstr " Nu mă pot conecta la serverul: %s"
 
 msgid " Too many open connections "
 msgstr " Prea multe conectări "
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Atenţie: nu am găsit fişierul %s\n"
 
 #, c-format
 msgid ""
@@ -951,7 +949,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -2636,9 +2634,13 @@ msgstr " Şterg: "
 msgid "Non&e"
 msgstr "&Niciunul"
 
-#, c-format
-msgid "ETA %d:%02d.%02d"
+#, fuzzy, c-format
+msgid "%d:%02d.%02d"
 msgstr "ETA %d:%02d.%02d"
+
+#, c-format
+msgid "ETA %s"
+msgstr ""
 
 #, c-format
 msgid "%.2f MB/s"
@@ -2652,14 +2654,17 @@ msgstr "%.2f KB/"
 msgid "%ld B/s"
 msgstr "%ld B/"
 
-msgid "File"
-msgstr " Fişier"
+#, c-format
+msgid "Files processed: %llu of %llu"
+msgstr ""
 
-msgid "Count"
-msgstr "Număr"
+#, fuzzy, c-format
+msgid "Time: %s  %s (%s)"
+msgstr "Mărime:    %s"
 
-msgid "Bytes"
-msgstr "Bytes"
+#, c-format
+msgid " Total: %s of %s "
+msgstr ""
 
 msgid "Source"
 msgstr "Sursă"
@@ -3524,6 +3529,16 @@ msgstr ""
 msgid "&Name"
 msgstr "&Nume"
 
+#. TRANSLATORS: one single character to represent 'version' sort mode
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+#, fuzzy
+msgid "sort|v"
+msgstr "ne-Sor&tat"
+
+#, fuzzy
+msgid "&Version"
+msgstr "Drepturi"
+
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 #, fuzzy
@@ -3628,6 +3643,12 @@ msgstr " Alegeţi codul de intrare "
 
 msgid "-  < No translation >"
 msgstr "-  < Fără translatare >"
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
 
 #, fuzzy, c-format
 msgid ""
@@ -3879,6 +3900,13 @@ msgstr " Nu poate fi vizualizat: nu este un fişier obişnuit "
 msgid "Seeking to search result"
 msgstr ""
 
+#, fuzzy
+msgid "Search done"
+msgstr "Caută"
+
+msgid "Continue from begining?"
+msgstr ""
+
 msgid " History "
 msgstr " Istoric "
 
@@ -3891,6 +3919,15 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Procese în fundal:"
+
+#~ msgid "File"
+#~ msgstr " Fişier"
+
+#~ msgid "Count"
+#~ msgstr "Număr"
+
+#~ msgid "Bytes"
+#~ msgstr "Bytes"
 
 #~ msgid " confirm &Exit "
 #~ msgstr " confirmă i&Eşirea "

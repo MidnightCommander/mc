@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-09 12:01+0200\n"
+"POT-Creation-Date: 2010-02-24 13:14+0200\n"
 "PO-Revision-Date: 2001-05-25 13:35+0200\n"
 "Last-Translator: Mari Susperregi <mari@elhuyar.com>\n"
 "Language-Team: Euskara <debian-l10n-basque@lists.debian.org>\n"
@@ -324,12 +324,6 @@ msgstr ""
 "%dx%d pantaila-tamaina ez da onartzen.\n"
 "Egiaztatu TERM ingurune-aldagaia.\n"
 
-msgid "%b %e  %Y"
-msgstr "%Y %b %e"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
 msgstr "direktorioa"
@@ -448,9 +442,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "extfs artxibo inkontsistentea"
 
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Abisua: %s fitxategia ez da aurkitu\n"
+#, fuzzy, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr "Ezin izan da direktorioz aldatu"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -672,6 +666,10 @@ msgstr " Ezin da zerbitzariarekin konektatu: %s "
 
 msgid " Too many open connections "
 msgstr " Konexio gehiegi daude irekita "
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Abisua: %s fitxategia ez da aurkitu\n"
 
 #, c-format
 msgid ""
@@ -957,7 +955,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -2654,7 +2652,11 @@ msgid "Non&e"
 msgstr "&Bat ere ez"
 
 #, c-format
-msgid "ETA %d:%02d.%02d"
+msgid "%d:%02d.%02d"
+msgstr ""
+
+#, c-format
+msgid "ETA %s"
 msgstr ""
 
 #, c-format
@@ -2669,14 +2671,17 @@ msgstr ""
 msgid "%ld B/s"
 msgstr ""
 
-msgid "File"
-msgstr "Fitxategia"
+#, c-format
+msgid "Files processed: %llu of %llu"
+msgstr ""
 
-msgid "Count"
-msgstr "Kontaketa"
+#, fuzzy, c-format
+msgid "Time: %s  %s (%s)"
+msgstr "Tamaina:  %s"
 
-msgid "Bytes"
-msgstr "Byte"
+#, c-format
+msgid " Total: %s of %s "
+msgstr ""
 
 msgid "Source"
 msgstr "Iturburua"
@@ -3545,6 +3550,16 @@ msgstr ""
 msgid "&Name"
 msgstr "&Izena"
 
+#. TRANSLATORS: one single character to represent 'version' sort mode
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+#, fuzzy
+msgid "sort|v"
+msgstr "&Desordenatu"
+
+#, fuzzy
+msgid "&Version"
+msgstr "Baimena"
+
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 #, fuzzy
@@ -3649,6 +3664,12 @@ msgstr " Aukeratu sarrerako kode-orria "
 
 msgid "-  < No translation >"
 msgstr "-  < Ez dago itzulpenik >"
+
+msgid "%b %e  %Y"
+msgstr "%Y %b %e"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
 
 #, fuzzy, c-format
 msgid ""
@@ -3901,6 +3922,13 @@ msgstr " Ezin da ikusi: ez da fitxategi erregularra "
 msgid "Seeking to search result"
 msgstr ""
 
+#, fuzzy
+msgid "Search done"
+msgstr "Bilatu"
+
+msgid "Continue from begining?"
+msgstr ""
+
 msgid " History "
 msgstr " Historia "
 
@@ -3913,6 +3941,15 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Atzeko planoko prozesua:"
+
+#~ msgid "File"
+#~ msgstr "Fitxategia"
+
+#~ msgid "Count"
+#~ msgstr "Kontaketa"
+
+#~ msgid "Bytes"
+#~ msgstr "Byte"
 
 #~ msgid " confirm &Exit "
 #~ msgstr "berretsi &Irten "

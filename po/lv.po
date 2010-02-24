@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-09 12:01+0200\n"
+"POT-Creation-Date: 2010-02-24 13:14+0200\n"
 "PO-Revision-Date: 2001-11-20 15:15+0200\n"
 "Last-Translator: Artis Trops <hornet@navigators.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -323,12 +323,6 @@ msgstr ""
 "Ekrāna izmērs %dx%d nav atbalstīts.\n"
 "Pārbaudi TERM vides mainīgo.\n"
 
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
 msgstr "direktoriju"
@@ -447,9 +441,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Nepatstāvīgs extfs arhīvs"
 
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Brīdinājums: fails %s nav atrasts\n"
+#, fuzzy, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr "Nevar nomainīt direktoriju"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -672,6 +666,10 @@ msgstr " Nevar savienoties ar serveri: %s "
 
 msgid " Too many open connections "
 msgstr " Par daudz atvērtu konekciju "
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Brīdinājums: fails %s nav atrasts\n"
 
 #, c-format
 msgid ""
@@ -957,7 +955,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -2651,7 +2649,11 @@ msgid "Non&e"
 msgstr "n&Evienu"
 
 #, c-format
-msgid "ETA %d:%02d.%02d"
+msgid "%d:%02d.%02d"
+msgstr ""
+
+#, c-format
+msgid "ETA %s"
 msgstr ""
 
 #, c-format
@@ -2666,14 +2668,17 @@ msgstr ""
 msgid "%ld B/s"
 msgstr ""
 
-msgid "File"
-msgstr "Fails"
+#, c-format
+msgid "Files processed: %llu of %llu"
+msgstr ""
 
-msgid "Count"
-msgstr "Skaitīt"
+#, fuzzy, c-format
+msgid "Time: %s  %s (%s)"
+msgstr "Lielums:      %s"
 
-msgid "Bytes"
-msgstr "Baiti"
+#, c-format
+msgid " Total: %s of %s "
+msgstr ""
 
 msgid "Source"
 msgstr "Avots"
@@ -3543,6 +3548,16 @@ msgstr ""
 msgid "&Name"
 msgstr "&Vārds"
 
+#. TRANSLATORS: one single character to represent 'version' sort mode
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+#, fuzzy
+msgid "sort|v"
+msgstr "&Nesakārtots"
+
+#, fuzzy
+msgid "&Version"
+msgstr "Atļauja"
+
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 #, fuzzy
@@ -3648,6 +3663,12 @@ msgstr " Izvēlies ievades kodu tabulu "
 
 msgid "-  < No translation >"
 msgstr "-  < Nav tulkojuma >"
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
 
 #, fuzzy, c-format
 msgid ""
@@ -3899,6 +3920,13 @@ msgstr " Nevar skatīt: nav regulārs fails "
 msgid "Seeking to search result"
 msgstr ""
 
+#, fuzzy
+msgid "Search done"
+msgstr "Meklēt"
+
+msgid "Continue from begining?"
+msgstr ""
+
 msgid " History "
 msgstr " Vēsture "
 
@@ -3911,6 +3939,15 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Fona process:"
+
+#~ msgid "File"
+#~ msgstr "Fails"
+
+#~ msgid "Count"
+#~ msgstr "Skaitīt"
+
+#~ msgid "Bytes"
+#~ msgstr "Baiti"
 
 #~ msgid " confirm &Exit "
 #~ msgstr " apstiprināt I&Ziešanu "

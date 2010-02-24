@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: uk\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-09 12:01+0200\n"
+"POT-Creation-Date: 2010-02-24 13:14+0200\n"
 "PO-Revision-Date: 2009-10-31 19:01+0200\n"
 "Last-Translator: Oleksandr Natalenko <pfactum@gmail.com>\n"
 "Language-Team: uk <kde-i18n-doc@kde.org>\n"
@@ -315,12 +315,6 @@ msgstr ""
 "Розмір екрану %dx%d не підтримується.\n"
 "Перевірте змінну середовища TERM.\n"
 
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s не є каталогом\n"
@@ -435,9 +429,10 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Неузгоджений архів extfs"
 
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Увага: файл %s не знайдений\n"
+# , c-format
+#, fuzzy, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr "Не вдалося створити каталог %s"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -658,6 +653,10 @@ msgstr " Не вдається з'єднатися з сервером: %s"
 
 msgid " Too many open connections "
 msgstr " Надто багато відкритих з'єднань "
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Увага: файл %s не знайдений\n"
 
 #, c-format
 msgid ""
@@ -929,6 +928,7 @@ msgid "Show mc with specified skin"
 msgstr "Показувати mc із обраним скіном"
 
 #. TRANSLATORS: don't translate keywords and names of colors
+#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -939,7 +939,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -2582,9 +2582,13 @@ msgstr " Видалення: "
 msgid "Non&e"
 msgstr "Ж&oдного"
 
-#, c-format
-msgid "ETA %d:%02d.%02d"
+#, fuzzy, c-format
+msgid "%d:%02d.%02d"
 msgstr "ОЧЗ %d:%02d.%02d"
+
+#, c-format
+msgid "ETA %s"
+msgstr ""
 
 #, c-format
 msgid "%.2f MB/s"
@@ -2598,14 +2602,17 @@ msgstr "%.2f KБ/с"
 msgid "%ld B/s"
 msgstr "%ld Б/с"
 
-msgid "File"
-msgstr "Файл"
+#, c-format
+msgid "Files processed: %llu of %llu"
+msgstr ""
 
-msgid "Count"
-msgstr "Кількість"
+#, fuzzy, c-format
+msgid "Time: %s  %s (%s)"
+msgstr "Розмір:    %s"
 
-msgid "Bytes"
-msgstr "Байт"
+#, c-format
+msgid " Total: %s of %s "
+msgstr ""
 
 msgid "Source"
 msgstr "Джерело"
@@ -3430,6 +3437,16 @@ msgstr "сортування|n"
 msgid "&Name"
 msgstr "За &назвою"
 
+#. TRANSLATORS: one single character to represent 'version' sort mode
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+#, fuzzy
+msgid "sort|v"
+msgstr "сортування|u"
+
+#, fuzzy
+msgid "&Version"
+msgstr "Права"
+
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|e"
@@ -3533,6 +3550,12 @@ msgstr "Виберіть кодову сторінку"
 
 msgid "-  < No translation >"
 msgstr "-  < Без перекодування >"
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
 
 # , c-format
 #, c-format
@@ -3794,6 +3817,13 @@ msgstr " Не вдається показати: не звичайний фай�
 msgid "Seeking to search result"
 msgstr "Перехід до результату пошуку"
 
+#, fuzzy
+msgid "Search done"
+msgstr "Пошук"
+
+msgid "Continue from begining?"
+msgstr ""
+
 msgid " History "
 msgstr "Історія команд"
 
@@ -3807,6 +3837,15 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Фоновий процес:"
+
+#~ msgid "File"
+#~ msgstr "Файл"
+
+#~ msgid "Count"
+#~ msgstr "Кількість"
+
+#~ msgid "Bytes"
+#~ msgstr "Байт"
 
 #~ msgid " confirm &Exit "
 #~ msgstr " перед ви&ходом"

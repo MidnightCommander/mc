@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-09 12:01+0200\n"
+"POT-Creation-Date: 2010-02-24 13:14+0200\n"
 "PO-Revision-Date: 2009-02-16 19:45+0300\n"
 "Last-Translator: Andrius Štikonas <stikonas@gmail.com>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -325,12 +325,6 @@ msgstr ""
 "Ekrano dydis %dx%d nepalaikomas.\n"
 "Patikrinkite TERM aplinkos kintamąjį.\n"
 
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s nėra aplankas\n"
@@ -445,9 +439,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Prieštaringas „extfs“ archyvas"
 
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Įspėjimas: failas %s nerasta\n"
+#, fuzzy, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr " Nepavyko pakeisti aplanko "
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -667,6 +661,10 @@ msgstr " Nepavyko prisijungti prie serverio: %s "
 
 msgid " Too many open connections "
 msgstr " Per daug prisijungimų "
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Įspėjimas: failas %s nerasta\n"
 
 #, c-format
 msgid ""
@@ -950,7 +948,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -2637,9 +2635,13 @@ msgstr " Šalinti: "
 msgid "Non&e"
 msgstr "&Joks"
 
-#, c-format
-msgid "ETA %d:%02d.%02d"
+#, fuzzy, c-format
+msgid "%d:%02d.%02d"
 msgstr "Liko %d:%02d.%02d"
+
+#, c-format
+msgid "ETA %s"
+msgstr ""
 
 #, c-format
 msgid "%.2f MB/s"
@@ -2653,14 +2655,17 @@ msgstr "%.2f KB/s"
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-msgid "File"
-msgstr "Failas"
+#, c-format
+msgid "Files processed: %llu of %llu"
+msgstr ""
 
-msgid "Count"
-msgstr "Kiekis"
+#, fuzzy, c-format
+msgid "Time: %s  %s (%s)"
+msgstr "Dydis:     %s"
 
-msgid "Bytes"
-msgstr "Baitai"
+#, c-format
+msgid " Total: %s of %s "
+msgstr ""
 
 msgid "Source"
 msgstr "Iš"
@@ -3529,6 +3534,16 @@ msgstr ""
 msgid "&Name"
 msgstr "Pavadi&nimas"
 
+#. TRANSLATORS: one single character to represent 'version' sort mode
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+#, fuzzy
+msgid "sort|v"
+msgstr "Neriki&uotai"
+
+#, fuzzy
+msgid "&Version"
+msgstr "Leidimai"
+
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 #, fuzzy
@@ -3635,6 +3650,12 @@ msgstr " Parinkite įvesties koduotę "
 
 msgid "-  < No translation >"
 msgstr "–  < Jokio vertimo >"
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
 
 #, fuzzy, c-format
 msgid ""
@@ -3900,6 +3921,13 @@ msgstr " Nepavyko parodyti: failas nėra įprastinis "
 msgid "Seeking to search result"
 msgstr ""
 
+#, fuzzy
+msgid "Search done"
+msgstr "Paieška"
+
+msgid "Continue from begining?"
+msgstr ""
+
 msgid " History "
 msgstr " Istorija "
 
@@ -3912,6 +3940,15 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Foninis procesas:"
+
+#~ msgid "File"
+#~ msgstr "Failas"
+
+#~ msgid "Count"
+#~ msgstr "Kiekis"
+
+#~ msgid "Bytes"
+#~ msgstr "Baitai"
 
 #~ msgid " confirm &Exit "
 #~ msgstr " patvirtinti išė&jimą "

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.41\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-09 12:01+0200\n"
+"POT-Creation-Date: 2010-02-24 13:14+0200\n"
 "PO-Revision-Date: 2001-10-20 21:37+02:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -330,12 +330,6 @@ msgstr ""
 "Skærmstørrelse %dx%d er ikke understøttet.\n"
 "Tjek TERM-miljøvariabelen.\n"
 
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
 msgstr "mappe"
@@ -453,9 +447,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Inkonsistent extfs-arkiv"
 
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Advarsel: fil %s ikke fundet\n"
+#, fuzzy, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr " Kunne ikke skifte mappe"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -677,6 +671,10 @@ msgstr "Kan ikke forbinde til server %s"
 
 msgid " Too many open connections "
 msgstr " For mange åbne forbindelser "
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Advarsel: fil %s ikke fundet\n"
 
 #, c-format
 msgid ""
@@ -962,7 +960,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -2655,7 +2653,11 @@ msgid "Non&e"
 msgstr "ing&En"
 
 #, c-format
-msgid "ETA %d:%02d.%02d"
+msgid "%d:%02d.%02d"
+msgstr ""
+
+#, c-format
+msgid "ETA %s"
 msgstr ""
 
 #, c-format
@@ -2670,14 +2672,17 @@ msgstr ""
 msgid "%ld B/s"
 msgstr ""
 
-msgid "File"
-msgstr "Fil"
+#, c-format
+msgid "Files processed: %llu of %llu"
+msgstr ""
 
-msgid "Count"
-msgstr "Tæl"
+#, fuzzy, c-format
+msgid "Time: %s  %s (%s)"
+msgstr "Størrelse: %s"
 
-msgid "Bytes"
-msgstr "Byte"
+#, c-format
+msgid " Total: %s of %s "
+msgstr ""
 
 msgid "Source"
 msgstr "Kilde"
@@ -3543,6 +3548,16 @@ msgstr ""
 msgid "&Name"
 msgstr "&Navn"
 
+#. TRANSLATORS: one single character to represent 'version' sort mode
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+#, fuzzy
+msgid "sort|v"
+msgstr "&Usorteret"
+
+#, fuzzy
+msgid "&Version"
+msgstr "Rettighed"
+
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 #, fuzzy
@@ -3647,6 +3662,12 @@ msgstr " Vælg kodning for inddata "
 
 msgid "-  < No translation >"
 msgstr "- < Ingen oversættelse >"
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
 
 #, fuzzy, c-format
 msgid ""
@@ -3898,6 +3919,13 @@ msgstr " Kan ikke vise: ikke en normal fil "
 msgid "Seeking to search result"
 msgstr ""
 
+#, fuzzy
+msgid "Search done"
+msgstr "Søg"
+
+msgid "Continue from begining?"
+msgstr ""
+
 msgid " History "
 msgstr " Historie "
 
@@ -3910,6 +3938,15 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Baggrundsproces:"
+
+#~ msgid "File"
+#~ msgstr "Fil"
+
+#~ msgid "Count"
+#~ msgstr "Tæl"
+
+#~ msgid "Bytes"
+#~ msgstr "Byte"
 
 #~ msgid " confirm &Exit "
 #~ msgstr " bekræft &Afslut "

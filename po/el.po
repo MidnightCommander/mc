@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.38\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-09 12:01+0200\n"
+"POT-Creation-Date: 2010-02-24 13:14+0200\n"
 "PO-Revision-Date: 1997-07-23 00:04-0400\n"
 "Last-Translator: Spiros Papadimitriou <spapadim+@cs.cmu.edu>\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
@@ -306,12 +306,6 @@ msgid ""
 "Check the TERM environment variable.\n"
 msgstr ""
 
-msgid "%b %e  %Y"
-msgstr ""
-
-msgid "%b %e %H:%M"
-msgstr ""
-
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
 msgstr "Δημηουργία νέου καταλόγου"
@@ -418,9 +412,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Χαλασμένο αρχείο extfs"
 
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr ""
+#, fuzzy, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr "Δημηουργία νέου καταλόγου"
 
 #, fuzzy, c-format
 msgid "fish: Disconnecting from %s"
@@ -430,7 +424,9 @@ msgid "fish: Waiting for initial line..."
 msgstr ""
 
 msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr "Με συγχωρείτε, αλλά προς το παρόν συνδέσεις με χρήση κωδικού δεν υποστηρίζονται."
+msgstr ""
+"Με συγχωρείτε, αλλά προς το παρόν συνδέσεις με χρήση κωδικού δεν "
+"υποστηρίζονται."
 
 #, fuzzy
 msgid " fish: Password required for "
@@ -642,6 +638,10 @@ msgstr "ftpfs: ανεπιτυχής σύνδεση με τον εξυπηρέτ�
 
 msgid " Too many open connections "
 msgstr " Υπέρβαση ορίου συνδέσεων "
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -913,7 +913,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -1014,8 +1014,7 @@ msgstr ""
 msgid "Confirmation"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr ""
@@ -2148,7 +2147,10 @@ msgid " %s%s file error"
 msgstr ""
 
 #, c-format
-msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
+msgid ""
+"The format of the %smc.ext file has changed with version 3.0.  It seems that "
+"the installation failed.  Please fetch a fresh copy from the Midnight "
+"Commander package."
 msgstr ""
 
 #, c-format
@@ -2156,7 +2158,10 @@ msgid " ~/%s file error "
 msgstr ""
 
 #, c-format
-msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
+msgid ""
+"The format of the ~/%s file has changed with version 3.0.  You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
 
 msgid "DialogTitle|Copy"
@@ -2452,7 +2457,11 @@ msgid "Non&e"
 msgstr ""
 
 #, c-format
-msgid "ETA %d:%02d.%02d"
+msgid "%d:%02d.%02d"
+msgstr ""
+
+#, c-format
+msgid "ETA %s"
 msgstr ""
 
 #, c-format
@@ -2467,13 +2476,16 @@ msgstr ""
 msgid "%ld B/s"
 msgstr ""
 
-msgid "File"
+#, c-format
+msgid "Files processed: %llu of %llu"
 msgstr ""
 
-msgid "Count"
+#, c-format
+msgid "Time: %s  %s (%s)"
 msgstr ""
 
-msgid "Bytes"
+#, c-format
+msgid " Total: %s of %s "
 msgstr ""
 
 msgid "Source"
@@ -2750,7 +2762,8 @@ msgid " Hotlist Load "
 msgstr ""
 
 #, c-format
-msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr ""
 
 #, c-format
@@ -3290,6 +3303,15 @@ msgstr ""
 msgid "&Name"
 msgstr ""
 
+#. TRANSLATORS: one single character to represent 'version' sort mode
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+msgid "sort|v"
+msgstr ""
+
+#, fuzzy
+msgid "&Version"
+msgstr "Δικαιώματα"
+
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|e"
@@ -3390,6 +3412,12 @@ msgid "Choose codepage"
 msgstr ""
 
 msgid "-  < No translation >"
+msgstr ""
+
+msgid "%b %e  %Y"
+msgstr ""
+
+msgid "%b %e %H:%M"
 msgstr ""
 
 #, fuzzy, c-format
@@ -3631,6 +3659,13 @@ msgid " Cannot view: not a regular file "
 msgstr ""
 
 msgid "Seeking to search result"
+msgstr ""
+
+#, fuzzy
+msgid "Search done"
+msgstr "Αναζήτηση"
+
+msgid "Continue from begining?"
 msgstr ""
 
 msgid " History "

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-09 12:01+0200\n"
+"POT-Creation-Date: 2010-02-24 13:14+0200\n"
 "PO-Revision-Date: 2003-01-22 18:10+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <debian-l10n-swedish@lists.debian.org>\n"
@@ -329,12 +329,6 @@ msgstr ""
 "Skärmstorleken %d×%d stöds inte.\n"
 "Kontrollera miljövariabeln TERM.\n"
 
-msgid "%b %e  %Y"
-msgstr "%e %b  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%e %b %H.%M"
-
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s är inte en katalog\n"
@@ -450,9 +444,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Inkonsistent extfsfil"
 
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Varning: filen %s kunde inte hittas\n"
+#, fuzzy, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr "Kan inte byta katalog"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -678,6 +672,10 @@ msgstr "Kan inte ansluta till värd: %s"
 
 msgid " Too many open connections "
 msgstr " För många aktiva anslutningar "
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Varning: filen %s kunde inte hittas\n"
 
 #, c-format
 msgid ""
@@ -964,7 +962,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -2665,9 +2663,13 @@ msgstr " Ta bort: "
 msgid "Non&e"
 msgstr "&Ingen"
 
-#, c-format
-msgid "ETA %d:%02d.%02d"
+#, fuzzy, c-format
+msgid "%d:%02d.%02d"
 msgstr "Klar om %d:%02d.%02d"
+
+#, c-format
+msgid "ETA %s"
+msgstr ""
 
 #, c-format
 msgid "%.2f MB/s"
@@ -2681,15 +2683,17 @@ msgstr "%.2f kB/s"
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-msgid "File"
-msgstr "Fil"
+#, c-format
+msgid "Files processed: %llu of %llu"
+msgstr ""
 
-msgid "Count"
-msgstr "Summa"
+#, fuzzy, c-format
+msgid "Time: %s  %s (%s)"
+msgstr "Storlek:   %s"
 
-# jag antar att detta är etikett för "progress bar" 
-msgid "Bytes"
-msgstr "Byte"
+#, c-format
+msgid " Total: %s of %s "
+msgstr ""
 
 msgid "Source"
 msgstr "Källa"
@@ -3567,6 +3571,17 @@ msgid "&Name"
 msgstr "&Namn"
 
 # incomplete
+#. TRANSLATORS: one single character to represent 'version' sort mode
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+#, fuzzy
+msgid "sort|v"
+msgstr "&Osorterad"
+
+#, fuzzy
+msgid "&Version"
+msgstr "Rättighet"
+
+# incomplete
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 #, fuzzy
@@ -3671,6 +3686,12 @@ msgstr " Välj teckentabell för inmatning "
 
 msgid "-  < No translation >"
 msgstr "- < Ingen översättning >"
+
+msgid "%b %e  %Y"
+msgstr "%e %b  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%e %b %H.%M"
 
 #, fuzzy, c-format
 msgid ""
@@ -3922,6 +3943,13 @@ msgstr " Kan inte visa: inte en vanlig fil "
 msgid "Seeking to search result"
 msgstr ""
 
+#, fuzzy
+msgid "Search done"
+msgstr "Sök"
+
+msgid "Continue from begining?"
+msgstr ""
+
 msgid " History "
 msgstr " Historik "
 
@@ -3934,6 +3962,16 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Bakgrundsprocess:"
+
+#~ msgid "File"
+#~ msgstr "Fil"
+
+#~ msgid "Count"
+#~ msgstr "Summa"
+
+# jag antar att detta är etikett för "progress bar" 
+#~ msgid "Bytes"
+#~ msgstr "Byte"
 
 #~ msgid " confirm &Exit "
 #~ msgstr " bekräfta &Avsluta "

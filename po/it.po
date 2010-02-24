@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.6.2\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-19 15:09+0100\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2010-02-24 13:14+0200\n"
 "PO-Revision-Date: 2010-02-19 15:10+0100\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian <debian-l10n-italian@lists.debian.org>\n"
@@ -924,6 +924,7 @@ msgid "Show mc with specified skin"
 msgstr "Mostra mc con il tema specificato"
 
 #. TRANSLATORS: don't translate keywords and names of colors
+#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -934,7 +935,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -2553,9 +2554,13 @@ msgstr " Elimina: "
 msgid "Non&e"
 msgstr "Nessun&o"
 
-#, c-format
-msgid "ETA %d:%02d.%02d"
+#, fuzzy, c-format
+msgid "%d:%02d.%02d"
 msgstr "ETA %d:%02d.%02d"
+
+#, c-format
+msgid "ETA %s"
+msgstr ""
 
 #, c-format
 msgid "%.2f MB/s"
@@ -2569,14 +2574,17 @@ msgstr "%.2f KB/s"
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-msgid "File"
-msgstr "File"
+#, c-format
+msgid "Files processed: %llu of %llu"
+msgstr ""
 
-msgid "Count"
-msgstr "Totale"
+#, fuzzy, c-format
+msgid "Time: %s  %s (%s)"
+msgstr "Dimensione: %s"
 
-msgid "Bytes"
-msgstr "Byte"
+#, c-format
+msgid " Total: %s of %s "
+msgstr ""
 
 msgid "Source"
 msgstr "Sorgente"
@@ -3400,6 +3408,16 @@ msgstr "n"
 msgid "&Name"
 msgstr "&Nome"
 
+#. TRANSLATORS: one single character to represent 'version' sort mode
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+#, fuzzy
+msgid "sort|v"
+msgstr "s"
+
+#, fuzzy
+msgid "&Version"
+msgstr "Permessi"
+
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|e"
@@ -3783,3 +3801,12 @@ msgstr "Cancellare questa cronologia?"
 
 msgid "Background process:"
 msgstr "Processo in background:"
+
+#~ msgid "File"
+#~ msgstr "File"
+
+#~ msgid "Count"
+#~ msgstr "Totale"
+
+#~ msgid "Bytes"
+#~ msgstr "Byte"

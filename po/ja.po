@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc CVS-20011220\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-09 12:01+0200\n"
+"POT-Creation-Date: 2010-02-24 13:14+0200\n"
 "PO-Revision-Date: 2001-12-20 18:33+0900\n"
 "Last-Translator: Akira TAGOH <tagoh@gnome.gr.jp>\n"
 "Language-Team: Japanese <debian-japanese@lists.debian.org>\n"
@@ -324,12 +324,6 @@ msgstr ""
 "スクリーンサイズ %dx%d はサポートされていません\n"
 "TERM環境変数の値をチェックしてください\n"
 
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
 msgstr "directory"
@@ -445,9 +439,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "不整合な extfs アーカイブです"
 
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "警告: ファイル %s は見つかりませんでした\n"
+#, fuzzy, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr "ディレクトリを変更できません"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -669,6 +663,10 @@ msgstr "サーバに接続できませんでした: %s"
 
 msgid " Too many open connections "
 msgstr " 接続が多すぎます "
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "警告: ファイル %s は見つかりませんでした\n"
 
 #, c-format
 msgid ""
@@ -950,7 +948,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -2644,7 +2642,11 @@ msgid "Non&e"
 msgstr "なし(&E)"
 
 #, c-format
-msgid "ETA %d:%02d.%02d"
+msgid "%d:%02d.%02d"
+msgstr ""
+
+#, c-format
+msgid "ETA %s"
 msgstr ""
 
 #, c-format
@@ -2659,14 +2661,17 @@ msgstr ""
 msgid "%ld B/s"
 msgstr ""
 
-msgid "File"
-msgstr "ファイル"
+#, c-format
+msgid "Files processed: %llu of %llu"
+msgstr ""
 
-msgid "Count"
-msgstr "カウント"
+#, fuzzy, c-format
+msgid "Time: %s  %s (%s)"
+msgstr "サイズ:    %s"
 
-msgid "Bytes"
-msgstr "バイト"
+#, c-format
+msgid " Total: %s of %s "
+msgstr ""
 
 msgid "Source"
 msgstr "元"
@@ -3531,6 +3536,16 @@ msgstr ""
 msgid "&Name"
 msgstr "名前(&N)"
 
+#. TRANSLATORS: one single character to represent 'version' sort mode
+#. TRANSLATORS: no need to translate 'sort', it's just a context prefix
+#, fuzzy
+msgid "sort|v"
+msgstr "並べ替え無し(&U)"
+
+#, fuzzy
+msgid "&Version"
+msgstr "アクセス権"
+
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 #, fuzzy
@@ -3635,6 +3650,12 @@ msgstr " 入力コードページを選択 "
 
 msgid "-  < No translation >"
 msgstr "-  < 翻訳がありません >"
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
 
 #, fuzzy, c-format
 msgid ""
@@ -3886,6 +3907,13 @@ msgstr " 表示できません: 通常ファイルではありません "
 msgid "Seeking to search result"
 msgstr ""
 
+#, fuzzy
+msgid "Search done"
+msgstr "検索"
+
+msgid "Continue from begining?"
+msgstr ""
+
 msgid " History "
 msgstr "履歴"
 
@@ -3898,6 +3926,15 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "バックグラウンド処理:"
+
+#~ msgid "File"
+#~ msgstr "ファイル"
+
+#~ msgid "Count"
+#~ msgstr "カウント"
+
+#~ msgid "Bytes"
+#~ msgstr "バイト"
 
 #~ msgid " confirm &Exit "
 #~ msgstr " 終了を確認(&E) "
