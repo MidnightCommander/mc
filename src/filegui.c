@@ -342,7 +342,7 @@ file_op_context_create_ui_without_init (FileOpContext *ctx, gboolean with_eta, f
 
     if ((right_panel == current_panel)
 	&& !mc_config_get_bool (mc_main_config,"Layout",
-				"progressbar_always_left2right", TRUE)) {
+				"classic_progressbar", TRUE)) {
 	ui->progress_file_gauge->from_left_to_right = FALSE;
 	if (dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
 	    ui->progress_total_gauge->from_left_to_right = FALSE;
