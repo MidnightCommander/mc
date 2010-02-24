@@ -49,6 +49,7 @@
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/strutil.h"
 
+#include "src/filegui.h"
 #include "src/file.h"		/* copy_file_file() */
 #ifndef HAVE_CHARSET
 #include "src/main.h"		/* eight_bit_clean */
@@ -539,15 +540,16 @@ check_for_default (const char *default_file, const char *file)
 {
     if (!exist_file (file)) {
 	FileOpContext *ctx;
-	off_t  count = 0;
-	double bytes = 0.0;
+	FileOpTotalContext *tctx;
 
 	if (!exist_file (default_file))
 	    return -1;
 
 	ctx = file_op_context_new (OP_COPY);
-	file_op_context_create_ui (ctx, 0);
-	copy_file_file (ctx, default_file, file, 1, &count, &bytes, 1);
+	tctx = file_op_total_context_new ();
+	file_op_context_create_ui (ctx, 0, FALSE);
+	copy_file_file (tctx, ctx, default_file, file);
+	file_op_total_context_destroy (tctx);
 	file_op_context_destroy (ctx);
     }
 
@@ -1444,7 +1446,7 @@ save_file_position (const char *filename, long line, long column, off_t offset)
 
     /* put the new record */
     if (line != 1 || column != 0) {
-        if (fprintf (f, "%s %ld;%ld;%lli\n", filename, line, column, offset) < 0)
+        if (fprintf (f, "%s %ld;%ld;%llu\n", filename, line, column, offset) < 0)
             goto write_position_error;
     }
 

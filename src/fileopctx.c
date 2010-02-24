@@ -55,10 +55,10 @@ file_op_context_new (FileOperation op)
     ctx->eta_secs = 0.0;
     ctx->progress_bytes = 0.0;
     ctx->op_preserve = TRUE;
-    ctx->do_reget = TRUE;
+    ctx->do_reget = 1;
     ctx->stat_func = mc_lstat;
     ctx->preserve = TRUE;
-    ctx->preserve_uidgid = (geteuid () == 0) ? TRUE : FALSE;
+    ctx->preserve_uidgid = (geteuid () == 0);
     ctx->umask_kill = 0777777;
     ctx->erase_at_end = TRUE;
 
@@ -86,4 +86,21 @@ file_op_context_destroy (FileOpContext *ctx)
     /** \todo FIXME: do we need to free ctx->dest_mask? */
 
     g_free (ctx);
+}
+
+FileOpTotalContext *
+file_op_total_context_new (void)
+{
+    FileOpTotalContext *tctx;
+    tctx = g_new0 (FileOpTotalContext, 1);
+    tctx->ask_overwrite = TRUE;
+    tctx->is_toplevel_file = TRUE;
+    return tctx;
+}
+
+void
+file_op_total_context_destroy (FileOpTotalContext *tctx)
+{
+    g_return_if_fail (tctx != NULL);
+    g_free (tctx);
 }

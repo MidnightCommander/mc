@@ -79,6 +79,7 @@
 #include "lib/global.h"
 
 #include "lib/tty/key.h"		/* tty_get_event */
+#include "lib/mcconfig.h"
 #include "lib/search.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/strescape.h"
@@ -108,51 +109,8 @@ typedef enum {
 /* Hack: the vfs code should not rely on this */
 #define WITH_FULL_PATHS 1
 
-/* This structure describes the UI and internal data required by a file
- * operation context.
- */
-typedef struct {
-    /* ETA and bps */
-
-    int showing_eta;
-    int showing_bps;
-    int eta_extra;
-
-    /* Dialog and widgets for the operation progress window */
-
-    Dlg_head *op_dlg;
-
-    WLabel *file_label[2];
-    WLabel *file_string[2];
-    WLabel *progress_label[3];
-    WGauge *progress_gauge[3];
-    WLabel *eta_label;
-    WLabel *bps_label;
-    WLabel *stalled_label;
-
-    /* Query replace dialog */
-
-    Dlg_head *replace_dlg;
-    const char *replace_filename;
-    int replace_result;
-    struct stat *s_stat, *d_stat;
-} FileOpContextUI;
-
-
-/* Used to save the hint line */
-static int last_hint_line;
-
-/* File operate window sizes */
-#define WX 62
-#define WY 10
-#define BY 10
-#define WX_ETA_EXTRA  12
-
-#define FCOPY_GAUGE_X 14
-#define FCOPY_LABEL_X 5
-
 /* Used for button result values */
-enum {
+typedef enum {
     REPLACE_YES = B_USER,
     REPLACE_NO,
     REPLACE_APPEND,
@@ -162,19 +120,57 @@ enum {
     REPLACE_ABORT,
     REPLACE_SIZE,
     REPLACE_REGET
-};
+} replace_action_t;
 
-static int
-filegui__check_attrs_on_fs(const char *fs_path)
+/* This structure describes the UI and internal data required by a file
+ * operation context.
+ */
+typedef struct {
+    /* ETA and bps */
+    gboolean showing_eta;
+    gboolean showing_bps;
+
+    /* Dialog and widgets for the operation progress window */
+    Dlg_head *op_dlg;
+    WLabel *file_string[2];
+    WLabel *file_label[2];
+    WGauge *progress_file_gauge;
+    WLabel *progress_file_label;
+
+    WGauge *progress_total_gauge;
+
+    WLabel *total_files_processed_label;
+    WLabel *time_label;
+    WLabel *total_bytes_label;
+
+    /* Query replace dialog */
+    Dlg_head *replace_dlg;
+    const char *replace_filename;
+    replace_action_t replace_result;
+
+    struct stat *s_stat, *d_stat;
+} FileOpContextUI;
+
+
+/* Used to save the hint line */
+static int last_hint_line;
+
+/* File operate window sizes */
+#define WX 58
+#define WY 11
+#define FCOPY_LABEL_X 3
+
+static gboolean
+filegui__check_attrs_on_fs (const char *fs_path)
 {
 #ifdef STATFS
     STRUCT_STATFS stfs;
 
     if (!setup_copymove_persistent_attr)
-        return 0;
+        return FALSE;
 
-    if (STATFS(fs_path, &stfs)!=0)
-        return 1;
+    if (STATFS (fs_path, &stfs) != 0)
+        return TRUE;
 
 # ifdef __linux__
     switch ((filegui_nonattrs_fs_t) stfs.f_type)
@@ -186,8 +182,7 @@ filegui__check_attrs_on_fs(const char *fs_path)
     case SMB_SUPER_MAGIC:
     case NCP_SUPER_MAGIC:
     case USBDEVICE_SUPER_MAGIC:
-        return 0;
-        break;
+        return FALSE;
     }
 # elif defined(HAVE_STRUCT_STATFS_F_FSTYPENAME) \
       || defined(HAVE_STRUCT_STATVFS_F_FSTYPENAME)
@@ -197,21 +192,21 @@ filegui__check_attrs_on_fs(const char *fs_path)
         || !strcmp(stfs.f_fstypename, "procfs")
         || !strcmp(stfs.f_fstypename, "smbfs")
         || strstr(stfs.f_fstypename, "fusefs"))
-        return 0;
+        return FALSE;
 # elif defined(HAVE_STRUCT_STATVFS_F_BASETYPE)
     if (!strcmp(stfs.f_basetype, "pcfs")
         || !strcmp(stfs.f_basetype, "ntfs")
         || !strcmp(stfs.f_basetype, "proc")
         || !strcmp(stfs.f_basetype, "smbfs")
         || !strcmp(stfs.f_basetype, "fuse"))
-        return 0;
+        return FALSE;
 # endif
 #endif /* STATFS */
 
-    return 1;
+    return TRUE;
 }
 
-static FileProgressStatus
+FileProgressStatus
 check_progress_buttons (FileOpContext *ctx)
 {
     int c;
@@ -236,11 +231,9 @@ check_progress_buttons (FileOpContext *ctx)
     switch (ui->op_dlg->ret_value) {
     case FILE_SKIP:
 	return FILE_SKIP;
-	break;
     case B_CANCEL:
     case FILE_ABORT:
 	return FILE_ABORT;
-	break;
     default:
 	return FILE_CONT;
     }
@@ -249,38 +242,56 @@ check_progress_buttons (FileOpContext *ctx)
 /* {{{ File progress display routines */
 
 void
-file_op_context_create_ui_without_init (FileOpContext *ctx, int with_eta)
+file_op_context_create_ui_without_init (FileOpContext *ctx, gboolean with_eta, filegui_dialog_type_t dialog_type)
 {
     FileOpContextUI *ui;
-    int x_size;
-    int minus;
-    int eta_offset;
-    const char *sixty;
-    const char *fifteen;
+    int minus, total_reserve=0;
+    const char *abort_button_label = N_("&Abort");
+    const char *skip_button_label = N_("&Skip");
+    int abort_button_width, skip_button_width, buttons_width;
+    int dlg_width;
 
     g_return_if_fail (ctx != NULL);
     g_return_if_fail (ctx->ui == NULL);
 
+#ifdef ENABLE_NLS
+    abort_button_label = _(abort_button_label);
+    skip_button_label = _(skip_button_label);
+#endif
+
+    abort_button_width = str_term_width1 (abort_button_label) + 3;
+    skip_button_width = str_term_width1 (skip_button_label) + 3;
+    buttons_width = abort_button_width + skip_button_width + 2;
+
+    dlg_width = max (WX, buttons_width + 6);
+
     ui = g_new0 (FileOpContextUI, 1);
     ctx->ui = ui;
 
+    ctx->dialog_type = dialog_type;
     minus = verbose ? 0 : 3;
-    eta_offset = with_eta ? (WX_ETA_EXTRA) / 2 : 0;
 
-    sixty = "";
-    fifteen = "";
+    switch (dialog_type) {
+	case FILEGUI_DIALOG_ONE_ITEM:
+	    total_reserve = 0;
+	    break;
+	case FILEGUI_DIALOG_MULTI_ITEM:
+	    total_reserve = 5;
+	    break;
+	case FILEGUI_DIALOG_DELETE_ITEM:
+	    total_reserve = -5;
+	    break;
+    }
 
-    ctx->recursive_result = 0;
+    ctx->recursive_result = RECURSIVE_YES;
 
-    ui->replace_result = 0;
+    ui->replace_result = REPLACE_YES;
     ui->showing_eta = with_eta;
     ui->showing_bps = with_eta;
-    ui->eta_extra = with_eta ? WX_ETA_EXTRA : 0;
-    x_size = (WX + 4) + ui->eta_extra;
 
     ui->op_dlg =
-	create_dlg (0, 0, WY - minus + 4, x_size, dialog_colors, NULL,
-		    NULL, op_names[ctx->operation],
+	create_dlg (0, 0, WY - minus + 1 + total_reserve, dlg_width,
+		    dialog_colors, NULL, NULL, op_names[ctx->operation],
 		    DLG_CENTER | DLG_REVERSE);
 
     last_hint_line = the_hint->widget.y;
@@ -288,49 +299,65 @@ file_op_context_create_ui_without_init (FileOpContext *ctx, int with_eta)
 	the_hint->widget.y = ui->op_dlg->y + ui->op_dlg->lines + 1;
 
     add_widget (ui->op_dlg,
-		button_new (BY - minus, WX - 19 + eta_offset, FILE_ABORT,
-			    NORMAL_BUTTON, _("&Abort"), 0));
+		button_new (WY - minus - 2 + total_reserve,
+			    dlg_width/2 + 1, FILE_ABORT,
+			    NORMAL_BUTTON, abort_button_label, NULL));
     add_widget (ui->op_dlg,
-		button_new (BY - minus, 14 + eta_offset, FILE_SKIP,
-			    NORMAL_BUTTON, _("&Skip"), 0));
+		button_new (WY - minus - 2 + total_reserve,
+			    dlg_width/2 - 1 - skip_button_width, FILE_SKIP,
+			    NORMAL_BUTTON, skip_button_label, NULL));
 
-    add_widget (ui->op_dlg, ui->progress_gauge[2] =
-		gauge_new (7, FCOPY_GAUGE_X, 0, 100, 0));
-    add_widget (ui->op_dlg, ui->progress_label[2] =
-		label_new (7, FCOPY_LABEL_X, fifteen));
-    add_widget (ui->op_dlg, ui->bps_label = label_new (7, WX, ""));
 
-    add_widget (ui->op_dlg, ui->progress_gauge[1] =
-		gauge_new (8, FCOPY_GAUGE_X, 0, 100, 0));
-    add_widget (ui->op_dlg, ui->progress_label[1] =
-		label_new (8, FCOPY_LABEL_X, fifteen));
-    add_widget (ui->op_dlg, ui->stalled_label = label_new (8, WX, ""));
+    if (dialog_type == FILEGUI_DIALOG_MULTI_ITEM) {
+	add_widget (ui->op_dlg, hline_new (8, 1, dlg_width - 2));
 
-    add_widget (ui->op_dlg, ui->progress_gauge[0] =
-		gauge_new (6, FCOPY_GAUGE_X, 0, 100, 0));
-    add_widget (ui->op_dlg, ui->progress_label[0] =
-		label_new (6, FCOPY_LABEL_X, fifteen));
-    add_widget (ui->op_dlg, ui->eta_label = label_new (6, WX, ""));
+	add_widget (ui->op_dlg, ui->total_bytes_label =
+		    label_new (8, FCOPY_LABEL_X + 15, ""));
+
+	add_widget (ui->op_dlg, ui->progress_total_gauge =
+		    gauge_new (9, FCOPY_LABEL_X + 3, 0, 100, 0));
+
+	add_widget (ui->op_dlg, ui->total_files_processed_label =
+		    label_new (11, FCOPY_LABEL_X, ""));
+
+	add_widget (ui->op_dlg, ui->time_label =
+		    label_new (12, FCOPY_LABEL_X, ""));
+    }
+
+    add_widget (ui->op_dlg, ui->progress_file_label =
+		label_new (7, FCOPY_LABEL_X, ""));
+
+    add_widget (ui->op_dlg, ui->progress_file_gauge =
+		gauge_new (6, FCOPY_LABEL_X + 3, 0, 100, 0));
 
     add_widget (ui->op_dlg, ui->file_string[1] =
-		label_new (4, FCOPY_GAUGE_X, sixty));
+		label_new (5, FCOPY_LABEL_X, ""));
+
     add_widget (ui->op_dlg, ui->file_label[1] =
-		label_new (4, FCOPY_LABEL_X, fifteen));
+		label_new (4, FCOPY_LABEL_X, ""));
     add_widget (ui->op_dlg, ui->file_string[0] =
-		label_new (3, FCOPY_GAUGE_X, sixty));
+		label_new (3, FCOPY_LABEL_X, ""));
     add_widget (ui->op_dlg, ui->file_label[0] =
-		label_new (3, FCOPY_LABEL_X, fifteen));
+		label_new (2, FCOPY_LABEL_X, ""));
+
+    if ((right_panel == current_panel)
+	&& !mc_config_get_bool (mc_main_config,"Layout",
+				"classic_progressbar", TRUE)) {
+	ui->progress_file_gauge->from_left_to_right = FALSE;
+	if (dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
+	    ui->progress_total_gauge->from_left_to_right = FALSE;
+    }
 }
 
 void
-file_op_context_create_ui (FileOpContext *ctx, int with_eta)
+file_op_context_create_ui (FileOpContext *ctx, gboolean with_eta, filegui_dialog_type_t dialog_type)
 {
     FileOpContextUI *ui;
 
     g_return_if_fail (ctx != NULL);
     g_return_if_fail (ctx->ui == NULL);
 
-    file_op_context_create_ui_without_init(ctx, with_eta);
+    file_op_context_create_ui_without_init (ctx, with_eta, dialog_type);
     ui = ctx->ui;
 
     /* We will manage the dialog without any help, that's why
@@ -359,178 +386,170 @@ file_op_context_destroy_ui (FileOpContext *ctx)
     ctx->ui = NULL;
 }
 
-static FileProgressStatus
-show_no_bar (FileOpContext *ctx, int n)
-{
-    FileOpContextUI *ui;
-
-    if (ctx->ui == NULL)
-	return FILE_CONT;
-
-    ui = ctx->ui;
-
-    if (n >= 0) {
-	label_set_text (ui->progress_label[n], "");
-	gauge_show (ui->progress_gauge[n], 0);
-    }
-    return check_progress_buttons (ctx);
-}
-
-static FileProgressStatus
-show_bar (FileOpContext *ctx, int n, double done, double total)
-{
-    FileOpContextUI *ui;
-
-    if (ctx->ui == NULL)
-	return FILE_CONT;
-
-    ui = ctx->ui;
-
-    /*
-     * Gauge needs integers, so give it with integers between 0 and 1023.
-     * This precision should be quite reasonable.
-     */
-    gauge_set_value (ui->progress_gauge[n], 1024,
-		     (int) (1024 * done / total));
-    gauge_show (ui->progress_gauge[n], 1);
-    return check_progress_buttons (ctx);
-}
-
 static void
-file_eta_show (FileOpContext *ctx)
+file_frmt_time (char *buffer, double eta_secs)
 {
     int eta_hours, eta_mins, eta_s;
-    char eta_buffer[BUF_TINY];
-    FileOpContextUI *ui;
-
-    if (ctx->ui == NULL)
-	return;
-
-    ui = ctx->ui;
-
-    if (!ui->showing_eta)
-	return;
-
-    if (ctx->eta_secs > 0.5) {
-	eta_hours = ctx->eta_secs / (60 * 60);
-	eta_mins = (ctx->eta_secs - (eta_hours * 60 * 60)) / 60;
-	eta_s = ctx->eta_secs - (eta_hours * 60 * 60 + eta_mins * 60);
-	g_snprintf (eta_buffer, sizeof (eta_buffer), _("ETA %d:%02d.%02d"),
-		    eta_hours, eta_mins, eta_s);
-    } else
-	*eta_buffer = 0;
-
-    label_set_text (ui->eta_label, eta_buffer);
+    eta_hours = eta_secs / (60 * 60);
+    eta_mins = (eta_secs - (eta_hours * 60 * 60)) / 60;
+    eta_s = eta_secs - (eta_hours * 60 * 60 + eta_mins * 60);
+    g_snprintf (buffer, BUF_TINY, _("%d:%02d.%02d"), eta_hours, eta_mins, eta_s);
 }
 
 static void
-file_bps_show (FileOpContext *ctx)
+file_eta_prepare_for_show (char *buffer, double eta_secs, gboolean always_show)
 {
-    char bps_buffer[BUF_TINY];
-    FileOpContextUI *ui;
-
-    if (ctx->ui == NULL)
+    char _fmt_buff[BUF_TINY];
+    if (eta_secs <= 0.5 && !always_show) {
+	*buffer = '\0';
 	return;
-
-    ui = ctx->ui;
-
-    if (!ui->showing_bps)
-	return;
-
-    if (ctx->bps > 1024 * 1024) {
-	g_snprintf (bps_buffer, sizeof (bps_buffer), _("%.2f MB/s"),
-		    ctx->bps / (1024 * 1024.0));
-    } else if (ctx->bps > 1024) {
-	g_snprintf (bps_buffer, sizeof (bps_buffer), _("%.2f KB/s"),
-		    ctx->bps / 1024.0);
-    } else if (ctx->bps > 1) {
-	g_snprintf (bps_buffer, sizeof (bps_buffer), _("%ld B/s"),
-		    ctx->bps);
-    } else
-	*bps_buffer = 0;
-
-    label_set_text (ui->bps_label, bps_buffer);
+    }
+    if (eta_secs <=  0.5)
+	eta_secs = 1;
+    file_frmt_time (_fmt_buff, eta_secs);
+    g_snprintf (buffer, BUF_TINY, _("ETA %s"), _fmt_buff);
 }
 
-FileProgressStatus
-file_progress_show (FileOpContext *ctx, off_t done, off_t total)
+static void
+file_bps_prepare_for_show (char *buffer, long bps)
+{
+    if (bps > 1024 * 1024) {
+	g_snprintf (buffer, BUF_TINY, _("%.2f MB/s"),
+		    bps / (1024 * 1024.0));
+    } else if (bps > 1024) {
+	g_snprintf (buffer, BUF_TINY, _("%.2f KB/s"),
+		    bps / 1024.0);
+    } else if (bps > 1) {
+	g_snprintf (buffer, BUF_TINY, _("%ld B/s"),
+		    bps);
+    } else
+	*buffer = 0;
+}
+
+/*
+    show progressbar for file
+*/
+void
+file_progress_show (FileOpContext *ctx, off_t done, off_t total,
+		    const char *stalled_msg, gboolean force_update)
 {
     FileOpContextUI *ui;
+    char buffer[BUF_TINY];
+    char buffer2[BUF_TINY];
+    char buffer3[BUF_TINY];
 
-    g_return_val_if_fail (ctx != NULL, FILE_CONT);
+    g_return_if_fail (ctx != NULL);
 
     if (ctx->ui == NULL)
-	return FILE_CONT;
+	return;
 
     ui = ctx->ui;
 
     if (!verbose)
-	return check_progress_buttons (ctx);
-    if (total > 0) {
-	label_set_text (ui->progress_label[0], _("File"));
-	file_eta_show (ctx);
-	file_bps_show (ctx);
-	return show_bar (ctx, 0, done, total);
-    } else
-	return show_no_bar (ctx, 0);
+	return;
+
+    if (total == 0) {
+	gauge_show (ui->progress_file_gauge, 0);
+	return;
+    }
+
+    gauge_set_value (ui->progress_file_gauge, 1024, (int) (1024 * done / total));
+    gauge_show (ui->progress_file_gauge, 1);
+
+    if (!force_update)
+	return;
+
+    if (ui->showing_eta && ctx->eta_secs > 0.5) {
+	file_eta_prepare_for_show (buffer2, ctx->eta_secs, FALSE);
+	file_bps_prepare_for_show (buffer3, ctx->bps);
+	g_snprintf (buffer, BUF_TINY, "%s (%s) %s", buffer2, buffer3, stalled_msg);
+    } else {
+	g_snprintf (buffer, BUF_TINY, "%s",stalled_msg);
+    }
+
+    label_set_text (ui->progress_file_label, buffer);
 }
 
-FileProgressStatus
+void
 file_progress_show_count (FileOpContext *ctx, off_t done, off_t total)
 {
+    char buffer[BUF_TINY];
     FileOpContextUI *ui;
 
-    g_return_val_if_fail (ctx != NULL, FILE_CONT);
+    g_return_if_fail (ctx != NULL);
 
-    if (ctx->ui == NULL)
-	return FILE_CONT;
+    if (ctx->dialog_type != FILEGUI_DIALOG_MULTI_ITEM || ctx->ui == NULL)
+	return;
 
     ui = ctx->ui;
 
     if (!verbose)
-	return check_progress_buttons (ctx);
-    if (total > 0) {
-	label_set_text (ui->progress_label[1], _("Count"));
-	return show_bar (ctx, 1, done, total);
-    } else
-	return show_no_bar (ctx, 1);
+	return;
+
+    g_snprintf (buffer, BUF_TINY, _("Files processed: %llu of %llu"), done, total);
+
+    label_set_text (ui->total_files_processed_label, buffer);
 }
 
-FileProgressStatus
-file_progress_show_bytes (FileOpContext *ctx, double done, double total)
+void
+file_progress_show_total (FileOpTotalContext *tctx, FileOpContext *ctx, double copyed_bytes,
+			  gboolean need_show_total_summary)
 {
+    char buffer[BUF_TINY];
+    char buffer2[BUF_TINY];
+    char buffer3[BUF_TINY];
+    char buffer4[BUF_TINY];
+    struct timeval tv_current;
     FileOpContextUI *ui;
 
-    g_return_val_if_fail (ctx != NULL, FILE_CONT);
-
-    if (ctx->ui == NULL)
-	return FILE_CONT;
+    if (ctx->dialog_type != FILEGUI_DIALOG_MULTI_ITEM || ctx->ui == NULL)
+	return;
 
     ui = ctx->ui;
 
-    if (!verbose)
-	return check_progress_buttons (ctx);
-    if (total > 0) {
-	label_set_text (ui->progress_label[2], _("Bytes"));
-	return show_bar (ctx, 2, done, total);
+    if (ctx->progress_bytes > 0 ){
+	gauge_set_value (ui->progress_total_gauge, 1024, (int) (1024 * copyed_bytes/ ctx->progress_bytes));
+	gauge_show (ui->progress_total_gauge, 1);
     } else
-	return show_no_bar (ctx, 2);
+	gauge_show (ui->progress_total_gauge, 0);
+
+
+    if (!need_show_total_summary && tctx->bps == 0)
+	return;
+
+    gettimeofday (&tv_current, NULL);
+    file_frmt_time (buffer2, tv_current.tv_sec - tctx->transfer_start.tv_sec);
+    file_eta_prepare_for_show (buffer3, tctx->eta_secs, TRUE);
+    file_bps_prepare_for_show (buffer4, (long) tctx->bps);
+
+
+
+    g_snprintf (buffer, BUF_TINY, _("Time: %s  %s (%s)"),  buffer2, buffer3,  buffer4);
+    label_set_text (ui->time_label, buffer);
+
+    size_trunc_len (buffer2, 5, tctx->copyed_bytes, 0);
+    size_trunc_len (buffer3, 5, ctx->progress_bytes, 0);
+
+    g_snprintf (buffer, BUF_TINY, _(" Total: %s of %s "),  buffer2, buffer3);
+
+    label_set_text (ui->total_bytes_label, buffer);
+
 }
 
 /* }}} */
 
-#define truncFileString(ui, s)       str_trunc (s, ui->eta_extra + 47)
-#define truncFileStringSecure(ui, s) path_trunc (s, ui->eta_extra + 47)
+#define truncFileString(ui, s)       str_trunc (s, 52)
+#define truncFileStringSecure(ui, s) path_trunc (s, 52)
 
-FileProgressStatus
+void
 file_progress_show_source (FileOpContext *ctx, const char *s)
 {
     FileOpContextUI *ui;
 
-    g_return_val_if_fail (ctx != NULL, FILE_CONT);
+    g_return_if_fail (ctx != NULL);
 
     if (ctx->ui == NULL)
-	return FILE_CONT;
+	return;
 
     ui = ctx->ui;
 
@@ -547,52 +566,46 @@ file_progress_show_source (FileOpContext *ctx, const char *s)
 
 	label_set_text (ui->file_label[0], _("Source"));
 	label_set_text (ui->file_string[0], truncFileString (ui, s));
-	return check_progress_buttons (ctx);
     } else {
 	label_set_text (ui->file_label[0], "");
 	label_set_text (ui->file_string[0], "");
-	return check_progress_buttons (ctx);
     }
 }
 
-FileProgressStatus
+void
 file_progress_show_target (FileOpContext *ctx, const char *s)
 {
     FileOpContextUI *ui;
 
-    g_return_val_if_fail (ctx != NULL, FILE_CONT);
+    g_return_if_fail (ctx != NULL);
 
     if (ctx->ui == NULL)
-	return FILE_CONT;
+	return;
 
     ui = ctx->ui;
 
     if (s != NULL) {
 	label_set_text (ui->file_label[1], _("Target"));
 	label_set_text (ui->file_string[1], truncFileStringSecure (ui, s));
-	return check_progress_buttons (ctx);
     } else {
 	label_set_text (ui->file_label[1], "");
 	label_set_text (ui->file_string[1], "");
-	return check_progress_buttons (ctx);
     }
 }
 
-FileProgressStatus
+void
 file_progress_show_deleting (FileOpContext *ctx, const char *s)
 {
     FileOpContextUI *ui;
 
-    g_return_val_if_fail (ctx != NULL, FILE_CONT);
+    g_return_if_fail (ctx != NULL);
 
     if (ctx->ui == NULL)
-	return FILE_CONT;
+	return;
 
     ui = ctx->ui;
-
     label_set_text (ui->file_label[0], _("Deleting"));
     label_set_text (ui->file_label[0], truncFileStringSecure (ui, s));
-    return check_progress_buttons (ctx);
 }
 
 /*
@@ -600,9 +613,7 @@ file_progress_show_deleting (FileOpContext *ctx, const char *s)
  * but actually I'm not familiar with it and have not much time :(
  *   alex
  */
-
-
-static int
+static replace_action_t
 overwrite_query_dialog (FileOpContext *ctx, enum OperationMode mode)
 {
 #define ADD_RD_BUTTON(i)\
@@ -767,21 +778,9 @@ overwrite_query_dialog (FileOpContext *ctx, enum OperationMode mode)
 
     g_free (widgets_len);
 
-    return result;
+    return (result == B_CANCEL) ? REPLACE_ABORT : (replace_action_t) result;
 #undef ADD_RD_LABEL
 #undef ADD_RD_BUTTON
-}
-
-void
-file_progress_set_stalled_label (FileOpContext *ctx, const char *stalled_msg)
-{
-    FileOpContextUI *ui;
-
-    g_return_if_fail (ctx != NULL);
-    g_return_if_fail (ctx->ui != NULL);
-
-    ui = ctx->ui;
-    label_set_text (ui->stalled_label, stalled_msg);
 }
 
 FileProgressStatus
@@ -802,8 +801,6 @@ file_progress_real_query_replace (FileOpContext *ctx,
 	ui->s_stat = _s_stat;
 	ui->d_stat = _d_stat;
 	ui->replace_result = overwrite_query_dialog (ctx, mode);
-	if (ui->replace_result == B_CANCEL)
-	    ui->replace_result = REPLACE_ABORT;
     }
 
     switch (ui->replace_result) {
@@ -826,7 +823,7 @@ file_progress_real_query_replace (FileOpContext *ctx,
 	ctx->do_reget = _d_stat->st_size;
 
     case REPLACE_APPEND:
-	ctx->do_append = 1;
+	ctx->do_append = TRUE;
 
     case REPLACE_YES:
     case REPLACE_ALWAYS:
@@ -992,7 +989,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation,
     /* destination */
     fmd_widgets[7 - OFFSET].u.input.text = def_text_secure;
 
-    ctx->stable_symlinks = 0;
+    ctx->stable_symlinks = FALSE;
     *do_background = FALSE;
 
     {
@@ -1018,18 +1015,18 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation,
 	    ctx->stat_func = mc_lstat;
 
 	if (ctx->op_preserve) {
-	    ctx->preserve = 1;
+	    ctx->preserve = TRUE;
 	    ctx->umask_kill = 0777777;
-	    ctx->preserve_uidgid = (geteuid () == 0) ? 1 : 0;
+	    ctx->preserve_uidgid = (geteuid () == 0);
 	} else {
 	    int i2;
-	    ctx->preserve = ctx->preserve_uidgid = 0;
+	    ctx->preserve = ctx->preserve_uidgid = FALSE;
 	    i2 = umask (0);
 	    umask (i2);
 	    ctx->umask_kill = i2 ^ 0777777;
 	}
 
-	if (!dest_dir || !*dest_dir) {
+	if ((dest_dir == NULL) || (*dest_dir == '\0')) {
 	    g_free (def_text_secure);
 	    g_free (source_mask);
 	    return dest_dir;

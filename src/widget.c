@@ -785,6 +785,66 @@ label_new (int y, int x, const char *text)
     return l;
 }
 
+static cb_ret_t
+hline_callback (Widget *w, widget_msg_t msg, int parm)
+{
+    WHLine *l = (WHLine *) w;
+    Dlg_head *h = l->widget.parent;
+
+    switch (msg) {
+    case WIDGET_INIT:
+    case WIDGET_RESIZED:
+	if (l->auto_adjust_cols) {
+	    if (((w->parent->flags & DLG_COMPACT) != 0)) {
+		w->x = w->parent->x;
+		w->cols = w->parent->cols;
+	    } else {
+		w->x = w->parent->x + 1;
+		w->cols = w->parent->cols - 2;
+	    }
+	}
+
+    case WIDGET_FOCUS:
+	/* We don't want to get the focus */
+	return MSG_NOT_HANDLED;
+
+    case WIDGET_DRAW:
+	if (l->transparent)
+	    tty_setcolor (DEFAULT_COLOR);
+	else
+	    tty_setcolor (DLG_NORMALC (h));
+
+	tty_draw_hline (w->y, w->x + 1, ACS_HLINE, w->cols - 2);
+
+	if (l->auto_adjust_cols) {
+	    widget_move (w, 0, 0);
+	    tty_print_alt_char (ACS_LTEE);
+	    widget_move (w, 0, w->cols - 1);
+	    tty_print_alt_char (ACS_RTEE);
+	}
+	return MSG_HANDLED;
+
+    default:
+	return default_proc (msg, parm);
+    }
+}
+
+
+WHLine *
+hline_new (int y, int x, int width)
+{
+    WHLine *l;
+    int cols = width;
+    int lines = 1;
+
+    l = g_new (WHLine, 1);
+    init_widget (&l->widget, y, x, lines, cols, hline_callback, NULL);
+    l->auto_adjust_cols = (width < 0);
+    l->transparent = FALSE;
+    widget_want_cursor (l->widget, 0);
+    return l;
+}
+
 
 /* Gauge widget (progress indicator) */
 /* Currently width is hardcoded here for text mode */
@@ -825,10 +885,19 @@ gauge_callback (Widget *w, widget_msg_t msg, int parm)
 	    percentage = (200 * done / total + 1) / 2;
 	    columns = (2 * (gauge_len - 7) * done / total + 1) / 2;
 	    tty_print_char ('[');
-	    tty_setcolor (GAUGE_COLOR);
-	    tty_printf ("%*s", (int) columns, "");
-	    tty_setcolor (DLG_NORMALC (h));
-	    tty_printf ("%*s] %3d%%", (int)(gauge_len - 7 - columns), "", (int) percentage);
+	    if (g->from_left_to_right) {
+		tty_setcolor (GAUGE_COLOR);
+		tty_printf ("%*s", (int) columns, "");
+		tty_setcolor (DLG_NORMALC (h));
+		tty_printf ("%*s] %3d%%", (int)(gauge_len - 7 - columns), "", (int) percentage);
+	    } else {
+		tty_setcolor (DLG_NORMALC (h));
+		tty_printf ("%*s", gauge_len - columns - 7, "");
+		tty_setcolor (GAUGE_COLOR);
+		tty_printf ("%*s", columns, "");
+		tty_setcolor (DLG_NORMALC (h));
+		tty_printf ("] %3d%%", 100 * columns / (gauge_len - 7), percentage);
+	    }
 	}
 	return MSG_HANDLED;
     }
@@ -869,6 +938,7 @@ gauge_new (int y, int x, int shown, int max, int current)
         max = 1; /* I do not like division by zero :) */
     g->max = max;
     g->current = current;
+    g->from_left_to_right = TRUE;
     widget_want_cursor (g->widget, 0);
     return g;
 }

@@ -345,7 +345,7 @@ void
 copy_cmd (void)
 {
     save_cwds_stat ();
-    if (panel_operate (current_panel, OP_COPY, 0)) {
+    if (panel_operate (current_panel, OP_COPY, FALSE)) {
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 	repaint_screen ();
     }
@@ -355,7 +355,7 @@ copy_cmd (void)
 void rename_cmd (void)
 {
     save_cwds_stat ();
-    if (panel_operate (current_panel, OP_MOVE, 0)){
+    if (panel_operate (current_panel, OP_MOVE, FALSE)) {
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 	repaint_screen ();
     }
@@ -365,7 +365,7 @@ void rename_cmd (void)
 void copy_cmd_local (void)
 {
     save_cwds_stat ();
-    if (panel_operate (current_panel, OP_COPY, 1)){
+    if (panel_operate (current_panel, OP_COPY, TRUE)) {
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 	repaint_screen ();
     }
@@ -375,7 +375,7 @@ void copy_cmd_local (void)
 void rename_cmd_local (void)
 {
     save_cwds_stat ();
-    if (panel_operate (current_panel, OP_MOVE, 1)){
+    if (panel_operate (current_panel, OP_MOVE, TRUE)) {
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 	repaint_screen ();
     }
@@ -422,7 +422,7 @@ void delete_cmd (void)
 {
     save_cwds_stat ();
 
-    if (panel_operate (current_panel, OP_DELETE, 0)){
+    if (panel_operate (current_panel, OP_DELETE, FALSE)) {
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 	repaint_screen ();
     }
@@ -433,7 +433,7 @@ void delete_cmd_local (void)
 {
     save_cwds_stat ();
 
-    if (panel_operate (current_panel, OP_DELETE, 1)){
+    if (panel_operate (current_panel, OP_DELETE, TRUE)) {
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 	repaint_screen ();
     }

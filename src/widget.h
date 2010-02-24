@@ -89,6 +89,7 @@ typedef struct WGauge {
     int shown;
     int max;
     int current;
+    gboolean from_left_to_right;
 } WGauge;
 
 GList *history_get (const char *input_name);
@@ -127,6 +128,12 @@ typedef struct {
     char   *text;
     int	   transparent;		/* Paint in the default color fg/bg */
 } WLabel;
+
+typedef struct {
+    Widget widget;
+    gboolean auto_adjust_cols;		/* Compute widget.cols from parent width? */
+    gboolean transparent;		/* Paint in the default color fg/bg */
+} WHLine;
 
 typedef struct WLEntry {
     char *text;			/* Text to display */
@@ -187,6 +194,8 @@ WRadio  *radio_new    (int y, int x, int count, const char **text);
 WCheck  *check_new    (int y, int x, int state,  const char *text);
 WInput  *input_new    (int y, int x, int color, int len, const char *text, const char *histname, INPUT_COMPLETE_FLAGS completion_flags);
 WLabel  *label_new    (int y, int x, const char *text);
+WHLine  *hline_new    (int y, int x, int width);
+
 WGauge  *gauge_new    (int y, int x, int shown, int max, int current);
 WListbox *listbox_new (int y, int x, int height, int width, gboolean deletable, lcback callback);
 WButtonBar *buttonbar_new (gboolean visible);
