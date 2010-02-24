@@ -2,6 +2,12 @@
 
 SUBDIRS = skins syntax
 
+if CHARSET
+LIBFILES_ADD = mc.charsets
+else
+LIBFILES_ADD =
+endif
+
 LIBFILES_OUT = mc.ext
 
 noinst_DATA = xterm.ad
@@ -34,5 +40,5 @@ EXTRA_DIST = \
 	$(LIBFILES_CONST) \
 	$(SCRIPTS_IN) \
 	$(noinst_DATA) \
-	$(pkgdata_DATA)
-
+	$(pkgdata_DATA) \
+	mc.charsets
