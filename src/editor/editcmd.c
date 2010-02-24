@@ -2417,7 +2417,7 @@ static int edit_find_word_start (WEdit *edit, long *word_start, gsize *word_len)
 /* search start of word to be completed */
     for (i = 2;; i++) {
 /* return if at begin of file */
-	if (edit->curs1 - i < 0)
+	if ((gsize)edit->curs1 < i)
 	    return 0;
 
 	last = c;

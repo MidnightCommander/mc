@@ -151,6 +151,8 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
 void
 editcmd_dialog_search_show (WEdit * edit, char **search_text)
 {
+    (void) edit;
+
     if (*search_text == '\0')
         *search_text = INPUT_LAST_TEXT;
 
