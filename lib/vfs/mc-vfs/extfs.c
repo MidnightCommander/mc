@@ -210,7 +210,7 @@ extfs_find_entry_int (struct entry *dir, char *name, GSList *list,
 
     if (g_path_is_absolute (name)) {
 	/* Handle absolute paths */
-	name = g_path_skip_root (name);
+	name = (char *) g_path_skip_root (name);
 	dir = dir->inode->archive->root_entry;
     }
 

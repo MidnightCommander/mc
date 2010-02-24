@@ -151,6 +151,8 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
 void
 editcmd_dialog_search_show (WEdit * edit, char **search_text)
 {
+    (void) edit;
+
     if (*search_text == '\0')
         *search_text = INPUT_LAST_TEXT;
 
@@ -466,7 +468,7 @@ editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, int max_l
         char *tmp_curr_def = (char *) curr_def;
         int do_moveto = 0;
 
-        listbox_get_current (def_list, &curr, &tmp_curr_def);
+        listbox_get_current (def_list, &curr, (void **) &tmp_curr_def);
         curr_def = (etags_hash_t *) tmp_curr_def;
         if (edit->modified) {
             if (!edit_query_dialog2

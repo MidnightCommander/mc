@@ -129,7 +129,7 @@ mcview_display_status (mcview_t * view)
     const screen_dimen width = view->status_area.width;
     const screen_dimen height = view->status_area.height;
     const char *file_label;
-    screen_dimen file_label_width, i = 0;
+    screen_dimen file_label_width;
 
     if (height < 1)
         return;

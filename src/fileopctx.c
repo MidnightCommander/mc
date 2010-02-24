@@ -34,6 +34,7 @@
 
 #include "lib/global.h"
 #include "fileopctx.h"
+#include "filegui.h"
 #include "lib/search.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 

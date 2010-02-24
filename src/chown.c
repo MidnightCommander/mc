@@ -249,7 +249,6 @@ chown_cmd (void)
 {
     char *fname;
     struct stat sf_stat;
-    WLEntry *fe;
     Dlg_head *ch_dlg;
     uid_t new_user;
     gid_t new_group;
