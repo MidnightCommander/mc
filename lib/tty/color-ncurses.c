@@ -97,20 +97,12 @@ static void
 mc_tty_color_pair_init_special (tty_color_pair_t * mc_color_pair,
                                 int fg1, int bg1, int fg2, int bg2, int mask)
 {
-    if (has_colors ()) {
-        if (!mc_tty_color_disable) {
-            init_pair (mc_color_pair->pair_index,
-                       mc_tty_color_save_attr_lib (mc_color_pair->pair_index, fg1 | mask), bg1);
-        } else {
-            init_pair (mc_color_pair->pair_index,
-                       mc_tty_color_save_attr_lib (mc_color_pair->pair_index, fg2 | mask), bg2);
-        }
-    }
-#if 0
-    else {
-        SLtt_set_mono (mc_color_pair->pair_index, NULL, mask);
-    }
-#endif
+    if (has_colors () && !mc_tty_color_disable)
+        init_pair (mc_color_pair->pair_index,
+                    mc_tty_color_save_attr_lib (mc_color_pair->pair_index, fg1 | mask), bg1);
+    else
+        init_pair (mc_color_pair->pair_index,
+                    mc_tty_color_save_attr_lib (mc_color_pair->pair_index, fg2 | mask), bg2);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -159,7 +151,6 @@ tty_color_try_alloc_pair_lib (tty_color_pair_t * mc_color_pair)
                                             COLOR_WHITE, COLOR_BLACK, A_BOLD);
             break;
         case SPEC_A_BOLD_REVERSE:
-
             mc_tty_color_pair_init_special (mc_color_pair,
                                             COLOR_WHITE, COLOR_WHITE,
                                             COLOR_WHITE, COLOR_WHITE, A_BOLD | A_REVERSE);
