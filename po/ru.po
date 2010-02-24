@@ -439,9 +439,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Несогласованный архив extfs"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Warning: cannot open %s directory\n"
-msgstr "Невозможно создать каталог \"%s\""
+msgstr "Внимание: невозможно открыть каталог %s\n"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -935,7 +935,6 @@ msgid "Show mc with specified skin"
 msgstr "Отобразить mc с указанным скином"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -960,7 +959,7 @@ msgstr ""
 "   Диалоги:            dnormal, dfocus, dhotnormal, dhotfocus, "
 "errdhotnormal,\n"
 "                       errdhotfocus\n"
-"   Меню:               menu, menuhot, menusel, menuhotsel\n"
+"   Меню:               menu, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Редактор:           editnormal, editbold, editmarked, editwhitespace,\n"
 "                       editlinestate\n"
 
@@ -2559,13 +2558,13 @@ msgstr " Удалить: "
 msgid "Non&e"
 msgstr "ни &Одного"
 
-#, fuzzy, c-format
-msgid "%d:%02d.%02d"
+#, c-format
+msgid "ETA %d:%02d.%02d"
 msgstr "ETA %d:%02d.%02d"
 
 #, c-format
 msgid "ETA %s"
-msgstr ""
+msgstr "ETA %s"
 
 #, c-format
 msgid "%.2f MB/s"
@@ -2581,15 +2580,15 @@ msgstr "%ld б/с"
 
 #, c-format
 msgid "Files processed: %llu of %llu"
-msgstr ""
+msgstr "Обработано файлов^ %llu из %llu"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s  %s (%s)"
-msgstr "Размер:    %s"
+msgstr "Время: %s  %s (%s)"
 
 #, c-format
 msgid " Total: %s of %s "
-msgstr ""
+msgstr " Всего: %s из %s "
 
 msgid "Source"
 msgstr "Источник"
@@ -3414,13 +3413,13 @@ msgstr "&Имя"
 
 #. TRANSLATORS: one single character to represent 'version' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#, fuzzy
+#
 msgid "sort|v"
-msgstr "н"
+msgstr "в"
 
-#, fuzzy
+#
 msgid "&Version"
-msgstr "Атрибуты"
+msgstr "&Версия"
 
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3790,12 +3789,11 @@ msgstr " Просмотр невозможен: необычный файл "
 msgid "Seeking to search result"
 msgstr "Переход к найденному"
 
-#, fuzzy
 msgid "Search done"
-msgstr "Поиск"
+msgstr "Поиск закончен"
 
 msgid "Continue from begining?"
-msgstr ""
+msgstr "Продолжить с начала?"
 
 msgid " History "
 msgstr "История команд"
@@ -3809,21 +3807,3 @@ msgstr "Желаете очистить историю?"
 
 msgid "Background process:"
 msgstr "Фоновый процесс:"
-
-#~ msgid "File"
-#~ msgstr "Файл"
-
-#~ msgid "Count"
-#~ msgstr "Счет"
-
-#~ msgid "Bytes"
-#~ msgstr "Байт"
-
-#~ msgid " confirm &Exit "
-#~ msgstr "перед &выходом"
-
-#~ msgid " confirm e&Xecute "
-#~ msgstr "перед выполнен&ием"
-
-#~ msgid " confirm &Delete "
-#~ msgstr "перед &удалением"
