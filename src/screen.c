@@ -1999,11 +1999,6 @@ prev_page (WPanel *panel)
     	panel->selected -= items;
     panel->top_file -= items;
 
-    /* This keeps the selection in a reasonable place */
-    if (panel->selected < 0)
-	panel->selected = 0;
-    if (panel->top_file < 0)
-	panel->top_file = 0;
     select_item (panel);
     paint_dir (panel);
 }
@@ -2034,11 +2029,6 @@ next_page (WPanel *panel)
 	panel->selected += items;
     panel->top_file += items;
 
-    /* This keeps the selection in it's relative position */
-    if (panel->selected >= panel->count)
-	panel->selected = panel->count - 1;
-    if (panel->top_file >= panel->count)
-	panel->top_file = panel->count - 1;
     select_item (panel);
     paint_dir (panel);
 }
@@ -2065,8 +2055,6 @@ goto_middle_file (WPanel *panel)
 {
     unselect_item (panel);
     panel->selected = panel->top_file + (ITEMS (panel)/2);
-    if (panel->selected >= panel->count)
-	panel->selected = panel->count - 1;
     select_item (panel);
 }
 
@@ -2074,9 +2062,7 @@ static void
 goto_bottom_file (WPanel *panel)
 {
     unselect_item (panel);
-    panel->selected = panel->top_file + ITEMS (panel)-1;
-    if (panel->selected >= panel->count)
-	panel->selected = panel->count - 1;
+    panel->selected = panel->top_file + ITEMS (panel) - 1;
     select_item (panel);
 }
 
@@ -3121,8 +3107,6 @@ panel_re_sort (WPanel *panel)
     }
     g_free (filename);
     panel->top_file = panel->selected - ITEMS (panel)/2;
-    if (panel->top_file < 0)
-	panel->top_file = 0;
     select_item (panel);
     panel->dirty = 1;
 }
