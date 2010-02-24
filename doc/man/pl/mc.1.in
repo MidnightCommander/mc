@@ -2501,8 +2501,8 @@ Format definicji kolorów jest następujący:
 .PP
 Kolory są opcjonalne, a słowa kluczowe są następujące: normal, selected,
 marked, markselect, errors, input, reverse menu, menusel, menuhot, menuhotsel,
-gauge;  kolory okien dialogowych: dnormal, dfocus, dhotnormal, dhotfocus;
-Kolory pomocy: helpnormal, helpitalic, helpbold, helplink,
+menuinactive, gauge;  kolory okien dialogowych: dnormal, dfocus, dhotnormal,
+dhotfocus; Kolory pomocy: helpnormal, helpitalic, helpbold, helplink,
 helpslink; Kolory podglądu: viewunderline; Specjalne tryby podświetlenia:
 executable, directory, link, device, special.
 [nie tłumaczyłem nazw z racji tego, że trzeba je stosować w ich angielskim
@@ -2520,7 +2520,7 @@ a
 jest używany do wyświetlania owych w aktualnie wybranym.
 .PP
 Menu używa tego samego schematu, ale jako nazw kolorów używa menu, menusel,
-menuhot i menuhotsel.
+menuhot, menuhotsel i menuinactive.
 .PP
 Pomoc używa następujących kolorów:
 .I helpnormal
