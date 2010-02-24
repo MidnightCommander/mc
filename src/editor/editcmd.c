@@ -1455,8 +1455,8 @@ editcmd_find (WEdit *edit, gsize *len)
     if (edit_search_options.backwards) {
         search_end = end_mark;
         while ((int) search_start >= start_mark) {
-            if (search_end > search_start + edit->search->original_len
-                && mc_search_is_fixed_search_str(edit->search)) {
+            if (search_end > (off_t) (search_start + edit->search->original_len) &&
+                mc_search_is_fixed_search_str(edit->search)) {
                 search_end = search_start + edit->search->original_len;
             }
             if (mc_search_run(edit->search, (void *) edit, search_start, search_end, len)

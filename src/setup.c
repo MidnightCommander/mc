@@ -278,7 +278,7 @@ panel_save_setup (struct WPanel *panel, const char *section)
     mc_config_set_string(mc_panels_config, section, "user_format", panel->user_format);
 
     for (i = 0; i < LIST_TYPES; i++){
-	buffer = g_strdup_printf("user_status%d", i);
+	buffer = g_strdup_printf("user_status%d", (int) i);
 	mc_config_set_string(mc_panels_config, section, buffer, panel->user_status_format [i]);
 	g_free(buffer);
     }
@@ -452,7 +452,7 @@ panel_load_setup (WPanel *panel, const char *section)
 
     for (i = 0; i < LIST_TYPES; i++){
 	g_free (panel->user_status_format [i]);
-	buffer = g_strdup_printf("user_status%d",i);
+	buffer = g_strdup_printf("user_status%d", (int)i);
 	panel->user_status_format [i] =
 	    mc_config_get_string(mc_panels_config, section, buffer, DEFAULT_USER_FORMAT);
         g_free(buffer);

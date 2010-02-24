@@ -146,7 +146,7 @@ char *
 mcview_get_ptr_string (mcview_t * view, off_t byte_index)
 {
     assert (view->datasource == DS_STRING);
-    if (byte_index < view->ds_string_len)
+    if (byte_index < (off_t) view->ds_string_len)
         return (char *) (view->ds_string_data + byte_index);
     return NULL;
 }
@@ -211,7 +211,7 @@ gboolean
 mcview_get_byte_string (mcview_t * view, off_t byte_index, int *retval)
 {
     assert (view->datasource == DS_STRING);
-    if (byte_index < view->ds_string_len) {
+    if (byte_index < (off_t) view->ds_string_len) {
         if (retval)
             *retval = view->ds_string_data[byte_index];
         return TRUE;
@@ -279,7 +279,7 @@ mcview_file_load_data (mcview_t * view, off_t byte_index)
         bytes_read += (size_t) res;
     }
     view->ds_file_offset = blockoffset;
-    if (bytes_read > view->ds_file_filesize - view->ds_file_offset) {
+    if ((off_t) bytes_read > view->ds_file_filesize - view->ds_file_offset) {
         /* the file has grown in the meantime -- stick to the old size */
         view->ds_file_datalen = view->ds_file_filesize - view->ds_file_offset;
     } else {

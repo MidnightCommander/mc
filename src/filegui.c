@@ -486,7 +486,9 @@ file_progress_show_count (FileOpContext *ctx, off_t done, off_t total)
     if (!verbose)
 	return;
 
-    g_snprintf (buffer, BUF_TINY, _("Files processed: %llu of %llu"), done, total);
+    g_snprintf (buffer, BUF_TINY, _("Files processed: %llu of %llu"),
+		(unsigned long long) done,
+		(unsigned long long) total);
 
     label_set_text (ui->total_files_processed_label, buffer);
 }

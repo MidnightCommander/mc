@@ -89,7 +89,7 @@ mcview_find (mcview_t * view, gsize search_start, gsize * len)
                 search_end = search_start + view->search->original_len;
 
             if (mc_search_run (view->search, (void *) view, search_start, search_end, len)
-                && view->search->normal_offset == search_start)
+                && view->search->normal_offset == (off_t) search_start)
                 return TRUE;
 
             search_start--;
@@ -184,7 +184,7 @@ mcview_search_update_cmd_callback (const void *user_data, gsize char_offset)
 {
     mcview_t *view = (mcview_t *) user_data;
 
-    if (char_offset >= view->update_activate) {
+    if (char_offset >= (gsize) view->update_activate) {
         view->update_activate += view->update_steps;
         if (verbose) {
             mcview_percent (view, char_offset);

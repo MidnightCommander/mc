@@ -70,7 +70,7 @@ mcview_may_still_grow (mcview_t * view)
 static inline gboolean
 mcview_already_loaded (off_t offset, off_t idx, size_t size)
 {
-    return (offset <= idx && idx - offset < size);
+    return (offset <= idx && idx - offset < (off_t) size);
 }
 
 /* --------------------------------------------------------------------------------------------- */
