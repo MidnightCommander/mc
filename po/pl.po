@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
 "POT-Creation-Date: 2010-02-24 13:14+0200\n"
-"PO-Revision-Date: 2010-02-10 22:10+0100\n"
+"PO-Revision-Date: 2010-02-24 13:56+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <trans-pl@lists.fedoraproject.org>\n"
 "MIME-Version: 1.0\n"
@@ -426,9 +426,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Niespójne archiwum extfs"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Warning: cannot open %s directory\n"
-msgstr "Nie można utworzyć katalogu %s"
+msgstr "Ostrzeżenie: nie można utworzyć katalogu %s\n"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -922,7 +922,6 @@ msgid "Show mc with specified skin"
 msgstr "Wyświetla program mc za pomocą podanej skórki"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -937,16 +936,16 @@ msgid ""
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
-"--colors SŁOWO_KLUCZOWE={ZNAKI},{TŁO}\n"
+"--colors SŁOWO_KLUCZOWE={TEKST},{TŁO}\n"
 "\n"
-"{ZNAKI} i {TŁO} mogą zostać pominięte, zostaną wówczas użyte domyślne\n"
+"{TEKST} i {TŁO} mogą zostać pominięte, zostaną wówczas użyte domyślne\n"
 "\n"
 "Słowa kluczowe:\n"
 "   Globalne:            errors, reverse, gauge, input, viewunderline\n"
 "   Wyświetlanie plików: normal, selected, marked, markselect\n"
 "   Pola dialogowe:      dnormal, dfocus, dhotnormal, dhotfocus,\n"
 "                        errdhotnormal, errdhotfocus\n"
-"   Menu:                menu, menuhot, menusel, menuhotsel\n"
+"   Menu:                menu, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Edytor:              editnormal, editbold, editmarked, editwhitespace,\n"
 "                        editlinestate\n"
 
@@ -2548,13 +2547,13 @@ msgstr " Usuń: "
 msgid "Non&e"
 msgstr "Br&ak"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%d:%02d.%02d"
-msgstr "ETA %d:%02d.%02d"
+msgstr "%d:%02d.%02d"
 
 #, c-format
 msgid "ETA %s"
-msgstr ""
+msgstr "ETA %s"
 
 #, c-format
 msgid "%.2f MB/s"
@@ -2570,15 +2569,15 @@ msgstr "%ld B/s"
 
 #, c-format
 msgid "Files processed: %llu of %llu"
-msgstr ""
+msgstr "Przetworzonych plików: %llu z %llu"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s  %s (%s)"
-msgstr "Rozmiar:      %s"
+msgstr "Czas: %s  %s (%s)"
 
 #, c-format
 msgid " Total: %s of %s "
-msgstr ""
+msgstr " Razem: %s z %s "
 
 msgid "Source"
 msgstr "Źródło"
@@ -3403,13 +3402,11 @@ msgstr "&Nazwa"
 
 #. TRANSLATORS: one single character to represent 'version' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#, fuzzy
 msgid "sort|v"
-msgstr "u"
+msgstr "w"
 
-#, fuzzy
 msgid "&Version"
-msgstr "Uprawnienia"
+msgstr "_Wersja"
 
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3778,12 +3775,11 @@ msgstr " Nie można wyświetlić: nie jest zwykłym plikiem "
 msgid "Seeking to search result"
 msgstr "Przechodzenie do wyników wyszukiwania"
 
-#, fuzzy
 msgid "Search done"
-msgstr "Wyszukiwanie"
+msgstr "Ukończono wyszukiwanie"
 
 msgid "Continue from begining?"
-msgstr ""
+msgstr "Kontynuować od początku?"
 
 msgid " History "
 msgstr " Historia "
@@ -3797,12 +3793,3 @@ msgstr "Wyczyścić tę historię?"
 
 msgid "Background process:"
 msgstr "Proces w tle:"
-
-#~ msgid "File"
-#~ msgstr "Plik"
-
-#~ msgid "Count"
-#~ msgstr "Liczba"
-
-#~ msgid "Bytes"
-#~ msgstr "Bajty"
