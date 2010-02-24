@@ -1446,7 +1446,7 @@ save_file_position (const char *filename, long line, long column, off_t offset)
 
     /* put the new record */
     if (line != 1 || column != 0) {
-        if (fprintf (f, "%s %ld;%ld;%llu\n", filename, line, column, offset) < 0)
+        if (fprintf (f, "%s %ld;%ld;%llu\n", filename, line, column, (unsigned long long) offset) < 0)
             goto write_position_error;
     }
 

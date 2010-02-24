@@ -85,7 +85,7 @@ tty_color_free_condition_cb (gpointer key, gpointer value, gpointer user_data)
     tty_color_pair_t *mc_color_pair;
     (void) key;
 
-    is_temp_color = (gboolean) user_data;
+    is_temp_color = user_data == NULL;
     mc_color_pair = (tty_color_pair_t *) value;
     return (mc_color_pair->is_temp == is_temp_color);
 }
@@ -96,7 +96,7 @@ static void
 tty_color_free_all (gboolean is_temp_color)
 {
     g_hash_table_foreach_remove (mc_tty_color__hashtable, tty_color_free_condition_cb,
-                                 (gpointer) is_temp_color);
+                                  (is_temp_color)? (gpointer) 1 : NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -104,11 +104,11 @@ tty_color_free_all (gboolean is_temp_color)
 static gboolean
 tty_color_get_next_cpn_cb (gpointer key, gpointer value, gpointer user_data)
 {
-    int cp;
+    size_t cp;
     tty_color_pair_t *mc_color_pair;
     (void) key;
 
-    cp = (int) user_data;
+    cp = (size_t) user_data;
     mc_color_pair = (tty_color_pair_t *) value;
 
     if (cp == mc_color_pair->pair_index)
@@ -122,8 +122,8 @@ tty_color_get_next_cpn_cb (gpointer key, gpointer value, gpointer user_data)
 static int
 tty_color_get_next__color_pair_number ()
 {
-    int cp_count = g_hash_table_size (mc_tty_color__hashtable);
-    int cp = 0;
+    size_t cp_count = g_hash_table_size (mc_tty_color__hashtable);
+    size_t cp = 0;
 
     for (cp = 0; cp < cp_count; cp++) {
         if (g_hash_table_find (mc_tty_color__hashtable, tty_color_get_next_cpn_cb, (gpointer) cp) ==
