@@ -86,7 +86,17 @@ that is not default for GNU Indent.  Please put following text to your
 ~/.indent.pro file to make GNU Indent follow the style used in GNU
 Midnight Commander:
 
--kr -i4 -pcs -psl --ignore-newlines
+--gnu-style
+--format-first-column-comments
+--indent-level4
+--brace-indent0
+--line-length100
+--no-tabs
+--blank-lines-after-procedures
+
+or in short notation:
+
+indent -gnu -fc1 -i4 -bli0 -nut -bap -l100
 
 It's OK to indent the whole function if you edit it.  However, please
 refrain from it if you are posting your patch for review.  In this case
