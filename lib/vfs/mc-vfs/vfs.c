@@ -927,39 +927,44 @@ int mc_fstat (int handle, struct stat *buf) {
 static const char *
 _vfs_get_cwd (void)
 {
-    char *sys_cwd;
     char *trans;
-    const char *encoding;
-    char *tmp;
-    estr_t state;
-    struct stat my_stat, my_stat2;
 
-    trans = vfs_translate_path_n (current_dir); /* add check if NULL */
-    
-    if (!_vfs_get_class (trans)) {
-        encoding = vfs_get_encoding (current_dir);
+    trans = vfs_translate_path_n (current_dir);
+
+    if (_vfs_get_class (trans) == NULL) {
+        const char *encoding = vfs_get_encoding (current_dir);
+
         if (encoding == NULL) {
+            char *tmp;
+
             tmp = g_get_current_dir ();
             if (tmp != NULL) { /* One of the directories in the path is not readable */
-		g_string_set_size(vfs_str_buffer,0);
+                estr_t state;
+                char *sys_cwd;
+
+                g_string_set_size (vfs_str_buffer, 0);
                 state = str_vfs_convert_from (str_cnv_from_term, tmp, vfs_str_buffer);
                 g_free (tmp);
-                sys_cwd = (state == ESTR_SUCCESS) ? g_strdup (vfs_str_buffer->str) : NULL;
-                if (!sys_cwd)
-		    return current_dir;
 
-	/* Otherwise check if it is O.K. to use the current_dir */
-                if (!cd_symlinks || mc_stat (sys_cwd, &my_stat) 
-	    || mc_stat (current_dir, &my_stat2)
-	    || my_stat.st_ino != my_stat2.st_ino
-	    || my_stat.st_dev != my_stat2.st_dev) {
-	    g_free (current_dir);
-                    current_dir = sys_cwd;
-                    return sys_cwd;
-                     }/* Otherwise we return current_dir below */
+                sys_cwd = (state == ESTR_SUCCESS) ? g_strdup (vfs_str_buffer->str) : NULL;
+                if (sys_cwd != NULL) {
+                    struct stat my_stat, my_stat2;
+                    /* Check if it is O.K. to use the current_dir */
+                    if (cd_symlinks
+                        && mc_stat (sys_cwd, &my_stat) == 0
+                        && mc_stat (current_dir, &my_stat2) == 0
+                        && my_stat.st_ino == my_stat2.st_ino
+                        && my_stat.st_dev == my_stat2.st_dev)
+                        g_free (sys_cwd);
+                    else {
+                        g_free (current_dir);
+                        current_dir = sys_cwd;
+                    }
+                }
             }
+        }
     }
-    }
+
     g_free (trans);
     return current_dir;
 }
