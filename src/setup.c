@@ -248,7 +248,7 @@ static const struct {
 void
 panel_save_setup (struct WPanel *panel, const char *section)
 {
-    char *buffer;
+    char buffer[BUF_TINY];
     size_t i;
 
     mc_config_set_int(mc_panels_config, section, "reverse", panel->reverse);
@@ -267,9 +267,8 @@ panel_save_setup (struct WPanel *panel, const char *section)
     mc_config_set_string(mc_panels_config, section, "user_format", panel->user_format);
 
     for (i = 0; i < LIST_TYPES; i++){
-	buffer = g_strdup_printf("user_status%d", i);
+	g_snprintf (buffer, BUF_TINY, "user_status%lld", (long long) i);
 	mc_config_set_string(mc_panels_config, section, buffer, panel->user_status_format [i]);
-	g_free(buffer);
     }
 
     mc_config_set_int(mc_panels_config, section, "user_mini_status", panel->user_mini_status);
@@ -409,7 +408,7 @@ void
 panel_load_setup (WPanel *panel, const char *section)
 {
     size_t i;
-    char *buffer;
+    char *buffer, buffer2[BUF_TINY];
 
     panel->reverse = mc_config_get_int(mc_panels_config, section, "reverse", 0);
     panel->case_sensitive = mc_config_get_int(mc_panels_config, section, "case_sensitive", OS_SORT_CASE_SENSITIVE_DEFAULT);
@@ -439,10 +438,9 @@ panel_load_setup (WPanel *panel, const char *section)
 
     for (i = 0; i < LIST_TYPES; i++){
 	g_free (panel->user_status_format [i]);
-	buffer = g_strdup_printf("user_status%d",i);
+	g_snprintf (buffer2, BUF_TINY, "user_status%lld", (long long) i);
 	panel->user_status_format [i] =
-	    mc_config_get_string(mc_panels_config, section, buffer, DEFAULT_USER_FORMAT);
-        g_free(buffer);
+	    mc_config_get_string(mc_panels_config, section, buffer2, DEFAULT_USER_FORMAT);
     }
 
     panel->user_mini_status =
