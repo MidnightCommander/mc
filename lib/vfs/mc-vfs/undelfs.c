@@ -384,6 +384,7 @@ undelfs_readdir(void *vfs_info)
 static int
 undelfs_closedir (void *vfs_info)
 {
+    (void) vfs_info;
     return 0;
 }
 
@@ -410,6 +411,9 @@ undelfs_open (struct vfs_class *me, const char *fname, int flags, int mode)
     char *file, *f;
     ext2_ino_t inode, i;
     undelfs_file *p = NULL;
+    (void) me;
+    (void) flags;
+    (void) mode;
 
     /* Only allow reads on this file system */
     undelfs_get_path (fname, &file, &f);
@@ -426,7 +430,7 @@ undelfs_open (struct vfs_class *me, const char *fname, int flags, int mode)
     inode = atol (f);
 
     /* Search the file into delarray */
-    for (i = 0; i < num_delarray; i++) {
+    for (i = 0; i < (ext2_ino_t) num_delarray; i++) {
 	if (inode != delarray[i].ino)
 	    continue;
 
@@ -468,7 +472,7 @@ undelfs_close (void *vfs_info)
 }
 
 static int
-undelfs_dump_read(ext2_filsys fs, blk_t *blocknr, int blockcnt, void *private)
+undelfs_dump_read(ext2_filsys param_fs, blk_t *blocknr, int blockcnt, void *private)
 {
     int     copy_count;
     undelfs_file *p = (undelfs_file *) private;
@@ -477,19 +481,19 @@ undelfs_dump_read(ext2_filsys fs, blk_t *blocknr, int blockcnt, void *private)
 	return 0;
     
     if (*blocknr) {
-	p->error_code = io_channel_read_blk(fs->io, *blocknr,
+	p->error_code = io_channel_read_blk(param_fs->io, *blocknr,
 					   1, p->buf);
 	if (p->error_code)
 	    return BLOCK_ABORT;
     } else
-	memset(p->buf, 0, fs->blocksize);
+	memset(p->buf, 0, param_fs->blocksize);
 
     if (p->pos + p->count < p->current){
 	p->finished = 1;
 	return BLOCK_ABORT;
     }
-    if (p->pos > p->current + fs->blocksize){
-	p->current += fs->blocksize;
+    if ((size_t) p->pos >  p->current + param_fs->blocksize){
+	p->current += param_fs->blocksize;
 	return 0;		/* we have not arrived yet */
     }
 
@@ -497,27 +501,27 @@ undelfs_dump_read(ext2_filsys fs, blk_t *blocknr, int blockcnt, void *private)
     if (p->pos >= p->current){
 
 	/* First case: starting pointer inside this block */
-	if (p->pos + p->count <= p->current + fs->blocksize){
+	if ( (size_t)(p->pos + p->count) <= p->current + param_fs->blocksize){
 	    /* Fully contained */
 	    copy_count = p->count;
 	    p->finished = p->count;
 	} else {
 	    /* Still some more data */
-	    copy_count = fs->blocksize-(p->pos-p->current);
+	    copy_count = param_fs->blocksize-(p->pos-p->current);
 	}
 	memcpy (p->dest_buffer, p->buf + (p->pos-p->current), copy_count);
     } else {
 	/* Second case: we already have passed p->pos */
-	if (p->pos+p->count < p->current+fs->blocksize){
+	if ((size_t) (p->pos + p->count) < p->current+param_fs->blocksize){
 	    copy_count = (p->pos + p->count) - p->current;
 	    p->finished = p->count;
 	} else {
-	    copy_count = fs->blocksize;
+	    copy_count = param_fs->blocksize;
 	}
 	memcpy (p->dest_buffer, p->buf, copy_count);
     }
     p->dest_buffer += copy_count;
-    p->current += fs->blocksize;
+    p->current += param_fs->blocksize;
     if (p->finished){
 	return BLOCK_ABORT;
     }
@@ -584,7 +588,8 @@ undelfs_lstat (struct vfs_class *me, const char *path, struct stat *buf)
 {
     int inode_index;
     char *file, *f;
-    
+    (void) me;
+
     undelfs_get_path (path, &file, &f);
     if (!file)
 	return 0;
@@ -632,7 +637,8 @@ undelfs_chdir(struct vfs_class *me, const char *path)
 {
     char *file, *f;
     int fd;
-    
+    (void) me;
+
     undelfs_get_path (path, &file, &f);
     if (!file)
 	return -1;
@@ -656,6 +662,10 @@ undelfs_chdir(struct vfs_class *me, const char *path)
 static off_t
 undelfs_lseek(void *vfs_info, off_t offset, int whence)
 {
+    (void) vfs_info;
+    (void) offset;
+    (void) whence;
+
     return -1;
 }
 
@@ -663,6 +673,7 @@ static vfsid
 undelfs_getid (struct vfs_class *me, const char *path)
 {
     char *fname, *fsname;
+    (void) me;
 
     undelfs_get_path (path, &fsname, &fname);
 
@@ -676,18 +687,24 @@ undelfs_getid (struct vfs_class *me, const char *path)
 static int
 undelfs_nothingisopen(vfsid id)
 {
+    (void) id;
+
     return !undelfs_usage;
 }
 
 static void
 undelfs_free(vfsid id)
 {
+    (void) id;
+
     undelfs_shutdown ();
 }
 
 #ifdef	ENABLE_NLS
 static int
 undelfs_init(struct vfs_class *me) {
+    (void) me;
+
     undelfserr = _(undelfserr);
     return 1;
 }
