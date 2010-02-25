@@ -1517,6 +1517,8 @@ edit_replace_cmd (WEdit *edit, int again)
     static char *saved2 = NULL;
     char *input1 = NULL;	/* user input from the dialog */
     char *input2 = NULL;
+    char *disp1 = NULL;
+    char *disp2 = NULL;
     int replace_yes;
     long times_replaced = 0, last_search;
     gboolean once_found = FALSE;
@@ -1538,9 +1540,9 @@ edit_replace_cmd (WEdit *edit, int again)
 	input1 = g_strdup (saved1 ? saved1 : "");
 	input2 = g_strdup (saved2 ? saved2 : "");
     } else {
-	char *disp1 = edit_replace_cmd__conv_to_display (saved1 ? saved1 : (char *) "");
-	char *disp2 = edit_replace_cmd__conv_to_display (saved2 ? saved2 : (char *) "");
 	char *tmp_inp1, *tmp_inp2;
+	disp1 = edit_replace_cmd__conv_to_display (saved1 ? saved1 : (char *) "");
+	disp2 = edit_replace_cmd__conv_to_display (saved2 ? saved2 : (char *) "");
 
 	edit_push_action (edit, KEY_PRESS + edit->start_display);
 
@@ -1632,7 +1634,9 @@ edit_replace_cmd (WEdit *edit, int again)
 		/*so that undo stops at each query */
 		edit_push_key_press (edit);
 		/* and prompt 2/3 down */
-		switch (editcmd_dialog_replace_prompt_show (edit, input1, input2, -1, -1)) {
+		disp1 = edit_replace_cmd__conv_to_display (saved1);
+		disp2 = edit_replace_cmd__conv_to_display (saved2);
+		switch (editcmd_dialog_replace_prompt_show (edit, disp1, disp2, -1, -1)) {
 		case B_ENTER:
 		    replace_yes = 1;
 		    break;
@@ -1647,6 +1651,8 @@ edit_replace_cmd (WEdit *edit, int again)
 		    edit->replace_mode = -1;
 		    break;
 		}
+		g_free (disp1);
+		g_free (disp2);
 	    }
 	    if (replace_yes) {	/* delete then insert new */
 		GString *repl_str, *tmp_str;
