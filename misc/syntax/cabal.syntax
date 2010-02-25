@@ -4,6 +4,8 @@
 # haskell.syntax is taken as base
 #
 
+caseinsensitive
+
 context default
 
 # cabal keywords
@@ -17,55 +19,58 @@ context default
     keyword whole _\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] magenta
 
 #   known fields
-    keyword whole author cyan
-    keyword whole bug-reports cyan
-    keyword whole buildable cyan
-    keyword whole build-depends cyan
-    keyword whole build-tools cyan
-    keyword whole build-type cyan
-    keyword whole cabal-version cyan
-    keyword whole category cyan
-    keyword whole cc-options cyan
-    keyword whole copyright cyan
-    keyword whole cpp-options cyan
-    keyword whole c-sources cyan
-    keyword whole data-dir cyan
-    keyword whole data-files cyan
-    keyword whole description cyan
-    keyword whole executable cyan
-    keyword whole exposed-modules cyan
-    keyword whole exposed cyan
-    keyword whole extensions cyan
-    keyword whole extra-lib-dirs cyan
-    keyword whole extra-libraries cyan
-    keyword whole extra-source-files cyan
-    keyword whole extra-tmp-files cyan
-    keyword whole frameworks cyan
-    keyword whole ghc-options cyan
-    keyword whole ghc-prof-options cyan
-    keyword whole ghc-shared-options cyan
-    keyword whole homepage cyan
-    keyword whole hs-source-dirs cyan
-    keyword whole hugs-options cyan
-    keyword whole include-dirs cyan
-    keyword whole includes cyan
-    keyword whole install-includes cyan
-    keyword whole jhc-options cyan
-    keyword whole ld-options cyan
-    keyword whole library cyan
-    keyword whole license-file cyan
-    keyword whole license cyan
-    keyword whole main-is cyan
-    keyword whole maintainer cyan
-    keyword whole name cyan
-    keyword whole nhc98-options cyan
-    keyword whole other-modules cyan
-    keyword whole package-url cyan
-    keyword whole pkgconfig-depends cyan
-    keyword whole stability cyan
-    keyword whole synopsis cyan
-    keyword whole tested-with cyan
-    keyword whole version cyan
+    keyword whole \[\s\]author cyan
+    keyword whole \[\s\]bug-reports cyan
+    keyword whole \[\s\]buildable cyan
+    keyword whole \[\s\]build-depends cyan
+    keyword whole \[\s\]build-tools cyan
+    keyword whole \[\s\]build-type cyan
+    keyword whole \[\s\]cabal-version cyan
+    keyword whole \[\s\]category cyan
+    keyword whole \[\s\]cc-options cyan
+    keyword whole \[\s\]copyright cyan
+    keyword whole \[\s\]cpp-options cyan
+    keyword whole \[\s\]c-sources cyan
+    keyword whole \[\s\]data-dir cyan
+    keyword whole \[\s\]data-files cyan
+    keyword whole \[\s\]default cyan
+    keyword whole \[\s\]description cyan
+    keyword whole \[\s\]exposed-modules cyan
+    keyword whole \[\s\]exposed cyan
+    keyword whole \[\s\]extensions cyan
+    keyword whole \[\s\]extra-lib-dirs cyan
+    keyword whole \[\s\]extra-libraries cyan
+    keyword whole \[\s\]extra-source-files cyan
+    keyword whole \[\s\]extra-tmp-files cyan
+    keyword whole \[\s\]frameworks cyan
+    keyword whole \[\s\]ghc-options cyan
+    keyword whole \[\s\]ghc-prof-options cyan
+    keyword whole \[\s\]ghc-shared-options cyan
+    keyword whole \[\s\]homepage cyan
+    keyword whole \[\s\]hs-source-dirs cyan
+    keyword whole \[\s\]hugs-options cyan
+    keyword whole \[\s\]include-dirs cyan
+    keyword whole \[\s\]includes cyan
+    keyword whole \[\s\]install-includes cyan
+    keyword whole \[\s\]jhc-options cyan
+    keyword whole \[\s\]ld-options cyan
+    keyword whole \[\s\]license-file cyan
+    keyword whole \[\s\]license cyan
+    keyword whole \[\s\]location cyan
+    keyword whole \[\s\]main-is cyan
+    keyword whole \[\s\]maintainer cyan
+    keyword whole \[\s\]name cyan
+    keyword whole \[\s\]nhc98-options cyan
+    keyword whole \[\s\]other-modules cyan
+    keyword whole \[\s\]package-url cyan
+    keyword whole \[\s\]pkgconfig-depends cyan
+    keyword whole \[\s\]source-repository cyan
+    keyword whole \[\s\]stability cyan
+    keyword whole \[\s\]synopsis cyan
+    keyword whole \[\s\]tag cyan
+    keyword whole \[\s\]tested-with cyan
+    keyword whole \[\s\]type cyan
+    keyword whole \[\s\]version cyan
 
 #   extended fields
     keyword whole x\-\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] cyan
@@ -74,7 +79,7 @@ context default
     keyword whole -any red
 
 #   commandline keys
-    keyword whole -\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz_0123456789\] brightred
+    keyword whole -\[\-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz_0123456789\] brightred
 
 #   known extensions
     keyword whole Arrows                      brightmagenta
@@ -137,22 +142,24 @@ context default
     keyword whole ViewPatterns                brightmagenta
 
 #   links
-    keyword http://+  blue
-    keyword ftp://+   blue
-    keyword git://+   blue
-    keyword cvs://+   blue
-    keyword svn://+   blue
-    keyword darcs://+ blue
-#   emails
+    keyword http://+  gray
+    keyword ftp://+   gray
+    keyword git://+   gray
+    keyword cvs://+   gray
+    keyword svn://+   gray
+    keyword darcs://+ gray
+#   special text inside of <>, i.e. emails
     keyword \<+\>     red
 
-#   build types
-    keyword whole Configure white
-    keyword whole Custom    white
-    keyword whole Make      white
-#   with hack
-    keyword whole Simple\n  white
-    keyword whole Simple\s  white
+#   build types with '\s & \n' hack to remove too stupid highlighting
+    keyword whole Configure\s white
+    keyword whole Configure\n white
+    keyword whole Custom\s    white
+    keyword whole Custom\n    white
+    keyword whole Make\s      white
+    keyword whole Make\n      white
+    keyword whole Simple\n    white
+    keyword whole Simple\s    white
 
 #   licenses
     keyword whole AllRightsReserved white
@@ -177,9 +184,18 @@ context default
     keyword whole Helium         white
     keyword whole Hugs           white
 
-#   types
+#   special keywords
     keyword whole True  white
     keyword whole False white
+    keyword whole if   white
+    keyword whole impl white
+    keyword whole else white
+
+    keyword whole linestart \[\s\]executable yellow
+    keyword whole linestart \[\s\]library yellow
+    keyword whole flag yellow
+    keyword whole repo yellow
+
 
 #   unboxed (started from upcase)
 #    keyword whole \{ABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]# white
@@ -224,9 +240,6 @@ context default
     keyword ) brightcyan
 
 # comments
-context exclusive /\* \*/ brown
-    spellcheck
-
 context exclusive {- -} brown
     spellcheck
 
