@@ -6,16 +6,16 @@
    2004, 2005, 2006, 2007, 2009 Free Software Foundation, Inc.
 
    Written by: 1994, 1995, 1998 Miguel de Icaza
-	       1994, 1995 Janne Kukonlehto
-	       1995 Jakub Jelinek
-	       1996 Joseph M. Hinkle
-	       1997 Norbert Warmuth
-	       1998 Pavel Machek
-	       2004 Roland Illig <roland.illig@gmx.de>
-	       2005 Roland Illig <roland.illig@gmx.de>
-	       2009 Slava Zanko <slavazanko@google.com>
-	       2009 Andrew Borodin <aborodin@vmail.ru>
-	       2009 Ilia Maslakov <il.smind@gmail.com>
+   1994, 1995 Janne Kukonlehto
+   1995 Jakub Jelinek
+   1996 Joseph M. Hinkle
+   1997 Norbert Warmuth
+   1998 Pavel Machek
+   2004 Roland Illig <roland.illig@gmx.de>
+   2005 Roland Illig <roland.illig@gmx.de>
+   2009 Slava Zanko <slavazanko@google.com>
+   2009 Andrew Borodin <aborodin@vmail.ru>
+   2009 Ilia Maslakov <il.smind@gmail.com>
 
    This file is part of the Midnight Commander.
 
@@ -44,9 +44,9 @@
 #include "lib/strutil.h"
 
 #include "src/main.h"
-#include "src/dialog.h"		/* Dlg_head */
+#include "src/dialog.h"         /* Dlg_head */
 #include "src/charsets.h"
-#include "src/widget.h"		/* WButtonBar */
+#include "src/widget.h"         /* WButtonBar */
 
 #include "internal.h"
 #include "mcviewer.h"
@@ -60,7 +60,8 @@
 /*** file scope variables ************************************************************************/
 
 /* If set, show a ruler */
-static enum ruler_type {
+static enum ruler_type
+{
     RULER_NONE,
     RULER_TOP,
     RULER_BOTTOM
@@ -72,7 +73,7 @@ static enum ruler_type {
 
 /* Define labels and handlers for functional keys */
 static void
-mcview_set_buttonbar (mcview_t *view)
+mcview_set_buttonbar (mcview_t * view)
 {
     Dlg_head *h = view->widget.parent;
     WButtonBar *b = find_buttonbar (h);
@@ -80,12 +81,13 @@ mcview_set_buttonbar (mcview_t *view)
 
     buttonbar_set_label (b, 1, Q_ ("ButtonBar|Help"), keymap, (Widget *) view);
 
-    if (view->hex_mode) {
-         if (view->hexedit_mode)
+    if (view->hex_mode)
+    {
+        if (view->hexedit_mode)
             buttonbar_set_label (b, 2, Q_ ("ButtonBar|View"), keymap, (Widget *) view);
-         else if (view->datasource == DS_FILE)
+        else if (view->datasource == DS_FILE)
             buttonbar_set_label (b, 2, Q_ ("ButtonBar|Edit"), keymap, (Widget *) view);
-         else
+        else
             buttonbar_set_label (b, 2, "", keymap, (Widget *) view);
 
         buttonbar_set_label (b, 4, Q_ ("ButtonBar|Ascii"), keymap, (Widget *) view);
@@ -93,10 +95,11 @@ mcview_set_buttonbar (mcview_t *view)
         buttonbar_set_label (b, 6, Q_ ("ButtonBar|Save"), keymap, (Widget *) view);
         buttonbar_set_label (b, 7, Q_ ("ButtonBar|HxSrch"), keymap, (Widget *) view);
 
-    } else {
+    }
+    else
+    {
         buttonbar_set_label (b, 2, view->text_wrap_mode ? Q_ ("ButtonBar|UnWrap")
-                                                        : Q_ ("ButtonBar|Wrap"),
-                                keymap, (Widget *) view);
+                             : Q_ ("ButtonBar|Wrap"), keymap, (Widget *) view);
         buttonbar_set_label (b, 4, Q_ ("ButtonBar|Hex"), keymap, (Widget *) view);
         buttonbar_set_label (b, 5, Q_ ("ButtonBar|Line"), keymap, (Widget *) view);
         buttonbar_set_label (b, 6, "", keymap, (Widget *) view);
@@ -104,17 +107,16 @@ mcview_set_buttonbar (mcview_t *view)
     }
 
     buttonbar_set_label (b, 8, view->magic_mode ? Q_ ("ButtonBar|Raw")
-                                                : Q_ ("ButtonBar|Parse"),
-                                keymap, (Widget *) view);
+                         : Q_ ("ButtonBar|Parse"), keymap, (Widget *) view);
 
     if (mcview_is_in_panel (view))
         buttonbar_set_label (b, 10, "", keymap, (Widget *) view);
-    else {
+    else
+    {
         /* don't override some panel buttonbar keys  */
         buttonbar_set_label (b, 3, Q_ ("ButtonBar|Quit"), keymap, (Widget *) view);
         buttonbar_set_label (b, 9, view->text_nroff_mode ? Q_ ("ButtonBar|Unform")
-                                                        : Q_ ("ButtonBar|Format"),
-                                keymap, (Widget *) view);
+                             : Q_ ("ButtonBar|Format"), keymap, (Widget *) view);
         buttonbar_set_label (b, 10, Q_ ("ButtonBar|Quit"), keymap, (Widget *) view);
     }
 }
@@ -147,18 +149,21 @@ mcview_display_status (mcview_t * view)
 
     if (width < file_label_width + 6)
         tty_print_string (str_fit_to_term (file_name, width, J_LEFT_FIT));
-    else {
+    else
+    {
         i = (width > 22 ? 22 : width) - file_label_width;
 
         tmp = g_strdup_printf (file_label, str_fit_to_term (file_name, i, J_LEFT_FIT));
         tty_print_string (tmp);
         g_free (tmp);
-        if (width > 46) {
+        if (width > 46)
+        {
             widget_move (view, top, left + 24);
             /* FIXME: the format strings need to be changed when off_t changes */
             if (view->hex_mode)
                 tty_printf (_("Offset 0x%08lx"), (unsigned long) view->hex_cursor);
-            else {
+            else
+            {
                 off_t line, col;
                 mcview_offset_to_coord (view, &line, &col, view->dpy_start);
                 tty_printf (_("Line %lu Col %lu"),
@@ -166,17 +171,22 @@ mcview_display_status (mcview_t * view)
                             (unsigned long) (view->text_wrap_mode ? col : view->dpy_text_column));
             }
         }
-        if (width > 62) {
+        if (width > 62)
+        {
             off_t filesize;
             filesize = mcview_get_filesize (view);
             widget_move (view, top, left + 43);
-            if (!mcview_may_still_grow (view)) {
+            if (!mcview_may_still_grow (view))
+            {
                 tty_printf (_("%s bytes"), size_trunc (filesize));
-            } else {
+            }
+            else
+            {
                 tty_printf (_(">= %s bytes"), size_trunc (filesize));
             }
         }
-        if (width > 26) {
+        if (width > 26)
+        {
             mcview_percent (view, view->hex_mode ? view->hex_cursor : view->dpy_end);
         }
     }
@@ -194,13 +204,15 @@ mcview_update (mcview_t * view)
 {
     static int dirt_limit = 1;
 
-    if (view->dpy_bbar_dirty) {
+    if (view->dpy_bbar_dirty)
+    {
         view->dpy_bbar_dirty = FALSE;
         mcview_set_buttonbar (view);
         buttonbar_redraw (find_buttonbar (view->widget.parent));
     }
 
-    if (view->dirty > dirt_limit) {
+    if (view->dirty > dirt_limit)
+    {
         /* Too many updates skipped -> force a update */
         mcview_display (view);
         view->dirty = 0;
@@ -209,14 +221,18 @@ mcview_update (mcview_t * view)
         if (dirt_limit > mcview_max_dirt_limit)
             dirt_limit = mcview_max_dirt_limit;
     }
-    if (view->dirty) {
-        if (is_idle ()) {
+    if (view->dirty)
+    {
+        if (is_idle ())
+        {
             /* We have time to update the screen properly */
             mcview_display (view);
             view->dirty = 0;
             if (dirt_limit > 1)
                 dirt_limit--;
-        } else {
+        }
+        else
+        {
             /* We are busy -> skipping full update,
                only the status line is updated */
             mcview_display_status (view);
@@ -232,11 +248,16 @@ mcview_update (mcview_t * view)
 void
 mcview_display (mcview_t * view)
 {
-    if (view->hex_mode) {
+    if (view->hex_mode)
+    {
         mcview_display_hex (view);
-    } else if (view->text_nroff_mode) {
+    }
+    else if (view->text_nroff_mode)
+    {
         mcview_display_nroff (view);
-    } else {
+    }
+    else
+    {
         mcview_display_text (view);
     }
     mcview_display_status (view);
@@ -284,7 +305,8 @@ mcview_compute_areas (mcview_t * view)
     view->status_area.top = y;
     y += view->status_area.height;
 
-    if (ruler == RULER_TOP) {
+    if (ruler == RULER_TOP)
+    {
         view->ruler_area.top = y;
         y += view->ruler_area.height;
     }
@@ -319,7 +341,8 @@ mcview_update_bytes_per_line (mcview_t * view)
 void
 mcview_display_toggle_ruler (mcview_t * view)
 {
-    static const enum ruler_type next[3] = {
+    static const enum ruler_type next[3] =
+    {
         RULER_TOP,
         RULER_BOTTOM,
         RULER_NONE
@@ -337,10 +360,11 @@ mcview_display_clean (mcview_t * view)
 {
     tty_setcolor (NORMAL_COLOR);
     widget_erase ((Widget *) view);
-    if (view->dpy_frame_size != 0) {
+    if (view->dpy_frame_size != 0)
+    {
         tty_draw_box (view->widget.y, view->widget.x, view->widget.lines, view->widget.cols);
-/*        draw_double_box (view->widget.parent, view->widget.y,
-                         view->widget.x, view->widget.lines, view->widget.cols);*/
+        /*        draw_double_box (view->widget.parent, view->widget.y,
+           view->widget.x, view->widget.lines, view->widget.cols); */
     }
 }
 
@@ -365,16 +389,20 @@ mcview_display_ruler (mcview_t * view)
         return;
 
     tty_setcolor (MARKED_COLOR);
-    for (c = 0; c < width; c++) {
+    for (c = 0; c < width; c++)
+    {
         cl = view->dpy_text_column + c;
-        if (line_row < height) {
+        if (line_row < height)
+        {
             widget_move (view, top + line_row, left + c);
             tty_print_char (ruler_chars[cl % 10]);
         }
 
-        if ((cl != 0) && (cl % 10) == 0) {
+        if ((cl != 0) && (cl % 10) == 0)
+        {
             g_snprintf (r_buff, sizeof (r_buff), "%" OFFSETTYPE_PRId, (long unsigned int) cl);
-            if (nums_row < height) {
+            if (nums_row < height)
+            {
                 widget_move (view, top + nums_row, left + c - 1);
                 tty_print_string (r_buff);
             }

@@ -6,16 +6,16 @@
    2004, 2005, 2006, 2007, 2009 Free Software Foundation, Inc.
 
    Written by: 1994, 1995, 1998 Miguel de Icaza
-	       1994, 1995 Janne Kukonlehto
-	       1995 Jakub Jelinek
-	       1996 Joseph M. Hinkle
-	       1997 Norbert Warmuth
-	       1998 Pavel Machek
-	       2004 Roland Illig <roland.illig@gmx.de>
-	       2005 Roland Illig <roland.illig@gmx.de>
-	       2009 Slava Zanko <slavazanko@google.com>
-	       2009 Andrew Borodin <aborodin@vmail.ru>
-	       2009 Ilia Maslakov <il.smind@gmail.com>
+   1994, 1995 Janne Kukonlehto
+   1995 Jakub Jelinek
+   1996 Joseph M. Hinkle
+   1997 Norbert Warmuth
+   1998 Pavel Machek
+   2004 Roland Illig <roland.illig@gmx.de>
+   2005 Roland Illig <roland.illig@gmx.de>
+   2009 Slava Zanko <slavazanko@google.com>
+   2009 Andrew Borodin <aborodin@vmail.ru>
+   2009 Ilia Maslakov <il.smind@gmail.com>
 
    This file is part of the Midnight Commander.
 
@@ -79,37 +79,46 @@ mcview_display_nroff (mcview_t * view)
 
     /* Find the first displayable changed byte */
     from = view->dpy_start;
-    while (curr && (curr->offset < from)) {
+    while (curr && (curr->offset < from))
+    {
         curr = curr->next;
     }
 
     tty_setcolor (NORMAL_COLOR);
-    for (row = 0, col = 0; row < height;) {
+    for (row = 0, col = 0; row < height;)
+    {
 #ifdef HAVE_CHARSET
-        if (view->utf8) {
+        if (view->utf8)
+        {
             gboolean read_res = TRUE;
             c = mcview_get_utf (view, from, &cw, &read_res);
             if (!read_res)
                 break;
-        } else
+        }
+        else
 #endif
         {
-            if (! mcview_get_byte (view, from, &c))
+            if (!mcview_get_byte (view, from, &c))
                 break;
         }
         from++;
         if (cw > 1)
             from += cw - 1;
 
-        if (c == '\b') {
-            if (from > 1) {
+        if (c == '\b')
+        {
+            if (from > 1)
+            {
                 mcview_get_byte (view, from - 2, &c_prev);
                 mcview_get_byte (view, from, &c_next);
             }
             if (g_ascii_isprint (c_prev) && g_ascii_isprint (c_prev)
-                && (c_prev == c_next || c_prev == '_' || (c_prev == '+' && c_next == 'o'))) {
-                if (col == 0) {
-                    if (row == 0) {
+                && (c_prev == c_next || c_prev == '_' || (c_prev == '+' && c_next == 'o')))
+            {
+                if (col == 0)
+                {
+                    if (row == 0)
+                    {
                         /* We're inside an nroff character sequence at the
                          * beginning of the screen -- just skip the
                          * backspace and continue with the next character. */
@@ -128,14 +137,16 @@ mcview_display_nroff (mcview_t * view)
             }
         }
 
-        if ((c == '\n') || (col >= width && view->text_wrap_mode)) {
+        if ((c == '\n') || (col >= width && view->text_wrap_mode))
+        {
             col = 0;
             row++;
             if (c == '\n' || row >= height)
                 continue;
         }
 
-        if (c == '\r') {
+        if (c == '\r')
+        {
             mcview_get_byte_indexed (view, from, 1, &c);
             if (c == '\r' || c == '\n')
                 continue;
@@ -144,34 +155,45 @@ mcview_display_nroff (mcview_t * view)
             continue;
         }
 
-        if (c == '\t') {
+        if (c == '\t')
+        {
             off_t line, column;
             mcview_offset_to_coord (view, &line, &column, from);
             col += (option_tab_spacing - col % option_tab_spacing);
-            if (view->text_wrap_mode && col >= width && width != 0) {
+            if (view->text_wrap_mode && col >= width && width != 0)
+            {
                 row += col / width;
                 col %= width;
             }
             continue;
         }
 
-        if (view->search_start <= from && from < view->search_end) {
+        if (view->search_start <= from && from < view->search_end)
+        {
             tty_setcolor (SELECTED_COLOR);
         }
 
-        if (col >= view->dpy_text_column && col - view->dpy_text_column < width) {
+        if (col >= view->dpy_text_column && col - view->dpy_text_column < width)
+        {
             widget_move (view, top + row, left + (col - view->dpy_text_column));
 #ifdef HAVE_CHARSET
-            if (utf8_display) {
-                if (!view->utf8) {
+            if (utf8_display)
+            {
+                if (!view->utf8)
+                {
                     c = convert_from_8bit_to_utf_c ((unsigned char) c, view->converter);
                 }
                 if (!g_unichar_isprint (c))
                     c = '.';
-            } else {
-                if (view->utf8) {
+            }
+            else
+            {
+                if (view->utf8)
+                {
                     c = convert_from_utf_to_current_c (c, view->converter);
-                } else {
+                }
+                else
+                {
 #endif
                     c = convert_to_display_c (c);
 #ifdef HAVE_CHARSET
@@ -182,10 +204,11 @@ mcview_display_nroff (mcview_t * view)
         }
         col++;
 #ifdef HAVE_CHARSET
-        if (view->utf8) {
-            if (g_unichar_iswide(c))
+        if (view->utf8)
+        {
+            if (g_unichar_iswide (c))
                 col++;
-            else if (g_unichar_iszerowidth(c))
+            else if (g_unichar_iszerowidth (c))
                 col--;
         }
 #endif
@@ -207,8 +230,10 @@ mcview__get_nroff_real_len (mcview_t * view, off_t start, off_t length)
     if (nroff == NULL)
         return 0;
 
-    while (i < length) {
-        if (nroff->type != NROFF_TYPE_NONE) {
+    while (i < length)
+    {
+        if (nroff->type != NROFF_TYPE_NONE)
+        {
             ret += 2;
         }
         i++;
@@ -227,10 +252,11 @@ mcview_nroff_seq_new_num (mcview_t * view, off_t lc_index)
     mcview_nroff_t *nroff;
 
     nroff = g_try_malloc0 (sizeof (mcview_nroff_t));
-    if (nroff != NULL) {
-	nroff->index = lc_index;
-	nroff->view = view;
-	mcview_nroff_seq_info (nroff);
+    if (nroff != NULL)
+    {
+        nroff->index = lc_index;
+        nroff->view = view;
+        mcview_nroff_seq_info (nroff);
     }
     return nroff;
 }
@@ -266,29 +292,34 @@ mcview_nroff_seq_info (mcview_nroff_t * nroff)
         return NROFF_TYPE_NONE;
     nroff->type = NROFF_TYPE_NONE;
 
-    if (! mcview_get_byte (nroff->view, nroff->index, &nroff->current_char)
-        || !g_ascii_isprint (nroff->current_char))   /* FIXME: utf-8 and g_ascii_isprint */
+    if (!mcview_get_byte (nroff->view, nroff->index, &nroff->current_char) || !g_ascii_isprint (nroff->current_char))   /* FIXME: utf-8 and g_ascii_isprint */
         return nroff->type;
 
     nroff->char_width = 1;
 
-    if (! mcview_get_byte (nroff->view, nroff->index + 1, &next) || next != '\b')
+    if (!mcview_get_byte (nroff->view, nroff->index + 1, &next) || next != '\b')
         return nroff->type;
 
-    if (! mcview_get_byte (nroff->view, nroff->index + 2, &next2)
-        || !g_ascii_isprint (next2))   /* FIXME: utf-8 and g_ascii_isprint */
+    if (!mcview_get_byte (nroff->view, nroff->index + 2, &next2) || !g_ascii_isprint (next2))   /* FIXME: utf-8 and g_ascii_isprint */
         return nroff->type;
 
-    if (nroff->current_char == '_' && next2 == '_') {
+    if (nroff->current_char == '_' && next2 == '_')
+    {
         nroff->type = (nroff->prev_type == NROFF_TYPE_BOLD)
             ? NROFF_TYPE_BOLD : NROFF_TYPE_UNDERLINE;
 
-    } else if (nroff->current_char == next2) {
+    }
+    else if (nroff->current_char == next2)
+    {
         nroff->type = NROFF_TYPE_BOLD;
-    } else if (nroff->current_char == '_') {
+    }
+    else if (nroff->current_char == '_')
+    {
         nroff->current_char = next2;
         nroff->type = NROFF_TYPE_UNDERLINE;
-    } else if (nroff->current_char == '+' && next2 == 'o') {
+    }
+    else if (nroff->current_char == '+' && next2 == 'o')
+    {
         /* ??? */
     }
 

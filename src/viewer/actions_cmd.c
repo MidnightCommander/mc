@@ -6,16 +6,16 @@
    2004, 2005, 2006, 2007, 2009 Free Software Foundation, Inc.
 
    Written by: 1994, 1995, 1998 Miguel de Icaza
-	       1994, 1995 Janne Kukonlehto
-	       1995 Jakub Jelinek
-	       1996 Joseph M. Hinkle
-	       1997 Norbert Warmuth
-	       1998 Pavel Machek
-	       2004 Roland Illig <roland.illig@gmx.de>
-	       2005 Roland Illig <roland.illig@gmx.de>
-	       2009 Slava Zanko <slavazanko@google.com>
-	       2009 Andrew Borodin <aborodin@vmail.ru>
-	       2009 Ilia Maslakov <il.smind@gmail.com>
+   1994, 1995 Janne Kukonlehto
+   1995 Jakub Jelinek
+   1996 Joseph M. Hinkle
+   1997 Norbert Warmuth
+   1998 Pavel Machek
+   2004 Roland Illig <roland.illig@gmx.de>
+   2005 Roland Illig <roland.illig@gmx.de>
+   2009 Slava Zanko <slavazanko@google.com>
+   2009 Andrew Borodin <aborodin@vmail.ru>
+   2009 Ilia Maslakov <il.smind@gmail.com>
 
    This file is part of the Midnight Commander.
 
@@ -36,12 +36,12 @@
  */
 
 /*
-    The functions in this section can be bound to hotkeys. They are all
-    of the same type (taking a pointer to mcview_t as parameter and
-    returning void). TODO: In the not-too-distant future, these commands
-    will become fully configurable, like they already are in the
-    internal editor. By convention, all the function names end in
-    "_cmd".
+   The functions in this section can be bound to hotkeys. They are all
+   of the same type (taking a pointer to mcview_t as parameter and
+   returning void). TODO: In the not-too-distant future, these commands
+   will become fully configurable, like they already are in the
+   internal editor. By convention, all the function names end in
+   "_cmd".
  */
 
 #include <config.h>
@@ -54,7 +54,7 @@
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"
 
-#include "src/dialog.h"	/* cb_ret_t */
+#include "src/dialog.h"         /* cb_ret_t */
 #include "src/panel.h"
 #include "src/layout.h"
 #include "src/wtools.h"
@@ -64,7 +64,7 @@
 #include "src/execute.h"
 #include "src/help.h"
 #include "src/keybind.h"
-#include "src/cmddef.h"	/* CK_ cmd name const */
+#include "src/cmddef.h"         /* CK_ cmd name const */
 
 #include "internal.h"
 #include "mcviewer.h"
@@ -81,7 +81,7 @@
 
 /* Both views */
 static void
-mcview_search (mcview_t *view)
+mcview_search (mcview_t * view)
 {
     if (mcview_dialog_search (view))
         mcview_do_search (view);
@@ -92,14 +92,18 @@ mcview_search (mcview_t *view)
 static void
 mcview_continue_search_cmd (mcview_t * view)
 {
-    if (view->last_search_string != NULL) {
+    if (view->last_search_string != NULL)
+    {
         mcview_do_search (view);
-    } else {
+    }
+    else
+    {
         /* find last search string in history */
         GList *history;
         history = history_get (MC_HISTORY_SHARED_SEARCH);
-        if (history != NULL && history->data != NULL) {
-            view->last_search_string = (gchar *) g_strdup(history->data);
+        if (history != NULL && history->data != NULL)
+        {
+            view->last_search_string = (gchar *) g_strdup (history->data);
             history = g_list_first (history);
             g_list_foreach (history, (GFunc) g_free, NULL);
             g_list_free (history);
@@ -107,12 +111,15 @@ mcview_continue_search_cmd (mcview_t * view)
             view->search = mc_search_new (view->last_search_string, -1);
             view->search_nroff_seq = mcview_nroff_seq_new (view);
 
-            if (!view->search) {
+            if (!view->search)
+            {
                 /* if not... then ask for an expression */
-                g_free(view->last_search_string);
+                g_free (view->last_search_string);
                 view->last_search_string = NULL;
                 mcview_search (view);
-            } else {
+            }
+            else
+            {
                 view->search->search_type = view->search_type;
                 view->search->is_all_charsets = view->search_all_codepages;
                 view->search->is_case_sentitive = view->search_case;
@@ -122,9 +129,11 @@ mcview_continue_search_cmd (mcview_t * view)
 
                 mcview_do_search (view);
             }
-        } else {
+        }
+        else
+        {
             /* if not... then ask for an expression */
-            g_free(view->last_search_string);
+            g_free (view->last_search_string);
             view->last_search_string = NULL;
             mcview_search (view);
         }
@@ -137,12 +146,14 @@ mcview_continue_search_cmd (mcview_t * view)
 static cb_ret_t
 mcview_check_left_right_keys (mcview_t * view, int c)
 {
-    if (c == KEY_LEFT) {
+    if (c == KEY_LEFT)
+    {
         mcview_move_left (view, 1);
         return MSG_HANDLED;
     }
 
-    if (c == KEY_RIGHT) {
+    if (c == KEY_RIGHT)
+    {
         mcview_move_right (view, 1);
         return MSG_HANDLED;
     }
@@ -151,7 +162,8 @@ mcview_check_left_right_keys (mcview_t * view, int c)
     if (view->hex_mode || view->text_wrap_mode)
         return MSG_NOT_HANDLED;
 
-    if (c == (KEY_M_CTRL | KEY_LEFT)) {
+    if (c == (KEY_M_CTRL | KEY_LEFT))
+    {
         if (view->dpy_text_column >= 10)
             view->dpy_text_column -= 10;
         else
@@ -160,7 +172,8 @@ mcview_check_left_right_keys (mcview_t * view, int c)
         return MSG_HANDLED;
     }
 
-    if (c == (KEY_M_CTRL | KEY_RIGHT)) {
+    if (c == (KEY_M_CTRL | KEY_RIGHT))
+    {
         if (view->dpy_text_column <= OFFSETTYPE_MAX - 10)
             view->dpy_text_column += 10;
         else
@@ -209,7 +222,7 @@ mcview_cmk_moveto_bottom (void *w, int n)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline void
-mcview_moveto_line_cmd (mcview_t *view)
+mcview_moveto_line_cmd (mcview_t * view)
 {
     char *answer, *answer_end, prompt[BUF_SMALL];
     off_t line, col;
@@ -218,9 +231,10 @@ mcview_moveto_line_cmd (mcview_t *view)
 
     g_snprintf (prompt, sizeof (prompt),
                 _(" The current line number is %lld.\n"
-                  " Enter the new line number:"), (long long)(line + 1));
+                  " Enter the new line number:"), (long long) (line + 1));
     answer = input_dialog (_(" Goto line "), prompt, MC_HISTORY_VIEW_GOTO_LINE, "");
-    if (answer != NULL && answer[0] != '\0') {
+    if (answer != NULL && answer[0] != '\0')
+    {
         errno = 0;
         line = strtoul (answer, &answer_end, 10);
         if (errno == 0 && *answer_end == '\0' && line >= 1)
@@ -230,7 +244,7 @@ mcview_moveto_line_cmd (mcview_t *view)
 }
 
 static inline void
-mcview_moveto_addr_cmd (mcview_t *view)
+mcview_moveto_addr_cmd (mcview_t * view)
 {
     char *line, *error, prompt[BUF_SMALL], prompt_format[BUF_SMALL];
 
@@ -239,7 +253,8 @@ mcview_moveto_addr_cmd (mcview_t *view)
                   " Enter the new address:"), "0x%08" OFFSETTYPE_PRIX "");
     g_snprintf (prompt, sizeof (prompt), prompt_format, view->hex_cursor);
     line = input_dialog (_(" Goto Address "), prompt, MC_HISTORY_VIEW_GOTO_ADDR, "");
-    if ((line != NULL) && (*line != '\0')) {
+    if ((line != NULL) && (*line != '\0'))
+    {
         off_t addr;
         addr = strtoul (line, &error, 0);
         if ((*error == '\0') && mcview_get_byte (view, addr, NULL))
@@ -260,7 +275,8 @@ mcview_hook (void *v)
 
     /* If the user is busy typing, wait until he finishes to update the
        screen */
-    if (!is_idle ()) {
+    if (!is_idle ())
+    {
         if (!hook_present (idle_hook, mcview_hook))
             add_hook (&idle_hook, mcview_hook, v);
         return;
@@ -291,12 +307,15 @@ mcview_handle_editkey (mcview_t * view, int key)
     while (node && (node->offset != view->hex_cursor))
         node = node->next;
 
-    if (!view->hexview_in_text) {
+    if (!view->hexview_in_text)
+    {
         /* Hex editing */
         unsigned int hexvalue = 0;
-        if (key >= '0' && key <= '9') {
+        if (key >= '0' && key <= '9')
+        {
             hexvalue = 0 + (key - '0');
-        } else if (key >= 'A' && key <= 'F')
+        }
+        else if (key >= 'A' && key <= 'F')
             hexvalue = 10 + (key - 'A');
         else if (key >= 'a' && key <= 'f')
             hexvalue = 10 + (key - 'a');
@@ -308,24 +327,32 @@ mcview_handle_editkey (mcview_t * view, int key)
         else
             mcview_get_byte (view, view->hex_cursor, &byte_val);
 
-        if (view->hexedit_lownibble) {
+        if (view->hexedit_lownibble)
+        {
             byte_val = (byte_val & 0xf0) | (hexvalue);
-        } else {
+        }
+        else
+        {
             byte_val = (byte_val & 0x0f) | (hexvalue << 4);
         }
-    } else {
+    }
+    else
+    {
         /* Text editing */
         if (key < 256 && ((key == '\n') || is_printable (key)))
             byte_val = key;
         else
             return MSG_NOT_HANDLED;
     }
-    if (!node) {
+    if (!node)
+    {
         node = g_new (struct hexedit_change_node, 1);
         node->offset = view->hex_cursor;
         node->value = byte_val;
         mcview_enqueue_change (&view->change_list, node);
-    } else {
+    }
+    else
+    {
         node->value = byte_val;
     }
     view->dirty++;
@@ -337,28 +364,29 @@ mcview_handle_editkey (mcview_t * view, int key)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-mcview_execute_cmd (mcview_t *view, unsigned long command)
+mcview_execute_cmd (mcview_t * view, unsigned long command)
 {
     int res = MSG_HANDLED;
 
-    switch (command) {
+    switch (command)
+    {
     case CK_ViewHelp:
         interactive_display (NULL, "[Internal File Viewer]");
         break;
     case CK_ViewToggleWrapMode:
         /* Toggle between wrapped and unwrapped view */
         mcview_toggle_wrap_mode (view);
-        mcview_update (view); /* FIXME: view->dirty++ ? */
+        mcview_update (view);   /* FIXME: view->dirty++ ? */
         break;
     case CK_ViewToggleHexEditMode:
         /* Toggle between hexview and hexedit mode */
         mcview_toggle_hexedit_mode (view);
-        mcview_update (view); /* FIXME: view->dirty++ ? */
+        mcview_update (view);   /* FIXME: view->dirty++ ? */
         break;
     case CK_ViewToggleHexMode:
         /* Toggle between hex view and text view */
         mcview_toggle_hex_mode (view);
-        mcview_update (view); /* FIXME: view->dirty++ ? */
+        mcview_update (view);   /* FIXME: view->dirty++ ? */
         break;
     case CK_ViewGoto:
         if (view->hex_mode)
@@ -366,7 +394,7 @@ mcview_execute_cmd (mcview_t *view, unsigned long command)
         else
             mcview_moveto_line_cmd (view);
         view->dirty++;
-        mcview_update (view); /* FIXME: unneeded? */
+        mcview_update (view);   /* FIXME: unneeded? */
         break;
     case CK_ViewHexEditSave:
         mcview_hexedit_save_changes (view);
@@ -376,11 +404,11 @@ mcview_execute_cmd (mcview_t *view, unsigned long command)
         break;
     case CK_ViewToggleMagicMode:
         mcview_toggle_magic_mode (view);
-        mcview_update (view); /* FIXME: view->dirty++ ? */
+        mcview_update (view);   /* FIXME: view->dirty++ ? */
         break;
     case CK_ViewToggleNroffMode:
         mcview_toggle_nroff_mode (view);
-        mcview_update (view); /* FIXME: view->dirty++ ? */
+        mcview_update (view);   /* FIXME: view->dirty++ ? */
         break;
     case CK_ViewToggleHexNavMode:
         view->hexview_in_text = !view->hexview_in_text;
@@ -427,12 +455,12 @@ mcview_execute_cmd (mcview_t *view, unsigned long command)
     case CK_ShowCommandLine:
         view_other_cmd ();
         break;
-    /*
-        // Unlike Ctrl-O, run a new shell if the subshell is not running
-    case '!':
-        exec_shell ();
-        return MSG_HANDLED;
-    */
+        /*
+           // Unlike Ctrl-O, run a new shell if the subshell is not running
+           case '!':
+           exec_shell ();
+           return MSG_HANDLED;
+         */
     case CK_ViewGotoBookmark:
         view->marks[view->marker] = view->dpy_start;
         break;
@@ -456,7 +484,7 @@ mcview_execute_cmd (mcview_t *view, unsigned long command)
         if (mcview_ok_to_quit (view))
             view->want_to_quit = TRUE;
         break;
-    default :
+    default:
         res = MSG_NOT_HANDLED;
     }
     return res;
@@ -470,21 +498,19 @@ mcview_handle_key (mcview_t * view, int key)
 
     key = convert_from_input_c (key);
 
-    if (view->hex_mode) {
-        if (view->hexedit_mode
-            && (mcview_handle_editkey (view, key) == MSG_HANDLED))
-                return MSG_HANDLED;
+    if (view->hex_mode)
+    {
+        if (view->hexedit_mode && (mcview_handle_editkey (view, key) == MSG_HANDLED))
+            return MSG_HANDLED;
 
         command = lookup_keymap_command (view->hex_map, key);
-        if ((command != CK_Ignore_Key)
-            && (mcview_execute_cmd (view, command) == MSG_HANDLED))
-                return MSG_HANDLED;
+        if ((command != CK_Ignore_Key) && (mcview_execute_cmd (view, command) == MSG_HANDLED))
+            return MSG_HANDLED;
     }
 
     command = lookup_keymap_command (view->plain_map, key);
-    if ((command != CK_Ignore_Key)
-        && (mcview_execute_cmd (view, command) == MSG_HANDLED))
-            return MSG_HANDLED;
+    if ((command != CK_Ignore_Key) && (mcview_execute_cmd (view, command) == MSG_HANDLED))
+        return MSG_HANDLED;
 
     if (mcview_check_left_right_keys (view, key))
         return MSG_HANDLED;
@@ -495,7 +521,8 @@ mcview_handle_key (mcview_t * view, int key)
         return MSG_HANDLED;
 
 #ifdef MC_ENABLE_DEBUGGING_CODE
-    if (c == 't') {                  /* mnemonic: "test" */
+    if (c == 't')
+    {                           /* mnemonic: "test" */
         mcview_ccache_dump (view);
         return MSG_HANDLED;
     }
@@ -511,7 +538,7 @@ mcview_handle_key (mcview_t * view, int key)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline void
-mcview_adjust_size (Dlg_head *h)
+mcview_adjust_size (Dlg_head * h)
 {
     mcview_t *view;
     WButtonBar *b;
@@ -521,7 +548,7 @@ mcview_adjust_size (Dlg_head *h)
     b = find_buttonbar (h);
 
     widget_set_size (&view->widget, 0, 0, LINES - 1, COLS);
-    widget_set_size (&b->widget , LINES - 1, 0, 1, COLS);
+    widget_set_size (&b->widget, LINES - 1, 0, 1, COLS);
 
     mcview_compute_areas (view);
     mcview_update_bytes_per_line (view);
@@ -544,7 +571,8 @@ mcview_callback (Widget * w, widget_msg_t msg, int parm)
     mcview_compute_areas (view);
     mcview_update_bytes_per_line (view);
 
-    switch (msg) {
+    switch (msg)
+    {
     case WIDGET_INIT:
         if (mcview_is_in_panel (view))
             add_hook (&select_file_hook, mcview_hook, view);
@@ -596,12 +624,12 @@ mcview_callback (Widget * w, widget_msg_t msg, int parm)
 /* --------------------------------------------------------------------------------------------- */
 
 cb_ret_t
-mcview_dialog_callback (Dlg_head *h, Widget *sender,
-			dlg_msg_t msg, int parm, void *data)
+mcview_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     mcview_t *view = data;
 
-    switch (msg) {
+    switch (msg)
+    {
     case DLG_RESIZE:
         mcview_adjust_size (h);
         return MSG_HANDLED;

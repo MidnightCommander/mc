@@ -3075,8 +3075,8 @@ El formato de la definición de color es:
 .PP
 los colores son opcionales, y las palabras claves son: normal, selected,
 marked, markselect, errors, input, reverse menu, menusel, menuhot, menuhotsel,
-gauge;  los colores por defecto son: dnormal, dfocus, dhotnormal, dhotfocus;
-los colores de Ayuda son: helpnormal, helpitalic, helpbold, helplink,
+menuinactive, gauge;  los colores por defecto son: dnormal, dfocus, dhotnormal,
+dhotfocus; los colores de Ayuda son: helpnormal, helpitalic, helpbold, helplink,
 helpslink;  color del visor: viewunderline; colores del editor: editnormal,
 editbold, editmarked.
 .PP
@@ -3091,8 +3091,8 @@ en los componentes normales, mientras que el color
 .I dhotfocus
 se utiliza para el color resaltado en el componente seleccionado.
 .PP
-Los menús utilizan el mismo esquema equivalente con los nombres menu, menusel, menuhot and
-menuhotsel en lugar de los anteriores.
+Los menús utilizan el mismo esquema equivalente con los nombres menu, menusel,
+menuhot, menuhotsel and menuinactive en lugar de los anteriores.
 .PP
 La ayuda utiliza los siguientes colores:
 .I helpnormal
@@ -3296,6 +3296,9 @@ Color de la entrada de menú activa, con el foco.
 .TP
 .I menuhotsel
 Color de las teclas de acceso rápido en la entrada activa de menú.
+.TP
+.I menuinactive
+Color de menú inactiva.
 
 .PP
 La sección
