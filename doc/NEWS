@@ -1,3 +1,37 @@
+Version 4.7.0.3
+
+- Core
+
+    * Reorganization of source tree structure (#2037)
+    * Added 'menuinactive' skin item to draw inactive visible main menu (#1999)
+
+- VFS
+- Editor
+- Viewer
+- Misc
+
+    * Documentation updates
+    * Translation updates
+
+- Fixes
+
+    * Missing includes (#2017)
+    * Memory leaks (#2028, #2053, #2058)
+    * Incorrect start up with some special paths (#1992)
+    * MC crashes at exit due to race conditions of destroying subshell and file manager (#2008)
+    * Ctrl-\ key closes the NCurses-based MC (#1926)
+    * verbose option is always switched on after MC start (#1940)
+    * Selections are not visible on monochrome terminals in NCurses-based MC (#1972)
+    * Extra quoting of shell variables in user menu (#1967)
+    * Editor's search parameters are not retained across editing session (#1572)
+    * EditColumnMark can't go up through newline (#1998)
+    * Missed \s symbol in Syntax file (#2010)
+    * ViewContinueSearch segfault on empty search (#1996)
+    * Potencial security risk in mcserv (#1902)
+    * The lslR VFS doesn't work with ls-lR files created in en_US.UTF-8 locale and with files and directories started with whitespaces (#1921)
+    * Contents of RAR archives with filenames that contain / \d\d:\d\d / are not listed correctly (#2029)
+    * FTPFS: strcpy() is used for overlaping strings (#2018)
+
 Version 4.7.0.2
 
 - Core
