@@ -1,3 +1,86 @@
+Version 4.7.1
+
+- Core
+
+    * Minimal required GLib version is 2.8 (#1980)
+    * Reorganization of source tree structure (#1866, #2037)
+    * States of all 'Find File' dialog checkboxes are saved in user configuration file (#1874, #1965)
+    * New file type bindings:
+          o viewing .lyx with lyxcat, opening with lyx (#1693)
+    * Added shortcut (Meta-,) to toggle panels split (#1991)
+    * Capability to remove history items. !WListbox widget was fully reimplemented (#1445)
+    * Autodetect codepages of edited/viewed files with enca program (#1838)
+    * Custom/locale-based date format (#1767)
+    * New quick search behavior, allow wildcard characters - '*' and '?'(#2022)
+    * Panels: new sort type 'by version' (#1994)
+    * Added 'menuinactive' skin item to draw inactive visible main menu (#1999)
+    * Added ability to show progressbars (when copy files) from right to left (#1443)
+    * Added indication of total BPS and ETA for file operations; fully rewrited FileOperations dialog (#1443)
+
+- VFS
+
+    * Small reorganizing (#1931)
+    * Easy plugable EXTFS VFS (#1909)
+
+- Editor
+
+    * Some simple optimization of syntax highlighting engine (#1843)
+    * Show right margin using 'editor_show_right_margin' option. Keybind EditToggleShowMargin in [editor] section is used to toggle the state (#1514)
+    * New editor action 'Mark all', new keybind EditMarkAll (#1945)
+    * Changed default for 'Cursor beyond EOL', now it switched off by default (#1946)
+    * Changed default color pair for 'editbold' (search result) to be more sensible (#1559)
+
+- Viewer
+
+    * Viewer is now very fast (#1585)
+    * Added new confirm box for repeat search from begining of file (#1917)
+
+- Misc
+
+    * Lots of code cleanup (#1780, #1915, #1990)
+    * Removed obsolete checks in configuration scripts (#262, #1932)
+    * Documentation updates
+    * Translation updates
+
+- Fixes
+
+    * MC won't compile on Solaris due to undefined constant NAME_MAX (#1943)
+    * MC won't compile on AIX (#1957)
+    * Missing includes (#1930, #2017)
+    * Missing printf format (#1960)
+    * Memory and file descriptors leaks (#1953, #2028, #2053, #2058)
+    * Small error in versioning (#1905)
+    * Incorrect start up with some special paths (#1992)
+    * Segfault in input line history (#1936)
+    * MC crashes on exit when using C locale (#1942)
+    * MC crashes at exit due to race conditions of destroying subshell and file manager (#2008)
+    * Assertion failed for g_array_free (#1954)
+    * Broken transparency if MC is built with NCurses (#1657)
+    * Selections not visible on monochrome terminals (#1972)
+    * Colors of visible inactive menu (#1702)
+    * Incorrect input line length in 'Edit symlink' dialog window (#1955)
+    * Unquoted shell variables in user menu (#1967)
+    * Ctrl-\ key closes the NCurses-based MC (#1926)
+    * verbose option is always on after MC start (#1940)
+    * Show total progressbar (and related info) when copying just one subdirdir with lot of files (#1443)
+    * Incorrecy movement in last line in editor (moving cursor to the empty last line) (#1956)
+    * Incorrect editor lock files check (#1935)
+    * Segfault at try of edit (F4) archives with utf-8 names (x86_64 specified) (#1982)
+    * Editor's search parameters are not retained across editing session (#1572)
+    * EditColumnMark can't go up through newline (#1998)
+    * 'Confirm replace' dialog is not converted from UTF-8 to user defined charset (#1986)
+    * Missed \s symbol in Syntax file (#2010)
+    * Viewer in QuickView mode corrupts screen (#1918, #1944)
+    * ViewContinueSearch segfault on empty search (#1996)
+    * MC crashes if file name in archves contains '@' symbol (#1605)
+    * deba and debd VFS: items from DEBIAN directory are not accessible (#1920)
+    * Samba is not built with tcc (#1933)
+    * Incorrect conditional compilation of mcserver (#1925)
+    * Potencial security risk in mcserv (#1902)
+    * The lslR VFS doesn't work with ls-lR files created in en_US.UTF-8 locale and with files and directories started with whitespaces (#1921)
+    * Contents of RAR archives with filenames that contain / \d\d:\d\d / are not listed correctly (#2029)
+    * FTPFS: strcpy() is used for overlaping strings (#2018)
+
 Version 4.7.0.1
 
 - Fixes
