@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-24 13:14+0200\n"
+"POT-Creation-Date: 2010-02-26 13:04+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Kang Bundo <bundo@bundo.biz>\n"
 "Language-Team: ubuntu korea <admin@ubuntu.or.kr>\n"
@@ -945,7 +945,8 @@ msgstr ""
 "   대화상자:      dnormal, dfocus, dhotnormal, dhotfocus\n"
 "   메뉴:          menu, menuhot, menusel, menuhotsel\n"
 "   도움말:        helpnormal, helpitalic, helplink, helpslink\n"
-"   파일형식:      directory, executable, link, stalelink, device, special, core\n"
+"   파일형식:      directory, executable, link, stalelink, device, special, "
+"core\n"
 "\n"
 "색상:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -2170,7 +2171,10 @@ msgid " %s%s file error"
 msgstr " %s%s 파일 에러 "
 
 #, fuzzy, c-format
-msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
+msgid ""
+"The format of the %smc.ext file has changed with version 3.0.  It seems that "
+"the installation failed.  Please fetch a fresh copy from the Midnight "
+"Commander package."
 msgstr ""
 "버전 3.0 이후에 mc.ext 파일이\n"
 "바뀌었습니다. 인스톨이 실패한 것으로 보입니다.\n"
@@ -2182,8 +2186,13 @@ msgid " ~/%s file error "
 msgstr "  ~/%s 파일 에러 "
 
 #, c-format
-msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
-msgstr "~ /%s 파일은 버전 3.0에서 바꿀수 있습니다. 당신은 어느 %smc.ext에서 복사하거나 작성하는 방법의 예제 파일을 사용할 수있습니다"
+msgid ""
+"The format of the ~/%s file has changed with version 3.0.  You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
+msgstr ""
+"~ /%s 파일은 버전 3.0에서 바꿀수 있습니다. 당신은 어느 %smc.ext에서 복사하거"
+"나 작성하는 방법의 예제 파일을 사용할 수있습니다"
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|복사"
@@ -2848,7 +2857,8 @@ msgid " Hotlist Load "
 msgstr " 단축목록 불러오기 "
 
 #, fuzzy, c-format
-msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr " file, your old hotlist entries were not deleted"
 
 #, c-format
@@ -3800,124 +3810,182 @@ msgstr " 배경 프로세스 에러 "
 
 #~ msgid "Toggle &ins/overw"
 #~ msgstr "삽입/겹침 선택(&i)"
+
 #~ msgid "C&opy to clipfile"
 #~ msgstr "클립파일에서 복사(&o)"
+
 #~ msgid "C&ut to clipfile"
 #~ msgstr "클립파일에서 자르기(&u)"
+
 #~ msgid "&Paste from clipfile"
 #~ msgstr "클립파일에서 붙이기(&P)"
+
 #~ msgid "Toggle bookmar&k"
 #~ msgstr "북마크 토글(&k)"
+
 #~ msgid "Pre&v bookmark"
 #~ msgstr "이전 북마크(&v)"
+
 #~ msgid "Sor&t..."
 #~ msgstr "정렬순서(&t)..."
+
 #~ msgid " confirm &Exit "
 #~ msgstr "끝내기 확인(&E) "
+
 #~ msgid " confirm e&Xecute "
 #~ msgstr "실행 확인(&X) "
+
 #~ msgid " confirm &Delete "
 #~ msgstr "지우기 확인(&D) "
+
 #~ msgid "File"
 #~ msgstr "파일"
+
 #~ msgid "Bytes"
 #~ msgstr "바이트"
+
 #~ msgid "learn &Keys..."
 #~ msgstr "글쇠 배우기(&K)..."
+
 #~ msgid " &File "
 #~ msgstr " 파일(&F) "
+
 #~ msgid " &Command "
 #~ msgstr " 명령(&C) "
+
 #~ msgid "Menu"
 #~ msgstr "메뉴"
+
 #~ msgid "n"
 #~ msgstr "On"
+
 #~ msgid "Extension"
 #~ msgstr "확장자:"
+
 #~ msgid "Size"
 #~ msgstr "크기"
+
 #~ msgid "MTime"
 #~ msgstr "MTime"
+
 #~ msgid "ATime"
 #~ msgstr "ATime"
+
 #~ msgid "CTime"
 #~ msgstr "CTime"
+
 #~ msgid "Inode"
 #~ msgstr "Inode"
+
 #~ msgid "RenMov"
 #~ msgstr "RenMov"
+
 #~ msgid "Static"
 #~ msgstr "Static"
+
 #~ msgid "Dynamc"
 #~ msgstr "Dynamc"
+
 #~ msgid "Forget"
 #~ msgstr "Forget"
+
 #~ msgid "Rmdir"
 #~ msgstr "Rmdir"
+
 #~ msgid "bind: Unknown command: `%s'"
 #~ msgstr " Chown 명령 "
+
 #~ msgid "%s: Unknown command: `%s'"
 #~ msgstr " Chown 명령 "
+
 #~ msgid "%s:%d: unknown command `%s'"
 #~ msgstr " Chown 명령 "
+
 #~ msgid "%s not found!"
 #~ msgstr "경고: 파일 %s을(를) 찾을 수 없습니다\n"
+
 #~ msgid "NumLock on keypad"
 #~ msgstr "NumLock on keypad"
+
 #~ msgid " Emacs key: "
 #~ msgstr " Emacs 글쇠: "
+
 #~ msgid " %d items found, %d bookmarks added "
 #~ msgstr " %d이(가) 찾아짐, %d 책갈피 더함 "
+
 #~ msgid "Displays this help message"
 #~ msgstr "이 도움말 보여주기"
+
 #~ msgid "Displays a help screen on how to change the color scheme"
 #~ msgstr "컬러를 어떻게 바꿀 수 있는 지 도움말 화면 출력"
+
 #~ msgid "unknown option"
 #~ msgstr "모르는 옵션"
+
 #~ msgid "Show this help message"
 #~ msgstr "이 도움말 보여주기"
+
 #~ msgid "Display brief usage message"
 #~ msgstr "간단한 사용 메시지 출력"
+
 #~ msgid "ARG"
 #~ msgstr "ARG"
+
 #~ msgid "Usage:"
 #~ msgstr "사용법:"
+
 #~ msgid "pro&Mpt on replace"
 #~ msgstr "바꿀 때마다 물어봄(&O)"
+
 #~ msgid "replace &All"
 #~ msgstr "모두 바꿈(&A)"
+
 #~ msgid "O&ne"
 #~ msgstr "하나(&n)"
+
 #~ msgid "%b %d %H:%M"
 #~ msgstr "%b %e %H:%M"
+
 #~ msgid "%b %d %Y"
 #~ msgstr "%b %e  %Y"
+
 #~ msgid " The current address is 0x%08"
 #~ msgstr ""
 #~ " 현재 주소는 0x%lx입니다.\n"
 #~ " 새로운 주소 입력:"
+
 #~ msgid "scanf &Expression"
 #~ msgstr "scanf 표현(&E)"
+
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr " 인자 순서 입력 (가령: 3,2,1,4): "
+
 #~ msgid ""
 #~ " Invalid regular expression, or scanf expression with too many "
 #~ "conversions "
 #~ msgstr " 이상한 정규표현식 혹은 너무 많이 바꿔야 하는 scanf 표현 "
+
 #~ msgid " Error in replacement format string. "
 #~ msgstr " 바꿀 형식 문자열 에러. "
+
 #~ msgid " Replacement too long. "
 #~ msgstr " 바꿀 글월 입력:"
+
 #~ msgid "&Copy              F5"
 #~ msgstr "복사(&C)                   F5"
+
 #~ msgid "&Delete            F8"
 #~ msgstr "지우기(&D)                 F8"
+
 #~ msgid " The command history is empty "
 #~ msgstr " 명령 히스토리가 비었습니다 "
+
 #~ msgid "Edit edi&tor menu file"
 #~ msgstr "편집기 메뉴 파일 편집(&t)"
+
 #~ msgid "Edit &syntax file"
 #~ msgstr "구문 파일 편집(&s) "
+
 #~ msgid ""
 #~ "To use this feature select your codepage in\n"
 #~ "Setup / Display Bits dialog!\n"
@@ -3926,34 +3994,49 @@ msgstr " 배경 프로세스 에러 "
 #~ "이 기능을 사용하려면 선택항목 / 출력비트\n"
 #~ "대화상자에서 코드페이지를 선택하세요!\n"
 #~ "옵션 저장하는 거 잊지마세요."
+
 #~ msgid "Invalid hex search expression"
 #~ msgstr " 알 수 없는 hex 찾기 표현식 "
+
 #~ msgid " Invalid regular expression "
 #~ msgstr " 알 수 없는 정규 표현식 "
+
 #~ msgid " Enter regexp:"
 #~ msgstr " 정규표현식 입력:"
+
 #~ msgid "Using included S-Lang library"
 #~ msgstr "내장된 S-Lang 라이브러리 사용"
+
 #~ msgid "with termcap database"
 #~ msgstr "termcap 데이타베이스 사용"
+
 #~ msgid "&Home"
 #~ msgstr "홈(&H)"
+
 #~ msgid "&Type"
 #~ msgstr "&Type"
+
 #~ msgid "N&GID"
 #~ msgstr "N&GID"
+
 #~ msgid "N&UID"
 #~ msgstr "N&UID"
+
 #~ msgid "&Owner"
 #~ msgstr "소유자(&O)"
+
 #~ msgid "&Group"
 #~ msgstr "집단(&G)"
+
 #~ msgid "MC was unable to write ~/"
 #~ msgstr "MC was unable to write ~/"
+
 #~ msgid " (%ld blocks)"
 #~ msgstr " (%ld 구역)"
+
 #~ msgid " Notice "
 #~ msgstr " Notice "
+
 #~ msgid ""
 #~ " The Midnight Commander configuration files \n"
 #~ " are now stored in the ~/.mc directory, the \n"
@@ -3962,14 +4045,19 @@ msgstr " 배경 프로세스 에러 "
 #~ " The Midnight Commander 환경설정 파일은 이제 ~/mc \n"
 #~ " 디렉토리에 저장됩니다. 모든 파일이 그쪽 \n"
 #~ " 으로 옮겨졌습니다.\n"
+
 #~ msgid "%s bytes in %d files"
 #~ msgstr "%s bytes in %d files"
+
 #~ msgid " Cannot open file for reading: "
 #~ msgstr " 읽을 파일 열기 실패: "
+
 #~ msgid " Not an ordinary file: "
 #~ msgstr " 일반 파일 아님: "
+
 #~ msgid "Format of the "
 #~ msgstr "Format of the "
+
 #~ msgid ""
 #~ " file has changed\n"
 #~ "with version 3.0. You may want either to\n"
@@ -3978,52 +4066,74 @@ msgstr " 배경 프로세스 에러 "
 #~ " file has changed\n"
 #~ "with version 3.0. You may want either to\n"
 #~ "copy it from "
+
 #~ msgid ""
 #~ "mc.ext or use that\n"
 #~ "file as an example of how to write it.\n"
 #~ msgstr ""
 #~ "mc.ext를 그대로 사용하거나\n"
 #~ "이 파일을 수정해서 사용하십시오.\n"
+
 #~ msgid "mc.ext will be used for this moment."
 #~ msgstr "지금은 mc.ext를 사용하실 수 있습니다."
+
 #~ msgid "Col %d"
 #~ msgstr "Col %d"
+
 #~ msgid "  [grow]"
 #~ msgstr "  [grow]"
+
 #~ msgid "Ascii"
 #~ msgstr "아스키"
+
 #~ msgid "Hex"
 #~ msgstr "십육진"
+
 #~ msgid "Line"
 #~ msgstr "줄"
+
 #~ msgid "RxSrch"
 #~ msgstr "RxSrch"
+
 #~ msgid "EdHex"
 #~ msgstr "EdHex"
+
 #~ msgid "EdText"
 #~ msgstr "EdText"
+
 #~ msgid "UnWrap"
 #~ msgstr "UnWrap"
+
 #~ msgid "Wrap"
 #~ msgstr "Wrap"
+
 #~ msgid "HxSrch"
 #~ msgstr "HxSrch"
+
 #~ msgid "Raw"
 #~ msgstr "Raw"
+
 #~ msgid "Parse"
 #~ msgstr "Parse"
+
 #~ msgid "Unform"
 #~ msgstr "Unform"
+
 #~ msgid "User menu available only in mcedit invoked from mc"
 #~ msgstr "사용자 메뉴는 mcedit이 mc에 의해 불려진 경우에만 사용가능합니다"
+
 #~ msgid " Socket source routing setup "
 #~ msgstr " 소켓 소스 라우팅 설정 "
+
 #~ msgid " Enter host name to use as a source routing hop: "
 #~ msgstr " 원천 라우팅 홉을 사용하기 위한 호스트 이름: "
+
 #~ msgid " Host name "
 #~ msgstr " 호스트 이름 "
+
 #~ msgid " Error while looking up IP address "
 #~ msgstr " IP 주소 찾는 중 오류 발생 "
+
 #~ msgid ""
 #~ "\n"
 #~ "\n"
@@ -4038,18 +4148,24 @@ msgstr " 배경 프로세스 에러 "
 #~ "재생 스택 아래넘침\n"
 #~ "\n"
 #~ "\n"
+
 #~ msgid " Listing format edit "
 #~ msgstr " 목록 형식 편집 "
+
 #~ msgid " New mode is \"%s\" "
 #~ msgstr " 새 모드는 \"%s\"입니다 "
+
 #~ msgid "&Drive...       M-d"
 #~ msgstr "드라이브(&D)...          M-d"
+
 #~ msgid "Use to debug the background code"
 #~ msgstr "배경 코드를 디버깅할 때 사용"
+
 #~ msgid "Force subshell execution"
 #~ msgstr "무조건 subshell 실행"
+
 #~ msgid " No action taken "
 #~ msgstr " No action taken "
+
 #~ msgid " Cannot set source routing (%s)"
 #~ msgstr " 소스 라우팅(%s)을 설정할 수 없습니다"
-

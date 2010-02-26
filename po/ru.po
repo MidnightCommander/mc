@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-24 13:14+0200\n"
+"POT-Creation-Date: 2010-02-26 13:04+0200\n"
 "PO-Revision-Date: 2009-10-29  23:37+0300\n"
 "Last-Translator: Andrew Borodin <aborodin@vmail.ru>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
@@ -2558,8 +2558,8 @@ msgstr " Удалить: "
 msgid "Non&e"
 msgstr "ни &Одного"
 
-#, c-format
-msgid "ETA %d:%02d.%02d"
+#, fuzzy, c-format
+msgid "%d:%02d.%02d"
 msgstr "ETA %d:%02d.%02d"
 
 #, c-format
@@ -3411,9 +3411,9 @@ msgstr "и"
 msgid "&Name"
 msgstr "&Имя"
 
+#
 #. TRANSLATORS: one single character to represent 'version' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#
 msgid "sort|v"
 msgstr "в"
 
