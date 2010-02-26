@@ -42,8 +42,7 @@ extern struct mcview_struct *mcview_new (int y, int x, int lines, int cols, int 
  * point to a variable that will receive the direction in which the user
  * wants to move (-1 = previous file, 1 = next file, 0 = do nothing).
  */
-extern int mcview_viewer (const char *command, const char *file,
-                          int *move_dir_p, int start_line);
+extern int mcview_viewer (const char *command, const char *file, int *move_dir_p, int start_line);
 
 extern gboolean mcview_load (struct mcview_struct *, const char *, const char *, int);
 

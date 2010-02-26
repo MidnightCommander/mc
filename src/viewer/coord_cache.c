@@ -6,16 +6,16 @@
    2004, 2005, 2006, 2007, 2009 Free Software Foundation, Inc.
 
    Written by: 1994, 1995, 1998 Miguel de Icaza
-	       1994, 1995 Janne Kukonlehto
-	       1995 Jakub Jelinek
-	       1996 Joseph M. Hinkle
-	       1997 Norbert Warmuth
-	       1998 Pavel Machek
-	       2004 Roland Illig <roland.illig@gmx.de>
-	       2005 Roland Illig <roland.illig@gmx.de>
-	       2009 Slava Zanko <slavazanko@google.com>
-	       2009 Andrew Borodin <aborodin@vmail.ru>
-	       2009 Ilia Maslakov <il.smind@gmail.com>
+   1994, 1995 Janne Kukonlehto
+   1995 Jakub Jelinek
+   1996 Joseph M. Hinkle
+   1997 Norbert Warmuth
+   1998 Pavel Machek
+   2004 Roland Illig <roland.illig@gmx.de>
+   2005 Roland Illig <roland.illig@gmx.de>
+   2009 Slava Zanko <slavazanko@google.com>
+   2009 Andrew Borodin <aborodin@vmail.ru>
+   2009 Ilia Maslakov <il.smind@gmail.com>
 
    This file is part of the Midnight Commander.
 
@@ -47,11 +47,11 @@
    neighbor entries. The algorithm used for determining the line/column
    for a specific offset needs to be kept synchronized with the one used
    in display().
-*/
+ */
 
 #include <config.h>
 
-#include <string.h>		/* for g_memmove() */
+#include <string.h>             /* for g_memmove() */
 
 #include "lib/global.h"
 #include "lib/tty/tty.h"
@@ -83,11 +83,15 @@ mcview_ccache_find (mcview_t * view, const struct coord_cache_entry *cache,
     assert (limit != 0);
 
     base = 0;
-    while (limit > 1) {
+    while (limit > 1)
+    {
         i = base + limit / 2;
-        if (mcview_coord_cache_entry_less (coord, &cache[i], sort_by, view->text_nroff_mode)) {
+        if (mcview_coord_cache_entry_less (coord, &cache[i], sort_by, view->text_nroff_mode))
+        {
             /* continue the search in the lower half of the cache */
-        } else {
+        }
+        else
+        {
             /* continue the search in the upper half of the cache */
             base = i;
         }
@@ -104,8 +108,8 @@ mcview_ccache_find (mcview_t * view, const struct coord_cache_entry *cache,
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mcview_coord_cache_entry_less (const struct coord_cache_entry *a,
-                               const struct coord_cache_entry *b, enum ccache_type crit,
+mcview_coord_cache_entry_less (const struct coord_cache_entry * a,
+                               const struct coord_cache_entry * b, enum ccache_type crit,
                                gboolean nroff_mode)
 {
     if (crit == CCACHE_OFFSET)
@@ -114,10 +118,14 @@ mcview_coord_cache_entry_less (const struct coord_cache_entry *a,
     if (a->cc_line < b->cc_line)
         return TRUE;
 
-    if (a->cc_line == b->cc_line) {
-        if (nroff_mode) {
+    if (a->cc_line == b->cc_line)
+    {
+        if (nroff_mode)
+        {
             return (a->cc_nroff_column < b->cc_nroff_column);
-        } else {
+        }
+        else
+        {
             return (a->cc_column < b->cc_column);
         }
     }
@@ -147,7 +155,8 @@ mcview_ccache_dump (mcview_t * view)
     (void) setvbuf (f, NULL, _IONBF, 0);
 
     /* cache entries */
-    for (i = 0; i < view->coord_cache->len; i++) {
+    for (i = 0; i < view->coord_cache->len; i++)
+    {
         (void) fprintf (f,
                         "entry %8u  "
                         "offset %8" OFFSETTYPE_PRId "  "
@@ -160,7 +169,8 @@ mcview_ccache_dump (mcview_t * view)
     (void) fprintf (f, "\n");
 
     /* offset -> line/column translation */
-    for (offset = 0; offset < filesize; offset++) {
+    for (offset = 0; offset < filesize; offset++)
+    {
         mcview_offset_to_coord (view, &line, &column, offset);
         (void) fprintf (f,
                         "offset %8" OFFSETTYPE_PRId "  "
@@ -169,11 +179,13 @@ mcview_ccache_dump (mcview_t * view)
     }
 
     /* line/column -> offset translation */
-    for (line = 0; TRUE; line++) {
+    for (line = 0; TRUE; line++)
+    {
         mcview_coord_to_offset (view, &nextline_offset, line + 1, 0);
         (void) fprintf (f, "nextline_offset %8" OFFSETTYPE_PRId "\n", nextline_offset);
 
-        for (column = 0; TRUE; column++) {
+        for (column = 0; TRUE; column++)
+        {
             mcview_coord_to_offset (view, &offset, line, column);
             if (offset >= nextline_offset)
                 break;
@@ -206,13 +218,15 @@ mcview_ccache_lookup (mcview_t * view, struct coord_cache_entry *coord,
     struct coord_cache_entry *cache, current, next, entry;
     enum ccache_type sorter;
     off_t limit;
-    enum {
+    enum
+    {
         NROFF_START,
         NROFF_BACKSPACE,
         NROFF_CONTINUATION
     } nroff_state;
 
-    if (!view->coord_cache) {
+    if (!view->coord_cache)
+    {
         view->coord_cache = g_array_new (FALSE, FALSE, sizeof (struct coord_cache_entry));
         current.cc_offset = 0;
         current.cc_line = 0;
@@ -239,16 +253,21 @@ mcview_ccache_lookup (mcview_t * view, struct coord_cache_entry *coord,
 
     entry = current;
     nroff_state = NROFF_START;
-    for (; current.cc_offset < limit; current = next) {
+    for (; current.cc_offset < limit; current = next)
+    {
         int c, nextc;
 
-        if (! mcview_get_byte (view, current.cc_offset, &c))
+        if (!mcview_get_byte (view, current.cc_offset, &c))
             break;
 
-        if (!mcview_coord_cache_entry_less (&current, coord, sorter, view->text_nroff_mode)) {
-            if (lookup_what == CCACHE_OFFSET && view->text_nroff_mode && nroff_state != NROFF_START) {
+        if (!mcview_coord_cache_entry_less (&current, coord, sorter, view->text_nroff_mode))
+        {
+            if (lookup_what == CCACHE_OFFSET && view->text_nroff_mode && nroff_state != NROFF_START)
+            {
                 /* don't break here */
-            } else {
+            }
+            else
+            {
                 break;
             }
         }
@@ -260,39 +279,52 @@ mcview_ccache_lookup (mcview_t * view, struct coord_cache_entry *coord,
         next.cc_nroff_column = current.cc_nroff_column + 1;
 
         /* and override some of them as necessary. */
-        if (c == '\r') {
+        if (c == '\r')
+        {
             mcview_get_byte_indexed (view, current.cc_offset, 1, &nextc);
 
             /* Ignore '\r' if it is followed by '\r' or '\n'. If it is
              * followed by anything else, it is a Mac line ending and
              * produces a line break.
              */
-            if (nextc == '\r' || nextc == '\n') {
+            if (nextc == '\r' || nextc == '\n')
+            {
                 next.cc_column = current.cc_column;
                 next.cc_nroff_column = current.cc_nroff_column;
-            } else {
+            }
+            else
+            {
                 next.cc_line = current.cc_line + 1;
                 next.cc_column = 0;
                 next.cc_nroff_column = 0;
             }
 
-        } else if (nroff_state == NROFF_BACKSPACE) {
+        }
+        else if (nroff_state == NROFF_BACKSPACE)
+        {
             next.cc_nroff_column = current.cc_nroff_column - 1;
 
-        } else if (c == '\t') {
+        }
+        else if (c == '\t')
+        {
             next.cc_column = mcview_offset_rounddown (current.cc_column, 8) + 8;
             next.cc_nroff_column = mcview_offset_rounddown (current.cc_nroff_column, 8) + 8;
 
-        } else if (c == '\n') {
+        }
+        else if (c == '\n')
+        {
             next.cc_line = current.cc_line + 1;
             next.cc_column = 0;
             next.cc_nroff_column = 0;
 
-        } else {
+        }
+        else
+        {
             /* Use all default values from above */
         }
 
-        switch (nroff_state) {
+        switch (nroff_state)
+        {
         case NROFF_START:
         case NROFF_CONTINUATION:
             if (mcview_is_nroff_sequence (view, current.cc_offset))
@@ -313,7 +345,8 @@ mcview_ccache_lookup (mcview_t * view, struct coord_cache_entry *coord,
             entry = next;
     }
 
-    if (i + 1 == view->coord_cache->len && entry.cc_offset != cache[i].cc_offset) {
+    if (i + 1 == view->coord_cache->len && entry.cc_offset != cache[i].cc_offset)
+    {
         g_array_append_val (view->coord_cache, entry);
 
         if (!tty_got_interrupt ())
@@ -322,9 +355,12 @@ mcview_ccache_lookup (mcview_t * view, struct coord_cache_entry *coord,
 
     tty_disable_interrupt_key ();
 
-    if (lookup_what == CCACHE_OFFSET) {
+    if (lookup_what == CCACHE_OFFSET)
+    {
         coord->cc_offset = current.cc_offset;
-    } else {
+    }
+    else
+    {
         coord->cc_line = current.cc_line;
         coord->cc_column = current.cc_column;
         coord->cc_nroff_column = current.cc_nroff_column;

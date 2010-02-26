@@ -6,16 +6,16 @@
    2004, 2005, 2006, 2007, 2009 Free Software Foundation, Inc.
 
    Written by: 1994, 1995, 1998 Miguel de Icaza
-	       1994, 1995 Janne Kukonlehto
-	       1995 Jakub Jelinek
-	       1996 Joseph M. Hinkle
-	       1997 Norbert Warmuth
-	       1998 Pavel Machek
-	       2004 Roland Illig <roland.illig@gmx.de>
-	       2005 Roland Illig <roland.illig@gmx.de>
-	       2009 Slava Zanko <slavazanko@google.com>
-	       2009 Andrew Borodin <aborodin@vmail.ru>
-	       2009 Ilia Maslakov <il.smind@gmail.com>
+   1994, 1995 Janne Kukonlehto
+   1995 Jakub Jelinek
+   1996 Joseph M. Hinkle
+   1997 Norbert Warmuth
+   1998 Pavel Machek
+   2004 Roland Illig <roland.illig@gmx.de>
+   2005 Roland Illig <roland.illig@gmx.de>
+   2009 Slava Zanko <slavazanko@google.com>
+   2009 Andrew Borodin <aborodin@vmail.ru>
+   2009 Ilia Maslakov <il.smind@gmail.com>
 
    This file is part of the Midnight Commander.
 
@@ -71,7 +71,8 @@ static void
 mcview_movement_fixups (mcview_t * view, gboolean reset_search)
 {
     mcview_scroll_to_cursor (view);
-    if (reset_search) {
+    if (reset_search)
+    {
         view->search_start = view->dpy_start;
         view->search_end = view->dpy_start;
     }
@@ -87,24 +88,34 @@ mcview_movement_fixups (mcview_t * view, gboolean reset_search)
 void
 mcview_move_up (mcview_t * view, off_t lines)
 {
-    if (view->hex_mode) {
+    if (view->hex_mode)
+    {
         off_t bytes = lines * view->bytes_per_line;
-        if (view->hex_cursor >= bytes) {
+        if (view->hex_cursor >= bytes)
+        {
             view->hex_cursor -= bytes;
             if (view->hex_cursor < view->dpy_start)
                 view->dpy_start = mcview_offset_doz (view->dpy_start, bytes);
-        } else {
+        }
+        else
+        {
             view->hex_cursor %= view->bytes_per_line;
         }
-    } else if (view->text_wrap_mode) {
+    }
+    else if (view->text_wrap_mode)
+    {
         const screen_dimen width = view->data_area.width;
         off_t i, col, line, linestart;
 
-        for (i = 0; i < lines; i++) {
+        for (i = 0; i < lines; i++)
+        {
             mcview_offset_to_coord (view, &line, &col, view->dpy_start);
-            if (col >= width) {
+            if (col >= width)
+            {
                 col -= width;
-            } else if (line >= 1) {
+            }
+            else if (line >= 1)
+            {
                 mcview_coord_to_offset (view, &linestart, line, 0);
                 mcview_offset_to_coord (view, &line, &col, linestart - 1);
 
@@ -115,12 +126,16 @@ mcview_move_up (mcview_t * view, off_t lines)
                     col -= width;
                 else
                     col -= col % width;
-            } else {
+            }
+            else
+            {
                 /* nothing to do */
             }
             mcview_coord_to_offset (view, &(view->dpy_start), line, col);
         }
-    } else {
+    }
+    else
+    {
         off_t line, column;
 
         mcview_offset_to_coord (view, &line, &column, view->dpy_start);
@@ -135,7 +150,8 @@ mcview_move_up (mcview_t * view, off_t lines)
 void
 mcview_move_down (mcview_t * view, off_t lines)
 {
-    if (view->hex_mode) {
+    if (view->hex_mode)
+    {
         off_t i, limit, last_byte;
 
         last_byte = mcview_get_filesize (view);
@@ -143,20 +159,26 @@ mcview_move_down (mcview_t * view, off_t lines)
             limit = last_byte - view->bytes_per_line;
         else
             limit = 0;
-        for (i = 0; i < lines && view->hex_cursor < limit; i++) {
+        for (i = 0; i < lines && view->hex_cursor < limit; i++)
+        {
             view->hex_cursor += view->bytes_per_line;
             if (lines != 1)
                 view->dpy_start += view->bytes_per_line;
         }
 
-    } else if (view->dpy_end == mcview_get_filesize (view)) {
+    }
+    else if (view->dpy_end == mcview_get_filesize (view))
+    {
         /* don't move further down. There's nothing more to see. */
 
-    } else if (view->text_wrap_mode) {
+    }
+    else if (view->text_wrap_mode)
+    {
         off_t line, col, i;
         int c;
 
-        for (i = 0; i < lines; i++) {
+        for (i = 0; i < lines; i++)
+        {
             off_t new_offset, chk_line, chk_col;
 
             mcview_offset_to_coord (view, &line, &col, view->dpy_start);
@@ -173,7 +195,9 @@ mcview_move_down (mcview_t * view, off_t lines)
             view->dpy_start = new_offset;
         }
 
-    } else {
+    }
+    else
+    {
         off_t line, col;
 
         mcview_offset_to_coord (view, &line, &col, view->dpy_start);
@@ -188,17 +212,23 @@ mcview_move_down (mcview_t * view, off_t lines)
 void
 mcview_move_left (mcview_t * view, off_t columns)
 {
-    if (view->hex_mode) {
+    if (view->hex_mode)
+    {
         assert (columns == 1);
-        if (view->hexview_in_text || !view->hexedit_lownibble) {
+        if (view->hexview_in_text || !view->hexedit_lownibble)
+        {
             if (view->hex_cursor > 0)
                 view->hex_cursor--;
         }
         if (!view->hexview_in_text)
             view->hexedit_lownibble = !view->hexedit_lownibble;
-    } else if (view->text_wrap_mode) {
+    }
+    else if (view->text_wrap_mode)
+    {
         /* nothing to do */
-    } else {
+    }
+    else
+    {
         if (view->dpy_text_column >= columns)
             view->dpy_text_column -= columns;
         else
@@ -212,16 +242,22 @@ mcview_move_left (mcview_t * view, off_t columns)
 void
 mcview_move_right (mcview_t * view, off_t columns)
 {
-    if (view->hex_mode) {
+    if (view->hex_mode)
+    {
         assert (columns == 1);
-        if (view->hexview_in_text || view->hexedit_lownibble) {
+        if (view->hexview_in_text || view->hexedit_lownibble)
+        {
             view->hex_cursor++;
         }
         if (!view->hexview_in_text)
             view->hexedit_lownibble = !view->hexedit_lownibble;
-    } else if (view->text_wrap_mode) {
+    }
+    else if (view->text_wrap_mode)
+    {
         /* nothing to do */
-    } else {
+    }
+    else
+    {
         view->dpy_text_column += columns;
     }
     mcview_movement_fixups (view, FALSE);
@@ -232,19 +268,21 @@ mcview_move_right (mcview_t * view, off_t columns)
 void
 mcview_scroll_to_cursor (mcview_t * view)
 {
-    if (view->hex_mode) {
+    if (view->hex_mode)
+    {
         const off_t bytes = view->bytes_per_line;
         const off_t displaysize = view->data_area.height * bytes;
         const off_t cursor = view->hex_cursor;
         off_t topleft = view->dpy_start;
 
         if (topleft + displaysize <= cursor)
-            topleft = mcview_offset_rounddown (cursor, bytes)
-                - (displaysize - bytes);
+            topleft = mcview_offset_rounddown (cursor, bytes) - (displaysize - bytes);
         if (cursor < topleft)
             topleft = mcview_offset_rounddown (cursor, bytes);
         view->dpy_start = topleft;
-    } else if (view->text_wrap_mode) {
+    }
+    else if (view->text_wrap_mode)
+    {
         off_t line, col, columns;
 
         columns = view->data_area.width;
@@ -253,7 +291,9 @@ mcview_scroll_to_cursor (mcview_t * view)
             col = mcview_offset_rounddown (col, columns);
         mcview_coord_to_offset (view, &(view->dpy_start), line, col);
         view->dpy_text_column = 0;
-    } else {
+    }
+    else
+    {
         /* nothing to do */
     }
 }
@@ -284,11 +324,14 @@ mcview_moveto_bottom (mcview_t * view)
     datalines = view->data_area.height;
     lines_up = mcview_offset_doz (datalines, 1);
 
-    if (view->hex_mode) {
+    if (view->hex_mode)
+    {
         view->hex_cursor = filesize;
         mcview_move_up (view, lines_up);
         view->hex_cursor = last_offset;
-    } else {
+    }
+    else
+    {
         view->dpy_start = last_offset;
         mcview_moveto_bol (view);
         mcview_move_up (view, lines_up);
@@ -301,11 +344,16 @@ mcview_moveto_bottom (mcview_t * view)
 void
 mcview_moveto_bol (mcview_t * view)
 {
-    if (view->hex_mode) {
+    if (view->hex_mode)
+    {
         view->hex_cursor -= view->hex_cursor % view->bytes_per_line;
-    } else if (view->text_wrap_mode) {
+    }
+    else if (view->text_wrap_mode)
+    {
         /* do nothing */
-    } else {
+    }
+    else
+    {
         off_t line, column;
         mcview_offset_to_coord (view, &line, &column, view->dpy_start);
         mcview_coord_to_offset (view, &(view->dpy_start), line, 0);
@@ -319,19 +367,27 @@ mcview_moveto_bol (mcview_t * view)
 void
 mcview_moveto_eol (mcview_t * view)
 {
-    if (view->hex_mode) {
+    if (view->hex_mode)
+    {
         off_t filesize, bol;
 
         bol = mcview_offset_rounddown (view->hex_cursor, view->bytes_per_line);
-        if (mcview_get_byte_indexed (view, bol, view->bytes_per_line - 1, NULL) == TRUE) {
+        if (mcview_get_byte_indexed (view, bol, view->bytes_per_line - 1, NULL) == TRUE)
+        {
             view->hex_cursor = bol + view->bytes_per_line - 1;
-        } else {
+        }
+        else
+        {
             filesize = mcview_get_filesize (view);
             view->hex_cursor = mcview_offset_doz (filesize, 1);
         }
-    } else if (view->text_wrap_mode) {
+    }
+    else if (view->text_wrap_mode)
+    {
         /* nothing to do */
-    } else {
+    }
+    else
+    {
         off_t line, col;
 
         mcview_offset_to_coord (view, &line, &col, view->dpy_start);
@@ -345,10 +401,13 @@ mcview_moveto_eol (mcview_t * view)
 void
 mcview_moveto_offset (mcview_t * view, off_t offset)
 {
-    if (view->hex_mode) {
+    if (view->hex_mode)
+    {
         view->hex_cursor = offset;
         view->dpy_start = offset - offset % view->bytes_per_line;
-    } else {
+    }
+    else
+    {
         view->dpy_start = offset;
     }
     mcview_movement_fixups (view, TRUE);
@@ -393,8 +452,7 @@ mcview_offset_to_coord (mcview_t * view, off_t * ret_line, off_t * ret_column, o
         *ret_line = coord.cc_line;
 
     if (ret_column)
-        *ret_column = (view->text_nroff_mode)
-            ? coord.cc_nroff_column : coord.cc_column;
+        *ret_column = (view->text_nroff_mode) ? coord.cc_nroff_column : coord.cc_column;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -428,10 +486,13 @@ mcview_moveto_match (mcview_t * view)
 
     mcview_coord_to_offset (view, &offset, search_line, search_col);
 
-    if (view->hex_mode) {
+    if (view->hex_mode)
+    {
         view->hex_cursor = offset;
         view->dpy_start = offset - offset % view->bytes_per_line;
-    } else {
+    }
+    else
+    {
         view->dpy_start = offset;
     }
 

@@ -6,17 +6,17 @@
    2004, 2005, 2006, 2007, 2009 Free Software Foundation, Inc.
 
    Written by: 1994, 1995, 1998 Miguel de Icaza
-	       1994, 1995 Janne Kukonlehto
-	       1995 Jakub Jelinek
-	       1996 Joseph M. Hinkle
-	       1997 Norbert Warmuth
-	       1998 Pavel Machek
-	       2004 Roland Illig <roland.illig@gmx.de>
-	       2005 Roland Illig <roland.illig@gmx.de>
-	       2009 Slava Zanko <slavazanko@google.com>
-	       2009 Andrew Borodin <aborodin@vmail.ru>
-	       2009 Ilia Maslakov <il.smind@gmail.com>
-	       2010 Andrew Borodin <aborodin@vmail.ru>
+   1994, 1995 Janne Kukonlehto
+   1995 Jakub Jelinek
+   1996 Joseph M. Hinkle
+   1997 Norbert Warmuth
+   1998 Pavel Machek
+   2004 Roland Illig <roland.illig@gmx.de>
+   2005 Roland Illig <roland.illig@gmx.de>
+   2009 Slava Zanko <slavazanko@google.com>
+   2009 Andrew Borodin <aborodin@vmail.ru>
+   2009 Ilia Maslakov <il.smind@gmail.com>
+   2010 Andrew Borodin <aborodin@vmail.ru>
 
    This file is part of the Midnight Commander.
 
@@ -45,7 +45,7 @@
 #include "lib/global.h"
 #include "src/main.h"
 #include "src/charsets.h"
-#include "mcviewer.h"		/* mcview_show_eof */
+#include "mcviewer.h"           /* mcview_show_eof */
 
 #include "internal.h"
 
@@ -84,29 +84,33 @@ mcview_display_text (mcview_t * view)
     while ((curr != NULL) && (curr->offset < from))
         curr = curr->next;
 
-    while (TRUE) {
+    while (TRUE)
+    {
         tty_setcolor (NORMAL_COLOR);
 
         if (row >= height)
             break;
 
 #ifdef HAVE_CHARSET
-        if (view->utf8) {
+        if (view->utf8)
+        {
             gboolean read_res = TRUE;
 
             c = mcview_get_utf (view, from, &cw, &read_res);
             if (!read_res)
                 break;
-        } else
+        }
+        else
 #endif
-            if (!mcview_get_byte (view, from, &c))
-                break;
+        if (!mcview_get_byte (view, from, &c))
+            break;
 
         from++;
         if (cw > 1)
             from += cw - 1;
 
-        if (c != '\n' && prev_ch == '\r') {
+        if (c != '\n' && prev_ch == '\r')
+        {
             if (++row >= height)
                 break;
 
@@ -118,23 +122,27 @@ mcview_display_text (mcview_t * view)
         if (c == '\r')
             continue;
 
-        if (c == '\n') {
+        if (c == '\n')
+        {
             col = 0;
             row++;
             continue;
         }
 
-        if (col >= width && view->text_wrap_mode) {
+        if (col >= width && view->text_wrap_mode)
+        {
             col = 0;
             if (++row >= height)
                 break;
         }
 
-        if (c == '\t') {
+        if (c == '\t')
+        {
             off_t line, column;
             mcview_offset_to_coord (view, &line, &column, from);
             col += (option_tab_spacing - col % option_tab_spacing);
-            if (view->text_wrap_mode && col >= width && width != 0) {
+            if (view->text_wrap_mode && col >= width && width != 0)
+            {
                 row += col / width;
                 col %= width;
             }
@@ -144,15 +152,18 @@ mcview_display_text (mcview_t * view)
         if (view->search_start <= from && from < view->search_end)
             tty_setcolor (SELECTED_COLOR);
 
-        if ((col >= view->dpy_text_column) && (col - view->dpy_text_column < width)) {
+        if ((col >= view->dpy_text_column) && (col - view->dpy_text_column < width))
+        {
             widget_move (view, top + row, left + (col - view->dpy_text_column));
 #ifdef HAVE_CHARSET
-            if (utf8_display) {
+            if (utf8_display)
+            {
                 if (!view->utf8)
                     c = convert_from_8bit_to_utf_c ((unsigned char) c, view->converter);
                 if (!g_unichar_isprint (c))
                     c = '.';
-            } else if (view->utf8)
+            }
+            else if (view->utf8)
                 c = convert_from_utf_to_current_c (c, view->converter);
             else
 #endif
@@ -169,7 +180,8 @@ mcview_display_text (mcview_t * view)
         col++;
 
 #ifdef HAVE_CHARSET
-        if (view->utf8) {
+        if (view->utf8)
+        {
             if (g_unichar_iswide (c))
                 col++;
             else if (g_unichar_iszerowidth (c))
