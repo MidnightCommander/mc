@@ -1,12 +1,12 @@
 # mc Greek PO file
 # Copyright (C) 1999 Free Software Foundation, Inc.
 # Spiros Papadimitriou <spapadim+@cs.cmu.edu>, 1999.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.38\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-09 12:08+0200\n"
+"POT-Creation-Date: 2010-02-26 12:26+0200\n"
 "PO-Revision-Date: 2010-02-23 16:49+0200\n"
 "Last-Translator: Alex-P. Natsios <root@drakevr.gr>\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
@@ -431,7 +431,9 @@ msgid "fish: Waiting for initial line..."
 msgstr ""
 
 msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr "Με συγχωρείτε, αλλά προς το παρόν συνδέσεις με χρήση κωδικού δεν υποστηρίζονται."
+msgstr ""
+"Με συγχωρείτε, αλλά προς το παρόν συνδέσεις με χρήση κωδικού δεν "
+"υποστηρίζονται."
 
 msgid " fish: Password required for "
 msgstr " fish: Απαιτείται κωδικός για το "
@@ -650,9 +652,10 @@ msgid ""
 "%s\n"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 " reconnect to %s failed\n"
+" "
 msgstr "ανεπιτυχής επανασύνδεση με τον εξυπηρέτη: %s \n"
 
 msgid " Authentication failed "
@@ -903,7 +906,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -2119,7 +2122,10 @@ msgid " %s%s file error"
 msgstr ""
 
 #, c-format
-msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
+msgid ""
+"The format of the %smc.ext file has changed with version 3.0.  It seems that "
+"the installation failed.  Please fetch a fresh copy from the Midnight "
+"Commander package."
 msgstr ""
 
 #, c-format
@@ -2127,7 +2133,10 @@ msgid " ~/%s file error "
 msgstr ""
 
 #, c-format
-msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
+msgid ""
+"The format of the ~/%s file has changed with version 3.0.  You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
 
 msgid "DialogTitle|Copy"
@@ -2719,7 +2728,8 @@ msgid " Hotlist Load "
 msgstr ""
 
 #, c-format
-msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr ""
 
 #, c-format
@@ -3633,16 +3643,22 @@ msgstr ""
 
 #~ msgid "Extension:"
 #~ msgstr "Επέκταση:"
+
 #~ msgid "&New              C-n"
 #~ msgstr "&Νέο                    C-n"
+
 #~ msgid "&Save              F2"
 #~ msgstr "Απο&θήκευση             F2"
+
 #~ msgid "A&bout...            "
 #~ msgstr "Πε&ρί...                   "
+
 #~ msgid "&Quit             F10"
 #~ msgstr "&Τέλος                  F10"
+
 #~ msgid "&New            C-x k"
 #~ msgstr "&Νέο                  C-x k"
+
 #~ msgid "Copy to &file...     "
 #~ msgstr "αντιγραφή σε αρ&χείο       "
 
@@ -3701,30 +3717,39 @@ msgstr ""
 #, fuzzy
 #~ msgid "Save setu&p"
 #~ msgstr " Αποθήκευση ως "
+
 #~ msgid " Edit "
 #~ msgstr " Επεξεργασία "
+
 #~ msgid " Sear/Repl "
 #~ msgstr " Αναζήτηση/Αντικατάσταση"
+
 #~ msgid "Key emulation"
 #~ msgstr "Εξομοίοση πληκτρολογίου"
+
 #~ msgid "Save"
 #~ msgstr "Αποθήκευση"
+
 #~ msgid "Delete"
 #~ msgstr "Διαγραφή"
 
 #, fuzzy
 #~ msgid "Extension"
 #~ msgstr "Επέκταση:"
+
 #~ msgid "Size"
 #~ msgstr "Μέγεθος"
+
 #~ msgid " Emacs key: "
 #~ msgstr " Πλήκτρο Emacs: "
 
 #, fuzzy
 #~ msgid "Usage:"
 #~ msgstr "Χρήστης"
+
 #~ msgid "replace &All"
 #~ msgstr "αντικατάσταση ό&λων"
+
 #~ msgid "O&ne"
 #~ msgstr "έ&Να"
 
@@ -3735,12 +3760,15 @@ msgstr ""
 #, fuzzy
 #~ msgid "Invalid hex search expression"
 #~ msgstr " Κανονική έκφραση "
+
 #~ msgid "%s bytes in %d files"
 #~ msgstr "%s byte σε %d αρχεία"
+
 #~ msgid " Cannot open file for reading: "
 #~ msgstr " Άνοιγμα αρχείου προς ανάγνωση ανεπιτυχής: "
+
 #~ msgid " Not an ordinary file: "
 #~ msgstr " Μη κανονικό αρχείο: "
+
 #~ msgid "Col %d"
 #~ msgstr "Στήλη %d"
-
