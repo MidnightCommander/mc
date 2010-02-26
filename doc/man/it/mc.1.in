@@ -2866,9 +2866,9 @@ Il formato della definizione dei colori è:
 .PP
 I colori sono opzionali e le parolechiave sono: normal, selected, marked,
 markselect, errors, input, reverse, gauge. I colori dei menu sono: menu,
-menusel, menuhot, menuhotsel. I colori delle finestre di dialogo sono:
-dnormal, dfocus, dhotnormal, dhotfocus. I colori dell'aiuto sono:
-helpnormal, helpitalic, helpbold, helplink, helpslink.
+menusel, menuhot, menuhotsel, menuinactive. I colori delle finestre di
+dialogo sono: dnormal, dfocus, dhotnormal, dhotfocus. I colori dell'aiuto
+sono: helpnormal, helpitalic, helpbold, helplink, helpslink.
 Il colore del visualizzatore è: viewunderline.
 Colori speciali di evidenziazione: executable, directory, link, device, 
 special, core.
@@ -2895,7 +2895,7 @@ viene usato per il colore evidenziato nel componente correntemente
 selezionato.
 .PP
 I menu usano lo stesso schema ma usano invece i selettori menu, menusel, 
-menuhot e menuhotsel.
+menuhot, menuhotsel e menuinactive.
 .PP
 L'aiuto usa i seguenti colori:
 .I helpnormal

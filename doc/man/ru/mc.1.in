@@ -3513,8 +3513,8 @@ xterm=menu=magenta:marked=,magenta:markselect=,red
 Цвета не являются обязательными, а в качестве ключевых слов (keywords)
 могут использоваться: для задания цветовой палитры в панелях: normal,
 selected, marked, markselect, errors, input, reverse, gauge; Цвета
-пунктов меню:  menu, menusel, menuhot, menuhotsel; Цвета в окне диалога:
-dnormal, dfocus, dhotnormal, dhotfocus; Цвета в окне подсказки:
+пунктов меню:  menu, menusel, menuhot, menuhotsel, menuinactive; Цвета
+в окне диалога: dnormal, dfocus, dhotnormal, dhotfocus; Цвета в окне подсказки:
 helpnormal, helpitalic, helpbold, helplink, helpslink; в окне программы
 просмотра:  viewunderline; специальные подсветки: executable, directory,
 link, device, special, core; в окне редактора: editnormal, editbold,
@@ -3546,7 +3546,7 @@ editmarked.
 компонентах окна.
 .PP
 В меню используется та же самая схема, только в качестве названий
-элементов используются menu, menusel, menuhot и menuhotsel.
+элементов используются menu, menusel, menuhot, menuhotsel и menuinactive.
 .PP
 Окно подсказки использует следующие цвета:
 .I helpnormal
@@ -3744,6 +3744,9 @@ base_color=normal=white,default:marked=magenta,default
 .TP
 .I menuhotsel
 Цвет хоткеев, находящихся в фокусе
+.TP
+.I menuinactive
+Цвет неактивного меню
 
 .PP
 Секция

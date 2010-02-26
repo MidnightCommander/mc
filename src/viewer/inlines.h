@@ -70,7 +70,7 @@ mcview_may_still_grow (mcview_t * view)
 static inline gboolean
 mcview_already_loaded (off_t offset, off_t idx, size_t size)
 {
-    return (offset <= idx && idx - offset < size);
+    return (offset <= idx && idx - offset < (off_t) size);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -81,7 +81,8 @@ mcview_get_byte_file (mcview_t * view, off_t byte_index, int *retval)
     assert (view->datasource == DS_FILE);
 
     mcview_file_load_data (view, byte_index);
-    if (mcview_already_loaded (view->ds_file_offset, byte_index, view->ds_file_datalen)) {
+    if (mcview_already_loaded (view->ds_file_offset, byte_index, view->ds_file_datalen))
+    {
         if (retval)
             *retval = view->ds_file_data[byte_index - view->ds_file_offset];
         return TRUE;
@@ -96,7 +97,8 @@ mcview_get_byte_file (mcview_t * view, off_t byte_index, int *retval)
 static inline gboolean
 mcview_get_byte (mcview_t * view, off_t offset, int *retval)
 {
-    switch (view->datasource) {
+    switch (view->datasource)
+    {
     case DS_STDIO_PIPE:
     case DS_VFS_PIPE:
         return mcview_get_byte_growing_buffer (view, offset, retval);
@@ -116,7 +118,8 @@ mcview_get_byte (mcview_t * view, off_t offset, int *retval)
 static inline gboolean
 mcview_get_byte_indexed (mcview_t * view, off_t base, off_t ofs, int *retval)
 {
-    if (base <= OFFSETTYPE_MAX - ofs) {
+    if (base <= OFFSETTYPE_MAX - ofs)
+    {
         return mcview_get_byte (view, base + ofs, retval);
     }
     if (retval)
@@ -146,13 +149,13 @@ mcview_is_nroff_sequence (mcview_t * view, off_t offset)
 
     /* The following commands are ordered to speed up the calculation. */
 
-    if (! mcview_get_byte_indexed (view, offset, 1, &c1) || c1 != '\b')
+    if (!mcview_get_byte_indexed (view, offset, 1, &c1) || c1 != '\b')
         return FALSE;
 
-    if (! mcview_get_byte_indexed (view, offset, 0, &c0) || !g_ascii_isprint (c0))
+    if (!mcview_get_byte_indexed (view, offset, 0, &c0) || !g_ascii_isprint (c0))
         return FALSE;
 
-    if (! mcview_get_byte_indexed (view, offset, 2, &c2) || !g_ascii_isprint (c2))
+    if (!mcview_get_byte_indexed (view, offset, 2, &c2) || !g_ascii_isprint (c2))
         return FALSE;
 
     return (c0 == c2 || c0 == '_' || (c0 == '+' && c2 == 'o'));

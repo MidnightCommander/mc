@@ -6,16 +6,16 @@
    2004, 2005, 2006, 2007, 2009 Free Software Foundation, Inc.
 
    Written by: 1994, 1995, 1998 Miguel de Icaza
-	       1994, 1995 Janne Kukonlehto
-	       1995 Jakub Jelinek
-	       1996 Joseph M. Hinkle
-	       1997 Norbert Warmuth
-	       1998 Pavel Machek
-	       2004 Roland Illig <roland.illig@gmx.de>
-	       2005 Roland Illig <roland.illig@gmx.de>
-	       2009 Slava Zanko <slavazanko@google.com>
-	       2009 Andrew Borodin <aborodin@vmail.ru>
-	       2009 Ilia Maslakov <il.smind@gmail.com>
+   1994, 1995 Janne Kukonlehto
+   1995 Jakub Jelinek
+   1996 Joseph M. Hinkle
+   1997 Norbert Warmuth
+   1998 Pavel Machek
+   2004 Roland Illig <roland.illig@gmx.de>
+   2005 Roland Illig <roland.illig@gmx.de>
+   2009 Slava Zanko <slavazanko@google.com>
+   2009 Andrew Borodin <aborodin@vmail.ru>
+   2009 Ilia Maslakov <il.smind@gmail.com>
 
    This file is part of the Midnight Commander.
 
@@ -78,9 +78,11 @@ mcview_find (mcview_t * view, gsize search_start, gsize * len)
 
     view->search_numNeedSkipChar = 0;
 
-    if (mcview_search_options.backwards) {
+    if (mcview_search_options.backwards)
+    {
         search_end = mcview_get_filesize (view);
-        while ((int) search_start >= 0) {
+        while ((int) search_start >= 0)
+        {
             view->search_nroff_seq->index = search_start;
             mcview_nroff_seq_info (view->search_nroff_seq);
 
@@ -89,7 +91,7 @@ mcview_find (mcview_t * view, gsize search_start, gsize * len)
                 search_end = search_start + view->search->original_len;
 
             if (mc_search_run (view->search, (void *) view, search_start, search_end, len)
-                && view->search->normal_offset == search_start)
+                && view->search->normal_offset == (off_t) search_start)
                 return TRUE;
 
             search_start--;
@@ -107,35 +109,36 @@ mcview_find (mcview_t * view, gsize search_start, gsize * len)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-mcview_search_show_result(mcview_t * view, Dlg_head **d, size_t match_len)
+mcview_search_show_result (mcview_t * view, Dlg_head ** d, size_t match_len)
 {
 
-        view->search_start = view->search->normal_offset +
-                mcview__get_nroff_real_len (view,
-                                            view->search->start_buffer,
-                                            view->search->normal_offset -
-                                            view->search->start_buffer);
+    view->search_start = view->search->normal_offset +
+        mcview__get_nroff_real_len (view,
+                                    view->search->start_buffer,
+                                    view->search->normal_offset - view->search->start_buffer);
 
-        if (!view->hex_mode)
-            view->search_start++;
+    if (!view->hex_mode)
+        view->search_start++;
 
-        view->search_end = view->search_start + match_len +
-            mcview__get_nroff_real_len (view, view->search_start - 1, match_len);
+    view->search_end = view->search_start + match_len +
+        mcview__get_nroff_real_len (view, view->search_start - 1, match_len);
 
-        if (view->hex_mode) {
-            view->hex_cursor = view->search_start;
-            view->hexedit_lownibble = FALSE;
-            view->dpy_start = view->search_start - view->search_start % view->bytes_per_line;
-            view->dpy_end = view->search_end - view->search_end % view->bytes_per_line;
-        }
+    if (view->hex_mode)
+    {
+        view->hex_cursor = view->search_start;
+        view->hexedit_lownibble = FALSE;
+        view->dpy_start = view->search_start - view->search_start % view->bytes_per_line;
+        view->dpy_end = view->search_end - view->search_end % view->bytes_per_line;
+    }
 
-        if (verbose) {
-            dlg_run_done (*d);
-            destroy_dlg (*d);
-            *d = create_message (D_NORMAL, _("Search"), _("Seeking to search result"));
-            tty_refresh ();
-        }
-        mcview_moveto_match (view);
+    if (verbose)
+    {
+        dlg_run_done (*d);
+        destroy_dlg (*d);
+        *d = create_message (D_NORMAL, _("Search"), _("Seeking to search result"));
+        tty_refresh ();
+    }
+    mcview_moveto_match (view);
 
 }
 
@@ -152,14 +155,16 @@ mcview_search_cmd_callback (const void *user_data, gsize char_offset)
     mcview_t *view = (mcview_t *) user_data;
 
     /*    view_read_continue (view, &view->search_onechar_info); *//* AB:FIXME */
-    if (!view->text_nroff_mode) {
-        if (! mcview_get_byte (view, char_offset, &lc_byte))
+    if (!view->text_nroff_mode)
+    {
+        if (!mcview_get_byte (view, char_offset, &lc_byte))
             return MC_SEARCH_CB_INVALID;
 
         return lc_byte;
     }
 
-    if (view->search_numNeedSkipChar) {
+    if (view->search_numNeedSkipChar)
+    {
         view->search_numNeedSkipChar--;
         return MC_SEARCH_CB_SKIP;
     }
@@ -184,9 +189,11 @@ mcview_search_update_cmd_callback (const void *user_data, gsize char_offset)
 {
     mcview_t *view = (mcview_t *) user_data;
 
-    if (char_offset >= view->update_activate) {
+    if (char_offset >= (gsize) view->update_activate)
+    {
         view->update_activate += view->update_steps;
-        if (verbose) {
+        if (verbose)
+        {
             mcview_percent (view, char_offset);
             tty_refresh ();
         }
@@ -212,18 +219,22 @@ mcview_do_search (mcview_t * view)
 
     size_t match_len;
 
-    if (verbose) {
+    if (verbose)
+    {
         d = create_message (D_NORMAL, _("Search"), _("Searching %s"), view->last_search_string);
         tty_refresh ();
     }
 
     /*for avoid infinite search loop we need to increase or decrease start offset of search */
 
-    if (view->search_start) {
+    if (view->search_start)
+    {
         search_start = (mcview_search_options.backwards) ? -2 : 2;
         search_start = view->search_start + search_start +
             mcview__get_nroff_real_len (view, view->search_start, 2) * search_start;
-    } else {
+    }
+    else
+    {
         search_start = view->search_start;
     }
 
@@ -236,19 +247,22 @@ mcview_do_search (mcview_t * view)
 
     tty_enable_interrupt_key ();
 
-    do {
+    do
+    {
         if (view->growbuf_in_use)
             growbufsize = mcview_growbuf_filesize (view);
         else
             growbufsize = view->search->original_len;
 
-        if (! mcview_find (view, search_start, &match_len)) {
+        if (!mcview_find (view, search_start, &match_len))
+        {
 
             if (view->search->error_str == NULL)
                 break;
 
             search_start = growbufsize - view->search->original_len;
-            if ( search_start <= 0 ) {
+            if (search_start <= 0)
+            {
                 search_start = 0;
                 break;
             }
@@ -256,32 +270,40 @@ mcview_do_search (mcview_t * view)
             continue;
         }
 
-        mcview_search_show_result(view, &d, match_len);
+        mcview_search_show_result (view, &d, match_len);
         need_search_again = FALSE;
         isFound = TRUE;
         break;
-    } while (mcview_may_still_grow (view));
+    }
+    while (mcview_may_still_grow (view));
 
-    if (!isFound && need_search_again && !mcview_search_options.backwards) {
+    if (!isFound && need_search_again && !mcview_search_options.backwards)
+    {
         int result;
         mcview_update (view);
 
         result =
-            query_dialog (_("Search done"), _("Continue from begining?"), D_NORMAL, 2, _("&Yes"), _("&No"));
+            query_dialog (_("Search done"), _("Continue from begining?"), D_NORMAL, 2, _("&Yes"),
+                          _("&No"));
 
-        if (result != 0) {
-            isFound=TRUE;
-        } else {
+        if (result != 0)
+        {
+            isFound = TRUE;
+        }
+        else
+        {
             search_start = 0;
         }
     }
 
-    if (!isFound && view->search->error_str != NULL && mcview_find (view, search_start, &match_len)) {
-        mcview_search_show_result(view, &d, match_len);
+    if (!isFound && view->search->error_str != NULL && mcview_find (view, search_start, &match_len))
+    {
+        mcview_search_show_result (view, &d, match_len);
         isFound = TRUE;
     }
 
-    if (!isFound) {
+    if (!isFound)
+    {
         if (view->search->error_str)
             message (D_NORMAL, _("Search"), "%s", view->search->error_str);
     }
@@ -290,7 +312,8 @@ mcview_do_search (mcview_t * view)
     mcview_update (view);
 
     tty_disable_interrupt_key ();
-    if (verbose) {
+    if (verbose)
+    {
         dlg_run_done (d);
         destroy_dlg (d);
     }

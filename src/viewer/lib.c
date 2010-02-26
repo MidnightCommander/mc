@@ -6,16 +6,16 @@
    2004, 2005, 2006, 2007, 2009 Free Software Foundation, Inc.
 
    Written by: 1994, 1995, 1998 Miguel de Icaza
-	       1994, 1995 Janne Kukonlehto
-	       1995 Jakub Jelinek
-	       1996 Joseph M. Hinkle
-	       1997 Norbert Warmuth
-	       1998 Pavel Machek
-	       2004 Roland Illig <roland.illig@gmx.de>
-	       2005 Roland Illig <roland.illig@gmx.de>
-	       2009 Slava Zanko <slavazanko@google.com>
-	       2009 Andrew Borodin <aborodin@vmail.ru>
-	       2009 Ilia Maslakov <il.smind@gmail.com>
+   1994, 1995 Janne Kukonlehto
+   1995 Jakub Jelinek
+   1996 Joseph M. Hinkle
+   1997 Norbert Warmuth
+   1998 Pavel Machek
+   2004 Roland Illig <roland.illig@gmx.de>
+   2005 Roland Illig <roland.illig@gmx.de>
+   2009 Slava Zanko <slavazanko@google.com>
+   2009 Andrew Borodin <aborodin@vmail.ru>
+   2009 Ilia Maslakov <il.smind@gmail.com>
 
    This file is part of the Midnight Commander.
 
@@ -115,11 +115,14 @@ mcview_toggle_hex_mode (mcview_t * view)
 {
     view->hex_mode = !view->hex_mode;
 
-    if (view->hex_mode) {
+    if (view->hex_mode)
+    {
         view->hex_cursor = view->dpy_start;
         view->dpy_start = mcview_offset_rounddown (view->dpy_start, view->bytes_per_line);
         view->widget.options |= W_WANT_CURSOR;
-    } else {
+    }
+    else
+    {
         view->dpy_start = view->hex_cursor;
         mcview_moveto_bol (view);
         view->widget.options &= ~W_WANT_CURSOR;
@@ -143,7 +146,8 @@ mcview_ok_to_quit (mcview_t * view)
                       _(" File was modified, Save with exit? "), D_NORMAL, 3,
                       _("&Cancel quit"), _("&Yes"), _("&No"));
 
-    switch (r) {
+    switch (r)
+    {
     case 1:
         return mcview_hexedit_save_changes (view);
     case 2:
@@ -160,7 +164,8 @@ void
 mcview_done (mcview_t * view)
 {
     /* Save current file position */
-    if (mcview_remember_file_position && view->filename != NULL) {
+    if (mcview_remember_file_position && view->filename != NULL)
+    {
         char *canon_fname;
         canon_fname = vfs_canon (view->filename);
         save_file_position (canon_fname, -1, 0, view->dpy_start);
@@ -185,7 +190,8 @@ mcview_done (mcview_t * view)
 
     coord_cache_free (view->coord_cache), view->coord_cache = NULL;
 
-    if (!(view->converter == INVALID_CONV || view->converter != str_cnv_from_term)) {
+    if (!(view->converter == INVALID_CONV || view->converter != str_cnv_from_term))
+    {
         str_close_conv (view->converter);
         view->converter = str_cnv_from_term;
     }
@@ -203,10 +209,12 @@ mcview_set_codeset (mcview_t * view)
 
     view->utf8 = TRUE;
     cp_id = get_codepage_id (source_codepage >= 0 ? source_codepage : display_codepage);
-    if (cp_id != NULL) {
+    if (cp_id != NULL)
+    {
         GIConv conv;
         conv = str_crt_conv_from (cp_id);
-        if (conv != INVALID_CONV) {
+        if (conv != INVALID_CONV)
+        {
             if (view->converter != str_cnv_from_term)
                 str_close_conv (view->converter);
             view->converter = conv;
@@ -224,7 +232,8 @@ void
 mcview_select_encoding (mcview_t * view)
 {
 #ifdef HAVE_CHARSET
-    if (do_select_codepage ()) {
+    if (do_select_codepage ())
+    {
         mcview_set_codeset (view);
     }
 #else
@@ -238,9 +247,12 @@ void
 mcview_show_error (mcview_t * view, const char *msg)
 {
     mcview_close_datasource (view);
-    if (mcview_is_in_panel (view)) {
+    if (mcview_is_in_panel (view))
+    {
         mcview_set_datasource_string (view, msg);
-    } else {
+    }
+    else
+    {
         message (D_ERROR, MSG_ERROR, "%s", msg);
     }
 }
@@ -261,13 +273,15 @@ mcview_bol (mcview_t * view, off_t current)
         return filesize;
     if (!mcview_get_byte (view, current, &c))
         return current;
-    if (c == '\n') {
+    if (c == '\n')
+    {
         if (!mcview_get_byte (view, current - 1, &c))
             return current;
         if (c == '\r')
             current--;
     }
-    while (current > 0) {
+    while (current > 0)
+    {
         if (!mcview_get_byte (view, current - 1, &c))
             break;
         if (c == '\r' || c == '\n')
@@ -289,13 +303,17 @@ mcview_eol (mcview_t * view, off_t current)
         return 0;
     if (current >= filesize)
         return filesize;
-    while (current < filesize) {
+    while (current < filesize)
+    {
         if (!mcview_get_byte (view, current, &c))
             break;
-        if (c == '\n') {
+        if (c == '\n')
+        {
             current++;
             break;
-        } else if (prev_ch == '\r') {
+        }
+        else if (prev_ch == '\r')
+        {
             break;
         }
         current++;

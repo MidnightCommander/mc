@@ -6,16 +6,16 @@
    2004, 2005, 2006, 2007, 2009 Free Software Foundation, Inc.
 
    Written by: 1994, 1995, 1998 Miguel de Icaza
-	       1994, 1995 Janne Kukonlehto
-	       1995 Jakub Jelinek
-	       1996 Joseph M. Hinkle
-	       1997 Norbert Warmuth
-	       1998 Pavel Machek
-	       2004 Roland Illig <roland.illig@gmx.de>
-	       2005 Roland Illig <roland.illig@gmx.de>
-	       2009 Slava Zanko <slavazanko@google.com>
-	       2009 Andrew Borodin <aborodin@vmail.ru>
-	       2009 Ilia Maslakov <il.smind@gmail.com>
+   1994, 1995 Janne Kukonlehto
+   1995 Jakub Jelinek
+   1996 Joseph M. Hinkle
+   1997 Norbert Warmuth
+   1998 Pavel Machek
+   2004 Roland Illig <roland.illig@gmx.de>
+   2005 Roland Illig <roland.illig@gmx.de>
+   2009 Slava Zanko <slavazanko@google.com>
+   2009 Andrew Borodin <aborodin@vmail.ru>
+   2009 Ilia Maslakov <il.smind@gmail.com>
 
    This file is part of the Midnight Commander.
 
@@ -47,11 +47,11 @@
    neighbor entries. The algorithm used for determining the line/column
    for a specific offset needs to be kept synchronized with the one used
    in display().
-*/
+ */
 
 #include <config.h>
 
-#include <string.h>		/* for g_memmove() */
+#include <string.h>             /* for g_memmove() */
 
 #include "lib/global.h"
 #include "lib/tty/tty.h"
@@ -66,8 +66,7 @@
 
 /*** file scope type declarations ****************************************************************/
 
-typedef gboolean (*cmp_func_t) (const coord_cache_entry_t *a,
-                                const coord_cache_entry_t *b);
+typedef gboolean (*cmp_func_t) (const coord_cache_entry_t * a, const coord_cache_entry_t * b);
 
 /*** file scope variables ************************************************************************/
 
@@ -77,39 +76,36 @@ typedef gboolean (*cmp_func_t) (const coord_cache_entry_t *a,
 
 /* insert new cache entry into the cache */
 static void
-mcview_ccache_add_entry (coord_cache_t *cache,
-			    size_t pos, const coord_cache_entry_t *entry)
+mcview_ccache_add_entry (coord_cache_t * cache, size_t pos, const coord_cache_entry_t * entry)
 {
     if ((cache == NULL) || (entry == NULL))
-	return;
+        return;
 
     pos = min (pos, cache->size);
 
     /* increase cache capacity if needed */
-    if (cache->size == cache->capacity) {
-	cache->capacity += CACHE_CAPACITY_DELTA;
-	cache->cache = g_realloc (cache->cache,
-				    cache->capacity * sizeof (coord_cache_entry_t *));
+    if (cache->size == cache->capacity)
+    {
+        cache->capacity += CACHE_CAPACITY_DELTA;
+        cache->cache = g_realloc (cache->cache, cache->capacity * sizeof (coord_cache_entry_t *));
     }
 
     /* insert new entry */
     if (pos != cache->size)
-	g_memmove (cache->cache[pos + 1], cache->cache[pos],
-		    (cache->size - pos) * sizeof (coord_cache_entry_t *));
+        g_memmove (cache->cache[pos + 1], cache->cache[pos],
+                   (cache->size - pos) * sizeof (coord_cache_entry_t *));
     cache->cache[pos] = g_memdup (entry, sizeof (coord_cache_entry_t));
     cache->size++;
 }
 
 static gboolean
-mcview_coord_cache_entry_less_offset (const coord_cache_entry_t *a,
-                                        const coord_cache_entry_t *b)
+mcview_coord_cache_entry_less_offset (const coord_cache_entry_t * a, const coord_cache_entry_t * b)
 {
     return (a->cc_offset < b->cc_offset);
 }
 
 static gboolean
-mcview_coord_cache_entry_less_plain (const coord_cache_entry_t *a,
-                                        const coord_cache_entry_t *b)
+mcview_coord_cache_entry_less_plain (const coord_cache_entry_t * a, const coord_cache_entry_t * b)
 {
     if (a->cc_line < b->cc_line)
         return TRUE;
@@ -122,8 +118,7 @@ mcview_coord_cache_entry_less_plain (const coord_cache_entry_t *a,
 
 
 static gboolean
-mcview_coord_cache_entry_less_nroff (const coord_cache_entry_t *a,
-                                        const coord_cache_entry_t *b)
+mcview_coord_cache_entry_less_nroff (const coord_cache_entry_t * a, const coord_cache_entry_t * b)
 {
     if (a->cc_line < b->cc_line)
         return TRUE;
@@ -138,21 +133,24 @@ mcview_coord_cache_entry_less_nroff (const coord_cache_entry_t *a,
 /* Find and return the index of the last cache entry that is
  * smaller than ''coord'', according to the criterion ''sort_by''. */
 static inline size_t
-mcview_ccache_find (mcview_t *view, const coord_cache_entry_t *coord,
-                    cmp_func_t cmp_func)
+mcview_ccache_find (mcview_t * view, const coord_cache_entry_t * coord, cmp_func_t cmp_func)
 {
     size_t base = 0;
     size_t limit = view->coord_cache->size;
 
     assert (limit != 0);
 
-    while (limit > 1) {
+    while (limit > 1)
+    {
         size_t i;
 
         i = base + limit / 2;
-        if (cmp_func (coord, view->coord_cache->cache[i])) {
+        if (cmp_func (coord, view->coord_cache->cache[i]))
+        {
             /* continue the search in the lower half of the cache */
-        } else {
+        }
+        else
+        {
             /* continue the search in the upper half of the cache */
             base = i;
         }
@@ -183,16 +181,17 @@ coord_cache_new (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-coord_cache_free (coord_cache_t *cache)
+coord_cache_free (coord_cache_t * cache)
 {
-    if (cache != NULL) {
-	size_t i;
+    if (cache != NULL)
+    {
+        size_t i;
 
-	for (i = 0; i < cache->size; i++)
-	    g_free (cache->cache[i]);
+        for (i = 0; i < cache->size; i++)
+            g_free (cache->cache[i]);
 
-	g_free (cache->cache);
-	g_free (cache);
+        g_free (cache->cache);
+        g_free (cache);
     }
 }
 
@@ -218,7 +217,8 @@ mcview_ccache_dump (mcview_t * view)
     (void) setvbuf (f, NULL, _IONBF, 0);
 
     /* cache entries */
-    for (i = 0; i < view->coord_cache->size; i++) {
+    for (i = 0; i < view->coord_cache->size; i++)
+    {
         (void) fprintf (f,
                         "entry %8u  "
                         "offset %8" OFFSETTYPE_PRId "  "
@@ -231,7 +231,8 @@ mcview_ccache_dump (mcview_t * view)
     (void) fprintf (f, "\n");
 
     /* offset -> line/column translation */
-    for (offset = 0; offset < filesize; offset++) {
+    for (offset = 0; offset < filesize; offset++)
+    {
         mcview_offset_to_coord (view, &line, &column, offset);
         (void) fprintf (f,
                         "offset %8" OFFSETTYPE_PRId "  "
@@ -240,11 +241,13 @@ mcview_ccache_dump (mcview_t * view)
     }
 
     /* line/column -> offset translation */
-    for (line = 0; TRUE; line++) {
+    for (line = 0; TRUE; line++)
+    {
         mcview_coord_to_offset (view, &nextline_offset, line + 1, 0);
         (void) fprintf (f, "nextline_offset %8" OFFSETTYPE_PRId "\n", nextline_offset);
 
-        for (column = 0; TRUE; column++) {
+        for (column = 0; TRUE; column++)
+        {
             mcview_coord_to_offset (view, &offset, line, column);
             if (offset >= nextline_offset)
                 break;
@@ -270,8 +273,7 @@ mcview_ccache_dump (mcview_t * view)
  * matches the existing components of ''coord''.
  */
 void
-mcview_ccache_lookup (mcview_t * view, coord_cache_entry_t *coord,
-                      enum ccache_type lookup_what)
+mcview_ccache_lookup (mcview_t * view, coord_cache_entry_t * coord, enum ccache_type lookup_what)
 {
     size_t i;
     coord_cache_t *cache;
@@ -280,7 +282,8 @@ mcview_ccache_lookup (mcview_t * view, coord_cache_entry_t *coord,
     off_t limit;
     cmp_func_t cmp_func;
 
-    enum {
+    enum
+    {
         NROFF_START,
         NROFF_BACKSPACE,
         NROFF_CONTINUATION
@@ -291,7 +294,8 @@ mcview_ccache_lookup (mcview_t * view, coord_cache_entry_t *coord,
 
     cache = view->coord_cache;
 
-    if (cache->size == 0) {
+    if (cache->size == 0)
+    {
         current.cc_offset = 0;
         current.cc_line = 0;
         current.cc_column = 0;
@@ -324,17 +328,21 @@ mcview_ccache_lookup (mcview_t * view, coord_cache_entry_t *coord,
 
     entry = current;
     nroff_state = NROFF_START;
-    for (; current.cc_offset < limit; current = next) {
+    for (; current.cc_offset < limit; current = next)
+    {
         int c, nextc;
 
-        if (! mcview_get_byte (view, current.cc_offset, &c))
+        if (!mcview_get_byte (view, current.cc_offset, &c))
             break;
 
-        if (!cmp_func (&current, coord)) {
-            if (lookup_what == CCACHE_OFFSET
-                    && view->text_nroff_mode && nroff_state != NROFF_START) {
+        if (!cmp_func (&current, coord))
+        {
+            if (lookup_what == CCACHE_OFFSET && view->text_nroff_mode && nroff_state != NROFF_START)
+            {
                 /* don't break here */
-            } else {
+            }
+            else
+            {
                 break;
             }
         }
@@ -346,43 +354,56 @@ mcview_ccache_lookup (mcview_t * view, coord_cache_entry_t *coord,
         next.cc_nroff_column = current.cc_nroff_column + 1;
 
         /* and override some of them as necessary. */
-        if (c == '\r') {
+        if (c == '\r')
+        {
             mcview_get_byte_indexed (view, current.cc_offset, 1, &nextc);
 
             /* Ignore '\r' if it is followed by '\r' or '\n'. If it is
              * followed by anything else, it is a Mac line ending and
              * produces a line break.
              */
-            if (nextc == '\r' || nextc == '\n') {
+            if (nextc == '\r' || nextc == '\n')
+            {
                 next.cc_column = current.cc_column;
                 next.cc_nroff_column = current.cc_nroff_column;
-            } else {
+            }
+            else
+            {
                 next.cc_line = current.cc_line + 1;
                 next.cc_column = 0;
                 next.cc_nroff_column = 0;
             }
 
-        } else if (nroff_state == NROFF_BACKSPACE) {
+        }
+        else if (nroff_state == NROFF_BACKSPACE)
+        {
             next.cc_nroff_column = current.cc_nroff_column - 1;
 
-        } else if (c == '\t') {
+        }
+        else if (c == '\t')
+        {
             next.cc_column = mcview_offset_rounddown (current.cc_column, 8) + 8;
             next.cc_nroff_column = mcview_offset_rounddown (current.cc_nroff_column, 8) + 8;
 
-        } else if (c == '\n') {
+        }
+        else if (c == '\n')
+        {
             next.cc_line = current.cc_line + 1;
             next.cc_column = 0;
             next.cc_nroff_column = 0;
 
-        } else {
+        }
+        else
+        {
             /* Use all default values from above */
         }
 
-        switch (nroff_state) {
+        switch (nroff_state)
+        {
         case NROFF_START:
         case NROFF_CONTINUATION:
             nroff_state = mcview_is_nroff_sequence (view, current.cc_offset)
-                            ? NROFF_BACKSPACE : NROFF_START;
+                ? NROFF_BACKSPACE : NROFF_START;
             break;
         case NROFF_BACKSPACE:
             nroff_state = NROFF_CONTINUATION;
@@ -397,7 +418,8 @@ mcview_ccache_lookup (mcview_t * view, coord_cache_entry_t *coord,
             entry = next;
     }
 
-    if (i + 1 == cache->size && entry.cc_offset != cache->cache[i]->cc_offset) {
+    if (i + 1 == cache->size && entry.cc_offset != cache->cache[i]->cc_offset)
+    {
         mcview_ccache_add_entry (cache, cache->size, &entry);
 
         if (!tty_got_interrupt ())
@@ -406,9 +428,12 @@ mcview_ccache_lookup (mcview_t * view, coord_cache_entry_t *coord,
 
     tty_disable_interrupt_key ();
 
-    if (lookup_what == CCACHE_OFFSET) {
+    if (lookup_what == CCACHE_OFFSET)
+    {
         coord->cc_offset = current.cc_offset;
-    } else {
+    }
+    else
+    {
         coord->cc_line = current.cc_line;
         coord->cc_column = current.cc_column;
         coord->cc_nroff_column = current.cc_nroff_column;

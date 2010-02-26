@@ -6,16 +6,16 @@
    2004, 2005, 2006, 2007, 2009 Free Software Foundation, Inc.
 
    Written by: 1994, 1995, 1998 Miguel de Icaza
-	       1994, 1995 Janne Kukonlehto
-	       1995 Jakub Jelinek
-	       1996 Joseph M. Hinkle
-	       1997 Norbert Warmuth
-	       1998 Pavel Machek
-	       2004 Roland Illig <roland.illig@gmx.de>
-	       2005 Roland Illig <roland.illig@gmx.de>
-	       2009 Slava Zanko <slavazanko@google.com>
-	       2009 Andrew Borodin <aborodin@vmail.ru>
-	       2009 Ilia Maslakov <il.smind@gmail.com>
+   1994, 1995 Janne Kukonlehto
+   1995 Jakub Jelinek
+   1996 Joseph M. Hinkle
+   1997 Norbert Warmuth
+   1998 Pavel Machek
+   2004 Roland Illig <roland.illig@gmx.de>
+   2005 Roland Illig <roland.illig@gmx.de>
+   2009 Slava Zanko <slavazanko@google.com>
+   2009 Andrew Borodin <aborodin@vmail.ru>
+   2009 Ilia Maslakov <il.smind@gmail.com>
 
    This file is part of the Midnight Commander.
 
@@ -46,8 +46,8 @@
 
 #include "src/main.h"
 #include "src/charsets.h"
-#include "src/main-widgets.h"	/* the_menubar */
-#include "src/menu.h"		/* menubar_visible */
+#include "src/main-widgets.h"   /* the_menubar */
+#include "src/menu.h"           /* menubar_visible */
 #include "src/widget.h"
 
 #include "internal.h"
@@ -88,18 +88,18 @@ char *mcview_show_eof = NULL;
 
 /* Both views */
 static int
-mcview_event (mcview_t *view, Gpm_Event *event, int *result)
+mcview_event (mcview_t * view, Gpm_Event * event, int *result)
 {
     screen_dimen y, x;
 
     *result = MOU_NORMAL;
 
     /* rest of the upper frame, the menu is invisible - call menu */
-    if (mcview_is_in_panel (view) && (event->type & GPM_DOWN)
-	    && event->y == 1 && !menubar_visible) {
-	event->x += view->widget.x;
-	*result = the_menubar->widget.mouse (event, the_menubar);
-	return 0; /* don't draw viewer over menu */
+    if (mcview_is_in_panel (view) && (event->type & GPM_DOWN) && event->y == 1 && !menubar_visible)
+    {
+        event->x += view->widget.x;
+        *result = the_menubar->widget.mouse (event, the_menubar);
+        return 0;               /* don't draw viewer over menu */
     }
 
     /* We are not interested in the release events */
@@ -107,11 +107,13 @@ mcview_event (mcview_t *view, Gpm_Event *event, int *result)
         return 0;
 
     /* Wheel events */
-    if ((event->buttons & GPM_B_UP) && (event->type & GPM_DOWN)) {
+    if ((event->buttons & GPM_B_UP) && (event->type & GPM_DOWN))
+    {
         mcview_move_up (view, 2);
         return 1;
     }
-    if ((event->buttons & GPM_B_DOWN) && (event->type & GPM_DOWN)) {
+    if ((event->buttons & GPM_B_DOWN) && (event->type & GPM_DOWN))
+    {
         mcview_move_down (view, 2);
         return 1;
     }
@@ -120,28 +122,39 @@ mcview_event (mcview_t *view, Gpm_Event *event, int *result)
     y = event->y;
 
     /* Scrolling left and right */
-    if (!view->text_wrap_mode) {
-        if (x < view->data_area.width * 1 / 4) {
+    if (!view->text_wrap_mode)
+    {
+        if (x < view->data_area.width * 1 / 4)
+        {
             mcview_move_left (view, 1);
             goto processed;
-        } else if (x < view->data_area.width * 3 / 4) {
+        }
+        else if (x < view->data_area.width * 3 / 4)
+        {
             /* ignore the click */
-        } else {
+        }
+        else
+        {
             mcview_move_right (view, 1);
             goto processed;
         }
     }
 
     /* Scrolling up and down */
-    if (y < view->data_area.top + view->data_area.height * 1 / 3) {
+    if (y < view->data_area.top + view->data_area.height * 1 / 3)
+    {
         if (mcview_mouse_move_pages)
             mcview_move_up (view, view->data_area.height / 2);
         else
             mcview_move_up (view, 1);
         goto processed;
-    } else if (y < view->data_area.top + view->data_area.height * 2 / 3) {
+    }
+    else if (y < view->data_area.top + view->data_area.height * 2 / 3)
+    {
         /* ignore the click */
-    } else {
+    }
+    else
+    {
         if (mcview_mouse_move_pages)
             mcview_move_down (view, view->data_area.height / 2);
         else
@@ -270,7 +283,7 @@ mcview_viewer (const char *command, const char *file, int *move_dir_p, int start
 
     /* Create dialog and widgets, put them on the dialog */
     view_dlg = create_dlg (0, 0, LINES, COLS, NULL, mcview_dialog_callback,
-                            "[Internal File Viewer]", NULL, DLG_WANT_TAB);
+                           "[Internal File Viewer]", NULL, DLG_WANT_TAB);
 
     lc_mcview = mcview_new (0, 0, LINES - 1, COLS, 0);
     add_widget (view_dlg, lc_mcview);
@@ -278,11 +291,14 @@ mcview_viewer (const char *command, const char *file, int *move_dir_p, int start
     add_widget (view_dlg, buttonbar_new (TRUE));
 
     succeeded = mcview_load (lc_mcview, command, file, start_line);
-    if (succeeded) {
+    if (succeeded)
+    {
         run_dlg (view_dlg);
         if (move_dir_p)
             *move_dir_p = lc_mcview->move_dir;
-    } else {
+    }
+    else
+    {
         if (move_dir_p)
             *move_dir_p = 0;
     }
@@ -319,15 +335,20 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
     for (i = 0; i < 10; i++)
         view->marks[i] = 0;
 
-    if (!mcview_is_in_panel (view)) {
+    if (!mcview_is_in_panel (view))
+    {
         view->dpy_text_column = 0;
     }
 
-    if (command && (view->magic_mode || file == NULL || file[0] == '\0')) {
+    if (command && (view->magic_mode || file == NULL || file[0] == '\0'))
+    {
         retval = mcview_load_command_output (view, command);
-    } else if (file != NULL && file[0] != '\0') {
+    }
+    else if (file != NULL && file[0] != '\0')
+    {
         /* Open the file */
-        if ((fd = mc_open (file, O_RDONLY | O_NONBLOCK)) == -1) {
+        if ((fd = mc_open (file, O_RDONLY | O_NONBLOCK)) == -1)
+        {
             g_snprintf (tmp, sizeof (tmp), _(" Cannot open \"%s\"\n %s "),
                         file, unix_error_string (errno));
             mcview_show_error (view, tmp);
@@ -337,7 +358,8 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
         }
 
         /* Make sure we are working with a regular file */
-        if (mc_fstat (fd, &st) == -1) {
+        if (mc_fstat (fd, &st) == -1)
+        {
             mc_close (fd);
             g_snprintf (tmp, sizeof (tmp), _(" Cannot stat \"%s\"\n %s "),
                         file, unix_error_string (errno));
@@ -347,7 +369,8 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
             goto finish;
         }
 
-        if (!S_ISREG (st.st_mode)) {
+        if (!S_ISREG (st.st_mode))
+        {
             mc_close (fd);
             mcview_show_error (view, _(" Cannot view: not a regular file "));
             g_free (view->filename);
@@ -355,13 +378,17 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
             goto finish;
         }
 
-        if (st.st_size == 0 || mc_lseek (fd, 0, SEEK_SET) == -1) {
+        if (st.st_size == 0 || mc_lseek (fd, 0, SEEK_SET) == -1)
+        {
             /* Must be one of those nice files that grow (/proc) */
             mcview_set_datasource_vfs_pipe (view, fd);
-        } else {
+        }
+        else
+        {
             type = get_compression_type (fd, file);
 
-            if (view->magic_mode && (type != COMPRESSION_NONE)) {
+            if (view->magic_mode && (type != COMPRESSION_NONE))
+            {
                 g_free (view->filename);
                 view->filename = g_strconcat (file, decompress_extension (type), (char *) NULL);
             }
@@ -380,7 +407,8 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
     mcview_compute_areas (view);
     mcview_update_bytes_per_line (view);
 
-    if (mcview_remember_file_position && view->filename != NULL && start_line == 0) {
+    if (mcview_remember_file_position && view->filename != NULL && start_line == 0)
+    {
         long line, col;
         off_t new_offset;
         canon_fname = vfs_canon (view->filename);
@@ -388,7 +416,9 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
         new_offset = min (new_offset, mcview_get_filesize (view));
         view->dpy_start = mcview_bol (view, new_offset);
         g_free (canon_fname);
-    } else if (start_line > 0) {
+    }
+    else if (start_line > 0)
+    {
         mcview_moveto (view, start_line - 1, 0);
     }
 
