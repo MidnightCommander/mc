@@ -85,7 +85,7 @@ tty_color_free_condition_cb (gpointer key, gpointer value, gpointer user_data)
     tty_color_pair_t *mc_color_pair;
     (void) key;
 
-    is_temp_color = user_data == NULL;
+    is_temp_color = user_data != NULL;
     mc_color_pair = (tty_color_pair_t *) value;
     return (mc_color_pair->is_temp == is_temp_color);
 }
