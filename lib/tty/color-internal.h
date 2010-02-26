@@ -19,7 +19,8 @@
 extern gboolean use_colors;
 extern gboolean mc_tty_color_disable;
 
-typedef struct mc_color_pair_struct {
+typedef struct mc_color_pair_struct
+{
     const char *cfg;
     const char *cbg;
     int ifg;
@@ -28,12 +29,14 @@ typedef struct mc_color_pair_struct {
     gboolean is_temp;
 } tty_color_pair_t;
 
+/* *INDENT-OFF* */
 typedef enum {
     SPEC_A_REVERSE		= -100,
     SPEC_A_BOLD			= -101,
     SPEC_A_BOLD_REVERSE		= -102,
     SPEC_A_UNDERLINE		= -103
 } tty_special_color_t;
+/* *INDENT-ON* */
 
 const char *tty_color_get_valid_name (const char *);
 int tty_color_get_index_by_name (const char *);

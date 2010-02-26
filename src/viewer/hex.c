@@ -6,16 +6,16 @@
    2004, 2005, 2006, 2007, 2009 Free Software Foundation, Inc.
 
    Written by: 1994, 1995, 1998 Miguel de Icaza
-	       1994, 1995 Janne Kukonlehto
-	       1995 Jakub Jelinek
-	       1996 Joseph M. Hinkle
-	       1997 Norbert Warmuth
-	       1998 Pavel Machek
-	       2004 Roland Illig <roland.illig@gmx.de>
-	       2005 Roland Illig <roland.illig@gmx.de>
-	       2009 Slava Zanko <slavazanko@google.com>
-	       2009 Andrew Borodin <aborodin@vmail.ru>
-	       2009 Ilia Maslakov <il.smind@gmail.com>
+   1994, 1995 Janne Kukonlehto
+   1995 Jakub Jelinek
+   1996 Joseph M. Hinkle
+   1997 Norbert Warmuth
+   1998 Pavel Machek
+   2004 Roland Illig <roland.illig@gmx.de>
+   2005 Roland Illig <roland.illig@gmx.de>
+   2009 Slava Zanko <slavazanko@google.com>
+   2009 Andrew Borodin <aborodin@vmail.ru>
+   2009 Ilia Maslakov <il.smind@gmail.com>
 
    This file is part of the Midnight Commander.
 
@@ -57,7 +57,8 @@
 
 /*** file scope type declarations ****************************************************************/
 
-typedef enum {
+typedef enum
+{
     MARK_NORMAL,
     MARK_SELECTED,
     MARK_CURSOR,
@@ -104,11 +105,13 @@ mcview_display_hex (mcview_t * view)
 
     /* Find the first displayable changed byte */
     from = view->dpy_start;
-    while (curr && (curr->offset < from)) {
+    while (curr && (curr->offset < from))
+    {
         curr = curr->next;
     }
 
-    for (row = 0; mcview_get_byte (view, from, NULL) == TRUE && row < height; row++) {
+    for (row = 0; mcview_get_byte (view, from, NULL) == TRUE && row < height; row++)
+    {
         col = 0;
 
         /* Print the hex offset */
@@ -116,17 +119,20 @@ mcview_display_hex (mcview_t * view)
                     (long unsigned int) from);
         widget_move (view, top + row, left);
         tty_setcolor (MARKED_COLOR);
-        for (i = 0; col < width && hex_buff[i] != '\0'; i++) {
+        for (i = 0; col < width && hex_buff[i] != '\0'; i++)
+        {
             tty_print_char (hex_buff[i]);
-/*		tty_print_char(hex_buff[i]);*/
+            /*              tty_print_char(hex_buff[i]); */
             col += 1;
         }
         tty_setcolor (NORMAL_COLOR);
 
-        for (bytes = 0; bytes < view->bytes_per_line; bytes++, from++) {
+        for (bytes = 0; bytes < view->bytes_per_line; bytes++, from++)
+        {
 
 #ifdef HAVE_CHARSET
-            if (view->utf8) {
+            if (view->utf8)
+            {
                 int cw = 1;
                 gboolean read_res = TRUE;
                 ch = mcview_get_utf (view, from, &cw, &read_res);
@@ -134,11 +140,12 @@ mcview_display_hex (mcview_t * view)
                     break;
             }
 #endif
-            if (! mcview_get_byte (view, from, &c))
+            if (!mcview_get_byte (view, from, &c))
                 break;
 
             /* Save the cursor position for mcview_place_cursor() */
-            if (from == view->hex_cursor && !view->hexview_in_text) {
+            if (from == view->hex_cursor && !view->hexview_in_text)
+            {
                 view->cursor_row = row;
                 view->cursor_col = col;
             }
@@ -151,7 +158,8 @@ mcview_display_hex (mcview_t * view)
                    from < view->search_end) ? MARK_SELECTED : MARK_NORMAL;
 
             /* Determine the value of the current byte */
-            if (curr != NULL && from == curr->offset) {
+            if (curr != NULL && from == curr->offset)
+            {
                 c = curr->value;
                 curr = curr->next;
             }
@@ -165,30 +173,37 @@ mcview_display_hex (mcview_t * view)
 
             /* Print the hex number */
             widget_move (view, top + row, left + col);
-            if (col < width) {
+            if (col < width)
+            {
                 tty_print_char (hex_char[c / 16]);
                 col += 1;
             }
-            if (col < width) {
+            if (col < width)
+            {
                 tty_print_char (hex_char[c % 16]);
                 col += 1;
             }
 
             /* Print the separator */
             tty_setcolor (NORMAL_COLOR);
-            if (bytes != view->bytes_per_line - 1) {
-                if (col < width) {
+            if (bytes != view->bytes_per_line - 1)
+            {
+                if (col < width)
+                {
                     tty_print_char (' ');
                     col += 1;
                 }
 
                 /* After every four bytes, print a group separator */
-                if (bytes % 4 == 3) {
-                    if (view->data_area.width >= 80 && col < width) {
+                if (bytes % 4 == 3)
+                {
+                    if (view->data_area.width >= 80 && col < width)
+                    {
                         tty_print_one_vline ();
                         col += 1;
                     }
-                    if (col < width) {
+                    if (col < width)
+                    {
                         tty_print_char (' ');
                         col += 1;
                     }
@@ -204,16 +219,23 @@ mcview_display_hex (mcview_t * view)
                           view->hexview_in_text ? VIEW_UNDERLINED_COLOR : MARKED_SELECTED_COLOR);
 
 #ifdef HAVE_CHARSET
-            if (utf8_display) {
-                if (!view->utf8) {
+            if (utf8_display)
+            {
+                if (!view->utf8)
+                {
                     ch = convert_from_8bit_to_utf_c ((unsigned char) ch, view->converter);
                 }
                 if (!g_unichar_isprint (ch))
                     ch = '.';
-            } else {
-                if (view->utf8) {
+            }
+            else
+            {
+                if (view->utf8)
+                {
                     ch = convert_from_utf_to_current_c (ch, view->converter);
-                } else {
+                }
+                else
+                {
 #endif
                     ch = convert_to_display_c (ch);
 #ifdef HAVE_CHARSET
@@ -225,17 +247,22 @@ mcview_display_hex (mcview_t * view)
                 c = '.';
 
             /* Print corresponding character on the text side */
-            if (text_start + bytes < width) {
+            if (text_start + bytes < width)
+            {
                 widget_move (view, top + row, left + text_start + bytes);
-                if (!view->utf8) {
+                if (!view->utf8)
+                {
                     tty_print_char (c);
-                } else {
+                }
+                else
+                {
                     tty_print_anychar (ch);
                 }
             }
 
             /* Save the cursor position for mcview_place_cursor() */
-            if (from == view->hex_cursor && view->hexview_in_text) {
+            if (from == view->hex_cursor && view->hexview_in_text)
+            {
                 view->cursor_row = row;
                 view->cursor_col = text_start + bytes;
             }
@@ -267,7 +294,8 @@ mcview_hexedit_save_changes (mcview_t * view)
     if (fp == -1)
         goto save_error;
 
-    for (curr = view->change_list; curr != NULL; curr = next) {
+    for (curr = view->change_list; curr != NULL; curr = next)
+    {
         next = curr->next;
 
         if (mc_lseek (fp, curr->offset, SEEK_SET) == -1 || mc_write (fp, &(curr->value), 1) != 1)
@@ -280,7 +308,8 @@ mcview_hexedit_save_changes (mcview_t * view)
         g_free (curr);
     }
 
-    if (mc_close (fp) == -1) {
+    if (mc_close (fp) == -1)
+    {
         error = g_strdup (unix_error_string (errno));
         message (D_ERROR, _(" Save file "),
                  _(" Error while closing the file: \n %s \n"
@@ -321,7 +350,8 @@ mcview_hexedit_free_change_list (mcview_t * view)
 {
     struct hexedit_change_node *curr, *next;
 
-    for (curr = view->change_list; curr != NULL; curr = next) {
+    for (curr = view->change_list; curr != NULL; curr = next)
+    {
         next = curr->next;
         g_free (curr);
     }

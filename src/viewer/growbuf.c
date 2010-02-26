@@ -6,16 +6,16 @@
    2004, 2005, 2006, 2007, 2009 Free Software Foundation, Inc.
 
    Written by: 1994, 1995, 1998 Miguel de Icaza
-	       1994, 1995 Janne Kukonlehto
-	       1995 Jakub Jelinek
-	       1996 Joseph M. Hinkle
-	       1997 Norbert Warmuth
-	       1998 Pavel Machek
-	       2004 Roland Illig <roland.illig@gmx.de>
-	       2005 Roland Illig <roland.illig@gmx.de>
-	       2009 Slava Zanko <slavazanko@google.com>
-	       2009 Andrew Borodin <aborodin@vmail.ru>
-	       2009 Ilia Maslakov <il.smind@gmail.com>
+   1994, 1995 Janne Kukonlehto
+   1995 Jakub Jelinek
+   1996 Joseph M. Hinkle
+   1997 Norbert Warmuth
+   1998 Pavel Machek
+   2004 Roland Illig <roland.illig@gmx.de>
+   2005 Roland Illig <roland.illig@gmx.de>
+   2009 Slava Zanko <slavazanko@google.com>
+   2009 Andrew Borodin <aborodin@vmail.ru>
+   2009 Ilia Maslakov <il.smind@gmail.com>
 
    This file is part of the Midnight Commander.
 
@@ -118,8 +118,10 @@ mcview_growbuf_read_until (mcview_t * view, off_t ofs)
         return;
 
     short_read = FALSE;
-    while (mcview_growbuf_filesize (view) < ofs || short_read) {
-        if (view->growbuf_lastindex == VIEW_PAGE_SIZE) {
+    while (mcview_growbuf_filesize (view) < ofs || short_read)
+    {
+        if (view->growbuf_lastindex == VIEW_PAGE_SIZE)
+        {
             /* Append a new block to the growing buffer */
             byte *newblock = g_try_malloc (VIEW_PAGE_SIZE);
             if (newblock == NULL)
@@ -128,16 +130,16 @@ mcview_growbuf_read_until (mcview_t * view, off_t ofs)
             g_ptr_array_add (view->growbuf_blockptr, newblock);
             view->growbuf_lastindex = 0;
         }
-        p = g_ptr_array_index(
-                            view->growbuf_blockptr,
-                            view->growbuf_blockptr->len - 1)
-            + view->growbuf_lastindex;
+        p = g_ptr_array_index (view->growbuf_blockptr,
+                               view->growbuf_blockptr->len - 1) + view->growbuf_lastindex;
 
         bytesfree = VIEW_PAGE_SIZE - view->growbuf_lastindex;
 
-        if (view->datasource == DS_STDIO_PIPE) {
+        if (view->datasource == DS_STDIO_PIPE)
+        {
             nread = fread (p, 1, bytesfree, view->ds_stdio_pipe);
-            if (nread == 0) {
+            if (nread == 0)
+            {
                 view->growbuf_finished = TRUE;
                 (void) pclose (view->ds_stdio_pipe);
                 mcview_display (view);
@@ -145,12 +147,17 @@ mcview_growbuf_read_until (mcview_t * view, off_t ofs)
                 view->ds_stdio_pipe = NULL;
                 return;
             }
-        } else {
-                assert (view->datasource == DS_VFS_PIPE);
-            do {
+        }
+        else
+        {
+            assert (view->datasource == DS_VFS_PIPE);
+            do
+            {
                 nread = mc_read (view->ds_vfs_pipe, p, bytesfree);
-            } while (nread == -1 && errno == EINTR);
-            if (nread == -1 || nread == 0) {
+            }
+            while (nread == -1 && errno == EINTR);
+            if (nread == -1 || nread == 0)
+            {
                 view->growbuf_finished = TRUE;
                 (void) mc_close (view->ds_vfs_pipe);
                 view->ds_vfs_pipe = -1;
@@ -184,14 +191,16 @@ mcview_get_byte_growing_buffer (mcview_t * view, off_t byte_index, int *retval)
     mcview_growbuf_read_until (view, byte_index + 1);
     if (view->growbuf_blockptr->len == 0)
         return FALSE;
-    if (pageno < view->growbuf_blockptr->len - 1) {
+    if (pageno < view->growbuf_blockptr->len - 1)
+    {
         if (retval)
-            *retval = *((byte *) (g_ptr_array_index(view->growbuf_blockptr, pageno) + pageindex));
+            *retval = *((byte *) (g_ptr_array_index (view->growbuf_blockptr, pageno) + pageindex));
         return TRUE;
     }
-    if (pageno == view->growbuf_blockptr->len - 1 && pageindex < (off_t) view->growbuf_lastindex) {
+    if (pageno == view->growbuf_blockptr->len - 1 && pageindex < (off_t) view->growbuf_lastindex)
+    {
         if (retval)
-            *retval = *((byte *) (g_ptr_array_index(view->growbuf_blockptr, pageno) + pageindex));
+            *retval = *((byte *) (g_ptr_array_index (view->growbuf_blockptr, pageno) + pageindex));
         return TRUE;
     }
     return FALSE;
@@ -214,9 +223,9 @@ mcview_get_ptr_growing_buffer (mcview_t * view, off_t byte_index)
     if (view->growbuf_blockptr->len == 0)
         return NULL;
     if (pageno < view->growbuf_blockptr->len - 1)
-        return (char *) (g_ptr_array_index(view->growbuf_blockptr, pageno) + pageindex);
+        return (char *) (g_ptr_array_index (view->growbuf_blockptr, pageno) + pageindex);
     if (pageno == view->growbuf_blockptr->len - 1 && pageindex < (off_t) view->growbuf_lastindex)
-        return (char *) (g_ptr_array_index(view->growbuf_blockptr, pageno) + pageindex);
+        return (char *) (g_ptr_array_index (view->growbuf_blockptr, pageno) + pageindex);
     return NULL;
 }
 

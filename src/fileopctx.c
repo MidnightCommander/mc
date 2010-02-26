@@ -4,7 +4,7 @@
    Free Software Foundation, Inc.
 
    Authors: Federico Mena <federico@nuclecu.unam.mx>
-            Miguel de Icaza <miguel@nuclecu.unam.mx>
+   Miguel de Icaza <miguel@nuclecu.unam.mx>
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -75,14 +75,14 @@ file_op_context_new (FileOperation op)
  * it exists.
  */
 void
-file_op_context_destroy (FileOpContext *ctx)
+file_op_context_destroy (FileOpContext * ctx)
 {
     g_return_if_fail (ctx != NULL);
 
     if (ctx->ui)
-	file_op_context_destroy_ui (ctx);
+        file_op_context_destroy_ui (ctx);
 
-    mc_search_free(ctx->search_handle);
+    mc_search_free (ctx->search_handle);
 
     /** \todo FIXME: do we need to free ctx->dest_mask? */
 
@@ -100,7 +100,7 @@ file_op_total_context_new (void)
 }
 
 void
-file_op_total_context_destroy (FileOpTotalContext *tctx)
+file_op_total_context_destroy (FileOpTotalContext * tctx)
 {
     g_return_if_fail (tctx != NULL);
     g_free (tctx);

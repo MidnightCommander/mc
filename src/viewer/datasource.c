@@ -6,16 +6,16 @@
    2004, 2005, 2006, 2007, 2009 Free Software Foundation, Inc.
 
    Written by: 1994, 1995, 1998 Miguel de Icaza
-	       1994, 1995 Janne Kukonlehto
-	       1995 Jakub Jelinek
-	       1996 Joseph M. Hinkle
-	       1997 Norbert Warmuth
-	       1998 Pavel Machek
-	       2004 Roland Illig <roland.illig@gmx.de>
-	       2005 Roland Illig <roland.illig@gmx.de>
-	       2009 Slava Zanko <slavazanko@google.com>
-	       2009 Andrew Borodin <aborodin@vmail.ru>
-	       2009 Ilia Maslakov <il.smind@gmail.com>
+   1994, 1995 Janne Kukonlehto
+   1995 Jakub Jelinek
+   1996 Joseph M. Hinkle
+   1997 Norbert Warmuth
+   1998 Pavel Machek
+   2004 Roland Illig <roland.illig@gmx.de>
+   2005 Roland Illig <roland.illig@gmx.de>
+   2009 Slava Zanko <slavazanko@google.com>
+   2009 Andrew Borodin <aborodin@vmail.ru>
+   2009 Ilia Maslakov <il.smind@gmail.com>
 
    This file is part of the Midnight Commander.
 
@@ -36,22 +36,22 @@
  */
 
 /*
-    The data source provides the viewer with data from either a file, a
-    string or the output of a command. The mcview_get_byte() function can be
-    used to get the value of a byte at a specific offset. If the offset
-    is out of range, -1 is returned. The function mcview_get_byte_indexed(a,b)
-    returns the byte at the offset a+b, or -1 if a+b is out of range.
+   The data source provides the viewer with data from either a file, a
+   string or the output of a command. The mcview_get_byte() function can be
+   used to get the value of a byte at a specific offset. If the offset
+   is out of range, -1 is returned. The function mcview_get_byte_indexed(a,b)
+   returns the byte at the offset a+b, or -1 if a+b is out of range.
 
-    The mcview_set_byte() function has the effect that later calls to
-    mcview_get_byte() will return the specified byte for this offset. This
-    function is designed only for use by the hexedit component after
-    saving its changes. Inspect the source before you want to use it for
-    other purposes.
+   The mcview_set_byte() function has the effect that later calls to
+   mcview_get_byte() will return the specified byte for this offset. This
+   function is designed only for use by the hexedit component after
+   saving its changes. Inspect the source before you want to use it for
+   other purposes.
 
-    The mcview_get_filesize() function returns the current size of the
-    data source. If the growing buffer is used, this size may increase
-    later on. Use the mcview_may_still_grow() function when you want to
-    know if the size can change later.
+   The mcview_get_filesize() function returns the current size of the
+   data source. If the growing buffer is used, this size may increase
+   later on. Use the mcview_may_still_grow() function when you want to
+   know if the size can change later.
  */
 
 #include <config.h>
@@ -99,7 +99,8 @@ mcview_set_datasource_none (mcview_t * view)
 off_t
 mcview_get_filesize (mcview_t * view)
 {
-    switch (view->datasource) {
+    switch (view->datasource)
+    {
     case DS_NONE:
         return 0;
     case DS_STDIO_PIPE:
@@ -120,7 +121,8 @@ mcview_get_filesize (mcview_t * view)
 void
 mcview_update_filesize (mcview_t * view)
 {
-    if (view->datasource == DS_FILE) {
+    if (view->datasource == DS_FILE)
+    {
         struct stat st;
         if (mc_fstat (view->ds_file_fd, &st) != -1)
             view->ds_file_filesize = st.st_size;
@@ -164,7 +166,8 @@ mcview_get_utf (mcview_t * view, off_t byte_index, int *char_width, gboolean * r
 
     *result = TRUE;
 
-    switch (view->datasource) {
+    switch (view->datasource)
+    {
     case DS_STDIO_PIPE:
     case DS_VFS_PIPE:
         str = mcview_get_ptr_growing_buffer (view, byte_index);
@@ -179,7 +182,8 @@ mcview_get_utf (mcview_t * view, off_t byte_index, int *char_width, gboolean * r
         break;
     }
 
-    if (str == NULL) {
+    if (str == NULL)
+    {
         *result = FALSE;
         width = 0;
         return 0;
@@ -187,16 +191,22 @@ mcview_get_utf (mcview_t * view, off_t byte_index, int *char_width, gboolean * r
 
     res = g_utf8_get_char_validated (str, -1);
 
-    if (res < 0) {
+    if (res < 0)
+    {
         ch = *str;
         width = 0;
-    } else {
+    }
+    else
+    {
         ch = res;
         /* Calculate UTF-8 char width */
         next_ch = g_utf8_next_char (str);
-        if (next_ch) {
+        if (next_ch)
+        {
             width = next_ch - str;
-        } else {
+        }
+        else
+        {
             ch = 0;
             width = 0;
         }
@@ -211,7 +221,8 @@ gboolean
 mcview_get_byte_string (mcview_t * view, off_t byte_index, int *retval)
 {
     assert (view->datasource == DS_STRING);
-    if (byte_index < (off_t) view->ds_string_len) {
+    if (byte_index < (off_t) view->ds_string_len)
+    {
         if (retval)
             *retval = view->ds_string_data[byte_index];
         return TRUE;
@@ -247,7 +258,7 @@ mcview_set_byte (mcview_t * view, off_t offset, byte b)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/*static*/
+/*static */
 void
 mcview_file_load_data (mcview_t * view, off_t byte_index)
 {
@@ -268,7 +279,8 @@ mcview_file_load_data (mcview_t * view, off_t byte_index)
         goto error;
 
     bytes_read = 0;
-    while (bytes_read < view->ds_file_datasize) {
+    while (bytes_read < view->ds_file_datasize)
+    {
         res =
             mc_read (view->ds_file_fd, view->ds_file_data + bytes_read,
                      view->ds_file_datasize - bytes_read);
@@ -279,10 +291,13 @@ mcview_file_load_data (mcview_t * view, off_t byte_index)
         bytes_read += (size_t) res;
     }
     view->ds_file_offset = blockoffset;
-    if ((off_t) bytes_read > view->ds_file_filesize - view->ds_file_offset) {
+    if ((off_t) bytes_read > view->ds_file_filesize - view->ds_file_offset)
+    {
         /* the file has grown in the meantime -- stick to the old size */
         view->ds_file_datalen = view->ds_file_filesize - view->ds_file_offset;
-    } else {
+    }
+    else
+    {
         view->ds_file_datalen = bytes_read;
     }
     return;
@@ -296,11 +311,13 @@ mcview_file_load_data (mcview_t * view, off_t byte_index)
 void
 mcview_close_datasource (mcview_t * view)
 {
-    switch (view->datasource) {
+    switch (view->datasource)
+    {
     case DS_NONE:
         break;
     case DS_STDIO_PIPE:
-        if (view->ds_stdio_pipe != NULL) {
+        if (view->ds_stdio_pipe != NULL)
+        {
             (void) pclose (view->ds_stdio_pipe);
             mcview_display (view);
             close_error_pipe (D_NORMAL, NULL);
@@ -309,7 +326,8 @@ mcview_close_datasource (mcview_t * view)
         mcview_growbuf_free (view);
         break;
     case DS_VFS_PIPE:
-        if (view->ds_vfs_pipe != -1) {
+        if (view->ds_vfs_pipe != -1)
+        {
             (void) mc_close (view->ds_vfs_pipe);
             view->ds_vfs_pipe = -1;
         }
@@ -355,7 +373,8 @@ mcview_load_command_output (mcview_t * view, const char *command)
     mcview_close_datasource (view);
 
     open_error_pipe ();
-    if ((fp = popen (command, "r")) == NULL) {
+    if ((fp = popen (command, "r")) == NULL)
+    {
         /* Avoid two messages.  Message from stderr has priority.  */
         mcview_display (view);
         if (!close_error_pipe (mcview_is_in_panel (view) ? -1 : D_ERROR, NULL))
@@ -365,7 +384,8 @@ mcview_load_command_output (mcview_t * view, const char *command)
 
     /* First, check if filter produced any output */
     mcview_set_datasource_stdio_pipe (view, fp);
-    if (! mcview_get_byte (view, 0, NULL)) {
+    if (!mcview_get_byte (view, 0, NULL))
+    {
         mcview_close_datasource (view);
 
         /* Avoid two messages.  Message from stderr has priority.  */
@@ -373,7 +393,9 @@ mcview_load_command_output (mcview_t * view, const char *command)
         if (!close_error_pipe (mcview_is_in_panel (view) ? -1 : D_ERROR, NULL))
             mcview_show_error (view, _("Empty output from child filter"));
         return FALSE;
-    } else {
+    }
+    else
+    {
         /*
          * At least something was read correctly. Close stderr and let
          * program die if it will try to write something there.

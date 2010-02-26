@@ -12,7 +12,7 @@
 
 #include "src/dialog.h"
 #include "src/widget.h"
-#include "src/keybind.h"		/* global_keymap_t */
+#include "src/keybind.h"        /* global_keymap_t */
 
 /*** typedefs(not structures) and defined constants ********************/
 
@@ -30,7 +30,8 @@ extern const off_t OFFSETTYPE_MAX;
 /*** enums *************************************************************/
 
 /* data sources of the view */
-enum view_ds {
+enum view_ds
+{
     DS_NONE,                    /* No data available */
     DS_STDIO_PIPE,              /* Data comes from a pipe using popen/pclose */
     DS_VFS_PIPE,                /* Data comes from a piped-in VFS file */
@@ -38,12 +39,14 @@ enum view_ds {
     DS_STRING                   /* Data comes from a string in memory */
 };
 
-enum ccache_type {
+enum ccache_type
+{
     CCACHE_OFFSET,
     CCACHE_LINECOL
 };
 
-typedef enum {
+typedef enum
+{
     NROFF_TYPE_NONE = 0,
     NROFF_TYPE_BOLD = 1,
     NROFF_TYPE_UNDERLINE = 2
@@ -52,13 +55,15 @@ typedef enum {
 /*** structures declarations (and typedefs of structures)***************/
 
 /* A node for building a change list on change_list */
-struct hexedit_change_node {
+struct hexedit_change_node
+{
     struct hexedit_change_node *next;
     off_t offset;
     byte value;
 };
 
-struct area {
+struct area
+{
     screen_dimen top, left;
     screen_dimen height, width;
 };
@@ -68,14 +73,16 @@ struct area {
  * line and column of that cache entry. cc_nroff_column is the column
  * corresponding to cc_offset in nroff mode.
  */
-typedef struct {
+typedef struct
+{
     off_t cc_offset;
     off_t cc_line;
     off_t cc_column;
     off_t cc_nroff_column;
 } coord_cache_entry_t;
 
-typedef struct {
+typedef struct
+{
     size_t size;
     size_t capacity;
     coord_cache_entry_t **cache;
@@ -83,7 +90,8 @@ typedef struct {
 
 struct mcview_nroff_struct;
 
-typedef struct mcview_struct {
+typedef struct mcview_struct
+{
     Widget widget;
 
     char *filename;             /* Name of the file */
@@ -111,7 +119,7 @@ typedef struct mcview_struct {
 
     /* Growing buffers information */
     gboolean growbuf_in_use;    /* Use the growing buffers? */
-    GPtrArray *growbuf_blockptr;    /* Pointer to the block pointers */
+    GPtrArray *growbuf_blockptr;        /* Pointer to the block pointers */
     size_t growbuf_lastindex;   /* Number of bytes in the last page of the
                                    growing buffer */
     gboolean growbuf_finished;  /* TRUE when all data has been read. */
@@ -185,7 +193,8 @@ typedef struct mcview_struct {
     int search_numNeedSkipChar;
 } mcview_t;
 
-typedef struct mcview_nroff_struct {
+typedef struct mcview_nroff_struct
+{
     mcview_t *view;
     off_t index;
     int char_width;
@@ -194,7 +203,8 @@ typedef struct mcview_nroff_struct {
     nroff_type_t prev_type;
 } mcview_nroff_t;
 
-typedef struct mcview_search_options_t {
+typedef struct mcview_search_options_t
+{
     mc_search_type_t type;
     gboolean case_sens;
     gboolean backwards;
@@ -209,20 +219,20 @@ extern mcview_search_options_t mcview_search_options;
 /*** declarations of public functions **********************************/
 
 /* actions_cmd.c:  */
-cb_ret_t mcview_callback (Widget *w, widget_msg_t msg, int parm);
-cb_ret_t mcview_dialog_callback (Dlg_head *h, Widget *sender,
-				    dlg_msg_t msg, int parm, void *data);
+cb_ret_t mcview_callback (Widget * w, widget_msg_t msg, int parm);
+cb_ret_t mcview_dialog_callback (Dlg_head * h, Widget * sender,
+                                 dlg_msg_t msg, int parm, void *data);
 
 /* coord_cache.c: */
 coord_cache_t *coord_cache_new (void);
-void coord_cache_free (coord_cache_t *cache);
+void coord_cache_free (coord_cache_t * cache);
 
 #ifdef MC_ENABLE_DEBUGGING_CODE
-void mcview_ccache_dump (mcview_t *view);
+void mcview_ccache_dump (mcview_t * view);
 #endif
 
-void mcview_ccache_lookup (mcview_t *view, coord_cache_entry_t *coord,
-			    enum ccache_type lookup_what);
+void mcview_ccache_lookup (mcview_t * view, coord_cache_entry_t * coord,
+                           enum ccache_type lookup_what);
 
 /* datasource.c: */
 void mcview_set_datasource_none (mcview_t *);
@@ -242,46 +252,46 @@ void mcview_set_datasource_vfs_pipe (mcview_t *, int);
 void mcview_set_datasource_string (mcview_t *, const char *);
 
 /* dialog.c: */
-gboolean mcview_dialog_search (mcview_t *view);
-gboolean mcview_dialog_goto (mcview_t *view, off_t *offset);
+gboolean mcview_dialog_search (mcview_t * view);
+gboolean mcview_dialog_goto (mcview_t * view, off_t * offset);
 
 /* display.c: */
-void mcview_update (mcview_t *view);
-void mcview_display (mcview_t *view);
-void mcview_compute_areas (mcview_t *view);
-void mcview_update_bytes_per_line (mcview_t *view);
-void mcview_display_toggle_ruler (mcview_t *view);
-void mcview_display_clean (mcview_t *view);
-void mcview_display_ruler (mcview_t *view);
-void mcview_percent (mcview_t *view, off_t p);
+void mcview_update (mcview_t * view);
+void mcview_display (mcview_t * view);
+void mcview_compute_areas (mcview_t * view);
+void mcview_update_bytes_per_line (mcview_t * view);
+void mcview_display_toggle_ruler (mcview_t * view);
+void mcview_display_clean (mcview_t * view);
+void mcview_display_ruler (mcview_t * view);
+void mcview_percent (mcview_t * view, off_t p);
 
 /* growbuf.c: */
-void mcview_growbuf_init (mcview_t *view);
-void mcview_growbuf_free (mcview_t *view);
-off_t mcview_growbuf_filesize (mcview_t *view);
-void mcview_growbuf_read_until (mcview_t *view, off_t p);
-gboolean mcview_get_byte_growing_buffer (mcview_t *view, off_t p, int *);
-char *mcview_get_ptr_growing_buffer (mcview_t *view, off_t p);
+void mcview_growbuf_init (mcview_t * view);
+void mcview_growbuf_free (mcview_t * view);
+off_t mcview_growbuf_filesize (mcview_t * view);
+void mcview_growbuf_read_until (mcview_t * view, off_t p);
+gboolean mcview_get_byte_growing_buffer (mcview_t * view, off_t p, int *);
+char *mcview_get_ptr_growing_buffer (mcview_t * view, off_t p);
 
 /* hex.c: */
-void mcview_display_hex (mcview_t *view);
-gboolean mcview_hexedit_save_changes (mcview_t *view);
-void mcview_toggle_hexedit_mode (mcview_t *view);
-void mcview_hexedit_free_change_list (mcview_t *view);
+void mcview_display_hex (mcview_t * view);
+gboolean mcview_hexedit_save_changes (mcview_t * view);
+void mcview_toggle_hexedit_mode (mcview_t * view);
+void mcview_hexedit_free_change_list (mcview_t * view);
 void mcview_enqueue_change (struct hexedit_change_node **, struct hexedit_change_node *);
 
 /* lib.c: */
-void mcview_toggle_magic_mode (mcview_t *view);
-void mcview_toggle_wrap_mode (mcview_t *view);
-void mcview_toggle_nroff_mode (mcview_t *view);
-void mcview_toggle_hex_mode (mcview_t *view);
-gboolean mcview_ok_to_quit (mcview_t *view);
-void mcview_done (mcview_t *view);
-void mcview_select_encoding (mcview_t *view);
-void mcview_set_codeset (mcview_t *view);
-void mcview_show_error (mcview_t *view, const char *error);
-off_t mcview_bol (mcview_t *view, off_t current);
-off_t mcview_eol (mcview_t *view, off_t current);
+void mcview_toggle_magic_mode (mcview_t * view);
+void mcview_toggle_wrap_mode (mcview_t * view);
+void mcview_toggle_nroff_mode (mcview_t * view);
+void mcview_toggle_hex_mode (mcview_t * view);
+gboolean mcview_ok_to_quit (mcview_t * view);
+void mcview_done (mcview_t * view);
+void mcview_select_encoding (mcview_t * view);
+void mcview_set_codeset (mcview_t * view);
+void mcview_show_error (mcview_t * view, const char *error);
+off_t mcview_bol (mcview_t * view, off_t current);
+off_t mcview_eol (mcview_t * view, off_t current);
 
 /* move.c */
 void mcview_move_up (mcview_t *, off_t);
@@ -301,10 +311,10 @@ void mcview_place_cursor (mcview_t *);
 void mcview_moveto_match (mcview_t *);
 
 /* nroff.c: */
-void mcview_display_nroff (mcview_t *view);
-int mcview__get_nroff_real_len (mcview_t *view, off_t, off_t p);
+void mcview_display_nroff (mcview_t * view);
+int mcview__get_nroff_real_len (mcview_t * view, off_t, off_t p);
 
-mcview_nroff_t *mcview_nroff_seq_new_num (mcview_t *view, off_t p);
+mcview_nroff_t *mcview_nroff_seq_new_num (mcview_t * view, off_t p);
 mcview_nroff_t *mcview_nroff_seq_new (mcview_t * view);
 void mcview_nroff_seq_free (mcview_nroff_t **);
 nroff_type_t mcview_nroff_seq_info (mcview_nroff_t *);
@@ -316,11 +326,11 @@ void mcview_display_text (mcview_t *);
 /* search.c: */
 int mcview_search_cmd_callback (const void *user_data, gsize char_offset);
 int mcview_search_update_cmd_callback (const void *, gsize);
-void mcview_do_search (mcview_t *view);
+void mcview_do_search (mcview_t * view);
 
 
 /*** inline functions ****************************************************************************/
 
 #include "inlines.h"
 
-#endif					/* MC_VIEWER_INTERNAL_H */
+#endif /* MC_VIEWER_INTERNAL_H */

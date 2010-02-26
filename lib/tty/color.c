@@ -1,13 +1,13 @@
 /* Color setup.
-    Interface functions.
+   Interface functions.
 
    Copyright (C) 1994, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
    2007, 2008, 2009 Free Software Foundation, Inc.
-   
+
    Written by:
    Andrew Borodin <aborodin@vmail.ru>, 2009.
    Slava Zanko <slavazanko@gmail.com>, 2009.
-   
+
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2 of the License, or
@@ -96,7 +96,7 @@ static void
 tty_color_free_all (gboolean is_temp_color)
 {
     g_hash_table_foreach_remove (mc_tty_color__hashtable, tty_color_free_condition_cb,
-                                  (is_temp_color)? (gpointer) 1 : NULL);
+                                 (is_temp_color) ? (gpointer) 1 : NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -125,7 +125,8 @@ tty_color_get_next__color_pair_number ()
     size_t cp_count = g_hash_table_size (mc_tty_color__hashtable);
     size_t cp = 0;
 
-    for (cp = 0; cp < cp_count; cp++) {
+    for (cp = 0; cp < cp_count; cp++)
+    {
         if (g_hash_table_find (mc_tty_color__hashtable, tty_color_get_next_cpn_cb, (gpointer) cp) ==
             NULL)
             return cp;
@@ -178,7 +179,8 @@ tty_try_alloc_color_pair2 (const char *fg, const char *bg, gboolean is_temp_colo
     if (fg == NULL)
         fg = tty_color_defaults__fg;
 
-    if (bg == NULL) {
+    if (bg == NULL)
+    {
         bg = tty_color_defaults__bg;
     }
     c_fg = tty_color_get_valid_name (fg);
@@ -191,13 +193,15 @@ tty_try_alloc_color_pair2 (const char *fg, const char *bg, gboolean is_temp_colo
     mc_color_pair =
         (tty_color_pair_t *) g_hash_table_lookup (mc_tty_color__hashtable, (gpointer) color_pair);
 
-    if (mc_color_pair != NULL) {
+    if (mc_color_pair != NULL)
+    {
         g_free (color_pair);
         return mc_color_pair->pair_index;
     }
 
     mc_color_pair = g_try_new0 (tty_color_pair_t, 1);
-    if (mc_color_pair == NULL) {
+    if (mc_color_pair == NULL)
+    {
         g_free (color_pair);
         return 0;
     }
