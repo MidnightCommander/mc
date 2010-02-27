@@ -887,6 +887,14 @@ mousedispatch_new (int y, int x, int yl, int xl)
 void
 interactive_display (const char *filename, const char *node)
 {
+    const int help_colors[DLG_COLOR_NUM] =
+    {
+	HELP_NORMAL_COLOR,	/* common text color */
+	0,			/* unused in help */
+	HELP_BOLD_COLOR,	/* title color */
+	0			/* unused in help */
+    };
+
     WButtonBar *help_bar;
     Widget *md;
     char *hlpfile = NULL;
@@ -934,7 +942,7 @@ interactive_display (const char *filename, const char *node)
 
     whelp =
 	create_dlg (0, 0, help_lines + 4, HELP_WINDOW_WIDTH + 4,
-		    dialog_colors, help_callback, "[Help]", _("Help"),
+		    help_colors, help_callback, "[Help]", _("Help"),
 		    DLG_TRYUP | DLG_CENTER | DLG_WANT_TAB);
 
     selected_item = search_string_node (main_node, STRING_LINK_START) - 1;
