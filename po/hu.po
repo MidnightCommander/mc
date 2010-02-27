@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-26 13:04+0200\n"
+"POT-Creation-Date: 2010-02-24 13:14+0200\n"
 "PO-Revision-Date: 2005-10-01 00:47+0200\n"
 "Last-Translator: SZABO Gergely <szg@subogero.com>\n"
 "Language-Team: Hungarian <debian-l10n-hungarian@lists.debian.org>\n"
@@ -430,9 +430,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Inkonzisztens Extfs-archívum."
 
-#, fuzzy, c-format
+#, c-format
 msgid "Warning: cannot open %s directory\n"
-msgstr "A(z) %s könyvtár nem létrehozható"
+msgstr "Figyelem: A(z) %s könyvtár nem megnyitható\n"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -932,7 +932,6 @@ msgid "Show mc with specified skin"
 msgstr "MC a megadott borítással"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -962,9 +961,11 @@ msgstr ""
 "                   errdhotfocus (gyorsbillentyű + fókusz hibaablakban)\n"
 "   Menük:          menu, menuhot (gyorsbillentyű), menusel (kijelölt),\n"
 "                   menuhotsel (gyorsbillentyű + kijelölt)\n"
+"                   menuinactive (inaktív)\n"
 "   Szerkesztő:     editnormal, editbold (félkövér), editmarked (kijelölt)\n"
-
+"                   editwhitespace (szóköz stb), editlinestate (sorállapot)\n"
 #. TRANSLATORS: don't translate keywords and names of colors
+
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 "\n"
@@ -980,8 +981,7 @@ msgstr ""
 "Színek:\n"
 "   black (fekete), gray (szürke), red (piros), brightred (élénkpiros),\n"
 "   green (zöld), brightgreen (élénkzöld), brown (barna), yellow (sárga),\n"
-"   blue (kék), brightblue (azúr), magenta (lila), brightmagenta "
-"(élénklila),\n"
+"   blue (kék), brightblue (azúr), magenta (lila), brightmagenta (élénklila),\n"
 "   cyan (türkiz), brightcyan (élénk-türkiz), lightgray (világosszürke),\n"
 "   white (fehér)\n"
 "\n"
@@ -1069,35 +1069,28 @@ msgstr "Futtatható fent"
 msgid "Sort order"
 msgstr "Rendezési mód"
 
-#, fuzzy
 msgid "Confirmation"
-msgstr " Megerősítés "
+msgstr "Megerősítés"
 
 #. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
-#, fuzzy
 msgid "Confirmation|&History cleanup"
-msgstr " Megerősítés "
+msgstr "Confirmation|&Történet törlés"
 
-#, fuzzy
 msgid "Confirmation|&Directory hotlist delete"
-msgstr " Könyvtár-&gyorslista törlése előtt "
+msgstr "Confirmation|Könyvtár-&gyorslista törlés"
 
-#, fuzzy
 msgid "Confirmation|E&xit"
-msgstr " Megerősítés "
+msgstr "Confirmation|&Kilépés"
 
-#, fuzzy
 msgid "Confirmation|&Execute"
-msgstr " Megerősítés "
+msgstr "Confirmation|&Futtatás"
 
-#, fuzzy
 msgid "Confirmation|O&verwrite"
-msgstr " &Felülírás előtt "
+msgstr "Confirmation|Felül&írás"
 
-#, fuzzy
 msgid "Confirmation|&Delete"
-msgstr " Megerősítés "
+msgstr "Confirmation|Tö&rlés"
 
 msgid "UTF-8 output"
 msgstr "UTF-8 kijelzés"
@@ -1909,45 +1902,37 @@ msgstr "&Kilépés"
 msgid "&Undo"
 msgstr "&Vissza"
 
-#, fuzzy
 msgid "&Toggle ins/overw"
 msgstr "&Beszúrás/átírás"
 
 # több fájl kijelölése esetén jelenik meg
-#, fuzzy
 msgid "To&ggle mark"
 msgstr "&Inverz kijelölés"
 
 msgid "&Mark columns"
 msgstr "&Oszlopkijelölés"
 
-#, fuzzy
 msgid "Mark &all"
-msgstr "&Jelölteket"
+msgstr "&Összes kijelöl"
 
 msgid "Unmar&k"
-msgstr ""
+msgstr "&Nem jelöl"
 
-#, fuzzy
 msgid "Cop&y"
 msgstr "&Másol"
 
-#, fuzzy
 msgid "Mo&ve"
 msgstr "Áthely"
 
 msgid "&Delete"
 msgstr "&Töröl"
 
-#, fuzzy
 msgid "Co&py to clipfile"
 msgstr "Máso&lás vágólapra"
 
-#, fuzzy
 msgid "&Cut to clipfile"
 msgstr "Kivágás vágólapra"
 
-#, fuzzy
 msgid "Pa&ste from clipfile"
 msgstr "Beillesztés vágólapról"
 
@@ -1967,14 +1952,12 @@ msgstr "Keresés &tovább"
 msgid "&Replace..."
 msgstr "&Csere"
 
-#, fuzzy
 msgid "&Toggle bookmark"
 msgstr "Könyvjelző ki/be"
 
 msgid "&Next bookmark"
 msgstr "Követk. könyvjelző"
 
-#, fuzzy
 msgid "&Prev bookmark"
 msgstr "Előző könyvjelző"
 
@@ -1982,24 +1965,20 @@ msgid "&Flush bookmark"
 msgstr "Könyvjelző törlése"
 
 msgid "&Go to line..."
-msgstr " Ugrás adott sorra "
+msgstr "Ugrás sorra..."
 
-#, fuzzy
 msgid "&Toggle line state"
 msgstr "Sorszámok"
 
 msgid "Go to matching &bracket"
 msgstr "Ugrás &zárójel párjára"
 
-#, fuzzy
 msgid "&Find declaration"
 msgstr "Deklaráció keresése"
 
-#, fuzzy
 msgid "Back from &declaration"
 msgstr "Vissza a deklarációtól"
 
-#, fuzzy
 msgid "For&ward to declaration"
 msgstr "Vissza a deklarációhoz"
 
@@ -2012,7 +1991,6 @@ msgstr "&Képernyő frissítése"
 msgid "&Start record macro"
 msgstr "&Makrórögzítés indítása"
 
-#, fuzzy
 msgid "Finis&h record macro..."
 msgstr "Makrórögzítés &vége..."
 
@@ -2034,19 +2012,15 @@ msgstr "Karakter &beszúrása..."
 msgid "Insert &date/time"
 msgstr "&Dátum/idő beszúrása"
 
-#, fuzzy
 msgid "&Format paragraph"
 msgstr "Bekezdés &formázása"
 
-#, fuzzy
 msgid "&Sort..."
 msgstr "&Rendezés..."
 
-#, fuzzy
 msgid "&Paste output of..."
 msgstr "K&imenet beillesztése..."
 
-#, fuzzy
 msgid "&External formatter"
 msgstr "Kü&lső formázó"
 
@@ -2629,13 +2603,13 @@ msgstr "&Egyiket sem"
 
 # ETA: Estimated time of arrival
 # a hátralevő időt jelzi: óra, perc, másodperc
-#, fuzzy, c-format
+#, c-format
 msgid "%d:%02d.%02d"
-msgstr "MÉG %d:%02d:%02d"
+msgstr "%d:%02d:%02d"
 
 #, c-format
 msgid "ETA %s"
-msgstr ""
+msgstr "MÉG %s"
 
 #, c-format
 msgid "%.2f MB/s"
@@ -2651,15 +2625,15 @@ msgstr "%ld B/s"
 
 #, c-format
 msgid "Files processed: %llu of %llu"
-msgstr ""
+msgstr "Fájlok feldolgozva: %llu %llu-ból"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s  %s (%s)"
-msgstr "Méret:        %s"
+msgstr "Idő: %s  %s (%s)"
 
 #, c-format
 msgid " Total: %s of %s "
-msgstr ""
+msgstr "Össz: %s %s-ből"
 
 msgid "Source"
 msgstr "Forrás"
@@ -3500,19 +3474,17 @@ msgstr "&Név"
 
 #. TRANSLATORS: one single character to represent 'version' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#, fuzzy
 msgid "sort|v"
-msgstr "surt|u"
+msgstr "sort|v"
 
 # jogok, mnemonikkal
-#, fuzzy
 msgid "&Version"
-msgstr "Jogok"
+msgstr "&Verzió"
 
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|e"
-msgstr "sort|e"
+msgstr "sort|k"
 
 msgid "&Extension"
 msgstr "&Kiterjesztés"
@@ -3520,10 +3492,10 @@ msgstr "&Kiterjesztés"
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|s"
-msgstr "sort|s"
+msgstr "sort|m"
 
 msgid "&Size"
-msgstr "Mé&ret"
+msgstr "&Méret"
 
 msgid "Block Size"
 msgstr "Blokkméret"
@@ -3531,16 +3503,16 @@ msgstr "Blokkméret"
 #. TRANSLATORS: one single character to represent 'Modify time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|m"
-msgstr "sort|m"
+msgstr "sort|t"
 
 # tartalomra vonatkozik
 msgid "&Modify time"
-msgstr "(Tartalmi) mó&dosítás ideje"
+msgstr "&Tartalmi mó&dosítás ideje"
 
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|a"
-msgstr "sort|a"
+msgstr "sort|e"
 
 msgid "&Access time"
 msgstr "&Elérés ideje"
@@ -3548,18 +3520,18 @@ msgstr "&Elérés ideje"
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|h"
-msgstr "sort|h"
+msgstr "sort|a"
 
 # metaadat-módosulás, például chmod dátuma
 msgid "C&Hange time"
-msgstr "&Adatváltozás ideje"
+msgstr "Meta&adat változás ideje"
 
 # jogok, mnemonikkal
 msgid "Permission"
 msgstr "Jogok"
 
 msgid "Perm"
-msgstr "Jogok"
+msgstr "Jog"
 
 msgid "Nl"
 msgstr "Ln"
@@ -3581,7 +3553,7 @@ msgstr "GID"
 # alignment problema miatt hosszu cimkek eleje lemaradhat!
 # 8 karakter fér ki
 msgid "Owner"
-msgstr "Tulajd."
+msgstr "Tulaj"
 
 msgid "Group"
 msgstr "Csoport"
@@ -3786,9 +3758,8 @@ msgstr " Nincsenek megfelelő bejegyzések ebben: \"%s\" "
 msgid " User menu "
 msgstr " Felhasználói menü "
 
-#, fuzzy
 msgid "Invalid value"
-msgstr "érvénytelen numerikus érték"
+msgstr "Érvénytelen érték"
 
 msgid " Cannot spawn child process "
 msgstr " Nem sikerült programot indítani "
@@ -3797,20 +3768,19 @@ msgid "Empty output from child filter"
 msgstr "A szűrő kimenete üres."
 
 msgid "&Line number (decimal)"
-msgstr ""
+msgstr "&Sorszám (decimális)"
 
 msgid "Pe&rcents"
-msgstr ""
+msgstr "Szá&zalék"
 
 msgid "&Decimal offset"
-msgstr ""
+msgstr "&Decimális offszet"
 
-#, fuzzy
 msgid "He&xadecimal offset"
-msgstr "Hexadecimális"
+msgstr "He&xadecimális offszet"
 
 msgid "Goto"
-msgstr ""
+msgstr "Ugrás"
 
 msgid "ButtonBar|Ascii"
 msgstr "ASCII"
@@ -3883,23 +3853,21 @@ msgid "Seeking to search result"
 msgstr "Találat keresése"
 
 # a gombsorban is szerepel (F7)
-#, fuzzy
 msgid "Search done"
-msgstr "Keresés"
+msgstr "Keresés kész"
 
 msgid "Continue from begining?"
-msgstr ""
+msgstr "Folytat elejéről?"
 
 msgid " History "
 msgstr " Előzmények "
 
 #. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
-#, fuzzy
 msgid "DialogTitle|History cleanup"
-msgstr "Másol"
+msgstr "DialogTitle|Előzmények törlése"
 
 msgid "Do you want clean this history?"
-msgstr ""
+msgstr "Előzmények törlése?"
 
 msgid "Background process:"
 msgstr "Háttérfolyamat:"
