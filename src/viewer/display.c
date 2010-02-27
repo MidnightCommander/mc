@@ -329,6 +329,7 @@ mcview_display_toggle_ruler (mcview_t * view)
 
     assert ((size_t) ruler < 3);
     ruler = next[(size_t) ruler];
+    mcview_compute_areas (view);
     view->dirty++;
 }
 
