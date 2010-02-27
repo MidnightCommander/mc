@@ -2102,9 +2102,8 @@ msgstr "&Menüdatei bearbeiten"
 msgid "&Save setup"
 msgstr "Einstellungen &Speichern"
 
-#, fuzzy
 msgid "&File"
-msgstr "Datei"
+msgstr "&Datei"
 
 #, fuzzy
 msgid "&Edit"
@@ -2114,17 +2113,15 @@ msgstr "Bearbeiten"
 msgid "&Search"
 msgstr "Suchen"
 
-#, fuzzy
 msgid "&Command"
-msgstr "Befehl"
+msgstr "&Befehl"
 
 #, fuzzy
 msgid "For&mat"
 msgstr "Vergisses"
 
-#, fuzzy
 msgid "&Options"
-msgstr " &Optionen "
+msgstr "&Optionen"
 
 msgid "None"
 msgstr "Keine"
@@ -3346,17 +3343,15 @@ msgstr "&Virtuelle FS..."
 msgid "&Above"
 msgstr " Drauf "
 
-#, fuzzy
 msgid "&Left"
-msgstr " &Links "
+msgstr "&Links"
 
 #, fuzzy
 msgid "&Below"
 msgstr " Drunter "
 
-#, fuzzy
 msgid "&Right"
-msgstr " &Rechts "
+msgstr "&Rechts"
 
 msgid " Information "
 msgstr " Information "
