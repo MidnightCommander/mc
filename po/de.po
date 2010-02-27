@@ -4,10 +4,10 @@
 # Kai Lahmann <kl@linuxfaqs.de>, 2000.
 # Christian Meyer <chrisime@gnome.org>, 2001.
 # Roland Illig <roland.illig@gmx.de>, 2005.
-#
+# 
 # 2001-03-06 Da Nautilus der zukÃ¼nftige GNOME Filemanager ist, werden die
 # mc-Meldungen nicht mehr infinitivisch umgeformt.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.x\n"
@@ -972,8 +972,7 @@ msgstr ""
 "   Menüs:         menu, menuhot, menusel, menuhotsel\n"
 "   Editor:        editnormal, editbold, editmarked\n"
 "   Hilfe:         helpnormal, helpitalic, helplink, helpslink\n"
-"   Dateitypen:    directory, executable, link, stalelink, device, special, "
-"core\n"
+"   Dateitypen:    directory, executable, link, stalelink, device, special, core\n"
 "\n"
 "Farben:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -1085,7 +1084,8 @@ msgstr "Sortierung"
 msgid "Confirmation"
 msgstr " Bestätigung "
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 #, fuzzy
 msgid "Confirmation|&History cleanup"
@@ -1696,8 +1696,7 @@ msgid " Load "
 msgstr "Laden"
 
 msgid " Block is large, you may not be able to undo this action. "
-msgstr ""
-" Großer Block, eventuell kann diese Aktion nicht rückgängig gemacht werden. "
+msgstr " Großer Block, eventuell kann diese Aktion nicht rückgängig gemacht werden. "
 
 #, fuzzy
 msgid "Replace"
@@ -2267,10 +2266,7 @@ msgid " %s%s file error"
 msgstr " Fehler in der Datei %s%s "
 
 #, c-format
-msgid ""
-"The format of the %smc.ext file has changed with version 3.0.  It seems that "
-"the installation failed.  Please fetch a fresh copy from the Midnight "
-"Commander package."
+msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
 msgstr ""
 "Das Dateiformat der Datei »%smc.ext« hat sich in Version 3.0 geändert.\n"
 "Bitte aktualisieren Sie die Datei."
@@ -2280,13 +2276,8 @@ msgid " ~/%s file error "
 msgstr " Fehler in Datei »~/%s« "
 
 #, c-format
-msgid ""
-"The format of the ~/%s file has changed with version 3.0.  You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write "
-"it."
-msgstr ""
-"Das Dateiformat von »~/%s« hat sich mit Version 3.0 geändert.  Eine "
-"Beispieldatei im neuen Format ist %smc.ext."
+msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
+msgstr "Das Dateiformat von »~/%s« hat sich mit Version 3.0 geändert.  Eine Beispieldatei im neuen Format ist %smc.ext."
 
 msgid "DialogTitle|Copy"
 msgstr ""
@@ -2313,8 +2304,7 @@ msgid ""
 "\n"
 " Option Stable Symlinks will be disabled "
 msgstr ""
-" Kann keine stabilen symbolischen Links auf nicht-lokalen Dateisystemen "
-"anlegen: \n"
+" Kann keine stabilen symbolischen Links auf nicht-lokalen Dateisystemen anlegen: \n"
 "\n"
 " Einstellung Stabile Symbolische Links wird deaktiviert "
 
@@ -2971,11 +2961,8 @@ msgid " Hotlist Load "
 msgstr " Hotlist laden "
 
 #, c-format
-msgid ""
-"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
-msgstr ""
-"MC konnte ~/%s nicht schreiben, die alten Hotlist-Einträge wurden nicht "
-"gelöscht"
+msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr "MC konnte ~/%s nicht schreiben, die alten Hotlist-Einträge wurden nicht gelöscht"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -3669,10 +3656,10 @@ msgid "-  < No translation >"
 msgstr "- < Keine Übersetzung >"
 
 msgid "%b %e  %Y"
-msgstr "%e. %b %Y"
+msgstr "%e. %b  %Y"
 
 msgid "%b %e %H:%M"
-msgstr "%e. %b %H.%M"
+msgstr "%e. %b %H:%M"
 
 #, fuzzy, c-format
 msgid ""
@@ -3831,8 +3818,7 @@ msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
 msgstr ""
-"Die Datei %s gehört weder root noch Ihnen oder sie kann von jedem "
-"beschrieben werden.\n"
+"Die Datei %s gehört weder root noch Ihnen oder sie kann von jedem beschrieben werden.\n"
 "Sie zu benutzen, kann Ihre Sicherheit gefährden"
 
 #, c-format
@@ -3973,7 +3959,6 @@ msgstr "Hintergrundprozeß:"
 #~ msgid " confirm &Delete "
 #~ msgstr " bestätige &Löschen "
 
-#, fuzzy
 #~ msgid ""
 #~ " The current line number is %lld.\n"
 #~ " Enter the new line number:"
@@ -3981,7 +3966,6 @@ msgstr "Hintergrundprozeß:"
 #~ " Die augenblickliche Zeilennummer lautet %d.\n"
 #~ " Geben sie die neue Zeilennummer ein:"
 
-#, fuzzy
 #~ msgid ""
 #~ " The current address is %s.\n"
 #~ " Enter the new address:"
@@ -4043,63 +4027,48 @@ msgstr "Hintergrundprozeß:"
 #~ msgid "Copy to &file...     "
 #~ msgstr "In Datei kopieren... "
 
-#, fuzzy
 #~ msgid "&Toggle mark                 F3"
 #~ msgstr "Markierung an/aus  F3"
 
-#, fuzzy
 #~ msgid "Mar&k columns              S-F3"
 #~ msgstr "Spalten &mark.   S-F3"
 
-#, fuzzy
 #~ msgid "&Copy                        F5"
 #~ msgstr "&Kopieren           F5"
 
-#, fuzzy
 #~ msgid "&Move                        F6"
 #~ msgstr "Verschieben        F6"
 
-#, fuzzy
 #~ msgid "&Delete                      F8"
 #~ msgstr "Lös&Chen            F8"
 
-#, fuzzy
 #~ msgid "&Next bookmark              M-j"
 #~ msgstr "&Neu              C-n"
 
-#, fuzzy
 #~ msgid "&Undo                       C-u"
 #~ msgstr "Rückgängig        C-u"
 
-#, fuzzy
 #~ msgid "&Beginning               C-PgUp"
 #~ msgstr "Anfang         C-PgUp"
 
-#, fuzzy
 #~ msgid "&End                     C-PgDn"
 #~ msgstr "&Ende          C-PgDn"
 
-#, fuzzy
 #~ msgid "C&opy to clipfile           M-w"
 #~ msgstr "&Gehe zu Zeile...        M-l"
 
-#, fuzzy
 #~ msgid "C&ut to clipfile            C-w"
 #~ msgstr "&Gehe zu Zeile...        M-l"
 
-#, fuzzy
 #~ msgid "Toggle bookmar&k               "
 #~ msgstr "Markierung an/aus  F3"
 
-#, fuzzy
 #~ msgid "&Next bookmark                 "
 #~ msgstr "&Neu              C-n"
 
-#, fuzzy
 #~ msgid "Pre&v bookmark                 "
 #~ msgstr "Sor&tieren               M-t"
 
-#, fuzzy
 #~ msgid "&Flush bookmark                "
 #~ msgstr "&Mail...                    "
 
@@ -4112,7 +4081,6 @@ msgstr "Hintergrundprozeß:"
 #~ msgid "&Go to line...            M-l"
 #~ msgstr "&Gehe zu Zeile...        M-l"
 
-#, fuzzy
 #~ msgid "Encod&ing...             M-e"
 #~ msgstr "Sor&tieren               M-t"
 
@@ -4131,7 +4099,6 @@ msgstr "Hintergrundprozeß:"
 #~ msgid "'ispell' s&pell check    M-$"
 #~ msgstr "'ispell-Rechtschr.-&Pr.  M-$"
 
-#, fuzzy
 #~ msgid "Save setu&p"
 #~ msgstr "Einstellungen &Speichern"
 
@@ -4273,7 +4240,6 @@ msgstr "Hintergrundprozeß:"
 #~ msgid "e&Xternal panelize    C-x !"
 #~ msgstr "e&Xternes Anordnen    C-x !"
 
-#, fuzzy
 #~ msgid "Command &history      M-h"
 #~ msgstr " Befehlschronik "
 
@@ -4295,11 +4261,9 @@ msgstr "Hintergrundprozeß:"
 #~ msgid "Menu"
 #~ msgstr "Menü"
 
-#, fuzzy
 #~ msgid "n"
 #~ msgstr "An"
 
-#, fuzzy
 #~ msgid "Extension"
 #~ msgstr "Suffix:"
 
@@ -4414,12 +4378,8 @@ msgstr "Hintergrundprozeß:"
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr " Argumentreihenfolge eingeben, z.B. 3,2,1,4 "
 
-#~ msgid ""
-#~ " Invalid regular expression, or scanf expression with too many "
-#~ "conversions "
-#~ msgstr ""
-#~ " Ungültiger regulärer Ausdruck oder scanf-Ausdruck mit zu vielen "
-#~ "Konvertierungen "
+#~ msgid " Invalid regular expression, or scanf expression with too many conversions "
+#~ msgstr " Ungültiger regulärer Ausdruck oder scanf-Ausdruck mit zu vielen Konvertierungen "
 
 #~ msgid " Error in replacement format string. "
 #~ msgstr " Fehler in der Format-Zeichenkette der Ersetzungen "
