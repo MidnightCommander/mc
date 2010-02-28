@@ -1,14 +1,14 @@
 # mc Greek PO file
 # Copyright (C) 1999 Free Software Foundation, Inc.
 # Spiros Papadimitriou <spapadim+@cs.cmu.edu>, 1999.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.38\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
 "POT-Creation-Date: 2010-02-26 12:26+0200\n"
-"PO-Revision-Date: 2010-02-23 16:49+0200\n"
-"Last-Translator: Alex-P. Natsios <root@drakevr.gr>\n"
+"PO-Revision-Date: 2010-02-27 23:05+0200\n"
+"Last-Translator: DigenisNikos <digenisnikos@linuxteam.cs.teilar.gr>\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,17 +16,17 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid " Search string not found "
-msgstr ""
+msgstr " Η συμβολοσειρά δεν βρέθηκε "
 
 msgid " Not implemented yet "
-msgstr ""
+msgstr " Δεν έχει υλοποιηθεί ακόμα"
 
 msgid " Num of replace tokens not equal to num of found tokens "
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid " Invalid token number %d "
-msgstr " Άκυρος κωδικός "
+msgstr " Άκυρος αριθμός κουπονιού %d "
 
 msgid "Normal"
 msgstr "Κανονικό"
@@ -35,7 +35,7 @@ msgid "&Regular expression"
 msgstr "&Κανονική έκφραση"
 
 msgid "Hexadecimal"
-msgstr ""
+msgstr "Δεκαεξαδικό"
 
 msgid "Wildcard search"
 msgstr ""
@@ -45,12 +45,16 @@ msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
 msgstr ""
+"Αδύνατο να φορτωθεί το θέμα '%s'.\n"
+"Εναλλακτικά φορτώθηκε το προεπιλεγμένο"
 
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
 msgstr ""
+"Μη αναγνωρίσιμο θέμα '%s'.\n"
+"Εναλλακτικά φορτώθηκε το προεπιλεγμένο"
 
 msgid "Function key 1"
 msgstr ""
@@ -209,41 +213,40 @@ msgid "Function key 24"
 msgstr ""
 
 msgid "Plus"
-msgstr ""
+msgstr "Συν"
 
 msgid "Minus"
-msgstr ""
+msgstr "Πλην"
 
 msgid "Asterisk"
-msgstr ""
+msgstr "Αστερίσκος"
 
 msgid "Dot"
-msgstr ""
+msgstr "Τελεία"
 
 msgid "Less than"
-msgstr ""
+msgstr "Μικρότερο"
 
 msgid "Great than"
-msgstr ""
+msgstr "Μεγαλύτερο"
 
 msgid "Equal"
-msgstr ""
+msgstr "Ίσο"
 
-#, fuzzy
 msgid "Comma"
-msgstr "Εντολή"
+msgstr "Κόμμα"
 
 msgid "Apostrophe"
-msgstr ""
+msgstr "Απόστροφος"
 
 msgid "Colon"
 msgstr ""
 
 msgid "Exclamation mark"
-msgstr ""
+msgstr "Θαυμαστικό"
 
 msgid "Question mark"
-msgstr ""
+msgstr "Ερωτηματικό"
 
 msgid "Ampersand"
 msgstr ""
@@ -269,19 +272,17 @@ msgstr "Υπογράμμιση"
 msgid "Understrike"
 msgstr ""
 
-#, fuzzy
 msgid "Pipe"
 msgstr "Αγωγός"
 
-#, fuzzy
 msgid "Enter"
-msgstr "Ιδιοκτήτης"
+msgstr "Enter"
 
 msgid "Tab key"
 msgstr ""
 
 msgid "Space key"
-msgstr ""
+msgstr "Διάκενο"
 
 msgid "Slash key"
 msgstr ""
@@ -290,7 +291,7 @@ msgid "Backslash key"
 msgstr ""
 
 msgid "Number sign #"
-msgstr ""
+msgstr "Σύμβολο #"
 
 msgid "Ctrl"
 msgstr "Ctrl"
@@ -306,12 +307,16 @@ msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
 msgstr ""
+"Μέγεθος οθόνης %dx%d μη υποστηριζόμενο.\n"
+"ελέγξτε τη μεταβλητή περιβάλλοντος TERM.\n"
 
+#, fuzzy
 msgid "%b %e  %Y"
-msgstr ""
+msgstr "%b %e  %Y"
 
+#, fuzzy
 msgid "%b %e %H:%M"
-msgstr ""
+msgstr "%b %e %H:%M"
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -319,15 +324,15 @@ msgstr "Το %s δεν είναι κατάλογος\n"
 
 #, c-format
 msgid "Directory %s is not owned by you\n"
-msgstr ""
+msgstr "Ο κατάλογος %s δεν σας ανήκει\n"
 
 #, c-format
 msgid "Cannot set correct permissions for directory %s\n"
-msgstr ""
+msgstr "Αδυναμία ρύθμισης σωστών αδειών για τον κατάλογο %s\n"
 
 #, c-format
 msgid "Cannot create temporary directory %s: %s\n"
-msgstr ""
+msgstr "Αδύνατο να δημιουργηθεί ο προσωρινός κατάλογος %s: %s\n"
 
 #, c-format
 msgid "Temporary files will be created in %s\n"
@@ -350,12 +355,12 @@ msgstr ""
 msgid " Dup failed "
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
 msgstr ""
-"Άνοιγμα αρχείου %s ανεπιτυχές\n"
+"Αδύνατο το άνοιγμα του cpio αρχείου\n"
 "%s"
 
 #, c-format
@@ -363,14 +368,20 @@ msgid ""
 "Premature end of cpio archive\n"
 "%s"
 msgstr ""
+"πρόωρο τέλος αρχείου cpio\n"
+"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Inconsistent hardlinks of\n"
 "%s\n"
 "in cpio archive\n"
 "%s"
-msgstr "Χαλασμένο αρχείο tar"
+msgstr ""
+"Ασυνεχείς hardlinks από\n"
+"%s\n"
+"στο cpio αρχείο\n"
+"%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
@@ -381,6 +392,8 @@ msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
 msgstr ""
+"Βρέθηκε κατεστραμμένο cpio header στο\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -390,20 +403,20 @@ msgstr ""
 "Απρόσμενο τέλος αρχείου\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid "Directory cache expired for %s"
-msgstr ""
+msgstr "Η λανθάνουσα μνήμη καταλόγου έληξε για %s"
 
 msgid "Starting linear transfer..."
 msgstr "Εκκίνηση γραμμικής μεταφοράς..."
 
 #, c-format
 msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
-msgstr ""
+msgstr "%s: %s: %s %3d%% (%lu bytes μεταφέρθηκαν)"
 
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
-msgstr ""
+msgstr "%s: %s: %s %lu bytes μεταφέρθηκαν"
 
 msgid "Getting file"
 msgstr "Παραλαβή αρχείου..."
@@ -421,7 +434,7 @@ msgstr "Χαλασμένο αρχείο extfs"
 
 #, c-format
 msgid "Warning: file %s not found\n"
-msgstr ""
+msgstr "Προσοχή: το Αρχείο %s δεν βρέθηκε\n"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -431,9 +444,7 @@ msgid "fish: Waiting for initial line..."
 msgstr ""
 
 msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr ""
-"Με συγχωρείτε, αλλά προς το παρόν συνδέσεις με χρήση κωδικού δεν "
-"υποστηρίζονται."
+msgstr "Με συγχωρείτε, αλλά προς το παρόν συνδέσεις με χρήση κωδικού δεν υποστηρίζονται."
 
 msgid " fish: Password required for "
 msgstr " fish: Απαιτείται κωδικός για το "
@@ -460,7 +471,7 @@ msgstr "fish: Ανάγνωση καταλόγου %s..."
 
 #, c-format
 msgid "%s: done."
-msgstr ""
+msgstr "%s: Ολοκληρώθηκε"
 
 #, c-format
 msgid "%s: failure"
@@ -481,7 +492,7 @@ msgid "zeros"
 msgstr ""
 
 msgid "file"
-msgstr ""
+msgstr "Αρχείο"
 
 msgid "Aborting transfer..."
 msgstr "ftpfs: Ακύρωση μεταφοράς..."
@@ -490,7 +501,7 @@ msgid "Error reported after abort."
 msgstr ""
 
 msgid "Aborted transfer would be successful."
-msgstr ""
+msgstr "Η Εγκαταληφθείσα μεταφορά θα ήταν επιτυχεις"
 
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
@@ -510,7 +521,7 @@ msgid "FTP: Account required for user %s"
 msgstr " FTP: Απαιτείται λογαριασμός για τον χρήστη %s"
 
 msgid "Account:"
-msgstr ""
+msgstr "Λογαριασμός:"
 
 msgid "ftpfs: sending user account"
 msgstr "ftpfs: αποστολή λογαριασμού χρήστη..."
@@ -652,11 +663,13 @@ msgid ""
 "%s\n"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " reconnect to %s failed\n"
 " "
-msgstr "ανεπιτυχής επανασύνδεση με τον εξυπηρέτη: %s \n"
+msgstr ""
+" ανεπιτυχής επανασύνδεση με τον εξυπηρέτη: %s \n"
+" "
 
 msgid " Authentication failed "
 msgstr ""
@@ -1038,9 +1051,8 @@ msgstr ""
 msgid " Display bits "
 msgstr ""
 
-#, fuzzy
 msgid "Other 8 bit"
-msgstr "Λοιποί"
+msgstr "Λοιπά 8 bit"
 
 msgid "Input / display codepage:"
 msgstr ""
@@ -1109,9 +1121,8 @@ msgstr ""
 msgid "Background Jobs"
 msgstr ""
 
-#, fuzzy
 msgid "Domain:"
-msgstr "Εντολή:"
+msgstr "Τομέας:"
 
 msgid "Username:"
 msgstr "Χρήστης:"
@@ -2122,10 +2133,7 @@ msgid " %s%s file error"
 msgstr ""
 
 #, c-format
-msgid ""
-"The format of the %smc.ext file has changed with version 3.0.  It seems that "
-"the installation failed.  Please fetch a fresh copy from the Midnight "
-"Commander package."
+msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
 msgstr ""
 
 #, c-format
@@ -2133,10 +2141,7 @@ msgid " ~/%s file error "
 msgstr ""
 
 #, c-format
-msgid ""
-"The format of the ~/%s file has changed with version 3.0.  You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write "
-"it."
+msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
 msgstr ""
 
 msgid "DialogTitle|Copy"
@@ -2728,8 +2733,7 @@ msgid " Hotlist Load "
 msgstr ""
 
 #, c-format
-msgid ""
-"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr ""
 
 #, c-format
@@ -3371,11 +3375,13 @@ msgstr ""
 msgid "-  < No translation >"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot save file %s:\n"
 "%s"
-msgstr " Σφάλμα αποθήκευσης αρχείου. "
+msgstr ""
+"Αδύνατη η αποθήκευση του αρχείου %s:\n"
+"%s"
 
 msgid ""
 "GNU Midnight Commander is already\n"
@@ -3415,9 +3421,8 @@ msgstr ""
 msgid "With subshell support as default"
 msgstr ""
 
-#, fuzzy
 msgid "With support for background operations\n"
-msgstr "Κατάλογος εργασιών παρασκηνίου"
+msgstr "Με υποστήριξη εργασιών παρασκηνίου\n"
 
 msgid "With mouse support on xterm and Linux console\n"
 msgstr ""
@@ -3425,9 +3430,8 @@ msgstr ""
 msgid "With mouse support on xterm\n"
 msgstr ""
 
-#, fuzzy
 msgid "With support for X11 events\n"
-msgstr "Κατάλογος εργασιών παρασκηνίου"
+msgstr "Με υποστήριξη συμβάντων X11\n"
 
 msgid "With internationalization support\n"
 msgstr ""
@@ -3538,15 +3542,11 @@ msgstr ""
 msgid " Goto Address "
 msgstr ""
 
-#, fuzzy
 msgid " Invalid address "
-msgstr " Άκυρος κωδικός "
+msgstr " Άκυρη διεύθυνση "
 
-#, fuzzy
 msgid " Cannot spawn child process "
-msgstr ""
-"Άνοιγμα αρχείου %s ανεπιτυχές\n"
-"%s"
+msgstr " Αδύνατη η δημιουργία θυγατρικής διεργασίας"
 
 msgid "Empty output from child filter"
 msgstr ""
@@ -3600,9 +3600,9 @@ msgstr ""
 msgid "%s bytes"
 msgstr "%s bytes"
 
-#, fuzzy, c-format
+#, c-format
 msgid ">= %s bytes"
-msgstr "%s byte"
+msgstr ">= %s bytes"
 
 #, c-format
 msgid ""
@@ -3611,11 +3611,13 @@ msgid ""
 " Data may have been written or not. "
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Cannot save file: \n"
 " %s "
-msgstr " Σφάλμα αποθήκευσης αρχείου. "
+msgstr ""
+" Αδύνατη η αποθήκευση του αρχείου: \n"
+" %s "
 
 #, c-format
 msgid ""
@@ -3643,22 +3645,16 @@ msgstr ""
 
 #~ msgid "Extension:"
 #~ msgstr "Επέκταση:"
-
 #~ msgid "&New              C-n"
 #~ msgstr "&Νέο                    C-n"
-
 #~ msgid "&Save              F2"
 #~ msgstr "Απο&θήκευση             F2"
-
 #~ msgid "A&bout...            "
 #~ msgstr "Πε&ρί...                   "
-
 #~ msgid "&Quit             F10"
 #~ msgstr "&Τέλος                  F10"
-
 #~ msgid "&New            C-x k"
 #~ msgstr "&Νέο                  C-x k"
-
 #~ msgid "Copy to &file...     "
 #~ msgstr "αντιγραφή σε αρ&χείο       "
 
@@ -3717,39 +3713,30 @@ msgstr ""
 #, fuzzy
 #~ msgid "Save setu&p"
 #~ msgstr " Αποθήκευση ως "
-
 #~ msgid " Edit "
 #~ msgstr " Επεξεργασία "
-
 #~ msgid " Sear/Repl "
 #~ msgstr " Αναζήτηση/Αντικατάσταση"
-
 #~ msgid "Key emulation"
 #~ msgstr "Εξομοίοση πληκτρολογίου"
-
 #~ msgid "Save"
 #~ msgstr "Αποθήκευση"
-
 #~ msgid "Delete"
 #~ msgstr "Διαγραφή"
 
 #, fuzzy
 #~ msgid "Extension"
 #~ msgstr "Επέκταση:"
-
 #~ msgid "Size"
 #~ msgstr "Μέγεθος"
-
 #~ msgid " Emacs key: "
 #~ msgstr " Πλήκτρο Emacs: "
 
 #, fuzzy
 #~ msgid "Usage:"
 #~ msgstr "Χρήστης"
-
 #~ msgid "replace &All"
 #~ msgstr "αντικατάσταση ό&λων"
-
 #~ msgid "O&ne"
 #~ msgstr "έ&Να"
 
@@ -3760,15 +3747,12 @@ msgstr ""
 #, fuzzy
 #~ msgid "Invalid hex search expression"
 #~ msgstr " Κανονική έκφραση "
-
 #~ msgid "%s bytes in %d files"
 #~ msgstr "%s byte σε %d αρχεία"
-
 #~ msgid " Cannot open file for reading: "
 #~ msgstr " Άνοιγμα αρχείου προς ανάγνωση ανεπιτυχής: "
-
 #~ msgid " Not an ordinary file: "
 #~ msgstr " Μη κανονικό αρχείο: "
-
 #~ msgid "Col %d"
 #~ msgstr "Στήλη %d"
+
