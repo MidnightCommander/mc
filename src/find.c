@@ -1255,7 +1255,7 @@ find_file (const char *start_dir, const char *pattern, const char *content,
 	    const char *lc_filename = NULL;
 	    WLEntry *le = (WLEntry *) entry->data;
 
-	    if ((le->text == NULL) || (entry->data == NULL))
+	    if ((le->text == NULL) || (le->data == NULL))
 		continue;
 
 	    if (content_pattern != NULL)
