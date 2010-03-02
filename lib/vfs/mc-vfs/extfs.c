@@ -560,15 +560,22 @@ extfs_read_archive (int fstype, const char *name, struct archive **pparc)
 static int
 extfs_which (struct vfs_class *me, const char *path)
 {
+    size_t path_len;
     size_t i;
 
     (void) me;
 
-    for (i = 0; i < extfs_plugins->len; i++) {
+    path_len = strlen (path);
+
+    for (i = 0; i < extfs_plugins->len; i++)
+    {
         extfs_plugin_info_t *info;
 
         info = &g_array_index (extfs_plugins, extfs_plugin_info_t, i);
-        if (strcmp (path, info->prefix) == 0)
+
+        if ((strncmp (path, info->prefix, path_len) == 0)
+                && ((info->prefix[path_len] == '\0')
+                    || (info->prefix[path_len] == '+')))
             return i;
     }
     return -1;
@@ -1414,65 +1421,74 @@ extfs_get_plugins (const char *where, gboolean silent)
     }
 
     if (extfs_plugins == NULL)
-	extfs_plugins = g_array_sized_new (FALSE, TRUE, sizeof (extfs_plugin_info_t), 32);
+        extfs_plugins = g_array_sized_new (FALSE, TRUE, sizeof (extfs_plugin_info_t), 32);
 
-    while ((filename = g_dir_read_name (dir)) != NULL) {
-	char fullname[MC_MAXPATHLEN];
-	struct stat s;
+    while ((filename = g_dir_read_name (dir)) != NULL)
+    {
+        char fullname[MC_MAXPATHLEN];
+        struct stat s;
 
-	g_snprintf (fullname, sizeof (fullname), "%s" PATH_SEP_STR "%s", dirname, filename);
+        g_snprintf (fullname, sizeof (fullname), "%s" PATH_SEP_STR "%s", dirname, filename);
 
-	if ((stat (fullname, &s) == 0)
-	    && S_ISREG (s.st_mode) && !S_ISDIR (s.st_mode)
-	    && (((s.st_mode & S_IXOTH) != 0) ||
-		((s.st_mode & S_IXUSR) != 0) ||
-		((s.st_mode & S_IXGRP) != 0))) {
-	    int f;
+        if ((stat (fullname, &s) == 0)
+            && S_ISREG (s.st_mode) && !S_ISDIR (s.st_mode)
+            && (((s.st_mode & S_IXOTH) != 0) ||
+                ((s.st_mode & S_IXUSR) != 0) || ((s.st_mode & S_IXGRP) != 0)))
+        {
+            int f;
 
-	    f = open (fullname, O_RDONLY);
+            f = open (fullname, O_RDONLY);
 
-	    if (f > 0) {
-		size_t len, i;
-		extfs_plugin_info_t info;
-		gboolean found = FALSE;
+            if (f > 0)
+            {
+                size_t len, i;
+                extfs_plugin_info_t info;
+                gboolean found = FALSE;
 
-		close (f);
+                close (f);
 
-		/* Handle those with a trailing '+', those flag that the
-		 * file system does not require an archive to work
-		 */
-		len = strlen (filename);
-		if (filename [len - 1] != '+')
-		    info.need_archive = TRUE;
-		else {
-		    info.need_archive = FALSE;
-		    len--;
-		}
+                /* Handle those with a trailing '+', those flag that the
+                 * file system does not require an archive to work
+                 */
+                len = strlen (filename);
+                info.need_archive = (filename[len - 1] != '+');
+                info.path = g_strconcat (dirname, PATH_SEP_STR, (char *) NULL);
+                info.prefix = g_strdup (filename);
 
-		info.path = g_strconcat (dirname, PATH_SEP_STR, (char *) NULL);
-		info.prefix = g_strndup (filename, len);
+                /* prepare to compare file names without trailing '+' */
+                if (!info.need_archive)
+                    info.prefix[len - 1] = '\0';
 
-		/* don't overload already found plugin */
-		for (i = 0; i < extfs_plugins->len; i++) {
-		    extfs_plugin_info_t *p;
+                /* don't overload already found plugin */
+                for (i = 0; i < extfs_plugins->len; i++)
+                {
+                    extfs_plugin_info_t *p;
 
-		    p = &g_array_index (extfs_plugins, extfs_plugin_info_t, i);
+                    p = &g_array_index (extfs_plugins, extfs_plugin_info_t, i);
 
-		    /* 2 files with same names cannot be in a directory */
-		    if ((strcmp (info.path, p->path) != 0)
-			&& (strcmp (info.prefix, p->prefix) == 0)) {
-			found = TRUE;
-			break;
-		    }
-		}
+                    /* 2 files with same names cannot be in a directory */
+                    if ((strcmp (info.path, p->path) != 0)
+                        && (strcmp (info.prefix, p->prefix) == 0))
+                    {
+                        found = TRUE;
+                        break;
+                    }
+                }
 
-		if (found) {
-		    g_free (info.path);
-		    g_free (info.prefix);
-		} else
-		    g_array_append_val (extfs_plugins, info);
-	    }
-	}
+                if (found)
+                {
+                    g_free (info.path);
+                    g_free (info.prefix);
+                }
+                else
+                {
+                    /* restore file name */
+                    if (!info.need_archive)
+                        info.prefix[len - 1] = '+';
+                    g_array_append_val (extfs_plugins, info);
+                }
+            }
+        }
     }
 
     g_dir_close (dir);

@@ -6,21 +6,17 @@ Starting with version 3.1, the Midnight Commander comes with so called
 extfs, which is one of the virtual filesystems. This system makes it
 possible to create new virtual filesystems for the GNU MC very easily.
 
-Such work has two basic steps:
+To handle requests, create a shell/perl/python/etc script/program
+(with executable permissions) in $(libexecdir)/mc/extfs.d
+or in ~/.mc/extfs.d.
 
-Editing $(libdir)/extfs/extfs.ini.
-Creating a shell script/program to handle requests.
-(Note: $(libdir) should be substituted for actual libdir path stored when
-configured or compiled, like /usr/local/lib/mc or /usr/lib/mc).
+(Note: $(libexecdir) should be substituted for actual libexecdir path
+stored when configured or compiled, like /usr/local/libexec or /usr/libexec).
 
-The first one is very easy:
-You assign a vfs suffix. For example, if you have .zip file, and would
-like to see what's inside it, path will be
+Assign a vfs suffix. For example, if you have .zip file, and would like
+to see what's inside it, path will be
 
 /anypath/my.zip#uzip/some_path/...
-
-Then you add a line extfs.ini file containing just that extension. If
-your vfs does not require file to work on, add ':' to the end of name.
 
 In this example, .zip is suffix, but I call vfs 'uzip'. Why? Well,
 what this vfs essentially does is UNzip. UN is too long, so I choosed
@@ -28,9 +24,18 @@ U. Note that sometime in future filesystem like zip may exist: It will
 take whole tree and create .zip file from it. So /usr#zip will be
 zipfile containing whole /usr tree.
 
-The second one may require some your knowledge of shell/c programming:
-You have to create a program (with executable permissions) prefix in
-$(libdir)/extfs (in our example $(libdir)/extfs/uzip).
+If your vfs does not require file to work on, add '+' to the end of name.
+Note, that trailing '+' in file name is not a part of vfs name, it is
+just an vfs attribue. So you have not use it in vfs commands:
+
+cd #rpms
+
+is correct command, and
+
+cd #rpms+
+
+is incorrect command.
+
 
 * Commands that should be implemented by your shell script
 ----------------------------------------------------------
