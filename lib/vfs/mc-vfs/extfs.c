@@ -583,16 +583,22 @@ extfs_read_archive (int fstype, const char *name, struct archive **pparc)
 static int
 extfs_which (struct vfs_class *me, const char *path)
 {
+    size_t path_len;
     size_t i;
 
     (void) me;
+
+    path_len = strlen (path);
 
     for (i = 0; i < extfs_plugins->len; i++)
     {
         extfs_plugin_info_t *info;
 
         info = &g_array_index (extfs_plugins, extfs_plugin_info_t, i);
-        if (strcmp (path, info->prefix) == 0)
+
+        if ((strncmp (path, info->prefix, path_len) == 0)
+                && ((info->prefix[path_len] == '\0')
+                    || (info->prefix[path_len] == '+')))
             return i;
     }
     return -1;
@@ -1470,16 +1476,13 @@ extfs_get_plugins (const char *where, gboolean silent)
                  * file system does not require an archive to work
                  */
                 len = strlen (filename);
-                if (filename[len - 1] != '+')
-                    info.need_archive = TRUE;
-                else
-                {
-                    info.need_archive = FALSE;
-                    len--;
-                }
-
+                info.need_archive = (filename[len - 1] != '+');
                 info.path = g_strconcat (dirname, PATH_SEP_STR, (char *) NULL);
-                info.prefix = g_strndup (filename, len);
+                info.prefix = g_strdup (filename);
+
+                /* prepare to compare file names without trailing '+' */
+                if (!info.need_archive)
+                    info.prefix[len - 1] = '\0';
 
                 /* don't overload already found plugin */
                 for (i = 0; i < extfs_plugins->len; i++)
@@ -1503,7 +1506,12 @@ extfs_get_plugins (const char *where, gboolean silent)
                     g_free (info.prefix);
                 }
                 else
+                {
+                    /* restore file name */
+                    if (!info.need_archive)
+                        info.prefix[len - 1] = '+';
                     g_array_append_val (extfs_plugins, info);
+                }
             }
         }
     }
