@@ -673,18 +673,19 @@ extfs_resolve_symlinks_int (struct entry *entry, GSList *list)
 
     if (g_slist_find (list, entry) != NULL)
     {
-	/* Here we protect us against symlink looping */
-	errloop = TRUE;
-    } else {
-	GSList *looping;
+        /* Here we protect us against symlink looping */
+        errloop = TRUE;
+    }
+    else
+    {
+        GSList *looping;
 
-	looping = g_slist_prepend (list, entry);
-	pent = extfs_find_entry_int (entry->dir, entry->inode->linkname,
-					looping, FALSE, FALSE);
-	g_free (looping); /* It is OK here, no any leaks */
+        looping = g_slist_prepend (list, entry);
+        pent = extfs_find_entry_int (entry->dir, entry->inode->linkname, looping, FALSE, FALSE);
+        g_slist_delete_link (looping, looping);
 
-	if (pent == NULL)
-	    my_errno = ENOENT;
+        if (pent == NULL)
+            my_errno = ENOENT;
     }
 
     return pent;
