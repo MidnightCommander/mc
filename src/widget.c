@@ -914,7 +914,7 @@ static void draw_history_button (WInput * in)
 
 /* Input widgets now have a global kill ring */
 /* Pointer to killed data */
-static char *kill_buffer = 0;
+static char *kill_buffer = NULL;
 
 void
 update_input (WInput *in, int clear_first)
@@ -1260,14 +1260,14 @@ do_show_hist (WInput *in)
 static void
 input_destroy (WInput *in)
 {
-    if (!in){
+    if (in == NULL){
 	fprintf (stderr, "Internal error: null Input *\n");
 	exit (1);
     }
 
     new_input (in);
 
-    if (in->history){
+    if (in->history != NULL){
 	if (!in->is_password && (((Widget *) in)->parent->ret_value != B_CANCEL))
 	    history_put (in->history_name, in->history);
 
@@ -1650,14 +1650,14 @@ clear_region (WInput *in)
 static void
 yank (WInput *in)
 {
-    char *p;
+    if (kill_buffer != NULL) {
+	char *p;
 
-    if (!kill_buffer)
-        return;
-    in->charpoint = 0;
-    for (p = kill_buffer; *p; p++)
-	insert_char (in, *p);
-    in->charpoint = 0;
+	in->charpoint = 0;
+	for (p = kill_buffer; *p != '\0'; p++)
+	    insert_char (in, *p);
+	in->charpoint = 0;
+    }
 }
 
 static void
