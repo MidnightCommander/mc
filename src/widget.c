@@ -1356,6 +1356,9 @@ input_destroy (WInput *in)
     g_free (in->buffer);
     free_completions (in);
     g_free (in->history_name);
+
+    g_free (kill_buffer);
+    kill_buffer = NULL;
 }
 
 void
