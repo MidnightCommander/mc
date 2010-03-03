@@ -71,7 +71,18 @@
 #define BUTTONBAR_HOTKEY_COLOR   mc_skin_color__cache[34]
 #define BUTTONBAR_BUTTON_COLOR   mc_skin_color__cache[35]
 
-#define MC_SKIN_COLOR_CACHE_COUNT 36
+/* Diff colors */
+#define DFF_ADD_COLOR            mc_skin_color__cache[36]
+#define DFF_CHG_COLOR            mc_skin_color__cache[37]
+#define DFF_CHH_COLOR            mc_skin_color__cache[38]
+#define DFF_CHD_COLOR            mc_skin_color__cache[39]
+#define DFF_DEL_COLOR            mc_skin_color__cache[40]
+#define DFF_FOLDER_COLOR         mc_skin_color__cache[41]
+#define DFF_ERROR_COLOR          mc_skin_color__cache[42]
+
+
+
+#define MC_SKIN_COLOR_CACHE_COUNT 43
 
 
 /*** enums ***************************************************************************************/

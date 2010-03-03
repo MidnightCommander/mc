@@ -4,6 +4,9 @@ if USE_EDIT
 SUBDIRS += editor
 endif
 
+if USE_DIFF
+SUBDIRS += diffviewer
+endif
 
 AM_CPPFLAGS = -DDATADIR=\""$(pkgdatadir)/"\" \
 	-DLOCALEDIR=\""$(localedir)"\" \
@@ -36,16 +39,22 @@ if USE_EDIT
 EDITLIB = editor/libedit.la
 endif
 
+if USE_DIFF
+DIFFLIB = diffviewer/libdiffviewer.la
+endif
+
 SRC_charset = charsets.c charsets.h selcodepage.c selcodepage.h
 
 if CHARSET
     SRC_USE_charset=$(SRC_charset)
 endif
 
+
 mc_LDADD = \
 	../lib/libmc.la \
-	$(EDITLIB) \
 	viewer/libmcviewer.la \
+	$(EDITLIB) \
+	$(DIFFLIB) \
 	$(INTLLIBS) $(MCLIBS) $(SLANGLIB) $(LIBICONV) \
 	$(GLIB_LIBS) $(PCRE_LIBS)
 

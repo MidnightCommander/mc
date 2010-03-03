@@ -946,6 +946,14 @@ compare_dirs_cmd (void)
     }
 }
 
+#ifdef USE_DIFF_VIEW
+void
+diff_view_cmd (void)
+{
+    view_diff_cmd (NULL);
+}
+#endif
+
 void
 history_cmd (void)
 {

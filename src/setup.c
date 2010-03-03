@@ -1085,6 +1085,10 @@ load_keymap_defs (void)
         help_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
         load_keymap_from_section ("help", help_keymap, mc_global_keymap);
 
+#ifdef USE_DIFF_VIEW
+        diff_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
+        load_keymap_from_section ("diffviewer", diff_keymap, mc_global_keymap);
+#endif
         mc_config_deinit (mc_global_keymap);
     }
 }
@@ -1114,6 +1118,10 @@ free_keymap_defs (void)
         g_array_free (tree_keymap, TRUE);
     if (help_keymap != NULL)
         g_array_free (help_keymap, TRUE);
+#ifdef USE_DIFF_VIEW
+    if (diff_keymap != NULL)
+        g_array_free (diff_keymap, TRUE);
+#endif
 }
 
 void

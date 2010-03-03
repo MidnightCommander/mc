@@ -367,6 +367,9 @@ static name_keymap_t command_names[] = {
     { "CmdCopyOtherTagged",              CK_CopyOtherTagged },
     { "CmdToggleShowHidden",             CK_ToggleShowHidden },
     { "CmdTogglePanelsSplit",            CK_TogglePanelsSplit },
+#ifdef USE_DIFF_VIEW
+    { "CmdDiffView",                     CK_DiffViewCmd},
+#endif
 
     /* panel */
     { "PanelChdirOtherPanel",            CK_PanelChdirOtherPanel },
@@ -443,6 +446,39 @@ static name_keymap_t command_names[] = {
     { "ExtMap2",                         CK_StartExtMap2 },
     { "ShowCommandLine",                 CK_ShowCommandLine },
     { "SelectCodepage",                  CK_SelectCodepage },
+
+
+    /* diff viewer */
+    { "DiffDisplaySymbols",              CK_DiffDisplaySymbols},
+    { "DiffDisplayNumbers",              CK_DiffDisplayNumbers},
+    { "DiffFull",                        CK_DiffFull},
+    { "DiffEqual",                       CK_DiffEqual},
+    { "DiffSplitMore",                   CK_DiffSplitMore},
+    { "DiffSplitLess",                   CK_DiffSplitLess},
+    { "DiffShowDiff",                    CK_DiffShowDiff},
+    { "DiffSetTab2",                     CK_DiffSetTab2},
+    { "DiffSetTab3",                     CK_DiffSetTab3},
+    { "DiffSetTab4",                     CK_DiffSetTab4},
+    { "DiffSetTab8",                     CK_DiffSetTab8},
+    { "DiffSwapPanel",                   CK_DiffSwapPanel},
+    { "DiffRedo",                        CK_DiffRedo},
+    { "DiffNextHunk",                    CK_DiffNextHunk},
+    { "DiffPrevHunk",                    CK_DiffPrevHunk},
+    { "DiffGoto",                        CK_DiffGoto},
+    { "DiffEditCurrent",                 CK_DiffEditCurrent},
+    { "DiffEditOther",                   CK_DiffEditOther},
+    { "DiffSearch",                      CK_DiffSearch},
+    { "DiffEOF",                         CK_DiffEOF},
+    { "DiffBOF",                         CK_DiffBOF},
+    { "DiffDown",                        CK_DiffDown},
+    { "DiffUp",                          CK_DiffUp},
+    { "DiffLeft",                        CK_DiffLeft},
+    { "DiffRight",                       CK_DiffRight},
+    { "DiffPageDown",                    CK_DiffPageDown},
+    { "DiffPageUp",                      CK_DiffPageUp},
+    { "DiffHome",                        CK_DiffHome},
+    { "DiffEnd",                         CK_DiffEnd},
+    { "DiffQuit",                        CK_DiffQuit},
 
     { NULL,                              CK_Ignore_Key }
 };
@@ -907,6 +943,47 @@ const global_keymap_t default_input_keymap[] = {
     { ALT ('\t'),             CK_InputComplete,         "M-tab" },
 
     { 0, CK_Ignore_Key, "" }
+};
+
+/* diff viewer */
+const global_keymap_t default_diff_keymap[] = {
+
+    { 's',                    CK_DiffDisplaySymbols, "s" },
+    { 'l',                    CK_DiffDisplayNumbers, "l" },
+    { 'f',                    CK_DiffFull,           "f" },
+    { '=',                    CK_DiffEqual,          "=" },
+    { '>',                    CK_DiffSplitMore,      ">" },
+    { '<',                    CK_DiffSplitLess,      "<" },
+    { '2',                    CK_DiffSetTab2,        "2" },
+    { '3',                    CK_DiffSetTab3,        "3" },
+    { '4',                    CK_DiffSetTab4,        "4" },
+    { '8',                    CK_DiffSetTab8,        "8" },
+    { XCTRL ('u'),            CK_DiffSwapPanel,      "C-u" },
+    { XCTRL ('r'),            CK_DiffRedo,           "C-r" },
+    { XCTRL ('o'),            CK_ShowCommandLine,    "C-o" },
+    { 'n',                    CK_DiffNextHunk,       "n" },
+    { 'p',                    CK_DiffPrevHunk,       "p" },
+    { 'g',                    CK_DiffGoto,           "g" },
+    { 'G',                    CK_DiffGoto,           "G" },
+    { KEY_F (4),              CK_DiffEditCurrent,    "F4" },
+    { KEY_F (14),             CK_DiffEditOther,      "S-F4" },
+    { KEY_F (17),             CK_DiffSearch,         "S-F7" },
+    { KEY_M_CTRL | KEY_HOME,  CK_DiffBOF,            "C-Home" },
+    { KEY_M_CTRL | KEY_END,   CK_DiffEOF,            "C-End" },
+    { KEY_DOWN,               CK_DiffDown,           "Down" },
+    { KEY_UP,                 CK_DiffUp,             "Up" },
+    { KEY_M_CTRL | KEY_LEFT,  CK_DiffQuickLeft,      "C-Left" },
+    { KEY_M_CTRL | KEY_RIGHT, CK_DiffQuickRight,     "C-Right" },
+    { KEY_LEFT,               CK_DiffLeft,           "Left" },
+    { KEY_RIGHT,              CK_DiffRight,          "Right" },
+    { KEY_NPAGE,              CK_DiffPageDown,       "Down" },
+    { KEY_PPAGE,              CK_DiffPageUp,         "Up" },
+    { KEY_HOME,               CK_DiffHome,           "Home" },
+    { KEY_END,                CK_DiffEnd,            "End" },
+    { 'q',                    CK_DiffQuit,           "q" },
+    { 'Q',                    CK_DiffQuit,           "Q" },
+    { XCTRL ('g'),            CK_DiffQuit,           "C-g" },
+    { ESC_CHAR,               CK_DiffQuit,           "Esc" },
 };
 
 static int

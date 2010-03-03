@@ -240,6 +240,14 @@ mc_skin_color_cache_init (void)
     BOOK_MARK_FOUND_COLOR = mc_skin_color_get ("editor", "bookmarkfound");
     BUTTONBAR_HOTKEY_COLOR = mc_skin_color_get ("buttonbar", "hotkey");
     BUTTONBAR_BUTTON_COLOR = mc_skin_color_get ("buttonbar", "button");
+
+    DFF_ADD_COLOR = mc_skin_color_get ("diffviewer", "added");
+    DFF_CHG_COLOR = mc_skin_color_get ("diffviewer", "changedline");
+    DFF_CHH_COLOR = mc_skin_color_get ("diffviewer", "changednew");
+    DFF_CHD_COLOR = mc_skin_color_get ("diffviewer", "changed");
+    DFF_DEL_COLOR = mc_skin_color_get ("diffviewer", "removed");
+    DFF_FOLDER_COLOR = mc_skin_color_get ("diffviewer", "folder");
+    DFF_ERROR_COLOR = mc_skin_color_get ("diffviewer", "error");
 }
 
 /* --------------------------------------------------------------------------------------------- */

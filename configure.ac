@@ -482,6 +482,21 @@ else
 	edit_msg="no"
 fi
 
+dnl
+dnl Diff viewer support.
+dnl
+AC_ARG_WITH(diff_viewer,
+        [  --with-diff-viewer       Compile with diff viewer [[yes]]])
+
+if test x$with_diff_viewer != xno; then
+	AC_DEFINE(USE_DIFF_VIEW, 1, [Define to enable diff viewer])
+	use_diff=yes
+	diff_msg="yes"
+	AC_MSG_NOTICE([using diff viewer])
+else
+	diff_msg="no"
+fi
+
 
 dnl Check if the OS is supported by the console saver.
 cons_saver=""
@@ -555,6 +570,7 @@ fi
 AM_CONDITIONAL(USE_MAINTAINER_MODE, [test x"$USE_MAINTAINER_MODE" = xyes])
 AM_CONDITIONAL(USE_SCREEN_SLANG, [test x"$with_screen" = xslang])
 AM_CONDITIONAL(USE_EDIT, [test -n "$use_edit"])
+AM_CONDITIONAL(USE_DIFF, [test -n "$use_diff"])
 AM_CONDITIONAL(ENABLE_VFS_NET, [test x"$use_net_code" = xtrue])
 AM_CONDITIONAL(USE_SAMBA_FS, [test -n "$use_smbfs"])
 AM_CONDITIONAL(ENABLE_MCSERVER, [test x"$enable_mcserver" = "xyes"])
@@ -582,6 +598,7 @@ src/Makefile
 src/consaver/Makefile
 src/editor/Makefile
 src/viewer/Makefile
+src/diffviewer/Makefile
 
 lib/Makefile
 lib/filehighlight/Makefile
@@ -662,6 +679,7 @@ Configuration:
   X11 events support:         ${textmode_x11_support}
   With subshell support:      ${subshell}
   Internal editor:            ${edit_msg}
+  Diff viewer:                ${diff_msg}
   Support for charset:        ${charset_msg}
   Search type:                ${SEARCH_TYPE}
 "

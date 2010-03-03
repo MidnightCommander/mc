@@ -41,4 +41,6 @@
 
 #define MC_HISTORY_SHARED_SEARCH	"mc.shared.search"
 
+#define MC_HISTORY_YDIFF_GOTO_LINE	"mc.ydiff.goto-line"
+
 #endif

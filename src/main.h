@@ -99,11 +99,18 @@ extern GArray *panel_keymap;
 extern GArray *input_keymap;
 extern GArray *tree_keymap;
 extern GArray *help_keymap;
+#ifdef USE_DIFF_VIEW
+extern GArray *diff_keymap;
+#endif
 
 extern const global_keymap_t *panel_map;
 extern const global_keymap_t *input_map;
 extern const global_keymap_t *tree_map;
 extern const global_keymap_t *help_map;
+
+#ifdef USE_DIFF_VIEW
+extern const global_keymap_t *diff_map;
+#endif
 
 #ifdef HAVE_SUBSHELL_SUPPORT
 void do_update_prompt (void);

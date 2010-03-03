@@ -317,7 +317,9 @@ GArray *panel_keymap = NULL;
 GArray *input_keymap = NULL;
 GArray *tree_keymap = NULL;
 GArray *help_keymap = NULL;
-
+#ifdef USE_DIFF_VIEW
+GArray *diff_keymap = NULL;
+#endif
 const global_keymap_t *main_map;
 const global_keymap_t *main_x_map;
 
@@ -746,6 +748,9 @@ create_command_menu (void)
     entries = g_list_append (entries, menu_entry_create (_("S&wap panels"),                  CK_SwapCmd));
     entries = g_list_append (entries, menu_entry_create (_("Switch &panels on/off"),         CK_ShowCommandLine));
     entries = g_list_append (entries, menu_entry_create (_("&Compare directories"),          CK_CompareDirsCmd));
+#ifdef USE_DIFF_VIEW
+    entries = g_list_append (entries, menu_entry_create (_("&View diff files"),              CK_DiffViewCmd));
+#endif
     entries = g_list_append (entries, menu_entry_create (_("E&xternal panelize"),            CK_ExternalPanelize));
     entries = g_list_append (entries, menu_entry_create (_("Show directory s&izes"),         CK_SingleDirsizeCmd));
     entries = g_list_append (entries, menu_separator_create ());
@@ -1153,6 +1158,11 @@ midnight_execute_cmd (Widget *sender, unsigned long command)
     case CK_CompareDirsCmd:
         compare_dirs_cmd ();
         break;
+#ifdef USE_DIFF_VIEW
+    case CK_DiffViewCmd:
+        diff_view_cmd ();
+        break;
+#endif
     case CK_ConfigureBox:
         configure_box ();
         break;
@@ -1879,6 +1889,12 @@ do_nc (void)
     help_map = default_help_keymap;
     if (help_keymap && help_keymap->len > 0)
         help_map = (global_keymap_t *) help_keymap->data;
+
+#ifdef USE_DIFF_VIEW
+    diff_map = default_diff_keymap;
+    if (diff_keymap && diff_keymap->len > 0)
+        diff_map = (global_keymap_t *) diff_keymap->data;
+#endif
 
     /* Check if we were invoked as an editor or file viewer */
     if ((view_one_file != NULL) || (edit_one_file != NULL))

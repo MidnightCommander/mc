@@ -367,6 +367,7 @@
 #define CK_HelpCmd                      7072
 #define CK_MenuCmd                      7073
 #define CK_TogglePanelsSplit            7074
+#define CK_DiffViewCmd                  7075
 
 /* panels */
 #define CK_PanelChdirOtherPanel         8001
@@ -408,6 +409,40 @@
 #define CK_PanelSortOrderByExt          8037
 #define CK_PanelSortOrderBySize         8038
 #define CK_PanelSortOrderByMTime        8039
+
+/* diff viewer */
+#define CK_DiffDisplaySymbols           9001
+#define CK_DiffDisplayNumbers           9002
+#define CK_DiffFull                     9003
+#define CK_DiffEqual                    9004
+#define CK_DiffSplitMore                9005
+#define CK_DiffSplitLess                9006
+#define CK_DiffShowDiff                 9008
+#define CK_DiffSetTab2                  9009
+#define CK_DiffSetTab3                  9010
+#define CK_DiffSetTab4                  9011
+#define CK_DiffSetTab8                  9012
+#define CK_DiffSwapPanel                9013
+#define CK_DiffRedo                     9014
+#define CK_DiffNextHunk                 9015
+#define CK_DiffPrevHunk                 9016
+#define CK_DiffGoto                     9017
+#define CK_DiffEditCurrent              9018
+#define CK_DiffEditOther                9019
+#define CK_DiffSearch                   9020
+#define CK_DiffEOF                      9021
+#define CK_DiffBOF                      9022
+#define CK_DiffDown                     9023
+#define CK_DiffUp                       9024
+#define CK_DiffLeft                     9025
+#define CK_DiffRight                    9026
+#define CK_DiffQuickLeft                9027
+#define CK_DiffQuickRight               9028
+#define CK_DiffPageDown                 9029
+#define CK_DiffPageUp                   9030
+#define CK_DiffHome                     9031
+#define CK_DiffEnd                      9032
+#define CK_DiffQuit                     9033
 
 /*
    Process a block through a shell command: CK_Pipe_Block(i) executes shell_cmd[i].
