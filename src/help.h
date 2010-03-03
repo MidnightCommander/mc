@@ -29,8 +29,6 @@
 #ifndef MC_HELP_H
 #define MC_HELP_H
 
-#define HELP_TEXT_WIDTH 58
-
 /* Markers used in the help files */
 #define CHAR_LINK_START		'\01'	/* Ctrl-A */
 #define CHAR_LINK_POINTER	'\02'	/* Ctrl-B */
