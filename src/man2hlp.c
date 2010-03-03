@@ -3,6 +3,7 @@
    2007 Free Software Foundation, Inc.
 		 2002  Andrew V. Samoilov
 		 2002  Pavel Roskin
+		 2010 Andrew Borodin
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -255,9 +256,6 @@ print_string (char *buffer)
 	    /* Skip empty strings */
 	    if (*(buffer)) {
 		len = string_len (buffer);
-		/* Change the line if about to break the right margin */
-		if (col + len >= HELP_TEXT_WIDTH)
-		    newline ();
 		/* Words are separated by spaces */
 		if (col > 0) {
 		    fputc (' ', f_out);
@@ -346,7 +344,6 @@ handle_node (char *buffer, int is_sh)
 		/* Start a new section, but omit empty section names */
 		if (*buffer) {
 		    fprintf (f_out, "%c[%s]", CHAR_NODE_END, buffer);
-		    col++;
 		    newline ();
 		}
 
