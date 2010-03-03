@@ -100,10 +100,9 @@ static struct {
 typedef struct Link_Area {
     int x1, y1, x2, y2;
     const char *link_name;
-    struct Link_Area *next;
 } Link_Area;
 
-static Link_Area *link_area = NULL;
+static GSList *link_area = NULL;
 static gboolean inside_link_area = FALSE;
 
 static cb_ret_t help_callback (Dlg_head *h, Widget *sender,
@@ -313,22 +312,19 @@ select_prev_link (const char *current_link)
 static void
 start_link_area (int x, int y, const char *link_name)
 {
-    Link_Area *new;
+    Link_Area *la;
 
     if (inside_link_area)
 	message (D_NORMAL, _("Warning"), _(" Internal bug: Double start of link area "));
 
     /* Allocate memory for a new link area */
-    new = g_new (Link_Area, 1);
-    new->next = link_area;
-    link_area = new;
-
+    la = g_new (Link_Area, 1);
     /* Save the beginning coordinates of the link area */
-    link_area->x1 = x;
-    link_area->y1 = y;
-
+    la->x1 = x;
+    la->y1 = y;
     /* Save the name of the destination anchor */
-    link_area->link_name = link_name;
+    la->link_name = link_name;
+    link_area = g_slist_prepend (link_area, la);
 
     inside_link_area = TRUE;
 }
@@ -337,9 +333,10 @@ static void
 end_link_area (int x, int y)
 {
     if (inside_link_area) {
+	Link_Area *la = (Link_Area *) link_area->data;
 	/* Save the end coordinates of the link area */
-	link_area->x2 = x;
-	link_area->y2 = y;
+	la->x2 = x;
+	la->y2 = y;
 	inside_link_area = FALSE;
     }
 }
@@ -347,14 +344,9 @@ end_link_area (int x, int y)
 static void
 clear_link_areas (void)
 {
-    Link_Area *current;
-
-    while (link_area != NULL) {
-	current = link_area;
-	link_area = current->next;
-	g_free (current);
-    }
-
+    g_slist_foreach (link_area, (GFunc) g_free, NULL);
+    g_slist_free (link_area);
+    link_area = NULL;
     inside_link_area = FALSE;
 }
 
@@ -465,10 +457,10 @@ help_show (Dlg_head *h, const char *paint_start)
 	end_of_node = line < help_lines;
 	tty_setcolor (HELP_NORMAL_COLOR);
 	if ((int) (selected_item - last_shown) >= 0) {
-	    if (link_area == NULL)
+	    if ((link_area == NULL) || (link_area->data == NULL))
 		selected_item = NULL;
 	    else {
-		selected_item = link_area->link_name;
+		selected_item = ((Link_Area *) link_area->data)->link_name;
 		repeat_paint = TRUE;
 	    }
 	}
@@ -483,7 +475,7 @@ static int
 help_event (Gpm_Event *event, void *vp)
 {
     Widget *w = vp;
-    Link_Area *current_area;
+    GSList *current_area;
 
     if ((event->type & GPM_UP) == 0)
 	return 0;
@@ -504,34 +496,34 @@ help_event (Gpm_Event *event, void *vp)
     }
 
     /* Test whether the mouse click is inside one of the link areas */
-    current_area = link_area;
-    while (current_area != NULL)
+    for (current_area = link_area; current_area != NULL; current_area = g_slist_next (current_area))
     {
+	Link_Area *la = (Link_Area *) current_area->data;
 	/* Test one line link area */
-	if (event->y == current_area->y1 && event->x >= current_area->x1 &&
-	    event->y == current_area->y2 && event->x <= current_area->x2)
+	if (event->y == la->y1 && event->x >= la->x1 &&
+	    event->y == la->y2 && event->x <= la->x2)
 	    break;
 	/* Test two line link area */
-	if (current_area->y1 + 1 == current_area->y2){
+	if (la->y1 + 1 == la->y2) {
 	    /* The first line */
-	    if (event->y == current_area->y1 && event->x >= current_area->x1)
+	    if (event->y == la->y1 && event->x >= la->x1)
 		break;
 	    /* The second line */
-	    if (event->y == current_area->y2 && event->x <= current_area->x2)
+	    if (event->y == la->y2 && event->x <= la->x2)
 		break;
 	}
 	/* Mouse will not work with link areas of more than two lines */
-
-	current_area = current_area->next;
     }
 
     /* Test whether a link area was found */
     if (current_area != NULL) {
+	Link_Area *la = (Link_Area *) current_area->data;
+
 	/* The click was inside a link area -> follow the link */
 	history_ptr = (history_ptr+1) % HISTORY_SIZE;
 	history [history_ptr].page = currentpoint;
-	history [history_ptr].link = current_area->link_name;
-	currentpoint = help_follow_link (currentpoint, current_area->link_name);
+	history [history_ptr].link = la->link_name;
+	currentpoint = help_follow_link (currentpoint, la->link_name);
 	selected_item = NULL;
     } else if (event->y < 0)
 	move_backward (help_lines - 1);
@@ -659,8 +651,8 @@ help_prev_link (gboolean move_up)
     if ((selected_item == NULL) || (selected_item < currentpoint)) {
 	if (move_up)
 	    move_backward (1);
-	else if (link_area != NULL)
-	    selected_item = link_area->link_name;
+	else if ((link_area != NULL) && (link_area->data != NULL))
+	    selected_item = ((Link_Area *) link_area->data)->link_name;
 	else
 	    selected_item = NULL;
     }
