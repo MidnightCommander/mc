@@ -1345,7 +1345,7 @@ input_destroy (WInput *in)
     new_input (in);
 
     if (in->history){
-	if (!in->is_password)	/* don't save passwords ;-) */
+	if (!in->is_password && (((Widget *) in)->parent->ret_value != B_CANCEL))
 	    history_put (in->history_name, in->history);
 
 	in->history = g_list_first (in->history);
