@@ -112,6 +112,7 @@ struct WEdit {
     struct syntax_rule rule;
     char *syntax_type;		/* description of syntax highlighting type being used */
     GTree *defines;		/* List of defines */
+    gboolean is_case_insensitive; /* selects language case sensitivity */
 
     /* macro stuff */
     int macro_i;		/* index to macro[], -1 if not recording a macro */

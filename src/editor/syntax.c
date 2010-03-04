@@ -25,6 +25,8 @@
  *  \brief Source: editor syntax highlighting
  *  \author Paul Sheer
  *  \date 1996, 1997
+ *  \author Mikhail Pobolovets
+ *  \date 2010
  *
  *  Mispelled words are flushed from the syntax highlighting rules
  *  when they have been around longer than
@@ -56,6 +58,7 @@
 
 #include "edit-impl.h"
 #include "edit-widget.h"
+
 
 /* bytes */
 #define SYNTAX_MARKER_DENSITY 512
@@ -134,6 +137,16 @@ destroy_defines (GTree **defines)
     *defines = NULL;
 }
 
+/* Wrapper for case insensitive mode */
+inline static int xx_tolower(WEdit * edit, int c)
+{
+    if (edit->is_case_insensitive)
+    {
+        return tolower(c);
+    }
+    return c;
+}
+
 static void
 subst_defines (GTree *defines, char **argv, char **argv_end)
 {
@@ -179,7 +192,7 @@ compare_word_to_right (WEdit *edit, long i, const char *text,
 
     if (!*text)
 	return -1;
-    c = edit_get_byte (edit, i - 1);
+    c = xx_tolower(edit, edit_get_byte (edit, i - 1));
     if (line_start)
 	if (c != '\n')
 	    return -1;
@@ -193,7 +206,7 @@ compare_word_to_right (WEdit *edit, long i, const char *text,
 	    if (++p > q)
 		return -1;
 	    for (;;) {
-		c = edit_get_byte (edit, i);
+		c = xx_tolower(edit, edit_get_byte (edit, i));
 		if (!*p)
 		    if (whole_right)
 			if (!strchr (whole_right, c))
@@ -210,7 +223,7 @@ compare_word_to_right (WEdit *edit, long i, const char *text,
 		return -1;
 	    j = 0;
 	    for (;;) {
-		c = edit_get_byte (edit, i);
+		c = xx_tolower(edit, edit_get_byte (edit, i));
 		if (c == *p) {
 		    j = i;
 		    if (*p == *text && !p[1])	/* handle eg '+' and @+@ keywords properly */
@@ -248,7 +261,7 @@ compare_word_to_right (WEdit *edit, long i, const char *text,
 	    c = -1;
 	    for (;; i++) {
 		d = c;
-		c = edit_get_byte (edit, i);
+		c = xx_tolower(edit, edit_get_byte (edit, i));
 		for (j = 0; p[j] != SYNTAX_TOKEN_BRACKET && p[j]; j++)
 		    if (c == p[j])
 			goto found_char2;
@@ -267,7 +280,7 @@ compare_word_to_right (WEdit *edit, long i, const char *text,
 	case SYNTAX_TOKEN_BRACE:
 	    if (++p > q)
 		return -1;
-	    c = edit_get_byte (edit, i);
+	    c = xx_tolower(edit, edit_get_byte (edit, i));
 	    for (; *p != SYNTAX_TOKEN_BRACE && *p; p++)
 		if (c == *p)
 		    goto found_char3;
@@ -277,21 +290,22 @@ compare_word_to_right (WEdit *edit, long i, const char *text,
 		 p++;
 	    break;
 	default:
-	    if (*p != edit_get_byte (edit, i))
+	    if (*p != xx_tolower(edit, edit_get_byte (edit, i)))
 		return -1;
 	}
     }
     if (whole_right)
-	if (strchr (whole_right, edit_get_byte (edit, i)))
+	if (strchr (whole_right, xx_tolower(edit, edit_get_byte (edit, i))))
 	    return -1;
     return i;
 }
 
-static const char *xx_strchr (const unsigned char *s, int c)
+static const char *xx_strchr (WEdit * edit, const unsigned char *s, int char_byte)
 {
-    while (*s >= '\005' && *s != (unsigned char) c) {
-	s++;
+    while (*s >= '\005' && xx_tolower(edit, *s) != char_byte) {
+        s++;
     }
+
     return (const char *) s;
 }
 
@@ -304,7 +318,7 @@ static struct syntax_rule apply_rules_going_right (WEdit * edit, long i, struct 
     long end = 0;
     struct syntax_rule _rule = rule;
 
-    if (!(c = edit_get_byte (edit, i)))
+    if (!(c = xx_tolower(edit, edit_get_byte (edit, i))))
 	return rule;
     is_end = (rule.end == (unsigned char) i);
 
@@ -349,7 +363,7 @@ static struct syntax_rule apply_rules_going_right (WEdit * edit, long i, struct 
 
 	p = (r = edit->rules[_rule.context])->keyword_first_chars;
 	if (p)
-	while (*(p = xx_strchr ((unsigned char *) p + 1, c))) {
+	while (*(p = xx_strchr (edit, (unsigned char *) p + 1, c))) {
 	    struct key_word *k;
 	    int count;
 	    long e;
@@ -425,7 +439,7 @@ static struct syntax_rule apply_rules_going_right (WEdit * edit, long i, struct 
 	const char *p;
 
 	p = (r = edit->rules[_rule.context])->keyword_first_chars;
-	while (*(p = xx_strchr ((unsigned char *) p + 1, c))) {
+	while (*(p = xx_strchr (edit, (unsigned char *) p + 1, c))) {
 	    struct key_word *k;
 	    int count;
 	    long e;
@@ -705,6 +719,13 @@ static FILE *open_include_file (const char *filename)
     return fopen (error_file_name, "r");
 }
 
+inline static void xx_lowerize_line(WEdit * edit, char * line, size_t len)
+{
+    if (edit->is_case_insensitive)
+        for (size_t i = 0; i < len; ++i)
+            line[i] = tolower(line[i]);
+}
+
 /* returns line number on error */
 static int
 edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
@@ -726,6 +747,7 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
 	max_alloc_words_per_context = MAX_WORDS_PER_CONTEXT;
 
     args[0] = 0;
+    edit->is_case_insensitive = FALSE;
 
     strcpy (whole_left, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_01234567890");
     strcpy (whole_right, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_01234567890");
@@ -737,10 +759,13 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
 
     for (;;) {
 	char **a;
+        size_t len;
 
 	line++;
 	l = 0;
-	if (read_one_line (&l, f) == 0) {
+
+        len = read_one_line (&l, f);
+	if (len == 0) {
 	    if (g) {
 		fclose (f);
 		f = g;
@@ -748,12 +773,19 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
 		line = save_line + 1;
 		MC_PTR_FREE (error_file_name);
 		MC_PTR_FREE (l);
-		if (read_one_line (&l, f) == 0)
+                len = read_one_line (&l, f);
+		if (len == 0)
 		    break;
+                else
+                    xx_lowerize_line(edit, l, len);
 	    } else {
 		break;
 	    }
 	}
+        else
+        {
+            xx_lowerize_line(edit, l, len);
+        }
 	argc = get_args (l, args, args_size);
 	a = args + 1;
 	if (!args[0]) {
@@ -772,6 +804,8 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
 	    }
 	    save_line = line;
 	    line = 0;
+        } else if (!strcmp (args[0], "caseinsensitive")) {
+            edit->is_case_insensitive = TRUE;
 	} else if (!strcmp (args[0], "wholechars")) {
 	    check_a;
 	    if (!strcmp (*a, "left")) {

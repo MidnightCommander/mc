@@ -29,6 +29,7 @@ context default
     keyword whole context\[\t\s\]exclusive brightred
     keyword whole context\[\t\s\]default brightred
     keyword whole context\[\] brightred
+    keyword whole caseinsensitive\[\] brightred
 
     keyword whole linestart file\[\] brightgreen
     keyword whole linestart include\[\] brightred
