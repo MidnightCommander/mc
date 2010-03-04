@@ -835,7 +835,8 @@ translate_file (char *filedata)
     GIConv conv;
     GString *translated_data;
 
-    translated_data = g_string_new ("");
+    /* initial allocation for largest whole help file */
+    translated_data = g_string_sized_new (32 * 1024);
 
     conv = str_crt_conv_from ("UTF-8");
 
@@ -844,10 +845,9 @@ translate_file (char *filedata)
     else {
 	g_free (fdata);
 
-	if (str_convert (conv, filedata, translated_data) != ESTR_FAILURE) {
-	    fdata = translated_data->str;
-	    g_string_free (translated_data, FALSE);
-	} else {
+	if (str_convert (conv, filedata, translated_data) != ESTR_FAILURE)
+	    fdata = g_string_free (translated_data, FALSE);
+	else {
 	    fdata = NULL;
 	    g_string_free (translated_data, TRUE);
 	}
