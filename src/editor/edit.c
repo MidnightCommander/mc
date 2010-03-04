@@ -330,14 +330,16 @@ edit_load_file_fast (WEdit * edit, const char *filename)
 
     edit->curs2 = edit->last_byte;
     buf2 = edit->curs2 >> S_EDIT_BUF_SIZE;
+    edit->utf8 = 0;
 
     file = mc_open (filename, O_RDONLY | O_BINARY);
     if (file == -1)
     {
-        GString *errmsg = g_string_new (NULL);
-        g_string_sprintf (errmsg, _("Cannot open %s for reading"), filename);
-        edit_error_dialog (_("Error"), get_sys_error (errmsg->str));
-        g_string_free (errmsg, TRUE);
+        gchar *errmsg;
+
+        errmsg = g_strdup_printf (_("Cannot open %s for reading"), filename);
+        edit_error_dialog (_("Error"), errmsg);
+        g_free (errmsg);
         return 1;
     }
 
@@ -627,7 +629,7 @@ static int
 check_file_access (WEdit * edit, const char *filename, struct stat *st)
 {
     int file;
-    GString *errmsg = (GString *) 0;
+    gchar *errmsg = NULL;
 
     /* Try opening an existing file */
     file = mc_open (filename, O_NONBLOCK | O_RDONLY | O_BINARY, 0666);
@@ -635,14 +637,13 @@ check_file_access (WEdit * edit, const char *filename, struct stat *st)
     if (file < 0)
     {
         /*
-         * Try creating the file.  O_EXCL prevents following broken links
+         * Try creating the file. O_EXCL prevents following broken links
          * and opening existing files.
          */
         file = mc_open (filename, O_NONBLOCK | O_RDONLY | O_BINARY | O_CREAT | O_EXCL, 0666);
         if (file < 0)
         {
-            g_string_sprintf (errmsg = g_string_new (NULL),
-                              _("Cannot open %s for reading"), filename);
+            errmsg = g_strdup_printf (_("Cannot open %s for reading"), filename);
             goto cleanup;
         }
         else
@@ -655,15 +656,14 @@ check_file_access (WEdit * edit, const char *filename, struct stat *st)
     /* Check what we have opened */
     if (mc_fstat (file, st) < 0)
     {
-        g_string_sprintf (errmsg = g_string_new (NULL),
-                          _("Cannot get size/permissions for %s"), filename);
+        errmsg = g_strdup_printf (_("Cannot get size/permissions for %s"), filename);
         goto cleanup;
     }
 
     /* We want to open regular files only */
     if (!S_ISREG (st->st_mode))
     {
-        g_string_sprintf (errmsg = g_string_new (NULL), _("\"%s\" is not a regular file"), filename);
+        errmsg = g_strdup_printf (_("\"%s\" is not a regular file"), filename);
         goto cleanup;
     }
 
@@ -672,21 +672,18 @@ check_file_access (WEdit * edit, const char *filename, struct stat *st)
      * O_EXCL should prevent it, but let's be on the safe side.
      */
     if (st->st_size > 0)
-    {
         edit->delete_file = 0;
-    }
 
     if (st->st_size >= SIZE_LIMIT)
-    {
-        g_string_sprintf (errmsg = g_string_new (NULL), _("File \"%s\" is too large"), filename);
-    }
+        errmsg = g_strdup_printf (_("File \"%s\" is too large"), filename);
 
   cleanup:
     (void) mc_close (file);
-    if (errmsg)
+
+    if (errmsg != NULL)
     {
-        edit_error_dialog (_("Error"), errmsg->str);
-        g_string_free (errmsg, TRUE);
+        edit_error_dialog (_("Error"), errmsg);
+        g_free (errmsg);
         return 1;
     }
     return 0;
