@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
 "POT-Creation-Date: 2010-02-24 13:14+0200\n"
-"PO-Revision-Date: 2010-02-27 00:09+0100\n"
+"PO-Revision-Date: 2010-03-04 11:24+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <trans-pl@lists.fedoraproject.org>\n"
 "MIME-Version: 1.0\n"
@@ -2091,7 +2091,7 @@ msgid "ButtonBar|Replac"
 msgstr "Zastąp"
 
 msgid "ButtonBar|Copy"
-msgstr "Kopia"
+msgstr "Kopiuj"
 
 msgid "ButtonBar|Move"
 msgstr "Przen"
@@ -2169,13 +2169,13 @@ msgid "The format of the ~/%s file has changed with version 3.0.  You may either
 msgstr "Format pliku ~/%s uległ zmianie wraz z wersją 3.0. Można teraz skopiować go z %smc.ext lub napisać samemu, opierając się na zawartości tego pliku."
 
 msgid "DialogTitle|Copy"
-msgstr "Skopiowanie"
+msgstr "Kopiowanie"
 
 msgid "DialogTitle|Move"
-msgstr "Przeniesienie"
+msgstr "Przenoszenie"
 
 msgid "DialogTitle|Delete"
-msgstr "Usunięcie"
+msgstr "Usuwanie"
 
 msgid " Cannot make the hardlink "
 msgstr " Nie można utworzyć dowiązania "
@@ -2460,13 +2460,13 @@ msgid "Directory scanning"
 msgstr "Skanowanie katalogu"
 
 msgid "FileOperation|Copy"
-msgstr "Skopiowanie"
+msgstr "Kopiowanie"
 
 msgid "FileOperation|Move"
-msgstr "Przeniesienie"
+msgstr "Przenoszenie"
 
 msgid "FileOperation|Delete"
-msgstr "Usunięcie"
+msgstr "Usuwanie"
 
 #, no-c-format
 msgid "%o %f \"%s\"%m"
