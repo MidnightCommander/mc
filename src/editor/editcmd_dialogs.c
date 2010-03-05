@@ -93,7 +93,7 @@ void
 editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const char *replace_default,
                              /*@out@ */ char **search_text, /*@out@ */ char **replace_text)
 {
-    if (*search_default == '\0')
+    if ((search_default == NULL) || (*search_default == '\0'))
         search_default = INPUT_LAST_TEXT;
 
     {
@@ -162,7 +162,7 @@ editcmd_dialog_search_show (WEdit * edit, char **search_text)
 {
     (void) edit;
 
-    if (*search_text == '\0')
+    if (*search_text == NULL)
         *search_text = INPUT_LAST_TEXT;
 
     {
