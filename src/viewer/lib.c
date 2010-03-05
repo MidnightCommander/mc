@@ -207,12 +207,20 @@ mcview_done (mcview_t * view)
         g_array_free (view->coord_cache, TRUE), view->coord_cache = NULL;
     }
 
-    if (!(view->converter == INVALID_CONV || view->converter != str_cnv_from_term))
+    if (view->converter == INVALID_CONV)
+        view->converter = str_cnv_from_term;
+
+    if (view->converter != str_cnv_from_term)
     {
         str_close_conv (view->converter);
         view->converter = str_cnv_from_term;
     }
 
+    mc_search_free (view->search);
+    view->search = NULL;
+    g_free (view->last_search_string);
+    view->last_search_string = NULL;
+    mcview_nroff_seq_free (&view->search_nroff_seq);
     mcview_hexedit_free_change_list (view);
 }
 
