@@ -688,7 +688,7 @@ read_filesystem_list(int need_fs_type, int all_fs)
 #endif /* HAVE_INFOMOUNT_QNX */
 
 void
-init_my_statfs (void)
+free_my_statfs (void)
 {
 #ifdef HAVE_INFOMOUNT_LIST
     while (mount_list) {
@@ -696,7 +696,16 @@ init_my_statfs (void)
 	free_mount_entry (mount_list);
 	mount_list = next;
     }
+    mount_list = NULL;
+#endif /* HAVE_INFOMOUNT_LIST */
+}
 
+
+void
+init_my_statfs (void)
+{
+#ifdef HAVE_INFOMOUNT_LIST
+    free_my_statfs ();
     mount_list = read_filesystem_list (1, 1);
 #endif /* HAVE_INFOMOUNT_LIST */
 }
