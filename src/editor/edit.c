@@ -897,11 +897,12 @@ edit_clean (WEdit *edit)
     g_free (edit->filename);
     g_free (edit->dir);
 
-    if (edit->search)
-    {
-	mc_search_free(edit->search);
-	edit->search = NULL;
-    }
+    mc_search_free (edit->search);
+    edit->search = NULL;
+
+    if (edit->converter != str_cnv_from_term)
+        str_close_conv (edit->converter);
+
     edit_purge_widget (edit);
 
     return 1;
