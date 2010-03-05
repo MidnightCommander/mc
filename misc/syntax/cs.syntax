@@ -1,7 +1,7 @@
 # Modified from C highlight file by Juan C. Olivares <juancri@juancri.com>
 
 context default
-    
+
     keyword whole abstract yellow
     keyword whole as yellow
     keyword whole base yellow
@@ -86,7 +86,7 @@ context default
     keyword whole while yellow
     keyword whole yield yellow
 
-    
+
     keyword whole linestart \{\s\t\}\[\s\t\]#*\n brightmagenta
 
     keyword /\* brown

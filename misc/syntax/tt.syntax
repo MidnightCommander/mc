@@ -4,15 +4,15 @@
 # HTML entities
 #
 context default
-	keyword &\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\]; brightgreen
-	keyword &#\{xX\}\[0123456789abcdefABCDEF\]; brightgreen
-	keyword &#\[0123456789\]; brightgreen
-	
+    keyword &\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\]; brightgreen
+    keyword &#\{xX\}\[0123456789abcdefABCDEF\]; brightgreen
+    keyword &#\[0123456789\]; brightgreen
+
 # Although TT is most often used to generate HTML, it's not *only* used for that, so assuming HTML around it may be presumptuous anyway.
 # Since cooledit doesn't support sub-context, we can't have TT *in* HTML, like <img src="[% image_url %]">
 # The best possible workaround, which still sucks, is to uncomment the line below, which will highlight any HTML tags that don't contain a '[', but without special highlight for strings, and without any HTML-specific keywords
 #    keyword <\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890\s"#$%&'()*+,-.=?@\\\]^_`{|}~\]> green
-	spellcheck
+    spellcheck
 
 # TT directives - http://template-toolkit.org/docs/manual/Directives.html
 context [% %] red black

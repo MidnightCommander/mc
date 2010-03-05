@@ -36,7 +36,7 @@ context default
     keyword whole @author yellow
     keyword whole @b yellow
     keyword whole @bullet{} yellow
-    keyword whole @bye yellow    
+    keyword whole @bye yellow
     keyword whole @c yellow
     keyword whole @cartouche yellow
     keyword whole @center yellow

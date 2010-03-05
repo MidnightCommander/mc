@@ -16,7 +16,7 @@ context default lightgray
     keyword whole GLOBAL white
     keyword whole COMMON white
     keyword whole CPU white
-    
+
 # NASM, WASM, TASM, MASM and common modifiers
     keyword whole ALIGN white
     keyword whole ALIGNB white

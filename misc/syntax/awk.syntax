@@ -133,7 +133,7 @@ context default
     keyword whole function brightmagenta
 # Hex constant:
     keyword 0\{xX\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\] magenta/6
-# Tab:	\t
+# Tab:    \t
 #    keyword linestart \t lightgray/13 blue/6
 
 # Sed:

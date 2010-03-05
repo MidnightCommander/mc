@@ -1,11 +1,11 @@
 # PHP syntax file
 
 # Authors:
-#	Paul Sheer
-#	Stephen Perez
-#	Max Schedriviy <max@humgat.org>, 2001--2002
-#	Leonard den Ottolander <leonard den ottolander nl>, 2003--2005
-#	Jindrich Novy <jnovy@redhat.com>, 2005
+#    Paul Sheer
+#    Stephen Perez
+#    Max Schedriviy <max@humgat.org>, 2001--2002
+#    Leonard den Ottolander <leonard den ottolander nl>, 2003--2005
+#    Jindrich Novy <jnovy@redhat.com>, 2005
 
 context default
 

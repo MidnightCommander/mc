@@ -71,7 +71,7 @@ context default
     keyword whole env red
     keyword whole ENV red
 
-#Braces & 
+#Braces &
 
     keyword { brightcyan
     keyword } brightcyan
@@ -210,7 +210,7 @@ context default
     keyword whole sleep yellow
 
 #this works only with label EOF :-(
-#context exclusive whole <<\[\s\]EOF EOF green 
+#context exclusive whole <<\[\s\]EOF EOF green
 
 context # \n brown
     spellcheck

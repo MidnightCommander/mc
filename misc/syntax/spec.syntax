@@ -9,9 +9,9 @@ context default
     keyword whole Build\{Rr\}equires: green
     keyword whole Conflicts: green
     keyword whole Copyright: white
-    keyword whole Description: green    
-    keyword whole Distribution: green    
-    keyword whole Doc\{Dd\}ir: green    
+    keyword whole Description: green
+    keyword whole Distribution: green
+    keyword whole Doc\{Dd\}ir: green
     keyword whole Epoch: green
     keyword whole Exclude\{Aa\}rch: green
     keyword whole Exclusive\{Aa\}rch: green
@@ -19,18 +19,18 @@ context default
     keyword whole Group: green
     keyword whole Icon: green
     keyword whole License: green
-    keyword whole Name: green    
+    keyword whole Name: green
     keyword whole NoSource\[0123456789\]: green
     keyword whole Obsoletes: green
     keyword whole Packager: green
-    keyword whole Patch\[0123456789\]: green    
+    keyword whole Patch\[0123456789\]: green
     keyword whole Prefix: green
-    keyword whole Pre\{Rr\}eq: green    
-    keyword whole Provides: green    
-    keyword whole Release: green    
-    keyword whole Requires: green    
+    keyword whole Pre\{Rr\}eq: green
+    keyword whole Provides: green
+    keyword whole Release: green
+    keyword whole Requires: green
     keyword whole Requires(\[abcdefghijklmnopqrstuvwxyz\]): green
-    keyword whole Root: green    
+    keyword whole Root: green
     keyword whole Serial: white
     keyword whole Source\[0123456789\]: green
     keyword whole Suggests: green
@@ -71,11 +71,11 @@ context default
     keyword %{ brightcyan
     keyword { brightcyan
     keyword } brightcyan
-        
+
     keyword whole %triggerin magenta
     keyword whole %triggerun magenta
     keyword whole %triggerun magenta
-    
+
     keyword \\\n yellow
     keyword wholeright $+ brightgreen
     keyword ftp://+ brightgreen
@@ -89,187 +89,187 @@ context default
     keyword whole SOURCE\[0123456789\] cyan
 
 context Group( ): green
-	keyword whole af yellow
-	keyword whole az yellow
-	keyword whole bg yellow
-	keyword whole br yellow
-	keyword whole ca yellow
-	keyword whole ca_ES yellow
-	keyword whole cs yellow
-	keyword whole cs_CZ yellow
-	keyword whole da yellow
-	keyword whole da_DK yellow
-	keyword whole de yellow
-	keyword whole de_AT yellow
-	keyword whole de_DE yellow
-	keyword whole el yellow
-	keyword whole el_GR yellow
-	keyword whole en yellow
-	keyword whole en_GB yellow
-	keyword whole eo yellow
-	keyword whole es yellow
-	keyword whole es_ES yellow
-	keyword whole et yellow
-	keyword whole et_EE yellow
-	keyword whole eu yellow
-	keyword whole fi yellow
-	keyword whole fi_FI yellow
-	keyword whole fr yellow
-	keyword whole fr_FR yellow
-	keyword whole gl yellow
-	keyword whole gl_ES yellow
-	keyword whole gr yellow
-	keyword whole he yellow
-	keyword whole he_IL yellow
-	keyword whole hi yellow
-	keyword whole hr yellow
-	keyword whole hr_HR yellow
-	keyword whole hu yellow
-	keyword whole hu_HU yellow
-	keyword whole id yellow
-	keyword whole is yellow
-	keyword whole is_IS yellow
-	keyword whole it yellow
-	keyword whole it_IT yellow
-	keyword whole ja yellow
-	keyword whole ja_JP yellow
-	keyword whole ja_JP.SJIS yellow
-	keyword whole ko yellow
-	keyword whole ko_KR yellow
-	keyword whole lt yellow
-	keyword whole lt_LT yellow
-	keyword whole lv yellow
-	keyword whole ms yellow
-	keyword whole nb yellow
-	keyword whole nl yellow
-	keyword whole nl_NL yellow
-	keyword whole nn yellow
-	keyword whole nn_NO yellow
-	keyword whole no yellow
-	keyword whole no_NO yellow
-	keyword whole pl yellow
-	keyword whole pl_PL yellow
-	keyword whole pt yellow
-	keyword whole pt_BR yellow
-	keyword whole pt_PT yellow
-	keyword whole ro yellow
-	keyword whole ro_RO yellow
-	keyword whole ru yellow
-	keyword whole ru_RU yellow
-	keyword whole sk yellow
-	keyword whole sk_SK yellow
-	keyword whole sl yellow
-	keyword whole sl_SI yellow
-	keyword whole sr yellow
-	keyword whole sv yellow
-	keyword whole sv_SE yellow
-	keyword whole ta yellow
-	keyword whole th_TH yellow
-	keyword whole tr yellow
-	keyword whole tr_TR yellow
-	keyword whole uk yellow
-	keyword whole vi yellow
-	keyword whole wa yellow
-	keyword whole zh yellow
-	keyword whole zh_CN yellow
-	keyword whole zh_CN.GB2312 yellow
-	keyword whole zh_TW yellow
-	keyword whole zh_TW.Big5 yellow
+    keyword whole af yellow
+    keyword whole az yellow
+    keyword whole bg yellow
+    keyword whole br yellow
+    keyword whole ca yellow
+    keyword whole ca_ES yellow
+    keyword whole cs yellow
+    keyword whole cs_CZ yellow
+    keyword whole da yellow
+    keyword whole da_DK yellow
+    keyword whole de yellow
+    keyword whole de_AT yellow
+    keyword whole de_DE yellow
+    keyword whole el yellow
+    keyword whole el_GR yellow
+    keyword whole en yellow
+    keyword whole en_GB yellow
+    keyword whole eo yellow
+    keyword whole es yellow
+    keyword whole es_ES yellow
+    keyword whole et yellow
+    keyword whole et_EE yellow
+    keyword whole eu yellow
+    keyword whole fi yellow
+    keyword whole fi_FI yellow
+    keyword whole fr yellow
+    keyword whole fr_FR yellow
+    keyword whole gl yellow
+    keyword whole gl_ES yellow
+    keyword whole gr yellow
+    keyword whole he yellow
+    keyword whole he_IL yellow
+    keyword whole hi yellow
+    keyword whole hr yellow
+    keyword whole hr_HR yellow
+    keyword whole hu yellow
+    keyword whole hu_HU yellow
+    keyword whole id yellow
+    keyword whole is yellow
+    keyword whole is_IS yellow
+    keyword whole it yellow
+    keyword whole it_IT yellow
+    keyword whole ja yellow
+    keyword whole ja_JP yellow
+    keyword whole ja_JP.SJIS yellow
+    keyword whole ko yellow
+    keyword whole ko_KR yellow
+    keyword whole lt yellow
+    keyword whole lt_LT yellow
+    keyword whole lv yellow
+    keyword whole ms yellow
+    keyword whole nb yellow
+    keyword whole nl yellow
+    keyword whole nl_NL yellow
+    keyword whole nn yellow
+    keyword whole nn_NO yellow
+    keyword whole no yellow
+    keyword whole no_NO yellow
+    keyword whole pl yellow
+    keyword whole pl_PL yellow
+    keyword whole pt yellow
+    keyword whole pt_BR yellow
+    keyword whole pt_PT yellow
+    keyword whole ro yellow
+    keyword whole ro_RO yellow
+    keyword whole ru yellow
+    keyword whole ru_RU yellow
+    keyword whole sk yellow
+    keyword whole sk_SK yellow
+    keyword whole sl yellow
+    keyword whole sl_SI yellow
+    keyword whole sr yellow
+    keyword whole sv yellow
+    keyword whole sv_SE yellow
+    keyword whole ta yellow
+    keyword whole th_TH yellow
+    keyword whole tr yellow
+    keyword whole tr_TR yellow
+    keyword whole uk yellow
+    keyword whole vi yellow
+    keyword whole wa yellow
+    keyword whole zh yellow
+    keyword whole zh_CN yellow
+    keyword whole zh_CN.GB2312 yellow
+    keyword whole zh_TW yellow
+    keyword whole zh_TW.Big5 yellow
 
 context Requires( ): green
-	keyword whole post yellow
-	keyword whole pre yellow
-	keyword whole postun yellow
-	keyword whole preun yellow
-	keyword , lightgray
+    keyword whole post yellow
+    keyword whole pre yellow
+    keyword whole postun yellow
+    keyword whole preun yellow
+    keyword , lightgray
 
 context Summary( ): green
-	keyword whole af yellow
-	keyword whole az yellow
-	keyword whole bg yellow
-	keyword whole br yellow
-	keyword whole ca yellow
-	keyword whole ca_ES yellow
-	keyword whole cs yellow
-	keyword whole cs_CZ yellow
-	keyword whole da yellow
-	keyword whole da_DK yellow
-	keyword whole de yellow
-	keyword whole de_AT yellow
-	keyword whole de_DE yellow
-	keyword whole el yellow
-	keyword whole el_GR yellow
-	keyword whole en yellow
-	keyword whole en_GB yellow
-	keyword whole eo yellow
-	keyword whole es yellow
-	keyword whole es_ES yellow
-	keyword whole et yellow
-	keyword whole et_EE yellow
-	keyword whole eu yellow
-	keyword whole fi yellow
-	keyword whole fi_FI yellow
-	keyword whole fr yellow
-	keyword whole fr_FR yellow
-	keyword whole gl yellow
-	keyword whole gl_ES yellow
-	keyword whole gr yellow
-	keyword whole he yellow
-	keyword whole he_IL yellow
-	keyword whole hi yellow
-	keyword whole hr yellow
-	keyword whole hr_HR yellow
-	keyword whole hu yellow
-	keyword whole hu_HU yellow
-	keyword whole id yellow
-	keyword whole is yellow
-	keyword whole is_IS yellow
-	keyword whole it yellow
-	keyword whole it_IT yellow
-	keyword whole ja yellow
-	keyword whole ja_JP yellow
-	keyword whole ja_JP.SJIS yellow
-	keyword whole ko yellow
-	keyword whole ko_KR yellow
-	keyword whole lt yellow
-	keyword whole lt_LT yellow
-	keyword whole lv yellow
-	keyword whole ms yellow
-	keyword whole nb yellow
-	keyword whole nl yellow
-	keyword whole nl_NL yellow
-	keyword whole nn yellow
-	keyword whole nn_NO yellow
-	keyword whole no yellow
-	keyword whole no_NO yellow
-	keyword whole pl yellow
-	keyword whole pl_PL yellow
-	keyword whole pt yellow
-	keyword whole pt_BR yellow
-	keyword whole pt_PT yellow
-	keyword whole ro yellow
-	keyword whole ro_RO yellow
-	keyword whole ru yellow
-	keyword whole ru_RU yellow
-	keyword whole sk yellow
-	keyword whole sk_SK yellow
-	keyword whole sl yellow
-	keyword whole sl_SI yellow
-	keyword whole sr yellow
-	keyword whole sv yellow
-	keyword whole sv_SE yellow
-	keyword whole ta yellow
-	keyword whole th_TH yellow
-	keyword whole tr yellow
-	keyword whole tr_TR yellow
-	keyword whole uk yellow
-	keyword whole vi yellow
-	keyword whole wa yellow
-	keyword whole zh yellow
-	keyword whole zh_CN yellow
-	keyword whole zh_CN.GB2312 yellow
-	keyword whole zh_TW yellow
-	keyword whole zh_TW.Big5 yellow
+    keyword whole af yellow
+    keyword whole az yellow
+    keyword whole bg yellow
+    keyword whole br yellow
+    keyword whole ca yellow
+    keyword whole ca_ES yellow
+    keyword whole cs yellow
+    keyword whole cs_CZ yellow
+    keyword whole da yellow
+    keyword whole da_DK yellow
+    keyword whole de yellow
+    keyword whole de_AT yellow
+    keyword whole de_DE yellow
+    keyword whole el yellow
+    keyword whole el_GR yellow
+    keyword whole en yellow
+    keyword whole en_GB yellow
+    keyword whole eo yellow
+    keyword whole es yellow
+    keyword whole es_ES yellow
+    keyword whole et yellow
+    keyword whole et_EE yellow
+    keyword whole eu yellow
+    keyword whole fi yellow
+    keyword whole fi_FI yellow
+    keyword whole fr yellow
+    keyword whole fr_FR yellow
+    keyword whole gl yellow
+    keyword whole gl_ES yellow
+    keyword whole gr yellow
+    keyword whole he yellow
+    keyword whole he_IL yellow
+    keyword whole hi yellow
+    keyword whole hr yellow
+    keyword whole hr_HR yellow
+    keyword whole hu yellow
+    keyword whole hu_HU yellow
+    keyword whole id yellow
+    keyword whole is yellow
+    keyword whole is_IS yellow
+    keyword whole it yellow
+    keyword whole it_IT yellow
+    keyword whole ja yellow
+    keyword whole ja_JP yellow
+    keyword whole ja_JP.SJIS yellow
+    keyword whole ko yellow
+    keyword whole ko_KR yellow
+    keyword whole lt yellow
+    keyword whole lt_LT yellow
+    keyword whole lv yellow
+    keyword whole ms yellow
+    keyword whole nb yellow
+    keyword whole nl yellow
+    keyword whole nl_NL yellow
+    keyword whole nn yellow
+    keyword whole nn_NO yellow
+    keyword whole no yellow
+    keyword whole no_NO yellow
+    keyword whole pl yellow
+    keyword whole pl_PL yellow
+    keyword whole pt yellow
+    keyword whole pt_BR yellow
+    keyword whole pt_PT yellow
+    keyword whole ro yellow
+    keyword whole ro_RO yellow
+    keyword whole ru yellow
+    keyword whole ru_RU yellow
+    keyword whole sk yellow
+    keyword whole sk_SK yellow
+    keyword whole sl yellow
+    keyword whole sl_SI yellow
+    keyword whole sr yellow
+    keyword whole sv yellow
+    keyword whole sv_SE yellow
+    keyword whole ta yellow
+    keyword whole th_TH yellow
+    keyword whole tr yellow
+    keyword whole tr_TR yellow
+    keyword whole uk yellow
+    keyword whole vi yellow
+    keyword whole wa yellow
+    keyword whole zh yellow
+    keyword whole zh_CN yellow
+    keyword whole zh_CN.GB2312 yellow
+    keyword whole zh_TW yellow
+    keyword whole zh_TW.Big5 yellow
 
 context linestart # \n brown
 context %( ) brightcyan

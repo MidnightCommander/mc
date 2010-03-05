@@ -1,5 +1,5 @@
 context default
-wholechars left \\ 
+wholechars left \\
 wholechars right abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
 
     spellcheck
@@ -68,7 +68,7 @@ wholechars right abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
     keyword %% yellow
     keyword \\% yellow
 
-# docuement and page styles    
+# docuement and page styles
     keyword whole \\documentstyle[*]{*} yellow
     keyword whole \\documentstyle{*} yellow
     keyword whole \\pagestyle{*} yellow

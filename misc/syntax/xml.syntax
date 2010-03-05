@@ -4,43 +4,43 @@
 # http://kozelka.hyperlink.cz
 
 context default
-	keyword &*; white cyan
-	spellcheck
+    keyword &*; white cyan
+    spellcheck
 
 context <!-- --> brightgreen
-	spellcheck
+    spellcheck
 
 context <! > yellow
-	keyword '+' brightcyan
-	keyword "+" brightcyan
-	keyword whole DOCTYPE white red
-	keyword whole PUBLIC brightred
-	keyword whole SYSTEM brightred
-	keyword whole NDATA brightred
-	keyword whole CDATA white
-	keyword whole #PCDATA white
-	keyword whole EMPTY white
-	keyword whole #REQUIRED white
-	keyword whole #IMPLIED white
-	keyword whole ELEMENT white
-	keyword whole ENTITY brightred
-	keyword whole ATTLIST white
-	keyword whole %*; white cyan
-	keyword \( lightgray
-	keyword \) lightgray
-	keyword \* lightgray
-	keyword \? lightgray
-	keyword \+ lightgray
-	keyword \| lightgray
-	keyword \, lightgray
-	spellcheck
+    keyword '+' brightcyan
+    keyword "+" brightcyan
+    keyword whole DOCTYPE white red
+    keyword whole PUBLIC brightred
+    keyword whole SYSTEM brightred
+    keyword whole NDATA brightred
+    keyword whole CDATA white
+    keyword whole #PCDATA white
+    keyword whole EMPTY white
+    keyword whole #REQUIRED white
+    keyword whole #IMPLIED white
+    keyword whole ELEMENT white
+    keyword whole ENTITY brightred
+    keyword whole ATTLIST white
+    keyword whole %*; white cyan
+    keyword \( lightgray
+    keyword \) lightgray
+    keyword \* lightgray
+    keyword \? lightgray
+    keyword \+ lightgray
+    keyword \| lightgray
+    keyword \, lightgray
+    spellcheck
 
 context <\?xml \?> white red
 context <\? \?> lightgray black
 context < > white
-	keyword \sxmlns\:*\="+" brightred
-	keyword \sxmlns\="+" brightred
-	keyword \s*= yellow
-	keyword '*' brightcyan
-	keyword "*" brightcyan
-	spellcheck
+    keyword \sxmlns\:*\="+" brightred
+    keyword \sxmlns\="+" brightred
+    keyword \s*= yellow
+    keyword '*' brightcyan
+    keyword "*" brightcyan
+    spellcheck

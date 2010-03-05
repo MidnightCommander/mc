@@ -154,7 +154,7 @@ context default lightgray
     keyword whole io.tmpfile yellow
     keyword whole io.type yellow
     keyword whole io.write yellow
-    
+
     # filelib
     keyword whole file.flush yellow
     keyword whole file.read yellow

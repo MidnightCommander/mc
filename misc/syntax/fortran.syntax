@@ -1,7 +1,7 @@
 # ---------------------------------------------------
 # fortran.syntax
 # FORTRAN language syntax highlighting template.
-# Provides syntax highlighting rules for the 
+# Provides syntax highlighting rules for the
 # FORTRAN programming language.
 #
 # Author: John Theal
@@ -13,7 +13,7 @@
 
 caseinsensitive
 
-context default 
+context default
 # keywords at the beginning of line
     keyword linestart ! black yellow
     keyword linestart \* black yellow
@@ -44,7 +44,7 @@ context default
 # boolean and logical expressions / operators
     keyword .and. brightred/orange
     keyword .eq. brightred/orange
-    keyword .eqv. brightred/orange	    
+    keyword .eqv. brightred/orange
     keyword .false. brightred/orange
     keyword .ge. brightred/orange
     keyword .gt. brightred/orange
@@ -60,7 +60,7 @@ context default
     keyword whole lle brightred/orange
     keyword whole llt brightred/orange
 
-# declarations 
+# declarations
     keyword whole block brightcyan
     keyword whole character brightcyan
     keyword whole common brightcyan
@@ -68,7 +68,7 @@ context default
     keyword whole data brightcyan
     keyword whole dimension brightcyan
     keyword whole double brightcyan
-    keyword whole external brightcyan 
+    keyword whole external brightcyan
     keyword whole format brightcyan
     keyword whole implicit brightcyan
     keyword whole integer brightcyan
@@ -97,7 +97,7 @@ context default
     keyword whole stop brightgreen
     keyword whole then brightgreen
     keyword whole to brightgreen
-    keyword whole while brightgreen   
+    keyword whole while brightgreen
 
 # headers
     keyword whole entry brightgreen
@@ -106,7 +106,7 @@ context default
     keyword whole subroutine yellow
 
 # I/O functions
-# may have optional equal signs after them: 'keyword =' 
+# may have optional equal signs after them: 'keyword ='
     keyword whole access brightmagenta
     keyword whole backspace brightmagenta
     keyword whole blank brightmagenta
