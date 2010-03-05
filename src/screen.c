@@ -3079,6 +3079,7 @@ panel_callback (Widget * w, widget_msg_t msg, int parm)
 
     case WIDGET_DESTROY:
         panel_destroy (panel);
+        free_my_statfs ();
         return MSG_HANDLED;
 
     default:

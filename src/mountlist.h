@@ -36,5 +36,6 @@ struct my_statfs {
 
 void init_my_statfs (void);
 void my_statfs (struct my_statfs *myfs_stats, const char *path);
+void free_my_statfs (void);
 
 #endif
