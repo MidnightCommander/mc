@@ -1,5 +1,7 @@
 # Scott Billings
 
+caseinsensitive
+
 context default
 	keyword whole abs	yellow
 	keyword whole delta	yellow

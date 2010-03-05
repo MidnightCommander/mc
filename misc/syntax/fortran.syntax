@@ -11,6 +11,8 @@
 
 # Heavily modified by Paul Sheer <psheer@obsidian.co.za>.
 
+caseinsensitive
+
 context default 
 # keywords at the beginning of line
     keyword linestart ! black yellow

@@ -13,6 +13,8 @@
 # Heavily modified by Paul Sheer <psheer@obsidian.co.za>.
 # Adjusted to Fortran 90 by Norbert Nemec <Norbert@Nemec-online.de>.
 
+caseinsensitive
+
 context default
 # keywords at the beginning of line
     keyword linestart \{0123456789\}\{0123456789\}\{0123456789\}\{0123456789\}\{0123456789\} brightred

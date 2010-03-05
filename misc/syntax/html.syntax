@@ -5,9 +5,11 @@
 # i got upto IMG in the netscape comprehensive tags reference. thereafter will get
 # done later - paul
 
+caseinsensitive
+
 context default
     keyword whole &*;           brightgreen/16
-	spellcheck
+    spellcheck
 
     keyword </A>                brightcyan/17
     keyword </ADDRESS>          brightcyan/17
@@ -1255,10 +1257,10 @@ context <PRE >                  brightcyan/17
     keyword whole lang          yellow/24
 
 context <!-- -->                brown/22
-	spellcheck
+    spellcheck
 
 context <! > brightred/orange
-	spellcheck
+    spellcheck
 
 context < >                     cyan/15
 

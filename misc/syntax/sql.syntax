@@ -1,272 +1,9 @@
 # SQL syntax highlighting for CoolEdit
 # by Walery Studennikov <despair@sama.ru>
 
-context default 
-    keyword whole ABORT yellow
-    keyword whole ABSOLUTE yellow
-    keyword whole ACTION yellow
-    keyword whole ADA yellow
-    keyword whole ADD yellow
-    keyword whole ALL yellow
-    keyword whole ALLOCATE yellow
-    keyword whole ALTER yellow
-    keyword whole AND yellow
-    keyword whole ANY yellow
-    keyword whole ARE yellow
-    keyword whole AS yellow
-    keyword whole ASC yellow
-    keyword whole ASSERTION yellow
-    keyword whole AT yellow
-    keyword whole AUTHORIZATION yellow
-    keyword whole AUTO_INCREMENT yellow
-    keyword whole BEGIN yellow
-    keyword whole BETWEEN yellow
-    keyword whole BIGINT yellow
-    keyword whole BIT yellow
-    keyword whole BIT_LENGTH yellow
-    keyword whole BLOB yellow
-    keyword whole BOTH yellow
-    keyword whole BY yellow
-    keyword whole CASCADE yellow
-    keyword whole CASCADED yellow
-    keyword whole CASE yellow
-    keyword whole CAST yellow
-    keyword whole CATALOG yellow
-    keyword whole CHAR yellow
-    keyword whole CHARACTER yellow
-    keyword whole CHARACTER_LENGTH yellow
-    keyword whole CHAR_LENGTH yellow
-    keyword whole CHECK yellow
-    keyword whole CLOSE yellow
-    keyword whole COALESCE yellow
-    keyword whole COLLATE yellow
-    keyword whole COLLATION yellow
-    keyword whole COLUMN yellow
-    keyword whole COMMIT yellow
-    keyword whole COMPILE yellow
-    keyword whole CONNECT yellow
-    keyword whole CONNECTION yellow
-    keyword whole CONSTRAINT yellow
-    keyword whole CONSTRAINTS yellow
-    keyword whole CONTINUE yellow
-    keyword whole COPY yellow
-    keyword whole CORRESPONDING yellow
-    keyword whole CREATE yellow
-    keyword whole CROSS yellow
-    keyword whole CURRENT yellow
-    keyword whole CURRENT_DATE yellow
-    keyword whole CURRENT_TIME yellow
-    keyword whole CURRENT_TIMESTAMP yellow
-    keyword whole CURRENT_USER yellow
-    keyword whole CURSOR yellow
-    keyword whole Constraint yellow
-    keyword whole DATABASE yellow
-    keyword whole DATE yellow
-    keyword whole DATETIME yellow
-    keyword whole DAY yellow
-    keyword whole DEALLOCATE yellow
-    keyword whole DEC yellow
-    keyword whole DECIMAL yellow
-    keyword whole DECLARE yellow
-    keyword whole DEFAULT yellow
-    keyword whole DEFERRABLE yellow
-    keyword whole DEFERRED yellow
-    keyword whole DELETE yellow
-    keyword whole DESC yellow
-    keyword whole DESCRIBE yellow
-    keyword whole DESCRIPTOR yellow
-    keyword whole DIAGNOSTICS yellow
-    keyword whole DISCONNECT yellow
-    keyword whole DISTINCT yellow
-    keyword whole DOMAIN yellow
-    keyword whole DOUBLE yellow
-    keyword whole DROP yellow
-    keyword whole ELSE yellow
-    keyword whole ENCODING yellow
-    keyword whole END yellow
-    keyword whole END-EXEC yellow
-    keyword whole ENUM yellow
-    keyword whole ESCAPE yellow
-    keyword whole EXCEPT yellow
-    keyword whole EXCEPTION yellow
-    keyword whole EXEC yellow
-    keyword whole EXECUTE yellow
-    keyword whole EXISTS yellow
-    keyword whole EXTERNAL yellow
-    keyword whole EXTRACT yellow
-    keyword whole FALSE yellow
-    keyword whole FETCH yellow
-    keyword whole FIRST yellow
-    keyword whole FLOAT yellow
-    keyword whole FOR yellow
-    keyword whole FOREIGN yellow
-    keyword whole FORTRAN yellow
-    keyword whole FOUND yellow
-    keyword whole FROM yellow
-    keyword whole FULL yellow
-    keyword whole GET yellow
-    keyword whole GLOBAL yellow
-    keyword whole GO yellow
-    keyword whole GOTO yellow
-    keyword whole GRANT yellow
-    keyword whole GROUP yellow
-    keyword whole HAVING yellow
-    keyword whole HOUR yellow
-    keyword whole IDENTITY yellow
-    keyword whole IF yellow
-    keyword whole IMMEDIATE yellow
-    keyword whole IN yellow
-    keyword whole INCLUDE yellow
-    keyword whole INDEX yellow
-    keyword whole INDICATOR yellow
-    keyword whole INITIALLY yellow
-    keyword whole INNER yellow
-    keyword whole INPUT yellow
-    keyword whole INSENSITIVE yellow
-    keyword whole INSERT yellow
-    keyword whole INT yellow
-    keyword whole INTEGER yellow
-    keyword whole INTERSECT yellow
-    keyword whole INTERVAL yellow
-    keyword whole INTO yellow
-    keyword whole IS yellow
-    keyword whole ISOLATION yellow
-    keyword whole JOIN yellow
-    keyword whole KEY yellow
-    keyword whole Key yellow
-    keyword whole LANGUAGE yellow
-    keyword whole LAST yellow
-    keyword whole LEADING yellow
-    keyword whole MERGE yellow
-    keyword whole MINUS yellow
-    keyword whole LEFT yellow
-    keyword whole LEVEL yellow
-    keyword whole LIKE yellow
-    keyword whole LOCAL yellow
-    keyword whole LOCK yellow
-    keyword whole LONGBLOB yellow
-    keyword whole LONGTEXT yellow
-    keyword whole LOOP yellow
-    keyword whole MATCH yellow
-    keyword whole MEDIUMBLOB yellow
-    keyword whole MEDIUMINT yellow
-    keyword whole MEDIUMTEXT yellow
-    keyword whole MINUTE yellow
-    keyword whole MODULE yellow
-    keyword whole MONTH yellow
-    keyword whole NAMES yellow
-    keyword whole NATIONAL yellow
-    keyword whole NATURAL yellow
-    keyword whole NCHAR yellow
-    keyword whole NEXT yellow
-    keyword whole NO yellow
-    keyword whole NONE yellow
-    keyword whole NOT yellow
-    keyword whole NULL yellow
-    keyword whole NULLIF yellow
-    keyword whole NUMERIC yellow
-    keyword whole OCTET_LENGTH yellow
-    keyword whole OF yellow
-    keyword whole OFFLINE yellow
-    keyword whole ON yellow
-    keyword whole ONLINE yellow
-    keyword whole ONLY yellow
-    keyword whole OPEN yellow
-    keyword whole OPTION yellow
-    keyword whole OR yellow
-    keyword whole ORDER yellow
-    keyword whole OUTER yellow
-    keyword whole OUTPUT yellow
-    keyword whole OVERLAPS yellow
-    keyword whole PAD yellow
-    keyword whole PARTIAL yellow
-    keyword whole PASCAL yellow
-    keyword whole POSITION yellow
-    keyword whole PRECISION yellow
-    keyword whole PREPARE yellow
-    keyword whole PRESERVE yellow
-    keyword whole PRIMARY yellow
-    keyword whole PRIOR yellow
-    keyword whole PRIVILEGES yellow
-    keyword whole PROCEDURE yellow
-    keyword whole PUBLIC yellow
-    keyword whole Primary yellow
-    keyword whole READ yellow
-    keyword whole REAL yellow
-    keyword whole REBUILD yellow
-    keyword whole REFERENCES yellow
-    keyword whole RELATIVE yellow
-    keyword whole REPLACE yellow
-    keyword whole RESTRICT yellow
-    keyword whole REVOKE yellow
-    keyword whole RIGHT yellow
-    keyword whole ROLLBACK yellow
-    keyword whole ROWS yellow
-    keyword whole SCHEMA yellow
-    keyword whole SCROLL yellow
-    keyword whole SECOND yellow
-    keyword whole SECTION yellow
-    keyword whole SELECT yellow
-    keyword whole SEQUENCE yellow
-    keyword whole SESSION yellow
-    keyword whole SESSION_USER yellow
-    keyword whole SET yellow
-    keyword whole SIZE yellow
-    keyword whole SMALLINT yellow
-    keyword whole SOME yellow
-    keyword whole SPACE yellow
-    keyword whole SQL yellow
-    keyword whole SQLCA yellow
-    keyword whole SQLSTATE yellow
-    keyword whole SQLWARNING yellow
-    keyword whole SUBSTRING yellow
-    keyword whole SYSTEM_USER yellow
-    keyword whole TRUNCATE yellow
-    keyword whole TABLE yellow
-    keyword whole TABLESPACE yellow
-    keyword whole TEMPLATE yellow
-    keyword whole TEMPORARY yellow
-    keyword whole TEXT yellow
-    keyword whole THEN yellow
-    keyword whole TIME yellow
-    keyword whole TIMESTAMP yellow
-    keyword whole TIMEZONE_HOUR yellow
-    keyword whole TIMEZONE_MINUTE yellow
-    keyword whole TINYBLOB yellow
-    keyword whole TINYINT yellow
-    keyword whole TINYTEXT yellow
-    keyword whole TO yellow
-    keyword whole TRAILING yellow
-    keyword whole TRANSACTION yellow
-    keyword whole TRANSLATION yellow
-    keyword whole TRIGGER yellow
-    keyword whole TRIM yellow
-    keyword whole TRUE yellow
-    keyword whole TYPE yellow
-    keyword whole UNION yellow
-    keyword whole UNIQUE yellow
-    keyword whole UNKNOWN yellow
-    keyword whole UNSIGNED yellow
-    keyword whole UPDATE yellow
-    keyword whole USAGE yellow
-    keyword whole USE yellow
-    keyword whole USER yellow
-    keyword whole USING yellow
-    keyword whole VALUE yellow
-    keyword whole VALUES yellow
-    keyword whole VARCHAR yellow
-    keyword whole VARYING yellow
-    keyword whole VIEW yellow
-    keyword whole WHEN yellow
-    keyword whole WHENEVER yellow
-    keyword whole WHERE yellow
-    keyword whole WHILE yellow
-    keyword whole WITH yellow
-    keyword whole WORK yellow
-    keyword whole WRITE yellow
-    keyword whole YEAR yellow
-    keyword whole ZONE yellow
-											    
+caseinsensitive
+
+context default
     keyword whole abort yellow
     keyword whole absolute yellow
     keyword whole action yellow
@@ -551,18 +288,6 @@ context default
     keyword . white
 
 # PostgreSQL specific
-    keyword AGGREGATE yellow
-    keyword CHECKPOINT yellow
-    keyword CLUSTER yellow
-    keyword CONVERSION yellow
-    keyword LISTEN yellow
-    keyword NOTIFY yellow
-    keyword OPERATOR yellow
-    keyword REINDEX yellow
-    keyword SAVEPOINT yellow
-    keyword UNLISTEN yellow
-    keyword VACUUM yellow
-
     keyword aggregate yellow
     keyword checkpoint yellow
     keyword cluster yellow
@@ -574,13 +299,6 @@ context default
     keyword savepoint yellow
     keyword unlisten yellow
     keyword vacuum yellow
-
-    keyword CREATEDB white
-    keyword CREATEUSER white
-    keyword NOCREATEDB white
-    keyword NOCREATEUSER white
-    keyword PASSWORD white
-    keyword SYSID white
 
     keyword createdb white
     keyword createuser white
@@ -597,7 +315,7 @@ context default
     keyword setval white
     keyword stdin white
 
-# PostgreSQL sequences 
+# PostgreSQL sequences
     keyword cache white
     keyword increment white
     keyword maxvalue white

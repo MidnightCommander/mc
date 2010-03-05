@@ -3,6 +3,8 @@
 # missing
 # literal, on,  (something else)
 
+caseinsensitive
+
 context default
 
 #wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_

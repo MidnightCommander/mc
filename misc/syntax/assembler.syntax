@@ -3,6 +3,8 @@
 # // Mike Gorchak
 #
 
+caseinsensitive
+
 context default lightgray
 
 # NASM directives
