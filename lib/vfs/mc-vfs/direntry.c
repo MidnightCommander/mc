@@ -1042,14 +1042,17 @@ static char *
 vfs_s_getlocalcopy (struct vfs_class *me, const char *path)
 {
     struct vfs_s_fh *fh;
-    char *local;
+    char *local = NULL;
 
     fh = vfs_s_open (me, path, O_RDONLY, 0);
-    if (!fh || !fh->ino || !fh->ino->localname)
-	return NULL;
 
-    local = g_strdup (fh->ino->localname);
-    vfs_s_close (fh);
+    if (fh != NULL) {
+	if ((fh->ino != NULL) && (fh->ino->localname != NULL))
+	    local = g_strdup (fh->ino->localname);
+
+	vfs_s_close (fh);
+    }
+
     return local;
 }
 
