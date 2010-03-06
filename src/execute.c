@@ -304,8 +304,10 @@ toggle_panels (void)
     }
 #endif				/* HAVE_SUBSHELL_SUPPORT */
 
-    update_panels (UP_OPTIMIZE, UP_KEEPSEL);
-    update_xterm_title_path ();
+    if ((view_one_file == NULL) && (edit_one_file == NULL)) {
+	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+	update_xterm_title_path ();
+    }
     repaint_screen ();
 }
 
