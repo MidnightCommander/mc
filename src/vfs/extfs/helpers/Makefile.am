@@ -42,11 +42,14 @@ EXTFS_OUT = 			\
 	a+			\
 	apt+			\
 	audio			\
+	changesetfs		\
+	patchsetfs		\
 	deb			\
 	deba			\
 	debd			\
 	dpkg+			\
 	iso9660			\
+	gitfs			\
 	hp48+			\
 	lslR			\
 	mailfs			\

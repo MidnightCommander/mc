@@ -1,0 +1,107 @@
+#!/bin/sh
+
+LANG=C
+export LANG
+
+# --- GIT -----------------------------------------------------------------------
+
+found_git_dir()
+{
+    work_dir=$1
+    while [ -n "$work_dir" -a "$work_dir" != "/" ]; do
+        [ -d "${work_dir}/.git" ] && {
+            echo "${work_dir}/.git/"
+            return
+        }
+        work_dir=`dirname "$work_dir"`
+    done
+    echo ''
+}
+
+changesetfs_list_git()
+{
+    WORK_DIR=$1; shift
+    fname=$1; shift
+    USER=$1; shift
+    DATE=$1; shift
+
+    GIT_DIR=`found_git_dir "$WORK_DIR"`
+    [ -z "$GIT_DIR" ] && GIT_DIR=$WORK_DIR
+    curr_year=`date +"%Y"`
+
+    git --git-dir="$GIT_DIR" log --abbrev=7 --pretty="format:%at %h %an" -- "$fname" | while read TIMESTAMP chset author
+    do
+        year=`date -d @"$TIMESTAMP" +"%Y"`
+        [ "$year" = "$curr_year" ] && {
+            DATE=`date -d @"$TIMESTAMP" +"%b %d %H:%M"`
+        } || {
+            DATE=`date -d @"$TIMESTAMP" +"%b %d %Y"`
+        }
+        NAME="$chset $author"
+        echo "-rw-rw-rw-   1 $USER    0 0 $DATE  $NAME `basename $fname`"
+    done
+}
+
+changesetfs_copyout_git()
+{
+    WORK_DIR=$1; shift
+    fname=$1; shift
+    orig_fname=$1;shift
+    output_fname=$1;shift
+
+    chset=`echo "$orig_fname"| cut -f 1 -d " "`
+
+    GIT_DIR=`found_git_dir "$WORK_DIR"`
+    [ -z "$GIT_DIR" ] && GIT_DIR=$WORK_DIR
+
+    filecommit=`git  --git-dir="$GIT_DIR" show --raw --pretty=tformat:%h "$chset" -- "$fname"| \
+        tail -n1 | \
+        sed 's@^::[0-9]*\s*[0-9]*\s*[0-9]*\s*@@' | \
+        sed 's@^:[0-9]*\s*[0-9]*\s*@@' | \
+        cut -d'.' -f 1`
+    git  --git-dir="$GIT_DIR" show "$filecommit" > "$output_fname"
+}
+
+# --- COMMON --------------------------------------------------------------------
+
+changesetfs_list()
+{
+    VCS_type=$1; shift
+    WORK_DIR=$1; shift
+    fname=$1; shift
+
+    DATE=`date +"%b %d %H:%M"`
+    USER=`whoami`
+
+    case "$VCS_type" in
+        git) changesetfs_list_git "$WORK_DIR" "$fname" "$USER" "$DATE" ;;
+    esac
+}
+
+changesetfs_copyout()
+{
+    VCS_type=$1; shift
+    WORK_DIR=$1; shift
+    fname=$1; shift
+
+    case "$VCS_type" in
+        git) changesetfs_copyout_git "$WORK_DIR" "$fname" "$@" ;;
+    esac
+
+}
+
+# --- MAIN ----------------------------------------------------------------------
+
+command=$1; shift
+tmp_file=$1; shift
+
+WORK_DIR=`head -n1 $tmp_file`
+fname=`tail -n2 $tmp_file | head -n1`
+VCS_type=`tail -n1 $tmp_file`
+
+case "$command" in
+  list) changesetfs_list "$VCS_type" "$WORK_DIR" "$fname" ;;
+  copyout) changesetfs_copyout "$VCS_type" "$WORK_DIR" "$fname" "$@" ;;
+  *) exit 1 ;;
+esac
+exit 0

@@ -104,6 +104,12 @@
 # Maybe:	Open/XOpen/GOpen/KOpen/... for Console/X/GNOME/KDE/etc.
 
 
+### GIT Repo ###
+# gitfs changeset
+regex/^\[git\]
+	Open=%cd %p/changesetfs://
+	View=%cd %p/patchsetfs://
+
 ### Archives ###
 
 # .tgz, .tpz, .tar.gz, .tar.z, .tar.Z, .ipk
@@ -659,7 +665,6 @@ regex/\.lzma$
 regex/\.xz$
 	Open=xz -dc %f | %var{PAGER:more}
 	View=%view{ascii} xz -dc %f 2>/dev/null
-
 
 ### Default ###
 
