@@ -178,13 +178,16 @@ vfs_info (int handle)
 static void
 vfs_free_handle (int handle)
 {
-    if (handle < VFS_FIRST_HANDLE ||
-        (guint)(handle - VFS_FIRST_HANDLE) >= vfs_openfiles->len)
-        return;
+    const int idx = handle - VFS_FIRST_HANDLE;
 
-    g_ptr_array_index (vfs_openfiles, handle - VFS_FIRST_HANDLE) =
-			(void *) vfs_free_handle_list;
-    vfs_free_handle_list = handle - VFS_FIRST_HANDLE;
+    if (handle >= VFS_FIRST_HANDLE && (guint) idx < vfs_openfiles->len) {
+	struct vfs_openfile *h;
+
+	h = (struct vfs_openfile *) g_ptr_array_index (vfs_openfiles, idx);
+	g_free (h);
+	g_ptr_array_index (vfs_openfiles, idx) = (void *) vfs_free_handle_list;
+	vfs_free_handle_list = idx;
+    }
 }
 
 static struct vfs_class *vfs_list;
