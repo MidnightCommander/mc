@@ -144,31 +144,32 @@ mc_search__cond_struct_new_regex_accum_append (const char *charset, GString * st
                                                GString * str_from)
 {
     GString *recoded_part;
-    gchar *one_char;
-    gsize loop;
-    gboolean just_letters;
+    gsize loop = 0;
 
-    loop = 0;
-    recoded_part = g_string_new ("");
+    recoded_part = g_string_sized_new (32);
 
     while (loop < str_from->len) {
+        gchar *one_char;
+        gsize one_char_len;
+        gboolean just_letters;
+
         one_char =
             mc_search__get_one_symbol (charset, &(str_from->str[loop]),
-                                       (str_from->len - loop > 6) ? 6 : str_from->len - loop,
-                                       &just_letters);
-        if (!strlen (one_char)) {
+                                       min (str_from->len - loop, 6), &just_letters);
+        one_char_len = strlen (one_char);
+
+        if (one_char_len == 0)
             loop++;
-            continue;
+        else {
+            loop += one_char_len;
+
+            if (just_letters)
+                mc_search__cond_struct_new_regex_hex_add (charset, recoded_part, one_char,
+                                                            one_char_len);
+            else
+                g_string_append_len (recoded_part, one_char, one_char_len);
         }
-        if (just_letters) {
-            mc_search__cond_struct_new_regex_hex_add (charset, recoded_part, one_char,
-                                                      strlen (one_char));
-        } else {
-            g_string_append (recoded_part, one_char);
-        }
-        loop += strlen (one_char);
-        if (!strlen (one_char))
-            loop++;
+
         g_free (one_char);
     }
 
