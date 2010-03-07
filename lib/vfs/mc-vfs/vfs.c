@@ -840,21 +840,23 @@ int
 mc_closedir (DIR *dirp)
 {
     int handle = *(int *) dirp;
-    struct vfs_class *vfs = vfs_op (handle);
-    int result;
-    struct vfs_dirinfo *dirinfo;
+    struct vfs_class *vfs;
+    int result = -1;
 
-    if (vfs == NULL)
-	return -1;
+    vfs = vfs_op (handle);
+    if (vfs != NULL) {
+	struct vfs_dirinfo *dirinfo;
 
-    dirinfo = vfs_info (handle);
-    if (dirinfo->converter != str_cnv_from_term) str_close_conv (dirinfo->converter);
+	dirinfo = vfs_info (handle);
+	if (dirinfo->converter != str_cnv_from_term)
+	    str_close_conv (dirinfo->converter);
 
-    result = vfs->closedir ? (*vfs->closedir)(dirinfo->info) : -1;
-    vfs_free_handle (handle);
-    g_free (dirinfo);
+	result = vfs->closedir ? (*vfs->closedir)(dirinfo->info) : -1;
+	vfs_free_handle (handle);
+	g_free (dirinfo);
+    }
     g_free (dirp);
-    return result; 
+    return result;
 }
 
 int mc_stat (const char *filename, struct stat *buf) {
