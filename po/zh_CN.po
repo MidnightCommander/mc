@@ -1,18 +1,24 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Free Software Foundation, Inc.
-# Wang Jian <lark@linux.net.cn>, 2001
-# 
+# Copyright (C) 2010 Free Software Foundation, Inc.
+#
+# Wang Jian <lark@linux.net.cn>, 2001.
+# gnozil <gnozil@gmail.com>, 2010.
+# Jake Li <gnozil@gmail.com>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
 "POT-Creation-Date: 2010-02-26 13:04+0200\n"
-"PO-Revision-Date: 2010-03-07 01:14+0800\n"
+"PO-Revision-Date: 2010-03-07 23:06+0800\n"
 "Last-Translator: Jake Li <gnozil@gmail.com>\n"
-"Language-Team: Chinese Simplified <i18n-translation@lists.linux.net.cn>\n"
+"Language-Team: Chinese Simplified\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"X-Poedit-Language: Chinese\n"
+"X-Poedit-Country: CHINA\n"
+"Plural-Forms: nplurals=2; plural=1\n"
+"X-Poedit-SourceCharset: utf-8\n"
 
 msgid " Search string not found "
 msgstr "没有找到要搜索的字符串"
@@ -248,7 +254,7 @@ msgid "Question mark"
 msgstr "问号"
 
 msgid "Ampersand"
-msgstr "与(\\&)号"
+msgstr "与号(&)"
 
 msgid "Dollar sign"
 msgstr "美元符"
@@ -260,7 +266,7 @@ msgid "Caret"
 msgstr "脱字符^"
 
 msgid "Tilda"
-msgstr "波浪号"
+msgstr "波浪号~"
 
 msgid "Prime"
 msgstr "Prime"
@@ -290,7 +296,7 @@ msgid "Backslash key"
 msgstr "反斜线键"
 
 msgid "Number sign #"
-msgstr "井号键"
+msgstr "井号键#"
 
 msgid "Ctrl"
 msgstr "Ctrl"
@@ -327,7 +333,7 @@ msgstr "无法创建临时目录%s：%s\n"
 
 #, c-format
 msgid "Temporary files will be created in %s\n"
-msgstr "临时文件在%s中生成\n"
+msgstr "在%s中创建临时文件\n"
 
 #, c-format
 msgid "Temporary files will not be created\n"
@@ -359,8 +365,8 @@ msgid ""
 "Premature end of cpio archive\n"
 "%s"
 msgstr ""
-"cpio 归档 %s\n"
-"过早结束"
+"过早结束的cpio 归档\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -430,7 +436,7 @@ msgstr "警告：不能打开目录%s\n"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
-msgstr "fish：正在从 %s 断口连接"
+msgstr "fish：正在从 %s 断开连接"
 
 msgid "fish: Waiting for initial line..."
 msgstr "fish：正在等待初始化行..."
@@ -471,7 +477,7 @@ msgstr "%s：失败"
 
 #, c-format
 msgid "fish: store %s: sending command..."
-msgstr "fish：正在保存 %s：正在发送命令..."
+msgstr "fish：保存 %s：正在发送命令..."
 
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish：本地读取失败，正在发送零"
@@ -548,7 +554,7 @@ msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "正在等待重试... %d (Control-C 取消)"
 
 msgid "ftpfs: invalid address family"
-msgstr "ftpfs：无效的地址"
+msgstr "ftpfs：无效的地址族"
 
 #, c-format
 msgid "ftpfs: could not setup passive mode: %s"
@@ -575,10 +581,10 @@ msgid "ftpfs: CWD failed."
 msgstr "ftpfs：CWD 失败。"
 
 msgid "ftpfs: couldn't resolve symlink"
-msgstr "ftpfs：无法解开符号链接"
+msgstr "ftpfs：无法解析符号链接"
 
 msgid "Resolving symlink..."
-msgstr "正在解开符号链接..."
+msgstr "正在解析符号链接..."
 
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
@@ -717,14 +723,15 @@ msgid ""
 "%s\n"
 "doesn't look like a tar archive."
 msgstr ""
+"嗯,...\n"
 "%s\n"
 "不是一个 tar 归档文件。"
 
 msgid " undelfs: error "
-msgstr " undelfs：错误 "
+msgstr "undelfs：错误 "
 
 msgid " not enough memory "
-msgstr " 内存不足 "
+msgstr "内存不足 "
 
 msgid " while allocating block buffer "
 msgstr " 当分配块缓冲时 "
@@ -788,7 +795,7 @@ msgid " You have to chdir to extract files first "
 msgstr " 您必须先更改目录来解开文件 "
 
 msgid " while iterating over blocks "
-msgstr " "
+msgstr "正当遍历块时 "
 
 msgid "Cannot parse:"
 msgstr "无法解析："
@@ -818,7 +825,7 @@ msgid "Set &all"
 msgstr "全部设置(&A)"
 
 msgid "owner"
-msgstr "所有者"
+msgstr "属主"
 
 msgid "group"
 msgstr "群组"
@@ -837,7 +844,7 @@ msgstr "模式"
 
 #, c-format
 msgid "%6d of %d"
-msgstr "%6d 之 %d"
+msgstr "%6d / %d"
 
 msgid " Chown advanced command "
 msgstr " Chown 高级命令 "
@@ -880,7 +887,7 @@ msgid "Set debug level"
 msgstr "设置调试级别"
 
 msgid "Launches the file viewer on a file"
-msgstr "在文件上使用文件查看器"
+msgstr "在文件上启动文件查看器"
 
 msgid "Edits one file"
 msgstr "编辑一个文件"
@@ -889,7 +896,7 @@ msgid "Forces xterm features"
 msgstr "强制使用 xterm 特性"
 
 msgid "Disable mouse support in text version"
-msgstr "在文字版本中禁用鼠标支持"
+msgstr "在文本模式下禁用鼠标支持"
 
 msgid "Tries to use termcap instead of terminfo"
 msgstr "尝试使用 termcap 而不是 terminfo"
@@ -956,13 +963,13 @@ msgid ""
 "   brightcyan, lightgray and white\n"
 "\n"
 msgstr ""
-"帮助：       helpnormal, helpitalic, helplink, helpslink\n"
+"帮助：       helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 "  \n"
 "\n"
 "颜色：\n"
 "  black, gray, red, brightred, green, brightgreen, brown,\n"
 "  yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"  brightcyan, lightgray and white\n"
+"  brightcyan, lightgray 和 white\n"
 "\n"
 
 msgid "Color options"
@@ -997,10 +1004,10 @@ msgid "Terminal options"
 msgstr "终端选项 "
 
 msgid " Background process error "
-msgstr " 后台进程错误 "
+msgstr "后台进程错误 "
 
 msgid " Unknown error in child "
-msgstr " 子进程未知错误 "
+msgstr "子进程未知错误 "
 
 msgid " Child died unexpectedly "
 msgstr " 子进程异常退出 "
@@ -1011,19 +1018,19 @@ msgstr " 后台协议错误 "
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
-msgstr " 后台进程发来一个请求，参数过多无法处理。 \n"
+msgstr " 后台进程请求更多的参数，无法处理。 \n"
 
 msgid "&Full file list"
 msgstr "完整文件列表(&F)"
 
 msgid "&Brief file list"
-msgstr "简单文件列表(&B)"
+msgstr "简要文件列表(&B)"
 
 msgid "&Long file list"
 msgstr "长文件列表(&L)"
 
 msgid "&User defined:"
-msgstr "用户定义(&U)："
+msgstr "用户自定义(&U)："
 
 msgid "Listing mode"
 msgstr "列表模式"
@@ -1056,25 +1063,25 @@ msgid "Confirmation|&History cleanup"
 msgstr "Confirmation|清除历史(&H)"
 
 msgid "Confirmation|&Directory hotlist delete"
-msgstr "Confirmation|删除目录列表(&D)"
+msgstr "Confirmation|删除目录活动表(&D)"
 
 msgid "Confirmation|E&xit"
 msgstr "Confirmation|退出(&X)"
 
 msgid "Confirmation|&Execute"
-msgstr "确认|执行(&E)"
+msgstr "Confirmation|执行(&E)"
 
 msgid "Confirmation|O&verwrite"
-msgstr "确认|覆盖时(&V) "
+msgstr "Confirmation|覆盖时(&V) "
 
 msgid "Confirmation|&Delete"
-msgstr "确认|删除(&D)"
+msgstr "Confirmation|删除(&D)"
 
 msgid "UTF-8 output"
 msgstr "UTF-8输出"
 
 msgid "Full 8 bits output"
-msgstr "8位输出"
+msgstr "全8位输出"
 
 msgid "ISO 8859-1"
 msgstr "ISO 8859-1"
@@ -1083,7 +1090,7 @@ msgid "7 bits"
 msgstr "7 位"
 
 msgid "F&ull 8 bits input"
-msgstr "8 位输入(&U)"
+msgstr "全8位输入(&U)"
 
 msgid " Display bits "
 msgstr "显示位 "
@@ -1104,7 +1111,7 @@ msgid "Use &passive mode"
 msgstr "使用被动模式(&P)"
 
 msgid "&Use ~/.netrc"
-msgstr "使用~/.netrc（&U）"
+msgstr "使用~/.netrc(&U)"
 
 msgid "&Always use ftp proxy"
 msgstr "总是使用 ftp 代理(&A)"
@@ -1122,13 +1129,13 @@ msgid "Timeout for freeing VFSs:"
 msgstr "释放 VFS 的超时值："
 
 msgid " Virtual File System Setting "
-msgstr " 虚拟文件系统设置 "
+msgstr "虚拟文件系统设置 "
 
 msgid "cd"
-msgstr "cd"
+msgstr "切换目录"
 
 msgid "Quick cd"
-msgstr "快速 cd"
+msgstr "快速切换目录"
 
 msgid "Symbolic link filename:"
 msgstr "符号链接文件名："
@@ -1149,7 +1156,7 @@ msgid "&Stop"
 msgstr "停止(&S)"
 
 msgid "&Resume"
-msgstr "继续(&R)"
+msgstr "恢复(&R)"
 
 msgid "&Kill"
 msgstr "杀死(&K)"
@@ -1211,10 +1218,10 @@ msgid "set user ID on execution"
 msgstr "执行时设置用户 ID"
 
 msgid "C&lear marked"
-msgstr "清除标记位(&L)"
+msgstr "清除已标记的(&L)"
 
 msgid "S&et marked"
-msgstr "设置标记位(&E)"
+msgstr "设置已标记的(&E)"
 
 msgid "&Marked all"
 msgstr "全部标记(&M)"
@@ -1232,13 +1239,13 @@ msgid "Group name"
 msgstr "群组名"
 
 msgid "Use SPACE to change"
-msgstr "使用空格键来修改"
+msgstr "使用空格键修改"
 
 msgid "an option, ARROW KEYS"
 msgstr "选项，光标键"
 
 msgid "to move between options"
-msgstr "移到不同选项，"
+msgstr "移到不同选项"
 
 msgid "and T or INS to mark"
 msgstr "T 或 INS 做标记"
@@ -1259,22 +1266,22 @@ msgid "Set &groups"
 msgstr "设置群组(&G)"
 
 msgid " Name "
-msgstr " 名字 "
+msgstr "名字 "
 
 msgid " Owner name "
-msgstr " 所有者名字 "
+msgstr "所有者名字 "
 
 msgid " Group name "
-msgstr " 群组名字 "
+msgstr "群组名字 "
 
 msgid " Size "
-msgstr " 大小 "
+msgstr "大小 "
 
 msgid " User name "
-msgstr " 用户名 "
+msgstr "用户名 "
 
 msgid " Chown command "
-msgstr " Chown 命令 "
+msgstr "Chown 命令 "
 
 msgid "<Unknown user>"
 msgstr "<未知用户>"
@@ -1283,7 +1290,7 @@ msgid "<Unknown group>"
 msgstr "<未知群组>"
 
 msgid " Confirmation "
-msgstr " 确认 "
+msgstr "确认 "
 
 msgid "Files tagged, want to cd?"
 msgstr "文件已经标记，要更改目录吗？"
@@ -1301,19 +1308,19 @@ msgid " Filtered view "
 msgstr " 过滤视图 "
 
 msgid " Filter command and arguments:"
-msgstr " 过滤命令和参数："
+msgstr "过滤命令和参数："
 
 msgid "Create a new Directory"
 msgstr "创建新目录"
 
 msgid " Enter directory name:"
-msgstr " 输入目录名字："
+msgstr "输入目录名字："
 
 msgid " Filter "
-msgstr " 过滤 "
+msgstr "过滤 "
 
 msgid " Set expression for filtering filenames"
-msgstr " 设置过滤文件名的表达式 "
+msgstr "设置过滤文件名的表达式 "
 
 msgid "&Using shell patterns"
 msgstr "使用 shell 模式(&U)"
@@ -1325,16 +1332,16 @@ msgid "&Files only"
 msgstr "仅文件(&F)"
 
 msgid " Select "
-msgstr " 选择 "
+msgstr "选择 "
 
 msgid " Unselect "
-msgstr " 取消选择 "
+msgstr "取消选择 "
 
 msgid "Extension file edit"
 msgstr "扩展文件编辑"
 
 msgid " Which extension file you want to edit? "
-msgstr " 您要编辑哪个扩展文件？ "
+msgstr "您要编辑哪个扩展文件？ "
 
 msgid "&User"
 msgstr "用户(&U)"
@@ -1343,10 +1350,10 @@ msgid "&System Wide"
 msgstr "系统范围(&S)"
 
 msgid " Menu edit "
-msgstr " 菜单编辑 "
+msgstr "菜单编辑 "
 
 msgid " Which menu file do you want to edit? "
-msgstr " 您要编辑哪个菜单文件？ "
+msgstr "您要编辑哪个菜单文件？ "
 
 msgid "&Local"
 msgstr "本地(&L)"
@@ -1358,10 +1365,10 @@ msgid " Which highlighting file you want to edit? "
 msgstr "您要编辑哪个突出显示的文件？ "
 
 msgid " Compare directories "
-msgstr " 比较目录 "
+msgstr "比较目录 "
 
 msgid " Select compare method: "
-msgstr " 选择比较方法："
+msgstr "选择比较方法："
 
 msgid "&Quick"
 msgstr "快速(&Q)"
@@ -1370,47 +1377,47 @@ msgid "&Size only"
 msgstr "仅大小(&S)"
 
 msgid "&Thorough"
-msgstr "仔细(&T)"
+msgstr "全面(&T)"
 
 msgid " Both panels should be in the listing mode to use this command "
-msgstr " 要使用该命令，两个面板必需都是列表视图模式 "
+msgstr "要使用该命令，两个面板必需都是列表视图模式 "
 
 msgid ""
 " Not an xterm or Linux console; \n"
 " the panels cannot be toggled. "
 msgstr ""
-" 不是一个 xterm 或 Linux 控制台；\n"
-" 面板无法切换。"
+"不是一个 xterm 或 Linux 控制台；\n"
+"面板无法切换。"
 
 #, c-format
 msgid "Link %s to:"
 msgstr "链接%s到："
 
 msgid " Link "
-msgstr " 链接 "
+msgstr "链接 "
 
 #, c-format
 msgid " link: %s "
-msgstr " 链接：%s "
+msgstr "链接：%s "
 
 #, c-format
 msgid " symlink: %s "
-msgstr " 符号链接：%s "
+msgstr "符号链接：%s "
 
 #, c-format
 msgid " Symlink `%s' points to: "
-msgstr " 符号链接“%s”指向："
+msgstr "符号链接“%s”指向："
 
 msgid " Edit symlink "
-msgstr " 编辑符号链接 "
+msgstr "编辑符号链接 "
 
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
-msgstr " 编辑符号链接，无法删除 %s：%s "
+msgstr "编辑符号链接，无法删除 %s：%s "
 
 #, c-format
 msgid " edit symlink: %s "
-msgstr " 编辑符号链接：%s "
+msgstr "编辑符号链接：%s "
 
 #, c-format
 msgid "`%s' is not a symbolic link"
@@ -1964,9 +1971,8 @@ msgstr "“ispell”拼写检查(&P)"
 msgid "&Mail..."
 msgstr "发送邮件(&M)..."
 
-#, fuzzy
 msgid "Insert &literal..."
-msgstr "字面插入(&L)...         C-q"
+msgstr "插入文字(&L)..."
 
 msgid "Insert &date/time"
 msgstr "插入日期/时间(&D)"
@@ -2156,7 +2162,7 @@ msgstr " %s%s文件错误 "
 
 #, c-format
 msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
-msgstr ""
+msgstr "文件%smc.ext的格式在3.0版本时已经被修改。似乎安装有错误。请获取新的Midnight Commander软件包。"
 
 #, c-format
 msgid " ~/%s file error "
@@ -2164,7 +2170,7 @@ msgstr " ~/%s文件错误 "
 
 #, c-format
 msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
-msgstr ""
+msgstr "文件~/%s的格式在3.0版本时已经被修改。您可以从%smc.ext复制一个或将它作为编写该文件的样例。"
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|复制"
@@ -2222,13 +2228,17 @@ msgstr ""
 " 无法 stat 源文件“%s” \n"
 " %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " `%s' \n"
 " and \n"
 " `%s' \n"
 " are the same file "
-msgstr " “%s”和“%s”是同一个文件 "
+msgstr ""
+" `%s' \n"
+" 和 \n"
+" `%s' \n"
+" 是同一个文件 "
 
 #, c-format
 msgid ""
@@ -2406,13 +2416,17 @@ msgstr ""
 " 无法删除文件“%s” \n"
 " %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " `%s' \n"
 " and \n"
 " `%s' \n"
 " are the same directory "
-msgstr " “%s”和“%s”是同一个目录 "
+msgstr ""
+" `%s' \n"
+" 和 \n"
+" `%s' \n"
+" 是同一个目录"
 
 #, c-format
 msgid " Cannot overwrite directory \"%s\" %s "
@@ -2652,15 +2666,14 @@ msgstr "编辑(&E) - F4"
 msgid "Found: %ld"
 msgstr "找到: %ld"
 
-#, fuzzy
 msgid " Malformed regular expression "
-msgstr "  不正确的正则表达式 "
+msgstr "不正确的正规表达式 "
 
 msgid "Cas&e sensitive"
 msgstr "大小写敏感(&e)"
 
 msgid "&Find recursively"
-msgstr ""
+msgstr "递归查找(&F)"
 
 msgid "S&kip hidden"
 msgstr "跳过隐藏(&K)"
@@ -2675,10 +2688,10 @@ msgid "Re&gular expression"
 msgstr "正规表达式(&R)"
 
 msgid "Fir&st hit"
-msgstr ""
+msgstr "第一个命中(&S)"
 
 msgid "All cha&rsets"
-msgstr ""
+msgstr "所有字符集"
 
 msgid "&Tree"
 msgstr "树(&T)"
@@ -2697,7 +2710,7 @@ msgstr "开始于："
 
 #, c-format
 msgid "Grepping in %s"
-msgstr ""
+msgstr "在%s中查找字符串"
 
 msgid "Finished"
 msgstr "完成"
@@ -2713,7 +2726,7 @@ msgid " Help file format error\n"
 msgstr " 帮助文件格式错误\n"
 
 msgid " Internal bug: Double start of link area "
-msgstr ""
+msgstr "内部缺陷：链接区域双向开始"
 
 #, c-format
 msgid " Cannot find node %s in help file "
@@ -2768,7 +2781,7 @@ msgid "Active VFS directories"
 msgstr "活动的 VFS 目录"
 
 msgid "Directory hotlist"
-msgstr ""
+msgstr "目录活动表"
 
 msgid " Directory path "
 msgstr " 目录路径 "
@@ -2781,7 +2794,7 @@ msgid "Moving %s"
 msgstr "正在移动 %s"
 
 msgid "New hotlist entry"
-msgstr ""
+msgstr "新建活动表条目"
 
 msgid "Directory label"
 msgstr "目录标签"
@@ -2790,7 +2803,7 @@ msgid "Directory path"
 msgstr "目录路径"
 
 msgid " New hotlist group "
-msgstr ""
+msgstr "新建活动表组"
 
 msgid "Name of new group"
 msgstr "新建组名"
@@ -2800,7 +2813,7 @@ msgid "Label for \"%s\":"
 msgstr "“%s”的标签："
 
 msgid " Add to hotlist "
-msgstr ""
+msgstr "添加到活动表"
 
 msgid " Remove: "
 msgstr " 删除： "
@@ -2809,6 +2822,8 @@ msgid ""
 "\n"
 " Are you sure you want to remove this entry?"
 msgstr ""
+"\n"
+"您确实要删除这个条目？"
 
 msgid ""
 "\n"
@@ -2823,11 +2838,11 @@ msgid " Top level group "
 msgstr " 顶级组 "
 
 msgid " Hotlist Load "
-msgstr ""
+msgstr "加载活动表"
 
-#, fuzzy, c-format
+#, c-format
 msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
-msgstr " 您的旧列表项没有被删除"
+msgstr "MC无法写文件~/%s，您的活动列表条目没有被删除"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -2881,16 +2896,16 @@ msgstr "状态： %s"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
-msgstr ""
+msgstr "设备类型：主要%lu，次要%lu"
 
 #, c-format
 msgid "Size:      %s"
 msgstr "大小：     %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid " (%ld block)"
 msgid_plural " (%ld blocks)"
-msgstr[0] " (%ld 个块)"
+msgstr[0] "(%ld 个块)"
 msgstr[1] " (%ld 个块)"
 
 #, c-format
@@ -2916,7 +2931,7 @@ msgid "&Horizontal"
 msgstr "水平(&H)"
 
 msgid "show free sp&Ace"
-msgstr ""
+msgstr "显示空闲空间(&A)"
 
 msgid "&Xterm window title"
 msgstr "Xterm窗口标题(&X)"
@@ -2925,7 +2940,7 @@ msgid "h&Intbar visible"
 msgstr "提示栏可见(&I)"
 
 msgid "&Keybar visible"
-msgstr ""
+msgstr "显示按键条(&K)"
 
 msgid "command &Prompt"
 msgstr "命令提示(&P)"
@@ -2977,6 +2992,14 @@ msgid ""
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
 msgstr ""
+"按下%s\n"
+"并等待这个消息消失。\n"
+"\n"
+"然后再次按下它并看确认是否出现\n"
+"在它的旁边。\n"
+"\n"
+"如果您想离开，请按下Esc键\n"
+"并稍等。"
 
 msgid " Cannot accept this key "
 msgstr " 无法接受这个按键 "
@@ -3067,7 +3090,7 @@ msgid "&Copy"
 msgstr "复制(&C)"
 
 msgid "C&hmod"
-msgstr ""
+msgstr "更改文件权限(&H)"
 
 msgid "&Link"
 msgstr "链接(&L)"
@@ -3079,7 +3102,7 @@ msgid "Edit s&ymlink"
 msgstr " 编辑符号链接 (&Y)"
 
 msgid "Ch&own"
-msgstr ""
+msgstr "更改文件所有者(&O)"
 
 msgid "&Advanced chown"
 msgstr "高级chown(&A)          "
@@ -3090,17 +3113,14 @@ msgstr "更名/移动(&R)"
 msgid "&Mkdir"
 msgstr "建目录(&M)"
 
-#, fuzzy
 msgid "&Quick cd"
-msgstr "快速 cd"
+msgstr "快速切换目录(&Q)"
 
-#, fuzzy
 msgid "Select &group"
-msgstr "设置群组(&G)"
+msgstr "选择群组(&G)"
 
-#, fuzzy
 msgid "U&nselect group"
-msgstr " 取消选择 "
+msgstr "取消选择组(&U)"
 
 msgid "Reverse selec&tion"
 msgstr "反转选择(&T)"
@@ -3118,7 +3138,7 @@ msgid "&Find file"
 msgstr "查找文件(&F)"
 
 msgid "S&wap panels"
-msgstr ""
+msgstr "交换面板(&W)"
 
 msgid "Switch &panels on/off"
 msgstr "切换面板开/关(&P)"
@@ -3126,20 +3146,17 @@ msgstr "切换面板开/关(&P)"
 msgid "&Compare directories"
 msgstr "比较目录(&C)"
 
-#, fuzzy
 msgid "E&xternal panelize"
-msgstr "其它命令"
+msgstr "外部面板(&X)"
 
-#, fuzzy
 msgid "Show directory s&izes"
 msgstr "显示目录大小(&I)"
 
 msgid "Command &history"
 msgstr "命令历史(&H)"
 
-#, fuzzy
 msgid "Di&rectory hotlist"
-msgstr "目录路径"
+msgstr "目录活动列表(&R)"
 
 msgid "&Active VFS list"
 msgstr "活动的VFS列表(&A)"
@@ -3160,7 +3177,7 @@ msgid "Edit &menu file"
 msgstr "菜单文件编辑(&M)"
 
 msgid "Edit hi&ghlighting group file"
-msgstr ""
+msgstr "编辑突出显示组文件(&G)"
 
 msgid "&Configuration..."
 msgstr "配置(&C)..."
@@ -3261,7 +3278,7 @@ msgid "&Verbose operation"
 msgstr "冗余操作(&V)"
 
 msgid "Mkdir autoname"
-msgstr ""
+msgstr "创建目录时自动命名"
 
 msgid "&Fast dir reload"
 msgstr "快速重载入目录(&F)"
@@ -3273,7 +3290,7 @@ msgid "&Drop down menus"
 msgstr "下拉菜单(&D)"
 
 msgid "ma&Rk moves down"
-msgstr ""
+msgstr "标记文件后光标下移(&R)"
 
 msgid "show &Hidden files"
 msgstr "显示隐藏文件(&H)"
@@ -3282,7 +3299,7 @@ msgid "show &Backup files"
 msgstr "显示备份文件(&B)"
 
 msgid "Use SI si&ze units"
-msgstr ""
+msgstr "使用SI大小单位(&Z)"
 
 msgid "&Never"
 msgstr "从不(&N)"
@@ -3306,7 +3323,7 @@ msgid "&Add new"
 msgstr "添加新(&A)"
 
 msgid "External panelize"
-msgstr ""
+msgstr "外部面板"
 
 msgid "Command"
 msgstr "命令"
@@ -3449,10 +3466,10 @@ msgstr "群组"
 msgid "<readlink failed>"
 msgstr "<readlink 失败>"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s in %d file"
 msgid_plural "%s in %d files"
-msgstr[0] "%2$d 个文件，%1$s 字节"
+msgstr[0] "%s 在 %d 文件"
 msgstr[1] "%2$d 个文件，%1$s 字节"
 
 msgid "Unknown tag on display format: "
