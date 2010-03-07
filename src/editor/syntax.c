@@ -800,8 +800,11 @@ inline static void
 xx_lowerize_line (WEdit * edit, char *line, size_t len)
 {
     if (edit->is_case_insensitive)
-        for (size_t i = 0; i < len; ++i)
+    {
+        size_t i;
+        for (i = 0; i < len; ++i)
             line[i] = tolower (line[i]);
+    }
 }
 
 /* returns line number on error */
