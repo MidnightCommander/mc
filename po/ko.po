@@ -1,29 +1,35 @@
-# 
+# Copyright (C) 2010 Free Software Foundation, Inc.
+#
+#
+#
+# Kang Bundo <bundo@bundo.biz>, 2010
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
 "POT-Creation-Date: 2010-02-26 13:04+0200\n"
-"PO-Revision-Date: \n"
+"PO-Revision-Date: 2010-03-08 00:37+0900\n"
 "Last-Translator: Kang Bundo <bundo@bundo.biz>\n"
 "Language-Team: ubuntu korea <admin@ubuntu.or.kr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"ftpfs: 파일 %lu 저장 (%lu)\n"
+"X-Poedit-Language: Korean\n"
+"X-Poedit-Country: KOREA, REPUBLIC OF\n"
+"X-Poedit-SourceCharset: utf-8\n"
 
 msgid " Search string not found "
 msgstr "글월을 찾을 수 없군요 "
 
 msgid " Not implemented yet "
-msgstr " 아직 구현되지 않았습니다."
+msgstr "아직 구현되지 않았습니다."
 
 msgid " Num of replace tokens not equal to num of found tokens "
 msgstr " Num of replace tokens not equal to num of found tokens "
 
 #, c-format
 msgid " Invalid token number %d "
-msgstr " I알수 없는 토큰 번호 %d "
+msgstr "알수 없는 토큰 번호 %d "
 
 msgid "Normal"
 msgstr "일반"
@@ -54,115 +60,115 @@ msgstr ""
 "기본 스킨으로 불러 옵니다."
 
 msgid "Function key 1"
-msgstr "Function key 1"
+msgstr "F1"
 
 msgid "Function key 2"
-msgstr "Function key 2"
+msgstr "F2"
 
 msgid "Function key 3"
-msgstr "Function key 3"
+msgstr "F3"
 
 msgid "Function key 4"
-msgstr "Function key 4"
+msgstr "F4"
 
 msgid "Function key 5"
-msgstr "Function key 5"
+msgstr "F5"
 
 msgid "Function key 6"
-msgstr "Function key 6"
+msgstr "F6"
 
 msgid "Function key 7"
-msgstr "Function key 7"
+msgstr "F7"
 
 msgid "Function key 8"
-msgstr "Function key 8"
+msgstr "F8"
 
 msgid "Function key 9"
-msgstr "Function key 9"
+msgstr "F9"
 
 msgid "Function key 10"
-msgstr "Function key 10"
+msgstr "F10"
 
 msgid "Function key 11"
-msgstr "Function key 11"
+msgstr "F11"
 
 msgid "Function key 12"
-msgstr "Function key 12"
+msgstr "F12"
 
 msgid "Function key 13"
-msgstr "Function key 13"
+msgstr "F13"
 
 msgid "Function key 14"
-msgstr "Function key 14"
+msgstr "F14"
 
 msgid "Function key 15"
-msgstr "Function key 15"
+msgstr "F15"
 
 msgid "Function key 16"
-msgstr "Function key 16"
+msgstr "F16"
 
 msgid "Function key 17"
-msgstr "Function key 17"
+msgstr "F17"
 
 msgid "Function key 18"
-msgstr "Function key 18"
+msgstr "F18"
 
 msgid "Function key 19"
-msgstr "Function key 19"
+msgstr "F19"
 
 msgid "Function key 20"
-msgstr "Function key 20"
+msgstr "F20"
 
 msgid "Backspace key"
-msgstr "Backspace key"
+msgstr "백스페이스키"
 
 msgid "End key"
-msgstr "End key"
+msgstr "엔드키"
 
 msgid "Up arrow key"
-msgstr "Up arrow key"
+msgstr "위 방향키"
 
 msgid "Down arrow key"
-msgstr "Down arrow key"
+msgstr "아래 방향키"
 
 msgid "Left arrow key"
-msgstr "Left arrow key"
+msgstr "왼쪽 방향키"
 
 msgid "Right arrow key"
-msgstr "Right arrow key"
+msgstr "오른쪽 방향키"
 
 msgid "Home key"
-msgstr "Home key"
+msgstr "홈키"
 
 msgid "Page Down key"
-msgstr "Page Down key"
+msgstr "페이지다운키"
 
 msgid "Page Up key"
-msgstr "Page Up key"
+msgstr "페이지업키"
 
 msgid "Insert key"
-msgstr "Insert key"
+msgstr "인써트키"
 
 msgid "Delete key"
-msgstr "Delete key"
+msgstr "딜레이트키"
 
 msgid "Completion/M-tab"
 msgstr "Completion/M-tab"
 
 msgid "+ on keypad"
-msgstr "+ on keypad"
+msgstr "+ 키패드"
 
 msgid "- on keypad"
-msgstr "- on keypad"
+msgstr "- 키패드"
 
 msgid "Slash on keypad"
-msgstr "Slash on keypad"
+msgstr "/ 키패드"
 
 msgid "* on keypad"
-msgstr "* on keypad"
+msgstr "* 키패드"
 
 msgid "Escape key"
-msgstr "Slash on keypad"
+msgstr "ESC키"
 
 msgid "Left arrow keypad"
 msgstr "Left arrow keypad"
@@ -198,28 +204,28 @@ msgid "Enter on keypad"
 msgstr "Enter on keypad"
 
 msgid "Function key 21"
-msgstr "Function key 1"
+msgstr "F21"
 
 msgid "Function key 22"
-msgstr "Function key 2"
+msgstr "F22"
 
 msgid "Function key 23"
-msgstr "Function key 2"
+msgstr "F23"
 
 msgid "Function key 24"
-msgstr "Function key 2"
+msgstr "F24"
 
 msgid "Plus"
-msgstr "Plus"
+msgstr "플러스"
 
 msgid "Minus"
 msgstr "마이너스"
 
 msgid "Asterisk"
-msgstr "Asterisk"
+msgstr "아스테릭키"
 
 msgid "Dot"
-msgstr "Dot"
+msgstr "점키"
 
 msgid "Less than"
 msgstr "Less than"
@@ -243,13 +249,13 @@ msgid "Exclamation mark"
 msgstr "Exclamation mark"
 
 msgid "Question mark"
-msgstr "Question mark"
+msgstr "퀘스천마크"
 
 msgid "Ampersand"
 msgstr "앰퍼샌드"
 
 msgid "Dollar sign"
-msgstr "Dollar sign"
+msgstr "달라사인"
 
 msgid "Quotation mark"
 msgstr "Quotation mark"
@@ -258,7 +264,7 @@ msgid "Caret"
 msgstr "캐럿"
 
 msgid "Tilda"
-msgstr "Tilda"
+msgstr "틸다"
 
 msgid "Prime"
 msgstr "프라임"
@@ -270,10 +276,10 @@ msgid "Understrike"
 msgstr "Understrike"
 
 msgid "Pipe"
-msgstr "Pipe"
+msgstr "| 키"
 
 msgid "Enter"
-msgstr "소유자"
+msgstr "언터키"
 
 msgid "Tab key"
 msgstr "탭키"
