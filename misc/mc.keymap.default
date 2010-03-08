@@ -227,6 +227,7 @@ CmdSingleDirsize = ctrl-space
 CmdSuspend = ctrl-z
 CmdSwapPanel = ctrl-u
 CmdHistory = alt-h
+CmdListing =
 CmdToggleListing = alt-t
 CmdToggleShowHidden = alt-dot
 CmdTogglePanelsSplit = alt-comma

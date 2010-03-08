@@ -358,6 +358,7 @@ static name_keymap_t command_names[] = {
     { "CmdLayout",                       CK_LayoutCmd },
     { "CmdLearnKeys",                    CK_LearnKeys },
     { "CmdLink",                         CK_LinkCmd },
+    { "CmdChangeListing",                CK_ChangeListingCmd },
     { "CmdListing",                      CK_ListingCmd },
 #ifdef LISTMODE_EDITOR
     { "CmdListmodeCmd",                  CK_ListmodeCmd }.

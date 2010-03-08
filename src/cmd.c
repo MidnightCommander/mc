@@ -1454,6 +1454,12 @@ switch_to_listing (int panel_index)
 void
 listing_cmd (void)
 {
+    switch_to_listing (MENU_PANEL_IDX);
+}
+
+void
+change_listing_cmd (void)
+{
     int list_type;
     int use_msformat;
     char *user, *status;

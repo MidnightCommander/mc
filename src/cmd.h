@@ -60,6 +60,7 @@ char *get_random_hint (int force);
 void user_file_menu_cmd (void);
 void info_cmd (void);
 void listing_cmd (void);
+void change_listing_cmd (void);
 void quick_cmd_no_menu (void);
 void info_cmd_no_menu (void);
 void quick_view_cmd (void);

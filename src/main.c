@@ -671,18 +671,16 @@ create_panel_menu (void)
 {
     GList *entries = NULL;
 
-    entries = g_list_append (entries, menu_entry_create (_("&Listing mode..."), CK_ListingCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Quick view"), CK_QuickViewCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Info"), CK_InfoCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Tree"), CK_TreeCmd));
+    entries = g_list_append (entries, menu_entry_create (_("File listin&g"),    CK_ListingCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Quick view"),      CK_QuickViewCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Info" ),           CK_InfoCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Tree"),            CK_TreeCmd));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&Sort order..."), CK_Sort));
-    entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&Filter..."), CK_FilterCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Listing mode..."), CK_ChangeListingCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Sort order..."),   CK_Sort));
+    entries = g_list_append (entries, menu_entry_create (_("&Filter..."),       CK_FilterCmd));
 #ifdef HAVE_CHARSET
-    entries = g_list_append (entries, menu_separator_create ());
-    entries =
-        g_list_append (entries, menu_entry_create (_("&Encoding..."), CK_PanelSetPanelEncoding));
+    entries = g_list_append (entries, menu_entry_create (_("&Encoding..."),     CK_PanelSetPanelEncoding));
 #endif
 #ifdef USE_NETCODE
     entries = g_list_append (entries, menu_separator_create ());
@@ -694,7 +692,7 @@ create_panel_menu (void)
 #ifdef ENABLE_VFS_SMB
     entries = g_list_append (entries, menu_entry_create (_("SM&B link..."), CK_SmblinkCmd));
 #endif /* ENABLE_VFS_SMB */
-#endif
+#endif /* USE_NETCODE */
     entries = g_list_append (entries, menu_separator_create ());
     entries = g_list_append (entries, menu_entry_create (_("&Rescan"), CK_RereadCmd));
 
@@ -1175,6 +1173,9 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
     {
     case CK_AddHotlist:
         add2hotlist_cmd ();
+        break;
+    case CK_ChangeListingCmd:
+        change_listing_cmd ();
         break;
     case CK_ChmodCmd:
         chmod_cmd ();
