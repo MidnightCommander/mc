@@ -15,13 +15,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid " Search string not found "
-msgstr ""
+msgstr "Η φράση αναζήτησης δεν βρέθηκε"
 
 msgid " Not implemented yet "
 msgstr "Δεν έχει ακόμη υλοποιηθεί"
 
 msgid " Num of replace tokens not equal to num of found tokens "
-msgstr ""
+msgstr "Ο αριθμός των ορισμάτων αντικατάστασης δεν είναι ίσος με τον αριθμό των ορισμάτων που βρέθηκαν"
 
 #, fuzzy, c-format
 msgid " Invalid token number %d "
@@ -37,19 +37,23 @@ msgid "Hexadecimal"
 msgstr "Δεκαεξαδικό"
 
 msgid "Wildcard search"
-msgstr ""
+msgstr "Αναζήτηση χαρακτήρα μπαλαντέρ"
 
 #, c-format
 msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
 msgstr ""
+"Αδύνατη η φόρτωση του δέρματος '%s'. \n"
+" Το προεπιλεγμένο δέρμα έχει φορτωθεί"
 
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
 msgstr ""
+"Αδύνατη η ανάγνωση του δέρματος '%s'. \n"
+" Το προεπιλεγμένο δέρμα έχει φορτωθεί"
 
 msgid "Function key 1"
 msgstr "Πλήκτρο λειτουργίας 1"
@@ -424,9 +428,7 @@ msgid "fish: Waiting for initial line..."
 msgstr ""
 
 msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr ""
-"Με συγχωρείτε, αλλά προς το παρόν συνδέσεις με χρήση κωδικού δεν "
-"υποστηρίζονται."
+msgstr "Με συγχωρείτε, αλλά προς το παρόν συνδέσεις με χρήση κωδικού δεν υποστηρίζονται."
 
 #, fuzzy
 msgid " fish: Password required for "
@@ -1014,7 +1016,8 @@ msgstr ""
 msgid "Confirmation"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr ""
@@ -2147,10 +2150,7 @@ msgid " %s%s file error"
 msgstr ""
 
 #, c-format
-msgid ""
-"The format of the %smc.ext file has changed with version 3.0.  It seems that "
-"the installation failed.  Please fetch a fresh copy from the Midnight "
-"Commander package."
+msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
 msgstr ""
 
 #, c-format
@@ -2158,10 +2158,7 @@ msgid " ~/%s file error "
 msgstr ""
 
 #, c-format
-msgid ""
-"The format of the ~/%s file has changed with version 3.0.  You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write "
-"it."
+msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
 msgstr ""
 
 msgid "DialogTitle|Copy"
@@ -2762,8 +2759,7 @@ msgid " Hotlist Load "
 msgstr ""
 
 #, c-format
-msgid ""
-"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr ""
 
 #, c-format
