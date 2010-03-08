@@ -31,7 +31,8 @@ typedef enum {
     quick_button	= 2,
     quick_input		= 3,
     quick_label		= 4,
-    quick_radio		= 5
+    quick_radio		= 5,
+    quick_groupbox	= 6
 } quick_t;
 
 /* The widget is placed on relative_?/divisions_? of the parent widget */
@@ -75,6 +76,12 @@ typedef struct {
 	    const char **items;
 	    int *value;			/* in/out */
 	} radio;
+
+	struct {
+	    int width;
+	    int height;
+	    const char *title;
+	} groupbox;
     } u;
 } QuickWidget;
 
@@ -158,6 +165,23 @@ typedef struct {
 	    .count = cnt,						\
 	    .items = items_,						\
 	    .value = val						\
+	}								\
+    }									\
+}
+
+#define QUICK_GROUPBOX(x, xdiv, y, ydiv, w, h, t)			\
+{									\
+    .widget_type = quick_groupbox,					\
+    .relative_x = x,							\
+    .x_divisions = xdiv,						\
+    .relative_y = y,							\
+    .y_divisions = ydiv,						\
+    .widget = NULL,							\
+    .u = {								\
+	.groupbox = {							\
+	    .width = w,							\
+	    .height = h,						\
+	    .title = t							\
 	}								\
     }									\
 }
