@@ -252,7 +252,7 @@ move_to_bottom (void)
     while ((*currentpoint != '\0') && (*currentpoint != CHAR_NODE_END))
 	currentpoint++;
     currentpoint--;
-    move_backward (help_lines - 1);
+    move_backward (1);
 }
 
 static const char *
@@ -351,15 +351,53 @@ clear_link_areas (void)
 }
 
 static void
+help_print_word (Dlg_head *h, GString *word, int *col, int *line, gboolean add_space)
+{
+    if (*line >= help_lines)
+	g_string_set_size (word, 0);
+    else {
+	int w;
+
+	w = str_term_width1 (word->str);
+	if (*col + w >= HELP_WINDOW_WIDTH) {
+	    *col = 0;
+	    (*line)++;
+	}
+
+	if (*line >= help_lines)
+	    g_string_set_size (word, 0);
+	else {
+	    dlg_move (h, *line + 2, *col + 2);
+	    tty_print_string (word->str);
+	    g_string_set_size (word, 0);
+	    *col += w;
+	}
+    }
+
+    if (add_space) {
+	if (*col < HELP_WINDOW_WIDTH - 1) {
+	    tty_print_char (' ');
+	    (*col)++;
+	} else {
+	    *col = 0;
+	    (*line)++;
+	}
+    }
+}
+
+static void
 help_show (Dlg_head *h, const char *paint_start)
 {
     const char *p, *n;
-    int col, line, c, w;
+    int col, line, c;
     gboolean painting = TRUE;
     gboolean acs;			/* Flag: Alternate character set active? */
     gboolean repeat_paint;
     int active_col, active_line;	/* Active link position */
-    static char buff[MB_LEN_MAX + 1];
+    char buff[MB_LEN_MAX + 1];
+    GString *word;
+
+    word = g_string_sized_new (32);
 
     tty_setcolor (HELP_NORMAL_COLOR);
     do {
@@ -373,7 +411,7 @@ help_show (Dlg_head *h, const char *paint_start)
 	
         p = paint_start;
         n = paint_start;
-        while (n[0] != '\0' && n[0] != CHAR_NODE_END && line < help_lines) {
+        while ((n[0] != '\0') && (n[0] != CHAR_NODE_END) && (line < help_lines)) {
             p = n;
             n = str_cget_next_char (p);
             memcpy (buff, p, n - p);
@@ -384,15 +422,15 @@ help_show (Dlg_head *h, const char *paint_start)
 	    case CHAR_LINK_START:
 		if (selected_item == NULL)
 		    selected_item = p;
-		if (p == selected_item){
+		if (p != selected_item)
+		    tty_setcolor (HELP_LINK_COLOR);
+		else {
 		    tty_setcolor (HELP_SLINK_COLOR);
 
 		    /* Store the coordinates of the link */
 		    active_col = col + 2;
 		    active_line = line + 2;
 		}
-		else
-		    tty_setcolor (HELP_LINK_COLOR);
 		start_link_area (col, line, p);
 		break;
 	    case CHAR_LINK_POINTER:
@@ -401,6 +439,7 @@ help_show (Dlg_head *h, const char *paint_start)
 		break;
 	    case CHAR_LINK_END:
 		painting = TRUE;
+		help_print_word (h, word, &col, &line, FALSE);
 		tty_setcolor (HELP_NORMAL_COLOR);
 		break;
 	    case CHAR_ALTERNATE:
@@ -410,7 +449,7 @@ help_show (Dlg_head *h, const char *paint_start)
 		acs = FALSE;
 		break;
 	    case CHAR_VERSION:
-		dlg_move (h, line+2, col+2);
+		dlg_move (h, line + 2, col + 2);
 		tty_print_string (VERSION);
 		col += str_term_width1 (VERSION);
 		break;
@@ -421,37 +460,52 @@ help_show (Dlg_head *h, const char *paint_start)
 		tty_setcolor (HELP_ITALIC_COLOR);
 		break;
 	    case CHAR_FONT_NORMAL:
+		help_print_word (h, word, &col, &line, FALSE);
 		tty_setcolor (HELP_NORMAL_COLOR);
 		break;
 	    case '\n':
+		if (painting)
+		    help_print_word (h, word, &col, &line, FALSE);
 		line++;
 		col = 0;
 		break;
 	    case '\t':
 		col = (col / 8 + 1) * 8;
+		if (col >= HELP_WINDOW_WIDTH) {
+		    line++;
+		    col = 8;
+		}
+		break;
+	    case ' ':
+		/* word delimeter */
+		if (painting)
+		    help_print_word (h, word, &col, &line, TRUE);
 		break;
 	    default:
-		if (!painting)
-		    continue;
-                w = str_term_width1 (buff);
-		if (col + w > HELP_WINDOW_WIDTH)
-		    continue;
-		
-		dlg_move (h, line + 2, col + 2);
-		if (!acs)
-		    tty_print_string (buff);
-		else if (c == ' ' || c == '.')
-		    tty_print_char (c);
-		else
+		if (painting && (line < help_lines)) {
+		    if (!acs)
+			/* accumulate symbols in a word */
+			g_string_append (word, buff);
+		    else if (col < HELP_WINDOW_WIDTH) {
+			dlg_move (h, line + 2, col + 2);
+
+			if ((c == ' ') || (c == '.'))
+			    tty_print_char (c);
+			else
 #ifndef HAVE_SLANG
-		    tty_print_char (acs_map [c]);
+			    tty_print_char (acs_map [c]);
 #else
-		    SLsmg_draw_object (h->y + line + 2, h->x + col + 2, c);
+			    SLsmg_draw_object (h->y + line + 2, h->x + col + 2, c);
 #endif
-		col += w;
-		break;
+			col++;
+		    }
+		}
 	    }
 	}
+
+	/* print last word */
+	if (n[0] == CHAR_NODE_END)
+	    help_print_word (h, word, &col, &line, FALSE);
 
 	last_shown = p;
 	end_of_node = line < help_lines;
@@ -465,6 +519,8 @@ help_show (Dlg_head *h, const char *paint_start)
 	    }
 	}
     } while (repeat_paint);
+
+    g_string_free (word, TRUE);
 
     /* Position the cursor over a nice link */
     if (active_col)
