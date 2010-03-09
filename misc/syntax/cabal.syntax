@@ -187,9 +187,11 @@ context default
 #   special keywords
     keyword whole True  white
     keyword whole False white
-    keyword whole if   white
-    keyword whole impl white
+    keyword whole if white
     keyword whole else white
+    keyword whole os white
+    keyword whole impl white
+    keyword whole arch white
 
     keyword whole linestart \[\s\]executable yellow
     keyword whole linestart \[\s\]library yellow
