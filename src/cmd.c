@@ -1340,8 +1340,8 @@ single_dirsize_cmd (void)
         compute_dir_size_destroy_ui (ui);
     }
 
-    if (mark_moves_down)
-        send_message (&(panel->widget), WIDGET_KEY, KEY_DOWN);
+    if (panels_options.mark_moves_down)
+        send_message (&panel->widget, WIDGET_KEY, KEY_DOWN);
 
     recalculate_panel_summary (panel);
 

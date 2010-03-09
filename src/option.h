@@ -7,5 +7,6 @@
 #define MC_OPTION_H
 
 void configure_box (void);
+void panel_options_box (void);
 
 #endif

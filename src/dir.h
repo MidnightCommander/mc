@@ -66,9 +66,4 @@ int sort_inode (file_entry *a, file_entry *b);
 int link_isdir (const file_entry *);
 int if_link_is_exe (const char *full_name, const file_entry *file);
 
-extern int show_backups;
-extern int show_dot_files;
-extern int mix_all_files;
-extern int kilobyte_si;
-
-#endif
+#endif                          /* MC_DIR_H */

@@ -57,13 +57,6 @@
 
 int easy_patterns = 1;
 
-/*
- * If true, SI units (1000 based) will be used for
- * larger units (kilobyte, megabyte, ...).
- * If false binary units (1024 based) will be used.
- */
-int kilobyte_si = 0;
-
 char *user_recent_timeformat = NULL;    /* time format string for recent dates */
 char *user_old_timeformat = NULL;       /* time format string for older dates */
 
@@ -289,7 +282,7 @@ path_trunc (const char *path, size_t trunc_len)
 }
 
 const char *
-size_trunc (double size)
+size_trunc (double size, gboolean use_si)
 {
     static char x[BUF_TINY];
     long int divisor = 1;
@@ -297,12 +290,12 @@ size_trunc (double size)
 
     if (size > 999999999L)
     {
-        divisor = kilobyte_si ? 1000 : 1024;
-        xtra = kilobyte_si ? "k" : "K";
+        divisor = use_si ? 1000 : 1024;
+        xtra = use_si ? "k" : "K";
         if (size / divisor > 999999999L)
         {
-            divisor = kilobyte_si ? (1000 * 1000) : (1024 * 1024);
-            xtra = kilobyte_si ? "m" : "M";
+            divisor = use_si ? (1000 * 1000) : (1024 * 1024);
+            xtra = use_si ? "m" : "M";
         }
     }
     g_snprintf (x, sizeof (x), "%.0f%s", (size / divisor), xtra);
@@ -310,14 +303,14 @@ size_trunc (double size)
 }
 
 const char *
-size_trunc_sep (double size)
+size_trunc_sep (double size, gboolean use_si)
 {
     static char x[60];
     int count;
     const char *p, *y;
     char *d;
 
-    p = y = size_trunc (size);
+    p = y = size_trunc (size, use_si);
     p += strlen (p) - 1;
     d = x + sizeof (x) - 1;
     *d-- = 0;
@@ -348,7 +341,7 @@ size_trunc_sep (double size)
  *    0=bytes, 1=Kbytes, 2=Mbytes, etc.
  */
 void
-size_trunc_len (char *buffer, unsigned int len, off_t size, int units)
+size_trunc_len (char *buffer, unsigned int len, off_t size, int units, gboolean use_si)
 {
     /* Avoid taking power for every file.  */
     static const off_t power10[] = { 1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000,
@@ -367,7 +360,7 @@ size_trunc_len (char *buffer, unsigned int len, off_t size, int units)
      * We can't just multiply by 1024 - that might cause overflow
      * if off_t type is too small
      */
-    if (units && kilobyte_si)
+    if (units && use_si)
     {
         for (j = 0; j < units; j++)
         {
@@ -391,26 +384,22 @@ size_trunc_len (char *buffer, unsigned int len, off_t size, int units)
 
             /* Use "~K" or just "K" if len is 1.  Use "B" for bytes.  */
             g_snprintf (buffer, len + 1, (len > 1) ? "~%s" : "%s",
-                        (j > 1) ? (kilobyte_si ? suffix_lc[j - 1] : suffix[j - 1]) : "B");
+                        (j > 1) ? (use_si ? suffix_lc[j - 1] : suffix[j - 1]) : "B");
             break;
         }
 
         if (size < power10[len - (j > 0)])
         {
             g_snprintf (buffer, len + 1, "%lu%s", (unsigned long) size,
-                        kilobyte_si ? suffix_lc[j] : suffix[j]);
+                        use_si ? suffix_lc[j] : suffix[j]);
             break;
         }
 
         /* Powers of 1000 or 1024, with rounding.  */
-        if (kilobyte_si)
-        {
+        if (use_si)
             size = (size + 500) / 1000;
-        }
         else
-        {
             size = (size + 512) >> 10;
-        }
     }
 }
 

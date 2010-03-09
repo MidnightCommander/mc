@@ -36,12 +36,11 @@
 #include "dialog.h"
 #include "widget.h"             /* default_proc */
 #include "main-widgets.h"       /* the_menubar */
-#include "dir.h"                /* required by panel */
 #include "panel.h"              /* for the panel structure */
-#include "main.h"               /* other_panel, current_panel definitions */
 #include "menu.h"               /* menubar_visible */
 #include "layout.h"
 #include "mountlist.h"
+#include "setup.h"              /* panels_options */
 #include "info.h"
 
 #ifndef VERSION
@@ -125,8 +124,8 @@ info_show_info (struct WInfo *info)
         if (myfs_stats.avail > 0 || myfs_stats.total > 0)
         {
             char buffer1[6], buffer2[6];
-            size_trunc_len (buffer1, 5, myfs_stats.avail, 1);
-            size_trunc_len (buffer2, 5, myfs_stats.total, 1);
+            size_trunc_len (buffer1, 5, myfs_stats.avail, 1, panels_options.kilobyte_si);
+            size_trunc_len (buffer2, 5, myfs_stats.total, 1, panels_options.kilobyte_si);
             tty_printf (_("Free space: %s (%d%%) of %s"), buffer1, myfs_stats.total ?
                         (int) (100 * (double) myfs_stats.avail / myfs_stats.total) : 0, buffer2);
         }
@@ -181,7 +180,7 @@ info_show_info (struct WInfo *info)
 #endif
         {
             char buffer[10];
-            size_trunc_len (buffer, 9, st.st_size, 0);
+            size_trunc_len (buffer, 9, st.st_size, 0, panels_options.kilobyte_si);
             tty_printf (_("Size:      %s"), buffer);
 #ifdef HAVE_STRUCT_STAT_ST_BLOCKS
             tty_printf (ngettext (" (%ld block)", " (%ld blocks)",

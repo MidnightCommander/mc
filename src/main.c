@@ -148,9 +148,6 @@ int cd_symlinks = 1;
 /* they do a complete refresh, refreshing all the parts of the program */
 int fast_refresh = 0;
 
-/* If true, marking a files moves the cursor down */
-int mark_moves_down = 1;
-
 /* If true, at startup the user-menu is invoked */
 int auto_menu = 0;
 
@@ -190,15 +187,6 @@ int utf8_display = 0;
 
 /* If true use the internal viewer */
 int use_internal_view = 1;
-
-/* Have we shown the fast-reload warning in the past? */
-int fast_reload_w = 0;
-
-/* Move page/item? When clicking on the top or bottom of a panel */
-int mouse_move_pages = 1;
-
-/* If true: l&r arrows are used to chdir if the input line is empty */
-int navigate_with_arrows = 0;
 
 /* The prompt */
 const char *mc_prompt = NULL;
@@ -302,7 +290,7 @@ mc_main_error_quark (void)
 void
 save_cwds_stat (void)
 {
-    if (fast_reload)
+    if (panels_options.fast_reload)
     {
         mc_stat (current_panel->cwd, &(current_panel->dir_stat));
         if (get_other_type () == view_listing)
@@ -796,10 +784,11 @@ create_options_menu (void)
     GList *entries = NULL;
 
     entries = g_list_append (entries, menu_entry_create (_("&Configuration..."), CK_ConfigureBox));
-    entries = g_list_append (entries, menu_entry_create (_("&Layout..."), CK_LayoutCmd));
-    entries = g_list_append (entries, menu_entry_create (_("C&onfirmation..."), CK_ConfirmBox));
-    entries = g_list_append (entries, menu_entry_create (_("&Display bits..."), CK_DisplayBitsBox));
-    entries = g_list_append (entries, menu_entry_create (_("Learn &keys..."), CK_LearnKeys));
+    entries = g_list_append (entries, menu_entry_create (_("&Layout..."),        CK_LayoutBox));
+    entries = g_list_append (entries, menu_entry_create (_("&Panel options..."), CK_PanelOptionsBox));
+    entries = g_list_append (entries, menu_entry_create (_("C&onfirmation..."),  CK_ConfirmBox));
+    entries = g_list_append (entries, menu_entry_create (_("&Display bits..."),  CK_DisplayBitsBox));
+    entries = g_list_append (entries, menu_entry_create (_("Learn &keys..."),    CK_LearnKeys));
 #ifdef ENABLE_VFS
     entries = g_list_append (entries, menu_entry_create (_("&Virtual FS..."), CK_ConfigureVfs));
 #endif
@@ -876,41 +865,10 @@ midnight_get_shortcut (unsigned long command)
     return NULL;
 }
 
-/* Flag toggling functions */
-void
-toggle_fast_reload (void)
-{
-    fast_reload = !fast_reload;
-    if (fast_reload_w == 0 && fast_reload)
-    {
-        message (D_NORMAL, _(" Information "),
-                 _
-                 (" Using the fast reload option may not reflect the exact \n"
-                  " directory contents. In this case you'll need to do a   \n"
-                  " manual reload of the directory. See the man page for   \n"
-                  " the details.                                           "));
-        fast_reload_w = 1;
-    }
-}
-
-void
-toggle_mix_all_files (void)
-{
-    mix_all_files = !mix_all_files;
-    update_panels (UP_RELOAD, UP_KEEPSEL);
-}
-
-void
-toggle_show_backup (void)
-{
-    show_backups = !show_backups;
-    update_panels (UP_RELOAD, UP_KEEPSEL);
-}
-
 void
 toggle_show_hidden (void)
 {
-    show_dot_files = !show_dot_files;
+    panels_options.show_dot_files = !panels_options.show_dot_files;
     update_panels (UP_RELOAD, UP_KEEPSEL);
 }
 
@@ -920,13 +878,6 @@ toggle_panels_split (void)
     horizontal_split = !horizontal_split;
     layout_change ();
     do_refresh ();
-}
-
-void
-toggle_kilobyte_si (void)
-{
-    kilobyte_si = !kilobyte_si;
-    update_panels (UP_RELOAD, UP_KEEPSEL);
 }
 
 /*
@@ -1284,8 +1235,8 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
         jobs_cmd ();
         break;
 #endif
-    case CK_LayoutCmd:
-        layout_cmd ();
+    case CK_LayoutBox:
+        layout_box ();
         break;
     case CK_LearnKeys:
         learn_keys ();
@@ -1315,6 +1266,9 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
         netlink_cmd ();
         break;
 #endif
+    case CK_PanelOptionsBox:
+        panel_options_box ();
+        break;
 #ifdef HAVE_CHARSET
     case CK_PanelSetPanelEncoding:
         encoding_cmd ();

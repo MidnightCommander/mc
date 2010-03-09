@@ -155,6 +155,7 @@ typedef struct
     struct stat *s_stat, *d_stat;
 } FileOpContextUI;
 
+int classic_progressbar = 1;
 
 /* Used to save the hint line */
 static int last_hint_line;
@@ -339,8 +340,7 @@ file_op_context_create_ui_without_init (FileOpContext * ctx, gboolean with_eta,
     add_widget (ui->op_dlg, ui->file_string[0] = label_new (3, FCOPY_LABEL_X, ""));
     add_widget (ui->op_dlg, ui->file_label[0] = label_new (2, FCOPY_LABEL_X, ""));
 
-    if ((right_panel == current_panel)
-        && !mc_config_get_bool (mc_main_config, "Layout", "classic_progressbar", TRUE))
+    if ((right_panel == current_panel) && !classic_progressbar)
     {
         ui->progress_file_gauge->from_left_to_right = FALSE;
         if (dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
@@ -543,8 +543,8 @@ file_progress_show_total (FileOpTotalContext * tctx, FileOpContext * ctx, double
     g_snprintf (buffer, BUF_TINY, _("Time: %s  %s (%s)"), buffer2, buffer3, buffer4);
     label_set_text (ui->time_label, buffer);
 
-    size_trunc_len (buffer2, 5, tctx->copyed_bytes, 0);
-    size_trunc_len (buffer3, 5, ctx->progress_bytes, 0);
+    size_trunc_len (buffer2, 5, tctx->copyed_bytes, 0, panels_options.kilobyte_si);
+    size_trunc_len (buffer3, 5, ctx->progress_bytes, 0, panels_options.kilobyte_si);
 
     g_snprintf (buffer, BUF_TINY, _(" Total: %s of %s "), buffer2, buffer3);
 
