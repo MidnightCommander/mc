@@ -9,17 +9,13 @@
 
 Główny ekran pomocy programu GNU Midnight Commander.
 
-Aby dowiedzieć się, jak używać interaktywnej pomocy,
-należy nacisnąć klawisz EnterHow to use help. Można też
-przejść bezpośrednio do spisu treściContents.
+Aby dowiedzieć się, jak używać interaktywnej pomocy, należy nacisnąć klawisz EnterHow to use help. Można też przejść bezpośrednio do spisu treściContents.
 
-Program GNU Midnight Commander został napisany przez jego
-autorówAUTHORS.
+Program GNU Midnight Commander został napisany przez jego autorówAUTHORS.
 
-Program GNU Midnight Commander jest dostarczany BEZ
-JAKIEJKOLWIEK GWARANCJIWarranty. Niniejszy program jest
-wolnym oprogramowaniem; można go rozprowadzać dalej na
-warunkach GNU General Public LicenseLicense.[License]
+Program GNU Midnight Commander jest dostarczany BEZ JAKIEJKOLWIEK GWARANCJIWarranty. Niniejszy program jest wolnym oprogramowaniem; można go rozprowadzać dalej na warunkach GNU General Public LicenseLicense.
+
+[License]
 
                 GNU GENERAL PUBLIC LICENSE
                    Version 2, June 1991
@@ -433,32 +429,16 @@ Library General Public License instead of this License.
 [QueryBox]
 Okna zapytań
 
-W oknach dialogowych zapytań można używać klawiszy
-strzałek lub pierwszych liter, aby wybrać element albo
-kliknąć na przycisku.
+W oknach dialogowych zapytań można używać klawiszy strzałek lub pierwszych liter, aby wybrać element albo kliknąć na przycisku.
 
 [How to use help]
 Jak używać pomocy
 
-Do obsługi przeglądarki można używać klawiszy kursora lub
-myszy. Naciśnięcie strzałki w dół przeniesie do następnego
-elementu lub przewinie w dół. Naciśnięcie strzałki w górę
-przeniesie do poprzedniego elementu lub przewinie w górę,
-Naciśnięcie strzałki w prawo podąży za zaznaczonym
-odnośnikiem. Naciśnięcie strzałki w lewo powróci do
-poprzednio odwiedzonego węzła.
+Do obsługi przeglądarki można używać klawiszy kursora lub myszy. Naciśnięcie strzałki w dół przeniesie do następnego elementu lub przewinie w dół. Naciśnięcie strzałki w górę przeniesie do poprzedniego elementu lub przewinie w górę, Naciśnięcie strzałki w prawo podąży za zaznaczonym odnośnikiem. Naciśnięcie strzałki w lewo powróci do poprzednio odwiedzonego węzła.
 
-Jeśli terminal nie obsługuje klawiszy kursora, można używać
-spacji do przewijania do przodu i klawisz B, aby przewijać
-do tyłu. Można używać klawisza Tab, aby przechodzić do
-następnego elementu i klawisza Enter, aby podążyć za
-zaznaczonym odnośnikiem. Klawisz L może być używany do
-przechodzenia do poprzednio odwiedzonego węzła.
-Naciśnięcie klawisza Esc zakończy przeglądarkę pomocy.
+Jeśli terminal nie obsługuje klawiszy kursora, można używać spacji do przewijania do przodu i klawisz B, aby przewijać do tyłu. Można używać klawisza Tab, aby przechodzić do następnego elementu i klawisza Enter, aby podążyć za zaznaczonym odnośnikiem. Klawisz L może być używany do przechodzenia do poprzednio odwiedzonego węzła. Naciśnięcie klawisza Esc zakończy przeglądarkę pomocy.
 
-Lewy przycisk myszy podąży za odnośnikiem lub przewinie
-ekran. Prawy przycisk myszy może być używany, aby
-przechodzić do poprzednio odwiedzonego węzła.
+Lewy przycisk myszy podąży za odnośnikiem lub przewinie ekran. Prawy przycisk myszy może być używany, aby przechodzić do poprzednio odwiedzonego węzła.
 
 Pełna lista klawiszy przeglądarki pomocy:
 
