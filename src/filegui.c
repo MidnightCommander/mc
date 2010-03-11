@@ -285,6 +285,7 @@ file_op_context_create_ui_without_init (FileOpContext * ctx, gboolean with_eta,
         break;
     case FILEGUI_DIALOG_DELETE_ITEM:
         total_reserve = -5;
+        minus = 0;
         break;
     }
 
