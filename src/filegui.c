@@ -249,7 +249,7 @@ file_op_context_create_ui_without_init (FileOpContext * ctx, gboolean with_eta,
                                         filegui_dialog_type_t dialog_type)
 {
     FileOpContextUI *ui;
-    int minus, total_reserve = 0;
+    int minus = 0, total_reserve = 0;
     const char *abort_button_label = N_("&Abort");
     const char *skip_button_label = N_("&Skip");
     int abort_button_width, skip_button_width, buttons_width;
@@ -273,15 +273,16 @@ file_op_context_create_ui_without_init (FileOpContext * ctx, gboolean with_eta,
     ctx->ui = ui;
 
     ctx->dialog_type = dialog_type;
-    minus = verbose ? 0 : 3;
 
     switch (dialog_type)
     {
     case FILEGUI_DIALOG_ONE_ITEM:
         total_reserve = 0;
+        minus = verbose ? 0 : 2;
         break;
     case FILEGUI_DIALOG_MULTI_ITEM:
         total_reserve = 5;
+        minus = verbose ? 0 : 7;
         break;
     case FILEGUI_DIALOG_DELETE_ITEM:
         total_reserve = -5;
@@ -313,7 +314,7 @@ file_op_context_create_ui_without_init (FileOpContext * ctx, gboolean with_eta,
                             NORMAL_BUTTON, skip_button_label, NULL));
 
 
-    if (dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
+    if (verbose && dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
     {
         add_widget (ui->op_dlg, hline_new (8, 1, dlg_width - 2));
 
@@ -510,6 +511,9 @@ file_progress_show_total (FileOpTotalContext * tctx, FileOpContext * ctx, double
     char buffer4[BUF_TINY];
     struct timeval tv_current;
     FileOpContextUI *ui;
+
+    if (!verbose)
+        return;
 
     if (ctx->dialog_type != FILEGUI_DIALOG_MULTI_ITEM || ctx->ui == NULL)
         return;
