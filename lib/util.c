@@ -666,6 +666,7 @@ load_mc_home_file (const char *_mc_home, const char *_mc_home_alt, const char *f
             /* Fall back to the two-letter language code */
             if (lang[0] && lang[1])
                 lang[2] = 0;
+            g_free (hintfile);
             hintfile = g_strconcat (hintfile_base, ".", lang, (char *) NULL);
             data = load_file (hintfile);
 
