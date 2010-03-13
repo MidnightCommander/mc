@@ -14,6 +14,9 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+extern char *user_recent_timeformat;    /* time format string for recent dates */
+extern char *user_old_timeformat;       /* time format string for older dates */
+
 /* Returns its argument as a "modifiable" string. This function is
  * intended to pass strings to legacy libraries that don't know yet
  * about the "const" modifier. The return value of this function
