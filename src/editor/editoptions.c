@@ -33,6 +33,7 @@
 
 #include "lib/global.h"
 
+#include "edit-widget.h"
 #include "edit-impl.h"
 #include "src/dialog.h"	/* B_CANCEL */
 #include "src/wtools.h"	/* QuickDialog */
@@ -136,6 +137,9 @@ edit_options_dialog (void)
 	return;
 
     old_syntax_hl = option_syntax_highlighting;
+
+    if (!option_cursor_beyond_eol)
+        wedit->over_col = 0;
 
     if (p) {
 	option_word_wrap_line_length = atoi (p);
