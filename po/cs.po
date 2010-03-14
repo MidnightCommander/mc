@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: mc 4.7.0.2\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
 "POT-Creation-Date: 2010-02-26 13:04+0200\n"
-"PO-Revision-Date: 2010-02-14 15:16+0100\n"
+"PO-Revision-Date: 2010-03-14 14:00+0100\n"
 "Last-Translator: Martin Zoubek <zoubek@seznam.cz>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -431,9 +431,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Poškozený extfs archiv"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Warning: cannot open %s directory\n"
-msgstr "Není možné vytvořit adresář %s"
+msgstr "Varování: není možné otevřít adresář %s\n"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -930,7 +930,6 @@ msgid "Show mc with specified skin"
 msgstr "Zobrazit mc se zadaným tématem vzhledu"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -955,7 +954,7 @@ msgstr ""
 "   Okna dialogů:      dnormal, dfocus, dhotnormal, dhotfocus, "
 "errdhotnormal,\n"
 "                      errdhotfocus\n"
-"   Menu:              menu, menuhot, menusel, menuhotsel\n"
+"   Menu:              menu, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:            editnormal, editbold, editmarked,\n"
 "                      editwhitespace, editlinestate\n"
 
@@ -2563,13 +2562,13 @@ msgstr " Smazat: "
 msgid "Non&e"
 msgstr "Žá&dné"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%d:%02d.%02d"
-msgstr "ČAS %d:%02d.%02d"
+msgstr "%d:%02d.%02d"
 
 #, c-format
 msgid "ETA %s"
-msgstr ""
+msgstr "ČAS %s"
 
 #, c-format
 msgid "%.2f MB/s"
@@ -2585,15 +2584,15 @@ msgstr "%ld B/s"
 
 #, c-format
 msgid "Files processed: %llu of %llu"
-msgstr ""
+msgstr "Zpracováno souborů: %llu z %llu"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s  %s (%s)"
-msgstr "Velikost:  %s"
+msgstr "Čas: %s  %s (%s)"
 
 #, c-format
 msgid " Total: %s of %s "
-msgstr ""
+msgstr " Celkem: %s z %s "
 
 msgid "Source"
 msgstr "Zdroj"
@@ -3421,13 +3420,11 @@ msgstr "&Jméno"
 
 #. TRANSLATORS: one single character to represent 'version' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#, fuzzy
 msgid "sort|v"
-msgstr "sort|s"
+msgstr "sort|v"
 
-#, fuzzy
 msgid "&Version"
-msgstr "Práva"
+msgstr "&Verze"
 
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3799,12 +3796,11 @@ msgstr " Nelze prohlížet: není to normální soubor "
 msgid "Seeking to search result"
 msgstr "Přesouvá se na pozici výsledku vyhledávání"
 
-#, fuzzy
 msgid "Search done"
-msgstr "Hledat"
+msgstr "Hledání dokončeno"
 
 msgid "Continue from begining?"
-msgstr ""
+msgstr "Pokračovat od začátku?"
 
 msgid " History "
 msgstr " Historie "
@@ -3818,12 +3814,3 @@ msgstr "Chcete smazat tuto historii?"
 
 msgid "Background process:"
 msgstr "Procesy na pozadí:"
-
-#~ msgid "File"
-#~ msgstr "Soubor"
-
-#~ msgid "Count"
-#~ msgstr "Počet"
-
-#~ msgid "Bytes"
-#~ msgstr "Bajtů"
