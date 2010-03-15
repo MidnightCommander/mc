@@ -150,40 +150,40 @@ msgid "Insert key"
 msgstr "인써트키"
 
 msgid "Delete key"
-msgstr "델레이트키"
+msgstr "댈리트키"
 
 msgid "Completion/M-tab"
 msgstr "Completion/M-tab"
 
 msgid "+ on keypad"
-msgstr "+ 키패드"
+msgstr "키패드 +"
 
 msgid "- on keypad"
-msgstr "- 키패드"
+msgstr "키패드 -"
 
 msgid "Slash on keypad"
-msgstr "/ 키패드"
+msgstr "키패드 /"
 
 msgid "* on keypad"
-msgstr "* 키패드"
+msgstr "키패드 *"
 
 msgid "Escape key"
 msgstr "ESC키"
 
 msgid "Left arrow keypad"
-msgstr "왼쪽 방향키 키패드"
+msgstr "키패드 왼쪽 방향키"
 
 msgid "Right arrow keypad"
-msgstr "오른쪽 방향키 키패드"
+msgstr "키패드 오른쪽 방향키"
 
 msgid "Up arrow keypad"
-msgstr "위쪽 방향키 키패드"
+msgstr "키패드 위쪽 방향키"
 
 msgid "Down arrow keypad"
-msgstr "아래쪽 방향키 키패드"
+msgstr "키패드 아래쪽 방향키"
 
 msgid "Home on keypad"
-msgstr "홈키 키패드"
+msgstr "키패드 홈키"
 
 msgid "End on keypad"
 msgstr "엔드키 키패드"
@@ -192,16 +192,16 @@ msgid "Page Down keypad"
 msgstr "페이지다운키 키패드"
 
 msgid "Page Up keypad"
-msgstr "페이지업키 키패드"
+msgstr "키패드 페이지업키"
 
 msgid "Insert on keypad"
-msgstr "인써트키 키패드"
+msgstr "키패드 인써트키"
 
 msgid "Delete on keypad"
-msgstr "델레이트키 키패드"
+msgstr "키패드 델레이트키"
 
 msgid "Enter on keypad"
-msgstr "엔터키 키패드"
+msgstr "키패드 엔터키"
 
 msgid "Function key 21"
 msgstr "F21"
@@ -258,7 +258,7 @@ msgid "Dollar sign"
 msgstr "달라사인"
 
 msgid "Quotation mark"
-msgstr "Quotation mark"
+msgstr "퀘스천 마크"
 
 msgid "Caret"
 msgstr "캐럿"
