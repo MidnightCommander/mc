@@ -2955,6 +2955,39 @@ edit_execute_cmd (WEdit *edit, unsigned long command, int char_for_insertion)
 	edit->force |= REDRAW_PAGE;
 	break;
 
+    case CK_Add_Collapse_Region:
+        if (option_line_status)
+        {
+            if (edit->mark1 != edit->mark2)
+            {
+                long start_mark = min (edit->mark1, edit->mark2);
+                int upto_start = edit_count_lines (edit, start_mark, edit->curs1);
+                int lines_selected = edit_count_lines (edit, start_mark, edit->curs1);
+                int start_line = edit->curs_line;
+                if (edit->curs1 > edit->mark1)
+                {
+                    start_line = edit->curs_line - upto_start;
+                }
+                else
+                {
+                    start_line = edit->curs_line + upto_start;
+                }
+                unsigned int end_line;
+                edit->highlight = 0;
+                edit->mark1 = 0;
+                edit->mark2 = 0;
+                end_line = start_line + lines_selected - 1;
+                if (abs (end_line - start_line) > 1)
+                    edit->collapsed = book_mark_collapse_insert (edit->collapsed, start_line, end_line, 1);
+            }
+            else
+            {
+                book_mark_collapse (edit->collapsed, edit->curs_line);
+            }
+            edit->force |= REDRAW_PAGE;
+        }
+        break;
+
     case CK_Toggle_Show_Margin:
 	show_right_margin = !show_right_margin;
 	edit->force |= REDRAW_PAGE;

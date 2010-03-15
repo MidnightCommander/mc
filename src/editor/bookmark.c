@@ -223,3 +223,238 @@ void book_mark_dec (WEdit * edit, int line)
 	}
     }
 }
+
+
+/*
+ *
+ * editor collapsed lines
+ *
+ * returns the first collapsed region on or before this line 
+ *
+ */
+GList *
+book_mark_collapse_find (GList * list, int line)
+{
+    GList *cl, *l;
+    collapsed_lines *collapsed;
+    l = list;
+    if (!l)
+        return NULL;
+    l = g_list_first (list);
+    cl = l;
+    while (cl) {
+        collapsed = (collapsed_lines *) cl->data;
+        if ( collapsed->start_line <= line && line <= collapsed->end_line )
+            return cl;
+        cl = g_list_next (cl);
+    }
+    return NULL;
+}
+
+/* insert a collapsed at this line */
+GList *
+book_mark_collapse_insert (GList *list, const int start_line, const int end_line,
+                           int state)
+{
+    collapsed_lines *p, *q;
+    p = g_new0 (collapsed_lines, 1);
+    p->start_line = start_line;
+    p->end_line = end_line;
+    p->state = state;
+
+    GList *link, *newlink, *tmp;
+    /*
+     * Go to the last position and traverse the list backwards
+     * starting from the second last entry to make sure that we
+     * are not removing the current link.
+     */
+    list = g_list_append (list, p);
+    list = g_list_last (list);
+    link = g_list_previous (list);
+
+    int sl = 0;
+    int el = 0;
+
+    while ( link ) {
+        newlink = g_list_previous (link);
+        q = (collapsed_lines *) link->data;
+        sl = q->start_line;
+        el = q->end_line;
+        if (((sl == start_line) || (el == end_line) ||
+           (sl == end_line) || (el == start_line)) ||
+           ((sl < start_line) && (el > start_line) && (el < end_line)) ||
+           ((sl > start_line) && (sl < end_line) && (el > end_line))) {
+            g_free (link->data);
+            tmp = g_list_remove_link (list, link);
+            g_list_free_1 (link);
+        }
+        link = newlink;
+    }
+    return list;
+}
+
+
+void
+book_mark_collapse (GList *list, const int line)
+{
+    GList *cl;
+    collapsed_lines *p;
+    int collapse_state;
+
+    collapse_state = book_mark_get_collapse_state(list, line, NULL);
+    cl = book_mark_collapse_find (list, line);
+    switch ( collapse_state ) {
+    case C_LINES_ELAPSED:
+        if ( cl ) {
+            p = (collapsed_lines *) cl->data;
+            p->state = 1;
+        }
+        break;
+    case C_LINES_COLLAPSED:
+        if ( cl ) {
+            p = (collapsed_lines *) cl->data;
+            p->state = 0;
+        }
+        break;
+    default:
+        break;
+    }
+}
+
+
+
+
+/* returns true if a collapsed exists at this line
+ * return start_line, end_line if found region
+ *
+ */
+int book_mark_collapse_query (GList * list, const int line,
+                              int *start_line,
+                              int *end_line,
+                              int *state)
+{
+    GList *cl;
+    collapsed_lines *p;
+
+    *start_line = 0;
+    *end_line = 0;
+    *state = 0;
+
+    cl = book_mark_collapse_find (list, line);
+    if ( cl ){
+        p = (collapsed_lines *) cl->data;
+        *start_line = p->start_line;
+        *end_line = p->end_line;
+        *state = p->state;
+        return 1;
+    }
+    return 0;
+}
+
+int book_mark_get_collapse_state (GList * list, const int line,
+                                  collapsed_lines *cl)
+{
+    int start_line;
+    int end_line;
+    int state;
+    int c = 0;
+
+    c = book_mark_collapse_query (list, line, &start_line, &end_line, &state);
+//    mc_log("l: %i, start_line:%i, end_line:%i", line, start_line, end_line);
+    if ( c == 0 )
+        return C_LINES_DEFAULT;
+
+    if ( cl ) {
+        cl->start_line = start_line;
+        cl->end_line = end_line;
+        cl->state = state;
+    }
+
+    if ( line == start_line ) {
+        if ( state )
+            return C_LINES_COLLAPSED;
+        else
+            return C_LINES_ELAPSED;
+    }
+    if ( line > start_line && line < end_line ) {
+        if ( state )
+            return C_LINES_MIDDLE_C;
+        else
+            return C_LINES_MIDDLE_E;
+    }
+    if ( line == end_line ) {
+        return C_LINES_LAST;
+    }
+    return C_LINES_DEFAULT;
+}
+
+
+/* shift down collapse after this line */
+void book_mark_collapse_inc (GList * list, int line)
+{
+    GList *cl, *l;
+    collapsed_lines *collapsed;
+    l = list;
+    if (!l)
+        return;
+    l = g_list_first (list);
+    cl = l;
+    while (cl) {
+        collapsed = (collapsed_lines *) cl->data;
+        if ( collapsed->start_line >= line ) {
+            collapsed->start_line++;
+            collapsed->end_line++;
+        } else if ( collapsed->end_line >= line ){
+            collapsed->end_line++;
+        }
+        cl = g_list_next (cl);
+    }
+}
+
+/* shift up collapse after this line */
+void book_mark_collapse_dec (GList * list, int line)
+{
+    GList *cl, *l, *tmp;
+    collapsed_lines *collapsed;
+    l = list;
+    if (!l)
+        return;
+    l = g_list_first (list);
+    cl = l;
+    while (cl) {
+        collapsed = (collapsed_lines *) cl->data;
+        if ( collapsed->start_line >= line ) {
+            collapsed->start_line--;
+            collapsed->end_line--;
+        } else if ( collapsed->end_line >= line ){
+            collapsed->end_line--;
+        }
+        cl = g_list_next (cl);
+    }
+
+}
+
+int book_mark_get_shiftup (GList * list, int line)
+{
+    GList *cl;
+    collapsed_lines *collapsed;
+    int res = 0;
+
+    cl = list;
+
+    if (!cl)
+        return res;
+
+    cl = g_list_first (list);
+    while (cl) {
+        collapsed = (collapsed_lines *) cl->data;
+        if ( line > collapsed->start_line && collapsed->state ) {
+            res += collapsed->end_line - collapsed->start_line - 1;
+        }
+        cl = g_list_next (cl);
+    }
+    return res;
+
+}
+
+

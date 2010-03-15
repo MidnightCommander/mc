@@ -35,6 +35,13 @@
 #include "lib/global.h"	/* PATH_SEP_STR */
 #include "lib/fileloc.h"
 
+#define C_LINES_ELAPSED		1       /* first line elapsed region */
+#define C_LINES_COLLAPSED	2       /* first line collapsed region */
+#define C_LINES_MIDDLE_E	3       /* in middle collapsed */
+#define C_LINES_MIDDLE_C	4       /* in middle elapsed */
+#define C_LINES_LAST		5       /* last line elapsed region */
+#define C_LINES_DEFAULT		0
+
 /* Editor widget */
 struct WEdit;
 typedef struct WEdit WEdit;
@@ -72,5 +79,17 @@ int edit_file (const char *_file, int line);
 const char *edit_get_file_name (const WEdit *edit);
 int edit_get_curs_col (const WEdit *edit);
 const char *edit_get_syntax_type (const WEdit *edit);
+
+typedef struct collapsed_lines {
+    int start_line;			/* first collpsed line number */
+    int end_line;			/* end collapsed line number */
+    int state;				/* 1 - collapsed; 0 - elapsed  */
+} collapsed_lines;
+
+GList * book_mark_collapse_insert (GList * list, const int start_line, const int end_line, int state);
+int book_mark_collapse_query (GList *list, const int line, int *start_line, int *end_line, int *state);
+int book_mark_get_collapse_state (GList *list, const int line, collapsed_lines *cl);
+void book_mark_collapse_inc (GList * list, int line);
+void book_mark_collapse_dec (GList * list, int line);
 
 #endif				/* MC_EDIT_H */

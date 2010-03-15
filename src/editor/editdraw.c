@@ -392,6 +392,8 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
     unsigned int cur_line = 0;
     int book_mark = 0;
     char line_stat[LINE_STATE_WIDTH + 1];
+    int skip_rows = 0;
+    int collapse_state = 0;
 
     if (row > edit->num_widget_lines - EDIT_TEXT_VERTICAL_OFFSET) {
          return;
@@ -416,6 +418,10 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 						q)) + edit->start_col;
     if ( option_line_state ) {
         cur_line = edit->start_line + row;
+        collapse_state = book_mark_get_collapse_state(edit->collapsed, cur_line, NULL);
+        /* not show line if in middle collapsed region */
+        if (collapse_state == C_LINES_MIDDLE_C)
+            return;
         if ( cur_line <= (unsigned int) edit->total_lines ) {
             g_snprintf (line_stat, LINE_STATE_WIDTH + 1, "%7i ", cur_line + 1);
         } else {
@@ -424,6 +430,24 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
         }
         if (book_mark_query_color (edit, cur_line, BOOK_MARK_COLOR)){
             g_snprintf (line_stat, 2, "*");
+        }
+        skip_rows = book_mark_get_shiftup (edit->collapsed, cur_line);
+        if (row - skip_rows < 0)
+            return;
+
+        switch (collapse_state) {
+        case C_LINES_ELAPSED:
+            g_snprintf (line_stat, 4, "[-]");
+            break;
+        case C_LINES_COLLAPSED:
+            g_snprintf (line_stat, 4, "[+]");
+            break;
+        case C_LINES_MIDDLE_E:
+            g_snprintf (line_stat, 3, " |");
+            break;
+        case C_LINES_LAST:
+            g_snprintf (line_stat, 3, " \\");
+            break;
         }
     }
 
@@ -633,6 +657,7 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
     long row = 0, curs_row;
     static long prev_curs_row = 0;
     static long prev_curs = 0;
+    int skip_rows = 0;
 
     int force = edit->force;
     long b;
@@ -645,6 +670,10 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 	if (!(force & REDRAW_IN_BOUNDS)) {	/* !REDRAW_IN_BOUNDS means to ignore bounds and redraw whole rows */
 	    start_row = 0;
 	    end_row = edit->num_widget_lines - 1;
+	    if ( option_line_status ) {
+		skip_rows = book_mark_get_shiftup (edit->collapsed, edit->curs_line + 1);
+		end_row += skip_rows;
+	    }
 	    start_column = 0;
 	    end_column = edit->num_widget_columns - 1;
 	}
@@ -655,8 +684,8 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 		if (key_pending (edit))
 		    goto exit_render;
 		edit_draw_this_line (edit, b, row, start_column, end_column);
-		b = edit_move_forward (edit, b, 1, 0);
 		row++;
+		b = edit_move_forward (edit, b, 1, 0);
 	    }
 	} else {
 	    curs_row = edit->curs_row;
@@ -669,7 +698,8 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 		    while (row <= upto) {
 			if (key_pending (edit))
 			    goto exit_render;
-			edit_draw_this_line (edit, b, row, start_column, end_column);
+			edit_draw_this_line (edit, b, row - skip_rows, start_column, end_column);
+			row++;
 			b = edit_move_forward (edit, b, 1, 0);
 		    }
 		}
@@ -689,8 +719,8 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 			if (key_pending (edit))
 			    goto exit_render;
 			edit_draw_this_line (edit, b, row, start_column, end_column);
-			b = edit_move_forward (edit, b, 1, 0);
 			row++;
+			b = edit_move_forward (edit, b, 1, 0);
 		    }
 		}
 	    }

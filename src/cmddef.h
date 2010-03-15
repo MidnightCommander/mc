@@ -117,6 +117,7 @@
 #define CK_Edit_Save_Mode   428
 #define CK_Choose_Syntax    429
 #define CK_About            430
+#define CK_New_Collapse_Region	431
 
 #if 0
 /* application control */
