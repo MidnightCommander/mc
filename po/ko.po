@@ -3014,10 +3014,10 @@ msgstr ""
 "이제 모든 키가 제대로 동작합니다."
 
 msgid "Press all the keys mentioned here. After you have done it, check"
-msgstr "Press all the keys mentioned here. After you have done it, check"
+msgstr "모든키가 언급되었습니다. 나중에 그것을 확인 할 수 있습니다."
 
 msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr "which keys are not marked with OK. Press space on the missing"
+msgstr "키 확인이 표시되지 않습니다. 누락된 키는 스페이스키로 누르세요"
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "키 혹은 마우스로 클릭한 후 키를 정의하십시오. 탭키로 이동하십시오."
