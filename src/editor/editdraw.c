@@ -670,7 +670,8 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 	if (!(force & REDRAW_IN_BOUNDS)) {	/* !REDRAW_IN_BOUNDS means to ignore bounds and redraw whole rows */
 	    start_row = 0;
 	    end_row = edit->num_widget_lines - 1;
-	    if ( option_line_status ) {
+	    if (option_line_state)
+	    {
 		skip_rows = book_mark_get_shiftup (edit->collapsed, edit->curs_line + 1);
 		end_row += skip_rows;
 	    }

@@ -92,6 +92,7 @@ static name_keymap_t command_names[] = {
     { "EditReplace",                       CK_Replace },
     { "EditReplaceAgain",                  CK_Replace_Again },
     { "EditCompleteWord",                  CK_Complete_Word },
+    { "EditNewCollapsedRegion",            CK_New_Collapse_Region },
 
 #if 0
     { "EditDebugStart",                    CK_Debug_Start },
