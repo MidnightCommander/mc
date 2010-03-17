@@ -342,7 +342,7 @@ mcview_display_clean (mcview_t * view)
     widget_erase ((Widget *) view);
     if (view->dpy_frame_size != 0)
     {
-        tty_draw_box (view->widget.y, view->widget.x, view->widget.lines, view->widget.cols);
+        tty_draw_box (view->widget.y, view->widget.x, view->widget.lines, view->widget.cols, FALSE);
         /*        draw_double_box (view->widget.parent, view->widget.y,
            view->widget.x, view->widget.lines, view->widget.cols); */
     }

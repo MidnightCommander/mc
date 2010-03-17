@@ -106,9 +106,9 @@ chown_refresh (Dlg_head * h)
 
     tty_setcolor (COLOR_NORMAL);
 
-    draw_box (h, UY, UX, 12, 21);
-    draw_box (h, GY, GX, 12, 21);
-    draw_box (h, TY, TX, 12, 19);
+    draw_box (h, UY, UX, 12, 21, TRUE);
+    draw_box (h, GY, GX, 12, 21, TRUE);
+    draw_box (h, TY, TX, 12, 19, TRUE);
 
     dlg_move (h, TY + 1, TX + 1);
     tty_print_string (_(" Name "));

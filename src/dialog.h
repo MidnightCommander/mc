@@ -167,7 +167,7 @@ struct Widget {
 };
 
 /* draw box in window */
-void draw_box (Dlg_head *h, int y, int x, int ys, int xs);
+void draw_box (Dlg_head *h, int y, int x, int ys, int xs, gboolean single);
 
 /* Flags for create_dlg: */
 #define DLG_REVERSE	(1 << 5) /* Tab order is opposite to the add order */

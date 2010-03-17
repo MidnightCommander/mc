@@ -63,9 +63,9 @@ static void dlg_broadcast_msg_to (Dlg_head * h, widget_msg_t message,
 
 /* draw box in window */
 void
-draw_box (Dlg_head *h, int y, int x, int ys, int xs)
+draw_box (Dlg_head *h, int y, int x, int ys, int xs, gboolean single)
 {
-    tty_draw_box (h->y + y, h->x + x, ys, xs);
+    tty_draw_box (h->y + y, h->x + x, ys, xs, single);
 }
 
 void
@@ -107,7 +107,7 @@ common_dialog_repaint (struct Dlg_head *h)
 
     tty_setcolor (DLG_NORMALC (h));
     dlg_erase (h);
-    draw_box (h, space, space, h->lines - 2 * space, h->cols - 2 * space);
+    draw_box (h, space, space, h->lines - 2 * space, h->cols - 2 * space, FALSE);
 
     if (h->title) {
 	tty_setcolor (DLG_HOT_NORMALC (h));

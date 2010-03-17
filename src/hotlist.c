@@ -181,9 +181,9 @@ hotlist_refresh (Dlg_head * dlg)
     common_dialog_repaint (dlg);
     tty_setcolor (COLOR_NORMAL);
     draw_box (dlg, 2, 5, dlg->lines - (hotlist_state.moving ? 6 : 10),
-	      dlg->cols - (UX * 2));
+	      dlg->cols - (UX * 2), TRUE);
     if (!hotlist_state.moving)
-	draw_box (dlg, dlg->lines - 8, 5, 3, dlg->cols - (UX * 2));
+	draw_box (dlg, dlg->lines - 8, 5, 3, dlg->cols - (UX * 2), TRUE);
 }
 
 /* If current->data is 0, then we are dealing with a VFS pathname */

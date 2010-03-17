@@ -131,8 +131,8 @@ static void chmod_refresh (Dlg_head *h)
 
     tty_setcolor (COLOR_NORMAL);
     
-    draw_box (h, PY, PX, PERMISSIONS + 2, 33);
-    draw_box (h, FY, FX, 10, 25);
+    draw_box (h, PY, PX, PERMISSIONS + 2, 33, TRUE);
+    draw_box (h, FY, FX, 10, 25, TRUE);
 
     dlg_move (h, FY + 1, FX + 2);
     tty_print_string (_("Name"));

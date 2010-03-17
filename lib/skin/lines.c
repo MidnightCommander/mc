@@ -54,7 +54,7 @@ mc_skin_lines_load_frm (mc_skin_t * mc_skin, const char *name)
     ret = mc_tty_normalize_lines_char (frm_val);
 
     g_free (frm_val);
-
+/*
     switch (ret) {
     case 0x80:
         ret = ACS_HLINE;
@@ -86,7 +86,7 @@ mc_skin_lines_load_frm (mc_skin_t * mc_skin, const char *name)
     default:
         break;
     }
-
+*/
     return ret;
 }
 
@@ -117,6 +117,17 @@ mc_skin_lines_parse_ini_file (mc_skin_t * mc_skin)
     mc_tty_ugly_frm[MC_TTY_FRM_centermiddle] = mc_skin_lines_load_frm (mc_skin, "centermiddle");
     mc_tty_ugly_frm[MC_TTY_FRM_leftmiddle] = mc_skin_lines_load_frm (mc_skin, "leftmiddle");
 
+    mc_tty_ugly_frm[MC_TTY_FRM_grphoriz] = mc_skin_lines_load_frm (mc_skin, "grouphoriz");
+    mc_tty_ugly_frm[MC_TTY_FRM_grpvert] = mc_skin_lines_load_frm (mc_skin, "groupvert");
+    mc_tty_ugly_frm[MC_TTY_FRM_grplefttop] = mc_skin_lines_load_frm (mc_skin, "grouplefttop");
+    mc_tty_ugly_frm[MC_TTY_FRM_grprighttop] = mc_skin_lines_load_frm (mc_skin, "grouprighttop");
+    mc_tty_ugly_frm[MC_TTY_FRM_grpleftbottom] = mc_skin_lines_load_frm (mc_skin, "groupleftbottom");
+    mc_tty_ugly_frm[MC_TTY_FRM_grprightbottom] = mc_skin_lines_load_frm (mc_skin, "grouprightbottom");
+    mc_tty_ugly_frm[MC_TTY_FRM_grprightmiddle] = mc_skin_lines_load_frm (mc_skin, "grouprightmiddle");
+    mc_tty_ugly_frm[MC_TTY_FRM_grpcentertop] = mc_skin_lines_load_frm (mc_skin, "groupcentertop");
+    mc_tty_ugly_frm[MC_TTY_FRM_grpcenterbottom] = mc_skin_lines_load_frm (mc_skin, "groupcenterbottom");
+    mc_tty_ugly_frm[MC_TTY_FRM_grpcentermiddle] = mc_skin_lines_load_frm (mc_skin, "groupcentermiddle");
+    mc_tty_ugly_frm[MC_TTY_FRM_grpleftmiddle] = mc_skin_lines_load_frm (mc_skin, "groupleftmiddle");
 }
 
 /* --------------------------------------------------------------------------------------------- */

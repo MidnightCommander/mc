@@ -984,14 +984,14 @@ show_dir (WPanel * panel)
     gchar *tmp;
     set_colors (panel);
     draw_box (panel->widget.parent,
-              panel->widget.y, panel->widget.x, panel->widget.lines, panel->widget.cols);
+              panel->widget.y, panel->widget.x, panel->widget.lines, panel->widget.cols, FALSE);
 
     if (show_mini_info)
     {
         widget_move (&panel->widget, llines (panel) + 2, 0);
-        tty_print_alt_char (ACS_LTEE);
+        tty_print_alt_char (ACS_LTEE, FALSE);
         widget_move (&panel->widget, llines (panel) + 2, panel->widget.cols - 1);
-        tty_print_alt_char (ACS_RTEE);
+        tty_print_alt_char (ACS_RTEE, FALSE);
     }
 
     widget_move (&panel->widget, 0, 1);

@@ -66,7 +66,7 @@ extern void tty_set_alt_charset (gboolean alt_charset);
 
 extern void tty_display_8bit (gboolean what);
 extern void tty_print_char (int c);
-extern void tty_print_alt_char (int c);
+extern void tty_print_alt_char (int c, gboolean single);
 extern void tty_print_anychar (int c);
 extern void tty_print_string (const char *s);
 extern void tty_printf (const char *s, ...);
@@ -75,7 +75,7 @@ extern void tty_print_one_vline (void);
 extern void tty_print_one_hline (void);
 extern void tty_draw_hline (int y, int x, int ch, int len);
 extern void tty_draw_vline (int y, int x, int ch, int len);
-extern void tty_draw_box (int y, int x, int rows, int cols);
+extern void tty_draw_box (int y, int x, int rows, int cols, gboolean single);
 extern void tty_fill_region (int y, int x, int rows, int cols, unsigned char ch);
 
 extern int mc_tty_ugly_frm[];
@@ -94,6 +94,19 @@ typedef enum {
     MC_TTY_FRM_leftmiddle,
     MC_TTY_FRM_rightmiddle,
     MC_TTY_FRM_centermiddle,
+
+    MC_TTY_FRM_grpvert,
+    MC_TTY_FRM_grphoriz,
+    MC_TTY_FRM_grplefttop,
+    MC_TTY_FRM_grprighttop,
+    MC_TTY_FRM_grpleftbottom,
+    MC_TTY_FRM_grprightbottom,
+    MC_TTY_FRM_grpcentertop,
+    MC_TTY_FRM_grpcenterbottom,
+    MC_TTY_FRM_grpleftmiddle,
+    MC_TTY_FRM_grprightmiddle,
+    MC_TTY_FRM_grpcentermiddle,
+
     MC_TTY_FRM_MAX
 } mc_tty_frm_t;
 

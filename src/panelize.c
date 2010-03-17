@@ -115,7 +115,7 @@ panelize_callback (Dlg_head *h, Widget *sender,
     case DLG_DRAW:
 	common_dialog_repaint (h);
 	tty_setcolor (COLOR_NORMAL);
-	draw_box (h, UY, UX, h->lines - 10, h->cols - 10);
+	draw_box (h, UY, UX, h->lines - 10, h->cols - 10, TRUE);
 	return MSG_HANDLED;
 
     default:

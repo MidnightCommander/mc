@@ -63,7 +63,7 @@ static void info_box (Dlg_head *h, struct WInfo *info)
     tty_setcolor (NORMAL_COLOR);
     widget_erase (&info->widget);
     draw_box (h, info->widget.y,  info->widget.x,
-	         info->widget.lines, info->widget.cols);
+	         info->widget.lines, info->widget.cols, FALSE);
 }
 
 static void

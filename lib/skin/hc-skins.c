@@ -114,6 +114,18 @@ mc_skin_hardcoded_ugly_lines (mc_skin_t * mc_skin)
     set_lines ("vert", "|");
     set_lines ("thinhoriz", "-");
     set_lines ("thinvert", "|");
+
+    set_lines ("grouplefttop", "+");
+    set_lines ("grouprighttop", "+");
+    set_lines ("groupcentertop", "-");
+    set_lines ("groupcenterbottom", "-");
+    set_lines ("groupleftbottom", "+");
+    set_lines ("grouprightbottom", "+");
+    set_lines ("groupleftmiddle", "|");
+    set_lines ("grouprightmiddle", "|");
+    set_lines ("groupcentermiddle", "+");
+    set_lines ("grouphoriz", "-");
+    set_lines ("groupvert", "|");
 }
 
 /* --------------------------------------------------------------------------------------------- */

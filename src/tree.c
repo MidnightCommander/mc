@@ -990,7 +990,7 @@ tree_frame (Dlg_head *h, WTree *tree)
     widget_erase ((Widget*) tree);
     if (tree->is_panel) {
 	draw_box (h, tree->widget.y, tree->widget.x, tree->widget.lines,
-		     tree->widget.cols);
+		     tree->widget.cols, FALSE);
 
 	if (show_mini_info)
 	    tty_draw_hline (tree->widget.y + tlines (tree) + 1,
