@@ -819,9 +819,10 @@ fish_linear_start (struct vfs_class *me, struct vfs_s_fh *fh, off_t offset)
     if (offset)
         ERRNOR (E_NOTSUPP, 0);
     name = vfs_s_fullpath (me, fh->ino);
-    if (!name)
+    if (name == NULL)
 	return 0;
-    quoted_name = strutils_shell_escape(name);
+    quoted_name = strutils_shell_escape (name);
+    g_free (name);
     fh->u.fish.append = 0;
 
     /*
