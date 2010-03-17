@@ -401,9 +401,8 @@ msgstr ""
 msgid "%s: %s: %s %lu bytes transferred"
 msgstr ""
 
-#, fuzzy
 msgid "Getting file"
-msgstr "Διαγραφή αρχείου: "
+msgstr "Γίνεται λήψη αρχείου"
 
 #, c-format
 msgid ""
