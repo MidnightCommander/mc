@@ -15,8 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 1.0\n"
 
 msgid " Search string not found "
 msgstr " Така стрічка не знайдена "
@@ -1927,7 +1927,6 @@ msgstr "Перемкнути закладку"
 msgid "&Next bookmark"
 msgstr "Наступна закладка"
 
-#, fuzzy
 msgid "&Prev bookmark"
 msgstr "Попередня закладка"
 
@@ -1937,22 +1936,18 @@ msgstr "Скинути закладки"
 msgid "&Go to line..."
 msgstr "Перейти на рядок…"
 
-#, fuzzy
 msgid "&Toggle line state"
 msgstr "Перемкнути стан рядка"
 
 msgid "Go to matching &bracket"
 msgstr "Перейти до парної &дужки"
 
-#, fuzzy
 msgid "&Find declaration"
 msgstr "Знайти об’явлення"
 
-#, fuzzy
 msgid "Back from &declaration"
 msgstr "Повернутися з об’явлення"
 
-#, fuzzy
 msgid "For&ward to declaration"
 msgstr "Перейти до об’явлення"
 
@@ -1965,7 +1960,6 @@ msgstr "Пере&малювати екран"
 msgid "&Start record macro"
 msgstr "&Розпочати запис макросу"
 
-#, fuzzy
 msgid "Finis&h record macro..."
 msgstr "&Завершити запис макросу…"
 
@@ -1987,19 +1981,15 @@ msgstr "Вставити &літерал…"
 msgid "Insert &date/time"
 msgstr "Вставити &дату/час"
 
-#, fuzzy
 msgid "&Format paragraph"
 msgstr "Форматувати &абзац"
 
-#, fuzzy
 msgid "&Sort..."
 msgstr "Сортувати…"
 
-#, fuzzy
 msgid "&Paste output of..."
 msgstr "Вставити вивід…"
 
-#, fuzzy
 msgid "&External formatter"
 msgstr "З&овнішня програма форматування"
 
@@ -2552,13 +2542,13 @@ msgstr " Видалення: "
 msgid "Non&e"
 msgstr "Ж&oдного"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%d:%02d.%02d"
-msgstr "ОЧЗ %d:%02d.%02d"
+msgstr "%d:%02d.%02d"
 
 #, c-format
 msgid "ETA %s"
-msgstr ""
+msgstr "ОЧЗ %s"
 
 #, c-format
 msgid "%.2f MB/s"
@@ -2574,15 +2564,15 @@ msgstr "%ld Б/с"
 
 #, c-format
 msgid "Files processed: %llu of %llu"
-msgstr ""
+msgstr "Файлів оброблено: %llu із %llu"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s  %s (%s)"
-msgstr "Розмір:    %s"
+msgstr "Час: %s %s (%s)"
 
 #, c-format
 msgid " Total: %s of %s "
-msgstr ""
+msgstr "Усього: %s of %s"
 
 msgid "Source"
 msgstr "Джерело"
@@ -3406,13 +3396,11 @@ msgstr "За &назвою"
 
 #. TRANSLATORS: one single character to represent 'version' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#, fuzzy
 msgid "sort|v"
-msgstr "сортування|u"
+msgstr "сортування|v"
 
-#, fuzzy
 msgid "&Version"
-msgstr "Права"
+msgstr "Версія"
 
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3688,9 +3676,8 @@ msgstr " Не знайдено записів, які підходять, у %s 
 msgid " User menu "
 msgstr " Меню користувача "
 
-#, fuzzy
 msgid "Invalid value"
-msgstr "невірне число"
+msgstr "Невірне значення"
 
 msgid " Cannot spawn child process "
 msgstr " Не вдається створити процес-нащадок "
@@ -3699,10 +3686,10 @@ msgid "Empty output from child filter"
 msgstr "Фільтр-нащадок не повернув даних"
 
 msgid "&Line number (decimal)"
-msgstr ""
+msgstr "Номер рядка (десяткове число)"
 
 msgid "Pe&rcents"
-msgstr ""
+msgstr "Відсотки"
 
 msgid "&Decimal offset"
 msgstr "Десятковий зсув"
