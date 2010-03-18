@@ -47,40 +47,40 @@
 
 #include "lib/global.h"
 
-#include "lib/tty/tty.h"		/* LINES, tty_touch_screen() */
-#include "lib/tty/key.h"		/* ALT() macro */
-#include "lib/tty/win.h"		/* do_enter_ca_mode() */
+#include "lib/tty/tty.h"        /* LINES, tty_touch_screen() */
+#include "lib/tty/key.h"        /* ALT() macro */
+#include "lib/tty/win.h"        /* do_enter_ca_mode() */
 #include "lib/mcconfig.h"
 #include "lib/search.h"
 #include "src/viewer/mcviewer.h"
-#include "lib/filehighlight.h"	/* MC_FHL_INI_FILE */
+#include "lib/filehighlight.h"  /* MC_FHL_INI_FILE */
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/fileloc.h"
 #include "lib/strutil.h"
 
-#include "cmd.h"		/* Our definitions */
+#include "cmd.h"                /* Our definitions */
 #include "fileopctx.h"
-#include "file.h"		/* file operation routines */
-#include "find.h"		/* do_find() */
-#include "hotlist.h"		/* hotlist_cmd() */
-#include "tree.h"		/* tree_chdir() */
-#include "subshell.h"		/* use_subshell */
-#include "consaver/cons.saver.h"		/* console_flag */
-#include "dialog.h"		/* Widget */
-#include "wtools.h"		/* message() */
-#include "main.h"		/* change_panel() */
-#include "panel.h"		/* current_panel */
-#include "help.h"		/* interactive_display() */
-#include "user.h"		/* MC_GLOBAL_MENU */
-#include "command.h"		/* cmdline */
-#include "layout.h"		/* get_current_type() */
-#include "ext.h"		/* regex_command() */
-#include "boxes.h"		/* cd_dialog() */
+#include "file.h"               /* file operation routines */
+#include "find.h"               /* do_find() */
+#include "hotlist.h"            /* hotlist_cmd() */
+#include "tree.h"               /* tree_chdir() */
+#include "subshell.h"           /* use_subshell */
+#include "consaver/cons.saver.h"        /* console_flag */
+#include "dialog.h"             /* Widget */
+#include "wtools.h"             /* message() */
+#include "main.h"               /* change_panel() */
+#include "panel.h"              /* current_panel */
+#include "help.h"               /* interactive_display() */
+#include "user.h"               /* MC_GLOBAL_MENU */
+#include "command.h"            /* cmdline */
+#include "layout.h"             /* get_current_type() */
+#include "ext.h"                /* regex_command() */
+#include "boxes.h"              /* cd_dialog() */
 #include "setup.h"
-#include "execute.h"		/* toggle_panels() */
+#include "execute.h"            /* toggle_panels() */
 #include "history.h"
 #include "dir.h"
-#include "cmddef.h"		/* CK_InputHistoryShow */
+#include "cmddef.h"             /* CK_InputHistoryShow */
 
 #ifndef MAP_FILE
 #   define MAP_FILE 0
@@ -103,7 +103,8 @@ int auto_fill_mkdir_name = 1;
 int reverse_files_only = 1;
 
 /* selection flags */
-typedef enum {
+typedef enum
+{
     SELECT_FILES_ONLY = 1 << 0,
     SELECT_MATCH_CASE = 1 << 1,
     SELECT_SHELL_PATTERNS = 1 << 2
@@ -112,62 +113,66 @@ typedef enum {
 int select_flags = SELECT_MATCH_CASE | SELECT_SHELL_PATTERNS;
 
 int
-view_file_at_line (const char *filename, int plain_view, int internal,
-		   int start_line)
+view_file_at_line (const char *filename, int plain_view, int internal, int start_line)
 {
     static const char *viewer = NULL;
     int move_dir = 0;
 
 
-    if (plain_view) {
-	int changed_hex_mode = 0;
-	int changed_nroff_flag = 0;
-	int changed_magic_flag = 0;
+    if (plain_view)
+    {
+        int changed_hex_mode = 0;
+        int changed_nroff_flag = 0;
+        int changed_magic_flag = 0;
 
-	mcview_altered_hex_mode = 0;
-	mcview_altered_nroff_flag = 0;
-	mcview_altered_magic_flag = 0;
-	if (mcview_default_hex_mode)
-	    changed_hex_mode = 1;
-	if (mcview_default_nroff_flag)
-	    changed_nroff_flag = 1;
-	if (mcview_default_magic_flag)
-	    changed_magic_flag = 1;
-	mcview_default_hex_mode = 0;
-	mcview_default_nroff_flag = 0;
-	mcview_default_magic_flag = 0;
-	mcview_viewer (NULL, filename, &move_dir, start_line);
-	if (changed_hex_mode && !mcview_altered_hex_mode)
-	    mcview_default_hex_mode = 1;
-	if (changed_nroff_flag && !mcview_altered_nroff_flag)
-	    mcview_default_nroff_flag = 1;
-	if (changed_magic_flag && !mcview_altered_magic_flag)
-	    mcview_default_magic_flag = 1;
-	repaint_screen ();
-	return move_dir;
+        mcview_altered_hex_mode = 0;
+        mcview_altered_nroff_flag = 0;
+        mcview_altered_magic_flag = 0;
+        if (mcview_default_hex_mode)
+            changed_hex_mode = 1;
+        if (mcview_default_nroff_flag)
+            changed_nroff_flag = 1;
+        if (mcview_default_magic_flag)
+            changed_magic_flag = 1;
+        mcview_default_hex_mode = 0;
+        mcview_default_nroff_flag = 0;
+        mcview_default_magic_flag = 0;
+        mcview_viewer (NULL, filename, &move_dir, start_line);
+        if (changed_hex_mode && !mcview_altered_hex_mode)
+            mcview_default_hex_mode = 1;
+        if (changed_nroff_flag && !mcview_altered_nroff_flag)
+            mcview_default_nroff_flag = 1;
+        if (changed_magic_flag && !mcview_altered_magic_flag)
+            mcview_default_magic_flag = 1;
+        repaint_screen ();
+        return move_dir;
     }
-    if (internal) {
-	char view_entry[BUF_TINY];
+    if (internal)
+    {
+        char view_entry[BUF_TINY];
 
-	if (start_line != 0)
-	    g_snprintf (view_entry, sizeof (view_entry), "View:%d",
-			start_line);
-	else
-	    strcpy (view_entry, "View");
+        if (start_line != 0)
+            g_snprintf (view_entry, sizeof (view_entry), "View:%d", start_line);
+        else
+            strcpy (view_entry, "View");
 
-	if (regex_command (filename, view_entry, &move_dir) == 0) {
-	    mcview_viewer (NULL, filename, &move_dir, start_line);
-	    repaint_screen ();
-	}
-    } else {
-	if (!viewer) {
-	    viewer = getenv ("VIEWER");
-	    if (!viewer)
-		viewer = getenv ("PAGER");
-	    if (!viewer)
-		viewer = "view";
-	}
-	execute_with_vfs_arg (viewer, filename);
+        if (regex_command (filename, view_entry, &move_dir) == 0)
+        {
+            mcview_viewer (NULL, filename, &move_dir, start_line);
+            repaint_screen ();
+        }
+    }
+    else
+    {
+        if (!viewer)
+        {
+            viewer = getenv ("VIEWER");
+            if (!viewer)
+                viewer = getenv ("PAGER");
+            if (!viewer)
+                viewer = "view";
+        }
+        execute_with_vfs_arg (viewer, filename);
     }
     return move_dir;
 }
@@ -193,18 +198,20 @@ view_file (const char *filename, int plain_view, int internal)
  *   idx:       starting file.
  *   direction: 1, or -1
  */
-static int scan_for_file (WPanel *panel, int idx, int direction)
+static int
+scan_for_file (WPanel * panel, int idx, int direction)
 {
     int i = idx + direction;
 
-    while (i != idx){
-	if (i < 0)
-	    i = panel->count - 1;
-	if (i == panel->count)
-	    i = 0;
-	if (!S_ISDIR (panel->dir.list [i].st.st_mode))
-	    return i;
-	i += direction;
+    while (i != idx)
+    {
+        if (i < 0)
+            i = panel->count - 1;
+        if (i == panel->count)
+            i = 0;
+        if (!S_ISDIR (panel->dir.list[i].st.st_mode))
+            return i;
+        i += direction;
     }
     return i;
 }
@@ -217,33 +224,38 @@ static void
 do_view_cmd (int normal)
 {
     /* Directories are viewed by changing to them */
-    if (S_ISDIR (selection (current_panel)->st.st_mode)
-	|| link_isdir (selection (current_panel))) {
-	if (confirm_view_dir && (current_panel->marked || current_panel->dirs_marked)) {
-	    if (query_dialog
-		(_(" Confirmation "), _("Files tagged, want to cd?"), D_NORMAL, 2,
-		 _("&Yes"), _("&No")) != 0) {
-		return;
-	    }
-	}
-	if (!do_cd (selection (current_panel)->fname, cd_exact))
-	    message (D_ERROR, MSG_ERROR, _("Cannot change directory"));
-    } else {
-	int dir, file_idx;
-	char *filename;
+    if (S_ISDIR (selection (current_panel)->st.st_mode) || link_isdir (selection (current_panel)))
+    {
+        if (confirm_view_dir && (current_panel->marked || current_panel->dirs_marked))
+        {
+            if (query_dialog
+                (_(" Confirmation "), _("Files tagged, want to cd?"), D_NORMAL, 2,
+                 _("&Yes"), _("&No")) != 0)
+            {
+                return;
+            }
+        }
+        if (!do_cd (selection (current_panel)->fname, cd_exact))
+            message (D_ERROR, MSG_ERROR, _("Cannot change directory"));
+    }
+    else
+    {
+        int dir, file_idx;
+        char *filename;
 
-	file_idx = current_panel->selected;
-	while (1) {
-	    filename = current_panel->dir.list[file_idx].fname;
+        file_idx = current_panel->selected;
+        while (1)
+        {
+            filename = current_panel->dir.list[file_idx].fname;
 
-	    dir = view_file (filename, normal, use_internal_view);
-	    if (dir == 0)
-		break;
-	    file_idx = scan_for_file (current_panel, file_idx, dir);
-	}
+            dir = view_file (filename, normal, use_internal_view);
+            if (dir == 0)
+                break;
+            file_idx = scan_for_file (current_panel, file_idx, dir);
+        }
     }
 
-    repaint_screen();
+    repaint_screen ();
 }
 
 /* Run user's preferred viewer on the currently selected file */
@@ -260,10 +272,10 @@ view_file_cmd (void)
     char *filename;
 
     filename =
-	input_expand_dialog (_(" View file "), _(" Filename:"),
-			     MC_HISTORY_FM_VIEW_FILE, selection (current_panel)->fname);
+        input_expand_dialog (_(" View file "), _(" Filename:"),
+                             MC_HISTORY_FM_VIEW_FILE, selection (current_panel)->fname);
     if (!filename)
-	return;
+        return;
 
     view_file (filename, 0, use_internal_view);
     g_free (filename);
@@ -282,12 +294,11 @@ filtered_view_cmd (void)
     char *command;
 
     command =
-	input_dialog (_(" Filtered view "),
-		      _(" Filter command and arguments:"),
-		      MC_HISTORY_FM_FILTERED_VIEW,
-		      selection (current_panel)->fname);
+        input_dialog (_(" Filtered view "),
+                      _(" Filter command and arguments:"),
+                      MC_HISTORY_FM_FILTERED_VIEW, selection (current_panel)->fname);
     if (!command)
-	return;
+        return;
 
     mcview_viewer (command, "", NULL, 0);
 
@@ -301,18 +312,19 @@ do_edit_at_line (const char *what, int start_line)
 
 #ifdef USE_INTERNAL_EDIT
     if (use_internal_edit)
-	edit_file (what, start_line);
+        edit_file (what, start_line);
     else
 #else
     (void) start_line;
 #endif /* USE_INTERNAL_EDIT */
     {
-	if (editor == NULL) {
-	    editor = getenv ("EDITOR");
-	    if (editor == NULL)
-		editor = get_default_editor ();
-	}
-	execute_with_vfs_arg (editor, what);
+        if (editor == NULL)
+        {
+            editor = getenv ("EDITOR");
+            if (editor == NULL)
+                editor = get_default_editor ();
+        }
+        execute_with_vfs_arg (editor, what);
     }
     update_panels (UP_OPTIMIZE, UP_KEEPSEL);
     repaint_screen ();
@@ -328,7 +340,7 @@ void
 edit_cmd (void)
 {
     if (regex_command (selection (current_panel)->fname, "Edit", 0) == 0)
-	do_edit (selection (current_panel)->fname);
+        do_edit (selection (current_panel)->fname);
 }
 
 void
@@ -345,39 +357,46 @@ void
 copy_cmd (void)
 {
     save_cwds_stat ();
-    if (panel_operate (current_panel, OP_COPY, FALSE)) {
-	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
-	repaint_screen ();
+    if (panel_operate (current_panel, OP_COPY, FALSE))
+    {
+        update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+        repaint_screen ();
     }
 }
 
 /* Invoked by F6.  Move/rename, default to the other panel, ignore marks.  */
-void rename_cmd (void)
+void
+rename_cmd (void)
 {
     save_cwds_stat ();
-    if (panel_operate (current_panel, OP_MOVE, FALSE)) {
-	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
-	repaint_screen ();
+    if (panel_operate (current_panel, OP_MOVE, FALSE))
+    {
+        update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+        repaint_screen ();
     }
 }
 
 /* Invoked by F15.  Copy, default to the same panel, ignore marks.  */
-void copy_cmd_local (void)
+void
+copy_cmd_local (void)
 {
     save_cwds_stat ();
-    if (panel_operate (current_panel, OP_COPY, TRUE)) {
-	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
-	repaint_screen ();
+    if (panel_operate (current_panel, OP_COPY, TRUE))
+    {
+        update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+        repaint_screen ();
     }
 }
 
 /* Invoked by F16.  Move/rename, default to the same panel.  */
-void rename_cmd_local (void)
+void
+rename_cmd_local (void)
 {
     save_cwds_stat ();
-    if (panel_operate (current_panel, OP_MOVE, TRUE)) {
-	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
-	repaint_screen ();
+    if (panel_operate (current_panel, OP_MOVE, TRUE))
+    {
+        update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+        repaint_screen ();
     }
 }
 
@@ -392,74 +411,82 @@ mkdir_cmd (void)
         name = selection (current_panel)->fname;
 
     dir =
-	input_expand_dialog (_("Create a new Directory"),
-			     _(" Enter directory name:"),
-			     MC_HISTORY_FM_MKDIR,
-			     name);
+        input_expand_dialog (_("Create a new Directory"),
+                             _(" Enter directory name:"), MC_HISTORY_FM_MKDIR, name);
 
     if (!dir)
-	return;
+        return;
 
-    if (dir[0] == '/' || dir[0] == '~')
-	absdir = g_strdup (dir);
-    else
-	absdir = concat_dir_and_file (current_panel->cwd, dir);
+    if (*dir)
+    {
+        if (dir[0] == '/' || dir[0] == '~')
+            absdir = g_strdup (dir);
+        else
+            absdir = concat_dir_and_file (current_panel->cwd, dir);
 
-    save_cwds_stat ();
-    if (my_mkdir (absdir, 0777) == 0) {
-	update_panels (UP_OPTIMIZE, dir);
-	repaint_screen ();
-	select_item (current_panel);
-    } else {
-	message (D_ERROR, MSG_ERROR, "  %s  ", unix_error_string (errno));
+        save_cwds_stat ();
+        if (my_mkdir (absdir, 0777) == 0)
+        {
+            update_panels (UP_OPTIMIZE, dir);
+            repaint_screen ();
+            select_item (current_panel);
+        }
+        else
+        {
+            message (D_ERROR, MSG_ERROR, "  %s  ", unix_error_string (errno));
+        }
+        g_free (absdir);
     }
-
-    g_free (absdir);
     g_free (dir);
 }
 
-void delete_cmd (void)
+void
+delete_cmd (void)
 {
     save_cwds_stat ();
 
-    if (panel_operate (current_panel, OP_DELETE, FALSE)) {
-	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
-	repaint_screen ();
+    if (panel_operate (current_panel, OP_DELETE, FALSE))
+    {
+        update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+        repaint_screen ();
     }
 }
 
 /* Invoked by F18.  Remove selected file, regardless of marked files.  */
-void delete_cmd_local (void)
+void
+delete_cmd_local (void)
 {
     save_cwds_stat ();
 
-    if (panel_operate (current_panel, OP_DELETE, TRUE)) {
-	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
-	repaint_screen ();
+    if (panel_operate (current_panel, OP_DELETE, TRUE))
+    {
+        update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+        repaint_screen ();
     }
 }
 
-void find_cmd (void)
+void
+find_cmd (void)
 {
     do_find ();
 }
 
 static void
-set_panel_filter_to (WPanel *p, char *allocated_filter_string)
+set_panel_filter_to (WPanel * p, char *allocated_filter_string)
 {
     g_free (p->filter);
     p->filter = 0;
 
-    if (!(allocated_filter_string [0] == '*' && allocated_filter_string [1] == 0))
-	p->filter = allocated_filter_string;
+    if (!(allocated_filter_string[0] == '*' && allocated_filter_string[1] == 0))
+        p->filter = allocated_filter_string;
     else
-	g_free (allocated_filter_string);
+        g_free (allocated_filter_string);
     reread_cmd ();
 }
 
 /* Set a given panel filter expression */
 static void
-set_panel_filter (WPanel *p)
+set_panel_filter (WPanel * p)
 {
     char *reg_exp;
     const char *x;
@@ -467,36 +494,37 @@ set_panel_filter (WPanel *p)
     x = p->filter ? p->filter : easy_patterns ? "*" : ".";
 
     reg_exp = input_dialog_help (_(" Filter "),
-				 _(" Set expression for filtering filenames"),
-				 "[Filter...]", MC_HISTORY_FM_PANEL_FILTER, x);
+                                 _(" Set expression for filtering filenames"),
+                                 "[Filter...]", MC_HISTORY_FM_PANEL_FILTER, x);
     if (!reg_exp)
-	return;
+        return;
     set_panel_filter_to (p, reg_exp);
 }
 
 /* Invoked from the left/right menus */
-void filter_cmd (void)
+void
+filter_cmd (void)
 {
     WPanel *p;
 
     if (!SELECTED_IS_PANEL)
-	return;
+        return;
 
     p = MENU_PANEL;
     set_panel_filter (p);
 }
 
-void reread_cmd (void)
+void
+reread_cmd (void)
 {
     int flag;
 
-    if (get_current_type () == view_listing &&
-	get_other_type () == view_listing)
-	flag = strcmp (current_panel->cwd, other_panel->cwd) ? UP_ONLY_CURRENT : 0;
+    if (get_current_type () == view_listing && get_other_type () == view_listing)
+        flag = strcmp (current_panel->cwd, other_panel->cwd) ? UP_ONLY_CURRENT : 0;
     else
-	flag = UP_ONLY_CURRENT;
+        flag = UP_ONLY_CURRENT;
 
-    update_panels (UP_RELOAD|flag, UP_KEEPSEL);
+    update_panels (UP_RELOAD | flag, UP_KEEPSEL);
     repaint_screen ();
 }
 
@@ -506,10 +534,11 @@ reverse_selection_cmd (void)
     int i;
     file_entry *file;
 
-    for (i = 0; i < current_panel->count; i++) {
-	file = &current_panel->dir.list [i];
-	if ((reverse_files_only == 0) || !S_ISDIR (file->st.st_mode))
-	    do_file_mark (current_panel, i, !file->f.marked);
+    for (i = 0; i < current_panel->count; i++)
+    {
+        file = &current_panel->dir.list[i];
+        if ((reverse_files_only == 0) || !S_ISDIR (file->st.st_mode))
+            do_file_mark (current_panel, i, !file->f.marked);
     }
 }
 
@@ -528,44 +557,44 @@ select_unselect_cmd (const char *title, const char *history_name, gboolean do_se
     mc_search_t *search;
     int i;
 
-    QuickWidget quick_widgets[] =
-    {
-	QUICK_CHECKBOX (3,        DX, DY - 3, DY, N_("&Using shell patterns"), &shell_patterns),
-	QUICK_CHECKBOX (DX/2 + 1, DX, DY - 4, DY, N_("&Case sensitive"),       &case_sens),
-	QUICK_CHECKBOX (3,        DX, DY - 4, DY, N_("&Files only"),           &files_only),
-	QUICK_INPUT    (3,        DX, DY - 5, DY, INPUT_LAST_TEXT, DX - 6, 0, history_name, &reg_exp),
-	QUICK_END
+    QuickWidget quick_widgets[] = {
+        QUICK_CHECKBOX (3, DX, DY - 3, DY, N_("&Using shell patterns"), &shell_patterns),
+        QUICK_CHECKBOX (DX / 2 + 1, DX, DY - 4, DY, N_("&Case sensitive"), &case_sens),
+        QUICK_CHECKBOX (3, DX, DY - 4, DY, N_("&Files only"), &files_only),
+        QUICK_INPUT (3, DX, DY - 5, DY, INPUT_LAST_TEXT, DX - 6, 0, history_name, &reg_exp),
+        QUICK_END
     };
 
-    QuickDialog quick_dlg =
-    {
-	DX, DY, -1, -1, title,
-	"[Select/Unselect Files]", quick_widgets, FALSE
+    QuickDialog quick_dlg = {
+        DX, DY, -1, -1, title,
+        "[Select/Unselect Files]", quick_widgets, FALSE
     };
 
     if (quick_dialog (&quick_dlg) == B_CANCEL)
-	return;
+        return;
 
     if (!reg_exp)
-	return;
-    if (!*reg_exp) {
-	g_free (reg_exp);
-	return;
+        return;
+    if (!*reg_exp)
+    {
+        g_free (reg_exp);
+        return;
     }
     search = mc_search_new (reg_exp, -1);
     search->search_type = (shell_patterns != 0) ? MC_SEARCH_T_GLOB : MC_SEARCH_T_REGEX;
     search->is_entire_line = TRUE;
     search->is_case_sentitive = case_sens != 0;
 
-    for (i = 0; i < current_panel->count; i++) {
-	if (strcmp (current_panel->dir.list[i].fname, "..") == 0)
-	    continue;
-	if (S_ISDIR (current_panel->dir.list[i].st.st_mode) && files_only != 0)
-	    continue;
+    for (i = 0; i < current_panel->count; i++)
+    {
+        if (strcmp (current_panel->dir.list[i].fname, "..") == 0)
+            continue;
+        if (S_ISDIR (current_panel->dir.list[i].st.st_mode) && files_only != 0)
+            continue;
 
         if (mc_search_run (search, current_panel->dir.list[i].fname,
-			    0, current_panel->dir.list[i].fnamelen, NULL))
-	    do_file_mark (current_panel, i, do_select);
+                           0, current_panel->dir.list[i].fnamelen, NULL))
+            do_file_mark (current_panel, i, do_select);
     }
 
     mc_search_free (search);
@@ -574,51 +603,59 @@ select_unselect_cmd (const char *title, const char *history_name, gboolean do_se
     /* result flags */
     select_flags = 0;
     if (case_sens != 0)
-	select_flags |= SELECT_MATCH_CASE;
+        select_flags |= SELECT_MATCH_CASE;
     if (files_only != 0)
-	select_flags |= SELECT_FILES_ONLY;
+        select_flags |= SELECT_FILES_ONLY;
     if (shell_patterns != 0)
-	select_flags |= SELECT_SHELL_PATTERNS;
+        select_flags |= SELECT_SHELL_PATTERNS;
 }
 
-void select_cmd (void)
+void
+select_cmd (void)
 {
     select_unselect_cmd (_(" Select "), ":select_cmd: Select ", TRUE);
 }
 
-void unselect_cmd (void)
+void
+unselect_cmd (void)
 {
     select_unselect_cmd (_(" Unselect "), ":unselect_cmd: Unselect ", FALSE);
 }
 
-void ext_cmd (void)
+void
+ext_cmd (void)
 {
     char *buffer;
     char *extdir;
-    int  dir;
+    int dir;
 
     dir = 0;
-    if (geteuid () == 0){
-	dir = query_dialog (_("Extension file edit"),
-			    _(" Which extension file you want to edit? "), D_NORMAL, 2,
-			    _("&User"), _("&System Wide"));
+    if (geteuid () == 0)
+    {
+        dir = query_dialog (_("Extension file edit"),
+                            _(" Which extension file you want to edit? "), D_NORMAL, 2,
+                            _("&User"), _("&System Wide"));
     }
     extdir = concat_dir_and_file (mc_home, MC_LIB_EXT);
 
-    if (dir == 0){
-	buffer = g_build_filename (home_dir, MC_USERCONF_DIR, MC_FILEBIND_FILE, NULL);
-	check_for_default (extdir, buffer);
-	do_edit (buffer);
-	g_free (buffer);
-    } else if (dir == 1) {
-	if (!exist_file(extdir)) {
-	    g_free (extdir);
-	    extdir = concat_dir_and_file (mc_home_alt, MC_LIB_EXT);
-	}
-	do_edit (extdir);
+    if (dir == 0)
+    {
+        buffer = g_build_filename (home_dir, MC_USERCONF_DIR, MC_FILEBIND_FILE, NULL);
+        check_for_default (extdir, buffer);
+        do_edit (buffer);
+        g_free (buffer);
     }
-   g_free (extdir);
-   flush_extension_file ();
+    else if (dir == 1)
+    {
+        if (!exist_file (extdir))
+        {
+            g_free (extdir);
+            extdir = concat_dir_and_file (mc_home_alt, MC_LIB_EXT);
+        }
+        do_edit (extdir);
+    }
+    g_free (extdir);
+    flush_extension_file ();
 }
 
 /* edit file menu for mc */
@@ -629,43 +666,43 @@ edit_mc_menu_cmd (void)
     char *menufile;
     int dir = 0;
 
-    dir = query_dialog (
-	_(" Menu edit "),
-	_(" Which menu file do you want to edit? "),
-	D_NORMAL, geteuid() ? 2 : 3,
-	_("&Local"), _("&User"), _("&System Wide")
-    );
+    dir = query_dialog (_(" Menu edit "),
+                        _(" Which menu file do you want to edit? "),
+                        D_NORMAL, geteuid ()? 2 : 3, _("&Local"), _("&User"), _("&System Wide"));
 
     menufile = concat_dir_and_file (mc_home, MC_GLOBAL_MENU);
 
-    if (!exist_file(menufile)) {
-	g_free (menufile);
-	menufile = concat_dir_and_file (mc_home_alt, MC_GLOBAL_MENU);
+    if (!exist_file (menufile))
+    {
+        g_free (menufile);
+        menufile = concat_dir_and_file (mc_home_alt, MC_GLOBAL_MENU);
     }
 
-    switch (dir) {
-	case 0:
-	    buffer = g_strdup (MC_LOCAL_MENU);
-	    check_for_default (menufile, buffer);
-	    chmod (buffer, 0600);
-	    break;
+    switch (dir)
+    {
+    case 0:
+        buffer = g_strdup (MC_LOCAL_MENU);
+        check_for_default (menufile, buffer);
+        chmod (buffer, 0600);
+        break;
 
-	case 1:
-	    buffer = g_build_filename (home_dir, MC_USERCONF_DIR, MC_USERMENU_FILE, NULL);
-	    check_for_default (menufile, buffer);
-	    break;
+    case 1:
+        buffer = g_build_filename (home_dir, MC_USERCONF_DIR, MC_USERMENU_FILE, NULL);
+        check_for_default (menufile, buffer);
+        break;
 
-	case 2:
-	    buffer = concat_dir_and_file (mc_home, MC_GLOBAL_MENU);
-	    if (!exist_file(buffer)) {
-		g_free (buffer);
-		buffer = concat_dir_and_file (mc_home_alt, MC_GLOBAL_MENU);
-	    }
-	    break;
+    case 2:
+        buffer = concat_dir_and_file (mc_home, MC_GLOBAL_MENU);
+        if (!exist_file (buffer))
+        {
+            g_free (buffer);
+            buffer = concat_dir_and_file (mc_home_alt, MC_GLOBAL_MENU);
+        }
+        break;
 
-	default:
-	    g_free (menufile);
-	    return;
+    default:
+        g_free (menufile);
+        return;
     }
 
     do_edit (buffer);
@@ -674,123 +711,139 @@ edit_mc_menu_cmd (void)
     g_free (menufile);
 }
 
-void edit_fhl_cmd (void)
+void
+edit_fhl_cmd (void)
 {
     char *buffer = NULL;
     char *fhlfile = NULL;
 
-    int  dir;
+    int dir;
 
     dir = 0;
-    if (geteuid () == 0){
-	dir = query_dialog (_("Highlighting groups file edit"),
-			    _(" Which highlighting file you want to edit? "), D_NORMAL, 2,
-			    _("&User"), _("&System Wide"));
+    if (geteuid () == 0)
+    {
+        dir = query_dialog (_("Highlighting groups file edit"),
+                            _(" Which highlighting file you want to edit? "), D_NORMAL, 2,
+                            _("&User"), _("&System Wide"));
     }
     fhlfile = concat_dir_and_file (mc_home, MC_FHL_INI_FILE);
 
-    if (dir == 0){
-	buffer = g_build_filename (home_dir, MC_USERCONF_DIR, MC_FHL_INI_FILE, NULL);
-	check_for_default (fhlfile, buffer);
-	do_edit (buffer);
-	g_free (buffer);
-    } else if (dir == 1) {
-	if (!exist_file(fhlfile)) {
-	    g_free (fhlfile);
-	    fhlfile = concat_dir_and_file (mc_home, MC_FHL_INI_FILE);
-	}
-	do_edit (fhlfile);
+    if (dir == 0)
+    {
+        buffer = g_build_filename (home_dir, MC_USERCONF_DIR, MC_FHL_INI_FILE, NULL);
+        check_for_default (fhlfile, buffer);
+        do_edit (buffer);
+        g_free (buffer);
     }
-   g_free (fhlfile);
+    else if (dir == 1)
+    {
+        if (!exist_file (fhlfile))
+        {
+            g_free (fhlfile);
+            fhlfile = concat_dir_and_file (mc_home, MC_FHL_INI_FILE);
+        }
+        do_edit (fhlfile);
+    }
+    g_free (fhlfile);
 
     /* refresh highlighting rules */
-   mc_fhl_free (&mc_filehighlight);
-   mc_filehighlight = mc_fhl_new (TRUE);
+    mc_fhl_free (&mc_filehighlight);
+    mc_filehighlight = mc_fhl_new (TRUE);
 }
 
-void quick_chdir_cmd (void)
+void
+quick_chdir_cmd (void)
 {
     char *target;
 
     target = hotlist_cmd (LIST_HOTLIST);
     if (!target)
-	return;
+        return;
 
     if (get_current_type () == view_tree)
-	tree_chdir (the_tree, target);
-    else {
-	char *cmd = g_strconcat ("cd ", target, (char *) NULL);
-	do_cd_command (cmd);
-	g_free (cmd);
+        tree_chdir (the_tree, target);
+    else
+    {
+        char *cmd = g_strconcat ("cd ", target, (char *) NULL);
+        do_cd_command (cmd);
+        g_free (cmd);
     }
     g_free (target);
 }
 
 #ifdef ENABLE_VFS
-void reselect_vfs (void)
+void
+reselect_vfs (void)
 {
     char *target;
 
     target = hotlist_cmd (LIST_VFSLIST);
     if (!target)
-	return;
+        return;
 
     if (!do_cd (target, cd_exact))
-        message (D_ERROR, MSG_ERROR, _("Cannot change directory") );
+        message (D_ERROR, MSG_ERROR, _("Cannot change directory"));
     g_free (target);
 }
 #endif /* ENABLE_VFS */
 
-static int compare_files (char *name1, char *name2, off_t size)
+static int
+compare_files (char *name1, char *name2, off_t size)
 {
     int file1, file2;
-    int result = -1;		/* Different by default */
+    int result = -1;            /* Different by default */
 
     if (size == 0)
         return 0;
 
     file1 = open (name1, O_RDONLY);
-    if (file1 >= 0){
-	file2 = open (name2, O_RDONLY);
-	if (file2 >= 0){
+    if (file1 >= 0)
+    {
+        file2 = open (name2, O_RDONLY);
+        if (file2 >= 0)
+        {
 #ifdef HAVE_MMAP
-	    char *data1, *data2;
-	    /* Ugly if jungle */
-	    data1 = mmap (0, size, PROT_READ, MAP_FILE | MAP_PRIVATE, file1, 0);
-	    if (data1 != (char*) -1){
-		data2 = mmap (0, size, PROT_READ, MAP_FILE | MAP_PRIVATE, file2, 0);
-		if (data2 != (char*) -1){
-		    rotate_dash ();
-		    result = memcmp (data1, data2, size);
-		    munmap (data2, size);
-		}
-		munmap (data1, size);
-	    }
+            char *data1, *data2;
+            /* Ugly if jungle */
+            data1 = mmap (0, size, PROT_READ, MAP_FILE | MAP_PRIVATE, file1, 0);
+            if (data1 != (char *) -1)
+            {
+                data2 = mmap (0, size, PROT_READ, MAP_FILE | MAP_PRIVATE, file2, 0);
+                if (data2 != (char *) -1)
+                {
+                    rotate_dash ();
+                    result = memcmp (data1, data2, size);
+                    munmap (data2, size);
+                }
+                munmap (data1, size);
+            }
 #else
-	    /* Don't have mmap() :( Even more ugly :) */
-	    char buf1[BUFSIZ], buf2[BUFSIZ];
-	    int n1, n2;
-	    rotate_dash ();
-	    do
-	    {
-		while((n1 = read(file1,buf1,BUFSIZ)) == -1 && errno == EINTR);
-		while((n2 = read(file2,buf2,BUFSIZ)) == -1 && errno == EINTR);
-	    } while (n1 == n2 && n1 == BUFSIZ && !memcmp(buf1,buf2,BUFSIZ));
-	    result = (n1 != n2) || memcmp(buf1,buf2,n1);
+            /* Don't have mmap() :( Even more ugly :) */
+            char buf1[BUFSIZ], buf2[BUFSIZ];
+            int n1, n2;
+            rotate_dash ();
+            do
+            {
+                while ((n1 = read (file1, buf1, BUFSIZ)) == -1 && errno == EINTR);
+                while ((n2 = read (file2, buf2, BUFSIZ)) == -1 && errno == EINTR);
+            }
+            while (n1 == n2 && n1 == BUFSIZ && !memcmp (buf1, buf2, BUFSIZ));
+            result = (n1 != n2) || memcmp (buf1, buf2, n1);
 #endif /* !HAVE_MMAP */
-	    close (file2);
-	}
-	close (file1);
+            close (file2);
+        }
+        close (file1);
     }
     return result;
 }
 
-enum CompareMode {
+enum CompareMode
+{
     compare_quick, compare_size_only, compare_thourough
 };
 
 static void
-compare_dir (WPanel *panel, WPanel *other, enum CompareMode mode)
+compare_dir (WPanel * panel, WPanel * other, enum CompareMode mode)
 {
     int i, j;
     char *src_name, *dst_name;
@@ -801,62 +854,68 @@ compare_dir (WPanel *panel, WPanel *other, enum CompareMode mode)
     panel->dirs_marked = 0;
 
     /* Handle all files in the panel */
-    for (i = 0; i < panel->count; i++){
-	file_entry *source = &panel->dir.list[i];
+    for (i = 0; i < panel->count; i++)
+    {
+        file_entry *source = &panel->dir.list[i];
 
-	/* Default: unmarked */
-	file_mark (panel, i, 0);
+        /* Default: unmarked */
+        file_mark (panel, i, 0);
 
-	/* Skip directories */
-	if (S_ISDIR (source->st.st_mode))
-	    continue;
+        /* Skip directories */
+        if (S_ISDIR (source->st.st_mode))
+            continue;
 
-	/* Search the corresponding entry from the other panel */
-	for (j = 0; j < other->count; j++){
-	    if (strcmp (source->fname,
-			other->dir.list[j].fname) == 0)
-		break;
-	}
-	if (j >= other->count)
-	    /* Not found -> mark */
-	    do_file_mark (panel, i, 1);
-	else {
-	    /* Found */
-	    file_entry *target = &other->dir.list[j];
+        /* Search the corresponding entry from the other panel */
+        for (j = 0; j < other->count; j++)
+        {
+            if (strcmp (source->fname, other->dir.list[j].fname) == 0)
+                break;
+        }
+        if (j >= other->count)
+            /* Not found -> mark */
+            do_file_mark (panel, i, 1);
+        else
+        {
+            /* Found */
+            file_entry *target = &other->dir.list[j];
 
-	    if (mode != compare_size_only){
-		/* Older version is not marked */
-		if (source->st.st_mtime < target->st.st_mtime)
-		    continue;
-	    }
+            if (mode != compare_size_only)
+            {
+                /* Older version is not marked */
+                if (source->st.st_mtime < target->st.st_mtime)
+                    continue;
+            }
 
-	    /* Newer version with different size is marked */
-	    if (source->st.st_size != target->st.st_size){
-		do_file_mark (panel, i, 1);
-		continue;
+            /* Newer version with different size is marked */
+            if (source->st.st_size != target->st.st_size)
+            {
+                do_file_mark (panel, i, 1);
+                continue;
 
-	    }
-	    if (mode == compare_size_only)
-		continue;
+            }
+            if (mode == compare_size_only)
+                continue;
 
-	    if (mode == compare_quick){
-		/* Thorough compare off, compare only time stamps */
-		/* Mark newer version, don't mark version with the same date */
-		if (source->st.st_mtime > target->st.st_mtime){
-		    do_file_mark (panel, i, 1);
-		}
-		continue;
-	    }
+            if (mode == compare_quick)
+            {
+                /* Thorough compare off, compare only time stamps */
+                /* Mark newer version, don't mark version with the same date */
+                if (source->st.st_mtime > target->st.st_mtime)
+                {
+                    do_file_mark (panel, i, 1);
+                }
+                continue;
+            }
 
-	    /* Thorough compare on, do byte-by-byte comparison */
-	    src_name = concat_dir_and_file (panel->cwd, source->fname);
-	    dst_name = concat_dir_and_file (other->cwd, target->fname);
-	    if (compare_files (src_name, dst_name, source->st.st_size))
-		do_file_mark (panel, i, 1);
-	    g_free (src_name);
-	    g_free (dst_name);
-	}
-    } /* for (i ...) */
+            /* Thorough compare on, do byte-by-byte comparison */
+            src_name = concat_dir_and_file (panel->cwd, source->fname);
+            dst_name = concat_dir_and_file (other->cwd, target->fname);
+            if (compare_files (src_name, dst_name, source->st.st_size))
+                do_file_mark (panel, i, 1);
+            g_free (src_name);
+            g_free (dst_name);
+        }
+    }                           /* for (i ...) */
 }
 
 void
@@ -866,23 +925,24 @@ compare_dirs_cmd (void)
     enum CompareMode thorough_flag;
 
     choice =
-	query_dialog (_(" Compare directories "),
-		      _(" Select compare method: "), D_NORMAL, 4,
-		      _("&Quick"), _("&Size only"), _("&Thorough"), _("&Cancel"));
+        query_dialog (_(" Compare directories "),
+                      _(" Select compare method: "), D_NORMAL, 4,
+                      _("&Quick"), _("&Size only"), _("&Thorough"), _("&Cancel"));
 
     if (choice < 0 || choice > 2)
-	return;
+        return;
 
     thorough_flag = choice;
 
-    if (get_current_type () == view_listing
-	&& get_other_type () == view_listing) {
-	compare_dir (current_panel, other_panel, thorough_flag);
-	compare_dir (other_panel, current_panel, thorough_flag);
-    } else {
-	message (D_ERROR, MSG_ERROR,
-		 _(" Both panels should be in the "
-		   "listing mode to use this command "));
+    if (get_current_type () == view_listing && get_other_type () == view_listing)
+    {
+        compare_dir (current_panel, other_panel, thorough_flag);
+        compare_dir (other_panel, current_panel, thorough_flag);
+    }
+    else
+    {
+        message (D_ERROR, MSG_ERROR,
+                 _(" Both panels should be in the " "listing mode to use this command "));
     }
 }
 
@@ -893,7 +953,8 @@ history_cmd (void)
     send_message (&cmdline->widget, WIDGET_COMMAND, CK_InputHistoryShow);
 }
 
-void swap_cmd (void)
+void
+swap_cmd (void)
 {
     swap_panels ();
     tty_touch_screen ();
@@ -905,14 +966,16 @@ view_other_cmd (void)
 {
     static int message_flag = TRUE;
 
-    if (!xterm_flag && !console_flag && !use_subshell && !output_starts_shell) {
-	if (message_flag)
-	    message (D_ERROR, MSG_ERROR,
-		     _(" Not an xterm or Linux console; \n"
-		       " the panels cannot be toggled. "));
-	message_flag = FALSE;
-    } else {
-	toggle_panels ();
+    if (!xterm_flag && !console_flag && !use_subshell && !output_starts_shell)
+    {
+        if (message_flag)
+            message (D_ERROR, MSG_ERROR,
+                     _(" Not an xterm or Linux console; \n" " the panels cannot be toggled. "));
+        message_flag = FALSE;
+    }
+    else
+    {
+        toggle_panels ();
     }
 }
 
@@ -921,108 +984,126 @@ do_link (int symbolic_link, const char *fname)
 {
     char *dest = NULL, *src = NULL;
 
-    if (!symbolic_link) {
-	src = g_strdup_printf (_("Link %s to:"), str_trunc (fname, 46));
-	dest = input_expand_dialog (_(" Link "), src, MC_HISTORY_FM_LINK, "");
-	if (!dest || !*dest)
-	    goto cleanup;
-	save_cwds_stat ();
-	if (-1 == mc_link (fname, dest))
-	    message (D_ERROR, MSG_ERROR, _(" link: %s "),
-		     unix_error_string (errno));
-    } else {
-	char *s;
-	char *d;
+    if (!symbolic_link)
+    {
+        src = g_strdup_printf (_("Link %s to:"), str_trunc (fname, 46));
+        dest = input_expand_dialog (_(" Link "), src, MC_HISTORY_FM_LINK, "");
+        if (!dest || !*dest)
+            goto cleanup;
+        save_cwds_stat ();
+        if (-1 == mc_link (fname, dest))
+            message (D_ERROR, MSG_ERROR, _(" link: %s "), unix_error_string (errno));
+    }
+    else
+    {
+        char *s;
+        char *d;
 
-	/* suggest the full path for symlink */
-	s = concat_dir_and_file (current_panel->cwd, fname);
+        /* suggest the full path for symlink */
+        s = concat_dir_and_file (current_panel->cwd, fname);
 
-	if (get_other_type () == view_listing) {
-	    d = concat_dir_and_file (other_panel->cwd, fname);
-	} else {
-	    d = g_strdup (fname);
-	}
+        if (get_other_type () == view_listing)
+        {
+            d = concat_dir_and_file (other_panel->cwd, fname);
+        }
+        else
+        {
+            d = g_strdup (fname);
+        }
 
-	symlink_dialog (s, d, &dest, &src);
-	g_free (d);
-	g_free (s);
+        symlink_dialog (s, d, &dest, &src);
+        g_free (d);
+        g_free (s);
 
-	if (!dest || !*dest || !src || !*src)
-	    goto cleanup;
-	save_cwds_stat ();
-	if (-1 == mc_symlink (dest, src))
-	    message (D_ERROR, MSG_ERROR, _(" symlink: %s "),
-		     unix_error_string (errno));
+        if (!dest || !*dest || !src || !*src)
+            goto cleanup;
+        save_cwds_stat ();
+        if (-1 == mc_symlink (dest, src))
+            message (D_ERROR, MSG_ERROR, _(" symlink: %s "), unix_error_string (errno));
     }
     update_panels (UP_OPTIMIZE, UP_KEEPSEL);
     repaint_screen ();
 
-cleanup:
+  cleanup:
     g_free (src);
     g_free (dest);
 }
 
-void link_cmd (void)
+void
+link_cmd (void)
 {
     do_link (0, selection (current_panel)->fname);
 }
 
-void symlink_cmd (void)
+void
+symlink_cmd (void)
 {
     char *filename = NULL;
     filename = selection (current_panel)->fname;
 
-    if (filename) {
-	do_link (1, filename);
+    if (filename)
+    {
+        do_link (1, filename);
     }
 }
 
-void edit_symlink_cmd (void)
+void
+edit_symlink_cmd (void)
 {
-    if (S_ISLNK (selection (current_panel)->st.st_mode)) {
-	char buffer [MC_MAXPATHLEN];
-	char *p = NULL;
-	int i;
-	char *dest, *q;
+    if (S_ISLNK (selection (current_panel)->st.st_mode))
+    {
+        char buffer[MC_MAXPATHLEN];
+        char *p = NULL;
+        int i;
+        char *dest, *q;
 
-	p = selection (current_panel)->fname;
+        p = selection (current_panel)->fname;
 
-	q = g_strdup_printf (_(" Symlink `%s\' points to: "), str_trunc (p, 32));
+        q = g_strdup_printf (_(" Symlink `%s\' points to: "), str_trunc (p, 32));
 
-	i = readlink (p, buffer, MC_MAXPATHLEN - 1);
-	if (i > 0) {
-	    buffer [i] = 0;
-	    dest = input_expand_dialog (_(" Edit symlink "), q, MC_HISTORY_FM_EDIT_LINK, buffer);
-	    if (dest) {
-		if (*dest && strcmp (buffer, dest)) {
-		    save_cwds_stat ();
-		    if (-1 == mc_unlink (p)){
-		        message (D_ERROR, MSG_ERROR, _(" edit symlink, unable to remove %s: %s "),
-				 p, unix_error_string (errno));
-		    } else {
-			    if (-1 == mc_symlink (dest, p))
-				    message (D_ERROR, MSG_ERROR, _(" edit symlink: %s "),
-					     unix_error_string (errno));
-		    }
-		    update_panels (UP_OPTIMIZE, UP_KEEPSEL);
-		    repaint_screen ();
-		}
-		g_free (dest);
-	    }
-	}
-	g_free (q);
-    } else {
-	message (D_ERROR, MSG_ERROR, _("`%s' is not a symbolic link"),
-		 selection (current_panel)->fname);
+        i = readlink (p, buffer, MC_MAXPATHLEN - 1);
+        if (i > 0)
+        {
+            buffer[i] = 0;
+            dest = input_expand_dialog (_(" Edit symlink "), q, MC_HISTORY_FM_EDIT_LINK, buffer);
+            if (dest)
+            {
+                if (*dest && strcmp (buffer, dest))
+                {
+                    save_cwds_stat ();
+                    if (-1 == mc_unlink (p))
+                    {
+                        message (D_ERROR, MSG_ERROR, _(" edit symlink, unable to remove %s: %s "),
+                                 p, unix_error_string (errno));
+                    }
+                    else
+                    {
+                        if (-1 == mc_symlink (dest, p))
+                            message (D_ERROR, MSG_ERROR, _(" edit symlink: %s "),
+                                     unix_error_string (errno));
+                    }
+                    update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+                    repaint_screen ();
+                }
+                g_free (dest);
+            }
+        }
+        g_free (q);
+    }
+    else
+    {
+        message (D_ERROR, MSG_ERROR, _("`%s' is not a symbolic link"),
+                 selection (current_panel)->fname);
     }
 }
 
-void help_cmd (void)
+void
+help_cmd (void)
 {
     if (current_panel->searching)
-       interactive_display (NULL, "[Quick search]");
+        interactive_display (NULL, "[Quick search]");
     else
-       interactive_display (NULL, "[main]");
+        interactive_display (NULL, "[main]");
 }
 
 void
@@ -1048,34 +1129,38 @@ get_random_hint (int force)
     /* Do not change hints more often than one minute */
     gettimeofday (&tv, NULL);
     if (!force && !(tv.tv_sec > last_sec + 60))
-	return g_strdup ("");
+        return g_strdup ("");
     last_sec = tv.tv_sec;
 
     data = load_mc_home_file (mc_home, mc_home_alt, MC_HINT, NULL);
     if (!data)
-	return 0;
+        return 0;
 
     /* get a random entry */
     srand (tv.tv_sec);
     len = strlen (data);
     start = rand () % len;
 
-    for (; start; start--) {
-	if (data[start] == '\n') {
-	    start++;
-	    break;
-	}
+    for (; start; start--)
+    {
+        if (data[start] == '\n')
+        {
+            start++;
+            break;
+        }
     }
     eol = strchr (&data[start], '\n');
     if (eol)
-	*eol = 0;
+        *eol = 0;
 
     /* hint files are stored in utf-8 */
     /* try convert hint file from utf-8 to terminal encoding */
     conv = str_crt_conv_from ("UTF-8");
-    if (conv != INVALID_CONV) {
-	buffer = g_string_new ("");
-        if (str_convert (conv, &data[start], buffer) != ESTR_FAILURE) {
+    if (conv != INVALID_CONV)
+    {
+        buffer = g_string_new ("");
+        if (str_convert (conv, &data[start], buffer) != ESTR_FAILURE)
+        {
             result = g_strdup (buffer->str);
         }
         g_string_free (buffer, TRUE);
@@ -1089,30 +1174,30 @@ get_random_hint (int force)
 #if defined(USE_NETCODE) || defined(USE_EXT2FSLIB)
 static void
 nice_cd (const char *text, const char *xtext, const char *help,
-	 const char *history_name, const char *prefix, int to_home)
+         const char *history_name, const char *prefix, int to_home)
 {
     char *machine;
     char *cd_path;
 
     if (!SELECTED_IS_PANEL)
-	return;
+        return;
 
     machine = input_dialog_help (text, xtext, help, history_name, "");
     if (!machine)
-	return;
+        return;
 
-    to_home = 0;	/* FIXME: how to solve going to home nicely? /~/ is
-			   ugly as hell and leads to problems in vfs layer */
+    to_home = 0;                /* FIXME: how to solve going to home nicely? /~/ is
+                                   ugly as hell and leads to problems in vfs layer */
 
     if (strncmp (prefix, machine, strlen (prefix)) == 0)
-	cd_path = g_strconcat (machine, to_home ? "/~/" : (char *) NULL, (char *) NULL);
+        cd_path = g_strconcat (machine, to_home ? "/~/" : (char *) NULL, (char *) NULL);
     else
-	cd_path = g_strconcat (prefix, machine, to_home ? "/~/" : (char *) NULL, (char *) NULL);
+        cd_path = g_strconcat (prefix, machine, to_home ? "/~/" : (char *) NULL, (char *) NULL);
 
     if (do_panel_cd (MENU_PANEL, cd_path, 0))
-	directory_history_add (MENU_PANEL, (MENU_PANEL)->cwd);
+        directory_history_add (MENU_PANEL, (MENU_PANEL)->cwd);
     else
-	message (D_ERROR, MSG_ERROR, _(" Cannot chdir to %s "), cd_path);
+        message (D_ERROR, MSG_ERROR, _(" Cannot chdir to %s "), cd_path);
     g_free (cd_path);
     g_free (machine);
 }
@@ -1124,53 +1209,57 @@ nice_cd (const char *text, const char *xtext, const char *help,
 static const char *machine_str = N_(" Enter machine name (F1 for details): ");
 
 #ifdef ENABLE_VFS_MCFS
-void netlink_cmd (void)
+void
+netlink_cmd (void)
 {
     nice_cd (_(" Link to a remote machine "), _(machine_str),
-	     "[Network File System]", ":netlink_cmd: Link to a remote ",
-	     "/#mc:", 1);
+             "[Network File System]", ":netlink_cmd: Link to a remote ", "/#mc:", 1);
 }
 #endif /* ENABLE_VFS_MCFS */
 
-void ftplink_cmd (void)
+void
+ftplink_cmd (void)
 {
     nice_cd (_(" FTP to machine "), _(machine_str),
-	     "[FTP File System]", ":ftplink_cmd: FTP to machine ", "/#ftp:", 1);
+             "[FTP File System]", ":ftplink_cmd: FTP to machine ", "/#ftp:", 1);
 }
 
-void fishlink_cmd (void)
+void
+fishlink_cmd (void)
 {
     nice_cd (_(" Shell link to machine "), _(machine_str),
-	     "[FIle transfer over SHell filesystem]", ":fishlink_cmd: Shell link to machine ",
-	     "/#sh:", 1);
+             "[FIle transfer over SHell filesystem]", ":fishlink_cmd: Shell link to machine ",
+             "/#sh:", 1);
 }
 
 #ifdef ENABLE_VFS_SMB
-void smblink_cmd (void)
+void
+smblink_cmd (void)
 {
     nice_cd (_(" SMB link to machine "), _(machine_str),
-	     "[SMB File System]", ":smblink_cmd: SMB link to machine ",
-	     "/#smb:", 0);
+             "[SMB File System]", ":smblink_cmd: SMB link to machine ", "/#smb:", 0);
 }
 #endif /* ENABLE_VFS_SMB */
 #endif /* USE_NETCODE */
 
 #ifdef USE_EXT2FSLIB
-void undelete_cmd (void)
+void
+undelete_cmd (void)
 {
     nice_cd (_(" Undelete files on an ext2 file system "),
-	     _(" Enter device (without /dev/) to undelete\n "
-	       "  files on: (F1 for details)"),
-	     "[Undelete File System]", ":undelete_cmd: Undel on ext2 fs ",
-	     "/#undel:", 0);
+             _(" Enter device (without /dev/) to undelete\n "
+               "  files on: (F1 for details)"),
+             "[Undelete File System]", ":undelete_cmd: Undel on ext2 fs ", "/#undel:", 0);
 }
 #endif /* USE_EXT2FSLIB */
 
-void quick_cd_cmd (void)
+void
+quick_cd_cmd (void)
 {
     char *p = cd_dialog ();
 
-    if (p && *p) {
+    if (p && *p)
+    {
         char *q = g_strconcat ("cd ", p, (char *) NULL);
 
         do_cd_command (q);
@@ -1181,14 +1270,14 @@ void quick_cd_cmd (void)
 
 
 /*!
-  \brief calculate dirs sizes
+   \brief calculate dirs sizes
 
-  calculate dirs sizes and resort panel:
-    dirs_selected = show size for selected dirs,
-    otherwise = show size for dir under cursor:
-      dir under cursor ".." = show size for all dirs,
-      otherwise = show size for dir under cursor
-*/
+   calculate dirs sizes and resort panel:
+   dirs_selected = show size for selected dirs,
+   otherwise = show size for dir under cursor:
+   dir under cursor ".." = show size for all dirs,
+   otherwise = show size for dir under cursor
+ */
 void
 smart_dirsize_cmd (void)
 {
@@ -1196,11 +1285,10 @@ smart_dirsize_cmd (void)
     file_entry *entry;
 
     entry = &(panel->dir.list[panel->selected]);
-    if ( ( S_ISDIR (entry->st.st_mode) && ( strcmp(entry->fname, "..") == 0 ) )
-	|| panel->dirs_marked )
-	 dirsizes_cmd ();
+    if ((S_ISDIR (entry->st.st_mode) && (strcmp (entry->fname, "..") == 0)) || panel->dirs_marked)
+        dirsizes_cmd ();
     else
-	 single_dirsize_cmd ();
+        single_dirsize_cmd ();
 }
 
 void
@@ -1213,27 +1301,29 @@ single_dirsize_cmd (void)
     ComputeDirSizeUI *ui;
 
     entry = &(panel->dir.list[panel->selected]);
-    if (S_ISDIR (entry->st.st_mode) && strcmp(entry->fname, "..") != 0) {
-	ui = compute_dir_size_create_ui ();
+    if (S_ISDIR (entry->st.st_mode) && strcmp (entry->fname, "..") != 0)
+    {
+        ui = compute_dir_size_create_ui ();
 
-	total = 0.0;
+        total = 0.0;
 
-	if (compute_dir_size (entry->fname, ui, compute_dir_size_update_ui,
-				&marked, &total) == FILE_CONT) {
-	    entry->st.st_size = (off_t) total;
-	    entry->f.dir_size_computed = 1;
-	}
+        if (compute_dir_size (entry->fname, ui, compute_dir_size_update_ui,
+                              &marked, &total) == FILE_CONT)
+        {
+            entry->st.st_size = (off_t) total;
+            entry->f.dir_size_computed = 1;
+        }
 
-	compute_dir_size_destroy_ui (ui);
+        compute_dir_size_destroy_ui (ui);
     }
 
     if (mark_moves_down)
-	send_message (&(panel->widget), WIDGET_KEY, KEY_DOWN);
+        send_message (&(panel->widget), WIDGET_KEY, KEY_DOWN);
 
     recalculate_panel_summary (panel);
 
-    if ( current_panel->current_sort_field->sort_routine == (sortfn *) sort_size )
-	panel_re_sort (panel);
+    if (current_panel->current_sort_field->sort_routine == (sortfn *) sort_size)
+        panel_re_sort (panel);
 
     panel->dirty = 1;
 }
@@ -1250,27 +1340,26 @@ dirsizes_cmd (void)
     ui = compute_dir_size_create_ui ();
 
     for (i = 0; i < panel->count; i++)
-	if (S_ISDIR (panel->dir.list [i].st.st_mode)
-	    && ((panel->dirs_marked && panel->dir.list [i].f.marked)
-		|| !panel->dirs_marked)
-	    && strcmp (panel->dir.list [i].fname, "..") != 0) {
-	    total = 0.0l;
+        if (S_ISDIR (panel->dir.list[i].st.st_mode)
+            && ((panel->dirs_marked && panel->dir.list[i].f.marked)
+                || !panel->dirs_marked) && strcmp (panel->dir.list[i].fname, "..") != 0)
+        {
+            total = 0.0l;
 
-	    if (compute_dir_size (panel->dir.list [i].fname,
-				    ui, compute_dir_size_update_ui,
-				    &marked, &total) != FILE_CONT)
-		break;
+            if (compute_dir_size (panel->dir.list[i].fname,
+                                  ui, compute_dir_size_update_ui, &marked, &total) != FILE_CONT)
+                break;
 
-	    panel->dir.list [i].st.st_size = (off_t) total;
-	    panel->dir.list [i].f.dir_size_computed = 1;
-	}
+            panel->dir.list[i].st.st_size = (off_t) total;
+            panel->dir.list[i].f.dir_size_computed = 1;
+        }
 
     compute_dir_size_destroy_ui (ui);
 
     recalculate_panel_summary (panel);
 
-    if ( current_panel->current_sort_field->sort_routine == (sortfn *) sort_size )
-	panel_re_sort (panel);
+    if (current_panel->current_sort_field->sort_routine == (sortfn *) sort_size)
+        panel_re_sort (panel);
 
     panel->dirty = 1;
 }
@@ -1278,27 +1367,30 @@ dirsizes_cmd (void)
 void
 save_setup_cmd (void)
 {
-    if (! save_setup ())
-	return;
+    if (!save_setup ())
+        return;
     message (D_NORMAL, _(" Setup "), _(" Setup saved to ~/%s"),
-	     MC_USERCONF_DIR PATH_SEP_STR MC_CONFIG_FILE);
+             MC_USERCONF_DIR PATH_SEP_STR MC_CONFIG_FILE);
 }
 
 static void
-configure_panel_listing (WPanel *p, int list_type, int use_msformat, char *user, char *status)
+configure_panel_listing (WPanel * p, int list_type, int use_msformat, char *user, char *status)
 {
     p->user_mini_status = use_msformat;
     p->list_type = list_type;
 
-    if (list_type == list_user || use_msformat) {
-	g_free (p->user_format);
-	p->user_format = user;
+    if (list_type == list_user || use_msformat)
+    {
+        g_free (p->user_format);
+        p->user_format = user;
 
-	g_free (p->user_status_format [list_type]);
-	p->user_status_format [list_type] = status;
+        g_free (p->user_status_format[list_type]);
+        p->user_status_format[list_type] = status;
 
-	set_panel_formats (p);
-    } else {
+        set_panel_formats (p);
+    }
+    else
+    {
         g_free (user);
         g_free (status);
     }
@@ -1311,29 +1403,29 @@ void
 info_cmd_no_menu (void)
 {
     if (get_display_type (0) == view_info)
-	set_display_type (0, view_listing);
+        set_display_type (0, view_listing);
     else if (get_display_type (1) == view_info)
-	set_display_type (1, view_listing);
+        set_display_type (1, view_listing);
     else
-	set_display_type (current_panel == left_panel ? 1 : 0, view_info);
+        set_display_type (current_panel == left_panel ? 1 : 0, view_info);
 }
 
 void
 quick_cmd_no_menu (void)
 {
     if (get_display_type (0) == view_quick)
-	set_display_type (0, view_listing);
+        set_display_type (0, view_listing);
     else if (get_display_type (1) == view_quick)
-	set_display_type (1, view_listing);
+        set_display_type (1, view_listing);
     else
-	set_display_type (current_panel == left_panel ? 1 : 0, view_quick);
+        set_display_type (current_panel == left_panel ? 1 : 0, view_quick);
 }
 
 static void
 switch_to_listing (int panel_index)
 {
     if (get_display_type (panel_index) != view_listing)
-	set_display_type (panel_index, view_listing);
+        set_display_type (panel_index, view_listing);
 }
 
 void
@@ -1341,18 +1433,19 @@ listing_cmd (void)
 {
     int list_type;
     int use_msformat;
-    char  *user, *status;
+    char *user, *status;
     WPanel *p = NULL;
 
     if (get_display_type (MENU_PANEL_IDX) == view_listing)
-	p = MENU_PANEL_IDX == 0 ? left_panel : right_panel;
+        p = MENU_PANEL_IDX == 0 ? left_panel : right_panel;
 
     list_type = display_box (p, &user, &status, &use_msformat, MENU_PANEL_IDX);
 
-    if (list_type != -1) {
-	switch_to_listing (MENU_PANEL_IDX);
-	p = MENU_PANEL_IDX == 0 ? left_panel : right_panel;
-	configure_panel_listing (p, list_type, use_msformat, user, status);
+    if (list_type != -1)
+    {
+        switch_to_listing (MENU_PANEL_IDX);
+        p = MENU_PANEL_IDX == 0 ? left_panel : right_panel;
+        configure_panel_listing (p, list_type, use_msformat, user, status);
     }
 }
 
@@ -1372,7 +1465,7 @@ void
 quick_view_cmd (void)
 {
     if ((WPanel *) get_panel_widget (MENU_PANEL_IDX) == current_panel)
-	change_panel ();
+        change_panel ();
     set_display_type (MENU_PANEL_IDX, view_quick);
 }
 
@@ -1389,7 +1482,7 @@ set_basic_panel_listing_to (int panel_index, int listing_mode)
     ok = set_panel_formats (p) == 0;
 
     if (ok)
-	do_refresh ();
+        do_refresh ();
 
     return ok;
 }
@@ -1407,5 +1500,5 @@ void
 encoding_cmd (void)
 {
     if (SELECTED_IS_PANEL)
-	set_panel_encoding (MENU_PANEL);
+        set_panel_encoding (MENU_PANEL);
 }
