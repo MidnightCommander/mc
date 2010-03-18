@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
 "POT-Creation-Date: 2010-03-09 14:37+0800\n"
-"PO-Revision-Date: 2010-03-15 20:26+0900\n"
+"PO-Revision-Date: 2010-03-18 16:38+0900\n"
 "Last-Translator: Kang Bundo <bundo@bundo.biz>\n"
 "Language-Team: ubuntu korea <admin@ubuntu.or.kr>\n"
 "MIME-Version: 1.0\n"
@@ -153,7 +153,7 @@ msgid "Delete key"
 msgstr "딜리트키"
 
 msgid "Completion/M-tab"
-msgstr "Completion/M-tab"
+msgstr "완료/M-tab"
 
 msgid "+ on keypad"
 msgstr "키패드 +"
@@ -240,13 +240,13 @@ msgid "Comma"
 msgstr "콤마"
 
 msgid "Apostrophe"
-msgstr "Apostrophe"
+msgstr "아포스트로피"
 
 msgid "Colon"
 msgstr "콜론"
 
 msgid "Exclamation mark"
-msgstr "Exclamation mark"
+msgstr "느낌표"
 
 msgid "Question mark"
 msgstr "퀘스천마크"
@@ -712,7 +712,7 @@ msgid "Inconsistent tar archive"
 msgstr "잘못된 테잎 아카이브"
 
 msgid "Unexpected EOF on archive file"
-msgstr "Unexpected EOF on archive file"
+msgstr "특이한 EOF 보관된 파일"
 
 #, c-format
 msgid ""
@@ -961,9 +961,9 @@ msgid ""
 "   brightcyan, lightgray and white\n"
 "\n"
 msgstr ""
-"Help: helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"도움말: helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 "\n"
-"Colors:\n"
+"색상:\n"
 " black, gray, red, brightred, green, brightgreen, brown,\n"
 " yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
 " brightcyan, lightgray and white\n"
@@ -1077,7 +1077,7 @@ msgid "Confirmation|&Delete"
 msgstr "Confirmation인|삭제(&D)"
 
 msgid "UTF-8 output"
-msgstr "8 bits 출력"
+msgstr "UTF-8 출력"
 
 msgid "Full 8 bits output"
 msgstr "8 bits 출력"
@@ -1104,7 +1104,7 @@ msgid "&Select"
 msgstr "선택(&S)"
 
 msgid "Use passive mode over pro&xy"
-msgstr "passive 모드 사용(&X)..."
+msgstr "프록시를 통한 passive 모드 사용(&X)..."
 
 msgid "Use &passive mode"
 msgstr "passive 모드 사용(&P)..."
@@ -1125,7 +1125,7 @@ msgid "ftp anonymous password:"
 msgstr "ftp anonymous 암호:"
 
 msgid "Timeout for freeing VFSs:"
-msgstr "Timeout for freeing VFSs:"
+msgstr "시간초과 for freeing VFSs:"
 
 msgid " Virtual File System Setting "
 msgstr "가상 파일 체계 설정 "
@@ -1754,7 +1754,7 @@ msgid "Process block"
 msgstr "Process block"
 
 msgid " Copies to"
-msgstr "Copies to"
+msgstr "복사"
 
 msgid " Subject"
 msgstr "제목"
@@ -2306,7 +2306,7 @@ msgstr ""
 " %s "
 
 msgid "(stalled)"
-msgstr "(stalled)"
+msgstr "(지연됨)"
 
 #, c-format
 msgid ""
@@ -2479,7 +2479,7 @@ msgid "files/directories"
 msgstr "파일/디렉터리"
 
 msgid " with source mask:"
-msgstr " with source mask:"
+msgstr "소스 마스크:"
 
 msgid " to:"
 msgstr " 대상:"
@@ -3344,13 +3344,13 @@ msgid "[dev]"
 msgstr "[dev]"
 
 msgid "UP--DIR"
-msgstr "UP--DIR"
+msgstr "상위폴더"
 
 msgid "SYMLINK"
-msgstr "SYMLINK"
+msgstr "심볼릭링크"
 
 msgid "SUB-DIR"
-msgstr "SUB-DIR"
+msgstr "아래폴더"
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3420,10 +3420,10 @@ msgid "C&Hange time"
 msgstr "바꾼 시간(&H)"
 
 msgid "Permission"
-msgstr "허용"
+msgstr "권한"
 
 msgid "Perm"
-msgstr "Perm"
+msgstr "권한"
 
 msgid "Nl"
 msgstr "Nl"
@@ -3680,7 +3680,7 @@ msgid "ButtonBar|Wrap"
 msgstr "ButtonBar|Wrap"
 
 msgid "ButtonBar|Hex"
-msgstr "ButtonBar|Hex"
+msgstr "ButtonBar|16진수"
 
 msgid "ButtonBar|Goto"
 msgstr "ButtonBar|Goto"
