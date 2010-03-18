@@ -340,26 +340,26 @@ tty_print_anychar (int c)
 }
 
 void
-tty_print_alt_char (int c)
+tty_print_alt_char (int c, gboolean single)
 {
     if ((chtype) c == ACS_VLINE)
         c = mc_tty_ugly_frm[MC_TTY_FRM_thinvert];
     else if ((chtype) c == ACS_HLINE)
         c = mc_tty_ugly_frm[MC_TTY_FRM_thinhoriz];
     else if ((chtype) c == ACS_LTEE)
-        c = mc_tty_ugly_frm[MC_TTY_FRM_leftmiddle];
+        c = mc_tty_ugly_frm[single ? MC_TTY_FRM_grpleftmiddle : MC_TTY_FRM_leftmiddle];
     else if ((chtype) c == ACS_RTEE)
-        c = mc_tty_ugly_frm[MC_TTY_FRM_rightmiddle];
+        c = mc_tty_ugly_frm[single ? MC_TTY_FRM_grprightmiddle : MC_TTY_FRM_rightmiddle];
     else if ((chtype) c == ACS_ULCORNER)
-        c = mc_tty_ugly_frm[MC_TTY_FRM_lefttop];
+        c = mc_tty_ugly_frm[single ? MC_TTY_FRM_grplefttop : MC_TTY_FRM_lefttop];
     else if ((chtype) c == ACS_LLCORNER)
-        c = mc_tty_ugly_frm[MC_TTY_FRM_leftbottom];
+        c = mc_tty_ugly_frm[single ? MC_TTY_FRM_grpleftbottom : MC_TTY_FRM_leftbottom];
     else if ((chtype) c == ACS_URCORNER)
-        c = mc_tty_ugly_frm[MC_TTY_FRM_righttop];
+        c = mc_tty_ugly_frm[single ? MC_TTY_FRM_grprighttop : MC_TTY_FRM_righttop];
     else if ((chtype) c == ACS_LRCORNER)
-        c = mc_tty_ugly_frm[MC_TTY_FRM_rightbottom];
+        c = mc_tty_ugly_frm[single ? MC_TTY_FRM_grprightbottom : MC_TTY_FRM_rightbottom];
     else if ((chtype) c == ACS_PLUS)
-        c = mc_tty_ugly_frm[MC_TTY_FRM_centermiddle];
+        c = mc_tty_ugly_frm[single ? MC_TTY_FRM_grpcentermiddle : MC_TTY_FRM_centermiddle];
 
     addch (c);
 }
