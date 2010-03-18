@@ -11,46 +11,49 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 msgid " Search string not found "
 msgstr "Радок пошуку не знойдзены "
 
 msgid " Not implemented yet "
-msgstr ""
+msgstr "Не рэалізавана"
 
 msgid " Num of replace tokens not equal to num of found tokens "
-msgstr ""
+msgstr "Колькасць такенаў да замены не роўная да колькасцi знойдзеных "
 
-#, fuzzy, c-format
+#, c-format
 msgid " Invalid token number %d "
-msgstr " Памылковы шаблон мэты "
+msgstr "Памылковы такен нумар %d "
 
 msgid "Normal"
-msgstr ""
+msgstr "Нармальны"
 
 msgid "&Regular expression"
 msgstr "&Сталы выраз"
 
 msgid "Hexadecimal"
-msgstr ""
+msgstr "Шаснаццатковы"
 
 msgid "Wildcard search"
-msgstr ""
+msgstr "wildcard-пошук"
 
 #, c-format
 msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
 msgstr ""
+"Не ўдалося  загрузiць скiн '%s'.\n"
+"Стандартны скін быў загружаны"
 
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
 msgstr ""
+"Не ўдалося разабраць скiн '%s'.\n"
+"Стандартны скін быў загружаны"
 
 msgid "Function key 1"
 msgstr "Функцыянальная 1 "
@@ -160,9 +163,8 @@ msgstr "Slash на keypad'е"
 msgid "* on keypad"
 msgstr "* на лічбавых клавішах"
 
-#, fuzzy
 msgid "Escape key"
-msgstr "Slash на keypad'е"
+msgstr "клавіша Escape"
 
 msgid "Left arrow keypad"
 msgstr "Стрэлка ўлева на keypad'e"
@@ -197,43 +199,38 @@ msgstr "Delete на keypad'е"
 msgid "Enter on keypad"
 msgstr "Enter на keypad'е"
 
-#, fuzzy
 msgid "Function key 21"
-msgstr "Функцыянальная 1 "
+msgstr "Функцыянальная 21 "
 
-#, fuzzy
 msgid "Function key 22"
-msgstr "Функцыянальная 2 "
+msgstr "Функцыянальная 22 "
 
-#, fuzzy
 msgid "Function key 23"
-msgstr "Функцыянальная 2 "
+msgstr "Функцыянальная 23 "
 
-#, fuzzy
 msgid "Function key 24"
-msgstr "Функцыянальная 2 "
+msgstr "Функцыянальная 24 "
 
 msgid "Plus"
-msgstr ""
+msgstr "Плюс"
 
-#, fuzzy
 msgid "Minus"
-msgstr "Меню"
+msgstr "Мiнус"
 
 msgid "Asterisk"
-msgstr ""
+msgstr "Зорка"
 
 msgid "Dot"
-msgstr ""
+msgstr "Кропка"
 
 msgid "Less than"
-msgstr ""
+msgstr "Меней чым"
 
 msgid "Great than"
-msgstr ""
+msgstr "Болей чым"
 
 msgid "Equal"
-msgstr ""
+msgstr "роўна"
 
 #, fuzzy
 msgid "Comma"
@@ -961,8 +958,7 @@ msgstr ""
 "   Меню:         menu, menuhot, menusel, menuhotsel\n"
 "   Рэдактар:     editnormal, editbold, editmarked\n"
 "   Дапамога:     helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   Тыпы файлаў:  directory, executable, link, stalelink, device, special, "
-"core\n"
+"   Тыпы файлаў:  directory, executable, link, stalelink, device, special, core\n"
 "hidden, temp, doc, archive, source, media, graph, database\n"
 "\n"
 "Колеры:\n"
@@ -1002,8 +998,7 @@ msgid ""
 "to mc-devel@gnome.org\n"
 msgstr ""
 "\n"
-"Калі ласка, дасылайце любыя паведамленні аб памылках (уключаючы вывад 'mc -"
-"V')\n"
+"Калі ласка, дасылайце любыя паведамленні аб памылках (уключаючы вывад 'mc -V')\n"
 "на адрас mc-devel@gnome.org\n"
 
 #, c-format
@@ -1075,7 +1070,8 @@ msgstr "Парадак сартавання"
 msgid "Confirmation"
 msgstr " Запыт пацверджання"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 #, fuzzy
 msgid "Confirmation|&History cleanup"
@@ -2254,26 +2250,16 @@ msgid " %s%s file error"
 msgstr " памылка файла %s%s "
 
 #, c-format
-msgid ""
-"The format of the %smc.ext file has changed with version 3.0.  It seems that "
-"the installation failed.  Please fetch a fresh copy from the Midnight "
-"Commander package."
-msgstr ""
-"Фармат файла %smc.ext зменены з версіі 3.0. Мажліва адбыўся збой пры "
-"ўсталёўцы. Калі ласка, вазміце свежую копію з пакету Midnight Commander."
+msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
+msgstr "Фармат файла %smc.ext зменены з версіі 3.0. Мажліва адбыўся збой пры ўсталёўцы. Калі ласка, вазміце свежую копію з пакету Midnight Commander."
 
 #, c-format
 msgid " ~/%s file error "
 msgstr " памылка файла ~/%s "
 
 #, c-format
-msgid ""
-"The format of the ~/%s file has changed with version 3.0.  You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write "
-"it."
-msgstr ""
-"Фармат файла ~/%s зменены з версіі 3.0. Вы мусіце або скапіяваць яго з %smc."
-"ext або выкарыстаць гэты файл як узор для напісання свайго."
+msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
+msgstr "Фармат файла ~/%s зменены з версіі 3.0. Вы мусіце або скапіяваць яго з %smc.ext або выкарыстаць гэты файл як узор для напісання свайго."
 
 msgid "DialogTitle|Copy"
 msgstr ""
@@ -2300,8 +2286,7 @@ msgid ""
 "\n"
 " Option Stable Symlinks will be disabled "
 msgstr ""
-" Немагчыма стварыць устойлівыя сімв. спасылкі праз нелакальныя файлавыя "
-"сістэмы:\n"
+" Немагчыма стварыць устойлівыя сімв. спасылкі праз нелакальныя файлавыя сістэмы:\n"
 "\n"
 " Опцыя Устойлівыя сімвалічныя спасылкі будзе адключана"
 
@@ -2948,8 +2933,7 @@ msgid " Hotlist Load "
 msgstr " Загрузка спісу "
 
 #, c-format
-msgid ""
-"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr "MC не здолеў запісаць файл ~/%s, ваш стары спіс каталогаў не выдалены"
 
 #, c-format
@@ -3948,7 +3932,6 @@ msgstr "Працэс у тле:"
 #~ msgid " confirm &Delete "
 #~ msgstr " пацверджанне &Выдалення"
 
-#, fuzzy
 #~ msgid ""
 #~ " The current line number is %lld.\n"
 #~ " Enter the new line number:"
@@ -3956,7 +3939,6 @@ msgstr "Працэс у тле:"
 #~ " Нумар бягучага радка %d.\n"
 #~ " Увядзіце нумар новага радка:"
 
-#, fuzzy
 #~ msgid ""
 #~ " The current address is %s.\n"
 #~ " Enter the new address:"
@@ -4015,63 +3997,48 @@ msgstr "Працэс у тле:"
 #~ msgid "Copy to &file...     "
 #~ msgstr "&Капіяваць у файл..."
 
-#, fuzzy
 #~ msgid "&Toggle mark                 F3"
 #~ msgstr "&Выдаленне блоку      F3"
 
-#, fuzzy
 #~ msgid "Mar&k columns              S-F3"
 #~ msgstr "Вылучыць &слупкі      S-F3"
 
-#, fuzzy
 #~ msgid "&Copy                        F5"
 #~ msgstr "&Капіяванне          F5"
 
-#, fuzzy
 #~ msgid "&Move                        F6"
 #~ msgstr "&Перамясціць блок     F6"
 
-#, fuzzy
 #~ msgid "&Delete                      F8"
 #~ msgstr "&Выдаленне           F8"
 
-#, fuzzy
 #~ msgid "&Next bookmark              M-j"
 #~ msgstr "&Новы файл             C-n"
 
-#, fuzzy
 #~ msgid "&Undo                       C-u"
 #~ msgstr "&Адкат аперацыі       C-u"
 
-#, fuzzy
 #~ msgid "&Beginning               C-PgUp"
 #~ msgstr "&Пачатак файла        C-PgUp"
 
-#, fuzzy
 #~ msgid "&End                     C-PgDn"
 #~ msgstr "Канец &файла          C-PgDn"
 
-#, fuzzy
 #~ msgid "C&opy to clipfile           M-w"
 #~ msgstr "&Перайсці да радка         M-l"
 
-#, fuzzy
 #~ msgid "C&ut to clipfile            C-w"
 #~ msgstr "&Перайсці да радка         M-l"
 
-#, fuzzy
 #~ msgid "Toggle bookmar&k               "
 #~ msgstr "&Выдаленне блоку      F3"
 
-#, fuzzy
 #~ msgid "&Next bookmark                 "
 #~ msgstr "&Новы файл             C-n"
 
-#, fuzzy
 #~ msgid "Pre&v bookmark                 "
 #~ msgstr "&Сартаванне                M-t"
 
-#, fuzzy
 #~ msgid "&Flush bookmark                "
 #~ msgstr "&Электроная пошта..."
 
@@ -4084,7 +4051,6 @@ msgstr "Працэс у тле:"
 #~ msgid "&Go to line...            M-l"
 #~ msgstr "&Перайсці да радка         M-l"
 
-#, fuzzy
 #~ msgid "Encod&ing...             M-e"
 #~ msgstr "&Сартаванне                M-t"
 
@@ -4103,7 +4069,6 @@ msgstr "Працэс у тле:"
 #~ msgid "'ispell' s&pell check    M-$"
 #~ msgstr "&Кантроль правапісу        M-$"
 
-#, fuzzy
 #~ msgid "Save setu&p"
 #~ msgstr "&Захаваць наладку"
 
@@ -4245,7 +4210,6 @@ msgstr "Працэс у тле:"
 #~ msgid "e&Xternal panelize    C-x !"
 #~ msgstr "&Крытэр панэлізацыі   C-x !"
 
-#, fuzzy
 #~ msgid "Command &history      M-h"
 #~ msgstr " Гісторыя каманд "
 
@@ -4267,11 +4231,9 @@ msgstr "Працэс у тле:"
 #~ msgid "Menu"
 #~ msgstr "Меню"
 
-#, fuzzy
 #~ msgid "n"
 #~ msgstr "На"
 
-#, fuzzy
 #~ msgid "Extension"
 #~ msgstr "Пашырэнне:"
 
@@ -4380,21 +4342,17 @@ msgstr "Працэс у тле:"
 #~ msgid "O&ne"
 #~ msgstr "&Адзін"
 
-#, fuzzy
 #~ msgid "%b %d %H:%M"
 #~ msgstr "%o %d %f%m"
 
-#, fuzzy
 #~ msgid "%b %d %Y"
 #~ msgstr "%o %d %f%m"
 
-#, fuzzy
 #~ msgid " The current address is 0x%08"
 #~ msgstr ""
 #~ " Бягучы адрас - 0x%lx.\n"
 #~ " Увядзіце новы адрас:"
 
-#, fuzzy
 #~ msgid "ftpfs: Invalid host address."
 #~ msgstr "ftpfs: Памылковае імя сістэмы."
 
@@ -4404,9 +4362,7 @@ msgstr "Працэс у тле:"
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr " Увядзіце парадак аргументаў замены, напр. 3,2,1,4 "
 
-#~ msgid ""
-#~ " Invalid regular expression, or scanf expression with too many "
-#~ "conversions "
+#~ msgid " Invalid regular expression, or scanf expression with too many conversions "
 #~ msgstr " Памылковы сталы выраз ці ў scanf-фармаце шмат пераўтварэнняў"
 
 #~ msgid " Error in replacement format string. "
@@ -4470,7 +4426,6 @@ msgstr "Працэс у тле:"
 #~ msgid "Output:"
 #~ msgstr "Вывад:"
 
-#, fuzzy
 #~ msgid "Pad if column highliting"
 #~ msgstr " Падсветка файлаў "
 
@@ -4589,7 +4544,6 @@ msgstr "Працэс у тле:"
 #~ msgid "select symlinked dir as dir"
 #~ msgstr "сімв.спасылка на кат-г як кат-г"
 
-#, fuzzy
 #~ msgid " Choose panel codepage "
 #~ msgstr " Выбраць знаказбор "
 
