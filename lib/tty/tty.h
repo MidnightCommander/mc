@@ -75,7 +75,8 @@ extern void tty_print_one_vline (void);
 extern void tty_print_one_hline (void);
 extern void tty_draw_hline (int y, int x, int ch, int len);
 extern void tty_draw_vline (int y, int x, int ch, int len);
-extern void tty_draw_box (int y, int x, int rows, int cols, gboolean single);
+extern void tty_draw_box (int y, int x, int rows, int cols);
+extern void tty_draw_double_box (int y, int x, int rows, int cols);
 extern void tty_fill_region (int y, int x, int rows, int cols, unsigned char ch);
 
 extern int mc_tty_ugly_frm[];
