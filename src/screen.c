@@ -89,6 +89,14 @@ typedef struct format_e
     const char *id;
 } format_e;
 
+enum {
+    QSEARCH_CASE_INSENSITIVE = 0, /* quick search in case insensitive mode */
+    QSEARCH_CASE_SENSITIVE = 1, /* quick search in case sensitive mode */
+    QSEARCH_PANEL_CASE = 2 /* quick search get value from panel case_sensitive */
+};
+
+int quick_search_case_sensitive = QSEARCH_PANEL_CASE;
+
 /* If true, show the mini-info on the panel */
 int show_mini_info = 1;
 
@@ -2403,8 +2411,18 @@ do_search (WPanel * panel, int c_code)
     search = mc_search_new (esc_str, -1);
     search->search_type = MC_SEARCH_T_GLOB;
     search->is_entire_line = TRUE;
-    search->is_case_sentitive = 0;
-
+    switch (quick_search_case_sensitive)
+    {
+    case QSEARCH_CASE_SENSITIVE:
+        search->is_case_sentitive = TRUE;
+        break;
+    case QSEARCH_CASE_INSENSITIVE:
+        search->is_case_sentitive = FALSE;
+        break;
+    default:
+        search->is_case_sentitive = panel->case_sensitive;
+        break;
+    }
     sel = panel->selected;
     for (i = panel->selected; !wrapped || i != panel->selected; i++)
     {

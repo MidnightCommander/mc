@@ -232,6 +232,7 @@ static const struct {
     { "reverse_files_only", &reverse_files_only },
     { "copymove_persistent_attr", &setup_copymove_persistent_attr },
     { "select_flags", &select_flags },
+    { "quick_search_case_sensitive", &quick_search_case_sensitive },
     { 0, 0 }
 };
 /* *INDENT-ON* */

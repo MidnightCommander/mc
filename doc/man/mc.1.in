@@ -595,6 +595,15 @@ again, the next match is searched for.
 .P
 Besides the filename characters, you can also use wildcard
 characters '*' and '?'.
+.P
+Quick search mode is defined by
+.I quick_search_case_sensitive
+option located in [Midnight-Commander] section in configuration file.
+This option can have one of the following values: 0, 1 or 2.
+If quick_search_case_sensitive=0, quick search is case insensitive.
+If quick_search_case_sensitive=1, quick search is case sensitive.
+If quick_search_case_sensitive=2 (default value), quick search mode
+is matched to the the panel sort order: case sensitive or not.
 .\"NODE "  Shell Command Line"
 .SH "  Shell Command Line"
 This section lists keys which are useful to avoid excessive typing when
