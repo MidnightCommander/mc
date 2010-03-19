@@ -2,7 +2,7 @@
 # Copyright (C) 1998-2010 Free Software Foundation, Inc.
 # David Martín <dmartina@excite.com>, 1998-2010.
 # Ismael Olea <olea@hispafuentes.com>, 2000.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.7.2\n"
@@ -247,7 +247,7 @@ msgid "Exclamation mark"
 msgstr "Exclamación"
 
 msgid "Question mark"
-msgstr "Interrrogación"
+msgstr "Interrogación"
 
 msgid "Ampersand"
 msgstr "Ampersand"
@@ -1053,7 +1053,8 @@ msgstr "Ordenar"
 msgid "Confirmation"
 msgstr "Confirmación"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "Confirmation|borrar &Historia"
@@ -2158,10 +2159,7 @@ msgid " %s%s file error"
 msgstr " error en el archivo %s%s "
 
 #, c-format
-msgid ""
-"The format of the %smc.ext file has changed with version 3.0.  It seems that "
-"the installation failed.  Please fetch a fresh copy from the Midnight "
-"Commander package."
+msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
 msgstr ""
 "El archivo %smc.ext ha cambiado con la versión 3.0.\n"
 "Parece que la instalación falló. Por favor, trate\n"
@@ -2173,10 +2171,7 @@ msgid " ~/%s file error "
 msgstr " error en el archivo ~/%s "
 
 #, c-format
-msgid ""
-"The format of the ~/%s file has changed with version 3.0.  You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write "
-"it."
+msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
 msgstr ""
 "El archivo ~/%s ha cambiado con la versión 3.0.\n"
 "Puede hacer una copia de %smc.ext o bien emplearlo\n"
@@ -2852,8 +2847,7 @@ msgid " Hotlist Load "
 msgstr " Cargar favoritos "
 
 #, c-format
-msgid ""
-"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr "No se pudo escribir ~/%s, la lista de favoritos antigua no fue borrada"
 
 #, c-format
