@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: uk\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-26 12:26+0200\n"
+"POT-Creation-Date: 2010-03-19 12:04+0200\n"
 "PO-Revision-Date: 2009-10-31 19:01+0200\n"
 "Last-Translator: Oleksandr Natalenko <pfactum@gmail.com>\n"
 "Language-Team: uk <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 1.0\n"
 
 msgid " Search string not found "
 msgstr " Така стрічка не знайдена "
@@ -168,9 +168,8 @@ msgstr "Додатковий /"
 msgid "* on keypad"
 msgstr "Додаткова *"
 
-#, fuzzy
 msgid "Escape key"
-msgstr "Додатковий /"
+msgstr "Клавіша Escape"
 
 msgid "Left arrow keypad"
 msgstr "Дод. стрілка вліво"
@@ -929,7 +928,6 @@ msgid "Show mc with specified skin"
 msgstr "Показувати mc із обраним скіном"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -954,9 +952,8 @@ msgstr ""
 "   Показ файлів: normal, selected, marked, markselect\n"
 "   Діалоги:      dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Меню:         menu, menuhot, menusel, menuhotsel\n"
-"   Довідка:      helpnormal, helpitalic, helplink, helpslink\n"
-"   Редактор:       editnormal, editbold, editmarked, editwhitespace,\n"
+"   Меню:         menu, menuhot, menusel, menuhotsel, menuinactive\n"
+"  Редактор:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 
 #. TRANSLATORS: don't translate keywords and names of colors
@@ -1063,8 +1060,9 @@ msgstr "Порядок сортування"
 msgid " Confirmation "
 msgstr " Запит підтвердження "
 
+#, fuzzy
 msgid " confirm di&Rectory hotlist delete "
-msgstr " підтверджувати видалення гарячого списку каталогів "
+msgstr "Підтвердження|Видалення гарячого списку каталогів"
 
 msgid " confirm &Exit "
 msgstr " перед ви&ходом"
@@ -1072,8 +1070,9 @@ msgstr " перед ви&ходом"
 msgid " confirm e&Xecute "
 msgstr " перед вик&онанням"
 
+#, fuzzy
 msgid " confirm o&Verwrite "
-msgstr " перед пе&резаписом"
+msgstr " перед &видаленням"
 
 msgid " confirm &Delete "
 msgstr " перед &видаленням"
@@ -1869,44 +1868,36 @@ msgstr "&Вийти"
 msgid "&Undo"
 msgstr "Відкотити"
 
-#, fuzzy
 msgid "&Toggle ins/overw"
 msgstr "&Режим вставки/заміни"
 
-#, fuzzy
 msgid "To&ggle mark"
 msgstr "Перемкнути помічання"
 
 msgid "&Mark columns"
 msgstr "Помітити стовпці"
 
-#, fuzzy
 msgid "Mark &all"
-msgstr "Вст. пом&iч."
+msgstr "Помітити все"
 
 msgid "Unmar&k"
-msgstr ""
+msgstr "Зняти помітку"
 
-#, fuzzy
 msgid "Cop&y"
 msgstr "Копіювати"
 
-#, fuzzy
 msgid "Mo&ve"
 msgstr "Перенести"
 
 msgid "&Delete"
 msgstr "&Видалити"
 
-#, fuzzy
 msgid "Co&py to clipfile"
 msgstr "Копіювати до буферного файлу"
 
-#, fuzzy
 msgid "&Cut to clipfile"
 msgstr "Вирізати до буферного файлу"
 
-#, fuzzy
 msgid "Pa&ste from clipfile"
 msgstr "Вставити із буферного файлу"
 
@@ -1925,14 +1916,12 @@ msgstr "Шукати &знову"
 msgid "&Replace..."
 msgstr "&Замінити…"
 
-#, fuzzy
 msgid "&Toggle bookmark"
 msgstr "Перемкнути закладку"
 
 msgid "&Next bookmark"
 msgstr "Наступна закладка"
 
-#, fuzzy
 msgid "&Prev bookmark"
 msgstr "Попередня закладка"
 
@@ -1942,22 +1931,18 @@ msgstr "Скинути закладки"
 msgid "&Go to line..."
 msgstr "Перейти на рядок…"
 
-#, fuzzy
 msgid "&Toggle line state"
 msgstr "Перемкнути стан рядка"
 
 msgid "Go to matching &bracket"
 msgstr "Перейти до парної &дужки"
 
-#, fuzzy
 msgid "&Find declaration"
 msgstr "Знайти об’явлення"
 
-#, fuzzy
 msgid "Back from &declaration"
 msgstr "Повернутися з об’явлення"
 
-#, fuzzy
 msgid "For&ward to declaration"
 msgstr "Перейти до об’явлення"
 
@@ -1970,7 +1955,6 @@ msgstr "Пере&малювати екран"
 msgid "&Start record macro"
 msgstr "&Розпочати запис макросу"
 
-#, fuzzy
 msgid "Finis&h record macro..."
 msgstr "&Завершити запис макросу…"
 
@@ -1992,19 +1976,15 @@ msgstr "Вставити &літерал…"
 msgid "Insert &date/time"
 msgstr "Вставити &дату/час"
 
-#, fuzzy
 msgid "&Format paragraph"
 msgstr "Форматувати &абзац"
 
-#, fuzzy
 msgid "&Sort..."
 msgstr "Сортувати…"
 
-#, fuzzy
 msgid "&Paste output of..."
 msgstr "Вставити вивід…"
 
-#, fuzzy
 msgid "&External formatter"
 msgstr "З&овнішня програма форматування"
 
@@ -2568,9 +2548,9 @@ msgstr " Видалення: "
 msgid "Non&e"
 msgstr "Ж&oдного"
 
-#, c-format
+#, fuzzy, c-format
 msgid "ETA %d:%02d.%02d"
-msgstr "ОЧЗ %d:%02d.%02d"
+msgstr "%d:%02d.%02d"
 
 #, c-format
 msgid "%.2f MB/s"
@@ -3684,7 +3664,6 @@ msgstr " Не знайдено записів, які підходять, у %s 
 msgid " User menu "
 msgstr " Меню користувача "
 
-# , c-format, c-format
 #, c-format
 msgid ""
 " The current line number is %lld.\n"
@@ -3693,7 +3672,6 @@ msgstr ""
 " Номер поточного рядка %lld.\n"
 " Введіть номер нового рядка:"
 
-# , c-format, c-format
 #, c-format
 msgid ""
 " The current address is %s.\n"
@@ -3813,6 +3791,76 @@ msgstr "Історія команд"
 msgid "Background process:"
 msgstr "Фоновий процес:"
 
+# , c-format
+#~ msgid "Warning: cannot open %s directory\n"
+#~ msgstr "Попередження: не вдалося відкрити каталог %s\n"
+
+#~ msgid "Confirmation"
+#~ msgstr "Підтвердження"
+
+#~ msgid "Confirmation|&History cleanup"
+#~ msgstr "Підтвердження|Очистка історії"
+
+#~ msgid "Confirmation|E&xit"
+#~ msgstr "Підтвердження|Вихід"
+
+#~ msgid "Confirmation|&Execute"
+#~ msgstr "Підтвердження|Виконання"
+
+#~ msgid "Confirmation|O&verwrite"
+#~ msgstr "Підтвердження|Перезапис"
+
+#~ msgid "Confirmation|&Delete"
+#~ msgstr "Підтвердження|Видалення"
+
+#~ msgid "ETA %s"
+#~ msgstr "ОЧЗ %s"
+
+#~ msgid "Files processed: %llu of %llu"
+#~ msgstr "Файлів оброблено: %llu із %llu"
+
+#~ msgid "Time: %s  %s (%s)"
+#~ msgstr "Час: %s %s (%s)"
+
+#~ msgid " Total: %s of %s "
+#~ msgstr "Усього: %s of %s"
+
+#~ msgid "sort|v"
+#~ msgstr "сортування|v"
+
+#~ msgid "&Version"
+#~ msgstr "Версія"
+
+#~ msgid "Invalid value"
+#~ msgstr "Невірне значення"
+
+#~ msgid "&Line number (decimal)"
+#~ msgstr "Номер рядка (десяткове число)"
+
+#~ msgid "Pe&rcents"
+#~ msgstr "Відсотки"
+
+#~ msgid "&Decimal offset"
+#~ msgstr "Десятковий зсув"
+
+#~ msgid "He&xadecimal offset"
+#~ msgstr "Шістнадцятковий зсув"
+
+#~ msgid "Goto"
+#~ msgstr "Йти до"
+
+#~ msgid "Search done"
+#~ msgstr "Пошук завершено"
+
+#~ msgid "Continue from begining?"
+#~ msgstr "Почати спочатку?"
+
+#~ msgid "DialogTitle|History cleanup"
+#~ msgstr "Заголовок діалогу|Очистка історії"
+
+#~ msgid "Do you want clean this history?"
+#~ msgstr "Ви дійсно хочете очистити цю історію?"
+
 #~ msgid "File:       None"
 #~ msgstr " Файл:      Немає"
 
@@ -3881,7 +3929,6 @@ msgstr "Фоновий процес:"
 #~ msgid "&Delete                      F8"
 #~ msgstr "&Видалити                  F8"
 
-#, fuzzy
 #~ msgid "&Next bookmark              M-j"
 #~ msgstr "Наступна закладка                 "
 
@@ -3924,7 +3971,6 @@ msgstr "Фоновий процес:"
 #~ msgid "&Go to line...            M-l"
 #~ msgstr "&Перейти на рядок                M-l"
 
-#, fuzzy
 #~ msgid "Encod&ing...             M-e"
 #~ msgstr "Кодування...             C-t"
 
@@ -4105,11 +4151,9 @@ msgstr "Фоновий процес:"
 #~ msgid "Menu"
 #~ msgstr "Меню"
 
-#, fuzzy
 #~ msgid "n"
 #~ msgstr "На"
 
-#, fuzzy
 #~ msgid "Extension"
 #~ msgstr "Розширення:"
 
@@ -4199,9 +4243,6 @@ msgstr "Фоновий процес:"
 
 #~ msgid "unknown option"
 #~ msgstr "невідомий перемикач"
-
-#~ msgid "invalid numeric value"
-#~ msgstr "невірне число"
 
 #~ msgid "Show this help message"
 #~ msgstr "Показати це довідкове повідомлення"

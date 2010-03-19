@@ -1,56 +1,62 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Free Software Foundation, Inc.
-# Wang Jian <lark@linux.net.cn>, 2001
+# MC Chinese (zh_CN) translation
+# Wang Jian <lark@linux.net.cn>, 2001.
+# Jake Li <gnozil@gmail.com>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-26 12:26+0200\n"
-"PO-Revision-Date: 2002-01-29 22:05+0800\n"
-"Last-Translator: Wang Jian <lark@linux.net.cn>\n"
-"Language-Team: Chinese Simplified <i18n-translation@lists.linux.net.cn>\n"
+"POT-Creation-Date: 2010-03-19 12:04+0200\n"
+"PO-Revision-Date: 2010-03-09 14:51+0800\n"
+"Last-Translator: Jake Li <gnozil@gmail.com>\n"
+"Language-Team: Simplified Chinese\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=1;\n"
+"X-Poedit-Language: Chinese\n"
+"X-Poedit-Country: CHINA\n"
 
 msgid " Search string not found "
-msgstr " 没有找到要搜索的字符串 "
+msgstr "没有找到要搜索的字符串"
 
 msgid " Not implemented yet "
-msgstr ""
+msgstr "尚未实现"
 
 msgid " Num of replace tokens not equal to num of found tokens "
-msgstr ""
+msgstr "替换的标记与找到的标记个数不相等"
 
-#, fuzzy, c-format
+#, c-format
 msgid " Invalid token number %d "
-msgstr " 无效的目标掩码 "
+msgstr "无效的标记个数%d "
 
-#, fuzzy
 msgid "Normal"
-msgstr "格式化"
+msgstr "普通"
 
 msgid "&Regular expression"
-msgstr "正则表达式(&R)"
+msgstr "正规表达式(&R)"
 
 msgid "Hexadecimal"
-msgstr ""
+msgstr "十六进制"
 
 msgid "Wildcard search"
-msgstr ""
+msgstr "通配符查找"
 
 #, c-format
 msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
 msgstr ""
+"无法加载皮肤'%s'。\n"
+"默认皮肤已经加载"
 
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
 msgstr ""
+"无法解析皮肤'%s'。\n"
+"默认皮肤已经加载"
 
 msgid "Function key 1"
 msgstr "F1"
@@ -113,207 +119,190 @@ msgid "Function key 20"
 msgstr "F20"
 
 msgid "Backspace key"
-msgstr "Backspace 键"
+msgstr "退格键"
 
 msgid "End key"
-msgstr "End 键"
+msgstr "末尾键"
 
 msgid "Up arrow key"
-msgstr "向上箭头键"
+msgstr "上箭头键"
 
 msgid "Down arrow key"
-msgstr "向下箭头键"
+msgstr "下箭头键"
 
 msgid "Left arrow key"
-msgstr "向左箭头键"
+msgstr "左箭头键"
 
 msgid "Right arrow key"
-msgstr "向右箭头键"
+msgstr "右箭头键"
 
 msgid "Home key"
-msgstr "Home 键"
+msgstr "行首键"
 
 msgid "Page Down key"
-msgstr "Page Down 键"
+msgstr "下页键"
 
 msgid "Page Up key"
-msgstr "Page Up 键"
+msgstr "上页键"
 
 msgid "Insert key"
-msgstr "Insert 键"
+msgstr "插入键"
 
 msgid "Delete key"
-msgstr "Delete 键"
+msgstr "删除键"
 
 msgid "Completion/M-tab"
 msgstr "补全/M-Tab"
 
 msgid "+ on keypad"
-msgstr "小键盘上的 +"
+msgstr "小键盘 +"
 
 msgid "- on keypad"
-msgstr "小键盘上的 -"
+msgstr "小键盘 -"
 
 msgid "Slash on keypad"
-msgstr "小键盘上的 /"
+msgstr "小键盘 /"
 
 msgid "* on keypad"
-msgstr "小键盘上的 *"
+msgstr "小键盘 *"
 
-#, fuzzy
 msgid "Escape key"
-msgstr "小键盘上的 /"
+msgstr "ESC键"
 
 msgid "Left arrow keypad"
-msgstr "向左方向键"
+msgstr "小键盘左箭头键"
 
 msgid "Right arrow keypad"
-msgstr "向右方向键"
+msgstr "小键盘右箭头键"
 
 msgid "Up arrow keypad"
-msgstr "向上方向键"
+msgstr "小键盘上箭头键"
 
 msgid "Down arrow keypad"
-msgstr "向下方向键"
+msgstr "小键盘下箭头键"
 
 msgid "Home on keypad"
-msgstr "小键盘上的 Home"
+msgstr "小键盘行首键"
 
 msgid "End on keypad"
-msgstr "小键盘上的 End"
+msgstr "小键盘末尾键"
 
 msgid "Page Down keypad"
-msgstr "PageDown"
+msgstr "小键盘下页键"
 
 msgid "Page Up keypad"
-msgstr "PageUp"
+msgstr "小键盘上页键"
 
 msgid "Insert on keypad"
-msgstr "小键盘上的 Insert"
+msgstr "小键盘插入键"
 
 msgid "Delete on keypad"
-msgstr "小键盘上的 Delete"
+msgstr "小键盘删除键"
 
 msgid "Enter on keypad"
-msgstr "小键盘上的 Enter"
+msgstr "小键盘回车键"
 
-#, fuzzy
 msgid "Function key 21"
-msgstr "F1"
+msgstr "F21"
 
-#, fuzzy
 msgid "Function key 22"
-msgstr "F2"
+msgstr "F22"
 
-#, fuzzy
 msgid "Function key 23"
-msgstr "F2"
+msgstr "F23"
 
-#, fuzzy
 msgid "Function key 24"
-msgstr "F2"
+msgstr "F24"
 
 msgid "Plus"
-msgstr ""
+msgstr "加"
 
-#, fuzzy
 msgid "Minus"
-msgstr "菜单"
+msgstr "减"
 
 msgid "Asterisk"
-msgstr ""
+msgstr "星号"
 
 msgid "Dot"
-msgstr ""
+msgstr "点"
 
 msgid "Less than"
-msgstr ""
+msgstr "小于"
 
 msgid "Great than"
-msgstr ""
+msgstr "大于"
 
 msgid "Equal"
-msgstr ""
+msgstr "等于"
 
-#, fuzzy
 msgid "Comma"
-msgstr "命令"
+msgstr "逗号"
 
 msgid "Apostrophe"
-msgstr ""
+msgstr "撇号"
 
-#, fuzzy
 msgid "Colon"
-msgstr "计数"
+msgstr "冒号"
 
 msgid "Exclamation mark"
-msgstr ""
+msgstr "感叹号"
 
 msgid "Question mark"
-msgstr ""
+msgstr "问号"
 
-#, fuzzy
 msgid "Ampersand"
-msgstr "追加(&P)"
+msgstr "与号(&)"
 
 msgid "Dollar sign"
-msgstr ""
+msgstr "美元符"
 
 msgid "Quotation mark"
-msgstr ""
+msgstr "引号"
 
-#, fuzzy
 msgid "Caret"
-msgstr "目标"
+msgstr "脱字符^"
 
 msgid "Tilda"
-msgstr ""
+msgstr "波浪号~"
 
-#, fuzzy
 msgid "Prime"
-msgstr "前"
+msgstr "Prime"
 
-#, fuzzy
 msgid "Underline"
-msgstr " 输入行号："
+msgstr "下划线"
 
 msgid "Understrike"
-msgstr ""
+msgstr "着重线"
 
 msgid "Pipe"
-msgstr ""
+msgstr "管道"
 
-#, fuzzy
 msgid "Enter"
-msgstr "所有者"
+msgstr "回车"
 
-#, fuzzy
 msgid "Tab key"
-msgstr "小键盘上的 +"
+msgstr "制表符键"
 
-#, fuzzy
 msgid "Space key"
-msgstr "小键盘上的 /"
+msgstr "空格键"
 
-#, fuzzy
 msgid "Slash key"
-msgstr "小键盘上的 /"
+msgstr "斜线键"
 
-#, fuzzy
 msgid "Backslash key"
-msgstr "Backspace 键"
+msgstr "反斜线键"
 
 msgid "Number sign #"
-msgstr ""
+msgstr "井号键#"
 
 msgid "Ctrl"
-msgstr ""
+msgstr "Ctrl"
 
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 msgid "Shift"
-msgstr ""
+msgstr "Shift"
 
 #, c-format
 msgid ""
@@ -329,33 +318,29 @@ msgstr "%b %e %Y"
 msgid "%b %e %H:%M"
 msgstr "%b %e %H:%M"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s is not a directory\n"
-msgstr "目录"
+msgstr "%s不是目录\n"
 
 #, c-format
 msgid "Directory %s is not owned by you\n"
-msgstr ""
+msgstr "目录%s不属于你\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot set correct permissions for directory %s\n"
-msgstr ""
-" 无法创建目标目录“%s” \n"
-" %s "
+msgstr "无法正确设置目录%s的权限\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot create temporary directory %s: %s\n"
-msgstr ""
-" 无法创建目标目录“%s” \n"
-" %s "
+msgstr "无法创建临时目录%s：%s\n"
 
 #, c-format
 msgid "Temporary files will be created in %s\n"
-msgstr ""
+msgstr "在%s中创建临时文件\n"
 
 #, c-format
 msgid "Temporary files will not be created\n"
-msgstr ""
+msgstr "不能创建临时文件\n"
 
 #, c-format
 msgid "Press any key to continue..."
@@ -365,10 +350,10 @@ msgid "Warning"
 msgstr "警告"
 
 msgid " Pipe failed "
-msgstr " 管道失败 "
+msgstr "管道失败 "
 
 msgid " Dup failed "
-msgstr " 复制失败 "
+msgstr "复制失败 "
 
 #, c-format
 msgid ""
@@ -383,8 +368,8 @@ msgid ""
 "Premature end of cpio archive\n"
 "%s"
 msgstr ""
-"cpio 归档 %s\n"
-"过早结束"
+"过早结束的cpio 归档\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -454,7 +439,7 @@ msgstr "警告：没有找到文件 %s\n"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
-msgstr "fish：正在从 %s 断口连接"
+msgstr "fish：正在从 %s 断开连接"
 
 msgid "fish: Waiting for initial line..."
 msgstr "fish：正在等待初始化行..."
@@ -463,7 +448,7 @@ msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "抱歉，目前无法创建口令验证连接。"
 
 msgid " fish: Password required for "
-msgstr " fish：需要口令 "
+msgstr "fish：需要口令 "
 
 msgid "fish: Sending password..."
 msgstr "fish：正在发送口令..."
@@ -477,9 +462,9 @@ msgstr "fish：正在握手版本..."
 msgid "fish: Setting up current directory..."
 msgstr "fish：正在设置当前目录..."
 
-#, fuzzy, c-format
+#, c-format
 msgid "fish: Connected, home %s."
-msgstr "fish：已连接，"
+msgstr "fish：已连接，主目录%s，"
 
 #, c-format
 msgid "fish: Reading directory %s..."
@@ -495,7 +480,7 @@ msgstr "%s：失败"
 
 #, c-format
 msgid "fish: store %s: sending command..."
-msgstr "fish：正在保存 %s：正在发送命令..."
+msgstr "fish：保存 %s：正在发送命令..."
 
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish：本地读取失败，正在发送零"
@@ -524,7 +509,7 @@ msgid "ftpfs: Disconnecting from %s"
 msgstr "ftpfs：正在断开到 %s 的连接"
 
 msgid " FTP: Password required for "
-msgstr " FTP：需要口令 "
+msgstr "FTP：需要口令 "
 
 msgid "ftpfs: sending login name"
 msgstr "ftpfs：正在发送用户登录名"
@@ -532,17 +517,15 @@ msgstr "ftpfs：正在发送用户登录名"
 msgid "ftpfs: sending user password"
 msgstr "ftpfs：正在发送用户口令"
 
-#, fuzzy, c-format
+#, c-format
 msgid "FTP: Account required for user %s"
-msgstr " FTP：需要口令 "
+msgstr "FTP：用户%s需要账户 "
 
-#, fuzzy
 msgid "Account:"
-msgstr "计数"
+msgstr "账户"
 
-#, fuzzy
 msgid "ftpfs: sending user account"
-msgstr "ftpfs：正在发送用户口令"
+msgstr "ftpfs：正在发送用户账户"
 
 msgid "ftpfs: logged in"
 msgstr "ftpfs：已登录"
@@ -556,7 +539,7 @@ msgstr "ftpfs：无效的主机名。"
 
 #, c-format
 msgid "ftpfs: %s"
-msgstr ""
+msgstr "ftpfs: %s"
 
 #, c-format
 msgid "ftpfs: making connection to %s"
@@ -573,17 +556,16 @@ msgstr "ftpfs：连接服务器失败：%s"
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "正在等待重试... %d (Control-C 取消)"
 
-#, fuzzy
 msgid "ftpfs: invalid address family"
-msgstr "ftpfs：无效的主机地址。"
+msgstr "ftpfs：无效的地址族"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not setup passive mode: %s"
-msgstr "ftpfs：无法设置为被动模式"
+msgstr "ftpfs：无法设置为被动模式：%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: could not create socket: %s"
-msgstr " 无法创建套接字：%s "
+msgstr "ftpfs: 无法创建套接字：%s "
 
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs：无法设置为被动模式"
@@ -602,10 +584,10 @@ msgid "ftpfs: CWD failed."
 msgstr "ftpfs：CWD 失败。"
 
 msgid "ftpfs: couldn't resolve symlink"
-msgstr "ftpfs：无法解开符号链接"
+msgstr "ftpfs：无法解析符号链接"
 
 msgid "Resolving symlink..."
-msgstr "正在解开符号链接..."
+msgstr "正在解析符号链接..."
 
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
@@ -632,10 +614,10 @@ msgstr ""
 "删除口令或者改正权限。"
 
 msgid " MCFS "
-msgstr " MCFS "
+msgstr "MCFS "
 
 msgid " The server does not support this version "
-msgstr " 服务器不支持该版本 "
+msgstr "服务器不支持该版本 "
 
 msgid ""
 " The remote server is not running on a system port \n"
@@ -740,14 +722,15 @@ msgid ""
 "%s\n"
 "doesn't look like a tar archive."
 msgstr ""
+"嗯,...\n"
 "%s\n"
 "不是一个 tar 归档文件。"
 
 msgid " undelfs: error "
-msgstr " undelfs：错误 "
+msgstr "undelfs：错误 "
 
 msgid " not enough memory "
-msgstr " 内存不足 "
+msgstr "内存不足 "
 
 msgid " while allocating block buffer "
 msgstr " 当分配块缓冲时 "
@@ -811,7 +794,7 @@ msgid " You have to chdir to extract files first "
 msgstr " 您必须先更改目录来解开文件 "
 
 msgid " while iterating over blocks "
-msgstr " "
+msgstr "正当遍历块时 "
 
 msgid "Cannot parse:"
 msgstr "无法解析："
@@ -841,7 +824,7 @@ msgid "Set &all"
 msgstr "全部设置(&A)"
 
 msgid "owner"
-msgstr "所有者"
+msgstr "属主"
 
 msgid "group"
 msgstr "群组"
@@ -860,7 +843,7 @@ msgstr "模式"
 
 #, c-format
 msgid "%6d of %d"
-msgstr ""
+msgstr "%6d / %d"
 
 msgid " Chown advanced command "
 msgstr " Chown 高级命令 "
@@ -884,13 +867,11 @@ msgstr ""
 msgid "Displays the current version"
 msgstr "显示当前版本"
 
-#, fuzzy
 msgid "Print data directory"
-msgstr "目录"
+msgstr "打印数据目录"
 
-#, fuzzy
 msgid "Print last working directory to specified file"
-msgstr "在程序退出时打印工作目录"
+msgstr "将工作目录打印到指定文件"
 
 msgid "Enables subshell support (default)"
 msgstr "启用子 shell 支持(默认)"
@@ -902,10 +883,10 @@ msgid "Log ftp dialog to specified file"
 msgstr "记录 ftp 对话到指定的文件"
 
 msgid "Set debug level"
-msgstr ""
+msgstr "设置调试级别"
 
 msgid "Launches the file viewer on a file"
-msgstr "在文件上使用文件查看器"
+msgstr "在文件上启动文件查看器"
 
 msgid "Edits one file"
 msgstr "编辑一个文件"
@@ -914,23 +895,22 @@ msgid "Forces xterm features"
 msgstr "强制使用 xterm 特性"
 
 msgid "Disable mouse support in text version"
-msgstr "在文字版本中禁用鼠标支持"
+msgstr "在文本模式下禁用鼠标支持"
 
 msgid "Tries to use termcap instead of terminfo"
 msgstr "尝试使用 termcap 而不是 terminfo"
 
 msgid "To run on slow terminals"
-msgstr "要在慢速的终端上运行"
+msgstr "在慢速终端上运行"
 
 msgid "Use stickchars to draw"
-msgstr ""
+msgstr "用线条字符绘制"
 
 msgid "Resets soft keys on HP terminals"
 msgstr "在 HP 终端上复位软键"
 
-#, fuzzy
 msgid "Load definitions of key bindings from specified file"
-msgstr "记录 ftp 对话到指定的文件"
+msgstr "从指定的文件加载键绑定定义"
 
 msgid "Requests to run in black and white"
 msgstr "请求运行在黑白模式"
@@ -942,10 +922,9 @@ msgid "Specifies a color configuration"
 msgstr "指定颜色配置"
 
 msgid "Show mc with specified skin"
-msgstr ""
+msgstr "用指定的皮肤显示MC"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -965,19 +944,13 @@ msgstr ""
 "{FORE} 和 {BACK} 可被忽略，默认值将被使用\n"
 "\n"
 "关键字：\n"
-"  全局：       errors, reverse, gauge, input\n"
+"  全局：       errors, reverse, gauge, input, viewunderline\n"
 "  文件显示：   normal, selected, marked, markselect\n"
-"  对话框：     dnormal, dfocus, dhotnormal, dhotfocus\n"
-"  菜单：       menu, menuhot, menusel, menuhotsel\n"
-"  帮助：       helpnormal, helpitalic, helplink, helpslink\n"
-"  文件类型：   directory, executable, link, stalelink, device, special, "
-"core\n"
-"\n"
-"颜色：\n"
-"  black, gray, red, brightred, green, brightgreen, brown,\n"
-"  yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"  brightcyan, lightgray and white\n"
-"\n"
+"  对话框：     dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"  errdhotfocus\n"
+"  菜单：       menu, menuhot, menusel, menuhotsel，menuinactive\n"
+" 编辑器: editnormal, editbold, editmarked, editwhitespace,\n"
+" editlinestate\n"
 
 #. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
@@ -989,20 +962,26 @@ msgid ""
 "   brightcyan, lightgray and white\n"
 "\n"
 msgstr ""
+"帮助：       helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"  \n"
+"\n"
+"颜色：\n"
+"  black, gray, red, brightred, green, brightgreen, brown,\n"
+"  yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"  brightcyan, lightgray 和 white\n"
+"\n"
 
-#, fuzzy
 msgid "Color options"
-msgstr "配置选项"
+msgstr "颜色选项"
 
 msgid "+number"
-msgstr ""
+msgstr "+数字"
 
-#, fuzzy
 msgid "[this_dir] [other_panel_dir]"
-msgstr "[flags] [this_dir] [other_panel_dir]\n"
+msgstr "[this_dir] [other_panel_dir]"
 
 msgid "Set initial line number for the internal editor"
-msgstr ""
+msgstr "设置内部编辑器的初始行号"
 
 msgid ""
 "\n"
@@ -1017,19 +996,17 @@ msgstr ""
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-#, fuzzy
 msgid "Main options"
-msgstr " 面板选项 "
+msgstr "主要选项"
 
-#, fuzzy
 msgid "Terminal options"
-msgstr " 其它选项 "
+msgstr "终端选项 "
 
 msgid " Background process error "
-msgstr " 后台进程错误 "
+msgstr "后台进程错误 "
 
 msgid " Unknown error in child "
-msgstr " 子进程未知错误 "
+msgstr "子进程未知错误 "
 
 msgid " Child died unexpectedly "
 msgstr " 子进程异常退出 "
@@ -1040,19 +1017,19 @@ msgstr " 后台协议错误 "
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
-msgstr " 后台进程发来一个请求，参数过多无法处理。 \n"
+msgstr " 后台进程请求更多的参数，无法处理。 \n"
 
 msgid "&Full file list"
 msgstr "完整文件列表(&F)"
 
 msgid "&Brief file list"
-msgstr "简单文件列表(&B)"
+msgstr "简要文件列表(&B)"
 
 msgid "&Long file list"
 msgstr "长文件列表(&L)"
 
 msgid "&User defined:"
-msgstr "用户定义(&U)："
+msgstr "用户自定义(&U)："
 
 msgid "Listing mode"
 msgstr "列表模式"
@@ -1066,41 +1043,43 @@ msgstr "确认(&O)"
 msgid "&Reverse"
 msgstr "反向(&R)"
 
-#, fuzzy
 msgid "Case sensi&tive"
 msgstr "大小写敏感(&T)"
 
 msgid "Executable &first"
-msgstr ""
+msgstr "可执行文件优先(&f)"
 
 msgid "Sort order"
 msgstr "排序"
 
 msgid " Confirmation "
-msgstr " 确认 "
+msgstr "确认 "
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
-msgstr " 删除时确认(&D) "
-
-msgid " confirm &Exit "
-msgstr " 退出时确认(&E) "
-
-msgid " confirm e&Xecute "
-msgstr " 执行时确认(&X) "
-
-msgid " confirm o&Verwrite "
-msgstr " 覆盖时确认(&V) "
-
-msgid " confirm &Delete "
-msgstr " 删除时确认(&D) "
+msgstr "Confirmation|删除目录活动表(&D)"
 
 #, fuzzy
+msgid " confirm &Exit "
+msgstr "确认 "
+
+#, fuzzy
+msgid " confirm e&Xecute "
+msgstr " 确认替换 "
+
+#, fuzzy
+msgid " confirm o&Verwrite "
+msgstr "Confirmation|覆盖时(&V) "
+
+#, fuzzy
+msgid " confirm &Delete "
+msgstr " 确认替换 "
+
 msgid "UTF-8 output"
-msgstr "8 位输出"
+msgstr "UTF-8输出"
 
 msgid "Full 8 bits output"
-msgstr "8 位输出"
+msgstr "全8位输出"
 
 msgid "ISO 8859-1"
 msgstr "ISO 8859-1"
@@ -1109,10 +1088,10 @@ msgid "7 bits"
 msgstr "7 位"
 
 msgid "F&ull 8 bits input"
-msgstr "8 位输入(&U)"
+msgstr "全8位输入(&U)"
 
 msgid " Display bits "
-msgstr " 显示位 "
+msgstr "显示位 "
 
 msgid "Other 8 bit"
 msgstr "其它 8 位"
@@ -1123,16 +1102,14 @@ msgstr "输入/显示代码页："
 msgid "&Select"
 msgstr "选择(&S)"
 
-#, fuzzy
 msgid "Use passive mode over pro&xy"
-msgstr "保存模式(&S)..."
+msgstr "通过代理时使用被动模式(&X)"
 
-#, fuzzy
 msgid "Use &passive mode"
-msgstr "保存模式(&S)..."
+msgstr "使用被动模式(&P)"
 
 msgid "&Use ~/.netrc"
-msgstr ""
+msgstr "使用~/.netrc(&U)"
 
 msgid "&Always use ftp proxy"
 msgstr "总是使用 ftp 代理(&A)"
@@ -1150,13 +1127,13 @@ msgid "Timeout for freeing VFSs:"
 msgstr "释放 VFS 的超时值："
 
 msgid " Virtual File System Setting "
-msgstr " 虚拟文件系统设置 "
+msgstr "虚拟文件系统设置 "
 
 msgid "cd"
-msgstr "cd"
+msgstr "切换目录"
 
 msgid "Quick cd"
-msgstr "快速 cd"
+msgstr "快速切换目录"
 
 msgid "Symbolic link filename:"
 msgstr "符号链接文件名："
@@ -1177,7 +1154,7 @@ msgid "&Stop"
 msgstr "停止(&S)"
 
 msgid "&Resume"
-msgstr "继续(&R)"
+msgstr "恢复(&R)"
 
 msgid "&Kill"
 msgstr "杀死(&K)"
@@ -1196,7 +1173,7 @@ msgid "Password for \\\\%s\\%s"
 msgstr "\\\\%s\\%s 的口令"
 
 msgid "7-bit ASCII"
-msgstr ""
+msgstr "7-bit ASCII"
 
 #, c-format
 msgid "Cannot translate from %s to %s"
@@ -1239,10 +1216,10 @@ msgid "set user ID on execution"
 msgstr "执行时设置用户 ID"
 
 msgid "C&lear marked"
-msgstr "清除标记位(&L)"
+msgstr "清除已标记的(&L)"
 
 msgid "S&et marked"
-msgstr "设置标记位(&E)"
+msgstr "设置已标记的(&E)"
 
 msgid "&Marked all"
 msgstr "全部标记(&M)"
@@ -1260,13 +1237,13 @@ msgid "Group name"
 msgstr "群组名"
 
 msgid "Use SPACE to change"
-msgstr "使用空格键来修改"
+msgstr "使用空格键修改"
 
 msgid "an option, ARROW KEYS"
 msgstr "选项，光标键"
 
 msgid "to move between options"
-msgstr "移到不同选项，"
+msgstr "移到不同选项"
 
 msgid "and T or INS to mark"
 msgstr "T 或 INS 做标记"
@@ -1287,22 +1264,22 @@ msgid "Set &groups"
 msgstr "设置群组(&G)"
 
 msgid " Name "
-msgstr " 名字 "
+msgstr "名字 "
 
 msgid " Owner name "
-msgstr " 所有者名字 "
+msgstr "所有者名字 "
 
 msgid " Group name "
-msgstr " 群组名字 "
+msgstr "群组名字 "
 
 msgid " Size "
-msgstr " 大小 "
+msgstr "大小 "
 
 msgid " User name "
-msgstr " 用户名 "
+msgstr "用户名 "
 
 msgid " Chown command "
-msgstr " Chown 命令 "
+msgstr "Chown 命令 "
 
 msgid "<Unknown user>"
 msgstr "<未知用户>"
@@ -1326,42 +1303,40 @@ msgid " Filtered view "
 msgstr " 过滤视图 "
 
 msgid " Filter command and arguments:"
-msgstr " 过滤命令和参数："
+msgstr "过滤命令和参数："
 
 msgid "Create a new Directory"
 msgstr "创建新目录"
 
 msgid " Enter directory name:"
-msgstr " 输入目录名字："
+msgstr "输入目录名字："
 
 msgid " Filter "
-msgstr " 过滤 "
+msgstr "过滤 "
 
 msgid " Set expression for filtering filenames"
-msgstr " 设置过滤文件名的表达式 "
+msgstr "设置过滤文件名的表达式 "
 
 msgid "&Using shell patterns"
 msgstr "使用 shell 模式(&U)"
 
-#, fuzzy
 msgid "&Case sensitive"
-msgstr "大小写敏感(&T)"
+msgstr "大小写敏感(&C)"
 
-#, fuzzy
 msgid "&Files only"
-msgstr "仅大小(&S)"
+msgstr "仅文件(&F)"
 
 msgid " Select "
-msgstr " 选择 "
+msgstr "选择 "
 
 msgid " Unselect "
-msgstr " 取消选择 "
+msgstr "取消选择 "
 
 msgid "Extension file edit"
 msgstr "扩展文件编辑"
 
 msgid " Which extension file you want to edit? "
-msgstr " 您要编辑哪个扩展文件？ "
+msgstr "您要编辑哪个扩展文件？ "
 
 msgid "&User"
 msgstr "用户(&U)"
@@ -1370,26 +1345,25 @@ msgid "&System Wide"
 msgstr "系统范围(&S)"
 
 msgid " Menu edit "
-msgstr " 菜单编辑 "
+msgstr "菜单编辑 "
 
 msgid " Which menu file do you want to edit? "
-msgstr " 您要编辑哪个菜单文件？ "
+msgstr "您要编辑哪个菜单文件？ "
 
 msgid "&Local"
 msgstr "本地(&L)"
 
 msgid "Highlighting groups file edit"
-msgstr ""
+msgstr "突出显示组文件编辑"
 
-#, fuzzy
 msgid " Which highlighting file you want to edit? "
-msgstr " 您要编辑哪个扩展文件？ "
+msgstr "您要编辑哪个突出显示的文件？ "
 
 msgid " Compare directories "
-msgstr " 比较目录 "
+msgstr "比较目录 "
 
 msgid " Select compare method: "
-msgstr " 选择比较方法："
+msgstr "选择比较方法："
 
 msgid "&Quick"
 msgstr "快速(&Q)"
@@ -1398,47 +1372,47 @@ msgid "&Size only"
 msgstr "仅大小(&S)"
 
 msgid "&Thorough"
-msgstr "仔细(&T)"
+msgstr "全面(&T)"
 
 msgid " Both panels should be in the listing mode to use this command "
-msgstr " 要使用该命令，两个面板必需都是列表视图模式 "
+msgstr "要使用该命令，两个面板必需都是列表视图模式 "
 
 msgid ""
 " Not an xterm or Linux console; \n"
 " the panels cannot be toggled. "
 msgstr ""
-" 不是一个 xterm 或 Linux 控制台；\n"
-" 面板无法切换。"
+"不是一个 xterm 或 Linux 控制台；\n"
+"面板无法切换。"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Link %s to:"
-msgstr " 链接：%s "
+msgstr "链接%s到："
 
 msgid " Link "
-msgstr " 链接 "
+msgstr "链接 "
 
 #, c-format
 msgid " link: %s "
-msgstr " 链接：%s "
+msgstr "链接：%s "
 
 #, c-format
 msgid " symlink: %s "
-msgstr " 符号链接：%s "
+msgstr "符号链接：%s "
 
 #, c-format
 msgid " Symlink `%s' points to: "
-msgstr " 符号链接“%s”指向："
+msgstr "符号链接“%s”指向："
 
 msgid " Edit symlink "
-msgstr " 编辑符号链接 "
+msgstr "编辑符号链接 "
 
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
-msgstr " 编辑符号链接，无法删除 %s：%s "
+msgstr "编辑符号链接，无法删除 %s：%s "
 
 #, c-format
 msgid " edit symlink: %s "
-msgstr " 编辑符号链接：%s "
+msgstr "编辑符号链接：%s "
 
 #, c-format
 msgid "`%s' is not a symbolic link"
@@ -1457,88 +1431,84 @@ msgstr " 链接到远程机器 "
 msgid " FTP to machine "
 msgstr " FTP 到机器 "
 
-#, fuzzy
 msgid " Shell link to machine "
-msgstr " SMB 链接到机器 "
+msgstr "Shell链接到机器 "
 
 msgid " SMB link to machine "
 msgstr " SMB 链接到机器 "
 
 msgid " Undelete files on an ext2 file system "
-msgstr " 反删除 ext2 文件系统上的文件 "
+msgstr "反删除 ext2 文件系统上的文件 "
 
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
 msgstr ""
-" 输入要反删除的文件所在的设备(不带 /dev/)\n"
+"输入要反删除的文件所在的设备(不带 /dev/)\n"
 "   (F1 获取详细信息)"
 
 msgid " Setup "
-msgstr " 设置 "
+msgstr "设置 "
 
-#, fuzzy, c-format
+#, c-format
 msgid " Setup saved to ~/%s"
-msgstr " 设置已保存到 ~/"
+msgstr "设置已保存到 ~/%s"
 
 #, c-format
 msgid ""
 " Cannot chdir to \"%s\" \n"
 " %s "
 msgstr ""
-" 无法进入目录“%s”\n"
+"无法进入目录“%s”\n"
 " %s "
 
 msgid " Cannot execute commands on non-local filesystems"
-msgstr " 您无法在非本地文件系统上执行命令"
+msgstr "您无法在非本地文件系统上执行命令"
 
 msgid " The shell is already running a command "
-msgstr " Shell 正在运行一个命令 "
+msgstr "Shell 正在运行一个命令 "
 
-#, fuzzy
 msgid "Cannot read directory contents"
-msgstr "无法改变目录"
+msgstr "无法读取目录内容"
 
-#, fuzzy
 msgid " Choose syntax highlighting "
-msgstr "语法突出显示(&X)"
+msgstr "选择语法突出显示"
 
-#, fuzzy
 msgid "< Auto >"
-msgstr " 关于 "
+msgstr "<自动>"
 
 msgid "< Reload Current Syntax >"
-msgstr ""
+msgstr "<重新加载当前语法>"
 
-#, fuzzy, c-format
+#, c-format
 msgid " Cannot open %s for reading "
-msgstr " 打开管道读取时失败："
+msgstr "不能打开管道%s读"
 
 msgid "Error"
 msgstr "错误"
 
-#, fuzzy, c-format
+#, c-format
 msgid " Error reading from pipe: %s "
-msgstr " 读取管道时发生错误："
+msgstr "读取管道时发生错误：%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid " Cannot open pipe for reading: %s "
-msgstr " 打开管道读取时失败："
+msgstr "不能打开管道读取：%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid " Cannot get size/permissions for %s "
-msgstr " 无法获取文件的大小和权限信息："
+msgstr "无法获取文件%s的大小和权限信息"
 
-#, fuzzy, c-format
+#, c-format
 msgid " %s is not a regular file "
-msgstr " 无法查看：不是常规文件 "
+msgstr "%s不是常规文件 "
 
-#, fuzzy, c-format
+#, c-format
 msgid " File %s is too large "
-msgstr " 文件太大："
+msgstr "文件%s太大"
 
 msgid " About "
-msgstr " 关于 "
+msgstr "关于 "
 
 msgid ""
 "\n"
@@ -1550,24 +1520,24 @@ msgid ""
 "           for the Midnight Commander.\n"
 msgstr ""
 "\n"
-"        Cooledit   v3.11.5\n"
+"Cooledit  v3.11.5\n"
 "\n"
 " 版权所有 (C) 1996 自由软件基金会(FSF)\n"
 "\n"
-"     为 Midnight Commander 开发的\n"
+"为 Midnight Commander 开发的\n"
 "       对用户友好的文字编辑器。\n"
 
 msgid "Macro recursion is too deep"
-msgstr ""
+msgstr "宏递归层次太深"
 
 msgid "Search"
 msgstr "搜索"
 
 msgid " File has hard-links. Detach before saving? "
-msgstr ""
+msgstr "文件有硬链接，保存文件前分离该链接吗？"
 
 msgid "The file has been modified in the meantime. Save anyway?"
-msgstr ""
+msgstr "文件同时已经被修改。仍然保存吗？"
 
 msgid " Error writing to pipe: "
 msgstr " 写入管道时发生错误："
@@ -1575,52 +1545,48 @@ msgstr " 写入管道时发生错误："
 msgid " Cannot open pipe for writing: "
 msgstr " 试图打开管道写入时失败："
 
-#, fuzzy, c-format
+#, c-format
 msgid " Cannot open file for writing: %s "
-msgstr " 试图打开管道写入时失败："
+msgstr "无法打开文件进行写操作：%s"
 
-#, fuzzy
 msgid "&Quick save"
-msgstr "快速保存"
+msgstr "快速保存(&Q)"
 
-#, fuzzy
 msgid "&Safe save"
-msgstr "安全保存"
+msgstr "安全保存(&S)"
 
 msgid "&Do backups with following extension:"
-msgstr ""
+msgstr "使用下面后缀备份文件(&B)："
 
 msgid "Check &POSIX new line"
-msgstr ""
+msgstr "检查&POSIX换行"
 
 msgid " Edit Save Mode "
 msgstr " 编辑保存模式 "
 
 msgid "The file you are saving is not finished with a newline"
-msgstr ""
+msgstr "您要保存的文件没有以换行符结束"
 
-#, fuzzy
 msgid "C&ontinue"
-msgstr "继续"
+msgstr "继续(&O)"
 
 msgid "&Do not change"
-msgstr ""
+msgstr "不修改(&D)"
 
 msgid "&Unix format (LF)"
-msgstr ""
+msgstr "&Unix格式(LF)"
 
 msgid "&Windows/DOS format (CR LF)"
-msgstr ""
+msgstr "&Windows/DOS格式 (CR LF)"
 
 msgid "&Macintosh format (CR)"
-msgstr ""
+msgstr "&Macintosh格式(CR)"
 
 msgid "Change line breaks to:"
-msgstr ""
+msgstr "更改换行符为："
 
-#, fuzzy
 msgid " Enter file name: "
-msgstr " 输入行号："
+msgstr "输入文件名："
 
 msgid " Save As "
 msgstr " 保存为"
@@ -1628,9 +1594,8 @@ msgstr " 保存为"
 msgid " A file already exists with this name. "
 msgstr " 同名文件已存在。"
 
-#, fuzzy
 msgid "&Overwrite"
-msgstr "覆盖"
+msgstr "覆盖(&O)"
 
 msgid " Cannot save file. "
 msgstr " 保存文件时发生错误。"
@@ -1675,13 +1640,11 @@ msgstr ""
 " 当前文字被修改但没有保存。\n"
 " 选择继续将丢失这些修改。"
 
-#, fuzzy
 msgid "Syntax file edit"
-msgstr "菜单文件编辑(&M)"
+msgstr "语法文件编辑"
 
-#, fuzzy
 msgid " Which syntax file you want to edit? "
-msgstr " 您要编辑哪个扩展文件？ "
+msgstr "您要编辑哪个语法文件？ "
 
 msgid " Load "
 msgstr " 加载 "
@@ -1689,9 +1652,8 @@ msgstr " 加载 "
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " 块过大，您可能无法撤消这个动作。"
 
-#, fuzzy
 msgid "Replace"
-msgstr "替换(&R)"
+msgstr "替换"
 
 msgid " Replace "
 msgstr " 替换 "
@@ -1706,16 +1668,14 @@ msgstr "退出"
 msgid " File was modified, Save with exit? "
 msgstr " 文件被修改，保存并退出？"
 
-#, fuzzy
 msgid "&Cancel quit"
-msgstr "取消退出"
+msgstr "取消退出(&C)"
 
-#, fuzzy
 msgid " Error "
 msgstr "错误"
 
 msgid " This function is not implemented. "
-msgstr ""
+msgstr "该功能尚未实现"
 
 msgid " Copy to clipboard "
 msgstr " 复制到剪贴板 "
@@ -1763,19 +1723,16 @@ msgid " Sort returned non-zero: "
 msgstr " Sort 返回非零值："
 
 msgid "Paste output of external command"
-msgstr ""
+msgstr "粘贴外部命令的输出"
 
-#, fuzzy
 msgid "Enter shell command(s):"
-msgstr " 输入命令标签："
+msgstr "输入Shell命令："
 
-#, fuzzy
 msgid "External command"
-msgstr "其它命令"
+msgstr "外部命令"
 
-#, fuzzy
 msgid "Cannot execute command"
-msgstr " 试图执行 sort 命令时发生错误 "
+msgstr "不能执行命令"
 
 msgid "Error creating script:"
 msgstr " 创建脚本时发生错误："
@@ -1817,15 +1774,13 @@ msgid " Execute Macro "
 msgstr " 执行宏 "
 
 msgid "All charsets"
-msgstr ""
+msgstr "所有字体集"
 
-#, fuzzy
 msgid "&Whole words"
 msgstr "仅整词(&W)"
 
-#, fuzzy
 msgid "In se&lection"
-msgstr "反转选择(&T)         M-*"
+msgstr "在选择区域(&L)"
 
 msgid "&Backwards"
 msgstr "向上(&B)"
@@ -1839,9 +1794,8 @@ msgstr " 输入替换字符串："
 msgid " Enter search string:"
 msgstr " 输入查找字符串："
 
-#, fuzzy
 msgid "&Find all"
-msgstr "搜索文件"
+msgstr "查找全部(&F)"
 
 msgid "Cancel"
 msgstr "取消"
@@ -1870,253 +1824,204 @@ msgid ""
 "User: %s\n"
 "Process ID: %d"
 msgstr ""
+"文件\"%s\"正在被编辑\n"
+"用户：%s\n"
+"进程号：%d"
 
 msgid "File locked"
-msgstr ""
+msgstr "文件被锁定"
 
 msgid "&Grab lock"
-msgstr ""
+msgstr "获取锁(&G)"
 
 msgid "&Ignore lock"
-msgstr ""
+msgstr "忽略锁(&I)"
 
 msgid "&Open file..."
 msgstr "打开文件(&O)..."
 
-#, fuzzy
 msgid "&New"
-msgstr "名字(&N)"
+msgstr "新建(&N)"
 
-#, fuzzy
 msgid "Save &as..."
-msgstr "保存设置(&S)"
+msgstr "保存为(&a)...l"
 
-#, fuzzy
 msgid "&Insert file..."
-msgstr "插入文件(&I)...   F15"
+msgstr "插入文件(&I)..."
 
-#, fuzzy
 msgid "Cop&y to file..."
-msgstr "复制到文件(&F)... C-f"
+msgstr "复制到文件(&Y)..."
 
-#, fuzzy
 msgid "&User menu..."
-msgstr "用户菜单(&U)...   F11"
+msgstr "用户菜单(&U)..."
 
-#, fuzzy
 msgid "A&bout..."
-msgstr "布局(&L)..."
+msgstr "关于(&B)..."
 
 msgid "&Quit"
 msgstr "退出(&Q)"
 
 msgid "&Undo"
-msgstr ""
+msgstr "撤消(&U)"
 
-#, fuzzy
 msgid "&Toggle ins/overw"
-msgstr "翻转插入/覆盖(&I) Ins"
+msgstr "翻转插入/覆盖(&T)"
 
-#, fuzzy
 msgid "To&ggle mark"
-msgstr "清除标记位(&L)"
+msgstr "翻转标记(&G)"
 
 msgid "&Mark columns"
-msgstr ""
+msgstr "按列标记(&M)"
 
-#, fuzzy
 msgid "Mark &all"
-msgstr "全部标记(&M)"
+msgstr "全部标记(&A)"
 
 msgid "Unmar&k"
-msgstr ""
+msgstr "取消标记(&K)"
 
-#, fuzzy
 msgid "Cop&y"
-msgstr "复制"
+msgstr "复制(&Y)"
 
-#, fuzzy
 msgid "Mo&ve"
-msgstr "移动"
+msgstr "移动(&V)"
 
 msgid "&Delete"
 msgstr "删除(&D)"
 
-#, fuzzy
 msgid "Co&py to clipfile"
-msgstr "复制到文件(&F)...    "
+msgstr "复制到剪切板文件(&P)"
 
-#, fuzzy
 msgid "&Cut to clipfile"
-msgstr "转到行(&G)...           M-l"
+msgstr "删除到剪切板文件(&C)"
 
-#, fuzzy
 msgid "Pa&ste from clipfile"
-msgstr "转到行(&G)...           M-l"
+msgstr "从剪切板文件粘贴(&S)"
 
 msgid "&Beginning"
-msgstr ""
+msgstr "起始(&B)"
 
-#, fuzzy
 msgid "&End"
-msgstr "Inode(&I)"
+msgstr "末尾(&E)"
 
-#, fuzzy
 msgid "&Search..."
-msgstr "搜索"
+msgstr "搜索(&S)..."
 
-#, fuzzy
 msgid "Search &again"
-msgstr "再次查找(&A)      F17"
+msgstr "重新搜索(&S)..."
 
-#, fuzzy
 msgid "&Replace..."
-msgstr "替换(&R)"
+msgstr "替换(&R)..."
 
-#, fuzzy
 msgid "&Toggle bookmark"
-msgstr "翻转标记(&T)       F3"
+msgstr "翻转书签(&T)"
 
-#, fuzzy
 msgid "&Next bookmark"
-msgstr "设置标记位(&E)"
+msgstr "下一个书签(&N)"
 
-#, fuzzy
 msgid "&Prev bookmark"
-msgstr "排序(&T)...             M-t"
+msgstr "上一个书签(&P)"
 
-#, fuzzy
 msgid "&Flush bookmark"
-msgstr "邮寄(&M)...                 "
+msgstr "清除书签(&F)       "
 
-#, fuzzy
 msgid "&Go to line..."
-msgstr " 转到行 "
+msgstr "转到行(&G)"
 
-#, fuzzy
 msgid "&Toggle line state"
-msgstr "翻转标记(&T)       F3"
+msgstr "翻转行状态(&T)"
 
-#, fuzzy
 msgid "Go to matching &bracket"
-msgstr "转到对应的括号(&B)      M-b"
+msgstr "转到匹配的括号(&B)"
 
-#, fuzzy
 msgid "&Find declaration"
-msgstr "应用补丁后查找被拒绝的补丁"
+msgstr "查找申明(&F)"
 
-#, fuzzy
 msgid "Back from &declaration"
-msgstr "应用补丁后查找被拒绝的补丁"
+msgstr "向后查找申明(&D)"
 
-#, fuzzy
 msgid "For&ward to declaration"
-msgstr "应用补丁后查找被拒绝的补丁"
+msgstr "向前查找申明(&W)"
 
-#, fuzzy
 msgid "Encod&ing..."
-msgstr "排序(&T)...             M-t"
+msgstr "编码(&I)..."
 
-#, fuzzy
 msgid "&Refresh screen"
-msgstr "刷新屏幕(&R)            C-l"
+msgstr "刷新屏幕(&R) "
 
-#, fuzzy
 msgid "&Start record macro"
-msgstr "开始记录宏(&S)          C-r"
+msgstr "开始记录宏(&S) "
 
-#, fuzzy
 msgid "Finis&h record macro..."
-msgstr "完成记录宏(&F)...       C-r"
+msgstr "结束记录宏(&H)..."
 
-#, fuzzy
 msgid "&Execute macro..."
-msgstr "执行宏(&E)...      C-a, KEY"
+msgstr "执行宏(&E)..."
 
-#, fuzzy
 msgid "Delete macr&o..."
-msgstr " 删除宏 "
+msgstr "删除宏(&O),,,"
 
-#, fuzzy
 msgid "'ispell' s&pell check"
-msgstr "“ispell”拼写检查(&P)  C-p"
+msgstr "“ispell”拼写检查(&P)"
 
-#, fuzzy
 msgid "&Mail..."
-msgstr "过滤(&F)..."
+msgstr "发送邮件(&M)..."
 
-#, fuzzy
 msgid "Insert &literal..."
-msgstr "字面插入(&L)...         C-q"
+msgstr "插入文字(&L)..."
 
-#, fuzzy
 msgid "Insert &date/time"
-msgstr "插入日期/时间(&D)          "
+msgstr "插入日期/时间(&D)"
 
-#, fuzzy
 msgid "&Format paragraph"
-msgstr "格式化段落(&A)          M-p"
+msgstr "格式化段落(&F)"
 
-#, fuzzy
 msgid "&Sort..."
 msgstr "排序(&S)..."
 
 msgid "&Paste output of..."
-msgstr ""
+msgstr "粘贴输出(&P)..."
 
-#, fuzzy
 msgid "&External formatter"
-msgstr "外部格式化工具(&X)      F19"
+msgstr "外部格式化工具(&E)"
 
 msgid "&General...  "
 msgstr "常规(&G)..."
 
-#, fuzzy
 msgid "Save &mode..."
-msgstr "保存模式(&S)..."
+msgstr "保存模式(&M)..."
 
-#, fuzzy
 msgid "Learn &keys..."
 msgstr "学习按键(&K)..."
 
-#, fuzzy
 msgid "Syntax &highlighting..."
-msgstr "语法突出显示(&X)"
+msgstr "语法突出显示(&h)..."
 
-#, fuzzy
 msgid "S&yntax file"
-msgstr "菜单文件编辑(&M)"
+msgstr "语法文件(&Y)"
 
-#, fuzzy
 msgid "&Menu file"
-msgstr "菜单文件编辑(&M)"
+msgstr "菜单文件(&M)"
 
 msgid "&Save setup"
 msgstr "保存设置(&S)"
 
-#, fuzzy
 msgid "&File"
-msgstr "文件"
+msgstr "文件(&F)"
 
-#, fuzzy
 msgid "&Edit"
-msgstr "编辑"
+msgstr "编辑(&E)"
 
-#, fuzzy
 msgid "&Search"
-msgstr "搜索"
+msgstr "搜索(&S)"
 
-#, fuzzy
 msgid "&Command"
-msgstr "命令"
+msgstr "命令(&C)"
 
-#, fuzzy
 msgid "For&mat"
-msgstr "格式化"
+msgstr "格式化(&r)"
 
-#, fuzzy
 msgid "&Options"
-msgstr " 选项 (&O) "
+msgstr "选项(&O) "
 
 msgid "None"
 msgstr "无"
@@ -2131,24 +2036,22 @@ msgid "Word wrap line length: "
 msgstr "换行位置："
 
 msgid "Cursor beyond end of line"
-msgstr ""
+msgstr "光标超出行末尾"
 
-#, fuzzy
 msgid "Pers&istent selection"
-msgstr "反转选择(&T)         M-*"
+msgstr "永久选择(&I)"
 
 msgid "Synta&x highlighting"
 msgstr "语法突出显示(&X)"
 
 msgid "Visible tabs"
-msgstr ""
+msgstr "制表符可见"
 
 msgid "Visible trailing spaces"
-msgstr ""
+msgstr "可见的后缀空白"
 
-#, fuzzy
 msgid "Save file &position"
-msgstr " 保存文件 "
+msgstr "保存文件位置(&P)"
 
 msgid "Confir&m before saving"
 msgstr "保存前确认(&M)"
@@ -2175,34 +2078,34 @@ msgid " Editor options "
 msgstr " 编辑器选项 "
 
 msgid "ButtonBar|Help"
-msgstr ""
+msgstr "ButtonBar|帮助"
 
 msgid "ButtonBar|Save"
-msgstr ""
+msgstr "ButtonBar|保存"
 
 msgid "ButtonBar|Mark"
-msgstr ""
+msgstr "ButtonBar|标记"
 
 msgid "ButtonBar|Replac"
-msgstr ""
+msgstr "ButtonBar|替换"
 
 msgid "ButtonBar|Copy"
-msgstr ""
+msgstr "ButtonBar|复制"
 
 msgid "ButtonBar|Move"
-msgstr ""
+msgstr "ButtonBar|移动"
 
 msgid "ButtonBar|Search"
-msgstr ""
+msgstr "ButtonBar|搜索"
 
 msgid "ButtonBar|Delete"
-msgstr ""
+msgstr "ButtonBar|删除"
 
 msgid "ButtonBar|PullDn"
-msgstr ""
+msgstr "ButtonBar|菜单"
 
 msgid "ButtonBar|Quit"
-msgstr ""
+msgstr "ButtonBar|退出"
 
 msgid " Load syntax file "
 msgstr " 载入语法文件 "
@@ -2248,9 +2151,9 @@ msgstr ""
 msgid " Parameter "
 msgstr " 参数 "
 
-#, fuzzy, c-format
+#, c-format
 msgid " %s%s file error"
-msgstr " 文件错误 "
+msgstr " %s%s文件错误 "
 
 #, c-format
 msgid ""
@@ -2258,10 +2161,12 @@ msgid ""
 "the installation failed.  Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
+"文件%smc.ext的格式在3.0版本时已经被修改。似乎安装有错误。请获取新的Midnight "
+"Commander软件包。"
 
-#, fuzzy, c-format
+#, c-format
 msgid " ~/%s file error "
-msgstr " 文件错误 "
+msgstr " ~/%s文件错误 "
 
 #, c-format
 msgid ""
@@ -2269,15 +2174,17 @@ msgid ""
 "want to copy it from %smc.ext or use that file as an example of how to write "
 "it."
 msgstr ""
+"文件~/%s的格式在3.0版本时已经被修改。您可以从%smc.ext复制一个或将它作为编写该"
+"文件的样例。"
 
 msgid "DialogTitle|Copy"
-msgstr ""
+msgstr "DialogTitle|复制"
 
 msgid "DialogTitle|Move"
-msgstr ""
+msgstr "DialogTitle|移动"
 
 msgid "DialogTitle|Delete"
-msgstr ""
+msgstr "DialogTitle|删除"
 
 msgid " Cannot make the hardlink "
 msgstr " 无法创建硬链接 "
@@ -2326,13 +2233,17 @@ msgstr ""
 " 无法 stat 源文件“%s” \n"
 " %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " `%s' \n"
 " and \n"
 " `%s' \n"
 " are the same file "
-msgstr " “%s”和“%s”是同一个文件 "
+msgstr ""
+" `%s' \n"
+" 和 \n"
+" `%s' \n"
+" 是同一个文件 "
 
 #, c-format
 msgid ""
@@ -2510,13 +2421,17 @@ msgstr ""
 " 无法删除文件“%s” \n"
 " %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " `%s' \n"
 " and \n"
 " `%s' \n"
 " are the same directory "
-msgstr " “%s”和“%s”是同一个目录 "
+msgstr ""
+" `%s' \n"
+" 和 \n"
+" `%s' \n"
+" 是同一个目录"
 
 #, c-format
 msgid " Cannot overwrite directory \"%s\" %s "
@@ -2550,18 +2465,17 @@ msgstr ""
 " 无法删除目录“%s” \n"
 " %s "
 
-#, fuzzy
 msgid "Directory scanning"
-msgstr "目录路径"
+msgstr "扫描目录"
 
 msgid "FileOperation|Copy"
-msgstr ""
+msgstr "FileOperation|复制"
 
 msgid "FileOperation|Move"
-msgstr ""
+msgstr "FileOperation|移动"
 
 msgid "FileOperation|Delete"
-msgstr ""
+msgstr "FileOperation|删除"
 
 #, no-c-format
 msgid "%o %f \"%s\"%m"
@@ -2591,7 +2505,7 @@ msgstr " 至："
 
 #, c-format
 msgid "%s?"
-msgstr ""
+msgstr "%s?"
 
 msgid " Cannot operate on \"..\"! "
 msgstr " 无法操作“..”！ "
@@ -2626,9 +2540,9 @@ msgstr " 删除："
 msgid "Non&e"
 msgstr "无(&E)"
 
-#, c-format
+#, fuzzy, c-format
 msgid "ETA %d:%02d.%02d"
-msgstr "预计 %d:%02d.%02d"
+msgstr "%d:%02d.%02d"
 
 #, c-format
 msgid "%.2f MB/s"
@@ -2642,14 +2556,16 @@ msgstr "%.2f KB/s"
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
+#, fuzzy
 msgid "File"
-msgstr "文件"
+msgstr "文件(&F)"
 
+#, fuzzy
 msgid "Count"
-msgstr "计数"
+msgstr "账户"
 
 msgid "Bytes"
-msgstr "字节"
+msgstr ""
 
 msgid "Source"
 msgstr "源"
@@ -2660,23 +2576,22 @@ msgstr "目标"
 msgid "Deleting"
 msgstr "正在删除"
 
-#, fuzzy
 msgid "Target file already exists!"
-msgstr "目标文件“%s”已存在！"
+msgstr "目标文件已存在！"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Source date: %s, size %llu"
 msgstr "源日期：%s，大小 %llu"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Target date: %s, size %llu"
 msgstr "目标日期：%s，大小 %llu"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Source date: %s, size %u"
 msgstr "源日期：%s，大小 %u"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Target date: %s, size %u"
 msgstr "目标日期：%s，大小 %u"
 
@@ -2710,9 +2625,8 @@ msgstr "后台(&B)"
 msgid "&Stable Symlinks"
 msgstr "稳定符号链接(&S)"
 
-#, fuzzy
 msgid "di&Ve into subdir if exists"
-msgstr "如果有子目录则进入(&D)"
+msgstr "如果有子目录则进入(&V)"
 
 msgid "preserve &Attributes"
 msgstr "保留属性(&A)"
@@ -2723,11 +2637,9 @@ msgstr "跟随链接(&L)"
 msgid "to:"
 msgstr "至："
 
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid source pattern `%s'"
-msgstr ""
-"无效的源模式“%s”\n"
-" %s "
+msgstr "无效的源模式“%s”"
 
 msgid "&Suspend"
 msgstr "挂起(&S)"
@@ -2742,7 +2654,7 @@ msgid "&Again"
 msgstr "再次(&A)"
 
 msgid "Pane&lize"
-msgstr ""
+msgstr "面板化"
 
 msgid "&View - F3"
 msgstr "查看(&V) - F3"
@@ -2752,38 +2664,34 @@ msgstr "编辑(&E) - F4"
 
 #, c-format
 msgid "Found: %ld"
-msgstr ""
+msgstr "找到: %ld"
 
-#, fuzzy
 msgid " Malformed regular expression "
-msgstr "  不正确的正则表达式 "
+msgstr "不正确的正规表达式 "
 
-#, fuzzy
 msgid "Cas&e sensitive"
-msgstr "大小写敏感(&T)"
+msgstr "大小写敏感(&e)"
 
 msgid "&Find recursively"
-msgstr ""
+msgstr "递归查找(&F)"
 
 msgid "S&kip hidden"
-msgstr ""
+msgstr "跳过隐藏(&K)"
 
 msgid "&All charsets"
-msgstr ""
+msgstr "所有字符集(&A)"
 
-#, fuzzy
 msgid "Case sens&itive"
 msgstr "大小写敏感(&T)"
 
-#, fuzzy
 msgid "Re&gular expression"
-msgstr "正则表达式(&R)"
+msgstr "正规表达式(&R)"
 
 msgid "Fir&st hit"
-msgstr ""
+msgstr "第一个命中(&S)"
 
 msgid "All cha&rsets"
-msgstr ""
+msgstr "所有字符集"
 
 msgid "&Tree"
 msgstr "树(&T)"
@@ -2791,11 +2699,9 @@ msgstr "树(&T)"
 msgid "Find File"
 msgstr "搜索文件"
 
-#, fuzzy
 msgid "Content:"
 msgstr "内容："
 
-#, fuzzy
 msgid "File name:"
 msgstr "文件名："
 
@@ -2804,7 +2710,7 @@ msgstr "开始于："
 
 #, c-format
 msgid "Grepping in %s"
-msgstr ""
+msgstr "在%s中查找字符串"
 
 msgid "Finished"
 msgstr "完成"
@@ -2820,7 +2726,7 @@ msgid " Help file format error\n"
 msgstr " 帮助文件格式错误\n"
 
 msgid " Internal bug: Double start of link area "
-msgstr ""
+msgstr "内部缺陷：链接区域双向开始"
 
 #, c-format
 msgid " Cannot find node %s in help file "
@@ -2830,10 +2736,10 @@ msgid "Help"
 msgstr "帮助"
 
 msgid "ButtonBar|Index"
-msgstr ""
+msgstr "ButtonBar|索引"
 
 msgid "ButtonBar|Prev"
-msgstr ""
+msgstr "ButtonBar|前一个"
 
 msgid "&Move"
 msgstr "移动(&M)"
@@ -2859,9 +2765,8 @@ msgstr "上(&U)"
 msgid "&Add current"
 msgstr "添加当前(&A)"
 
-#, fuzzy
 msgid "&Refresh"
-msgstr "反向(&R)"
+msgstr "刷新(&R)"
 
 msgid "Fr&ee VFSs now"
 msgstr "释放 VFS(&E)"
@@ -2876,7 +2781,7 @@ msgid "Active VFS directories"
 msgstr "活动的 VFS 目录"
 
 msgid "Directory hotlist"
-msgstr ""
+msgstr "目录活动表"
 
 msgid " Directory path "
 msgstr " 目录路径 "
@@ -2889,7 +2794,7 @@ msgid "Moving %s"
 msgstr "正在移动 %s"
 
 msgid "New hotlist entry"
-msgstr ""
+msgstr "新建活动表条目"
 
 msgid "Directory label"
 msgstr "目录标签"
@@ -2898,7 +2803,7 @@ msgid "Directory path"
 msgstr "目录路径"
 
 msgid " New hotlist group "
-msgstr ""
+msgstr "新建活动表组"
 
 msgid "Name of new group"
 msgstr "新建组名"
@@ -2908,7 +2813,7 @@ msgid "Label for \"%s\":"
 msgstr "“%s”的标签："
 
 msgid " Add to hotlist "
-msgstr ""
+msgstr "添加到活动表"
 
 msgid " Remove: "
 msgstr " 删除： "
@@ -2917,6 +2822,8 @@ msgid ""
 "\n"
 " Are you sure you want to remove this entry?"
 msgstr ""
+"\n"
+"您确实要删除这个条目？"
 
 msgid ""
 "\n"
@@ -2931,12 +2838,12 @@ msgid " Top level group "
 msgstr " 顶级组 "
 
 msgid " Hotlist Load "
-msgstr ""
+msgstr "加载活动表"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
-msgstr " 您的旧列表项没有被删除"
+msgstr "MC无法写文件~/%s，您的活动列表条目没有被删除"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -2984,22 +2891,22 @@ msgid "Modified:  %s"
 msgstr "修改： %s"
 
 #. TRANSLATORS: "Status changed", like in the stat(2) man page
-#, fuzzy, c-format
+#, c-format
 msgid "Status:    %s"
-msgstr "创建： %s"
+msgstr "状态： %s"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
-msgstr ""
+msgstr "设备类型：主要%lu，次要%lu"
 
 #, c-format
 msgid "Size:      %s"
 msgstr "大小：     %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid " (%ld block)"
 msgid_plural " (%ld blocks)"
-msgstr[0] " (%ld 个块)"
+msgstr[0] "(%ld 个块)"
 msgstr[1] " (%ld 个块)"
 
 #, c-format
@@ -3025,17 +2932,16 @@ msgid "&Horizontal"
 msgstr "水平(&H)"
 
 msgid "show free sp&Ace"
-msgstr ""
+msgstr "显示空闲空间(&A)"
 
-#, fuzzy
 msgid "&Xterm window title"
-msgstr "Xterm 提示栏(&X)"
+msgstr "Xterm窗口标题(&X)"
 
 msgid "h&Intbar visible"
 msgstr "提示栏可见(&I)"
 
 msgid "&Keybar visible"
-msgstr ""
+msgstr "显示按键条(&K)"
 
 msgid "command &Prompt"
 msgstr "命令提示(&P)"
@@ -3087,6 +2993,14 @@ msgid ""
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
 msgstr ""
+"按下%s\n"
+"并等待这个消息消失。\n"
+"\n"
+"然后再次按下它并看确认是否出现\n"
+"在它的旁边。\n"
+"\n"
+"如果您想离开，请按下Esc键\n"
+"并稍等。"
 
 msgid " Cannot accept this key "
 msgstr " 无法接受这个按键 "
@@ -3134,13 +3048,11 @@ msgstr " 您真的要退出 Midnight Commander 吗？"
 msgid "&Listing mode..."
 msgstr "列表模式(&L)..."
 
-#, fuzzy
 msgid "&Quick view"
-msgstr "快速保存"
+msgstr "快速查看(&Q)"
 
-#, fuzzy
 msgid "&Info"
-msgstr "Inode(&I)"
+msgstr "信息(&I)"
 
 msgid "&Sort order..."
 msgstr "排序(&S)..."
@@ -3148,9 +3060,8 @@ msgstr "排序(&S)..."
 msgid "&Filter..."
 msgstr "过滤(&F)..."
 
-#, fuzzy
 msgid "&Encoding..."
-msgstr "排序(&T)...             M-t"
+msgstr "编码(&E)..."
 
 msgid "&Network link..."
 msgstr "网络链接(&N)..."
@@ -3158,128 +3069,101 @@ msgstr "网络链接(&N)..."
 msgid "FT&P link..."
 msgstr "FTP 链接(&P)..."
 
-#, fuzzy
 msgid "S&hell link..."
-msgstr "SMB 链接(&B)..."
+msgstr "S&hell链接..."
 
 msgid "SM&B link..."
 msgstr "SMB 链接(&B)..."
 
-#, fuzzy
 msgid "&Rescan"
-msgstr "重新扫描"
+msgstr "重新扫描(&R)"
 
-#, fuzzy
 msgid "&View"
-msgstr "查看"
+msgstr "查看(&V)"
 
-#, fuzzy
 msgid "Vie&w file..."
-msgstr " 查看文件 "
+msgstr "查看文件(&W)..."
 
-#, fuzzy
 msgid "&Filtered view"
-msgstr " 过滤视图 "
+msgstr " 过滤视图(&F)"
 
-#, fuzzy
 msgid "&Copy"
-msgstr "复制"
+msgstr "复制(&C)"
 
 msgid "C&hmod"
-msgstr ""
+msgstr "更改文件权限(&H)"
 
-#, fuzzy
 msgid "&Link"
 msgstr "链接(&L)"
 
-#, fuzzy
 msgid "&SymLink"
-msgstr "链接(&L)"
+msgstr "符号链接(&L)"
 
-#, fuzzy
 msgid "Edit s&ymlink"
-msgstr " 编辑符号链接 "
+msgstr " 编辑符号链接 (&Y)"
 
 msgid "Ch&own"
-msgstr ""
+msgstr "更改文件所有者(&O)"
 
-#, fuzzy
 msgid "&Advanced chown"
-msgstr "高级 chown(&A)          "
+msgstr "高级chown(&A)          "
 
-#, fuzzy
 msgid "&Rename/Move"
-msgstr "删除(&R)"
+msgstr "更名/移动(&R)"
 
-#, fuzzy
 msgid "&Mkdir"
-msgstr "建目录"
+msgstr "建目录(&M)"
 
-#, fuzzy
 msgid "&Quick cd"
-msgstr "快速 cd"
+msgstr "快速切换目录(&Q)"
 
-#, fuzzy
 msgid "Select &group"
-msgstr "设置群组(&G)"
+msgstr "选择群组(&G)"
 
-#, fuzzy
 msgid "U&nselect group"
-msgstr " 取消选择 "
+msgstr "取消选择组(&U)"
 
-#, fuzzy
 msgid "Reverse selec&tion"
-msgstr "反转选择(&T)         M-*"
+msgstr "反转选择(&T)"
 
-#, fuzzy
 msgid "E&xit"
-msgstr "编辑"
+msgstr "退出(&X)"
 
-#, fuzzy
 msgid "&User menu"
-msgstr " 用户菜单 "
+msgstr "用户菜单(&U)"
 
 msgid "&Directory tree"
 msgstr "目录树(&D)"
 
-#, fuzzy
 msgid "&Find file"
-msgstr "搜索文件"
+msgstr "查找文件(&F)"
 
 msgid "S&wap panels"
-msgstr ""
+msgstr "交换面板(&W)"
 
-#, fuzzy
 msgid "Switch &panels on/off"
-msgstr "切换面板开/关(&P)  C-o"
+msgstr "切换面板开/关(&P)"
 
-#, fuzzy
 msgid "&Compare directories"
-msgstr " 比较目录 "
+msgstr "比较目录(&C)"
 
-#, fuzzy
 msgid "E&xternal panelize"
-msgstr "其它命令"
+msgstr "外部面板(&X)"
 
-#, fuzzy
 msgid "Show directory s&izes"
 msgstr "显示目录大小(&I)"
 
-#, fuzzy
 msgid "Command &history"
 msgstr "命令历史(&H)"
 
-#, fuzzy
 msgid "Di&rectory hotlist"
-msgstr "目录路径"
+msgstr "目录活动列表(&R)"
 
-#, fuzzy
 msgid "&Active VFS list"
-msgstr "活动 VFS 列表(&A)  C-x a"
+msgstr "活动的VFS列表(&A)"
 
-#, fuzzy
 msgid "&Background jobs"
-msgstr "后台任务"
+msgstr "后台任务（——B）"
 
 msgid "&Undelete files (ext2fs only)"
 msgstr "反删除文件(仅限 ext2fs)(&U)"
@@ -3294,7 +3178,7 @@ msgid "Edit &menu file"
 msgstr "菜单文件编辑(&M)"
 
 msgid "Edit hi&ghlighting group file"
-msgstr ""
+msgstr "编辑突出显示组文件(&G)"
 
 msgid "&Configuration..."
 msgstr "配置(&C)..."
@@ -3302,7 +3186,6 @@ msgstr "配置(&C)..."
 msgid "&Layout..."
 msgstr "布局(&L)..."
 
-#, fuzzy
 msgid "C&onfirmation..."
 msgstr "确认(&O)..."
 
@@ -3312,21 +3195,17 @@ msgstr "显示位(&D)..."
 msgid "&Virtual FS..."
 msgstr "虚拟文件系统(&V)..."
 
-#, fuzzy
 msgid "&Above"
-msgstr " 上(&A) "
+msgstr "上(&A)"
 
-#, fuzzy
 msgid "&Left"
-msgstr " 左(&L) "
+msgstr "左(&L)"
 
-#, fuzzy
 msgid "&Below"
-msgstr " 下(&B) "
+msgstr "下(&B)"
 
-#, fuzzy
 msgid "&Right"
-msgstr " 右(&R) "
+msgstr "右(&R)"
 
 msgid " Information "
 msgstr " 信息 "
@@ -3342,26 +3221,26 @@ msgstr ""
 " 的信息。                                             "
 
 msgid "ButtonBar|Menu"
-msgstr ""
+msgstr "ButtonBar|目录"
 
 msgid "ButtonBar|View"
-msgstr ""
+msgstr "ButtonBar|显示"
 
 msgid "ButtonBar|Edit"
-msgstr ""
+msgstr "ButtonBar|编辑"
 
 msgid "ButtonBar|RenMov"
-msgstr ""
+msgstr "ButtonBar|更名或移动"
 
 msgid "ButtonBar|Mkdir"
-msgstr ""
+msgstr "ButtonBar|建目录"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "没有设置 TERM 环境变量！\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot create %s directory"
-msgstr "无法改变目录"
+msgstr "不能建立目录%s"
 
 msgid "safe de&Lete"
 msgstr "安全删除(&L)"
@@ -3400,7 +3279,7 @@ msgid "&Verbose operation"
 msgstr "冗余操作(&V)"
 
 msgid "Mkdir autoname"
-msgstr ""
+msgstr "创建目录时自动命名"
 
 msgid "&Fast dir reload"
 msgstr "快速重载入目录(&F)"
@@ -3412,7 +3291,7 @@ msgid "&Drop down menus"
 msgstr "下拉菜单(&D)"
 
 msgid "ma&Rk moves down"
-msgstr ""
+msgstr "标记文件后光标下移(&R)"
 
 msgid "show &Hidden files"
 msgstr "显示隐藏文件(&H)"
@@ -3421,7 +3300,7 @@ msgid "show &Backup files"
 msgstr "显示备份文件(&B)"
 
 msgid "Use SI si&ze units"
-msgstr ""
+msgstr "使用SI大小单位(&Z)"
 
 msgid "&Never"
 msgstr "从不(&N)"
@@ -3445,7 +3324,7 @@ msgid "&Add new"
 msgstr "添加新(&A)"
 
 msgid "External panelize"
-msgstr ""
+msgstr "外部面板"
 
 msgid "Command"
 msgstr "命令"
@@ -3454,13 +3333,13 @@ msgid "Other command"
 msgstr "其它命令"
 
 msgid " Add to external panelize "
-msgstr ""
+msgstr "添加到外部面板"
 
 msgid " Enter command label: "
 msgstr " 输入命令标签："
 
 msgid " Cannot run external panelize in a non-local directory "
-msgstr ""
+msgstr "在非本地目录不能运行外部面板化"
 
 msgid "Find rejects after patching"
 msgstr "应用补丁后查找被拒绝的补丁"
@@ -3478,7 +3357,7 @@ msgid "Pipe close failed"
 msgstr "关闭管道失败"
 
 msgid "[dev]"
-msgstr ""
+msgstr "[dev]"
 
 msgid "UP--DIR"
 msgstr "上级目录"
@@ -3492,7 +3371,7 @@ msgstr "子目录"
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|u"
-msgstr ""
+msgstr "sort|u"
 
 msgid "&Unsorted"
 msgstr "未排序(&U)"
@@ -3500,16 +3379,15 @@ msgstr "未排序(&U)"
 #. TRANSLATORS: one single character to represent 'name' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|n"
-msgstr ""
+msgstr "sort|n"
 
 msgid "&Name"
 msgstr "名字(&N)"
 
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#, fuzzy
 msgid "sort|e"
-msgstr "未排序(&U)"
+msgstr "sort|e"
 
 msgid "&Extension"
 msgstr "扩展(&E)"
@@ -3517,19 +3395,18 @@ msgstr "扩展(&E)"
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|s"
-msgstr ""
+msgstr "sort|s"
 
 msgid "&Size"
 msgstr "大小(&S)"
 
-#, fuzzy
 msgid "Block Size"
-msgstr " 大小 "
+msgstr "块大小 "
 
 #. TRANSLATORS: one single character to represent 'Modify time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|m"
-msgstr ""
+msgstr "sort|m"
 
 msgid "&Modify time"
 msgstr "修改时间(&M)"
@@ -3537,7 +3414,7 @@ msgstr "修改时间(&M)"
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|a"
-msgstr ""
+msgstr "sort|a"
 
 msgid "&Access time"
 msgstr "访问时间(&A)"
@@ -3545,7 +3422,7 @@ msgstr "访问时间(&A)"
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|h"
-msgstr ""
+msgstr "sort|h"
 
 msgid "C&Hange time"
 msgstr "修改时间(&C)"
@@ -3562,7 +3439,7 @@ msgstr "Nl"
 #. TRANSLATORS: one single character to represent 'inode' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|i"
-msgstr ""
+msgstr "sort|i"
 
 msgid "&Inode"
 msgstr "Inode(&I)"
@@ -3582,16 +3459,16 @@ msgstr "群组"
 msgid "<readlink failed>"
 msgstr "<readlink 失败>"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
-msgstr[0] "%s 字节"
-msgstr[1] "%s 字节"
+msgstr[0] "%s字节"
+msgstr[1] "%s字节"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s in %d file"
 msgid_plural "%s in %d files"
-msgstr[0] "%2$d 个文件，%1$s 字节"
+msgstr[0] "%s 在 %d 文件"
 msgstr[1] "%2$d 个文件，%1$s 字节"
 
 msgid "Unknown tag on display format: "
@@ -3601,26 +3478,30 @@ msgid "User supplied format looks invalid, reverting to default."
 msgstr "用户提供的格式无效，回复到默认设置。"
 
 msgid " Do you really want to execute? "
-msgstr " 您真的要执行吗？"
+msgstr "您真的要执行吗？"
 
-#, fuzzy
 msgid "Choose codepage"
-msgstr " 选择输入代码页"
+msgstr "选择代码页"
 
 msgid "-  < No translation >"
 msgstr "-  < 没有翻译 >"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot save file %s:\n"
 "%s"
-msgstr " 保存文件时发生错误。"
+msgstr ""
+"不能保存文件%s:\n"
+"%s"
 
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
+"GNU Midnight Commander正在\n"
+"该终端运行。\n"
+"Subshell支持被禁止."
 
 #, c-format
 msgid "Cannot open named pipe %s\n"
@@ -3645,9 +3526,8 @@ msgstr "terminfo 数据库"
 msgid "Using the ncurses library"
 msgstr "使用 ncurses 库"
 
-#, fuzzy
 msgid "Using the ncursesw library"
-msgstr "使用 ncurses 库"
+msgstr "使用 ncursesw 库"
 
 msgid "With optional subshell support"
 msgstr "可选的 subshell 支持"
@@ -3706,19 +3586,19 @@ msgid "  Delete %s?  "
 msgstr "  删除 %s？ "
 
 msgid "ButtonBar|Static"
-msgstr ""
+msgstr "ButtonBar|静态"
 
 msgid "ButtonBar|Dynamc"
-msgstr ""
+msgstr "ButtonBar|动态"
 
 msgid "ButtonBar|Rescan"
-msgstr ""
+msgstr "ButtonBar|重扫描"
 
 msgid "ButtonBar|Forget"
-msgstr ""
+msgstr "ButtonBar|忘记"
 
 msgid "ButtonBar|Rmdir"
-msgstr ""
+msgstr "ButtonBar|删除目录"
 
 #, c-format
 msgid ""
@@ -3769,88 +3649,85 @@ msgstr " 在 %s 没有找到相应的项 "
 msgid " User menu "
 msgstr " 用户菜单 "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " The current line number is %lld.\n"
 " Enter the new line number:"
 msgstr ""
-" 当前行号是 %d。\n"
-" 输入新行号："
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " The current address is %s.\n"
 " Enter the new address:"
 msgstr ""
-" 当前行号是 %d。\n"
-" 输入新行号："
 
+#, fuzzy
 msgid " Goto Address "
-msgstr " 跳到地址 "
+msgstr " 转到行 "
 
 #, fuzzy
 msgid " Invalid address "
 msgstr " 无效的口令 "
 
-#, fuzzy
 msgid " Cannot spawn child process "
-msgstr " 无法生成子程序 "
+msgstr "无法生成子进程"
 
 msgid "Empty output from child filter"
-msgstr ""
+msgstr "子过滤器输出为空"
 
 msgid "ButtonBar|Ascii"
-msgstr ""
+msgstr "ButtonBar|Ascii"
 
 msgid "ButtonBar|Goto"
-msgstr ""
+msgstr "ButtonBar|跳转"
 
 msgid "ButtonBar|HxSrch"
-msgstr ""
+msgstr "ButtonBar|16进制搜索"
 
 msgid "ButtonBar|UnWrap"
-msgstr ""
+msgstr "ButtonBar|不换行"
 
 msgid "ButtonBar|Wrap"
-msgstr ""
+msgstr "ButtonBar|换行"
 
 msgid "ButtonBar|Hex"
-msgstr ""
+msgstr "ButtonBar|16进制"
 
+#, fuzzy
 msgid "ButtonBar|Line"
-msgstr ""
+msgstr "ButtonBar|显示"
 
 msgid "ButtonBar|Raw"
-msgstr ""
+msgstr "ButtonBar|原格式"
 
 msgid "ButtonBar|Parse"
-msgstr ""
+msgstr "ButtonBar|解析"
 
 msgid "ButtonBar|Unform"
-msgstr ""
+msgstr "ButtonBar|未格式化"
 
 msgid "ButtonBar|Format"
-msgstr ""
+msgstr "ButtonBar|格式化"
 
-#, c-format
+#, fuzzy, c-format
 msgid "File: %s"
-msgstr "文件：%s"
+msgstr "文件：      %s"
 
 #, c-format
 msgid "Offset 0x%08lx"
-msgstr "偏移 0x%08lx"
+msgstr ""
 
 #, c-format
 msgid "Line %lu Col %lu"
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid "%s bytes"
-msgstr "%s 字节"
+msgstr "%s字节"
 
 #, fuzzy, c-format
 msgid ">= %s bytes"
-msgstr "%s 字节"
+msgstr "%s字节"
 
 #, c-format
 msgid ""
@@ -3858,622 +3735,108 @@ msgid ""
 " %s \n"
 " Data may have been written or not. "
 msgstr ""
+"关闭文件时出错：\n"
+" %s \n"
+"数据可能未能写入磁盘。"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Cannot save file: \n"
 " %s "
-msgstr " 保存文件时发生错误。"
+msgstr ""
+"无法法保存文件:\n"
+"%s"
 
 #, c-format
 msgid ""
 " Cannot open \"%s\"\n"
 " %s "
 msgstr ""
-" 无法打开“%s”\n"
-" %s "
+"无法打开“%s”\n"
+"%s "
 
 #, c-format
 msgid ""
 " Cannot stat \"%s\"\n"
 " %s "
 msgstr ""
-" 无法查看“%s”的状态\n"
-" %s "
+"无法查看“%s”的状态\n"
+"%s "
 
 msgid " Cannot view: not a regular file "
-msgstr " 无法查看：不是常规文件 "
+msgstr "无法查看：不是常规文件"
 
 msgid "Seeking to search result"
-msgstr ""
+msgstr "查询搜索结果"
 
 msgid " History "
-msgstr " 历史 "
+msgstr "历史"
 
 msgid "Background process:"
 msgstr "后台进程："
 
-#~ msgid "File:       None"
-#~ msgstr "文件：      无"
+#~ msgid "Warning: cannot open %s directory\n"
+#~ msgstr "警告：不能打开目录%s\n"
 
-#~ msgid "Do backups -->"
-#~ msgstr "备份 -->"
+#~ msgid "Confirmation"
+#~ msgstr "确认"
 
-#~ msgid "Extension:"
-#~ msgstr "扩展名："
+#~ msgid "Confirmation|&History cleanup"
+#~ msgstr "Confirmation|清除历史(&H)"
 
-#~ msgid "&New              C-n"
-#~ msgstr "新建(&N)         C-n"
+#~ msgid "Confirmation|E&xit"
+#~ msgstr "Confirmation|退出(&X)"
 
-#~ msgid "&Save              F2"
-#~ msgstr "保存(&S)           F2"
+#~ msgid "Confirmation|&Execute"
+#~ msgstr "Confirmation|执行(&E)"
 
-#~ msgid "Save &as...       F12"
-#~ msgstr "保存为(&A)...     F12"
+#~ msgid "Confirmation|&Delete"
+#~ msgstr "Confirmation|删除(&D)"
 
-#~ msgid "A&bout...            "
-#~ msgstr "关于(&B)...          "
+#~ msgid "ETA %s"
+#~ msgstr "估计%s"
 
-#~ msgid "&Quit             F10"
-#~ msgstr "退出(&Q)          F10"
+#~ msgid "Files processed: %llu of %llu"
+#~ msgstr "已处理文件: %llu 之 %llu"
 
-#~ msgid "&New            C-x k"
-#~ msgstr "新建(&N)        C-x k"
+#~ msgid "Time: %s  %s (%s)"
+#~ msgstr "时间: %s  %s (%s)"
 
-#~ msgid "Copy to &file...     "
-#~ msgstr "复制到文件(&F)...    "
+#~ msgid " Total: %s of %s "
+#~ msgstr "总计: %s of %s"
 
-#, fuzzy
-#~ msgid "&Toggle mark                 F3"
-#~ msgstr "翻转标记(&T)       F3"
+#~ msgid "sort|v"
+#~ msgstr "sort|v"
 
-#, fuzzy
-#~ msgid "Mar&k columns              S-F3"
-#~ msgstr "标记列(&M)       S-F3"
+#~ msgid "&Version"
+#~ msgstr "版本(&V)"
 
-#, fuzzy
-#~ msgid "&Copy                        F5"
-#~ msgstr "复制(&C)              F5"
+#~ msgid "Invalid value"
+#~ msgstr "无效的值"
 
-#, fuzzy
-#~ msgid "&Move                        F6"
-#~ msgstr "移动(&M)           F6"
+#~ msgid "&Line number (decimal)"
+#~ msgstr "行号(10进制&L)"
 
-#, fuzzy
-#~ msgid "&Delete                      F8"
-#~ msgstr "删除(&D)              F8"
+#~ msgid "Pe&rcents"
+#~ msgstr "百分比(&R)"
 
-#, fuzzy
-#~ msgid "&Next bookmark              M-j"
-#~ msgstr "新建(&N)         C-n"
+#~ msgid "&Decimal offset"
+#~ msgstr "十进制偏移(&D)"
 
-#, fuzzy
-#~ msgid "&Undo                       C-u"
-#~ msgstr "撤消(&U)          C-u"
-
-#, fuzzy
-#~ msgid "&Beginning               C-PgUp"
-#~ msgstr "开始(&B)       C-PgUp"
-
-#, fuzzy
-#~ msgid "&End                     C-PgDn"
-#~ msgstr "结尾(&E)       C-PgDn"
-
-#, fuzzy
-#~ msgid "C&opy to clipfile           M-w"
-#~ msgstr "转到行(&G)...           M-l"
-
-#, fuzzy
-#~ msgid "C&ut to clipfile            C-w"
-#~ msgstr "转到行(&G)...           M-l"
-
-#, fuzzy
-#~ msgid "Toggle bookmar&k               "
-#~ msgstr "翻转标记(&T)       F3"
-
-#, fuzzy
-#~ msgid "&Next bookmark                 "
-#~ msgstr "新建(&N)         C-n"
-
-#, fuzzy
-#~ msgid "Pre&v bookmark                 "
-#~ msgstr "排序(&T)...             M-t"
-
-#, fuzzy
-#~ msgid "&Flush bookmark                "
-#~ msgstr "邮寄(&M)...                 "
-
-#~ msgid "&Search...         F7"
-#~ msgstr "查找(&S)...        F7"
-
-#~ msgid "&Replace...        F4"
-#~ msgstr "替换(&R)...        F4"
-
-#~ msgid "&Go to line...            M-l"
-#~ msgstr "转到行(&G)...           M-l"
-
-#, fuzzy
-#~ msgid "Encod&ing...             M-e"
-#~ msgstr "排序(&T)...             M-t"
-
-#~ msgid "Delete macr&o...            "
-#~ msgstr "删除宏(&O)...              "
-
-#~ msgid "Sor&t...                 M-t"
-#~ msgstr "排序(&T)...             M-t"
-
-#~ msgid "&Mail...                    "
-#~ msgstr "邮寄(&M)...                 "
-
-#~ msgid "&Execute macro... C-x e, KEY"
-#~ msgstr "执行宏(&E)...    C-x e, KEY"
-
-#~ msgid "'ispell' s&pell check    M-$"
-#~ msgstr "“ispell”拼写检查(&P)  M-$"
-
-#, fuzzy
-#~ msgid "Save setu&p"
-#~ msgstr "保存设置(&S)"
-
-#~ msgid " Edit "
-#~ msgstr " 编辑 "
-
-#~ msgid " Sear/Repl "
-#~ msgstr " 搜索/替换 "
-
-#~ msgid " Command "
-#~ msgstr " 命令 "
-
-#~ msgid " Options "
-#~ msgstr " 选项 "
-
-#~ msgid "Intuitive"
-#~ msgstr "直观的"
-
-#~ msgid "Emacs"
-#~ msgstr "Emacs"
-
-#, fuzzy
-#~ msgid "User-defined"
-#~ msgstr "用户定义(&U)："
-
-#~ msgid "Key emulation"
-#~ msgstr "键模拟"
-
-#~ msgid "Save"
-#~ msgstr "保存"
-
-#~ msgid "Mark"
-#~ msgstr "标记"
-
-#~ msgid "Replac"
-#~ msgstr "替换"
-
-#~ msgid "Delete"
-#~ msgstr "删除"
-
-#~ msgid "PullDn"
-#~ msgstr "下拉"
-
-#~ msgid " Copy "
-#~ msgstr " 复制 "
-
-#~ msgid " Move "
-#~ msgstr " 移动 "
-
-#~ msgid " Delete "
-#~ msgstr " 删除 "
-
-#~ msgid "1Copy"
-#~ msgstr "1复制"
-
-#~ msgid "1Move"
-#~ msgstr "1移动"
-
-#~ msgid "1Delete"
-#~ msgstr "1删除"
-
-#~ msgid "Index"
-#~ msgstr "索引"
-
-#~ msgid "Prev"
-#~ msgstr "前"
-
-#~ msgid "&Quick view     C-x q"
-#~ msgstr "快速查看(&Q)   C-x q"
-
-#~ msgid "&Info           C-x i"
-#~ msgstr "信息(&I)       C-x i"
-
-#~ msgid "&Rescan         C-r"
-#~ msgstr "重新扫描(&R)   C-r"
-
-#~ msgid "&View               F3"
-#~ msgstr "查看(&V)              F3"
-
-#~ msgid "Vie&w file...         "
-#~ msgstr "查看文件(&W)...         "
-
-#~ msgid "&Filtered view     M-!"
-#~ msgstr "过滤视图(&F)         M-!"
-
-#~ msgid "&Edit               F4"
-#~ msgstr "编辑(&E)              F4"
-
-#~ msgid "&Copy               F5"
-#~ msgstr "复制(&C)              F5"
-
-#~ msgid "c&Hmod           C-x c"
-#~ msgstr "chmod(&H)          C-x c"
-
-#~ msgid "&Link            C-x l"
-#~ msgstr "链接(&L)           C-x l"
-
-#~ msgid "&SymLink         C-x s"
-#~ msgstr "符号链接(&S)       C-x s"
-
-#~ msgid "edit s&Ymlink  C-x C-s"
-#~ msgstr "编辑符号链接(&Y) C-x C-s"
-
-#~ msgid "ch&Own           C-x o"
-#~ msgstr "chown(&O)          C-x o"
-
-#~ msgid "&Rename/Move        F6"
-#~ msgstr "重命名(&R)            F6"
-
-#~ msgid "&Mkdir              F7"
-#~ msgstr "创建目录(&M)          F7"
-
-#~ msgid "&Delete             F8"
-#~ msgstr "删除(&D)              F8"
-
-#~ msgid "&Quick cd          M-c"
-#~ msgstr "快速 cd(&Q)          M-c"
-
-#~ msgid "select &Group      M-+"
-#~ msgstr "选择组(&G)           M-+"
-
-#~ msgid "u&Nselect group    M-\\"
-#~ msgstr "取消选择组(&N)       M-\\"
-
-#~ msgid "e&Xit              F10"
-#~ msgstr "退出(&X)             F10"
-
-#~ msgid "&User menu          F2"
-#~ msgstr "用户菜单(&U)          F2"
-
-#~ msgid "&Find file            M-?"
-#~ msgstr "查找文件(&F)       M-?"
-
-#~ msgid "s&Wap panels          C-u"
-#~ msgstr "交换面板(&W)       C-u"
-
-#~ msgid "&Compare directories  C-x d"
-#~ msgstr "比较目录(&C)       C-x d"
-
-#, fuzzy
-#~ msgid "Command &history      M-h"
-#~ msgstr " 命令历史 "
-
-#~ msgid "&Background jobs      C-x j"
-#~ msgstr "后台任务(&B)       C-x j"
-
-#~ msgid "learn &Keys..."
-#~ msgstr "学习按键(&K)..."
-
-#~ msgid " &File "
-#~ msgstr " 文件(&F) "
-
-#~ msgid " &Command "
-#~ msgstr " 命令(&C) "
-
-#~ msgid "Menu"
-#~ msgstr "菜单"
-
-#, fuzzy
-#~ msgid "n"
-#~ msgstr "开"
-
-#, fuzzy
-#~ msgid "Extension"
-#~ msgstr "扩展名："
-
-#~ msgid "Size"
-#~ msgstr "大小"
-
-#~ msgid "MTime"
-#~ msgstr "修改时间"
-
-#~ msgid "ATime"
-#~ msgstr "访问时间"
-
-#~ msgid "CTime"
-#~ msgstr "创建时间"
-
-#~ msgid "Inode"
-#~ msgstr "Inode"
-
-#~ msgid "RenMov"
-#~ msgstr "重命名"
-
-#~ msgid "Static"
-#~ msgstr "静态"
-
-#~ msgid "Dynamc"
-#~ msgstr "动态"
-
-#~ msgid "Forget"
-#~ msgstr "忘记"
-
-#~ msgid "Rmdir"
-#~ msgstr "删除目录"
-
-#, fuzzy
-#~ msgid "bind: Unknown command: `%s'"
-#~ msgstr " Chown 命令 "
-
-#, fuzzy
-#~ msgid "%s: Unknown command: `%s'"
-#~ msgstr " Chown 命令 "
-
-#, fuzzy
-#~ msgid "%s:%d: unknown command `%s'"
-#~ msgstr " Chown 命令 "
-
-#, fuzzy
-#~ msgid "%s not found!"
-#~ msgstr "警告：没有找到文件 %s\n"
-
-#~ msgid "NumLock on keypad"
-#~ msgstr "小键盘上的 NumLock"
-
-#~ msgid " Emacs key: "
-#~ msgstr " Emacs 键："
-
-#~ msgid " %d items found, %d bookmarks added "
-#~ msgstr " 找到 %d 匹配项，添加了 %d 个书签 "
-
-#~ msgid "Displays this help message"
-#~ msgstr "显示该帮助信息"
-
-#~ msgid "Displays a help screen on how to change the color scheme"
-#~ msgstr "显示如何修改配色方案的帮助"
-
-#, fuzzy
-#~ msgid "unknown option"
-#~ msgstr "<未知群组>"
-
-#~ msgid "Show this help message"
-#~ msgstr "显示该帮助信息"
-
-#~ msgid "Display brief usage message"
-#~ msgstr "显示简短的使用信息"
-
-#, fuzzy
-#~ msgid "Usage:"
-#~ msgstr "用户名："
-
-#~ msgid "pro&Mpt on replace"
-#~ msgstr "替换时提示(&O)"
-
-#~ msgid "replace &All"
-#~ msgstr "全部替换(&A)"
-
-#~ msgid "O&ne"
-#~ msgstr "一个(&N)"
-
-#, fuzzy
-#~ msgid "%b %d %H:%M"
-#~ msgstr "%b %e %H:%M"
-
-#, fuzzy
-#~ msgid "%b %d %Y"
-#~ msgstr "%b %e %Y"
-
-#, fuzzy
-#~ msgid " The current address is 0x%08"
-#~ msgstr ""
-#~ " 当前地址是 0x%lx。\n"
-#~ " 输入新地址："
-
-#~ msgid "scanf &Expression"
-#~ msgstr "scanf 表达式(&E)"
-
-#~ msgid " Enter replacement argument order eg. 3,2,1,4 "
-#~ msgstr " 输入替换参数的顺序，例如 3,2,1,4 "
-
-#~ msgid ""
-#~ " Invalid regular expression, or scanf expression with too many "
-#~ "conversions "
-#~ msgstr " 无效的正则表达式，或者有太多转换符的 scanf 表达式 "
-
-#~ msgid " Error in replacement format string. "
-#~ msgstr " 在替换格式串中有错误。"
-
-#, fuzzy
-#~ msgid " Replacement too long. "
-#~ msgstr " 输入替换字符串："
-
-#~ msgid "&Copy              F5"
-#~ msgstr "复制(&C)           F5"
-
-#~ msgid "&Delete            F8"
-#~ msgstr "删除(&D)           F8"
-
-#~ msgid " The command history is empty "
-#~ msgstr " 命令历史是空的 "
-
-#~ msgid "Edit edi&tor menu file"
-#~ msgstr "菜单编辑器编辑(&T)"
-
-#, fuzzy
-#~ msgid "Edit &syntax file"
-#~ msgstr "菜单文件编辑(&M)"
-
-#~ msgid ""
-#~ "To use this feature select your codepage in\n"
-#~ "Setup / Display Bits dialog!\n"
-#~ "Do not forget to save options."
-#~ msgstr ""
-#~ "要使用该特性，在设置/显示位对话中选择您的\n"
-#~ "代码页！\n"
-#~ "不要忘记保存选项。"
-
-#~ msgid "Invalid hex search expression"
-#~ msgstr "无效的代码搜索表达式"
-
-#~ msgid " Invalid regular expression "
-#~ msgstr " 无效的正则表达式 "
-
-#~ msgid " Enter regexp:"
-#~ msgstr " 输入正则表达式："
-
-#~ msgid "Using included S-Lang library"
-#~ msgstr "使用自带的 S-Lang 库"
-
-#~ msgid "with termcap database"
-#~ msgstr "termcap 数据库"
-
-#~ msgid "&Home"
-#~ msgstr "主目录(&H)"
-
-#~ msgid "&Type"
-#~ msgstr "类型(&T)"
-
-#~ msgid "N&GID"
-#~ msgstr "N&GID"
-
-#~ msgid "N&UID"
-#~ msgstr "N&UID"
-
-#~ msgid "&Owner"
-#~ msgstr "所有者(&O)"
-
-#~ msgid "&Group"
-#~ msgstr "群组(&G)"
-
-#~ msgid "MC was unable to write ~/"
-#~ msgstr "MC 无法写 ~/ 文件，"
-
-#~ msgid " (%ld blocks)"
-#~ msgstr " (%ld 个块)"
-
-#~ msgid " Notice "
-#~ msgstr " 注意 "
-
-#~ msgid ""
-#~ " The Midnight Commander configuration files \n"
-#~ " are now stored in the ~/.mc directory, the \n"
-#~ " files have been moved now\n"
-#~ msgstr ""
-#~ " Midnight Commander 配置文件已保存到 ~/.mc \n"
-#~ " 目录，文件已经被移动\n"
-
-#~ msgid "%s bytes in %d files"
-#~ msgstr "%2$d 个文件，%1$s 字节"
-
-#~ msgid " Cannot open file for reading: "
-#~ msgstr " 试图打开文件读取时失败："
-
-#~ msgid " Not an ordinary file: "
-#~ msgstr " 不是普通文件："
-
-#~ msgid " Cannot open file "
-#~ msgstr " 无法打开文件 "
-
-#~ msgid "Col %d"
-#~ msgstr "列 %d"
-
-#~ msgid "  [grow]"
-#~ msgstr "  [增加]"
-
-#~ msgid "Ascii"
-#~ msgstr "Ascii"
-
-#~ msgid "Hex"
-#~ msgstr "十六进制"
+#~ msgid "He&xadecimal offset"
+#~ msgstr "16进制偏移(&X)"
 
 #~ msgid "Goto"
 #~ msgstr "跳到"
 
-#~ msgid "Line"
-#~ msgstr "行"
+#~ msgid "Search done"
+#~ msgstr "搜索完成"
 
-#~ msgid "RxSrch"
-#~ msgstr "RxSrch"
+#~ msgid "Continue from begining?"
+#~ msgstr "从起始处继续吗？"
 
-#~ msgid "EdHex"
-#~ msgstr "编辑代码"
+#~ msgid "DialogTitle|History cleanup"
+#~ msgstr "DialogTitle|清除历史"
 
-#~ msgid "EdText"
-#~ msgstr "编辑文字"
-
-#~ msgid "UnWrap"
-#~ msgstr "不折行"
-
-#~ msgid "Wrap"
-#~ msgstr "折行"
-
-#~ msgid "HxSrch"
-#~ msgstr "HxSrch"
-
-#~ msgid "Raw"
-#~ msgstr "原始"
-
-#~ msgid "Parse"
-#~ msgstr "分析"
-
-#~ msgid "Unform"
-#~ msgstr "非格式化"
-
-#~ msgid "User menu available only in mcedit invoked from mc"
-#~ msgstr "用户菜单仅在从 mc 中启动的 mcedit 中才有"
-
-#~ msgid " Socket source routing setup "
-#~ msgstr " 套接字源路由设置 "
-
-#~ msgid " Enter host name to use as a source routing hop: "
-#~ msgstr " 输入要作为源路由的一跳的主机名："
-
-#~ msgid " Host name "
-#~ msgstr " 主机名 "
-
-#~ msgid " Error while looking up IP address "
-#~ msgstr " 查找 IP 地址时发生错误 "
-
-#~ msgid ""
-#~ "\n"
-#~ "\n"
-#~ "\n"
-#~ "refresh stack underflow!\n"
-#~ "\n"
-#~ "\n"
-#~ msgstr ""
-#~ "\n"
-#~ "\n"
-#~ "\n"
-#~ "刷新堆栈下溢！\n"
-#~ "\n"
-#~ "\n"
-
-#~ msgid " Listing format edit "
-#~ msgstr " 列表格式编辑 "
-
-#~ msgid " New mode is \"%s\" "
-#~ msgstr " 新模式是“%s” "
-
-#~ msgid "&Drive...       M-d"
-#~ msgstr "驱动器(&D)...  M-d"
-
-#~ msgid "Use to debug the background code"
-#~ msgstr "用来调试后台代码"
-
-#, fuzzy
-#~ msgid "Force subshell execution"
-#~ msgstr "执行时设置用户 ID"
-
-#~ msgid " No action taken "
-#~ msgstr " 没有执行动作 "
-
-#~ msgid " Cannot set source routing (%s)"
-#~ msgstr " 无法设置源路由 (%s)"
+#~ msgid "Do you want clean this history?"
+#~ msgstr "你要清除历史"
