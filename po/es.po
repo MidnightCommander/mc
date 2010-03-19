@@ -1,14 +1,14 @@
 # Spanish locale - Midnight Commander
-# Copyright (C) 1998-2009 Free Software Foundation, Inc.
-# David Martín <dmartina@excite.com>, 1998-2009.
+# Copyright (C) 1998-2010 Free Software Foundation, Inc.
+# David Martín <dmartina@excite.com>, 1998-2010.
 # Ismael Olea <olea@hispafuentes.com>, 2000.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 4.7.0\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-26 13:04+0200\n"
-"PO-Revision-Date: 2009-12-24 09:40+0100\n"
+"Project-Id-Version: 4.7.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-03-19 15:42+0100\n"
+"PO-Revision-Date: 2010-03-19 15:00+0100\n"
 "Last-Translator: David Martín <dmartina@excite.com\n"
 "Language-Team: Spanish <debian-l10n-spanish@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -425,9 +425,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Archivo extfs inconsistente"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Warning: cannot open %s directory\n"
-msgstr "Imposible crear directorio %s"
+msgstr "Atención: imposible abrir el directorio %s\n"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -921,7 +921,6 @@ msgid "Show mc with specified skin"
 msgstr "Mostrar mc con la careta (skin) indicada"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -945,7 +944,7 @@ msgstr ""
 "   Visor de archivos:  normal, selected, marked, markselect\n"
 "   Diálogos:           dnormal, dfocus, dhotnormal, dhotfocus,\n"
 "                        errdhotnormal, errdhotfocus\n"
-"   Menús:              menu, menuhot, menusel, menuhotsel\n"
+"   Menús:              menu, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:             editnormal, editbold, editmarked, editwhitespace,\n"
 "                       editlinestate\n"
 
@@ -1049,37 +1048,30 @@ msgid "Executable &first"
 msgstr "&Ejecutables primero"
 
 msgid "Sort order"
-msgstr " Ordenar "
+msgstr "Ordenar"
 
-#, fuzzy
 msgid "Confirmation"
-msgstr " Confirmación "
+msgstr "Confirmación"
 
 #. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
-#, fuzzy
 msgid "Confirmation|&History cleanup"
-msgstr " Confirmación "
+msgstr "Confirmation|borrar &Historia"
 
-#, fuzzy
 msgid "Confirmation|&Directory hotlist delete"
-msgstr " confirmar eliminación de &Favoritos "
+msgstr "Confirmation|borrar &Favoritos"
 
-#, fuzzy
 msgid "Confirmation|E&xit"
-msgstr " Confirmación "
+msgstr "Confirmation|sali&R"
 
-#, fuzzy
 msgid "Confirmation|&Execute"
-msgstr " Confirmación "
+msgstr "Confirmation|e&Jecutar"
 
-#, fuzzy
 msgid "Confirmation|O&verwrite"
-msgstr " confirmar s&Obrescritura "
+msgstr "Confirmation|s&Obrescribir"
 
-#, fuzzy
 msgid "Confirmation|&Delete"
-msgstr " Confirmación "
+msgstr "Confirmation|&Borrar"
 
 msgid "UTF-8 output"
 msgstr "salida UTF-8"
@@ -1873,46 +1865,38 @@ msgstr "&Salir"
 msgid "&Undo"
 msgstr "&Deshacer"
 
-#, fuzzy
 msgid "&Toggle ins/overw"
 msgstr "activar &Inserción"
 
-#, fuzzy
 msgid "To&ggle mark"
 msgstr "i&Nicio/fin de marca"
 
 msgid "&Mark columns"
 msgstr "marcar c&Olumnas"
 
-#, fuzzy
 msgid "Mark &all"
-msgstr "* t&Odos"
+msgstr "marcar &Todo"
 
 msgid "Unmar&k"
-msgstr ""
+msgstr "desma&Rcar"
 
-#, fuzzy
 msgid "Cop&y"
 msgstr "&Copiar"
 
-#, fuzzy
 msgid "Mo&ve"
 msgstr "&Mover"
 
 msgid "&Delete"
 msgstr "&Borrar"
 
-#, fuzzy
 msgid "Co&py to clipfile"
-msgstr "co&Piar a un archivo..."
+msgstr "copiar a un &Archivo..."
 
-#, fuzzy
 msgid "&Cut to clipfile"
-msgstr "cor&Tar a un archivo..."
+msgstr "cortar a un arc&Hivo..."
 
-#, fuzzy
 msgid "Pa&ste from clipfile"
-msgstr "pe&Gar de un archivo..."
+msgstr "pegar de un archi&Vo..."
 
 msgid "&Beginning"
 msgstr "&Principio del archivo"
@@ -1929,14 +1913,12 @@ msgstr "buscar &Siguiente"
 msgid "&Replace..."
 msgstr "&Reemplazar..."
 
-#, fuzzy
 msgid "&Toggle bookmark"
 msgstr "poner/quitar m&Arca"
 
 msgid "&Next bookmark"
 msgstr "&Ir a marca siguiente"
 
-#, fuzzy
 msgid "&Prev bookmark"
 msgstr "&Volver a marca anterior"
 
@@ -1946,22 +1928,18 @@ msgstr "borra&R todas las marcas"
 msgid "&Go to line..."
 msgstr "&Ir a la línea..."
 
-#, fuzzy
 msgid "&Toggle line state"
 msgstr "&Numeración de líneas"
 
 msgid "Go to matching &bracket"
 msgstr "buscar pare&Ja del operador"
 
-#, fuzzy
 msgid "&Find declaration"
 msgstr "buscar &Declaración"
 
-#, fuzzy
 msgid "Back from &declaration"
 msgstr "&Volver desde declaración"
 
-#, fuzzy
 msgid "For&ward to declaration"
 msgstr "ava&Nzar a declaración"
 
@@ -1974,7 +1952,6 @@ msgstr "&Refrescar la pantalla"
 msgid "&Start record macro"
 msgstr "iniciar grabación de &Macro"
 
-#, fuzzy
 msgid "Finis&h record macro..."
 msgstr "&Terminar grabación de macro..."
 
@@ -1996,19 +1973,15 @@ msgstr "insertar &Literalmente..."
 msgid "Insert &date/time"
 msgstr "insertar &Fecha y hora"
 
-#, fuzzy
 msgid "&Format paragraph"
 msgstr "dar formato al &Párrafo"
 
-#, fuzzy
 msgid "&Sort..."
 msgstr "&Ordenar bloque de texto..."
 
-#, fuzzy
 msgid "&Paste output of..."
 msgstr "peg&Ar desde otro programa..."
 
-#, fuzzy
 msgid "&External formatter"
 msgstr "dar formato e&Xterno"
 
@@ -2573,13 +2546,13 @@ msgstr " Borrar: "
 msgid "Non&e"
 msgstr "nin&Guno"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%d:%02d.%02d"
-msgstr "ETA %d:%02d.%02d"
+msgstr "%d:%02d.%02d"
 
 #, c-format
 msgid "ETA %s"
-msgstr ""
+msgstr "ETA %s"
 
 #, c-format
 msgid "%.2f MB/s"
@@ -2595,15 +2568,15 @@ msgstr "%ld B/s"
 
 #, c-format
 msgid "Files processed: %llu of %llu"
-msgstr ""
+msgstr "Archivos procesados: %llu de %llu"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Time: %s  %s (%s)"
-msgstr "Tamaño:     %s"
+msgstr "Tiempo: %s  %s (%s)"
 
 #, c-format
 msgid " Total: %s of %s "
-msgstr ""
+msgstr " Total: %s de %s "
 
 msgid "Source"
 msgstr "Origen"
@@ -3425,13 +3398,11 @@ msgstr "&Nombre"
 
 #. TRANSLATORS: one single character to represent 'version' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#, fuzzy
 msgid "sort|v"
-msgstr "sort|o"
+msgstr "sort|v"
 
-#, fuzzy
 msgid "&Version"
-msgstr "Permisos"
+msgstr "&Versión"
 
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3704,9 +3675,8 @@ msgstr " No se encuentran entradas apropiadas en %s "
 msgid " User menu "
 msgstr " Menú de usuario "
 
-#, fuzzy
 msgid "Invalid value"
-msgstr " Posición incorrecta "
+msgstr "Posición incorrecta"
 
 msgid " Cannot spawn child process "
 msgstr " Imposible ejecutar el proceso hijo "
@@ -3715,20 +3685,19 @@ msgid "Empty output from child filter"
 msgstr "Salida del filtro vacía"
 
 msgid "&Line number (decimal)"
-msgstr ""
+msgstr "número de &Línea (decimal)"
 
 msgid "Pe&rcents"
-msgstr ""
+msgstr "po&Rcentaje del archivo"
 
 msgid "&Decimal offset"
-msgstr ""
+msgstr "desplazamiento (&Decimal)"
 
-#, fuzzy
 msgid "He&xadecimal offset"
-msgstr "he&Xadecimal"
+msgstr "desplazamiento (he&Xadecimal)"
 
 msgid "Goto"
-msgstr ""
+msgstr "Ir a"
 
 msgid "ButtonBar|Ascii"
 msgstr "Ascii"
@@ -3802,76 +3771,21 @@ msgstr ""
 msgid "Seeking to search result"
 msgstr "Avanzando al resultado de búsqueda"
 
-#, fuzzy
 msgid "Search done"
-msgstr "Buscar"
+msgstr "Búsqueda finalizada"
 
 msgid "Continue from begining?"
-msgstr ""
+msgstr "¿Continuar desde el principio?"
 
 msgid " History "
 msgstr " Historia "
 
 #. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
-#, fuzzy
 msgid "DialogTitle|History cleanup"
-msgstr "Copiar"
+msgstr "Borrar historia"
 
 msgid "Do you want clean this history?"
-msgstr ""
+msgstr "¿Desea borrar esta historia?"
 
 msgid "Background process:"
 msgstr "Procesos en 2º plano"
-
-#~ msgid "File"
-#~ msgstr "Archivo"
-
-#~ msgid "Count"
-#~ msgstr "Total"
-
-#~ msgid "Bytes"
-#~ msgstr "Bytes"
-
-#~ msgid " confirm &Exit "
-#~ msgstr " confirmar &Salida "
-
-#~ msgid " confirm e&Xecute "
-#~ msgstr " confirmar &Ejecución "
-
-#~ msgid " confirm &Delete "
-#~ msgstr " confirmar e&Liminación "
-
-#~ msgid ""
-#~ " The current line number is %lld.\n"
-#~ " Enter the new line number:"
-#~ msgstr ""
-#~ " La línea actual es la número %lld\n"
-#~ " Teclee el número de línea a buscar:"
-
-#~ msgid ""
-#~ " The current address is %s.\n"
-#~ " Enter the new address:"
-#~ msgstr ""
-#~ " La dirección actual es %s.\n"
-#~ " Teclee la dirección a buscar:"
-
-#~ msgid " Goto Address "
-#~ msgstr " Ir a posición "
-
-#~ msgid "ButtonBar|Line"
-#~ msgstr "Línea"
-
-#~ msgid "File: %s"
-#~ msgstr "Archivo: %s"
-
-#~ msgid "Offset 0x%08lx"
-#~ msgstr "Offset 0x%08lx"
-
-#~ msgid "Line %lu Col %lu"
-#~ msgstr "Línea %lu Col %lu"
-
-#~ msgid "%s bytes"
-#~ msgstr "%s bytes"
-
-#~ msgid ">= %s bytes"
-#~ msgstr ">= %s bytes"
