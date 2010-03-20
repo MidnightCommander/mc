@@ -266,8 +266,32 @@ static const struct
 #endif
     { "mcview_eof", &mcview_show_eof, "" },
     {  NULL, NULL, NULL }
-/* *INDENT-ON* */
 };
+
+static const struct
+{
+    const char *opt_name;
+    const char *opt_old_name;
+    gboolean *opt_addr;
+} panels_ini_options[] = {
+    { "mix_all_files", NULL, &panels_options.mix_all_files },
+    { "show_backups",  NULL, &panels_options.show_backups },
+    { "show_dot_files",  NULL, &panels_options.show_dot_files },
+    { "fast_reload",  NULL, &panels_options.fast_reload },
+    { "fast_reload",  NULL, &panels_options.fast_reload_msg_shown },
+    { "mark_moves_down",  NULL, &panels_options.mark_moves_down },
+    { "navigate_with_arrows",  NULL, &panels_options.navigate_with_arrows },
+    { "kilobyte_si",  NULL, &panels_options.kilobyte_si },
+    { "panel_scroll_pages",  "scroll_pages", &panels_options.scroll_pages },
+    { "mouse_move_pages",  NULL, &panels_options.mouse_move_pages },
+    { "auto_save_setup_panels", "auto_save_setup", &panels_options.auto_save_setup },
+    { "filetype_mode",  NULL, &panels_options.filetype_mode },
+    { "permission_mode",  NULL, &panels_options.permission_mode },
+    { NULL, NULL, NULL }
+};
+/* *INDENT-ON* */
+
+static const char *panels_section = "Panels";
 
 /*** file scope functions **********************************************/
 
@@ -1180,95 +1204,28 @@ save_panel_types (void)
 }
 
 /**
-  Load panels options from  section.
+  Load panels options from [Panels] section.
 */
 void
 panels_load_options (void)
 {
-    const char *section = "Panels";
+    size_t i;
 
     /* Backward compatibility: load old parameters */
-    panels_options.mix_all_files =
-        mc_config_get_int (mc_main_config, CONFIG_APP_SECTION, "mix_all_files",
-                           panels_options.mix_all_files);
-    panels_options.show_backups =
-        mc_config_get_int (mc_main_config, CONFIG_APP_SECTION, "show_backups",
-                           panels_options.show_backups);
-    panels_options.show_dot_files =
-        mc_config_get_int (mc_main_config, CONFIG_APP_SECTION, "show_dot_files",
-                           panels_options.show_dot_files);
-    panels_options.fast_reload =
-        mc_config_get_int (mc_main_config, CONFIG_APP_SECTION, "fast_reload",
-                           panels_options.fast_reload);
-    panels_options.fast_reload_msg_shown =
-        mc_config_get_int (mc_main_config, CONFIG_APP_SECTION, "fast_reload",
-                           panels_options.fast_reload_msg_shown);
-    panels_options.mark_moves_down =
-        mc_config_get_int (mc_main_config, CONFIG_APP_SECTION, "mark_moves_down",
-                           panels_options.mark_moves_down);
-    panels_options.navigate_with_arrows =
-        mc_config_get_int (mc_main_config, CONFIG_APP_SECTION, "navigate_with_arrows",
-                           panels_options.navigate_with_arrows);
-    panels_options.kilobyte_si =
-        mc_config_get_int (mc_main_config, CONFIG_APP_SECTION, "kilobyte_si",
-                           panels_options.kilobyte_si);
-    panels_options.scroll_pages =
-        mc_config_get_int (mc_main_config, CONFIG_APP_SECTION, "panel_scroll_pages",
-                           panels_options.scroll_pages);
-    panels_options.mouse_move_pages =
-        mc_config_get_int (mc_main_config, CONFIG_APP_SECTION, "mouse_move_pages",
-                           panels_options.mouse_move_pages);
-    panels_options.auto_save_setup =
-        mc_config_get_int (mc_main_config, CONFIG_APP_SECTION, "auto_save_setup_panels",
-                           panels_options.auto_save_setup);
-    panels_options.filetype_mode =
-        mc_config_get_int (mc_main_config, CONFIG_APP_SECTION, "filetype_mode",
-                           panels_options.filetype_mode);
-    panels_options.permission_mode =
-        mc_config_get_int (mc_main_config, CONFIG_APP_SECTION, "permission_mode",
-                           panels_options.permission_mode);
+    for (i = 0; panels_ini_options[i].opt_name != NULL; i++)
+        *panels_ini_options[i].opt_addr =
+            mc_config_get_int (mc_main_config, CONFIG_APP_SECTION,
+                               panels_ini_options[i].opt_old_name != NULL
+                               ? panels_ini_options[i].opt_old_name : panels_ini_options[i].opt_name,
+                               *panels_ini_options[i].opt_addr);
 
     /* overwrite by new parameters */
-    if (mc_config_has_group (mc_main_config, section))
-    {
-        panels_options.mix_all_files =
-            mc_config_get_bool (mc_main_config, section, "mix_all_files",
-                                panels_options.mix_all_files);
-        panels_options.show_backups =
-            mc_config_get_bool (mc_main_config, section, "show_backups",
-                                panels_options.show_backups);
-        panels_options.show_dot_files =
-            mc_config_get_bool (mc_main_config, section, "show_dot_files",
-                                panels_options.show_dot_files);
-        panels_options.fast_reload =
-            mc_config_get_bool (mc_main_config, section, "fast_reload", panels_options.fast_reload);
-        panels_options.fast_reload_msg_shown =
-            mc_config_get_bool (mc_main_config, section, "fast_reload_msg_shown",
-                                panels_options.fast_reload_msg_shown);
-        panels_options.mark_moves_down =
-            mc_config_get_bool (mc_main_config, section, "mark_moves_down",
-                                panels_options.mark_moves_down);
-        panels_options.navigate_with_arrows =
-            mc_config_get_bool (mc_main_config, section, "navigate_with_arrows",
-                                panels_options.navigate_with_arrows);
-        panels_options.kilobyte_si =
-            mc_config_get_bool (mc_main_config, section, "kilobyte_si", panels_options.kilobyte_si);
-        panels_options.scroll_pages =
-            mc_config_get_bool (mc_main_config, section, "scroll_pages",
-                                panels_options.scroll_pages);
-        panels_options.mouse_move_pages =
-            mc_config_get_bool (mc_main_config, section, "mouse_move_pages",
-                                panels_options.mouse_move_pages);
-        panels_options.auto_save_setup =
-            mc_config_get_bool (mc_main_config, section, "auto_save_setup",
-                                panels_options.auto_save_setup);
-        panels_options.filetype_mode =
-            mc_config_get_bool (mc_main_config, section, "filetype_mode",
-                                panels_options.filetype_mode);
-        panels_options.permission_mode =
-            mc_config_get_bool (mc_main_config, section, "permission_mode",
-                                panels_options.permission_mode);
-    }
+    if (mc_config_has_group (mc_main_config, panels_section))
+        for (i = 0; panels_ini_options[i].opt_name != NULL; i++)
+            *panels_ini_options[i].opt_addr =
+                mc_config_get_bool (mc_main_config, panels_section,
+                                    panels_ini_options[i].opt_name,
+                                    *panels_ini_options[i].opt_addr);
 }
 
 /**
@@ -1277,22 +1234,9 @@ panels_load_options (void)
 void
 panels_save_options (void)
 {
-    const char *section = "Panels";
+    size_t i;
 
-    mc_config_set_bool (mc_main_config, section, "mix_all_files", panels_options.mix_all_files);
-    mc_config_set_bool (mc_main_config, section, "show_backups", panels_options.show_backups);
-    mc_config_set_bool (mc_main_config, section, "show_dot_files", panels_options.show_dot_files);
-    mc_config_set_bool (mc_main_config, section, "fast_reload", panels_options.fast_reload);
-    mc_config_set_bool (mc_main_config, section, "fast_reload_msg_shown",
-                        panels_options.fast_reload_msg_shown);
-    mc_config_set_bool (mc_main_config, section, "mark_moves_down", panels_options.mark_moves_down);
-    mc_config_set_bool (mc_main_config, section, "navigate_with_arrows",
-                        panels_options.navigate_with_arrows);
-    mc_config_set_bool (mc_main_config, section, "kilobyte_si", panels_options.kilobyte_si);
-    mc_config_set_bool (mc_main_config, section, "scroll_pages", panels_options.scroll_pages);
-    mc_config_set_bool (mc_main_config, section, "mouse_move_pages",
-                        panels_options.mouse_move_pages);
-    mc_config_set_bool (mc_main_config, section, "auto_save_setup", panels_options.auto_save_setup);
-    mc_config_set_bool (mc_main_config, section, "filetype_mode", panels_options.filetype_mode);
-    mc_config_set_bool (mc_main_config, section, "permission_mode", panels_options.permission_mode);
+    for (i = 0; panels_ini_options[i].opt_name != NULL; i++)
+        mc_config_get_bool (mc_main_config, panels_section,
+                            panels_ini_options[i].opt_name, *panels_ini_options[i].opt_addr);
 }
