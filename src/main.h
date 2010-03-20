@@ -58,8 +58,6 @@ extern int clear_before_exec;
 
 extern int option_tab_spacing;
 
-extern int quick_search_case_sensitive;
-
 #ifdef HAVE_CHARSET
 extern int source_codepage;
 extern int default_source_codepage;

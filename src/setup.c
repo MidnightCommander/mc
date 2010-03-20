@@ -102,9 +102,11 @@ panels_options_t panels_options = {
     .kilobyte_si = FALSE,
     .scroll_pages = TRUE,
     .mouse_move_pages = TRUE,
+    .reverse_files_only = TRUE,
     .auto_save_setup = FALSE,
     .filetype_mode = TRUE,
-    .permission_mode = FALSE
+    .permission_mode = FALSE,
+    .qsearch_mode = QSEARCH_PANEL_CASE
 };
 
 /*** file scope macro definitions **************************************/
@@ -248,10 +250,8 @@ static const struct
     { "horizontal_split",   &horizontal_split },
     { "mcview_remember_file_position", &mcview_remember_file_position },
     { "auto_fill_mkdir_name", &auto_fill_mkdir_name },
-    { "reverse_files_only", &reverse_files_only },
     { "copymove_persistent_attr", &setup_copymove_persistent_attr },
     { "select_flags", &select_flags },
-    { "quick_search_case_sensitive", &quick_search_case_sensitive },
     { NULL, NULL }
 };
 
@@ -284,6 +284,7 @@ static const struct
     { "kilobyte_si",  NULL, &panels_options.kilobyte_si },
     { "panel_scroll_pages",  "scroll_pages", &panels_options.scroll_pages },
     { "mouse_move_pages",  NULL, &panels_options.mouse_move_pages },
+    { "reverse_files_only", NULL, &panels_options.reverse_files_only },
     { "auto_save_setup_panels", "auto_save_setup", &panels_options.auto_save_setup },
     { "filetype_mode",  NULL, &panels_options.filetype_mode },
     { "permission_mode",  NULL, &panels_options.permission_mode },
@@ -1210,6 +1211,7 @@ void
 panels_load_options (void)
 {
     size_t i;
+    int qmode;
 
     /* Backward compatibility: load old parameters */
     for (i = 0; panels_ini_options[i].opt_name != NULL; i++)
@@ -1219,13 +1221,33 @@ panels_load_options (void)
                                ? panels_ini_options[i].opt_old_name : panels_ini_options[i].opt_name,
                                *panels_ini_options[i].opt_addr);
 
+    qmode = mc_config_get_int (mc_main_config, CONFIG_APP_SECTION,
+                                "quick_search_case_sensitive", (int) panels_options.qsearch_mode);
+    if (qmode < 0)
+        panels_options.qsearch_mode = QSEARCH_CASE_INSENSITIVE;
+    else if (qmode >= QSEARCH_NUM)
+        panels_options.qsearch_mode = QSEARCH_PANEL_CASE;
+    else
+        panels_options.qsearch_mode = (qsearch_mode_t) qmode;
+
     /* overwrite by new parameters */
     if (mc_config_has_group (mc_main_config, panels_section))
+    {
         for (i = 0; panels_ini_options[i].opt_name != NULL; i++)
             *panels_ini_options[i].opt_addr =
                 mc_config_get_bool (mc_main_config, panels_section,
                                     panels_ini_options[i].opt_name,
                                     *panels_ini_options[i].opt_addr);
+
+        qmode = mc_config_get_int (mc_main_config, panels_section,
+                                    "quick_search_mode", (int) panels_options.qsearch_mode);
+        if (qmode < 0)
+            panels_options.qsearch_mode = QSEARCH_CASE_INSENSITIVE;
+        else if (qmode >= QSEARCH_NUM)
+            panels_options.qsearch_mode = QSEARCH_PANEL_CASE;
+        else
+            panels_options.qsearch_mode = (qsearch_mode_t) qmode;
+    }
 }
 
 /**
@@ -1237,6 +1259,9 @@ panels_save_options (void)
     size_t i;
 
     for (i = 0; panels_ini_options[i].opt_name != NULL; i++)
-        mc_config_get_bool (mc_main_config, panels_section,
+        mc_config_set_bool (mc_main_config, panels_section,
                             panels_ini_options[i].opt_name, *panels_ini_options[i].opt_addr);
+
+    mc_config_set_int (mc_main_config, panels_section,
+                        "quick_search_mode", (int) panels_options.qsearch_mode);
 }

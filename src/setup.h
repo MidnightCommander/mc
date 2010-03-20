@@ -20,7 +20,6 @@ extern char *term_color_string;
 extern char *color_terminal_string;
 extern int verbose;
 extern int mouse_close_dialog;
-extern int reverse_files_only;
 extern int select_flags;
 extern int setup_copymove_persistent_attr;
 extern int num_history_items_recorded;
@@ -43,7 +42,15 @@ char *load_anon_passwd (void);
 void load_keymap_defs (void);
 void free_keymap_defs (void);
 
-/* panel setup */
+typedef enum
+{
+    QSEARCH_CASE_INSENSITIVE = 0,       /* quick search in case insensitive mode */
+    QSEARCH_CASE_SENSITIVE   = 1,       /* quick search in case sensitive mode */
+    QSEARCH_PANEL_CASE       = 2,       /* quick search get value from panel case_sensitive */
+    QSEARCH_NUM
+} qsearch_mode_t;
+
+/* panels ini options; [Panels] section */
 typedef struct
 {
     gboolean mix_all_files;             /* If FALSE then directories are shown separately from files */
@@ -57,9 +64,11 @@ typedef struct
                                          * (kilobyte, megabyte, ...). If FALSE, binary units (1024 based) will be used */
     gboolean scroll_pages;              /* If TRUE, up/down keys scroll the pane listing by pages */
     gboolean mouse_move_pages;          /* Move page/item? When clicking on the top or bottom of a panel */
+    gboolean reverse_files_only;        /* If TRUE, only selection of files is inverted */
     gboolean auto_save_setup;
     gboolean filetype_mode;             /* If TRUE - then add per file type hilighting */
     gboolean permission_mode;           /* If TRUE, we use permission hilighting */
+    qsearch_mode_t qsearch_mode;        /* Quick search mode */
 } panels_options_t;
 
 extern panels_options_t panels_options;
