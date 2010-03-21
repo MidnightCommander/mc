@@ -143,6 +143,9 @@ install-exec-hook:
 if USE_EDIT
 	$(MAKE) install_mcedit
 endif
+if USE_DIFF
+	$(MAKE) install_mcdiff
+endif
 
 #
 # Make relative symlinks, but do the right thing if LN_S is `ln' or `cp'.
@@ -153,8 +156,14 @@ install_mcview:
 install_mcedit:
 	cd $(DESTDIR)$(bindir)/$(binprefix) && rm -f mcedit && $(LN_S) mc mcedit
 
+install_mcdiff:
+	cd $(DESTDIR)$(bindir)/$(binprefix) && rm -f mcdiff && $(LN_S) mc mcdiff
+
 uninstall-hook:
 	rm -f $(DESTDIR)$(bindir)/$(binprefix)/mcview
 if USE_EDIT
 	rm -f $(DESTDIR)$(bindir)/$(binprefix)/mcedit
+endif
+if USE_DIFF
+	rm -f $(DESTDIR)$(bindir)/$(binprefix)/mcdiff
 endif

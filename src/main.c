@@ -91,21 +91,23 @@
 #include "cmddef.h"		/* CK_ cmd name const */
 #include "user.h"		/* user_file_menu_cmd() */
 
-
 #include "chmod.h"
 #include "chown.h"
 #include "achown.h"
 
 #include "main.h"
 
-
 #ifdef USE_INTERNAL_EDIT
-#   include "src/editor/edit.h"
+#include "src/editor/edit.h"
 #endif
 
-#ifdef	HAVE_CHARSET
+#ifdef USE_DIFF_VIEW
+#include "src/diffviewer/ydiff.h"
+#endif
+
+#ifdef HAVE_CHARSET
 #include "charsets.h"
-#endif				/* HAVE_CHARSET */
+#endif
 
 
 #include "keybind.h"		/* type global_keymap_t */
@@ -257,13 +259,8 @@ const char *home_dir = NULL;
 /* Tab size */
 int option_tab_spacing = 8;
 
-/* The value of the other directory, only used when loading the setup */
-char *other_dir = NULL;
-
 /* Only used at program boot */
 int boot_current_is_left = 1;
-
-static char *this_dir = NULL;
 
 /* If this is true, then when browsing the tree the other window will
  * automatically reload it's directory with the contents of the currently
@@ -276,11 +273,9 @@ static char *last_wd_string = NULL;
 /* Set to 1 to suppress printing the last directory */
 static int print_last_revert = 0;
 
-/* File name to view if argument was supplied */
-const char *view_one_file = NULL;
-
-/* File name to edit if argument was supplied */
-const char *edit_one_file = NULL;
+mc_run_mode_t mc_run_mode = MC_RUN_FULL;
+char *mc_run_param0 = NULL;
+char *mc_run_param1 = NULL;
 
 /* Line to start the editor on */
 static int edit_one_file_start_line = 0;
@@ -952,23 +947,23 @@ create_panels (void)
 	other_mode = startup_left_mode;
     }
     /* Creates the left panel */
-    if (this_dir) {
-	if (other_dir) {
+    if (mc_run_param0 != NULL) {
+	if (mc_run_param1 != NULL) {
 	    /* Ok, user has specified two dirs, save the original one,
 	     * since we may not be able to chdir to the proper
 	     * second directory later
 	     */
 	    mc_get_current_wd (original_dir, sizeof (original_dir) - 2);
 	}
-	translated_mc_chdir (this_dir);
+	translated_mc_chdir (mc_run_param0);
     }
     set_display_type (current_index, current_mode);
 
     /* The other panel */
-    if (other_dir) {
+    if (mc_run_param1 != NULL) {
 	if (original_dir[0] != '\0')
 	    translated_mc_chdir (original_dir);
-	translated_mc_chdir (other_dir);
+	translated_mc_chdir (mc_run_param1);
     }
     set_display_type (other_index, other_mode);
 
@@ -1158,11 +1153,6 @@ midnight_execute_cmd (Widget *sender, unsigned long command)
     case CK_CompareDirsCmd:
         compare_dirs_cmd ();
         break;
-#ifdef USE_DIFF_VIEW
-    case CK_DiffViewCmd:
-        diff_view_cmd ();
-        break;
-#endif
     case CK_ConfigureBox:
         configure_box ();
         break;
@@ -1198,6 +1188,11 @@ midnight_execute_cmd (Widget *sender, unsigned long command)
     case CK_DeleteCmd:
         delete_cmd ();
         break;
+#ifdef USE_DIFF_VIEW
+    case CK_DiffViewCmd:
+        diff_view_cmd ();
+        break;
+#endif
     case CK_DisplayBitsBox:
         display_bits_box ();
         break;
@@ -1829,16 +1824,28 @@ prepend_cwd_on_local (const char *filename)
 static void
 mc_maybe_editor_or_viewer (void)
 {
-    if (view_one_file != NULL) {
+    switch (mc_run_mode) {
+#ifdef USE_INTERNAL_EDIT
+    case MC_RUN_EDITOR:
+	edit_file (mc_run_param0, edit_one_file_start_line);
+	break;
+#endif				/* USE_INTERNAL_EDIT */
+    case MC_RUN_VIEWER:
+    {
 	char *path;
-	path = prepend_cwd_on_local (view_one_file);
+	path = prepend_cwd_on_local (mc_run_param0);
 	view_file (path, 0, 1);
 	g_free (path);
+	break;
     }
-#ifdef USE_INTERNAL_EDIT
-    else
-	edit_file (edit_one_file, edit_one_file_start_line);
-#endif				/* USE_INTERNAL_EDIT */
+#ifdef USE_DIFF_VIEW
+    case MC_RUN_DIFFVIEWER:
+	diff_view (mc_run_param0, mc_run_param1, mc_run_param0, mc_run_param1);
+	break;
+#endif				/* USE_DIFF_VIEW */
+    default:
+	break;
+    }
     midnight_shutdown = 1;
     done_mc ();
 }
@@ -1858,10 +1865,10 @@ do_nc (void)
     midnight_dlg = create_dlg (0, 0, LINES, COLS, midnight_colors, midnight_callback,
 			       "[main]", NULL, DLG_WANT_IDLE);
 
-    if ((view_one_file != NULL) || (edit_one_file != NULL))
-	setup_dummy_mc ();
-    else
+    if (mc_run_mode == MC_RUN_FULL)
 	setup_mc ();
+    else
+	setup_dummy_mc ();
 
     /* start check display_codepage and source_codepage */
     check_codeset ();
@@ -1897,7 +1904,7 @@ do_nc (void)
 #endif
 
     /* Check if we were invoked as an editor or file viewer */
-    if ((view_one_file != NULL) || (edit_one_file != NULL))
+    if (mc_run_mode != MC_RUN_FULL)
 	mc_maybe_editor_or_viewer ();
     else {
 	create_panels_and_run_mc ();
@@ -2048,8 +2055,8 @@ mc_main__setup_by_args (int argc, char *argv[])
     tmp = (argc > 0) ? argv[1] : NULL;
 
     if (!STRNCOMP (base, "mce", 3) || !STRCOMP (base, "vi")) {
-	edit_one_file = "";
-	if (tmp) {
+	mc_run_param0 = g_strdup ("");
+	if (tmp != NULL) {
 	    /*
 	     * Check for filename:lineno, followed by an optional colon.
 	     * This format is used by many programs (especially compilers)
@@ -2069,7 +2076,7 @@ mc_main__setup_by_args (int argc, char *argv[])
 		 * If it doesn't exist, revert to the old behavior.
 		 */
 		if (mc_stat (tmp, &st) == -1 && mc_stat (fname, &st) != -1) {
-		    edit_one_file = fname;
+		    mc_run_param0 = fname;
 		    edit_one_file_start_line = atoi (p);
 		} else {
 		    g_free (fname);
@@ -2087,24 +2094,40 @@ mc_main__setup_by_args (int argc, char *argv[])
 			}
 		    }
 		}
-		edit_one_file = g_strdup (tmp);
+		mc_run_param0 = g_strdup (tmp);
 	    }
 	}
+	mc_run_mode = MC_RUN_EDITOR;
     } else if (!STRNCOMP (base, "mcv", 3) || !STRCOMP (base, "view")) {
-	if (tmp)
-	    view_one_file = g_strdup (tmp);
+	if (tmp != NULL)
+	    mc_run_param0 = g_strdup (tmp);
 	else {
 	    fputs ("No arguments given to the viewer\n", stderr);
 	    exit (1);
 	}
+	mc_run_mode = MC_RUN_VIEWER;
+#ifdef USE_DIFF_VIEW
+    } else if (!STRNCOMP (base, "mcd", 3) || !STRCOMP (base, "diff")) {
+	if (argc < 3) {
+	    fputs ("There 2 files are required to diffviewer\n", stderr);
+	    exit (1);
+	} else if (tmp != NULL) {
+	    mc_run_param0 = g_strdup (tmp);
+	    tmp = (argc > 1) ? argv[2] : NULL;
+	    if (tmp != NULL)
+		mc_run_param1 = g_strdup (tmp);
+	mc_run_mode = MC_RUN_DIFFVIEWER;
+	}
+#endif				/* USE_DIFF_VIEW */
     } else {
 	/* sets the current dir and the other dir */
-	if (tmp) {
-	    this_dir = g_strdup (tmp);
+	if (tmp != NULL) {
+	    mc_run_param0 = g_strdup (tmp);
 	    tmp = (argc > 1) ? argv[2] : NULL;
-	    if (tmp)
-		other_dir = g_strdup (tmp);
+	    if (tmp != NULL)
+		mc_run_param1 = g_strdup (tmp);
 	}
+	mc_run_mode = MC_RUN_FULL;
     }
 }
 
@@ -2152,7 +2175,7 @@ main (int argc, char *argv[])
 
 #ifdef HAVE_SUBSHELL_SUPPORT
     /* Don't use subshell when invoked as viewer or editor */
-    if ((view_one_file != NULL) || (edit_one_file != NULL))
+    if (mc_run_mode != MC_RUN_FULL)
 	use_subshell = 0;
 
     if (use_subshell)
@@ -2254,8 +2277,8 @@ main (int argc, char *argv[])
 	handle_console (CONSOLE_DONE);
     putchar ('\n');		/* Hack to make shell's prompt start at left of screen */
 
-    if (mc_args__last_wd_file && last_wd_string && !print_last_revert
-	&& !edit_one_file && !view_one_file) {
+    if (mc_run_mode == MC_RUN_FULL && mc_args__last_wd_file && last_wd_string
+	&& !print_last_revert) {
 	int last_wd_fd =
 	    open (mc_args__last_wd_file, O_WRONLY | O_CREAT | O_TRUNC | O_EXCL,
 		  S_IRUSR | S_IWUSR);
@@ -2278,8 +2301,8 @@ main (int argc, char *argv[])
 #endif
     str_uninit_strings ();
 
-    g_free (this_dir);
-    g_free (other_dir);
+    g_free (mc_run_param0);
+    g_free (mc_run_param1);
 
 #ifdef USE_INTERNAL_EDIT
     edit_stack_free ();

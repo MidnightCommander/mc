@@ -145,13 +145,13 @@ static const GOptionEntry argument_main_table[] = {
     /* single file operations */
     {
      "view", 'v', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_STRING,
-     &view_one_file,
+     &mc_run_param0,
      N_("Launches the file viewer on a file"),
      "<file>"},
 
     {
      "edit", 'e', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_STRING,
-     &edit_one_file,
+     &mc_run_param0,
      N_("Edits one file"),
      "<file>"},
 

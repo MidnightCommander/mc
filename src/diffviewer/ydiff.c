@@ -31,28 +31,29 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 
+#include "lib/global.h"
+
+#include "lib/tty/tty.h"
+#include "lib/tty/color.h"
+#include "lib/tty/key.h"
+
+#include "lib/skin.h"                   /* EDITOR_NORMAL_COLOR */
+#include "lib/vfs/mc-vfs/vfs.h"         /* mc_opendir, mc_readdir, mc_closedir, */
+
 #include "src/cmddef.h"
 #include "src/keybind.h"
-#include "lib/global.h"
-#include "lib/tty/tty.h"
 #include "src/cmd.h"
 #include "src/dialog.h"
 #include "src/widget.h"
-#include "lib/tty/color.h"
 #include "src/help.h"
-#include "lib/tty/key.h"
 #include "src/wtools.h"
 #include "src/charsets.h"
 #include "src/history.h"
 #include "src/panel.h"                  /* Needed for current_panel and other_panel */
 #include "src/layout.h"                 /* Needed for get_current_index and get_other_panel */
-#include "lib/skin.h"                   /* EDITOR_NORMAL_COLOR */
-#include "lib/vfs/mc-vfs/vfs.h"         /* mc_opendir, mc_readdir, mc_closedir, */
                                         /* mc_open, mc_close, mc_read, mc_stat  */
 #include "src/main.h"                   /* mc_run_mode */
 #include "ydiff.h"
-
-#ifdef USE_DIFF_VIEW
 
 /*** global variables ****************************************************************************/
 
@@ -3133,7 +3134,7 @@ view_diff_cmd (WDiff *dview)
     int is_dir0 = 0;
     int is_dir1 = 0;
 
-    if (dview == NULL)
+    if ((mc_run_mode == MC_RUN_FULL) && (dview == NULL))
     {
         const WPanel *panel0 = current_panel;
         const WPanel *panel1 = other_panel;

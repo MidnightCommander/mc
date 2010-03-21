@@ -193,7 +193,7 @@ expand_format (struct WEdit *edit_widget, char c, gboolean do_quote)
     if (c == '%')
 	return g_strdup ("%");
 
-    if (edit_one_file == NULL) {
+    if (mc_run_mode == MC_RUN_FULL) {
 	if (g_ascii_islower ((gchar) c))
 	    panel = current_panel;
 	else {

@@ -304,7 +304,7 @@ toggle_panels (void)
     }
 #endif				/* HAVE_SUBSHELL_SUPPORT */
 
-    if ((view_one_file == NULL) && (edit_one_file == NULL)) {
+    if (mc_run_mode == MC_RUN_FULL) {
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 	update_xterm_title_path ();
     }
