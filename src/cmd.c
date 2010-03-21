@@ -326,8 +326,11 @@ do_edit_at_line (const char *what, int start_line)
         }
         execute_with_vfs_arg (editor, what);
     }
-    update_panels (UP_OPTIMIZE, UP_KEEPSEL);
-    repaint_screen ();
+    if (mc_run_mode == MC_RUN_FULL)
+    {
+        update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+        repaint_screen ();
+    }
 }
 
 static void

@@ -1629,7 +1629,7 @@ static void
 cc_free_elt (void *elt)
 {
     DIFFLN *p = elt;
-    if (p->p)
+    if (p != NULL)
     {
         g_free (p->p);
     }
