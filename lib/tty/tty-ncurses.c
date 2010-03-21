@@ -269,7 +269,7 @@ void
 tty_draw_hline (int y, int x, int ch, int len)
 {
     if ((chtype) ch == ACS_HLINE)
-        ch = mc_tty_ugly_frm[MC_TTY_FRM_thinhoriz];
+        ch = mc_tty_frm[MC_TTY_FRM_HORIZ];
 
     if ((y >= 0) && (x >= 0))
         move (y, x);
@@ -281,7 +281,7 @@ void
 tty_draw_vline (int y, int x, int ch, int len)
 {
     if ((chtype) ch == ACS_VLINE)
-        ch = mc_tty_ugly_frm[MC_TTY_FRM_thinvert];
+        ch = mc_tty_frm[MC_TTY_FRM_VERT];
 
     if ((y >= 0) && (x >= 0))
         move (y, x);
@@ -343,23 +343,23 @@ void
 tty_print_alt_char (int c, gboolean single)
 {
     if ((chtype) c == ACS_VLINE)
-        c = mc_tty_ugly_frm[single ? MC_TTY_FRM_thinvert: MC_TTY_FRM_vert];
+        c = mc_tty_frm[single ? MC_TTY_FRM_VERT : MC_TTY_FRM_DVERT];
     else if ((chtype) c == ACS_HLINE)
-        c = mc_tty_ugly_frm[single ? MC_TTY_FRM_thinhoriz : MC_TTY_FRM_horiz];
+        c = mc_tty_frm[single ? MC_TTY_FRM_HORIZ : MC_TTY_FRM_DHORIZ];
     else if ((chtype) c == ACS_LTEE)
-        c = mc_tty_ugly_frm[single ? MC_TTY_FRM_grpleftmiddle : MC_TTY_FRM_leftmiddle];
+        c = mc_tty_frm[single ? MC_TTY_FRM_LEFTMIDDLE : MC_TTY_FRM_DLEFTMIDDLE];
     else if ((chtype) c == ACS_RTEE)
-        c = mc_tty_ugly_frm[single ? MC_TTY_FRM_grprightmiddle : MC_TTY_FRM_rightmiddle];
+        c = mc_tty_frm[single ? MC_TTY_FRM_RIGHTMIDDLE : MC_TTY_FRM_DRIGHTMIDDLE];
     else if ((chtype) c == ACS_ULCORNER)
-        c = mc_tty_ugly_frm[single ? MC_TTY_FRM_grplefttop : MC_TTY_FRM_lefttop];
+        c = mc_tty_frm[single ? MC_TTY_FRM_LEFTTOP : MC_TTY_FRM_DLEFTTOP];
     else if ((chtype) c == ACS_LLCORNER)
-        c = mc_tty_ugly_frm[single ? MC_TTY_FRM_grpleftbottom : MC_TTY_FRM_leftbottom];
+        c = mc_tty_frm[single ? MC_TTY_FRM_LEFTBOTTOM : MC_TTY_FRM_DLEFTBOTTOM];
     else if ((chtype) c == ACS_URCORNER)
-        c = mc_tty_ugly_frm[single ? MC_TTY_FRM_grprighttop : MC_TTY_FRM_righttop];
+        c = mc_tty_frm[single ? MC_TTY_FRM_RIGHTTOP : MC_TTY_FRM_DRIGHTTOP];
     else if ((chtype) c == ACS_LRCORNER)
-        c = mc_tty_ugly_frm[single ? MC_TTY_FRM_grprightbottom : MC_TTY_FRM_rightbottom];
+        c = mc_tty_frm[single ? MC_TTY_FRM_RIGHTBOTTOM : MC_TTY_FRM_DRIGHTBOTTOM];
     else if ((chtype) c == ACS_PLUS)
-        c = mc_tty_ugly_frm[single ? MC_TTY_FRM_grpcentermiddle : MC_TTY_FRM_centermiddle];
+        c = mc_tty_frm[MC_TTY_FRM_CROSS];
 
     addch (c);
 }

@@ -420,7 +420,7 @@ void
 tty_draw_hline (int y, int x, int ch, int len)
 {
     if (ch == ACS_HLINE)
-        ch = mc_tty_ugly_frm[MC_TTY_FRM_thinhoriz];
+        ch = mc_tty_frm[MC_TTY_FRM_HORIZ];
 
     if ((y < 0) || (x < 0)) {
         y = SLsmg_get_row ();
@@ -445,7 +445,7 @@ void
 tty_draw_vline (int y, int x, int ch, int len)
 {
     if (ch == ACS_VLINE)
-        ch = mc_tty_ugly_frm[MC_TTY_FRM_thinvert];
+        ch = mc_tty_frm[MC_TTY_FRM_VERT];
 
     if ((y < 0) || (x < 0)) {
         y = SLsmg_get_row ();
@@ -503,31 +503,31 @@ tty_print_alt_char (int c, gboolean single)
        : SLsmg_write_char ((unsigned int) y)
     switch (c) {
     case ACS_VLINE:
-        DRAW (c, mc_tty_ugly_frm[single ? MC_TTY_FRM_thinvert : MC_TTY_FRM_vert]);
+        DRAW (c, mc_tty_frm[single ? MC_TTY_FRM_VERT : MC_TTY_FRM_DVERT]);
         break;
     case ACS_HLINE:
-        DRAW (c, mc_tty_ugly_frm[single ?  MC_TTY_FRM_thinhoriz : MC_TTY_FRM_horiz]);
+        DRAW (c, mc_tty_frm[single ?  MC_TTY_FRM_HORIZ : MC_TTY_FRM_DHORIZ]);
         break;
     case ACS_LTEE:
-        DRAW (c, mc_tty_ugly_frm[single ? MC_TTY_FRM_grpleftmiddle : MC_TTY_FRM_leftmiddle]);
+        DRAW (c, mc_tty_frm[single ? MC_TTY_FRM_LEFTMIDDLE : MC_TTY_FRM_DLEFTMIDDLE]);
         break;
     case ACS_RTEE:
-        DRAW (c, mc_tty_ugly_frm[single ? MC_TTY_FRM_grprightmiddle : MC_TTY_FRM_rightmiddle]);
+        DRAW (c, mc_tty_frm[single ? MC_TTY_FRM_RIGHTMIDDLE : MC_TTY_FRM_DRIGHTMIDDLE]);
         break;
     case ACS_ULCORNER:
-        DRAW (c, mc_tty_ugly_frm[single ? MC_TTY_FRM_grplefttop : MC_TTY_FRM_lefttop]);
+        DRAW (c, mc_tty_frm[single ? MC_TTY_FRM_LEFTTOP : MC_TTY_FRM_DLEFTTOP]);
         break;
     case ACS_LLCORNER:
-        DRAW (c, mc_tty_ugly_frm[single ? MC_TTY_FRM_grpleftbottom : MC_TTY_FRM_leftbottom]);
+        DRAW (c, mc_tty_frm[single ? MC_TTY_FRM_LEFTBOTTOM : MC_TTY_FRM_DLEFTBOTTOM]);
         break;
     case ACS_URCORNER:
-        DRAW (c, mc_tty_ugly_frm[single ? MC_TTY_FRM_grprighttop : MC_TTY_FRM_righttop]);
+        DRAW (c, mc_tty_frm[single ? MC_TTY_FRM_RIGHTTOP : MC_TTY_FRM_DRIGHTTOP]);
         break;
     case ACS_LRCORNER:
-        DRAW (c, mc_tty_ugly_frm[single ? MC_TTY_FRM_grprightbottom : MC_TTY_FRM_rightbottom]);
+        DRAW (c, mc_tty_frm[single ? MC_TTY_FRM_RIGHTBOTTOM : MC_TTY_FRM_DRIGHTBOTTOM]);
         break;
     case ACS_PLUS:
-        DRAW (c, mc_tty_ugly_frm[single ? MC_TTY_FRM_grpcentermiddle : MC_TTY_FRM_centermiddle]);
+        DRAW (c, mc_tty_frm[MC_TTY_FRM_CROSS]);
         break;
     default:
         SLsmg_write_char ((unsigned int) c);

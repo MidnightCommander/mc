@@ -79,34 +79,33 @@ extern void tty_draw_box (int y, int x, int rows, int cols);
 extern void tty_draw_double_box (int y, int x, int rows, int cols);
 extern void tty_fill_region (int y, int x, int rows, int cols, unsigned char ch);
 
-extern int mc_tty_ugly_frm[];
+extern int mc_tty_frm[];
 
 typedef enum {
-    MC_TTY_FRM_thinvert,
-    MC_TTY_FRM_thinhoriz,
-    MC_TTY_FRM_vert,
-    MC_TTY_FRM_horiz,
-    MC_TTY_FRM_lefttop,
-    MC_TTY_FRM_righttop,
-    MC_TTY_FRM_leftbottom,
-    MC_TTY_FRM_rightbottom,
-    MC_TTY_FRM_centertop,
-    MC_TTY_FRM_centerbottom,
-    MC_TTY_FRM_leftmiddle,
-    MC_TTY_FRM_rightmiddle,
-    MC_TTY_FRM_centermiddle,
+    /* single lines */
+    MC_TTY_FRM_VERT,
+    MC_TTY_FRM_HORIZ,
+    MC_TTY_FRM_LEFTTOP,
+    MC_TTY_FRM_RIGHTTOP,
+    MC_TTY_FRM_LEFTBOTTOM,
+    MC_TTY_FRM_RIGHTBOTTOM,
+    MC_TTY_FRM_TOPMIDDLE,
+    MC_TTY_FRM_BOTTOMMIDDLE,
+    MC_TTY_FRM_LEFTMIDDLE,
+    MC_TTY_FRM_RIGHTMIDDLE,
+    MC_TTY_FRM_CROSS,
 
-    MC_TTY_FRM_grpvert,
-    MC_TTY_FRM_grphoriz,
-    MC_TTY_FRM_grplefttop,
-    MC_TTY_FRM_grprighttop,
-    MC_TTY_FRM_grpleftbottom,
-    MC_TTY_FRM_grprightbottom,
-    MC_TTY_FRM_grpcentertop,
-    MC_TTY_FRM_grpcenterbottom,
-    MC_TTY_FRM_grpleftmiddle,
-    MC_TTY_FRM_grprightmiddle,
-    MC_TTY_FRM_grpcentermiddle,
+    /* double lines */
+    MC_TTY_FRM_DVERT,
+    MC_TTY_FRM_DHORIZ,
+    MC_TTY_FRM_DLEFTTOP,
+    MC_TTY_FRM_DRIGHTTOP,
+    MC_TTY_FRM_DLEFTBOTTOM,
+    MC_TTY_FRM_DRIGHTBOTTOM,
+    MC_TTY_FRM_DTOPMIDDLE,
+    MC_TTY_FRM_DBOTTOMMIDDLE,
+    MC_TTY_FRM_DLEFTMIDDLE,
+    MC_TTY_FRM_DRIGHTMIDDLE,
 
     MC_TTY_FRM_MAX
 } mc_tty_frm_t;

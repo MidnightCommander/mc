@@ -54,7 +54,7 @@ gboolean slow_tty = FALSE;
 /* If true use +, -, | for line drawing */
 gboolean ugly_line_drawing = FALSE;
 
-int mc_tty_ugly_frm[MC_TTY_FRM_MAX];
+int mc_tty_frm[MC_TTY_FRM_MAX];
 
 /*** file scope macro definitions **************************************/
 
@@ -140,35 +140,35 @@ tty_print_one_vline (gboolean single)
 void
 tty_draw_box (int y, int x, int ys, int xs)
 {
-    tty_draw_vline (y, x, mc_tty_ugly_frm[MC_TTY_FRM_grpvert], ys);
-    tty_draw_vline (y, x + xs - 1, mc_tty_ugly_frm[MC_TTY_FRM_grpvert], ys);
-    tty_draw_hline (y, x, mc_tty_ugly_frm[MC_TTY_FRM_grphoriz], xs);
-    tty_draw_hline (y + ys - 1, x, mc_tty_ugly_frm[MC_TTY_FRM_grphoriz], xs);
+    tty_draw_vline (y, x, mc_tty_frm[MC_TTY_FRM_VERT], ys);
+    tty_draw_vline (y, x + xs - 1, mc_tty_frm[MC_TTY_FRM_VERT], ys);
+    tty_draw_hline (y, x, mc_tty_frm[MC_TTY_FRM_HORIZ], xs);
+    tty_draw_hline (y + ys - 1, x, mc_tty_frm[MC_TTY_FRM_HORIZ], xs);
     tty_gotoyx (y, x);
-    tty_print_alt_char (mc_tty_ugly_frm[MC_TTY_FRM_grplefttop], TRUE);
+    tty_print_alt_char (ACS_ULCORNER, TRUE);
     tty_gotoyx (y + ys - 1, x);
-    tty_print_alt_char (mc_tty_ugly_frm[MC_TTY_FRM_grpleftbottom], TRUE);
+    tty_print_alt_char (ACS_LLCORNER, TRUE);
     tty_gotoyx (y, x + xs - 1);
-    tty_print_alt_char (mc_tty_ugly_frm[MC_TTY_FRM_grprighttop], TRUE);
+    tty_print_alt_char (ACS_URCORNER, TRUE);
     tty_gotoyx (y + ys - 1, x + xs - 1);
-    tty_print_alt_char (mc_tty_ugly_frm[MC_TTY_FRM_grprightbottom], TRUE);
+    tty_print_alt_char (ACS_LRCORNER, TRUE);
 }
 
 void
 tty_draw_double_box (int y, int x, int ys, int xs)
 {
-    tty_draw_vline (y, x, mc_tty_ugly_frm[MC_TTY_FRM_vert], ys);
-    tty_draw_vline (y, x + xs - 1, mc_tty_ugly_frm[MC_TTY_FRM_vert], ys);
-    tty_draw_hline (y, x, mc_tty_ugly_frm[MC_TTY_FRM_horiz], xs);
-    tty_draw_hline (y + ys - 1, x, mc_tty_ugly_frm[MC_TTY_FRM_horiz], xs);
+    tty_draw_vline (y, x, mc_tty_frm[MC_TTY_FRM_DVERT], ys);
+    tty_draw_vline (y, x + xs - 1, mc_tty_frm[MC_TTY_FRM_DVERT], ys);
+    tty_draw_hline (y, x, mc_tty_frm[MC_TTY_FRM_DHORIZ], xs);
+    tty_draw_hline (y + ys - 1, x, mc_tty_frm[MC_TTY_FRM_DHORIZ], xs);
     tty_gotoyx (y, x);
-    tty_print_alt_char (mc_tty_ugly_frm[MC_TTY_FRM_lefttop], FALSE);
+    tty_print_alt_char (ACS_ULCORNER, FALSE);
     tty_gotoyx (y + ys - 1, x);
-    tty_print_alt_char (mc_tty_ugly_frm[MC_TTY_FRM_leftbottom], FALSE);
+    tty_print_alt_char (ACS_LLCORNER], FALSE);
     tty_gotoyx (y, x + xs - 1);
-    tty_print_alt_char (mc_tty_ugly_frm[MC_TTY_FRM_righttop], FALSE);
+    tty_print_alt_char (ACS_URCORNER, FALSE);
     tty_gotoyx (y + ys - 1, x + xs - 1);
-    tty_print_alt_char (mc_tty_ugly_frm[MC_TTY_FRM_rightbottom], FALSE);
+    tty_print_alt_char (ACS_LRCORNER, FALSE);
 }
 
 char *

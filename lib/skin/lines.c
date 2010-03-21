@@ -97,37 +97,35 @@ mc_skin_lines_load_frm (mc_skin_t * mc_skin, const char *name)
 void
 mc_skin_lines_parse_ini_file (mc_skin_t * mc_skin)
 {
-    if (mc_args__slow_terminal) {
+    if (mc_args__slow_terminal)
         mc_skin_hardcoded_space_lines (mc_skin);
-    } else if (mc_args__ugly_line_drawing) {
+    else if (mc_args__ugly_line_drawing)
         mc_skin_hardcoded_ugly_lines (mc_skin);
-    }
 
-    mc_tty_ugly_frm[MC_TTY_FRM_horiz] = mc_skin_lines_load_frm (mc_skin, "horiz");
-    mc_tty_ugly_frm[MC_TTY_FRM_vert] = mc_skin_lines_load_frm (mc_skin, "vert");
-    mc_tty_ugly_frm[MC_TTY_FRM_lefttop] = mc_skin_lines_load_frm (mc_skin, "lefttop");
-    mc_tty_ugly_frm[MC_TTY_FRM_righttop] = mc_skin_lines_load_frm (mc_skin, "righttop");
-    mc_tty_ugly_frm[MC_TTY_FRM_leftbottom] = mc_skin_lines_load_frm (mc_skin, "leftbottom");
-    mc_tty_ugly_frm[MC_TTY_FRM_rightbottom] = mc_skin_lines_load_frm (mc_skin, "rightbottom");
-    mc_tty_ugly_frm[MC_TTY_FRM_thinvert] = mc_skin_lines_load_frm (mc_skin, "thinvert");
-    mc_tty_ugly_frm[MC_TTY_FRM_thinhoriz] = mc_skin_lines_load_frm (mc_skin, "thinhoriz");
-    mc_tty_ugly_frm[MC_TTY_FRM_rightmiddle] = mc_skin_lines_load_frm (mc_skin, "rightmiddle");
-    mc_tty_ugly_frm[MC_TTY_FRM_centertop] = mc_skin_lines_load_frm (mc_skin, "centertop");
-    mc_tty_ugly_frm[MC_TTY_FRM_centerbottom] = mc_skin_lines_load_frm (mc_skin, "centerbottom");
-    mc_tty_ugly_frm[MC_TTY_FRM_centermiddle] = mc_skin_lines_load_frm (mc_skin, "centermiddle");
-    mc_tty_ugly_frm[MC_TTY_FRM_leftmiddle] = mc_skin_lines_load_frm (mc_skin, "leftmiddle");
+    /* single lines */
+    mc_tty_frm[MC_TTY_FRM_VERT] = mc_skin_lines_load_frm (mc_skin, "vert");
+    mc_tty_frm[MC_TTY_FRM_HORIZ] = mc_skin_lines_load_frm (mc_skin, "horiz");
+    mc_tty_frm[MC_TTY_FRM_LEFTTOP] = mc_skin_lines_load_frm (mc_skin, "lefttop");
+    mc_tty_frm[MC_TTY_FRM_RIGHTTOP] = mc_skin_lines_load_frm (mc_skin, "righttop");
+    mc_tty_frm[MC_TTY_FRM_LEFTBOTTOM] = mc_skin_lines_load_frm (mc_skin, "leftbottom");
+    mc_tty_frm[MC_TTY_FRM_RIGHTBOTTOM] = mc_skin_lines_load_frm (mc_skin, "rightbottom");
+    mc_tty_frm[MC_TTY_FRM_TOPMIDDLE] = mc_skin_lines_load_frm (mc_skin, "topmiddle");
+    mc_tty_frm[MC_TTY_FRM_BOTTOMMIDDLE] = mc_skin_lines_load_frm (mc_skin, "bottommiddle");
+    mc_tty_frm[MC_TTY_FRM_LEFTMIDDLE] = mc_skin_lines_load_frm (mc_skin, "leftmiddle");
+    mc_tty_frm[MC_TTY_FRM_RIGHTMIDDLE] = mc_skin_lines_load_frm (mc_skin, "rightmiddle");
+    mc_tty_frm[MC_TTY_FRM_CROSS] = mc_skin_lines_load_frm (mc_skin, "cross");
 
-    mc_tty_ugly_frm[MC_TTY_FRM_grphoriz] = mc_skin_lines_load_frm (mc_skin, "grouphoriz");
-    mc_tty_ugly_frm[MC_TTY_FRM_grpvert] = mc_skin_lines_load_frm (mc_skin, "groupvert");
-    mc_tty_ugly_frm[MC_TTY_FRM_grplefttop] = mc_skin_lines_load_frm (mc_skin, "grouplefttop");
-    mc_tty_ugly_frm[MC_TTY_FRM_grprighttop] = mc_skin_lines_load_frm (mc_skin, "grouprighttop");
-    mc_tty_ugly_frm[MC_TTY_FRM_grpleftbottom] = mc_skin_lines_load_frm (mc_skin, "groupleftbottom");
-    mc_tty_ugly_frm[MC_TTY_FRM_grprightbottom] = mc_skin_lines_load_frm (mc_skin, "grouprightbottom");
-    mc_tty_ugly_frm[MC_TTY_FRM_grprightmiddle] = mc_skin_lines_load_frm (mc_skin, "grouprightmiddle");
-    mc_tty_ugly_frm[MC_TTY_FRM_grpcentertop] = mc_skin_lines_load_frm (mc_skin, "groupcentertop");
-    mc_tty_ugly_frm[MC_TTY_FRM_grpcenterbottom] = mc_skin_lines_load_frm (mc_skin, "groupcenterbottom");
-    mc_tty_ugly_frm[MC_TTY_FRM_grpcentermiddle] = mc_skin_lines_load_frm (mc_skin, "groupcentermiddle");
-    mc_tty_ugly_frm[MC_TTY_FRM_grpleftmiddle] = mc_skin_lines_load_frm (mc_skin, "groupleftmiddle");
+    /* double lines */
+    mc_tty_frm[MC_TTY_FRM_DVERT] = mc_skin_lines_load_frm (mc_skin, "dvert");
+    mc_tty_frm[MC_TTY_FRM_DHORIZ] = mc_skin_lines_load_frm (mc_skin, "dhoriz");
+    mc_tty_frm[MC_TTY_FRM_DLEFTTOP] = mc_skin_lines_load_frm (mc_skin, "dlefttop");
+    mc_tty_frm[MC_TTY_FRM_DRIGHTTOP] = mc_skin_lines_load_frm (mc_skin, "drighttop");
+    mc_tty_frm[MC_TTY_FRM_DLEFTBOTTOM] = mc_skin_lines_load_frm (mc_skin, "dleftbottom");
+    mc_tty_frm[MC_TTY_FRM_DRIGHTBOTTOM] = mc_skin_lines_load_frm (mc_skin, "drightbottom");
+    mc_tty_frm[MC_TTY_FRM_DTOPMIDDLE] = mc_skin_lines_load_frm (mc_skin, "dtopmiddle");
+    mc_tty_frm[MC_TTY_FRM_DBOTTOMMIDDLE] = mc_skin_lines_load_frm (mc_skin, "dbottommiddle");
+    mc_tty_frm[MC_TTY_FRM_DLEFTMIDDLE] = mc_skin_lines_load_frm (mc_skin, "dleftmiddle");
+    mc_tty_frm[MC_TTY_FRM_DRIGHTMIDDLE] = mc_skin_lines_load_frm (mc_skin, "drightmiddle");
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -81,19 +81,29 @@ mc_skin_hardcoded_blackwhite_colors (mc_skin_t * mc_skin)
 void
 mc_skin_hardcoded_space_lines (mc_skin_t * mc_skin)
 {
+    /* single lines */
+    set_lines ("vert", " ");
+    set_lines ("horiz", " ");
     set_lines ("lefttop", " ");
     set_lines ("righttop", " ");
-    set_lines ("centertop", " ");
-    set_lines ("centerbottom", " ");
     set_lines ("leftbottom", " ");
     set_lines ("rightbottom", " ");
+    set_lines ("topmiddle", " ");
+    set_lines ("bottommiddle", " ");
     set_lines ("leftmiddle", " ");
     set_lines ("rightmiddle", " ");
-    set_lines ("centermiddle", " ");
-    set_lines ("horiz", " ");
-    set_lines ("vert", " ");
-    set_lines ("thinhoriz", " ");
-    set_lines ("thinvert", " ");
+    set_lines ("cross", " ");
+
+    set_lines ("dvert", " ");
+    set_lines ("dhoriz", " ");
+    set_lines ("dlefttop", " ");
+    set_lines ("drighttop", " ");
+    set_lines ("dleftbottom", " ");
+    set_lines ("drightbottom", " ");
+    set_lines ("dtopmiddle", " ");
+    set_lines ("dbottommiddle", " ");
+    set_lines ("dleftmiddle", " ");
+    set_lines ("drightmiddle", " ");
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -101,31 +111,30 @@ mc_skin_hardcoded_space_lines (mc_skin_t * mc_skin)
 void
 mc_skin_hardcoded_ugly_lines (mc_skin_t * mc_skin)
 {
+    /* single lines */
+    set_lines ("vert", "|");
+    set_lines ("horiz", "-");
     set_lines ("lefttop", "+");
     set_lines ("righttop", "+");
-    set_lines ("centertop", "-");
-    set_lines ("centerbottom", "-");
     set_lines ("leftbottom", "+");
     set_lines ("rightbottom", "+");
+    set_lines ("topmiddle", "-");
+    set_lines ("bottommiddle", "-");
     set_lines ("leftmiddle", "|");
     set_lines ("rightmiddle", "|");
-    set_lines ("centermiddle", "+");
-    set_lines ("horiz", "-");
-    set_lines ("vert", "|");
-    set_lines ("thinhoriz", "-");
-    set_lines ("thinvert", "|");
+    set_lines ("cross", "+");
 
-    set_lines ("grouplefttop", "+");
-    set_lines ("grouprighttop", "+");
-    set_lines ("groupcentertop", "-");
-    set_lines ("groupcenterbottom", "-");
-    set_lines ("groupleftbottom", "+");
-    set_lines ("grouprightbottom", "+");
-    set_lines ("groupleftmiddle", "|");
-    set_lines ("grouprightmiddle", "|");
-    set_lines ("groupcentermiddle", "+");
-    set_lines ("grouphoriz", "-");
-    set_lines ("groupvert", "|");
+    /* double lines */
+    set_lines ("dvert", "|");
+    set_lines ("dhoriz", "-");
+    set_lines ("dlefttop", "+");
+    set_lines ("drighttop", "+");
+    set_lines ("dleftbottom", "+");
+    set_lines ("drightbottom", "+");
+    set_lines ("dtopmiddle", "-");
+    set_lines ("dbottommiddle", "-");
+    set_lines ("dleftmiddle", "|");
+    set_lines ("drightmiddle", "|");
 }
 
 /* --------------------------------------------------------------------------------------------- */
