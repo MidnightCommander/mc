@@ -126,15 +126,15 @@ tty_got_interrupt (void)
 }
 
 void
-tty_print_one_hline (void)
+tty_print_one_hline (gboolean single)
 {
-    tty_print_alt_char (mc_tty_ugly_frm[MC_TTY_FRM_thinhoriz], FALSE);
+    tty_print_alt_char (ACS_HLINE, single);
 }
 
 void
-tty_print_one_vline (void)
+tty_print_one_vline (gboolean single)
 {
-    tty_print_alt_char (mc_tty_ugly_frm[MC_TTY_FRM_thinvert], FALSE);
+    tty_print_alt_char (ACS_VLINE, single);
 }
 
 void

@@ -71,8 +71,8 @@ extern void tty_print_anychar (int c);
 extern void tty_print_string (const char *s);
 extern void tty_printf (const char *s, ...);
 
-extern void tty_print_one_vline (void);
-extern void tty_print_one_hline (void);
+extern void tty_print_one_vline (gboolean single);
+extern void tty_print_one_hline (gboolean single);
 extern void tty_draw_hline (int y, int x, int ch, int len);
 extern void tty_draw_vline (int y, int x, int ch, int len);
 extern void tty_draw_box (int y, int x, int rows, int cols);

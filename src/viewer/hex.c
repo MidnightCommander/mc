@@ -199,7 +199,7 @@ mcview_display_hex (mcview_t * view)
                 {
                     if (view->data_area.width >= 80 && col < width)
                     {
-                        tty_print_one_vline ();
+                        tty_print_one_vline (TRUE);
                         col += 1;
                     }
                     if (col < width)

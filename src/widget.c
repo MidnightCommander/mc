@@ -2254,14 +2254,14 @@ listbox_drawscroll (WListbox * l)
     /* Are we at the top? */
     widget_move (&l->widget, 0, l->widget.cols);
     if (l->top == 0)
-        tty_print_one_vline ();
+        tty_print_one_vline (TRUE);
     else
         tty_print_char ('^');
 
     /* Are we at the bottom? */
     widget_move (&l->widget, max_line, l->widget.cols);
     if ((l->top + l->widget.lines == l->count) || (l->widget.lines >= l->count))
-        tty_print_one_vline ();
+        tty_print_one_vline (TRUE);
     else
         tty_print_char ('v');
 
@@ -2273,7 +2273,7 @@ listbox_drawscroll (WListbox * l)
     {
         widget_move (&l->widget, i, l->widget.cols);
         if (i != line)
-            tty_print_one_vline ();
+            tty_print_one_vline (TRUE);
         else
             tty_print_char ('*');
     }

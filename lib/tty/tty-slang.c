@@ -503,10 +503,10 @@ tty_print_alt_char (int c, gboolean single)
        : SLsmg_write_char ((unsigned int) y)
     switch (c) {
     case ACS_VLINE:
-        DRAW (c, mc_tty_ugly_frm[MC_TTY_FRM_thinvert]);
+        DRAW (c, mc_tty_ugly_frm[single ? MC_TTY_FRM_thinvert : MC_TTY_FRM_vert]);
         break;
     case ACS_HLINE:
-        DRAW (c, mc_tty_ugly_frm[MC_TTY_FRM_thinhoriz]);
+        DRAW (c, mc_tty_ugly_frm[single ?  MC_TTY_FRM_thinhoriz : MC_TTY_FRM_horiz]);
         break;
     case ACS_LTEE:
         DRAW (c, mc_tty_ugly_frm[single ? MC_TTY_FRM_grpleftmiddle : MC_TTY_FRM_leftmiddle]);

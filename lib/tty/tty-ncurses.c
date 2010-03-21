@@ -343,9 +343,9 @@ void
 tty_print_alt_char (int c, gboolean single)
 {
     if ((chtype) c == ACS_VLINE)
-        c = mc_tty_ugly_frm[MC_TTY_FRM_thinvert];
+        c = mc_tty_ugly_frm[single ? MC_TTY_FRM_thinvert: MC_TTY_FRM_vert];
     else if ((chtype) c == ACS_HLINE)
-        c = mc_tty_ugly_frm[MC_TTY_FRM_thinhoriz];
+        c = mc_tty_ugly_frm[single ? MC_TTY_FRM_thinhoriz : MC_TTY_FRM_horiz];
     else if ((chtype) c == ACS_LTEE)
         c = mc_tty_ugly_frm[single ? MC_TTY_FRM_grpleftmiddle : MC_TTY_FRM_leftmiddle];
     else if ((chtype) c == ACS_RTEE)
