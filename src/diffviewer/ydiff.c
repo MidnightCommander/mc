@@ -255,17 +255,13 @@ f_dopen (int fd)
     FBUF *fs;
 
     if (fd < 0)
-    {
         return NULL;
-    }
 
-    fs = g_malloc (sizeof (FBUF));
+    fs = g_try_malloc (sizeof (FBUF));
     if (fs == NULL)
-    {
         return NULL;
-    }
 
-    fs->buf = g_malloc (FILE_READ_BUF);
+    fs->buf = g_try_malloc (FILE_READ_BUF);
     if (fs->buf == NULL)
     {
         g_free (fs);
@@ -296,7 +292,7 @@ f_free (FBUF * fs)
     if (fs->flags & FILE_FLAG_TEMP)
     {
         rv = unlink (fs->data);
-        free (fs->data);
+        g_free (fs->data);
     }
     g_free (fs->buf);
     g_free (fs);
@@ -803,29 +799,21 @@ dff_execute (const char *args, const char *extra, const char *file1, const char 
     char *cmd;
     int code;
 
-    cmd =
-        malloc (14 + strlen (args) + strlen (extra) + strlen (opt) + strlen (file1) +
-                strlen (file2));
+    cmd = g_strdup_printf ("diff %s %s %s \"%s\" \"%s\"", args, extra, opt, file1, file2);
     if (cmd == NULL)
-    {
         return -1;
-    }
-    sprintf (cmd, "diff %s %s %s \"%s\" \"%s\"", args, extra, opt, file1, file2);
 
     f = p_open (cmd, O_RDONLY);
-    free (cmd);
+    g_free (cmd);
+
     if (f == NULL)
-    {
         return -1;
-    }
 
     rv = scan_diff (f, ops);
     code = p_close (f);
 
     if (rv < 0 || code == -1 || !WIFEXITED (code) || WEXITSTATUS (code) == 2)
-    {
         return -1;
-    }
 
     return rv;
 }
@@ -1667,11 +1655,8 @@ printer (void *ctx, int ch, int line, off_t off, size_t sz, const char *str)
             {
                 sz--;
             }
-            if (sz)
-            {
-                p.p = g_malloc (sz);
-                memcpy (p.p, str, sz);
-            }
+            if (sz != NULL)
+                p.p = g_strndup (str, sz);
             p.u.len = sz;
         }
         g_array_append_val (a, p);
