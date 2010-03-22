@@ -65,10 +65,7 @@ static void dlg_broadcast_msg_to (Dlg_head * h, widget_msg_t message,
 void
 draw_box (Dlg_head *h, int y, int x, int ys, int xs, gboolean single)
 {
-    if (single)
-	tty_draw_box (h->y + y, h->x + x, ys, xs);
-    else
-	tty_draw_double_box (h->y + y, h->x + x, ys, xs);
+    tty_draw_box (h->y + y, h->x + x, ys, xs, single);
 }
 
 void
