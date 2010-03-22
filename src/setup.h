@@ -62,11 +62,12 @@ typedef struct
     gboolean navigate_with_arrows;      /* If TRUE: l&r arrows are used to chdir if the input line is empty */
     gboolean kilobyte_si;               /* If TRUE, SI units (1000 based) will be used for larger units
                                          * (kilobyte, megabyte, ...). If FALSE, binary units (1024 based) will be used */
-    gboolean scroll_pages;              /* If TRUE, up/down keys scroll the pane listing by pages */
-    gboolean mouse_move_pages;          /* Move page/item? When clicking on the top or bottom of a panel */
+    gboolean scroll_pages;              /* If TRUE, panel is scrolled by half the display when the cursor reaches
+                                           the end or the beginning of the panel */
+    gboolean mouse_move_pages;          /* Scroll page/item using mouse wheel */
     gboolean reverse_files_only;        /* If TRUE, only selection of files is inverted */
     gboolean auto_save_setup;
-    gboolean filetype_mode;             /* If TRUE - then add per file type hilighting */
+    gboolean filetype_mode;             /* If TRUE then add per file type hilighting */
     gboolean permission_mode;           /* If TRUE, we use permission hilighting */
     qsearch_mode_t qsearch_mode;        /* Quick search mode */
 } panels_options_t;
