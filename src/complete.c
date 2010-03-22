@@ -459,7 +459,7 @@ command_completion_function (const char *_text, int state, INPUT_COMPLETE_FLAGS 
     static const char *path_end;
     static gboolean isabsolute;
     static int phase;
-    static int text_len;
+    static size_t text_len;
     static const char *const *words;
     static char *path;
     static char *cur_path;
@@ -520,16 +520,20 @@ command_completion_function (const char *_text, int state, INPUT_COMPLETE_FLAGS 
     switch (phase) {
     case 0:			/* Reserved words */
 	while (*words) {
-	    if (!strncmp (*words, text, text_len))
+	    if (strncmp (*words, text, text_len) == 0) {
+		g_free (text);
 		return g_strdup (*(words++));
+	    }
 	    words++;
 	}
 	phase++;
 	words = bash_builtins;
     case 1:			/* Builtin commands */
 	while (*words) {
-	    if (!strncmp (*words, text, text_len))
+	    if (strncmp (*words, text, text_len) == 0) {
+		g_free (text);
 		return g_strdup (*(words++));
+	    }
 	    words++;
 	}
 	phase++;
