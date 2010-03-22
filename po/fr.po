@@ -55,7 +55,7 @@ msgstr ""
 "Le thème par défaut a été chargé"
 
 # XXX: trad "parser"
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
@@ -452,9 +452,7 @@ msgid "fish: Waiting for initial line..."
 msgstr "fish : attente de la première ligne..."
 
 msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr ""
-"Désolé, nous ne pouvons pas faire de connexion authentifiée par mot de passe "
-"pour l'instant."
+msgstr "Désolé, nous ne pouvons pas faire de connexion authentifiée par mot de passe pour l'instant."
 
 msgid " fish: Password required for "
 msgstr " fish : mot de passe requis "
@@ -754,8 +752,7 @@ msgstr " lors du démarrage du scrutage de l'inode %d "
 
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
-msgstr ""
-"undelfs : chargement le l'information de fichiers supprimés de %d inodes"
+msgstr "undelfs : chargement le l'information de fichiers supprimés de %d inodes"
 
 #, c-format
 msgid " while calling ext2_block_iterate %d "
@@ -801,8 +798,7 @@ msgid " vfs_info is not fs! "
 msgstr " vfs_info n'est pas fs ! "
 
 msgid " You have to chdir to extract files first "
-msgstr ""
-" Vous devez changer de répertoire pour extraire les fichier en premier "
+msgstr " Vous devez changer de répertoire pour extraire les fichier en premier "
 
 msgid " while iterating over blocks "
 msgstr " lors de l'itération au dessus des blocs "
@@ -962,8 +958,7 @@ msgstr ""
 "mots clés :\n"
 "   Global :             errors, reverse, gauge, input, viewunderline\n"
 "   Affichage fichiers : normal, selected, marked, markselect\n"
-"   Boîtes de dialogue : dnormal, dfocus, dhotnormal, dhotfocus, "
-"errdhotnormal\n"
+"   Boîtes de dialogue : dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal\n"
 "                        errdhotfocus\n"
 "   Menus :              menu, menuhot, menusel, menuhotsel\n"
 "   Editeur :            editnormal, editbold, editmarked, editwhitespace,\n"
@@ -1033,8 +1028,7 @@ msgstr " Erreur de  protocole de fond "
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
-msgstr ""
-"Une tâche de fond a passé plus de paramètres que je ne peux en gérer. \n"
+msgstr "Une tâche de fond a passé plus de paramètres que je ne peux en gérer. \n"
 
 msgid "&Full file list"
 msgstr "Liste &Complète des fichiers"
@@ -1073,9 +1067,8 @@ msgstr "Ordre de tri"
 msgid " Confirmation "
 msgstr " Confirmation "
 
-#, fuzzy
 msgid " confirm di&Rectory hotlist delete "
-msgstr "&Répertoire hotlist              C-\\"
+msgstr "Confirmer la suppression du &Répertoire hotlist"
 
 msgid " confirm &Exit "
 msgstr " confirmer &Quitter "
@@ -1391,8 +1384,7 @@ msgid "&Thorough"
 msgstr "&Exhaustive"
 
 msgid " Both panels should be in the listing mode to use this command "
-msgstr ""
-" Les deux panneaux doivent être en mode liste pour utiliser cette commande "
+msgstr " Les deux panneaux doivent être en mode liste pour utiliser cette commande "
 
 msgid ""
 " Not an xterm or Linux console; \n"
@@ -1594,8 +1586,7 @@ msgid " Edit Save Mode "
 msgstr " Éditer le mode de sauvegarde"
 
 msgid "The file you are saving is not finished with a newline"
-msgstr ""
-"Le fichier que vous enregistré ne se termine pas par une nouvelle ligne"
+msgstr "Le fichier que vous enregistré ne se termine pas par une nouvelle ligne"
 
 msgid "C&ontinue"
 msgstr "C&ontinuer"
@@ -1681,9 +1672,7 @@ msgid " Load "
 msgstr " Ouvrir "
 
 msgid " Block is large, you may not be able to undo this action. "
-msgstr ""
-" Le bloc est gros et il est possible que vous ne puissiez pas annuler ce "
-"changement. "
+msgstr " Le bloc est gros et il est possible que vous ne puissiez pas annuler ce changement. "
 
 msgid "Replace"
 msgstr "Remplacer"
@@ -1744,9 +1733,7 @@ msgid " Run Sort "
 msgstr " Lancer le tri "
 
 msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr ""
-" Saisissez les options de tri (cf page de manuel sort(1)) séparées par des "
-"espaces : "
+msgstr " Saisissez les options de tri (cf page de manuel sort(1)) séparées par des espaces : "
 
 msgid " Sort "
 msgstr " Trier "
@@ -1850,7 +1837,6 @@ msgstr " Remplacer par : "
 msgid " Confirm replace "
 msgstr " Confirmer le remplacement "
 
-#, fuzzy
 msgid "&Dismiss"
 msgstr "&Fermer"
 
@@ -1901,9 +1887,8 @@ msgstr "&Quitter"
 msgid "&Undo"
 msgstr "Ann&uller"
 
-#, fuzzy
 msgid "&Toggle ins/overw"
-msgstr "&Insertion/écrasement   Ins"
+msgstr "&Insertion/écrasement"
 
 #, fuzzy
 msgid "To&ggle mark"
@@ -1912,20 +1897,17 @@ msgstr "Ra&Z marqué"
 msgid "&Mark columns"
 msgstr "&Marquer colonne"
 
-#, fuzzy
 msgid "Mark &all"
 msgstr "Tous &Marqués"
 
 msgid "Unmar&k"
 msgstr "Supprimer la marque"
 
-#, fuzzy
 msgid "Cop&y"
 msgstr "&Copier"
 
-#, fuzzy
 msgid "Mo&ve"
-msgstr "Déplacer"
+msgstr "&Déplacer"
 
 msgid "&Delete"
 msgstr "&Effacer"
@@ -1933,7 +1915,7 @@ msgstr "&Effacer"
 # FIXME : translation clipfile
 #, fuzzy
 msgid "Co&py to clipfile"
-msgstr "Copier vers le &fichier..."
+msgstr "Copier vers le &fichier"
 
 #, fuzzy
 msgid "&Cut to clipfile"
@@ -1958,7 +1940,6 @@ msgstr "Chercher à nouve&au"
 msgid "&Replace..."
 msgstr "&Remplacer..."
 
-#, fuzzy
 msgid "&Toggle bookmark"
 msgstr "&Inverser le marque-page"
 
@@ -1983,13 +1964,11 @@ msgstr "Aller au &crochet correspondant"
 msgid "&Find declaration"
 msgstr "Trouver la declaration"
 
-#, fuzzy
 msgid "Back from &declaration"
-msgstr "Trouver la declaration"
+msgstr "Retourner à  la &déclaration"
 
-#, fuzzy
 msgid "For&ward to declaration"
-msgstr "Trouver la declaration"
+msgstr "Aller à la déclaration"
 
 msgid "Encod&ing..."
 msgstr "&Encodage..."
@@ -2002,7 +1981,6 @@ msgid "&Start record macro"
 msgstr "&Commencer à enregistrer une macro"
 
 # XXX problème &
-#, fuzzy
 msgid "Finis&h record macro..."
 msgstr "&Achever d'enregistrer la macro..."
 
@@ -2036,7 +2014,7 @@ msgstr "&Coller la sortie de..."
 
 #, fuzzy
 msgid "&External formatter"
-msgstr "Formatteur e&xterne"
+msgstr "Formateur e&xterne"
 
 msgid "&General...  "
 msgstr "&Général...  "
@@ -2213,27 +2191,16 @@ msgid " %s%s file error"
 msgstr " %s%s erreur de fichier "
 
 #, c-format
-msgid ""
-"The format of the %smc.ext file has changed with version 3.0.  It seems that "
-"the installation failed.  Please fetch a fresh copy from the Midnight "
-"Commander package."
-msgstr ""
-"Le format du fichier %smc.ext a changé avec la version 3.0. Il semble que "
-"l'installation ait échoué. Récupérez une nouvelle copie depuis le paquet "
-"Midnight Commander."
+msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
+msgstr "Le format du fichier %smc.ext a changé avec la version 3.0. Il semble que l'installation ait échoué. Récupérez une nouvelle copie depuis le paquet Midnight Commander."
 
 #, c-format
 msgid " ~/%s file error "
 msgstr "  ~/%s erreur de fichier "
 
 #, c-format
-msgid ""
-"The format of the ~/%s file has changed with version 3.0.  You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write "
-"it."
-msgstr ""
-"Le format du fichier ~/%s a changé depuis la version 3.0. Vous pourriez soit "
-"copier %smc.ext ou utiliser ce dernier comme exemple pour l'écrire"
+msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
+msgstr "Le format du fichier ~/%s a changé depuis la version 3.0. Vous pourriez soit copier %smc.ext ou utiliser ce dernier comme exemple pour l'écrire"
 
 msgid "DialogTitle|Copy"
 msgstr "TitreDialog|Copie"
@@ -2261,8 +2228,7 @@ msgid ""
 "\n"
 " Option Stable Symlinks will be disabled "
 msgstr ""
-" Ne peut faire des liens symboliques stables entre des systèmes de fichiers "
-"non-locaux : \n"
+" Ne peut faire des liens symboliques stables entre des systèmes de fichiers non-locaux : \n"
 " L'option « Liens symboliques stables » sera désactivée "
 
 #, c-format
@@ -2923,11 +2889,8 @@ msgid " Hotlist Load "
 msgstr " Charger la hotlist "
 
 #, c-format
-msgid ""
-"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
-msgstr ""
-"MC n'a pu écrire dans le fichier ~/%s, les entrées de votre ancienne hotlist "
-"ont été conservées"
+msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr "MC n'a pu écrire dans le fichier ~/%s, les entrées de votre ancienne hotlist ont été conservées"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -3429,9 +3392,7 @@ msgid " Enter command label: "
 msgstr " Saisissez un nom pour la commande :"
 
 msgid " Cannot run external panelize in a non-local directory "
-msgstr ""
-" Ne peut utiliser un panneau externe lorsque connecté sur un répertoire non "
-"local "
+msgstr " Ne peut utiliser un panneau externe lorsque connecté sur un répertoire non local "
 
 msgid "Find rejects after patching"
 msgstr "Trouver les déchets de patches"
@@ -3569,9 +3530,7 @@ msgid "Unknown tag on display format: "
 msgstr "Balise inconnue dans le format d'affichage :"
 
 msgid "User supplied format looks invalid, reverting to default."
-msgstr ""
-"Le format fourni par l'utilisateur semble invalide, retourner aux valeurs "
-"par défaut."
+msgstr "Le format fourni par l'utilisateur semble invalide, retourner aux valeurs par défaut."
 
 msgid " Do you really want to execute? "
 msgstr " Voulez-vous vraiment exécuter ? "
@@ -3696,7 +3655,7 @@ msgid "ButtonBar|Forget"
 msgstr "ButtonBar|Oublie"
 
 msgid "ButtonBar|Rmdir"
-msgstr ""
+msgstr "ButtonBar|SupRep"
 
 #, c-format
 msgid ""
@@ -3737,8 +3696,7 @@ msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
 msgstr ""
-"Le fichier %s n'appartient ni à vous ni au root ou tout le monde peux y "
-"écrire.\n"
+"Le fichier %s n'appartient ni à vous ni au root ou tout le monde peux y écrire.\n"
 "Son utilisation peut compromettre la sécurité du système"
 
 #, c-format
@@ -3801,7 +3759,7 @@ msgid "ButtonBar|Raw"
 msgstr "ButtonBar|Brut"
 
 msgid "ButtonBar|Parse"
-msgstr ""
+msgstr "ButtonBar|Parse"
 
 msgid "ButtonBar|Unform"
 msgstr ""
@@ -3867,7 +3825,7 @@ msgid " Cannot view: not a regular file "
 msgstr " Visualisation impossible : ce n'est pas un fichier régulier "
 
 msgid "Seeking to search result"
-msgstr ""
+msgstr "Aller au résultat de la recherche"
 
 msgid " History "
 msgstr " Historique "
@@ -4200,8 +4158,7 @@ msgstr "Processus en tâche de fond :"
 #~ msgstr "Affiche ce message d'aide"
 
 #~ msgid "Displays a help screen on how to change the color scheme"
-#~ msgstr ""
-#~ "Affiche un écran d'aide sur la façon de changer les styles de couleur"
+#~ msgstr "Affiche un écran d'aide sur la façon de changer les styles de couleur"
 
 #~ msgid "unknown option"
 #~ msgstr "<Groupe inconnu>"
@@ -4241,12 +4198,8 @@ msgstr "Processus en tâche de fond :"
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr " Saisissez l'ordre des arguments (ex. : 3,2,1,4) "
 
-#~ msgid ""
-#~ " Invalid regular expression, or scanf expression with too many "
-#~ "conversions "
-#~ msgstr ""
-#~ " Expression régulière invalide, ou expression scanf avec trop de "
-#~ "conversions "
+#~ msgid " Invalid regular expression, or scanf expression with too many conversions "
+#~ msgstr " Expression régulière invalide, ou expression scanf avec trop de conversions "
 
 #~ msgid " Error in replacement format string. "
 #~ msgstr " Erreur dans la chaîne de format de remplacement. "
@@ -4407,16 +4360,13 @@ msgstr "Processus en tâche de fond :"
 #~ msgstr "Déformat"
 
 #~ msgid "User menu available only in mcedit invoked from mc"
-#~ msgstr ""
-#~ "Le menu utilisateur n'est disponible que si mcedit est invoqué depuis mc"
+#~ msgstr "Le menu utilisateur n'est disponible que si mcedit est invoqué depuis mc"
 
 #~ msgid " Socket source routing setup "
 #~ msgstr " Configuration du routage à la source "
 
 #~ msgid " Enter host name to use as a source routing hop: "
-#~ msgstr ""
-#~ " Saisissez le nom de l'hôte à utiliser comme  noeud de routage à la "
-#~ "source : "
+#~ msgstr " Saisissez le nom de l'hôte à utiliser comme  noeud de routage à la source : "
 
 #~ msgid " Host name "
 #~ msgstr " Nom de l'hôte "
