@@ -2182,13 +2182,13 @@ msgid "The format of the ~/%s file has changed with version 3.0.  You may either
 msgstr "формат файла %smc.ext изменён с версии 3.0. Вы можете либо скопировать его с %smc.ext либо использовать этот файл как пример и написать свой."
 
 msgid "DialogTitle|Copy"
-msgstr "Копировать"
+msgstr "Копирование"
 
 msgid "DialogTitle|Move"
-msgstr "Переместить"
+msgstr "Перемещение"
 
 msgid "DialogTitle|Delete"
-msgstr "Удалить"
+msgstr "Удаление"
 
 msgid " Cannot make the hardlink "
 msgstr " Невозможно создать жесткую ссылку "
