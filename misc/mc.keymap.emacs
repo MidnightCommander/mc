@@ -399,3 +399,4 @@ DiffHome = home
 DiffEnd = end
 DiffQuit = q; shift-q; ctrl-g; esc
 ShowCommandLine = ctrl-o
+SelectCodepage = alt-e

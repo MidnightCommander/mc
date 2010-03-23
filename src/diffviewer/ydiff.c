@@ -32,7 +32,6 @@
 #include <sys/stat.h>
 
 #include "lib/global.h"
-
 #include "lib/tty/tty.h"
 #include "lib/tty/color.h"
 #include "lib/tty/key.h"
@@ -53,6 +52,8 @@
 #include "src/layout.h"                 /* Needed for get_current_index and get_other_panel */
                                         /* mc_open, mc_close, mc_read, mc_stat  */
 #include "src/main.h"                   /* mc_run_mode */
+#include "src/selcodepage.h"
+
 #include "ydiff.h"
 
 /*** global variables ****************************************************************************/
@@ -108,107 +109,54 @@ do { \
 
 /*** file scope type declarations ****************************************************************/
 
-typedef struct
-{
-    int fd;
-    int pos;
-    int len;
-    char *buf;
-    int flags;
-    void *data;
-} FBUF;
-
-typedef struct
-{
-    int a[2][2];
-    int cmd;
-} DIFFCMD;
-
-typedef int (*DFUNC) (void *ctx, int ch, int line, off_t off, size_t sz, const char *str);
-
-typedef struct
-{
-    int off;
-    int len;
-} BRACKET[2];
-
-typedef int PAIR[2];
-
-typedef enum
-{
-    DATA_SRC_MEM = 0,
-    DATA_SRC_TMP = 1,
-    DATA_SRC_ORG = 2
-} DSRC;
-
-typedef struct
-{
-    int ch;
-    int line;
-    union
-    {
-        off_t off;
-        size_t len;
-    } u;
-    void *p;
-} DIFFLN;
-
-typedef struct
-{
-    FBUF *f;
-    GArray *a;
-    DSRC dsrc;
-} PRINTER_CTX;
-
-typedef struct
-{
-    Widget widget;
-
-    const char *args;           /* Args passed to diff */
-    const char *file[2];        /* filenames */
-    const char *label[2];
-    FBUF *f[2];
-    GArray *a[2];
-    GPtrArray *hdiff;
-    int ndiff;                  /* number of hunks */
-    DSRC dsrc;                  /* data source: memory or temporary file */
-
-    int view_quit:1;            /* Quit flag */
-
-    int height;
-    int half1;
-    int half2;
-    int width1;
-    int width2;
-    int bias;
-    int new_frame;
-    int skip_rows;
-    int skip_cols;
-    int display_symbols;
-    int display_numbers;
-    int show_cr;
-    int tab_size;
-    int ord;
-    int full;
-    ssize_t last_found;
-
-    struct
-    {
-        int quality;
-        gboolean strip_trailing_cr;
-        gboolean ignore_tab_expansion;
-        gboolean ignore_space_change;
-        gboolean ignore_all_space;
-        gboolean ignore_case;
-    } opt;
-} WDiff;
-
 /*** file scope variables ************************************************************************/
 
 static const char *wholechars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_";
 
 /*** file scope functions ************************************************************************/
+
 /* --------------------------------------------------------------------------------------------- */
+
+static void
+dview_set_codeset (WDiff * dview)
+{
+#ifdef HAVE_CHARSET
+    const char *encoding_id = NULL;
+
+    dview->utf8 = TRUE;
+    encoding_id = get_codepage_id (source_codepage >= 0 ? source_codepage : display_codepage);
+    if (encoding_id != NULL)
+    {
+        GIConv conv;
+        conv = str_crt_conv_from (encoding_id);
+        int cp_id;
+        if (conv != INVALID_CONV)
+        {
+            if (dview->converter != str_cnv_from_term)
+                str_close_conv (dview->converter);
+            dview->converter = conv;
+        }
+        dview->utf8 = (gboolean) str_isutf8 (encoding_id);
+    }
+#else
+    (void) dview;
+#endif
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+static dview_select_encoding (WDiff * dview)
+{
+#ifdef HAVE_CHARSET
+    if (do_select_codepage ())
+    {
+        dview_set_codeset (dview);
+    }
+#else
+    (void) dview;
+#endif
+}
 
 /* buffered I/O ************************************************************* */
 
@@ -614,6 +562,78 @@ p_close (FBUF * fs)
     int rv = pclose (fs->data);
     f_free (fs);
     return rv;
+}
+
+/**
+ * Get one char (byte) from string
+ *
+ * \param char * str, gboolean * result
+ *
+ * \return int as character or 0 and result == FALSE if fail
+ */
+
+static int
+dview_get_byte (char * str, gboolean * result)
+{
+    if (str == NULL)
+    {
+        *result = FALSE;
+        return 0;
+    }
+    *result = TRUE;
+    return *str;
+}
+
+
+/**
+ * Get utf multibyte char from string
+ *
+ * \param char * str, int * char_width, gboolean * result
+ *
+ * \return int as utf character or 0 and result == FALSE if fail
+ */
+
+static int
+dview_get_utf (char * str, int * char_width, gboolean * result)
+{
+    int res = -1;
+    gunichar ch;
+    gchar *next_ch = NULL;
+    int width = 0;
+
+    *result = TRUE;
+
+    if (str == NULL)
+    {
+        *result = FALSE;
+        width = 0;
+        return 0;
+    }
+
+    res = g_utf8_get_char_validated (str, -1);
+
+    if (res < 0)
+    {
+        ch = *str;
+        width = 0;
+    }
+    else
+    {
+        ch = res;
+        /* Calculate UTF-8 char width */
+        next_ch = g_utf8_next_char (str);
+        if (next_ch)
+        {
+            width = next_ch - str;
+        }
+        else
+        {
+            ch = 0;
+            width = 0;
+        }
+    }
+    *char_width = width;
+    return ch;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1348,7 +1368,7 @@ cvt_mget (const char *src, size_t srcsize, char *dst, int dstsize, int skip, int
                 i += j - 1;
                 while (j-- > 0)
                 {
-                    if (skip)
+                    if (skip > 0)
                     {
                         skip--;
                     }
@@ -1361,7 +1381,7 @@ cvt_mget (const char *src, size_t srcsize, char *dst, int dstsize, int skip, int
             }
             else if (src[0] == '\r' && (srcsize == 1 || src[1] == '\n'))
             {
-                if (!skip && show_cr)
+                if (skip == 0 && show_cr)
                 {
                     if (dstsize > 1)
                     {
@@ -1379,14 +1399,20 @@ cvt_mget (const char *src, size_t srcsize, char *dst, int dstsize, int skip, int
             }
             else
             {
-                if (skip)
+                if (skip > 0)
                 {
+                    int utf_ch = 0;
+                    gboolean res;
+                    int w;
                     skip--;
+                    utf_ch = dview_get_utf ((char *)src, &w, &res);
+                    if (w > 1)
+                        skip += w - 1;
                 }
                 else
                 {
                     dstsize--;
-                    *dst++ = is_printable (*src) ? *src : '.';
+                    *dst++ = *src;
                 }
             }
         }
@@ -1474,13 +1500,19 @@ cvt_mgeta (const char *src, size_t srcsize, char *dst, int dstsize, int skip, in
             {
                 if (skip)
                 {
+                    int utf_ch = 0;
+                    gboolean res;
+                    int w;
                     skip--;
+                    utf_ch = dview_get_utf ((char *) src, &w, &res);
+                    if (w > 1)
+                        skip += w - 1;
                 }
                 else
                 {
                     dstsize--;
                     *att++ = is_inside (k, hdiff, ord);
-                    *dst++ = is_printable (*src) ? *src : '.';
+                    *dst++ = *src;
                 }
             }
         }
@@ -1604,14 +1636,10 @@ cvt_fget (FBUF * f, off_t off, char *dst, size_t dstsize, int skip, int ts, int 
                 }
                 else
                 {
-                    dst[i++] = '.';
+                    dst[i++] = '*';
                 }
             }
             break;
-        }
-        else if (!is_printable (dst[i]))
-        {
-            dst[i] = '.';
         }
     }
     for (; i < dstsize; i++)
@@ -1655,7 +1683,7 @@ printer (void *ctx, int ch, int line, off_t off, size_t sz, const char *str)
             {
                 sz--;
             }
-            if (sz != NULL)
+            if (sz > 0)
                 p.p = g_strndup (str, sz);
             p.u.len = sz;
         }
@@ -1669,7 +1697,7 @@ printer (void *ctx, int ch, int line, off_t off, size_t sz, const char *str)
         {
             sz--;
         }
-        if (sz)
+        if (sz > 0)
         {
             size_t new_size = p->u.len + sz;
             char *q = g_realloc (p->p, new_size);
@@ -1940,7 +1968,7 @@ find_next_hunk (const GArray * a, size_t pos)
 /* view routines and callbacks ********************************************** */
 
 static void
-view_compute_split (WDiff * dview, int i)
+dview_compute_split (WDiff * dview, int i)
 {
     dview->bias += i;
     if (dview->bias < 2 - dview->half1)
@@ -1956,19 +1984,19 @@ view_compute_split (WDiff * dview, int i)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-view_compute_areas (WDiff * dview)
+dview_compute_areas (WDiff * dview)
 {
     dview->height = LINES - 2;
     dview->half1 = COLS / 2;
     dview->half2 = COLS - dview->half1;
 
-    view_compute_split (dview, 0);
+    dview_compute_split (dview, 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-view_init (WDiff * dview, const char *args, const char *file1, const char *file2,
+dview_init (WDiff * dview, const char *args, const char *file1, const char *file2,
            const char *label1, const char *label2, DSRC dsrc)
 {
     int ndiff;
@@ -2015,6 +2043,8 @@ view_init (WDiff * dview, const char *args, const char *file1, const char *file2
     dview->f[1] = f[1];
     dview->hdiff = NULL;
     dview->dsrc = dsrc;
+    dview->converter = str_cnv_from_term;
+    dview_set_codeset (dview);
 
     dview->a[0] = g_array_new (FALSE, FALSE, sizeof (DIFFLN));
     dview->a[1] = g_array_new (FALSE, FALSE, sizeof (DIFFLN));
@@ -2052,7 +2082,8 @@ view_init (WDiff * dview, const char *args, const char *file1, const char *file2
     dview->opt.ignore_all_space = 0;
     dview->opt.ignore_case = 0;
 
-    view_compute_areas (dview);
+    dview_compute_areas (dview);
+
     return 0;
 
   err_3:
@@ -2068,7 +2099,7 @@ view_init (WDiff * dview, const char *args, const char *file1, const char *file2
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-view_reinit (WDiff * dview)
+dview_reinit (WDiff * dview)
 {
     const char *quality_str[] = {
         N_("&Normal"),
@@ -2125,7 +2156,7 @@ view_reinit (WDiff * dview)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-view_fini (WDiff * dview)
+dview_fini (WDiff * dview)
 {
     if (dview->dsrc != DATA_SRC_MEM)
     {
@@ -2146,10 +2177,10 @@ view_fini (WDiff * dview)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-view_display_file (const WDiff * dview, int ord, int r, int c, int height, int width)
+dview_display_file (const WDiff * dview, int ord, int r, int c, int height, int width)
 {
-    size_t i;
-    int j, k;
+    size_t i, k, col;
+    int j;
     char buf[BUFSIZ];
     FBUF *f = dview->f[ord];
     int skip = dview->skip_cols;
@@ -2158,7 +2189,6 @@ view_display_file (const WDiff * dview, int ord, int r, int c, int height, int w
     int show_cr = dview->show_cr;
     int tab_size = dview->tab_size;
     const DIFFLN *p;
-
     int nwidth = display_numbers;
     int xwidth = display_symbols + display_numbers;
 
@@ -2194,7 +2224,7 @@ view_display_file (const WDiff * dview, int ord, int r, int c, int height, int w
 
     for (i = dview->skip_rows, j = 0; i < dview->a[ord]->len && j < height; j++, i++)
     {
-        int ch;
+        int ch, next_ch;
         p = (DIFFLN *) & g_array_index (dview->a[ord], DIFFLN, i);
         ch = p->ch;
         tty_setcolor (NORMAL_COLOR);
@@ -2230,13 +2260,39 @@ view_display_file (const WDiff * dview, int ord, int r, int c, int height, int w
                     if (dview->hdiff != NULL && g_ptr_array_index (dview->hdiff, i) != NULL)
                     {
                         char att[BUFSIZ];
-                        cvt_mgeta (p->p, p->u.len, buf, width, skip, tab_size, show_cr,
-                                   g_ptr_array_index (dview->hdiff, i), ord, att);
+                        k = str_offset_to_pos (p->p, width);
+                        cvt_mgeta (p->p, p->u.len, buf, k, skip, tab_size, show_cr,
+                                g_ptr_array_index (dview->hdiff, i), ord, att);
                         tty_gotoyx (r + j, c);
-                        for (k = 0; k < width; k++)
+                        col = 0;
+                        for (k = 0; k < strlen (buf) && col < width; k++)
                         {
-                            tty_setcolor (att[k] ? DFF_CHH_COLOR : DFF_CHG_COLOR);
-                            tty_print_char (buf[k]);
+                            int w;
+                            gboolean ch_res;
+                            if (dview->utf8)
+                            {
+                                next_ch = dview_get_utf (buf + k, &w, &ch_res);
+                                if (w > 1)
+                                    k += w - 1;
+                            }
+                            else
+                                next_ch = dview_get_byte (buf + k, &ch_res);
+                            if (ch_res)
+                            {
+                                tty_setcolor (att[k] ? DFF_CHH_COLOR : DFF_CHG_COLOR);
+#ifdef HAVE_CHARSET
+                                if (utf8_display) {
+                                    if (!dview->utf8) {
+                                        next_ch = convert_from_8bit_to_utf_c ((unsigned char) next_ch, dview->converter);
+                                    }
+                                } else if (dview->utf8)
+                                    next_ch = convert_from_utf_to_current_c (next_ch, dview->converter);
+                                else
+#endif
+                                next_ch = convert_to_display_c (next_ch);
+                                tty_print_anychar (next_ch);
+                                col++;
+                            }
                         }
                         continue;
                     }
@@ -2245,7 +2301,8 @@ view_display_file (const WDiff * dview, int ord, int r, int c, int height, int w
                         tty_setcolor (DFF_CHH_COLOR);
                     }
                 }
-                cvt_mget (p->p, p->u.len, buf, width, skip, tab_size, show_cr);
+                k = str_offset_to_pos (p->p, width);
+                cvt_mget (p->p, p->u.len, buf, k, skip, tab_size, show_cr);
             }
             else
             {
@@ -2259,7 +2316,6 @@ view_display_file (const WDiff * dview, int ord, int r, int c, int height, int w
                 tty_gotoyx (r + j, c - xwidth);
                 memset (buf, ' ', display_numbers);
                 buf[display_numbers] = '\0';
-                /* tty_print_nstring (buf, display_numbers); */
                 tty_print_string (buf);
             }
             if (ch == DEL_CH)
@@ -2275,7 +2331,36 @@ view_display_file (const WDiff * dview, int ord, int r, int c, int height, int w
         }
         tty_gotoyx (r + j, c);
         /* tty_print_nstring (buf, width); */
-        tty_print_string (buf);
+        col = 0;
+        for (k = 0; k < strlen (buf) && col < width; k++)
+        {
+            int w;
+            gboolean ch_res;
+            if (dview->utf8)
+            {
+                next_ch = dview_get_utf (buf + k, &w, &ch_res);
+                if (w > 1)
+                    k += w - 1;
+            }
+            else
+                next_ch = dview_get_byte (buf + k, &ch_res);
+            if (ch_res)
+            {
+#ifdef HAVE_CHARSET
+                if (utf8_display) {
+                    if (!dview->utf8) {
+                        next_ch = convert_from_8bit_to_utf_c ((unsigned char) next_ch, dview->converter);
+                    }
+                } else if (dview->utf8)
+                    next_ch = convert_from_utf_to_current_c (next_ch, dview->converter);
+                else
+#endif
+                next_ch = convert_to_display_c (next_ch);
+                tty_print_anychar (next_ch);
+                col++;
+            }
+        }
+//        continue;
     }
     tty_setcolor (NORMAL_COLOR);
     k = width;
@@ -2291,11 +2376,11 @@ view_display_file (const WDiff * dview, int ord, int r, int c, int height, int w
         {
             tty_gotoyx (r + j, c - xwidth);
             /* tty_print_nstring (buf, xwidth - 1); */
-            tty_print_string (buf);
+            tty_print_string (str_fit_to_term (buf, xwidth - 1, J_LEFT_FIT));
         }
         tty_gotoyx (r + j, c);
         /* tty_print_nstring (buf, width); */
-        tty_print_string (buf);
+        tty_print_string (str_fit_to_term (buf, width, J_LEFT_FIT));
     }
 
     return 0;
@@ -2304,7 +2389,7 @@ view_display_file (const WDiff * dview, int ord, int r, int c, int height, int w
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-view_status (const WDiff * dview, int ord, int width, int c)
+dview_status (const WDiff * dview, int ord, int width, int c)
 {
     int skip_rows = dview->skip_rows;
     int skip_cols = dview->skip_cols;
@@ -2342,7 +2427,7 @@ view_status (const WDiff * dview, int ord, int width, int c)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-view_update (WDiff * dview)
+dview_update (WDiff * dview)
 {
     int height = dview->height;
     int width1;
@@ -2415,22 +2500,22 @@ view_update (WDiff * dview)
 
     if (width1 > 2)
     {
-        view_status (dview, dview->ord, width1, 0);
-        view_display_file (dview, dview->ord, 2, 1, height - 2, width1 - 2);
+        dview_status (dview, dview->ord, width1, 0);
+        dview_display_file (dview, dview->ord, 2, 1, height - 2, width1 - 2);
     }
     if (width2 > 2)
     {
-        view_status (dview, dview->ord ^ 1, width2, width1);
-        view_display_file (dview, dview->ord ^ 1, 2, width1 + 1, height - 2, width2 - 2);
+        dview_status (dview, dview->ord ^ 1, width2, width1);
+        dview_display_file (dview, dview->ord ^ 1, 2, width1 + 1, height - 2, width2 - 2);
     }
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-view_redo (WDiff * dview)
+dview_redo (WDiff * dview)
 {
-    if (view_reinit (dview) < 0)
+    if (dview_reinit (dview) < 0)
     {
         dview->view_quit = 1;
     }
@@ -2526,7 +2611,7 @@ search_string (const DIFFLN * p, size_t xpos, const void *needle, size_t nlen, i
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-view_search_string (WDiff * dview, const char *needle, int ccase, int back, int whole)
+dview_search_string (WDiff * dview, const char *needle, int ccase, int back, int whole)
 {
     size_t nlen = strlen (needle);
     size_t xpos = 0;
@@ -2579,7 +2664,7 @@ view_search_string (WDiff * dview, const char *needle, int ccase, int back, int 
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-view_search (WDiff * dview, int again)
+dview_search (WDiff * dview, int again)
 {
     /* XXX some statics here, to be remembered between runs */
     static char *searchopt_text = NULL;
@@ -2686,7 +2771,7 @@ view_search (WDiff * dview, int again)
     if (searchopt_type == 0)
     {
         dview->last_found =
-            view_search_string (dview, searchopt_text, searchopt_case, searchopt_backwards,
+            dview_search_string (dview, searchopt_text, searchopt_case, searchopt_backwards,
                                 searchopt_whole);
     }
 
@@ -2697,14 +2782,14 @@ view_search (WDiff * dview, int again)
     else
     {
         dview->skip_rows = dview->last_found;
-        view_update (dview);
+        dview_update (dview);
     }
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-view_edit (WDiff * dview, int ord)
+dview_edit (WDiff * dview, int ord)
 {
     int linenum, lineofs;
 
@@ -2716,14 +2801,14 @@ view_edit (WDiff * dview, int ord)
 
     get_line_numbers (dview->a[ord], dview->skip_rows, &linenum, &lineofs);
     do_edit_at_line (dview->file[ord], linenum);
-    view_redo (dview);
-    view_update (dview);
+    dview_redo (dview);
+    dview_update (dview);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-view_goto_cmd (WDiff * dview, int ord)
+dview_goto_cmd (WDiff * dview, int ord)
 {
     static const char *title[2] = { " Goto line (left) ", " Goto line (right) " };
     static char prev[256];
@@ -2761,7 +2846,7 @@ view_goto_cmd (WDiff * dview, int ord)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-view_labels (WDiff * dview)
+dview_labels (WDiff * dview)
 {
     Dlg_head *h = dview->widget.parent;
     WButtonBar *b = find_buttonbar (h);
@@ -2776,7 +2861,7 @@ view_labels (WDiff * dview)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-view_event (Gpm_Event * event, void *x)
+dview_event (Gpm_Event * event, void *x)
 {
     WDiff *dview = (WDiff *) x;
     int result = MOU_NORMAL;
@@ -2791,13 +2876,13 @@ view_event (Gpm_Event * event, void *x)
     if ((event->buttons & GPM_B_UP) && (event->type & GPM_DOWN))
     {
         dview->skip_rows -= 2;
-        view_update (dview);
+        dview_update (dview);
         return result;
     }
     if ((event->buttons & GPM_B_DOWN) && (event->type & GPM_DOWN))
     {
         dview->skip_rows += 2;
-        view_update (dview);
+        dview_update (dview);
         return result;
     }
 
@@ -2807,7 +2892,7 @@ view_event (Gpm_Event * event, void *x)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-view_execute_cmd (WDiff * dview, unsigned long command)
+dview_execute_cmd (WDiff * dview, unsigned long command)
 {
     cb_ret_t res = MSG_HANDLED;
 
@@ -2835,7 +2920,7 @@ view_execute_cmd (WDiff * dview, unsigned long command)
     case CK_DiffSplitMore:
         if (!dview->full)
         {
-            view_compute_split (dview, 1);
+            dview_compute_split (dview, 1);
             dview->new_frame = 1;
         }
         break;
@@ -2843,7 +2928,7 @@ view_execute_cmd (WDiff * dview, unsigned long command)
     case CK_DiffSplitLess:
         if (!dview->full)
         {
-            view_compute_split (dview, -1);
+            dview_compute_split (dview, -1);
             dview->new_frame = 1;
         }
         break;
@@ -2866,7 +2951,7 @@ view_execute_cmd (WDiff * dview, unsigned long command)
         dview->ord ^= 1;
         break;
     case CK_DiffRedo:
-        view_redo (dview);
+        dview_redo (dview);
         break;
     case CK_DiffNextHunk:
         dview->skip_rows = find_next_hunk (dview->a[0], dview->skip_rows);
@@ -2875,7 +2960,7 @@ view_execute_cmd (WDiff * dview, unsigned long command)
         dview->skip_rows = find_prev_hunk (dview->a[0], dview->skip_rows);
         break;
     case CK_DiffGoto:
-        view_goto_cmd (dview, TRUE);
+        dview_goto_cmd (dview, TRUE);
         break;
         /* what this?
            case KEY_BACKSPACE:
@@ -2883,13 +2968,13 @@ view_execute_cmd (WDiff * dview, unsigned long command)
            break;
          */
     case CK_DiffEditCurrent:
-        view_edit (dview, dview->ord);
+        dview_edit (dview, dview->ord);
         break;
     case CK_DiffEditOther:
-        view_edit (dview, dview->ord ^ 1);
+        dview_edit (dview, dview->ord ^ 1);
         break;
     case CK_DiffSearch:
-        view_search (dview, 1);
+        dview_search (dview, 1);
         break;
     case CK_DiffBOF:
         dview->skip_rows = 0;
@@ -2930,6 +3015,9 @@ view_execute_cmd (WDiff * dview, unsigned long command)
     case CK_DiffQuit:
         dview->view_quit = 1;
         break;
+    case CK_SelectCodepage:
+        dview_select_encoding (dview);
+        break;
     default:
         res = MSG_NOT_HANDLED;
     }
@@ -2939,14 +3027,14 @@ view_execute_cmd (WDiff * dview, unsigned long command)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-view_handle_key (WDiff * dview, int key)
+dview_handle_key (WDiff * dview, int key)
 {
     unsigned long command;
 
     key = convert_from_input_c (key);
 
     command = lookup_keymap_command (diff_map, key);
-    if ((command != CK_Ignore_Key) && (view_execute_cmd (dview, command) == MSG_HANDLED))
+    if ((command != CK_Ignore_Key) && (dview_execute_cmd (dview, command) == MSG_HANDLED))
         return MSG_HANDLED;
 
     /* Key not used */
@@ -2956,7 +3044,7 @@ view_handle_key (WDiff * dview, int key)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-view_callback (Widget * w, widget_msg_t msg, int parm)
+dview_callback (Widget * w, widget_msg_t msg, int parm)
 {
     WDiff *dview = (WDiff *) w;
     Dlg_head *h = dview->widget.parent;
@@ -2965,24 +3053,24 @@ view_callback (Widget * w, widget_msg_t msg, int parm)
     switch (msg)
     {
     case WIDGET_INIT:
-        view_labels (dview);
+        dview_labels (dview);
         return MSG_HANDLED;
 
     case WIDGET_DRAW:
         dview->new_frame = 1;
-        view_update (dview);
+        dview_update (dview);
         return MSG_HANDLED;
 
     case WIDGET_CURSOR:
         return MSG_HANDLED;
 
     case WIDGET_KEY:
-        i = view_handle_key (dview, parm);
+        i = dview_handle_key (dview, parm);
         if (dview->view_quit)
             dlg_stop (h);
         else
         {
-            view_update (dview);
+            dview_update (dview);
         }
         return i;
 
@@ -2990,7 +3078,7 @@ view_callback (Widget * w, widget_msg_t msg, int parm)
         return MSG_HANDLED;
 
     case WIDGET_FOCUS:
-        view_labels (dview);
+        dview_labels (dview);
         return MSG_HANDLED;
 
     case WIDGET_DESTROY:
@@ -3004,29 +3092,29 @@ view_callback (Widget * w, widget_msg_t msg, int parm)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-view_adjust_size (Dlg_head * h)
+dview_adjust_size (Dlg_head * h)
 {
     WDiff *dview;
     WButtonBar *bar;
 
     /* Look up the viewer and the buttonbar, we assume only two widgets here */
-    dview = (WDiff *) find_widget_type (h, view_callback);
+    dview = (WDiff *) find_widget_type (h, dview_callback);
     bar = find_buttonbar (h);
     widget_set_size (&dview->widget, 0, 0, LINES, COLS);
     widget_set_size ((Widget *) bar, LINES - 1, 0, 1, COLS);
 
-    view_compute_areas (dview);
+    dview_compute_areas (dview);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-view_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+dview_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
     case DLG_RESIZE:
-        view_adjust_size (h);
+        dview_adjust_size (h);
         return MSG_HANDLED;
 
     default:
@@ -3043,38 +3131,38 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
     int error;
     WDiff *dview;
     WButtonBar *bar;
-    Dlg_head *view_dlg;
+    Dlg_head *dview_dlg;
 
     /* Create dialog and widgets, put them on the dialog */
-    view_dlg =
-        create_dlg (0, 0, LINES, COLS, NULL, view_dialog_callback,
+    dview_dlg =
+        create_dlg (0, 0, LINES, COLS, NULL, dview_dialog_callback,
                     "[Diff Viewer]", NULL, DLG_WANT_TAB);
 
     dview = g_new0 (WDiff, 1);
 
     init_widget (&dview->widget, 0, 0, LINES, COLS,
-                 (callback_fn) view_callback, (mouse_h) view_event);
+                 (callback_fn) dview_callback, (mouse_h) dview_event);
 
     widget_want_cursor (dview->widget, 0);
 
     bar = buttonbar_new (1);
 
-    add_widget (view_dlg, bar);
-    add_widget (view_dlg, dview);
+    add_widget (dview_dlg, bar);
+    add_widget (dview_dlg, dview);
 
-    error = view_init (dview, "-a", file1, file2, label1, label2, DATA_SRC_MEM);        /* XXX binary diff? */
+    error = dview_init (dview, "-a", file1, file2, label1, label2, DATA_SRC_MEM);        /* XXX binary diff? */
 
     /* Please note that if you add another widget,
-     * you have to modify view_adjust_size to
+     * you have to modify dview_adjust_size to
      * be aware of it
      */
     if (!error)
     {
-        run_dlg (view_dlg);
-        view_search (dview, -1);
-        view_fini (dview);
+        run_dlg (dview_dlg);
+        dview_search (dview, -1);
+        dview_fini (dview);
     }
-    destroy_dlg (view_dlg);
+    destroy_dlg (dview_dlg);
 
     return error;
 }
@@ -3111,7 +3199,7 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
     } while (0)
 
 void
-view_diff_cmd (WDiff *dview)
+dview_diff_cmd (WDiff *dview)
 {
     int rv = 0;
     char *file0 = NULL;

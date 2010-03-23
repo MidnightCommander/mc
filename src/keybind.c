@@ -479,6 +479,7 @@ static name_keymap_t command_names[] = {
     { "DiffHome",                        CK_DiffHome},
     { "DiffEnd",                         CK_DiffEnd},
     { "DiffQuit",                        CK_DiffQuit},
+    { "SelectCodepage",                  CK_SelectCodepage},
 
     { NULL,                              CK_Ignore_Key }
 };

@@ -90,6 +90,12 @@
 #   include "src/editor/edit.h"
 #endif
 
+#ifdef USE_DIFF_VIEW
+#   include "src/diffviewer/ydiff.h"
+#endif
+
+
+
 /* If set and you don't have subshell support,then C-o will give you a shell */
 int output_starts_shell = 0;
 
@@ -953,7 +959,7 @@ compare_dirs_cmd (void)
 void
 diff_view_cmd (void)
 {
-    view_diff_cmd (NULL);
+    dview_diff_cmd (NULL);
 }
 #endif
 
