@@ -1573,9 +1573,23 @@ compute_dir_size (const char *dirname, const void *ui,
 		    compute_dir_size_callback cback,
 		    off_t *ret_marked, double *ret_total)
 {
+    int res;
+    struct stat s;
     DIR *dir;
     struct dirent *dirent;
     FileProgressStatus ret = FILE_CONT;
+
+    res = mc_lstat (dirname, &s);
+
+    if (res != 0)
+	return ret;
+
+    /* don't scan symlink to directory */
+    if (S_ISLNK (s.st_mode)) {
+	(*ret_marked)++;
+	*ret_total += s.st_size;
+	return ret;
+    }
 
     dir = mc_opendir (dirname);
 
@@ -1584,8 +1598,6 @@ compute_dir_size (const char *dirname, const void *ui,
 
     while ((dirent = mc_readdir (dir)) != NULL) {
 	char *fullname;
-	int res;
-	struct stat s;
 
 	ret = (cback != NULL) ? cback (ui, dirname) : FILE_CONT;
 
