@@ -1,3 +1,4 @@
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.55\n"
@@ -15,7 +16,7 @@ msgid " Search string not found "
 msgstr " Търсеният низ не е намерен "
 
 msgid " Not implemented yet "
-msgstr ""
+msgstr "Не е внедрено още"
 
 msgid " Num of replace tokens not equal to num of found tokens "
 msgstr ""
@@ -24,15 +25,14 @@ msgstr ""
 msgid " Invalid token number %d "
 msgstr " Невалидна маска на назначението "
 
-#, fuzzy
 msgid "Normal"
-msgstr "Формат"
+msgstr "Нормално"
 
 msgid "&Regular expression"
 msgstr "Регулярен израз"
 
 msgid "Hexadecimal"
-msgstr ""
+msgstr "Шестнадесетично"
 
 msgid "Wildcard search"
 msgstr ""
@@ -157,9 +157,8 @@ msgstr "Накл. черта от доп. клв."
 msgid "* on keypad"
 msgstr "* от доп. клв."
 
-#, fuzzy
 msgid "Escape key"
-msgstr "Накл. черта от доп. клв."
+msgstr "Клавиш Escape"
 
 msgid "Left arrow keypad"
 msgstr "Лява стрелка от доп. клв."
@@ -211,68 +210,63 @@ msgid "Function key 24"
 msgstr "F2"
 
 msgid "Plus"
-msgstr ""
+msgstr "Плюс"
 
-#, fuzzy
 msgid "Minus"
-msgstr "Меню"
+msgstr "Минус"
 
 msgid "Asterisk"
-msgstr ""
+msgstr "Звезда"
 
 msgid "Dot"
-msgstr ""
+msgstr "Точка"
 
 msgid "Less than"
-msgstr ""
+msgstr "По-малко"
 
 msgid "Great than"
-msgstr ""
+msgstr "По-голямо"
 
 msgid "Equal"
-msgstr ""
+msgstr "Равно"
 
-#, fuzzy
 msgid "Comma"
-msgstr "Команда"
+msgstr "Запетайка"
 
 msgid "Apostrophe"
-msgstr ""
+msgstr "Апостроф"
 
-#, fuzzy
 msgid "Colon"
-msgstr "Брой"
+msgstr "Двоеточие"
 
 msgid "Exclamation mark"
-msgstr ""
+msgstr "Удивителна"
 
 msgid "Question mark"
-msgstr ""
+msgstr "Въпросителна"
 
-#, fuzzy
 msgid "Ampersand"
-msgstr "добави"
+msgstr "Амперсанд"
 
 msgid "Dollar sign"
-msgstr ""
+msgstr "Долар"
 
 msgid "Quotation mark"
-msgstr ""
+msgstr "Кавички"
 
 #, fuzzy
 msgid "Caret"
 msgstr "Назначение"
 
 msgid "Tilda"
-msgstr ""
+msgstr "Тилда"
 
 #, fuzzy
 msgid "Prime"
 msgstr "Преди"
 
-#, fuzzy
 msgid "Underline"
-msgstr " Въведете ред: "
+msgstr "Подчертаване"
 
 msgid "Understrike"
 msgstr ""
@@ -280,37 +274,32 @@ msgstr ""
 msgid "Pipe"
 msgstr ""
 
-#, fuzzy
 msgid "Enter"
-msgstr "собст."
+msgstr "Enter"
 
-#, fuzzy
 msgid "Tab key"
-msgstr "+ от доп. клв."
+msgstr "Табулация"
 
-#, fuzzy
 msgid "Space key"
-msgstr "Накл. черта от доп. клв."
+msgstr "Интервал"
 
-#, fuzzy
 msgid "Slash key"
-msgstr "Накл. черта от доп. клв."
+msgstr "Накл. черта"
 
-#, fuzzy
 msgid "Backslash key"
-msgstr "Backspace"
+msgstr "Обратна накл. черта"
 
 msgid "Number sign #"
 msgstr ""
 
 msgid "Ctrl"
-msgstr ""
+msgstr "Ctrl"
 
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 msgid "Shift"
-msgstr ""
+msgstr "Shift"
 
 #, c-format
 msgid ""
@@ -320,9 +309,9 @@ msgstr ""
 "Размер на екрана %dx%d не е поддържан.\n"
 "Проверете променливата на средата TERM.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s is not a directory\n"
-msgstr "директорията"
+msgstr "%s не е директория\n"
 
 #, c-format
 msgid "Directory %s is not owned by you\n"
@@ -965,8 +954,7 @@ msgstr ""
 "   Диалози:         dnormal, dfocus, dhotnormal, dhotfocus\n"
 "   Менюта:          menu, menuhot, menusel, menuhotsel\n"
 "   Помощ:           helpnormal, helpitalic, helplink, helpslink\n"
-"   Файлови типове:  directory, executable, link, stalelink, device, special, "
-"core\n"
+"   Файлови типове:  directory, executable, link, stalelink, device, special, core\n"
 "\n"
 "Цветове:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -1077,7 +1065,8 @@ msgstr "Ред на сортиране"
 msgid "Confirmation"
 msgstr " Потвърждение "
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 #, fuzzy
 msgid "Confirmation|&History cleanup"
@@ -1412,8 +1401,7 @@ msgid "&Thorough"
 msgstr "Пълен"
 
 msgid " Both panels should be in the listing mode to use this command "
-msgstr ""
-" Двата панела трябва да са в режим на списък, за да използвате тази команда "
+msgstr " Двата панела трябва да са в режим на списък, за да използвате тази команда "
 
 msgid ""
 " Not an xterm or Linux console; \n"
@@ -1697,8 +1685,7 @@ msgid " Load "
 msgstr " Зареди "
 
 msgid " Block is large, you may not be able to undo this action. "
-msgstr ""
-" Блокът е голям. Възможно е това действие да не може да бъде отменено. "
+msgstr " Блокът е голям. Възможно е това действие да не може да бъде отменено. "
 
 #, fuzzy
 msgid "Replace"
@@ -1762,8 +1749,7 @@ msgid " Run Sort "
 msgstr " Стартирай Sort "
 
 msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr ""
-" Въведете опции за sort, разделени от интервали (вижте man-страницата): "
+msgstr " Въведете опции за sort, разделени от интервали (вижте man-страницата): "
 
 msgid " Sort "
 msgstr " Сортирай "
@@ -2266,10 +2252,7 @@ msgid " %s%s file error"
 msgstr " грешка във файла "
 
 #, fuzzy, c-format
-msgid ""
-"The format of the %smc.ext file has changed with version 3.0.  It seems that "
-"the installation failed.  Please fetch a fresh copy from the Midnight "
-"Commander package."
+msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
 msgstr ""
 "файлът mc.ext е сменен\n"
 "с версия 3.0. Изглежда, че инсталацията\n"
@@ -2281,10 +2264,7 @@ msgid " ~/%s file error "
 msgstr " грешка във файла "
 
 #, c-format
-msgid ""
-"The format of the ~/%s file has changed with version 3.0.  You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write "
-"it."
+msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
 msgstr ""
 
 msgid "DialogTitle|Copy"
@@ -2958,8 +2938,7 @@ msgid " Hotlist Load "
 msgstr " Зареждане на горещия списък "
 
 #, fuzzy, c-format
-msgid ""
-"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr "Старият ви горещ списък не е изтрит"
 
 #, c-format
@@ -3947,7 +3926,6 @@ msgstr "Фонов процес:"
 #~ msgid " confirm &Delete "
 #~ msgstr " Потвърждавай изтриване "
 
-#, fuzzy
 #~ msgid ""
 #~ " The current line number is %lld.\n"
 #~ " Enter the new line number:"
@@ -3955,7 +3933,6 @@ msgstr "Фонов процес:"
 #~ " Текущият ред е %d.\n"
 #~ " Въведете нов номер на ред:"
 
-#, fuzzy
 #~ msgid ""
 #~ " The current address is %s.\n"
 #~ " Enter the new address:"
@@ -3975,7 +3952,6 @@ msgstr "Фонов процес:"
 #~ msgid "%s bytes"
 #~ msgstr "%s байта"
 
-#, fuzzy
 #~ msgid ">= %s bytes"
 #~ msgstr "%s байта"
 
@@ -4009,63 +3985,48 @@ msgstr "Фонов процес:"
 #~ msgid "Copy to &file...     "
 #~ msgstr "Копирай във файл...  "
 
-#, fuzzy
 #~ msgid "&Toggle mark                 F3"
 #~ msgstr "Маркирай            F3"
 
-#, fuzzy
 #~ msgid "Mar&k columns              S-F3"
 #~ msgstr "Маркирай колони   S-F3"
 
-#, fuzzy
 #~ msgid "&Copy                        F5"
 #~ msgstr "Копирай                   F5"
 
-#, fuzzy
 #~ msgid "&Move                        F6"
 #~ msgstr "Премести            F6"
 
-#, fuzzy
 #~ msgid "&Delete                      F8"
 #~ msgstr "Изтрий                    F8"
 
-#, fuzzy
 #~ msgid "&Next bookmark              M-j"
 #~ msgstr "Нов                C-n"
 
-#, fuzzy
 #~ msgid "&Undo                       C-u"
 #~ msgstr "Отмени действие    C-u"
 
-#, fuzzy
 #~ msgid "&Beginning               C-PgUp"
 #~ msgstr "Начало          C-PgUp"
 
-#, fuzzy
 #~ msgid "&End                     C-PgDn"
 #~ msgstr "Край            C-PgDn"
 
-#, fuzzy
 #~ msgid "C&opy to clipfile           M-w"
 #~ msgstr "Отиди на ред...            M-l"
 
-#, fuzzy
 #~ msgid "C&ut to clipfile            C-w"
 #~ msgstr "Отиди на ред...            M-l"
 
-#, fuzzy
 #~ msgid "Toggle bookmar&k               "
 #~ msgstr "Маркирай            F3"
 
-#, fuzzy
 #~ msgid "&Next bookmark                 "
 #~ msgstr "Нов                C-n"
 
-#, fuzzy
 #~ msgid "Pre&v bookmark                 "
 #~ msgstr "Сортирай...                M-t"
 
-#, fuzzy
 #~ msgid "&Flush bookmark                "
 #~ msgstr "Пусни по пощата...            "
 
@@ -4078,7 +4039,6 @@ msgstr "Фонов процес:"
 #~ msgid "&Go to line...            M-l"
 #~ msgstr "Отиди на ред...            M-l"
 
-#, fuzzy
 #~ msgid "Encod&ing...             M-e"
 #~ msgstr "Сортирай...                M-t"
 
@@ -4097,7 +4057,6 @@ msgstr "Фонов процес:"
 #~ msgid "'ispell' s&pell check    M-$"
 #~ msgstr "Провери с 'ispell'         M-$"
 
-#, fuzzy
 #~ msgid "Save setu&p"
 #~ msgstr "Запази настройките"
 
@@ -4119,7 +4078,6 @@ msgstr "Фонов процес:"
 #~ msgid "Emacs"
 #~ msgstr "Emacs"
 
-#, fuzzy
 #~ msgid "User-defined"
 #~ msgstr "Дефиниран от потребителя:"
 
@@ -4240,7 +4198,6 @@ msgstr "Фонов процес:"
 #~ msgid "e&Xternal panelize    C-x !"
 #~ msgstr "Команда в панел         C-x !"
 
-#, fuzzy
 #~ msgid "Command &history      M-h"
 #~ msgstr " Командна история "
 
@@ -4262,11 +4219,9 @@ msgstr "Фонов процес:"
 #~ msgid "Menu"
 #~ msgstr "Меню"
 
-#, fuzzy
 #~ msgid "n"
 #~ msgstr "За"
 
-#, fuzzy
 #~ msgid "Extension"
 #~ msgstr "Разширение:"
 
@@ -4300,19 +4255,15 @@ msgstr "Фонов процес:"
 #~ msgid "Rmdir"
 #~ msgstr "Изтрий"
 
-#, fuzzy
 #~ msgid "bind: Unknown command: `%s'"
 #~ msgstr " Команда Chown "
 
-#, fuzzy
 #~ msgid "%s: Unknown command: `%s'"
 #~ msgstr " Команда Chown "
 
-#, fuzzy
 #~ msgid "%s:%d: unknown command `%s'"
 #~ msgstr " Команда Chown "
 
-#, fuzzy
 #~ msgid "%s not found!"
 #~ msgstr "Внимание: файлът %s не е намерен\n"
 
@@ -4331,7 +4282,6 @@ msgstr "Фонов процес:"
 #~ msgid "Displays a help screen on how to change the color scheme"
 #~ msgstr "Показва как да се смени цветовата схема"
 
-#, fuzzy
 #~ msgid "unknown option"
 #~ msgstr "<Неизвестна>"
 
@@ -4341,7 +4291,6 @@ msgstr "Фонов процес:"
 #~ msgid "Display brief usage message"
 #~ msgstr "Покажи кратка инструкция"
 
-#, fuzzy
 #~ msgid "Usage:"
 #~ msgstr "Потребителско име:"
 
@@ -4354,15 +4303,12 @@ msgstr "Фонов процес:"
 #~ msgid "O&ne"
 #~ msgstr "Един"
 
-#, fuzzy
 #~ msgid "%b %d %H:%M"
 #~ msgstr "%b %e %H:%M"
 
-#, fuzzy
 #~ msgid "%b %d %Y"
 #~ msgstr "%b %e  %Y"
 
-#, fuzzy
 #~ msgid " The current address is 0x%08"
 #~ msgstr ""
 #~ " Текущият адрес е 0x%lx.\n"
@@ -4374,16 +4320,12 @@ msgstr "Фонов процес:"
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr " Ред на заместващите аргументи, напр. 3,2,1,4 "
 
-#~ msgid ""
-#~ " Invalid regular expression, or scanf expression with too many "
-#~ "conversions "
-#~ msgstr ""
-#~ " Невалиден регулярен израз или scanf израз с прекалено много превръщания "
+#~ msgid " Invalid regular expression, or scanf expression with too many conversions "
+#~ msgstr " Невалиден регулярен израз или scanf израз с прекалено много превръщания "
 
 #~ msgid " Error in replacement format string. "
 #~ msgstr "Грешка във формата на заместващия низ. "
 
-#, fuzzy
 #~ msgid " Replacement too long. "
 #~ msgstr " Въведете заместващия низ:"
 
@@ -4574,7 +4516,6 @@ msgstr "Фонов процес:"
 #~ msgid "Use to debug the background code"
 #~ msgstr "Използвай за дебъг на фоновия код"
 
-#, fuzzy
 #~ msgid "Force subshell execution"
 #~ msgstr "установи UID при изпълн."
 
