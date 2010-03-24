@@ -39,8 +39,8 @@ my $cmd_extract = "$app_unzip -p";
 my $regex_zipinfo_line = qr"^(\S{7,10})\s+(\d+\.\d+)\s+(\S+)\s+(\d+)\s+(\S\S)\s+(\d+)\s+(\S{4})\s+(\d{4})(\d\d)(\d\d)\.(\d\d)(\d\d)(\d\d)\s(.*)$";
 
 #     2891  Defl:N     1435  50%  03-30-00 21:19  50cbaaf8  ./edit.html
-# (size) (method) (zippedsize) (zipratio) (mm)(dd)(yy)(HH)(MM) (cksum) (fname)
-my $regex_nonzipinfo_line = qr"^\s*(\d+)\s+(\S+)\s+(\d+)\s+(-?\d+\%)\s+(\d?\d)-(\d?\d)-(\d\d)\s+(\d?\d):(\d\d)\s+([0-9a-f]+)\s\s(.*)$";
+# (size) (method) (zippedsize) (zipratio) (mm)(dd)(yy|yyyy)(HH)(MM) (cksum) (fname)
+my $regex_nonzipinfo_line = qr"^\s*(\d+)\s+(\S+)\s+(\d+)\s+(-?\d+\%)\s+(\d?\d)-(\d?\d)-(\d+)\s+(\d?\d):(\d\d)\s+([0-9a-f]+)\s\s(.*)$";
 
 #
 # Main code
