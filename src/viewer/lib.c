@@ -91,6 +91,8 @@ mcview_toggle_magic_mode (mcview_t * view)
 void
 mcview_toggle_wrap_mode (mcview_t * view)
 {
+    if (view->text_wrap_mode)
+        view->dpy_start = mcview_bol (view, view->dpy_start);
     view->text_wrap_mode = !view->text_wrap_mode;
     view->dpy_bbar_dirty = TRUE;
     view->dirty++;
