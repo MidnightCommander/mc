@@ -79,7 +79,6 @@ mcview_toggle_magic_mode (mcview_t * view)
     filename = g_strdup (view->filename);
     command = g_strdup (view->command);
 
-    mcview_done (view);
     mcview_load (view, command, filename, 0);
     g_free (filename);
     g_free (command);

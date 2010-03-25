@@ -329,17 +329,14 @@ mcview_execute_cmd (mcview_t * view, unsigned long command)
     case CK_ViewToggleWrapMode:
         /* Toggle between wrapped and unwrapped view */
         mcview_toggle_wrap_mode (view);
-        view->dirty++;
         break;
     case CK_ViewToggleHexEditMode:
         /* Toggle between hexview and hexedit mode */
         mcview_toggle_hexedit_mode (view);
-        view->dirty++;
         break;
     case CK_ViewToggleHexMode:
         /* Toggle between hex view and text view */
         mcview_toggle_hex_mode (view);
-        view->dirty++;
         break;
     case CK_ViewGoto:
         {
@@ -365,7 +362,6 @@ mcview_execute_cmd (mcview_t * view, unsigned long command)
         break;
     case CK_ViewToggleMagicMode:
         mcview_toggle_magic_mode (view);
-        view->dirty++;
         break;
     case CK_ViewToggleNroffMode:
         mcview_toggle_nroff_mode (view);
