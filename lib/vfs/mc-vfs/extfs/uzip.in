@@ -262,7 +262,7 @@ sub mczipfs_list {
 			my @match = /$regex_nonzipinfo_line/;
 			next if ($#match != 10);
 			my @rmatch = ('', '', 'unknown', $match[0], '', $match[2], $match[1],
-					$match[6] + ($match[6] < 70 ? 2000 : 1900), $match[4], $match[5],
+					$match[6] > 100 ? $match[6] : $match[6] + ($match[6] < 70 ? 2000 : 1900), $match[4], $match[5],
 					$match[7], $match[8], "00", $match[10]);
 			&checked_print_file(@rmatch);
 		}
