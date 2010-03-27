@@ -116,10 +116,10 @@ msgid "Function key 20"
 msgstr "Функцыянальная 20"
 
 msgid "Backspace key"
-msgstr "Клявіша Backspace"
+msgstr "Клfвіша Backspace"
 
 msgid "End key"
-msgstr "Клявіша End      "
+msgstr "Клавіша End      "
 
 msgid "Up arrow key"
 msgstr "Стрэлка угору    "
@@ -238,15 +238,14 @@ msgstr "Коска"
 msgid "Apostrophe"
 msgstr "Апостраф"
 
-#, fuzzy
 msgid "Colon"
-msgstr "Лік"
+msgstr "двукроп'е"
 
 msgid "Exclamation mark"
-msgstr ""
+msgstr "Клічнiк"
 
 msgid "Question mark"
-msgstr "Пытальны знак"
+msgstr "Пытальнiк"
 
 msgid "Ampersand"
 msgstr "Амперсанд"
@@ -255,11 +254,10 @@ msgid "Dollar sign"
 msgstr "Знак даляра"
 
 msgid "Quotation mark"
-msgstr ""
+msgstr "Знак цытаты"
 
-#, fuzzy
 msgid "Caret"
-msgstr "Мэта"
+msgstr "карэтка"
 
 msgid "Tilda"
 msgstr "Цiлда"
@@ -272,40 +270,38 @@ msgid "Underline"
 msgstr "Падкрэсленне"
 
 msgid "Understrike"
-msgstr ""
+msgstr "Падкрэсленне"
 
 msgid "Pipe"
-msgstr ""
+msgstr "Канал"
 
 #, fuzzy
 msgid "Enter"
 msgstr "уладальнік"
 
-#, fuzzy
 msgid "Tab key"
-msgstr "+ на keypad'е"
+msgstr "клавiша 'Tab'"
 
 msgid "Space key"
-msgstr "Клявіша  Прабел"
+msgstr "клавіша  Прабел"
 
-#, fuzzy
 msgid "Slash key"
-msgstr "Slash на keypad'е"
+msgstr "клавiша 'дзяленне'"
 
 msgid "Backslash key"
-msgstr "Клявіша Backspace"
+msgstr "клавіша Backspace"
 
 msgid "Number sign #"
 msgstr "Знак нумара #"
 
 msgid "Ctrl"
-msgstr ""
+msgstr "Ctrl"
 
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 msgid "Shift"
-msgstr ""
+msgstr "Shift"
 
 #, c-format
 msgid ""
@@ -429,9 +425,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Няўзгоднены архіў extfs"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Warning: cannot open %s directory\n"
-msgstr "Немагчыма змяніць каталог"
+msgstr "Папярэджанне:  немагчыма адкрыць каталог '%s'\n"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -909,9 +905,8 @@ msgstr "Псеўдаграфіка для малявання"
 msgid "Resets soft keys on HP terminals"
 msgstr "Скідае праграмныя клавішы на тэрміналах HP"
 
-#, fuzzy
 msgid "Load definitions of key bindings from specified file"
-msgstr "Весці пратакол дыялёгу з FTP у файл"
+msgstr "Загрузіць вызначэння прывязкаў клавішаў з указанага файла"
 
 msgid "Requests to run in black and white"
 msgstr "Запыт на запуск у монахромным рэжыме"
@@ -923,10 +918,9 @@ msgid "Specifies a color configuration"
 msgstr "Вызначае наладкі колераў"
 
 msgid "Show mc with specified skin"
-msgstr ""
+msgstr "Адлюстраваць mc з названым скiнам"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -944,23 +938,23 @@ msgstr ""
 "--colors КЛЮЧ={ТЭКСТ},{ФОН}\n"
 "\n"
 "{ТЭКСТ} і {ФОН} можна не ўказваць, каб ужыць прадвызначэнні\n"
+"\r\n"
 "\n"
+"\r\n"
 "КЛЮЧЫ:\n"
-"   Агульныя:     errors, reverse, gauge, input, viewunderline\n"
-"   Паказ файлаў: normal, selected, marked, markselect\n"
-"   Дыялогі:      dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Меню:         menu, menuhot, menusel, menuhotsel\n"
-"   Рэдактар:     editnormal, editbold, editmarked\n"
-"   Дапамога:     helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   Тыпы файлаў:  directory, executable, link, stalelink, device, special, core\n"
-"hidden, temp, doc, archive, source, media, graph, database\n"
-"\n"
-"Колеры:\n"
-"   black, gray, red, brightred, green, brightgreen, brown,\n"
-"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray, white\n"
-"\n"
+"\r\n"
+"Агульныя:     errors, reverse, gauge, input, viewunderline\n"
+"\r\n"
+"Паказ файлаў: normal, selected, marked, markselect\n"
+"\r\n"
+"Дыялогі:      dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"\r\n"
+"errdhotfocus\n"
+"\r\n"
+"Меню:         menu, menuhot, menusel, menuhotsel, menuinactive\n"
+"\r\n"
+"Рэдактар:     editnormal, editbold, editmarked\n"
+"\r\n"
 
 #. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
@@ -972,17 +966,26 @@ msgid ""
 "   brightcyan, lightgray and white\n"
 "\n"
 msgstr ""
+"Дапамога:     helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"\r\n"
+"Колеры:\n"
+"\r\n"
+"black, gray, red, brightred, green, brightgreen, brown,\n"
+"\r\n"
+"yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"\r\n"
+"brightcyan, lightgray, white\n"
+"\n"
+"\r\n"
 
-#, fuzzy
 msgid "Color options"
-msgstr "Параметры канфігурацыі"
+msgstr "Параметры колеру"
 
 msgid "+number"
 msgstr "+лічба"
 
-#, fuzzy
 msgid "[this_dir] [other_panel_dir]"
-msgstr "[сцягі] [гэты_каталог] [каталог_другой_панэлі]\n"
+msgstr "[гэты_каталог] [каталог_другой_панэлі]"
 
 msgid "Set initial line number for the internal editor"
 msgstr "Усталяваць пачатковы нумар радка ва ўнутраным рэдактары"
@@ -1080,7 +1083,7 @@ msgid "Confirmation|O&verwrite"
 msgstr "&Перазапіс"
 
 msgid "Confirmation|&Delete"
-msgstr "Выдаленне"
+msgstr "Вы&даленне"
 
 msgid "UTF-8 output"
 msgstr "UTF-8 вывад"
@@ -1106,15 +1109,14 @@ msgstr "Іншыя 8 bit"
 msgid "Input / display codepage:"
 msgstr "Кодавая старонка:"
 
-#, fuzzy
 msgid "&Select"
-msgstr " Вылучыць "
+msgstr "&Выбраць"
 
 msgid "Use passive mode over pro&xy"
 msgstr "Ужыць &пасіўны рэжым праз проксі"
 
 msgid "Use &passive mode"
-msgstr "Ужыць &пасіўны рэжым"
+msgstr "Ужыць па&сіўны рэжым"
 
 msgid "&Use ~/.netrc"
 msgstr "&Выкарыстоўваць ~/.netrc"
@@ -1183,11 +1185,9 @@ msgstr "Пароль для \\\\%s\\%s"
 msgid "7-bit ASCII"
 msgstr "7-бiтны ASCII"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot translate from %s to %s"
-msgstr ""
-" Немагчыма атрымаць уласцівасці файла \"%s\" \n"
-" %s "
+msgstr " Немагчыма перакласці  p '%s'  у '%s'"
 
 msgid "execute/search by others"
 msgstr "запуск/пошук для іншых"
@@ -1868,75 +1868,62 @@ msgstr "&Капіяваць у файл..."
 msgid "&User menu..."
 msgstr "&Меню карыстальніка..."
 
-#, fuzzy
 msgid "A&bout..."
-msgstr "&Вонкавы выгляд"
+msgstr "&Аб праграме"
 
 msgid "&Quit"
 msgstr "&Выхад"
 
 msgid "&Undo"
-msgstr ""
+msgstr "&Адкаціць"
 
-#, fuzzy
 msgid "&Toggle ins/overw"
-msgstr "&Рэжым устаўкі/замены Ins"
+msgstr "&Рэжым устаўкі/замены"
 
-#, fuzzy
 msgid "To&ggle mark"
-msgstr "&Ачысціць пазначанае"
+msgstr "&Смянiць пазначанае"
 
 msgid "&Mark columns"
-msgstr ""
+msgstr "Пазначыць &стаўбец"
 
-#, fuzzy
 msgid "Mark &all"
 msgstr "Пазначыць &усе"
 
 msgid "Unmar&k"
-msgstr ""
+msgstr "&Зняць пазначэнне"
 
-#, fuzzy
 msgid "Cop&y"
-msgstr "Копія"
+msgstr "&Капiраваць"
 
-#, fuzzy
 msgid "Mo&ve"
-msgstr "Перамясціць"
+msgstr "&Перамясціць"
 
 msgid "&Delete"
 msgstr "&Выдаліць"
 
-#, fuzzy
 msgid "Co&py to clipfile"
-msgstr "&Капіяваць у файл..."
+msgstr "&Капіяваць у файл"
 
-#, fuzzy
 msgid "&Cut to clipfile"
-msgstr "&Перайсці да радка         M-l"
+msgstr "&Выдаліць у файл"
 
-#, fuzzy
 msgid "Pa&ste from clipfile"
-msgstr "diff &файлаў          C-x C-y"
+msgstr "&Уставiць з файла"
 
 msgid "&Beginning"
 msgstr ""
 
-#, fuzzy
 msgid "&End"
-msgstr "&Інода"
+msgstr "&Канец"
 
-#, fuzzy
 msgid "&Search..."
-msgstr "Пошук"
+msgstr "&Пошук"
 
-#, fuzzy
 msgid "Search &again"
-msgstr "Пра&цяг пошуку  F17"
+msgstr "П&аўтор пошуку"
 
-#, fuzzy
 msgid "&Replace..."
-msgstr "&Замяніць"
+msgstr "&Замяніць..."
 
 #, fuzzy
 msgid "&Toggle bookmark"
@@ -1954,24 +1941,20 @@ msgstr "&Ачыстка закладкі"
 msgid "&Go to line..."
 msgstr " Перайсці да радка..."
 
-#, fuzzy
 msgid "&Toggle line state"
-msgstr "&Выдаленне блоку      F3"
+msgstr "Пераключэнне статусу &радка"
 
 msgid "Go to matching &bracket"
 msgstr "Ісці да парнай &дужкі"
 
-#, fuzzy
 msgid "&Find declaration"
-msgstr "Знайсці карэктуры, адкінутыя камандай patch"
+msgstr "&Знайсці  дэкларацыю"
 
-#, fuzzy
 msgid "Back from &declaration"
-msgstr "Знайсці карэктуры, адкінутыя камандай patch"
+msgstr "&Вярнуцца да дэкларацыi"
 
-#, fuzzy
 msgid "For&ward to declaration"
-msgstr "Знайсці карэктуры, адкінутыя камандай patch"
+msgstr "&Уперад да дэкларацыi"
 
 msgid "Encod&ing..."
 msgstr "&Кадыроўка"
@@ -2006,63 +1989,50 @@ msgstr "Уставіць &Дату/час"
 msgid "&Format paragraph"
 msgstr "Фарматаваць &параграф"
 
-#, fuzzy
 msgid "&Sort..."
-msgstr "Парадак &сартавання"
+msgstr "&Сартыроўка"
 
-#, fuzzy
 msgid "&Paste output of..."
-msgstr "Уставіць в&ывад ад ...     M-u"
+msgstr "Уставіць в&ывад ад ..."
 
-#, fuzzy
 msgid "&External formatter"
-msgstr "&Знешняе фарматаванне      F19"
+msgstr "&Знешняе фарматаванне"
 
 msgid "&General...  "
 msgstr "&Асноўнае..."
 
-#, fuzzy
 msgid "Save &mode..."
 msgstr "Рэжым &захавання..."
 
-#, fuzzy
 msgid "Learn &keys..."
 msgstr "В&ызначэнне клавіш..."
 
-#, fuzzy
 msgid "Syntax &highlighting..."
 msgstr "Вылучэнне &колерам сінтаксісу..."
 
-#, fuzzy
 msgid "S&yntax file"
 msgstr "Рэдагаванне файла сінтанксісу"
 
-#, fuzzy
 msgid "&Menu file"
 msgstr "Файл мен&ю"
 
 msgid "&Save setup"
 msgstr "&Захаваць наладку"
 
-#, fuzzy
 msgid "&File"
-msgstr "Файл"
+msgstr "&Файл"
 
-#, fuzzy
 msgid "&Edit"
-msgstr "Праўка"
+msgstr "П&раўка"
 
-#, fuzzy
 msgid "&Search"
-msgstr "Пошук"
+msgstr "&Пошук"
 
-#, fuzzy
 msgid "&Command"
-msgstr "Каманда"
+msgstr "&Каманда"
 
-#, fuzzy
 msgid "For&mat"
-msgstr "Забыцца"
+msgstr "&Фармат"
 
 #, fuzzy
 msgid "&Options"
@@ -2087,9 +2057,8 @@ msgstr ""
 msgid "Pers&istent selection"
 msgstr "Інвер&сія вылучэння  M-*"
 
-#, fuzzy
 msgid "Synta&x highlighting"
-msgstr "Падсветка сінтаксісу"
+msgstr "Падсветка &сінтаксісу"
 
 msgid "Visible tabs"
 msgstr ""
@@ -2128,16 +2097,16 @@ msgid "ButtonBar|Help"
 msgstr ""
 
 msgid "ButtonBar|Save"
-msgstr ""
+msgstr "Захвц"
 
 msgid "ButtonBar|Mark"
-msgstr ""
+msgstr "Пазнч"
 
 msgid "ButtonBar|Replac"
 msgstr "Замена"
 
 msgid "ButtonBar|Copy"
-msgstr ""
+msgstr "Капр"
 
 msgid "ButtonBar|Move"
 msgstr ""
@@ -3838,9 +3807,8 @@ msgstr " Прагляд немагчымы: не звычайны файл "
 msgid "Seeking to search result"
 msgstr ""
 
-#, fuzzy
 msgid "Search done"
-msgstr "Пошук"
+msgstr "Пошук скончаны"
 
 msgid "Continue from begining?"
 msgstr ""

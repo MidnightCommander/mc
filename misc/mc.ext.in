@@ -622,7 +622,7 @@ type/^gzip
 	Open=gzip -dc %f | %var{PAGER:more}
 	View=%view{ascii} gzip -dc %f 2>/dev/null
 
-regex/\.(gz|Z)?$
+regex/\.(gz|Z)$
 	View=%view{ascii} gzip -dc %f 2>/dev/null
 
 # bzip2

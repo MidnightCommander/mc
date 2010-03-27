@@ -89,6 +89,14 @@ typedef struct format_e
     const char *id;
 } format_e;
 
+enum {
+    QSEARCH_CASE_INSENSITIVE = 0, /* quick search in case insensitive mode */
+    QSEARCH_CASE_SENSITIVE = 1, /* quick search in case sensitive mode */
+    QSEARCH_PANEL_CASE = 2 /* quick search get value from panel case_sensitive */
+};
+
+int quick_search_case_sensitive = QSEARCH_PANEL_CASE;
+
 /* If true, show the mini-info on the panel */
 int show_mini_info = 1;
 
@@ -2403,8 +2411,18 @@ do_search (WPanel * panel, int c_code)
     search = mc_search_new (esc_str, -1);
     search->search_type = MC_SEARCH_T_GLOB;
     search->is_entire_line = TRUE;
-    search->is_case_sentitive = 0;
-
+    switch (quick_search_case_sensitive)
+    {
+    case QSEARCH_CASE_SENSITIVE:
+        search->is_case_sentitive = TRUE;
+        break;
+    case QSEARCH_CASE_INSENSITIVE:
+        search->is_case_sentitive = FALSE;
+        break;
+    default:
+        search->is_case_sentitive = panel->case_sensitive;
+        break;
+    }
     sel = panel->selected;
     for (i = panel->selected; !wrapped || i != panel->selected; i++)
     {
@@ -3192,58 +3210,66 @@ mouse_sort_col (Gpm_Event * event, WPanel * panel)
 
 /*
  * Mouse callback of the panel minus repainting.
- * If the event is redirected to the menu, *redir is set to 1.
+ * If the event is redirected to the menu, *redir is set to TRUE.
  */
 static int
-do_panel_event (Gpm_Event * event, WPanel * panel, int *redir)
+do_panel_event (Gpm_Event * event, WPanel * panel, gboolean *redir)
 {
     const int lines = llines (panel);
     const gboolean is_active = dlg_widget_active (panel);
     const gboolean mouse_down = (event->type & GPM_DOWN) != 0;
 
-    /* "." button show/hide hidden files */
-    if (event->type & GPM_DOWN && event->x == panel->widget.cols - 5 && event->y == 1)
+    *redir = FALSE;
+
+    /* 1st line */
+    if (mouse_down && event->y == 1)
     {
-        toggle_show_hidden ();
-        repaint_screen ();
+        /* "<" button */
+        if (event->x == 2)
+        {
+            directory_history_prev (panel);
+            return MOU_NORMAL;
+        }
+
+        /* "." button show/hide hidden files */
+        if (event->x == panel->widget.cols - 5)
+        {
+            toggle_show_hidden ();
+            repaint_screen ();
+            return MOU_NORMAL;
+        }
+
+        /* ">" button */
+        if (event->x == panel->widget.cols - 1)
+        {
+            directory_history_next (panel);
+            return MOU_NORMAL;
+        }
+
+        /* "^" button */
+        if (event->x >= panel->widget.cols - 4 && event->x <= panel->widget.cols - 2)
+        {
+            directory_history_list (panel);
+            return MOU_NORMAL;
+        }
+
+        /* rest of the upper frame, the menu is invisible - call menu */
+        if (!menubar_visible)
+        {
+            *redir = TRUE;
+            event->x += panel->widget.x;
+            return the_menubar->widget.mouse (event, the_menubar);
+        }
+
+        /* no other events on 1st line */
         return MOU_NORMAL;
     }
 
-    /* "<" button */
-    if (mouse_down && event->y == 1 && event->x == 2)
-    {
-        directory_history_prev (panel);
-        return MOU_NORMAL;
-    }
-
-    /* ">" button */
-    if (mouse_down && event->y == 1 && event->x == panel->widget.cols - 1)
-    {
-        directory_history_next (panel);
-        return MOU_NORMAL;
-    }
-
-    /* "^" button */
-    if (mouse_down && event->y == 1 && event->x >= panel->widget.cols - 4
-        && event->x <= panel->widget.cols - 2)
-    {
-        directory_history_list (panel);
-        return MOU_NORMAL;
-    }
-
-    /* sort on clicked column */
-    if (event->type & GPM_DOWN && event->y == 2)
+    /* sort on clicked column; don't handle wheel events */
+    if (mouse_down && (event->buttons & (GPM_B_UP | GPM_B_DOWN)) == 0 && event->y == 2)
     {
         mouse_sort_col (event, panel);
         return MOU_NORMAL;
-    }
-
-    /* rest of the upper frame, the menu is invisible - call menu */
-    if (mouse_down && event->y == 1 && !menubar_visible)
-    {
-        *redir = 1;
-        event->x += panel->widget.x;
-        return the_menubar->widget.mouse (event, the_menubar);
     }
 
     /* Mouse wheel events */
@@ -3330,7 +3356,7 @@ panel_event (Gpm_Event * event, void *data)
 {
     WPanel *panel = data;
     int ret;
-    int redir = MOU_NORMAL;
+    gboolean redir;
 
     ret = do_panel_event (event, panel, &redir);
     if (!redir)
