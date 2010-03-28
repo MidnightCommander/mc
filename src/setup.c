@@ -92,18 +92,18 @@ int setup_copymove_persistent_attr = 1;
 int saving_setup;
 
 panels_options_t panels_options = {
+    .kilobyte_si = FALSE,
     .mix_all_files = FALSE,
     .show_backups = TRUE,
     .show_dot_files = TRUE,
     .fast_reload = FALSE,
     .fast_reload_msg_shown = FALSE,
     .mark_moves_down = TRUE,
-    .navigate_with_arrows = FALSE,
-    .kilobyte_si = FALSE,
-    .scroll_pages = TRUE,
-    .mouse_move_pages = TRUE,
     .reverse_files_only = TRUE,
     .auto_save_setup = FALSE,
+    .navigate_with_arrows = FALSE,
+    .scroll_pages = TRUE,
+    .mouse_move_pages = TRUE,
     .filetype_mode = TRUE,
     .permission_mode = FALSE,
     .qsearch_mode = QSEARCH_PANEL_CASE
@@ -274,18 +274,18 @@ static const struct
     const char *opt_old_name;
     gboolean *opt_addr;
 } panels_ini_options[] = {
+    { "kilobyte_si",  NULL, &panels_options.kilobyte_si },
     { "mix_all_files", NULL, &panels_options.mix_all_files },
     { "show_backups",  NULL, &panels_options.show_backups },
     { "show_dot_files",  NULL, &panels_options.show_dot_files },
     { "fast_reload",  NULL, &panels_options.fast_reload },
-    { "fast_reload",  NULL, &panels_options.fast_reload_msg_shown },
+    { "fast_reload_msg_shown",  NULL, &panels_options.fast_reload_msg_shown },
     { "mark_moves_down",  NULL, &panels_options.mark_moves_down },
-    { "navigate_with_arrows",  NULL, &panels_options.navigate_with_arrows },
-    { "kilobyte_si",  NULL, &panels_options.kilobyte_si },
-    { "panel_scroll_pages",  "scroll_pages", &panels_options.scroll_pages },
-    { "mouse_move_pages",  NULL, &panels_options.mouse_move_pages },
     { "reverse_files_only", NULL, &panels_options.reverse_files_only },
     { "auto_save_setup_panels", "auto_save_setup", &panels_options.auto_save_setup },
+    { "navigate_with_arrows",  NULL, &panels_options.navigate_with_arrows },
+    { "panel_scroll_pages",  "scroll_pages", &panels_options.scroll_pages },
+    { "mouse_move_pages",  NULL, &panels_options.mouse_move_pages },
     { "filetype_mode",  NULL, &panels_options.filetype_mode },
     { "permission_mode",  NULL, &panels_options.permission_mode },
     { NULL, NULL, NULL }
