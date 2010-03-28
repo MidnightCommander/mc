@@ -489,7 +489,7 @@ static key_define_t qansi_key_defines[] = {
 };
 
 /* timeout for old_esc_mode in usec */
-static int keyboard_key_timeout = 1000000;      /* settable via env */
+int old_esc_mode_timeout = 1000000;      /* settable via env */
 
 /* This holds all the key definitions */
 static key_def *keys = NULL;
@@ -983,8 +983,8 @@ xgetch_second (void)
     int c;
     struct timeval time_out;
 
-    time_out.tv_sec = keyboard_key_timeout / 1000000;
-    time_out.tv_usec = keyboard_key_timeout % 1000000;
+    time_out.tv_sec = old_esc_mode_timeout / 1000000;
+    time_out.tv_usec = old_esc_mode_timeout % 1000000;
     tty_nodelay (TRUE);
     FD_ZERO (&Read_FD_Set);
     FD_SET (input_fd, &Read_FD_Set);
@@ -1039,9 +1039,6 @@ void
 init_key (void)
 {
     const char *term = getenv ("TERM");
-    const char *kt = getenv ("KEYBOARD_KEY_TIMEOUT_US");
-    if (kt != NULL)
-        keyboard_key_timeout = atoi (kt);
 
     /* This has to be the first define_sequence */
     /* So, we can assume that the first keys member has ESC */
@@ -1520,8 +1517,8 @@ get_key_code (int no_delay)
                 if (esctime.tv_sec == -1)
                     return -1;
                 GET_TIME (current);
-                time_out.tv_sec = keyboard_key_timeout / 1000000 + esctime.tv_sec;
-                time_out.tv_usec = keyboard_key_timeout % 1000000 + esctime.tv_usec;
+                time_out.tv_sec = old_esc_mode_timeout / 1000000 + esctime.tv_sec;
+                time_out.tv_usec = old_esc_mode_timeout % 1000000 + esctime.tv_usec;
                 if (time_out.tv_usec > 1000000) {
                     time_out.tv_usec -= 1000000;
                     time_out.tv_sec++;

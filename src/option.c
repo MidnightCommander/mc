@@ -23,6 +23,7 @@
 
 #include <config.h>
 
+#include <stdlib.h>             /* atoi() */
 #include <stdio.h>
 #include <string.h>
 
@@ -33,6 +34,7 @@
 #include "lib/global.h"
 #include "lib/mcconfig.h"       /* mc_config_save_file() */
 #include "lib/strutil.h"        /* str_term_width1() */
+#include "lib/tty/key.h"        /* old_esc_mode_timeout */
 
 #include "dialog.h"             /* B_ constants */
 #include "setup.h"              /* panels_options */
@@ -40,6 +42,7 @@
 #include "file.h"               /* file_op_compute_totals */
 #include "layout.h"             /* nice_rotating_dash */
 #include "wtools.h"             /* QuickDialog */
+#include "history.h"            /* MC_HISTORY_ESC_TIMEOUT */
 
 #include "option.h"
 
@@ -48,7 +51,10 @@ void
 configure_box (void)
 {
     int dlg_width = 60;
-    int dlg_height = 17;
+    int dlg_height = 20;
+
+    char time_out[BUF_TINY] = "";
+    char *time_out_new;
 
     const char *pause_options[] = {
         N_("&Never"),
@@ -83,12 +89,20 @@ configure_box (void)
                         &use_internal_view),
         QUICK_CHECKBOX (dlg_width / 2 + 2, dlg_width, 3, dlg_height, N_("Use internal edi&t"),
                         &use_internal_edit),
-        QUICK_GROUPBOX (dlg_width / 2, dlg_width, 2, dlg_height, dlg_width / 2 - 4, 12,
+        QUICK_GROUPBOX (dlg_width / 2, dlg_width, 2, dlg_height, dlg_width / 2 - 4, 15,
                         N_("Other options")),
         /* pause options */
-        QUICK_RADIO (5, dlg_width, 10, dlg_height, pause_options_num, pause_options,
+        QUICK_RADIO (5, dlg_width, 13, dlg_height, pause_options_num, pause_options,
                      &pause_after_run),
-        QUICK_GROUPBOX (3, dlg_width, 9, dlg_height, dlg_width / 2 - 4, 5, N_("Pause after run")),
+        QUICK_GROUPBOX (3, dlg_width, 12, dlg_height, dlg_width / 2 - 4, 5, N_("Pause after run")),
+
+        /* Esc key mode */
+        QUICK_INPUT (10, dlg_width, 10, dlg_height, (const char *) time_out, 8, 0,
+                        MC_HISTORY_ESC_TIMEOUT, &time_out_new),
+        QUICK_LABEL (5, dlg_width, 10, dlg_height, N_("Timeout:")),
+        QUICK_CHECKBOX (5, dlg_width, 9, dlg_height, N_("S&ingle press"), &old_esc_mode),
+        QUICK_GROUPBOX (3, dlg_width, 8, dlg_height, dlg_width / 2 - 4, 4, N_("Esc key mode")),
+
         /* file operation options */
         QUICK_CHECKBOX (5, dlg_width, 6, dlg_height, N_("Mkdi&r autoname"), &auto_fill_mkdir_name),
         QUICK_CHECKBOX (5, dlg_width, 5, dlg_height, N_("Classic pro&gressbar"), &classic_progressbar),
@@ -108,8 +122,10 @@ configure_box (void)
         quick_widgets, TRUE
     };
 
+    int qd_result;
+
     int b0_len, b1_len, b2_len;
-    int b_len, c_len, g_len;
+    int b_len, c_len, g_len, l_len;
     size_t i;
 
 #ifdef ENABLE_NLS
@@ -118,7 +134,7 @@ configure_box (void)
             if (i < 3)
                 /* buttons */
                 quick_widgets[i].u.button.text = _(quick_widgets[i].u.button.text);
-            else if ((i == 13) || (i == 15) || (i == 20))
+            else if ((i == 13) || (i == 15) || (i == 19) || (i == 24))
                 /* groupboxes */
                 quick_widgets[i].u.groupbox.title = _(quick_widgets[i].u.groupbox.title);
             else if (i == 14)
@@ -128,7 +144,10 @@ configure_box (void)
                 for (j = 0; j < pause_options_num; j++)
                     pause_options[j] = _(pause_options[j]);
             }
-            else
+            else if (i == 17)
+                /* label */
+                quick_widgets[i].u.label.text = _(quick_widgets[i].u.label.text);
+            else if (i != 16)
                 /* checkboxes */
                 quick_widgets[i].u.checkbox.text = _(quick_widgets[i].u.checkbox.text);
 
@@ -147,14 +166,18 @@ configure_box (void)
 
     /* checkboxes within groupboxes */
     c_len = 0;
-    for (i = 3; i < 20; i++)
-        if ((i < 13) || (i > 15))
+    for (i = 3; i < 24; i++)
+        if ((i < 13) || (i == 18) || (i > 19))
             c_len = max (c_len, str_term_width1 (quick_widgets[i].u.checkbox.text) + 3);
     /* radiobuttons */
     for (i = 0; i < pause_options_num; i++)
         c_len = max (c_len, str_term_width1 (pause_options[i]) + 3);
+    /* label + input */
+    l_len = str_term_width1 (quick_widgets[17].u.label.text);
+    c_len = max (c_len, l_len + 1 + 8);
     /* groupboxes */
-    g_len = max (c_len + 2, str_term_width1 (quick_widgets[20].u.groupbox.title) + 4);
+    g_len = max (c_len + 2, str_term_width1 (quick_widgets[24].u.groupbox.title) + 4);
+    g_len = max (g_len, str_term_width1 (quick_widgets[19].u.groupbox.title) + 4);
     g_len = max (g_len, str_term_width1 (quick_widgets[15].u.groupbox.title) + 4);
     g_len = max (g_len, str_term_width1 (quick_widgets[13].u.groupbox.title) + 4);
     /* dialog width */
@@ -168,9 +191,14 @@ configure_box (void)
         quick_widgets[i].x_divisions = Quick_input.xlen;
 
     /* groupboxes */
-    quick_widgets[13].u.groupbox.width =
-        quick_widgets[15].u.groupbox.width =
-        quick_widgets[20].u.groupbox.width = Quick_input.xlen / 2 - 4;
+    quick_widgets[15].u.groupbox.width =
+        quick_widgets[19].u.groupbox.width =
+        quick_widgets[24].u.groupbox.width = Quick_input.xlen / 2 - 4;
+    quick_widgets[13].u.groupbox.width = Quick_input.xlen / 2 - 3;
+
+    /* input */
+    quick_widgets[16].relative_x = quick_widgets[17].relative_x + l_len + 1;
+    quick_widgets[16].u.input.len = quick_widgets[19].u.groupbox.width - l_len - 4;
 
     /* right column */
     quick_widgets[13].relative_x = Quick_input.xlen / 2;
@@ -182,8 +210,17 @@ configure_box (void)
     quick_widgets[1].relative_x = quick_widgets[2].relative_x + b2_len + 1;
     quick_widgets[0].relative_x = quick_widgets[1].relative_x + b1_len + 1;
 
+    g_snprintf (time_out, sizeof (time_out), "%ld", old_esc_mode_timeout);
+
+    qd_result = quick_dialog (&Quick_input);
+
+    if ((qd_result == B_ENTER) || (qd_result == B_EXIT))
+        old_esc_mode_timeout = atoi (time_out_new);
+
+    g_free (time_out_new);
+
     /* Save button */
-    if (quick_dialog (&Quick_input) == B_EXIT)
+    if (qd_result == B_EXIT)
     {
         save_config ();
         mc_config_save_file (mc_main_config, NULL);

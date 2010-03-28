@@ -198,6 +198,7 @@ static const struct
     { "drop_menus", &drop_menus },
     { "wrap_mode",  &mcview_global_wrap_mode},
     { "old_esc_mode", &old_esc_mode },
+    { "old_esc_mode_timeout", &old_esc_mode_timeout },
     { "cd_symlinks", &cd_symlinks },
     { "show_all_if_ambiguous", &show_all_if_ambiguous },
     { "max_dirt_limit", &mcview_max_dirt_limit },
@@ -715,6 +716,7 @@ load_setup (void)
     char *profile;
     size_t i;
     char *buffer;
+    const char *kt;
 
     profile = setup_init ();
 
@@ -741,6 +743,11 @@ load_setup (void)
         *int_options[i].opt_addr =
             mc_config_get_int (mc_main_config, CONFIG_APP_SECTION, int_options[i].opt_name,
                                *int_options[i].opt_addr);
+
+    /* overwrite old_esc_mode_timeout */
+    kt = getenv ("KEYBOARD_KEY_TIMEOUT_US");
+    if ((kt != NULL) && (kt[0] != '\0'))
+        old_esc_mode_timeout = atoi (kt);
 
     /* Load string options */
     for (i = 0; str_options[i].opt_name != NULL; i++)
