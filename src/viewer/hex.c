@@ -314,15 +314,14 @@ mcview_hexedit_save_changes (mcview_t * view)
 
             if (mc_close (fp) == -1)
                 message (D_ERROR, _(" Save file "),
-                            _(" Error while closing the file: \n %s \n"
-                            " Data may have been written or not. "),
-                            unix_error_string (errno));
+                         _(" Error while closing the file: \n %s \n"
+                           " Data may have been written or not. "), unix_error_string (errno));
 
             view->dirty++;
             return TRUE;
         }
 
-save_error:
+      save_error:
         text = g_strdup_printf (_(" Cannot save file: \n %s "), unix_error_string (errno));
         (void) mc_close (fp);
 
