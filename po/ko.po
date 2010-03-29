@@ -1,7 +1,7 @@
 # Copyright (C) 2010 Free Software Foundation, Inc.
-#
-#
-#
+# 
+# 
+# 
 # Kang Bundo <bundo@bundo.biz>, 2010
 msgid ""
 msgstr ""
@@ -575,7 +575,7 @@ msgstr "ftpfs: 중지 실패"
 
 #, fuzzy
 msgid "ftpfs: CWD failed."
-msgstr "ftpfs: CWD실패."
+msgstr "ftpfs : CWD에 실패했습니다."
 
 msgid "ftpfs: couldn't resolve symlink"
 msgstr "ftpfs: 심볼릭 링크 해결 못함"
@@ -3755,4 +3755,3 @@ msgstr "기록을 삭제하기를 원하십니까?"
 
 msgid "Background process:"
 msgstr "배경 프로세스:"
-
