@@ -329,17 +329,14 @@ mcview_execute_cmd (mcview_t * view, unsigned long command)
     case CK_ViewToggleWrapMode:
         /* Toggle between wrapped and unwrapped view */
         mcview_toggle_wrap_mode (view);
-        view->dirty++;
         break;
     case CK_ViewToggleHexEditMode:
         /* Toggle between hexview and hexedit mode */
         mcview_toggle_hexedit_mode (view);
-        view->dirty++;
         break;
     case CK_ViewToggleHexMode:
         /* Toggle between hex view and text view */
         mcview_toggle_hex_mode (view);
-        view->dirty++;
         break;
     case CK_ViewGoto:
         {
@@ -365,7 +362,6 @@ mcview_execute_cmd (mcview_t * view, unsigned long command)
         break;
     case CK_ViewToggleMagicMode:
         mcview_toggle_magic_mode (view);
-        view->dirty++;
         break;
     case CK_ViewToggleNroffMode:
         mcview_toggle_nroff_mode (view);
@@ -471,12 +467,12 @@ mcview_handle_key (mcview_t * view, int key)
     if ((command != CK_Ignore_Key) && (mcview_execute_cmd (view, command) == MSG_HANDLED))
         return MSG_HANDLED;
 
-    if (mcview_check_left_right_keys (view, key))
+    if (mcview_check_left_right_keys (view, key) == MSG_HANDLED)
         return MSG_HANDLED;
 
     if (check_movement_keys (key, view->data_area.height + 1, view,
                              mcview_cmk_move_up, mcview_cmk_move_down,
-                             mcview_cmk_moveto_top, mcview_cmk_moveto_bottom))
+                             mcview_cmk_moveto_top, mcview_cmk_moveto_bottom) == MSG_HANDLED)
         return MSG_HANDLED;
 
 #ifdef MC_ENABLE_DEBUGGING_CODE

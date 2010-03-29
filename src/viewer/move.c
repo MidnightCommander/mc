@@ -173,10 +173,6 @@ mcview_move_left (mcview_t * view, off_t columns)
             if (old_cursor > 0 || view->hexedit_lownibble)
                 view->hexedit_lownibble = !view->hexedit_lownibble;
     }
-    else if (view->text_wrap_mode)
-    {
-        /* nothing to do */
-    }
     else
     {
         if (view->dpy_text_column >= columns)
@@ -206,10 +202,6 @@ mcview_move_right (mcview_t * view, off_t columns)
         if (!view->hexview_in_text)
             if (old_cursor < last_byte || !view->hexedit_lownibble)
                 view->hexedit_lownibble = !view->hexedit_lownibble;
-    }
-    else if (view->text_wrap_mode)
-    {
-        /* nothing to do */
     }
     else
     {
