@@ -145,13 +145,13 @@ menubar_paint_idx (WMenuBar *menubar, unsigned int idx, int color)
 	tty_setcolor (MENU_ENTRY_COLOR);
 
 	widget_move (&menubar->widget, y, x - 1);
-	tty_print_alt_char (ACS_LTEE, TRUE);
+	tty_print_alt_char (ACS_LTEE, FALSE);
 
 	tty_draw_hline (menubar->widget.y + y, menubar->widget.x + x,
 			    ACS_HLINE, menu->max_entry_len + 3);
 
 	widget_move (&menubar->widget, y, x + menu->max_entry_len + 3);
-	tty_print_alt_char (ACS_RTEE, TRUE);
+	tty_print_alt_char (ACS_RTEE, FALSE);
     } else {
 	/* menu text */
 	tty_setcolor (color);
@@ -194,7 +194,7 @@ menubar_draw_drop (WMenuBar *menubar)
     tty_setcolor (MENU_ENTRY_COLOR);
     draw_box (menubar->widget.parent,
 		 menubar->widget.y + 1, menubar->widget.x + column,
-		 count + 2, menu->max_entry_len + 5, TRUE);
+		 count + 2, menu->max_entry_len + 5, FALSE);
 
     /* draw items except selected */
     for (i = 0; i < count; i++)
