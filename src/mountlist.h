@@ -23,7 +23,8 @@
 #define MC_MOUNTLIST_H
 
 /* Filesystem status */
-struct my_statfs {
+struct my_statfs
+{
     int type;
     char *typename;
     const char *mpoint;
