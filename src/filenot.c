@@ -76,7 +76,8 @@ my_mkdir_rec (char *s, mode_t mode)
     q = vfs_canon (p);
     g_free (p);
 
-    if (!(result = my_mkdir_rec (q, mode)))
+    result = my_mkdir_rec (q, mode);
+    if (result == 0)
 	result = mc_mkdir (s, mode);
 
     g_free (q);

@@ -498,7 +498,8 @@ init_subshell (void)
     }
 
     if (subshell_pid == 0)
-    {                           /* We are in the child process */
+    {
+        /* We are in the child process */
         init_subshell_child (pty_name);
     }
 
@@ -1254,20 +1255,20 @@ pty_open_master (char *pty_name)
     for (ptr1 = "pqrstuvwxyzPQRST"; *ptr1; ++ptr1)
     {
         pty_name[8] = *ptr1;
-        for (ptr2 = "0123456789abcdef"; *ptr2; ++ptr2)
+        for (ptr2 = "0123456789abcdef"; *ptr2 != '\0'; ++ptr2)
         {
             pty_name[9] = *ptr2;
 
             /* Try to open master */
-            if ((pty_master = open (pty_name, O_RDWR)) == -1)
+            pty_master = open (pty_name, O_RDWR);
+            if (pty_master == -1)
             {
                 if (errno == ENOENT)    /* Different from EIO */
                     return -1;  /* Out of pty devices */
-                else
-                    continue;   /* Try next pty device */
+                continue;       /* Try next pty device */
             }
             pty_name[5] = 't';  /* Change "pty" to "tty" */
-            if (access (pty_name, 6))
+            if (access (pty_name, 6) != 0)
             {
                 close (pty_master);
                 pty_name[5] = 'p';
@@ -1293,7 +1294,8 @@ pty_open_slave (const char *pty_name)
         /* chown (pty_name, getuid (), group_info->gr_gid);  FIXME */
         /* chmod (pty_name, S_IRUSR | S_IWUSR | S_IWGRP);   FIXME */
     }
-    if ((pty_slave = open (pty_name, O_RDWR)) == -1)
+    pty_slave = open (pty_name, O_RDWR);
+    if (pty_slave == -1)
         fprintf (stderr, "open (pty_name, O_RDWR): %s\r\n", pty_name);
     fcntl (pty_slave, F_SETFD, FD_CLOEXEC);
     return pty_slave;

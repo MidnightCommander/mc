@@ -668,7 +668,8 @@ read_filesystem_list (int need_fs_type, int all_fs)
     if (!getcwd (dir, _POSIX_PATH_MAX))
         return (NULL);
 
-    if ((fd = open (dir, O_RDONLY)) == -1)
+    fd = open (dir, O_RDONLY);
+    if (fd == -1)
         return (NULL);
 
     i = disk_get_entry (fd, &de);
@@ -756,7 +757,7 @@ void
 my_statfs (struct my_statfs *myfs_stats, const char *path)
 {
 #ifdef HAVE_INFOMOUNT_LIST
-    int i, len = 0;
+    size_t i, len = 0;
     struct mount_entry *entry = NULL;
     struct mount_entry *temp = mount_list;
     struct fs_usage fs_use;
@@ -765,7 +766,7 @@ my_statfs (struct my_statfs *myfs_stats, const char *path)
     {
         i = strlen (temp->me_mountdir);
         if (i > len && (strncmp (path, temp->me_mountdir, i) == 0))
-            if (!entry || (path[i] == PATH_SEP || path[i] == 0))
+            if (!entry || (path[i] == PATH_SEP || path[i] == '\0'))
             {
                 len = i;
                 entry = temp;
@@ -800,7 +801,8 @@ my_statfs (struct my_statfs *myfs_stats, const char *path)
         struct mount_entry *entry;
     struct fs_usage fs_use;
 
-    if ((entry = read_filesystem_list (0, 0)) != NULL)
+    entry = read_filesystem_list (0, 0);
+    if (entry != NULL)
     {
         get_fs_usage (entry->me_mountdir, &fs_use);
 

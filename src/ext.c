@@ -118,17 +118,19 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir,
 		 unix_error_string (errno));
 	return;
     }
+
     cmd_file = fdopen (cmd_file_fd, "w");
     fputs ("#! /bin/sh\n", cmd_file);
 
-    lc_prompt[0] = 0;
-    for (; *lc_data && *lc_data != '\n'; lc_data++) {
+    lc_prompt[0] = '\0';
+    for (; *lc_data != '\0' && *lc_data != '\n'; lc_data++) {
 	if (parameter_found) {
 	    if (*lc_data == '}') {
 		char *parameter;
+
 		parameter_found = 0;
 		parameter = input_dialog (_(" Parameter "), lc_prompt, MC_HISTORY_EXT_PARAMETER, "");
-		if (!parameter) {
+		if (parameter == NULL) {
 		    /* User canceled */
 		    fclose (cmd_file);
 		    unlink (file_name);
@@ -147,7 +149,7 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir,
 
 		if (len < sizeof (lc_prompt) - 1) {
 		    lc_prompt[len] = *lc_data;
-		    lc_prompt[len + 1] = 0;
+		    lc_prompt[len + 1] = '\0';
 		}
 	    }
 	} else if (expand_prefix_found) {
@@ -155,66 +157,73 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir,
 	    if (*lc_data == '{')
 		parameter_found = 1;
 	    else {
-		int i = check_format_view (lc_data);
+		int i;
 		char *v;
 
-		if (i) {
+		i = check_format_view (lc_data);
+		if (i != 0) {
 		    lc_data += i - 1;
 		    run_view = 1;
-		} else if ((i = check_format_cd (lc_data)) > 0) {
-		    is_cd = 1;
-		    quote_func = fake_name_quote;
-		    do_local_copy = 0;
-		    p = buffer;
-		    lc_data += i - 1;
-		} else if ((i = check_format_var (lc_data, &v)) > 0 && v) {
-		    fputs (v, cmd_file);
-		    g_free (v);
-		    lc_data += i;
 		} else {
-		    char *text;
-
-		    if (*lc_data == 'f') {
-			if (do_local_copy) {
-			    localcopy = mc_getlocalcopy (filename);
-			    if (localcopy == NULL) {
-				fclose (cmd_file);
-				unlink (file_name);
-				g_free (file_name);
-				return;
-			    }
-			    mc_stat (localcopy, &mystat);
-			    localmtime = mystat.st_mtime;
-			    text = (*quote_func) (localcopy, 0);
-			} else {
-                            fn = vfs_canon_and_translate (filename);
-                            text = (*quote_func) (fn, 0);
-                            g_free (fn);
-			}
+		    i = check_format_cd (lc_data);
+		    if (i > 0) {
+			is_cd = 1;
+			quote_func = fake_name_quote;
+			do_local_copy = 0;
+			p = buffer;
+			lc_data += i - 1;
 		    } else {
-			text = expand_format (NULL, *lc_data, !is_cd);
-                    }
-		    if (!is_cd)
-			fputs (text, cmd_file);
-		    else {
-			strcpy (p, text);
-			p = strchr (p, 0);
+			i = check_format_var (lc_data, &v);
+			if (i > 0 && v != NULL) {
+			    fputs (v, cmd_file);
+			    g_free (v);
+			    lc_data += i;
+			} else {
+			    char *text;
+
+			    if (*lc_data != 'f')
+				text = expand_format (NULL, *lc_data, !is_cd);
+			    else {
+				if (do_local_copy) {
+				    localcopy = mc_getlocalcopy (filename);
+				    if (localcopy == NULL) {
+					fclose (cmd_file);
+					unlink (file_name);
+					g_free (file_name);
+					return;
+				    }
+				    mc_stat (localcopy, &mystat);
+				    localmtime = mystat.st_mtime;
+				    text = quote_func (localcopy, 0);
+				} else {
+				    fn = vfs_canon_and_translate (filename);
+				    text = quote_func (fn, 0);
+				    g_free (fn);
+				}
+			    }
+
+			    if (!is_cd)
+				fputs (text, cmd_file);
+			    else {
+				strcpy (p, text);
+				p = strchr (p, 0);
+			    }
+
+			    g_free (text);
+			    written_nonspace = 1;
+			}
 		    }
-		    g_free (text);
-		    written_nonspace = 1;
 		}
 	    }
-	} else {
-	    if (*lc_data == '%')
-		expand_prefix_found = 1;
-	    else {
-		if (*lc_data != ' ' && *lc_data != '\t')
-		    written_nonspace = 1;
-		if (is_cd)
-		    *(p++) = *lc_data;
-		else
-		    fputc (*lc_data, cmd_file);
-	    }
+	} else if (*lc_data == '%')
+	    expand_prefix_found = 1;
+	else {
+	    if (*lc_data != ' ' && *lc_data != '\t')
+		written_nonspace = 1;
+	    if (is_cd)
+		*(p++) = *lc_data;
+	    else
+		fputc (*lc_data, cmd_file);
 	}
     }				/* for */
 
@@ -223,9 +232,8 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir,
      * Don't do it for the viewer - it may need to rerun the script,
      * so we clean up after calling view().
      */
-    if (!run_view) {
+    if (!run_view)
 	fprintf (cmd_file, "\n/bin/rm -f %s\n", file_name);
-    }
 
     fclose (cmd_file);
 
@@ -285,7 +293,6 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir,
 				       LINES - keybar_visible -
 				       output_lines - 1,
 				       LINES - keybar_visible - 1);
-
 	    }
 	}
     }

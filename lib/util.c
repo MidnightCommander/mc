@@ -526,13 +526,15 @@ strip_password (char *p, int has_prefix)
 
         if (has_prefix)
         {
-            if ((q = strstr (p, prefixes[i].name)) == 0)
+            q = strstr (p, prefixes[i].name);
+            if (q == NULL)
                 continue;
             else
                 p = q + prefixes[i].len;
         }
 
-        if ((dir = strchr (p, PATH_SEP)) != NULL)
+        dir = strchr (p, PATH_SEP);
+        if (dir != NULL)
             *dir = '\0';
 
         /* search for any possible user */
@@ -559,7 +561,8 @@ strip_home_and_password (const char *dir)
     size_t len;
     static char newdir[MC_MAXPATHLEN];
 
-    if (home_dir && !strncmp (dir, home_dir, len = strlen (home_dir)) &&
+    len = strlen (home_dir);
+    if (home_dir != NULL && strncmp (dir, home_dir, len) == 0 &&
         (dir[len] == PATH_SEP || dir[len] == '\0'))
     {
         newdir[0] = '~';
@@ -619,7 +622,8 @@ load_file (const char *filename)
     char *data;
     long read_size;
 
-    if ((data_file = fopen (filename, "r")) == NULL)
+    data_file = fopen (filename, "r");
+    if (data_file == NULL)
     {
         return 0;
     }

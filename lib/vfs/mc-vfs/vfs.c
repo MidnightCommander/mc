@@ -197,7 +197,7 @@ static struct vfs_class *vfs_list;
 int
 vfs_register_class (struct vfs_class *vfs)
 {
-    if (vfs->init)              /* vfs has own initialization function */
+    if (vfs->init != NULL)              /* vfs has own initialization function */
         if (!(*vfs->init) (vfs))        /* but it failed */
             return 0;
 
@@ -214,15 +214,15 @@ vfs_prefix_to_class (char *prefix)
     struct vfs_class *vfs;
 
     /* Avoid last class (localfs) that would accept any prefix */
-    for (vfs = vfs_list; vfs->next; vfs = vfs->next)
+    for (vfs = vfs_list; vfs->next != NULL; vfs = vfs->next)
     {
-        if (vfs->which)
+        if (vfs->which != NULL)
         {
             if ((*vfs->which) (vfs, prefix) == -1)
                 continue;
             return vfs;
         }
-        if (vfs->prefix && !strncmp (prefix, vfs->prefix, strlen (vfs->prefix)))
+        if (vfs->prefix != NULL && strncmp (prefix, vfs->prefix, strlen (vfs->prefix)) == 0)
             return vfs;
     }
     return NULL;
@@ -239,24 +239,25 @@ vfs_strip_suffix_from_filename (const char *filename)
     char *semi;
     char *p;
 
-    if (!filename)
+    if (filename == NULL)
         vfs_die ("vfs_strip_suffix_from_path got NULL: impossible");
 
     p = g_strdup (filename);
-    if (!(semi = strrchr (p, '#')))
+    semi = strrchr (p, '#');
+    if (semi == NULL)
         return p;
 
     /* Avoid last class (localfs) that would accept any prefix */
-    for (vfs = vfs_list; vfs->next; vfs = vfs->next)
+    for (vfs = vfs_list; vfs->next != NULL; vfs = vfs->next)
     {
-        if (vfs->which)
+        if (vfs->which != NULL)
         {
             if ((*vfs->which) (vfs, semi + 1) == -1)
                 continue;
             *semi = '\0';       /* Found valid suffix */
             return p;
         }
-        if (vfs->prefix && !strncmp (semi + 1, vfs->prefix, strlen (vfs->prefix)))
+        if (vfs->prefix != NULL && strncmp (semi + 1, vfs->prefix, strlen (vfs->prefix)) == 0)
         {
             *semi = '\0';       /* Found valid suffix */
             return p;
@@ -265,15 +266,12 @@ vfs_strip_suffix_from_filename (const char *filename)
     return p;
 }
 
-static int
+static gboolean
 path_magic (const char *path)
 {
     struct stat buf;
 
-    if (!stat (path, &buf))
-        return 0;
-
-    return 1;
+    return (stat (path, &buf) != 0);
 }
 
 /**
@@ -294,37 +292,38 @@ vfs_split (char *path, char **inpath, char **op)
     char *slash;
     struct vfs_class *ret;
 
-    if (!path)
+    if (path == NULL)
         vfs_die ("Cannot split NULL");
 
     semi = strrchr (path, '#');
-    if (!semi || !path_magic (path))
+    if (semi == NULL || !path_magic (path))
         return NULL;
 
     slash = strchr (semi, PATH_SEP);
-    *semi = 0;
+    *semi = '\0';
 
-    if (op)
+    if (op != NULL)
         *op = NULL;
 
-    if (inpath)
+    if (inpath != NULL)
         *inpath = NULL;
 
-    if (slash)
-        *slash = 0;
+    if (slash != NULL)
+        *slash = '\0';
 
-    if ((ret = vfs_prefix_to_class (semi + 1)))
+    ret = vfs_prefix_to_class (semi + 1);
+    if (ret != NULL)
     {
-        if (op)
+        if (op != NULL)
             *op = semi + 1;
-        if (inpath)
-            *inpath = slash ? slash + 1 : NULL;
+        if (inpath != NULL)
+            *inpath = slash != NULL ? slash + 1 : NULL;
         return ret;
     }
 
-
-    if (slash)
+    if (slash != NULL)
         *slash = PATH_SEP;
+
     ret = vfs_split (path, inpath, op);
     *semi = '#';
     return ret;
@@ -340,19 +339,19 @@ _vfs_get_class (char *path)
     g_return_val_if_fail (path, NULL);
 
     semi = strrchr (path, '#');
-    if (!semi || !path_magic (path))
+    if (semi == NULL || !path_magic (path))
         return NULL;
 
     slash = strchr (semi, PATH_SEP);
-    *semi = 0;
-    if (slash)
-        *slash = 0;
+    *semi = '\0';
+    if (slash != NULL)
+        *slash = '\0';
 
     ret = vfs_prefix_to_class (semi + 1);
 
-    if (slash)
+    if (slash != NULL)
         *slash = PATH_SEP;
-    if (!ret)
+    if (ret == NULL)
         ret = _vfs_get_class (path);
 
     *semi = '#';
@@ -498,7 +497,6 @@ _vfs_translate_path (const char *path, int size, GIConv defcnv, GString * buffer
                 errno = EINVAL;
                 return ESTR_FAILURE;
             }
-            break;
         default:
             errno = EINVAL;
             return ESTR_FAILURE;

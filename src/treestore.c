@@ -403,7 +403,8 @@ tree_store_save (void)
     name = g_build_filename (home_dir, MC_USERCONF_DIR, MC_TREESTORE_FILE, NULL);
     mc_util_make_backup_if_possible (name, ".tmp");
 
-    if ((retval = tree_store_save_to (name)) != 0)
+    retval = tree_store_save_to (name);
+    if (retval != 0)
     {
         mc_util_restore_from_backup_if_possible (name, ".tmp");
         g_free (name);

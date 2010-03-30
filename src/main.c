@@ -440,14 +440,24 @@ directory_history_add (struct WPanel *panel, const char *dir)
 static const char *
 get_parent_dir_name (const char *cwd, const char *lwd)
 {
-    const char *p;
-    if (strlen (lwd) > strlen (cwd))
-        if ((p = strrchr (lwd, PATH_SEP)) && !strncmp (cwd, lwd, p - lwd) &&
-            ((gsize) strlen (cwd) == (gsize) p - (gsize) lwd || (p == lwd && cwd[0] == PATH_SEP &&
-                                                                 cwd[1] == '\0')))
-        {
+    size_t llen, clen;
+
+    llen = strlen (lwd);
+    clen = strlen (cwd);
+
+    if (llen > clen)
+    {
+        const char *p;
+
+        p = strrchr (lwd, PATH_SEP);
+
+        if ((p != NULL)
+            && (strncmp (cwd, lwd, (size_t) (p - lwd)) == 0)
+            && (clen == (size_t) (p - lwd)
+                || ((p == lwd) && (cwd[0] == PATH_SEP) && (cwd[1] == '\0'))))
             return (p + 1);
-        }
+    }
+
     return NULL;
 }
 

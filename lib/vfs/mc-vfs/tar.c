@@ -666,7 +666,8 @@ tar_open_archive (struct vfs_class *me, struct vfs_s_super *archive,
 
     current_tar_position = 0;
     /* Open for reading */
-    if ((tard = tar_open_archive_int (me, name, archive)) == -1)
+    tard = tar_open_archive_int (me, name, archive);
+    if (tard == -1)
 	return -1;
 
     for (;;) {
@@ -772,7 +773,9 @@ static ssize_t tar_read (void *fh, char *buffer, int count)
 
     count = MIN(count, FH->ino->st.st_size - FH->pos);
 
-    if ((count = mc_read (fd, buffer, count)) == -1) ERRNOR (errno, -1);
+    count = mc_read (fd, buffer, count);
+    if (count == -1) 
+        ERRNOR (errno, -1);
 
     FH->pos += count;
     return count;

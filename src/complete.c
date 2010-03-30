@@ -109,7 +109,7 @@ filename_completion_function (const char *text, int state, INPUT_COMPLETE_FLAGS 
     }
 
     /* If we're starting the match process, initialize us a bit. */
-    if (!state)
+    if (state == 0)
     {
         const char *temp;
 
@@ -117,7 +117,7 @@ filename_completion_function (const char *text, int state, INPUT_COMPLETE_FLAGS 
         g_free (filename);
         g_free (users_dirname);
 
-        if ((*text) && (temp = strrchr (text, PATH_SEP)))
+        if ((*text != '\0') && (temp = strrchr (text, PATH_SEP)) != NULL)
         {
             filename = g_strdup (++temp);
             dirname = g_strndup (text, temp - text);
@@ -205,7 +205,7 @@ filename_completion_function (const char *text, int state, INPUT_COMPLETE_FLAGS 
             break;
     }
 
-    if (!entry)
+    if (entry == NULL)
     {
         if (directory)
         {
@@ -233,7 +233,7 @@ filename_completion_function (const char *text, int state, INPUT_COMPLETE_FLAGS 
             if (users_dirname[dirlen - 1] != PATH_SEP)
             {
                 temp[dirlen] = PATH_SEP;
-                temp[dirlen + 1] = 0;
+                temp[dirlen + 1] = '\0';
             }
             strcat (temp, entry->d_name);
         }
@@ -262,7 +262,7 @@ username_completion_function (const char *text, int state, INPUT_COMPLETE_FLAGS 
 
     if (text[0] == '\\' && text[1] == '~')
         text++;
-    if (!state)
+    if (state == 0)
     {                           /* Initialization stuff */
         setpwent ();
         userlen = strlen (text + 1);
@@ -276,7 +276,7 @@ username_completion_function (const char *text, int state, INPUT_COMPLETE_FLAGS 
             break;
     }
 
-    if (entry)
+    if (entry != NULL)
         return g_strconcat ("~", entry->pw_name, PATH_SEP_STR, (char *) NULL);
 
     endpwent ();
@@ -300,7 +300,7 @@ variable_completion_function (const char *text, int state, INPUT_COMPLETE_FLAGS 
     (void) flags;
     SHOW_C_CTX ("variable_completion_function");
 
-    if (!state)
+    if (state == 0)
     {                           /* Initialization stuff */
         isbrace = (text[1] == '{');
         varlen = strlen (text + 1 + isbrace);
@@ -315,9 +315,9 @@ variable_completion_function (const char *text, int state, INPUT_COMPLETE_FLAGS 
         env_p++;
     }
 
-    if (!*env_p)
+    if (*env_p == NULL)
         return NULL;
-    else
+
     {
         char *temp = g_malloc (2 + 2 * isbrace + p - *env_p);
 
@@ -518,10 +518,11 @@ command_completion_function (const char *_text, int state, INPUT_COMPLETE_FLAGS 
 
     if (!(flags & INPUT_COMPLETE_COMMANDS))
         return 0;
+
     text = strutils_shell_unescape (_text);
     flags &= ~INPUT_COMPLETE_SHELL_ESC;
 
-    if (!state)
+    if (state == 0)
     {                           /* Initialize us a little bit */
         isabsolute = strchr (text, PATH_SEP) != NULL;
         if (!isabsolute)
@@ -529,13 +530,18 @@ command_completion_function (const char *_text, int state, INPUT_COMPLETE_FLAGS 
             words = bash_reserved;
             phase = 0;
             text_len = strlen (text);
-            if (!path && (path = g_strdup (getenv ("PATH"))) != NULL)
+
+            if (path == NULL)
             {
-                p = path;
-                path_end = strchr (p, 0);
-                while ((p = strchr (p, PATH_ENV_SEP)))
+                path = g_strdup (getenv ("PATH"));
+                if (path != NULL)
                 {
-                    *p++ = 0;
+                    p = path;
+                    path_end = strchr (p, '\0');
+                    while ((p = strchr (p, PATH_ENV_SEP)) != NULL)
+                    {
+                        *p++ = '\0';
+                    }
                 }
             }
         }
@@ -545,7 +551,7 @@ command_completion_function (const char *_text, int state, INPUT_COMPLETE_FLAGS 
     {
         p = filename_completion_function (text, state, flags);
 
-        if (p)
+        if (p != NULL)
         {
             char *temp_p = p;
             p = strutils_shell_escape (p);
@@ -616,11 +622,15 @@ command_completion_function (const char *_text, int state, INPUT_COMPLETE_FLAGS 
         g_free (path);
         path = NULL;
     }
-    else if ((p = strrchr (found, PATH_SEP)) != NULL)
+    else
     {
-        char *tmp = found;
-        found = strutils_shell_escape (p + 1);
-        g_free (tmp);
+        p = strrchr (found, PATH_SEP);
+        if (p != NULL)
+        {
+            char *tmp = found;
+            found = strutils_shell_escape (p + 1);
+            g_free (tmp);
+        }
     }
 
     g_free (text);
@@ -1188,8 +1198,9 @@ complete_engine (WInput * in, int what_to_do)
             Dlg_head *query_dlg;
             WListbox *query_list;
 
-            for (p = in->completions + 1; *p; count++, p++)
-                if ((i = str_term_width1 (*p)) > maxlen)
+            for (p = in->completions + 1; *p != NULL; count++, p++)
+                i = str_term_width1 (*p);
+                if (i > maxlen)
                     maxlen = i;
             start_x = in->widget.x;
             start_y = in->widget.y;

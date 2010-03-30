@@ -799,15 +799,22 @@ mc_pam_auth (const char *username, const char *password)
     up.password = password;
     conv.appdata_ptr = &up;
 
-    if ((status =
-	 pam_start ("mcserv", username, &conv, &pamh)) != PAM_SUCCESS)
+    status = pam_start ("mcserv", username, &conv, &pamh);
+    if (status != PAM_SUCCESS)
 	goto failed_pam;
-    if ((status = pam_authenticate (pamh, 0)) != PAM_SUCCESS)
+
+    status = pam_authenticate (pamh, 0);
+    if (status != PAM_SUCCESS)
 	goto failed_pam;
-    if ((status = pam_acct_mgmt (pamh, 0)) != PAM_SUCCESS)
+
+    status = pam_acct_mgmt (pamh, 0);
+    if (status != PAM_SUCCESS)
 	goto failed_pam;
-    if ((status = pam_setcred (pamh, PAM_ESTABLISH_CRED)) != PAM_SUCCESS)
+
+    status = pam_setcred (pamh, PAM_ESTABLISH_CRED);
+    if (status != PAM_SUCCESS)
 	goto failed_pam;
+
     pam_end (pamh, status);
     return 0;
 
@@ -866,11 +873,13 @@ do_ftp_auth (const char *username, const char *password)
     local_address.sin_port = htons (21);
 
     /*  Convert localhost to usable format */
-    if ((inaddr = inet_addr ("127.0.0.1")) != INADDR_NONE)
+    inaddr = inet_addr ("127.0.0.1");
+    if (inaddr != INADDR_NONE)
 	memcpy ((char *) &local_address.sin_addr, (char *) &inaddr,
 		sizeof (inaddr));
 
-    if ((my_socket = socket (AF_INET, SOCK_STREAM, 0)) < 0) {
+    my_socket = socket (AF_INET, SOCK_STREAM, 0);
+    if (my_socket < 0) {
 	if (!isDaemon)
 	    fprintf (stderr, "do_auth: can't create socket\n");
 	return 0;
@@ -916,14 +925,16 @@ do_classic_auth (const char *username, const char *password)
     struct spwd *spw;
 #endif
 
-    if ((pw = getpwnam (username)) == 0)
+    pw = getpwnam (username);
+    if (pw == NULL)
 	return 0;
 
 #ifdef HAVE_SHADOW
     setspent ();
 
     /* Password expiration is not checked! */
-    if ((spw = getspnam (username)) == NULL)
+    spw = getspnam (username);
+    if (spw == NULL)
 	encr_pwd = "*";
     else
 	encr_pwd = spw->sp_pwdp;
@@ -1200,7 +1211,8 @@ get_client (int port)
     struct sockaddr_in client_address, server_address;
     int yes = 1;
 
-    if ((sock = socket (AF_INET, SOCK_STREAM, 0)) < 0)
+    sock = socket (AF_INET, SOCK_STREAM, 0);
+    if (sock < 0)
 	return "Cannot create socket";
 
     /* Use this to debug: */
@@ -1227,7 +1239,8 @@ get_client (int port)
 	newsocket =
 	    accept (sock, (struct sockaddr *) &client_address, &clilen);
 
-	if (isDaemon && (child = fork ())) {
+	child = fork ();
+	if (isDaemon != 0 && child != 0) {
 	    int status;
 
 	    close (newsocket);
@@ -1373,10 +1386,12 @@ main (int argc, char *argv[])
 	register_port (portnum, 0);
 	if (verbose)
 	    printf ("Using port %d\n", portnum);
-	if ((result = get_client (portnum)))
+
+	result = get_client (portnum);
+	if (result != NULL)
 	    perror (result);
 #ifdef HAVE_PMAP_SET
-	if (!isDaemon)
+	if (isDaemon == 0)
 	    pmap_unset (RPC_PROGNUM, RPC_PROGVER);
 #endif
     }

@@ -301,8 +301,8 @@ expand_format (struct WEdit *edit_widget, char c, gboolean do_quote)
 	    *block = 0;
 	    for (i = 0; i < panel->count; i++)
 		if (panel->dir.list[i].f.marked) {
-		    strcat (block, tmp =
-			    (*quote_func) (panel->dir.list[i].fname, 0));
+		    tmp = (*quote_func) (panel->dir.list[i].fname, 0);
+		    strcat (block, tmp);
 		    g_free (tmp);
 		    strcat (block, " ");
 		    if (c_lc == 'u')
@@ -784,7 +784,8 @@ user_menu_cmd (struct WEdit *edit_widget)
 	}
     }
 
-    if ((data = load_file (menu)) == NULL){
+    data = load_file (menu);
+    if (data == NULL) {
 	message (D_ERROR, MSG_ERROR, _(" Cannot open file %s \n %s "),
 		 menu, unix_error_string (errno));
 	g_free (menu);
