@@ -4,15 +4,15 @@ dnl If not, and $1 is "strict", exit.
 dnl
 AC_DEFUN([MC_CHECK_SLANG_BY_PATH], [
 
-    ac_slang_inc_path=[$1]
-    ac_slang_lib_path=[$2]
+    param_slang_inc_path=[$1]
+    param_slang_lib_path=[$2]
 
-    if test x"$ac_slang_inc_path" != x; then
-        ac_slang_inc_path="-I"$ac_slang_inc_path
+    if test x"$param_slang_inc_path" != x; then
+        ac_slang_inc_path="-I"$param_slang_inc_path
     fi
 
-    if test x"$ac_slang_lib_path" != x; then
-        ac_slang_lib_path="-L"$ac_slang_lib_path
+    if test x"$param_slang_lib_path" != x; then
+        ac_slang_lib_path="-L"$param_slang_lib_path
     fi
 
     saved_CFLAGS="$CFLAGS"
@@ -57,6 +57,7 @@ AC_DEFUN([MC_CHECK_SLANG_BY_PATH], [
 		    fi
 		    found_slang=yes
 		    AC_DEFINE(HAVE_SLANG_SLANG_H, 1,[Define to use slang.h])
+		    CFLAGS="-DHAVE_SLANG_SLANG_H $CFLAGS"
 		],
 		[
 		    AC_MSG_RESULT(no)
@@ -66,39 +67,10 @@ AC_DEFUN([MC_CHECK_SLANG_BY_PATH], [
 	    )
 	],
     )
-
-    dnl Check if termcap is needed.
-    dnl This check must be done before anything is linked against S-Lang.
-    if test x"$found_slang" = x"yes"; then
-	CFLAGS="$saved_CFLAGS $ac_slang_inc_path $ac_slang_lib_path"
-	LDFLAGS="$saved_LDFLAGS $ac_slang_lib_path"
-	CPPFLAGS="$saved_CPPFLAGS $ac_slang_inc_path $ac_slang_lib_path"
-
-        MC_SLANG_TERMCAP
-        if test x"$mc_cv_slang_termcap"  = x"yes"; then
-	    ac_slang_lib_path="$ac_slang_lib_path -ltermcap"
-	    CFLAGS="$saved_CFLAGS $ac_slang_inc_path $ac_slang_lib_path"
-	    CPPFLAGS="$saved_CPPFLAGS $ac_slang_inc_path $ac_slang_lib_path"
-	    LDFLAGS="$saved_LDFLAGS $ac_slang_lib_path"
-        fi
-    fi
-    dnl Check the library
-    if test x"$found_slang" = x"yes"; then
-	unset ac_cv_lib_slang_SLang_init_tty
-        AC_CHECK_LIB(
-            [slang],
-            [SLang_init_tty],
-            [:],
-            [
-                found_slang=no
-                error_msg_slang="S-lang library not found"
-            ]
-        )
-    fi
     dnl check if S-Lang have version 2.0 or newer
     if test x"$found_slang" = x"yes"; then
         AC_MSG_CHECKING([for S-Lang version 2.0 or newer])
-        AC_TRY_RUN([
+        AC_RUN_IFELSE([
 #ifdef HAVE_SLANG_SLANG_H
 #include <slang/slang.h>
 #else
@@ -115,13 +87,48 @@ int main (void)
 ],
 	    [mc_slang_is_valid_version=yes],
 	    [mc_slang_is_valid_version=no],
-	    [mc_slang_is_valid_version=no]
+	    [
+	    if test -f "$param_slang_inc_path/slang/slang.h" ; then
+	        hdr_file="$param_slang_inc_path/slang/slang.h"
+	    else
+	        hdr_file="$param_slang_inc_path/slang.h"
+	    fi
+	    mc_slang_is_valid_version=`grep '^#define SLANG_VERSION[[:space:]]' "$hdr_file"| sed s'/^#define SLANG_VERSION[[:space:]]*//'`
+	    if test "$mc_slang_is_valid_version" -ge "20000"; then
+		mc_slang_is_valid_version=yes
+	    else
+		mc_slang_is_valid_version=no
+	    fi
+	    ]
 	)
 	if test x$mc_slang_is_valid_version = xno; then
             found_slang=no
             error_msg_slang="S-Lang library version 2.0 or newer not found"
 	fi
 	AC_MSG_RESULT($mc_slang_is_valid_version)
+    fi
+
+    dnl Check if termcap is needed.
+    dnl This check must be done before anything is linked against S-Lang.
+    if test x"$found_slang" = x"yes"; then
+        MC_SLANG_TERMCAP
+        if test x"$mc_cv_slang_termcap"  = x"yes"; then
+	    saved_CPPFLAGS="-ltermcap $saved_CPPFLAGS "
+	    saved_LDFLAGS="-ltermcap $saved_LDFLAGS"
+        fi
+
+
+        dnl Check the library
+	unset ac_cv_lib_slang_SLang_init_tty
+        AC_CHECK_LIB(
+            [slang],
+            [SLang_init_tty],
+            [:],
+            [
+                found_slang=no
+                error_msg_slang="S-lang library not found"
+            ]
+        )
     fi
 
     dnl Unless external S-Lang was requested, reject S-Lang with UTF-8 hacks
@@ -145,8 +152,8 @@ int main (void)
         AC_DEFINE(HAVE_SLANG, 1,
             [Define to use S-Lang library for screen management])
 
-        MCLIBS="$MCLIBS $ac_slang_lib_path -lslang"
-        CFLAGS="$saved_CFLAGS"
+        MCLIBS="$ac_slang_lib_path -lslang $MCLIBS"
+        CFLAGS="$ac_slang_inc_path $saved_CFLAGS"
         dnl do not reset CPPFLAGS
         dnl - if CPPFLAGS are resetted then cpp does not find the specified header
         LDFLAGS="$saved_LDFLAGS"
@@ -180,15 +187,27 @@ AC_DEFUN([MC_WITH_SLANG], [
         [ac_slang_lib_path="$withval"],
         [ac_slang_lib_path=""]
     )
-    echo 'checking SLANG-headers in default place ...'
-    MC_CHECK_SLANG_BY_PATH([$ac_slang_inc_path],[$ac_slang_lib_path])
+    if test x"$ac_slang_lib_path" != x -o x"$ac_slang_inc_path" != x; then
+        echo 'checking SLANG-headers in specified place ...'
+        MC_CHECK_SLANG_BY_PATH([$ac_slang_inc_path],[$ac_slang_lib_path])
+    else
+        found_slang=no
+        PKG_CHECK_MODULES(SLANG, [slang >= 2.0], [found_slang=yes], [:])
+        if test x"$found_slang" = "xyes"; then
+            MCLIBS="$SLANG_LIBS $MCLIBS"
+            CFLAGS="$SLANG_CFLAGS $CFLAGS"
+        fi
+    fi
+
     if test x"$found_slang" = "xno"; then
+        found_slang=yes
         ac_slang_inc_path="/usr/include"
         ac_slang_lib_path="/usr/lib"
 
         echo 'checking SLANG-headers in /usr ...'
         MC_CHECK_SLANG_BY_PATH([$ac_slang_inc_path],[$ac_slang_lib_path])
         if test x"$found_slang" = "xno"; then
+            found_slang=yes
             ac_slang_inc_path="/usr/local/include"
             ac_slang_lib_path="/usr/local/lib"
 
