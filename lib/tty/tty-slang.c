@@ -254,7 +254,7 @@ tty_init (gboolean slow, gboolean ugly_lines)
         fprintf (stderr,
                  _("Screen size %dx%d is not supported.\n"
                    "Check the TERM environment variable.\n"), COLS, LINES);
-        exit (1);
+        exit (EXIT_FAILURE);
     }
 
     tcgetattr (fileno (stdin), &boot_mode);
@@ -394,7 +394,7 @@ tty_lowlevel_getch (void)
         fprintf (stderr,
                  "SLang_getkey returned SLANG_GETKEY_ERROR\n"
                  "Assuming EOF on stdin and exiting\n");
-        exit (1);
+        exit (EXIT_FAILURE);
     }
 
     return c;

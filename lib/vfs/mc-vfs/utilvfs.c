@@ -819,7 +819,7 @@ void
 vfs_die (const char *m)
 {
     message (D_ERROR, _("Internal error:"), "%s", m);
-    exit (1);
+    exit (EXIT_FAILURE);
 }
 
 char *

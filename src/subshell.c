@@ -494,7 +494,7 @@ init_subshell (void)
         fprintf (stderr, "Cannot spawn the subshell process: %s\r\n", unix_error_string (errno));
         /* We exit here because, if the process table is full, the */
         /* other method of running user commands won't work either */
-        exit (1);
+        exit (EXIT_FAILURE);
     }
 
     if (subshell_pid == 0)
@@ -651,7 +651,7 @@ read_subshell_prompt (void)
             else
             {
                 fprintf (stderr, "select (FD_SETSIZE, &tmp...): %s\r\n", unix_error_string (errno));
-                exit (1);
+                exit (EXIT_FAILURE);
             }
         }
 
@@ -1033,7 +1033,7 @@ feed_subshell (int how, int fail_on_error)
             tcsetattr (STDOUT_FILENO, TCSANOW, &shell_mode);
             fprintf (stderr, "select (FD_SETSIZE, &read_set...): %s\r\n",
                      unix_error_string (errno));
-            exit (1);
+            exit (EXIT_FAILURE);
         }
 
         if (FD_ISSET (subshell_pty, &read_set))
@@ -1054,7 +1054,7 @@ feed_subshell (int how, int fail_on_error)
             {
                 tcsetattr (STDOUT_FILENO, TCSANOW, &shell_mode);
                 fprintf (stderr, "read (subshell_pty...): %s\r\n", unix_error_string (errno));
-                exit (1);
+                exit (EXIT_FAILURE);
             }
 
             if (how == VISIBLY)
@@ -1071,7 +1071,7 @@ feed_subshell (int how, int fail_on_error)
                 tcsetattr (STDOUT_FILENO, TCSANOW, &shell_mode);
                 fprintf (stderr, "read (subshell_pipe[READ]...): %s\r\n",
                          unix_error_string (errno));
-                exit (1);
+                exit (EXIT_FAILURE);
             }
 
             subshell_cwd[bytes - 1] = 0;        /* Squash the final '\n' */
@@ -1095,7 +1095,7 @@ feed_subshell (int how, int fail_on_error)
                 tcsetattr (STDOUT_FILENO, TCSANOW, &shell_mode);
                 fprintf (stderr,
                          "read (STDIN_FILENO, pty_buffer...): %s\r\n", unix_error_string (errno));
-                exit (1);
+                exit (EXIT_FAILURE);
             }
 
             for (i = 0; i < bytes; ++i)

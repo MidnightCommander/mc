@@ -1452,7 +1452,7 @@ init_xterm_support (void)
     if (!termvalue || !(*termvalue))
     {
         fputs (_("The TERM environment variable is unset!\n"), stderr);
-        exit (1);
+        exit (EXIT_FAILURE);
     }
 
     /* Check mouse capabilities */
@@ -2225,7 +2225,7 @@ mc_main__setup_by_args (int argc, char *argv[])
         else
         {
             fputs ("No arguments given to the viewer\n", stderr);
-            exit (1);
+            exit (EXIT_FAILURE);
         }
         mc_run_mode = MC_RUN_VIEWER;
 #ifdef USE_DIFF_VIEW
@@ -2235,7 +2235,7 @@ mc_main__setup_by_args (int argc, char *argv[])
         if (argc < 3)
         {
             fputs ("There 2 files are required to diffviewer\n", stderr);
-            exit (1);
+            exit (EXIT_FAILURE);
         }
         else if (tmp != NULL)
         {

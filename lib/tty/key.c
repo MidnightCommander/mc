@@ -1576,7 +1576,7 @@ get_key_code (int no_delay)
                         if (this == NULL) {
                             /* Shouldn't happen */
                             fputs ("Internal error\n", stderr);
-                            exit (1);
+                            exit (EXIT_FAILURE);
                         }
                         goto nodelay_try_again;
                     }

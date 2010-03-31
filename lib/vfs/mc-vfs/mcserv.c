@@ -1309,7 +1309,7 @@ register_port (int port, int abort_if_fail)
     else {
 	fprintf (stderr, "Cannot register service with portmapper\n");
 	if (abort_if_fail)
-	    exit (1);
+	    exit (EXIT_FAILURE);
     }
 #else
     (void) port;
@@ -1403,5 +1403,5 @@ void
 vfs_die (const char *m)
 {
     fputs (m, stderr);
-    exit (1);
+    exit (EXIT_FAILURE);
 }
