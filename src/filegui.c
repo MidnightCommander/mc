@@ -1102,7 +1102,7 @@ file_mask_dialog (FileOpContext * ctx, FileOperation operation,
         g_free (def_text_secure);
         g_free (source_mask);
 
-        ctx->search_handle->is_case_sentitive = TRUE;
+        ctx->search_handle->is_case_sensitive = TRUE;
         if (source_easy_patterns)
             ctx->search_handle->search_type = MC_SEARCH_T_GLOB;
         else

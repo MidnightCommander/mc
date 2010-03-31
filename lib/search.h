@@ -58,8 +58,8 @@ typedef struct mc_search_struct {
     /* search in all charsets */
     gboolean is_all_charsets;
 
-    /* case sentitive search */
-    gboolean is_case_sentitive;
+    /* case sensitive search */
+    gboolean is_case_sensitive;
 
     /* search only once.  Is this for replace? */
     gboolean is_once_only;
@@ -87,7 +87,7 @@ typedef struct mc_search_struct {
 
     off_t start_buffer;
     /* some data for regexp */
-    int num_rezults;
+    int num_results;
     mc_search_matchinfo_t *regex_match_info;
     GString *regex_buffer;
 #ifdef SEARCH_TYPE_PCRE
@@ -140,7 +140,7 @@ gchar **mc_search_get_types_strings_array (size_t *num);
 
 gboolean mc_search (const gchar *, const gchar *, mc_search_type_t);
 
-int mc_search_getstart_rezult_by_num (mc_search_t *, int);
-int mc_search_getend_rezult_by_num (mc_search_t *, int);
+int mc_search_getstart_result_by_num (mc_search_t *, int);
+int mc_search_getend_result_by_num (mc_search_t *, int);
 
 #endif
