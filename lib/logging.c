@@ -67,12 +67,14 @@ mc_log(const char *fmt, ...)
 	if (is_logging_enabled()) {
 		va_start(args, fmt);
 		logfilename = g_strdup_printf("%s/%s/log", home_dir, MC_USERCONF_DIR);
-		f = fopen (logfilename, "a");
-		if (f != NULL) {
+		if (logfilename != NULL) {
+		    f = fopen (logfilename, "a");
+		    if (f != NULL) {
 			(void)vfprintf(f, fmt, args);
 			(void)fclose(f);
+		    }
+		    g_free(logfilename);
+		    va_end(args);
 		}
-		g_free(logfilename);
-		va_end(args);
 	}
 }
