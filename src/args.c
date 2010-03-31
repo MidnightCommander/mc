@@ -92,38 +92,44 @@ static gboolean mc_args__show_datadirs = FALSE;
 static GOptionGroup *main_group;
 
 static const GOptionEntry argument_main_table[] = {
+    /* *INDENT-OFF* */
     /* generic options */
     {
      "version", 'V', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE,
      &mc_args__version,
      N_("Displays the current version"),
-     NULL},
+     NULL
+    },
 
     /* options for wrappers */
     {
      "datadir", 'f', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE,
      &mc_args__show_datadirs,
      N_("Print data directory"),
-     NULL},
+     NULL
+    },
 
     {
      "printwd", 'P', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_STRING,
      &mc_args__last_wd_file,
      N_("Print last working directory to specified file"),
-     "<file>"},
+     "<file>"
+    },
 
 #ifdef HAVE_SUBSHELL_SUPPORT
     {
      "subshell", 'U', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE,
      &use_subshell,
      N_("Enables subshell support (default)"),
-     NULL},
+     NULL
+    },
 
     {
      "nosubshell", 'u', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE,
      &mc_args__nouse_subshell,
      N_("Disables subshell support"),
-     NULL},
+     NULL
+    },
 #endif
 
     /* debug options */
@@ -132,13 +138,15 @@ static const GOptionEntry argument_main_table[] = {
      "ftplog", 'l', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_STRING,
      &mc_args__netfs_logfile,
      N_("Log ftp dialog to specified file"),
-     "<file>"},
+     "<file>"
+    },
 #ifdef ENABLE_VFS_SMB
     {
      "debuglevel", 'D', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_INT,
      &mc_args__debug_level,
      N_("Set debug level"),
-     "<integer>"},
+     "<integer>"
+    },
 #endif /* ENABLE_VFS_SMB */
 #endif
 
@@ -147,7 +155,8 @@ static const GOptionEntry argument_main_table[] = {
      "view", 'v', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_STRING,
      &mc_run_param0,
      N_("Launches the file viewer on a file"),
-     "<file>"},
+     "<file>"
+    },
 
     {
      "edit", 'e', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_STRING,
@@ -155,59 +164,72 @@ static const GOptionEntry argument_main_table[] = {
      N_("Edits one file"),
      "<file>"},
 
-    {NULL}
+    {
+     NULL, '\0', 0, 0, NULL, NULL, NULL /* Complete struct initialization */
+    }
+    /* *INDENT-ON* */
 };
 
 GOptionGroup *terminal_group;
 #define ARGS_TERM_OPTIONS 0
 static const GOptionEntry argument_terminal_table[] = {
-
+    /* *INDENT-OFF* */
     /* terminal options */
     {
      "xterm", 'x', ARGS_TERM_OPTIONS, G_OPTION_ARG_NONE,
      &mc_args__force_xterm,
      N_("Forces xterm features"),
-     NULL},
+     NULL
+    },
 
     {
      "nomouse", 'd', ARGS_TERM_OPTIONS, G_OPTION_ARG_NONE,
      &mc_args__nomouse,
      N_("Disable mouse support in text version"),
-     NULL},
+     NULL
+    },
 
 #ifdef HAVE_SLANG
     {
      "termcap", 't', ARGS_TERM_OPTIONS, G_OPTION_ARG_NONE,
      &SLtt_Try_Termcap,
      N_("Tries to use termcap instead of terminfo"),
-     NULL},
+     NULL
+    },
 #endif
 
     {
      "slow", 's', ARGS_TERM_OPTIONS, G_OPTION_ARG_NONE,
      &mc_args__slow_terminal,
      N_("To run on slow terminals"),
-     NULL},
+     NULL
+    },
 
     {
      "stickchars", 'a', ARGS_TERM_OPTIONS, G_OPTION_ARG_NONE,
      &mc_args__ugly_line_drawing,
      N_("Use stickchars to draw"),
-     NULL},
+     NULL
+    },
 
     {
      "resetsoft", 'k', ARGS_TERM_OPTIONS, G_OPTION_ARG_NONE,
      &reset_hp_softkeys,
      N_("Resets soft keys on HP terminals"),
-     NULL},
+     NULL
+    },
 
     {
      "keymap", 'K', ARGS_TERM_OPTIONS, G_OPTION_ARG_STRING,
      &mc_args__keymap_file,
      N_("Load definitions of key bindings from specified file"),
-     "<file>"},
+     "<file>"
+    },
 
-    {NULL}
+    {
+     NULL, '\0', 0, 0, NULL, NULL, NULL /* Complete struct initialization */
+    }
+    /* *INDENT-ON* */
 };
 
 #undef ARGS_TERM_OPTIONS
@@ -216,32 +238,40 @@ GOptionGroup *color_group;
 #define ARGS_COLOR_OPTIONS 0
 // #define ARGS_COLOR_OPTIONS G_OPTION_FLAG_IN_MAIN
 static const GOptionEntry argument_color_table[] = {
+    /* *INDENT-OFF* */
     /* color options */
     {
      "nocolor", 'b', ARGS_COLOR_OPTIONS, G_OPTION_ARG_NONE,
      &mc_args__disable_colors,
      N_("Requests to run in black and white"),
-     NULL},
+     NULL
+    },
 
     {
      "color", 'c', ARGS_COLOR_OPTIONS, G_OPTION_ARG_NONE,
      &mc_args__force_colors,
      N_("Request to run in color mode"),
-     NULL},
+     NULL
+    },
 
     {
      "colors", 'C', ARGS_COLOR_OPTIONS, G_OPTION_ARG_STRING,
      &command_line_colors,
      N_("Specifies a color configuration"),
-     "<string>"},
+     "<string>"
+    },
 
     {
      "skin", 'S', ARGS_COLOR_OPTIONS, G_OPTION_ARG_STRING,
      &mc_args__skin,
      N_("Show mc with specified skin"),
-     "<string>"},
+     "<string>"
+    },
 
-    { NULL }
+    {
+     NULL, '\0', 0, 0, NULL, NULL, NULL /* Complete struct initialization */
+    }
+    /* *INDENT-ON* */
 };
 
 #undef ARGS_COLOR_OPTIONS
