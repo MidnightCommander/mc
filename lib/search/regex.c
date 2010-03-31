@@ -271,12 +271,12 @@ mc_search__regex_found_cond_one (mc_search_t * lc_mc_search, mc_search_regex_t *
         }
         return COND__NOT_FOUND;
     }
-    lc_mc_search->num_rezults = g_match_info_get_match_count (lc_mc_search->regex_match_info);
+    lc_mc_search->num_results = g_match_info_get_match_count (lc_mc_search->regex_match_info);
 #else /* SEARCH_TYPE_GLIB */
-    lc_mc_search->num_rezults = pcre_exec (regex, lc_mc_search->regex_match_info,
+    lc_mc_search->num_results = pcre_exec (regex, lc_mc_search->regex_match_info,
                                            search_str->str, search_str->len - 1, 0, 0,
                                            lc_mc_search->iovector, MC_SEARCH__NUM_REPLACE_ARGS);
-    if (lc_mc_search->num_rezults < 0)
+    if (lc_mc_search->num_results < 0)
     {
         return COND__NOT_FOUND;
     }
@@ -530,7 +530,7 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * lc_mc_
     int erroffset;
 #endif /* SEARCH_TYPE_GLIB */
 
-    if (!lc_mc_search->is_case_sentitive)
+    if (!lc_mc_search->is_case_sensitive)
     {
         tmp = g_string_new_len (mc_search_cond->str->str, mc_search_cond->str->len);
         g_string_free (mc_search_cond->str, TRUE);
@@ -675,10 +675,10 @@ mc_search_regex_prepare_replace_str (mc_search_t * lc_mc_search, GString * repla
     num_replace_tokens =
         mc_search_regex__get_max_num_of_replace_tokens (replace_str->str, replace_str->len);
 
-    if (lc_mc_search->num_rezults < 0)
+    if (lc_mc_search->num_results < 0)
         return g_string_new_len (replace_str->str, replace_str->len);
 
-    if (num_replace_tokens > lc_mc_search->num_rezults - 1
+    if (num_replace_tokens > lc_mc_search->num_results - 1
         || num_replace_tokens > MC_SEARCH__NUM_REPLACE_ARGS)
     {
         lc_mc_search->error = MC_SEARCH_E_REGEX_REPLACE;
@@ -718,7 +718,7 @@ mc_search_regex_prepare_replace_str (mc_search_t * lc_mc_search, GString * repla
             continue;
         }
 
-        if (lc_index > lc_mc_search->num_rezults)
+        if (lc_index > lc_mc_search->num_results)
         {
             g_string_free (ret, TRUE);
             lc_mc_search->error = MC_SEARCH_E_REGEX_REPLACE;

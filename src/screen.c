@@ -2421,13 +2421,13 @@ do_search (WPanel * panel, int c_code)
     switch (quick_search_case_sensitive)
     {
     case QSEARCH_CASE_SENSITIVE:
-        search->is_case_sentitive = TRUE;
+        search->is_case_sensitive = TRUE;
         break;
     case QSEARCH_CASE_INSENSITIVE:
-        search->is_case_sentitive = FALSE;
+        search->is_case_sensitive = FALSE;
         break;
     default:
-        search->is_case_sentitive = panel->case_sensitive;
+        search->is_case_sensitive = panel->case_sensitive;
         break;
     }
     sel = panel->selected;

@@ -1747,7 +1747,7 @@ edit_replace_cmd (WEdit * edit, int again)
         }
         edit->search->search_type = edit_search_options.type;
         edit->search->is_all_charsets = edit_search_options.all_codepages;
-        edit->search->is_case_sentitive = edit_search_options.case_sens;
+        edit->search->is_case_sensitive = edit_search_options.case_sens;
         edit->search->whole_words = edit_search_options.whole_words;
         edit->search->search_fn = edit_search_cmd_callback;
     }
@@ -1988,7 +1988,7 @@ edit_search_cmd (WEdit * edit, int again)
 
         edit->search->search_type = edit_search_options.type;
         edit->search->is_all_charsets = edit_search_options.all_codepages;
-        edit->search->is_case_sentitive = edit_search_options.case_sens;
+        edit->search->is_case_sensitive = edit_search_options.case_sens;
         edit->search->whole_words = edit_search_options.whole_words;
         edit->search->search_fn = edit_search_cmd_callback;
     }
@@ -2734,7 +2734,7 @@ edit_collect_completions (WEdit * edit, long start, gsize word_len,
     }
 
     srch->search_type = MC_SEARCH_T_REGEX;
-    srch->is_case_sentitive = TRUE;
+    srch->is_case_sensitive = TRUE;
     srch->search_fn = edit_search_cmd_callback;
 
     /* collect max MAX_WORD_COMPLETIONS completions */
