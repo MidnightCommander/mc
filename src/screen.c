@@ -3428,7 +3428,7 @@ set_panel_encoding (WPanel * panel)
     const char *encoding = NULL;
     char *cd_path;
 #ifdef HAVE_CHARSET
-    const char *errmsg;
+    char *errmsg;
     int r;
 
     r = select_charset (-1, -1, default_source_codepage, FALSE);
@@ -3439,7 +3439,7 @@ set_panel_encoding (WPanel * panel)
     if (r == SELECT_CHARSET_NO_TRANSLATE)
     {
         /* No translation */
-        errmsg = init_translation_table (display_codepage, display_codepage);
+        g_free (init_translation_table (display_codepage, display_codepage));
         cd_path = remove_encoding_from_path (panel->cwd);
         do_panel_cd (panel, cd_path, 0);
         g_free (cd_path);
@@ -3449,9 +3449,10 @@ set_panel_encoding (WPanel * panel)
     source_codepage = r;
 
     errmsg = init_translation_table (source_codepage, display_codepage);
-    if (errmsg)
+    if (errmsg != NULL)
     {
         message (D_ERROR, MSG_ERROR, "%s", errmsg);
+        g_free (errmsg);
         return;
     }
 

@@ -623,12 +623,14 @@ display_bits_box (void)
     run_dlg (dbits_dlg);
 
     if (dbits_dlg->ret_value == B_ENTER) {
-	const char *errmsg;
+	char *errmsg;
+
 	display_codepage = new_display_codepage;
-	errmsg =
-	    init_translation_table (source_codepage, display_codepage);
-	if (errmsg)
+	errmsg = init_translation_table (source_codepage, display_codepage);
+	if (errmsg != NULL) {
 	    message (D_ERROR, MSG_ERROR, "%s", errmsg);
+	    g_free (errmsg);
+	}
 #ifdef HAVE_SLANG
 	tty_display_8bit (display_codepage != 0 && display_codepage != 1);
 #else

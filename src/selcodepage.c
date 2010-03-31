@@ -115,16 +115,21 @@ select_charset (int center_y, int center_x, int current_charset, gboolean seldis
 gboolean
 do_set_codepage (int codepage)
 {
-    const char *errmsg = NULL;
+    char *errmsg;
+    gboolean ret;
 
     source_codepage = codepage;
     errmsg = init_translation_table (codepage == SELECT_CHARSET_NO_TRANSLATE ?
 					display_codepage : source_codepage,
 					display_codepage);
-    if (errmsg != NULL)
-        message (D_ERROR, MSG_ERROR, "%s", errmsg);
+    ret = errmsg == NULL;
 
-    return (errmsg == NULL);
+    if (!ret) {
+	message (D_ERROR, MSG_ERROR, "%s", errmsg);
+	g_free (errmsg);
+    }
+
+    return ret;
 }
 
 /* Show menu selecting codepage */

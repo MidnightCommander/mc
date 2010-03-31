@@ -868,7 +868,7 @@ load_setup (void)
     if ((autodetect_codeset[0] != '\0') && (strcmp (autodetect_codeset, "off")))
         is_autodetect_codeset_enabled = TRUE;
 
-    init_translation_table (source_codepage, display_codepage);
+    g_free (init_translation_table (source_codepage, display_codepage));
     if (get_codepage_id (display_codepage))
         utf8_display = str_isutf8 (get_codepage_id (display_codepage));
 #endif /* HAVE_CHARSET */
