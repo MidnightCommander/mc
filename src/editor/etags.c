@@ -110,7 +110,6 @@ static gboolean parse_define(char *buf, char **long_name, char **short_name, lon
             *short_name = g_strdup (shortdef);
             *line = atol (linedef);
             return TRUE;
-            break;
         }
         buf++;
         c = *buf;
