@@ -43,7 +43,7 @@ typedef FileProgressStatus (*compute_dir_size_callback)(const void *ui, const ch
 /* return value is FILE_CONT or FILE_ABORT */
 FileProgressStatus compute_dir_size (const char *dirname, const void *ui,
 					compute_dir_size_callback cback,
-					off_t *ret_marked, double *ret_total);
+					off_t *ret_marked, double *ret_total, gboolean compute_symlinks);
 
 /* status dialog of directory size computing */
 typedef struct {

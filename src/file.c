@@ -1571,7 +1571,8 @@ compute_dir_size_update_ui (const void *ui, const char *dirname)
 FileProgressStatus
 compute_dir_size (const char *dirname, const void *ui,
 		    compute_dir_size_callback cback,
-		    off_t *ret_marked, double *ret_total)
+		    off_t *ret_marked, double *ret_total,
+		    gboolean compute_symlinks)
 {
     int res;
     struct stat s;
@@ -1579,16 +1580,18 @@ compute_dir_size (const char *dirname, const void *ui,
     struct dirent *dirent;
     FileProgressStatus ret = FILE_CONT;
 
-    res = mc_lstat (dirname, &s);
+    if (!compute_symlinks)
+    {
+        res = mc_lstat (dirname, &s);
+        if (res != 0)
+            return ret;
 
-    if (res != 0)
-	return ret;
-
-    /* don't scan symlink to directory */
-    if (S_ISLNK (s.st_mode)) {
-	(*ret_marked)++;
-	*ret_total += s.st_size;
-	return ret;
+        /* don't scan symlink to directory */
+        if (S_ISLNK (s.st_mode)) {
+            (*ret_marked)++;
+            *ret_total += s.st_size;
+            return ret;
+        }
     }
 
     dir = mc_opendir (dirname);
@@ -1621,7 +1624,7 @@ compute_dir_size (const char *dirname, const void *ui,
 	    off_t subdir_count = 0;
 	    double subdir_bytes = 0;
 
-	    ret = compute_dir_size (fullname, ui, cback, &subdir_count, &subdir_bytes);
+	    ret = compute_dir_size (fullname, ui, cback, &subdir_count, &subdir_bytes, compute_symlinks);
 
 	    if (ret != FILE_CONT) {
 		g_free (fullname);
@@ -1654,7 +1657,7 @@ compute_dir_size (const char *dirname, const void *ui,
 static FileProgressStatus
 panel_compute_totals (const WPanel *panel, const void *ui,
 			compute_dir_size_callback cback,
-			off_t *ret_marked, double *ret_total)
+			off_t *ret_marked, double *ret_total, gboolean compute_symlinks)
 {
     int i;
 
@@ -1679,7 +1682,7 @@ panel_compute_totals (const WPanel *panel, const void *ui,
 		concat_dir_and_file (panel->cwd, panel->dir.list[i].fname);
 
 	    status = compute_dir_size (dir_name, ui, cback,
-					&subdir_count, &subdir_bytes);
+					&subdir_count, &subdir_bytes, compute_symlinks);
 	    g_free (dir_name);
 
 	    if (status != FILE_CONT)
@@ -1711,10 +1714,10 @@ panel_operate_init_totals (FileOperation operation,
 
 	if (source != NULL)
 	    status = compute_dir_size (source, ui, compute_dir_size_update_ui,
-					&ctx->progress_count, &ctx->progress_bytes);
+					&ctx->progress_count, &ctx->progress_bytes, ctx->follow_links);
 	else
 	    status = panel_compute_totals (panel, ui, compute_dir_size_update_ui,
-					&ctx->progress_count, &ctx->progress_bytes);
+					&ctx->progress_count, &ctx->progress_bytes, ctx->follow_links);
 
 	compute_dir_size_destroy_ui (ui);
 
