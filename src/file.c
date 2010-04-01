@@ -1054,6 +1054,7 @@ move_file_file (FileOpTotalContext *tctx, FileOpContext *ctx, const char *s, con
     struct stat src_stats, dst_stats;
     FileProgressStatus return_status = FILE_CONT;
     gboolean copy_done = FALSE;
+    gboolean old_ask_overwrite;
 
     file_progress_show_source (ctx, s);
     file_progress_show_target (ctx, d);
@@ -1121,7 +1122,10 @@ move_file_file (FileOpTotalContext *tctx, FileOpContext *ctx, const char *s, con
 #endif
 
     /* Failed because filesystem boundary -> copy the file instead */
+    old_ask_overwrite = tctx->ask_overwrite;
+    tctx->ask_overwrite = FALSE;
     return_status = copy_file_file (tctx, ctx, s, d);
+    tctx->ask_overwrite = old_ask_overwrite;
     if (return_status != FILE_CONT)
 	return return_status;
 
