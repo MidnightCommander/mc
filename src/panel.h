@@ -81,7 +81,7 @@ typedef struct WPanel {
 
     int      dirty;		/* Should we redisplay the panel? */
 
-    int	     user_mini_status;	/* Is user_status_format used */
+    int      user_mini_status;	/* Is user_status_format used */
     char     *user_format;      /* User format */
     char     *user_status_format[LIST_TYPES];/* User format for status line */
 
@@ -140,8 +140,8 @@ void select_item (WPanel *panel);
 extern Hook *select_file_hook;
 
 void recalculate_panel_summary (WPanel *panel);
-void file_mark (WPanel *panel, int index, int val);
-void do_file_mark (WPanel *panel, int index, int val);
+void file_mark (WPanel *panel, int idx, int val);
+void do_file_mark (WPanel *panel, int idx, int val);
 
 void directory_history_next (WPanel *panel);
 void directory_history_prev (WPanel *panel);
@@ -158,4 +158,4 @@ const char **panel_get_user_possible_fields(gsize *);
 void panel_init(void);
 void panel_deinit(void);
 
-#endif
+#endif					/* MC_PANEL_H */
