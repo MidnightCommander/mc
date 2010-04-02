@@ -1,3 +1,27 @@
+Version 4.7.0.4
+
+- Core
+
+    * Mouse wheel doesn't change sorting preferences in panels (#2093)
+
+- Misc
+
+    * Translation updates
+
+Fixes
+
+    * Segfault in standalone editor and viewer (#2087)
+    * Memory leaks (#2069, #2108)
+    * If dialog was canceled, input line content is saved in history (#2082)
+    * MC says "File exists" trying create directory with empty filename (#2014)
+    * Can't define help window background via skin (#1701)
+    * MC proposes ".." as a dirname with automatic name filling (#2056)
+    * MC treats file ending with a dot as gzip (#2114)
+    * Broken default regexp mask in filecopy dialog (#2001)
+    * Incorrect cursor position after "Cursor beyond end of line" mode switched off (#2094)
+    * Incorrect toggling state of ruler in viewer (#2067)
+
+
 Version 4.7.0.3
 
 - Core
@@ -5,9 +29,6 @@ Version 4.7.0.3
     * Reorganization of source tree structure (#2037)
     * Added 'menuinactive' skin item to draw inactive visible main menu (#1999)
 
-- VFS
-- Editor
-- Viewer
 - Misc
 
     * Documentation updates
@@ -31,6 +52,7 @@ Version 4.7.0.3
     * The lslR VFS doesn't work with ls-lR files created in en_US.UTF-8 locale and with files and directories started with whitespaces (#1921)
     * Contents of RAR archives with filenames that contain / \d\d:\d\d / are not listed correctly (#2029)
     * FTPFS: strcpy() is used for overlaping strings (#2018)
+
 
 Version 4.7.0.2
 
@@ -79,6 +101,7 @@ Version 4.7.0.2
     * deba and debd VFS: items from DEBIAN directory are not accessible (#1920)
     * Samba is not built with tcc (#1933)
     * Incorrect conditional compilation of mcserver (#1925) 
+
 
 Version 4.7.0.1
 
