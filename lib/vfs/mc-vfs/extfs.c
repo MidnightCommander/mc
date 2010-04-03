@@ -486,7 +486,7 @@ extfs_read_archive (int fstype, const char *name, struct archive **pparc)
                     *(p++) = '\0';
                     q = cfn;
                 }
-                if (S_ISDIR (hstat.st_mode) && (strcmp (p, ".") || !strcmp (p, "..") == 0))
+                if (S_ISDIR (hstat.st_mode) && (strcmp (p, ".") == 0 || strcmp (p, "..") == 0))
                     goto read_extfs_continue;
                 pent = extfs_find_entry (current_archive->root_entry, q, TRUE, FALSE);
                 if (pent == NULL)
