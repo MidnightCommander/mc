@@ -325,7 +325,7 @@ find_parm_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void
         {
             message (D_ERROR, MSG_ERROR, _("Malformed regular expression"));
             dlg_select_widget (in_name);
-            h->running = 1;     /* Don't stop the dialog */
+            h->state = DLG_ACTIVE;      /* Don't stop the dialog */
             return MSG_HANDLED;
         }
 
@@ -335,7 +335,7 @@ find_parm_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void
         {
             message (D_ERROR, MSG_ERROR, _("Malformed regular expression"));
             dlg_select_widget (in_with);
-            h->running = 1;     /* Don't stop the dialog */
+            h->state = DLG_ACTIVE;      /* Don't stop the dialog */
             return MSG_HANDLED;
         }
 

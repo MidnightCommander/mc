@@ -141,14 +141,15 @@ dlg_set_position (Dlg_head * h, int y1, int x1, int y2, int x2)
     h->lines = y2 - y1;
     h->cols = x2 - x1;
 
+    /* dialog is empty */
+    if (h->current == NULL)
+        return;
+
     /* values by which controls should be moved */
     shift_x = h->x - ox;
     shift_y = h->y - oy;
     scale_x = h->cols - oc;
     scale_y = h->lines - ol;
-
-    if (h->current == NULL)
-        return;
 
     if ((shift_x != 0) || (shift_y != 0) || (scale_x != 0) || (scale_y != 0))
     {
@@ -275,9 +276,13 @@ create_dlg (int y1, int x1, int lines, int cols, const int *colors,
     new_d->data = NULL;
 
     dlg_set_size (new_d, lines, cols);
+    new_d->fullscreen = (new_d->x == 0 && new_d->y == 0
+                         && new_d->cols == COLS && new_d->lines == LINES);
+
+    new_d->mouse_status = MOU_NORMAL;
 
     /* Strip existing spaces, add one space before and after the title */
-    if (title)
+    if (title != NULL)
     {
         char *t;
 
@@ -329,8 +334,8 @@ add_widget_autopos (Dlg_head * h, void *w, widget_pos_flags_t pos_flags)
 {
     Widget *widget = (Widget *) w;
 
-    /* Don't accept 0 widgets, and running dialogs */
-    if (!widget || h->running)
+    /* Don't accept 0 widgets */
+    if (widget == NULL)
         abort ();
 
     widget->x += h->x;
@@ -610,7 +615,7 @@ dlg_redraw (Dlg_head * h)
 void
 dlg_stop (Dlg_head * h)
 {
-    h->running = 0;
+    h->state = DLG_CLOSED;
 }
 
 static void
@@ -821,14 +826,9 @@ dlg_key_event (Dlg_head * h, int d_key)
 void
 init_dlg (Dlg_head * h)
 {
+
     /* add dialog to the stack */
     current_dlg = g_list_prepend (current_dlg, h);
-
-    if (h->x == 0 && h->y == 0 && h->cols == COLS && h->lines == LINES)
-        h->fullscreen = 1;
-
-    /* Initialize the mouse status */
-    h->mouse_status = MOU_NORMAL;
 
     /* Initialize dialog manager and widgets */
     h->callback (h, NULL, DLG_INIT, 0, NULL);
@@ -841,7 +841,7 @@ init_dlg (Dlg_head * h)
         h->current = h->current->next;
 
     h->ret_value = 0;
-    h->running = 1;
+    h->state = DLG_ACTIVE;
 }
 
 void
@@ -868,7 +868,7 @@ frontend_run_dlg (Dlg_head * h)
     Gpm_Event event;
 
     event.x = -1;
-    while (h->running)
+    while (h->state == DLG_ACTIVE)
     {
         if (winch_flag)
             change_screen_size ();
@@ -882,7 +882,7 @@ frontend_run_dlg (Dlg_head * h)
                 h->callback (h, NULL, DLG_IDLE, 0, NULL);
 
             /* Allow terminating the dialog from the idle handler */
-            if (!h->running)
+            if (h->state != DLG_ACTIVE)
                 break;
         }
 
@@ -894,7 +894,7 @@ frontend_run_dlg (Dlg_head * h)
 
         dlg_process_event (h, d_key, &event);
 
-        if (!h->running)
+        if (h->state == DLG_CLOSED)
             h->callback (h, NULL, DLG_VALIDATE, 0, NULL);
     }
 }

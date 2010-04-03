@@ -324,10 +324,10 @@ change_panel (void)
 static void
 stop_dialogs (void)
 {
-    midnight_dlg->running = 0;
+    midnight_dlg->state = DLG_CLOSED;
 
     if ((current_dlg != NULL) && (current_dlg->data != NULL))
-        ((Dlg_head *) current_dlg->data)->running = 0;
+        ((Dlg_head *) current_dlg->data)->state = DLG_CLOSED;
 }
 
 static int

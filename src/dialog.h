@@ -97,6 +97,14 @@ typedef enum
     DLG_NONE = 0                /* No options */
 } dlg_flags_t;
 
+/* Dialog state */
+typedef enum
+{
+    DLG_ACTIVE = 0,             /* Dialog is visible and active */
+    DLG_SUSPENDED = 1,          /* Dialog is suspended */
+    DLG_CLOSED = 2              /* Dialog is closed */
+} dlg_state_t;
+
 /* Dialog callback */
 typedef struct Dlg_head Dlg_head;
 typedef cb_ret_t (*dlg_cb_fn) (struct Dlg_head * h, Widget * sender,
@@ -132,8 +140,8 @@ struct Dlg_head
     int cols, lines;            /* Width and height of the window */
 
     /* Internal flags */
-    unsigned int running:1;     /* The dialog is currently active */
-    unsigned int fullscreen:1;  /* Parents dialogs don't need refresh */
+    dlg_state_t state;
+    gboolean fullscreen;        /* Parents dialogs don't need refresh */
     int mouse_status;           /* For the autorepeat status of the mouse */
 
     /* Internal variables */

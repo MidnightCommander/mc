@@ -3205,7 +3205,10 @@ dview_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, v
     case DLG_VALIDATE:
         dview = (WDiff *) find_widget_type (h, dview_callback);
         if (!dview_ok_to_exit (dview))
-            h->running = 1;
+            h->state = DLG_ACTIVE;
+        else
+            h->state = DLG_CLOSED;
+
         return MSG_HANDLED;
 
     default:
