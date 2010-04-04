@@ -1,7 +1,7 @@
 # Copyright (C) 2010 Free Software Foundation, Inc.
-#
-#
-#
+# 
+# 
+# 
 # Kang Bundo <bundo@bundo.biz>, 2010
 msgid ""
 msgstr ""
@@ -14,9 +14,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Country: KOREA, REPUBLIC OF\n"
 "X-Poedit-Language: Korean\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-Country: KOREA, REPUBLIC OF\n"
 
 msgid " Search string not found "
 msgstr "글월을 찾을 수 없군요 "
@@ -25,7 +25,7 @@ msgid " Not implemented yet "
 msgstr "아직 구현되지 않았습니다."
 
 msgid " Num of replace tokens not equal to num of found tokens "
-msgstr " Num of replace tokens not equal to num of found tokens "
+msgstr "Num of replace tokens not equal to num of found tokens "
 
 #, c-format
 msgid " Invalid token number %d "
@@ -35,7 +35,7 @@ msgid "Normal"
 msgstr "일반"
 
 msgid "&Regular expression"
-msgstr "정규표현식(&R)"
+msgstr "정규 표현식(&R)"
 
 msgid "Hexadecimal"
 msgstr "16진수"
@@ -395,7 +395,7 @@ msgid ""
 "%s"
 msgstr ""
 "파일의 끝에 알 수 없습니다\n"
-"% s"
+"%s"
 
 #, c-format
 msgid "Directory cache expired for %s"
@@ -406,11 +406,11 @@ msgstr "선형 전송 시작..."
 
 #, c-format
 msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
-msgstr "%s: %s: %s %3d%% (%lu 바이트 전송됨)"
+msgstr "%s: %s: %s %3d%% (%lu 바이트 전송 됨)"
 
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
-msgstr "%s: %s: %s %lu 바이트 전송됨"
+msgstr "%s: %s: %s %lu 바이트 전송 됨"
 
 msgid "Getting file"
 msgstr "파일 받기"
@@ -432,7 +432,7 @@ msgstr "경고: %s 디렉터리을 바꿀 수 없습니다\n"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
-msgstr "fish : %s에서 분리중"
+msgstr "fish : %s에서 분리 중"
 
 msgid "fish: Waiting for initial line..."
 msgstr "fish: 초기 라인을 기다림..."
@@ -457,11 +457,11 @@ msgstr "fish: 현재 디렉터리의 설정..."
 
 #, c-format
 msgid "fish: Connected, home %s."
-msgstr "fish: 홈 %s , 접속됨."
+msgstr "fish: 홈 %s, 접속됨."
 
 #, c-format
 msgid "fish: Reading directory %s..."
-msgstr "fish:  %s 디렉터리 읽는 중..."
+msgstr "fish: %s 디렉터리 읽는 중..."
 
 #, c-format
 msgid "%s: done."
@@ -473,7 +473,7 @@ msgstr "%s: 실패"
 
 #, c-format
 msgid "fish: store %s: sending command..."
-msgstr "fish: % s : 명령을 보내는 중..."
+msgstr "fish: %s : 명령을 보내는 중..."
 
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: 상태 읽기 실패, 전송 제로"
@@ -547,7 +547,7 @@ msgstr " ftpfs: 서버로 연결할 수 없음: %s "
 
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
-msgstr "재시도를 기다리는 중 ... % d  (컨트롤 - C를 취소)"
+msgstr "재시도를 기다리는 중 ... %d  (Contro-C로 취소)"
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: 잘못된 주소 목록"
@@ -575,7 +575,7 @@ msgstr "ftpfs: 중지 실패"
 
 #, fuzzy
 msgid "ftpfs: CWD failed."
-msgstr "ftpfs: CWD실패."
+msgstr "ftpfs : CWD에 실패했습니다."
 
 msgid "ftpfs: couldn't resolve symlink"
 msgstr "ftpfs: 심볼릭 링크 해결 못함"
@@ -841,7 +841,7 @@ msgstr "모드"
 
 #, c-format
 msgid "%6d of %d"
-msgstr "%6d of %d"
+msgstr "%6d 의 %d"
 
 msgid " Chown advanced command "
 msgstr " 고급 chown 명령 "
@@ -1035,7 +1035,7 @@ msgid "Listing mode"
 msgstr "목록보기 설정"
 
 msgid "user &Mini status"
-msgstr "사용자 &미니 상태 바(&M)"
+msgstr "사용자 미니 상태 바(&M)"
 
 msgid "&OK"
 msgstr "확인(&O)"
@@ -1098,7 +1098,7 @@ msgid "Other 8 bit"
 msgstr "다른 8 비트"
 
 msgid "Input / display codepage:"
-msgstr "입출력 코드페이지:"
+msgstr "입/출력 코드페이지:"
 
 msgid "&Select"
 msgstr "선택(&S)"
@@ -1355,7 +1355,7 @@ msgid " Which menu file do you want to edit? "
 msgstr "어떤 메뉴 파일을 편집하고 싶으세요? "
 
 msgid "&Local"
-msgstr "로칼(&L)"
+msgstr "로컬(&L)"
 
 msgid "Highlighting groups file edit"
 msgstr "선택 표시된 그룹 파일을 수정"
@@ -1493,7 +1493,7 @@ msgstr "에러"
 
 #, c-format
 msgid " Error reading from pipe: %s "
-msgstr "파이프 읽기 에러:  %s "
+msgstr "파이프 읽기 에러: %s "
 
 #, c-format
 msgid " Cannot open pipe for reading: %s "
@@ -1560,7 +1560,7 @@ msgid "&Safe save"
 msgstr "안전한 저장(&S)"
 
 msgid "&Do backups with following extension:"
-msgstr "확장명을 다음과 같이 백업하지 않음(&D) :"
+msgstr "확장명을 다음과 같이 백업하지 않음(&D):"
 
 msgid "Check &POSIX new line"
 msgstr "체크 POSIX의 새로운 라인(&P)"
@@ -1584,7 +1584,7 @@ msgid "&Windows/DOS format (CR LF)"
 msgstr "MS 도스/윈도우즈 포맷(&W) (CR LF)"
 
 msgid "&Macintosh format (CR)"
-msgstr "메캔토시 포맷(&M) (CR)"
+msgstr "매캔토시 포맷(&M) (CR)"
 
 msgid "Change line breaks to:"
 msgstr "깨진 라인 바꾸기:"
@@ -1629,7 +1629,7 @@ msgid " Load macro "
 msgstr "매크로 불러오기"
 
 msgid " Confirm save file? : "
-msgstr "저장하시겠습니까? "
+msgstr "저장하시겠습니까? :"
 
 msgid " Save file "
 msgstr "파일 저장"
@@ -1645,7 +1645,7 @@ msgstr ""
 " 저장 안하고 계속하실 겁니까? "
 
 msgid "Syntax file edit"
-msgstr "문법 파일 수정(&M)"
+msgstr "문법 파일 수정"
 
 msgid " Which syntax file you want to edit? "
 msgstr "수정하기를 원하는 문법 파일은? "
@@ -1676,7 +1676,7 @@ msgid "&Cancel quit"
 msgstr "끝내기 취소(&C)"
 
 msgid " Error "
-msgstr "에러"
+msgstr "오류"
 
 msgid " This function is not implemented. "
 msgstr "이 기능은 구현되지 않습니다."
@@ -1751,7 +1751,7 @@ msgid "Script created:"
 msgstr "스크립트 만듬:"
 
 msgid "Process block"
-msgstr "Process block"
+msgstr "프로세스 블럭"
 
 msgid " Copies to"
 msgstr "복사"
@@ -1811,7 +1811,7 @@ msgid "A&ll"
 msgstr "모두(&L)"
 
 msgid " Replace with: "
-msgstr " ...로 바꿈: "
+msgstr "함께 바꿈: "
 
 msgid " Confirm replace "
 msgstr "바꾸기 확인 "
@@ -2758,7 +2758,7 @@ msgid "Fr&ee VFSs now"
 msgstr "VFS를 지금 해제(&E)"
 
 msgid "Change &To"
-msgstr "로 바꾸기(&T)"
+msgstr "바꾸기(&T)"
 
 msgid "Subgroup - press ENTER to see list"
 msgstr "하위집단 - 보려면 엔터키를 누르십시오"
@@ -2836,7 +2836,7 @@ msgstr "미드나잇 코맨더 %s"
 
 #, c-format
 msgid "File:       %s"
-msgstr "파일:     %s"
+msgstr "파일: %s"
 
 #, c-format
 msgid "Free nodes: %d (%d%%) of %d"
@@ -2854,14 +2854,14 @@ msgstr "빈 공간: 정보 없음"
 
 #, c-format
 msgid "Type:      %s "
-msgstr "종류:      %s "
+msgstr "종류: %s "
 
 msgid "non-local vfs"
 msgstr "원격 vfs"
 
 #, c-format
 msgid "Device:    %s"
-msgstr "디바이스:  %s"
+msgstr "디바이스: %s"
 
 #, c-format
 msgid "Filesystem: %s"
@@ -2869,16 +2869,16 @@ msgstr "파일체계: %s"
 
 #, c-format
 msgid "Accessed:  %s"
-msgstr "액세스일:  %s"
+msgstr "액세스일: %s"
 
 #, c-format
 msgid "Modified:  %s"
-msgstr "수정일:    %s"
+msgstr "수정일: %s"
 
 #. TRANSLATORS: "Status changed", like in the stat(2) man page
 #, c-format
 msgid "Status:    %s"
-msgstr "만든날:    %s"
+msgstr "만든날: %s"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -2886,7 +2886,7 @@ msgstr "Dev. type: 주요 %lu, 기여 %lu"
 
 #, c-format
 msgid "Size:      %s"
-msgstr "크기:      %s"
+msgstr "크기: %s"
 
 #, c-format
 msgid " (%ld block)"
@@ -2894,19 +2894,19 @@ msgstr " (%ld 블럭)"
 
 #, c-format
 msgid "Owner:     %s/%s"
-msgstr "소유자:    %s/%s"
+msgstr "소유자: %s/%s"
 
 #, c-format
 msgid "Links:     %d"
-msgstr "링크:      %d"
+msgstr "링크: %d"
 
 #, c-format
 msgid "Mode:      %s (%04o)"
-msgstr "모드:      %s (%04o)"
+msgstr "모드: %s (%04o)"
 
 #, c-format
 msgid "Location:  %Xh:%Xh"
-msgstr "위치:      %Xh:%Xh"
+msgstr "위치: %Xh:%Xh"
 
 msgid "&Vertical"
 msgstr "수직(&V)"
@@ -3755,4 +3755,3 @@ msgstr "기록을 삭제하기를 원하십니까?"
 
 msgid "Background process:"
 msgstr "배경 프로세스:"
-

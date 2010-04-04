@@ -9,15 +9,13 @@
 
 This is the main help screen for GNU Midnight Commander.
 
-To learn more on how to use the interactive help facility
-just press EnterHow to use help.  You may want to go directly to the help
-contentsContents.
+To learn more on how to use the interactive help facility just press EnterHow to use help.  You may want to go directly to the help contentsContents.
 
 GNU Midnight Commander is written by its authorsAUTHORS.
 
-GNU Midnight Commander comes with ABSOLUTELY NO WARRANTYWarranty.
-This is free software, and you are welcome to redistribute
-it under terms of GNU General Public LicenseLicense.[License]
+GNU Midnight Commander comes with ABSOLUTELY NO WARRANTYWarranty. This is free software, and you are welcome to redistribute it under terms of GNU General Public LicenseLicense.
+
+[License]
 
                 GNU GENERAL PUBLIC LICENSE
                    Version 2, June 1991
@@ -431,30 +429,16 @@ Library General Public License instead of this License.
 [QueryBox]
 Query boxes
 
-In the query dialog box you can use the arrow keys or the
-first letter to select an item or click with the mouse on
-the button.
+In the query dialog box you can use the arrow keys or the first letter to select an item or click with the mouse on the button.
 
 [How to use help]
 How to use help
 
-You can use the cursor keys or mouse to navigate in the
-help viewer.  Press down arrow to move to the next item or
-scroll down.  Press up arrow to move to the previous item
-or scroll up.  Press right arrow to follow the current
-link.  Press left arrow to go back in the history of nodes
-that you have visited.
+You can use the cursor keys or mouse to navigate in the help viewer.  Press down arrow to move to the next item or scroll down.  Press up arrow to move to the previous item or scroll up.  Press right arrow to follow the current link.  Press left arrow to go back in the history of nodes that you have visited.
 
-If you terminal doesn't support the cursor keys you can
-use the space bar to scroll forward and the b (back) key
-scroll back.  Use the TAB key to move to the next item and
-press ENTER to follow the current link.  The l (last) key
-can be used to go back in the history of nodes you have
-visited.  Press ESC to exit the help viewer.
+If you terminal doesn't support the cursor keys you can use the space bar to scroll forward and the b (back) key scroll back.  Use the TAB key to move to the next item and press ENTER to follow the current link.  The l (last) key can be used to go back in the history of nodes you have visited.  Press ESC to exit the help viewer.
 
-The left mouse button will follow the link or scroll.  The
-right mouse button can be used to go back in the history
-of nodes.
+The left mouse button will follow the link or scroll.  The right mouse button can be used to go back in the history of nodes.
 
 The full key list of the help viewer:
 

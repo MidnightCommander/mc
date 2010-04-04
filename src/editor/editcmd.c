@@ -1881,7 +1881,6 @@ void
 edit_search_cmd (WEdit * edit, int again)
 {
     char *search_string = NULL, *search_string_dup = NULL;
-
     gsize len = 0;
 
     if (!edit)
@@ -1910,36 +1909,45 @@ edit_search_cmd (WEdit * edit, int again)
     {
 #ifdef HAVE_CHARSET
         GString *tmp;
+
         if (search_string && *search_string)
         {
             tmp = str_convert_to_display (search_string);
-
-            g_free (search_string_dup);
-            search_string_dup = NULL;
-
-            if (tmp && tmp->len)
-                search_string = search_string_dup = tmp->str;
-            g_string_free (tmp, FALSE);
+            if (tmp != NULL)
+            {
+                if (tmp->len == 0)
+                    g_string_free (tmp, TRUE);
+                else
+                {
+                    g_free (search_string);
+                    search_string = search_string_dup = g_string_free (tmp, FALSE);
+                }
+            }
         }
 #endif /* HAVE_CHARSET */
         editcmd_dialog_search_show (edit, &search_string);
+        g_free (search_string_dup);
+        search_string_dup = NULL;
 #ifdef HAVE_CHARSET
         if (search_string && *search_string)
         {
             tmp = str_convert_to_input (search_string);
-            if (tmp && tmp->len)
-                search_string = tmp->str;
-
-            g_string_free (tmp, FALSE);
-
-            if (search_string_dup)
-                g_free (search_string_dup);
+            if (tmp != NULL)
+            {
+                if (tmp->len == 0)
+                    g_string_free (tmp, TRUE);
+                else
+                {
+                    g_free (search_string);
+                    search_string = g_string_free (tmp, FALSE);
+                }
+            }
         }
 #endif /* HAVE_CHARSET */
 
         edit_push_action (edit, KEY_PRESS + edit->start_display);
 
-        if (!search_string)
+        if (search_string == NULL)
         {
             edit->force |= REDRAW_COMPLETELY;
             edit_scroll_screen_over_cursor (edit);
@@ -1959,14 +1967,18 @@ edit_search_cmd (WEdit * edit, int again)
         if (edit->search == NULL)
         {
             edit->search_start = edit->curs1;
+            g_free (search_string);
             return;
         }
+
         edit->search->search_type = edit_search_options.type;
         edit->search->is_all_charsets = edit_search_options.all_codepages;
         edit->search->is_case_sentitive = edit_search_options.case_sens;
         edit->search->whole_words = edit_search_options.whole_words;
         edit->search->search_fn = edit_search_cmd_callback;
     }
+
+    g_free (search_string);
 
     if (search_create_bookmark)
     {

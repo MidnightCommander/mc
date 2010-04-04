@@ -281,55 +281,54 @@ mcview_display_hex (mcview_t * view)
 gboolean
 mcview_hexedit_save_changes (mcview_t * view)
 {
-    struct hexedit_change_node *curr, *next;
-    int fp, answer;
-    char *text, *error;
+    int answer = 0;
 
     if (view->change_list == NULL)
         return TRUE;
 
-  retry_save:
-    assert (view->filename != NULL);
-    fp = mc_open (view->filename, O_WRONLY);
-    if (fp == -1)
-        goto save_error;
-
-    for (curr = view->change_list; curr != NULL; curr = next)
+    while (answer == 0)
     {
-        next = curr->next;
+        int fp;
+        char *text;
+        struct hexedit_change_node *curr, *next;
 
-        if (mc_lseek (fp, curr->offset, SEEK_SET) == -1 || mc_write (fp, &(curr->value), 1) != 1)
-            goto save_error;
+        assert (view->filename != NULL);
 
-        /* delete the saved item from the change list */
-        view->change_list = next;
-        view->dirty++;
-        mcview_set_byte (view, curr->offset, curr->value);
-        g_free (curr);
+        fp = mc_open (view->filename, O_WRONLY);
+        if (fp != -1)
+        {
+            for (curr = view->change_list; curr != NULL; curr = next)
+            {
+                next = curr->next;
+
+                if (mc_lseek (fp, curr->offset, SEEK_SET) == -1
+                    || mc_write (fp, &(curr->value), 1) != 1)
+                    goto save_error;
+
+                /* delete the saved item from the change list */
+                view->change_list = next;
+                view->dirty++;
+                mcview_set_byte (view, curr->offset, curr->value);
+                g_free (curr);
+            }
+
+            if (mc_close (fp) == -1)
+                message (D_ERROR, _(" Save file "),
+                         _(" Error while closing the file: \n %s \n"
+                           " Data may have been written or not. "), unix_error_string (errno));
+
+            view->dirty++;
+            return TRUE;
+        }
+
+      save_error:
+        text = g_strdup_printf (_(" Cannot save file: \n %s "), unix_error_string (errno));
+        (void) mc_close (fp);
+
+        answer = query_dialog (_(" Save file "), text, D_ERROR, 2, _("&Retry"), _("&Cancel"));
+        g_free (text);
     }
 
-    if (mc_close (fp) == -1)
-    {
-        error = g_strdup (unix_error_string (errno));
-        message (D_ERROR, _(" Save file "),
-                 _(" Error while closing the file: \n %s \n"
-                   " Data may have been written or not. "), error);
-        g_free (error);
-    }
-    mcview_update (view);
-    return TRUE;
-
-  save_error:
-    error = g_strdup (unix_error_string (errno));
-    text = g_strdup_printf (_(" Cannot save file: \n %s "), error);
-    g_free (error);
-    (void) mc_close (fp);
-
-    answer = query_dialog (_(" Save file "), text, D_ERROR, 2, _("&Retry"), _("&Cancel"));
-    g_free (text);
-
-    if (answer == 0)
-        goto retry_save;
     return FALSE;
 }
 

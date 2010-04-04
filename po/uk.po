@@ -15,8 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid " Search string not found "
 msgstr " Така стрічка не знайдена "
@@ -340,7 +340,7 @@ msgstr "Тимчасові файли створюватися не будуть
 
 #, c-format
 msgid "Press any key to continue..."
-msgstr "Натисніть пробіл для продовження..."
+msgstr "Натисніть пробіл для продовження…"
 
 msgid "Warning"
 msgstr "Попередження"
@@ -404,7 +404,7 @@ msgid "Directory cache expired for %s"
 msgstr "Кеш каталога застарів для %s"
 
 msgid "Starting linear transfer..."
-msgstr "Початок лінійного перенесення..."
+msgstr "Початок лінійного перенесення…"
 
 #, c-format
 msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
@@ -438,7 +438,7 @@ msgid "fish: Disconnecting from %s"
 msgstr "fish: від'єднуюсь від %s"
 
 msgid "fish: Waiting for initial line..."
-msgstr "fish: чекаю початковий рядок..."
+msgstr "fish: чекаю початковий рядок…"
 
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Вибачте, зараз неможливо створювати з'єднання, авторизовані паролем."
@@ -447,16 +447,16 @@ msgid " fish: Password required for "
 msgstr " fish: вимагається пароль для "
 
 msgid "fish: Sending password..."
-msgstr "fish: відсилаю пароль..."
+msgstr "fish: відсилаю пароль…"
 
 msgid "fish: Sending initial line..."
-msgstr "fish: відсилаю початковий рядок..."
+msgstr "fish: відсилаю початковий рядок…"
 
 msgid "fish: Handshaking version..."
-msgstr "fish: домовляюсь про версію..."
+msgstr "fish: домовляюсь про версію…"
 
 msgid "fish: Setting up current directory..."
-msgstr "fish: встановлюю поточний каталог..."
+msgstr "fish: встановлюю поточний каталог…"
 
 #, c-format
 msgid "fish: Connected, home %s."
@@ -464,7 +464,7 @@ msgstr "fish: з'єднався, домашній каталог %s."
 
 #, c-format
 msgid "fish: Reading directory %s..."
-msgstr "fish: читаю каталог %s..."
+msgstr "fish: читаю каталог %s…"
 
 #, c-format
 msgid "%s: done."
@@ -476,7 +476,7 @@ msgstr "%s: збій"
 
 #, c-format
 msgid "fish: store %s: sending command..."
-msgstr "fish: запис %s: відсилаю команду..."
+msgstr "fish: запис %s: відсилаю команду…"
 
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Збій локального читання, відсилаються нулі"
@@ -492,7 +492,7 @@ msgid "file"
 msgstr "файл"
 
 msgid "Aborting transfer..."
-msgstr "Переривання перенесення..."
+msgstr "Переривання перенесення…"
 
 msgid "Error reported after abort."
 msgstr "Повідомлена помилка після переривання."
@@ -550,7 +550,7 @@ msgstr "ftpfs: збій з'єднання з сервером: %s"
 
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
-msgstr "Очікування повтору спроби... %d (Control-C для скасування)"
+msgstr "Очікування повтору спроби… %d (Control-C для скасування)"
 
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs: неправильний рід адреси"
@@ -585,11 +585,11 @@ msgid "ftpfs: couldn't resolve symlink"
 msgstr "ftpfs: не зміг розпізнати символьне посилання"
 
 msgid "Resolving symlink..."
-msgstr "Розпізнається символьне посилання..."
+msgstr "Розпізнається символьне посилання…"
 
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
-msgstr "ftpfs: Читання каталога FTP %s... %s%s"
+msgstr "ftpfs: Читання каталога FTP %s… %s%s"
 
 msgid "(strict rfc959)"
 msgstr "(обмеження rfc959)"
@@ -724,7 +724,7 @@ msgid ""
 "%s\n"
 "doesn't look like a tar archive."
 msgstr ""
-"Гм,...\n"
+"Гм,…\n"
 "%s\n"
 "не схожий на tar-архів."
 
@@ -768,25 +768,25 @@ msgid " Cannot open file %s "
 msgstr " Не вдалося відкрити файл %s "
 
 msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: читання бітової мапи i-вузлів..."
+msgstr "undelfs: читання бітової карти i-вузлів…"
 
 #, c-format
 msgid ""
 " Cannot load inode bitmap from: \n"
 " %s \n"
 msgstr ""
-" Не вдалося завантажити бітову мапу i-вузлів з:\n"
+" Не вдалося завантажити бітову карту i-вузлів з:\n"
 " %s \n"
 
 msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: читання блоку бітової мапи..."
+msgstr "undelfs: читання блоку бітової карти…"
 
 #, c-format
 msgid ""
 " Cannot load block bitmap from: \n"
 " %s \n"
 msgstr ""
-" Не вдалося завантажити блок бітової мапи з:\n"
+" Не вдалося завантажити блок бітової карти з:\n"
 " %s \n"
 
 msgid " vfs_info is not fs! "
@@ -1847,7 +1847,7 @@ msgid "&Ignore lock"
 msgstr "Ігнорувати замок"
 
 msgid "&Open file..."
-msgstr "&Відкрити файл..."
+msgstr "&Відкрити файл…"
 
 msgid "&New"
 msgstr "Новий"
@@ -1994,7 +1994,7 @@ msgid "&External formatter"
 msgstr "З&овнішня програма форматування"
 
 msgid "&General...  "
-msgstr "&Загальні...  "
+msgstr "&Загальні…"
 
 msgid "Save &mode..."
 msgstr "Режим &збереження…"
@@ -2973,7 +2973,7 @@ msgid " Panel split "
 msgstr " Розбиття панелей "
 
 msgid " Highlight... "
-msgstr " Підсвітка... "
+msgstr " Підсвітка…"
 
 msgid " Other options "
 msgstr " Інші параметри "
@@ -3054,7 +3054,7 @@ msgid " Do you really want to quit the Midnight Commander? "
 msgstr " Ви дійсно хочете вийти з Midnight Commander? "
 
 msgid "&Listing mode..."
-msgstr "Фор&мат списку..."
+msgstr "Фор&мат списку…"
 
 msgid "&Quick view"
 msgstr "Швидкий перегляд"
@@ -3063,25 +3063,25 @@ msgid "&Info"
 msgstr "Інформація"
 
 msgid "&Sort order..."
-msgstr "Порядок &сортування"
+msgstr "Порядок &сортування…"
 
 msgid "&Filter..."
-msgstr "&Фільтр..."
+msgstr "&Фільтр…"
 
 msgid "&Encoding..."
 msgstr "Кодування…"
 
 msgid "&Network link..."
-msgstr "Ме&режне з'єднання..."
+msgstr "Ме&режне з'єднання…"
 
 msgid "FT&P link..."
-msgstr "&FTP-з'єднання..."
+msgstr "&FTP-з'єднання…"
 
 msgid "S&hell link..."
-msgstr "Зв'язок через &shell..."
+msgstr "Зв'язок через &shell…"
 
 msgid "SM&B link..."
-msgstr "Зв'язок через &SMB..."
+msgstr "Зв'язок через &SMB…"
 
 msgid "&Rescan"
 msgstr "Пересканувати"
@@ -3189,19 +3189,19 @@ msgid "Edit hi&ghlighting group file"
 msgstr "Редагувати файл підсвітки груп"
 
 msgid "&Configuration..."
-msgstr "&Конфігурація..."
+msgstr "&Конфігурація…"
 
 msgid "&Layout..."
-msgstr "&Макет..."
+msgstr "&Макет…"
 
 msgid "C&onfirmation..."
 msgstr "&Підтвердження…"
 
 msgid "&Display bits..."
-msgstr "&Відображення символів..."
+msgstr "&Відображення символів…"
 
 msgid "&Virtual FS..."
-msgstr "Віртуальні &ФС..."
+msgstr "Віртуальні &ФС…"
 
 msgid "&Above"
 msgstr "Верхня"
@@ -3325,7 +3325,7 @@ msgid " Panel options "
 msgstr " Параметри панелей "
 
 msgid " Pause after run... "
-msgstr " Пауза після виконання... "
+msgstr " Пауза після виконання…"
 
 msgid "Configure options"
 msgstr "Параметри конфігурації"

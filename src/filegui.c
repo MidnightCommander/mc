@@ -960,7 +960,7 @@ file_mask_dialog (FileOpContext * ctx, FileOperation operation,
         /*  9 - OFFSET */
         QUICK_CHECKBOX (37, FMDX, 4, FMDY, N_("&Using shell patterns"), &source_easy_patterns),
         /* 10 - OFFSET */
-        QUICK_INPUT (3, FMDX, 3, FMDY, easy_patterns ? "*" : "^\\(.*\\)$", 58, 0, "input-def",
+        QUICK_INPUT (3, FMDX, 3, FMDY, easy_patterns ? "*" : "^(.*)$", 58, 0, "input-def",
                      &source_mask),
         /* 11 - OFFSET */
         QUICK_LABEL (3, FMDX, 2, FMDY, fmd_buf),

@@ -79,7 +79,6 @@ mcview_toggle_magic_mode (mcview_t * view)
     filename = g_strdup (view->filename);
     command = g_strdup (view->command);
 
-    mcview_done (view);
     mcview_load (view, command, filename, 0);
     g_free (filename);
     g_free (command);
@@ -92,6 +91,8 @@ mcview_toggle_magic_mode (mcview_t * view)
 void
 mcview_toggle_wrap_mode (mcview_t * view)
 {
+    if (view->text_wrap_mode)
+        view->dpy_start = mcview_bol (view, view->dpy_start);
     view->text_wrap_mode = !view->text_wrap_mode;
     view->dpy_bbar_dirty = TRUE;
     view->dirty++;
@@ -190,12 +191,20 @@ mcview_done (mcview_t * view)
 
     coord_cache_free (view->coord_cache), view->coord_cache = NULL;
 
-    if (!(view->converter == INVALID_CONV || view->converter != str_cnv_from_term))
+    if (view->converter == INVALID_CONV)
+        view->converter = str_cnv_from_term;
+
+    if (view->converter != str_cnv_from_term)
     {
         str_close_conv (view->converter);
         view->converter = str_cnv_from_term;
     }
 
+    mc_search_free (view->search);
+    view->search = NULL;
+    g_free (view->last_search_string);
+    view->last_search_string = NULL;
+    mcview_nroff_seq_free (&view->search_nroff_seq);
     mcview_hexedit_free_change_list (view);
 }
 

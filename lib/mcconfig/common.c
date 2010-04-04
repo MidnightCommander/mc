@@ -23,10 +23,10 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <fcntl.h>
-#include <errno.h> /* extern int errno */
+#include <errno.h>              /* extern int errno */
 
 #include "lib/global.h"
-#include "lib/vfs/mc-vfs/vfs.h"      /* mc_stat */
+#include "lib/vfs/mc-vfs/vfs.h" /* mc_stat */
 #include "lib/mcconfig.h"
 
 /*** global variables **************************************************/
@@ -44,8 +44,7 @@ mc_config_t *mc_panels_config;
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 static gboolean
-mc_config_new_or_override_file (mc_config_t * mc_config, const gchar * ini_path,
-                                GError **error)
+mc_config_new_or_override_file (mc_config_t * mc_config, const gchar * ini_path, GError ** error)
 {
     gchar *data, *written_data;
     gsize len, total_written;
@@ -54,7 +53,8 @@ mc_config_new_or_override_file (mc_config_t * mc_config, const gchar * ini_path,
     ssize_t cur_written;
 
     data = g_key_file_to_data (mc_config->handle, &len, NULL);
-    if (!exist_file (ini_path)) {
+    if (!exist_file (ini_path))
+    {
         ret = g_file_set_contents (ini_path, data, len, error);
         g_free (data);
         return ret;
@@ -62,9 +62,12 @@ mc_config_new_or_override_file (mc_config_t * mc_config, const gchar * ini_path,
     mc_util_make_backup_if_possible (ini_path, "~");
 
     fd = mc_open (ini_path, O_WRONLY | O_TRUNC | O_SYNC, 0);
-    if (fd == -1) {
-        g_propagate_error (error, g_error_new (mc_main_error_quark() ,0, "%s", unix_error_string (errno)));
-        g_free(data);
+    if (fd == -1)
+    {
+        g_propagate_error (error,
+                           g_error_new (mc_main_error_quark (), 0, "%s",
+                                        unix_error_string (errno)));
+        g_free (data);
         return FALSE;
     }
 
@@ -74,9 +77,12 @@ mc_config_new_or_override_file (mc_config_t * mc_config, const gchar * ini_path,
     mc_close (fd);
     g_free (data);
 
-    if (cur_written == -1) {
+    if (cur_written == -1)
+    {
         mc_util_restore_from_backup_if_possible (ini_path, "~");
-        g_propagate_error (error, g_error_new (mc_main_error_quark() ,0, "%s", unix_error_string (errno)));
+        g_propagate_error (error,
+                           g_error_new (mc_main_error_quark (), 0, "%s",
+                                        unix_error_string (errno)));
         return FALSE;
     }
 
@@ -100,15 +106,18 @@ mc_config_init (const gchar * ini_path)
         return NULL;
 
     mc_config->handle = g_key_file_new ();
-    if (mc_config->handle == NULL) {
+    if (mc_config->handle == NULL)
+    {
         g_free (mc_config);
         return NULL;
     }
-    if (!ini_path || !exist_file (ini_path)) {
+    if (!ini_path || !exist_file (ini_path))
+    {
         return mc_config;
     }
 
-    if (!mc_stat (ini_path, &st) && st.st_size) {
+    if (!mc_stat (ini_path, &st) && st.st_size)
+    {
         /* file present and not empty */
         g_key_file_load_from_file (mc_config->handle, ini_path, G_KEY_FILE_KEEP_COMMENTS, NULL);
     }
@@ -195,7 +204,8 @@ mc_config_read_file (mc_config_t * mc_config, const gchar * ini_path)
     gchar **keys, **curr_key;
     gchar *value;
 
-    if (mc_config == NULL) {
+    if (mc_config == NULL)
+    {
         return FALSE;
     }
 
@@ -206,11 +216,16 @@ mc_config_read_file (mc_config_t * mc_config, const gchar * ini_path)
     groups = mc_config_get_groups (tmp_config, NULL);
 
     if (groups == NULL)
+    {
+        mc_config_deinit (tmp_config);
         return FALSE;
+    }
 
-    for (curr_grp = groups; *curr_grp != NULL; curr_grp++) {
+    for (curr_grp = groups; *curr_grp != NULL; curr_grp++)
+    {
         keys = mc_config_get_keys (tmp_config, *curr_grp, NULL);
-        for (curr_key = keys; *curr_key != NULL; curr_key++) {
+        for (curr_key = keys; *curr_key != NULL; curr_key++)
+        {
             value = g_key_file_get_value (tmp_config->handle, *curr_grp, *curr_key, NULL);
             if (value == NULL)
                 continue;
@@ -228,9 +243,10 @@ mc_config_read_file (mc_config_t * mc_config, const gchar * ini_path)
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 gboolean
-mc_config_save_file (mc_config_t * mc_config, GError **error)
+mc_config_save_file (mc_config_t * mc_config, GError ** error)
 {
-    if (mc_config == NULL || mc_config->ini_path == NULL) {
+    if (mc_config == NULL || mc_config->ini_path == NULL)
+    {
         return FALSE;
     }
     return mc_config_new_or_override_file (mc_config, mc_config->ini_path, error);
@@ -239,10 +255,10 @@ mc_config_save_file (mc_config_t * mc_config, GError **error)
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 gboolean
-mc_config_save_to_file (mc_config_t * mc_config, const gchar * ini_path, GError **error)
+mc_config_save_to_file (mc_config_t * mc_config, const gchar * ini_path, GError ** error)
 {
-
-    if (mc_config == NULL) {
+    if (mc_config == NULL)
+    {
         return FALSE;
     }
     return mc_config_new_or_override_file (mc_config, ini_path, error);
