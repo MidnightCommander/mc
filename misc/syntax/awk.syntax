@@ -12,29 +12,29 @@ context default
     keyword whole linestart #!\[\s\]/bin/\[msg\]awk yellow magenta
     keyword whole linestart #!\[\s\]/usr/bin/\[msg\]awk yellow magenta
 # Keywords
-    keyword whole AMNOISE      white
-    keyword whole BEGIN        white
-    keyword whole END          white
-    keyword whole func         white
-    keyword whole function     white
-    keyword whole nextfile     white
+    keyword whole AMNOISE white
+    keyword whole BEGIN white
+    keyword whole END white
+    keyword whole func white
+    keyword whole function white
+    keyword whole nextfile white
 
-    keyword whole return       white/26
-    keyword whole print        white/26
-    keyword whole printf       white/26
-    keyword whole if           white/26
-    keyword whole else         white/26
-    keyword whole while        white/26
-    keyword whole for          white/26
-    keyword whole in           white/26
-    keyword whole do           white/26
-    keyword whole break        white/26
-    keyword whole continue     white/26
-    keyword whole next         white/26
-    keyword whole exit         white/26
-    keyword whole close        white/26
-    keyword whole system       white/26
-    keyword whole getline      white/26
+    keyword whole return white/26
+    keyword whole print white/26
+    keyword whole printf white/26
+    keyword whole if white/26
+    keyword whole else white/26
+    keyword whole while white/26
+    keyword whole for white/26
+    keyword whole in white/26
+    keyword whole do white/26
+    keyword whole break white/26
+    keyword whole continue white/26
+    keyword whole next white/26
+    keyword whole exit white/26
+    keyword whole close white/26
+    keyword whole system white/26
+    keyword whole getline white/26
 # Builtin functions:
     keyword whole atan2        white black
     keyword whole cos          white black
@@ -56,9 +56,9 @@ context default
     keyword whole asort        white black
     keyword whole asorti       white black
 
-    keyword whole xor          white
-    keyword whole and          white
-    keyword whole or           white
+    keyword whole xor white
+    keyword whole and white
+    keyword whole or white
 
 # Gawk builtin functions:
     keyword whole fflush       white black
@@ -67,44 +67,44 @@ context default
     keyword whole toupper      white black
     keyword whole systime      white black
     keyword whole strftime     white black
-    keyword whole strtonum     white
+    keyword whole strtonum white
     keyword whole bindtextdomain white
-    keyword whole dcgettext    white
-    keyword whole dcngettext   white
-    keyword whole compl        white
-    keyword whole delete       white
-    keyword whole extension    white
-    keyword whole mktime       white
-    keyword whole lshift       white
-    keyword whole rshift       white
+    keyword whole dcgettext white
+    keyword whole dcngettext white
+    keyword whole compl white
+    keyword whole delete white
+    keyword whole extension white
+    keyword whole mktime white
+    keyword whole lshift white
+    keyword whole rshift white
 
 # Builtin variables:
-    keyword whole ARGIND       brightblue
-    keyword whole BINMODE      brightblue
-    keyword whole CONVFMT      brightblue
-    keyword whole ENVIRON      brightblue
-    keyword whole LINT         brightblue
-    keyword whole TEXTDOMAIN   brightblue
-    keyword whole ARGC         brightblue
-    keyword whole ARGV         brightblue
-    keyword whole FILENAME     brightblue
-    keyword whole FNR          brightblue
-    keyword whole FS           brightblue
-    keyword whole NF           brightblue
-    keyword whole NR           brightblue
-    keyword whole OFMT         brightblue
-    keyword whole OFS          brightblue
-    keyword whole ORS          brightblue
-    keyword whole RLENGTH      brightblue
-    keyword whole RS           brightblue
-    keyword whole RSTART       brightblue
-    keyword whole SUBSEP       brightblue
+    keyword whole ARGIND brightblue
+    keyword whole BINMODE brightblue
+    keyword whole CONVFMT brightblue
+    keyword whole ENVIRON brightblue
+    keyword whole LINT brightblue
+    keyword whole TEXTDOMAIN brightblue
+    keyword whole ARGC brightblue
+    keyword whole ARGV brightblue
+    keyword whole FILENAME brightblue
+    keyword whole FNR brightblue
+    keyword whole FS brightblue
+    keyword whole NF brightblue
+    keyword whole NR brightblue
+    keyword whole OFMT brightblue
+    keyword whole OFS brightblue
+    keyword whole ORS brightblue
+    keyword whole RLENGTH brightblue
+    keyword whole RS brightblue
+    keyword whole RSTART brightblue
+    keyword whole SUBSEP brightblue
 # Gawk builtin variables:
-    keyword whole ARGIND       brightblue
-    keyword whole ERRNO        brightblue
-    keyword whole RT           brightblue
-    keyword whole IGNORECASE   brightblue
-    keyword whole FIELDWIDTHS  brightblue
+    keyword whole ARGIND brightblue
+    keyword whole ERRNO brightblue
+    keyword whole RT brightblue
+    keyword whole IGNORECASE brightblue
+    keyword whole FIELDWIDTHS brightblue
 
     keyword '\s' brightgreen/16
     keyword '+' brightgreen/16

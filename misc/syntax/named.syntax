@@ -13,8 +13,8 @@ context default
     keyword whole allow-v6-synthesis yellow
     keyword whole allow yellow
     keyword whole also-notify yellow
-    keyword whole alt-transfer-source  yellow
-    keyword whole alt-transfer-source-v6  yellow
+    keyword whole alt-transfer-source yellow
+    keyword whole alt-transfer-source-v6 yellow
     keyword whole avoid-v4-udp-ports yellow
     keyword whole avoid-v6-udp-ports yellow
     keyword whole auth-nxdomain yellow

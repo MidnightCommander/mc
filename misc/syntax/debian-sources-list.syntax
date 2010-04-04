@@ -1,6 +1,6 @@
 context default
-    keyword linestart deb-src    brightmagenta/20
-    keyword linestart deb    brightmagenta/20
+    keyword linestart deb-src brightmagenta/20
+    keyword linestart deb brightmagenta/20
     keyword \$\(ARCH\) brightred/18
 
 context # \n brown/22

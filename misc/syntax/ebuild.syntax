@@ -177,8 +177,8 @@ context default
 
     keyword whole 2>&1 brightred
     keyword whole 1>&2 brightred
-    keyword whole 2>   brightred
-    keyword whole 1>   brightred
+    keyword whole 2> brightred
+    keyword whole 1> brightred
 
     keyword wholeright $\[0123456789\] brightred
 
@@ -194,9 +194,9 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
 
     keyword whole break yellow
     keyword whole case yellow
-    keyword whole clear         yellow
+    keyword whole clear yellow
     keyword whole continue yellow
-    keyword whole declare       yellow
+    keyword whole declare yellow
     keyword whole done yellow
     keyword whole do yellow
     keyword whole elif yellow
@@ -206,14 +206,14 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
     keyword whole export yellow
     keyword whole fi yellow
     keyword whole for yellow
-    keyword whole getopts       yellow
+    keyword whole getopts yellow
     keyword whole if yellow
     keyword whole in yellow
     keyword whole read yellow
     keyword whole return yellow
     keyword whole select yellow
     keyword whole shift yellow
-    keyword whole source        yellow
+    keyword whole source yellow
     keyword whole then yellow
     keyword whole trap yellow
     keyword whole until yellow
@@ -222,57 +222,57 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
     keyword whole while yellow
 
 # here goes usable subset for .ebuild commands
-    keyword whole awk        cyan
-    keyword whole cd         cyan
-    keyword whole chown      cyan
-    keyword whole chmod      cyan
-    keyword whole cmake      cyan
-    keyword whole cp         cyan
-    keyword whole echo       cyan
-    keyword whole egrep      cyan
-    keyword whole fgrep      cyan
-    keyword whole find       cyan
-    keyword whole grep       cyan
-    keyword whole ln         cyan
-    keyword whole make       cyan
-    keyword whole mkdir      cyan
-    keyword whole mknod      cyan
-    keyword whole mv         cyan
-    keyword whole perl       cyan
-    keyword whole pod2man    cyan
-    keyword whole rm         cyan
-    keyword whole sed        cyan
-    keyword whole sh         cyan
-    keyword whole touch      cyan
-    keyword whole xmkmf      cyan
+    keyword whole awk cyan
+    keyword whole cd cyan
+    keyword whole chown cyan
+    keyword whole chmod cyan
+    keyword whole cmake cyan
+    keyword whole cp cyan
+    keyword whole echo cyan
+    keyword whole egrep cyan
+    keyword whole fgrep cyan
+    keyword whole find cyan
+    keyword whole grep cyan
+    keyword whole ln cyan
+    keyword whole make cyan
+    keyword whole mkdir cyan
+    keyword whole mknod cyan
+    keyword whole mv cyan
+    keyword whole perl cyan
+    keyword whole pod2man cyan
+    keyword whole rm cyan
+    keyword whole sed cyan
+    keyword whole sh cyan
+    keyword whole touch cyan
+    keyword whole xmkmf cyan
 
 # some interesting files to copy
-    keyword whole ANNOUNCEMENT  white
-    keyword whole AUTHORS       white
-    keyword whole BUGS          white
-    keyword whole CHANGES       white
-    keyword whole COPYING       white
-    keyword whole COPYRIGHT     white
-    keyword whole CREDITS       white
-    keyword whole ChangeLog     white
-    keyword whole FAQ           white
-    keyword whole HACKING       white
-    keyword whole INSTALL       white
-    keyword whole LICENSE       white
-    keyword whole NEWS          white
-    keyword whole README        white
-    keyword whole THANKS        white
-    keyword whole TODO          white
-    keyword whole VERSION       white
+    keyword whole ANNOUNCEMENT white
+    keyword whole AUTHORS white
+    keyword whole BUGS white
+    keyword whole CHANGES white
+    keyword whole COPYING white
+    keyword whole COPYRIGHT white
+    keyword whole CREDITS white
+    keyword whole ChangeLog white
+    keyword whole FAQ white
+    keyword whole HACKING white
+    keyword whole INSTALL white
+    keyword whole LICENSE white
+    keyword whole NEWS white
+    keyword whole README white
+    keyword whole THANKS white
+    keyword whole TODO white
+    keyword whole VERSION white
 
-    keyword whole /dev/audio  brightblue
-    keyword whole /dev/dsp    brightblue
-    keyword whole /dev/null   brightblue
-    keyword whole /dev/mixed  brightblue
-    keyword whole /dev/stdin  brightblue
+    keyword whole /dev/audio brightblue
+    keyword whole /dev/dsp brightblue
+    keyword whole /dev/null brightblue
+    keyword whole /dev/mixed brightblue
+    keyword whole /dev/stdin brightblue
     keyword whole /dev/stdout brightblue
     keyword whole /dev/stderr brightblue
-    keyword whole /dev/zero   brightblue
+    keyword whole /dev/zero brightblue
 
 wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_
 
@@ -327,8 +327,8 @@ context exclusive ` ` lightgray black
     keyword $_ brightred
 
     keyword whole 2>&1 brightred
-    keyword whole 2>   brightred
-    keyword whole 1>   brightred
+    keyword whole 2> brightred
+    keyword whole 1> brightred
 
     keyword wholeright $\[0123456789\] brightred
 
@@ -340,9 +340,9 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
 
     keyword whole break yellow
     keyword whole case yellow
-    keyword whole clear         yellow
+    keyword whole clear yellow
     keyword whole continue yellow
-    keyword whole declare       yellow
+    keyword whole declare yellow
     keyword whole done yellow
     keyword whole do yellow
     keyword whole elif yellow
@@ -352,33 +352,33 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
     keyword whole export yellow
     keyword whole fi yellow
     keyword whole for yellow
-    keyword whole getopts       yellow
+    keyword whole getopts yellow
     keyword whole if yellow
     keyword whole in yellow
     keyword whole read yellow
     keyword whole return yellow
     keyword whole select yellow
     keyword whole shift yellow
-    keyword whole source        yellow
+    keyword whole source yellow
     keyword whole then yellow
     keyword whole trap yellow
     keyword whole until yellow
     keyword whole unset yellow
-    keyword whole wait          yellow
+    keyword whole wait yellow
     keyword whole while yellow
 
 # here goes usable subset for .ebuild commands
-    keyword whole awk        cyan
-    keyword whole sed        cyan
+    keyword whole awk cyan
+    keyword whole sed cyan
 
-    keyword whole /dev/audio  brightblue
-    keyword whole /dev/dsp    brightblue
-    keyword whole /dev/null   brightblue
-    keyword whole /dev/mixed  brightblue
-    keyword whole /dev/stdin  brightblue
+    keyword whole /dev/audio brightblue
+    keyword whole /dev/dsp brightblue
+    keyword whole /dev/null brightblue
+    keyword whole /dev/mixed brightblue
+    keyword whole /dev/stdin brightblue
     keyword whole /dev/stdout brightblue
     keyword whole /dev/stderr brightblue
-    keyword whole /dev/zero   brightblue
+    keyword whole /dev/zero brightblue
 
 context inherit \n magenta
     keyword whole inherit yellow

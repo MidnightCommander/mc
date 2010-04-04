@@ -113,14 +113,14 @@ context default
     keyword whole linestart \[\s\t\]\{ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\}\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]: cyan
 
 #digits
-    keyword whole 0\{xX\}\{0123456789abcdefABCDEF\}\[0123456789abcdefABCDEF\]       brightgreen
-    keyword whole \{0123456789\}\[0123456789\]      brightgreen
-    keyword whole \[0123456789\]\.\{0123456789\}\[0123456789\]      brightgreen
-    keyword whole \{0123456789\}\[0123456789\]\.\[0123456789\]      brightgreen
-    keyword whole \{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\]    brightgreen
-    keyword whole \{0123456789\}\[0123456789\]\{eE\}\{\-\+\}\{0123456789\}\[0123456789\]    brightgreen
-    keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\]      brightgreen
-    keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{\-\+\}\{0123456789\}\[0123456789\]      brightgreen
+    keyword whole 0\{xX\}\{0123456789abcdefABCDEF\}\[0123456789abcdefABCDEF\] brightgreen
+    keyword whole \{0123456789\}\[0123456789\] brightgreen
+    keyword whole \[0123456789\]\.\{0123456789\}\[0123456789\] brightgreen
+    keyword whole \{0123456789\}\[0123456789\]\.\[0123456789\] brightgreen
+    keyword whole \{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] brightgreen
+    keyword whole \{0123456789\}\[0123456789\]\{eE\}\{\-\+\}\{0123456789\}\[0123456789\] brightgreen
+    keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] brightgreen
+    keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{\-\+\}\{0123456789\}\[0123456789\] brightgreen
 
 #comments
     keyword {- brown
@@ -142,14 +142,14 @@ context default
     keyword '\\ENQ' brightgreen
     keyword '\\ACK' brightgreen
     keyword '\\BEL' brightgreen
-    keyword '\\BS'  brightgreen
-    keyword '\\HT'  brightgreen
-    keyword '\\LF'  brightgreen
-    keyword '\\VT'  brightgreen
-    keyword '\\FF'  brightgreen
-    keyword '\\CR'  brightgreen
-    keyword '\\SO'  brightgreen
-    keyword '\\SI'  brightgreen
+    keyword '\\BS' brightgreen
+    keyword '\\HT' brightgreen
+    keyword '\\LF' brightgreen
+    keyword '\\VT' brightgreen
+    keyword '\\FF' brightgreen
+    keyword '\\CR' brightgreen
+    keyword '\\SO' brightgreen
+    keyword '\\SI' brightgreen
     keyword '\\DLE' brightgreen
     keyword '\\DC1' brightgreen
     keyword '\\DC2' brightgreen
@@ -159,14 +159,14 @@ context default
     keyword '\\SYN' brightgreen
     keyword '\\ETB' brightgreen
     keyword '\\CAN' brightgreen
-    keyword '\\EM'  brightgreen
+    keyword '\\EM' brightgreen
     keyword '\\SUB' brightgreen
     keyword '\\ESC' brightgreen
-    keyword '\\FS'  brightgreen
-    keyword '\\GS'  brightgreen
-    keyword '\\RS'  brightgreen
-    keyword '\\US'  brightgreen
-    keyword '\\SP'  brightgreen
+    keyword '\\FS' brightgreen
+    keyword '\\GS' brightgreen
+    keyword '\\RS' brightgreen
+    keyword '\\US' brightgreen
+    keyword '\\SP' brightgreen
     keyword '\\DEL' brightgreen
 
     keyword '\\\{0123\}\{01234567\}\{01234567\}' brightgreen

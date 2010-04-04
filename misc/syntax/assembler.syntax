@@ -75,7 +75,7 @@ context default lightgray
     keyword whole .bss brightblue
 
 # NASM/TASM Macroses
-    keyword whole %ifdef  brightred
+    keyword whole %ifdef brightred
     keyword whole %define brightred
     keyword whole %else brightred
     keyword whole %elif brightred

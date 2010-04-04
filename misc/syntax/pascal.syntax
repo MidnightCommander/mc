@@ -138,6 +138,3 @@ context { } brightgreen
 #    keyword $* green
     keyword $+:*$ black green
     spellcheck
-
-
-

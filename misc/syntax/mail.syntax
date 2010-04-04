@@ -71,4 +71,3 @@ context linestart >\[\s\]>\[\s\]>\[\s\]> \n brightred
 context linestart >\[\s\]>\[\s\]> \n brightgreen
 context linestart >\[\s\]> \n brightred
 context linestart > \n brightgreen
-

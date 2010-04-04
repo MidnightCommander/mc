@@ -82,110 +82,110 @@ context default
     keyword whole -\[\-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz_0123456789\] brightred
 
 #   known extensions
-    keyword whole Arrows                      brightmagenta
-    keyword whole BangPatterns                brightmagenta
-    keyword whole ConstrainedClassMethods     brightmagenta
-    keyword whole DeriveDataTypeable          brightmagenta
-    keyword whole DisambiguateRecordFields    brightmagenta
-    keyword whole EmptyDataDecls              brightmagenta
-    keyword whole CPP                         brightmagenta
-    keyword whole ExistentialQuantification   brightmagenta
-    keyword whole ExtendedDefaultRules        brightmagenta
-    keyword whole ExtensibleRecords           brightmagenta
-    keyword whole FlexibleContexts            brightmagenta
-    keyword whole FlexibleInstances           brightmagenta
-    keyword whole ForeignFunctionInterface    brightmagenta
-    keyword whole FunctionalDependencies      brightmagenta
-    keyword whole GADTs                       brightmagenta
-    keyword whole GeneralizedNewtypeDeriving  brightmagenta
-    keyword whole Generics                    brightmagenta
-    keyword whole HereDocuments               brightmagenta
-    keyword whole ImplicitParams              brightmagenta
-    keyword whole ImpredicativeTypes          brightmagenta
-    keyword whole IncoherentInstances         brightmagenta
-    keyword whole KindSignatures              brightmagenta
-    keyword whole LiberalTypeSynonyms         brightmagenta
-    keyword whole MagicHash                   brightmagenta
-    keyword whole MultiParamTypeClasses       brightmagenta
-    keyword whole NamedFieldPuns              brightmagenta
-    keyword whole NewQualifiedOperators       brightmagenta
-    keyword whole NoImplicitPrelude           brightmagenta
-    keyword whole NoMonomorphismRestriction   brightmagenta
-    keyword whole NoMonoPatBinds              brightmagenta
-    keyword whole OverlappingInstances        brightmagenta
-    keyword whole OverloadedStrings           brightmagenta
-    keyword whole PackageImports              brightmagenta
-    keyword whole ParallelListComp            brightmagenta
-    keyword whole PatternGuards               brightmagenta
-    keyword whole PatternSignatures           brightmagenta
-    keyword whole PolymorphicComponents       brightmagenta
-    keyword whole PostfixOperators            brightmagenta
-    keyword whole QuasiQuotes                 brightmagenta
-    keyword whole Rank2Types                  brightmagenta
-    keyword whole RankNTypes                  brightmagenta
-    keyword whole RecordPuns                  brightmagenta
-    keyword whole RecordWildCards             brightmagenta
-    keyword whole RecursiveDo                 brightmagenta
-    keyword whole RelaxedPolyRec              brightmagenta
-    keyword whole RestrictedTypeSynonyms      brightmagenta
-    keyword whole ScopedTypeVariables         brightmagenta
-    keyword whole StandaloneDeriving          brightmagenta
-    keyword whole TemplateHaskell             brightmagenta
-    keyword whole TransformListComp           brightmagenta
-    keyword whole TypeFamilies                brightmagenta
-    keyword whole TypeOperators               brightmagenta
-    keyword whole TypeSynonymInstances        brightmagenta
-    keyword whole UnboxedTuples               brightmagenta
-    keyword whole UndecidableInstances        brightmagenta
-    keyword whole UnicodeSyntax               brightmagenta
-    keyword whole UnliftedFFITypes            brightmagenta
-    keyword whole ViewPatterns                brightmagenta
+    keyword whole Arrows brightmagenta
+    keyword whole BangPatterns brightmagenta
+    keyword whole ConstrainedClassMethods brightmagenta
+    keyword whole DeriveDataTypeable brightmagenta
+    keyword whole DisambiguateRecordFields brightmagenta
+    keyword whole EmptyDataDecls brightmagenta
+    keyword whole CPP brightmagenta
+    keyword whole ExistentialQuantification brightmagenta
+    keyword whole ExtendedDefaultRules brightmagenta
+    keyword whole ExtensibleRecords brightmagenta
+    keyword whole FlexibleContexts brightmagenta
+    keyword whole FlexibleInstances brightmagenta
+    keyword whole ForeignFunctionInterface brightmagenta
+    keyword whole FunctionalDependencies brightmagenta
+    keyword whole GADTs brightmagenta
+    keyword whole GeneralizedNewtypeDeriving brightmagenta
+    keyword whole Generics brightmagenta
+    keyword whole HereDocuments brightmagenta
+    keyword whole ImplicitParams brightmagenta
+    keyword whole ImpredicativeTypes brightmagenta
+    keyword whole IncoherentInstances brightmagenta
+    keyword whole KindSignatures brightmagenta
+    keyword whole LiberalTypeSynonyms brightmagenta
+    keyword whole MagicHash brightmagenta
+    keyword whole MultiParamTypeClasses brightmagenta
+    keyword whole NamedFieldPuns brightmagenta
+    keyword whole NewQualifiedOperators brightmagenta
+    keyword whole NoImplicitPrelude brightmagenta
+    keyword whole NoMonomorphismRestriction brightmagenta
+    keyword whole NoMonoPatBinds brightmagenta
+    keyword whole OverlappingInstances brightmagenta
+    keyword whole OverloadedStrings brightmagenta
+    keyword whole PackageImports brightmagenta
+    keyword whole ParallelListComp brightmagenta
+    keyword whole PatternGuards brightmagenta
+    keyword whole PatternSignatures brightmagenta
+    keyword whole PolymorphicComponents brightmagenta
+    keyword whole PostfixOperators brightmagenta
+    keyword whole QuasiQuotes brightmagenta
+    keyword whole Rank2Types brightmagenta
+    keyword whole RankNTypes brightmagenta
+    keyword whole RecordPuns brightmagenta
+    keyword whole RecordWildCards brightmagenta
+    keyword whole RecursiveDo brightmagenta
+    keyword whole RelaxedPolyRec brightmagenta
+    keyword whole RestrictedTypeSynonyms brightmagenta
+    keyword whole ScopedTypeVariables brightmagenta
+    keyword whole StandaloneDeriving brightmagenta
+    keyword whole TemplateHaskell brightmagenta
+    keyword whole TransformListComp brightmagenta
+    keyword whole TypeFamilies brightmagenta
+    keyword whole TypeOperators brightmagenta
+    keyword whole TypeSynonymInstances brightmagenta
+    keyword whole UnboxedTuples brightmagenta
+    keyword whole UndecidableInstances brightmagenta
+    keyword whole UnicodeSyntax brightmagenta
+    keyword whole UnliftedFFITypes brightmagenta
+    keyword whole ViewPatterns brightmagenta
 
 #   links
-    keyword http://+  gray
-    keyword ftp://+   gray
-    keyword git://+   gray
-    keyword cvs://+   gray
-    keyword svn://+   gray
+    keyword http://+ gray
+    keyword ftp://+ gray
+    keyword git://+ gray
+    keyword cvs://+ gray
+    keyword svn://+ gray
     keyword darcs://+ gray
 #   special text inside of <>, i.e. emails
-    keyword \<+\>     red
+    keyword \<+\> red
 
 #   build types with '\s & \n' hack to remove too stupid highlighting
     keyword whole Configure\s white
     keyword whole Configure\n white
-    keyword whole Custom\s    white
-    keyword whole Custom\n    white
-    keyword whole Make\s      white
-    keyword whole Make\n      white
-    keyword whole Simple\n    white
-    keyword whole Simple\s    white
+    keyword whole Custom\s white
+    keyword whole Custom\n white
+    keyword whole Make\s white
+    keyword whole Make\n white
+    keyword whole Simple\n white
+    keyword whole Simple\s white
 
 #   licenses
     keyword whole AllRightsReserved white
-    keyword whole OtherLicense      white
-    keyword whole PublicDomain      white
-    keyword whole LGPL              white
-    keyword whole GPL               white
-    keyword whole LGPL2             white
-    keyword whole GPL2              white
-    keyword whole LGPL3             white
-    keyword whole GPL3              white
-    keyword whole BSD               white
-    keyword whole BSD3              white
-    keyword whole BSD4              white
-    keyword whole MIT               white
+    keyword whole OtherLicense white
+    keyword whole PublicDomain white
+    keyword whole LGPL white
+    keyword whole GPL white
+    keyword whole LGPL2 white
+    keyword whole GPL2 white
+    keyword whole LGPL3 white
+    keyword whole GPL3 white
+    keyword whole BSD white
+    keyword whole BSD3 white
+    keyword whole BSD4 white
+    keyword whole MIT white
 
 #   compillers
-    keyword whole GHC            white
-    keyword whole NHC            white
-    keyword whole JHC            white
-    keyword whole HBC            white
-    keyword whole Helium         white
-    keyword whole Hugs           white
+    keyword whole GHC white
+    keyword whole NHC white
+    keyword whole JHC white
+    keyword whole HBC white
+    keyword whole Helium white
+    keyword whole Hugs white
 
 #   special keywords
-    keyword whole True  white
+    keyword whole True white
     keyword whole False white
     keyword whole if white
     keyword whole else white
@@ -205,14 +205,14 @@ context default
 #    keyword whole \{ABCDEFGHIJKLMNOPQRSTUVWXYZ\}\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] white
 
 #digits
-    keyword whole 0\{xX\}\{0123456789abcdefABCDEF\}\[0123456789abcdefABCDEF\]       brightgreen
-    keyword whole \{0123456789\}\[0123456789\]      brightgreen
-    keyword whole \[0123456789\]\.\{0123456789\}\[0123456789\]      brightgreen
-    keyword whole \{0123456789\}\[0123456789\]\.\[0123456789\]      brightgreen
-    keyword whole \{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\]    brightgreen
-    keyword whole \{0123456789\}\[0123456789\]\{eE\}\{\-\+\}\{0123456789\}\[0123456789\]    brightgreen
-    keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\]      brightgreen
-    keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{\-\+\}\{0123456789\}\[0123456789\]      brightgreen
+    keyword whole 0\{xX\}\{0123456789abcdefABCDEF\}\[0123456789abcdefABCDEF\] brightgreen
+    keyword whole \{0123456789\}\[0123456789\] brightgreen
+    keyword whole \[0123456789\]\.\{0123456789\}\[0123456789\] brightgreen
+    keyword whole \{0123456789\}\[0123456789\]\.\[0123456789\] brightgreen
+    keyword whole \{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] brightgreen
+    keyword whole \{0123456789\}\[0123456789\]\{eE\}\{\-\+\}\{0123456789\}\[0123456789\] brightgreen
+    keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\] brightgreen
+    keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{\-\+\}\{0123456789\}\[0123456789\] brightgreen
 
 
 # some punctuation characters

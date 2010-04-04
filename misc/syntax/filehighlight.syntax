@@ -41,25 +41,25 @@ context regexp= \n lightgray
     keyword whole regexp yellow
 
 # regexp patterns
-    keyword \\\/  brightcyan
-    keyword \\\\  brightcyan
-    keyword \\B  brightcyan
-    keyword \\b  brightcyan
-    keyword \\D  brightcyan
-    keyword \\d  brightcyan
-    keyword \\S  brightcyan
-    keyword \\s  brightcyan
-    keyword \\W  brightcyan
-    keyword \\w  brightcyan
-    keyword \\A  brightcyan
-    keyword \\Z  brightcyan
+    keyword \\\/ brightcyan
+    keyword \\\\ brightcyan
+    keyword \\B brightcyan
+    keyword \\b brightcyan
+    keyword \\D brightcyan
+    keyword \\d brightcyan
+    keyword \\S brightcyan
+    keyword \\s brightcyan
+    keyword \\W brightcyan
+    keyword \\w brightcyan
+    keyword \\A brightcyan
+    keyword \\Z brightcyan
 
-    keyword \\(  brightcyan
-    keyword \\)  brightcyan
-    keyword \\[  brightcyan
-    keyword \\]  brightcyan
-    keyword \\{  brightcyan
-    keyword \\}  brightcyan
+    keyword \\( brightcyan
+    keyword \\) brightcyan
+    keyword \\[ brightcyan
+    keyword \\] brightcyan
+    keyword \\{ brightcyan
+    keyword \\} brightcyan
     keyword \\$ brightcyan
     keyword \\\+ brightcyan
     keyword \\. brightcyan
@@ -88,4 +88,3 @@ context regexp= \n lightgray
     keyword \* yellow
     keyword ^ yellow
     keyword | yellow
-

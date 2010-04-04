@@ -272,4 +272,3 @@ context $ $ brightgreen
 context exclusive \\begin{equation} \\end{equation} brightgreen
 context exclusive \\begin{displaymath} \\end{displaymath} brightgreen
 context exclusive \\begin{eqnarray} \\end{eqnarray} brightgreen
-

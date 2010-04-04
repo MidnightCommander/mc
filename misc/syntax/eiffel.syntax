@@ -4,87 +4,87 @@
 
 context default yellow
 
-    keyword whole agent    white
-    keyword whole alias    white
-    keyword whole as    white
-    keyword whole check    white
-    keyword whole class    white
-    keyword whole create    white
-    keyword whole creation    white
-    keyword whole debug    white
-    keyword whole deferred    white
-    keyword whole do    white
-    keyword whole else    white
-    keyword whole elseif    white
-    keyword whole end    white
-    keyword whole ensure    white
-    keyword whole expanded    white
-    keyword whole export    white
-    keyword whole external    white
-    keyword whole feature    white
-    keyword whole from    white
-    keyword whole if    white
-    keyword whole is    white
-    keyword whole indexing    white
-    keyword whole inherit    white
-    keyword whole inspect    white
-    keyword whole invariant    white
-    keyword whole like    white
-    keyword whole local    white
-    keyword whole loop    white
-    keyword whole obsolete    white
-    keyword whole old    white
-    keyword whole once    white
-    keyword whole redefine    white
-    keyword whole reference    white
-    keyword whole rename    white
-    keyword whole require    white
-    keyword whole rescue    white
-    keyword whole retry    white
-    keyword whole select    white
-    keyword whole then    white
-    keyword whole undefine    white
-    keyword whole unique    white
-    keyword whole until    white
-    keyword whole variant    white
-    keyword whole when    white
+    keyword whole agent white
+    keyword whole alias white
+    keyword whole as white
+    keyword whole check white
+    keyword whole class white
+    keyword whole create white
+    keyword whole creation white
+    keyword whole debug white
+    keyword whole deferred white
+    keyword whole do white
+    keyword whole else white
+    keyword whole elseif white
+    keyword whole end white
+    keyword whole ensure white
+    keyword whole expanded white
+    keyword whole export white
+    keyword whole external white
+    keyword whole feature white
+    keyword whole from white
+    keyword whole if white
+    keyword whole is white
+    keyword whole indexing white
+    keyword whole inherit white
+    keyword whole inspect white
+    keyword whole invariant white
+    keyword whole like white
+    keyword whole local white
+    keyword whole loop white
+    keyword whole obsolete white
+    keyword whole old white
+    keyword whole once white
+    keyword whole redefine white
+    keyword whole reference white
+    keyword whole rename white
+    keyword whole require white
+    keyword whole rescue white
+    keyword whole retry white
+    keyword whole select white
+    keyword whole then white
+    keyword whole undefine white
+    keyword whole unique white
+    keyword whole until white
+    keyword whole variant white
+    keyword whole when white
 
-    keyword whole Current    brightmagenta
-    keyword whole Precursor    brightmagenta
-    keyword whole Result    brightmagenta
-    keyword whole Void    brightmagenta
+    keyword whole Current brightmagenta
+    keyword whole Precursor brightmagenta
+    keyword whole Result brightmagenta
+    keyword whole Void brightmagenta
 
 # prevents - keyword from interfering with comment
-    keyword --    lightgray
+    keyword -- lightgray
 
-    keyword :=    brightcyan
-    keyword ?=    brightcyan
-    keyword !    brightcyan
-    keyword :    brightcyan
-    keyword ;    brightcyan
-    keyword (    brightcyan
-    keyword )    brightcyan
-    keyword [    brightcyan
-    keyword ]    brightcyan
+    keyword := brightcyan
+    keyword ?= brightcyan
+    keyword ! brightcyan
+    keyword : brightcyan
+    keyword ; brightcyan
+    keyword ( brightcyan
+    keyword ) brightcyan
+    keyword [ brightcyan
+    keyword ] brightcyan
 
-    keyword {*}    brightred
+    keyword {*} brightred
 
-    keyword \+    cyan
-    keyword -    cyan
-    keyword \*    cyan
-    keyword /    cyan
-    keyword >    cyan
-    keyword <    cyan
-    keyword =    cyan
-    keyword ^    cyan
-    keyword \\    cyan
-    keyword @    cyan
-    keyword |    cyan
-    keyword whole and    cyan
-    keyword whole implies    cyan
-    keyword whole not    cyan
-    keyword whole xor    cyan
-    keyword whole or    cyan
+    keyword \+ cyan
+    keyword - cyan
+    keyword \* cyan
+    keyword / cyan
+    keyword > cyan
+    keyword < cyan
+    keyword = cyan
+    keyword ^ cyan
+    keyword \\ cyan
+    keyword @ cyan
+    keyword | cyan
+    keyword whole and cyan
+    keyword whole implies cyan
+    keyword whole not cyan
+    keyword whole xor cyan
+    keyword whole or cyan
 
 # Uncomment this to highlight tabs and trailing spaces
 #    keyword \t yellow red
@@ -92,23 +92,23 @@ context default yellow
 
 # Comments
 context exclusive -- \n    lightgray
-        keyword `*' brown
+    keyword `*' brown
 
 # Strings and characters
 context " "    green
-    keyword %N    brightgreen
-    keyword %R    brightgreen
-    keyword %U    brightgreen
-    keyword %"    brightgreen
-    keyword %'    brightgreen
-    keyword %%    brightgreen
-    keyword %/\[0123456789\]/    brightgreen
+    keyword %N brightgreen
+    keyword %R brightgreen
+    keyword %U brightgreen
+    keyword %" brightgreen
+    keyword %' brightgreen
+    keyword %% brightgreen
+    keyword %/\[0123456789\]/ brightgreen
 
 context ' '    green
-    keyword %N    brightgreen
-    keyword %R    brightgreen
-    keyword %U    brightgreen
-    keyword %"    brightgreen
-    keyword %'    brightgreen
-    keyword %%    brightgreen
-    keyword %/\[0123456789\]/    brightgreen
+    keyword %N brightgreen
+    keyword %R brightgreen
+    keyword %U brightgreen
+    keyword %" brightgreen
+    keyword %' brightgreen
+    keyword %% brightgreen
+    keyword %/\[0123456789\]/ brightgreen
