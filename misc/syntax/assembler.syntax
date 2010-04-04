@@ -43,52 +43,8 @@ context default lightgray
     keyword whole DWORD white
     keyword whole QWORD white
     keyword whole TWORD white
-    keyword whole align white
-    keyword whole alignb white
-    keyword whole struc white
-    keyword whole endstruc white
-    keyword whole istruc white
-    keyword whole iend white
-    keyword whole at white
-    keyword whole strict white
-    keyword whole seg white
-    keyword whole wrt white
-    keyword whole nosplit white
-    keyword whole byte white
-    keyword whole word white
-    keyword whole dword white
-    keyword whole qword white
-    keyword whole tword white
 
 # Pseudo instructions
-    keyword whole Org white
-    keyword whole Equ white
-    keyword whole Db white
-    keyword whole Dw white
-    keyword whole Dd white
-    keyword whole Dq white
-    keyword whole Dt white
-    keyword whole Resb white
-    keyword whole Resw white
-    keyword whole Resd white
-    keyword whole Resq white
-    keyword whole Rest white
-    keyword whole Incbin white
-    keyword whole Times white
-    keyword whole org white
-    keyword whole equ white
-    keyword whole db white
-    keyword whole dw white
-    keyword whole dd white
-    keyword whole dq white
-    keyword whole dt white
-    keyword whole resb white
-    keyword whole resw white
-    keyword whole resd white
-    keyword whole resq white
-    keyword whole rest white
-    keyword whole incbin white
-    keyword whole times white
     keyword whole ORG white
     keyword whole EQU white
     keyword whole DB white
@@ -140,26 +96,6 @@ context default lightgray
     keyword whole %\+ brightred
 
 # Generic 16-bit registers set
-    keyword whole al brightmagenta
-    keyword whole bl brightmagenta
-    keyword whole cl brightmagenta
-    keyword whole dl brightmagenta
-    keyword whole ah brightmagenta
-    keyword whole bh brightmagenta
-    keyword whole ch brightmagenta
-    keyword whole dh brightmagenta
-    keyword whole ax brightmagenta
-    keyword whole bx brightmagenta
-    keyword whole cx brightmagenta
-    keyword whole dx brightmagenta
-    keyword whole si brightmagenta
-    keyword whole di brightmagenta
-    keyword whole bp brightmagenta
-    keyword whole sp brightmagenta
-    keyword whole es brightmagenta
-    keyword whole cs brightmagenta
-    keyword whole ds brightmagenta
-
     keyword whole %al brightmagenta
     keyword whole %bl brightmagenta
     keyword whole %cl brightmagenta
@@ -201,17 +137,6 @@ context default lightgray
     keyword whole DS brightmagenta
 
 # Generic 32-bit registers set
-    keyword whole eax brightmagenta
-    keyword whole ebx brightmagenta
-    keyword whole ecx brightmagenta
-    keyword whole edx brightmagenta
-    keyword whole esi brightmagenta
-    keyword whole edi brightmagenta
-    keyword whole ebp brightmagenta
-    keyword whole esp brightmagenta
-    keyword whole fs brightmagenta
-    keyword whole gs brightmagenta
-
     keyword whole %eax brightmagenta
     keyword whole %ebx brightmagenta
     keyword whole %ecx brightmagenta
@@ -234,40 +159,31 @@ context default lightgray
     keyword whole FS brightmagenta
     keyword whole GS brightmagenta
 
-    keyword whole cr0 magenta
-    keyword whole cr1 magenta
-    keyword whole cr2 magenta
-    keyword whole dr0 magenta
-    keyword whole dr1 magenta
-    keyword whole tr0 magenta
-    keyword whole tr1 magenta
-
     keyword whole CR0 magenta
     keyword whole CR1 magenta
     keyword whole CR2 magenta
+    keyword whole CR3 magenta
     keyword whole DR0 magenta
     keyword whole DR1 magenta
+    keyword whole DR3 magenta
+    keyword whole DR4 magenta
+    keyword whole DR5 magenta
+    keyword whole DR6 magenta
+    keyword whole DR7 magenta
     keyword whole TR0 magenta
     keyword whole TR1 magenta
+    keyword whole TR2 magenta
+    keyword whole TR3 magenta
+    keyword whole TR4 magenta
+    keyword whole TR5 magenta
+    keyword whole TR6 magenta
+    keyword whole TR7 magenta
+    keyword whole TR8 magenta
+    keyword whole TR9 magenta
+    keyword whole TR10 magenta
+    keyword whole TR11 magenta
 
 # Generic AMD64 registers set
-    keyword whole rax brightmagenta
-    keyword whole rbx brightmagenta
-    keyword whole rcx brightmagenta
-    keyword whole rdx brightmagenta
-    keyword whole rsi brightmagenta
-    keyword whole rdi brightmagenta
-    keyword whole rbp brightmagenta
-    keyword whole rsp brightmagenta
-    keyword whole r8 brightmagenta
-    keyword whole r9 brightmagenta
-    keyword whole r10 brightmagenta
-    keyword whole r11 brightmagenta
-    keyword whole r12 brightmagenta
-    keyword whole r13 brightmagenta
-    keyword whole r14 brightmagenta
-    keyword whole r15 brightmagenta
-
     keyword whole %rax brightmagenta
     keyword whole %rbx brightmagenta
     keyword whole %rcx brightmagenta
