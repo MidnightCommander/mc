@@ -222,7 +222,7 @@ static void update_mode (Dlg_head * h)
     tty_setcolor (COLOR_NORMAL);
     dlg_move (h, BY + 2, 9);
     tty_printf ("%12o", get_mode ());
-    send_message (h->current, WIDGET_FOCUS, 0);
+    send_message ((Widget *) h->current->data, WIDGET_FOCUS, 0);
 }
 
 static cb_ret_t
@@ -405,7 +405,7 @@ static cb_ret_t
 advanced_chown_callback (Dlg_head *h, Widget *sender,
 			    dlg_msg_t msg, int parm, void *data)
 {
-    int i = 0, f_pos = BUTTONS - h->current->dlg_id - single_set - 1;
+    int i = 0, f_pos = BUTTONS - dlg_get_current_widget_id (h) - single_set - 1;
 
     switch (msg) {
     case DLG_DRAW:
@@ -467,8 +467,8 @@ advanced_chown_callback (Dlg_head *h, Widget *sender,
 		    (x_toggle & (1 << parm)) ? '-' : '+';
 	    x_toggle ^= (1 << parm);
 	    update_mode (h);
-	    dlg_broadcast_msg (h, WIDGET_DRAW, 0);
-	    send_message (h->current, WIDGET_FOCUS, 0);
+	    dlg_broadcast_msg (h, WIDGET_DRAW, FALSE);
+	    send_message ((Widget *) h->current->data, WIDGET_FOCUS, 0);
 	    break;
 
 	case XCTRL ('x'):
@@ -484,8 +484,8 @@ advanced_chown_callback (Dlg_head *h, Widget *sender,
 		    (x_toggle & (1 << parm)) ? '-' : '+';
 	    x_toggle ^= (1 << parm);
 	    update_mode (h);
-	    dlg_broadcast_msg (h, WIDGET_DRAW, 0);
-	    send_message (h->current, WIDGET_FOCUS, 0);
+	    dlg_broadcast_msg (h, WIDGET_DRAW, FALSE);
+	    send_message ((Widget *) h->current->data, WIDGET_FOCUS, 0);
 	    break;
 
 	case 'x':

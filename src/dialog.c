@@ -60,7 +60,7 @@ Hook *idle_hook = NULL;
 /* left click outside of dialog closes it */
 int mouse_close_dialog = 0;
 
-static void dlg_broadcast_msg_to (Dlg_head * h, widget_msg_t message, int reverse, int flags);
+static void dlg_broadcast_msg_to (Dlg_head * h, widget_msg_t message, gboolean reverse, int flags);
 
 /* draw box in window */
 void
@@ -142,8 +142,11 @@ dlg_set_position (Dlg_head * h, int y1, int x1, int y2, int x2)
     h->cols = x2 - x1;
 
     /* dialog is empty */
-    if (h->current == NULL)
+    if (h->widgets == NULL)
         return;
+
+    if (h->current == NULL)
+        h->current = h->widgets;
 
     /* values by which controls should be moved */
     shift_x = h->x - ox;
@@ -153,9 +156,9 @@ dlg_set_position (Dlg_head * h, int y1, int x1, int y2, int x2)
 
     if ((shift_x != 0) || (shift_y != 0) || (scale_x != 0) || (scale_y != 0))
     {
-        Widget *c = h->current;
+        GList *w;
 
-        do
+        for (w = h->widgets; w != NULL; w = g_list_next (w))
         {
             /* there are, mainly, 2 generally possible
                situations:
@@ -166,6 +169,7 @@ dlg_set_position (Dlg_head * h, int y1, int x1, int y2, int x2)
                2. control sticks to two sides of
                one direction - it should be sized */
 
+            Widget *c = (Widget *) w->data;
             int x = c->x;
             int y = c->y;
             int cols = c->cols;
@@ -192,10 +196,7 @@ dlg_set_position (Dlg_head * h, int y1, int x1, int y2, int x2)
                 y += shift_y + scale_y;
 
             widget_set_size (c, y, x, lines, cols);
-
-            c = c->next;
         }
-        while (h->current != c);
     }
 }
 
@@ -237,7 +238,7 @@ default_dlg_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, vo
         return MSG_NOT_HANDLED;
 
     case DLG_IDLE:
-        dlg_broadcast_msg_to (h, WIDGET_IDLE, 0, W_WANT_IDLE);
+        dlg_broadcast_msg_to (h, WIDGET_IDLE, FALSE, W_WANT_IDLE);
         return MSG_HANDLED;
 
     case DLG_RESIZE:
@@ -335,30 +336,21 @@ add_widget_autopos (Dlg_head * h, void *w, widget_pos_flags_t pos_flags)
     Widget *widget = (Widget *) w;
 
     /* Don't accept 0 widgets */
-    if (widget == NULL)
+    if (w == NULL)
         abort ();
 
     widget->x += h->x;
     widget->y += h->y;
     widget->parent = h;
-    widget->dlg_id = h->count++;
     widget->pos_flags = pos_flags;
+    widget->dlg_id = g_list_length (h->widgets);
 
-    if (h->current)
-    {
-        widget->next = h->current;
-        widget->prev = h->current->prev;
-        h->current->prev->next = widget;
-        h->current->prev = widget;
-    }
+    if ((h->flags & DLG_REVERSE) != 0)
+        h->widgets = g_list_prepend (h->widgets, widget);
     else
-    {
-        widget->prev = widget;
-        widget->next = widget;
-    }
+        h->widgets = g_list_append (h->widgets, widget);
 
-    if ((h->flags & DLG_REVERSE) || !h->current)
-        h->current = widget;
+    h->current = h->widgets;
 
     return widget->dlg_id;
 }
@@ -398,34 +390,61 @@ do_refresh (void)
  * to all widgets.
  */
 static void
-dlg_broadcast_msg_to (Dlg_head * h, widget_msg_t message, int reverse, int flags)
+dlg_broadcast_msg_to (Dlg_head * h, widget_msg_t message, gboolean reverse, int flags)
 {
-    Widget *p, *first, *wi;
+    GList *p, *first;
 
-    if (!h->current)
+    if (h->widgets == NULL)
         return;
 
+    if (h->current == NULL)
+        h->current = h->widgets;
+
     if (reverse)
-        first = p = h->current->prev;
+    {
+        p = g_list_previous (h->current);
+
+        if (p == NULL)
+            p = g_list_last (h->widgets);
+    }
     else
-        first = p = h->current->next;
+    {
+        p = g_list_next (h->current);
+
+        if (p == NULL)
+            p = h->widgets;
+    }
+
+    first = p;
 
     do
     {
-        wi = p;
+        Widget *w = (Widget *) p->data;
+
         if (reverse)
-            p = p->prev;
+        {
+            p = g_list_previous (p);
+
+            if (p == NULL)
+                p = g_list_last (h->widgets);
+        }
         else
-            p = p->next;
-        if (flags == 0 || (flags & wi->options))
-            send_message (wi, message, 0);
+        {
+            p = g_list_next (p);
+
+            if (p == NULL)
+                p = h->widgets;
+        }
+
+        if ((flags == 0) || ((flags & w->options) != 0))
+            send_message (w, message, 0);
     }
     while (first != p);
 }
 
 /* broadcast a message to all the widgets in a dialog */
 void
-dlg_broadcast_msg (Dlg_head * h, widget_msg_t message, int reverse)
+dlg_broadcast_msg (Dlg_head * h, widget_msg_t message, gboolean reverse)
 {
     dlg_broadcast_msg_to (h, message, reverse, 0);
 }
@@ -433,9 +452,10 @@ dlg_broadcast_msg (Dlg_head * h, widget_msg_t message, int reverse)
 int
 dlg_focus (Dlg_head * h)
 {
-    if ((h->current != NULL) && (send_message (h->current, WIDGET_FOCUS, 0) == MSG_HANDLED))
+    if ((h->current != NULL)
+        && (send_message ((Widget *) h->current->data, WIDGET_FOCUS, 0) == MSG_HANDLED))
     {
-        h->callback (h, h->current, DLG_FOCUS, 0, NULL);
+        h->callback (h, (Widget *) h->current->data, DLG_FOCUS, 0, NULL);
         return 1;
     }
     return 0;
@@ -444,9 +464,10 @@ dlg_focus (Dlg_head * h)
 static int
 dlg_unfocus (Dlg_head * h)
 {
-    if ((h->current != NULL) && (send_message (h->current, WIDGET_UNFOCUS, 0) == MSG_HANDLED))
+    if ((h->current != NULL)
+        && (send_message ((Widget *) h->current->data, WIDGET_UNFOCUS, 0) == MSG_HANDLED))
     {
-        h->callback (h, h->current, DLG_UNFOCUS, 0, NULL);
+        h->callback (h, (Widget *) h->current->data, DLG_UNFOCUS, 0, NULL);
         return 1;
     }
     return 0;
@@ -460,53 +481,39 @@ dlg_overlap (Widget * a, Widget * b)
              || (a->x >= b->x + b->cols) || (b->y >= a->y + a->lines) || (a->y >= b->y + b->lines));
 }
 
+static int
+dlg_find_widget_callback (const void *a, const void *b)
+{
+    const Widget *w = (const Widget *) a;
+    callback_fn f = (callback_fn) b;
+
+    return (w->callback == f) ? 0 : 1;
+}
+
 /* Find the widget with the given callback in the dialog h */
 Widget *
 find_widget_type (const Dlg_head * h, callback_fn callback)
 {
-    Widget *w = NULL;
+    GList *w;
 
-    if ((h != NULL) && (h->current != NULL))
-    {
-        int i;
-        Widget *item;
+    w = g_list_find_custom (h->widgets, callback, dlg_find_widget_callback);
 
-        for (i = 0, item = h->current; i < h->count; i++, item = item->next)
-        {
-            if (item->callback == callback)
-            {
-                w = item;
-                break;
-            }
-        }
-    }
-
-    return w;
+    return (w == NULL) ? NULL : (Widget *) w->data;
 }
 
 /* Find the widget with the given dialog id in the dialog h and select it */
 void
-dlg_select_by_id (const Dlg_head * h, int id)
+dlg_select_by_id (const Dlg_head * h, unsigned int id)
 {
-    Widget *w = h->current;
-    Widget *w_found = NULL;
-
-    if (h->current == NULL)
-        return;
-
-    do
+    if (h->widgets != NULL)
     {
-        if (w->dlg_id == id)
-        {
-            w_found = w;
-            break;
-        }
-        w = w->next;
-    }
-    while (w != h->current);
+        Widget *w_found;
 
-    if (w_found != NULL)
-        dlg_select_widget (w_found);
+        w_found = (Widget *) g_list_nth_data (h->widgets, id);
+
+        if (w_found != NULL)
+            dlg_select_widget (w_found);
+    }
 }
 
 
@@ -523,14 +530,15 @@ typedef enum
  * Otherwise go to the previous widget.
  */
 static void
-do_select_widget (Dlg_head * h, Widget * w, select_dir_t dir)
+do_select_widget (Dlg_head * h, GList * w, select_dir_t dir)
 {
-    Widget *w0 = h->current;
+    Widget *w0 = (Widget *) h->current->data;
 
     if (!dlg_unfocus (h))
         return;
 
     h->current = w;
+
     do
     {
         if (dlg_focus (h))
@@ -539,23 +547,27 @@ do_select_widget (Dlg_head * h, Widget * w, select_dir_t dir)
         switch (dir)
         {
         case SELECT_NEXT:
-            h->current = h->current->next;
+            h->current = g_list_next (h->current);
+            if (h->current == NULL)
+                h->current = h->widgets;
             break;
         case SELECT_PREV:
-            h->current = h->current->prev;
+            h->current = g_list_previous (h->current);
+            if (h->current == NULL)
+                h->current = g_list_last (h->widgets);
             break;
         case SELECT_EXACT:
-            h->current = w0;
+            h->current = g_list_find (h->widgets, w0);
             dlg_focus (h);
             return;
         }
     }
     while (h->current != w);
 
-    if (dlg_overlap (w0, h->current))
+    if (dlg_overlap (w0, (Widget *) h->current->data))
     {
-        send_message (h->current, WIDGET_DRAW, 0);
-        send_message (h->current, WIDGET_FOCUS, 0);
+        send_message ((Widget *) h->current->data, WIDGET_DRAW, 0);
+        send_message ((Widget *) h->current->data, WIDGET_FOCUS, 0);
     }
 }
 
@@ -565,39 +577,67 @@ do_select_widget (Dlg_head * h, Widget * w, select_dir_t dir)
 void
 dlg_select_widget (void *w)
 {
-    do_select_widget (((Widget *) w)->parent, w, SELECT_NEXT);
+    const Widget *widget = (Widget *) w;
+    Dlg_head *h = widget->parent;
+
+    do_select_widget (h, g_list_find (h->widgets, widget), SELECT_NEXT);
 }
 
 /* Try to select previous widget in the tab order */
 void
 dlg_one_up (Dlg_head * h)
 {
-    if (h->current)
-        do_select_widget (h, h->current->prev, SELECT_PREV);
+    if (h->widgets != NULL)
+    {
+        GList *prev;
+
+        prev = g_list_previous (h->current);
+        if (prev == NULL)
+            prev = g_list_last (h->widgets);
+
+        do_select_widget (h, prev, SELECT_PREV);
+    }
 }
 
 /* Try to select next widget in the tab order */
 void
 dlg_one_down (Dlg_head * h)
 {
-    if (h->current)
-        do_select_widget (h, h->current->next, SELECT_NEXT);
+    if (h->widgets != NULL)
+    {
+        GList *next;
+
+        next = g_list_next (h->current);
+        if (next == NULL)
+            next = h->widgets;
+        do_select_widget (h, next, SELECT_NEXT);
+    }
 }
 
 void
 update_cursor (Dlg_head * h)
 {
-    Widget *p = h->current;
+    GList *p = h->current;
 
     if (p != NULL)
     {
-        if (p->options & W_WANT_CURSOR)
-            send_message (p, WIDGET_CURSOR, 0);
+        if (((Widget *) (p->data))->options & W_WANT_CURSOR)
+            send_message ((Widget *) p->data, WIDGET_CURSOR, 0);
         else
-            while ((p = p->next) != h->current)
-                if (p->options & W_WANT_CURSOR)
-                    if (send_message (p, WIDGET_CURSOR, 0) == MSG_HANDLED)
+            do
+            {
+                p = g_list_next (p);
+                if (p == NULL)
+                    p = h->widgets;
+
+                if (p == h->current)
+                    break;
+
+                if (((Widget *) (p->data))->options & W_WANT_CURSOR)
+                    if (send_message ((Widget *) p->data, WIDGET_CURSOR, 0) == MSG_HANDLED)
                         break;
+            }
+            while (TRUE);
     }
 }
 
@@ -608,7 +648,7 @@ void
 dlg_redraw (Dlg_head * h)
 {
     h->callback (h, NULL, DLG_DRAW, 0, NULL);
-    dlg_broadcast_msg (h, WIDGET_DRAW, 1);
+    dlg_broadcast_msg (h, WIDGET_DRAW, TRUE);
     update_cursor (h);
 }
 
@@ -683,8 +723,8 @@ dlg_handle_key (Dlg_head * h, int d_key)
 static int
 dlg_mouse_event (Dlg_head * h, Gpm_Event * event)
 {
-    Widget *item;
-    Widget *starting_widget = h->current;
+    GList *item;
+    GList *starting_widget = h->current;
     Gpm_Event new_event;
     int x = event->x;
     int y = event->y;
@@ -703,8 +743,10 @@ dlg_mouse_event (Dlg_head * h, Gpm_Event * event)
     {
         Widget *widget;
 
-        widget = item;
-        item = item->next;
+        widget = (Widget *) item->data;
+        item = g_list_next (item);
+        if (item == NULL)
+            item = h->widgets;
 
         if ((x > widget->x) && (x <= widget->x + widget->cols)
             && (y > widget->y) && (y <= widget->y + widget->lines))
@@ -725,19 +767,22 @@ dlg_mouse_event (Dlg_head * h, Gpm_Event * event)
 static cb_ret_t
 dlg_try_hotkey (Dlg_head * h, int d_key)
 {
-    Widget *hot_cur;
+    GList *hot_cur;
     cb_ret_t handled;
     int c;
 
-    if (h->current == NULL)
+    if (h->widgets == NULL)
         return MSG_NOT_HANDLED;
+
+    if (h->current == NULL)
+        h->current = h->widgets;
 
     /*
      * Explanation: we don't send letter hotkeys to other widgets if
      * the currently selected widget is an input line
      */
 
-    if (h->current->options & W_IS_INPUT)
+    if (((Widget *) h->current->data)->options & W_IS_INPUT)
     {
         /* skip ascii control characters, anything else can valid character in
          * some encoding */
@@ -751,23 +796,29 @@ dlg_try_hotkey (Dlg_head * h, int d_key)
         d_key = g_ascii_tolower (c);
 
     handled = MSG_NOT_HANDLED;
-    if (h->current->options & W_WANT_HOTKEY)
-        handled = send_message (h->current, WIDGET_HOTKEY, d_key);
+    if (((Widget *) h->current->data)->options & W_WANT_HOTKEY)
+        handled = send_message ((Widget *) h->current->data, WIDGET_HOTKEY, d_key);
 
     /* If not used, send hotkey to other widgets */
     if (handled == MSG_HANDLED)
         return MSG_HANDLED;
 
-    hot_cur = h->current->next;
+    hot_cur = g_list_next (h->current);
+    if (hot_cur == NULL)
+        hot_cur = h->widgets;
 
     /* send it to all widgets */
     while (h->current != hot_cur && handled == MSG_NOT_HANDLED)
     {
-        if (hot_cur->options & W_WANT_HOTKEY)
-            handled = send_message (hot_cur, WIDGET_HOTKEY, d_key);
+        if (((Widget *) hot_cur->data)->options & W_WANT_HOTKEY)
+            handled = send_message ((Widget *) hot_cur->data, WIDGET_HOTKEY, d_key);
 
         if (handled == MSG_NOT_HANDLED)
-            hot_cur = hot_cur->next;
+        {
+            hot_cur = g_list_next (hot_cur);
+            if (hot_cur == NULL)
+                hot_cur = h->widgets;
+        }
     }
 
     if (handled == MSG_HANDLED)
@@ -781,8 +832,11 @@ dlg_key_event (Dlg_head * h, int d_key)
 {
     cb_ret_t handled;
 
-    if (h->current == NULL)
+    if (h->widgets == NULL)
         return;
+
+    if (h->current == NULL)
+        h->current = h->widgets;
 
     /* TAB used to cycle */
     if ((h->flags & DLG_WANT_TAB) == 0)
@@ -810,7 +864,7 @@ dlg_key_event (Dlg_head * h, int d_key)
         h->callback (h, NULL, DLG_HOTKEY_HANDLED, 0, NULL);
     else
         /* not used - then try widget_callback */
-        handled = send_message (h->current, WIDGET_KEY, d_key);
+        handled = send_message ((Widget *) h->current->data, WIDGET_KEY, d_key);
 
     /* not used- try to use the unhandled case */
     if (handled == MSG_NOT_HANDLED)
@@ -826,19 +880,22 @@ dlg_key_event (Dlg_head * h, int d_key)
 void
 init_dlg (Dlg_head * h)
 {
-
     /* add dialog to the stack */
     current_dlg = g_list_prepend (current_dlg, h);
 
     /* Initialize dialog manager and widgets */
     h->callback (h, NULL, DLG_INIT, 0, NULL);
-    dlg_broadcast_msg (h, WIDGET_INIT, 0);
+    dlg_broadcast_msg (h, WIDGET_INIT, FALSE);
 
     dlg_redraw (h);
 
     /* Select the first widget that takes focus */
     while (h->current != NULL && !dlg_focus (h))
-        h->current = h->current->next;
+    {
+        h->current = g_list_next (h->current);
+        if (h->current == NULL)
+            h->current = h->widgets;
+    }
 
     h->ret_value = 0;
     h->state = DLG_ACTIVE;
@@ -904,7 +961,7 @@ void
 dlg_run_done (Dlg_head * h)
 {
     if (h->current != NULL)
-        h->callback (h, h->current, DLG_END, 0, NULL);
+        h->callback (h, (Widget *) h->current->data, DLG_END, 0, NULL);
 
     current_dlg = g_list_remove (current_dlg, h);
 }
@@ -926,17 +983,9 @@ run_dlg (Dlg_head * h)
 void
 destroy_dlg (Dlg_head * h)
 {
-    int i;
-    Widget *c;
-
-    dlg_broadcast_msg (h, WIDGET_DESTROY, 0);
-    c = h->current;
-    for (i = 0; i < h->count; i++)
-    {
-        c = c->next;
-        g_free (h->current);
-        h->current = c;
-    }
+    dlg_broadcast_msg (h, WIDGET_DESTROY, FALSE);
+    g_list_foreach (h->widgets, (GFunc) g_free, NULL);
+    g_list_free (h->widgets);
     g_free (h->color);
     g_free (h->title);
     g_free (h);
@@ -949,33 +998,24 @@ void
 dlg_replace_widget (Widget * old_w, Widget * new_w)
 {
     Dlg_head *h = old_w->parent;
-    int should_focus = 0;
+    gboolean should_focus = FALSE;
 
-    if (!h->current)
+    if (h->widgets == NULL)
         return;
 
-    if (old_w == h->current)
-        should_focus = 1;
+    if (h->current == NULL)
+        h->current = h->widgets;
+
+    if (old_w == h->current->data)
+        should_focus = TRUE;
 
     new_w->parent = h;
     new_w->dlg_id = old_w->dlg_id;
 
-    if (old_w == old_w->next)
-    {
-        /* just one widget */
-        new_w->prev = new_w;
-        new_w->next = new_w;
-    }
-    else
-    {
-        new_w->prev = old_w->prev;
-        new_w->next = old_w->next;
-        old_w->prev->next = new_w;
-        old_w->next->prev = new_w;
-    }
-
     if (should_focus)
-        h->current = new_w;
+        h->current->data = new_w;
+    else
+        g_list_find (h->widgets, old_w)->data = new_w;
 
     send_message (old_w, WIDGET_DESTROY, 0);
     send_message (new_w, WIDGET_INIT, 0);

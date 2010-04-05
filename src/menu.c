@@ -608,7 +608,7 @@ menubar_event (Gpm_Event * event, void *data)
 
     if (!menubar->is_dropped)
     {
-        menubar->previous_widget = menubar->widget.parent->current->dlg_id;
+        menubar->previous_widget = dlg_get_current_widget_id (menubar->widget.parent);
         menubar->is_active = TRUE;
         menubar->is_dropped = TRUE;
         was_active = FALSE;

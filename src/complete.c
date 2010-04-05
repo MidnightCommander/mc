@@ -1035,7 +1035,7 @@ query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
                         listbox_select_entry ((WListbox *) h->current, i);
                         end = str_get_prev_char (&(input->buffer[end])) - input->buffer;
                         handle_char (input, parm);
-                        send_message (h->current, WIDGET_DRAW, 0);
+                        send_message ((Widget *) h->current->data, WIDGET_DRAW, 0);
                         break;
                     }
                 }
@@ -1127,7 +1127,7 @@ query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
                 if (need_redraw == 2)
                 {
                     insert_text (input, last_text, low);
-                    send_message (h->current, WIDGET_DRAW, 0);
+                    send_message ((Widget *) h->current->data, WIDGET_DRAW, 0);
                 }
                 else if (need_redraw == 1)
                 {

@@ -162,7 +162,7 @@ static cb_ret_t
 chmod_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     char buffer[BUF_TINY];
-    int id = h->current->dlg_id - BUTTONS + single_set * 2 - 1;
+    int id = dlg_get_current_widget_id (h) - BUTTONS + single_set * 2 - 1;
 
     switch (msg)
     {

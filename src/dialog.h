@@ -145,8 +145,8 @@ struct Dlg_head
     int mouse_status;           /* For the autorepeat status of the mouse */
 
     /* Internal variables */
-    int count;                  /* Number of widgets */
-    struct Widget *current;     /* Curently active widget */
+    GList *widgets;             /* widgets list */
+    GList *current;             /* Curently active widget */
     void *data;                 /* Data can be passed to dialog */
     dlg_cb_fn callback;
     dlg_shortcut_str get_shortcut;      /* Shortcut string */
@@ -189,9 +189,7 @@ struct Widget
     int cols, lines;
     widget_options_t options;
     widget_pos_flags_t pos_flags;       /* repositioning flags */
-    int dlg_id;                 /* Number of the widget, starting with 0 */
-    struct Widget *next;
-    struct Widget *prev;
+    unsigned int dlg_id;                /* Number of the widget, starting with 0 */
     callback_fn callback;
     mouse_h mouse;
     struct Dlg_head *parent;
@@ -231,7 +229,7 @@ void destroy_dlg (Dlg_head * h);
 
 void widget_set_size (Widget * widget, int y, int x, int lines, int cols);
 
-void dlg_broadcast_msg (Dlg_head * h, widget_msg_t message, int reverse);
+void dlg_broadcast_msg (Dlg_head * h, widget_msg_t message, gboolean reverse);
 
 void init_widget (Widget * w, int y, int x, int lines, int cols,
                   callback_fn callback, mouse_h mouse_handler);
@@ -253,7 +251,7 @@ extern Hook *idle_hook;
 static inline cb_ret_t
 send_message (Widget * w, widget_msg_t msg, int parm)
 {
-    return (*(w->callback)) (w, msg, parm);
+    return w->callback (w, msg, parm);
 }
 
 /* Return 1 if the widget is active, 0 otherwise */
@@ -261,7 +259,13 @@ static inline int
 dlg_widget_active (void *w)
 {
     Widget *w1 = (Widget *) w;
-    return (w1->parent->current == w1);
+    return ((Widget *) w1->parent->current->data == w1);
+}
+
+static inline unsigned int
+dlg_get_current_widget_id (const Dlg_head * h)
+{
+    return ((Widget *) h->current->data)->dlg_id;
 }
 
 void dlg_replace_widget (Widget * old, Widget * new);
@@ -276,7 +280,7 @@ void dlg_one_up (Dlg_head * h);
 void dlg_one_down (Dlg_head * h);
 int dlg_focus (Dlg_head * h);
 Widget *find_widget_type (const Dlg_head * h, callback_fn callback);
-void dlg_select_by_id (const Dlg_head * h, int id);
+void dlg_select_by_id (const Dlg_head * h, unsigned int id);
 
 /* Redraw all dialogs */
 void do_refresh (void);

@@ -234,7 +234,7 @@ edit_drop_menu_cmd (WEdit * e, int which)
         if (which >= 0)
             menubar->selected = which;
 
-        menubar->previous_widget = e->widget.parent->current->dlg_id;
+        menubar->previous_widget = dlg_get_current_widget_id (e->widget.parent);
         dlg_select_widget (menubar);
     }
 }

@@ -826,7 +826,7 @@ menu_last_selected_cmd (void)
 {
     the_menubar->is_active = TRUE;
     the_menubar->is_dropped = (drop_menus != 0);
-    the_menubar->previous_widget = midnight_dlg->current->dlg_id;
+    the_menubar->previous_widget = dlg_get_current_widget_id (midnight_dlg);
     dlg_select_widget (the_menubar);
 }
 
