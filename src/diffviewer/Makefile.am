@@ -7,3 +7,5 @@ libdiffviewer_la_SOURCES = \
 libdiffviewer_la_CFLAGS = -I$(top_srcdir) \
 	$(GLIB_CFLAGS) $(PCRE_CFLAGS) \
 	-DDATADIR=\""$(pkgdatadir)/"\" -DLOCALEDIR=\""$(localedir)"\"
+
+libdiffviewer_la_LIBADD = ../../lib/libmc.la
