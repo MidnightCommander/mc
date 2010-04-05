@@ -79,7 +79,7 @@ init_widget (Widget * w, int y, int x, int lines, int cols,
     w->lines = lines;
     w->callback = callback;
     w->mouse = mouse_handler;
-    w->parent = 0;
+    w->owner = NULL;
 
     /* Almost all widgets want to put the cursor in a suitable place */
     w->options = W_WANT_CURSOR;
@@ -341,9 +341,9 @@ add_widget_autopos (Dlg_head * h, void *w, widget_pos_flags_t pos_flags)
 
     widget->x += h->x;
     widget->y += h->y;
-    widget->parent = h;
+    widget->owner = h;
     widget->pos_flags = pos_flags;
-    widget->dlg_id = g_list_length (h->widgets);
+    widget->id = g_list_length (h->widgets);
 
     if ((h->flags & DLG_REVERSE) != 0)
         h->widgets = g_list_prepend (h->widgets, widget);
@@ -352,7 +352,7 @@ add_widget_autopos (Dlg_head * h, void *w, widget_pos_flags_t pos_flags)
 
     h->current = h->widgets;
 
-    return widget->dlg_id;
+    return widget->id;
 }
 
 /* wrapper to simply add lefttop positioned controls */
@@ -578,7 +578,7 @@ void
 dlg_select_widget (void *w)
 {
     const Widget *widget = (Widget *) w;
-    Dlg_head *h = widget->parent;
+    Dlg_head *h = widget->owner;
 
     do_select_widget (h, g_list_find (h->widgets, widget), SELECT_NEXT);
 }
@@ -997,7 +997,7 @@ destroy_dlg (Dlg_head * h)
 void
 dlg_replace_widget (Widget * old_w, Widget * new_w)
 {
-    Dlg_head *h = old_w->parent;
+    Dlg_head *h = old_w->owner;
     gboolean should_focus = FALSE;
 
     if (h->widgets == NULL)
@@ -1009,8 +1009,8 @@ dlg_replace_widget (Widget * old_w, Widget * new_w)
     if (old_w == h->current->data)
         should_focus = TRUE;
 
-    new_w->parent = h;
-    new_w->dlg_id = old_w->dlg_id;
+    new_w->owner = h;
+    new_w->id = old_w->id;
 
     if (should_focus)
         h->current->data = new_w;

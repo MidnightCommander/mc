@@ -199,7 +199,7 @@ update_path_name (void)
     const char *text = "";
     char *p;
     WListbox *list = hotlist_state.moving ? l_movelist : l_hotlist;
-    Dlg_head *dlg = list->widget.parent;
+    Dlg_head *dlg = list->widget.owner;
 
     if (list->count != 0)
     {
@@ -555,7 +555,7 @@ hotlist_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *
 static int
 l_call (WListbox * list)
 {
-    Dlg_head *dlg = list->widget.parent;
+    Dlg_head *dlg = list->widget.owner;
 
     if (list->count != 0)
     {

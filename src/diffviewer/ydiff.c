@@ -2805,7 +2805,7 @@ dview_goto_cmd (WDiff * dview, int ord)
 static void
 dview_labels (WDiff * dview)
 {
-    Dlg_head *h = dview->widget.parent;
+    Dlg_head *h = dview->widget.owner;
     WButtonBar *b = find_buttonbar (h);
 
     buttonbar_set_label (b, 1, Q_ ("ButtonBar|Help"), diff_map, (Widget *) dview);
@@ -3126,7 +3126,7 @@ static cb_ret_t
 dview_callback (Widget * w, widget_msg_t msg, int parm)
 {
     WDiff *dview = (WDiff *) w;
-    Dlg_head *h = dview->widget.parent;
+    Dlg_head *h = dview->widget.owner;
     cb_ret_t i;
 
     switch (msg)

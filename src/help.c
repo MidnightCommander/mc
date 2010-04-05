@@ -570,7 +570,7 @@ help_event (Gpm_Event * event, void *vp)
         if (history_ptr < 0)
             history_ptr = HISTORY_SIZE - 1;
 
-        help_callback (w->parent, NULL, DLG_DRAW, 0, NULL);
+        help_callback (w->owner, NULL, DLG_DRAW, 0, NULL);
         return 0;
     }
 
@@ -616,7 +616,7 @@ help_event (Gpm_Event * event, void *vp)
         move_forward (1);
 
     /* Show the new node */
-    help_callback (w->parent, NULL, DLG_DRAW, 0, NULL);
+    help_callback (w->owner, NULL, DLG_DRAW, 0, NULL);
 
     return 0;
 }

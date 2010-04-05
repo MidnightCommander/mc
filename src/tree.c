@@ -187,7 +187,7 @@ load_tree (WTree * tree)
 static void
 tree_show_mini_info (WTree * tree, int tree_lines, int tree_cols)
 {
-    Dlg_head *h = tree->widget.parent;
+    Dlg_head *h = tree->widget.owner;
     int line;
 
     /* Show mini info */
@@ -223,7 +223,7 @@ tree_show_mini_info (WTree * tree, int tree_lines, int tree_cols)
 static void
 show_tree (WTree * tree)
 {
-    Dlg_head *h = tree->widget.parent;
+    Dlg_head *h = tree->widget.owner;
     tree_entry *current;
     int i, j, topsublevel;
     int x = 0, y = 0;
@@ -908,7 +908,7 @@ static void
 tree_toggle_navig (WTree * tree)
 {
     tree_navigation_flag = !tree_navigation_flag;
-    buttonbar_set_label (find_buttonbar (tree->widget.parent), 4,
+    buttonbar_set_label (find_buttonbar (tree->widget.owner), 4,
                          tree_navigation_flag ? Q_ ("ButtonBar|Static")
                          : Q_ ("ButtonBar|Dynamc"), tree_map, (Widget *) tree);
 }
@@ -1059,7 +1059,7 @@ static cb_ret_t
 tree_callback (Widget * w, widget_msg_t msg, int parm)
 {
     WTree *tree = (WTree *) w;
-    Dlg_head *h = tree->widget.parent;
+    Dlg_head *h = tree->widget.owner;
     WButtonBar *b = find_buttonbar (h);
 
     switch (msg)

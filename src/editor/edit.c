@@ -3508,7 +3508,7 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         edit_get_match_keyword_cmd (edit);
         break;
     case CK_Quit:
-        dlg_stop (edit->widget.parent);
+        dlg_stop (edit->widget.owner);
         break;
     case CK_New:
         edit_new_cmd (edit);

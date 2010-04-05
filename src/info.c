@@ -64,7 +64,7 @@ info_box (struct WInfo *info)
     tty_set_normal_attrs ();
     tty_setcolor (NORMAL_COLOR);
     widget_erase (&info->widget);
-    draw_box (info->widget.parent, info->widget.y, info->widget.x,
+    draw_box (info->widget.owner, info->widget.y, info->widget.x,
               info->widget.lines, info->widget.cols, FALSE);
 
     widget_move (&info->widget, 0, (info->widget.cols - len - 2)/2);

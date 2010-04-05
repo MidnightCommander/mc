@@ -189,10 +189,10 @@ struct Widget
     int cols, lines;
     widget_options_t options;
     widget_pos_flags_t pos_flags;       /* repositioning flags */
-    unsigned int dlg_id;                /* Number of the widget, starting with 0 */
+    unsigned int id;                    /* Number of the widget, starting with 0 */
     callback_fn callback;
     mouse_h mouse;
-    struct Dlg_head *parent;
+    struct Dlg_head *owner;
 };
 
 /* draw box in window */
@@ -259,13 +259,13 @@ static inline int
 dlg_widget_active (void *w)
 {
     Widget *w1 = (Widget *) w;
-    return ((Widget *) w1->parent->current->data == w1);
+    return ((Widget *) w1->owner->current->data == w1);
 }
 
 static inline unsigned int
 dlg_get_current_widget_id (const Dlg_head * h)
 {
-    return ((Widget *) h->current->data)->dlg_id;
+    return ((Widget *) h->current->data)->id;
 }
 
 void dlg_replace_widget (Widget * old, Widget * new);

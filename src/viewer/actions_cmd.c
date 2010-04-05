@@ -522,7 +522,7 @@ mcview_callback (Widget * w, widget_msg_t msg, int parm)
 {
     mcview_t *view = (mcview_t *) w;
     cb_ret_t i;
-    Dlg_head *h = view->widget.parent;
+    Dlg_head *h = view->widget.owner;
 
     mcview_compute_areas (view);
     mcview_update_bytes_per_line (view);

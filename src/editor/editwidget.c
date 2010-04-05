@@ -90,7 +90,7 @@ edit_event (Gpm_Event * event, void *data)
     {
         WMenuBar *menubar;
 
-        menubar = find_menubar (edit->widget.parent);
+        menubar = find_menubar (edit->widget.owner);
 
         return menubar->widget.mouse (event, menubar);
     }

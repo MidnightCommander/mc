@@ -969,7 +969,7 @@ show_dir (WPanel * panel)
 {
     gchar *tmp;
     set_colors (panel);
-    draw_box (panel->widget.parent,
+    draw_box (panel->widget.owner,
               panel->widget.y, panel->widget.x, panel->widget.lines, panel->widget.cols, FALSE);
 
     if (show_mini_info)
@@ -3081,7 +3081,7 @@ panel_callback (Widget * w, widget_msg_t msg, int parm)
         paint_dir (panel);
         panel->dirty = 0;
 
-        bb = find_buttonbar (panel->widget.parent);
+        bb = find_buttonbar (panel->widget.owner);
         midnight_set_buttonbar (bb);
         buttonbar_redraw (bb);
         return MSG_HANDLED;

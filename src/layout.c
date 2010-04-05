@@ -819,7 +819,7 @@ print_vfs_message (const char *msg, ...)
     if (midnight_shutdown)
         return;
 
-    if (!message_visible || !the_hint || !the_hint->widget.parent)
+    if (!message_visible || !the_hint || !the_hint->widget.owner)
     {
         int col, row;
 

@@ -225,7 +225,7 @@ edit_drop_menu_cmd (WEdit * e, int which)
 {
     WMenuBar *menubar;
 
-    menubar = find_menubar (e->widget.parent);
+    menubar = find_menubar (e->widget.owner);
 
     if (!menubar->is_active)
     {
@@ -234,7 +234,7 @@ edit_drop_menu_cmd (WEdit * e, int which)
         if (which >= 0)
             menubar->selected = which;
 
-        menubar->previous_widget = dlg_get_current_widget_id (e->widget.parent);
+        menubar->previous_widget = dlg_get_current_widget_id (e->widget.owner);
         dlg_select_widget (menubar);
     }
 }

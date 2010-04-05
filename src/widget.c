@@ -66,7 +66,7 @@
 static void
 widget_selectcolor (Widget * w, gboolean focused, gboolean hotkey)
 {
-    Dlg_head *h = w->parent;
+    Dlg_head *h = w->owner;
 
     tty_setcolor (hotkey
                   ? (focused
@@ -173,7 +173,7 @@ button_callback (Widget * w, widget_msg_t msg, int parm)
     WButton *b = (WButton *) w;
     int stop = 0;
     int off = 0;
-    Dlg_head *h = b->widget.parent;
+    Dlg_head *h = b->widget.owner;
 
     switch (msg)
     {
@@ -298,7 +298,7 @@ button_event (Gpm_Event * event, void *data)
 
     if (event->type & (GPM_DOWN | GPM_UP))
     {
-        Dlg_head *h = b->widget.parent;
+        Dlg_head *h = b->widget.owner;
         dlg_select_widget (b);
         if (event->type & GPM_UP)
         {
@@ -366,7 +366,7 @@ button_set_text (WButton * b, const char *text)
     release_hotkey (b->text);
     b->text = parse_hotkey (text);
     b->widget.cols = button_get_len (b);
-    dlg_redraw (b->widget.parent);
+    dlg_redraw (b->widget.owner);
 }
 
 
@@ -378,7 +378,7 @@ radio_callback (Widget * w, widget_msg_t msg, int parm)
 {
     WRadio *r = (WRadio *) w;
     int i;
-    Dlg_head *h = r->widget.parent;
+    Dlg_head *h = r->widget.owner;
 
     switch (msg)
     {
@@ -472,7 +472,7 @@ radio_event (Gpm_Event * event, void *data)
 
     if (event->type & (GPM_DOWN | GPM_UP))
     {
-        Dlg_head *h = r->widget.parent;
+        Dlg_head *h = r->widget.owner;
 
         r->pos = event->y - 1;
         dlg_select_widget (r);
@@ -524,7 +524,7 @@ static cb_ret_t
 check_callback (Widget * w, widget_msg_t msg, int parm)
 {
     WCheck *c = (WCheck *) w;
-    Dlg_head *h = c->widget.parent;
+    Dlg_head *h = c->widget.owner;
 
     switch (msg)
     {
@@ -579,7 +579,7 @@ check_event (Gpm_Event * event, void *data)
 
     if (event->type & (GPM_DOWN | GPM_UP))
     {
-        Dlg_head *h = c->widget.parent;
+        Dlg_head *h = c->widget.owner;
 
         dlg_select_widget (c);
         if (event->type & GPM_UP)
@@ -726,7 +726,7 @@ static cb_ret_t
 label_callback (Widget * w, widget_msg_t msg, int parm)
 {
     WLabel *l = (WLabel *) w;
-    Dlg_head *h = l->widget.parent;
+    Dlg_head *h = l->widget.owner;
 
     switch (msg)
     {
@@ -806,7 +806,7 @@ label_set_text (WLabel * label, const char *text)
     else
         label->text = NULL;
 
-    if (label->widget.parent)
+    if (label->widget.owner)
         label_callback ((Widget *) label, WIDGET_DRAW, 0);
 
     if (newcols < label->widget.cols)
@@ -836,7 +836,7 @@ static cb_ret_t
 hline_callback (Widget * w, widget_msg_t msg, int parm)
 {
     WHLine *l = (WHLine *) w;
-    Dlg_head *h = l->widget.parent;
+    Dlg_head *h = l->widget.owner;
 
     switch (msg)
     {
@@ -844,15 +844,15 @@ hline_callback (Widget * w, widget_msg_t msg, int parm)
     case WIDGET_RESIZED:
         if (l->auto_adjust_cols)
         {
-            if (((w->parent->flags & DLG_COMPACT) != 0))
+            if (((w->owner->flags & DLG_COMPACT) != 0))
             {
-                w->x = w->parent->x;
-                w->cols = w->parent->cols;
+                w->x = w->owner->x;
+                w->cols = w->owner->cols;
             }
             else
             {
-                w->x = w->parent->x + 1;
-                w->cols = w->parent->cols - 2;
+                w->x = w->owner->x + 1;
+                w->cols = w->owner->cols - 2;
             }
         }
 
@@ -906,7 +906,7 @@ static cb_ret_t
 gauge_callback (Widget * w, widget_msg_t msg, int parm)
 {
     WGauge *g = (WGauge *) w;
-    Dlg_head *h = g->widget.parent;
+    Dlg_head *h = g->widget.owner;
 
     if (msg == WIDGET_INIT)
         return MSG_HANDLED;
@@ -1016,7 +1016,7 @@ gauge_new (int y, int x, int shown, int max, int current)
 #endif
 
 #define should_show_history_button(in) \
-(in->history && in->field_width > HISTORY_BUTTON_WIDTH * 2 + 1 && in->widget.parent)
+(in->history && in->field_width > HISTORY_BUTTON_WIDTH * 2 + 1 && in->widget.owner)
 
 static void
 draw_history_button (WInput * in)
@@ -1027,7 +1027,7 @@ draw_history_button (WInput * in)
 #ifdef LARGE_HISTORY_BUTTON
     {
         Dlg_head *h;
-        h = in->widget.parent;
+        h = in->widget.owner;
         tty_setcolor (NORMAL_COLOR);
         tty_print_string ("[ ]");
         /* Too distracting: tty_setcolor (MARKED_COLOR); */
@@ -1513,7 +1513,7 @@ input_destroy (WInput * in)
 
     if (in->history != NULL)
     {
-        if (!in->is_password && (((Widget *) in)->parent->ret_value != B_CANCEL))
+        if (!in->is_password && (((Widget *) in)->owner->ret_value != B_CANCEL))
             history_put (in->history_name, in->history);
 
         in->history = g_list_first (in->history);
@@ -2439,7 +2439,7 @@ listbox_drawscroll (WListbox * l)
 static void
 listbox_draw (WListbox * l, gboolean focused)
 {
-    const Dlg_head *h = l->widget.parent;
+    const Dlg_head *h = l->widget.owner;
     const int normalc = DLG_NORMALC (h);
     int selc = focused ? DLG_HOT_FOCUSC (h) : DLG_FOCUSC (h);
 
@@ -2739,7 +2739,7 @@ static cb_ret_t
 listbox_callback (Widget * w, widget_msg_t msg, int parm)
 {
     WListbox *l = (WListbox *) w;
-    Dlg_head *h = l->widget.parent;
+    Dlg_head *h = l->widget.owner;
     cb_ret_t ret_code;
 
     switch (msg)
@@ -2810,7 +2810,7 @@ listbox_event (Gpm_Event * event, void *data)
     WListbox *l = data;
     int i;
 
-    Dlg_head *h = l->widget.parent;
+    Dlg_head *h = l->widget.owner;
 
     /* Single click */
     if (event->type & GPM_DOWN)
@@ -3011,9 +3011,9 @@ buttonbar_call (WButtonBar * bb, int i)
     cb_ret_t ret = MSG_NOT_HANDLED;
 
     if ((bb != NULL) && (bb->labels[i].command != CK_Ignore_Key))
-        ret = bb->widget.parent->callback (bb->widget.parent,
-                                           (Widget *) bb, DLG_ACTION,
-                                           bb->labels[i].command, bb->labels[i].receiver);
+        ret = bb->widget.owner->callback (bb->widget.owner,
+                                          (Widget *) bb, DLG_ACTION,
+                                          bb->labels[i].command, bb->labels[i].receiver);
     return ret;
 }
 
@@ -3234,12 +3234,12 @@ groupbox_callback (Widget * w, widget_msg_t msg, int parm)
 
     case WIDGET_DRAW:
         tty_setcolor (COLOR_NORMAL);
-        draw_box (g->widget.parent, g->widget.y - g->widget.parent->y,
-                  g->widget.x - g->widget.parent->x, g->widget.lines, g->widget.cols, TRUE);
+        draw_box (g->widget.owner, g->widget.y - g->widget.owner->y,
+                  g->widget.x - g->widget.owner->x, g->widget.lines, g->widget.cols, TRUE);
 
         tty_setcolor (COLOR_HOT_NORMAL);
-        dlg_move (g->widget.parent, g->widget.y - g->widget.parent->y,
-                  g->widget.x - g->widget.parent->x + 1);
+        dlg_move (g->widget.owner, g->widget.y - g->widget.owner->y,
+                  g->widget.x - g->widget.owner->x + 1);
         tty_print_string (g->title);
         return MSG_HANDLED;
 

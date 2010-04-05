@@ -1784,7 +1784,7 @@ load_hint (int force)
 {
     char *hint;
 
-    if (!the_hint->widget.parent)
+    if (!the_hint->widget.owner)
         return;
 
     if (!message_visible)
