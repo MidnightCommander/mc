@@ -135,14 +135,6 @@ aux*)
     ;;
 esac
 
-dnl Extended Character Sets
-dnl
-AC_ARG_ENABLE([extcharset],
-	AC_HELP_STRING([--enable-extcharset], [Enable extended character sets]))
-if test x"$enable_extcharset" = x"yes"; then
-  AC_DEFINE([EXTCHARSET_ENABLED], 1, [Enable extended character sets?])
-fi
-
 AC_PROG_INSTALL
 AC_CHECK_HEADERS([unistd.h string.h memory.h limits.h malloc.h \
 	utime.h fcntl.h sys/statfs.h sys/vfs.h sys/time.h \

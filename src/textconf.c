@@ -30,7 +30,6 @@
 #include <sys/types.h>
 
 #include "lib/global.h"
-#include "ecs.h"
 #include "src/textconf.h"
 
 #ifdef ENABLE_VFS
@@ -144,7 +143,6 @@ show_version (void)
     TYPE_INFO(long);
     TYPE_INFO(void *);
     TYPE_INFO(off_t);
-    TYPE_INFO(ecs_char);
 #undef TYPE_INFO
     (void)printf("\n");
 }
