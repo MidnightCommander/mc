@@ -1308,7 +1308,7 @@ single_dirsize_cmd (void)
         total = 0.0;
 
         if (compute_dir_size (entry->fname, ui, compute_dir_size_update_ui,
-                              &marked, &total) == FILE_CONT)
+                              &marked, &total, TRUE) == FILE_CONT)
         {
             entry->st.st_size = (off_t) total;
             entry->f.dir_size_computed = 1;
@@ -1347,7 +1347,7 @@ dirsizes_cmd (void)
             total = 0.0l;
 
             if (compute_dir_size (panel->dir.list[i].fname,
-                                  ui, compute_dir_size_update_ui, &marked, &total) != FILE_CONT)
+                                  ui, compute_dir_size_update_ui, &marked, &total, TRUE) != FILE_CONT)
                 break;
 
             panel->dir.list[i].st.st_size = (off_t) total;
