@@ -2616,7 +2616,8 @@ edit_execute_cmd (WEdit *edit, unsigned long command, int char_for_insertion)
     /* An ordinary key press */
     if (char_for_insertion >= 0) {
 	if (edit->overwrite) {
-	    if (edit_get_byte (edit, edit->curs1) != '\n')
+	    /* remove char only one time, after input first byte, multibyte chars */
+	    if ((!utf8_display || edit->charpoint == 0) && edit_get_byte (edit, edit->curs1) != '\n')
 		edit_delete (edit, 0);
 	}
         if ( option_cursor_beyond_eol && edit->over_col > 0 )
