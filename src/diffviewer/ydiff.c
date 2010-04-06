@@ -636,6 +636,40 @@ dview_get_utf (char * str, int * char_width, gboolean * result)
     return ch;
 }
 
+static int
+dview_str_utf8_offset_to_pos (const char *text, size_t length)
+{
+    int result;
+    if (text == NULL || text[0] == '\0')
+        return length;
+    if (g_utf8_validate (text, -1, NULL))
+    {
+        result = g_utf8_offset_to_pointer (text, length) - text;
+    }
+    else
+    {
+        gunichar uni;
+        char *buffer = g_strdup (text);
+        while (buffer[0] != '\0')
+        {
+            uni = g_utf8_get_char_validated (buffer, -1);
+            if ((uni != (gunichar) (-1)) && (uni != (gunichar) (-2)))
+            {
+                buffer = g_utf8_next_char (buffer);
+            }
+            else
+            {
+                buffer[0] = '.';
+                buffer++;
+            }
+        }
+        result = g_utf8_offset_to_pointer (buffer, length) - buffer;
+        g_free (buffer);
+    }
+    return max (length, result);
+}
+
+
 /* --------------------------------------------------------------------------------------------- */
 /* diff parse *************************************************************** */
 
@@ -1408,6 +1442,8 @@ cvt_mget (const char *src, size_t srcsize, char *dst, int dstsize, int skip, int
                     utf_ch = dview_get_utf ((char *)src, &w, &res);
                     if (w > 1)
                         skip += w - 1;
+                    if (!g_unichar_isprint (utf_ch))
+                        utf_ch = '.';
                 }
                 else
                 {
@@ -1507,6 +1543,8 @@ cvt_mgeta (const char *src, size_t srcsize, char *dst, int dstsize, int skip, in
                     utf_ch = dview_get_utf ((char *) src, &w, &res);
                     if (w > 1)
                         skip += w - 1;
+                    if (!g_unichar_isprint (utf_ch))
+                        utf_ch = '.';
                 }
                 else
                 {
@@ -1960,7 +1998,6 @@ find_next_hunk (const GArray * a, size_t pos)
     {
         pos++;
     }
-
     return pos;
 }
 
@@ -2260,7 +2297,10 @@ dview_display_file (const WDiff * dview, int ord, int r, int c, int height, int 
                     if (dview->hdiff != NULL && g_ptr_array_index (dview->hdiff, i) != NULL)
                     {
                         char att[BUFSIZ];
-                        k = str_offset_to_pos (p->p, width);
+                        if (dview->utf8)
+                            k = dview_str_utf8_offset_to_pos (p->p, width);
+                        else
+                            k = width;
                         cvt_mgeta (p->p, p->u.len, buf, k, skip, tab_size, show_cr,
                                 g_ptr_array_index (dview->hdiff, i), ord, att);
                         tty_gotoyx (r + j, c);
@@ -2274,6 +2314,8 @@ dview_display_file (const WDiff * dview, int ord, int r, int c, int height, int 
                                 next_ch = dview_get_utf (buf + k, &w, &ch_res);
                                 if (w > 1)
                                     k += w - 1;
+                                if (!g_unichar_isprint (next_ch))
+                                    next_ch = '.';
                             }
                             else
                                 next_ch = dview_get_byte (buf + k, &ch_res);
@@ -2301,7 +2343,10 @@ dview_display_file (const WDiff * dview, int ord, int r, int c, int height, int 
                         tty_setcolor (DFF_CHH_COLOR);
                     }
                 }
-                k = str_offset_to_pos (p->p, width);
+                if (dview->utf8)
+                    k = dview_str_utf8_offset_to_pos (p->p, width);
+                else
+                    k = width;
                 cvt_mget (p->p, p->u.len, buf, k, skip, tab_size, show_cr);
             }
             else
@@ -2341,6 +2386,8 @@ dview_display_file (const WDiff * dview, int ord, int r, int c, int height, int 
                 next_ch = dview_get_utf (buf + k, &w, &ch_res);
                 if (w > 1)
                     k += w - 1;
+                if (!g_unichar_isprint (next_ch))
+                    next_ch = '.';
             }
             else
                 next_ch = dview_get_byte (buf + k, &ch_res);
