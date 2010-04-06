@@ -11,7 +11,7 @@
 #ifndef MC_TTY_H
 #define MC_TTY_H
 
-#include "lib/global.h"   /* include <glib.h> */
+#include "lib/global.h"         /* include <glib.h> */
 
 #ifdef HAVE_SLANG
 #   include "tty-slang.h"
@@ -51,9 +51,9 @@ extern int tty_lowlevel_getch (void);
 /* {{{ Output }}} */
 
 /*
-    The output functions do not check themselves for screen overflows,
-    so make sure that you never write more than what fits on the screen.
-    While SLang provides such a feature, ncurses does not.
+   The output functions do not check themselves for screen overflows,
+   so make sure that you never write more than what fits on the screen.
+   While SLang provides such a feature, ncurses does not.
  */
 
 extern int tty_reset_screen (void);
@@ -66,34 +66,47 @@ extern void tty_set_alt_charset (gboolean alt_charset);
 
 extern void tty_display_8bit (gboolean what);
 extern void tty_print_char (int c);
-extern void tty_print_alt_char (int c);
+extern void tty_print_alt_char (int c, gboolean single);
 extern void tty_print_anychar (int c);
 extern void tty_print_string (const char *s);
 extern void tty_printf (const char *s, ...);
 
-extern void tty_print_one_vline (void);
-extern void tty_print_one_hline (void);
+extern void tty_print_one_vline (gboolean single);
+extern void tty_print_one_hline (gboolean single);
 extern void tty_draw_hline (int y, int x, int ch, int len);
 extern void tty_draw_vline (int y, int x, int ch, int len);
-extern void tty_draw_box (int y, int x, int rows, int cols);
+extern void tty_draw_box (int y, int x, int rows, int cols, gboolean single);
 extern void tty_fill_region (int y, int x, int rows, int cols, unsigned char ch);
 
-extern int mc_tty_ugly_frm[];
+extern int mc_tty_frm[];
 
-typedef enum {
-    MC_TTY_FRM_thinvert,
-    MC_TTY_FRM_thinhoriz,
-    MC_TTY_FRM_vert,
-    MC_TTY_FRM_horiz,
-    MC_TTY_FRM_lefttop,
-    MC_TTY_FRM_righttop,
-    MC_TTY_FRM_leftbottom,
-    MC_TTY_FRM_rightbottom,
-    MC_TTY_FRM_centertop,
-    MC_TTY_FRM_centerbottom,
-    MC_TTY_FRM_leftmiddle,
-    MC_TTY_FRM_rightmiddle,
-    MC_TTY_FRM_centermiddle,
+typedef enum
+{
+    /* single lines */
+    MC_TTY_FRM_VERT,
+    MC_TTY_FRM_HORIZ,
+    MC_TTY_FRM_LEFTTOP,
+    MC_TTY_FRM_RIGHTTOP,
+    MC_TTY_FRM_LEFTBOTTOM,
+    MC_TTY_FRM_RIGHTBOTTOM,
+    MC_TTY_FRM_TOPMIDDLE,
+    MC_TTY_FRM_BOTTOMMIDDLE,
+    MC_TTY_FRM_LEFTMIDDLE,
+    MC_TTY_FRM_RIGHTMIDDLE,
+    MC_TTY_FRM_CROSS,
+
+    /* double lines */
+    MC_TTY_FRM_DVERT,
+    MC_TTY_FRM_DHORIZ,
+    MC_TTY_FRM_DLEFTTOP,
+    MC_TTY_FRM_DRIGHTTOP,
+    MC_TTY_FRM_DLEFTBOTTOM,
+    MC_TTY_FRM_DRIGHTBOTTOM,
+    MC_TTY_FRM_DTOPMIDDLE,
+    MC_TTY_FRM_DBOTTOMMIDDLE,
+    MC_TTY_FRM_DLEFTMIDDLE,
+    MC_TTY_FRM_DRIGHTMIDDLE,
+
     MC_TTY_FRM_MAX
 } mc_tty_frm_t;
 

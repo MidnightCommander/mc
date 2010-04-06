@@ -40,14 +40,14 @@
 #include <signal.h>
 
 #include "lib/global.h"
-#include "lib/strutil.h"  /* str_term_form */
+#include "lib/strutil.h"        /* str_term_form */
 
-#include "tty-internal.h" /* slow_tty */
+#include "tty-internal.h"       /* slow_tty */
 #include "tty.h"
 #include "color-slang.h"
 #include "color-internal.h"
-#include "mouse.h"        /* Gpm_Event is required in key.h */
-#include "key.h"  /* define_sequence */
+#include "mouse.h"              /* Gpm_Event is required in key.h */
+#include "key.h"                /* define_sequence */
 #include "win.h"
 
 
@@ -83,44 +83,47 @@ static gboolean no_slang_delay;
 /* This table describes which capabilities we want and which values we
  * assign to them.
  */
-static const struct {
+static const struct
+{
     int key_code;
     const char *key_name;
-} key_table[] = {
-    {
-    KEY_F (0), "k0"}, {
-    KEY_F (1), "k1"}, {
-    KEY_F (2), "k2"}, {
-    KEY_F (3), "k3"}, {
-    KEY_F (4), "k4"}, {
-    KEY_F (5), "k5"}, {
-    KEY_F (6), "k6"}, {
-    KEY_F (7), "k7"}, {
-    KEY_F (8), "k8"}, {
-    KEY_F (9), "k9"}, {
-    KEY_F (10), "k;"}, {
-    KEY_F (11), "F1"}, {
-    KEY_F (12), "F2"}, {
-    KEY_F (13), "F3"}, {
-    KEY_F (14), "F4"}, {
-    KEY_F (15), "F5"}, {
-    KEY_F (16), "F6"}, {
-    KEY_F (17), "F7"}, {
-    KEY_F (18), "F8"}, {
-    KEY_F (19), "F9"}, {
-    KEY_F (20), "FA"}, {
-    KEY_IC, "kI"}, {
-    KEY_NPAGE, "kN"}, {
-    KEY_PPAGE, "kP"}, {
-    KEY_LEFT, "kl"}, {
-    KEY_RIGHT, "kr"}, {
-    KEY_UP, "ku"}, {
-    KEY_DOWN, "kd"}, {
-    KEY_DC, "kD"}, {
-    KEY_BACKSPACE, "kb"}, {
-    KEY_HOME, "kh"}, {
-    KEY_END, "@7"}, {
-    0, NULL}
+} key_table[] =
+{
+    /* *INDENT-OFF* */
+    { KEY_F (0), "k0" },
+    { KEY_F (1), "k1" },
+    { KEY_F (2), "k2" },
+    { KEY_F (3), "k3" },
+    { KEY_F (4), "k4" },
+    { KEY_F (5), "k5" },
+    { KEY_F (6), "k6" },
+    { KEY_F (7), "k7" },
+    { KEY_F (8), "k8" },
+    { KEY_F (9), "k9" },
+    { KEY_F (10), "k;" },
+    { KEY_F (11), "F1" },
+    { KEY_F (12), "F2" },
+    { KEY_F (13), "F3" },
+    { KEY_F (14), "F4" },
+    { KEY_F (15), "F5" },
+    { KEY_F (16), "F6" },
+    { KEY_F (17), "F7" },
+    { KEY_F (18), "F8" },
+    { KEY_F (19), "F9" },
+    { KEY_F (20), "FA" },
+    { KEY_IC, "kI" },
+    { KEY_NPAGE, "kN" },
+    { KEY_PPAGE, "kP" },
+    { KEY_LEFT, "kl" },
+    { KEY_RIGHT, "kr" },
+    { KEY_UP, "ku" },
+    { KEY_DOWN, "kd" },
+    { KEY_DC, "kD" },
+    { KEY_BACKSPACE, "kb" },
+    { KEY_HOME, "kh" },
+    { KEY_END, "@7" },
+    { 0, NULL }
+    /* *INDENT-ON* */
 };
 
 /*** file scope functions **********************************************/
@@ -148,10 +151,12 @@ slang_reset_softkeys (void)
     static const char display[] = "                ";
     char tmp[BUF_SMALL];
 
-    for (key = 1; key < 9; key++) {
+    for (key = 1; key < 9; key++)
+    {
         g_snprintf (tmp, sizeof (tmp), "k%d", key);
         send = (char *) SLtt_tgetstr (tmp);
-        if (send != NULL) {
+        if (send != NULL)
+        {
             g_snprintf (tmp, sizeof (tmp), "\033&f%dk%dd%dL%s%s", key,
                         (int) (sizeof (display) - 1), (int) strlen (send), display, send);
             SLtt_write_string (tmp);
@@ -188,7 +193,8 @@ mc_tty_normalize_lines_char (const char *str)
     char *str2;
     int res;
 
-    struct mc_tty_lines_struct {
+    struct mc_tty_lines_struct
+    {
         const char *line;
         int line_code;
     } const lines_codes[] = {
@@ -210,7 +216,8 @@ mc_tty_normalize_lines_char (const char *str)
     if (!str)
         return (int) ' ';
 
-    for (res = 0; lines_codes[res].line; res++) {
+    for (res = 0; lines_codes[res].line; res++)
+    {
         if (strcmp (str, lines_codes[res].line) == 0)
             return lines_codes[res].line_code;
     }
@@ -242,7 +249,8 @@ tty_init (gboolean slow, gboolean ugly_lines)
      * small, large and negative screen dimensions.
      */
     if ((COLS < 10) || (LINES < 5)
-        || (COLS > SLTT_MAX_SCREEN_COLS) || (LINES > SLTT_MAX_SCREEN_ROWS)) {
+        || (COLS > SLTT_MAX_SCREEN_COLS) || (LINES > SLTT_MAX_SCREEN_ROWS))
+    {
         fprintf (stderr,
                  _("Screen size %dx%d is not supported.\n"
                    "Check the TERM environment variable.\n"), COLS, LINES);
@@ -263,7 +271,8 @@ tty_init (gboolean slow, gboolean ugly_lines)
     if (SLang_TT_Read_FD == fileno (stderr))
         SLang_TT_Read_FD = fileno (stdin);
 
-    if (tcgetattr (SLang_TT_Read_FD, &new_mode) == 0) {
+    if (tcgetattr (SLang_TT_Read_FD, &new_mode) == 0)
+    {
 #ifdef VDSUSP
         new_mode.c_cc[VDSUSP] = NULL_VALUE;     /* to ignore ^Y */
 #endif
@@ -302,7 +311,8 @@ tty_shutdown (void)
      * active when the program was started up 
      */
     op_cap = SLtt_tgetstr ((char *) "op");
-    if (op_cap != NULL) {
+    if (op_cap != NULL)
+    {
         fputs (op_cap, stdout);
         fflush (stdout);
     }
@@ -379,7 +389,8 @@ tty_lowlevel_getch (void)
         return -1;
 
     c = SLang_getkey ();
-    if (c == SLANG_GETKEY_ERROR) {
+    if (c == SLANG_GETKEY_ERROR)
+    {
         fprintf (stderr,
                  "SLang_getkey returned SLANG_GETKEY_ERROR\n"
                  "Assuming EOF on stdin and exiting\n");
@@ -420,12 +431,14 @@ void
 tty_draw_hline (int y, int x, int ch, int len)
 {
     if (ch == ACS_HLINE)
-        ch = mc_tty_ugly_frm[MC_TTY_FRM_thinhoriz];
+        ch = mc_tty_frm[MC_TTY_FRM_HORIZ];
 
-    if ((y < 0) || (x < 0)) {
+    if ((y < 0) || (x < 0))
+    {
         y = SLsmg_get_row ();
         x = SLsmg_get_column ();
-    } else
+    }
+    else
         SLsmg_gotorc (y, x);
 
     if (ch == 0)
@@ -445,12 +458,14 @@ void
 tty_draw_vline (int y, int x, int ch, int len)
 {
     if (ch == ACS_VLINE)
-        ch = mc_tty_ugly_frm[MC_TTY_FRM_thinvert];
+        ch = mc_tty_frm[MC_TTY_FRM_VERT];
 
-    if ((y < 0) || (x < 0)) {
+    if ((y < 0) || (x < 0))
+    {
         y = SLsmg_get_row ();
         x = SLsmg_get_column ();
-    } else
+    }
+    else
         SLsmg_gotorc (y, x);
 
     if (ch == 0)
@@ -458,10 +473,12 @@ tty_draw_vline (int y, int x, int ch, int len)
 
     if (ch == ACS_VLINE)
         SLsmg_draw_vline (len);
-    else {
+    else
+    {
         int pos = 0;
 
-        while (len-- != 0) {
+        while (len-- != 0)
+        {
             SLsmg_gotorc (y + pos, x);
             tty_print_char (ch);
             pos++;
@@ -496,38 +513,39 @@ tty_print_char (int c)
 }
 
 void
-tty_print_alt_char (int c)
+tty_print_alt_char (int c, gboolean single)
 {
 #define DRAW(x, y) (x == y) \
        ? SLsmg_draw_object (SLsmg_get_row(), SLsmg_get_column(), x) \
        : SLsmg_write_char ((unsigned int) y)
-    switch (c) {
+    switch (c)
+    {
     case ACS_VLINE:
-        DRAW (c, mc_tty_ugly_frm[MC_TTY_FRM_thinvert]);
+        DRAW (c, mc_tty_frm[single ? MC_TTY_FRM_VERT : MC_TTY_FRM_DVERT]);
         break;
     case ACS_HLINE:
-        DRAW (c, mc_tty_ugly_frm[MC_TTY_FRM_thinhoriz]);
+        DRAW (c, mc_tty_frm[single ? MC_TTY_FRM_HORIZ : MC_TTY_FRM_DHORIZ]);
         break;
     case ACS_LTEE:
-        DRAW (c, mc_tty_ugly_frm[MC_TTY_FRM_leftmiddle]);
+        DRAW (c, mc_tty_frm[single ? MC_TTY_FRM_LEFTMIDDLE : MC_TTY_FRM_DLEFTMIDDLE]);
         break;
     case ACS_RTEE:
-        DRAW (c, mc_tty_ugly_frm[MC_TTY_FRM_rightmiddle]);
+        DRAW (c, mc_tty_frm[single ? MC_TTY_FRM_RIGHTMIDDLE : MC_TTY_FRM_DRIGHTMIDDLE]);
         break;
     case ACS_ULCORNER:
-        DRAW (c, mc_tty_ugly_frm[MC_TTY_FRM_lefttop]);
+        DRAW (c, mc_tty_frm[single ? MC_TTY_FRM_LEFTTOP : MC_TTY_FRM_DLEFTTOP]);
         break;
     case ACS_LLCORNER:
-        DRAW (c, mc_tty_ugly_frm[MC_TTY_FRM_leftbottom]);
+        DRAW (c, mc_tty_frm[single ? MC_TTY_FRM_LEFTBOTTOM : MC_TTY_FRM_DLEFTBOTTOM]);
         break;
     case ACS_URCORNER:
-        DRAW (c, mc_tty_ugly_frm[MC_TTY_FRM_righttop]);
+        DRAW (c, mc_tty_frm[single ? MC_TTY_FRM_RIGHTTOP : MC_TTY_FRM_DRIGHTTOP]);
         break;
     case ACS_LRCORNER:
-        DRAW (c, mc_tty_ugly_frm[MC_TTY_FRM_rightbottom]);
+        DRAW (c, mc_tty_frm[single ? MC_TTY_FRM_RIGHTBOTTOM : MC_TTY_FRM_DRIGHTBOTTOM]);
         break;
     case ACS_PLUS:
-        DRAW (c, mc_tty_ugly_frm[MC_TTY_FRM_centermiddle]);
+        DRAW (c, mc_tty_frm[MC_TTY_FRM_CROSS]);
         break;
     default:
         SLsmg_write_char ((unsigned int) c);
@@ -540,16 +558,22 @@ tty_print_anychar (int c)
 {
     char str[6 + 1];
 
-    if (c > 255) {
+    if (c > 255)
+    {
         int res = g_unichar_to_utf8 (c, str);
-        if (res == 0) {
+        if (res == 0)
+        {
             str[0] = '.';
             str[1] = '\0';
-        } else {
+        }
+        else
+        {
             str[res] = '\0';
         }
         SLsmg_write_string ((char *) str_term_form (str));
-    } else {
+    }
+    else
+    {
         SLsmg_write_char ((SLwchar_Type) ((unsigned int) c));
     }
 }

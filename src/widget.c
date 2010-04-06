@@ -871,9 +871,9 @@ hline_callback (Widget * w, widget_msg_t msg, int parm)
         if (l->auto_adjust_cols)
         {
             widget_move (w, 0, 0);
-            tty_print_alt_char (ACS_LTEE);
+            tty_print_alt_char (ACS_LTEE, FALSE);
             widget_move (w, 0, w->cols - 1);
-            tty_print_alt_char (ACS_RTEE);
+            tty_print_alt_char (ACS_RTEE, FALSE);
         }
         return MSG_HANDLED;
 
@@ -2254,14 +2254,14 @@ listbox_drawscroll (WListbox * l)
     /* Are we at the top? */
     widget_move (&l->widget, 0, l->widget.cols);
     if (l->top == 0)
-        tty_print_one_vline ();
+        tty_print_one_vline (TRUE);
     else
         tty_print_char ('^');
 
     /* Are we at the bottom? */
     widget_move (&l->widget, max_line, l->widget.cols);
     if ((l->top + l->widget.lines == l->count) || (l->widget.lines >= l->count))
-        tty_print_one_vline ();
+        tty_print_one_vline (TRUE);
     else
         tty_print_char ('v');
 
@@ -2273,7 +2273,7 @@ listbox_drawscroll (WListbox * l)
     {
         widget_move (&l->widget, i, l->widget.cols);
         if (i != line)
-            tty_print_one_vline ();
+            tty_print_one_vline (TRUE);
         else
             tty_print_char ('*');
     }
@@ -3022,7 +3022,7 @@ groupbox_callback (Widget * w, widget_msg_t msg, int parm)
     case WIDGET_DRAW:
         tty_setcolor (COLOR_NORMAL);
         draw_box (g->widget.parent, g->widget.y - g->widget.parent->y,
-                  g->widget.x - g->widget.parent->x, g->widget.lines, g->widget.cols);
+                  g->widget.x - g->widget.parent->x, g->widget.lines, g->widget.cols, TRUE);
 
         tty_setcolor (COLOR_HOT_NORMAL);
         dlg_move (g->widget.parent, g->widget.y - g->widget.parent->y,

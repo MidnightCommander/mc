@@ -54,7 +54,7 @@ gboolean slow_tty = FALSE;
 /* If true use +, -, | for line drawing */
 gboolean ugly_line_drawing = FALSE;
 
-int mc_tty_ugly_frm[MC_TTY_FRM_MAX];
+int mc_tty_frm[MC_TTY_FRM_MAX];
 
 /*** file scope macro definitions **************************************/
 
@@ -126,32 +126,32 @@ tty_got_interrupt (void)
 }
 
 void
-tty_print_one_hline (void)
+tty_print_one_hline (gboolean single)
 {
-    tty_print_alt_char (mc_tty_ugly_frm[MC_TTY_FRM_thinhoriz]);
+    tty_print_alt_char (ACS_HLINE, single);
 }
 
 void
-tty_print_one_vline (void)
+tty_print_one_vline (gboolean single)
 {
-    tty_print_alt_char (mc_tty_ugly_frm[MC_TTY_FRM_thinvert]);
+    tty_print_alt_char (ACS_VLINE, single);
 }
 
 void
-tty_draw_box (int y, int x, int ys, int xs)
+tty_draw_box (int y, int x, int ys, int xs, gboolean single)
 {
-    tty_draw_vline (y, x, mc_tty_ugly_frm[MC_TTY_FRM_vert], ys);
-    tty_draw_vline (y, x + xs - 1, mc_tty_ugly_frm[MC_TTY_FRM_vert], ys);
-    tty_draw_hline (y, x, mc_tty_ugly_frm[MC_TTY_FRM_horiz], xs);
-    tty_draw_hline (y + ys - 1, x, mc_tty_ugly_frm[MC_TTY_FRM_horiz], xs);
+    tty_draw_vline (y, x, mc_tty_frm[single ? MC_TTY_FRM_VERT : MC_TTY_FRM_DVERT], ys);
+    tty_draw_vline (y, x + xs - 1, mc_tty_frm[single ? MC_TTY_FRM_VERT : MC_TTY_FRM_DVERT], ys);
+    tty_draw_hline (y, x, mc_tty_frm[single ? MC_TTY_FRM_HORIZ : MC_TTY_FRM_DHORIZ], xs);
+    tty_draw_hline (y + ys - 1, x, mc_tty_frm[single ? MC_TTY_FRM_HORIZ : MC_TTY_FRM_DHORIZ], xs);
     tty_gotoyx (y, x);
-    tty_print_alt_char (mc_tty_ugly_frm[MC_TTY_FRM_lefttop]);
+    tty_print_alt_char (ACS_ULCORNER, single);
     tty_gotoyx (y + ys - 1, x);
-    tty_print_alt_char (mc_tty_ugly_frm[MC_TTY_FRM_leftbottom]);
+    tty_print_alt_char (ACS_LLCORNER, single);
     tty_gotoyx (y, x + xs - 1);
-    tty_print_alt_char (mc_tty_ugly_frm[MC_TTY_FRM_righttop]);
+    tty_print_alt_char (ACS_URCORNER, single);
     tty_gotoyx (y + ys - 1, x + xs - 1);
-    tty_print_alt_char (mc_tty_ugly_frm[MC_TTY_FRM_rightbottom]);
+    tty_print_alt_char (ACS_LRCORNER, single);
 }
 
 char *
@@ -170,7 +170,8 @@ mc_tty_normalize_from_utf8 (const char *str)
 
     buffer = g_string_new ("");
 
-    if (str_convert (conv, str, buffer) == ESTR_FAILURE) {
+    if (str_convert (conv, str, buffer) == ESTR_FAILURE)
+    {
         g_string_free (buffer, TRUE);
         str_close_conv (conv);
         return g_strdup (str);

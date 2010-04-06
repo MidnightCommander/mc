@@ -89,10 +89,11 @@ typedef struct format_e
     const char *id;
 } format_e;
 
-enum {
-    QSEARCH_CASE_INSENSITIVE = 0, /* quick search in case insensitive mode */
+enum
+{
+    QSEARCH_CASE_INSENSITIVE = 0,       /* quick search in case insensitive mode */
     QSEARCH_CASE_SENSITIVE = 1, /* quick search in case sensitive mode */
-    QSEARCH_PANEL_CASE = 2 /* quick search get value from panel case_sensitive */
+    QSEARCH_PANEL_CASE = 2      /* quick search get value from panel case_sensitive */
 };
 
 int quick_search_case_sensitive = QSEARCH_PANEL_CASE;
@@ -747,7 +748,7 @@ format_file (char *dest, int limit, WPanel * panel, int file_index, int width, i
                 tty_setcolor (SELECTED_COLOR);
             else
                 tty_setcolor (NORMAL_COLOR);
-            tty_print_one_vline ();
+            tty_print_one_vline (TRUE);
             length++;
         }
     }
@@ -803,7 +804,7 @@ repaint_file (WPanel * panel, int file_index, int mv, int attr, int isstatus)
         else
         {
             tty_setcolor (NORMAL_COLOR);
-            tty_print_one_vline ();
+            tty_print_one_vline (TRUE);
         }
     }
 }
@@ -984,14 +985,14 @@ show_dir (WPanel * panel)
     gchar *tmp;
     set_colors (panel);
     draw_box (panel->widget.parent,
-              panel->widget.y, panel->widget.x, panel->widget.lines, panel->widget.cols);
+              panel->widget.y, panel->widget.x, panel->widget.lines, panel->widget.cols, FALSE);
 
     if (show_mini_info)
     {
         widget_move (&panel->widget, llines (panel) + 2, 0);
-        tty_print_alt_char (ACS_LTEE);
+        tty_print_alt_char (ACS_LTEE, FALSE);
         widget_move (&panel->widget, llines (panel) + 2, panel->widget.cols - 1);
-        tty_print_alt_char (ACS_RTEE);
+        tty_print_alt_char (ACS_RTEE, FALSE);
     }
 
     widget_move (&panel->widget, 0, 1);
@@ -1515,7 +1516,7 @@ paint_frame (WPanel * panel)
         if (side)
         {
             tty_setcolor (NORMAL_COLOR);
-            tty_print_one_vline ();
+            tty_print_one_vline (TRUE);
             width = panel->widget.cols - panel->widget.cols / 2 - 1;
         }
         else if (panel->split)
@@ -1551,7 +1552,7 @@ paint_frame (WPanel * panel)
             else
             {
                 tty_setcolor (NORMAL_COLOR);
-                tty_print_one_vline ();
+                tty_print_one_vline (TRUE);
                 width--;
             }
         }
@@ -3214,7 +3215,7 @@ mouse_sort_col (Gpm_Event * event, WPanel * panel)
  * If the event is redirected to the menu, *redir is set to TRUE.
  */
 static int
-do_panel_event (Gpm_Event * event, WPanel * panel, gboolean *redir)
+do_panel_event (Gpm_Event * event, WPanel * panel, gboolean * redir)
 {
     const int lines = llines (panel);
     const gboolean is_active = dlg_widget_active (panel);
