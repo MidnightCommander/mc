@@ -51,19 +51,19 @@
 #include "chown.h"
 #include "wtools.h"             /* For init_box_colors */
 
-#define UX		5
-#define UY		2
+#define UX 5
+#define UY 2
 
-#define GX              27
-#define GY              2
+#define GX 27
+#define GY 2
 
-#define BX		5
-#define BY		15
+#define BX 5
+#define BY 15
 
-#define TX              50
-#define TY              2
+#define TX 50
+#define TY 2
 
-#define BUTTONS		5
+#define BUTTONS 5
 
 #define B_SETALL        B_USER
 #define B_SETUSR        (B_USER + 1)
@@ -91,11 +91,11 @@ static struct {
     int y, x;
     WLabel *l;
 } chown_label [LABELS] = {
-{ TY+2, TX+2, NULL },
-{ TY+4, TX+2, NULL },
-{ TY+6, TX+2, NULL },
-{ TY+8, TX+2, NULL },
-{ TY+10,TX+2, NULL }
+    { TY + 2, TX + 2, NULL },
+    { TY + 4, TX + 2, NULL },
+    { TY + 6, TX + 2, NULL },
+    { TY + 8, TX + 2, NULL },
+    { TY + 10,TX + 2, NULL }
 };
 /* *INDENT-ON* */
 

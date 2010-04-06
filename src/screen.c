@@ -89,10 +89,11 @@ typedef struct format_e
     const char *id;
 } format_e;
 
-enum {
-    QSEARCH_CASE_INSENSITIVE = 0, /* quick search in case insensitive mode */
+enum
+{
+    QSEARCH_CASE_INSENSITIVE = 0,       /* quick search in case insensitive mode */
     QSEARCH_CASE_SENSITIVE = 1, /* quick search in case sensitive mode */
-    QSEARCH_PANEL_CASE = 2 /* quick search get value from panel case_sensitive */
+    QSEARCH_PANEL_CASE = 2      /* quick search get value from panel case_sensitive */
 };
 
 int quick_search_case_sensitive = QSEARCH_PANEL_CASE;
@@ -3214,7 +3215,7 @@ mouse_sort_col (Gpm_Event * event, WPanel * panel)
  * If the event is redirected to the menu, *redir is set to TRUE.
  */
 static int
-do_panel_event (Gpm_Event * event, WPanel * panel, gboolean *redir)
+do_panel_event (Gpm_Event * event, WPanel * panel, gboolean * redir)
 {
     const int lines = llines (panel);
     const gboolean is_active = dlg_widget_active (panel);

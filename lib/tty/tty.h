@@ -11,7 +11,7 @@
 #ifndef MC_TTY_H
 #define MC_TTY_H
 
-#include "lib/global.h"   /* include <glib.h> */
+#include "lib/global.h"         /* include <glib.h> */
 
 #ifdef HAVE_SLANG
 #   include "tty-slang.h"
@@ -51,9 +51,9 @@ extern int tty_lowlevel_getch (void);
 /* {{{ Output }}} */
 
 /*
-    The output functions do not check themselves for screen overflows,
-    so make sure that you never write more than what fits on the screen.
-    While SLang provides such a feature, ncurses does not.
+   The output functions do not check themselves for screen overflows,
+   so make sure that you never write more than what fits on the screen.
+   While SLang provides such a feature, ncurses does not.
  */
 
 extern int tty_reset_screen (void);
@@ -80,7 +80,8 @@ extern void tty_fill_region (int y, int x, int rows, int cols, unsigned char ch)
 
 extern int mc_tty_frm[];
 
-typedef enum {
+typedef enum
+{
     /* single lines */
     MC_TTY_FRM_VERT,
     MC_TTY_FRM_HORIZ,

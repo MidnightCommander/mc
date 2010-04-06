@@ -170,7 +170,8 @@ mc_tty_normalize_from_utf8 (const char *str)
 
     buffer = g_string_new ("");
 
-    if (str_convert (conv, str, buffer) == ESTR_FAILURE) {
+    if (str_convert (conv, str, buffer) == ESTR_FAILURE)
+    {
         g_string_free (buffer, TRUE);
         str_close_conv (conv);
         return g_strdup (str);

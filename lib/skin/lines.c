@@ -54,8 +54,10 @@ mc_skin_lines_load_frm (mc_skin_t * mc_skin, const char *name)
     ret = mc_tty_normalize_lines_char (frm_val);
 
     g_free (frm_val);
-/*
-    switch (ret) {
+
+#if 0
+    switch (ret)
+    {
     case 0x80:
         ret = ACS_HLINE;
         break;
@@ -86,7 +88,8 @@ mc_skin_lines_load_frm (mc_skin_t * mc_skin, const char *name)
     default:
         break;
     }
-*/
+#endif
+
     return ret;
 }
 

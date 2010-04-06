@@ -37,7 +37,7 @@
 #include <signal.h>
 
 #include "lib/global.h"
-#include "lib/strutil.h"  /* str_term_form */
+#include "lib/strutil.h"        /* str_term_form */
 
 #include "src/main.h"
 
@@ -45,7 +45,7 @@
 #   define WANT_TERM_H
 #endif
 
-#include "tty-internal.h" /* slow_tty */
+#include "tty-internal.h"       /* slow_tty */
 #include "tty.h"
 #include "color-internal.h"
 #include "win.h"
@@ -85,7 +85,8 @@ mc_tty_normalize_lines_char (const char *ch)
     char *str2;
     int res;
 
-    struct mc_tty_lines_struct {
+    struct mc_tty_lines_struct
+    {
         const char *line;
         int line_code;
     } const lines_codes[] = {
@@ -93,24 +94,24 @@ mc_tty_normalize_lines_char (const char *ch)
         {"\342\224\220", ACS_LLCORNER}, /* ┐ */
         {"\342\224\224", ACS_URCORNER}, /* └ */
         {"\342\224\230", ACS_ULCORNER}, /* ┘ */
-        {"\342\224\234", ACS_LTEE}, /* ├ */
-        {"\342\224\244", ACS_RTEE}, /* ┤ */
-        {"\342\224\254", ACS_TTEE}, /* ┬ */
-        {"\342\224\264", ACS_BTEE}, /* ┴ */
-        {"\342\224\200", ACS_HLINE}, /* ─ */
-        {"\342\224\202", ACS_VLINE}, /* │ */
-        {"\342\224\274", ACS_PLUS}, /* ┼ */
+        {"\342\224\234", ACS_LTEE},     /* ├ */
+        {"\342\224\244", ACS_RTEE},     /* ┤ */
+        {"\342\224\254", ACS_TTEE},     /* ┬ */
+        {"\342\224\264", ACS_BTEE},     /* ┴ */
+        {"\342\224\200", ACS_HLINE},    /* ─ */
+        {"\342\224\202", ACS_VLINE},    /* │ */
+        {"\342\224\274", ACS_PLUS},     /* ┼ */
 
-        {"\342\225\235", ACS_LRCORNER | A_BOLD}, /* ╔ */
-        {"\342\225\232", ACS_LLCORNER | A_BOLD}, /* ╗ */
-        {"\342\225\227", ACS_URCORNER | A_BOLD}, /* ╚ */
-        {"\342\225\224", ACS_ULCORNER | A_BOLD}, /* ╝ */
-        {"\342\225\237", ACS_LTEE | A_BOLD}, /* ╟ */
-        {"\342\225\242", ACS_RTEE | A_BOLD}, /* ╢ */
-        {"\342\225\244", ACS_TTEE | A_BOLD}, /* ╤ */
-        {"\342\225\247", ACS_BTEE | A_BOLD}, /* ╧ */
-        {"\342\225\220", ACS_HLINE | A_BOLD}, /* ═ */
-        {"\342\225\221", ACS_VLINE | A_BOLD}, /* ║ */
+        {"\342\225\235", ACS_LRCORNER | A_BOLD},        /* ╔ */
+        {"\342\225\232", ACS_LLCORNER | A_BOLD},        /* ╗ */
+        {"\342\225\227", ACS_URCORNER | A_BOLD},        /* ╚ */
+        {"\342\225\224", ACS_ULCORNER | A_BOLD},        /* ╝ */
+        {"\342\225\237", ACS_LTEE | A_BOLD},    /* ╟ */
+        {"\342\225\242", ACS_RTEE | A_BOLD},    /* ╢ */
+        {"\342\225\244", ACS_TTEE | A_BOLD},    /* ╤ */
+        {"\342\225\247", ACS_BTEE | A_BOLD},    /* ╧ */
+        {"\342\225\220", ACS_HLINE | A_BOLD},   /* ═ */
+        {"\342\225\221", ACS_VLINE | A_BOLD},   /* ║ */
 
         {NULL, 0}
     };
@@ -118,7 +119,8 @@ mc_tty_normalize_lines_char (const char *ch)
     if (ch == NULL)
         return (int) ' ';
 
-    for (res = 0; lines_codes[res].line; res++) {
+    for (res = 0; lines_codes[res].line; res++)
+    {
         if (strcmp (ch, lines_codes[res].line) == 0)
             return lines_codes[res].line_code;
     }
@@ -158,7 +160,7 @@ tty_init (gboolean slow, gboolean ugly_lines)
 #endif /* HAVE_ESCDELAY */
 
     /* use Ctrl-g to generate SIGINT */
-    cur_term->Nttyb.c_cc[VINTR] = CTRL ('g'); /* ^g */
+    cur_term->Nttyb.c_cc[VINTR] = CTRL ('g');   /* ^g */
     /* disable SIGQUIT to allow use Ctrl-\ key */
     cur_term->Nttyb.c_cc[VQUIT] = NULL_VALUE;
     tcsetattr (cur_term->Filedes, TCSANOW, &cur_term->Nttyb);
@@ -193,14 +195,14 @@ tty_reset_shell_mode (void)
 void
 tty_raw_mode (void)
 {
-    raw (); /* FIXME: uneeded? */
+    raw ();                     /* FIXME: uneeded? */
     cbreak ();
 }
 
 void
 tty_noraw_mode (void)
 {
-    nocbreak (); /* FIXME: unneeded? */
+    nocbreak ();                /* FIXME: unneeded? */
     noraw ();
 }
 
@@ -293,7 +295,8 @@ tty_fill_region (int y, int x, int rows, int cols, unsigned char ch)
 {
     int i;
 
-    for (i = 0; i < rows; i++) {
+    for (i = 0; i < rows; i++)
+    {
         move (y + i, x);
         hline (ch, cols);
     }
@@ -324,18 +327,20 @@ tty_print_anychar (int c)
 {
     unsigned char str[6 + 1];
 
-    if (utf8_display || c > 255) {
+    if (utf8_display || c > 255)
+    {
         int res = g_unichar_to_utf8 (c, (char *) str);
-        if (res == 0) {
+        if (res == 0)
+        {
             str[0] = '.';
             str[1] = '\0';
-        } else {
-            str[res] = '\0';
         }
+        else
+            str[res] = '\0';
         addstr (str_term_form ((char *) str));
-    } else {
-        addch (c);
     }
+    else
+        addch (c);
 
 }
 
