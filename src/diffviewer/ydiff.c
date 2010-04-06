@@ -129,7 +129,6 @@ dview_set_codeset (WDiff * dview)
     {
         GIConv conv;
         conv = str_crt_conv_from (encoding_id);
-        int cp_id;
         if (conv != INVALID_CONV)
         {
             if (dview->converter != str_cnv_from_term)
@@ -581,7 +580,7 @@ dview_get_byte (char * str, gboolean * result)
         return 0;
     }
     *result = TRUE;
-    return *str;
+    return (unsigned char) *str;
 }
 
 
@@ -649,21 +648,23 @@ dview_str_utf8_offset_to_pos (const char *text, size_t length)
     else
     {
         gunichar uni;
-        char *buffer = g_strdup (text);
-        while (buffer[0] != '\0')
+        char *tmpbuf, *buffer;
+        buffer = tmpbuf = g_strdup (text);
+        while (tmpbuf[0] != '\0')
         {
-            uni = g_utf8_get_char_validated (buffer, -1);
+            uni = g_utf8_get_char_validated (tmpbuf, -1);
             if ((uni != (gunichar) (-1)) && (uni != (gunichar) (-2)))
             {
-                buffer = g_utf8_next_char (buffer);
+                tmpbuf = g_utf8_next_char (tmpbuf);
             }
             else
             {
-                buffer[0] = '.';
-                buffer++;
+                tmpbuf[0] = '.';
+                tmpbuf++;
             }
+
         }
-        result = g_utf8_offset_to_pointer (buffer, length) - buffer;
+        result = g_utf8_offset_to_pointer (tmpbuf, length) - tmpbuf;
         g_free (buffer);
     }
     return max (length, result);
@@ -2135,7 +2136,30 @@ dview_init (WDiff * dview, const char *args, const char *file1, const char *file
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static void
+dview_reread (WDiff * dview)
+{
+    int ndiff = dview->ndiff;
+    destroy_hdiff (dview);
+
+    g_array_foreach (dview->a[0], DIFFLN, cc_free_elt);
+    g_array_free (dview->a[0], TRUE);
+    g_array_foreach (dview->a[1], DIFFLN, cc_free_elt);
+    g_array_free (dview->a[1], TRUE);
+
+    dview->a[0] = g_array_new (FALSE, FALSE, sizeof (DIFFLN));
+    dview->a[1] = g_array_new (FALSE, FALSE, sizeof (DIFFLN));
+
+    ndiff = redo_diff (dview);
+    if (ndiff >= 0)
+    {
+        dview->ndiff = ndiff;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+#if 0
+static void
 dview_reinit (WDiff * dview)
 {
     const char *quality_str[] = {
@@ -2168,28 +2192,12 @@ dview_reinit (WDiff * dview)
         diffopt_widgets, 0
     };
 
-    int ndiff = dview->ndiff;
     if (quick_dialog (&diffopt) != B_CANCEL)
     {
-        destroy_hdiff (dview);
-
-        g_array_foreach (dview->a[0], DIFFLN, cc_free_elt);
-        g_array_free (dview->a[0], TRUE);
-        g_array_foreach (dview->a[1], DIFFLN, cc_free_elt);
-        g_array_free (dview->a[1], TRUE);
-
-        dview->a[0] = g_array_new (FALSE, FALSE, sizeof (DIFFLN));
-        dview->a[1] = g_array_new (FALSE, FALSE, sizeof (DIFFLN));
-
-        ndiff = redo_diff (dview);
-        if (ndiff >= 0)
-        {
-            dview->ndiff = ndiff;
-        }
+        dview_reread (dview);
     }
-    return ndiff;
 }
-
+#endif
 /* --------------------------------------------------------------------------------------------- */
 
 static void
@@ -2216,7 +2224,7 @@ dview_fini (WDiff * dview)
 static int
 dview_display_file (const WDiff * dview, int ord, int r, int c, int height, int width)
 {
-    size_t i, k, col;
+    size_t i, k;
     int j;
     char buf[BUFSIZ];
     FBUF *f = dview->f[ord];
@@ -2261,7 +2269,8 @@ dview_display_file (const WDiff * dview, int ord, int r, int c, int height, int 
 
     for (i = dview->skip_rows, j = 0; i < dview->a[ord]->len && j < height; j++, i++)
     {
-        int ch, next_ch;
+        int ch, next_ch, col;
+        size_t cnt;
         p = (DIFFLN *) & g_array_index (dview->a[ord], DIFFLN, i);
         ch = p->ch;
         tty_setcolor (NORMAL_COLOR);
@@ -2305,23 +2314,23 @@ dview_display_file (const WDiff * dview, int ord, int r, int c, int height, int 
                                 g_ptr_array_index (dview->hdiff, i), ord, att);
                         tty_gotoyx (r + j, c);
                         col = 0;
-                        for (k = 0; k < strlen (buf) && col < width; k++)
+                        for (cnt = 0; cnt < strlen (buf) && col < width; cnt++)
                         {
                             int w;
                             gboolean ch_res;
                             if (dview->utf8)
                             {
-                                next_ch = dview_get_utf (buf + k, &w, &ch_res);
+                                next_ch = dview_get_utf (buf + cnt, &w, &ch_res);
                                 if (w > 1)
-                                    k += w - 1;
+                                    cnt += w - 1;
                                 if (!g_unichar_isprint (next_ch))
                                     next_ch = '.';
                             }
                             else
-                                next_ch = dview_get_byte (buf + k, &ch_res);
+                                next_ch = dview_get_byte (buf + cnt, &ch_res);
                             if (ch_res)
                             {
-                                tty_setcolor (att[k] ? DFF_CHH_COLOR : DFF_CHG_COLOR);
+                                tty_setcolor (att[cnt] ? DFF_CHH_COLOR : DFF_CHG_COLOR);
 #ifdef HAVE_CHARSET
                                 if (utf8_display) {
                                     if (!dview->utf8) {
@@ -2331,8 +2340,9 @@ dview_display_file (const WDiff * dview, int ord, int r, int c, int height, int 
                                     next_ch = convert_from_utf_to_current_c (next_ch, dview->converter);
                                 else
 #endif
-                                next_ch = convert_to_display_c (next_ch);
-                                tty_print_anychar (next_ch);
+                                    next_ch = convert_to_display_c (next_ch);
+
+                                    tty_print_anychar (next_ch);
                                 col++;
                             }
                         }
@@ -2377,20 +2387,20 @@ dview_display_file (const WDiff * dview, int ord, int r, int c, int height, int 
         tty_gotoyx (r + j, c);
         /* tty_print_nstring (buf, width); */
         col = 0;
-        for (k = 0; k < strlen (buf) && col < width; k++)
+        for (cnt = 0; cnt < strlen (buf) && col < width; cnt++)
         {
             int w;
             gboolean ch_res;
             if (dview->utf8)
             {
-                next_ch = dview_get_utf (buf + k, &w, &ch_res);
+                next_ch = dview_get_utf (buf + cnt, &w, &ch_res);
                 if (w > 1)
-                    k += w - 1;
+                    cnt += w - 1;
                 if (!g_unichar_isprint (next_ch))
                     next_ch = '.';
             }
             else
-                next_ch = dview_get_byte (buf + k, &ch_res);
+                next_ch = dview_get_byte (buf + cnt, &ch_res);
             if (ch_res)
             {
 #ifdef HAVE_CHARSET
@@ -2402,12 +2412,13 @@ dview_display_file (const WDiff * dview, int ord, int r, int c, int height, int 
                     next_ch = convert_from_utf_to_current_c (next_ch, dview->converter);
                 else
 #endif
-                next_ch = convert_to_display_c (next_ch);
+                    next_ch = convert_to_display_c (next_ch);
+
                 tty_print_anychar (next_ch);
                 col++;
             }
         }
-//        continue;
+        continue;
     }
     tty_setcolor (NORMAL_COLOR);
     k = width;
@@ -2562,16 +2573,13 @@ dview_update (WDiff * dview)
 static void
 dview_redo (WDiff * dview)
 {
-    if (dview_reinit (dview) < 0)
-    {
-        dview->view_quit = 1;
-    }
-    else if (dview->display_numbers)
+    if (dview->display_numbers)
     {
         int old = dview->display_numbers;
         dview->display_numbers = calc_nwidth ((const GArray **) dview->a);
         dview->new_frame = (old != dview->display_numbers);
     }
+    dview_reread (dview);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2742,7 +2750,7 @@ dview_search (WDiff * dview, int again)
 
     if (!again || searchopt_text == NULL)
     {
-        char *tsearchopt_text;
+        char *tsearchopt_text = NULL;
         int tsearchopt_type = searchopt_type;
         int tsearchopt_case = searchopt_case;
         int tsearchopt_backwards = searchopt_backwards;
@@ -3064,6 +3072,7 @@ dview_execute_cmd (WDiff * dview, unsigned long command)
         break;
     case CK_SelectCodepage:
         dview_select_encoding (dview);
+        dview_reread (dview);
         break;
     default:
         res = MSG_NOT_HANDLED;
