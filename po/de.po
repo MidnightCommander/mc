@@ -3220,7 +3220,7 @@ msgid "ButtonBar|Edit"
 msgstr "ButtonBar|Bearbeiten"
 
 msgid "ButtonBar|RenMov"
-msgstr "ButtonBar|Umbenennen"
+msgstr "ButtonBar|Verschieben"
 
 msgid "ButtonBar|Mkdir"
 msgstr "ButtonBar|Mkdir"
