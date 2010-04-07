@@ -589,6 +589,7 @@ misc/mc.ext
 src/Makefile
 src/consaver/Makefile
 src/editor/Makefile
+src/man2hlp/Makefile
 src/viewer/Makefile
 src/diffviewer/Makefile
 
