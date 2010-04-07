@@ -5,7 +5,7 @@
 # Christian Meyer <chrisime@gnome.org>, 2001.
 # Roland Illig <roland.illig@gmx.de>, 2005.
 # German Transifex-Team (transifex.net), 2010
-#
+# 
 # 2001-03-06 Da Nautilus der zukünftige GNOME Filemanager ist, werden die
 # mc-Meldungen nicht mehr infinitivisch umgeformt.
 msgid ""
@@ -29,8 +29,7 @@ msgid " Not implemented yet "
 msgstr " Noch nicht implementiert "
 
 msgid " Num of replace tokens not equal to num of found tokens "
-msgstr ""
-"Zahl der ersetzende Zeichen nicht gleich mit der Zahl von gefundenen Zeichen"
+msgstr "Zahl der ersetzende Zeichen nicht gleich mit der Zahl von gefundenen Zeichen"
 
 #, c-format
 msgid " Invalid token number %d "
@@ -1065,9 +1064,8 @@ msgstr "Sortierreihenfolge"
 msgid " Confirmation "
 msgstr " Bestätigung "
 
-#, fuzzy
 msgid " confirm di&Rectory hotlist delete "
-msgstr "Confirmation|Ve&rzeichnis-Hotlist löschen"
+msgstr "Ve&rzeichnis-Hotlist löschen"
 
 msgid " confirm &Exit "
 msgstr " bestätige &Beenden "
@@ -1075,9 +1073,8 @@ msgstr " bestätige &Beenden "
 msgid " confirm e&Xecute "
 msgstr " bestätige &Ausführen "
 
-#, fuzzy
 msgid " confirm o&Verwrite "
-msgstr " bestätige &Löschen "
+msgstr "&Überschreiben"
 
 msgid " confirm &Delete "
 msgstr " bestätige &Löschen "
@@ -1541,8 +1538,7 @@ msgid "Search"
 msgstr "Suchen"
 
 msgid " File has hard-links. Detach before saving? "
-msgstr ""
-"Die Datei ist statisch verlinkt. Diesen Link vor dem  Speichern entfernt?"
+msgstr "Die Datei ist statisch verlinkt. Diesen Link vor dem  Speichern entfernt?"
 
 msgid "The file has been modified in the meantime. Save anyway?"
 msgstr "Die Datei wurde zwischenzeitlich modifiziert, trotzdem speichern?"
@@ -1658,8 +1654,7 @@ msgid " Load "
 msgstr " Laden "
 
 msgid " Block is large, you may not be able to undo this action. "
-msgstr ""
-" Großer Block, eventuell kann diese Aktion nicht rückgängig gemacht werden. "
+msgstr " Großer Block, eventuell kann diese Aktion nicht rückgängig gemacht werden. "
 
 msgid "Replace"
 msgstr "Ersetzen"
@@ -2165,26 +2160,16 @@ msgid " %s%s file error"
 msgstr " Fehler in der Datei %s%s "
 
 #, c-format
-msgid ""
-"The format of the %smc.ext file has changed with version 3.0.  It seems that "
-"the installation failed.  Please fetch a fresh copy from the Midnight "
-"Commander package."
-msgstr ""
-"Das Dateiformat der Datei »%smc.ext« hat sich in Version 3.0 geändert. Bitte "
-"aktualisieren Sie die Datei."
+msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
+msgstr "Das Dateiformat der Datei »%smc.ext« hat sich in Version 3.0 geändert. Bitte aktualisieren Sie die Datei."
 
 #, c-format
 msgid " ~/%s file error "
 msgstr " Fehler in Datei »~/%s« "
 
 #, c-format
-msgid ""
-"The format of the ~/%s file has changed with version 3.0.  You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write "
-"it."
-msgstr ""
-"Das Dateiformat von »~/%s« hat sich mit Version 3.0 geändert.  Eine "
-"Beispieldatei im neuen Format ist %smc.ext."
+msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
+msgstr "Das Dateiformat von »~/%s« hat sich mit Version 3.0 geändert.  Eine Beispieldatei im neuen Format ist %smc.ext."
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|Kopieren"
@@ -2211,8 +2196,7 @@ msgid ""
 "\n"
 " Option Stable Symlinks will be disabled "
 msgstr ""
-" Kann keine stabilen symbolischen Links auf nicht-lokalen Dateisystemen "
-"anlegen: \n"
+" Kann keine stabilen symbolischen Links auf nicht-lokalen Dateisystemen anlegen: \n"
 "\n"
 " Einstellung Stabile Symbolische Links wird deaktiviert "
 
@@ -2550,9 +2534,9 @@ msgstr " Löschen: "
 msgid "Non&e"
 msgstr "Kein&e"
 
-#, fuzzy, c-format
+#, c-format
 msgid "ETA %d:%02d.%02d"
-msgstr "%d:%02d.%02d"
+msgstr "noch %d:%02d.%02d"
 
 #, c-format
 msgid "%.2f MB/s"
@@ -2849,11 +2833,8 @@ msgid " Hotlist Load "
 msgstr " Hotlist laden "
 
 #, c-format
-msgid ""
-"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
-msgstr ""
-"MC konnte ~/%s nicht schreiben, die alten Hotlist-Einträge wurden nicht "
-"gelöscht"
+msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr "MC konnte ~/%s nicht schreiben, die alten Hotlist-Einträge wurden nicht gelöscht"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -3348,8 +3329,7 @@ msgid " Enter command label: "
 msgstr " Kommandobezeichnung eingeben: "
 
 msgid " Cannot run external panelize in a non-local directory "
-msgstr ""
-" Kann externes Anordnen nicht in einem nichtlokalen Verzeichnis ausführen "
+msgstr " Kann externes Anordnen nicht in einem nichtlokalen Verzeichnis ausführen "
 
 msgid "Find rejects after patching"
 msgstr "Nach dem Patchen nach Rejects suchen"
@@ -3649,8 +3629,7 @@ msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
 msgstr ""
-"Die Datei \"%s\" gehört weder root noch Ihnen oder sie kann von jedem "
-"beschrieben werden.\n"
+"Die Datei \"%s\" gehört weder root noch Ihnen oder sie kann von jedem beschrieben werden.\n"
 "Sie zu benutzen, kann Ihre Sicherheit gefährden"
 
 #, c-format
@@ -3660,20 +3639,20 @@ msgstr " keine verwendbaren Einträge in %s gefunden "
 msgid " User menu "
 msgstr " Benutzermenü "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " The current line number is %lld.\n"
 " Enter the new line number:"
 msgstr ""
-" Die augenblickliche Zeilennummer lautet %d.\n"
+" Die augenblickliche Zeilennummer lautet %lld.\n"
 " Geben sie die neue Zeilennummer ein:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " The current address is %s.\n"
 " Enter the new address:"
 msgstr ""
-" Die momentane Adresse ist 0x%lx.\n"
+" Die momentane Adresse ist %s.\n"
 " Geben sie die neue Adresse ein:"
 
 msgid " Goto Address "
@@ -4235,12 +4214,8 @@ msgstr "Hintergrundprozess:"
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr " Argumentreihenfolge eingeben, z.B. 3,2,1,4 "
 
-#~ msgid ""
-#~ " Invalid regular expression, or scanf expression with too many "
-#~ "conversions "
-#~ msgstr ""
-#~ " Ungültiger regulärer Ausdruck oder scanf-Ausdruck mit zu vielen "
-#~ "Konvertierungen "
+#~ msgid " Invalid regular expression, or scanf expression with too many conversions "
+#~ msgstr " Ungültiger regulärer Ausdruck oder scanf-Ausdruck mit zu vielen Konvertierungen "
 
 #~ msgid " Error in replacement format string. "
 #~ msgstr " Fehler in der Format-Zeichenkette der Ersetzungen "
