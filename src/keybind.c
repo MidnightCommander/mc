@@ -479,6 +479,7 @@ static name_keymap_t command_names[] = {
     { "DiffHome",                        CK_DiffHome},
     { "DiffEnd",                         CK_DiffEnd},
     { "DiffQuit",                        CK_DiffQuit},
+    { "DiffHelp",                        CK_DiffHelp},
     { "SelectCodepage",                  CK_SelectCodepage},
 
     { NULL,                              CK_Ignore_Key }
@@ -966,9 +967,6 @@ const global_keymap_t default_diff_keymap[] = {
     { 'p',                    CK_DiffPrevHunk,       "p" },
     { 'g',                    CK_DiffGoto,           "g" },
     { 'G',                    CK_DiffGoto,           "G" },
-    { KEY_F (4),              CK_DiffEditCurrent,    "F4" },
-    { KEY_F (14),             CK_DiffEditOther,      "S-F4" },
-    { KEY_F (17),             CK_DiffSearch,         "S-F7" },
     { KEY_M_CTRL | KEY_HOME,  CK_DiffBOF,            "C-Home" },
     { KEY_M_CTRL | KEY_END,   CK_DiffEOF,            "C-End" },
     { KEY_DOWN,               CK_DiffDown,           "Down" },
@@ -985,6 +983,14 @@ const global_keymap_t default_diff_keymap[] = {
     { 'Q',                    CK_DiffQuit,           "Q" },
     { XCTRL ('g'),            CK_DiffQuit,           "C-g" },
     { ESC_CHAR,               CK_DiffQuit,           "Esc" },
+
+    { KEY_F (1),              CK_DiffHelp,           "F1" },
+    { KEY_F (4),              CK_DiffEditCurrent,    "F4" },
+    { KEY_F (7),              CK_DiffSearch,         "F7" },
+    { KEY_F (10),             CK_DiffQuit,           "F10" },
+    { KEY_F (14),             CK_DiffEditOther,      "S-F4" },
+
+    { 0, CK_Ignore_Key, "" }
 };
 
 static int

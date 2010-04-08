@@ -2953,6 +2953,9 @@ dview_execute_cmd (WDiff * dview, unsigned long command)
 
     switch (command)
     {
+    case CK_DiffHelp:
+        interactive_display (NULL, "[Diff Viewer]");
+        break;
     case CK_DiffDisplaySymbols:
         dview->display_symbols ^= 1;
         dview->new_frame = 1;
@@ -3117,28 +3120,21 @@ dview_callback (Widget * w, widget_msg_t msg, int parm)
         dview_update (dview);
         return MSG_HANDLED;
 
-    case WIDGET_CURSOR:
-        return MSG_HANDLED;
-
     case WIDGET_KEY:
         i = dview_handle_key (dview, parm);
         if (dview->view_quit)
             dlg_stop (h);
         else
-        {
             dview_update (dview);
-        }
         return i;
 
-    case WIDGET_IDLE:
-        return MSG_HANDLED;
-
-    case WIDGET_FOCUS:
-        dview_labels (dview);
-        return MSG_HANDLED;
-
-    case WIDGET_DESTROY:
-        return MSG_HANDLED;
+    case WIDGET_COMMAND:
+        i = dview_execute_cmd (dview, parm);
+        if (dview->view_quit)
+            dlg_stop (h);
+        else
+            dview_update (dview);
+        return i;
 
     default:
         return default_proc (msg, parm);
@@ -3156,7 +3152,7 @@ dview_adjust_size (Dlg_head * h)
     /* Look up the viewer and the buttonbar, we assume only two widgets here */
     dview = (WDiff *) find_widget_type (h, dview_callback);
     bar = find_buttonbar (h);
-    widget_set_size (&dview->widget, 0, 0, LINES, COLS);
+    widget_set_size (&dview->widget, 0, 0, LINES - 1, COLS);
     widget_set_size ((Widget *) bar, LINES - 1, 0, 1, COLS);
 
     dview_compute_areas (dview);
@@ -3167,11 +3163,17 @@ dview_adjust_size (Dlg_head * h)
 static cb_ret_t
 dview_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
+    WDiff *dview = (WDiff *) data;
+
     switch (msg)
     {
     case DLG_RESIZE:
         dview_adjust_size (h);
         return MSG_HANDLED;
+
+    case DLG_ACTION:
+        /* command from buttonbar */
+        return send_message ((Widget *) dview, WIDGET_COMMAND, parm);
 
     default:
         return default_dlg_callback (h, sender, msg, parm, data);
@@ -3196,15 +3198,15 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
 
     dview = g_new0 (WDiff, 1);
 
-    init_widget (&dview->widget, 0, 0, LINES, COLS,
+    init_widget (&dview->widget, 0, 0, LINES - 1, COLS,
                  (callback_fn) dview_callback, (mouse_h) dview_event);
 
     widget_want_cursor (dview->widget, 0);
 
     bar = buttonbar_new (1);
 
-    add_widget (dview_dlg, bar);
     add_widget (dview_dlg, dview);
+    add_widget (dview_dlg, bar);
 
     error = dview_init (dview, "-a", file1, file2, label1, label2, DATA_SRC_MEM);        /* XXX binary diff? */
 

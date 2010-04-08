@@ -443,6 +443,7 @@
 #define CK_DiffHome                     9031
 #define CK_DiffEnd                      9032
 #define CK_DiffQuit                     9033
+#define CK_DiffHelp                     9034
 
 /*
    Process a block through a shell command: CK_Pipe_Block(i) executes shell_cmd[i].
