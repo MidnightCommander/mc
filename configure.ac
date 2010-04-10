@@ -11,6 +11,9 @@ AC_CONFIG_AUX_DIR(config)
 MC_VERSION
 AM_INIT_AUTOMAKE(mc, ${VERSION} )
 
+dnl Enable silent rules by default (if yes)
+m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
+
 AM_CONFIG_HEADER(config.h)
 AM_MAINTAINER_MODE
 AC_CANONICAL_HOST
