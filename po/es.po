@@ -1,14 +1,14 @@
 # Spanish locale - Midnight Commander
-# Copyright (C) 1998-2009 Free Software Foundation, Inc.
-# David Martín <dmartina@excite.com>, 1998-2009.
+# Copyright (C) 1998-2010 Free Software Foundation, Inc.
+# David Martín <dmartina@excite.com>, 1998-2010.
 # Ismael Olea <olea@hispafuentes.com>, 2000.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.7.0\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-26 12:26+0200\n"
-"PO-Revision-Date: 2009-12-24 09:40+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-04-10 10:26+0200\n"
+"PO-Revision-Date: 2010-04-10 10:25+0200\n"
 "Last-Translator: David Martín <dmartina@excite.com\n"
 "Language-Team: Spanish <debian-l10n-spanish@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -247,7 +247,7 @@ msgid "Exclamation mark"
 msgstr "Exclamación"
 
 msgid "Question mark"
-msgstr "Interrrogación"
+msgstr "Interrogación"
 
 msgid "Ampersand"
 msgstr "Ampersand"
@@ -923,7 +923,6 @@ msgid "Show mc with specified skin"
 msgstr "Mostrar mc con la careta (skin) indicada"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -947,7 +946,7 @@ msgstr ""
 "   Visor de archivos:  normal, selected, marked, markselect\n"
 "   Diálogos:           dnormal, dfocus, dhotnormal, dhotfocus,\n"
 "                        errdhotnormal, errdhotfocus\n"
-"   Menús:              menu, menuhot, menusel, menuhotsel\n"
+"   Menús:              menu, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:             editnormal, editbold, editmarked, editwhitespace,\n"
 "                       editlinestate\n"
 
@@ -1860,46 +1859,38 @@ msgstr "&Salir"
 msgid "&Undo"
 msgstr "&Deshacer"
 
-#, fuzzy
 msgid "&Toggle ins/overw"
 msgstr "activar &Inserción"
 
-#, fuzzy
 msgid "To&ggle mark"
 msgstr "i&Nicio/fin de marca"
 
 msgid "&Mark columns"
 msgstr "marcar c&Olumnas"
 
-#, fuzzy
 msgid "Mark &all"
-msgstr "* t&Odos"
+msgstr "marcar &Todo"
 
 msgid "Unmar&k"
-msgstr ""
+msgstr "desma&Rcar"
 
-#, fuzzy
 msgid "Cop&y"
 msgstr "&Copiar"
 
-#, fuzzy
 msgid "Mo&ve"
 msgstr "&Mover"
 
 msgid "&Delete"
 msgstr "&Borrar"
 
-#, fuzzy
 msgid "Co&py to clipfile"
-msgstr "co&Piar a un archivo..."
+msgstr "copiar a un &Archivo..."
 
-#, fuzzy
 msgid "&Cut to clipfile"
-msgstr "cor&Tar a un archivo..."
+msgstr "cortar a un arc&Hivo..."
 
-#, fuzzy
 msgid "Pa&ste from clipfile"
-msgstr "pe&Gar de un archivo..."
+msgstr "pegar de un archi&Vo..."
 
 msgid "&Beginning"
 msgstr "&Principio del archivo"
@@ -1916,14 +1907,12 @@ msgstr "buscar &Siguiente"
 msgid "&Replace..."
 msgstr "&Reemplazar..."
 
-#, fuzzy
 msgid "&Toggle bookmark"
 msgstr "poner/quitar m&Arca"
 
 msgid "&Next bookmark"
 msgstr "&Ir a marca siguiente"
 
-#, fuzzy
 msgid "&Prev bookmark"
 msgstr "&Volver a marca anterior"
 
@@ -1933,22 +1922,18 @@ msgstr "borra&R todas las marcas"
 msgid "&Go to line..."
 msgstr "&Ir a la línea..."
 
-#, fuzzy
 msgid "&Toggle line state"
 msgstr "&Numeración de líneas"
 
 msgid "Go to matching &bracket"
 msgstr "buscar pare&Ja del operador"
 
-#, fuzzy
 msgid "&Find declaration"
 msgstr "buscar &Declaración"
 
-#, fuzzy
 msgid "Back from &declaration"
 msgstr "&Volver desde declaración"
 
-#, fuzzy
 msgid "For&ward to declaration"
 msgstr "ava&Nzar a declaración"
 
@@ -1961,7 +1946,6 @@ msgstr "&Refrescar la pantalla"
 msgid "&Start record macro"
 msgstr "iniciar grabación de &Macro"
 
-#, fuzzy
 msgid "Finis&h record macro..."
 msgstr "&Terminar grabación de macro..."
 
@@ -1983,19 +1967,15 @@ msgstr "insertar &Literalmente..."
 msgid "Insert &date/time"
 msgstr "insertar &Fecha y hora"
 
-#, fuzzy
 msgid "&Format paragraph"
 msgstr "dar formato al &Párrafo"
 
-#, fuzzy
 msgid "&Sort..."
 msgstr "&Ordenar bloque de texto..."
 
-#, fuzzy
 msgid "&Paste output of..."
 msgstr "peg&Ar desde otro programa..."
 
-#, fuzzy
 msgid "&External formatter"
 msgstr "dar formato e&Xterno"
 
