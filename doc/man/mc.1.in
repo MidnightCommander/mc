@@ -1705,6 +1705,12 @@ looks like on the screen.
 .PP
 The
 .\"LINK2"
+Panel options
+.\"Panel options"
+command pops up a dialog from which you specify options of file manager panels.
+.PP
+The
+.\"LINK2"
 Confirmation
 .\"Confirmation"
 command pops up a dialog from which you specify which actions you want to
@@ -1900,6 +1906,9 @@ If this option is enabled, deleting files and directory hotlist entries
 unintentionally becomes more difficult.  The default selection in the
 confirmation dialogs for deletion changes from "Yes" to "No".
 This option is disabled by default.
+.\"NODE "    Panel options"
+.SH "    Panel options"
+Not written yet.
 .\"NODE "    Layout"
 .SH "    Layout"
 The layout dialog gives you a possibility to change the general layout
