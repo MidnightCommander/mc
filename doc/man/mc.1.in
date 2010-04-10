@@ -587,7 +587,7 @@ instead of the command line. If the
 option is enabled the search string is shown on the mini\-status
 line. When typing, the selection bar will move to the next file
 starting with the typed letters. The
-.I backspace
+.I Backspace
 or
 .I DEL
 keys can be used to correct typing mistakes. If C\-s is pressed
@@ -713,7 +713,7 @@ moves one word forward.
 .B Alt\-b
 moves one word backward.
 .TP
-.B C\-h, backspace
+.B C\-h, Backspace
 delete the previous character.
 .TP
 .B C\-d, Delete
@@ -2565,6 +2565,104 @@ checkbox is on, the selection will be case sensitive characters.
 If
 .I Case sensitive
 is off, the case will be ignored.
+.\"NODE "Diff Viewer"
+.SH "Internal Diff Viewer"
+The mcdiff is a visual diff tool. You can compare two files and edit them
+in\-place (diffs are updated dynamically). You can browse and view a working
+copy from popular version control systems (GIT, Subversion, etc).
+.PP
+Following shortcuts are available in internal diff viewer of Midnight
+Commander.
+.PP
+.B F1
+Invoke the built\-in hypertext help viewer.
+.PP
+.B F2
+Save modified files.
+.PP
+.B F4
+Edit file of the left panel in the internal editor.
+.PP
+.B F14
+Edit file of the right panel in the internal editor.
+.PP
+.B F5
+Merge the current hunk. Only the current hunk will be merged.
+.PP
+.B F7
+Start search.
+.PP
+.B F17
+Continue search.
+.PP
+.B F10, Esc, q
+Exit from diff viewer.
+.PP
+.B Alt\-s, s
+Toggle show of hunk status.
+.PP
+.B Alt\-n, l
+Toggle show of line numbers.
+.PP
+.B f
+Maximize left panel.
+.PP
+.B \=
+Make panels equal in width.
+.PP
+.B \>
+Reduce the size of the right panel.
+.PP
+.B \<
+Reduce the size of the left panel.
+.PP
+.B c
+Toggle show of trailing carriage return (CR) symbol as ^M.
+.PP
+.B 2, 3, 4, 8
+Set tabulation size
+.PP
+.B C\-u
+Swap contents of diff panels.
+.PP
+.B C\-r
+Refresh the screen.
+.PP
+.B C\-o
+Switch to the subshell and show the command screen.
+.PP
+.B Enter, Space, n
+Find next diff hunk.
+.PP
+.B Backspace, p
+Find previous diff hunk.
+.PP
+.B g
+Go to line.
+.PP
+.B Down
+Scroll one line forward.
+.PP
+.B Up
+Scroll one line backward.
+.PP
+.B PageUp
+Move one page up.
+.PP
+.B PageDown
+Mves one page down.
+.PP
+.B Home, A1
+Moves to the line beginning.
+.PP
+.B End
+Moves to the line end.
+.PP
+.B C\-Home
+Move to the file beginning.
+.PP
+.B C\-End, C1
+Move to the file end.
 .\"NODE "Internal File Viewer"
 .SH "Internal File Viewer"
 The internal file viewer provides two display modes: ASCII and hex.
@@ -2638,7 +2736,7 @@ Exit the internal file viewer.
 .B next\-page, space, C\-v.
 Scroll one page forward.
 .PP
-.B prev\-page, Alt\-v, C\-b, backspace.
+.B prev\-page, Alt\-v, C\-b, Backspace.
 Scroll one page backward.
 .PP
 .B down\-key
