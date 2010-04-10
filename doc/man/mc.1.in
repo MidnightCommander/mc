@@ -322,30 +322,29 @@ the input lines in the query dialogs.
 Hotkey bindings may be readed from external file (keymap\-file).
 A keymap\-file is searched on the following algorithm (to the first one found):
 .IP
-.br
+.BR
 1) command line option
 .BR \-K
 .BR \<keymap\>
 or
 .BR \-\-keymap=\<keymap\>
-.br
+.BR
 2) Environment variable
 .BR MC_KEYMAP
-.br
+.BR
 3) In config file parameter
 .BR keymap
 in section
-.BR [Midhight Commander]
-.br
+.BR [Midnight Commander]
+.BR
 4) File
 .BR ~/.mc/mc.keymap
-.br
+.BR
 5) File
 .BR @sysconfdir@/mc/mc.keymap
 .br
 6) File
 .BR @prefix@/share/mc/mc.keymap
-
 .PP
 Command line option, environment variable and parameter in config file may
 contain the absolute path to the keymap\-file (with the extension \.keymap
@@ -353,14 +352,13 @@ or without it). Search of keymap\-file will occur in (to the first one found):
 .IP
 1)
 .BR ~/.mc/
-.br
+.BR
 2)
 .BR @sysconfdir@/mc/
-.br
+.BR
 3)
 .BR @prefix@/share/mc/
-.br
-
+.BR
 .\"NODE "  Miscellaneous Keys"
 .SH "  Miscellaneous Keys"
 Here are some keys which don't fall into any of the other categories:
@@ -965,9 +963,9 @@ order by checking the reverse box.
 By default directories are sorted before files but this can be changed
 from the
 .\"LINK2"
-Options menu
-.\"Options Menu"
-(option
+Panel options
+.\"Panel options"
+menu (option
 .BR "Mix all files" ).
 .\"NODE "    Filter..."
 .SH "    Filter..."
@@ -1744,72 +1742,10 @@ command saves the current settings of the Left, Right and Options
 menus. A small number of other settings is saved, too.
 .\"NODE "    Configuration"
 .SH "    Configuration"
-The options in this dialog are divided into three groups:
-Panel Options, Pause after run and Other Options.
+The options in this dialog are divided into several groups: "File
+operation options", "Esc key mode", "Pause after run" and "Other options".
 .PP
-.B Panel Options
-.PP
-.I Use SI size units.
-If this option is set, Midnight Commander will use SI units (powers of 1000)
-when displaying any byte sizes. The suffixes (k, m ...) are shown in lowercase.
-If unset (default), Midnight Commander will use binary units (powers of 1024)
-and the suffixes are shown in upper case (K, M ...)
-.PP
-.I Show Backup Files.
-If enabled, the Midnight Commander will show files ending with a tilde.
-Otherwise, they won't be shown (like GNU's ls option \-B).
-.PP
-.I Show Hidden Files.
-If enabled, the Midnight Commander will show all files that start with
-a dot (like ls \-a).
-.PP
-.I Mark moves down.
-If enabled, the selection bar will move down when you mark a file (with
-Insert key).
-.PP
-.I Drop down menus.
-When this option is enabled, the pull down menus will be activated as
-soon as you press the
-.B F9
-key.  Otherwise, you will only get the menu title, and you will have
-to activate the menu either with the arrow keys or with the hotkeys.
-It is recommended if you are using hotkeys.
-.PP
-.I Mix all files.
-If this option is enabled, all files and directories are shown mixed
-together.  If the option is off, directories (and links to directories)
-are shown at the beginning of the listing, and other files below.
-.PP
-.I Fast directory reload.
-If this option is enabled, the Midnight Commander will use a trick to
-determine if the directory contents have changed.  The trick is to reload
-the directory only if the i\-node of the directory has changed; this means
-that reloads only happen when files are created or deleted.  If what
-changes is the i\-node for a file in the directory (file size changes,
-mode or owner changes, etc) the display is not updated.  In these cases,
-if you have the option on, you have to rescan the directory manually
-(with C\-r).
-.PP
-.B Pause after run
-.PP
-After executing your commands, the Midnight Commander can pause, so
-that you can examine the output of the command.  There are three
-possible settings for this variable:
-.PP
-.I Never.
-Means that you do not want to see the output of your command.  If you
-are using the Linux or FreeBSD console or an xterm, you will be able to
-see the output of the command by typing C\-o.
-.PP
-.I On dumb terminals.
-You will get the pause message on terminals that are not capable of
-showing the output of the last command executed (any terminal that is
-not an xterm or the Linux console).
-.PP
-.I Always.
-The program will pause after executing all of your commands.
-.PP
-.B Other Options
+.B File operation options
 .PP
 .I Verbose operation.
 This toggles whether the file Copy, Rename and Delete operations are
@@ -1819,30 +1755,64 @@ automatically turned off if the speed of your terminal is less than
 9600 bps.
 .PP
 .I Compute totals.
-If this option is enabled, the Midnight
-Commander computes total byte sizes and total number of files
-prior to any Copy, Rename and Delete operations. This will
-provide you with a more accurate progress bar at the expense
-of some speed. This option has no effect, if
-.I Verbose operation
+If this option is enabled, the Midnight Commander computes total byte
+sizes and total number of files prior to any Copy, Rename and Delete
+operations. This will provide you with a more accurate progress bar
+at the expense of some speed. This option has no effect, if
+.I Verbose  operation
 is disabled.
 .PP
-.I Shell Patterns.
-By default the Select, Unselect and Filter commands will use shell\-like
-regular expressions. The following conversions are performed to achieve
-this: the '*' is replaced by '.*' (zero or more characters); the '?'
-is replaced by '.' (exactly one character) and '.' by the literal
-dot. If the option is disabled, then the regular expressions are the
-ones described in ed(1).
+.I Classic progressbar.
+If this option is enabled, the progressbar of Copy/Move/Delete operations
+is always grown form left to right. If disabled, the growing direction
+of progressbar follows to direction of Copy/Move/Delete operation:
+from left panel to right one and vice versa. Enabled by default.
 .PP
-.I Auto Save Setup.
-If this option is enabled, when you exit the Midnight Commander the
-configurable options of the Midnight Commander are saved in the
-~/.mc/ini file.
+.I Mkdir autoname
+When you press F7 to create a new directory, the input line in popup dialog
+will be filled by name of current file or directory in active panel.
+Disabled by default.
 .PP
-.I Auto menus.
-If this option is enabled, the user menu will be invoked at startup.
-Useful for building menus for non\-unixers.
+.B Esc key mode.
+.PP
+By default the Midnight Commander treats the ESC key as a key prefix.
+Therefore, you should press Esc code twice to exit a dialog. But there is
+a possibility to use a single press of ESC key for that action.
+.PP
+.I Single press.
+By default this option is disabled. If you'll enable it, the ESC key
+will act as a prefix key for set up time interval (see
+.I Timeout
+option below), and if no extra keys have arrived, then the ESC key
+is interpreted as a cancel key (ESC ESC).
+.PP
+.I Timeout.
+This options is used to setup the time interval (in microseconds)
+for single press of ESC key. By default, this inrerval is one second
+(1000000 microseconds). Also the timeout can be set via KEYBOARD_KEY_TIMEOUT_US
+environment variable (also in microseconds), which has higher priority
+than Timeout option value.
+.PP
+.B Pause after run
+.PP
+After executing your commands, the Midnight Commander can pause, so
+that you can examine the output of the command.  There are three
+possible settings for this variable:
+.PP
+.IR Never .
+Means that you do not want to see the output of your command.  If you
+are using the Linux or FreeBSD console or an xterm, you will be able to
+see the output of the command by typing C\-o.
+.PP
+.IR On dumb terminals .
+You will get the pause message on terminals that are not capable of
+showing the output of the last command executed (any terminal that is
+not an xterm or the Linux console).
+.PP
+.IR Always .
+The program will pause after executing all of your commands.
+.PP
+.B Other options
 .PP
 .I Use internal editor.
 If this option is enabled, the built\-in file editor is used to edit
@@ -1868,6 +1838,24 @@ command is used.  See the section on the
 internal file viewer\&.
 .\"Internal File Viewer"
 .PP
+.I Auto menus.
+If this option is enabled, the user menu will be invoked at startup.
+Useful for building menus for non\-unixers.
+.PP
+.I Drop down menus.
+When this option is enabled, the pull down menus will be activated as
+soon as you press the F9 key. Otherwise, you will only get the menu title,
+and you will have to activate the menu either with the arrow keys or with
+the hotkeys. It is recommended if you are using hotkeys.
+.PP
+.I Shell Patterns.
+By default the Select, Unselect and Filter commands will use shell\-like
+regular expressions. The following conversions are performed to achieve
+this: the '*' is replaced by '.*' (zero or more characters); the '?'
+is replaced by '.' (exactly one character) and '.' by the literal
+dot. If the option is disabled, then the regular expressions are the
+ones described in ed(1).
+.PP
 .I Complete: show all.
 By default the Midnight Commander pops up all possible
 .\"LINK2"
@@ -1886,12 +1874,6 @@ If this option is enabled, the
 Midnight Commander shows a rotating dash in the upper right corner
 as a work in progress indicator.
 .PP
-.I Lynx\-like motion.
-If this option is enabled,
-you may use the arrows keys to automatically chdir if the
-current selection is a subdirectory and the shell command
-line is empty. By default, this setting is off.
-.PP
 .I Cd follows links.
 This option, if set, causes the Midnight Commander to follow the
 logical chain of directories when changing current directory
@@ -1906,9 +1888,11 @@ If this option is enabled, deleting files and directory hotlist entries
 unintentionally becomes more difficult.  The default selection in the
 confirmation dialogs for deletion changes from "Yes" to "No".
 This option is disabled by default.
-.\"NODE "    Panel options"
-.SH "    Panel options"
-Not written yet.
+.PP
+.I Auto Save Setup.
+If this option is enabled, when you exit the Midnight Commander the
+configurable options of the Midnight Commander are saved in the
+~/.mc/ini file.
 .\"NODE "    Layout"
 .SH "    Layout"
 The layout dialog gives you a possibility to change the general layout
@@ -1957,6 +1941,54 @@ when necessary.  If your terminal emulator is broken and you see some
 incorrect output on startup and directory change, turn off the
 .I Xterm Window Title
 option.
+.\"NODE "    Panel options"
+.SH "    Panel options"
+.PP
+.I Use SI size units.
+If this option is enabled, Midnight Commander will use SI units (powers of 1000)
+when displaying any byte sizes. The suffixes (k, m ...) are shown in lowercase.
+If disabled (default), Midnight Commander will use binary units (powers of 1024)
+and the suffixes are shown in upper case (K, M ...)
+.PP
+.I Mix all files.
+If this option is enabled, all files and directories are shown mixed
+together.  If the option is desabled (default), directories (and links to
+directories) are shown at the beginning of the listing, and other files below.
+.PP
+.I Show Backup Files.
+If enabled, the Midnight Commander will show files ending with a tilde.
+Otherwise, they won't be shown (like GNU's ls option \-B). Enabled by default.
+.PP
+.I Show Hidden Files.
+If enabled, the Midnight Commander will show all files that start with
+a dot (like ls \-a). Disabled by default.
+.PP
+.I Fast directory reload.
+If this option is enabled, the Midnight Commander will use a trick to
+determine if the directory contents have changed.  The trick is to reload
+the directory only if the i\-node of the directory has changed; this means
+that reloads only happen when files are created or deleted.  If what
+changes is the i\-node for a file in the directory (file size changes,
+mode or owner changes, etc) the display is not updated.  In these cases,
+if you have the option on, you have to rescan the directory manually
+(with C\-r). Disabled by default.
+.PP
+.I Mark moves down.
+If enabled, the selection bar will move down when you mark a file (with
+Insert key). Enabled by default.
+.PP
+.I Reverse files only
+Allow revert selection of files only. Enabled by default.
+If enabled, the reverse selection is applied to files only, not to directories.
+The selection of directories is untouched. If off, the reverse selection
+is applied to files as well to directories: all unselected items become
+selected, and vice versa.
+.PP
+.I Lynx\-like motion.
+If this option is enabled,
+you may use the arrows keys to automatically chdir if the
+current selection is a subdirectory and the shell command
+line is empty. By default, this setting is off.
 .\"NODE "    Confirmation"
 .SH "    Confirmation"
 In this dialog you configure the confirmation options for file deletion,
@@ -3394,7 +3426,7 @@ base_color=normal=white,default:marked=magenta,default
 
 .\"NODE "Skins"
 .SH "Skins"
-You can change the appearance of Midhight Commander.
+You can change the appearance of Midnight Commander.
 To do this, you must specify a file that contain descriptions of colors
 and lines to draw boxes. Redefining of the colors is entirely compatible
 with the assignment of colors, as described in Section
@@ -3506,7 +3538,6 @@ color of input lines used in query dialogs.
 .TP
 .I reverse
 reverse color
-
 .PP
 Section
 .B [dialog]
@@ -3811,25 +3842,12 @@ line on the panels.
 Controls if scrolling with the mouse is done by pages or line by line
 on the internal file viewer.
 .TP
-.I old_esc_mode
-By default the Midnight Commander treats the ESC key as a key prefix
-(old_esc_mode=0).  If this option is set (old_esc_mode=1), the ESC key
-will act as a prefix key for one second, and if no extra keys have
-arrived, then the ESC key is interpreted as a cancel key (ESC ESC).
-.TP
 .I only_leading_plus_minus
 Allow special treatment for '+', '\-', '*' in the command line (select,
 unselect, reverse selection) only if the command line is empty.  You
 don't need to quote those characters in the middle of the command line.
 On the other hand, you cannot use them to change selection when the
 command line is not empty.
-.TP
-.I reverse_files_only
-Allow revert selection of files only. This variable is on by default.
-If on, the reverse selection is applied to files only, not to directories.
-The selection of directories is untouched. If off, the reverse
-selection is applied to files as well to directories: all unselected
-items become selected, and vice versa.
 .TP
 .I panel_scroll_pages
 If set (the default), panel will scroll by half the display when the
