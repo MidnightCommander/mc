@@ -168,7 +168,7 @@ static struct {
     WCheck *widget;
 } check_options [] = {
     { N_("show free sp&Ace"),    &free_space,      NULL },
-    { N_("&Xterm window title"), &xterm_title,     NULL },
+    { N_("&XTerm window title"), &xterm_title,     NULL },
     { N_("h&Intbar visible"),    &message_visible, NULL },
     { N_("&Keybar visible"),     &keybar_visible,  NULL },
     { N_("command &Prompt"),     &command_prompt,  NULL },
@@ -180,7 +180,7 @@ static struct {
 #define LAYOUT_OPTIONS_COUNT  sizeof (check_options) / sizeof (check_options[0])
 #define OTHER_OPTIONS_COUNT   (LAYOUT_OPTIONS_COUNT - 1)
 
-static gsize first_width, second_width;
+static gsize first_width;
 static const char *output_lines_label = 0;
 static int output_lines_label_len;
 
@@ -368,10 +368,10 @@ init_layout (void)
     if (!i18n_layt_flag) {
 	gsize l1;
 
-	first_width = 19;	/* length of line with '<' '>' buttons */
+	first_width = 0;
 
 	title1 = _(" Panel split ");
-	title2 = _(" Terminal output ");
+	title2 = _(" Console output ");
 	title3 = _(" Other options ");
 	output_lines_label = _("Output lines: ");
 
@@ -397,18 +397,11 @@ init_layout (void)
 	if (l1 > first_width)
 	    first_width = l1;
 
-        second_width = str_term_width1 (title3) + 1;
-	for (i = 0; i < OTHER_OPTIONS_COUNT; i++) {
-	    check_options[i].text = _(check_options[i].text);
-            l1 = str_term_width1 (check_options[i].text) + 7;
-	    if (l1 > second_width)
-		second_width = l1;
-	}
 	if (console_flag) {
 	    output_lines_label_len = str_term_width1 (output_lines_label);
-            l1 = output_lines_label_len + 13;
-	    if (l1 > second_width)
-		second_width = l1;
+            l1 = output_lines_label_len + 12;
+	    if (l1 > first_width)
+		first_width = l1;
 	}
 
 	/*
@@ -424,7 +417,7 @@ init_layout (void)
                 + str_term_width1 (save_button)	/* notice: it is 3 char less because */
                 + str_term_width1 (cancel_button);	/* of '&' char in button text */
 
-	i = (first_width + second_width - l1) / 4;
+	i = (first_width * 2 - l1) / 4;
 	b1 = 5 + i;
         b2 = b1 + str_term_width1 (ok_button) + i + 6;
         b3 = b2 + str_term_width1 (save_button) + i + 4;
@@ -433,14 +426,14 @@ init_layout (void)
     }
 
     layout_dlg =
-	create_dlg (0, 0, 14, first_width + second_width + 9,
+	create_dlg (0, 0, 14, first_width * 2 + 9,
 		    dialog_colors, layout_callback, "[Layout]",
 		    _("Layout"), DLG_CENTER | DLG_REVERSE);
 
     add_widget (layout_dlg, groupbox_new (2, 4, 6, first_width, title1));
 
     add_widget (layout_dlg,
-		groupbox_new (2, 5 + first_width, 9, second_width,
+		groupbox_new (2, 5 + first_width, 9, first_width,
 			      title3));
 
     add_widget (layout_dlg,

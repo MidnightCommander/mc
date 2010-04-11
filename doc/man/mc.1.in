@@ -1896,51 +1896,58 @@ configurable options of the Midnight Commander are saved in the
 .\"NODE "    Layout"
 .SH "    Layout"
 The layout dialog gives you a possibility to change the general layout
-of screen. You can specify whether the menubar, the command prompt, the
-hintbar and the function keybar are visible. On the Linux or FreeBSD
-console you can specify how many lines are shown in the output window.
+of screen. The options in this dialog are divided into several groups:
+"Panel split", "Console output" and "Other options".
+.PP
+.B Panel split
 .PP
 The rest of the screen area is used for the two directory panels. You
-can specify whether the area is split to the panels in vertical or
-horizontal direction. The split can be equal or you can specify an
-unequal split.
+can specify whether the area is split to the panels in
+.I Vertical
+ or
+.I Horizontal
+direction. Panel layout can be changed using Alt\-, (Alt\-comma) shortcut.
 .PP
-You can specify whether
-.I permissions
-and
-.I file types
-should be highlighted with distinctive
-.\"LINK2"
-Colors\&.
-.\"Colors"
-If the permission highlighting is enabled, the parts of the
-.I perm
-and
-.I mode
-.\"LINK2"
-display fields
-.\"Listing Mode..."
-which apply to the user running Midnight Commander are highlighted with
-the color defined by the
-.I selected
-keyword.  If the file type highlighting is enabled, file names are colored
-according to rules described in @sysconfdir@/mc/filehighlight.ini file. See
-.\"LINK2"
-Filenames Highlight
-.\"Filenames Highlight"
-for more info.
+.I Equal split.
+By default, panels have equal sizes. Using this option you can specify
+an unequal split.
 .PP
-If the
-.I Show Mini\-Status
-option is enabled, one line of status information about the currently
-selected item is shown at the bottom of the panels.
+.B Console output
 .PP
+On the Linux or FreeBSD console you can specify how many lines are shown
+in the output window. This option is available if Midnight Commander runs
+on native console only.
+.PP
+.B Other options
+.PP
+.I Menu bar visible.
+If enabled, main menu of Midnight Commander is always visible on the top row
+of screen above panels. Enabled by default.
+.PP
+.I Show mini\-status.
+If enabled, one line of status information about the currently selected item
+is shown at the bottom of the panels. Enabled by default.
+.PP
+.I Command prompt.
+If enabled, command line is avalable. Enabled by default.
+.PP
+.I Keybar visible.
+If enabled, 10 lables associated with F1\-F10 keys are located at the bottom
+row of screen. Enabled by default.
+.PP
+.I Hintbar visible.
+If enabled, the one\-line hints are visible below panels. Enabled by default.
+.PP
+.I XTerm window title.
 When run in a terminal emulator for X11, Midnight Commander sets the
 terminal window title to the current working directory and updates it
 when necessary.  If your terminal emulator is broken and you see some
-incorrect output on startup and directory change, turn off the
-.I Xterm Window Title
-option.
+incorrect output on startup and directory change, turn off this option.
+Enabled by default.
+.PP
+.I Show free space.
+If enabled, free space and total space of current file system is shown
+at the bottom frame of panel. Enabled by default.
 .\"NODE "    Panel options"
 .SH "    Panel options"
 .PP
@@ -1989,6 +1996,31 @@ If this option is enabled,
 you may use the arrows keys to automatically chdir if the
 current selection is a subdirectory and the shell command
 line is empty. By default, this setting is off.
+.PP
+You can specify whether
+.I permissions
+and
+.I file types
+should be highlighted with distinctive
+.\"LINK2"
+Colors\&.
+.\"Colors"
+If the permission highlighting is enabled, the parts of the
+.I perm
+and
+.I mode
+.\"LINK2"
+display fields
+.\"Listing Mode..."
+which apply to the user running Midnight Commander are highlighted with
+the color defined by the
+.I selected
+keyword.  If the file type highlighting is enabled, file names are colored
+according to rules described in @sysconfdir@/mc/filehighlight.ini file. See
+.\"LINK2"
+Filenames Highlight
+.\"Filenames Highlight"
+for more info.
 .\"NODE "    Confirmation"
 .SH "    Confirmation"
 In this dialog you configure the confirmation options for file deletion,

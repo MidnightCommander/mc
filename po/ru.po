@@ -3054,7 +3054,7 @@ msgid "&Horizontal"
 msgstr "&Горизонтальное"
 
 msgid "show free sp&Ace"
-msgstr "показать свободное пространство"
+msgstr "Сво&бодное место"
 
 msgid "&Xterm window title"
 msgstr "&Заголовок xterm"
