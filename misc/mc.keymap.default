@@ -375,6 +375,7 @@ DiffRedo = ctrl-r
 DiffNextHunk = n; enter; space
 DiffPrevHunk = p; backspace
 DiffGoto = g; shift-g
+DiffSave = f2
 DiffEditCurrent = f4
 DiffEditOther = f14
 DiffMergeCurrentHunk = f5

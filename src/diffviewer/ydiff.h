@@ -61,6 +61,8 @@ typedef struct
     const char *file[2];        /* filenames */
     const char *label[2];
     FBUF *f[2];
+    const char *backup_sufix;
+    gboolean merged;
     GArray *a[2];
     GPtrArray *hdiff;
     int ndiff;                  /* number of hunks */
@@ -97,6 +99,14 @@ typedef struct
         gboolean ignore_case;
     } opt;
 } WDiff;
+
+typedef enum
+{
+    DIFF_NONE = 0,
+    DIFF_ADD = 1,
+    DIFF_DEL = 2,
+    DIFF_CHG = 3
+} DiffState;
 
 void dview_diff_cmd (WDiff * dview);
 int diff_view (const char *file1, const char *file2, const char *label1, const char *label2);

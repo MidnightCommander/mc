@@ -481,6 +481,8 @@ static name_keymap_t command_names[] = {
     { "DiffQuit",                        CK_DiffQuit},
     { "DiffHelp",                        CK_DiffHelp},
     { "SelectCodepage",                  CK_SelectCodepage},
+    { "DiffMergeCurrentHunk",            CK_DiffMergeCurrentHunk},
+    { "DiffSave",                        CK_DiffSave},
 
     { NULL,                              CK_Ignore_Key }
 };
@@ -986,6 +988,7 @@ const global_keymap_t default_diff_keymap[] = {
 
     { KEY_F (1),              CK_DiffHelp,           "F1" },
     { KEY_F (4),              CK_DiffEditCurrent,    "F4" },
+    { KEY_F (5),              CK_DiffMergeCurrentHunk, "F5" },
     { KEY_F (7),              CK_DiffSearch,         "F7" },
     { KEY_F (10),             CK_DiffQuit,           "F10" },
     { KEY_F (14),             CK_DiffEditOther,      "S-F4" },

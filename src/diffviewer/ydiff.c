@@ -157,6 +157,32 @@ static dview_select_encoding (WDiff * dview)
 #endif
 }
 
+
+static gboolean
+rewrite_backup_content (const char *from_file_name, const char *to_file_name)
+{
+    FILE *backup_fd;
+    char *contents;
+    gsize length;
+
+    if (!g_file_get_contents (from_file_name, &contents, &length, NULL))
+        return FALSE;
+
+    backup_fd = fopen (to_file_name, "w");
+    if (backup_fd == NULL)
+    {
+        g_free (contents);
+        return FALSE;
+    }
+
+    fwrite ((const void *) contents, length, 1, backup_fd);
+
+    fflush (backup_fd);
+    fclose (backup_fd);
+    g_free (contents);
+    return TRUE;
+}
+
 /* buffered I/O ************************************************************* */
 
 /**
@@ -1241,20 +1267,15 @@ hdiff_scan (const char *s, int m, const char *t, int n, int min, GArray * hdiff,
     BRACKET b;
 
     /* dumbscan (single horizontal diff) -- does not compress whitespace */
+    for (i = 0; i < m && i < n && s[i] == t[i]; i++);
+    for (; m > i && n > i && s[m - 1] == t[n - 1]; m--, n--);
 
-    for (i = 0; i < m && i < n && s[i] == t[i]; i++)
-    {
-    }
-    for (; m > i && n > i && s[m - 1] == t[n - 1]; m--, n--)
-    {
-    }
     b[0].off = i;
     b[0].len = m - i;
     b[1].off = i;
     b[1].len = n - i;
 
     /* smartscan (multiple horizontal diff) */
-
     return hdiff_multi (s, t, b, min, hdiff, depth);
 }
 
@@ -1964,20 +1985,26 @@ static int
 find_prev_hunk (const GArray * a, int pos)
 {
 #if 1
-    while (pos > 0 && ((DIFFLN *) & g_array_index (a, DIFFLN, pos))->ch != EQU_CH)
+    while (pos > 0 && ((DIFFLN *) &g_array_index (a, DIFFLN, pos))->ch != EQU_CH)
     {
         pos--;
     }
-    while (pos > 0 && ((DIFFLN *) & g_array_index (a, DIFFLN, pos))->ch == EQU_CH)
+    while (pos > 0 && ((DIFFLN *) &g_array_index (a, DIFFLN, pos))->ch == EQU_CH)
     {
         pos--;
     }
+    while (pos > 0 && ((DIFFLN *) &g_array_index (a, DIFFLN, pos))->ch != EQU_CH)
+    {
+        pos--;
+    }
+    if (pos > 0 && pos < a->len)
+        pos++;
 #else
-    while (pos > 0 && ((DIFFLN *) & g_array_index (a, DIFFLN, pos - 1))->ch == EQU_CH)
+    while (pos > 0 && ((DIFFLN *) &g_array_index (a, DIFFLN, pos - 1))->ch == EQU_CH)
     {
         pos--;
     }
-    while (pos > 0 && ((DIFFLN *) & g_array_index (a, DIFFLN, pos - 1))->ch != EQU_CH)
+    while (pos > 0 && ((DIFFLN *) &g_array_index (a, DIFFLN, pos - 1))->ch != EQU_CH)
     {
         pos--;
     }
@@ -1991,15 +2018,224 @@ find_prev_hunk (const GArray * a, int pos)
 static int
 find_next_hunk (const GArray * a, size_t pos)
 {
-    while (pos < a->len && ((DIFFLN *) & g_array_index (a, DIFFLN, pos))->ch != EQU_CH)
+    int result = 0;
+    while (pos < a->len && ((DIFFLN *) &g_array_index (a, DIFFLN, pos))->ch != EQU_CH)
     {
         pos++;
     }
-    while (pos < a->len && ((DIFFLN *) & g_array_index (a, DIFFLN, pos))->ch == EQU_CH)
+    while (pos < a->len && ((DIFFLN *) &g_array_index (a, DIFFLN, pos))->ch == EQU_CH)
     {
         pos++;
     }
     return pos;
+}
+
+/**
+ * Find start and end lines of the current hunk.
+ *
+ * \param dview - widget WDiff
+ * \return boolean and
+ * start_line1 first line of current hunk (file[0])
+ * end_line1 last line of current hunk (file[0])
+ * start_line1 first line of current hunk (file[0])
+ * end_line1 last line of current hunk (file[0])
+ */
+static int
+get_current_hunk (WDiff * dview, int *start_line1, int *end_line1, int *start_line2, int *end_line2)
+{
+    const GArray *a0 = dview->a[0];
+    const GArray *a1 = dview->a[1];
+    size_t tmp, pos;
+    int ch;
+    int res = 0;
+
+    *start_line1 = 1;
+    *start_line2 = 1;
+    *end_line1 = 1;
+    *end_line2 = 1;
+
+    pos = dview->skip_rows;
+    ch = ((DIFFLN *) &g_array_index (a0, DIFFLN, pos))->ch;
+    if (ch != EQU_CH)
+    {
+        switch (ch)
+        {
+        case ADD_CH:
+            res = DIFF_DEL;
+            break;
+        case DEL_CH:
+            res = DIFF_ADD;
+            break;
+        case CHG_CH:
+            res = DIFF_CHG;
+            break;
+        }
+        while (pos > 0 && ((DIFFLN *) &g_array_index (a0, DIFFLN, pos))->ch != EQU_CH)
+        {
+            pos--;
+        }
+        if (pos > 0)
+        {
+            *start_line1 = ((DIFFLN *) &g_array_index (a0, DIFFLN, pos))->line + 1;
+            *start_line2 = ((DIFFLN *) &g_array_index (a1, DIFFLN, pos))->line + 1;
+        }
+        pos = dview->skip_rows;
+        while (pos < a0->len && ((DIFFLN *) &g_array_index (a0, DIFFLN, pos))->ch != EQU_CH)
+        {
+            int l0, l1;
+            l0 = ((DIFFLN *) &g_array_index (a0, DIFFLN, pos))->line;
+            l1 = ((DIFFLN *) &g_array_index (a1, DIFFLN, pos))->line;
+            if (l0 > 0)
+                *end_line1 = max (*start_line1, l0);
+            if (l1 > 0)
+                *end_line2 = max (*start_line2, l1);
+            pos++;
+        }
+    }
+    return res;
+}
+
+static void
+dview_remove_hunk (WDiff * dview,  FILE * merge_file, int from1, int to1)
+{
+    int line;
+    char buf[BUF_10K];
+    FILE *f0;
+    f0 = fopen (dview->file[0], "r");
+    line = 0;
+    while (fgets (buf, sizeof (buf), f0) && line < from1 - 1)
+    {
+        line++;
+        fputs (buf, merge_file);
+    }
+    while (fgets (buf, sizeof (buf), f0))
+    {
+        line++;
+        if (line >= to1)
+            fputs (buf, merge_file);
+    }
+    fclose (f0);
+}
+
+static void
+dview_add_hunk (WDiff * dview, FILE * merge_file, int from1, int from2, int to2)
+{
+    int line;
+    char buf[BUF_10K];
+    FILE *f0;
+    FILE *f1;
+    f0 = fopen (dview->file[0], "r");
+    f1 = fopen (dview->file[1], "r");
+    line = 0;
+    while (fgets (buf, sizeof (buf), f0) && line < from1 - 1)
+    {
+        line++;
+        fputs (buf, merge_file);
+    }
+    line = 0;
+    while (fgets (buf, sizeof (buf), f1) && line <= to2)
+    {
+        line++;
+        if (line >= from2)
+            fputs (buf, merge_file);
+    }
+    while (fgets (buf, sizeof (buf), f0))
+    {
+        fputs (buf, merge_file);
+    }
+    fclose (f0);
+    fclose (f1);
+}
+
+static void
+dview_replace_hunk (WDiff * dview, FILE * merge_file, int from1, int to1, int from2, int to2)
+{
+    int line1, line2;
+    char buf[BUF_10K];
+    FILE *f0;
+    FILE *f1;
+    f0 = fopen (dview->file[0], "r");
+    f1 = fopen (dview->file[1], "r");
+    line1 = 0;
+    while (fgets (buf, sizeof (buf), f0) && line1 < from1 - 1)
+    {
+        line1++;
+        fputs (buf, merge_file);
+    }
+    line2 = 0;
+    while (fgets (buf, sizeof (buf), f1) && line2 <= to2)
+    {
+        line2++;
+        if (line2 >= from2)
+            fputs (buf, merge_file);
+    }
+    while (fgets (buf, sizeof (buf), f0))
+    {
+        line1++;
+        if (line1 > to1)
+            fputs (buf, merge_file);
+    }
+    fclose (f0);
+    fclose (f1);
+}
+
+static void
+do_merge_hunk (WDiff * dview)
+{
+    int i, diff;
+    int from1, to1, from2, to2;
+    int res;
+    int hunk;
+
+    hunk = get_current_hunk (dview, &from1, &to1, &from2, &to2);
+    if (hunk > 0)
+    {
+        int merge_file_fd;
+        FILE *merge_file;
+        char *merge_file_name = NULL;
+
+        if (!dview->merged)
+        {
+            dview->merged = mc_util_make_backup_if_possible (dview->file[0], "~~~");
+            if (!dview->merged)
+            {
+                message (D_ERROR, MSG_ERROR,
+                _(" Cannot create backup file \n %s%s \n %s "),
+                dview->file[0], "~~~", unix_error_string (errno));
+                return;
+            }
+
+        }
+
+        merge_file_fd = mc_mkstemps (&merge_file_name, "mcmerge", NULL);
+        if (merge_file_fd == -1)
+            {
+            message (D_ERROR, MSG_ERROR,
+            _(" Cannot create temporary merge file \n %s "),
+            unix_error_string (errno));
+            return;
+        }
+
+        merge_file = fdopen (merge_file_fd, "w");
+
+        switch (hunk)
+        {
+        case DIFF_DEL:
+            dview_remove_hunk (dview, merge_file, from1, to1);
+            break;
+        case DIFF_ADD:
+            dview_add_hunk (dview, merge_file, from1, from2, to2);
+            break;
+        case DIFF_CHG:
+            dview_replace_hunk (dview, merge_file, from1, to1, from2, to2);
+            break;
+        }
+        fflush (merge_file);
+        fclose (merge_file);
+        res = rewrite_backup_content (merge_file_name, dview->file[0]);
+        unlink (merge_file_name);
+        g_free (merge_file_name);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2236,7 +2472,6 @@ dview_display_file (const WDiff * dview, int ord, int r, int c, int height, int 
     const DIFFLN *p;
     int nwidth = display_numbers;
     int xwidth = display_symbols + display_numbers;
-
     if (xwidth)
     {
         if (xwidth > width && display_symbols)
@@ -2271,7 +2506,7 @@ dview_display_file (const WDiff * dview, int ord, int r, int c, int height, int 
     {
         int ch, next_ch, col;
         size_t cnt;
-        p = (DIFFLN *) & g_array_index (dview->a[ord], DIFFLN, i);
+        p = (DIFFLN *) &g_array_index (dview->a[ord], DIFFLN, i);
         ch = p->ch;
         tty_setcolor (NORMAL_COLOR);
         if (display_symbols)
@@ -2907,7 +3142,9 @@ dview_labels (WDiff * dview)
     WButtonBar *b = find_buttonbar (h);
 
     buttonbar_set_label (b, 1, Q_ ("ButtonBar|Help"), diff_map, (Widget *) dview);
+    buttonbar_set_label (b, 2, Q_ ("ButtonBar|Save"), diff_map, (Widget *) dview);
     buttonbar_set_label (b, 4, Q_ ("ButtonBar|Edit"), diff_map, (Widget *) dview);
+    buttonbar_set_label (b, 5, Q_ ("ButtonBar|Merge"), diff_map, (Widget *) dview);
     buttonbar_set_label (b, 7, Q_ ("ButtonBar|Search"), diff_map, (Widget *) dview);
     buttonbar_set_label (b, 10, Q_ ("ButtonBar|Quit"), diff_map, (Widget *) dview);
 }
@@ -2944,13 +3181,58 @@ dview_event (Gpm_Event * event, void *x)
     return result;
 }
 
+static gboolean
+dview_save (WDiff * dview)
+{
+    gboolean res = TRUE;
+    if (!dview->merged)
+        return res;
+    res = mc_util_unlink_backup_if_possible (dview->file[0], "~~~");
+    dview->merged = !res;
+    return res;
+}
+
+static void
+dview_do_save (WDiff * dview)
+{
+    (void) dview_save (dview);
+}
+
+/*
+ * Check if it's OK to close the diff viewer.  If there are unsaved changes,
+ * ask user.
+ */
+static gboolean
+dview_ok_to_exit (WDiff * dview)
+{
+    gboolean res = TRUE;
+    if (!dview->merged)
+        return res;
+    switch (query_dialog
+            (_("Quit"), _(" File was modified, Save with exit? "), D_NORMAL, 2, _("&Yes"), _("&No")))
+    {
+    case -1:
+        res = FALSE;
+        break;
+    case 0:
+        res = TRUE;
+        (void) dview_save (dview);
+        break;
+    case 1:
+        res = TRUE;
+        if (mc_util_restore_from_backup_if_possible (dview->file[0], "~~~"))
+            res = mc_util_unlink_backup_if_possible (dview->file[0], "~~~");
+        break;
+    }
+    return res;
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
 dview_execute_cmd (WDiff * dview, unsigned long command)
 {
     cb_ret_t res = MSG_HANDLED;
-
     switch (command)
     {
     case CK_DiffHelp:
@@ -3028,6 +3310,10 @@ dview_execute_cmd (WDiff * dview, unsigned long command)
     case CK_DiffEditCurrent:
         dview_edit (dview, dview->ord);
         break;
+    case CK_DiffMergeCurrentHunk:
+        do_merge_hunk (dview);
+        dview_redo (dview);
+        break;
     case CK_DiffEditOther:
         dview_edit (dview, dview->ord ^ 1);
         break;
@@ -3072,6 +3358,9 @@ dview_execute_cmd (WDiff * dview, unsigned long command)
         break;
     case CK_DiffQuit:
         dview->view_quit = 1;
+        break;
+    case CK_DiffSave:
+        dview_do_save (dview);
         break;
     case CK_SelectCodepage:
         dview_select_encoding (dview);
@@ -3174,6 +3463,12 @@ dview_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, v
     case DLG_ACTION:
         /* command from buttonbar */
         return send_message ((Widget *) dview, WIDGET_COMMAND, parm);
+
+    case DLG_VALIDATE:
+        dview = (WDiff *) find_widget_type (h, dview_callback);
+        if (!dview_ok_to_exit (dview))
+            h->running = 1;
+        return MSG_HANDLED;
 
     default:
         return default_dlg_callback (h, sender, msg, parm, data);
