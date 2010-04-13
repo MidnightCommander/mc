@@ -71,7 +71,7 @@ const global_keymap_t *help_map;
 
 #define MAXLINKNAME 80
 #define HISTORY_SIZE 20
-#define HELP_WINDOW_WIDTH (COLS - 16)
+#define HELP_WINDOW_WIDTH min(80, COLS - 16)
 
 #define STRING_LINK_START	"\01"
 #define STRING_LINK_POINTER	"\02"
