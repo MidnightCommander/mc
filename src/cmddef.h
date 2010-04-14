@@ -446,6 +446,7 @@
 #define CK_DiffHelp                     9034
 #define CK_DiffMergeCurrentHunk         9035
 #define CK_DiffSave                     9036
+#define CK_DiffContinueSearch           9037
 
 /*
    Process a block through a shell command: CK_Pipe_Block(i) executes shell_cmd[i].

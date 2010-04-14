@@ -43,7 +43,6 @@
 #include "src/keybind.h"
 #include "src/cmd.h"
 #include "src/dialog.h"
-#include "src/widget.h"
 #include "src/help.h"
 #include "src/wtools.h"
 #include "src/charsets.h"
@@ -55,6 +54,7 @@
 #include "src/selcodepage.h"
 
 #include "ydiff.h"
+#include "internal.h"
 
 /*** global variables ****************************************************************************/
 
@@ -79,9 +79,6 @@ do { \
 #define OPTX 50
 #define OPTY 16
 
-#define SEARCH_DLG_WIDTH  58
-#define SEARCH_DLG_HEIGHT 14
-
 #define ADD_CH		'+'
 #define DEL_CH		'-'
 #define CHG_CH		'*'
@@ -93,25 +90,15 @@ do { \
 
 #define TAB_SKIP(ts, pos)	((ts) - (pos) % (ts))
 
-#define error_dialog(h, s) query_dialog(h, s, D_ERROR, 1, _("&Dismiss"))
-
 #define FILE_DIRTY(fs)	\
     do {		\
 	(fs)->pos = 0;	\
 	(fs)->len = 0;	\
     } while (0)
 
-#define IS_WHOLE_OR_DONT_CARE()							\
-    (!whole || (								\
-     (i == 0 || strchr(wholechars, haystack[i - 1]) == NULL) &&			\
-     (i + nlen == hlen || strchr(wholechars, haystack[i + nlen]) == NULL)	\
-    ))
-
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/
-
-static const char *wholechars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_";
 
 /*** file scope functions ************************************************************************/
 
@@ -1909,6 +1896,11 @@ destroy_hdiff (WDiff * dview)
         g_ptr_array_free (dview->hdiff, TRUE);
         dview->hdiff = NULL;
     }
+
+    mc_search_free (dview->search.handle);
+    dview->search.handle = NULL;
+    g_free (dview->search.last_string);
+    dview->search.last_string = NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2347,7 +2339,12 @@ dview_init (WDiff * dview, const char *args, const char *file1, const char *file
     dview->tab_size = 8;
     dview->ord = 0;
     dview->full = 0;
-    dview->last_found = -1;
+
+    dview->search.handle=NULL;
+    dview->search.last_string=NULL;
+    dview->search.last_found_line = -1;
+    dview->search.last_accessed_num_line = 0;
+
 
     dview->opt.quality = 0;
     dview->opt.strip_trailing_cr = 0;
@@ -2532,7 +2529,7 @@ dview_display_file (const WDiff * dview, int ord, int r, int c, int height, int 
             }
             if (f == NULL)
             {
-                if (i == (size_t) dview->last_found)
+                if (i == (size_t) dview->search.last_found_line)
                 {
                     tty_setcolor (MARKED_SELECTED_COLOR);
                 }
@@ -2720,92 +2717,6 @@ dview_status (const WDiff * dview, int ord, int width, int c)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-dview_update (WDiff * dview)
-{
-    int height = dview->height;
-    int width1;
-    int width2;
-
-    int last = dview->a[0]->len - 1;
-
-    if (dview->skip_rows > last)
-    {
-        dview->skip_rows = last;
-    }
-    if (dview->skip_rows < 0)
-    {
-        dview->skip_rows = 0;
-    }
-    if (dview->skip_cols < 0)
-    {
-        dview->skip_cols = 0;
-    }
-
-    if (height < 2)
-    {
-        return;
-    }
-
-    width1 = dview->half1 + dview->bias;
-    width2 = dview->half2 - dview->bias;
-    if (dview->full)
-    {
-        width1 = COLS;
-        width2 = 0;
-    }
-
-    if (dview->new_frame)
-    {
-        int xwidth = dview->display_symbols + dview->display_numbers;
-
-        tty_setcolor (NORMAL_COLOR);
-        if (width1 > 1)
-        {
-            tty_draw_box (1, 0, height, width1, FALSE);
-        }
-        if (width2 > 1)
-        {
-            tty_draw_box (1, width1, height, width2, FALSE);
-        }
-
-        if (xwidth)
-        {
-            xwidth++;
-            if (xwidth < width1 - 1)
-            {
-                tty_gotoyx (1, xwidth);
-                tty_print_alt_char (mc_tty_frm[MC_TTY_FRM_DTOPMIDDLE], FALSE);
-                tty_gotoyx (height, xwidth);
-                tty_print_alt_char (mc_tty_frm[MC_TTY_FRM_DBOTTOMMIDDLE], FALSE);
-                tty_draw_vline (2, xwidth, mc_tty_frm[MC_TTY_FRM_VERT], height - 2);
-            }
-            if (xwidth < width2 - 1)
-            {
-                tty_gotoyx (1, width1 + xwidth);
-                tty_print_alt_char (mc_tty_frm[MC_TTY_FRM_DTOPMIDDLE], FALSE);
-                tty_gotoyx (height, width1 + xwidth);
-                tty_print_alt_char (mc_tty_frm[MC_TTY_FRM_DBOTTOMMIDDLE], FALSE);
-                tty_draw_vline (2, width1 + xwidth, mc_tty_frm[MC_TTY_FRM_VERT], height - 2);
-            }
-        }
-        dview->new_frame = 0;
-    }
-
-    if (width1 > 2)
-    {
-        dview_status (dview, dview->ord, width1, 0);
-        dview_display_file (dview, dview->ord, 2, 1, height - 2, width1 - 2);
-    }
-    if (width2 > 2)
-    {
-        dview_status (dview, dview->ord ^ 1, width2, width1);
-        dview_display_file (dview, dview->ord ^ 1, 2, width1 + 1, height - 2, width2 - 2);
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
 dview_redo (WDiff * dview)
 {
     if (dview->display_numbers)
@@ -2815,265 +2726,6 @@ dview_redo (WDiff * dview)
         dview->new_frame = (old != dview->display_numbers);
     }
     dview_reread (dview);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static const unsigned char *
-memmem_dummy (const unsigned char *haystack, size_t i, size_t hlen, const unsigned char *needle,
-              size_t nlen, int whole)
-{
-    for (; i + nlen <= hlen; i++)
-    {
-        if (haystack[i] == needle[0])
-        {
-            size_t j;
-            for (j = 1; j < nlen; j++)
-            {
-                if (haystack[i + j] != needle[j])
-                {
-                    break;
-                }
-            }
-            if (j == nlen && IS_WHOLE_OR_DONT_CARE ())
-            {
-                return haystack + i;
-            }
-        }
-    }
-
-    return NULL;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static const unsigned char *
-memmem_dummy_nocase (const unsigned char *haystack, size_t i, size_t hlen,
-                     const unsigned char *needle, size_t nlen, int whole)
-{
-    for (; i + nlen <= hlen; i++)
-    {
-        if (toupper (haystack[i]) == toupper (needle[0]))
-        {
-            size_t j;
-            for (j = 1; j < nlen; j++)
-            {
-                if (toupper (haystack[i + j]) != toupper (needle[j]))
-                {
-                    break;
-                }
-            }
-            if (j == nlen && IS_WHOLE_OR_DONT_CARE ())
-            {
-                return haystack + i;
-            }
-        }
-    }
-
-    return NULL;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static const unsigned char *
-search_string (const DIFFLN * p, size_t xpos, const void *needle, size_t nlen, int whole, int ccase)
-{
-    const unsigned char *haystack = p->p;
-    size_t hlen = p->u.len;
-
-    if (xpos > hlen || nlen <= 0 || haystack == NULL || needle == NULL)
-    {
-        return NULL;
-    }
-
-    /* XXX I should use Boyer-Moore */
-    if (ccase)
-    {
-        return memmem_dummy (haystack, xpos, hlen, needle, nlen, whole);
-    }
-    else
-    {
-        return memmem_dummy_nocase (haystack, xpos, hlen, needle, nlen, whole);
-    }
-}
-
-
-/* --------------------------------------------------------------------------------------------- */
-
-static int
-dview_search_string (WDiff * dview, const char *needle, int ccase, int back, int whole)
-{
-    size_t nlen = strlen (needle);
-    size_t xpos = 0;
-
-    int ord = dview->ord;
-    const DIFFLN *p;
-
-    size_t i = (size_t) dview->last_found;
-
-    if (back)
-    {
-        if (i == (size_t) - 1)
-        {
-            i = dview->skip_rows;
-        }
-        for (--i; i >= 0; i--)
-        {
-            const unsigned char *q;
-
-            p = (DIFFLN *) & g_array_index (dview->a[ord], DIFFLN, i);
-            q = search_string (p, xpos, needle, nlen, whole, ccase);
-            if (q != NULL)
-            {
-                return i;
-            }
-        }
-    }
-    else
-    {
-        if (i == (size_t) - 1)
-        {
-            i = dview->skip_rows - 1;
-        }
-        for (++i; i < dview->a[ord]->len; i++)
-        {
-            const unsigned char *q;
-
-            p = (DIFFLN *) & g_array_index (dview->a[ord], DIFFLN, i);
-            q = search_string (p, xpos, needle, nlen, whole, ccase);
-            if (q != NULL)
-            {
-                return i;
-            }
-        }
-    }
-
-    return -1;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-dview_search (WDiff * dview, int again)
-{
-    /* XXX some statics here, to be remembered between runs */
-    static char *searchopt_text = NULL;
-    static int searchopt_type;
-    static int searchopt_case;
-    static int searchopt_backwards;
-    static int searchopt_whole;
-
-    static int compiled = 0;
-
-    if (again < 0)
-    {
-        g_free (searchopt_text);
-        searchopt_text = NULL;
-        if (compiled)
-        {
-            compiled = 0;
-            /*XXX free search exp */
-        }
-        return;
-    }
-
-    if (dview->dsrc != DATA_SRC_MEM)
-    {
-        error_dialog (_("Search"), _(" Search is disabled "));
-        return;
-    }
-
-    if (!again || searchopt_text == NULL)
-    {
-        char *tsearchopt_text = NULL;
-        int tsearchopt_type = searchopt_type;
-        int tsearchopt_case = searchopt_case;
-        int tsearchopt_backwards = searchopt_backwards;
-        int tsearchopt_whole = searchopt_whole;
-
-        const char *search_str[] = {
-            N_("&Normal")
-        };
-
-        QuickWidget search_widgets[] = {
-            /* 0 */
-            QUICK_BUTTON (6, 10, 11, SEARCH_DLG_HEIGHT, N_("&Cancel"), B_CANCEL, NULL),
-            /* 1 */
-            QUICK_BUTTON (4, 10, 11, SEARCH_DLG_HEIGHT, N_("&Find all"), B_USER, NULL),
-            /* 2 */
-            QUICK_BUTTON (2, 10, 11, SEARCH_DLG_HEIGHT, N_("&OK"), B_ENTER, NULL),
-            /* 3 */
-            QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 8, SEARCH_DLG_HEIGHT, N_("&Whole words"),
-                            &tsearchopt_whole),
-            /* 4 */
-            QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 6, SEARCH_DLG_HEIGHT, N_("&Backwards"),
-                            &tsearchopt_backwards),
-            /* 5 */
-            QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT, N_("case &Sensitive"),
-                            &tsearchopt_case),
-            /* 6 */
-            QUICK_RADIO (3, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT,
-                         1, (const char **) search_str, (int *) &tsearchopt_type),
-            /* 7 */
-            QUICK_INPUT (3, SEARCH_DLG_WIDTH, 3, SEARCH_DLG_HEIGHT,
-                         tsearchopt_text, SEARCH_DLG_WIDTH - 6, 0, MC_HISTORY_SHARED_SEARCH,
-                         &tsearchopt_text),
-            /* 8 */
-            QUICK_LABEL (2, SEARCH_DLG_WIDTH, 2, SEARCH_DLG_HEIGHT, N_(" Enter search string:")),
-            QUICK_END
-        };
-
-        QuickDialog search_input = {
-            SEARCH_DLG_WIDTH, SEARCH_DLG_HEIGHT, -1, 0,
-            N_("Search"), "[Input Line Keys]",
-            search_widgets, 0
-        };
-
-        if (quick_dialog (&search_input) == B_CANCEL)
-        {
-            return;
-        }
-        if (tsearchopt_text == NULL || !*tsearchopt_text)
-        {
-            g_free (tsearchopt_text);
-            return;
-        }
-        g_free (searchopt_text);
-
-        searchopt_text = tsearchopt_text;
-        searchopt_type = tsearchopt_type;
-        searchopt_case = tsearchopt_case;
-        searchopt_backwards = tsearchopt_backwards;
-        searchopt_whole = tsearchopt_whole;
-    }
-
-    if (compiled)
-    {
-        compiled = 0;
-        /*XXX free search exp */
-    }
-    if (0 /*XXX new search exp */ )
-    {
-        error_dialog (_("Error"), _(" Cannot search "));
-        return;
-    }
-    compiled = 1;
-    if (searchopt_type == 0)
-    {
-        dview->last_found =
-            dview_search_string (dview, searchopt_text, searchopt_case, searchopt_backwards,
-                                searchopt_whole);
-    }
-
-    if (dview->last_found == -1)
-    {
-        error_dialog (_("Search"), _(" Search string not found "));
-    }
-    else
-    {
-        dview->skip_rows = dview->last_found;
-        dview_update (dview);
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3126,7 +2778,7 @@ dview_goto_cmd (WDiff * dview, int ord)
                     }
                 }
             }
-            dview->skip_rows = i;
+            dview->skip_rows = dview->search.last_accessed_num_line = i;
             snprintf (prev, sizeof (prev), "%d", newline);
         }
         g_free (input);
@@ -3168,12 +2820,14 @@ dview_event (Gpm_Event * event, void *x)
     if ((event->buttons & GPM_B_UP) && (event->type & GPM_DOWN))
     {
         dview->skip_rows -= 2;
+        dview->search.last_accessed_num_line = dview->skip_rows;
         dview_update (dview);
         return result;
     }
     if ((event->buttons & GPM_B_DOWN) && (event->type & GPM_DOWN))
     {
         dview->skip_rows += 2;
+        dview->search.last_accessed_num_line = dview->skip_rows;
         dview_update (dview);
         return result;
     }
@@ -3294,17 +2948,17 @@ dview_execute_cmd (WDiff * dview, unsigned long command)
         dview_redo (dview);
         break;
     case CK_DiffNextHunk:
-        dview->skip_rows = find_next_hunk (dview->a[0], dview->skip_rows);
+        dview->skip_rows = dview->search.last_accessed_num_line = find_next_hunk (dview->a[0], dview->skip_rows);
         break;
     case CK_DiffPrevHunk:
-        dview->skip_rows = find_prev_hunk (dview->a[0], dview->skip_rows);
+        dview->skip_rows = dview->search.last_accessed_num_line = find_prev_hunk (dview->a[0], dview->skip_rows);
         break;
     case CK_DiffGoto:
         dview_goto_cmd (dview, TRUE);
         break;
         /* what this?
            case KEY_BACKSPACE:
-           dview->last_found = -1;
+           dview->search.last_found_line = -1;
            break;
          */
     case CK_DiffEditCurrent:
@@ -3318,25 +2972,32 @@ dview_execute_cmd (WDiff * dview, unsigned long command)
         dview_edit (dview, dview->ord ^ 1);
         break;
     case CK_DiffSearch:
-        dview_search (dview, 1);
+        dview_search_cmd (dview);
+        break;
+    case CK_DiffContinueSearch:
+        dview_continue_search_cmd (dview);
         break;
     case CK_DiffBOF:
-        dview->skip_rows = 0;
+        dview->skip_rows = dview->search.last_accessed_num_line = 0;
         break;
     case CK_DiffEOF:
-        dview->skip_rows = dview->a[0]->len - 1;
+        dview->skip_rows = dview->search.last_accessed_num_line = dview->a[0]->len - 1;
         break;
     case CK_DiffUp:
         dview->skip_rows--;
+        dview->search.last_accessed_num_line = dview->skip_rows;
         break;
     case CK_DiffDown:
         dview->skip_rows++;
+        dview->search.last_accessed_num_line = dview->skip_rows;
         break;
     case CK_DiffPageDown:
         dview->skip_rows += dview->height - 2;
+        dview->search.last_accessed_num_line = dview->skip_rows;
         break;
     case CK_DiffPageUp:
         dview->skip_rows -= dview->height - 2;
+        dview->search.last_accessed_num_line = dview->skip_rows;
         break;
     case CK_DiffLeft:
         dview->skip_cols--;
@@ -3512,7 +3173,6 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
     if (!error)
     {
         run_dlg (dview_dlg);
-        dview_search (dview, -1);
         dview_fini (dview);
     }
     destroy_dlg (dview_dlg);
@@ -3603,3 +3263,91 @@ dview_diff_cmd (WDiff *dview)
         message (1, MSG_ERROR, _("Need two files to compare"));
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+dview_update (WDiff * dview)
+{
+    int height = dview->height;
+    int width1;
+    int width2;
+
+    int last = dview->a[0]->len - 1;
+
+    if (dview->skip_rows > last)
+    {
+        dview->skip_rows = dview->search.last_accessed_num_line = last;
+    }
+    if (dview->skip_rows < 0)
+    {
+        dview->skip_rows = dview->search.last_accessed_num_line = 0;
+    }
+    if (dview->skip_cols < 0)
+    {
+        dview->skip_cols = 0;
+    }
+
+    if (height < 2)
+    {
+        return;
+    }
+
+    width1 = dview->half1 + dview->bias;
+    width2 = dview->half2 - dview->bias;
+    if (dview->full)
+    {
+        width1 = COLS;
+        width2 = 0;
+    }
+
+    if (dview->new_frame)
+    {
+        int xwidth = dview->display_symbols + dview->display_numbers;
+
+        tty_setcolor (NORMAL_COLOR);
+        if (width1 > 1)
+        {
+            tty_draw_box (1, 0, height, width1, FALSE);
+        }
+        if (width2 > 1)
+        {
+            tty_draw_box (1, width1, height, width2, FALSE);
+        }
+
+        if (xwidth)
+        {
+            xwidth++;
+            if (xwidth < width1 - 1)
+            {
+                tty_gotoyx (1, xwidth);
+                tty_print_alt_char (mc_tty_frm[MC_TTY_FRM_DTOPMIDDLE], FALSE);
+                tty_gotoyx (height, xwidth);
+                tty_print_alt_char (mc_tty_frm[MC_TTY_FRM_DBOTTOMMIDDLE], FALSE);
+                tty_draw_vline (2, xwidth, mc_tty_frm[MC_TTY_FRM_VERT], height - 2);
+            }
+            if (xwidth < width2 - 1)
+            {
+                tty_gotoyx (1, width1 + xwidth);
+                tty_print_alt_char (mc_tty_frm[MC_TTY_FRM_DTOPMIDDLE], FALSE);
+                tty_gotoyx (height, width1 + xwidth);
+                tty_print_alt_char (mc_tty_frm[MC_TTY_FRM_DBOTTOMMIDDLE], FALSE);
+                tty_draw_vline (2, width1 + xwidth, mc_tty_frm[MC_TTY_FRM_VERT], height - 2);
+            }
+        }
+        dview->new_frame = 0;
+    }
+
+    if (width1 > 2)
+    {
+        dview_status (dview, dview->ord, width1, 0);
+        dview_display_file (dview, dview->ord, 2, 1, height - 2, width1 - 2);
+    }
+    if (width2 > 2)
+    {
+        dview_status (dview, dview->ord ^ 1, width2, width1);
+        dview_display_file (dview, dview->ord ^ 1, 2, width1 + 1, height - 2, width2 - 2);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
