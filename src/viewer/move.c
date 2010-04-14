@@ -154,7 +154,7 @@ mcview_move_down (mcview_t * view, off_t lines)
     else
     {
         off_t i;
-        for (i = 0; i < lines; i++)
+        for (i = 0; i < lines && view->dpy_end < last_byte; i++)
         {
             off_t new_offset;
             new_offset = mcview_eol (view, view->dpy_start);
@@ -257,7 +257,8 @@ mcview_moveto_top (mcview_t * view)
 void
 mcview_moveto_bottom (mcview_t * view)
 {
-    off_t datalines, lines_up, filesize, last_offset;
+    const off_t datalines = view->data_area.height;
+    off_t filesize;
 
     mcview_update_filesize (view);
 
@@ -265,11 +266,12 @@ mcview_moveto_bottom (mcview_t * view)
         mcview_growbuf_read_until (view, OFFSETTYPE_MAX);
 
     filesize = mcview_get_filesize (view);
-    datalines = view->data_area.height;
-    lines_up = mcview_offset_doz (datalines, 1);
 
     if (view->hex_mode)
     {
+        off_t lines_up, last_offset;
+
+        lines_up = mcview_offset_doz (datalines, 1);
         last_offset = mcview_offset_doz (filesize, 1);
         view->hex_cursor = filesize;
         mcview_move_up (view, lines_up);
@@ -278,7 +280,7 @@ mcview_moveto_bottom (mcview_t * view)
     else
     {
         view->dpy_start = filesize;
-        mcview_move_up (view, 1);
+        mcview_move_up (view, datalines);
     }
 }
 
