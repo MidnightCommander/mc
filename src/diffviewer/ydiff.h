@@ -2,7 +2,6 @@
 #define MC__DIFFVIEW_YDIFF_H
 
 /*** typedefs(not structures) and defined constants **********************************************/
-struct WDiff_struct;
 
 /*** enums ***************************************************************************************/
 
@@ -12,7 +11,7 @@ struct WDiff_struct;
 
 /*** declarations of public functions ************************************************************/
 
-void dview_diff_cmd (struct WDiff_struct * dview);
+void dview_diff_cmd (void);
 int diff_view (const char *file1, const char *file2, const char *label1, const char *label2);
 
 #endif /* MC__DIFFVIEW_YDIFF_H */

@@ -959,7 +959,7 @@ compare_dirs_cmd (void)
 void
 diff_view_cmd (void)
 {
-    dview_diff_cmd (NULL);
+    dview_diff_cmd ();
 }
 #endif
 

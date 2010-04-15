@@ -76,7 +76,7 @@ typedef struct
     DSRC dsrc;
 } PRINTER_CTX;
 
-typedef struct WDiff_struct
+typedef struct WDiff
 {
     Widget widget;
 

@@ -152,7 +152,6 @@ mcdiffview_dialog_search (WDiff * dview)
         return FALSE;
     }
 
-
 #ifdef HAVE_CHARSET
     {
         GString *tmp = str_convert_to_input (exp);
@@ -237,7 +236,6 @@ mcdiffview_do_search (WDiff * dview)
 {
     gboolean present_result = FALSE;
 
-
     tty_enable_interrupt_key ();
 
     if (mcdiffview_search_options.backwards)
@@ -256,7 +254,6 @@ mcdiffview_do_search (WDiff * dview)
         dview->search.last_found_line = -1;
         error_dialog (_("Search"), _(" Search string not found "));
     }
-
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -295,16 +292,11 @@ void
 dview_continue_search_cmd (WDiff * dview)
 {
     if (dview->dsrc != DATA_SRC_MEM)
-    {
         error_dialog (_("Search"), _(" Search is disabled "));
-        return;
-    }
-    if (dview->search.handle == NULL)
-    {
+    else if (dview->search.handle == NULL)
         dview_search_cmd (dview);
-        return;
-    }
-    mcdiffview_do_search (dview);
+    else
+        mcdiffview_do_search (dview);
 }
 
 /* --------------------------------------------------------------------------------------------- */

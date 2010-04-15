@@ -30,6 +30,7 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <sys/stat.h>
+#include <sys/types.h>
 
 #include "lib/global.h"
 #include "lib/tty/tty.h"
@@ -49,7 +50,6 @@
 #include "src/history.h"
 #include "src/panel.h"                  /* Needed for current_panel and other_panel */
 #include "src/layout.h"                 /* Needed for get_current_index and get_other_panel */
-                                        /* mc_open, mc_close, mc_read, mc_stat  */
 #include "src/main.h"                   /* mc_run_mode */
 #include "src/selcodepage.h"
 
@@ -131,14 +131,12 @@ dview_set_codeset (WDiff * dview)
 
 /* --------------------------------------------------------------------------------------------- */
 
-void
-static dview_select_encoding (WDiff * dview)
+static void
+dview_select_encoding (WDiff * dview)
 {
 #ifdef HAVE_CHARSET
     if (do_select_codepage ())
-    {
         dview_set_codeset (dview);
-    }
 #else
     (void) dview;
 #endif
@@ -651,7 +649,7 @@ dview_get_utf (char * str, int * char_width, gboolean * result)
 static int
 dview_str_utf8_offset_to_pos (const char *text, size_t length)
 {
-    int result;
+    ptrdiff_t result;
     if (text == NULL || text[0] == '\0')
         return length;
     if (g_utf8_validate (text, -1, NULL))
@@ -680,7 +678,7 @@ dview_str_utf8_offset_to_pos (const char *text, size_t length)
         result = g_utf8_offset_to_pointer (tmpbuf, length) - tmpbuf;
         g_free (buffer);
     }
-    return max (length, result);
+    return max (length, (size_t) result);
 }
 
 
@@ -1989,7 +1987,7 @@ find_prev_hunk (const GArray * a, int pos)
     {
         pos--;
     }
-    if (pos > 0 && pos < a->len)
+    if (pos > 0 && (size_t) pos < a->len)
         pos++;
 #else
     while (pos > 0 && ((DIFFLN *) &g_array_index (a, DIFFLN, pos - 1))->ch == EQU_CH)
@@ -2007,10 +2005,9 @@ find_prev_hunk (const GArray * a, int pos)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static size_t
 find_next_hunk (const GArray * a, size_t pos)
 {
-    int result = 0;
     while (pos < a->len && ((DIFFLN *) &g_array_index (a, DIFFLN, pos))->ch != EQU_CH)
     {
         pos++;
@@ -2037,7 +2034,7 @@ get_current_hunk (WDiff * dview, int *start_line1, int *end_line1, int *start_li
 {
     const GArray *a0 = dview->a[0];
     const GArray *a1 = dview->a[1];
-    size_t tmp, pos;
+    size_t pos;
     int ch;
     int res = 0;
 
@@ -2174,7 +2171,6 @@ dview_replace_hunk (WDiff * dview, FILE * merge_file, int from1, int to1, int fr
 static void
 do_merge_hunk (WDiff * dview)
 {
-    int i, diff;
     int from1, to1, from2, to2;
     int res;
     int hunk;
@@ -3212,7 +3208,7 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
     } while (0)
 
 void
-dview_diff_cmd (WDiff *dview)
+dview_diff_cmd (void)
 {
     int rv = 0;
     char *file0 = NULL;
@@ -3220,7 +3216,7 @@ dview_diff_cmd (WDiff *dview)
     int is_dir0 = 0;
     int is_dir1 = 0;
 
-    if ((mc_run_mode == MC_RUN_FULL) && (dview == NULL))
+    if (mc_run_mode == MC_RUN_FULL)
     {
         const WPanel *panel0 = current_panel;
         const WPanel *panel1 = other_panel;
@@ -3235,7 +3231,8 @@ dview_diff_cmd (WDiff *dview)
         is_dir1 = S_ISDIR (selection (panel1)->st.st_mode);
     }
 
-    if (rv == 0) {
+    if (rv == 0)
+    {
         rv = -1;
         if (file0 != NULL && !is_dir0 && file1 != NULL && !is_dir1)
         {
@@ -3259,9 +3256,8 @@ dview_diff_cmd (WDiff *dview)
     g_free (file1);
     g_free (file0);
 
-    if (rv != 0) {
-        message (1, MSG_ERROR, _("Need two files to compare"));
-    }
+    if (rv != 0)
+        message (1, MSG_ERROR, _("Two files are needed to compare"));
 }
 
 /* --------------------------------------------------------------------------------------------- */
