@@ -3022,6 +3022,8 @@ dview_execute_cmd (WDiff * dview, unsigned long command)
     case CK_SelectCodepage:
         dview_select_encoding (dview);
         dview_reread (dview);
+        tty_touch_screen ();
+        repaint_screen ();
         break;
     default:
         res = MSG_NOT_HANDLED;
