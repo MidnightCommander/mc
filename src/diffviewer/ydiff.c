@@ -2438,6 +2438,9 @@ dview_fini (WDiff * dview)
         f_close (dview->f[0]);
     }
 
+    if (dview->converter != str_cnv_from_term)
+        str_close_conv (dview->converter);
+
     destroy_hdiff (dview);
     g_array_foreach (dview->a[0], DIFFLN, cc_free_elt);
     g_array_free (dview->a[0], TRUE);
@@ -3084,6 +3087,10 @@ dview_callback (Widget * w, widget_msg_t msg, int parm)
             dview_update (dview);
         return i;
 
+    case WIDGET_DESTROY:
+        dview_fini (dview);
+        return MSG_HANDLED;
+
     default:
         return default_proc (msg, parm);
     }
@@ -3168,11 +3175,8 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
      * you have to modify dview_adjust_size to
      * be aware of it
      */
-    if (!error)
-    {
+    if (error == 0)
         run_dlg (dview_dlg);
-        dview_fini (dview);
-    }
     destroy_dlg (dview_dlg);
 
     return error;
