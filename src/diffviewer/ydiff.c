@@ -77,7 +77,7 @@ do { \
 #define FILE_FLAG_TEMP	(1 << 0)
 
 #define OPTX 50
-#define OPTY 16
+#define OPTY 17
 
 #define ADD_CH		'+'
 #define DEL_CH		'-'
@@ -2393,25 +2393,29 @@ dview_reinit (WDiff * dview)
 {
     const char *quality_str[] = {
         N_("&Normal"),
-        N_("&Fastest"),
-        N_("&Minimal")
+        N_("&Fastest (Assume large files)"),
+        N_("&Minimal (Find a smaller set of change)")
     };
 
     QuickWidget diffopt_widgets[] = {
-        QUICK_BUTTON (6, 10, 13, OPTY, N_("&Cancel"), B_CANCEL, NULL),
-        QUICK_BUTTON (2, 10, 13, OPTY, N_("&OK"), B_ENTER, NULL),
-        QUICK_RADIO (3, OPTX, 15, OPTX,
-                     3, (const char **) quality_str, (int *) &dview->opt.quality),
+        QUICK_BUTTON (6, 10, 14, OPTY, N_("&Cancel"), B_CANCEL, NULL),
+        QUICK_BUTTON (2, 10, 14, OPTY, N_("&OK"), B_ENTER, NULL),
+
+        QUICK_CHECKBOX (3, OPTX, 12, OPTY,
+                        N_("Strip &trailing carriage return"), &dview->opt.strip_trailing_cr),
         QUICK_CHECKBOX (3, OPTX, 11, OPTY,
-                        N_("strip trailing &CR"), &dview->opt.strip_trailing_cr),
+                        N_("Ignore all &whitespace"), &dview->opt.ignore_all_space),
         QUICK_CHECKBOX (3, OPTX, 10, OPTY,
-                        N_("ignore all &Whitespace"), &dview->opt.ignore_all_space),
+                        N_("Ignore &space change"), &dview->opt.ignore_space_change),
         QUICK_CHECKBOX (3, OPTX, 9, OPTY,
-                        N_("ignore &Space change"), &dview->opt.ignore_space_change),
+                        N_("Ignore tab &expansion"), &dview->opt.ignore_tab_expansion),
         QUICK_CHECKBOX (3, OPTX, 8, OPTY,
-                        N_("ignore tab &Expansion"), &dview->opt.ignore_tab_expansion),
-        QUICK_CHECKBOX (3, OPTX, 7, OPTY,
                         N_("&Ignore case"), &dview->opt.ignore_case),
+        QUICK_LABEL (3, OPTX, 7, OPTY, N_("Diff extra options")),
+        QUICK_RADIO (3, OPTX, 3, OPTY,
+                     3, (const char **) quality_str, (int *) &dview->opt.quality),
+        QUICK_LABEL (3, OPTX, 2, OPTY, N_("Diff algorithm")),
+
         QUICK_END
     };
 
@@ -2851,6 +2855,57 @@ dview_do_save (WDiff * dview)
     (void) dview_save (dview);
 }
 
+static void
+dview_save_options (WDiff * dview)
+{
+    mc_config_set_bool (mc_main_config, "DiffView", "show_symbols",
+                        dview->display_symbols != 0 ? TRUE : FALSE);
+    mc_config_set_bool (mc_main_config, "DiffView", "show_numbers",
+                        dview->display_numbers != 0 ? TRUE : FALSE);
+    mc_config_set_int (mc_main_config, "DiffView", "tab_size", dview->tab_size);
+
+    mc_config_set_int (mc_main_config, "DiffView", "diff_quality", dview->opt.quality);
+
+    mc_config_set_bool (mc_main_config, "DiffView", "diff_ignore_tws",
+                        dview->opt.strip_trailing_cr);
+    mc_config_set_bool (mc_main_config, "DiffView", "diff_ignore_all_space",
+                        dview->opt.ignore_all_space);
+    mc_config_set_bool (mc_main_config, "DiffView", "diff_ignore_space_change",
+                        dview->opt.ignore_space_change);
+    mc_config_set_bool (mc_main_config, "DiffView", "diff_tab_expansion",
+                        dview->opt.ignore_tab_expansion);
+    mc_config_set_bool (mc_main_config, "DiffView", "diff_ignore_case", dview->opt.ignore_case);
+}
+
+static void
+dview_load_options (WDiff * dview)
+{
+    gboolean show_numbers, show_symbols;
+
+    show_symbols = mc_config_get_bool (mc_main_config, "DiffView", "show_symbols", FALSE);
+    if (show_symbols)
+        dview->display_symbols = 1;
+    show_numbers = mc_config_get_bool (mc_main_config, "DiffView", "show_numbers", FALSE);
+    if (show_numbers)
+        dview->display_numbers = calc_nwidth ((const GArray ** const) dview->a);
+    dview->tab_size = mc_config_get_int (mc_main_config, "DiffView", "tab_size", 8);
+
+    dview->opt.quality = mc_config_get_int (mc_main_config, "DiffView", "diff_quality", 0);
+
+    dview->opt.strip_trailing_cr =
+        mc_config_get_bool (mc_main_config, "DiffView", "diff_ignore_tws", FALSE);
+    dview->opt.ignore_all_space =
+        mc_config_get_bool (mc_main_config, "DiffView", "diff_ignore_all_space", FALSE);
+    dview->opt.ignore_space_change =
+        mc_config_get_bool (mc_main_config, "DiffView", "diff_ignore_space_change", FALSE);
+    dview->opt.ignore_tab_expansion =
+        mc_config_get_bool (mc_main_config, "DiffView", "diff_tab_expansion", FALSE);
+    dview->opt.ignore_case =
+        mc_config_get_bool (mc_main_config, "DiffView", "diff_ignore_case", FALSE);
+
+    dview->new_frame = 1;
+}
+
 /*
  * Check if it's OK to close the diff viewer.  If there are unsaved changes,
  * ask user.
@@ -2925,9 +2980,6 @@ dview_execute_cmd (WDiff * dview, unsigned long command)
             dview->new_frame = 1;
         }
         break;
-    case CK_DiffShowCR:
-        dview->show_cr ^= 1;
-        break;
     case CK_DiffSetTab2:
         dview->tab_size = 2;
         break;
@@ -2955,11 +3007,6 @@ dview_execute_cmd (WDiff * dview, unsigned long command)
     case CK_DiffGoto:
         dview_goto_cmd (dview, TRUE);
         break;
-        /* what this?
-           case KEY_BACKSPACE:
-           dview->search.last_found_line = -1;
-           break;
-         */
     case CK_DiffEditCurrent:
         dview_edit (dview, dview->ord);
         break;
@@ -3064,6 +3111,8 @@ dview_callback (Widget * w, widget_msg_t msg, int parm)
     {
     case WIDGET_INIT:
         dview_labels (dview);
+        dview_load_options (dview);
+        dview_update (dview);
         return MSG_HANDLED;
 
     case WIDGET_DRAW:
@@ -3088,6 +3137,7 @@ dview_callback (Widget * w, widget_msg_t msg, int parm)
         return i;
 
     case WIDGET_DESTROY:
+        dview_save_options (dview);
         dview_fini (dview);
         return MSG_HANDLED;
 
