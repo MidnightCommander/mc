@@ -36,16 +36,13 @@
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/mcconfig.h"
 #include "lib/fileloc.h"
-
-#ifdef ENABLE_VFS
-#include "lib/vfs/mc-vfs/gc.h"
-#endif
+#include "lib/strutil.h"        /* str_isutf8 () */
 
 #ifdef USE_NETCODE
 #   include "lib/vfs/mc-vfs/ftpfs.h"
 #   include "lib/vfs/mc-vfs/fish.h"
 #endif
-#include "lib/strutil.h"        /* str_isutf8 () */
+
 
 #include "args.h"
 #include "dir.h"

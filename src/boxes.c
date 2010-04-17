@@ -42,12 +42,12 @@
 #include "lib/mcconfig.h"	/* Load/save user formats */
 #include "lib/strutil.h"
 
-#ifdef USE_NETCODE
-#   include "lib/vfs/mc-vfs/ftpfs.h"
+#ifdef ENABLE_VFS
+#include "lib/vfs/mc-vfs/vfs.h" /* vfs_timeout */
 #endif
 
-#ifdef ENABLE_VFS
-#include "lib/vfs/mc-vfs/gc.h"
+#ifdef USE_NETCODE
+#   include "lib/vfs/mc-vfs/ftpfs.h"
 #endif
 
 #include "dialog.h"		/* The nice dialog manager */

@@ -135,10 +135,6 @@ void vfs_fill_names (fill_names_f);
 /* vfs/direntry.c: */
 void *vfs_s_open (struct vfs_class *, const char *, int, int);
 
-#ifdef USE_NETCODE
-extern int use_netrc;
-#endif
-
 void init_cpiofs (void);
 void init_extfs (void);
 void init_fish (void);

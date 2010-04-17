@@ -9,14 +9,13 @@
 
 #include "vfs-impl.h"
 
-struct vfs_stamping {
+struct vfs_stamping
+{
     struct vfs_class *v;
     vfsid id;
     struct vfs_stamping *next;
     struct timeval time;
 };
-
-extern int vfs_timeout;
 
 void vfs_stamp (struct vfs_class *vclass, vfsid id);
 void vfs_rmstamp (struct vfs_class *vclass, vfsid id);
@@ -29,4 +28,4 @@ void vfs_release_path (const char *dir);
 vfsid vfs_getid (struct vfs_class *vclass, const char *dir);
 void vfs_gc_done (void);
 
-#endif				/* __GC_H */
+#endif /* MC_VFS_GC_H */
