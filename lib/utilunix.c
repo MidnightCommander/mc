@@ -138,11 +138,11 @@ int my_system (int flags, const char *shell, const char *command)
     struct sigaction ignore, save_intr, save_quit, save_stop;
     pid_t pid;
     int status = 0;
-    
+
     ignore.sa_handler = SIG_IGN;
     sigemptyset (&ignore.sa_mask);
     ignore.sa_flags = 0;
-    
+
     sigaction (SIGINT, &ignore, &save_intr);    
     sigaction (SIGQUIT, &ignore, &save_quit);
 
@@ -150,53 +150,66 @@ int my_system (int flags, const char *shell, const char *command)
     /* handler messing the screen after the SIGCONT */
     sigaction (SIGTSTP, &startup_handler, &save_stop);
 
-    if ((pid = fork ()) < 0){
-	fprintf (stderr, "\n\nfork () = -1\n");
-	return -1;
+    pid = fork ();
+    if (pid < 0)
+    {
+        fprintf (stderr, "\n\nfork () = -1\n");
+        status = -1;
     }
-    if (pid == 0){
-	signal (SIGINT, SIG_DFL);
-	signal (SIGQUIT, SIG_DFL);
-	signal (SIGTSTP, SIG_DFL);
-	signal (SIGCHLD, SIG_DFL);
+    else if (pid == 0)
+    {
+        signal (SIGINT, SIG_DFL);
+        signal (SIGQUIT, SIG_DFL);
+        signal (SIGTSTP, SIG_DFL);
+        signal (SIGCHLD, SIG_DFL);
 
-	if (flags & EXECUTE_AS_SHELL)
-	    execl (shell, shell, "-c", command, (char *) NULL);
-	else
-	{
-	    gchar **shell_tokens;
-	    const gchar *only_cmd;
-	    shell_tokens = g_strsplit(shell," ", 2);
+        if (flags & EXECUTE_AS_SHELL)
+            execl (shell, shell, "-c", command, (char *) NULL);
+        else
+        {
+            gchar **shell_tokens;
+            const gchar *only_cmd;
 
-	    if (shell_tokens == NULL)
-	        only_cmd = shell;
-	    else
-	        only_cmd = (*shell_tokens) ? *shell_tokens: shell;
+            shell_tokens = g_strsplit (shell, " ", 2);
+            if (shell_tokens == NULL)
+                only_cmd = shell;
+            else
+                only_cmd = (*shell_tokens != NULL) ? *shell_tokens : shell;
 
-	    execlp (only_cmd, shell, command, (char *) NULL);
+            execlp (only_cmd, shell, command, (char *) NULL);
 
-	    /*
-	      execlp will replace current process,
-	      therefore no sence in call of g_strfreev().
-	      But this keeped for estetic reason :)
-	    */
-	    g_strfreev(shell_tokens);
+            /*
+               execlp will replace current process,
+               therefore no sence in call of g_strfreev().
+               But this keeped for estetic reason :)
+             */
+            g_strfreev (shell_tokens);
 
-	}
+        }
 
-	_exit (127);		/* Exec error */
-    } else {
-	while (waitpid (pid, &status, 0) < 0)
-	    if (errno != EINTR){
-		status = -1;
-		break;
-	    }
+        _exit (127);            /* Exec error */
     }
-    sigaction (SIGINT,  &save_intr, NULL);
+    else
+    {
+        while (TRUE)
+        {
+            if (waitpid (pid, &status, 0) > 0)
+            {
+                status = WEXITSTATUS(status);
+                break;
+            }
+            if (errno != EINTR)
+            {
+                status = -1;
+                break;
+            }
+        }
+    }
+    sigaction (SIGINT, &save_intr, NULL);
     sigaction (SIGQUIT, &save_quit, NULL);
     sigaction (SIGTSTP, &save_stop, NULL);
 
-    return WEXITSTATUS(status);
+    return status;
 }
 
 
