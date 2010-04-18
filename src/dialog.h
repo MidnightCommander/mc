@@ -244,7 +244,7 @@ void common_dialog_repaint (struct Dlg_head *h);
 #define widget_move(w, _y, _x) tty_gotoyx (((Widget *)(w))->y + _y, ((Widget *)(w))->x + _x)
 #define dlg_move(h, _y, _x) tty_gotoyx (((Dlg_head *)(h))->y + _y, ((Dlg_head *)(h))->x + _x)
 
-extern GList *current_dlg;
+extern GList *top_dlg;
 
 /* A hook list for idle events */
 extern Hook *idle_hook;

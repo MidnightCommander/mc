@@ -52,7 +52,7 @@ int alarm_colors[4];
 
 /* Primitive way to check if the the current dialog is our dialog */
 /* This is needed by async routines like load_prompt */
-GList *current_dlg = NULL;
+GList *top_dlg = NULL;
 
 /* A hook list for idle events */
 Hook *idle_hook = NULL;
@@ -367,7 +367,7 @@ add_widget (Dlg_head * h, void *w)
 void
 do_refresh (void)
 {
-    GList *d = current_dlg;
+    GList *d = top_dlg;
 
     if (fast_refresh)
     {
@@ -886,7 +886,7 @@ init_dlg (Dlg_head * h)
         h->modal = TRUE;
 
     /* add dialog to the stack */
-    current_dlg = g_list_prepend (current_dlg, h);
+    top_dlg = g_list_prepend (top_dlg, h);
 
     /* Initialize dialog manager and widgets */
     h->callback (h, NULL, DLG_INIT, 0, NULL);
@@ -968,7 +968,7 @@ dlg_run_done (Dlg_head * h)
     if (h->current != NULL)
         h->callback (h, (Widget *) h->current->data, DLG_END, 0, NULL);
 
-    current_dlg = g_list_remove (current_dlg, h);
+    top_dlg = g_list_remove (top_dlg, h);
 }
 
 /* Standard run dialog routine

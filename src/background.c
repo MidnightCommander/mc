@@ -171,7 +171,7 @@ do_background (struct FileOpContext *ctx, char *info)
         from_parent_fd = back_comm[0];
 
         we_are_background = 1;
-        current_dlg = NULL;
+        top_dlg = NULL;
 
         /* Make stdin/stdout/stderr point somewhere */
         close (0);

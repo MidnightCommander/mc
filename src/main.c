@@ -326,8 +326,8 @@ stop_dialogs (void)
 {
     midnight_dlg->state = DLG_CLOSED;
 
-    if ((current_dlg != NULL) && (current_dlg->data != NULL))
-        ((Dlg_head *) current_dlg->data)->state = DLG_CLOSED;
+    if ((top_dlg != NULL) && (top_dlg->data != NULL))
+        ((Dlg_head *) top_dlg->data)->state = DLG_CLOSED;
 }
 
 static int
@@ -572,7 +572,7 @@ load_prompt (int fd, void *unused)
         return 0;
 
     /* Don't actually change the prompt if it's invisible */
-    if (((Dlg_head *) current_dlg->data == midnight_dlg) && command_prompt)
+    if (((Dlg_head *) top_dlg->data == midnight_dlg) && command_prompt)
     {
         char *tmp_prompt;
         int prompt_len;

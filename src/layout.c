@@ -779,7 +779,7 @@ change_screen_size (void)
 #endif
 
     /* Inform all running dialogs */
-    g_list_foreach (current_dlg, (GFunc) dlg_resize_cb, NULL);
+    g_list_foreach (top_dlg, (GFunc) dlg_resize_cb, NULL);
 
     /* Now, force the redraw */
     repaint_screen ();
