@@ -43,6 +43,7 @@
 
 #include "lib/tty/tty.h"        /* LINES, COLS */
 #include "lib/tty/key.h"        /* is_idle() */
+#include "lib/strutil.h"        /* str_term_trim() */
 
 #include "edit-impl.h"
 #include "edit-widget.h"
@@ -74,6 +75,20 @@ edit_get_shortcut (unsigned long command)
         return g_strdup_printf ("%s %s", ext_map, shortcut);
 
     return NULL;
+}
+
+static char *
+edit_get_title (const Dlg_head *h, size_t len)
+{
+    const WEdit *edit = (const WEdit *) find_widget_type (h, edit_callback);
+    const char *modified = edit->modified ? "(*) " : "    ";
+    const char *file_label;
+
+    len -= 4;
+
+    file_label = str_term_trim (edit->filename, len - str_term_width1 (_("Edit: ")));
+
+    return g_strconcat (_("Edit: "), modified, file_label, (char *) NULL);
 }
 
 static int
@@ -267,6 +282,8 @@ edit_file (const char *_file, int line)
                     "[Internal File Editor]", NULL, DLG_WANT_TAB);
 
     edit_dlg->get_shortcut = edit_get_shortcut;
+    edit_dlg->get_title = edit_get_title;
+
     menubar = menubar_new (0, 0, COLS, NULL);
     add_widget (edit_dlg, menubar);
     edit_init_menu (menubar);

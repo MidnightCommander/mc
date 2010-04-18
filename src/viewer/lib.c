@@ -382,3 +382,19 @@ mcview_eol (mcview_t * view, off_t current)
     }
     return current;
 }
+
+char *
+mcview_get_title (const Dlg_head *h, size_t len)
+{
+    const mcview_t *view = (const mcview_t *) find_widget_type (h, mcview_callback);
+    const char *modified = view->hexedit_mode && (view->change_list != NULL) ? "(*) " : "    ";
+    const char *file_label;
+
+    len -= 4;
+
+    file_label = view->filename != NULL ? view->filename :
+                 view->command != NULL ? view->command : "";
+    file_label = str_term_trim (file_label, len - str_term_width1 (_("View: ")));
+
+    return g_strconcat (_("View: "), modified, file_label, (char *) NULL);
+}

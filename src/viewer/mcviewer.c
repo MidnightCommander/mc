@@ -253,6 +253,8 @@ mcview_viewer (const char *command, const char *file, int *move_dir_p, int start
 
     add_widget (view_dlg, buttonbar_new (TRUE));
 
+    view_dlg->get_title = mcview_get_title;
+
     succeeded = mcview_load (lc_mcview, command, file, start_line);
     if (succeeded)
     {

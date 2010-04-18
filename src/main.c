@@ -866,6 +866,41 @@ midnight_get_shortcut (unsigned long command)
     return NULL;
 }
 
+static char *
+midnight_get_title (const Dlg_head *h, size_t len)
+{
+    /* TODO: share code with update_xterm_title_path() */
+
+    const char *path;
+    char host[BUF_TINY];
+    char *p;
+    struct passwd *pw = NULL;
+    char *login = NULL;
+    int res = 0;
+
+    (void) h;
+
+    path = strip_home_and_password (current_panel->cwd);
+    res = gethostname (host, sizeof (host));
+    if (res != 0)
+        host[0] = '\0';
+    else
+        host [sizeof (host) - 1] = '\0';
+
+    pw = getpwuid (getuid ());
+    if (pw != NULL)
+        login = g_strdup_printf ("%s@%s", pw->pw_name, host);
+    else
+        login = g_strdup (host);
+
+    p = g_strdup_printf ("%s [%s]:%s", _("Panels:"), login, path);
+    path = str_trunc (p, len - 4);
+    g_free (login);
+    g_free (p);
+
+    return g_strdup (path);
+}
+
 void
 toggle_show_hidden (void)
 {
@@ -1738,12 +1773,15 @@ midnight_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void 
 void
 update_xterm_title_path (void)
 {
+    /* TODO: share code with midnight_get_title () */
+
     const char *path;
     char host[BUF_TINY];
     char *p;
     struct passwd *pw = NULL;
     char *login = NULL;
     int res = 0;
+
     if (xterm_flag && xterm_title)
     {
         path = strip_home_and_password (current_panel->cwd);
@@ -1814,6 +1852,7 @@ static void
 create_panels_and_run_mc (void)
 {
     midnight_dlg->get_shortcut = midnight_get_shortcut;
+    midnight_dlg->get_title = midnight_get_title;
 
     create_panels ();
 

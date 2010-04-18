@@ -2312,8 +2312,8 @@ dview_init (WDiff * dview, const char *args, const char *file1, const char *file
     dview->args = args;
     dview->file[0] = file1;
     dview->file[1] = file2;
-    dview->label[0] = label1;
-    dview->label[1] = label2;
+    dview->label[0] = g_strdup (label1);
+    dview->label[1] = g_strdup (label2);
     dview->f[0] = f[0];
     dview->f[1] = f[1];
     dview->hdiff = NULL;
@@ -2449,6 +2449,9 @@ dview_fini (WDiff * dview)
     g_array_free (dview->a[0], TRUE);
     g_array_foreach (dview->a[1], DIFFLN, cc_free_elt);
     g_array_free (dview->a[1], TRUE);
+
+    g_free (dview->label[0]);
+    g_free (dview->label[1]);
 
     dview->a[1] = NULL;
     dview->a[0] = NULL;
@@ -2801,7 +2804,7 @@ dview_goto_cmd (WDiff * dview, int ord)
                 }
             }
             dview->skip_rows = dview->search.last_accessed_num_line = i;
-            snprintf (prev, sizeof (prev), "%d", newline);
+            g_snprintf (prev, sizeof (prev), "%d", newline);
         }
         g_free (input);
     }
@@ -3223,6 +3226,23 @@ dview_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, v
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+static char *
+dview_get_title (const Dlg_head *h, size_t len)
+{
+    const WDiff *dview = (const WDiff *) find_widget_type (h, dview_callback);
+    const char *modified = dview->merged ? " (*) " : "     ";
+    size_t len1;
+
+    len -=  (size_t) str_term_width1 (_("Diff:")) + strlen (modified);
+    len1 = (len - 3)/2;
+
+    return g_strconcat (_("Diff:"), modified,
+                        str_term_trim (dview->label[0], len1), " | ",
+                        str_term_trim (dview->label[1], len - len1), (char *) NULL);
+}
+
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -3231,7 +3251,6 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
 {
     int error;
     WDiff *dview;
-    WButtonBar *bar;
     Dlg_head *dview_dlg;
 
     /* Create dialog and widgets, put them on the dialog */
@@ -3246,10 +3265,10 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
 
     widget_want_cursor (dview->widget, 0);
 
-    bar = buttonbar_new (1);
-
     add_widget (dview_dlg, dview);
-    add_widget (dview_dlg, bar);
+    add_widget (dview_dlg, buttonbar_new (TRUE));
+
+    dview_dlg->get_title = dview_get_title;
 
     error = dview_init (dview, "-a", file1, file2, label1, label2, DATA_SRC_MEM);       /* XXX binary diff? */
 

@@ -293,6 +293,7 @@ void mcview_set_codeset (mcview_t * view);
 void mcview_show_error (mcview_t * view, const char *error);
 off_t mcview_bol (mcview_t * view, off_t current);
 off_t mcview_eol (mcview_t * view, off_t current);
+char *mcview_get_title (const Dlg_head *h, size_t len);
 
 /* move.c */
 void mcview_move_up (mcview_t *, off_t);

@@ -998,6 +998,22 @@ destroy_dlg (Dlg_head * h)
     do_refresh ();
 }
 
+char *
+dlg_get_title (const Dlg_head *h, size_t len)
+{
+    char *t;
+
+    if (h == NULL)
+        abort ();
+
+    if (h->get_title != NULL)
+        t = h->get_title (h, len);
+    else
+        t = g_strdup ("");
+
+    return t;
+}
+
 /* Replace widget old_w for widget new_w in the dialog */
 void
 dlg_replace_widget (Widget * old_w, Widget * new_w)

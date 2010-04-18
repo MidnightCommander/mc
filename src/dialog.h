@@ -23,15 +23,17 @@
 #ifndef MC_DIALOG_H
 #define MC_DIALOG_H
 
+#include <sys/types.h>          /* size_t */
+
 #include "lib/global.h"
 #include "lib/tty/mouse.h"
 #include "lib/util.h"           /* Hook */
 
 /* Common return values */
-#define B_EXIT		0
-#define B_CANCEL	1
-#define B_ENTER		2
-#define B_HELP		3
+#define B_EXIT          0
+#define B_CANCEL        1
+#define B_ENTER         2
+#define B_HELP          3
 #define B_USER          100
 
 typedef struct Widget Widget;
@@ -107,7 +109,7 @@ typedef enum
 
 /* Dialog callback */
 typedef struct Dlg_head Dlg_head;
-typedef cb_ret_t (*dlg_cb_fn) (struct Dlg_head * h, Widget * sender,
+typedef cb_ret_t (*dlg_cb_fn) (Dlg_head * h, Widget * sender,
                                dlg_msg_t msg, int parm, void *data);
 
 /* menu command execution */
@@ -116,6 +118,9 @@ typedef cb_ret_t (*menu_exec_fn) (int command);
 /* get string representation of shortcut assigned  with command */
 /* as menu is a widget of dialog, ask dialog about shortcut string */
 typedef char *(*dlg_shortcut_str) (unsigned long command);
+
+/* get dialog name to show in dialog list */
+typedef char *(*dlg_title_str) (const Dlg_head * h, size_t len);
 
 /* Dialog color constants */
 #define DLG_COLOR_NUM       4
@@ -149,15 +154,17 @@ struct Dlg_head
     GList *widgets;             /* widgets list */
     GList *current;             /* Curently active widget */
     void *data;                 /* Data can be passed to dialog */
+
     dlg_cb_fn callback;
     dlg_shortcut_str get_shortcut;      /* Shortcut string */
+    dlg_title_str get_title;    /* useless for modal dialogs */
+
     struct Dlg_head *parent;    /* Parent dialog */
 };
 
 /* Color styles for normal and error dialogs */
 extern int dialog_colors[4];
 extern int alarm_colors[4];
-
 
 /* Widget callback */
 typedef cb_ret_t (*callback_fn) (Widget * widget, widget_msg_t msg, int parm);
@@ -215,18 +222,19 @@ void dlg_set_size (Dlg_head * h, int lines, int cols);
 /* this function allows to set dialog position */
 void dlg_set_position (Dlg_head * h, int y1, int x1, int y2, int x2);
 
-/* Runs dialog d */
+void init_dlg (Dlg_head * h);
 int run_dlg (Dlg_head * d);
+void destroy_dlg (Dlg_head * h);
 
 void dlg_run_done (Dlg_head * h);
 void dlg_process_event (Dlg_head * h, int key, Gpm_Event * event);
-void init_dlg (Dlg_head * h);
+
+char *dlg_get_title (const Dlg_head *h, size_t len);
 
 /* To activate/deactivate the idle message generation */
 void set_idle_proc (Dlg_head * d, int enable);
 
 void dlg_redraw (Dlg_head * h);
-void destroy_dlg (Dlg_head * h);
 
 void widget_set_size (Widget * widget, int y, int x, int lines, int cols);
 
