@@ -238,6 +238,7 @@ CmdFilteredView = alt-exclamation
 CmdSelect = kpplus
 CmdUnselect = kpminus
 CmdReverseSelection = kpasterisk
+CmdDialogList = alt-prime
 ExtMap1 = ctrl-x
 
 [main:xmap]
@@ -377,6 +378,10 @@ DialogNextItem = right; down
 DialogHelp = f1
 DialogSuspend = ctrl-z
 DialogRefresh = ctrl-l
+CmdDialogList = alt-prime
+CmdDialogNext = alt-rbrace
+CmdDialogPrev = alt-lbrace
+
 
 [diffviewer]
 DiffDisplaySymbols = alt-s; s

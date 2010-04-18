@@ -295,7 +295,8 @@ edit_file (const char *_file, int line)
 
     run_dlg (edit_dlg);
 
-    destroy_dlg (edit_dlg);
+    if (edit_dlg->state == DLG_CLOSED)
+        destroy_dlg (edit_dlg);
 
     return 1;
 }

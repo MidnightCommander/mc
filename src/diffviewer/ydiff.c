@@ -3278,7 +3278,9 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
      */
     if (error == 0)
         run_dlg (dview_dlg);
-    destroy_dlg (dview_dlg);
+
+    if ((error != 0) || (dview_dlg->state == DLG_CLOSED))
+        destroy_dlg (dview_dlg);
 
     return error;
 }

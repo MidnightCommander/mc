@@ -90,6 +90,7 @@
 #include "wtools.h"
 #include "cmddef.h"             /* CK_ cmd name const */
 #include "user.h"               /* user_file_menu_cmd() */
+#include "dialog-switch.h"
 
 #include "chmod.h"
 #include "chown.h"
@@ -756,6 +757,7 @@ create_command_menu (void)
 #ifdef WITH_BACKGROUND
     entries = g_list_append (entries, menu_entry_create (_("&Background jobs"), CK_JobsCmd));
 #endif
+    entries = g_list_append (entries, menu_entry_create (_("Screen lis&t"), CK_DialogListCmd));
     entries = g_list_append (entries, menu_separator_create ());
 #ifdef USE_EXT2FSLIB
     entries =
@@ -1213,6 +1215,9 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
         break;
     case CK_DeleteCmd:
         delete_cmd ();
+        break;
+    case CK_DialogListCmd:
+        dialog_switch_list ();
         break;
 #ifdef USE_DIFF_VIEW
     case CK_DiffViewCmd:

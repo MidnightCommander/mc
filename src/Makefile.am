@@ -57,6 +57,7 @@ endif
 
 SRC_mc_widgets = \
 	dialog.c dialog.h \
+	dialog-switch.c dialog-switch.h \
 	menu.c menu.h \
 	screen.c panel.h \
 	tree.c tree.h \

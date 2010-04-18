@@ -67,6 +67,7 @@
 #include "subshell.h"           /* use_subshell */
 #include "consaver/cons.saver.h"        /* console_flag */
 #include "dialog.h"             /* Widget */
+#include "dialog-switch.h"
 #include "wtools.h"             /* message() */
 #include "main.h"               /* change_panel() */
 #include "panel.h"              /* current_panel */
@@ -159,7 +160,7 @@ view_file_at_line (const char *filename, int plain_view, int internal, int start
         if (changed_magic_flag && !mcview_altered_magic_flag)
             mcview_default_magic_flag = 1;
 
-        repaint_screen ();
+        dialog_switch_process_pending ();
     }
     else if (internal)
     {
@@ -184,7 +185,7 @@ view_file_at_line (const char *filename, int plain_view, int internal, int start
                 move_dir = 0;
             }
 
-            repaint_screen ();
+            dialog_switch_process_pending ();
         }
     }
     else
@@ -329,6 +330,7 @@ filtered_view_cmd (void)
     {
         mcview_viewer (command, "", 0);
         g_free (command);
+        dialog_switch_process_pending ();
     }
 }
 
@@ -353,11 +355,16 @@ do_edit_at_line (const char *what, int start_line)
         }
         execute_with_vfs_arg (editor, what);
     }
+
     if (mc_run_mode == MC_RUN_FULL)
-    {
         update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+
+#ifdef USE_INTERNAL_EDIT
+    if (use_internal_edit)
+        dialog_switch_process_pending ();
+    else
+#endif /* USE_INTERNAL_EDIT */
         repaint_screen ();
-    }
 }
 
 static void
@@ -983,10 +990,9 @@ diff_view_cmd (void)
     dview_diff_cmd ();
 
     if (mc_run_mode == MC_RUN_FULL)
-    {
         update_panels (UP_OPTIMIZE, UP_KEEPSEL);
-        repaint_screen ();
-    }
+
+    dialog_switch_process_pending ();
 }
 #endif
 

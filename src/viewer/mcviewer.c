@@ -257,6 +257,7 @@ mcview_viewer (const char *command, const char *file, int start_line)
     view_dlg->get_title = mcview_get_title;
 
     succeeded = mcview_load (lc_mcview, command, file, start_line);
+
     if (succeeded)
     {
         run_dlg (view_dlg);
@@ -269,7 +270,9 @@ mcview_viewer (const char *command, const char *file, int start_line)
         view_dlg->state = DLG_CLOSED;
         ret = MCVIEW_EXIT_FAILURE;
     }
-    destroy_dlg (view_dlg);
+
+    if (view_dlg->state == DLG_CLOSED)
+        destroy_dlg (view_dlg);
 
     return ret;
 }

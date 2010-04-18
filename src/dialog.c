@@ -1,6 +1,6 @@
 /* Dialog box features module for the Midnight Commander
    Copyright (C) 1994, 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004,
-   2005, 2007 Free Software Foundation, Inc.
+   2005, 2007, 2009, 2010  Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -38,13 +38,15 @@
 #include "lib/strutil.h"
 
 #include "help.h"               /* interactive_display() */
-#include "dialog.h"
 #include "layout.h"
 #include "execute.h"            /* suspend_cmd() */
 #include "cmddef.h"
 #include "keybind.h"
 #include "main.h"               /* fast_refresh */
 #include "setup.h"              /* mouse_close_dialog */
+#include "dialog.h"
+
+#include "dialog-switch.h"
 
 /* Color styles for normal and error dialogs */
 int dialog_colors[4];
@@ -687,16 +689,19 @@ dlg_execute_cmd (Dlg_head * h, unsigned long command)
         h->ret_value = B_CANCEL;
         dlg_stop (h);
         break;
+
     case CK_DialogPrevItem:
         dlg_one_up (h);
         break;
     case CK_DialogNextItem:
         dlg_one_down (h);
         break;
+
     case CK_DialogHelp:
         interactive_display (NULL, h->help_ctx);
         do_refresh ();
         break;
+
     case CK_DialogSuspend:
         suspend_cmd ();
         refresh_cmd ();
@@ -704,6 +709,26 @@ dlg_execute_cmd (Dlg_head * h, unsigned long command)
     case CK_DialogRefresh:
         refresh_cmd ();
         break;
+
+    case CK_DialogListCmd:
+        if (!h->modal)
+            dialog_switch_list ();
+        else
+            ret = MSG_NOT_HANDLED;
+        break;
+    case CK_DialogNextCmd:
+        if (!h->modal)
+            dialog_switch_next ();
+        else
+            ret = MSG_NOT_HANDLED;
+        break;
+    case CK_DialogPrevCmd:
+        if (!h->modal)
+            dialog_switch_prev ();
+        else
+            ret = MSG_NOT_HANDLED;
+        break;
+
     default:
         ret = MSG_NOT_HANDLED;
     }
@@ -885,12 +910,21 @@ init_dlg (Dlg_head * h)
     if ((top_dlg != NULL) && ((Dlg_head *) top_dlg->data)->modal)
         h->modal = TRUE;
 
+
     /* add dialog to the stack */
     top_dlg = g_list_prepend (top_dlg, h);
 
     /* Initialize dialog manager and widgets */
-    h->callback (h, NULL, DLG_INIT, 0, NULL);
-    dlg_broadcast_msg (h, WIDGET_INIT, FALSE);
+    if (h->state == DLG_ACTIVE)
+    {
+        if (!h->modal)
+            dialog_switch_add (h);
+
+        h->callback (h, NULL, DLG_INIT, 0, NULL);
+        dlg_broadcast_msg (h, WIDGET_INIT, FALSE);
+    }
+
+    h->state = DLG_ACTIVE;
 
     dlg_redraw (h);
 
@@ -903,7 +937,6 @@ init_dlg (Dlg_head * h)
     }
 
     h->ret_value = 0;
-    h->state = DLG_ACTIVE;
 }
 
 void
@@ -965,8 +998,12 @@ frontend_run_dlg (Dlg_head * h)
 void
 dlg_run_done (Dlg_head * h)
 {
-    if (h->current != NULL)
+    if (h->state == DLG_CLOSED)
+    {
         h->callback (h, (Widget *) h->current->data, DLG_END, 0, NULL);
+        if (!h->modal)
+            dialog_switch_remove (h);
+    }
 
     top_dlg = g_list_remove (top_dlg, h);
 }

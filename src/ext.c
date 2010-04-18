@@ -52,6 +52,7 @@
 #include "charsets.h"           /* get_codepage_index */
 #include "selcodepage.h"        /* do_set_codepage */
 #endif
+#include "dialog-switch.h"
 #include "ext.h"
 
 /* If set, we execute the file command to check the file type */
@@ -321,7 +322,7 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
         if (changed_nroff_flag && !mcview_altered_nroff_flag)
             mcview_default_nroff_flag = def_nroff_flag;
 
-        repaint_screen ();
+        dialog_switch_process_pending ();
     }
     else if (is_cd)
     {
