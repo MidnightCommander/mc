@@ -385,6 +385,7 @@ DiffEditOther = f14
 DiffMergeCurrentHunk = f5
 DiffSearch = f7
 DiffContinueSearch = f17
+DiffOptions = f9
 DiffBOF = ctrl-home
 DiffEOF = ctrl-end
 DiffDown = down

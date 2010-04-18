@@ -2387,9 +2387,8 @@ dview_reread (WDiff * dview)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-#if 0
 static void
-dview_reinit (WDiff * dview)
+dview_diff_options (WDiff * dview)
 {
     const char *quality_str[] = {
         N_("&Normal"),
@@ -2430,7 +2429,6 @@ dview_reinit (WDiff * dview)
         dview_reread (dview);
     }
 }
-#endif
 /* --------------------------------------------------------------------------------------------- */
 
 static void
@@ -2801,6 +2799,7 @@ dview_labels (WDiff * dview)
     buttonbar_set_label (b, 4, Q_ ("ButtonBar|Edit"), diff_map, (Widget *) dview);
     buttonbar_set_label (b, 5, Q_ ("ButtonBar|Merge"), diff_map, (Widget *) dview);
     buttonbar_set_label (b, 7, Q_ ("ButtonBar|Search"), diff_map, (Widget *) dview);
+    buttonbar_set_label (b, 9, Q_ ("ButtonBar|Options"), diff_map, (Widget *) dview);
     buttonbar_set_label (b, 10, Q_ ("ButtonBar|Quit"), diff_map, (Widget *) dview);
 }
 
@@ -3068,6 +3067,9 @@ dview_execute_cmd (WDiff * dview, unsigned long command)
         break;
     case CK_DiffSave:
         dview_do_save (dview);
+        break;
+    case CK_DiffOptions:
+        dview_diff_options (dview);
         break;
     case CK_SelectCodepage:
         dview_select_encoding (dview);
