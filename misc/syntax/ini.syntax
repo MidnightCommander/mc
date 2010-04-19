@@ -1,0 +1,20 @@
+# DOS / Windows INI files
+
+context default
+
+    keyword = brightred
+    keyword $*$ brightgreen
+
+# options
+#context .* = cyan
+
+# groups
+context [ ] yellow
+
+# lists
+context exclusive $*$ $*$ green
+
+# comments:
+context # \n brown
+context ; \n brown
+
