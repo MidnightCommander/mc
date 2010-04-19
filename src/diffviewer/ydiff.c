@@ -2271,28 +2271,26 @@ dview_init (WDiff * dview, const char *args, const char *file1, const char *file
     {
         f[0] = f_temp ();
         if (f[0] == NULL)
-        {
-            goto err_2;
-        }
+            return -1;
+
         f[1] = f_temp ();
         if (f[1] == NULL)
         {
             f_close (f[0]);
-            goto err_2;
+            return -1;
         }
     }
-    if (dsrc == DATA_SRC_ORG)
+    else if (dsrc == DATA_SRC_ORG)
     {
         f[0] = f_open (file1, O_RDONLY);
         if (f[0] == NULL)
-        {
-            goto err_2;
-        }
+            return -1;
+
         f[1] = f_open (file2, O_RDONLY);
         if (f[1] == NULL)
         {
             f_close (f[0]);
-            goto err_2;
+            return -1;
         }
     }
 
@@ -2314,11 +2312,8 @@ dview_init (WDiff * dview, const char *args, const char *file1, const char *file
     ndiff = redo_diff (dview);
     if (ndiff < 0)
     {
-        g_array_foreach (dview->a[0], DIFFLN, cc_free_elt);
-        g_array_free (dview->a[0], TRUE);
-        g_array_foreach (dview->a[1], DIFFLN, cc_free_elt);
-        g_array_free (dview->a[1], TRUE);
-        goto err_3;
+        /* goto WIDGET_DESTROY stage: dview_fini() */
+        return -1;
     }
 
     dview->ndiff = ndiff;
@@ -2341,7 +2336,6 @@ dview_init (WDiff * dview, const char *args, const char *file1, const char *file
     dview->search.last_found_line = -1;
     dview->search.last_accessed_num_line = 0;
 
-
     dview->opt.quality = 0;
     dview->opt.strip_trailing_cr = 0;
     dview->opt.ignore_tab_expansion = 0;
@@ -2352,15 +2346,6 @@ dview_init (WDiff * dview, const char *args, const char *file1, const char *file
     dview_compute_areas (dview);
 
     return 0;
-
-  err_3:
-    if (dsrc != DATA_SRC_MEM)
-    {
-        f_close (f[1]);
-        f_close (f[0]);
-    }
-  err_2:
-    return -1;
 }
 
 /* --------------------------------------------------------------------------------------------- */
