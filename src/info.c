@@ -162,8 +162,10 @@ info_show_info (struct WInfo *info)
         g_string_set_size(buff, 0);
     case 9:
 	widget_move (&info->widget, 9, 3);
-	/* TRANSLATORS: "Status changed", like in the stat(2) man page */
-        str_printf (buff, _("Status:    %s"), file_date (st.st_ctime));
+        /* The field st_ctime is changed by writing or by setting inode
+           information (i.e., owner, group, link count, mode, etc.).  */
+        /* TRANSLATORS: Time of last status change as in stat(2) man. */
+        str_printf (buff, _("Changed:   %s"), file_date (st.st_ctime));
         tty_print_string (buff->str);
         g_string_set_size(buff, 0);
 
