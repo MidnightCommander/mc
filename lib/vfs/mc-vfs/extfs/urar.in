@@ -28,7 +28,7 @@ fi
 
 mcrarfs_list ()
 {
-     $UNRAR v -c- "$1" | @AWK@ -v uid=`id -u` -v gid=`id -g` '
+     $UNRAR v -c- -cfg- "$1" | @AWK@ -v uid=`id -u` -v gid=`id -g` '
 BEGIN { flag=0 }
 /^-------/ { flag++; if (flag > 1) exit 0; next }
 flag==1 {
@@ -65,7 +65,7 @@ mcrarfs_copyin ()
 
 mcrarfs_copyout ()
 {
-    $UNRAR p -p- -c- -inul "$1" "$2" > "$3"
+    $UNRAR p -p- -c- -cfg- -inul "$1" "$2" > "$3"
 }
 
 mcrarfs_mkdir ()
