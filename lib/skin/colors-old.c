@@ -49,7 +49,7 @@ typedef struct mc_skin_colors_old_struct {
 
 /*** file scope variables ************************************************************************/
 
-mc_skin_colors_old_t old_colors[] = {
+static const mc_skin_colors_old_t old_colors[] = {
     {"normal", "core", "_default_"},
     {"marked", "core", "marked"},
     {"selected", "core", "selected"},
@@ -62,7 +62,7 @@ mc_skin_colors_old_t old_colors[] = {
     {"errors", "error", "_default_"},
     {"errdhotnormal", "error", "errdhotnormal"},
     {"errdhotfocus", "error", "errdhotfocus"},
-    {"menu", "menu", "_default_"},
+    {"menunormal", "menu", "_default_"},
     {"menuhot", "menu", "menuhot"},
     {"menusel", "menu", "menusel"},
     {"menuhotsel", "menu", "menuhotsel"},
@@ -79,7 +79,7 @@ mc_skin_colors_old_t old_colors[] = {
     {"editbold", "editor", "editbold"},
     {"editmarked", "editor", "editmarked"},
     {"editwhitespace", "editor", "editwhitespace"},
-    {"editlinestate", "editor", "linestate"},
+    {"editlinestate", "editor", "editlinestate"},
     {NULL, NULL, NULL}
 };
 

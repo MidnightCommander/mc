@@ -2865,7 +2865,7 @@ Il formato della definizione dei colori è:
 .fi
 .PP
 I colori sono opzionali e le parolechiave sono: normal, selected, marked,
-markselect, errors, input, reverse, gauge. I colori dei menu sono: menu,
+markselect, errors, input, reverse, gauge. I colori dei menu sono: menunormal,
 menusel, menuhot, menuhotsel, menuinactive. I colori delle finestre di
 dialogo sono: dnormal, dfocus, dhotnormal, dhotfocus. I colori dell'aiuto
 sono: helpnormal, helpitalic, helpbold, helplink, helpslink.
@@ -2894,7 +2894,7 @@ nei componenti normali, mentre il colore
 viene usato per il colore evidenziato nel componente correntemente
 selezionato.
 .PP
-I menu usano lo stesso schema ma usano invece i selettori menu, menusel, 
+I menu usano lo stesso schema ma usano invece i selettori menunormal, menusel,
 menuhot, menuhotsel e menuinactive.
 .PP
 L'aiuto usa i seguenti colori:
