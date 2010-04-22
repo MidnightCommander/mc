@@ -3502,7 +3502,7 @@ xterm=menu=magenta:marked=,magenta:markselect=,red
 Цвета не являются обязательными, а в качестве ключевых слов (keywords)
 могут использоваться: для задания цветовой палитры в панелях: normal,
 selected, marked, markselect, errors, input, reverse, gauge; Цвета
-пунктов меню:  menu, menusel, menuhot, menuhotsel, menuinactive; Цвета
+пунктов меню: menunormal, menusel, menuhot, menuhotsel, menuinactive; Цвета
 в окне диалога: dnormal, dfocus, dhotnormal, dhotfocus; Цвета в окне подсказки:
 helpnormal, helpitalic, helpbold, helplink, helpslink; в окне программы
 просмотра:  viewunderline; специальные подсветки: executable, directory,
@@ -3535,7 +3535,7 @@ editmarked.
 компонентах окна.
 .PP
 В меню используется та же самая схема, только в качестве названий
-элементов используются menu, menusel, menuhot, menuhotsel и menuinactive.
+элементов используются menunormal, menusel, menuhot, menuhotsel и menuinactive.
 .PP
 Окно подсказки использует следующие цвета:
 .I helpnormal
@@ -3716,7 +3716,7 @@ base_color=normal=white,default:marked=magenta,default
 .PP
 Секция
 .BR [menu]
-содержит описание элементов, отображающихся в меню. Это касается как системного меню 
+содержит описание элементов, отображающихся в меню. Это касается как системного меню
 (вызываемого клавишей F9), так и пользовательских меню (F2 в панелях или F11 в редакторе).
 .TP
 .I _default_
@@ -3777,7 +3777,7 @@ base_color=normal=white,default:marked=magenta,default
 .I editwhitespace
 Подсветка знаков табуляции и "висящих" пробелов
 .TP
-.I linestate
+.I editlinestate
 Цвет области отображения состояния строки.
 
 

@@ -2825,7 +2825,7 @@ A színmeghatározás formátuma:
 .fi
 .PP
 A színek opcionálisak, a kulcsszavak a következők: normal, selected,
-marked, markselect, errors, input, reverse, gauge; A menü színek: menu,
+marked, markselect, errors, input, reverse, gauge; A menü színek: menunormal,
 menusel, menuhot, menuhotsel, menuinactive; A dialog színek: dnormal, dfocus,
 dhotnormal, dhotfocus; Súgó színek: helpnormal, helpitalic, helpbold,
 helplink, helpslink; Fájlnéző színek: viewunderline; Speciális kijelölés
@@ -2851,7 +2851,7 @@ aholis a
 .I dhotfocus
 színt használjuk a jelenleg kiválasztott komponensekhez.
 .PP
-A menük azonos sémát használnak a menu, menusel, menuhot, menuhotsel és a
+A menük azonos sémát használnak a menunormal, menusel, menuhot, menuhotsel és a
 menuinactive részeknél.
 .PP
 A súgó a következő színeket használja:

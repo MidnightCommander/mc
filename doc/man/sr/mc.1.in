@@ -2996,7 +2996,7 @@ xterm=menu=magenta:marked=,magenta:markselect=,red
 .PP
 Боје су необавезне, док кључне речи могу бити: normal, selected,
 marked, markselect, errors, input, reverse, gauge. Боје менија су:
-menu, menusel, menuhot, menuhotsel, menuinactive. Боје дијалога су:
+menunormal, menusel, menuhot, menuhotsel, menuinactive. Боје дијалога су:
 dnormal, dfocus, dhotnormal, dhotfocus. Боје помоћи су: helpnormal, helpitalic,
 helpbold, helplink, helpslink. Боја прегледача је: viewunderline.
 Посебне боје за истицање су: executable, directory, link, stalelink,
@@ -3020,7 +3020,7 @@ editmarked.
 .I dhotfocus
 се користи за боју истицања у тренутно изабраној контроли.
 .PP
-Менији користе исту шему, али користе изнаке menu, menusel, menuhot, menuhotsel
+Менији користе исту шему, али користе изнаке menunormal, menusel, menuhot, menuhotsel
 и menuinactive.
 .PP
 Помоћ користи следеће боје:
