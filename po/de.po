@@ -5,14 +5,14 @@
 # Christian Meyer <chrisime@gnome.org>, 2001.
 # Roland Illig <roland.illig@gmx.de>, 2005.
 # German Transifex-Team (transifex.net), 2010
-# 
+#
 # 2001-03-06 Da Nautilus der zukünftige GNOME Filemanager ist, werden die
 # mc-Meldungen nicht mehr infinitivisch umgeformt.
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.x\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-26 13:04+0200\n"
+"POT-Creation-Date: 2010-04-23 10:46+0200\n"
 "PO-Revision-Date: 2010-03-03 12:00-0000\n"
 "Last-Translator: Sebastian Siebert <freespacer@gmx.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -29,7 +29,8 @@ msgid " Not implemented yet "
 msgstr " Noch nicht implementiert "
 
 msgid " Num of replace tokens not equal to num of found tokens "
-msgstr "Zahl der ersetzende Zeichen nicht gleich mit der Zahl von gefundenen Zeichen"
+msgstr ""
+"Zahl der ersetzende Zeichen nicht gleich mit der Zahl von gefundenen Zeichen"
 
 #, c-format
 msgid " Invalid token number %d "
@@ -930,6 +931,7 @@ msgid "Show mc with specified skin"
 msgstr "Zeige mc mit dem angegebenen Skin"
 
 #. TRANSLATORS: don't translate keywords and names of colors
+#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -940,7 +942,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -958,7 +960,6 @@ msgstr ""
 "   Editor:        editnormal, editbold, editmarked, editwhitespace\n"
 "                 editlinestate\n"
 
-#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 "\n"
@@ -1062,8 +1063,7 @@ msgstr "Sortierreihenfolge"
 msgid "Confirmation"
 msgstr "Bestätigung"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "Confirmation|C&hronik löschen"
@@ -1545,7 +1545,8 @@ msgid "Search"
 msgstr "Suchen"
 
 msgid " File has hard-links. Detach before saving? "
-msgstr "Die Datei ist statisch verlinkt. Diesen Link vor dem  Speichern entfernt?"
+msgstr ""
+"Die Datei ist statisch verlinkt. Diesen Link vor dem  Speichern entfernt?"
 
 msgid "The file has been modified in the meantime. Save anyway?"
 msgstr "Die Datei wurde zwischenzeitlich modifiziert, trotzdem speichern?"
@@ -1661,7 +1662,8 @@ msgid " Load "
 msgstr " Laden "
 
 msgid " Block is large, you may not be able to undo this action. "
-msgstr " Großer Block, eventuell kann diese Aktion nicht rückgängig gemacht werden. "
+msgstr ""
+" Großer Block, eventuell kann diese Aktion nicht rückgängig gemacht werden. "
 
 msgid "Replace"
 msgstr "Ersetzen"
@@ -2167,16 +2169,26 @@ msgid " %s%s file error"
 msgstr " Fehler in der Datei %s%s "
 
 #, c-format
-msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
-msgstr "Das Dateiformat der Datei »%smc.ext« hat sich in Version 3.0 geändert. Bitte aktualisieren Sie die Datei."
+msgid ""
+"The format of the %smc.ext file has changed with version 3.0.  It seems that "
+"the installation failed.  Please fetch a fresh copy from the Midnight "
+"Commander package."
+msgstr ""
+"Das Dateiformat der Datei »%smc.ext« hat sich in Version 3.0 geändert. Bitte "
+"aktualisieren Sie die Datei."
 
 #, c-format
 msgid " ~/%s file error "
 msgstr " Fehler in Datei »~/%s« "
 
 #, c-format
-msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
-msgstr "Das Dateiformat von »~/%s« hat sich mit Version 3.0 geändert.  Eine Beispieldatei im neuen Format ist %smc.ext."
+msgid ""
+"The format of the ~/%s file has changed with version 3.0.  You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
+msgstr ""
+"Das Dateiformat von »~/%s« hat sich mit Version 3.0 geändert.  Eine "
+"Beispieldatei im neuen Format ist %smc.ext."
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|Kopieren"
@@ -2203,7 +2215,8 @@ msgid ""
 "\n"
 " Option Stable Symlinks will be disabled "
 msgstr ""
-" Kann keine stabilen symbolischen Links auf nicht-lokalen Dateisystemen anlegen: \n"
+" Kann keine stabilen symbolischen Links auf nicht-lokalen Dateisystemen "
+"anlegen: \n"
 "\n"
 " Einstellung Stabile Symbolische Links wird deaktiviert "
 
@@ -2847,8 +2860,11 @@ msgid " Hotlist Load "
 msgstr " Hotlist laden "
 
 #, c-format
-msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
-msgstr "MC konnte ~/%s nicht schreiben, die alten Hotlist-Einträge wurden nicht gelöscht"
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr ""
+"MC konnte ~/%s nicht schreiben, die alten Hotlist-Einträge wurden nicht "
+"gelöscht"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -2895,10 +2911,10 @@ msgstr "Zugegriffen:  %s"
 msgid "Modified:  %s"
 msgstr "Geändert:     %s"
 
-#. TRANSLATORS: "Status changed", like in the stat(2) man page
-#, c-format
-msgid "Status:    %s"
-msgstr "Status:       %s"
+#. TRANSLATORS: Time of last status change as in stat(2) man.
+#, fuzzy, c-format
+msgid "Changed:   %s"
+msgstr "Ändern in"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -3343,7 +3359,8 @@ msgid " Enter command label: "
 msgstr " Kommandobezeichnung eingeben: "
 
 msgid " Cannot run external panelize in a non-local directory "
-msgstr " Kann externes Anordnen nicht in einem nichtlokalen Verzeichnis ausführen "
+msgstr ""
+" Kann externes Anordnen nicht in einem nichtlokalen Verzeichnis ausführen "
 
 msgid "Find rejects after patching"
 msgstr "Nach dem Patchen nach Rejects suchen"
@@ -3657,7 +3674,8 @@ msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
 msgstr ""
-"Die Datei \"%s\" gehört weder root noch Ihnen oder sie kann von jedem beschrieben werden.\n"
+"Die Datei \"%s\" gehört weder root noch Ihnen oder sie kann von jedem "
+"beschrieben werden.\n"
 "Sie zu benutzen, kann Ihre Sicherheit gefährden"
 
 #, c-format
@@ -3777,6 +3795,9 @@ msgstr "Möchten Sie wirklich die Chronik löschen?"
 
 msgid "Background process:"
 msgstr "Hintergrundprozess:"
+
+#~ msgid "Status:    %s"
+#~ msgstr "Status:       %s"
 
 #~ msgid "File"
 #~ msgstr "Datei"
@@ -4215,8 +4236,12 @@ msgstr "Hintergrundprozess:"
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr " Argumentreihenfolge eingeben, z.B. 3,2,1,4 "
 
-#~ msgid " Invalid regular expression, or scanf expression with too many conversions "
-#~ msgstr " Ungültiger regulärer Ausdruck oder scanf-Ausdruck mit zu vielen Konvertierungen "
+#~ msgid ""
+#~ " Invalid regular expression, or scanf expression with too many "
+#~ "conversions "
+#~ msgstr ""
+#~ " Ungültiger regulärer Ausdruck oder scanf-Ausdruck mit zu vielen "
+#~ "Konvertierungen "
 
 #~ msgid " Error in replacement format string. "
 #~ msgstr " Fehler in der Format-Zeichenkette der Ersetzungen "

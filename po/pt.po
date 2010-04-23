@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-26 13:04+0200\n"
+"POT-Creation-Date: 2010-04-23 10:46+0200\n"
 "PO-Revision-Date: 2002-04-25 03:55+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <debian-l10n-portuguese@lists.debian.org>\n"
@@ -954,7 +954,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -978,7 +978,6 @@ msgstr ""
 "   cian-vivo, cinza-suave e branco\n"
 "\n"
 
-#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 "\n"
@@ -3012,10 +3011,10 @@ msgstr "Acedido:   %s"
 msgid "Modified:  %s"
 msgstr "Modificado: %s"
 
-#. TRANSLATORS: "Status changed", like in the stat(2) man page
+#. TRANSLATORS: Time of last status change as in stat(2) man.
 #, fuzzy, c-format
-msgid "Status:    %s"
-msgstr "Criado:    %s"
+msgid "Changed:   %s"
+msgstr "Modificar &Para"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -3936,6 +3935,10 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Processo de fundo:"
+
+#, fuzzy
+#~ msgid "Status:    %s"
+#~ msgstr "Criado:    %s"
 
 #~ msgid "File"
 #~ msgstr "Ficheiro"

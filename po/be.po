@@ -4,14 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: be\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-26 13:04+0200\n"
+"POT-Creation-Date: 2010-04-23 10:46+0200\n"
 "PO-Revision-Date: 2008-12-21 23:28+0200\n"
 "Last-Translator: Pavel Piatruk <piatruk.p@gmail.com>\n"
 "Language-Team: Belarusian <debian-l10n-belarusian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: KBabel 1.11.4\n"
 
 msgid " Search string not found "
@@ -921,6 +922,7 @@ msgid "Show mc with specified skin"
 msgstr "Адлюстраваць mc з названым скiнам"
 
 #. TRANSLATORS: don't translate keywords and names of colors
+#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -931,7 +933,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -956,7 +958,6 @@ msgstr ""
 "Рэдактар:     editnormal, editbold, editmarked\n"
 "\r\n"
 
-#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 "\n"
@@ -996,7 +997,8 @@ msgid ""
 "to mc-devel@gnome.org\n"
 msgstr ""
 "\n"
-"Калі ласка, дасылайце любыя паведамленні аб памылках (уключаючы вывад 'mc -V')\n"
+"Калі ласка, дасылайце любыя паведамленні аб памылках (уключаючы вывад 'mc -"
+"V')\n"
 "на адрас mc-devel@gnome.org\n"
 
 #, c-format
@@ -1064,8 +1066,7 @@ msgstr "Парадак сартавання"
 msgid "Confirmation"
 msgstr " Запыт пацверджання"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "Ачыстка &гiсторыi"
@@ -2173,16 +2174,26 @@ msgid " %s%s file error"
 msgstr " памылка файла %s%s "
 
 #, c-format
-msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
-msgstr "Фармат файла %smc.ext зменены з версіі 3.0. Мажліва адбыўся збой пры ўсталёўцы. Калі ласка, вазміце свежую копію з пакету Midnight Commander."
+msgid ""
+"The format of the %smc.ext file has changed with version 3.0.  It seems that "
+"the installation failed.  Please fetch a fresh copy from the Midnight "
+"Commander package."
+msgstr ""
+"Фармат файла %smc.ext зменены з версіі 3.0. Мажліва адбыўся збой пры "
+"ўсталёўцы. Калі ласка, вазміце свежую копію з пакету Midnight Commander."
 
 #, c-format
 msgid " ~/%s file error "
 msgstr " памылка файла ~/%s "
 
 #, c-format
-msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
-msgstr "Фармат файла ~/%s зменены з версіі 3.0. Вы мусіце або скапіяваць яго з %smc.ext або выкарыстаць гэты файл як узор для напісання свайго."
+msgid ""
+"The format of the ~/%s file has changed with version 3.0.  You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
+msgstr ""
+"Фармат файла ~/%s зменены з версіі 3.0. Вы мусіце або скапіяваць яго з %smc."
+"ext або выкарыстаць гэты файл як узор для напісання свайго."
 
 msgid "DialogTitle|Copy"
 msgstr ""
@@ -2209,7 +2220,8 @@ msgid ""
 "\n"
 " Option Stable Symlinks will be disabled "
 msgstr ""
-" Немагчыма стварыць устойлівыя сімв. спасылкі праз нелакальныя файлавыя сістэмы:\n"
+" Немагчыма стварыць устойлівыя сімв. спасылкі праз нелакальныя файлавыя "
+"сістэмы:\n"
 "\n"
 " Опцыя Устойлівыя сімвалічныя спасылкі будзе адключана"
 
@@ -2868,7 +2880,8 @@ msgid " Hotlist Load "
 msgstr " Загрузка спісу "
 
 #, c-format
-msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr "MC не здолеў запісаць файл ~/%s, ваш стары спіс каталогаў не выдалены"
 
 #, c-format
@@ -2916,10 +2929,10 @@ msgstr "Зварот:        %s"
 msgid "Modified:  %s"
 msgstr "Зменены:       %s"
 
-#. TRANSLATORS: "Status changed", like in the stat(2) man page
-#, c-format
-msgid "Status:    %s"
-msgstr "Статус:        %s"
+#. TRANSLATORS: Time of last status change as in stat(2) man.
+#, fuzzy, c-format
+msgid "Changed:   %s"
+msgstr "Пера&йсці"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -3826,6 +3839,9 @@ msgstr ""
 msgid "Background process:"
 msgstr "Працэс у тле:"
 
+#~ msgid "Status:    %s"
+#~ msgstr "Статус:        %s"
+
 #~ msgid "File"
 #~ msgstr "Файл"
 
@@ -4274,7 +4290,9 @@ msgstr "Працэс у тле:"
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr " Увядзіце парадак аргументаў замены, напр. 3,2,1,4 "
 
-#~ msgid " Invalid regular expression, or scanf expression with too many conversions "
+#~ msgid ""
+#~ " Invalid regular expression, or scanf expression with too many "
+#~ "conversions "
 #~ msgstr " Памылковы сталы выраз ці ў scanf-фармаце шмат пераўтварэнняў"
 
 #~ msgid " Error in replacement format string. "

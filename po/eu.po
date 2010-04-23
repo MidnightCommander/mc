@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-26 13:04+0200\n"
+"POT-Creation-Date: 2010-04-23 10:46+0200\n"
 "PO-Revision-Date: 2001-05-25 13:35+0200\n"
 "Last-Translator: Mari Susperregi <mari@elhuyar.com>\n"
 "Language-Team: Euskara <debian-l10n-basque@lists.debian.org>\n"
@@ -955,7 +955,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -978,7 +978,6 @@ msgstr ""
 "   cyan argia, gris argia eta zuria\n"
 "\n"
 
-#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 "\n"
@@ -3015,10 +3014,10 @@ msgstr "Atzipena:  %s"
 msgid "Modified:  %s"
 msgstr "Aldaketa:  %s"
 
-#. TRANSLATORS: "Status changed", like in the stat(2) man page
+#. TRANSLATORS: Time of last status change as in stat(2) man.
 #, fuzzy, c-format
-msgid "Status:    %s"
-msgstr "Sorrera:   %s"
+msgid "Changed:   %s"
+msgstr "Aldatu"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -3941,6 +3940,10 @@ msgstr ""
 
 msgid "Background process:"
 msgstr "Atzeko planoko prozesua:"
+
+#, fuzzy
+#~ msgid "Status:    %s"
+#~ msgstr "Sorrera:   %s"
 
 #~ msgid "File"
 #~ msgstr "Fitxategia"

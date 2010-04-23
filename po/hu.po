@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-24 13:14+0200\n"
+"POT-Creation-Date: 2010-04-23 10:46+0200\n"
 "PO-Revision-Date: 2005-10-01 00:47+0200\n"
 "Last-Translator: SZABO Gergely <szg@subogero.com>\n"
 "Language-Team: Hungarian <debian-l10n-hungarian@lists.debian.org>\n"
@@ -932,6 +932,7 @@ msgid "Show mc with specified skin"
 msgstr "MC a megadott borítással"
 
 #. TRANSLATORS: don't translate keywords and names of colors
+#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -942,7 +943,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -964,7 +965,6 @@ msgstr ""
 "                   menuinactive (inaktív)\n"
 "   Szerkesztő:     editnormal, editbold (félkövér), editmarked (kijelölt)\n"
 "                   editwhitespace (szóköz stb), editlinestate (sorállapot)\n"
-#. TRANSLATORS: don't translate keywords and names of colors
 
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
@@ -981,7 +981,8 @@ msgstr ""
 "Színek:\n"
 "   black (fekete), gray (szürke), red (piros), brightred (élénkpiros),\n"
 "   green (zöld), brightgreen (élénkzöld), brown (barna), yellow (sárga),\n"
-"   blue (kék), brightblue (azúr), magenta (lila), brightmagenta (élénklila),\n"
+"   blue (kék), brightblue (azúr), magenta (lila), brightmagenta "
+"(élénklila),\n"
 "   cyan (türkiz), brightcyan (élénk-türkiz), lightgray (világosszürke),\n"
 "   white (fehér)\n"
 "\n"
@@ -2968,12 +2969,10 @@ msgstr "Elérés ideje: %s"
 msgid "Modified:  %s"
 msgstr "Módosítás:    %s"
 
-# !! Ez ext2fs-en nem 'creation', hanem az utolso metadata-valtozas...
-# Ext3 és ReiserFS esetén is: például chmod (csak) ezt a fájldátumot módosítja
-#. TRANSLATORS: "Status changed", like in the stat(2) man page
-#, c-format
-msgid "Status:    %s"
-msgstr "Adatváltozás: %s"
+#. TRANSLATORS: Time of last status change as in stat(2) man.
+#, fuzzy, c-format
+msgid "Changed:   %s"
+msgstr "&Belépés"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -3871,6 +3870,11 @@ msgstr "Előzmények törlése?"
 
 msgid "Background process:"
 msgstr "Háttérfolyamat:"
+
+# !! Ez ext2fs-en nem 'creation', hanem az utolso metadata-valtozas...
+# Ext3 és ReiserFS esetén is: például chmod (csak) ezt a fájldátumot módosítja
+#~ msgid "Status:    %s"
+#~ msgstr "Adatváltozás: %s"
 
 #~ msgid "File"
 #~ msgstr "Fájl"

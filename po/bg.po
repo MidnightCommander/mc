@@ -1,9 +1,9 @@
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.55\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-26 13:04+0200\n"
+"POT-Creation-Date: 2010-04-23 10:46+0200\n"
 "PO-Revision-Date: 2002-06-24 02:15+0300\n"
 "Last-Translator: Todor Buyukliev <adrez@mail.bg>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -940,7 +940,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -954,7 +954,8 @@ msgstr ""
 "   Диалози:         dnormal, dfocus, dhotnormal, dhotfocus\n"
 "   Менюта:          menu, menuhot, menusel, menuhotsel\n"
 "   Помощ:           helpnormal, helpitalic, helplink, helpslink\n"
-"   Файлови типове:  directory, executable, link, stalelink, device, special, core\n"
+"   Файлови типове:  directory, executable, link, stalelink, device, special, "
+"core\n"
 "\n"
 "Цветове:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -962,7 +963,6 @@ msgstr ""
 "   brightcyan, lightgray and white\n"
 "\n"
 
-#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 "\n"
@@ -1065,8 +1065,7 @@ msgstr "Ред на сортиране"
 msgid "Confirmation"
 msgstr " Потвърждение "
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 #, fuzzy
 msgid "Confirmation|&History cleanup"
@@ -1401,7 +1400,8 @@ msgid "&Thorough"
 msgstr "Пълен"
 
 msgid " Both panels should be in the listing mode to use this command "
-msgstr " Двата панела трябва да са в режим на списък, за да използвате тази команда "
+msgstr ""
+" Двата панела трябва да са в режим на списък, за да използвате тази команда "
 
 msgid ""
 " Not an xterm or Linux console; \n"
@@ -1685,7 +1685,8 @@ msgid " Load "
 msgstr " Зареди "
 
 msgid " Block is large, you may not be able to undo this action. "
-msgstr " Блокът е голям. Възможно е това действие да не може да бъде отменено. "
+msgstr ""
+" Блокът е голям. Възможно е това действие да не може да бъде отменено. "
 
 #, fuzzy
 msgid "Replace"
@@ -1749,7 +1750,8 @@ msgid " Run Sort "
 msgstr " Стартирай Sort "
 
 msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr " Въведете опции за sort, разделени от интервали (вижте man-страницата): "
+msgstr ""
+" Въведете опции за sort, разделени от интервали (вижте man-страницата): "
 
 msgid " Sort "
 msgstr " Сортирай "
@@ -2252,7 +2254,10 @@ msgid " %s%s file error"
 msgstr " грешка във файла "
 
 #, fuzzy, c-format
-msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
+msgid ""
+"The format of the %smc.ext file has changed with version 3.0.  It seems that "
+"the installation failed.  Please fetch a fresh copy from the Midnight "
+"Commander package."
 msgstr ""
 "файлът mc.ext е сменен\n"
 "с версия 3.0. Изглежда, че инсталацията\n"
@@ -2264,7 +2269,10 @@ msgid " ~/%s file error "
 msgstr " грешка във файла "
 
 #, c-format
-msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
+msgid ""
+"The format of the ~/%s file has changed with version 3.0.  You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
 
 msgid "DialogTitle|Copy"
@@ -2938,7 +2946,8 @@ msgid " Hotlist Load "
 msgstr " Зареждане на горещия списък "
 
 #, fuzzy, c-format
-msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr "Старият ви горещ списък не е изтрит"
 
 #, c-format
@@ -2986,10 +2995,10 @@ msgstr "Отварян:      %s"
 msgid "Modified:  %s"
 msgstr "Променян:     %s"
 
-#. TRANSLATORS: "Status changed", like in the stat(2) man page
+#. TRANSLATORS: Time of last status change as in stat(2) man.
 #, fuzzy, c-format
-msgid "Status:    %s"
-msgstr "Създаден:     %s"
+msgid "Changed:   %s"
+msgstr "Влез в"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -3908,6 +3917,10 @@ msgstr ""
 msgid "Background process:"
 msgstr "Фонов процес:"
 
+#, fuzzy
+#~ msgid "Status:    %s"
+#~ msgstr "Създаден:     %s"
+
 #~ msgid "File"
 #~ msgstr "Файл"
 
@@ -4320,8 +4333,11 @@ msgstr "Фонов процес:"
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr " Ред на заместващите аргументи, напр. 3,2,1,4 "
 
-#~ msgid " Invalid regular expression, or scanf expression with too many conversions "
-#~ msgstr " Невалиден регулярен израз или scanf израз с прекалено много превръщания "
+#~ msgid ""
+#~ " Invalid regular expression, or scanf expression with too many "
+#~ "conversions "
+#~ msgstr ""
+#~ " Невалиден регулярен израз или scanf израз с прекалено много превръщания "
 
 #~ msgid " Error in replacement format string. "
 #~ msgstr "Грешка във формата на заместващия низ. "

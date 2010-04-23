@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-09 14:37+0800\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2010-04-23 10:46+0200\n"
 "PO-Revision-Date: 2010-03-09 14:51+0800\n"
 "Last-Translator: Jake Li <gnozil@gmail.com>\n"
 "Language-Team: Simplified Chinese\n"
@@ -17,45 +17,31 @@ msgstr ""
 "X-Poedit-Language: Chinese\n"
 "X-Poedit-Country: CHINA\n"
 
-#: lib/search/lib.c:42
-#: src/editor/editcmd.c:114
-#: src/editor/editcmd.c:1567
-#: src/editor/editcmd.c:1607
-#: src/editor/editcmd.c:1866
-#: src/viewer/search.c:99
 msgid " Search string not found "
 msgstr "没有找到要搜索的字符串"
 
-#: lib/search/lib.c:43
 msgid " Not implemented yet "
 msgstr "尚未实现"
 
-#: lib/search/lib.c:44
 msgid " Num of replace tokens not equal to num of found tokens "
 msgstr "替换的标记与找到的标记个数不相等"
 
-#: lib/search/lib.c:45
 #, c-format
 msgid " Invalid token number %d "
 msgstr "无效的标记个数%d "
 
-#: lib/search/search.c:50
 msgid "Normal"
 msgstr "普通"
 
-#: lib/search/search.c:51
 msgid "&Regular expression"
 msgstr "正规表达式(&R)"
 
-#: lib/search/search.c:52
 msgid "Hexadecimal"
 msgstr "十六进制"
 
-#: lib/search/search.c:53
 msgid "Wildcard search"
 msgstr "通配符查找"
 
-#: lib/skin/common.c:132
 #, c-format
 msgid ""
 "Unable to load '%s' skin.\n"
@@ -64,7 +50,6 @@ msgstr ""
 "无法加载皮肤'%s'。\n"
 "默认皮肤已经加载"
 
-#: lib/skin/common.c:143
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
@@ -73,343 +58,252 @@ msgstr ""
 "无法解析皮肤'%s'。\n"
 "默认皮肤已经加载"
 
-#: lib/tty/key.c:102
 msgid "Function key 1"
 msgstr "F1"
 
-#: lib/tty/key.c:103
 msgid "Function key 2"
 msgstr "F2"
 
-#: lib/tty/key.c:104
 msgid "Function key 3"
 msgstr "F3"
 
-#: lib/tty/key.c:105
 msgid "Function key 4"
 msgstr "F4"
 
-#: lib/tty/key.c:106
 msgid "Function key 5"
 msgstr "F5"
 
-#: lib/tty/key.c:107
 msgid "Function key 6"
 msgstr "F6"
 
-#: lib/tty/key.c:108
 msgid "Function key 7"
 msgstr "F7"
 
-#: lib/tty/key.c:109
 msgid "Function key 8"
 msgstr "F8"
 
-#: lib/tty/key.c:110
 msgid "Function key 9"
 msgstr "F9"
 
-#: lib/tty/key.c:111
 msgid "Function key 10"
 msgstr "F10"
 
-#: lib/tty/key.c:112
 msgid "Function key 11"
 msgstr "F11"
 
-#: lib/tty/key.c:113
 msgid "Function key 12"
 msgstr "F12"
 
-#: lib/tty/key.c:114
 msgid "Function key 13"
 msgstr "F13"
 
-#: lib/tty/key.c:115
 msgid "Function key 14"
 msgstr "F14"
 
-#: lib/tty/key.c:116
 msgid "Function key 15"
 msgstr "F15"
 
-#: lib/tty/key.c:117
 msgid "Function key 16"
 msgstr "F16"
 
-#: lib/tty/key.c:118
 msgid "Function key 17"
 msgstr "F17"
 
-#: lib/tty/key.c:119
 msgid "Function key 18"
 msgstr "F18"
 
-#: lib/tty/key.c:120
 msgid "Function key 19"
 msgstr "F19"
 
-#: lib/tty/key.c:121
 msgid "Function key 20"
 msgstr "F20"
 
-#: lib/tty/key.c:122
-#: lib/tty/key.c:159
 msgid "Backspace key"
 msgstr "退格键"
 
-#: lib/tty/key.c:123
 msgid "End key"
 msgstr "末尾键"
 
-#: lib/tty/key.c:124
 msgid "Up arrow key"
 msgstr "上箭头键"
 
-#: lib/tty/key.c:125
 msgid "Down arrow key"
 msgstr "下箭头键"
 
-#: lib/tty/key.c:126
 msgid "Left arrow key"
 msgstr "左箭头键"
 
-#: lib/tty/key.c:127
 msgid "Right arrow key"
 msgstr "右箭头键"
 
-#: lib/tty/key.c:128
 msgid "Home key"
 msgstr "行首键"
 
-#: lib/tty/key.c:129
 msgid "Page Down key"
 msgstr "下页键"
 
-#: lib/tty/key.c:130
 msgid "Page Up key"
 msgstr "上页键"
 
-#: lib/tty/key.c:131
-#: lib/tty/key.c:160
 msgid "Insert key"
 msgstr "插入键"
 
-#: lib/tty/key.c:132
-#: lib/tty/key.c:161
 msgid "Delete key"
 msgstr "删除键"
 
-#: lib/tty/key.c:133
 msgid "Completion/M-tab"
 msgstr "补全/M-Tab"
 
-#: lib/tty/key.c:134
 msgid "+ on keypad"
 msgstr "小键盘 +"
 
-#: lib/tty/key.c:135
 msgid "- on keypad"
 msgstr "小键盘 -"
 
-#: lib/tty/key.c:136
 msgid "Slash on keypad"
 msgstr "小键盘 /"
 
-#: lib/tty/key.c:137
 msgid "* on keypad"
 msgstr "小键盘 *"
 
-#: lib/tty/key.c:140
-#: lib/tty/key.c:158
 msgid "Escape key"
 msgstr "ESC键"
 
-#: lib/tty/key.c:141
 msgid "Left arrow keypad"
 msgstr "小键盘左箭头键"
 
-#: lib/tty/key.c:142
 msgid "Right arrow keypad"
 msgstr "小键盘右箭头键"
 
-#: lib/tty/key.c:143
 msgid "Up arrow keypad"
 msgstr "小键盘上箭头键"
 
-#: lib/tty/key.c:144
 msgid "Down arrow keypad"
 msgstr "小键盘下箭头键"
 
-#: lib/tty/key.c:145
 msgid "Home on keypad"
 msgstr "小键盘行首键"
 
-#: lib/tty/key.c:146
 msgid "End on keypad"
 msgstr "小键盘末尾键"
 
-#: lib/tty/key.c:147
 msgid "Page Down keypad"
 msgstr "小键盘下页键"
 
-#: lib/tty/key.c:148
 msgid "Page Up keypad"
 msgstr "小键盘上页键"
 
-#: lib/tty/key.c:149
 msgid "Insert on keypad"
 msgstr "小键盘插入键"
 
-#: lib/tty/key.c:150
 msgid "Delete on keypad"
 msgstr "小键盘删除键"
 
-#: lib/tty/key.c:151
 msgid "Enter on keypad"
 msgstr "小键盘回车键"
 
-#: lib/tty/key.c:152
 msgid "Function key 21"
 msgstr "F21"
 
-#: lib/tty/key.c:153
 msgid "Function key 22"
 msgstr "F22"
 
-#: lib/tty/key.c:154
 msgid "Function key 23"
 msgstr "F23"
 
-#: lib/tty/key.c:155
 msgid "Function key 24"
 msgstr "F24"
 
-#: lib/tty/key.c:162
 msgid "Plus"
 msgstr "加"
 
-#: lib/tty/key.c:163
 msgid "Minus"
 msgstr "减"
 
-#: lib/tty/key.c:164
 msgid "Asterisk"
 msgstr "星号"
 
-#: lib/tty/key.c:165
 msgid "Dot"
 msgstr "点"
 
-#: lib/tty/key.c:166
 msgid "Less than"
 msgstr "小于"
 
-#: lib/tty/key.c:167
 msgid "Great than"
 msgstr "大于"
 
-#: lib/tty/key.c:168
 msgid "Equal"
 msgstr "等于"
 
-#: lib/tty/key.c:169
 msgid "Comma"
 msgstr "逗号"
 
-#: lib/tty/key.c:170
 msgid "Apostrophe"
 msgstr "撇号"
 
-#: lib/tty/key.c:171
 msgid "Colon"
 msgstr "冒号"
 
-#: lib/tty/key.c:172
 msgid "Exclamation mark"
 msgstr "感叹号"
 
-#: lib/tty/key.c:173
 msgid "Question mark"
 msgstr "问号"
 
-#: lib/tty/key.c:174
 msgid "Ampersand"
 msgstr "与号(&)"
 
-#: lib/tty/key.c:175
 msgid "Dollar sign"
 msgstr "美元符"
 
-#: lib/tty/key.c:176
 msgid "Quotation mark"
 msgstr "引号"
 
-#: lib/tty/key.c:177
 msgid "Caret"
 msgstr "脱字符^"
 
-#: lib/tty/key.c:178
 msgid "Tilda"
 msgstr "波浪号~"
 
-#: lib/tty/key.c:179
 msgid "Prime"
 msgstr "Prime"
 
-#: lib/tty/key.c:180
 msgid "Underline"
 msgstr "下划线"
 
-#: lib/tty/key.c:181
 msgid "Understrike"
 msgstr "着重线"
 
-#: lib/tty/key.c:182
 msgid "Pipe"
 msgstr "管道"
 
-#: lib/tty/key.c:183
 msgid "Enter"
 msgstr "回车"
 
-#: lib/tty/key.c:184
 msgid "Tab key"
 msgstr "制表符键"
 
-#: lib/tty/key.c:185
 msgid "Space key"
 msgstr "空格键"
 
-#: lib/tty/key.c:186
 msgid "Slash key"
 msgstr "斜线键"
 
-#: lib/tty/key.c:187
 msgid "Backslash key"
 msgstr "反斜线键"
 
-#: lib/tty/key.c:188
-#: lib/tty/key.c:189
 msgid "Number sign #"
 msgstr "井号键#"
 
-#: lib/tty/key.c:192
-#: lib/tty/key.c:193
 msgid "Ctrl"
 msgstr "Ctrl"
 
-#: lib/tty/key.c:194
-#: lib/tty/key.c:195
-#: lib/tty/key.c:196
 msgid "Alt"
 msgstr "Alt"
 
-#: lib/tty/key.c:197
 msgid "Shift"
 msgstr "Shift"
 
-#: lib/tty/tty-slang.c:247
 #, c-format
 msgid ""
 "Screen size %dx%d is not supported.\n"
@@ -418,79 +312,43 @@ msgstr ""
 "不支持屏幕大小 %dx%d。\n"
 "检查 TERM 环境变量。\n"
 
-#: lib/utilunix.c:283
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s不是目录\n"
 
-#: lib/utilunix.c:285
 #, c-format
 msgid "Directory %s is not owned by you\n"
 msgstr "目录%s不属于你\n"
 
-#: lib/utilunix.c:288
 #, c-format
 msgid "Cannot set correct permissions for directory %s\n"
 msgstr "无法正确设置目录%s的权限\n"
 
-#: lib/utilunix.c:293
 #, c-format
 msgid "Cannot create temporary directory %s: %s\n"
 msgstr "无法创建临时目录%s：%s\n"
 
-#: lib/utilunix.c:322
 #, c-format
 msgid "Temporary files will be created in %s\n"
 msgstr "在%s中创建临时文件\n"
 
-#: lib/utilunix.c:327
 #, c-format
 msgid "Temporary files will not be created\n"
 msgstr "不能创建临时文件\n"
 
-#: lib/utilunix.c:331
-#: src/execute.c:159
 #, c-format
 msgid "Press any key to continue..."
 msgstr "按任意键继续..."
 
-#: lib/utilunix.c:357
-#: lib/utilunix.c:361
-#: lib/utilunix.c:411
-#: lib/vfs/mc-vfs/mcfs.c:156
-#: src/editor/editcmd.c:211
-#: src/editor/editcmd.c:235
-#: src/editor/editcmd.c:519
-#: src/editor/editcmd.c:608
-#: src/editor/editcmd.c:947
-#: src/editor/editcmd.c:1074
-#: src/editor/editcmd.c:1360
-#: src/editor/editcmd.c:1482
-#: src/editor/editcmd.c:2915
-#: src/editor/editcmd.c:2953
-#: src/editor/editcmd_dialogs.c:490
-#: src/execute.c:106
-#: src/file.c:599
-#: src/help.c:319
-#: src/main.c:2167
-#: src/main.c:2178
-#: src/screen.c:1869
-#: src/subshell.c:345
-#: src/subshell.c:678
-#: src/viewer/actions_cmd.c:354
 msgid "Warning"
 msgstr "警告"
 
-#: lib/utilunix.c:357
 msgid " Pipe failed "
 msgstr "管道失败 "
 
-#: lib/utilunix.c:361
 msgid " Dup failed "
 msgstr "复制失败 "
 
-#: lib/vfs/mc-vfs/cpio.c:169
-#: lib/vfs/mc-vfs/cpio.c:185
 #, c-format
 msgid ""
 "Cannot open cpio archive\n"
@@ -499,7 +357,6 @@ msgstr ""
 "无法打开 cpio 归档\n"
 "%s"
 
-#: lib/vfs/mc-vfs/cpio.c:251
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
@@ -508,7 +365,6 @@ msgstr ""
 "过早结束的cpio 归档\n"
 "%s"
 
-#: lib/vfs/mc-vfs/cpio.c:320
 #, c-format
 msgid ""
 "Inconsistent hardlinks of\n"
@@ -522,16 +378,10 @@ msgstr ""
 "%1$s\n"
 "的硬链接"
 
-#: lib/vfs/mc-vfs/cpio.c:355
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s 含有重复的项！正在跳过！"
 
-#: lib/vfs/mc-vfs/cpio.c:433
-#: lib/vfs/mc-vfs/cpio.c:485
-#: lib/vfs/mc-vfs/cpio.c:491
-#: lib/vfs/mc-vfs/cpio.c:548
-#: lib/vfs/mc-vfs/cpio.c:558
 #, c-format
 msgid ""
 "Corrupted cpio header encountered in\n"
@@ -540,7 +390,6 @@ msgstr ""
 "在 %s 中\n"
 "遇到损坏的 cpio 头"
 
-#: lib/vfs/mc-vfs/cpio.c:610
 #, c-format
 msgid ""
 "Unexpected end of file\n"
@@ -549,30 +398,24 @@ msgstr ""
 "异常的文件结束\n"
 "%s"
 
-#: lib/vfs/mc-vfs/direntry.c:364
 #, c-format
 msgid "Directory cache expired for %s"
 msgstr "%s 的目录缓存已过期"
 
-#: lib/vfs/mc-vfs/direntry.c:794
 msgid "Starting linear transfer..."
 msgstr "正在开始线性传输..."
 
-#: lib/vfs/mc-vfs/direntry.c:936
 #, c-format
 msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
 msgstr "%s：%s：%s %3d%% (传输了 %lu 字节)"
 
-#: lib/vfs/mc-vfs/direntry.c:937
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s：%s：%s 传输了 %lu 字节"
 
-#: lib/vfs/mc-vfs/direntry.c:983
 msgid "Getting file"
 msgstr "正在获取文件"
 
-#: lib/vfs/mc-vfs/extfs.c:455
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
@@ -581,247 +424,182 @@ msgstr ""
 "无法打开 %s 归档\n"
 "%s"
 
-#: lib/vfs/mc-vfs/extfs.c:497
-#: lib/vfs/mc-vfs/extfs.c:518
-#: lib/vfs/mc-vfs/extfs.c:574
 msgid "Inconsistent extfs archive"
 msgstr "不完整的 extfs 归档"
 
-#: lib/vfs/mc-vfs/extfs.c:1443
 #, c-format
 msgid "Warning: cannot open %s directory\n"
 msgstr "警告：不能打开目录%s\n"
 
-#: lib/vfs/mc-vfs/fish.c:178
 #, c-format
 msgid "fish: Disconnecting from %s"
 msgstr "fish：正在从 %s 断开连接"
 
-#: lib/vfs/mc-vfs/fish.c:274
 msgid "fish: Waiting for initial line..."
 msgstr "fish：正在等待初始化行..."
 
-#: lib/vfs/mc-vfs/fish.c:285
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "抱歉，目前无法创建口令验证连接。"
 
-#: lib/vfs/mc-vfs/fish.c:289
 msgid " fish: Password required for "
 msgstr "fish：需要口令 "
 
-#: lib/vfs/mc-vfs/fish.c:297
 msgid "fish: Sending password..."
 msgstr "fish：正在发送口令..."
 
-#: lib/vfs/mc-vfs/fish.c:303
 msgid "fish: Sending initial line..."
 msgstr "fish：正在发送初始化行..."
 
-#: lib/vfs/mc-vfs/fish.c:314
 msgid "fish: Handshaking version..."
 msgstr "fish：正在握手版本..."
 
-#: lib/vfs/mc-vfs/fish.c:328
 msgid "fish: Setting up current directory..."
 msgstr "fish：正在设置当前目录..."
 
-#: lib/vfs/mc-vfs/fish.c:330
 #, c-format
 msgid "fish: Connected, home %s."
 msgstr "fish：已连接，主目录%s，"
 
-#: lib/vfs/mc-vfs/fish.c:421
 #, c-format
 msgid "fish: Reading directory %s..."
 msgstr "fish：正在读取目录 %s..."
 
-#: lib/vfs/mc-vfs/fish.c:664
-#: lib/vfs/mc-vfs/ftpfs.c:1444
-#: lib/vfs/mc-vfs/undelfs.c:356
 #, c-format
 msgid "%s: done."
 msgstr "%s：完成"
 
-#: lib/vfs/mc-vfs/fish.c:673
-#: lib/vfs/mc-vfs/ftpfs.c:1399
-#: lib/vfs/mc-vfs/undelfs.c:359
 #, c-format
 msgid "%s: failure"
 msgstr "%s：失败"
 
-#: lib/vfs/mc-vfs/fish.c:727
 #, c-format
 msgid "fish: store %s: sending command..."
 msgstr "fish：保存 %s：正在发送命令..."
 
-#: lib/vfs/mc-vfs/fish.c:782
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish：本地读取失败，正在发送零"
 
-#: lib/vfs/mc-vfs/fish.c:798
 #, c-format
 msgid "fish: storing %s %d (%lu)"
 msgstr "fish：正在保存 %s %d (%lu)"
 
-#: lib/vfs/mc-vfs/fish.c:799
 msgid "zeros"
 msgstr "零"
 
-#: lib/vfs/mc-vfs/fish.c:799
-#: src/file.c:1746
 msgid "file"
 msgstr "文件"
 
-#: lib/vfs/mc-vfs/fish.c:870
 msgid "Aborting transfer..."
 msgstr "正在中止传输..."
 
-#: lib/vfs/mc-vfs/fish.c:881
 msgid "Error reported after abort."
 msgstr "中止后有错误。"
 
-#: lib/vfs/mc-vfs/fish.c:883
 msgid "Aborted transfer would be successful."
 msgstr "被中止的传输可能成功完成了。"
 
-#: lib/vfs/mc-vfs/ftpfs.c:424
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
 msgstr "ftpfs：正在断开到 %s 的连接"
 
-#: lib/vfs/mc-vfs/ftpfs.c:479
 msgid " FTP: Password required for "
 msgstr "FTP：需要口令 "
 
-#: lib/vfs/mc-vfs/ftpfs.c:515
 msgid "ftpfs: sending login name"
 msgstr "ftpfs：正在发送用户登录名"
 
-#: lib/vfs/mc-vfs/ftpfs.c:519
 msgid "ftpfs: sending user password"
 msgstr "ftpfs：正在发送用户口令"
 
-#: lib/vfs/mc-vfs/ftpfs.c:525
 #, c-format
 msgid "FTP: Account required for user %s"
 msgstr "FTP：用户%s需要账户 "
 
-#: lib/vfs/mc-vfs/ftpfs.c:527
 msgid "Account:"
 msgstr "账户"
 
-#: lib/vfs/mc-vfs/ftpfs.c:531
 msgid "ftpfs: sending user account"
 msgstr "ftpfs：正在发送用户账户"
 
-#: lib/vfs/mc-vfs/ftpfs.c:541
 msgid "ftpfs: logged in"
 msgstr "ftpfs：已登录"
 
-#: lib/vfs/mc-vfs/ftpfs.c:555
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
 msgstr "ftpfs：用户 %s 登录不正确"
 
-#: lib/vfs/mc-vfs/ftpfs.c:681
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs：无效的主机名。"
 
-#: lib/vfs/mc-vfs/ftpfs.c:714
-#: lib/vfs/mc-vfs/ftpfs.c:730
 #, c-format
 msgid "ftpfs: %s"
 msgstr "ftpfs: %s"
 
-#: lib/vfs/mc-vfs/ftpfs.c:737
 #, c-format
 msgid "ftpfs: making connection to %s"
 msgstr "ftpfs：正在连接 %s"
 
-#: lib/vfs/mc-vfs/ftpfs.c:748
 msgid "ftpfs: connection interrupted by user"
 msgstr "ftpfs：连接被用户中断"
 
-#: lib/vfs/mc-vfs/ftpfs.c:750
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
 msgstr "ftpfs：连接服务器失败：%s"
 
-#: lib/vfs/mc-vfs/ftpfs.c:797
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "正在等待重试... %d (Control-C 取消)"
 
-#: lib/vfs/mc-vfs/ftpfs.c:940
-#: lib/vfs/mc-vfs/ftpfs.c:1005
-#: lib/vfs/mc-vfs/ftpfs.c:1052
 msgid "ftpfs: invalid address family"
 msgstr "ftpfs：无效的地址族"
 
-#: lib/vfs/mc-vfs/ftpfs.c:1012
 #, c-format
 msgid "ftpfs: could not setup passive mode: %s"
 msgstr "ftpfs：无法设置为被动模式：%s"
 
-#: lib/vfs/mc-vfs/ftpfs.c:1017
 #, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr "ftpfs: 无法创建套接字：%s "
 
-#: lib/vfs/mc-vfs/ftpfs.c:1027
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs：无法设置为被动模式"
 
-#: lib/vfs/mc-vfs/ftpfs.c:1143
 msgid "ftpfs: aborting transfer."
 msgstr "ftpfs：正在中止传输。"
 
-#: lib/vfs/mc-vfs/ftpfs.c:1145
 #, c-format
 msgid "ftpfs: abort error: %s"
 msgstr "ftpfs：中止错误：%s"
 
-#: lib/vfs/mc-vfs/ftpfs.c:1153
 msgid "ftpfs: abort failed"
 msgstr "ftpfs：终止失败"
 
-#: lib/vfs/mc-vfs/ftpfs.c:1257
-#: lib/vfs/mc-vfs/ftpfs.c:1356
 msgid "ftpfs: CWD failed."
 msgstr "ftpfs：CWD 失败。"
 
-#: lib/vfs/mc-vfs/ftpfs.c:1267
-#: lib/vfs/mc-vfs/ftpfs.c:1274
 msgid "ftpfs: couldn't resolve symlink"
 msgstr "ftpfs：无法解析符号链接"
 
-#: lib/vfs/mc-vfs/ftpfs.c:1325
 msgid "Resolving symlink..."
 msgstr "正在解析符号链接..."
 
-#: lib/vfs/mc-vfs/ftpfs.c:1347
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
 msgstr "ftpfs：正在读取 FTP 目录 %s... %s%s"
 
-#: lib/vfs/mc-vfs/ftpfs.c:1350
 msgid "(strict rfc959)"
 msgstr "(严格遵循 rfc959)"
 
-#: lib/vfs/mc-vfs/ftpfs.c:1351
 msgid "(chdir first)"
 msgstr "(先改变目录)"
 
-#: lib/vfs/mc-vfs/ftpfs.c:1457
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs：失败；没有后备"
 
-#: lib/vfs/mc-vfs/ftpfs.c:1525
 #, c-format
 msgid "ftpfs: storing file %lu (%lu)"
 msgstr "ftpfs：正在保存文件 %lu (%lu)"
 
-#: lib/vfs/mc-vfs/ftpfs.c:1940
 msgid ""
 "~/.netrc file has incorrect mode.\n"
 "Remove password or correct mode."
@@ -829,16 +607,12 @@ msgstr ""
 "~/.netrc 文件没有正确的权限。\n"
 "删除口令或者改正权限。"
 
-#: lib/vfs/mc-vfs/mcfs.c:140
-#: lib/vfs/mc-vfs/mcfs.c:185
 msgid " MCFS "
 msgstr "MCFS "
 
-#: lib/vfs/mc-vfs/mcfs.c:141
 msgid " The server does not support this version "
 msgstr "服务器不支持该版本 "
 
-#: lib/vfs/mc-vfs/mcfs.c:158
 msgid ""
 " The remote server is not running on a system port \n"
 " you need a password to log in, but the information may \n"
@@ -848,80 +622,37 @@ msgstr ""
 " 您需要口令来登录，但是对端可能不安全。\n"
 " 继续吗？\n"
 
-#: lib/vfs/mc-vfs/mcfs.c:161
-#: src/cmd.c:225
-#: src/editor/editcmd.c:213
-#: src/editor/editcmd.c:237
-#: src/editor/editcmd.c:2025
-#: src/file.c:2011
-#: src/file.c:2364
-#: src/filegui.c:708
-#: src/hotlist.c:1106
-#: src/hotlist.c:1124
-#: src/main.c:377
-#: src/screen.c:2499
-#: src/subshell.c:680
-#: src/tree.c:747
-#: src/viewer/lib.c:147
-#: src/viewer/search.c:286
-#: src/widget.c:2559
 msgid "&Yes"
 msgstr "是(&Y)"
 
-#: lib/vfs/mc-vfs/mcfs.c:161
-#: src/cmd.c:225
-#: src/editor/editcmd.c:213
-#: src/editor/editcmd.c:2025
-#: src/file.c:2011
-#: src/file.c:2364
-#: src/filegui.c:705
-#: src/hotlist.c:1106
-#: src/hotlist.c:1124
-#: src/main.c:377
-#: src/screen.c:2499
-#: src/subshell.c:680
-#: src/tree.c:747
-#: src/viewer/lib.c:147
-#: src/viewer/search.c:287
-#: src/widget.c:2559
 msgid "&No"
 msgstr "否(&N)"
 
-#: lib/vfs/mc-vfs/mcfs.c:171
 msgid " MCFS Password required "
 msgstr " 需要 MCFS 口令 "
 
-#: lib/vfs/mc-vfs/mcfs.c:185
 msgid " Invalid password "
 msgstr " 无效的口令 "
 
-#: lib/vfs/mc-vfs/mcfs.c:245
 #, c-format
 msgid " Cannot locate hostname: %s "
 msgstr " 无法定位主机名：%s "
 
-#: lib/vfs/mc-vfs/mcfs.c:264
 #, c-format
 msgid " Cannot create socket: %s "
 msgstr " 无法创建套接字：%s "
 
-#: lib/vfs/mc-vfs/mcfs.c:270
 #, c-format
 msgid " Cannot connect to server: %s "
 msgstr " 无法连接到服务器：%s "
 
-#: lib/vfs/mc-vfs/mcfs.c:340
 msgid " Too many open connections "
 msgstr " 太多打开的连接 "
 
-#: lib/vfs/mc-vfs/sfs.c:351
-#: src/charsets.c:61
-#: src/charsets.c:66
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "警告：没有找到文件 %s\n"
 
-#: lib/vfs/mc-vfs/sfs.c:376
 #, c-format
 msgid ""
 "Warning: Invalid line in %s:\n"
@@ -930,7 +661,6 @@ msgstr ""
 "警告：%s 中有无效的行：\n"
 "%s\n"
 
-#: lib/vfs/mc-vfs/sfs.c:388
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
@@ -939,7 +669,6 @@ msgstr ""
 "警告：%2$s 中有无效的标志 %1$c\n"
 "%3$s\n"
 
-#: lib/vfs/mc-vfs/smbfs.c:622
 #, c-format
 msgid ""
 " reconnect to %s failed\n"
@@ -948,37 +677,29 @@ msgstr ""
 " 重新连接 %s 失败\n"
 " "
 
-#: lib/vfs/mc-vfs/smbfs.c:1179
 msgid " Authentication failed "
 msgstr " 验证失败 "
 
-#: lib/vfs/mc-vfs/smbfs.c:1702
 #, c-format
 msgid " Error %s creating directory %s "
 msgstr " %s 正在创建目录 %s "
 
-#: lib/vfs/mc-vfs/smbfs.c:1728
 #, c-format
 msgid " Error %s removing directory %s "
 msgstr " %s 正在删除目录 %s "
 
-#: lib/vfs/mc-vfs/smbfs.c:1830
 #, c-format
 msgid " %s opening remote file %s "
 msgstr " %s 正在打开远程文件 %s "
 
-#: lib/vfs/mc-vfs/smbfs.c:1909
 #, c-format
 msgid " %s removing remote file %s "
 msgstr " %s 正在删除远程文件 %s "
 
-#: lib/vfs/mc-vfs/smbfs.c:1944
 #, c-format
 msgid " %s renaming files\n"
 msgstr " %s 正在重命名文件\n"
 
-#: lib/vfs/mc-vfs/tar.c:237
-#: lib/vfs/mc-vfs/tar.c:255
 #, c-format
 msgid ""
 "Cannot open tar archive\n"
@@ -987,18 +708,12 @@ msgstr ""
 "无法打开 tar 归档文件\n"
 "%s"
 
-#: lib/vfs/mc-vfs/tar.c:497
-#: lib/vfs/mc-vfs/tar.c:527
-#: lib/vfs/mc-vfs/tar.c:602
-#: lib/vfs/mc-vfs/tar.c:611
 msgid "Inconsistent tar archive"
 msgstr "不完整的 tar 归档文件"
 
-#: lib/vfs/mc-vfs/tar.c:513
 msgid "Unexpected EOF on archive file"
 msgstr "归档文件出现异常 EOF"
 
-#: lib/vfs/mc-vfs/tar.c:699
 #, c-format
 msgid ""
 "Hmm,...\n"
@@ -1009,62 +724,48 @@ msgstr ""
 "%s\n"
 "不是一个 tar 归档文件。"
 
-#: lib/vfs/mc-vfs/undelfs.c:93
 msgid " undelfs: error "
 msgstr "undelfs：错误 "
 
-#: lib/vfs/mc-vfs/undelfs.c:200
 msgid " not enough memory "
 msgstr "内存不足 "
 
-#: lib/vfs/mc-vfs/undelfs.c:206
 msgid " while allocating block buffer "
 msgstr " 当分配块缓冲时 "
 
-#: lib/vfs/mc-vfs/undelfs.c:211
 #, c-format
 msgid " open_inode_scan: %d "
 msgstr " open_inode_scan：%d "
 
-#: lib/vfs/mc-vfs/undelfs.c:216
 #, c-format
 msgid " while starting inode scan %d "
 msgstr " 当开始 inode 扫描 %d "
 
-#: lib/vfs/mc-vfs/undelfs.c:224
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
 msgstr "undelfs：正在载入被删除文件的信息 %d inode"
 
-#: lib/vfs/mc-vfs/undelfs.c:239
 #, c-format
 msgid " while calling ext2_block_iterate %d "
 msgstr " 当调用 ext2_block_iterate %d 时 "
 
-#: lib/vfs/mc-vfs/undelfs.c:251
 msgid " no more memory while reallocating array "
 msgstr " 当重新分配数组时没有内存时 "
 
-#: lib/vfs/mc-vfs/undelfs.c:273
 #, c-format
 msgid " while doing inode scan %d "
 msgstr " 当进行 inode 扫描 %d 时 "
 
-#: lib/vfs/mc-vfs/undelfs.c:307
 msgid " Ext2lib error "
 msgstr " Ext2lib 错误 "
 
-#: lib/vfs/mc-vfs/undelfs.c:338
-#: lib/vfs/mc-vfs/undelfs.c:679
 #, c-format
 msgid " Cannot open file %s "
 msgstr " 无法打开文件 %s "
 
-#: lib/vfs/mc-vfs/undelfs.c:341
 msgid "undelfs: reading inode bitmap..."
 msgstr "undelfs：正在读取 inode bitmap..."
 
-#: lib/vfs/mc-vfs/undelfs.c:344
 #, c-format
 msgid ""
 " Cannot load inode bitmap from: \n"
@@ -1073,11 +774,9 @@ msgstr ""
 " 无法载入 inode bitmap 自：\n"
 " %s \n"
 
-#: lib/vfs/mc-vfs/undelfs.c:347
 msgid "undelfs: reading block bitmap..."
 msgstr "undelfs：正在读取 block bitmap..."
 
-#: lib/vfs/mc-vfs/undelfs.c:350
 #, c-format
 msgid ""
 " Cannot load block bitmap from: \n"
@@ -1086,146 +785,67 @@ msgstr ""
 " 无法载入 block bitmap 自：\n"
 " %s \n"
 
-#: lib/vfs/mc-vfs/undelfs.c:374
 msgid " vfs_info is not fs! "
 msgstr "vfs_info 不是 fs！ "
 
-#: lib/vfs/mc-vfs/undelfs.c:433
-#: lib/vfs/mc-vfs/undelfs.c:638
 msgid " You have to chdir to extract files first "
 msgstr " 您必须先更改目录来解开文件 "
 
-#: lib/vfs/mc-vfs/undelfs.c:573
 msgid " while iterating over blocks "
 msgstr "正当遍历块时 "
 
-#: lib/vfs/mc-vfs/utilvfs.c:802
 msgid "Cannot parse:"
 msgstr "无法解析："
 
-#: lib/vfs/mc-vfs/utilvfs.c:806
 msgid "More parsing errors will be ignored."
 msgstr "以后的解析错误将被忽略。"
 
-#: lib/vfs/mc-vfs/utilvfs.c:816
 msgid "Internal error:"
 msgstr "内部错误："
 
-#: lib/vfs/mc-vfs/utilvfs.c:823
-#: src/boxes.c:989
 msgid "Password:"
 msgstr "口令："
 
-#: lib/vfs/mc-vfs/vfs.c:1242
 msgid "Changes to file lost"
 msgstr "对文件的修改被丢失"
 
-#: src/achown.c:78
-#: src/boxes.c:148
-#: src/boxes.c:291
-#: src/boxes.c:378
-#: src/boxes.c:465
-#: src/boxes.c:597
-#: src/boxes.c:726
-#: src/boxes.c:820
-#: src/boxes.c:990
-#: src/chmod.c:110
-#: src/chown.c:82
-#: src/cmd.c:871
-#: src/editor/editcmd.c:213
-#: src/editor/editcmd.c:237
-#: src/editor/editcmd.c:442
-#: src/editor/editcmd.c:521
-#: src/editor/editcmd.c:542
-#: src/editor/editcmd.c:610
-#: src/editor/editcmd.c:901
-#: src/editor/editcmd.c:950
-#: src/editor/editcmd.c:1076
-#: src/editor/editcmd.c:1363
-#: src/editor/editcmd.c:1485
-#: src/editor/editcmd.c:2587
-#: src/editor/editcmd.c:2917
-#: src/editor/editcmd.c:2955
-#: src/editor/editcmd_dialogs.c:105
-#: src/editor/editcmd_dialogs.c:178
-#: src/editor/editcmd_dialogs.c:492
-#: src/editor/editcmd_dialogs.c:558
-#: src/editor/editoptions.c:72
-#: src/filegui.c:933
-#: src/find.c:365
-#: src/hotlist.c:141
-#: src/hotlist.c:577
-#: src/hotlist.c:889
-#: src/hotlist.c:979
-#: src/layout.c:374
-#: src/learn.c:66
-#: src/option.c:120
-#: src/panelize.c:74
-#: src/viewer/dialogs.c:90
-#: src/viewer/dialogs.c:196
-#: src/viewer/hex.c:328
-#: src/wtools.c:509
 msgid "&Cancel"
 msgstr "取消(&C)"
 
-#: src/achown.c:79
-#: src/chmod.c:111
-#: src/chown.c:83
 msgid "&Set"
 msgstr "设置(&S)"
 
-#: src/achown.c:80
 msgid "S&kip"
 msgstr "跳过(&K)"
 
-#: src/achown.c:81
-#: src/chmod.c:115
-#: src/chown.c:86
 msgid "Set &all"
 msgstr "全部设置(&A)"
 
-#: src/achown.c:260
-#: src/achown.c:354
-#: src/achown.c:361
 msgid "owner"
 msgstr "属主"
 
-#: src/achown.c:260
-#: src/achown.c:356
-#: src/achown.c:363
 msgid "group"
 msgstr "群组"
 
-#: src/achown.c:358
 msgid "other"
 msgstr "其它"
 
-#: src/achown.c:366
 msgid "On"
 msgstr "开"
 
-#: src/achown.c:368
 msgid "Flag"
 msgstr "标志"
 
-#: src/achown.c:370
 msgid "Mode"
 msgstr "模式"
 
-#: src/achown.c:374
 #, c-format
 msgid "%6d of %d"
 msgstr "%6d / %d"
 
-#: src/achown.c:585
 msgid " Chown advanced command "
 msgstr " Chown 高级命令 "
 
-#: src/achown.c:643
-#: src/achown.c:659
-#: src/achown.c:706
-#: src/chmod.c:256
-#: src/chmod.c:326
 #, c-format
 msgid ""
 " Cannot chmod \"%s\" \n"
@@ -1234,11 +854,6 @@ msgstr ""
 " 无法 chmod “%s” \n"
 " %s "
 
-#: src/achown.c:648
-#: src/achown.c:664
-#: src/achown.c:711
-#: src/chown.c:227
-#: src/chown.c:342
 #, c-format
 msgid ""
 " Cannot chown \"%s\" \n"
@@ -1247,88 +862,68 @@ msgstr ""
 " 无法 chown “%s” \n"
 " %s "
 
-#: src/args.c:99
 msgid "Displays the current version"
 msgstr "显示当前版本"
 
-#: src/args.c:107
 msgid "Print data directory"
 msgstr "打印数据目录"
 
-#: src/args.c:114
 msgid "Print last working directory to specified file"
 msgstr "将工作目录打印到指定文件"
 
-#: src/args.c:122
 msgid "Enables subshell support (default)"
 msgstr "启用子 shell 支持(默认)"
 
-#: src/args.c:129
 msgid "Disables subshell support"
 msgstr "禁用子 shell 支持"
 
-#: src/args.c:139
 msgid "Log ftp dialog to specified file"
 msgstr "记录 ftp 对话到指定的文件"
 
-#: src/args.c:146
 msgid "Set debug level"
 msgstr "设置调试级别"
 
-#: src/args.c:156
 msgid "Launches the file viewer on a file"
 msgstr "在文件上启动文件查看器"
 
-#: src/args.c:163
 msgid "Edits one file"
 msgstr "编辑一个文件"
 
-#: src/args.c:178
 msgid "Forces xterm features"
 msgstr "强制使用 xterm 特性"
 
-#: src/args.c:185
 msgid "Disable mouse support in text version"
 msgstr "在文本模式下禁用鼠标支持"
 
-#: src/args.c:193
 msgid "Tries to use termcap instead of terminfo"
 msgstr "尝试使用 termcap 而不是 terminfo"
 
-#: src/args.c:201
 msgid "To run on slow terminals"
 msgstr "在慢速终端上运行"
 
-#: src/args.c:208
 msgid "Use stickchars to draw"
 msgstr "用线条字符绘制"
 
-#: src/args.c:215
 msgid "Resets soft keys on HP terminals"
 msgstr "在 HP 终端上复位软键"
 
-#: src/args.c:222
 msgid "Load definitions of key bindings from specified file"
 msgstr "从指定的文件加载键绑定定义"
 
-#: src/args.c:238
 msgid "Requests to run in black and white"
 msgstr "请求运行在黑白模式"
 
-#: src/args.c:245
 msgid "Request to run in color mode"
 msgstr "请求运行在彩色模式"
 
-#: src/args.c:252
 msgid "Specifies a color configuration"
 msgstr "指定颜色配置"
 
-#: src/args.c:259
 msgid "Show mc with specified skin"
 msgstr "用指定的皮肤显示MC"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#: src/args.c:303
+#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -1339,7 +934,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -1356,8 +951,6 @@ msgstr ""
 " 编辑器: editnormal, editbold, editmarked, editwhitespace,\n"
 " editlinestate\n"
 
-#. TRANSLATORS: don't translate keywords and names of colors
-#: src/args.c:314
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 "\n"
@@ -1376,24 +969,18 @@ msgstr ""
 "  brightcyan, lightgray 和 white\n"
 "\n"
 
-#: src/args.c:322
 msgid "Color options"
 msgstr "颜色选项"
 
-#: src/args.c:332
-#: src/args.c:334
 msgid "+number"
 msgstr "+数字"
 
-#: src/args.c:333
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[this_dir] [other_panel_dir]"
 
-#: src/args.c:335
 msgid "Set initial line number for the internal editor"
 msgstr "设置内部编辑器的初始行号"
 
-#: src/args.c:347
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -1403,580 +990,394 @@ msgstr ""
 "请发送错误报告(包含有`mc -V`的输出)\n"
 "到 mc-devel@gnome.org\n"
 
-#: src/args.c:351
-#: src/main.c:1766
-#: src/textconf.c:121
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-#: src/args.c:428
-#: src/args.c:429
 msgid "Main options"
 msgstr "主要选项"
 
-#: src/args.c:436
-#: src/args.c:437
 msgid "Terminal options"
 msgstr "终端选项 "
 
-#: src/background.c:268
-#: src/background.c:318
-#: src/file.c:390
-#: src/file.c:2297
 msgid " Background process error "
 msgstr "后台进程错误 "
 
-#: src/background.c:274
-#: src/background.c:318
 msgid " Unknown error in child "
 msgstr "子进程未知错误 "
 
-#: src/background.c:282
 msgid " Child died unexpectedly "
 msgstr " 子进程异常退出 "
 
-#: src/background.c:289
 msgid " Background protocol error "
 msgstr " 后台协议错误 "
 
-#: src/background.c:290
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
 msgstr " 后台进程请求更多的参数，无法处理。 \n"
 
-#: src/boxes.c:136
 msgid "&Full file list"
 msgstr "完整文件列表(&F)"
 
-#: src/boxes.c:137
 msgid "&Brief file list"
 msgstr "简要文件列表(&B)"
 
-#: src/boxes.c:138
 msgid "&Long file list"
 msgstr "长文件列表(&L)"
 
-#: src/boxes.c:139
 msgid "&User defined:"
 msgstr "用户自定义(&U)："
 
-#: src/boxes.c:145
 msgid "Listing mode"
 msgstr "列表模式"
 
-#: src/boxes.c:146
 msgid "user &Mini status"
 msgstr "用户简要状态(&M)"
 
-#: src/boxes.c:147
-#: src/boxes.c:293
-#: src/boxes.c:379
-#: src/boxes.c:466
-#: src/boxes.c:599
-#: src/boxes.c:727
-#: src/boxes.c:821
-#: src/boxes.c:922
-#: src/boxes.c:990
-#: src/editor/edit.c:3145
-#: src/editor/editcmd.c:444
-#: src/editor/editcmd.c:543
-#: src/editor/editcmd.c:1866
-#: src/editor/editcmd.c:2588
-#: src/editor/editcmd_dialogs.c:106
-#: src/editor/editcmd_dialogs.c:182
-#: src/editor/editoptions.c:73
-#: src/filegui.c:941
-#: src/find.c:365
-#: src/layout.c:373
-#: src/option.c:119
-#: src/subshell.c:349
-#: src/viewer/dialogs.c:92
-#: src/viewer/dialogs.c:197
-#: src/wtools.c:510
 msgid "&OK"
 msgstr "确认(&O)"
 
-#: src/boxes.c:295
 msgid "&Reverse"
 msgstr "反向(&R)"
 
-#: src/boxes.c:297
 msgid "Case sensi&tive"
 msgstr "大小写敏感(&T)"
 
-#: src/boxes.c:299
 msgid "Executable &first"
 msgstr "可执行文件优先(&f)"
 
-#: src/boxes.c:309
 msgid "Sort order"
 msgstr "排序"
 
-#: src/boxes.c:374
 msgid "Confirmation"
 msgstr "确认"
 
 #. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
-#: src/boxes.c:381
 msgid "Confirmation|&History cleanup"
 msgstr "Confirmation|清除历史(&H)"
 
-#: src/boxes.c:382
 msgid "Confirmation|&Directory hotlist delete"
 msgstr "Confirmation|删除目录活动表(&D)"
 
-#: src/boxes.c:383
 msgid "Confirmation|E&xit"
 msgstr "Confirmation|退出(&X)"
 
-#: src/boxes.c:384
 msgid "Confirmation|&Execute"
 msgstr "Confirmation|执行(&E)"
 
-#: src/boxes.c:385
 msgid "Confirmation|O&verwrite"
 msgstr "Confirmation|覆盖时(&V) "
 
-#: src/boxes.c:386
 msgid "Confirmation|&Delete"
 msgstr "Confirmation|删除(&D)"
 
-#: src/boxes.c:457
 msgid "UTF-8 output"
 msgstr "UTF-8输出"
 
-#: src/boxes.c:458
 msgid "Full 8 bits output"
 msgstr "全8位输出"
 
-#: src/boxes.c:459
 msgid "ISO 8859-1"
 msgstr "ISO 8859-1"
 
-#: src/boxes.c:460
 msgid "7 bits"
 msgstr "7 位"
 
-#: src/boxes.c:467
-#: src/boxes.c:603
 msgid "F&ull 8 bits input"
 msgstr "全8位输入(&U)"
 
-#: src/boxes.c:474
-#: src/boxes.c:584
 msgid " Display bits "
 msgstr "显示位 "
 
-#: src/boxes.c:559
-#: src/boxes.c:590
-#: src/selcodepage.c:85
 msgid "Other 8 bit"
 msgstr "其它 8 位"
 
-#: src/boxes.c:587
 msgid "Input / display codepage:"
 msgstr "输入/显示代码页："
 
-#: src/boxes.c:606
 msgid "&Select"
 msgstr "选择(&S)"
 
-#: src/boxes.c:729
 msgid "Use passive mode over pro&xy"
 msgstr "通过代理时使用被动模式(&X)"
 
-#: src/boxes.c:730
 msgid "Use &passive mode"
 msgstr "使用被动模式(&P)"
 
-#: src/boxes.c:731
 msgid "&Use ~/.netrc"
 msgstr "使用~/.netrc(&U)"
 
-#: src/boxes.c:733
 msgid "&Always use ftp proxy"
 msgstr "总是使用 ftp 代理(&A)"
 
-#: src/boxes.c:734
-#: src/boxes.c:740
 msgid "sec"
 msgstr "秒"
 
-#: src/boxes.c:736
 msgid "ftpfs directory cache timeout:"
 msgstr "ftpfs 目录缓存超时值："
 
-#: src/boxes.c:738
 msgid "ftp anonymous password:"
 msgstr "ftp 匿名登录口令："
 
-#: src/boxes.c:742
 msgid "Timeout for freeing VFSs:"
 msgstr "释放 VFS 的超时值："
 
-#: src/boxes.c:748
 msgid " Virtual File System Setting "
 msgstr "虚拟文件系统设置 "
 
-#: src/boxes.c:782
 msgid "cd"
 msgstr "切换目录"
 
-#: src/boxes.c:806
 msgid "Quick cd"
 msgstr "快速切换目录"
 
-#: src/boxes.c:823
 msgid "Symbolic link filename:"
 msgstr "符号链接文件名："
 
-#: src/boxes.c:825
 msgid "Existing filename (filename symlink will point to):"
 msgstr "已存在文件名(文件名符号链接指向)："
 
-#: src/boxes.c:831
 msgid "Symbolic link"
 msgstr "符号链接"
 
-#: src/boxes.c:858
 msgid "Running "
 msgstr "正在运行"
 
-#: src/boxes.c:859
-#: src/find.c:1087
 msgid "Stopped"
 msgstr "已停止"
 
-#: src/boxes.c:919
 msgid "&Stop"
 msgstr "停止(&S)"
 
-#: src/boxes.c:920
 msgid "&Resume"
 msgstr "恢复(&R)"
 
-#: src/boxes.c:921
 msgid "&Kill"
 msgstr "杀死(&K)"
 
-#: src/boxes.c:958
 msgid "Background Jobs"
 msgstr "后台任务"
 
-#: src/boxes.c:989
 msgid "Domain:"
 msgstr "域："
 
-#: src/boxes.c:989
 msgid "Username:"
 msgstr "用户名："
 
-#: src/boxes.c:1040
 #, c-format
 msgid "Password for \\\\%s\\%s"
 msgstr "\\\\%s\\%s 的口令"
 
-#: src/charsets.c:73
 msgid "7-bit ASCII"
 msgstr "7-bit ASCII"
 
-#: src/charsets.c:217
-#: src/charsets.c:231
 #, c-format
 msgid "Cannot translate from %s to %s"
 msgstr "无法从 %s 翻译到 %s"
 
-#: src/chmod.c:91
 msgid "execute/search by others"
 msgstr "可被他人执行/搜索"
 
-#: src/chmod.c:92
 msgid "write by others"
 msgstr "可被他人写"
 
-#: src/chmod.c:93
 msgid "read by others"
 msgstr "可被他人读"
 
-#: src/chmod.c:94
 msgid "execute/search by group"
 msgstr "可被群组执行/搜索"
 
-#: src/chmod.c:95
 msgid "write by group"
 msgstr "可被群组写"
 
-#: src/chmod.c:96
 msgid "read by group"
 msgstr "可被群组读"
 
-#: src/chmod.c:97
 msgid "execute/search by owner"
 msgstr "可被所有者执行/搜索"
 
-#: src/chmod.c:98
 msgid "write by owner"
 msgstr "可被所有者写"
 
-#: src/chmod.c:99
 msgid "read by owner"
 msgstr "可被所有者读"
 
-#: src/chmod.c:100
 msgid "sticky bit"
 msgstr "粘附位"
 
-#: src/chmod.c:101
 msgid "set group ID on execution"
 msgstr "执行时设置群组 ID"
 
-#: src/chmod.c:102
 msgid "set user ID on execution"
 msgstr "执行时设置用户 ID"
 
-#: src/chmod.c:112
 msgid "C&lear marked"
 msgstr "清除已标记的(&L)"
 
-#: src/chmod.c:113
 msgid "S&et marked"
 msgstr "设置已标记的(&E)"
 
-#: src/chmod.c:114
 msgid "&Marked all"
 msgstr "全部标记(&M)"
 
-#: src/chmod.c:138
 msgid "Name"
 msgstr "名字"
 
-#: src/chmod.c:140
 msgid "Permissions (Octal)"
 msgstr "权限(8进制)"
 
-#: src/chmod.c:142
 msgid "Owner name"
 msgstr "所有者名"
 
-#: src/chmod.c:144
 msgid "Group name"
 msgstr "群组名"
 
-#: src/chmod.c:147
 msgid "Use SPACE to change"
 msgstr "使用空格键修改"
 
-#: src/chmod.c:149
 msgid "an option, ARROW KEYS"
 msgstr "选项，光标键"
 
-#: src/chmod.c:151
 msgid "to move between options"
 msgstr "移到不同选项"
 
-#: src/chmod.c:153
 msgid "and T or INS to mark"
 msgstr "T 或 INS 做标记"
 
-#: src/chmod.c:158
-#: src/chown.c:122
 msgid " Permission "
 msgstr " 权限 "
 
-#: src/chmod.c:160
-#: src/chown.c:130
 msgid " File "
 msgstr " 文件 "
 
-#: src/chmod.c:211
 msgid "Chmod command"
 msgstr "Chmod 命令"
 
-#: src/chown.c:84
 msgid "Set &users"
 msgstr "设置用户(&U)"
 
-#: src/chown.c:85
 msgid "Set &groups"
 msgstr "设置群组(&G)"
 
-#: src/chown.c:114
 msgid " Name "
 msgstr "名字 "
 
-#: src/chown.c:116
 msgid " Owner name "
 msgstr "所有者名字 "
 
-#: src/chown.c:118
-#: src/chown.c:128
 msgid " Group name "
 msgstr "群组名字 "
 
-#: src/chown.c:120
 msgid " Size "
 msgstr "大小 "
 
-#: src/chown.c:126
 msgid " User name "
 msgstr "用户名 "
 
-#: src/chown.c:170
 msgid " Chown command "
 msgstr "Chown 命令 "
 
-#: src/chown.c:189
 msgid "<Unknown user>"
 msgstr "<未知用户>"
 
-#: src/chown.c:190
 msgid "<Unknown group>"
 msgstr "<未知群组>"
 
-#: src/cmd.c:224
 msgid " Confirmation "
 msgstr "确认 "
 
-#: src/cmd.c:224
 msgid "Files tagged, want to cd?"
 msgstr "文件已经标记，要更改目录吗？"
 
-#: src/cmd.c:230
-#: src/cmd.c:739
-#: src/main.c:572
-#: src/screen.c:2478
 msgid "Cannot change directory"
 msgstr "无法改变目录"
 
-#: src/cmd.c:263
 msgid " View file "
 msgstr " 查看文件 "
 
-#: src/cmd.c:263
 msgid " Filename:"
 msgstr " 文件名："
 
-#: src/cmd.c:285
 msgid " Filtered view "
 msgstr " 过滤视图 "
 
-#: src/cmd.c:286
 msgid " Filter command and arguments:"
 msgstr "过滤命令和参数："
 
-#: src/cmd.c:395
 msgid "Create a new Directory"
 msgstr "创建新目录"
 
-#: src/cmd.c:396
 msgid " Enter directory name:"
 msgstr "输入目录名字："
 
-#: src/cmd.c:469
 msgid " Filter "
 msgstr "过滤 "
 
-#: src/cmd.c:470
 msgid " Set expression for filtering filenames"
 msgstr "设置过滤文件名的表达式 "
 
-#: src/cmd.c:533
-#: src/filegui.c:956
-#: src/find.c:349
 msgid "&Using shell patterns"
 msgstr "使用 shell 模式(&U)"
 
-#: src/cmd.c:534
 msgid "&Case sensitive"
 msgstr "大小写敏感(&C)"
 
-#: src/cmd.c:535
 msgid "&Files only"
 msgstr "仅文件(&F)"
 
-#: src/cmd.c:586
 msgid " Select "
 msgstr "选择 "
 
-#: src/cmd.c:591
 msgid " Unselect "
 msgstr "取消选择 "
 
-#: src/cmd.c:602
 msgid "Extension file edit"
 msgstr "扩展文件编辑"
 
-#: src/cmd.c:603
 msgid " Which extension file you want to edit? "
 msgstr "您要编辑哪个扩展文件？ "
 
-#: src/cmd.c:604
-#: src/cmd.c:636
-#: src/cmd.c:688
-#: src/editor/editcmd.c:990
-#: src/editor/editcmd.c:1024
 msgid "&User"
 msgstr "用户(&U)"
 
-#: src/cmd.c:604
-#: src/cmd.c:636
-#: src/cmd.c:688
-#: src/editor/editcmd.c:990
-#: src/editor/editcmd.c:1024
 msgid "&System Wide"
 msgstr "系统范围(&S)"
 
-#: src/cmd.c:633
-#: src/editor/editcmd.c:1022
 msgid " Menu edit "
 msgstr "菜单编辑 "
 
-#: src/cmd.c:634
-#: src/editor/editcmd.c:1023
 msgid " Which menu file do you want to edit? "
 msgstr "您要编辑哪个菜单文件？ "
 
-#: src/cmd.c:636
-#: src/editor/editcmd.c:1024
 msgid "&Local"
 msgstr "本地(&L)"
 
-#: src/cmd.c:686
 msgid "Highlighting groups file edit"
 msgstr "突出显示组文件编辑"
 
-#: src/cmd.c:687
 msgid " Which highlighting file you want to edit? "
 msgstr "您要编辑哪个突出显示的文件？ "
 
-#: src/cmd.c:869
 msgid " Compare directories "
 msgstr "比较目录 "
 
-#: src/cmd.c:870
 msgid " Select compare method: "
 msgstr "选择比较方法："
 
-#: src/cmd.c:871
 msgid "&Quick"
 msgstr "快速(&Q)"
 
-#: src/cmd.c:871
 msgid "&Size only"
 msgstr "仅大小(&S)"
 
-#: src/cmd.c:871
 msgid "&Thorough"
 msgstr "全面(&T)"
 
-#: src/cmd.c:884
 msgid " Both panels should be in the listing mode to use this command "
 msgstr "要使用该命令，两个面板必需都是列表视图模式 "
 
-#: src/cmd.c:911
 msgid ""
 " Not an xterm or Linux console; \n"
 " the panels cannot be toggled. "
@@ -1984,83 +1385,62 @@ msgstr ""
 "不是一个 xterm 或 Linux 控制台；\n"
 "面板无法切换。"
 
-#: src/cmd.c:925
 #, c-format
 msgid "Link %s to:"
 msgstr "链接%s到："
 
-#: src/cmd.c:926
 msgid " Link "
 msgstr "链接 "
 
-#: src/cmd.c:931
 #, c-format
 msgid " link: %s "
 msgstr "链接：%s "
 
-#: src/cmd.c:954
 #, c-format
 msgid " symlink: %s "
 msgstr "符号链接：%s "
 
-#: src/cmd.c:990
 #, c-format
 msgid " Symlink `%s' points to: "
 msgstr "符号链接“%s”指向："
 
-#: src/cmd.c:995
 msgid " Edit symlink "
 msgstr "编辑符号链接 "
 
-#: src/cmd.c:1000
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
 msgstr "编辑符号链接，无法删除 %s：%s "
 
-#: src/cmd.c:1004
 #, c-format
 msgid " edit symlink: %s "
 msgstr "编辑符号链接：%s "
 
-#: src/cmd.c:1015
 #, c-format
 msgid "`%s' is not a symbolic link"
 msgstr "“%s”不是符号链接"
 
-#: src/cmd.c:1115
-#: src/screen.c:3430
 #, c-format
 msgid " Cannot chdir to %s "
 msgstr " 无法进入目录 %s "
 
-#: src/cmd.c:1124
 msgid " Enter machine name (F1 for details): "
 msgstr " 输入机器名(F1 查看细节)："
 
-#: src/cmd.c:1129
-#: src/widget.c:1468
 msgid " Link to a remote machine "
 msgstr " 链接到远程机器 "
 
-#: src/cmd.c:1137
-#: src/widget.c:1469
 msgid " FTP to machine "
 msgstr " FTP 到机器 "
 
-#: src/cmd.c:1143
 msgid " Shell link to machine "
 msgstr "Shell链接到机器 "
 
-#: src/cmd.c:1151
-#: src/widget.c:1470
 msgid " SMB link to machine "
 msgstr " SMB 链接到机器 "
 
-#: src/cmd.c:1161
 msgid " Undelete files on an ext2 file system "
 msgstr "反删除 ext2 文件系统上的文件 "
 
-#: src/cmd.c:1162
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
@@ -2068,18 +1448,13 @@ msgstr ""
 "输入要反删除的文件所在的设备(不带 /dev/)\n"
 "   (F1 获取详细信息)"
 
-#: src/cmd.c:1283
 msgid " Setup "
 msgstr "设置 "
 
-#: src/cmd.c:1283
 #, c-format
 msgid " Setup saved to ~/%s"
 msgstr "设置已保存到 ~/%s"
 
-#: src/command.c:197
-#: src/screen.c:3050
-#: src/tree.c:509
 #, c-format
 msgid ""
 " Cannot chdir to \"%s\" \n"
@@ -2088,86 +1463,54 @@ msgstr ""
 "无法进入目录“%s”\n"
 " %s "
 
-#: src/command.c:236
-#: src/user.c:762
 msgid " Cannot execute commands on non-local filesystems"
 msgstr "您无法在非本地文件系统上执行命令"
 
-#: src/command.c:245
-#: src/execute.c:216
 msgid " The shell is already running a command "
 msgstr "Shell 正在运行一个命令 "
 
-#: src/dir.c:426
-#: src/dir.c:523
 msgid "Cannot read directory contents"
 msgstr "无法读取目录内容"
 
-#: src/editor/choosesyntax.c:49
 msgid " Choose syntax highlighting "
 msgstr "选择语法突出显示"
 
-#: src/editor/choosesyntax.c:50
 msgid "< Auto >"
 msgstr "<自动>"
 
-#: src/editor/choosesyntax.c:51
 msgid "< Reload Current Syntax >"
 msgstr "<重新加载当前语法>"
 
-#: src/editor/edit-impl.h:297
-msgid "&Dismiss"
-msgstr "取消(&D)"
-
-#: src/editor/edit.c:300
-#: src/editor/edit.c:574
 #, c-format
 msgid " Cannot open %s for reading "
 msgstr "不能打开管道%s读"
 
-#: src/editor/edit.c:301
-#: src/editor/edit.c:505
-#: src/editor/edit.c:513
-#: src/editor/edit.c:612
-#: src/editor/edit.c:3294
-#: src/editor/editcmd.c:301
-#: src/editor/editcmd.c:312
-#: src/editor/editcmd.c:389
-#: src/wtools.c:171
-#: src/wtools.c:338
 msgid "Error"
 msgstr "错误"
 
-#: src/editor/edit.c:504
 #, c-format
 msgid " Error reading from pipe: %s "
 msgstr "读取管道时发生错误：%s"
 
-#: src/editor/edit.c:512
 #, c-format
 msgid " Cannot open pipe for reading: %s "
 msgstr "不能打开管道读取：%s"
 
-#: src/editor/edit.c:585
 #, c-format
 msgid " Cannot get size/permissions for %s "
 msgstr "无法获取文件%s的大小和权限信息"
 
-#: src/editor/edit.c:592
 #, c-format
 msgid " %s is not a regular file "
 msgstr "%s不是常规文件 "
 
-#: src/editor/edit.c:606
 #, c-format
 msgid " File %s is too large "
 msgstr "文件%s太大"
 
-#: src/editor/edit.c:3140
 msgid " About "
 msgstr "关于 "
 
-#: src/editor/edit.c:3141
 msgid ""
 "\n"
 "                Cooledit  v3.11.5\n"
@@ -2185,185 +1528,112 @@ msgstr ""
 "为 Midnight Commander 开发的\n"
 "       对用户友好的文字编辑器。\n"
 
-#: src/editor/edit.c:3294
 msgid "Macro recursion is too deep"
 msgstr "宏递归层次太深"
 
-#: src/editor/editcmd.c:114
-#: src/editor/editcmd.c:1758
-#: src/editor/editcmd.c:2001
-#: src/editor/editcmd_dialogs.c:220
-#: src/viewer/dialogs.c:114
-#: src/viewer/search.c:138
-#: src/viewer/search.c:224
-#: src/viewer/search.c:308
 msgid "Search"
 msgstr "搜索"
 
-#: src/editor/editcmd.c:212
 msgid " File has hard-links. Detach before saving? "
 msgstr "文件有硬链接，保存文件前分离该链接吗？"
 
-#: src/editor/editcmd.c:236
 msgid "The file has been modified in the meantime. Save anyway?"
 msgstr "文件同时已经被修改。仍然保存吗？"
 
-#: src/editor/editcmd.c:300
 msgid " Error writing to pipe: "
 msgstr " 写入管道时发生错误："
 
-#: src/editor/editcmd.c:310
 msgid " Cannot open pipe for writing: "
 msgstr " 试图打开管道写入时失败："
 
-#: src/editor/editcmd.c:388
 #, c-format
 msgid " Cannot open file for writing: %s "
 msgstr "无法打开文件进行写操作：%s"
 
-#: src/editor/editcmd.c:435
 msgid "&Quick save"
 msgstr "快速保存(&Q)"
 
-#: src/editor/editcmd.c:436
 msgid "&Safe save"
 msgstr "安全保存(&S)"
 
-#: src/editor/editcmd.c:437
 msgid "&Do backups with following extension:"
 msgstr "使用下面后缀备份文件(&B)："
 
-#: src/editor/editcmd.c:446
 msgid "Check &POSIX new line"
 msgstr "检查&POSIX换行"
 
-#: src/editor/editcmd.c:455
 msgid " Edit Save Mode "
 msgstr " 编辑保存模式 "
 
-#: src/editor/editcmd.c:520
 msgid "The file you are saving is not finished with a newline"
 msgstr "您要保存的文件没有以换行符结束"
 
-#: src/editor/editcmd.c:521
-#: src/editor/editcmd.c:950
-#: src/editor/editcmd.c:1076
-#: src/editor/editcmd.c:1363
-#: src/editor/editcmd.c:1485
-#: src/editor/editcmd.c:2917
-#: src/editor/editcmd.c:2955
-#: src/editor/editcmd_dialogs.c:492
 msgid "C&ontinue"
 msgstr "继续(&O)"
 
-#: src/editor/editcmd.c:535
 msgid "&Do not change"
 msgstr "不修改(&D)"
 
-#: src/editor/editcmd.c:536
 msgid "&Unix format (LF)"
 msgstr "&Unix格式(LF)"
 
-#: src/editor/editcmd.c:537
 msgid "&Windows/DOS format (CR LF)"
 msgstr "&Windows/DOS格式 (CR LF)"
 
-#: src/editor/editcmd.c:538
 msgid "&Macintosh format (CR)"
 msgstr "&Macintosh格式(CR)"
 
-#: src/editor/editcmd.c:545
 msgid "Change line breaks to:"
 msgstr "更改换行符为："
 
-#: src/editor/editcmd.c:548
-#: src/editor/editcmd.c:1085
-#: src/editor/editcmd.c:2246
-#: src/editor/editcmd.c:2285
 msgid " Enter file name: "
 msgstr "输入文件名："
 
-#: src/editor/editcmd.c:554
-#: src/editor/editcmd.c:668
 msgid " Save As "
 msgstr " 保存为"
 
-#: src/editor/editcmd.c:609
 msgid " A file already exists with this name. "
 msgstr " 同名文件已存在。"
 
-#: src/editor/editcmd.c:610
 msgid "&Overwrite"
 msgstr "覆盖(&O)"
 
-#: src/editor/editcmd.c:668
-#: src/editor/editcmd.c:2268
 msgid " Cannot save file. "
 msgstr " 保存文件时发生错误。"
 
-#: src/editor/editcmd.c:742
-#: src/editor/editcmd.c:748
-#: src/editor/editcmd.c:775
-#: src/editor/editcmd.c:828
 msgid " Delete macro "
 msgstr " 删除宏 "
 
-#: src/editor/editcmd.c:742
 msgid " Cannot open temp file "
 msgstr " 打开临时文件时发生错误 "
 
-#: src/editor/editcmd.c:748
-#: src/editor/editcmd.c:818
-#: src/editor/editcmd.c:883
 msgid " Cannot open macro file "
 msgstr " 打开宏文件时发生错误 "
 
-#: src/editor/editcmd.c:775
 msgid " Cannot overwrite macro file "
 msgstr " 覆盖宏文件时发生错误 "
 
-#: src/editor/editcmd.c:796
-#: src/editor/editcmd.c:818
 msgid " Save macro "
 msgstr " 保存宏 "
 
-#: src/editor/editcmd.c:796
 msgid " Press the macro's new hotkey: "
 msgstr " 按下宏的新的热键："
 
-#: src/editor/editcmd.c:828
-#: src/editor/editcmd.c:2890
 msgid " Press macro hotkey: "
 msgstr " 按下宏热键："
 
-#: src/editor/editcmd.c:883
 msgid " Load macro "
 msgstr " 加载宏 "
 
-#: src/editor/editcmd.c:900
 msgid " Confirm save file? : "
 msgstr " 确认保存文件？："
 
-#: src/editor/editcmd.c:901
-#: src/viewer/hex.c:314
-#: src/viewer/hex.c:328
 msgid " Save file "
 msgstr " 保存文件 "
 
-#: src/editor/editcmd.c:901
-#: src/editor/editmenu.c:63
-#: src/layout.c:375
-#: src/learn.c:67
-#: src/learn.c:179
-#: src/option.c:121
 msgid "&Save"
 msgstr "保存(&S)"
 
-#: src/editor/editcmd.c:949
-#: src/editor/editcmd.c:1075
-#: src/editor/editcmd.c:2916
-#: src/editor/editcmd.c:2954
-#: src/editor/editcmd_dialogs.c:491
 msgid ""
 " Current text was modified without a file save. \n"
 " Continue discards these changes. "
@@ -2371,267 +1641,184 @@ msgstr ""
 " 当前文字被修改但没有保存。\n"
 " 选择继续将丢失这些修改。"
 
-#: src/editor/editcmd.c:988
 msgid "Syntax file edit"
 msgstr "语法文件编辑"
 
-#: src/editor/editcmd.c:989
 msgid " Which syntax file you want to edit? "
 msgstr "您要编辑哪个语法文件？ "
 
-#: src/editor/editcmd.c:1085
 msgid " Load "
 msgstr " 加载 "
 
-#: src/editor/editcmd.c:1362
-#: src/editor/editcmd.c:1484
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " 块过大，您可能无法撤消这个动作。"
 
-#: src/editor/editcmd.c:1826
 msgid "Replace"
 msgstr "替换"
 
-#: src/editor/editcmd.c:1854
-#: src/editor/editcmd_dialogs.c:140
 msgid " Replace "
 msgstr " 替换 "
 
-#: src/editor/editcmd.c:1863
 #, c-format
 msgid " %ld replacements made. "
 msgstr " 替换了 %ld 处。"
 
-#: src/editor/editcmd.c:2024
-#: src/viewer/lib.c:145
 msgid "Quit"
 msgstr "退出"
 
-#: src/editor/editcmd.c:2024
-#: src/viewer/lib.c:146
 msgid " File was modified, Save with exit? "
 msgstr " 文件被修改，保存并退出？"
 
-#: src/editor/editcmd.c:2025
-#: src/viewer/lib.c:147
 msgid "&Cancel quit"
 msgstr "取消退出(&C)"
 
-#: src/editor/editcmd.c:2147
 msgid " Error "
 msgstr "错误"
 
-#: src/editor/editcmd.c:2147
 msgid " This function is not implemented. "
 msgstr "该功能尚未实现"
 
-#: src/editor/editcmd.c:2158
 msgid " Copy to clipboard "
 msgstr " 复制到剪贴板 "
 
-#: src/editor/editcmd.c:2159
-#: src/editor/editcmd.c:2174
 msgid " Unable to save to file. "
 msgstr " 无法保存到文件。"
 
-#: src/editor/editcmd.c:2174
 msgid " Cut to clipboard "
 msgstr " 剪切到剪贴板 "
 
-#: src/editor/editcmd.c:2206
 msgid " Goto line "
 msgstr " 转到行 "
 
-#: src/editor/editcmd.c:2206
 msgid " Enter line: "
 msgstr " 输入行号："
 
-#: src/editor/editcmd.c:2246
-#: src/editor/editcmd.c:2268
 msgid " Save Block "
 msgstr " 保存块 "
 
-#: src/editor/editcmd.c:2285
-#: src/editor/editcmd.c:2307
 msgid " Insert File "
 msgstr " 插入文件 "
 
-#: src/editor/editcmd.c:2307
 msgid " Cannot insert file. "
 msgstr " 试图插入文件时发生错误。"
 
-#: src/editor/editcmd.c:2326
 msgid " Sort block "
 msgstr " 排序块 "
 
-#: src/editor/editcmd.c:2326
-#: src/editor/editcmd.c:2478
 msgid " You must first highlight a block of text. "
 msgstr " 您必需先突出显示一个文字块。"
 
-#: src/editor/editcmd.c:2334
 msgid " Run Sort "
 msgstr " 运行 sort "
 
-#: src/editor/editcmd.c:2335
 msgid " Enter sort options (see manpage) separated by whitespace: "
 msgstr " 输入排序选项(查看manpage)，用空格分隔："
 
-#: src/editor/editcmd.c:2350
-#: src/editor/editcmd.c:2357
 msgid " Sort "
 msgstr " 排序 "
 
-#: src/editor/editcmd.c:2350
 msgid " Cannot execute sort command "
 msgstr " 试图执行 sort 命令时发生错误 "
 
-#: src/editor/editcmd.c:2356
 msgid " Sort returned non-zero: "
 msgstr " Sort 返回非零值："
 
-#: src/editor/editcmd.c:2384
 msgid "Paste output of external command"
 msgstr "粘贴外部命令的输出"
 
-#: src/editor/editcmd.c:2385
 msgid "Enter shell command(s):"
 msgstr "输入Shell命令："
 
-#: src/editor/editcmd.c:2397
 msgid "External command"
 msgstr "外部命令"
 
-#: src/editor/editcmd.c:2397
 msgid "Cannot execute command"
 msgstr "不能执行命令"
 
-#: src/editor/editcmd.c:2433
 msgid "Error creating script:"
 msgstr " 创建脚本时发生错误："
 
-#: src/editor/editcmd.c:2448
 msgid "Error reading script:"
 msgstr " 读取脚本时发生错误："
 
-#: src/editor/editcmd.c:2460
 msgid "Error closing script:"
 msgstr " 关闭脚本时发生错误："
 
-#: src/editor/editcmd.c:2466
 msgid "Script created:"
 msgstr "脚本被创建："
 
-#: src/editor/editcmd.c:2477
 msgid "Process block"
 msgstr "处理块"
 
-#: src/editor/editcmd.c:2590
 msgid " Copies to"
 msgstr " 复制到 "
 
-#: src/editor/editcmd.c:2593
 msgid " Subject"
 msgstr " 标题 "
 
-#: src/editor/editcmd.c:2595
 msgid " To"
 msgstr " 收件人 "
 
-#: src/editor/editcmd.c:2596
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <subject> -c <cc> <to>"
 
-#: src/editor/editcmd.c:2601
 msgid " Mail "
 msgstr " 邮件 "
 
-#: src/editor/editcmd.c:2881
 msgid " Insert Literal "
 msgstr " 字面插入 "
 
-#: src/editor/editcmd.c:2882
 msgid " Press any key: "
 msgstr " 按下任意键："
 
-#: src/editor/editcmd.c:2890
 msgid " Execute Macro "
 msgstr " 执行宏 "
 
-#: src/editor/editcmd_dialogs.c:109
-#: src/editor/editcmd_dialogs.c:185
-#: src/viewer/dialogs.c:95
 msgid "All charsets"
 msgstr "所有字体集"
 
-#: src/editor/editcmd_dialogs.c:113
-#: src/editor/editcmd_dialogs.c:189
-#: src/find.c:360
-#: src/viewer/dialogs.c:98
 msgid "&Whole words"
 msgstr "仅整词(&W)"
 
-#: src/editor/editcmd_dialogs.c:116
-#: src/editor/editcmd_dialogs.c:192
 msgid "In se&lection"
 msgstr "在选择区域(&L)"
 
-#: src/editor/editcmd_dialogs.c:118
-#: src/editor/editcmd_dialogs.c:195
-#: src/viewer/dialogs.c:100
 msgid "&Backwards"
 msgstr "向上(&B)"
 
-#: src/editor/editcmd_dialogs.c:121
-#: src/editor/editcmd_dialogs.c:198
-#: src/viewer/dialogs.c:102
 msgid "case &Sensitive"
 msgstr "大小写敏感(&S)"
 
-#: src/editor/editcmd_dialogs.c:127
 msgid " Enter replacement string:"
 msgstr " 输入替换字符串："
 
-#: src/editor/editcmd_dialogs.c:132
-#: src/editor/editcmd_dialogs.c:209
-#: src/viewer/dialogs.c:108
 msgid " Enter search string:"
 msgstr " 输入查找字符串："
 
-#: src/editor/editcmd_dialogs.c:180
 msgid "&Find all"
 msgstr "查找全部(&F)"
 
-#: src/editor/editcmd_dialogs.c:322
 msgid "Cancel"
 msgstr "取消"
 
-#: src/editor/editcmd_dialogs.c:559
-#: src/file.c:393
-#: src/file.c:2299
-#: src/filegui.c:254
 msgid "&Skip"
 msgstr "跳过(&S)"
 
-#: src/editor/editcmd_dialogs.c:560
-#: src/file.c:2365
-#: src/filegui.c:693
 msgid "A&ll"
 msgstr "全部(&L)"
 
-#: src/editor/editcmd_dialogs.c:561
 msgid "&Replace"
 msgstr "替换(&R)"
 
-#: src/editor/editcmd_dialogs.c:563
 msgid " Replace with: "
 msgstr " 替换为："
 
-#: src/editor/editcmd_dialogs.c:607
 msgid " Confirm replace "
 msgstr " 确认替换 "
 
-#: src/editor/editlock.c:197
+msgid "&Dismiss"
+msgstr "取消(&D)"
+
 #, c-format
 msgid ""
 "File \"%s\" is already being edited\n"
@@ -2642,410 +1829,288 @@ msgstr ""
 "用户：%s\n"
 "进程号：%d"
 
-#: src/editor/editlock.c:202
 msgid "File locked"
 msgstr "文件被锁定"
 
-#: src/editor/editlock.c:202
 msgid "&Grab lock"
 msgstr "获取锁(&G)"
 
-#: src/editor/editlock.c:203
 msgid "&Ignore lock"
 msgstr "忽略锁(&I)"
 
-#: src/editor/editmenu.c:60
 msgid "&Open file..."
 msgstr "打开文件(&O)..."
 
-#: src/editor/editmenu.c:61
 msgid "&New"
 msgstr "新建(&N)"
 
-#: src/editor/editmenu.c:64
 msgid "Save &as..."
 msgstr "保存为(&a)...l"
 
-#: src/editor/editmenu.c:66
 msgid "&Insert file..."
 msgstr "插入文件(&I)..."
 
-#: src/editor/editmenu.c:67
 msgid "Cop&y to file..."
 msgstr "复制到文件(&Y)..."
 
-#: src/editor/editmenu.c:69
 msgid "&User menu..."
 msgstr "用户菜单(&U)..."
 
-#: src/editor/editmenu.c:71
 msgid "A&bout..."
 msgstr "关于(&B)..."
 
-#: src/editor/editmenu.c:73
-#: src/find.c:149
-#: src/subshell.c:349
 msgid "&Quit"
 msgstr "退出(&Q)"
 
-#: src/editor/editmenu.c:83
 msgid "&Undo"
 msgstr "撤消(&U)"
 
-#: src/editor/editmenu.c:85
 msgid "&Toggle ins/overw"
 msgstr "翻转插入/覆盖(&T)"
 
-#: src/editor/editmenu.c:87
 msgid "To&ggle mark"
 msgstr "翻转标记(&G)"
 
-#: src/editor/editmenu.c:88
 msgid "&Mark columns"
 msgstr "按列标记(&M)"
 
-#: src/editor/editmenu.c:89
 msgid "Mark &all"
 msgstr "全部标记(&A)"
 
-#: src/editor/editmenu.c:90
 msgid "Unmar&k"
 msgstr "取消标记(&K)"
 
-#: src/editor/editmenu.c:92
 msgid "Cop&y"
 msgstr "复制(&Y)"
 
-#: src/editor/editmenu.c:93
 msgid "Mo&ve"
 msgstr "移动(&V)"
 
-#: src/editor/editmenu.c:94
-#: src/file.c:789
-#: src/main.c:722
 msgid "&Delete"
 msgstr "删除(&D)"
 
-#: src/editor/editmenu.c:96
 msgid "Co&py to clipfile"
 msgstr "复制到剪切板文件(&P)"
 
-#: src/editor/editmenu.c:97
 msgid "&Cut to clipfile"
 msgstr "删除到剪切板文件(&C)"
 
-#: src/editor/editmenu.c:98
 msgid "Pa&ste from clipfile"
 msgstr "从剪切板文件粘贴(&S)"
 
-#: src/editor/editmenu.c:100
 msgid "&Beginning"
 msgstr "起始(&B)"
 
-#: src/editor/editmenu.c:101
 msgid "&End"
 msgstr "末尾(&E)"
 
-#: src/editor/editmenu.c:111
 msgid "&Search..."
 msgstr "搜索(&S)..."
 
-#: src/editor/editmenu.c:112
 msgid "Search &again"
 msgstr "重新搜索(&S)..."
 
-#: src/editor/editmenu.c:113
 msgid "&Replace..."
 msgstr "替换(&R)..."
 
-#: src/editor/editmenu.c:115
 msgid "&Toggle bookmark"
 msgstr "翻转书签(&T)"
 
-#: src/editor/editmenu.c:116
 msgid "&Next bookmark"
 msgstr "下一个书签(&N)"
 
-#: src/editor/editmenu.c:117
 msgid "&Prev bookmark"
 msgstr "上一个书签(&P)"
 
-#: src/editor/editmenu.c:118
 msgid "&Flush bookmark"
 msgstr "清除书签(&F)       "
 
-#: src/editor/editmenu.c:128
 msgid "&Go to line..."
 msgstr "转到行(&G)"
 
-#: src/editor/editmenu.c:129
 msgid "&Toggle line state"
 msgstr "翻转行状态(&T)"
 
-#: src/editor/editmenu.c:130
 msgid "Go to matching &bracket"
 msgstr "转到匹配的括号(&B)"
 
-#: src/editor/editmenu.c:132
 msgid "&Find declaration"
 msgstr "查找申明(&F)"
 
-#: src/editor/editmenu.c:133
 msgid "Back from &declaration"
 msgstr "向后查找申明(&D)"
 
-#: src/editor/editmenu.c:134
 msgid "For&ward to declaration"
 msgstr "向前查找申明(&W)"
 
-#: src/editor/editmenu.c:137
 msgid "Encod&ing..."
 msgstr "编码(&I)..."
 
-#: src/editor/editmenu.c:140
 msgid "&Refresh screen"
 msgstr "刷新屏幕(&R) "
 
-#: src/editor/editmenu.c:142
 msgid "&Start record macro"
 msgstr "开始记录宏(&S) "
 
-#: src/editor/editmenu.c:143
 msgid "Finis&h record macro..."
 msgstr "结束记录宏(&H)..."
 
-#: src/editor/editmenu.c:144
 msgid "&Execute macro..."
 msgstr "执行宏(&E)..."
 
-#: src/editor/editmenu.c:145
 msgid "Delete macr&o..."
 msgstr "删除宏(&O),,,"
 
-#: src/editor/editmenu.c:147
 msgid "'ispell' s&pell check"
 msgstr "“ispell”拼写检查(&P)"
 
-#: src/editor/editmenu.c:148
 msgid "&Mail..."
 msgstr "发送邮件(&M)..."
 
-#: src/editor/editmenu.c:158
 msgid "Insert &literal..."
 msgstr "插入文字(&L)..."
 
-#: src/editor/editmenu.c:159
 msgid "Insert &date/time"
 msgstr "插入日期/时间(&D)"
 
-#: src/editor/editmenu.c:161
 msgid "&Format paragraph"
 msgstr "格式化段落(&F)"
 
-#: src/editor/editmenu.c:162
 msgid "&Sort..."
 msgstr "排序(&S)..."
 
-#: src/editor/editmenu.c:163
 msgid "&Paste output of..."
 msgstr "粘贴输出(&P)..."
 
-#: src/editor/editmenu.c:164
 msgid "&External formatter"
 msgstr "外部格式化工具(&E)"
 
-#: src/editor/editmenu.c:174
 msgid "&General...  "
 msgstr "常规(&G)..."
 
-#: src/editor/editmenu.c:175
 msgid "Save &mode..."
 msgstr "保存模式(&M)..."
 
-#: src/editor/editmenu.c:176
-#: src/main.c:786
 msgid "Learn &keys..."
 msgstr "学习按键(&K)..."
 
-#: src/editor/editmenu.c:177
 msgid "Syntax &highlighting..."
 msgstr "语法突出显示(&h)..."
 
-#: src/editor/editmenu.c:179
 msgid "S&yntax file"
 msgstr "语法文件(&Y)"
 
-#: src/editor/editmenu.c:180
 msgid "&Menu file"
 msgstr "菜单文件(&M)"
 
-#: src/editor/editmenu.c:182
-#: src/main.c:791
 msgid "&Save setup"
 msgstr "保存设置(&S)"
 
-#: src/editor/editmenu.c:190
-#: src/main.c:803
 msgid "&File"
 msgstr "文件(&F)"
 
-#: src/editor/editmenu.c:191
-#: src/main.c:712
 msgid "&Edit"
 msgstr "编辑(&E)"
 
-#: src/editor/editmenu.c:192
 msgid "&Search"
 msgstr "搜索(&S)"
 
-#: src/editor/editmenu.c:193
-#: src/main.c:805
 msgid "&Command"
 msgstr "命令(&C)"
 
-#: src/editor/editmenu.c:194
 msgid "For&mat"
 msgstr "格式化(&r)"
 
-#: src/editor/editmenu.c:195
-#: src/main.c:807
 msgid "&Options"
 msgstr "选项(&O) "
 
-#: src/editor/editoptions.c:46
 msgid "None"
 msgstr "无"
 
-#: src/editor/editoptions.c:47
 msgid "Dynamic paragraphing"
 msgstr "动态划分段落"
 
-#: src/editor/editoptions.c:48
 msgid "Type writer wrap"
 msgstr "打字机换行"
 
-#: src/editor/editoptions.c:75
 msgid "Word wrap line length: "
 msgstr "换行位置："
 
-#: src/editor/editoptions.c:79
 msgid "Cursor beyond end of line"
 msgstr "光标超出行末尾"
 
-#: src/editor/editoptions.c:81
 msgid "Pers&istent selection"
 msgstr "永久选择(&I)"
 
-#: src/editor/editoptions.c:83
 msgid "Synta&x highlighting"
 msgstr "语法突出显示(&X)"
 
-#: src/editor/editoptions.c:85
 msgid "Visible tabs"
 msgstr "制表符可见"
 
-#: src/editor/editoptions.c:87
 msgid "Visible trailing spaces"
 msgstr "可见的后缀空白"
 
-#: src/editor/editoptions.c:89
 msgid "Save file &position"
 msgstr "保存文件位置(&P)"
 
-#: src/editor/editoptions.c:91
 msgid "Confir&m before saving"
 msgstr "保存前确认(&M)"
 
-#: src/editor/editoptions.c:93
 msgid "&Return does autoindent"
 msgstr "回车不自动缩进(&R)"
 
-#: src/editor/editoptions.c:94
 msgid "Tab spacing: "
 msgstr "制表位间距："
 
-#: src/editor/editoptions.c:98
 msgid "Fill tabs with &spaces"
 msgstr "使用空格填充制表位(&S)"
 
-#: src/editor/editoptions.c:100
 msgid "&Backspace through tabs"
 msgstr "退格键删除制表符(&B)"
 
-#: src/editor/editoptions.c:102
 msgid "&Fake half tabs"
 msgstr "模拟半个制表符(&F)"
 
-#: src/editor/editoptions.c:104
 msgid "Wrap mode"
 msgstr "换行模式"
 
-#: src/editor/editoptions.c:110
 msgid " Editor options "
 msgstr " 编辑器选项 "
 
-#: src/editor/editwidget.c:175
-#: src/help.c:966
-#: src/main.c:1113
-#: src/tree.c:1017
-#: src/viewer/display.c:82
 msgid "ButtonBar|Help"
 msgstr "ButtonBar|帮助"
 
-#: src/editor/editwidget.c:176
-#: src/viewer/display.c:94
 msgid "ButtonBar|Save"
 msgstr "ButtonBar|保存"
 
-#: src/editor/editwidget.c:177
 msgid "ButtonBar|Mark"
 msgstr "ButtonBar|标记"
 
-#: src/editor/editwidget.c:178
 msgid "ButtonBar|Replac"
 msgstr "ButtonBar|替换"
 
-#: src/editor/editwidget.c:179
-#: src/main.c:1117
-#: src/tree.c:1023
 msgid "ButtonBar|Copy"
 msgstr "ButtonBar|复制"
 
-#: src/editor/editwidget.c:180
 msgid "ButtonBar|Move"
 msgstr "ButtonBar|移动"
 
-#: src/editor/editwidget.c:181
-#: src/viewer/display.c:104
 msgid "ButtonBar|Search"
 msgstr "ButtonBar|搜索"
 
-#: src/editor/editwidget.c:182
-#: src/main.c:1120
 msgid "ButtonBar|Delete"
 msgstr "ButtonBar|删除"
 
-#: src/editor/editwidget.c:183
-#: src/main.c:1121
 msgid "ButtonBar|PullDn"
 msgstr "ButtonBar|菜单"
 
-#: src/editor/editwidget.c:184
-#: src/help.c:975
-#: src/main.c:1122
-#: src/viewer/display.c:116
-#: src/viewer/display.c:119
 msgid "ButtonBar|Quit"
 msgstr "ButtonBar|退出"
 
-#: src/editor/syntax.c:1407
-#: src/editor/syntax.c:1413
 msgid " Load syntax file "
 msgstr " 载入语法文件 "
 
-#: src/editor/syntax.c:1408
-#: src/help.c:909
-#: src/user.c:788
 #, c-format
 msgid ""
 " Cannot open file %s \n"
@@ -3054,12 +2119,10 @@ msgstr ""
 " 无法打开文件 %s \n"
 " %s "
 
-#: src/editor/syntax.c:1414
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " 在文件 %s 的第 %d 行有错误 "
 
-#: src/execute.c:107
 msgid ""
 " The Commander can't change to the directory that \n"
 " the subshell claims you are in.  Perhaps you have \n"
@@ -3070,18 +2133,14 @@ msgstr ""
 " 也许您删除了工作目录，或者通过“su”命令给您的   \n"
 " 进程额外的访问权限？"
 
-#: src/execute.c:270
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "键入“退出”以返回 Midnight Commander"
 
-#: src/execute.c:382
 #, c-format
 msgid " Cannot fetch a local copy of %s "
 msgstr " 无法获取 %s 的本地副本 "
 
-#: src/ext.c:117
-#: src/user.c:628
 #, c-format
 msgid ""
 " Cannot create temporary command file \n"
@@ -3090,52 +2149,47 @@ msgstr ""
 " 无法创建临时命令文件 \n"
 " %s "
 
-#: src/ext.c:130
-#: src/user.c:652
 msgid " Parameter "
 msgstr " 参数 "
 
-#: src/ext.c:548
 #, c-format
 msgid " %s%s file error"
 msgstr " %s%s文件错误 "
 
-#: src/ext.c:550
 #, c-format
-msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
-msgstr "文件%smc.ext的格式在3.0版本时已经被修改。似乎安装有错误。请获取新的Midnight Commander软件包。"
+msgid ""
+"The format of the %smc.ext file has changed with version 3.0.  It seems that "
+"the installation failed.  Please fetch a fresh copy from the Midnight "
+"Commander package."
+msgstr ""
+"文件%smc.ext的格式在3.0版本时已经被修改。似乎安装有错误。请获取新的Midnight "
+"Commander软件包。"
 
-#: src/ext.c:562
 #, c-format
 msgid " ~/%s file error "
 msgstr " ~/%s文件错误 "
 
-#: src/ext.c:563
 #, c-format
-msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
-msgstr "文件~/%s的格式在3.0版本时已经被修改。您可以从%smc.ext复制一个或将它作为编写该文件的样例。"
+msgid ""
+"The format of the ~/%s file has changed with version 3.0.  You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
+msgstr ""
+"文件~/%s的格式在3.0版本时已经被修改。您可以从%smc.ext复制一个或将它作为编写该"
+"文件的样例。"
 
-#: src/file.c:131
-#: src/file.c:787
-#: src/tree.c:644
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|复制"
 
-#: src/file.c:132
-#: src/tree.c:678
 msgid "DialogTitle|Move"
 msgstr "DialogTitle|移动"
 
-#: src/file.c:133
-#: src/tree.c:747
 msgid "DialogTitle|Delete"
 msgstr "DialogTitle|删除"
 
-#: src/file.c:242
 msgid " Cannot make the hardlink "
 msgstr " 无法创建硬链接 "
 
-#: src/file.c:283
 #, c-format
 msgid ""
 " Cannot read source link \"%s\" \n"
@@ -3144,7 +2198,6 @@ msgstr ""
 " 无法读取源链接“%s” \n"
 " %s "
 
-#: src/file.c:294
 msgid ""
 " Cannot make stable symlinks across non-local filesystems: \n"
 "\n"
@@ -3154,7 +2207,6 @@ msgstr ""
 "\n"
 " 稳定的符号链接选项将被取消 "
 
-#: src/file.c:343
 #, c-format
 msgid ""
 " Cannot create target symlink \"%s\" \n"
@@ -3163,16 +2215,9 @@ msgstr ""
 " 无法创建目标符号链接“%s” \n"
 " %s "
 
-#: src/file.c:393
-#: src/file.c:1492
-#: src/file.c:2300
-#: src/file.c:2366
-#: src/filegui.c:253
-#: src/filegui.c:681
 msgid "&Abort"
 msgstr "中止(&A)"
 
-#: src/file.c:510
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -3181,7 +2226,6 @@ msgstr ""
 " 无法覆盖目录“%s” \n"
 " %s "
 
-#: src/file.c:522
 #, c-format
 msgid ""
 " Cannot stat source file \"%s\" \n"
@@ -3190,8 +2234,6 @@ msgstr ""
 " 无法 stat 源文件“%s” \n"
 " %s "
 
-#: src/file.c:531
-#: src/file.c:1076
 #, c-format
 msgid ""
 " `%s' \n"
@@ -3204,7 +2246,6 @@ msgstr ""
 " `%s' \n"
 " 是同一个文件 "
 
-#: src/file.c:559
 #, c-format
 msgid ""
 " Cannot create special file \"%s\" \n"
@@ -3213,8 +2254,6 @@ msgstr ""
 " 无法创建特殊文件“%s” \n"
 " %s "
 
-#: src/file.c:569
-#: src/file.c:797
 #, c-format
 msgid ""
 " Cannot chown target file \"%s\" \n"
@@ -3223,8 +2262,6 @@ msgstr ""
 " 无法 chown 目标文件“%s” \n"
 " %s "
 
-#: src/file.c:577
-#: src/file.c:809
 #, c-format
 msgid ""
 " Cannot chmod target file \"%s\" \n"
@@ -3233,7 +2270,6 @@ msgstr ""
 " 无法 chmod 目标文件“%s” \n"
 " %s "
 
-#: src/file.c:590
 #, c-format
 msgid ""
 " Cannot open source file \"%s\" \n"
@@ -3242,11 +2278,9 @@ msgstr ""
 " 无法打开源文件“%s” \n"
 " %s "
 
-#: src/file.c:600
 msgid " Reget failed, about to overwrite file "
 msgstr " 重取失败，准备覆盖文件 "
 
-#: src/file.c:608
 #, c-format
 msgid ""
 " Cannot fstat source file \"%s\" \n"
@@ -3255,7 +2289,6 @@ msgstr ""
 " 无法 fstat 源文件“%s” \n"
 " %s "
 
-#: src/file.c:636
 #, c-format
 msgid ""
 " Cannot create target file \"%s\" \n"
@@ -3264,7 +2297,6 @@ msgstr ""
 " 无法创建目标文件“%s” \n"
 " %s "
 
-#: src/file.c:650
 #, c-format
 msgid ""
 " Cannot fstat target file \"%s\" \n"
@@ -3273,7 +2305,6 @@ msgstr ""
 " 无法 fstat 目标文件“%s” \n"
 " %s "
 
-#: src/file.c:686
 #, c-format
 msgid ""
 " Cannot read source file \"%s\" \n"
@@ -3282,7 +2313,6 @@ msgstr ""
 " 无法读取源文件“%s” \n"
 " %s "
 
-#: src/file.c:717
 #, c-format
 msgid ""
 " Cannot write target file \"%s\" \n"
@@ -3291,11 +2321,9 @@ msgstr ""
 " 无法写入目标文件“%s” \n"
 " %s "
 
-#: src/file.c:738
 msgid "(stalled)"
 msgstr "(暂停)"
 
-#: src/file.c:767
 #, c-format
 msgid ""
 " Cannot close source file \"%s\" \n"
@@ -3304,7 +2332,6 @@ msgstr ""
 " 无法关闭源文件“%s” \n"
 " %s "
 
-#: src/file.c:777
 #, c-format
 msgid ""
 " Cannot close target file \"%s\" \n"
@@ -3313,15 +2340,12 @@ msgstr ""
 " 无法关闭目标文件“%s” \n"
 " %s "
 
-#: src/file.c:788
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr "文件没有完整获取。保留它吗？"
 
-#: src/file.c:789
 msgid "&Keep"
 msgstr "保留(&K)"
 
-#: src/file.c:856
 #, c-format
 msgid ""
 " Cannot stat source directory \"%s\" \n"
@@ -3330,7 +2354,6 @@ msgstr ""
 " 无法 stat 源目录“%s” \n"
 " %s "
 
-#: src/file.c:882
 #, c-format
 msgid ""
 " Source \"%s\" is not a directory \n"
@@ -3339,7 +2362,6 @@ msgstr ""
 " 源目录“%s”不是一个目录 \n"
 " %s "
 
-#: src/file.c:891
 #, c-format
 msgid ""
 " Cannot copy cyclic symbolic link \n"
@@ -3348,9 +2370,6 @@ msgstr ""
 " 无法复制循环的符号链接 \n"
 " “%s” "
 
-#: src/file.c:926
-#: src/file.c:2154
-#: src/tree.c:693
 #, c-format
 msgid ""
 " Destination \"%s\" must be a directory \n"
@@ -3359,7 +2378,6 @@ msgstr ""
 " 目标“%s”必需是目录 \n"
 " %s "
 
-#: src/file.c:942
 #, c-format
 msgid ""
 " Cannot create target directory \"%s\" \n"
@@ -3368,7 +2386,6 @@ msgstr ""
 " 无法创建目标目录“%s” \n"
 " %s "
 
-#: src/file.c:958
 #, c-format
 msgid ""
 " Cannot chown target directory \"%s\" \n"
@@ -3377,7 +2394,6 @@ msgstr ""
 " 无法 chown 目标目录“%s” \n"
 " %s "
 
-#: src/file.c:1068
 #, c-format
 msgid ""
 " Cannot stat file \"%s\" \n"
@@ -3386,12 +2402,10 @@ msgstr ""
 " 无法 stat 文件“%s” \n"
 " %s "
 
-#: src/file.c:1080
 #, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " 无法覆盖目录“%s” "
 
-#: src/file.c:1115
 #, c-format
 msgid ""
 " Cannot move file \"%s\" to \"%s\" \n"
@@ -3400,7 +2414,6 @@ msgstr ""
 " 无法移动文件“%s”到“%s” \n"
 " %s "
 
-#: src/file.c:1142
 #, c-format
 msgid ""
 " Cannot remove file \"%s\" \n"
@@ -3409,7 +2422,6 @@ msgstr ""
 " 无法删除文件“%s” \n"
 " %s "
 
-#: src/file.c:1176
 #, c-format
 msgid ""
 " `%s' \n"
@@ -3422,17 +2434,14 @@ msgstr ""
 " `%s' \n"
 " 是同一个目录"
 
-#: src/file.c:1199
 #, c-format
 msgid " Cannot overwrite directory \"%s\" %s "
 msgstr " 无法覆盖目录“%s” %s "
 
-#: src/file.c:1203
 #, c-format
 msgid " Cannot overwrite file \"%s\" %s "
 msgstr " 无法覆盖文件“%s” %s "
 
-#: src/file.c:1221
 #, c-format
 msgid ""
 " Cannot move directory \"%s\" to \"%s\" \n"
@@ -3441,7 +2450,6 @@ msgstr ""
 " 无法移动目录“%s”到“%s” \n"
 " %s "
 
-#: src/file.c:1289
 #, c-format
 msgid ""
 " Cannot delete file \"%s\" \n"
@@ -3450,9 +2458,6 @@ msgstr ""
 " 无法删除文件“%s” \n"
 " %s "
 
-#: src/file.c:1346
-#: src/file.c:1414
-#: src/file.c:1443
 #, c-format
 msgid ""
 " Cannot remove directory \"%s\" \n"
@@ -3461,75 +2466,57 @@ msgstr ""
 " 无法删除目录“%s” \n"
 " %s "
 
-#: src/file.c:1501
 msgid "Directory scanning"
 msgstr "扫描目录"
 
-#: src/file.c:1726
 msgid "FileOperation|Copy"
 msgstr "FileOperation|复制"
 
-#: src/file.c:1727
 msgid "FileOperation|Move"
 msgstr "FileOperation|移动"
 
-#: src/file.c:1728
 msgid "FileOperation|Delete"
 msgstr "FileOperation|删除"
 
-#: src/file.c:1741
 #, no-c-format
 msgid "%o %f \"%s\"%m"
 msgstr "%o %f \"%s\"%m"
 
-#: src/file.c:1743
 #, no-c-format
 msgid "%o %d %f%m"
 msgstr "%o %d %f%m"
 
-#: src/file.c:1747
 msgid "files"
 msgstr "文件"
 
-#: src/file.c:1748
 msgid "directory"
 msgstr "目录"
 
-#: src/file.c:1749
 msgid "directories"
 msgstr "目录"
 
-#: src/file.c:1750
 msgid "files/directories"
 msgstr "文件/目录"
 
-#: src/file.c:1751
 msgid " with source mask:"
 msgstr " 源掩码："
 
-#: src/file.c:1752
 msgid " to:"
 msgstr " 至："
 
-#: src/file.c:1755
 #, c-format
 msgid "%s?"
 msgstr "%s?"
 
-#: src/file.c:1928
 msgid " Cannot operate on \"..\"! "
 msgstr " 无法操作“..”！ "
 
-#: src/file.c:2051
 msgid " Sorry, I could not put the job in background "
 msgstr " 抱歉，无法将任务放到后台 "
 
-#: src/file.c:2299
-#: src/viewer/hex.c:328
 msgid "&Retry"
 msgstr "重试(&R)"
 
-#: src/file.c:2353
 msgid ""
 "\n"
 "   Directory not empty.   \n"
@@ -3539,7 +2526,6 @@ msgstr ""
 "  目录非空。  \n"
 "  递归删除它？"
 
-#: src/file.c:2355
 msgid ""
 "\n"
 "   Background process: Directory not empty \n"
@@ -3549,401 +2535,295 @@ msgstr ""
 "   后台进程：目录非空 \n"
 "   递归删除它？"
 
-#: src/file.c:2357
 msgid " Delete: "
 msgstr " 删除："
 
-#: src/file.c:2365
-#: src/filegui.c:687
 msgid "Non&e"
 msgstr "无(&E)"
 
-#: src/filegui.c:395
 #, c-format
 msgid "%d:%02d.%02d"
 msgstr "%d:%02d.%02d"
 
-#: src/filegui.c:410
 #, c-format
 msgid "ETA %s"
 msgstr "估计%s"
 
-#: src/filegui.c:418
 #, c-format
 msgid "%.2f MB/s"
 msgstr "%.2f MB/s"
 
-#: src/filegui.c:422
 #, c-format
 msgid "%.2f KB/s"
 msgstr "%.2f KB/s"
 
-#: src/filegui.c:426
 #, c-format
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-#: src/filegui.c:496
 #, c-format
 msgid "Files processed: %llu of %llu"
 msgstr "已处理文件: %llu 之 %llu"
 
-#: src/filegui.c:538
 #, c-format
 msgid "Time: %s  %s (%s)"
 msgstr "时间: %s  %s (%s)"
 
-#: src/filegui.c:544
 #, c-format
 msgid " Total: %s of %s "
 msgstr "总计: %s of %s"
 
-#: src/filegui.c:580
 msgid "Source"
 msgstr "源"
 
-#: src/filegui.c:604
 msgid "Target"
 msgstr "目标"
 
-#: src/filegui.c:625
 msgid "Deleting"
 msgstr "正在删除"
 
-#: src/filegui.c:660
 msgid "Target file already exists!"
 msgstr "目标文件已存在！"
 
-#: src/filegui.c:667
 #, c-format
 msgid "Source date: %s, size %llu"
 msgstr "源日期：%s，大小 %llu"
 
-#: src/filegui.c:670
 #, c-format
 msgid "Target date: %s, size %llu"
 msgstr "目标日期：%s，大小 %llu"
 
-#: src/filegui.c:674
 #, c-format
 msgid "Source date: %s, size %u"
 msgstr "源日期：%s，大小 %u"
 
-#: src/filegui.c:677
 #, c-format
 msgid "Target date: %s, size %u"
 msgstr "目标日期：%s，大小 %u"
 
-#: src/filegui.c:684
 msgid "If &size differs"
 msgstr "如果大小有差别(&S)"
 
-#: src/filegui.c:690
 msgid "&Update"
 msgstr "更新(&U)"
 
-#: src/filegui.c:696
 msgid "Overwrite all targets?"
 msgstr "覆盖所有目标？"
 
-#: src/filegui.c:699
 msgid "&Reget"
 msgstr "重新获取(&R)"
 
-#: src/filegui.c:702
 msgid "A&ppend"
 msgstr "追加(&P)"
 
-#: src/filegui.c:711
 msgid "Overwrite this target?"
 msgstr "覆盖该目标？"
 
-#: src/filegui.c:729
 msgid " File exists "
 msgstr " 文件已存在 "
 
-#: src/filegui.c:731
 msgid " Background process: File exists "
 msgstr " 后台进程：文件已存在 "
 
-#: src/filegui.c:935
 msgid "&Background"
 msgstr "后台(&B)"
 
-#: src/filegui.c:943
 msgid "&Stable Symlinks"
 msgstr "稳定符号链接(&S)"
 
-#: src/filegui.c:945
 msgid "di&Ve into subdir if exists"
 msgstr "如果有子目录则进入(&V)"
 
-#: src/filegui.c:948
 msgid "preserve &Attributes"
 msgstr "保留属性(&A)"
 
-#: src/filegui.c:950
 msgid "follow &Links"
 msgstr "跟随链接(&L)"
 
-#: src/filegui.c:954
 msgid "to:"
 msgstr "至："
 
-#: src/filegui.c:1101
 #, c-format
 msgid "Invalid source pattern `%s'"
 msgstr "无效的源模式“%s”"
 
-#: src/find.c:145
 msgid "&Suspend"
 msgstr "挂起(&S)"
 
-#: src/find.c:146
 msgid "Con&tinue"
 msgstr "继续(&T)"
 
-#: src/find.c:147
 msgid "&Chdir"
 msgstr "改目录(&C)"
 
-#: src/find.c:148
 msgid "&Again"
 msgstr "再次(&A)"
 
-#: src/find.c:150
-#: src/panelize.c:77
 msgid "Pane&lize"
 msgstr "面板化"
 
-#: src/find.c:151
 msgid "&View - F3"
 msgstr "查看(&V) - F3"
 
-#: src/find.c:152
 msgid "&Edit - F4"
 msgstr "编辑(&E) - F4"
 
-#: src/find.c:261
 #, c-format
 msgid "Found: %ld"
 msgstr "找到: %ld"
 
-#: src/find.c:306
-#: src/find.c:316
 msgid " Malformed regular expression "
 msgstr "不正确的正规表达式 "
 
-#: src/find.c:348
 msgid "Cas&e sensitive"
 msgstr "大小写敏感(&e)"
 
-#: src/find.c:350
 msgid "&Find recursively"
 msgstr "递归查找(&F)"
 
-#: src/find.c:351
 msgid "S&kip hidden"
 msgstr "跳过隐藏(&K)"
 
-#: src/find.c:353
 msgid "&All charsets"
 msgstr "所有字符集(&A)"
 
-#: src/find.c:357
 msgid "Case sens&itive"
 msgstr "大小写敏感(&T)"
 
-#: src/find.c:358
 msgid "Re&gular expression"
 msgstr "正规表达式(&R)"
 
-#: src/find.c:359
 msgid "Fir&st hit"
 msgstr "第一个命中(&S)"
 
-#: src/find.c:362
 msgid "All cha&rsets"
 msgstr "所有字符集"
 
-#: src/find.c:365
-#: src/main.c:678
 msgid "&Tree"
 msgstr "树(&T)"
 
-#: src/find.c:402
-#: src/find.c:1162
 msgid "Find File"
 msgstr "搜索文件"
 
-#: src/find.c:449
 msgid "Content:"
 msgstr "内容："
 
-#: src/find.c:454
 msgid "File name:"
 msgstr "文件名："
 
-#: src/find.c:462
 msgid "Start at:"
 msgstr "开始于："
 
-#: src/find.c:746
 #, c-format
 msgid "Grepping in %s"
 msgstr "在%s中查找字符串"
 
-#: src/find.c:872
 msgid "Finished"
 msgstr "完成"
 
-#: src/find.c:900
-#: src/viewer/search.c:224
 #, c-format
 msgid "Searching %s"
 msgstr "正在搜索 %s"
 
-#: src/find.c:1087
-#: src/find.c:1188
 msgid "Searching"
 msgstr "正在搜索"
 
-#: src/help.c:285
 msgid " Help file format error\n"
 msgstr " 帮助文件格式错误\n"
 
-#: src/help.c:319
 msgid " Internal bug: Double start of link area "
 msgstr "内部缺陷：链接区域双向开始"
 
-#: src/help.c:577
-#: src/help.c:930
 #, c-format
 msgid " Cannot find node %s in help file "
 msgstr " 无法在帮助文件中找到节点 %s "
 
-#: src/help.c:945
 msgid "Help"
 msgstr "帮助"
 
-#: src/help.c:967
 msgid "ButtonBar|Index"
 msgstr "ButtonBar|索引"
 
-#: src/help.c:968
 msgid "ButtonBar|Prev"
 msgstr "ButtonBar|前一个"
 
-#: src/hotlist.c:129
 msgid "&Move"
 msgstr "移动(&M)"
 
-#: src/hotlist.c:131
-#: src/panelize.c:76
 msgid "&Remove"
 msgstr "删除(&R)"
 
-#: src/hotlist.c:133
-#: src/hotlist.c:891
-#: src/hotlist.c:981
 msgid "&Append"
 msgstr "追加(&A)"
 
-#: src/hotlist.c:135
-#: src/hotlist.c:890
-#: src/hotlist.c:980
 msgid "&Insert"
 msgstr "插入(&I)"
 
-#: src/hotlist.c:137
 msgid "New &Entry"
 msgstr "新项(&E)"
 
-#: src/hotlist.c:139
 msgid "New &Group"
 msgstr "新群组(&G)"
 
-#: src/hotlist.c:143
 msgid "&Up"
 msgstr "上(&U)"
 
-#: src/hotlist.c:145
 msgid "&Add current"
 msgstr "添加当前(&A)"
 
-#: src/hotlist.c:148
 msgid "&Refresh"
 msgstr "刷新(&R)"
 
-#: src/hotlist.c:150
 msgid "Fr&ee VFSs now"
 msgstr "释放 VFS(&E)"
 
-#: src/hotlist.c:153
 msgid "Change &To"
 msgstr "改到(&T)"
 
-#: src/hotlist.c:212
 msgid "Subgroup - press ENTER to see list"
 msgstr "子组－按 ENTER 查看列表"
 
-#: src/hotlist.c:662
 msgid "Active VFS directories"
 msgstr "活动的 VFS 目录"
 
-#: src/hotlist.c:665
 msgid "Directory hotlist"
 msgstr "目录活动表"
 
-#: src/hotlist.c:694
 msgid " Directory path "
 msgstr " 目录路径 "
 
-#: src/hotlist.c:698
-#: src/hotlist.c:747
 msgid " Directory label "
 msgstr " 目录标签 "
 
-#: src/hotlist.c:723
 #, c-format
 msgid "Moving %s"
 msgstr "正在移动 %s"
 
-#: src/hotlist.c:954
 msgid "New hotlist entry"
 msgstr "新建活动表条目"
 
-#: src/hotlist.c:954
 msgid "Directory label"
 msgstr "目录标签"
 
-#: src/hotlist.c:955
 msgid "Directory path"
 msgstr "目录路径"
 
-#: src/hotlist.c:1033
 msgid " New hotlist group "
 msgstr "新建活动表组"
 
-#: src/hotlist.c:1033
 msgid "Name of new group"
 msgstr "新建组名"
 
-#: src/hotlist.c:1048
 #, c-format
 msgid "Label for \"%s\":"
 msgstr "“%s”的标签："
 
-#: src/hotlist.c:1055
 msgid " Add to hotlist "
 msgstr "添加到活动表"
 
-#: src/hotlist.c:1098
-#: src/hotlist.c:1119
 msgid " Remove: "
 msgstr " 删除： "
 
-#: src/hotlist.c:1105
 msgid ""
 "\n"
 " Are you sure you want to remove this entry?"
@@ -3951,7 +2831,6 @@ msgstr ""
 "\n"
 "您确实要删除这个条目？"
 
-#: src/hotlist.c:1122
 msgid ""
 "\n"
 " Group not empty.\n"
@@ -3961,197 +2840,154 @@ msgstr ""
 " 组非空。\n"
 " 删除它吗？"
 
-#: src/hotlist.c:1469
 msgid " Top level group "
 msgstr " 顶级组 "
 
-#: src/hotlist.c:1490
 msgid " Hotlist Load "
 msgstr "加载活动表"
 
-#: src/hotlist.c:1491
 #, c-format
-msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr "MC无法写文件~/%s，您的活动列表条目没有被删除"
 
-#: src/info.c:83
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
 
-#: src/info.c:100
 #, c-format
 msgid "File:       %s"
 msgstr "文件：      %s"
 
-#: src/info.c:114
 #, c-format
 msgid "Free nodes: %d (%d%%) of %d"
 msgstr "空闲节点：%3$d 中的 %1$d (%2$d%%)"
 
-#: src/info.c:120
 msgid "No node information"
 msgstr "没有节点信息"
 
-#: src/info.c:128
 #, c-format
 msgid "Free space: %s (%d%%) of %s"
 msgstr "空闲空间：%3$s 中的 %1$s (%2$d%%)"
 
-#: src/info.c:132
 msgid "No space information"
 msgstr "没有空间信息"
 
-#: src/info.c:136
 #, c-format
 msgid "Type:      %s "
 msgstr "类型：  %s "
 
-#: src/info.c:137
 msgid "non-local vfs"
 msgstr "非本地 vfs"
 
-#: src/info.c:143
 #, c-format
 msgid "Device:    %s"
 msgstr "设备：  %s"
 
-#: src/info.c:149
 #, c-format
 msgid "Filesystem: %s"
 msgstr "文件系统：%s"
 
-#: src/info.c:155
 #, c-format
 msgid "Accessed:  %s"
 msgstr "访问： %s"
 
-#: src/info.c:160
 #, c-format
 msgid "Modified:  %s"
 msgstr "修改： %s"
 
-#. TRANSLATORS: "Status changed", like in the stat(2) man page
-#: src/info.c:166
-#, c-format
-msgid "Status:    %s"
-msgstr "状态： %s"
+#. TRANSLATORS: Time of last status change as in stat(2) man.
+#, fuzzy, c-format
+msgid "Changed:   %s"
+msgstr "改到(&T)"
 
-#: src/info.c:174
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
 msgstr "设备类型：主要%lu，次要%lu"
 
-#: src/info.c:182
 #, c-format
 msgid "Size:      %s"
 msgstr "大小：     %s"
 
-#: src/info.c:184
 #, c-format
 msgid " (%ld block)"
 msgid_plural " (%ld blocks)"
 msgstr[0] "(%ld 个块)"
 msgstr[1] " (%ld 个块)"
 
-#: src/info.c:192
 #, c-format
 msgid "Owner:     %s/%s"
 msgstr "所有者：   %s/%s"
 
-#: src/info.c:198
 #, c-format
 msgid "Links:     %d"
 msgstr "链接：     %d"
 
-#: src/info.c:202
 #, c-format
 msgid "Mode:      %s (%04o)"
 msgstr "模式：     %s (%04o)"
 
-#: src/info.c:207
 #, c-format
 msgid "Location:  %Xh:%Xh"
 msgstr "位置：     %Xh:%Xh"
 
-#: src/layout.c:163
 msgid "&Vertical"
 msgstr "垂直(&V)"
 
-#: src/layout.c:164
 msgid "&Horizontal"
 msgstr "水平(&H)"
 
-#: src/layout.c:174
 msgid "show free sp&Ace"
 msgstr "显示空闲空间(&A)"
 
-#: src/layout.c:175
 msgid "&Xterm window title"
 msgstr "Xterm窗口标题(&X)"
 
-#: src/layout.c:176
 msgid "h&Intbar visible"
 msgstr "提示栏可见(&I)"
 
-#: src/layout.c:177
 msgid "&Keybar visible"
 msgstr "显示按键条(&K)"
 
-#: src/layout.c:178
 msgid "command &Prompt"
 msgstr "命令提示(&P)"
 
-#: src/layout.c:179
 msgid "show &Mini status"
 msgstr "显示简单状态(&M)"
 
-#: src/layout.c:180
 msgid "menu&Bar visible"
 msgstr "菜单可见(&B)"
 
-#: src/layout.c:181
 msgid "&Equal split"
 msgstr "平分(&E)"
 
-#: src/layout.c:182
 msgid "pe&Rmissions"
 msgstr "权限(&R)"
 
-#: src/layout.c:183
 msgid "&File types"
 msgstr "文件类型(&F)"
 
-#: src/layout.c:383
 msgid " Panel split "
 msgstr " 显示分隔 "
 
-#: src/layout.c:384
 msgid " Highlight... "
 msgstr " 突出显示... "
 
-#: src/layout.c:385
-#: src/option.c:131
 msgid " Other options "
 msgstr " 其它选项 "
 
-#: src/layout.c:386
 msgid "output lines"
 msgstr "输出行"
 
-#: src/layout.c:447
 msgid "Layout"
 msgstr "布局"
 
-#: src/learn.c:81
 msgid "Learn keys"
 msgstr "学习按键"
 
-#: src/learn.c:87
 msgid " Teach me a key "
 msgstr " 教我一个键 "
 
-#: src/learn.c:88
 #, c-format
 msgid ""
 "Please press the %s\n"
@@ -4172,21 +3008,17 @@ msgstr ""
 "如果您想离开，请按下Esc键\n"
 "并稍等。"
 
-#: src/learn.c:120
 msgid " Cannot accept this key "
 msgstr " 无法接受这个按键 "
 
-#: src/learn.c:121
 #, c-format
 msgid " You have entered \"%s\""
 msgstr " 您输入了“%s”"
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
-#: src/learn.c:169
 msgid "OK"
 msgstr "确认"
 
-#: src/learn.c:177
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
@@ -4194,11 +3026,9 @@ msgstr ""
 "看起来您的所有按键都工作得很好。\n"
 "实在是太好了。"
 
-#: src/learn.c:179
 msgid "&Discard"
 msgstr "放弃(&D)"
 
-#: src/learn.c:184
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
@@ -4206,248 +3036,186 @@ msgstr ""
 "非常好！您有一个完整的终端数据库！\n"
 "您的所有按键都工作。"
 
-#: src/learn.c:295
 msgid "Press all the keys mentioned here. After you have done it, check"
 msgstr "按下这里提到的所有键。在您做完之后，检查"
 
-#: src/learn.c:299
 msgid "which keys are not marked with OK.  Press space on the missing"
 msgstr "哪些键没有标记上 OK。在缺少的键上按空格"
 
-#: src/learn.c:303
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "键，或者用鼠标点击来定义。用 Tab 来移动。"
 
-#: src/main.c:375
-#: src/screen.c:2498
 msgid " The Midnight Commander "
 msgstr " Midnight Commander "
 
-#: src/main.c:376
 msgid " Do you really want to quit the Midnight Commander? "
 msgstr " 您真的要退出 Midnight Commander 吗？"
 
-#: src/main.c:675
 msgid "&Listing mode..."
 msgstr "列表模式(&L)..."
 
-#: src/main.c:676
 msgid "&Quick view"
 msgstr "快速查看(&Q)"
 
-#: src/main.c:677
 msgid "&Info"
 msgstr "信息(&I)"
 
-#: src/main.c:680
 msgid "&Sort order..."
 msgstr "排序(&S)..."
 
-#: src/main.c:682
 msgid "&Filter..."
 msgstr "过滤(&F)..."
 
-#: src/main.c:685
 msgid "&Encoding..."
 msgstr "编码(&E)..."
 
-#: src/main.c:690
 msgid "&Network link..."
 msgstr "网络链接(&N)..."
 
-#: src/main.c:692
 msgid "FT&P link..."
 msgstr "FTP 链接(&P)..."
 
-#: src/main.c:693
 msgid "S&hell link..."
 msgstr "S&hell链接..."
 
-#: src/main.c:695
 msgid "SM&B link..."
 msgstr "SMB 链接(&B)..."
 
-#: src/main.c:699
 msgid "&Rescan"
 msgstr "重新扫描(&R)"
 
-#: src/main.c:709
 msgid "&View"
 msgstr "查看(&V)"
 
-#: src/main.c:710
 msgid "Vie&w file..."
 msgstr "查看文件(&W)..."
 
-#: src/main.c:711
 msgid "&Filtered view"
 msgstr " 过滤视图(&F)"
 
-#: src/main.c:713
 msgid "&Copy"
 msgstr "复制(&C)"
 
-#: src/main.c:714
 msgid "C&hmod"
 msgstr "更改文件权限(&H)"
 
-#: src/main.c:715
 msgid "&Link"
 msgstr "链接(&L)"
 
-#: src/main.c:716
 msgid "&SymLink"
 msgstr "符号链接(&L)"
 
-#: src/main.c:717
 msgid "Edit s&ymlink"
 msgstr " 编辑符号链接 (&Y)"
 
-#: src/main.c:718
 msgid "Ch&own"
 msgstr "更改文件所有者(&O)"
 
-#: src/main.c:719
 msgid "&Advanced chown"
 msgstr "高级chown(&A)          "
 
-#: src/main.c:720
 msgid "&Rename/Move"
 msgstr "更名/移动(&R)"
 
-#: src/main.c:721
 msgid "&Mkdir"
 msgstr "建目录(&M)"
 
-#: src/main.c:723
 msgid "&Quick cd"
 msgstr "快速切换目录(&Q)"
 
-#: src/main.c:725
 msgid "Select &group"
 msgstr "选择群组(&G)"
 
-#: src/main.c:726
 msgid "U&nselect group"
 msgstr "取消选择组(&U)"
 
-#: src/main.c:727
 msgid "Reverse selec&tion"
 msgstr "反转选择(&T)"
 
-#: src/main.c:729
 msgid "E&xit"
 msgstr "退出(&X)"
 
-#: src/main.c:743
 msgid "&User menu"
 msgstr "用户菜单(&U)"
 
-#: src/main.c:744
 msgid "&Directory tree"
 msgstr "目录树(&D)"
 
-#: src/main.c:745
 msgid "&Find file"
 msgstr "查找文件(&F)"
 
-#: src/main.c:746
 msgid "S&wap panels"
 msgstr "交换面板(&W)"
 
-#: src/main.c:747
 msgid "Switch &panels on/off"
 msgstr "切换面板开/关(&P)"
 
-#: src/main.c:748
 msgid "&Compare directories"
 msgstr "比较目录(&C)"
 
-#: src/main.c:749
 msgid "E&xternal panelize"
 msgstr "外部面板(&X)"
 
-#: src/main.c:750
 msgid "Show directory s&izes"
 msgstr "显示目录大小(&I)"
 
-#: src/main.c:752
 msgid "Command &history"
 msgstr "命令历史(&H)"
 
-#: src/main.c:753
 msgid "Di&rectory hotlist"
 msgstr "目录活动列表(&R)"
 
-#: src/main.c:755
 msgid "&Active VFS list"
 msgstr "活动的VFS列表(&A)"
 
-#: src/main.c:758
 msgid "&Background jobs"
 msgstr "后台任务（——B）"
 
-#: src/main.c:762
 msgid "&Undelete files (ext2fs only)"
 msgstr "反删除文件(仅限 ext2fs)(&U)"
 
-#: src/main.c:765
 msgid "&Listing format edit"
 msgstr "列表格式编辑(&L)"
 
-#: src/main.c:770
 msgid "Edit &extension file"
 msgstr "扩展文件编辑(&E)"
 
-#: src/main.c:771
 msgid "Edit &menu file"
 msgstr "菜单文件编辑(&M)"
 
-#: src/main.c:772
 msgid "Edit hi&ghlighting group file"
 msgstr "编辑突出显示组文件(&G)"
 
-#: src/main.c:782
 msgid "&Configuration..."
 msgstr "配置(&C)..."
 
-#: src/main.c:783
 msgid "&Layout..."
 msgstr "布局(&L)..."
 
-#: src/main.c:784
 msgid "C&onfirmation..."
 msgstr "确认(&O)..."
 
-#: src/main.c:785
 msgid "&Display bits..."
 msgstr "显示位(&D)..."
 
-#: src/main.c:788
 msgid "&Virtual FS..."
 msgstr "虚拟文件系统(&V)..."
 
-#: src/main.c:800
 msgid "&Above"
 msgstr "上(&A)"
 
-#: src/main.c:800
 msgid "&Left"
 msgstr "左(&L)"
 
-#: src/main.c:809
 msgid "&Below"
 msgstr "下(&B)"
 
-#: src/main.c:809
 msgid "&Right"
 msgstr "右(&R)"
 
-#: src/main.c:870
 msgid " Information "
 msgstr " 信息 "
 
-#: src/main.c:872
 msgid ""
 " Using the fast reload option may not reflect the exact \n"
 " directory contents. In this case you'll need to do a   \n"
@@ -4458,381 +3226,286 @@ msgstr ""
 " 情况下，您需要手工刷新目录的内容。请参考手册获得详细 \n"
 " 的信息。                                             "
 
-#: src/main.c:1114
 msgid "ButtonBar|Menu"
 msgstr "ButtonBar|目录"
 
-#: src/main.c:1115
-#: src/viewer/display.c:87
 msgid "ButtonBar|View"
 msgstr "ButtonBar|显示"
 
-#: src/main.c:1116
-#: src/viewer/display.c:89
 msgid "ButtonBar|Edit"
 msgstr "ButtonBar|编辑"
 
-#: src/main.c:1118
-#: src/tree.c:1024
 msgid "ButtonBar|RenMov"
 msgstr "ButtonBar|更名或移动"
 
-#: src/main.c:1119
-#: src/tree.c:1027
 msgid "ButtonBar|Mkdir"
 msgstr "ButtonBar|建目录"
 
-#: src/main.c:1392
 msgid "The TERM environment variable is unset!\n"
 msgstr "没有设置 TERM 环境变量！\n"
 
-#: src/main.c:2179
 #, c-format
 msgid "Cannot create %s directory"
 msgstr "不能建立目录%s"
 
-#: src/option.c:60
 msgid "safe de&Lete"
 msgstr "安全删除(&L)"
 
-#: src/option.c:61
 msgid "cd follows lin&Ks"
 msgstr "cd 跟随链接(&K)"
 
-#: src/option.c:62
 msgid "L&ynx-like motion"
 msgstr "类似 Lynx 动作(&Y)"
 
-#: src/option.c:63
 msgid "rotatin&G dash"
 msgstr "选择的线(&G)"
 
-#: src/option.c:64
 msgid "co&Mplete: show all"
 msgstr "完全：显示全部(&M)"
 
-#: src/option.c:65
 msgid "&Use internal view"
 msgstr "使用内部查看(&U)"
 
-#: src/option.c:66
 msgid "use internal ed&It"
 msgstr "使用内部编辑(&I)"
 
-#: src/option.c:67
 msgid "auto m&Enus"
 msgstr "自动菜单(&E)"
 
-#: src/option.c:68
 msgid "&Auto save setup"
 msgstr "自动保存设置(&A)"
 
-#: src/option.c:69
 msgid "shell &Patterns"
 msgstr "shell 模式(&P)"
 
-#: src/option.c:70
 msgid "Compute &Totals"
 msgstr "计算总和(&T)"
 
-#: src/option.c:71
 msgid "&Verbose operation"
 msgstr "冗余操作(&V)"
 
-#: src/option.c:72
 msgid "Mkdir autoname"
 msgstr "创建目录时自动命名"
 
-#: src/option.c:74
 msgid "&Fast dir reload"
 msgstr "快速重载入目录(&F)"
 
-#: src/option.c:75
 msgid "mi&X all files"
 msgstr "混合所有文件(&X)"
 
-#: src/option.c:76
 msgid "&Drop down menus"
 msgstr "下拉菜单(&D)"
 
-#: src/option.c:77
 msgid "ma&Rk moves down"
 msgstr "标记文件后光标下移(&R)"
 
-#: src/option.c:78
 msgid "show &Hidden files"
 msgstr "显示隐藏文件(&H)"
 
-#: src/option.c:79
 msgid "show &Backup files"
 msgstr "显示备份文件(&B)"
 
-#: src/option.c:80
 msgid "Use SI si&ze units"
 msgstr "使用SI大小单位(&Z)"
 
-#: src/option.c:91
 msgid "&Never"
 msgstr "从不(&N)"
 
-#: src/option.c:92
 msgid "on dumb &Terminals"
 msgstr "在哑终端上(&T)"
 
-#: src/option.c:93
 msgid "Alwa&ys"
 msgstr "总是(&Y)"
 
-#: src/option.c:129
 msgid " Panel options "
 msgstr " 面板选项 "
 
-#: src/option.c:130
 msgid " Pause after run... "
 msgstr " 运行后暂停... "
 
-#: src/option.c:176
 msgid "Configure options"
 msgstr "配置选项"
 
-#: src/panelize.c:75
 msgid "&Add new"
 msgstr "添加新(&A)"
 
-#: src/panelize.c:164
-#: src/panelize.c:459
 msgid "External panelize"
 msgstr "外部面板"
 
-#: src/panelize.c:179
 msgid "Command"
 msgstr "命令"
 
-#: src/panelize.c:195
-#: src/panelize.c:253
-#: src/panelize.c:333
-#: src/panelize.c:371
 msgid "Other command"
 msgstr "其它命令"
 
-#: src/panelize.c:236
 msgid " Add to external panelize "
 msgstr "添加到外部面板"
 
-#: src/panelize.c:237
 msgid " Enter command label: "
 msgstr " 输入命令标签："
 
-#: src/panelize.c:278
 msgid " Cannot run external panelize in a non-local directory "
 msgstr "在非本地目录不能运行外部面板化"
 
-#: src/panelize.c:336
 msgid "Find rejects after patching"
 msgstr "应用补丁后查找被拒绝的补丁"
 
-#: src/panelize.c:337
 msgid "Find *.orig after patching"
 msgstr "应用补丁后查找 .orig"
 
-#: src/panelize.c:338
 msgid "Find SUID and SGID programs"
 msgstr "查找 SUID 和 SGID 程序"
 
-#: src/panelize.c:406
 msgid "Cannot invoke command."
 msgstr "无法调用命令。"
 
-#: src/panelize.c:459
 msgid "Pipe close failed"
 msgstr "关闭管道失败"
 
-#: src/screen.c:232
 msgid "[dev]"
 msgstr "[dev]"
 
-#: src/screen.c:245
-#: src/screen.c:846
 msgid "UP--DIR"
 msgstr "上级目录"
 
-#: src/screen.c:265
 msgid "SYMLINK"
 msgstr "符号链接"
 
-#: src/screen.c:270
 msgid "SUB-DIR"
 msgstr "子目录"
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#: src/screen.c:454
 msgid "sort|u"
 msgstr "sort|u"
 
-#: src/screen.c:455
 msgid "&Unsorted"
 msgstr "未排序(&U)"
 
 #. TRANSLATORS: one single character to represent 'name' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#: src/screen.c:464
 msgid "sort|n"
 msgstr "sort|n"
 
-#: src/screen.c:465
 msgid "&Name"
 msgstr "名字(&N)"
 
 #. TRANSLATORS: one single character to represent 'version' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#: src/screen.c:474
 msgid "sort|v"
 msgstr "sort|v"
 
-#: src/screen.c:475
 msgid "&Version"
 msgstr "版本(&V)"
 
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#: src/screen.c:484
 msgid "sort|e"
 msgstr "sort|e"
 
-#: src/screen.c:485
 msgid "&Extension"
 msgstr "扩展(&E)"
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#: src/screen.c:494
 msgid "sort|s"
 msgstr "sort|s"
 
-#: src/screen.c:495
 msgid "&Size"
 msgstr "大小(&S)"
 
-#: src/screen.c:503
 msgid "Block Size"
 msgstr "块大小 "
 
 #. TRANSLATORS: one single character to represent 'Modify time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#: src/screen.c:520
 msgid "sort|m"
 msgstr "sort|m"
 
-#: src/screen.c:521
 msgid "&Modify time"
 msgstr "修改时间(&M)"
 
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#: src/screen.c:530
 msgid "sort|a"
 msgstr "sort|a"
 
-#: src/screen.c:531
 msgid "&Access time"
 msgstr "访问时间(&A)"
 
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#: src/screen.c:540
 msgid "sort|h"
 msgstr "sort|h"
 
-#: src/screen.c:541
 msgid "C&Hange time"
 msgstr "修改时间(&C)"
 
-#: src/screen.c:549
 msgid "Permission"
 msgstr "权限"
 
-#: src/screen.c:557
 msgid "Perm"
 msgstr "权限"
 
-#: src/screen.c:565
 msgid "Nl"
 msgstr "Nl"
 
 #. TRANSLATORS: one single character to represent 'inode' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#: src/screen.c:573
 msgid "sort|i"
 msgstr "sort|i"
 
-#: src/screen.c:574
 msgid "&Inode"
 msgstr "Inode(&I)"
 
-#: src/screen.c:582
 msgid "UID"
 msgstr "UID"
 
-#: src/screen.c:590
 msgid "GID"
 msgstr "GID"
 
-#: src/screen.c:598
 msgid "Owner"
 msgstr "属主"
 
-#: src/screen.c:606
 msgid "Group"
 msgstr "群组"
 
-#: src/screen.c:837
 msgid "<readlink failed>"
 msgstr "<readlink 失败>"
 
-#: src/screen.c:893
 #, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
 msgstr[0] "%s字节"
 msgstr[1] "%s字节"
 
-#: src/screen.c:897
 #, c-format
 msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] "%s 在 %d 文件"
 msgstr[1] "%2$d 个文件，%1$s 字节"
 
-#: src/screen.c:1741
 msgid "Unknown tag on display format: "
 msgstr "显示格式中未知的标记："
 
-#: src/screen.c:1870
 msgid "User supplied format looks invalid, reverting to default."
 msgstr "用户提供的格式无效，回复到默认设置。"
 
-#: src/screen.c:2499
 msgid " Do you really want to execute? "
 msgstr "您真的要执行吗？"
 
-#: src/selcodepage.c:69
 msgid "Choose codepage"
 msgstr "选择代码页"
 
-#: src/selcodepage.c:73
 msgid "-  < No translation >"
 msgstr "-  < 没有翻译 >"
 
-#: src/setup.c:246
 msgid "%b %e  %Y"
 msgstr "%b %e %Y"
 
-#: src/setup.c:247
 msgid "%b %e %H:%M"
 msgstr "%b %e %H:%M"
 
-#: src/setup.c:1124
 #, c-format
 msgid ""
 "Cannot save file %s:\n"
@@ -4841,7 +3514,6 @@ msgstr ""
 "不能保存文件%s:\n"
 "%s"
 
-#: src/subshell.c:346
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -4851,78 +3523,60 @@ msgstr ""
 "该终端运行。\n"
 "Subshell支持被禁止."
 
-#: src/subshell.c:442
 #, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "无法打开有名管道 %s\n"
 
-#: src/subshell.c:679
 msgid " The shell is still active. Quit anyway? "
 msgstr " shell 仍然活动。仍然退出？"
 
-#: src/subshell.c:843
 #, c-format
 msgid "Warning: Cannot change to %s.\n"
 msgstr "警告：无法换到 %s。\n"
 
-#: src/textconf.c:61
 msgid "With builtin Editor\n"
 msgstr "内建编辑器\n"
 
-#: src/textconf.c:66
 msgid "Using system-installed S-Lang library"
 msgstr "使用系统中安装的 S-Lang 库"
 
-#: src/textconf.c:70
 msgid "with terminfo database"
 msgstr "terminfo 数据库"
 
-#: src/textconf.c:73
 msgid "Using the ncurses library"
 msgstr "使用 ncurses 库"
 
-#: src/textconf.c:75
 msgid "Using the ncursesw library"
 msgstr "使用 ncursesw 库"
 
-#: src/textconf.c:84
 msgid "With optional subshell support"
 msgstr "可选的 subshell 支持"
 
-#: src/textconf.c:86
 msgid "With subshell support as default"
 msgstr "默认的子 shell 支持"
 
-#: src/textconf.c:92
 msgid "With support for background operations\n"
 msgstr "后台操作支持\n"
 
-#: src/textconf.c:96
 msgid "With mouse support on xterm and Linux console\n"
 msgstr "xterm 和 Linux 控制台里的鼠标支持\n"
 
-#: src/textconf.c:98
 msgid "With mouse support on xterm\n"
 msgstr "xterm 里鼠标支持\n"
 
-#: src/textconf.c:102
 msgid "With support for X11 events\n"
 msgstr "X11 事件支持\n"
 
-#: src/textconf.c:106
 msgid "With internationalization support\n"
 msgstr "国际化支持\n"
 
-#: src/textconf.c:110
 msgid "With multiple codepages support\n"
 msgstr "多代码页支持\n"
 
-#: src/textconf.c:124
 #, c-format
 msgid "Virtual File System:"
 msgstr "虚拟文件系统："
 
-#: src/tree.c:150
 #, c-format
 msgid ""
 "Cannot open the %s file for writing:\n"
@@ -4931,17 +3585,14 @@ msgstr ""
 "无法打开文件 %s 来写入：\n"
 "%s\n"
 
-#: src/tree.c:642
 #, c-format
 msgid "Copy \"%s\" directory to:"
 msgstr "复制目录“%s”到："
 
-#: src/tree.c:676
 #, c-format
 msgid "Move \"%s\" directory to:"
 msgstr "移动目录“%s”到："
 
-#: src/tree.c:686
 #, c-format
 msgid ""
 " Cannot stat the destination \n"
@@ -4950,34 +3601,25 @@ msgstr ""
 " 无法查看目标信息 \n"
 " %s "
 
-#: src/tree.c:744
 #, c-format
 msgid "  Delete %s?  "
 msgstr "  删除 %s？ "
 
-#: src/tree.c:871
-#: src/tree.c:1020
 msgid "ButtonBar|Static"
 msgstr "ButtonBar|静态"
 
-#: src/tree.c:872
-#: src/tree.c:1021
 msgid "ButtonBar|Dynamc"
 msgstr "ButtonBar|动态"
 
-#: src/tree.c:1018
 msgid "ButtonBar|Rescan"
 msgstr "ButtonBar|重扫描"
 
-#: src/tree.c:1019
 msgid "ButtonBar|Forget"
 msgstr "ButtonBar|忘记"
 
-#: src/tree.c:1031
 msgid "ButtonBar|Rmdir"
 msgstr "ButtonBar|删除目录"
 
-#: src/treestore.c:351
 #, c-format
 msgid ""
 "Cannot write to the %s file:\n"
@@ -4986,41 +3628,32 @@ msgstr ""
 "无法写入 %s 文件：\n"
 "%s\n"
 
-#: src/user.c:143
 msgid " Format error on file Extensions File "
 msgstr " 扩展文件格式错误 "
 
-#: src/user.c:144
 #, c-format
 msgid " The %%var macro has no default "
 msgstr " %%var 宏没有默认值 "
 
-#: src/user.c:145
 #, c-format
 msgid " The %%var macro has no variable "
 msgstr " %%var 宏没有变量 "
 
-#: src/user.c:510
 msgid " Debug "
 msgstr "调试 "
 
-#: src/user.c:525
 msgid " ERROR: "
 msgstr " 错误："
 
-#: src/user.c:529
 msgid " True:  "
 msgstr " 正确："
 
-#: src/user.c:531
 msgid " False: "
 msgstr " 错误："
 
-#: src/user.c:737
 msgid " Warning -- ignoring file "
 msgstr " 警告 － 忽略文件 "
 
-#: src/user.c:738
 #, c-format
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
@@ -5029,88 +3662,67 @@ msgstr ""
 "文件 %s 的拥有者不是 root 或者您，或者是全局可写。\n"
 "使用它可能会妨碍您的安全"
 
-#: src/user.c:869
 #, c-format
 msgid " No suitable entries found in %s "
 msgstr " 在 %s 没有找到相应的项 "
 
-#: src/user.c:874
 msgid " User menu "
 msgstr " 用户菜单 "
 
-#: src/viewer/actions_cmd.c:354
 msgid "Invalid value"
 msgstr "无效的值"
 
-#: src/viewer/datasource.c:381
 msgid " Cannot spawn child process "
 msgstr "无法生成子进程"
 
-#: src/viewer/datasource.c:394
 msgid "Empty output from child filter"
 msgstr "子过滤器输出为空"
 
-#: src/viewer/dialogs.c:177
 msgid "&Line number (decimal)"
 msgstr "行号(10进制&L)"
 
-#: src/viewer/dialogs.c:178
 msgid "Pe&rcents"
 msgstr "百分比(&R)"
 
-#: src/viewer/dialogs.c:179
 msgid "&Decimal offset"
 msgstr "十进制偏移(&D)"
 
-#: src/viewer/dialogs.c:180
 msgid "He&xadecimal offset"
 msgstr "16进制偏移(&X)"
 
-#: src/viewer/dialogs.c:207
 msgid "Goto"
 msgstr "跳到"
 
-#: src/viewer/display.c:93
 msgid "ButtonBar|Ascii"
 msgstr "ButtonBar|Ascii"
 
-#: src/viewer/display.c:95
 msgid "ButtonBar|HxSrch"
 msgstr "ButtonBar|16进制搜索"
 
-#: src/viewer/display.c:100
 msgid "ButtonBar|UnWrap"
 msgstr "ButtonBar|不换行"
 
-#: src/viewer/display.c:101
 msgid "ButtonBar|Wrap"
 msgstr "ButtonBar|换行"
 
-#: src/viewer/display.c:102
 msgid "ButtonBar|Hex"
 msgstr "ButtonBar|16进制"
 
-#: src/viewer/display.c:107
 msgid "ButtonBar|Goto"
 msgstr "ButtonBar|跳转"
 
-#: src/viewer/display.c:108
 msgid "ButtonBar|Raw"
 msgstr "ButtonBar|原格式"
 
-#: src/viewer/display.c:109
 msgid "ButtonBar|Parse"
 msgstr "ButtonBar|解析"
 
-#: src/viewer/display.c:117
 msgid "ButtonBar|Unform"
 msgstr "ButtonBar|未格式化"
 
-#: src/viewer/display.c:118
 msgid "ButtonBar|Format"
 msgstr "ButtonBar|格式化"
 
-#: src/viewer/hex.c:315
 #, c-format
 msgid ""
 " Error while closing the file: \n"
@@ -5121,7 +3733,6 @@ msgstr ""
 " %s \n"
 "数据可能未能写入磁盘。"
 
-#: src/viewer/hex.c:324
 #, c-format
 msgid ""
 " Cannot save file: \n"
@@ -5130,7 +3741,6 @@ msgstr ""
 "无法法保存文件:\n"
 "%s"
 
-#: src/viewer/mcviewer.c:352
 #, c-format
 msgid ""
 " Cannot open \"%s\"\n"
@@ -5139,7 +3749,6 @@ msgstr ""
 "无法打开“%s”\n"
 "%s "
 
-#: src/viewer/mcviewer.c:364
 #, c-format
 msgid ""
 " Cannot stat \"%s\"\n"
@@ -5148,36 +3757,30 @@ msgstr ""
 "无法查看“%s”的状态\n"
 "%s "
 
-#: src/viewer/mcviewer.c:375
 msgid " Cannot view: not a regular file "
 msgstr "无法查看：不是常规文件"
 
-#: src/viewer/search.c:138
 msgid "Seeking to search result"
 msgstr "查询搜索结果"
 
-#: src/viewer/search.c:286
 msgid "Search done"
 msgstr "搜索完成"
 
-#: src/viewer/search.c:286
 msgid "Continue from begining?"
 msgstr "从起始处继续吗？"
 
-#: src/widget.c:1239
 msgid " History "
 msgstr "历史"
 
 #. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
-#: src/widget.c:2557
 msgid "DialogTitle|History cleanup"
 msgstr "DialogTitle|清除历史"
 
-#: src/widget.c:2558
 msgid "Do you want clean this history?"
 msgstr "你要清除历史"
 
-#: src/wtools.c:315
 msgid "Background process:"
 msgstr "后台进程："
 
+#~ msgid "Status:    %s"
+#~ msgstr "状态： %s"

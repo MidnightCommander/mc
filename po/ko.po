@@ -1,13 +1,13 @@
 # Copyright (C) 2010 Free Software Foundation, Inc.
-# 
-# 
-# 
+#
+#
+#
 # Kang Bundo <bundo@bundo.biz>, 2010
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-03-09 14:37+0800\n"
+"POT-Creation-Date: 2010-04-23 10:46+0200\n"
 "PO-Revision-Date: 2010-03-18 16:38+0900\n"
 "Last-Translator: Kang Bundo <bundo@bundo.biz>\n"
 "Language-Team: ubuntu korea <admin@ubuntu.or.kr>\n"
@@ -923,6 +923,7 @@ msgid "Show mc with specified skin"
 msgstr "특별한 스킨으로 MC 보기"
 
 #. TRANSLATORS: don't translate keywords and names of colors
+#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -933,7 +934,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -951,7 +952,6 @@ msgstr ""
 "   편집:     editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 
-#. TRANSLATORS: don't translate keywords and names of colors
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 "\n"
@@ -1055,8 +1055,7 @@ msgstr "정렬 순서"
 msgid "Confirmation"
 msgstr "확인"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "Confirmation|기록청소(&H)"
@@ -1656,7 +1655,8 @@ msgstr "불러오기 "
 msgid " Block is large, you may not be able to undo this action. "
 msgstr "구역이 너무 커서 나중에 무를 수 없습니다. "
 
-msgid "&Replace"
+#, fuzzy
+msgid "Replace"
 msgstr "바꾸기(&R)"
 
 msgid " Replace "
@@ -1810,6 +1810,9 @@ msgstr "건너뜀(&S)"
 msgid "A&ll"
 msgstr "모두(&L)"
 
+msgid "&Replace"
+msgstr "바꾸기(&R)"
+
 msgid " Replace with: "
 msgstr "함께 바꿈: "
 
@@ -1909,6 +1912,10 @@ msgstr "검색(&S)..."
 
 msgid "Search &again"
 msgstr "다시 검색(&A)"
+
+#, fuzzy
+msgid "&Replace..."
+msgstr "바꾸기(&R)"
 
 msgid "&Toggle bookmark"
 msgstr "북마크 토글(&T)"
@@ -2155,16 +2162,26 @@ msgid " %s%s file error"
 msgstr " %s%s 파일 에러 "
 
 #, c-format
-msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
-msgstr "버전 3.0 이후에 %smc.ext 파일이 바뀌었습니다. 인스톨이 실패한 것으로 보입니다. 미드나잇 코맨더에서 새로운 mc.ext 파일을 가져오시기 바랍니다."
+msgid ""
+"The format of the %smc.ext file has changed with version 3.0.  It seems that "
+"the installation failed.  Please fetch a fresh copy from the Midnight "
+"Commander package."
+msgstr ""
+"버전 3.0 이후에 %smc.ext 파일이 바뀌었습니다. 인스톨이 실패한 것으로 보입니"
+"다. 미드나잇 코맨더에서 새로운 mc.ext 파일을 가져오시기 바랍니다."
 
 #, c-format
 msgid " ~/%s file error "
 msgstr "  ~/%s 파일 에러 "
 
 #, c-format
-msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
-msgstr "~ /%s 파일은 버전 3.0에서 바꿀 수 있습니다. 당신은 어느 %smc.ext에서 복사하거나 작성하는 방법의 예제 파일을 사용할 수 있습니다."
+msgid ""
+"The format of the ~/%s file has changed with version 3.0.  You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
+msgstr ""
+"~ /%s 파일은 버전 3.0에서 바꿀 수 있습니다. 당신은 어느 %smc.ext에서 복사하거"
+"나 작성하는 방법의 예제 파일을 사용할 수 있습니다."
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|복사"
@@ -2827,7 +2844,8 @@ msgid " Hotlist Load "
 msgstr " 단축목록 불러오기 "
 
 #, c-format
-msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr "MC  ~/%s 파일을 쓸 수 없습니다, 지난 설정파일을 지울 수 없습니다."
 
 #, c-format
@@ -2875,10 +2893,10 @@ msgstr "액세스일: %s"
 msgid "Modified:  %s"
 msgstr "수정일: %s"
 
-#. TRANSLATORS: "Status changed", like in the stat(2) man page
-#, c-format
-msgid "Status:    %s"
-msgstr "만든날: %s"
+#. TRANSLATORS: Time of last status change as in stat(2) man.
+#, fuzzy, c-format
+msgid "Changed:   %s"
+msgstr "바꾸기(&T)"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -2888,9 +2906,11 @@ msgstr "Dev. type: 주요 %lu, 기여 %lu"
 msgid "Size:      %s"
 msgstr "크기: %s"
 
-#, c-format
+#, fuzzy, c-format
 msgid " (%ld block)"
-msgstr " (%ld 블럭)"
+msgid_plural " (%ld blocks)"
+msgstr[0] " (%ld 블럭)"
+msgstr[1] " (%ld 블럭)"
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -3451,13 +3471,17 @@ msgstr "집단"
 msgid "<readlink failed>"
 msgstr "<readlink 실패>"
 
-#, c-format
+#, fuzzy, c-format
 msgid "%s byte"
-msgstr "%s 바이트"
+msgid_plural "%s bytes"
+msgstr[0] "%s 바이트"
+msgstr[1] "%s 바이트"
 
-#, c-format
+#, fuzzy, c-format
 msgid "%s in %d file"
-msgstr "%s in %d 파일"
+msgid_plural "%s in %d files"
+msgstr[0] "%s in %d 파일"
+msgstr[1] "%s in %d 파일"
 
 msgid "Unknown tag on display format: "
 msgstr "출력 형식에 모르는 태그: "
@@ -3755,3 +3779,6 @@ msgstr "기록을 삭제하기를 원하십니까?"
 
 msgid "Background process:"
 msgstr "배경 프로세스:"
+
+#~ msgid "Status:    %s"
+#~ msgstr "만든날: %s"
