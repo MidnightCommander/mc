@@ -3076,7 +3076,7 @@ El formato de la definición de color es:
 .fi
 .PP
 los colores son opcionales, y las palabras claves son: normal, selected,
-marked, markselect, errors, input, reverse menu, menusel, menuhot, menuhotsel,
+marked, markselect, errors, input, reverse menunormal, menusel, menuhot, menuhotsel,
 menuinactive, gauge;  los colores por defecto son: dnormal, dfocus, dhotnormal,
 dhotfocus; los colores de Ayuda son: helpnormal, helpitalic, helpbold, helplink,
 helpslink;  color del visor: viewunderline; colores del editor: editnormal,
@@ -3093,8 +3093,8 @@ en los componentes normales, mientras que el color
 .I dhotfocus
 se utiliza para el color resaltado en el componente seleccionado.
 .PP
-Los menús utilizan el mismo esquema equivalente con los nombres menu, menusel,
-menuhot, menuhotsel and menuinactive en lugar de los anteriores.
+Los menús utilizan el mismo esquema equivalente con los nombres menunormal,
+menusel, menuhot, menuhotsel and menuinactive en lugar de los anteriores.
 .PP
 La ayuda utiliza los siguientes colores:
 .I helpnormal
@@ -3344,7 +3344,7 @@ Color del texto seleccionado.
 .I editwhitespace
 Color de las tabulaciones y espacios al final de línea resaltados.
 .TP
-.I linestate
+.I editlinestate
 Color de la línea de estado.
 
 .PP

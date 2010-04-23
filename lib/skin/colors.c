@@ -89,7 +89,8 @@ mc_skin_color_add_to_hash (mc_skin_t * mc_skin, const gchar * group, const gchar
     gchar *kname;
 
     kname = g_strdup_printf ("%s.%s", group, key);
-    if (kname != NULL) {
+    if (kname != NULL)
+    {
         if (g_hash_table_lookup (mc_skin->colors, (gpointer) kname) != NULL)
             g_hash_table_remove (mc_skin->colors, (gpointer) kname);
 
@@ -127,24 +128,30 @@ mc_skin_color_get_from_ini_file (mc_skin_t * mc_skin, const gchar * group, const
 
     values = mc_config_get_string_list (mc_skin->config, group, key, &items_count);
 
-    if (values == NULL || *values == NULL) {
+    if (values == NULL || *values == NULL)
+    {
         if (values != NULL)
             g_strfreev (values);
         return NULL;
     }
     mc_skin_color = g_try_new0 (mc_skin_color_t, 1);
-    if (mc_skin_color == NULL) {
+    if (mc_skin_color == NULL)
+    {
         g_strfreev (values);
         return NULL;
     }
 
-    switch (items_count) {
+    switch (items_count)
+    {
     case 0:
         tmp = mc_skin_color_get_with_defaults (group, "_default_");
-        if (tmp) {
+        if (tmp)
+        {
             mc_skin_color->fgcolor = g_strdup (tmp->fgcolor);
             mc_skin_color->bgcolor = g_strdup (tmp->bgcolor);
-        } else {
+        }
+        else
+        {
             g_strfreev (values);
             g_free (mc_skin_color);
             return NULL;
@@ -175,12 +182,13 @@ mc_skin_color_set_default_for_terminal (mc_skin_t * mc_skin)
 {
     mc_skin_color_t *mc_skin_color;
     mc_skin_color = g_try_new0 (mc_skin_color_t, 1);
-    if (mc_skin_color != NULL) {
-	mc_skin_color->fgcolor = g_strdup ("default");
-	mc_skin_color->bgcolor = g_strdup ("default");
-	mc_skin_color->pair_index =
-	    tty_try_alloc_color_pair2 (mc_skin_color->fgcolor, mc_skin_color->bgcolor, FALSE);
-	mc_skin_color_add_to_hash (mc_skin, "skin", "terminal_default_color", mc_skin_color);
+    if (mc_skin_color != NULL)
+    {
+        mc_skin_color->fgcolor = g_strdup ("default");
+        mc_skin_color->bgcolor = g_strdup ("default");
+        mc_skin_color->pair_index =
+            tty_try_alloc_color_pair2 (mc_skin_color->fgcolor, mc_skin_color->bgcolor, FALSE);
+        mc_skin_color_add_to_hash (mc_skin, "skin", "terminal_default_color", mc_skin_color);
     }
 }
 
@@ -226,7 +234,7 @@ mc_skin_color_cache_init (void)
     EDITOR_MARKED_COLOR = mc_skin_color_get ("editor", "editmarked");
     EDITOR_WHITESPACE_COLOR = mc_skin_color_get ("editor", "editwhitespace");
     EDITOR_RIGHT_MARGIN_COLOR = mc_skin_color_get ("editor", "editrightmargin");
-    LINE_STATE_COLOR = mc_skin_color_get ("editor", "linestate");
+    LINE_STATE_COLOR = mc_skin_color_get ("editor", "editlinestate");
 
     BOOK_MARK_COLOR = mc_skin_color_get ("editor", "bookmark");
     BOOK_MARK_FOUND_COLOR = mc_skin_color_get ("editor", "bookmarkfound");
@@ -240,8 +248,7 @@ static gboolean
 mc_skin_color_check_inisection (const gchar * group)
 {
     return !((strcasecmp ("skin", group) == 0)
-        || (strcasecmp ("lines", group) == 0)
-        || (strncasecmp ("widget-", group, 7) == 0));
+             || (strcasecmp ("lines", group) == 0) || (strncasecmp ("widget-", group, 7) == 0));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -251,7 +258,7 @@ mc_skin_color_check_bw_mode (mc_skin_t * mc_skin)
 {
     gchar **groups, **orig_groups;
 
-    if ( tty_use_colors () && !mc_args__disable_colors)
+    if (tty_use_colors () && !mc_args__disable_colors)
         return;
 
     orig_groups = groups = mc_config_get_groups (mc_skin->config, NULL);
@@ -259,7 +266,8 @@ mc_skin_color_check_bw_mode (mc_skin_t * mc_skin)
     if (groups == NULL)
         return;
 
-    for (; *groups != NULL; groups++) {
+    for (; *groups != NULL; groups++)
+    {
         if (mc_skin_color_check_inisection (*groups))
             mc_config_del_group (mc_skin->config, *groups);
     }
@@ -284,9 +292,10 @@ mc_skin_color_parse_ini_file (mc_skin_t * mc_skin)
     orig_groups = groups = mc_config_get_groups (mc_skin->config, &items_count);
 
     if (groups == NULL)
-	return FALSE;
+        return FALSE;
 
-    if (*groups == NULL) {
+    if (*groups == NULL)
+    {
         g_strfreev (groups);
         return FALSE;
     }
@@ -300,7 +309,8 @@ mc_skin_color_parse_ini_file (mc_skin_t * mc_skin)
     tty_color_set_defaults (mc_skin_color->fgcolor, mc_skin_color->bgcolor);
     mc_skin_color_add_to_hash (mc_skin, "core", "_default_", mc_skin_color);
 
-    for (; *groups != NULL; groups++) {
+    for (; *groups != NULL; groups++)
+    {
         if (!mc_skin_color_check_inisection (*groups))
             continue;
 
@@ -308,12 +318,14 @@ mc_skin_color_parse_ini_file (mc_skin_t * mc_skin)
         if (keys == NULL)
             continue;
 
-        if(*keys == NULL) {
+        if (*keys == NULL)
+        {
             g_strfreev (keys);
             continue;
         }
 
-        for (; *keys; keys++) {
+        for (; *keys; keys++)
+        {
             mc_skin_color = mc_skin_color_get_from_ini_file (mc_skin, *groups, *keys);
             if (mc_skin_color != NULL)
                 mc_skin_color_add_to_hash (mc_skin, *groups, *keys, mc_skin_color);

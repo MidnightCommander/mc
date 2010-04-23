@@ -3233,7 +3233,7 @@ The format for the color definition is:
 .fi
 .PP
 The colors are optional, and the keywords are: normal, selected, marked,
-markselect, errors, input, reverse, gauge.  Menu colors are: menu,
+markselect, errors, input, reverse, gauge.  Menu colors are: menunormal,
 menusel, menuhot, menuhotsel, menuinactive. Dialog colors are: dnormal, dfocus,
 dhotnormal, dhotfocus.  Help colors are: helpnormal, helpitalic,
 helpbold, helplink, helpslink.  Viewer color is: viewunderline. Editor
@@ -3259,7 +3259,7 @@ components, whereas the
 color is used for the highlighted color in the currently selected
 component.
 .PP
-Menus use the same scheme but uses the menu, menusel, menuhot, menuhotsel
+Menus use the same scheme but uses the menunormal, menusel, menuhot, menuhotsel
 and menuinactive tags instead.
 .PP
 Help uses the following colors:
@@ -3434,7 +3434,7 @@ Color of hotkeys in focused element
 .PP
 Section
 .B [menu]
-describes the elements that are placed on menu. This section describes
+describes the elements that are placed in menu. This section describes
 system menu (called by F9) and user-defined menus (called by F2 in panels
 and by F11 in editor).
 .TP
@@ -3499,7 +3499,7 @@ Color of selected text
 .I editwhitespace
 Color of tabs and trailing spaces highlighting
 .TP
-.I linestate
+.I editlinestate
 Color for line state area
 
 .PP
