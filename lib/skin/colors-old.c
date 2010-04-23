@@ -41,7 +41,8 @@
 
 /*** file scope type declarations ****************************************************************/
 
-typedef struct mc_skin_colors_old_struct {
+typedef struct mc_skin_colors_old_struct
+{
     const char *old_color;
     const char *group;
     const char *key;
@@ -93,15 +94,15 @@ mc_skin_colors_old_transform (const char *old_color, const char **group, const c
     int lc_index;
 
     if (old_color != NULL)
-        for (lc_index = 0; old_colors[lc_index].old_color; lc_index++) {
-            if (strcasecmp (old_color, old_colors[lc_index].old_color) == 0) {
+        for (lc_index = 0; old_colors[lc_index].old_color; lc_index++)
+            if (strcasecmp (old_color, old_colors[lc_index].old_color) == 0)
+            {
                 if (group != NULL)
                     *group = old_colors[lc_index].group;
                 if (key != NULL)
                     *key = old_colors[lc_index].key;
                 return TRUE;
             }
-        }
     return FALSE;
 }
 
@@ -122,17 +123,20 @@ mc_skin_colors_old_configure_one (mc_skin_t * mc_skin, const char *the_color_str
     if (colors == NULL)
         return;
 
-    for (; *colors; colors++) {
+    for (; *colors; colors++)
+    {
         key_val = g_strsplit_set (*colors, "=,", 3);
 
         if (!key_val)
             continue;
 
         if (key_val[1] == NULL
-            || !mc_skin_colors_old_transform (key_val[0], &skin_group, &skin_key)) {
+            || !mc_skin_colors_old_transform (key_val[0], &skin_group, &skin_key))
+        {
             g_strfreev (key_val);
             continue;
         }
+
         if (key_val[2] != NULL)
             skin_val = g_strdup_printf ("%s;%s", key_val[1], key_val[2]);
         else
