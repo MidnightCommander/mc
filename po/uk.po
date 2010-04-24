@@ -15,11 +15,11 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 1.0\n"
 
 msgid " Search string not found "
-msgstr " Така стрічка не знайдена "
+msgstr " Такий рядок не знайдено"
 
 msgid " Not implemented yet "
 msgstr " Ще не реалізовано "
@@ -927,7 +927,6 @@ msgid "Show mc with specified skin"
 msgstr "Показувати mc із обраним скіном"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -944,15 +943,14 @@ msgid ""
 msgstr ""
 "--colors КЛЮЧ={ТЕКСТ},{ФОН}\n"
 "\n"
-"{ТЕКСТ} і {ФОН} можна опустити, тоді буде використано значення за "
-"змовчуванням\n"
+"{ТЕКСТ} і {ФОН} можна опустити, тоді буде використано значення за змовчуванням\n"
 "\n"
 "Ключі:\n"
 "   Глобальні:    errors, reverse, gauge, input, viewunderline\n"
 "   Показ файлів: normal, selected, marked, markselect\n"
 "   Діалоги:      dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Меню:         menu, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Меню:         menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "  Редактор:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 
@@ -1059,25 +1057,26 @@ msgstr "Порядок сортування"
 msgid "Confirmation"
 msgstr "Підтвердження"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
-msgstr "Підтвердження|Очистка історії"
+msgstr "Confirmation|Очистка історії"
 
 msgid "Confirmation|&Directory hotlist delete"
-msgstr "Підтвердження|Видалення гарячого списку каталогів"
+msgstr "Confirmation|Видалення гарячого списку каталогів"
 
 msgid "Confirmation|E&xit"
-msgstr "Підтвердження|Вихід"
+msgstr "Confirmation|Вихід"
 
 msgid "Confirmation|&Execute"
-msgstr "Підтвердження|Виконання"
+msgstr "Confirmation|Виконання"
 
 msgid "Confirmation|O&verwrite"
-msgstr "Підтвердження|Перезапис"
+msgstr "Confirmation|Перезапис"
 
 msgid "Confirmation|&Delete"
-msgstr "Підтвердження|Видалення"
+msgstr "Confirmation|Видалення"
 
 msgid "UTF-8 output"
 msgstr "Вивід UTF-8"
@@ -1798,10 +1797,10 @@ msgid "case &Sensitive"
 msgstr "Вра&xування регістру"
 
 msgid " Enter replacement string:"
-msgstr " Введіть стрічку для заміни:"
+msgstr " Введіть рядок для заміни:"
 
 msgid " Enter search string:"
-msgstr " Введіть стрічку для пошуку:"
+msgstr " Введіть рядок для пошуку:"
 
 msgid "&Find all"
 msgstr "Знайти все"
@@ -2087,34 +2086,34 @@ msgid " Editor options "
 msgstr " Параметри редактора "
 
 msgid "ButtonBar|Help"
-msgstr "Нижня панель|Допомога"
+msgstr "ButtonBar|Допомога"
 
 msgid "ButtonBar|Save"
-msgstr "Нижня панель|Зберегти"
+msgstr "ButtonBar|Зберегти"
 
 msgid "ButtonBar|Mark"
-msgstr "Нижня панель|Відмітити"
+msgstr "ButtonBar|Відмітити"
 
 msgid "ButtonBar|Replac"
-msgstr "Нижня панель|Заміна"
+msgstr "ButtonBar|Заміна"
 
 msgid "ButtonBar|Copy"
-msgstr "Нижня панель|Копіювати"
+msgstr "ButtonBar|Копіювати"
 
 msgid "ButtonBar|Move"
-msgstr "Нижня панель|Перемістити"
+msgstr "ButtonBar|Перемістити"
 
 msgid "ButtonBar|Search"
-msgstr "Нижня панель|Пошук"
+msgstr "ButtonBar|Пошук"
 
 msgid "ButtonBar|Delete"
-msgstr "Нижня панель|Видалити"
+msgstr "ButtonBar|Видалити"
 
 msgid "ButtonBar|PullDn"
-msgstr "Нижня панель|Меню"
+msgstr "ButtonBar|Меню"
 
 msgid "ButtonBar|Quit"
-msgstr "Нижня панель|Вихід"
+msgstr "ButtonBar|Вихід"
 
 msgid " Load syntax file "
 msgstr " Завантажити синтаксичний файл "
@@ -2166,35 +2165,25 @@ msgid " %s%s file error"
 msgstr "%s%s помилка файлу "
 
 #, c-format
-msgid ""
-"The format of the %smc.ext file has changed with version 3.0.  It seems that "
-"the installation failed.  Please fetch a fresh copy from the Midnight "
-"Commander package."
-msgstr ""
-"Формат файлу %smc.ext було змінено у версіі 3.0. Схоже що стався збій при "
-"встановленні.Будь ласка візьміть свіжу копію з пакета Midnight Commander."
+msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
+msgstr "Формат файлу %smc.ext було змінено у версіі 3.0. Схоже що стався збій при встановленні.Будь ласка візьміть свіжу копію з пакета Midnight Commander."
 
 #, c-format
 msgid " ~/%s file error "
 msgstr " помилка файлу  ~/%s"
 
 #, c-format
-msgid ""
-"The format of the ~/%s file has changed with version 3.0.  You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write "
-"it."
-msgstr ""
-"Формат файлу %smc.ext було змінено у версіі 3.0. Ви можете зкопіювати його з "
-"%smc.ext чи зкористуватися ним як зразком та написати свій."
+msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
+msgstr "Формат файлу %smc.ext було змінено у версіі 3.0. Ви можете зкопіювати його з %smc.ext чи зкористуватися ним як зразком та написати свій."
 
 msgid "DialogTitle|Copy"
-msgstr "Заголовок діалогу|Копіювання"
+msgstr "DialogTitle|Копіювання"
 
 msgid "DialogTitle|Move"
-msgstr "Заголовок діалогу|Переміщення"
+msgstr "DialogTitle|Переміщення"
 
 msgid "DialogTitle|Delete"
-msgstr "Заголовок діалогу|Видалення"
+msgstr "DialogTitle|Видалення"
 
 msgid " Cannot make the hardlink "
 msgstr " Не вдалося створити жорстке посилання "
@@ -2212,8 +2201,7 @@ msgid ""
 "\n"
 " Option Stable Symlinks will be disabled "
 msgstr ""
-"Неможливо створити стійкі симв. посилання через не локальні файлові "
-"системи:\n"
+"Неможливо створити стійкі симв. посилання через не локальні файлові системи:\n"
 "\n"
 " Параметр Стійкі символьні посилання буде заборонено "
 
@@ -2482,13 +2470,13 @@ msgid "Directory scanning"
 msgstr "Сканування каталога"
 
 msgid "FileOperation|Copy"
-msgstr "Файлова операція|Копіювання"
+msgstr "FileOperation|Копіювання"
 
 msgid "FileOperation|Move"
-msgstr "Файлова операція|Переміщення"
+msgstr "FileOperation|Переміщення"
 
 msgid "FileOperation|Delete"
-msgstr "Файлова операція|Видалення"
+msgstr "FileOperation|Видалення"
 
 #, no-c-format
 msgid "%o %f \"%s\"%m"
@@ -2755,10 +2743,10 @@ msgid "Help"
 msgstr "Довідка"
 
 msgid "ButtonBar|Index"
-msgstr "Нижня панель|Індекс"
+msgstr "ButtonBar|Індекс"
 
 msgid "ButtonBar|Prev"
-msgstr "Нижня панель|Попередній"
+msgstr "ButtonBar|Попередній"
 
 msgid "&Move"
 msgstr "Пере&нести"
@@ -2861,10 +2849,8 @@ msgstr " Завантаження довідника "
 
 # , c-format
 #, c-format
-msgid ""
-"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
-msgstr ""
-"MC не зміг записати файл ~/%s, Ваш старий список елементів не був видалений"
+msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr "MC не зміг записати файл ~/%s, Ваш старий список елементів не був видалений"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -2912,9 +2898,9 @@ msgid "Modified:  %s"
 msgstr "Змінено:   %s"
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
-#, fuzzy, c-format
+#, c-format
 msgid "Changed:   %s"
-msgstr "Пере&йти до"
+msgstr "Змінено: %s"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -3243,19 +3229,19 @@ msgstr ""
 " керівництво (man mc).                                             "
 
 msgid "ButtonBar|Menu"
-msgstr "Нижня панель|Меню"
+msgstr "ButtonBar|Меню"
 
 msgid "ButtonBar|View"
-msgstr "Нижня панель|Вид"
+msgstr "ButtonBar|Вид"
 
 msgid "ButtonBar|Edit"
-msgstr "Нижня панель|Редагувати"
+msgstr "ButtonBar|Редагувати"
 
 msgid "ButtonBar|RenMov"
-msgstr "Нижня панель|Переміст."
+msgstr "ButtonBar|Переміст."
 
 msgid "ButtonBar|Mkdir"
-msgstr "Нижня панель|СтвКат"
+msgstr "ButtonBar|СтвКат"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "Змінна середовища TERM не встановлена!\n"
@@ -3362,8 +3348,7 @@ msgid " Enter command label: "
 msgstr " Введіть мітку команди: "
 
 msgid " Cannot run external panelize in a non-local directory "
-msgstr ""
-" Не можу виконати цю команду, коли знаходжуся не у локальному каталозі "
+msgstr " Не можу виконати цю команду, коли знаходжуся не у локальному каталозі "
 
 msgid "Find rejects after patching"
 msgstr "Знайти коректури, відкинуті командою patch"
@@ -3395,7 +3380,7 @@ msgstr "ПІД-КАТ"
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|u"
-msgstr "сортування|u"
+msgstr "sort|u"
 
 msgid "&Unsorted"
 msgstr "&Не сортувати"
@@ -3403,7 +3388,7 @@ msgstr "&Не сортувати"
 #. TRANSLATORS: one single character to represent 'name' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|n"
-msgstr "сортування|n"
+msgstr "sort|n"
 
 msgid "&Name"
 msgstr "За &назвою"
@@ -3411,7 +3396,7 @@ msgstr "За &назвою"
 #. TRANSLATORS: one single character to represent 'version' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|v"
-msgstr "сортування|v"
+msgstr "sort|v"
 
 msgid "&Version"
 msgstr "Версія"
@@ -3419,7 +3404,7 @@ msgstr "Версія"
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|e"
-msgstr "сортування|e"
+msgstr "sort|e"
 
 msgid "&Extension"
 msgstr "За роз&ширенням"
@@ -3427,7 +3412,7 @@ msgstr "За роз&ширенням"
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|s"
-msgstr "сортування|s"
+msgstr "sort|s"
 
 msgid "&Size"
 msgstr "За &розміром"
@@ -3438,7 +3423,7 @@ msgstr "Розмір блоку"
 #. TRANSLATORS: one single character to represent 'Modify time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|m"
-msgstr "сортування|m"
+msgstr "sort|m"
 
 msgid "&Modify time"
 msgstr "За часом &зміни"
@@ -3446,7 +3431,7 @@ msgstr "За часом &зміни"
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|a"
-msgstr "сортування|a"
+msgstr "sort|a"
 
 msgid "&Access time"
 msgstr "За часом &доступу"
@@ -3454,7 +3439,7 @@ msgstr "За часом &доступу"
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|h"
-msgstr "сортування|h"
+msgstr "sort|h"
 
 msgid "C&Hange time"
 msgstr "За часом &зміни вузла"
@@ -3471,7 +3456,7 @@ msgstr "Кс"
 #. TRANSLATORS: one single character to represent 'inode' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|i"
-msgstr "сортування|i"
+msgstr "sort|i"
 
 msgid "&Inode"
 msgstr "За &i-вузлами"
@@ -3627,19 +3612,19 @@ msgid "  Delete %s?  "
 msgstr "  Видалити %s?  "
 
 msgid "ButtonBar|Static"
-msgstr "Нижня панель|Статично"
+msgstr "ButtonBar|Статично"
 
 msgid "ButtonBar|Dynamc"
-msgstr "Нижня панель|Динамічно"
+msgstr "ButtonBar|Динамічно"
 
 msgid "ButtonBar|Rescan"
-msgstr "Нижня панель|Пересканувати"
+msgstr "ButtonBar|Пересканувати"
 
 msgid "ButtonBar|Forget"
-msgstr "Нижня панель|Забути"
+msgstr "ButtonBar|Забути"
 
 msgid "ButtonBar|Rmdir"
-msgstr "Нижня панель|ВидалКат"
+msgstr "ButtonBar|ВидалКат"
 
 #, c-format
 msgid ""
@@ -3715,34 +3700,34 @@ msgid "Goto"
 msgstr "Йти до"
 
 msgid "ButtonBar|Ascii"
-msgstr "Нижня панель|Ascii"
+msgstr "ButtonBar|Ascii"
 
 msgid "ButtonBar|HxSrch"
-msgstr "Нижня панель|HxПошук"
+msgstr "ButtonBar|HxПошук"
 
 msgid "ButtonBar|UnWrap"
-msgstr "Нижня панель|НеПеренос."
+msgstr "ButtonBar|НеПеренос."
 
 msgid "ButtonBar|Wrap"
-msgstr "Нижня панель|Перенос."
+msgstr "ButtonBar|Перенос."
 
 msgid "ButtonBar|Hex"
-msgstr "Нижня панель|Hex"
+msgstr "ButtonBar|Hex"
 
 msgid "ButtonBar|Goto"
-msgstr "Нижня панель|Перехід"
+msgstr "ButtonBar|Перехід"
 
 msgid "ButtonBar|Raw"
-msgstr "Нижня панель|Як є"
+msgstr "ButtonBar|Як є"
 
 msgid "ButtonBar|Parse"
-msgstr "Нижня панель|Фільтр"
+msgstr "ButtonBar|Фільтр"
 
 msgid "ButtonBar|Unform"
-msgstr "Нижня панель|НеФормат."
+msgstr "ButtonBar|НеФормат."
 
 msgid "ButtonBar|Format"
-msgstr "Нижня панель|Формат."
+msgstr "ButtonBar|Формат."
 
 #, c-format
 msgid ""
@@ -3795,7 +3780,7 @@ msgstr "Історія команд"
 
 #. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
 msgid "DialogTitle|History cleanup"
-msgstr "Заголовок діалогу|Очистка історії"
+msgstr "DialogTitle|Очистка історії"
 
 msgid "Do you want clean this history?"
 msgstr "Ви дійсно хочете очистити цю історію?"
@@ -4281,11 +4266,8 @@ msgstr "Фоновий процес:"
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr " Введіть порядок аргументів заміни, напр. 3,2,1,4 "
 
-#~ msgid ""
-#~ " Invalid regular expression, or scanf expression with too many "
-#~ "conversions "
-#~ msgstr ""
-#~ " Неправильний регулярний вираз або у scanf-форматі багато перетворень"
+#~ msgid " Invalid regular expression, or scanf expression with too many conversions "
+#~ msgstr " Неправильний регулярний вираз або у scanf-форматі багато перетворень"
 
 #~ msgid " Error in replacement format string. "
 #~ msgstr " Помилка у форматі стрічки заміни "
