@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: be\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-26 12:26+0200\n"
+"POT-Creation-Date: 2010-04-25 15:33+0200\n"
 "PO-Revision-Date: 2008-12-21 23:28+0200\n"
 "Last-Translator: Pavel Piatruk <piatruk.p@gmail.com>\n"
 "Language-Team: Belarusian <debian-l10n-belarusian@lists.debian.org>\n"
@@ -323,12 +323,6 @@ msgstr ""
 "Памер экрану %dx%d не падтрымліваецца.\n"
 "Праверце пераменную асяродздзя TERM.\n"
 
-msgid "%b %e  %Y"
-msgstr ""
-
-msgid "%b %e %H:%M"
-msgstr ""
-
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s не каталог\n"
@@ -443,9 +437,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Няўзгоднены архіў extfs"
 
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Увага: файл %s адсутнічае\n"
+#, fuzzy, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr "Немагчыма змяніць каталог"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -664,6 +658,10 @@ msgstr " Немагчыма далучыцца да сервера: %s "
 
 msgid " Too many open connections "
 msgstr " Вельмі шмат адкрытых злучэнняў "
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Увага: файл %s адсутнічае\n"
 
 #, c-format
 msgid ""
@@ -947,7 +945,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -2977,10 +2975,10 @@ msgstr "Зварот:        %s"
 msgid "Modified:  %s"
 msgstr "Зменены:       %s"
 
-#. TRANSLATORS: "Status changed", like in the stat(2) man page
-#, c-format
-msgid "Status:    %s"
-msgstr "Статус:        %s"
+#. TRANSLATORS: Time of last status change as in stat(2) man.
+#, fuzzy, c-format
+msgid "Changed:   %s"
+msgstr "Пера&йсці"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -3905,6 +3903,9 @@ msgstr " Гісторыя "
 
 msgid "Background process:"
 msgstr "Працэс у тле:"
+
+#~ msgid "Status:    %s"
+#~ msgstr "Статус:        %s"
 
 #~ msgid "File:       None"
 #~ msgstr "Файл:          Адсутнічае"

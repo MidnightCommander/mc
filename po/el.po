@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.38\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-26 12:26+0200\n"
+"POT-Creation-Date: 2010-04-25 15:33+0200\n"
 "PO-Revision-Date: 2010-04-10 18:58+0200\n"
 "Last-Translator: Alex-P. Natsios\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
@@ -311,14 +311,6 @@ msgstr ""
 "Μέγεθος οθόνης %dx%d μη υποστηριζόμενο.\n"
 "ελέγξτε τη μεταβλητή περιβάλλοντος TERM.\n"
 
-#, fuzzy
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-#, fuzzy
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "Το %s δεν είναι κατάλογος\n"
@@ -433,9 +425,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Χαλασμένο αρχείο extfs"
 
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Προσοχή: το Αρχείο %s δεν βρέθηκε\n"
+#, fuzzy, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr "Αδυναμία δημιουργίας καταλόγου %s"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -445,7 +437,9 @@ msgid "fish: Waiting for initial line..."
 msgstr ""
 
 msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr "Με συγχωρείτε, αλλά προς το παρόν συνδέσεις με χρήση κωδικού δεν υποστηρίζονται."
+msgstr ""
+"Με συγχωρείτε, αλλά προς το παρόν συνδέσεις με χρήση κωδικού δεν "
+"υποστηρίζονται."
 
 msgid " fish: Password required for "
 msgstr " fish: Απαιτείται κωδικός για το "
@@ -651,6 +645,10 @@ msgstr "ftpfs: Αδυναμία σύνδεσης με τον εξυπηρέτη:
 
 msgid " Too many open connections "
 msgstr " Υπέρβαση ορίου συνδέσεων "
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Προσοχή: το Αρχείο %s δεν βρέθηκε\n"
 
 #, c-format
 msgid ""
@@ -923,7 +921,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -2134,7 +2132,10 @@ msgid " %s%s file error"
 msgstr ""
 
 #, c-format
-msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
+msgid ""
+"The format of the %smc.ext file has changed with version 3.0.  It seems that "
+"the installation failed.  Please fetch a fresh copy from the Midnight "
+"Commander package."
 msgstr ""
 
 #, c-format
@@ -2142,7 +2143,10 @@ msgid " ~/%s file error "
 msgstr ""
 
 #, c-format
-msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
+msgid ""
+"The format of the ~/%s file has changed with version 3.0.  You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
 
 msgid "DialogTitle|Copy"
@@ -2734,7 +2738,8 @@ msgid " Hotlist Load "
 msgstr ""
 
 #, c-format
-msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr ""
 
 #, c-format
@@ -2782,10 +2787,10 @@ msgstr ""
 msgid "Modified:  %s"
 msgstr ""
 
-#. TRANSLATORS: "Status changed", like in the stat(2) man page
+#. TRANSLATORS: Time of last status change as in stat(2) man.
 #, c-format
-msgid "Status:    %s"
-msgstr "Κατάσταση:     %s"
+msgid "Changed:   %s"
+msgstr ""
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -3636,80 +3641,127 @@ msgstr "Ιστορικό"
 msgid "Background process:"
 msgstr ""
 
+#, fuzzy
+#~ msgid "%b %e  %Y"
+#~ msgstr "%b %e  %Y"
+
+#, fuzzy
+#~ msgid "%b %e %H:%M"
+#~ msgstr "%b %e %H:%M"
+
+#~ msgid "Status:    %s"
+#~ msgstr "Κατάσταση:     %s"
+
 #~ msgid "Extension:"
 #~ msgstr "Επέκταση:"
+
 #~ msgid "&New              C-n"
 #~ msgstr "&Νέο                    C-n"
+
 #~ msgid "&Save              F2"
 #~ msgstr "Απο&θήκευση             F2"
+
 #~ msgid "A&bout...            "
 #~ msgstr "Πε&ρί...                   "
+
 #~ msgid "&Quit             F10"
 #~ msgstr "&Τέλος                  F10"
+
 #~ msgid "&New            C-x k"
 #~ msgstr "&Νέο                  C-x k"
+
 #~ msgid "Copy to &file...     "
 #~ msgstr "αντιγραφή σε αρ&χείο       "
+
 #~ msgid "&Toggle mark                 F3"
 #~ msgstr "Απο&θήκευση             F2"
+
 #~ msgid "Mar&k columns              S-F3"
 #~ msgstr "&Νέο                    C-n"
+
 #~ msgid "&Copy                        F5"
 #~ msgstr "Απο&θήκευση             F2"
+
 #~ msgid "&Move                        F6"
 #~ msgstr "Απο&θήκευση             F2"
+
 #~ msgid "&Delete                      F8"
 #~ msgstr "Απο&θήκευση             F2"
+
 #~ msgid "&Undo                       C-u"
 #~ msgstr "&Νέο                    C-n"
+
 #~ msgid "&Beginning               C-PgUp"
 #~ msgstr "&Νέο                    C-n"
+
 #~ msgid "&End                     C-PgDn"
 #~ msgstr "&Νέο                    C-n"
+
 #~ msgid "C&opy to clipfile           M-w"
 #~ msgstr "αντιγραφή σε αρ&χείο       "
+
 #~ msgid "&Next bookmark                 "
 #~ msgstr "&Νέο                    C-n"
+
 #~ msgid "Pre&v bookmark                 "
 #~ msgstr "Απο&θήκευση             F2"
+
 #~ msgid "&Flush bookmark                "
 #~ msgstr "Απο&θήκευση             F2"
+
 #~ msgid "Encod&ing...             M-e"
 #~ msgstr "&Νέο                    C-n"
+
 #~ msgid "Save setu&p"
 #~ msgstr " Αποθήκευση ως "
+
 #~ msgid " Edit "
 #~ msgstr " Επεξεργασία "
+
 #~ msgid " Sear/Repl "
 #~ msgstr " Αναζήτηση/Αντικατάσταση"
+
 #~ msgid "Key emulation"
 #~ msgstr "Εξομοίοση πληκτρολογίου"
+
 #~ msgid "Save"
 #~ msgstr "Αποθήκευση"
+
 #~ msgid "Delete"
 #~ msgstr "Διαγραφή"
+
 #~ msgid "Extension"
 #~ msgstr "Επέκταση:"
+
 #~ msgid "Size"
 #~ msgstr "Μέγεθος"
+
 #~ msgid " Emacs key: "
 #~ msgstr " Πλήκτρο Emacs: "
+
 #~ msgid "Usage:"
 #~ msgstr "Χρήστης"
+
 #~ msgid "replace &All"
 #~ msgstr "αντικατάσταση ό&λων"
+
 #~ msgid "O&ne"
 #~ msgstr "έ&Να"
+
 #~ msgid " Replacement too long. "
 #~ msgstr " Εισαγωγή ακολουθίας αντικατάστασης:"
+
 #~ msgid "Invalid hex search expression"
 #~ msgstr " Κανονική έκφραση "
+
 #~ msgid "%s bytes in %d files"
 #~ msgstr "%s byte σε %d αρχεία"
+
 #~ msgid " Cannot open file for reading: "
 #~ msgstr " Άνοιγμα αρχείου προς ανάγνωση ανεπιτυχής: "
+
 #~ msgid " Not an ordinary file: "
 #~ msgstr " Μη κανονικό αρχείο: "
+
 #~ msgid "Col %d"
 #~ msgstr "Στήλη %d"
-

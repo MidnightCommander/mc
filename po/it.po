@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.6.2\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-03-19 12:04+0200\n"
+"POT-Creation-Date: 2010-04-25 15:33+0200\n"
 "PO-Revision-Date: 2010-02-19 15:10+0100\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian <debian-l10n-italian@lists.debian.org>\n"
@@ -314,12 +314,6 @@ msgstr ""
 "Schermo di dimensione %dx%d non supportato.\n"
 "Controllare la variabile ambiente TERM.\n"
 
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s non è una directory\n"
@@ -435,8 +429,8 @@ msgid "Inconsistent extfs archive"
 msgstr "Archivio extfs inconsistente"
 
 #, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Attenzione: file %s non trovato\n"
+msgid "Warning: cannot open %s directory\n"
+msgstr "Attenzione: impossibile aprire la directory %s\n"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -655,6 +649,10 @@ msgstr " Non riesco a connettermi al server: %s "
 
 msgid " Too many open connections "
 msgstr " Troppe connessioni aperte "
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Attenzione: file %s non trovato\n"
 
 #, c-format
 msgid ""
@@ -937,7 +935,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -2903,10 +2901,10 @@ msgstr "Aperto:     %s"
 msgid "Modified:  %s"
 msgstr "Modificato: %s"
 
-#. TRANSLATORS: "Status changed", like in the stat(2) man page
-#, c-format
-msgid "Status:    %s"
-msgstr "Stato:      %s"
+#. TRANSLATORS: Time of last status change as in stat(2) man.
+#, fuzzy, c-format
+msgid "Changed:   %s"
+msgstr "&Vai a"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -3791,8 +3789,14 @@ msgstr " Cronologia "
 msgid "Background process:"
 msgstr "Processo in background:"
 
-#~ msgid "Warning: cannot open %s directory\n"
-#~ msgstr "Attenzione: impossibile aprire la directory %s\n"
+#~ msgid "%b %e  %Y"
+#~ msgstr "%b %e  %Y"
+
+#~ msgid "%b %e %H:%M"
+#~ msgstr "%b %e %H:%M"
+
+#~ msgid "Status:    %s"
+#~ msgstr "Stato:      %s"
 
 #~ msgid "Confirmation"
 #~ msgstr "Conferma"

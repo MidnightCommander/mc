@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.41\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-26 12:26+0200\n"
+"POT-Creation-Date: 2010-04-25 15:33+0200\n"
 "PO-Revision-Date: 2001-10-20 21:37+02:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -330,12 +330,6 @@ msgstr ""
 "Skærmstørrelse %dx%d er ikke understøttet.\n"
 "Tjek TERM-miljøvariabelen.\n"
 
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
 msgstr "mappe"
@@ -453,9 +447,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Inkonsistent extfs-arkiv"
 
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Advarsel: fil %s ikke fundet\n"
+#, fuzzy, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr " Kunne ikke skifte mappe"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -677,6 +671,10 @@ msgstr "Kan ikke forbinde til server %s"
 
 msgid " Too many open connections "
 msgstr " For mange åbne forbindelser "
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Advarsel: fil %s ikke fundet\n"
 
 #, c-format
 msgid ""
@@ -962,7 +960,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -2997,10 +2995,10 @@ msgstr "Læst:      %s"
 msgid "Modified:  %s"
 msgstr "Ændret:    %s"
 
-#. TRANSLATORS: "Status changed", like in the stat(2) man page
+#. TRANSLATORS: Time of last status change as in stat(2) man.
 #, fuzzy, c-format
-msgid "Status:    %s"
-msgstr "Oprettet:  %s"
+msgid "Changed:   %s"
+msgstr "Skift &Til"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -3916,6 +3914,16 @@ msgstr " Historie "
 
 msgid "Background process:"
 msgstr "Baggrundsproces:"
+
+#~ msgid "%b %e  %Y"
+#~ msgstr "%b %e  %Y"
+
+#~ msgid "%b %e %H:%M"
+#~ msgstr "%b %e %H:%M"
+
+#, fuzzy
+#~ msgid "Status:    %s"
+#~ msgstr "Oprettet:  %s"
 
 #~ msgid "File:       None"
 #~ msgstr "Fil:       Ingen"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-26 12:26+0200\n"
+"POT-Creation-Date: 2010-04-25 15:33+0200\n"
 "PO-Revision-Date: 2001-09-29 17:41+0200\n"
 "Last-Translator: Softcatalà <tradgnome@softcatala.org>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
@@ -324,12 +324,6 @@ msgstr ""
 "La mida de la pantalla %dx%d no es pot utilitzar.\n"
 "Reviseu la variable d'entorn TERM.\n"
 
-msgid "%b %e  %Y"
-msgstr "%b %e %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
 msgstr "Crea un directori nou"
@@ -448,9 +442,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "L'arxiu extfs no és consistent"
 
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Avís: no s'ha trobat el fitxer %s\n"
+#, fuzzy, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr "No he pogut canviar de directori"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -672,6 +666,10 @@ msgstr " No es pot connectar amb el servidor: %s"
 
 msgid " Too many open connections "
 msgstr " Hi ha massa connexions obertes "
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Avís: no s'ha trobat el fitxer %s\n"
 
 #, c-format
 msgid ""
@@ -960,7 +958,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -3001,10 +2999,10 @@ msgstr "Accedit:    %s"
 msgid "Modified:  %s"
 msgstr "Modificat:  %s"
 
-#. TRANSLATORS: "Status changed", like in the stat(2) man page
+#. TRANSLATORS: Time of last status change as in stat(2) man.
 #, fuzzy, c-format
-msgid "Status:    %s"
-msgstr "Creat:      %s"
+msgid "Changed:   %s"
+msgstr "Can&via a"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -3925,6 +3923,16 @@ msgstr " Historial "
 
 msgid "Background process:"
 msgstr "Procés de fons:"
+
+#~ msgid "%b %e  %Y"
+#~ msgstr "%b %e %Y"
+
+#~ msgid "%b %e %H:%M"
+#~ msgstr "%b %e %H:%M"
+
+#, fuzzy
+#~ msgid "Status:    %s"
+#~ msgstr "Creat:      %s"
 
 #~ msgid "File:       None"
 #~ msgstr "Fitxer:       cap"

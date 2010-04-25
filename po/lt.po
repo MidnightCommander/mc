@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-26 12:26+0200\n"
+"POT-Creation-Date: 2010-04-25 15:33+0200\n"
 "PO-Revision-Date: 2009-02-16 19:45+0300\n"
 "Last-Translator: Andrius Štikonas <stikonas@gmail.com>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -325,12 +325,6 @@ msgstr ""
 "Ekrano dydis %dx%d nepalaikomas.\n"
 "Patikrinkite TERM aplinkos kintamąjį.\n"
 
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s nėra aplankas\n"
@@ -445,9 +439,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Prieštaringas „extfs“ archyvas"
 
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Įspėjimas: failas %s nerasta\n"
+#, fuzzy, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr " Nepavyko pakeisti aplanko "
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -667,6 +661,10 @@ msgstr " Nepavyko prisijungti prie serverio: %s "
 
 msgid " Too many open connections "
 msgstr " Per daug prisijungimų "
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Įspėjimas: failas %s nerasta\n"
 
 #, c-format
 msgid ""
@@ -950,7 +948,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -2982,10 +2980,10 @@ msgstr "Pasiekta:  %s"
 msgid "Modified:  %s"
 msgstr "Keista:    %s"
 
-#. TRANSLATORS: "Status changed", like in the stat(2) man page
-#, c-format
-msgid "Status:    %s"
-msgstr "Būklė:     %s"
+#. TRANSLATORS: Time of last status change as in stat(2) man.
+#, fuzzy, c-format
+msgid "Changed:   %s"
+msgstr "Ei&ti į"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -3916,6 +3914,15 @@ msgstr " Istorija "
 
 msgid "Background process:"
 msgstr "Foninis procesas:"
+
+#~ msgid "%b %e  %Y"
+#~ msgstr "%b %e  %Y"
+
+#~ msgid "%b %e %H:%M"
+#~ msgstr "%b %e %H:%M"
+
+#~ msgid "Status:    %s"
+#~ msgstr "Būklė:     %s"
 
 #~ msgid "File:       None"
 #~ msgstr "Rikmena:    nėra"

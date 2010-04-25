@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-26 12:26+0200\n"
+"POT-Creation-Date: 2010-04-25 15:33+0200\n"
 "PO-Revision-Date: 2010-02-28 15:59+0100\n"
 "Last-Translator: rezso <rezso@rezso.net>\n"
 "Language-Team: Hungarian\n"
@@ -317,12 +317,6 @@ msgstr ""
 "A(z) %dx%d képernyőméret nem támogatott.\n"
 "Ellenőrizze a TERM környezeti változót.\n"
 
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H.%M"
-
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "\"%s\" nem könyvtár\n"
@@ -439,9 +433,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Inkonzisztens Extfs-archívum."
 
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Figyelem: \"%s\" fájl nem található\n"
+#, fuzzy, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr "A(z) %s könyvtár nem hozható létre"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -660,6 +654,10 @@ msgstr " Nem sikerült kapcsolódni a kiszolgálóhoz: %s "
 
 msgid " Too many open connections "
 msgstr " Túl sok megnyitott kapcsolat. "
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Figyelem: \"%s\" fájl nem található\n"
 
 #, c-format
 msgid ""
@@ -937,6 +935,7 @@ msgid "Show mc with specified skin"
 msgstr "A megadott skin használata"
 
 #. TRANSLATORS: don't translate keywords and names of colors
+#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -947,7 +946,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -956,7 +955,8 @@ msgstr ""
 "{ELŐTÉR} és {HÁTTÉR} elhagyható, ekkor az alapértékek lesznek érvényesek.\n"
 "\n"
 "Kulcsszavak:\n"
-"   Globális:         errors (hibák), reverse (inverz), gauge (folyamatjelző),\n"
+"   Globális:         errors (hibák), reverse (inverz), gauge "
+"(folyamatjelző),\n"
 "                     input (bevitel), viewunderline (aláhúzottak a\n"
 "                     megjelenítőben)\n"
 "   Fájllista:        normal, selected (kurzor), marked (kijelölt),\n"
@@ -985,7 +985,8 @@ msgstr ""
 "Színek:\n"
 "   black (fekete), gray (szürke), red (piros), brightred (élénkpiros),\n"
 "   green (zöld), brightgreen (élénkzöld), brown (barna), yellow (sárga),\n"
-"   blue (kék), brightblue (azúr), magenta (lila), brightmagenta (élénklila),\n"
+"   blue (kék), brightblue (azúr), magenta (lila), brightmagenta "
+"(élénklila),\n"
 "   cyan (türkiz), brightcyan (élénktürkiz), lightgray (világosszürke),\n"
 "   white (fehér)\n"
 "\n"
@@ -2201,16 +2202,27 @@ msgid " %s%s file error"
 msgstr " %s%s fájlhiba"
 
 #, c-format
-msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
-msgstr "A(z) \"%smc.ext\" fájl formátuma a 3.0-s verzióval módosult. Úgy tűnik, hogy a Midnight Commander telepítésekor hiba történt. Szerezzen be egy friss verziót a Midnight Commander csomagból."
+msgid ""
+"The format of the %smc.ext file has changed with version 3.0.  It seems that "
+"the installation failed.  Please fetch a fresh copy from the Midnight "
+"Commander package."
+msgstr ""
+"A(z) \"%smc.ext\" fájl formátuma a 3.0-s verzióval módosult. Úgy tűnik, hogy "
+"a Midnight Commander telepítésekor hiba történt. Szerezzen be egy friss "
+"verziót a Midnight Commander csomagból."
 
 #, c-format
 msgid " ~/%s file error "
 msgstr " ~/%s fájlhiba "
 
 #, c-format
-msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
-msgstr "A \"~/%s\" fájl formátuma a 3.0-s verzióval módosult. Lemásolhatja azt a(z) \"%smc.ext\" fájlból, vagy elkészítheti az alapján."
+msgid ""
+"The format of the ~/%s file has changed with version 3.0.  You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
+msgstr ""
+"A \"~/%s\" fájl formátuma a 3.0-s verzióval módosult. Lemásolhatja azt a(z) "
+"\"%smc.ext\" fájlból, vagy elkészítheti az alapján."
 
 msgid "DialogTitle|Copy"
 msgstr "Másolás"
@@ -2237,7 +2249,8 @@ msgid ""
 "\n"
 " Option Stable Symlinks will be disabled "
 msgstr ""
-" Távoli fájlrendszerek között nem hozhatók létre stabil szimbolikus linkek. \n"
+" Távoli fájlrendszerek között nem hozhatók létre stabil szimbolikus "
+"linkek. \n"
 "\n"
 " A \"Stabil szimbolikus linkek\" opció ki lesz kapcsolva. "
 
@@ -2521,15 +2534,6 @@ msgstr "törlése"
 
 # pl.: "dfdsfds" nevű fájl törlése?
 # (Copy, Move, Delete)
-#.
-#. * These are formats for building a prompt. Parts encoded as follows:
-#. * %o - operation from op_names1
-#. * %f - file/files or files/directories, as appropriate
-#. * %m - "with source mask" or question mark for delete
-#. * %s - source name (truncated)
-#. * %d - number of marked files
-#. * %e - "to:" or question mark for delete
-#.
 #, no-c-format
 msgid "%o %f \"%s\"%m"
 msgstr "\"%s\" %f %o%m"
@@ -2910,7 +2914,8 @@ msgid " Hotlist Load "
 msgstr " Gyorslista betöltése "
 
 #, c-format
-msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr " A{z} \"~/%s\" fájl nem írható, régi gyorslista-bejegyzések megtartva"
 
 #, c-format
@@ -2960,12 +2965,10 @@ msgstr "Elérés ideje: %s"
 msgid "Modified:  %s"
 msgstr "Módosítás:    %s"
 
-# !! Ez ext2fs-en nem 'creation', hanem az utolso metadata-valtozas...
-# Ext3 és ReiserFS esetén is: például chmod (csak) ezt a fájldátumot módosítja
-#. TRANSLATORS: "Status changed", like in the stat(2) man page
-#, c-format
-msgid "Status:    %s"
-msgstr "Metaadatmód.: %s"
+#. TRANSLATORS: Time of last status change as in stat(2) man.
+#, fuzzy, c-format
+msgid "Changed:   %s"
+msgstr "&Belépés"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -3416,7 +3419,8 @@ msgid " Enter command label: "
 msgstr " A parancshoz tartozó leírás: "
 
 msgid " Cannot run external panelize in a non-local directory "
-msgstr " Távoli és virtuális könyvtáron nem lehet külső panel-parancsot futtatni "
+msgstr ""
+" Távoli és virtuális könyvtáron nem lehet külső panel-parancsot futtatni "
 
 msgid "Find rejects after patching"
 msgstr "\"patch\" parancs utáni problémajegyzékek (*.rej) keresése"
@@ -3860,3 +3864,13 @@ msgstr " Előzmények "
 msgid "Background process:"
 msgstr "Háttérfolyamat:"
 
+#~ msgid "%b %e  %Y"
+#~ msgstr "%b %e  %Y"
+
+#~ msgid "%b %e %H:%M"
+#~ msgstr "%b %e %H.%M"
+
+# !! Ez ext2fs-en nem 'creation', hanem az utolso metadata-valtozas...
+# Ext3 és ReiserFS esetén is: például chmod (csak) ezt a fájldátumot módosítja
+#~ msgid "Status:    %s"
+#~ msgstr "Metaadatmód.: %s"

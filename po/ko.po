@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0-pre3\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-26 12:26+0200\n"
+"POT-Creation-Date: 2010-04-25 15:33+0200\n"
 "PO-Revision-Date: 2003-01-22 17:31+0900\n"
 "Last-Translator: Nam SungHyun <namsh@kldp.org>\n"
 "Language-Team: Korean <debian-l10n-korean@lists.debian.org>\n"
@@ -322,12 +322,6 @@ msgstr ""
 "화면크기 %dx%d은(는) 지원되지 않습니다.\n"
 "TERM 환경변수를 확인해 보세요.\n"
 
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s은(는) 디렉토리가 아닙니다\n"
@@ -438,9 +432,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "모순된 extfs 아카이브"
 
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "경고: 파일 %s을(를) 찾을 수 없습니다\n"
+#, fuzzy, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr "디렉토리을 바꿀 수 없습니다"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -662,6 +656,10 @@ msgstr " 서버로 연결할 수 없음: %s "
 
 msgid " Too many open connections "
 msgstr " 너무 많은 연결이 이루어짐 "
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "경고: 파일 %s을(를) 찾을 수 없습니다\n"
 
 #, c-format
 msgid ""
@@ -945,7 +943,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -2971,10 +2969,10 @@ msgstr "액세스일:  %s"
 msgid "Modified:  %s"
 msgstr "수정일:    %s"
 
-#. TRANSLATORS: "Status changed", like in the stat(2) man page
+#. TRANSLATORS: Time of last status change as in stat(2) man.
 #, fuzzy, c-format
-msgid "Status:    %s"
-msgstr "만든날:    %s"
+msgid "Changed:   %s"
+msgstr "..로 바꾸기(&T)"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -3887,6 +3885,16 @@ msgstr " 히스토리 "
 
 msgid "Background process:"
 msgstr "Background 프로세스:"
+
+#~ msgid "%b %e  %Y"
+#~ msgstr "%b %e  %Y"
+
+#~ msgid "%b %e %H:%M"
+#~ msgstr "%b %e %H:%M"
+
+#, fuzzy
+#~ msgid "Status:    %s"
+#~ msgstr "만든날:    %s"
 
 #~ msgid "File:       None"
 #~ msgstr "파일:     아님"

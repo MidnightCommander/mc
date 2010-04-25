@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc \n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-26 12:26+0200\n"
+"POT-Creation-Date: 2010-04-25 15:33+0200\n"
 "PO-Revision-Date: 2000-06-22 00:00+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -322,12 +322,6 @@ msgstr ""
 "Velikost zaslona %dx%d ni podprta.\n"
 "Preverite okoljsko spremenljivko TERM.\n"
 
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s ni imenik\n"
@@ -442,9 +436,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Nekonsistenten extfs arhiv"
 
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Opozorilo: datoteka %s ni bila najdena\n"
+#, fuzzy, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr "Ne morem spremeniti imenika"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -667,6 +661,10 @@ msgstr " Ne morem se povezati s strežnikom: %s "
 
 msgid " Too many open connections "
 msgstr " Preveč odprtih povezav "
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Opozorilo: datoteka %s ni bila najdena\n"
 
 #, c-format
 msgid ""
@@ -950,7 +948,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -2980,10 +2978,10 @@ msgstr "Dostopan:  %s"
 msgid "Modified:  %s"
 msgstr "Modificiran %s"
 
-#. TRANSLATORS: "Status changed", like in the stat(2) man page
+#. TRANSLATORS: Time of last status change as in stat(2) man.
 #, fuzzy, c-format
-msgid "Status:    %s"
-msgstr "Ustvarjen  %s"
+msgid "Changed:   %s"
+msgstr "Pojdi &V"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -3899,6 +3897,16 @@ msgstr " Zgodovina "
 
 msgid "Background process:"
 msgstr "Proces v ozadju:"
+
+#~ msgid "%b %e  %Y"
+#~ msgstr "%b %e  %Y"
+
+#~ msgid "%b %e %H:%M"
+#~ msgstr "%b %e %H:%M"
+
+#, fuzzy
+#~ msgid "Status:    %s"
+#~ msgstr "Ustvarjen  %s"
 
 #~ msgid "File:       None"
 #~ msgstr "Datoteka:   Brez"

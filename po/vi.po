@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-26 12:26+0200\n"
+"POT-Creation-Date: 2010-04-25 15:33+0200\n"
 "PO-Revision-Date: 2006-08-16 16:20+0400\n"
 "Last-Translator: Phan Vĩnh Thịnh <teppi82@gmail.com>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
@@ -324,12 +324,6 @@ msgstr ""
 "Kích thước màn hình %dx%d không được hỗ trợ.\n"
 "Hãy kiểm tra biến môi trường TERM.\n"
 
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s không phải là một thư mục\n"
@@ -444,9 +438,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Tập tin nén extfs không thích hợp"
 
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Cảnh báo: không tìm thấy tập tin %s\n"
+#, fuzzy, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr "Không thay đổi được thư mục"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -666,6 +660,10 @@ msgstr " Không kết nối được tới máy chủ: %s "
 
 msgid " Too many open connections "
 msgstr " Quá nhiều kết nối mở "
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Cảnh báo: không tìm thấy tập tin %s\n"
 
 #, c-format
 msgid ""
@@ -950,7 +948,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -2985,10 +2983,10 @@ msgstr "Truy cập:     %s"
 msgid "Modified:  %s"
 msgstr "Sửa đổi:      %s"
 
-#. TRANSLATORS: "Status changed", like in the stat(2) man page
-#, c-format
-msgid "Status:    %s"
-msgstr "Trạng thái:  %s"
+#. TRANSLATORS: Time of last status change as in stat(2) man.
+#, fuzzy, c-format
+msgid "Changed:   %s"
+msgstr "&Chuyển tới"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -3921,6 +3919,15 @@ msgstr " Lịch sử"
 
 msgid "Background process:"
 msgstr "Tiến trình nền sau:"
+
+#~ msgid "%b %e  %Y"
+#~ msgstr "%b %e  %Y"
+
+#~ msgid "%b %e %H:%M"
+#~ msgstr "%b %e %H:%M"
+
+#~ msgid "Status:    %s"
+#~ msgstr "Trạng thái:  %s"
 
 #~ msgid "File:       None"
 #~ msgstr "Tập tin:      Không có"

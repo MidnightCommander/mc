@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mn\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-26 12:26+0200\n"
+"POT-Creation-Date: 2010-04-25 15:33+0200\n"
 "PO-Revision-Date: 2003-03-04 21:16+0100\n"
 "Last-Translator: Sanlig Badral <badral@chinggis.com>\n"
 "Language-Team: Mongolian <mn@li.org>\n"
@@ -327,12 +327,6 @@ msgstr ""
 "Дэлгэцийн %dx%d хэмжээсийг сонгох боломжгүй байна.\n"
 "TERM хувьсагчийн утгыг шалгана уу.\n"
 
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s нь лавлах биш байна\n"
@@ -447,9 +441,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Алдаатай архив extfs"
 
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Анхааруулга: файл %s алга байна\n"
+#, fuzzy, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr "Хавтас руу шилжиж чадсангүй"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -671,6 +665,10 @@ msgstr "Сервер рүү холбогдож чадсангүй %s "
 
 msgid " Too many open connections "
 msgstr " Маш олон холболтууд "
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Анхааруулга: файл %s алга байна\n"
 
 #, c-format
 msgid ""
@@ -955,7 +953,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -2984,10 +2982,10 @@ msgstr "Хандагдсан: %s"
 msgid "Modified:  %s"
 msgstr "Засагдсан:   %s"
 
-#. TRANSLATORS: "Status changed", like in the stat(2) man page
+#. TRANSLATORS: Time of last status change as in stat(2) man.
 #, fuzzy, c-format
-msgid "Status:    %s"
-msgstr "үүссэн:    %s"
+msgid "Changed:   %s"
+msgstr "руу &Солих"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -3901,6 +3899,16 @@ msgstr "Бүртгэл"
 
 msgid "Background process:"
 msgstr "Арын процесс:"
+
+#~ msgid "%b %e  %Y"
+#~ msgstr "%b %e  %Y"
+
+#~ msgid "%b %e %H:%M"
+#~ msgstr "%b %e %H:%M"
+
+#, fuzzy
+#~ msgid "Status:    %s"
+#~ msgstr "үүссэн:    %s"
 
 #~ msgid "File:       None"
 #~ msgstr "Файл:      Байхгүй"

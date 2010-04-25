@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-26 12:26+0200\n"
+"POT-Creation-Date: 2010-04-25 15:33+0200\n"
 "PO-Revision-Date: 2001-09-26 16:43GMT +0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
@@ -324,12 +324,6 @@ msgstr ""
 "%dx%d ekran böyüklüyü dəstəklənmir.\n"
 "TERM sistem dəyişgənini yoxla.\n"
 
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
 msgstr "qovluq"
@@ -447,9 +441,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "extfs arxivi xəsərlidir"
 
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Xəbərdarlıq: %s faylı tapılmadı\n"
+#, fuzzy, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr "Qovluq dəyişdirilə bilmir"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -671,6 +665,10 @@ msgstr " Vericiyə bağlana bilmədim : %s "
 
 msgid " Too many open connections "
 msgstr " Çox miqdarda açıq bağlantı var "
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Xəbərdarlıq: %s faylı tapılmadı\n"
 
 #, c-format
 msgid ""
@@ -956,7 +954,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -2990,10 +2988,10 @@ msgstr "Çatılıb:\t%s"
 msgid "Modified:  %s"
 msgstr "Düzəldilib:\t%s"
 
-#. TRANSLATORS: "Status changed", like in the stat(2) man page
+#. TRANSLATORS: Time of last status change as in stat(2) man.
 #, fuzzy, c-format
-msgid "Status:    %s"
-msgstr "Yaradılıb :   %s"
+msgid "Changed:   %s"
+msgstr "&Buraya keç"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -3909,6 +3907,16 @@ msgstr " Tarix "
 
 msgid "Background process:"
 msgstr "Arxaplan gedişatı:"
+
+#~ msgid "%b %e  %Y"
+#~ msgstr "%b %e  %Y"
+
+#~ msgid "%b %e %H:%M"
+#~ msgstr "%b %e %H:%M"
+
+#, fuzzy
+#~ msgid "Status:    %s"
+#~ msgstr "Yaradılıb :   %s"
 
 #~ msgid "File:       None"
 #~ msgstr "Fayl :     Yok"

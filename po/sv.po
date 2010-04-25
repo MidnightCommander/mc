@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-26 12:26+0200\n"
+"POT-Creation-Date: 2010-04-25 15:33+0200\n"
 "PO-Revision-Date: 2003-01-22 18:10+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <debian-l10n-swedish@lists.debian.org>\n"
@@ -329,12 +329,6 @@ msgstr ""
 "Skärmstorleken %d×%d stöds inte.\n"
 "Kontrollera miljövariabeln TERM.\n"
 
-msgid "%b %e  %Y"
-msgstr "%e %b  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%e %b %H.%M"
-
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s är inte en katalog\n"
@@ -450,9 +444,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Inkonsistent extfsfil"
 
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Varning: filen %s kunde inte hittas\n"
+#, fuzzy, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr "Kan inte byta katalog"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -678,6 +672,10 @@ msgstr "Kan inte ansluta till värd: %s"
 
 msgid " Too many open connections "
 msgstr " För många aktiva anslutningar "
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Varning: filen %s kunde inte hittas\n"
 
 #, c-format
 msgid ""
@@ -964,7 +962,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -3016,10 +3014,10 @@ msgstr "Accessad:  %s"
 msgid "Modified:  %s"
 msgstr "Modifierad: %s"
 
-#. TRANSLATORS: "Status changed", like in the stat(2) man page
+#. TRANSLATORS: Time of last status change as in stat(2) man.
 #, fuzzy, c-format
-msgid "Status:    %s"
-msgstr "Skapad:    %s"
+msgid "Changed:   %s"
+msgstr "byt &Till"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -3940,6 +3938,16 @@ msgstr " Historik "
 
 msgid "Background process:"
 msgstr "Bakgrundsprocess:"
+
+#~ msgid "%b %e  %Y"
+#~ msgstr "%e %b  %Y"
+
+#~ msgid "%b %e %H:%M"
+#~ msgstr "%e %b %H.%M"
+
+#, fuzzy
+#~ msgid "Status:    %s"
+#~ msgstr "Skapad:    %s"
 
 #~ msgid "File:       None"
 #~ msgstr "Fil:        Ingen"

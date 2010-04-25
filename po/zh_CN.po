@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-03-19 12:04+0200\n"
+"POT-Creation-Date: 2010-04-25 15:33+0200\n"
 "PO-Revision-Date: 2010-03-09 14:51+0800\n"
 "Last-Translator: Jake Li <gnozil@gmail.com>\n"
 "Language-Team: Simplified Chinese\n"
@@ -312,12 +312,6 @@ msgstr ""
 "不支持屏幕大小 %dx%d。\n"
 "检查 TERM 环境变量。\n"
 
-msgid "%b %e  %Y"
-msgstr "%b %e %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s不是目录\n"
@@ -434,8 +428,8 @@ msgid "Inconsistent extfs archive"
 msgstr "不完整的 extfs 归档"
 
 #, c-format
-msgid "Warning: file %s not found\n"
-msgstr "警告：没有找到文件 %s\n"
+msgid "Warning: cannot open %s directory\n"
+msgstr "警告：不能打开目录%s\n"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -654,6 +648,10 @@ msgstr " 无法连接到服务器：%s "
 
 msgid " Too many open connections "
 msgstr " 太多打开的连接 "
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "警告：没有找到文件 %s\n"
 
 #, c-format
 msgid ""
@@ -925,6 +923,7 @@ msgid "Show mc with specified skin"
 msgstr "用指定的皮肤显示MC"
 
 #. TRANSLATORS: don't translate keywords and names of colors
+#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -935,7 +934,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -2890,10 +2889,10 @@ msgstr "访问： %s"
 msgid "Modified:  %s"
 msgstr "修改： %s"
 
-#. TRANSLATORS: "Status changed", like in the stat(2) man page
-#, c-format
-msgid "Status:    %s"
-msgstr "状态： %s"
+#. TRANSLATORS: Time of last status change as in stat(2) man.
+#, fuzzy, c-format
+msgid "Changed:   %s"
+msgstr "改到(&T)"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -3775,8 +3774,14 @@ msgstr "历史"
 msgid "Background process:"
 msgstr "后台进程："
 
-#~ msgid "Warning: cannot open %s directory\n"
-#~ msgstr "警告：不能打开目录%s\n"
+#~ msgid "%b %e  %Y"
+#~ msgstr "%b %e %Y"
+
+#~ msgid "%b %e %H:%M"
+#~ msgstr "%b %e %H:%M"
+
+#~ msgid "Status:    %s"
+#~ msgstr "状态： %s"
 
 #~ msgid "Confirmation"
 #~ msgstr "确认"

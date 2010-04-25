@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: uk\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-03-19 12:04+0200\n"
+"POT-Creation-Date: 2010-04-25 15:33+0200\n"
 "PO-Revision-Date: 2009-10-31 19:01+0200\n"
 "Last-Translator: Oleksandr Natalenko <pfactum@gmail.com>\n"
 "Language-Team: uk <kde-i18n-doc@kde.org>\n"
@@ -314,12 +314,6 @@ msgstr ""
 "Розмір екрану %dx%d не підтримується.\n"
 "Перевірте змінну середовища TERM.\n"
 
-msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
-
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s не є каталогом\n"
@@ -434,9 +428,10 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Неузгоджений архів extfs"
 
+# , c-format
 #, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Увага: файл %s не знайдений\n"
+msgid "Warning: cannot open %s directory\n"
+msgstr "Попередження: не вдалося відкрити каталог %s\n"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -657,6 +652,10 @@ msgstr " Не вдається з'єднатися з сервером: %s"
 
 msgid " Too many open connections "
 msgstr " Надто багато відкритих з'єднань "
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Увага: файл %s не знайдений\n"
 
 #, c-format
 msgid ""
@@ -928,6 +927,7 @@ msgid "Show mc with specified skin"
 msgstr "Показувати mc із обраним скіном"
 
 #. TRANSLATORS: don't translate keywords and names of colors
+#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -938,7 +938,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -2899,10 +2899,10 @@ msgstr "Останній доступ:  %s"
 msgid "Modified:  %s"
 msgstr "Змінено:   %s"
 
-#. TRANSLATORS: "Status changed", like in the stat(2) man page
-#, c-format
-msgid "Status:    %s"
-msgstr "Статус:    %s"
+#. TRANSLATORS: Time of last status change as in stat(2) man.
+#, fuzzy, c-format
+msgid "Changed:   %s"
+msgstr "Пере&йти до"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -3791,9 +3791,14 @@ msgstr "Історія команд"
 msgid "Background process:"
 msgstr "Фоновий процес:"
 
-# , c-format
-#~ msgid "Warning: cannot open %s directory\n"
-#~ msgstr "Попередження: не вдалося відкрити каталог %s\n"
+#~ msgid "%b %e  %Y"
+#~ msgstr "%b %e  %Y"
+
+#~ msgid "%b %e %H:%M"
+#~ msgstr "%b %e %H:%M"
+
+#~ msgid "Status:    %s"
+#~ msgstr "Статус:    %s"
 
 #~ msgid "Confirmation"
 #~ msgstr "Підтвердження"

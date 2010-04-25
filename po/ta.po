@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-26 12:26+0200\n"
+"POT-Creation-Date: 2010-04-25 15:33+0200\n"
 "PO-Revision-Date: 2000-10-26 11:00 CST\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil <ubuntu-l10n-tam@lists.ubuntu.com>\n"
@@ -306,12 +306,6 @@ msgid ""
 "Check the TERM environment variable.\n"
 msgstr ""
 
-msgid "%b %e  %Y"
-msgstr ""
-
-msgid "%b %e %H:%M"
-msgstr ""
-
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
 msgstr "புதிய முனையம் ஒனறைப் படைக்கும்"
@@ -412,9 +406,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr ""
 
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr ""
+#, fuzzy, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr "புதிய முனையம் ஒனறைப் படைக்கும்"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -627,6 +621,10 @@ msgid " Cannot connect to server: %s "
 msgstr ""
 
 msgid " Too many open connections "
+msgstr ""
+
+#, c-format
+msgid "Warning: file %s not found\n"
 msgstr ""
 
 #, c-format
@@ -891,7 +889,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -2787,9 +2785,9 @@ msgstr ""
 msgid "Modified:  %s"
 msgstr ""
 
-#. TRANSLATORS: "Status changed", like in the stat(2) man page
+#. TRANSLATORS: Time of last status change as in stat(2) man.
 #, c-format
-msgid "Status:    %s"
+msgid "Changed:   %s"
 msgstr ""
 
 #, c-format

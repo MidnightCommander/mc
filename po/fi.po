@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gmc finnish 0.01\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-02-26 12:26+0200\n"
+"POT-Creation-Date: 2010-04-25 15:33+0200\n"
 "PO-Revision-Date: 1999-08-23 17:30+0200\n"
 "Last-Translator: Mikko Rauhala <mjr@iki.fi>\n"
 "Language-Team: Finnish <debian-l10n-finnish@lists.debian.org>\n"
@@ -306,12 +306,6 @@ msgid ""
 "Check the TERM environment variable.\n"
 msgstr ""
 
-msgid "%b %e  %Y"
-msgstr ""
-
-msgid "%b %e %H:%M"
-msgstr ""
-
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
 msgstr "Luo uusi hakemisto"
@@ -417,9 +411,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr ""
 
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr ""
+#, fuzzy, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr "Ei voitu vaihtaa hakemistoa"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -642,6 +636,10 @@ msgstr ""
 " %s "
 
 msgid " Too many open connections "
+msgstr ""
+
+#, c-format
+msgid "Warning: file %s not found\n"
 msgstr ""
 
 #, c-format
@@ -916,7 +914,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -2865,10 +2863,10 @@ msgstr ""
 msgid "Modified:  %s"
 msgstr ""
 
-#. TRANSLATORS: "Status changed", like in the stat(2) man page
-#, c-format
-msgid "Status:    %s"
-msgstr ""
+#. TRANSLATORS: Time of last status change as in stat(2) man.
+#, fuzzy, c-format
+msgid "Changed:   %s"
+msgstr "&Pitkä tiedostolista"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"

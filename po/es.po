@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.7.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-10 10:26+0200\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2010-04-25 15:33+0200\n"
 "PO-Revision-Date: 2010-04-10 10:25+0200\n"
 "Last-Translator: David Martín <dmartina@excite.com\n"
 "Language-Team: Spanish <debian-l10n-spanish@lists.debian.org>\n"
@@ -311,12 +311,6 @@ msgstr ""
 "El tamaño de ventana %dx%d no está soportado.\n"
 "Verifique el valor de la variable de entorno TERM.\n"
 
-msgid "%b %e  %Y"
-msgstr "%e %b  %Y"
-
-msgid "%b %e %H:%M"
-msgstr "%e %b %H:%M"
-
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s no es un directorio\n"
@@ -431,9 +425,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Archivo extfs inconsistente"
 
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Atención: no se encuentra el archivo %s\n"
+#, fuzzy, c-format
+msgid "Warning: cannot open %s directory\n"
+msgstr "Imposible crear directorio %s"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -652,6 +646,10 @@ msgstr " Imposible conectar con servidor: %s "
 
 msgid " Too many open connections "
 msgstr " Demasiadas conexiones en curso "
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Atención: no se encuentra el archivo %s\n"
 
 #, c-format
 msgid ""
@@ -923,6 +921,7 @@ msgid "Show mc with specified skin"
 msgstr "Mostrar mc con la careta (skin) indicada"
 
 #. TRANSLATORS: don't translate keywords and names of colors
+#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -933,7 +932,7 @@ msgid ""
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
-"   Menus:        menu, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menus:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 msgstr ""
@@ -2888,10 +2887,10 @@ msgstr "Accedido:   %s"
 msgid "Modified:  %s"
 msgstr "Modificado: %s"
 
-#. TRANSLATORS: "Status changed", like in the stat(2) man page
-#, c-format
-msgid "Status:    %s"
-msgstr "Cambiado:   %s"
+#. TRANSLATORS: Time of last status change as in stat(2) man.
+#, fuzzy, c-format
+msgid "Changed:   %s"
+msgstr "camb&Iar a"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -3776,3 +3775,12 @@ msgstr " Historia "
 
 msgid "Background process:"
 msgstr "Procesos en 2º plano"
+
+#~ msgid "%b %e  %Y"
+#~ msgstr "%e %b  %Y"
+
+#~ msgid "%b %e %H:%M"
+#~ msgstr "%e %b %H:%M"
+
+#~ msgid "Status:    %s"
+#~ msgstr "Cambiado:   %s"
