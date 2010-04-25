@@ -535,8 +535,12 @@ ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super, const char 
 
     if (ftpfs_get_reply (me, SUP.sock, reply_string, sizeof (reply_string) - 1) == COMPLETE)
     {
-        g_strup (reply_string);
-        SUP.remote_is_amiga = strstr (reply_string, "AMIGA") != 0;
+        char *reply_up;
+
+        reply_up = g_ascii_strup (reply_string, -1);
+        SUP.remote_is_amiga = strstr (reply_up, "AMIGA") != 0;
+        g_free (reply_up);
+
         if (MEDATA->logfile)
         {
             fprintf (MEDATA->logfile, "MC -- remote_is_amiga =  %d\n", SUP.remote_is_amiga);
