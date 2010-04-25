@@ -574,6 +574,24 @@ str_8bit_release_search_needle (char *needle, int case_sen)
     (void) needle;
 }
 
+static char *
+str_8bit_strdown (const char *str)
+{
+    char *rets;
+
+    rets = g_strdup (str);
+    if (rets == NULL)
+        return NULL;
+
+    while (*rets != '\0')
+    {
+        *rets = char_tolower (*rets);
+        rets++;
+    }
+    return rets;
+}
+
+
 static const char *
 str_8bit_search_first (const char *text, const char *search, int case_sen)
 {
@@ -582,8 +600,8 @@ str_8bit_search_first (const char *text, const char *search, int case_sen)
     const char *match;
     size_t offsset;
 
-    fold_text = (case_sen) ? (char *) text : g_strdown (g_strdup (text));
-    fold_search = (case_sen) ? (char *) search : g_strdown (g_strdup (search));
+    fold_text = (case_sen) ? (char *) text : str_8bit_strdown (text);
+    fold_search = (case_sen) ? (char *) search : str_8bit_strdown (search);
 
     match = g_strstr_len (fold_text, -1, fold_search);
     if (match != NULL)
@@ -609,8 +627,8 @@ str_8bit_search_last (const char *text, const char *search, int case_sen)
     const char *match;
     size_t offsset;
 
-    fold_text = (case_sen) ? (char *) text : g_strdown (g_strdup (text));
-    fold_search = (case_sen) ? (char *) search : g_strdown (g_strdup (search));
+    fold_text = (case_sen) ? (char *) text : str_8bit_strdown (text);
+    fold_search = (case_sen) ? (char *) search : str_8bit_strdown (search);
 
     match = g_strrstr_len (fold_text, -1, fold_search);
     if (match != NULL)
@@ -681,7 +699,7 @@ str_8bit_fix_string (char *text)
 static char *
 str_8bit_create_key (const char *text, int case_sen)
 {
-    return (case_sen) ? (char *) text : g_strdown (g_strdup (text));
+    return (case_sen) ? (char *) text : str_8bit_strdown (text);
 }
 
 static int
