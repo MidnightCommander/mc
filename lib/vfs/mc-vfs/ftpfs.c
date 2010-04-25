@@ -682,7 +682,7 @@ ftpfs_check_proxy (const char *host)
             if (!ld)
                 return 0;
         }
-        else if (!g_strcasecmp (host, domain))
+        else if (g_ascii_strcasecmp (host, domain) == 0)
             return 0;
     }
 
@@ -2153,7 +2153,7 @@ ftpfs_find_machine (const char *host, const char *domain)
         if (ftpfs_netrc_next () == NETRC_NONE)
             break;
 
-        if (g_strcasecmp (host, buffer))
+        if (g_ascii_strcasecmp (host, buffer) != 0)
         {
             /* Try adding our domain to short names in .netrc */
             const char *host_domain = strchr (host, '.');
@@ -2161,7 +2161,7 @@ ftpfs_find_machine (const char *host, const char *domain)
                 continue;
 
             /* Compare domain part */
-            if (g_strcasecmp (host_domain, domain))
+            if (g_ascii_strcasecmp (host_domain, domain) != 0)
                 continue;
 
             /* Compare local part */

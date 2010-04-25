@@ -659,9 +659,36 @@ str_8bit_ncompare (const char *t1, const char *t2)
 }
 
 static int
-str_8bit_casecmp (const char *t1, const char *t2)
+str_8bit_casecmp (const char *s1, const char *s2)
 {
-    return g_strcasecmp (t1, t2);
+    /* code from GLib */
+
+#ifdef HAVE_STRCASECMP
+    g_return_val_if_fail (s1 != NULL, 0);
+    g_return_val_if_fail (s2 != NULL, 0);
+
+    return strcasecmp (s1, s2);
+#else
+    gint c1, c2;
+
+    g_return_val_if_fail (s1 != NULL, 0);
+    g_return_val_if_fail (s2 != NULL, 0);
+
+    while (*s1 != '\0' && *s2 != '\0')
+    {
+        /* According to A. Cox, some platforms have islower's that
+         * don't work right on non-uppercase
+         */
+        c1 = isupper ((guchar) *s1) ? tolower ((guchar) *s1) : *s1;
+        c2 = isupper ((guchar) *s2) ? tolower ((guchar) *s2) : *s2;
+        if (c1 != c2)
+            return (c1 - c2);
+        s1++;
+        s2++;
+    }
+
+    return (((gint)(guchar) *s1) - ((gint)(guchar) *s2));
+#endif
 }
 
 static int
