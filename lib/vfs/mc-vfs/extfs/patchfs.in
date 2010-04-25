@@ -26,7 +26,7 @@ my $parsedates = eval 'require Date::Parse';
 my $unified_header=qr/^--- .*\n\+\+\+ .*\n$/;
 my $unified_extract=qr/^--- ([^\s]+).*\n\+\+\+ ([^\s]+)\s*([^\t\n]*)/;
 my $unified_contents=qr/^([+\-\\ \n]|@@ .* @@)/;
-my $unified_hunk=qr/@@ -(\d+)(,(\d+))? \+(\d+)(,(\d+)) @@.*\n/;
+my $unified_hunk=qr/@@ -(\d+)(,(\d+))? \+(\d+)(,(\d+))? @@.*\n/;
 
 my $context_header=qr/^\*\*\* .*\n--- .*\n$/;
 my $context_extract=qr/^\*\*\* ([^\s]+).*\n--- ([^\s]+)\s*([^\t\n]*)/;
