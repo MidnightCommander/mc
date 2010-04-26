@@ -960,6 +960,12 @@ void
 diff_view_cmd (void)
 {
     dview_diff_cmd ();
+
+    if (mc_run_mode == MC_RUN_FULL)
+    {
+        update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+        repaint_screen ();
+    }
 }
 #endif
 
