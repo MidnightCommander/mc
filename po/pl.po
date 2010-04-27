@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
 "POT-Creation-Date: 2010-04-25 15:33+0200\n"
-"PO-Revision-Date: 2010-02-27 00:09+0100\n"
+"PO-Revision-Date: 2010-04-27 22:40+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <trans-pl@lists.fedoraproject.org>\n"
 "MIME-Version: 1.0\n"
@@ -426,9 +426,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Niespójne archiwum extfs"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Warning: cannot open %s directory\n"
-msgstr "Nie można utworzyć katalogu %s"
+msgstr "Ostrzeżenie: nie można otworzyć katalogu %s\n"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -922,7 +922,6 @@ msgid "Show mc with specified skin"
 msgstr "Wyświetla program mc za pomocą podanej skórki"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -946,7 +945,8 @@ msgstr ""
 "   Wyświetlanie plików: normal, selected, marked, markselect\n"
 "   Pola dialogowe:      dnormal, dfocus, dhotnormal, dhotfocus,\n"
 "                        errdhotnormal, errdhotfocus\n"
-"   Menu:                menu, menuhot, menusel, menuhotsel\n"
+"   Menu:                menunormal, menuhot, menusel, menuhotsel,\n"
+"                        menuinactive\n"
 "   Edytor:              editnormal, editbold, editmarked, editwhitespace,\n"
 "                        editlinestate\n"
 
@@ -1301,7 +1301,7 @@ msgid " Filter command and arguments:"
 msgstr " Polecenie i parametry filtra:"
 
 msgid "Create a new Directory"
-msgstr "Utworzenie nowego katalogu"
+msgstr "Tworzenie nowego katalogu"
 
 msgid " Enter directory name:"
 msgstr " Proszę podać nazwę katalogu:"
@@ -2891,9 +2891,9 @@ msgid "Modified:  %s"
 msgstr "Zmodyfikowany:  %s"
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
-#, fuzzy, c-format
+#, c-format
 msgid "Changed:   %s"
-msgstr "Zmień &na"
+msgstr "Zmieniony:   %s"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -3062,7 +3062,7 @@ msgid "&Filter..."
 msgstr "&Filtr..."
 
 msgid "&Encoding..."
-msgstr "Kodowani&e..."
+msgstr "&Kodowanie..."
 
 msgid "&Network link..."
 msgstr "Połącze&nie sieciowe..."
@@ -3077,7 +3077,7 @@ msgid "SM&B link..."
 msgstr "Połączenie SM&B..."
 
 msgid "&Rescan"
-msgstr "P&rzeskanuj ponownie"
+msgstr "Odświ&eż"
 
 msgid "&View"
 msgstr "&Podgląd"
@@ -3779,12 +3779,3 @@ msgstr " Historia "
 
 msgid "Background process:"
 msgstr "Proces w tle:"
-
-#~ msgid "%b %e  %Y"
-#~ msgstr "%e.%m.%Y "
-
-#~ msgid "%b %e %H:%M"
-#~ msgstr "%e.%m %H:%M"
-
-#~ msgid "Status:    %s"
-#~ msgstr "Stan:    %s"
