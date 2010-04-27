@@ -2852,7 +2852,7 @@ buttonbar_call (WButtonBar * bb, int i)
 {
     cb_ret_t ret = MSG_NOT_HANDLED;
 
-    if (bb != NULL)
+    if ((bb != NULL) && (bb->labels[i].command != CK_Ignore_Key))
         ret = bb->widget.parent->callback (bb->widget.parent,
                                            (Widget *) bb, DLG_ACTION,
                                            bb->labels[i].command, bb->labels[i].receiver);

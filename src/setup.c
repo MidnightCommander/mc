@@ -356,7 +356,7 @@ save_panel_types (void)
 {
     panel_view_mode_t type;
 
-    if ((view_one_file != NULL) || (edit_one_file != NULL))
+    if (mc_run_mode != MC_RUN_FULL)
         return;
 
     if (!mc_config_get_int (mc_main_config, CONFIG_APP_SECTION,
@@ -812,11 +812,11 @@ load_setup (void)
     if (startup_left_mode != view_listing && startup_right_mode != view_listing)
         startup_left_mode = view_listing;
 
-    if (!other_dir)
+    if (mc_run_param1 == NULL)
     {
         buffer = mc_config_get_string (mc_panels_config, "Dirs", "other_dir", ".");
         if (vfs_file_is_local (buffer))
-            other_dir = buffer;
+            mc_run_param1 = buffer;
         else
             g_free (buffer);
     }
@@ -1085,6 +1085,10 @@ load_keymap_defs (void)
         help_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
         load_keymap_from_section ("help", help_keymap, mc_global_keymap);
 
+#ifdef USE_DIFF_VIEW
+        diff_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
+        load_keymap_from_section ("diffviewer", diff_keymap, mc_global_keymap);
+#endif
         mc_config_deinit (mc_global_keymap);
     }
 }
@@ -1114,6 +1118,10 @@ free_keymap_defs (void)
         g_array_free (tree_keymap, TRUE);
     if (help_keymap != NULL)
         g_array_free (help_keymap, TRUE);
+#ifdef USE_DIFF_VIEW
+    if (diff_keymap != NULL)
+        g_array_free (diff_keymap, TRUE);
+#endif
 }
 
 void

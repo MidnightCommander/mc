@@ -55,4 +55,9 @@ extern const global_keymap_t default_tree_keymap[];
 /* help.c */
 extern const global_keymap_t default_help_keymap[];
 
+#ifdef USE_DIFF_VIEW
+/* yview.c */
+extern const global_keymap_t default_diff_keymap[];
+#endif
+
 #endif					/* MC_KEYBIND_H */

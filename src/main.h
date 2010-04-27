@@ -9,6 +9,31 @@
 #include "lib/global.h"
 #include "keybind.h"
 
+/* run mode and params */
+typedef enum
+{
+    MC_RUN_FULL = 0,
+    MC_RUN_EDITOR,
+    MC_RUN_VIEWER,
+    MC_RUN_DIFFVIEWER
+} mc_run_mode_t;
+
+extern mc_run_mode_t mc_run_mode;
+/*
+ * MC_RUN_FULL: dir for left panel
+ * MC_RUN_EDITOR: file to edit
+ * MC_RUN_VIEWER: file to view
+ * MC_RUN_DIFFVIEWER: first file to compare
+ */
+extern char *mc_run_param0;
+/*
+ * MC_RUN_FULL: dir for right panel
+ * MC_RUN_EDITOR: unused
+ * MC_RUN_VIEWER: unused
+ * MC_RUN_DIFFVIEWER: second file to compare
+ */
+extern char *mc_run_param1;
+
 /* Toggling functions */
 void toggle_fast_reload (void);
 void toggle_mix_all_files (void);
@@ -29,8 +54,6 @@ struct WButtonBar;
 void midnight_set_buttonbar (struct WButtonBar *b);
 
 /* See main.c for details on these variables */
-extern const char *edit_one_file;
-extern const char *view_one_file;
 extern int mark_moves_down;
 extern int auto_menu;
 extern int pause_after_run;
@@ -39,7 +62,6 @@ extern int use_internal_view;
 extern int use_internal_edit;
 extern int fast_reload_w;
 extern int clear_before_exec;
-extern char *other_dir;
 extern int mouse_move_pages;
 
 extern int option_tab_spacing;
@@ -99,11 +121,18 @@ extern GArray *panel_keymap;
 extern GArray *input_keymap;
 extern GArray *tree_keymap;
 extern GArray *help_keymap;
+#ifdef USE_DIFF_VIEW
+extern GArray *diff_keymap;
+#endif
 
 extern const global_keymap_t *panel_map;
 extern const global_keymap_t *input_map;
 extern const global_keymap_t *tree_map;
 extern const global_keymap_t *help_map;
+
+#ifdef USE_DIFF_VIEW
+extern const global_keymap_t *diff_map;
+#endif
 
 #ifdef HAVE_SUBSHELL_SUPPORT
 void do_update_prompt (void);
@@ -129,7 +158,6 @@ void print_vfs_message(const char *msg, ...)
     __attribute__ ((format (__printf__, 1, 2)));
 
 extern const char *mc_prompt;
-extern const char *edit_one_file;
 extern char *mc_home;
 extern char *mc_home_alt;
 

@@ -4,6 +4,9 @@ if USE_EDIT
 SUBDIRS += editor
 endif
 
+if USE_DIFF
+SUBDIRS += diffviewer
+endif
 
 AM_CPPFLAGS = -DDATADIR=\""$(pkgdatadir)/"\" \
 	-DLOCALEDIR=\""$(localedir)"\" \
@@ -36,16 +39,22 @@ if USE_EDIT
 EDITLIB = editor/libedit.la
 endif
 
+if USE_DIFF
+DIFFLIB = diffviewer/libdiffviewer.la
+endif
+
 SRC_charset = charsets.c charsets.h selcodepage.c selcodepage.h
 
 if CHARSET
     SRC_USE_charset=$(SRC_charset)
 endif
 
+
 mc_LDADD = \
 	../lib/libmc.la \
-	$(EDITLIB) \
 	viewer/libmcviewer.la \
+	$(EDITLIB) \
+	$(DIFFLIB) \
 	$(INTLLIBS) $(MCLIBS) $(SLANGLIB) $(LIBICONV) \
 	$(GLIB_LIBS) $(PCRE_LIBS)
 
@@ -134,6 +143,9 @@ install-exec-hook:
 if USE_EDIT
 	$(MAKE) install_mcedit
 endif
+if USE_DIFF
+	$(MAKE) install_mcdiff
+endif
 
 #
 # Make relative symlinks, but do the right thing if LN_S is `ln' or `cp'.
@@ -144,8 +156,14 @@ install_mcview:
 install_mcedit:
 	cd $(DESTDIR)$(bindir)/$(binprefix) && rm -f mcedit && $(LN_S) mc mcedit
 
+install_mcdiff:
+	cd $(DESTDIR)$(bindir)/$(binprefix) && rm -f mcdiff && $(LN_S) mc mcdiff
+
 uninstall-hook:
 	rm -f $(DESTDIR)$(bindir)/$(binprefix)/mcview
 if USE_EDIT
 	rm -f $(DESTDIR)$(bindir)/$(binprefix)/mcedit
+endif
+if USE_DIFF
+	rm -f $(DESTDIR)$(bindir)/$(binprefix)/mcdiff
 endif

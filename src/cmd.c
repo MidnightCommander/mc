@@ -90,6 +90,12 @@
 #   include "src/editor/edit.h"
 #endif
 
+#ifdef USE_DIFF_VIEW
+#   include "src/diffviewer/ydiff.h"
+#endif
+
+
+
 /* If set and you don't have subshell support,then C-o will give you a shell */
 int output_starts_shell = 0;
 
@@ -326,8 +332,11 @@ do_edit_at_line (const char *what, int start_line)
         }
         execute_with_vfs_arg (editor, what);
     }
-    update_panels (UP_OPTIMIZE, UP_KEEPSEL);
-    repaint_screen ();
+    if (mc_run_mode == MC_RUN_FULL)
+    {
+        update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+        repaint_screen ();
+    }
 }
 
 static void
@@ -945,6 +954,20 @@ compare_dirs_cmd (void)
                  _(" Both panels should be in the " "listing mode to use this command "));
     }
 }
+
+#ifdef USE_DIFF_VIEW
+void
+diff_view_cmd (void)
+{
+    dview_diff_cmd ();
+
+    if (mc_run_mode == MC_RUN_FULL)
+    {
+        update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+        repaint_screen ();
+    }
+}
+#endif
 
 void
 history_cmd (void)
