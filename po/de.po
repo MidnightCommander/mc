@@ -931,7 +931,6 @@ msgid "Show mc with specified skin"
 msgstr "Zeige mc mit dem angegebenen Skin"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -949,15 +948,15 @@ msgstr ""
 "--colors Name=Vordergrund,Hintergrund\n"
 "\n"
 "Vordergrund und Hintergrund können weggelassen werden, dann wird die\n"
-"Voreinstellung benutzt. Mehrere Farbwerte können durch : getrennt werden.\n"
+"Voreinstellung benutzt.\n"
 "\n"
 "Schlüsselwörter:\n"
 "   Global:        errors, reverse, gauge, input, viewunderline\n"
 "   Dateianzeige:  normal, selected, marked, markselect\n"
 "   Dialogfelder:  dnormal, dfocus, dhotnormal, dhotfocus,\n"
 "                  errdhotnormal, errdhotfocus\n"
-"   Menüs:         menu, menuhot, menusel, menuhotsel\n"
-"   Editor:        editnormal, editbold, editmarked, editwhitespace\n"
+"   Menüs:         menunormal, menuhot, menuhotsel, menuinactive\n"
+"   Editor:        editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate\n"
 
 msgid ""
@@ -1075,7 +1074,7 @@ msgid "Confirmation|E&xit"
 msgstr "Confirmation|&Beenden"
 
 msgid "Confirmation|&Execute"
-msgstr "Confirmation|&Ausführen"
+msgstr "Confirmation|Aus&führen"
 
 msgid "Confirmation|O&verwrite"
 msgstr "Confirmation|&Überschreiben"
@@ -2912,9 +2911,9 @@ msgid "Modified:  %s"
 msgstr "Geändert:     %s"
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
-#, fuzzy, c-format
+#, c-format
 msgid "Changed:   %s"
-msgstr "Ändern in"
+msgstr "Ändern in: %s"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -3081,7 +3080,7 @@ msgid "&Filter..."
 msgstr "&Filter..."
 
 msgid "&Encoding..."
-msgstr "Kodierung..."
+msgstr "&Kodierung..."
 
 msgid "&Network link..."
 msgstr "&Netzwerkverbindung..."
@@ -3093,16 +3092,16 @@ msgid "S&hell link..."
 msgstr "S&hell-Verbindung..."
 
 msgid "SM&B link..."
-msgstr "SM&B-Verbindung..."
+msgstr "S&MB-Verbindung..."
 
 msgid "&Rescan"
-msgstr "Neu einlesen"
+msgstr "&Neu einlesen"
 
 msgid "&View"
 msgstr "&Ansicht"
 
 msgid "Vie&w file..."
-msgstr "Datei anzeigen..."
+msgstr "Datei an&zeigen..."
 
 msgid "&Filtered view"
 msgstr "Ge&filterte Ansicht"
@@ -3135,13 +3134,13 @@ msgid "&Mkdir"
 msgstr "&Neues Verzeichnis erstellen"
 
 msgid "&Quick cd"
-msgstr "Schnelles cd"
+msgstr "Schnelles c&d"
 
 msgid "Select &group"
 msgstr "&Gruppe auswählen"
 
 msgid "U&nselect group"
-msgstr "Gruppe a&bwählen"
+msgstr "Gruppe ab&wählen"
 
 msgid "Reverse selec&tion"
 msgstr "Auswahl &umkehren"
@@ -3183,7 +3182,7 @@ msgid "&Active VFS list"
 msgstr "&Aktive VFS-Liste"
 
 msgid "&Background jobs"
-msgstr "&Hintergrund-Aufgaben"
+msgstr "Hintergrund-Aufga&ben"
 
 msgid "&Undelete files (ext2fs only)"
 msgstr "Löschen rückgängig (nur ext2fs)"
@@ -3278,22 +3277,23 @@ msgid "co&Mplete: show all"
 msgstr "Vollständi&g: alle anzeigen"
 
 msgid "&Use internal view"
-msgstr "Internen Betrachter ben&utzen"
+msgstr "Internen Betrac&hter benutzen"
 
 msgid "use internal ed&It"
-msgstr "Internen Ed&itor benutzen"
+msgstr "Internen Editor &benutzen"
 
 msgid "auto m&Enus"
 msgstr "Autom&enüs"
 
+#, fuzzy
 msgid "&Auto save setup"
-msgstr "Einstellungen &autom. speichern"
+msgstr "Einstellungen autom. speichern"
 
 msgid "shell &Patterns"
 msgstr "Shellm&uster"
 
 msgid "Compute &Totals"
-msgstr "Gesam&tsummen berechnen"
+msgstr "Gesamt&summen berechnen"
 
 msgid "&Verbose operation"
 msgstr "Redselige &Vorgänge"
@@ -3317,16 +3317,16 @@ msgid "show &Hidden files"
 msgstr "Verb&orgene Dateien anzeigen"
 
 msgid "show &Backup files"
-msgstr "Sicherheits&kopien anzeigen"
+msgstr "Sicherheitsko&pien anzeigen"
 
 msgid "Use SI si&ze units"
-msgstr "&SI-Größeneinheit verwenden"
+msgstr "SI-Größeneinheit ver&wenden"
 
 msgid "&Never"
 msgstr "&Nie"
 
 msgid "on dumb &Terminals"
-msgstr "auf dummen &Terminals"
+msgstr "au&f dummen Terminals"
 
 msgid "Alwa&ys"
 msgstr "&Immer"
