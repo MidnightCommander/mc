@@ -3285,7 +3285,6 @@ msgstr "Internen Editor &benutzen"
 msgid "auto m&Enus"
 msgstr "Autom&enüs"
 
-#, fuzzy
 msgid "&Auto save setup"
 msgstr "Einstellungen autom. speichern"
 
