@@ -31,6 +31,7 @@
 #include "src/wtools.h"
 
 #include "edit-impl.h"
+#include "edit-widget.h"
 
 #define MAX_ENTRY_LEN 40
 #define LIST_LINES 14
@@ -61,7 +62,7 @@ exec_edit_syntax_dialog (const char **names, const char *current_syntax) {
 }
 
 void
-edit_syntax_dialog (const char *current_syntax) {
+edit_syntax_dialog (WEdit *edit, const char *current_syntax) {
     char *old_syntax_type;
     int old_auto_syntax, syntax;
     char **names;
@@ -84,7 +85,7 @@ edit_syntax_dialog (const char *current_syntax) {
     }
 
     old_auto_syntax = option_auto_syntax;
-    old_syntax_type = g_strdup (option_syntax_type);
+    old_syntax_type = g_strdup (current_syntax);
 
     switch (syntax) {
 	case 0: /* auto syntax */
@@ -95,16 +96,16 @@ edit_syntax_dialog (const char *current_syntax) {
 	    break;
 	default:
 	    option_auto_syntax = 0;
-	    g_free (option_syntax_type);
-	    option_syntax_type = g_strdup (names[syntax - N_DFLT_ENTRIES]);
+	    g_free (edit->syntax_type);
+	    edit->syntax_type = g_strdup (names[syntax - N_DFLT_ENTRIES]);
     }
 
     /* Load or unload syntax rules if the option has changed */
     if ((option_auto_syntax && !old_auto_syntax) || old_auto_syntax ||
-	(old_syntax_type && option_syntax_type &&
-	(strcmp (old_syntax_type, option_syntax_type) != 0)) ||
+	(old_syntax_type && edit->syntax_type &&
+	(strcmp (old_syntax_type, edit->syntax_type) != 0)) ||
 	force_reload)
-	edit_load_syntax (wedit, NULL, option_syntax_type);
+	edit_load_syntax (edit, NULL, edit->syntax_type);
 
     g_strfreev (names);
     g_free (old_syntax_type);

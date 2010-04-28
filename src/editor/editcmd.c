@@ -661,7 +661,7 @@ edit_save_as_cmd (WEdit * edit)
                 edit->modified = 0;
                 edit->delete_file = 0;
                 if (different_filename)
-                    edit_load_syntax (edit, NULL, option_syntax_type);
+                    edit_load_syntax (edit, NULL, edit->syntax_type);
                 edit->force |= REDRAW_COMPLETELY;
                 return 1;
             default:

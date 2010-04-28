@@ -284,8 +284,8 @@ void book_mark_dec (WEdit * edit, int line);
 int line_is_blank (WEdit *edit, long line);
 int edit_indent_width (WEdit *edit, long p);
 void edit_insert_indent (WEdit *edit, int indent);
-void edit_options_dialog (void);
-void edit_syntax_dialog (const char *current_syntax);
+void edit_options_dialog (WEdit *edit);
+void edit_syntax_dialog (WEdit *edit, const char *current_syntax);
 void edit_mail_dialog (WEdit *edit);
 void format_paragraph (WEdit *edit, int force);
 
@@ -316,7 +316,6 @@ extern edit_search_options_t edit_search_options;
 extern int edit_stack_iterator;
 extern edit_stack_type edit_history_moveto [MAX_HISTORY_MOVETO];
 
-extern WEdit *wedit;
 extern struct WMenuBar *edit_menubar;
 
 extern const global_keymap_t *editor_map;
@@ -332,7 +331,6 @@ typedef enum {
 
 extern int option_max_undo;
 extern int option_auto_syntax;
-extern char *option_syntax_type;
 
 extern int option_edit_right_extreme;
 extern int option_edit_left_extreme;

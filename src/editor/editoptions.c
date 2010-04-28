@@ -62,7 +62,7 @@ i18n_translate_array (const char *array[])
 #endif			/* ENABLE_NLS */
 
 void
-edit_options_dialog (void)
+edit_options_dialog (WEdit *edit)
 {
     char wrap_length[16], tab_spacing[16], *p, *q;
     int wrap_mode = 0;
@@ -139,7 +139,7 @@ edit_options_dialog (void)
     old_syntax_hl = option_syntax_highlighting;
 
     if (!option_cursor_beyond_eol)
-        wedit->over_col = 0;
+        edit->over_col = 0;
 
     if (p) {
 	option_word_wrap_line_length = atoi (p);
@@ -165,5 +165,5 @@ edit_options_dialog (void)
 
     /* Load or unload syntax rules if the option has changed */
     if (option_syntax_highlighting != old_syntax_hl)
-	edit_load_syntax (wedit, NULL, option_syntax_type);
+	edit_load_syntax (edit, NULL, edit->syntax_type);
 }

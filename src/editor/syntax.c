@@ -114,7 +114,6 @@ struct _syntax_marker
 
 int option_syntax_highlighting = 1;
 int option_auto_syntax = 1;
-char *option_syntax_type = NULL;
 
 static gint
 mc_defines_destroy (gpointer key, gpointer value, gpointer data)

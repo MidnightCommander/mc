@@ -52,7 +52,6 @@
 #include "src/menu.h"		/* menubar_new() */
 #include "src/cmddef.h"
 
-WEdit *wedit;
 struct WMenuBar *edit_menubar;
 
 int column_highlighting = 0;
@@ -231,6 +230,7 @@ edit_file (const char *_file, int line)
 {
     static gboolean made_directory = FALSE;
     Dlg_head *edit_dlg;
+    WEdit *wedit;
 
     if (!made_directory) {
 	char *dir = concat_dir_and_file (home_dir, EDIT_DIR);
