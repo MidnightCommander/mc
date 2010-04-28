@@ -198,14 +198,18 @@ edit_init_menu (struct WMenuBar *menubar)
 static void
 edit_drop_menu_cmd (WEdit *e, int which)
 {
-    if (!edit_menubar->is_active) {
-	edit_menubar->is_active = TRUE;
-	edit_menubar->is_dropped = (drop_menus != 0);
-	if (which >= 0)
-	    edit_menubar->selected = which;
+    WMenuBar *menubar;
 
-	edit_menubar->previous_widget = e->widget.parent->current->dlg_id;
-	dlg_select_widget (edit_menubar);
+    menubar = find_menubar (e->widget.parent);
+
+    if (!menubar->is_active) {
+	menubar->is_active = TRUE;
+	menubar->is_dropped = (drop_menus != 0);
+	if (which >= 0)
+	    menubar->selected = which;
+
+	menubar->previous_widget = e->widget.parent->current->dlg_id;
+	dlg_select_widget (menubar);
     }
 }
 

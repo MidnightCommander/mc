@@ -52,8 +52,6 @@
 #include "src/menu.h"		/* menubar_new() */
 #include "src/cmddef.h"
 
-struct WMenuBar *edit_menubar;
-
 int column_highlighting = 0;
 
 static cb_ret_t edit_callback (Widget *, widget_msg_t msg, int parm);
@@ -87,8 +85,13 @@ edit_event (Gpm_Event *event, void *data)
 	return MOU_NORMAL;
 
     /* rest of the upper frame, the menu is invisible - call menu */
-    if ((event->type & GPM_DOWN) && (event->y == 1))
-	return edit_menubar->widget.mouse (event, edit_menubar);
+    if ((event->type & GPM_DOWN) && (event->y == 1)) {
+	WMenuBar *menubar;
+
+	menubar = find_menubar (edit->widget.parent);
+
+	return menubar->widget.mouse (event, menubar);
+    }
 
     edit_update_curs_row (edit);
     edit_update_curs_col (edit);
@@ -231,6 +234,7 @@ edit_file (const char *_file, int line)
     static gboolean made_directory = FALSE;
     Dlg_head *edit_dlg;
     WEdit *wedit;
+    WMenuBar *menubar;
 
     if (!made_directory) {
 	char *dir = concat_dir_and_file (home_dir, EDIT_DIR);
@@ -249,9 +253,9 @@ edit_file (const char *_file, int line)
 		    "[Internal File Editor]", NULL, DLG_WANT_TAB);
 
     edit_dlg->get_shortcut = edit_get_shortcut;
-    edit_menubar = menubar_new (0, 0, COLS, NULL);
-    add_widget (edit_dlg, edit_menubar);
-    edit_init_menu (edit_menubar);
+    menubar = menubar_new (0, 0, COLS, NULL);
+    add_widget (edit_dlg, menubar);
+    edit_init_menu (menubar);
 
     init_widget (&(wedit->widget), 0, 0, LINES - 1, COLS,
 		 edit_callback, edit_event);
