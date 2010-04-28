@@ -934,7 +934,7 @@ edit_init (WEdit * edit, int lines, int columns, const char *filename, long line
     edit->loading_done = 1;
     edit->modified = 0;
     edit->locked = 0;
-    edit_load_syntax (edit, 0, 0);
+    edit_load_syntax (edit, NULL, NULL);
     {
         int color;
         edit_get_syntax_color (edit, -1, &color);

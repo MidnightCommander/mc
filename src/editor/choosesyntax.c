@@ -25,6 +25,7 @@
 #include <config.h>
 
 #include <stdlib.h>
+#include <sys/types.h>
 
 #include "lib/global.h"
 #include "src/wtools.h"
@@ -43,14 +44,14 @@ pstrcmp(const void *p1, const void *p2)
 
 static int
 exec_edit_syntax_dialog (const char **names, const char *current_syntax) {
-    int i;
+    size_t i;
 
     Listbox *syntaxlist = create_listbox_window (LIST_LINES, MAX_ENTRY_LEN,
 	_(" Choose syntax highlighting "), NULL);
     LISTBOX_APPEND_TEXT (syntaxlist, 'A', _("< Auto >"), NULL);
     LISTBOX_APPEND_TEXT (syntaxlist, 'R', _("< Reload Current Syntax >"), NULL);
 
-    for (i = 0; names[i]; i++) {
+    for (i = 0; names[i] != NULL; i++) {
 	LISTBOX_APPEND_TEXT (syntaxlist, 0, names[i], NULL);
 	if ((current_syntax != NULL) && (strcmp (names[i], current_syntax) == 0))
 	    listbox_select_entry (syntaxlist->list, i + N_DFLT_ENTRIES);
@@ -64,25 +65,21 @@ edit_syntax_dialog (const char *current_syntax) {
     char *old_syntax_type;
     int old_auto_syntax, syntax;
     char **names;
-    int i;
-    int force_reload = 0;
-    int count = 0;
+    gboolean force_reload = FALSE;
+    size_t count;
 
-    names = (char**) g_malloc (sizeof (char*));
-    names[0] = NULL;
+    names = g_new0 (char *, 1);
+
     /* We fill the list of syntax files every time the editor is invoked.
        Instead we could save the list to a file and update it once the syntax
        file gets updated (either by testing or by explicit user command). */
     edit_load_syntax (NULL, &names, NULL);
-    while (names[count++] != NULL);
-    qsort(names, count - 1, sizeof(char*), pstrcmp);
+    count = g_strv_length (names);
+    qsort (names, count, sizeof (char *), pstrcmp);
 
     syntax = exec_edit_syntax_dialog ((const char**) names, current_syntax);
     if (syntax < 0) {
-	for (i = 0; names[i]; i++) {
-	    g_free (names[i]);
-	}
-	g_free (names);
+	g_strfreev (names);
 	return;
     }
 
@@ -94,7 +91,7 @@ edit_syntax_dialog (const char *current_syntax) {
 	    option_auto_syntax = 1;
 	    break;
 	case 1: /* reload current syntax */
-	    force_reload = 1;
+	    force_reload = TRUE;
 	    break;
 	default:
 	    option_auto_syntax = 0;
@@ -109,9 +106,6 @@ edit_syntax_dialog (const char *current_syntax) {
 	force_reload)
 	edit_load_syntax (wedit, NULL, option_syntax_type);
 
-    for (i = 0; names[i]; i++) {
-	g_free (names[i]);
-    }
-    g_free (names);
+    g_strfreev (names);
     g_free (old_syntax_type);
 }
