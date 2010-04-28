@@ -42,7 +42,7 @@ pstrcmp(const void *p1, const void *p2)
 }
 
 static int
-exec_edit_syntax_dialog (const char **names) {
+exec_edit_syntax_dialog (const char **names, const char *current_syntax) {
     int i;
 
     Listbox *syntaxlist = create_listbox_window (LIST_LINES, MAX_ENTRY_LEN,
@@ -52,8 +52,7 @@ exec_edit_syntax_dialog (const char **names) {
 
     for (i = 0; names[i]; i++) {
 	LISTBOX_APPEND_TEXT (syntaxlist, 0, names[i], NULL);
-	if (! option_auto_syntax && option_syntax_type
-		&& (strcmp (names[i], option_syntax_type) == 0))
+	if ((current_syntax != NULL) && (strcmp (names[i], current_syntax) == 0))
 	    listbox_select_entry (syntaxlist->list, i + N_DFLT_ENTRIES);
     }
 
@@ -61,7 +60,7 @@ exec_edit_syntax_dialog (const char **names) {
 }
 
 void
-edit_syntax_dialog (void) {
+edit_syntax_dialog (const char *current_syntax) {
     char *old_syntax_type;
     int old_auto_syntax, syntax;
     char **names;
@@ -78,7 +77,8 @@ edit_syntax_dialog (void) {
     while (names[count++] != NULL);
     qsort(names, count - 1, sizeof(char*), pstrcmp);
 
-    if ((syntax = exec_edit_syntax_dialog ((const char**) names)) < 0) {
+    syntax = exec_edit_syntax_dialog ((const char**) names, current_syntax);
+    if (syntax < 0) {
 	for (i = 0; names[i]; i++) {
 	    g_free (names[i]);
 	}
