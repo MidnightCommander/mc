@@ -2944,6 +2944,12 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
     /* An ordinary key press */
     if (char_for_insertion >= 0)
     {
+        /* if non persistent selection and text selected */
+        if (!option_persistent_selections)
+        {
+            if (edit->mark1 != edit->mark2)
+                edit_block_delete_cmd (edit);
+        }
         if (edit->overwrite)
         {
             /* remove char only one time, after input first byte, multibyte chars */
@@ -3410,6 +3416,12 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         edit_cut_to_X_buf_cmd (edit);
         break;
     case CK_XPaste:
+        /* if non persistent selection and text selected */
+        if (!option_persistent_selections)
+        {
+            if (edit->mark1 != edit->mark2)
+                edit_block_delete_cmd (edit);
+        }
         if (option_cursor_beyond_eol && edit->over_col > 0)
             edit_insert_over (edit);
         edit_paste_from_X_buf_cmd (edit);
