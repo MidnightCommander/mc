@@ -122,6 +122,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/mcedit
 %{_bindir}/mcview
 %{_bindir}/mcmfmt
+%{_bindir}/mcdiff
 
 %dir %{_libexecdir}/mc
 %dir %{_libexecdir}/mc/extfs.d
@@ -156,6 +157,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Apr 28 2010 Yury V. Zaytsev <yury@shurup.com>
+- Added mcdiff to the list of packaged files.
+
 * Tue Feb 09 2010 Andrew Borodin <aborodin@vmail.ru>
 - Fixed file list because of EXTFS VFS reorganizing.
 
