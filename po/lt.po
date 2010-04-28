@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-23 10:46+0200\n"
+"POT-Creation-Date: 2010-04-28 16:02+0300\n"
 "PO-Revision-Date: 2009-02-16 19:45+0300\n"
 "Last-Translator: Andrius Štikonas <stikonas@gmail.com>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -1501,6 +1501,135 @@ msgstr "Negalima vykdyti komandų nevietinėje failų sistemoje"
 msgid " The shell is already running a command "
 msgstr " Aplinkoje jau vykdoma komanda "
 
+msgid "&Dismiss"
+msgstr "At&mesti"
+
+msgid "All charsets"
+msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "&Tik žodžius"
+
+msgid "&Backwards"
+msgstr "At&bulai"
+
+msgid "case &Sensitive"
+msgstr "&Skirti ABC nuo abc"
+
+msgid " Enter search string:"
+msgstr " Įveskite ieškomą eilutę:"
+
+msgid "Search"
+msgstr "Paieška"
+
+msgid " Search is disabled "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary diff file \n"
+" %s "
+msgstr ""
+" Nepavyko sukurti laikino komandų failo \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create backup file \n"
+" %s%s \n"
+" %s "
+msgstr ""
+" Nepavyko atverti paskirties failo „%s“ \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary merge file \n"
+" %s "
+msgstr ""
+" Nepavyko sukurti laikino komandų failo \n"
+" %s "
+
+#, fuzzy
+msgid "&Normal"
+msgstr "&Vietinį"
+
+msgid "&Fastest (Assume large files)"
+msgstr ""
+
+msgid "&Minimal (Find a smaller set of change)"
+msgstr ""
+
+msgid "Strip &trailing carriage return"
+msgstr ""
+
+msgid "Ignore all &whitespace"
+msgstr ""
+
+msgid "Ignore &space change"
+msgstr ""
+
+msgid "Ignore tab &expansion"
+msgstr ""
+
+#, fuzzy
+msgid "&Ignore case"
+msgstr "&Ignoruoti užraktą"
+
+#, fuzzy
+msgid "Diff extra options"
+msgstr " Kiti nustatymai "
+
+msgid "Diff algorithm"
+msgstr ""
+
+#, fuzzy
+msgid "Diff Options"
+msgstr " Nustatymai "
+
+#, fuzzy
+msgid "Edit"
+msgstr "Taisyti"
+
+msgid " Edit is disabled "
+msgstr ""
+
+msgid " Enter line: "
+msgstr " Įveskite eilutę: "
+
+msgid "ButtonBar|Help"
+msgstr "ButtonBar|Pagalb"
+
+msgid "ButtonBar|Save"
+msgstr "ButtonBar|Įrašy"
+
+msgid "ButtonBar|Edit"
+msgstr "ButtonBar|Keist"
+
+#, fuzzy
+msgid "ButtonBar|Merge"
+msgstr "ButtonBar|Formuot."
+
+msgid "ButtonBar|Search"
+msgstr "ButtonBar|Ieškot"
+
+#, fuzzy
+msgid "ButtonBar|Options"
+msgstr "ButtonBar|Eilutė"
+
+msgid "ButtonBar|Quit"
+msgstr "ButtonBar|Išeit"
+
+msgid "Quit"
+msgstr "Išeiti"
+
+msgid " File was modified, Save with exit? "
+msgstr " Failas buvo pakeistas, įrašyti išeinant? "
+
+msgid "Two files are needed to compare"
+msgstr ""
+
 msgid "Cannot read directory contents"
 msgstr "Nepavyko perskaityti aplanko turinio"
 
@@ -1562,9 +1691,6 @@ msgstr ""
 
 msgid "Macro recursion is too deep"
 msgstr "Makrokomandų rekursija yra per gili"
-
-msgid "Search"
-msgstr "Paieška"
 
 msgid " File has hard-links. Detach before saving? "
 msgstr " Failas turi nuorodų. Atjungti prieš išsaugant? "
@@ -1698,12 +1824,6 @@ msgstr " Pakeisti "
 msgid " %ld replacements made. "
 msgstr " Atlikta %ld pakeitimų. "
 
-msgid "Quit"
-msgstr "Išeiti"
-
-msgid " File was modified, Save with exit? "
-msgstr " Failas buvo pakeistas, įrašyti išeinant? "
-
 msgid "&Cancel quit"
 msgstr "&Neišeiti"
 
@@ -1724,9 +1844,6 @@ msgstr " Iškirpti į krepšį "
 
 msgid " Goto line "
 msgstr " Eiti į eilutę "
-
-msgid " Enter line: "
-msgstr " Įveskite eilutę: "
 
 msgid " Save Block "
 msgstr " Įrašyti bloką "
@@ -1809,28 +1926,12 @@ msgstr " Paspauskite bet kurį klavišą: "
 msgid " Execute Macro "
 msgstr " Įvykdyti makrokomandą "
 
-msgid "All charsets"
-msgstr ""
-
-#, fuzzy
-msgid "&Whole words"
-msgstr "&Tik žodžius"
-
 #, fuzzy
 msgid "In se&lection"
 msgstr "Žymėti at&virkščiai M-*"
 
-msgid "&Backwards"
-msgstr "At&bulai"
-
-msgid "case &Sensitive"
-msgstr "&Skirti ABC nuo abc"
-
 msgid " Enter replacement string:"
 msgstr " Įveskite pakeitimo eilutę:"
-
-msgid " Enter search string:"
-msgstr " Įveskite ieškomą eilutę:"
 
 #, fuzzy
 msgid "&Find all"
@@ -1853,9 +1954,6 @@ msgstr " Pakeisti su: "
 
 msgid " Confirm replace "
 msgstr " Patvirtinti pakeitimą "
-
-msgid "&Dismiss"
-msgstr "At&mesti"
 
 #, c-format
 msgid ""
@@ -2170,12 +2268,6 @@ msgstr "Eilučių laužymas"
 msgid " Editor options "
 msgstr " Nustatymai "
 
-msgid "ButtonBar|Help"
-msgstr "ButtonBar|Pagalb"
-
-msgid "ButtonBar|Save"
-msgstr "ButtonBar|Įrašy"
-
 #, fuzzy
 msgid "ButtonBar|Mark"
 msgstr "ButtonBar|Apdorot."
@@ -2192,9 +2284,6 @@ msgstr "ButtonBar|Pagalb"
 msgid "ButtonBar|Move"
 msgstr "ButtonBar|Įrašy"
 
-msgid "ButtonBar|Search"
-msgstr "ButtonBar|Ieškot"
-
 #, fuzzy
 msgid "ButtonBar|Delete"
 msgstr "ButtonBar|Pagalb"
@@ -2202,9 +2291,6 @@ msgstr "ButtonBar|Pagalb"
 #, fuzzy
 msgid "ButtonBar|PullDn"
 msgstr "ButtonBar|Pagalb"
-
-msgid "ButtonBar|Quit"
-msgstr "ButtonBar|Išeit"
 
 msgid " Load syntax file "
 msgstr " Įkelti sintaksės failą "
@@ -3283,6 +3369,10 @@ msgid "&Compare directories"
 msgstr " Palyginti aplankus "
 
 #, fuzzy
+msgid "&View diff files"
+msgstr " Rodyti failą "
+
+#, fuzzy
 msgid "E&xternal panelize"
 msgstr "Išorinis skydelis"
 
@@ -3372,9 +3462,6 @@ msgstr "ButtonBar|Šešiol"
 
 msgid "ButtonBar|View"
 msgstr "ButtonBar|Rodyt"
-
-msgid "ButtonBar|Edit"
-msgstr "ButtonBar|Keist"
 
 #, fuzzy
 msgid "ButtonBar|RenMov"
@@ -3983,9 +4070,6 @@ msgstr "Foninis procesas:"
 #~ msgid " Invalid address "
 #~ msgstr " Neteisingas adresas "
 
-#~ msgid "ButtonBar|Line"
-#~ msgstr "ButtonBar|Eilutė"
-
 #~ msgid "File: %s"
 #~ msgstr "Failas: %s"
 
@@ -4131,9 +4215,6 @@ msgstr "Foninis procesas:"
 
 #~ msgid " Command "
 #~ msgstr " Komanda "
-
-#~ msgid " Options "
-#~ msgstr " Nustatymai "
 
 #~ msgid "Intuitive"
 #~ msgstr "Intuityvus"

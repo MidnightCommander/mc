@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-23 10:46+0200\n"
+"POT-Creation-Date: 2010-04-28 16:02+0300\n"
 "PO-Revision-Date: 2006-08-16 16:20+0400\n"
 "Last-Translator: Phan Vĩnh Thịnh <teppi82@gmail.com>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
@@ -1501,6 +1501,135 @@ msgstr " Chỉ có thể thực hiện câu lệnh trên hệ thống tập tin 
 msgid " The shell is already running a command "
 msgstr " shell đang chạy một câu lệnh"
 
+msgid "&Dismiss"
+msgstr "Đó&ng"
+
+msgid "All charsets"
+msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "&Chỉ những từ đầy đủ"
+
+msgid "&Backwards"
+msgstr "&Tìm ngược lại"
+
+msgid "case &Sensitive"
+msgstr "có tính &Kiểu chữ"
+
+msgid " Enter search string:"
+msgstr " Nhập chuỗi tìm kiếm:"
+
+msgid "Search"
+msgstr "Tìm"
+
+msgid " Search is disabled "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary diff file \n"
+" %s "
+msgstr ""
+" Không tạo được tập tin câu lệnh tạm thời\n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create backup file \n"
+" %s%s \n"
+" %s "
+msgstr ""
+" Không tạo được tập tin đích \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary merge file \n"
+" %s "
+msgstr ""
+" Không tạo được tập tin câu lệnh tạm thời\n"
+" %s "
+
+#, fuzzy
+msgid "&Normal"
+msgstr "&Nội bộ máy"
+
+msgid "&Fastest (Assume large files)"
+msgstr ""
+
+msgid "&Minimal (Find a smaller set of change)"
+msgstr ""
+
+msgid "Strip &trailing carriage return"
+msgstr ""
+
+msgid "Ignore all &whitespace"
+msgstr ""
+
+msgid "Ignore &space change"
+msgstr ""
+
+msgid "Ignore tab &expansion"
+msgstr ""
+
+#, fuzzy
+msgid "&Ignore case"
+msgstr "&Lời đi khóa"
+
+#, fuzzy
+msgid "Diff extra options"
+msgstr " Cấu hình khác "
+
+msgid "Diff algorithm"
+msgstr ""
+
+#, fuzzy
+msgid "Diff Options"
+msgstr " Tùy chọn "
+
+#, fuzzy
+msgid "Edit"
+msgstr "Soạn  "
+
+msgid " Edit is disabled "
+msgstr ""
+
+msgid " Enter line: "
+msgstr "Hãy nhập số thứ tự dòng: "
+
+msgid "ButtonBar|Help"
+msgstr "Trợ giúp"
+
+msgid "ButtonBar|Save"
+msgstr "Lưu"
+
+msgid "ButtonBar|Edit"
+msgstr "Sửa"
+
+#, fuzzy
+msgid "ButtonBar|Merge"
+msgstr "Định dạng"
+
+msgid "ButtonBar|Search"
+msgstr "Tìm kiếm"
+
+#, fuzzy
+msgid "ButtonBar|Options"
+msgstr "Dòng"
+
+msgid "ButtonBar|Quit"
+msgstr "Thoát"
+
+msgid "Quit"
+msgstr "Thoát"
+
+msgid " File was modified, Save with exit? "
+msgstr "Tập tin đã thay đổi, ghi nhớ khi thoát? "
+
+msgid "Two files are needed to compare"
+msgstr ""
+
 msgid "Cannot read directory contents"
 msgstr "Không đọc được nội dung thư mục"
 
@@ -1562,9 +1691,6 @@ msgstr ""
 
 msgid "Macro recursion is too deep"
 msgstr "Đệ qui của macro quá sâu"
-
-msgid "Search"
-msgstr "Tìm"
 
 msgid " File has hard-links. Detach before saving? "
 msgstr ""
@@ -1698,12 +1824,6 @@ msgstr " Thay thế "
 msgid " %ld replacements made. "
 msgstr " %ld thay thế được thực hiện. "
 
-msgid "Quit"
-msgstr "Thoát"
-
-msgid " File was modified, Save with exit? "
-msgstr "Tập tin đã thay đổi, ghi nhớ khi thoát? "
-
 msgid "&Cancel quit"
 msgstr "&Dừng thoát"
 
@@ -1724,9 +1844,6 @@ msgstr "Cắt vào bộ đệm "
 
 msgid " Goto line "
 msgstr "Chuyển tới dòng "
-
-msgid " Enter line: "
-msgstr "Hãy nhập số thứ tự dòng: "
 
 msgid " Save Block "
 msgstr "Ghi nhớ khối "
@@ -1810,28 +1927,12 @@ msgstr " Nhấn phím bất kỳ: "
 msgid " Execute Macro "
 msgstr "Thực hiện Macro "
 
-msgid "All charsets"
-msgstr ""
-
-#, fuzzy
-msgid "&Whole words"
-msgstr "&Chỉ những từ đầy đủ"
-
 #, fuzzy
 msgid "In se&lection"
 msgstr "Chọn ngược lạ&I        M-*"
 
-msgid "&Backwards"
-msgstr "&Tìm ngược lại"
-
-msgid "case &Sensitive"
-msgstr "có tính &Kiểu chữ"
-
 msgid " Enter replacement string:"
 msgstr " Nhập chuỗi thay thế:"
-
-msgid " Enter search string:"
-msgstr " Nhập chuỗi tìm kiếm:"
 
 #, fuzzy
 msgid "&Find all"
@@ -1854,9 +1955,6 @@ msgstr " Thay thế bằng: "
 
 msgid " Confirm replace "
 msgstr " Phê chuẩn thay thế "
-
-msgid "&Dismiss"
-msgstr "Đó&ng"
 
 #, c-format
 msgid ""
@@ -2171,12 +2269,6 @@ msgstr "Chế độ chuyển dòng"
 msgid " Editor options "
 msgstr " Cấu hình trình soạn thảo "
 
-msgid "ButtonBar|Help"
-msgstr "Trợ giúp"
-
-msgid "ButtonBar|Save"
-msgstr "Lưu"
-
 #, fuzzy
 msgid "ButtonBar|Mark"
 msgstr "Phân tích"
@@ -2193,9 +2285,6 @@ msgstr "Trợ giúp"
 msgid "ButtonBar|Move"
 msgstr "Lưu"
 
-msgid "ButtonBar|Search"
-msgstr "Tìm kiếm"
-
 #, fuzzy
 msgid "ButtonBar|Delete"
 msgstr "Trợ giúp"
@@ -2203,9 +2292,6 @@ msgstr "Trợ giúp"
 #, fuzzy
 msgid "ButtonBar|PullDn"
 msgstr "Trợ giúp"
-
-msgid "ButtonBar|Quit"
-msgstr "Thoát"
 
 msgid " Load syntax file "
 msgstr " Nạp tập tin cú pháp "
@@ -3285,6 +3371,10 @@ msgid "&Compare directories"
 msgstr " So sánh thư mục "
 
 #, fuzzy
+msgid "&View diff files"
+msgstr " Xem tập tin "
+
+#, fuzzy
 msgid "E&xternal panelize"
 msgstr "Bảng ngoài"
 
@@ -3375,9 +3465,6 @@ msgstr "Hex"
 
 msgid "ButtonBar|View"
 msgstr "Xem"
-
-msgid "ButtonBar|Edit"
-msgstr "Sửa"
 
 #, fuzzy
 msgid "ButtonBar|RenMov"
@@ -3987,9 +4074,6 @@ msgstr "Tiến trình nền sau:"
 #~ msgid " Invalid address "
 #~ msgstr " Mật khẩu không đúng "
 
-#~ msgid "ButtonBar|Line"
-#~ msgstr "Dòng"
-
 #~ msgid "File: %s"
 #~ msgstr "Tập tin: %s"
 
@@ -4135,9 +4219,6 @@ msgstr "Tiến trình nền sau:"
 
 #~ msgid " Command "
 #~ msgstr " Câu lệnh "
-
-#~ msgid " Options "
-#~ msgstr " Tùy chọn "
 
 #~ msgid "Intuitive"
 #~ msgstr "T&rực giác"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-23 10:46+0200\n"
+"POT-Creation-Date: 2010-04-28 16:02+0300\n"
 "PO-Revision-Date: 2002-04-25 03:55+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <debian-l10n-portuguese@lists.debian.org>\n"
@@ -1511,6 +1511,132 @@ msgstr " Não pode executar comandos em sistemas de ficheiros não-locais"
 msgid " The shell is already running a command "
 msgstr " O terminal já se encontra a executar um comando "
 
+msgid "&Dismiss"
+msgstr "&Fechar"
+
+msgid "All charsets"
+msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "&Apenas palavras inteiras"
+
+msgid "&Backwards"
+msgstr "&Para trás"
+
+msgid "case &Sensitive"
+msgstr "&Sensível à capitalização"
+
+msgid " Enter search string:"
+msgstr " Introduza expressão de procura:"
+
+msgid "Search"
+msgstr "Procurar"
+
+msgid " Search is disabled "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary diff file \n"
+" %s "
+msgstr ""
+" Incapaz de criar ficheiro temporário de comando \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create backup file \n"
+" %s%s \n"
+" %s "
+msgstr ""
+" Incapaz de criar ficheiro alvo \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary merge file \n"
+" %s "
+msgstr ""
+" Incapaz de criar ficheiro temporário de comando \n"
+" %s "
+
+#, fuzzy
+msgid "&Normal"
+msgstr "Formatar"
+
+msgid "&Fastest (Assume large files)"
+msgstr ""
+
+msgid "&Minimal (Find a smaller set of change)"
+msgstr ""
+
+msgid "Strip &trailing carriage return"
+msgstr ""
+
+msgid "Ignore all &whitespace"
+msgstr ""
+
+msgid "Ignore &space change"
+msgstr ""
+
+msgid "Ignore tab &expansion"
+msgstr ""
+
+msgid "&Ignore case"
+msgstr ""
+
+#, fuzzy
+msgid "Diff extra options"
+msgstr " Outras opções "
+
+msgid "Diff algorithm"
+msgstr ""
+
+#, fuzzy
+msgid "Diff Options"
+msgstr " Opções "
+
+#, fuzzy
+msgid "Edit"
+msgstr "Editar"
+
+msgid " Edit is disabled "
+msgstr ""
+
+msgid " Enter line: "
+msgstr " Introduza linha: "
+
+msgid "ButtonBar|Help"
+msgstr ""
+
+msgid "ButtonBar|Save"
+msgstr ""
+
+msgid "ButtonBar|Edit"
+msgstr ""
+
+msgid "ButtonBar|Merge"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Options"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
+
+msgid "Quit"
+msgstr "Sair"
+
+msgid " File was modified, Save with exit? "
+msgstr " Ficheiro foi modificado. Gravar ao sair? "
+
+msgid "Two files are needed to compare"
+msgstr ""
+
 #, fuzzy
 msgid "Cannot read directory contents"
 msgstr "Incapaz de mudar de directório"
@@ -1575,9 +1701,6 @@ msgstr ""
 
 msgid "Macro recursion is too deep"
 msgstr ""
-
-msgid "Search"
-msgstr "Procurar"
 
 msgid " File has hard-links. Detach before saving? "
 msgstr ""
@@ -1714,12 +1837,6 @@ msgstr " Substituir "
 msgid " %ld replacements made. "
 msgstr " %ld substituições efectuadas. "
 
-msgid "Quit"
-msgstr "Sair"
-
-msgid " File was modified, Save with exit? "
-msgstr " Ficheiro foi modificado. Gravar ao sair? "
-
 #, fuzzy
 msgid "&Cancel quit"
 msgstr "Cancelar sair"
@@ -1742,9 +1859,6 @@ msgstr " Cortar para área de transferência "
 
 msgid " Goto line "
 msgstr " Ir para linha "
-
-msgid " Enter line: "
-msgstr " Introduza linha: "
 
 msgid " Save Block "
 msgstr " Gravar Bloco "
@@ -1831,28 +1945,12 @@ msgstr " Primir qualquer tecla: "
 msgid " Execute Macro "
 msgstr " Executar Macro "
 
-msgid "All charsets"
-msgstr ""
-
-#, fuzzy
-msgid "&Whole words"
-msgstr "&Apenas palavras inteiras"
-
 #, fuzzy
 msgid "In se&lection"
 msgstr "reverter sele&cção M-*"
 
-msgid "&Backwards"
-msgstr "&Para trás"
-
-msgid "case &Sensitive"
-msgstr "&Sensível à capitalização"
-
 msgid " Enter replacement string:"
 msgstr " Introduza expressão de substituição:"
-
-msgid " Enter search string:"
-msgstr " Introduza expressão de procura:"
 
 #, fuzzy
 msgid "&Find all"
@@ -1875,9 +1973,6 @@ msgstr " Substituir por: "
 
 msgid " Confirm replace "
 msgstr " Confirmar substituição "
-
-msgid "&Dismiss"
-msgstr "&Fechar"
 
 #, c-format
 msgid ""
@@ -2189,12 +2284,6 @@ msgstr "Modo de quebra"
 msgid " Editor options "
 msgstr " Opções de editor "
 
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
 msgid "ButtonBar|Mark"
 msgstr ""
 
@@ -2207,16 +2296,10 @@ msgstr ""
 msgid "ButtonBar|Move"
 msgstr ""
 
-msgid "ButtonBar|Search"
-msgstr ""
-
 msgid "ButtonBar|Delete"
 msgstr ""
 
 msgid "ButtonBar|PullDn"
-msgstr ""
-
-msgid "ButtonBar|Quit"
 msgstr ""
 
 msgid " Load syntax file "
@@ -3294,6 +3377,10 @@ msgid "&Compare directories"
 msgstr " Comparar directórios "
 
 #, fuzzy
+msgid "&View diff files"
+msgstr " Ver ficheiro "
+
+#, fuzzy
 msgid "E&xternal panelize"
 msgstr "Paineis externos"
 
@@ -3382,9 +3469,6 @@ msgid "ButtonBar|Menu"
 msgstr ""
 
 msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
 msgstr ""
 
 msgid "ButtonBar|RenMov"
@@ -4120,9 +4204,6 @@ msgstr "Processo de fundo:"
 
 #~ msgid " Command "
 #~ msgstr " Comando "
-
-#~ msgid " Options "
-#~ msgstr " Opções "
 
 #~ msgid "Intuitive"
 #~ msgstr "Intuitivo"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.38\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-23 10:46+0200\n"
+"POT-Creation-Date: 2010-04-28 16:02+0300\n"
 "PO-Revision-Date: 1997-07-23 00:04-0400\n"
 "Last-Translator: Spiros Papadimitriou <spapadim+@cs.cmu.edu>\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
@@ -1436,6 +1436,125 @@ msgstr ""
 msgid " The shell is already running a command "
 msgstr ""
 
+msgid "&Dismiss"
+msgstr ""
+
+msgid "All charsets"
+msgstr ""
+
+msgid "&Whole words"
+msgstr ""
+
+msgid "&Backwards"
+msgstr "Πρός τα &πίσω"
+
+msgid "case &Sensitive"
+msgstr "κεφαλαία/πε&ζά"
+
+msgid " Enter search string:"
+msgstr " Εισαγωγή ακολουθίας προς αναζήτηση:"
+
+msgid "Search"
+msgstr "Αναζήτηση"
+
+msgid " Search is disabled "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary diff file \n"
+" %s "
+msgstr " Σφάλμα αποθήκευσης αρχείου. "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create backup file \n"
+" %s%s \n"
+" %s "
+msgstr " Σφάλμα αποθήκευσης αρχείου. "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary merge file \n"
+" %s "
+msgstr " Σφάλμα αποθήκευσης αρχείου. "
+
+#, fuzzy
+msgid "&Normal"
+msgstr "Κανονικό"
+
+msgid "&Fastest (Assume large files)"
+msgstr ""
+
+msgid "&Minimal (Find a smaller set of change)"
+msgstr ""
+
+msgid "Strip &trailing carriage return"
+msgstr ""
+
+msgid "Ignore all &whitespace"
+msgstr ""
+
+msgid "Ignore &space change"
+msgstr ""
+
+msgid "Ignore tab &expansion"
+msgstr ""
+
+msgid "&Ignore case"
+msgstr ""
+
+#, fuzzy
+msgid "Diff extra options"
+msgstr " Επιλογές επεξεργαστή "
+
+msgid "Diff algorithm"
+msgstr ""
+
+#, fuzzy
+msgid "Diff Options"
+msgstr "Επιλογές "
+
+#, fuzzy
+msgid "Edit"
+msgstr "Επεξεργασία"
+
+msgid " Edit is disabled "
+msgstr ""
+
+msgid " Enter line: "
+msgstr " Γραμμή: "
+
+msgid "ButtonBar|Help"
+msgstr ""
+
+msgid "ButtonBar|Save"
+msgstr ""
+
+msgid "ButtonBar|Edit"
+msgstr ""
+
+msgid "ButtonBar|Merge"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Options"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
+
+msgid "Quit"
+msgstr "Τέλος"
+
+msgid " File was modified, Save with exit? "
+msgstr " Το αρχείο τροποποιήθηκε, Αποθήκευση κατά την έξοδο; "
+
+msgid "Two files are needed to compare"
+msgstr ""
+
 msgid "Cannot read directory contents"
 msgstr ""
 
@@ -1493,9 +1612,6 @@ msgstr ""
 
 msgid "Macro recursion is too deep"
 msgstr ""
-
-msgid "Search"
-msgstr "Αναζήτηση"
 
 msgid " File has hard-links. Detach before saving? "
 msgstr ""
@@ -1631,12 +1747,6 @@ msgstr " Αντικατάσταση "
 msgid " %ld replacements made. "
 msgstr " Πραγματοποιήθηκαν %ld αντικαταστάσεις. "
 
-msgid "Quit"
-msgstr "Τέλος"
-
-msgid " File was modified, Save with exit? "
-msgstr " Το αρχείο τροποποιήθηκε, Αποθήκευση κατά την έξοδο; "
-
 #, fuzzy
 msgid "&Cancel quit"
 msgstr "Ακύρωση τέλους"
@@ -1659,9 +1769,6 @@ msgstr " Αποκοπή στο τεμάχιο "
 
 msgid " Goto line "
 msgstr " Επίσκεψη γραμμής "
-
-msgid " Enter line: "
-msgstr " Γραμμή: "
 
 msgid " Save Block "
 msgstr ""
@@ -1745,26 +1852,11 @@ msgstr " Πιέστε κάποιο πλήκτρο: "
 msgid " Execute Macro "
 msgstr " Εκτελ. μακροεντολής"
 
-msgid "All charsets"
-msgstr ""
-
-msgid "&Whole words"
-msgstr ""
-
 msgid "In se&lection"
 msgstr ""
 
-msgid "&Backwards"
-msgstr "Πρός τα &πίσω"
-
-msgid "case &Sensitive"
-msgstr "κεφαλαία/πε&ζά"
-
 msgid " Enter replacement string:"
 msgstr " Εισαγωγή ακολουθίας αντικατάστασης:"
-
-msgid " Enter search string:"
-msgstr " Εισαγωγή ακολουθίας προς αναζήτηση:"
 
 msgid "&Find all"
 msgstr ""
@@ -1786,9 +1878,6 @@ msgstr " Αντικατάσταση με: "
 
 msgid " Confirm replace "
 msgstr " Επιβεβαίωση αντικατάστασης "
-
-msgid "&Dismiss"
-msgstr ""
 
 #, c-format
 msgid ""
@@ -2081,12 +2170,6 @@ msgstr ""
 msgid " Editor options "
 msgstr " Επιλογές επεξεργαστή "
 
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
 msgid "ButtonBar|Mark"
 msgstr ""
 
@@ -2099,16 +2182,10 @@ msgstr ""
 msgid "ButtonBar|Move"
 msgstr ""
 
-msgid "ButtonBar|Search"
-msgstr ""
-
 msgid "ButtonBar|Delete"
 msgstr ""
 
 msgid "ButtonBar|PullDn"
-msgstr ""
-
-msgid "ButtonBar|Quit"
 msgstr ""
 
 msgid " Load syntax file "
@@ -3072,6 +3149,10 @@ msgstr ""
 msgid "&Compare directories"
 msgstr ""
 
+#, fuzzy
+msgid "&View diff files"
+msgstr "Άνοιγμα με..."
+
 msgid "E&xternal panelize"
 msgstr ""
 
@@ -3149,9 +3230,6 @@ msgid "ButtonBar|Menu"
 msgstr ""
 
 msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
 msgstr ""
 
 msgid "ButtonBar|RenMov"

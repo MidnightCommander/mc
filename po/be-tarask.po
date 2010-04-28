@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-23 10:46+0200\n"
+"POT-Creation-Date: 2010-04-28 16:02+0300\n"
 "PO-Revision-Date: 2002-08-25 16:15GMT+2\n"
 "Last-Translator: Vital Khilko <dojlid@mova.org>\n"
 "Language-Team: Belarusian (tarask) <debian-l10n-belarusian@lists.debian."
@@ -1488,6 +1488,132 @@ msgstr " Немагчыма выконваць каманды на не ляка
 msgid " The shell is already running a command "
 msgstr " Інтэрпрэтатар ужо апрацоўвае каманду "
 
+msgid "&Dismiss"
+msgstr "&Зачыніць"
+
+msgid "All charsets"
+msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "Толькі поўныя &словы"
+
+msgid "&Backwards"
+msgstr "&Назад"
+
+msgid "case &Sensitive"
+msgstr "Улік рэ&гістру"
+
+msgid " Enter search string:"
+msgstr " Увядзіце радок для пошуку"
+
+msgid "Search"
+msgstr "Пошук"
+
+msgid " Search is disabled "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary diff file \n"
+" %s "
+msgstr ""
+" Немагчыма стварыць часовы камандны файл \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create backup file \n"
+" %s%s \n"
+" %s "
+msgstr ""
+" Немагчыма стварыць файл мэты \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary merge file \n"
+" %s "
+msgstr ""
+" Немагчыма стварыць часовы камандны файл \n"
+" %s "
+
+#, fuzzy
+msgid "&Normal"
+msgstr "Фармат"
+
+msgid "&Fastest (Assume large files)"
+msgstr ""
+
+msgid "&Minimal (Find a smaller set of change)"
+msgstr ""
+
+msgid "Strip &trailing carriage return"
+msgstr ""
+
+msgid "Ignore all &whitespace"
+msgstr ""
+
+msgid "Ignore &space change"
+msgstr ""
+
+msgid "Ignore tab &expansion"
+msgstr ""
+
+msgid "&Ignore case"
+msgstr ""
+
+#, fuzzy
+msgid "Diff extra options"
+msgstr " Іншыя наладкі "
+
+msgid "Diff algorithm"
+msgstr ""
+
+#, fuzzy
+msgid "Diff Options"
+msgstr " Наладка "
+
+#, fuzzy
+msgid "Edit"
+msgstr "Праўка"
+
+msgid " Edit is disabled "
+msgstr ""
+
+msgid " Enter line: "
+msgstr " Увядзіце нумар радку: "
+
+msgid "ButtonBar|Help"
+msgstr ""
+
+msgid "ButtonBar|Save"
+msgstr ""
+
+msgid "ButtonBar|Edit"
+msgstr ""
+
+msgid "ButtonBar|Merge"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Options"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
+
+msgid "Quit"
+msgstr "Выхад"
+
+msgid " File was modified, Save with exit? "
+msgstr " Файл быў зьменены, захаваць пры выхадзе? "
+
+msgid "Two files are needed to compare"
+msgstr ""
+
 #, fuzzy
 msgid "Cannot read directory contents"
 msgstr "Немагчыма зьмяніць каталёг"
@@ -1552,9 +1678,6 @@ msgstr ""
 
 msgid "Macro recursion is too deep"
 msgstr ""
-
-msgid "Search"
-msgstr "Пошук"
 
 msgid " File has hard-links. Detach before saving? "
 msgstr ""
@@ -1692,12 +1815,6 @@ msgstr " Замяніць "
 msgid " %ld replacements made. "
 msgstr " Зьдейсьнена падстановак: %ld "
 
-msgid "Quit"
-msgstr "Выхад"
-
-msgid " File was modified, Save with exit? "
-msgstr " Файл быў зьменены, захаваць пры выхадзе? "
-
 #, fuzzy
 msgid "&Cancel quit"
 msgstr "Перарваць выхад"
@@ -1720,9 +1837,6 @@ msgstr " Выразаць у буфер "
 
 msgid " Goto line "
 msgstr " Перайсьці да радку "
-
-msgid " Enter line: "
-msgstr " Увядзіце нумар радку: "
 
 msgid " Save Block "
 msgstr " Захаваць блёк "
@@ -1808,28 +1922,12 @@ msgstr " Націсьніце любую клявішу: "
 msgid " Execute Macro "
 msgstr " Выканаць макрас "
 
-msgid "All charsets"
-msgstr ""
-
-#, fuzzy
-msgid "&Whole words"
-msgstr "Толькі поўныя &словы"
-
 #, fuzzy
 msgid "In se&lection"
 msgstr "Інвэр&таваць адзнаку *"
 
-msgid "&Backwards"
-msgstr "&Назад"
-
-msgid "case &Sensitive"
-msgstr "Улік рэ&гістру"
-
 msgid " Enter replacement string:"
 msgstr " Увядзіце тэкст для замены: "
-
-msgid " Enter search string:"
-msgstr " Увядзіце радок для пошуку"
 
 #, fuzzy
 msgid "&Find all"
@@ -1852,9 +1950,6 @@ msgstr " Замяніць на: "
 
 msgid " Confirm replace "
 msgstr " Падцьвердзіць замену "
-
-msgid "&Dismiss"
-msgstr "&Зачыніць"
 
 #, c-format
 msgid ""
@@ -2166,12 +2261,6 @@ msgstr "Рэжым пераносу радкоў"
 msgid " Editor options "
 msgstr " Наладка рэдактару "
 
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
 msgid "ButtonBar|Mark"
 msgstr ""
 
@@ -2184,16 +2273,10 @@ msgstr ""
 msgid "ButtonBar|Move"
 msgstr ""
 
-msgid "ButtonBar|Search"
-msgstr ""
-
 msgid "ButtonBar|Delete"
 msgstr ""
 
 msgid "ButtonBar|PullDn"
-msgstr ""
-
-msgid "ButtonBar|Quit"
 msgstr ""
 
 msgid " Load syntax file "
@@ -3270,6 +3353,10 @@ msgid "&Compare directories"
 msgstr " Параўнаць каталёгі "
 
 #, fuzzy
+msgid "&View diff files"
+msgstr " Прагляд файлу "
+
+#, fuzzy
 msgid "E&xternal panelize"
 msgstr "Вонкавая панэлізацыя"
 
@@ -3358,9 +3445,6 @@ msgid "ButtonBar|Menu"
 msgstr ""
 
 msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
 msgstr ""
 
 msgid "ButtonBar|RenMov"
@@ -4094,9 +4178,6 @@ msgstr "Працэс у тле:"
 
 #~ msgid " Command "
 #~ msgstr " Каманда "
-
-#~ msgid " Options "
-#~ msgstr " Наладка "
 
 #~ msgid "Intuitive"
 #~ msgstr "Інтуіцыйная"

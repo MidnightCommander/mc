@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc-4.5.36\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-23 10:46+0200\n"
+"POT-Creation-Date: 2010-04-28 16:02+0300\n"
 "PO-Revision-Date: 2000-10-27 15:37-03:00\n"
 "Last-Translator: E. A. Tacão <tacao@conectiva.com.br>\n"
 "Language-Team: Brazilian Portuguese <ldp-br@bazar.conectiva.com.br>\n"
@@ -1523,6 +1523,132 @@ msgstr " Não é possível executar comandos em um sistema de arquivos remoto"
 msgid " The shell is already running a command "
 msgstr " O interpretador de comandos já está executando um comando"
 
+msgid "&Dismiss"
+msgstr "&Dispensar"
+
+msgid "All charsets"
+msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "&Somente palavras inteiras"
+
+msgid "&Backwards"
+msgstr "&Para trás"
+
+msgid "case &Sensitive"
+msgstr "Sensível à &Caixa Alta ou Baixa"
+
+msgid " Enter search string:"
+msgstr "Digite a expressão a ser pesquisada:"
+
+msgid "Search"
+msgstr "Procurar"
+
+msgid " Search is disabled "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary diff file \n"
+" %s "
+msgstr ""
+"Impossível criar arquivo de comando temporário \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create backup file \n"
+" %s%s \n"
+" %s "
+msgstr ""
+" Impossível criar arquivo de destino \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary merge file \n"
+" %s "
+msgstr ""
+"Impossível criar arquivo de comando temporário \n"
+" %s "
+
+#, fuzzy
+msgid "&Normal"
+msgstr "Formatar"
+
+msgid "&Fastest (Assume large files)"
+msgstr ""
+
+msgid "&Minimal (Find a smaller set of change)"
+msgstr ""
+
+msgid "Strip &trailing carriage return"
+msgstr ""
+
+msgid "Ignore all &whitespace"
+msgstr ""
+
+msgid "Ignore &space change"
+msgstr ""
+
+msgid "Ignore tab &expansion"
+msgstr ""
+
+msgid "&Ignore case"
+msgstr ""
+
+#, fuzzy
+msgid "Diff extra options"
+msgstr " Outras opções "
+
+msgid "Diff algorithm"
+msgstr ""
+
+#, fuzzy
+msgid "Diff Options"
+msgstr " Opções "
+
+#, fuzzy
+msgid "Edit"
+msgstr "Editar"
+
+msgid " Edit is disabled "
+msgstr ""
+
+msgid " Enter line: "
+msgstr "Informe a linha: "
+
+msgid "ButtonBar|Help"
+msgstr ""
+
+msgid "ButtonBar|Save"
+msgstr ""
+
+msgid "ButtonBar|Edit"
+msgstr ""
+
+msgid "ButtonBar|Merge"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Options"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
+
+msgid "Quit"
+msgstr "Sair"
+
+msgid " File was modified, Save with exit? "
+msgstr " O arquivo foi modificado. Salvar antes de Sair ?"
+
+msgid "Two files are needed to compare"
+msgstr ""
+
 #, fuzzy
 msgid "Cannot read directory contents"
 msgstr " Impossível mudar de diretório"
@@ -1590,9 +1716,6 @@ msgstr ""
 
 msgid "Macro recursion is too deep"
 msgstr ""
-
-msgid "Search"
-msgstr "Procurar"
 
 msgid " File has hard-links. Detach before saving? "
 msgstr ""
@@ -1733,12 +1856,6 @@ msgstr " Substituir "
 msgid " %ld replacements made. "
 msgstr " %ld substituições feitas "
 
-msgid "Quit"
-msgstr "Sair"
-
-msgid " File was modified, Save with exit? "
-msgstr " O arquivo foi modificado. Salvar antes de Sair ?"
-
 #, fuzzy
 msgid "&Cancel quit"
 msgstr " Cancelar a saída "
@@ -1761,9 +1878,6 @@ msgstr " Corta para a área de transferência "
 
 msgid " Goto line "
 msgstr " Ir Para a linha "
-
-msgid " Enter line: "
-msgstr "Informe a linha: "
 
 msgid " Save Block "
 msgstr " Salvar Bloco "
@@ -1852,28 +1966,12 @@ msgstr " Pressione qualquer tecla: "
 msgid " Execute Macro "
 msgstr " Executar Macro "
 
-msgid "All charsets"
-msgstr ""
-
-#, fuzzy
-msgid "&Whole words"
-msgstr "&Somente palavras inteiras"
-
 #, fuzzy
 msgid "In se&lection"
 msgstr "Seleçã&O reversa  M-*"
 
-msgid "&Backwards"
-msgstr "&Para trás"
-
-msgid "case &Sensitive"
-msgstr "Sensível à &Caixa Alta ou Baixa"
-
 msgid " Enter replacement string:"
 msgstr "Digite a expressão de substituição:"
-
-msgid " Enter search string:"
-msgstr "Digite a expressão a ser pesquisada:"
 
 #, fuzzy
 msgid "&Find all"
@@ -1896,9 +1994,6 @@ msgstr " Substituir com: "
 
 msgid " Confirm replace "
 msgstr " Confirme substituição "
-
-msgid "&Dismiss"
-msgstr "&Dispensar"
 
 #, c-format
 msgid ""
@@ -2213,12 +2308,6 @@ msgstr "Modo Empacotado"
 msgid " Editor options "
 msgstr " Opções do editor "
 
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
 msgid "ButtonBar|Mark"
 msgstr ""
 
@@ -2231,16 +2320,10 @@ msgstr ""
 msgid "ButtonBar|Move"
 msgstr ""
 
-msgid "ButtonBar|Search"
-msgstr ""
-
 msgid "ButtonBar|Delete"
 msgstr ""
 
 msgid "ButtonBar|PullDn"
-msgstr ""
-
-msgid "ButtonBar|Quit"
 msgstr ""
 
 msgid " Load syntax file "
@@ -3319,6 +3402,10 @@ msgid "&Compare directories"
 msgstr " Comparar diretórios"
 
 #, fuzzy
+msgid "&View diff files"
+msgstr " Ver arquivo "
+
+#, fuzzy
 msgid "E&xternal panelize"
 msgstr "Painéis externos"
 
@@ -3407,9 +3494,6 @@ msgid "ButtonBar|Menu"
 msgstr ""
 
 msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
 msgstr ""
 
 msgid "ButtonBar|RenMov"
@@ -4158,9 +4242,6 @@ msgstr "Processo em segundo plano:"
 
 #~ msgid " Command "
 #~ msgstr " Comando "
-
-#~ msgid " Options "
-#~ msgstr " Opções "
 
 #~ msgid "Intuitive"
 #~ msgstr "Intuitivo"

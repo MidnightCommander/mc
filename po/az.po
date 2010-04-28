@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-23 10:46+0200\n"
+"POT-Creation-Date: 2010-04-28 16:02+0300\n"
 "PO-Revision-Date: 2001-09-26 16:43GMT +0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
@@ -1509,6 +1509,132 @@ msgstr " Yerli olmayan fayl sistemləri üstündə fayl işə sala bilməzsiniz 
 msgid " The shell is already running a command "
 msgstr " Shell artıq əmri işə salıb "
 
+msgid "&Dismiss"
+msgstr "&Keç"
+
+msgid "All charsets"
+msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "&Təkcə bütöv sözləri"
+
+msgid "&Backwards"
+msgstr "&geriyə doğru"
+
+msgid "case &Sensitive"
+msgstr "&Böyük/Kiçik hərflərə diqqət et"
+
+msgid " Enter search string:"
+msgstr " Axtarılacaq kəliməyi gir:"
+
+msgid "Search"
+msgstr "Axtar"
+
+msgid " Search is disabled "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary diff file \n"
+" %s "
+msgstr ""
+" Müvəqqəti əmr faylı yaradıla bilmir \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create backup file \n"
+" %s%s \n"
+" %s "
+msgstr ""
+" Hədəf faylı \"%s\" yaradıla bilmir \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary merge file \n"
+" %s "
+msgstr ""
+" Müvəqqəti əmr faylı yaradıla bilmir \n"
+" %s "
+
+#, fuzzy
+msgid "&Normal"
+msgstr "Şəkil"
+
+msgid "&Fastest (Assume large files)"
+msgstr ""
+
+msgid "&Minimal (Find a smaller set of change)"
+msgstr ""
+
+msgid "Strip &trailing carriage return"
+msgstr ""
+
+msgid "Ignore all &whitespace"
+msgstr ""
+
+msgid "Ignore &space change"
+msgstr ""
+
+msgid "Ignore tab &expansion"
+msgstr ""
+
+msgid "&Ignore case"
+msgstr ""
+
+#, fuzzy
+msgid "Diff extra options"
+msgstr " O biri seçənəklər"
+
+msgid "Diff algorithm"
+msgstr ""
+
+#, fuzzy
+msgid "Diff Options"
+msgstr " Seçənəklər "
+
+#, fuzzy
+msgid "Edit"
+msgstr "Düzəlt"
+
+msgid " Edit is disabled "
+msgstr ""
+
+msgid " Enter line: "
+msgstr " Sətiri tap: "
+
+msgid "ButtonBar|Help"
+msgstr ""
+
+msgid "ButtonBar|Save"
+msgstr ""
+
+msgid "ButtonBar|Edit"
+msgstr ""
+
+msgid "ButtonBar|Merge"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Options"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
+
+msgid "Quit"
+msgstr "Çıx"
+
+msgid " File was modified, Save with exit? "
+msgstr " Fayl dəyişdirilmişdir, Çıxarkən qeyd edim mi? "
+
+msgid "Two files are needed to compare"
+msgstr ""
+
 #, fuzzy
 msgid "Cannot read directory contents"
 msgstr "Qovluq dəyişdirilə bilmir"
@@ -1573,9 +1699,6 @@ msgstr ""
 
 msgid "Macro recursion is too deep"
 msgstr ""
-
-msgid "Search"
-msgstr "Axtar"
 
 msgid " File has hard-links. Detach before saving? "
 msgstr ""
@@ -1714,12 +1837,6 @@ msgstr " Dəyişdir "
 msgid " %ld replacements made. "
 msgstr " %ld dəyişikliklər edildi. "
 
-msgid "Quit"
-msgstr "Çıx"
-
-msgid " File was modified, Save with exit? "
-msgstr " Fayl dəyişdirilmişdir, Çıxarkən qeyd edim mi? "
-
 #, fuzzy
 msgid "&Cancel quit"
 msgstr "Çıxışı dayandır"
@@ -1742,9 +1859,6 @@ msgstr " Ara yaddaşa kəs "
 
 msgid " Goto line "
 msgstr " Sətirə get "
-
-msgid " Enter line: "
-msgstr " Sətiri tap: "
 
 msgid " Save Block "
 msgstr " Bloku qeyd et "
@@ -1830,28 +1944,12 @@ msgstr " İstədiyin düyməyə bas :"
 msgid " Execute Macro "
 msgstr " Makronu işə sal"
 
-msgid "All charsets"
-msgstr ""
-
-#, fuzzy
-msgid "&Whole words"
-msgstr "&Təkcə bütöv sözləri"
-
 #, fuzzy
 msgid "In se&lection"
 msgstr "Qrupu tə&rsçevir     M-*"
 
-msgid "&Backwards"
-msgstr "&geriyə doğru"
-
-msgid "case &Sensitive"
-msgstr "&Böyük/Kiçik hərflərə diqqət et"
-
 msgid " Enter replacement string:"
 msgstr " Dəyişdiriləcək kəliməyi gir:"
-
-msgid " Enter search string:"
-msgstr " Axtarılacaq kəliməyi gir:"
 
 #, fuzzy
 msgid "&Find all"
@@ -1874,9 +1972,6 @@ msgstr " Bunla dəyişdir: "
 
 msgid " Confirm replace "
 msgstr " Dəyişikliyi qəbul et"
-
-msgid "&Dismiss"
-msgstr "&Keç"
 
 #, c-format
 msgid ""
@@ -2188,12 +2283,6 @@ msgstr "Qırma modu"
 msgid " Editor options "
 msgstr " Düzəldici seçənəkləri"
 
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
 msgid "ButtonBar|Mark"
 msgstr ""
 
@@ -2206,16 +2295,10 @@ msgstr ""
 msgid "ButtonBar|Move"
 msgstr ""
 
-msgid "ButtonBar|Search"
-msgstr ""
-
 msgid "ButtonBar|Delete"
 msgstr ""
 
 msgid "ButtonBar|PullDn"
-msgstr ""
-
-msgid "ButtonBar|Quit"
 msgstr ""
 
 msgid " Load syntax file "
@@ -3292,6 +3375,10 @@ msgid "&Compare directories"
 msgstr " Qovluqları müqayisə et"
 
 #, fuzzy
+msgid "&View diff files"
+msgstr " Faylı göstər "
+
+#, fuzzy
 msgid "E&xternal panelize"
 msgstr "Xarici panelləşdirmə"
 
@@ -3379,9 +3466,6 @@ msgid "ButtonBar|Menu"
 msgstr ""
 
 msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
 msgstr ""
 
 msgid "ButtonBar|RenMov"
@@ -4115,9 +4199,6 @@ msgstr "Arxaplan gedişatı:"
 
 #~ msgid " Command "
 #~ msgstr " Əmr "
-
-#~ msgid " Options "
-#~ msgstr " Seçənəklər "
 
 #~ msgid "Intuitive"
 #~ msgstr "Hissi"

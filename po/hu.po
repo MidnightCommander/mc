@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-23 10:46+0200\n"
+"POT-Creation-Date: 2010-04-28 16:02+0300\n"
 "PO-Revision-Date: 2005-10-01 00:47+0200\n"
 "Last-Translator: SZABO Gergely <szg@subogero.com>\n"
 "Language-Team: Hungarian <debian-l10n-hungarian@lists.debian.org>\n"
@@ -1500,6 +1500,137 @@ msgstr " Távoli fájlrendszeren nem lehet végrehajtani a parancsokat "
 msgid " The shell is already running a command "
 msgstr " A parancsértelmező már futtat egy parancsot. "
 
+msgid "&Dismiss"
+msgstr "&Tovább"
+
+msgid "All charsets"
+msgstr "Összes karakterkészlet"
+
+msgid "&Whole words"
+msgstr "Csak &teljes szót"
+
+msgid "&Backwards"
+msgstr "&Visszafelé"
+
+msgid "case &Sensitive"
+msgstr "&Kis-/nagybetű számít"
+
+msgid " Enter search string:"
+msgstr " Keresendő szöveg:"
+
+# a gombsorban is szerepel (F7)
+msgid "Search"
+msgstr "Keresés"
+
+msgid " Search is disabled "
+msgstr ""
+
+# %s: unixos hibaüzenet
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary diff file \n"
+" %s "
+msgstr ""
+" Nem sikerült ideiglenes parancsfájlt létrehozni. \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create backup file \n"
+" %s%s \n"
+" %s "
+msgstr ""
+" Nem sikerült létrehozni a(z) \"%s\" célfájlt. \n"
+" %s "
+
+# %s: unixos hibaüzenet
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary merge file \n"
+" %s "
+msgstr ""
+" Nem sikerült ideiglenes parancsfájlt létrehozni. \n"
+" %s "
+
+#, fuzzy
+msgid "&Normal"
+msgstr "Normális"
+
+msgid "&Fastest (Assume large files)"
+msgstr ""
+
+msgid "&Minimal (Find a smaller set of change)"
+msgstr ""
+
+msgid "Strip &trailing carriage return"
+msgstr ""
+
+msgid "Ignore all &whitespace"
+msgstr ""
+
+msgid "Ignore &space change"
+msgstr ""
+
+msgid "Ignore tab &expansion"
+msgstr ""
+
+#, fuzzy
+msgid "&Ignore case"
+msgstr "&Nem érdekes, tovább"
+
+#, fuzzy
+msgid "Diff extra options"
+msgstr " További opciók "
+
+msgid "Diff algorithm"
+msgstr ""
+
+#, fuzzy
+msgid "Diff Options"
+msgstr " Beállítások "
+
+#, fuzzy
+msgid "Edit"
+msgstr "Szerkeszt"
+
+msgid " Edit is disabled "
+msgstr ""
+
+msgid " Enter line: "
+msgstr " Sor száma: "
+
+msgid "ButtonBar|Help"
+msgstr "Súgó"
+
+msgid "ButtonBar|Save"
+msgstr "Ment"
+
+msgid "ButtonBar|Edit"
+msgstr "Szerk"
+
+#, fuzzy
+msgid "ButtonBar|Merge"
+msgstr "Felejt"
+
+msgid "ButtonBar|Search"
+msgstr "Keres"
+
+#, fuzzy
+msgid "ButtonBar|Options"
+msgstr "UgrSor"
+
+msgid "ButtonBar|Quit"
+msgstr "Kilép"
+
+msgid "Quit"
+msgstr "Kilép"
+
+msgid " File was modified, Save with exit? "
+msgstr " A fájl módosult. Menti kilépéskor? "
+
+msgid "Two files are needed to compare"
+msgstr ""
+
 msgid "Cannot read directory contents"
 msgstr "Könyvtár tartalma nem olvasható"
 
@@ -1562,10 +1693,6 @@ msgstr ""
 
 msgid "Macro recursion is too deep"
 msgstr "A makrórekurzió túl mély"
-
-# a gombsorban is szerepel (F7)
-msgid "Search"
-msgstr "Keresés"
 
 msgid " File has hard-links. Detach before saving? "
 msgstr " A fájlban \"hard-link\" van. Leválaszt mentés előtt? "
@@ -1697,12 +1824,6 @@ msgstr " Csere "
 msgid " %ld replacements made. "
 msgstr " %ld csere történt. "
 
-msgid "Quit"
-msgstr "Kilép"
-
-msgid " File was modified, Save with exit? "
-msgstr " A fájl módosult. Menti kilépéskor? "
-
 msgid "&Cancel quit"
 msgstr "&Mégsem lép ki"
 
@@ -1724,9 +1845,6 @@ msgstr " Kivágás a vágólapra "
 
 msgid " Goto line "
 msgstr " Ugrás adott sorra "
-
-msgid " Enter line: "
-msgstr " Sor száma: "
 
 msgid " Save Block "
 msgstr " Blokk mentése "
@@ -1810,26 +1928,11 @@ msgstr " Nyomjon meg egy billentyűt: "
 msgid " Execute Macro "
 msgstr " Makró futtatása "
 
-msgid "All charsets"
-msgstr "Összes karakterkészlet"
-
-msgid "&Whole words"
-msgstr "Csak &teljes szót"
-
 msgid "In se&lection"
 msgstr "A kijelölt &szövegben"
 
-msgid "&Backwards"
-msgstr "&Visszafelé"
-
-msgid "case &Sensitive"
-msgstr "&Kis-/nagybetű számít"
-
 msgid " Enter replacement string:"
 msgstr "  Újszöveg:"
-
-msgid " Enter search string:"
-msgstr " Keresendő szöveg:"
 
 msgid "&Find all"
 msgstr "Min&det"
@@ -1851,9 +1954,6 @@ msgstr " Csere erre: "
 
 msgid " Confirm replace "
 msgstr " Csere megerősítése "
-
-msgid "&Dismiss"
-msgstr "&Tovább"
 
 #, c-format
 msgid ""
@@ -2121,12 +2221,6 @@ msgstr "Tördelés"
 msgid " Editor options "
 msgstr " A szövegszerkesztő beállításai "
 
-msgid "ButtonBar|Help"
-msgstr "Súgó"
-
-msgid "ButtonBar|Save"
-msgstr "Ment"
-
 msgid "ButtonBar|Mark"
 msgstr "Jelöl"
 
@@ -2139,17 +2233,11 @@ msgstr "Másol"
 msgid "ButtonBar|Move"
 msgstr "Mozgat"
 
-msgid "ButtonBar|Search"
-msgstr "Keres"
-
 msgid "ButtonBar|Delete"
 msgstr "Töröl"
 
 msgid "ButtonBar|PullDn"
 msgstr "Főmenü"
-
-msgid "ButtonBar|Quit"
-msgstr "Kilép"
 
 msgid " Load syntax file "
 msgstr " Szintaxisfájl betöltése "
@@ -3229,6 +3317,10 @@ msgstr "Pane&lek ki/be"
 msgid "&Compare directories"
 msgstr " Könyvtárak összehasonlítása "
 
+#, fuzzy
+msgid "&View diff files"
+msgstr " Fájl megjelenítése "
+
 msgid "E&xternal panelize"
 msgstr "Külső panel-parancs"
 
@@ -3308,9 +3400,6 @@ msgstr "Menü"
 
 msgid "ButtonBar|View"
 msgstr "Megnéz"
-
-msgid "ButtonBar|Edit"
-msgstr "Szerk"
 
 msgid "ButtonBar|RenMov"
 msgstr "Mozgat"
@@ -3915,9 +4004,6 @@ msgstr "Háttérfolyamat:"
 #~ msgid " Invalid address "
 #~ msgstr " Hibás cím "
 
-#~ msgid "ButtonBar|Line"
-#~ msgstr "UgrSor"
-
 #~ msgid "File: %s"
 #~ msgstr "Fájl: %s"
 
@@ -4077,9 +4163,6 @@ msgstr "Háttérfolyamat:"
 # menü
 #~ msgid " Command "
 #~ msgstr " Eszközök "
-
-#~ msgid " Options "
-#~ msgstr " Beállítások "
 
 #~ msgid "Intuitive"
 #~ msgstr "Intuitív"

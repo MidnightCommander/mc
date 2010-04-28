@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-23 10:46+0200\n"
+"POT-Creation-Date: 2010-04-28 16:02+0300\n"
 "PO-Revision-Date: 2001-11-20 15:15+0200\n"
 "Last-Translator: Artis Trops <hornet@navigators.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -1510,6 +1510,132 @@ msgstr " Tu nevari palaist komandas uz ne-vietējām failsistēmām"
 msgid " The shell is already running a command "
 msgstr " Čaulā jau ir palaista komanda "
 
+msgid "&Dismiss"
+msgstr "&Atcelt"
+
+msgid "All charsets"
+msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "&Tikai veselus vārdus"
+
+msgid "&Backwards"
+msgstr "at&Pakaļ"
+
+msgid "case &Sensitive"
+msgstr "lielo/mazo burtu &Jūtigs"
+
+msgid " Enter search string:"
+msgstr " Ievadiet meklējamo virkni:"
+
+msgid "Search"
+msgstr "Meklēt"
+
+msgid " Search is disabled "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary diff file \n"
+" %s "
+msgstr ""
+" Nevar izveidot īslaicīgu komandas failu \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create backup file \n"
+" %s%s \n"
+" %s "
+msgstr ""
+" Nevar izveidot mērķa failu \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary merge file \n"
+" %s "
+msgstr ""
+" Nevar izveidot īslaicīgu komandas failu \n"
+" %s "
+
+#, fuzzy
+msgid "&Normal"
+msgstr "Formatēt"
+
+msgid "&Fastest (Assume large files)"
+msgstr ""
+
+msgid "&Minimal (Find a smaller set of change)"
+msgstr ""
+
+msgid "Strip &trailing carriage return"
+msgstr ""
+
+msgid "Ignore all &whitespace"
+msgstr ""
+
+msgid "Ignore &space change"
+msgstr ""
+
+msgid "Ignore tab &expansion"
+msgstr ""
+
+msgid "&Ignore case"
+msgstr ""
+
+#, fuzzy
+msgid "Diff extra options"
+msgstr " Citas opcijas"
+
+msgid "Diff algorithm"
+msgstr ""
+
+#, fuzzy
+msgid "Diff Options"
+msgstr " Opcijas "
+
+#, fuzzy
+msgid "Edit"
+msgstr "Rediģēt"
+
+msgid " Edit is disabled "
+msgstr ""
+
+msgid " Enter line: "
+msgstr " Ievadīet līniju: "
+
+msgid "ButtonBar|Help"
+msgstr ""
+
+msgid "ButtonBar|Save"
+msgstr ""
+
+msgid "ButtonBar|Edit"
+msgstr ""
+
+msgid "ButtonBar|Merge"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Options"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
+
+msgid "Quit"
+msgstr "Iziet"
+
+msgid " File was modified, Save with exit? "
+msgstr " Fails tika mainīts, saglabāt izejot?"
+
+msgid "Two files are needed to compare"
+msgstr ""
+
 #, fuzzy
 msgid "Cannot read directory contents"
 msgstr "Nevar nomainīt direktoriju"
@@ -1574,9 +1700,6 @@ msgstr ""
 
 msgid "Macro recursion is too deep"
 msgstr ""
-
-msgid "Search"
-msgstr "Meklēt"
 
 msgid " File has hard-links. Detach before saving? "
 msgstr ""
@@ -1715,12 +1838,6 @@ msgstr " Aizvietot "
 msgid " %ld replacements made. "
 msgstr " %ld aizstāšanas režīms. "
 
-msgid "Quit"
-msgstr "Iziet"
-
-msgid " File was modified, Save with exit? "
-msgstr " Fails tika mainīts, saglabāt izejot?"
-
 #, fuzzy
 msgid "&Cancel quit"
 msgstr "Atcelt iziešanu"
@@ -1743,9 +1860,6 @@ msgstr " Aiznest uz starpliktuvi "
 
 msgid " Goto line "
 msgstr " Iet uz līniju "
-
-msgid " Enter line: "
-msgstr " Ievadīet līniju: "
 
 msgid " Save Block "
 msgstr " Saglabāt Bloku "
@@ -1832,28 +1946,12 @@ msgstr " Spiest jebkuru taustiņu: "
 msgid " Execute Macro "
 msgstr " Palaist Makro "
 
-msgid "All charsets"
-msgstr ""
-
-#, fuzzy
-msgid "&Whole words"
-msgstr "&Tikai veselus vārdus"
-
 #, fuzzy
 msgid "In se&lection"
 msgstr "pretēji izvēlē&Tajam M-*"
 
-msgid "&Backwards"
-msgstr "at&Pakaļ"
-
-msgid "case &Sensitive"
-msgstr "lielo/mazo burtu &Jūtigs"
-
 msgid " Enter replacement string:"
 msgstr " Ievadiet aizvietotājvirkni:"
-
-msgid " Enter search string:"
-msgstr " Ievadiet meklējamo virkni:"
 
 #, fuzzy
 msgid "&Find all"
@@ -1876,9 +1974,6 @@ msgstr " Aizvietot ar: "
 
 msgid " Confirm replace "
 msgstr " Apstirpināt aizvietošanu "
-
-msgid "&Dismiss"
-msgstr "&Atcelt"
 
 #, c-format
 msgid ""
@@ -2190,12 +2285,6 @@ msgstr "Iekļaušanas režīms"
 msgid " Editor options "
 msgstr " Redaktora opcijas "
 
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
 msgid "ButtonBar|Mark"
 msgstr ""
 
@@ -2208,16 +2297,10 @@ msgstr ""
 msgid "ButtonBar|Move"
 msgstr ""
 
-msgid "ButtonBar|Search"
-msgstr ""
-
 msgid "ButtonBar|Delete"
 msgstr ""
 
 msgid "ButtonBar|PullDn"
-msgstr ""
-
-msgid "ButtonBar|Quit"
 msgstr ""
 
 msgid " Load syntax file "
@@ -3297,6 +3380,10 @@ msgid "&Compare directories"
 msgstr " Salīdzināt direktorijas "
 
 #, fuzzy
+msgid "&View diff files"
+msgstr " Skatīt failu "
+
+#, fuzzy
 msgid "E&xternal panelize"
 msgstr "Ārējā panelēšana"
 
@@ -3386,9 +3473,6 @@ msgid "ButtonBar|Menu"
 msgstr ""
 
 msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
 msgstr ""
 
 msgid "ButtonBar|RenMov"
@@ -4123,9 +4207,6 @@ msgstr "Fona process:"
 
 #~ msgid " Command "
 #~ msgstr " Komanda "
-
-#~ msgid " Options "
-#~ msgstr " Opcijas "
 
 #~ msgid "Intuitive"
 #~ msgstr "Intuitīvi"

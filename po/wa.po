@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-23 10:46+0200\n"
+"POT-Creation-Date: 2010-04-28 16:02+0300\n"
 "PO-Revision-Date: 1999-03-18 23:11+0100\n"
 "Last-Translator: Lorint Hendschel <LorintHendschel@skynet.be>\n"
 "Language-Team: Wallon <linux-wa@chanae.alphanet.ch>\n"
@@ -1467,6 +1467,132 @@ msgstr ""
 msgid " The shell is already running a command "
 msgstr "Li shell est ddja k' il enonde ene comande "
 
+msgid "&Dismiss"
+msgstr "&Rinoncî"
+
+msgid "All charsets"
+msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "Rén &ki des mots etirs"
+
+msgid "&Backwards"
+msgstr "È&n erî"
+
+msgid "case &Sensitive"
+msgstr "Grandès <> ptitès letes"
+
+msgid " Enter search string:"
+msgstr " Dinez li tchinne a cweri après:"
+
+msgid "Search"
+msgstr "Cweri"
+
+msgid " Search is disabled "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary diff file \n"
+" %s "
+msgstr ""
+" Dji n' sai fé on passant fitchî di cmande \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create backup file \n"
+" %s%s \n"
+" %s "
+msgstr ""
+" Dji n' sai fé li fitchî såme «%s» \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary merge file \n"
+" %s "
+msgstr ""
+" Dji n' sai fé on passant fitchî di cmande \n"
+" %s "
+
+#, fuzzy
+msgid "&Normal"
+msgstr "&Locå"
+
+msgid "&Fastest (Assume large files)"
+msgstr ""
+
+msgid "&Minimal (Find a smaller set of change)"
+msgstr ""
+
+msgid "Strip &trailing carriage return"
+msgstr ""
+
+msgid "Ignore all &whitespace"
+msgstr ""
+
+msgid "Ignore &space change"
+msgstr ""
+
+msgid "Ignore tab &expansion"
+msgstr ""
+
+msgid "&Ignore case"
+msgstr ""
+
+#, fuzzy
+msgid "Diff extra options"
+msgstr " Ôtès tchûzes "
+
+msgid "Diff algorithm"
+msgstr ""
+
+#, fuzzy
+msgid "Diff Options"
+msgstr " Tchûzes "
+
+#, fuzzy
+msgid "Edit"
+msgstr "Aspougnî"
+
+msgid " Edit is disabled "
+msgstr ""
+
+msgid " Enter line: "
+msgstr " Diner roye: "
+
+msgid "ButtonBar|Help"
+msgstr ""
+
+msgid "ButtonBar|Save"
+msgstr ""
+
+msgid "ButtonBar|Edit"
+msgstr ""
+
+msgid "ButtonBar|Merge"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Options"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
+
+msgid "Quit"
+msgstr "Cwiter"
+
+msgid " File was modified, Save with exit? "
+msgstr " Li fitchî a stî candjî. El fåt-i schaper tot moussant foû? "
+
+msgid "Two files are needed to compare"
+msgstr ""
+
 #, fuzzy
 msgid "Cannot read directory contents"
 msgstr "Dji n' sai candjî di ridant"
@@ -1531,9 +1657,6 @@ msgstr ""
 
 msgid "Macro recursion is too deep"
 msgstr ""
-
-msgid "Search"
-msgstr "Cweri"
 
 msgid " File has hard-links. Detach before saving? "
 msgstr ""
@@ -1673,12 +1796,6 @@ msgstr " Mete el plaece "
 msgid " %ld replacements made. "
 msgstr " %ld discandjes di fwaites. "
 
-msgid "Quit"
-msgstr "Cwiter"
-
-msgid " File was modified, Save with exit? "
-msgstr " Li fitchî a stî candjî. El fåt-i schaper tot moussant foû? "
-
 #, fuzzy
 msgid "&Cancel quit"
 msgstr "Rinoncî a moussî foû"
@@ -1701,9 +1818,6 @@ msgstr " Côper evoye e tchapea emacralé "
 
 msgid " Goto line "
 msgstr " Potchî al roye "
-
-msgid " Enter line: "
-msgstr " Diner roye: "
 
 msgid " Save Block "
 msgstr " Schaper li blok "
@@ -1792,28 +1906,12 @@ msgstr " Tchôkî tot l' minme li kéne tape: "
 msgid " Execute Macro "
 msgstr " Enonder Macro "
 
-msgid "All charsets"
-msgstr ""
-
-#, fuzzy
-msgid "&Whole words"
-msgstr "Rén &ki des mots etirs"
-
 #, fuzzy
 msgid "In se&lection"
 msgstr "reverse selec&Tion M-*"
 
-msgid "&Backwards"
-msgstr "È&n erî"
-
-msgid "case &Sensitive"
-msgstr "Grandès <> ptitès letes"
-
 msgid " Enter replacement string:"
 msgstr " Dinez li tchinne pol discandje:"
-
-msgid " Enter search string:"
-msgstr " Dinez li tchinne a cweri après:"
 
 #, fuzzy
 msgid "&Find all"
@@ -1836,9 +1934,6 @@ msgstr " Mete çouchal el plaece: "
 
 msgid " Confirm replace "
 msgstr " Racertiner li discandje "
-
-msgid "&Dismiss"
-msgstr "&Rinoncî"
 
 #, c-format
 msgid ""
@@ -2150,12 +2245,6 @@ msgstr "Môde côpaedje di roye"
 msgid " Editor options "
 msgstr " Tchûzes po l' aspougneu "
 
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
 msgid "ButtonBar|Mark"
 msgstr ""
 
@@ -2168,16 +2257,10 @@ msgstr ""
 msgid "ButtonBar|Move"
 msgstr ""
 
-msgid "ButtonBar|Search"
-msgstr ""
-
 msgid "ButtonBar|Delete"
 msgstr ""
 
 msgid "ButtonBar|PullDn"
-msgstr ""
-
-msgid "ButtonBar|Quit"
 msgstr ""
 
 msgid " Load syntax file "
@@ -3259,6 +3342,10 @@ msgid "&Compare directories"
 msgstr " Rimete les ridants "
 
 #, fuzzy
+msgid "&View diff files"
+msgstr " Loukî e fitchî "
+
+#, fuzzy
 msgid "E&xternal panelize"
 msgstr "Difoûtrins paneas"
 
@@ -3343,9 +3430,6 @@ msgid "ButtonBar|Menu"
 msgstr ""
 
 msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
 msgstr ""
 
 msgid "ButtonBar|RenMov"
@@ -4078,9 +4162,6 @@ msgstr "Porcessus di fond:"
 
 #~ msgid " Command "
 #~ msgstr " Comande "
-
-#~ msgid " Options "
-#~ msgstr " Tchûzes "
 
 #~ msgid "Intuitive"
 #~ msgstr "A sinti"

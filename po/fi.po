@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gmc finnish 0.01\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-23 10:46+0200\n"
+"POT-Creation-Date: 2010-04-28 16:02+0300\n"
 "PO-Revision-Date: 1999-08-23 17:30+0200\n"
 "Last-Translator: Mikko Rauhala <mjr@iki.fi>\n"
 "Language-Team: Finnish <debian-l10n-finnish@lists.debian.org>\n"
@@ -1452,6 +1452,132 @@ msgstr " Ei-paikallisesta tiedostojärjestelmästä ei voi suorittaa komentoja"
 msgid " The shell is already running a command "
 msgstr ""
 
+msgid "&Dismiss"
+msgstr "&Kuittaa"
+
+msgid "All charsets"
+msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "&Vain koko sanat"
+
+msgid "&Backwards"
+msgstr "&Takaperin"
+
+msgid "case &Sensitive"
+msgstr "isot/pienet kirjaimet &erilaisia"
+
+msgid " Enter search string:"
+msgstr " Anna haettava merkkijono:"
+
+msgid "Search"
+msgstr "Etsi"
+
+msgid " Search is disabled "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary diff file \n"
+" %s "
+msgstr ""
+" Ei voitu luoda väliaikaiskomentotiedostoa \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create backup file \n"
+" %s%s \n"
+" %s "
+msgstr ""
+" Ei voitu avata erityistiedostoa \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary merge file \n"
+" %s "
+msgstr ""
+" Ei voitu luoda väliaikaiskomentotiedostoa \n"
+" %s "
+
+#, fuzzy
+msgid "&Normal"
+msgstr "&Paikallinen"
+
+msgid "&Fastest (Assume large files)"
+msgstr ""
+
+msgid "&Minimal (Find a smaller set of change)"
+msgstr ""
+
+msgid "Strip &trailing carriage return"
+msgstr ""
+
+msgid "Ignore all &whitespace"
+msgstr ""
+
+msgid "Ignore &space change"
+msgstr ""
+
+msgid "Ignore tab &expansion"
+msgstr ""
+
+msgid "&Ignore case"
+msgstr ""
+
+#, fuzzy
+msgid "Diff extra options"
+msgstr " Muokkaimen valinnat "
+
+msgid "Diff algorithm"
+msgstr ""
+
+#, fuzzy
+msgid "Diff Options"
+msgstr " Valinnat "
+
+#, fuzzy
+msgid "Edit"
+msgstr "Muokkaa"
+
+msgid " Edit is disabled "
+msgstr ""
+
+msgid " Enter line: "
+msgstr " Anna rivi: "
+
+msgid "ButtonBar|Help"
+msgstr ""
+
+msgid "ButtonBar|Save"
+msgstr ""
+
+msgid "ButtonBar|Edit"
+msgstr ""
+
+msgid "ButtonBar|Merge"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Options"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
+
+msgid "Quit"
+msgstr "Lopeta"
+
+msgid " File was modified, Save with exit? "
+msgstr " Tiedostoa on muutettu, tallennetaanko lopetettaessa? "
+
+msgid "Two files are needed to compare"
+msgstr ""
+
 #, fuzzy
 msgid "Cannot read directory contents"
 msgstr "Ei voitu vaihtaa hakemistoa"
@@ -1517,9 +1643,6 @@ msgstr ""
 
 msgid "Macro recursion is too deep"
 msgstr ""
-
-msgid "Search"
-msgstr "Etsi"
 
 msgid " File has hard-links. Detach before saving? "
 msgstr ""
@@ -1659,12 +1782,6 @@ msgstr " Korvaa "
 msgid " %ld replacements made. "
 msgstr " %ld korvausta tehty. "
 
-msgid "Quit"
-msgstr "Lopeta"
-
-msgid " File was modified, Save with exit? "
-msgstr " Tiedostoa on muutettu, tallennetaanko lopetettaessa? "
-
 #, fuzzy
 msgid "&Cancel quit"
 msgstr "Peruuta lopetus"
@@ -1687,9 +1804,6 @@ msgstr " Leikkaa leikepöydälle "
 
 msgid " Goto line "
 msgstr " Siirry riville "
-
-msgid " Enter line: "
-msgstr " Anna rivi: "
 
 msgid " Save Block "
 msgstr " Tallenna valinta "
@@ -1774,28 +1888,12 @@ msgstr " Paina jotakin näppäintä: "
 msgid " Execute Macro "
 msgstr " Suorita makro "
 
-msgid "All charsets"
-msgstr ""
-
-#, fuzzy
-msgid "&Whole words"
-msgstr "&Vain koko sanat"
-
 #, fuzzy
 msgid "In se&lection"
 msgstr " Poista valinta"
 
-msgid "&Backwards"
-msgstr "&Takaperin"
-
-msgid "case &Sensitive"
-msgstr "isot/pienet kirjaimet &erilaisia"
-
 msgid " Enter replacement string:"
 msgstr " Anna korvaava merkkijono:"
-
-msgid " Enter search string:"
-msgstr " Anna haettava merkkijono:"
 
 #, fuzzy
 msgid "&Find all"
@@ -1818,9 +1916,6 @@ msgstr " Korvaus: "
 
 msgid " Confirm replace "
 msgstr " Varmista korvaus "
-
-msgid "&Dismiss"
-msgstr "&Kuittaa"
 
 #, c-format
 msgid ""
@@ -2128,12 +2223,6 @@ msgstr "Kieromoodi"
 msgid " Editor options "
 msgstr " Muokkaimen valinnat "
 
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
 msgid "ButtonBar|Mark"
 msgstr ""
 
@@ -2146,16 +2235,10 @@ msgstr ""
 msgid "ButtonBar|Move"
 msgstr ""
 
-msgid "ButtonBar|Search"
-msgstr ""
-
 msgid "ButtonBar|Delete"
 msgstr ""
 
 msgid "ButtonBar|PullDn"
-msgstr ""
-
-msgid "ButtonBar|Quit"
 msgstr ""
 
 msgid " Load syntax file "
@@ -3149,6 +3232,10 @@ msgstr ""
 msgid "&Compare directories"
 msgstr " Vertaa hakemistoja "
 
+#, fuzzy
+msgid "&View diff files"
+msgstr " Näytä tiedosto "
+
 msgid "E&xternal panelize"
 msgstr ""
 
@@ -3230,9 +3317,6 @@ msgid "ButtonBar|Menu"
 msgstr ""
 
 msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
 msgstr ""
 
 msgid "ButtonBar|RenMov"

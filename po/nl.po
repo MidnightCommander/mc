@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.0\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-23 10:46+0200\n"
+"POT-Creation-Date: 2010-04-28 16:02+0300\n"
 "PO-Revision-Date: 2010-03-09\n"
 "Last-Translator: Marcel Pol <mpol@gmx.net>\n"
 "Language-Team: \n"
@@ -1483,6 +1483,134 @@ msgstr " U kunt geen opdrachten uitvoeren op non-lokale bestandssystemen"
 msgid " The shell is already running a command "
 msgstr " De shell voert al een opdracht uit "
 
+msgid "&Dismiss"
+msgstr "&Verwerp"
+
+msgid "All charsets"
+msgstr "Alle karaktersets"
+
+msgid "&Whole words"
+msgstr "Hele &Woorden"
+
+msgid "&Backwards"
+msgstr "&Terug"
+
+msgid "case &Sensitive"
+msgstr "&Hoofd/Kleine-letters"
+
+msgid " Enter search string:"
+msgstr " Geef de zoekstring:"
+
+msgid "Search"
+msgstr "Zoeken"
+
+msgid " Search is disabled "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary diff file \n"
+" %s "
+msgstr ""
+" Kan geen tijdelijk opdrachtenbestand maken \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create backup file \n"
+" %s%s \n"
+" %s "
+msgstr ""
+" Doelbestand \"%s\" kan niet gecreëerd worden \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary merge file \n"
+" %s "
+msgstr ""
+" Kan geen tijdelijk opdrachtenbestand maken \n"
+" %s "
+
+#, fuzzy
+msgid "&Normal"
+msgstr "Normaal"
+
+msgid "&Fastest (Assume large files)"
+msgstr ""
+
+msgid "&Minimal (Find a smaller set of change)"
+msgstr ""
+
+msgid "Strip &trailing carriage return"
+msgstr ""
+
+msgid "Ignore all &whitespace"
+msgstr ""
+
+msgid "Ignore &space change"
+msgstr ""
+
+msgid "Ignore tab &expansion"
+msgstr ""
+
+#, fuzzy
+msgid "&Ignore case"
+msgstr "Negeer vergrendel&Ing"
+
+#, fuzzy
+msgid "Diff extra options"
+msgstr " Overige opties "
+
+msgid "Diff algorithm"
+msgstr ""
+
+#, fuzzy
+msgid "Diff Options"
+msgstr "&Opties"
+
+#, fuzzy
+msgid "Edit"
+msgstr "Be&Werk"
+
+msgid " Edit is disabled "
+msgstr ""
+
+msgid " Enter line: "
+msgstr " Geef regelnummer: "
+
+msgid "ButtonBar|Help"
+msgstr "Help"
+
+msgid "ButtonBar|Save"
+msgstr "Opsln"
+
+msgid "ButtonBar|Edit"
+msgstr "Bewerk"
+
+#, fuzzy
+msgid "ButtonBar|Merge"
+msgstr "Vergeet"
+
+msgid "ButtonBar|Search"
+msgstr "Zoek"
+
+#, fuzzy
+msgid "ButtonBar|Options"
+msgstr "Regel"
+
+msgid "ButtonBar|Quit"
+msgstr "Afsltn"
+
+msgid "Quit"
+msgstr "Afsltn"
+
+msgid " File was modified, Save with exit? "
+msgstr " Bestand is gewijzigd. Opslaan bij afsluiten? "
+
+msgid "Two files are needed to compare"
+msgstr ""
+
 msgid "Cannot read directory contents"
 msgstr "Kan mapinhoud niet lezen"
 
@@ -1544,9 +1672,6 @@ msgstr ""
 
 msgid "Macro recursion is too deep"
 msgstr "Macro-recursie gaat te diep"
-
-msgid "Search"
-msgstr "Zoeken"
 
 msgid " File has hard-links. Detach before saving? "
 msgstr " Bestand heeft harde links. Verwijderen voor het opslaan? "
@@ -1677,12 +1802,6 @@ msgstr " Vervangen "
 msgid " %ld replacements made. "
 msgstr " %ld vervangingen doorgevoerd. "
 
-msgid "Quit"
-msgstr "Afsltn"
-
-msgid " File was modified, Save with exit? "
-msgstr " Bestand is gewijzigd. Opslaan bij afsluiten? "
-
 msgid "&Cancel quit"
 msgstr "&Annuleer afsluiten"
 
@@ -1703,9 +1822,6 @@ msgstr " Knippen naar prikbord "
 
 msgid " Goto line "
 msgstr " Ga naar regel "
-
-msgid " Enter line: "
-msgstr " Geef regelnummer: "
 
 msgid " Save Block "
 msgstr " Opslaan blok "
@@ -1788,26 +1904,11 @@ msgstr " Druk een toets: "
 msgid " Execute Macro "
 msgstr " Macro uitvoeren "
 
-msgid "All charsets"
-msgstr "Alle karaktersets"
-
-msgid "&Whole words"
-msgstr "Hele &Woorden"
-
 msgid "In se&lection"
 msgstr "In se&Lectie"
 
-msgid "&Backwards"
-msgstr "&Terug"
-
-msgid "case &Sensitive"
-msgstr "&Hoofd/Kleine-letters"
-
 msgid " Enter replacement string:"
 msgstr " Geef de vervangende string:"
-
-msgid " Enter search string:"
-msgstr " Geef de zoekstring:"
 
 msgid "&Find all"
 msgstr "&Vind allemaal"
@@ -1829,9 +1930,6 @@ msgstr " Vervangen door: "
 
 msgid " Confirm replace "
 msgstr " Vervanging bevestigen "
-
-msgid "&Dismiss"
-msgstr "&Verwerp"
 
 #, c-format
 msgid ""
@@ -2111,12 +2209,6 @@ msgstr "Woordafbrekingsmodus"
 msgid " Editor options "
 msgstr " Editoropties "
 
-msgid "ButtonBar|Help"
-msgstr "Help"
-
-msgid "ButtonBar|Save"
-msgstr "Opsln"
-
 msgid "ButtonBar|Mark"
 msgstr "Markr"
 
@@ -2129,17 +2221,11 @@ msgstr "Kopie"
 msgid "ButtonBar|Move"
 msgstr "Verplts"
 
-msgid "ButtonBar|Search"
-msgstr "Zoek"
-
 msgid "ButtonBar|Delete"
 msgstr "Verwder"
 
 msgid "ButtonBar|PullDn"
 msgstr "Menu"
-
-msgid "ButtonBar|Quit"
-msgstr "Afsltn"
 
 msgid " Load syntax file "
 msgstr " Laad syntaxbestand "
@@ -3189,6 +3275,10 @@ msgstr "Vensters &Aan/uit"
 msgid "&Compare directories"
 msgstr "&Mappen vergelijken"
 
+#, fuzzy
+msgid "&View diff files"
+msgstr " Toon bestand "
+
 msgid "E&xternal panelize"
 msgstr "&Plaats in extern venster"
 
@@ -3267,9 +3357,6 @@ msgstr "Menu"
 
 msgid "ButtonBar|View"
 msgstr "Bekijk"
-
-msgid "ButtonBar|Edit"
-msgstr "Bewerk"
 
 msgid "ButtonBar|RenMov"
 msgstr "Hernoem"
@@ -3863,9 +3950,6 @@ msgstr "Achtergrondproces:"
 
 #~ msgid " Goto Address "
 #~ msgstr " Ga naar adres "
-
-#~ msgid "ButtonBar|Line"
-#~ msgstr "Regel"
 
 #~ msgid "File: %s"
 #~ msgstr "Bestand: %s"

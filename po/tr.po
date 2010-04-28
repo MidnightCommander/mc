@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-23 10:46+0200\n"
+"POT-Creation-Date: 2010-04-28 16:02+0300\n"
 "PO-Revision-Date: 2001-11-06 05:50+0200\n"
 "Last-Translator: Nilgün Belma Bugüner <nilgun@fide.org>\n"
 "Language-Team: Turkish <debian-l10n-turkish@lists.debian.org>\n"
@@ -1511,6 +1511,132 @@ msgstr " Yerel dosya sistemi dışında komut çalıştırılamaz"
 msgid " The shell is already running a command "
 msgstr " Kabukta halen bir komut etkin "
 
+msgid "&Dismiss"
+msgstr "&Bırak"
+
+msgid "All charsets"
+msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "&Sadece tam kelimeler"
+
+msgid "&Backwards"
+msgstr "&Geriye doğru"
+
+msgid "case &Sensitive"
+msgstr "Harf büyüklüğüne &Duyarlı"
+
+msgid " Enter search string:"
+msgstr " Aranacak metni girin:"
+
+msgid "Search"
+msgstr "Ara"
+
+msgid " Search is disabled "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary diff file \n"
+" %s "
+msgstr ""
+" Geçici komut dosyası oluşturulamıyor:\n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create backup file \n"
+" %s%s \n"
+" %s "
+msgstr ""
+"\"%s\" hedef dosyası oluşturulamıyor \n"
+" %sw"
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary merge file \n"
+" %s "
+msgstr ""
+" Geçici komut dosyası oluşturulamıyor:\n"
+" %s "
+
+#, fuzzy
+msgid "&Normal"
+msgstr "Biçim"
+
+msgid "&Fastest (Assume large files)"
+msgstr ""
+
+msgid "&Minimal (Find a smaller set of change)"
+msgstr ""
+
+msgid "Strip &trailing carriage return"
+msgstr ""
+
+msgid "Ignore all &whitespace"
+msgstr ""
+
+msgid "Ignore &space change"
+msgstr ""
+
+msgid "Ignore tab &expansion"
+msgstr ""
+
+msgid "&Ignore case"
+msgstr ""
+
+#, fuzzy
+msgid "Diff extra options"
+msgstr " Diğer ayarlar "
+
+msgid "Diff algorithm"
+msgstr ""
+
+#, fuzzy
+msgid "Diff Options"
+msgstr " Seçenekler "
+
+#, fuzzy
+msgid "Edit"
+msgstr "Düzenle"
+
+msgid " Edit is disabled "
+msgstr ""
+
+msgid " Enter line: "
+msgstr " Satırı girin: "
+
+msgid "ButtonBar|Help"
+msgstr ""
+
+msgid "ButtonBar|Save"
+msgstr ""
+
+msgid "ButtonBar|Edit"
+msgstr ""
+
+msgid "ButtonBar|Merge"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Options"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
+
+msgid "Quit"
+msgstr "Çık"
+
+msgid " File was modified, Save with exit? "
+msgstr " Değişiklikler çıkarken dosyaya kaydedilsin mi? "
+
+msgid "Two files are needed to compare"
+msgstr ""
+
 #, fuzzy
 msgid "Cannot read directory contents"
 msgstr "Dizin değiştirilemedi"
@@ -1575,9 +1701,6 @@ msgstr ""
 
 msgid "Macro recursion is too deep"
 msgstr ""
-
-msgid "Search"
-msgstr "Ara"
 
 msgid " File has hard-links. Detach before saving? "
 msgstr ""
@@ -1716,12 +1839,6 @@ msgstr " Değiştir"
 msgid " %ld replacements made. "
 msgstr " %ld yerleştirme yapıldı. "
 
-msgid "Quit"
-msgstr "Çık"
-
-msgid " File was modified, Save with exit? "
-msgstr " Değişiklikler çıkarken dosyaya kaydedilsin mi? "
-
 #, fuzzy
 msgid "&Cancel quit"
 msgstr "Çıkışı durdur"
@@ -1744,9 +1861,6 @@ msgstr " Panoya kes "
 
 msgid " Goto line "
 msgstr " Satıra git "
-
-msgid " Enter line: "
-msgstr " Satırı girin: "
 
 msgid " Save Block "
 msgstr " Bloku kaydet "
@@ -1833,28 +1947,12 @@ msgstr " Bir tuşa basınız: "
 msgid " Execute Macro "
 msgstr " Macro'yu çalıştır "
 
-msgid "All charsets"
-msgstr ""
-
-#, fuzzy
-msgid "&Whole words"
-msgstr "&Sadece tam kelimeler"
-
 #, fuzzy
 msgid "In se&lection"
 msgstr "Seçimi Tersine Çe&vir        M-*"
 
-msgid "&Backwards"
-msgstr "&Geriye doğru"
-
-msgid "case &Sensitive"
-msgstr "Harf büyüklüğüne &Duyarlı"
-
 msgid " Enter replacement string:"
 msgstr " Yerleştirilecek metni verin:"
-
-msgid " Enter search string:"
-msgstr " Aranacak metni girin:"
 
 #, fuzzy
 msgid "&Find all"
@@ -1877,9 +1975,6 @@ msgstr " Bununla değiştir: "
 
 msgid " Confirm replace "
 msgstr " Yer değişikliğini onaylat "
-
-msgid "&Dismiss"
-msgstr "&Bırak"
 
 #, c-format
 msgid ""
@@ -2191,12 +2286,6 @@ msgstr "Sarmalama kipi"
 msgid " Editor options "
 msgstr " Düzenleyici seçenekleri "
 
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
 msgid "ButtonBar|Mark"
 msgstr ""
 
@@ -2209,16 +2298,10 @@ msgstr ""
 msgid "ButtonBar|Move"
 msgstr ""
 
-msgid "ButtonBar|Search"
-msgstr ""
-
 msgid "ButtonBar|Delete"
 msgstr ""
 
 msgid "ButtonBar|PullDn"
-msgstr ""
-
-msgid "ButtonBar|Quit"
 msgstr ""
 
 msgid " Load syntax file "
@@ -3294,6 +3377,10 @@ msgid "&Compare directories"
 msgstr " Dizinleri karşılaştır"
 
 #, fuzzy
+msgid "&View diff files"
+msgstr " Dosyayı göster "
+
+#, fuzzy
 msgid "E&xternal panelize"
 msgstr "Dış panelleme"
 
@@ -3383,9 +3470,6 @@ msgid "ButtonBar|Menu"
 msgstr ""
 
 msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
 msgstr ""
 
 msgid "ButtonBar|RenMov"
@@ -4118,9 +4202,6 @@ msgstr "Artalan işlemi:"
 
 #~ msgid " Command "
 #~ msgstr " Komut "
-
-#~ msgid " Options "
-#~ msgstr " Seçenekler "
 
 #~ msgid "Intuitive"
 #~ msgstr "Geleneksel"

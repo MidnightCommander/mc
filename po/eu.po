@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-23 10:46+0200\n"
+"POT-Creation-Date: 2010-04-28 16:02+0300\n"
 "PO-Revision-Date: 2001-05-25 13:35+0200\n"
 "Last-Translator: Mari Susperregi <mari@elhuyar.com>\n"
 "Language-Team: Euskara <debian-l10n-basque@lists.debian.org>\n"
@@ -1513,6 +1513,132 @@ msgstr "Ezin dituzu komandoak fitxategi-sistema ez-lokaletan exekutatu"
 msgid " The shell is already running a command "
 msgstr "Shell dagoeneko komando bat exekutatzen ari da "
 
+msgid "&Dismiss"
+msgstr "&Itxi"
+
+msgid "All charsets"
+msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "&Hitz osoak bakarrik"
+
+msgid "&Backwards"
+msgstr "&Atzera"
+
+msgid "case &Sensitive"
+msgstr "&maiuskulak eta minuskulak bereizten ditu"
+
+msgid " Enter search string:"
+msgstr "Sartu bilaketa-katea:"
+
+msgid "Search"
+msgstr "Bilatu"
+
+msgid " Search is disabled "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary diff file \n"
+" %s "
+msgstr ""
+"Ezin da aldi baterako %s komando-fitxategia \n"
+" sortu"
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create backup file \n"
+" %s%s \n"
+" %s "
+msgstr ""
+"Ezin da \"%s\" helburu-fitxategia sortu \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary merge file \n"
+" %s "
+msgstr ""
+"Ezin da aldi baterako %s komando-fitxategia \n"
+" sortu"
+
+#, fuzzy
+msgid "&Normal"
+msgstr "Formateatu"
+
+msgid "&Fastest (Assume large files)"
+msgstr ""
+
+msgid "&Minimal (Find a smaller set of change)"
+msgstr ""
+
+msgid "Strip &trailing carriage return"
+msgstr ""
+
+msgid "Ignore all &whitespace"
+msgstr ""
+
+msgid "Ignore &space change"
+msgstr ""
+
+msgid "Ignore tab &expansion"
+msgstr ""
+
+msgid "&Ignore case"
+msgstr ""
+
+#, fuzzy
+msgid "Diff extra options"
+msgstr "Bestelako aukerak "
+
+msgid "Diff algorithm"
+msgstr ""
+
+#, fuzzy
+msgid "Diff Options"
+msgstr "Aukerak "
+
+#, fuzzy
+msgid "Edit"
+msgstr "Edizioa"
+
+msgid " Edit is disabled "
+msgstr ""
+
+msgid " Enter line: "
+msgstr "Sartu lerroa: "
+
+msgid "ButtonBar|Help"
+msgstr ""
+
+msgid "ButtonBar|Save"
+msgstr ""
+
+msgid "ButtonBar|Edit"
+msgstr ""
+
+msgid "ButtonBar|Merge"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Options"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
+
+msgid "Quit"
+msgstr "Irten"
+
+msgid " File was modified, Save with exit? "
+msgstr "Fitxategia aldatu egin da, irtetean gorde? "
+
+msgid "Two files are needed to compare"
+msgstr ""
+
 #, fuzzy
 msgid "Cannot read directory contents"
 msgstr "Ezin izan da direktorioz aldatu"
@@ -1577,9 +1703,6 @@ msgstr ""
 
 msgid "Macro recursion is too deep"
 msgstr ""
-
-msgid "Search"
-msgstr "Bilatu"
 
 msgid " File has hard-links. Detach before saving? "
 msgstr ""
@@ -1718,12 +1841,6 @@ msgstr "Ordeztu "
 msgid " %ld replacements made. "
 msgstr " %ld ordezpen eginda."
 
-msgid "Quit"
-msgstr "Irten"
-
-msgid " File was modified, Save with exit? "
-msgstr "Fitxategia aldatu egin da, irtetean gorde? "
-
 #, fuzzy
 msgid "&Cancel quit"
 msgstr "Bertan behera utzi Irten"
@@ -1746,9 +1863,6 @@ msgstr "Ebaki arbelera "
 
 msgid " Goto line "
 msgstr "Joan lerro honetara "
-
-msgid " Enter line: "
-msgstr "Sartu lerroa: "
 
 msgid " Save Block "
 msgstr "Gorde blokea "
@@ -1835,28 +1949,12 @@ msgstr " Sakatu tekla bat: "
 msgid " Execute Macro "
 msgstr " Exekutatu makroa "
 
-msgid "All charsets"
-msgstr ""
-
-#, fuzzy
-msgid "&Whole words"
-msgstr "&Hitz osoak bakarrik"
-
 #, fuzzy
 msgid "In se&lection"
 msgstr "alderantzikatu &hautapena       M-*"
 
-msgid "&Backwards"
-msgstr "&Atzera"
-
-msgid "case &Sensitive"
-msgstr "&maiuskulak eta minuskulak bereizten ditu"
-
 msgid " Enter replacement string:"
 msgstr "Sartu ordezko katea:"
-
-msgid " Enter search string:"
-msgstr "Sartu bilaketa-katea:"
 
 #, fuzzy
 msgid "&Find all"
@@ -1879,9 +1977,6 @@ msgstr " Ordeztu honekin: "
 
 msgid " Confirm replace "
 msgstr " Berretsi ordeztea "
-
-msgid "&Dismiss"
-msgstr "&Itxi"
 
 #, c-format
 msgid ""
@@ -2193,12 +2288,6 @@ msgstr "Doipen-modua"
 msgid " Editor options "
 msgstr "Editore-aukerak "
 
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
 msgid "ButtonBar|Mark"
 msgstr ""
 
@@ -2211,16 +2300,10 @@ msgstr ""
 msgid "ButtonBar|Move"
 msgstr ""
 
-msgid "ButtonBar|Search"
-msgstr ""
-
 msgid "ButtonBar|Delete"
 msgstr ""
 
 msgid "ButtonBar|PullDn"
-msgstr ""
-
-msgid "ButtonBar|Quit"
 msgstr ""
 
 msgid " Load syntax file "
@@ -3299,6 +3382,10 @@ msgid "&Compare directories"
 msgstr "Konparatu direktorioak "
 
 #, fuzzy
+msgid "&View diff files"
+msgstr "Ikusi fitxategia "
+
+#, fuzzy
 msgid "E&xternal panelize"
 msgstr "Kanpoko panela"
 
@@ -3387,9 +3474,6 @@ msgid "ButtonBar|Menu"
 msgstr ""
 
 msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
 msgstr ""
 
 msgid "ButtonBar|RenMov"
@@ -4125,9 +4209,6 @@ msgstr "Atzeko planoko prozesua:"
 
 #~ msgid " Command "
 #~ msgstr "Komandoa "
-
-#~ msgid " Options "
-#~ msgstr "Aukerak "
 
 #~ msgid "Intuitive"
 #~ msgstr "Intuitiboa"

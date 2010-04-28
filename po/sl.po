@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc \n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-23 10:46+0200\n"
+"POT-Creation-Date: 2010-04-28 16:02+0300\n"
 "PO-Revision-Date: 2000-06-22 00:00+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -1500,6 +1500,132 @@ msgstr " Ukaze lahko izvršujete le na krajevnih datotečnih sistemih"
 msgid " The shell is already running a command "
 msgstr " Lupina že izvaja ukaz "
 
+msgid "&Dismiss"
+msgstr "&Opusti"
+
+msgid "All charsets"
+msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "&Le cele besede"
+
+msgid "&Backwards"
+msgstr "&Nazaj"
+
+msgid "case &Sensitive"
+msgstr "ra&Zlikuj velike in male črke"
+
+msgid " Enter search string:"
+msgstr " Vnesite niz za iskanje:"
+
+msgid "Search"
+msgstr "Iskanje"
+
+msgid " Search is disabled "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary diff file \n"
+" %s "
+msgstr ""
+" Ne morem ustvariti začasne ukazne datoteke \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create backup file \n"
+" %s%s \n"
+" %s "
+msgstr ""
+" Ne morem ustvariti ciljne datoteke \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary merge file \n"
+" %s "
+msgstr ""
+" Ne morem ustvariti začasne ukazne datoteke \n"
+" %s "
+
+#, fuzzy
+msgid "&Normal"
+msgstr "Oblikuj izpis"
+
+msgid "&Fastest (Assume large files)"
+msgstr ""
+
+msgid "&Minimal (Find a smaller set of change)"
+msgstr ""
+
+msgid "Strip &trailing carriage return"
+msgstr ""
+
+msgid "Ignore all &whitespace"
+msgstr ""
+
+msgid "Ignore &space change"
+msgstr ""
+
+msgid "Ignore tab &expansion"
+msgstr ""
+
+msgid "&Ignore case"
+msgstr ""
+
+#, fuzzy
+msgid "Diff extra options"
+msgstr " Ostale nastavitve "
+
+msgid "Diff algorithm"
+msgstr ""
+
+#, fuzzy
+msgid "Diff Options"
+msgstr " Možnosti "
+
+#, fuzzy
+msgid "Edit"
+msgstr "Uredi"
+
+msgid " Edit is disabled "
+msgstr ""
+
+msgid " Enter line: "
+msgstr " Vpiši vrstico: "
+
+msgid "ButtonBar|Help"
+msgstr ""
+
+msgid "ButtonBar|Save"
+msgstr ""
+
+msgid "ButtonBar|Edit"
+msgstr ""
+
+msgid "ButtonBar|Merge"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Options"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
+
+msgid "Quit"
+msgstr "Končaj"
+
+msgid " File was modified, Save with exit? "
+msgstr " Datoteka je bila spremenjena. Shranim ob izhodu? "
+
+msgid "Two files are needed to compare"
+msgstr ""
+
 msgid "Cannot read directory contents"
 msgstr "Ne morem prebrati vsebine imenika"
 
@@ -1564,9 +1690,6 @@ msgstr ""
 
 msgid "Macro recursion is too deep"
 msgstr "Rekurzija makra je pregloboka"
-
-msgid "Search"
-msgstr "Iskanje"
 
 msgid " File has hard-links. Detach before saving? "
 msgstr ""
@@ -1702,12 +1825,6 @@ msgstr " Zamenjaj "
 msgid " %ld replacements made. "
 msgstr " storjenih je bilo %ld zamenjav. "
 
-msgid "Quit"
-msgstr "Končaj"
-
-msgid " File was modified, Save with exit? "
-msgstr " Datoteka je bila spremenjena. Shranim ob izhodu? "
-
 #, fuzzy
 msgid "&Cancel quit"
 msgstr "Prekliči izhod"
@@ -1730,9 +1847,6 @@ msgstr " Izreži in postavi na odložišče "
 
 msgid " Goto line "
 msgstr " Pojdi v vrstico "
-
-msgid " Enter line: "
-msgstr " Vpiši vrstico: "
 
 msgid " Save Block "
 msgstr " Shrani blok "
@@ -1819,28 +1933,12 @@ msgstr " Pritisni tipko: "
 msgid " Execute Macro "
 msgstr " Izvedi makro "
 
-msgid "All charsets"
-msgstr ""
-
-#, fuzzy
-msgid "&Whole words"
-msgstr "&Le cele besede"
-
 #, fuzzy
 msgid "In se&lection"
 msgstr "obrni iz&Biro      M-*"
 
-msgid "&Backwards"
-msgstr "&Nazaj"
-
-msgid "case &Sensitive"
-msgstr "ra&Zlikuj velike in male črke"
-
 msgid " Enter replacement string:"
 msgstr " Vnesite nadomestni niz:"
-
-msgid " Enter search string:"
-msgstr " Vnesite niz za iskanje:"
 
 #, fuzzy
 msgid "&Find all"
@@ -1863,9 +1961,6 @@ msgstr " Zamenjaj z: "
 
 msgid " Confirm replace "
 msgstr " Potrdi zamenjavo"
-
-msgid "&Dismiss"
-msgstr "&Opusti"
 
 #, c-format
 msgid ""
@@ -2176,12 +2271,6 @@ msgstr "Način zavijanja"
 msgid " Editor options "
 msgstr " Možnosti urejevalnika"
 
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
 msgid "ButtonBar|Mark"
 msgstr ""
 
@@ -2194,16 +2283,10 @@ msgstr ""
 msgid "ButtonBar|Move"
 msgstr ""
 
-msgid "ButtonBar|Search"
-msgstr ""
-
 msgid "ButtonBar|Delete"
 msgstr ""
 
 msgid "ButtonBar|PullDn"
-msgstr ""
-
-msgid "ButtonBar|Quit"
 msgstr ""
 
 msgid " Load syntax file "
@@ -3281,6 +3364,10 @@ msgid "&Compare directories"
 msgstr " Primerjaj imenike "
 
 #, fuzzy
+msgid "&View diff files"
+msgstr " Pogled datoteke"
+
+#, fuzzy
 msgid "E&xternal panelize"
 msgstr "V pult od zunaj"
 
@@ -3369,9 +3456,6 @@ msgid "ButtonBar|Menu"
 msgstr ""
 
 msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
 msgstr ""
 
 msgid "ButtonBar|RenMov"
@@ -4109,9 +4193,6 @@ msgstr "Proces v ozadju:"
 
 #~ msgid " Command "
 #~ msgstr " Ukaz "
-
-#~ msgid " Options "
-#~ msgstr " Možnosti "
 
 #~ msgid "Intuitive"
 #~ msgstr "Intuitiven"

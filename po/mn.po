@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mn\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-23 10:46+0200\n"
+"POT-Creation-Date: 2010-04-28 16:02+0300\n"
 "PO-Revision-Date: 2003-03-04 21:16+0100\n"
 "Last-Translator: Sanlig Badral <badral@chinggis.com>\n"
 "Language-Team: Mongolian <mn@li.org>\n"
@@ -1505,6 +1505,132 @@ msgstr " Локал бус файл систем дэх командуудыг �
 msgid " The shell is already running a command "
 msgstr " shell коммандыг аль хэдийнэ биелүүлж байна "
 
+msgid "&Dismiss"
+msgstr "&Хаах"
+
+msgid "All charsets"
+msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "Зөвхөн &бүтэн үгнүүд"
+
+msgid "&Backwards"
+msgstr "&Буцах"
+
+msgid "case &Sensitive"
+msgstr "Учет ре&гистра"
+
+msgid " Enter search string:"
+msgstr " Хайх үгээ оруул:"
+
+msgid "Search"
+msgstr "Хайх"
+
+msgid " Search is disabled "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary diff file \n"
+" %s "
+msgstr ""
+" Түр зуурын командын файлыг үүсгэж чадсангүй \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create backup file \n"
+" %s%s \n"
+" %s "
+msgstr ""
+" Заагдсан файлыг үүсгэж чадсангүй \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary merge file \n"
+" %s "
+msgstr ""
+" Түр зуурын командын файлыг үүсгэж чадсангүй \n"
+" %s "
+
+#, fuzzy
+msgid "&Normal"
+msgstr "Формат"
+
+msgid "&Fastest (Assume large files)"
+msgstr ""
+
+msgid "&Minimal (Find a smaller set of change)"
+msgstr ""
+
+msgid "Strip &trailing carriage return"
+msgstr ""
+
+msgid "Ignore all &whitespace"
+msgstr ""
+
+msgid "Ignore &space change"
+msgstr ""
+
+msgid "Ignore tab &expansion"
+msgstr ""
+
+msgid "&Ignore case"
+msgstr ""
+
+#, fuzzy
+msgid "Diff extra options"
+msgstr " Бусад тохиргоонууд "
+
+msgid "Diff algorithm"
+msgstr ""
+
+#, fuzzy
+msgid "Diff Options"
+msgstr " Тохируулга "
+
+#, fuzzy
+msgid "Edit"
+msgstr "Засах"
+
+msgid " Edit is disabled "
+msgstr ""
+
+msgid " Enter line: "
+msgstr " мөрийн дугаарын оруул: "
+
+msgid "ButtonBar|Help"
+msgstr ""
+
+msgid "ButtonBar|Save"
+msgstr ""
+
+msgid "ButtonBar|Edit"
+msgstr ""
+
+msgid "ButtonBar|Merge"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Options"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
+
+msgid "Quit"
+msgstr "Гарах"
+
+msgid " File was modified, Save with exit? "
+msgstr " Файл засварлагдсан байна, Хадгалж гарах уу? "
+
+msgid "Two files are needed to compare"
+msgstr ""
+
 msgid "Cannot read directory contents"
 msgstr "Хавтасны доторхыг уншиж чадсангүй"
 
@@ -1568,9 +1694,6 @@ msgstr ""
 
 msgid "Macro recursion is too deep"
 msgstr "Макрогийн рекурс хэт гүн байна"
-
-msgid "Search"
-msgstr "Хайх"
 
 msgid " File has hard-links. Detach before saving? "
 msgstr ""
@@ -1706,12 +1829,6 @@ msgstr " Солих "
 msgid " %ld replacements made. "
 msgstr " %ld нь солигдсон байна"
 
-msgid "Quit"
-msgstr "Гарах"
-
-msgid " File was modified, Save with exit? "
-msgstr " Файл засварлагдсан байна, Хадгалж гарах уу? "
-
 #, fuzzy
 msgid "&Cancel quit"
 msgstr "Болих гарах"
@@ -1734,9 +1851,6 @@ msgstr " Буфер руу зөөх"
 
 msgid " Goto line "
 msgstr " мөр рүү очих "
-
-msgid " Enter line: "
-msgstr " мөрийн дугаарын оруул: "
 
 msgid " Save Block "
 msgstr " Блокыг хадгалах "
@@ -1824,28 +1938,12 @@ msgstr " Дурын товч дарна уу: "
 msgid " Execute Macro "
 msgstr " Макрог гүйцэтгэх "
 
-msgid "All charsets"
-msgstr ""
-
-#, fuzzy
-msgid "&Whole words"
-msgstr "Зөвхөн &бүтэн үгнүүд"
-
 #, fuzzy
 msgid "In se&lection"
 msgstr "Тэмдэглэгдсэнг &эсрэгээр болгох  М *"
 
-msgid "&Backwards"
-msgstr "&Буцах"
-
-msgid "case &Sensitive"
-msgstr "Учет ре&гистра"
-
 msgid " Enter replacement string:"
 msgstr " Солигдох текстийг оруул: "
-
-msgid " Enter search string:"
-msgstr " Хайх үгээ оруул:"
 
 #, fuzzy
 msgid "&Find all"
@@ -1868,9 +1966,6 @@ msgstr " Цуг солих: "
 
 msgid " Confirm replace "
 msgstr " Солихыг баталгаажуулах "
-
-msgid "&Dismiss"
-msgstr "&Хаах"
 
 #, c-format
 msgid ""
@@ -2181,12 +2276,6 @@ msgstr "Таслагч горим"
 msgid " Editor options "
 msgstr " Засварлагчын тохиргоо "
 
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
 msgid "ButtonBar|Mark"
 msgstr ""
 
@@ -2199,16 +2288,10 @@ msgstr ""
 msgid "ButtonBar|Move"
 msgstr ""
 
-msgid "ButtonBar|Search"
-msgstr ""
-
 msgid "ButtonBar|Delete"
 msgstr ""
 
 msgid "ButtonBar|PullDn"
-msgstr ""
-
-msgid "ButtonBar|Quit"
 msgstr ""
 
 msgid " Load syntax file "
@@ -3285,6 +3368,10 @@ msgid "&Compare directories"
 msgstr " Хавтасуудыг харьцуулах "
 
 #, fuzzy
+msgid "&View diff files"
+msgstr " Файлыг харах "
+
+#, fuzzy
 msgid "E&xternal panelize"
 msgstr "Гадаад панелиз хийх"
 
@@ -3372,9 +3459,6 @@ msgid "ButtonBar|Menu"
 msgstr ""
 
 msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
 msgstr ""
 
 msgid "ButtonBar|RenMov"
@@ -4111,9 +4195,6 @@ msgstr "Арын процесс:"
 
 #~ msgid " Command "
 #~ msgstr " Команд "
-
-#~ msgid " Options "
-#~ msgstr " Тохируулга "
 
 #~ msgid "Intuitive"
 #~ msgstr "Мэдрэмж"

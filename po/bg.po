@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.55\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-23 10:46+0200\n"
+"POT-Creation-Date: 2010-04-28 16:02+0300\n"
 "PO-Revision-Date: 2002-06-24 02:15+0300\n"
 "Last-Translator: Todor Buyukliev <adrez@mail.bg>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -1495,6 +1495,132 @@ msgstr " Не може да изпълнявате команди на не-ло
 msgid " The shell is already running a command "
 msgstr " Обвивката вече изпълнява команда "
 
+msgid "&Dismiss"
+msgstr "Затвори"
+
+msgid "All charsets"
+msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "Само цели думи"
+
+msgid "&Backwards"
+msgstr "Назад"
+
+msgid "case &Sensitive"
+msgstr "Различавай главни/малки"
+
+msgid " Enter search string:"
+msgstr " Въведете търсения низ:"
+
+msgid "Search"
+msgstr "Търси"
+
+msgid " Search is disabled "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary diff file \n"
+" %s "
+msgstr ""
+" Не може да се създаде временен команден файл \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create backup file \n"
+" %s%s \n"
+" %s "
+msgstr ""
+" Не може да се създаде файлът назначение \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary merge file \n"
+" %s "
+msgstr ""
+" Не може да се създаде временен команден файл \n"
+" %s "
+
+#, fuzzy
+msgid "&Normal"
+msgstr "Нормално"
+
+msgid "&Fastest (Assume large files)"
+msgstr ""
+
+msgid "&Minimal (Find a smaller set of change)"
+msgstr ""
+
+msgid "Strip &trailing carriage return"
+msgstr ""
+
+msgid "Ignore all &whitespace"
+msgstr ""
+
+msgid "Ignore &space change"
+msgstr ""
+
+msgid "Ignore tab &expansion"
+msgstr ""
+
+msgid "&Ignore case"
+msgstr ""
+
+#, fuzzy
+msgid "Diff extra options"
+msgstr " Други опции "
+
+msgid "Diff algorithm"
+msgstr ""
+
+#, fuzzy
+msgid "Diff Options"
+msgstr " Опции "
+
+#, fuzzy
+msgid "Edit"
+msgstr "Редактирай"
+
+msgid " Edit is disabled "
+msgstr ""
+
+msgid " Enter line: "
+msgstr " Въведете ред: "
+
+msgid "ButtonBar|Help"
+msgstr ""
+
+msgid "ButtonBar|Save"
+msgstr ""
+
+msgid "ButtonBar|Edit"
+msgstr ""
+
+msgid "ButtonBar|Merge"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Options"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
+
+msgid "Quit"
+msgstr "Изход"
+
+msgid " File was modified, Save with exit? "
+msgstr " Файлът е модифициран, да го запазя ли? "
+
+msgid "Two files are needed to compare"
+msgstr ""
+
 #, fuzzy
 msgid "Cannot read directory contents"
 msgstr "Не може да се смени директорията"
@@ -1559,9 +1685,6 @@ msgstr ""
 
 msgid "Macro recursion is too deep"
 msgstr ""
-
-msgid "Search"
-msgstr "Търси"
 
 msgid " File has hard-links. Detach before saving? "
 msgstr ""
@@ -1699,12 +1822,6 @@ msgstr " Замяна "
 msgid " %ld replacements made. "
 msgstr " %ld замени направени. "
 
-msgid "Quit"
-msgstr "Изход"
-
-msgid " File was modified, Save with exit? "
-msgstr " Файлът е модифициран, да го запазя ли? "
-
 #, fuzzy
 msgid "&Cancel quit"
 msgstr "Отмени изхода"
@@ -1727,9 +1844,6 @@ msgstr " Премести в буфера "
 
 msgid " Goto line "
 msgstr " Отиди на ред "
-
-msgid " Enter line: "
-msgstr " Въведете ред: "
 
 msgid " Save Block "
 msgstr " Запази блока "
@@ -1816,28 +1930,12 @@ msgstr " Натиснете клавиш: "
 msgid " Execute Macro "
 msgstr " Изпълни Макрос "
 
-msgid "All charsets"
-msgstr ""
-
-#, fuzzy
-msgid "&Whole words"
-msgstr "Само цели думи"
-
 #, fuzzy
 msgid "In se&lection"
 msgstr "Обърни маркирането       M-*"
 
-msgid "&Backwards"
-msgstr "Назад"
-
-msgid "case &Sensitive"
-msgstr "Различавай главни/малки"
-
 msgid " Enter replacement string:"
 msgstr " Въведете заместващия низ:"
-
-msgid " Enter search string:"
-msgstr " Въведете търсения низ:"
 
 #, fuzzy
 msgid "&Find all"
@@ -1860,9 +1958,6 @@ msgstr " Замести с:"
 
 msgid " Confirm replace "
 msgstr " Потвърдете замяната "
-
-msgid "&Dismiss"
-msgstr "Затвори"
 
 #, c-format
 msgid ""
@@ -2174,12 +2269,6 @@ msgstr "Режим на пренасяне"
 msgid " Editor options "
 msgstr " Опции на редактора "
 
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
 msgid "ButtonBar|Mark"
 msgstr ""
 
@@ -2192,16 +2281,10 @@ msgstr ""
 msgid "ButtonBar|Move"
 msgstr ""
 
-msgid "ButtonBar|Search"
-msgstr ""
-
 msgid "ButtonBar|Delete"
 msgstr ""
 
 msgid "ButtonBar|PullDn"
-msgstr ""
-
-msgid "ButtonBar|Quit"
 msgstr ""
 
 msgid " Load syntax file "
@@ -3278,6 +3361,10 @@ msgid "&Compare directories"
 msgstr " Сравни директории "
 
 #, fuzzy
+msgid "&View diff files"
+msgstr " Покажи файл "
+
+#, fuzzy
 msgid "E&xternal panelize"
 msgstr "Команда в панел"
 
@@ -3366,9 +3453,6 @@ msgid "ButtonBar|Menu"
 msgstr ""
 
 msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
 msgstr ""
 
 msgid "ButtonBar|RenMov"
@@ -4081,9 +4165,6 @@ msgstr "Фонов процес:"
 
 #~ msgid " Command "
 #~ msgstr " Команди "
-
-#~ msgid " Options "
-#~ msgstr " Опции "
 
 #~ msgid "Intuitive"
 #~ msgstr "Интуитивно"

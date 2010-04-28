@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.0.2\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-23 10:46+0200\n"
+"POT-Creation-Date: 2010-04-28 16:02+0300\n"
 "PO-Revision-Date: 2010-03-14 14:00+0100\n"
 "Last-Translator: Martin Zoubek <zoubek@seznam.cz>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
@@ -1485,6 +1485,134 @@ msgstr " Pokud nepracujete s lokálními soubory, nelze spouštět žádné př�
 msgid " The shell is already running a command "
 msgstr " Shell už provádí příkaz "
 
+msgid "&Dismiss"
+msgstr "&Odmítnout"
+
+msgid "All charsets"
+msgstr "Všechny znakové sady"
+
+msgid "&Whole words"
+msgstr "Pouze &celá slova"
+
+msgid "&Backwards"
+msgstr "Po&zpátku"
+
+msgid "case &Sensitive"
+msgstr "Všímat si velikos&ti"
+
+msgid " Enter search string:"
+msgstr " Zadejte hledaný text:"
+
+msgid "Search"
+msgstr "Hledat"
+
+msgid " Search is disabled "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary diff file \n"
+" %s "
+msgstr ""
+" Nelze vytvořit dočasný příkazový soubor \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create backup file \n"
+" %s%s \n"
+" %s "
+msgstr ""
+" Nelze vytvořit cílový soubor „%s“ \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary merge file \n"
+" %s "
+msgstr ""
+" Nelze vytvořit dočasný příkazový soubor \n"
+" %s "
+
+#, fuzzy
+msgid "&Normal"
+msgstr "Normální"
+
+msgid "&Fastest (Assume large files)"
+msgstr ""
+
+msgid "&Minimal (Find a smaller set of change)"
+msgstr ""
+
+msgid "Strip &trailing carriage return"
+msgstr ""
+
+msgid "Ignore all &whitespace"
+msgstr ""
+
+msgid "Ignore &space change"
+msgstr ""
+
+msgid "Ignore tab &expansion"
+msgstr ""
+
+#, fuzzy
+msgid "&Ignore case"
+msgstr "&Ignorovat zámek"
+
+#, fuzzy
+msgid "Diff extra options"
+msgstr " Další nastavení "
+
+msgid "Diff algorithm"
+msgstr ""
+
+#, fuzzy
+msgid "Diff Options"
+msgstr "&Nastavení"
+
+#, fuzzy
+msgid "Edit"
+msgstr "&Upravit"
+
+msgid " Edit is disabled "
+msgstr ""
+
+msgid " Enter line: "
+msgstr " Zadejte číslo řádku: "
+
+msgid "ButtonBar|Help"
+msgstr "TlačítkováLišta|Pomoc"
+
+msgid "ButtonBar|Save"
+msgstr "TlačítkováLišta|Uložit"
+
+msgid "ButtonBar|Edit"
+msgstr "TlačítkováLišta|Uprav"
+
+#, fuzzy
+msgid "ButtonBar|Merge"
+msgstr "TlačítkováLišta|Zapomn"
+
+msgid "ButtonBar|Search"
+msgstr "TlačítkováLišta|Hledat"
+
+#, fuzzy
+msgid "ButtonBar|Options"
+msgstr "TlačítkováLišta|JdiNa"
+
+msgid "ButtonBar|Quit"
+msgstr "TlačítkováLišta|Konec"
+
+msgid "Quit"
+msgstr "Konec"
+
+msgid " File was modified, Save with exit? "
+msgstr " Soubor byl změněn, uložit při odchodu? "
+
+msgid "Two files are needed to compare"
+msgstr ""
+
 msgid "Cannot read directory contents"
 msgstr "Nelze číst obsah adresáře"
 
@@ -1547,9 +1675,6 @@ msgstr ""
 
 msgid "Macro recursion is too deep"
 msgstr "Rekurze maker je příliš hluboká"
-
-msgid "Search"
-msgstr "Hledat"
 
 msgid " File has hard-links. Detach before saving? "
 msgstr " Soubor má pevné odkazy. Odpojit před uložením? "
@@ -1680,12 +1805,6 @@ msgstr " Nahradit "
 msgid " %ld replacements made. "
 msgstr " Provedeno %ld nahrazení. "
 
-msgid "Quit"
-msgstr "Konec"
-
-msgid " File was modified, Save with exit? "
-msgstr " Soubor byl změněn, uložit při odchodu? "
-
 msgid "&Cancel quit"
 msgstr "&Zrušit odchod"
 
@@ -1706,9 +1825,6 @@ msgstr " Vyjmout do schránky "
 
 msgid " Goto line "
 msgstr " Jdi na řádek "
-
-msgid " Enter line: "
-msgstr " Zadejte číslo řádku: "
 
 msgid " Save Block "
 msgstr " Uložit blok "
@@ -1791,26 +1907,11 @@ msgstr " Stiskněte libovolnou klávesu: "
 msgid " Execute Macro "
 msgstr " Spustit makro "
 
-msgid "All charsets"
-msgstr "Všechny znakové sady"
-
-msgid "&Whole words"
-msgstr "Pouze &celá slova"
-
 msgid "In se&lection"
 msgstr "&Ve výběru"
 
-msgid "&Backwards"
-msgstr "Po&zpátku"
-
-msgid "case &Sensitive"
-msgstr "Všímat si velikos&ti"
-
 msgid " Enter replacement string:"
 msgstr " Zadejte náhradní text:"
-
-msgid " Enter search string:"
-msgstr " Zadejte hledaný text:"
 
 msgid "&Find all"
 msgstr "&Najít všechny"
@@ -1832,9 +1933,6 @@ msgstr " Nahradit textem: "
 
 msgid " Confirm replace "
 msgstr " Potvrdit náhradu "
-
-msgid "&Dismiss"
-msgstr "&Odmítnout"
 
 #, c-format
 msgid ""
@@ -2095,12 +2193,6 @@ msgstr "Režim zalamování"
 msgid " Editor options "
 msgstr " Nastavení editoru "
 
-msgid "ButtonBar|Help"
-msgstr "TlačítkováLišta|Pomoc"
-
-msgid "ButtonBar|Save"
-msgstr "TlačítkováLišta|Uložit"
-
 msgid "ButtonBar|Mark"
 msgstr "TlačítkováLišta|Označ"
 
@@ -2113,17 +2205,11 @@ msgstr "TlačítkováLišta|Kopie"
 msgid "ButtonBar|Move"
 msgstr "TlačítkováLišta|Přesun"
 
-msgid "ButtonBar|Search"
-msgstr "TlačítkováLišta|Hledat"
-
 msgid "ButtonBar|Delete"
 msgstr "TlačítkováLišta|Smazat"
 
 msgid "ButtonBar|PullDn"
 msgstr "TlačítkováLišta|H.Menu"
-
-msgid "ButtonBar|Quit"
-msgstr "TlačítkováLišta|Konec"
 
 msgid " Load syntax file "
 msgstr " Načíst soubor se syntaxí "
@@ -3178,6 +3264,10 @@ msgstr "&Panely ano/ne"
 msgid "&Compare directories"
 msgstr "Porovnat &adresáře"
 
+#, fuzzy
+msgid "&View diff files"
+msgstr " Prohlížet soubor "
+
 msgid "E&xternal panelize"
 msgstr "E&xterní panelizace"
 
@@ -3257,9 +3347,6 @@ msgstr "ButtonBar|Menu"
 
 msgid "ButtonBar|View"
 msgstr "TlačítkováLišta|Zobraz"
-
-msgid "ButtonBar|Edit"
-msgstr "TlačítkováLišta|Uprav"
 
 msgid "ButtonBar|RenMov"
 msgstr "TlačítkováLišta|Přesun"

@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-23 10:46+0200\n"
+"POT-Creation-Date: 2010-04-28 16:02+0300\n"
 "PO-Revision-Date: 2009-10-29  23:37+0300\n"
 "Last-Translator: Andrew Borodin <aborodin@vmail.ru>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
@@ -1483,6 +1483,134 @@ msgstr " Невозможно выполнять команды на не лок
 msgid " The shell is already running a command "
 msgstr " Интерпретатор занят выполнением команды "
 
+msgid "&Dismiss"
+msgstr "&Закрыть"
+
+msgid "All charsets"
+msgstr "Все кодировки"
+
+msgid "&Whole words"
+msgstr "&Слово целиком"
+
+msgid "&Backwards"
+msgstr "&Назад"
+
+msgid "case &Sensitive"
+msgstr "Учет ре&гистра"
+
+msgid " Enter search string:"
+msgstr " Введите строку для поиска:"
+
+msgid "Search"
+msgstr "Поиск"
+
+msgid " Search is disabled "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary diff file \n"
+" %s "
+msgstr ""
+" Невозможно создать временный командный файл \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create backup file \n"
+" %s%s \n"
+" %s "
+msgstr ""
+" Невозможно создать целевой файл \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary merge file \n"
+" %s "
+msgstr ""
+" Невозможно создать временный командный файл \n"
+" %s "
+
+#, fuzzy
+msgid "&Normal"
+msgstr "Обычный"
+
+msgid "&Fastest (Assume large files)"
+msgstr ""
+
+msgid "&Minimal (Find a smaller set of change)"
+msgstr ""
+
+msgid "Strip &trailing carriage return"
+msgstr ""
+
+msgid "Ignore all &whitespace"
+msgstr ""
+
+msgid "Ignore &space change"
+msgstr ""
+
+msgid "Ignore tab &expansion"
+msgstr ""
+
+#, fuzzy
+msgid "&Ignore case"
+msgstr "Игнорировать замок"
+
+#, fuzzy
+msgid "Diff extra options"
+msgstr " Прочие настройки "
+
+msgid "Diff algorithm"
+msgstr ""
+
+#, fuzzy
+msgid "Diff Options"
+msgstr "&Настройки"
+
+#, fuzzy
+msgid "Edit"
+msgstr "&Правка"
+
+msgid " Edit is disabled "
+msgstr ""
+
+msgid " Enter line: "
+msgstr " Введите номер строки: "
+
+msgid "ButtonBar|Help"
+msgstr "Помощь"
+
+msgid "ButtonBar|Save"
+msgstr "Сохранить"
+
+msgid "ButtonBar|Edit"
+msgstr "Правка"
+
+#, fuzzy
+msgid "ButtonBar|Merge"
+msgstr "Забыть"
+
+msgid "ButtonBar|Search"
+msgstr "Поиск"
+
+#, fuzzy
+msgid "ButtonBar|Options"
+msgstr "Перейти"
+
+msgid "ButtonBar|Quit"
+msgstr "Выход"
+
+msgid "Quit"
+msgstr "Выход"
+
+msgid " File was modified, Save with exit? "
+msgstr " Файл был изменен, сохранить при выходе? "
+
+msgid "Two files are needed to compare"
+msgstr ""
+
 msgid "Cannot read directory contents"
 msgstr "Невозможно прочесть содержимое каталога"
 
@@ -1544,9 +1672,6 @@ msgstr ""
 
 msgid "Macro recursion is too deep"
 msgstr "Слишком глубокая рекурсия макросов"
-
-msgid "Search"
-msgstr "Поиск"
 
 msgid " File has hard-links. Detach before saving? "
 msgstr " Файл имеет жесткие ссылки. Отсоединить перед сохранением? "
@@ -1677,12 +1802,6 @@ msgstr " Заменить "
 msgid " %ld replacements made. "
 msgstr " Осуществлено подстановок: %ld "
 
-msgid "Quit"
-msgstr "Выход"
-
-msgid " File was modified, Save with exit? "
-msgstr " Файл был изменен, сохранить при выходе? "
-
 msgid "&Cancel quit"
 msgstr "&Прервать выход"
 
@@ -1703,9 +1822,6 @@ msgstr " Вырезать в буфер "
 
 msgid " Goto line "
 msgstr " Перейти к строке "
-
-msgid " Enter line: "
-msgstr " Введите номер строки: "
 
 msgid " Save Block "
 msgstr " Сохранить блок "
@@ -1788,26 +1904,11 @@ msgstr " Нажмите любую клавишу: "
 msgid " Execute Macro "
 msgstr " Выполнить макрос "
 
-msgid "All charsets"
-msgstr "Все кодировки"
-
-msgid "&Whole words"
-msgstr "&Слово целиком"
-
 msgid "In se&lection"
 msgstr "В вы&деленном"
 
-msgid "&Backwards"
-msgstr "&Назад"
-
-msgid "case &Sensitive"
-msgstr "Учет ре&гистра"
-
 msgid " Enter replacement string:"
 msgstr " Введите текст для замены: "
-
-msgid " Enter search string:"
-msgstr " Введите строку для поиска:"
 
 msgid "&Find all"
 msgstr "На&йти всё"
@@ -1829,9 +1930,6 @@ msgstr " Заменить на: "
 
 msgid " Confirm replace "
 msgstr " Подтвердить замену "
-
-msgid "&Dismiss"
-msgstr "&Закрыть"
 
 #, c-format
 msgid ""
@@ -2092,12 +2190,6 @@ msgstr "Режим переноса строк"
 msgid " Editor options "
 msgstr " Настройки редактора "
 
-msgid "ButtonBar|Help"
-msgstr "Помощь"
-
-msgid "ButtonBar|Save"
-msgstr "Сохранить"
-
 msgid "ButtonBar|Mark"
 msgstr "Блок"
 
@@ -2110,17 +2202,11 @@ msgstr "Копия"
 msgid "ButtonBar|Move"
 msgstr "Переместить"
 
-msgid "ButtonBar|Search"
-msgstr "Поиск"
-
 msgid "ButtonBar|Delete"
 msgstr "Удалить"
 
 msgid "ButtonBar|PullDn"
 msgstr "МенюMC"
-
-msgid "ButtonBar|Quit"
-msgstr "Выход"
 
 msgid " Load syntax file "
 msgstr " Загрузить файл синтаксиса "
@@ -3173,6 +3259,10 @@ msgstr "&Отключить панели"
 msgid "&Compare directories"
 msgstr "&Сравнить каталоги"
 
+#, fuzzy
+msgid "&View diff files"
+msgstr " Просмотр файла "
+
 msgid "E&xternal panelize"
 msgstr "В&нешняя панелизация"
 
@@ -3252,9 +3342,6 @@ msgstr "Меню"
 
 msgid "ButtonBar|View"
 msgstr "Просмотр"
-
-msgid "ButtonBar|Edit"
-msgstr "Правка"
 
 msgid "ButtonBar|RenMov"
 msgstr "Перенос"

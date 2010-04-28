@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.7.2\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-23 10:46+0200\n"
+"POT-Creation-Date: 2010-04-28 16:02+0300\n"
 "PO-Revision-Date: 2010-03-19 15:00+0100\n"
 "Last-Translator: David Martín <dmartina@excite.com\n"
 "Language-Team: Spanish <debian-l10n-spanish@lists.debian.org>\n"
@@ -1469,6 +1469,134 @@ msgstr " Imposible ejecutar comandos desde directorios no locales "
 msgid " The shell is already running a command "
 msgstr " El shell ya está ejecutando un comando "
 
+msgid "&Dismiss"
+msgstr "&Ignorar"
+
+msgid "All charsets"
+msgstr "en co&Dificaciones"
+
+msgid "&Whole words"
+msgstr "&Palabras completas"
+
+msgid "&Backwards"
+msgstr "&Hacia atrás"
+
+msgid "case &Sensitive"
+msgstr "distinguir &May/min"
+
+msgid " Enter search string:"
+msgstr " Teclee el texto a buscar:"
+
+msgid "Search"
+msgstr "Buscar"
+
+msgid " Search is disabled "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary diff file \n"
+" %s "
+msgstr ""
+" Imposible crear el archivo temporal para comandos \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create backup file \n"
+" %s%s \n"
+" %s "
+msgstr ""
+" Imposible crear el archivo destino \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary merge file \n"
+" %s "
+msgstr ""
+" Imposible crear el archivo temporal para comandos \n"
+" %s "
+
+#, fuzzy
+msgid "&Normal"
+msgstr "&Normal"
+
+msgid "&Fastest (Assume large files)"
+msgstr ""
+
+msgid "&Minimal (Find a smaller set of change)"
+msgstr ""
+
+msgid "Strip &trailing carriage return"
+msgstr ""
+
+msgid "Ignore all &whitespace"
+msgstr ""
+
+msgid "Ignore &space change"
+msgstr ""
+
+msgid "Ignore tab &expansion"
+msgstr ""
+
+#, fuzzy
+msgid "&Ignore case"
+msgstr "&Ignorar bloqueo"
+
+#, fuzzy
+msgid "Diff extra options"
+msgstr " Otras opciones "
+
+msgid "Diff algorithm"
+msgstr ""
+
+#, fuzzy
+msgid "Diff Options"
+msgstr "&Opciones"
+
+#, fuzzy
+msgid "Edit"
+msgstr "&Edición"
+
+msgid " Edit is disabled "
+msgstr ""
+
+msgid " Enter line: "
+msgstr " Línea: "
+
+msgid "ButtonBar|Help"
+msgstr "Ayuda"
+
+msgid "ButtonBar|Save"
+msgstr "Guarda"
+
+msgid "ButtonBar|Edit"
+msgstr "Editar"
+
+#, fuzzy
+msgid "ButtonBar|Merge"
+msgstr "Olvidar"
+
+msgid "ButtonBar|Search"
+msgstr "Buscar"
+
+#, fuzzy
+msgid "ButtonBar|Options"
+msgstr "Ir a"
+
+msgid "ButtonBar|Quit"
+msgstr "Salir"
+
+msgid "Quit"
+msgstr "Salir"
+
+msgid " File was modified, Save with exit? "
+msgstr " El archivo fue modificado. ¿Desea guardarlo al salir? "
+
+msgid "Two files are needed to compare"
+msgstr ""
+
 msgid "Cannot read directory contents"
 msgstr "Imposible leer directorio"
 
@@ -1530,9 +1658,6 @@ msgstr ""
 
 msgid "Macro recursion is too deep"
 msgstr "La macro es demasiado recursiva"
-
-msgid "Search"
-msgstr "Buscar"
 
 msgid " File has hard-links. Detach before saving? "
 msgstr " Hay otros enlaces al archivo. ¿Desea separarlo al guardar? "
@@ -1663,12 +1788,6 @@ msgstr " Reemplazar "
 msgid " %ld replacements made. "
 msgstr " %ld reemplazos hechos. "
 
-msgid "Quit"
-msgstr "Salir"
-
-msgid " File was modified, Save with exit? "
-msgstr " El archivo fue modificado. ¿Desea guardarlo al salir? "
-
 msgid "&Cancel quit"
 msgstr "&Cancelar salida"
 
@@ -1689,9 +1808,6 @@ msgstr " Cortar al portapapeles "
 
 msgid " Goto line "
 msgstr " Ir a la línea "
-
-msgid " Enter line: "
-msgstr " Línea: "
 
 msgid " Save Block "
 msgstr " Guardar bloque "
@@ -1774,26 +1890,11 @@ msgstr " Presione cualquier tecla: "
 msgid " Execute Macro "
 msgstr " Ejecutar macro "
 
-msgid "All charsets"
-msgstr "en co&Dificaciones"
-
-msgid "&Whole words"
-msgstr "&Palabras completas"
-
 msgid "In se&lection"
 msgstr "sólo en se&Lección"
 
-msgid "&Backwards"
-msgstr "&Hacia atrás"
-
-msgid "case &Sensitive"
-msgstr "distinguir &May/min"
-
 msgid " Enter replacement string:"
 msgstr " Teclee el cambio a realizar:"
-
-msgid " Enter search string:"
-msgstr " Teclee el texto a buscar:"
 
 msgid "&Find all"
 msgstr "buscar &Todos"
@@ -1815,9 +1916,6 @@ msgstr " Reemplazar con: "
 
 msgid " Confirm replace "
 msgstr " Confirmar cambios "
-
-msgid "&Dismiss"
-msgstr "&Ignorar"
 
 #, c-format
 msgid ""
@@ -2078,12 +2176,6 @@ msgstr "Autoajuste de párrafo"
 msgid " Editor options "
 msgstr " Opciones del editor "
 
-msgid "ButtonBar|Help"
-msgstr "Ayuda"
-
-msgid "ButtonBar|Save"
-msgstr "Guarda"
-
 msgid "ButtonBar|Mark"
 msgstr "Marcar"
 
@@ -2096,17 +2188,11 @@ msgstr "Copiar"
 msgid "ButtonBar|Move"
 msgstr "Mover"
 
-msgid "ButtonBar|Search"
-msgstr "Buscar"
-
 msgid "ButtonBar|Delete"
 msgstr "Borrar"
 
 msgid "ButtonBar|PullDn"
 msgstr "Menú"
-
-msgid "ButtonBar|Quit"
-msgstr "Salir"
 
 msgid " Load syntax file "
 msgstr " Cargar archivo de sintaxis "
@@ -3158,6 +3244,10 @@ msgstr "&Activar/desactivar paneles"
 msgid "&Compare directories"
 msgstr "&Comparar directorios..."
 
+#, fuzzy
+msgid "&View diff files"
+msgstr " Ver archivo "
+
 msgid "E&xternal panelize"
 msgstr "búsquedas e&Xternas..."
 
@@ -3237,9 +3327,6 @@ msgstr "Menú"
 
 msgid "ButtonBar|View"
 msgstr "Ver"
-
-msgid "ButtonBar|Edit"
-msgstr "Editar"
 
 msgid "ButtonBar|RenMov"
 msgstr "RenMov"

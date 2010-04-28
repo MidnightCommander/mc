@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-23 10:46+0200\n"
+"POT-Creation-Date: 2010-04-28 16:02+0300\n"
 "PO-Revision-Date: 2009-12-03 12:42+0100\n"
 "Last-Translator: Ivan Masár <helix84@centrum.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -1477,6 +1477,134 @@ msgstr " Nemôžete spustiť príkazy na nelokálnych súborových systémoch"
 msgid " The shell is already running a command "
 msgstr " Shell už spustil príkaz "
 
+msgid "&Dismiss"
+msgstr "&Odmietnuť"
+
+msgid "All charsets"
+msgstr "Všetky znakové sady"
+
+msgid "&Whole words"
+msgstr "&Celé slová"
+
+msgid "&Backwards"
+msgstr "&Späť"
+
+msgid "case &Sensitive"
+msgstr "&Citlivý na veľkosť"
+
+msgid " Enter search string:"
+msgstr " Zadajte reťazec pre hľadanie:"
+
+msgid "Search"
+msgstr "Hľadať"
+
+msgid " Search is disabled "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary diff file \n"
+" %s "
+msgstr ""
+" Nepodarilo sa vytvoriť dočasný príkazový súbor \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create backup file \n"
+" %s%s \n"
+" %s "
+msgstr ""
+" Nepodarilo sa vytvoriť cieľový súbor \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary merge file \n"
+" %s "
+msgstr ""
+" Nepodarilo sa vytvoriť dočasný príkazový súbor \n"
+" %s "
+
+#, fuzzy
+msgid "&Normal"
+msgstr "Normálny"
+
+msgid "&Fastest (Assume large files)"
+msgstr ""
+
+msgid "&Minimal (Find a smaller set of change)"
+msgstr ""
+
+msgid "Strip &trailing carriage return"
+msgstr ""
+
+msgid "Ignore all &whitespace"
+msgstr ""
+
+msgid "Ignore &space change"
+msgstr ""
+
+msgid "Ignore tab &expansion"
+msgstr ""
+
+#, fuzzy
+msgid "&Ignore case"
+msgstr "&Ignorovať zámok"
+
+#, fuzzy
+msgid "Diff extra options"
+msgstr " Ďalšie voľby "
+
+msgid "Diff algorithm"
+msgstr ""
+
+#, fuzzy
+msgid "Diff Options"
+msgstr " Voľby "
+
+#, fuzzy
+msgid "Edit"
+msgstr "&Upraviť"
+
+msgid " Edit is disabled "
+msgstr ""
+
+msgid " Enter line: "
+msgstr " Zadajte riadok: "
+
+msgid "ButtonBar|Help"
+msgstr "ButtonBar|Pomoc"
+
+msgid "ButtonBar|Save"
+msgstr "ButtonBar|Uložiť"
+
+msgid "ButtonBar|Edit"
+msgstr "ButtonBar|Upravi"
+
+#, fuzzy
+msgid "ButtonBar|Merge"
+msgstr "ButtonBar|Zabudn"
+
+msgid "ButtonBar|Search"
+msgstr "ButtonBar|Hľad"
+
+#, fuzzy
+msgid "ButtonBar|Options"
+msgstr "ButtonBar|Riadok"
+
+msgid "ButtonBar|Quit"
+msgstr "ButtonBar|Ukončiť"
+
+msgid "Quit"
+msgstr "Skončiť"
+
+msgid " File was modified, Save with exit? "
+msgstr " Súbor bol zmenený, uložiť a skončiť? "
+
+msgid "Two files are needed to compare"
+msgstr ""
+
 msgid "Cannot read directory contents"
 msgstr "Nepodarilo sa načítať obsah adresára"
 
@@ -1538,9 +1666,6 @@ msgstr ""
 
 msgid "Macro recursion is too deep"
 msgstr "Rekurzia makra je príliš hlboká"
-
-msgid "Search"
-msgstr "Hľadať"
 
 msgid " File has hard-links. Detach before saving? "
 msgstr " Súbor má pevné odkazy. Odpojiť pred uložením? "
@@ -1671,12 +1796,6 @@ msgstr " Nahradiť "
 msgid " %ld replacements made. "
 msgstr " %ld náhrad urobených. "
 
-msgid "Quit"
-msgstr "Skončiť"
-
-msgid " File was modified, Save with exit? "
-msgstr " Súbor bol zmenený, uložiť a skončiť? "
-
 msgid "&Cancel quit"
 msgstr "&Zrušiť ukončenie"
 
@@ -1697,9 +1816,6 @@ msgstr " Vystrihnúť do schránky "
 
 msgid " Goto line "
 msgstr " Prejsť na riadok "
-
-msgid " Enter line: "
-msgstr " Zadajte riadok: "
 
 msgid " Save Block "
 msgstr " Uložiť blok "
@@ -1783,26 +1899,11 @@ msgstr " Stlačte ľubovoľný kláves: "
 msgid " Execute Macro "
 msgstr " Spustiť makro "
 
-msgid "All charsets"
-msgstr "Všetky znakové sady"
-
-msgid "&Whole words"
-msgstr "&Celé slová"
-
 msgid "In se&lection"
 msgstr "&Vo výbere"
 
-msgid "&Backwards"
-msgstr "&Späť"
-
-msgid "case &Sensitive"
-msgstr "&Citlivý na veľkosť"
-
 msgid " Enter replacement string:"
 msgstr " Zadajte reťazec pre nahradenie:"
-
-msgid " Enter search string:"
-msgstr " Zadajte reťazec pre hľadanie:"
 
 msgid "&Find all"
 msgstr "&Nájsť všetky"
@@ -1824,9 +1925,6 @@ msgstr " Nahradiť s: "
 
 msgid " Confirm replace "
 msgstr " Potvrdiť nahradenie "
-
-msgid "&Dismiss"
-msgstr "&Odmietnuť"
 
 #, c-format
 msgid ""
@@ -2106,12 +2204,6 @@ msgstr "Zalamovanie riadkov"
 msgid " Editor options "
 msgstr " Nastavenie editora "
 
-msgid "ButtonBar|Help"
-msgstr "ButtonBar|Pomoc"
-
-msgid "ButtonBar|Save"
-msgstr "ButtonBar|Uložiť"
-
 msgid "ButtonBar|Mark"
 msgstr "ButtonBar|Označ"
 
@@ -2124,17 +2216,11 @@ msgstr "ButtonBar|Kopír"
 msgid "ButtonBar|Move"
 msgstr "ButtonBar|Presu"
 
-msgid "ButtonBar|Search"
-msgstr "ButtonBar|Hľad"
-
 msgid "ButtonBar|Delete"
 msgstr "ButtonBar|Zmaza"
 
 msgid "ButtonBar|PullDn"
 msgstr "ButtonBar|H.menu"
-
-msgid "ButtonBar|Quit"
-msgstr "ButtonBar|Ukončiť"
 
 msgid " Load syntax file "
 msgstr " Načítať súbor so syntaxou "
@@ -3185,6 +3271,10 @@ msgstr "&Panely zap./vyp."
 msgid "&Compare directories"
 msgstr "&Porovnanie adresárov "
 
+#, fuzzy
+msgid "&View diff files"
+msgstr " Prezrieť si súbor "
+
 msgid "E&xternal panelize"
 msgstr "Panelizovať e&Xterným"
 
@@ -3264,9 +3354,6 @@ msgstr "ButtonBar|Menu"
 
 msgid "ButtonBar|View"
 msgstr "ButtonBar|Zobraz"
-
-msgid "ButtonBar|Edit"
-msgstr "ButtonBar|Upravi"
 
 msgid "ButtonBar|RenMov"
 msgstr "ButtonBar|PremPres"
@@ -3865,9 +3952,6 @@ msgstr "Proces v pozadí:"
 #~ msgid " Invalid address "
 #~ msgstr " Neplatná adresa"
 
-#~ msgid "ButtonBar|Line"
-#~ msgstr "ButtonBar|Riadok"
-
 #~ msgid "File: %s"
 #~ msgstr "Súbor: %s"
 
@@ -4024,9 +4108,6 @@ msgstr "Proces v pozadí:"
 
 #~ msgid " Command "
 #~ msgstr " Príkaz "
-
-#~ msgid " Options "
-#~ msgstr " Voľby "
 
 #~ msgid "Intuitive"
 #~ msgstr "Intuitívne"

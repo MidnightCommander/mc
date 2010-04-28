@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.41\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-23 10:46+0200\n"
+"POT-Creation-Date: 2010-04-28 16:02+0300\n"
 "PO-Revision-Date: 2001-10-20 21:37+02:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -1515,6 +1515,132 @@ msgstr " Kan ikke køre kommandoer på ikke-lokale filsystemer"
 msgid " The shell is already running a command "
 msgstr " Skallen kører allerede en kommando "
 
+msgid "&Dismiss"
+msgstr "&Forkast"
+
+msgid "All charsets"
+msgstr ""
+
+#, fuzzy
+msgid "&Whole words"
+msgstr "&Kun hele ord"
+
+msgid "&Backwards"
+msgstr "&Baglæns"
+
+msgid "case &Sensitive"
+msgstr "forskel på &Store og små bogstaver"
+
+msgid " Enter search string:"
+msgstr " Indtast søgetekst:"
+
+msgid "Search"
+msgstr "Søg"
+
+msgid " Search is disabled "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary diff file \n"
+" %s "
+msgstr ""
+" Kan ikke oprette midlertidig kommandofil \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create backup file \n"
+" %s%s \n"
+" %s "
+msgstr ""
+" Kan ikke oprette målfilen \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary merge file \n"
+" %s "
+msgstr ""
+" Kan ikke oprette midlertidig kommandofil \n"
+" %s "
+
+#, fuzzy
+msgid "&Normal"
+msgstr "Format"
+
+msgid "&Fastest (Assume large files)"
+msgstr ""
+
+msgid "&Minimal (Find a smaller set of change)"
+msgstr ""
+
+msgid "Strip &trailing carriage return"
+msgstr ""
+
+msgid "Ignore all &whitespace"
+msgstr ""
+
+msgid "Ignore &space change"
+msgstr ""
+
+msgid "Ignore tab &expansion"
+msgstr ""
+
+msgid "&Ignore case"
+msgstr ""
+
+#, fuzzy
+msgid "Diff extra options"
+msgstr " Andre indstillinger "
+
+msgid "Diff algorithm"
+msgstr ""
+
+#, fuzzy
+msgid "Diff Options"
+msgstr " Indstillinger "
+
+#, fuzzy
+msgid "Edit"
+msgstr "Redigér"
+
+msgid " Edit is disabled "
+msgstr ""
+
+msgid " Enter line: "
+msgstr " Indtast linje: "
+
+msgid "ButtonBar|Help"
+msgstr ""
+
+msgid "ButtonBar|Save"
+msgstr ""
+
+msgid "ButtonBar|Edit"
+msgstr ""
+
+msgid "ButtonBar|Merge"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Options"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
+
+msgid "Quit"
+msgstr "Slut"
+
+msgid " File was modified, Save with exit? "
+msgstr " Filen blev ændret, Gem ved afslutning? "
+
+msgid "Two files are needed to compare"
+msgstr ""
+
 #, fuzzy
 msgid "Cannot read directory contents"
 msgstr " Kunne ikke skifte mappe"
@@ -1579,9 +1705,6 @@ msgstr ""
 
 msgid "Macro recursion is too deep"
 msgstr ""
-
-msgid "Search"
-msgstr "Søg"
 
 msgid " File has hard-links. Detach before saving? "
 msgstr ""
@@ -1720,12 +1843,6 @@ msgstr " Erstat "
 msgid " %ld replacements made. "
 msgstr " %ld erstatninger udført. "
 
-msgid "Quit"
-msgstr "Slut"
-
-msgid " File was modified, Save with exit? "
-msgstr " Filen blev ændret, Gem ved afslutning? "
-
 #, fuzzy
 msgid "&Cancel quit"
 msgstr "Annullér afslut"
@@ -1748,9 +1865,6 @@ msgstr " Klip til klipbord "
 
 msgid " Goto line "
 msgstr " Gå til linje "
-
-msgid " Enter line: "
-msgstr " Indtast linje: "
 
 msgid " Save Block "
 msgstr " Gem blok "
@@ -1836,28 +1950,12 @@ msgstr " Tryk på en tast: "
 msgid " Execute Macro "
 msgstr " Kør makro "
 
-msgid "All charsets"
-msgstr ""
-
-#, fuzzy
-msgid "&Whole words"
-msgstr "&Kun hele ord"
-
 #, fuzzy
 msgid "In se&lection"
 msgstr "Omvendt valg      M-*"
 
-msgid "&Backwards"
-msgstr "&Baglæns"
-
-msgid "case &Sensitive"
-msgstr "forskel på &Store og små bogstaver"
-
 msgid " Enter replacement string:"
 msgstr " Indtast erstatningstekst:"
-
-msgid " Enter search string:"
-msgstr " Indtast søgetekst:"
 
 #, fuzzy
 msgid "&Find all"
@@ -1880,9 +1978,6 @@ msgstr " Erstat med: "
 
 msgid " Confirm replace "
 msgstr " Bekræft erstat "
-
-msgid "&Dismiss"
-msgstr "&Forkast"
 
 #, c-format
 msgid ""
@@ -2194,12 +2289,6 @@ msgstr "Ombrydningsmåde"
 msgid " Editor options "
 msgstr " Editorindstillinger "
 
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
 msgid "ButtonBar|Mark"
 msgstr ""
 
@@ -2212,16 +2301,10 @@ msgstr ""
 msgid "ButtonBar|Move"
 msgstr ""
 
-msgid "ButtonBar|Search"
-msgstr ""
-
 msgid "ButtonBar|Delete"
 msgstr ""
 
 msgid "ButtonBar|PullDn"
-msgstr ""
-
-msgid "ButtonBar|Quit"
 msgstr ""
 
 msgid " Load syntax file "
@@ -3299,6 +3382,10 @@ msgid "&Compare directories"
 msgstr " Sammenlign mapper "
 
 #, fuzzy
+msgid "&View diff files"
+msgstr " Se på fil "
+
+#, fuzzy
 msgid "E&xternal panelize"
 msgstr "Eksternt panel"
 
@@ -3387,9 +3474,6 @@ msgid "ButtonBar|Menu"
 msgstr ""
 
 msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
 msgstr ""
 
 msgid "ButtonBar|RenMov"
@@ -4122,9 +4206,6 @@ msgstr "Baggrundsproces:"
 
 #~ msgid " Command "
 #~ msgstr " Kommando "
-
-#~ msgid " Options "
-#~ msgstr " Indstillinger "
 
 #~ msgid "Intuitive"
 #~ msgstr "Intuitiv"

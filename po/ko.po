@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-23 10:46+0200\n"
+"POT-Creation-Date: 2010-04-28 16:02+0300\n"
 "PO-Revision-Date: 2010-04-26 00:31+0900\n"
 "Last-Translator: Kang Bundo <bundo@bundo.biz>\n"
 "Language-Team: ubuntu korea <admin@ubuntu.or.kr>\n"
@@ -1469,6 +1469,134 @@ msgstr "로컬 파일 시스템이 아니면 명령을 실행할 수 없습니�
 msgid " The shell is already running a command "
 msgstr "명령해석기가 이미 명령을 수행중입니다 "
 
+msgid "&Dismiss"
+msgstr "취소(&D)"
+
+msgid "All charsets"
+msgstr "모든 문자셋"
+
+msgid "&Whole words"
+msgstr "단어 단위로(&W)"
+
+msgid "&Backwards"
+msgstr "뒤로(&B)"
+
+msgid "case &Sensitive"
+msgstr "대소문자 구분(&S)"
+
+msgid " Enter search string:"
+msgstr " 찾을 글월 입력:"
+
+msgid "Search"
+msgstr "검색"
+
+msgid " Search is disabled "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary diff file \n"
+" %s "
+msgstr ""
+" 임시 명령 파일을 만들 수 없습니다 \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create backup file \n"
+" %s%s \n"
+" %s "
+msgstr ""
+" \"%s\" 파일을 만들 수 없습니다 \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary merge file \n"
+" %s "
+msgstr ""
+" 임시 명령 파일을 만들 수 없습니다 \n"
+" %s "
+
+#, fuzzy
+msgid "&Normal"
+msgstr "일반"
+
+msgid "&Fastest (Assume large files)"
+msgstr ""
+
+msgid "&Minimal (Find a smaller set of change)"
+msgstr ""
+
+msgid "Strip &trailing carriage return"
+msgstr ""
+
+msgid "Ignore all &whitespace"
+msgstr ""
+
+msgid "Ignore &space change"
+msgstr ""
+
+msgid "Ignore tab &expansion"
+msgstr ""
+
+#, fuzzy
+msgid "&Ignore case"
+msgstr "잠금 무시(&I)"
+
+#, fuzzy
+msgid "Diff extra options"
+msgstr " 기타 선택항목 "
+
+msgid "Diff algorithm"
+msgstr ""
+
+#, fuzzy
+msgid "Diff Options"
+msgstr "선택항목(&O) "
+
+#, fuzzy
+msgid "Edit"
+msgstr "편집(&E)"
+
+msgid " Edit is disabled "
+msgstr ""
+
+msgid " Enter line: "
+msgstr "줄 번호 입력:"
+
+msgid "ButtonBar|Help"
+msgstr "ButtonBar|도움말"
+
+msgid "ButtonBar|Save"
+msgstr "ButtonBar|저장"
+
+msgid "ButtonBar|Edit"
+msgstr "ButtonBar|편집"
+
+#, fuzzy
+msgid "ButtonBar|Merge"
+msgstr "ButtonBar|분실"
+
+msgid "ButtonBar|Search"
+msgstr "ButtonBar|검색"
+
+#, fuzzy
+msgid "ButtonBar|Options"
+msgstr "ButtonBar|Goto"
+
+msgid "ButtonBar|Quit"
+msgstr "ButtonBar|종료"
+
+msgid "Quit"
+msgstr "끝내기"
+
+msgid " File was modified, Save with exit? "
+msgstr "파일이 바뀌었는데, 저장하고 끝낼까요? "
+
+msgid "Two files are needed to compare"
+msgstr ""
+
 msgid "Cannot read directory contents"
 msgstr "디렉터리 내용을 읽을 수 없습니다"
 
@@ -1530,9 +1658,6 @@ msgstr ""
 
 msgid "Macro recursion is too deep"
 msgstr "매크로가 너무 많이 반복되어 불려졌습니다"
-
-msgid "Search"
-msgstr "검색"
 
 msgid " File has hard-links. Detach before saving? "
 msgstr "분리를 저장하기 전에 파일을 하드-링크했습니다"
@@ -1653,18 +1778,16 @@ msgstr "불러오기 "
 msgid " Block is large, you may not be able to undo this action. "
 msgstr "구역이 너무 커서 나중에 무를 수 없습니다. "
 
+#, fuzzy
+msgid "Replace"
+msgstr "바꾸기(&R)"
+
 msgid " Replace "
 msgstr "바꾸기"
 
 #, c-format
 msgid " %ld replacements made. "
 msgstr "%ld 개가 바뀌었습니다. "
-
-msgid "Quit"
-msgstr "끝내기"
-
-msgid " File was modified, Save with exit? "
-msgstr "파일이 바뀌었는데, 저장하고 끝낼까요? "
 
 msgid "&Cancel quit"
 msgstr "끝내기 취소(&C)"
@@ -1686,9 +1809,6 @@ msgstr "클립보드로 오려두기 "
 
 msgid " Goto line "
 msgstr "줄찾기"
-
-msgid " Enter line: "
-msgstr "줄 번호 입력:"
 
 msgid " Save Block "
 msgstr "구역 저장"
@@ -1771,26 +1891,11 @@ msgstr " 아무 키나 누르십시오: "
 msgid " Execute Macro "
 msgstr " 매크로 실행 "
 
-msgid "All charsets"
-msgstr "모든 문자셋"
-
-msgid "&Whole words"
-msgstr "단어 단위로(&W)"
-
 msgid "In se&lection"
 msgstr "선택반전(&L)"
 
-msgid "&Backwards"
-msgstr "뒤로(&B)"
-
-msgid "case &Sensitive"
-msgstr "대소문자 구분(&S)"
-
 msgid " Enter replacement string:"
 msgstr " 바꿀 글월 입력:"
-
-msgid " Enter search string:"
-msgstr " 찾을 글월 입력:"
 
 msgid "&Find all"
 msgstr "파일 찾기(&F)"
@@ -1812,9 +1917,6 @@ msgstr "함께 바꿈: "
 
 msgid " Confirm replace "
 msgstr "바꾸기 확인 "
-
-msgid "&Dismiss"
-msgstr "취소(&D)"
 
 #, c-format
 msgid ""
@@ -2075,12 +2177,6 @@ msgstr "배치 방법"
 msgid " Editor options "
 msgstr " 편집기 옵션 "
 
-msgid "ButtonBar|Help"
-msgstr "ButtonBar|도움말"
-
-msgid "ButtonBar|Save"
-msgstr "ButtonBar|저장"
-
 msgid "ButtonBar|Mark"
 msgstr "ButtonBar|표시"
 
@@ -2093,17 +2189,11 @@ msgstr "ButtonBar|복사"
 msgid "ButtonBar|Move"
 msgstr "ButtonBar|이동"
 
-msgid "ButtonBar|Search"
-msgstr "ButtonBar|검색"
-
 msgid "ButtonBar|Delete"
 msgstr "ButtonBar|삭제"
 
 msgid "ButtonBar|PullDn"
 msgstr "ButtonBar|풀다운"
-
-msgid "ButtonBar|Quit"
-msgstr "ButtonBar|종료"
 
 msgid " Load syntax file "
 msgstr "구문 파일 읽어오기 "
@@ -2155,16 +2245,26 @@ msgid " %s%s file error"
 msgstr " %s%s 파일 에러 "
 
 #, c-format
-msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
-msgstr "버전 3.0 이후에 %smc.ext 파일이 바뀌었습니다. 인스톨이 실패한 것으로 보입니다. 미드나잇 코맨더에서 새로운 mc.ext 파일을 가져오시기 바랍니다."
+msgid ""
+"The format of the %smc.ext file has changed with version 3.0.  It seems that "
+"the installation failed.  Please fetch a fresh copy from the Midnight "
+"Commander package."
+msgstr ""
+"버전 3.0 이후에 %smc.ext 파일이 바뀌었습니다. 인스톨이 실패한 것으로 보입니"
+"다. 미드나잇 코맨더에서 새로운 mc.ext 파일을 가져오시기 바랍니다."
 
 #, c-format
 msgid " ~/%s file error "
 msgstr "  ~/%s 파일 에러 "
 
 #, c-format
-msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
-msgstr "~ /%s 파일은 버전 3.0에서 바꿀 수 있습니다. 당신은 어느 %smc.ext에서 복사하거나 작성하는 방법의 예제 파일을 사용할 수 있습니다."
+msgid ""
+"The format of the ~/%s file has changed with version 3.0.  You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
+msgstr ""
+"~ /%s 파일은 버전 3.0에서 바꿀 수 있습니다. 당신은 어느 %smc.ext에서 복사하거"
+"나 작성하는 방법의 예제 파일을 사용할 수 있습니다."
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|복사"
@@ -2827,7 +2927,8 @@ msgid " Hotlist Load "
 msgstr " 단축목록 불러오기 "
 
 #, c-format
-msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr "MC  ~/%s 파일을 쓸 수 없습니다, 지난 설정파일을 지울 수 없습니다."
 
 #, c-format
@@ -2888,9 +2989,11 @@ msgstr "Dev. type: 주요 %lu, 기여 %lu"
 msgid "Size:      %s"
 msgstr "크기: %s"
 
-#, c-format
+#, fuzzy, c-format
 msgid " (%ld block)"
-msgstr " (%ld 블럭)"
+msgid_plural " (%ld blocks)"
+msgstr[0] " (%ld 블럭)"
+msgstr[1] " (%ld 블럭)"
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -3130,6 +3233,10 @@ msgstr "패널 열기/닫기(&P)"
 msgid "&Compare directories"
 msgstr "디렉터리 비교(&C)"
 
+#, fuzzy
+msgid "&View diff files"
+msgstr "파일 보기 "
+
 msgid "E&xternal panelize"
 msgstr "확장 패널(&X)"
 
@@ -3209,9 +3316,6 @@ msgstr "ButtonBar|메뉴"
 
 msgid "ButtonBar|View"
 msgstr "ButtonBar|보기"
-
-msgid "ButtonBar|Edit"
-msgstr "ButtonBar|편집"
 
 msgid "ButtonBar|RenMov"
 msgstr "ButtonBar|이동"
@@ -3451,13 +3555,17 @@ msgstr "집단"
 msgid "<readlink failed>"
 msgstr "<readlink 실패>"
 
-#, c-format
+#, fuzzy, c-format
 msgid "%s byte"
-msgstr "%s 바이트"
+msgid_plural "%s bytes"
+msgstr[0] "%s 바이트"
+msgstr[1] "%s 바이트"
 
-#, c-format
+#, fuzzy, c-format
 msgid "%s in %d file"
-msgstr "%s in %d 파일"
+msgid_plural "%s in %d files"
+msgstr[0] "%s in %d 파일"
+msgstr[1] "%s in %d 파일"
 
 msgid "Unknown tag on display format: "
 msgstr "출력 형식에 모르는 태그: "
@@ -3756,6 +3864,5 @@ msgstr "기록을 삭제하기를 원하십니까?"
 msgid "Background process:"
 msgstr "배경 프로세스:"
 
-msgid "Status:    %s"
-msgstr "상태: %s"
-
+#~ msgid "Status:    %s"
+#~ msgstr "상태: %s"

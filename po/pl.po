@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-23 10:46+0200\n"
+"POT-Creation-Date: 2010-04-28 16:02+0300\n"
 "PO-Revision-Date: 2010-04-24 18:03+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <trans-pl@lists.fedoraproject.org>\n"
@@ -1472,6 +1472,134 @@ msgstr " Polecenia można wykonywać tylko na lokalnym systemie plików"
 msgid " The shell is already running a command "
 msgstr " Powłoka wykonuje już polecenie "
 
+msgid "&Dismiss"
+msgstr "&Porzuć"
+
+msgid "All charsets"
+msgstr "Wszystkie zest. znaków"
+
+msgid "&Whole words"
+msgstr "&Całe słowa"
+
+msgid "&Backwards"
+msgstr "&Wstecz"
+
+msgid "case &Sensitive"
+msgstr "&Rozróż. wielkości"
+
+msgid " Enter search string:"
+msgstr " Proszę podać wyszukiwany napis:"
+
+msgid "Search"
+msgstr "Wyszukiwanie"
+
+msgid " Search is disabled "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary diff file \n"
+" %s "
+msgstr ""
+" Nie można utworzyć tymczasowego pliku polecenia \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create backup file \n"
+" %s%s \n"
+" %s "
+msgstr ""
+" Nie można utworzyć pliku docelowego \"%s\" \n"
+" %s "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary merge file \n"
+" %s "
+msgstr ""
+" Nie można utworzyć tymczasowego pliku polecenia \n"
+" %s "
+
+#, fuzzy
+msgid "&Normal"
+msgstr "Normalny"
+
+msgid "&Fastest (Assume large files)"
+msgstr ""
+
+msgid "&Minimal (Find a smaller set of change)"
+msgstr ""
+
+msgid "Strip &trailing carriage return"
+msgstr ""
+
+msgid "Ignore all &whitespace"
+msgstr ""
+
+msgid "Ignore &space change"
+msgstr ""
+
+msgid "Ignore tab &expansion"
+msgstr ""
+
+#, fuzzy
+msgid "&Ignore case"
+msgstr "Z&ignoruj blokadę"
+
+#, fuzzy
+msgid "Diff extra options"
+msgstr " Inne opcje "
+
+msgid "Diff algorithm"
+msgstr ""
+
+#, fuzzy
+msgid "Diff Options"
+msgstr "&Opcje"
+
+#, fuzzy
+msgid "Edit"
+msgstr "&Edycja"
+
+msgid " Edit is disabled "
+msgstr ""
+
+msgid " Enter line: "
+msgstr " Proszę podać wiersz: "
+
+msgid "ButtonBar|Help"
+msgstr "Pomoc"
+
+msgid "ButtonBar|Save"
+msgstr "Zapisz"
+
+msgid "ButtonBar|Edit"
+msgstr "Edycja"
+
+#, fuzzy
+msgid "ButtonBar|Merge"
+msgstr "Porzuć"
+
+msgid "ButtonBar|Search"
+msgstr "Szukaj"
+
+#, fuzzy
+msgid "ButtonBar|Options"
+msgstr "Idź do"
+
+msgid "ButtonBar|Quit"
+msgstr "Kończ"
+
+msgid "Quit"
+msgstr "Zakończ"
+
+msgid " File was modified, Save with exit? "
+msgstr " Plik został zmodyfikowany. Zapisać przed zakończeniem?"
+
+msgid "Two files are needed to compare"
+msgstr ""
+
 msgid "Cannot read directory contents"
 msgstr "Nie można odczytać zawartości katalogu"
 
@@ -1533,9 +1661,6 @@ msgstr ""
 
 msgid "Macro recursion is too deep"
 msgstr "Rekurencja makr jest za głeboka"
-
-msgid "Search"
-msgstr "Wyszukiwanie"
 
 msgid " File has hard-links. Detach before saving? "
 msgstr " Plik posiada twarde dowiązania. Odłączył przez zapisaniem? "
@@ -1666,12 +1791,6 @@ msgstr " Zastąp "
 msgid " %ld replacements made. "
 msgstr " Wykonano %ld zastąpień. "
 
-msgid "Quit"
-msgstr "Zakończ"
-
-msgid " File was modified, Save with exit? "
-msgstr " Plik został zmodyfikowany. Zapisać przed zakończeniem?"
-
 msgid "&Cancel quit"
 msgstr "N&ie zamykaj"
 
@@ -1692,9 +1811,6 @@ msgstr " Wytnij do schowka "
 
 msgid " Goto line "
 msgstr " Przejdź do wiersza "
-
-msgid " Enter line: "
-msgstr " Proszę podać wiersz: "
 
 msgid " Save Block "
 msgstr " Zapisz blok "
@@ -1779,26 +1895,11 @@ msgstr " Naciśnij dowolny klawisz: "
 msgid " Execute Macro "
 msgstr " Wykonaj makro "
 
-msgid "All charsets"
-msgstr "Wszystkie zest. znaków"
-
-msgid "&Whole words"
-msgstr "&Całe słowa"
-
 msgid "In se&lection"
 msgstr "W wy&branych"
 
-msgid "&Backwards"
-msgstr "&Wstecz"
-
-msgid "case &Sensitive"
-msgstr "&Rozróż. wielkości"
-
 msgid " Enter replacement string:"
 msgstr " Proszę podać zastępujący napis:"
-
-msgid " Enter search string:"
-msgstr " Proszę podać wyszukiwany napis:"
 
 msgid "&Find all"
 msgstr "&Znajdź wszystkie"
@@ -1820,9 +1921,6 @@ msgstr " Zastąp napisem: "
 
 msgid " Confirm replace "
 msgstr " Potwierdź zastąpienie "
-
-msgid "&Dismiss"
-msgstr "&Porzuć"
 
 #, c-format
 msgid ""
@@ -2083,12 +2181,6 @@ msgstr "Tryb zawijania"
 msgid " Editor options "
 msgstr " Opcje edytora "
 
-msgid "ButtonBar|Help"
-msgstr "Pomoc"
-
-msgid "ButtonBar|Save"
-msgstr "Zapisz"
-
 msgid "ButtonBar|Mark"
 msgstr "Zazncz"
 
@@ -2101,17 +2193,11 @@ msgstr "Kopiuj"
 msgid "ButtonBar|Move"
 msgstr "Przen"
 
-msgid "ButtonBar|Search"
-msgstr "Szukaj"
-
 msgid "ButtonBar|Delete"
 msgstr "Usuń"
 
 msgid "ButtonBar|PullDn"
 msgstr "WDół"
-
-msgid "ButtonBar|Quit"
-msgstr "Kończ"
 
 msgid " Load syntax file "
 msgstr " Wczytaj plik składni "
@@ -3162,6 +3248,10 @@ msgstr "Prz&ełącz wyświetlanie paneli"
 msgid "&Compare directories"
 msgstr "P&orównanie katalogów"
 
+#, fuzzy
+msgid "&View diff files"
+msgstr " Podgląd pliku "
+
 msgid "E&xternal panelize"
 msgstr "Panele ze&wnętrzne"
 
@@ -3241,9 +3331,6 @@ msgstr "Menu"
 
 msgid "ButtonBar|View"
 msgstr "Podgld"
-
-msgid "ButtonBar|Edit"
-msgstr "Edycja"
 
 msgid "ButtonBar|RenMov"
 msgstr "Przen"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-23 10:46+0200\n"
+"POT-Creation-Date: 2010-04-28 16:02+0300\n"
 "PO-Revision-Date: 2000-10-26 11:00 CST\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil <ubuntu-l10n-tam@lists.ubuntu.com>\n"
@@ -1403,6 +1403,125 @@ msgstr ""
 msgid " The shell is already running a command "
 msgstr ""
 
+msgid "&Dismiss"
+msgstr ""
+
+msgid "All charsets"
+msgstr ""
+
+msgid "&Whole words"
+msgstr ""
+
+msgid "&Backwards"
+msgstr "&பின்னோக்கம்"
+
+msgid "case &Sensitive"
+msgstr ""
+
+msgid " Enter search string:"
+msgstr " தேடுவதட்க்கு சரத்தை நுழைவிடு:"
+
+msgid "Search"
+msgstr "தேடு"
+
+msgid " Search is disabled "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary diff file \n"
+" %s "
+msgstr " கோப்பை சேமிக்கும் போது பிழை. "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create backup file \n"
+" %s%s \n"
+" %s "
+msgstr " கோப்பை சேமிக்கும் போது பிழை. "
+
+#, fuzzy, c-format
+msgid ""
+" Cannot create temporary merge file \n"
+" %s "
+msgstr " கோப்பை சேமிக்கும் போது பிழை. "
+
+#, fuzzy
+msgid "&Normal"
+msgstr "&இல்லை"
+
+msgid "&Fastest (Assume large files)"
+msgstr ""
+
+msgid "&Minimal (Find a smaller set of change)"
+msgstr ""
+
+msgid "Strip &trailing carriage return"
+msgstr ""
+
+msgid "Ignore all &whitespace"
+msgstr ""
+
+msgid "Ignore &space change"
+msgstr ""
+
+msgid "Ignore tab &expansion"
+msgstr ""
+
+msgid "&Ignore case"
+msgstr ""
+
+#, fuzzy
+msgid "Diff extra options"
+msgstr " விருப்பங்கள் "
+
+msgid "Diff algorithm"
+msgstr ""
+
+#, fuzzy
+msgid "Diff Options"
+msgstr " விருப்பங்கள் "
+
+#, fuzzy
+msgid "Edit"
+msgstr "பதிப்பு"
+
+msgid " Edit is disabled "
+msgstr ""
+
+msgid " Enter line: "
+msgstr " வாிசையை உள்ளீடு: "
+
+msgid "ButtonBar|Help"
+msgstr ""
+
+msgid "ButtonBar|Save"
+msgstr ""
+
+msgid "ButtonBar|Edit"
+msgstr ""
+
+msgid "ButtonBar|Merge"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Options"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
+
+msgid "Quit"
+msgstr ""
+
+msgid " File was modified, Save with exit? "
+msgstr " கோப்பு மாற்றப்பட்டது, சேமித்து வெளியேறு? "
+
+msgid "Two files are needed to compare"
+msgstr ""
+
 msgid "Cannot read directory contents"
 msgstr ""
 
@@ -1465,9 +1584,6 @@ msgstr ""
 
 msgid "Macro recursion is too deep"
 msgstr ""
-
-msgid "Search"
-msgstr "தேடு"
 
 msgid " File has hard-links. Detach before saving? "
 msgstr ""
@@ -1603,12 +1719,6 @@ msgstr " மாற்று "
 msgid " %ld replacements made. "
 msgstr " %ld மாற்றங்கள் செய்யப்பட்டன. "
 
-msgid "Quit"
-msgstr ""
-
-msgid " File was modified, Save with exit? "
-msgstr " கோப்பு மாற்றப்பட்டது, சேமித்து வெளியேறு? "
-
 #, fuzzy
 msgid "&Cancel quit"
 msgstr "வெளியேற்றளை ரத்து செய்"
@@ -1631,9 +1741,6 @@ msgstr " பிடிப்புப் பலகைக்கு வெட்ட
 
 msgid " Goto line "
 msgstr " வாிசைக்குப் போ "
-
-msgid " Enter line: "
-msgstr " வாிசையை உள்ளீடு: "
 
 msgid " Save Block "
 msgstr " தொகுதியை சேமி "
@@ -1718,26 +1825,11 @@ msgstr "ஏதாவது ஒரு விசையை அழுத்து: "
 msgid " Execute Macro "
 msgstr " பெரு நிரலை செயல்படுத்து "
 
-msgid "All charsets"
-msgstr ""
-
-msgid "&Whole words"
-msgstr ""
-
 msgid "In se&lection"
-msgstr ""
-
-msgid "&Backwards"
-msgstr "&பின்னோக்கம்"
-
-msgid "case &Sensitive"
 msgstr ""
 
 msgid " Enter replacement string:"
 msgstr " மாற்றல் சரத்தை நுழைவிடு:"
-
-msgid " Enter search string:"
-msgstr " தேடுவதட்க்கு சரத்தை நுழைவிடு:"
 
 msgid "&Find all"
 msgstr ""
@@ -1759,9 +1851,6 @@ msgstr " இதை வைத்து மாற்று: "
 
 msgid " Confirm replace "
 msgstr " மாற்றுதலை உறுதிப்படுத்து "
-
-msgid "&Dismiss"
-msgstr ""
 
 #, c-format
 msgid ""
@@ -2064,12 +2153,6 @@ msgstr ""
 msgid " Editor options "
 msgstr ""
 
-msgid "ButtonBar|Help"
-msgstr ""
-
-msgid "ButtonBar|Save"
-msgstr ""
-
 msgid "ButtonBar|Mark"
 msgstr ""
 
@@ -2082,16 +2165,10 @@ msgstr ""
 msgid "ButtonBar|Move"
 msgstr ""
 
-msgid "ButtonBar|Search"
-msgstr ""
-
 msgid "ButtonBar|Delete"
 msgstr ""
 
 msgid "ButtonBar|PullDn"
-msgstr ""
-
-msgid "ButtonBar|Quit"
 msgstr ""
 
 msgid " Load syntax file "
@@ -3056,6 +3133,10 @@ msgstr ""
 msgid "&Compare directories"
 msgstr ""
 
+#, fuzzy
+msgid "&View diff files"
+msgstr "இதை வைத்து திற..."
+
 msgid "E&xternal panelize"
 msgstr ""
 
@@ -3133,9 +3214,6 @@ msgid "ButtonBar|Menu"
 msgstr ""
 
 msgid "ButtonBar|View"
-msgstr ""
-
-msgid "ButtonBar|Edit"
 msgstr ""
 
 msgid "ButtonBar|RenMov"
