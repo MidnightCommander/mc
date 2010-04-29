@@ -1,12 +1,12 @@
 # MC Chinese (zh_CN) translation
 # Wang Jian <lark@linux.net.cn>, 2001.
 # Jake Li <gnozil@gmail.com>, 2010.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-28 16:02+0300\n"
+"POT-Creation-Date: 2010-04-23 10:46+0200\n"
 "PO-Revision-Date: 2010-03-09 14:51+0800\n"
 "Last-Translator: Jake Li <gnozil@gmail.com>\n"
 "Language-Team: Simplified Chinese\n"
@@ -923,7 +923,6 @@ msgid "Show mc with specified skin"
 msgstr "用指定的皮肤显示MC"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -947,7 +946,7 @@ msgstr ""
 "  文件显示：   normal, selected, marked, markselect\n"
 "  对话框：     dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "  errdhotfocus\n"
-"  菜单：       menu, menuhot, menusel, menuhotsel，menuinactive\n"
+"  菜单：       menunormal, menuhot, menusel, menuhotsel，menuinactive\n"
 " 编辑器: editnormal, editbold, editmarked, editwhitespace,\n"
 " editlinestate\n"
 
@@ -1053,7 +1052,8 @@ msgstr "排序"
 msgid "Confirmation"
 msgstr "确认"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "Confirmation|清除历史(&H)"
@@ -1469,134 +1469,6 @@ msgstr "您无法在非本地文件系统上执行命令"
 msgid " The shell is already running a command "
 msgstr "Shell 正在运行一个命令 "
 
-msgid "&Dismiss"
-msgstr "取消(&D)"
-
-msgid "All charsets"
-msgstr "所有字体集"
-
-msgid "&Whole words"
-msgstr "仅整词(&W)"
-
-msgid "&Backwards"
-msgstr "向上(&B)"
-
-msgid "case &Sensitive"
-msgstr "大小写敏感(&S)"
-
-msgid " Enter search string:"
-msgstr " 输入查找字符串："
-
-msgid "Search"
-msgstr "搜索"
-
-msgid " Search is disabled "
-msgstr ""
-
-#, fuzzy, c-format
-msgid ""
-" Cannot create temporary diff file \n"
-" %s "
-msgstr ""
-" 无法创建临时命令文件 \n"
-" %s "
-
-#, fuzzy, c-format
-msgid ""
-" Cannot create backup file \n"
-" %s%s \n"
-" %s "
-msgstr ""
-" 无法创建目标文件“%s” \n"
-" %s "
-
-#, fuzzy, c-format
-msgid ""
-" Cannot create temporary merge file \n"
-" %s "
-msgstr ""
-" 无法创建临时命令文件 \n"
-" %s "
-
-#, fuzzy
-msgid "&Normal"
-msgstr "普通"
-
-msgid "&Fastest (Assume large files)"
-msgstr ""
-
-msgid "&Minimal (Find a smaller set of change)"
-msgstr ""
-
-msgid "Strip &trailing carriage return"
-msgstr ""
-
-msgid "Ignore all &whitespace"
-msgstr ""
-
-msgid "Ignore &space change"
-msgstr ""
-
-msgid "Ignore tab &expansion"
-msgstr ""
-
-#, fuzzy
-msgid "&Ignore case"
-msgstr "忽略锁(&I)"
-
-#, fuzzy
-msgid "Diff extra options"
-msgstr " 其它选项 "
-
-msgid "Diff algorithm"
-msgstr ""
-
-#, fuzzy
-msgid "Diff Options"
-msgstr "选项(&O) "
-
-#, fuzzy
-msgid "Edit"
-msgstr "编辑(&E)"
-
-msgid " Edit is disabled "
-msgstr ""
-
-msgid " Enter line: "
-msgstr " 输入行号："
-
-msgid "ButtonBar|Help"
-msgstr "ButtonBar|帮助"
-
-msgid "ButtonBar|Save"
-msgstr "ButtonBar|保存"
-
-msgid "ButtonBar|Edit"
-msgstr "ButtonBar|编辑"
-
-#, fuzzy
-msgid "ButtonBar|Merge"
-msgstr "ButtonBar|忘记"
-
-msgid "ButtonBar|Search"
-msgstr "ButtonBar|搜索"
-
-#, fuzzy
-msgid "ButtonBar|Options"
-msgstr "ButtonBar|跳转"
-
-msgid "ButtonBar|Quit"
-msgstr "ButtonBar|退出"
-
-msgid "Quit"
-msgstr "退出"
-
-msgid " File was modified, Save with exit? "
-msgstr " 文件被修改，保存并退出？"
-
-msgid "Two files are needed to compare"
-msgstr ""
-
 msgid "Cannot read directory contents"
 msgstr "无法读取目录内容"
 
@@ -1658,6 +1530,9 @@ msgstr ""
 
 msgid "Macro recursion is too deep"
 msgstr "宏递归层次太深"
+
+msgid "Search"
+msgstr "搜索"
 
 msgid " File has hard-links. Detach before saving? "
 msgstr "文件有硬链接，保存文件前分离该链接吗？"
@@ -1788,6 +1663,12 @@ msgstr " 替换 "
 msgid " %ld replacements made. "
 msgstr " 替换了 %ld 处。"
 
+msgid "Quit"
+msgstr "退出"
+
+msgid " File was modified, Save with exit? "
+msgstr " 文件被修改，保存并退出？"
+
 msgid "&Cancel quit"
 msgstr "取消退出(&C)"
 
@@ -1808,6 +1689,9 @@ msgstr " 剪切到剪贴板 "
 
 msgid " Goto line "
 msgstr " 转到行 "
+
+msgid " Enter line: "
+msgstr " 输入行号："
 
 msgid " Save Block "
 msgstr " 保存块 "
@@ -1890,11 +1774,26 @@ msgstr " 按下任意键："
 msgid " Execute Macro "
 msgstr " 执行宏 "
 
+msgid "All charsets"
+msgstr "所有字体集"
+
+msgid "&Whole words"
+msgstr "仅整词(&W)"
+
 msgid "In se&lection"
 msgstr "在选择区域(&L)"
 
+msgid "&Backwards"
+msgstr "向上(&B)"
+
+msgid "case &Sensitive"
+msgstr "大小写敏感(&S)"
+
 msgid " Enter replacement string:"
 msgstr " 输入替换字符串："
+
+msgid " Enter search string:"
+msgstr " 输入查找字符串："
 
 msgid "&Find all"
 msgstr "查找全部(&F)"
@@ -1916,6 +1815,9 @@ msgstr " 替换为："
 
 msgid " Confirm replace "
 msgstr " 确认替换 "
+
+msgid "&Dismiss"
+msgstr "取消(&D)"
 
 #, c-format
 msgid ""
@@ -2176,6 +2078,12 @@ msgstr "换行模式"
 msgid " Editor options "
 msgstr " 编辑器选项 "
 
+msgid "ButtonBar|Help"
+msgstr "ButtonBar|帮助"
+
+msgid "ButtonBar|Save"
+msgstr "ButtonBar|保存"
+
 msgid "ButtonBar|Mark"
 msgstr "ButtonBar|标记"
 
@@ -2188,11 +2096,17 @@ msgstr "ButtonBar|复制"
 msgid "ButtonBar|Move"
 msgstr "ButtonBar|移动"
 
+msgid "ButtonBar|Search"
+msgstr "ButtonBar|搜索"
+
 msgid "ButtonBar|Delete"
 msgstr "ButtonBar|删除"
 
 msgid "ButtonBar|PullDn"
 msgstr "ButtonBar|菜单"
+
+msgid "ButtonBar|Quit"
+msgstr "ButtonBar|退出"
 
 msgid " Load syntax file "
 msgstr " 载入语法文件 "
@@ -2243,26 +2157,16 @@ msgid " %s%s file error"
 msgstr " %s%s文件错误 "
 
 #, c-format
-msgid ""
-"The format of the %smc.ext file has changed with version 3.0.  It seems that "
-"the installation failed.  Please fetch a fresh copy from the Midnight "
-"Commander package."
-msgstr ""
-"文件%smc.ext的格式在3.0版本时已经被修改。似乎安装有错误。请获取新的Midnight "
-"Commander软件包。"
+msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
+msgstr "文件%smc.ext的格式在3.0版本时已经被修改。似乎安装有错误。请获取新的Midnight Commander软件包。"
 
 #, c-format
 msgid " ~/%s file error "
 msgstr " ~/%s文件错误 "
 
 #, c-format
-msgid ""
-"The format of the ~/%s file has changed with version 3.0.  You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write "
-"it."
-msgstr ""
-"文件~/%s的格式在3.0版本时已经被修改。您可以从%smc.ext复制一个或将它作为编写该"
-"文件的样例。"
+msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
+msgstr "文件~/%s的格式在3.0版本时已经被修改。您可以从%smc.ext复制一个或将它作为编写该文件的样例。"
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|复制"
@@ -2933,8 +2837,7 @@ msgid " Hotlist Load "
 msgstr "加载活动表"
 
 #, c-format
-msgid ""
-"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr "MC无法写文件~/%s，您的活动列表条目没有被删除"
 
 #, c-format
@@ -2983,9 +2886,9 @@ msgid "Modified:  %s"
 msgstr "修改： %s"
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
-#, fuzzy, c-format
+#, c-format
 msgid "Changed:   %s"
-msgstr "改到(&T)"
+msgstr "改到：%s"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -3239,10 +3142,6 @@ msgstr "切换面板开/关(&P)"
 msgid "&Compare directories"
 msgstr "比较目录(&C)"
 
-#, fuzzy
-msgid "&View diff files"
-msgstr " 查看文件 "
-
 msgid "E&xternal panelize"
 msgstr "外部面板(&X)"
 
@@ -3321,6 +3220,9 @@ msgstr "ButtonBar|目录"
 
 msgid "ButtonBar|View"
 msgstr "ButtonBar|显示"
+
+msgid "ButtonBar|Edit"
+msgstr "ButtonBar|编辑"
 
 msgid "ButtonBar|RenMov"
 msgstr "ButtonBar|更名或移动"
