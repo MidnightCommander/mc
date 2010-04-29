@@ -15,8 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid " Search string not found "
 msgstr " Такий рядок не знайдено"
@@ -943,8 +943,7 @@ msgid ""
 msgstr ""
 "--colors КЛЮЧ={ТЕКСТ},{ФОН}\n"
 "\n"
-"{ТЕКСТ} і {ФОН} можна опустити, тоді буде використано значення за "
-"змовчуванням\n"
+"{ТЕКСТ} і {ФОН} можна опустити, тоді буде використано значення за змовчуванням\n"
 "\n"
 "Ключі:\n"
 "   Глобальні:    errors, reverse, gauge, input, viewunderline\n"
@@ -1058,7 +1057,8 @@ msgstr "Порядок сортування"
 msgid "Confirmation"
 msgstr "Підтвердження"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "Confirmation|Очистка історії"
@@ -1497,76 +1497,72 @@ msgid "Search"
 msgstr "Пошук"
 
 msgid " Search is disabled "
-msgstr ""
+msgstr "Пошук вимкнено"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Cannot create temporary diff file \n"
 " %s "
 msgstr ""
-" Не вдається створити тимчасовий командний файл \n"
+"Не вдається створити тимчасовий різницевий файл \n"
 " %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Cannot create backup file \n"
 " %s%s \n"
 " %s "
 msgstr ""
-" Не вдається створити цільовий файл \"%s\" \n"
-" %s "
+"Не вдається створити файл резервної копії \n"
+" %s%s \n"
+" %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Cannot create temporary merge file \n"
 " %s "
 msgstr ""
-" Не вдається створити тимчасовий командний файл \n"
+"Не вдається створити тимчасовий  файл об’єднання \n"
 " %s "
 
-#, fuzzy
 msgid "&Normal"
 msgstr "Нормальний"
 
 msgid "&Fastest (Assume large files)"
-msgstr ""
+msgstr "Найшвидший (приймати великі файли)"
 
 msgid "&Minimal (Find a smaller set of change)"
-msgstr ""
+msgstr "Мінімальний (знайти менший набір змін)"
 
 msgid "Strip &trailing carriage return"
-msgstr ""
+msgstr "Прибирати новий рядок у кінці"
 
 msgid "Ignore all &whitespace"
-msgstr ""
+msgstr "Ігнорувати усі пробіли"
 
 msgid "Ignore &space change"
-msgstr ""
+msgstr "Ігнорувати зміну простору"
 
 msgid "Ignore tab &expansion"
-msgstr ""
+msgstr "Ігнорувати збільшення табуляції"
 
-#, fuzzy
 msgid "&Ignore case"
-msgstr "Ігнорувати замок"
+msgstr "Ігнорувати регістр"
 
-#, fuzzy
 msgid "Diff extra options"
-msgstr " Інші параметри "
+msgstr "Інші різницеві параметри"
 
 msgid "Diff algorithm"
-msgstr ""
+msgstr "Різницевий алогритм"
 
-#, fuzzy
 msgid "Diff Options"
-msgstr " Параметри "
+msgstr "Різницеві параметри"
 
-#, fuzzy
 msgid "Edit"
 msgstr "Редагувати"
 
 msgid " Edit is disabled "
-msgstr ""
+msgstr "Редагування вимкнено"
 
 msgid " Enter line: "
 msgstr " Введіть номер рядка: "
@@ -1580,16 +1576,14 @@ msgstr "ButtonBar|Зберегти"
 msgid "ButtonBar|Edit"
 msgstr "ButtonBar|Редагувати"
 
-#, fuzzy
 msgid "ButtonBar|Merge"
-msgstr "ButtonBar|Забути"
+msgstr "ButtonBar|Об’єднати"
 
 msgid "ButtonBar|Search"
 msgstr "ButtonBar|Пошук"
 
-#, fuzzy
 msgid "ButtonBar|Options"
-msgstr "Нижня панель|Рядок"
+msgstr "ButtonBar|Параметри"
 
 msgid "ButtonBar|Quit"
 msgstr "ButtonBar|Вихід"
@@ -1601,7 +1595,7 @@ msgid " File was modified, Save with exit? "
 msgstr " Файл було змінено, зберегти при виході? "
 
 msgid "Two files are needed to compare"
-msgstr ""
+msgstr "Для порівняння необхідно два файли"
 
 msgid "Cannot read directory contents"
 msgstr "Не вдалося отримати зміст каталога"
@@ -2251,26 +2245,16 @@ msgid " %s%s file error"
 msgstr "%s%s помилка файлу "
 
 #, c-format
-msgid ""
-"The format of the %smc.ext file has changed with version 3.0.  It seems that "
-"the installation failed.  Please fetch a fresh copy from the Midnight "
-"Commander package."
-msgstr ""
-"Формат файлу %smc.ext було змінено у версіі 3.0. Схоже що стався збій при "
-"встановленні.Будь ласка візьміть свіжу копію з пакета Midnight Commander."
+msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
+msgstr "Формат файлу %smc.ext було змінено у версіі 3.0. Схоже що стався збій при встановленні.Будь ласка візьміть свіжу копію з пакета Midnight Commander."
 
 #, c-format
 msgid " ~/%s file error "
 msgstr " помилка файлу  ~/%s"
 
 #, c-format
-msgid ""
-"The format of the ~/%s file has changed with version 3.0.  You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write "
-"it."
-msgstr ""
-"Формат файлу %smc.ext було змінено у версіі 3.0. Ви можете зкопіювати його з "
-"%smc.ext чи зкористуватися ним як зразком та написати свій."
+msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
+msgstr "Формат файлу %smc.ext було змінено у версіі 3.0. Ви можете зкопіювати його з %smc.ext чи зкористуватися ним як зразком та написати свій."
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|Копіювання"
@@ -2297,8 +2281,7 @@ msgid ""
 "\n"
 " Option Stable Symlinks will be disabled "
 msgstr ""
-"Неможливо створити стійкі симв. посилання через не локальні файлові "
-"системи:\n"
+"Неможливо створити стійкі симв. посилання через не локальні файлові системи:\n"
 "\n"
 " Параметр Стійкі символьні посилання буде заборонено "
 
@@ -2946,10 +2929,8 @@ msgstr " Завантаження довідника "
 
 # , c-format
 #, c-format
-msgid ""
-"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
-msgstr ""
-"MC не зміг записати файл ~/%s, Ваш старий список елементів не був видалений"
+msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr "MC не зміг записати файл ~/%s, Ваш старий список елементів не був видалений"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -3253,9 +3234,8 @@ msgstr "&Сховати/показати панелі"
 msgid "&Compare directories"
 msgstr "Порівняти каталоги"
 
-#, fuzzy
 msgid "&View diff files"
-msgstr " Перегляд файлу "
+msgstr "Перегляд різницевих файлів"
 
 msgid "E&xternal panelize"
 msgstr "Зовнішня панелізація"
@@ -3448,8 +3428,7 @@ msgid " Enter command label: "
 msgstr " Введіть мітку команди: "
 
 msgid " Cannot run external panelize in a non-local directory "
-msgstr ""
-" Не можу виконати цю команду, коли знаходжуся не у локальному каталозі "
+msgstr " Не можу виконати цю команду, коли знаходжуся не у локальному каталозі "
 
 msgid "Find rejects after patching"
 msgstr "Знайти коректури, відкинуті командою patch"
@@ -4361,11 +4340,8 @@ msgstr "Фоновий процес:"
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr " Введіть порядок аргументів заміни, напр. 3,2,1,4 "
 
-#~ msgid ""
-#~ " Invalid regular expression, or scanf expression with too many "
-#~ "conversions "
-#~ msgstr ""
-#~ " Неправильний регулярний вираз або у scanf-форматі багато перетворень"
+#~ msgid " Invalid regular expression, or scanf expression with too many conversions "
+#~ msgstr " Неправильний регулярний вираз або у scanf-форматі багато перетворень"
 
 #~ msgid " Error in replacement format string. "
 #~ msgstr " Помилка у форматі стрічки заміни "
