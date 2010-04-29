@@ -1500,76 +1500,72 @@ msgid "Search"
 msgstr "Suchen"
 
 msgid " Search is disabled "
-msgstr ""
+msgstr " Suche ist deaktiviert "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Cannot create temporary diff file \n"
 " %s "
 msgstr ""
-" Kann temporäre Befehlsdatei nicht anlegen \n"
+" Kann temporäre Diffdatei nicht anlegen \n"
 " %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Cannot create backup file \n"
 " %s%s \n"
 " %s "
 msgstr ""
-" Kann Zieldatei \"%s\" nicht anlegen \n"
+" Kann Backupdatei nicht anlegen \n"
+" %s%s \n"
 " %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Cannot create temporary merge file \n"
 " %s "
 msgstr ""
-" Kann temporäre Befehlsdatei nicht anlegen \n"
+" Kann temporäre Mergedatei nicht anlegen \n"
 " %s "
 
-#, fuzzy
 msgid "&Normal"
 msgstr "&Normal"
 
 msgid "&Fastest (Assume large files)"
-msgstr ""
+msgstr "&Schnell (Bei großen Dateien)"
 
 msgid "&Minimal (Find a smaller set of change)"
-msgstr ""
+msgstr "&Minimal (wenig Änderungen)"
 
 msgid "Strip &trailing carriage return"
-msgstr ""
+msgstr "Nachfolgenden Wagen&rücklauf entfernen"
 
 msgid "Ignore all &whitespace"
-msgstr ""
+msgstr "Alle &Whitespaces ignorieren"
 
 msgid "Ignore &space change"
-msgstr ""
+msgstr "&Leerstellen ignorieren"
 
 msgid "Ignore tab &expansion"
-msgstr ""
+msgstr "&Taberweiterung ignorieren"
 
-#, fuzzy
 msgid "&Ignore case"
-msgstr "Sperre &ignorieren"
+msgstr "&Groß-/Kleinschreibung ignorieren"
 
-#, fuzzy
 msgid "Diff extra options"
-msgstr " Weitere Optionen "
+msgstr "Diff Extra Optionen"
 
 msgid "Diff algorithm"
-msgstr ""
+msgstr "Diffalgorithmus"
 
-#, fuzzy
 msgid "Diff Options"
-msgstr " Optionen "
+msgstr "Diff Optionen"
 
-#, fuzzy
 msgid "Edit"
 msgstr "&Bearbeiten"
 
 msgid " Edit is disabled "
-msgstr ""
+msgstr " Bearbeiten ist deaktiviert "
 
 msgid " Enter line: "
 msgstr " Zeilennummer eingeben: "
@@ -1583,16 +1579,14 @@ msgstr "ButtonBar|Speichern"
 msgid "ButtonBar|Edit"
 msgstr "ButtonBar|Bearbeiten"
 
-#, fuzzy
 msgid "ButtonBar|Merge"
-msgstr "ButtonBar|Vergessen"
+msgstr "ButtonBar|Zusammenführen"
 
 msgid "ButtonBar|Search"
 msgstr "ButtonBar|Suchen"
 
-#, fuzzy
 msgid "ButtonBar|Options"
-msgstr "Zeile"
+msgstr "ButtonBar|Optionen"
 
 msgid "ButtonBar|Quit"
 msgstr "ButtonBar|Beenden"
@@ -1604,7 +1598,7 @@ msgid " File was modified, Save with exit? "
 msgstr " Datei wurde geändert, beim Beenden speichern? "
 
 msgid "Two files are needed to compare"
-msgstr ""
+msgstr "2 Dateien sind zum Vergleichen erforderlich"
 
 msgid "Cannot read directory contents"
 msgstr "Kann Verzeichnis nicht lesen"
@@ -3252,9 +3246,8 @@ msgstr "&Fenster an/aus"
 msgid "&Compare directories"
 msgstr "Verzeichnis ver&gleichen"
 
-#, fuzzy
 msgid "&View diff files"
-msgstr " Datei anzeigen "
+msgstr "&Dateien vergleichen"
 
 msgid "E&xternal panelize"
 msgstr "E&xternes Anordnen"
