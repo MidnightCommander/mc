@@ -305,8 +305,14 @@ WInput *
 command_new (int y, int x, int cols)
 {
     WInput *cmd;
+    const int command_colors[3] =
+    {
+        DEFAULT_COLOR,
+        DEFAULT_COLOR,
+        COMMAND_MARK_COLOR
+    };
 
-    cmd = input_new (y, x, DEFAULT_COLOR, cols, "", "cmdline",
+    cmd = input_new (y, x, (int *) command_colors, cols, "", "cmdline",
 	INPUT_COMPLETE_DEFAULT | INPUT_COMPLETE_CD | INPUT_COMPLETE_COMMANDS | INPUT_COMPLETE_SHELL_ESC);
 
     /* Add our hooks */

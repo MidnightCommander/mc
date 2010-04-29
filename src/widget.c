@@ -1079,7 +1079,10 @@ update_input (WInput * in, int clear_first)
     if (has_history)
         draw_history_button (in);
 
-    tty_setcolor (in->color);
+    if (in->first)
+        tty_setcolor (in->inactive_color);
+    else
+        tty_setcolor (in->color);
 
     widget_move (&in->widget, 0, 0);
 
@@ -1103,7 +1106,7 @@ update_input (WInput * in, int clear_first)
     }
 
     if (clear_first)
-        in->first = 0;
+        in->first = FALSE;
 }
 
 void
@@ -1920,7 +1923,7 @@ port_region_marked_for_delete (WInput * in)
 {
     in->buffer[0] = '\0';
     in->point = 0;
-    in->first = 0;
+    in->first = FALSE;
     in->charpoint = 0;
 }
 
@@ -1965,7 +1968,10 @@ input_execute_cmd (WInput * in, unsigned long command)
         backward_delete (in);
         break;
     case CK_InputDeleteChar:
-        delete_char (in);
+        if (in->first)
+            port_region_marked_for_delete (in);
+        else
+            delete_char (in);
         break;
     case CK_InputKillWord:
         kill_word (in);
@@ -2179,7 +2185,7 @@ input_event (Gpm_Event * event, void *data)
 }
 
 WInput *
-input_new (int y, int x, int color, int width, const char *def_text,
+input_new (int y, int x, int *input_colors, int width, const char *def_text,
            const char *histname, INPUT_COMPLETE_FLAGS completion_flags)
 {
     WInput *in = g_new (WInput, 1);
@@ -2212,9 +2218,11 @@ input_new (int y, int x, int color, int width, const char *def_text,
     in->completion_flags = completion_flags;
     in->current_max_size = initial_buffer_len;
     in->buffer = g_new (char, initial_buffer_len);
-    in->color = color;
+    in->color = input_colors[0];
+    in->mark_color = input_colors[2];
+    in->inactive_color = input_colors[1];
     in->field_width = width;
-    in->first = 1;
+    in->first = TRUE;
     in->term_first_shown = 0;
     in->disable_update = 0;
     in->mark = 0;

@@ -367,6 +367,13 @@ quick_dialog_skip (QuickDialog *qd, int nskip)
     WRadio *r;
     int return_val;
 
+    const int input_colors[3] =
+    {
+        INPUT_COLOR,
+        INPUT_INACTIVE_COLOR,
+        INPUT_MARK_COLOR
+    };
+
     I18N (qd->title);
 
     if ((qd->xpos == -1) || (qd->ypos == -1))
@@ -397,8 +404,9 @@ quick_dialog_skip (QuickDialog *qd, int nskip)
 	    break;
 
 	case quick_input:
-	    in = input_new (ypos, xpos, INPUT_COLOR, qw->u.input.len,
-			    qw->u.input.text, qw->u.input.histname, INPUT_COMPLETE_DEFAULT);
+	    in = input_new (ypos, xpos, (int *) input_colors,
+	                    qw->u.input.len, qw->u.input.text, qw->u.input.histname,
+	                    INPUT_COMPLETE_DEFAULT);
 	    in->is_password = (qw->u.input.flags == 1);
 	    in->point = 0;
 	    if ((qw->u.input.flags & 2) != 0)

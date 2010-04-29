@@ -139,6 +139,13 @@ init_panelize (void)
     static int i18n_flag = 0;
     static int maxlen = 0;
 
+    const int input_colors[3] =
+    {
+        INPUT_COLOR,
+        INPUT_INACTIVE_COLOR,
+        INPUT_MARK_COLOR
+    };
+
     if (!i18n_flag)
     {
         i = sizeof (panelize_but) / sizeof (panelize_but[0]);
@@ -176,8 +183,8 @@ init_panelize (void)
                                 panelize_but[i].flags, panelize_but[i].text, 0));
 
     pname =
-        input_new (UY + 14, UX, INPUT_COLOR, panelize_dlg->cols - 10, "",
-                   "in", INPUT_COMPLETE_DEFAULT);
+        input_new (UY + 14, UX, (int *) input_colors,
+                   panelize_dlg->cols - 10, "", "in", INPUT_COMPLETE_DEFAULT);
     add_widget (panelize_dlg, pname);
 
     add_widget (panelize_dlg, label_new (UY + 13, UX, _("Command")));

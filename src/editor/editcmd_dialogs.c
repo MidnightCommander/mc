@@ -312,11 +312,18 @@ int
 editcmd_dialog_raw_key_query (const char *heading, const char *query, int cancel)
 {
     int w = str_term_width1 (query) + 7;
+    const int input_colors[3] =
+    {
+        INPUT_COLOR,
+        INPUT_INACTIVE_COLOR,
+        INPUT_MARK_COLOR
+    };
+
     struct Dlg_head *raw_dlg =
         create_dlg (0, 0, 7, w, dialog_colors, editcmd_dialog_raw_key_query_cb,
                     NULL, heading, DLG_CENTER | DLG_TRYUP | DLG_WANT_TAB);
-    add_widget (raw_dlg,
-                input_new (3 - cancel, w - 5, INPUT_COLOR, 2, "", 0, INPUT_COMPLETE_DEFAULT));
+    add_widget (raw_dlg, input_new (3 - cancel, w - 5, (int *) input_colors,
+                                    2, "", 0, INPUT_COMPLETE_DEFAULT));
     add_widget (raw_dlg, label_new (3 - cancel, 2, query));
     if (cancel)
         add_widget (raw_dlg, button_new (4, w / 2 - 5, B_CANCEL, NORMAL_BUTTON, _("Cancel"), 0));

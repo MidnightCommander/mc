@@ -202,6 +202,7 @@ mc_skin_color_cache_init (void)
     SELECTED_COLOR = mc_skin_color_get ("core", "selected");
     MARKED_SELECTED_COLOR = mc_skin_color_get ("core", "markselect");
     REVERSE_COLOR = mc_skin_color_get ("core", "reverse");
+    COMMAND_MARK_COLOR = mc_skin_color_get ("core", "commandlinemark");
 
     COLOR_NORMAL = mc_skin_color_get ("dialog", "_default_");
     COLOR_FOCUS = mc_skin_color_get ("dialog", "dfocus");
@@ -220,6 +221,8 @@ mc_skin_color_cache_init (void)
 
     GAUGE_COLOR = mc_skin_color_get ("core", "gauge");
     INPUT_COLOR = mc_skin_color_get ("core", "input");
+    INPUT_MARK_COLOR = mc_skin_color_get ("core", "inputmark");
+    INPUT_INACTIVE_COLOR = mc_skin_color_get ("core", "inputinactive");
 
     HELP_NORMAL_COLOR = mc_skin_color_get ("help", "_default_");
     HELP_ITALIC_COLOR = mc_skin_color_get ("help", "helpitalic");

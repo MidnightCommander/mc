@@ -384,6 +384,13 @@ find_parameters (char **start_dir, char **pattern, char **content)
 
     const char *buts[] = { N_("&OK"), N_("&Cancel"), N_("&Tree") };
 
+    const int input_colors[3] =
+    {
+        INPUT_COLOR,
+        INPUT_INACTIVE_COLOR,
+        INPUT_MARK_COLOR
+    };
+
     int b0, b1, b2;
 
 #ifdef ENABLE_NLS
@@ -467,20 +474,20 @@ find_parameters (char **start_dir, char **pattern, char **content)
     file_case_sens_cbox = check_new (7, 3, options.file_case_sens, file_case_label);
     add_widget (find_dlg, file_case_sens_cbox);
 
-    in_with = input_new (6, FIND_X / 2 + 1, INPUT_COLOR, FIND_X / 2 - 4, INPUT_LAST_TEXT,
+    in_with = input_new (6, FIND_X / 2 + 1, (int *) input_colors, FIND_X / 2 - 4, INPUT_LAST_TEXT,
                          MC_HISTORY_SHARED_SEARCH, INPUT_COMPLETE_DEFAULT);
     add_widget (find_dlg, in_with);
     add_widget (find_dlg, label_new (5, FIND_X / 2 + 1, _("Content:")));
 
-    in_name = input_new (6, 3, INPUT_COLOR, FIND_X / 2 - 4, INPUT_LAST_TEXT, "name",
-                         INPUT_COMPLETE_DEFAULT);
+    in_name = input_new (6, 3, (int *) input_colors,
+                         FIND_X / 2 - 4, INPUT_LAST_TEXT, "name", INPUT_COMPLETE_DEFAULT);
     add_widget (find_dlg, in_name);
     add_widget (find_dlg, label_new (5, 3, _("File name:")));
 
     add_widget (find_dlg, button_new (3, FIND_X - b2 - 2, B_TREE, NORMAL_BUTTON, buts[2], 0));
 
-    in_start = input_new (3, 3, INPUT_COLOR, FIND_X - b2 - 6, in_start_dir, "start",
-                          INPUT_COMPLETE_DEFAULT);
+    in_start = input_new (3, 3, (int *) input_colors,
+                          FIND_X - b2 - 6, in_start_dir, "start", INPUT_COMPLETE_DEFAULT);
     add_widget (find_dlg, in_start);
     add_widget (find_dlg, label_new (2, 3, _("Start at:")));
 
