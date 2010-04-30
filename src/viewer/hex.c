@@ -69,6 +69,49 @@ typedef enum
 
 static const char hex_char[] = "0123456789ABCDEF";
 
+static int
+utf8_to_int (char * str, int * char_width, gboolean * result)
+{
+    int res = -1;
+    gunichar ch;
+    gchar *next_ch = NULL;
+    int width = 0;
+
+    *result = TRUE;
+
+    if (str == NULL)
+    {
+        *result = FALSE;
+        width = 0;
+        return 0;
+    }
+
+    res = g_utf8_get_char_validated (str, -1);
+
+    if (res < 0)
+    {
+        ch = *str;
+        width = 0;
+    }
+    else
+    {
+        ch = res;
+        /* Calculate UTF-8 char width */
+        next_ch = g_utf8_next_char (str);
+        if (next_ch)
+        {
+            width = next_ch - str;
+        }
+        else
+        {
+            ch = 0;
+            width = 0;
+        }
+    }
+    *char_width = width;
+    return ch;
+}
+
 /*** file scope functions ************************************************************************/
 
 /*** public functions ****************************************************************************/
@@ -95,7 +138,6 @@ mcview_display_hex (mcview_t * view)
     int c;
     mark_t boldflag = MARK_NORMAL;
     struct hexedit_change_node *curr = view->change_list;
-    size_t i;
     int ch = 0;
 
     char hex_buff[10];          /* A temporary buffer for sprintf and mvwaddstr */
@@ -112,6 +154,7 @@ mcview_display_hex (mcview_t * view)
 
     for (row = 0; mcview_get_byte (view, from, NULL) == TRUE && row < height; row++)
     {
+        size_t i;
         col = 0;
 
         /* Print the hex offset */
@@ -133,11 +176,31 @@ mcview_display_hex (mcview_t * view)
 #ifdef HAVE_CHARSET
             if (view->utf8)
             {
-                int cw = 1;
+                char corr_buf[6 + 1];
+                int cnt, cw = 1;
                 gboolean read_res = TRUE;
                 ch = mcview_get_utf (view, from, &cw, &read_res);
                 if (!read_res)
                     break;
+                /* char width is greater 0 bytes */
+                if (cw != 0)
+                {
+                    struct hexedit_change_node *corr = curr;
+                    int res = g_unichar_to_utf8 (ch, (char *) corr_buf);
+                    for (cnt = 0; cnt < cw; cnt++)
+                    {
+                        if (curr != NULL && from + cnt == curr->offset)
+                        {
+                            /* replace only changed bytes in array of multibyte char */
+                            corr_buf[cnt] = curr->value;
+                            curr = curr->next;
+                        }
+                    }
+                    corr_buf[res] = '\0';
+                    /* Determine the state of the current multibyte char */
+                    ch = utf8_to_int ((char *) corr_buf, &cw, &read_res);
+                    curr = corr;
+                }
             }
 #endif
             if (!mcview_get_byte (view, from, &c))
