@@ -39,8 +39,8 @@ my $cmd_extract = "$app_unzip -p";
 my $regex_zipinfo_line = qr"^(\S{7,10})\s+(\d+\.\d+)\s+(\S+)\s+(\d+)\s+(\S\S)\s+(\d+)\s+(\S{4})\s+(\d{4})(\d\d)(\d\d)\.(\d\d)(\d\d)(\d\d)\s(.*)$";
 
 #     2891  Defl:N     1435  50%  03-30-00 21:19  50cbaaf8  ./edit.html
-# (size) (method) (zippedsize) (zipratio) (mm)(dd)(yy)(HH)(MM) (cksum) (fname)
-my $regex_nonzipinfo_line = qr"^\s*(\d+)\s+(\S+)\s+(\d+)\s+(-?\d+\%)\s+(\d?\d)-(\d?\d)-(\d\d)\s+(\d?\d):(\d\d)\s+([0-9a-f]+)\s\s(.*)$";
+# (size) (method) (zippedsize) (zipratio) (mm)(dd)(yy|yyyy)(HH)(MM) (cksum) (fname)
+my $regex_nonzipinfo_line = qr"^\s*(\d+)\s+(\S+)\s+(\d+)\s+(-?\d+\%)\s+(\d?\d)-(\d?\d)-(\d+)\s+(\d?\d):(\d\d)\s+([0-9a-f]+)\s\s(.*)$";
 
 #
 # Main code
@@ -262,7 +262,7 @@ sub mczipfs_list {
 			my @match = /$regex_nonzipinfo_line/;
 			next if ($#match != 10);
 			my @rmatch = ('', '', 'unknown', $match[0], '', $match[2], $match[1],
-					$match[6] + ($match[6] < 70 ? 2000 : 1900), $match[4], $match[5],
+					$match[6] > 100 ? $match[6] : $match[6] + ($match[6] < 70 ? 2000 : 1900), $match[4], $match[5],
 					$match[7], $match[8], "00", $match[10]);
 			&checked_print_file(@rmatch);
 		}
