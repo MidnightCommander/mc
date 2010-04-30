@@ -295,6 +295,7 @@ mcview_moveto_bol (mcview_t * view)
     {
         view->dpy_start = mcview_bol (view, view->dpy_start);
     }
+    view->dpy_text_column = 0;
     mcview_movement_fixups (view, TRUE);
 }
 
@@ -303,9 +304,10 @@ mcview_moveto_bol (mcview_t * view)
 void
 mcview_moveto_eol (mcview_t * view)
 {
+    off_t bol;
     if (view->hex_mode)
     {
-        off_t filesize, bol;
+        off_t filesize;
 
         bol = mcview_offset_rounddown (view->hex_cursor, view->bytes_per_line);
         if (mcview_get_byte_indexed (view, bol, view->bytes_per_line - 1, NULL) == TRUE)
@@ -318,9 +320,43 @@ mcview_moveto_eol (mcview_t * view)
             view->hex_cursor = mcview_offset_doz (filesize, 1);
         }
     }
+    else
+    {
+        off_t eol;
+        bol = mcview_bol (view, view->dpy_start);
+        eol = mcview_eol (view, view->dpy_start);
+        if (!view->utf8)
+        {
+            if (eol > bol)
+                view->dpy_text_column = eol - bol;
+        }
+        else
+        {
+            char *str = NULL;
+            switch (view->datasource)
+            {
+            case DS_STDIO_PIPE:
+            case DS_VFS_PIPE:
+                str = mcview_get_ptr_growing_buffer (view, bol);
+                break;
+            case DS_FILE:
+                str = mcview_get_ptr_file (view, bol);
+                break;
+            case DS_STRING:
+                str = mcview_get_ptr_string (view, bol);
+                break;
+            case DS_NONE:
+                break;
+            }
+            if (str != NULL && eol > bol)
+                view->dpy_text_column = g_utf8_strlen (str, eol - bol);
+            else
+                view->dpy_text_column = eol - bol;
+        }
+        view->dpy_text_column = max (0, view->dpy_text_column - view->data_area.width);
+    }
     mcview_movement_fixups (view, FALSE);
 }
-
 /* --------------------------------------------------------------------------------------------- */
 
 void
