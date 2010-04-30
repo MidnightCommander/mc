@@ -934,7 +934,7 @@ edit_init (WEdit * edit, int lines, int columns, const char *filename, long line
     edit->loading_done = 1;
     edit->modified = 0;
     edit->locked = 0;
-    edit_load_syntax (edit, 0, 0);
+    edit_load_syntax (edit, NULL, NULL);
     {
         int color;
         edit_get_syntax_color (edit, -1, &color);
@@ -1629,8 +1629,8 @@ edit_cursor_move (WEdit * edit, long increment)
             edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE][EDIT_BUF_SIZE -
                                                            (edit->curs2 & M_EDIT_BUF_SIZE) - 1] = c;
             edit->curs2++;
-            c = edit->
-                buffers1[(edit->curs1 - 1) >> S_EDIT_BUF_SIZE][(edit->curs1 - 1) & M_EDIT_BUF_SIZE];
+            c = edit->buffers1[(edit->curs1 - 1) >> S_EDIT_BUF_SIZE][(edit->curs1 -
+                                                                      1) & M_EDIT_BUF_SIZE];
             if (!((edit->curs1 - 1) & M_EDIT_BUF_SIZE))
             {
                 g_free (edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE]);
@@ -1938,9 +1938,8 @@ edit_move_to_prev_col (WEdit * edit, long p)
 
     if (option_cursor_beyond_eol)
     {
-        long line_len =
-            edit_move_forward3 (edit, edit_bol (edit, edit->curs1), 0,
-                                edit_eol (edit, edit->curs1));
+        long line_len = edit_move_forward3 (edit, edit_bol (edit, edit->curs1), 0,
+                                            edit_eol (edit, edit->curs1));
 
         if (line_len < prev + edit->over_col)
         {
@@ -2953,7 +2952,8 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         if (edit->overwrite)
         {
             /* remove char only one time, after input first byte, multibyte chars */
-            if ((!utf8_display || edit->charpoint == 0) && edit_get_byte (edit, edit->curs1) != '\n')
+            if ((!utf8_display || edit->charpoint == 0)
+                && edit_get_byte (edit, edit->curs1) != '\n')
                 edit_delete (edit, 0);
         }
         if (option_cursor_beyond_eol && edit->over_col > 0)
@@ -3457,7 +3457,7 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         edit_load_cmd (edit, EDIT_FILE_SYNTAX);
         break;
     case CK_Choose_Syntax:
-        edit_syntax_dialog ();
+        edit_syntax_dialog (edit, edit->syntax_type);
         break;
 
     case CK_Load_Menu_File:
@@ -3466,7 +3466,7 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
 
     case CK_Toggle_Syntax:
         if ((option_syntax_highlighting ^= 1) == 1)
-            edit_load_syntax (edit, NULL, option_syntax_type);
+            edit_load_syntax (edit, NULL, edit->syntax_type);
         edit->force |= REDRAW_PAGE;
         break;
 
@@ -3527,7 +3527,7 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         learn_keys ();
         break;
     case CK_Edit_Options:
-        edit_options_dialog ();
+        edit_options_dialog (edit);
         break;
     case CK_Edit_Save_Mode:
         menu_save_mode_cmd ();

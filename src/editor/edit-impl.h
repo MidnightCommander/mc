@@ -3,7 +3,7 @@
    Copyright (C) 1996, 1997, 2009 Free Software Foundation, Inc.
 
    Authors: 1996, 1997 Paul Sheer
-            2009 Andrew Borodin
+   2009 Andrew Borodin
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
    02110-1301, USA.
-*/
+ */
 
 /** \file edit-impl.h
  *  \brief Header: editor low level data handling and cursor fundamentals
@@ -32,18 +32,18 @@
 
 #include <stdio.h>
 
-#include "lib/search.h"		/* mc_search_type_t */
+#include "lib/search.h"         /* mc_search_type_t */
 
-#include "src/dialog.h"		/* cb_ret_t */
-#include "src/keybind.h"	/* global_keymap_t */
+#include "src/dialog.h"         /* cb_ret_t */
+#include "src/keybind.h"        /* global_keymap_t */
 
 #include "src/editor/edit.h"
 
-#define SEARCH_DIALOG_OPTION_NO_SCANF	(1 << 0)
-#define SEARCH_DIALOG_OPTION_NO_REGEX	(1 << 1)
-#define SEARCH_DIALOG_OPTION_NO_CASE	(1 << 2)
-#define SEARCH_DIALOG_OPTION_BACKWARDS	(1 << 3)
-#define SEARCH_DIALOG_OPTION_BOOKMARK	(1 << 4)
+#define SEARCH_DIALOG_OPTION_NO_SCANF   (1 << 0)
+#define SEARCH_DIALOG_OPTION_NO_REGEX   (1 << 1)
+#define SEARCH_DIALOG_OPTION_NO_CASE    (1 << 2)
+#define SEARCH_DIALOG_OPTION_BACKWARDS  (1 << 3)
+#define SEARCH_DIALOG_OPTION_BOOKMARK   (1 << 4)
 
 #define EDIT_KEY_EMULATION_NORMAL 0
 #define EDIT_KEY_EMULATION_EMACS  1
@@ -59,8 +59,8 @@
 #define REDRAW_CHAR_ONLY     (1 << 7)
 #define REDRAW_COMPLETELY    (1 << 8)
 
-#define EDIT_TEXT_HORIZONTAL_OFFSET	0
-#define EDIT_TEXT_VERTICAL_OFFSET	1
+#define EDIT_TEXT_HORIZONTAL_OFFSET 0
+#define EDIT_TEXT_VERTICAL_OFFSET   1
 
 #define EDIT_RIGHT_EXTREME option_edit_right_extreme
 #define EDIT_LEFT_EXTREME option_edit_left_extreme
@@ -120,7 +120,8 @@
 #define LINE_STATE_WIDTH	8
 
 /* search/replace options */
-typedef struct edit_search_options_t {
+typedef struct edit_search_options_t
+{
     mc_search_type_t type;
     gboolean case_sens;
     gboolean backwards;
@@ -129,25 +130,29 @@ typedef struct edit_search_options_t {
     gboolean all_codepages;
 } edit_search_options_t;
 
-typedef struct edit_stack_type {
+typedef struct edit_stack_type
+{
     long line;
     char *filename;
 } edit_stack_type;
 
-struct macro {
+struct macro
+{
     unsigned long command;
     int ch;
 };
 
 /* type for file which is currently being edited */
-typedef enum {
-    EDIT_FILE_COMMON	= 0,
-    EDIT_FILE_SYNTAX	= 1,
-    EDIT_FILE_MENU	= 2
+typedef enum
+{
+    EDIT_FILE_COMMON = 0,
+    EDIT_FILE_SYNTAX = 1,
+    EDIT_FILE_MENU = 2
 } edit_current_file_t;
 
 /* line breaks */
-typedef enum {
+typedef enum
+{
     LB_ASIS = 0,
     LB_UNIX,
     LB_WIN,
@@ -161,11 +166,11 @@ struct WMenuBar;
 extern const char VERTICAL_MAGIC[5];
 /* if enable_show_tabs_tws ==1 then use visible_tab visible_tws */
 extern int enable_show_tabs_tws;
-int edit_drop_hotkey_menu (WEdit *e, int key);
-void edit_menu_cmd (WEdit *e);
+int edit_drop_hotkey_menu (WEdit * e, int key);
+void edit_menu_cmd (WEdit * e);
 void edit_init_menu (struct WMenuBar *menubar);
 void menu_save_mode_cmd (void);
-int edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch);
+int edit_translate_key (WEdit * edit, long x_key, int *cmd, int *ch);
 int edit_get_byte (WEdit * edit, long byte_index);
 char *edit_get_byte_ptr (WEdit * edit, long byte_index);
 char *edit_get_buf_ptr (WEdit * edit, long byte_index);
@@ -183,14 +188,14 @@ void edit_scroll_right (WEdit * edit, int i);
 void edit_scroll_left (WEdit * edit, int i);
 void edit_move_up (WEdit * edit, unsigned long i, int scroll);
 void edit_move_down (WEdit * edit, unsigned long i, int scroll);
-void edit_move_to_prev_col (WEdit *edit, long p);
+void edit_move_to_prev_col (WEdit * edit, long p);
 int edit_get_col (WEdit * edit);
 long edit_bol (WEdit * edit, long current);
 long edit_eol (WEdit * edit, long current);
 void edit_update_curs_row (WEdit * edit);
 void edit_update_curs_col (WEdit * edit);
 void edit_find_bracket (WEdit * edit);
-int edit_reload_line (WEdit *edit, const char *filename, long line);
+int edit_reload_line (WEdit * edit, const char *filename, long line);
 
 void edit_block_copy_cmd (WEdit * edit);
 void edit_block_move_cmd (WEdit * edit);
@@ -210,13 +215,12 @@ long edit_write_stream (WEdit * edit, FILE * f);
 char *edit_get_write_filter (const char *writename, const char *filename);
 int edit_save_confirm_cmd (WEdit * edit);
 int edit_save_as_cmd (WEdit * edit);
-WEdit *edit_init (WEdit *edit, int lines, int columns,
-		  const char *filename, long line);
+WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, long line);
 int edit_clean (WEdit * edit);
-int edit_ok_to_exit (WEdit *edit);
+int edit_ok_to_exit (WEdit * edit);
 int edit_renew (WEdit * edit);
 int edit_new_cmd (WEdit * edit);
-int edit_reload (WEdit *edit, const char *filename);
+int edit_reload (WEdit * edit, const char *filename);
 int edit_load_cmd (WEdit * edit, edit_current_file_t what);
 void edit_mark_cmd (WEdit * edit, int unmark);
 void edit_set_markers (WEdit * edit, long m1, long m2, int c1, int c2);
@@ -224,7 +228,7 @@ void edit_push_markers (WEdit * edit);
 void edit_replace_cmd (WEdit * edit, int again);
 void edit_search_cmd (WEdit * edit, int again);
 void edit_complete_word_cmd (WEdit * edit);
-void edit_get_match_keyword_cmd (WEdit *edit);
+void edit_get_match_keyword_cmd (WEdit * edit);
 int edit_save_block (WEdit * edit, const char *filename, long start, long finish);
 int edit_save_block_cmd (WEdit * edit);
 int edit_insert_file_cmd (WEdit * edit);
@@ -239,8 +243,7 @@ void edit_date_cmd (WEdit * edit);
 void edit_goto_cmd (WEdit * edit);
 int eval_marks (WEdit * edit, long *start_mark, long *end_mark);
 void edit_status (WEdit * edit);
-void edit_execute_key_command (WEdit *edit, unsigned long command,
-			       int char_for_insertion);
+void edit_execute_key_command (WEdit * edit, unsigned long command, int char_for_insertion);
 void edit_update_screen (WEdit * edit);
 int edit_print_string (WEdit * e, const char *s);
 void edit_move_to_line (WEdit * e, long line);
@@ -258,19 +261,18 @@ int edit_copy_to_X_buf_cmd (WEdit * edit);
 int edit_cut_to_X_buf_cmd (WEdit * edit);
 void edit_paste_from_X_buf_cmd (WEdit * edit);
 
-void edit_select_codepage_cmd (WEdit *edit);
-void edit_insert_literal_cmd (WEdit *edit);
-void edit_execute_macro_cmd (WEdit *edit);
-void edit_begin_end_macro_cmd(WEdit *edit);
+void edit_select_codepage_cmd (WEdit * edit);
+void edit_insert_literal_cmd (WEdit * edit);
+void edit_execute_macro_cmd (WEdit * edit);
+void edit_begin_end_macro_cmd (WEdit * edit);
 
-void edit_paste_from_history (WEdit *edit);
+void edit_paste_from_history (WEdit * edit);
 
-void edit_set_filename (WEdit *edit, const char *name);
+void edit_set_filename (WEdit * edit, const char *name);
 
 void edit_load_syntax (WEdit * edit, char ***pnames, const char *type);
 void edit_free_syntax_rules (WEdit * edit);
 void edit_get_syntax_color (WEdit * edit, long byte_index, int *color);
-
 
 void book_mark_insert (WEdit * edit, int line, int c);
 int book_mark_query_color (WEdit * edit, int line, int c);
@@ -281,16 +283,16 @@ void book_mark_flush (WEdit * edit, int c);
 void book_mark_inc (WEdit * edit, int line);
 void book_mark_dec (WEdit * edit, int line);
 
-int line_is_blank (WEdit *edit, long line);
-int edit_indent_width (WEdit *edit, long p);
-void edit_insert_indent (WEdit *edit, int indent);
-void edit_options_dialog (void);
-void edit_syntax_dialog (void);
-void edit_mail_dialog (WEdit *edit);
-void format_paragraph (WEdit *edit, int force);
+int line_is_blank (WEdit * edit, long line);
+int edit_indent_width (WEdit * edit, long p);
+void edit_insert_indent (WEdit * edit, int indent);
+void edit_options_dialog (WEdit * edit);
+void edit_syntax_dialog (WEdit * edit, const char *current_syntax);
+void edit_mail_dialog (WEdit * edit);
+void format_paragraph (WEdit * edit, int force);
 
 /* either command or char_for_insertion must be passed as -1 */
-void edit_execute_cmd (WEdit *edit, unsigned long command, int char_for_insertion);
+void edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion);
 
 #define get_sys_error(s) (s)
 
@@ -314,17 +316,15 @@ void edit_execute_cmd (WEdit *edit, unsigned long command, int char_for_insertio
 extern edit_search_options_t edit_search_options;
 
 extern int edit_stack_iterator;
-extern edit_stack_type edit_history_moveto [MAX_HISTORY_MOVETO];
-
-extern WEdit *wedit;
-extern struct WMenuBar *edit_menubar;
+extern edit_stack_type edit_history_moveto[MAX_HISTORY_MOVETO];
 
 extern const global_keymap_t *editor_map;
 extern const global_keymap_t *editor_x_map;
 
 extern int option_line_state_width;
 
-typedef enum {
+typedef enum
+{
     EDIT_QUICK_SAVE = 0,
     EDIT_SAFE_SAVE,
     EDIT_DO_BACKUP
@@ -332,7 +332,6 @@ typedef enum {
 
 extern int option_max_undo;
 extern int option_auto_syntax;
-extern char *option_syntax_type;
 
 extern int option_edit_right_extreme;
 extern int option_edit_left_extreme;
@@ -344,4 +343,4 @@ extern int search_create_bookmark;
 
 extern int column_highlighting;
 
-#endif				/* MC_EDIT_IMPL_H */
+#endif /* MC_EDIT_IMPL_H */
