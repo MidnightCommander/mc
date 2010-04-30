@@ -1127,7 +1127,7 @@ lcsubstr (const char *s, int m, const char *t, int n, GArray * ret, int min)
                         {
                             break;
                         }
-                        if ((*p)[1] == off1)
+                        if ((*p)[1] >= off1)
                         {
                             break;
                         }
