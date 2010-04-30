@@ -1404,7 +1404,10 @@ panel_new_with_dir (const char *panel_name, const char *wpath)
 
     /* Because do_load_dir lists files in current directory */
     if (wpath)
-        mc_chdir (wpath);
+    {
+        int ret;
+        ret = mc_chdir (wpath);
+    }
 
     /* Load the default format */
     panel->count =
@@ -1413,7 +1416,10 @@ panel_new_with_dir (const char *panel_name, const char *wpath)
 
     /* Restore old right path */
     if (wpath)
-        mc_chdir (curdir);
+    {
+        int ret;
+        ret = mc_chdir (curdir);
+    }
 
     return panel;
 }
@@ -3467,7 +3473,10 @@ reload_panelized (WPanel * panel)
     dir_list *list = &panel->dir;
 
     if (panel != current_panel)
-        mc_chdir (panel->cwd);
+    {
+        int ret;
+        ret = mc_chdir (panel->cwd);
+    }
 
     for (i = 0, j = 0; i < panel->count; i++)
     {
@@ -3498,7 +3507,10 @@ reload_panelized (WPanel * panel)
         panel->count = j;
 
     if (panel != current_panel)
-        mc_chdir (current_panel->cwd);
+    {
+        int ret;
+        ret = mc_chdir (current_panel->cwd);
+    }
 }
 
 static void
@@ -3560,6 +3572,7 @@ update_panels (int force_update, const char *current_file)
 {
     int reload_other = !(force_update & UP_ONLY_CURRENT);
     WPanel *panel;
+    int ret;
 
     update_one_panel (get_current_index (), force_update, current_file);
     if (reload_other)
@@ -3570,7 +3583,7 @@ update_panels (int force_update, const char *current_file)
     else
         panel = (WPanel *) get_panel_widget (get_other_index ());
 
-    mc_chdir (panel->cwd);
+    ret = mc_chdir (panel->cwd);
 }
 
 gsize

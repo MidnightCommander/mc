@@ -2003,6 +2003,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     char *temp = NULL;
     char *save_cwd = NULL, *save_dest = NULL;
     struct stat src_stat;
+    gboolean ret_val = TRUE;
     int i;
     FileProgressStatus value;
     FileOpContext *ctx;
@@ -2197,8 +2198,12 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
         /* We now have ETA in all cases */
 
         /* One file: FIXME mc_chdir will take user out of any vfs */
-        if (operation != OP_COPY && get_current_type () == view_tree)
-            mc_chdir (PATH_SEP_STR);
+        if ((operation != OP_COPY) && (get_current_type () == view_tree) &&
+            (mc_chdir (PATH_SEP_STR) < 0))
+        {
+            ret_val = FALSE;
+            goto clean_up;
+        }
 
         /* The source and src_stat variables have been initialized before */
 #ifdef WITH_FULL_PATHS
@@ -2417,7 +2422,9 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
 #endif /* WITH_BACKGROUND */
 
     file_op_context_destroy (ctx);
-    return TRUE;
+    file_op_total_context_destroy (tctx);
+
+    return ret_val;
 }
 
 /* }}} */

@@ -135,22 +135,26 @@ typedef struct dir_stack {
 } dir_stack;
 
 static dir_stack *dir_stack_base = 0;
-#endif				 /* GLIB_CHECK_VERSION */
+#endif /* GLIB_CHECK_VERSION */
 
-static struct {
-	const char* text;
-	int len;	/* length including space and brackets */
-	int x;
-} fbuts [] = {
-	{ N_("&Suspend"),   11, 29 },
-	{ N_("Con&tinue"),  12, 29 },
-	{ N_("&Chdir"),     11, 3  },
-	{ N_("&Again"),     9,  17 },
-	{ N_("&Quit"),      8,  43 },
-	{ N_("Pane&lize"),  12, 3  },
-	{ N_("&View - F3"), 13, 20 },
-	{ N_("&Edit - F4"), 13, 38 }
+/* *INDENT-OFF* */
+static struct
+{
+    const char *text;
+    int len;                    /* length including space and brackets */
+    int x;
+} fbuts[] =
+{
+    {N_("&Suspend"), 11, 29},
+    {N_("Con&tinue"), 12, 29},
+    {N_("&Chdir"), 11, 3},
+    {N_("&Again"), 9, 17},
+    {N_("&Quit"), 8, 43},
+    {N_("Pane&lize"), 12, 3},
+    {N_("&View - F3"), 13, 20},
+    {N_("&Edit - F4"), 13, 38}
 };
+/* *INDENT-ON* */
 
 /* find file options */
 typedef struct
@@ -1304,8 +1308,9 @@ find_file (const char *start_dir, const char *pattern, const char *content,
 	    current_panel->is_panelized = 1;
 
 	    if (start_dir[0] == PATH_SEP) {
+	        int ret;
 		strcpy (current_panel->cwd, PATH_SEP_STR);
-		chdir (PATH_SEP_STR);
+		ret = chdir (PATH_SEP_STR);
 	    }
 	}
     }

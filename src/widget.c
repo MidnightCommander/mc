@@ -615,6 +615,8 @@ save_text_to_clip_file (const char *text)
 {
     int file;
     char *fname = NULL;
+    ssize_t ret;
+    size_t str_len;
 
     fname = g_build_filename (home_dir, EDIT_CLIP_FILE, NULL);
     file = mc_open (fname, O_CREAT | O_WRONLY | O_TRUNC,
@@ -624,9 +626,10 @@ save_text_to_clip_file (const char *text)
     if (file == -1)
         return FALSE;
 
-    mc_write (file, (char *) text, strlen (text));
+    str_len = strlen (text);
+    ret = mc_write (file, (char *) text, str_len);
     mc_close (file);
-    return TRUE;
+    return ret == (ssize_t) str_len;
 }
 
 static gboolean

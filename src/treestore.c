@@ -190,13 +190,16 @@ tree_store_load_from(char *name)
     file = fopen(name, "r");
 
     if (file) {
-	fgets(buffer, sizeof(buffer), file);
-
+	if ( fgets(buffer, sizeof(buffer), file) != NULL )
+	{
 	if (strncmp(buffer, TREE_SIGNATURE, strlen(TREE_SIGNATURE)) != 0) {
 	    fclose(file);
 	    do_load = FALSE;
 	} else
 	    do_load = TRUE;
+        }
+        else
+            do_load = FALSE;
     } else
 	do_load = FALSE;
 

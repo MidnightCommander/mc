@@ -921,9 +921,10 @@ static void
 translated_mc_chdir (char *dir)
 {
     char *newdir;
+    int ret;
 
     newdir = vfs_translate_url (dir);
-    mc_chdir (newdir);
+    ret = mc_chdir (newdir);
     g_free (newdir);
 }
 
@@ -1459,10 +1460,11 @@ static void
 setup_dummy_mc (void)
 {
     char d[MC_MAXPATHLEN];
+    int ret;
 
     mc_get_current_wd (d, MC_MAXPATHLEN);
     setup_mc ();
-    mc_chdir (d);
+    ret = mc_chdir (d);
 }
 
 static void check_codeset()
@@ -2284,8 +2286,10 @@ main (int argc, char *argv[])
 		  S_IRUSR | S_IWUSR);
 
 	if (last_wd_fd != -1) {
-	    write (last_wd_fd, last_wd_string, strlen (last_wd_string));
-	    close (last_wd_fd);
+	    ssize_t ret1;
+	    int ret2;
+	    ret1 = write (last_wd_fd, last_wd_string, strlen (last_wd_string));
+	    ret2 = close (last_wd_fd);
 	}
     }
     g_free (last_wd_string);

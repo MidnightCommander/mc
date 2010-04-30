@@ -663,13 +663,14 @@ tree_rescan (void *data)
 {
     char old_dir[MC_MAXPATHLEN];
     WTree *tree = data;
+    int ret;
 
     if (!tree->selected_ptr || !mc_get_current_wd (old_dir, MC_MAXPATHLEN) ||
         mc_chdir (tree->selected_ptr->name))
         return;
 
     tree_store_rescan (tree->selected_ptr->name);
-    mc_chdir (old_dir);
+    ret = mc_chdir (old_dir);
 }
 
 static void

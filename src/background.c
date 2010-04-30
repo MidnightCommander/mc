@@ -256,7 +256,7 @@ background_attention (int fd, void *closure)
 /*    void *routine;*/
     int  argc, i, result, status;
     char *data [MAXCALLARGS];
-    ssize_t bytes;
+    ssize_t bytes, ret;
 	struct TaskList *p;
 	int to_child_fd = -1;
     enum ReturnType type;
@@ -284,24 +284,41 @@ background_attention (int fd, void *closure)
 	return 0;
     }
 
-    read (fd, &argc, sizeof (argc));
+    if ((read (fd, &argc,     sizeof (argc))     != sizeof (argc)) ||
+        (read (fd, &type,     sizeof (type))     != sizeof (type)) ||
+        (read (fd, &have_ctx, sizeof (have_ctx)) != sizeof (have_ctx)))
+    {
+	message (D_ERROR, _(" Background protocol error "),_("Reading failed"));
+	return 0;
+    }
+
     if (argc > MAXCALLARGS){
 	message (D_ERROR, _(" Background protocol error "),
 		 _(" Background process sent us a request for more arguments \n"
 		 " than we can handle. \n"));
     }
-    read (fd, &type, sizeof (type));
-    read (fd, &have_ctx, sizeof (have_ctx));
+
     if (have_ctx)
-	    read (fd, ctx, sizeof (FileOpContext));
+    {
+	if (read (fd, ctx, sizeof (FileOpContext)) != sizeof (FileOpContext))
+	{
+	    message (D_ERROR, _(" Background protocol error "),_("Reading failed"));
+	    return 0;
+	}
+    }
 
     for (i = 0; i < argc; i++){
 	int size;
 
-	read (fd, &size, sizeof (size));
+	if (read (fd, &size, sizeof (size)) != sizeof (size)) {
+	    message (D_ERROR, _(" Background protocol error "),_("Reading failed"));
+	    return 0;
+	}
 	data [i] = g_malloc (size+1);
-	read (fd, data [i], size);
-
+	if (read (fd, data [i], size) != size) {
+	    message (D_ERROR, _(" Background protocol error "),_("Reading failed"));
+	    return 0;
+	}
 	data [i][size] = 0;	/* NULL terminate the blocks (they could be strings) */
     }
 
@@ -357,9 +374,9 @@ background_attention (int fd, void *closure)
 	    }
 
 	/* Send the result code and the value for shared variables */
-	write (to_child_fd, &result, sizeof (int));
+	ret = write (to_child_fd, &result, sizeof (int));
 	if (have_ctx && to_child_fd != -1)
-	    write (to_child_fd, ctx, sizeof (FileOpContext));
+	    ret = write (to_child_fd, ctx, sizeof (FileOpContext));
     } else if (type == Return_String) {
 	int len;
 	char *resstr = NULL;
@@ -387,14 +404,14 @@ background_attention (int fd, void *closure)
 	}
 	if (resstr){
 	    len = strlen (resstr);
-	    write (to_child_fd, &len, sizeof (len));
+	    ret = write (to_child_fd, &len, sizeof (len));
 	    if (len){
 		write (to_child_fd, resstr, len);
-		g_free (resstr);
 	    }
+	    g_free (resstr);
 	} else {
 	    len = 0;
-	    write (to_child_fd, &len, sizeof (len));
+	    ret = write (to_child_fd, &len, sizeof (len));
 	}
     }
     for (i = 0; i < argc; i++)
@@ -417,16 +434,17 @@ static void
 parent_call_header (void *routine, int argc, enum ReturnType type, FileOpContext *ctx)
 {
     int have_ctx;
+    ssize_t ret;
 
     have_ctx = (ctx != NULL);
 
-    write (parent_fd, &routine, sizeof (routine));
-    write (parent_fd, &argc, sizeof (int));
-    write (parent_fd, &type, sizeof (type));
-    write (parent_fd, &have_ctx, sizeof (have_ctx));
+    ret = write (parent_fd, &routine, sizeof (routine));
+    ret = write (parent_fd, &argc, sizeof (int));
+    ret = write (parent_fd, &type, sizeof (type));
+    ret = write (parent_fd, &have_ctx, sizeof (have_ctx));
 
     if (have_ctx)
-	write (parent_fd, ctx, sizeof (FileOpContext));
+	ret = write (parent_fd, ctx, sizeof (FileOpContext));
 }
 
 int
@@ -434,6 +452,7 @@ parent_call (void *routine, struct FileOpContext *ctx, int argc, ...)
 {
     va_list ap;
     int i;
+    ssize_t ret;
 
     va_start (ap, argc);
     parent_call_header (routine, argc, Return_Integer, ctx);
@@ -443,13 +462,13 @@ parent_call (void *routine, struct FileOpContext *ctx, int argc, ...)
 
 	len   = va_arg (ap, int);
 	value = va_arg (ap, void *);
-	write (parent_fd, &len, sizeof (int));
-	write (parent_fd, value, len);
+	ret = write (parent_fd, &len, sizeof (int));
+	ret = write (parent_fd, value, len);
     }
 
-    read (from_parent_fd, &i, sizeof (int));
+    ret = read (from_parent_fd, &i, sizeof (int));
     if (ctx)
-	read (from_parent_fd, ctx, sizeof (FileOpContext));
+	ret = read (from_parent_fd, ctx, sizeof (FileOpContext));
 
     return i;
 }
@@ -469,14 +488,20 @@ parent_call_string (void *routine, int argc, ...)
 
 	len   = va_arg (ap, int);
 	value = va_arg (ap, void *);
-	write (parent_fd, &len, sizeof (int));
-	write (parent_fd, value, len);
+	if ((write (parent_fd, &len, sizeof (int)) != sizeof (int)) ||
+            (write (parent_fd, value, len) != len))
+	    return NULL;
     }
-    read (from_parent_fd, &i, sizeof (int));
+    if (read (from_parent_fd, &i, sizeof (int)) != sizeof (int))
+	return NULL;
     if (!i)
 	return NULL;
     str = g_malloc (i + 1);
-    read (from_parent_fd, str, i);
+    if (read (from_parent_fd, str, i) != i)
+    {
+        g_free(str);
+        return NULL;
+    }
     str [i] = 0;
     return str;
 }

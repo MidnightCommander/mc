@@ -60,6 +60,7 @@ show_console_contents_linux (int starty, unsigned char begin_line,
     unsigned char message = 0;
     unsigned short bytes = 0;
     int i;
+    ssize_t ret;
 
     /* Is tty console? */
     if (!console_flag)
@@ -73,28 +74,28 @@ show_console_contents_linux (int starty, unsigned char begin_line,
 
     /* Send command to the console handler */
     message = CONSOLE_CONTENTS;
-    write (pipefd1[1], &message, 1);
+    ret = write (pipefd1[1], &message, 1);
     /* Check for outdated cons.saver */
-    read (pipefd2[0], &message, 1);
+    ret = read (pipefd2[0], &message, 1);
     if (message != CONSOLE_CONTENTS)
 	return;
 
     /* Send the range of lines that we want */
-    write (pipefd1[1], &begin_line, 1);
-    write (pipefd1[1], &end_line, 1);
+    ret = write (pipefd1[1], &begin_line, 1);
+    ret = write (pipefd1[1], &end_line, 1);
     /* Read the corresponding number of bytes */
-    read (pipefd2[0], &bytes, 2);
+    ret = read (pipefd2[0], &bytes, 2);
 
     /* Read the bytes and output them */
     for (i = 0; i < bytes; i++) {
 	if ((i % COLS) == 0)
 	    tty_gotoyx (starty + (i / COLS), 0);
-	read (pipefd2[0], &message, 1);
+	ret = read (pipefd2[0], &message, 1);
 	tty_print_char (message);
     }
 
     /* Read the value of the console_flag */
-    read (pipefd2[0], &message, 1);
+    ret = read (pipefd2[0], &message, 1);
 }
 
 static void
@@ -107,58 +108,67 @@ handle_console_linux (unsigned char action)
     switch (action) {
     case CONSOLE_INIT:
 	/* Close old pipe ends in case it is the 2nd time we run cons.saver */
-	close (pipefd1[1]);
-	close (pipefd2[0]);
+	status = close (pipefd1[1]);
+	status = close (pipefd2[0]);
 	/* Create two pipes for communication */
-	pipe (pipefd1);
-	pipe (pipefd2);
+	if (!((pipe (pipefd1) == 0) && ((pipe (pipefd2)) == 0)))
+	{
+	    console_flag = 0;
+	    break;
+	}
 	/* Get the console saver running */
 	cons_saver_pid = fork ();
 	if (cons_saver_pid < 0) {
 	    /* Cannot fork */
 	    /* Delete pipes */
-	    close (pipefd1[1]);
-	    close (pipefd1[0]);
-	    close (pipefd2[1]);
-	    close (pipefd2[0]);
+	    status = close (pipefd1[1]);
+	    status = close (pipefd1[0]);
+	    status = close (pipefd2[1]);
+	    status = close (pipefd2[0]);
 	    console_flag = 0;
 	} else if (cons_saver_pid > 0) {
 	    /* Parent */
 	    /* Close the extra pipe ends */
-	    close (pipefd1[0]);
-	    close (pipefd2[1]);
+	    status = close (pipefd1[0]);
+	    status = close (pipefd2[1]);
 	    /* Was the child successful? */
-	    read (pipefd2[0], &console_flag, 1);
+	    status = read (pipefd2[0], &console_flag, 1);
 	    if (!console_flag) {
-		close (pipefd1[1]);
-		close (pipefd2[0]);
-		waitpid (cons_saver_pid, &status, 0);
+	        pid_t ret;
+		status = close (pipefd1[1]);
+		status = close (pipefd2[0]);
+		ret = waitpid (cons_saver_pid, &status, 0);
 	    }
 	} else {
 	    /* Child */
 	    /* Close the extra pipe ends */
-	    close (pipefd1[1]);
-	    close (pipefd2[0]);
+	    status = close (pipefd1[1]);
+	    status = close (pipefd2[0]);
 	    tty_name = ttyname (0);
 	    /* Bind the pipe 0 to the standard input */
-	    close (0);
-	    dup (pipefd1[0]);
-	    close (pipefd1[0]);
+	    do {
+	    if ( dup2 (pipefd1[0], 0) == -1)
+	        break;
+	    status = close (pipefd1[0]);
 	    /* Bind the pipe 1 to the standard output */
-	    close (1);
-	    dup (pipefd2[1]);
-	    close (pipefd2[1]);
+	    if ( dup2 (pipefd2[1], 1) == -1)
+	        break;
+
+	    status = close (pipefd2[1]);
 	    /* Bind standard error to /dev/null */
-	    close (2);
-	    open ("/dev/null", O_WRONLY);
+	    status = open ("/dev/null", O_WRONLY);
+	    if ( dup2(status, 2) == -1)
+	        break;
+            status = close (status);
 	    if (tty_name) {
 		/* Exec the console save/restore handler */
 		mc_conssaver = concat_dir_and_file (SAVERDIR, "cons.saver");
 		execl (mc_conssaver, "cons.saver", tty_name, (char *) NULL);
 	    }
 	    /* Console is not a tty or execl() failed */
+	    } while (0);
 	    console_flag = 0;
-	    write (1, &console_flag, 1);
+	    status = write (1, &console_flag, 1);
 	    _exit (3);
 	}			/* if (cons_saver_pid ...) */
 	break;
@@ -176,16 +186,17 @@ handle_console_linux (unsigned char action)
 	    return;
 	}
 	/* Send command to the console handler */
-	write (pipefd1[1], &action, 1);
+	status = write (pipefd1[1], &action, 1);
 	if (action != CONSOLE_DONE) {
 	    /* Wait the console handler to do its job */
-	    read (pipefd2[0], &console_flag, 1);
+	    status = read (pipefd2[0], &console_flag, 1);
 	}
 	if (action == CONSOLE_DONE || !console_flag) {
 	    /* We are done -> Let's clean up */
+	    pid_t ret;
 	    close (pipefd1[1]);
 	    close (pipefd2[0]);
-	    waitpid (cons_saver_pid, &status, 0);
+	    ret = waitpid (cons_saver_pid, &status, 0);
 	    console_flag = 0;
 	}
 	break;
