@@ -273,9 +273,11 @@ edit_save_file (WEdit * edit, const char *filename)
     }
     else
         savename = g_strdup (real_filename);
-
-    mc_chown (savename, edit->stat1.st_uid, edit->stat1.st_gid);
-    mc_chmod (savename, edit->stat1.st_mode);
+    {
+    int ret;
+    ret = mc_chown (savename, edit->stat1.st_uid, edit->stat1.st_gid);
+    ret = mc_chmod (savename, edit->stat1.st_mode);
+    }
 
     if ((fd =
          mc_open (savename, O_CREAT | O_WRONLY | O_TRUNC | O_BINARY, edit->stat1.st_mode)) == -1)
@@ -757,7 +759,10 @@ edit_delete_macro (WEdit * edit, int k)
         n = 0;
         while (fscanf (f, "%lu %d, ", &macro[n].command, &macro[n].ch))
             n++;
-        fscanf (f, ";\n");
+        {
+        int ret;
+        ret = fscanf (f, ";\n");
+        }
         if (s != k)
         {
             fprintf (g, ("key '%d 0': "), s);
@@ -866,7 +871,10 @@ edit_load_macro_cmd (WEdit * edit, struct macro macro[], int *n, int k)
             {
                 while (2 == fscanf (f, "%lu %d, ", &dummy.command, &dummy.ch));
             }
-            fscanf (f, ";\n");
+            {
+            int ret;
+            ret = fscanf (f, ";\n");
+            }
             if (s == k)
                 found = 1;
         }
@@ -2503,8 +2511,6 @@ edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
          */
         tmp = g_strconcat (" ", home_dir, PATH_SEP_STR EDIT_DIR, shell_cmd, " ", quoted_name,
                            " ", home_dir, PATH_SEP_STR EDIT_BLOCK_FILE " /dev/null", (char *) NULL);
-        system (tmp);
-        g_free (tmp);
     }
     else
     {
@@ -2515,9 +2521,15 @@ edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
          */
         tmp = g_strconcat (" ", home_dir, PATH_SEP_STR EDIT_DIR, shell_cmd, " ",
                            quoted_name, (char *) NULL);
-        system (tmp);
-        g_free (tmp);
     }
+
+    if (system (tmp) == -1)
+    {
+        edit_error_dialog (_("Process block"),_("Error calling program"));
+    }
+    else
+    {
+
     g_free (quoted_name);
     close_error_pipe (D_NORMAL, NULL);
 
@@ -2532,6 +2544,8 @@ edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
         if (block_file != NULL)
             fclose (block_file);
     }
+    }
+    g_free (tmp);
 
   edit_block_process_cmd__EXIT:
     g_free (b);
