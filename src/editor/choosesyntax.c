@@ -38,31 +38,34 @@
 #define N_DFLT_ENTRIES 2
 
 static int
-pstrcmp(const void *p1, const void *p2)
+pstrcmp (const void *p1, const void *p2)
 {
-    return strcmp(*(char**)p1, *(char**)p2);
+    return strcmp (*(char **) p1, *(char **) p2);
 }
 
 static int
-exec_edit_syntax_dialog (const char **names, const char *current_syntax) {
+exec_edit_syntax_dialog (const char **names, const char *current_syntax)
+{
     size_t i;
 
     Listbox *syntaxlist = create_listbox_window (LIST_LINES, MAX_ENTRY_LEN,
-	_(" Choose syntax highlighting "), NULL);
+                                                 _(" Choose syntax highlighting "), NULL);
     LISTBOX_APPEND_TEXT (syntaxlist, 'A', _("< Auto >"), NULL);
     LISTBOX_APPEND_TEXT (syntaxlist, 'R', _("< Reload Current Syntax >"), NULL);
 
-    for (i = 0; names[i] != NULL; i++) {
-	LISTBOX_APPEND_TEXT (syntaxlist, 0, names[i], NULL);
-	if ((current_syntax != NULL) && (strcmp (names[i], current_syntax) == 0))
-	    listbox_select_entry (syntaxlist->list, i + N_DFLT_ENTRIES);
+    for (i = 0; names[i] != NULL; i++)
+    {
+        LISTBOX_APPEND_TEXT (syntaxlist, 0, names[i], NULL);
+        if ((current_syntax != NULL) && (strcmp (names[i], current_syntax) == 0))
+            listbox_select_entry (syntaxlist->list, i + N_DFLT_ENTRIES);
     }
 
     return run_listbox (syntaxlist);
 }
 
 void
-edit_syntax_dialog (WEdit *edit, const char *current_syntax) {
+edit_syntax_dialog (WEdit * edit, const char *current_syntax)
+{
     char *old_syntax_type;
     int old_auto_syntax, syntax;
     char **names;
@@ -78,34 +81,35 @@ edit_syntax_dialog (WEdit *edit, const char *current_syntax) {
     count = g_strv_length (names);
     qsort (names, count, sizeof (char *), pstrcmp);
 
-    syntax = exec_edit_syntax_dialog ((const char**) names, current_syntax);
-    if (syntax < 0) {
-	g_strfreev (names);
-	return;
+    syntax = exec_edit_syntax_dialog ((const char **) names, current_syntax);
+    if (syntax < 0)
+    {
+        g_strfreev (names);
+        return;
     }
 
     old_auto_syntax = option_auto_syntax;
     old_syntax_type = g_strdup (current_syntax);
 
-    switch (syntax) {
-	case 0: /* auto syntax */
-	    option_auto_syntax = 1;
-	    break;
-	case 1: /* reload current syntax */
-	    force_reload = TRUE;
-	    break;
-	default:
-	    option_auto_syntax = 0;
-	    g_free (edit->syntax_type);
-	    edit->syntax_type = g_strdup (names[syntax - N_DFLT_ENTRIES]);
+    switch (syntax)
+    {
+    case 0:                    /* auto syntax */
+        option_auto_syntax = 1;
+        break;
+    case 1:                    /* reload current syntax */
+        force_reload = TRUE;
+        break;
+    default:
+        option_auto_syntax = 0;
+        g_free (edit->syntax_type);
+        edit->syntax_type = g_strdup (names[syntax - N_DFLT_ENTRIES]);
     }
 
     /* Load or unload syntax rules if the option has changed */
     if ((option_auto_syntax && !old_auto_syntax) || old_auto_syntax ||
-	(old_syntax_type && edit->syntax_type &&
-	(strcmp (old_syntax_type, edit->syntax_type) != 0)) ||
-	force_reload)
-	edit_load_syntax (edit, NULL, edit->syntax_type);
+        (old_syntax_type && edit->syntax_type &&
+         (strcmp (old_syntax_type, edit->syntax_type) != 0)) || force_reload)
+        edit_load_syntax (edit, NULL, edit->syntax_type);
 
     g_strfreev (names);
     g_free (old_syntax_type);
