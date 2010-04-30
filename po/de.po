@@ -957,7 +957,7 @@ msgstr ""
 "                  errdhotnormal, errdhotfocus\n"
 "   Menüs:         menunormal, menuhot, menuhotsel, menuinactive\n"
 "   Editor:        editnormal, editbold, editmarked, editwhitespace,\n"
-"                 editlinestate\n"
+"                  editlinestate\n"
 
 msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
