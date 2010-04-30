@@ -4,11 +4,11 @@
    2004, 2005, 2006, 2007, 2009 Free Software Foundation, Inc.
 
    Authors: 1994, 1995 Radek Doulik
-            1994, 1995 Miguel de Icaza
-            1995 Jakub Jelinek
-            1996 Andrej Borsenkow
-            1997 Norbert Warmuth
-            2009, 2010 Andrew Borodin
+   1994, 1995 Miguel de Icaza
+   1995 Jakub Jelinek
+   1996 Andrej Borsenkow
+   1997 Norbert Warmuth
+   2009, 2010 Andrew Borodin
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -71,10 +71,7 @@ widget_selectcolor (Widget * w, gboolean focused, gboolean hotkey)
     tty_setcolor (hotkey
                   ? (focused
                      ? DLG_HOT_FOCUSC (h)
-                     : DLG_HOT_NORMALC (h))
-                  : (focused
-                     ? DLG_FOCUSC (h)
-                     : DLG_NORMALC (h)));
+                     : DLG_HOT_NORMALC (h)) : (focused ? DLG_FOCUSC (h) : DLG_NORMALC (h)));
 }
 
 struct hotkey_t

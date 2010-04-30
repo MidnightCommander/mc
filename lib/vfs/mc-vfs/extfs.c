@@ -597,8 +597,7 @@ extfs_which (struct vfs_class *me, const char *path)
         info = &g_array_index (extfs_plugins, extfs_plugin_info_t, i);
 
         if ((strncmp (path, info->prefix, path_len) == 0)
-                && ((info->prefix[path_len] == '\0')
-                    || (info->prefix[path_len] == '+')))
+            && ((info->prefix[path_len] == '\0') || (info->prefix[path_len] == '+')))
             return i;
     }
     return -1;

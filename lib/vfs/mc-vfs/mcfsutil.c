@@ -1,12 +1,12 @@
 /* Low-level protocol for MCFS.
-   
+
    Copyright (C) 1995, 1996 Miguel de Icaza
-   
+
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public License
    as published by the Free Software Foundation; either version 2 of
    the License, or (at your option) any later version.
-   
+
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -51,12 +51,12 @@
 #include <errno.h>
 
 #include "lib/global.h"
-#include "src/wtools.h"	/* message() */
-#include "src/main.h"	/* print_vfs_message */
+#include "src/wtools.h"         /* message() */
+#include "src/main.h"           /* print_vfs_message */
 #include "utilvfs.h"
 #include "mcfsutil.h"
 #include "netutil.h"
-#include "mcfs.h"	/* tcp_invalidate_socket() */
+#include "mcfs.h"               /* tcp_invalidate_socket() */
 
 #define CHECK_SIG_PIPE(sock) if (got_sigpipe) \
      { tcp_invalidate_socket (sock); return got_sigpipe = 0; }
@@ -68,13 +68,15 @@ socket_read_block (int sock, char *dest, int len)
 {
     int nread, n;
 
-    for (nread = 0; nread < len;) {
-	n = read (sock, dest + nread, len - nread);
-	if (n <= 0) {
-	    tcp_invalidate_socket (sock);
-	    return 0;
-	}
-	nread += n;
+    for (nread = 0; nread < len;)
+    {
+        n = read (sock, dest + nread, len - nread);
+        if (n <= 0)
+        {
+            tcp_invalidate_socket (sock);
+            return 0;
+        }
+        nread += n;
     }
     return 1;
 }
@@ -84,13 +86,14 @@ socket_write_block (int sock, const char *buffer, int len)
 {
     int left, status;
 
-    for (left = len; left > 0;) {
-	status = write (sock, buffer, left);
-	CHECK_SIG_PIPE (sock);
-	if (status < 0)
-	    return 0;
-	left -= status;
-	buffer += status;
+    for (left = len; left > 0;)
+    {
+        status = write (sock, buffer, left);
+        CHECK_SIG_PIPE (sock);
+        if (status < 0)
+            return 0;
+        left -= status;
+        buffer += status;
     }
     return 1;
 }
@@ -104,56 +107,58 @@ rpc_send (int sock, ...)
 
     va_start (ap, sock);
 
-    for (;;) {
-	cmd = va_arg (ap, int);
-	switch (cmd) {
-	case RPC_END:
-	    va_end (ap);
-	    return 1;
+    for (;;)
+    {
+        cmd = va_arg (ap, int);
+        switch (cmd)
+        {
+        case RPC_END:
+            va_end (ap);
+            return 1;
 
-	case RPC_INT:
-	    tmp = htonl (va_arg (ap, int));
-	    if (write (sock, &tmp, sizeof (tmp)) != sizeof(tmp))
-	    {
-		vfs_die ( "RPC: write failed (RPC_INT)" );
-		break;
-	    }
-	    CHECK_SIG_PIPE (sock);
-	    break;
+        case RPC_INT:
+            tmp = htonl (va_arg (ap, int));
+            if (write (sock, &tmp, sizeof (tmp)) != sizeof (tmp))
+            {
+                vfs_die ("RPC: write failed (RPC_INT)");
+                break;
+            }
+            CHECK_SIG_PIPE (sock);
+            break;
 
-	case RPC_STRING:
-	    text = va_arg (ap, char *);
-	    len = strlen (text);
-	    tmp = htonl (len);
-	    if (write (sock, &tmp, sizeof (tmp)) != sizeof(tmp))
-	    {
-		vfs_die ( "RPC: write failed (RPC_STRING)" );
-		break;
-	    }
-	    CHECK_SIG_PIPE (sock);
-	    if (write (sock, text, len) != len)
-	    {
-		vfs_die ( "RPC: write failed (RPC_STRING)" );
-		break;
-	    }
-	    CHECK_SIG_PIPE (sock);
-	    break;
+        case RPC_STRING:
+            text = va_arg (ap, char *);
+            len = strlen (text);
+            tmp = htonl (len);
+            if (write (sock, &tmp, sizeof (tmp)) != sizeof (tmp))
+            {
+                vfs_die ("RPC: write failed (RPC_STRING)");
+                break;
+            }
+            CHECK_SIG_PIPE (sock);
+            if (write (sock, text, len) != len)
+            {
+                vfs_die ("RPC: write failed (RPC_STRING)");
+                break;
+            }
+            CHECK_SIG_PIPE (sock);
+            break;
 
-	case RPC_BLOCK:
-	    len = va_arg (ap, int);
-	    text = va_arg (ap, char *);
-	    tmp = htonl (len);
-	    if (write (sock, text, len) != len)
-	    {
-		vfs_die ( "RPC: write failed (RPC_BLOCK)" );
-		break;
-	    }
-	    CHECK_SIG_PIPE (sock);
-	    break;
+        case RPC_BLOCK:
+            len = va_arg (ap, int);
+            text = va_arg (ap, char *);
+            tmp = htonl (len);
+            if (write (sock, text, len) != len)
+            {
+                vfs_die ("RPC: write failed (RPC_BLOCK)");
+                break;
+            }
+            CHECK_SIG_PIPE (sock);
+            break;
 
-	default:
-	    vfs_die ("Unknown rpc message\n");
-	}
+        default:
+            vfs_die ("Unknown rpc message\n");
+        }
     }
 }
 
@@ -167,63 +172,70 @@ rpc_get (int sock, ...)
 
     va_start (ap, sock);
 
-    for (;;) {
-	cmd = va_arg (ap, int);
-	switch (cmd) {
-	case RPC_END:
-	    va_end (ap);
-	    return 1;
+    for (;;)
+    {
+        cmd = va_arg (ap, int);
+        switch (cmd)
+        {
+        case RPC_END:
+            va_end (ap);
+            return 1;
 
-	case RPC_INT:
-	    if (socket_read_block (sock, (char *) &tmp, sizeof (tmp)) == 0) {
-		va_end (ap);
-		return 0;
-	    }
-	    dest = va_arg (ap, int *);
-	    *dest = ntohl (tmp);
-	    break;
+        case RPC_INT:
+            if (socket_read_block (sock, (char *) &tmp, sizeof (tmp)) == 0)
+            {
+                va_end (ap);
+                return 0;
+            }
+            dest = va_arg (ap, int *);
+            *dest = ntohl (tmp);
+            break;
 
-	    /* returns an allocated string */
-	case RPC_LIMITED_STRING:
-	case RPC_STRING:
-	    if (socket_read_block (sock, (char *) &tmp, sizeof (tmp)) == 0) {
-		va_end (ap);
-		return 0;
-	    }
-	    len = ntohl (tmp);
-	    if (cmd == RPC_LIMITED_STRING)
-		if (len > 16 * 1024) {
-		    /* silently die */
-		    abort ();
-		}
-	    if (len > 128 * 1024)
-		abort ();
+            /* returns an allocated string */
+        case RPC_LIMITED_STRING:
+        case RPC_STRING:
+            if (socket_read_block (sock, (char *) &tmp, sizeof (tmp)) == 0)
+            {
+                va_end (ap);
+                return 0;
+            }
+            len = ntohl (tmp);
+            if (cmd == RPC_LIMITED_STRING)
+                if (len > 16 * 1024)
+                {
+                    /* silently die */
+                    abort ();
+                }
+            if (len > 128 * 1024)
+                abort ();
 
-	    /* Don't use glib functions here - this code is used by mcserv */
-	    text = malloc (len + 1);
-	    if (socket_read_block (sock, text, len) == 0) {
-		free (text);
-		va_end (ap);
-		return 0;
-	    }
-	    text[len] = '\0';
+            /* Don't use glib functions here - this code is used by mcserv */
+            text = malloc (len + 1);
+            if (socket_read_block (sock, text, len) == 0)
+            {
+                free (text);
+                va_end (ap);
+                return 0;
+            }
+            text[len] = '\0';
 
-	    str_dest = va_arg (ap, char **);
-	    *str_dest = text;
-	    break;
+            str_dest = va_arg (ap, char **);
+            *str_dest = text;
+            break;
 
-	case RPC_BLOCK:
-	    len = va_arg (ap, int);
-	    text = va_arg (ap, char *);
-	    if (socket_read_block (sock, text, len) == 0) {
-		va_end (ap);
-		return 0;
-	    }
-	    break;
+        case RPC_BLOCK:
+            len = va_arg (ap, int);
+            text = va_arg (ap, char *);
+            if (socket_read_block (sock, text, len) == 0)
+            {
+                va_end (ap);
+                return 0;
+            }
+            break;
 
-	default:
-	    vfs_die ("Unknown rpc message\n");
-	}
+        default:
+            vfs_die ("Unknown rpc message\n");
+        }
     }
 }
-#endif				/* ENABLE_VFS_MCFS || ENABLE_MCSERVER */
+#endif /* ENABLE_VFS_MCFS || ENABLE_MCSERVER */

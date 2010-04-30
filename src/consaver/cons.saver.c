@@ -9,12 +9,12 @@
    This code requires root privileges.
    You may want to make the cons.saver setuid root.
    The code should be safe even if it is setuid but who knows?
-   
+
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2 of the License, or
    (at your option) any later version.
-   
+
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -67,182 +67,184 @@
 static void
 send_contents (char *buffer, unsigned int columns, unsigned int rows)
 {
-  unsigned char begin_line = 0, end_line = 0;
-  unsigned int lastline, lc_index, x;
-  unsigned char message, outbuf[1024], *p;
-  unsigned short bytes;
+    unsigned char begin_line = 0, end_line = 0;
+    unsigned int lastline, lc_index, x;
+    unsigned char message, outbuf[1024], *p;
+    unsigned short bytes;
 
-  lc_index = 2 * rows * columns;
-  for (lastline = rows; lastline > 0; lastline--)
-    for (x = 0; x < columns; x++)
-      {
-	lc_index -= 2;
-	if (buffer [lc_index] != ' ')
-	  goto out;
-      }
-out:
+    lc_index = 2 * rows * columns;
+    for (lastline = rows; lastline > 0; lastline--)
+        for (x = 0; x < columns; x++)
+        {
+            lc_index -= 2;
+            if (buffer[lc_index] != ' ')
+                goto out;
+        }
+  out:
 
-  message = CONSOLE_CONTENTS;
-  if (write (1, &message, 1) != 1)
-	return;
-  if (read (0, &begin_line, 1) != 1)
-	return;
-  if (read (0, &end_line, 1) != 1)
-	return;
-  if (begin_line > lastline)
-    begin_line = lastline;
-  if (end_line > lastline)
-    end_line = lastline;
+    message = CONSOLE_CONTENTS;
+    if (write (1, &message, 1) != 1)
+        return;
+    if (read (0, &begin_line, 1) != 1)
+        return;
+    if (read (0, &end_line, 1) != 1)
+        return;
+    if (begin_line > lastline)
+        begin_line = lastline;
+    if (end_line > lastline)
+        end_line = lastline;
 
-  lc_index = (end_line - begin_line) * columns;
+    lc_index = (end_line - begin_line) * columns;
 
-  if (write (1, &bytes, 2) != 2)
-	return;
-  if (! bytes)
-    return;
+    if (write (1, &bytes, 2) != 2)
+        return;
+    if (!bytes)
+        return;
 
-  p = outbuf;
-  for (lc_index = 2 * begin_line * columns;
-       lc_index < 2 * end_line * columns;
-       lc_index += 2)
+    p = outbuf;
+    for (lc_index = 2 * begin_line * columns; lc_index < 2 * end_line * columns; lc_index += 2)
     {
-      *p++ = buffer [lc_index];
-      if (p == outbuf + sizeof (outbuf))
-	{
-	  if (write (1, outbuf, sizeof (outbuf)) != sizeof (outbuf))
-	    return;
-	  p = outbuf;
-	}
+        *p++ = buffer[lc_index];
+        if (p == outbuf + sizeof (outbuf))
+        {
+            if (write (1, outbuf, sizeof (outbuf)) != sizeof (outbuf))
+                return;
+            p = outbuf;
+        }
     }
 
-  if (p != outbuf)
-    if (write (1, outbuf, p - outbuf) < (p - outbuf))
-	return;
+    if (p != outbuf)
+        if (write (1, outbuf, p - outbuf) < (p - outbuf))
+            return;
 }
 
-static void __attribute__ ((noreturn))
-die (void)
+static void __attribute__ ((noreturn)) die (void)
 {
-  unsigned char zero = 0;
-  ssize_t ret;
-  ret = write (1, &zero, 1);
-  exit (3);
+    unsigned char zero = 0;
+    ssize_t ret;
+    ret = write (1, &zero, 1);
+    exit (3);
 }
 
 int
 main (int argc, char **argv)
 {
-  unsigned char action = 0, console_flag = 3;
-  int console_fd, vcsa_fd, console_minor, buffer_size;
-  struct stat st;
-  uid_t uid, euid;
-  char *buffer, *tty_name, console_name [16], vcsa_name [16];
-  const char *p, *q;
-  struct winsize winsz;
+    unsigned char action = 0, console_flag = 3;
+    int console_fd, vcsa_fd, console_minor, buffer_size;
+    struct stat st;
+    uid_t uid, euid;
+    char *buffer, *tty_name, console_name[16], vcsa_name[16];
+    const char *p, *q;
+    struct winsize winsz;
 
-  close (2);
+    close (2);
 
-  if (argc != 2)
-    die ();
+    if (argc != 2)
+        die ();
 
-  tty_name = argv [1];
-  if (strnlen (tty_name, 15) == 15
-      || strncmp (tty_name, "/dev/", 5))
-    die ();
+    tty_name = argv[1];
+    if (strnlen (tty_name, 15) == 15 || strncmp (tty_name, "/dev/", 5))
+        die ();
 
-  setsid ();
-  uid = getuid ();
-  euid = geteuid ();
+    setsid ();
+    uid = getuid ();
+    euid = geteuid ();
 
-  if (seteuid (uid) < 0)
-    die ();
-  console_fd = open (tty_name, O_RDONLY);
-  if (console_fd < 0)
-    die ();
-  if (fstat (console_fd, &st) < 0 || ! S_ISCHR (st.st_mode))
-    die ();
-  if ((st.st_rdev & 0xff00) != 0x0400)
-    die ();
-  console_minor = (int) (st.st_rdev & 0x00ff);
-  if (console_minor < 1 || console_minor > 63)
-    die ();
-  if (st.st_uid != uid)
-    die ();
+    if (seteuid (uid) < 0)
+        die ();
+    console_fd = open (tty_name, O_RDONLY);
+    if (console_fd < 0)
+        die ();
+    if (fstat (console_fd, &st) < 0 || !S_ISCHR (st.st_mode))
+        die ();
+    if ((st.st_rdev & 0xff00) != 0x0400)
+        die ();
+    console_minor = (int) (st.st_rdev & 0x00ff);
+    if (console_minor < 1 || console_minor > 63)
+        die ();
+    if (st.st_uid != uid)
+        die ();
 
-  switch (tty_name [5])
+    switch (tty_name[5])
     {
-    /* devfs */
-    case 'v': p = "/dev/vc/%d"; q = "/dev/vcc/a%d"; break;
-    /* /dev/ttyN */
-    case 't': p = "/dev/tty%d"; q = "/dev/vcsa%d"; break;
-    default: die (); break;
+        /* devfs */
+    case 'v':
+        p = "/dev/vc/%d";
+        q = "/dev/vcc/a%d";
+        break;
+        /* /dev/ttyN */
+    case 't':
+        p = "/dev/tty%d";
+        q = "/dev/vcsa%d";
+        break;
+    default:
+        die ();
+        break;
     }
 
-  snprintf (console_name, sizeof (console_name), p, console_minor);
-  if (strncmp (console_name, tty_name, sizeof (console_name)) != 0)
-    die ();
+    snprintf (console_name, sizeof (console_name), p, console_minor);
+    if (strncmp (console_name, tty_name, sizeof (console_name)) != 0)
+        die ();
 
-  if (seteuid (euid) < 0)
-    die ();
+    if (seteuid (euid) < 0)
+        die ();
 
-  snprintf (vcsa_name, sizeof (vcsa_name), q, console_minor);
-  vcsa_fd = open (vcsa_name, O_RDWR);
-  if (vcsa_fd < 0)
-    die ();
-  if (fstat (vcsa_fd, &st) < 0 || ! S_ISCHR (st.st_mode))
-    die ();
+    snprintf (vcsa_name, sizeof (vcsa_name), q, console_minor);
+    vcsa_fd = open (vcsa_name, O_RDWR);
+    if (vcsa_fd < 0)
+        die ();
+    if (fstat (vcsa_fd, &st) < 0 || !S_ISCHR (st.st_mode))
+        die ();
 
-  if (seteuid (uid) < 0)
-    die ();
+    if (seteuid (uid) < 0)
+        die ();
 
-  winsz.ws_col = winsz.ws_row = 0;
-  if (ioctl (console_fd, TIOCGWINSZ, &winsz) < 0
-      || winsz.ws_col <= 0 || winsz.ws_row <= 0
-      || winsz.ws_col >= 256 || winsz.ws_row >= 256)
-    die ();
+    winsz.ws_col = winsz.ws_row = 0;
+    if (ioctl (console_fd, TIOCGWINSZ, &winsz) < 0
+        || winsz.ws_col <= 0 || winsz.ws_row <= 0 || winsz.ws_col >= 256 || winsz.ws_row >= 256)
+        die ();
 
-  buffer_size = 4 + 2 * winsz.ws_col * winsz.ws_row;
-  buffer = calloc (buffer_size, 1);
-  if (buffer == NULL)
-    die ();
+    buffer_size = 4 + 2 * winsz.ws_col * winsz.ws_row;
+    buffer = calloc (buffer_size, 1);
+    if (buffer == NULL)
+        die ();
 
-  if (write (1, &console_flag, 1) != 1)
-    die ();
+    if (write (1, &console_flag, 1) != 1)
+        die ();
 
-  while (console_flag && read (0, &action, 1) == 1)
+    while (console_flag && read (0, &action, 1) == 1)
     {
-      switch (action)
-	{
-	case CONSOLE_DONE:
-	  console_flag = 0;
-	  continue;
-	case CONSOLE_SAVE:
-	  if (seteuid (euid) < 0
-	      || lseek (vcsa_fd, 0, 0) != 0
-	      || fstat (console_fd, &st) < 0 || st.st_uid != uid
-	      || read (vcsa_fd, buffer, buffer_size) != buffer_size
-	      || fstat (console_fd, &st) < 0 || st.st_uid != uid)
-	    memset (buffer, 0, buffer_size);
-	  if (seteuid (uid) < 0)
-	    die ();
-	  break;
-	case CONSOLE_RESTORE:
-	  if (seteuid (euid) >= 0
-	      && lseek (vcsa_fd, 0, 0) == 0
-	      && fstat (console_fd, &st) >= 0 && st.st_uid == uid)
-	    if (write (vcsa_fd, buffer, buffer_size) != buffer_size)
-		die ();
-	  if (seteuid (uid) < 0)
-	    die ();
-	  break;
-	case CONSOLE_CONTENTS:
-	  send_contents (buffer + 4, winsz.ws_col, winsz.ws_row);
-	  break;
-	}
+        switch (action)
+        {
+        case CONSOLE_DONE:
+            console_flag = 0;
+            continue;
+        case CONSOLE_SAVE:
+            if (seteuid (euid) < 0
+                || lseek (vcsa_fd, 0, 0) != 0
+                || fstat (console_fd, &st) < 0 || st.st_uid != uid
+                || read (vcsa_fd, buffer, buffer_size) != buffer_size
+                || fstat (console_fd, &st) < 0 || st.st_uid != uid)
+                memset (buffer, 0, buffer_size);
+            if (seteuid (uid) < 0)
+                die ();
+            break;
+        case CONSOLE_RESTORE:
+            if (seteuid (euid) >= 0
+                && lseek (vcsa_fd, 0, 0) == 0 && fstat (console_fd, &st) >= 0 && st.st_uid == uid)
+                if (write (vcsa_fd, buffer, buffer_size) != buffer_size)
+                    die ();
+            if (seteuid (uid) < 0)
+                die ();
+            break;
+        case CONSOLE_CONTENTS:
+            send_contents (buffer + 4, winsz.ws_col, winsz.ws_row);
+            break;
+        }
 
-      if (write (1, &console_flag, 1) != 1)
-	die ();
+        if (write (1, &console_flag, 1) != 1)
+            die ();
     }
 
-  exit (0);
+    exit (0);
 }

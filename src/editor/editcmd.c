@@ -274,9 +274,9 @@ edit_save_file (WEdit * edit, const char *filename)
     else
         savename = g_strdup (real_filename);
     {
-    int ret;
-    ret = mc_chown (savename, edit->stat1.st_uid, edit->stat1.st_gid);
-    ret = mc_chmod (savename, edit->stat1.st_mode);
+        int ret;
+        ret = mc_chown (savename, edit->stat1.st_uid, edit->stat1.st_gid);
+        ret = mc_chmod (savename, edit->stat1.st_mode);
     }
 
     if ((fd =
@@ -760,8 +760,8 @@ edit_delete_macro (WEdit * edit, int k)
         while (fscanf (f, "%lu %d, ", &macro[n].command, &macro[n].ch))
             n++;
         {
-        int ret;
-        ret = fscanf (f, ";\n");
+            int ret;
+            ret = fscanf (f, ";\n");
         }
         if (s != k)
         {
@@ -872,8 +872,8 @@ edit_load_macro_cmd (WEdit * edit, struct macro macro[], int *n, int k)
                 while (2 == fscanf (f, "%lu %d, ", &dummy.command, &dummy.ch));
             }
             {
-            int ret;
-            ret = fscanf (f, ";\n");
+                int ret;
+                ret = fscanf (f, ";\n");
             }
             if (s == k)
                 found = 1;
@@ -2525,25 +2525,25 @@ edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
 
     if (system (tmp) == -1)
     {
-        edit_error_dialog (_("Process block"),_("Error calling program"));
+        edit_error_dialog (_("Process block"), _("Error calling program"));
     }
     else
     {
 
-    g_free (quoted_name);
-    close_error_pipe (D_NORMAL, NULL);
+        g_free (quoted_name);
+        close_error_pipe (D_NORMAL, NULL);
 
-    edit_refresh_cmd (edit);
-    edit->force |= REDRAW_COMPLETELY;
+        edit_refresh_cmd (edit);
+        edit->force |= REDRAW_COMPLETELY;
 
-    /* insert result block */
-    if (block && !edit_block_delete_cmd (edit))
-    {
-        edit_insert_file (edit, b);
-        block_file = fopen (b, "w");
-        if (block_file != NULL)
-            fclose (block_file);
-    }
+        /* insert result block */
+        if (block && !edit_block_delete_cmd (edit))
+        {
+            edit_insert_file (edit, b);
+            block_file = fopen (b, "w");
+            if (block_file != NULL)
+                fclose (block_file);
+        }
     }
     g_free (tmp);
 

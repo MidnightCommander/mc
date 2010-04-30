@@ -328,7 +328,7 @@ edit_load_file_fast (WEdit * edit, const char *filename)
 {
     long buf, buf2;
     int file = -1;
-    int ret=1;
+    int ret = 1;
     edit->curs2 = edit->last_byte;
     buf2 = edit->curs2 >> S_EDIT_BUF_SIZE;
     edit->utf8 = 0;
@@ -346,26 +346,27 @@ edit_load_file_fast (WEdit * edit, const char *filename)
 
     do
     {
-    if (mc_read (file,
-             (char *) edit->buffers2[buf2] + EDIT_BUF_SIZE -
-             (edit->curs2 & M_EDIT_BUF_SIZE), edit->curs2 & M_EDIT_BUF_SIZE) < 0)
-        break;
-
-    for (buf = buf2 - 1; buf >= 0; buf--)
-    {
-        /* edit->buffers2[0] is already allocated */
-        if (!edit->buffers2[buf])
-            edit->buffers2[buf] = g_malloc0 (EDIT_BUF_SIZE);
-        if (mc_read (file, (char *) edit->buffers2[buf], EDIT_BUF_SIZE) < 0)
+        if (mc_read (file,
+                     (char *) edit->buffers2[buf2] + EDIT_BUF_SIZE -
+                     (edit->curs2 & M_EDIT_BUF_SIZE), edit->curs2 & M_EDIT_BUF_SIZE) < 0)
             break;
-    }
-    ret = 0;
+
+        for (buf = buf2 - 1; buf >= 0; buf--)
+        {
+            /* edit->buffers2[0] is already allocated */
+            if (!edit->buffers2[buf])
+                edit->buffers2[buf] = g_malloc0 (EDIT_BUF_SIZE);
+            if (mc_read (file, (char *) edit->buffers2[buf], EDIT_BUF_SIZE) < 0)
+                break;
+        }
+        ret = 0;
     }
     while (0);
-    if (ret) {
-        char *err_str = g_strdup_printf(_(" Error reading %s "), filename);
+    if (ret)
+    {
+        char *err_str = g_strdup_printf (_(" Error reading %s "), filename);
         edit_error_dialog (_("Error"), err_str);
-        g_free(err_str);
+        g_free (err_str);
     }
     mc_close (file);
     return ret;

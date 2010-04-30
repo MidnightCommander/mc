@@ -159,7 +159,7 @@ fish_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, c
 
     if (logfile)
     {
-	size_t ret;
+        size_t ret;
         ret = fwrite (str, strlen (str), 1, logfile);
         ret = fflush (logfile);
     }
@@ -314,10 +314,10 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
             {
                 size_t str_len;
                 str_len = strlen (SUP.password);
-                if ((write (SUP.sockw, SUP.password, str_len ) != (ssize_t) str_len)
+                if ((write (SUP.sockw, SUP.password, str_len) != (ssize_t) str_len)
                     || (write (SUP.sockw, "\n", 1) != 1))
                 {
-                    ERRNOR(EIO, -1);
+                    ERRNOR (EIO, -1);
                 }
             }
         }
@@ -763,6 +763,7 @@ fish_file_store (struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *lo
 
     /* FIXME: File size is limited to ULONG_MAX */
     if (!fh->u.fish.append)
+    {
         /* *INDENT-OFF* */
         n = fish_command (me, super, WAIT_REPLY,
                 "#STOR %lu /%s\n"
@@ -787,7 +788,9 @@ fish_file_store (struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *lo
                 (unsigned long) s.st_size, quoted_name,
                 quoted_name, (unsigned long) s.st_size, (unsigned long) s.st_size);
         /* *INDENT-ON* */
+    }
     else
+    {
         /* *INDENT-OFF* */
         n = fish_command (me, super, WAIT_REPLY,
                 "#STOR %lu /%s\n"
@@ -805,7 +808,7 @@ fish_file_store (struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *lo
                 (unsigned long) s.st_size, quoted_name,
                 quoted_name, (unsigned long) s.st_size);
         /* *INDENT-ON* */
-
+    }
     if (n != PRELIM)
     {
         close (h);
@@ -1030,8 +1033,8 @@ fish_send_command (struct vfs_class *me, struct vfs_s_super *super, const char *
 static int
 fish_chmod (struct vfs_class *me, const char *path, int mode)
 {
-    PREFIX
     /* *INDENT-OFF* */
+    PREFIX
     g_snprintf (buf, sizeof (buf),
                 "#CHMOD %4.4o /%s\n"
                 "if chmod %4.4o /%s 2>/dev/null; then\n"
@@ -1040,10 +1043,11 @@ fish_chmod (struct vfs_class *me, const char *path, int mode)
                     "echo '### 500'\n"
                 "fi\n",
                 mode & 07777, rpath, mode & 07777, rpath);
-    /* *INDENT-ON* */
     POSTFIX (OPT_FLUSH);
+    /* *INDENT-ON* */
 }
 
+/* *INDENT-OFF* */
 #define FISH_OP(name, string) \
 static int fish_##name (struct vfs_class *me, const char *path1, const char *path2) \
 { \
@@ -1072,7 +1076,6 @@ static int fish_##name (struct vfs_class *me, const char *path1, const char *pat
     return fish_send_command(me, super2, buf, OPT_FLUSH); \
 }
 
-/* *INDENT-OFF* */
 FISH_OP (rename,
         "#RENAME /%s /%s\n"
         "if mv /%s /%s 2>/dev/null; then\n"
@@ -1125,8 +1128,8 @@ fish_chown (struct vfs_class *me, const char *path, int owner, int group)
     sowner = pw->pw_name;
     sgroup = gr->gr_name;
     {
-        PREFIX
         /* *INDENT-OFF* */
+        PREFIX
         g_snprintf (buf, sizeof (buf),
                     "#CHOWN %s:%s /%s\n"
                     "if chown %s:%s /%s 2>/dev/null; then\n"
@@ -1145,9 +1148,9 @@ fish_chown (struct vfs_class *me, const char *path, int owner, int group)
 static int
 fish_unlink (struct vfs_class *me, const char *path)
 {
+    /* *INDENT-OFF* */
     PREFIX
 
-    /* *INDENT-OFF* */
     g_snprintf (buf, sizeof (buf),
                 "#DELE /%s\n"
                 "if rm -f /%s 2>/dev/null; then\n"
@@ -1164,9 +1167,9 @@ fish_unlink (struct vfs_class *me, const char *path)
 static int
 fish_exists (struct vfs_class *me, const char *path)
 {
+    /* *INDENT-OFF* */
     PREFIX
 
-    /* *INDENT-OFF* */
     g_snprintf (buf, sizeof (buf),
                 "#ISEXISTS /%s\n"
                 "ls -l /%s >/dev/null 2>/dev/null\n"
@@ -1188,9 +1191,9 @@ fish_mkdir (struct vfs_class *me, const char *path, mode_t mode)
 {
     int ret_code;
 
+    /* *INDENT-OFF* */
     PREFIX (void) mode;
 
-    /* *INDENT-OFF* */
     g_snprintf (buf, sizeof (buf),
                 "#MKD /%s\n"
                 "if mkdir /%s 2>/dev/null; then\n"
@@ -1217,8 +1220,8 @@ fish_mkdir (struct vfs_class *me, const char *path, mode_t mode)
 static int
 fish_rmdir (struct vfs_class *me, const char *path)
 {
-    PREFIX
     /* *INDENT-OFF* */
+    PREFIX
     g_snprintf (buf, sizeof (buf),
                 "#RMD /%s\n"
                 "if rmdir /%s 2>/dev/null; then\n"

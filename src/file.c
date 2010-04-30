@@ -416,8 +416,8 @@ warn_same_file (const char *fmt, const char *a, const char *b)
     union
     {
         void *p;
-        FileProgressStatus (*f) (enum OperationMode, const char *fmt,
-                                 const char *a, const char *b);
+          FileProgressStatus (*f) (enum OperationMode, const char *fmt,
+                                   const char *a, const char *b);
     } pntr;
     pntr.f = real_warn_same_file;
 
@@ -1991,7 +1991,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
 {
     WPanel *panel = (WPanel *) source_panel;
     const gboolean single_entry = force_single || (panel->marked <= 1)
-                                    || (get_current_type () == view_tree);
+        || (get_current_type () == view_tree);
 
     char *source = NULL;
 #ifdef WITH_FULL_PATHS
@@ -2564,8 +2564,8 @@ query_replace (FileOpContext * ctx, const char *destname, struct stat *_s_stat,
     union
     {
         void *p;
-        FileProgressStatus (*f) (FileOpContext *, enum OperationMode, const char *,
-                                 struct stat *, struct stat *);
+          FileProgressStatus (*f) (FileOpContext *, enum OperationMode, const char *,
+                                   struct stat *, struct stat *);
     } pntr;
     pntr.f = file_progress_real_query_replace;
 

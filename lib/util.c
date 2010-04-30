@@ -1256,9 +1256,9 @@ mc_util_write_backup_content (const char *from_file_name, const char *to_file_na
     if (fwrite ((const void *) contents, length, 1, backup_fd) != length)
         ret1 = FALSE;
     {
-    int ret2;
-    ret2 = fflush (backup_fd);
-    ret2 = fclose (backup_fd);
+        int ret2;
+        ret2 = fflush (backup_fd);
+        ret2 = fclose (backup_fd);
     }
     g_free (contents);
     return ret1;
