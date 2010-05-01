@@ -283,6 +283,8 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
 
     if (run_view)
     {
+        mcview_ret_t ret;
+
         mcview_altered_hex_mode = 0;
         mcview_altered_nroff_flag = 0;
         if (def_hex_mode != mcview_default_hex_mode)
@@ -295,17 +297,30 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
          */
         if (written_nonspace)
         {
-            mcview_viewer (cmd, filename, move_dir, start_line);
+            ret = mcview_viewer (cmd, filename, start_line);
             unlink (file_name);
         }
         else
-        {
-            mcview_viewer (NULL, filename, move_dir, start_line);
-        }
+            ret = mcview_viewer (NULL, filename, start_line);
+
+        if (move_dir != NULL)
+            switch (ret)
+            {
+            case MCVIEW_WANT_NEXT:
+                *move_dir = 1;
+                break;
+            case MCVIEW_WANT_PREV:
+                *move_dir = -1;
+                break;
+            default:
+                *move_dir = 0;
+            }
+
         if (changed_hex_mode && !mcview_altered_hex_mode)
             mcview_default_hex_mode = def_hex_mode;
         if (changed_nroff_flag && !mcview_altered_nroff_flag)
             mcview_default_nroff_flag = def_nroff_flag;
+
         repaint_screen ();
     }
     else if (is_cd)
@@ -331,11 +346,9 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
         {
             handle_console (CONSOLE_SAVE);
             if (output_lines && keybar_visible)
-            {
                 show_console_contents (output_start_y,
                                        LINES - keybar_visible -
                                        output_lines - 1, LINES - keybar_visible - 1);
-            }
         }
     }
 

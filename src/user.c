@@ -775,10 +775,7 @@ execute_menu_command (WEdit * edit_widget, const char *commands)
     fclose (cmd_file);
     chmod (file_name, S_IRWXU);
     if (run_view)
-    {
-        run_view = 0;
-        mcview_viewer (file_name, NULL, &run_view, 0);
-    }
+        mcview_viewer (file_name, NULL, 0);
     else
     {
         /* execute the command indirectly to allow execution even

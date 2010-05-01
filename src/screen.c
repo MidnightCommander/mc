@@ -2509,7 +2509,7 @@ do_enter_on_file_entry (file_entry * fe)
     }
 
     /* Try associated command */
-    if (regex_command (fe->fname, "Open", 0) != 0)
+    if (regex_command (fe->fname, "Open", NULL) != 0)
         return 1;
 
     /* Check if the file is executable */

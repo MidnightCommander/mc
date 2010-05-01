@@ -237,12 +237,13 @@ mcview_new (int y, int x, int lines, int cols, gboolean is_panel)
 /* --------------------------------------------------------------------------------------------- */
 
 /* Real view only */
-int
-mcview_viewer (const char *command, const char *file, int *move_dir_p, int start_line)
+mcview_ret_t
+mcview_viewer (const char *command, const char *file, int start_line)
 {
     gboolean succeeded;
     mcview_t *lc_mcview;
     Dlg_head *view_dlg;
+    mcview_ret_t ret;
 
     /* Create dialog and widgets, put them on the dialog */
     view_dlg = create_dlg (FALSE, 0, 0, LINES, COLS, NULL, mcview_dialog_callback,
@@ -259,17 +260,18 @@ mcview_viewer (const char *command, const char *file, int *move_dir_p, int start
     if (succeeded)
     {
         run_dlg (view_dlg);
-        if (move_dir_p)
-            *move_dir_p = lc_mcview->move_dir;
+
+        ret = lc_mcview->move_dir == 0 ? MCVIEW_EXIT_OK :
+              lc_mcview->move_dir > 0 ? MCVIEW_WANT_NEXT : MCVIEW_WANT_PREV;
     }
     else
     {
-        if (move_dir_p)
-            *move_dir_p = 0;
+        view_dlg->state = DLG_CLOSED;
+        ret = MCVIEW_EXIT_FAILURE;
     }
     destroy_dlg (view_dlg);
 
-    return succeeded;
+    return ret;
 }
 
 /* {{{ Miscellaneous functions }}} */

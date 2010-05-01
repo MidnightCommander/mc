@@ -11,6 +11,14 @@
 
 struct mcview_struct;
 
+typedef enum
+{
+    MCVIEW_EXIT_FAILURE = -1,
+    MCVIEW_EXIT_OK = 0,
+    MCVIEW_WANT_NEXT,
+    MCVIEW_WANT_PREV
+} mcview_ret_t;
+
 /*** enums *************************************************************/
 
 /*** structures declarations (and typedefs of structures)***************/
@@ -41,11 +49,9 @@ extern struct mcview_struct *mcview_new (int y, int x, int lines, int cols, gboo
 
 
 /* Shows {file} or the output of {command} in the internal viewer,
- * starting in line {start_line}. {move_dir_p} may be NULL or
- * point to a variable that will receive the direction in which the user
- * wants to move (-1 = previous file, 1 = next file, 0 = do nothing).
+ * starting in line {start_line}.
  */
-extern int mcview_viewer (const char *command, const char *file, int *move_dir_p, int start_line);
+extern mcview_ret_t mcview_viewer (const char *command, const char *file, int start_line);
 
 extern gboolean mcview_load (struct mcview_struct *, const char *, const char *, int);
 
