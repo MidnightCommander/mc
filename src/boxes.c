@@ -139,7 +139,7 @@ display_init (int radio_sel, char *init_text, int _check_status, char **_status)
     const int input_colors[3] =
     {
         INPUT_COLOR,
-        INPUT_INACTIVE_COLOR,
+        INPUT_UNCHANGED_COLOR,
         INPUT_MARK_COLOR
     };
 
@@ -1025,7 +1025,7 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain, c
     const int input_colors[3] =
     {
         INPUT_COLOR,
-        INPUT_INACTIVE_COLOR,
+        INPUT_UNCHANGED_COLOR,
         INPUT_MARK_COLOR
     };
 

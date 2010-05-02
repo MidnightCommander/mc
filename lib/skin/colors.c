@@ -222,7 +222,7 @@ mc_skin_color_cache_init (void)
     GAUGE_COLOR = mc_skin_color_get ("core", "gauge");
     INPUT_COLOR = mc_skin_color_get ("core", "input");
     INPUT_MARK_COLOR = mc_skin_color_get ("core", "inputmark");
-    INPUT_INACTIVE_COLOR = mc_skin_color_get ("core", "inputinactive");
+    INPUT_UNCHANGED_COLOR = mc_skin_color_get ("core", "inputunchanged");
 
     HELP_NORMAL_COLOR = mc_skin_color_get ("help", "_default_");
     HELP_ITALIC_COLOR = mc_skin_color_get ("help", "helpitalic");

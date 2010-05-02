@@ -315,7 +315,7 @@ editcmd_dialog_raw_key_query (const char *heading, const char *query, int cancel
     const int input_colors[3] =
     {
         INPUT_COLOR,
-        INPUT_INACTIVE_COLOR,
+        INPUT_UNCHANGED_COLOR,
         INPUT_MARK_COLOR
     };
 

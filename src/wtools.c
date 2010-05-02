@@ -370,7 +370,7 @@ quick_dialog_skip (QuickDialog *qd, int nskip)
     const int input_colors[3] =
     {
         INPUT_COLOR,
-        INPUT_INACTIVE_COLOR,
+        INPUT_UNCHANGED_COLOR,
         INPUT_MARK_COLOR
     };
 

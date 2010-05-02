@@ -102,12 +102,13 @@ typedef struct {
     Widget widget;
     int  point;		   /* cursor position in the input line in characters */
     int  mark;			/* The mark position in characters */
+    gboolean highlight;         /* There is a selected block */
     int  term_first_shown;	/* column of the first shown character */
     size_t current_max_size;	/* Maximum length of input line (bytes) */
     int  field_width;		/* width of the editing field */
     int  color;			/* color used */
     int  mark_color;		/* color for marked text */
-    int  inactive_color;	/* color for inactive text (Is first keystroke) */
+    int  unchanged_color;	/* color for inactive text (Is first keystroke) */
     gboolean first;		/* Is first keystroke? */
     int  disable_update;	/* Do we want to skip updates? */
     int  is_password;		/* Is this a password input line? */

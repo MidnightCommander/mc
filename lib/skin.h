@@ -45,7 +45,7 @@
  */
 #define GAUGE_COLOR               mc_skin_color__cache[19]
 #define INPUT_COLOR               mc_skin_color__cache[20]
-#define INPUT_INACTIVE_COLOR      mc_skin_color__cache[21]
+#define INPUT_UNCHANGED_COLOR     mc_skin_color__cache[21]
 #define INPUT_MARK_COLOR          mc_skin_color__cache[22]
 
 #define HELP_NORMAL_COLOR         mc_skin_color__cache[23]

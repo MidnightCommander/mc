@@ -255,6 +255,13 @@
 #define CK_InputPaste                  4025
 #define CK_InputClearLine              4026
 
+#define CK_InputLeftHighlight          4027
+#define CK_InputRightHighlight         4028
+#define CK_InputWordLeftHighlight      4029
+#define CK_InputWordRightHighlight     4030
+#define CK_InputBolHighlight           4031
+#define CK_InputEolHighlight           4032
+
 /* Viewer */
 #define CK_ViewHelp                     5001
 #define CK_ViewToggleWrapMode           5002
