@@ -69,7 +69,12 @@ int easy_patterns = 1;
  */
 int kilobyte_si = 0;
 
-
+/*
+ * Cache variable for the i18n_checktimelength function,
+ * initially set to a clearly invalid value to show that
+ * it hasn't been initialized yet.
+ */
+static size_t i18n_timelength_cache = MAX_I18NTIMELENGTH + 1;
 
 extern void
 str_replace (char *s, char from, char to)
@@ -693,13 +698,16 @@ load_mc_home_file (const char *_mc_home, const char *_mc_home_alt, const char *f
 }
 
 /* Check strftime() results. Some systems (i.e. Solaris) have different
-   short-month-name sizes for different locales */
+   short-month and month name sizes for different locales */
 size_t
 i18n_checktimelength (void)
 {
-    size_t length;
-    time_t testtime = time (NULL);
+    size_t length = 0;
+    const time_t testtime = time (NULL);
     struct tm *lt = localtime (&testtime);
+
+    if (i18n_timelength_cache <= MAX_I18NTIMELENGTH)
+        return i18n_timelength_cache;
 
     if (lt == NULL)
     {
@@ -709,14 +717,18 @@ i18n_checktimelength (void)
     else
     {
         char buf[MB_LEN_MAX * MAX_I18NTIMELENGTH + 1];
-        size_t a, b;
 
-        strftime (buf, sizeof (buf) - 1, FMTTIME, lt);
-        a = str_term_width1 (buf);
-        strftime (buf, sizeof (buf) - 1, FMTYEAR, lt);
-        b = str_term_width1 (buf);
+        /* We are interested in the longest possible date */
+        lt->tm_sec = lt->tm_min = lt->tm_hour = lt->tm_mday = 10;
 
-        length = max (a, b);
+        /* Loop through all months to find out the longest one */
+        for (lt->tm_mon = 0; lt->tm_mon < 12; lt->tm_mon++) {
+            strftime (buf, sizeof(buf) - 1, FMTTIME, lt);
+            length = max ((size_t) str_term_width1 (buf), length);
+            strftime (buf, sizeof(buf) - 1, FMTYEAR, lt);
+            length = max ((size_t) str_term_width1 (buf), length);
+        }
+
         length = max ((size_t) str_term_width1 (_(INVALID_TIME_TEXT)), length);
     }
 
@@ -724,7 +736,10 @@ i18n_checktimelength (void)
     if (length > MAX_I18NTIMELENGTH || length < MIN_I18NTIMELENGTH)
         length = STD_I18NTIMELENGTH;
 
-    return length;
+    /* Save obtained value to the cache */
+    i18n_timelength_cache = length;
+
+    return i18n_timelength_cache;
 }
 
 const char *
