@@ -1,2 +1,3 @@
-See
-git log
+For the major changes since the last release please see doc/NEWS. For
+the detailed commit log please refer to the output of 'git log' against
+a checked out copy of the repository.
