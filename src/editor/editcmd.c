@@ -2505,8 +2505,6 @@ edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
          */
         tmp = g_strconcat (" ", home_dir, PATH_SEP_STR EDIT_DIR, shell_cmd, " ", quoted_name,
                            " ", home_dir, PATH_SEP_STR EDIT_BLOCK_FILE " /dev/null", (char *) NULL);
-        system (tmp);
-        g_free (tmp);
     }
     else
     {
@@ -2517,9 +2515,9 @@ edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
          */
         tmp = g_strconcat (" ", home_dir, PATH_SEP_STR EDIT_DIR, shell_cmd, " ",
                            quoted_name, (char *) NULL);
-        system (tmp);
-        g_free (tmp);
     }
+    system (tmp);
+    g_free (tmp);
     g_free (quoted_name);
     close_error_pipe (D_NORMAL, NULL);
 

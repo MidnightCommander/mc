@@ -390,8 +390,8 @@ background_attention (int fd, void *closure)
 	    write (to_child_fd, &len, sizeof (len));
 	    if (len){
 		write (to_child_fd, resstr, len);
-		g_free (resstr);
 	    }
+	    g_free (resstr);
 	} else {
 	    len = 0;
 	    write (to_child_fd, &len, sizeof (len));

@@ -93,9 +93,7 @@ out:
     end_line = lastline;
 
   lc_index = (end_line - begin_line) * columns;
-  bytes = lc_index;
-  if (lc_index != bytes)
-    bytes = 0;
+
   write (1, &bytes, 2);
   if (! bytes)
     return;
