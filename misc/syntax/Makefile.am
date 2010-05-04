@@ -26,6 +26,7 @@ SYNTAXFILES =			\
 	haskell.syntax		\
 	html.syntax		\
 	idl.syntax		\
+	ini.syntax		\
 	j.syntax		\
 	java.syntax		\
 	js.syntax		\
