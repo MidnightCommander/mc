@@ -416,8 +416,8 @@ warn_same_file (const char *fmt, const char *a, const char *b)
     union
     {
         void *p;
-        FileProgressStatus (*f) (enum OperationMode, const char *fmt,
-                                 const char *a, const char *b);
+          FileProgressStatus (*f) (enum OperationMode, const char *fmt,
+                                   const char *a, const char *b);
     } pntr;
     pntr.f = real_warn_same_file;
 
@@ -1991,7 +1991,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
 {
     WPanel *panel = (WPanel *) source_panel;
     const gboolean single_entry = force_single || (panel->marked <= 1)
-                                    || (get_current_type () == view_tree);
+        || (get_current_type () == view_tree);
 
     char *source = NULL;
 #ifdef WITH_FULL_PATHS
@@ -2003,6 +2003,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     char *temp = NULL;
     char *save_cwd = NULL, *save_dest = NULL;
     struct stat src_stat;
+    gboolean ret_val = TRUE;
     int i;
     FileProgressStatus value;
     FileOpContext *ctx;
@@ -2197,8 +2198,12 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
         /* We now have ETA in all cases */
 
         /* One file: FIXME mc_chdir will take user out of any vfs */
-        if (operation != OP_COPY && get_current_type () == view_tree)
-            mc_chdir (PATH_SEP_STR);
+        if ((operation != OP_COPY) && (get_current_type () == view_tree) &&
+            (mc_chdir (PATH_SEP_STR) < 0))
+        {
+            ret_val = FALSE;
+            goto clean_up;
+        }
 
         /* The source and src_stat variables have been initialized before */
 #ifdef WITH_FULL_PATHS
@@ -2417,7 +2422,9 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
 #endif /* WITH_BACKGROUND */
 
     file_op_context_destroy (ctx);
-    return TRUE;
+    file_op_total_context_destroy (tctx);
+
+    return ret_val;
 }
 
 /* }}} */
@@ -2557,8 +2564,8 @@ query_replace (FileOpContext * ctx, const char *destname, struct stat *_s_stat,
     union
     {
         void *p;
-        FileProgressStatus (*f) (FileOpContext *, enum OperationMode, const char *,
-                                 struct stat *, struct stat *);
+          FileProgressStatus (*f) (FileOpContext *, enum OperationMode, const char *,
+                                   struct stat *, struct stat *);
     } pntr;
     pntr.f = file_progress_real_query_replace;
 

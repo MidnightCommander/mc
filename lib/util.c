@@ -1241,6 +1241,7 @@ mc_util_write_backup_content (const char *from_file_name, const char *to_file_na
     FILE *backup_fd;
     char *contents;
     gsize length;
+    gboolean ret1 = TRUE;
 
     if (!g_file_get_contents (from_file_name, &contents, &length, NULL))
         return FALSE;
@@ -1252,12 +1253,15 @@ mc_util_write_backup_content (const char *from_file_name, const char *to_file_na
         return FALSE;
     }
 
-    fwrite ((const void *) contents, length, 1, backup_fd);
-
-    fflush (backup_fd);
-    fclose (backup_fd);
+    if (fwrite ((const void *) contents, length, 1, backup_fd) != length)
+        ret1 = FALSE;
+    {
+        int ret2;
+        ret2 = fflush (backup_fd);
+        ret2 = fclose (backup_fd);
+    }
     g_free (contents);
-    return TRUE;
+    return ret1;
 }
 
 /* Finds out a relative path from first to second, i.e. goes as many ..

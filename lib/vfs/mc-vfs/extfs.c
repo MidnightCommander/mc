@@ -597,8 +597,7 @@ extfs_which (struct vfs_class *me, const char *path)
         info = &g_array_index (extfs_plugins, extfs_plugin_info_t, i);
 
         if ((strncmp (path, info->prefix, path_len) == 0)
-                && ((info->prefix[path_len] == '\0')
-                    || (info->prefix[path_len] == '+')))
+            && ((info->prefix[path_len] == '\0') || (info->prefix[path_len] == '+')))
             return i;
     }
     return -1;
@@ -706,7 +705,7 @@ extfs_resolve_symlinks_int (struct entry *entry, GSList * list)
 
         looping = g_slist_prepend (list, entry);
         pent = extfs_find_entry_int (entry->dir, entry->inode->linkname, looping, FALSE, FALSE);
-        g_slist_delete_link (looping, looping);
+        looping = g_slist_delete_link (looping, looping);
 
         if (pent == NULL)
             my_errno = ENOENT;

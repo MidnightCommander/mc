@@ -3,8 +3,8 @@
    2003, 2004, 2005, 2006, 2007, 2009 Free Software Foundation, Inc.
 
    Written by: 1994, 1995, 1996, 1997 Miguel de Icaza
-               1994, 1995 Janne Kukonlehto
-	       1997 Norbert Warmuth
+   1994, 1995 Janne Kukonlehto
+   1997 Norbert Warmuth
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -37,25 +37,25 @@
 #include <sys/stat.h>
 #include <sys/wait.h>
 #include <unistd.h>
-#include <pwd.h>		/* for username in xterm title */
+#include <pwd.h>                /* for username in xterm title */
 
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"
 #include "lib/tty/mouse.h"
-#include "lib/tty/key.h"		/* For init_key() */
-#include "lib/tty/win.h"		/* xterm_flag */
+#include "lib/tty/key.h"        /* For init_key() */
+#include "lib/tty/win.h"        /* xterm_flag */
 
 #include "lib/skin.h"
 
 #include "lib/mcconfig.h"
 #include "lib/filehighlight.h"
-#include "lib/fileloc.h"		/* MC_USERCONF_DIR */
+#include "lib/fileloc.h"        /* MC_USERCONF_DIR */
 
-#include "lib/vfs/mc-vfs/vfs.h"		/* vfs_translate_url() */
+#include "lib/vfs/mc-vfs/vfs.h" /* vfs_translate_url() */
 
 #ifdef ENABLE_VFS_SMB
-#include "lib/vfs/mc-vfs/smbfs.h"	/* smbfs_set_debug() */
+#include "lib/vfs/mc-vfs/smbfs.h"       /* smbfs_set_debug() */
 #endif /* ENABLE_VFS_SMB */
 
 #ifdef ENABLE_VFS
@@ -75,21 +75,21 @@
 #include "treestore.h"
 #include "consaver/cons.saver.h"
 #include "subshell.h"
-#include "setup.h"		/* save_setup() */
-#include "boxes.h"		/* sort_box() */
+#include "setup.h"              /* save_setup() */
+#include "boxes.h"              /* sort_box() */
 #include "layout.h"
-#include "cmd.h"		/* Normal commands */
+#include "cmd.h"                /* Normal commands */
 #include "hotlist.h"
 #include "panelize.h"
-#include "learn.h"		/* learn_keys() */
+#include "learn.h"              /* learn_keys() */
 #include "listmode.h"
 #include "execute.h"
-#include "ext.h"		/* For flush_extension_file() */
+#include "ext.h"                /* For flush_extension_file() */
 #include "widget.h"
 #include "command.h"
 #include "wtools.h"
-#include "cmddef.h"		/* CK_ cmd name const */
-#include "user.h"		/* user_file_menu_cmd() */
+#include "cmddef.h"             /* CK_ cmd name const */
+#include "user.h"               /* user_file_menu_cmd() */
 
 #include "chmod.h"
 #include "chown.h"
@@ -110,7 +110,7 @@
 #endif
 
 
-#include "keybind.h"		/* type global_keymap_t */
+#include "keybind.h"            /* type global_keymap_t */
 
 /* When the modes are active, left_panel, right_panel and tree_panel */
 /* Point to a proper data structure.  You should check with the functions */
@@ -171,7 +171,7 @@ int auto_save_setup = 1;
  */
 #define full_eight_bits (1)
 #define eight_bit_clean (1)
-#else				/* HAVE_CHARSET */
+#else /* HAVE_CHARSET */
 /* If true, allow characters in the range 160-255 */
 int eight_bit_clean = 1;
 /*
@@ -179,13 +179,13 @@ int eight_bit_clean = 1;
  * This is reported to break on many terminals (xterm, qansi-m).
  */
 int full_eight_bits = 0;
-#endif				/* !HAVE_CHARSET */
+#endif /* !HAVE_CHARSET */
 
 /*
  * If utf-8 terminal utf8_display = 1
  * Display bits set UTF-8
  *
-*/
+ */
 int utf8_display = 0;
 
 /* If true use the internal viewer */
@@ -297,7 +297,7 @@ char *mc_home_alt = NULL;
 GQuark
 mc_main_error_quark (void)
 {
-  return g_quark_from_static_string (PACKAGE);
+    return g_quark_from_static_string (PACKAGE);
 }
 
 #ifdef USE_INTERNAL_EDIT
@@ -323,10 +323,11 @@ const global_keymap_t *main_x_map;
 void
 save_cwds_stat (void)
 {
-    if (fast_reload) {
-	mc_stat (current_panel->cwd, &(current_panel->dir_stat));
-	if (get_other_type () == view_listing)
-	    mc_stat (other_panel->cwd, &(other_panel->dir_stat));
+    if (fast_reload)
+    {
+        mc_stat (current_panel->cwd, &(current_panel->dir_stat));
+        if (get_other_type () == view_listing)
+            mc_stat (other_panel->cwd, &(other_panel->dir_stat));
     }
 }
 
@@ -334,13 +335,14 @@ save_cwds_stat (void)
 void
 do_update_prompt (void)
 {
-    if (update_prompt) {
-	printf ("\r\n%s", subshell_prompt);
-	fflush (stdout);
-	update_prompt = 0;
+    if (update_prompt)
+    {
+        printf ("\r\n%s", subshell_prompt);
+        fflush (stdout);
+        update_prompt = 0;
     }
 }
-#endif				/* HAVE_SUBSHELL_SUPPORT */
+#endif /* HAVE_SUBSHELL_SUPPORT */
 
 void
 change_panel (void)
@@ -355,8 +357,9 @@ static void
 stop_dialogs (void)
 {
     midnight_dlg->running = 0;
-    if (current_dlg) {
-	current_dlg->running = 0;
+    if (current_dlg)
+    {
+        current_dlg->running = 0;
     }
 }
 
@@ -365,25 +368,29 @@ quit_cmd_internal (int quiet)
 {
     int q = quit;
 
-    if (quiet || !confirm_exit) {
-	q = 1;
-    } else {
-	if (query_dialog
-	    (_(" The Midnight Commander "),
-	     _(" Do you really want to quit the Midnight Commander? "), D_NORMAL,
-	     2, _("&Yes"), _("&No")) == 0)
-	    q = 1;
+    if (quiet || !confirm_exit)
+    {
+        q = 1;
     }
-    if (q) {
-#ifdef HAVE_SUBSHELL_SUPPORT
-	if (!use_subshell)
-	    stop_dialogs ();
-	else if ((q = exit_subshell ()))
-#endif
-	    stop_dialogs ();
+    else
+    {
+        if (query_dialog
+            (_(" The Midnight Commander "),
+             _(" Do you really want to quit the Midnight Commander? "), D_NORMAL,
+             2, _("&Yes"), _("&No")) == 0)
+            q = 1;
     }
     if (q)
-	quit |= 1;
+    {
+#ifdef HAVE_SUBSHELL_SUPPORT
+        if (!use_subshell)
+            stop_dialogs ();
+        else if ((q = exit_subshell ()))
+#endif
+            stop_dialogs ();
+    }
+    if (q)
+        quit |= 1;
     return quit;
 }
 
@@ -405,11 +412,12 @@ void
 subshell_chdir (const char *directory)
 {
 #ifdef HAVE_SUBSHELL_SUPPORT
-    if (use_subshell) {
-	if (vfs_current_is_local ())
-	    do_subshell_chdir (directory, 0, 1);
+    if (use_subshell)
+    {
+        if (vfs_current_is_local ())
+            do_subshell_chdir (directory, 0, 1);
     }
-#endif				/* HAVE_SUBSHELL_SUPPORT */
+#endif /* HAVE_SUBSHELL_SUPPORT */
 }
 
 void
@@ -434,11 +442,12 @@ get_parent_dir_name (const char *cwd, const char *lwd)
 {
     const char *p;
     if (strlen (lwd) > strlen (cwd))
-	if ((p = strrchr (lwd, PATH_SEP)) && !strncmp (cwd, lwd, p - lwd) &&
-	 ((gsize)strlen (cwd) == (gsize) p - (gsize) lwd || (p == lwd && cwd[0] == PATH_SEP &&
-	  cwd[1] == '\0'))) {
-	    return (p + 1);
-	}
+        if ((p = strrchr (lwd, PATH_SEP)) && !strncmp (cwd, lwd, p - lwd) &&
+            ((gsize) strlen (cwd) == (gsize) p - (gsize) lwd || (p == lwd && cwd[0] == PATH_SEP &&
+                                                                 cwd[1] == '\0')))
+        {
+            return (p + 1);
+        }
     return NULL;
 }
 
@@ -447,16 +456,17 @@ get_parent_dir_name (const char *cwd, const char *lwd)
  * Don't record change in the directory history.
  */
 static int
-_do_panel_cd (WPanel *panel, const char *new_dir, enum cd_enum cd_type)
+_do_panel_cd (WPanel * panel, const char *new_dir, enum cd_enum cd_type)
 {
     const char *directory;
     char *olddir;
     char temp[MC_MAXPATHLEN];
     char *translated_url;
 
-    if (cd_type == cd_parse_command) {
-	while (*new_dir == ' ')
-	    new_dir++;
+    if (cd_type == cd_parse_command)
+    {
+        while (*new_dir == ' ')
+            new_dir++;
     }
 
     olddir = g_strdup (panel->cwd);
@@ -464,19 +474,22 @@ _do_panel_cd (WPanel *panel, const char *new_dir, enum cd_enum cd_type)
 
     /* Convert *new_path to a suitable pathname, handle ~user */
 
-    if (cd_type == cd_parse_command) {
-	if (!strcmp (new_dir, "-")) {
-	    strcpy (temp, panel->lwd);
-	    new_dir = temp;
-	}
+    if (cd_type == cd_parse_command)
+    {
+        if (!strcmp (new_dir, "-"))
+        {
+            strcpy (temp, panel->lwd);
+            new_dir = temp;
+        }
     }
     directory = *new_dir ? new_dir : home_dir;
 
-    if (mc_chdir (directory) == -1) {
-	strcpy (panel->cwd, olddir);
-	g_free (olddir);
-	g_free (translated_url);
-	return 0;
+    if (mc_chdir (directory) == -1)
+    {
+        strcpy (panel->cwd, olddir);
+        g_free (olddir);
+        g_free (translated_url);
+        return 0;
     }
     g_free (translated_url);
 
@@ -493,9 +506,8 @@ _do_panel_cd (WPanel *panel, const char *new_dir, enum cd_enum cd_type)
     /* Reload current panel */
     panel_clean_dir (panel);
     panel->count =
-	do_load_dir (panel->cwd, &panel->dir, panel->current_sort_field->sort_routine,
-		     panel->reverse, panel->case_sensitive,
-		     panel->exec_first, panel->filter);
+        do_load_dir (panel->cwd, &panel->dir, panel->current_sort_field->sort_routine,
+                     panel->reverse, panel->case_sensitive, panel->exec_first, panel->filter);
     try_to_select (panel, get_parent_dir_name (panel->cwd, olddir));
     load_hint (0);
     panel->dirty = 1;
@@ -517,7 +529,7 @@ do_panel_cd (struct WPanel *panel, const char *new_dir, enum cd_enum cd_type)
 
     r = _do_panel_cd (panel, new_dir, cd_type);
     if (r)
-	directory_history_add (panel, panel->cwd);
+        directory_history_add (panel, panel->cwd);
     return r;
 }
 
@@ -528,46 +540,47 @@ do_cd (const char *new_dir, enum cd_enum exact)
 }
 
 void
-directory_history_next (WPanel *panel)
+directory_history_next (WPanel * panel)
 {
     GList *nextdir;
 
     nextdir = g_list_next (panel->dir_history);
 
     if (!nextdir)
-	return;
+        return;
 
     if (_do_panel_cd (panel, (char *) nextdir->data, cd_exact))
-	panel->dir_history = nextdir;
+        panel->dir_history = nextdir;
 }
 
 void
-directory_history_prev (WPanel *panel)
+directory_history_prev (WPanel * panel)
 {
     GList *prevdir;
 
     prevdir = g_list_previous (panel->dir_history);
 
     if (!prevdir)
-	return;
+        return;
 
     if (_do_panel_cd (panel, (char *) prevdir->data, cd_exact))
-	panel->dir_history = prevdir;
+        panel->dir_history = prevdir;
 }
 
 void
-directory_history_list (WPanel *panel)
+directory_history_list (WPanel * panel)
 {
     char *s;
 
     s = show_hist (&panel->dir_history, &panel->widget);
 
-    if (s != NULL) {
-	if (_do_panel_cd (panel, s, cd_exact))
-	    directory_history_add (panel, panel->cwd);
-	else
-	    message (D_ERROR, MSG_ERROR, _("Cannot change directory"));
-	g_free (s);
+    if (s != NULL)
+    {
+        if (_do_panel_cd (panel, s, cd_exact))
+            directory_history_add (panel, panel->cwd);
+        else
+            message (D_ERROR, MSG_ERROR, _("Cannot change directory"));
+        g_free (s);
     }
 }
 
@@ -579,37 +592,38 @@ load_prompt (int fd, void *unused)
     (void) unused;
 
     if (!read_subshell_prompt ())
-	return 0;
+        return 0;
 
     /* Don't actually change the prompt if it's invisible */
-    if (current_dlg == midnight_dlg && command_prompt) {
-	char *tmp_prompt;
-	int prompt_len;
+    if (current_dlg == midnight_dlg && command_prompt)
+    {
+        char *tmp_prompt;
+        int prompt_len;
 
-	tmp_prompt = strip_ctrl_codes (subshell_prompt);
-	prompt_len = str_term_width1 (tmp_prompt);
+        tmp_prompt = strip_ctrl_codes (subshell_prompt);
+        prompt_len = str_term_width1 (tmp_prompt);
 
-	/* Check for prompts too big */
-	if (COLS > 8 && prompt_len > COLS - 8) {
-	    tmp_prompt[COLS - 8] = '\0';
-	    prompt_len = COLS - 8;
-	}
-	mc_prompt = tmp_prompt;
-	label_set_text (the_prompt, mc_prompt);
-	winput_set_origin ((WInput *) cmdline, prompt_len,
-			   COLS - prompt_len);
+        /* Check for prompts too big */
+        if (COLS > 8 && prompt_len > COLS - 8)
+        {
+            tmp_prompt[COLS - 8] = '\0';
+            prompt_len = COLS - 8;
+        }
+        mc_prompt = tmp_prompt;
+        label_set_text (the_prompt, mc_prompt);
+        winput_set_origin ((WInput *) cmdline, prompt_len, COLS - prompt_len);
 
-	/* since the prompt has changed, and we are called from one of the
-	 * tty_get_event channels, the prompt updating does not take place
-	 * automatically: force a cursor update and a screen refresh
-	 */
-	update_cursor (midnight_dlg);
-	mc_refresh ();
+        /* since the prompt has changed, and we are called from one of the
+         * tty_get_event channels, the prompt updating does not take place
+         * automatically: force a cursor update and a screen refresh
+         */
+        update_cursor (midnight_dlg);
+        mc_refresh ();
     }
     update_prompt = 1;
     return 0;
 }
-#endif				/* HAVE_SUBSHELL_SUPPORT */
+#endif /* HAVE_SUBSHELL_SUPPORT */
 
 void
 sort_cmd (void)
@@ -618,12 +632,10 @@ sort_cmd (void)
     const panel_field_t *sort_order;
 
     if (!SELECTED_IS_PANEL)
-	return;
+        return;
 
     p = MENU_PANEL;
-    sort_order = sort_box (p->current_sort_field, &p->reverse,
-			   &p->case_sensitive,
-			   &p->exec_first);
+    sort_order = sort_box (p->current_sort_field, &p->reverse, &p->case_sensitive, &p->exec_first);
 
     panel_set_sort_order (p, sort_order);
 
@@ -635,9 +647,10 @@ treebox_cmd (void)
     char *sel_dir;
 
     sel_dir = tree_box (selection (current_panel)->fname);
-    if (sel_dir) {
-	do_cd (sel_dir, cd_exact);
-	g_free (sel_dir);
+    if (sel_dir)
+    {
+        do_cd (sel_dir, cd_exact);
+        g_free (sel_dir);
     }
 }
 
@@ -648,11 +661,11 @@ listmode_cmd (void)
     char *newmode;
 
     if (get_current_type () != view_listing)
-	return;
+        return;
 
     newmode = listmode_edit (current_panel->user_format);
     if (!newmode)
-	return;
+        return;
 
     g_free (current_panel->user_format);
     current_panel->list_type = list_user;
@@ -661,7 +674,7 @@ listmode_cmd (void)
 
     do_refresh ();
 }
-#endif				/* LISTMODE_EDITOR */
+#endif /* LISTMODE_EDITOR */
 
 /* NOTICE: hotkeys specified here are overriden in menubar_paint_idx (alex) */
 static GList *
@@ -670,30 +683,31 @@ create_panel_menu (void)
     GList *entries = NULL;
 
     entries = g_list_append (entries, menu_entry_create (_("&Listing mode..."), CK_ListingCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Quick view"),      CK_QuickViewCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Info" ),           CK_InfoCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Tree"),            CK_TreeCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Quick view"), CK_QuickViewCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Info"), CK_InfoCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Tree"), CK_TreeCmd));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&Sort order..."),   CK_Sort));
+    entries = g_list_append (entries, menu_entry_create (_("&Sort order..."), CK_Sort));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&Filter..."),       CK_FilterCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Filter..."), CK_FilterCmd));
 #ifdef HAVE_CHARSET
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&Encoding..."),     CK_PanelSetPanelEncoding));
+    entries =
+        g_list_append (entries, menu_entry_create (_("&Encoding..."), CK_PanelSetPanelEncoding));
 #endif
 #ifdef USE_NETCODE
     entries = g_list_append (entries, menu_separator_create ());
 #ifdef ENABLE_VFS_MCFS
     entries = g_list_append (entries, menu_entry_create (_("&Network link..."), CK_NetlinkCmd));
 #endif
-    entries = g_list_append (entries, menu_entry_create (_("FT&P link..."),     CK_FtplinkCmd));
-    entries = g_list_append (entries, menu_entry_create (_("S&hell link..."),   CK_FishlinkCmd));
+    entries = g_list_append (entries, menu_entry_create (_("FT&P link..."), CK_FtplinkCmd));
+    entries = g_list_append (entries, menu_entry_create (_("S&hell link..."), CK_FishlinkCmd));
 #ifdef ENABLE_VFS_SMB
-    entries = g_list_append (entries, menu_entry_create (_("SM&B link..."),     CK_SmblinkCmd));
+    entries = g_list_append (entries, menu_entry_create (_("SM&B link..."), CK_SmblinkCmd));
 #endif /* ENABLE_VFS_SMB */
 #endif
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&Rescan"),          CK_RereadCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Rescan"), CK_RereadCmd));
 
     return entries;
 }
@@ -703,27 +717,30 @@ create_file_menu (void)
 {
     GList *entries = NULL;
 
-    entries = g_list_append (entries, menu_entry_create (_("&View"),              CK_ViewCmd));
-    entries = g_list_append (entries, menu_entry_create (_("Vie&w file..."),      CK_ViewFileCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Filtered view"),     CK_FilteredViewCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Edit"),              CK_EditCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Copy"),              CK_CopyCmd));
-    entries = g_list_append (entries, menu_entry_create (_("C&hmod"),             CK_ChmodCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Link"),              CK_LinkCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&SymLink"),           CK_SymlinkCmd));
-    entries = g_list_append (entries, menu_entry_create (_("Edit s&ymlink"),      CK_EditSymlinkCmd));
-    entries = g_list_append (entries, menu_entry_create (_("Ch&own"),             CK_ChownCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Advanced chown"),    CK_ChownAdvancedCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Rename/Move"),       CK_RenameCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Mkdir"),             CK_MkdirCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Delete"),            CK_DeleteCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Quick cd"),          CK_QuickCdCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&View"), CK_ViewCmd));
+    entries = g_list_append (entries, menu_entry_create (_("Vie&w file..."), CK_ViewFileCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Filtered view"), CK_FilteredViewCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Edit"), CK_EditCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Copy"), CK_CopyCmd));
+    entries = g_list_append (entries, menu_entry_create (_("C&hmod"), CK_ChmodCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Link"), CK_LinkCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&SymLink"), CK_SymlinkCmd));
+    entries = g_list_append (entries, menu_entry_create (_("Edit s&ymlink"), CK_EditSymlinkCmd));
+    entries = g_list_append (entries, menu_entry_create (_("Ch&own"), CK_ChownCmd));
+    entries =
+        g_list_append (entries, menu_entry_create (_("&Advanced chown"), CK_ChownAdvancedCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Rename/Move"), CK_RenameCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Mkdir"), CK_MkdirCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Delete"), CK_DeleteCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Quick cd"), CK_QuickCdCmd));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("Select &group"),      CK_SelectCmd));
-    entries = g_list_append (entries, menu_entry_create (_("U&nselect group"),    CK_UnselectCmd));
-    entries = g_list_append (entries, menu_entry_create (_("Reverse selec&tion"), CK_ReverseSelectionCmd));
+    entries = g_list_append (entries, menu_entry_create (_("Select &group"), CK_SelectCmd));
+    entries = g_list_append (entries, menu_entry_create (_("U&nselect group"), CK_UnselectCmd));
+    entries =
+        g_list_append (entries,
+                       menu_entry_create (_("Reverse selec&tion"), CK_ReverseSelectionCmd));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("E&xit"),              CK_QuitCmd));
+    entries = g_list_append (entries, menu_entry_create (_("E&xit"), CK_QuitCmd));
 
     return entries;
 }
@@ -737,39 +754,51 @@ create_command_menu (void)
      */
     GList *entries = NULL;
 
-    entries = g_list_append (entries, menu_entry_create (_("&User menu"),                    CK_UserMenuCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Directory tree"),               CK_TreeBoxCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Find file"),                    CK_FindCmd));
-    entries = g_list_append (entries, menu_entry_create (_("S&wap panels"),                  CK_SwapCmd));
-    entries = g_list_append (entries, menu_entry_create (_("Switch &panels on/off"),         CK_ShowCommandLine));
-    entries = g_list_append (entries, menu_entry_create (_("&Compare directories"),          CK_CompareDirsCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&User menu"), CK_UserMenuCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Directory tree"), CK_TreeBoxCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Find file"), CK_FindCmd));
+    entries = g_list_append (entries, menu_entry_create (_("S&wap panels"), CK_SwapCmd));
+    entries =
+        g_list_append (entries, menu_entry_create (_("Switch &panels on/off"), CK_ShowCommandLine));
+    entries =
+        g_list_append (entries, menu_entry_create (_("&Compare directories"), CK_CompareDirsCmd));
 #ifdef USE_DIFF_VIEW
-    entries = g_list_append (entries, menu_entry_create (_("&View diff files"),              CK_DiffViewCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&View diff files"), CK_DiffViewCmd));
 #endif
-    entries = g_list_append (entries, menu_entry_create (_("E&xternal panelize"),            CK_ExternalPanelize));
-    entries = g_list_append (entries, menu_entry_create (_("Show directory s&izes"),         CK_SingleDirsizeCmd));
+    entries =
+        g_list_append (entries, menu_entry_create (_("E&xternal panelize"), CK_ExternalPanelize));
+    entries =
+        g_list_append (entries,
+                       menu_entry_create (_("Show directory s&izes"), CK_SingleDirsizeCmd));
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("Command &history"),              CK_HistoryCmd));
-    entries = g_list_append (entries, menu_entry_create (_("Di&rectory hotlist"),            CK_QuickChdirCmd));
+    entries = g_list_append (entries, menu_entry_create (_("Command &history"), CK_HistoryCmd));
+    entries =
+        g_list_append (entries, menu_entry_create (_("Di&rectory hotlist"), CK_QuickChdirCmd));
 #ifdef ENABLE_VFS
-    entries = g_list_append (entries, menu_entry_create (_("&Active VFS list"),              CK_ReselectVfs));
+    entries = g_list_append (entries, menu_entry_create (_("&Active VFS list"), CK_ReselectVfs));
 #endif
 #ifdef WITH_BACKGROUND
-    entries = g_list_append (entries, menu_entry_create (_("&Background jobs"),              CK_JobsCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Background jobs"), CK_JobsCmd));
 #endif
     entries = g_list_append (entries, menu_separator_create ());
 #ifdef USE_EXT2FSLIB
-    entries = g_list_append (entries, menu_entry_create (_("&Undelete files (ext2fs only)"), CK_UndeleteCmd));
+    entries =
+        g_list_append (entries,
+                       menu_entry_create (_("&Undelete files (ext2fs only)"), CK_UndeleteCmd));
 #endif
 #ifdef LISTMODE_EDITOR
-    entries = g_list_append (entries, menu_entry_create (_("&Listing format edit"),          CK_ListmodeCmd));
+    entries =
+        g_list_append (entries, menu_entry_create (_("&Listing format edit"), CK_ListmodeCmd));
 #endif
 #if defined (USE_EXT2FSLIB) || defined (LISTMODE_EDITOR)
     entries = g_list_append (entries, menu_separator_create ());
 #endif
-    entries = g_list_append (entries, menu_entry_create (_("Edit &extension file"),          CK_EditExtFileCmd));
-    entries = g_list_append (entries, menu_entry_create (_("Edit &menu file"),               CK_EditMcMenuCmd));
-    entries = g_list_append (entries, menu_entry_create (_("Edit hi&ghlighting group file"), CK_EditFhlFileCmd));
+    entries =
+        g_list_append (entries, menu_entry_create (_("Edit &extension file"), CK_EditExtFileCmd));
+    entries = g_list_append (entries, menu_entry_create (_("Edit &menu file"), CK_EditMcMenuCmd));
+    entries =
+        g_list_append (entries,
+                       menu_entry_create (_("Edit hi&ghlighting group file"), CK_EditFhlFileCmd));
 
     return entries;
 }
@@ -780,15 +809,15 @@ create_options_menu (void)
     GList *entries = NULL;
 
     entries = g_list_append (entries, menu_entry_create (_("&Configuration..."), CK_ConfigureBox));
-    entries = g_list_append (entries, menu_entry_create (_("&Layout..."),        CK_LayoutCmd));
-    entries = g_list_append (entries, menu_entry_create (_("C&onfirmation..."),  CK_ConfirmBox));
-    entries = g_list_append (entries, menu_entry_create (_("&Display bits..."),  CK_DisplayBitsBox));
-    entries = g_list_append (entries, menu_entry_create (_("Learn &keys..."),    CK_LearnKeys));
+    entries = g_list_append (entries, menu_entry_create (_("&Layout..."), CK_LayoutCmd));
+    entries = g_list_append (entries, menu_entry_create (_("C&onfirmation..."), CK_ConfirmBox));
+    entries = g_list_append (entries, menu_entry_create (_("&Display bits..."), CK_DisplayBitsBox));
+    entries = g_list_append (entries, menu_entry_create (_("Learn &keys..."), CK_LearnKeys));
 #ifdef ENABLE_VFS
-    entries = g_list_append (entries, menu_entry_create (_("&Virtual FS..."),    CK_ConfigureVfs));
+    entries = g_list_append (entries, menu_entry_create (_("&Virtual FS..."), CK_ConfigureVfs));
 #endif
     entries = g_list_append (entries, menu_separator_create ());
-    entries = g_list_append (entries, menu_entry_create (_("&Save setup"),       CK_SaveSetupCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Save setup"), CK_SaveSetupCmd));
 
     return entries;
 }
@@ -797,17 +826,16 @@ void
 init_menu (void)
 {
     menubar_add_menu (the_menubar,
-	create_menu (horizontal_split ? _("&Above") : _("&Left"),
-					create_panel_menu (),   "[Left and Right Menus]"));
+                      create_menu (horizontal_split ? _("&Above") : _("&Left"),
+                                   create_panel_menu (), "[Left and Right Menus]"));
+    menubar_add_menu (the_menubar, create_menu (_("&File"), create_file_menu (), "[File Menu]"));
     menubar_add_menu (the_menubar,
-	create_menu (_("&File"),	create_file_menu (),    "[File Menu]"));
+                      create_menu (_("&Command"), create_command_menu (), "[Command Menu]"));
     menubar_add_menu (the_menubar,
-	create_menu (_("&Command"),	create_command_menu (), "[Command Menu]"));
+                      create_menu (_("&Options"), create_options_menu (), "[Options Menu]"));
     menubar_add_menu (the_menubar,
-	create_menu (_("&Options"),	create_options_menu (), "[Options Menu]"));
-    menubar_add_menu (the_menubar,
-	create_menu (horizontal_split ? _("&Below") : _("&Right"),
-					create_panel_menu (),   "[Left and Right Menus]"));
+                      create_menu (horizontal_split ? _("&Below") : _("&Right"),
+                                   create_panel_menu (), "[Left and Right Menus]"));
 }
 
 void
@@ -829,12 +857,12 @@ static void
 menu_cmd (void)
 {
     if (the_menubar->is_active)
-	return;
+        return;
 
     if ((get_current_index () == 0) == (current_panel->active != 0))
-	the_menubar->selected = 0;
+        the_menubar->selected = 0;
     else
-	the_menubar->selected = g_list_length (the_menubar->menu) - 1;
+        the_menubar->selected = g_list_length (the_menubar->menu) - 1;
     menu_last_selected_cmd ();
 }
 
@@ -846,17 +874,17 @@ midnight_get_shortcut (unsigned long command)
 
     shortcut = lookup_keymap_shortcut (main_map, command);
     if (shortcut != NULL)
-	return g_strdup (shortcut);
+        return g_strdup (shortcut);
 
     shortcut = lookup_keymap_shortcut (panel_map, command);
     if (shortcut != NULL)
-	return g_strdup (shortcut);
+        return g_strdup (shortcut);
 
     ext_map = lookup_keymap_shortcut (main_map, CK_StartExtMap1);
     if (ext_map != NULL)
-	shortcut = lookup_keymap_shortcut (main_x_map, command);
+        shortcut = lookup_keymap_shortcut (main_x_map, command);
     if (shortcut != NULL)
-	return g_strdup_printf ("%s %s", ext_map, shortcut);
+        return g_strdup_printf ("%s %s", ext_map, shortcut);
 
     return NULL;
 }
@@ -866,14 +894,15 @@ void
 toggle_fast_reload (void)
 {
     fast_reload = !fast_reload;
-    if (fast_reload_w == 0 && fast_reload) {
-	message (D_NORMAL, _(" Information "),
-		 _
-		 (" Using the fast reload option may not reflect the exact \n"
-		  " directory contents. In this case you'll need to do a   \n"
-		  " manual reload of the directory. See the man page for   \n"
-		  " the details.                                           "));
-	fast_reload_w = 1;
+    if (fast_reload_w == 0 && fast_reload)
+    {
+        message (D_NORMAL, _(" Information "),
+                 _
+                 (" Using the fast reload option may not reflect the exact \n"
+                  " directory contents. In this case you'll need to do a   \n"
+                  " manual reload of the directory. See the man page for   \n"
+                  " the details.                                           "));
+        fast_reload_w = 1;
     }
 }
 
@@ -903,7 +932,7 @@ toggle_panels_split (void)
 {
     horizontal_split = !horizontal_split;
     layout_change ();
-    do_refresh();
+    do_refresh ();
 }
 
 void
@@ -921,9 +950,10 @@ static void
 translated_mc_chdir (char *dir)
 {
     char *newdir;
+    int ret;
 
     newdir = vfs_translate_url (dir);
-    mc_chdir (newdir);
+    ret = mc_chdir (newdir);
     g_free (newdir);
 }
 
@@ -935,45 +965,54 @@ create_panels (void)
     panel_view_mode_t current_mode, other_mode;
     char original_dir[BUF_1K] = "\0";
 
-    if (boot_current_is_left) {
-	current_index = 0;
-	other_index = 1;
-	current_mode = startup_left_mode;
-	other_mode = startup_right_mode;
-    } else {
-	current_index = 1;
-	other_index = 0;
-	current_mode = startup_right_mode;
-	other_mode = startup_left_mode;
+    if (boot_current_is_left)
+    {
+        current_index = 0;
+        other_index = 1;
+        current_mode = startup_left_mode;
+        other_mode = startup_right_mode;
+    }
+    else
+    {
+        current_index = 1;
+        other_index = 0;
+        current_mode = startup_right_mode;
+        other_mode = startup_left_mode;
     }
     /* Creates the left panel */
-    if (mc_run_param0 != NULL) {
-	if (mc_run_param1 != NULL) {
-	    /* Ok, user has specified two dirs, save the original one,
-	     * since we may not be able to chdir to the proper
-	     * second directory later
-	     */
-	    mc_get_current_wd (original_dir, sizeof (original_dir) - 2);
-	}
-	translated_mc_chdir (mc_run_param0);
+    if (mc_run_param0 != NULL)
+    {
+        if (mc_run_param1 != NULL)
+        {
+            /* Ok, user has specified two dirs, save the original one,
+             * since we may not be able to chdir to the proper
+             * second directory later
+             */
+            mc_get_current_wd (original_dir, sizeof (original_dir) - 2);
+        }
+        translated_mc_chdir (mc_run_param0);
     }
     set_display_type (current_index, current_mode);
 
     /* The other panel */
-    if (mc_run_param1 != NULL) {
-	if (original_dir[0] != '\0')
-	    translated_mc_chdir (original_dir);
-	translated_mc_chdir (mc_run_param1);
+    if (mc_run_param1 != NULL)
+    {
+        if (original_dir[0] != '\0')
+            translated_mc_chdir (original_dir);
+        translated_mc_chdir (mc_run_param1);
     }
     set_display_type (other_index, other_mode);
 
-    if (startup_left_mode == view_listing) {
-	current_panel = left_panel;
-    } else {
-	if (right_panel)
-	    current_panel = right_panel;
-	else
-	    current_panel = left_panel;
+    if (startup_left_mode == view_listing)
+    {
+        current_panel = left_panel;
+    }
+    else
+    {
+        if (right_panel)
+            current_panel = right_panel;
+        else
+            current_panel = left_panel;
     }
 
     /* Create the nice widgets */
@@ -995,13 +1034,13 @@ copy_current_pathname (void)
 {
     char *cwd_path;
     if (!command_prompt)
-	return;
+        return;
 
     cwd_path = remove_encoding_from_path (current_panel->cwd);
     command_insert (cmdline, cwd_path, 0);
 
-    if (cwd_path [strlen (cwd_path ) - 1] != PATH_SEP)
-	command_insert (cmdline, PATH_SEP_STR, 0);
+    if (cwd_path[strlen (cwd_path) - 1] != PATH_SEP)
+        command_insert (cmdline, PATH_SEP_STR, 0);
     g_free (cwd_path);
 }
 
@@ -1011,36 +1050,37 @@ copy_other_pathname (void)
     char *cwd_path;
 
     if (get_other_type () != view_listing)
-	return;
+        return;
 
     if (!command_prompt)
-	return;
+        return;
 
     cwd_path = remove_encoding_from_path (other_panel->cwd);
     command_insert (cmdline, cwd_path, 0);
 
-    if (cwd_path [strlen (cwd_path ) - 1] != PATH_SEP)
-	command_insert (cmdline, PATH_SEP_STR, 0);
+    if (cwd_path[strlen (cwd_path) - 1] != PATH_SEP)
+        command_insert (cmdline, PATH_SEP_STR, 0);
     g_free (cwd_path);
 }
 
 static void
-copy_readlink (WPanel *panel)
+copy_readlink (WPanel * panel)
 {
     if (!command_prompt)
-	return;
-    if (S_ISLNK (selection (panel)->st.st_mode)) {
-	char buffer[MC_MAXPATHLEN];
-	char *p =
-	    concat_dir_and_file (panel->cwd, selection (panel)->fname);
-	int i;
+        return;
+    if (S_ISLNK (selection (panel)->st.st_mode))
+    {
+        char buffer[MC_MAXPATHLEN];
+        char *p = concat_dir_and_file (panel->cwd, selection (panel)->fname);
+        int i;
 
-	i = mc_readlink (p, buffer, MC_MAXPATHLEN - 1);
-	g_free (p);
-	if (i > 0) {
-	    buffer[i] = 0;
-	    command_insert (cmdline, buffer, 1);
-	}
+        i = mc_readlink (p, buffer, MC_MAXPATHLEN - 1);
+        g_free (p);
+        if (i > 0)
+        {
+            buffer[i] = 0;
+            command_insert (cmdline, buffer, 1);
+        }
     }
 }
 
@@ -1054,7 +1094,7 @@ static void
 copy_other_readlink (void)
 {
     if (get_other_type () == view_listing)
-	copy_readlink (other_panel);
+        copy_readlink (other_panel);
 }
 
 /* Insert the selected file name into the input line */
@@ -1063,33 +1103,38 @@ copy_prog_name (void)
 {
     char *tmp;
     if (!command_prompt)
-	return;
+        return;
 
-    if (get_current_type () == view_tree) {
-	WTree *tree = (WTree *) get_panel_widget (get_current_index ());
-	tmp = tree_selected_name (tree);
-    } else
-	tmp = selection (current_panel)->fname;
+    if (get_current_type () == view_tree)
+    {
+        WTree *tree = (WTree *) get_panel_widget (get_current_index ());
+        tmp = tree_selected_name (tree);
+    }
+    else
+        tmp = selection (current_panel)->fname;
 
     command_insert (cmdline, tmp, 1);
 }
 
 static void
-copy_tagged (WPanel *panel)
+copy_tagged (WPanel * panel)
 {
     int i;
 
     if (!command_prompt)
-	return;
+        return;
     input_disable_update (cmdline);
-    if (panel->marked) {
-	for (i = 0; i < panel->count; i++) {
-	    if (panel->dir.list[i].f.marked)
-		command_insert (cmdline, panel->dir.list[i].fname, 1);
-	}
-    } else {
-	command_insert (cmdline, panel->dir.list[panel->selected].fname,
-			1);
+    if (panel->marked)
+    {
+        for (i = 0; i < panel->count; i++)
+        {
+            if (panel->dir.list[i].f.marked)
+                command_insert (cmdline, panel->dir.list[i].fname, 1);
+        }
+    }
+    else
+    {
+        command_insert (cmdline, panel->dir.list[panel->selected].fname, 1);
     }
     input_enable_update (cmdline);
 }
@@ -1104,22 +1149,22 @@ static void
 copy_other_tagged (void)
 {
     if (get_other_type () == view_listing)
-	copy_tagged (other_panel);
+        copy_tagged (other_panel);
 }
 
 void
-midnight_set_buttonbar (WButtonBar *b)
+midnight_set_buttonbar (WButtonBar * b)
 {
-    buttonbar_set_label (b,  1, Q_("ButtonBar|Help"), main_map, NULL);
-    buttonbar_set_label (b,  2, Q_("ButtonBar|Menu"), main_map, NULL);
-    buttonbar_set_label (b,  3, Q_("ButtonBar|View"), main_map, NULL);
-    buttonbar_set_label (b,  4, Q_("ButtonBar|Edit"), main_map, NULL);
-    buttonbar_set_label (b,  5, Q_("ButtonBar|Copy"), main_map, NULL);
-    buttonbar_set_label (b,  6, Q_("ButtonBar|RenMov"), main_map, NULL);
-    buttonbar_set_label (b,  7, Q_("ButtonBar|Mkdir"), main_map, NULL);
-    buttonbar_set_label (b,  8, Q_("ButtonBar|Delete"), main_map, NULL);
-    buttonbar_set_label (b,  9, Q_("ButtonBar|PullDn"), main_map, NULL);
-    buttonbar_set_label (b, 10, Q_("ButtonBar|Quit"), main_map, NULL);
+    buttonbar_set_label (b, 1, Q_ ("ButtonBar|Help"), main_map, NULL);
+    buttonbar_set_label (b, 2, Q_ ("ButtonBar|Menu"), main_map, NULL);
+    buttonbar_set_label (b, 3, Q_ ("ButtonBar|View"), main_map, NULL);
+    buttonbar_set_label (b, 4, Q_ ("ButtonBar|Edit"), main_map, NULL);
+    buttonbar_set_label (b, 5, Q_ ("ButtonBar|Copy"), main_map, NULL);
+    buttonbar_set_label (b, 6, Q_ ("ButtonBar|RenMov"), main_map, NULL);
+    buttonbar_set_label (b, 7, Q_ ("ButtonBar|Mkdir"), main_map, NULL);
+    buttonbar_set_label (b, 8, Q_ ("ButtonBar|Delete"), main_map, NULL);
+    buttonbar_set_label (b, 9, Q_ ("ButtonBar|PullDn"), main_map, NULL);
+    buttonbar_set_label (b, 10, Q_ ("ButtonBar|Quit"), main_map, NULL);
 }
 
 static gboolean ctl_x_map_enabled = FALSE;
@@ -1131,13 +1176,14 @@ ctl_x_cmd (void)
 }
 
 static cb_ret_t
-midnight_execute_cmd (Widget *sender, unsigned long command)
+midnight_execute_cmd (Widget * sender, unsigned long command)
 {
     cb_ret_t res = MSG_HANDLED;
 
     (void) sender;
 
-    switch (command) {
+    switch (command)
+    {
     case CK_AddHotlist:
         add2hotlist_cmd ();
         break;
@@ -1239,7 +1285,7 @@ midnight_execute_cmd (Widget *sender, unsigned long command)
         break;
     case CK_InfoCmd:
         if (sender == (Widget *) the_menubar)
-            info_cmd ();                /* mwnu */
+            info_cmd ();        /* mwnu */
         else
             info_cmd_no_menu ();        /* shortcut or buttonbar */
         break;
@@ -1292,7 +1338,7 @@ midnight_execute_cmd (Widget *sender, unsigned long command)
         break;
     case CK_QuickViewCmd:
         if (sender == (Widget *) the_menubar)
-            quick_view_cmd ();          /* menu */
+            quick_view_cmd ();  /* menu */
         else
             quick_cmd_no_menu ();       /* shortcut or buttonabr */
         break;
@@ -1393,42 +1439,49 @@ init_xterm_support (void)
     const char *termvalue;
 
     termvalue = getenv ("TERM");
-    if (!termvalue || !(*termvalue)) {
-	fputs (_("The TERM environment variable is unset!\n"), stderr);
-	exit (1);
+    if (!termvalue || !(*termvalue))
+    {
+        fputs (_("The TERM environment variable is unset!\n"), stderr);
+        exit (1);
     }
 
     /* Check mouse capabilities */
     xmouse_seq = tty_tgetstr ("Km");
 
-    if (strcmp (termvalue, "cygwin") == 0) {
-	mc_args__force_xterm = 1;
-	use_mouse_p = MOUSE_DISABLED;
+    if (strcmp (termvalue, "cygwin") == 0)
+    {
+        mc_args__force_xterm = 1;
+        use_mouse_p = MOUSE_DISABLED;
     }
 
     if (mc_args__force_xterm || strncmp (termvalue, "xterm", 5) == 0
-	|| strncmp (termvalue, "konsole", 7) == 0
-	|| strncmp (termvalue, "rxvt", 4) == 0
-	|| strcmp (termvalue, "Eterm") == 0
-	|| strcmp (termvalue, "dtterm") == 0) {
-	xterm_flag = 1;
+        || strncmp (termvalue, "konsole", 7) == 0
+        || strncmp (termvalue, "rxvt", 4) == 0
+        || strcmp (termvalue, "Eterm") == 0 || strcmp (termvalue, "dtterm") == 0)
+    {
+        xterm_flag = 1;
 
-	/* Default to the standard xterm sequence */
-	if (!xmouse_seq) {
-	    xmouse_seq = ESC_STR "[M";
-	}
+        /* Default to the standard xterm sequence */
+        if (!xmouse_seq)
+        {
+            xmouse_seq = ESC_STR "[M";
+        }
 
-	/* Enable mouse unless explicitly disabled by --nomouse */
-	if (use_mouse_p != MOUSE_DISABLED) {
-	    const char *color_term = getenv ("COLORTERM");
-	    if (strncmp (termvalue, "rxvt", 4) == 0 ||
-		(color_term != NULL && strncmp (color_term, "rxvt", 4) == 0) ||
-		strcmp (termvalue, "Eterm") == 0) {
-		    use_mouse_p = MOUSE_XTERM_NORMAL_TRACKING;
-	    } else {
-		use_mouse_p = MOUSE_XTERM_BUTTON_EVENT_TRACKING;
-	    }
-	}
+        /* Enable mouse unless explicitly disabled by --nomouse */
+        if (use_mouse_p != MOUSE_DISABLED)
+        {
+            const char *color_term = getenv ("COLORTERM");
+            if (strncmp (termvalue, "rxvt", 4) == 0 ||
+                (color_term != NULL && strncmp (color_term, "rxvt", 4) == 0) ||
+                strcmp (termvalue, "Eterm") == 0)
+            {
+                use_mouse_p = MOUSE_XTERM_NORMAL_TRACKING;
+            }
+            else
+            {
+                use_mouse_p = MOUSE_XTERM_BUTTON_EVENT_TRACKING;
+            }
+        }
     }
 }
 
@@ -1443,13 +1496,13 @@ setup_mc (void)
 
 #ifdef HAVE_SUBSHELL_SUPPORT
     if (use_subshell)
-	add_select_channel (subshell_pty, load_prompt, 0);
-#endif				/* !HAVE_SUBSHELL_SUPPORT */
+        add_select_channel (subshell_pty, load_prompt, 0);
+#endif /* !HAVE_SUBSHELL_SUPPORT */
 
     tty_setup_sigwinch (sigwinch_handler);
 
     if ((tty_baudrate () < 9600) || tty_is_slow ())
-	verbose = 0;
+        verbose = 0;
 
     init_xterm_support ();
     init_mouse ();
@@ -1459,35 +1512,39 @@ static void
 setup_dummy_mc (void)
 {
     char d[MC_MAXPATHLEN];
+    int ret;
 
     mc_get_current_wd (d, MC_MAXPATHLEN);
     setup_mc ();
-    mc_chdir (d);
+    ret = mc_chdir (d);
 }
 
-static void check_codeset()
+static void
+check_codeset ()
 {
     const char *current_system_codepage = NULL;
 
-    current_system_codepage = str_detect_termencoding();
+    current_system_codepage = str_detect_termencoding ();
 
 #ifdef HAVE_CHARSET
     {
-    const char *_display_codepage;
+        const char *_display_codepage;
 
-    _display_codepage = get_codepage_id (display_codepage);
+        _display_codepage = get_codepage_id (display_codepage);
 
-    if (! strcmp(_display_codepage, current_system_codepage)) {
-	utf8_display = str_isutf8 (current_system_codepage);
-	return;
-    }
+        if (!strcmp (_display_codepage, current_system_codepage))
+        {
+            utf8_display = str_isutf8 (current_system_codepage);
+            return;
+        }
 
-    display_codepage = get_codepage_index (current_system_codepage);
-    if (display_codepage == -1) {
-	display_codepage = 0;
-    }
+        display_codepage = get_codepage_index (current_system_codepage);
+        if (display_codepage == -1)
+        {
+            display_codepage = 0;
+        }
 
-    mc_config_set_string(mc_main_config, "Misc", "display_codepage", cp_display);
+        mc_config_set_string (mc_main_config, "Misc", "display_codepage", cp_display);
     }
 #endif
     utf8_display = str_isutf8 (current_system_codepage);
@@ -1497,7 +1554,7 @@ static void
 done_screen (void)
 {
     if (!(quit & SUBSHELL_EXIT))
-	clr_scr ();
+        clr_scr ();
     tty_reset_shell_mode ();
     tty_noraw_mode ();
     tty_keypad (FALSE);
@@ -1516,10 +1573,11 @@ done_mc (void)
      */
 
     if (auto_save_setup)
-	save_setup ();		/* does also call save_hotlist */
-    else {
-	save_hotlist ();
-	save_panel_types ();
+        save_setup ();          /* does also call save_hotlist */
+    else
+    {
+        save_hotlist ();
+        save_panel_types ();
     }
     done_screen ();
     vfs_add_current_stamps ();
@@ -1535,176 +1593,193 @@ done_mc_profile (void)
 }
 
 static cb_ret_t
-midnight_callback (Dlg_head *h, Widget *sender,
-		    dlg_msg_t msg, int parm, void *data)
+midnight_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     unsigned long command;
 
-    switch (msg) {
+    switch (msg)
+    {
     case DLG_INIT:
-	setup_panels ();
-	return MSG_HANDLED;
+        setup_panels ();
+        return MSG_HANDLED;
 
     case DLG_DRAW:
-	load_hint (1);
-	/* We handle the special case of the output lines */
-	if (console_flag && output_lines)
-	    show_console_contents (output_start_y,
-				   LINES - output_lines - keybar_visible -
-				   1, LINES - keybar_visible - 1);
-	return MSG_HANDLED;
+        load_hint (1);
+        /* We handle the special case of the output lines */
+        if (console_flag && output_lines)
+            show_console_contents (output_start_y,
+                                   LINES - output_lines - keybar_visible -
+                                   1, LINES - keybar_visible - 1);
+        return MSG_HANDLED;
 
     case DLG_RESIZE:
-	setup_panels ();
-	menubar_arrange (the_menubar);
-	return MSG_HANDLED;
+        setup_panels ();
+        menubar_arrange (the_menubar);
+        return MSG_HANDLED;
 
     case DLG_IDLE:
-	/* We only need the first idle event to show user menu after start */
-	set_idle_proc (h, 0);
+        /* We only need the first idle event to show user menu after start */
+        set_idle_proc (h, 0);
 
-	if (boot_current_is_left)
-	    dlg_select_widget (get_panel_widget (0));
-	else
-	    dlg_select_widget (get_panel_widget (1));
+        if (boot_current_is_left)
+            dlg_select_widget (get_panel_widget (0));
+        else
+            dlg_select_widget (get_panel_widget (1));
 
-	if (auto_menu)
-	    midnight_execute_cmd (NULL, CK_UserMenuCmd);
-	return MSG_HANDLED;
+        if (auto_menu)
+            midnight_execute_cmd (NULL, CK_UserMenuCmd);
+        return MSG_HANDLED;
 
     case DLG_KEY:
-	if (ctl_x_map_enabled) {
-	    ctl_x_map_enabled = FALSE;
-	    command = lookup_keymap_command (main_x_map, parm);
-	    if (command != CK_Ignore_Key)
-		return midnight_execute_cmd (NULL, command);
-	}
+        if (ctl_x_map_enabled)
+        {
+            ctl_x_map_enabled = FALSE;
+            command = lookup_keymap_command (main_x_map, parm);
+            if (command != CK_Ignore_Key)
+                return midnight_execute_cmd (NULL, command);
+        }
 
-	/* FIXME: should handle all menu shortcuts before this point */
-	if (the_menubar->is_active)
-	    return MSG_NOT_HANDLED;
+        /* FIXME: should handle all menu shortcuts before this point */
+        if (the_menubar->is_active)
+            return MSG_NOT_HANDLED;
 
-	if (parm == '\t')
-	    free_completions (cmdline);
+        if (parm == '\t')
+            free_completions (cmdline);
 
-	if (parm == '\n') {
-	    size_t i;
+        if (parm == '\n')
+        {
+            size_t i;
 
-	    for (i = 0; cmdline->buffer[i] && (cmdline->buffer[i] == ' ' ||
-		cmdline->buffer[i] == '\t'); i++)
-		;
-	    if (cmdline->buffer[i]) {
-	        send_message ((Widget *) cmdline, WIDGET_KEY, parm);
-		return MSG_HANDLED;
-	    }
-	    stuff (cmdline, "", 0);
-	    cmdline->point = 0;
-	}
+            for (i = 0; cmdline->buffer[i] && (cmdline->buffer[i] == ' ' ||
+                                               cmdline->buffer[i] == '\t'); i++)
+                ;
+            if (cmdline->buffer[i])
+            {
+                send_message ((Widget *) cmdline, WIDGET_KEY, parm);
+                return MSG_HANDLED;
+            }
+            stuff (cmdline, "", 0);
+            cmdline->point = 0;
+        }
 
-	/* Ctrl-Enter and Alt-Enter */
-	if (((parm & ~(KEY_M_CTRL | KEY_M_ALT)) == '\n')
-	    && (parm & (KEY_M_CTRL | KEY_M_ALT))) {
-	    copy_prog_name ();
-	    return MSG_HANDLED;
-	}
+        /* Ctrl-Enter and Alt-Enter */
+        if (((parm & ~(KEY_M_CTRL | KEY_M_ALT)) == '\n') && (parm & (KEY_M_CTRL | KEY_M_ALT)))
+        {
+            copy_prog_name ();
+            return MSG_HANDLED;
+        }
 
-	/* Ctrl-Shift-Enter */
-	if (parm == (KEY_M_CTRL | KEY_M_SHIFT | '\n')) {
-	    copy_current_pathname ();
-	    copy_prog_name ();
-	    return MSG_HANDLED;
-	}
+        /* Ctrl-Shift-Enter */
+        if (parm == (KEY_M_CTRL | KEY_M_SHIFT | '\n'))
+        {
+            copy_current_pathname ();
+            copy_prog_name ();
+            return MSG_HANDLED;
+        }
 
-	if ((!alternate_plus_minus || !(console_flag || xterm_flag))
-	    && !quote && !current_panel->searching) {
-	    if (!only_leading_plus_minus) {
-		/* Special treatement, since the input line will eat them */
-		if (parm == '+') {
-		    select_cmd ();
-		    return MSG_HANDLED;
-		}
+        if ((!alternate_plus_minus || !(console_flag || xterm_flag))
+            && !quote && !current_panel->searching)
+        {
+            if (!only_leading_plus_minus)
+            {
+                /* Special treatement, since the input line will eat them */
+                if (parm == '+')
+                {
+                    select_cmd ();
+                    return MSG_HANDLED;
+                }
 
-		if (parm == '\\' || parm == '-') {
-		    unselect_cmd ();
-		    return MSG_HANDLED;
-		}
+                if (parm == '\\' || parm == '-')
+                {
+                    unselect_cmd ();
+                    return MSG_HANDLED;
+                }
 
-		if (parm == '*') {
-		    reverse_selection_cmd ();
-		    return MSG_HANDLED;
-		}
-	    } else if (!command_prompt || !cmdline->buffer[0]) {
-		/* Special treatement '+', '-', '\', '*' only when this is
-		 * first char on input line
-		 */
+                if (parm == '*')
+                {
+                    reverse_selection_cmd ();
+                    return MSG_HANDLED;
+                }
+            }
+            else if (!command_prompt || !cmdline->buffer[0])
+            {
+                /* Special treatement '+', '-', '\', '*' only when this is
+                 * first char on input line
+                 */
 
-		if (parm == '+') {
-		    select_cmd ();
-		    return MSG_HANDLED;
-		}
+                if (parm == '+')
+                {
+                    select_cmd ();
+                    return MSG_HANDLED;
+                }
 
-		if (parm == '\\' || parm == '-') {
-		    unselect_cmd ();
-		    return MSG_HANDLED;
-		}
+                if (parm == '\\' || parm == '-')
+                {
+                    unselect_cmd ();
+                    return MSG_HANDLED;
+                }
 
-		if (parm == '*') {
-		    reverse_selection_cmd ();
-		    return MSG_HANDLED;
-		}
-	    }
-	}
-	return MSG_NOT_HANDLED;
+                if (parm == '*')
+                {
+                    reverse_selection_cmd ();
+                    return MSG_HANDLED;
+                }
+            }
+        }
+        return MSG_NOT_HANDLED;
 
     case DLG_HOTKEY_HANDLED:
-	if ((get_current_type () == view_listing) && current_panel->searching) {
-	    current_panel->searching = 0;
-	    current_panel->dirty = 1;
-	}
-	return MSG_HANDLED;
+        if ((get_current_type () == view_listing) && current_panel->searching)
+        {
+            current_panel->searching = 0;
+            current_panel->dirty = 1;
+        }
+        return MSG_HANDLED;
 
     case DLG_UNHANDLED_KEY:
-	if (command_prompt) {
-	    cb_ret_t v;
+        if (command_prompt)
+        {
+            cb_ret_t v;
 
-	    v = send_message ((Widget *) cmdline, WIDGET_KEY, parm);
-	    if (v == MSG_HANDLED)
-		return MSG_HANDLED;
-	}
+            v = send_message ((Widget *) cmdline, WIDGET_KEY, parm);
+            if (v == MSG_HANDLED)
+                return MSG_HANDLED;
+        }
 
-	if (ctl_x_map_enabled) {
-	    ctl_x_map_enabled = FALSE;
-	    command = lookup_keymap_command (main_x_map, parm);
-	} else
-	    command = lookup_keymap_command (main_map, parm);
+        if (ctl_x_map_enabled)
+        {
+            ctl_x_map_enabled = FALSE;
+            command = lookup_keymap_command (main_x_map, parm);
+        }
+        else
+            command = lookup_keymap_command (main_map, parm);
 
-	return (command == CK_Ignore_Key)
-			? MSG_NOT_HANDLED
-			: midnight_execute_cmd (NULL, command);
+        return (command == CK_Ignore_Key) ? MSG_NOT_HANDLED : midnight_execute_cmd (NULL, command);
 
     case DLG_POST_KEY:
-	if (!the_menubar->is_active)
-	    update_dirty_panels ();
-	return MSG_HANDLED;
+        if (!the_menubar->is_active)
+            update_dirty_panels ();
+        return MSG_HANDLED;
 
     case DLG_ACTION:
-	/* shortcut */
-	if (sender == NULL)
-	    midnight_execute_cmd (NULL, parm);
-	/* message from menu */
-	else if (sender == (Widget *) the_menubar)
-	    midnight_execute_cmd (sender, parm);
-	/* message from buttonbar */
-	else if (sender == (Widget *) the_bar) {
-	    if (data == NULL)
-		midnight_execute_cmd (sender, parm);
-	    else
-		send_message ((Widget *) data, WIDGET_COMMAND, parm);
-	}
-	return MSG_HANDLED;
+        /* shortcut */
+        if (sender == NULL)
+            midnight_execute_cmd (NULL, parm);
+        /* message from menu */
+        else if (sender == (Widget *) the_menubar)
+            midnight_execute_cmd (sender, parm);
+        /* message from buttonbar */
+        else if (sender == (Widget *) the_bar)
+        {
+            if (data == NULL)
+                midnight_execute_cmd (sender, parm);
+            else
+                send_message ((Widget *) data, WIDGET_COMMAND, parm);
+        }
+        return MSG_HANDLED;
 
     default:
-	return default_dlg_callback (h, sender, msg, parm, data);
+        return default_dlg_callback (h, sender, msg, parm, data);
     }
 }
 
@@ -1718,27 +1793,34 @@ update_xterm_title_path (void)
     struct passwd *pw = NULL;
     char *login = NULL;
     int res = 0;
-    if (xterm_flag && xterm_title) {
-	path = strip_home_and_password (current_panel->cwd);
-	res = gethostname(host, sizeof (host));
-	if ( res ) { /* On success, res = 0 */
-	    host[0] = '\0';
-	} else {
-	    host[sizeof (host) - 1] = '\0';
-	}
-	pw = getpwuid(getuid());
-	if ( pw ) {
-	    login = g_strdup_printf ("%s@%s", pw->pw_name, host);
-	} else {
-	    login = g_strdup (host);
-	}
-	p = g_strdup_printf ("mc [%s]:%s", login, path);
-	fprintf (stdout, "\33]0;%s\7", str_term_form (p));
-	g_free (login);
-	g_free (p);
-	if (!alternate_plus_minus)
-	    numeric_keypad_mode ();
-	fflush (stdout);
+    if (xterm_flag && xterm_title)
+    {
+        path = strip_home_and_password (current_panel->cwd);
+        res = gethostname (host, sizeof (host));
+        if (res)
+        {                       /* On success, res = 0 */
+            host[0] = '\0';
+        }
+        else
+        {
+            host[sizeof (host) - 1] = '\0';
+        }
+        pw = getpwuid (getuid ());
+        if (pw)
+        {
+            login = g_strdup_printf ("%s@%s", pw->pw_name, host);
+        }
+        else
+        {
+            login = g_strdup (host);
+        }
+        p = g_strdup_printf ("mc [%s]:%s", login, path);
+        fprintf (stdout, "\33]0;%s\7", str_term_form (p));
+        g_free (login);
+        g_free (p);
+        if (!alternate_plus_minus)
+            numeric_keypad_mode ();
+        fflush (stdout);
     }
 }
 
@@ -1752,25 +1834,28 @@ load_hint (int force)
     char *hint;
 
     if (!the_hint->widget.parent)
-	return;
+        return;
 
-    if (!message_visible) {
-	label_set_text (the_hint, NULL);
-	return;
+    if (!message_visible)
+    {
+        label_set_text (the_hint, NULL);
+        return;
     }
 
     hint = get_random_hint (force);
 
-    if (hint != NULL) {
-	if (*hint)
-	    set_hintbar (hint);
-	g_free (hint);
-    } else {
-	char text[BUF_SMALL];
+    if (hint != NULL)
+    {
+        if (*hint)
+            set_hintbar (hint);
+        g_free (hint);
+    }
+    else
+    {
+        char text[BUF_SMALL];
 
-	g_snprintf (text, sizeof (text), _("GNU Midnight Commander %s\n"),
-		    VERSION);
-	set_hintbar (text);
+        g_snprintf (text, sizeof (text), _("GNU Midnight Commander %s\n"), VERSION);
+        set_hintbar (text);
     }
 }
 
@@ -1805,9 +1890,8 @@ prepend_cwd_on_local (const char *filename)
     char *d;
     size_t l;
 
-    if (!vfs_file_is_local (filename)
-	|| g_path_is_absolute (filename))
-	return g_strdup (filename);
+    if (!vfs_file_is_local (filename) || g_path_is_absolute (filename))
+        return g_strdup (filename);
 
     d = g_malloc (MC_MAXPATHLEN + strlen (filename) + 2);
     mc_get_current_wd (d, MC_MAXPATHLEN);
@@ -1824,27 +1908,28 @@ prepend_cwd_on_local (const char *filename)
 static void
 mc_maybe_editor_or_viewer (void)
 {
-    switch (mc_run_mode) {
+    switch (mc_run_mode)
+    {
 #ifdef USE_INTERNAL_EDIT
     case MC_RUN_EDITOR:
-	edit_file (mc_run_param0, edit_one_file_start_line);
-	break;
-#endif				/* USE_INTERNAL_EDIT */
+        edit_file (mc_run_param0, edit_one_file_start_line);
+        break;
+#endif /* USE_INTERNAL_EDIT */
     case MC_RUN_VIEWER:
-    {
-	char *path;
-	path = prepend_cwd_on_local (mc_run_param0);
-	view_file (path, 0, 1);
-	g_free (path);
-	break;
-    }
+        {
+            char *path;
+            path = prepend_cwd_on_local (mc_run_param0);
+            view_file (path, 0, 1);
+            g_free (path);
+            break;
+        }
 #ifdef USE_DIFF_VIEW
     case MC_RUN_DIFFVIEWER:
-	diff_view (mc_run_param0, mc_run_param1, mc_run_param0, mc_run_param1);
-	break;
-#endif				/* USE_DIFF_VIEW */
+        diff_view (mc_run_param0, mc_run_param1, mc_run_param0, mc_run_param1);
+        break;
+#endif /* USE_DIFF_VIEW */
     default:
-	break;
+        break;
     }
     midnight_shutdown = 1;
     done_mc ();
@@ -1855,20 +1940,20 @@ static void
 do_nc (void)
 {
     int midnight_colors[DLG_COLOR_NUM];
-    midnight_colors[0] = mc_skin_color_get("dialog", "_default_");
-    midnight_colors[1] = mc_skin_color_get("dialog", "focus");
-    midnight_colors[2] = mc_skin_color_get("dialog", "hotnormal");
-    midnight_colors[3] = mc_skin_color_get("dialog", "hotfocus");
+    midnight_colors[0] = mc_skin_color_get ("dialog", "_default_");
+    midnight_colors[1] = mc_skin_color_get ("dialog", "focus");
+    midnight_colors[2] = mc_skin_color_get ("dialog", "hotnormal");
+    midnight_colors[3] = mc_skin_color_get ("dialog", "hotfocus");
 
     panel_init ();
 
     midnight_dlg = create_dlg (0, 0, LINES, COLS, midnight_colors, midnight_callback,
-			       "[main]", NULL, DLG_WANT_IDLE);
+                               "[main]", NULL, DLG_WANT_IDLE);
 
     if (mc_run_mode == MC_RUN_FULL)
-	setup_mc ();
+        setup_mc ();
     else
-	setup_dummy_mc ();
+        setup_dummy_mc ();
 
     /* start check display_codepage and source_codepage */
     check_codeset ();
@@ -1905,18 +1990,19 @@ do_nc (void)
 
     /* Check if we were invoked as an editor or file viewer */
     if (mc_run_mode != MC_RUN_FULL)
-	mc_maybe_editor_or_viewer ();
-    else {
-	create_panels_and_run_mc ();
+        mc_maybe_editor_or_viewer ();
+    else
+    {
+        create_panels_and_run_mc ();
 
-	/* Program end */
-	midnight_shutdown = 1;
+        /* Program end */
+        midnight_shutdown = 1;
 
-	/* destroy_dlg destroys even current_panel->cwd, so we have to save a copy :) */
-	if (mc_args__last_wd_file && vfs_current_is_local ())
-	    last_wd_string = g_strdup (current_panel->cwd);
+        /* destroy_dlg destroys even current_panel->cwd, so we have to save a copy :) */
+        if (mc_args__last_wd_file && vfs_current_is_local ())
+            last_wd_string = g_strdup (current_panel->cwd);
 
-	done_mc ();
+        done_mc ();
     }
 
     destroy_dlg (midnight_dlg);
@@ -1932,35 +2018,41 @@ OS_Setup (void)
     const char *shell_env = getenv ("SHELL");
     const char *mc_libdir;
 
-    if ((shell_env == NULL) || (shell_env[0] == '\0')) {
+    if ((shell_env == NULL) || (shell_env[0] == '\0'))
+    {
         struct passwd *pwd;
         pwd = getpwuid (geteuid ());
         if (pwd != NULL)
-           shell = g_strdup (pwd->pw_shell);
-    } else
-	shell = g_strdup (shell_env);
+            shell = g_strdup (pwd->pw_shell);
+    }
+    else
+        shell = g_strdup (shell_env);
 
-    if ((shell == NULL) || (shell[0] == '\0')) {
-	g_free (shell);
-	shell = g_strdup ("/bin/sh");
+    if ((shell == NULL) || (shell[0] == '\0'))
+    {
+        g_free (shell);
+        shell = g_strdup ("/bin/sh");
     }
 
     /* This is the directory, where MC was installed, on Unix this is DATADIR */
     /* and can be overriden by the MC_DATADIR environment variable */
     mc_libdir = getenv ("MC_DATADIR");
-    if (mc_libdir != NULL) {
-	mc_home = g_strdup (mc_libdir);
-	mc_home_alt = g_strdup (SYSCONFDIR);
-    } else {
-	mc_home = g_strdup (SYSCONFDIR);
-	mc_home_alt = g_strdup (DATADIR);
+    if (mc_libdir != NULL)
+    {
+        mc_home = g_strdup (mc_libdir);
+        mc_home_alt = g_strdup (SYSCONFDIR);
+    }
+    else
+    {
+        mc_home = g_strdup (SYSCONFDIR);
+        mc_home_alt = g_strdup (DATADIR);
     }
 
     /* This variable is used by the subshell */
     home_dir = getenv ("HOME");
 
     if (!home_dir)
-	home_dir = mc_home;
+        home_dir = mc_home;
 }
 
 static void
@@ -1970,7 +2062,7 @@ sigchld_handler_no_subshell (int sig)
     int pid, status;
 
     if (!console_flag)
-	return;
+        return;
 
     /* COMMENT: if it were true that after the call to handle_console(..INIT)
        the value of console_flag never changed, we could simply not install
@@ -1981,19 +2073,23 @@ sigchld_handler_no_subshell (int sig)
 
     pid = waitpid (cons_saver_pid, &status, WUNTRACED | WNOHANG);
 
-    if (pid == cons_saver_pid) {
+    if (pid == cons_saver_pid)
+    {
 
-	if (WIFSTOPPED (status)) {
-	    /* Someone has stopped cons.saver - restart it */
-	    kill (pid, SIGCONT);
-	} else {
-	    /* cons.saver has died - disable console saving */
-	    handle_console (CONSOLE_DONE);
-	    console_flag = 0;
-	}
+        if (WIFSTOPPED (status))
+        {
+            /* Someone has stopped cons.saver - restart it */
+            kill (pid, SIGCONT);
+        }
+        else
+        {
+            /* cons.saver has died - disable console saving */
+            handle_console (CONSOLE_DONE);
+            console_flag = 0;
+        }
     }
     /* If we got here, some other child exited; ignore it */
-#endif				/* __linux__ */
+#endif /* __linux__ */
 
     (void) sig;
 }
@@ -2005,9 +2101,9 @@ init_sigchld (void)
 
     sigchld_action.sa_handler =
 #ifdef HAVE_SUBSHELL_SUPPORT
-	use_subshell ? sigchld_handler :
-#endif				/* HAVE_SUBSHELL_SUPPORT */
-	sigchld_handler_no_subshell;
+        use_subshell ? sigchld_handler :
+#endif /* HAVE_SUBSHELL_SUPPORT */
+        sigchld_handler_no_subshell;
 
     sigemptyset (&sigchld_action.sa_mask);
 
@@ -2015,16 +2111,17 @@ init_sigchld (void)
     sigchld_action.sa_flags = SA_RESTART;
 #else
     sigchld_action.sa_flags = 0;
-#endif				/* !SA_RESTART */
+#endif /* !SA_RESTART */
 
-    if (sigaction (SIGCHLD, &sigchld_action, NULL) == -1) {
+    if (sigaction (SIGCHLD, &sigchld_action, NULL) == -1)
+    {
 #ifdef HAVE_SUBSHELL_SUPPORT
-	/*
-	 * This may happen on QNX Neutrino 6, where SA_RESTART
-	 * is defined but not implemented.  Fallback to no subshell.
-	 */
-	use_subshell = 0;
-#endif				/* HAVE_SUBSHELL_SUPPORT */
+        /*
+         * This may happen on QNX Neutrino 6, where SA_RESTART
+         * is defined but not implemented.  Fallback to no subshell.
+         */
+        use_subshell = 0;
+#endif /* HAVE_SUBSHELL_SUPPORT */
     }
 }
 
@@ -2035,99 +2132,122 @@ mc_main__setup_by_args (int argc, char *argv[])
     char *tmp;
 
     if (mc_args__nomouse)
-	use_mouse_p = MOUSE_DISABLED;
+        use_mouse_p = MOUSE_DISABLED;
 
 #ifdef USE_NETCODE
-    if (mc_args__netfs_logfile != NULL) {
-	mc_setctl ("/#ftp:", VFS_SETCTL_LOGFILE, (void *) mc_args__netfs_logfile);
+    if (mc_args__netfs_logfile != NULL)
+    {
+        mc_setctl ("/#ftp:", VFS_SETCTL_LOGFILE, (void *) mc_args__netfs_logfile);
 #ifdef ENABLE_VFS_SMB
-	smbfs_set_debugf (mc_args__netfs_logfile);
-#endif				/* ENABLE_VFS_SMB */
+        smbfs_set_debugf (mc_args__netfs_logfile);
+#endif /* ENABLE_VFS_SMB */
     }
 
 #ifdef ENABLE_VFS_SMB
     if (mc_args__debug_level != 0)
-	smbfs_set_debug (mc_args__debug_level);
-#endif				/* ENABLE_VFS_SMB */
-#endif				/* USE_NETCODE */
+        smbfs_set_debug (mc_args__debug_level);
+#endif /* ENABLE_VFS_SMB */
+#endif /* USE_NETCODE */
 
     base = x_basename (argv[0]);
     tmp = (argc > 0) ? argv[1] : NULL;
 
-    if (!STRNCOMP (base, "mce", 3) || !STRCOMP (base, "vi")) {
-	mc_run_param0 = g_strdup ("");
-	if (tmp != NULL) {
-	    /*
-	     * Check for filename:lineno, followed by an optional colon.
-	     * This format is used by many programs (especially compilers)
-	     * in error messages and warnings. It is supported so that
-	     * users can quickly copy and paste file locations.
-	     */
-	    char *end = tmp + strlen (tmp), *p = end;
-	    if (p > tmp && p[-1] == ':')
-		p--;
-	    while (p > tmp && g_ascii_isdigit ((gchar) p[-1]))
-		p--;
-	    if (tmp < p && p < end && p[-1] == ':') {
-	        struct stat st;
-		gchar *fname = g_strndup (tmp, p - 1 - tmp);
-		/*
-		 * Check that the file before the colon actually exists.
-		 * If it doesn't exist, revert to the old behavior.
-		 */
-		if (mc_stat (tmp, &st) == -1 && mc_stat (fname, &st) != -1) {
-		    mc_run_param0 = fname;
-		    edit_one_file_start_line = atoi (p);
-		} else {
-		    g_free (fname);
-		    goto try_plus_filename;
-		}
-	    } else {
-	    try_plus_filename:
-		if (*tmp == '+' && g_ascii_isdigit ((gchar) tmp[1])) {
-		    int start_line = atoi (tmp);
-		    if (start_line > 0) {
-			char *file = (argc > 1) ? argv[2] : NULL;
-			if (file) {
-			    tmp = file;
-			    edit_one_file_start_line = start_line;
-			}
-		    }
-		}
-		mc_run_param0 = g_strdup (tmp);
-	    }
-	}
-	mc_run_mode = MC_RUN_EDITOR;
-    } else if (!STRNCOMP (base, "mcv", 3) || !STRCOMP (base, "view")) {
-	if (tmp != NULL)
-	    mc_run_param0 = g_strdup (tmp);
-	else {
-	    fputs ("No arguments given to the viewer\n", stderr);
-	    exit (1);
-	}
-	mc_run_mode = MC_RUN_VIEWER;
+    if (!STRNCOMP (base, "mce", 3) || !STRCOMP (base, "vi"))
+    {
+        mc_run_param0 = g_strdup ("");
+        if (tmp != NULL)
+        {
+            /*
+             * Check for filename:lineno, followed by an optional colon.
+             * This format is used by many programs (especially compilers)
+             * in error messages and warnings. It is supported so that
+             * users can quickly copy and paste file locations.
+             */
+            char *end = tmp + strlen (tmp), *p = end;
+            if (p > tmp && p[-1] == ':')
+                p--;
+            while (p > tmp && g_ascii_isdigit ((gchar) p[-1]))
+                p--;
+            if (tmp < p && p < end && p[-1] == ':')
+            {
+                struct stat st;
+                gchar *fname = g_strndup (tmp, p - 1 - tmp);
+                /*
+                 * Check that the file before the colon actually exists.
+                 * If it doesn't exist, revert to the old behavior.
+                 */
+                if (mc_stat (tmp, &st) == -1 && mc_stat (fname, &st) != -1)
+                {
+                    mc_run_param0 = fname;
+                    edit_one_file_start_line = atoi (p);
+                }
+                else
+                {
+                    g_free (fname);
+                    goto try_plus_filename;
+                }
+            }
+            else
+            {
+              try_plus_filename:
+                if (*tmp == '+' && g_ascii_isdigit ((gchar) tmp[1]))
+                {
+                    int start_line = atoi (tmp);
+                    if (start_line > 0)
+                    {
+                        char *file = (argc > 1) ? argv[2] : NULL;
+                        if (file)
+                        {
+                            tmp = file;
+                            edit_one_file_start_line = start_line;
+                        }
+                    }
+                }
+                mc_run_param0 = g_strdup (tmp);
+            }
+        }
+        mc_run_mode = MC_RUN_EDITOR;
+    }
+    else if (!STRNCOMP (base, "mcv", 3) || !STRCOMP (base, "view"))
+    {
+        if (tmp != NULL)
+            mc_run_param0 = g_strdup (tmp);
+        else
+        {
+            fputs ("No arguments given to the viewer\n", stderr);
+            exit (1);
+        }
+        mc_run_mode = MC_RUN_VIEWER;
 #ifdef USE_DIFF_VIEW
-    } else if (!STRNCOMP (base, "mcd", 3) || !STRCOMP (base, "diff")) {
-	if (argc < 3) {
-	    fputs ("There 2 files are required to diffviewer\n", stderr);
-	    exit (1);
-	} else if (tmp != NULL) {
-	    mc_run_param0 = g_strdup (tmp);
-	    tmp = (argc > 1) ? argv[2] : NULL;
-	    if (tmp != NULL)
-		mc_run_param1 = g_strdup (tmp);
-	mc_run_mode = MC_RUN_DIFFVIEWER;
-	}
-#endif				/* USE_DIFF_VIEW */
-    } else {
-	/* sets the current dir and the other dir */
-	if (tmp != NULL) {
-	    mc_run_param0 = g_strdup (tmp);
-	    tmp = (argc > 1) ? argv[2] : NULL;
-	    if (tmp != NULL)
-		mc_run_param1 = g_strdup (tmp);
-	}
-	mc_run_mode = MC_RUN_FULL;
+    }
+    else if (!STRNCOMP (base, "mcd", 3) || !STRCOMP (base, "diff"))
+    {
+        if (argc < 3)
+        {
+            fputs ("There 2 files are required to diffviewer\n", stderr);
+            exit (1);
+        }
+        else if (tmp != NULL)
+        {
+            mc_run_param0 = g_strdup (tmp);
+            tmp = (argc > 1) ? argv[2] : NULL;
+            if (tmp != NULL)
+                mc_run_param1 = g_strdup (tmp);
+            mc_run_mode = MC_RUN_DIFFVIEWER;
+        }
+#endif /* USE_DIFF_VIEW */
+    }
+    else
+    {
+        /* sets the current dir and the other dir */
+        if (tmp != NULL)
+        {
+            mc_run_param0 = g_strdup (tmp);
+            tmp = (argc > 1) ? argv[2] : NULL;
+            if (tmp != NULL)
+                mc_run_param1 = g_strdup (tmp);
+        }
+        mc_run_mode = MC_RUN_FULL;
     }
 }
 
@@ -2161,10 +2281,10 @@ main (int argc, char *argv[])
     SLtt_Ignore_Beep = 1;
 #endif
 
-    if ( !mc_args_handle (&argc, &argv, "mc"))
-	return 1;
+    if (!mc_args_handle (&argc, &argv, "mc"))
+        return 1;
 
-    mc_main__setup_by_args (argc,argv);
+    mc_main__setup_by_args (argc, argv);
 
     /* NOTE: This has to be called before tty_init or whatever routine
        calls any define_sequence */
@@ -2176,11 +2296,11 @@ main (int argc, char *argv[])
 #ifdef HAVE_SUBSHELL_SUPPORT
     /* Don't use subshell when invoked as viewer or editor */
     if (mc_run_mode != MC_RUN_FULL)
-	use_subshell = 0;
+        use_subshell = 0;
 
     if (use_subshell)
-	subshell_get_console_attributes ();
-#endif				/* HAVE_SUBSHELL_SUPPORT */
+        subshell_get_console_attributes ();
+#endif /* HAVE_SUBSHELL_SUPPORT */
 
     /* Install the SIGCHLD handler; must be done before init_subshell() */
     init_sigchld ();
@@ -2196,15 +2316,16 @@ main (int argc, char *argv[])
 
     tty_init_colors (mc_args__disable_colors, mc_args__force_colors);
 
-    isInitialized = mc_skin_init(&error);
+    isInitialized = mc_skin_init (&error);
 
     mc_filehighlight = mc_fhl_new (TRUE);
 
     dlg_set_default_colors ();
 
-    if ( ! isInitialized ) {
+    if (!isInitialized)
+    {
         message (D_ERROR, _("Warning"), "%s", error->message);
-        g_error_free(error);
+        g_error_free (error);
         error = NULL;
     }
 
@@ -2212,19 +2333,17 @@ main (int argc, char *argv[])
     /* do it after the screen library initialization to show the error message */
     mc_dir = concat_dir_and_file (home_dir, MC_USERCONF_DIR);
     canonicalize_pathname (mc_dir);
-    if ((stat (mc_dir, &s) != 0) && (errno == ENOENT)
-	&& mkdir (mc_dir, 0700) != 0)
-	message (D_ERROR, _("Warning"),
-		    _("Cannot create %s directory"), mc_dir);
+    if ((stat (mc_dir, &s) != 0) && (errno == ENOENT) && mkdir (mc_dir, 0700) != 0)
+        message (D_ERROR, _("Warning"), _("Cannot create %s directory"), mc_dir);
     g_free (mc_dir);
 
 #ifdef HAVE_SUBSHELL_SUPPORT
     /* Done here to ensure that the subshell doesn't  */
     /* inherit the file descriptors opened below, etc */
     if (use_subshell)
-	init_subshell ();
+        init_subshell ();
 
-#endif				/* HAVE_SUBSHELL_SUPPORT */
+#endif /* HAVE_SUBSHELL_SUPPORT */
 
     /* Removing this from the X code let's us type C-c */
     load_key_defs ();
@@ -2233,23 +2352,25 @@ main (int argc, char *argv[])
 
     /* Also done after init_subshell, to save any shell init file messages */
     if (console_flag)
-	handle_console (CONSOLE_SAVE);
+        handle_console (CONSOLE_SAVE);
 
     if (alternate_plus_minus)
-	application_keypad_mode ();
+        application_keypad_mode ();
 
 #ifdef HAVE_SUBSHELL_SUPPORT
-    if (use_subshell) {
-	mc_prompt = strip_ctrl_codes (subshell_prompt);
-	if (mc_prompt == NULL)
-	    mc_prompt = (geteuid () == 0) ? "# " : "$ ";
-    } else
-#endif				/* HAVE_SUBSHELL_SUPPORT */
-	mc_prompt = (geteuid () == 0) ? "# " : "$ ";
+    if (use_subshell)
+    {
+        mc_prompt = strip_ctrl_codes (subshell_prompt);
+        if (mc_prompt == NULL)
+            mc_prompt = (geteuid () == 0) ? "# " : "$ ";
+    }
+    else
+#endif /* HAVE_SUBSHELL_SUPPORT */
+        mc_prompt = (geteuid () == 0) ? "# " : "$ ";
 
     /* Program main loop */
     if (!midnight_shutdown)
-	do_nc ();
+        do_nc ();
 
     /* Save the tree store */
     tree_store_save ();
@@ -2259,7 +2380,7 @@ main (int argc, char *argv[])
     /* Virtual File System shutdown */
     vfs_shut ();
 
-    flush_extension_file ();	/* does only free memory */
+    flush_extension_file ();    /* does only free memory */
 
     mc_fhl_free (&mc_filehighlight);
     mc_skin_deinit ();
@@ -2267,26 +2388,28 @@ main (int argc, char *argv[])
     tty_shutdown ();
 
     if (console_flag && !(quit & SUBSHELL_EXIT))
-	handle_console (CONSOLE_RESTORE);
+        handle_console (CONSOLE_RESTORE);
     if (alternate_plus_minus)
-	numeric_keypad_mode ();
+        numeric_keypad_mode ();
 
-    signal (SIGCHLD, SIG_DFL);	/* Disable the SIGCHLD handler */
+    signal (SIGCHLD, SIG_DFL);  /* Disable the SIGCHLD handler */
 
     if (console_flag)
-	handle_console (CONSOLE_DONE);
-    putchar ('\n');		/* Hack to make shell's prompt start at left of screen */
+        handle_console (CONSOLE_DONE);
+    putchar ('\n');             /* Hack to make shell's prompt start at left of screen */
 
-    if (mc_run_mode == MC_RUN_FULL && mc_args__last_wd_file && last_wd_string
-	&& !print_last_revert) {
-	int last_wd_fd =
-	    open (mc_args__last_wd_file, O_WRONLY | O_CREAT | O_TRUNC | O_EXCL,
-		  S_IRUSR | S_IWUSR);
+    if (mc_run_mode == MC_RUN_FULL && mc_args__last_wd_file && last_wd_string && !print_last_revert)
+    {
+        int last_wd_fd = open (mc_args__last_wd_file, O_WRONLY | O_CREAT | O_TRUNC | O_EXCL,
+                               S_IRUSR | S_IWUSR);
 
-	if (last_wd_fd != -1) {
-	    write (last_wd_fd, last_wd_string, strlen (last_wd_string));
-	    close (last_wd_fd);
-	}
+        if (last_wd_fd != -1)
+        {
+            ssize_t ret1;
+            int ret2;
+            ret1 = write (last_wd_fd, last_wd_string, strlen (last_wd_string));
+            ret2 = close (last_wd_fd);
+        }
     }
     g_free (last_wd_string);
 
