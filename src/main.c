@@ -2228,8 +2228,8 @@ mc_main__setup_by_args (int argc, char *argv[])
             exit (EXIT_FAILURE);
         }
         mc_run_mode = MC_RUN_VIEWER;
-#ifdef USE_DIFF_VIEW
     }
+#ifdef USE_DIFF_VIEW
     else if (!STRNCOMP (base, "mcd", 3) || !STRCOMP (base, "diff"))
     {
         if (argc < 3)
@@ -2237,7 +2237,8 @@ mc_main__setup_by_args (int argc, char *argv[])
             fputs ("There 2 files are required to diffviewer\n", stderr);
             exit (EXIT_FAILURE);
         }
-        else if (tmp != NULL)
+
+        if (tmp != NULL)
         {
             mc_run_param0 = g_strdup (tmp);
             tmp = (argc > 1) ? argv[2] : NULL;
@@ -2245,8 +2246,8 @@ mc_main__setup_by_args (int argc, char *argv[])
                 mc_run_param1 = g_strdup (tmp);
             mc_run_mode = MC_RUN_DIFFVIEWER;
         }
-#endif /* USE_DIFF_VIEW */
     }
+#endif /* USE_DIFF_VIEW */
     else
     {
         /* sets the current dir and the other dir */
