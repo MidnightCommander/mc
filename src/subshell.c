@@ -73,7 +73,7 @@ static char tcsh_fifo[128];
 
 /* Local functions */
 static void init_raw_mode (void);
-static int feed_subshell (int how, int fail_on_error);
+static gboolean feed_subshell (int how, int fail_on_error);
 static void synchronize (void);
 static int pty_open_master (char *pty_name);
 static int pty_open_slave (const char *pty_name);
@@ -991,7 +991,7 @@ sigchld_handler (int sig)
 
 
 /* Feed the subshell our keyboard input until it says it's finished */
-static int
+static gboolean
 feed_subshell (int how, int fail_on_error)
 {
     fd_set read_set;            /* For `select' */
@@ -1007,7 +1007,7 @@ feed_subshell (int how, int fail_on_error)
     wtime.tv_usec = 0;
     wptr = fail_on_error ? &wtime : NULL;
 
-    while (1)
+    while (TRUE)
     {
         if (!subshell_alive)
             return FALSE;
@@ -1063,7 +1063,6 @@ feed_subshell (int how, int fail_on_error)
 
         else if (FD_ISSET (subshell_pipe[READ], &read_set))
             /* Read the subshell's CWD and capture its prompt */
-
         {
             bytes = read (subshell_pipe[READ], subshell_cwd, MC_MAXPATHLEN + 1);
             if (bytes <= 0)
@@ -1082,7 +1081,7 @@ feed_subshell (int how, int fail_on_error)
             if (subshell_state == RUNNING_COMMAND)
             {
                 subshell_state = INACTIVE;
-                return 1;
+                return TRUE;
             }
         }
 
@@ -1113,9 +1112,7 @@ feed_subshell (int how, int fail_on_error)
                 subshell_ready = FALSE;
         }
         else
-        {
             return FALSE;
-        }
     }
 }
 
