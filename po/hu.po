@@ -3,7 +3,7 @@
 # Szabolcs Szasz <sz@szasz.hu>, 2001.
 # Szabolcs Ban <shooby@gnome.hu>, 2001.
 # Arpad Biro <biro_arpad@yahoo.com>, 2003, 2004, 2005.
-# SZABO Gergely <szg@subogero.com>, 2009
+# SZABÓ Gergely <szg@subogero.com>, 2009-2010
 # Páder Rezső <rezso@rezso.net>, 2009-2010
 # Pauli Henrik <henrik.pauli@uhusystems.com>, 2010
 #
@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
 "POT-Creation-Date: 2010-04-25 15:33+0200\n"
 "PO-Revision-Date: 2010-02-28 15:59+0100\n"
-"Last-Translator: rezso <rezso@rezso.net>\n"
+"Last-Translator: SZABÓ Gergely <szg@subogero.com>\n"
 "Language-Team: Hungarian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -433,9 +433,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Inkonzisztens Extfs-archívum."
 
-#, fuzzy, c-format
+#, c-format
 msgid "Warning: cannot open %s directory\n"
-msgstr "A(z) %s könyvtár nem hozható létre"
+msgstr "Figyelem: A(z) %s könyvtár nem nyitható meg\n"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -935,7 +935,6 @@ msgid "Show mc with specified skin"
 msgstr "A megadott skin használata"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2966,9 +2965,9 @@ msgid "Modified:  %s"
 msgstr "Módosítás:    %s"
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
-#, fuzzy, c-format
+#, c-format
 msgid "Changed:   %s"
-msgstr "&Belépés"
+msgstr "Változtatás:  %s"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -3863,14 +3862,3 @@ msgstr " Előzmények "
 
 msgid "Background process:"
 msgstr "Háttérfolyamat:"
-
-#~ msgid "%b %e  %Y"
-#~ msgstr "%b %e  %Y"
-
-#~ msgid "%b %e %H:%M"
-#~ msgstr "%b %e %H.%M"
-
-# !! Ez ext2fs-en nem 'creation', hanem az utolso metadata-valtozas...
-# Ext3 és ReiserFS esetén is: például chmod (csak) ezt a fájldátumot módosítja
-#~ msgid "Status:    %s"
-#~ msgstr "Metaadatmód.: %s"
