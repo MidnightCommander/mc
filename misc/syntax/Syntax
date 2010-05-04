@@ -175,6 +175,9 @@ include lua.syntax
 file ..\*\\.([iI][dD][lL])$ CORBA\sIDL
 include idl.syntax
 
+file ..\*\\.([iI][nN][iI])$ INI\sFile
+include ini.syntax
+
 file Don_t_match_me Mail\sfolder ^(From|Return-(P|p)ath:|From:|Date:)\s
 include mail.syntax
 
