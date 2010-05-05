@@ -233,7 +233,8 @@ is_week (const char *str, struct tm *tim)
     if (!str)
 	return 0;
 
-    if ((pos = strstr (week, str)) != NULL) {
+    pos = strstr (week, str);
+    if (pos != NULL) {
 	if (tim != NULL)
 	    tim->tm_wday = (pos - week) / 3;
 	return 1;
@@ -250,7 +251,8 @@ is_month (const char *str, struct tm *tim)
     if (!str)
 	return 0;
 
-    if ((pos = strstr (month, str)) != NULL) {
+    pos = strstr (month, str);
+    if (pos != NULL) {
 	if (tim != NULL)
 	    tim->tm_mon = (pos - month) / 3;
 	return 1;
@@ -287,10 +289,12 @@ is_time (const char *str, struct tm *tim)
 {
     const char *p, *p2;
 
-    if (!str)
+    if (str == NULL)
 	return 0;
 
-    if ((p = strchr (str, ':')) && (p2 = strrchr (str, ':'))) {
+    p = strchr (str, ':');
+    p2 = strrchr (str, ':');
+    if (p != NULL && p2 != NULL) {
 	if (p != p2) {
 	    if (sscanf
 		(str, "%2d:%2d:%2d", &tim->tm_hour, &tim->tm_min,
@@ -619,7 +623,8 @@ vfs_parse_filedate (int idx, time_t *t)
 
 	tim.tm_year--;
 
-    if (l10n || (*t = mktime (&tim)) < 0)
+    *t = mktime (&tim);
+    if (l10n || (*t < 0))
 	*t = 0;
     return idx;
 }
@@ -814,7 +819,7 @@ void
 vfs_die (const char *m)
 {
     message (D_ERROR, _("Internal error:"), "%s", m);
-    exit (1);
+    exit (EXIT_FAILURE);
 }
 
 char *

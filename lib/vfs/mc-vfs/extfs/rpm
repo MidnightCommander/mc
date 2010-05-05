@@ -20,8 +20,7 @@
 #	2004: Whitespace(s) & single quote(s) in filename workaround
 #	      https://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=64007
 #  Slava Zanko <slavazanko@gmail.com>
-#	2009: Totally rewrited.
-#	      ALTLinux users have strange artefacts with single quote(s)
+#	2009: Totally rewritten.
 #
 #  This file is part of the Midnight Commander.
 #

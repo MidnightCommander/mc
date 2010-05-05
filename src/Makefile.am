@@ -84,16 +84,12 @@ SRC_mc_keybind = \
 	keybind.c keybind.h \
 	cmddef.h
 
-SRC_mc_extended_charset = \
-	ecs.c ecs.h
-
 mc_SOURCES = \
 	$(SRC_USE_charset) \
 	$(SRC_mc_widgets) \
 	$(SRC_mc_conssaver) \
 	$(SRC_mc_options) \
 	$(SRC_mc_keybind) \
-	$(SRC_mc_extended_charset) \
 	achown.c achown.h \
 	args.c args.h \
 	background.c background.h \
@@ -127,14 +123,6 @@ mc_SOURCES = \
 	user.c user.h
 
 EXTRA_DIST = man2hlp.c $(SRC_maintainer) $(SRC_charset)
-
-# automated testing
-
-TESTS =			ecs-test
-
-check_PROGRAMS =	ecs-test
-ecs_test_SOURCES =	ecs-test.c ecs.h ecs.c
-ecs_test_LDADD =	$(GLIB_LIBS) $(INTLLIBS) $(MCLIBS)
 
 # end of automated testing
 

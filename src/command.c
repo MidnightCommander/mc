@@ -311,7 +311,6 @@ command_new (int y, int x, int cols)
 
     /* Add our hooks */
     cmd->widget.callback = command_callback;
-    cmd->completion_flags |= INPUT_COMPLETE_COMMANDS;
 
     return cmd;
 }

@@ -1327,11 +1327,14 @@ hot_next_token (void)
         while ((c = getc (hotlist_file)) != EOF && c != '"')
         {
             if (c == '\\')
-                if ((c = getc (hotlist_file)) == EOF)
+            {
+                c = getc (hotlist_file);
+                if (c == EOF)
                 {
                     g_string_free (tkn_buf, TRUE);
                     return TKN_EOF;
                 }
+            }
             g_string_append_c (tkn_buf, c == '\n' ? ' ' : c);
         }
         if (c == EOF)
@@ -1340,7 +1343,8 @@ hot_next_token (void)
             ret = TKN_STRING;
         break;
     case '\\':
-        if ((c = getc (hotlist_file)) == EOF)
+        c = getc (hotlist_file);
+        if (c == EOF)
         {
             g_string_free (tkn_buf, TRUE);
             return TKN_EOF;
@@ -1380,7 +1384,8 @@ while ((_tkn = hot_next_token ()) != TKN_EOF && _tkn != TKN_EOL) ; \
 }
 
 #define CHECK_TOKEN(_TKN_) \
-if ((tkn = hot_next_token ()) != _TKN_) { \
+tkn = hot_next_token (); \
+if (tkn != _TKN_) { \
     hotlist_state.readonly = 1; \
     hotlist_state.file_error = 1; \
     while (tkn != TKN_EOL && tkn != TKN_EOF) \
@@ -1537,7 +1542,8 @@ load_hotlist (void)
      */
     hotlist->directory = g_strdup ("Hotlist");
 
-    if ((hotlist_file = fopen (hotlist_file_name, "r")) == 0)
+    hotlist_file = fopen (hotlist_file_name, "r");
+    if (hotlist_file == NULL)
     {
         int result;
 
@@ -1649,7 +1655,8 @@ save_hotlist (void)
     {
         mc_util_make_backup_if_possible (hotlist_file_name, ".bak");
 
-        if ((hotlist_file = fopen (hotlist_file_name, "w")) != 0)
+        hotlist_file = fopen (hotlist_file_name, "w");
+        if (hotlist_file != NULL)
         {
             hot_save_group (hotlist);
             fclose (hotlist_file);

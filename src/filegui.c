@@ -660,60 +660,45 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
         int value;              /* 0 for labels */
     } rd_widgets[] =
     {
+    /* *INDENT-OFF* */
         /*  0 */
-        {
-        N_("Target file already exists!"), 3, 4, 0},
-            /*  1 */
-        {
-        "%s", 4, 4, 0},
+        { N_("Target file already exists!"), 3, 4, 0 },
+        /*  1 */
+        { "%s", 4, 4, 0 },
 #if (defined(_FILE_OFFSET_BITS) && _FILE_OFFSET_BITS == 64) || (defined _LARGE_FILES && _LARGE_FILES)
-            /*  2 */
-        {
-        N_("Source date: %s, size %llu"), 6, 4, 0},
-            /*  3 */
-        {
-        N_("Target date: %s, size %llu"), 7, 4, 0},
+        /*  2 */
+        { N_("Source date: %s, size %llu"), 6, 4, 0 },
+        /*  3 */
+        { N_("Target date: %s, size %llu"), 7, 4, 0 },
 #else
-            /*  2 */
-        {
-        N_("Source date: %s, size %u"), 6, 4, 0},
-            /*  3 */
-        {
-        N_("Target date: %s, size %u"), 7, 4, 0},
+        /*  2 */
+        { N_("Source date: %s, size %u"), 6, 4, 0 },
+        /*  3 */
+        { N_("Target date: %s, size %u"), 7, 4, 0 },
 #endif
-            /*  4 */
-        {
-        N_("&Abort"), 14, 25, REPLACE_ABORT},
-            /*  5 */
-        {
-        N_("If &size differs"), 12, 28, REPLACE_SIZE},
-            /*  6 */
-        {
-        N_("Non&e"), 11, 47, REPLACE_NEVER},
-            /*  7 */
-        {
-        N_("&Update"), 11, 36, REPLACE_UPDATE},
-            /*  8 */
-        {
-        N_("A&ll"), 11, 28, REPLACE_ALWAYS},
-            /*  9 */
-        {
-        N_("Overwrite all targets?"), 11, 4, 0},
-            /* 10 */
-        {
-        N_("&Reget"), 10, 28, REPLACE_REGET},
-            /* 11 */
-        {
-        N_("A&ppend"), 9, 45, REPLACE_APPEND},
-            /* 12 */
-        {
-        N_("&No"), 9, 37, REPLACE_NO},
-            /* 13 */
-        {
-        N_("&Yes"), 9, 28, REPLACE_YES},
-            /* 14 */
-        {
-        N_("Overwrite this target?"), 9, 4, 0}
+        /*  4 */
+        { N_("&Abort"), 14, 25, REPLACE_ABORT },
+        /*  5 */
+        { N_("If &size differs"), 12, 28, REPLACE_SIZE },
+        /*  6 */
+        { N_("Non&e"), 11, 47, REPLACE_NEVER },
+        /*  7 */
+        { N_("&Update"), 11, 36, REPLACE_UPDATE },
+        /*  8 */
+        { N_("A&ll"), 11, 28, REPLACE_ALWAYS },
+        /*  9 */
+        { N_("Overwrite all targets?"), 11, 4, 0 },
+        /* 10 */
+        { N_("&Reget"), 10, 28, REPLACE_REGET },
+        /* 11 */
+        { N_("A&ppend"), 9, 45, REPLACE_APPEND },
+        /* 12 */
+        { N_("&No"), 9, 37, REPLACE_NO },
+        /* 13 */
+        { N_("&Yes"), 9, 28, REPLACE_YES },
+        /* 14 */
+        { N_("Overwrite this target?"), 9, 4, 0 }
+    /* *INDENT-ON* */
     };
 
     const int num = sizeof (rd_widgets) / sizeof (rd_widgets[0]);
@@ -1112,7 +1097,7 @@ file_mask_dialog (FileOpContext * ctx, FileOperation operation,
         g_free (def_text_secure);
         g_free (source_mask);
 
-        ctx->search_handle->is_case_sentitive = TRUE;
+        ctx->search_handle->is_case_sensitive = TRUE;
         if (source_easy_patterns)
             ctx->search_handle->search_type = MC_SEARCH_T_GLOB;
         else

@@ -36,16 +36,13 @@
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/mcconfig.h"
 #include "lib/fileloc.h"
-
-#ifdef ENABLE_VFS
-#include "lib/vfs/mc-vfs/gc.h"
-#endif
+#include "lib/strutil.h"        /* str_isutf8 () */
 
 #ifdef USE_NETCODE
 #   include "lib/vfs/mc-vfs/ftpfs.h"
 #   include "lib/vfs/mc-vfs/fish.h"
 #endif
-#include "lib/strutil.h"        /* str_isutf8 () */
+
 
 #include "args.h"
 #include "dir.h"
@@ -868,7 +865,7 @@ load_setup (void)
     if ((autodetect_codeset[0] != '\0') && (strcmp (autodetect_codeset, "off")))
         is_autodetect_codeset_enabled = TRUE;
 
-    init_translation_table (source_codepage, display_codepage);
+    g_free (init_translation_table (source_codepage, display_codepage));
     if (get_codepage_id (display_codepage))
         utf8_display = str_isutf8 (get_codepage_id (display_codepage));
 #endif /* HAVE_CHARSET */

@@ -94,11 +94,12 @@ get_owner (int uid)
     char *name;
     static int uid_last;
 
-    if ((name = i_cache_match (uid, uid_cache, UID_CACHE_SIZE)) != NULL)
+    name = i_cache_match (uid, uid_cache, UID_CACHE_SIZE);
+    if (name != NULL)
         return name;
 
     pwd = getpwuid (uid);
-    if (pwd)
+    if (pwd != NULL)
     {
         i_cache_add (uid, uid_cache, UID_CACHE_SIZE, pwd->pw_name, &uid_last);
         return pwd->pw_name;
@@ -118,11 +119,12 @@ get_group (int gid)
     char *name;
     static int gid_last;
 
-    if ((name = i_cache_match (gid, gid_cache, GID_CACHE_SIZE)) != NULL)
+    name = i_cache_match (gid, gid_cache, GID_CACHE_SIZE);
+    if (name != NULL)
         return name;
 
     grp = getgrgid (gid);
-    if (grp)
+    if (grp != NULL)
     {
         i_cache_add (gid, gid_cache, GID_CACHE_SIZE, grp->gr_name, &gid_last);
         return grp->gr_name;
@@ -161,7 +163,8 @@ my_system (int flags, const char *shell, const char *command)
     /* handler messing the screen after the SIGCONT */
     sigaction (SIGTSTP, &startup_handler, &save_stop);
 
-    if ((pid = fork ()) < 0)
+    pid = fork ();
+    if (pid < 0)
     {
         fprintf (stderr, "\n\nfork () = -1\n");
         return -1;
@@ -179,12 +182,12 @@ my_system (int flags, const char *shell, const char *command)
         {
             gchar **shell_tokens;
             const gchar *only_cmd;
-            shell_tokens = g_strsplit (shell, " ", 2);
 
+            shell_tokens = g_strsplit (shell, " ", 2);
             if (shell_tokens == NULL)
                 only_cmd = shell;
             else
-                only_cmd = (*shell_tokens) ? *shell_tokens : shell;
+                only_cmd = (*shell_tokens != NULL) ? *shell_tokens : shell;
 
             execlp (only_cmd, shell, command, (char *) NULL);
 

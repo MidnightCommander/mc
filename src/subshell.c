@@ -73,7 +73,7 @@ static char tcsh_fifo[128];
 
 /* Local functions */
 static void init_raw_mode (void);
-static int feed_subshell (int how, int fail_on_error);
+static gboolean feed_subshell (int how, int fail_on_error);
 static void synchronize (void);
 static int pty_open_master (char *pty_name);
 static int pty_open_slave (const char *pty_name);
@@ -494,11 +494,12 @@ init_subshell (void)
         fprintf (stderr, "Cannot spawn the subshell process: %s\r\n", unix_error_string (errno));
         /* We exit here because, if the process table is full, the */
         /* other method of running user commands won't work either */
-        exit (1);
+        exit (EXIT_FAILURE);
     }
 
     if (subshell_pid == 0)
-    {                           /* We are in the child process */
+    {
+        /* We are in the child process */
         init_subshell_child (pty_name);
     }
 
@@ -650,7 +651,7 @@ read_subshell_prompt (void)
             else
             {
                 fprintf (stderr, "select (FD_SETSIZE, &tmp...): %s\r\n", unix_error_string (errno));
-                exit (1);
+                exit (EXIT_FAILURE);
             }
         }
 
@@ -990,7 +991,7 @@ sigchld_handler (int sig)
 
 
 /* Feed the subshell our keyboard input until it says it's finished */
-static int
+static gboolean
 feed_subshell (int how, int fail_on_error)
 {
     fd_set read_set;            /* For `select' */
@@ -1006,7 +1007,7 @@ feed_subshell (int how, int fail_on_error)
     wtime.tv_usec = 0;
     wptr = fail_on_error ? &wtime : NULL;
 
-    while (1)
+    while (TRUE)
     {
         if (!subshell_alive)
             return FALSE;
@@ -1032,7 +1033,7 @@ feed_subshell (int how, int fail_on_error)
             tcsetattr (STDOUT_FILENO, TCSANOW, &shell_mode);
             fprintf (stderr, "select (FD_SETSIZE, &read_set...): %s\r\n",
                      unix_error_string (errno));
-            exit (1);
+            exit (EXIT_FAILURE);
         }
 
         if (FD_ISSET (subshell_pty, &read_set))
@@ -1053,7 +1054,7 @@ feed_subshell (int how, int fail_on_error)
             {
                 tcsetattr (STDOUT_FILENO, TCSANOW, &shell_mode);
                 fprintf (stderr, "read (subshell_pty...): %s\r\n", unix_error_string (errno));
-                exit (1);
+                exit (EXIT_FAILURE);
             }
 
             if (how == VISIBLY)
@@ -1062,7 +1063,6 @@ feed_subshell (int how, int fail_on_error)
 
         else if (FD_ISSET (subshell_pipe[READ], &read_set))
             /* Read the subshell's CWD and capture its prompt */
-
         {
             bytes = read (subshell_pipe[READ], subshell_cwd, MC_MAXPATHLEN + 1);
             if (bytes <= 0)
@@ -1070,7 +1070,7 @@ feed_subshell (int how, int fail_on_error)
                 tcsetattr (STDOUT_FILENO, TCSANOW, &shell_mode);
                 fprintf (stderr, "read (subshell_pipe[READ]...): %s\r\n",
                          unix_error_string (errno));
-                exit (1);
+                exit (EXIT_FAILURE);
             }
 
             subshell_cwd[bytes - 1] = 0;        /* Squash the final '\n' */
@@ -1081,7 +1081,7 @@ feed_subshell (int how, int fail_on_error)
             if (subshell_state == RUNNING_COMMAND)
             {
                 subshell_state = INACTIVE;
-                return 1;
+                return TRUE;
             }
         }
 
@@ -1094,7 +1094,7 @@ feed_subshell (int how, int fail_on_error)
                 tcsetattr (STDOUT_FILENO, TCSANOW, &shell_mode);
                 fprintf (stderr,
                          "read (STDIN_FILENO, pty_buffer...): %s\r\n", unix_error_string (errno));
-                exit (1);
+                exit (EXIT_FAILURE);
             }
 
             for (i = 0; i < bytes; ++i)
@@ -1112,9 +1112,7 @@ feed_subshell (int how, int fail_on_error)
                 subshell_ready = FALSE;
         }
         else
-        {
             return FALSE;
-        }
     }
 }
 
@@ -1254,20 +1252,20 @@ pty_open_master (char *pty_name)
     for (ptr1 = "pqrstuvwxyzPQRST"; *ptr1; ++ptr1)
     {
         pty_name[8] = *ptr1;
-        for (ptr2 = "0123456789abcdef"; *ptr2; ++ptr2)
+        for (ptr2 = "0123456789abcdef"; *ptr2 != '\0'; ++ptr2)
         {
             pty_name[9] = *ptr2;
 
             /* Try to open master */
-            if ((pty_master = open (pty_name, O_RDWR)) == -1)
+            pty_master = open (pty_name, O_RDWR);
+            if (pty_master == -1)
             {
                 if (errno == ENOENT)    /* Different from EIO */
                     return -1;  /* Out of pty devices */
-                else
-                    continue;   /* Try next pty device */
+                continue;       /* Try next pty device */
             }
             pty_name[5] = 't';  /* Change "pty" to "tty" */
-            if (access (pty_name, 6))
+            if (access (pty_name, 6) != 0)
             {
                 close (pty_master);
                 pty_name[5] = 'p';
@@ -1293,7 +1291,8 @@ pty_open_slave (const char *pty_name)
         /* chown (pty_name, getuid (), group_info->gr_gid);  FIXME */
         /* chmod (pty_name, S_IRUSR | S_IWUSR | S_IWGRP);   FIXME */
     }
-    if ((pty_slave = open (pty_name, O_RDWR)) == -1)
+    pty_slave = open (pty_name, O_RDWR);
+    if (pty_slave == -1)
         fprintf (stderr, "open (pty_name, O_RDWR): %s\r\n", pty_name);
     fcntl (pty_slave, F_SETFD, FD_CLOEXEC);
     return pty_slave;

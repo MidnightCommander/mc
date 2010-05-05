@@ -829,7 +829,7 @@ scan_diff (FBUF * f, GArray * ops)
             }
             continue;
         }
-        while (buf[sz - 1] != '\n' && (sz = f_gets (buf, sizeof (buf), f)))
+        while (buf[sz - 1] != '\n' && (sz = f_gets (buf, sizeof (buf), f)) != 0)
         {
         }
     }
@@ -936,14 +936,15 @@ dff_reparse (int ord, const char *filename, const GArray * ops, DFUNC printer, v
         int n;
         op = &g_array_index (ops, DIFFCMD, i);
         n = op->F1 - (op->cmd != add_cmd);
-        while (line < n && (sz = f_gets (buf, sizeof (buf), f)))
+        while (line < n && (sz = f_gets (buf, sizeof (buf), f)) != 0)
         {
             line++;
             printer (ctx, EQU_CH, line, off, sz, buf);
             off += sz;
             while (buf[sz - 1] != '\n')
             {
-                if (!(sz = f_gets (buf, sizeof (buf), f)))
+                sz = f_gets (buf, sizeof (buf), f);
+                if (sz == 0)
                 {
                     printer (ctx, 0, 0, 0, 1, "\n");
                     break;
@@ -969,14 +970,15 @@ dff_reparse (int ord, const char *filename, const GArray * ops, DFUNC printer, v
         if (op->cmd == del_cmd)
         {
             n = op->F2 - op->F1 + 1;
-            while (n && (sz = f_gets (buf, sizeof (buf), f)))
+            while (n != 0 && (sz = f_gets (buf, sizeof (buf), f)) != 0)
             {
                 line++;
                 printer (ctx, ADD_CH, line, off, sz, buf);
                 off += sz;
                 while (buf[sz - 1] != '\n')
                 {
-                    if (!(sz = f_gets (buf, sizeof (buf), f)))
+                    sz = f_gets (buf, sizeof (buf), f);
+                    if (sz == 0)
                     {
                         printer (ctx, 0, 0, 0, 1, "\n");
                         break;
@@ -994,14 +996,15 @@ dff_reparse (int ord, const char *filename, const GArray * ops, DFUNC printer, v
         if (op->cmd == 'c')
         {
             n = op->F2 - op->F1 + 1;
-            while (n && (sz = f_gets (buf, sizeof (buf), f)))
+            while (n != 0 && (sz = f_gets (buf, sizeof (buf), f)) != 0)
             {
                 line++;
                 printer (ctx, CHG_CH, line, off, sz, buf);
                 off += sz;
                 while (buf[sz - 1] != '\n')
                 {
-                    if (!(sz = f_gets (buf, sizeof (buf), f)))
+                    sz = f_gets (buf, sizeof (buf), f);
+                    if (sz == 0)
                     {
                         printer (ctx, 0, 0, 0, 1, "\n");
                         break;
@@ -1028,14 +1031,15 @@ dff_reparse (int ord, const char *filename, const GArray * ops, DFUNC printer, v
 #undef F2
 #undef F1
 
-    while ((sz = f_gets (buf, sizeof (buf), f)))
+    while ((sz = f_gets (buf, sizeof (buf), f)) != 0)
     {
         line++;
         printer (ctx, EQU_CH, line, off, sz, buf);
         off += sz;
         while (buf[sz - 1] != '\n')
         {
-            if (!(sz = f_gets (buf, sizeof (buf), f)))
+            sz = f_gets (buf, sizeof (buf), f);
+            if (sz == 0)
             {
                 printer (ctx, 0, 0, 0, 1, "\n");
                 break;
@@ -1252,8 +1256,10 @@ hdiff_scan (const char *s, int m, const char *t, int n, int min, GArray * hdiff,
     BRACKET b;
 
     /* dumbscan (single horizontal diff) -- does not compress whitespace */
-    for (i = 0; i < m && i < n && s[i] == t[i]; i++);
-    for (; m > i && n > i && s[m - 1] == t[n - 1]; m--, n--);
+    for (i = 0; i < m && i < n && s[i] == t[i]; i++)
+        ;
+    for (; m > i && n > i && s[m - 1] == t[n - 1]; m--, n--)
+        ;
 
     b[0].off = i;
     b[0].len = m - i;
@@ -1315,7 +1321,7 @@ static int
 cvt_cpy (char *dst, const char *src, size_t srcsize, int base, int ts)
 {
     int i;
-    for (i = 0; srcsize; i++, src++, dst++, srcsize--)
+    for (i = 0; srcsize != 0; i++, src++, dst++, srcsize--)
     {
         *dst = *src;
         if (*src == '\t')
@@ -1355,7 +1361,7 @@ cvt_ncpy (char *dst, int dstsize, const char **_src, size_t srcsize, int base, i
 {
     int i;
     const char *src = *_src;
-    for (i = 0; i < dstsize && srcsize; i++, src++, dst++, srcsize--)
+    for (i = 0; i < dstsize && srcsize != 0; i++, src++, dst++, srcsize--)
     {
         *dst = *src;
         if (*src == '\t')
@@ -1401,7 +1407,7 @@ cvt_mget (const char *src, size_t srcsize, char *dst, int dstsize, int skip, int
         int i;
         char *tmp = dst;
         const int base = 0;
-        for (i = 0; dstsize && srcsize && *src != '\n'; i++, src++, srcsize--)
+        for (i = 0; dstsize != 0 && srcsize != 0 && *src != '\n'; i++, src++, srcsize--)
         {
             if (*src == '\t')
             {
@@ -1413,7 +1419,7 @@ cvt_mget (const char *src, size_t srcsize, char *dst, int dstsize, int skip, int
                     {
                         skip--;
                     }
-                    else if (dstsize)
+                    else if (dstsize != 0)
                     {
                         dstsize--;
                         *dst++ = ' ';
@@ -1445,6 +1451,7 @@ cvt_mget (const char *src, size_t srcsize, char *dst, int dstsize, int skip, int
                     int utf_ch = 0;
                     gboolean res;
                     int w;
+
                     skip--;
                     utf_ch = dview_get_utf ((char *)src, &w, &res);
                     if (w > 1)
@@ -1461,7 +1468,7 @@ cvt_mget (const char *src, size_t srcsize, char *dst, int dstsize, int skip, int
         }
         sz = dst - tmp;
     }
-    while (dstsize)
+    while (dstsize != 0)
     {
         dstsize--;
         *dst++ = ' ';
@@ -1498,7 +1505,7 @@ cvt_mgeta (const char *src, size_t srcsize, char *dst, int dstsize, int skip, in
         int i, k;
         char *tmp = dst;
         const int base = 0;
-        for (i = 0, k = 0; dstsize && srcsize && *src != '\n'; i++, k++, src++, srcsize--)
+        for (i = 0, k = 0; dstsize != 0 && srcsize != 0 && *src != '\n'; i++, k++, src++, srcsize--)
         {
             if (*src == '\t')
             {
@@ -1506,11 +1513,11 @@ cvt_mgeta (const char *src, size_t srcsize, char *dst, int dstsize, int skip, in
                 i += j - 1;
                 while (j-- > 0)
                 {
-                    if (skip)
+                    if (skip != 0)
                     {
                         skip--;
                     }
-                    else if (dstsize)
+                    else if (dstsize != 0)
                     {
                         dstsize--;
                         *att++ = is_inside (k, hdiff, ord);
@@ -1520,7 +1527,7 @@ cvt_mgeta (const char *src, size_t srcsize, char *dst, int dstsize, int skip, in
             }
             else if (src[0] == '\r' && (srcsize == 1 || src[1] == '\n'))
             {
-                if (!skip && show_cr)
+                if (skip == 0 && show_cr)
                 {
                     if (dstsize > 1)
                     {
@@ -1541,11 +1548,12 @@ cvt_mgeta (const char *src, size_t srcsize, char *dst, int dstsize, int skip, in
             }
             else
             {
-                if (skip)
+                if (skip != 0)
                 {
                     int utf_ch = 0;
                     gboolean res;
                     int w;
+
                     skip--;
                     utf_ch = dview_get_utf ((char *) src, &w, &res);
                     if (w > 1)
@@ -1563,7 +1571,7 @@ cvt_mgeta (const char *src, size_t srcsize, char *dst, int dstsize, int skip, in
         }
         sz = dst - tmp;
     }
-    while (dstsize)
+    while (dstsize != 0)
     {
         dstsize--;
         *att++ = 0;
@@ -1620,10 +1628,10 @@ cvt_fget (FBUF * f, off_t off, char *dst, size_t dstsize, int skip, int ts, int 
     while (skip > base)
     {
         old_base = base;
-        if (!(sz = f_gets (tmp, amount, f)))
-        {
+        sz = f_gets (tmp, amount, f);
+        if (sz == 0)
             break;
-        }
+
         base = cvt_cpy (cvt, tmp, sz, old_base, ts);
         if (cvt[base - old_base - 1] == '\n')
         {
@@ -1645,17 +1653,18 @@ cvt_fget (FBUF * f, off_t off, char *dst, size_t dstsize, int skip, int ts, int 
 
     if (useful <= dstsize)
     {
-        if (useful)
-        {
+        if (useful != 0)
             memmove (dst, cvt + offset, useful);
-        }
-        if (q == NULL && (sz = f_gets (tmp, dstsize - useful + 1, f)))
+
+        if (q == NULL)
         {
-            const char *ptr = tmp;
-            useful += cvt_ncpy (dst + useful, dstsize - useful, &ptr, sz, base, ts) - base;
-            if (ptr < tmp + sz)
+            sz = f_gets (tmp, dstsize - useful + 1, f);
+            if (sz != 0)
             {
-                lastch = *ptr;
+                const char *ptr = tmp;
+                useful += cvt_ncpy (dst + useful, dstsize - useful, &ptr, sz, base, ts) - base;
+                if (ptr < tmp + sz)
+                    lastch = *ptr;
             }
         }
         sz = useful;
@@ -1722,9 +1731,9 @@ printer (void *ctx, int ch, int line, off_t off, size_t sz, const char *str)
         p.ch = ch;
         p.line = line;
         p.u.off = off;
-        if (dsrc == DATA_SRC_MEM && line)
+        if (dsrc == DATA_SRC_MEM && line != 0)
         {
-            if (sz && str[sz - 1] == '\n')
+            if (sz != 0 && str[sz - 1] == '\n')
             {
                 sz--;
             }
@@ -1738,11 +1747,11 @@ printer (void *ctx, int ch, int line, off_t off, size_t sz, const char *str)
     {
         DIFFLN *p;
         p = &g_array_index (a, DIFFLN, a->len - 1);
-        if (sz && str[sz - 1] == '\n')
+        if (sz != 0 && str[sz - 1] == '\n')
         {
             sz--;
         }
-        if (sz > 0)
+        if (sz != 0)
         {
             size_t new_size = p->u.len + sz;
             char *q = g_realloc (p->p, new_size);
@@ -1751,7 +1760,7 @@ printer (void *ctx, int ch, int line, off_t off, size_t sz, const char *str)
         }
         p->u.len += sz;
     }
-    if (dsrc == DATA_SRC_TMP && (line || !ch))
+    if (dsrc == DATA_SRC_TMP && (line != 0 || ch == 0))
     {
         FBUF *f = ((PRINTER_CTX *) ctx)->f;
         f_write (f, str, sz);
@@ -1925,7 +1934,7 @@ get_line_numbers (const GArray * a, size_t pos, int *linenum, int *lineofs)
     *linenum = 0;
     *lineofs = 0;
 
-    if (a->len)
+    if (a->len != 0)
     {
         if (pos >= a->len)
         {
@@ -1934,13 +1943,13 @@ get_line_numbers (const GArray * a, size_t pos, int *linenum, int *lineofs)
 
         p = &g_array_index (a, DIFFLN, pos);
 
-        if (!p->line)
+        if (p->line == 0)
         {
             int n;
             for (n = pos; n > 0; n--)
             {
                 p--;
-                if (p->line)
+                if (p->line != 0)
                 {
                     break;
                 }
@@ -2092,12 +2101,12 @@ dview_remove_hunk (WDiff * dview,  FILE * merge_file, int from1, int to1)
     FILE *f0;
     f0 = fopen (dview->file[0], "r");
     line = 0;
-    while (fgets (buf, sizeof (buf), f0) && line < from1 - 1)
+    while (fgets (buf, sizeof (buf), f0) != NULL && line < from1 - 1)
     {
         line++;
         fputs (buf, merge_file);
     }
-    while (fgets (buf, sizeof (buf), f0))
+    while (fgets (buf, sizeof (buf), f0) != NULL)
     {
         line++;
         if (line >= to1)
@@ -2116,19 +2125,19 @@ dview_add_hunk (WDiff * dview, FILE * merge_file, int from1, int from2, int to2)
     f0 = fopen (dview->file[0], "r");
     f1 = fopen (dview->file[1], "r");
     line = 0;
-    while (fgets (buf, sizeof (buf), f0) && line < from1 - 1)
+    while (fgets (buf, sizeof (buf), f0) != NULL && line < from1 - 1)
     {
         line++;
         fputs (buf, merge_file);
     }
     line = 0;
-    while (fgets (buf, sizeof (buf), f1) && line <= to2)
+    while (fgets (buf, sizeof (buf), f1) != NULL && line <= to2)
     {
         line++;
         if (line >= from2)
             fputs (buf, merge_file);
     }
-    while (fgets (buf, sizeof (buf), f0))
+    while (fgets (buf, sizeof (buf), f0) != NULL)
     {
         fputs (buf, merge_file);
     }
@@ -2146,19 +2155,19 @@ dview_replace_hunk (WDiff * dview, FILE * merge_file, int from1, int to1, int fr
     f0 = fopen (dview->file[0], "r");
     f1 = fopen (dview->file[1], "r");
     line1 = 0;
-    while (fgets (buf, sizeof (buf), f0) && line1 < from1 - 1)
+    while (fgets (buf, sizeof (buf), f0) != NULL && line1 < from1 - 1)
     {
         line1++;
         fputs (buf, merge_file);
     }
     line2 = 0;
-    while (fgets (buf, sizeof (buf), f1) && line2 <= to2)
+    while (fgets (buf, sizeof (buf), f1) != NULL && line2 <= to2)
     {
         line2++;
         if (line2 >= from2)
             fputs (buf, merge_file);
     }
-    while (fgets (buf, sizeof (buf), f0))
+    while (fgets (buf, sizeof (buf), f0) != NULL)
     {
         line1++;
         if (line1 > to1)
@@ -2197,10 +2206,9 @@ do_merge_hunk (WDiff * dview)
 
         merge_file_fd = mc_mkstemps (&merge_file_name, "mcmerge", NULL);
         if (merge_file_fd == -1)
-            {
-            message (D_ERROR, MSG_ERROR,
-            _(" Cannot create temporary merge file \n %s "),
-            unix_error_string (errno));
+        {
+            message (D_ERROR, MSG_ERROR, _(" Cannot create temporary merge file \n %s "),
+                     unix_error_string (errno));
             return;
         }
 
@@ -2497,7 +2505,7 @@ dview_display_file (const WDiff * dview, int ord, int r, int c, int height, int 
             tty_gotoyx (r + j, c - 2);
             tty_print_char (ch);
         }
-        if (p->line)
+        if (p->line != 0)
         {
             if (display_numbers)
             {
@@ -2798,25 +2806,23 @@ dview_event (Gpm_Event * event, void *x)
     int result = MOU_NORMAL;
 
     /* We are not interested in the release events */
-    if (!(event->type & (GPM_DOWN | GPM_DRAG)))
+    if ((event->type & (GPM_DOWN | GPM_DRAG)) == 0)
     {
         return result;
     }
 
     /* Wheel events */
-    if ((event->buttons & GPM_B_UP) && (event->type & GPM_DOWN))
+    if ((event->buttons & GPM_B_UP) != 0 && (event->type & GPM_DOWN) != 0)
     {
         dview->skip_rows -= 2;
         dview->search.last_accessed_num_line = dview->skip_rows;
         dview_update (dview);
-        return result;
     }
-    if ((event->buttons & GPM_B_DOWN) && (event->type & GPM_DOWN))
+    else if ((event->buttons & GPM_B_DOWN) != 0 && (event->type & GPM_DOWN) != 0)
     {
         dview->skip_rows += 2;
         dview->search.last_accessed_num_line = dview->skip_rows;
         dview_update (dview);
-        return result;
     }
 
     return result;

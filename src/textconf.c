@@ -26,11 +26,9 @@
 
 #include <limits.h>
 #include <stdio.h>
-
 #include <sys/types.h>
 
 #include "lib/global.h"
-#include "ecs.h"
 #include "src/textconf.h"
 
 #ifdef ENABLE_VFS
@@ -116,35 +114,30 @@ static const char *const features[] = {
 void
 show_version (void)
 {
-    int i;
+    size_t i;
 
     printf (_("GNU Midnight Commander %s\n"), VERSION);
 
 #ifdef ENABLE_VFS
-    printf (_("Virtual File System:"));
-    for (i = 0; vfs_supported[i]; i++) {
-	if (i == 0)
-	    printf (" ");
-	else
-	    printf (", ");
+    printf (_("Virtual File Systems:"));
+    for (i = 0; vfs_supported[i] != NULL; i++)
+	printf ("%s %s", i == 0 ? "" : ",", _(vfs_supported[i]));
 
-	printf ("%s", _(vfs_supported[i]));
-    }
     printf ("\n");
 #endif				/* ENABLE_VFS */
 
-    for (i = 0; features[i]; i++)
+    for (i = 0; features[i] != NULL; i++)
 	printf ("%s", _(features[i]));
 
-    (void)printf("Data types:");
+    (void)printf(_("Data types:"));
 #define TYPE_INFO(T) \
-    (void)printf(" %s %d", #T, (int) (CHAR_BIT * sizeof(T)))
+    (void)printf(" %s: %d;", #T, (int) (CHAR_BIT * sizeof(T)))
     TYPE_INFO(char);
     TYPE_INFO(int);
     TYPE_INFO(long);
     TYPE_INFO(void *);
+    TYPE_INFO(size_t);
     TYPE_INFO(off_t);
-    TYPE_INFO(ecs_char);
 #undef TYPE_INFO
     (void)printf("\n");
 }

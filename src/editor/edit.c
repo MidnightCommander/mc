@@ -332,7 +332,8 @@ edit_load_file_fast (WEdit * edit, const char *filename)
     edit->curs2 = edit->last_byte;
     buf2 = edit->curs2 >> S_EDIT_BUF_SIZE;
     edit->utf8 = 0;
-    if ((file = mc_open (filename, O_RDONLY | O_BINARY)) == -1)
+    file = mc_open (filename, O_RDONLY | O_BINARY);
+    if (file == -1)
     {
         GString *errmsg = g_string_new (NULL);
         g_string_sprintf (errmsg, _(" Cannot open %s for reading "), filename);
@@ -594,7 +595,8 @@ edit_insert_file (WEdit * edit, const char *filename)
         long current = edit->curs1;
         int vertical_insertion = 0;
         char *buf;
-        if ((file = mc_open (filename, O_RDONLY | O_BINARY)) == -1)
+        file = mc_open (filename, O_RDONLY | O_BINARY);
+        if (file == -1)
             return 0;
         buf = g_malloc0 (TEMP_BUF_LEN);
         blocklen = mc_read (file, buf, sizeof (VERTICAL_MAGIC));
@@ -602,30 +604,20 @@ edit_insert_file (WEdit * edit, const char *filename)
         {
             /* if contain signature VERTICAL_MAGIC tnen it vertical block */
             if (memcmp (buf, VERTICAL_MAGIC, sizeof (VERTICAL_MAGIC)) == 0)
-            {
                 vertical_insertion = 1;
-            }
             else
-            {
                 mc_lseek (file, 0, SEEK_SET);
-            }
         }
         if (vertical_insertion)
-        {
             blocklen = edit_insert_column_of_text_from_file (edit, file);
-        }
         else
-        {
             while ((blocklen = mc_read (file, (char *) buf, TEMP_BUF_LEN)) > 0)
-            {
                 for (i = 0; i < blocklen; i++)
                     edit_insert (edit, buf[i]);
-            }
-        }
         edit_cursor_move (edit, current - edit->curs1);
         g_free (buf);
         mc_close (file);
-        if (blocklen)
+        if (blocklen != 0)
             return 0;
     }
     return 1;
@@ -1150,7 +1142,7 @@ edit_push_action (WEdit * edit, long c, ...)
     if (c == CURS_LEFT_LOTS || c == CURS_RIGHT_LOTS)
     {
         va_list ap;
-        edit->undo_stack[sp] = c == CURS_LEFT_LOTS ? CURS_LEFT : CURS_RIGHT;
+        edit->undo_stack[sp] = (c == CURS_LEFT_LOTS) ? CURS_LEFT : CURS_RIGHT;
         edit->stack_pointer = (edit->stack_pointer + 1) & edit->stack_size_mask;
         va_start (ap, c);
         c = -(va_arg (ap, int));
@@ -1239,21 +1231,22 @@ pop_action (WEdit * edit)
 {
     long c;
     unsigned long sp = edit->stack_pointer;
+
     if (sp == edit->stack_bottom)
-    {
         return STACK_BOTTOM;
-    }
+
     sp = (sp - 1) & edit->stack_size_mask;
-    if ((c = edit->undo_stack[sp]) >= 0)
+    c = edit->undo_stack[sp];
+    if (c >= 0)
     {
         /*      edit->undo_stack[sp] = '@'; */
         edit->stack_pointer = (edit->stack_pointer - 1) & edit->stack_size_mask;
         return c;
     }
+
     if (sp == edit->stack_bottom)
-    {
         return STACK_BOTTOM;
-    }
+
     c = edit->undo_stack[(sp - 1) & edit->stack_size_mask];
     if (edit->undo_stack[sp] == -2)
     {
@@ -1356,6 +1349,7 @@ edit_insert_ahead (WEdit * edit, int c)
 {
     if (edit->last_byte >= SIZE_LIMIT)
         return;
+
     if (edit->curs1 < edit->start_display)
     {
         edit->start_display++;
@@ -1378,8 +1372,8 @@ edit_insert_ahead (WEdit * edit, int c)
 
     if (!((edit->curs2 + 1) & M_EDIT_BUF_SIZE))
         edit->buffers2[(edit->curs2 + 1) >> S_EDIT_BUF_SIZE] = g_malloc0 (EDIT_BUF_SIZE);
-    edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE][EDIT_BUF_SIZE - (edit->curs2 & M_EDIT_BUF_SIZE) -
-                                                   1] = c;
+    edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE]
+                  [EDIT_BUF_SIZE - (edit->curs2 & M_EDIT_BUF_SIZE) - 1] = c;
 
     edit->last_byte++;
     edit->curs2++;
@@ -1538,7 +1532,7 @@ edit_move_backward_lots (WEdit * edit, long increment)
     }
     else
     {
-        if (s)
+        if (s != 0)
         {
             memqcpy (edit,
                      edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE] + t -
@@ -1603,9 +1597,7 @@ edit_move_backward_lots (WEdit * edit, long increment)
                 edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE] = g_malloc0 (EDIT_BUF_SIZE);
         }
         else
-        {
             g_free (p);
-        }
     }
     return edit_get_byte (edit, edit->curs1);
 }
@@ -1696,14 +1688,12 @@ edit_cursor_move (WEdit * edit, long increment)
 long
 edit_eol (WEdit * edit, long current)
 {
-    if (current < edit->last_byte)
-    {
-        for (;; current++)
-            if (edit_get_byte (edit, current) == '\n')
-                break;
-    }
-    else
+    if (current >= edit->last_byte)
         return edit->last_byte;
+
+    for (;; current++)
+        if (edit_get_byte (edit, current) == '\n')
+            break;
     return current;
 }
 
@@ -1711,14 +1701,12 @@ edit_eol (WEdit * edit, long current)
 long
 edit_bol (WEdit * edit, long current)
 {
-    if (current > 0)
-    {
-        for (;; current--)
-            if (edit_get_byte (edit, current - 1) == '\n')
-                break;
-    }
-    else
+    if (current <= 0)
         return 0;
+
+    for (;; current--)
+        if (edit_get_byte (edit, current - 1) == '\n')
+            break;
     return current;
 }
 

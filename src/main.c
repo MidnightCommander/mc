@@ -440,14 +440,24 @@ directory_history_add (struct WPanel *panel, const char *dir)
 static const char *
 get_parent_dir_name (const char *cwd, const char *lwd)
 {
-    const char *p;
-    if (strlen (lwd) > strlen (cwd))
-        if ((p = strrchr (lwd, PATH_SEP)) && !strncmp (cwd, lwd, p - lwd) &&
-            ((gsize) strlen (cwd) == (gsize) p - (gsize) lwd || (p == lwd && cwd[0] == PATH_SEP &&
-                                                                 cwd[1] == '\0')))
-        {
+    size_t llen, clen;
+
+    llen = strlen (lwd);
+    clen = strlen (cwd);
+
+    if (llen > clen)
+    {
+        const char *p;
+
+        p = strrchr (lwd, PATH_SEP);
+
+        if ((p != NULL)
+            && (strncmp (cwd, lwd, (size_t) (p - lwd)) == 0)
+            && (clen == (size_t) (p - lwd)
+                || ((p == lwd) && (cwd[0] == PATH_SEP) && (cwd[1] == '\0'))))
             return (p + 1);
-        }
+    }
+
     return NULL;
 }
 
@@ -1442,7 +1452,7 @@ init_xterm_support (void)
     if (!termvalue || !(*termvalue))
     {
         fputs (_("The TERM environment variable is unset!\n"), stderr);
-        exit (1);
+        exit (EXIT_FAILURE);
     }
 
     /* Check mouse capabilities */
@@ -2215,19 +2225,20 @@ mc_main__setup_by_args (int argc, char *argv[])
         else
         {
             fputs ("No arguments given to the viewer\n", stderr);
-            exit (1);
+            exit (EXIT_FAILURE);
         }
         mc_run_mode = MC_RUN_VIEWER;
-#ifdef USE_DIFF_VIEW
     }
+#ifdef USE_DIFF_VIEW
     else if (!STRNCOMP (base, "mcd", 3) || !STRCOMP (base, "diff"))
     {
         if (argc < 3)
         {
             fputs ("There 2 files are required to diffviewer\n", stderr);
-            exit (1);
+            exit (EXIT_FAILURE);
         }
-        else if (tmp != NULL)
+
+        if (tmp != NULL)
         {
             mc_run_param0 = g_strdup (tmp);
             tmp = (argc > 1) ? argv[2] : NULL;
@@ -2235,8 +2246,8 @@ mc_main__setup_by_args (int argc, char *argv[])
                 mc_run_param1 = g_strdup (tmp);
             mc_run_mode = MC_RUN_DIFFVIEWER;
         }
-#endif /* USE_DIFF_VIEW */
     }
+#endif /* USE_DIFF_VIEW */
     else
     {
         /* sets the current dir and the other dir */

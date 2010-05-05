@@ -1422,7 +1422,7 @@ input_destroy (WInput * in)
     if (in == NULL)
     {
         fprintf (stderr, "Internal error: null Input *\n");
-        exit (1);
+        exit (EXIT_FAILURE);
     }
 
     new_input (in);

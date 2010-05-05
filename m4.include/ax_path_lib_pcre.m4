@@ -17,7 +17,7 @@ dnl @license GPLWithACException
 AC_DEFUN([AX_PATH_LIB_PCRE],[dnl
 AC_MSG_CHECKING([lib pcre])
 AC_ARG_WITH([pcre],
-            AC_HELP_STRING([--with-pcre[[=prefix]]].[ compile pcre part (via libpcre check)]),
+            AC_HELP_STRING([--with-pcre[[=prefix]]], [compile pcre part (via libpcre check)]),
             ,
             [with_pcre="yes"]
 )
@@ -41,7 +41,7 @@ else
      AC_CHECK_LIB(pcre, pcre_compile)
 
      if test x"$ac_cv_lib_pcre_pcre_compile" = x"yes" ; then
-        AC_MSG_RESULT(.setting PCRE_LIBS -L$with_pcre/lib -lpcre)
+        AC_MSG_RESULT(setting PCRE_LIBS -L$with_pcre/lib -lpcre)
 
         PCRE_LIBS=$test_PCRE_LIBS
         test_PCRE_CFLAGS=$test_PCRE_CFLAGS

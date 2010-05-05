@@ -28,7 +28,7 @@ const char *get_codepage_id (const int n);
 int get_codepage_index (const char *id);
 int load_codepages_list (void);
 void free_codepages_list (void);
-const char *init_translation_table (int cpsource, int cpdisplay);
+char *init_translation_table (int cpsource, int cpdisplay);
 void convert_to_display (char *str);
 void convert_from_input (char *str);
 void convert_string (unsigned char *str);

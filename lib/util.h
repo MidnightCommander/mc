@@ -280,15 +280,16 @@ const char *Q_ (const char *s);
  * We can't use str*cpy funs here:
  * http://kerneltrap.org/mailarchive/openbsd-misc/2008/5/27/1951294
  */
-static inline char * str_move(char * dest, const char * src)
+static inline char *
+str_move (char *dest, const char *src)
 {
     size_t n;
 
-    assert (dest<=src);
+    assert (dest <= src);
 
     n = strlen (src) + 1; /* + '\0' */
 
-    return memmove (dest, src, n);
+    return (char *) memmove (dest, src, n);
 }
 
 gboolean mc_util_make_backup_if_possible (const char *, const char *);
@@ -297,6 +298,6 @@ gboolean mc_util_unlink_backup_if_possible (const char *, const char *);
 
 char *guess_message_value (void);
 
-#define MC_PTR_FREE(ptr) do { g_free(ptr); (ptr) = NULL; } while (0)
+#define MC_PTR_FREE(ptr) do { g_free (ptr); (ptr) = NULL; } while (0)
 
-#endif
+#endif                              /* MC_UTIL_H */

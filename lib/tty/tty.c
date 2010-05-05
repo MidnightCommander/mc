@@ -140,17 +140,20 @@ tty_print_one_vline (gboolean single)
 void
 tty_draw_box (int y, int x, int ys, int xs, gboolean single)
 {
+    ys--;
+    xs--;
+
     tty_draw_vline (y, x, mc_tty_frm[single ? MC_TTY_FRM_VERT : MC_TTY_FRM_DVERT], ys);
-    tty_draw_vline (y, x + xs - 1, mc_tty_frm[single ? MC_TTY_FRM_VERT : MC_TTY_FRM_DVERT], ys);
+    tty_draw_vline (y, x + xs, mc_tty_frm[single ? MC_TTY_FRM_VERT : MC_TTY_FRM_DVERT], ys);
     tty_draw_hline (y, x, mc_tty_frm[single ? MC_TTY_FRM_HORIZ : MC_TTY_FRM_DHORIZ], xs);
-    tty_draw_hline (y + ys - 1, x, mc_tty_frm[single ? MC_TTY_FRM_HORIZ : MC_TTY_FRM_DHORIZ], xs);
+    tty_draw_hline (y + ys, x, mc_tty_frm[single ? MC_TTY_FRM_HORIZ : MC_TTY_FRM_DHORIZ], xs);
     tty_gotoyx (y, x);
     tty_print_alt_char (ACS_ULCORNER, single);
-    tty_gotoyx (y + ys - 1, x);
+    tty_gotoyx (y + ys, x);
     tty_print_alt_char (ACS_LLCORNER, single);
-    tty_gotoyx (y, x + xs - 1);
+    tty_gotoyx (y, x + xs);
     tty_print_alt_char (ACS_URCORNER, single);
-    tty_gotoyx (y + ys - 1, x + xs - 1);
+    tty_gotoyx (y + ys, x + xs);
     tty_print_alt_char (ACS_LRCORNER, single);
 }
 

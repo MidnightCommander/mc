@@ -373,7 +373,8 @@ mcview_load_command_output (mcview_t * view, const char *command)
     mcview_close_datasource (view);
 
     open_error_pipe ();
-    if ((fp = popen (command, "r")) == NULL)
+    fp = popen (command, "r");
+    if (fp == NULL)
     {
         /* Avoid two messages.  Message from stderr has priority.  */
         mcview_display (view);

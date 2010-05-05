@@ -18,6 +18,12 @@
 
 #ifdef ENABLE_VFS
 
+extern int vfs_timeout;
+
+#ifdef USE_NETCODE
+extern int use_netrc;
+#endif
+
 void vfs_init (void);
 void vfs_shut (void);
 

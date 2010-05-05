@@ -42,12 +42,13 @@
 #include "lib/mcconfig.h"	/* Load/save user formats */
 #include "lib/strutil.h"
 
-#ifdef USE_NETCODE
-#   include "lib/vfs/mc-vfs/ftpfs.h"
+#ifdef ENABLE_VFS
+#include "lib/vfs/mc-vfs/vfs.h" /* vfs_timeout */
+#include "lib/vfs/mc-vfs/vfs-impl.h"
 #endif
 
-#ifdef ENABLE_VFS
-#include "lib/vfs/mc-vfs/gc.h"
+#ifdef USE_NETCODE
+#   include "lib/vfs/mc-vfs/ftpfs.h"
 #endif
 
 #include "dialog.h"		/* The nice dialog manager */
@@ -623,12 +624,14 @@ display_bits_box (void)
     run_dlg (dbits_dlg);
 
     if (dbits_dlg->ret_value == B_ENTER) {
-	const char *errmsg;
+	char *errmsg;
+
 	display_codepage = new_display_codepage;
-	errmsg =
-	    init_translation_table (source_codepage, display_codepage);
-	if (errmsg)
+	errmsg = init_translation_table (source_codepage, display_codepage);
+	if (errmsg != NULL) {
 	    message (D_ERROR, MSG_ERROR, "%s", errmsg);
+	    g_free (errmsg);
+	}
 #ifdef HAVE_SLANG
 	tty_display_8bit (display_codepage != 0 && display_codepage != 1);
 #else

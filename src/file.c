@@ -1153,7 +1153,8 @@ move_file_file (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, c
     {
         if (S_ISLNK (src_stats.st_mode) && ctx->stable_symlinks)
         {
-            if ((return_status = make_symlink (ctx, s, d)) == FILE_CONT)
+            return_status = make_symlink (ctx, s, d);
+            if (return_status == FILE_CONT)
                 goto retry_src_remove;
             else
                 return return_status;

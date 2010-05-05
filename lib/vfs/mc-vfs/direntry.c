@@ -493,11 +493,14 @@ vfs_s_get_path_mangle (struct vfs_class *me, char *inname, struct vfs_s_super **
 
     archive_name = inname;
     vfs_split (inname, &local, &op);
-    retval = (local) ? local : "";
+    retval = (local != NULL) ? local : "";
 
-    if (MEDATA->archive_check)
-        if (!(cookie = MEDATA->archive_check (me, archive_name, op)))
+    if (MEDATA->archive_check != NULL)
+    {
+        cookie = MEDATA->archive_check (me, archive_name, op);
+        if (cookie == NULL)
             return NULL;
+    }
 
     for (super = MEDATA->supers; super != NULL; super = super->next)
     {
@@ -686,7 +689,9 @@ static int
 vfs_s_chdir (struct vfs_class *me, const char *path)
 {
     void *data;
-    if (!(data = vfs_s_opendir (me, path)))
+
+    data = vfs_s_opendir (me, path);
+    if (data == NULL)
         return -1;
     vfs_s_closedir (data);
     return 0;
@@ -699,7 +704,8 @@ vfs_s_internal_stat (struct vfs_class *me, const char *path, struct stat *buf, i
 {
     struct vfs_s_inode *ino;
 
-    if (!(ino = vfs_s_inode_from_path (me, path, flag)))
+    ino = vfs_s_inode_from_path (me, path, flag);
+    if (ino == NULL)
         return -1;
     *buf = ino->st;
     return 0;
@@ -757,7 +763,8 @@ vfs_s_open (struct vfs_class *me, const char *file, int flags, int mode)
     char *q;
     struct vfs_s_inode *ino;
 
-    if ((q = vfs_s_get_path (me, file, &super, 0)) == NULL)
+    q = vfs_s_get_path (me, file, &super, 0);
+    if (q == NULL)
         return NULL;
     ino = vfs_s_find_inode (me, super, q, LINK_FOLLOW, FL_NONE);
     if (ino && ((flags & (O_CREAT | O_EXCL)) == (O_CREAT | O_EXCL)))
@@ -1115,7 +1122,7 @@ vfs_s_setctl (struct vfs_class *me, const char *path, int ctlop, void *arg)
         {
             struct vfs_s_inode *ino = vfs_s_inode_from_path (me, path, 0);
 
-            if (!ino)
+            if (ino == NULL)
                 return 0;
             if (arg)
                 ino->super->want_stale = 1;
@@ -1142,10 +1149,11 @@ vfs_s_setctl (struct vfs_class *me, const char *path, int ctlop, void *arg)
 static vfsid
 vfs_s_getid (struct vfs_class *me, const char *path)
 {
-    struct vfs_s_super *archive;
+    struct vfs_s_super *archive = NULL;
     char *p;
 
-    if (!(p = vfs_s_get_path (me, path, &archive, FL_NO_OPEN)))
+    p = vfs_s_get_path (me, path, &archive, FL_NO_OPEN);
+    if (p == NULL)
         return NULL;
     g_free (p);
     return (vfsid) archive;

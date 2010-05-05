@@ -150,9 +150,11 @@ do_background (struct FileOpContext *ctx, char *info)
     if (pipe (back_comm) == -1)
         return -1;
 
-    if ((pid = fork ()) == -1)
+    pid = fork ();
+    if (pid == -1)
     {
         int saved_errno = errno;
+
         (void) close (comm[0]);
         (void) close (comm[1]);
         (void) close (back_comm[0]);
@@ -176,11 +178,15 @@ do_background (struct FileOpContext *ctx, char *info)
         close (1);
         close (2);
 
-        if ((nullfd = open ("/dev/null", O_RDWR)) != -1)
+        nullfd = open ("/dev/null", O_RDWR);
+        if (nullfd != -1)
         {
-            while (dup2 (nullfd, 0) == -1 && errno == EINTR);
-            while (dup2 (nullfd, 1) == -1 && errno == EINTR);
-            while (dup2 (nullfd, 2) == -1 && errno == EINTR);
+            while (dup2 (nullfd, 0) == -1 && errno == EINTR)
+                ;
+            while (dup2 (nullfd, 1) == -1 && errno == EINTR)
+                ;
+            while (dup2 (nullfd, 2) == -1 && errno == EINTR)
+                ;
         }
 
         return 0;

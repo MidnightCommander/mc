@@ -84,7 +84,8 @@ sfs_vfmake (struct vfs_class *me, const char *name, char *cache)
 
     pname = g_strdup (name);
     vfs_split (pname, &inpath, &op);
-    if ((w = (*me->which) (me, op)) == -1)
+    w = (*me->which) (me, op);
+    if (w == -1)
 	vfs_die ("This cannot happen... Hopefully.\n");
 
     if (!(sfs_flags[w] & F_1) && strcmp (pname, "/")) {
@@ -392,9 +393,11 @@ static int sfs_init (struct vfs_class *me)
 	}
 	if (!*c)
 	    goto invalid_line;
+
 	c++;
 	*(semi+1) = 0;
-	if ((semi = strchr (c, '\n')))
+	semi = strchr (c, '\n');
+	if (semi != NULL)
 	    *semi = 0;
 
 	sfs_prefix [sfs_no] = g_strdup (key);

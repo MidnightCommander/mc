@@ -165,7 +165,8 @@ cpio_open_cpio_file (struct vfs_class *me, struct vfs_s_super *super,
     mode_t mode;
     struct vfs_s_inode *root;
 
-    if ((fd = mc_open (name, O_RDONLY)) == -1) {
+    fd = mc_open (name, O_RDONLY);
+    if (fd == -1) {
 	message (D_ERROR, MSG_ERROR, _("Cannot open cpio archive\n%s"), name);
 	return -1;
     }
@@ -181,7 +182,8 @@ cpio_open_cpio_file (struct vfs_class *me, struct vfs_s_super *super,
 
 	mc_close (fd);
 	s = g_strconcat (name, decompress_extension (type), (char *) NULL);
-	if ((fd = mc_open (s, O_RDONLY)) == -1) {
+	fd = mc_open (s, O_RDONLY);
+	if (fd == -1) {
 	    message (D_ERROR, MSG_ERROR, _("Cannot open cpio archive\n%s"), s);
 	    g_free (s);
 	    return -1;
@@ -247,7 +249,8 @@ static int cpio_find_head(struct vfs_class *me, struct vfs_s_super *super)
 		ptr -= top - 128;
 		top = 128;
 	    }
-	    if((tmp = mc_read(super->u.arch.fd, buf, top)) == 0 || tmp == -1) {
+	    tmp = mc_read (super->u.arch.fd, buf, top);
+	    if (tmp == 0 || tmp == -1) {
 		message (D_ERROR, MSG_ERROR, _("Premature end of cpio archive\n%s"), super->name);
 		cpio_free_archive(me, super);
 		return CPIO_UNKNOWN;
@@ -419,7 +422,8 @@ static ssize_t cpio_read_bin_head(struct vfs_class *me, struct vfs_s_super *supe
     char *name;
     struct stat st;
 
-    if((len = mc_read(super->u.arch.fd, (char *)&u.buf, HEAD_LENGTH)) < HEAD_LENGTH)
+    len = mc_read (super->u.arch.fd, (char *)&u.buf, HEAD_LENGTH);
+    if (len < HEAD_LENGTH)
 	return STATUS_EOF;
     CPIO_POS(super) += len;
     if(super->u.arch.type == CPIO_BINRE) {
@@ -435,7 +439,8 @@ static ssize_t cpio_read_bin_head(struct vfs_class *me, struct vfs_s_super *supe
 	return STATUS_FAIL;
     }
     name = g_malloc(u.buf.c_namesize);
-    if((len = mc_read(super->u.arch.fd, name, u.buf.c_namesize)) < u.buf.c_namesize) {
+    len = mc_read (super->u.arch.fd, name, u.buf.c_namesize);
+    if (len < u.buf.c_namesize) {
 	g_free(name);
 	return STATUS_EOF;
     }
@@ -493,8 +498,8 @@ static ssize_t cpio_read_oldc_head(struct vfs_class *me, struct vfs_s_super *sup
 	return STATUS_FAIL;
     }
     name = g_malloc(hd.c_namesize);
-    if((len = mc_read(super->u.arch.fd, name, hd.c_namesize)) == -1 ||
-       (unsigned long) len < hd.c_namesize) {
+    len = mc_read (super->u.arch.fd, name, hd.c_namesize);
+    if ((len == -1) || ((unsigned long) len < hd.c_namesize)) {
 	g_free (name);
 	return STATUS_EOF;
     }
@@ -669,7 +674,9 @@ static ssize_t cpio_read(void *fh, char *buffer, int count)
 
     count = MIN(count, FH->ino->st.st_size - FH->pos);
 
-    if ((count = mc_read (fd, buffer, count)) == -1) ERRNOR (errno, -1);
+    count = mc_read (fd, buffer, count);
+    if (count == -1) 
+        ERRNOR (errno, -1);
 
     FH->pos += count;
     return count;

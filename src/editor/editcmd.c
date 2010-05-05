@@ -279,12 +279,13 @@ edit_save_file (WEdit * edit, const char *filename)
         ret = mc_chmod (savename, edit->stat1.st_mode);
     }
 
-    if ((fd =
-         mc_open (savename, O_CREAT | O_WRONLY | O_TRUNC | O_BINARY, edit->stat1.st_mode)) == -1)
+    fd = mc_open (savename, O_CREAT | O_WRONLY | O_TRUNC | O_BINARY, edit->stat1.st_mode);
+    if (fd == -1)
         goto error_save;
 
     /* pipe save */
-    if ((p = edit_get_write_filter (savename, real_filename)))
+    p = edit_get_write_filter (savename, real_filename);
+    if (p != NULL)
     {
         FILE *file;
 
@@ -601,7 +602,8 @@ edit_save_as_cmd (WEdit * edit)
             {
                 int file;
                 different_filename = 1;
-                if ((file = mc_open (exp, O_RDONLY | O_BINARY)) != -1)
+                file = mc_open (exp, O_RDONLY | O_BINARY);
+                if (file != -1)
                 {
                     /* the file exists */
                     mc_close (file);
@@ -693,7 +695,8 @@ edit_open_macro_file (const char *r)
     FILE *fd;
     int file;
     filename = concat_dir_and_file (home_dir, EDIT_MACRO_FILE);
-    if ((file = open (filename, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
+    file = open (filename, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+    if (file == -1)
     {
         g_free (filename);
         return 0;
@@ -734,8 +737,11 @@ edit_delete_macro (WEdit * edit, int k)
     (void) edit;
 
     if (saved_macros_loaded)
-        if ((j = macro_exists (k)) < 0)
+    {
+        j = macro_exists (k);
+        if (j < 0)
             return 0;
+    }
     tmp = concat_dir_and_file (home_dir, EDIT_TEMP_FILE);
     g = fopen (tmp, "w");
     g_free (tmp);
@@ -849,7 +855,8 @@ edit_load_macro_cmd (WEdit * edit, struct macro macro[], int *n, int k)
         if (macro_exists (k) < 0)
             return 0;
 
-    if ((f = edit_open_macro_file ("r")))
+    f = edit_open_macro_file ("r");
+    if (f != NULL)
     {
         struct macro dummy;
         do
@@ -1740,7 +1747,7 @@ edit_replace_cmd (WEdit * edit, int again)
         }
         edit->search->search_type = edit_search_options.type;
         edit->search->is_all_charsets = edit_search_options.all_codepages;
-        edit->search->is_case_sentitive = edit_search_options.case_sens;
+        edit->search->is_case_sensitive = edit_search_options.case_sens;
         edit->search->whole_words = edit_search_options.whole_words;
         edit->search->search_fn = edit_search_cmd_callback;
     }
@@ -1981,7 +1988,7 @@ edit_search_cmd (WEdit * edit, int again)
 
         edit->search->search_type = edit_search_options.type;
         edit->search->is_all_charsets = edit_search_options.all_codepages;
-        edit->search->is_case_sentitive = edit_search_options.case_sens;
+        edit->search->is_case_sensitive = edit_search_options.case_sens;
         edit->search->whole_words = edit_search_options.whole_words;
         edit->search->search_fn = edit_search_cmd_callback;
     }
@@ -2101,9 +2108,9 @@ edit_save_block (WEdit * edit, const char *filename, long start, long finish)
 {
     int len, file;
 
-    if ((file =
-         mc_open (filename, O_CREAT | O_WRONLY | O_TRUNC,
-                  S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH | O_BINARY)) == -1)
+    file = mc_open (filename, O_CREAT | O_WRONLY | O_TRUNC,
+                    S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH | O_BINARY);
+    if (file == -1)
         return 0;
 
     if (column_highlighting)
@@ -2727,7 +2734,7 @@ edit_collect_completions (WEdit * edit, long start, gsize word_len,
     }
 
     srch->search_type = MC_SEARCH_T_REGEX;
-    srch->is_case_sentitive = TRUE;
+    srch->is_case_sensitive = TRUE;
     srch->search_fn = edit_search_cmd_callback;
 
     /* collect max MAX_WORD_COMPLETIONS completions */

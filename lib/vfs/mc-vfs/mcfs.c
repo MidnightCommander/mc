@@ -212,7 +212,8 @@ mcfs_get_remote_port (struct sockaddr_in *sin, int *version)
 #ifdef HAVE_PMAP_GETPORT
     int port;
     for (*version = RPC_PROGVER; *version >= 1; (*version)--)
-	if (port = pmap_getport (sin, RPC_PROGNUM, *version, IPPROTO_TCP))
+	port = pmap_getport (sin, RPC_PROGNUM, *version, IPPROTO_TCP);
+	if (port != NULL)
 	    return port;
 #endif				/* HAVE_PMAP_GETPORT */
     *version = 1;
@@ -237,11 +238,13 @@ mcfs_create_tcp_link (const char *host, int *port, int *version, const char *cal
     server_address.sin_family = AF_INET;
 
     /*  Try to use the dotted decimal number */
-    if ((inaddr = inet_addr (host)) != INADDR_NONE)
+    inaddr = inet_addr (host);
+    if (inaddr != INADDR_NONE) {
 	memcpy ((char *) &server_address.sin_addr, (char *) &inaddr,
 		sizeof (inaddr));
-    else {
-	if ((hp = gethostbyname (host)) == NULL) {
+    } else {
+	hp = gethostbyname (host);
+	if (hp == NULL) {
 	    message (D_ERROR, caller, _(" Cannot locate hostname: %s "),
 			host);
 	    return 0;
@@ -259,8 +262,8 @@ mcfs_create_tcp_link (const char *host, int *port, int *version, const char *cal
 	*version = 1;
 
     server_address.sin_port = htons (*port);
-
-    if ((my_socket = socket (AF_INET, SOCK_STREAM, 0)) < 0) {
+    my_socket = socket (AF_INET, SOCK_STREAM, 0);
+    if (my_socket < 0) {
 	message (D_ERROR, caller, _(" Cannot create socket: %s "),
 		    unix_error_string (errno));
 	return 0;
@@ -340,10 +343,8 @@ mcfs_open_link (char *host, char *user, int *port, char *netrcpass)
 	message (D_ERROR, MSG_ERROR, _(" Too many open connections "));
 	return 0;
     }
-
-    if (!
-	(sock =
-	 mcfs_open_tcp_link (host, user, port, netrcpass, &version)))
+    sock = mcfs_open_tcp_link (host, user, port, netrcpass, &version);
+    if (sock == 0)
 	return 0;
 
     bucket = mcfs_get_free_bucket ();
@@ -394,12 +395,14 @@ mcfs_get_path (mcfs_connection **mc, const char *path)
      * remote portmapper to get the port number
      */
     port = 0;
-    if ((remote_path =
-	 mcfs_get_host_and_username (path, &host, &user, &port, &pass)))
-	if (!(*mc = mcfs_open_link (host, user, &port, pass))) {
+    remote_path = mcfs_get_host_and_username (path, &host, &user, &port, &pass);
+    if (remote_path != NULL) {
+	*mc = mcfs_open_link (host, user, &port, pass);
+	if (*mc == NULL) {
 	    g_free (remote_path);
 	    remote_path = NULL;
 	}
+    }
     g_free (host);
     g_free (user);
     if (pass)
@@ -445,10 +448,12 @@ mcfs_rpc_two_paths (int command, const char *s1, const char *s2)
     mcfs_connection *mc;
     char *r1, *r2;
 
-    if ((r1 = mcfs_get_path (&mc, s1)) == 0)
+    r1 = mcfs_get_path (&mc, s1);
+    if (r1 == NULL)
 	return -1;
 
-    if ((r2 = mcfs_get_path (&mc, s2)) == 0) {
+    r2 = mcfs_get_path (&mc, s2);
+    if (r2 == NULL) {
 	g_free (r1);
 	return -1;
     }
@@ -466,7 +471,8 @@ mcfs_rpc_path (int command, const char *path)
     mcfs_connection *mc;
     char *remote_file;
 
-    if ((remote_file = mcfs_get_path (&mc, path)) == 0)
+    remote_file = mcfs_get_path (&mc, path);
+    if (remote_file == NULL)
 	return -1;
 
     rpc_send (mc->sock,
@@ -482,7 +488,8 @@ mcfs_rpc_path_int (int command, const char *path, int data)
     mcfs_connection *mc;
     char *remote_file;
 
-    if ((remote_file = mcfs_get_path (&mc, path)) == 0)
+    remote_file = mcfs_get_path (&mc, path);
+    if (remote_file == NULL)
 	return -1;
 
     rpc_send (mc->sock,
@@ -499,7 +506,8 @@ mcfs_rpc_path_int_int (int command, const char *path, int n1, int n2)
     mcfs_connection *mc;
     char *remote_file;
 
-    if ((remote_file = mcfs_get_path (&mc, path)) == 0)
+    remote_file = mcfs_get_path (&mc, path);
+    if (remote_file == NULL)
 	return -1;
 
     rpc_send (mc->sock,
@@ -537,7 +545,8 @@ mcfs_open (struct vfs_class *me, const char *file, int flags, int mode)
 
     (void) me;
 
-    if (!(remote_file = mcfs_get_path (&mc, file)))
+    remote_file = mcfs_get_path (&mc, file);
+    if (remote_file == NULL)
 	return 0;
 
     rpc_send (mc->sock, RPC_INT, MC_OPEN, RPC_STRING, remote_file, RPC_INT,
@@ -661,8 +670,9 @@ mcfs_opendir (struct vfs_class *me, const char *dirname)
 
     (void) me;
 
-    if (!(remote_dir = mcfs_get_path (&mc, dirname)))
-	return 0;
+    remote_dir = mcfs_get_path (&mc, dirname);
+    if (remote_dir == NULL)
+	return NULL;
 
     rpc_send (mc->sock, RPC_INT, MC_OPENDIR, RPC_STRING, remote_dir,
 	      RPC_END);
@@ -670,10 +680,10 @@ mcfs_opendir (struct vfs_class *me, const char *dirname)
 
     if (0 ==
 	rpc_get (mc->sock, RPC_INT, &result, RPC_INT, &error_num, RPC_END))
-	return 0;
+	return NULL;
 
     if (mcfs_is_error (result, error_num))
-	return 0;
+	return NULL;
 
     handle = result;
 
@@ -683,7 +693,7 @@ mcfs_opendir (struct vfs_class *me, const char *dirname)
     mcfs_info->entries = 0;
     mcfs_info->current = 0;
 
-    return mcfs_info;
+    return (void *) mcfs_info;
 }
 
 static int mcfs_get_stat_info (mcfs_connection * mc, struct stat *buf);
@@ -880,7 +890,8 @@ mcfs_stat_cmd (int cmd, const char *path, struct stat *buf)
     mcfs_connection *mc;
     int status, error;
 
-    if ((remote_file = mcfs_get_path (&mc, path)) == 0)
+    remote_file = mcfs_get_path (&mc, path);
+    if (remote_file == NULL)
 	return -1;
 
     rpc_send (mc->sock, RPC_INT, cmd, RPC_STRING, remote_file, RPC_END);
@@ -970,7 +981,8 @@ mcfs_utime (struct vfs_class *me, const char *path, struct utimbuf *times)
 
     (void) me;
 
-    if (!(file = mcfs_get_path (&mc, path)))
+    file = mcfs_get_path (&mc, path);
+    if (file == NULL)
 	return -1;
 
     status = 0;
@@ -1005,7 +1017,8 @@ mcfs_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
 
     (void) me;
 
-    if (!(remote_file = mcfs_get_path (&mc, path)))
+    remote_file = mcfs_get_path (&mc, path);
+    if (remote_file == NULL)
 	return -1;
 
     rpc_send (mc->sock, RPC_INT, MC_READLINK, RPC_STRING, remote_file,
@@ -1062,7 +1075,8 @@ mcfs_chdir (struct vfs_class *me, const char *path)
 
     (void) me;
 
-    if (!(remote_dir = mcfs_get_path (&mc, path)))
+    remote_dir = mcfs_get_path (&mc, path);
+    if (remote_dir == NULL)
 	return -1;
 
     rpc_send (mc->sock, RPC_INT, MC_CHDIR, RPC_STRING, remote_dir,
@@ -1137,12 +1151,11 @@ mcfs_forget (const char *path)
 	return;
 
     path += 5;
-    if (path[0] == '/' && path[1] == '/')
+    if ((path[0] == '/') && (path[1] == '/'))
 	path += 2;
 
-    if ((p =
-	 mcfs_get_host_and_username (path, &host, &user, &port,
-				     &pass)) == 0) {
+    p = mcfs_get_host_and_username (path, &host, &user, &port, &pass);
+    if (p == NULL) {
 	g_free (host);
 	g_free (user);
 	if (pass)

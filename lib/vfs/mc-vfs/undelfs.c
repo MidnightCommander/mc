@@ -206,17 +206,18 @@ undelfs_loaddel (void)
         message (D_ERROR, undelfserr, _(" while allocating block buffer "));
         goto free_delarray;
     }
-    if ((retval = ext2fs_open_inode_scan (fs, 0, &scan)))
+    retval = ext2fs_open_inode_scan (fs, 0, &scan);
+    if (retval != 0)
     {
         message (D_ERROR, undelfserr, _(" open_inode_scan: %d "), retval);
         goto free_block_buf;
     }
-    if ((retval = ext2fs_get_next_inode (scan, &ino, &inode)))
+    retval = ext2fs_get_next_inode (scan, &ino, &inode);
+    if (retval != 0)
     {
         message (D_ERROR, undelfserr, _(" while starting inode scan %d "), retval);
         goto error_out;
     }
-
     count = 0;
     while (ino)
     {
@@ -674,7 +675,8 @@ undelfs_chdir (struct vfs_class *me, const char *path)
     /* We may use access because ext2 file systems are local */
     /* this could be fixed by making an ext2fs io manager to use */
     /* our vfs, but that is left as an excercise for the reader */
-    if ((fd = open (file, O_RDONLY)) == -1)
+    fd = open (file, O_RDONLY);
+    if (fd == -1)
     {
         message (D_ERROR, undelfserr, _(" Cannot open file %s "), file);
         g_free (f);

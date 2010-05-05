@@ -206,7 +206,9 @@ fish_pipeopen (struct vfs_s_super *super, const char *path, const char *argv[])
     if ((pipe (fileset1) < 0) || (pipe (fileset2) < 0))
         vfs_die ("Cannot pipe(): %m.");
 
-    if ((res = fork ()))
+    res = fork ();
+
+    if (res != 0)
     {
         if (res < 0)
             vfs_die ("Cannot fork(): %m.");
@@ -828,18 +830,17 @@ fish_file_store (struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *lo
             close (h);
             h = open ("/dev/zero", O_RDONLY);
         }
+
         if (n == 0)
             break;
-        if ((t = write (SUP.sockw, buffer, n)) != n)
+
+        t = write (SUP.sockw, buffer, n);
+        if (t != n)
         {
             if (t == -1)
-            {
                 me->verrno = errno;
-            }
             else
-            {
                 me->verrno = EIO;
-            }
             goto error_return;
         }
         tty_disable_interrupt_key ();
@@ -923,14 +924,15 @@ fish_linear_abort (struct vfs_class *me, struct vfs_s_fh *fh)
     do
     {
         n = MIN (8192, fh->u.fish.total - fh->u.fish.got);
-        if (n)
+        if (n != 0)
         {
-            if ((n = read (SUP.sockr, buffer, n)) < 0)
+            n = read (SUP.sockr, buffer, n);
+            if (n < 0)
                 return;
             fh->u.fish.got += n;
         }
     }
-    while (n);
+    while (n != 0);
 
     if (fish_get_reply (me, SUP.sockr, NULL, 0) != COMPLETE)
         print_vfs_message (_("Error reported after abort."));
@@ -955,9 +957,9 @@ fish_linear_read (struct vfs_class *me, struct vfs_s_fh *fh, void *buf, int len)
 
     if (n > 0)
         fh->u.fish.got += n;
-    if (n < 0)
+    else if (n < 0)
         fish_linear_abort (me, fh);
-    if ((!n) && ((fish_get_reply (me, SUP.sockr, NULL, 0) != COMPLETE)))
+    else if (fish_get_reply (me, SUP.sockr, NULL, 0) != COMPLETE)
         ERRNOR (E_REMOTE, -1);
     ERRNOR (errno, n);
 }
@@ -1018,17 +1020,18 @@ fish_send_command (struct vfs_class *me, struct vfs_s_super *super, const char *
     const char *crpath; \
     char *rpath, *mpath = g_strdup (path); \
     struct vfs_s_super *super; \
-    if (!(crpath = vfs_s_get_path_mangle (me, mpath, &super, 0))) \
+    crpath = vfs_s_get_path_mangle (me, mpath, &super, 0); \
+    if (crpath == NULL) \
     { \
 	g_free (mpath); \
 	return -1; \
     } \
-    rpath = strutils_shell_escape(crpath); \
+    rpath = strutils_shell_escape (crpath); \
     g_free (mpath);
 
 #define POSTFIX(flags) \
     g_free (rpath); \
-    return fish_send_command(me, super, buf, flags);
+    return fish_send_command (me, super, buf, flags);
 
 static int
 fish_chmod (struct vfs_class *me, const char *path, int mode)
@@ -1055,12 +1058,14 @@ static int fish_##name (struct vfs_class *me, const char *path1, const char *pat
     const char *crpath1, *crpath2; \
     char *rpath1, *rpath2, *mpath1, *mpath2; \
     struct vfs_s_super *super1, *super2; \
-    if (!(crpath1 = vfs_s_get_path_mangle (me, mpath1 = g_strdup(path1), &super1, 0))) \
+    crpath1 = vfs_s_get_path_mangle (me, mpath1 = g_strdup(path1), &super1, 0); \
+    if (crpath1 == NULL) \
     { \
         g_free (mpath1); \
         return -1; \
     } \
-    if (!(crpath2 = vfs_s_get_path_mangle (me, mpath2 = g_strdup(path2), &super2, 0))) \
+    crpath2 = vfs_s_get_path_mangle (me, mpath2 = g_strdup(path2), &super2, 0); \
+    if (crpath2 == NULL) \
     { \
         g_free (mpath1); \
         g_free (mpath2); \
@@ -1119,10 +1124,12 @@ fish_chown (struct vfs_class *me, const char *path, int owner, int group)
     struct passwd *pw;
     struct group *gr;
 
-    if ((pw = getpwuid (owner)) == NULL)
+    pw = getpwuid (owner);
+    if (pw == NULL)
         return 0;
 
-    if ((gr = getgrgid (group)) == NULL)
+    gr = getgrgid (group);
+    if (gr == NULL)
         return 0;
 
     sowner = pw->pw_name;
@@ -1179,10 +1186,7 @@ fish_exists (struct vfs_class *me, const char *path)
 
     g_free (rpath);
 
-    if (fish_send_command (me, super, buf, OPT_FLUSH) == 0)
-        return 1;
-
-    return 0;
+    return (fish_send_command (me, super, buf, OPT_FLUSH) == 0) ? 1 : 0;
 }
 
 

@@ -57,12 +57,14 @@ load_codepages_list (void)
     char *default_codepage = NULL;
 
     fname = concat_dir_and_file (mc_home, CHARSETS_INDEX);
-    if (!(f = fopen (fname, "r"))) {
+    f = fopen (fname, "r");
+    if (f == NULL) {
 	fprintf (stderr, _("Warning: file %s not found\n"), fname);
 	g_free (fname);
 
 	fname = concat_dir_and_file (mc_home_alt, CHARSETS_INDEX);
-	if (!(f = fopen (fname, "r"))) {
+	f = fopen (fname, "r");
+	if (f == NULL) {
 	    fprintf (stderr, _("Warning: file %s not found\n"), fname);
 	    g_free (fname);
 
@@ -177,15 +179,13 @@ translate_character (GIConv cd, char c)
     return ch;
 }
 
-char errbuf[255];
-
 /*
  * FIXME: This assumes that ASCII is always the first encoding
  * in mc.charsets
  */
 #define CP_ASCII 0
 
-const char *
+char *
 init_translation_table (int cpsource, int cpdisplay)
 {
     int i;
@@ -212,11 +212,8 @@ init_translation_table (int cpsource, int cpdisplay)
     /* display <- inpit table */
 
     cd = g_iconv_open (cp_display, cp_source);
-    if (cd == INVALID_CONV) {
-	g_snprintf (errbuf, sizeof (errbuf),
-		    _("Cannot translate from %s to %s"), cp_source, cp_display);
-	return errbuf;
-    }
+    if (cd == INVALID_CONV)
+	return g_strdup_printf (_("Cannot translate from %s to %s"), cp_source, cp_display);
 
     for (i = 128; i <= 255; ++i)
 	conv_displ[i] = translate_character (cd, i);
@@ -226,11 +223,8 @@ init_translation_table (int cpsource, int cpdisplay)
     /* inpit <- display table */
 
     cd = g_iconv_open (cp_source, cp_display);
-    if (cd == INVALID_CONV) {
-	g_snprintf (errbuf, sizeof (errbuf),
-		    _("Cannot translate from %s to %s"), cp_display, cp_source);
-	return errbuf;
-    }
+    if (cd == INVALID_CONV)
+	return g_strdup_printf (_("Cannot translate from %s to %s"), cp_display, cp_source);
 
     for (i = 128; i <= 255; ++i) {
 	unsigned char ch;

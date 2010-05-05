@@ -227,8 +227,10 @@ ftpfs_translate_path (struct vfs_class *me, struct vfs_s_super *super, const cha
             memmove (p + 1, p + 2, strlen (p + 2) + 1);
 
         /* strip trailing "/." */
-        if ((p = strrchr (ret, '/')) && *(p + 1) == '.' && *(p + 2) == '\0')
+        p = strrchr (ret, '/');
+        if ((p != NULL) && (*(p + 1) == '.') && (*(p + 2) == '\0'))
             *p = '\0';
+
         return ret;
     }
 }
@@ -608,33 +610,37 @@ ftpfs_load_no_proxy_list (void)
         return;
 
     mc_file = concat_dir_and_file (mc_home, "mc.no_proxy");
-    if (exist_file (mc_file) && (npf = fopen (mc_file, "r")))
+    if (exist_file (mc_file))
     {
-        while (fgets (s, sizeof (s), npf))
+        npf = fopen (mc_file, "r");
+        if (npf != NULL)
         {
-            if (!(p = strchr (s, '\n')))
-            {                   /* skip bogus entries */
-                while ((c = fgetc (npf)) != EOF && c != '\n')
-                    ;
-                continue;
+            while (fgets (s, sizeof (s), npf) != NULL)
+            {
+                p = strchr (s, '\n');
+                if (p == NULL) /* skip bogus entries */
+                {
+                    while ((c = fgetc (npf)) != EOF && c != '\n')
+                        ;
+                    continue;
+                }
+
+                if (p == s)
+                    continue;
+
+                *p = '\0';
+
+                np = g_new (struct no_proxy_entry, 1);
+                np->domain = g_strdup (s);
+                np->next   = NULL;
+                if (no_proxy)
+                    current->next = np;
+                else
+                    no_proxy = np;
+                current = np;
             }
-
-            if (p == s)
-                continue;
-
-            *p = '\0';
-
-            np = g_new (struct no_proxy_entry, 1);
-            np->domain = g_strdup (s);
-            np->next = NULL;
-            if (no_proxy)
-                current->next = np;
-            else
-                no_proxy = np;
-            current = np;
+            fclose (npf);
         }
-
-        fclose (npf);
     }
     g_free (mc_file);
 }
@@ -1169,10 +1175,12 @@ ftpfs_open_data_connection (struct vfs_class *me, struct vfs_s_super *super, con
 {
     struct sockaddr_storage from;
     int s, j, data;
-    socklen_t fromlen = sizeof (from);
+    socklen_t fromlen = sizeof(from);
 
-    if ((s = ftpfs_initconn (me, super)) == -1)
+    s = ftpfs_initconn (me, super);
+    if (s == -1)
         return -1;
+
     if (ftpfs_changetype (me, super, isbinary) == -1)
         return -1;
     if (reget > 0)
@@ -1191,6 +1199,7 @@ ftpfs_open_data_connection (struct vfs_class *me, struct vfs_s_super *super, con
     }
     else
         j = ftpfs_command (me, super, WAIT_REPLY, "%s", cmd);
+
     if (j != PRELIM)
         ERRNOR (EPERM, -1);
     tty_enable_interrupt_key ();
@@ -1750,7 +1759,8 @@ ftpfs_send_command (struct vfs_class *me, const char *filename, const char *cmd,
     int r;
     int flush_directory_cache = (flags & OPT_FLUSH);
 
-    if (!(rpath = vfs_s_get_path_mangle (me, mpath, &super, 0)))
+    rpath = vfs_s_get_path_mangle (me, mpath, &super, 0);
+    if (rpath == NULL)
     {
         g_free (mpath);
         return -1;
@@ -2216,8 +2226,10 @@ ftpfs_netrc_lookup (const char *host, char **login, char **pass)
 
     /* Find our own domain name */
     if (gethostname (hostname, sizeof (hostname)) < 0)
-        *hostname = 0;
-    if (!(domain = strchr (hostname, '.')))
+        *hostname = '\0';
+
+    domain = strchr (hostname, '.');
+    if (domain == NULL)
         domain = "";
 
     /* Scan for "default" and matching "machine" keywords */

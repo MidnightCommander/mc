@@ -347,7 +347,8 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
     else if (file != NULL && file[0] != '\0')
     {
         /* Open the file */
-        if ((fd = mc_open (file, O_RDONLY | O_NONBLOCK)) == -1)
+        fd = mc_open (file, O_RDONLY | O_NONBLOCK);
+        if (fd == -1)
         {
             g_snprintf (tmp, sizeof (tmp), _(" Cannot open \"%s\"\n %s "),
                         file, unix_error_string (errno));
