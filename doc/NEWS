@@ -14,6 +14,10 @@ Version 4.7.2
     * Current syntax scheme is highlighted in 'Choose syntax highlighting' dialog (#1754)
     * Added ini.syntax (#2126)
 
+- Viewer
+
+    * Fixed jump to end of file
+
 - Diff viewer
 
     * A built-in tool to visual compare and merge two files (#120, #2159)
@@ -339,7 +343,6 @@ Version 4.7.0-pre3
 - Viewer
 
     * Fixed showing Windows/Mac (CR LF/CR) line terminator
-    * Fixed jump to end of file
 
 - Misc
 
