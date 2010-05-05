@@ -618,7 +618,7 @@ ftpfs_load_no_proxy_list (void)
             while (fgets (s, sizeof (s), npf) != NULL)
             {
                 p = strchr (s, '\n');
-                if (p == NULL) {  /* skip bogus entries */
+                if (p == NULL) /* skip bogus entries */
                 {
                     while ((c = fgetc (npf)) != EOF && c != '\n')
                         ;

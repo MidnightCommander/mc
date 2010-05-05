@@ -981,8 +981,8 @@ mcfs_utime (struct vfs_class *me, const char *path, struct utimbuf *times)
 
     (void) me;
 
-    remote_file = mcfs_get_path (&mc, path);
-    if (remote_file == NULL)
+    file = mcfs_get_path (&mc, path);
+    if (file == NULL)
 	return -1;
 
     status = 0;
@@ -1075,8 +1075,8 @@ mcfs_chdir (struct vfs_class *me, const char *path)
 
     (void) me;
 
-    remote_file = mcfs_get_path (&mc, path);
-    if (remote_file == NULL)
+    remote_dir = mcfs_get_path (&mc, path);
+    if (remote_dir == NULL)
 	return -1;
 
     rpc_send (mc->sock, RPC_INT, MC_CHDIR, RPC_STRING, remote_dir,

@@ -44,6 +44,7 @@
 
 #ifdef ENABLE_VFS
 #include "lib/vfs/mc-vfs/vfs.h" /* vfs_timeout */
+#include "lib/vfs/mc-vfs/vfs-impl.h"
 #endif
 
 #ifdef USE_NETCODE

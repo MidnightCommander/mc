@@ -2806,7 +2806,7 @@ dview_event (Gpm_Event * event, void *x)
     int result = MOU_NORMAL;
 
     /* We are not interested in the release events */
-    if (event->type & (GPM_DOWN | GPM_DRAG) == 0)
+    if ((event->type & (GPM_DOWN | GPM_DRAG)) == 0)
     {
         return result;
     }
