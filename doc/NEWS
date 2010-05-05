@@ -232,7 +232,7 @@ Version 4.7.0
     * Incorrect mouse movement in editor when text scrolled to the right (#1792)
     * Newlines are lost when pasting multiline text in editor (#1710)
     * Mismatched hotkeys EditBeginRecordMacro, EditEndRecordMacro in editor
-    * íismatched hotkeys EditBeginningOfText, EditEndOfText, EditBeginPage, EditEndPage (#1724)
+    * Mismatched hotkeys EditBeginningOfText, EditEndOfText, EditBeginPage, EditEndPage (#1724)
     * Some syntax files are not installable (#1779)
     * Date & time insertion in editor (#1759)
     * "Matches not found" message is not shown in viewer
@@ -339,6 +339,7 @@ Version 4.7.0-pre3
 - Viewer
 
     * Fixed showing Windows/Mac (CR LF/CR) line terminator
+    * Fixed jump to end of file
 
 - Misc
 
