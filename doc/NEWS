@@ -1,3 +1,33 @@
+Version 4.7.0.5
+
+- VFS
+
+    * Easy plugable EXTFS VFS (backport from 4.7.1 with all fixes) (#1909)
+
+- Editor
+
+    * Added ini.syntax (#2126)
+
+- Misc
+
+    * Renamed color keywords (#1660):
+        - menu -> menunormal
+        - linestate -> editlinestate
+    * Updated file extension for "sh" (#2127)
+    * Translation updates
+
+- Fixes
+
+    * Build breaks on ignored return values (just memleaks and some little changes) (#1897)
+    * Misleading label "Status:" in the Info panel (#2146)
+    * i18n_checktimelength may vary depending on the season (#1671)
+    * Incorrect overwrite mode in editor in UTF-8 codeset (#2081)
+    * urar EXTFS doesn't correctly show localized filenames in RAR archives (#2049)
+    * urar EXTFS: disable RAR/UNRAR user/system configuration for archive list and copyout operations (#2050)
+    * Patches adding a single line are not shown correctly by patchfs (#2149)
+    * uzip EXTFS: fixed Y2K bug (#2122) 
+
+
 Version 4.7.0.4
 
 - Core
@@ -8,7 +38,7 @@ Version 4.7.0.4
 
     * Translation updates
 
-Fixes
+- Fixes
 
     * Segfault in standalone editor and viewer (#2087)
     * Memory leaks (#2069, #2108)
@@ -57,6 +87,7 @@ Version 4.7.0.3
 Version 4.7.0.2
 
 - Core
+
     * Minimal required GLib version is 2.8 (#1980)
     * Reorganizing of directory structure (#1866)
     * States of all 'Find File' dialog checkboxes are saved in user configuration file (#1874, #1965)
@@ -64,21 +95,25 @@ Version 4.7.0.2
         - viewing .lyx with lyxcat, opening with lyx (#1693)
 
 - VFS
+
     * Small reorganizing (#1931)
 
 - Editor
+
     * Some simple optimization of syntax highlighting engine (#1843)
     * New editor action 'Mark all', new keybind EditMarkAll (#1945)
     * Changed default for 'Cursor beyond EOL', now it switched off by default (#1946)
     * Changed default color pair for 'editbold' (search result) to be more sensible (#1559). 
 
 - Misc
+
     * Lots of code cleanup (#1780, #1915, #1990)
     * Removed obsolete checks in configuration scripts (#262, #1932)
     * Documentation updates
     * Translation updates 
 
 - Fixes
+
     * MC won't compile on Solaris due to undefined constant NAME_MAX (#1943)
     * MC won't compile on AIX (#1957)
     * Missing includes (#1930)
