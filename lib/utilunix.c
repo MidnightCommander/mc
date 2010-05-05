@@ -446,7 +446,7 @@ close_error_pipe (int error, const char *text)
         title = _("Warning");
     if (old_error >= 0)
     {
-        if (dup2 (old_error, 2))
+        if (dup2 (old_error, 2) == -1)
         {
             message (error, MSG_ERROR, "%s", _("Error dup'ing old error pipe"));
             return 1;
