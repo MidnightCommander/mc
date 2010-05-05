@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.55\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-25 15:33+0200\n"
+"POT-Creation-Date: 2010-05-05 20:57+0300\n"
 "PO-Revision-Date: 2002-06-24 02:15+0300\n"
 "Last-Translator: Todor Buyukliev <adrez@mail.bg>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -319,6 +319,12 @@ msgid ""
 msgstr ""
 "Размер на екрана %dx%d не е поддържан.\n"
 "Проверете променливата на средата TERM.\n"
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
@@ -3904,12 +3910,6 @@ msgstr " История "
 
 msgid "Background process:"
 msgstr "Фонов процес:"
-
-#~ msgid "%b %e  %Y"
-#~ msgstr "%b %e  %Y"
-
-#~ msgid "%b %e %H:%M"
-#~ msgstr "%b %e %H:%M"
 
 #, fuzzy
 #~ msgid "Status:    %s"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-25 15:33+0200\n"
+"POT-Creation-Date: 2010-05-05 20:57+0300\n"
 "PO-Revision-Date: 2002-08-25 16:15GMT+2\n"
 "Last-Translator: Vital Khilko <dojlid@mova.org>\n"
 "Language-Team: Belarusian (tarask) <debian-l10n-belarusian@lists.debian."
@@ -320,6 +320,12 @@ msgid ""
 msgstr ""
 "Памер экрану %dx%d ня падтрымліваецца.\n"
 "Праверце пераменную асяродзьдзя TERM.\n"
+
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
@@ -3886,12 +3892,6 @@ msgstr "Гісторыя камандаў"
 
 msgid "Background process:"
 msgstr "Працэс у тле:"
-
-#~ msgid "%b %e  %Y"
-#~ msgstr "%b %e  %Y"
-
-#~ msgid "%b %e %H:%M"
-#~ msgstr "%b %e %H:%M"
 
 #, fuzzy
 #~ msgid "Status:    %s"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-25 15:33+0200\n"
+"POT-Creation-Date: 2010-05-05 20:57+0300\n"
 "PO-Revision-Date: 2010-03-09 14:51+0800\n"
 "Last-Translator: Jake Li <gnozil@gmail.com>\n"
 "Language-Team: Simplified Chinese\n"
@@ -311,6 +311,12 @@ msgid ""
 msgstr ""
 "不支持屏幕大小 %dx%d。\n"
 "检查 TERM 环境变量。\n"
+
+msgid "%b %e  %Y"
+msgstr "%b %e %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -3773,12 +3779,6 @@ msgstr "历史"
 
 msgid "Background process:"
 msgstr "后台进程："
-
-#~ msgid "%b %e  %Y"
-#~ msgstr "%b %e %Y"
-
-#~ msgid "%b %e %H:%M"
-#~ msgstr "%b %e %H:%M"
 
 #~ msgid "Status:    %s"
 #~ msgstr "状态： %s"

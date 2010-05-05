@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-25 15:33+0200\n"
+"POT-Creation-Date: 2010-05-05 20:57+0300\n"
 "PO-Revision-Date: 2001-11-06 05:50+0200\n"
 "Last-Translator: Nilgün Belma Bugüner <nilgun@fide.org>\n"
 "Language-Team: Turkish <debian-l10n-turkish@lists.debian.org>\n"
@@ -324,6 +324,12 @@ msgid ""
 msgstr ""
 "%dx%d ekran boyutu desteklenmiyor.\n"
 "TERM ortam değişkenini kontrol ediniz.\n"
+
+msgid "%b %e  %Y"
+msgstr "%e %b  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%e %b %H:%M"
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
@@ -3910,12 +3916,6 @@ msgstr " Geçmiş "
 
 msgid "Background process:"
 msgstr "Artalan işlemi:"
-
-#~ msgid "%b %e  %Y"
-#~ msgstr "%e %b  %Y"
-
-#~ msgid "%b %e %H:%M"
-#~ msgstr "%e %b %H:%M"
 
 #, fuzzy
 #~ msgid "Status:    %s"

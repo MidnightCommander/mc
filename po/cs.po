@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.0.2\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-25 15:33+0200\n"
+"POT-Creation-Date: 2010-05-05 20:57+0300\n"
 "PO-Revision-Date: 2010-03-14 14:00+0100\n"
 "Last-Translator: Martin Zoubek <zoubek@seznam.cz>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
@@ -316,6 +316,12 @@ msgid ""
 msgstr ""
 "Velikost obrazovky %d×%d není podporovaná.\n"
 "Prověřte nastavení proměnné prostředí TERM.\n"
+
+msgid "%b %e  %Y"
+msgstr "%e.%b  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%e.%b %H:%M"
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -3800,12 +3806,6 @@ msgstr " Historie "
 
 msgid "Background process:"
 msgstr "Procesy na pozadí:"
-
-#~ msgid "%b %e  %Y"
-#~ msgstr "%e.%b  %Y"
-
-#~ msgid "%b %e %H:%M"
-#~ msgstr "%e.%b %H:%M"
 
 #~ msgid "Status:    %s"
 #~ msgstr "Stav:      %s"

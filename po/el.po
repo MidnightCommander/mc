@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.38\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-25 15:33+0200\n"
+"POT-Creation-Date: 2010-05-05 20:57+0300\n"
 "PO-Revision-Date: 2010-04-10 18:58+0200\n"
 "Last-Translator: Alex-P. Natsios\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
@@ -310,6 +310,14 @@ msgid ""
 msgstr ""
 "Μέγεθος οθόνης %dx%d μη υποστηριζόμενο.\n"
 "ελέγξτε τη μεταβλητή περιβάλλοντος TERM.\n"
+
+#, fuzzy
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+#, fuzzy
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -3640,14 +3648,6 @@ msgstr "Ιστορικό"
 
 msgid "Background process:"
 msgstr ""
-
-#, fuzzy
-#~ msgid "%b %e  %Y"
-#~ msgstr "%b %e  %Y"
-
-#, fuzzy
-#~ msgid "%b %e %H:%M"
-#~ msgstr "%b %e %H:%M"
 
 #~ msgid "Status:    %s"
 #~ msgstr "Κατάσταση:     %s"

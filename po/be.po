@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: be\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-25 15:33+0200\n"
+"POT-Creation-Date: 2010-05-05 20:57+0300\n"
 "PO-Revision-Date: 2008-12-21 23:28+0200\n"
 "Last-Translator: Pavel Piatruk <piatruk.p@gmail.com>\n"
 "Language-Team: Belarusian <debian-l10n-belarusian@lists.debian.org>\n"
@@ -322,6 +322,14 @@ msgid ""
 msgstr ""
 "Памер экрану %dx%d не падтрымліваецца.\n"
 "Праверце пераменную асяродздзя TERM.\n"
+
+#, fuzzy
+msgid "%b %e  %Y"
+msgstr "%o %d %f%m"
+
+#, fuzzy
+msgid "%b %e %H:%M"
+msgstr "%o %d %f%m"
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -4304,14 +4312,6 @@ msgstr "Працэс у тле:"
 
 #~ msgid "O&ne"
 #~ msgstr "&Адзін"
-
-#, fuzzy
-#~ msgid "%b %d %H:%M"
-#~ msgstr "%o %d %f%m"
-
-#, fuzzy
-#~ msgid "%b %d %Y"
-#~ msgstr "%o %d %f%m"
 
 #, fuzzy
 #~ msgid " The current address is 0x%08"

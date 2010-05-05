@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-25 15:33+0200\n"
+"POT-Creation-Date: 2010-05-05 20:57+0300\n"
 "PO-Revision-Date: 2003-01-22 18:10+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <debian-l10n-swedish@lists.debian.org>\n"
@@ -328,6 +328,12 @@ msgid ""
 msgstr ""
 "Skärmstorleken %d×%d stöds inte.\n"
 "Kontrollera miljövariabeln TERM.\n"
+
+msgid "%b %e  %Y"
+msgstr "%e %b  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%e %b %H.%M"
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -3938,12 +3944,6 @@ msgstr " Historik "
 
 msgid "Background process:"
 msgstr "Bakgrundsprocess:"
-
-#~ msgid "%b %e  %Y"
-#~ msgstr "%e %b  %Y"
-
-#~ msgid "%b %e %H:%M"
-#~ msgstr "%e %b %H.%M"
 
 #, fuzzy
 #~ msgid "Status:    %s"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.7.0\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-25 15:33+0200\n"
+"POT-Creation-Date: 2010-05-05 20:57+0300\n"
 "PO-Revision-Date: 2010-04-10 10:25+0200\n"
 "Last-Translator: David Martín <dmartina@excite.com\n"
 "Language-Team: Spanish <debian-l10n-spanish@lists.debian.org>\n"
@@ -310,6 +310,12 @@ msgid ""
 msgstr ""
 "El tamaño de ventana %dx%d no está soportado.\n"
 "Verifique el valor de la variable de entorno TERM.\n"
+
+msgid "%b %e  %Y"
+msgstr "%e %b  %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%e %b %H:%M"
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -3775,12 +3781,6 @@ msgstr " Historia "
 
 msgid "Background process:"
 msgstr "Procesos en 2º plano"
-
-#~ msgid "%b %e  %Y"
-#~ msgstr "%e %b  %Y"
-
-#~ msgid "%b %e %H:%M"
-#~ msgstr "%e %b %H:%M"
 
 #~ msgid "Status:    %s"
 #~ msgstr "Cambiado:   %s"

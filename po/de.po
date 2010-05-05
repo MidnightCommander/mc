@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.x\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-25 15:33+0200\n"
+"POT-Creation-Date: 2010-05-05 20:57+0300\n"
 "PO-Revision-Date: 2010-03-03 12:00-0000\n"
 "Last-Translator: Sebastian Siebert <freespacer@gmx.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -317,6 +317,12 @@ msgid ""
 msgstr ""
 "Bildschirmgröße %dx%d wird nicht unterstützt.\n"
 "Überprüfen Sie die TERM-Umgebungsvariable.\n"
+
+msgid "%b %e  %Y"
+msgstr "%d. %b %Y"
+
+msgid "%b %e %H:%M"
+msgstr "%d. %b %H:%M"
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -3780,12 +3786,6 @@ msgstr " Chronik "
 
 msgid "Background process:"
 msgstr "Hintergrundprozess:"
-
-#~ msgid "%b %e  %Y"
-#~ msgstr "%d. %b %Y"
-
-#~ msgid "%b %e %H:%M"
-#~ msgstr "%d. %b %H:%M"
 
 #~ msgid "Status:    %s"
 #~ msgstr "Status:       %s"
