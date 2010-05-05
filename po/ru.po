@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-28 16:02+0300\n"
+"POT-Creation-Date: 2010-05-05 22:32+0300\n"
 "PO-Revision-Date: 2009-10-29  23:37+0300\n"
 "Last-Translator: Andrew Borodin <aborodin@vmail.ru>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
@@ -361,6 +361,10 @@ msgstr " Сбой канала "
 
 msgid " Dup failed "
 msgstr " Сбой дублирования дескриптора "
+
+#, fuzzy
+msgid "Error dup'ing old error pipe"
+msgstr " Ошибка чтения из канала: %s "
 
 #, c-format
 msgid ""
@@ -956,9 +960,11 @@ msgstr ""
 "Ключевые слова:\n"
 "   Общие:              errors, reverse, gauge, input, viewunderline\n"
 "   Отображение файлов: normal, selected, marked, markselect\n"
-"   Диалоги:            dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"   Диалоги:            dnormal, dfocus, dhotnormal, dhotfocus, "
+"errdhotnormal,\n"
 "                       errdhotfocus\n"
-"   Меню:               menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Меню:               menunormal, menuhot, menusel, menuhotsel, "
+"menuinactive\n"
 "   Редактор:           editnormal, editbold, editmarked, editwhitespace,\n"
 "                       editlinestate\n"
 
@@ -1021,6 +1027,10 @@ msgstr " Дочерний процесс неожиданно завершилс
 
 msgid " Background protocol error "
 msgstr " Ошибка фонового протокола "
+
+#, fuzzy
+msgid "Reading failed"
+msgstr "<сбой чтения ссылки>"
 
 msgid ""
 " Background process sent us a request for more arguments \n"
@@ -1509,7 +1519,8 @@ msgstr "Поиск невозможен"
 msgid ""
 " Cannot create temporary diff file \n"
 " %s "
-msgstr "Невозможно создать временный файл различий\n"
+msgstr ""
+"Невозможно создать временный файл различий\n"
 " %s "
 
 #, c-format
@@ -1620,6 +1631,10 @@ msgstr " Невозможно открыть файл %s для чтения "
 
 msgid "Error"
 msgstr "Ошибка"
+
+#, fuzzy, c-format
+msgid " Error reading %s "
+msgstr "Ошибка чтения скрипта:"
 
 #, c-format
 msgid " Error reading from pipe: %s "
@@ -1870,6 +1885,10 @@ msgstr "Скрипт создан:"
 
 msgid "Process block"
 msgstr "Обработать блок"
+
+#, fuzzy
+msgid "Error calling program"
+msgstr "Ошибка закрытия скрипта:"
 
 msgid " Copies to"
 msgstr " Отправить копии адресатам"
@@ -3673,9 +3692,13 @@ msgstr "С поддержкой интернационализации\n"
 msgid "With multiple codepages support\n"
 msgstr "С поддержкой многих кодировок\n"
 
-#, c-format
-msgid "Virtual File System:"
+#, fuzzy, c-format
+msgid "Virtual File Systems:"
 msgstr "Виртуальная файловая система:"
+
+#, c-format
+msgid "Data types:"
+msgstr ""
 
 #, c-format
 msgid ""

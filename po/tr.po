@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-28 16:02+0300\n"
+"POT-Creation-Date: 2010-05-05 22:32+0300\n"
 "PO-Revision-Date: 2001-11-06 05:50+0200\n"
 "Last-Translator: Nilgün Belma Bugüner <nilgun@fide.org>\n"
 "Language-Team: Turkish <debian-l10n-turkish@lists.debian.org>\n"
@@ -365,6 +365,10 @@ msgstr " Veri yolu açılamadı "
 
 msgid " Dup failed "
 msgstr " Tekrar başarısız "
+
+#, fuzzy
+msgid "Error dup'ing old error pipe"
+msgstr " Veri yolundan okumada hata "
 
 #, c-format
 msgid ""
@@ -1037,6 +1041,10 @@ msgstr " Ast süreç anlaşılmayan bir sebeple çöktü"
 msgid " Background protocol error "
 msgstr " Artalan protokol hatası "
 
+#, fuzzy
+msgid "Reading failed"
+msgstr "<bağ okuması başarısız>"
+
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -1660,6 +1668,10 @@ msgid "Error"
 msgstr "Hata"
 
 #, fuzzy, c-format
+msgid " Error reading %s "
+msgstr "Betik okunurken hata:"
+
+#, fuzzy, c-format
 msgid " Error reading from pipe: %s "
 msgstr " Veri yolundan okumada hata "
 
@@ -1922,6 +1934,10 @@ msgstr "Betik oluşturuldu:"
 
 msgid "Process block"
 msgstr "Bloku işle"
+
+#, fuzzy
+msgid "Error calling program"
+msgstr "Betik kapatılırken hata:"
 
 msgid " Copies to"
 msgstr " Kopyalar "
@@ -3811,9 +3827,13 @@ msgstr "i18n desteğiyle\n"
 msgid "With multiple codepages support\n"
 msgstr "Çoklu karakter kümesi desteğiyle\n"
 
-#, c-format
-msgid "Virtual File System:"
+#, fuzzy, c-format
+msgid "Virtual File Systems:"
 msgstr "Sanal Dosya Sistemi:"
+
+#, c-format
+msgid "Data types:"
+msgstr ""
 
 #, c-format
 msgid ""

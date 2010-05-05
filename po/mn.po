@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mn\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-28 16:02+0300\n"
+"POT-Creation-Date: 2010-05-05 22:32+0300\n"
 "PO-Revision-Date: 2003-03-04 21:16+0100\n"
 "Last-Translator: Sanlig Badral <badral@chinggis.com>\n"
 "Language-Team: Mongolian <mn@li.org>\n"
@@ -363,6 +363,10 @@ msgstr " Урсгалд алдаа гарлаа "
 
 msgid " Dup failed "
 msgstr " Dup д алдаа гарлаа "
+
+#, fuzzy
+msgid "Error dup'ing old error pipe"
+msgstr " Урсгалаас уншихад алдаа гарав: "
 
 #, c-format
 msgid ""
@@ -1033,6 +1037,10 @@ msgstr " Хүү процесс дууссан "
 msgid " Background protocol error "
 msgstr " Арын протокол дэхь алдаа "
 
+#, fuzzy
+msgid "Reading failed"
+msgstr "<унших холбоох алдаатай>"
+
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -1653,6 +1661,10 @@ msgid "Error"
 msgstr "Алдаа"
 
 #, fuzzy, c-format
+msgid " Error reading %s "
+msgstr "Скрипт уншихад алдаа гарлаа:"
+
+#, fuzzy, c-format
 msgid " Error reading from pipe: %s "
 msgstr " Урсгалаас уншихад алдаа гарав: "
 
@@ -1913,6 +1925,10 @@ msgstr "Скрипт үүссэн:"
 
 msgid "Process block"
 msgstr "Гүйцэтгэлийн блок"
+
+#, fuzzy
+msgid "Error calling program"
+msgstr "Скрипт хаахад алдаа гарлаа:"
 
 msgid " Copies to"
 msgstr " нд Хувилах"
@@ -3800,9 +3816,13 @@ msgstr "Олон улсын боломжтойгоор\n"
 msgid "With multiple codepages support\n"
 msgstr "Олон кодлогч хуудасны боломжтойгоор\n"
 
-#, c-format
-msgid "Virtual File System:"
+#, fuzzy, c-format
+msgid "Virtual File Systems:"
 msgstr "Виртуаль файл систем:"
+
+#, c-format
+msgid "Data types:"
+msgstr ""
 
 #, c-format
 msgid ""

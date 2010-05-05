@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gmc finnish 0.01\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-28 16:02+0300\n"
+"POT-Creation-Date: 2010-05-05 22:32+0300\n"
 "PO-Revision-Date: 1999-08-23 17:30+0200\n"
 "Last-Translator: Mikko Rauhala <mjr@iki.fi>\n"
 "Language-Team: Finnish <debian-l10n-finnish@lists.debian.org>\n"
@@ -346,6 +346,10 @@ msgstr ""
 
 msgid " Dup failed "
 msgstr ""
+
+#, fuzzy
+msgid "Error dup'ing old error pipe"
+msgstr " Virhe hakiessa tietoja tiedostosta "
 
 #, c-format
 msgid ""
@@ -971,6 +975,10 @@ msgstr " Lapsiprosessi kuoli odottamattomasti "
 
 msgid " Background protocol error "
 msgstr " Taustaprotokollavirhe "
+
+#, fuzzy
+msgid "Reading failed"
+msgstr "<linkin luku epäonnistui>"
 
 msgid ""
 " Background process sent us a request for more arguments \n"
@@ -1601,6 +1609,10 @@ msgid "Error"
 msgstr "Virhe"
 
 #, fuzzy, c-format
+msgid " Error reading %s "
+msgstr " Virhe hakiessa tietoja tiedostosta "
+
+#, fuzzy, c-format
 msgid " Error reading from pipe: %s "
 msgstr " Virhe hakiessa tietoja tiedostosta "
 
@@ -1863,6 +1875,9 @@ msgstr ""
 #, fuzzy
 msgid "Process block"
 msgstr " Käsittele valinta "
+
+msgid "Error calling program"
+msgstr ""
 
 msgid " Copies to"
 msgstr " Kopiot"
@@ -3661,8 +3676,12 @@ msgid "With multiple codepages support\n"
 msgstr ""
 
 #, fuzzy, c-format
-msgid "Virtual File System:"
+msgid "Virtual File Systems:"
 msgstr " VFS - virtuaalitiedostojärjestelmäasetus "
+
+#, c-format
+msgid "Data types:"
+msgstr ""
 
 #, c-format
 msgid ""

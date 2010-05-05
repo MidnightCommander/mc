@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-28 16:02+0300\n"
+"POT-Creation-Date: 2010-05-05 22:32+0300\n"
 "PO-Revision-Date: 2003-09-20 18:50+0200\n"
 "Last-Translator: Strahinya Radich (Страхиња Радић) <mr99164@alas.matf.bg.ac."
 "yu>\n"
@@ -361,6 +361,10 @@ msgstr " Цев није успела "
 
 msgid " Dup failed "
 msgstr " Позив `dup' није успео "
+
+#, fuzzy
+msgid "Error dup'ing old error pipe"
+msgstr " Грешка при читању са цеви: "
 
 #, c-format
 msgid ""
@@ -1029,6 +1033,10 @@ msgstr " Дете је изненадно завршило рад "
 msgid " Background protocol error "
 msgstr " Грешка позадинског протокола "
 
+#, fuzzy
+msgid "Reading failed"
+msgstr "<неуспешно читање везе>"
+
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -1650,6 +1658,10 @@ msgid "Error"
 msgstr "Грешка"
 
 #, fuzzy, c-format
+msgid " Error reading %s "
+msgstr "Грешка при читању списа:"
+
+#, fuzzy, c-format
 msgid " Error reading from pipe: %s "
 msgstr " Грешка при читању са цеви: "
 
@@ -1905,6 +1917,10 @@ msgstr "Спис је створен:"
 
 msgid "Process block"
 msgstr "Обради блок"
+
+#, fuzzy
+msgid "Error calling program"
+msgstr "Грешка при затварању списа:"
 
 msgid " Copies to"
 msgstr " Копије "
@@ -3802,9 +3818,13 @@ msgstr "Са подршком за интернационализацију\n"
 msgid "With multiple codepages support\n"
 msgstr "Са подршком за више кодних страна\n"
 
-#, c-format
-msgid "Virtual File System:"
+#, fuzzy, c-format
+msgid "Virtual File Systems:"
 msgstr "Виртуални систем датотека:"
+
+#, c-format
+msgid "Data types:"
+msgstr ""
 
 #, c-format
 msgid ""

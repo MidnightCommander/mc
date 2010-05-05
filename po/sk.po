@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-28 16:02+0300\n"
+"POT-Creation-Date: 2010-05-05 22:32+0300\n"
 "PO-Revision-Date: 2009-12-03 12:42+0100\n"
 "Last-Translator: Ivan Masár <helix84@centrum.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -349,6 +349,10 @@ msgstr " Zlyhanie pipe "
 
 msgid " Dup failed "
 msgstr " Zlyhanie dup "
+
+#, fuzzy
+msgid "Error dup'ing old error pipe"
+msgstr " Chyba pri čítaní z rúry: %s "
 
 #, c-format
 msgid ""
@@ -1011,6 +1015,10 @@ msgstr " Potomok procesu nečakane umrel "
 msgid " Background protocol error "
 msgstr " Chyba v protokole pozadia "
 
+#, fuzzy
+msgid "Reading failed"
+msgstr "<čítanie odkazu zlyhalo>"
+
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -1624,6 +1632,10 @@ msgstr " Nepodarilo sa otvoriť %s na čítanie "
 msgid "Error"
 msgstr "Chyba"
 
+#, fuzzy, c-format
+msgid " Error reading %s "
+msgstr "Chyba pri čítaní skriptu:"
+
 #, c-format
 msgid " Error reading from pipe: %s "
 msgstr " Chyba pri čítaní z rúry: %s "
@@ -1874,6 +1886,10 @@ msgstr "Vytvorený skript:"
 
 msgid "Process block"
 msgstr "Spracovať blok "
+
+#, fuzzy
+msgid "Error calling program"
+msgstr "Chyba pri zatváraní skriptu:"
 
 msgid " Copies to"
 msgstr " Kopie komu"
@@ -3698,9 +3714,13 @@ msgstr "S podporou internacionalizácie\n"
 msgid "With multiple codepages support\n"
 msgstr "S podporou znakových sád\n"
 
-#, c-format
-msgid "Virtual File System:"
+#, fuzzy, c-format
+msgid "Virtual File Systems:"
 msgstr "Virtuálny súborový systém:"
+
+#, c-format
+msgid "Data types:"
+msgstr ""
 
 #, c-format
 msgid ""

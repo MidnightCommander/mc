@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-28 16:02+0300\n"
+"POT-Creation-Date: 2010-05-05 22:32+0300\n"
 "PO-Revision-Date: 2001-07-27 03:02+0800\n"
 "Last-Translator: Jing-Jong Shyue <shyue@sonoma.com.tw>\n"
 "Language-Team: Chinese Traditional <zh-l10n@linux.org.tw>\n"
@@ -364,6 +364,10 @@ msgstr " 管線失敗 "
 
 msgid " Dup failed "
 msgstr " 抄寫失敗 "
+
+#, fuzzy
+msgid "Error dup'ing old error pipe"
+msgstr " 從管線讀取資料時發生錯誤: "
 
 #, c-format
 msgid ""
@@ -1036,6 +1040,10 @@ msgstr " 子程序不預期的結束 "
 msgid " Background protocol error "
 msgstr " 背景 protocol 錯誤 "
 
+#, fuzzy
+msgid "Reading failed"
+msgstr "<連結讀取錯誤>"
+
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -1659,6 +1667,10 @@ msgid "Error"
 msgstr "錯誤"
 
 #, fuzzy, c-format
+msgid " Error reading %s "
+msgstr "讀取指令稿時時發生錯誤: "
+
+#, fuzzy, c-format
 msgid " Error reading from pipe: %s "
 msgstr " 從管線讀取資料時發生錯誤: "
 
@@ -1918,6 +1930,10 @@ msgstr "建立的指令稿:"
 
 msgid "Process block"
 msgstr "處理區塊 "
+
+#, fuzzy
+msgid "Error calling program"
+msgstr "關閉指令稿錯誤:"
 
 msgid " Copies to"
 msgstr " 複製到 "
@@ -3810,9 +3826,13 @@ msgstr ""
 msgid "With multiple codepages support\n"
 msgstr "使用多頁碼支援\n"
 
-#, c-format
-msgid "Virtual File System:"
+#, fuzzy, c-format
+msgid "Virtual File Systems:"
 msgstr "虛擬檔案系統: "
+
+#, c-format
+msgid "Data types:"
+msgstr ""
 
 #, c-format
 msgid ""

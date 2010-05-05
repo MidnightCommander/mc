@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-28 16:02+0300\n"
+"POT-Creation-Date: 2010-05-05 22:32+0300\n"
 "PO-Revision-Date: 2001-09-29 17:41+0200\n"
 "Last-Translator: Softcatalà <tradgnome@softcatala.org>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
@@ -364,6 +364,10 @@ msgstr " Ha fallat el conducte"
 
 msgid " Dup failed "
 msgstr " Ha fallat dup() "
+
+#, fuzzy
+msgid "Error dup'ing old error pipe"
+msgstr " S'ha produït un error en llegir del conducte: "
 
 #, c-format
 msgid ""
@@ -1041,6 +1045,10 @@ msgstr " El procés fill ha acabat inesperadament "
 msgid " Background protocol error "
 msgstr " S'ha produït un error de protocol al procés de fons "
 
+#, fuzzy
+msgid "Reading failed"
+msgstr "<S'ha produït una fallida en llegir l'enllaç>"
+
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -1665,6 +1673,10 @@ msgid "Error"
 msgstr "S'ha produït un error"
 
 #, fuzzy, c-format
+msgid " Error reading %s "
+msgstr "S'ha produït un error en llegir la seqüència:"
+
+#, fuzzy, c-format
 msgid " Error reading from pipe: %s "
 msgstr " S'ha produït un error en llegir del conducte: "
 
@@ -1926,6 +1938,10 @@ msgstr "Seqüència creada:"
 
 msgid "Process block"
 msgstr "Processa el bloc"
+
+#, fuzzy
+msgid "Error calling program"
+msgstr "Error en tancar la seqüència:"
 
 msgid " Copies to"
 msgstr " Còpies per a"
@@ -3824,9 +3840,13 @@ msgstr "Amb la possibilitat d'utilitzar internacionalització\n"
 msgid "With multiple codepages support\n"
 msgstr "Amb la possibilitat d'utilitzar diverses pàgines de codis\n"
 
-#, c-format
-msgid "Virtual File System:"
+#, fuzzy, c-format
+msgid "Virtual File Systems:"
 msgstr "Sistema de fitxers virtual:"
+
+#, c-format
+msgid "Data types:"
+msgstr ""
 
 #, c-format
 msgid ""

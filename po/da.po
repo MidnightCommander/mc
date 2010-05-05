@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.41\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-28 16:02+0300\n"
+"POT-Creation-Date: 2010-05-05 22:32+0300\n"
 "PO-Revision-Date: 2001-10-20 21:37+02:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -370,6 +370,10 @@ msgstr " Pibe fejlede "
 
 msgid " Dup failed "
 msgstr " Dup fejlede "
+
+#, fuzzy
+msgid "Error dup'ing old error pipe"
+msgstr " Problem under læsning fra rør: "
 
 #, c-format
 msgid ""
@@ -1040,6 +1044,10 @@ msgstr " Barn døde uventet "
 msgid " Background protocol error "
 msgstr " Fejl i baggrundsprotokol "
 
+#, fuzzy
+msgid "Reading failed"
+msgstr "<læslink mislykkedes>"
+
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -1664,6 +1672,10 @@ msgid "Error"
 msgstr "Fejl"
 
 #, fuzzy, c-format
+msgid " Error reading %s "
+msgstr "Fejl ved læsning af skript:"
+
+#, fuzzy, c-format
 msgid " Error reading from pipe: %s "
 msgstr " Problem under læsning fra rør: "
 
@@ -1925,6 +1937,10 @@ msgstr "Skript oprettet:"
 
 msgid "Process block"
 msgstr "Procesblok"
+
+#, fuzzy
+msgid "Error calling program"
+msgstr "Fejl ved lukning af skript"
 
 msgid " Copies to"
 msgstr " Kopiér til"
@@ -3815,9 +3831,13 @@ msgstr "Med understøttelse for internationalisering\n"
 msgid "With multiple codepages support\n"
 msgstr "Med understøttelse for flere tegnsæt\n"
 
-#, c-format
-msgid "Virtual File System:"
+#, fuzzy, c-format
+msgid "Virtual File Systems:"
 msgstr "Virtuelt filsystem: "
+
+#, c-format
+msgid "Data types:"
+msgstr ""
 
 #, c-format
 msgid ""

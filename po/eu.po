@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-28 16:02+0300\n"
+"POT-Creation-Date: 2010-05-05 22:32+0300\n"
 "PO-Revision-Date: 2001-05-25 13:35+0200\n"
 "Last-Translator: Mari Susperregi <mari@elhuyar.com>\n"
 "Language-Team: Euskara <debian-l10n-basque@lists.debian.org>\n"
@@ -364,6 +364,10 @@ msgstr " Kanalizazioak huts egin du "
 
 msgid " Dup failed "
 msgstr " Bikoizketak huts egin du "
+
+#, fuzzy
+msgid "Error dup'ing old error pipe"
+msgstr " Errorea kanalizazioan irakurtzean: "
 
 #, c-format
 msgid ""
@@ -1035,6 +1039,10 @@ msgstr "Umea ustekabean hil da "
 msgid " Background protocol error "
 msgstr "Atzeko planoko protokoloaren errorea "
 
+#, fuzzy
+msgid "Reading failed"
+msgstr "<readlink-ek huts egin du>"
+
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -1662,6 +1670,10 @@ msgid "Error"
 msgstr "Errorea"
 
 #, fuzzy, c-format
+msgid " Error reading %s "
+msgstr "Errorea script-a irakurtzean:"
+
+#, fuzzy, c-format
 msgid " Error reading from pipe: %s "
 msgstr " Errorea kanalizazioan irakurtzean: "
 
@@ -1924,6 +1936,10 @@ msgstr "Sortutako script-a:"
 
 msgid "Process block"
 msgstr "Prozesatu blokea"
+
+#, fuzzy
+msgid "Error calling program"
+msgstr "Errorea script-a ixtean:"
 
 msgid " Copies to"
 msgstr "Hona kopiatzen du"
@@ -3817,9 +3833,13 @@ msgstr "Nazioarteratzea onartzen du\n"
 msgid "With multiple codepages support\n"
 msgstr "Kode-orrien euskarri ugarirekin\n"
 
-#, c-format
-msgid "Virtual File System:"
+#, fuzzy, c-format
+msgid "Virtual File Systems:"
 msgstr "Fitxategi-sistema birtuala:"
+
+#, c-format
+msgid "Data types:"
+msgstr ""
 
 #, c-format
 msgid ""

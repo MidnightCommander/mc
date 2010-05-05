@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-28 16:02+0300\n"
+"POT-Creation-Date: 2010-05-05 22:32+0300\n"
 "PO-Revision-Date: 2002-04-25 03:55+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <debian-l10n-portuguese@lists.debian.org>\n"
@@ -363,6 +363,10 @@ msgstr " Canal falhou "
 
 msgid " Dup failed "
 msgstr " Dup falhou "
+
+#, fuzzy
+msgid "Error dup'ing old error pipe"
+msgstr " Erro ao ler de canal: "
 
 #, c-format
 msgid ""
@@ -1035,6 +1039,10 @@ msgstr " Filho morreu inesperadamente "
 msgid " Background protocol error "
 msgstr " Erro de protocolo de fundo "
 
+#, fuzzy
+msgid "Reading failed"
+msgstr "<falha em leitura atalho>"
+
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -1660,6 +1668,10 @@ msgid "Error"
 msgstr "Erro"
 
 #, fuzzy, c-format
+msgid " Error reading %s "
+msgstr "Erro ao ler script:"
+
+#, fuzzy, c-format
 msgid " Error reading from pipe: %s "
 msgstr " Erro ao ler de canal: "
 
@@ -1920,6 +1932,10 @@ msgstr "Script criado:"
 
 msgid "Process block"
 msgstr "Processar bloco"
+
+#, fuzzy
+msgid "Error calling program"
+msgstr "Erro ao fechar script:"
 
 msgid " Copies to"
 msgstr " Cópias para"
@@ -3813,9 +3829,13 @@ msgstr "Com suporte de internacionalização\n"
 msgid "With multiple codepages support\n"
 msgstr "Com suporte para múltiplas páginas de códigos\n"
 
-#, c-format
-msgid "Virtual File System:"
+#, fuzzy, c-format
+msgid "Virtual File Systems:"
 msgstr "Sistema de Fichreiros Virtual (VFS):"
+
+#, c-format
+msgid "Data types:"
+msgstr ""
 
 #, c-format
 msgid ""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.7.2\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-28 16:02+0300\n"
+"POT-Creation-Date: 2010-05-05 22:32+0300\n"
 "PO-Revision-Date: 2010-03-19 15:00+0100\n"
 "Last-Translator: David Martín <dmartina@excite.com\n"
 "Language-Team: Spanish <debian-l10n-spanish@lists.debian.org>\n"
@@ -347,6 +347,10 @@ msgstr " Fallo en la tubería "
 
 msgid " Dup failed "
 msgstr " Dup falló "
+
+#, fuzzy
+msgid "Error dup'ing old error pipe"
+msgstr " Error al leer en tubería: %s "
 
 #, c-format
 msgid ""
@@ -1010,6 +1014,10 @@ msgstr " El proceso hijo feneció inesperadamente"
 msgid " Background protocol error "
 msgstr " Error de protocolo en proceso en 2º plano "
 
+#, fuzzy
+msgid "Reading failed"
+msgstr "<readlink falló>"
+
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -1616,6 +1624,10 @@ msgstr " Imposible abrir %s para lectura "
 msgid "Error"
 msgstr "Error"
 
+#, fuzzy, c-format
+msgid " Error reading %s "
+msgstr "Error al leer guión:"
+
 #, c-format
 msgid " Error reading from pipe: %s "
 msgstr " Error al leer en tubería: %s "
@@ -1865,6 +1877,10 @@ msgstr "Guión creado:"
 
 msgid "Process block"
 msgstr "Procesar bloque"
+
+#, fuzzy
+msgid "Error calling program"
+msgstr "Error al cerrar guión:"
 
 msgid " Copies to"
 msgstr " Cursar Copias a"
@@ -3666,9 +3682,13 @@ msgstr "Soporte para idioma local\n"
 msgid "With multiple codepages support\n"
 msgstr "Soporte para cambio de juegos de caracteres\n"
 
-#, c-format
-msgid "Virtual File System:"
+#, fuzzy, c-format
+msgid "Virtual File Systems:"
 msgstr "Sistema de archivos virtual:"
+
+#, c-format
+msgid "Data types:"
+msgstr ""
 
 #, c-format
 msgid ""

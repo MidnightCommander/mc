@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-28 16:02+0300\n"
+"POT-Creation-Date: 2010-05-05 22:32+0300\n"
 "PO-Revision-Date: 2001-09-26 16:43GMT +0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
@@ -364,6 +364,10 @@ msgstr " Borulama Bacarılmadı "
 
 msgid " Dup failed "
 msgstr " Dup Bacarılmadı "
+
+#, fuzzy
+msgid "Error dup'ing old error pipe"
+msgstr " Borudan oxuyarkən xəta oldu . "
 
 #, c-format
 msgid ""
@@ -1034,6 +1038,10 @@ msgstr " Törəmə gözlənilmədən qurtardı "
 msgid " Background protocol error "
 msgstr " Arxaplan protokolu xətası "
 
+#, fuzzy
+msgid "Reading failed"
+msgstr "<bağ oxuması iflas etdi>"
+
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -1658,6 +1666,10 @@ msgid "Error"
 msgstr "XƏTA"
 
 #, fuzzy, c-format
+msgid " Error reading %s "
+msgstr "Scripti oxuduğum vaxt bir xəta oldu :"
+
+#, fuzzy, c-format
 msgid " Error reading from pipe: %s "
 msgstr " Borudan oxuyarkən xəta oldu . "
 
@@ -1919,6 +1931,10 @@ msgstr "Script yaradıldı:"
 
 msgid "Process block"
 msgstr "Blok əməliyyatına başla"
+
+#, fuzzy
+msgid "Error calling program"
+msgstr "Script qapadılarkən xəta oldu:"
 
 msgid " Copies to"
 msgstr " Köçürdülür"
@@ -3808,9 +3824,13 @@ msgstr "Beynəlmiləlləşdirmə dəstəkli\n"
 msgid "With multiple codepages support\n"
 msgstr "Çoxlu kod səhifəsi dəstəyilə\n"
 
-#, c-format
-msgid "Virtual File System:"
+#, fuzzy, c-format
+msgid "Virtual File Systems:"
 msgstr "Virtual Fayl Sistemi:"
+
+#, c-format
+msgid "Data types:"
+msgstr ""
 
 #, c-format
 msgid ""

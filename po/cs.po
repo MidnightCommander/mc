@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.0.2\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-28 16:02+0300\n"
+"POT-Creation-Date: 2010-05-05 22:32+0300\n"
 "PO-Revision-Date: 2010-03-14 14:00+0100\n"
 "Last-Translator: Martin Zoubek <zoubek@seznam.cz>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
@@ -353,6 +353,10 @@ msgstr " pipe() selhalo "
 
 msgid " Dup failed "
 msgstr " dup() selhalo "
+
+#, fuzzy
+msgid "Error dup'ing old error pipe"
+msgstr " Chyba při čtení z roury: %s "
 
 #, c-format
 msgid ""
@@ -1019,6 +1023,10 @@ msgstr " Potomek procesu neočekávaně umřel "
 msgid " Background protocol error "
 msgstr " Chyba interního protokolu "
 
+#, fuzzy
+msgid "Reading failed"
+msgstr "<čtení odkazu selhalo>"
+
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -1632,6 +1640,10 @@ msgstr " Nepodařilo se otevřít %s pro čtení "
 msgid "Error"
 msgstr "Chyba"
 
+#, fuzzy, c-format
+msgid " Error reading %s "
+msgstr "Chyba při čtení skriptu:"
+
 #, c-format
 msgid " Error reading from pipe: %s "
 msgstr " Chyba při čtení z roury: %s "
@@ -1882,6 +1894,10 @@ msgstr "Skript byl vytvořen:"
 
 msgid "Process block"
 msgstr "Zpracovat blok"
+
+#, fuzzy
+msgid "Error calling program"
+msgstr "Chyba při zavírání skriptu:"
 
 msgid " Copies to"
 msgstr " Kopie do"
@@ -3691,9 +3707,13 @@ msgstr "S podporou internacionalizace\n"
 msgid "With multiple codepages support\n"
 msgstr "S podporou více kódových stránek\n"
 
-#, c-format
-msgid "Virtual File System:"
+#, fuzzy, c-format
+msgid "Virtual File Systems:"
 msgstr "Virtuální souborový systém:"
+
+#, c-format
+msgid "Data types:"
+msgstr ""
 
 #, c-format
 msgid ""

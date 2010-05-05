@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-28 16:02+0300\n"
+"POT-Creation-Date: 2010-05-05 22:32+0300\n"
 "PO-Revision-Date: 2003-01-31 00:11+0200\n"
 "Last-Translator: Mişu Moldovan <dumol@go.ro>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
@@ -361,6 +361,10 @@ msgstr " Filtrul a eşuat "
 
 msgid " Dup failed "
 msgstr " Dup eşuat "
+
+#, fuzzy
+msgid "Error dup'ing old error pipe"
+msgstr " Eroare la citirea din filtrul: "
 
 #, c-format
 msgid ""
@@ -1030,6 +1034,10 @@ msgstr " Procesul copil s-a terminat în mod neaşteptat"
 msgid " Background protocol error "
 msgstr " Eroare în protocolul de fundal "
 
+#, fuzzy
+msgid "Reading failed"
+msgstr "<readlink eşuat>"
+
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -1650,6 +1658,10 @@ msgid "Error"
 msgstr "Eroare"
 
 #, fuzzy, c-format
+msgid " Error reading %s "
+msgstr "Eroare la citirea script-ului: "
+
+#, fuzzy, c-format
 msgid " Error reading from pipe: %s "
 msgstr " Eroare la citirea din filtrul: "
 
@@ -1908,6 +1920,10 @@ msgstr "A fost creat script-ul: "
 
 msgid "Process block"
 msgstr "Prelucrarea blocului"
+
+#, fuzzy
+msgid "Error calling program"
+msgstr "Eroare la închiderea script-ului: "
 
 msgid " Copies to"
 msgstr " Copie Indigo la:"
@@ -3796,9 +3812,13 @@ msgstr "Cu suport de internaţionalizare\n"
 msgid "With multiple codepages support\n"
 msgstr "Cu suport pentru coduri de pagină multiple\n"
 
-#, c-format
-msgid "Virtual File System:"
+#, fuzzy, c-format
+msgid "Virtual File Systems:"
 msgstr "Sistem Virtual de Fişiere:"
+
+#, c-format
+msgid "Data types:"
+msgstr ""
 
 #, c-format
 msgid ""

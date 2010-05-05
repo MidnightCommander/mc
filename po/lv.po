@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-28 16:02+0300\n"
+"POT-Creation-Date: 2010-05-05 22:32+0300\n"
 "PO-Revision-Date: 2001-11-20 15:15+0200\n"
 "Last-Translator: Artis Trops <hornet@navigators.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -363,6 +363,10 @@ msgstr " Kanāls neizdevās "
 
 msgid " Dup failed "
 msgstr " Dup neizdevās "
+
+#, fuzzy
+msgid "Error dup'ing old error pipe"
+msgstr " Kļūda lasot no programkanāla: "
 
 #, c-format
 msgid ""
@@ -1035,6 +1039,10 @@ msgstr " Bērnelis negaidīti nomira "
 msgid " Background protocol error "
 msgstr " Fona darba kļūda "
 
+#, fuzzy
+msgid "Reading failed"
+msgstr "<lasītsaiti neveiksme>"
+
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -1659,6 +1667,10 @@ msgid "Error"
 msgstr "Kļūda"
 
 #, fuzzy, c-format
+msgid " Error reading %s "
+msgstr "Kļūda lasot skriptu:"
+
+#, fuzzy, c-format
 msgid " Error reading from pipe: %s "
 msgstr " Kļūda lasot no programkanāla: "
 
@@ -1921,6 +1933,10 @@ msgstr "Skripts izveidots:"
 
 msgid "Process block"
 msgstr "Procesa bloks"
+
+#, fuzzy
+msgid "Error calling program"
+msgstr "Kļūda aizverot skriptu:"
 
 msgid " Copies to"
 msgstr " Kopét uz"
@@ -3816,9 +3832,13 @@ msgstr "ar internacionalizācijas atbalstu\n"
 msgid "With multiple codepages support\n"
 msgstr "Ar vairāku kodu tabulu atbalstu\n"
 
-#, c-format
-msgid "Virtual File System:"
+#, fuzzy, c-format
+msgid "Virtual File Systems:"
 msgstr "Virtuālā Failsistēma:"
+
+#, c-format
+msgid "Data types:"
+msgstr ""
 
 #, c-format
 msgid ""

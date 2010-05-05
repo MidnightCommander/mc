@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc \n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-28 16:02+0300\n"
+"POT-Creation-Date: 2010-05-05 22:32+0300\n"
 "PO-Revision-Date: 2000-06-22 00:00+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -358,6 +358,10 @@ msgstr " Cev neuspešna "
 
 msgid " Dup failed "
 msgstr " Podvojitev neuspešna"
+
+#, fuzzy
+msgid "Error dup'ing old error pipe"
+msgstr " Napaka ob branju iz cevi: "
 
 #, c-format
 msgid ""
@@ -1028,6 +1032,10 @@ msgstr " Otrok je umru nepricakovano "
 msgid " Background protocol error "
 msgstr " Napaka protokola v ozadju "
 
+#, fuzzy
+msgid "Reading failed"
+msgstr "<branje povezave neuspešno>"
+
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -1648,6 +1656,10 @@ msgid "Error"
 msgstr "Napaka"
 
 #, fuzzy, c-format
+msgid " Error reading %s "
+msgstr "Napaka ob branju skripte:"
+
+#, fuzzy, c-format
 msgid " Error reading from pipe: %s "
 msgstr " Napaka ob branju iz cevi: "
 
@@ -1908,6 +1920,10 @@ msgstr "Skripta ustvarjena:"
 
 msgid "Process block"
 msgstr "Procesiraj blok"
+
+#, fuzzy
+msgid "Error calling program"
+msgstr "Napaka ob zapiranju skripte:"
 
 msgid " Copies to"
 msgstr " Skopira se v"
@@ -3798,9 +3814,13 @@ msgstr "Z mednarodno podporo\n"
 msgid "With multiple codepages support\n"
 msgstr "Z podporo večim naborom znakov\n"
 
-#, c-format
-msgid "Virtual File System:"
+#, fuzzy, c-format
+msgid "Virtual File Systems:"
 msgstr "Navidezni datotečni sistem:"
+
+#, c-format
+msgid "Data types:"
+msgstr ""
 
 #, c-format
 msgid ""

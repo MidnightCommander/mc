@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc CVS-20011220\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-28 16:02+0300\n"
+"POT-Creation-Date: 2010-05-05 22:32+0300\n"
 "PO-Revision-Date: 2001-12-20 18:33+0900\n"
 "Last-Translator: Akira TAGOH <tagoh@gnome.gr.jp>\n"
 "Language-Team: Japanese <debian-japanese@lists.debian.org>\n"
@@ -364,6 +364,10 @@ msgstr "pipe 失敗 "
 
 msgid " Dup failed "
 msgstr " dup 失敗 "
+
+#, fuzzy
+msgid "Error dup'ing old error pipe"
+msgstr " パイプからの読み込みエラー: "
 
 #, c-format
 msgid ""
@@ -1028,6 +1032,10 @@ msgstr " 子プロセスが死んでしまいました "
 msgid " Background protocol error "
 msgstr " バックグラウンド・プロトコルのエラー "
 
+#, fuzzy
+msgid "Reading failed"
+msgstr "<リンク読みだしに失敗>"
+
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -1652,6 +1660,10 @@ msgid "Error"
 msgstr "エラー"
 
 #, fuzzy, c-format
+msgid " Error reading %s "
+msgstr "スクリプト読み込みでエラー:"
+
+#, fuzzy, c-format
 msgid " Error reading from pipe: %s "
 msgstr " パイプからの読み込みエラー: "
 
@@ -1914,6 +1926,10 @@ msgstr "スクリプトは作成されました:"
 
 msgid "Process block"
 msgstr "プロセスブロック"
+
+#, fuzzy
+msgid "Error calling program"
+msgstr "スクリプトクローズエラー:"
 
 msgid " Copies to"
 msgstr " コピー"
@@ -3803,9 +3819,13 @@ msgstr "国際化サポートを使用\n"
 msgid "With multiple codepages support\n"
 msgstr "複数のコードページを使用\n"
 
-#, c-format
-msgid "Virtual File System:"
+#, fuzzy, c-format
+msgid "Virtual File Systems:"
 msgstr "仮想ファイルシステム:"
+
+#, c-format
+msgid "Data types:"
+msgstr ""
 
 #, c-format
 msgid ""

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.55\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-28 16:02+0300\n"
+"POT-Creation-Date: 2010-05-05 22:32+0300\n"
 "PO-Revision-Date: 2002-06-24 02:15+0300\n"
 "Last-Translator: Todor Buyukliev <adrez@mail.bg>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -349,6 +349,10 @@ msgstr " Канала пропадна "
 
 msgid " Dup failed "
 msgstr " Дублирането на дескриптора пропадна "
+
+#, fuzzy
+msgid "Error dup'ing old error pipe"
+msgstr "Грешка при четене от канала: "
 
 #, c-format
 msgid ""
@@ -1020,6 +1024,10 @@ msgstr " Процесът-дете умря неочаквано "
 msgid " Background protocol error "
 msgstr " Грешка във фоновия протокол "
 
+#, fuzzy
+msgid "Reading failed"
+msgstr "<непрочетена връзка>"
+
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -1644,6 +1652,10 @@ msgid "Error"
 msgstr "Грешка"
 
 #, fuzzy, c-format
+msgid " Error reading %s "
+msgstr "Грешка при четене на скрипт:"
+
+#, fuzzy, c-format
 msgid " Error reading from pipe: %s "
 msgstr "Грешка при четене от канала: "
 
@@ -1905,6 +1917,10 @@ msgstr "Създаден скрипт:"
 
 msgid "Process block"
 msgstr "Обработи блока"
+
+#, fuzzy
+msgid "Error calling program"
+msgstr "Грешка при затваряне на скрипт:"
 
 msgid " Copies to"
 msgstr " Копия до"
@@ -3794,9 +3810,13 @@ msgstr "С поддръжка на интернационализация\n"
 msgid "With multiple codepages support\n"
 msgstr "С поддръжка на много кодови страници\n"
 
-#, c-format
-msgid "Virtual File System:"
+#, fuzzy, c-format
+msgid "Virtual File Systems:"
 msgstr "Виртуална Файлова Система:"
+
+#, c-format
+msgid "Data types:"
+msgstr ""
 
 #, c-format
 msgid ""

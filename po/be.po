@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: be\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-28 16:02+0300\n"
+"POT-Creation-Date: 2010-05-05 22:32+0300\n"
 "PO-Revision-Date: 2008-12-21 23:28+0200\n"
 "Last-Translator: Pavel Piatruk <piatruk.p@gmail.com>\n"
 "Language-Team: Belarusian <debian-l10n-belarusian@lists.debian.org>\n"
@@ -348,6 +348,10 @@ msgstr " Збой каналу "
 
 msgid " Dup failed "
 msgstr " Збой дублявання дэскрыптару "
+
+#, fuzzy
+msgid "Error dup'ing old error pipe"
+msgstr " Памылка чытання з каналу: %s "
 
 #, c-format
 msgid ""
@@ -1023,6 +1027,10 @@ msgstr " Дачэрні працэс нечакана памёр "
 msgid " Background protocol error "
 msgstr " Памылка пратаколу тла"
 
+#, fuzzy
+msgid "Reading failed"
+msgstr "<памылка чытання спасылкі>"
+
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -1629,6 +1637,10 @@ msgstr " Памылка адкрыцця %s чытання"
 msgid "Error"
 msgstr "Памылка"
 
+#, fuzzy, c-format
+msgid " Error reading %s "
+msgstr "Памылка чытання скрыпта:"
+
 #, c-format
 msgid " Error reading from pipe: %s "
 msgstr " Памылка чытання з каналу: %s "
@@ -1878,6 +1890,10 @@ msgstr "Скрыпт створаны:"
 
 msgid "Process block"
 msgstr "Апрацаваць блок"
+
+#, fuzzy
+msgid "Error calling program"
+msgstr "Памылка закрыцця скрыпта:"
 
 msgid " Copies to"
 msgstr " Копіі на "
@@ -3716,9 +3732,13 @@ msgstr "З падтрымкай інтэрнацыяналізацыі\n"
 msgid "With multiple codepages support\n"
 msgstr "З падтрымкай шматлікіх кодавых старонак\n"
 
-#, c-format
-msgid "Virtual File System:"
+#, fuzzy, c-format
+msgid "Virtual File Systems:"
 msgstr "Віртуальная Файлавая Сістэма:"
+
+#, fuzzy, c-format
+msgid "Data types:"
+msgstr "Базы Дадзеных"
 
 #, c-format
 msgid ""
@@ -4485,9 +4505,6 @@ msgstr "Працэс у тле:"
 
 #~ msgid "&Ok"
 #~ msgstr "&Так"
-
-#~ msgid "Databases"
-#~ msgstr "Базы Дадзеных"
 
 #~ msgid "Graphics"
 #~ msgstr "Графіка"

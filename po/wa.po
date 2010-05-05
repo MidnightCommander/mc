@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-28 16:02+0300\n"
+"POT-Creation-Date: 2010-05-05 22:32+0300\n"
 "PO-Revision-Date: 1999-03-18 23:11+0100\n"
 "Last-Translator: Lorint Hendschel <LorintHendschel@skynet.be>\n"
 "Language-Team: Wallon <linux-wa@chanae.alphanet.ch>\n"
@@ -367,6 +367,10 @@ msgstr " Li bûze a fwait berwete "
 
 msgid " Dup failed "
 msgstr " Dup a fwait berwete "
+
+#, fuzzy
+msgid "Error dup'ing old error pipe"
+msgstr " Åk ni va nén cwand dji saye di lére del bûze: "
 
 #, c-format
 msgid ""
@@ -984,6 +988,10 @@ msgstr " L' efant a morou tot d' on côp "
 
 msgid " Background protocol error "
 msgstr " Aroke e protocole di fond "
+
+#, fuzzy
+msgid "Reading failed"
+msgstr "<readlink a fwait berwete>"
 
 msgid ""
 " Background process sent us a request for more arguments \n"
@@ -1616,6 +1624,10 @@ msgid "Error"
 msgstr "Aroke"
 
 #, fuzzy, c-format
+msgid " Error reading %s "
+msgstr " Åk ni va nén cwand dji saye di lére del bûze: "
+
+#, fuzzy, c-format
 msgid " Error reading from pipe: %s "
 msgstr " Åk ni va nén cwand dji saye di lére del bûze: "
 
@@ -1880,6 +1892,9 @@ msgstr ""
 #, fuzzy
 msgid "Process block"
 msgstr " Aspougnî li blok "
+
+msgid "Error calling program"
+msgstr ""
 
 msgid " Copies to"
 msgstr " Copyî po "
@@ -3774,9 +3789,13 @@ msgstr ""
 msgid "With multiple codepages support\n"
 msgstr ""
 
-#, c-format
-msgid "Virtual File System:"
+#, fuzzy, c-format
+msgid "Virtual File Systems:"
 msgstr "Forveyou sistinme di fitchîs:"
+
+#, c-format
+msgid "Data types:"
+msgstr ""
 
 #, c-format
 msgid ""

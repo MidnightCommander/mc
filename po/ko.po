@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-28 16:02+0300\n"
+"POT-Creation-Date: 2010-05-05 22:32+0300\n"
 "PO-Revision-Date: 2010-04-26 00:31+0900\n"
 "Last-Translator: Kang Bundo <bundo@bundo.biz>\n"
 "Language-Team: ubuntu korea <admin@ubuntu.or.kr>\n"
@@ -349,6 +349,10 @@ msgstr " Pipe 실패"
 
 msgid " Dup failed "
 msgstr " Dup 실패"
+
+#, fuzzy
+msgid "Error dup'ing old error pipe"
+msgstr "파이프 읽기 에러: %s "
 
 #, c-format
 msgid ""
@@ -1010,6 +1014,10 @@ msgstr "예기치 않은 자식(child) 프로세스의 죽음 "
 msgid " Background protocol error "
 msgstr "배경 프로토콜 에러 "
 
+#, fuzzy
+msgid "Reading failed"
+msgstr "<readlink 실패>"
+
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -1616,6 +1624,10 @@ msgstr " %s 읽는 중  열 수 없습니다."
 msgid "Error"
 msgstr "에러"
 
+#, fuzzy, c-format
+msgid " Error reading %s "
+msgstr "스크립트 읽기 에러:"
+
 #, c-format
 msgid " Error reading from pipe: %s "
 msgstr "파이프 읽기 에러: %s "
@@ -1866,6 +1878,10 @@ msgstr "스크립트 만듬:"
 
 msgid "Process block"
 msgstr "프로세스 블럭"
+
+#, fuzzy
+msgid "Error calling program"
+msgstr "스크립트 닫기 에러:"
 
 msgid " Copies to"
 msgstr "복사"
@@ -3655,9 +3671,13 @@ msgstr "국제화 지원\n"
 msgid "With multiple codepages support\n"
 msgstr "복수의 코드페이지 지원\n"
 
-#, c-format
-msgid "Virtual File System:"
+#, fuzzy, c-format
+msgid "Virtual File Systems:"
 msgstr "가상 파일 체계:"
+
+#, c-format
+msgid "Data types:"
+msgstr ""
 
 #, c-format
 msgid ""

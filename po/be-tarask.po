@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-28 16:02+0300\n"
+"POT-Creation-Date: 2010-05-05 22:32+0300\n"
 "PO-Revision-Date: 2002-08-25 16:15GMT+2\n"
 "Last-Translator: Vital Khilko <dojlid@mova.org>\n"
 "Language-Team: Belarusian (tarask) <debian-l10n-belarusian@lists.debian."
@@ -361,6 +361,10 @@ msgstr " Збой каналу "
 
 msgid " Dup failed "
 msgstr " Збой дубляваньня дэскрыптару "
+
+#, fuzzy
+msgid "Error dup'ing old error pipe"
+msgstr " Памылка чытаньня з каналу: "
 
 #, c-format
 msgid ""
@@ -1014,6 +1018,10 @@ msgstr " Дачэрні працэс нечакана памёр "
 msgid " Background protocol error "
 msgstr " Памылка пратаколу тла"
 
+#, fuzzy
+msgid "Reading failed"
+msgstr "<памылка чытаньня спасылкі>"
+
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -1637,6 +1645,10 @@ msgid "Error"
 msgstr "Памылка"
 
 #, fuzzy, c-format
+msgid " Error reading %s "
+msgstr "Памылка чытаньня сцэнару:"
+
+#, fuzzy, c-format
 msgid " Error reading from pipe: %s "
 msgstr " Памылка чытаньня з каналу: "
 
@@ -1897,6 +1909,10 @@ msgstr "Сцэнар створаны:"
 
 msgid "Process block"
 msgstr "Апрацаваць блёк"
+
+#, fuzzy
+msgid "Error calling program"
+msgstr "Памылка закрыцьця сцэнару:"
 
 msgid " Copies to"
 msgstr " Копіі на адрэсы"
@@ -3786,9 +3802,13 @@ msgstr "З падтрымкай інтэрнацыяналізацыі\n"
 msgid "With multiple codepages support\n"
 msgstr "З падтрымкай шматлікіх кодавых старонак\n"
 
-#, c-format
-msgid "Virtual File System:"
+#, fuzzy, c-format
+msgid "Virtual File Systems:"
 msgstr "Віртуальная Файлавая Сыстэма:"
+
+#, c-format
+msgid "Data types:"
+msgstr ""
 
 #, c-format
 msgid ""

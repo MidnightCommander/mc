@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc-4.5.36\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-28 16:02+0300\n"
+"POT-Creation-Date: 2010-05-05 22:32+0300\n"
 "PO-Revision-Date: 2000-10-27 15:37-03:00\n"
 "Last-Translator: E. A. Tacão <tacao@conectiva.com.br>\n"
 "Language-Team: Brazilian Portuguese <ldp-br@bazar.conectiva.com.br>\n"
@@ -362,6 +362,11 @@ msgstr " Conector falhou"
 
 msgid " Dup failed "
 msgstr " dup falhou"
+
+#
+#, fuzzy
+msgid "Error dup'ing old error pipe"
+msgstr " Problema lendo do pipe:"
 
 #, c-format
 msgid ""
@@ -1040,6 +1045,10 @@ msgstr " Processo filho morreu inesperadamente "
 msgid " Background protocol error "
 msgstr " Erro no protocolo de segundo plano "
 
+#, fuzzy
+msgid "Reading failed"
+msgstr "<erro ao ler ligação>"
+
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -1672,6 +1681,10 @@ msgstr " Falha ao abrir pipe para leitura: "
 msgid "Error"
 msgstr "Erro"
 
+#, fuzzy, c-format
+msgid " Error reading %s "
+msgstr "Erro ao ler script:"
+
 #
 #, fuzzy, c-format
 msgid " Error reading from pipe: %s "
@@ -1941,6 +1954,10 @@ msgstr "Script criado:"
 #
 msgid "Process block"
 msgstr " Processar bloco "
+
+#, fuzzy
+msgid "Error calling program"
+msgstr "Erro ao fechar script:"
 
 msgid " Copies to"
 msgstr " Copias para "
@@ -3850,9 +3867,13 @@ msgid "With multiple codepages support\n"
 msgstr ""
 
 #
-#, c-format
-msgid "Virtual File System:"
+#, fuzzy, c-format
+msgid "Virtual File Systems:"
 msgstr "Sistema de arquivos virtual:"
+
+#, c-format
+msgid "Data types:"
+msgstr ""
 
 #, c-format
 msgid ""

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-28 16:02+0300\n"
+"POT-Creation-Date: 2010-05-05 22:32+0300\n"
 "PO-Revision-Date: 2010-04-24 18:03+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <trans-pl@lists.fedoraproject.org>\n"
@@ -348,6 +348,10 @@ msgstr " Potok nie powiódł się "
 
 msgid " Dup failed "
 msgstr " Dup nie powiodło się "
+
+#, fuzzy
+msgid "Error dup'ing old error pipe"
+msgstr " Błąd podczas odczytywania potoku: %s "
 
 #, c-format
 msgid ""
@@ -1011,6 +1015,10 @@ msgstr " Proces potomny został niespodziewanie zakończony "
 msgid " Background protocol error "
 msgstr " Błąd protokołu komunikacji w tle "
 
+#, fuzzy
+msgid "Reading failed"
+msgstr "<readlink nie powiodło się>"
+
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -1619,6 +1627,10 @@ msgstr " Nie można otworzyć %s do odczytania "
 msgid "Error"
 msgstr "Błąd"
 
+#, fuzzy, c-format
+msgid " Error reading %s "
+msgstr "Błąd podczas odczytywania skryptu:"
+
 #, c-format
 msgid " Error reading from pipe: %s "
 msgstr " Błąd podczas odczytywania potoku: %s "
@@ -1870,6 +1882,10 @@ msgstr "Utworzono skrypt:"
 
 msgid "Process block"
 msgstr "Przetwórz blok"
+
+#, fuzzy
+msgid "Error calling program"
+msgstr "Błąd podczas zamykania skryptu:"
 
 msgid " Copies to"
 msgstr " Kopie do"
@@ -3672,9 +3688,13 @@ msgstr "Z obsługą wielu języków\n"
 msgid "With multiple codepages support\n"
 msgstr "Z obsługą wielu stron kodowych\n"
 
-#, c-format
-msgid "Virtual File System:"
+#, fuzzy, c-format
+msgid "Virtual File Systems:"
 msgstr "Wirtualny system plików:"
+
+#, c-format
+msgid "Data types:"
+msgstr ""
 
 #, c-format
 msgid ""

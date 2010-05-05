@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.0\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-28 16:02+0300\n"
+"POT-Creation-Date: 2010-05-05 22:32+0300\n"
 "PO-Revision-Date: 2010-03-09\n"
 "Last-Translator: Marcel Pol <mpol@gmx.net>\n"
 "Language-Team: \n"
@@ -351,6 +351,10 @@ msgstr " Pipe mislukt "
 
 msgid " Dup failed "
 msgstr " Dup mislukt"
+
+#, fuzzy
+msgid "Error dup'ing old error pipe"
+msgstr " Probleem bij het lezen van pijp: %s "
 
 #, c-format
 msgid ""
@@ -1015,6 +1019,10 @@ msgstr " Kindproces onverwacht afgebroken "
 msgid " Background protocol error "
 msgstr " Fout in achtergrondprotocol "
 
+#, fuzzy
+msgid "Reading failed"
+msgstr "<readlink mislukt>"
+
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -1630,6 +1638,10 @@ msgstr " Openen van %s voor lezen mislukt "
 msgid "Error"
 msgstr "Fout"
 
+#, fuzzy, c-format
+msgid " Error reading %s "
+msgstr "Fout bij lezen script:"
+
 #, c-format
 msgid " Error reading from pipe: %s "
 msgstr " Probleem bij het lezen van pijp: %s "
@@ -1879,6 +1891,10 @@ msgstr "Script gemaakt:"
 
 msgid "Process block"
 msgstr "Bewerk blok"
+
+#, fuzzy
+msgid "Error calling program"
+msgstr "Fout bij sluiten script:"
 
 msgid " Copies to"
 msgstr " Kopiëert naar"
@@ -3699,9 +3715,13 @@ msgstr "Met ondersteuning voor internationalisatie\n"
 msgid "With multiple codepages support\n"
 msgstr "Met ondersteuning voor meerdere karaktersets\n"
 
-#, c-format
-msgid "Virtual File System:"
+#, fuzzy, c-format
+msgid "Virtual File Systems:"
 msgstr "Virtueel Bestandssysteem:"
+
+#, c-format
+msgid "Data types:"
+msgstr ""
 
 #, c-format
 msgid ""

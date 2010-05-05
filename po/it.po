@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.6.2\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-28 16:02+0300\n"
+"POT-Creation-Date: 2010-05-05 22:32+0300\n"
 "PO-Revision-Date: 2010-02-19 15:10+0100\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian <debian-l10n-italian@lists.debian.org>\n"
@@ -350,6 +350,10 @@ msgstr " Pipe fallita "
 
 msgid " Dup failed "
 msgstr " Dup fallita "
+
+#, fuzzy
+msgid "Error dup'ing old error pipe"
+msgstr " Errore leggendo dalla pipe: %s "
 
 #, c-format
 msgid ""
@@ -1012,6 +1016,10 @@ msgstr " Il processo figlio è uscito prematuramente"
 msgid " Background protocol error "
 msgstr " Errore del protocollo in background "
 
+#, fuzzy
+msgid "Reading failed"
+msgstr "<readlink fallito>"
+
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -1624,6 +1632,10 @@ msgstr " Impossibile aprire %s in lettura "
 msgid "Error"
 msgstr "Errore"
 
+#, fuzzy, c-format
+msgid " Error reading %s "
+msgstr "Errore durante la lettura dello script:"
+
 #, c-format
 msgid " Error reading from pipe: %s "
 msgstr " Errore leggendo dalla pipe: %s "
@@ -1873,6 +1885,10 @@ msgstr "Script creato:"
 
 msgid "Process block"
 msgstr "Elabora blocco"
+
+#, fuzzy
+msgid "Error calling program"
+msgstr "Errore durante la chiusura dello script:"
 
 msgid " Copies to"
 msgstr " Copie a"
@@ -3679,9 +3695,13 @@ msgstr "Con supporto internazionale\n"
 msgid "With multiple codepages support\n"
 msgstr "Con supporto codepages multiple\n"
 
-#, c-format
-msgid "Virtual File System:"
+#, fuzzy, c-format
+msgid "Virtual File Systems:"
 msgstr " File System Virtuale:"
+
+#, c-format
+msgid "Data types:"
+msgstr ""
 
 #, c-format
 msgid ""

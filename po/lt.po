@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-28 16:02+0300\n"
+"POT-Creation-Date: 2010-05-05 22:32+0300\n"
 "PO-Revision-Date: 2009-02-16 19:45+0300\n"
 "Last-Translator: Andrius Štikonas <stikonas@gmail.com>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -361,6 +361,10 @@ msgstr " Konvejeris nepavyko "
 
 msgid " Dup failed "
 msgstr " „Dup“ nepavyko "
+
+#, fuzzy
+msgid "Error dup'ing old error pipe"
+msgstr " Klaida skaitant iš konvejerio: %s "
 
 #, c-format
 msgid ""
@@ -1030,6 +1034,10 @@ msgstr " Vaikas netikėtai mirė "
 msgid " Background protocol error "
 msgstr " Fono protokolo klaida "
 
+#, fuzzy
+msgid "Reading failed"
+msgstr "<„readlink“ nepavyko>"
+
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -1649,6 +1657,10 @@ msgstr " Nepavyko atverti %s skaitymui "
 msgid "Error"
 msgstr "Klaida"
 
+#, fuzzy, c-format
+msgid " Error reading %s "
+msgstr "Klaida skaitant skriptą:"
+
 #, c-format
 msgid " Error reading from pipe: %s "
 msgstr " Klaida skaitant iš konvejerio: %s "
@@ -1901,6 +1913,10 @@ msgstr "Skriptas sukurtas:"
 
 msgid "Process block"
 msgstr "Apdoroti bloką"
+
+#, fuzzy
+msgid "Error calling program"
+msgstr "Klaida užveriant skriptą:"
 
 msgid " Copies to"
 msgstr " Kopijos"
@@ -3811,9 +3827,13 @@ msgstr "Su internacionalizacijos palaimymu\n"
 msgid "With multiple codepages support\n"
 msgstr "Su daugelio koduočių galimybe\n"
 
-#, c-format
-msgid "Virtual File System:"
+#, fuzzy, c-format
+msgid "Virtual File Systems:"
 msgstr "Virtualioji failų sistema:"
+
+#, c-format
+msgid "Data types:"
+msgstr ""
 
 #, c-format
 msgid ""

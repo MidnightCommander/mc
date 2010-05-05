@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-28 16:02+0300\n"
+"POT-Creation-Date: 2010-05-05 22:32+0300\n"
 "PO-Revision-Date: 2006-08-16 16:20+0400\n"
 "Last-Translator: Phan Vĩnh Thịnh <teppi82@gmail.com>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
@@ -360,6 +360,10 @@ msgstr " Lỗi đường ống "
 
 msgid " Dup failed "
 msgstr " Lỗi lặp lại "
+
+#, fuzzy
+msgid "Error dup'ing old error pipe"
+msgstr " Lỗi đọc từ đường ống (pipe): %s "
 
 #, c-format
 msgid ""
@@ -1030,6 +1034,10 @@ msgstr " Tiến trình con bất đắc kỳ tử "
 msgid " Background protocol error "
 msgstr " Lỗi giao thức nền sau "
 
+#, fuzzy
+msgid "Reading failed"
+msgstr "<đọc liên kết không thành công>"
+
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -1649,6 +1657,10 @@ msgstr " Không thể mở %s để đọc "
 msgid "Error"
 msgstr "Lỗi"
 
+#, fuzzy, c-format
+msgid " Error reading %s "
+msgstr "Lỗi đọc script:"
+
 #, c-format
 msgid " Error reading from pipe: %s "
 msgstr " Lỗi đọc từ đường ống (pipe): %s "
@@ -1902,6 +1914,10 @@ msgstr "Đã tạo script:"
 
 msgid "Process block"
 msgstr "Xử lý khối"
+
+#, fuzzy
+msgid "Error calling program"
+msgstr "Lỗi đóng script:"
 
 msgid " Copies to"
 msgstr " Sao chép tới"
@@ -3812,9 +3828,13 @@ msgstr "Với hỗ trợ các ngôn ngữ khác\n"
 msgid "With multiple codepages support\n"
 msgstr "Với hỗ trợ nhiều bảng mã\n"
 
-#, c-format
-msgid "Virtual File System:"
+#, fuzzy, c-format
+msgid "Virtual File Systems:"
 msgstr "Hệ thống tập tin ảo:"
+
+#, c-format
+msgid "Data types:"
+msgstr ""
 
 #, c-format
 msgid ""

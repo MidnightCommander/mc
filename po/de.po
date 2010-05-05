@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.x\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-28 16:02+0300\n"
+"POT-Creation-Date: 2010-05-05 22:32+0300\n"
 "PO-Revision-Date: 2010-03-03 12:00-0000\n"
 "Last-Translator: Sebastian Siebert <freespacer@gmx.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -354,6 +354,10 @@ msgstr " Pipe fehlgeschlagen "
 
 msgid " Dup failed "
 msgstr " Dup fehlgeschlagen"
+
+#, fuzzy
+msgid "Error dup'ing old error pipe"
+msgstr " Fehler beim Lesen aus einer Pipe: %s "
 
 #, c-format
 msgid ""
@@ -1019,6 +1023,10 @@ msgstr " Kindprozess starb plötzlich "
 msgid " Background protocol error "
 msgstr " Fehler im Hintergrundprotokoll "
 
+#, fuzzy
+msgid "Reading failed"
+msgstr "<readlink fehlgeschlagen>"
+
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -1619,6 +1627,10 @@ msgstr " Datei »%s« konnte nicht zum Lesen geöffnet werden "
 msgid "Error"
 msgstr "Fehler"
 
+#, fuzzy, c-format
+msgid " Error reading %s "
+msgstr "Fehler beim Lesen von Skript:"
+
 #, c-format
 msgid " Error reading from pipe: %s "
 msgstr " Fehler beim Lesen aus einer Pipe: %s "
@@ -1870,6 +1882,10 @@ msgstr "Skript erzeugt:"
 
 msgid "Process block"
 msgstr "Block verarbeiten"
+
+#, fuzzy
+msgid "Error calling program"
+msgstr "Fehler beim Schließen von Skript:"
 
 msgid " Copies to"
 msgstr " Kopien an"
@@ -3667,9 +3683,13 @@ msgstr "Mit Internationalisierungs-Unterstützung\n"
 msgid "With multiple codepages support\n"
 msgstr "Mit mehrfach Codepage-Unterstützung\n"
 
-#, c-format
-msgid "Virtual File System:"
+#, fuzzy, c-format
+msgid "Virtual File Systems:"
 msgstr "Virtuelles Dateisystem:"
+
+#, c-format
+msgid "Data types:"
+msgstr ""
 
 #, c-format
 msgid ""

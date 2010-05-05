@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: uk\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-28 16:02+0300\n"
+"POT-Creation-Date: 2010-05-05 22:32+0300\n"
 "PO-Revision-Date: 2009-10-31 19:01+0200\n"
 "Last-Translator: Oleksandr Natalenko <pfactum@gmail.com>\n"
 "Language-Team: uk <kde-i18n-doc@kde.org>\n"
@@ -350,6 +350,10 @@ msgstr " Збій каналу "
 
 msgid " Dup failed "
 msgstr " Збій дублювання дескриптора "
+
+#, fuzzy
+msgid "Error dup'ing old error pipe"
+msgstr " Помилка читання з каналу: %s "
 
 #, c-format
 msgid ""
@@ -943,7 +947,8 @@ msgid ""
 msgstr ""
 "--colors КЛЮЧ={ТЕКСТ},{ФОН}\n"
 "\n"
-"{ТЕКСТ} і {ФОН} можна опустити, тоді буде використано значення за змовчуванням\n"
+"{ТЕКСТ} і {ФОН} можна опустити, тоді буде використано значення за "
+"змовчуванням\n"
 "\n"
 "Ключі:\n"
 "   Глобальні:    errors, reverse, gauge, input, viewunderline\n"
@@ -1014,6 +1019,10 @@ msgstr " Процес-нащадок неочікувано закінчився
 msgid " Background protocol error "
 msgstr " Помилка фонового протоколу "
 
+#, fuzzy
+msgid "Reading failed"
+msgstr "<збій зчитування посилання>"
+
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -1057,8 +1066,7 @@ msgstr "Порядок сортування"
 msgid "Confirmation"
 msgstr "Підтвердження"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "Confirmation|Очистка історії"
@@ -1616,6 +1624,10 @@ msgstr " Не вдається відкрити %s для читання "
 msgid "Error"
 msgstr "Помилка"
 
+#, fuzzy, c-format
+msgid " Error reading %s "
+msgstr "Помилка читання скрипта:"
+
 #, c-format
 msgid " Error reading from pipe: %s "
 msgstr " Помилка читання з каналу: %s "
@@ -1866,6 +1878,10 @@ msgstr "Скрипт створено:"
 
 msgid "Process block"
 msgstr "Обробити блок"
+
+#, fuzzy
+msgid "Error calling program"
+msgstr "Помилка закриття скрипта:"
 
 msgid " Copies to"
 msgstr " Копії до"
@@ -2245,16 +2261,26 @@ msgid " %s%s file error"
 msgstr "%s%s помилка файлу "
 
 #, c-format
-msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
-msgstr "Формат файлу %smc.ext було змінено у версіі 3.0. Схоже що стався збій при встановленні.Будь ласка візьміть свіжу копію з пакета Midnight Commander."
+msgid ""
+"The format of the %smc.ext file has changed with version 3.0.  It seems that "
+"the installation failed.  Please fetch a fresh copy from the Midnight "
+"Commander package."
+msgstr ""
+"Формат файлу %smc.ext було змінено у версіі 3.0. Схоже що стався збій при "
+"встановленні.Будь ласка візьміть свіжу копію з пакета Midnight Commander."
 
 #, c-format
 msgid " ~/%s file error "
 msgstr " помилка файлу  ~/%s"
 
 #, c-format
-msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
-msgstr "Формат файлу %smc.ext було змінено у версіі 3.0. Ви можете зкопіювати його з %smc.ext чи зкористуватися ним як зразком та написати свій."
+msgid ""
+"The format of the ~/%s file has changed with version 3.0.  You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
+msgstr ""
+"Формат файлу %smc.ext було змінено у версіі 3.0. Ви можете зкопіювати його з "
+"%smc.ext чи зкористуватися ним як зразком та написати свій."
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|Копіювання"
@@ -2281,7 +2307,8 @@ msgid ""
 "\n"
 " Option Stable Symlinks will be disabled "
 msgstr ""
-"Неможливо створити стійкі симв. посилання через не локальні файлові системи:\n"
+"Неможливо створити стійкі симв. посилання через не локальні файлові "
+"системи:\n"
 "\n"
 " Параметр Стійкі символьні посилання буде заборонено "
 
@@ -2929,8 +2956,10 @@ msgstr " Завантаження довідника "
 
 # , c-format
 #, c-format
-msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
-msgstr "MC не зміг записати файл ~/%s, Ваш старий список елементів не був видалений"
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr ""
+"MC не зміг записати файл ~/%s, Ваш старий список елементів не був видалений"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -3428,7 +3457,8 @@ msgid " Enter command label: "
 msgstr " Введіть мітку команди: "
 
 msgid " Cannot run external panelize in a non-local directory "
-msgstr " Не можу виконати цю команду, коли знаходжуся не у локальному каталозі "
+msgstr ""
+" Не можу виконати цю команду, коли знаходжуся не у локальному каталозі "
 
 msgid "Find rejects after patching"
 msgstr "Знайти коректури, відкинуті командою patch"
@@ -3659,9 +3689,13 @@ msgstr "З підтримкою інтернаціоналізації\n"
 msgid "With multiple codepages support\n"
 msgstr "З підтримкою багатьох кодових сторінок\n"
 
-#, c-format
-msgid "Virtual File System:"
+#, fuzzy, c-format
+msgid "Virtual File Systems:"
 msgstr "Віртуальна Файлова Система:"
+
+#, c-format
+msgid "Data types:"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -4340,8 +4374,11 @@ msgstr "Фоновий процес:"
 #~ msgid " Enter replacement argument order eg. 3,2,1,4 "
 #~ msgstr " Введіть порядок аргументів заміни, напр. 3,2,1,4 "
 
-#~ msgid " Invalid regular expression, or scanf expression with too many conversions "
-#~ msgstr " Неправильний регулярний вираз або у scanf-форматі багато перетворень"
+#~ msgid ""
+#~ " Invalid regular expression, or scanf expression with too many "
+#~ "conversions "
+#~ msgstr ""
+#~ " Неправильний регулярний вираз або у scanf-форматі багато перетворень"
 
 #~ msgid " Error in replacement format string. "
 #~ msgstr " Помилка у форматі стрічки заміни "

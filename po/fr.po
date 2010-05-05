@@ -5,12 +5,12 @@
 # Martin Quinson <mquinson@zeppelin-cb.de>, 2000.
 # maintainer: Christophe Merlet (RedFox) <christophe@merlet.net>, 2000-2002.
 # Emmanuel Trillaud <etrillaud@gmail.com>, 2010
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.0.1\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-04-28 16:02+0300\n"
+"POT-Creation-Date: 2010-05-05 22:32+0300\n"
 "PO-Revision-Date: 2002-04-30 16:46+0200\n"
 "Last-Translator: Emmanuel Trillaud <etrillaud@gmail.com>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
@@ -356,6 +356,10 @@ msgstr " Échec du tube "
 
 msgid " Dup failed "
 msgstr " Échec de la duplication "
+
+#, fuzzy
+msgid "Error dup'ing old error pipe"
+msgstr " Erreur lors de la lecture du tube : %s "
 
 #, c-format
 msgid ""
@@ -1027,6 +1031,10 @@ msgstr " Mort inattendue du processus fils "
 msgid " Background protocol error "
 msgstr " Erreur de  protocole de fond "
 
+#, fuzzy
+msgid "Reading failed"
+msgstr "<échec de readlink>"
+
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -1650,6 +1658,10 @@ msgstr " Échec de l'ouverture de %s en lecture "
 msgid "Error"
 msgstr "Erreur"
 
+#, fuzzy, c-format
+msgid " Error reading %s "
+msgstr "Erreur à la lecture du script :"
+
 #, c-format
 msgid " Error reading from pipe: %s "
 msgstr " Erreur lors de la lecture du tube : %s "
@@ -1907,6 +1919,10 @@ msgstr "Script créé :"
 
 msgid "Process block"
 msgstr "Traitement du bloc"
+
+#, fuzzy
+msgid "Error calling program"
+msgstr "Erreur à la fermeture du script :"
 
 msgid " Copies to"
 msgstr " Copier vers"
@@ -3753,9 +3769,13 @@ msgstr "Avec le support de l'internationalisation\n"
 msgid "With multiple codepages support\n"
 msgstr "Avec le support de plusieurs codepages\n"
 
-#, c-format
-msgid "Virtual File System:"
+#, fuzzy, c-format
+msgid "Virtual File Systems:"
 msgstr "Système de Fichier Virtuel (VFS) :"
+
+#, c-format
+msgid "Data types:"
+msgstr ""
 
 #, c-format
 msgid ""
