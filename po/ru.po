@@ -935,7 +935,6 @@ msgid "Show mc with specified skin"
 msgstr "Отобразить mc с указанным скином"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -957,10 +956,9 @@ msgstr ""
 "Ключевые слова:\n"
 "   Общие:              errors, reverse, gauge, input, viewunderline\n"
 "   Отображение файлов: normal, selected, marked, markselect\n"
-"   Диалоги:            dnormal, dfocus, dhotnormal, dhotfocus, "
-"errdhotnormal,\n"
+"   Диалоги:            dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                       errdhotfocus\n"
-"   Меню:               menu, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Меню:               menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Редактор:           editnormal, editbold, editmarked, editwhitespace,\n"
 "                       editlinestate\n"
 
@@ -982,7 +980,7 @@ msgstr ""
 "\n"
 
 msgid "Color options"
-msgstr "Цветовые опции"
+msgstr "Цветовые настройки"
 
 msgid "+number"
 msgstr "+число"
@@ -1007,10 +1005,10 @@ msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander, версия %s\n"
 
 msgid "Main options"
-msgstr "Основные опции"
+msgstr "Основные настройки"
 
 msgid "Terminal options"
-msgstr "Опции терминала"
+msgstr "Настройки терминала"
 
 msgid " Background process error "
 msgstr " Ошибка фонового процесса "
@@ -1255,7 +1253,7 @@ msgid "an option, ARROW KEYS"
 msgstr "опций, КЛАВИШИ-СТРЕЛКИ - "
 
 msgid "to move between options"
-msgstr "перемещения между опциями"
+msgstr "перемещения между настройками"
 
 msgid "and T or INS to mark"
 msgstr "и T или INS для пометки"
@@ -1505,76 +1503,71 @@ msgid "Search"
 msgstr "Поиск"
 
 msgid " Search is disabled "
-msgstr ""
+msgstr "Поиск невозможен"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Cannot create temporary diff file \n"
 " %s "
-msgstr ""
-" Невозможно создать временный командный файл \n"
+msgstr "Невозможно создать временный файл различий\n"
 " %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Cannot create backup file \n"
 " %s%s \n"
 " %s "
 msgstr ""
-" Невозможно создать целевой файл \"%s\" \n"
+" Невозможно создать файл с резервной копией \n"
+" %s%s \n"
 " %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Cannot create temporary merge file \n"
 " %s "
 msgstr ""
-" Невозможно создать временный командный файл \n"
+" Невозможно создать временный файл слияния \n"
 " %s "
 
-#, fuzzy
 msgid "&Normal"
-msgstr "Обычный"
+msgstr "О&бычный"
 
 msgid "&Fastest (Assume large files)"
-msgstr ""
+msgstr "Б&ыстрый (для больших файлов)"
 
 msgid "&Minimal (Find a smaller set of change)"
-msgstr ""
+msgstr "&Минимальный (искать меньшее число различий)"
 
 msgid "Strip &trailing carriage return"
-msgstr ""
+msgstr "Не &учитывать переводы строк"
 
 msgid "Ignore all &whitespace"
-msgstr ""
+msgstr "И&гнорировать все пробелы"
 
 msgid "Ignore &space change"
-msgstr ""
+msgstr "&Игнорировать изменения в пробелах"
 
 msgid "Ignore tab &expansion"
-msgstr ""
+msgstr "Игнорировать &табуляции"
 
-#, fuzzy
 msgid "&Ignore case"
-msgstr "Игнорировать замок"
+msgstr "Игнорировать &регистр"
 
-#, fuzzy
 msgid "Diff extra options"
 msgstr " Прочие настройки "
 
 msgid "Diff algorithm"
-msgstr ""
+msgstr "Алгоритм сравнения"
 
-#, fuzzy
 msgid "Diff Options"
-msgstr "&Настройки"
+msgstr "Настройки сравнения"
 
-#, fuzzy
 msgid "Edit"
 msgstr "&Правка"
 
 msgid " Edit is disabled "
-msgstr ""
+msgstr "Правка запрещена"
 
 msgid " Enter line: "
 msgstr " Введите номер строки: "
@@ -1588,16 +1581,14 @@ msgstr "Сохранить"
 msgid "ButtonBar|Edit"
 msgstr "Правка"
 
-#, fuzzy
 msgid "ButtonBar|Merge"
-msgstr "Забыть"
+msgstr "Слияние"
 
 msgid "ButtonBar|Search"
 msgstr "Поиск"
 
-#, fuzzy
 msgid "ButtonBar|Options"
-msgstr "Перейти"
+msgstr "Настройки"
 
 msgid "ButtonBar|Quit"
 msgstr "Выход"
@@ -1609,7 +1600,7 @@ msgid " File was modified, Save with exit? "
 msgstr " Файл был изменен, сохранить при выходе? "
 
 msgid "Two files are needed to compare"
-msgstr ""
+msgstr "Для сравнения необходимы два файла"
 
 msgid "Cannot read directory contents"
 msgstr "Невозможно прочесть содержимое каталога"
@@ -2999,12 +2990,12 @@ msgstr "Обращение: %s"
 
 #, c-format
 msgid "Modified:  %s"
-msgstr "Изменен:   %s"
+msgstr "Модифицирован:   %s"
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
-#, fuzzy, c-format
+#, c-format
 msgid "Changed:   %s"
-msgstr "Пере&йти"
+msgstr "Изменён:   %s"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -3259,9 +3250,8 @@ msgstr "&Отключить панели"
 msgid "&Compare directories"
 msgstr "&Сравнить каталоги"
 
-#, fuzzy
 msgid "&View diff files"
-msgstr " Просмотр файла "
+msgstr "Сра&внить файлы"
 
 msgid "E&xternal panelize"
 msgstr "В&нешняя панелизация"
@@ -3892,6 +3882,3 @@ msgstr "Желаете очистить историю?"
 
 msgid "Background process:"
 msgstr "Фоновый процесс:"
-
-#~ msgid "Status:    %s"
-#~ msgstr "Cтатус:    %s"

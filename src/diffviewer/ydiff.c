@@ -76,7 +76,7 @@ do { \
 #define FILE_READ_BUF	4096
 #define FILE_FLAG_TEMP	(1 << 0)
 
-#define OPTX 50
+#define OPTX 56
 #define OPTY 17
 
 #define ADD_CH		'+'
