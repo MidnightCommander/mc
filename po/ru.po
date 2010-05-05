@@ -439,9 +439,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Несогласованный архив extfs"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Warning: cannot open %s directory\n"
-msgstr "Невозможно создать каталог \"%s\""
+msgstr "Невозможно прочитать каталог \"%s\"\n"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -935,7 +935,6 @@ msgid "Show mc with specified skin"
 msgstr "Отобразить mc с указанным скином"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -957,10 +956,9 @@ msgstr ""
 "Ключевые слова:\n"
 "   Общие:              errors, reverse, gauge, input, viewunderline\n"
 "   Отображение файлов: normal, selected, marked, markselect\n"
-"   Диалоги:            dnormal, dfocus, dhotnormal, dhotfocus, "
-"errdhotnormal,\n"
+"   Диалоги:            dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                       errdhotfocus\n"
-"   Меню:               menu, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Меню:               menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Редактор:           editnormal, editbold, editmarked, editwhitespace,\n"
 "                       editlinestate\n"
 
@@ -2899,12 +2897,12 @@ msgstr "Обращение: %s"
 
 #, c-format
 msgid "Modified:  %s"
-msgstr "Изменен:   %s"
+msgstr "Модифицирован:   %s"
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
-#, fuzzy, c-format
+#, c-format
 msgid "Changed:   %s"
-msgstr "Пере&йти"
+msgstr "Изменён:   %s"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -3791,12 +3789,3 @@ msgstr "История команд"
 
 msgid "Background process:"
 msgstr "Фоновый процесс:"
-
-#~ msgid "%b %e  %Y"
-#~ msgstr "%b %e  %Y"
-
-#~ msgid "%b %e %H:%M"
-#~ msgstr "%b %e %H:%M"
-
-#~ msgid "Status:    %s"
-#~ msgstr "Cтатус:    %s"
