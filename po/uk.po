@@ -2569,7 +2569,7 @@ msgid "FileOperation|Move"
 msgstr "FileOperation|Переміщення"
 
 msgid "FileOperation|Delete"
-msgstr "FileOperation|Видалення"
+msgstr "FileOperation|Видалити"
 
 #, no-c-format
 msgid "%o %f \"%s\"%m"
