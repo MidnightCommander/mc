@@ -67,8 +67,6 @@
 #include "help.h"
 #include "main.h"
 
-const global_keymap_t *help_map;
-
 #define MAXLINKNAME 80
 #define HISTORY_SIZE 20
 #define HELP_WINDOW_WIDTH min(80, COLS - 16)

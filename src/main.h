@@ -109,31 +109,6 @@ extern int is_right;		/* If the selected menu was the right */
 #define MENU_PANEL_IDX  (is_right ? 1 : 0)
 #define SELECTED_IS_PANEL (get_display_type (is_right ? 1 : 0) == view_listing)
 
-#ifdef USE_INTERNAL_EDIT
-extern GArray *editor_keymap;
-extern GArray *editor_x_keymap;
-#endif
-extern GArray *viewer_keymap;
-extern GArray *viewer_hex_keymap;
-extern GArray *main_keymap;
-extern GArray *main_x_keymap;
-extern GArray *panel_keymap;
-extern GArray *input_keymap;
-extern GArray *tree_keymap;
-extern GArray *help_keymap;
-#ifdef USE_DIFF_VIEW
-extern GArray *diff_keymap;
-#endif
-
-extern const global_keymap_t *panel_map;
-extern const global_keymap_t *input_map;
-extern const global_keymap_t *tree_map;
-extern const global_keymap_t *help_map;
-
-#ifdef USE_DIFF_VIEW
-extern const global_keymap_t *diff_map;
-#endif
-
 #ifdef HAVE_SUBSHELL_SUPPORT
 void do_update_prompt (void);
 int load_prompt (int fd, void *unused);

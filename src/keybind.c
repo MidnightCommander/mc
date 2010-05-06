@@ -44,6 +44,38 @@
 #include "wtools.h"
 #include "keybind.h"
 
+#ifdef USE_INTERNAL_EDIT
+GArray *editor_keymap = NULL;
+GArray *editor_x_keymap = NULL;
+
+const global_keymap_t *editor_map;
+const global_keymap_t *editor_x_map;
+#endif
+
+GArray *main_keymap = NULL;
+GArray *main_x_keymap = NULL;
+GArray *viewer_keymap = NULL;
+GArray *viewer_hex_keymap = NULL;
+GArray *panel_keymap = NULL;
+GArray *input_keymap = NULL;
+GArray *tree_keymap = NULL;
+GArray *help_keymap = NULL;
+GArray *dialog_keymap = NULL;
+
+#ifdef USE_DIFF_VIEW
+GArray *diff_keymap = NULL;
+
+const global_keymap_t *diff_map;
+#endif
+
+const global_keymap_t *main_map;
+const global_keymap_t *main_x_map;
+const global_keymap_t *panel_map;
+const global_keymap_t *input_map;
+const global_keymap_t *tree_map;
+const global_keymap_t *help_map;
+const global_keymap_t *dialog_map;
+
 static name_keymap_t command_names[] = {
 #ifdef USE_INTERNAL_EDIT
     { "EditNoCommand",                     CK_Ignore_Key },
@@ -447,6 +479,14 @@ static name_keymap_t command_names[] = {
     { "ShowCommandLine",                 CK_ShowCommandLine },
     { "SelectCodepage",                  CK_SelectCodepage },
 
+    /* dialog */
+    { "DialogOK",                        CK_DialogOK },
+    { "DialogCancel",                    CK_DialogCancel },
+    { "DialogPrevItem",                  CK_DialogPrevItem },
+    { "DialogNextItem",                  CK_DialogNextItem },
+    { "DialogHelp",                      CK_DialogHelp },
+    { "DialogSuspend",                   CK_DialogSuspend },
+    { "DialogRefresh",                   CK_DialogRefresh },
 
     /* diff viewer */
     { "DiffDisplaySymbols",              CK_DiffDisplaySymbols},
@@ -738,6 +778,23 @@ const global_keymap_t default_editor_x_keymap[] = {
     { 0, CK_Ignore_Key, "" }
 };
 #endif				/* USE_INTERNAL_EDIT */
+
+/* dialog */
+const global_keymap_t default_dialog_keymap[] = {
+    { '\n',        CK_DialogOK,        "Enter" },
+    { KEY_ENTER,   CK_DialogOK,        "Enter" },
+    { ESC_CHAR,    CK_DialogCancel,    "Esc" },
+    { XCTRL('g'),  CK_DialogCancel,    "C-g" },
+    { KEY_F (10),  CK_DialogCancel,    "F10" },
+    { KEY_LEFT,    CK_DialogPrevItem,  "Left" },
+    { KEY_UP,      CK_DialogPrevItem,  "Up" },
+    { KEY_RIGHT,   CK_DialogNextItem,  "Right" },
+    { KEY_DOWN,    CK_DialogNextItem,  "Down" },
+    { KEY_F(1),    CK_DialogHelp,      "F1" },
+    { XCTRL('z'),  CK_DialogSuspend,   "C-z" },
+    { XCTRL('l'),  CK_DialogRefresh,   "C-l" },
+    { 0, CK_Ignore_Key, "" }
+};
 
 /* tree */
 const global_keymap_t default_tree_keymap[] = {

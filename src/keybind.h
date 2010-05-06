@@ -29,6 +29,38 @@ unsigned long lookup_action (const char *name);
 const char *lookup_keymap_shortcut (const global_keymap_t *keymap, unsigned long action);
 unsigned long lookup_keymap_command (const global_keymap_t *keymap, long key);
 
+#ifdef USE_INTERNAL_EDIT
+extern GArray *editor_keymap;
+extern GArray *editor_x_keymap;
+
+extern const global_keymap_t *editor_map;
+extern const global_keymap_t *editor_x_map;
+#endif
+
+extern GArray *viewer_keymap;
+extern GArray *viewer_hex_keymap;
+extern GArray *main_keymap;
+extern GArray *main_x_keymap;
+extern GArray *panel_keymap;
+extern GArray *input_keymap;
+extern GArray *tree_keymap;
+extern GArray *help_keymap;
+extern GArray *dialog_keymap;
+#ifdef USE_DIFF_VIEW
+extern GArray *diff_keymap;
+#endif
+
+extern const global_keymap_t *main_map;
+extern const global_keymap_t *main_x_map;
+extern const global_keymap_t *panel_map;
+extern const global_keymap_t *input_map;
+extern const global_keymap_t *tree_map;
+extern const global_keymap_t *help_map;
+extern const global_keymap_t *dialog_map;
+#ifdef USE_DIFF_VIEW
+extern const global_keymap_t *diff_map;
+#endif
+
 /* viewer/actions_cmd.c */
 extern const global_keymap_t default_viewer_keymap[];
 extern const global_keymap_t default_viewer_hex_keymap[];
@@ -55,8 +87,11 @@ extern const global_keymap_t default_tree_keymap[];
 /* help.c */
 extern const global_keymap_t default_help_keymap[];
 
+/* dialog.c */
+extern const global_keymap_t default_dialog_keymap[];
+
 #ifdef USE_DIFF_VIEW
-/* yview.c */
+/* ydiff.c */
 extern const global_keymap_t default_diff_keymap[];
 #endif
 

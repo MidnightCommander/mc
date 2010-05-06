@@ -119,8 +119,6 @@ int filetype_mode = 1;
 /* The hook list for the select file function */
 Hook *select_file_hook = 0;
 
-const global_keymap_t *panel_map;
-
 static cb_ret_t panel_callback (Widget *, widget_msg_t msg, int parm);
 static int panel_event (Gpm_Event * event, void *);
 static void paint_frame (WPanel * panel);

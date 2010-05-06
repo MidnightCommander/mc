@@ -33,10 +33,7 @@
 #include <stdio.h>
 
 #include "lib/search.h"         /* mc_search_type_t */
-
 #include "src/dialog.h"         /* cb_ret_t */
-#include "src/keybind.h"        /* global_keymap_t */
-
 #include "src/editor/edit.h"
 
 #define SEARCH_DIALOG_OPTION_NO_SCANF   (1 << 0)
@@ -317,9 +314,6 @@ extern edit_search_options_t edit_search_options;
 
 extern int edit_stack_iterator;
 extern edit_stack_type edit_history_moveto[MAX_HISTORY_MOVETO];
-
-extern const global_keymap_t *editor_map;
-extern const global_keymap_t *editor_x_map;
 
 extern int option_line_state_width;
 

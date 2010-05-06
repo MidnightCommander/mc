@@ -61,8 +61,6 @@
 #include "panel.h"              /* current_panel */
 #include "main.h"               /* confirm_history_cleanup */
 
-const global_keymap_t *input_map;
-
 static void
 widget_selectcolor (Widget * w, gboolean focused, gboolean hotkey)
 {

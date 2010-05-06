@@ -51,6 +51,7 @@
 #include "src/widget.h"         /* ButtonBar */
 #include "src/menu.h"           /* menubar_new() */
 #include "src/cmddef.h"
+#include "src/keybind.h"
 
 int column_highlighting = 0;
 

@@ -107,7 +107,7 @@
 
 #ifdef HAVE_CHARSET
 #include "charsets.h"
-#endif
+#endif				/* HAVE_CHARSET */
 
 
 #include "keybind.h"            /* type global_keymap_t */
@@ -299,24 +299,6 @@ mc_main_error_quark (void)
 {
     return g_quark_from_static_string (PACKAGE);
 }
-
-#ifdef USE_INTERNAL_EDIT
-GArray *editor_keymap = NULL;
-GArray *editor_x_keymap = NULL;
-#endif
-GArray *viewer_keymap = NULL;
-GArray *viewer_hex_keymap = NULL;
-GArray *main_keymap = NULL;
-GArray *main_x_keymap = NULL;
-GArray *panel_keymap = NULL;
-GArray *input_keymap = NULL;
-GArray *tree_keymap = NULL;
-GArray *help_keymap = NULL;
-#ifdef USE_DIFF_VIEW
-GArray *diff_keymap = NULL;
-#endif
-const global_keymap_t *main_map;
-const global_keymap_t *main_x_map;
 
 /* Save current stat of directories to avoid reloading the panels */
 /* when no modifications have taken place */
@@ -1968,36 +1950,6 @@ do_nc (void)
     /* start check display_codepage and source_codepage */
     check_codeset ();
 
-    main_map = default_main_map;
-    if (main_keymap && main_keymap->len > 0)
-        main_map = (global_keymap_t *) main_keymap->data;
-
-    main_x_map = default_main_x_map;
-    if (main_x_keymap && main_x_keymap->len > 0)
-        main_x_map = (global_keymap_t *) main_x_keymap->data;
-
-    panel_map = default_panel_keymap;
-    if (panel_keymap && panel_keymap->len > 0)
-        panel_map = (global_keymap_t *) panel_keymap->data;
-
-    input_map = default_input_keymap;
-    if (input_keymap && input_keymap->len > 0)
-        input_map = (global_keymap_t *) input_keymap->data;
-
-    tree_map = default_tree_keymap;
-    if (tree_keymap && tree_keymap->len > 0)
-        tree_map = (global_keymap_t *) tree_keymap->data;
-
-    help_map = default_help_keymap;
-    if (help_keymap && help_keymap->len > 0)
-        help_map = (global_keymap_t *) help_keymap->data;
-
-#ifdef USE_DIFF_VIEW
-    diff_map = default_diff_keymap;
-    if (diff_keymap && diff_keymap->len > 0)
-        diff_map = (global_keymap_t *) diff_keymap->data;
-#endif
-
     /* Check if we were invoked as an editor or file viewer */
     if (mc_run_mode != MC_RUN_FULL)
         mc_maybe_editor_or_viewer ();
@@ -2325,6 +2277,11 @@ main (int argc, char *argv[])
 
     load_setup ();
 
+    /* Removing this from the X code let's us type C-c */
+    load_key_defs ();
+
+    load_keymap_defs ();
+
     tty_init_colors (mc_args__disable_colors, mc_args__force_colors);
 
     isInitialized = mc_skin_init (&error);
@@ -2355,11 +2312,6 @@ main (int argc, char *argv[])
         init_subshell ();
 
 #endif /* HAVE_SUBSHELL_SUPPORT */
-
-    /* Removing this from the X code let's us type C-c */
-    load_key_defs ();
-
-    load_keymap_defs ();
 
     /* Also done after init_subshell, to save any shell init file messages */
     if (console_flag)

@@ -41,6 +41,8 @@
 #include "dialog.h"
 #include "layout.h"
 #include "execute.h"            /* suspend_cmd() */
+#include "cmddef.h"
+#include "keybind.h"
 #include "main.h"               /* fast_refresh */
 #include "setup.h"              /* mouse_close_dialog */
 
@@ -609,43 +611,8 @@ dlg_stop (Dlg_head * h)
 }
 
 static void
-dialog_handle_key (Dlg_head * h, int d_key)
+refresh_cmd (void)
 {
-    if (is_abort_char (d_key))
-    {
-        h->ret_value = B_CANCEL;
-        dlg_stop (h);
-        return;
-    }
-
-    switch (d_key)
-    {
-    case '\n':
-    case KEY_ENTER:
-        h->ret_value = B_ENTER;
-        dlg_stop (h);
-        break;
-
-    case KEY_LEFT:
-    case KEY_UP:
-        dlg_one_up (h);
-        break;
-
-    case KEY_RIGHT:
-    case KEY_DOWN:
-        dlg_one_down (h);
-        break;
-
-    case KEY_F (1):
-        interactive_display (NULL, h->help_ctx);
-        do_refresh ();
-        break;
-
-    case XCTRL ('z'):
-        suspend_cmd ();
-        /* Fall through */
-
-    case XCTRL ('l'):
 #ifdef HAVE_SLANG
         tty_touch_screen ();
         mc_refresh ();
@@ -654,11 +621,55 @@ dialog_handle_key (Dlg_head * h, int d_key)
         clr_scr ();
         repaint_screen ();
 #endif /* HAVE_SLANG */
-        break;
+}
 
-    default:
+static cb_ret_t
+dlg_execute_cmd (Dlg_head * h, unsigned long command)
+{
+    cb_ret_t ret = MSG_HANDLED;
+    switch (command)
+    {
+    case CK_DialogOK:
+        h->ret_value = B_ENTER;
+        dlg_stop (h);
         break;
+    case CK_DialogCancel:
+        h->ret_value = B_CANCEL;
+        dlg_stop (h);
+        break;
+    case CK_DialogPrevItem:
+        dlg_one_up (h);
+        break;
+    case CK_DialogNextItem:
+        dlg_one_down (h);
+        break;
+    case CK_DialogHelp:
+        interactive_display (NULL, h->help_ctx);
+        do_refresh ();
+        break;
+    case CK_DialogSuspend:
+        suspend_cmd ();
+        refresh_cmd ();
+        break;
+    case CK_DialogRefresh:
+        refresh_cmd ();
+        break;
+    default:
+        ret = MSG_NOT_HANDLED;
     }
+
+    return ret;
+}
+
+static cb_ret_t
+dlg_handle_key (Dlg_head * h, int d_key)
+{
+    unsigned long command;
+    command = lookup_keymap_command (dialog_map, d_key);
+    if ((command == CK_Ignore_Key) || (dlg_execute_cmd (h, command) == MSG_NOT_HANDLED))
+        return MSG_NOT_HANDLED;
+    else
+        return MSG_HANDLED;
 }
 
 static cb_ret_t
@@ -756,7 +767,7 @@ dlg_key_event (Dlg_head * h, int d_key)
         handled = h->callback (h, NULL, DLG_UNHANDLED_KEY, d_key, NULL);
 
     if (handled == MSG_NOT_HANDLED)
-        dialog_handle_key (h, d_key);
+        handled = dlg_handle_key (h, d_key);
 
     h->callback (h, NULL, DLG_POST_KEY, d_key, NULL);
 }
@@ -849,9 +860,9 @@ dlg_process_event (Dlg_head * h, int key, Gpm_Event * event)
     if (key == EV_NONE)
     {
         if (tty_got_interrupt ())
-            key = XCTRL ('g');
-        else
-            return;
+            dlg_execute_cmd (h, CK_DialogCancel);
+
+        return;
     }
 
     if (key == EV_MOUSE)

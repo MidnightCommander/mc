@@ -219,6 +219,15 @@
 #define CK_StartExtMap1                 2021
 #define CK_StartExtMap2                 2022
 
+/* Dialog */
+#define CK_DialogOK                    3001
+#define CK_DialogCancel                3002
+#define CK_DialogPrevItem              3003
+#define CK_DialogNextItem              3004
+#define CK_DialogHelp                  3005
+#define CK_DialogSuspend               3006
+#define CK_DialogRefresh               3007
+
 /* text fields*/
 #define CK_InputBol                    4001
 #define CK_InputEol                    4002
