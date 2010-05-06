@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
 "POT-Creation-Date: 2010-05-05 22:32+0300\n"
-"PO-Revision-Date: 2010-04-24 18:03+0200\n"
+"PO-Revision-Date: 2010-05-06 12:19+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <trans-pl@lists.fedoraproject.org>\n"
 "MIME-Version: 1.0\n"
@@ -344,14 +344,13 @@ msgid "Warning"
 msgstr "Ostrzeżenie"
 
 msgid " Pipe failed "
-msgstr " Potok nie powiódł się "
+msgstr " Potok się nie powiódł "
 
 msgid " Dup failed "
-msgstr " Dup nie powiodło się "
+msgstr " Dup się nie powiodło "
 
-#, fuzzy
 msgid "Error dup'ing old error pipe"
-msgstr " Błąd podczas odczytywania potoku: %s "
+msgstr "Błąd podczas duplikowania poprzedniego potoku błędu"
 
 #, c-format
 msgid ""
@@ -473,14 +472,14 @@ msgstr "%s: ukończono."
 
 #, c-format
 msgid "%s: failure"
-msgstr "%s: nie powiodło się"
+msgstr "%s: niepowodzenie"
 
 #, c-format
 msgid "fish: store %s: sending command..."
 msgstr "fish: zapis %s: wysyłanie polecenia..."
 
 msgid "fish: Local read failed, sending zeros"
-msgstr "fish: lokalny odczyt nie powiódł się, wysyłanie zer"
+msgstr "fish: lokalny odczyt się nie powiódł, wysyłanie zer"
 
 #, c-format
 msgid "fish: storing %s %d (%lu)"
@@ -547,7 +546,7 @@ msgstr "ftpfs: połączenie przerwane przez użytkownika"
 
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
-msgstr "ftpfs: połączenie z serwerem nie powiodło się: %s"
+msgstr "ftpfs: połączenie z serwerem się nie powiodło: %s"
 
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
@@ -575,10 +574,10 @@ msgid "ftpfs: abort error: %s"
 msgstr "ftpfs: błąd przerywania: %s"
 
 msgid "ftpfs: abort failed"
-msgstr "ftpfs: przerwanie nie powiodło się"
+msgstr "ftpfs: przerwanie się nie powiodło"
 
 msgid "ftpfs: CWD failed."
-msgstr "ftpfs: CWD nie powiodło się."
+msgstr "ftpfs: CWD się nie powiodło."
 
 msgid "ftpfs: couldn't resolve symlink"
 msgstr "ftpts: nie można rozwiązać dowiązania symbolicznego"
@@ -677,11 +676,11 @@ msgid ""
 " reconnect to %s failed\n"
 " "
 msgstr ""
-" ponowne połączenie z %s nie powiodło się\n"
+" ponowne połączenie z %s się nie powiodło\n"
 " "
 
 msgid " Authentication failed "
-msgstr " Uwierzytelnienie nie powiodło się "
+msgstr " Uwierzytelnienie się nie powiodło "
 
 #, c-format
 msgid " Error %s creating directory %s "
@@ -1015,9 +1014,8 @@ msgstr " Proces potomny został niespodziewanie zakończony "
 msgid " Background protocol error "
 msgstr " Błąd protokołu komunikacji w tle "
 
-#, fuzzy
 msgid "Reading failed"
-msgstr "<readlink nie powiodło się>"
+msgstr "Odczytanie się nie powiodło"
 
 msgid ""
 " Background process sent us a request for more arguments \n"
@@ -1502,76 +1500,72 @@ msgid "Search"
 msgstr "Wyszukiwanie"
 
 msgid " Search is disabled "
-msgstr ""
+msgstr " Wyszukiwanie jest wyłączone "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Cannot create temporary diff file \n"
 " %s "
 msgstr ""
-" Nie można utworzyć tymczasowego pliku polecenia \n"
+" Nie można utworzyć tymczasowego pliku różnicy \n"
 " %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Cannot create backup file \n"
 " %s%s \n"
 " %s "
 msgstr ""
-" Nie można utworzyć pliku docelowego \"%s\" \n"
+" Nie można utworzyć pliku zapasowego \n"
+" %s%s \n"
 " %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Cannot create temporary merge file \n"
 " %s "
 msgstr ""
-" Nie można utworzyć tymczasowego pliku polecenia \n"
+" Nie można utworzyć tymczasowego pliku łączenia \n"
 " %s "
 
-#, fuzzy
 msgid "&Normal"
-msgstr "Normalny"
+msgstr "&Normalny"
 
 msgid "&Fastest (Assume large files)"
-msgstr ""
+msgstr "Naj&szybszy (przyjmuje duże pliki)"
 
 msgid "&Minimal (Find a smaller set of change)"
-msgstr ""
+msgstr "&Minimalny (wyszukuje mniejszy zestaw zmian"
 
 msgid "Strip &trailing carriage return"
-msgstr ""
+msgstr "Skracanie &kończących znaków CR"
 
 msgid "Ignore all &whitespace"
-msgstr ""
+msgstr "Ignorowanie &wszystkich spacji"
 
 msgid "Ignore &space change"
-msgstr ""
+msgstr "Ignorowanie zmian &spacji"
 
 msgid "Ignore tab &expansion"
-msgstr ""
+msgstr "Ignorowanie rozsz&erzeń tabulacji"
 
-#, fuzzy
 msgid "&Ignore case"
-msgstr "Z&ignoruj blokadę"
+msgstr "&Ignorowanie wielkości znaków"
 
-#, fuzzy
 msgid "Diff extra options"
-msgstr " Inne opcje "
+msgstr "Dodatkowe opcje różnicy"
 
 msgid "Diff algorithm"
-msgstr ""
+msgstr "Algorytm różnicy"
 
-#, fuzzy
 msgid "Diff Options"
-msgstr "&Opcje"
+msgstr "Opcje różnicy"
 
-#, fuzzy
 msgid "Edit"
-msgstr "&Edycja"
+msgstr "Edycja"
 
 msgid " Edit is disabled "
-msgstr ""
+msgstr " Edycja jest wyłączona "
 
 msgid " Enter line: "
 msgstr " Proszę podać wiersz: "
@@ -1585,16 +1579,14 @@ msgstr "Zapisz"
 msgid "ButtonBar|Edit"
 msgstr "Edycja"
 
-#, fuzzy
 msgid "ButtonBar|Merge"
-msgstr "Porzuć"
+msgstr "Połącz"
 
 msgid "ButtonBar|Search"
 msgstr "Szukaj"
 
-#, fuzzy
 msgid "ButtonBar|Options"
-msgstr "Idź do"
+msgstr "Opcje"
 
 msgid "ButtonBar|Quit"
 msgstr "Kończ"
@@ -1606,7 +1598,7 @@ msgid " File was modified, Save with exit? "
 msgstr " Plik został zmodyfikowany. Zapisać przed zakończeniem?"
 
 msgid "Two files are needed to compare"
-msgstr ""
+msgstr "Wymagane są dwa pliki do porównania"
 
 msgid "Cannot read directory contents"
 msgstr "Nie można odczytać zawartości katalogu"
@@ -1627,9 +1619,9 @@ msgstr " Nie można otworzyć %s do odczytania "
 msgid "Error"
 msgstr "Błąd"
 
-#, fuzzy, c-format
+#, c-format
 msgid " Error reading %s "
-msgstr "Błąd podczas odczytywania skryptu:"
+msgstr " Błąd podczas odczytywania %s "
 
 #, c-format
 msgid " Error reading from pipe: %s "
@@ -1883,9 +1875,8 @@ msgstr "Utworzono skrypt:"
 msgid "Process block"
 msgstr "Przetwórz blok"
 
-#, fuzzy
 msgid "Error calling program"
-msgstr "Błąd podczas zamykania skryptu:"
+msgstr "Błąd podczas wywoływania programu"
 
 msgid " Copies to"
 msgstr " Kopie do"
@@ -2387,7 +2378,7 @@ msgstr ""
 " %s "
 
 msgid " Reget failed, about to overwrite file "
-msgstr " Polecenie reget nie powiodło się, plik zostanie zastąpiony "
+msgstr " Polecenie reget się nie powiodło, plik zostanie zastąpiony "
 
 #, c-format
 msgid ""
@@ -3264,9 +3255,8 @@ msgstr "Prz&ełącz wyświetlanie paneli"
 msgid "&Compare directories"
 msgstr "P&orównanie katalogów"
 
-#, fuzzy
 msgid "&View diff files"
-msgstr " Podgląd pliku "
+msgstr "Wyświetl pliki &różnicy"
 
 msgid "E&xternal panelize"
 msgstr "Panele ze&wnętrzne"
@@ -3473,7 +3463,7 @@ msgid "Cannot invoke command."
 msgstr "Nie można wywołać polecenia."
 
 msgid "Pipe close failed"
-msgstr "Zamknięcie potoku nie powiodło się"
+msgstr "Zamknięcie potoku się nie powiodło"
 
 msgid "[dev]"
 msgstr "[urz]"
@@ -3584,7 +3574,7 @@ msgid "Group"
 msgstr "Grupa"
 
 msgid "<readlink failed>"
-msgstr "<readlink nie powiodło się>"
+msgstr "<readlink się nie powiodło>"
 
 #, c-format
 msgid "%s byte"
@@ -3688,13 +3678,13 @@ msgstr "Z obsługą wielu języków\n"
 msgid "With multiple codepages support\n"
 msgstr "Z obsługą wielu stron kodowych\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Virtual File Systems:"
-msgstr "Wirtualny system plików:"
+msgstr "Wirtualne systemy plików:"
 
 #, c-format
 msgid "Data types:"
-msgstr ""
+msgstr "Typy danych:"
 
 #, c-format
 msgid ""
