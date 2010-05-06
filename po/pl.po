@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
 "POT-Creation-Date: 2010-05-05 20:57+0300\n"
-"PO-Revision-Date: 2010-04-27 22:40+0200\n"
+"PO-Revision-Date: 2010-05-06 12:08+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <trans-pl@lists.fedoraproject.org>\n"
 "MIME-Version: 1.0\n"
@@ -313,10 +313,10 @@ msgstr ""
 "Proszę sprawdzić zmienną środowiskową TERM.\n"
 
 msgid "%b %e  %Y"
-msgstr ""
+msgstr "%e %b %Y"
 
 msgid "%b %e %H:%M"
-msgstr ""
+msgstr "%e %b %H:%M"
 
 #, c-format
 msgid "%s is not a directory\n"
