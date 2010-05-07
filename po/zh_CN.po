@@ -1582,9 +1582,8 @@ msgstr "ButtonBar|合并"
 msgid "ButtonBar|Search"
 msgstr "ButtonBar|搜索"
 
-#, fuzzy
 msgid "ButtonBar|Options"
-msgstr "ButtonBar|跳转"
+msgstr "ButtonBar|选项"
 
 msgid "ButtonBar|Quit"
 msgstr "ButtonBar|退出"
@@ -1596,7 +1595,7 @@ msgid " File was modified, Save with exit? "
 msgstr " 文件被修改，保存并退出？"
 
 msgid "Two files are needed to compare"
-msgstr ""
+msgstr "比较时需要两个文件"
 
 msgid "Cannot read directory contents"
 msgstr "无法读取目录内容"
@@ -1617,9 +1616,9 @@ msgstr "不能打开管道%s读"
 msgid "Error"
 msgstr "错误"
 
-#, fuzzy, c-format
+#, c-format
 msgid " Error reading %s "
-msgstr " 读取脚本时发生错误："
+msgstr "读错误%s"
 
 #, c-format
 msgid " Error reading from pipe: %s "
@@ -1871,9 +1870,8 @@ msgstr "脚本被创建："
 msgid "Process block"
 msgstr "处理块"
 
-#, fuzzy
 msgid "Error calling program"
-msgstr " 关闭脚本时发生错误："
+msgstr "调用程序错误"
 
 msgid " Copies to"
 msgstr " 复制到 "
@@ -3237,9 +3235,8 @@ msgstr "切换面板开/关(&P)"
 msgid "&Compare directories"
 msgstr "比较目录(&C)"
 
-#, fuzzy
 msgid "&View diff files"
-msgstr " 查看文件 "
+msgstr "查看Diff文件(&V)"
 
 msgid "E&xternal panelize"
 msgstr "外部面板(&X)"
@@ -3658,13 +3655,13 @@ msgstr "国际化支持\n"
 msgid "With multiple codepages support\n"
 msgstr "多代码页支持\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Virtual File Systems:"
-msgstr "虚拟文件系统："
+msgstr "虚拟文件系统:"
 
 #, c-format
 msgid "Data types:"
-msgstr ""
+msgstr "数据类型"
 
 #, c-format
 msgid ""
