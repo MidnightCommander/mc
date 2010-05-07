@@ -1,7 +1,7 @@
 # MC Chinese (zh_CN) translation
 # Wang Jian <lark@linux.net.cn>, 2001.
 # Jake Li <gnozil@gmail.com>, 2010.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
@@ -349,9 +349,8 @@ msgstr "管道失败 "
 msgid " Dup failed "
 msgstr "复制失败 "
 
-#, fuzzy
 msgid "Error dup'ing old error pipe"
-msgstr "读取管道时发生错误：%s"
+msgstr "复制原有出错管道时发生错误"
 
 #, c-format
 msgid ""
@@ -1015,9 +1014,8 @@ msgstr " 子进程异常退出 "
 msgid " Background protocol error "
 msgstr " 后台协议错误 "
 
-#, fuzzy
 msgid "Reading failed"
-msgstr "<readlink 失败>"
+msgstr "读失败"
 
 msgid ""
 " Background process sent us a request for more arguments \n"
@@ -1060,7 +1058,8 @@ msgstr "排序"
 msgid "Confirmation"
 msgstr "确认"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "Confirmation|清除历史(&H)"
@@ -1498,76 +1497,72 @@ msgid "Search"
 msgstr "搜索"
 
 msgid " Search is disabled "
-msgstr ""
+msgstr "禁止搜索"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Cannot create temporary diff file \n"
 " %s "
 msgstr ""
-" 无法创建临时命令文件 \n"
+" 无法创建临时diff文件 \n"
 " %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Cannot create backup file \n"
 " %s%s \n"
 " %s "
 msgstr ""
-" 无法创建目标文件“%s” \n"
+" 无法创建备份文件\n"
+" %s%s \n"
 " %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Cannot create temporary merge file \n"
 " %s "
 msgstr ""
-" 无法创建临时命令文件 \n"
+" 无法创建临时合并文件 \n"
 " %s "
 
-#, fuzzy
 msgid "&Normal"
-msgstr "普通"
+msgstr "普通(&N)"
 
 msgid "&Fastest (Assume large files)"
-msgstr ""
+msgstr "最快(&F针对大文件)"
 
 msgid "&Minimal (Find a smaller set of change)"
-msgstr ""
+msgstr "最小(&M查找较小的更改集)"
 
 msgid "Strip &trailing carriage return"
-msgstr ""
+msgstr "去除行末的回车换行(&T)"
 
 msgid "Ignore all &whitespace"
-msgstr ""
+msgstr "忽略所有空白(&W)"
 
 msgid "Ignore &space change"
-msgstr ""
+msgstr "忽略空格变化(&S)"
 
 msgid "Ignore tab &expansion"
-msgstr ""
+msgstr "忽略TAB扩展(&E)"
 
-#, fuzzy
 msgid "&Ignore case"
-msgstr "忽略锁(&I)"
+msgstr "忽略大小写(&I)"
 
-#, fuzzy
 msgid "Diff extra options"
-msgstr " 其它选项 "
+msgstr "Diff其它选项 "
 
 msgid "Diff algorithm"
-msgstr ""
+msgstr "Diff算法"
 
-#, fuzzy
 msgid "Diff Options"
-msgstr "选项(&O) "
+msgstr "Diff选项"
 
-#, fuzzy
 msgid "Edit"
-msgstr "编辑(&E)"
+msgstr "编辑"
 
 msgid " Edit is disabled "
-msgstr ""
+msgstr "禁止编辑"
 
 msgid " Enter line: "
 msgstr " 输入行号："
@@ -1581,9 +1576,8 @@ msgstr "ButtonBar|保存"
 msgid "ButtonBar|Edit"
 msgstr "ButtonBar|编辑"
 
-#, fuzzy
 msgid "ButtonBar|Merge"
-msgstr "ButtonBar|忘记"
+msgstr "ButtonBar|合并"
 
 msgid "ButtonBar|Search"
 msgstr "ButtonBar|搜索"
@@ -2258,26 +2252,16 @@ msgid " %s%s file error"
 msgstr " %s%s文件错误 "
 
 #, c-format
-msgid ""
-"The format of the %smc.ext file has changed with version 3.0.  It seems that "
-"the installation failed.  Please fetch a fresh copy from the Midnight "
-"Commander package."
-msgstr ""
-"文件%smc.ext的格式在3.0版本时已经被修改。似乎安装有错误。请获取新的Midnight "
-"Commander软件包。"
+msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
+msgstr "文件%smc.ext的格式在3.0版本时已经被修改。似乎安装有错误。请获取新的Midnight Commander软件包。"
 
 #, c-format
 msgid " ~/%s file error "
 msgstr " ~/%s文件错误 "
 
 #, c-format
-msgid ""
-"The format of the ~/%s file has changed with version 3.0.  You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write "
-"it."
-msgstr ""
-"文件~/%s的格式在3.0版本时已经被修改。您可以从%smc.ext复制一个或将它作为编写该"
-"文件的样例。"
+msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
+msgstr "文件~/%s的格式在3.0版本时已经被修改。您可以从%smc.ext复制一个或将它作为编写该文件的样例。"
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|复制"
@@ -2948,8 +2932,7 @@ msgid " Hotlist Load "
 msgstr "加载活动表"
 
 #, c-format
-msgid ""
-"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr "MC无法写文件~/%s，您的活动列表条目没有被删除"
 
 #, c-format
