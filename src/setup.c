@@ -1082,12 +1082,44 @@ load_keymap_defs (void)
         help_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
         load_keymap_from_section ("help", help_keymap, mc_global_keymap);
 
+        dialog_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
+        load_keymap_from_section ("dialog", dialog_keymap, mc_global_keymap);
+
 #ifdef USE_DIFF_VIEW
         diff_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
         load_keymap_from_section ("diffviewer", diff_keymap, mc_global_keymap);
 #endif
         mc_config_deinit (mc_global_keymap);
     }
+
+    main_map = default_main_map;
+    if (main_keymap && main_keymap->len > 0)
+        main_map = (global_keymap_t *) main_keymap->data;
+
+    main_x_map = default_main_x_map;
+    if (main_x_keymap && main_x_keymap->len > 0)
+        main_x_map = (global_keymap_t *) main_x_keymap->data;
+
+    panel_map = default_panel_keymap;
+    if (panel_keymap && panel_keymap->len > 0)
+        panel_map = (global_keymap_t *) panel_keymap->data;
+
+    input_map = default_input_keymap;
+    if (input_keymap && input_keymap->len > 0)
+        input_map = (global_keymap_t *) input_keymap->data;
+
+    tree_map = default_tree_keymap;
+    if (tree_keymap && tree_keymap->len > 0)
+        tree_map = (global_keymap_t *) tree_keymap->data;
+
+    help_map = default_help_keymap;
+    if (help_keymap && help_keymap->len > 0)
+        help_map = (global_keymap_t *) help_keymap->data;
+
+    dialog_map = default_dialog_keymap;
+    if (dialog_keymap && dialog_keymap->len > 0)
+        dialog_map = (global_keymap_t *) dialog_keymap->data;
+
 }
 
 void
@@ -1115,6 +1147,8 @@ free_keymap_defs (void)
         g_array_free (tree_keymap, TRUE);
     if (help_keymap != NULL)
         g_array_free (help_keymap, TRUE);
+    if (dialog_keymap != NULL)
+        g_array_free (dialog_keymap, TRUE);
 #ifdef USE_DIFF_VIEW
     if (diff_keymap != NULL)
         g_array_free (diff_keymap, TRUE);

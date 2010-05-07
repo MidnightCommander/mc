@@ -58,8 +58,6 @@
 
 /*** global variables ****************************************************************************/
 
-const global_keymap_t *diff_map;
-
 /*** file scope macro definitions ****************************************************************/
 
 #define g_array_foreach(a, TP, cbf) \

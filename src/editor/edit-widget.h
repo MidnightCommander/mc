@@ -10,7 +10,6 @@
 #include "lib/search.h"         /* mc_search_t */
 
 #include "edit-impl.h"
-#include "src/keybind.h"
 
 #define MAX_MACRO_LENGTH 1024
 #define N_LINE_CACHES 32

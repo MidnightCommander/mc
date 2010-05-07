@@ -68,8 +68,6 @@
 #include "tree.h"
 #include "filegui.h"
 
-const global_keymap_t *tree_map;
-
 #define tlines(t) (t->is_panel ? t->widget.lines - 2 - (show_mini_info ? 2 : 0) : t->widget.lines)
 
 /* Use the color of the parent widget for the unselected entries */

@@ -57,6 +57,7 @@
 #include "src/main.h"           /* source_codepage */
 #include "src/learn.h"          /* learn_keys */
 #include "src/cmddef.h"
+#include "src/keybind.h"
 
 #include "edit-impl.h"
 #include "editlock.h"
@@ -121,9 +122,6 @@ const char VERTICAL_MAGIC[] = { '\1', '\1', '\1', '\1', '\n' };
  * This_is_some_file
  * fin.
  */
-
-const global_keymap_t *editor_map;
-const global_keymap_t *editor_x_map;
 
 static void user_menu (WEdit * edit);
 

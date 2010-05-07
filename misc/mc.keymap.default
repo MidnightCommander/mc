@@ -359,6 +359,15 @@ HelpPrevLink = alt-tab
 HelpNextNode = n
 HelpPrevNode = p
 
+[dialog]
+DialogOK = enter
+DialogCancel = f10; esc; ctrl-g
+DialogPrevItem = left; up
+DialogNextItem = right; down
+DialogHelp = f1
+DialogSuspend = ctrl-z
+DialogRefresh = ctrl-l
+
 [diffviewer]
 DiffDisplaySymbols = alt-s; s
 DiffDisplayNumbers = alt-n; l
