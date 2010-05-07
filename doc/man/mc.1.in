@@ -3439,7 +3439,8 @@ The format for the color definition is:
 .fi
 .PP
 The colors are optional, and the keywords are: normal, selected, marked,
-markselect, errors, input, reverse, gauge.  Menu colors are: menunormal,
+markselect, errors, input, inputmark, inputunchanged, commandlinemark,
+reverse, gauge.  Menu colors are: menunormal,
 menusel, menuhot, menuhotsel, menuinactive. Dialog colors are: dnormal, dfocus,
 dhotnormal, dhotfocus.  Help colors are: helpnormal, helpitalic,
 helpbold, helplink, helpslink.  Viewer color is: viewunderline. Editor
@@ -3601,7 +3602,16 @@ cursor on selected data
 color of the filled part of the progress bar
 .TP
 .I input
-color of input lines used in query dialogs.
+color of input lines used in query dialogs
+.TP
+.I inputmark
+color of input selected text
+.TP
+.I inputunhanged
+color of input text before first modification or cursor movement
+.TP
+.I commandlinemark
+color of selected text in command line
 .TP
 .I reverse
 reverse color
