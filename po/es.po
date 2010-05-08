@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.7.2\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-05-05 22:32+0300\n"
-"PO-Revision-Date: 2010-03-19 15:00+0100\n"
+"POT-Creation-Date: 2010-05-08 16:12+0200\n"
+"PO-Revision-Date: 2010-05-08 16:30+0200\n"
 "Last-Translator: David Martín <dmartina@excite.com\n"
 "Language-Team: Spanish <debian-l10n-spanish@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -348,9 +348,8 @@ msgstr " Fallo en la tubería "
 msgid " Dup failed "
 msgstr " Dup falló "
 
-#, fuzzy
 msgid "Error dup'ing old error pipe"
-msgstr " Error al leer en tubería: %s "
+msgstr "Error duplicando tubería de error"
 
 #, c-format
 msgid ""
@@ -925,7 +924,6 @@ msgid "Show mc with specified skin"
 msgstr "Mostrar mc con la careta (skin) indicada"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -949,7 +947,8 @@ msgstr ""
 "   Visor de archivos:  normal, selected, marked, markselect\n"
 "   Diálogos:           dnormal, dfocus, dhotnormal, dhotfocus,\n"
 "                        errdhotnormal, errdhotfocus\n"
-"   Menús:              menu, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menús:              menunormal, menuhot, menusel, menuhotsel, "
+"menuinactive\n"
 "   Editor:             editnormal, editbold, editmarked, editwhitespace,\n"
 "                       editlinestate\n"
 
@@ -1014,9 +1013,8 @@ msgstr " El proceso hijo feneció inesperadamente"
 msgid " Background protocol error "
 msgstr " Error de protocolo en proceso en 2º plano "
 
-#, fuzzy
 msgid "Reading failed"
-msgstr "<readlink falló>"
+msgstr "Error en la lectura"
 
 msgid ""
 " Background process sent us a request for more arguments \n"
@@ -1499,76 +1497,72 @@ msgid "Search"
 msgstr "Buscar"
 
 msgid " Search is disabled "
-msgstr ""
+msgstr " Busquedas deshabilitadas "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Cannot create temporary diff file \n"
 " %s "
 msgstr ""
-" Imposible crear el archivo temporal para comandos \n"
+" Imposible crear archivo temporal de diferencias \n"
 " %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Cannot create backup file \n"
 " %s%s \n"
 " %s "
 msgstr ""
-" Imposible crear el archivo destino \"%s\" \n"
+" Imposible crear archivo de copia \n"
+" %s%s \n"
 " %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Cannot create temporary merge file \n"
 " %s "
 msgstr ""
-" Imposible crear el archivo temporal para comandos \n"
+" Imposible crear archivo temporal de mezcla \n"
 " %s "
 
-#, fuzzy
 msgid "&Normal"
 msgstr "&Normal"
 
 msgid "&Fastest (Assume large files)"
-msgstr ""
+msgstr "&Rápido (archivos grandes)"
 
 msgid "&Minimal (Find a smaller set of change)"
-msgstr ""
+msgstr "mí&Nimo (buscar mínimo de cambios)"
 
 msgid "Strip &trailing carriage return"
-msgstr ""
+msgstr "descartar salto de línea &Final"
 
 msgid "Ignore all &whitespace"
-msgstr ""
+msgstr "ignorar es&Paciado"
 
 msgid "Ignore &space change"
-msgstr ""
+msgstr "ignorar cambios en e&Spacios"
 
 msgid "Ignore tab &expansion"
-msgstr ""
+msgstr "ignorar &Tabulaciones"
 
-#, fuzzy
 msgid "&Ignore case"
-msgstr "&Ignorar bloqueo"
+msgstr "ignorar &May/min"
 
-#, fuzzy
 msgid "Diff extra options"
-msgstr " Otras opciones "
+msgstr "Otras opciones"
 
 msgid "Diff algorithm"
-msgstr ""
+msgstr "Algoritmo de comparación"
 
-#, fuzzy
 msgid "Diff Options"
-msgstr "&Opciones"
+msgstr "Opciones"
 
-#, fuzzy
 msgid "Edit"
-msgstr "&Edición"
+msgstr "Edición"
 
 msgid " Edit is disabled "
-msgstr ""
+msgstr " Ediciones deshabilitadas "
 
 msgid " Enter line: "
 msgstr " Línea: "
@@ -1582,16 +1576,14 @@ msgstr "Guarda"
 msgid "ButtonBar|Edit"
 msgstr "Editar"
 
-#, fuzzy
 msgid "ButtonBar|Merge"
-msgstr "Olvidar"
+msgstr "Mezclar"
 
 msgid "ButtonBar|Search"
 msgstr "Buscar"
 
-#, fuzzy
 msgid "ButtonBar|Options"
-msgstr "Ir a"
+msgstr "Opciones"
 
 msgid "ButtonBar|Quit"
 msgstr "Salir"
@@ -1604,6 +1596,8 @@ msgstr " El archivo fue modificado. ¿Desea guardarlo al salir? "
 
 msgid "Two files are needed to compare"
 msgstr ""
+"Para comparar se necesita\n"
+"un archivo en cada panel"
 
 msgid "Cannot read directory contents"
 msgstr "Imposible leer directorio"
@@ -1624,9 +1618,9 @@ msgstr " Imposible abrir %s para lectura "
 msgid "Error"
 msgstr "Error"
 
-#, fuzzy, c-format
+#, c-format
 msgid " Error reading %s "
-msgstr "Error al leer guión:"
+msgstr " Error al leer %s "
 
 #, c-format
 msgid " Error reading from pipe: %s "
@@ -1878,9 +1872,8 @@ msgstr "Guión creado:"
 msgid "Process block"
 msgstr "Procesar bloque"
 
-#, fuzzy
 msgid "Error calling program"
-msgstr "Error al cerrar guión:"
+msgstr "Error al ejecutar el programa"
 
 msgid " Copies to"
 msgstr " Cursar Copias a"
@@ -3004,9 +2997,9 @@ msgid "Modified:  %s"
 msgstr "Modificado: %s"
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
-#, fuzzy, c-format
+#, c-format
 msgid "Changed:   %s"
-msgstr "camb&Iar a"
+msgstr "Cambiado:   %s"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -3246,7 +3239,7 @@ msgid "&User menu"
 msgstr "me&Nú de usuario"
 
 msgid "&Directory tree"
-msgstr "árbol de &Directorios"
+msgstr "árbol de di&Rectorios"
 
 msgid "&Find file"
 msgstr "&Buscar archivos..."
@@ -3260,9 +3253,8 @@ msgstr "&Activar/desactivar paneles"
 msgid "&Compare directories"
 msgstr "&Comparar directorios..."
 
-#, fuzzy
 msgid "&View diff files"
-msgstr " Ver archivo "
+msgstr "ver &Diferencias"
 
 msgid "E&xternal panelize"
 msgstr "búsquedas e&Xternas..."
@@ -3486,7 +3478,7 @@ msgstr "SUB-DIR"
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|u"
-msgstr "sort|o"
+msgstr "o"
 
 msgid "&Unsorted"
 msgstr "sin &Ordenar"
@@ -3494,7 +3486,7 @@ msgstr "sin &Ordenar"
 #. TRANSLATORS: one single character to represent 'name' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|n"
-msgstr "sort|n"
+msgstr "n"
 
 msgid "&Name"
 msgstr "&Nombre"
@@ -3502,7 +3494,7 @@ msgstr "&Nombre"
 #. TRANSLATORS: one single character to represent 'version' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|v"
-msgstr "sort|v"
+msgstr "v"
 
 msgid "&Version"
 msgstr "&Versión"
@@ -3510,7 +3502,7 @@ msgstr "&Versión"
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|e"
-msgstr "sort|x"
+msgstr "x"
 
 msgid "&Extension"
 msgstr "e&Xtensión"
@@ -3518,7 +3510,7 @@ msgstr "e&Xtensión"
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|s"
-msgstr "sort|t"
+msgstr "t"
 
 msgid "&Size"
 msgstr "&Tamaño"
@@ -3529,7 +3521,7 @@ msgstr "Tamaño bloque"
 #. TRANSLATORS: one single character to represent 'Modify time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|m"
-msgstr "sort|m"
+msgstr "m"
 
 msgid "&Modify time"
 msgstr "fecha &Modificación"
@@ -3537,7 +3529,7 @@ msgstr "fecha &Modificación"
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|a"
-msgstr "sort|a"
+msgstr "a"
 
 msgid "&Access time"
 msgstr "fecha acce&So"
@@ -3545,7 +3537,7 @@ msgstr "fecha acce&So"
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|h"
-msgstr "sort|c"
+msgstr "c"
 
 msgid "C&Hange time"
 msgstr "fecha cam&Bio"
@@ -3562,7 +3554,7 @@ msgstr "Ne"
 #. TRANSLATORS: one single character to represent 'inode' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|i"
-msgstr "sort|i"
+msgstr "i"
 
 msgid "&Inode"
 msgstr "&Inodo"
@@ -3682,13 +3674,13 @@ msgstr "Soporte para idioma local\n"
 msgid "With multiple codepages support\n"
 msgstr "Soporte para cambio de juegos de caracteres\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Virtual File Systems:"
-msgstr "Sistema de archivos virtual:"
+msgstr "Sistemas de archivos virtuales:"
 
 #, c-format
 msgid "Data types:"
-msgstr ""
+msgstr "Tipos de datos:"
 
 #, c-format
 msgid ""
@@ -3896,6 +3888,3 @@ msgstr "¿Desea borrar esta historia?"
 
 msgid "Background process:"
 msgstr "Procesos en 2º plano"
-
-#~ msgid "Status:    %s"
-#~ msgstr "Cambiado:   %s"
