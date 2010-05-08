@@ -1120,6 +1120,12 @@ load_keymap_defs (void)
     if (dialog_keymap && dialog_keymap->len > 0)
         dialog_map = (global_keymap_t *) dialog_keymap->data;
 
+#ifdef USE_DIFF_VIEW
+    diff_map = default_diff_keymap;
+    if (diff_keymap && diff_keymap->len > 0)
+        diff_map = (global_keymap_t *) diff_keymap->data;
+#endif
+
 }
 
 void
