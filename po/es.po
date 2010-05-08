@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 4.7.0\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
 "POT-Creation-Date: 2010-05-05 20:57+0300\n"
-"PO-Revision-Date: 2010-04-10 10:25+0200\n"
+"PO-Revision-Date: 2010-05-08 16:30+0200\n"
 "Last-Translator: David Martín <dmartina@excite.com\n"
 "Language-Team: Spanish <debian-l10n-spanish@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -431,9 +431,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Archivo extfs inconsistente"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Warning: cannot open %s directory\n"
-msgstr "Imposible crear directorio %s"
+msgstr "Atención: imposible abrir el directorio %s\n"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -927,7 +927,6 @@ msgid "Show mc with specified skin"
 msgstr "Mostrar mc con la careta (skin) indicada"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -951,7 +950,7 @@ msgstr ""
 "   Visor de archivos:  normal, selected, marked, markselect\n"
 "   Diálogos:           dnormal, dfocus, dhotnormal, dhotfocus,\n"
 "                        errdhotnormal, errdhotfocus\n"
-"   Menús:              menu, menuhot, menusel, menuhotsel, menuinactive\n"
+"   Menús:              menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Editor:             editnormal, editbold, editmarked, editwhitespace,\n"
 "                       editlinestate\n"
 
@@ -2894,9 +2893,9 @@ msgid "Modified:  %s"
 msgstr "Modificado: %s"
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
-#, fuzzy, c-format
+#, c-format
 msgid "Changed:   %s"
-msgstr "camb&Iar a"
+msgstr "Cambiado:   %s"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -3781,6 +3780,3 @@ msgstr " Historia "
 
 msgid "Background process:"
 msgstr "Procesos en 2º plano"
-
-#~ msgid "Status:    %s"
-#~ msgstr "Cambiado:   %s"
