@@ -2291,8 +2291,10 @@ input_event (Gpm_Event * event, void *data)
     WInput *in = data;
 
     if (event->type & GPM_DOWN)
+    {
+        in->first = FALSE;
         input_mark_cmd (in, FALSE);
-
+    }
     if (event->type & (GPM_DOWN | GPM_DRAG))
     {
         dlg_select_widget (in);
