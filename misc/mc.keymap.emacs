@@ -169,6 +169,7 @@ ViewToggleWrapMode = f2
 ViewQuit = f3; f10; q; esc; ctrl-g
 ViewToggleHexMode = f4
 ViewGoto = f5
+ViewRunEditor = f6
 ViewSearch = f7; question; slash
 ViewToggleMagicMode = f8
 ViewToggleNroffMode = f9

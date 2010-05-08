@@ -101,7 +101,7 @@ mcview_set_buttonbar (mcview_t * view)
         buttonbar_set_label (b, 2, view->text_wrap_mode ? Q_ ("ButtonBar|UnWrap")
                              : Q_ ("ButtonBar|Wrap"), keymap, (Widget *) view);
         buttonbar_set_label (b, 4, Q_ ("ButtonBar|Hex"), keymap, (Widget *) view);
-        buttonbar_set_label (b, 6, "", keymap, (Widget *) view);
+        buttonbar_set_label (b, 6, Q_ ("ButtonBar|Edit"), keymap, (Widget *) view);
         buttonbar_set_label (b, 7, Q_ ("ButtonBar|Search"), keymap, (Widget *) view);
     }
 

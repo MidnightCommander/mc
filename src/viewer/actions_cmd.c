@@ -79,6 +79,7 @@
 
 /*** file scope functions ************************************************************************/
 
+
 /* Both views */
 static void
 mcview_search (mcview_t * view)
@@ -339,6 +340,10 @@ mcview_execute_cmd (mcview_t * view, unsigned long command)
     case CK_ViewToggleHexMode:
         /* Toggle between hex view and text view */
         mcview_toggle_hex_mode (view);
+        break;
+    case CK_ViewRunEditor:
+        /* Open current file in editor */
+        mcview_edit (view);
         break;
     case CK_ViewGoto:
         {

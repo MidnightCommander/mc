@@ -281,6 +281,7 @@ static name_keymap_t command_names[] = {
     { "ViewPrevFile",                    CK_ViewPrevFile },
     { "ViewToggleRuler",                 CK_ViewToggleRuler },
     { "ViewToggleHexNavMode",            CK_ViewToggleHexNavMode },
+    { "ViewRunEditor",                   CK_ViewRunEditor },
 
     /* help */
     { "HelpHelp",                        CK_HelpHelp },
@@ -552,6 +553,7 @@ const global_keymap_t default_viewer_keymap[] = {
     { KEY_F (3),   CK_ViewQuit,              "F3" },
     { KEY_F (4),   CK_ViewToggleHexMode,     "F4" },
     { KEY_F (5),   CK_ViewGoto,              "F5" },
+    { KEY_F (6),   CK_ViewRunEditor,         "F6" },
     { KEY_F (7),   CK_ViewSearch,            "F7" },
     { KEY_F (8),   CK_ViewToggleMagicMode,   "F8" },
     { KEY_F (9),   CK_ViewToggleNroffMode,   "F9" },
