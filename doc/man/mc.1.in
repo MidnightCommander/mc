@@ -223,18 +223,6 @@ program is executed.
 Also, it is possible to execute the commands assigned to the function
 key labels by clicking on them.
 .PP
-If a mouse button is clicked on the top frame line of the directory panel,
-it is scrolled one page up.  Likewise, a click on the bottom frame line
-will cause scrolling one page down.  This frame line method works also
-in the
-.\"LINK2"
-Help Viewer
-.\"Contents"
-and the
-.\"LINK2"
-Directory Tree\&.
-.\"Directory Tree"
-.PP
 The default auto repeat rate for the mouse buttons is 400
 milliseconds. This may be changed to other values by editing the
 .\"LINK2"
@@ -593,15 +581,6 @@ again, the next match is searched for.
 .P
 Besides the filename characters, you can also use wildcard
 characters '*' and '?'.
-.P
-Quick search mode is defined by
-.I quick_search_case_sensitive
-option located in [Midnight-Commander] section in configuration file.
-This option can have one of the following values: 0, 1 or 2.
-If quick_search_case_sensitive=0, quick search is case insensitive.
-If quick_search_case_sensitive=1, quick search is case sensitive.
-If quick_search_case_sensitive=2 (default value), quick search mode
-is matched to the the panel sort order: case sensitive or not.
 .\"NODE "  Shell Command Line"
 .SH "  Shell Command Line"
 This section lists keys which are useful to avoid excessive typing when
@@ -1889,7 +1868,7 @@ unintentionally becomes more difficult.  The default selection in the
 confirmation dialogs for deletion changes from "Yes" to "No".
 This option is disabled by default.
 .PP
-.I Auto Save Setup.
+.I Auto save setup.
 If this option is enabled, when you exit the Midnight Commander the
 configurable options of the Midnight Commander are saved in the
 ~/.mc/ini file.
@@ -1950,6 +1929,7 @@ If enabled, free space and total space of current file system is shown
 at the bottom frame of panel. Enabled by default.
 .\"NODE "    Panel options"
 .SH "    Panel options"
+.B Main panel options
 .PP
 .I Use SI size units.
 If this option is enabled, Midnight Commander will use SI units (powers of 1000)
@@ -1962,11 +1942,11 @@ If this option is enabled, all files and directories are shown mixed
 together.  If the option is desabled (default), directories (and links to
 directories) are shown at the beginning of the listing, and other files below.
 .PP
-.I Show Backup Files.
+.I Show backup files.
 If enabled, the Midnight Commander will show files ending with a tilde.
 Otherwise, they won't be shown (like GNU's ls option \-B). Enabled by default.
 .PP
-.I Show Hidden Files.
+.I Show hidden files.
 If enabled, the Midnight Commander will show all files that start with
 a dot (like ls \-a). Disabled by default.
 .PP
@@ -1984,18 +1964,35 @@ if you have the option on, you have to rescan the directory manually
 If enabled, the selection bar will move down when you mark a file (with
 Insert key). Enabled by default.
 .PP
-.I Reverse files only
+.I Reverse files only.
 Allow revert selection of files only. Enabled by default.
 If enabled, the reverse selection is applied to files only, not to directories.
 The selection of directories is untouched. If off, the reverse selection
 is applied to files as well to directories: all unselected items become
 selected, and vice versa.
 .PP
+.I Auto save panels setup.
+If this option is enabled, when you exit the Midnight Commander the
+current settings of panels are saved in the ~/.mc/panels.ini file.
+Disabled by default.
+.PP
+.B Navigation
+.PP
 .I Lynx\-like motion.
-If this option is enabled,
-you may use the arrows keys to automatically chdir if the
-current selection is a subdirectory and the shell command
+If this option is enabled, you may use the arrows keys to automatically
+chdir if the current selection is a subdirectory and the shell command
 line is empty. By default, this setting is off.
+.PP
+.I Page scrolling.
+If set (the default), panel will scroll by half the display when the
+cursor reaches the end or the beginning of the panel, otherwise it
+will just scroll a file at a time.
+.PP
+.I Mouse page scrolling.
+Controls whenever scrolling with the mouse wheel is done by pages or
+line by line on the panels.
+.PP
+.B File highlight
 .PP
 You can specify whether
 .I permissions
@@ -2021,6 +2018,15 @@ according to rules described in @sysconfdir@/mc/filehighlight.ini file. See
 Filenames Highlight
 .\"Filenames Highlight"
 for more info.
+.PP
+.B Quick search
+.PP
+You can specify how the
+.\"LINK2"
+Quick search
+.\"Quick search"
+mode should works: case insensitively, case sensitively or be matched
+to the the panel sort order: case sensitive or not.
 .\"NODE "    Confirmation"
 .SH "    Confirmation"
 In this dialog you configure the confirmation options for file deletion,
@@ -3866,10 +3872,6 @@ updates too jumpy.
 It seems that setting max_dirt_limit to 10 causes the best behavior,
 and that is the default value.
 .TP
-.I mouse_move_pages
-Controls whenever scrolling with the mouse is done by pages or line by
-line on the panels.
-.TP
 .I mouse_move_pages_viewer
 Controls if scrolling with the mouse is done by pages or line by line
 on the internal file viewer.
@@ -3880,11 +3882,6 @@ unselect, reverse selection) only if the command line is empty.  You
 don't need to quote those characters in the middle of the command line.
 On the other hand, you cannot use them to change selection when the
 command line is not empty.
-.TP
-.I panel_scroll_pages
-If set (the default), panel will scroll by half the display when the
-cursor reaches the end or the beginning of the panel, otherwise it
-will just scroll a file at a time.
 .TP
 .I show_output_starts_shell
 This variable only works if you are not using the subshell support.
