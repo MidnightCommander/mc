@@ -1000,11 +1000,11 @@ view_other_cmd (void)
 }
 
 static void
-do_link (int symbolic_link, const char *fname)
+do_link (link_type_t link_type, const char *fname)
 {
     char *dest = NULL, *src = NULL;
 
-    if (!symbolic_link)
+    if (link_type == LINK_HARDLINK)
     {
         src = g_strdup_printf (_("Link %s to:"), str_trunc (fname, 46));
         dest = input_expand_dialog (_(" Link "), src, MC_HISTORY_FM_LINK, "");
@@ -1019,17 +1019,17 @@ do_link (int symbolic_link, const char *fname)
         char *s;
         char *d;
 
-        /* suggest the full path for symlink */
+        /* suggest the full path for symlink, and either the full or
+           relative path to the file it points to  */
         s = concat_dir_and_file (current_panel->cwd, fname);
 
         if (get_other_type () == view_listing)
-        {
             d = concat_dir_and_file (other_panel->cwd, fname);
-        }
         else
-        {
             d = g_strdup (fname);
-        }
+
+        if (link_type == LINK_SYMLINK_RELATIVE)
+            s = diff_two_paths (other_panel->cwd, s);
 
         symlink_dialog (s, d, &dest, &src);
         g_free (d);
@@ -1041,6 +1041,7 @@ do_link (int symbolic_link, const char *fname)
         if (-1 == mc_symlink (dest, src))
             message (D_ERROR, MSG_ERROR, _(" symlink: %s "), unix_error_string (errno));
     }
+
     update_panels (UP_OPTIMIZE, UP_KEEPSEL);
     repaint_screen ();
 
@@ -1050,21 +1051,12 @@ do_link (int symbolic_link, const char *fname)
 }
 
 void
-link_cmd (void)
+link_cmd (link_type_t link_type)
 {
-    do_link (0, selection (current_panel)->fname);
-}
+    char *filename = selection (current_panel)->fname;
 
-void
-symlink_cmd (void)
-{
-    char *filename = NULL;
-    filename = selection (current_panel)->fname;
-
-    if (filename)
-    {
-        do_link (1, filename);
-    }
+    if (filename != NULL)
+        do_link (link_type, filename);
 }
 
 void

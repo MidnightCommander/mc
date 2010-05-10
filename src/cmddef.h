@@ -379,6 +379,7 @@
 #define CK_TogglePanelsSplit            7075
 #define CK_DiffViewCmd                  7076
 #define CK_PanelOptionsBox              7077
+#define CK_RelativeSymlinkCmd           7078
 
 /* panels */
 #define CK_PanelChdirOtherPanel         8001

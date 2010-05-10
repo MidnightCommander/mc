@@ -251,6 +251,7 @@ CmdCompareDirs = d
 CmdEditSymlink = ctrl-s
 CmdLink = l
 CmdSymlink = s
+CmdRelativeSymlink = v
 CmdInfo = i
 CmdQuickView = q
 CmdExternalPanelize = exclamation
