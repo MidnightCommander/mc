@@ -260,6 +260,8 @@ CmdDiffView = ctrl-y
 [panel]
 PanelStartSearch = ctrl-s; alt-s
 PanelMarkFile = insert; ctrl-t
+PanelMarkFileUp = shift-up
+PanelMarkFileDown = shift-down
 PanelMoveDown = down; ctrl-n
 PanelMoveUp = up; ctrl-p
 PanelMoveLeft = left
