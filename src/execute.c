@@ -125,7 +125,8 @@ do_execute (const char *lc_shell, const char *command, int flags)
 	old_vfs_dir = g_strdup (vfs_get_current_dir ());
 #endif				/* ENABLE_VFS */
 
-    save_cwds_stat ();
+    if ((view_one_file == NULL) && (edit_one_file == NULL))
+	save_cwds_stat ();
     pre_exec ();
     if (console_flag)
 	handle_console (CONSOLE_RESTORE);
@@ -188,8 +189,10 @@ do_execute (const char *lc_shell, const char *command, int flags)
     }
 #endif				/* ENABLE_VFS */
 
-    update_panels (UP_OPTIMIZE, UP_KEEPSEL);
-    update_xterm_title_path ();
+    if ((view_one_file == NULL) && (edit_one_file == NULL)) {
+	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+	update_xterm_title_path ();
+    }
 
     do_refresh ();
     use_dash (TRUE);
@@ -346,9 +349,11 @@ do_suspend_cmd (void)
 void
 suspend_cmd (void)
 {
-    save_cwds_stat ();
+    if ((view_one_file == NULL) && (edit_one_file == NULL))
+	save_cwds_stat ();
     do_suspend_cmd ();
-    update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+    if ((view_one_file == NULL) && (edit_one_file == NULL))
+	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
     do_refresh ();
 }
 
