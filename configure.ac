@@ -569,6 +569,14 @@ AM_CONDITIONAL(ENABLE_MCSERVER, [test x"$enable_mcserver" = "xyes"])
 AM_CONDITIONAL(CHARSET, [test -n "$have_charset"])
 AM_CONDITIONAL(CONS_SAVER, [test -n "$cons_saver"])
 
+AC_CONFIG_FILES(
+[
+src/man2hlp/man2hlp
+],
+[
+chmod +x src/man2hlp/man2hlp
+])
+
 AC_CONFIG_FILES([
 Makefile
 
