@@ -408,7 +408,6 @@ quick_dialog_skip (QuickDialog *qd, int nskip)
 	                    qw->u.input.len, qw->u.input.text, qw->u.input.histname,
 	                    INPUT_COMPLETE_DEFAULT);
 	    in->is_password = (qw->u.input.flags == 1);
-	    in->point = 0;
 	    if ((qw->u.input.flags & 2) != 0)
 		in->completion_flags |= INPUT_COMPLETE_CD;
 	    qw->widget = (Widget *) in;
