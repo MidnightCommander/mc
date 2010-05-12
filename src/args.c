@@ -34,6 +34,7 @@
 #include "lib/tty/mouse.h"
 #include "lib/strutil.h"
 #include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/mc-vfs/smbfs.h" /* smbfs_set_debugf()  */
 
 #include "src/main.h"
 #include "src/textconf.h"
@@ -82,12 +83,17 @@ char *mc_args__keymap_file = NULL;
 /* Debug level */
 int mc_args__debug_level = 0;
 
-
 /*** file scope macro definitions ****************************************************************/
 
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/
+
+/* forward declarations */
+static gboolean parse_mc_e_argument (const gchar *option_name, const gchar *value,
+                              gpointer data, GError **error);
+static gboolean parse_mc_v_argument (const gchar *option_name, const gchar *value,
+                              gpointer data, GError **error);
 
 static GOptionContext *context;
 
@@ -157,15 +163,15 @@ static const GOptionEntry argument_main_table[] = {
 
     /* single file operations */
     {
-     "view", 'v', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_STRING,
-     &mc_run_param0,
+     "view", 'v', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_CALLBACK,
+     parse_mc_v_argument,
      N_("Launches the file viewer on a file"),
      "<file>"
     },
 
     {
-     "edit", 'e', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_STRING,
-     &mc_run_param0,
+     "edit", 'e', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_CALLBACK,
+     parse_mc_e_argument,
      N_("Edits one file"),
      "<file>"},
 
@@ -403,6 +409,8 @@ mc_setup_by_args (int argc, char *argv[])
 
     if (strncmp (base, "mce", 3) == 0 || strcmp (base, "vi") == 0)
     {
+        /* mce* or vi is link to mc */
+
         mc_run_param0 = g_strdup ("");
         if (tmp != NULL)
         {
@@ -469,6 +477,8 @@ mc_setup_by_args (int argc, char *argv[])
     }
     else if (strncmp (base, "mcv", 3) == 0 || strcmp (base, "view") == 0)
     {
+        /* mcv* or view is link to mc */
+
         if (tmp != NULL)
             mc_run_param0 = g_strdup (tmp);
         else
@@ -481,6 +491,8 @@ mc_setup_by_args (int argc, char *argv[])
 #ifdef USE_DIFF_VIEW
     else if (strncmp (base, "mcd", 3) == 0 || strcmp (base, "diff") == 0)
     {
+        /* mcd* or diff is link to mc */
+
         if (argc < 3)
         {
             fprintf (stderr, "%s\n", _("There 2 files are required to diffviewer."));
@@ -499,15 +511,32 @@ mc_setup_by_args (int argc, char *argv[])
 #endif /* USE_DIFF_VIEW */
     else
     {
-        /* sets the current dir and the other dir */
-        if (tmp != NULL)
+        /* MC is run as mc */
+
+        switch (mc_run_mode)
         {
-            mc_run_param0 = g_strdup (tmp);
-            tmp = (argc > 1) ? argv[2] : NULL;
+        case MC_RUN_EDITOR:
+        case MC_RUN_VIEWER:
+            /* mc_run_param0 is set up in parse_mc_e_argument() and parse_mc_v_argument() */
+            break;
+
+        case MC_RUN_DIFFVIEWER:
+            /* not implemented yet */
+            break;
+
+        case MC_RUN_FULL:
+        default:
+            /* sets the current dir and the other dir */
             if (tmp != NULL)
-                mc_run_param1 = g_strdup (tmp);
+            {
+                mc_run_param0 = g_strdup (tmp);
+                tmp = (argc > 1) ? argv[2] : NULL;
+                if (tmp != NULL)
+                    mc_run_param1 = g_strdup (tmp);
+            }
+            mc_run_mode = MC_RUN_FULL;
+            break;
         }
-        mc_run_mode = MC_RUN_FULL;
     }
 }
 
@@ -559,6 +588,38 @@ mc_args__convert_help_to_syscharset (const gchar * charset, const gchar * error_
     g_iconv_close (conv);
 
     return g_string_free (buffer, FALSE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+parse_mc_e_argument (const gchar *option_name, const gchar *value,
+                     gpointer data, GError **error)
+{
+    (void) option_name;
+    (void) data;
+    (void) error;
+
+    mc_run_mode = MC_RUN_EDITOR;
+    mc_run_param0 = g_strdup (value);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+parse_mc_v_argument (const gchar *option_name, const gchar *value,
+                     gpointer data, GError **error)
+{
+    (void) option_name;
+    (void) data;
+    (void) error;
+
+    mc_run_mode = MC_RUN_VIEWER;
+    mc_run_param0 = g_strdup (value);
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
