@@ -1199,9 +1199,11 @@ complete_engine (WInput * in, int what_to_do)
             WListbox *query_list;
 
             for (p = in->completions + 1; *p != NULL; count++, p++)
+            {
                 i = str_term_width1 (*p);
                 if (i > maxlen)
                     maxlen = i;
+            }
             start_x = in->widget.x;
             start_y = in->widget.y;
             if (start_y - 2 >= count)
