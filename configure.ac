@@ -161,7 +161,8 @@ AC_CHECK_FUNCS([\
 	memcpy memset \
 	setreuid statfs sysconf \
 	tcgetattr tcsetattr truncate \
-	strverscmp
+	strverscmp \
+	realpath
 ])
 
 dnl

@@ -188,7 +188,11 @@ int mc_mkstemps(char **pname, const char *prefix, const char *suffix);
 #define MAXSYMLINKS 32
 #endif
 
-char *mc_realpath(const char *path, char resolved_path[]);
+#ifdef HAVE_REALPATH
+#define mc_realpath realpath
+#else
+char *mc_realpath (const char *path, char *resolved_path);
+#endif
 
 enum compression_type {
 	COMPRESSION_NONE,
