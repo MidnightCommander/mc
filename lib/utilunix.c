@@ -593,12 +593,10 @@ int gettimeofday (struct timeval *tp, void *tzp)
 }
 #endif /* HAVE_GET_PROCESS_STATS */
 
+#ifndef HAVE_REALPATH
 char *
-mc_realpath (const char *path, char resolved_path[])
+mc_realpath (const char *path, char *resolved_path)
 {
-#ifdef	USE_SYSTEM_REALPATH
-    return realpath (path, resolved_path);
-#else
     char copy_path[PATH_MAX];
     char link_path[PATH_MAX];
     char got_path[PATH_MAX];
@@ -715,8 +713,8 @@ mc_realpath (const char *path, char resolved_path[])
     *new_path = '\0';
     strcpy (resolved_path, got_path);
     return resolved_path;
-#endif	/* USE_SYSTEM_REALPATH */
 }
+#endif /* HAVE_REALPATH */
 
 /* Return the index of the permissions triplet */
 int
