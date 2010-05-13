@@ -293,7 +293,33 @@ tty_fill_region (int y, int x, int rows, int cols, unsigned char ch)
 {
     int i;
 
-    for (i = 0; i < rows; i++) {
+    if (y < 0)
+    {
+        rows += y;
+
+        if (rows <= 0)
+            return;
+
+        y = 0;
+    }
+
+    if (x < 0)
+    {
+        cols += x;
+
+        if (cols <= 0)
+            return;
+
+        x = 0;
+    }
+
+    if (y + rows > LINES)
+        rows = LINES - y;
+    if (x + cols > COLS)
+        cols = COLS - x;
+
+    for (i = 0; i < rows; i++)
+    {
         move (y + i, x);
         hline (ch, cols);
     }
