@@ -1,7 +1,7 @@
 # Copyright (C) 2010 Free Software Foundation, Inc.
-#
-#
-#
+# 
+# 
+# 
 # Kang Bundo <bundo@bundo.biz>, 2010
 msgid ""
 msgstr ""
@@ -14,9 +14,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Country: KOREA, REPUBLIC OF\n"
 "X-Poedit-Language: Korean\n"
 "X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Country: KOREA, REPUBLIC OF\n"
 
 msgid " Search string not found "
 msgstr "글월을 찾을 수 없군요 "
@@ -350,9 +350,8 @@ msgstr " Pipe 실패"
 msgid " Dup failed "
 msgstr " Dup 실패"
 
-#, fuzzy
 msgid "Error dup'ing old error pipe"
-msgstr "파이프 읽기 에러: %s "
+msgstr "Error dup'ing old error pipe"
 
 #, c-format
 msgid ""
@@ -1014,9 +1013,8 @@ msgstr "예기치 않은 자식(child) 프로세스의 죽음 "
 msgid " Background protocol error "
 msgstr "배경 프로토콜 에러 "
 
-#, fuzzy
 msgid "Reading failed"
-msgstr "<readlink 실패>"
+msgstr "읽기 실패함"
 
 msgid ""
 " Background process sent us a request for more arguments \n"
@@ -1061,7 +1059,8 @@ msgstr "정렬 순서"
 msgid "Confirmation"
 msgstr "확인"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 #. 2
 msgid "Confirmation|&History cleanup"
 msgstr "Confirmation|기록청소(&H)"
@@ -1499,76 +1498,72 @@ msgid "Search"
 msgstr "검색"
 
 msgid " Search is disabled "
-msgstr ""
+msgstr "검색 불가"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Cannot create temporary diff file \n"
 " %s "
 msgstr ""
-" 임시 명령 파일을 만들 수 없습니다 \n"
+"비교 임시 파일을 만들 수 없습니다 \n"
 " %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Cannot create backup file \n"
 " %s%s \n"
 " %s "
 msgstr ""
-" \"%s\" 파일을 만들 수 없습니다 \n"
+"백업 파일을 만들 수 없습니다 \n"
+" %s%s \n"
 " %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Cannot create temporary merge file \n"
 " %s "
 msgstr ""
-" 임시 명령 파일을 만들 수 없습니다 \n"
-" %s "
+"병합 임시 파일을 만들 수 없습니다 \n"
+" %s"
 
-#, fuzzy
 msgid "&Normal"
-msgstr "일반"
+msgstr "일반(&N)"
 
 msgid "&Fastest (Assume large files)"
-msgstr ""
+msgstr "빠름 (큰파일 가정)(&F)"
 
 msgid "&Minimal (Find a smaller set of change)"
-msgstr ""
+msgstr "최소 (찾은 작은 셋트의 변경)"
 
 msgid "Strip &trailing carriage return"
-msgstr ""
+msgstr "Strip &trailing carriage return"
 
 msgid "Ignore all &whitespace"
-msgstr ""
+msgstr "빈공간 모두 무시(&W)"
 
 msgid "Ignore &space change"
-msgstr ""
+msgstr "공간 변경 무시(&S)"
 
 msgid "Ignore tab &expansion"
-msgstr ""
+msgstr "탭 확장 무시(&E)"
 
-#, fuzzy
 msgid "&Ignore case"
 msgstr "잠금 무시(&I)"
 
-#, fuzzy
 msgid "Diff extra options"
 msgstr " 기타 선택항목 "
 
 msgid "Diff algorithm"
-msgstr ""
+msgstr "Dif 알고리즘"
 
-#, fuzzy
 msgid "Diff Options"
-msgstr "선택항목(&O) "
+msgstr "DIff 설정 "
 
-#, fuzzy
 msgid "Edit"
-msgstr "편집(&E)"
+msgstr "편집"
 
 msgid " Edit is disabled "
-msgstr ""
+msgstr "편집 불가"
 
 msgid " Enter line: "
 msgstr "줄 번호 입력:"
@@ -1582,9 +1577,8 @@ msgstr "ButtonBar|저장"
 msgid "ButtonBar|Edit"
 msgstr "ButtonBar|편집"
 
-#, fuzzy
 msgid "ButtonBar|Merge"
-msgstr "ButtonBar|분실"
+msgstr "ButtonBar|병합"
 
 msgid "ButtonBar|Search"
 msgstr "ButtonBar|검색"
@@ -2261,26 +2255,16 @@ msgid " %s%s file error"
 msgstr " %s%s 파일 에러 "
 
 #, c-format
-msgid ""
-"The format of the %smc.ext file has changed with version 3.0.  It seems that "
-"the installation failed.  Please fetch a fresh copy from the Midnight "
-"Commander package."
-msgstr ""
-"버전 3.0 이후에 %smc.ext 파일이 바뀌었습니다. 인스톨이 실패한 것으로 보입니"
-"다. 미드나잇 코맨더에서 새로운 mc.ext 파일을 가져오시기 바랍니다."
+msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
+msgstr "버전 3.0 이후에 %smc.ext 파일이 바뀌었습니다. 인스톨이 실패한 것으로 보입니다. 미드나잇 코맨더에서 새로운 mc.ext 파일을 가져오시기 바랍니다."
 
 #, c-format
 msgid " ~/%s file error "
 msgstr "  ~/%s 파일 에러 "
 
 #, c-format
-msgid ""
-"The format of the ~/%s file has changed with version 3.0.  You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write "
-"it."
-msgstr ""
-"~ /%s 파일은 버전 3.0에서 바꿀 수 있습니다. 당신은 어느 %smc.ext에서 복사하거"
-"나 작성하는 방법의 예제 파일을 사용할 수 있습니다."
+msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
+msgstr "~ /%s 파일은 버전 3.0에서 바꿀 수 있습니다. 당신은 어느 %smc.ext에서 복사하거나 작성하는 방법의 예제 파일을 사용할 수 있습니다."
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|복사"
@@ -2943,8 +2927,7 @@ msgid " Hotlist Load "
 msgstr " 단축목록 불러오기 "
 
 #, c-format
-msgid ""
-"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr "MC  ~/%s 파일을 쓸 수 없습니다, 지난 설정파일을 지울 수 없습니다."
 
 #, c-format
