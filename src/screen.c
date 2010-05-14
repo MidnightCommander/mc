@@ -73,6 +73,14 @@
 #define MARKED_SELECTED	3
 #define STATUS		5
 
+typedef enum
+{
+    MARK_DONT_MOVE = 0,
+    MARK_DOWN = 1,
+    MARK_FORCE_DOWN = 2,
+    MARK_FORCE_UP = 3
+} mark_act_t;
+
 /*
  * This describes a format item.  The parse_display_format routine parses
  * the user specified format and creates a linked list of format_e structures.
@@ -2346,17 +2354,31 @@ do_file_mark (WPanel * panel, int idx, int mark)
 }
 
 static void
-do_mark_file (WPanel * panel, int do_move)
+do_mark_file (WPanel * panel, mark_act_t do_move)
 {
     do_file_mark (panel, panel->selected, selection (panel)->f.marked ? 0 : 1);
-    if (mark_moves_down && do_move)
+    if ((mark_moves_down && do_move == MARK_DOWN) || do_move == MARK_FORCE_DOWN)
         move_down (panel);
+    else if (do_move == MARK_FORCE_UP)
+        move_up (panel);
 }
 
 static void
 mark_file (WPanel * panel)
 {
-    do_mark_file (panel, 1);
+    do_mark_file (panel, MARK_DOWN);
+}
+
+static void
+mark_file_up (WPanel * panel)
+{
+    do_mark_file (panel, MARK_FORCE_UP);
+}
+
+static void
+mark_file_down (WPanel * panel)
+{
+    do_mark_file (panel, MARK_FORCE_DOWN);
 }
 
 /* Incremental search of a file name in the panel */
@@ -2936,6 +2958,12 @@ panel_execute_cmd (WPanel * panel, unsigned long command)
     case CK_PanelMarkFile:
         mark_file (panel);
         break;
+    case CK_PanelMarkFileUp:
+        mark_file_up (panel);
+        break;
+    case CK_PanelMarkFileDown:
+        mark_file_down (panel);
+        break;
     case CK_PanelMoveUp:
         move_up (panel);
         break;
@@ -3131,7 +3159,7 @@ static int mouse_marking = 0;
 static void
 mouse_toggle_mark (WPanel * panel)
 {
-    do_mark_file (panel, 0);
+    do_mark_file (panel, MARK_DONT_MOVE);
     mouse_marking = selection (panel)->f.marked;
 }
 
@@ -3139,9 +3167,9 @@ static void
 mouse_set_mark (WPanel * panel)
 {
     if (mouse_marking && !(selection (panel)->f.marked))
-        do_mark_file (panel, 0);
+        do_mark_file (panel, MARK_DONT_MOVE);
     else if (!mouse_marking && (selection (panel)->f.marked))
-        do_mark_file (panel, 0);
+        do_mark_file (panel, MARK_DONT_MOVE);
 }
 
 static int

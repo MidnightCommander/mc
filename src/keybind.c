@@ -424,6 +424,8 @@ static name_keymap_t command_names[] = {
     { "PanelGotoMiddleFile",             CK_PanelGotoMiddleFile },
     { "PanelGotoTopFile",                CK_PanelGotoTopFile },
     { "PanelMarkFile",                   CK_PanelMarkFile },
+    { "PanelMarkFileDown",               CK_PanelMarkFileDown },
+    { "PanelMarkFileUp",                 CK_PanelMarkFileUp },
     { "PanelMoveUp",                     CK_PanelMoveUp },
     { "PanelMoveDown",                   CK_PanelMoveDown },
     { "PanelMoveLeft",                   CK_PanelMoveLeft },
