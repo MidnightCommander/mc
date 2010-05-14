@@ -52,50 +52,50 @@ mcedit это символическая ссылка на
 Вывод версии программы.
 .TP
 .I "\-x"
-Принудительное включение режима xterm. Используется при работе
-в xterm\-совместимых терминалах (двух оконный режим и возможность
-отправлять сообщения мыши в виде escape\-последовательностей).
+Принудительное включение режима xterm. Используется при работе в
+xterm\-совместимых терминалах (двух оконный режим и возможность отправлять
+сообщения мыши в виде escape\-последовательностей).
 .SH "ОСОБЕННОСТИ"
-The internal file editor is a full\-featured full screen editor.  It can
-edit files up to 64 megabytes.  It is possible to edit binary files. 
-The features it presently supports are: block copy, move, delete, cut,
-paste; key for key undo; pull\-down menus; file insertion; macro
-commands; regular expression search and replace (and our own
-scanf\-printf search and replace); shift\-arrow text highlighting (if
-supported by the terminal); insert\-overwrite toggle; word wrap;
-autoindent; tunable tab size; syntax highlighting for various file
-types; and an option to pipe text blocks through shell commands like
-indent and ispell.
-.SH KEYS
-The editor is easy to use and can be used without learning.  The
-pull\-down menu is invoked by pressing F9.  You can learn other keys from
-the menu and from the button bar labels.
+Встроенный редактор это полнофункциональный полно-экранный редактор.
+Позволяет редактировать файлы размером не более 64 мегабайт. Также можно
+редактировать бинарные файлы. Функции которые в настоящее время поддерживаются:
+копирование, перемещение, удаление, вырезка, вставка помеченного текста;
+операция отмены; выпадающее меню; вставка текста из файла; макросы, регулярные
+выражения поиска и замены; выделение текста с помощью Shift\-стрелки  (если
+поддерживается терминалом); режим замены текста при вводе; авто\-перенос слов;
+авто-отступ; настраиваемый размер табуляции; подсветка синтаксиса для различных
+типов файлов, а также возможность передачи текстовых блоков через pipe, для
+дальнейшей обработки внешними утилитами такими как indent или ispell.
+.SH "КЛЮЧИ"
+Редактор прост в использовании и может использоваться без предварительного
+изучения документации. Выпадающее меню вызывается клавишей F9. В меню программы
+и в нижней панели вы сможете ознакомиться также и с другими "горячими" клавишами.
 .PP
-In addition to that, Shift combined with arrows does text highlighting
-(if supported by the terminal):
+Дополнительно к этому вы можете использовать клавишу Shift совместно со
+стрелками для пометки текста (если поддерживается терминалом):
 .B Ctrl\-Ins
-copies to the file
+копирует помеченный текст в файл
 .BR ~/.mc/cedit/cooledit.clip ,
 .B Shift\-Ins
-pastes from
+вставляет содержимое
 .BR ~/.mc/cedit/cooledit.clip ,
 .B Shift\-Del
-cuts to
+вырезает помеченное в файл
 .BR ~/.mc/cedit/cooledit.clip ,
-and
+и
 .B Ctrl\-Del
-deletes highlighted text.  Mouse highlighting also works on some
-terminals.  To use the standard mouse support provided by your terminal,
-hold the Shift key.  Please note that the mouse support in the terminal
-doesn't share the clipboard with
+удаляет помеченный текст. Также на некоторых терминалах работает
+выделение с помощью мыши . Для стандартной для терминалов пометки,
+удерживайте клавишу Shift. Пожалуйста имейте ввиду что стандартная
+пометка текста не распространяется на клипборд
 .BR mcedit .
 .PP
-The completion key (usually
+Функция дополнения текста (сочетание
 .B "Meta\-Tab"
-or
+или
 .BR "Escape Tab" )
-completes the word under the cursor using the words used earlier in the
-file.
+завершает слово под курсором с использованием слов которые уже использовались
+ранее в данном файле.
 .PP
 To define a macro, press
 .B Ctrl\-R
@@ -118,22 +118,19 @@ so you won't have to edit this file. You will also have to restart
 other running editors for macros to take effect.
 .P
 .B F19
-will format C, C++, Java or HTML code when it is highlighted.  An executable
-file called
+F19 позволит отформатировать помеченный код на языках C, C++, Java или HTML.
+Этим занимается скрипт
 .B ~/.mc/cedit/edit.indent.rc
-will be created for you from the default template.  Feel free to edit it
-if you need.
+созданный из готового шаблона. Вы можете изменить его так как вам будет удобнее.
 .PP
 .B C\-p
-will run ispell on a block of text in a similar way.  The script file
-will be called
+запустит ispell для блока текста. Будет выполнен скрипт
 .BR ~/.mc/cedit/edit.spell.rc .
 .PP
-If some keys don't work, you can use
-.B Learn Keys
-in the
-.B Options
-menu.
+В случае, если какие-либо клавиши не работают, Вы можете воспользоваться диалогом
+.B "Распознавание клавиш"
+в меню 
+.B  "Настройки"
 .SH CODE NAVIGATION
 .B mcedit
 can be used to navigation through code with tags files created by etags
