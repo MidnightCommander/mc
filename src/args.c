@@ -31,11 +31,14 @@
 #include "lib/global.h"
 #include "lib/tty/tty.h"
 #include "lib/tty/color.h"      /* command_line_colors */
+#include "lib/tty/mouse.h"
 #include "lib/strutil.h"
+#include "lib/vfs/mc-vfs/vfs.h"
+#include "lib/vfs/mc-vfs/smbfs.h" /* smbfs_set_debugf()  */
 
 #include "src/main.h"
 #include "src/textconf.h"
-#include "subshell.h"           /* use_subshell */
+#include "src/subshell.h"       /* use_subshell */
 
 #include "src/args.h"
 
@@ -44,7 +47,7 @@
 /*** global variables ****************************************************************************/
 
 /* If true, show version info and exit */
-gboolean mc_args__version = FALSE;
+gboolean mc_args__show_version = FALSE;
 
 /* If true, assume we are running on an xterm terminal */
 gboolean mc_args__force_xterm = FALSE;
@@ -63,6 +66,9 @@ gboolean mc_args__disable_colors = FALSE;
 /* Force colors, only used by Slang */
 gboolean mc_args__force_colors = FALSE;
 
+/* Line to start the editor on */
+int mc_args__edit_start_line = 0;
+
 /* Show in specified skin */
 char *mc_args__skin = NULL;
 
@@ -77,12 +83,17 @@ char *mc_args__keymap_file = NULL;
 /* Debug level */
 int mc_args__debug_level = 0;
 
-
 /*** file scope macro definitions ****************************************************************/
 
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/
+
+/* forward declarations */
+static gboolean parse_mc_e_argument (const gchar *option_name, const gchar *value,
+                              gpointer data, GError **error);
+static gboolean parse_mc_v_argument (const gchar *option_name, const gchar *value,
+                              gpointer data, GError **error);
 
 static GOptionContext *context;
 
@@ -96,7 +107,7 @@ static const GOptionEntry argument_main_table[] = {
     /* generic options */
     {
      "version", 'V', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE,
-     &mc_args__version,
+     &mc_args__show_version,
      N_("Displays the current version"),
      NULL
     },
@@ -152,15 +163,15 @@ static const GOptionEntry argument_main_table[] = {
 
     /* single file operations */
     {
-     "view", 'v', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_STRING,
-     &mc_run_param0,
+     "view", 'v', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_CALLBACK,
+     parse_mc_v_argument,
      N_("Launches the file viewer on a file"),
      "<file>"
     },
 
     {
-     "edit", 'e', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_STRING,
-     &mc_run_param0,
+     "edit", 'e', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_CALLBACK,
+     parse_mc_e_argument,
      N_("Edits one file"),
      "<file>"},
 
@@ -369,10 +380,172 @@ mc_args_add_extended_info_to_help (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static gboolean
-mc_args_process (void)
+static void
+mc_setup_by_args (int argc, char *argv[])
 {
-    if (mc_args__version)
+    const char *base;
+    char *tmp;
+
+    if (mc_args__nomouse)
+        use_mouse_p = MOUSE_DISABLED;
+
+#ifdef USE_NETCODE
+    if (mc_args__netfs_logfile != NULL)
+    {
+        mc_setctl ("/#ftp:", VFS_SETCTL_LOGFILE, (void *) mc_args__netfs_logfile);
+#ifdef ENABLE_VFS_SMB
+        smbfs_set_debugf (mc_args__netfs_logfile);
+#endif /* ENABLE_VFS_SMB */
+    }
+
+#ifdef ENABLE_VFS_SMB
+    if (mc_args__debug_level != 0)
+        smbfs_set_debug (mc_args__debug_level);
+#endif /* ENABLE_VFS_SMB */
+#endif /* USE_NETCODE */
+
+    base = x_basename (argv[0]);
+    tmp = (argc > 0) ? argv[1] : NULL;
+
+    if (strncmp (base, "mce", 3) == 0 || strcmp (base, "vi") == 0)
+    {
+        /* mce* or vi is link to mc */
+
+        mc_run_param0 = g_strdup ("");
+        if (tmp != NULL)
+        {
+            /*
+             * Check for filename:lineno, followed by an optional colon.
+             * This format is used by many programs (especially compilers)
+             * in error messages and warnings. It is supported so that
+             * users can quickly copy and paste file locations.
+             */
+            char *end, *p;
+
+            end = tmp + strlen (tmp);\
+            p = end;
+
+            if (p > tmp && p[-1] == ':')
+                p--;
+            while (p > tmp && g_ascii_isdigit ((gchar) p[-1]))
+                p--;
+            if (tmp < p && p < end && p[-1] == ':')
+            {
+                char *fname;
+                struct stat st;
+
+                fname = g_strndup (tmp, p - 1 - tmp);
+                /*
+                 * Check that the file before the colon actually exists.
+                 * If it doesn't exist, revert to the old behavior.
+                 */
+                if (mc_stat (tmp, &st) == -1 && mc_stat (fname, &st) != -1)
+                {
+                    mc_run_param0 = fname;
+                    mc_args__edit_start_line = atoi (p);
+                }
+                else
+                {
+                    g_free (fname);
+                    goto try_plus_filename;
+                }
+            }
+            else
+            {
+              try_plus_filename:
+                if (*tmp == '+' && g_ascii_isdigit ((gchar) tmp[1]))
+                {
+                    int start_line;;
+
+                    start_line = atoi (tmp);
+                    if (start_line > 0)
+                    {
+                        char *file;
+
+                        file = (argc > 1) ? argv[2] : NULL;
+                        if (file != NULL)
+                        {
+                            tmp = file;
+                            mc_args__edit_start_line = start_line;
+                        }
+                    }
+                }
+                mc_run_param0 = g_strdup (tmp);
+            }
+        }
+        mc_run_mode = MC_RUN_EDITOR;
+    }
+    else if (strncmp (base, "mcv", 3) == 0 || strcmp (base, "view") == 0)
+    {
+        /* mcv* or view is link to mc */
+
+        if (tmp != NULL)
+            mc_run_param0 = g_strdup (tmp);
+        else
+        {
+            fprintf (stderr, "%s\n", _("No arguments given to the viewer."));
+            exit (EXIT_FAILURE);
+        }
+        mc_run_mode = MC_RUN_VIEWER;
+    }
+#ifdef USE_DIFF_VIEW
+    else if (strncmp (base, "mcd", 3) == 0 || strcmp (base, "diff") == 0)
+    {
+        /* mcd* or diff is link to mc */
+
+        if (argc < 3)
+        {
+            fprintf (stderr, "%s\n", _("There 2 files are required to diffviewer."));
+            exit (EXIT_FAILURE);
+        }
+
+        if (tmp != NULL)
+        {
+            mc_run_param0 = g_strdup (tmp);
+            tmp = (argc > 1) ? argv[2] : NULL;
+            if (tmp != NULL)
+                mc_run_param1 = g_strdup (tmp);
+            mc_run_mode = MC_RUN_DIFFVIEWER;
+        }
+    }
+#endif /* USE_DIFF_VIEW */
+    else
+    {
+        /* MC is run as mc */
+
+        switch (mc_run_mode)
+        {
+        case MC_RUN_EDITOR:
+        case MC_RUN_VIEWER:
+            /* mc_run_param0 is set up in parse_mc_e_argument() and parse_mc_v_argument() */
+            break;
+
+        case MC_RUN_DIFFVIEWER:
+            /* not implemented yet */
+            break;
+
+        case MC_RUN_FULL:
+        default:
+            /* sets the current dir and the other dir */
+            if (tmp != NULL)
+            {
+                mc_run_param0 = g_strdup (tmp);
+                tmp = (argc > 1) ? argv[2] : NULL;
+                if (tmp != NULL)
+                    mc_run_param1 = g_strdup (tmp);
+            }
+            mc_run_mode = MC_RUN_FULL;
+            break;
+        }
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+mc_args_process (int argc, char *argv[])
+{
+    if (mc_args__show_version)
     {
         show_version ();
         return FALSE;
@@ -393,6 +566,8 @@ mc_args_process (void)
     if (mc_args__nouse_subshell)
         use_subshell = 0;
 #endif /* HAVE_SUBSHELL_SUPPORT */
+
+    mc_setup_by_args (argc, argv);
 
     return TRUE;
 }
@@ -417,12 +592,44 @@ mc_args__convert_help_to_syscharset (const gchar * charset, const gchar * error_
 
 /* --------------------------------------------------------------------------------------------- */
 
+static gboolean
+parse_mc_e_argument (const gchar *option_name, const gchar *value,
+                     gpointer data, GError **error)
+{
+    (void) option_name;
+    (void) data;
+    (void) error;
+
+    mc_run_mode = MC_RUN_EDITOR;
+    mc_run_param0 = g_strdup (value);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+parse_mc_v_argument (const gchar *option_name, const gchar *value,
+                     gpointer data, GError **error)
+{
+    (void) option_name;
+    (void) data;
+    (void) error;
+
+    mc_run_mode = MC_RUN_VIEWER;
+    mc_run_param0 = g_strdup (value);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 /*** public functions ****************************************************************************/
 
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_args_handle (int *argc, char ***argv, const gchar * translation_domain)
+mc_args_handle (int argc, char **argv, const char *translation_domain)
 {
     GError *error = NULL;
     const gchar *_system_codepage = str_detect_termencoding ();
@@ -444,7 +651,6 @@ mc_args_handle (int *argc, char ***argv, const gchar * translation_domain)
     g_option_context_set_main_group (context, main_group);
     g_option_group_set_translation_domain (main_group, translation_domain);
 
-
     terminal_group = g_option_group_new ("terminal", _("Terminal options"),
                                          _("Terminal options"), NULL, NULL);
 
@@ -452,14 +658,13 @@ mc_args_handle (int *argc, char ***argv, const gchar * translation_domain)
     g_option_context_add_group (context, terminal_group);
     g_option_group_set_translation_domain (terminal_group, translation_domain);
 
-
     color_group = mc_args_new_color_group ();
 
     g_option_group_add_entries (color_group, argument_color_table);
     g_option_context_add_group (context, color_group);
     g_option_group_set_translation_domain (color_group, translation_domain);
 
-    if (!g_option_context_parse (context, argc, argv, &error))
+    if (!g_option_context_parse (context, &argc, &argv, &error))
     {
         if (error != NULL)
         {
@@ -497,7 +702,7 @@ mc_args_handle (int *argc, char ***argv, const gchar * translation_domain)
         bind_textdomain_codeset ("mc", _system_codepage);
 #endif
 
-    return mc_args_process ();
+    return mc_args_process (argc, argv);
 }
 
 /* --------------------------------------------------------------------------------------------- */

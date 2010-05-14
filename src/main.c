@@ -277,9 +277,6 @@ mc_run_mode_t mc_run_mode = MC_RUN_FULL;
 char *mc_run_param0 = NULL;
 char *mc_run_param1 = NULL;
 
-/* Line to start the editor on */
-static int edit_one_file_start_line = 0;
-
 /* Used so that widgets know if they are being destroyed or
    shut down */
 int midnight_shutdown = 0;
@@ -1904,7 +1901,7 @@ mc_maybe_editor_or_viewer (void)
     {
 #ifdef USE_INTERNAL_EDIT
     case MC_RUN_EDITOR:
-        edit_file (mc_run_param0, edit_one_file_start_line);
+        edit_file (mc_run_param0, mc_args__edit_start_line);
         break;
 #endif /* USE_INTERNAL_EDIT */
     case MC_RUN_VIEWER:
@@ -2087,133 +2084,6 @@ init_sigchld (void)
     }
 }
 
-static void
-mc_main__setup_by_args (int argc, char *argv[])
-{
-    const char *base;
-    char *tmp;
-
-    if (mc_args__nomouse)
-        use_mouse_p = MOUSE_DISABLED;
-
-#ifdef USE_NETCODE
-    if (mc_args__netfs_logfile != NULL)
-    {
-        mc_setctl ("/#ftp:", VFS_SETCTL_LOGFILE, (void *) mc_args__netfs_logfile);
-#ifdef ENABLE_VFS_SMB
-        smbfs_set_debugf (mc_args__netfs_logfile);
-#endif /* ENABLE_VFS_SMB */
-    }
-
-#ifdef ENABLE_VFS_SMB
-    if (mc_args__debug_level != 0)
-        smbfs_set_debug (mc_args__debug_level);
-#endif /* ENABLE_VFS_SMB */
-#endif /* USE_NETCODE */
-
-    base = x_basename (argv[0]);
-    tmp = (argc > 0) ? argv[1] : NULL;
-
-    if (!STRNCOMP (base, "mce", 3) || !STRCOMP (base, "vi"))
-    {
-        mc_run_param0 = g_strdup ("");
-        if (tmp != NULL)
-        {
-            /*
-             * Check for filename:lineno, followed by an optional colon.
-             * This format is used by many programs (especially compilers)
-             * in error messages and warnings. It is supported so that
-             * users can quickly copy and paste file locations.
-             */
-            char *end = tmp + strlen (tmp), *p = end;
-            if (p > tmp && p[-1] == ':')
-                p--;
-            while (p > tmp && g_ascii_isdigit ((gchar) p[-1]))
-                p--;
-            if (tmp < p && p < end && p[-1] == ':')
-            {
-                struct stat st;
-                gchar *fname = g_strndup (tmp, p - 1 - tmp);
-                /*
-                 * Check that the file before the colon actually exists.
-                 * If it doesn't exist, revert to the old behavior.
-                 */
-                if (mc_stat (tmp, &st) == -1 && mc_stat (fname, &st) != -1)
-                {
-                    mc_run_param0 = fname;
-                    edit_one_file_start_line = atoi (p);
-                }
-                else
-                {
-                    g_free (fname);
-                    goto try_plus_filename;
-                }
-            }
-            else
-            {
-              try_plus_filename:
-                if (*tmp == '+' && g_ascii_isdigit ((gchar) tmp[1]))
-                {
-                    int start_line = atoi (tmp);
-                    if (start_line > 0)
-                    {
-                        char *file = (argc > 1) ? argv[2] : NULL;
-                        if (file)
-                        {
-                            tmp = file;
-                            edit_one_file_start_line = start_line;
-                        }
-                    }
-                }
-                mc_run_param0 = g_strdup (tmp);
-            }
-        }
-        mc_run_mode = MC_RUN_EDITOR;
-    }
-    else if (!STRNCOMP (base, "mcv", 3) || !STRCOMP (base, "view"))
-    {
-        if (tmp != NULL)
-            mc_run_param0 = g_strdup (tmp);
-        else
-        {
-            fputs ("No arguments given to the viewer\n", stderr);
-            exit (EXIT_FAILURE);
-        }
-        mc_run_mode = MC_RUN_VIEWER;
-    }
-#ifdef USE_DIFF_VIEW
-    else if (!STRNCOMP (base, "mcd", 3) || !STRCOMP (base, "diff"))
-    {
-        if (argc < 3)
-        {
-            fputs ("There 2 files are required to diffviewer\n", stderr);
-            exit (EXIT_FAILURE);
-        }
-
-        if (tmp != NULL)
-        {
-            mc_run_param0 = g_strdup (tmp);
-            tmp = (argc > 1) ? argv[2] : NULL;
-            if (tmp != NULL)
-                mc_run_param1 = g_strdup (tmp);
-            mc_run_mode = MC_RUN_DIFFVIEWER;
-        }
-    }
-#endif /* USE_DIFF_VIEW */
-    else
-    {
-        /* sets the current dir and the other dir */
-        if (tmp != NULL)
-        {
-            mc_run_param0 = g_strdup (tmp);
-            tmp = (argc > 1) ? argv[2] : NULL;
-            if (tmp != NULL)
-                mc_run_param1 = g_strdup (tmp);
-        }
-        mc_run_mode = MC_RUN_FULL;
-    }
-}
-
 int
 main (int argc, char *argv[])
 {
@@ -2244,10 +2114,8 @@ main (int argc, char *argv[])
     SLtt_Ignore_Beep = 1;
 #endif
 
-    if (!mc_args_handle (&argc, &argv, "mc"))
-        return 1;
-
-    mc_main__setup_by_args (argc, argv);
+    if (!mc_args_handle (argc, argv, "mc"))
+        exit (EXIT_FAILURE);
 
     /* NOTE: This has to be called before tty_init or whatever routine
        calls any define_sequence */
