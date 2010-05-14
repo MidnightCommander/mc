@@ -37,8 +37,8 @@
 #include "lib/tty/color.h"
 #include "lib/tty/key.h"
 
-#include "lib/skin.h"                   /* EDITOR_NORMAL_COLOR */
-#include "lib/vfs/mc-vfs/vfs.h"         /* mc_opendir, mc_readdir, mc_closedir, */
+#include "lib/skin.h"           /* EDITOR_NORMAL_COLOR */
+#include "lib/vfs/mc-vfs/vfs.h" /* mc_opendir, mc_readdir, mc_closedir, */
 
 #include "src/cmddef.h"
 #include "src/keybind.h"
@@ -48,9 +48,9 @@
 #include "src/wtools.h"
 #include "src/charsets.h"
 #include "src/history.h"
-#include "src/panel.h"                  /* Needed for current_panel and other_panel */
-#include "src/layout.h"                 /* Needed for get_current_index and get_other_panel */
-#include "src/main.h"                   /* mc_run_mode */
+#include "src/panel.h"          /* Needed for current_panel and other_panel */
+#include "src/layout.h"         /* Needed for get_current_index and get_other_panel */
+#include "src/main.h"           /* mc_run_mode */
 #include "src/selcodepage.h"
 
 #include "ydiff.h"
@@ -86,19 +86,28 @@ do { \
 #define HDIFF_MINCTX	5
 #define HDIFF_DEPTH	10
 
-#define TAB_SKIP(ts, pos)	((ts) - (pos) % (ts))
-
 #define FILE_DIRTY(fs)	\
     do {		\
 	(fs)->pos = 0;	\
 	(fs)->len = 0;	\
     } while (0)
 
+
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/
 
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+static inline int
+TAB_SKIP (int ts, int pos)
+{
+    if (ts > 0 && ts < 9)
+        return ts - pos % ts;
+    else
+        return 8 - pos % 8;
+}
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -188,8 +197,7 @@ open_temp (void **name)
     if (fd == -1)
     {
         message (D_ERROR, MSG_ERROR,
-        _(" Cannot create temporary diff file \n %s "),
-        unix_error_string (errno));
+                 _(" Cannot create temporary diff file \n %s "), unix_error_string (errno));
         return -1;
     }
     *name = diff_file_name;
@@ -581,7 +589,7 @@ p_close (FBUF * fs)
  */
 
 static int
-dview_get_byte (char * str, gboolean * result)
+dview_get_byte (char *str, gboolean * result)
 {
     if (str == NULL)
     {
@@ -602,7 +610,7 @@ dview_get_byte (char * str, gboolean * result)
  */
 
 static int
-dview_get_utf (char * str, int * char_width, gboolean * result)
+dview_get_utf (char *str, int *char_width, gboolean * result)
 {
     int res = -1;
     gunichar ch;
@@ -1451,7 +1459,7 @@ cvt_mget (const char *src, size_t srcsize, char *dst, int dstsize, int skip, int
                     int w;
 
                     skip--;
-                    utf_ch = dview_get_utf ((char *)src, &w, &res);
+                    utf_ch = dview_get_utf ((char *) src, &w, &res);
                     if (w > 1)
                         skip += w - 1;
                     if (!g_unichar_isprint (utf_ch))
@@ -1982,26 +1990,26 @@ static int
 find_prev_hunk (const GArray * a, int pos)
 {
 #if 1
-    while (pos > 0 && ((DIFFLN *) &g_array_index (a, DIFFLN, pos))->ch != EQU_CH)
+    while (pos > 0 && ((DIFFLN *) & g_array_index (a, DIFFLN, pos))->ch != EQU_CH)
     {
         pos--;
     }
-    while (pos > 0 && ((DIFFLN *) &g_array_index (a, DIFFLN, pos))->ch == EQU_CH)
+    while (pos > 0 && ((DIFFLN *) & g_array_index (a, DIFFLN, pos))->ch == EQU_CH)
     {
         pos--;
     }
-    while (pos > 0 && ((DIFFLN *) &g_array_index (a, DIFFLN, pos))->ch != EQU_CH)
+    while (pos > 0 && ((DIFFLN *) & g_array_index (a, DIFFLN, pos))->ch != EQU_CH)
     {
         pos--;
     }
     if (pos > 0 && (size_t) pos < a->len)
         pos++;
 #else
-    while (pos > 0 && ((DIFFLN *) &g_array_index (a, DIFFLN, pos - 1))->ch == EQU_CH)
+    while (pos > 0 && ((DIFFLN *) & g_array_index (a, DIFFLN, pos - 1))->ch == EQU_CH)
     {
         pos--;
     }
-    while (pos > 0 && ((DIFFLN *) &g_array_index (a, DIFFLN, pos - 1))->ch != EQU_CH)
+    while (pos > 0 && ((DIFFLN *) & g_array_index (a, DIFFLN, pos - 1))->ch != EQU_CH)
     {
         pos--;
     }
@@ -2015,11 +2023,11 @@ find_prev_hunk (const GArray * a, int pos)
 static size_t
 find_next_hunk (const GArray * a, size_t pos)
 {
-    while (pos < a->len && ((DIFFLN *) &g_array_index (a, DIFFLN, pos))->ch != EQU_CH)
+    while (pos < a->len && ((DIFFLN *) & g_array_index (a, DIFFLN, pos))->ch != EQU_CH)
     {
         pos++;
     }
-    while (pos < a->len && ((DIFFLN *) &g_array_index (a, DIFFLN, pos))->ch == EQU_CH)
+    while (pos < a->len && ((DIFFLN *) & g_array_index (a, DIFFLN, pos))->ch == EQU_CH)
     {
         pos++;
     }
@@ -2051,7 +2059,7 @@ get_current_hunk (WDiff * dview, int *start_line1, int *end_line1, int *start_li
     *end_line2 = 1;
 
     pos = dview->skip_rows;
-    ch = ((DIFFLN *) &g_array_index (a0, DIFFLN, pos))->ch;
+    ch = ((DIFFLN *) & g_array_index (a0, DIFFLN, pos))->ch;
     if (ch != EQU_CH)
     {
         switch (ch)
@@ -2066,21 +2074,21 @@ get_current_hunk (WDiff * dview, int *start_line1, int *end_line1, int *start_li
             res = DIFF_CHG;
             break;
         }
-        while (pos > 0 && ((DIFFLN *) &g_array_index (a0, DIFFLN, pos))->ch != EQU_CH)
+        while (pos > 0 && ((DIFFLN *) & g_array_index (a0, DIFFLN, pos))->ch != EQU_CH)
         {
             pos--;
         }
         if (pos > 0)
         {
-            *start_line1 = ((DIFFLN *) &g_array_index (a0, DIFFLN, pos))->line + 1;
-            *start_line2 = ((DIFFLN *) &g_array_index (a1, DIFFLN, pos))->line + 1;
+            *start_line1 = ((DIFFLN *) & g_array_index (a0, DIFFLN, pos))->line + 1;
+            *start_line2 = ((DIFFLN *) & g_array_index (a1, DIFFLN, pos))->line + 1;
         }
         pos = dview->skip_rows;
-        while (pos < a0->len && ((DIFFLN *) &g_array_index (a0, DIFFLN, pos))->ch != EQU_CH)
+        while (pos < a0->len && ((DIFFLN *) & g_array_index (a0, DIFFLN, pos))->ch != EQU_CH)
         {
             int l0, l1;
-            l0 = ((DIFFLN *) &g_array_index (a0, DIFFLN, pos))->line;
-            l1 = ((DIFFLN *) &g_array_index (a1, DIFFLN, pos))->line;
+            l0 = ((DIFFLN *) & g_array_index (a0, DIFFLN, pos))->line;
+            l1 = ((DIFFLN *) & g_array_index (a1, DIFFLN, pos))->line;
             if (l0 > 0)
                 *end_line1 = max (*start_line1, l0);
             if (l1 > 0)
@@ -2092,7 +2100,7 @@ get_current_hunk (WDiff * dview, int *start_line1, int *end_line1, int *start_li
 }
 
 static void
-dview_remove_hunk (WDiff * dview,  FILE * merge_file, int from1, int to1)
+dview_remove_hunk (WDiff * dview, FILE * merge_file, int from1, int to1)
 {
     int line;
     char buf[BUF_10K];
@@ -2195,8 +2203,8 @@ do_merge_hunk (WDiff * dview)
             if (!dview->merged)
             {
                 message (D_ERROR, MSG_ERROR,
-                _(" Cannot create backup file \n %s%s \n %s "),
-                dview->file[0], "~~~", unix_error_string (errno));
+                         _(" Cannot create backup file \n %s%s \n %s "),
+                         dview->file[0], "~~~", unix_error_string (errno));
                 return;
             }
 
@@ -2265,7 +2273,7 @@ dview_compute_areas (WDiff * dview)
 
 static int
 dview_init (WDiff * dview, const char *args, const char *file1, const char *file2,
-           const char *label1, const char *label2, DSRC dsrc)
+            const char *label1, const char *label2, DSRC dsrc)
 {
     int ndiff;
     FBUF *f[2];
@@ -2337,8 +2345,8 @@ dview_init (WDiff * dview, const char *args, const char *file1, const char *file
     dview->ord = 0;
     dview->full = 0;
 
-    dview->search.handle=NULL;
-    dview->search.last_string=NULL;
+    dview->search.handle = NULL;
+    dview->search.last_string = NULL;
     dview->search.last_found_line = -1;
     dview->search.last_accessed_num_line = 0;
 
@@ -2420,6 +2428,7 @@ dview_diff_options (WDiff * dview)
         dview_reread (dview);
     }
 }
+
 /* --------------------------------------------------------------------------------------------- */
 
 static void
@@ -2457,10 +2466,13 @@ dview_display_file (const WDiff * dview, int ord, int r, int c, int height, int 
     int display_symbols = dview->display_symbols;
     int display_numbers = dview->display_numbers;
     int show_cr = dview->show_cr;
-    int tab_size = dview->tab_size;
+    int tab_size = 8;
     const DIFFLN *p;
     int nwidth = display_numbers;
     int xwidth = display_symbols + display_numbers;
+    if (dview->tab_size > 0 && dview->tab_size < 9)
+        tab_size = dview->tab_size;
+
     if (xwidth)
     {
         if (xwidth > width && display_symbols)
@@ -2495,7 +2507,7 @@ dview_display_file (const WDiff * dview, int ord, int r, int c, int height, int 
     {
         int ch, next_ch, col;
         size_t cnt;
-        p = (DIFFLN *) &g_array_index (dview->a[ord], DIFFLN, i);
+        p = (DIFFLN *) & g_array_index (dview->a[ord], DIFFLN, i);
         ch = p->ch;
         tty_setcolor (NORMAL_COLOR);
         if (display_symbols)
@@ -2535,7 +2547,7 @@ dview_display_file (const WDiff * dview, int ord, int r, int c, int height, int 
                         else
                             k = width;
                         cvt_mgeta (p->p, p->u.len, buf, k, skip, tab_size, show_cr,
-                                g_ptr_array_index (dview->hdiff, i), ord, att);
+                                   g_ptr_array_index (dview->hdiff, i), ord, att);
                         tty_gotoyx (r + j, c);
                         col = 0;
                         for (cnt = 0; cnt < strlen (buf) && col < width; cnt++)
@@ -2556,17 +2568,23 @@ dview_display_file (const WDiff * dview, int ord, int r, int c, int height, int 
                             {
                                 tty_setcolor (att[cnt] ? DFF_CHH_COLOR : DFF_CHG_COLOR);
 #ifdef HAVE_CHARSET
-                                if (utf8_display) {
-                                    if (!dview->utf8) {
-                                        next_ch = convert_from_8bit_to_utf_c ((unsigned char) next_ch, dview->converter);
+                                if (utf8_display)
+                                {
+                                    if (!dview->utf8)
+                                    {
+                                        next_ch =
+                                            convert_from_8bit_to_utf_c ((unsigned char) next_ch,
+                                                                        dview->converter);
                                     }
-                                } else if (dview->utf8)
-                                    next_ch = convert_from_utf_to_current_c (next_ch, dview->converter);
+                                }
+                                else if (dview->utf8)
+                                    next_ch =
+                                        convert_from_utf_to_current_c (next_ch, dview->converter);
                                 else
 #endif
                                     next_ch = convert_to_display_c (next_ch);
 
-                                    tty_print_anychar (next_ch);
+                                tty_print_anychar (next_ch);
                                 col++;
                             }
                         }
@@ -2628,11 +2646,15 @@ dview_display_file (const WDiff * dview, int ord, int r, int c, int height, int 
             if (ch_res)
             {
 #ifdef HAVE_CHARSET
-                if (utf8_display) {
-                    if (!dview->utf8) {
-                        next_ch = convert_from_8bit_to_utf_c ((unsigned char) next_ch, dview->converter);
+                if (utf8_display)
+                {
+                    if (!dview->utf8)
+                    {
+                        next_ch =
+                            convert_from_8bit_to_utf_c ((unsigned char) next_ch, dview->converter);
                     }
-                } else if (dview->utf8)
+                }
+                else if (dview->utf8)
                     next_ch = convert_from_utf_to_current_c (next_ch, dview->converter);
                 else
 #endif
@@ -2869,6 +2891,7 @@ static void
 dview_load_options (WDiff * dview)
 {
     gboolean show_numbers, show_symbols;
+    int tab_size;
 
     show_symbols = mc_config_get_bool (mc_main_config, "DiffView", "show_symbols", FALSE);
     if (show_symbols)
@@ -2876,7 +2899,11 @@ dview_load_options (WDiff * dview)
     show_numbers = mc_config_get_bool (mc_main_config, "DiffView", "show_numbers", FALSE);
     if (show_numbers)
         dview->display_numbers = calc_nwidth ((const GArray ** const) dview->a);
-    dview->tab_size = mc_config_get_int (mc_main_config, "DiffView", "tab_size", 8);
+    tab_size = mc_config_get_int (mc_main_config, "DiffView", "tab_size", 8);
+    if (tab_size > 0 && tab_size < 9)
+        dview->tab_size = tab_size;
+    else
+        dview->tab_size = 8;
 
     dview->opt.quality = mc_config_get_int (mc_main_config, "DiffView", "diff_quality", 0);
 
@@ -2905,7 +2932,8 @@ dview_ok_to_exit (WDiff * dview)
     if (!dview->merged)
         return res;
     switch (query_dialog
-            (_("Quit"), _(" File was modified, Save with exit? "), D_NORMAL, 2, _("&Yes"), _("&No")))
+            (_("Quit"), _(" File was modified, Save with exit? "), D_NORMAL, 2, _("&Yes"),
+             _("&No")))
     {
     case -1:
         res = FALSE;
@@ -2987,10 +3015,12 @@ dview_execute_cmd (WDiff * dview, unsigned long command)
         dview_redo (dview);
         break;
     case CK_DiffNextHunk:
-        dview->skip_rows = dview->search.last_accessed_num_line = find_next_hunk (dview->a[0], dview->skip_rows);
+        dview->skip_rows = dview->search.last_accessed_num_line =
+            find_next_hunk (dview->a[0], dview->skip_rows);
         break;
     case CK_DiffPrevHunk:
-        dview->skip_rows = dview->search.last_accessed_num_line = find_prev_hunk (dview->a[0], dview->skip_rows);
+        dview->skip_rows = dview->search.last_accessed_num_line =
+            find_prev_hunk (dview->a[0], dview->skip_rows);
         break;
     case CK_DiffGoto:
         dview_goto_cmd (dview, TRUE);
@@ -3210,7 +3240,7 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
     add_widget (dview_dlg, dview);
     add_widget (dview_dlg, bar);
 
-    error = dview_init (dview, "-a", file1, file2, label1, label2, DATA_SRC_MEM);        /* XXX binary diff? */
+    error = dview_init (dview, "-a", file1, file2, label1, label2, DATA_SRC_MEM);       /* XXX binary diff? */
 
     /* Please note that if you add another widget,
      * you have to modify dview_adjust_size to
