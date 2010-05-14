@@ -904,13 +904,6 @@ edit_init (WEdit * edit, int lines, int columns, const char *filename, long line
     edit->stack_size = START_STACK_SIZE;
     edit->stack_size_mask = START_STACK_SIZE - 1;
     edit->undo_stack = g_malloc0 ((edit->stack_size + 10) * sizeof (long));
-    if (edit_load_file (edit))
-    {
-        /* edit_load_file already gives an error message */
-        if (to_free)
-            g_free (edit);
-        return 0;
-    }
     edit->utf8 = 0;
     edit->converter = str_cnv_from_term;
 #ifdef HAVE_CHARSET
@@ -933,6 +926,14 @@ edit_init (WEdit * edit, int lines, int columns, const char *filename, long line
             edit->utf8 = str_isutf8 (cp_id);
     }
 #endif
+
+    if (edit_load_file (edit))
+    {
+        /* edit_load_file already gives an error message */
+        if (to_free)
+            g_free (edit);
+        return 0;
+    }
 
     edit->loading_done = 1;
     edit->modified = 0;
