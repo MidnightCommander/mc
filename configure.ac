@@ -158,10 +158,10 @@ AC_CHECK_FUNCS([\
 	atoll \
 	cfgetospeed \
 	initgroups isascii \
-	memcpy memset \
 	setreuid statfs sysconf \
 	tcgetattr tcsetattr truncate \
-	strverscmp
+	strverscmp \
+	realpath
 ])
 
 dnl
