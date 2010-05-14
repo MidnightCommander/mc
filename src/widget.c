@@ -60,6 +60,7 @@
 #include "keybind.h"            /* global_keymap_t */
 #include "panel.h"              /* current_panel */
 #include "main.h"               /* confirm_history_cleanup */
+#include "setup.h"              /* num_history_items_recorded */
 
 static void
 widget_selectcolor (Widget * w, gboolean focused, gboolean hotkey)

@@ -97,32 +97,11 @@ typedef struct format_e
     const char *id;
 } format_e;
 
-enum
-{
-    QSEARCH_CASE_INSENSITIVE = 0,       /* quick search in case insensitive mode */
-    QSEARCH_CASE_SENSITIVE = 1, /* quick search in case sensitive mode */
-    QSEARCH_PANEL_CASE = 2      /* quick search get value from panel case_sensitive */
-};
-
-int quick_search_case_sensitive = QSEARCH_PANEL_CASE;
-
 /* If true, show the mini-info on the panel */
 int show_mini_info = 1;
 
-/* If true, then use stat() on the cwd to determine directory changes */
-int fast_reload = 0;
-
 /* If true, use some usability hacks by Torben */
 int torben_fj_mode = 0;
-
-/* If true, up/down keys scroll the pane listing by pages */
-int panel_scroll_pages = 1;
-
-/* If 1, we use permission hilighting */
-int permission_mode = 0;
-
-/* If 1 - then add per file type hilighting */
-int filetype_mode = 1;
 
 /* The hook list for the select file function */
 Hook *select_file_hook = 0;
@@ -266,7 +245,7 @@ string_file_size (file_entry * fe, int len)
     else
 #endif
     {
-        size_trunc_len (buffer, (unsigned int) len, fe->st.st_size, 0);
+        size_trunc_len (buffer, (unsigned int) len, fe->st.st_size, 0, panels_options.kilobyte_si);
     }
     return buffer;
 }
@@ -676,7 +655,7 @@ file_compute_color (int attr, file_entry * fe)
         return (NORMAL_COLOR);
     case NORMAL:
     default:
-        if (!filetype_mode)
+        if (!panels_options.filetype_mode)
             return (NORMAL_COLOR);
     }
 
@@ -727,7 +706,7 @@ format_file (char *dest, int limit, WPanel * panel, int file_index, int width, i
                 break;
 
             perm = 0;
-            if (permission_mode)
+            if (panels_options.permission_mode)
             {
                 if (!strcmp (format->id, "perm"))
                     perm = 1;
@@ -906,7 +885,7 @@ display_total_marked_size (WPanel * panel, int y, int x, gboolean size_only)
      */
     g_snprintf (b_bytes, sizeof (b_bytes),
                 ngettext ("%s byte", "%s bytes", (unsigned long) panel->total),
-                size_trunc_sep (panel->total));
+                size_trunc_sep (panel->total, panels_options.kilobyte_si));
     if (!size_only)
         g_snprintf (buffer, sizeof (buffer),
                     ngettext ("%s in %d file", "%s in %d files", panel->marked),
@@ -973,8 +952,8 @@ show_free_space (WPanel * panel)
     if (myfs_stats.avail > 0 || myfs_stats.total > 0)
     {
         char buffer1[6], buffer2[6], tmp[BUF_SMALL];
-        size_trunc_len (buffer1, sizeof (buffer1) - 1, myfs_stats.avail, 1);
-        size_trunc_len (buffer2, sizeof (buffer2) - 1, myfs_stats.total, 1);
+        size_trunc_len (buffer1, sizeof (buffer1) - 1, myfs_stats.avail, 1, panels_options.kilobyte_si);
+        size_trunc_len (buffer2, sizeof (buffer2) - 1, myfs_stats.total, 1, panels_options.kilobyte_si);
         g_snprintf (tmp, sizeof (tmp), " %s/%s (%d%%) ", buffer1, buffer2,
                     myfs_stats.total > 0 ?
                     (int) (100 * (double) myfs_stats.avail / myfs_stats.total) : 0);
@@ -1004,10 +983,9 @@ show_dir (WPanel * panel)
     widget_move (&panel->widget, 0, 1);
     tty_print_string (panel_history_prev_item_sign);
 
-    tmp = (show_dot_files) ? panel_hiddenfiles_sign_show : panel_hiddenfiles_sign_hide;
-    tmp =
-        g_strdup_printf ("%s[%s]%s", tmp, panel_history_show_list_sign,
-                         panel_history_next_item_sign);
+    tmp = panels_options.show_dot_files ? panel_hiddenfiles_sign_show : panel_hiddenfiles_sign_hide;
+    tmp = g_strdup_printf ("%s[%s]%s", tmp, panel_history_show_list_sign,
+                            panel_history_next_item_sign);
 
     widget_move (&panel->widget, 0, panel->widget.cols - 6);
     tty_print_string (tmp);
@@ -1033,7 +1011,8 @@ show_dir (WPanel * panel)
                 char buffer[BUF_SMALL];
 
                 g_snprintf (buffer, sizeof (buffer), " %s ",
-                            size_trunc_sep (panel->dir.list[panel->selected].st.st_size));
+                            size_trunc_sep (panel->dir.list[panel->selected].st.st_size,
+                                            panels_options.kilobyte_si));
                 tty_setcolor (NORMAL_COLOR);
                 widget_move (&panel->widget, panel->widget.lines - 1, 4);
                 tty_print_string (buffer);
@@ -1435,7 +1414,7 @@ panel_reload (WPanel * panel)
 {
     struct stat current_stat;
 
-    if (fast_reload && !stat (panel->cwd, &current_stat)
+    if (panels_options.fast_reload && !stat (panel->cwd, &current_stat)
         && current_stat.st_ctime == panel->dir_stat.st_ctime
         && current_stat.st_mtime == panel->dir_stat.st_mtime)
         return;
@@ -1957,21 +1936,19 @@ mini_status_format (WPanel * panel)
 static cb_ret_t
 maybe_cd (int move_up_dir)
 {
-    if (navigate_with_arrows)
+    if (panels_options.navigate_with_arrows && (cmdline->buffer[0] == '\0'))
     {
-        if (!cmdline->buffer[0])
+        if (move_up_dir)
         {
-            if (move_up_dir)
-            {
-                do_cd ("..", cd_exact);
-                return MSG_HANDLED;
-            }
-            if (S_ISDIR (selection (current_panel)->st.st_mode)
-                || link_isdir (selection (current_panel)))
-            {
-                do_cd (selection (current_panel)->fname, cd_exact);
-                return MSG_HANDLED;
-            }
+            do_cd ("..", cd_exact);
+            return MSG_HANDLED;
+        }
+
+        if (S_ISDIR (selection (current_panel)->st.st_mode)
+            || link_isdir (selection (current_panel)))
+        {
+            do_cd (selection (current_panel)->fname, cd_exact);
+            return MSG_HANDLED;
         }
     }
     return MSG_NOT_HANDLED;
@@ -2057,7 +2034,7 @@ move_down (WPanel * panel)
 
     unselect_item (panel);
     panel->selected++;
-    if (panel->selected - panel->top_file == ITEMS (panel) && panel_scroll_pages)
+    if (panels_options.scroll_pages && panel->selected - panel->top_file == ITEMS (panel))
     {
         /* Scroll window half screen */
         panel->top_file += ITEMS (panel) / 2;
@@ -2076,7 +2053,7 @@ move_up (WPanel * panel)
 
     unselect_item (panel);
     panel->selected--;
-    if (panel->selected < panel->top_file && panel_scroll_pages)
+    if (panels_options.scroll_pages && panel->selected < panel->top_file)
     {
         /* Scroll window half screen */
         panel->top_file -= ITEMS (panel) / 2;
@@ -2357,7 +2334,7 @@ static void
 do_mark_file (WPanel * panel, mark_act_t do_move)
 {
     do_file_mark (panel, panel->selected, selection (panel)->f.marked ? 0 : 1);
-    if ((mark_moves_down && do_move == MARK_DOWN) || do_move == MARK_FORCE_DOWN)
+    if ((panels_options.mark_moves_down && do_move == MARK_DOWN) || do_move == MARK_FORCE_DOWN)
         move_down (panel);
     else if (do_move == MARK_FORCE_UP)
         move_up (panel);
@@ -2438,7 +2415,7 @@ do_search (WPanel * panel, int c_code)
     search = mc_search_new (esc_str, -1);
     search->search_type = MC_SEARCH_T_GLOB;
     search->is_entire_line = TRUE;
-    switch (quick_search_case_sensitive)
+    switch (panels_options.qsearch_mode)
     {
     case QSEARCH_CASE_SENSITIVE:
         search->is_case_sensitive = TRUE;
@@ -3311,7 +3288,7 @@ do_panel_event (Gpm_Event * event, WPanel * panel, gboolean * redir)
     {
         if (is_active)
         {
-            if (panel->top_file > 0)
+            if (panels_options.mouse_move_pages && (panel->top_file > 0))
                 prev_page (panel);
             else                /* We are in first page */
                 move_up (panel);
@@ -3323,7 +3300,8 @@ do_panel_event (Gpm_Event * event, WPanel * panel, gboolean * redir)
     {
         if (is_active)
         {
-            if (panel->top_file + ITEMS (panel) < panel->count)
+            if (panels_options.mouse_move_pages
+                    && (panel->top_file + ITEMS (panel) < panel->count))
                 next_page (panel);
             else                /* We are in last page */
                 move_down (panel);
@@ -3339,32 +3317,20 @@ do_panel_event (Gpm_Event * event, WPanel * panel, gboolean * redir)
         if (!is_active)
             change_panel ();
 
-        if (event->y <= 0)
-        {
-            mark_if_marking (panel, event);
-            if (mouse_move_pages)
-                prev_page (panel);
-            else
-                move_up (panel);
-            return MOU_REPEAT;
-        }
+        if (event->y > lines)
+            return MOU_NORMAL;
 
-        if (!((panel->top_file + event->y <= panel->count) && event->y <= lines))
-        {
-            mark_if_marking (panel, event);
-            if (mouse_move_pages)
-                next_page (panel);
-            else
-                move_down (panel);
-            return MOU_REPEAT;
-        }
-
-        my_index = panel->top_file + event->y - 1;
-        if (panel->split && (event->x > ((panel->widget.cols - 2) / 2)))
-            my_index += llines (panel);
-
-        if (my_index >= panel->count)
+        if (panel->top_file + event->y > panel->count)
             my_index = panel->count - 1;
+        else
+        {
+            my_index = panel->top_file + event->y - 1;
+            if (panel->split && (event->x > ((panel->widget.cols - 2) / 2)))
+                my_index += llines (panel);
+
+            if (my_index >= panel->count)
+                my_index = panel->count - 1;
+        }
 
         if (my_index != panel->selected)
         {

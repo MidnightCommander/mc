@@ -37,15 +37,7 @@
 #include "wtools.h"
 #include "treestore.h"
 #include "dir.h"
-
-/* If true show files starting with a dot */
-int show_dot_files = 1;
-
-/* If true show files ending in ~ */
-int show_backups = 1;
-
-/* If false then directories are shown separately from files */
-int mix_all_files = 0;
+#include "setup.h"              /* panels_options */
 
 /* Reverse flag */
 static int reverse = 1;
@@ -84,13 +76,13 @@ sort_name (file_entry *a, file_entry *b)
     int ad = MY_ISDIR (a);
     int bd = MY_ISDIR (b);
 
-    if (ad == bd || mix_all_files) {
+    if (ad == bd || panels_options.mix_all_files) {
         /* create key if does not exist, key will be freed after sorting */
-        if (a->sort_key == NULL) 
+        if (a->sort_key == NULL)
             a->sort_key = str_create_key_for_filename (a->fname, case_sensitive);
-        if (b->sort_key == NULL) 
+        if (b->sort_key == NULL)
             b->sort_key = str_create_key_for_filename (b->fname, case_sensitive);
-        
+
 	return str_key_collate (a->sort_key, b->sort_key, case_sensitive) 
                 * reverse;
     }
@@ -103,7 +95,7 @@ sort_vers (file_entry *a, file_entry *b)
     int ad = MY_ISDIR (a);
     int bd = MY_ISDIR (b);
 
-    if (ad == bd || mix_all_files) {
+    if (ad == bd || panels_options.mix_all_files) {
         return str_verscmp(a->fname, b->fname) * reverse;
     } else {
         return bd - ad;
@@ -117,10 +109,10 @@ sort_ext (file_entry *a, file_entry *b)
     int ad = MY_ISDIR (a);
     int bd = MY_ISDIR (b);
 
-    if (ad == bd || mix_all_files){
-        if (a->second_sort_key == NULL) 
+    if (ad == bd || panels_options.mix_all_files) {
+        if (a->second_sort_key == NULL)
             a->second_sort_key = str_create_key (extension (a->fname), case_sensitive);
-        if (b->second_sort_key == NULL) 
+        if (b->second_sort_key == NULL)
             b->second_sort_key = str_create_key (extension (b->fname), case_sensitive);
 	
         r = str_key_collate (a->second_sort_key, b->second_sort_key, case_sensitive);
@@ -138,7 +130,7 @@ sort_time (file_entry *a, file_entry *b)
     int ad = MY_ISDIR (a);
     int bd = MY_ISDIR (b);
 
-    if (ad == bd || mix_all_files) {
+    if (ad == bd || panels_options.mix_all_files) {
 	int result = a->st.st_mtime < b->st.st_mtime ? -1 :
 		     a->st.st_mtime > b->st.st_mtime;
 	if (result != 0)
@@ -156,7 +148,7 @@ sort_ctime (file_entry *a, file_entry *b)
     int ad = MY_ISDIR (a);
     int bd = MY_ISDIR (b);
 
-    if (ad == bd || mix_all_files) {
+    if (ad == bd || panels_options.mix_all_files) {
 	int result = a->st.st_ctime < b->st.st_ctime ? -1 :
 		     a->st.st_ctime > b->st.st_ctime;
 	if (result != 0)
@@ -174,7 +166,7 @@ sort_atime (file_entry *a, file_entry *b)
     int ad = MY_ISDIR (a);
     int bd = MY_ISDIR (b);
 
-    if (ad == bd || mix_all_files) {
+    if (ad == bd || panels_options.mix_all_files) {
 	int result = a->st.st_atime < b->st.st_atime ? -1 :
 		     a->st.st_atime > b->st.st_atime;
 	if (result != 0)
@@ -192,7 +184,7 @@ sort_inode (file_entry *a, file_entry *b)
     int ad = MY_ISDIR (a);
     int bd = MY_ISDIR (b);
 
-    if (ad == bd || mix_all_files)
+    if (ad == bd || panels_options.mix_all_files)
 	return (a->st.st_ino - b->st.st_ino) * reverse;
     else
 	return bd-ad;
@@ -205,7 +197,7 @@ sort_size (file_entry *a, file_entry *b)
     int bd = MY_ISDIR (b);
     int result = 0;
 
-    if (ad != bd && !mix_all_files)
+    if (ad != bd && !panels_options.mix_all_files)
 	return bd - ad;
 
     result = a->st.st_size < b->st.st_size ? -1 :
@@ -300,10 +292,11 @@ handle_dirent (dir_list *list, const char *fltr, struct dirent *dp,
 	return 0;
     if (dp->d_name[0] == '.' && dp->d_name[1] == '.' && dp->d_name[2] == 0)
 	return 0;
-    if (!show_dot_files && (dp->d_name[0] == '.'))
+    if (!panels_options.show_dot_files && (dp->d_name[0] == '.'))
 	return 0;
-    if (!show_backups && dp->d_name[NLENGTH (dp) - 1] == '~')
+    if (!panels_options.show_backups && dp->d_name[NLENGTH (dp) - 1] == '~')
 	return 0;
+
     if (mc_lstat (dp->d_name, buf1) == -1) {
 	/*
 	 * lstat() fails - such entries should be identified by
@@ -362,7 +355,8 @@ get_dotdot_dir_stat (const char *path, struct stat *st)
 }
 
 /* handle_path is a simplified handle_dirent. The difference is that
-   handle_path doesn't pay attention to show_dot_files and show_backups.
+   handle_path doesn't pay attention to panels_options.show_dot_files
+   and panels_options.show_backups.
    Moreover handle_path can't be used with a filemask.
    If you change handle_path then check also handle_dirent. */
 /* Return values: -1 = failure, 0 = don't add, 1 = add to the list */

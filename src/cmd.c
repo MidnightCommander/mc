@@ -105,9 +105,6 @@ int use_internal_edit = 1;
 /* Automatically fills name with current selected item name on mkdir */
 int auto_fill_mkdir_name = 1;
 
-/* if set, only selection of files is inverted */
-int reverse_files_only = 1;
-
 /* selection flags */
 typedef enum
 {
@@ -546,7 +543,7 @@ reverse_selection_cmd (void)
     for (i = 0; i < current_panel->count; i++)
     {
         file = &current_panel->dir.list[i];
-        if ((reverse_files_only == 0) || !S_ISDIR (file->st.st_mode))
+        if (!panels_options.reverse_files_only || !S_ISDIR (file->st.st_mode))
             do_file_mark (current_panel, i, !file->f.marked);
     }
 }
@@ -1340,8 +1337,8 @@ single_dirsize_cmd (void)
         compute_dir_size_destroy_ui (ui);
     }
 
-    if (mark_moves_down)
-        send_message (&(panel->widget), WIDGET_KEY, KEY_DOWN);
+    if (panels_options.mark_moves_down)
+        send_message (&panel->widget, WIDGET_KEY, KEY_DOWN);
 
     recalculate_panel_summary (panel);
 
@@ -1453,6 +1450,12 @@ switch_to_listing (int panel_index)
 
 void
 listing_cmd (void)
+{
+    switch_to_listing (MENU_PANEL_IDX);
+}
+
+void
+change_listing_cmd (void)
 {
     int list_type;
     int use_msformat;

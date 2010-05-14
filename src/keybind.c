@@ -355,9 +355,10 @@ static name_keymap_t command_names[] = {
 #ifdef WITH_BACKGROUND
     { "CmdJobs",                         CK_JobsCmd },
 #endif
-    { "CmdLayout",                       CK_LayoutCmd },
+    { "CmdLayout",                       CK_LayoutBox },
     { "CmdLearnKeys",                    CK_LearnKeys },
     { "CmdLink",                         CK_LinkCmd },
+    { "CmdChangeListing",                CK_ChangeListingCmd },
     { "CmdListing",                      CK_ListingCmd },
 #ifdef LISTMODE_EDITOR
     { "CmdListmodeCmd",                  CK_ListmodeCmd }.
@@ -366,6 +367,7 @@ static name_keymap_t command_names[] = {
 #if defined (USE_NETCODE) && defined (ENABLE_VFS_MCFS)
     { "CmdNetlink",                      CK_NetlinkCmd },
 #endif
+    { "CmdPanelOptions",                 CK_PanelOptionsBox },
     { "CmdQuickCd",                      CK_QuickCdCmd },
     { "CmdQuickChdir",                   CK_QuickChdirCmd },
     { "CmdQuickView",                    CK_QuickViewCmd },

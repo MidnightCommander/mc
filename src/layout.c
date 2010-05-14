@@ -141,16 +141,12 @@ static int _keybar_visible;
 static int _message_visible;
 static int _xterm_title;
 static int _free_space;
-static int _permission_mode;
-static int _filetype_mode;
 
 static int height;
 
 /* Width 12 for a wee Quick (Hex) View */
 #define MINWIDTH 12
 #define MINHEIGHT 5
-
-#define BY      12
 
 #define B_2LEFT B_USER
 #define B_2RIGHT (B_USER + 1)
@@ -171,26 +167,22 @@ static struct {
     int    *variable;
     WCheck *widget;
 } check_options [] = {
-    { N_("show free sp&Ace"),  &free_space,      0 },
-    { N_("&Xterm window title"), &xterm_title,   0 },
-    { N_("h&Intbar visible"),  &message_visible, 0 },
-    { N_("&Keybar visible"),   &keybar_visible,  0 },
-    { N_("command &Prompt"),   &command_prompt,  0 },
-    { N_("show &Mini status"), &show_mini_info,  0 },
-    { N_("menu&Bar visible"),  &menubar_visible, 0 },
-    { N_("&Equal split"),      &equal_split,     0 },
-    { N_("pe&Rmissions"),      &permission_mode, 0 },
-    { N_("&File types"),       &filetype_mode,   0 },
-    { 0, 0, 0 }
+    { N_("show free sp&Ace"),    &free_space,      NULL },
+    { N_("&XTerm window title"), &xterm_title,     NULL },
+    { N_("h&Intbar visible"),    &message_visible, NULL },
+    { N_("&Keybar visible"),     &keybar_visible,  NULL },
+    { N_("command &Prompt"),     &command_prompt,  NULL },
+    { N_("show &Mini status"),   &show_mini_info,  NULL },
+    { N_("menu&Bar visible"),    &menubar_visible, NULL },
+    { N_("&Equal split"),        &equal_split,     NULL }
 };
 
-#define LAYOUT_OPTIONS_COUNT           10
-#define HIGHLIGHT_OPTIONS_COUNT        2
-#define SPLIT_OPTIONS_COUNT            1
-#define OTHER_OPTIONS_COUNT            7
+#define LAYOUT_OPTIONS_COUNT  sizeof (check_options) / sizeof (check_options[0])
+#define OTHER_OPTIONS_COUNT   (LAYOUT_OPTIONS_COUNT - 1)
 
-static gsize first_width, second_width;
-static const char *output_lines_label;
+static gsize first_width;
+static const char *output_lines_label = 0;
+static int output_lines_label_len;
 
 static WButton *bleft_widget, *bright_widget;
 
@@ -308,17 +300,15 @@ layout_callback (Dlg_head *h, Widget *sender,
 	    if (old_output_lines != _output_lines){
 		old_output_lines = _output_lines;
 		tty_setcolor (COLOR_NORMAL);
-		dlg_move (h, LAYOUT_OPTIONS_COUNT, 16 + first_width);
+		dlg_move (h, 9, 6);
 		tty_print_string (output_lines_label);
-		dlg_move (h, LAYOUT_OPTIONS_COUNT, 10 + first_width);
+		dlg_move (h, 9, 6 + 3 + output_lines_label_len);
 		tty_printf ("%02d", _output_lines);
 	    }
 	}
 	return MSG_HANDLED;
 
     case DLG_POST_KEY:
-	_filetype_mode = check_options [9].widget->state & C_BOOL;
-	_permission_mode = check_options [8].widget->state & C_BOOL;
 	_equal_split = check_options [7].widget->state & C_BOOL;
 	_menubar_visible = check_options [6].widget->state & C_BOOL;
 	_command_prompt = check_options [5].widget->state & C_BOOL;
@@ -353,7 +343,7 @@ layout_callback (Dlg_head *h, Widget *sender,
 	    if (old_output_lines != _output_lines){
 		old_output_lines = _output_lines;
 		tty_setcolor (COLOR_NORMAL);
-		dlg_move (h, LAYOUT_OPTIONS_COUNT, 10 + first_width);
+		dlg_move (h, 9, 6 + 3 + output_lines_label_len);
 		tty_printf ("%02d", _output_lines);
 	    }
 	}
@@ -378,12 +368,12 @@ init_layout (void)
     if (!i18n_layt_flag) {
 	gsize l1;
 
-	first_width = 19;	/* length of line with '<' '>' buttons */
+	first_width = 0;
 
 	title1 = _(" Panel split ");
-	title2 = _(" Highlight... ");
+	title2 = _(" Console output ");
 	title3 = _(" Other options ");
-	output_lines_label = _("output lines");
+	output_lines_label = _("Output lines: ");
 
 	while (i--) {
 	    s_split_direction[i] = _(s_split_direction[i]);
@@ -399,25 +389,19 @@ init_layout (void)
 		first_width = l1;
 	}
 
-        l1 = str_term_width1 (title1) + 1;
+	l1 = str_term_width1 (title1) + 1;
 	if (l1 > first_width)
 	    first_width = l1;
 
-        l1 = str_term_width1 (title2) + 1;
+	l1 = str_term_width1 (title2) + 1;
 	if (l1 > first_width)
 	    first_width = l1;
 
-        second_width = str_term_width1 (title3) + 1;
-	for (i = 0; i < OTHER_OPTIONS_COUNT; i++) {
-	    check_options[i].text = _(check_options[i].text);
-            l1 = str_term_width1 (check_options[i].text) + 7;
-	    if (l1 > second_width)
-		second_width = l1;
-	}
 	if (console_flag) {
-            l1 = str_term_width1 (output_lines_label) + 13;
-	    if (l1 > second_width)
-		second_width = l1;
+	    output_lines_label_len = str_term_width1 (output_lines_label);
+            l1 = output_lines_label_len + 12;
+	    if (l1 > first_width)
+		first_width = l1;
 	}
 
 	/*
@@ -433,7 +417,7 @@ init_layout (void)
                 + str_term_width1 (save_button)	/* notice: it is 3 char less because */
                 + str_term_width1 (cancel_button);	/* of '&' char in button text */
 
-	i = (first_width + second_width - l1) / 4;
+	i = (first_width * 2 - l1) / 4;
 	b1 = 5 + i;
         b2 = b1 + str_term_width1 (ok_button) + i + 6;
         b3 = b2 + str_term_width1 (save_button) + i + 4;
@@ -442,47 +426,33 @@ init_layout (void)
     }
 
     layout_dlg =
-	create_dlg (0, 0, 15, first_width + second_width + 9,
+	create_dlg (0, 0, 14, first_width * 2 + 9,
 		    dialog_colors, layout_callback, "[Layout]",
 		    _("Layout"), DLG_CENTER | DLG_REVERSE);
 
     add_widget (layout_dlg, groupbox_new (2, 4, 6, first_width, title1));
-    add_widget (layout_dlg, groupbox_new (8, 4, 4, first_width, title2));
+
     add_widget (layout_dlg,
-		groupbox_new (2, 5 + first_width, 10, second_width,
+		groupbox_new (2, 5 + first_width, 9, first_width,
 			      title3));
 
     add_widget (layout_dlg,
-		button_new (BY, b3, B_CANCEL, NORMAL_BUTTON, cancel_button,
+		button_new (11, b3, B_CANCEL, NORMAL_BUTTON, cancel_button,
 			    0));
     add_widget (layout_dlg,
-		button_new (BY, b2, B_EXIT, NORMAL_BUTTON, save_button,
+		button_new (11, b2, B_EXIT, NORMAL_BUTTON, save_button,
 			    0));
     add_widget (layout_dlg,
-		button_new (BY, b1, B_ENTER, DEFPUSH_BUTTON, ok_button,
+		button_new (11, b1, B_ENTER, DEFPUSH_BUTTON, ok_button,
 			    0));
-    if (console_flag) {
-	add_widget (layout_dlg,
-		    button_new (LAYOUT_OPTIONS_COUNT, 12 + first_width, B_MINUS,
-				NARROW_BUTTON, "&-", bminus_cback));
-	add_widget (layout_dlg,
-		    button_new (LAYOUT_OPTIONS_COUNT, 7 + first_width, B_PLUS, NARROW_BUTTON,
-				"&+", bplus_cback));
-    }
 #define XTRACT(i) *check_options[i].variable, check_options[i].text
 
     for (i = 0; i < OTHER_OPTIONS_COUNT; i++) {
 	check_options[i].widget =
-	    check_new (LAYOUT_OPTIONS_COUNT - i - 1, 7 + first_width, XTRACT (i));
+	    check_new (OTHER_OPTIONS_COUNT - i + 2, 7 + first_width, XTRACT (i));
 	add_widget (layout_dlg, check_options[i].widget);
     }
-    check_options[9].widget = check_new (10, 6, XTRACT (9));
-    add_widget (layout_dlg, check_options[9].widget);
-    check_options[8].widget = check_new (9, 6, XTRACT (8));
-    add_widget (layout_dlg, check_options[8].widget);
 
-    _filetype_mode = filetype_mode;
-    _permission_mode = permission_mode;
     _equal_split = equal_split;
     _menubar_visible = menubar_visible;
     _command_prompt = command_prompt;
@@ -490,6 +460,18 @@ init_layout (void)
     _message_visible = message_visible;
     _xterm_title = xterm_title;
     _free_space = free_space;
+
+    if (console_flag) {
+	add_widget (layout_dlg, groupbox_new (8, 4, 3, first_width, title2));
+
+	add_widget (layout_dlg,
+		    button_new (9, output_lines_label_len + 6 + 5, B_MINUS,
+				NARROW_BUTTON, "&-", bminus_cback));
+	add_widget (layout_dlg,
+		    button_new (9, output_lines_label_len + 6, B_PLUS,
+				NARROW_BUTTON, "&+", bplus_cback));
+    }
+
     bright_widget =
 	button_new (6, 15, B_2RIGHT, NARROW_BUTTON, "&>", b2right_cback);
     add_widget (layout_dlg, bright_widget);
@@ -497,12 +479,14 @@ init_layout (void)
 	button_new (6, 9, B_2LEFT, NARROW_BUTTON, "&<", b2left_cback);
     add_widget (layout_dlg, bleft_widget);
     check_options[7].widget = check_new (5, 6, XTRACT (7));
+
     old_first_panel_size = -1;
     old_horizontal_split = -1;
     old_output_lines = -1;
 
     _first_panel_size = first_panel_size;
     _output_lines = output_lines;
+
     add_widget (layout_dlg, check_options[7].widget);
     radio_widget = radio_new (3, 6, 2, s_split_direction);
     add_widget (layout_dlg, radio_widget);
@@ -521,7 +505,7 @@ layout_change (void)
     load_hint (1);
 }
 
-void layout_cmd (void)
+void layout_box (void)
 {
     int result;
     int i;
@@ -532,7 +516,7 @@ void layout_cmd (void)
     result = layout_dlg->ret_value;
 
     if (result == B_ENTER || result == B_EXIT){
-	for (i = 0; check_options [i].text; i++)
+	for (i = 0; i < LAYOUT_OPTIONS_COUNT; i++)
 	    if (check_options [i].widget)
 		*check_options [i].variable = check_options [i].widget->state & C_BOOL;
 	horizontal_split = radio_widget->sel;

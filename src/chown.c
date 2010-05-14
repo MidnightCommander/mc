@@ -43,13 +43,12 @@
 #include "widget.h"
 
 /* Needed for the extern declarations of integer parameters */
-#include "dir.h"
-#include "panel.h"              /* Needed for the externs */
 #include "chmod.h"
 #include "main.h"               /* update_panels() */
 #include "layout.h"             /* repaint_screen() */
 #include "chown.h"
-#include "wtools.h"             /* For init_box_colors */
+#include "wtools.h"             /* init_box_colors() */
+#include "setup.h"              /* panels_options */
 
 #define UX 5
 #define UY 2
@@ -75,7 +74,8 @@ static int single_set;
 static WListbox *l_user, *l_group;
 
 /* *INDENT-OFF* */
-static struct {
+static struct
+{
     int ret_cmd, flags, y, x;
     const char *text;
 } chown_but[BUTTONS] = {
@@ -91,11 +91,11 @@ static struct {
     int y, x;
     WLabel *l;
 } chown_label [LABELS] = {
-    { TY + 2, TX + 2, NULL },
-    { TY + 4, TX + 2, NULL },
-    { TY + 6, TX + 2, NULL },
-    { TY + 8, TX + 2, NULL },
-    { TY + 10,TX + 2, NULL }
+    { TY +  2, TX + 2, NULL },
+    { TY +  4, TX + 2, NULL },
+    { TY +  6, TX + 2, NULL },
+    { TY +  8, TX + 2, NULL },
+    { TY + 10, TX + 2, NULL }
 };
 /* *INDENT-ON* */
 
@@ -282,7 +282,7 @@ chown_cmd (void)
         chown_label (0, str_trunc (fname, 15));
         chown_label (1, str_trunc (get_owner (sf_stat.st_uid), 15));
         chown_label (2, str_trunc (get_group (sf_stat.st_gid), 15));
-        size_trunc_len (buffer, 15, sf_stat.st_size, 0);
+        size_trunc_len (buffer, 15, sf_stat.st_size, 0, panels_options.kilobyte_si);
         chown_label (3, buffer);
         chown_label (4, string_perm (sf_stat.st_mode));
 

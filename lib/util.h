@@ -14,6 +14,9 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+extern char *user_recent_timeformat;    /* time format string for recent dates */
+extern char *user_old_timeformat;       /* time format string for older dates */
+
 /* Returns its argument as a "modifiable" string. This function is
  * intended to pass strings to legacy libraries that don't know yet
  * about the "const" modifier. The return value of this function
@@ -55,18 +58,18 @@ const char *path_trunc (const char *path, size_t trunc_len);
 /* return a static string representing size, appending "K" or "M" for
  * big sizes.
  * NOTE: uses the same static buffer as size_trunc_sep. */
-const char *size_trunc (double size);
+const char *size_trunc (double size, gboolean use_si);
 
 /* return a static string representing size, appending "K" or "M" for
  * big sizes. Separates every three digits by ",".
  * NOTE: uses the same static buffer as size_trunc. */
-const char *size_trunc_sep (double size);
+const char *size_trunc_sep (double size, gboolean use_si);
 
 /* Print file SIZE to BUFFER, but don't exceed LEN characters,
  * not including trailing 0. BUFFER should be at least LEN+1 long.
  *
  * Units: size units (0=bytes, 1=Kbytes, 2=Mbytes, etc.) */
-void size_trunc_len (char *buffer, unsigned int len, off_t size, int units);
+void size_trunc_len (char *buffer, unsigned int len, off_t size, int units, gboolean use_si);
 int is_exe (mode_t mode);
 const char *string_perm (mode_t mode_bits);
 

@@ -104,11 +104,7 @@ WPanel *panel_new_with_dir (const char *panel_name, const char *dr);
 void panel_clean_dir (WPanel *panel);
 
 extern int torben_fj_mode;
-extern int permission_mode;
-extern int filetype_mode;
 extern int show_mini_info;
-extern int panel_scroll_pages;
-extern int fast_reload;
 
 void panel_reload         (WPanel *panel);
 void panel_set_sort_order (WPanel *panel, const panel_field_t *sort_order);

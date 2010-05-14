@@ -411,6 +411,13 @@ quick_dialog_skip (QuickDialog *qd, int nskip)
 	    qw->widget = (Widget *) label_new (ypos, xpos, I18N (qw->u.label.text));
 	    break;
 
+	case quick_groupbox:
+	    qw->widget = (Widget *) groupbox_new (ypos, xpos,
+						    qw->u.groupbox.height,
+						    qw->u.groupbox.width,
+						    I18N (qw->u.groupbox.title));
+            break;
+
 	case quick_radio:
 	{
 	    int i;

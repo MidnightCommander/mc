@@ -34,12 +34,7 @@ extern char *mc_run_param0;
  */
 extern char *mc_run_param1;
 
-/* Toggling functions */
-void toggle_fast_reload (void);
-void toggle_mix_all_files (void);
-void toggle_show_backup (void);
 void toggle_show_hidden (void);
-void toggle_kilobyte_si (void);
 
 extern int quote;
 extern volatile int quit;
@@ -54,19 +49,14 @@ struct WButtonBar;
 void midnight_set_buttonbar (struct WButtonBar *b);
 
 /* See main.c for details on these variables */
-extern int mark_moves_down;
 extern int auto_menu;
 extern int pause_after_run;
 extern int auto_save_setup;
 extern int use_internal_view;
 extern int use_internal_edit;
-extern int fast_reload_w;
 extern int clear_before_exec;
-extern int mouse_move_pages;
 
 extern int option_tab_spacing;
-
-extern int quick_search_case_sensitive;
 
 #ifdef HAVE_CHARSET
 extern int source_codepage;
@@ -82,7 +72,6 @@ extern int full_eight_bits;
 extern int utf8_display;
 
 extern int fast_refresh;
-extern int navigate_with_arrows;
 extern int drop_menus;
 extern int cd_symlinks;
 extern int show_all_if_ambiguous;

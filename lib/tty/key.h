@@ -32,6 +32,8 @@ typedef struct {
 
 extern const key_code_name_t key_name_conv_tab[];
 
+extern int old_esc_mode_timeout;
+
 /* mouse support */
 struct Gpm_Event;
 int tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block);

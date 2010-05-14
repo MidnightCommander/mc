@@ -43,10 +43,11 @@
 #include "lib/tty/key.h"
 #include "lib/strutil.h"
 
-#include "src/main.h"
 #include "src/dialog.h"         /* Dlg_head */
-#include "src/charsets.h"
 #include "src/widget.h"         /* WButtonBar */
+#include "src/charsets.h"
+#include "src/setup.h"          /* panels_options */
+#include "src/main.h"           /* source_codepage */
 
 #include "internal.h"
 #include "mcviewer.h"
@@ -152,7 +153,7 @@ mcview_display_status (mcview_t * view)
         }
         else
         {
-            size_trunc_len (buffer, 5, mcview_get_filesize (view), 0);
+            size_trunc_len (buffer, 5, mcview_get_filesize (view), 0, panels_options.kilobyte_si);
             tty_printf ("%9lli/%s%s %s", view->dpy_end,
                         buffer, mcview_may_still_grow (view) ? "+" : " ",
 #ifdef HAVE_CHARSET
