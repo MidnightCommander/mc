@@ -6,7 +6,7 @@
 #ifndef MC_UTIL_H
 #define MC_UTIL_H
 
-#include "lib/global.h"		/* include <glib.h> */
+#include "lib/global.h"         /* include <glib.h> */
 
 #include <string.h>
 #include <assert.h>
@@ -25,9 +25,9 @@ extern char *str_unconst (const char *);
 extern const char *cstrcasestr (const char *haystack, const char *needle);
 extern const char *cstrstr (const char *haystack, const char *needle);
 
-void str_replace(char *s, char from, char to);
-int  is_printable (int c);
-void msglen (const char *text, /*@out@*/ int *lines, /*@out@*/ int *columns);
+void str_replace (char *s, char from, char to);
+int is_printable (int c);
+void msglen (const char *text, /*@out@ */ int *lines, /*@out@ */ int *columns);
 
 /* Copy from s to d, and trim the beginning if necessary, and prepend
  * "..." in this case.  The destination string can have at most len
@@ -67,7 +67,7 @@ const char *size_trunc_sep (double size);
  *
  * Units: size units (0=bytes, 1=Kbytes, 2=Mbytes, etc.) */
 void size_trunc_len (char *buffer, unsigned int len, off_t size, int units);
-int  is_exe (mode_t mode);
+int is_exe (mode_t mode);
 const char *string_perm (mode_t mode_bits);
 
 /* @modifies path. @returns pointer into path. */
@@ -97,7 +97,8 @@ char *diff_two_paths (const char *first, const char *second);
 const char *x_basename (const char *fname);
 
 char *load_file (const char *filename);
-char *load_mc_home_file (const char *, const char *, const char *filename, char ** allocated_filename);
+char *load_mc_home_file (const char *, const char *, const char *filename,
+                         char **allocated_filename);
 
 /* uid/gid managing */
 void init_groups (void);
@@ -124,10 +125,11 @@ int check_for_default (const char *default_file, const char *file);
 const char *extract_line (const char *s, const char *top);
 
 /* Matching */
-enum {
-    match_file,			/* match a filename, use easy_patterns */
-    match_normal,		/* match pattern, use easy_patterns */
-    match_regex			/* match pattern, force using regex */
+enum
+{
+    match_file,                 /* match a filename, use easy_patterns */
+    match_normal,               /* match pattern, use easy_patterns */
+    match_regex                 /* match pattern, force using regex */
 };
 
 extern int easy_patterns;
@@ -146,15 +148,14 @@ extern struct sigaction startup_handler;
 char *tilde_expand (const char *);
 
 /* Pathname canonicalization */
-typedef enum {
-    CANON_PATH_JOINSLASHES	= 1L<<0, /* Multiple `/'s are collapsed to a single `/'. */
-    CANON_PATH_REMSLASHDOTS	= 1L<<1, /* Leading `./'s, `/'s and trailing `/.'s are removed. */
-    CANON_PATH_REMDOUBLEDOTS	= 1L<<3, /* Non-leading `../'s and trailing `..'s are handled by removing */
-    CANON_PATH_GUARDUNC		= 1L<<4, /* Detect and preserve UNC paths: //server/... */
-    CANON_PATH_ALL	= CANON_PATH_JOINSLASHES
-			| CANON_PATH_REMSLASHDOTS
-			| CANON_PATH_REMDOUBLEDOTS
-			| CANON_PATH_GUARDUNC
+typedef enum
+{
+    CANON_PATH_JOINSLASHES = 1L << 0,   /* Multiple `/'s are collapsed to a single `/'. */
+    CANON_PATH_REMSLASHDOTS = 1L << 1,  /* Leading `./'s, `/'s and trailing `/.'s are removed. */
+    CANON_PATH_REMDOUBLEDOTS = 1L << 3, /* Non-leading `../'s and trailing `..'s are handled by removing */
+    CANON_PATH_GUARDUNC = 1L << 4,      /* Detect and preserve UNC paths: //server/... */
+    CANON_PATH_ALL = CANON_PATH_JOINSLASHES
+        | CANON_PATH_REMSLASHDOTS | CANON_PATH_REMDOUBLEDOTS | CANON_PATH_GUARDUNC
 } CANON_PATH_FLAGS;
 void custom_canonicalize_pathname (char *, CANON_PATH_FLAGS);
 void canonicalize_pathname (char *);
@@ -165,12 +166,12 @@ int my_mkdir (const char *s, mode_t mode);
 int my_rmdir (const char *s);
 
 /* Rotating dash routines */
-void use_dash (int flag); /* Disable/Enable rotate_dash routines */
+void use_dash (int flag);       /* Disable/Enable rotate_dash routines */
 void rotate_dash (void);
 
 /* Creating temporary files safely */
 const char *mc_tmpdir (void);
-int mc_mkstemps(char **pname, const char *prefix, const char *suffix);
+int mc_mkstemps (char **pname, const char *prefix, const char *suffix);
 
 #ifndef PATH_MAX
 #ifdef _POSIX_VERSION
@@ -194,39 +195,41 @@ int mc_mkstemps(char **pname, const char *prefix, const char *suffix);
 char *mc_realpath (const char *path, char *resolved_path);
 #endif
 
-enum compression_type {
-	COMPRESSION_NONE,
-	COMPRESSION_GZIP,
-	COMPRESSION_BZIP,
-	COMPRESSION_BZIP2,
-	COMPRESSION_LZMA,
-	COMPRESSION_XZ
+enum compression_type
+{
+    COMPRESSION_NONE,
+    COMPRESSION_GZIP,
+    COMPRESSION_BZIP,
+    COMPRESSION_BZIP2,
+    COMPRESSION_LZMA,
+    COMPRESSION_XZ
 };
 
 /* Looks for ``magic'' bytes at the start of the VFS file to guess the
  * compression type. Side effect: modifies the file position. */
-enum compression_type get_compression_type (int fd, const char*);
+enum compression_type get_compression_type (int fd, const char *);
 const char *decompress_extension (int type);
 
 /* Hook functions */
 
-typedef struct hook {
-    void (*hook_fn)(void *);
+typedef struct hook
+{
+    void (*hook_fn) (void *);
     void *hook_data;
     struct hook *next;
 } Hook;
 
-void add_hook (Hook **hook_list, void (*hook_fn)(void *), void *data);
-void execute_hooks (Hook *hook_list);
-void delete_hook (Hook **hook_list, void (*hook_fn)(void *));
-int hook_present (Hook *hook_list, void (*hook_fn)(void *));
+void add_hook (Hook ** hook_list, void (*hook_fn) (void *), void *data);
+void execute_hooks (Hook * hook_list);
+void delete_hook (Hook ** hook_list, void (*hook_fn) (void *));
+int hook_present (Hook * hook_list, void (*hook_fn) (void *));
 
-GList *list_append_unique (GList *list, char *text);
+GList *list_append_unique (GList * list, char *text);
 
 /* Position saving and restoring */
 
 /* Load position for the given filename */
-void load_file_position (const char *filename, long *line, long *column, off_t *offset);
+void load_file_position (const char *filename, long *line, long *column, off_t * offset);
 /* Save position for the given filename */
 void save_file_position (const char *filename, long line, long column, off_t offset);
 
@@ -291,7 +294,7 @@ str_move (char *dest, const char *src)
 
     assert (dest <= src);
 
-    n = strlen (src) + 1; /* + '\0' */
+    n = strlen (src) + 1;       /* + '\0' */
 
     return (char *) memmove (dest, src, n);
 }
@@ -304,4 +307,4 @@ char *guess_message_value (void);
 
 #define MC_PTR_FREE(ptr) do { g_free (ptr); (ptr) = NULL; } while (0)
 
-#endif                              /* MC_UTIL_H */
+#endif /* MC_UTIL_H */
