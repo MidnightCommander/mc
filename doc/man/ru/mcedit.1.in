@@ -521,47 +521,49 @@ binary files, you should set
 .B display bits
 to 7 bits in the Midnight Commander options menu to keep the spacing
 clean.
-.SH FILES
+.SH ФАЙЛЫ
 .I @prefix@/share/mc/mc.hlp
 .IP
-The help file for the program.
+Файл помощи для этой программы.
 .PP
 .I @prefix@/share/mc/mc.ini
 .IP
-The default system\-wide setup for GNU Midnight Commander, used only if
-the user's own ~/.mc/ini file is missing.
+Стандартные системные настройки для  GNU Midnight
+Commander используются только в случае отсутствия пользоватьлеского файла ~/.mc/ini.
 .PP
 .I @prefix@/share/mc/mc.lib
 .IP
-Global settings for the Midnight Commander.  Settings in this file
-affect all users, whether they have ~/.mc/ini or not.
+Глобальные настройки для Midnight Commander. Настройки в этом файле влияют
+на всех пользователей, в независимости от наличия ~/.mc/ini.
 .PP
 .I @prefix@/share/mc/syntax/*
 .IP
-The default system\-wide syntax files for mcedit, used only if
-the corresponding user's own ~/.mc/cedit/ file is missing.
+Глобальные файлы синтаксиса, используются только в случае, если аналогичный
+файл отсутствует в ~/.mc/cedit/.
 .PP
 .I $HOME/.mc/ini
 .IP
-User's own setup.  If this file is present then the setup is loaded
-from here instead of the system\-wide setup file.
+Личные настройки пользователя. Если файл существует, то он будет
+использоваться вместо глобальных настроек.
 .PP
 .I $HOME/.mc/cedit/
 .IP
-User's own directory where block commands are processed and saved and
-user's own syntax files are located.
-.SH LICENSE
-This program is distributed under the terms of the GNU General Public
-License as published by the Free Software Foundation.  See the built\-in
-help of the Midnight Commander for details on the License and the lack
-of warranty.
-.SH AVAILABILITY
-The latest version of this program can be found at
+Пользовательский каталог, где сохраняется и обрабатывается помеченный текст.
+.SH ЛИЦЕНЗИЯ
+Эта программа распространяется в надежде, что она будет полезной,
+но БЕЗ ВСЯКИХ ГАРАНТИЙ, в том числе подразумеваемых гарантий ТОВАРНОГО
+СОСТОЯНИЯ ПРИ ПРОДАЖЕ и ГОДНОСТИ ДЛЯ ОПРЕДЕЛЁННОГО ПРИМЕНЕНИЯ. Смотрите
+Стандартную Общественную Лицензию GNU для получения дополнительной
+информации. Полный текст лицензии смотрите на http://www.gnu.org/licenses/.
+.SH ДОСТУПНОСТЬ
+Последняя версия программы может быть найдена на
 http://midnight\-commander.org/.
-.SH SEE ALSO
+.SH СМОТРИ ТАКЖЕ
 cooledit(1), mc(1), gpm(1), terminfo(1), scanf(3).
-.SH AUTHORS
-Paul Sheer (psheer@obsidian.co.za) is the original author of
-the Midnight Commander's internal editor.
-.SH BUGS
-Bugs should be reported to mc\-devel@gnome.org
+.SH АВТОРЫ
+Paul Sheer (psheer@obsidian.co.za) - создатель встроенного редактора Midnight Commander.
+Ilia Maslakov (il.smind@gmail.com)
+Mikhail Pobolovets (styx.mp@gmail.com)
+.SH ОШИБКИ
+Вы можете оставить сообщение об ошибках на http://www.midnight-commander.org/
+или отправить письмо на mc-devel (at) gnome (dot) org
