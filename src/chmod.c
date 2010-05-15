@@ -163,9 +163,9 @@ chmod_refresh (Dlg_head * h)
     tty_setcolor (COLOR_HOT_NORMAL);
 
     dlg_move (h, PY, PX + 1);
-    tty_print_string (_(" Permission "));
+    tty_print_string (_("Permission"));
     dlg_move (h, FY, FX + 1);
-    tty_print_string (_(" File "));
+    tty_print_string (_("File"));
 }
 
 static cb_ret_t
@@ -264,7 +264,7 @@ do_chmod (struct stat *sf)
     sf->st_mode &= and_mask;
     sf->st_mode |= or_mask;
     if (mc_chmod (current_panel->dir.list[c_file].fname, sf->st_mode) == -1)
-        message (D_ERROR, MSG_ERROR, _(" Cannot chmod \"%s\" \n %s "),
+        message (D_ERROR, MSG_ERROR, _("Cannot chmod \"%s\"\n%s"),
                  current_panel->dir.list[c_file].fname, unix_error_string (errno));
 
     do_file_mark (current_panel, c_file, 0);
@@ -342,7 +342,7 @@ chmod_cmd (void)
         case B_ENTER:
             if (mode_change)
                 if (mc_chmod (fname, c_stat) == -1)
-                    message (D_ERROR, MSG_ERROR, _(" Cannot chmod \"%s\" \n %s "),
+                    message (D_ERROR, MSG_ERROR, _("Cannot chmod \"%s\"\n%s"),
                              fname, unix_error_string (errno));
             need_update = 1;
             break;

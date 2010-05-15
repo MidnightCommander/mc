@@ -232,7 +232,7 @@ do_view_cmd (int normal)
         if (confirm_view_dir && (current_panel->marked || current_panel->dirs_marked))
         {
             if (query_dialog
-                (_(" Confirmation "), _("Files tagged, want to cd?"), D_NORMAL, 2,
+                (_("Confirmation"), _("Files tagged, want to cd?"), D_NORMAL, 2,
                  _("&Yes"), _("&No")) != 0)
             {
                 return;
@@ -275,7 +275,7 @@ view_file_cmd (void)
     char *filename;
 
     filename =
-        input_expand_dialog (_(" View file "), _(" Filename:"),
+        input_expand_dialog (_("View file"), _("Filename:"),
                              MC_HISTORY_FM_VIEW_FILE, selection (current_panel)->fname);
     if (!filename)
         return;
@@ -297,8 +297,8 @@ filtered_view_cmd (void)
     char *command;
 
     command =
-        input_dialog (_(" Filtered view "),
-                      _(" Filter command and arguments:"),
+        input_dialog (_("Filtered view"),
+                      _("Filter command and arguments:"),
                       MC_HISTORY_FM_FILTERED_VIEW, selection (current_panel)->fname);
     if (!command)
         return;
@@ -418,7 +418,7 @@ mkdir_cmd (void)
 
     dir =
         input_expand_dialog (_("Create a new Directory"),
-                             _(" Enter directory name:"), MC_HISTORY_FM_MKDIR, name);
+                             _("Enter directory name:"), MC_HISTORY_FM_MKDIR, name);
 
     if (!dir)
         return;
@@ -439,7 +439,7 @@ mkdir_cmd (void)
         }
         else
         {
-            message (D_ERROR, MSG_ERROR, "  %s  ", unix_error_string (errno));
+            message (D_ERROR, MSG_ERROR, "%s", unix_error_string (errno));
         }
         g_free (absdir);
     }
@@ -499,8 +499,8 @@ set_panel_filter (WPanel * p)
 
     x = p->filter ? p->filter : easy_patterns ? "*" : ".";
 
-    reg_exp = input_dialog_help (_(" Filter "),
-                                 _(" Set expression for filtering filenames"),
+    reg_exp = input_dialog_help (_("Filter"),
+                                 _("Set expression for filtering filenames"),
                                  "[Filter...]", MC_HISTORY_FM_PANEL_FILTER, x);
     if (!reg_exp)
         return;
@@ -619,13 +619,13 @@ select_unselect_cmd (const char *title, const char *history_name, gboolean do_se
 void
 select_cmd (void)
 {
-    select_unselect_cmd (_(" Select "), ":select_cmd: Select ", TRUE);
+    select_unselect_cmd (_("Select"), ":select_cmd: Select ", TRUE);
 }
 
 void
 unselect_cmd (void)
 {
-    select_unselect_cmd (_(" Unselect "), ":unselect_cmd: Unselect ", FALSE);
+    select_unselect_cmd (_("Unselect"), ":unselect_cmd: Unselect ", FALSE);
 }
 
 void
@@ -639,7 +639,7 @@ ext_cmd (void)
     if (geteuid () == 0)
     {
         dir = query_dialog (_("Extension file edit"),
-                            _(" Which extension file you want to edit? "), D_NORMAL, 2,
+                            _("Which extension file you want to edit?"), D_NORMAL, 2,
                             _("&User"), _("&System Wide"));
     }
     extdir = concat_dir_and_file (mc_home, MC_LIB_EXT);
@@ -672,8 +672,8 @@ edit_mc_menu_cmd (void)
     char *menufile;
     int dir = 0;
 
-    dir = query_dialog (_(" Menu edit "),
-                        _(" Which menu file do you want to edit? "),
+    dir = query_dialog (_("Menu edit"),
+                        _("Which menu file do you want to edit?"),
                         D_NORMAL, geteuid ()? 2 : 3, _("&Local"), _("&User"), _("&System Wide"));
 
     menufile = concat_dir_and_file (mc_home, MC_GLOBAL_MENU);
@@ -729,7 +729,7 @@ edit_fhl_cmd (void)
     if (geteuid () == 0)
     {
         dir = query_dialog (_("Highlighting groups file edit"),
-                            _(" Which highlighting file you want to edit? "), D_NORMAL, 2,
+                            _("Which highlighting file you want to edit?"), D_NORMAL, 2,
                             _("&User"), _("&System Wide"));
     }
     fhlfile = concat_dir_and_file (mc_home, MC_FHL_INI_FILE);
@@ -931,8 +931,8 @@ compare_dirs_cmd (void)
     enum CompareMode thorough_flag;
 
     choice =
-        query_dialog (_(" Compare directories "),
-                      _(" Select compare method: "), D_NORMAL, 4,
+        query_dialog (_("Compare directories"),
+                      _("Select compare method:"), D_NORMAL, 4,
                       _("&Quick"), _("&Size only"), _("&Thorough"), _("&Cancel"));
 
     if (choice < 0 || choice > 2)
@@ -948,7 +948,7 @@ compare_dirs_cmd (void)
     else
     {
         message (D_ERROR, MSG_ERROR,
-                 _(" Both panels should be in the " "listing mode to use this command "));
+                 _("Both panels should be in the listing mode\nto use this command"));
     }
 }
 
@@ -990,7 +990,7 @@ view_other_cmd (void)
     {
         if (message_flag)
             message (D_ERROR, MSG_ERROR,
-                     _(" Not an xterm or Linux console; \n" " the panels cannot be toggled. "));
+                     _("Not an xterm or Linux console;\nthe panels cannot be toggled."));
         message_flag = FALSE;
     }
     else
@@ -1007,12 +1007,12 @@ do_link (link_type_t link_type, const char *fname)
     if (link_type == LINK_HARDLINK)
     {
         src = g_strdup_printf (_("Link %s to:"), str_trunc (fname, 46));
-        dest = input_expand_dialog (_(" Link "), src, MC_HISTORY_FM_LINK, "");
+        dest = input_expand_dialog (_("Link"), src, MC_HISTORY_FM_LINK, "");
         if (!dest || !*dest)
             goto cleanup;
         save_cwds_stat ();
         if (-1 == mc_link (fname, dest))
-            message (D_ERROR, MSG_ERROR, _(" link: %s "), unix_error_string (errno));
+            message (D_ERROR, MSG_ERROR, _("link: %s"), unix_error_string (errno));
     }
     else
     {
@@ -1039,7 +1039,7 @@ do_link (link_type_t link_type, const char *fname)
             goto cleanup;
         save_cwds_stat ();
         if (-1 == mc_symlink (dest, src))
-            message (D_ERROR, MSG_ERROR, _(" symlink: %s "), unix_error_string (errno));
+            message (D_ERROR, MSG_ERROR, _("symlink: %s"), unix_error_string (errno));
     }
 
     update_panels (UP_OPTIMIZE, UP_KEEPSEL);
@@ -1071,13 +1071,13 @@ edit_symlink_cmd (void)
 
         p = selection (current_panel)->fname;
 
-        q = g_strdup_printf (_(" Symlink `%s\' points to: "), str_trunc (p, 32));
+        q = g_strdup_printf (_("Symlink `%s\' points to:"), str_trunc (p, 32));
 
         i = readlink (p, buffer, MC_MAXPATHLEN - 1);
         if (i > 0)
         {
             buffer[i] = 0;
-            dest = input_expand_dialog (_(" Edit symlink "), q, MC_HISTORY_FM_EDIT_LINK, buffer);
+            dest = input_expand_dialog (_("Edit symlink"), q, MC_HISTORY_FM_EDIT_LINK, buffer);
             if (dest)
             {
                 if (*dest && strcmp (buffer, dest))
@@ -1085,13 +1085,13 @@ edit_symlink_cmd (void)
                     save_cwds_stat ();
                     if (-1 == mc_unlink (p))
                     {
-                        message (D_ERROR, MSG_ERROR, _(" edit symlink, unable to remove %s: %s "),
+                        message (D_ERROR, MSG_ERROR, _("edit symlink, unable to remove %s: %s"),
                                  p, unix_error_string (errno));
                     }
                     else
                     {
                         if (-1 == mc_symlink (dest, p))
-                            message (D_ERROR, MSG_ERROR, _(" edit symlink: %s "),
+                            message (D_ERROR, MSG_ERROR, _("edit symlink: %s"),
                                      unix_error_string (errno));
                     }
                     update_panels (UP_OPTIMIZE, UP_KEEPSEL);
@@ -1209,7 +1209,7 @@ nice_cd (const char *text, const char *xtext, const char *help,
     if (do_panel_cd (MENU_PANEL, cd_path, 0))
         directory_history_add (MENU_PANEL, (MENU_PANEL)->cwd);
     else
-        message (D_ERROR, MSG_ERROR, _(" Cannot chdir to %s "), cd_path);
+        message (D_ERROR, MSG_ERROR, _("Cannot chdir to %s"), cd_path);
     g_free (cd_path);
     g_free (machine);
 }
@@ -1218,13 +1218,13 @@ nice_cd (const char *text, const char *xtext, const char *help,
 
 #ifdef USE_NETCODE
 
-static const char *machine_str = N_(" Enter machine name (F1 for details): ");
+static const char *machine_str = N_("Enter machine name (F1 for details):");
 
 #ifdef ENABLE_VFS_MCFS
 void
 netlink_cmd (void)
 {
-    nice_cd (_(" Link to a remote machine "), _(machine_str),
+    nice_cd (_("Link to a remote machine"), _(machine_str),
              "[Network File System]", ":netlink_cmd: Link to a remote ", "/#mc:", 1);
 }
 #endif /* ENABLE_VFS_MCFS */
@@ -1232,14 +1232,14 @@ netlink_cmd (void)
 void
 ftplink_cmd (void)
 {
-    nice_cd (_(" FTP to machine "), _(machine_str),
+    nice_cd (_("FTP to machine"), _(machine_str),
              "[FTP File System]", ":ftplink_cmd: FTP to machine ", "/#ftp:", 1);
 }
 
 void
 fishlink_cmd (void)
 {
-    nice_cd (_(" Shell link to machine "), _(machine_str),
+    nice_cd (_("Shell link to machine"), _(machine_str),
              "[FIle transfer over SHell filesystem]", ":fishlink_cmd: Shell link to machine ",
              "/#sh:", 1);
 }
@@ -1248,7 +1248,7 @@ fishlink_cmd (void)
 void
 smblink_cmd (void)
 {
-    nice_cd (_(" SMB link to machine "), _(machine_str),
+    nice_cd (_("SMB link to machine"), _(machine_str),
              "[SMB File System]", ":smblink_cmd: SMB link to machine ", "/#smb:", 0);
 }
 #endif /* ENABLE_VFS_SMB */
@@ -1258,9 +1258,8 @@ smblink_cmd (void)
 void
 undelete_cmd (void)
 {
-    nice_cd (_(" Undelete files on an ext2 file system "),
-             _(" Enter device (without /dev/) to undelete\n "
-               "  files on: (F1 for details)"),
+    nice_cd (_("Undelete files on an ext2 file system"),
+             _("Enter device (without /dev/) to undelete\nfiles on: (F1 for details)"),
              "[Undelete File System]", ":undelete_cmd: Undel on ext2 fs ", "/#undel:", 0);
 }
 #endif /* USE_EXT2FSLIB */
@@ -1381,7 +1380,7 @@ save_setup_cmd (void)
 {
     if (!save_setup ())
         return;
-    message (D_NORMAL, _(" Setup "), _(" Setup saved to ~/%s"),
+    message (D_NORMAL, _("Setup"), _("Setup saved to ~/%s"),
              MC_USERCONF_DIR PATH_SEP_STR MC_CONFIG_FILE);
 }
 

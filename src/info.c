@@ -108,7 +108,7 @@ info_show_info (struct WInfo *info)
     if (i18n_adjust == 0)
     {
         /* This printf pattern string is used as a reference for size */
-        file_label = _("File:       %s");
+        file_label = _("File: %s");
         i18n_adjust = str_term_width1 (file_label) + 2;
     }
 
@@ -148,7 +148,7 @@ info_show_info (struct WInfo *info)
 
     case 14:
         widget_move (&info->widget, 14, 3);
-        tty_printf (_("Type:      %s "),
+        tty_printf (_("Type:      %s"),
                     myfs_stats.typename ? myfs_stats.typename : _("non-local vfs"));
         if (myfs_stats.type != 0xffff && myfs_stats.type != -1)
             tty_printf (" (%Xh)", myfs_stats.type);

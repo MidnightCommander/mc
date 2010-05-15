@@ -130,7 +130,7 @@ mcdiffview_dialog_search (WDiff * dview)
                      MC_HISTORY_SHARED_SEARCH,
                      &exp),
         /* 7 */
-        QUICK_LABEL (2, SEARCH_DLG_WIDTH, 2, SEARCH_DLG_HEIGHT, N_(" Enter search string:")),
+        QUICK_LABEL (3, SEARCH_DLG_WIDTH, 2, SEARCH_DLG_HEIGHT, N_("Enter search string:")),
         QUICK_END
     };
 
@@ -252,7 +252,7 @@ mcdiffview_do_search (WDiff * dview)
     if (!present_result)
     {
         dview->search.last_found_line = -1;
-        error_dialog (_("Search"), _(" Search string not found "));
+        error_dialog (_("Search"), _("Search string not found"));
     }
 }
 
@@ -265,7 +265,7 @@ dview_search_cmd (WDiff * dview)
 {
     if (dview->dsrc != DATA_SRC_MEM)
     {
-        error_dialog (_("Search"), _(" Search is disabled "));
+        error_dialog (_("Search"), _("Search is disabled"));
         return;
     }
 
@@ -292,7 +292,7 @@ void
 dview_continue_search_cmd (WDiff * dview)
 {
     if (dview->dsrc != DATA_SRC_MEM)
-        error_dialog (_("Search"), _(" Search is disabled "));
+        error_dialog (_("Search"), _("Search is disabled"));
     else if (dview->search.handle == NULL)
         dview_search_cmd (dview);
     else

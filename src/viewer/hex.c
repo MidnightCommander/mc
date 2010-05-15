@@ -376,19 +376,19 @@ mcview_hexedit_save_changes (mcview_t * view)
             }
 
             if (mc_close (fp) == -1)
-                message (D_ERROR, _(" Save file "),
-                         _(" Error while closing the file: \n %s \n"
-                           " Data may have been written or not. "), unix_error_string (errno));
+                message (D_ERROR, _("Save file"),
+                         _("Error while closing the file:\n%s\n"
+                           "Data may have been written or not"), unix_error_string (errno));
 
             view->dirty++;
             return TRUE;
         }
 
       save_error:
-        text = g_strdup_printf (_(" Cannot save file: \n %s "), unix_error_string (errno));
+        text = g_strdup_printf (_("Cannot save file:\n%s"), unix_error_string (errno));
         (void) mc_close (fp);
 
-        answer = query_dialog (_(" Save file "), text, D_ERROR, 2, _("&Retry"), _("&Cancel"));
+        answer = query_dialog (_("Save file"), text, D_ERROR, 2, _("&Retry"), _("&Cancel"));
         g_free (text);
     }
 

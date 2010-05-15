@@ -528,7 +528,7 @@ tree_chdir_sel (WTree * tree)
     if (do_cd (tree->selected_ptr->name, cd_exact))
         select_item (current_panel);
     else
-        message (D_ERROR, MSG_ERROR, _(" Cannot chdir to \"%s\" \n %s "),
+        message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\"\n%s"),
                  tree->selected_ptr->name, unix_error_string (errno));
 
     change_panel ();
@@ -720,7 +720,7 @@ tree_move (WTree * tree, const char *default_dest)
 
     if (stat (dest, &buf))
     {
-        message (D_ERROR, MSG_ERROR, _(" Cannot stat the destination \n %s "),
+        message (D_ERROR, MSG_ERROR, _("Cannot stat the destination\n%s"),
                  unix_error_string (errno));
         g_free (dest);
         return;
@@ -728,7 +728,7 @@ tree_move (WTree * tree, const char *default_dest)
 
     if (!S_ISDIR (buf.st_mode))
     {
-        file_error (_(" Destination \"%s\" must be a directory \n %s "), dest);
+        file_error (_("Destination \"%s\" must be a directory\n%s"), dest);
         g_free (dest);
         return;
     }
@@ -778,7 +778,7 @@ tree_rmdir (void *data)
         char *buf;
         int result;
 
-        buf = g_strdup_printf (_("  Delete %s?  "), tree->selected_ptr->name);
+        buf = g_strdup_printf (_("Delete %s?"), tree->selected_ptr->name);
         result = query_dialog (Q_ ("DialogTitle|Delete"), buf, D_ERROR, 2, _("&Yes"), _("&No"));
         g_free (buf);
         if (result != 0)

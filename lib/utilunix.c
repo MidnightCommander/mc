@@ -388,12 +388,12 @@ open_error_pipe (void)
 {
     if (pipe (error_pipe) < 0)
     {
-        message (D_NORMAL, _("Warning"), _(" Pipe failed "));
+        message (D_NORMAL, _("Warning"), _("Pipe failed"));
     }
     old_error = dup (2);
     if (old_error < 0 || close (2) || dup (error_pipe[1]) != 2)
     {
-        message (D_NORMAL, _("Warning"), _(" Dup failed "));
+        message (D_NORMAL, _("Warning"), _("Dup failed"));
 
         close (error_pipe[0]);
         error_pipe[0] = -1;
@@ -448,7 +448,7 @@ close_error_pipe (int error, const char *text)
     {
         if (dup2 (old_error, 2) == -1)
         {
-            message (error, MSG_ERROR, "%s", _("Error dup'ing old error pipe"));
+            message (error, MSG_ERROR, _("Error dup'ing old error pipe"));
             return 1;
         }
         close (old_error);
@@ -472,7 +472,7 @@ close_error_pipe (int error, const char *text)
     else
     {
         /* Show given text and possible message from pipe */
-        message (error, title, " %s \n %s ", text, msg);
+        message (error, title, "%s\n%s", text, msg);
     }
     return 1;
 }

@@ -379,7 +379,7 @@ mcview_load_command_output (mcview_t * view, const char *command)
         /* Avoid two messages.  Message from stderr has priority.  */
         mcview_display (view);
         if (!close_error_pipe (mcview_is_in_panel (view) ? -1 : D_ERROR, NULL))
-            mcview_show_error (view, _(" Cannot spawn child process "));
+            mcview_show_error (view, _("Cannot spawn child process"));
         return FALSE;
     }
 

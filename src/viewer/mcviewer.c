@@ -300,7 +300,7 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
         fd = mc_open (file, O_RDONLY | O_NONBLOCK);
         if (fd == -1)
         {
-            g_snprintf (tmp, sizeof (tmp), _(" Cannot open \"%s\"\n %s "),
+            g_snprintf (tmp, sizeof (tmp), _("Cannot open \"%s\"\n%s"),
                         file, unix_error_string (errno));
             mcview_show_error (view, tmp);
             g_free (view->filename);
@@ -312,7 +312,7 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
         if (mc_fstat (fd, &st) == -1)
         {
             mc_close (fd);
-            g_snprintf (tmp, sizeof (tmp), _(" Cannot stat \"%s\"\n %s "),
+            g_snprintf (tmp, sizeof (tmp), _("Cannot stat \"%s\"\n%s"),
                         file, unix_error_string (errno));
             mcview_show_error (view, tmp);
             g_free (view->filename);
@@ -323,7 +323,7 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
         if (!S_ISREG (st.st_mode))
         {
             mc_close (fd);
-            mcview_show_error (view, _(" Cannot view: not a regular file "));
+            mcview_show_error (view, _("Cannot view: not a regular file"));
             g_free (view->filename);
             view->filename = NULL;
             goto finish;

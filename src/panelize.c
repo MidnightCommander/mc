@@ -249,8 +249,8 @@ add2panelize_cmd (void)
 
     if (pname->buffer && (*pname->buffer))
     {
-        label = input_dialog (_(" Add to external panelize "),
-                              _(" Enter command label: "), MC_HISTORY_FM_PANELIZE_ADD, "");
+        label = input_dialog (_("Add to external panelize"),
+                              _("Enter command label:"), MC_HISTORY_FM_PANELIZE_ADD, "");
         if (!label)
             return;
         if (!*label)
@@ -296,7 +296,7 @@ external_panelize (void)
 
     if (!vfs_current_is_local ())
     {
-        message (D_ERROR, MSG_ERROR, _(" Cannot run external panelize in a non-local directory "));
+        message (D_ERROR, MSG_ERROR, _("Cannot run external panelize in a non-local directory"));
         return;
     }
 

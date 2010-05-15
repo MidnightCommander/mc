@@ -105,7 +105,7 @@ mcview_dialog_search (mcview_t * view)
                      (int *) &mcview_search_options.type),
         QUICK_INPUT (3, SEARCH_DLG_WIDTH, 3, SEARCH_DLG_HEIGHT,
                      INPUT_LAST_TEXT, SEARCH_DLG_WIDTH - 6, 0, MC_HISTORY_SHARED_SEARCH, &exp),
-        QUICK_LABEL (2, SEARCH_DLG_WIDTH, 2, SEARCH_DLG_HEIGHT, N_(" Enter search string:")),
+        QUICK_LABEL (3, SEARCH_DLG_WIDTH, 2, SEARCH_DLG_HEIGHT, N_("Enter search string:")),
         QUICK_END
     };
 

@@ -123,13 +123,13 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
             /*  7 */ QUICK_RADIO (3, REPLACE_DLG_WIDTH, 7, REPLACE_DLG_HEIGHT,
                                   num_of_types, (const char **) list_of_types,
                                   (int *) &edit_search_options.type),
-            /*  8 */ QUICK_LABEL (2, REPLACE_DLG_WIDTH, 4, REPLACE_DLG_HEIGHT,
-                                  N_(" Enter replacement string:")),
+            /*  8 */ QUICK_LABEL (3, REPLACE_DLG_WIDTH, 4, REPLACE_DLG_HEIGHT,
+                                  N_("Enter replacement string:")),
             /*  9 */ QUICK_INPUT (3, REPLACE_DLG_WIDTH, 5, REPLACE_DLG_HEIGHT,
                                   replace_default, REPLACE_DLG_WIDTH - 6, 0, "replace",
                                   replace_text),
-            /* 10 */ QUICK_LABEL (2, REPLACE_DLG_WIDTH, 2, REPLACE_DLG_HEIGHT,
-                                  N_(" Enter search string:")),
+            /* 10 */ QUICK_LABEL (3, REPLACE_DLG_WIDTH, 2, REPLACE_DLG_HEIGHT,
+                                  N_("Enter search string:")),
             /* 11 */ QUICK_INPUT (3, REPLACE_DLG_WIDTH, 3, REPLACE_DLG_HEIGHT,
                                   search_default, REPLACE_DLG_WIDTH - 6, 0,
                                   MC_HISTORY_SHARED_SEARCH, search_text),
@@ -137,7 +137,7 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
         };
 
         QuickDialog Quick_input = {
-            REPLACE_DLG_WIDTH, REPLACE_DLG_HEIGHT, -1, -1, N_(" Replace "),
+            REPLACE_DLG_WIDTH, REPLACE_DLG_HEIGHT, -1, -1, N_("Replace"),
             "[Input Line Keys]", quick_widgets, FALSE
         };
 
@@ -206,7 +206,7 @@ editcmd_dialog_search_show (WEdit * edit, char **search_text)
                          *search_text, SEARCH_DLG_WIDTH - 6, 0,
                          MC_HISTORY_SHARED_SEARCH, search_text),
             /* 10 */
-            QUICK_LABEL (2, SEARCH_DLG_WIDTH, 2, SEARCH_DLG_HEIGHT, N_(" Enter search string:")),
+            QUICK_LABEL (3, SEARCH_DLG_WIDTH, 2, SEARCH_DLG_HEIGHT, N_("Enter search string:")),
             QUICK_END
         };
 
@@ -495,8 +495,8 @@ editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, int max_l
         {
             if (!edit_query_dialog2
                 (_("Warning"),
-                 _(" Current text was modified without a file save. \n"
-                   " Continue discards these changes. "), _("C&ontinue"), _("&Cancel")))
+                 _("Current text was modified without a file save.\n"
+                   "Continue discards these changes."), _("C&ontinue"), _("&Cancel")))
             {
                 edit->force |= REDRAW_COMPLETELY;
                 do_moveto = 1;
@@ -567,7 +567,7 @@ editcmd_dialog_replace_prompt_show (WEdit * edit, char *from_text, char *to_text
         /* 2 */ QUICK_BUTTON (21, dlg_width, 6, dlg_height, N_("A&ll"), B_REPLACE_ALL, NULL),
         /* 3 */ QUICK_BUTTON (4, dlg_width, 6, dlg_height, N_("&Replace"), B_ENTER, NULL),
         /* 4 */ QUICK_LABEL (3, dlg_width, 2, dlg_height, NULL),
-        /* 5 */ QUICK_LABEL (2, dlg_width, 3, dlg_height, N_(" Replace with: ")),
+        /* 5 */ QUICK_LABEL (3, dlg_width, 3, dlg_height, N_("Replace with:")),
         /* 6 */ QUICK_LABEL (3, dlg_width, 4, dlg_height, NULL),
         QUICK_END
     };
@@ -594,10 +594,10 @@ editcmd_dialog_replace_prompt_show (WEdit * edit, char *from_text, char *to_text
     for (i = 0; i < 7; i++)
         quick_widgets[i].x_divisions = dlg_width;
 
-    g_snprintf (tmp, sizeof (tmp), " '%s'", from_text);
+    g_snprintf (tmp, sizeof (tmp), "\"%s\"", from_text);
     repl_from = g_strdup (str_fit_to_term (tmp, dlg_width - 7, J_LEFT));
 
-    g_snprintf (tmp, sizeof (tmp), " '%s'", to_text);
+    g_snprintf (tmp, sizeof (tmp), "\"%s\"", to_text);
     repl_to = g_strdup (str_fit_to_term (tmp, dlg_width - 7, J_LEFT));
 
     quick_widgets[4].u.label.text = repl_from;
@@ -611,7 +611,7 @@ editcmd_dialog_replace_prompt_show (WEdit * edit, char *from_text, char *to_text
 
     {
         QuickDialog Quick_input = {
-            dlg_width, dlg_height, 0, 0, N_(" Confirm replace "),
+            dlg_width, dlg_height, 0, 0, N_("Confirm replace"),
             "[Input Line Keys]", quick_widgets, FALSE
         };
 

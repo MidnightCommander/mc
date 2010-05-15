@@ -84,7 +84,7 @@ static const char* learn_title = N_("Learn keys");
 static int learn_button (int action)
 {
     char *seq;
-    Dlg_head *d = create_message (D_ERROR, _(" Teach me a key "),
+    Dlg_head *d = create_message (D_ERROR, _("Teach me a key"),
 _("Please press the %s\n"
 "and then wait until this message disappears.\n\n"
 "Then, press it again to see if OK appears\n"
@@ -117,8 +117,8 @@ _("Please press the %s\n"
 	}
 
 	if (!seq_ok)
-	    message (D_NORMAL, _(" Cannot accept this key "),
-		_(" You have entered \"%s\""), seq);
+	    message (D_NORMAL, _("Cannot accept this key"),
+		_("You have entered \"%s\""), seq);
 
 	g_free (seq);
     }

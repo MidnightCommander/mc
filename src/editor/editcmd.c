@@ -111,7 +111,7 @@ edit_search_cmd_search_create_bookmark (WEdit * edit)
 
     if (found == 0)
     {
-        edit_error_dialog (_("Search"), _(" Search string not found "));
+        edit_error_dialog (_("Search"), _("Search string not found"));
     }
     else
     {
@@ -209,7 +209,7 @@ edit_save_file (WEdit * edit, const char *filename)
         if (rv == 0 && sb.st_nlink > 1)
         {
             rv = edit_query_dialog3 (_("Warning"),
-                                     _(" File has hard-links. Detach before saving? "),
+                                     _("File has hard-links. Detach before saving?"),
                                      _("&Yes"), _("&No"), _("&Cancel"));
             switch (rv)
             {
@@ -300,7 +300,7 @@ edit_save_file (WEdit * edit, const char *filename)
 #else
             if (pclose (file) != 0)
             {
-                tmp = g_strconcat (_(" Error writing to pipe: "), p, " ", (char *) NULL);
+                tmp = g_strdup_printf (_("Error writing to pipe: %s"), p);
                 edit_error_dialog (_("Error"), tmp);
                 g_free (tmp);
                 g_free (p);
@@ -310,8 +310,7 @@ edit_save_file (WEdit * edit, const char *filename)
         }
         else
         {
-            tmp = g_strconcat (_(" Cannot open pipe for writing: "), p, " ", (char *) NULL);
-
+            tmp = g_strdup_printf (_("Cannot open pipe for writing: %s"), p);
             edit_error_dialog (_("Error"), get_sys_error (tmp));
             g_free (p);
             g_free (tmp);
@@ -388,7 +387,7 @@ edit_save_file (WEdit * edit, const char *filename)
         {
             char *msg;
 
-            msg = g_strdup_printf (_(" Cannot open file for writing: %s "), savename);
+            msg = g_strdup_printf (_("Cannot open file for writing: %s"), savename);
             edit_error_dialog (_("Error"), msg);
             g_free (msg);
             goto error_save;
@@ -455,7 +454,7 @@ menu_save_mode_cmd (void)
     };
 
     QuickDialog dialog = {
-        DLG_X, DLG_Y, -1, -1, N_(" Edit Save Mode "),
+        DLG_X, DLG_Y, -1, -1, N_("Edit Save Mode"),
         "[Edit Save Mode]", widgets, FALSE
     };
 
@@ -548,13 +547,13 @@ edit_get_save_file_as (WEdit * edit)
         QUICK_LABEL (3, DLG_WIDTH, DLG_HEIGHT - 9, DLG_HEIGHT, N_("Change line breaks to:")),
         QUICK_INPUT (3, DLG_WIDTH, DLG_HEIGHT - 11, DLG_HEIGHT, filename, DLG_WIDTH - 6, 0,
                      "save-as", &filename),
-        QUICK_LABEL (2, DLG_WIDTH, DLG_HEIGHT - 12, DLG_HEIGHT, N_(" Enter file name: ")),
+        QUICK_LABEL (3, DLG_WIDTH, DLG_HEIGHT - 12, DLG_HEIGHT, N_("Enter file name:")),
         QUICK_END
     };
 
     QuickDialog Quick_options = {
         DLG_WIDTH, DLG_HEIGHT, -1, -1,
-        N_(" Save As "), "[Save File As]",
+        N_("Save As"), "[Save File As]",
         quick_widgets, FALSE
     };
 
@@ -610,7 +609,7 @@ edit_save_as_cmd (WEdit * edit)
                     /* Overwrite the current file or cancel the operation */
                     if (edit_query_dialog2
                         (_("Warning"),
-                         _(" A file already exists with this name. "),
+                         _("A file already exists with this name"),
                          _("&Overwrite"), _("&Cancel")))
                     {
                         edit->force |= REDRAW_COMPLETELY;
@@ -669,7 +668,7 @@ edit_save_as_cmd (WEdit * edit)
                 edit->force |= REDRAW_COMPLETELY;
                 return 1;
             default:
-                edit_error_dialog (_(" Save As "), get_sys_error (_(" Cannot save file. ")));
+                edit_error_dialog (_("Save as"), get_sys_error (_("Cannot save file")));
                 /* fallthrough */
             case -1:
                 /* Failed, so maintain modify (not save) lock */
@@ -747,13 +746,13 @@ edit_delete_macro (WEdit * edit, int k)
     g_free (tmp);
     if (!g)
     {
-        edit_error_dialog (_(" Delete macro "), get_sys_error (_(" Cannot open temp file ")));
+        edit_error_dialog (_("Delete macro"), get_sys_error (_("Cannot open temp file")));
         return 1;
     }
     f = edit_open_macro_file ("r");
     if (!f)
     {
-        edit_error_dialog (_(" Delete macro "), get_sys_error (_(" Cannot open macro file ")));
+        edit_error_dialog (_("Delete macro"), get_sys_error (_("Cannot open macro file")));
         fclose (g);
         return 1;
     }
@@ -783,7 +782,7 @@ edit_delete_macro (WEdit * edit, int k)
     tmp2 = concat_dir_and_file (home_dir, EDIT_MACRO_FILE);
     if (rename (tmp, tmp2) == -1)
     {
-        edit_error_dialog (_(" Delete macro "), get_sys_error (_(" Cannot overwrite macro file ")));
+        edit_error_dialog (_("Delete macro"), get_sys_error (_("Cannot overwrite macro file")));
         g_free (tmp);
         g_free (tmp2);
         return 1;
@@ -804,7 +803,7 @@ edit_save_macro_cmd (WEdit * edit, struct macro macro[], int n)
     int s, i;
 
     edit_push_action (edit, KEY_PRESS + edit->start_display);
-    s = editcmd_dialog_raw_key_query (_(" Save macro "), _(" Press the macro's new hotkey: "), 1);
+    s = editcmd_dialog_raw_key_query (_("Save macro"), _("Press the macro's new hotkey:"), 1);
     edit->force |= REDRAW_COMPLETELY;
     if (s)
     {
@@ -826,7 +825,7 @@ edit_save_macro_cmd (WEdit * edit, struct macro macro[], int n)
             return 1;
         }
         else
-            edit_error_dialog (_(" Save macro "), get_sys_error (_(" Cannot open macro file ")));
+            edit_error_dialog (_("Save macro"), get_sys_error (_("Cannot open macro file")));
     }
     return 0;
 }
@@ -836,7 +835,7 @@ edit_delete_macro_cmd (WEdit * edit)
 {
     int command;
 
-    command = editcmd_dialog_raw_key_query (_(" Delete macro "), _(" Press macro hotkey: "), 1);
+    command = editcmd_dialog_raw_key_query (_("Delete macro"), _("Press macro hotkey:"), 1);
 
     if (command != 0)
         edit_delete_macro (edit, command);
@@ -895,7 +894,7 @@ edit_load_macro_cmd (WEdit * edit, struct macro macro[], int *n, int k)
         return found;
     }
     else
-        edit_error_dialog (_(" Load macro "), get_sys_error (_(" Cannot open macro file ")));
+        edit_error_dialog (_("Load macro"), get_sys_error (_("Cannot open macro file")));
     return 0;
 }
 
@@ -912,8 +911,8 @@ edit_save_confirm_cmd (WEdit * edit)
 
     if (edit_confirm_save)
     {
-        f = g_strconcat (_(" Confirm save file? : "), edit->filename, " ", (char *) NULL);
-        if (edit_query_dialog2 (_(" Save file "), f, _("&Save"), _("&Cancel")))
+        f = g_strdup_printf (_("Confirm save file: \"%s\""), edit->filename);
+        if (edit_query_dialog2 (_("Save file"), f, _("&Save"), _("&Cancel")))
         {
             g_free (f);
             return 0;
@@ -961,7 +960,7 @@ edit_new_cmd (WEdit * edit)
         if (edit_query_dialog2
             (_("Warning"),
              _
-             (" Current text was modified without a file save. \n Continue discards these changes. "),
+             ("Current text was modified without a file save.\nContinue discards these changes"),
              _("C&ontinue"), _("&Cancel")))
         {
             edit->force |= REDRAW_COMPLETELY;
@@ -1001,7 +1000,7 @@ edit_load_syntax_file (WEdit * edit)
     if (geteuid () == 0)
     {
         dir = query_dialog (_("Syntax file edit"),
-                            _(" Which syntax file you want to edit? "), D_NORMAL, 2,
+                            _("Which syntax file you want to edit?"), D_NORMAL, 2,
                             _("&User"), _("&System Wide"));
     }
 
@@ -1034,9 +1033,9 @@ edit_load_menu_file (WEdit * edit)
     char *menufile;
     int dir = 0;
 
-    dir = query_dialog (_(" Menu edit "),
-                        _(" Which menu file do you want to edit? "), D_NORMAL,
-                        geteuid ()? 2 : 3, _("&Local"), _("&User"), _("&System Wide"));
+    dir = query_dialog (_("Menu edit"),
+                        _("Which menu file do you want to edit?"), D_NORMAL,
+                        geteuid () != 0 ? 2 : 3, _("&Local"), _("&User"), _("&System Wide"));
 
     menufile = concat_dir_and_file (mc_home, EDIT_GLOBAL_MENU);
 
@@ -1087,8 +1086,8 @@ edit_load_cmd (WEdit * edit, edit_current_file_t what)
     if (edit->modified
         && (edit_query_dialog2
             (_("Warning"),
-             _(" Current text was modified without a file save. \n"
-               " Continue discards these changes. "), _("C&ontinue"), _("&Cancel")) == 1))
+             _("Current text was modified without a file save.\n"
+               "Continue discards these changes"), _("C&ontinue"), _("&Cancel")) == 1))
     {
         edit->force |= REDRAW_COMPLETELY;
         return 0;
@@ -1097,7 +1096,7 @@ edit_load_cmd (WEdit * edit, edit_current_file_t what)
     switch (what)
     {
     case EDIT_FILE_COMMON:
-        exp = input_expand_dialog (_(" Load "), _(" Enter file name: "),
+        exp = input_expand_dialog (_("Load"), _("Enter file name:"),
                                    MC_HISTORY_EDIT_LOAD, edit->filename);
 
         if (exp)
@@ -1374,7 +1373,7 @@ edit_block_move_cmd (WEdit * edit)
         if (edit_query_dialog2
             (_("Warning"),
              _
-             (" Block is large, you may not be able to undo this action. "),
+             ("Block is large, you may not be able to undo this action"),
              _("C&ontinue"), _("&Cancel")))
             return;
 
@@ -1496,7 +1495,7 @@ edit_block_delete (WEdit * edit)
         if (edit_query_dialog2
             (_("Warning"),
              _
-             (" Block is large, you may not be able to undo this action. "),
+             ("Block is large, you may not be able to undo this action"),
              _("C&ontinue"), _("&Cancel")))
         {
             return 1;
@@ -1579,7 +1578,7 @@ editcmd_find (WEdit * edit, gsize * len)
         if (mark_res != 0)
         {
             edit->search->error = MC_SEARCH_E_NOTFOUND;
-            edit->search->error_str = g_strdup (_(" Search string not found "));
+            edit->search->error_str = g_strdup (_("Search string not found"));
             return FALSE;
         }
         if (edit_search_options.backwards)
@@ -1619,7 +1618,7 @@ editcmd_find (WEdit * edit, gsize * len)
             }
             search_start--;
         }
-        edit->search->error_str = g_strdup (_(" Search string not found "));
+        edit->search->error_str = g_strdup (_("Search string not found"));
     }
     else
     {
@@ -1866,7 +1865,7 @@ edit_replace_cmd (WEdit * edit, int again)
         }
         else
         {
-            const char *msg = _(" Replace ");
+            const char *msg = _("Replace");
             /* try and find from right here for next search */
             edit->search_start = edit->curs1;
             edit_update_curs_col (edit);
@@ -1875,10 +1874,10 @@ edit_replace_cmd (WEdit * edit, int again)
             edit_render_keypress (edit);
             if (times_replaced)
             {
-                message (D_NORMAL, msg, _(" %ld replacements made. "), times_replaced);
+                message (D_NORMAL, msg, _("%ld replacements made"), times_replaced);
             }
             else
-                query_dialog (msg, _(" Search string not found "), D_NORMAL, 1, _("&OK"));
+                query_dialog (msg, _("Search string not found"), D_NORMAL, 1, _("&OK"));
             edit->replace_mode = -1;
         }
     }
@@ -2048,7 +2047,7 @@ edit_ok_to_exit (WEdit * edit)
         return 0;
 
     switch (edit_query_dialog3
-            (_("Quit"), _(" File was modified, Save with exit? "),
+            (_("Quit"), _("File was modified, save with exit?"),
              _("&Cancel quit"), _("&Yes"), _("&No")))
     {
     case 1:
@@ -2171,7 +2170,7 @@ void
 edit_paste_from_history (WEdit * edit)
 {
     (void) edit;
-    edit_error_dialog (_(" Error "), _(" This function is not implemented. "));
+    edit_error_dialog (_("Error"), _("This function is not implemented"));
 }
 
 int
@@ -2182,8 +2181,8 @@ edit_copy_to_X_buf_cmd (WEdit * edit)
         return 0;
     if (!edit_save_block_to_clip_file (edit, start_mark, end_mark))
     {
-        edit_error_dialog (_(" Copy to clipboard "),
-                           get_sys_error (_(" Unable to save to file. ")));
+        edit_error_dialog (_("Copy to clipboard"),
+                           get_sys_error (_("Unable to save to file")));
         return 1;
     }
     edit_mark_cmd (edit, 1);
@@ -2198,7 +2197,7 @@ edit_cut_to_X_buf_cmd (WEdit * edit)
         return 0;
     if (!edit_save_block_to_clip_file (edit, start_mark, end_mark))
     {
-        edit_error_dialog (_(" Cut to clipboard "), _(" Unable to save to file. "));
+        edit_error_dialog (_("Cut to clipboard"), _("Unable to save to file"));
         return 1;
     }
     edit_block_delete_cmd (edit);
@@ -2230,7 +2229,7 @@ edit_goto_cmd (WEdit * edit)
     char s[32];
 
     g_snprintf (s, sizeof (s), "%ld", line);
-    f = input_dialog (_(" Goto line "), _(" Enter line: "), MC_HISTORY_EDIT_GOTO_LINE,
+    f = input_dialog (_("Goto line"), _("Enter line:"), MC_HISTORY_EDIT_GOTO_LINE,
                       line ? s : "");
     if (!f)
         return;
@@ -2270,7 +2269,7 @@ edit_save_block_cmd (WEdit * edit)
 
     tmp = concat_dir_and_file (home_dir, EDIT_CLIP_FILE);
     exp =
-        input_expand_dialog (_(" Save Block "), _(" Enter file name: "),
+        input_expand_dialog (_("Save block"), _("Enter file name:"),
                              MC_HISTORY_EDIT_SAVE_BLOCK, tmp);
     g_free (tmp);
     edit_push_action (edit, KEY_PRESS + edit->start_display);
@@ -2292,7 +2291,7 @@ edit_save_block_cmd (WEdit * edit)
             else
             {
                 g_free (exp);
-                edit_error_dialog (_(" Save Block "), get_sys_error (_(" Cannot save file. ")));
+                edit_error_dialog (_("Save block"), get_sys_error (_("Cannot save file")));
             }
         }
     }
@@ -2309,7 +2308,7 @@ edit_insert_file_cmd (WEdit * edit)
     char *exp;
 
     tmp = concat_dir_and_file (home_dir, EDIT_CLIP_FILE);
-    exp = input_expand_dialog (_(" Insert File "), _(" Enter file name: "),
+    exp = input_expand_dialog (_("Insert file"), _("Enter file name:"),
                                MC_HISTORY_EDIT_INSERT_FILE, tmp);
     g_free (tmp);
     edit_push_action (edit, KEY_PRESS + edit->start_display);
@@ -2331,7 +2330,7 @@ edit_insert_file_cmd (WEdit * edit)
             else
             {
                 g_free (exp);
-                edit_error_dialog (_(" Insert File "), get_sys_error (_(" Cannot insert file. ")));
+                edit_error_dialog (_("Insert file"), get_sys_error (_("Cannot insert file")));
             }
         }
     }
@@ -2350,7 +2349,7 @@ edit_sort_cmd (WEdit * edit)
 
     if (eval_marks (edit, &start_mark, &end_mark))
     {
-        edit_error_dialog (_(" Sort block "), _(" You must first highlight a block of text. "));
+        edit_error_dialog (_("Sort block"), _("You must first highlight a block of text"));
         return 0;
     }
 
@@ -2358,8 +2357,8 @@ edit_sort_cmd (WEdit * edit)
     edit_save_block (edit, tmp, start_mark, end_mark);
     g_free (tmp);
 
-    exp = input_dialog (_(" Run Sort "),
-                        _(" Enter sort options (see manpage) separated by whitespace: "),
+    exp = input_dialog (_("Run sort"),
+                        _("Enter sort options (see manpage) separated by whitespace:"),
                         MC_HISTORY_EDIT_SORT, (old != NULL) ? old : "");
 
     if (!exp)
@@ -2374,14 +2373,14 @@ edit_sort_cmd (WEdit * edit)
     {
         if (e == -1 || e == 127)
         {
-            edit_error_dialog (_(" Sort "), get_sys_error (_(" Cannot execute sort command ")));
+            edit_error_dialog (_("Sort"), get_sys_error (_("Cannot execute sort command")));
         }
         else
         {
             char q[8];
             sprintf (q, "%d ", e);
-            tmp = g_strconcat (_(" Sort returned non-zero: "), q, (char *) NULL);
-            edit_error_dialog (_(" Sort "), tmp);
+            tmp = g_strdup_printf (_("Sort returned non-zero: %s"), q);
+            edit_error_dialog (_("Sort"), tmp);
             g_free (tmp);
         }
         return -1;
@@ -2502,7 +2501,7 @@ edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
         if (eval_marks (edit, &start_mark, &end_mark))
         {
             edit_error_dialog (_("Process block"),
-                               _(" You must first highlight a block of text. "));
+                               _("You must first highlight a block of text"));
             goto edit_block_process_cmd__EXIT;
         }
         edit_save_block (edit, b, start_mark, end_mark);
@@ -2620,18 +2619,18 @@ edit_mail_dialog (WEdit * edit)
         /* 0 */ QUICK_BUTTON (6, 10, 9, MAIL_DLG_HEIGHT, N_("&Cancel"), B_CANCEL, NULL),
         /* 1 */ QUICK_BUTTON (2, 10, 9, MAIL_DLG_HEIGHT, N_("&OK"), B_ENTER, NULL),
         /* 2 */ QUICK_INPUT (3, 50, 8, MAIL_DLG_HEIGHT, "", 44, 0, "mail-dlg-input", &tmail_cc),
-        /* 3 */ QUICK_LABEL (2, 50, 7, MAIL_DLG_HEIGHT, N_(" Copies to")),
+        /* 3 */ QUICK_LABEL (3, 50, 7, MAIL_DLG_HEIGHT, N_("Copies to")),
         /* 4 */ QUICK_INPUT (3, 50, 6, MAIL_DLG_HEIGHT, "", 44, 0, "mail-dlg-input-2",
                              &tmail_subject),
-        /* 5 */ QUICK_LABEL (2, 50, 5, MAIL_DLG_HEIGHT, N_(" Subject")),
+        /* 5 */ QUICK_LABEL (3, 50, 5, MAIL_DLG_HEIGHT, N_("Subject")),
         /* 6 */ QUICK_INPUT (3, 50, 4, MAIL_DLG_HEIGHT, "", 44, 0, "mail-dlg-input-3", &tmail_to),
-        /* 7 */ QUICK_LABEL (2, 50, 3, MAIL_DLG_HEIGHT, N_(" To")),
-        /* 8 */ QUICK_LABEL (2, 50, 2, MAIL_DLG_HEIGHT, N_(" mail -s <subject> -c <cc> <to>")),
+        /* 7 */ QUICK_LABEL (3, 50, 3, MAIL_DLG_HEIGHT, N_("To")),
+        /* 8 */ QUICK_LABEL (3, 50, 2, MAIL_DLG_HEIGHT, N_("mail -s <subject> -c <cc> <to>")),
         QUICK_END
     };
 
     QuickDialog Quick_input = {
-        50, MAIL_DLG_HEIGHT, -1, -1, N_(" Mail "),
+        50, MAIL_DLG_HEIGHT, -1, -1, N_("Mail"),
         "[Input Line Keys]", quick_widgets, FALSE
     };
 
@@ -2893,8 +2892,8 @@ edit_select_codepage_cmd (WEdit * edit)
 void
 edit_insert_literal_cmd (WEdit * edit)
 {
-    int char_for_insertion = editcmd_dialog_raw_key_query (_(" Insert Literal "),
-                                                           _(" Press any key: "), 0);
+    int char_for_insertion = editcmd_dialog_raw_key_query (_("Insert literal"),
+                                                           _("Press any key:"), 0);
     edit_execute_key_command (edit, -1, ascii_alpha_to_cntrl (char_for_insertion));
 }
 
@@ -2902,7 +2901,7 @@ void
 edit_execute_macro_cmd (WEdit * edit)
 {
     int command =
-        CK_Macro (editcmd_dialog_raw_key_query (_(" Execute Macro "), _(" Press macro hotkey: "),
+        CK_Macro (editcmd_dialog_raw_key_query (_("Execute macro"), _("Press macro hotkey:"),
                                                 1));
     if (command == CK_Macro (0))
         command = CK_Insert_Char;
@@ -2928,8 +2927,8 @@ edit_load_forward_cmd (WEdit * edit)
     {
         if (edit_query_dialog2
             (_("Warning"),
-             _(" Current text was modified without a file save. \n"
-               " Continue discards these changes. "), _("C&ontinue"), _("&Cancel")))
+             _("Current text was modified without a file save\n"
+               "Continue discards these changes"), _("C&ontinue"), _("&Cancel")))
         {
             edit->force |= REDRAW_COMPLETELY;
             return 0;
@@ -2966,8 +2965,8 @@ edit_load_back_cmd (WEdit * edit)
     {
         if (edit_query_dialog2
             (_("Warning"),
-             _(" Current text was modified without a file save. \n"
-               " Continue discards these changes. "), _("C&ontinue"), _("&Cancel")))
+             _("Current text was modified without a file save\n"
+               "Continue discards these changes"), _("C&ontinue"), _("&Cancel")))
         {
             edit->force |= REDRAW_COMPLETELY;
             return 0;

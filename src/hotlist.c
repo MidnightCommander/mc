@@ -184,6 +184,7 @@ static void add_dotdot_to_list (void);
 static void
 hotlist_refresh (Dlg_head * dlg)
 {
+    /* TODO: use groupboxes here */
     common_dialog_repaint (dlg);
     tty_setcolor (COLOR_NORMAL);
     draw_box (dlg, 2, 5, dlg->lines - (hotlist_state.moving ? 6 : 10), dlg->cols - (UX * 2), TRUE);
@@ -721,12 +722,15 @@ init_hotlist (int list_type)
     add_widget_autopos (hotlist_dlg, pname, WPOS_KEEP_BOTTOM | WPOS_KEEP_LEFT);
     if (!hotlist_state.moving)
     {
+        char label_text[BUF_TINY];
+
+        g_snprintf (label_text, sizeof (label_text), " %s ", _("Directory path"));
         add_widget_autopos (hotlist_dlg,
-                            label_new (UY - 12 + LINES, UX + 1,
-                                       _(" Directory path ")), WPOS_KEEP_BOTTOM | WPOS_KEEP_LEFT);
+                            label_new (UY - 12 + LINES, UX + 2,
+                                       label_text), WPOS_KEEP_BOTTOM | WPOS_KEEP_LEFT);
 
         /* This one holds the displayed pathname */
-        pname_group = label_new (UY, UX + 1, _(" Directory label "));
+        pname_group = label_new (UY, UX + 2, _("Directory label"));
         add_widget (hotlist_dlg, pname_group);
     }
     /* get new listbox */
@@ -775,7 +779,7 @@ init_movelist (int list_type, struct hotlist *item)
     /* We add the labels.  We are interested in the last one,
      * that one will hold the path name label
      */
-    movelist_group = label_new (UY, UX + 1, _(" Directory label "));
+    movelist_group = label_new (UY, UX + 2, _("Directory label"));
     add_widget (movelist_dlg, movelist_group);
     /* get new listbox */
     l_movelist =
@@ -936,9 +940,9 @@ add_new_entry_input (const char *header, const char *text1, const char *text2,
         /* 1 */ QUICK_BUTTON (30, 80, RELATIVE_Y_BUTTONS, 0, N_("&Insert"), B_INSERT, NULL),
         /* 2 */ QUICK_BUTTON (10, 80, RELATIVE_Y_BUTTONS, 0, N_("&Append"), B_APPEND, NULL),
         /* 3 */ QUICK_INPUT (4, 80, RELATIVE_Y_INPUT_PTH, 0, *r2, 58, 2, "input-pth", r2),
-        /* 4 */ QUICK_LABEL (RELATIVE_Y_LABEL_PTH, 80, 3, 0, text2),
+        /* 4 */ QUICK_LABEL (4, 80, 3, 0, text2),
         /* 5 */ QUICK_INPUT (4, 80, 3, 0, *r1, 58, 0, "input-lbl", r1),
-        /* 6 */ QUICK_LABEL (3, 80, 2, 0, text1),
+        /* 6 */ QUICK_LABEL (4, 80, 2, 0, text1),
         QUICK_END
     };
 
@@ -998,8 +1002,8 @@ add_new_entry_cmd (void)
     /* Take current directory as default value for input fields */
     to_free = title = url = strip_password (g_strdup (current_panel->cwd), 1);
 
-    ret = add_new_entry_input (_("New hotlist entry"), _("Directory label"),
-                               _("Directory path"), "[Hotlist]", &title, &url);
+    ret = add_new_entry_input (_("New hotlist entry"), _("Directory label:"),
+                               _("Directory path:"), "[Hotlist]", &title, &url);
     g_free (to_free);
 
     if (!ret)
@@ -1027,7 +1031,7 @@ add_new_group_input (const char *header, const char *label, char **result)
         /* 1 */ QUICK_BUTTON (30, 80, 1, 0, N_("&Insert"), B_INSERT, NULL),
         /* 2 */ QUICK_BUTTON (10, 80, 1, 0, N_("&Append"), B_APPEND, NULL),
         /* 3 */ QUICK_INPUT (4, 80, 0, 0, "", 58, 0, "input", result),
-        /* 4 */ QUICK_LABEL (3, 80, 2, 0, label),
+        /* 4 */ QUICK_LABEL (4, 80, 2, 0, label),
         QUICK_END
     };
 
@@ -1078,7 +1082,7 @@ add_new_group_cmd (void)
     char *label;
     int ret;
 
-    ret = add_new_group_input (_(" New hotlist group "), _("Name of new group"), &label);
+    ret = add_new_group_input (_("New hotlist group"), _("Name of new group:"), &label);
     if (!ret || !label || !*label)
         return;
 
@@ -1101,7 +1105,7 @@ add2hotlist_cmd (void)
     strip_password (label_string, 1);
 
     lc_prompt = g_strdup_printf (cp, path_trunc (current_panel->cwd, COLS - 2 * UX - (l + 8)));
-    label = input_dialog (_(" Add to hotlist "), lc_prompt, MC_HISTORY_HOTLIST_ADD, label_string);
+    label = input_dialog (_("Add to hotlist"), lc_prompt, MC_HISTORY_HOTLIST_ADD, label_string);
     g_free (lc_prompt);
 
     if (!label || !*label)
@@ -1149,12 +1153,12 @@ remove_from_hotlist (struct hotlist *entry)
         char *title;
         int result;
 
-        title = g_strconcat (_(" Remove: "), str_trunc (entry->label, 30), " ", (char *) NULL);
+        title = g_strconcat (_("Remove:"), " ", str_trunc (entry->label, 30), (char *) NULL);
 
         if (safe_delete)
             query_set_sel (1);
         result = query_dialog (title,
-                               _("\n Are you sure you want to remove this entry?"),
+                               _("Are you sure you want to remove this entry?"),
                                D_ERROR, 2, _("&Yes"), _("&No"));
 
         g_free (title);
@@ -1170,8 +1174,8 @@ remove_from_hotlist (struct hotlist *entry)
             char *header;
             int result;
 
-            header = g_strconcat (_(" Remove: "), str_trunc (entry->label, 30), " ", (char *) NULL);
-            result = query_dialog (header, _("\n Group not empty.\n Remove it?"),
+            header = g_strconcat (_("Remove:"), " ", str_trunc (entry->label, 30), (char *) NULL);
+            result = query_dialog (header, _("Group not empty.\nRemove it?"),
                                    D_ERROR, 2, _("&Yes"), _("&No"));
             g_free (header);
 
@@ -1535,7 +1539,7 @@ load_hotlist (void)
 
     hotlist = new_hotlist ();
     hotlist->type = HL_TYPE_GROUP;
-    hotlist->label = g_strdup (_(" Top level group "));
+    hotlist->label = g_strdup (_("Top level group"));
     hotlist->up = hotlist;
     /*
      * compatibility :-(
@@ -1558,9 +1562,8 @@ load_hotlist (void)
         if (result)
             remove_old_list = 1;
         else
-            message (D_ERROR, _(" Hotlist Load "),
-                     _
-                     ("MC was unable to write ~/%s file, your old hotlist entries were not deleted"),
+            message (D_ERROR, _("Hotlist Load"),
+                     _("MC was unable to write ~/%s file,\nyour old hotlist entries were not deleted"),
                      MC_USERCONF_DIR PATH_SEP_STR MC_HOTLIST_FILE);
     }
     else

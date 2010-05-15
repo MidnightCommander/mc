@@ -342,8 +342,8 @@ quit_cmd_internal (int quiet)
     else
     {
         if (query_dialog
-            (_(" The Midnight Commander "),
-             _(" Do you really want to quit the Midnight Commander? "), D_NORMAL,
+            (_("The Midnight Commander"),
+             _("Do you really want to quit the Midnight Commander?"), D_NORMAL,
              2, _("&Yes"), _("&No")) == 0)
             q = 1;
     }
@@ -661,7 +661,7 @@ create_panel_menu (void)
 
     entries = g_list_append (entries, menu_entry_create (_("File listin&g"),    CK_ListingCmd));
     entries = g_list_append (entries, menu_entry_create (_("&Quick view"),      CK_QuickViewCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&Info" ),           CK_InfoCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Info"),            CK_InfoCmd));
     entries = g_list_append (entries, menu_entry_create (_("&Tree"),            CK_TreeCmd));
     entries = g_list_append (entries, menu_separator_create ());
     entries = g_list_append (entries, menu_entry_create (_("&Listing mode..."), CK_ChangeListingCmd));

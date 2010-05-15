@@ -110,24 +110,24 @@ chown_refresh (Dlg_head * h)
     draw_box (h, GY, GX, 12, 21, TRUE);
     draw_box (h, TY, TX, 12, 19, TRUE);
 
-    dlg_move (h, TY + 1, TX + 1);
-    tty_print_string (_(" Name "));
-    dlg_move (h, TY + 3, TX + 1);
-    tty_print_string (_(" Owner name "));
-    dlg_move (h, TY + 5, TX + 1);
-    tty_print_string (_(" Group name "));
-    dlg_move (h, TY + 7, TX + 1);
-    tty_print_string (_(" Size "));
-    dlg_move (h, TY + 9, TX + 1);
-    tty_print_string (_(" Permission "));
+    dlg_move (h, TY + 1, TX + 2);
+    tty_print_string (_("Name"));
+    dlg_move (h, TY + 3, TX + 2);
+    tty_print_string (_("Owner name"));
+    dlg_move (h, TY + 5, TX + 2);
+    tty_print_string (_("Group name"));
+    dlg_move (h, TY + 7, TX + 2);
+    tty_print_string (_("Size"));
+    dlg_move (h, TY + 9, TX + 2);
+    tty_print_string (_("Permission"));
 
     tty_setcolor (COLOR_HOT_NORMAL);
-    dlg_move (h, UY, UX + 1);
-    tty_print_string (_(" User name "));
-    dlg_move (h, GY, GX + 1);
-    tty_print_string (_(" Group name "));
-    dlg_move (h, TY, TX + 1);
-    tty_print_string (_(" File "));
+    dlg_move (h, UY, UX + 2);
+    tty_print_string (_("User name"));
+    dlg_move (h, GY, GX + 2);
+    tty_print_string (_("Group name"));
+    dlg_move (h, TY, TX + 2);
+    tty_print_string (_("File"));
 }
 
 static char *
@@ -167,7 +167,7 @@ init_chown (void)
 
     ch_dlg =
         create_dlg (0, 0, 18, 74, dialog_colors, chown_callback, "[Chown]",
-                    _(" Chown command "), DLG_CENTER | DLG_REVERSE);
+                    _("Chown command"), DLG_CENTER | DLG_REVERSE);
 
     for (i = 0; i < BUTTONS - single_set; i++)
         add_widget (ch_dlg,
@@ -224,7 +224,7 @@ static void
 do_chown (uid_t u, gid_t g)
 {
     if (mc_chown (current_panel->dir.list[current_file].fname, u, g) == -1)
-        message (D_ERROR, MSG_ERROR, _(" Cannot chown \"%s\" \n %s "),
+        message (D_ERROR, MSG_ERROR, _("Cannot chown \"%s\"\n%s"),
                  current_panel->dir.list[current_file].fname, unix_error_string (errno));
 
     do_file_mark (current_panel, current_file, 0);
@@ -339,7 +339,7 @@ chown_cmd (void)
                 {
                     need_update = 1;
                     if (mc_chown (fname, new_user, new_group) == -1)
-                        message (D_ERROR, MSG_ERROR, _(" Cannot chown \"%s\" \n %s "),
+                        message (D_ERROR, MSG_ERROR, _("Cannot chown \"%s\"\n%s"),
                                  fname, unix_error_string (errno));
                 }
                 else

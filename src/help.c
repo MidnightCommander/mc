@@ -287,7 +287,7 @@ help_follow_link (const char *start, const char *lc_selected_item)
     }
 
     /* Create a replacement page with the error message */
-    return _(" Help file format error\n");
+    return _("Help file format error\n");
 }
 
 static const char *
@@ -319,7 +319,7 @@ start_link_area (int x, int y, const char *link_name)
     Link_Area *la;
 
     if (inside_link_area)
-        message (D_NORMAL, _("Warning"), _(" Internal bug: Double start of link area "));
+        message (D_NORMAL, _("Warning"), _("Internal bug: Double start of link area"));
 
     /* Allocate memory for a new link area */
     la = g_new (Link_Area, 1);
@@ -648,7 +648,7 @@ help_index (Dlg_head * h)
     new_item = search_string (fdata, "[Contents]");
 
     if (new_item == NULL)
-        message (D_ERROR, MSG_ERROR, _(" Cannot find node %s in help file "), "[Contents]");
+        message (D_ERROR, MSG_ERROR, _("Cannot find node %s in help file"), "[Contents]");
     else
     {
         history_ptr = (history_ptr + 1) % HISTORY_SIZE;
@@ -991,7 +991,7 @@ interactive_display (const char *filename, const char *node)
         filedata = load_mc_home_file (mc_home, mc_home_alt, "mc.hlp", &hlpfile);
 
     if (filedata == NULL)
-        message (D_ERROR, MSG_ERROR, _(" Cannot open file %s \n %s "),
+        message (D_ERROR, MSG_ERROR, _("Cannot open file %s\n%s"),
                  filename ? filename : hlpfile, unix_error_string (errno));
 
     g_free (hlpfile);
@@ -1013,7 +1013,7 @@ interactive_display (const char *filename, const char *node)
 
     if (main_node == NULL)
     {
-        message (D_ERROR, MSG_ERROR, _(" Cannot find node %s in help file "), node);
+        message (D_ERROR, MSG_ERROR, _("Cannot find node %s in help file"), node);
 
         /* Fallback to [main], return if it also cannot be found */
         main_node = search_string (fdata, "[main]");

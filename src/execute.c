@@ -105,10 +105,10 @@ do_possible_cd (const char *new_dir)
 {
     if (!do_cd (new_dir, cd_exact))
         message (D_ERROR, _("Warning"),
-                 _(" The Commander can't change to the directory that \n"
-                   " the subshell claims you are in.  Perhaps you have \n"
-                   " deleted your working directory, or given yourself \n"
-                   " extra access permissions with the \"su\" command? "));
+                 _("The Commander can't change to the directory that\n"
+                   "the subshell claims you are in. Perhaps you have\n"
+                   "deleted your working directory, or given yourself\n"
+                   "extra access permissions with the \"su\" command?"));
 }
 #endif /* HAVE_SUBSHELL_SUPPORT */
 
@@ -226,7 +226,7 @@ shell_execute (const char *command, int flags)
         if (subshell_state == INACTIVE)
             do_execute (shell, cmd ? cmd : command, flags | EXECUTE_AS_SHELL);
         else
-            message (D_ERROR, MSG_ERROR, _(" The shell is already running a command "));
+            message (D_ERROR, MSG_ERROR, _("The shell is already running a command"));
     else
 #endif /* HAVE_SUBSHELL_SUPPORT */
         do_execute (shell, cmd ? cmd : command, flags | EXECUTE_AS_SHELL);
@@ -401,7 +401,7 @@ execute_with_vfs_arg (const char *command, const char *filename)
     localcopy = mc_getlocalcopy (filename);
     if (localcopy == NULL)
     {
-        message (D_ERROR, MSG_ERROR, _(" Cannot fetch a local copy of %s "), filename);
+        message (D_ERROR, MSG_ERROR, _("Cannot fetch a local copy of %s"), filename);
         return;
     }
 

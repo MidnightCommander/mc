@@ -90,7 +90,7 @@ static struct lsdel_struct lsd;
 static struct deleted_info *delarray;
 static int num_delarray, max_delarray;
 static char *block_buf;
-static const char *undelfserr = N_(" undelfs: error ");
+static const char *undelfserr = N_("undelfs: error");
 static int readdir_ptr;
 static int undelfs_usage;
 static struct vfs_class vfs_undelfs_ops;
@@ -197,25 +197,25 @@ undelfs_loaddel (void)
     delarray = g_try_malloc (sizeof (struct deleted_info) * max_delarray);
     if (!delarray)
     {
-        message (D_ERROR, undelfserr, _(" not enough memory "));
+        message (D_ERROR, undelfserr, _("not enough memory"));
         return 0;
     }
     block_buf = g_try_malloc (fs->blocksize * 3);
     if (!block_buf)
     {
-        message (D_ERROR, undelfserr, _(" while allocating block buffer "));
+        message (D_ERROR, undelfserr, _("while allocating block buffer"));
         goto free_delarray;
     }
     retval = ext2fs_open_inode_scan (fs, 0, &scan);
     if (retval != 0)
     {
-        message (D_ERROR, undelfserr, _(" open_inode_scan: %d "), retval);
+        message (D_ERROR, undelfserr, _("open_inode_scan: %d"), retval);
         goto free_block_buf;
     }
     retval = ext2fs_get_next_inode (scan, &ino, &inode);
     if (retval != 0)
     {
-        message (D_ERROR, undelfserr, _(" while starting inode scan %d "), retval);
+        message (D_ERROR, undelfserr, _("while starting inode scan %d"), retval);
         goto error_out;
     }
     count = 0;
@@ -237,7 +237,7 @@ undelfs_loaddel (void)
         retval = ext2fs_block_iterate (fs, ino, 0, block_buf, undelfs_lsdel_proc, &lsd);
         if (retval)
         {
-            message (D_ERROR, undelfserr, _(" while calling ext2_block_iterate %d "), retval);
+            message (D_ERROR, undelfserr, _("while calling ext2_block_iterate %d"), retval);
             goto next;
         }
         if (lsd.free_blocks && !lsd.bad_blocks)
@@ -249,7 +249,7 @@ undelfs_loaddel (void)
                                                                    (max_delarray + 50));
                 if (!delarray_new)
                 {
-                    message (D_ERROR, undelfserr, _(" no more memory while reallocating array "));
+                    message (D_ERROR, undelfserr, _("no more memory while reallocating array"));
                     goto error_out;
                 }
                 delarray = delarray_new;
@@ -271,7 +271,7 @@ undelfs_loaddel (void)
         retval = ext2fs_get_next_inode (scan, &ino, &inode);
         if (retval)
         {
-            message (D_ERROR, undelfserr, _(" while doing inode scan %d "), retval);
+            message (D_ERROR, undelfserr, _("while doing inode scan %d"), retval);
             goto error_out;
         }
     }
@@ -305,7 +305,7 @@ com_err (const char *whoami, long err_code, const char *fmt, ...)
     str = g_strdup_vprintf (fmt, ap);
     va_end (ap);
 
-    message (D_ERROR, _(" Ext2lib error "), " %s (%s: %ld) ", str, whoami, err_code);
+    message (D_ERROR, _("Ext2lib error"), "%s (%s: %ld)", str, whoami, err_code);
     g_free (str);
 }
 
@@ -336,19 +336,19 @@ undelfs_opendir (struct vfs_class *me, const char *dirname)
 
     if (ext2fs_open (ext2_fname, 0, 0, 0, unix_io_manager, &fs))
     {
-        message (D_ERROR, undelfserr, _(" Cannot open file %s "), ext2_fname);
+        message (D_ERROR, undelfserr, _("Cannot open file %s"), ext2_fname);
         return 0;
     }
     print_vfs_message (_("undelfs: reading inode bitmap..."));
     if (ext2fs_read_inode_bitmap (fs))
     {
-        message (D_ERROR, undelfserr, _(" Cannot load inode bitmap from: \n %s \n"), ext2_fname);
+        message (D_ERROR, undelfserr, _("Cannot load inode bitmap from:\n%s"), ext2_fname);
         goto quit_opendir;
     }
     print_vfs_message (_("undelfs: reading block bitmap..."));
     if (ext2fs_read_block_bitmap (fs))
     {
-        message (D_ERROR, undelfserr, _(" Cannot load block bitmap from: \n %s \n"), ext2_fname);
+        message (D_ERROR, undelfserr, _("Cannot load block bitmap from:\n%s"), ext2_fname);
         goto quit_opendir;
     }
     /* Now load the deleted information */
@@ -372,7 +372,7 @@ undelfs_readdir (void *vfs_info)
 
     if (vfs_info != fs)
     {
-        message (D_ERROR, undelfserr, _(" vfs_info is not fs! "));
+        message (D_ERROR, undelfserr, _("vfs_info is not fs!"));
         return NULL;
     }
     if (readdir_ptr == num_delarray)
@@ -431,7 +431,7 @@ undelfs_open (struct vfs_class *me, const char *fname, int flags, int mode)
 
     if (!ext2_fname || strcmp (ext2_fname, file))
     {
-        message (D_ERROR, undelfserr, _(" You have to chdir to extract files first "));
+        message (D_ERROR, undelfserr, _("You have to chdir to extract files first"));
         g_free (file);
         g_free (f);
         return 0;
@@ -571,7 +571,7 @@ undelfs_read (void *vfs_info, char *buffer, int count)
     retval = ext2fs_block_iterate (fs, p->inode, 0, NULL, undelfs_dump_read, p);
     if (retval)
     {
-        message (D_ERROR, undelfserr, _(" while iterating over blocks "));
+        message (D_ERROR, undelfserr, _("while iterating over blocks"));
         return -1;
     }
     if (p->error_code && !p->finished)
@@ -636,7 +636,7 @@ undelfs_lstat (struct vfs_class *me, const char *path, struct stat *buf)
 
     if (!ext2_fname || strcmp (ext2_fname, file))
     {
-        message (D_ERROR, undelfserr, _(" You have to chdir to extract files first "));
+        message (D_ERROR, undelfserr, _("You have to chdir to extract files first"));
         g_free (file);
         g_free (f);
         return 0;
@@ -678,7 +678,7 @@ undelfs_chdir (struct vfs_class *me, const char *path)
     fd = open (file, O_RDONLY);
     if (fd == -1)
     {
-        message (D_ERROR, undelfserr, _(" Cannot open file %s "), file);
+        message (D_ERROR, undelfserr, _("Cannot open file \"%s\""), file);
         g_free (f);
         g_free (file);
         return -1;

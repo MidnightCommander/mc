@@ -484,7 +484,7 @@ display_bits_box (void)         /* AB:FIXME: test dialog */
     };
 
     QuickDialog display_bits = {
-        DISPX, DISPY, -1, -1, _(" Display bits "),
+        DISPX, DISPY, -1, -1, _("Display bits"),
         "[Display bits]", display_widgets, TRUE
     };
 
@@ -598,7 +598,7 @@ init_disp_bits_box (void)
 
     dbits_dlg =
         create_dlg (0, 0, DISPY, DISPX, dialog_colors, NULL,
-                    "[Display bits]", _(" Display bits "), DLG_CENTER | DLG_REVERSE);
+                    "[Display bits]", _("Display bits"), DLG_CENTER | DLG_REVERSE);
 
     add_widget (dbits_dlg, label_new (3, 4, _("Input / display codepage:")));
 
@@ -765,7 +765,7 @@ configure_vfs (void)
     };
 
     QuickDialog confvfs_dlg = {
-        VFSX, VFSY, -1, -1, N_(" Virtual File System Setting "),
+        VFSX, VFSY, -1, -1, N_("Virtual File System Setting"),
         "[Virtual FS]", confvfs_widgets, FALSE
     };
 
@@ -874,7 +874,7 @@ jobs_fill_listbox (void)
 
     if (!state_str[0])
     {
-        state_str[0] = _("Running ");
+        state_str[0] = _("Running");
         state_str[1] = _("Stopped");
     }
 

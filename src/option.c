@@ -383,10 +383,10 @@ panel_options_box (void)
         if (!panels_options.fast_reload_msg_shown && panels_options.fast_reload)
         {
             message (D_NORMAL, _("Information"),
-                     _(" Using the fast reload option may not reflect the exact \n"
-                       " directory contents. In this case you'll need to do a   \n"
-                       " manual reload of the directory. See the man page for   \n"
-                       " the details.                                           "));
+                     _("Using the fast reload option may not reflect the exact\n"
+                       "directory contents. In this case you'll need to do a\n"
+                       "manual reload of the directory. See the man page for\n"
+                       "the details."));
             panels_options.fast_reload_msg_shown = TRUE;
         }
         update_panels (UP_RELOAD, UP_KEEPSEL);
