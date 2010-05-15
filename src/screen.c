@@ -532,7 +532,7 @@ panel_field_t panel_fields[] = {
      /* TRANSLATORS: one single character to represent 'Change time' sort mode  */
      /* TRANSLATORS: no need to translate 'sort', it's just a context prefix  */
      N_("sort|h"),
-     N_("C&Hange time"), TRUE, TRUE,
+     N_("C&hange time"), TRUE, TRUE,
      string_file_ctime,
      (sortfn *) sort_ctime
     }

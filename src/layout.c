@@ -167,13 +167,13 @@ static struct {
     int    *variable;
     WCheck *widget;
 } check_options [] = {
-    { N_("show free sp&Ace"),    &free_space,      NULL },
+    { N_("Show free sp&ace"),    &free_space,      NULL },
     { N_("&XTerm window title"), &xterm_title,     NULL },
-    { N_("h&Intbar visible"),    &message_visible, NULL },
+    { N_("H&intbar visible"),    &message_visible, NULL },
     { N_("&Keybar visible"),     &keybar_visible,  NULL },
-    { N_("command &Prompt"),     &command_prompt,  NULL },
-    { N_("show &Mini status"),   &show_mini_info,  NULL },
-    { N_("menu&Bar visible"),    &menubar_visible, NULL },
+    { N_("Command &prompt"),     &command_prompt,  NULL },
+    { N_("Show &mini status"),   &show_mini_info,  NULL },
+    { N_("Menu&bar visible"),    &menubar_visible, NULL },
     { N_("&Equal split"),        &equal_split,     NULL }
 };
 

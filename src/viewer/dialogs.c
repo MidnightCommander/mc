@@ -99,7 +99,7 @@ mcview_dialog_search (mcview_t * view)
         QUICK_CHECKBOX (SEARCH_DLG_WIDTH / 2 + 3, SEARCH_DLG_WIDTH, 6, SEARCH_DLG_HEIGHT,
                         N_("&Backwards"), &mcview_search_options.backwards),
         QUICK_CHECKBOX (SEARCH_DLG_WIDTH / 2 + 3, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT,
-                        N_("case &Sensitive"), &mcview_search_options.case_sens),
+                        N_("Case &sensitive"), &mcview_search_options.case_sens),
         QUICK_RADIO (3, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT,
                      num_of_types, (const char **) list_of_types,
                      (int *) &mcview_search_options.type),

@@ -144,7 +144,7 @@ display_init (int radio_sel, char *init_text, int _check_status,
     const int user_type_idx = 3;
 
     const char *display_title = N_("Listing mode");
-    const char *user_mini_status = N_("user &Mini status");
+    const char *user_mini_status = N_("User &mini status");
     const char *ok_name = N_("&OK");
     const char *cancel_name = N_("&Cancel");
 
