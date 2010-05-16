@@ -55,7 +55,7 @@
 #include "src/history.h"
 #include "src/widget.h"         /* listbox_new() */
 #include "src/layout.h"         /* clr_scr() */
-#include "src/main.h"           /* mc_home source_codepage */
+#include "src/main.h"           /* mc_home */
 #include "src/help.h"           /* interactive_display() */
 #include "src/wtools.h"         /* message() */
 #include "src/charsets.h"
@@ -2859,26 +2859,8 @@ void
 edit_select_codepage_cmd (WEdit * edit)
 {
 #ifdef HAVE_CHARSET
-    const char *cp_id = NULL;
     if (do_select_codepage ())
-    {
-        cp_id = get_codepage_id (source_codepage >= 0 ? source_codepage : display_codepage);
-
-        if (cp_id != NULL)
-        {
-            GIConv conv;
-            conv = str_crt_conv_from (cp_id);
-            if (conv != INVALID_CONV)
-            {
-                if (edit->converter != str_cnv_from_term)
-                    str_close_conv (edit->converter);
-                edit->converter = conv;
-            }
-        }
-
-        if (cp_id != NULL)
-            edit->utf8 = str_isutf8 (cp_id);
-    }
+        edit_set_codeset (edit);
 
     edit->force = REDRAW_COMPLETELY;
     edit_refresh_cmd (edit);

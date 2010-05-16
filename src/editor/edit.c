@@ -806,27 +806,10 @@ edit_init (WEdit *edit, int lines, int columns, const char *filename,
     edit->stack_size = START_STACK_SIZE;
     edit->stack_size_mask = START_STACK_SIZE - 1;
     edit->undo_stack = g_malloc0 ((edit->stack_size + 10) * sizeof (long));
+
     edit->utf8 = 0;
     edit->converter = str_cnv_from_term;
-#ifdef HAVE_CHARSET
-    {
-    const char *cp_id = NULL;
-    cp_id = get_codepage_id (source_codepage >= 0 ?
-                            source_codepage : display_codepage);
-
-    if (cp_id != NULL) {
-        GIConv conv;
-        conv = str_crt_conv_from (cp_id);
-        if (conv != INVALID_CONV) {
-            if (edit->converter != str_cnv_from_term)
-                str_close_conv (edit->converter);
-            edit->converter = conv;
-        }
-    }
-    if (cp_id != NULL)
-        edit->utf8 = str_isutf8 (cp_id);
-    }
-#endif
+    edit_set_codeset (edit);
 
     if (edit_load_file (edit)) {
         /* edit_load_file already gives an error message */
@@ -961,6 +944,33 @@ edit_reload_line (WEdit *edit, const char *filename, long line)
     memcpy (edit, e, sizeof (WEdit));
     g_free (e);
     return 1;
+}
+
+void
+edit_set_codeset (WEdit *edit)
+{
+#ifdef HAVE_CHARSET
+    const char *cp_id;
+
+    cp_id = get_codepage_id (source_codepage >= 0 ? source_codepage : display_codepage);
+
+    if (cp_id != NULL)
+    {
+        GIConv conv;
+        conv = str_crt_conv_from (cp_id);
+        if (conv != INVALID_CONV)
+        {
+            if (edit->converter != str_cnv_from_term)
+                str_close_conv (edit->converter);
+            edit->converter = conv;
+        }
+    }
+
+    if (cp_id != NULL)
+        edit->utf8 = str_isutf8 (cp_id);
+#else
+    (void) edit;
+#endif
 }
 
 
