@@ -1327,7 +1327,7 @@ mc_ungetlocalcopy (const char *pathname, const char *local, int has_changed)
     char *path;
 
     path = vfs_canon_and_translate (pathname);
-    if (path == NULL)
+    if (path != NULL)
     {
         struct vfs_class *vfs = vfs_get_class (path);
 
