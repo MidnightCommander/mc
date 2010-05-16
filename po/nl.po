@@ -5,13 +5,13 @@
 # Vincent van Adrighem <V.vanAdrighem@dirck.mine.nu>, 2001.
 # Leonard den Ottolander <leonard den ottolander nl>, 2005.
 # Marcel Pol <mpol@gmx.net>, 2009-2010.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.0\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
 "POT-Creation-Date: 2010-05-05 20:57+0300\n"
-"PO-Revision-Date: 2010-01-03\n"
+"PO-Revision-Date: 2010-05-16\n"
 "Last-Translator: Marcel Pol <mpol@gmx.net>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -26,11 +26,11 @@ msgid " Not implemented yet "
 msgstr " Nog niet geimplementeerd "
 
 msgid " Num of replace tokens not equal to num of found tokens "
-msgstr ""
+msgstr "Het aantal overschrijvende tekens is niet gelijk aan het aantal gevonden tekens"
 
 #, c-format
 msgid " Invalid token number %d "
-msgstr ""
+msgstr "Foutief tekennummer %d "
 
 msgid "Normal"
 msgstr "Normaal"
@@ -269,13 +269,13 @@ msgstr "Tilde"
 
 # Enkel aanhalingsteken, terugvallend?
 msgid "Prime"
-msgstr ""
+msgstr "Streep"
 
 msgid "Underline"
 msgstr "Onderstreping"
 
 msgid "Understrike"
-msgstr ""
+msgstr "Onderstreping"
 
 msgid "Pipe"
 msgstr "Pipe"
@@ -435,9 +435,9 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Inconsistent extfs archief"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Warning: cannot open %s directory\n"
-msgstr "Aanmaken van map %s mislukt"
+msgstr "Waarschuwing: het openen van map %s is mislukt\n"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -931,7 +931,6 @@ msgid "Show mc with specified skin"
 msgstr "Laad mc met aangegeven skin"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -986,7 +985,7 @@ msgid "+number"
 msgstr "+number"
 
 msgid "[this_dir] [other_panel_dir]"
-msgstr ""
+msgstr "[deze_index] [ander_scherm_index]"
 
 msgid "Set initial line number for the internal editor"
 msgstr "Regelnummer instellen om de interne editor mee te starten"
@@ -1380,9 +1379,7 @@ msgid "&Thorough"
 msgstr "&Grondig"
 
 msgid " Both panels should be in the listing mode to use this command "
-msgstr ""
-" Beide vensters moeten zich in lijstweergave-modus bevinden voor deze "
-"opdracht"
+msgstr " Beide vensters moeten zich in lijstweergave-modus bevinden voor deze opdracht"
 
 msgid ""
 " Not an xterm or Linux console; \n"
@@ -1871,44 +1868,36 @@ msgstr "Beëindigen"
 msgid "&Undo"
 msgstr "&Herstellen"
 
-#, fuzzy
 msgid "&Toggle ins/overw"
-msgstr "&Inv aan/uit"
+msgstr "I&nvoegen/Overschrijven"
 
-#, fuzzy
 msgid "To&ggle mark"
 msgstr "Markering aan/ui&T"
 
 msgid "&Mark columns"
 msgstr "&Markeer kolommen"
 
-#, fuzzy
 msgid "Mark &all"
 msgstr "Alle gemarkeerden"
 
 msgid "Unmar&k"
-msgstr ""
+msgstr "Deselecteren"
 
-#, fuzzy
 msgid "Cop&y"
 msgstr "&Kopiëer"
 
-#, fuzzy
 msgid "Mo&ve"
 msgstr "&Verplaatsen"
 
 msgid "&Delete"
 msgstr "&Verwijderen"
 
-#, fuzzy
 msgid "Co&py to clipfile"
 msgstr "&Kopiëer naar prikbord"
 
-#, fuzzy
 msgid "&Cut to clipfile"
 msgstr "Kn&Ippen naar prikbord"
 
-#, fuzzy
 msgid "Pa&ste from clipfile"
 msgstr "&Plakken van prikbord"
 
@@ -1927,16 +1916,14 @@ msgstr "Nogmaals z&Oeken"
 msgid "&Replace..."
 msgstr "Ve&Rvangen..."
 
-#, fuzzy
 msgid "&Toggle bookmark"
 msgstr "&Bladwijzer aan/uit"
 
 msgid "&Next bookmark"
 msgstr "&Volgende bladwijzer"
 
-#, fuzzy
 msgid "&Prev bookmark"
-msgstr "Vo&Rige bladwijzer"
+msgstr "&Vorige bladwijzer"
 
 msgid "&Flush bookmark"
 msgstr "Ver&Wijder bladwijzer"
@@ -1944,24 +1931,20 @@ msgstr "Ver&Wijder bladwijzer"
 msgid "&Go to line..."
 msgstr "&Ga naar regel..."
 
-#, fuzzy
 msgid "&Toggle line state"
-msgstr "&Inv aan/uit"
+msgstr "&Regelnummering aan/uit"
 
 msgid "Go to matching &bracket"
 msgstr "Ga naar corresponderend &Haakje"
 
-#, fuzzy
 msgid "&Find declaration"
 msgstr "Zoek declaratie"
 
-#, fuzzy
 msgid "Back from &declaration"
-msgstr "Ga terug vanaf declaratie"
+msgstr "Vorige declaratie"
 
-#, fuzzy
 msgid "For&ward to declaration"
-msgstr "Ga vooruit vanaf declaratie"
+msgstr "Volgende declaratie"
 
 msgid "Encod&ing..."
 msgstr "Encoder&Ing..."
@@ -1972,7 +1955,6 @@ msgstr "Scherm verversen"
 msgid "&Start record macro"
 msgstr "&Start opnemen macro"
 
-#, fuzzy
 msgid "Finis&h record macro..."
 msgstr "&Voltooi opnemen macro..."
 
@@ -1994,21 +1976,17 @@ msgstr "&Letterlijk invoegen..."
 msgid "Insert &date/time"
 msgstr "&Datum/Tijd invoegen"
 
-#, fuzzy
 msgid "&Format paragraph"
-msgstr "P&Aragraaf opmaken"
+msgstr "&Paragraaf opmaken"
 
-#, fuzzy
 msgid "&Sort..."
 msgstr "&Sorteer..."
 
-#, fuzzy
 msgid "&Paste output of..."
-msgstr "Plak &Uitvoer van..."
+msgstr "Plak uitvoer van..."
 
-#, fuzzy
 msgid "&External formatter"
-msgstr "E&Xterne formatteerder"
+msgstr "E&xterne formatteerder"
 
 msgid "&General...  "
 msgstr "&Algemeen..."
@@ -2182,27 +2160,16 @@ msgid " %s%s file error"
 msgstr " %s%s bestandsfout "
 
 #, c-format
-msgid ""
-"The format of the %smc.ext file has changed with version 3.0.  It seems that "
-"the installation failed.  Please fetch a fresh copy from the Midnight "
-"Commander package."
-msgstr ""
-"Het formaat van het %smc.ext bestand is veranderd met versie 3.0. De "
-"installatie lijkt mislukt. Haal een nieuw Midnight Commander-pakket op."
+msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
+msgstr "Het formaat van het %smc.ext bestand is veranderd met versie 3.0. De installatie lijkt mislukt. Haal een nieuw Midnight Commander-pakket op."
 
 #, c-format
 msgid " ~/%s file error "
 msgstr " ~/%s bestandsfout "
 
 #, c-format
-msgid ""
-"The format of the ~/%s file has changed with version 3.0.  You may either "
-"want to copy it from %smc.ext or use that file as an example of how to write "
-"it."
-msgstr ""
-"De opmaak van het ~/%s bestand is veranderd met versie 3.0. Je kunt het of "
-"kopiëren van %smc.ext of dat bestand gebruiken als een voorbeeld hoe het te "
-"schrijven."
+msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
+msgstr "De opmaak van het ~/%s bestand is veranderd met versie 3.0. Je kunt het of kopiëren van %smc.ext of dat bestand gebruiken als een voorbeeld hoe het te schrijven."
 
 msgid "DialogTitle|Copy"
 msgstr "Kopie"
@@ -2867,10 +2834,8 @@ msgid " Hotlist Load "
 msgstr " Favolijst laden "
 
 #, c-format
-msgid ""
-"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
-msgstr ""
-"MC kon niet schrijven naar ~/%s bestand, uw oude favolijst is niet verwijderd"
+msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr "MC kon niet schrijven naar ~/%s bestand, uw oude favolijst is niet verwijderd"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -2918,9 +2883,9 @@ msgid "Modified:  %s"
 msgstr "Veranderd:  %s"
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
-#, fuzzy, c-format
+#, c-format
 msgid "Changed:   %s"
-msgstr "Ver&Ander in"
+msgstr "Verandering in: %s"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -3022,8 +2987,7 @@ msgid ""
 msgstr ""
 "Druk op %s,\n"
 "\n"
-"en wacht dan tot dit bericht verdwijntDruk vervolgens nogmaals om te zien of "
-"'Ok' verschijnt\n"
+"en wacht dan tot dit bericht verdwijntDruk vervolgens nogmaals om te zien of 'Ok' verschijnt\n"
 "naast de toets.\n"
 "\n"
 "Als u wilt afbreken, druk dan de escape-toets,\n"
@@ -3436,7 +3400,7 @@ msgid "sort|m"
 msgstr "m"
 
 msgid "&Modify time"
-msgstr "&Wijzigingstijd"
+msgstr "&Wijz.tijd"
 
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3502,8 +3466,7 @@ msgid "Unknown tag on display format: "
 msgstr "Onbekend label in weergaveformaat: "
 
 msgid "User supplied format looks invalid, reverting to default."
-msgstr ""
-"Door gebruiker gedefinieerde formaat lijkt onjuist, gebruik de standaard."
+msgstr "Door gebruiker gedefinieerde formaat lijkt onjuist, gebruik de standaard."
 
 msgid " Do you really want to execute? "
 msgstr " Wilt u die opdracht echt uitvoeren? "
@@ -3667,8 +3630,7 @@ msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
 msgstr ""
-"Bestand %s is niet van de 'root' of van u, of is door iedereen "
-"beschrijfbaar.\n"
+"Bestand %s is niet van de 'root' of van u, of is door iedereen beschrijfbaar.\n"
 "Het gebruik kan veiligheidsrisico's betekenen"
 
 #, c-format
@@ -3797,7 +3759,7 @@ msgid " Cannot view: not a regular file "
 msgstr " Bekijken niet mogelijk: geen normaal bestand "
 
 msgid "Seeking to search result"
-msgstr ""
+msgstr "Zoekresultaten doorzoeken"
 
 msgid " History "
 msgstr " Opdrachthistorie "
