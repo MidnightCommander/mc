@@ -245,6 +245,8 @@ mcview_hook (void *v)
     else
         return;
 
+    mcview_done (view);
+    mcview_init (view);
     mcview_load (view, 0, panel->dir.list[panel->selected].fname, 0);
     mcview_display (view);
 }
@@ -365,7 +367,6 @@ mcview_execute_cmd (mcview_t * view, unsigned long command)
         break;
     case CK_ViewToggleNroffMode:
         mcview_toggle_nroff_mode (view);
-        view->dirty++;
         break;
     case CK_ViewToggleHexNavMode:
         view->hexview_in_text = !view->hexview_in_text;

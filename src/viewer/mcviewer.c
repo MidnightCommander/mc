@@ -205,18 +205,10 @@ mcview_t *
 mcview_new (int y, int x, int lines, int cols, gboolean is_panel)
 {
     mcview_t *view = g_new0 (mcview_t, 1);
-    size_t i;
 
     init_widget (&view->widget, y, x, lines, cols, mcview_callback, mcview_real_event);
 
-    view->filename = NULL;
-    view->command = NULL;
-    view->search_nroff_seq = NULL;
-
-    mcview_set_datasource_none (view);
-
-    view->growbuf_in_use = FALSE;
-    /* leave the other growbuf fields uninitialized */
+    mcview_set_keymap (view);
 
     view->hex_mode = FALSE;
     view->hexedit_mode = FALSE;
@@ -224,38 +216,11 @@ mcview_new (int y, int x, int lines, int cols, gboolean is_panel)
     view->text_nroff_mode = FALSE;
     view->text_wrap_mode = FALSE;
     view->magic_mode = FALSE;
-    view->utf8 = FALSE;
-
-    view->hexedit_lownibble = FALSE;
-    view->coord_cache = NULL;
 
     view->dpy_frame_size = is_panel ? 1 : 0;
-    view->dpy_start = 0;
-    view->dpy_text_column = 0;
-    view->dpy_end = 0;
-    view->hex_cursor = 0;
-    view->cursor_col = 0;
-    view->cursor_row = 0;
-    view->change_list = NULL;
     view->converter = str_cnv_from_term;
-    mcview_set_codeset (view);
-    /* {status,ruler,data}_area are left uninitialized */
 
-    view->dirty = 0;
-    view->dpy_bbar_dirty = TRUE;
-    view->bytes_per_line = 1;
-
-    view->search_start = 0;
-    view->search_end = 0;
-
-    view->want_to_quit = FALSE;
-    view->marker = 0;
-    for (i = 0; i < sizeof (view->marks) / sizeof (view->marks[0]); i++)
-        view->marks[i] = 0;
-
-    view->move_dir = 0;
-    view->update_steps = 0;
-    view->update_activate = 0;
+    mcview_init (view);
 
     if (mcview_default_hex_mode)
         mcview_toggle_hex_mode (view);
@@ -265,8 +230,6 @@ mcview_new (int y, int x, int lines, int cols, gboolean is_panel)
         mcview_toggle_wrap_mode (view);
     if (mcview_default_magic_flag)
         mcview_toggle_magic_mode (view);
-
-    mcview_set_keymap (view);
 
     return view;
 }
@@ -314,38 +277,25 @@ mcview_viewer (const char *command, const char *file, int *move_dir_p, int start
 gboolean
 mcview_load (mcview_t * view, const char *command, const char *file, int start_line)
 {
-    int i, type;
-    int fd = -1;
-    char tmp[BUF_MEDIUM];
-    char *canon_fname;
-    struct stat st;
-
     gboolean retval = FALSE;
 
     assert (view->bytes_per_line != 0);
-    mcview_done (view);
 
-    /* Set up the state */
-    mcview_set_datasource_none (view);
     view->filename = g_strdup (file);
-    view->command = 0;
-
-    /* Clear the markers */
-    view->marker = 0;
-    for (i = 0; i < 10; i++)
-        view->marks[i] = 0;
 
     if (!mcview_is_in_panel (view))
-    {
         view->dpy_text_column = 0;
-    }
 
-    if (command && (view->magic_mode || file == NULL || file[0] == '\0'))
-    {
+    mcview_set_codeset (view);
+
+    if (command != NULL && (view->magic_mode || file == NULL || file[0] == '\0'))
         retval = mcview_load_command_output (view, command);
-    }
     else if (file != NULL && file[0] != '\0')
     {
+        int fd = -1;
+        char tmp[BUF_MEDIUM];
+        struct stat st;
+
         /* Open the file */
         fd = mc_open (file, O_RDONLY | O_NONBLOCK);
         if (fd == -1)
@@ -386,6 +336,8 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
         }
         else
         {
+            int type;
+
             type = get_compression_type (fd, file);
 
             if (view->magic_mode && (type != COMPRESSION_NONE))
@@ -410,8 +362,10 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
 
     if (mcview_remember_file_position && view->filename != NULL && start_line == 0)
     {
+        char *canon_fname;
         long line, col;
         off_t new_offset;
+
         canon_fname = vfs_canon (view->filename);
         load_file_position (canon_fname, &line, &col, &new_offset);
         new_offset = min (new_offset, mcview_get_filesize (view));
@@ -419,9 +373,7 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
         g_free (canon_fname);
     }
     else if (start_line > 0)
-    {
         mcview_moveto (view, start_line - 1, 0);
-    }
 
     view->hexedit_lownibble = FALSE;
     view->hexview_in_text = FALSE;

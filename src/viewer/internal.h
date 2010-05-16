@@ -286,6 +286,7 @@ void mcview_toggle_wrap_mode (mcview_t * view);
 void mcview_toggle_nroff_mode (mcview_t * view);
 void mcview_toggle_hex_mode (mcview_t * view);
 gboolean mcview_ok_to_quit (mcview_t * view);
+void mcview_init (mcview_t * view);
 void mcview_done (mcview_t * view);
 void mcview_select_encoding (mcview_t * view);
 void mcview_set_codeset (mcview_t * view);
