@@ -327,9 +327,10 @@ edit_load_file_fast (WEdit * edit, const char *filename)
     long buf, buf2;
     int file = -1;
     int ret = 1;
+
     edit->curs2 = edit->last_byte;
     buf2 = edit->curs2 >> S_EDIT_BUF_SIZE;
-    edit->utf8 = 0;
+
     file = mc_open (filename, O_RDONLY | O_BINARY);
     if (file == -1)
     {
