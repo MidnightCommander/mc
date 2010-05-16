@@ -946,20 +946,21 @@ set_display_type (int num, panel_view_mode_t type)
     case view_nothing:
     case view_listing:
         new_widget = restore_into_right_dir_panel (num, old_widget);
+        widget_set_size (new_widget, y, x, lines, cols);
         break;
 
     case view_info:
-        new_widget = (Widget *) info_new ();
-        break;
+        new_widget = (Widget *) info_new (y, x, lines, cols);
+    break;
 
     case view_tree:
-        new_widget = (Widget *) tree_new (1, 0, 0, 0, 0);
+        new_widget = (Widget *) tree_new (y, x, lines, cols, TRUE);
         break;
 
     case view_quick:
-        new_widget = (Widget *) mcview_new (0, 0, 0, 0, 1);
-        the_other_panel = (WPanel *) panels[the_other].widget;
-        if (the_other_panel)
+        new_widget = (Widget *) mcview_new (y, x, lines, cols, TRUE);
+        the_other_panel = (WPanel *) panels [the_other].widget;
+        if (the_other_panel != NULL)
             file_name = the_other_panel->dir.list[the_other_panel->selected].fname;
         else
             file_name = "";
@@ -975,9 +976,6 @@ set_display_type (int num, panel_view_mode_t type)
 
     panels[num].type = type;
     panels[num].widget = new_widget;
-
-    /* We set the same size the old widget had */
-    widget_set_size (new_widget, y, x, lines, cols);
 
     /* We use replace to keep the circular list of the dialog in the */
     /* same state.  Maybe we could just kill it and then replace it  */

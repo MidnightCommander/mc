@@ -202,7 +202,7 @@ mcview_set_keymap (mcview_t * view)
 /* --------------------------------------------------------------------------------------------- */
 
 mcview_t *
-mcview_new (int y, int x, int lines, int cols, int is_panel)
+mcview_new (int y, int x, int lines, int cols, gboolean is_panel)
 {
     mcview_t *view = g_new0 (mcview_t, 1);
     size_t i;
@@ -285,7 +285,7 @@ mcview_viewer (const char *command, const char *file, int *move_dir_p, int start
     view_dlg = create_dlg (0, 0, LINES, COLS, NULL, mcview_dialog_callback,
                            "[Internal File Viewer]", NULL, DLG_WANT_TAB);
 
-    lc_mcview = mcview_new (0, 0, LINES - 1, COLS, 0);
+    lc_mcview = mcview_new (0, 0, LINES - 1, COLS, FALSE);
     add_widget (view_dlg, lc_mcview);
 
     add_widget (view_dlg, buttonbar_new (TRUE));

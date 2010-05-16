@@ -285,11 +285,11 @@ info_event (Gpm_Event * event, void *data)
 }
 
 WInfo *
-info_new (void)
+info_new (int y, int x, int lines, int cols)
 {
     struct WInfo *info = g_new (struct WInfo, 1);
 
-    init_widget (&info->widget, 0, 0, 0, 0, info_callback, info_event);
+    init_widget (&info->widget, y, x, lines, cols, info_callback, info_event);
 
     /* We do not want the cursor */
     widget_want_cursor (info->widget, 0);

@@ -1123,7 +1123,7 @@ tree_callback (Widget * w, widget_msg_t msg, int parm)
 }
 
 WTree *
-tree_new (int is_panel, int y, int x, int lines, int cols)
+tree_new (int y, int x, int lines, int cols, gboolean is_panel)
 {
     WTree *tree = g_new (WTree, 1);
 
