@@ -765,7 +765,11 @@ sub main
         $buffer = $_;
         if (defined $lc_node)
         {
-            chomp $buffer;
+            if ($buffer ne "\n")
+            {
+                $cnode->{'lname'} = $buffer;
+                chomp $cnode->{'lname'};
+            }
             $lc_node = undef;
         }
         else
@@ -792,7 +796,7 @@ sub main
                             $cnode->{'next'} = struct_node();
                             $cnode = $cnode->{'next'};
                         }
-                        $cnode->{'$node'} = substr($lc_node, 1, $p-1);
+                        $cnode->{'node'} = substr($lc_node, 2, $p-2);
                         $cnode->{'lname'} = undef;
                         $cnode->{'next'} = undef;
                         $cnode->{'heading_level'} = 0;
