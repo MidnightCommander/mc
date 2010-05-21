@@ -638,6 +638,7 @@ sub handle_link($)
 
         # "Layout\&)," -- "Layout" should be highlighted, but not "),"
         ($$old, $amp_arg) = split /\\&/, $$old, 2;
+        $amp_arg = "" unless defined $amp_arg;
         printf_string "%s%s%s%s%s%s\n", $CHAR_LINK_START, $$old,
                        $CHAR_LINK_POINTER, $buffer, $CHAR_LINK_END, $amp_arg;
         $link_flag = 0;
