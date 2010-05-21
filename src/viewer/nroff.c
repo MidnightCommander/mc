@@ -278,7 +278,7 @@ mcview_nroff_seq_free (mcview_nroff_t ** nroff)
     if (nroff == NULL || *nroff == NULL)
         return;
     g_free (*nroff);
-    nroff = NULL;
+    *nroff = NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
