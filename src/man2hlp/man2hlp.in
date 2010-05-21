@@ -23,13 +23,10 @@
 #
 #  You should have received a copy of the GNU General Public License
 #  along with this program; if not, write to the Free Software
-#  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  */
+#  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 #
-# \file man2hlp.c
+# \file man2hlp
 # \brief Source: man page to help file converter
-
-# include "help.h"
-# end of include "help.h"
 
 use strict;
 use warnings;
@@ -435,7 +432,7 @@ sub handle_alt_font($)
     return 1;
 }
 
-# Handle .IP and .TP commands.  is_tp is 1 for .TP, 0 for .IP */
+# Handle .IP and .TP commands.  is_tp is 1 for .TP, 0 for .IP
 sub handle_tp_ip($)
 {
     my ($is_tp) = @_;
@@ -519,9 +516,7 @@ sub handle_command($)
         $buffer = substr($buffer, 1, 1) eq 'I' ? $CHAR_FONT_ITALIC : $CHAR_FONT_BOLD;
 
         # Attempt to handle backslash quoting
-        my @p = split //, $p;
-        $p = '';
-        foreach (@p)
+        foreach (split //, $p)
         {
             if ($_ eq '\\' && !$backslash_flag)
             {
@@ -529,9 +524,9 @@ sub handle_command($)
                 next;
             }
             $backslash_flag = 0;
-            $p .= $_;
+            $buffer .= $_;
         }
-        print_string $buffer . $p . $CHAR_FONT_NORMAL;
+        print_string $buffer . $CHAR_FONT_NORMAL;
     }
     elsif ($buffer eq ".TP")
     {
@@ -902,7 +897,6 @@ sub main
     # Third stage - swap two parts of the output file.
     # First, open the output file for reading and load it into the memory.
     #
-    ## TODO: replace writing to f_out by writing to a string
     $outfile_buffer = '';
     $f_out = fopen_check '<', $c_out;
     $outfile_buffer .= $_ while <$f_out>;
