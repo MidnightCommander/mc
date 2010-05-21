@@ -101,25 +101,6 @@ sub strtok($$) {
     return $result;
 }
 
-# Attempt to handle backslash quoting
-sub handle_backslash($)
-{
-    my ($s) = @_;
-    my $backslash_flag = 0;
-    my $result = '';
-    foreach my $c (split //, $s)
-    {
-        if ($c eq '\\' && ! $backslash_flag)
-        {
-            $backslash_flag = 1;
-            next;
-        }
-        $backslash_flag = 0;
-        $result .= $c;
-    }
-    return $result;
-}
-
 sub struct_node() {
     return {
         "node"          => undef,   # Section name
@@ -224,7 +205,6 @@ sub print_string($)
 {
     my ($buffer) = @_;
     my $len;                    # The length of current word
-    my $c;                      # Current character
     my $backslash_flag = 0;
 
     # Skipping lines?
@@ -233,8 +213,16 @@ sub print_string($)
     if ($verbatim_flag)
     {
         # Attempt to handle backslash quoting
-        $buffer = handle_backslash $buffer;
-        print $f_out $buffer;
+        foreach (split //, $buffer)
+        {
+            if ($_ eq '\\' && !$backslash_flag)
+            {
+                $backslash_flag = 1;
+                next;
+            }
+            $backslash_flag = 0;
+            print $f_out $_;
+        }
     }
     else
     {
@@ -258,8 +246,16 @@ sub print_string($)
                     print $f_out ' ' while $col++ < $indentation;
                 }
                 # Attempt to handle backslash quoting
-                $buffer = handle_backslash $buffer;
-                print $f_out $buffer;
+                foreach (split //, $buffer)
+                {
+                    if ($_ eq '\\' && !$backslash_flag)
+                    {
+                        $backslash_flag = 1;
+                        next;
+                    }
+                    $backslash_flag = 0;
+                    print $f_out $_;
+                }
                 # Increase column
                 $col += $len;
             }
@@ -503,6 +499,7 @@ sub handle_command($)
     elsif ($buffer eq ".I" || $buffer eq ".B" || $buffer eq ".SB")
     {
         # Bold text or italics text
+        my $backslash_flag = 0;
 
         # .SB [text]
         # Causes the text on the same line or the text on the
@@ -511,6 +508,7 @@ sub handle_command($)
         #
 
         # FIXME: text is optional, so there is no error
+
         my $p = strtok(undef, "");
         if (! defined $p)
         {
@@ -521,7 +519,18 @@ sub handle_command($)
         $buffer = substr($buffer, 1, 1) eq 'I' ? $CHAR_FONT_ITALIC : $CHAR_FONT_BOLD;
 
         # Attempt to handle backslash quoting
-        $p = handle_backslash $p;
+        my @p = split //, $p;
+        $p = '';
+        foreach (@p)
+        {
+            if ($_ eq '\\' && !$backslash_flag)
+            {
+                $backslash_flag = 1;
+                next;
+            }
+            $backslash_flag = 0;
+            $p .= $_;
+        }
         print_string $buffer . $p . $CHAR_FONT_NORMAL;
     }
     elsif ($buffer eq ".TP")
