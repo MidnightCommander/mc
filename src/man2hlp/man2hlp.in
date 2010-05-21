@@ -409,7 +409,7 @@ sub handle_alt_font($)
         {
             shift @p;
             # Don't change font if we are at the end
-            if ($#p)
+            if (@p)
             {
                 $alt_state = $alt_state ? 0 : 1;
                 $buffer .= $font[$alt_state];
