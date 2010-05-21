@@ -234,7 +234,7 @@ sub print_string($)
             # Skip empty strings
             if ($buffer ne '')
             {
-                $len = length($buffer);
+                $len = string_len($buffer);
                 # Words are separated by spaces
                 if ($col > 0)
                 {
