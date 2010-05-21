@@ -185,7 +185,7 @@ static struct
     /* *INDENT-ON* */
 };
 
-#define LAYOUT_OPTIONS_COUNT  sizeof (check_options) / sizeof (check_options[0])
+#define LAYOUT_OPTIONS_COUNT  (sizeof (check_options) / sizeof (check_options[0]))
 #define OTHER_OPTIONS_COUNT   (LAYOUT_OPTIONS_COUNT - 1)
 
 static gsize first_width;
@@ -385,7 +385,7 @@ init_layout (void)
 {
     static int i18n_layt_flag = 0;
     static int b1, b2, b3;
-    int i = sizeof (s_split_direction) / sizeof (char *);
+    size_t i = sizeof (s_split_direction) / sizeof (char *);
     const char *ok_button = _("&OK");
     const char *cancel_button = _("&Cancel");
     const char *save_button = _("&Save");
@@ -410,7 +410,7 @@ init_layout (void)
                 first_width = l1;
         }
 
-        for (i = 0; i < LAYOUT_OPTIONS_COUNT; i++)
+        for (i = 0; i < (size_t) LAYOUT_OPTIONS_COUNT; i++)
         {
             check_options[i].text = _(check_options[i].text);
             l1 = str_term_width1 (check_options[i].text) + 7;
@@ -469,7 +469,7 @@ init_layout (void)
     add_widget (layout_dlg, button_new (11, b1, B_ENTER, DEFPUSH_BUTTON, ok_button, 0));
 #define XTRACT(i) *check_options[i].variable, check_options[i].text
 
-    for (i = 0; i < OTHER_OPTIONS_COUNT; i++)
+    for (i = 0; i < (size_t) OTHER_OPTIONS_COUNT; i++)
     {
         check_options[i].widget =
             check_new (OTHER_OPTIONS_COUNT - i + 2, 7 + first_width, XTRACT (i));
@@ -531,7 +531,7 @@ void
 layout_box (void)
 {
     int result;
-    int i;
+    size_t i;
     int layout_do_change = 0;
 
     init_layout ();
@@ -540,8 +540,8 @@ layout_box (void)
 
     if (result == B_ENTER || result == B_EXIT)
     {
-        for (i = 0; i < LAYOUT_OPTIONS_COUNT; i++)
-            if (check_options[i].widget)
+        for (i = 0; i < (size_t) LAYOUT_OPTIONS_COUNT; i++)
+            if (check_options[i].widget != NULL)
                 *check_options[i].variable = check_options[i].widget->state & C_BOOL;
         horizontal_split = radio_widget->sel;
         first_panel_size = _first_panel_size;
