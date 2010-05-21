@@ -296,7 +296,7 @@ sub handle_node($$)
         $heading_level = 0;
         $heading_level++ while substr($buffer, $heading_level, 1) eq ' ';
         # Heading level must be even
-        unless ($heading_level % 2)
+        if ($heading_level % 2)
         {
             print_error "Syntax error: .SH: odd heading level";
         }
