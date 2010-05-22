@@ -151,24 +151,25 @@ Back).
 where equal is symbol "=" go to next function in navigation list (like a browser
 Forward).
 .PP
-.SH SYNTAX HIGHLIGHTING
+.SH "ПОДСВЕТКА СИНТАКСИСА"
 .B mcedit
-supports syntax highlighting.  This means that keywords and contexts
-(like C comments, string constants, etc) are highlighted in different
-colors.  The following section explains the format of the file
+поддерживает подсветку синтаксиса. Это означает, что ключевые слова
+и контексты (такие как комментарии, строковые константы и т.д.)
+будут подсвечены разными цветами. Этот раздел описывает формат файла
 .BR ~/.mc/cedit/Syntax .
-If this file is missing, system\-wide
+Если этот файл отсутствует то используется системный файл
 .B @prefix@/share/mc/syntax/Syntax
-is used.
-The file
+Файл
 .B ~/.mc/cedit/Syntax
-is rescanned on opening of a any new editor file.  The file contains
-rules for highlighting, each of which is given on a separate line, and
-define which keywords will be highlighted to what color.
+перечитывается при открытии каждого нового редактора. В файле содержатся
+правила подсветки, каждое из которых записано с новой строки, и которые
+определяют, какие из ключевых слов каким цветом подсвечиваются.
 .PP
-The file is divided into sections, each beginning with a line with the
+Также файл
+разделён на секции, каждая из которых, начинается со строки с командой
 .B file
-command.  The sections are normally put into separate files using the
+и регулярным выражением следующим за ней.
+The sections are normally put into separate files using the
 .B include
 command.
 .PP
@@ -181,22 +182,23 @@ type.  It is used in
 .BR cooledit ;
 future versions of
 .B mcedit
-may use it as well.  The third optional argument is a regular expression
-to match the first line of text of the file.  The rules in the following
-section apply if either the file name or the first line of text matches.
+may use it as well.
+Третий параметр (необязательный) \- регулярное выражение соответствующее
+первой строке текста из файла. Если любое из регулярных выражений, по
+имени или по первой строке, совпадёт, то правила будут загружены.
 .PP
-A section ends with the start of another section.  Each section is
-divided into contexts, and each context contains rules.  A context is a
-scope within the text that a particular set of rules belongs to.  For
-instance, the text within a C style comment (i.e. between
+Секция оканчивается началом новой секции. Каждая секция разделена на
+контексты, а каждый контекст содержит правила. Контекст (context) \-
+область текста, которой принадлежат особенный набор правил. Например,
+область комментариев в стиле C (например между
 .B /*
-and
+и
 .BR */ )
-has its own color.  This is a context, although it has no further rules
-inside it because there is probably nothing that we want highlighted
-within a C comment.
+имеет свой собственный цвет. Он является контекстом, не смотря на то,
+что он не имеет других правил внутри себя, т.к. возможно мы не хотим
+ничего подсвечивать внутри C комментария.
 .PP
-A trivial C programming section might look like this:
+Простейшая секция для языка C может выглядеть так:
 .PP
 .nf
 file .\\*\\\\.c C\\sProgram\\sFile (#include|/\\\\\\*)
@@ -219,14 +221,14 @@ context default
   keyword         }        brightcyan
   keyword         '*'      green
 
-# C comments
+# комментарии языка C
 context /\\* \\*/ comment
 
-# C preprocessor directives
+# Директивы препроцессора языка C
 context linestart # \\n red
   keyword  \\\\\\n  brightred
 
-# C string constants
+# Строковые константы языка C
 context " " green
   keyword  %d    brightgreen
   keyword  %s    brightgreen
@@ -234,7 +236,7 @@ context " " green
   keyword  \\\\"   brightgreen
 .fi
 .PP
-Each context starts with a line of the form:
+Каждый контекст начинается со строки вида:
 .PP
 .B context
 .RB [ exclusive ]
@@ -246,19 +248,19 @@ Each context starts with a line of the form:
 .RI [ foreground ]
 .RI [ background ]
 .PP
-The first context is an exception.  It must start with the command
+Единственное исключение составляет первый контекст. Он должен начинаться со строки вида:
 .PP
 .B context default
 .RI [ foreground ]
 .RI [ background ]
 .PP
-otherwise
+иначе
 .B mcedit
-will report an error.  The
+возвратит ошибку. Параметр
 .B linestart
-option specifies that
+определяет, что начало ограничителя
 .I delim
-must start at the beginning of a line.  The
+должен совпадать с началом строки.
 .B whole
 option tells that
 .I delim
@@ -283,7 +285,7 @@ The
 option causes the text between the delimiters to be highlighted, but not
 the delimiters themselves.
 .PP
-Each rule is a line of the form:
+Каждое правило имеет вид:
 .PP
 .B keyword
 .RB [ whole | wholeright | wholeleft ]
@@ -319,13 +321,14 @@ Important to note is the line
   keyword  \\\\\\n  brightgreen
 .fi
 .PP
-This line defines a keyword containing the backslash and newline
-characters.  Since the keywords are matched before the context
-delimiters, this keyword prevents the context from ending at the end of
-the lines that end in a backslash, thus allowing C preprocessor
-directive to continue across multiple lines.
+Эта строка определяет ключевое слово (keyword) содержащее символ "\\" и
+символ новой строки (\\n). Так как ключевые слова (keyword) имеют более
+высокий приоритет чем разделители контестов, это ключевое слово (keyword)
+предотвращает завершение контекста в конце строки, если строка оканчивается
+символом "\". позволяя, таким образом, применять расцветку к дерективам
+С\-препроцессора расположенным на нескольких строках.
 .PP
-The possible colors are: black, gray, red, brightred, green,
+Допустимые цвета: black, gray, red, brightred, green,
 brightgreen, brown, yellow, blue, brightblue, magenta, brightmagenta,
 cyan, brightcyan, lightgray and white.  If the syntax file is shared
 with
@@ -351,22 +354,22 @@ If you are describing case insensitive language you need to use
 .B caseinsensitive
 derective. It should be specified at the begining of syntax file.
 .PP
-Because of the simplicity of the implementation, there are a few
-intricacies that will not be dealt with correctly but these are a minor
-irritation.  On the whole, a broad spectrum of quite complicated
-situations are handled with these simple rules.  It is a good idea to
-take a look at the syntax file to see some of the nifty tricks you can
-do with a little imagination.  If you cannot get by with the rules I
-have coded, and you think you have a rule that would be useful, please
-email me with your request.  However, do not ask for regular expression
-support, because this is flatly impossible.
+Ввиду простоты реализации, есть некоторые затруднительные ситуации
+которые не будут обрабатываться корректно, но это мелкие раздражители.
+В большинстве своём, достаточно сложные ситуации могут быть обработаны
+с помощью этих простых правил. Неплохой идеей будет просмотреть несколько
+файлов с правилами для изучения изящных приёмов, которые Вы можете
+использовать применив немного воображения. Если Вы не можете решить
+проблему с помощью моих правил, а у Вас есть правило, которое
+Вы считаете будет полезным, пожалуйста напишите мне письмо с запросом
+на реализацию. Однако, не просите о поддержке регулярных выражений, т.к.
+это решительно невозможно.
 .PP
-A useful hint is to work with as much as possible with the things you
-can do rather than try to do things that this implementation cannot deal
-with.  Also remember that the aim of syntax highlighting is to make
-programming less prone to error, not to make code look pretty.
-
-.SH ЦВЕТА
+Полезным замечанием будет: работайте с как можно большим количеством
+вещей которые Вы можете сделать, чем пытайтесь реализовать вещи которые
+не покрываются данной реализацией. Помните, подсветка синтаксиса должна
+сокращать количество возможных ошибок, а не делать код красиво выглядящим.
+.SH "ЦВЕТА"
 Предопределённые цвета могут быть переопределены. Для этого необходимо
 добавить новые определения в переменную окружения
 .B MC_COLOR_TABLE
@@ -379,7 +382,7 @@ editnormal=lightgray,black:\\
 editbold=yellow,black:\\
 editmarked=black,cyan"
 .fi
-.SH НАСТРОЙКИ
+.SH "НАСТРОЙКИ"
 Большинство настроек могут изменены через графический интерфейс редактора,
 при помощи диалога
 .B Настройки
