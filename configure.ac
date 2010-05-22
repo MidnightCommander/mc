@@ -161,6 +161,7 @@ AC_CHECK_FUNCS([\
 	setreuid statfs sysconf \
 	tcgetattr tcsetattr truncate \
 	strverscmp \
+	strncasecmp \
 	realpath
 ])
 

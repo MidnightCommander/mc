@@ -2169,7 +2169,7 @@ ftpfs_find_machine (const char *host, const char *domain)
                 continue;
 
             /* Compare local part */
-            if (g_strncasecmp (host, buffer, host_domain - host))
+            if (g_ascii_strncasecmp (host, buffer, host_domain - host) != 0)
                 continue;
         }
 
