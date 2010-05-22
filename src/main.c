@@ -699,7 +699,8 @@ create_file_menu (void)
     entries = g_list_append (entries, menu_entry_create (_("&Copy"), CK_CopyCmd));
     entries = g_list_append (entries, menu_entry_create (_("C&hmod"), CK_ChmodCmd));
     entries = g_list_append (entries, menu_entry_create (_("&Link"), CK_LinkCmd));
-    entries = g_list_append (entries, menu_entry_create (_("&SymLink"), CK_SymlinkCmd));
+    entries = g_list_append (entries, menu_entry_create (_("&Symlink"), CK_SymlinkCmd));
+    entries = g_list_append (entries, menu_entry_create (_("Relative symlin&k"), CK_RelativeSymlinkCmd));
     entries = g_list_append (entries, menu_entry_create (_("Edit s&ymlink"), CK_EditSymlinkCmd));
     entries = g_list_append (entries, menu_entry_create (_("Ch&own"), CK_ChownCmd));
     entries =
@@ -1242,7 +1243,7 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
         learn_keys ();
         break;
     case CK_LinkCmd:
-        link_cmd ();
+        link_cmd (LINK_HARDLINK);
         break;
     case CK_ListingCmd:
         listing_cmd ();
@@ -1292,6 +1293,9 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
     case CK_QuitCmd:
         quit_cmd ();
         break;
+    case CK_RelativeSymlinkCmd:
+        link_cmd (LINK_SYMLINK_RELATIVE);
+        break;
     case CK_RenameCmd:
         rename_cmd ();
         break;
@@ -1336,7 +1340,7 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
         swap_cmd ();
         break;
     case CK_SymlinkCmd:
-        symlink_cmd ();
+        link_cmd (LINK_SYMLINK_ABSOLUTE);
         break;
     case CK_ToggleListingCmd:
         toggle_listing_cmd ();

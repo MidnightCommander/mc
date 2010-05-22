@@ -384,10 +384,17 @@ Chown
 command on the current file or on the tagged files.
 .TP
 .B C\-x l
-run the link command.
+run the hard link command.
 .TP
 .B C\-x s
-run the symbolic link command.
+run the absolute symbolic link command.
+.TP
+.B C\-x v
+run the relative symbolic link command. See the
+.\"LINK2"
+File Menu
+.\"File Menu"
+section for more information about symbolic links.
 .TP
 .B C\-x i
 set the other panel display mode to information.
@@ -994,7 +1001,7 @@ user menu\&.
 The user menu provides an easy way to provide users with a menu and
 add extra features to the Midnight Commander.
 .PP
-.B View (F3, Shift\-F3)
+.B View (F3, F13)
 .PP
 View the currently selected file. By default this invokes the
 .\"LINK2"
@@ -1009,7 +1016,7 @@ is undefined, the
 .B PAGER
 environment variable is tried.  If
 .B PAGER
-is also undefined, the "view" command is invoked.  If you use Shift\-F3
+is also undefined, the "view" command is invoked.  If you use F13
 instead, the viewer will be invoked without doing any formatting or
 preprocessing to the file.
 .PP
@@ -1022,7 +1029,7 @@ viewer.
 .PP
 .B Edit (F4, F14)
 .PP
-Press F4 to edit the highlighted file.  Press F14 (usually Shift\-F4)
+Press F4 to edit the highlighted file.  Press F14 (usually F14)
 to start the editor with a new, empty file.
 Currently they invoke the
 .B vi
@@ -1048,7 +1055,7 @@ see
 Mask copy/rename\&.
 .\"Mask Copy/Rename"
 .PP
-F15 (usually Shift\-F5) is similar, but defaults to the directory in the
+F15 (usually F15) is similar, but defaults to the directory in the
 selected panel. It always operates on the selected file, regardless of
 any tagged files.
 .PP
@@ -1064,12 +1071,17 @@ is used to control the background process.
 .PP
 Create a hard link to the current file.
 .PP
-.B SymLink (C\-x s)
+.B Absolute symlink (C\-x s)
 .PP
-Create a symbolic link to the current file. To those of you who don't
-know what links are: creating a link to a file is a bit like copying
-the file, but both the source filename and the destination filename
-represent the same file image. For example, if you edit one of these
+Create a absolute symbolic link to the current file.
+.PP
+.B Relative symLink (C\-x v)
+.PP
+Create a relative symbolic link to the current file.
+.PP
+To those of you who don't know what links are: creating a link to a file
+is a bit like copying the file, but both the source filename and the destination
+filename represent the same file image. For example, if you edit one of these
 files, all changes you make will appear in both files. Some people call
 links aliases or shortcuts.
 .PP
@@ -1089,6 +1101,23 @@ The original file which the link points to is shown on mini\-status line if the
 option is enabled. Use symbolic links when you want to avoid the
 confusion that can be caused by hard links.
 .PP
+When you press "C\-x s" Midnight Commander will automatically fill in the
+complete path+filename of the original file and suggest a name for the link.
+You can change either one.
+.PP
+Sometimes you may want to change the absolute path of the original into
+a relative path. An absolute path starts from the root directory:
+.PP
+.I /home/frodo/mc/mc -> /home/frodo/new/mc
+.PP
+A relative link describes the original file's location starting from the
+location of the link itself:
+.PP
+.I /home/frodo/mc/mc -> ../new/mc
+.PP
+You can force Midnight Commander to suggest a relative path by pressing
+"C\-x v" instead of "C\-x s".
+.PP
 .B Rename/Move (F6, F16)
 .PP
 Press F6 to pop up an input dialog to copy the currently selected file (or
@@ -1097,7 +1126,7 @@ directory/filename you specify in the input dialog.  The destination
 defaults to the directory in the non\-selected panel. For more details
 look at Copy (F5) operation above, most of the things are quite similar.
 .PP
-F16 (usually Shift\-F6) is similar, but defaults to the directory in the
+F16 (usually F16) is similar, but defaults to the directory in the
 selected panel. It always operates on the selected file, regardless of
 any tagged files.
 .PP

@@ -8,6 +8,13 @@
 #ifndef MC_CMD_H
 #define MC_CMD_H
 
+typedef enum
+{
+    LINK_HARDLINK = 0,
+    LINK_SYMLINK_ABSOLUTE,
+    LINK_SYMLINK_RELATIVE
+} link_type_t;
+
 void netlink_cmd (void);
 void ftplink_cmd (void);
 void fishlink_cmd (void);
@@ -46,8 +53,7 @@ void compare_dirs_cmd (void);
 void diff_view_cmd (void);
 void history_cmd (void);
 void tree_cmd (void);
-void link_cmd (void);
-void symlink_cmd (void);
+void link_cmd (link_type_t link_type);
 void edit_symlink_cmd (void);
 void reverse_selection_cmd (void);
 void unselect_cmd (void);
