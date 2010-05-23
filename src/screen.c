@@ -3257,7 +3257,7 @@ do_panel_event (Gpm_Event * event, WPanel * panel, gboolean *redir)
     {
         if (is_active)
         {
-            if (panel->top_file > 0)
+            if (mouse_move_pages && (panel->top_file > 0))
                 prev_page (panel);
             else                /* We are in first page */
                 move_up (panel);
@@ -3269,7 +3269,8 @@ do_panel_event (Gpm_Event * event, WPanel * panel, gboolean *redir)
     {
         if (is_active)
         {
-            if (panel->top_file + ITEMS (panel) < panel->count)
+            if (mouse_move_pages
+                    && (panel->top_file + ITEMS (panel) < panel->count))
                 next_page (panel);
             else                /* We are in last page */
                 move_down (panel);
@@ -3285,32 +3286,20 @@ do_panel_event (Gpm_Event * event, WPanel * panel, gboolean *redir)
         if (!is_active)
             change_panel ();
 
-        if (event->y <= 0)
-        {
-            mark_if_marking (panel, event);
-            if (mouse_move_pages)
-                prev_page (panel);
-            else
-                move_up (panel);
-            return MOU_REPEAT;
-        }
+        if (event->y > lines)
+            return MOU_NORMAL;
 
-        if (!((panel->top_file + event->y <= panel->count) && event->y <= lines))
-        {
-            mark_if_marking (panel, event);
-            if (mouse_move_pages)
-                next_page (panel);
-            else
-                move_down (panel);
-            return MOU_REPEAT;
-        }
-
-        my_index = panel->top_file + event->y - 1;
-        if (panel->split && (event->x > ((panel->widget.cols - 2) / 2)))
-            my_index += llines (panel);
-
-        if (my_index >= panel->count)
+        if (panel->top_file + event->y > panel->count)
             my_index = panel->count - 1;
+        else
+        {
+            my_index = panel->top_file + event->y - 1;
+            if (panel->split && (event->x > ((panel->widget.cols - 2) / 2)))
+                my_index += llines (panel);
+
+            if (my_index >= panel->count)
+                my_index = panel->count - 1;
+        }
 
         if (my_index != panel->selected)
         {
