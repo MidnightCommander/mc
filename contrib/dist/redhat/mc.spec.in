@@ -31,7 +31,7 @@ Patch0:         glib2-CVE-2008-4316.patch
 
 URL:            http://www.midnight-commander.org/
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires:  e2fsprogs-devel gpm-devel
+BuildRequires:  e2fsprogs-devel gpm-devel perl
 
 %if %{legacy_rhel}%{?el5}
 BuildRequires:  pcre-devel

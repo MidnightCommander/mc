@@ -1,4 +1,4 @@
-SUBDIRS = viewer
+SUBDIRS = man2hlp viewer
 
 if USE_EDIT
 SUBDIRS += editor
@@ -25,15 +25,7 @@ pkglibexecdir =		$(libexecdir)/@PACKAGE@
 
 bin_PROGRAMS = mc mcmfmt
 
-noinst_PROGRAMS = man2hlp
-
 mcmfmt_SOURCES = mfmt.c
-
-man2hlp_SOURCES = man2hlp.c
-
-man2hlp_LDADD = \
-    ../lib/libmc.la \
-    $(GLIB_LIBS) $(PCRE_LIBS)
 
 if USE_EDIT
 EDITLIB = editor/libedit.la
@@ -53,10 +45,9 @@ endif
 mc_LDADD = \
 	../lib/libmc.la \
 	viewer/libmcviewer.la \
-	$(EDITLIB) \
-	$(DIFFLIB) \
-	$(INTLLIBS) $(MCLIBS) $(SLANGLIB) $(LIBICONV) \
-	$(GLIB_LIBS) $(PCRE_LIBS)
+	$(MCLIBS) $(DIFFLIB) $(EDITLIB) $(SLANGLIB) \
+	$(GLIB_LIBS) $(PCRE_LIBS) \
+	$(LIBICONV) $(INTLLIBS)
 
 if USE_SAMBA_FS
 # this is a hack for linking with own samba library in simple way
@@ -115,14 +106,17 @@ mc_SOURCES = \
 	listmode.c listmode.h \
 	main.c main.h \
 	main-widgets.h \
-	mountlist.c mountlist.h \
 	panelize.c panelize.h \
 	subshell.c subshell.h \
 	textconf.c textconf.h \
 	treestore.c treestore.h \
 	user.c user.h
 
-EXTRA_DIST = man2hlp.c $(SRC_maintainer) $(SRC_charset)
+#if USE_MOUNTLIST
+mc_SOURCES += mountlist.c mountlist.h
+#endif
+
+EXTRA_DIST = $(SRC_maintainer) $(SRC_charset)
 
 # end of automated testing
 
