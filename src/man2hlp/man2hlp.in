@@ -911,6 +911,7 @@ sub main
 
     # Write part before the "Contents" node
     print $f_out substr($outfile_buffer, 0, $cont_start-1);
+    print $f_out "\n";
     fclose_check $f_out;
 
     return 0;
