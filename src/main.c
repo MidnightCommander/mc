@@ -1127,7 +1127,11 @@ midnight_execute_cmd (Widget *sender, unsigned long command)
 
     (void) sender;
 
-    switch (command) {
+    /* stop quick search before executing any command */
+    send_message ((Widget *) current_panel, WIDGET_COMMAND, CK_PanelStopSearch);
+
+    switch (command)
+    {
     case CK_AddHotlist:
         add2hotlist_cmd ();
         break;
@@ -1639,11 +1643,12 @@ midnight_callback (Dlg_head *h, Widget *sender,
 	return MSG_NOT_HANDLED;
 
     case DLG_HOTKEY_HANDLED:
-	if ((get_current_type () == view_listing) && current_panel->searching) {
-	    current_panel->searching = 0;
-	    current_panel->dirty = 1;
-	}
-	return MSG_HANDLED;
+        if ((get_current_type () == view_listing) && current_panel->searching)
+        {
+            current_panel->dirty = 1; /* FIXME: unneeded? */
+            send_message ((Widget *) current_panel, WIDGET_COMMAND, CK_PanelStopSearch);
+        }
+        return MSG_HANDLED;
 
     case DLG_UNHANDLED_KEY:
 	if (command_prompt) {
