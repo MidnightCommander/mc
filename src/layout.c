@@ -1008,8 +1008,8 @@ void swap_panels ()
         panelswap (is_panelized);
         panelswap (dir_stat);
 
-        panel1->searching = 0;
-        panel2->searching = 0;
+        panel1->searching = FALSE;
+        panel2->searching = FALSE;
         if (current_panel == panel1)
             current_panel = panel2;
         else

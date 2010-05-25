@@ -6,6 +6,7 @@
 #ifndef MC_PANEL_H
 #define MC_PANEL_H
 
+#include "lib/global.h"
 #include "lib/fs.h"			/* MC_MAXPATHLEN */
 #include "lib/strutil.h"
 
@@ -93,7 +94,7 @@ typedef struct WPanel {
     char     *panel_name;	/* The panel name */
     struct   stat dir_stat;	/* Stat of current dir: used by execute () */
 
-    int      searching;
+    gboolean searching;
     char     search_buffer [256];
     char     search_char [MB_LEN_MAX]; /*buffer for multibytes characters*/
     int      search_chpoint;           /*point after last characters in search_char*/
