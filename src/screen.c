@@ -2888,6 +2888,8 @@ panel_execute_cmd (WPanel * panel, unsigned long command)
     case CK_PanelStartSearch:
         start_search (panel);
         break;
+    case CK_PanelStopSearch:
+        break;
     case CK_PanelSyncOtherPanel:
         sync_other_panel (panel);
         break;
@@ -3007,6 +3009,9 @@ panel_callback (Widget * w, widget_msg_t msg, int parm)
 
     case WIDGET_KEY:
         return panel_key (panel, parm);
+
+    case WIDGET_COMMAND:
+        return panel_execute_cmd (panel, parm);
 
     case WIDGET_DESTROY:
         panel_destroy (panel);

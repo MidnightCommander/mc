@@ -397,15 +397,16 @@
 #define CK_PanelPrevPage                8028
 #define CK_PanelSetPanelEncoding        8029
 #define CK_PanelStartSearch             8030
-#define CK_PanelSyncOtherPanel          8031
-#define CK_PanelToggleSortOrderNext     8032
-#define CK_PanelToggleSortOrderPrev     8033
-#define CK_PanelSelectSortOrder         8034
-#define CK_PanelReverseSort             8035
-#define CK_PanelSortOrderByName         8036
-#define CK_PanelSortOrderByExt          8037
-#define CK_PanelSortOrderBySize         8038
-#define CK_PanelSortOrderByMTime        8039
+#define CK_PanelStopSearch              8031
+#define CK_PanelSyncOtherPanel          8032
+#define CK_PanelToggleSortOrderNext     8033
+#define CK_PanelToggleSortOrderPrev     8034
+#define CK_PanelSelectSortOrder         8035
+#define CK_PanelReverseSort             8036
+#define CK_PanelSortOrderByName         8037
+#define CK_PanelSortOrderByExt          8038
+#define CK_PanelSortOrderBySize         8039
+#define CK_PanelSortOrderByMTime        8040
 
 /*
    Process a block through a shell command: CK_Pipe_Block(i) executes shell_cmd[i].
