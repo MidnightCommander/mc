@@ -1259,7 +1259,7 @@ panel_clean_dir (WPanel * panel)
     panel->marked = 0;
     panel->dirs_marked = 0;
     panel->total = 0;
-    panel->searching = 0;
+    panel->searching = FALSE;
     panel->is_panelized = 0;
     panel->dirty = 1;
 
@@ -1358,7 +1358,7 @@ panel_new_with_dir (const char *panel_name, const char *wpath)
     panel->total = 0;
     panel->reverse = 0;
     panel->dirty = 1;
-    panel->searching = 0;
+    panel->searching = FALSE;
     panel->dirs_marked = 0;
     panel->is_panelized = 0;
     panel->format = 0;
@@ -2475,7 +2475,7 @@ start_search (WPanel * panel)
     }
     else
     {
-        panel->searching = 1;
+        panel->searching = TRUE;
         panel->search_buffer[0] = '\0';
         panel->search_char[0] = '\0';
         panel->search_chpoint = 0;
@@ -2487,7 +2487,7 @@ start_search (WPanel * panel)
 static void
 stop_search (WPanel * panel)
 {
-    panel->searching = 0;
+    panel->searching = FALSE;
     display_mini_info (panel);
 }
 
