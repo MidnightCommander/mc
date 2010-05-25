@@ -671,8 +671,8 @@ tree_box (const char *current_dir)
 
     /* Create the components */
     dlg = create_dlg (0, 0, LINES - 9, COLS - 20, dialog_colors,
-			tree_callback, "[Directory Tree]",
-			NULL, DLG_CENTER | DLG_REVERSE);
+                      tree_callback, "[Directory Tree]",
+                      _("Directory tree"), DLG_CENTER | DLG_REVERSE);
 
     mytree = tree_new (0, 2, 2, dlg->lines - 6, dlg->cols - 5);
     add_widget (dlg, mytree);
