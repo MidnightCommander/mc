@@ -72,6 +72,7 @@
 
 /* Use the color of the parent widget for the unselected entries */
 #define TREE_NORMALC(h) (DLG_NORMALC (h))
+#define TREE_CURRENTC(h) (DLG_FOCUSC (h))
 
 /* Specifies the display mode: 1d or 2d */
 static gboolean tree_navigation_flag = FALSE;
@@ -199,23 +200,22 @@ tree_show_mini_info (WTree * tree, int tree_lines, int tree_cols)
     else
         line = tree_lines + 1;
 
-    tty_draw_hline (tree->widget.y + line, tree->widget.x + 1, ' ', tree_cols);
-    widget_move (&tree->widget, line, 1);
-
     if (tree->searching)
     {
         /* Show search string */
-        tty_setcolor (TREE_NORMALC (h));
-        tty_setcolor (DLG_FOCUSC (h));
+        tty_setcolor (INPUT_COLOR);
+        tty_draw_hline (tree->widget.y + line, tree->widget.x + 1, ' ', tree_cols);
+        widget_move (&tree->widget, line, 1);
         tty_print_char (PATH_SEP);
-
         tty_print_string (str_fit_to_term (tree->search_buffer, tree_cols - 2, J_LEFT_FIT));
         tty_print_char (' ');
-        tty_setcolor (DLG_FOCUSC (h));
     }
     else
     {
         /* Show full name of selected directory */
+        tty_setcolor (tree->is_panel ? NORMAL_COLOR : TREE_NORMALC (h));
+        tty_draw_hline (tree->widget.y + line, tree->widget.x + 1, ' ', tree_cols);
+        widget_move (&tree->widget, line, 1);
         tty_print_string (str_fit_to_term (tree->selected_ptr->name, tree_cols, J_LEFT_FIT));
     }
 }
@@ -234,7 +234,6 @@ show_tree (WTree * tree)
     tree_lines = tlines (tree);
     tree_cols = tree->widget.cols;
 
-    tty_setcolor (TREE_NORMALC (h));
     widget_move ((Widget *) tree, y, x);
     if (tree->is_panel)
     {
@@ -290,33 +289,31 @@ show_tree (WTree * tree)
     /* Loop for every line */
     for (i = 0; i < tree_lines; i++)
     {
+        tty_setcolor (tree->is_panel ? NORMAL_COLOR : TREE_NORMALC (h));
+
         /* Move to the beginning of the line */
         tty_draw_hline (tree->widget.y + y + i, tree->widget.x + x, ' ', tree_cols);
 
-        if (!current)
+        if (current == NULL)
             continue;
+
+        if (tree->is_panel)
+            tty_setcolor (tree->active && current == tree->selected_ptr
+                            ? SELECTED_COLOR : NORMAL_COLOR);
+        else
+            tty_setcolor (current == tree->selected_ptr ? TREE_CURRENTC (h) : TREE_NORMALC (h));
 
         tree->tree_shown[i] = current;
         if (current->sublevel == topsublevel)
         {
-
-            /* Top level directory */
-            if (tree->active && current == tree->selected_ptr)
-            {
-                if (!tty_use_colors () && !tree->is_panel)
-                    tty_setcolor (MARKED_COLOR);
-                else
-                    tty_setcolor (SELECTED_COLOR);
-            }
-
             /* Show full name */
             tty_print_string (str_fit_to_term (current->name, tree_cols - 6, J_LEFT_FIT));
         }
         else
         {
             /* Sub level directory */
-
             tty_set_alt_charset (TRUE);
+
             /* Output branch parts */
             for (j = 0; j < current->sublevel - topsublevel - 1; j++)
             {
@@ -338,15 +335,6 @@ show_tree (WTree * tree)
             tty_print_char (ACS_HLINE);
             tty_set_alt_charset (FALSE);
 
-            if (tree->active && current == tree->selected_ptr)
-            {
-                /* Selected directory -> change color */
-                if (!tty_use_colors () && !tree->is_panel)
-                    tty_setcolor (MARKED_COLOR);
-                else
-                    tty_setcolor (SELECTED_COLOR);
-            }
-
             /* Show sub-name */
             tty_print_char (' ');
             tty_print_string (str_fit_to_term (current->subname,
@@ -354,14 +342,12 @@ show_tree (WTree * tree)
         }
         tty_print_char (' ');
 
-        /* Return to normal color */
-        tty_setcolor (TREE_NORMALC (h));
 
         /* Calculate the next value for current */
         current = current->next;
         if (tree_navigation_flag)
         {
-            while (current)
+            while (current != NULL)
             {
                 if (current->sublevel < tree->selected_ptr->sublevel)
                 {
@@ -371,7 +357,8 @@ show_tree (WTree * tree)
                 }
                 else if (current->sublevel == tree->selected_ptr->sublevel)
                 {
-                    for (j = strlen (current->name) - 1; current->name[j] != PATH_SEP; j--);
+                    for (j = strlen (current->name) - 1; current->name[j] != PATH_SEP; j--)
+                        ;
                     if (strncmp (current->name, tree->selected_ptr->name, j) == 0)
                         break;
                 }
@@ -386,6 +373,7 @@ show_tree (WTree * tree)
             }
         }
     }
+
     tree_show_mini_info (tree, tree_lines, tree_cols);
 }
 
