@@ -226,11 +226,10 @@ show_tree (WTree * tree)
     Dlg_head *h = tree->widget.parent;
     tree_entry *current;
     int i, j, topsublevel;
-    int x, y;
+    int x = 0, y = 0;
     int tree_lines, tree_cols;
 
     /* Initialize */
-    x = y = 0;
     tree_lines = tlines (tree);
     tree_cols = tree->widget.cols;
 
@@ -307,7 +306,7 @@ show_tree (WTree * tree)
         if (current->sublevel == topsublevel)
         {
             /* Show full name */
-            tty_print_string (str_fit_to_term (current->name, tree_cols - 6, J_LEFT_FIT));
+            tty_print_string (str_fit_to_term (current->name, tree_cols + (tree->is_panel ? 0 : 1), J_LEFT_FIT));
         }
         else
         {
@@ -337,11 +336,8 @@ show_tree (WTree * tree)
 
             /* Show sub-name */
             tty_print_char (' ');
-            tty_print_string (str_fit_to_term (current->subname,
-                                               tree_cols - 2 - 4 - 3 * j, J_LEFT_FIT));
+            tty_print_string (str_fit_to_term (current->subname, tree_cols - x - 3 * j, J_LEFT_FIT));
         }
-        tty_print_char (' ');
-
 
         /* Calculate the next value for current */
         current = current->next;
