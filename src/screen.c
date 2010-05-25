@@ -2463,6 +2463,13 @@ start_search (WPanel * panel)
     }
 }
 
+static void
+stop_search (WPanel * panel)
+{
+    panel->searching = 0;
+    display_mini_info (panel);
+}
+
 /* Return 1 if the Enter key has been processed, 0 otherwise */
 static int
 do_enter_on_file_entry (file_entry * fe)
@@ -2786,6 +2793,9 @@ panel_execute_cmd (WPanel * panel, unsigned long command)
 {
     int res = MSG_HANDLED;
 
+    if (command != CK_PanelStartSearch)
+        stop_search (panel);
+
     switch (command)
     {
     case CK_PanelChdirOtherPanel:
@@ -2914,28 +2924,10 @@ static cb_ret_t
 panel_key (WPanel * panel, int key)
 {
     size_t i;
-    unsigned long res, command;
 
     for (i = 0; panel_map[i].key != 0; i++)
-    {
         if (key == panel_map[i].key)
-        {
-            int old_searching = panel->searching;
-
-            if (panel_map[i].command != CK_PanelStartSearch)
-                panel->searching = 0;
-
-            command = panel_map[i].command;
-            res = panel_execute_cmd (panel, command);
-
-            if (res == MSG_NOT_HANDLED)
-                return res;
-
-            if (panel->searching != old_searching)
-                display_mini_info (panel);
-            return MSG_HANDLED;
-        }
-    }
+            return panel_execute_cmd (panel, panel_map[i].command);
 
     if (torben_fj_mode && key == ALT ('h'))
     {
@@ -2945,8 +2937,7 @@ panel_key (WPanel * panel, int key)
 
     if (is_abort_char (key))
     {
-        panel->searching = 0;
-        display_mini_info (panel);
+        stop_search (panel);
         return MSG_HANDLED;
     }
 
@@ -3008,11 +2999,7 @@ panel_callback (Widget * w, widget_msg_t msg, int parm)
 
     case WIDGET_UNFOCUS:
         /* Janne: look at this for the multiple panel options */
-        if (panel->searching)
-        {
-            panel->searching = 0;
-            display_mini_info (panel);
-        }
+        stop_search (panel);
         panel->active = 0;
         show_dir (panel);
         unselect_item (panel);
