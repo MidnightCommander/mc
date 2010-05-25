@@ -421,15 +421,16 @@
 #define CK_PanelPrevPage                8030
 #define CK_PanelSetPanelEncoding        8031
 #define CK_PanelStartSearch             8032
-#define CK_PanelSyncOtherPanel          8033
-#define CK_PanelToggleSortOrderNext     8034
-#define CK_PanelToggleSortOrderPrev     8035
-#define CK_PanelSelectSortOrder         8036
-#define CK_PanelReverseSort             8037
-#define CK_PanelSortOrderByName         8038
-#define CK_PanelSortOrderByExt          8039
-#define CK_PanelSortOrderBySize         8040
-#define CK_PanelSortOrderByMTime        8041
+#define CK_PanelStopSearch              8033
+#define CK_PanelSyncOtherPanel          8034
+#define CK_PanelToggleSortOrderNext     8035
+#define CK_PanelToggleSortOrderPrev     8036
+#define CK_PanelSelectSortOrder         8037
+#define CK_PanelReverseSort             8038
+#define CK_PanelSortOrderByName         8039
+#define CK_PanelSortOrderByExt          8040
+#define CK_PanelSortOrderBySize         8041
+#define CK_PanelSortOrderByMTime        8042
 
 /* diff viewer */
 #define CK_DiffDisplaySymbols           9001
