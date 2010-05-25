@@ -1087,6 +1087,7 @@ tree_callback (Widget * w, widget_msg_t msg, int parm)
 
     case WIDGET_UNFOCUS:
         tree->active = 0;
+        tree->searching = 0;
         show_tree (tree);
         return MSG_HANDLED;
 
