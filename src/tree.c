@@ -979,15 +979,24 @@ static void
 tree_frame (Dlg_head *h, WTree *tree)
 {
     tty_setcolor (NORMAL_COLOR);
-    widget_erase ((Widget*) tree);
-    if (tree->is_panel) {
-	draw_box (h, tree->widget.y, tree->widget.x, tree->widget.lines,
-		     tree->widget.cols);
+    widget_erase ((Widget *) tree);
+    if (tree->is_panel)
+    {
+        const char *title = _("Directory tree");
+        const int len = str_term_width1 (title);
 
-	if (show_mini_info)
-	    tty_draw_hline (tree->widget.y + tlines (tree) + 1,
-			    tree->widget.x + 1,
-			    ACS_HLINE, tree->widget.cols - 2);
+        draw_box (h, tree->widget.y, tree->widget.x, tree->widget.lines, tree->widget.cols);
+
+        widget_move (&tree->widget, 0, (tree->widget.cols - len - 2)/2);
+        tty_printf (" %s ", title);
+
+        if (show_mini_info)
+            widget_move (&tree->widget, tlines (tree) + 1, 0);
+            tty_print_alt_char (ACS_LTEE);
+            widget_move (&tree->widget, tlines (tree) + 1, tree->widget.cols - 1);
+            tty_print_alt_char (ACS_RTEE);
+            tty_draw_hline (tree->widget.y + tlines (tree) + 1,
+                            tree->widget.x + 1, ACS_HLINE, tree->widget.cols - 2);
     }
 }
 
