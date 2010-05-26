@@ -2738,6 +2738,7 @@ listbox_new (int y, int x, int height, int width, gboolean deletable, lcback cal
     l->allow_duplicates = TRUE;
     l->scrollbar = !tty_is_slow ();
     widget_want_hotkey (l->widget, 1);
+    widget_want_cursor (l->widget, 0);
 
     return l;
 }

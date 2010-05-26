@@ -141,7 +141,7 @@ configure_box (void)
             {
                 /* radio button */
                 size_t j;
-                for (j = 0; j < pause_options_num; j++)
+                for (j = 0; j < (size_t) pause_options_num; j++)
                     pause_options[j] = _(pause_options[j]);
             }
             else if (i == 17)
@@ -170,7 +170,7 @@ configure_box (void)
         if ((i < 13) || (i == 18) || (i > 19))
             c_len = max (c_len, str_term_width1 (quick_widgets[i].u.checkbox.text) + 3);
     /* radiobuttons */
-    for (i = 0; i < pause_options_num; i++)
+    for (i = 0; i < (size_t) pause_options_num; i++)
         c_len = max (c_len, str_term_width1 (pause_options[i]) + 3);
     /* label + input */
     l_len = str_term_width1 (quick_widgets[17].u.label.text);
@@ -210,7 +210,7 @@ configure_box (void)
     quick_widgets[1].relative_x = quick_widgets[2].relative_x + b2_len + 1;
     quick_widgets[0].relative_x = quick_widgets[1].relative_x + b1_len + 1;
 
-    g_snprintf (time_out, sizeof (time_out), "%ld", old_esc_mode_timeout);
+    g_snprintf (time_out, sizeof (time_out), "%d", old_esc_mode_timeout);
 
     qd_result = quick_dialog (&Quick_input);
 

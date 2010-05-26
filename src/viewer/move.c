@@ -119,7 +119,7 @@ mcview_move_up (mcview_t * view, off_t lines)
             {
                 size_t last_row_length = (view->dpy_start - new_offset) % view->data_area.width;
                 if (last_row_length != 0 && cur_bol == view->dpy_start)
-                    new_offset = max (new_offset, view->dpy_start - last_row_length);
+                    new_offset = max (new_offset, (off_t) (view->dpy_start - last_row_length));
                 else
                     new_offset = max (new_offset, view->dpy_start - view->data_area.width);
             }

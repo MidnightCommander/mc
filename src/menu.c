@@ -205,13 +205,9 @@ menubar_draw_drop (WMenuBar * menubar)
               menubar->widget.y + 1, menubar->widget.x + column,
               count + 2, menu->max_entry_len + 5, FALSE);
 
-    /* draw items except selected */
     for (i = 0; i < count; i++)
-        if (i != menu->selected)
-            menubar_paint_idx (menubar, i, MENU_ENTRY_COLOR);
-
-    /* draw selected item at last to move cursor to the nice location */
-    menubar_paint_idx (menubar, menu->selected, MENU_SELECTED_COLOR);
+        menubar_paint_idx (menubar, i,
+                           i == menu->selected ? MENU_SELECTED_COLOR : MENU_ENTRY_COLOR);
 }
 
 static void
@@ -546,8 +542,6 @@ menubar_callback (Widget * w, widget_msg_t msg, int parm)
         if (!menubar->is_active)
             return MSG_NOT_HANDLED;
 
-        widget_want_cursor (menubar->widget, 1);
-
         /* Trick to get all the mouse events */
         menubar->widget.lines = LINES;
 
@@ -571,11 +565,7 @@ menubar_callback (Widget * w, widget_msg_t msg, int parm)
         return MSG_NOT_HANDLED;
 
     case WIDGET_UNFOCUS:
-        if (menubar->is_active)
-            return MSG_NOT_HANDLED;
-
-        widget_want_cursor (menubar->widget, 0);
-        return MSG_HANDLED;
+        return menubar->is_active ? MSG_NOT_HANDLED : MSG_HANDLED;
 
     case WIDGET_DRAW:
         if (menubar_visible)
