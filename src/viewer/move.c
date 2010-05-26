@@ -472,6 +472,16 @@ mcview_moveto_match (mcview_t * view)
     else
     {
         view->dpy_start = mcview_bol (view, offset);
+
+        if (! view->text_wrap_mode)
+        {
+            /*
+                FIXME: need to calculate length in symbols, not in bytes
+            */
+            offset = view->search_start - view->dpy_start;
+            if (offset > view->data_area.width)
+                mcview_move_right (view, offset);
+        }
     }
 
     mcview_scroll_to_cursor (view);
