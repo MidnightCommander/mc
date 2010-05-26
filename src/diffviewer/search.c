@@ -118,7 +118,7 @@ mcdiffview_dialog_search (WDiff * dview)
         QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 6, SEARCH_DLG_HEIGHT, N_("&Backwards"),
                         &mcdiffview_search_options.backwards),
         /* 4 */
-        QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT, N_("case &Sensitive"),
+        QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT, N_("Case &sensitive"),
                         &mcdiffview_search_options.case_sens),
         /* 5 */
         QUICK_RADIO (3, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT,

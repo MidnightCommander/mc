@@ -138,9 +138,9 @@ static struct _hotlist_but
             LIST_MOVELIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
     { B_INSERT, NORMAL_BUTTON, 1, 0, N_("&Insert"),
             LIST_MOVELIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
-    { B_NEW_ENTRY, NORMAL_BUTTON, 1, 15, N_("New &Entry"),
+    { B_NEW_ENTRY, NORMAL_BUTTON, 1, 15, N_("New &entry"),
             LIST_HOTLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
-    { B_NEW_GROUP, NORMAL_BUTTON, 1, 0, N_("New &Group"),
+    { B_NEW_GROUP, NORMAL_BUTTON, 1, 0, N_("New &group"),
             LIST_HOTLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
     { B_CANCEL, NORMAL_BUTTON, 0, 53, N_("&Cancel"),
             LIST_HOTLIST | LIST_VFSLIST | LIST_MOVELIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
@@ -154,7 +154,7 @@ static struct _hotlist_but
     { B_FREE_ALL_VFS, NORMAL_BUTTON, 0, 20, N_("Fr&ee VFSs now"),
             LIST_VFSLIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM },
 #endif
-    { B_ENTER, DEFPUSH_BUTTON, 0, 0, N_("Change &To"),
+    { B_ENTER, DEFPUSH_BUTTON, 0, 0, N_("Change &to"),
             LIST_HOTLIST | LIST_VFSLIST | LIST_MOVELIST, WPOS_KEEP_LEFT | WPOS_KEEP_BOTTOM }
     /* *INDENT-ON* */
 };

@@ -4,7 +4,7 @@
    2005, 2006, 2009 Free Software Foundation, Inc.
 
    Authors: 1994, 1995 Miguel de Icaza
-            1995 Jakub Jelinek
+   1995 Jakub Jelinek
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -37,9 +37,9 @@
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"
-#include "lib/skin.h"		/* INPUT_COLOR */
-#include "lib/tty/key.h"		/* XCTRL and ALT macros  */
-#include "lib/mcconfig.h"	/* Load/save user formats */
+#include "lib/skin.h"           /* INPUT_COLOR */
+#include "lib/tty/key.h"        /* XCTRL and ALT macros  */
+#include "lib/mcconfig.h"       /* Load/save user formats */
 #include "lib/strutil.h"
 
 #ifdef ENABLE_VFS
@@ -51,18 +51,18 @@
 #   include "lib/vfs/mc-vfs/ftpfs.h"
 #endif
 
-#include "dialog.h"		/* The nice dialog manager */
-#include "widget.h"		/* The widgets for the nice dialog manager */
+#include "dialog.h"             /* The nice dialog manager */
+#include "widget.h"             /* The widgets for the nice dialog manager */
 #include "wtools.h"
-#include "setup.h"		/* For profile_name */
-#include "command.h"		/* For cmdline */
+#include "setup.h"              /* For profile_name */
+#include "command.h"            /* For cmdline */
 #include "dir.h"
-#include "panel.h"		/* LIST_TYPES */
+#include "panel.h"              /* LIST_TYPES */
 #include "boxes.h"
-#include "main.h"		/* For the confirm_* variables */
+#include "main.h"               /* For the confirm_* variables */
 #include "tree.h"
-#include "layout.h"		/* for get_nth_panel_name proto */
-#include "background.h"		/* task_list */
+#include "layout.h"             /* for get_nth_panel_name proto */
+#include "background.h"         /* task_list */
 
 #ifdef HAVE_CHARSET
 #include "charsets.h"
@@ -78,128 +78,132 @@ static char **displays_status;
 static int display_user_hotkey = 'u';
 
 static cb_ret_t
-display_callback (Dlg_head *h, Widget *sender,
-		    dlg_msg_t msg, int parm, void *data)
+display_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
-    switch (msg) {
+    switch (msg)
+    {
     case DLG_UNFOCUS:
-	if (dlg_widget_active (display_radio)) {
-	    assign_text (display_mini_status, displays_status[display_radio->sel]);
-	    input_set_point (display_mini_status, 0);
-	}
-	return MSG_HANDLED;
+        if (dlg_widget_active (display_radio))
+        {
+            assign_text (display_mini_status, displays_status[display_radio->sel]);
+            input_set_point (display_mini_status, 0);
+        }
+        return MSG_HANDLED;
 
     case DLG_KEY:
-	if (parm == '\n') {
-	    if (dlg_widget_active (display_radio)) {
-		assign_text (display_mini_status, displays_status[display_radio->sel]);
-		dlg_stop (h);
-		return MSG_HANDLED;
-	    }
+        if (parm == '\n')
+        {
+            if (dlg_widget_active (display_radio))
+            {
+                assign_text (display_mini_status, displays_status[display_radio->sel]);
+                dlg_stop (h);
+                return MSG_HANDLED;
+            }
 
-	    if (dlg_widget_active (display_user_format)) {
-		h->ret_value = B_USER + 6;
-		dlg_stop (h);
-		return MSG_HANDLED;
-	    }
+            if (dlg_widget_active (display_user_format))
+            {
+                h->ret_value = B_USER + 6;
+                dlg_stop (h);
+                return MSG_HANDLED;
+            }
 
-	    if (dlg_widget_active (display_mini_status)) {
-		h->ret_value = B_USER + 7;
-		dlg_stop (h);
-		return MSG_HANDLED;
-	    }
-	}
+            if (dlg_widget_active (display_mini_status))
+            {
+                h->ret_value = B_USER + 7;
+                dlg_stop (h);
+                return MSG_HANDLED;
+            }
+        }
 
-	if (g_ascii_tolower (parm) == display_user_hotkey && dlg_widget_active (display_user_format)
-	    && dlg_widget_active (display_mini_status)) {
-	    display_radio->sel = 3;
-	    dlg_select_widget (display_radio);	/* force redraw */
-	    dlg_select_widget (display_user_format);
-	    return MSG_HANDLED;
-	}
-	return MSG_NOT_HANDLED;
+        if (g_ascii_tolower (parm) == display_user_hotkey && dlg_widget_active (display_user_format)
+            && dlg_widget_active (display_mini_status))
+        {
+            display_radio->sel = 3;
+            dlg_select_widget (display_radio);  /* force redraw */
+            dlg_select_widget (display_user_format);
+            return MSG_HANDLED;
+        }
+        return MSG_NOT_HANDLED;
 
     default:
-	return default_dlg_callback (h, sender, msg, parm, data);
+        return default_dlg_callback (h, sender, msg, parm, data);
     }
 }
 
 static Dlg_head *
-display_init (int radio_sel, char *init_text, int _check_status,
-	      char **_status)
+display_init (int radio_sel, char *init_text, int _check_status, char **_status)
 {
     int dlg_width = 48, dlg_height = 15;
     Dlg_head *dd;
 
     /* Controls whether the array strings have been translated */
-    const char *displays [LIST_TYPES] =
-    {
-	N_("&Full file list"),
-	N_("&Brief file list"),
-	N_("&Long file list"),
-	N_("&User defined:")
+    const char *displays[LIST_TYPES] = {
+        N_("&Full file list"),
+        N_("&Brief file list"),
+        N_("&Long file list"),
+        N_("&User defined:")
     };
 
     /* Index in displays[] for "user defined" */
     const int user_type_idx = 3;
 
     const char *display_title = N_("Listing mode");
-    const char *user_mini_status = N_("user &Mini status");
+    const char *user_mini_status = N_("User &mini status");
     const char *ok_name = N_("&OK");
     const char *cancel_name = N_("&Cancel");
 
     WButton *ok_button, *cancel_button;
 
     {
-	int i, maxlen = 0;
-	const char *cp;
-	int ok_len, cancel_len;
+        int i, maxlen = 0;
+        const char *cp;
+        int ok_len, cancel_len;
 
 #ifdef ENABLE_NLS
-	display_title = _(display_title);
-	user_mini_status = _(user_mini_status);
-	ok_name = _(ok_name);
-	cancel_name = _(cancel_name);
+        display_title = _(display_title);
+        user_mini_status = _(user_mini_status);
+        ok_name = _(ok_name);
+        cancel_name = _(cancel_name);
 
-	for (i = 0; i < LIST_TYPES; i++)
-	    displays[i] = _(displays[i]);
+        for (i = 0; i < LIST_TYPES; i++)
+            displays[i] = _(displays[i]);
 #endif
 
-	/* get hotkey of user-defined format string */
-	cp = strchr (displays[user_type_idx], '&');
-	if (cp != NULL && *++cp != '\0')
-	    display_user_hotkey = g_ascii_tolower (*cp);
+        /* get hotkey of user-defined format string */
+        cp = strchr (displays[user_type_idx], '&');
+        if (cp != NULL && *++cp != '\0')
+            display_user_hotkey = g_ascii_tolower (*cp);
 
-	/* xpos will be fixed later */
-	ok_button = button_new (dlg_height - 3, 0, B_ENTER, DEFPUSH_BUTTON, ok_name, 0);
-	ok_len = button_get_len (ok_button);
-	cancel_button = button_new (dlg_height - 3, 0, B_CANCEL, NORMAL_BUTTON, cancel_name, 0);
-	cancel_len = button_get_len (cancel_button);
+        /* xpos will be fixed later */
+        ok_button = button_new (dlg_height - 3, 0, B_ENTER, DEFPUSH_BUTTON, ok_name, 0);
+        ok_len = button_get_len (ok_button);
+        cancel_button = button_new (dlg_height - 3, 0, B_CANCEL, NORMAL_BUTTON, cancel_name, 0);
+        cancel_len = button_get_len (cancel_button);
 
-	dlg_width = max (dlg_width, str_term_width1 (display_title) + 10);
-	/* calculate max width of radiobutons */
-	for (i = 0; i < LIST_TYPES; i++)
-	    maxlen = max (maxlen, str_term_width1 (displays[i]));
-	dlg_width = max (dlg_width, maxlen);
-	dlg_width = max (dlg_width, str_term_width1 (user_mini_status) + 13);
+        dlg_width = max (dlg_width, str_term_width1 (display_title) + 10);
+        /* calculate max width of radiobutons */
+        for (i = 0; i < LIST_TYPES; i++)
+            maxlen = max (maxlen, str_term_width1 (displays[i]));
+        dlg_width = max (dlg_width, maxlen);
+        dlg_width = max (dlg_width, str_term_width1 (user_mini_status) + 13);
 
-	/* buttons */
-	dlg_width = max (dlg_width, ok_len + cancel_len + 8);
-	ok_button->widget.x = dlg_width/3 - ok_len/2;
-	cancel_button->widget.x = dlg_width * 2/3 - cancel_len/2;
+        /* buttons */
+        dlg_width = max (dlg_width, ok_len + cancel_len + 8);
+        ok_button->widget.x = dlg_width / 3 - ok_len / 2;
+        cancel_button->widget.x = dlg_width * 2 / 3 - cancel_len / 2;
     }
 
     displays_status = _status;
 
     dd = create_dlg (0, 0, dlg_height, dlg_width, dialog_colors,
-		     display_callback, "[Listing Mode...]", display_title,
-		     DLG_CENTER | DLG_REVERSE);
+                     display_callback, "[Listing Mode...]", display_title,
+                     DLG_CENTER | DLG_REVERSE);
 
     add_widget (dd, cancel_button);
     add_widget (dd, ok_button);
 
     display_mini_status = input_new (10, 8, INPUT_COLOR, dlg_width - 12, _status[radio_sel],
-			    "mini-input", INPUT_COMPLETE_DEFAULT);
+                                     "mini-input", INPUT_COMPLETE_DEFAULT);
     add_widget (dd, display_mini_status);
     input_set_point (display_mini_status, 0);
 
@@ -207,7 +211,7 @@ display_init (int radio_sel, char *init_text, int _check_status,
     add_widget (dd, display_check_status);
 
     display_user_format = input_new (7, 8, INPUT_COLOR, dlg_width - 12, init_text,
-			"user-fmt-input", INPUT_COMPLETE_DEFAULT);
+                                     "user-fmt-input", INPUT_COMPLETE_DEFAULT);
     add_widget (dd, display_user_format);
     input_set_point (display_user_format, 0);
 
@@ -220,14 +224,15 @@ display_init (int radio_sel, char *init_text, int _check_status,
 
 /* return list type */
 int
-display_box (WPanel *panel, char **userp, char **minip, int *use_msformat, int num)
+display_box (WPanel * panel, char **userp, char **minip, int *use_msformat, int num)
 {
     int result = -1;
     Dlg_head *dd;
     char *section = NULL;
     size_t i;
 
-    if (panel == NULL) {
+    if (panel == NULL)
+    {
         const char *p = get_nth_panel_name (num);
         panel = g_new (WPanel, 1);
         panel->list_type = list_full;
@@ -236,7 +241,8 @@ display_box (WPanel *panel, char **userp, char **minip, int *use_msformat, int n
         for (i = 0; i < LIST_TYPES; i++)
             panel->user_status_format[i] = g_strdup (DEFAULT_USER_FORMAT);
         section = g_strconcat ("Temporal:", p, (char *) NULL);
-        if (! mc_config_has_group (mc_main_config, section)) {
+        if (!mc_config_has_group (mc_main_config, section))
+        {
             g_free (section);
             section = g_strdup (p);
         }
@@ -245,19 +251,21 @@ display_box (WPanel *panel, char **userp, char **minip, int *use_msformat, int n
     }
 
     dd = display_init (panel->list_type, panel->user_format,
-	panel->user_mini_status, panel->user_status_format);
+                       panel->user_mini_status, panel->user_status_format);
 
-    if (run_dlg (dd) != B_CANCEL) {
-	result = display_radio->sel;
-	*userp = g_strdup (display_user_format->buffer);
-	*minip = g_strdup (display_mini_status->buffer);
-	*use_msformat = display_check_status->state & C_BOOL;
+    if (run_dlg (dd) != B_CANCEL)
+    {
+        result = display_radio->sel;
+        *userp = g_strdup (display_user_format->buffer);
+        *minip = g_strdup (display_mini_status->buffer);
+        *use_msformat = display_check_status->state & C_BOOL;
     }
 
-    if (section != NULL) {
+    if (section != NULL)
+    {
         g_free (panel->user_format);
-	for (i = 0; i < LIST_TYPES; i++)
-	   g_free (panel->user_status_format [i]);
+        for (i = 0; i < LIST_TYPES; i++)
+            g_free (panel->user_status_format[i]);
         g_free (panel);
     }
 
@@ -267,7 +275,7 @@ display_box (WPanel *panel, char **userp, char **minip, int *use_msformat, int n
 }
 
 const panel_field_t *
-sort_box (const panel_field_t *sort_format, int *reverse, int *case_sensitive, int *exec_first)
+sort_box (const panel_field_t * sort_format, int *reverse, int *case_sensitive, int *exec_first)
 {
     int dlg_width = 40, dlg_height = 7;
 
@@ -278,93 +286,92 @@ sort_box (const panel_field_t *sort_format, int *reverse, int *case_sensitive, i
 
     const panel_field_t *result = sort_format;
 
-    sort_orders_names = panel_get_sortable_fields(&sort_names_num);
+    sort_orders_names = panel_get_sortable_fields (&sort_names_num);
     dlg_height += sort_names_num;
 
     {
-	int max_radio = 0, max_check = 0;
-	int ok_len, cancel_len;
-	gsize i;
+        int max_radio = 0, max_check = 0;
+        int ok_len, cancel_len;
+        gsize i;
 
-	QuickWidget quick_widgets[] =
-	{
-	    /* 0 */
-	    QUICK_BUTTON (0, dlg_width, dlg_height - 3, dlg_height, N_("&Cancel"), B_CANCEL, NULL),
-	    /* 1 */
-	    QUICK_BUTTON (0, dlg_width, dlg_height - 3, dlg_height, N_("&OK"), B_ENTER, NULL),
-	    /* 2 */
-	    QUICK_CHECKBOX (0, dlg_width, 5, dlg_height, N_("&Reverse"), reverse),
-	    /* 3 */
-	    QUICK_CHECKBOX (0, dlg_width, 4, dlg_height, N_("Case sensi&tive"), case_sensitive),
-	    /* 4 */
-	    QUICK_CHECKBOX (0, dlg_width, 3, dlg_height, N_("Executable &first"), exec_first),
-	    /* 5 */
-	    QUICK_RADIO (4, dlg_width, 3, dlg_height, 0,
-				    NULL, &sort_idx),
-	    QUICK_END
-	};
+        QuickWidget quick_widgets[] = {
+            /* 0 */
+            QUICK_BUTTON (0, dlg_width, dlg_height - 3, dlg_height, N_("&Cancel"), B_CANCEL, NULL),
+            /* 1 */
+            QUICK_BUTTON (0, dlg_width, dlg_height - 3, dlg_height, N_("&OK"), B_ENTER, NULL),
+            /* 2 */
+            QUICK_CHECKBOX (0, dlg_width, 5, dlg_height, N_("&Reverse"), reverse),
+            /* 3 */
+            QUICK_CHECKBOX (0, dlg_width, 4, dlg_height, N_("Case sensi&tive"), case_sensitive),
+            /* 4 */
+            QUICK_CHECKBOX (0, dlg_width, 3, dlg_height, N_("Executable &first"), exec_first),
+            /* 5 */
+            QUICK_RADIO (4, dlg_width, 3, dlg_height, 0,
+                         NULL, &sort_idx),
+            QUICK_END
+        };
 
-	QuickDialog quick_dlg =
-	{
-	    dlg_width, dlg_height, -1, -1,
-	    N_("Sort order"), "[Sort Order...]",
-	    quick_widgets, TRUE
-	};
+        QuickDialog quick_dlg = {
+            dlg_width, dlg_height, -1, -1,
+            N_("Sort order"), "[Sort Order...]",
+            quick_widgets, TRUE
+        };
 
-	quick_widgets[5].u.radio.items = sort_orders_names;
-	quick_widgets[5].u.radio.count = sort_names_num;
+        quick_widgets[5].u.radio.items = sort_orders_names;
+        quick_widgets[5].u.radio.count = sort_names_num;
 
-	for (i = 0; i < sort_names_num; i++)
-	    if (strcmp (sort_orders_names[i], _(sort_format->title_hotkey)) == 0 ) {
-		sort_idx = i;
-		break;
-	    }
+        for (i = 0; i < sort_names_num; i++)
+            if (strcmp (sort_orders_names[i], _(sort_format->title_hotkey)) == 0)
+            {
+                sort_idx = i;
+                break;
+            }
 
 #ifdef ENABLE_NLS
-	quick_dlg.title = _(quick_dlg.title);
-	/* buttons */
-	for (i = 0; i < 2; i++)
-	    quick_widgets[i].u.button.text = _(quick_widgets[i].u.button.text);
-	/* checkboxes */
-	for (i = 2; i < 5; i++)
-	    quick_widgets[i].u.checkbox.text = _(quick_widgets[i].u.checkbox.text);
-#endif				/* ENABLE_NlS */
+        quick_dlg.title = _(quick_dlg.title);
+        /* buttons */
+        for (i = 0; i < 2; i++)
+            quick_widgets[i].u.button.text = _(quick_widgets[i].u.button.text);
+        /* checkboxes */
+        for (i = 2; i < 5; i++)
+            quick_widgets[i].u.checkbox.text = _(quick_widgets[i].u.checkbox.text);
+#endif /* ENABLE_NlS */
 
-	/* buttons */
-	cancel_len = str_term_width1 (quick_widgets[0].u.button.text) + 4;
-	ok_len = str_term_width1 (quick_widgets[1].u.button.text) + 6;
-	/* checkboxes */
-	for (i = 2; i < 5; i++)
-	    max_check = max (max_check, str_term_width1 (quick_widgets[i].u.checkbox.text) + 4);
-	/* radiobuttons */
-	for (i = 0; i < sort_names_num; i++)
-	    max_radio  = max (max_radio, str_term_width1 (sort_orders_names[i]) + 4);
+        /* buttons */
+        cancel_len = str_term_width1 (quick_widgets[0].u.button.text) + 4;
+        ok_len = str_term_width1 (quick_widgets[1].u.button.text) + 6;
+        /* checkboxes */
+        for (i = 2; i < 5; i++)
+            max_check = max (max_check, str_term_width1 (quick_widgets[i].u.checkbox.text) + 4);
+        /* radiobuttons */
+        for (i = 0; i < sort_names_num; i++)
+            max_radio = max (max_radio, str_term_width1 (sort_orders_names[i]) + 4);
 
-	/* dialog width */
-	dlg_width = max (dlg_width, str_term_width1 (quick_dlg.title) + 8);
-	dlg_width = max (dlg_width, ok_len + cancel_len + 8);
-	dlg_width = max (dlg_width, 2 * max (max_radio, max_check) + 8);
+        /* dialog width */
+        dlg_width = max (dlg_width, str_term_width1 (quick_dlg.title) + 8);
+        dlg_width = max (dlg_width, ok_len + cancel_len + 8);
+        dlg_width = max (dlg_width, 2 * max (max_radio, max_check) + 8);
 
-	/* fix widget and dialog parameters */
-	/* dialog */
-	quick_dlg.xlen = dlg_width;
-	/* widgets */
-	for (i = 0; (size_t) i < sizeof (quick_widgets)/sizeof (quick_widgets[0]) - 1; i++)
-	    quick_widgets[i].x_divisions = dlg_width;
-	/* buttons */
-	quick_widgets[0].relative_x = dlg_width * 2/3 - cancel_len/2;
-	quick_widgets[1].relative_x = dlg_width/3 - ok_len/2;
-	/* checkboxes */
-	for (i = 2; i < 5; i++)
-	    quick_widgets[i].relative_x = dlg_width/2 + 2;
+        /* fix widget and dialog parameters */
+        /* dialog */
+        quick_dlg.xlen = dlg_width;
+        /* widgets */
+        for (i = 0; (size_t) i < sizeof (quick_widgets) / sizeof (quick_widgets[0]) - 1; i++)
+            quick_widgets[i].x_divisions = dlg_width;
+        /* buttons */
+        quick_widgets[0].relative_x = dlg_width * 2 / 3 - cancel_len / 2;
+        quick_widgets[1].relative_x = dlg_width / 3 - ok_len / 2;
+        /* checkboxes */
+        for (i = 2; i < 5; i++)
+            quick_widgets[i].relative_x = dlg_width / 2 + 2;
 
-	if (quick_dialog (&quick_dlg) != B_CANCEL)
-	    result = panel_get_field_by_title_hotkey(sort_orders_names[sort_idx]);
+        if (quick_dialog (&quick_dlg) != B_CANCEL)
+            result = panel_get_field_by_title_hotkey (sort_orders_names[sort_idx]);
 
-	if (result == NULL)
-	    result = sort_format;
+        if (result == NULL)
+            result = sort_format;
     }
-    g_strfreev((gchar **)sort_orders_names);
+    g_strfreev ((gchar **) sort_orders_names);
     return result;
 }
 
@@ -374,18 +381,19 @@ confirm_box (void)
 {
     const char *title = _("Confirmation");
 
-    QuickWidget conf_widgets [] =
-    {
-	/* 0 */ QUICK_BUTTON  (29, 46, 10, 13, N_("&Cancel"), B_CANCEL, NULL),
-	/* 1 */ QUICK_BUTTON  (12, 46, 10, 13, N_("&OK"),     B_ENTER,  NULL),
-/* TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix */
-	/* 2 */ QUICK_CHECKBOX (3, 46, 8, 13, N_("Confirmation|&History cleanup"), &confirm_history_cleanup),
-	/* 3 */ QUICK_CHECKBOX (3, 46, 7, 13, N_("Confirmation|&Directory hotlist delete"), &confirm_directory_hotlist_delete),
-	/* 4 */ QUICK_CHECKBOX (3, 46, 6, 13, N_("Confirmation|E&xit"), &confirm_exit),
-	/* 5 */ QUICK_CHECKBOX (3, 46, 5, 13, N_("Confirmation|&Execute"), &confirm_execute),
-	/* 6 */ QUICK_CHECKBOX (3, 46, 4, 13, N_("Confirmation|O&verwrite"), &confirm_overwrite),
-	/* 7 */ QUICK_CHECKBOX (3, 46, 3, 13, N_("Confirmation|&Delete"), &confirm_delete),
-	QUICK_END
+    QuickWidget conf_widgets[] = {
+        /* 0 */ QUICK_BUTTON (29, 46, 10, 13, N_("&Cancel"), B_CANCEL, NULL),
+        /* 1 */ QUICK_BUTTON (12, 46, 10, 13, N_("&OK"), B_ENTER, NULL),
+        /* TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix */
+        /* 2 */ QUICK_CHECKBOX (3, 46, 8, 13, N_("Confirmation|&History cleanup"),
+                                &confirm_history_cleanup),
+        /* 3 */ QUICK_CHECKBOX (3, 46, 7, 13, N_("Confirmation|&Directory hotlist delete"),
+                                &confirm_directory_hotlist_delete),
+        /* 4 */ QUICK_CHECKBOX (3, 46, 6, 13, N_("Confirmation|E&xit"), &confirm_exit),
+        /* 5 */ QUICK_CHECKBOX (3, 46, 5, 13, N_("Confirmation|&Execute"), &confirm_execute),
+        /* 6 */ QUICK_CHECKBOX (3, 46, 4, 13, N_("Confirmation|O&verwrite"), &confirm_overwrite),
+        /* 7 */ QUICK_CHECKBOX (3, 46, 3, 13, N_("Confirmation|&Delete"), &confirm_delete),
+        QUICK_END
     };
 
     const size_t w_num = sizeof (conf_widgets) / sizeof (conf_widgets[0]) - 1;
@@ -402,19 +410,19 @@ confirm_box (void)
     title = _(title);
 
     for (i = 0; i < 2; i++)
-	conf_widgets [i].u.button.text = _(conf_widgets [i].u.button.text);
+        conf_widgets[i].u.button.text = _(conf_widgets[i].u.button.text);
 
     for (i = 2; i < w_num; i++)
-	conf_widgets [i].u.checkbox.text = Q_(conf_widgets [i].u.checkbox.text);
+        conf_widgets[i].u.checkbox.text = Q_ (conf_widgets[i].u.checkbox.text);
 #endif /* ENABLE_NLS */
 
     /* maximumr length of checkboxes */
     for (i = 2; i < w_num; i++)
-        maxlen = max (maxlen, str_term_width1 (conf_widgets [i].u.checkbox.text) + 4);
+        maxlen = max (maxlen, str_term_width1 (conf_widgets[i].u.checkbox.text) + 4);
 
     /* length of buttons */
-    cancel_len = str_term_width1 (conf_widgets [0].u.button.text) + 3;
-    ok_len = str_term_width1 (conf_widgets [1].u.button.text) + 5; /* default button */
+    cancel_len = str_term_width1 (conf_widgets[0].u.button.text) + 3;
+    ok_len = str_term_width1 (conf_widgets[1].u.button.text) + 5;       /* default button */
 
     blen = cancel_len + ok_len + 2;
 
@@ -422,29 +430,29 @@ confirm_box (void)
     dlg_width = max (dlg_width, str_term_width1 (title) + 4);
 
     /* correct widget parameters */
-    for (i = 0; i < w_num; i++) {
-	conf_widgets[i].x_divisions = dlg_width;
-	conf_widgets[i].y_divisions = dlg_height;
+    for (i = 0; i < w_num; i++)
+    {
+        conf_widgets[i].x_divisions = dlg_width;
+        conf_widgets[i].y_divisions = dlg_height;
     }
 
-    conf_widgets[1].relative_x = dlg_width/2 - blen/2;
+    conf_widgets[1].relative_x = dlg_width / 2 - blen / 2;
     conf_widgets[0].relative_x = conf_widgets[1].relative_x + ok_len + 2;
 
     {
-	QuickDialog confirmation =
-	{
-	    dlg_width, dlg_height, -1, -1, title,
-	    "[Confirmation]", conf_widgets, 1
-	};
+        QuickDialog confirmation = {
+            dlg_width, dlg_height, -1, -1, title,
+            "[Confirmation]", conf_widgets, 1
+        };
 
-	(void) quick_dialog (&confirmation);
+        (void) quick_dialog (&confirmation);
     }
 }
 
 
 #ifndef HAVE_CHARSET
 void
-display_bits_box (void) /* AB:FIXME: test dialog */
+display_bits_box (void)         /* AB:FIXME: test dialog */
 {
     /* dialog sizes */
     const int DISPY = 13;
@@ -453,27 +461,24 @@ display_bits_box (void) /* AB:FIXME: test dialog */
     int new_meta = 0;
     int current_mode;
 
-    const char *display_bits_str [] =
-    {
-	N_("UTF-8 output"),
-	N_("Full 8 bits output"),
-	N_("ISO 8859-1"),
-	N_("7 bits")
+    const char *display_bits_str[] = {
+        N_("UTF-8 output"),
+        N_("Full 8 bits output"),
+        N_("ISO 8859-1"),
+        N_("7 bits")
     };
 
-    QuickWidget display_widgets[] =
-    {
-	/* 0 */ QUICK_BUTTON (15, DISPX, DISPY - 3, DISPY, N_("&Cancel"), B_CANCEL, NULL),
-	/* 1 */ QUICK_BUTTON (29, DISPX, DISPY - 3, DISPY, N_("&OK"),     B_ENTER,  NULL),
-	/* 2 */ QUICK_CHECKBOX (3, DISPX, 8, DISPY, N_("F&ull 8 bits input"), &new_meta),
-	/* 3 */ QUICK_RADIO (3, DISPX, 3, DISPY, 4, display_bits_str, &current_mode),
-	QUICK_END
+    QuickWidget display_widgets[] = {
+        /* 0 */ QUICK_BUTTON (15, DISPX, DISPY - 3, DISPY, N_("&Cancel"), B_CANCEL, NULL),
+        /* 1 */ QUICK_BUTTON (29, DISPX, DISPY - 3, DISPY, N_("&OK"), B_ENTER, NULL),
+        /* 2 */ QUICK_CHECKBOX (3, DISPX, 8, DISPY, N_("F&ull 8 bits input"), &new_meta),
+        /* 3 */ QUICK_RADIO (3, DISPX, 3, DISPY, 4, display_bits_str, &current_mode),
+        QUICK_END
     };
 
-    QuickDialog display_bits =
-    {
-	DISPX, DISPY, -1, -1, _(" Display bits "),
-	"[Display bits]", display_widgets, TRUE
+    QuickDialog display_bits = {
+        DISPX, DISPY, -1, -1, _(" Display bits "),
+        "[Display bits]", display_widgets, TRUE
     };
 
     int i;
@@ -483,55 +488,58 @@ display_bits_box (void) /* AB:FIXME: test dialog */
 #ifdef ENABLE_NLS
     static gboolean i18n_flag = FALSE;
 
-    if (!i18n_flag) {
-	for (i = 0; i < 3; i++) {
-	    display_bits_str[i] = _(display_bits_str [i]);
-	}
+    if (!i18n_flag)
+    {
+        for (i = 0; i < 3; i++)
+        {
+            display_bits_str[i] = _(display_bits_str[i]);
+        }
 
-	display_widgets[0].u.button.text = _(display_widgets[0].u.button.text);
-	display_widgets[1].u.button.text = _(display_widgets[1].u.button.text);
-	display_widgets[2].u.checkbox.text = _(display_widgets[2].u.checkbox.text);
+        display_widgets[0].u.button.text = _(display_widgets[0].u.button.text);
+        display_widgets[1].u.button.text = _(display_widgets[1].u.button.text);
+        display_widgets[2].u.checkbox.text = _(display_widgets[2].u.checkbox.text);
 
-	i18n_flag = TRUE;
+        i18n_flag = TRUE;
     }
 #endif /* ENABLE_NLS */
 
     /* radiobuttons */
     for (i = 0; i < 3; i++)
-	maxlen = max (maxlen, str_term_width1 (display_bits_str [i]));
+        maxlen = max (maxlen, str_term_width1 (display_bits_str[i]));
 
     /* buttons */
-    cancel_len = str_term_width1 (display_widgets [0].u.button.text) + 2;
-    ok_len = str_term_width1 (display_widgets [1].u.button.text) + 4; /* default button */
+    cancel_len = str_term_width1 (display_widgets[0].u.button.text) + 2;
+    ok_len = str_term_width1 (display_widgets[1].u.button.text) + 4;    /* default button */
 
     l1 = max (cancel_len, ok_len);
 
     display_bits.xlen = max (maxlen, l1) + 20;
 
     for (i = 0; i < 4; i++)
-	display_widgets[i].x_divisions = display_bits.xlen;
+        display_widgets[i].x_divisions = display_bits.xlen;
 
-    display_widgets[0].relative_x = display_bits.xlen * 2/3 - cancel_len/2;
-    display_widgets[1].relative_x = display_bits.xlen/3 - ok_len/2;
+    display_widgets[0].relative_x = display_bits.xlen * 2 / 3 - cancel_len / 2;
+    display_widgets[1].relative_x = display_bits.xlen / 3 - ok_len / 2;
 
     if (full_eight_bits)
-	current_mode = 0;
+        current_mode = 0;
     else if (eight_bit_clean)
-	current_mode = 1;
+        current_mode = 1;
     else
-	current_mode = 2;
+        current_mode = 2;
 
     new_meta = !use_8th_bit_as_meta;
 
-    if (quick_dialog (&display_bits) != B_CANCEL) {
-	eight_bit_clean = current_mode < 3;
-	full_eight_bits = current_mode < 2;
+    if (quick_dialog (&display_bits) != B_CANCEL)
+    {
+        eight_bit_clean = current_mode < 3;
+        full_eight_bits = current_mode < 2;
 #ifndef HAVE_SLANG
-	meta (stdscr, eight_bit_clean);
+        meta (stdscr, eight_bit_clean);
 #else
-	SLsmg_Display_Eight_Bit = full_eight_bits ? 128 : 160;
+        SLsmg_Display_Eight_Bit = full_eight_bits ? 128 : 160;
 #endif
-	use_8th_bit_as_meta = !new_meta;
+        use_8th_bit_as_meta = !new_meta;
     }
 }
 
@@ -551,18 +559,19 @@ sel_charset_button (int action)
 
     new_dcp = select_charset (-1, -1, new_display_codepage, TRUE);
 
-    if (new_dcp != SELECT_CHARSET_CANCEL) {
-	const char *cpname;
-	char buf[BUF_TINY];
+    if (new_dcp != SELECT_CHARSET_CANCEL)
+    {
+        const char *cpname;
+        char buf[BUF_TINY];
 
-	new_display_codepage = new_dcp;
-	cpname = (new_display_codepage == SELECT_CHARSET_OTHER_8BIT) ?
-		    _("Other 8 bit") : codepages[new_display_codepage].name;
-	if (cpname != NULL)
-	    utf8_display = str_isutf8 (cpname);
-	/* avoid strange bug with label repainting */
-	g_snprintf (buf, sizeof (buf), "%-27s", cpname);
-	label_set_text (cplabel, buf);
+        new_display_codepage = new_dcp;
+        cpname = (new_display_codepage == SELECT_CHARSET_OTHER_8BIT) ?
+            _("Other 8 bit") : codepages[new_display_codepage].name;
+        if (cpname != NULL)
+            utf8_display = str_isutf8 (cpname);
+        /* avoid strange bug with label repainting */
+        g_snprintf (buf, sizeof (buf), "%-27s", cpname);
+        label_set_text (cplabel, buf);
     }
 
     return 0;
@@ -581,33 +590,26 @@ init_disp_bits_box (void)
     do_refresh ();
 
     dbits_dlg =
-	create_dlg (0, 0, DISPY, DISPX, dialog_colors, NULL,
-		    "[Display bits]", _(" Display bits "), DLG_CENTER | DLG_REVERSE);
+        create_dlg (0, 0, DISPY, DISPX, dialog_colors, NULL,
+                    "[Display bits]", _(" Display bits "), DLG_CENTER | DLG_REVERSE);
 
-    add_widget (dbits_dlg,
-		label_new (3, 4, _("Input / display codepage:")));
+    add_widget (dbits_dlg, label_new (3, 4, _("Input / display codepage:")));
 
-    cpname = (new_display_codepage < 0)
-	? _("Other 8 bit")
-	: codepages[new_display_codepage].name;
+    cpname = (new_display_codepage < 0) ? _("Other 8 bit") : codepages[new_display_codepage].name;
     cplabel = label_new (4, 4, cpname);
     add_widget (dbits_dlg, cplabel);
 
     add_widget (dbits_dlg,
-		button_new (DISPY - 3, DISPX / 2 + 3, B_CANCEL,
-			    NORMAL_BUTTON, _("&Cancel"), 0));
-    add_widget (dbits_dlg,
-		button_new (DISPY - 3, 7, B_ENTER, NORMAL_BUTTON, _("&OK"),
-			    0));
+                button_new (DISPY - 3, DISPX / 2 + 3, B_CANCEL, NORMAL_BUTTON, _("&Cancel"), 0));
+    add_widget (dbits_dlg, button_new (DISPY - 3, 7, B_ENTER, NORMAL_BUTTON, _("&OK"), 0));
 
-    inpcheck =
-	check_new (6, 4, !use_8th_bit_as_meta, _("F&ull 8 bits input"));
+    inpcheck = check_new (6, 4, !use_8th_bit_as_meta, _("F&ull 8 bits input"));
     add_widget (dbits_dlg, inpcheck);
 
     cpname = _("&Select");
     add_widget (dbits_dlg,
-		button_new (4, DISPX - 7 - str_term_width1 (cpname), B_USER,
-			    NORMAL_BUTTON, cpname, sel_charset_button));
+                button_new (4, DISPX - 7 - str_term_width1 (cpname), B_USER,
+                            NORMAL_BUTTON, cpname, sel_charset_button));
 
     return dbits_dlg;
 }
@@ -623,21 +625,23 @@ display_bits_box (void)
 
     run_dlg (dbits_dlg);
 
-    if (dbits_dlg->ret_value == B_ENTER) {
-	char *errmsg;
+    if (dbits_dlg->ret_value == B_ENTER)
+    {
+        char *errmsg;
 
-	display_codepage = new_display_codepage;
-	errmsg = init_translation_table (source_codepage, display_codepage);
-	if (errmsg != NULL) {
-	    message (D_ERROR, MSG_ERROR, "%s", errmsg);
-	    g_free (errmsg);
-	}
+        display_codepage = new_display_codepage;
+        errmsg = init_translation_table (source_codepage, display_codepage);
+        if (errmsg != NULL)
+        {
+            message (D_ERROR, MSG_ERROR, "%s", errmsg);
+            g_free (errmsg);
+        }
 #ifdef HAVE_SLANG
-	tty_display_8bit (display_codepage != 0 && display_codepage != 1);
+        tty_display_8bit (display_codepage != 0 && display_codepage != 1);
 #else
-	tty_display_8bit (display_codepage != 0);
+        tty_display_8bit (display_codepage != 0);
 #endif
-	use_8th_bit_as_meta = !(inpcheck->state & C_BOOL);
+        use_8th_bit_as_meta = !(inpcheck->state & C_BOOL);
     }
     destroy_dlg (dbits_dlg);
     repaint_screen ();
@@ -646,24 +650,25 @@ display_bits_box (void)
 #endif /* HAVE_CHARSET */
 
 static cb_ret_t
-tree_callback (Dlg_head *h, Widget *sender,
-		dlg_msg_t msg, int parm, void *data)
+tree_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
-    switch (msg) {
+    switch (msg)
+    {
     case DLG_POST_KEY:
-	/* The enter key will be processed by the tree widget */
-	if (parm == '\n') {
-	    h->ret_value = B_ENTER;
-	    dlg_stop (h);
-	}
-	return MSG_HANDLED;
+        /* The enter key will be processed by the tree widget */
+        if (parm == '\n')
+        {
+            h->ret_value = B_ENTER;
+            dlg_stop (h);
+        }
+        return MSG_HANDLED;
 
     case DLG_ACTION:
-	/* command from buttonbar */
-	return send_message ((Widget *) find_tree (h), WIDGET_COMMAND, parm);
+        /* command from buttonbar */
+        return send_message ((Widget *) find_tree (h), WIDGET_COMMAND, parm);
 
     default:
-	return default_dlg_callback (h, sender, msg, parm, data);
+        return default_dlg_callback (h, sender, msg, parm, data);
     }
 }
 
@@ -671,17 +676,16 @@ tree_callback (Dlg_head *h, Widget *sender,
 char *
 tree_box (const char *current_dir)
 {
-    WTree    *mytree;
+    WTree *mytree;
     Dlg_head *dlg;
-    char     *val = NULL;
+    char *val = NULL;
     WButtonBar *bar;
 
     (void) current_dir;
 
     /* Create the components */
     dlg = create_dlg (0, 0, LINES - 9, COLS - 20, dialog_colors,
-			tree_callback, "[Directory Tree]",
-			NULL, DLG_CENTER | DLG_REVERSE);
+                      tree_callback, "[Directory Tree]", NULL, DLG_CENTER | DLG_REVERSE);
 
     mytree = tree_new (0, 2, 2, dlg->lines - 6, dlg->cols - 5);
     add_widget (dlg, mytree);
@@ -692,7 +696,7 @@ tree_box (const char *current_dir)
     ((Widget *) bar)->y = LINES - 1;
 
     if (run_dlg (dlg) == B_ENTER)
-	val = g_strdup (tree_selected_name (mytree));
+        val = g_strdup (tree_selected_name (mytree));
 
     destroy_dlg (dlg);
     return val;
@@ -719,37 +723,41 @@ configure_vfs (void)
 #define VFSY 8
 #endif
 
-    char buffer2 [BUF_TINY];
+    char buffer2[BUF_TINY];
 #ifdef USE_NETCODE
-    char buffer3 [BUF_TINY];
+    char buffer3[BUF_TINY];
 #endif
 
-    QuickWidget confvfs_widgets [] =
-    {
-	/*  0 */ QUICK_BUTTON (30,  VFSX, VFSY - 3, VFSY, N_("&Cancel"), B_CANCEL, NULL),
-	/*  1 */ QUICK_BUTTON (12, VFSX,  VFSY - 3, VFSY, N_("&OK"),     B_ENTER,  NULL),
+    QuickWidget confvfs_widgets[] = {
+        /*  0 */ QUICK_BUTTON (30, VFSX, VFSY - 3, VFSY, N_("&Cancel"), B_CANCEL, NULL),
+        /*  1 */ QUICK_BUTTON (12, VFSX, VFSY - 3, VFSY, N_("&OK"), B_ENTER, NULL),
 #ifdef USE_NETCODE
-	/*  2 */ QUICK_CHECKBOX (4, VFSX, 12, VFSY, N_("Use passive mode over pro&xy"), &ftpfs_use_passive_connections_over_proxy),
-	/*  3 */ QUICK_CHECKBOX (4, VFSX, 11, VFSY, N_("Use &passive mode"), &ftpfs_use_passive_connections),
-	/*  4 */ QUICK_CHECKBOX (4, VFSX, 10, VFSY, N_("&Use ~/.netrc"), &use_netrc),
-	/*  5 */ QUICK_INPUT (4, VFSX, 9, VFSY, ftpfs_proxy_host, 48, 0, "input-ftp-proxy", &ret_ftp_proxy),
-	/*  6 */ QUICK_CHECKBOX (4, VFSX, 8, VFSY, N_("&Always use ftp proxy"), &ftpfs_always_use_proxy),
-	/*  7 */ QUICK_LABEL (49, VFSX, 7, VFSY, N_("sec")),
-	/*  8 */ QUICK_INPUT (38, VFSX, 7, VFSY, buffer3, 10, 0, "input-timeout", &ret_directory_timeout),
-	/*  9 */ QUICK_LABEL (4, VFSX, 7, VFSY, N_("ftpfs directory cache timeout:")),
-	/* 10 */ QUICK_INPUT (4, VFSX, 6, VFSY, ftpfs_anonymous_passwd, 48, 0, "input-passwd", &ret_passwd),
-	/* 11 */ QUICK_LABEL (4, VFSX, 5, VFSY, N_("ftp anonymous password:")),
+        /*  2 */ QUICK_CHECKBOX (4, VFSX, 12, VFSY, N_("Use passive mode over pro&xy"),
+                                 &ftpfs_use_passive_connections_over_proxy),
+        /*  3 */ QUICK_CHECKBOX (4, VFSX, 11, VFSY, N_("Use &passive mode"),
+                                 &ftpfs_use_passive_connections),
+        /*  4 */ QUICK_CHECKBOX (4, VFSX, 10, VFSY, N_("&Use ~/.netrc"), &use_netrc),
+        /*  5 */ QUICK_INPUT (4, VFSX, 9, VFSY, ftpfs_proxy_host, 48, 0, "input-ftp-proxy",
+                              &ret_ftp_proxy),
+        /*  6 */ QUICK_CHECKBOX (4, VFSX, 8, VFSY, N_("&Always use ftp proxy"),
+                                 &ftpfs_always_use_proxy),
+        /*  7 */ QUICK_LABEL (49, VFSX, 7, VFSY, N_("sec")),
+        /*  8 */ QUICK_INPUT (38, VFSX, 7, VFSY, buffer3, 10, 0, "input-timeout",
+                              &ret_directory_timeout),
+        /*  9 */ QUICK_LABEL (4, VFSX, 7, VFSY, N_("ftpfs directory cache timeout:")),
+        /* 10 */ QUICK_INPUT (4, VFSX, 6, VFSY, ftpfs_anonymous_passwd, 48, 0, "input-passwd",
+                              &ret_passwd),
+        /* 11 */ QUICK_LABEL (4, VFSX, 5, VFSY, N_("ftp anonymous password:")),
 #endif
-	/* 12 */ QUICK_LABEL (49, VFSX, 3, VFSY, N_("sec")),
-	/* 13 */ QUICK_INPUT (38, VFSX, 3, VFSY, buffer2, 10, 0, "input-timo-vfs", &ret_timeout),
-	/* 14 */ QUICK_LABEL (4,  VFSX, 3, VFSY, N_("Timeout for freeing VFSs:")),
-	QUICK_END
+        /* 12 */ QUICK_LABEL (49, VFSX, 3, VFSY, N_("sec")),
+        /* 13 */ QUICK_INPUT (38, VFSX, 3, VFSY, buffer2, 10, 0, "input-timo-vfs", &ret_timeout),
+        /* 14 */ QUICK_LABEL (4, VFSX, 3, VFSY, N_("Timeout for freeing VFSs:")),
+        QUICK_END
     };
 
-    QuickDialog confvfs_dlg =
-    {
-	 VFSX, VFSY, -1, -1, N_(" Virtual File System Setting "),
-	"[Virtual FS]", confvfs_widgets, FALSE
+    QuickDialog confvfs_dlg = {
+        VFSX, VFSY, -1, -1, N_(" Virtual File System Setting "),
+        "[Virtual FS]", confvfs_widgets, FALSE
     };
 
 #ifdef USE_NETCODE
@@ -757,19 +765,20 @@ configure_vfs (void)
 #endif
     g_snprintf (buffer2, sizeof (buffer2), "%i", vfs_timeout);
 
-    if (quick_dialog (&confvfs_dlg) != B_CANCEL) {
+    if (quick_dialog (&confvfs_dlg) != B_CANCEL)
+    {
         vfs_timeout = atoi (ret_timeout);
         g_free (ret_timeout);
 
         if (vfs_timeout < 0 || vfs_timeout > 10000)
             vfs_timeout = 10;
 #ifdef USE_NETCODE
-	g_free (ftpfs_anonymous_passwd);
-	ftpfs_anonymous_passwd = ret_passwd;
-	g_free (ftpfs_proxy_host);
-	ftpfs_proxy_host = ret_ftp_proxy;
-	ftpfs_directory_timeout = atoi(ret_directory_timeout);
-	g_free (ret_directory_timeout);
+        g_free (ftpfs_anonymous_passwd);
+        ftpfs_anonymous_passwd = ret_passwd;
+        g_free (ftpfs_proxy_host);
+        ftpfs_proxy_host = ret_ftp_proxy;
+        ftpfs_directory_timeout = atoi (ret_directory_timeout);
+        g_free (ret_directory_timeout);
 #endif
     }
 
@@ -777,7 +786,7 @@ configure_vfs (void)
 #undef VFSY
 }
 
-#endif				/* ENABLE_VFS */
+#endif /* ENABLE_VFS */
 
 char *
 cd_dialog (void)
@@ -795,49 +804,46 @@ cd_dialog (void)
     len = str_term_width1 (label);
 
     {
-	char *my_str;
+        char *my_str;
 
-	QuickWidget quick_widgets [] =
-        {
-	    /* 0 */ QUICK_INPUT (4 + len, xlen, 2, ylen, "", xlen - 7 - len, 2, "input" , &my_str),
-	    /* 1 */ QUICK_LABEL (3,       xlen, 2, ylen, label),
-	    QUICK_END
-	};
+        QuickWidget quick_widgets[] = {
+            /* 0 */ QUICK_INPUT (4 + len, xlen, 2, ylen, "", xlen - 7 - len, 2, "input", &my_str),
+            /* 1 */ QUICK_LABEL (3, xlen, 2, ylen, label),
+            QUICK_END
+        };
 
-	QuickDialog Quick_input =
-	{
-	    xlen, ylen, 2, LINES - 2 - ylen, _("Quick cd"),
-	    "[Quick cd]", quick_widgets, TRUE
-	};
+        QuickDialog Quick_input = {
+            xlen, ylen, 2, LINES - 2 - ylen, _("Quick cd"),
+            "[Quick cd]", quick_widgets, TRUE
+        };
 
-	return (quick_dialog (&Quick_input) != B_CANCEL) ? my_str : NULL;
+        return (quick_dialog (&Quick_input) != B_CANCEL) ? my_str : NULL;
     }
 }
 
 void
-symlink_dialog (const char *existing, const char *new, char **ret_existing,
-		char **ret_new)
+symlink_dialog (const char *existing, const char *new, char **ret_existing, char **ret_new)
 {
-    QuickWidget quick_widgets[] =
-    {
-	/* 0 */ QUICK_BUTTON (50, 80, 6, 8, N_("&Cancel"), B_CANCEL, NULL),
-	/* 1 */ QUICK_BUTTON (16, 80, 6, 8, N_("&OK"),     B_ENTER,  NULL),
-	/* 2 */ QUICK_INPUT (4, 80, 5, 8, new, 58, 0, "input-1", ret_new),
-	/* 3 */ QUICK_LABEL (4, 80, 4, 8, N_("Symbolic link filename:")),
-	/* 4 */ QUICK_INPUT (4, 80, 3, 8, existing, 58, 0, "input-2", ret_existing),
-	/* 5 */ QUICK_LABEL (4, 80, 2, 8,  N_("Existing filename (filename symlink will point to):")),
-	QUICK_END
+    QuickWidget quick_widgets[] = {
+        /* 0 */ QUICK_BUTTON (50, 80, 6, 8, N_("&Cancel"), B_CANCEL, NULL),
+        /* 1 */ QUICK_BUTTON (16, 80, 6, 8, N_("&OK"), B_ENTER, NULL),
+        /* 2 */ QUICK_INPUT (4, 80, 5, 8, new, 58, 0, "input-1", ret_new),
+        /* 3 */ QUICK_LABEL (4, 80, 4, 8, N_("Symbolic link filename:")),
+        /* 4 */ QUICK_INPUT (4, 80, 3, 8, existing, 58, 0, "input-2", ret_existing),
+        /* 5 */ QUICK_LABEL (4, 80, 2, 8,
+                             N_("Existing filename (filename symlink will point to):")),
+        QUICK_END
     };
 
-    QuickDialog Quick_input =
-    {
-	64, 12, -1, -1, N_("Symbolic link"),
-	"[File Menu]", quick_widgets, FALSE
+    QuickDialog Quick_input = {
+        64, 12, -1, -1, N_("Symbolic link"),
+        "[File Menu]", quick_widgets, FALSE
     };
 
-    if (quick_dialog (&Quick_input) == B_CANCEL) {
-	*ret_new = NULL;
-	*ret_existing = NULL;
+    if (quick_dialog (&Quick_input) == B_CANCEL)
+    {
+        *ret_new = NULL;
+        *ret_existing = NULL;
     }
 }
 
@@ -854,21 +860,23 @@ static Dlg_head *jobs_dlg;
 static void
 jobs_fill_listbox (void)
 {
-    static const char *state_str [2];
+    static const char *state_str[2];
     TaskList *tl = task_list;
 
-    if (!state_str [0]){
-       state_str [0] = _("Running ");
-       state_str [1] = _("Stopped");
+    if (!state_str[0])
+    {
+        state_str[0] = _("Running ");
+        state_str[1] = _("Stopped");
     }
 
-    while (tl){
-	char *s;
+    while (tl)
+    {
+        char *s;
 
-	s = g_strconcat (state_str [tl->state], " ", tl->info, (char *) NULL);
-	listbox_add_item (bg_list, LISTBOX_APPEND_AT_END, 0, s, (void *) tl);
-	g_free (s);
-	tl = tl->next;
+        s = g_strconcat (state_str[tl->state], " ", tl->info, (char *) NULL);
+        listbox_add_item (bg_list, LISTBOX_APPEND_AT_END, 0, s, (void *) tl);
+        g_free (s);
+        tl = tl->next;
     }
 }
 
@@ -879,26 +887,31 @@ task_cb (int action)
     int sig = 0;
 
     if (!bg_list->list)
-	return 0;
+        return 0;
 
     /* Get this instance information */
     listbox_get_current (bg_list, NULL, (void **) &tl);
 
 #  ifdef SIGTSTP
-    if (action == B_STOP){
-	sig   = SIGSTOP;
-	tl->state = Task_Stopped;
-    } else if (action == B_RESUME){
-	sig   = SIGCONT;
-	tl->state = Task_Running;
-    } else 
-#  endif
-    if (action == B_KILL){
-	sig = SIGKILL;
+    if (action == B_STOP)
+    {
+        sig = SIGSTOP;
+        tl->state = Task_Stopped;
     }
-    
+    else if (action == B_RESUME)
+    {
+        sig = SIGCONT;
+        tl->state = Task_Running;
+    }
+    else
+#  endif
+    if (action == B_KILL)
+    {
+        sig = SIGKILL;
+    }
+
     if (sig == SIGKILL)
-	unregister_task_running (tl->pid, tl->fd);
+        unregister_task_running (tl->pid, tl->fd);
 
     kill (tl->pid, sig);
     listbox_remove_list (bg_list);
@@ -906,91 +919,94 @@ task_cb (int action)
 
     /* This can be optimized to just redraw this widget :-) */
     dlg_redraw (jobs_dlg);
-    
+
     return 0;
 }
 
-static struct 
+static struct
 {
-	const char* name;
-	int xpos;
-	int value;
-	int (*callback)(int);
-} 
-job_buttons [] =
+    const char *name;
+    int xpos;
+    int value;
+    int (*callback) (int);
+}
+job_buttons[] =
 {
-	{N_("&Stop"),   3,  B_STOP,   task_cb},
-	{N_("&Resume"), 12, B_RESUME, task_cb},
-	{N_("&Kill"),   23, B_KILL,   task_cb},
-	{N_("&OK"),     35, B_CANCEL, NULL   }
+    {
+    N_("&Stop"), 3, B_STOP, task_cb},
+    {
+    N_("&Resume"), 12, B_RESUME, task_cb},
+    {
+    N_("&Kill"), 23, B_KILL, task_cb},
+    {
+    N_("&OK"), 35, B_CANCEL, NULL}
 };
 
 void
 jobs_cmd (void)
 {
-	register int i;
-	int n_buttons = sizeof (job_buttons) / sizeof (job_buttons[0]);
+    register int i;
+    int n_buttons = sizeof (job_buttons) / sizeof (job_buttons[0]);
 
 #ifdef ENABLE_NLS
-	static int i18n_flag = 0;
-	if (!i18n_flag)
-	{
-		int startx = job_buttons [0].xpos;
-		int len;
+    static int i18n_flag = 0;
+    if (!i18n_flag)
+    {
+        int startx = job_buttons[0].xpos;
+        int len;
 
-		for (i = 0; i < n_buttons; i++)
-		{
-			job_buttons [i].name = _(job_buttons [i].name);
+        for (i = 0; i < n_buttons; i++)
+        {
+            job_buttons[i].name = _(job_buttons[i].name);
 
-			len = str_term_width1 (job_buttons [i].name) + 4;
-			JOBS_X = max (JOBS_X, startx + len + 3);
+            len = str_term_width1 (job_buttons[i].name) + 4;
+            JOBS_X = max (JOBS_X, startx + len + 3);
 
-			job_buttons [i].xpos = startx;
-			startx += len;
-		}
+            job_buttons[i].xpos = startx;
+            startx += len;
+        }
 
-		/* Last button - Ok a.k.a. Cancel :) */
-		job_buttons [n_buttons - 1].xpos =
-                JOBS_X - str_term_width1 (job_buttons [n_buttons - 1].name) - 7;
+        /* Last button - Ok a.k.a. Cancel :) */
+        job_buttons[n_buttons - 1].xpos =
+            JOBS_X - str_term_width1 (job_buttons[n_buttons - 1].name) - 7;
 
-		i18n_flag = 1;
-	}
+        i18n_flag = 1;
+    }
 #endif /* ENABLE_NLS */
 
     jobs_dlg = create_dlg (0, 0, JOBS_Y, JOBS_X, dialog_colors, NULL,
-			   "[Background jobs]", _("Background Jobs"),
-			   DLG_CENTER | DLG_REVERSE);
+                           "[Background jobs]", _("Background Jobs"), DLG_CENTER | DLG_REVERSE);
 
     bg_list = listbox_new (2, 3, JOBS_Y - 9, JOBS_X - 7, FALSE, NULL);
     add_widget (jobs_dlg, bg_list);
 
-	i = n_buttons;
-	while (i--)
-	{
-		add_widget (jobs_dlg, button_new (JOBS_Y-4, 
-			job_buttons [i].xpos, job_buttons [i].value,
-			NORMAL_BUTTON, job_buttons [i].name, 
-			job_buttons [i].callback));
-	}
-	
+    i = n_buttons;
+    while (i--)
+    {
+        add_widget (jobs_dlg, button_new (JOBS_Y - 4,
+                                          job_buttons[i].xpos, job_buttons[i].value,
+                                          NORMAL_BUTTON, job_buttons[i].name,
+                                          job_buttons[i].callback));
+    }
+
     /* Insert all of task information in the list */
     jobs_fill_listbox ();
     run_dlg (jobs_dlg);
-    
+
     destroy_dlg (jobs_dlg);
 }
 #endif /* WITH_BACKGROUND */
 
 #ifdef ENABLE_VFS_SMB
 struct smb_authinfo *
-vfs_smb_get_authinfo (const char *host, const char *share, const char *domain,
-		      const char *user)
+vfs_smb_get_authinfo (const char *host, const char *share, const char *domain, const char *user)
 {
     static int dialog_x = 44;
-    enum { b0 = 3, dialog_y = 12};
+    enum
+    { b0 = 3, dialog_y = 12 };
     struct smb_authinfo *return_value;
-    static const char* lc_labs[] = {N_("Domain:"), N_("Username:"), N_("Password:")};
-    static const char* buts[] = {N_("&OK"), N_("&Cancel")};
+    static const char *lc_labs[] = { N_("Domain:"), N_("Username:"), N_("Password:") };
+    static const char *buts[] = { N_("&OK"), N_("&Cancel") };
     static int ilen = 30, istart = 14;
     static int b2 = 30;
     char *title;
@@ -1001,63 +1017,63 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain,
 
 #ifdef ENABLE_NLS
     static int i18n_flag = 0;
-    
+
     if (!i18n_flag)
     {
-        register int i = sizeof(lc_labs)/sizeof(lc_labs[0]);
+        register int i = sizeof (lc_labs) / sizeof (lc_labs[0]);
         int l1, maxlen = 0;
-        
+
         while (i--)
         {
-            l1 = str_term_width1 (lc_labs [i] = _(lc_labs [i]));
+            l1 = str_term_width1 (lc_labs[i] = _(lc_labs[i]));
             if (l1 > maxlen)
                 maxlen = l1;
         }
         i = maxlen + ilen + 7;
         if (i > dialog_x)
             dialog_x = i;
-        
-        for (i = sizeof(buts)/sizeof(buts[0]), l1 = 0; i--; )
+
+        for (i = sizeof (buts) / sizeof (buts[0]), l1 = 0; i--;)
         {
-            l1 += str_term_width1 (buts [i] = _(buts [i]));
+            l1 += str_term_width1 (buts[i] = _(buts[i]));
         }
         l1 += 15;
         if (l1 > dialog_x)
             dialog_x = l1;
 
-        ilen = dialog_x - 7 - maxlen; /* for the case of very long buttons :) */
+        ilen = dialog_x - 7 - maxlen;   /* for the case of very long buttons :) */
         istart = dialog_x - 3 - ilen;
-        
+
         b2 = dialog_x - (str_term_width1 (buts[1]) + 6);
-        
+
         i18n_flag = 1;
     }
-    
+
 #endif /* ENABLE_NLS */
 
     if (!domain)
-    domain = "";
+        domain = "";
     if (!user)
-    user = "";
+        user = "";
 
     title = g_strdup_printf (_("Password for \\\\%s\\%s"), host, share);
 
     auth_dlg = create_dlg (0, 0, dialog_y, dialog_x, dialog_colors, NULL,
-			   "[Smb Authinfo]", title, DLG_CENTER | DLG_REVERSE);
+                           "[Smb Authinfo]", title, DLG_CENTER | DLG_REVERSE);
 
     g_free (title);
 
-    in_user  = input_new (5, istart, INPUT_COLOR, ilen, user, "auth_name", INPUT_COMPLETE_DEFAULT);
+    in_user = input_new (5, istart, INPUT_COLOR, ilen, user, "auth_name", INPUT_COMPLETE_DEFAULT);
     add_widget (auth_dlg, in_user);
 
-    in_domain = input_new (3, istart, INPUT_COLOR, ilen, domain, "auth_domain", INPUT_COMPLETE_DEFAULT);
+    in_domain =
+        input_new (3, istart, INPUT_COLOR, ilen, domain, "auth_domain", INPUT_COMPLETE_DEFAULT);
     add_widget (auth_dlg, in_domain);
-    add_widget (auth_dlg, button_new (9, b2, B_CANCEL, NORMAL_BUTTON,
-                 buts[1], 0));
-    add_widget (auth_dlg, button_new (9, b0, B_ENTER, DEFPUSH_BUTTON,
-                 buts[0], 0));
+    add_widget (auth_dlg, button_new (9, b2, B_CANCEL, NORMAL_BUTTON, buts[1], 0));
+    add_widget (auth_dlg, button_new (9, b0, B_ENTER, DEFPUSH_BUTTON, buts[0], 0));
 
-    in_password  = input_new (7, istart, INPUT_COLOR, ilen, "", "auth_password", INPUT_COMPLETE_DEFAULT);
+    in_password =
+        input_new (7, istart, INPUT_COLOR, ilen, "", "auth_password", INPUT_COMPLETE_DEFAULT);
     in_password->completion_flags = 0;
     in_password->is_password = 1;
     add_widget (auth_dlg, in_password);
@@ -1068,13 +1084,15 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain,
 
     run_dlg (auth_dlg);
 
-    switch (auth_dlg->ret_value) {
+    switch (auth_dlg->ret_value)
+    {
     case B_CANCEL:
         return_value = 0;
         break;
     default:
         return_value = g_try_new (struct smb_authinfo, 1);
-        if (return_value) {
+        if (return_value)
+        {
             return_value->host = g_strdup (host);
             return_value->share = g_strdup (share);
             return_value->domain = g_strdup (in_domain->buffer);
@@ -1084,7 +1102,7 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain,
     }
 
     destroy_dlg (auth_dlg);
-             
+
     return return_value;
 }
 #endif /* ENABLE_VFS_SMB */

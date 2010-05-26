@@ -932,12 +932,12 @@ file_mask_dialog (FileOpContext * ctx, FileOperation operation,
         /*  3 - OFFSET */
         QUICK_CHECKBOX (42, FMDX, 8, FMDY, N_("&Stable Symlinks"), &ctx->stable_symlinks),
         /*  4 - OFFSET */
-        QUICK_CHECKBOX (31, FMDX, 7, FMDY, N_("di&Ve into subdir if exists"),
+        QUICK_CHECKBOX (31, FMDX, 7, FMDY, N_("Di&ve into subdir if exists"),
                         &ctx->dive_into_subdirs),
         /*  5 - OFFSET */
-        QUICK_CHECKBOX (3, FMDX, 8, FMDY, N_("preserve &Attributes"), &ctx->op_preserve),
+        QUICK_CHECKBOX (3, FMDX, 8, FMDY, N_("Preserve &attributes"), &ctx->op_preserve),
         /*  6 - OFFSET */
-        QUICK_CHECKBOX (3, FMDX, 7, FMDY, N_("follow &Links"), &ctx->follow_links),
+        QUICK_CHECKBOX (3, FMDX, 7, FMDY, N_("Follow &links"), &ctx->follow_links),
         /*  7 - OFFSET */
         QUICK_INPUT (3, FMDX, 6, FMDY, "", 58, 0, "input2", &dest_dir),
         /*  8 - OFFSET */

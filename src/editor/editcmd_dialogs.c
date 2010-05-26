@@ -118,7 +118,7 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
             /*  5 */ QUICK_CHECKBOX (33, REPLACE_DLG_WIDTH, 8, REPLACE_DLG_HEIGHT, N_("&Backwards"),
                                      &edit_search_options.backwards),
             /*  6 */ QUICK_CHECKBOX (33, REPLACE_DLG_WIDTH, 7, REPLACE_DLG_HEIGHT,
-                                     N_("case &Sensitive"),
+                                     N_("Case &sensitive"),
                                      &edit_search_options.case_sens),
             /*  7 */ QUICK_RADIO (3, REPLACE_DLG_WIDTH, 7, REPLACE_DLG_HEIGHT,
                                   num_of_types, (const char **) list_of_types,
@@ -195,7 +195,7 @@ editcmd_dialog_search_show (WEdit * edit, char **search_text)
             QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 6, SEARCH_DLG_HEIGHT, N_("&Backwards"),
                             &edit_search_options.backwards),
             /* 7 */
-            QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT, N_("case &Sensitive"),
+            QUICK_CHECKBOX (33, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT, N_("Case &sensitive"),
                             &edit_search_options.case_sens),
             /* 8 */
             QUICK_RADIO (3, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT,
