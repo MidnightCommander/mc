@@ -299,10 +299,6 @@ void edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_inserti
 #define edit_query_dialog2(h,t,a,b) query_dialog (h, t, D_NORMAL, 2, a, b)
 #define edit_query_dialog3(h,t,a,b,c) query_dialog (h, t, D_NORMAL, 3, a, b, c)
 
-#define color_palette(x) win->color[x].pixel
-
-#define NUM_SELECTION_HISTORY 64
-
 #ifndef MAX_PATH_LEN
 #ifdef PATH_MAX
 #define MAX_PATH_LEN PATH_MAX
