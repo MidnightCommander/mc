@@ -330,12 +330,12 @@ InputHistoryNext = alt-n; ctrl-up
 InputHistoryShow = alt-h
 InputComplete = alt-tab
 InputClearLine =
-InputLeftHighlight =
-InputRightHighlight =
-InputWordLeftHighlight =
-InputWordRightHighlight =
-InputBolHighlight =
-InputEolHighlight =
+InputLeftHighlight = shift-left
+InputRightHighlight = shift-right
+InputWordLeftHighlight = ctrl-shift-left
+InputWordRightHighlight = ctrl-shift-right
+InputBolHighlight = shift-home
+InputEolHighlight = shift-end
 
 [tree]
 TreeHelp = f1
