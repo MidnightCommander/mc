@@ -1240,7 +1240,7 @@ mc_util_write_backup_content (const char *from_file_name, const char *to_file_na
         return FALSE;
     }
 
-    if (fwrite ((const void *) contents, length, 1, backup_fd) != length)
+    if (fwrite ((const void *) contents, 1, length, backup_fd) != length)
         ret1 = FALSE;
     {
         int ret2;
