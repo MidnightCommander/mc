@@ -9,6 +9,6 @@
 struct WInfo;
 typedef struct WInfo WInfo;
 
-WInfo *info_new (void);
+WInfo *info_new (int y, int x, int lines, int cols);
 
-#endif
+#endif /* MC_INFO_H */

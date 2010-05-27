@@ -5,6 +5,8 @@
 #ifndef MC_VIEWER_H
 #define MC_VIEWER_H
 
+#include "lib/global.h"
+
 /*** typedefs(not structures) and defined constants ********************/
 
 struct mcview_struct;
@@ -35,7 +37,7 @@ extern char *mcview_show_eof;
 
 /* Creates a new mcview_t object with the given properties. Caveat: the
  * origin is in y-x order, while the extent is in x-y order. */
-extern struct mcview_struct *mcview_new (int y, int x, int lines, int cols, int is_panel);
+extern struct mcview_struct *mcview_new (int y, int x, int lines, int cols, gboolean is_panel);
 
 
 /* Shows {file} or the output of {command} in the internal viewer,

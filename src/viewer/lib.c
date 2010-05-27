@@ -38,6 +38,7 @@
 #include <config.h>
 
 #include <limits.h>
+#include <sys/types.h>
 
 #include "lib/global.h"
 #include "lib/vfs/mc-vfs/vfs.h"
@@ -79,6 +80,8 @@ mcview_toggle_magic_mode (mcview_t * view)
     filename = g_strdup (view->filename);
     command = g_strdup (view->command);
 
+    mcview_done (view);
+    mcview_init (view);
     mcview_load (view, command, filename, 0);
     g_free (filename);
     g_free (command);
@@ -120,13 +123,13 @@ mcview_toggle_hex_mode (mcview_t * view)
     {
         view->hex_cursor = view->dpy_start;
         view->dpy_start = mcview_offset_rounddown (view->dpy_start, view->bytes_per_line);
-        view->widget.options |= W_WANT_CURSOR;
+        widget_want_cursor (view->widget, 1);
     }
     else
     {
         view->dpy_start = view->hex_cursor;
         mcview_moveto_bol (view);
-        view->widget.options &= ~W_WANT_CURSOR;
+        widget_want_cursor (view->widget, 0);
     }
     mcview_altered_hex_mode = 1;
     view->dpy_bbar_dirty = TRUE;
@@ -162,6 +165,53 @@ mcview_ok_to_quit (mcview_t * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
+mcview_init (mcview_t * view)
+{
+    size_t i;
+
+    view->filename = NULL;
+    view->command = NULL;
+    view->search_nroff_seq = NULL;
+
+    mcview_set_datasource_none (view);
+
+    view->growbuf_in_use = FALSE;
+    /* leave the other growbuf fields uninitialized */
+
+    view->hexedit_lownibble = FALSE;
+    view->coord_cache = NULL;
+
+    view->dpy_start = 0;
+    view->dpy_text_column = 0;
+    view->dpy_end = 0;
+    view->hex_cursor = 0;
+    view->cursor_col = 0;
+    view->cursor_row = 0;
+    view->change_list = NULL;
+
+    /* {status,ruler,data}_area are left uninitialized */
+
+    view->dirty = 0;
+    view->dpy_bbar_dirty = TRUE;
+    view->bytes_per_line = 1;
+
+    view->search_start = 0;
+    view->search_end = 0;
+
+    view->want_to_quit = FALSE;
+
+    view->marker = 0;
+    for (i = 0; i < sizeof (view->marks) / sizeof (view->marks[0]); i++)
+        view->marks[i] = 0;
+
+    view->move_dir = 0;
+    view->update_steps = 0;
+    view->update_activate = 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
 mcview_done (mcview_t * view)
 {
     /* Save current file position */
@@ -183,8 +233,10 @@ mcview_done (mcview_t * view)
 
     /* view->widget needs no destructor */
 
-    g_free (view->filename), view->filename = NULL;
-    g_free (view->command), view->command = NULL;
+    g_free (view->filename);
+    view->filename = NULL;
+    g_free (view->command);
+    view->command = NULL;
 
     mcview_close_datasource (view);
     /* the growing buffer is freed with the datasource */
