@@ -1247,7 +1247,7 @@ mc_util_write_backup_content (const char *from_file_name, const char *to_file_na
         return FALSE;
     }
 
-    fwrite ((const void *) contents, length, 1, backup_fd);
+    fwrite ((const void *) contents, 1, length, backup_fd);
 
     fflush (backup_fd);
     fclose (backup_fd);
