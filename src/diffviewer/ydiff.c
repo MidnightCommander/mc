@@ -31,6 +31,7 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <sys/wait.h>
 
 #include "lib/global.h"
 #include "lib/tty/tty.h"

@@ -1046,6 +1046,60 @@ draw_history_button (WInput * in)
 /* Pointer to killed data */
 static char *kill_buffer = NULL;
 
+static void
+input_set_markers (WInput * in, long m1)
+{
+    in->mark = m1;
+}
+
+static void
+input_mark_cmd (WInput * in, gboolean mark)
+{
+    if (!mark)
+    {
+        in->highlight = FALSE;
+        input_set_markers (in, 0);
+    }
+    else
+    {
+        in->highlight = TRUE;
+        input_set_markers (in, in->point);
+    }
+}
+
+static gboolean
+input_eval_marks (WInput * in, long *start_mark, long *end_mark)
+{
+    if (in->highlight)
+    {
+        *start_mark = min (in->mark, in->point);
+        *end_mark = max (in->mark, in->point);
+        return TRUE;
+    }
+    else
+    {
+        *start_mark = *end_mark = 0;
+        return FALSE;
+    }
+}
+
+static void
+delete_region (WInput * in, int x_first, int x_last)
+{
+    int first = min (x_first, x_last);
+    int last = max (x_first, x_last);
+    size_t len;
+
+    input_mark_cmd (in, FALSE);
+    in->point = first;
+    last = str_offset_to_pos (in->buffer, last);
+    first = str_offset_to_pos (in->buffer, first);
+    len = strlen (&in->buffer[last]) + 1;
+    memmove (&in->buffer[first], &in->buffer[last], len);
+    in->charpoint = 0;
+    in->need_push = 1;
+}
+
 void
 update_input (WInput * in, int clear_first)
 {
@@ -1079,22 +1133,52 @@ update_input (WInput * in, int clear_first)
     if (has_history)
         draw_history_button (in);
 
-    tty_setcolor (in->color);
+    if (in->first)
+        tty_setcolor (in->unchanged_color);
+    else
+        tty_setcolor (in->color);
 
     widget_move (&in->widget, 0, 0);
 
     if (!in->is_password)
     {
-        tty_print_string (str_term_substring (in->buffer, in->term_first_shown,
-                                              in->field_width - has_history));
+        if (!in->highlight)
+        {
+            tty_print_string (str_term_substring (in->buffer, in->term_first_shown,
+                                                  in->field_width - has_history));
+        }
+        else
+        {
+            long m1, m2;
+            if (input_eval_marks (in, &m1, &m2))
+            {
+                tty_setcolor (in->color);
+                cp = str_term_substring (in->buffer, in->term_first_shown, in->field_width - has_history);
+                tty_print_string (cp);
+                tty_setcolor (in->mark_color);
+                if (m1 < in->term_first_shown)
+                {
+                    widget_move (&in->widget, 0, 0);
+                    tty_print_string (str_term_substring (in->buffer, in->term_first_shown, m2 - in->term_first_shown));
+                }
+                else
+                {
+                    int sel_width;
+                    widget_move (&in->widget, 0, m1 - in->term_first_shown);
+                    sel_width = min (m2 - m1, (in->field_width - has_history) - (str_term_width2 (in->buffer, m1) - in->term_first_shown));
+                    tty_print_string (str_term_substring (in->buffer, m1, sel_width));
+                }
+            }
+        }
     }
     else
     {
-        cp = in->buffer;
-        for (i = -in->term_first_shown; i < in->field_width - has_history; i++)
+        cp = str_term_substring (in->buffer, in->term_first_shown, in->field_width - has_history);
+        for (i = 0; i < in->field_width - has_history; i++)
         {
             if (i >= 0)
             {
+                tty_setcolor (in->color);
                 tty_print_char ((cp[0] != '\0') ? '*' : ' ');
             }
             if (cp[0] != '\0')
@@ -1103,7 +1187,7 @@ update_input (WInput * in, int clear_first)
     }
 
     if (clear_first)
-        in->first = 0;
+        in->first = FALSE;
 }
 
 void
@@ -1512,6 +1596,7 @@ new_input (WInput * in)
     in->point = 0;
     in->charpoint = 0;
     in->mark = 0;
+    in->highlight = FALSE;
     free_completions (in);
     update_input (in, 0);
 }
@@ -1537,6 +1622,12 @@ insert_char (WInput * in, int c_code)
     size_t i;
     int res;
 
+    if (in->highlight)
+    {
+        long m1, m2;
+        if (input_eval_marks (in, &m1, &m2))
+            delete_region (in, m1, m2);
+    }
     if (c_code == -1)
         return MSG_NOT_HANDLED;
 
@@ -1744,24 +1835,6 @@ copy_region (WInput * in, int x_first, int x_last)
 }
 
 static void
-delete_region (WInput * in, int x_first, int x_last)
-{
-    int first = min (x_first, x_last);
-    int last = max (x_first, x_last);
-    size_t len;
-
-    in->point = first;
-    if (in->mark > first)
-        in->mark = first;
-    last = str_offset_to_pos (in->buffer, last);
-    first = str_offset_to_pos (in->buffer, first);
-    len = strlen (&in->buffer[last]) + 1;
-    memmove (&in->buffer[first], &in->buffer[last], len);
-    in->charpoint = 0;
-    in->need_push = 1;
-}
-
-static void
 kill_word (WInput * in)
 {
     int old_point = in->point;
@@ -1796,7 +1869,7 @@ back_kill_word (WInput * in)
 static void
 set_mark (WInput * in)
 {
-    in->mark = in->point;
+    input_mark_cmd (in, TRUE);
 }
 
 static void
@@ -1920,7 +1993,7 @@ port_region_marked_for_delete (WInput * in)
 {
     in->buffer[0] = '\0';
     in->point = 0;
-    in->first = 0;
+    in->first = FALSE;
     in->charpoint = 0;
 }
 
@@ -1929,24 +2002,55 @@ input_execute_cmd (WInput * in, unsigned long command)
 {
     cb_ret_t res = MSG_HANDLED;
 
+    /* a highlight command like shift-arrow */
+    if (command == CK_InputLeftHighlight ||
+        command == CK_InputRightHighlight ||
+        command == CK_InputWordLeftHighlight ||
+        command == CK_InputWordRightHighlight ||
+        command == CK_InputBolHighlight ||
+        command == CK_InputEolHighlight)
+    {
+        if (!in->highlight)
+        {
+            input_mark_cmd (in, FALSE);     /* clear */
+            input_mark_cmd (in, TRUE);      /* marking on */
+        }
+    }
+
+    switch (command)
+    {
+    case CK_InputForwardWord:
+    case CK_InputBackwardWord:
+    case CK_InputForwardChar:
+    case CK_InputBackwardChar:
+        if (in->highlight)
+            input_mark_cmd (in, FALSE);
+    }
+
     switch (command)
     {
     case CK_InputBol:
+    case CK_InputBolHighlight:
         beginning_of_line (in);
         break;
     case CK_InputEol:
+    case CK_InputEolHighlight:
         end_of_line (in);
         break;
     case CK_InputMoveLeft:
+    case CK_InputLeftHighlight:
         key_left (in);
         break;
     case CK_InputWordLeft:
+    case CK_InputWordLeftHighlight:
         key_ctrl_left (in);
         break;
     case CK_InputMoveRight:
+    case CK_InputRightHighlight:
         key_right (in);
         break;
     case CK_InputWordRight:
+    case CK_InputWordRightHighlight:
         key_ctrl_right (in);
         break;
     case CK_InputBackwardChar:
@@ -1962,10 +2066,28 @@ input_execute_cmd (WInput * in, unsigned long command)
         forward_word (in);
         break;
     case CK_InputBackwardDelete:
-        backward_delete (in);
+        if (in->highlight)
+        {
+            long m1, m2;
+            if (input_eval_marks (in, &m1, &m2))
+                delete_region (in, m1, m2);
+        }
+        else
+        {
+            backward_delete (in);
+        }
         break;
     case CK_InputDeleteChar:
-        delete_char (in);
+        if (in->first)
+            port_region_marked_for_delete (in);
+        else if (in->highlight)
+        {
+            long m1, m2;
+            if (input_eval_marks (in, &m1, &m2))
+                delete_region (in, m1, m2);
+        }
+        else
+            delete_char (in);
         break;
     case CK_InputKillWord:
         kill_word (in);
@@ -2008,6 +2130,16 @@ input_execute_cmd (WInput * in, unsigned long command)
         break;
     default:
         res = MSG_NOT_HANDLED;
+    }
+
+    if (command != CK_InputLeftHighlight &&
+        command != CK_InputRightHighlight &&
+        command != CK_InputWordLeftHighlight &&
+        command != CK_InputWordRightHighlight &&
+        command != CK_InputBolHighlight &&
+        command != CK_InputEolHighlight)
+    {
+        in->highlight = FALSE;
     }
 
     return res;
@@ -2158,6 +2290,11 @@ input_event (Gpm_Event * event, void *data)
 {
     WInput *in = data;
 
+    if (event->type & GPM_DOWN)
+    {
+        in->first = FALSE;
+        input_mark_cmd (in, FALSE);
+    }
     if (event->type & (GPM_DOWN | GPM_DRAG))
     {
         dlg_select_widget (in);
@@ -2175,11 +2312,18 @@ input_event (Gpm_Event * event, void *data)
         }
         update_input (in, 1);
     }
+    /* A lone up mustn't do anything */
+    if (in->highlight && event->type & (GPM_UP | GPM_DRAG))
+        return MOU_NORMAL;
+
+    if (!(event->type & GPM_DRAG))
+        input_mark_cmd (in, TRUE);
+
     return MOU_NORMAL;
 }
 
 WInput *
-input_new (int y, int x, int color, int width, const char *def_text,
+input_new (int y, int x, int *input_colors, int width, const char *def_text,
            const char *histname, INPUT_COMPLETE_FLAGS completion_flags)
 {
     WInput *in = g_new (WInput, 1);
@@ -2212,9 +2356,12 @@ input_new (int y, int x, int color, int width, const char *def_text,
     in->completion_flags = completion_flags;
     in->current_max_size = initial_buffer_len;
     in->buffer = g_new (char, initial_buffer_len);
-    in->color = color;
+    in->color = input_colors[0];
+    in->unchanged_color = input_colors[1];
+    in->mark_color = input_colors[2];
     in->field_width = width;
-    in->first = 1;
+    in->first = TRUE;
+    in->highlight = FALSE;
     in->term_first_shown = 0;
     in->disable_update = 0;
     in->mark = 0;

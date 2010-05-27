@@ -334,6 +334,12 @@ InputHistoryNext = alt-n; ctrl-up
 InputHistoryShow = alt-h
 InputComplete = alt-tab
 InputClearLine =
+InputLeftHighlight =
+InputRightHighlight =
+InputWordLeftHighlight =
+InputWordRightHighlight =
+InputBolHighlight =
+InputEolHighlight =
 
 [tree]
 TreeHelp = f1

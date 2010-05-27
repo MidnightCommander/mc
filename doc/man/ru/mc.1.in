@@ -3713,20 +3713,29 @@ xterm=menu=magenta:marked=,magenta:markselect=,red
 .PP
 Цвета не являются обязательными, а в качестве ключевых слов (keywords)
 могут использоваться: для задания цветовой палитры в панелях: normal,
-selected, marked, markselect, errors, input, reverse, gauge; Цвета
-пунктов меню: menunormal, menusel, menuhot, menuhotsel, menuinactive; Цвета
-в окне диалога: dnormal, dfocus, dhotnormal, dhotfocus; Цвета в окне подсказки:
-helpnormal, helpitalic, helpbold, helplink, helpslink; в окне программы
-просмотра:  viewunderline; специальные подсветки: executable, directory,
-link, device, special, core; в окне редактора: editnormal, editbold,
-editmarked.
+selected, marked, markselect, errors, input, inputmark, inputunchanged,
+commandlinemark, reverse, gauge. Цвета пунктов меню: menunormal, menusel,
+menuhot, menuhotsel, menuinactive. Цвета в окне диалога: dnormal, dfocus,
+dhotnormal, dhotfocus. Цвета в окне подсказки: helpnormal, helpitalic,
+helpbold, helplink, helpslink. Цвета в окне программы просмотра:
+viewunderline. Специальные подсветки: executable, directory, link, device,
+special, core. Цвета в редакторе: editnormal, editbold, editmarked.
 .PP
 Цвета задавать не обязательно. Цвет какого именно поля определяется
 каждым ключевым словом, можно понять из перевода этого ключевого слова.
 Некоторые случаи требуют пояснений.
 .PP
 .I input
-определяет цвета в строке ввода в диалоговых окнах.
+определяет цвета в строке ввода в диалоговых окнах;
+.PP
+.I inputmark
+цвет выделенного текста в строке ввода в диалоговых окнах;
+.PP
+.I inputunchanged
+цвет текста в строке ввода до первого изменения или до перемещения курсора;
+.PP
+.I commandlinemark
+цвет выделенного текста в командной строке;
 .PP
 .I gauge
 определяет цвет заполненной части полоски (progress bar), при

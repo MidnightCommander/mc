@@ -102,11 +102,14 @@ typedef struct {
     Widget widget;
     int  point;		   /* cursor position in the input line in characters */
     int  mark;			/* The mark position in characters */
+    gboolean highlight;         /* There is a selected block */
     int  term_first_shown;	/* column of the first shown character */
     size_t current_max_size;	/* Maximum length of input line (bytes) */
     int  field_width;		/* width of the editing field */
     int  color;			/* color used */
-    int  first;			/* Is first keystroke? */
+    int  mark_color;		/* color for marked text */
+    int  unchanged_color;	/* color for inactive text (Is first keystroke) */
+    gboolean first;		/* Is first keystroke? */
     int  disable_update;	/* Do we want to skip updates? */
     int  is_password;		/* Is this a password input line? */
     char *buffer;		/* pointer to editing buffer */
@@ -192,7 +195,9 @@ WButton *button_new   (int y, int x, int action, int flags, const char *text,
 		      bcback callback);
 WRadio  *radio_new    (int y, int x, int count, const char **text);
 WCheck  *check_new    (int y, int x, int state,  const char *text);
-WInput  *input_new    (int y, int x, int color, int len, const char *text, const char *histname, INPUT_COMPLETE_FLAGS completion_flags);
+WInput  *input_new    (int y, int x, int *input_colors,
+                       int len, const char *text, const char *histname,
+                       INPUT_COMPLETE_FLAGS completion_flags);
 WLabel  *label_new    (int y, int x, const char *text);
 WHLine  *hline_new    (int y, int x, int width);
 

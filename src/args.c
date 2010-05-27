@@ -320,13 +320,13 @@ mc_args_new_color_group (void)
      * FIXME: undocumented keywords: viewunderline, editnormal, editbold,
      * and editmarked.  To preserve translations, lines should be split.
      */
-
     mc_args__loc__colors_string = g_strdup_printf ("%s%s",
                                                    /* TRANSLATORS: don't translate keywords and names of colors */
                                                    _("--colors KEYWORD={FORE},{BACK}\n\n"
                                                      "{FORE} and {BACK} can be omitted, and the default will be used\n"
                                                      "\n" "Keywords:\n"
-                                                     "   Global:       errors, reverse, gauge, input, viewunderline\n"
+                                                     "   Global:       errors, reverse, gauge, viewunderline\n"
+                                                     "                 input, inputmark, inputunchanged, commandlinemark\n"
                                                      "   File display: normal, selected, marked, markselect\n"
                                                      "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
                                                      "                 errdhotfocus\n"

@@ -477,6 +477,12 @@ static name_keymap_t command_names[] = {
     { "InputXStore",                     CK_InputKillSave },
     { "InputXPaste",                     CK_InputPaste },
     { "InputClearLine",                  CK_InputClearLine },
+    { "InputLeftHighlight",              CK_InputLeftHighlight },
+    { "InputRightHighlight",             CK_InputRightHighlight},
+    { "InputWordLeftHighlight",          CK_InputWordLeftHighlight},
+    { "InputWordRightHighlight",         CK_InputWordRightHighlight},
+    { "InputBolHighlight",               CK_InputBolHighlight},
+    { "InputEolHighlight",               CK_InputEolHighlight},
 
     /* common */
     { "ExtMap1",                         CK_StartExtMap1 },
