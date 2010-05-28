@@ -52,6 +52,9 @@
 
 #include "lib/global.h"
 #include "lib/strutil.h"
+#ifdef HAVE_CHARSET
+#include "src/charsets.h"
+#endif
 
 #include "src/wtools.h"         /* message() */
 #include "src/main.h"           /* print_vfs_message */
@@ -95,21 +98,6 @@ static long vfs_free_handle_list = -1;
 
 static struct vfs_class *localfs_class;
 static GString *vfs_str_buffer;
-
-static const char *supported_encodings[] = {
-    "UTF8",
-    "UTF-8",
-    "BIG5",
-    "ASCII",
-    "ISO8859",
-    "ISO-8859",
-    "ISO_8859",
-    "KOI8",
-    "CP852",
-    "CP866",
-    "CP125",
-    NULL
-};
 
 /** Create new VFS handle and put it to the list */
 static int
@@ -404,17 +392,18 @@ vfs_get_encoding (const char *path)
 
 /* return if encoding can by used in vfs (is ascci full compactible) */
 /* contains only a few encoding now */
-static int
+static gboolean
 vfs_supported_enconding (const char *encoding)
 {
-    int t;
-    int result = 0;
+    gboolean result = FALSE;
 
-    for (t = 0; supported_encodings[t] != NULL; t++)
-    {
-        result += (g_ascii_strncasecmp (encoding, supported_encodings[t],
-                                        strlen (supported_encodings[t])) == 0);
-    }
+#ifdef HAVE_CHARSET
+    int t;
+
+    for (t = 0; t < n_codepages; t++)
+        result |= (g_ascii_strncasecmp (encoding, codepages[t].id,
+                                        strlen (codepages[t].id)) == 0);
+#endif
 
     return result;
 }
@@ -434,18 +423,20 @@ _vfs_translate_path (const char *path, int size, GIConv defcnv, GString * buffer
     const char *ps;
     const char *slash;
     estr_t state = ESTR_SUCCESS;
-    static char encoding[16];
-    GIConv coder;
-    int ms;
 
     if (size == 0)
-        return 0;
+        return ESTR_SUCCESS;
+
     size = (size > 0) ? size : (signed int) strlen (path);
 
     /* try found #end: */
     semi = g_strrstr_len (path, size, "#enc:");
     if (semi != NULL)
     {
+        char encoding[16];
+        GIConv coder = INVALID_CONV;
+        int ms;
+
         /* first must be translated part before #enc: */
         ms = semi - path;
 
@@ -474,42 +465,32 @@ _vfs_translate_path (const char *path, int size, GIConv defcnv, GString * buffer
         memcpy (encoding, semi, ms);
         encoding[ms] = '\0';
 
-        switch (vfs_supported_enconding (encoding))
-        {
-        case 1:
+        if (vfs_supported_enconding (encoding))
             coder = str_crt_conv_to (encoding);
-            if (coder != INVALID_CONV)
+
+        if (coder != INVALID_CONV)
+        {
+            if (slash != NULL)
+                state = str_vfs_convert_to (coder, slash, path + size - slash, buffer);
+            else if (buffer->str[0] == '\0')
             {
-                if (slash != NULL)
-                {
-                    state = str_vfs_convert_to (coder, slash, path + size - slash, buffer);
-                }
-                else if (buffer->str[0] == '\0')
-                {
-                    /* exmaple "/#enc:utf-8" */
-                    g_string_append_c (buffer, PATH_SEP);
-                }
-                str_close_conv (coder);
-                return state;
+                /* exmaple "/#enc:utf-8" */
+                g_string_append_c (buffer, PATH_SEP);
             }
-            else
-            {
-                errno = EINVAL;
-                return ESTR_FAILURE;
-            }
-        default:
-            errno = EINVAL;
-            return ESTR_FAILURE;
+            str_close_conv (coder);
+            return state;
         }
+
+        errno = EINVAL;
+        state = ESTR_FAILURE;
     }
     else
     {
         /* path can be translated whole at once */
         state = str_vfs_convert_to (defcnv, path, size, buffer);
-        return state;
     }
 
-    return ESTR_SUCCESS;
+    return state;
 }
 
 char *
