@@ -55,13 +55,26 @@ struct WInfo {
 
 static struct my_statfs myfs_stats;
 
-static void info_box (Dlg_head *h, struct WInfo *info)
+static void
+info_box (struct WInfo *info)
 {
+    const char *title = _("Information");
+    const int len = str_term_width1 (title);
+
     tty_set_normal_attrs ();
     tty_setcolor (NORMAL_COLOR);
     widget_erase (&info->widget);
-    draw_box (h, info->widget.y,  info->widget.x,
-	         info->widget.lines, info->widget.cols);
+    draw_box (info->widget.parent, info->widget.y, info->widget.x,
+              info->widget.lines, info->widget.cols);
+
+    widget_move (&info->widget, 0, (info->widget.cols - len - 2)/2);
+    tty_printf (" %s ", title);
+
+    widget_move (&info->widget, 2, 0);
+    tty_print_alt_char (ACS_LTEE);
+    widget_move (&info->widget, 2, info->widget.cols - 1);
+    tty_print_alt_char (ACS_RTEE);
+    tty_draw_hline (info->widget.y + 2, info->widget.x + 1, ACS_HLINE, info->widget.cols - 2);
 }
 
 static void
@@ -75,18 +88,17 @@ info_show_info (struct WInfo *info)
     if (!is_idle ())
 	return;
 
-    info_box (info->widget.parent, info);
+    info_box (info);
+
     tty_setcolor (MARKED_COLOR);
     widget_move (&info->widget, 1, 3);
     tty_printf (_("Midnight Commander %s"), VERSION);
-    tty_setcolor (NORMAL_COLOR);
-    tty_draw_hline (info->widget.y + 2, info->widget.x + 1,
-		    ACS_HLINE, info->widget.cols - 2);
-    if (get_current_type () != view_listing)
-	return;
 
     if (!info->ready)
 	return;
+
+    if (get_current_type () != view_listing)
+        return;
 
     my_statfs (&myfs_stats, current_panel->cwd);
     st = current_panel->dir.list [current_panel->selected].st;
@@ -98,6 +110,8 @@ info_show_info (struct WInfo *info)
 	file_label = _("File:       %s");
 	i18n_adjust = str_term_width1 (file_label) + 2;
     }
+
+    tty_setcolor (NORMAL_COLOR);
 
     buff = g_string_new ("");
 
