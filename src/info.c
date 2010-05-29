@@ -23,14 +23,14 @@
 #include <config.h>
 
 #include <stdio.h>
+#include <sys/stat.h>
 
 #include "lib/global.h"
-
+#include "lib/unixcompat.h"
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"		/* is_idle() */
 #include "lib/tty/mouse.h"		/* Gpm_Event */
 #include "lib/skin.h"
-#include "lib/unixcompat.h"
 #include "lib/strutil.h"
 
 #include "dialog.h"
@@ -53,8 +53,6 @@ struct WInfo {
     int ready;
 };
 
-/* Have we called the init_my_statfs routine? */
-static gboolean initialized = FALSE;
 static struct my_statfs myfs_stats;
 
 static void info_box (Dlg_head *h, struct WInfo *info)
@@ -250,21 +248,22 @@ info_callback (Widget *w, widget_msg_t msg, int parm)
     switch (msg) {
 
     case WIDGET_INIT:
-	add_hook (&select_file_hook, info_hook, info);
-	info->ready = 0;
-	return MSG_HANDLED;
+        init_my_statfs ();
+        add_hook (&select_file_hook, info_hook, info);
+        info->ready = 0;
+        return MSG_HANDLED;
 
     case WIDGET_DRAW:
-	info_hook (info);
-	info_show_info (info);
-	return MSG_HANDLED;
+        info_hook (info);
+        return MSG_HANDLED;
 
     case WIDGET_FOCUS:
 	return MSG_NOT_HANDLED;
 
     case WIDGET_DESTROY:
-	delete_hook (&select_file_hook, info_hook);
-	return MSG_HANDLED;
+        delete_hook (&select_file_hook, info_hook);
+        free_my_statfs ();
+        return MSG_HANDLED;
 
     default:
 	return default_proc (msg, parm);
@@ -294,11 +293,6 @@ info_new (void)
 
     /* We do not want the cursor */
     widget_want_cursor (info->widget, 0);
-
-    if (!initialized) {
-	initialized = TRUE;
-	init_my_statfs ();
-    }
 
     return info;
 }
