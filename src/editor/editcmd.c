@@ -1150,7 +1150,7 @@ eval_marks (WEdit * edit, long *start_mark, long *end_mark)
             *end_mark = max (edit->mark1, edit->curs1);
             edit->column2 = edit->curs_col + edit->over_col;
         }
-        if (column_highlighting
+        if (edit->column_highlight
             && (((edit->mark1 > edit->curs1) && (edit->column1 < edit->column2))
                 || ((edit->mark1 < edit->curs1) && (edit->column1 > edit->column2))))
         {
@@ -1321,7 +1321,7 @@ edit_block_copy_cmd (WEdit * edit)
 
     edit_push_markers (edit);
 
-    if (column_highlighting)
+    if (edit->column_highlight)
     {
         edit_insert_column_of_text (edit, copy_buf, size, abs (edit->column2 - edit->column1));
     }
@@ -1334,11 +1334,11 @@ edit_block_copy_cmd (WEdit * edit)
     g_free (copy_buf);
     edit_scroll_screen_over_cursor (edit);
 
-    if (column_highlighting)
+    if (edit->column_highlight)
     {
         edit_set_markers (edit, 0, 0, 0, 0);
         edit_push_action (edit, COLUMN_ON);
-        column_highlighting = 0;
+        edit->column_highlight = 0;
     }
     else if (start_mark < current && end_mark > current)
         edit_set_markers (edit, start_mark, end_mark + end_mark - start_mark, 0, 0);
@@ -1359,7 +1359,7 @@ edit_block_move_cmd (WEdit * edit)
 
     if (eval_marks (edit, &start_mark, &end_mark))
         return;
-    if (column_highlighting)
+    if (edit->column_highlight)
     {
         edit_update_curs_col (edit);
         x = edit->curs_col;
@@ -1381,7 +1381,7 @@ edit_block_move_cmd (WEdit * edit)
 
     edit_push_markers (edit);
     current = edit->curs1;
-    if (column_highlighting)
+    if (edit->column_highlight)
     {
         long line;
         int size, c1, c2;
@@ -1415,7 +1415,7 @@ edit_block_move_cmd (WEdit * edit)
         }
         edit_set_markers (edit, 0, 0, 0, 0);
         edit_push_action (edit, COLUMN_ON);
-        column_highlighting = 0;
+        edit->column_highlight = 0;
     }
     else
     {
@@ -1489,7 +1489,7 @@ edit_block_delete (WEdit * edit)
 
     if (eval_marks (edit, &start_mark, &end_mark))
         return 0;
-    if (column_highlighting && edit->mark2 < 0)
+    if (edit->column_highlight && edit->mark2 < 0)
         edit_mark_cmd (edit, 0);
     if ((end_mark - start_mark) > option_max_undo / 2)
     {
@@ -1523,7 +1523,7 @@ edit_block_delete (WEdit * edit)
     count = start_mark;
     if (start_mark < end_mark)
     {
-        if (column_highlighting)
+        if (edit->column_highlight)
         {
             if (edit->mark2 < 0)
                 edit_mark_cmd (edit, 0);
@@ -2074,7 +2074,7 @@ edit_get_block (WEdit * edit, long start, long finish, int *l)
 {
     unsigned char *s, *r;
     r = s = g_malloc0 (finish - start + 1);
-    if (column_highlighting)
+    if (edit->column_highlight)
     {
         *l = 0;
         /* copy from buffer, excluding chars that are out of the column 'margins' */
@@ -2114,7 +2114,7 @@ edit_save_block (WEdit * edit, const char *filename, long start, long finish)
     if (file == -1)
         return 0;
 
-    if (column_highlighting)
+    if (edit->column_highlight)
     {
         int r;
         r = mc_write (file, VERTICAL_MAGIC, sizeof (VERTICAL_MAGIC));

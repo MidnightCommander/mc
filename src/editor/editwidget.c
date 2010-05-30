@@ -54,8 +54,6 @@
 #include "src/cmddef.h"
 #include "src/keybind.h"
 
-int column_highlighting = 0;
-
 static cb_ret_t edit_callback (Widget *, widget_msg_t msg, int parm);
 
 static char *

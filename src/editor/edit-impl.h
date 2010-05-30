@@ -332,6 +332,4 @@ extern int option_edit_bottom_extreme;
 extern const char *option_whole_chars_search;
 extern int search_create_bookmark;
 
-extern int column_highlighting;
-
 #endif /* MC_EDIT_IMPL_H */
