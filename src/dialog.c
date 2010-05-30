@@ -963,6 +963,14 @@ frontend_run_dlg (Dlg_head * h)
     Gpm_Event event;
 
     event.x = -1;
+
+    /* close opened editors, viewers, etc */
+    if (!h->modal && midnight_shutdown)
+    {
+        h->callback (h, NULL, DLG_VALIDATE, 0, NULL);
+        return;
+    }
+
     while (h->state == DLG_ACTIVE)
     {
         if (winch_flag)

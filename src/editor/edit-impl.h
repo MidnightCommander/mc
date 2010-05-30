@@ -215,7 +215,7 @@ int edit_save_confirm_cmd (WEdit * edit);
 int edit_save_as_cmd (WEdit * edit);
 WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, long line);
 int edit_clean (WEdit * edit);
-int edit_ok_to_exit (WEdit * edit);
+gboolean edit_ok_to_exit (WEdit * edit);
 int edit_renew (WEdit * edit);
 int edit_new_cmd (WEdit * edit);
 int edit_reload (WEdit * edit, const char *filename);

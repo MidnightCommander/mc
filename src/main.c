@@ -1574,15 +1574,6 @@ done_mc (void)
     vfs_add_current_stamps ();
 }
 
-/* This should be called after destroy_dlg since panel widgets
- *  save their state on the profiles
- */
-static void
-done_mc_profile (void)
-{
-    done_setup ();
-}
-
 static cb_ret_t
 midnight_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
@@ -1927,7 +1918,6 @@ mc_maybe_editor_or_viewer (void)
         break;
     }
     midnight_shutdown = 1;
-    done_mc ();
 }
 
 /* Run the main dialog that occupies the whole screen */
@@ -1967,13 +1957,14 @@ do_nc (void)
         if (mc_args__last_wd_file && vfs_current_is_local ())
             last_wd_string = g_strdup (current_panel->cwd);
 
-        done_mc ();
     }
 
+    dialog_switch_shutdown ();
+    done_mc ();
     destroy_dlg (midnight_dlg);
     panel_deinit ();
     current_panel = 0;
-    done_mc_profile ();
+    done_setup ();
 }
 
 /* POSIX version.  The only version we support.  */

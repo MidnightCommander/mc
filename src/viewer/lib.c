@@ -146,15 +146,27 @@ mcview_ok_to_quit (mcview_t * view)
     if (view->change_list == NULL)
         return TRUE;
 
-    r = query_dialog (_("Quit"),
-                      _("File was modified, Save with exit?"), D_NORMAL, 3,
-                      _("&Cancel quit"), _("&Yes"), _("&No"));
+    if (!midnight_shutdown)
+    {
+        r = query_dialog (_("Quit"),
+                          _("File was modified. Save with exit?"), D_NORMAL, 3,
+                          _("&Yes"), _("&No"), _("&Cancel quit"));
+    }
+    else
+    {
+        r = query_dialog (_("Quit"),
+                          _("Midnight Commander is being shut down.\nSave modified file?"), D_NORMAL, 2,
+                           _("&Yes"), _("&No"));
+        /* Esc is No */
+        if (r == -1)
+            r = 1;
+    }
 
     switch (r)
     {
-    case 1:
-        return mcview_hexedit_save_changes (view);
-    case 2:
+    case 0: /* Yes */
+        return mcview_hexedit_save_changes (view) || midnight_shutdown;
+    case 1: /* No */
         mcview_hexedit_free_change_list (view);
         return TRUE;
     default:

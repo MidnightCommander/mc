@@ -232,3 +232,15 @@ dialog_switch_process_pending (void)
 
     return ret;
 }
+
+void
+dialog_switch_shutdown (void)
+{
+    while (mc_dialogs != NULL)
+    {
+        Dlg_head *dlg = (Dlg_head *) mc_dialogs->data;
+
+        run_dlg (dlg);
+        destroy_dlg (dlg);
+    }
+}

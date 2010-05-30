@@ -56,7 +56,7 @@
 #include "src/history.h"
 #include "src/widget.h"         /* listbox_new() */
 #include "src/layout.h"         /* clr_scr() */
-#include "src/main.h"           /* mc_home */
+#include "src/main.h"           /* mc_home, midnight_shutdown */
 #include "src/setup.h"          /* option_tab_spacing */
 #include "src/help.h"           /* interactive_display() */
 #include "src/wtools.h"         /* message() */
@@ -2039,33 +2039,48 @@ edit_search_cmd (WEdit * edit, int again)
  * Check if it's OK to close the editor.  If there are unsaved changes,
  * ask user.  Return 1 if it's OK to exit, 0 to continue editing.
  */
-int
+gboolean
 edit_ok_to_exit (WEdit * edit)
 {
+    int act;
+
     if (!edit->modified)
-        return 1;
+        return TRUE;
 
-    if (!edit_check_newline (edit))
-        return 0;
-
-    switch (edit_query_dialog3
-            (_("Quit"), _("File was modified, save with exit?"),
-             _("&Cancel quit"), _("&Yes"), _("&No")))
+    if (!midnight_shutdown)
     {
-    case 1:
-        edit_push_markers (edit);
-        edit_set_markers (edit, 0, 0, 0, 0);
-        if (!edit_save_cmd (edit))
-            return 0;
-        break;
-    case 2:
-        break;
-    case 0:
-    case -1:
-        return 0;
+        if (!edit_check_newline (edit))
+            return FALSE;
+
+        act = edit_query_dialog3 (_("Quit"), _("File was modified. Save with exit?"),
+                                  _("&Yes"), _("&No"), _("&Cancel quit"));
+    }
+    else
+    {
+        act = edit_query_dialog2 (_("Quit"), _("Midnight Commander is being shut down.\nSave modified file?"),
+                                  _("&Yes"), _("&No"));
+
+        /* Esc is No */
+        if (act == -1)
+            act = 1;
     }
 
-    return 1;
+    switch (act)
+    {
+    case 0: /* Yes */
+        edit_push_markers (edit);
+        edit_set_markers (edit, 0, 0, 0, 0);
+        if (!edit_save_cmd (edit) || midnight_shutdown)
+            return (gboolean) midnight_shutdown;
+        break;
+    case 1: /* No */
+        break;
+    case 2: /* Cancel quit */
+    case -1: /* Esc */
+        return FALSE;
+    }
+
+    return TRUE;
 }
 
 /* Return a null terminated length of text. Result must be g_free'd */

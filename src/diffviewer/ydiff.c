@@ -51,7 +51,7 @@
 #include "src/history.h"
 #include "src/panel.h"          /* Needed for current_panel and other_panel */
 #include "src/layout.h"         /* Needed for get_current_index and get_other_panel */
-#include "src/main.h"           /* mc_run_mode */
+#include "src/main.h"           /* mc_run_mode, midnight_shutdown */
 #include "src/selcodepage.h"
 
 #include "ydiff.h"
@@ -2940,23 +2940,35 @@ static gboolean
 dview_ok_to_exit (WDiff * dview)
 {
     gboolean res = TRUE;
+    int act;
+
     if (!dview->merged)
         return res;
-    switch (query_dialog
-            (_("Quit"), _("File was modified, Save with exit?"), D_NORMAL, 2, _("&Yes"),
-             _("&No")))
+
+    act = query_dialog (_("Quit"), !midnight_shutdown ?
+                                _("File was modified. Save with exit?") :
+                                _("Midnight Commander is being shut down.\nSave modified file?"),
+                          D_NORMAL, 2, _("&Yes"), _("&No"));
+
+    /* Esc is No */
+    if (midnight_shutdown || (act == -1))
+        act = 1;
+
+    switch (act)
     {
-    case -1:
+    case -1: /* Esc */
         res = FALSE;
         break;
-    case 0:
-        res = TRUE;
+    case 0: /* Yes */
         (void) dview_save (dview);
-        break;
-    case 1:
         res = TRUE;
+        break;
+    case 1: /* No */
         if (mc_util_restore_from_backup_if_possible (dview->file[0], "~~~"))
             res = mc_util_unlink_backup_if_possible (dview->file[0], "~~~");
+        /* fall through */
+    default:
+        res = TRUE;
         break;
     }
     return res;
