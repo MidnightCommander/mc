@@ -65,6 +65,7 @@
 #include "src/help.h"
 #include "src/keybind.h"
 #include "src/cmddef.h"         /* CK_ cmd name const */
+#include "src/main.h"           /* midnight_shutdown */
 
 #include "internal.h"
 #include "mcviewer.h"
@@ -437,8 +438,8 @@ mcview_execute_cmd (mcview_t * view, unsigned long command)
             view->move_dir = (command == CK_ViewNextFile) ? 1 : -1;
         /* fallthrough */
     case CK_ViewQuit:
-        if (mcview_ok_to_quit (view))
-            view->want_to_quit = TRUE;
+        if (!mcview_is_in_panel (view))
+            dlg_stop (view->widget.owner);
         break;
     default:
         res = MSG_NOT_HANDLED;
@@ -522,7 +523,6 @@ mcview_callback (Widget * w, widget_msg_t msg, int parm)
 {
     mcview_t *view = (mcview_t *) w;
     cb_ret_t i;
-    Dlg_head *h = view->widget.owner;
 
     mcview_compute_areas (view);
     mcview_update_bytes_per_line (view);
@@ -547,18 +547,12 @@ mcview_callback (Widget * w, widget_msg_t msg, int parm)
 
     case WIDGET_KEY:
         i = mcview_handle_key (view, parm);
-        if (view->want_to_quit && !mcview_is_in_panel (view))
-            dlg_stop (h);
-        else
-            mcview_update (view);
+        mcview_update (view);
         return i;
 
     case WIDGET_COMMAND:
         i = mcview_execute_cmd (view, parm);
-        if (view->want_to_quit && !mcview_is_in_panel (view))
-            dlg_stop (h);
-        else
-            mcview_update (view);
+        mcview_update (view);
         return i;
 
     case WIDGET_FOCUS:
@@ -567,9 +561,14 @@ mcview_callback (Widget * w, widget_msg_t msg, int parm)
         return MSG_HANDLED;
 
     case WIDGET_DESTROY:
-        mcview_done (view);
         if (mcview_is_in_panel (view))
+        {
             delete_hook (&select_file_hook, mcview_hook);
+
+            if (midnight_shutdown)
+                mcview_ok_to_quit (view);
+        }
+        mcview_done (view);
         return MSG_HANDLED;
 
     default:
@@ -582,7 +581,7 @@ mcview_callback (Widget * w, widget_msg_t msg, int parm)
 cb_ret_t
 mcview_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
-    mcview_t *view = data;
+    mcview_t *view;
 
     switch (msg)
     {
@@ -592,7 +591,19 @@ mcview_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, 
 
     case DLG_ACTION:
         /* command from buttonbar */
+        view = (mcview_t *) data;
         return send_message ((Widget *) view, WIDGET_COMMAND, parm);
+
+    case DLG_VALIDATE:
+        view = (mcview_t *) find_widget_type (h, mcview_callback);
+        if (mcview_ok_to_quit (view))
+            h->state = DLG_CLOSED;
+        else
+        {
+            h->state = DLG_ACTIVE;
+            mcview_update (view);
+        }
+        return MSG_HANDLED;
 
     default:
         return default_dlg_callback (h, sender, msg, parm, data);

@@ -161,9 +161,6 @@ typedef struct mcview_struct
     off_t search_start;         /* First character to start searching from */
     off_t search_end;           /* Length of found string or 0 if none was found */
 
-    /* Pointer to the last search command */
-    gboolean want_to_quit;      /* Prepare for cleanup ... */
-
     /* Markers */
     int marker;                 /* mark to use */
     off_t marks[10];            /* 10 marks: 0..9 */

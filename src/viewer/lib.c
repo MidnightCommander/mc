@@ -198,8 +198,6 @@ mcview_init (mcview_t * view)
     view->search_start = 0;
     view->search_end = 0;
 
-    view->want_to_quit = FALSE;
-
     view->marker = 0;
     for (i = 0; i < sizeof (view->marks) / sizeof (view->marks[0]); i++)
         view->marks[i] = 0;
