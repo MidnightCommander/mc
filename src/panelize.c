@@ -132,19 +132,19 @@ panelize_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void 
 static void
 init_panelize (void)
 {
-    int i, panelize_cols = COLS - 6;
-    struct panelize *current = panelize;
-
-#ifdef ENABLE_NLS
-    static int i18n_flag = 0;
-    static int maxlen = 0;
-
     const int input_colors[3] =
     {
         INPUT_COLOR,
         INPUT_UNCHANGED_COLOR,
         INPUT_MARK_COLOR
     };
+
+    int i, panelize_cols = COLS - 6;
+    struct panelize *current = panelize;
+
+#ifdef ENABLE_NLS
+    static int i18n_flag = 0;
+    static int maxlen = 0;
 
     if (!i18n_flag)
     {
