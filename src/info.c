@@ -121,15 +121,15 @@ info_show_info (struct WInfo *info)
     default:
 
     case 16:
-	widget_move (&info->widget, 16, 3);
-	if (myfs_stats.nfree >0 || myfs_stats.nodes > 0)
-	    tty_printf (_("Free nodes: %d (%d%%) of %d"),
-		    myfs_stats.nfree,
-		    myfs_stats.total
-		    ? 100 * myfs_stats.nfree / myfs_stats.nodes : 0,
-		    myfs_stats.nodes);
-	else
-	    tty_print_string (_("No node information"));
+        widget_move (&info->widget, 16, 3);
+        if (myfs_stats.nfree > 0 || myfs_stats.nodes > 0)
+            tty_printf (_("Free nodes: %ld (%ld%%) of %ld"),
+                        (size_t) myfs_stats.nfree,
+                        myfs_stats.total != 0
+                        ? 100 * (size_t) myfs_stats.nfree / (size_t) myfs_stats.nodes : 0,
+                        (size_t) myfs_stats.nodes);
+        else
+            tty_print_string (_("No node information"));
 
     case 15:
 	widget_move (&info->widget, 15, 3);
