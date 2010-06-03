@@ -1782,11 +1782,10 @@ edit_replace_cmd (WEdit * edit, int again)
         edit->search_start = edit->search->normal_offset;
         /*returns negative on not found or error in pattern */
 
-        if (edit->search_start >= 0)
+        if ((edit->search_start >= 0) && (edit->search_start < edit->last_byte))
         {
             gboolean replace_yes;
-
-            guint i;
+            gsize i;
 
             edit->found_start = edit->search_start;
             i = edit->found_len = len;
@@ -1814,6 +1813,7 @@ edit_replace_cmd (WEdit * edit, int again)
                 /* and prompt 2/3 down */
                 disp1 = edit_replace_cmd__conv_to_display (saved1);
                 disp2 = edit_replace_cmd__conv_to_display (saved2);
+
                 switch (editcmd_dialog_replace_prompt_show (edit, disp1, disp2, -1, -1))
                 {
                 case B_ENTER:
@@ -1837,54 +1837,64 @@ edit_replace_cmd (WEdit * edit, int again)
             if (replace_yes)
             {                   /* delete then insert new */
                 GString *repl_str, *tmp_str;
-                tmp_str = g_string_new (input2);
 
+                tmp_str = g_string_new (input2);
                 repl_str = mc_search_prepare_replace_str (edit->search, tmp_str);
                 g_string_free (tmp_str, TRUE);
+
                 if (edit->search->error != MC_SEARCH_E_OK)
                 {
                     edit_error_dialog (_("Replace"), edit->search->error_str);
                     break;
                 }
 
-                while (i--)
+                for (i = 0; i < len; i++)
                     edit_delete (edit, 1);
 
-                while (++i < repl_str->len)
+                for (i = 0; i < repl_str->len; i++)
                     edit_insert (edit, repl_str->str[i]);
 
-                g_string_free (repl_str, TRUE);
                 edit->found_len = i;
+                g_string_free (repl_str, TRUE);
+                times_replaced++;
             }
+
             /* so that we don't find the same string again */
             if (edit_search_options.backwards)
                 edit->search_start--;
             else
+            {
                 edit->search_start += i;
+
+                if (edit->search_start >= edit->last_byte)
+                    break;
+            }
+
             edit_scroll_screen_over_cursor (edit);
         }
         else
         {
-            const char *msg = _("Replace");
             /* try and find from right here for next search */
             edit->search_start = edit->curs1;
             edit_update_curs_col (edit);
 
             edit->force |= REDRAW_PAGE;
             edit_render_keypress (edit);
-            if (times_replaced)
-            {
-                message (D_NORMAL, msg, _("%ld replacements made"), times_replaced);
-            }
-            else
-                query_dialog (msg, _("Search string not found"), D_NORMAL, 1, _("&OK"));
-            edit->replace_mode = -1;
+
+            if (times_replaced == 0)
+                query_dialog (_("Replace"), _("Search string not found"), D_NORMAL, 1, _("&OK"));
+            break;
         }
     }
     while (edit->replace_mode >= 0);
 
-    edit->force = REDRAW_COMPLETELY;
     edit_scroll_screen_over_cursor (edit);
+    edit->force |= REDRAW_COMPLETELY;
+    edit_render_keypress (edit);
+
+    if ((edit->replace_mode == 1) && (times_replaced != 0))
+        message (D_NORMAL, _("Replace"), _("%ld replacements made"), times_replaced);
+
   cleanup:
     g_free (input1);
     g_free (input2);
