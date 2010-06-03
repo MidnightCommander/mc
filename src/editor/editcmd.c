@@ -1728,7 +1728,7 @@ edit_replace_cmd (WEdit * edit, int again)
         if (edit->search == NULL)
         {
             edit->search_start = edit->curs1;
-            return;
+            goto cleanup;
         }
         edit->search->search_type = edit_search_options.type;
         edit->search->is_all_charsets = edit_search_options.all_codepages;
