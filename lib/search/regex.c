@@ -682,7 +682,7 @@ mc_search_regex_prepare_replace_str (mc_search_t * lc_mc_search, GString * repla
         || num_replace_tokens > MC_SEARCH__NUM_REPLACE_ARGS)
     {
         lc_mc_search->error = MC_SEARCH_E_REGEX_REPLACE;
-        lc_mc_search->error_str = g_strdup (STR_E_RPL_NOT_EQ_TO_FOUND);
+        lc_mc_search->error_str = g_strdup (_(STR_E_RPL_NOT_EQ_TO_FOUND));
         return NULL;
     }
 
@@ -722,7 +722,7 @@ mc_search_regex_prepare_replace_str (mc_search_t * lc_mc_search, GString * repla
         {
             g_string_free (ret, TRUE);
             lc_mc_search->error = MC_SEARCH_E_REGEX_REPLACE;
-            lc_mc_search->error_str = g_strdup_printf (STR_E_RPL_INVALID_TOKEN, lc_index);
+            lc_mc_search->error_str = g_strdup_printf (_(STR_E_RPL_INVALID_TOKEN), lc_index);
             return NULL;
         }
 
