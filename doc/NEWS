@@ -1,3 +1,29 @@
+Version 4.7.0.6
+
+- Core
+
+    * Use system realapth(3) function if available (#1911)
+
+- VFS
+
+    * Unified charset list with used one in core (#2203)
+
+- Misc
+
+    * Changed main URL for bug reports (#2025)
+    * Code cleanups (#2225)
+    * Translation updates
+
+- Fixes
+
+    * Oversized dialog backgrounds not painted in NCurses-based MC (#2157)
+    * Incorrect colors of directory tree (#2212)
+    * mouse_move_pages option is not applied to the mouse scrolling in file panel (#2219)
+    * Segfault in standalone editor and viewer (#2178)
+    * Edit crashes while opening some incorrect files (#2183)
+    * Crash on search in viewer after Parsed/Raw switching (#2195)
+
+
 Version 4.7.0.5
 
 - VFS
