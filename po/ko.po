@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0-pre3\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-05-05 20:57+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2010-06-04 23:20+0400\n"
 "PO-Revision-Date: 2003-01-22 17:31+0900\n"
 "Last-Translator: Nam SungHyun <namsh@kldp.org>\n"
 "Language-Team: Korean <debian-l10n-korean@lists.debian.org>\n"
@@ -997,10 +997,11 @@ msgstr "[플래그] [이 디렉토리] [다른 패널 디렉토리]\n"
 msgid "Set initial line number for the internal editor"
 msgstr "내장 편집기를 위한 초기 줄 번호 설정"
 
+#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
+"as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
 "버그 레포트 (`mc -V'의 출력결과를 포함)를\n"
@@ -1117,6 +1118,10 @@ msgstr "입출력 코드페이지:"
 
 msgid "&Select"
 msgstr "선택(&S)"
+
+#, fuzzy
+msgid "Directory tree"
+msgstr "디렉토리 나무꼴(&D)"
 
 #, fuzzy
 msgid "Use passive mode over pro&xy"

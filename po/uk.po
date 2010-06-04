@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: uk\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-05-05 20:57+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2010-06-04 23:20+0400\n"
 "PO-Revision-Date: 2009-10-31 19:01+0200\n"
 "Last-Translator: Oleksandr Natalenko <pfactum@gmail.com>\n"
 "Language-Team: uk <kde-i18n-doc@kde.org>\n"
@@ -992,10 +992,11 @@ msgstr "[цей_каталог] [каталог_іншої_панелі]"
 msgid "Set initial line number for the internal editor"
 msgstr "Встановити номер початкового рядка для редактора"
 
+#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
+"as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
 "Будь ласка, відсилайте будь які повідомлення про помилки\n"
@@ -1109,6 +1110,10 @@ msgstr "Кодування вводу/показу:"
 
 msgid "&Select"
 msgstr "&Вибрати"
+
+#, fuzzy
+msgid "Directory tree"
+msgstr "&Дерево каталогів"
 
 msgid "Use passive mode over pro&xy"
 msgstr "Використовувати пасивний режим pro&xy"

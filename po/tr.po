@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-05-05 20:57+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2010-06-04 23:20+0400\n"
 "PO-Revision-Date: 2001-11-06 05:50+0200\n"
 "Last-Translator: Nilgün Belma Bugüner <nilgun@fide.org>\n"
 "Language-Team: Turkish <debian-l10n-turkish@lists.debian.org>\n"
@@ -1011,10 +1011,11 @@ msgstr "[seçenekler] [bu_dizin] [diğer_panel_dizini]\n"
 msgid "Set initial line number for the internal editor"
 msgstr ""
 
+#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
+"as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
 "Lütfen, `mc -V' çıktısını da içeren bir hata raporunu\n"
@@ -1131,6 +1132,10 @@ msgstr "Girdi / gösterme karakter kümesi:"
 
 msgid "&Select"
 msgstr "&Seç"
+
+#, fuzzy
+msgid "Directory tree"
+msgstr "&Dizin ağacı"
 
 #, fuzzy
 msgid "Use passive mode over pro&xy"

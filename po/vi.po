@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-05-05 20:57+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2010-06-04 23:20+0400\n"
 "PO-Revision-Date: 2006-08-16 16:20+0400\n"
 "Last-Translator: Phan Vĩnh Thịnh <teppi82@gmail.com>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
@@ -1004,10 +1004,11 @@ msgstr "[cờ] [thư_mục_này] [thư_mục_bảng_còn_lại]\n"
 msgid "Set initial line number for the internal editor"
 msgstr "Đặt số dòng ban đầu cho trình soạn thảo nội bộ"
 
+#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
+"as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
 "Xin hãy gửi bất kỳ báo cáo lỗi bug nào (gồm cả kết quả của lệnh\n"
@@ -1124,6 +1125,10 @@ msgstr "Bảng mã đầu vào / hiển thị:"
 
 msgid "&Select"
 msgstr "&Lựa chọn"
+
+#, fuzzy
+msgid "Directory tree"
+msgstr "cây thư &Mục"
 
 msgid "Use passive mode over pro&xy"
 msgstr "Sử &dụng chế độ thụ động qua proxy"

@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-05-05 20:57+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2010-06-04 23:20+0400\n"
 "PO-Revision-Date: 2003-01-31 00:11+0200\n"
 "Last-Translator: Mişu Moldovan <dumol@go.ro>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
@@ -1003,10 +1003,11 @@ msgstr "[opţiuni] [acest_dir] [celălalt_dir]\n"
 msgid "Set initial line number for the internal editor"
 msgstr "Numărul primei linii pentru editorul intern"
 
+#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
+"as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
 "Vă rugăm semnalaţi orice eroare (inclusiv ale rezultatului comenzii 'mc -"
@@ -1124,6 +1125,10 @@ msgstr "Intrare / cod de afişare:"
 
 msgid "&Select"
 msgstr "&Selectează "
+
+#, fuzzy
+msgid "Directory tree"
+msgstr "arbore de &Directoare"
 
 #, fuzzy
 msgid "Use passive mode over pro&xy"

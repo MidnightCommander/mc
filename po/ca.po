@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-05-05 20:57+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2010-06-04 23:20+0400\n"
 "PO-Revision-Date: 2001-09-29 17:41+0200\n"
 "Last-Translator: Softcatalà <tradgnome@softcatala.org>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
@@ -1014,10 +1014,11 @@ msgstr "[opcions] [aquest_dir] [dir_d'altre_quadre]\n"
 msgid "Set initial line number for the internal editor"
 msgstr ""
 
+#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
+"as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
 "Si us plau envieu qualsevol informació sobre errors (incloent la sortida de "
@@ -1135,6 +1136,10 @@ msgstr "Pàgina de codis d'entrada / visualització:"
 
 msgid "&Select"
 msgstr "&Seleccioneu"
+
+#, fuzzy
+msgid "Directory tree"
+msgstr "arbre de &Directoris"
 
 #, fuzzy
 msgid "Use passive mode over pro&xy"

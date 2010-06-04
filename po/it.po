@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.6.2\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-05-05 20:57+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2010-06-04 23:20+0400\n"
 "PO-Revision-Date: 2010-02-19 15:10+0100\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian <debian-l10n-italian@lists.debian.org>\n"
@@ -988,10 +988,11 @@ msgstr "[questa_dir] [dir_altro_pannello]"
 msgid "Set initial line number for the internal editor"
 msgstr "Imposta numero di riga iniziale per l'editor interno"
 
+#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
+"as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
 "Prego spedire rapporti su bug (inclusa l'uscita di `mc -V')\n"
@@ -1108,6 +1109,10 @@ msgstr "Ingresso / mostra codepage:"
 
 msgid "&Select"
 msgstr "&Seleziona"
+
+#, fuzzy
+msgid "Directory tree"
+msgstr "&Albero directory"
 
 msgid "Use passive mode over pro&xy"
 msgstr "Usa modalità passiva su pro&xy"

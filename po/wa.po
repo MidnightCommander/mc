@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-05-05 20:57+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2010-06-04 23:20+0400\n"
 "PO-Revision-Date: 1999-03-18 23:11+0100\n"
 "Last-Translator: Lorint Hendschel <LorintHendschel@skynet.be>\n"
 "Language-Team: Wallon <linux-wa@chanae.alphanet.ch>\n"
@@ -965,7 +965,7 @@ msgstr ""
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
+"as tickets at www.midnight-commander.org\n"
 msgstr ""
 
 #, c-format
@@ -1082,6 +1082,10 @@ msgstr "Ecôdaedje po ls intrêyes/rexhowes:"
 
 msgid "&Select"
 msgstr "T&chwezi"
+
+#, fuzzy
+msgid "Directory tree"
+msgstr "&Brantches do ridant"
 
 #, fuzzy
 msgid "Use passive mode over pro&xy"

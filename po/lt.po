@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-05-05 20:57+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2010-06-04 23:20+0400\n"
 "PO-Revision-Date: 2009-02-16 19:45+0300\n"
 "Last-Translator: Andrius Štikonas <stikonas@gmail.com>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -1004,10 +1004,11 @@ msgstr "[nustatymai] [katalogas] [kito skydelio katalogas]\n"
 msgid "Set initial line number for the internal editor"
 msgstr "Nustatykite pradinės eilutės numerį redaktoriuje"
 
+#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
+"as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
 "Prašome siųsti klaidų pranešimus (taip pat ir „mc -V“ išvestį)\n"
@@ -1123,6 +1124,10 @@ msgstr "Įvesties / išvesties kodų lentelė:"
 
 msgid "&Select"
 msgstr "Ž&ymėti"
+
+#, fuzzy
+msgid "Directory tree"
+msgstr "&Aplankų medis"
 
 msgid "Use passive mode over pro&xy"
 msgstr "Pasyvus režimas per įgaliotąjį serverį"

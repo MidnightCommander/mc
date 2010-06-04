@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.0.2\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-05-05 20:57+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2010-06-04 23:20+0400\n"
 "PO-Revision-Date: 2010-03-14 14:00+0100\n"
 "Last-Translator: Martin Zoubek <zoubek@seznam.cz>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
@@ -995,10 +995,11 @@ msgstr "[aktuální_adresář] [druhý_adresář_panelu]"
 msgid "Set initial line number for the internal editor"
 msgstr "Nastavit počáteční číslo řádku pro interní editor"
 
+#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
+"as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
 "Závady programu oznamujte (včetně výstupu „mc -V“)\n"
@@ -1111,6 +1112,10 @@ msgstr "Vstupní/zobrazovací codepage:"
 
 msgid "&Select"
 msgstr "&Výběr"
+
+#, fuzzy
+msgid "Directory tree"
+msgstr "Strom a&dresářů"
 
 msgid "Use passive mode over pro&xy"
 msgstr "Používat pasivní režim přes pro&xy"

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.55\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-05-05 20:57+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2010-06-04 23:20+0400\n"
 "PO-Revision-Date: 2002-06-24 02:15+0300\n"
 "Last-Translator: Todor Buyukliev <adrez@mail.bg>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -1005,10 +1005,11 @@ msgstr "[флагове] [тази_директория] [директория_�
 msgid "Set initial line number for the internal editor"
 msgstr ""
 
+#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
+"as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
 "Моля, изпращайте всякакви съобщения за бъгове (заедно с изхода на 'mc -V')\n"
@@ -1125,6 +1126,10 @@ msgstr "Вход / дисплей кодова страница:"
 
 msgid "&Select"
 msgstr "Маркирай"
+
+#, fuzzy
+msgid "Directory tree"
+msgstr "Дърво на директориите"
 
 #, fuzzy
 msgid "Use passive mode over pro&xy"

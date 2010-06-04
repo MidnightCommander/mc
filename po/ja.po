@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc CVS-20011220\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-05-05 20:57+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2010-06-04 23:20+0400\n"
 "PO-Revision-Date: 2001-12-20 18:33+0900\n"
 "Last-Translator: Akira TAGOH <tagoh@gnome.gr.jp>\n"
 "Language-Team: Japanese <debian-japanese@lists.debian.org>\n"
@@ -1002,10 +1002,11 @@ msgstr "[flags] [this_dir] [other_panel_dir]\n"
 msgid "Set initial line number for the internal editor"
 msgstr ""
 
+#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
+"as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
 "不具合報告を ('mc -V' の出力を含めて) mc-devel@gnome.org\n"
@@ -1122,6 +1123,10 @@ msgstr "入力 / コードページを表示:"
 
 msgid "&Select"
 msgstr "選択(&S)"
+
+#, fuzzy
+msgid "Directory tree"
+msgstr "ディレクトリツリー(&D)"
 
 #, fuzzy
 msgid "Use passive mode over pro&xy"

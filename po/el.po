@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.38\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-05-05 20:57+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2010-06-04 23:20+0400\n"
 "PO-Revision-Date: 2010-04-10 18:58+0200\n"
 "Last-Translator: Alex-P. Natsios\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
@@ -960,7 +960,7 @@ msgstr ""
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
+"as tickets at www.midnight-commander.org\n"
 msgstr ""
 
 #, c-format
@@ -1068,6 +1068,10 @@ msgstr ""
 
 msgid "&Select"
 msgstr "&Επιλογή"
+
+#, fuzzy
+msgid "Directory tree"
+msgstr "&Δέντρο καταλόγου"
 
 msgid "Use passive mode over pro&xy"
 msgstr ""

@@ -5,12 +5,12 @@
 # Vincent van Adrighem <V.vanAdrighem@dirck.mine.nu>, 2001.
 # Leonard den Ottolander <leonard den ottolander nl>, 2005.
 # Marcel Pol <mpol@gmx.net>, 2009-2010.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.0\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-05-05 20:57+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2010-06-04 23:20+0400\n"
 "PO-Revision-Date: 2010-05-16\n"
 "Last-Translator: Marcel Pol <mpol@gmx.net>\n"
 "Language-Team: \n"
@@ -26,7 +26,9 @@ msgid " Not implemented yet "
 msgstr " Nog niet geimplementeerd "
 
 msgid " Num of replace tokens not equal to num of found tokens "
-msgstr "Het aantal overschrijvende tekens is niet gelijk aan het aantal gevonden tekens"
+msgstr ""
+"Het aantal overschrijvende tekens is niet gelijk aan het aantal gevonden "
+"tekens"
 
 #, c-format
 msgid " Invalid token number %d "
@@ -990,10 +992,11 @@ msgstr "[deze_index] [ander_scherm_index]"
 msgid "Set initial line number for the internal editor"
 msgstr "Regelnummer instellen om de interne editor mee te starten"
 
+#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
+"as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
 "Stuur bugreports (met de uitvoer van 'mc -V')\n"
@@ -1105,6 +1108,10 @@ msgstr "Invoer / weergave karakterset:"
 
 msgid "&Select"
 msgstr "&Selecteer"
+
+#, fuzzy
+msgid "Directory tree"
+msgstr "&Mappenhiërarchie                 "
 
 msgid "Use passive mode over pro&xy"
 msgstr "Gebruik passieve modus over pro&Xy"
@@ -1379,7 +1386,9 @@ msgid "&Thorough"
 msgstr "&Grondig"
 
 msgid " Both panels should be in the listing mode to use this command "
-msgstr " Beide vensters moeten zich in lijstweergave-modus bevinden voor deze opdracht"
+msgstr ""
+" Beide vensters moeten zich in lijstweergave-modus bevinden voor deze "
+"opdracht"
 
 msgid ""
 " Not an xterm or Linux console; \n"
@@ -2160,16 +2169,27 @@ msgid " %s%s file error"
 msgstr " %s%s bestandsfout "
 
 #, c-format
-msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
-msgstr "Het formaat van het %smc.ext bestand is veranderd met versie 3.0. De installatie lijkt mislukt. Haal een nieuw Midnight Commander-pakket op."
+msgid ""
+"The format of the %smc.ext file has changed with version 3.0.  It seems that "
+"the installation failed.  Please fetch a fresh copy from the Midnight "
+"Commander package."
+msgstr ""
+"Het formaat van het %smc.ext bestand is veranderd met versie 3.0. De "
+"installatie lijkt mislukt. Haal een nieuw Midnight Commander-pakket op."
 
 #, c-format
 msgid " ~/%s file error "
 msgstr " ~/%s bestandsfout "
 
 #, c-format
-msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
-msgstr "De opmaak van het ~/%s bestand is veranderd met versie 3.0. Je kunt het of kopiëren van %smc.ext of dat bestand gebruiken als een voorbeeld hoe het te schrijven."
+msgid ""
+"The format of the ~/%s file has changed with version 3.0.  You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
+msgstr ""
+"De opmaak van het ~/%s bestand is veranderd met versie 3.0. Je kunt het of "
+"kopiëren van %smc.ext of dat bestand gebruiken als een voorbeeld hoe het te "
+"schrijven."
 
 msgid "DialogTitle|Copy"
 msgstr "Kopie"
@@ -2834,8 +2854,10 @@ msgid " Hotlist Load "
 msgstr " Favolijst laden "
 
 #, c-format
-msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
-msgstr "MC kon niet schrijven naar ~/%s bestand, uw oude favolijst is niet verwijderd"
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr ""
+"MC kon niet schrijven naar ~/%s bestand, uw oude favolijst is niet verwijderd"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -2987,7 +3009,8 @@ msgid ""
 msgstr ""
 "Druk op %s,\n"
 "\n"
-"en wacht dan tot dit bericht verdwijntDruk vervolgens nogmaals om te zien of 'Ok' verschijnt\n"
+"en wacht dan tot dit bericht verdwijntDruk vervolgens nogmaals om te zien of "
+"'Ok' verschijnt\n"
 "naast de toets.\n"
 "\n"
 "Als u wilt afbreken, druk dan de escape-toets,\n"
@@ -3466,7 +3489,8 @@ msgid "Unknown tag on display format: "
 msgstr "Onbekend label in weergaveformaat: "
 
 msgid "User supplied format looks invalid, reverting to default."
-msgstr "Door gebruiker gedefinieerde formaat lijkt onjuist, gebruik de standaard."
+msgstr ""
+"Door gebruiker gedefinieerde formaat lijkt onjuist, gebruik de standaard."
 
 msgid " Do you really want to execute? "
 msgstr " Wilt u die opdracht echt uitvoeren? "
@@ -3630,7 +3654,8 @@ msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
 msgstr ""
-"Bestand %s is niet van de 'root' of van u, of is door iedereen beschrijfbaar.\n"
+"Bestand %s is niet van de 'root' of van u, of is door iedereen "
+"beschrijfbaar.\n"
 "Het gebruik kan veiligheidsrisico's betekenen"
 
 #, c-format

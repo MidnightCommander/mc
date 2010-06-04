@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc-4.5.36\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-05-05 20:57+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2010-06-04 23:20+0400\n"
 "PO-Revision-Date: 2000-10-27 15:37-03:00\n"
 "Last-Translator: E. A. Tacão <tacao@conectiva.com.br>\n"
 "Language-Team: Brazilian Portuguese <ldp-br@bazar.conectiva.com.br>\n"
@@ -1013,10 +1013,11 @@ msgstr "[sinalizadores] [este_dir] [outro dir_painel]\n"
 msgid "Set initial line number for the internal editor"
 msgstr ""
 
+#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
+"as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
 "Por favor envie qualquer relatório de problemas (incluindo a saída de 'mn - "
@@ -1136,6 +1137,10 @@ msgstr ""
 #, fuzzy
 msgid "&Select"
 msgstr " Selecionar "
+
+#, fuzzy
+msgid "Directory tree"
+msgstr "Arvore de &Diretórios"
 
 #, fuzzy
 msgid "Use passive mode over pro&xy"

@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-05-05 20:57+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2010-06-04 23:20+0400\n"
 "PO-Revision-Date: 2001-05-25 13:35+0200\n"
 "Last-Translator: Mari Susperregi <mari@elhuyar.com>\n"
 "Language-Team: Euskara <debian-l10n-basque@lists.debian.org>\n"
@@ -1009,10 +1009,11 @@ msgstr "[flags] [this_dir] [other_panel_dir]\n"
 msgid "Set initial line number for the internal editor"
 msgstr ""
 
+#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
+"as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
 "Bidali akatsen berri-emateak (`mc -V'-ren irteera barne)\n"
@@ -1129,6 +1130,10 @@ msgstr "Sartu / bistaratu kode-orria:"
 
 msgid "&Select"
 msgstr "&Hautatu"
+
+#, fuzzy
+msgid "Directory tree"
+msgstr "&Direktorio-zuhaitza"
 
 #, fuzzy
 msgid "Use passive mode over pro&xy"

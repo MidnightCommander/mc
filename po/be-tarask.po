@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-05-05 20:57+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2010-06-04 23:20+0400\n"
 "PO-Revision-Date: 2002-08-25 16:15GMT+2\n"
 "Last-Translator: Vital Khilko <dojlid@mova.org>\n"
 "Language-Team: Belarusian (tarask) <debian-l10n-belarusian@lists.debian."
@@ -987,10 +987,11 @@ msgstr "[сьцягі] [гэты_каталёг] [каталёг_другой_п
 msgid "Set initial line number for the internal editor"
 msgstr ""
 
+#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
+"as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
 "Калі ласка, дасылайце любыя паведамленьні аб памылках (уключаючы вывад 'mc -"
@@ -1108,6 +1109,10 @@ msgstr "Увесьці / адлюстраваць кодавую старонк�
 
 msgid "&Select"
 msgstr "&Выбраць"
+
+#, fuzzy
+msgid "Directory tree"
+msgstr "&Дрэва каталёгаў"
 
 #, fuzzy
 msgid "Use passive mode over pro&xy"

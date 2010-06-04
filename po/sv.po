@@ -11,8 +11,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-05-05 20:57+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2010-06-04 23:20+0400\n"
 "PO-Revision-Date: 2003-01-22 18:10+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <debian-l10n-swedish@lists.debian.org>\n"
@@ -1016,10 +1016,11 @@ msgstr "[flaggor] [denna katalog] [annan panels katalog]\n"
 msgid "Set initial line number for the internal editor"
 msgstr "Ställ in initialt radnummer för den interna redigeraren"
 
+#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
+"as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
 "Skicka felrapporter (ta med utdata från \"mc -V\") till\n"
@@ -1138,6 +1139,11 @@ msgstr "Teckentabell för inmatning/visning:"
 
 msgid "&Select"
 msgstr "&Välj"
+
+# # >>---<< 
+#, fuzzy
+msgid "Directory tree"
+msgstr "katalogtr&Äd"
 
 #, fuzzy
 msgid "Use passive mode over pro&xy"

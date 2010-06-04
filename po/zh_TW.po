@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54a\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-05-05 20:57+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2010-06-04 23:20+0400\n"
 "PO-Revision-Date: 2001-07-27 03:02+0800\n"
 "Last-Translator: Jing-Jong Shyue <shyue@sonoma.com.tw>\n"
 "Language-Team: Chinese Traditional <zh-l10n@linux.org.tw>\n"
@@ -1010,10 +1010,11 @@ msgstr "[選項標籤] [路徑] [另一個路徑]\n"
 msgid "Set initial line number for the internal editor"
 msgstr ""
 
+#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
+"as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
 "請將臭蟲回報 (包含 `mc -V' 的輸出)\n"
@@ -1130,6 +1131,10 @@ msgstr "輸入/顯示 頁碼："
 
 msgid "&Select"
 msgstr "選取(&S)"
+
+#, fuzzy
+msgid "Directory tree"
+msgstr "目錄樹"
 
 #, fuzzy
 msgid "Use passive mode over pro&xy"
