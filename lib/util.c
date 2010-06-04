@@ -499,25 +499,19 @@ strip_password (char *p, int has_prefix)
         size_t len;
     } prefixes[] =
     {
-        {
-        "/#ftp:", 6},
-        {
-        "ftp://", 6},
-        {
-        "/#mc:", 5},
-        {
-        "mc://", 5},
-        {
-        "/#smb:", 6},
-        {
-        "smb://", 6},
-        {
-        "/#sh:", 5},
-        {
-        "sh://", 5},
-        {
-        "ssh://", 6}
+        /* *INDENT-OFF* */
+        { "/#ftp:", 6 },
+        { "ftp://", 6 },
+        { "/#mc:", 5 },
+        { "mc://", 5 },
+        { "/#smb:", 6 },
+        { "smb://", 6 },
+        { "/#sh:", 5 },
+        { "sh://", 5 },
+        { "ssh://", 6 }
+        /* *INDENT-ON* */
     };
+
     char *at, *inner_colon, *dir;
     size_t i;
     char *result = p;
@@ -1253,7 +1247,7 @@ mc_util_write_backup_content (const char *from_file_name, const char *to_file_na
         return FALSE;
     }
 
-    fwrite ((const void *) contents, length, 1, backup_fd);
+    fwrite ((const void *) contents, 1, length, backup_fd);
 
     fflush (backup_fd);
     fclose (backup_fd);

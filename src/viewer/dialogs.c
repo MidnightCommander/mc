@@ -144,7 +144,7 @@ mcview_dialog_search (mcview_t * view)
 
     view->search->search_type = view->search_type;
     view->search->is_all_charsets = view->search_all_codepages;
-    view->search->is_case_sentitive = view->search_case;
+    view->search->is_case_sensitive = view->search_case;
     view->search->search_fn = mcview_search_cmd_callback;
     view->search->update_fn = mcview_search_update_cmd_callback;
     view->search->whole_words = view->whole_words;

@@ -376,7 +376,7 @@ mc_search (const gchar * pattern, const gchar * str, mc_search_type_t type)
     if (search == NULL)
         return FALSE;
     search->search_type = type;
-    search->is_case_sentitive = TRUE;
+    search->is_case_sensitive = TRUE;
 
     if (type == MC_SEARCH_T_GLOB)
         search->is_entire_line = TRUE;
@@ -389,7 +389,7 @@ mc_search (const gchar * pattern, const gchar * str, mc_search_type_t type)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-mc_search_getstart_rezult_by_num (mc_search_t * lc_mc_search, int lc_index)
+mc_search_getstart_result_by_num (mc_search_t * lc_mc_search, int lc_index)
 {
     if (!lc_mc_search)
         return 0;
@@ -411,7 +411,7 @@ mc_search_getstart_rezult_by_num (mc_search_t * lc_mc_search, int lc_index)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-mc_search_getend_rezult_by_num (mc_search_t * lc_mc_search, int lc_index)
+mc_search_getend_result_by_num (mc_search_t * lc_mc_search, int lc_index)
 {
     if (!lc_mc_search)
         return 0;
