@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
 "POT-Creation-Date: 2010-06-04 23:20+0400\n"
-"PO-Revision-Date: 2010-05-06 12:08+0200\n"
+"PO-Revision-Date: 2010-06-05 06:35+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <trans-pl@lists.fedoraproject.org>\n"
 "MIME-Version: 1.0\n"
@@ -987,7 +987,6 @@ msgstr "[ten_katalog] [katalog_w_drugim_panelu]"
 msgid "Set initial line number for the internal editor"
 msgstr "Ustawia początkowy numer wiersza dla wewnętrznego edytora"
 
-#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -995,7 +994,8 @@ msgid ""
 msgstr ""
 "\n"
 "Proszę wysyłać raporty błędów (w języku angielskim, wraz z\n"
-"wyjściem \"mc -V\") na adres mc-devel@gnome.org\n"
+"wyjściem polecenia \"mc -V\") jako zgłoszenia\n"
+"na stronie www.midnight-commander.org\n"
 
 #, c-format
 msgid "GNU Midnight Commander %s\n"
@@ -1104,9 +1104,8 @@ msgstr "Strona kodowa wejściowa/wyjściowa:"
 msgid "&Select"
 msgstr "&Wybierz"
 
-#, fuzzy
 msgid "Directory tree"
-msgstr "&Drzewo katalogów"
+msgstr "Drzewo katalogów"
 
 msgid "Use passive mode over pro&xy"
 msgstr "Użycie trybu pasywnego przez poś&rednika"
