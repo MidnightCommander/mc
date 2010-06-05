@@ -234,6 +234,16 @@ dialog_switch_process_pending (void)
 }
 
 void
+dialog_switch_got_winch (void)
+{
+    GList *dlg;
+
+    for (dlg = mc_dialogs; dlg != NULL; dlg = g_list_next (dlg))
+        if (dlg != mc_current)
+            ((Dlg_head *) dlg->data)->winch_pending = TRUE;
+}
+
+void
 dialog_switch_shutdown (void)
 {
     while (mc_dialogs != NULL)

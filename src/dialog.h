@@ -152,6 +152,7 @@ struct Dlg_head
     /* Internal flags */
     dlg_state_t state;
     gboolean fullscreen;        /* Parents dialogs don't need refresh */
+    gboolean winch_pending;     /* SIGWINCH signal has been got. Resize dialog after rise */
     int mouse_status;           /* For the autorepeat status of the mouse */
 
     /* Internal variables */

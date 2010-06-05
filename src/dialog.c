@@ -651,6 +651,12 @@ update_cursor (Dlg_head * h)
 void
 dlg_redraw (Dlg_head * h)
 {
+    if (h->winch_pending)
+    {
+        h->winch_pending = FALSE;
+        h->callback (h, NULL, DLG_RESIZE, 0, NULL);
+    }
+
     h->callback (h, NULL, DLG_DRAW, 0, NULL);
     dlg_broadcast_msg (h, WIDGET_DRAW, TRUE);
     update_cursor (h);

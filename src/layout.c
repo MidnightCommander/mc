@@ -55,6 +55,7 @@
 #include "lib/strutil.h"
 
 #include "dialog.h"
+#include "dialog-switch.h"      /* dialog_switch_got_winch() */
 #include "widget.h"
 #include "command.h"
 #include "main-widgets.h"
@@ -778,6 +779,8 @@ change_screen_size (void)
     tty_nodelay (FALSE);
 #endif
 
+    /* Inform all suspending dialogs */
+    dialog_switch_got_winch ();
     /* Inform all running dialogs */
     g_list_foreach (top_dlg, (GFunc) dlg_resize_cb, NULL);
 
