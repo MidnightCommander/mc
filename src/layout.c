@@ -1004,6 +1004,8 @@ set_display_type (int num, panel_view_mode_t type)
 
     if ((type != view_listing) && (current_panel == (WPanel *) old_widget))
         current_panel = num == 0 ? right_panel : left_panel;
+
+    g_free (old_widget);
 }
 
 /* This routine is deeply sticked to the two panels idea.
