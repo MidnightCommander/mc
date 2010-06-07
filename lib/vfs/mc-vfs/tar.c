@@ -697,7 +697,7 @@ tar_open_archive (struct vfs_class *me, struct vfs_s_super *archive,
 	    case STATUS_EOFMARK:
 		message (D_ERROR, MSG_ERROR,
 			 _
-			 ("Hmm,...\n%s\ndoesn't look like a tar archive."),
+			 ("%s\ndoesn't look like a tar archive."),
 			 name);
 		/* FALL THRU */
 

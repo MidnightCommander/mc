@@ -1400,14 +1400,14 @@ edit_load_syntax (WEdit * edit, char ***pnames, const char *type)
     if (r == -1)
     {
         edit_free_syntax_rules (edit);
-        message (D_ERROR, _(" Load syntax file "),
-                 _(" Cannot open file %s \n %s "), f, unix_error_string (errno));
+        message (D_ERROR, _("Load syntax file"),
+                 _("Cannot open file %s\n%s"), f, unix_error_string (errno));
     }
     else if (r != 0)
     {
         edit_free_syntax_rules (edit);
-        message (D_ERROR, _(" Load syntax file "),
-                 _(" Error in file %s on line %d "), error_file_name ? error_file_name : f, r);
+        message (D_ERROR, _("Load syntax file"),
+                 _("Error in file %s on line %d"), error_file_name ? error_file_name : f, r);
         MC_PTR_FREE (error_file_name);
     }
 

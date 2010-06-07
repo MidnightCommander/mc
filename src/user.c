@@ -140,9 +140,9 @@ int check_format_var (const char *p, char **v)
 
 	if (!dots || dots == q+5){
 	    message (D_ERROR,
-		     _(" Format error on file Extensions File "),
-		     !dots ? _(" The %%var macro has no default ")
-		     :       _(" The %%var macro has no variable "));
+		     _("Format error on file Extensions File"),
+		     !dots ? _("The %%var macro has no default")
+		     :       _("The %%var macro has no variable"));
 	    return 0;
 	}
 	
@@ -507,7 +507,7 @@ debug_out (char *start, char *end, int cond)
 	    len = strlen (msg);
 	    if (len)
 		msg [len - 1] = 0;
-	    message (D_NORMAL, _(" Debug "), "%s", msg);
+	    message (D_NORMAL, _("Debug"), "%s", msg);
 
 	}
 	debug_flag = 0;
@@ -522,18 +522,18 @@ debug_out (char *start, char *end, int cond)
 	    return;
 	/* Save the result of the condition */
 	if (debug_error){
-	    type = _(" ERROR: ");
+	    type = _("ERROR:");
 	    debug_error = 0;
 	}
 	else if (cond)
-	    type = _(" True:  ");
+	    type = _("True:");
 	else
-	    type = _(" False: ");
+	    type = _("False:");
 	/* This is for debugging, don't need to be super efficient.  */
 	if (end == NULL)
-	    p = g_strdup_printf ("%s%s%c \n", msg ? msg : "", type, *start);
+	    p = g_strdup_printf ("%s %s %c \n", msg ? msg : "", type, *start);
 	else
-	    p = g_strdup_printf ("%s%s%.*s \n", msg ? msg : "", type,
+	    p = g_strdup_printf ("%s %s %.*s \n", msg ? msg : "", type,
 			(int) (end - start), start);
 	g_free (msg);
 	msg = p;
@@ -625,7 +625,7 @@ execute_menu_command (WEdit *edit_widget, const char *commands)
     cmd_file_fd = mc_mkstemps (&file_name, "mcusr", SCRIPT_SUFFIX);
 
     if (cmd_file_fd == -1){
-	message (D_ERROR, MSG_ERROR, _(" Cannot create temporary command file \n %s "),
+	message (D_ERROR, MSG_ERROR, _("Cannot create temporary command file\n%s"),
 		 unix_error_string (errno));
 	return;
     }
@@ -649,7 +649,7 @@ execute_menu_command (WEdit *edit_widget, const char *commands)
 	    if (*commands == '}'){
 		char *tmp;
 		*parameter = 0;
-		parameter = input_dialog (_(" Parameter "), lc_prompt, MC_HISTORY_FM_MENU_EXEC_PARAM, "");
+		parameter = input_dialog (_("Parameter"), lc_prompt, MC_HISTORY_FM_MENU_EXEC_PARAM, "");
 		if (!parameter || !*parameter){
 		    /* User canceled */
 		    fclose (cmd_file);
@@ -734,7 +734,7 @@ menu_file_own(char* path)
     }
     if (verbose)
     {
-	message (D_NORMAL, _(" Warning -- ignoring file "),
+	message (D_NORMAL, _("Warning -- ignoring file"),
 		    _("File %s is not owned by root or you or is world writable.\n"
 		    "Using it may compromise your security"),
 		path
@@ -759,7 +759,7 @@ user_menu_cmd (struct WEdit *edit_widget)
     
     if (!vfs_current_is_local ()){
 	message (D_ERROR, MSG_ERROR,
-		 _(" Cannot execute commands on non-local filesystems"));
+		 "%s", _("Cannot execute commands on non-local filesystems"));
 	return;
     }
 
@@ -786,7 +786,7 @@ user_menu_cmd (struct WEdit *edit_widget)
 
     data = load_file (menu);
     if (data == NULL) {
-	message (D_ERROR, MSG_ERROR, _(" Cannot open file %s \n %s "),
+	message (D_ERROR, MSG_ERROR, _("Cannot open file%s\n%s"),
 		 menu, unix_error_string (errno));
 	g_free (menu);
 	menu = NULL;
@@ -867,12 +867,12 @@ user_menu_cmd (struct WEdit *edit_widget)
     }
 
     if (menu_lines == 0)
-	message (D_ERROR, MSG_ERROR, _(" No suitable entries found in %s "), menu);
+	message (D_ERROR, MSG_ERROR, _("No suitable entries found in %s"), menu);
     else {
 	max_cols = min (max (max_cols, col), MAX_ENTRY_LEN);
 
 	/* Create listbox */
-	listbox = create_listbox_window (menu_lines, max_cols + 2,_(" User menu "),
+	listbox = create_listbox_window (menu_lines, max_cols + 2, _("User menu"),
 					    "[Menu File Edit]");
 	/* insert all the items found */
 	for (i = 0; i < menu_lines; i++) {

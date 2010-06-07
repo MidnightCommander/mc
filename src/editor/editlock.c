@@ -195,7 +195,7 @@ edit_lock_file (const char *fname)
 	    || !(kill (lockinfo->pid, 0) == -1 && errno == ESRCH)) {
 	    msg =
 		g_strdup_printf (_
-				 ("File \"%s\" is already being edited\n"
+				 ("File \"%s\" is already being edited.\n"
 				  "User: %s\nProcess ID: %d"), x_basename (lockfname) + 2,
 				 lockinfo->who, (int) lockinfo->pid);
 	    /* TODO: Implement "Abort" - needs to rewind undo stack */

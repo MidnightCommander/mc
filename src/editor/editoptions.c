@@ -73,7 +73,7 @@ edit_options_dialog (WEdit *edit)
 	/*  0 */ QUICK_BUTTON (6, 10, OPT_DLG_H - 3, OPT_DLG_H, N_("&Cancel"), B_CANCEL, NULL),
 	/*  1 */ QUICK_BUTTON (2, 10, OPT_DLG_H - 3, OPT_DLG_H, N_("&OK"),     B_ENTER,  NULL),
 	/*  2 */ QUICK_LABEL (OPT_DLG_W / 2 + 1, OPT_DLG_W, 11, OPT_DLG_H,
-				N_("Word wrap line length: ")),
+				N_("Word wrap line length:")),
 	/*  3 */ QUICK_INPUT (OPT_DLG_W / 2 + 25, OPT_DLG_W, 11, OPT_DLG_H,
 				wrap_length, OPT_DLG_W / 2 - 4 - 24, 0, "edit-word-wrap", &p),
 	/*  4 */ QUICK_CHECKBOX (OPT_DLG_W / 2 + 1, OPT_DLG_W, 10, OPT_DLG_H,
@@ -92,7 +92,7 @@ edit_options_dialog (WEdit *edit)
 				N_("Confir&m before saving"), &edit_confirm_save),
 	/* 11 */ QUICK_CHECKBOX (OPT_DLG_W / 2 + 1, OPT_DLG_W, 3, OPT_DLG_H,
 				N_("&Return does autoindent"), &option_return_does_auto_indent),
-	/* 12 */ QUICK_LABEL (3, OPT_DLG_W, 11, OPT_DLG_H, N_("Tab spacing: ")),
+	/* 12 */ QUICK_LABEL (3, OPT_DLG_W, 11, OPT_DLG_H, N_("Tab spacing:")),
 	/* 13 */ QUICK_INPUT (3 + 24, OPT_DLG_W, 11, OPT_DLG_H,
 				tab_spacing, OPT_DLG_W / 2 - 4 - 24, 0, "edit-tab-spacing", &q),
 	/* 14 */ QUICK_CHECKBOX (3, OPT_DLG_W, 10, OPT_DLG_H,
@@ -108,7 +108,7 @@ edit_options_dialog (WEdit *edit)
 
     QuickDialog Quick_options =
     {
-	 OPT_DLG_W, OPT_DLG_H, -1, -1, N_(" Editor options "),
+	 OPT_DLG_W, OPT_DLG_H, -1, -1, N_("Editor options"),
 	"[Editor options]", quick_widgets, FALSE
      };
 

@@ -279,14 +279,14 @@ background_attention (int fd, void *closure)
     bytes = read (fd, &routine.pointer, sizeof (routine));
     if (bytes == -1 || (size_t) bytes < (sizeof (routine)))
     {
-        const char *background_process_error = _(" Background process error ");
+        const char *background_process_error = _("Background process error");
 
         unregister_task_running (ctx->pid, fd);
         if (!waitpid (ctx->pid, &status, WNOHANG))
         {
             /* the process is still running, but it misbehaves - kill it */
             kill (ctx->pid, SIGTERM);
-            message (D_ERROR, background_process_error, _(" Unknown error in child "));
+            message (D_ERROR, background_process_error, _("Unknown error in child"));
             return 0;
         }
 
@@ -294,7 +294,7 @@ background_attention (int fd, void *closure)
         if (WIFEXITED (status) && (WEXITSTATUS (status) == 0))
             return 0;
 
-        message (D_ERROR, background_process_error, _(" Child died unexpectedly "));
+        message (D_ERROR, background_process_error, _("Child died unexpectedly"));
 
         return 0;
     }
@@ -303,22 +303,22 @@ background_attention (int fd, void *closure)
         (read (fd, &type, sizeof (type)) != sizeof (type)) ||
         (read (fd, &have_ctx, sizeof (have_ctx)) != sizeof (have_ctx)))
     {
-        message (D_ERROR, _(" Background protocol error "), _("Reading failed"));
+        message (D_ERROR, _("Background protocol error"), _("Reading failed"));
         return 0;
     }
 
     if (argc > MAXCALLARGS)
     {
-        message (D_ERROR, _(" Background protocol error "),
-                 _(" Background process sent us a request for more arguments \n"
-                   " than we can handle. \n"));
+        message (D_ERROR, _("Background protocol error"),
+                 _("Background process sent us a request for more arguments\n"
+                   "than we can handle."));
     }
 
     if (have_ctx)
     {
         if (read (fd, ctx, sizeof (FileOpContext)) != sizeof (FileOpContext))
         {
-            message (D_ERROR, _(" Background protocol error "), _("Reading failed"));
+            message (D_ERROR, _("Background protocol error"), _("Reading failed"));
             return 0;
         }
     }
@@ -329,13 +329,13 @@ background_attention (int fd, void *closure)
 
         if (read (fd, &size, sizeof (size)) != sizeof (size))
         {
-            message (D_ERROR, _(" Background protocol error "), _("Reading failed"));
+            message (D_ERROR, _("Background protocol error"), _("Reading failed"));
             return 0;
         }
         data[i] = g_malloc (size + 1);
         if (read (fd, data[i], size) != size)
         {
-            message (D_ERROR, _(" Background protocol error "), _("Reading failed"));
+            message (D_ERROR, _("Background protocol error"), _("Reading failed"));
             return 0;
         }
         data[i][size] = 0;      /* NULL terminate the blocks (they could be strings) */
@@ -353,7 +353,7 @@ background_attention (int fd, void *closure)
         to_child_fd = p->to_child_fd;
 
     if (to_child_fd == -1)
-        message (D_ERROR, _(" Background process error "), _(" Unknown error in child "));
+        message (D_ERROR, _("Background process error"), _("Unknown error in child"));
 
     /* Handle the call */
     if (type == Return_Integer)

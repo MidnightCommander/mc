@@ -106,28 +106,16 @@ chown_refresh (Dlg_head * h)
 
     tty_setcolor (COLOR_NORMAL);
 
-    draw_box (h, UY, UX, 12, 21, TRUE);
-    draw_box (h, GY, GX, 12, 21, TRUE);
-    draw_box (h, TY, TX, 12, 19, TRUE);
-
-    dlg_move (h, TY + 1, TX + 1);
-    tty_print_string (_(" Name "));
-    dlg_move (h, TY + 3, TX + 1);
-    tty_print_string (_(" Owner name "));
-    dlg_move (h, TY + 5, TX + 1);
-    tty_print_string (_(" Group name "));
-    dlg_move (h, TY + 7, TX + 1);
-    tty_print_string (_(" Size "));
-    dlg_move (h, TY + 9, TX + 1);
-    tty_print_string (_(" Permission "));
-
-    tty_setcolor (COLOR_HOT_NORMAL);
-    dlg_move (h, UY, UX + 1);
-    tty_print_string (_(" User name "));
-    dlg_move (h, GY, GX + 1);
-    tty_print_string (_(" Group name "));
-    dlg_move (h, TY, TX + 1);
-    tty_print_string (_(" File "));
+    dlg_move (h, TY + 1, TX + 2);
+    tty_print_string (_("Name"));
+    dlg_move (h, TY + 3, TX + 2);
+    tty_print_string (_("Owner name"));
+    dlg_move (h, TY + 5, TX + 2);
+    tty_print_string (_("Group name"));
+    dlg_move (h, TY + 7, TX + 2);
+    tty_print_string (_("Size"));
+    dlg_move (h, TY + 9, TX + 2);
+    tty_print_string (_("Permission"));
 }
 
 static char *
@@ -167,7 +155,7 @@ init_chown (void)
 
     ch_dlg =
         create_dlg (0, 0, 18, 74, dialog_colors, chown_callback, "[Chown]",
-                    _(" Chown command "), DLG_CENTER | DLG_REVERSE);
+                    _("Chown command"), DLG_CENTER | DLG_REVERSE);
 
     for (i = 0; i < BUTTONS - single_set; i++)
         add_widget (ch_dlg,
@@ -191,7 +179,7 @@ init_chown (void)
 
     /* get and put user names in the listbox */
     setpwent ();
-    while ((l_pass = getpwent ()))
+    while ((l_pass = getpwent ()) != NULL)
     {
         listbox_add_item (l_user, LISTBOX_APPEND_SORTED, 0, l_pass->pw_name, NULL);
     }
@@ -199,15 +187,19 @@ init_chown (void)
 
     /* get and put group names in the listbox */
     setgrent ();
-    while ((l_grp = getgrent ()))
+    while ((l_grp = getgrent ()) != NULL)
     {
         listbox_add_item (l_group, LISTBOX_APPEND_SORTED, 0, l_grp->gr_name, NULL);
     }
     endgrent ();
 
+    add_widget (ch_dlg, groupbox_new (TY, TX, 12, 19, _("File")));
+
     /* add listboxes to the dialogs */
     add_widget (ch_dlg, l_group);
+    add_widget (ch_dlg, groupbox_new (GY, GX, 12, 21, _("Group name")));
     add_widget (ch_dlg, l_user);
+    add_widget (ch_dlg, groupbox_new (UY, UX, 12, 21, _("User name")));
 
     return ch_dlg;
 }
@@ -224,7 +216,7 @@ static void
 do_chown (uid_t u, gid_t g)
 {
     if (mc_chown (current_panel->dir.list[current_file].fname, u, g) == -1)
-        message (D_ERROR, MSG_ERROR, _(" Cannot chown \"%s\" \n %s "),
+        message (D_ERROR, MSG_ERROR, _("Cannot chown \"%s\"\n%s"),
                  current_panel->dir.list[current_file].fname, unix_error_string (errno));
 
     do_file_mark (current_panel, current_file, 0);
@@ -306,6 +298,7 @@ chown_cmd (void)
                 }
                 break;
             }
+
         case B_SETGRP:
             {
                 struct group *grp;
@@ -320,6 +313,7 @@ chown_cmd (void)
                 }
                 break;
             }
+
         case B_SETALL:
         case B_ENTER:
             {
@@ -339,7 +333,7 @@ chown_cmd (void)
                 {
                     need_update = 1;
                     if (mc_chown (fname, new_user, new_group) == -1)
-                        message (D_ERROR, MSG_ERROR, _(" Cannot chown \"%s\" \n %s "),
+                        message (D_ERROR, MSG_ERROR, _("Cannot chown \"%s\"\n%s"),
                                  fname, unix_error_string (errno));
                 }
                 else
@@ -353,6 +347,7 @@ chown_cmd (void)
             do_file_mark (current_panel, current_file, 0);
             need_update = 1;
         }
+
         destroy_dlg (ch_dlg);
     }
     while (current_panel->marked && !end_chown);

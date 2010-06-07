@@ -1738,7 +1738,7 @@ parse_display_format (WPanel * panel, const char *format, char **error, int isst
             int pos = min (8, strlen (format));
             delete_format (home);
             tmp_format[pos] = 0;
-            *error = g_strconcat (_("Unknown tag on display format: "), tmp_format, (char *) NULL);
+            *error = g_strconcat (_("Unknown tag on display format:"), " ", tmp_format, (char *) NULL);
             g_free (tmp_format);
             return 0;
         }
@@ -2517,8 +2517,8 @@ do_enter_on_file_entry (file_entry * fe)
     if (confirm_execute)
     {
         if (query_dialog
-            (_(" The Midnight Commander "),
-             _(" Do you really want to execute? "), D_NORMAL, 2, _("&Yes"), _("&No")) != 0)
+            (_("The Midnight Commander"),
+             _("Do you really want to execute?"), D_NORMAL, 2, _("&Yes"), _("&No")) != 0)
             return 1;
     }
 #ifdef ENABLE_VFS
@@ -3075,7 +3075,7 @@ panel_callback (Widget * w, widget_msg_t msg, int parm)
         if (mc_chdir (panel->cwd) != 0)
         {
             char *cwd = strip_password (g_strdup (panel->cwd), 1);
-            message (D_ERROR, MSG_ERROR, _(" Cannot chdir to \"%s\" \n %s "),
+            message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\"\n%s"),
                      cwd, unix_error_string (errno));
             g_free (cwd);
         }
@@ -3454,7 +3454,7 @@ set_panel_encoding (WPanel * panel)
     {
         cd_path = add_encoding_to_path (panel->cwd, encoding);
         if (!do_panel_cd (panel, cd_path, 0))
-            message (D_ERROR, MSG_ERROR, _(" Cannot chdir to %s "), cd_path);
+            message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\""), cd_path);
         g_free (cd_path);
     }
 }

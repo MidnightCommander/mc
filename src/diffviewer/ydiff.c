@@ -198,7 +198,7 @@ open_temp (void **name)
     if (fd == -1)
     {
         message (D_ERROR, MSG_ERROR,
-                 _(" Cannot create temporary diff file \n %s "), unix_error_string (errno));
+                 _("Cannot create temporary diff file\n%s"), unix_error_string (errno));
         return -1;
     }
     *name = diff_file_name;
@@ -2204,7 +2204,7 @@ do_merge_hunk (WDiff * dview)
             if (!dview->merged)
             {
                 message (D_ERROR, MSG_ERROR,
-                         _(" Cannot create backup file \n %s%s \n %s "),
+                         _("Cannot create backup file\n%s%s\n%s"),
                          dview->file[0], "~~~", unix_error_string (errno));
                 return;
             }
@@ -2214,7 +2214,7 @@ do_merge_hunk (WDiff * dview)
         merge_file_fd = mc_mkstemps (&merge_file_name, "mcmerge", NULL);
         if (merge_file_fd == -1)
         {
-            message (D_ERROR, MSG_ERROR, _(" Cannot create temporary merge file \n %s "),
+            message (D_ERROR, MSG_ERROR, _("Cannot create temporary merge file\n%s"),
                      unix_error_string (errno));
             return;
         }
@@ -2752,7 +2752,7 @@ dview_edit (WDiff * dview, int ord)
 
     if (dview->dsrc == DATA_SRC_TMP)
     {
-        error_dialog (_("Edit"), _(" Edit is disabled "));
+        error_dialog (_("Edit"), _("Edit is disabled"));
         return;
     }
 
@@ -2767,14 +2767,14 @@ dview_edit (WDiff * dview, int ord)
 static void
 dview_goto_cmd (WDiff * dview, int ord)
 {
-    static const char *title[2] = { " Goto line (left) ", " Goto line (right) " };
+    static const char *title[2] = { N_("Goto line (left)"), N_("Goto line (right)") };
     static char prev[256];
     /* XXX some statics here, to be remembered between runs */
 
     int newline;
     char *input;
 
-    input = input_dialog (_(title[ord]), _(" Enter line: "), MC_HISTORY_YDIFF_GOTO_LINE, prev);
+    input = input_dialog (_(title[ord]), _("Enter line:"), MC_HISTORY_YDIFF_GOTO_LINE, prev);
     if (input != NULL)
     {
         const char *s = input;
@@ -2933,7 +2933,7 @@ dview_ok_to_exit (WDiff * dview)
     if (!dview->merged)
         return res;
     switch (query_dialog
-            (_("Quit"), _(" File was modified, Save with exit? "), D_NORMAL, 2, _("&Yes"),
+            (_("Quit"), _("File was modified, Save with exit?"), D_NORMAL, 2, _("&Yes"),
              _("&No")))
     {
     case -1:

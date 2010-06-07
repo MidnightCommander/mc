@@ -304,13 +304,14 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
             if (!SUP.password)
             {
                 char *p, *op;
-                p = g_strconcat (_(" fish: Password required for "), SUP.user, " ", (char *) NULL);
+                p = g_strdup_printf (_("fish: Password is required for %s"), SUP.user);
                 op = vfs_get_password (p);
                 g_free (p);
                 if (op == NULL)
                     ERRNOR (EPERM, -1);
                 SUP.password = op;
             }
+
             print_vfs_message (_("fish: Sending password..."));
 
             {

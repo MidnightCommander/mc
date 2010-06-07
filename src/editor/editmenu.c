@@ -186,7 +186,7 @@ create_options_menu (void)
 {
     GList *entries = NULL;
 
-    entries = g_list_append (entries, menu_entry_create (_("&General...  "), CK_Edit_Options));
+    entries = g_list_append (entries, menu_entry_create (_("&General..."), CK_Edit_Options));
     entries = g_list_append (entries, menu_entry_create (_("Save &mode..."), CK_Edit_Save_Mode));
     entries = g_list_append (entries, menu_entry_create (_("Learn &keys..."), CK_LearnKeys));
     entries =

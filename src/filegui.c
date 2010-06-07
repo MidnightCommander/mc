@@ -538,15 +538,13 @@ file_progress_show_total (FileOpTotalContext * tctx, FileOpContext * ctx, double
     file_eta_prepare_for_show (buffer3, tctx->eta_secs, TRUE);
     file_bps_prepare_for_show (buffer4, (long) tctx->bps);
 
-
-
     g_snprintf (buffer, BUF_TINY, _("Time: %s  %s (%s)"), buffer2, buffer3, buffer4);
     label_set_text (ui->time_label, buffer);
 
     size_trunc_len (buffer2, 5, tctx->copyed_bytes, 0, panels_options.kilobyte_si);
     size_trunc_len (buffer3, 5, ctx->progress_bytes, 0, panels_options.kilobyte_si);
 
-    g_snprintf (buffer, BUF_TINY, _(" Total: %s of %s "), buffer2, buffer3);
+    g_snprintf (buffer, BUF_TINY, _("Total: %s of %s"), buffer2, buffer3);
 
     label_set_text (ui->total_bytes_label, buffer);
 
@@ -716,9 +714,9 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
     widgets_len = g_new0 (int, num);
 
     if (mode == Foreground)
-        title = _(" File exists ");
+        title = _("File exists");
     else
-        title = _(" Background process: File exists ");
+        title = _("Background process: File exists");
 
     stripped_name_len = str_term_width1 (stripped_name);
 

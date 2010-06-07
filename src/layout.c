@@ -397,10 +397,10 @@ init_layout (void)
 
         first_width = 0;
 
-        title1 = _(" Panel split ");
-        title2 = _(" Console output ");
-        title3 = _(" Other options ");
-        output_lines_label = _("Output lines: ");
+        title1 = _("Panel split");
+        title2 = _("Console output");
+        title3 = _("Other options");
+        output_lines_label = _("Output lines:");
 
         while (i--)
         {

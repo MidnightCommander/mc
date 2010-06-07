@@ -139,9 +139,6 @@ chmod_refresh (Dlg_head * h)
 
     tty_setcolor (COLOR_NORMAL);
 
-    draw_box (h, PY, PX, PERMISSIONS + 2, 33, TRUE);
-    draw_box (h, FY, FX, 10, 25, TRUE);
-
     dlg_move (h, FY + 1, FX + 2);
     tty_print_string (_("Name"));
     dlg_move (h, FY + 3, FX + 2);
@@ -159,20 +156,13 @@ chmod_refresh (Dlg_head * h)
     tty_print_string (_("to move between options"));
     dlg_move (h, TY + 3, TX);
     tty_print_string (_("and T or INS to mark"));
-
-    tty_setcolor (COLOR_HOT_NORMAL);
-
-    dlg_move (h, PY, PX + 1);
-    tty_print_string (_(" Permission "));
-    dlg_move (h, FY, FX + 1);
-    tty_print_string (_(" File "));
 }
 
 static cb_ret_t
 chmod_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     char buffer[BUF_TINY];
-    int id = h->current->dlg_id - BUTTONS + single_set * 2;
+    int id = h->current->dlg_id - BUTTONS + single_set * 2 - 1;
 
     switch (msg)
     {
@@ -232,11 +222,15 @@ init_chmod (void)
                                     chmod_but[i].flags, _(chmod_but[i].text), 0));
     }
 
+    add_widget (ch_dlg, groupbox_new (FY, FX, 10, 25, _("File")));
+
     for (i = 0; i < PERMISSIONS; i++)
     {
         check_perm[i].check = check_new (PY + (PERMISSIONS - i), PX + 2, 0, _(check_perm[i].text));
         add_widget (ch_dlg, check_perm[i].check);
     }
+
+    add_widget (ch_dlg, groupbox_new ( PY, PX, PERMISSIONS + 2, 33, _("Permission")));
 
     return ch_dlg;
 }
@@ -264,7 +258,7 @@ do_chmod (struct stat *sf)
     sf->st_mode &= and_mask;
     sf->st_mode |= or_mask;
     if (mc_chmod (current_panel->dir.list[c_file].fname, sf->st_mode) == -1)
-        message (D_ERROR, MSG_ERROR, _(" Cannot chmod \"%s\" \n %s "),
+        message (D_ERROR, MSG_ERROR, _("Cannot chmod \"%s\"\n%s"),
                  current_panel->dir.list[c_file].fname, unix_error_string (errno));
 
     do_file_mark (current_panel, c_file, 0);
@@ -342,7 +336,7 @@ chmod_cmd (void)
         case B_ENTER:
             if (mode_change)
                 if (mc_chmod (fname, c_stat) == -1)
-                    message (D_ERROR, MSG_ERROR, _(" Cannot chmod \"%s\" \n %s "),
+                    message (D_ERROR, MSG_ERROR, _("Cannot chmod \"%s\"\n%s"),
                              fname, unix_error_string (errno));
             need_update = 1;
             break;
@@ -382,6 +376,7 @@ chmod_cmd (void)
 
             apply_mask (&sf_stat);
             break;
+
         case B_CLRMRK:
             and_mask = or_mask = 0;
             and_mask = ~and_mask;
@@ -401,8 +396,10 @@ chmod_cmd (void)
             do_file_mark (current_panel, c_file, 0);
             need_update = 1;
         }
+
         destroy_dlg (ch_dlg);
     }
     while (current_panel->marked && !end_chmod);
+
     chmod_done ();
 }

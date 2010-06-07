@@ -1319,7 +1319,7 @@ history_put (const char *input_name, GList * h)
 static const char *
 i18n_htitle (void)
 {
-    return _(" History ");
+    return _("History");
 }
 
 typedef struct
@@ -1548,9 +1548,9 @@ push_history (WInput * in, const char *text)
     /* input widget where urls with passwords are entered without any
        vfs prefix */
     const char *password_input_fields[] = {
-        N_(" Link to a remote machine "),
-        N_(" FTP to machine "),
-        N_(" SMB link to machine ")
+        " Link to a remote machine ",
+        " FTP to machine ",
+        " SMB link to machine "
     };
     const size_t ELEMENTS = (sizeof (password_input_fields) / sizeof (password_input_fields[0]));
 
@@ -1573,6 +1573,8 @@ push_history (WInput * in, const char *text)
 
     if (in->history_name != NULL)
     {
+        /* FIXME: It is the strange code. Rewrite is needed. */
+
         const char *p = in->history_name + 3;
 
         for (i = 0; i < ELEMENTS; i++)

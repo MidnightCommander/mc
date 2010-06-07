@@ -507,7 +507,7 @@ ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super, const char 
     {                           /* ask user */
         char *p;
 
-        p = g_strconcat (_(" FTP: Password required for "), SUP.user, " ", (char *) NULL);
+        p = g_strdup_printf (_("FTP: Password required for %s"), SUP.user);
         op = vfs_get_password (p);
         g_free (p);
         if (op == NULL)
@@ -2104,7 +2104,7 @@ ftpfs_netrc_bad_mode (const char *netrcname)
         if (be_angry)
         {
             message (D_ERROR, MSG_ERROR,
-                     _("~/.netrc file has incorrect mode.\n" "Remove password or correct mode."));
+                     _("~/.netrc file has incorrect mode\nRemove password or correct mode"));
             be_angry = 0;
         }
         return 1;

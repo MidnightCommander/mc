@@ -116,7 +116,7 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
     if (cmd_file_fd == -1)
     {
         message (D_ERROR, MSG_ERROR,
-                 _(" Cannot create temporary command file \n %s "), unix_error_string (errno));
+                 _("Cannot create temporary command file\n%s"), unix_error_string (errno));
         return;
     }
 
@@ -134,7 +134,7 @@ exec_extension (const char *filename, const char *lc_data, int *move_dir, int st
 
                 parameter_found = 0;
                 parameter =
-                    input_dialog (_(" Parameter "), lc_prompt, MC_HISTORY_EXT_PARAMETER, "");
+                    input_dialog (_("Parameter"), lc_prompt, MC_HISTORY_EXT_PARAMETER, "");
                 if (parameter == NULL)
                 {
                     /* User canceled */
@@ -626,8 +626,8 @@ regex_command (const char *filename, const char *action, int *move_dir)
                     char *title = g_strdup_printf (_(" %s%s file error"),
                                                    mc_home, MC_LIB_EXT);
                     message (D_ERROR, title, _("The format of the %smc.ext "
-                                               "file has changed with version 3.0.  It seems that "
-                                               "the installation failed.  Please fetch a fresh "
+                                               "file has changed with version 3.0. It seems that "
+                                               "the installation failed. Please fetch a fresh "
                                                "copy from the Midnight Commander package."),
                              mc_home);
                     g_free (title);
@@ -638,12 +638,12 @@ regex_command (const char *filename, const char *action, int *move_dir)
         if (home_error)
         {
             char *title =
-                g_strdup_printf (_(" ~/%s file error "),
+                g_strdup_printf (_("~/%s file error"),
                                  MC_USERCONF_DIR PATH_SEP_STR MC_FILEBIND_FILE);
             message (D_ERROR, title,
                      _("The format of the ~/%s file has "
-                       "changed with version 3.0.  You may either want to copy "
-                       "it from %smc.ext or use that file as an example of how " "to write it."),
+                       "changed with version 3.0. You may either want to copy "
+                       "it from %smc.ext or use that file as an example of how to write it."),
                      MC_USERCONF_DIR PATH_SEP_STR MC_FILEBIND_FILE, mc_home);
             g_free (title);
         }

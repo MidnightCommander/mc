@@ -335,7 +335,7 @@ edit_load_file_fast (WEdit * edit, const char *filename)
     if (file == -1)
     {
         GString *errmsg = g_string_new (NULL);
-        g_string_sprintf (errmsg, _(" Cannot open %s for reading "), filename);
+        g_string_sprintf (errmsg, _("Cannot open %s for reading"), filename);
         edit_error_dialog (_("Error"), get_sys_error (errmsg->str));
         g_string_free (errmsg, TRUE);
         return 1;
@@ -364,7 +364,7 @@ edit_load_file_fast (WEdit * edit, const char *filename)
     while (0);
     if (ret)
     {
-        char *err_str = g_strdup_printf (_(" Error reading %s "), filename);
+        char *err_str = g_strdup_printf (_("Error reading %s"), filename);
         edit_error_dialog (_("Error"), err_str);
         g_free (err_str);
     }
@@ -570,7 +570,7 @@ edit_insert_file (WEdit * edit, const char *filename)
             if (pclose (f) > 0)
             {
                 char *errmsg;
-                errmsg = g_strdup_printf (_(" Error reading from pipe: %s "), p);
+                errmsg = g_strdup_printf (_("Error reading from pipe: %s"), p);
                 edit_error_dialog (_("Error"), errmsg);
                 g_free (errmsg);
                 g_free (p);
@@ -580,7 +580,7 @@ edit_insert_file (WEdit * edit, const char *filename)
         else
         {
             char *errmsg;
-            errmsg = g_strdup_printf (_(" Cannot open pipe for reading: %s "), p);
+            errmsg = g_strdup_printf (_("Cannot open pipe for reading: %s"), p);
             edit_error_dialog (_("Error"), errmsg);
             g_free (errmsg);
             g_free (p);
@@ -642,7 +642,7 @@ check_file_access (WEdit * edit, const char *filename, struct stat *st)
         if (file < 0)
         {
             g_string_sprintf (errmsg = g_string_new (NULL),
-                              _(" Cannot open %s for reading "), filename);
+                              _("Cannot open %s for reading"), filename);
             goto cleanup;
         }
         else
@@ -656,14 +656,14 @@ check_file_access (WEdit * edit, const char *filename, struct stat *st)
     if (mc_fstat (file, st) < 0)
     {
         g_string_sprintf (errmsg = g_string_new (NULL),
-                          _(" Cannot get size/permissions for %s "), filename);
+                          _("Cannot get size/permissions for %s"), filename);
         goto cleanup;
     }
 
     /* We want to open regular files only */
     if (!S_ISREG (st->st_mode))
     {
-        g_string_sprintf (errmsg = g_string_new (NULL), _(" %s is not a regular file "), filename);
+        g_string_sprintf (errmsg = g_string_new (NULL), _("\"%s\" is not a regular file"), filename);
         goto cleanup;
     }
 
@@ -678,7 +678,7 @@ check_file_access (WEdit * edit, const char *filename, struct stat *st)
 
     if (st->st_size >= SIZE_LIMIT)
     {
-        g_string_sprintf (errmsg = g_string_new (NULL), _(" File %s is too large "), filename);
+        g_string_sprintf (errmsg = g_string_new (NULL), _("File \"%s\" is too large"), filename);
     }
 
   cleanup:
@@ -3527,7 +3527,7 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         save_setup_cmd ();
         break;
     case CK_About:
-        query_dialog (_(" About "),
+        query_dialog (_("About"),
                       _("\n                Cooledit  v3.11.5\n\n"
                         " Copyright (C) 1996 the Free Software Foundation\n\n"
                         "       A user friendly text editor written\n"

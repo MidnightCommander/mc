@@ -147,7 +147,7 @@ mcview_ok_to_quit (mcview_t * view)
         return TRUE;
 
     r = query_dialog (_("Quit"),
-                      _(" File was modified, Save with exit? "), D_NORMAL, 3,
+                      _("File was modified, Save with exit?"), D_NORMAL, 3,
                       _("&Cancel quit"), _("&Yes"), _("&No"));
 
     switch (r)
