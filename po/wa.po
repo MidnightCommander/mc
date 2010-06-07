@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-05-05 22:32+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2010-06-07 21:44+0400\n"
 "PO-Revision-Date: 1999-03-18 23:11+0100\n"
 "Last-Translator: Lorint Hendschel <LorintHendschel@skynet.be>\n"
 "Language-Team: Wallon <linux-wa@chanae.alphanet.ch>\n"
@@ -21,18 +21,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-msgid " Search string not found "
+#, fuzzy
+msgid "Search string not found"
 msgstr " Dji n' a nén trové li tchinne ki dji cachîve après "
 
-msgid " Not implemented yet "
+msgid "Not implemented yet"
 msgstr ""
 
-msgid " Num of replace tokens not equal to num of found tokens "
+msgid "Num of replace tokens not equal to num of found tokens"
 msgstr ""
 
 # Mask = umask (modele di cogne di fitchî?)??
 #, fuzzy, c-format
-msgid " Invalid token number %d "
+msgid "Invalid token number %d"
 msgstr " Li masse såme n' est nén valåbe "
 
 msgid "Normal"
@@ -362,10 +363,12 @@ msgstr "Tchôkîz so tot l' minme li kéne tape po tcheryî pus lon..."
 msgid "Warning"
 msgstr "Advertixhmint"
 
-msgid " Pipe failed "
+#, fuzzy
+msgid "Pipe failed"
 msgstr " Li bûze a fwait berwete "
 
-msgid " Dup failed "
+#, fuzzy
+msgid "Dup failed"
 msgstr " Dup a fwait berwete "
 
 #, fuzzy
@@ -451,7 +454,8 @@ msgstr ""
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr ""
 
-msgid " fish: Password required for "
+#, fuzzy, c-format
+msgid "fish: Password is required for %s"
 msgstr " fish: Secret dmandé po "
 
 msgid "fish: Sending password..."
@@ -512,7 +516,8 @@ msgstr ""
 msgid "ftpfs: Disconnecting from %s"
 msgstr "ftpfs: Dji m' disraloye di %s"
 
-msgid " FTP: Password required for "
+#, fuzzy, c-format
+msgid "FTP: Password required for %s"
 msgstr " FTP: Secret dmandé po "
 
 msgid "ftpfs: sending login name"
@@ -614,20 +619,22 @@ msgid "ftpfs: storing file %lu (%lu)"
 msgstr ""
 
 msgid ""
-"~/.netrc file has incorrect mode.\n"
-"Remove password or correct mode."
+"~/.netrc file has incorrect mode\n"
+"Remove password or correct mode"
 msgstr ""
 
-msgid " MCFS "
+#, fuzzy
+msgid "MCFS"
 msgstr " MCFS "
 
-msgid " The server does not support this version "
+#, fuzzy
+msgid "The server does not support this version"
 msgstr " Li sierveu n' sopoite nén cisse modêye ci "
 
 msgid ""
-" The remote server is not running on a system port \n"
-" you need a password to log in, but the information may \n"
-" not be safe on the remote side.  Continue? \n"
+"The remote server is not running on a system port\n"
+"you need a password to log in, but the information may\n"
+"not be safe on the remote side.  Continue?\n"
 msgstr ""
 
 msgid "&Yes"
@@ -636,25 +643,28 @@ msgstr "&Oyi"
 msgid "&No"
 msgstr "&Neni"
 
-msgid " MCFS Password required "
-msgstr ""
+#, fuzzy
+msgid "MCFS Password required"
+msgstr " FTP: Secret dmandé po "
 
-msgid " Invalid password "
-msgstr ""
+# Mask = umask (modele di cogne di fitchî?)??
+#, fuzzy
+msgid "Invalid password"
+msgstr " Li masse såme n' est nén valåbe "
 
-#, c-format
-msgid " Cannot locate hostname: %s "
+#, fuzzy, c-format
+msgid "Cannot locate hostname: %s"
 msgstr " Dji n' sai trover li lodjeu: %s "
 
-#, c-format
-msgid " Cannot create socket: %s "
+#, fuzzy, c-format
+msgid "Cannot create socket: %s"
 msgstr " Dji n' sai fé on soket: %s "
 
-#, c-format
-msgid " Cannot connect to server: %s "
+#, fuzzy, c-format
+msgid "Cannot connect to server: %s"
 msgstr "Dji n' pout m' raloyî å sierveu: %s"
 
-msgid " Too many open connections "
+msgid "Too many open connections"
 msgstr ""
 
 #, c-format
@@ -673,33 +683,32 @@ msgid ""
 "%s\n"
 msgstr ""
 
-#, c-format
-msgid ""
-" reconnect to %s failed\n"
-" "
-msgstr ""
+#, fuzzy, c-format
+msgid "reconnect to %s failed"
+msgstr "ftpfs: dj' a fwait berwete come dji m' raloyîve å sierveu: %s"
 
-msgid " Authentication failed "
-msgstr ""
-
-#, c-format
-msgid " Error %s creating directory %s "
-msgstr " %s fjhant on mkdir %s "
-
-#, c-format
-msgid " Error %s removing directory %s "
-msgstr " %s fjhant on rmdir %s "
-
-#, c-format
-msgid " %s opening remote file %s "
-msgstr ""
+#, fuzzy
+msgid "Authentication failed"
+msgstr "<readlink a fwait berwete>"
 
 #, fuzzy, c-format
-msgid " %s removing remote file %s "
+msgid "Error %s creating directory %s"
+msgstr " %s fjhant on mkdir %s "
+
+#, fuzzy, c-format
+msgid "Error %s removing directory %s"
+msgstr " %s fjhant on rmdir %s "
+
+#, fuzzy, c-format
+msgid "%s opening remote file %s"
 msgstr "  %s fitchîs ki restèt\n"
 
-#, c-format
-msgid " %s renaming files\n"
+#, fuzzy, c-format
+msgid "%s removing remote file %s"
+msgstr "  %s fitchîs ki restèt\n"
+
+#, fuzzy, c-format
+msgid "%s renaming files\n"
 msgstr "  %s fitchîs ki restèt\n"
 
 #, c-format
@@ -716,26 +725,26 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Hmm,...\n"
 "%s\n"
 "doesn't look like a tar archive."
 msgstr ""
 
-msgid " undelfs: error "
+#, fuzzy
+msgid "undelfs: error"
 msgstr " undelfs: aroke "
 
-msgid " not enough memory "
+msgid "not enough memory"
 msgstr ""
 
-msgid " while allocating block buffer "
-msgstr ""
-
-#, c-format
-msgid " open_inode_scan: %d "
+msgid "while allocating block buffer"
 msgstr ""
 
 #, c-format
-msgid " while starting inode scan %d "
+msgid "open_inode_scan: %d"
+msgstr ""
+
+#, c-format
+msgid "while starting inode scan %d"
 msgstr ""
 
 #, c-format
@@ -743,21 +752,22 @@ msgid "undelfs: loading deleted files information %d inodes"
 msgstr ""
 
 #, c-format
-msgid " while calling ext2_block_iterate %d "
+msgid "while calling ext2_block_iterate %d"
 msgstr ""
 
-msgid " no more memory while reallocating array "
+msgid "no more memory while reallocating array"
 msgstr ""
 
 #, c-format
-msgid " while doing inode scan %d "
+msgid "while doing inode scan %d"
 msgstr ""
 
-msgid " Ext2lib error "
+#, fuzzy
+msgid "Ext2lib error"
 msgstr " Aroke di ext2lib "
 
-#, c-format
-msgid " Cannot open file %s "
+#, fuzzy, c-format
+msgid "Cannot open file %s"
 msgstr " Dji n' sai drovî li fitchî %s"
 
 msgid "undelfs: reading inode bitmap..."
@@ -765,27 +775,31 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid ""
-" Cannot load inode bitmap from: \n"
-" %s \n"
+"Cannot load inode bitmap from:\n"
+"%s"
 msgstr " Dji n' a savu fé on chdir viè %s "
 
 msgid "undelfs: reading block bitmap..."
 msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot load block bitmap from: \n"
-" %s \n"
+"Cannot load block bitmap from:\n"
+"%s"
+msgstr " Dji n' a savu fé on chdir viè %s "
+
+msgid "vfs_info is not fs!"
 msgstr ""
 
-msgid " vfs_info is not fs! "
+msgid "You have to chdir to extract files first"
 msgstr ""
 
-msgid " You have to chdir to extract files first "
+msgid "while iterating over blocks"
 msgstr ""
 
-msgid " while iterating over blocks "
-msgstr ""
+#, fuzzy, c-format
+msgid "Cannot open file \"%s\""
+msgstr " Dji n' sai drovî li fitchî %s"
 
 #, fuzzy
 msgid "Cannot parse:"
@@ -839,21 +853,22 @@ msgstr "Môde"
 msgid "%6d of %d"
 msgstr "%6d di %d"
 
-msgid " Chown advanced command "
+#, fuzzy
+msgid "Chown advanced command"
 msgstr " Comande chown avanceye "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot chmod \"%s\" \n"
-" %s "
+"Cannot chmod \"%s\"\n"
+"%s"
 msgstr ""
 " Dji n' sai fé on chmod «%s» \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot chown \"%s\" \n"
-" %s "
+"Cannot chown \"%s\"\n"
+"%s"
 msgstr ""
 " Dji n' sai fé on chown «%s» \n"
 " %s "
@@ -927,7 +942,8 @@ msgid ""
 "{FORE} and {BACK} can be omitted, and the default will be used\n"
 "\n"
 "Keywords:\n"
-"   Global:       errors, reverse, gauge, input, viewunderline\n"
+"   Global:       errors, reverse, gauge, viewunderline\n"
+"                 input, inputmark, inputunchanged, commandlinemark\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
@@ -962,12 +978,18 @@ msgstr ""
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
+"as tickets at www.midnight-commander.org\n"
 msgstr ""
 
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
+
+msgid "No arguments given to the viewer."
+msgstr ""
+
+msgid "There 2 files are required to diffviewer."
+msgstr ""
 
 #, fuzzy
 msgid "Main options"
@@ -977,25 +999,30 @@ msgstr " Tchûzes pol panea "
 msgid "Terminal options"
 msgstr " Ôtès tchûzes "
 
-msgid " Background process error "
+#, fuzzy
+msgid "Background process error"
 msgstr " Aroke e processus di fond «"
 
-msgid " Unknown error in child "
+#, fuzzy
+msgid "Unknown error in child"
 msgstr " Aroke nén cnoxhowe dins l' efant "
 
-msgid " Child died unexpectedly "
+#, fuzzy
+msgid "Child died unexpectedly"
 msgstr " L' efant a morou tot d' on côp "
 
-msgid " Background protocol error "
+#, fuzzy
+msgid "Background protocol error"
 msgstr " Aroke e protocole di fond "
 
 #, fuzzy
 msgid "Reading failed"
 msgstr "<readlink a fwait berwete>"
 
+#, fuzzy
 msgid ""
-" Background process sent us a request for more arguments \n"
-" than we can handle. \n"
+"Background process sent us a request for more arguments\n"
+"than we can handle."
 msgstr ""
 " Li processus di fond nos a evoyî ene dimande po-z avu did pus\n"
 " d' årgumint ki çu ki dji såreu travayî avou. \n"
@@ -1015,7 +1042,8 @@ msgstr "A vosse &Môde:"
 msgid "Listing mode"
 msgstr "Môde djîvêye"
 
-msgid "user &Mini status"
+#, fuzzy
+msgid "User &mini status"
 msgstr "&Mini statut ûzeu"
 
 msgid "&OK"
@@ -1083,7 +1111,8 @@ msgstr "7 bits"
 msgid "F&ull 8 bits input"
 msgstr "I&ntreye 8 bits etire"
 
-msgid " Display bits "
+#, fuzzy
+msgid "Display bits"
 msgstr " Håyner bits "
 
 msgid "Other 8 bit"
@@ -1094,6 +1123,10 @@ msgstr "Ecôdaedje po ls intrêyes/rexhowes:"
 
 msgid "&Select"
 msgstr "T&chwezi"
+
+#, fuzzy
+msgid "Directory tree"
+msgstr "&Brantches do ridant"
 
 #, fuzzy
 msgid "Use passive mode over pro&xy"
@@ -1121,7 +1154,8 @@ msgstr "secret po ftp anonime:"
 msgid "Timeout for freeing VFSs:"
 msgstr "Tins a ratinde po delîberer les VFS:"
 
-msgid " Virtual File System Setting "
+#, fuzzy
+msgid "Virtual File System Setting"
 msgstr " Apontiaedje do forveyou sistinme di fitchîs "
 
 msgid "cd"
@@ -1139,7 +1173,8 @@ msgstr "No do fitchî k' egzisteye dedja (li loyén simbolike va loyî après):"
 msgid "Symbolic link"
 msgstr "Loyén simbolike"
 
-msgid "Running "
+#, fuzzy
+msgid "Running"
 msgstr "En alaedje "
 
 msgid "Stopped"
@@ -1245,14 +1280,14 @@ msgstr "po bodjî d' ene tchûze a l' ôte"
 msgid "and T or INS to mark"
 msgstr "eyet T ou INS po mårker"
 
-msgid " Permission "
-msgstr " Permission "
-
-msgid " File "
-msgstr " Fitchî "
-
 msgid "Chmod command"
 msgstr "Comande Chmod"
+
+msgid "File"
+msgstr "fitchî"
+
+msgid "Permission"
+msgstr "Permission"
 
 msgid "Set &users"
 msgstr "Mete les û&zeus"
@@ -1260,22 +1295,11 @@ msgstr "Mete les û&zeus"
 msgid "Set &groups"
 msgstr "Mete les &groupe"
 
-msgid " Name "
-msgstr " No "
+msgid "Size"
+msgstr "Grandeu"
 
-msgid " Owner name "
-msgstr " No do prôpietaire "
-
-msgid " Group name "
-msgstr " No do groupe "
-
-msgid " Size "
-msgstr " Grandeu "
-
-msgid " User name "
-msgstr " No di l' ûzeu "
-
-msgid " Chown command "
+#, fuzzy
+msgid "Chown command"
 msgstr " Comande chown "
 
 msgid "<Unknown user>"
@@ -1284,8 +1308,9 @@ msgstr "<Ûzeu nén cnoxhou>"
 msgid "<Unknown group>"
 msgstr "<Groupe nén cnoxhou>"
 
-msgid " Confirmation "
-msgstr " Racertinaedje "
+#, fuzzy
+msgid "User name"
+msgstr " No di l' ûzeu "
 
 msgid "Files tagged, want to cd?"
 msgstr "Essegne metowe so les fitchîs, voloz-ve fé on cd?"
@@ -1293,28 +1318,35 @@ msgstr "Essegne metowe so les fitchîs, voloz-ve fé on cd?"
 msgid "Cannot change directory"
 msgstr "Dji n' sai candjî di ridant"
 
-msgid " View file "
+#, fuzzy
+msgid "View file"
 msgstr " Loukî e fitchî "
 
-msgid " Filename:"
+#, fuzzy
+msgid "Filename:"
 msgstr " No do fitchî:"
 
-msgid " Filtered view "
+#, fuzzy
+msgid "Filtered view"
 msgstr " Vey passé "
 
-msgid " Filter command and arguments:"
+#, fuzzy
+msgid "Filter command and arguments:"
 msgstr " Comande po passer eyet ses årgumints:"
 
 msgid "Create a new Directory"
 msgstr "Fé on novea Ridant"
 
-msgid " Enter directory name:"
+#, fuzzy
+msgid "Enter directory name:"
 msgstr " No do ridant:"
 
-msgid " Filter "
+#, fuzzy
+msgid "Filter"
 msgstr " Passete "
 
-msgid " Set expression for filtering filenames"
+#, fuzzy
+msgid "Set expression for filtering filenames"
 msgstr " Diner ene ratoûrneure po passer les nos di fitchîs"
 
 msgid "&Using shell patterns"
@@ -1328,16 +1360,19 @@ msgstr "grandès <> ptitès letes"
 msgid "&Files only"
 msgstr "Rén ki li &Grandeu"
 
-msgid " Select "
-msgstr " Tchwezi "
+#, fuzzy
+msgid "Select"
+msgstr "T&chwezi"
 
-msgid " Unselect "
+#, fuzzy
+msgid "Unselect"
 msgstr " Distchwezi "
 
 msgid "Extension file edit"
 msgstr "Aspougnî les cawetes di fitchîs"
 
-msgid " Which extension file you want to edit? "
+#, fuzzy
+msgid "Which extension file you want to edit?"
 msgstr " Kénès cawetes di fitchîs voloz-ve aspougnî? "
 
 msgid "&User"
@@ -1346,10 +1381,12 @@ msgstr "&Ûzeu"
 msgid "&System Wide"
 msgstr "&Tot avå li Sistinme"
 
-msgid " Menu edit "
+#, fuzzy
+msgid "Menu edit"
 msgstr " Aspougnî menu "
 
-msgid " Which menu file do you want to edit? "
+#, fuzzy
+msgid "Which menu file do you want to edit?"
 msgstr " Ké fitchî menu voloz-ve aspougnî? "
 
 msgid "&Local"
@@ -1359,13 +1396,15 @@ msgid "Highlighting groups file edit"
 msgstr ""
 
 #, fuzzy
-msgid " Which highlighting file you want to edit? "
+msgid "Which highlighting file you want to edit?"
 msgstr " Kénès cawetes di fitchîs voloz-ve aspougnî? "
 
-msgid " Compare directories "
+#, fuzzy
+msgid "Compare directories"
 msgstr " Rimete les ridants "
 
-msgid " Select compare method: "
+#, fuzzy
+msgid "Select compare method:"
 msgstr " Tchwezi li manire di rmete: "
 
 msgid "&Quick"
@@ -1377,14 +1416,18 @@ msgstr "Rén ki li &Grandeu"
 msgid "&Thorough"
 msgstr "E&tir"
 
-msgid " Both panels should be in the listing mode to use this command "
+#, fuzzy
+msgid ""
+"Both panels should be in the listing mode\n"
+"to use this command"
 msgstr ""
 " Les deus paneas dvèt esse veyous a môde di djîvêye por vos savu eployî "
 "cisse comande "
 
+#, fuzzy
 msgid ""
-" Not an xterm or Linux console; \n"
-" the panels cannot be toggled. "
+"Not an xterm or Linux console;\n"
+"the panels cannot be toggled."
 msgstr ""
 " Ci n' est nén on xterm ni ene conzôle di Linux; \n"
 " dji n' såreu discandjî les paneas. "
@@ -1393,86 +1436,97 @@ msgstr ""
 msgid "Link %s to:"
 msgstr " loyén: %s "
 
-msgid " Link "
-msgstr " Loyén "
+#, fuzzy
+msgid "Link"
+msgstr "&Loyéns"
 
-#, c-format
-msgid " link: %s "
+#, fuzzy, c-format
+msgid "link: %s"
 msgstr " loyén: %s "
 
-#, c-format
-msgid " symlink: %s "
+#, fuzzy, c-format
+msgid "symlink: %s"
 msgstr " loyén simbolike: %s "
 
-#, c-format
-msgid " Symlink `%s' points to: "
+#, fuzzy, c-format
+msgid "Symlink `%s' points to:"
 msgstr "«%s» e-st on loyén simbolike après:  "
 
-msgid " Edit symlink "
+#, fuzzy
+msgid "Edit symlink"
 msgstr " Aspougnî li loyén simbolike "
 
-#, c-format
-msgid " edit symlink, unable to remove %s: %s "
+#, fuzzy, c-format
+msgid "edit symlink, unable to remove %s: %s"
 msgstr " aspougnî li loyén simbolike, dji n' sai waester %s: %s "
 
-#, c-format
-msgid " edit symlink: %s "
+#, fuzzy, c-format
+msgid "edit symlink: %s"
 msgstr " aspougnî loyén simbolike : %s "
 
 #, c-format
 msgid "`%s' is not a symbolic link"
 msgstr "«%s» n' est nén on loyén simbolike"
 
-#, c-format
-msgid " Cannot chdir to %s "
+#, fuzzy, c-format
+msgid "Cannot chdir to %s"
 msgstr " Dji n' a savu fé on chdir viè %s "
 
-msgid " Enter machine name (F1 for details): "
+#, fuzzy
+msgid "Enter machine name (F1 for details):"
 msgstr " Intrer li no di l' éndjole (F1 po ndè savu did pus): "
 
-msgid " Link to a remote machine "
+#, fuzzy
+msgid "Link to a remote machine"
 msgstr " Loyén après ene éndjole å lon "
 
-msgid " FTP to machine "
+#, fuzzy
+msgid "FTP to machine"
 msgstr " FTP après ene éndjole "
 
 #, fuzzy
-msgid " Shell link to machine "
+msgid "Shell link to machine"
 msgstr " raloyaedje SMB so ene éndjole "
 
-msgid " SMB link to machine "
+#, fuzzy
+msgid "SMB link to machine"
 msgstr " raloyaedje SMB so ene éndjole "
 
-msgid " Undelete files on an ext2 file system "
+#, fuzzy
+msgid "Undelete files on an ext2 file system"
 msgstr " Disrafacer des fitchîs so on sistinme di fitchî ext2 "
 
+#, fuzzy
 msgid ""
-" Enter device (without /dev/) to undelete\n"
-"   files on: (F1 for details)"
+"Enter device (without /dev/) to undelete\n"
+"files on: (F1 for details)"
 msgstr ""
 " Intrer l' éndjin (sins li /dev/) ki vos voloz disrafacer\n"
 "   des fitchîs dsu: (F1 po ndè savu did pus)"
 
-msgid " Setup "
+#, fuzzy
+msgid "Setup"
 msgstr " Apontiaedje "
 
 #, fuzzy, c-format
-msgid " Setup saved to ~/%s"
+msgid "Setup saved to ~/%s"
 msgstr " Apontiaedje schapé dins ~/"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot chdir to \"%s\" \n"
-" %s "
+"Cannot chdir to \"%s\"\n"
+"%s"
 msgstr ""
 " Dji n' sai fé on chdir dins «%s» \n"
 " %s "
 
-msgid " Cannot execute commands on non-local filesystems"
+#, fuzzy
+msgid "Cannot execute commands on non-local filesystems"
 msgstr ""
 " Vos n' poloz nén mete en oûve des cmande so on sistinme di fitchî nén locå"
 
-msgid " The shell is already running a command "
+#, fuzzy
+msgid "The shell is already running a command"
 msgstr "Li shell est ddja k' il enonde ene comande "
 
 msgid "&Dismiss"
@@ -1488,39 +1542,42 @@ msgstr "Rén &ki des mots etirs"
 msgid "&Backwards"
 msgstr "È&n erî"
 
-msgid "case &Sensitive"
-msgstr "Grandès <> ptitès letes"
+#, fuzzy
+msgid "Case &sensitive"
+msgstr "grandès <> ptitès letes"
 
-msgid " Enter search string:"
+#, fuzzy
+msgid "Enter search string:"
 msgstr " Dinez li tchinne a cweri après:"
 
 msgid "Search"
 msgstr "Cweri"
 
-msgid " Search is disabled "
-msgstr ""
+#, fuzzy
+msgid "Search is disabled"
+msgstr "Cweri"
 
 #, fuzzy, c-format
 msgid ""
-" Cannot create temporary diff file \n"
-" %s "
+"Cannot create temporary diff file\n"
+"%s"
 msgstr ""
 " Dji n' sai fé on passant fitchî di cmande \n"
 " %s "
 
 #, fuzzy, c-format
 msgid ""
-" Cannot create backup file \n"
-" %s%s \n"
-" %s "
+"Cannot create backup file\n"
+"%s%s\n"
+"%s"
 msgstr ""
 " Dji n' sai fé li fitchî såme «%s» \n"
 " %s "
 
 #, fuzzy, c-format
 msgid ""
-" Cannot create temporary merge file \n"
-" %s "
+"Cannot create temporary merge file\n"
+"%s"
 msgstr ""
 " Dji n' sai fé on passant fitchî di cmande \n"
 " %s "
@@ -1565,10 +1622,20 @@ msgstr " Tchûzes "
 msgid "Edit"
 msgstr "Aspougnî"
 
-msgid " Edit is disabled "
-msgstr ""
+#, fuzzy
+msgid "Edit is disabled"
+msgstr " Tcherdjî fitchî emantchaedje "
 
-msgid " Enter line: "
+#, fuzzy
+msgid "Goto line (left)"
+msgstr " Potchî al roye "
+
+#, fuzzy
+msgid "Goto line (right)"
+msgstr " Potchî al roye "
+
+#, fuzzy
+msgid "Enter line:"
 msgstr " Diner roye: "
 
 msgid "ButtonBar|Help"
@@ -1595,7 +1662,8 @@ msgstr ""
 msgid "Quit"
 msgstr "Cwiter"
 
-msgid " File was modified, Save with exit? "
+#, fuzzy
+msgid "File was modified, Save with exit?"
 msgstr " Li fitchî a stî candjî. El fåt-i schaper tot moussant foû? "
 
 msgid "Two files are needed to compare"
@@ -1606,7 +1674,7 @@ msgid "Cannot read directory contents"
 msgstr "Dji n' sai candjî di ridant"
 
 #, fuzzy
-msgid " Choose syntax highlighting "
+msgid "Choose syntax highlighting"
 msgstr "mete e &valeur l' emantchaedje"
 
 #, fuzzy
@@ -1617,37 +1685,38 @@ msgid "< Reload Current Syntax >"
 msgstr ""
 
 #, fuzzy, c-format
-msgid " Cannot open %s for reading "
+msgid "Cannot open %s for reading"
 msgstr " Dj' a fwait berwete come dji sayîve di drovî l' bûze po lére: "
 
 msgid "Error"
 msgstr "Aroke"
 
 #, fuzzy, c-format
-msgid " Error reading %s "
+msgid "Error reading %s"
 msgstr " Åk ni va nén cwand dji saye di lére del bûze: "
 
 #, fuzzy, c-format
-msgid " Error reading from pipe: %s "
+msgid "Error reading from pipe: %s"
 msgstr " Åk ni va nén cwand dji saye di lére del bûze: "
 
 #, fuzzy, c-format
-msgid " Cannot open pipe for reading: %s "
+msgid "Cannot open pipe for reading: %s"
 msgstr " Dj' a fwait berwete come dji sayîve di drovî l' bûze po lére: "
 
 #, fuzzy, c-format
-msgid " Cannot get size/permissions for %s "
+msgid "Cannot get size/permissions for %s"
 msgstr " Dji n' sai obtni li grandeus ou les permissions pol fitchî: "
 
 #, fuzzy, c-format
-msgid " %s is not a regular file "
+msgid "\"%s\" is not a regular file"
 msgstr " Dji n' sai håyner ci fitchî ci: ci n' est nén on fitchî normå "
 
 #, fuzzy, c-format
-msgid " File %s is too large "
+msgid "File \"%s\" is too large"
 msgstr " Li fitchî est trop grand: "
 
-msgid " About "
+#, fuzzy
+msgid "About"
 msgstr " Å dfait "
 
 msgid ""
@@ -1670,20 +1739,22 @@ msgstr ""
 msgid "Macro recursion is too deep"
 msgstr ""
 
-msgid " File has hard-links. Detach before saving? "
+msgid "File has hard-links. Detach before saving?"
 msgstr ""
 
 msgid "The file has been modified in the meantime. Save anyway?"
 msgstr ""
 
-msgid " Error writing to pipe: "
+#, fuzzy, c-format
+msgid "Error writing to pipe: %s"
 msgstr " Åk n' a nén stî come dji sayîve di scrire el bûze: "
 
-msgid " Cannot open pipe for writing: "
+#, fuzzy, c-format
+msgid "Cannot open pipe for writing: %s"
 msgstr " Dj' a fwait berwete come dji sayîve di drovî l' bûze po scrire: "
 
 #, fuzzy, c-format
-msgid " Cannot open file for writing: %s "
+msgid "Cannot open file for writing: %s"
 msgstr " Dj' a fwait berwete come dji sayîve di drovî l' bûze po scrire: "
 
 #, fuzzy
@@ -1701,7 +1772,8 @@ msgid "Check &POSIX new line"
 msgstr ""
 
 # (Edit + Save) mode / Edit (Save mode)???
-msgid " Edit Save Mode "
+#, fuzzy
+msgid "Edit Save Mode"
 msgstr " Môde Aspougnî Schaper "
 
 msgid "The file you are saving is not finished with a newline"
@@ -1727,58 +1799,76 @@ msgid "Change line breaks to:"
 msgstr ""
 
 #, fuzzy
-msgid " Enter file name: "
+msgid "Enter file name:"
 msgstr " Diner roye: "
 
-msgid " Save As "
+#, fuzzy
+msgid "Save As"
 msgstr " Schaper et rlomer "
 
-msgid " A file already exists with this name. "
+#, fuzzy
+msgid "A file already exists with this name"
 msgstr " I gn a ddja on fitchî lomé insi. "
 
 #, fuzzy
 msgid "&Overwrite"
 msgstr "Sipotchî"
 
-msgid " Cannot save file. "
+#, fuzzy
+msgid "Save as"
+msgstr "&Schaper l' apontiaedje"
+
+#, fuzzy
+msgid "Cannot save file"
 msgstr " Åk n' a nén stî come dji sayîve di schaper li fitchî. "
 
-msgid " Delete macro "
+#, fuzzy
+msgid "Delete macro"
 msgstr " Disfacer macro "
 
-msgid " Cannot open temp file "
+#, fuzzy
+msgid "Cannot open temp file"
 msgstr " Åk n' a nén stî come dji sayîve di drovî on fitchî temp "
 
-msgid " Cannot open macro file "
+#, fuzzy
+msgid "Cannot open macro file"
 msgstr " Åk n' a nén stî come dji sayîve di drovî on fitchî macro "
 
-msgid " Cannot overwrite macro file "
+#, fuzzy
+msgid "Cannot overwrite macro file"
 msgstr " Åk n' a nén stî come dji sayîve di spotchî li fitchî macro "
 
-msgid " Save macro "
+#, fuzzy
+msgid "Save macro"
 msgstr " Schaper li macro "
 
-msgid " Press the macro's new hotkey: "
+#, fuzzy
+msgid "Press the macro's new hotkey:"
 msgstr " Tchôkî li novele tape rascoûrti pol macro: "
 
-msgid " Press macro hotkey: "
+#, fuzzy
+msgid "Press macro hotkey:"
 msgstr " Tchôkî sol Tape Rascoûrti pol Macro: "
 
-msgid " Load macro "
+#, fuzzy
+msgid "Load macro"
 msgstr " Tcherdjî li macro "
 
-msgid " Confirm save file? : "
+#, fuzzy, c-format
+msgid "Confirm save file: \"%s\""
 msgstr " Racertiner ki vos voloz bén schaper li fitchî? : "
 
-msgid " Save file "
+#, fuzzy
+msgid "Save file"
 msgstr " Schaper Fitchî "
 
 msgid "&Save"
 msgstr "&Schaper"
 
+#, fuzzy
 msgid ""
-" Current text was modified without a file save. \n"
-" Continue discards these changes. "
+"Current text was modified without a file save.\n"
+"Continue discards these changes"
 msgstr ""
 " Li tecse do moumint a stî candjî mins nén schapé. \n"
 " Si vos tcheryîz pus lon, les candjmints seront pierdous. "
@@ -1788,78 +1878,91 @@ msgid "Syntax file edit"
 msgstr " Tcherdjî fitchî emantchaedje "
 
 #, fuzzy
-msgid " Which syntax file you want to edit? "
+msgid "Which syntax file you want to edit?"
 msgstr " Kénès cawetes di fitchîs voloz-ve aspougnî? "
 
-msgid " Load "
+#, fuzzy
+msgid "Load"
 msgstr " Tcherdjî "
 
-msgid " Block is large, you may not be able to undo this action. "
+#, fuzzy
+msgid "Block is large, you may not be able to undo this action"
 msgstr " Li blok est lådje; s' il astcheut, vos n' såroz disfé cist bezogne. "
 
 #, fuzzy
 msgid "Replace"
 msgstr "&Mete el Plaece"
 
-msgid " Replace "
-msgstr " Mete el plaece "
-
-#, c-format
-msgid " %ld replacements made. "
+#, fuzzy, c-format
+msgid "%ld replacements made"
 msgstr " %ld discandjes di fwaites. "
+
+#, fuzzy
+msgid "File was modified, save with exit?"
+msgstr " Li fitchî a stî candjî. El fåt-i schaper tot moussant foû? "
 
 #, fuzzy
 msgid "&Cancel quit"
 msgstr "Rinoncî a moussî foû"
 
-#, fuzzy
-msgid " Error "
-msgstr "Aroke"
-
-msgid " This function is not implemented. "
+msgid "This function is not implemented"
 msgstr ""
 
-msgid " Copy to clipboard "
+#, fuzzy
+msgid "Copy to clipboard"
 msgstr " Copyî e tchapea emacralé "
 
-msgid " Unable to save to file. "
+#, fuzzy
+msgid "Unable to save to file"
 msgstr " Dji n' a savu schaper çoula dins on fitchî. "
 
-msgid " Cut to clipboard "
+#, fuzzy
+msgid "Cut to clipboard"
 msgstr " Côper evoye e tchapea emacralé "
 
-msgid " Goto line "
+#, fuzzy
+msgid "Goto line"
 msgstr " Potchî al roye "
 
-msgid " Save Block "
+#, fuzzy
+msgid "Save block"
 msgstr " Schaper li blok "
 
-msgid " Insert File "
-msgstr " Sititchî on fitchî "
+#, fuzzy
+msgid "Insert file"
+msgstr "S&itichî fitchî...     F15"
 
-msgid " Cannot insert file. "
+#, fuzzy
+msgid "Cannot insert file"
 msgstr " Åk n' a nén stî come dji sayîve di stitchî on fitchî. "
 
-msgid " Sort block "
+#, fuzzy
+msgid "Sort block"
 msgstr " Relire li blok "
 
-msgid " You must first highlight a block of text. "
+#, fuzzy
+msgid "You must first highlight a block of text"
 msgstr " Po cmincî vos dvoz mete e valeur on blok di tecse. "
 
-msgid " Run Sort "
+#, fuzzy
+msgid "Run sort"
 msgstr " Relire "
 
-msgid " Enter sort options (see manpage) separated by whitespace: "
+#, fuzzy
+msgid "Enter sort options (see manpage) separated by whitespace:"
 msgstr ""
 " Dinez les tchûzes pol relîjhaedje (loukî el pådje man) avou on blanc inte: "
 
-msgid " Sort "
+#, fuzzy
+msgid "Sort"
 msgstr " Relire "
 
-msgid " Cannot execute sort command "
+#, fuzzy
+msgid "Cannot execute sort command"
 msgstr " Åk n' a nén stî come dji sayîve di relire "
 
-msgid " Sort returned non-zero: "
+#, fuzzy, c-format
+msgid "Sort returned non-zero: %s"
 msgstr " Li relîjhaedje a revoyî åk d' ôte ki zérô "
 
 msgid "Paste output of external command"
@@ -1896,36 +1999,53 @@ msgstr " Aspougnî li blok "
 msgid "Error calling program"
 msgstr ""
 
-msgid " Copies to"
+#, fuzzy
+msgid "Copies to"
 msgstr " Copyî po "
 
-msgid " Subject"
+#, fuzzy
+msgid "Subject"
 msgstr " Sudjet"
 
-msgid " To"
+#, fuzzy
+msgid "To"
 msgstr " Po"
 
-msgid " mail -s <subject> -c <cc> <to>"
+#, fuzzy
+msgid "mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <subject> -c <cc> <to>"
 
 # Viebe ou no?
-msgid " Mail "
+#, fuzzy
+msgid "Mail"
 msgstr " Emile "
 
-msgid " Insert Literal "
-msgstr " Sititchî literål "
+#, fuzzy
+msgid "Insert literal"
+msgstr "sititchî &Literål...                C-q"
 
-msgid " Press any key: "
+#, fuzzy
+msgid "Press any key:"
 msgstr " Tchôkî tot l' minme li kéne tape: "
 
-msgid " Execute Macro "
-msgstr " Enonder Macro "
+#, fuzzy
+msgid "Execute macro"
+msgstr "&Enonder ene macro...         C-a, TAPE"
+
+#, fuzzy
+msgid ""
+"Current text was modified without a file save\n"
+"Continue discards these changes"
+msgstr ""
+" Li tecse do moumint a stî candjî mins nén schapé. \n"
+" Si vos tcheryîz pus lon, les candjmints seront pierdous. "
 
 #, fuzzy
 msgid "In se&lection"
 msgstr "reverse selec&Tion M-*"
 
-msgid " Enter replacement string:"
+#, fuzzy
+msgid "Enter replacement string:"
 msgstr " Dinez li tchinne pol discandje:"
 
 #, fuzzy
@@ -1934,6 +2054,14 @@ msgstr "Trover Fitchî"
 
 msgid "Cancel"
 msgstr "Rinoncî"
+
+#, fuzzy
+msgid ""
+"Current text was modified without a file save.\n"
+"Continue discards these changes."
+msgstr ""
+" Li tecse do moumint a stî candjî mins nén schapé. \n"
+" Si vos tcheryîz pus lon, les candjmints seront pierdous. "
 
 msgid "&Skip"
 msgstr "&Passer"
@@ -1944,15 +2072,17 @@ msgstr "&Tertos"
 msgid "&Replace"
 msgstr "&Mete el Plaece"
 
-msgid " Replace with: "
+#, fuzzy
+msgid "Replace with:"
 msgstr " Mete çouchal el plaece: "
 
-msgid " Confirm replace "
+#, fuzzy
+msgid "Confirm replace"
 msgstr " Racertiner li discandje "
 
 #, c-format
 msgid ""
-"File \"%s\" is already being edited\n"
+"File \"%s\" is already being edited.\n"
 "User: %s\n"
 "Process ID: %d"
 msgstr ""
@@ -2153,7 +2283,8 @@ msgstr ""
 msgid "&External formatter"
 msgstr "difoûtrin metaedje e &cogne         F19"
 
-msgid "&General...  "
+#, fuzzy
+msgid "&General..."
 msgstr "&Djenerå...  "
 
 #, fuzzy
@@ -2213,7 +2344,8 @@ msgstr "Fé les hagnons al voleye"
 msgid "Type writer wrap"
 msgstr ""
 
-msgid "Word wrap line length: "
+#, fuzzy
+msgid "Word wrap line length:"
 msgstr "Longueu del roye wice k' i fåt côper les mots : "
 
 msgid "Cursor beyond end of line"
@@ -2242,7 +2374,8 @@ msgstr "ra&certiner dvant di schaper"
 msgid "&Return does autoindent"
 msgstr "&Ritiraedje avou ene ritoûne"
 
-msgid "Tab spacing: "
+#, fuzzy
+msgid "Tab spacing:"
 msgstr "Espåçmint del tabulåcion : "
 
 msgid "Fill tabs with &spaces"
@@ -2257,7 +2390,8 @@ msgstr "&Fås dmeys ritiraedjes"
 msgid "Wrap mode"
 msgstr "Môde côpaedje di roye"
 
-msgid " Editor options "
+#, fuzzy
+msgid "Editor options"
 msgstr " Tchûzes po l' aspougneu "
 
 msgid "ButtonBar|Mark"
@@ -2278,26 +2412,28 @@ msgstr ""
 msgid "ButtonBar|PullDn"
 msgstr ""
 
-msgid " Load syntax file "
+#, fuzzy
+msgid "Load syntax file"
 msgstr " Tcherdjî fitchî emantchaedje "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot open file %s \n"
-" %s "
+"Cannot open file %s\n"
+"%s"
 msgstr ""
 " Dji n' sai drovî li fitchî %s \n"
 " %s "
 
-#, c-format
-msgid " Error in file %s on line %d "
+#, fuzzy, c-format
+msgid "Error in file %s on line %d"
 msgstr " Aroke e fitchî %s al roye %d "
 
+#, fuzzy
 msgid ""
-" The Commander can't change to the directory that \n"
-" the subshell claims you are in.  Perhaps you have \n"
-" deleted your working directory, or given yourself \n"
-" extra access permissions with the \"su\" command? "
+"The Commander can't change to the directory that\n"
+"the subshell claims you are in. Perhaps you have\n"
+"deleted your working directory, or given yourself\n"
+"extra access permissions with the \"su\" command?"
 msgstr ""
 " Li Commander ni vs sait amwirner e ridant ki li \n"
 " sorshell prétind ki vos estoz dvins.  Mutwè avoz \n"
@@ -2308,19 +2444,20 @@ msgstr ""
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Tapez «exit» po-z eraler a Midnight Commander"
 
-#, c-format
-msgid " Cannot fetch a local copy of %s "
+#, fuzzy, c-format
+msgid "Cannot fetch a local copy of %s"
 msgstr " Dji n' sai aminer ene copeye locåle di %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot create temporary command file \n"
-" %s "
+"Cannot create temporary command file\n"
+"%s"
 msgstr ""
 " Dji n' sai fé on passant fitchî di cmande \n"
 " %s "
 
-msgid " Parameter "
+#, fuzzy
+msgid "Parameter"
 msgstr " Pondant "
 
 #, fuzzy, c-format
@@ -2329,18 +2466,18 @@ msgstr " aroke e fitchî "
 
 #, c-format
 msgid ""
-"The format of the %smc.ext file has changed with version 3.0.  It seems that "
-"the installation failed.  Please fetch a fresh copy from the Midnight "
+"The format of the %smc.ext file has changed with version 3.0. It seems that "
+"the installation failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
 
 #, fuzzy, c-format
-msgid " ~/%s file error "
+msgid "~/%s file error"
 msgstr " aroke e fitchî "
 
 #, c-format
 msgid ""
-"The format of the ~/%s file has changed with version 3.0.  You may either "
+"The format of the ~/%s file has changed with version 3.0. You may either "
 "want to copy it from %smc.ext or use that file as an example of how to write "
 "it."
 msgstr ""
@@ -2354,31 +2491,33 @@ msgstr ""
 msgid "DialogTitle|Delete"
 msgstr ""
 
-msgid " Cannot make the hardlink "
+#, fuzzy
+msgid "Cannot make the hardlink"
 msgstr " Dji n' a savu fé li deur loyén "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot read source link \"%s\" \n"
-" %s "
+"Cannot read source link \"%s\"\n"
+"%s"
 msgstr ""
 " Dji n' sai lére li loyén soûrdant «%s» \n"
 " %s "
 
+#, fuzzy
 msgid ""
-" Cannot make stable symlinks across non-local filesystems: \n"
+"Cannot make stable symlinks acrossnon-local filesystems:\n"
 "\n"
-" Option Stable Symlinks will be disabled "
+"Option Stable Symlinks will be disabled"
 msgstr ""
 " Dji n' sai fé des stocaesses loyéns simbolike avou des sistinmes di fitchîs "
 "nén locås: \n"
 "\n"
 " Li tchûze 'Stocaesse loyéns simbolikes' ni serè nén en alaedje "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot create target symlink \"%s\" \n"
-" %s "
+"Cannot create target symlink \"%s\"\n"
+"%s"
 msgstr ""
 " Dji n' sai fé li loyén simbolike såme «%s» \n"
 " %s "
@@ -2386,103 +2525,104 @@ msgstr ""
 msgid "&Abort"
 msgstr "Ri&noncî"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot overwrite directory \"%s\" \n"
-" %s "
+"Cannot overwrite directory\"%s\"\n"
+"%s"
 msgstr ""
 " Dji n' sai spotchî li ridant «%s» \n"
 " %s "
 
 #  sta_r_t?
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot stat source file \"%s\" \n"
-" %s "
+"Cannot stat source file \"%s\"\n"
+"%s"
 msgstr ""
 " Dji n' sai fé on stat sol fitchî soûrdant «%s» \n"
 " %s "
 
 #, fuzzy, c-format
 msgid ""
-" `%s' \n"
-" and \n"
-" `%s' \n"
-" are the same file "
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same file"
 msgstr " «%s» eyet «%s» sont li minme fitchî "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot create special file \"%s\" \n"
-" %s "
+"Cannot create special file \"%s\"\n"
+"%s"
 msgstr ""
 " Dji n' sai fé li fitchî speciå «%s» \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot chown target file \"%s\" \n"
-" %s "
+"Cannot chown target file \"%s\"\n"
+"%s"
 msgstr ""
 " Dji n' sai fé on chown sol fitchî såme «%s» \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot chmod target file \"%s\" \n"
-" %s "
+"Cannot chmod target file \"%s\"\n"
+"%s"
 msgstr ""
 " Dji n' sai fé on chmod sol fitchî såme «%s» \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot open source file \"%s\" \n"
-" %s "
+"Cannot open source file \"%s\"\n"
+"%s"
 msgstr ""
 " Dji n' sai drovî li fitchî soûrdant «%s» \n"
 " %s "
 
 #  reget?
-msgid " Reget failed, about to overwrite file "
+#, fuzzy
+msgid "Reget failed, about to overwrite file"
 msgstr " Li rapexhaedje a fwait berwete, dji va spotchî li fitchî "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot fstat source file \"%s\" \n"
-" %s "
+"Cannot fstat source file \"%s\"\n"
+"%s"
 msgstr ""
 " Dji n' sai fé on fstat sol fitchî soûrdant «%s» \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot create target file \"%s\" \n"
-" %s "
+"Cannot create target file \"%s\"\n"
+"%s"
 msgstr ""
 " Dji n' sai fé li fitchî såme «%s» \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot fstat target file \"%s\" \n"
-" %s "
+"Cannot fstat target file \"%s\"\n"
+"%s"
 msgstr ""
 " Dji n' sai fé on fstat sol fitchî såme «%s» \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot read source file \"%s\" \n"
-" %s "
+"Cannot read source file\"%s\"\n"
+"%s"
 msgstr ""
 " Dji n' sai lére li fitchî soûrdant «%s» \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot write target file \"%s\" \n"
-" %s "
+"Cannot write target file \"%s\"\n"
+"%s"
 msgstr ""
 " Dji n' sai scrire li fitchî såme «%s» \n"
 " %s "
@@ -2490,18 +2630,18 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(a djok)"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot close source file \"%s\" \n"
-" %s "
+"Cannot close source file \"%s\"\n"
+"%s"
 msgstr ""
 " Dji n' sai clôre li fitchî soûrdant «%s» \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot close target file \"%s\" \n"
-" %s "
+"Cannot close target file \"%s\"\n"
+"%s"
 msgstr ""
 " Dji n' sai clôre li fitchî såme «%s» \n"
 " %s "
@@ -2512,118 +2652,124 @@ msgstr "Dj' a rapexhî on fitchî nén etir. El fåt-i wårder?"
 msgid "&Keep"
 msgstr "&Wårder"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot stat source directory \"%s\" \n"
-" %s "
+"Cannot stat source directory \"%s\"\n"
+"%s"
 msgstr ""
 " Dji n' sai fé on stat sol ridant soûrdant «%s» \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Source \"%s\" is not a directory \n"
-" %s "
+"Source \"%s\" is not a directory\n"
+"%s"
 msgstr ""
 " Li ridant soûrdant «%s» n' est nén on ridant \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot copy cyclic symbolic link \n"
-" `%s' "
+"Cannot copy cyclic symbolic link\n"
+"\"%s\""
 msgstr ""
 " Dji n' sai copyî on loyén simbolike ciclike \n"
 " «%s» "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Destination \"%s\" must be a directory \n"
-" %s "
+"Destination \"%s\" must be a directory\n"
+"%s"
 msgstr ""
 " Li såme «%s» doet esse on ridant \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot create target directory \"%s\" \n"
-" %s "
+"Cannot create target directory \"%s\"\n"
+"%s"
 msgstr ""
 " Dji n' sai fé li ridant såme «%s» \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot chown target directory \"%s\" \n"
-" %s "
+"Cannot chown target directory \"%s\"\n"
+"%s"
 msgstr ""
 " Dji n' sai fé on chown sol ridant såme «%s» \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot stat file \"%s\" \n"
-" %s "
+"Cannot stat file \"%s\"\n"
+"%s"
 msgstr ""
 " Dji n' sai fé on stat sol fitchî «%s» \n"
 " %s "
 
-#, c-format
-msgid " Cannot overwrite directory `%s' "
-msgstr " Dji n' såreu spotchî li ridant «%s» "
+#, fuzzy, c-format
+msgid "Cannot overwrite directory \"%s\""
+msgstr " Dji n' sai spotchî li ridant «%s» %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot move file \"%s\" to \"%s\" \n"
-" %s "
+"Cannot move file \"%s\" to \"%s\"\n"
+"%s"
 msgstr ""
 " Dji n' såreu bodjî li fitchî «%s» dins «%s» \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot remove file \"%s\" \n"
-" %s "
+"Cannot remove file \"%s\"\n"
+"%s"
 msgstr ""
 " Dji n' sai waester li fitchî «%s» \n"
 " %s "
 
 #, fuzzy, c-format
 msgid ""
-" `%s' \n"
-" and \n"
-" `%s' \n"
-" are the same directory "
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same directory"
 msgstr " «%s» eyet «%s» sont li minme ridant "
 
-#, c-format
-msgid " Cannot overwrite directory \"%s\" %s "
-msgstr " Dji n' sai spotchî li ridant «%s» %s "
+#, fuzzy, c-format
+msgid ""
+"Cannot overwrite directory \"%s\"\n"
+"%s"
+msgstr ""
+" Dji n' sai spotchî li ridant «%s» \n"
+" %s "
 
-#, c-format
-msgid " Cannot overwrite file \"%s\" %s "
+#, fuzzy, c-format
+msgid ""
+"Cannot overwrite file \"%s\"\n"
+"%s"
 msgstr " Dji n' sai spotchî «%s» %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot move directory \"%s\" to \"%s\" \n"
-" %s "
+"Cannot move directory \"%s\" to \"%s\"\n"
+"%s"
 msgstr ""
 " Dji n' sai bodjî li ridant «%s» dins «%s» \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot delete file \"%s\" \n"
-" %s "
+"Cannot delete file \"%s\"\n"
+"%s"
 msgstr ""
 " Dji n' sai disfacer li fitchî «%s» \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot remove directory \"%s\" \n"
-" %s "
+"Cannot remove directory \"%s\"\n"
+"%s"
 msgstr ""
 " Dji n' sai waester li ridant «%s» \n"
 " %s "
@@ -2661,45 +2807,51 @@ msgstr "ridants"
 msgid "files/directories"
 msgstr "fitchîs/ridants"
 
+#. TRANSLATORS: keep leading space here to split words in Copy/Move dialog
 msgid " with source mask:"
 msgstr " avou li masse soûrdant:"
 
-msgid " to:"
-msgstr " a:"
+msgid "to:"
+msgstr "a:"
 
 #, c-format
 msgid "%s?"
 msgstr ""
 
-msgid " Cannot operate on \"..\"! "
+#, fuzzy
+msgid "Cannot operate on \"..\"!"
 msgstr " Dji n' sai ovrer so «..» ! "
 
-msgid " Sorry, I could not put the job in background "
+#, fuzzy
+msgid "Sorry, I could not put the job in background"
 msgstr " Dji rgrete, dji n' sai mete ci bezogne la e fond "
 
 msgid "&Retry"
 msgstr "&Rissayî"
 
+#, fuzzy
 msgid ""
 "\n"
-"   Directory not empty.   \n"
-"   Delete it recursively? "
+"Directory not empty.\n"
+"Delete it recursively?"
 msgstr ""
 "\n"
 "   Li ridant n' est nén vûde.   \n"
 "   El fåt-i disfacer avou tos ses efants? "
 
+#, fuzzy
 msgid ""
 "\n"
-"   Background process: Directory not empty \n"
-"   Delete it recursively? "
+"Background process: Directory not empty.\n"
+"Delete it recursively?"
 msgstr ""
 "\n"
 "   Bezogne di fond: li ridant n' est nén vûde \n"
 "   El fåt-i disfacer avou tos ses efants? "
 
-msgid " Delete: "
-msgstr " Disfacer: "
+#, fuzzy
+msgid "Delete:"
+msgstr "Disfacer"
 
 msgid "Non&e"
 msgstr "&Nouk"
@@ -2733,7 +2885,7 @@ msgid "Time: %s  %s (%s)"
 msgstr "Grandeu: %s"
 
 #, c-format
-msgid " Total: %s of %s "
+msgid "Total: %s of %s"
 msgstr ""
 
 msgid "Source"
@@ -2783,10 +2935,12 @@ msgstr "ra&djouter å coron"
 msgid "Overwrite this target?"
 msgstr "Sipotchî cisse såme chal?"
 
-msgid " File exists "
+#, fuzzy
+msgid "File exists"
 msgstr " Li fitchî egzisteye dedja "
 
-msgid " Background process: File exists "
+#, fuzzy
+msgid "Background process: File exists"
 msgstr " Bezogne di fond: li fitchî egzisteye dedja "
 
 msgid "&Background"
@@ -2796,17 +2950,16 @@ msgid "&Stable Symlinks"
 msgstr "&Stocaesse loyéns simbolikes"
 
 #, fuzzy
-msgid "di&Ve into subdir if exists"
+msgid "Di&ve into subdir if exists"
 msgstr "&Plonker ezès ridants efants, s' i gn a"
 
-msgid "preserve &Attributes"
+#, fuzzy
+msgid "Preserve &attributes"
 msgstr "wårder les &Atributs"
 
-msgid "follow &Links"
+#, fuzzy
+msgid "Follow &links"
 msgstr "shure les &Loyéns"
-
-msgid "to:"
-msgstr "a:"
 
 #, fuzzy, c-format
 msgid "Invalid source pattern `%s'"
@@ -2840,7 +2993,7 @@ msgid "Found: %ld"
 msgstr ""
 
 #, fuzzy
-msgid " Malformed regular expression "
+msgid "Malformed regular expression"
 msgstr " Erûleye ratoûrneure må adjinçneye "
 
 #, fuzzy
@@ -2901,14 +3054,16 @@ msgstr "Dji cwîr %s"
 msgid "Searching"
 msgstr "Dji cwîr"
 
-msgid " Help file format error\n"
+#, fuzzy
+msgid "Help file format error\n"
 msgstr " Ene sacwè ni va nén el cogne do fitchî d' aidance\n"
 
-msgid " Internal bug: Double start of link area "
+#, fuzzy
+msgid "Internal bug: Double start of link area"
 msgstr " Divintrin bug: dobe enondeye del coine loyén "
 
-#, c-format
-msgid " Cannot find node %s in help file "
+#, fuzzy, c-format
+msgid "Cannot find node %s in help file"
 msgstr " Dji n' trove nén li nouk %s e fitchî d' aidance "
 
 msgid "Help"
@@ -2932,10 +3087,12 @@ msgstr "&Mete å coron"
 msgid "&Insert"
 msgstr "&Sititchî"
 
-msgid "New &Entry"
+#, fuzzy
+msgid "New &entry"
 msgstr "Novele &Intrêye"
 
-msgid "New &Group"
+#, fuzzy
+msgid "New &group"
 msgstr "Novea &Hopê"
 
 msgid "&Up"
@@ -2951,7 +3108,8 @@ msgstr "Å&rvier"
 msgid "Fr&ee VFSs now"
 msgstr ""
 
-msgid "Change &To"
+#, fuzzy
+msgid "Change &to"
 msgstr "Ca&ndjî A"
 
 msgid "Subgroup - press ENTER to see list"
@@ -2963,11 +3121,11 @@ msgstr "Ovrants ridants VFS"
 msgid "Directory hotlist"
 msgstr "Ridant pol Djîvêye Rascoûrti"
 
-msgid " Directory path "
-msgstr " Tchimin do ridant "
+msgid "Directory path"
+msgstr "Tchimin viè li ridant"
 
-msgid " Directory label "
-msgstr " Etikete do ridant "
+msgid "Directory label"
+msgstr "No do ridant"
 
 #, fuzzy, c-format
 msgid "Moving %s"
@@ -2976,64 +3134,75 @@ msgstr "Dji bodje"
 msgid "New hotlist entry"
 msgstr "Novele intrêye el djîvêye rascoûrti"
 
-msgid "Directory label"
+#, fuzzy
+msgid "Directory label:"
 msgstr "No do ridant"
 
-msgid "Directory path"
+#, fuzzy
+msgid "Directory path:"
 msgstr "Tchimin viè li ridant"
 
-msgid " New hotlist group "
+#, fuzzy
+msgid "New hotlist group"
 msgstr " Novea hopê el djîvêye rascoûrti "
 
-msgid "Name of new group"
+#, fuzzy
+msgid "Name of new group:"
 msgstr "No do novea hopê"
 
 #, c-format
 msgid "Label for \"%s\":"
 msgstr "Etikete po «%s»:"
 
-msgid " Add to hotlist "
+#, fuzzy
+msgid "Add to hotlist"
 msgstr " Radjouter el djîvêye rascoûrti "
 
-msgid " Remove: "
+#, fuzzy
+msgid "Remove:"
 msgstr " Waester: "
 
-msgid ""
-"\n"
-" Are you sure you want to remove this entry?"
+msgid "Are you sure you want to remove this entry?"
 msgstr ""
 
+#, fuzzy
 msgid ""
-"\n"
-" Group not empty.\n"
-" Remove it?"
+"Group not empty.\n"
+"Remove it?"
 msgstr ""
 "\n"
 " Li hopê n' est nén vûde.\n"
 " El fåt-i waester?"
 
-msgid " Top level group "
+#, fuzzy
+msgid "Top level group"
 msgstr " Hopê do pus hôt livea "
 
-msgid " Hotlist Load "
+#, fuzzy
+msgid "Hotlist Load"
 msgstr " Dji tchedje li djîvêye rascoûrti "
 
 #, fuzzy, c-format
 msgid ""
-"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+"MC was unable to write ~/%s file,\n"
+"your old hotlist entries were not deleted"
 msgstr ""
 "Do côp, vos vîyès intrêyes el djîvêye rascoûrti n' ont nén stî disfacêyes"
+
+#, fuzzy
+msgid "Information"
+msgstr " Informåcion "
 
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
 
 #, c-format
-msgid "File:       %s"
-msgstr "Fitchî:       %s"
+msgid "File: %s"
+msgstr "Fitchî: %s"
 
-#, c-format
-msgid "Free nodes: %d (%d%%) of %d"
+#, fuzzy, c-format
+msgid "Free nodes: %ld (%ld%%) of %ld"
 msgstr "Nouks libes: %d (%d%%) so %d"
 
 msgid "No node information"
@@ -3046,8 +3215,8 @@ msgstr "Espace Libe: %s (%d%%) so %s"
 msgid "No space information"
 msgstr "Nole informåcion so li stindeye"
 
-#, c-format
-msgid "Type:      %s "
+#, fuzzy, c-format
+msgid "Type:      %s"
 msgstr "Sôrt:      %s "
 
 msgid "non-local vfs"
@@ -3110,48 +3279,49 @@ msgstr "D' &Astampé"
 msgid "&Horizontal"
 msgstr "Di &Coûtchî"
 
-msgid "show free sp&Ace"
+msgid "Show free sp&ace"
 msgstr ""
 
 #, fuzzy
-msgid "&Xterm window title"
+msgid "&XTerm window title"
 msgstr "Bår ås racsegnes &Xterm"
 
-msgid "h&Intbar visible"
+#, fuzzy
+msgid "H&intbar visible"
 msgstr "Bår ås racsegnes veyåve"
 
 #  Key? Clé? Tapes?
 msgid "&Keybar visible"
 msgstr ""
 
-msgid "command &Prompt"
+#, fuzzy
+msgid "Command &prompt"
 msgstr "&Houkete"
 
-msgid "show &Mini status"
+#, fuzzy
+msgid "Show &mini status"
 msgstr "vey mini &Statut"
 
-msgid "menu&Bar visible"
+#, fuzzy
+msgid "Menu&bar visible"
 msgstr "Bår ås &Menus veyåve"
 
 msgid "&Equal split"
 msgstr "Pårti e deus bokets les &minmes"
 
-msgid "pe&Rmissions"
-msgstr "pe&Rmissions"
-
-msgid "&File types"
-msgstr "Sôrts di &Fitchîs"
-
-msgid " Panel split "
+#, fuzzy
+msgid "Panel split"
 msgstr " Pårti panea "
 
-msgid " Highlight... "
-msgstr " Mete e Valeur... "
+msgid "Console output"
+msgstr ""
 
-msgid " Other options "
+#, fuzzy
+msgid "Other options"
 msgstr " Ôtès tchûzes "
 
-msgid "output lines"
+#, fuzzy
+msgid "Output lines:"
 msgstr "fé rexhe royes"
 
 msgid "Layout"
@@ -3160,7 +3330,8 @@ msgstr "Adjinçmint"
 msgid "Learn keys"
 msgstr "Aprinde des tapes"
 
-msgid " Teach me a key "
+#, fuzzy
+msgid "Teach me a key"
 msgstr " Apurdoz-me ene tape "
 
 #, c-format
@@ -3184,11 +3355,12 @@ msgstr ""
 "Si vos voloz spiter foû, tchôkîz on côp so Escape\n"
 "et ratindoz eto."
 
-msgid " Cannot accept this key "
+#, fuzzy
+msgid "Cannot accept this key"
 msgstr " Dji n' vou nén di cisse tape la "
 
-#, c-format
-msgid " You have entered \"%s\""
+#, fuzzy, c-format
+msgid "You have entered \"%s\""
 msgstr " Vos avoz tapé «%s»"
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
@@ -3224,14 +3396,17 @@ msgstr ""
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "tape, ou bén clitchîz avou vosse soris pol defini. Bodjî avou Tab."
 
-msgid " The Midnight Commander "
+#, fuzzy
+msgid "The Midnight Commander"
 msgstr " Li Midnight Commander "
 
-msgid " Do you really want to quit the Midnight Commander? "
+#, fuzzy
+msgid "Do you really want to quit the Midnight Commander?"
 msgstr " Voloz moussî foû po do bon do Midnight Commander? "
 
-msgid "&Listing mode..."
-msgstr "Môde &Djîvêye..."
+#, fuzzy
+msgid "File listin&g"
+msgstr "Djîvêye e&tire des fitchîs"
 
 #, fuzzy
 msgid "&Quick view"
@@ -3240,6 +3415,9 @@ msgstr "Schaper al vole "
 #, fuzzy
 msgid "&Info"
 msgstr "&Inode"
+
+msgid "&Listing mode..."
+msgstr "Môde &Djîvêye..."
 
 msgid "&Sort order..."
 msgstr "Ôrde po &Relire..."
@@ -3292,8 +3470,12 @@ msgid "&Link"
 msgstr "&Loyéns"
 
 #, fuzzy
-msgid "&SymLink"
+msgid "&Symlink"
 msgstr "&Loyéns"
+
+#, fuzzy
+msgid "Relative symlin&k"
+msgstr " Aspougnî li loyén simbolike "
 
 #, fuzzy
 msgid "Edit s&ymlink"
@@ -3406,6 +3588,10 @@ msgid "&Layout..."
 msgstr "arindj&mint del pådje..."
 
 #, fuzzy
+msgid "&Panel options..."
+msgstr " Tchûzes pol panea "
+
+#, fuzzy
 msgid "C&onfirmation..."
 msgstr "Ra&certiner..."
 
@@ -3431,16 +3617,6 @@ msgstr " Diz&o "
 msgid "&Right"
 msgstr " &Droete "
 
-msgid " Information "
-msgstr " Informåcion "
-
-msgid ""
-" Using the fast reload option may not reflect the exact \n"
-" directory contents. In this case you'll need to do a   \n"
-" manual reload of the directory. See the man page for   \n"
-" the details.                                           "
-msgstr ""
-
 msgid "ButtonBar|Menu"
 msgstr ""
 
@@ -3460,83 +3636,168 @@ msgstr "Li variåve d' evironmint TERM n' est nén metowe!\n"
 msgid "Cannot create %s directory"
 msgstr "Dji n' sai candjî di ridant"
 
-msgid "safe de&Lete"
-msgstr "disf&Acer a såvrité"
-
-msgid "cd follows lin&Ks"
-msgstr "cd shû&T les loyéns"
-
-msgid "L&ynx-like motion"
-msgstr "bodjî come dins L&ynx"
-
-msgid "rotatin&G dash"
-msgstr ""
-
-msgid "co&Mplete: show all"
-msgstr ""
-
-msgid "&Use internal view"
-msgstr ""
-
-msgid "use internal ed&It"
-msgstr ""
-
-msgid "auto m&Enus"
-msgstr ""
-
-msgid "&Auto save setup"
-msgstr ""
-
-msgid "shell &Patterns"
-msgstr ""
-
-msgid "Compute &Totals"
-msgstr ""
-
-msgid "&Verbose operation"
-msgstr ""
-
-msgid "Mkdir autoname"
-msgstr ""
-
-msgid "&Fast dir reload"
-msgstr ""
-
-msgid "mi&X all files"
-msgstr ""
-
-msgid "&Drop down menus"
-msgstr ""
-
-msgid "ma&Rk moves down"
-msgstr ""
-
-msgid "show &Hidden files"
-msgstr "mostrer &Fitchîs catchîs"
-
-msgid "show &Backup files"
-msgstr "mostrer les &Copeyes di såvrité"
-
-msgid "Use SI si&ze units"
-msgstr ""
-
 msgid "&Never"
 msgstr "&Måy"
 
-msgid "on dumb &Terminals"
+#, fuzzy
+msgid "On dum&b terminals"
 msgstr "so les mouwês &Terminås"
 
 msgid "Alwa&ys"
 msgstr "to&Fer"
 
-msgid " Panel options "
-msgstr " Tchûzes pol panea "
+#, fuzzy
+msgid "A&uto save setup"
+msgstr "&Schaper l' apontiaedje"
 
-msgid " Pause after run... "
+#, fuzzy
+msgid "Sa&fe delete"
+msgstr "disf&Acer a såvrité"
+
+#, fuzzy
+msgid "Cd follows lin&ks"
+msgstr "cd shû&T les loyéns"
+
+msgid "Rotating d&ash"
+msgstr ""
+
+msgid "Co&mplete: show all"
+msgstr ""
+
+#, fuzzy
+msgid "Shell &patterns"
+msgstr "Dji m' &sieve des modeles do shell"
+
+msgid "&Drop down menus"
+msgstr ""
+
+msgid "Auto m&enus"
+msgstr ""
+
+#, fuzzy
+msgid "Use internal vie&w"
+msgstr " Vey passé "
+
+msgid "Use internal edi&t"
+msgstr ""
+
+#, fuzzy
+msgid "Pause after run"
 msgstr " Si djoker après avu enondé... "
+
+#, fuzzy
+msgid "Timeout:"
+msgstr "MTime"
+
+#, fuzzy
+msgid "S&ingle press"
+msgstr "Sôrts di &Fitchîs"
+
+#, fuzzy
+msgid "Esc key mode"
+msgstr "Pådje copete"
+
+msgid "Mkdi&r autoname"
+msgstr ""
+
+msgid "Classic pro&gressbar"
+msgstr ""
+
+msgid "Compute tota&ls"
+msgstr ""
+
+msgid "&Verbose operation"
+msgstr ""
+
+#, fuzzy
+msgid "File operation options"
+msgstr " Ôtès tchûzes "
 
 msgid "Configure options"
 msgstr "Apontyî les tchûzes"
+
+#, fuzzy
+msgid "Case &insensitive"
+msgstr "grandès <> ptitès letes"
+
+#, fuzzy
+msgid "Case s&ensitive"
+msgstr "grandès <> ptitès letes"
+
+#, fuzzy
+msgid "Use panel sort mo&de"
+msgstr "Môde &Schapaedje..."
+
+#, fuzzy
+msgid "Quick search"
+msgstr "Abeye cd"
+
+#, fuzzy
+msgid "&Permissions"
+msgstr "Permission"
+
+#, fuzzy
+msgid "File &types"
+msgstr "Sôrts di &Fitchîs"
+
+#, fuzzy
+msgid "File highlight"
+msgstr " Mete e Valeur... "
+
+msgid "&Mouse page scrolling"
+msgstr ""
+
+msgid "Pa&ge scrolling"
+msgstr ""
+
+msgid "L&ynx-like motion"
+msgstr "bodjî come dins L&ynx"
+
+msgid "Navigation"
+msgstr ""
+
+msgid "A&uto save panels setup"
+msgstr ""
+
+#, fuzzy
+msgid "Re&verse files only"
+msgstr "Rén ki li &Grandeu"
+
+msgid "Ma&rk moves down"
+msgstr ""
+
+msgid "&Fast dir reload"
+msgstr ""
+
+#, fuzzy
+msgid "Show &hidden files"
+msgstr "mostrer &Fitchîs catchîs"
+
+#, fuzzy
+msgid "Show &backup files"
+msgstr "mostrer les &Copeyes di såvrité"
+
+#, fuzzy
+msgid "Mi&x all files"
+msgstr "Djîvêye e&tire des fitchîs"
+
+msgid "Use SI si&ze units"
+msgstr ""
+
+#, fuzzy
+msgid "Main panel options"
+msgstr " Tchûzes pol panea "
+
+#, fuzzy
+msgid "Panel options"
+msgstr " Tchûzes pol panea "
+
+msgid ""
+"Using the fast reload option may not reflect the exact\n"
+"directory contents. In this case you'll need to do a\n"
+"manual reload of the directory. See the man page for\n"
+"the details."
+msgstr ""
 
 msgid "&Add new"
 msgstr "R&adjouter novea"
@@ -3550,13 +3811,15 @@ msgstr "Comande"
 msgid "Other command"
 msgstr "Ôtès cmandes"
 
-msgid " Add to external panelize "
-msgstr ""
+#, fuzzy
+msgid "Add to external panelize"
+msgstr "Difoûtrins paneas"
 
-msgid " Enter command label: "
-msgstr ""
+#, fuzzy
+msgid "Enter command label:"
+msgstr "Ôtès cmandes"
 
-msgid " Cannot run external panelize in a non-local directory "
+msgid "Cannot run external panelize in a non-local directory"
 msgstr ""
 
 msgid "Find rejects after patching"
@@ -3654,11 +3917,9 @@ msgstr "E&ployî"
 msgid "sort|h"
 msgstr ""
 
-msgid "C&Hange time"
+#, fuzzy
+msgid "C&hange time"
 msgstr "As&pougnî"
-
-msgid "Permission"
-msgstr "Permission"
 
 msgid "Perm"
 msgstr ""
@@ -3701,14 +3962,19 @@ msgid_plural "%s in %d files"
 msgstr[0] "%s octets e fitchî %d"
 msgstr[1] "%s octets e fitchî %d"
 
-msgid "Unknown tag on display format: "
+msgid "Unknown tag on display format:"
 msgstr ""
 
 msgid "User supplied format looks invalid, reverting to default."
 msgstr ""
 
-msgid " Do you really want to execute? "
+#, fuzzy
+msgid "Do you really want to execute?"
 msgstr " Voloz-ve enonder po do bon? "
+
+#, fuzzy, c-format
+msgid "Cannot chdir to \"%s\""
+msgstr " Dji n' a savu fé on chdir viè %s "
 
 msgid "Choose codepage"
 msgstr ""
@@ -3738,7 +4004,8 @@ msgstr ""
 msgid "Cannot open named pipe %s\n"
 msgstr "Dji n' sai drovî li lomêye bûze %s\n"
 
-msgid " The shell is still active. Quit anyway? "
+#, fuzzy
+msgid "The shell is still active. Quit anyway?"
 msgstr " Li shell est co en alaedje. Voloz-ve tot l' minme moussî foû? "
 
 #, c-format
@@ -3813,14 +4080,16 @@ msgstr "Copyî li ridant «%s» dins:"
 msgid "Move \"%s\" directory to:"
 msgstr "Bodjî li ridant «%s» dins:"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot stat the destination \n"
-" %s "
+"Cannot stat the destination\n"
+"%s"
 msgstr ""
+" Dji n' sai fé on stat sol fitchî «%s» \n"
+" %s "
 
-#, c-format
-msgid "  Delete %s?  "
+#, fuzzy, c-format
+msgid "Delete %s?"
 msgstr "  Disfacer %s?  "
 
 msgid "ButtonBar|Static"
@@ -3846,30 +4115,35 @@ msgstr ""
 "Dji n' sai scrire e fitchî %s :\n"
 "%s\n"
 
-msgid " Format error on file Extensions File "
+msgid "Format error on file Extensions File"
 msgstr ""
 
 #, c-format
-msgid " The %%var macro has no default "
+msgid "The %%var macro has no default"
 msgstr ""
 
 #, c-format
-msgid " The %%var macro has no variable "
+msgid "The %%var macro has no variable"
 msgstr ""
 
-msgid " Debug "
+#, fuzzy
+msgid "Debug"
 msgstr " Disbuguer "
 
-msgid " ERROR: "
+#, fuzzy
+msgid "ERROR:"
 msgstr " AROKE: "
 
-msgid " True:  "
+#, fuzzy
+msgid "True:"
 msgstr " Veur:  "
 
-msgid " False: "
+#, fuzzy
+msgid "False:"
 msgstr " Fås:  "
 
-msgid " Warning -- ignoring file "
+#, fuzzy
+msgid "Warning -- ignoring file"
 msgstr " Advertixhmint -- dji passe hute do fitchî "
 
 #, c-format
@@ -3881,11 +4155,20 @@ msgstr ""
 "divins.\n"
 "Do côp, si vos vos e siervoz, ça pôreut esse dandjureu..."
 
+#, fuzzy, c-format
+msgid ""
+"Cannot open file%s\n"
+"%s"
+msgstr ""
+" Dji n' sai drovî li fitchî %s \n"
+" %s "
+
 #, c-format
-msgid " No suitable entries found in %s "
+msgid "No suitable entries found in %s"
 msgstr ""
 
-msgid " User menu "
+#, fuzzy
+msgid "User menu"
 msgstr " Menu di l' ûzeu "
 
 # Mask = umask (modele di cogne di fitchî?)??
@@ -3894,7 +4177,7 @@ msgid "Invalid value"
 msgstr " Li masse såme n' est nén valåbe "
 
 #, fuzzy
-msgid " Cannot spawn child process "
+msgid "Cannot spawn child process"
 msgstr " Dji n' sai drovî li fitchî %s"
 
 msgid "Empty output from child filter"
@@ -3947,34 +4230,35 @@ msgstr ""
 
 #, c-format
 msgid ""
-" Error while closing the file: \n"
-" %s \n"
-" Data may have been written or not. "
+"Error while closing the file:\n"
+"%s\n"
+"Data may have been written or not"
 msgstr ""
 
 #, fuzzy, c-format
 msgid ""
-" Cannot save file: \n"
-" %s "
+"Cannot save file:\n"
+"%s"
 msgstr " Åk n' a nén stî come dji sayîve di schaper li fitchî. "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot open \"%s\"\n"
-" %s "
+"Cannot open \"%s\"\n"
+"%s"
 msgstr ""
 " Dji n' sai drovî «%s»\n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot stat \"%s\"\n"
-" %s "
+"Cannot stat \"%s\"\n"
+"%s"
 msgstr ""
 " Dji n' sai fé on stat so «%s»\n"
 " %s "
 
-msgid " Cannot view: not a regular file "
+#, fuzzy
+msgid "Cannot view: not a regular file"
 msgstr " Dji n' sai håyner ci fitchî ci: ci n' est nén on fitchî normå "
 
 msgid "Seeking to search result"
@@ -3987,7 +4271,8 @@ msgstr "Cweri"
 msgid "Continue from begining?"
 msgstr ""
 
-msgid " History "
+#, fuzzy
+msgid "History"
 msgstr " Istwere "
 
 #. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
@@ -4000,12 +4285,91 @@ msgstr ""
 msgid "Background process:"
 msgstr "Porcessus di fond:"
 
+#~ msgid " Permission "
+#~ msgstr " Permission "
+
+#~ msgid " File "
+#~ msgstr " Fitchî "
+
+#~ msgid " Name "
+#~ msgstr " No "
+
+#~ msgid " Owner name "
+#~ msgstr " No do prôpietaire "
+
+#~ msgid " Group name "
+#~ msgstr " No do groupe "
+
+#~ msgid " Size "
+#~ msgstr " Grandeu "
+
+#~ msgid " Confirmation "
+#~ msgstr " Racertinaedje "
+
+#~ msgid " Select "
+#~ msgstr " Tchwezi "
+
+#~ msgid " Compare directories "
+#~ msgstr " Rimete les ridants "
+
+#~ msgid " Link "
+#~ msgstr " Loyén "
+
+#~ msgid " Edit symlink "
+#~ msgstr " Aspougnî li loyén simbolike "
+
+#~ msgid "case &Sensitive"
+#~ msgstr "Grandès <> ptitès letes"
+
+#~ msgid " Replace "
+#~ msgstr " Mete el plaece "
+
+#, fuzzy
+#~ msgid " Error "
+#~ msgstr "Aroke"
+
+#~ msgid " Insert File "
+#~ msgstr " Sititchî on fitchî "
+
+#~ msgid " Insert Literal "
+#~ msgstr " Sititchî literål "
+
+#~ msgid " Execute Macro "
+#~ msgstr " Enonder Macro "
+
+#~ msgid " Cannot overwrite directory `%s' "
+#~ msgstr " Dji n' såreu spotchî li ridant «%s» "
+
+#~ msgid " to:"
+#~ msgstr " a:"
+
+#~ msgid " Delete: "
+#~ msgstr " Disfacer: "
+
+#~ msgid " Directory path "
+#~ msgstr " Tchimin do ridant "
+
+#~ msgid " Directory label "
+#~ msgstr " Etikete do ridant "
+
+#~ msgid "File:       %s"
+#~ msgstr "Fitchî:       %s"
+
+#~ msgid "pe&Rmissions"
+#~ msgstr "pe&Rmissions"
+
+#~ msgid " User menu "
+#~ msgstr " Menu di l' ûzeu "
+
+#, fuzzy
+#~ msgid ""
+#~ " Cannot save file: \n"
+#~ " %s "
+#~ msgstr " Åk n' a nén stî come dji sayîve di schaper li fitchî. "
+
 #, fuzzy
 #~ msgid "Status:    %s"
 #~ msgstr "Fwait:   %s"
-
-#~ msgid "File"
-#~ msgstr "fitchî"
 
 #~ msgid "Count"
 #~ msgstr "Conter"
@@ -4040,9 +4404,6 @@ msgstr "Porcessus di fond:"
 
 #~ msgid " Goto Address "
 #~ msgstr " Potchî al Adresse "
-
-#~ msgid "File: %s"
-#~ msgstr "Fitchî: %s"
 
 #~ msgid "%s bytes"
 #~ msgstr "%s octets"
@@ -4204,9 +4565,6 @@ msgstr "Porcessus di fond:"
 #~ msgid "Replac"
 #~ msgstr "Discandjî"
 
-#~ msgid "Delete"
-#~ msgstr "Disfacer"
-
 #~ msgid "PullDn"
 #~ msgstr "Djus"
 
@@ -4336,12 +4694,6 @@ msgstr "Porcessus di fond:"
 #~ msgid "Extension"
 #~ msgstr "Cawete:"
 
-#~ msgid "Size"
-#~ msgstr "Grandeu"
-
-#~ msgid "MTime"
-#~ msgstr "MTime"
-
 #~ msgid "ATime"
 #~ msgstr "ATime"
 
@@ -4457,10 +4809,6 @@ msgstr "Porcessus di fond:"
 #, fuzzy
 #~ msgid "Edit edi&tor menu file"
 #~ msgstr "Aspougnî fitchî menu"
-
-#, fuzzy
-#~ msgid "Edit &syntax file"
-#~ msgstr " Tcherdjî fitchî emantchaedje "
 
 #, fuzzy
 #~ msgid "Invalid hex search expression"

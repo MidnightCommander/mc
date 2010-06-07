@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-05-05 22:32+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2010-06-07 21:44+0400\n"
 "PO-Revision-Date: 2006-08-16 16:20+0400\n"
 "Last-Translator: Phan Vĩnh Thịnh <teppi82@gmail.com>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
@@ -16,17 +16,18 @@ msgstr ""
 "X-Generator: KBabel 1.10\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 
-msgid " Search string not found "
+#, fuzzy
+msgid "Search string not found"
 msgstr " Không tìm thấy chuỗi tìm kiếm "
 
-msgid " Not implemented yet "
+msgid "Not implemented yet"
 msgstr ""
 
-msgid " Num of replace tokens not equal to num of found tokens "
+msgid "Num of replace tokens not equal to num of found tokens"
 msgstr ""
 
 #, fuzzy, c-format
-msgid " Invalid token number %d "
+msgid "Invalid token number %d"
 msgstr " Dấu hiệu đích đến không đúng "
 
 msgid "Normal"
@@ -355,10 +356,12 @@ msgstr "Để tiếp tục nhấn phím bất kỳ..."
 msgid "Warning"
 msgstr "Cảnh báo"
 
-msgid " Pipe failed "
+#, fuzzy
+msgid "Pipe failed"
 msgstr " Lỗi đường ống "
 
-msgid " Dup failed "
+#, fuzzy
+msgid "Dup failed"
 msgstr " Lỗi lặp lại "
 
 #, fuzzy
@@ -456,7 +459,8 @@ msgstr "fish: Đang chời dòng đầu tiên..."
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Xin lỗi, bây giờ không thể tạo kết nối xác thực theo mật khẩu."
 
-msgid " fish: Password required for "
+#, fuzzy, c-format
+msgid "fish: Password is required for %s"
 msgstr "fish: yêu cầu mật khẩu cho "
 
 msgid "fish: Sending password..."
@@ -517,7 +521,8 @@ msgstr "Dừng truyền tải thành công."
 msgid "ftpfs: Disconnecting from %s"
 msgstr "ftpfs: Ngắt kết nối từ %s"
 
-msgid " FTP: Password required for "
+#, fuzzy, c-format
+msgid "FTP: Password required for %s"
 msgstr " FTP: Cần mật khẩu cho "
 
 msgid "ftpfs: sending login name"
@@ -616,23 +621,27 @@ msgstr "ftpfs: lỗi; không có nơi nào để quay lại về"
 msgid "ftpfs: storing file %lu (%lu)"
 msgstr "ftpfs: ghi tập tin %lu (%lu)"
 
+#, fuzzy
 msgid ""
-"~/.netrc file has incorrect mode.\n"
-"Remove password or correct mode."
+"~/.netrc file has incorrect mode\n"
+"Remove password or correct mode"
 msgstr ""
 "Tập tin ~/.netrc có chế độ truy cập/sở hữu không đúng.\n"
 "Hãy xóa mật khẩu hoặc sửa lại chế độ cho đúng."
 
-msgid " MCFS "
+#, fuzzy
+msgid "MCFS"
 msgstr " MCFS "
 
-msgid " The server does not support this version "
+#, fuzzy
+msgid "The server does not support this version"
 msgstr " Máy chủ không hỗ trợ phiên bản này "
 
+#, fuzzy
 msgid ""
-" The remote server is not running on a system port \n"
-" you need a password to log in, but the information may \n"
-" not be safe on the remote side.  Continue? \n"
+"The remote server is not running on a system port\n"
+"you need a password to log in, but the information may\n"
+"not be safe on the remote side.  Continue?\n"
 msgstr ""
 " Máy chủ ở xa không chạy trên một cổng hệ thống. Cần \n"
 " mật khẩu để đăng nhập vào, nhưng điều này có thể \n"
@@ -644,25 +653,28 @@ msgstr "&Có"
 msgid "&No"
 msgstr "&Không"
 
-msgid " MCFS Password required "
+#, fuzzy
+msgid "MCFS Password required"
 msgstr " Yêu cầu mật khẩu MCFS "
 
-msgid " Invalid password "
+#, fuzzy
+msgid "Invalid password"
 msgstr " Mật khẩu không đúng "
 
-#, c-format
-msgid " Cannot locate hostname: %s "
+#, fuzzy, c-format
+msgid "Cannot locate hostname: %s"
 msgstr " Không xác định được tên máy ở xa: %s"
 
-#, c-format
-msgid " Cannot create socket: %s "
+#, fuzzy, c-format
+msgid "Cannot create socket: %s"
 msgstr " Không tạo được socket: %s "
 
-#, c-format
-msgid " Cannot connect to server: %s "
+#, fuzzy, c-format
+msgid "Cannot connect to server: %s"
 msgstr " Không kết nối được tới máy chủ: %s "
 
-msgid " Too many open connections "
+#, fuzzy
+msgid "Too many open connections"
 msgstr " Quá nhiều kết nối mở "
 
 #, c-format
@@ -685,35 +697,34 @@ msgstr ""
 "Cảnh báo: Cờ không đúng %c trong %s:\n"
 "%s\n"
 
-#, c-format
-msgid ""
-" reconnect to %s failed\n"
-" "
+#, fuzzy, c-format
+msgid "reconnect to %s failed"
 msgstr ""
 " kết nối lại tới %s không thành công\n"
 " "
 
-msgid " Authentication failed "
+#, fuzzy
+msgid "Authentication failed"
 msgstr " Xác thực không thành công "
 
-#, c-format
-msgid " Error %s creating directory %s "
+#, fuzzy, c-format
+msgid "Error %s creating directory %s"
 msgstr " Lỗi %s khi tạo thư mục %s "
 
-#, c-format
-msgid " Error %s removing directory %s "
+#, fuzzy, c-format
+msgid "Error %s removing directory %s"
 msgstr " Lỗi %s khi xóa thư mục %s "
 
-#, c-format
-msgid " %s opening remote file %s "
+#, fuzzy, c-format
+msgid "%s opening remote file %s"
 msgstr " %s khi mở tập tin ở xa %s "
 
-#, c-format
-msgid " %s removing remote file %s "
+#, fuzzy, c-format
+msgid "%s removing remote file %s"
 msgstr " %s khi xoá tập tin ở xa %s "
 
-#, c-format
-msgid " %s renaming files\n"
+#, fuzzy, c-format
+msgid "%s renaming files\n"
 msgstr " %s khi đổi tên các tập tin\n"
 
 #, c-format
@@ -730,9 +741,8 @@ msgstr "Tập tin tar không thích hợp"
 msgid "Unexpected EOF on archive file"
 msgstr "Kết thúc tập tin EOF nén không mong đợi"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Hmm,...\n"
 "%s\n"
 "doesn't look like a tar archive."
 msgstr ""
@@ -740,52 +750,57 @@ msgstr ""
 "%s\n"
 "không giống tập tin tar."
 
-msgid " undelfs: error "
+#, fuzzy
+msgid "undelfs: error"
 msgstr " undelfs: lỗi "
 
-msgid " not enough memory "
+#, fuzzy
+msgid "not enough memory"
 msgstr " không đủ bộ nhớ "
 
-msgid " while allocating block buffer "
+#, fuzzy
+msgid "while allocating block buffer"
 msgstr " khi phân phối bộ đệm khối "
 
-#, c-format
-msgid " open_inode_scan: %d "
+#, fuzzy, c-format
+msgid "open_inode_scan: %d"
 msgstr " open_inode_scan: %d "
 
-#, c-format
-msgid " while starting inode scan %d "
+#, fuzzy, c-format
+msgid "while starting inode scan %d"
 msgstr " khi bắt đầu quét chỉ mục nút inode %d "
 
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
 msgstr "undelfs: nạp thông tin về những tập tin bị xóa %d inode"
 
-#, c-format
-msgid " while calling ext2_block_iterate %d "
+#, fuzzy, c-format
+msgid "while calling ext2_block_iterate %d"
 msgstr " khi gọi ext2_block_iterate %d "
 
-msgid " no more memory while reallocating array "
+#, fuzzy
+msgid "no more memory while reallocating array"
 msgstr " không đủ bộ nhớ khi phân phối lại chuỗi "
 
-#, c-format
-msgid " while doing inode scan %d "
+#, fuzzy, c-format
+msgid "while doing inode scan %d"
 msgstr " khi quét chỉ mục nút inode %d "
 
-msgid " Ext2lib error "
+#, fuzzy
+msgid "Ext2lib error"
 msgstr " Lỗi Ext2lib "
 
-#, c-format
-msgid " Cannot open file %s "
+#, fuzzy, c-format
+msgid "Cannot open file %s"
 msgstr " Không mở được tập tin %s "
 
 msgid "undelfs: reading inode bitmap..."
 msgstr "undelfs: đọc sơ đồ bit của nút inode..."
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot load inode bitmap from: \n"
-" %s \n"
+"Cannot load inode bitmap from:\n"
+"%s"
 msgstr ""
 " Không nạp được sơ đồ bit của nút inode từ:\n"
 " %s \n"
@@ -793,23 +808,30 @@ msgstr ""
 msgid "undelfs: reading block bitmap..."
 msgstr "undelfs: đọc sơ đồ bit của khối..."
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot load block bitmap from: \n"
-" %s \n"
+"Cannot load block bitmap from:\n"
+"%s"
 msgstr ""
 "  Không nạp được sơ đồ bit của khối từ:\n"
 " %s \n"
 
-msgid " vfs_info is not fs! "
+#, fuzzy
+msgid "vfs_info is not fs!"
 msgstr " vfs_info không phải là hệ thống tập tin! "
 
-msgid " You have to chdir to extract files first "
+#, fuzzy
+msgid "You have to chdir to extract files first"
 msgstr ""
 " Đầu tiên bạn phải chdir để chuyển tới thư mục chứa tập tin cần giản nén "
 
-msgid " while iterating over blocks "
+#, fuzzy
+msgid "while iterating over blocks"
 msgstr " khi lặp lại khối "
+
+#, fuzzy, c-format
+msgid "Cannot open file \"%s\""
+msgstr " Không mở được tập tin %s "
 
 msgid "Cannot parse:"
 msgstr "Không thể phân tích:"
@@ -860,21 +882,22 @@ msgstr "Chếđộ"
 msgid "%6d of %d"
 msgstr "%6d của %d"
 
-msgid " Chown advanced command "
+#, fuzzy
+msgid "Chown advanced command"
 msgstr " Câu lệnh chown mở rộng"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot chmod \"%s\" \n"
-" %s "
+"Cannot chmod \"%s\"\n"
+"%s"
 msgstr ""
 " Không chmod được \"%s\" \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot chown \"%s\" \n"
-" %s "
+"Cannot chown \"%s\"\n"
+"%s"
 msgstr ""
 " Không thay thế được chủ sở hữu \"%s\" \n"
 " %s "
@@ -948,7 +971,8 @@ msgid ""
 "{FORE} and {BACK} can be omitted, and the default will be used\n"
 "\n"
 "Keywords:\n"
-"   Global:       errors, reverse, gauge, input, viewunderline\n"
+"   Global:       errors, reverse, gauge, viewunderline\n"
+"                 input, inputmark, inputunchanged, commandlinemark\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
@@ -1001,10 +1025,11 @@ msgstr "[cờ] [thư_mục_này] [thư_mục_bảng_còn_lại]\n"
 msgid "Set initial line number for the internal editor"
 msgstr "Đặt số dòng ban đầu cho trình soạn thảo nội bộ"
 
+#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
+"as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
 "Xin hãy gửi bất kỳ báo cáo lỗi bug nào (gồm cả kết quả của lệnh\n"
@@ -1014,6 +1039,12 @@ msgstr ""
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
+msgid "No arguments given to the viewer."
+msgstr ""
+
+msgid "There 2 files are required to diffviewer."
+msgstr ""
+
 #, fuzzy
 msgid "Main options"
 msgstr " Cấu hình bảng "
@@ -1022,25 +1053,30 @@ msgstr " Cấu hình bảng "
 msgid "Terminal options"
 msgstr " Cấu hình khác "
 
-msgid " Background process error "
+#, fuzzy
+msgid "Background process error"
 msgstr " Lỗi của tiến trình nền sau "
 
-msgid " Unknown error in child "
+#, fuzzy
+msgid "Unknown error in child"
 msgstr " Lỗi không rõ trong tiến trình con "
 
-msgid " Child died unexpectedly "
+#, fuzzy
+msgid "Child died unexpectedly"
 msgstr " Tiến trình con bất đắc kỳ tử "
 
-msgid " Background protocol error "
+#, fuzzy
+msgid "Background protocol error"
 msgstr " Lỗi giao thức nền sau "
 
 #, fuzzy
 msgid "Reading failed"
 msgstr "<đọc liên kết không thành công>"
 
+#, fuzzy
 msgid ""
-" Background process sent us a request for more arguments \n"
-" than we can handle. \n"
+"Background process sent us a request for more arguments\n"
+"than we can handle."
 msgstr ""
 " Tiến trình nền sau yêu cầu nhiều tham số hơn, \n"
 " số chúng ta có thể điều khiển. \n"
@@ -1060,7 +1096,8 @@ msgstr "&Người dùng tự xác định:"
 msgid "Listing mode"
 msgstr "Dạng danh sách"
 
-msgid "user &Mini status"
+#, fuzzy
+msgid "User &mini status"
 msgstr "dòng t&Rạng thái nhỏ"
 
 msgid "&OK"
@@ -1125,7 +1162,8 @@ msgstr "7 bit"
 msgid "F&ull 8 bits input"
 msgstr "Đầ&u vào 8 bit đầy đủ"
 
-msgid " Display bits "
+#, fuzzy
+msgid "Display bits"
 msgstr " Ký tự hiển thị "
 
 msgid "Other 8 bit"
@@ -1136,6 +1174,10 @@ msgstr "Bảng mã đầu vào / hiển thị:"
 
 msgid "&Select"
 msgstr "&Lựa chọn"
+
+#, fuzzy
+msgid "Directory tree"
+msgstr "cây thư &Mục"
 
 msgid "Use passive mode over pro&xy"
 msgstr "Sử &dụng chế độ thụ động qua proxy"
@@ -1161,7 +1203,8 @@ msgstr "Mật khẩu ftp nặc danh:"
 msgid "Timeout for freeing VFSs:"
 msgstr "Thời gian chờ giải phóng VFS:"
 
-msgid " Virtual File System Setting "
+#, fuzzy
+msgid "Virtual File System Setting"
 msgstr " Thiết lập hệ thống tập tin ảo "
 
 msgid "cd"
@@ -1179,7 +1222,8 @@ msgstr "Tên tập tin đã có (liên kết mềm sẽ chỉ đến):"
 msgid "Symbolic link"
 msgstr "Liên kết mềm"
 
-msgid "Running "
+#, fuzzy
+msgid "Running"
 msgstr "Đang chạy "
 
 msgid "Stopped"
@@ -1283,14 +1327,14 @@ msgstr "để di chuyển giữa các tùy chọn"
 msgid "and T or INS to mark"
 msgstr "và T hoặc INS để đánh dấu"
 
-msgid " Permission "
-msgstr " Quyền truy cập "
-
-msgid " File "
-msgstr " Tập tin "
-
 msgid "Chmod command"
 msgstr " Câu lệnh chmod "
+
+msgid "File"
+msgstr "Tập tin"
+
+msgid "Permission"
+msgstr "Quyền hạn"
 
 msgid "Set &users"
 msgstr "Đặt &người dùng"
@@ -1298,22 +1342,11 @@ msgstr "Đặt &người dùng"
 msgid "Set &groups"
 msgstr "Đặt &nhóm"
 
-msgid " Name "
-msgstr " Tên "
+msgid "Size"
+msgstr "Kích cỡ"
 
-msgid " Owner name "
-msgstr " Tên chủ sở hữu "
-
-msgid " Group name "
-msgstr " Tên nhóm "
-
-msgid " Size "
-msgstr " Kích thước "
-
-msgid " User name "
-msgstr " Tên người dùng "
-
-msgid " Chown command "
+#, fuzzy
+msgid "Chown command"
 msgstr " Câu lệnh chown "
 
 msgid "<Unknown user>"
@@ -1322,8 +1355,9 @@ msgstr "<không rõ người dùng>"
 msgid "<Unknown group>"
 msgstr "<không rõ nhóm>"
 
-msgid " Confirmation "
-msgstr " Hỏi xác nhận "
+#, fuzzy
+msgid "User name"
+msgstr " Tên người dùng "
 
 msgid "Files tagged, want to cd?"
 msgstr "Đã đánh dấu các tập tin, chuyển thư mục?"
@@ -1331,28 +1365,35 @@ msgstr "Đã đánh dấu các tập tin, chuyển thư mục?"
 msgid "Cannot change directory"
 msgstr "Không thay đổi được thư mục"
 
-msgid " View file "
+#, fuzzy
+msgid "View file"
 msgstr " Xem tập tin "
 
-msgid " Filename:"
+#, fuzzy
+msgid "Filename:"
 msgstr " Tên tập tin:"
 
-msgid " Filtered view "
+#, fuzzy
+msgid "Filtered view"
 msgstr " Lọc rồi xem "
 
-msgid " Filter command and arguments:"
+#, fuzzy
+msgid "Filter command and arguments:"
 msgstr " Lệnh lọc và tham số:"
 
 msgid "Create a new Directory"
 msgstr "Tạo thư mục mới"
 
-msgid " Enter directory name:"
+#, fuzzy
+msgid "Enter directory name:"
 msgstr " Hãy nhập tên thư mục:"
 
-msgid " Filter "
+#, fuzzy
+msgid "Filter"
 msgstr " Đầu lọc "
 
-msgid " Set expression for filtering filenames"
+#, fuzzy
+msgid "Set expression for filtering filenames"
 msgstr " Đặt biểu thức để lọc tên tập tin (nhấn F1 để xem trợ giúp)"
 
 msgid "&Using shell patterns"
@@ -1366,16 +1407,19 @@ msgstr "tính đến kiể&U chữ"
 msgid "&Files only"
 msgstr "&Chỉ theo kích thước"
 
-msgid " Select "
-msgstr " Chọn "
+#, fuzzy
+msgid "Select"
+msgstr "&Lựa chọn"
 
-msgid " Unselect "
+#, fuzzy
+msgid "Unselect"
 msgstr " Bỏ chọn "
 
 msgid "Extension file edit"
 msgstr "Soạn thảo phần mở rộng tập tin"
 
-msgid " Which extension file you want to edit? "
+#, fuzzy
+msgid "Which extension file you want to edit?"
 msgstr " Soạn thảo phần mở rộng tập tin nào? "
 
 msgid "&User"
@@ -1384,10 +1428,12 @@ msgstr "&Người dùng"
 msgid "&System Wide"
 msgstr "&Hệ thống"
 
-msgid " Menu edit "
+#, fuzzy
+msgid "Menu edit"
 msgstr " Soạn thảo tập tin trình đơn "
 
-msgid " Which menu file do you want to edit? "
+#, fuzzy
+msgid "Which menu file do you want to edit?"
 msgstr " Soạn thảo tập tin trình đơn nào? "
 
 msgid "&Local"
@@ -1397,13 +1443,15 @@ msgid "Highlighting groups file edit"
 msgstr ""
 
 #, fuzzy
-msgid " Which highlighting file you want to edit? "
+msgid "Which highlighting file you want to edit?"
 msgstr " Soạn thảo phần mở rộng tập tin nào? "
 
-msgid " Compare directories "
+#, fuzzy
+msgid "Compare directories"
 msgstr " So sánh thư mục "
 
-msgid " Select compare method: "
+#, fuzzy
+msgid "Select compare method:"
 msgstr " Chọn phương pháp so sánh: "
 
 msgid "&Quick"
@@ -1415,12 +1463,16 @@ msgstr "&Chỉ theo kích thước"
 msgid "&Thorough"
 msgstr "&Theo từng byte"
 
-msgid " Both panels should be in the listing mode to use this command "
+#, fuzzy
+msgid ""
+"Both panels should be in the listing mode\n"
+"to use this command"
 msgstr "Để thực hiện câu lệnh này cả hai bảng phải ở trong chế độ danh sách "
 
+#, fuzzy
 msgid ""
-" Not an xterm or Linux console; \n"
-" the panels cannot be toggled. "
+"Not an xterm or Linux console;\n"
+"the panels cannot be toggled."
 msgstr ""
 " Đây không phải là xterm hay kênh giao tác Linux; \n"
 " bảng sẽ không thể bị tắt. "
@@ -1429,84 +1481,96 @@ msgstr ""
 msgid "Link %s to:"
 msgstr "Tạo liên kết tới %s:"
 
-msgid " Link "
-msgstr " Liên kết "
+#, fuzzy
+msgid "Link"
+msgstr "&Liên kết"
 
-#, c-format
-msgid " link: %s "
+#, fuzzy, c-format
+msgid "link: %s"
 msgstr " liên kết: %s "
 
-#, c-format
-msgid " symlink: %s "
+#, fuzzy, c-format
+msgid "symlink: %s"
 msgstr " liên kết mềm: %s "
 
-#, c-format
-msgid " Symlink `%s' points to: "
+#, fuzzy, c-format
+msgid "Symlink `%s' points to:"
 msgstr " Liên kết mềm %s chỉ tới: "
 
-msgid " Edit symlink "
+#, fuzzy
+msgid "Edit symlink"
 msgstr " Sửa liên kết mềm "
 
-#, c-format
-msgid " edit symlink, unable to remove %s: %s "
+#, fuzzy, c-format
+msgid "edit symlink, unable to remove %s: %s"
 msgstr " sửa liên kết mềm, không thể xóa %s: %s "
 
-#, c-format
-msgid " edit symlink: %s "
+#, fuzzy, c-format
+msgid "edit symlink: %s"
 msgstr " sửa liên kết mềm: %s "
 
 #, c-format
 msgid "`%s' is not a symbolic link"
 msgstr "`%s' không phải là một liên kết mềm"
 
-#, c-format
-msgid " Cannot chdir to %s "
+#, fuzzy, c-format
+msgid "Cannot chdir to %s"
 msgstr " Không thể chdir vào %s "
 
-msgid " Enter machine name (F1 for details): "
+#, fuzzy
+msgid "Enter machine name (F1 for details):"
 msgstr " Hãy nhập tên máy (nhấn F1 để biết chi tiết): "
 
-msgid " Link to a remote machine "
+#, fuzzy
+msgid "Link to a remote machine"
 msgstr " Kiết nối tới máy ở xa "
 
-msgid " FTP to machine "
+#, fuzzy
+msgid "FTP to machine"
 msgstr " FTP tới máy ở xa "
 
-msgid " Shell link to machine "
+#, fuzzy
+msgid "Shell link to machine"
 msgstr " Kết nối shell tới máy ở xa"
 
-msgid " SMB link to machine "
+#, fuzzy
+msgid "SMB link to machine"
 msgstr " Kết nối SMB tới máy ở xa"
 
-msgid " Undelete files on an ext2 file system "
+#, fuzzy
+msgid "Undelete files on an ext2 file system"
 msgstr " Phục hồi tập tin trên hệ thống tập tin ext2 sau khi xóa "
 
+#, fuzzy
 msgid ""
-" Enter device (without /dev/) to undelete\n"
-"   files on: (F1 for details)"
+"Enter device (without /dev/) to undelete\n"
+"files on: (F1 for details)"
 msgstr ""
 " Nhập tên thiết bị (không có /dev/), để\n"
 " phục hồi tập tin của nó: (nhấn F1 để biết chi tiết)"
 
-msgid " Setup "
+#, fuzzy
+msgid "Setup"
 msgstr " Cấu hình "
 
 #, fuzzy, c-format
-msgid " Setup saved to ~/%s"
+msgid "Setup saved to ~/%s"
 msgstr " Tham số ghi nhớ trong ~/"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot chdir to \"%s\" \n"
-" %s "
+"Cannot chdir to \"%s\"\n"
+"%s"
 msgstr ""
 " Không chdir được tới \"%s\" \n"
 " %s "
 
-msgid " Cannot execute commands on non-local filesystems"
+#, fuzzy
+msgid "Cannot execute commands on non-local filesystems"
 msgstr " Chỉ có thể thực hiện câu lệnh trên hệ thống tập tin nội bộ"
 
-msgid " The shell is already running a command "
+#, fuzzy
+msgid "The shell is already running a command"
 msgstr " shell đang chạy một câu lệnh"
 
 msgid "&Dismiss"
@@ -1522,39 +1586,42 @@ msgstr "&Chỉ những từ đầy đủ"
 msgid "&Backwards"
 msgstr "&Tìm ngược lại"
 
-msgid "case &Sensitive"
-msgstr "có tính &Kiểu chữ"
+#, fuzzy
+msgid "Case &sensitive"
+msgstr "tính đến kiể&U chữ"
 
-msgid " Enter search string:"
+#, fuzzy
+msgid "Enter search string:"
 msgstr " Nhập chuỗi tìm kiếm:"
 
 msgid "Search"
 msgstr "Tìm"
 
-msgid " Search is disabled "
-msgstr ""
+#, fuzzy
+msgid "Search is disabled"
+msgstr "Tìm"
 
 #, fuzzy, c-format
 msgid ""
-" Cannot create temporary diff file \n"
-" %s "
+"Cannot create temporary diff file\n"
+"%s"
 msgstr ""
 " Không tạo được tập tin câu lệnh tạm thời\n"
 " %s "
 
 #, fuzzy, c-format
 msgid ""
-" Cannot create backup file \n"
-" %s%s \n"
-" %s "
+"Cannot create backup file\n"
+"%s%s\n"
+"%s"
 msgstr ""
 " Không tạo được tập tin đích \"%s\" \n"
 " %s "
 
 #, fuzzy, c-format
 msgid ""
-" Cannot create temporary merge file \n"
-" %s "
+"Cannot create temporary merge file\n"
+"%s"
 msgstr ""
 " Không tạo được tập tin câu lệnh tạm thời\n"
 " %s "
@@ -1600,10 +1667,20 @@ msgstr " Tùy chọn "
 msgid "Edit"
 msgstr "Soạn  "
 
-msgid " Edit is disabled "
-msgstr ""
+#, fuzzy
+msgid "Edit is disabled"
+msgstr "sửa tập tin cú &Pháp"
 
-msgid " Enter line: "
+#, fuzzy
+msgid "Goto line (left)"
+msgstr "Chuyển tới dòng "
+
+#, fuzzy
+msgid "Goto line (right)"
+msgstr "Chuyển tới dòng "
+
+#, fuzzy
+msgid "Enter line:"
 msgstr "Hãy nhập số thứ tự dòng: "
 
 msgid "ButtonBar|Help"
@@ -1632,7 +1709,8 @@ msgstr "Thoát"
 msgid "Quit"
 msgstr "Thoát"
 
-msgid " File was modified, Save with exit? "
+#, fuzzy
+msgid "File was modified, Save with exit?"
 msgstr "Tập tin đã thay đổi, ghi nhớ khi thoát? "
 
 msgid "Two files are needed to compare"
@@ -1641,7 +1719,8 @@ msgstr ""
 msgid "Cannot read directory contents"
 msgstr "Không đọc được nội dung thư mục"
 
-msgid " Choose syntax highlighting "
+#, fuzzy
+msgid "Choose syntax highlighting"
 msgstr "Chọn chiếu sáng cú pháp "
 
 msgid "< Auto >"
@@ -1650,38 +1729,39 @@ msgstr "< Tự động >"
 msgid "< Reload Current Syntax >"
 msgstr "< Nạp lại cú pháp hiện thời >"
 
-#, c-format
-msgid " Cannot open %s for reading "
+#, fuzzy, c-format
+msgid "Cannot open %s for reading"
 msgstr " Không thể mở %s để đọc "
 
 msgid "Error"
 msgstr "Lỗi"
 
 #, fuzzy, c-format
-msgid " Error reading %s "
+msgid "Error reading %s"
 msgstr "Lỗi đọc script:"
 
-#, c-format
-msgid " Error reading from pipe: %s "
+#, fuzzy, c-format
+msgid "Error reading from pipe: %s"
 msgstr " Lỗi đọc từ đường ống (pipe): %s "
 
-#, c-format
-msgid " Cannot open pipe for reading: %s "
+#, fuzzy, c-format
+msgid "Cannot open pipe for reading: %s"
 msgstr " Không thể mở đường ống để đọc: %s "
 
-#, c-format
-msgid " Cannot get size/permissions for %s "
+#, fuzzy, c-format
+msgid "Cannot get size/permissions for %s"
 msgstr " Không lấy được kích thước/quyền hạn cho %s "
 
-#, c-format
-msgid " %s is not a regular file "
+#, fuzzy, c-format
+msgid "\"%s\" is not a regular file"
 msgstr " %s phải tập tin thông thường "
 
-#, c-format
-msgid " File %s is too large "
+#, fuzzy, c-format
+msgid "File \"%s\" is too large"
 msgstr " Tập tin %s quá lớn "
 
-msgid " About "
+#, fuzzy
+msgid "About"
 msgstr " Về chương trình "
 
 msgid ""
@@ -1704,20 +1784,22 @@ msgstr ""
 msgid "Macro recursion is too deep"
 msgstr "Đệ qui của macro quá sâu"
 
-msgid " File has hard-links. Detach before saving? "
+msgid "File has hard-links. Detach before saving?"
 msgstr ""
 
 msgid "The file has been modified in the meantime. Save anyway?"
 msgstr ""
 
-msgid " Error writing to pipe: "
+#, fuzzy, c-format
+msgid "Error writing to pipe: %s"
 msgstr " Lỗi ghi vào đường ống: "
 
-msgid " Cannot open pipe for writing: "
+#, fuzzy, c-format
+msgid "Cannot open pipe for writing: %s"
 msgstr " Không thể mở đường ống để ghi: "
 
 #, fuzzy, c-format
-msgid " Cannot open file for writing: %s "
+msgid "Cannot open file for writing: %s"
 msgstr " Không thể mở đường ống để ghi: "
 
 #, fuzzy
@@ -1734,7 +1816,8 @@ msgstr ""
 msgid "Check &POSIX new line"
 msgstr ""
 
-msgid " Edit Save Mode "
+#, fuzzy
+msgid "Edit Save Mode"
 msgstr " Chế độ ghi nhớ "
 
 msgid "The file you are saving is not finished with a newline"
@@ -1758,57 +1841,76 @@ msgstr ""
 msgid "Change line breaks to:"
 msgstr ""
 
-msgid " Enter file name: "
+#, fuzzy
+msgid "Enter file name:"
 msgstr " Hãy nhập tên tập tin: "
 
-msgid " Save As "
+#, fuzzy
+msgid "Save As"
 msgstr " Ghi như "
 
-msgid " A file already exists with this name. "
+#, fuzzy
+msgid "A file already exists with this name"
 msgstr " Tập tin có tên như vậy đã tồn tại. "
 
 msgid "&Overwrite"
 msgstr "&Ghi chèn"
 
-msgid " Cannot save file. "
+#, fuzzy
+msgid "Save as"
+msgstr "&Ghi nhớ cấu hình..."
+
+#, fuzzy
+msgid "Cannot save file"
 msgstr " Không thể ghi nhớ tập tin. "
 
-msgid " Delete macro "
+#, fuzzy
+msgid "Delete macro"
 msgstr " Xóa macro "
 
-msgid " Cannot open temp file "
+#, fuzzy
+msgid "Cannot open temp file"
 msgstr " Không thể mở tập tin tạm thời "
 
-msgid " Cannot open macro file "
+#, fuzzy
+msgid "Cannot open macro file"
 msgstr " Không thể mở tập tin chứa các macro "
 
-msgid " Cannot overwrite macro file "
+#, fuzzy
+msgid "Cannot overwrite macro file"
 msgstr " Không thể ghi chèn lên tập tin chứa các macro "
 
-msgid " Save macro "
+#, fuzzy
+msgid "Save macro"
 msgstr " Ghi nhớ macro "
 
-msgid " Press the macro's new hotkey: "
+#, fuzzy
+msgid "Press the macro's new hotkey:"
 msgstr " Hãy nhấn phím tắt mới của macro: "
 
-msgid " Press macro hotkey: "
+#, fuzzy
+msgid "Press macro hotkey:"
 msgstr " Hãy nhấn phím tắt của macro: "
 
-msgid " Load macro "
+#, fuzzy
+msgid "Load macro"
 msgstr " Nạp macro "
 
-msgid " Confirm save file? : "
+#, fuzzy, c-format
+msgid "Confirm save file: \"%s\""
 msgstr " Phê chuẩn việc ghi nhớ tập tin?: "
 
-msgid " Save file "
+#, fuzzy
+msgid "Save file"
 msgstr " Ghi nhớ tập tin "
 
 msgid "&Save"
 msgstr "Ghi nhớ &+"
 
+#, fuzzy
 msgid ""
-" Current text was modified without a file save. \n"
-" Continue discards these changes. "
+"Current text was modified without a file save.\n"
+"Continue discards these changes"
 msgstr ""
 " Văn bản hiện thời đã thay đổi và chưa được ghi nhớ. \n"
 " Tiếp tục thao tác sẽ làm mất những thay đổi này. "
@@ -1816,76 +1918,92 @@ msgstr ""
 msgid "Syntax file edit"
 msgstr "Soạn thảo tập tin cú pháp"
 
-msgid " Which syntax file you want to edit? "
+#, fuzzy
+msgid "Which syntax file you want to edit?"
 msgstr " Soạn thảo tập tin cú pháp nào? "
 
-msgid " Load "
+#, fuzzy
+msgid "Load"
 msgstr " Nạp "
 
-msgid " Block is large, you may not be able to undo this action. "
+#, fuzzy
+msgid "Block is large, you may not be able to undo this action"
 msgstr " Khối quá lớn, có thể bạn sẽ không hủy bỏ được bước này. "
 
 #, fuzzy
 msgid "Replace"
 msgstr "&Thay thế"
 
-msgid " Replace "
-msgstr " Thay thế "
-
-#, c-format
-msgid " %ld replacements made. "
+#, fuzzy, c-format
+msgid "%ld replacements made"
 msgstr " %ld thay thế được thực hiện. "
+
+#, fuzzy
+msgid "File was modified, save with exit?"
+msgstr "Tập tin đã thay đổi, ghi nhớ khi thoát? "
 
 msgid "&Cancel quit"
 msgstr "&Dừng thoát"
 
-msgid " Error "
-msgstr " Lỗi "
-
-msgid " This function is not implemented. "
+#, fuzzy
+msgid "This function is not implemented"
 msgstr " Tính năng này chưa được phát triển. "
 
-msgid " Copy to clipboard "
+#, fuzzy
+msgid "Copy to clipboard"
 msgstr "Sao chép vào bộ đệm "
 
-msgid " Unable to save to file. "
+#, fuzzy
+msgid "Unable to save to file"
 msgstr "Không ghi nhớ được tập tin. "
 
-msgid " Cut to clipboard "
+#, fuzzy
+msgid "Cut to clipboard"
 msgstr "Cắt vào bộ đệm "
 
-msgid " Goto line "
+#, fuzzy
+msgid "Goto line"
 msgstr "Chuyển tới dòng "
 
-msgid " Save Block "
+#, fuzzy
+msgid "Save block"
 msgstr "Ghi nhớ khối "
 
-msgid " Insert File "
-msgstr "Chèn tập tin "
+#, fuzzy
+msgid "Insert file"
+msgstr "&Chèn tập tin...         F15"
 
-msgid " Cannot insert file. "
+#, fuzzy
+msgid "Cannot insert file"
 msgstr "Không chèn được tập tin. "
 
-msgid " Sort block "
+#, fuzzy
+msgid "Sort block"
 msgstr "Sắp xếp khối "
 
-msgid " You must first highlight a block of text. "
+#, fuzzy
+msgid "You must first highlight a block of text"
 msgstr "Đầu tiên bạn phải chọn một khối văn bản. "
 
-msgid " Run Sort "
+#, fuzzy
+msgid "Run sort"
 msgstr "Thực hiện sắp xếp "
 
-msgid " Enter sort options (see manpage) separated by whitespace: "
+#, fuzzy
+msgid "Enter sort options (see manpage) separated by whitespace:"
 msgstr ""
 "Nhập tùy chọn sắp xếp (xem trang man), phân cách nhau bởi khoảng trắng: "
 
-msgid " Sort "
+#, fuzzy
+msgid "Sort"
 msgstr "Sắp xếp "
 
-msgid " Cannot execute sort command "
+#, fuzzy
+msgid "Cannot execute sort command"
 msgstr "Không thể thực hiện câu lệnh sort "
 
-msgid " Sort returned non-zero: "
+#, fuzzy, c-format
+msgid "Sort returned non-zero: %s"
 msgstr "Sắp xếp trả lại giá trị khác không: "
 
 msgid "Paste output of external command"
@@ -1919,35 +2037,52 @@ msgstr "Xử lý khối"
 msgid "Error calling program"
 msgstr "Lỗi đóng script:"
 
-msgid " Copies to"
+#, fuzzy
+msgid "Copies to"
 msgstr " Sao chép tới"
 
-msgid " Subject"
+#, fuzzy
+msgid "Subject"
 msgstr " Tên thư"
 
-msgid " To"
+#, fuzzy
+msgid "To"
 msgstr " Người nhận"
 
-msgid " mail -s <subject> -c <cc> <to>"
+#, fuzzy
+msgid "mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <Tên thư> -c <cc> <Người nhận>"
 
-msgid " Mail "
+#, fuzzy
+msgid "Mail"
 msgstr " Thư "
 
-msgid " Insert Literal "
-msgstr " Chèn văn bản thuần túy "
+#, fuzzy
+msgid "Insert literal"
+msgstr "Chèn &văn bản thuần túy...       C-q"
 
-msgid " Press any key: "
+#, fuzzy
+msgid "Press any key:"
 msgstr " Nhấn phím bất kỳ: "
 
-msgid " Execute Macro "
-msgstr "Thực hiện Macro "
+#, fuzzy
+msgid "Execute macro"
+msgstr "Chạy &macro...              C-a, KEY"
+
+#, fuzzy
+msgid ""
+"Current text was modified without a file save\n"
+"Continue discards these changes"
+msgstr ""
+" Văn bản hiện thời đã thay đổi và chưa được ghi nhớ. \n"
+" Tiếp tục thao tác sẽ làm mất những thay đổi này. "
 
 #, fuzzy
 msgid "In se&lection"
 msgstr "Chọn ngược lạ&I        M-*"
 
-msgid " Enter replacement string:"
+#, fuzzy
+msgid "Enter replacement string:"
 msgstr " Nhập chuỗi thay thế:"
 
 #, fuzzy
@@ -1956,6 +2091,14 @@ msgstr "Tìm tập tin"
 
 msgid "Cancel"
 msgstr "Hủy bỏ"
+
+#, fuzzy
+msgid ""
+"Current text was modified without a file save.\n"
+"Continue discards these changes."
+msgstr ""
+" Văn bản hiện thời đã thay đổi và chưa được ghi nhớ. \n"
+" Tiếp tục thao tác sẽ làm mất những thay đổi này. "
 
 msgid "&Skip"
 msgstr "&Bỏ qua"
@@ -1966,15 +2109,17 @@ msgstr "&Tất cả"
 msgid "&Replace"
 msgstr "&Thay thế"
 
-msgid " Replace with: "
+#, fuzzy
+msgid "Replace with:"
 msgstr " Thay thế bằng: "
 
-msgid " Confirm replace "
+#, fuzzy
+msgid "Confirm replace"
 msgstr " Phê chuẩn thay thế "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"File \"%s\" is already being edited\n"
+"File \"%s\" is already being edited.\n"
 "User: %s\n"
 "Process ID: %d"
 msgstr ""
@@ -2180,7 +2325,8 @@ msgstr "Dán &kết quả của lệnh...         M-u"
 msgid "&External formatter"
 msgstr "T&rình định dạng ngoài           F19"
 
-msgid "&General...  "
+#, fuzzy
+msgid "&General..."
 msgstr "Ch&ung...         "
 
 #, fuzzy
@@ -2239,7 +2385,8 @@ msgstr "Định &dạng đoạn văn động"
 msgid "Type writer wrap"
 msgstr "Tự độ&ng chuyển dòng"
 
-msgid "Word wrap line length: "
+#, fuzzy
+msgid "Word wrap line length:"
 msgstr "Vị trí chuyển dòng: "
 
 msgid "Cursor beyond end of line"
@@ -2267,7 +2414,8 @@ msgstr "&Hỏi lại trước khi ghi nhớ"
 msgid "&Return does autoindent"
 msgstr "&Enter tự động thụt dòng"
 
-msgid "Tab spacing: "
+#, fuzzy
+msgid "Tab spacing:"
 msgstr "Độ rộng tab: "
 
 msgid "Fill tabs with &spaces"
@@ -2282,7 +2430,8 @@ msgstr "&Tạo một nửa tab"
 msgid "Wrap mode"
 msgstr "Chế độ chuyển dòng"
 
-msgid " Editor options "
+#, fuzzy
+msgid "Editor options"
 msgstr " Cấu hình trình soạn thảo "
 
 #, fuzzy
@@ -2309,26 +2458,28 @@ msgstr "Trợ giúp"
 msgid "ButtonBar|PullDn"
 msgstr "Trợ giúp"
 
-msgid " Load syntax file "
+#, fuzzy
+msgid "Load syntax file"
 msgstr " Nạp tập tin cú pháp "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot open file %s \n"
-" %s "
+"Cannot open file %s\n"
+"%s"
 msgstr ""
 " Không mở được tập tin %s \n"
 " %s "
 
-#, c-format
-msgid " Error in file %s on line %d "
+#, fuzzy, c-format
+msgid "Error in file %s on line %d"
 msgstr " Lỗi trong tập tin %s trên dòng %d "
 
+#, fuzzy
 msgid ""
-" The Commander can't change to the directory that \n"
-" the subshell claims you are in.  Perhaps you have \n"
-" deleted your working directory, or given yourself \n"
-" extra access permissions with the \"su\" command? "
+"The Commander can't change to the directory that\n"
+"the subshell claims you are in. Perhaps you have\n"
+"deleted your working directory, or given yourself\n"
+"extra access permissions with the \"su\" command?"
 msgstr ""
 " MC không thể chuyển vào thư mục, mà tiến trình shell \n"
 " con thông báo. Rất có thể, bạn đã xóa thư mục làm việc \n"
@@ -2339,41 +2490,42 @@ msgstr ""
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Hãy gõ \"exit\" để quay trở lại Midnight Commander"
 
-#, c-format
-msgid " Cannot fetch a local copy of %s "
+#, fuzzy, c-format
+msgid "Cannot fetch a local copy of %s"
 msgstr " Không thể lấy được bản sao nội bộ của %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot create temporary command file \n"
-" %s "
+"Cannot create temporary command file\n"
+"%s"
 msgstr ""
 " Không tạo được tập tin câu lệnh tạm thời\n"
 " %s "
 
-msgid " Parameter "
+#, fuzzy
+msgid "Parameter"
 msgstr " Tham số "
 
 #, c-format
 msgid " %s%s file error"
 msgstr " %s%s lỗi tập tin "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The format of the %smc.ext file has changed with version 3.0.  It seems that "
-"the installation failed.  Please fetch a fresh copy from the Midnight "
+"The format of the %smc.ext file has changed with version 3.0. It seems that "
+"the installation failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
 "Định dạng của tập tin %smc.ext đã thay đổi từ phiên bản 3.0. Rất có thể có "
 "sự cố khi cài đặt. Xin hãy lấy bản sao mới nhất từ gói Midnight Commander."
 
-#, c-format
-msgid " ~/%s file error "
+#, fuzzy, c-format
+msgid "~/%s file error"
 msgstr " ~/%s lỗi tập tin "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The format of the ~/%s file has changed with version 3.0.  You may either "
+"The format of the ~/%s file has changed with version 3.0. You may either "
 "want to copy it from %smc.ext or use that file as an example of how to write "
 "it."
 msgstr ""
@@ -2390,31 +2542,33 @@ msgstr ""
 msgid "DialogTitle|Delete"
 msgstr ""
 
-msgid " Cannot make the hardlink "
+#, fuzzy
+msgid "Cannot make the hardlink"
 msgstr " Không thể tạo liên kết cứng "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot read source link \"%s\" \n"
-" %s "
+"Cannot read source link \"%s\"\n"
+"%s"
 msgstr ""
 " Không thể đọc liên kết nguồn \"%s\" \n"
 " %s "
 
+#, fuzzy
 msgid ""
-" Cannot make stable symlinks across non-local filesystems: \n"
+"Cannot make stable symlinks acrossnon-local filesystems:\n"
 "\n"
-" Option Stable Symlinks will be disabled "
+"Option Stable Symlinks will be disabled"
 msgstr ""
 " Không tạo được liên kết mềm bền vững giữa các hệ thống tập tin không phải "
 "nội bộ:\n"
 "\n"
 " Tùy chọn \"Liên kết mềm Bền vững\" sẽ bị tắt "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot create target symlink \"%s\" \n"
-" %s "
+"Cannot create target symlink \"%s\"\n"
+"%s"
 msgstr ""
 " Khônt tạo được liên kết mềm đích \"%s\" \n"
 " %s "
@@ -2422,101 +2576,102 @@ msgstr ""
 msgid "&Abort"
 msgstr "&Dừng"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot overwrite directory \"%s\" \n"
-" %s "
+"Cannot overwrite directory\"%s\"\n"
+"%s"
 msgstr ""
 " Không thể ghi chèn lên thư mục \"%s\" \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot stat source file \"%s\" \n"
-" %s "
+"Cannot stat source file \"%s\"\n"
+"%s"
 msgstr ""
 " Không lấy được tính chất (stat) của tập tin nguồn \"%s\" \n"
 " %s "
 
 #, fuzzy, c-format
 msgid ""
-" `%s' \n"
-" and \n"
-" `%s' \n"
-" are the same file "
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same file"
 msgstr " `%s' và `%s' là một tập tin "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot create special file \"%s\" \n"
-" %s "
+"Cannot create special file \"%s\"\n"
+"%s"
 msgstr ""
 " Không tạo được tập tin đặc biệt \"%s\" \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot chown target file \"%s\" \n"
-" %s "
+"Cannot chown target file \"%s\"\n"
+"%s"
 msgstr ""
 " Không thay đổi được chủ sở hữu của tập tin đích đến \"%s\" \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot chmod target file \"%s\" \n"
-" %s "
+"Cannot chmod target file \"%s\"\n"
+"%s"
 msgstr ""
 " Không thay đổi được quyền hạn (chmod) của tập tin đích đến \"%s\" \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot open source file \"%s\" \n"
-" %s "
+"Cannot open source file \"%s\"\n"
+"%s"
 msgstr ""
 " Không mở được tập tin nguồn \"%s\" \n"
 " %s "
 
-msgid " Reget failed, about to overwrite file "
+#, fuzzy
+msgid "Reget failed, about to overwrite file"
 msgstr " Lấy phần còn lại của tập tin không thành công, tập tin sẽ bị ghi đè "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot fstat source file \"%s\" \n"
-" %s "
+"Cannot fstat source file \"%s\"\n"
+"%s"
 msgstr ""
 " Không lấy được tính chất (fstat) tập tin nguồn \"%s\" \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot create target file \"%s\" \n"
-" %s "
+"Cannot create target file \"%s\"\n"
+"%s"
 msgstr ""
 " Không tạo được tập tin đích \"%s\" \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot fstat target file \"%s\" \n"
-" %s "
+"Cannot fstat target file \"%s\"\n"
+"%s"
 msgstr ""
 " Không lấy được tính chất (fstat) tập tin đích \"%s\" \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot read source file \"%s\" \n"
-" %s "
+"Cannot read source file\"%s\"\n"
+"%s"
 msgstr ""
 " Không đọc được tập tin nguồn \"%s\" \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot write target file \"%s\" \n"
-" %s "
+"Cannot write target file \"%s\"\n"
+"%s"
 msgstr ""
 " Không ghi nhớ được tập tin nguồn \"%s\" \n"
 " %s "
@@ -2524,18 +2679,18 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(bị nhốt)"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot close source file \"%s\" \n"
-" %s "
+"Cannot close source file \"%s\"\n"
+"%s"
 msgstr ""
 " Không đóng được tập tin nguồn \"%s\" \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot close target file \"%s\" \n"
-" %s "
+"Cannot close target file \"%s\"\n"
+"%s"
 msgstr ""
 " Không đóng được tập tin đính \"%s\" \n"
 " %s "
@@ -2546,118 +2701,124 @@ msgstr "Nhận được tập tin không đầy đủ. Giữ tập tin?"
 msgid "&Keep"
 msgstr "&Giữ"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot stat source directory \"%s\" \n"
-" %s "
+"Cannot stat source directory \"%s\"\n"
+"%s"
 msgstr ""
 " Không lấy được thông tin (stat) thư mục nguồn \"%s\" \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Source \"%s\" is not a directory \n"
-" %s "
+"Source \"%s\" is not a directory\n"
+"%s"
 msgstr ""
 " Nguồn \"%s\" không phải là một thư mục \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot copy cyclic symbolic link \n"
-" `%s' "
+"Cannot copy cyclic symbolic link\n"
+"\"%s\""
 msgstr ""
 " Không sao chép được liên kết mềm vòng lặp \n"
 " `%s' "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Destination \"%s\" must be a directory \n"
-" %s "
+"Destination \"%s\" must be a directory\n"
+"%s"
 msgstr ""
 " Nơi đến \"%s\" phải là một thư mục \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot create target directory \"%s\" \n"
-" %s "
+"Cannot create target directory \"%s\"\n"
+"%s"
 msgstr ""
 " Không tạo được thư mục đích đến \"%s\" \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot chown target directory \"%s\" \n"
-" %s "
+"Cannot chown target directory \"%s\"\n"
+"%s"
 msgstr ""
 " Không thay đổi được chủ sở hữu (chown) của thư mục đích đến \"%s\" \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot stat file \"%s\" \n"
-" %s "
+"Cannot stat file \"%s\"\n"
+"%s"
 msgstr ""
 " Không nhận được tính chất (stat) của tập tin \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " Cannot overwrite directory `%s' "
-msgstr " Không thể ghi đè lên thư mục `%s' "
+#, fuzzy, c-format
+msgid "Cannot overwrite directory \"%s\""
+msgstr " Không thể ghi đè lên thư mục \"%s\" %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot move file \"%s\" to \"%s\" \n"
-" %s "
+"Cannot move file \"%s\" to \"%s\"\n"
+"%s"
 msgstr ""
 " Không thể di chuyển tập tin \"%s\" vào \"%s\" \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot remove file \"%s\" \n"
-" %s "
+"Cannot remove file \"%s\"\n"
+"%s"
 msgstr ""
 " Không thể xóa tập tin \"%s\" \n"
 " %s "
 
 #, fuzzy, c-format
 msgid ""
-" `%s' \n"
-" and \n"
-" `%s' \n"
-" are the same directory "
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same directory"
 msgstr " %s và %s - là một thư mục "
 
-#, c-format
-msgid " Cannot overwrite directory \"%s\" %s "
-msgstr " Không thể ghi đè lên thư mục \"%s\" %s "
+#, fuzzy, c-format
+msgid ""
+"Cannot overwrite directory \"%s\"\n"
+"%s"
+msgstr ""
+" Không thể ghi chèn lên thư mục \"%s\" \n"
+" %s "
 
-#, c-format
-msgid " Cannot overwrite file \"%s\" %s "
+#, fuzzy, c-format
+msgid ""
+"Cannot overwrite file \"%s\"\n"
+"%s"
 msgstr " Không thể ghi đè tập tin \"%s\" %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot move directory \"%s\" to \"%s\" \n"
-" %s "
+"Cannot move directory \"%s\" to \"%s\"\n"
+"%s"
 msgstr ""
 " Không thể di chuyển thư mục \"%s\" vào \"%s\" \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot delete file \"%s\" \n"
-" %s "
+"Cannot delete file \"%s\"\n"
+"%s"
 msgstr ""
 " Không thể xóa tập tin \"%s\" \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot remove directory \"%s\" \n"
-" %s "
+"Cannot remove directory \"%s\"\n"
+"%s"
 msgstr ""
 " Không thể xóa thư mục \"%s\" \n"
 " %s "
@@ -2696,45 +2857,51 @@ msgstr "Các thư mục"
 msgid "files/directories"
 msgstr "tập tin/thư mục"
 
+#. TRANSLATORS: keep leading space here to split words in Copy/Move dialog
 msgid " with source mask:"
 msgstr " với nhãn ban đầu:"
 
-msgid " to:"
-msgstr " vào:"
+msgid "to:"
+msgstr "vào:"
 
 #, c-format
 msgid "%s?"
 msgstr ""
 
-msgid " Cannot operate on \"..\"! "
+#, fuzzy
+msgid "Cannot operate on \"..\"!"
 msgstr " Không thể thao tác trên \"..\"! "
 
-msgid " Sorry, I could not put the job in background "
+#, fuzzy
+msgid "Sorry, I could not put the job in background"
 msgstr " Xin lỗi, không thể đặt công việc nào vào chế độ nền sau "
 
 msgid "&Retry"
 msgstr "&Thử lại"
 
+#, fuzzy
 msgid ""
 "\n"
-"   Directory not empty.   \n"
-"   Delete it recursively? "
+"Directory not empty.\n"
+"Delete it recursively?"
 msgstr ""
 "\n"
 "   Thư mục không rỗng.    \n"
 "   Xóa toàn bộ (đệ quy)? "
 
+#, fuzzy
 msgid ""
 "\n"
-"   Background process: Directory not empty \n"
-"   Delete it recursively? "
+"Background process: Directory not empty.\n"
+"Delete it recursively?"
 msgstr ""
 "\n"
 "   Tiến trình nền sau: Thư mục không rỗng \n"
 "   Xóa toàn bộ (đệ quy)? "
 
-msgid " Delete: "
-msgstr " Xóa: "
+#, fuzzy
+msgid "Delete:"
+msgstr "Xóa   "
 
 msgid "Non&e"
 msgstr "&Không"
@@ -2768,7 +2935,7 @@ msgid "Time: %s  %s (%s)"
 msgstr "Kích thước:   %s"
 
 #, c-format
-msgid " Total: %s of %s "
+msgid "Total: %s of %s"
 msgstr ""
 
 msgid "Source"
@@ -2818,10 +2985,12 @@ msgstr "&Thêm vào cuối"
 msgid "Overwrite this target?"
 msgstr "Khi đè lên tập tin này?"
 
-msgid " File exists "
+#, fuzzy
+msgid "File exists"
 msgstr " Tập tin tồn tại "
 
-msgid " Background process: File exists "
+#, fuzzy
+msgid "Background process: File exists"
 msgstr " Tiến trình nền sau: tập tin tồn tại "
 
 msgid "&Background"
@@ -2831,17 +3000,16 @@ msgid "&Stable Symlinks"
 msgstr "liên kết &Bền vững"
 
 #, fuzzy
-msgid "di&Ve into subdir if exists"
+msgid "Di&ve into subdir if exists"
 msgstr "&Vào thư mục con, nếu có"
 
-msgid "preserve &Attributes"
+#, fuzzy
+msgid "Preserve &attributes"
 msgstr "&Ghi nhớ thuộc tính"
 
-msgid "follow &Links"
+#, fuzzy
+msgid "Follow &links"
 msgstr "đi theo &Liên kết"
-
-msgid "to:"
-msgstr "vào:"
 
 #, fuzzy, c-format
 msgid "Invalid source pattern `%s'"
@@ -2875,7 +3043,7 @@ msgid "Found: %ld"
 msgstr ""
 
 #, fuzzy
-msgid " Malformed regular expression "
+msgid "Malformed regular expression"
 msgstr "  Biểu thức chính quy không đúng  "
 
 #, fuzzy
@@ -2937,14 +3105,16 @@ msgstr "Tìm %s"
 msgid "Searching"
 msgstr "Tìm"
 
-msgid " Help file format error\n"
+#, fuzzy
+msgid "Help file format error\n"
 msgstr " Lỗi định dạng tập tin trợ giúp\n"
 
-msgid " Internal bug: Double start of link area "
+#, fuzzy
+msgid "Internal bug: Double start of link area"
 msgstr " Lỗi (bug) nội bộ: vùng liên kết có hai đầu "
 
-#, c-format
-msgid " Cannot find node %s in help file "
+#, fuzzy, c-format
+msgid "Cannot find node %s in help file"
 msgstr " Không tìm thấy nút %s trong tập tin trợ giúp "
 
 msgid "Help"
@@ -2970,10 +3140,12 @@ msgstr "&Thêm vào"
 msgid "&Insert"
 msgstr "c&Hèn"
 
-msgid "New &Entry"
+#, fuzzy
+msgid "New &entry"
 msgstr "tạo &Mục mới"
 
-msgid "New &Group"
+#, fuzzy
+msgid "New &group"
 msgstr "&Nhóm mới"
 
 msgid "&Up"
@@ -2988,7 +3160,8 @@ msgstr "&Làm mới"
 msgid "Fr&ee VFSs now"
 msgstr "&Giải phóng"
 
-msgid "Change &To"
+#, fuzzy
+msgid "Change &to"
 msgstr "&Chuyển tới"
 
 msgid "Subgroup - press ENTER to see list"
@@ -3000,11 +3173,11 @@ msgstr "Thư mục VFS hoạt động"
 msgid "Directory hotlist"
 msgstr "Danh sách thư mục thường dùng"
 
-msgid " Directory path "
-msgstr " Đường dẫn tới thư mục "
+msgid "Directory path"
+msgstr " Đường dẫn tới thư mục"
 
-msgid " Directory label "
-msgstr " Nhãn thư mục"
+msgid "Directory label"
+msgstr " Tên nhãn thư mục"
 
 #, c-format
 msgid "Moving %s"
@@ -3013,63 +3186,74 @@ msgstr "Di chuyển %s"
 msgid "New hotlist entry"
 msgstr " Thêm bản ghi vào tra cứu"
 
-msgid "Directory label"
+#, fuzzy
+msgid "Directory label:"
 msgstr " Tên nhãn thư mục"
 
-msgid "Directory path"
+#, fuzzy
+msgid "Directory path:"
 msgstr " Đường dẫn tới thư mục"
 
-msgid " New hotlist group "
+#, fuzzy
+msgid "New hotlist group"
 msgstr " Thêm nhóm vào tra cứu "
 
-msgid "Name of new group"
+#, fuzzy
+msgid "Name of new group:"
 msgstr " Tên nhóm mới"
 
 #, c-format
 msgid "Label for \"%s\":"
 msgstr " Tên nhãn cho \"%s\":"
 
-msgid " Add to hotlist "
+#, fuzzy
+msgid "Add to hotlist"
 msgstr " Thêm vào tra cứu "
 
-msgid " Remove: "
+#, fuzzy
+msgid "Remove:"
 msgstr " Xóa: "
 
-msgid ""
-"\n"
-" Are you sure you want to remove this entry?"
+msgid "Are you sure you want to remove this entry?"
 msgstr ""
 
+#, fuzzy
 msgid ""
-"\n"
-" Group not empty.\n"
-" Remove it?"
+"Group not empty.\n"
+"Remove it?"
 msgstr ""
 "\n"
 " Nhóm không rỗng.\n"
 " Xóa nó?"
 
-msgid " Top level group "
+#, fuzzy
+msgid "Top level group"
 msgstr "Nhóm cấp độ cao nhất "
 
-msgid " Hotlist Load "
+#, fuzzy
+msgid "Hotlist Load"
 msgstr " Nạp tra cứu "
 
 #, fuzzy, c-format
 msgid ""
-"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+"MC was unable to write ~/%s file,\n"
+"your old hotlist entries were not deleted"
 msgstr " tập tin, tra cứu thư mục cũ chưa bị xóa"
+
+#, fuzzy
+msgid "Information"
+msgstr " Thông tin "
 
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
 
 #, c-format
-msgid "File:       %s"
-msgstr "Tập tin:       %s"
+msgid "File: %s"
+msgstr "Tập tin: %s"
 
-#, c-format
-msgid "Free nodes: %d (%d%%) of %d"
+#, fuzzy, c-format
+msgid "Free nodes: %ld (%ld%%) of %ld"
 msgstr "Nút tự do: %d (%d%%) trong tổng số %d"
 
 msgid "No node information"
@@ -3082,8 +3266,8 @@ msgstr "Chỗ trống:    %s (%d%%) của %s"
 msgid "No space information"
 msgstr "Không có thông tin về khoảng trống"
 
-#, c-format
-msgid "Type:      %s "
+#, fuzzy, c-format
+msgid "Type:      %s"
 msgstr "Loại:         %s "
 
 msgid "non-local vfs"
@@ -3145,46 +3329,48 @@ msgstr "&Thẳng đứng"
 msgid "&Horizontal"
 msgstr "&Nằm ngang"
 
-msgid "show free sp&Ace"
+msgid "Show free sp&ace"
 msgstr ""
 
-msgid "&Xterm window title"
+#, fuzzy
+msgid "&XTerm window title"
 msgstr "tiê&U đề cửa sổ xterm"
 
-msgid "h&Intbar visible"
+#, fuzzy
+msgid "H&intbar visible"
 msgstr "dòng &Gợi ý"
 
 msgid "&Keybar visible"
 msgstr "&Hiển thị thanh phím tắt"
 
-msgid "command &Prompt"
+#, fuzzy
+msgid "Command &prompt"
 msgstr "&Dòng lệnh"
 
-msgid "show &Mini status"
+#, fuzzy
+msgid "Show &mini status"
 msgstr "hiện trạng thái m&Ini"
 
-msgid "menu&Bar visible"
+#, fuzzy
+msgid "Menu&bar visible"
 msgstr "thAnh trình đơn"
 
 msgid "&Equal split"
 msgstr "&Kích thước bằng nhau"
 
-msgid "pe&Rmissions"
-msgstr "&Quyền truy cập"
-
-msgid "&File types"
-msgstr "&Loại tập tin"
-
-msgid " Panel split "
+#, fuzzy
+msgid "Panel split"
 msgstr " Chia bảng "
 
-msgid " Highlight... "
-msgstr " Chiếu sáng... "
+msgid "Console output"
+msgstr ""
 
-msgid " Other options "
+#, fuzzy
+msgid "Other options"
 msgstr " Cấu hình khác "
 
-msgid "output lines"
+#, fuzzy
+msgid "Output lines:"
 msgstr "dòng kết quả"
 
 msgid "Layout"
@@ -3193,7 +3379,8 @@ msgstr "Vẻ ngoài"
 msgid "Learn keys"
 msgstr "Tạo phím tắt"
 
-msgid " Teach me a key "
+#, fuzzy
+msgid "Teach me a key"
 msgstr " Dạy tôi một phím "
 
 #, c-format
@@ -3216,11 +3403,12 @@ msgstr ""
 "Nếu bạn muốn dừng việc dạy phím, thì hãy nhấn\n"
 "phím Esc và cũng cần đợi một chút."
 
-msgid " Cannot accept this key "
+#, fuzzy
+msgid "Cannot accept this key"
 msgstr " Không thể chấp nhận phím này "
 
-#, c-format
-msgid " You have entered \"%s\""
+#, fuzzy, c-format
+msgid "You have entered \"%s\""
 msgstr " Đã nhập vào \"%s\""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
@@ -3255,14 +3443,17 @@ msgstr ""
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "phím bị thiếu, hoặc nhấn chuột để xác định. Di chuyển bằng Tab."
 
-msgid " The Midnight Commander "
+#, fuzzy
+msgid "The Midnight Commander"
 msgstr " Midnight Commander "
 
-msgid " Do you really want to quit the Midnight Commander? "
+#, fuzzy
+msgid "Do you really want to quit the Midnight Commander?"
 msgstr " Thực sự muốn thoát Midnight Commander? "
 
-msgid "&Listing mode..."
-msgstr "&Dạng danh sách..."
+#, fuzzy
+msgid "File listin&g"
+msgstr "&Đầy đủ"
 
 #, fuzzy
 msgid "&Quick view"
@@ -3271,6 +3462,9 @@ msgstr "&Lưu nhanh"
 #, fuzzy
 msgid "&Info"
 msgstr "&Chỉ mục inode"
+
+msgid "&Listing mode..."
+msgstr "&Dạng danh sách..."
 
 msgid "&Sort order..."
 msgstr "t&Hứ tự sắp xếp..."
@@ -3322,8 +3516,12 @@ msgid "&Link"
 msgstr "&Liên kết"
 
 #, fuzzy
-msgid "&SymLink"
+msgid "&Symlink"
 msgstr "&Liên kết"
+
+#, fuzzy
+msgid "Relative symlin&k"
+msgstr "Đang tìm liên kết mềm..."
 
 #, fuzzy
 msgid "Edit s&ymlink"
@@ -3436,6 +3634,10 @@ msgid "&Layout..."
 msgstr "&Vẻ ngoài..."
 
 #, fuzzy
+msgid "&Panel options..."
+msgstr " Cấu hình bảng "
+
+#, fuzzy
 msgid "C&onfirmation..."
 msgstr "&Xác nhận..."
 
@@ -3461,20 +3663,6 @@ msgstr " Ở &dưới "
 msgid "&Right"
 msgstr " Bảng &phải "
 
-msgid " Information "
-msgstr " Thông tin "
-
-msgid ""
-" Using the fast reload option may not reflect the exact \n"
-" directory contents. In this case you'll need to do a   \n"
-" manual reload of the directory. See the man page for   \n"
-" the details.                                           "
-msgstr ""
-" Sử dụng tùy chọn nạp lại nhanh có thể không phản ánh   \n"
-" đúng nội dung hiện thời của thư mục. Trong trường hợp  \n"
-" này cần nạp lại thư mục một cách thủ công. Hãy xem     \n"
-" trang hướng dẫn sử dụng man để biết them chi tiết.     "
-
 #, fuzzy
 msgid "ButtonBar|Menu"
 msgstr "Hex"
@@ -3497,83 +3685,180 @@ msgstr "Biến môi trườn TERM chưa được xác định!\n"
 msgid "Cannot create %s directory"
 msgstr "Không thay đổi được thư mục"
 
-msgid "safe de&Lete"
-msgstr "Xóa một cách &An toàn"
-
-msgid "cd follows lin&Ks"
-msgstr "cd th&Eo liên kết"
-
-msgid "L&ynx-like motion"
-msgstr "di chuyển giống trong l&Ynx"
-
-msgid "rotatin&G dash"
-msgstr "cái chỉ &Quay"
-
-msgid "co&Mplete: show all"
-msgstr "tự động hoàn thành: hiện tất cả"
-
-msgid "&Use internal view"
-msgstr "trình xem nội &Bộ"
-
-msgid "use internal ed&It"
-msgstr "sử dụng s&Oạn thảo nội bộ"
-
-msgid "auto m&Enus"
-msgstr "t&Rình đơn tự động"
-
-msgid "&Auto save setup"
-msgstr "tự động gh&I nhớ cấu hình"
-
-msgid "shell &Patterns"
-msgstr "&Mẫu dạng shell"
-
-msgid "Compute &Totals"
-msgstr "tính tổn&G kích thước"
-
-msgid "&Verbose operation"
-msgstr "thao tác với thông báo &Dài dòng"
-
-msgid "Mkdir autoname"
-msgstr ""
-
-msgid "&Fast dir reload"
-msgstr "nạ&P nhanh thư mục"
-
-msgid "mi&X all files"
-msgstr "trộn lẫn tất &Cả tập tin"
-
-msgid "&Drop down menus"
-msgstr "đẩy &Xuống trình đơn"
-
-msgid "ma&Rk moves down"
-msgstr "&Nhãn di chuyển xuống"
-
-msgid "show &Hidden files"
-msgstr "&Hiển thị tập tin ẩn"
-
-msgid "show &Backup files"
-msgstr "hiển thị tập tin sao &Lưu"
-
-msgid "Use SI si&ze units"
-msgstr ""
-
 msgid "&Never"
 msgstr "&Không bao giờ"
 
-msgid "on dumb &Terminals"
+#, fuzzy
+msgid "On dum&b terminals"
 msgstr "&Trên terminal ngu"
 
 msgid "Alwa&ys"
 msgstr "&Luôn luôn"
 
-msgid " Panel options "
-msgstr " Cấu hình bảng "
+#, fuzzy
+msgid "A&uto save setup"
+msgstr "tự động gh&I nhớ cấu hình"
 
-msgid " Pause after run... "
+#, fuzzy
+msgid "Sa&fe delete"
+msgstr "Xóa một cách &An toàn"
+
+#, fuzzy
+msgid "Cd follows lin&ks"
+msgstr "cd th&Eo liên kết"
+
+#, fuzzy
+msgid "Rotating d&ash"
+msgstr "cái chỉ &Quay"
+
+#, fuzzy
+msgid "Co&mplete: show all"
+msgstr "tự động hoàn thành: hiện tất cả"
+
+#, fuzzy
+msgid "Shell &patterns"
+msgstr "&Mẫu dạng shell"
+
+msgid "&Drop down menus"
+msgstr "đẩy &Xuống trình đơn"
+
+#, fuzzy
+msgid "Auto m&enus"
+msgstr "t&Rình đơn tự động"
+
+#, fuzzy
+msgid "Use internal vie&w"
+msgstr "trình xem nội &Bộ"
+
+#, fuzzy
+msgid "Use internal edi&t"
+msgstr "sử dụng s&Oạn thảo nội bộ"
+
+#, fuzzy
+msgid "Pause after run"
 msgstr " Tạm ngừng sau khi chạy... "
+
+#, fuzzy
+msgid "Timeout:"
+msgstr "Thời gian sửa"
+
+#, fuzzy
+msgid "S&ingle press"
+msgstr "&Loại tập tin"
+
+#, fuzzy
+msgid "Esc key mode"
+msgstr "Slash trên keypad"
+
+msgid "Mkdi&r autoname"
+msgstr ""
+
+msgid "Classic pro&gressbar"
+msgstr ""
+
+#, fuzzy
+msgid "Compute tota&ls"
+msgstr "tính tổn&G kích thước"
+
+msgid "&Verbose operation"
+msgstr "thao tác với thông báo &Dài dòng"
+
+#, fuzzy
+msgid "File operation options"
+msgstr " Cấu hình khác "
 
 msgid "Configure options"
 msgstr "Tùy chọn cấu hình"
+
+#, fuzzy
+msgid "Case &insensitive"
+msgstr "tính đến kiể&U chữ"
+
+#, fuzzy
+msgid "Case s&ensitive"
+msgstr "tính đến kiể&U chữ"
+
+#, fuzzy
+msgid "Use panel sort mo&de"
+msgstr "Sử &dụng chế độ thụ động"
+
+#, fuzzy
+msgid "Quick search"
+msgstr "cd nhanh"
+
+#, fuzzy
+msgid "&Permissions"
+msgstr "Quyền hạn"
+
+#, fuzzy
+msgid "File &types"
+msgstr "&Loại tập tin"
+
+#, fuzzy
+msgid "File highlight"
+msgstr " Chiếu sáng... "
+
+msgid "&Mouse page scrolling"
+msgstr ""
+
+msgid "Pa&ge scrolling"
+msgstr ""
+
+msgid "L&ynx-like motion"
+msgstr "di chuyển giống trong l&Ynx"
+
+msgid "Navigation"
+msgstr ""
+
+#, fuzzy
+msgid "A&uto save panels setup"
+msgstr "tự động gh&I nhớ cấu hình"
+
+#, fuzzy
+msgid "Re&verse files only"
+msgstr "&Chỉ theo kích thước"
+
+#, fuzzy
+msgid "Ma&rk moves down"
+msgstr "&Nhãn di chuyển xuống"
+
+msgid "&Fast dir reload"
+msgstr "nạ&P nhanh thư mục"
+
+#, fuzzy
+msgid "Show &hidden files"
+msgstr "&Hiển thị tập tin ẩn"
+
+#, fuzzy
+msgid "Show &backup files"
+msgstr "hiển thị tập tin sao &Lưu"
+
+#, fuzzy
+msgid "Mi&x all files"
+msgstr "trộn lẫn tất &Cả tập tin"
+
+msgid "Use SI si&ze units"
+msgstr ""
+
+#, fuzzy
+msgid "Main panel options"
+msgstr " Cấu hình bảng "
+
+#, fuzzy
+msgid "Panel options"
+msgstr " Cấu hình bảng "
+
+#, fuzzy
+msgid ""
+"Using the fast reload option may not reflect the exact\n"
+"directory contents. In this case you'll need to do a\n"
+"manual reload of the directory. See the man page for\n"
+"the details."
+msgstr ""
+" Sử dụng tùy chọn nạp lại nhanh có thể không phản ánh   \n"
+" đúng nội dung hiện thời của thư mục. Trong trường hợp  \n"
+" này cần nạp lại thư mục một cách thủ công. Hãy xem     \n"
+" trang hướng dẫn sử dụng man để biết them chi tiết.     "
 
 msgid "&Add new"
 msgstr "&Thêm mới"
@@ -3587,13 +3872,16 @@ msgstr "Câu lệnh"
 msgid "Other command"
 msgstr "Lệnh khác"
 
-msgid " Add to external panelize "
+#, fuzzy
+msgid "Add to external panelize"
 msgstr " Thêm vào bảng ngoài "
 
-msgid " Enter command label: "
+#, fuzzy
+msgid "Enter command label:"
 msgstr " Nhập tên câu lệnh: "
 
-msgid " Cannot run external panelize in a non-local directory "
+#, fuzzy
+msgid "Cannot run external panelize in a non-local directory"
 msgstr " Không thể chạy câu lệnh này trên một thư mục không phải nội bộ "
 
 msgid "Find rejects after patching"
@@ -3692,11 +3980,8 @@ msgid "sort|h"
 msgstr ""
 
 #, fuzzy
-msgid "C&Hange time"
+msgid "C&hange time"
 msgstr "thời gi&An thay đổi"
-
-msgid "Permission"
-msgstr "Quyền hạn"
 
 msgid "Perm"
 msgstr "Quyền"
@@ -3737,15 +4022,21 @@ msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] "%s trong %d tập tin"
 
-msgid "Unknown tag on display format: "
+#, fuzzy
+msgid "Unknown tag on display format:"
 msgstr "Thẻ ghi không rõ trong định dạng hiển thị: "
 
 msgid "User supplied format looks invalid, reverting to default."
 msgstr ""
 "Định dạng người dùng đưa ra có vẻ không thích hợp, chuyển lại thành mặc định."
 
-msgid " Do you really want to execute? "
+#, fuzzy
+msgid "Do you really want to execute?"
 msgstr " Thực sự muốn thực hiện? "
+
+#, fuzzy, c-format
+msgid "Cannot chdir to \"%s\""
+msgstr " Không thể chdir vào %s "
 
 #, fuzzy
 msgid "Choose codepage"
@@ -3781,7 +4072,8 @@ msgstr ""
 msgid "Cannot open named pipe %s\n"
 msgstr "Không mở được đường ống tên (named pipe) %s\n"
 
-msgid " The shell is still active. Quit anyway? "
+#, fuzzy
+msgid "The shell is still active. Quit anyway?"
 msgstr " Shell vẫn còn hoạt động. Vẫn thoát? "
 
 #, c-format
@@ -3852,16 +4144,16 @@ msgstr " Sao chép thư mục \"%s\" vào:"
 msgid "Move \"%s\" directory to:"
 msgstr " Di chuyển thư mục \"%s\" vào:"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot stat the destination \n"
-" %s "
+"Cannot stat the destination\n"
+"%s"
 msgstr ""
 " Không lấy (stat) được thuộc tính của đích đến \n"
 " %s "
 
-#, c-format
-msgid "  Delete %s?  "
+#, fuzzy, c-format
+msgid "Delete %s?"
 msgstr "  Xóa %s?  "
 
 #, fuzzy
@@ -3892,30 +4184,36 @@ msgstr ""
 "Không ghi nhớ được vào tập tin %s:\n"
 "%s\n"
 
-msgid " Format error on file Extensions File "
+#, fuzzy
+msgid "Format error on file Extensions File"
 msgstr " Lỗi định dạng tập tin \"Phần mở rộng của tập tin\" "
 
-#, c-format
-msgid " The %%var macro has no default "
+#, fuzzy, c-format
+msgid "The %%var macro has no default"
 msgstr " Macro %%var không có giá trị mặc định "
 
-#, c-format
-msgid " The %%var macro has no variable "
+#, fuzzy, c-format
+msgid "The %%var macro has no variable"
 msgstr " Macro %%var không có giá trị biến "
 
-msgid " Debug "
+#, fuzzy
+msgid "Debug"
 msgstr " Sửa lỗi "
 
-msgid " ERROR: "
+#, fuzzy
+msgid "ERROR:"
 msgstr " LỖI: "
 
-msgid " True:  "
+#, fuzzy
+msgid "True:"
 msgstr " Đúng: "
 
-msgid " False: "
+#, fuzzy
+msgid "False:"
 msgstr " Sai: "
 
-msgid " Warning -- ignoring file "
+#, fuzzy
+msgid "Warning -- ignoring file"
 msgstr " Cảnh báo - tập tin bị lờ đi "
 
 #, c-format
@@ -3926,18 +4224,28 @@ msgstr ""
 "Tập tin %s không thuộc quyền sở hữu của root, hay của bạn,\n"
 "hoặc ai cũng có thể ghi. Sử dụng tập tin này có thể không an toàn"
 
-#, c-format
-msgid " No suitable entries found in %s "
+#, fuzzy, c-format
+msgid ""
+"Cannot open file%s\n"
+"%s"
+msgstr ""
+" Không mở được tập tin %s \n"
+" %s "
+
+#, fuzzy, c-format
+msgid "No suitable entries found in %s"
 msgstr " Không tìm thấy mục thích hợp trong %s"
 
-msgid " User menu "
+#, fuzzy
+msgid "User menu"
 msgstr " Trình đơn người dùng "
 
 #, fuzzy
 msgid "Invalid value"
 msgstr "giá trị số không thích hợp"
 
-msgid " Cannot spawn child process "
+#, fuzzy
+msgid "Cannot spawn child process"
 msgstr " Không sinh ra được tiến trình con "
 
 msgid "Empty output from child filter"
@@ -3988,41 +4296,42 @@ msgstr "Bỏ định dạng"
 msgid "ButtonBar|Format"
 msgstr "Định dạng"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Error while closing the file: \n"
-" %s \n"
-" Data may have been written or not. "
+"Error while closing the file:\n"
+"%s\n"
+"Data may have been written or not"
 msgstr ""
 " Lỗi khi đóng tập tin: \n"
 " %s \n"
 " Dữ liệu chưa chắc đã được khi. "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot save file: \n"
-" %s "
+"Cannot save file:\n"
+"%s"
 msgstr ""
 " Không thể lưu tập tin. \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot open \"%s\"\n"
-" %s "
+"Cannot open \"%s\"\n"
+"%s"
 msgstr ""
 " Không mở được \"%s\"\n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot stat \"%s\"\n"
-" %s "
+"Cannot stat \"%s\"\n"
+"%s"
 msgstr ""
 " Không lấy (stat) được thuộc tính \"%s\"\n"
 " %s "
 
-msgid " Cannot view: not a regular file "
+#, fuzzy
+msgid "Cannot view: not a regular file"
 msgstr ""
 " Không xem được vì lý do: không\n"
 " phải tập tin thông thường "
@@ -4037,7 +4346,8 @@ msgstr "Tìm"
 msgid "Continue from begining?"
 msgstr ""
 
-msgid " History "
+#, fuzzy
+msgid "History"
 msgstr " Lịch sử"
 
 #. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
@@ -4050,11 +4360,93 @@ msgstr ""
 msgid "Background process:"
 msgstr "Tiến trình nền sau:"
 
+#~ msgid " Permission "
+#~ msgstr " Quyền truy cập "
+
+#~ msgid " File "
+#~ msgstr " Tập tin "
+
+#~ msgid " Name "
+#~ msgstr " Tên "
+
+#~ msgid " Owner name "
+#~ msgstr " Tên chủ sở hữu "
+
+#~ msgid " Group name "
+#~ msgstr " Tên nhóm "
+
+#~ msgid " Size "
+#~ msgstr " Kích thước "
+
+#~ msgid " Confirmation "
+#~ msgstr " Hỏi xác nhận "
+
+#~ msgid " Filtered view "
+#~ msgstr " Lọc rồi xem "
+
+#~ msgid " Select "
+#~ msgstr " Chọn "
+
+#~ msgid " Compare directories "
+#~ msgstr " So sánh thư mục "
+
+#~ msgid " Link "
+#~ msgstr " Liên kết "
+
+#~ msgid " Edit symlink "
+#~ msgstr " Sửa liên kết mềm "
+
+#~ msgid "case &Sensitive"
+#~ msgstr "có tính &Kiểu chữ"
+
+#~ msgid " Replace "
+#~ msgstr " Thay thế "
+
+#~ msgid " Error "
+#~ msgstr " Lỗi "
+
+#~ msgid " Insert File "
+#~ msgstr "Chèn tập tin "
+
+#~ msgid " Insert Literal "
+#~ msgstr " Chèn văn bản thuần túy "
+
+#~ msgid " Execute Macro "
+#~ msgstr "Thực hiện Macro "
+
+#~ msgid " Cannot overwrite directory `%s' "
+#~ msgstr " Không thể ghi đè lên thư mục `%s' "
+
+#~ msgid " to:"
+#~ msgstr " vào:"
+
+#~ msgid " Delete: "
+#~ msgstr " Xóa: "
+
+#~ msgid " Directory path "
+#~ msgstr " Đường dẫn tới thư mục "
+
+#~ msgid " Directory label "
+#~ msgstr " Nhãn thư mục"
+
+#~ msgid "File:       %s"
+#~ msgstr "Tập tin:       %s"
+
+#~ msgid "pe&Rmissions"
+#~ msgstr "&Quyền truy cập"
+
+#~ msgid " User menu "
+#~ msgstr " Trình đơn người dùng "
+
+#~ msgid ""
+#~ " Cannot save file: \n"
+#~ " %s "
+#~ msgstr ""
+#~ " Không thể lưu tập tin. \n"
+#~ " %s "
+
 #~ msgid "Status:    %s"
 #~ msgstr "Trạng thái:  %s"
-
-#~ msgid "File"
-#~ msgstr "Tập tin"
 
 #~ msgid "Count"
 #~ msgstr "Đếm"
@@ -4093,9 +4485,6 @@ msgstr "Tiến trình nền sau:"
 #, fuzzy
 #~ msgid " Invalid address "
 #~ msgstr " Mật khẩu không đúng "
-
-#~ msgid "File: %s"
-#~ msgstr "Tập tin: %s"
 
 #~ msgid "Offset 0x%08lx"
 #~ msgstr "Bộ offset 0x%08lx"
@@ -4261,9 +4650,6 @@ msgstr "Tiến trình nền sau:"
 #~ msgid "Replac"
 #~ msgstr "Thayth"
 
-#~ msgid "Delete"
-#~ msgstr "Xóa   "
-
 #~ msgid "PullDn"
 #~ msgstr "GọiTĐ "
 
@@ -4395,12 +4781,6 @@ msgstr "Tiến trình nền sau:"
 #, fuzzy
 #~ msgid "Extension"
 #~ msgstr "&Mở rộng:"
-
-#~ msgid "Size"
-#~ msgstr "Kích cỡ"
-
-#~ msgid "MTime"
-#~ msgstr "Thời gian sửa"
 
 #~ msgid "ATime"
 #~ msgstr "Truy cập cuối cùng"
@@ -4546,9 +4926,6 @@ msgstr "Tiến trình nền sau:"
 
 #~ msgid "Edit edi&tor menu file"
 #~ msgstr "sửa trình đơn của trình s&Oạn thảo"
-
-#~ msgid "Edit &syntax file"
-#~ msgstr "sửa tập tin cú &Pháp"
 
 #~ msgid ""
 #~ "To use this feature select your codepage in\n"

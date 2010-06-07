@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-05-05 22:32+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2010-06-07 21:44+0400\n"
 "PO-Revision-Date: 2003-09-20 18:50+0200\n"
 "Last-Translator: Strahinya Radich (Страхиња Радић) <mr99164@alas.matf.bg.ac."
 "yu>\n"
@@ -16,17 +16,18 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-msgid " Search string not found "
+#, fuzzy
+msgid "Search string not found"
 msgstr " Тражена ниска није нађена "
 
-msgid " Not implemented yet "
+msgid "Not implemented yet"
 msgstr ""
 
-msgid " Num of replace tokens not equal to num of found tokens "
+msgid "Num of replace tokens not equal to num of found tokens"
 msgstr ""
 
 #, fuzzy, c-format
-msgid " Invalid token number %d "
+msgid "Invalid token number %d"
 msgstr " Неисправна одредишна маска "
 
 #, fuzzy
@@ -356,10 +357,12 @@ msgstr "Притисните било који тастер за настава�
 msgid "Warning"
 msgstr "Упозорење"
 
-msgid " Pipe failed "
+#, fuzzy
+msgid "Pipe failed"
 msgstr " Цев није успела "
 
-msgid " Dup failed "
+#, fuzzy
+msgid "Dup failed"
 msgstr " Позив `dup' није успео "
 
 #, fuzzy
@@ -457,7 +460,8 @@ msgstr "fish: Чекам почетни ред..."
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Извините, али за сад не можемо да се повезујемо уз потврду лозинке."
 
-msgid " fish: Password required for "
+#, fuzzy, c-format
+msgid "fish: Password is required for %s"
 msgstr " fish: Неопходна је лозинка за "
 
 msgid "fish: Sending password..."
@@ -518,7 +522,8 @@ msgstr "Прекинути пренос би био успешан."
 msgid "ftpfs: Disconnecting from %s"
 msgstr "ftpfs: Прекидам повезивање са %s"
 
-msgid " FTP: Password required for "
+#, fuzzy, c-format
+msgid "FTP: Password required for %s"
 msgstr " FTP: Неопходна је лозинка за "
 
 msgid "ftpfs: sending login name"
@@ -617,24 +622,28 @@ msgstr "ftpfs: нисам успео; немам решења"
 msgid "ftpfs: storing file %lu (%lu)"
 msgstr "ftpfs: складиштим датотеку %lu (%lu)"
 
+#, fuzzy
 msgid ""
-"~/.netrc file has incorrect mode.\n"
-"Remove password or correct mode."
+"~/.netrc file has incorrect mode\n"
+"Remove password or correct mode"
 msgstr ""
 "Датотека ~/.netrc нема исправне дозволе.\n"
 "Уклоните лозинку или исправите дозволе."
 
 # Систем датотека Поноћног наредника
-msgid " MCFS "
+#, fuzzy
+msgid "MCFS"
 msgstr " СДПН "
 
-msgid " The server does not support this version "
+#, fuzzy
+msgid "The server does not support this version"
 msgstr " Сервер не подржава ову верзију "
 
+#, fuzzy
 msgid ""
-" The remote server is not running on a system port \n"
-" you need a password to log in, but the information may \n"
-" not be safe on the remote side.  Continue? \n"
+"The remote server is not running on a system port\n"
+"you need a password to log in, but the information may\n"
+"not be safe on the remote side.  Continue?\n"
 msgstr ""
 " Удаљени сервер није покренут на системском порту. \n"
 " Неопходна вам је лозинка за пријаву, али подаци можда неће\n"
@@ -646,25 +655,28 @@ msgstr "&Да"
 msgid "&No"
 msgstr "&Не"
 
-msgid " MCFS Password required "
+#, fuzzy
+msgid "MCFS Password required"
 msgstr " Неопходна је лозинка за СДПН "
 
-msgid " Invalid password "
+#, fuzzy
+msgid "Invalid password"
 msgstr " Неисправна лозинка "
 
-#, c-format
-msgid " Cannot locate hostname: %s "
+#, fuzzy, c-format
+msgid "Cannot locate hostname: %s"
 msgstr " Не могу да пронађем домаћина: %s "
 
-#, c-format
-msgid " Cannot create socket: %s "
+#, fuzzy, c-format
+msgid "Cannot create socket: %s"
 msgstr " Не могу да створим утичницу: %s "
 
-#, c-format
-msgid " Cannot connect to server: %s "
+#, fuzzy, c-format
+msgid "Cannot connect to server: %s"
 msgstr " Не могу да се повежем са сервером: %s "
 
-msgid " Too many open connections "
+#, fuzzy
+msgid "Too many open connections"
 msgstr " Превише отворених повезивања "
 
 #, c-format
@@ -687,35 +699,34 @@ msgstr ""
 "Упозорење: Неисправан прекидач %c у %s:\n"
 "%s\n"
 
-#, c-format
-msgid ""
-" reconnect to %s failed\n"
-" "
+#, fuzzy, c-format
+msgid "reconnect to %s failed"
 msgstr ""
 " поновно повезивање са %s није успело\n"
 " "
 
-msgid " Authentication failed "
+#, fuzzy
+msgid "Authentication failed"
 msgstr " Потврда исправности није успела "
 
-#, c-format
-msgid " Error %s creating directory %s "
+#, fuzzy, c-format
+msgid "Error %s creating directory %s"
 msgstr " Грешка %s приликом стварања директоријума %s "
 
-#, c-format
-msgid " Error %s removing directory %s "
+#, fuzzy, c-format
+msgid "Error %s removing directory %s"
 msgstr " Грешка %s приликом уклањања директоријума %s "
 
-#, c-format
-msgid " %s opening remote file %s "
+#, fuzzy, c-format
+msgid "%s opening remote file %s"
 msgstr " %s при отварању удаљене датотеке %s "
 
-#, c-format
-msgid " %s removing remote file %s "
+#, fuzzy, c-format
+msgid "%s removing remote file %s"
 msgstr " %s при уклањању удаљене датотеке %s "
 
-#, c-format
-msgid " %s renaming files\n"
+#, fuzzy, c-format
+msgid "%s renaming files\n"
 msgstr " %s при преименовању датотека\n"
 
 #, c-format
@@ -732,9 +743,8 @@ msgstr "Недоследна архива врсте `tar'"
 msgid "Unexpected EOF on archive file"
 msgstr "Неочекивани завршетак датотеке у архиви"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Hmm,...\n"
 "%s\n"
 "doesn't look like a tar archive."
 msgstr ""
@@ -742,52 +752,57 @@ msgstr ""
 "%s\n"
 "не личи на архиву врсте `tar'."
 
-msgid " undelfs: error "
+#, fuzzy
+msgid "undelfs: error"
 msgstr " undelfs: грешка "
 
-msgid " not enough memory "
+#, fuzzy
+msgid "not enough memory"
 msgstr " недовољно меморије "
 
-msgid " while allocating block buffer "
+#, fuzzy
+msgid "while allocating block buffer"
 msgstr " при алоцирању блока прихватника "
 
-#, c-format
-msgid " open_inode_scan: %d "
+#, fuzzy, c-format
+msgid "open_inode_scan: %d"
 msgstr " open_inode_scan: %d "
 
-#, c-format
-msgid " while starting inode scan %d "
+#, fuzzy, c-format
+msgid "while starting inode scan %d"
 msgstr " при почетку претраживања ичворова %d "
 
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
 msgstr "undelfs: учитавам податке о обрисаним ичворовима: %d ичворова"
 
-#, c-format
-msgid " while calling ext2_block_iterate %d "
+#, fuzzy, c-format
+msgid "while calling ext2_block_iterate %d"
 msgstr " при позиву ext2_block_iterate %d "
 
-msgid " no more memory while reallocating array "
+#, fuzzy
+msgid "no more memory while reallocating array"
 msgstr " нема више меморије при поновној алок. низа "
 
-#, c-format
-msgid " while doing inode scan %d "
+#, fuzzy, c-format
+msgid "while doing inode scan %d"
 msgstr " при претраживању ичворова %d "
 
-msgid " Ext2lib error "
+#, fuzzy
+msgid "Ext2lib error"
 msgstr " Грешка библиотеке ext2lib "
 
-#, c-format
-msgid " Cannot open file %s "
+#, fuzzy, c-format
+msgid "Cannot open file %s"
 msgstr " Не могу да отворим датотеку %s "
 
 msgid "undelfs: reading inode bitmap..."
 msgstr "undelfs: читам мапу битова за ичворове..."
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot load inode bitmap from: \n"
-" %s \n"
+"Cannot load inode bitmap from:\n"
+"%s"
 msgstr ""
 " Не могу да учитам мапу битова за ичворове из: \n"
 " %s \n"
@@ -795,22 +810,29 @@ msgstr ""
 msgid "undelfs: reading block bitmap..."
 msgstr "undelfs: учитавам мапу битова за ичворове..."
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot load block bitmap from: \n"
-" %s \n"
+"Cannot load block bitmap from:\n"
+"%s"
 msgstr ""
 " Не могу да учитам мапу битова за блокове из: \n"
 " %s \n"
 
-msgid " vfs_info is not fs! "
+#, fuzzy
+msgid "vfs_info is not fs!"
 msgstr " vfs_info - није систем датотека! "
 
-msgid " You have to chdir to extract files first "
+#, fuzzy
+msgid "You have to chdir to extract files first"
 msgstr " Морате да поставите дир. у који желите да издвајате "
 
-msgid " while iterating over blocks "
+#, fuzzy
+msgid "while iterating over blocks"
 msgstr " при итерацији блокова "
+
+#, fuzzy, c-format
+msgid "Cannot open file \"%s\""
+msgstr " Не могу да отворим датотеку %s "
 
 msgid "Cannot parse:"
 msgstr "Не могу да рашчланим:"
@@ -861,21 +883,22 @@ msgstr "Режим"
 msgid "%6d of %d"
 msgstr "%6d од %d"
 
-msgid " Chown advanced command "
+#, fuzzy
+msgid "Chown advanced command"
 msgstr " Напредна промена власника "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot chmod \"%s\" \n"
-" %s "
+"Cannot chmod \"%s\"\n"
+"%s"
 msgstr ""
 " Не могу да променим дозволе `%s'\n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot chown \"%s\" \n"
-" %s "
+"Cannot chown \"%s\"\n"
+"%s"
 msgstr ""
 " Не могу да променим власника `%s' \n"
 " %s "
@@ -949,7 +972,8 @@ msgid ""
 "{FORE} and {BACK} can be omitted, and the default will be used\n"
 "\n"
 "Keywords:\n"
-"   Global:       errors, reverse, gauge, input, viewunderline\n"
+"   Global:       errors, reverse, gauge, viewunderline\n"
+"                 input, inputmark, inputunchanged, commandlinemark\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
@@ -1000,10 +1024,11 @@ msgstr "[прекидачи] [овај_дир] [дир_другог_окна]\n"
 msgid "Set initial line number for the internal editor"
 msgstr "Поставите број почетног реда за уграђени уређивач"
 
+#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
+"as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
 "Молим да пошаљете пријаве грешака (укључивши излаз наредбе `mc -V')\n"
@@ -1013,6 +1038,12 @@ msgstr ""
 msgid "GNU Midnight Commander %s\n"
 msgstr "ГНУ-ов поноћни наредник %s\n"
 
+msgid "No arguments given to the viewer."
+msgstr ""
+
+msgid "There 2 files are required to diffviewer."
+msgstr ""
+
 #, fuzzy
 msgid "Main options"
 msgstr " Избори окна "
@@ -1021,25 +1052,30 @@ msgstr " Избори окна "
 msgid "Terminal options"
 msgstr " Други избори "
 
-msgid " Background process error "
+#, fuzzy
+msgid "Background process error"
 msgstr " Грешка позадинског процеса "
 
-msgid " Unknown error in child "
+#, fuzzy
+msgid "Unknown error in child"
 msgstr " Непозната грешка у детету "
 
-msgid " Child died unexpectedly "
+#, fuzzy
+msgid "Child died unexpectedly"
 msgstr " Дете је изненадно завршило рад "
 
-msgid " Background protocol error "
+#, fuzzy
+msgid "Background protocol error"
 msgstr " Грешка позадинског протокола "
 
 #, fuzzy
 msgid "Reading failed"
 msgstr "<неуспешно читање везе>"
 
+#, fuzzy
 msgid ""
-" Background process sent us a request for more arguments \n"
-" than we can handle. \n"
+"Background process sent us a request for more arguments\n"
+"than we can handle."
 msgstr ""
 " Позадински процес нам је послао захтев за више аргумената\n"
 " него што можемо да обрадимо. \n"
@@ -1059,7 +1095,8 @@ msgstr "&Кориснички задано:"
 msgid "Listing mode"
 msgstr "Режим списка"
 
-msgid "user &Mini status"
+#, fuzzy
+msgid "User &mini status"
 msgstr "корисничко &Мини стање"
 
 msgid "&OK"
@@ -1124,7 +1161,8 @@ msgstr "7 бита"
 msgid "F&ull 8 bits input"
 msgstr "П&ун осмобитни улаз"
 
-msgid " Display bits "
+#, fuzzy
+msgid "Display bits"
 msgstr " Битова у приказу "
 
 msgid "Other 8 bit"
@@ -1135,6 +1173,10 @@ msgstr "Кодна страна улаза и приказа:"
 
 msgid "&Select"
 msgstr "&Изабери"
+
+#, fuzzy
+msgid "Directory tree"
+msgstr "&Стабло директоријума"
 
 #, fuzzy
 msgid "Use passive mode over pro&xy"
@@ -1161,7 +1203,8 @@ msgstr "анонимна лозинка за ftp:"
 msgid "Timeout for freeing VFSs:"
 msgstr "Чекање ослобађања ВСД-ова:"
 
-msgid " Virtual File System Setting "
+#, fuzzy
+msgid "Virtual File System Setting"
 msgstr " Подешавање виртуалног система датотека "
 
 msgid "cd"
@@ -1179,7 +1222,8 @@ msgstr "Постојећа датотека (на коју ће упућиват
 msgid "Symbolic link"
 msgstr "Симболичка веза"
 
-msgid "Running "
+#, fuzzy
+msgid "Running"
 msgstr "Покренуто "
 
 msgid "Stopped"
@@ -1283,14 +1327,14 @@ msgstr "кретање по изборима"
 msgid "and T or INS to mark"
 msgstr "а T или INS за означавање"
 
-msgid " Permission "
-msgstr " Дозвола "
-
-msgid " File "
-msgstr " Датотека "
-
 msgid "Chmod command"
 msgstr "Промена дозвола"
+
+msgid "File"
+msgstr "Датотека"
+
+msgid "Permission"
+msgstr "Дозволе"
 
 msgid "Set &users"
 msgstr "Постави &кориснике"
@@ -1298,22 +1342,11 @@ msgstr "Постави &кориснике"
 msgid "Set &groups"
 msgstr "Постави &групе"
 
-msgid " Name "
-msgstr " Назив "
+msgid "Size"
+msgstr "Величина"
 
-msgid " Owner name "
-msgstr " Име власника "
-
-msgid " Group name "
-msgstr " Назив групе "
-
-msgid " Size "
-msgstr " Величина "
-
-msgid " User name "
-msgstr " Име корисника "
-
-msgid " Chown command "
+#, fuzzy
+msgid "Chown command"
 msgstr " Промена власника "
 
 msgid "<Unknown user>"
@@ -1322,8 +1355,9 @@ msgstr "<Непознат корисник>"
 msgid "<Unknown group>"
 msgstr "<Непозната група>"
 
-msgid " Confirmation "
-msgstr " Потврде "
+#, fuzzy
+msgid "User name"
+msgstr " Име корисника "
 
 msgid "Files tagged, want to cd?"
 msgstr "Датотеке означене, да пром.дир.?"
@@ -1331,28 +1365,35 @@ msgstr "Датотеке означене, да пром.дир.?"
 msgid "Cannot change directory"
 msgstr "Не могу да променим директоријум"
 
-msgid " View file "
+#, fuzzy
+msgid "View file"
 msgstr " Прегледај датотеку "
 
-msgid " Filename:"
+#, fuzzy
+msgid "Filename:"
 msgstr " Датотека: "
 
-msgid " Filtered view "
+#, fuzzy
+msgid "Filtered view"
 msgstr " Филтрирани приказ "
 
-msgid " Filter command and arguments:"
+#, fuzzy
+msgid "Filter command and arguments:"
 msgstr " Наредба и аргументи филтера: "
 
 msgid "Create a new Directory"
 msgstr "Створи нови директоријум"
 
-msgid " Enter directory name:"
+#, fuzzy
+msgid "Enter directory name:"
 msgstr " Унесите назив директоријума:"
 
-msgid " Filter "
+#, fuzzy
+msgid "Filter"
 msgstr " Филтар "
 
-msgid " Set expression for filtering filenames"
+#, fuzzy
+msgid "Set expression for filtering filenames"
 msgstr " Постави израз за филтрирање датотека"
 
 msgid "&Using shell patterns"
@@ -1366,16 +1407,19 @@ msgstr "разлику&ј велика и мала слова"
 msgid "&Files only"
 msgstr "&Само величина"
 
-msgid " Select "
-msgstr " Изабери "
+#, fuzzy
+msgid "Select"
+msgstr "&Изабери"
 
-msgid " Unselect "
+#, fuzzy
+msgid "Unselect"
 msgstr " Одизабери "
 
 msgid "Extension file edit"
 msgstr "Уређивање датотеке са врстама"
 
-msgid " Which extension file you want to edit? "
+#, fuzzy
+msgid "Which extension file you want to edit?"
 msgstr " Коју датотеку са врстама желите да уредите? "
 
 msgid "&User"
@@ -1384,10 +1428,12 @@ msgstr "&Корисничку"
 msgid "&System Wide"
 msgstr "&Системску"
 
-msgid " Menu edit "
+#, fuzzy
+msgid "Menu edit"
 msgstr " Уређивање менија "
 
-msgid " Which menu file do you want to edit? "
+#, fuzzy
+msgid "Which menu file do you want to edit?"
 msgstr " Коју датотеку менија желите да уредите? "
 
 msgid "&Local"
@@ -1397,13 +1443,15 @@ msgid "Highlighting groups file edit"
 msgstr ""
 
 #, fuzzy
-msgid " Which highlighting file you want to edit? "
+msgid "Which highlighting file you want to edit?"
 msgstr " Коју датотеку са врстама желите да уредите? "
 
-msgid " Compare directories "
+#, fuzzy
+msgid "Compare directories"
 msgstr " Упореди директоријуме "
 
-msgid " Select compare method: "
+#, fuzzy
+msgid "Select compare method:"
 msgstr " Изаберите начин поређења: "
 
 msgid "&Quick"
@@ -1415,12 +1463,16 @@ msgstr "&Само величина"
 msgid "&Thorough"
 msgstr "&Темељан"
 
-msgid " Both panels should be in the listing mode to use this command "
+#, fuzzy
+msgid ""
+"Both panels should be in the listing mode\n"
+"to use this command"
 msgstr " Оба окна би требало да су у режиму списка за употребу ове наредбе "
 
+#, fuzzy
 msgid ""
-" Not an xterm or Linux console; \n"
-" the panels cannot be toggled. "
+"Not an xterm or Linux console;\n"
+"the panels cannot be toggled."
 msgstr ""
 " Ово није Икс терминал или конзола; \n"
 " окна се не могу смењивати. "
@@ -1429,84 +1481,96 @@ msgstr ""
 msgid "Link %s to:"
 msgstr "Повежи %s са:"
 
-msgid " Link "
-msgstr " Повежи "
+#, fuzzy
+msgid "Link"
+msgstr "Ве&зе"
 
-#, c-format
-msgid " link: %s "
+#, fuzzy, c-format
+msgid "link: %s"
 msgstr " веза: %s "
 
-#, c-format
-msgid " symlink: %s "
+#, fuzzy, c-format
+msgid "symlink: %s"
 msgstr " симвеза: %s "
 
-#, c-format
-msgid " Symlink `%s' points to: "
+#, fuzzy, c-format
+msgid "Symlink `%s' points to:"
 msgstr " Симвеза `%s' упућује на: "
 
-msgid " Edit symlink "
+#, fuzzy
+msgid "Edit symlink"
 msgstr " Уреди симвезу "
 
-#, c-format
-msgid " edit symlink, unable to remove %s: %s "
+#, fuzzy, c-format
+msgid "edit symlink, unable to remove %s: %s"
 msgstr " уређивање симвезе; не могу да уклоним %s: %s "
 
-#, c-format
-msgid " edit symlink: %s "
+#, fuzzy, c-format
+msgid "edit symlink: %s"
 msgstr " уређивање симвезе: %s "
 
 #, c-format
 msgid "`%s' is not a symbolic link"
 msgstr "`%s' није симболичка веза"
 
-#, c-format
-msgid " Cannot chdir to %s "
+#, fuzzy, c-format
+msgid "Cannot chdir to %s"
 msgstr " Не могу да поставим дир. на %s "
 
-msgid " Enter machine name (F1 for details): "
+#, fuzzy
+msgid "Enter machine name (F1 for details):"
 msgstr " Унесите назив машине (F1 за детаље): "
 
-msgid " Link to a remote machine "
+#, fuzzy
+msgid "Link to a remote machine"
 msgstr " Повезивање са удаљеном машином "
 
-msgid " FTP to machine "
+#, fuzzy
+msgid "FTP to machine"
 msgstr " FTP на машину "
 
-msgid " Shell link to machine "
+#, fuzzy
+msgid "Shell link to machine"
 msgstr " Повезивање љуске са машином "
 
-msgid " SMB link to machine "
+#, fuzzy
+msgid "SMB link to machine"
 msgstr " Веза SMB-ом са машином "
 
-msgid " Undelete files on an ext2 file system "
+#, fuzzy
+msgid "Undelete files on an ext2 file system"
 msgstr " Одобриши датотеке на систему датотека ext2 "
 
+#, fuzzy
 msgid ""
-" Enter device (without /dev/) to undelete\n"
-"   files on: (F1 for details)"
+"Enter device (without /dev/) to undelete\n"
+"files on: (F1 for details)"
 msgstr ""
 " Унесите уређај (без /dev/) за одобрисање\n"
 "   датотека на: (F1 за детаље)"
 
-msgid " Setup "
+#, fuzzy
+msgid "Setup"
 msgstr " Подешавања "
 
 #, fuzzy, c-format
-msgid " Setup saved to ~/%s"
+msgid "Setup saved to ~/%s"
 msgstr " Подешавања су сачувана у ~/"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot chdir to \"%s\" \n"
-" %s "
+"Cannot chdir to \"%s\"\n"
+"%s"
 msgstr ""
 " Не могу да поставим дир. на `%s' \n"
 " %s "
 
-msgid " Cannot execute commands on non-local filesystems"
+#, fuzzy
+msgid "Cannot execute commands on non-local filesystems"
 msgstr " Не могу да извршавам наредбе на не-лок. системима датoтека"
 
-msgid " The shell is already running a command "
+#, fuzzy
+msgid "The shell is already running a command"
 msgstr " Љуска већ извршава наредбу "
 
 msgid "&Dismiss"
@@ -1522,39 +1586,42 @@ msgstr "Само &целе речи"
 msgid "&Backwards"
 msgstr "Уна&зад"
 
-msgid "case &Sensitive"
-msgstr "разл. &Вел./мала слова"
+#, fuzzy
+msgid "Case &sensitive"
+msgstr "разлику&ј велика и мала слова"
 
-msgid " Enter search string:"
+#, fuzzy
+msgid "Enter search string:"
 msgstr " Унесите ниску претраге:"
 
 msgid "Search"
 msgstr "Тражи"
 
-msgid " Search is disabled "
-msgstr ""
+#, fuzzy
+msgid "Search is disabled"
+msgstr "Тражи"
 
 #, fuzzy, c-format
 msgid ""
-" Cannot create temporary diff file \n"
-" %s "
+"Cannot create temporary diff file\n"
+"%s"
 msgstr ""
 " Не могу да створим привремену датотеку наредби \n"
 " %s "
 
 #, fuzzy, c-format
 msgid ""
-" Cannot create backup file \n"
-" %s%s \n"
-" %s "
+"Cannot create backup file\n"
+"%s%s\n"
+"%s"
 msgstr ""
 " Не могу да створим одредишну датотеку `%s' \n"
 " %s "
 
 #, fuzzy, c-format
 msgid ""
-" Cannot create temporary merge file \n"
-" %s "
+"Cannot create temporary merge file\n"
+"%s"
 msgstr ""
 " Не могу да створим привремену датотеку наредби \n"
 " %s "
@@ -1600,10 +1667,20 @@ msgstr " Избори "
 msgid "Edit"
 msgstr "Уреди"
 
-msgid " Edit is disabled "
-msgstr ""
+#, fuzzy
+msgid "Edit is disabled"
+msgstr "Уреди датотеку &синтаксе"
 
-msgid " Enter line: "
+#, fuzzy
+msgid "Goto line (left)"
+msgstr " Иди на ред "
+
+#, fuzzy
+msgid "Goto line (right)"
+msgstr " Иди на ред "
+
+#, fuzzy
+msgid "Enter line:"
 msgstr " Унесите број реда: "
 
 msgid "ButtonBar|Help"
@@ -1630,7 +1707,8 @@ msgstr ""
 msgid "Quit"
 msgstr "Заврши"
 
-msgid " File was modified, Save with exit? "
+#, fuzzy
+msgid "File was modified, Save with exit?"
 msgstr " Датотека је измењена, да сачувам при излазу? "
 
 msgid "Two files are needed to compare"
@@ -1640,7 +1718,7 @@ msgid "Cannot read directory contents"
 msgstr "Не могу да учитам садржај директоријума"
 
 #, fuzzy
-msgid " Choose syntax highlighting "
+msgid "Choose syntax highlighting"
 msgstr "Исти&цање синтаксе"
 
 #, fuzzy
@@ -1651,37 +1729,38 @@ msgid "< Reload Current Syntax >"
 msgstr ""
 
 #, fuzzy, c-format
-msgid " Cannot open %s for reading "
+msgid "Cannot open %s for reading"
 msgstr " Не могу да отворим цев за читање: "
 
 msgid "Error"
 msgstr "Грешка"
 
 #, fuzzy, c-format
-msgid " Error reading %s "
+msgid "Error reading %s"
 msgstr "Грешка при читању списа:"
 
 #, fuzzy, c-format
-msgid " Error reading from pipe: %s "
+msgid "Error reading from pipe: %s"
 msgstr " Грешка при читању са цеви: "
 
 #, fuzzy, c-format
-msgid " Cannot open pipe for reading: %s "
+msgid "Cannot open pipe for reading: %s"
 msgstr " Не могу да отворим цев за читање: "
 
 #, fuzzy, c-format
-msgid " Cannot get size/permissions for %s "
+msgid "Cannot get size/permissions for %s"
 msgstr " Не могу да сазнам величину и дозволе за датотеку: "
 
 #, fuzzy, c-format
-msgid " %s is not a regular file "
+msgid "\"%s\" is not a regular file"
 msgstr " Не могу да прегледам: датотека није обична "
 
 #, fuzzy, c-format
-msgid " File %s is too large "
+msgid "File \"%s\" is too large"
 msgstr " Датотека је превелика: "
 
-msgid " About "
+#, fuzzy
+msgid "About"
 msgstr " О програму"
 
 msgid ""
@@ -1704,20 +1783,22 @@ msgstr ""
 msgid "Macro recursion is too deep"
 msgstr "Ниво рекурзије макроа је превисок"
 
-msgid " File has hard-links. Detach before saving? "
+msgid "File has hard-links. Detach before saving?"
 msgstr ""
 
 msgid "The file has been modified in the meantime. Save anyway?"
 msgstr ""
 
-msgid " Error writing to pipe: "
+#, fuzzy, c-format
+msgid "Error writing to pipe: %s"
 msgstr " Грешка при упису у цев: "
 
-msgid " Cannot open pipe for writing: "
+#, fuzzy, c-format
+msgid "Cannot open pipe for writing: %s"
 msgstr " Не могу да отворим цев за упис: "
 
 #, fuzzy, c-format
-msgid " Cannot open file for writing: %s "
+msgid "Cannot open file for writing: %s"
 msgstr " Не могу да отворим цев за упис: "
 
 #, fuzzy
@@ -1734,7 +1815,8 @@ msgstr ""
 msgid "Check &POSIX new line"
 msgstr ""
 
-msgid " Edit Save Mode "
+#, fuzzy
+msgid "Edit Save Mode"
 msgstr " Режим чувања "
 
 msgid "The file you are saving is not finished with a newline"
@@ -1759,58 +1841,77 @@ msgstr ""
 msgid "Change line breaks to:"
 msgstr ""
 
-msgid " Enter file name: "
+#, fuzzy
+msgid "Enter file name:"
 msgstr " Унесите назив датотеке: "
 
-msgid " Save As "
+#, fuzzy
+msgid "Save As"
 msgstr " Сачувај као "
 
-msgid " A file already exists with this name. "
+#, fuzzy
+msgid "A file already exists with this name"
 msgstr " Датотека под тим називом већ постоји. "
 
 #, fuzzy
 msgid "&Overwrite"
 msgstr "Препиши"
 
-msgid " Cannot save file. "
+#, fuzzy
+msgid "Save as"
+msgstr "&Сачувај подешавања"
+
+#, fuzzy
+msgid "Cannot save file"
 msgstr " Не могу да сачувам датотеку. "
 
-msgid " Delete macro "
+#, fuzzy
+msgid "Delete macro"
 msgstr " Брисање макроа "
 
-msgid " Cannot open temp file "
+#, fuzzy
+msgid "Cannot open temp file"
 msgstr " Не могу да отворим привремену датотеку "
 
-msgid " Cannot open macro file "
+#, fuzzy
+msgid "Cannot open macro file"
 msgstr " Не могу да отворим датотеку макроа "
 
-msgid " Cannot overwrite macro file "
+#, fuzzy
+msgid "Cannot overwrite macro file"
 msgstr " Не могу да препишем датотеку макроа "
 
-msgid " Save macro "
+#, fuzzy
+msgid "Save macro"
 msgstr " Чување макроа "
 
-msgid " Press the macro's new hotkey: "
+#, fuzzy
+msgid "Press the macro's new hotkey:"
 msgstr " Притисните нову пречицу макроа: "
 
-msgid " Press macro hotkey: "
+#, fuzzy
+msgid "Press macro hotkey:"
 msgstr " Притисните пречицу макроа: "
 
-msgid " Load macro "
+#, fuzzy
+msgid "Load macro"
 msgstr " Учитавање макроа "
 
-msgid " Confirm save file? : "
+#, fuzzy, c-format
+msgid "Confirm save file: \"%s\""
 msgstr " Потврда чувања датотеке? : "
 
-msgid " Save file "
+#, fuzzy
+msgid "Save file"
 msgstr " Чување датотеке "
 
 msgid "&Save"
 msgstr "са&Чувај"
 
+#, fuzzy
 msgid ""
-" Current text was modified without a file save. \n"
-" Continue discards these changes. "
+"Current text was modified without a file save.\n"
+"Continue discards these changes"
 msgstr ""
 " Постојећи текст је измењен а није сачуван.\n"
 " Дугме `настави' одбацује ове измене. "
@@ -1818,77 +1919,91 @@ msgstr ""
 msgid "Syntax file edit"
 msgstr "Уређивање синтаксне датотеке"
 
-msgid " Which syntax file you want to edit? "
+#, fuzzy
+msgid "Which syntax file you want to edit?"
 msgstr " Коју синтаксну датотеку желите да уредите?"
 
-msgid " Load "
+#, fuzzy
+msgid "Load"
 msgstr " Учитај "
 
-msgid " Block is large, you may not be able to undo this action. "
+#, fuzzy
+msgid "Block is large, you may not be able to undo this action"
 msgstr " Блок је велики, можда нећете моћи да опозовете ову радњу. "
 
 #, fuzzy
 msgid "Replace"
 msgstr "За&мени"
 
-msgid " Replace "
-msgstr " Замена "
-
-#, c-format
-msgid " %ld replacements made. "
+#, fuzzy, c-format
+msgid "%ld replacements made"
 msgstr " Извршено %ld замена. "
+
+#, fuzzy
+msgid "File was modified, save with exit?"
+msgstr " Датотека је измењена, да сачувам при излазу? "
 
 #, fuzzy
 msgid "&Cancel quit"
 msgstr "Поништи завршетак"
 
-#, fuzzy
-msgid " Error "
-msgstr "Грешка"
-
-msgid " This function is not implemented. "
+msgid "This function is not implemented"
 msgstr ""
 
-msgid " Copy to clipboard "
+#, fuzzy
+msgid "Copy to clipboard"
 msgstr " Копирај у прихватник "
 
-msgid " Unable to save to file. "
+#, fuzzy
+msgid "Unable to save to file"
 msgstr " Не могу да сачувам датотеку. "
 
-msgid " Cut to clipboard "
+#, fuzzy
+msgid "Cut to clipboard"
 msgstr " Исеци у прихватник "
 
-msgid " Goto line "
+#, fuzzy
+msgid "Goto line"
 msgstr " Иди на ред "
 
-msgid " Save Block "
+#, fuzzy
+msgid "Save block"
 msgstr " Сачувај блок "
 
-msgid " Insert File "
-msgstr " Уметни датотеку "
+#, fuzzy
+msgid "Insert file"
+msgstr "&Убаци датотеку...      F15"
 
-msgid " Cannot insert file. "
+#, fuzzy
+msgid "Cannot insert file"
 msgstr " Не могу да уметнем датотеку. "
 
-msgid " Sort block "
+#, fuzzy
+msgid "Sort block"
 msgstr " Поређај блок "
 
-msgid " You must first highlight a block of text. "
+#, fuzzy
+msgid "You must first highlight a block of text"
 msgstr " Прво морате да означите блок текста. "
 
-msgid " Run Sort "
+#, fuzzy
+msgid "Run sort"
 msgstr " Ређај "
 
-msgid " Enter sort options (see manpage) separated by whitespace: "
+#, fuzzy
+msgid "Enter sort options (see manpage) separated by whitespace:"
 msgstr " Унесите изборе ређања (види упутство) раздвојене белинама: "
 
-msgid " Sort "
+#, fuzzy
+msgid "Sort"
 msgstr " Ређај "
 
-msgid " Cannot execute sort command "
+#, fuzzy
+msgid "Cannot execute sort command"
 msgstr " Не могу да извршим наредбу ређања "
 
-msgid " Sort returned non-zero: "
+#, fuzzy, c-format
+msgid "Sort returned non-zero: %s"
 msgstr " Ређање није успешно завршено: "
 
 msgid "Paste output of external command"
@@ -1922,35 +2037,52 @@ msgstr "Обради блок"
 msgid "Error calling program"
 msgstr "Грешка при затварању списа:"
 
-msgid " Copies to"
+#, fuzzy
+msgid "Copies to"
 msgstr " Копије "
 
-msgid " Subject"
+#, fuzzy
+msgid "Subject"
 msgstr " Тема "
 
-msgid " To"
+#, fuzzy
+msgid "To"
 msgstr " Коме"
 
-msgid " mail -s <subject> -c <cc> <to>"
+#, fuzzy
+msgid "mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <тема> -c <копије> <коме>"
 
-msgid " Mail "
+#, fuzzy
+msgid "Mail"
 msgstr " Пошта "
 
-msgid " Insert Literal "
-msgstr " Убаци литерал "
+#, fuzzy
+msgid "Insert literal"
+msgstr "Убаци &литерал...               C-q"
 
-msgid " Press any key: "
+#, fuzzy
+msgid "Press any key:"
 msgstr " Притисните било који тастер: "
 
-msgid " Execute Macro "
-msgstr " Изврши макро "
+#, fuzzy
+msgid "Execute macro"
+msgstr "&Изврши макро...           C-a, KEY"
+
+#, fuzzy
+msgid ""
+"Current text was modified without a file save\n"
+"Continue discards these changes"
+msgstr ""
+" Постојећи текст је измењен а није сачуван.\n"
+" Дугме `настави' одбацује ове измене. "
 
 #, fuzzy
 msgid "In se&lection"
 msgstr "обрни из&Бор           M-*"
 
-msgid " Enter replacement string:"
+#, fuzzy
+msgid "Enter replacement string:"
 msgstr " Унесите ниску замене:"
 
 #, fuzzy
@@ -1959,6 +2091,14 @@ msgstr "Нађи датотеку"
 
 msgid "Cancel"
 msgstr "Поништи"
+
+#, fuzzy
+msgid ""
+"Current text was modified without a file save.\n"
+"Continue discards these changes."
+msgstr ""
+" Постојећи текст је измењен а није сачуван.\n"
+" Дугме `настави' одбацује ове измене. "
 
 msgid "&Skip"
 msgstr "Пре&скочи"
@@ -1969,15 +2109,17 @@ msgstr "С&ве"
 msgid "&Replace"
 msgstr "За&мени"
 
-msgid " Replace with: "
+#, fuzzy
+msgid "Replace with:"
 msgstr " Замени са: "
 
-msgid " Confirm replace "
+#, fuzzy
+msgid "Confirm replace"
 msgstr " Потврда замене "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"File \"%s\" is already being edited\n"
+"File \"%s\" is already being edited.\n"
 "User: %s\n"
 "Process ID: %d"
 msgstr ""
@@ -2183,7 +2325,8 @@ msgstr "Залепи &излаз наредбе...        M-u"
 msgid "&External formatter"
 msgstr "Спо&љашњи форматер              F19"
 
-msgid "&General...  "
+#, fuzzy
+msgid "&General..."
 msgstr "&Опште...  "
 
 #, fuzzy
@@ -2242,7 +2385,8 @@ msgstr "Динамични пасуси"
 msgid "Type writer wrap"
 msgstr "Аутоматски прелом"
 
-msgid "Word wrap line length: "
+#, fuzzy
+msgid "Word wrap line length:"
 msgstr "Прелом реда на дужини: "
 
 msgid "Cursor beyond end of line"
@@ -2270,7 +2414,8 @@ msgstr "Потврда &чувања"
 msgid "&Return does autoindent"
 msgstr "Тастер `&Return' не увлачи"
 
-msgid "Tab spacing: "
+#, fuzzy
+msgid "Tab spacing:"
 msgstr "Размак табулатора: "
 
 msgid "Fill tabs with &spaces"
@@ -2285,7 +2430,8 @@ msgstr "&Лажна полутабулација"
 msgid "Wrap mode"
 msgstr "Прелом редова"
 
-msgid " Editor options "
+#, fuzzy
+msgid "Editor options"
 msgstr " Избори уређивача "
 
 msgid "ButtonBar|Mark"
@@ -2306,26 +2452,28 @@ msgstr ""
 msgid "ButtonBar|PullDn"
 msgstr ""
 
-msgid " Load syntax file "
+#, fuzzy
+msgid "Load syntax file"
 msgstr " Учитај датотеку синтаксе "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot open file %s \n"
-" %s "
+"Cannot open file %s\n"
+"%s"
 msgstr ""
 " Не могу да отворим датотеку `%s' \n"
 " %s "
 
-#, c-format
-msgid " Error in file %s on line %d "
+#, fuzzy, c-format
+msgid "Error in file %s on line %d"
 msgstr " Грешка у датотеци `%s' на реду %d "
 
+#, fuzzy
 msgid ""
-" The Commander can't change to the directory that \n"
-" the subshell claims you are in.  Perhaps you have \n"
-" deleted your working directory, or given yourself \n"
-" extra access permissions with the \"su\" command? "
+"The Commander can't change to the directory that\n"
+"the subshell claims you are in. Perhaps you have\n"
+"deleted your working directory, or given yourself\n"
+"extra access permissions with the \"su\" command?"
 msgstr ""
 " Наредник не може да уђе у директоријум за који\n"
 " подљуска тврди да се у њему налазите. Можда сте\n"
@@ -2336,19 +2484,20 @@ msgstr ""
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Унесите `exit' да бисте се вратили у Поноћног наредника"
 
-#, c-format
-msgid " Cannot fetch a local copy of %s "
+#, fuzzy, c-format
+msgid "Cannot fetch a local copy of %s"
 msgstr " Не могу да добавим локални примерак %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot create temporary command file \n"
-" %s "
+"Cannot create temporary command file\n"
+"%s"
 msgstr ""
 " Не могу да створим привремену датотеку наредби \n"
 " %s "
 
-msgid " Parameter "
+#, fuzzy
+msgid "Parameter"
 msgstr " Параметар "
 
 #, fuzzy, c-format
@@ -2357,8 +2506,8 @@ msgstr " грешка датотеке "
 
 #, fuzzy, c-format
 msgid ""
-"The format of the %smc.ext file has changed with version 3.0.  It seems that "
-"the installation failed.  Please fetch a fresh copy from the Midnight "
+"The format of the %smc.ext file has changed with version 3.0. It seems that "
+"the installation failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
 "Датотека mc.ext је измењена у верзији 3.0.\n"
@@ -2367,15 +2516,19 @@ msgstr ""
 "пакета Поноћног наредника."
 
 #, fuzzy, c-format
-msgid " ~/%s file error "
+msgid "~/%s file error"
 msgstr " грешка датотеке "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The format of the ~/%s file has changed with version 3.0.  You may either "
+"The format of the ~/%s file has changed with version 3.0. You may either "
 "want to copy it from %smc.ext or use that file as an example of how to write "
 "it."
 msgstr ""
+"Датотека mc.ext је измењена у верзији 3.0.\n"
+"Изгледа да инсталација није успела.\n"
+"Молим да преузмете свеж примерак из\n"
+"пакета Поноћног наредника."
 
 msgid "DialogTitle|Copy"
 msgstr ""
@@ -2386,30 +2539,32 @@ msgstr ""
 msgid "DialogTitle|Delete"
 msgstr ""
 
-msgid " Cannot make the hardlink "
+#, fuzzy
+msgid "Cannot make the hardlink"
 msgstr " Не могу да направим тврду везу "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot read source link \"%s\" \n"
-" %s "
+"Cannot read source link \"%s\"\n"
+"%s"
 msgstr ""
 " Не могу да читам изворну везу `%s' \n"
 " %s "
 
+#, fuzzy
 msgid ""
-" Cannot make stable symlinks across non-local filesystems: \n"
+"Cannot make stable symlinks acrossnon-local filesystems:\n"
 "\n"
-" Option Stable Symlinks will be disabled "
+"Option Stable Symlinks will be disabled"
 msgstr ""
 " Не могу да правим стабилне симвезе преко не-лок. система датотека: \n"
 "\n"
 " Избор `Стабилне симвезе' ће бити искључен "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot create target symlink \"%s\" \n"
-" %s "
+"Cannot create target symlink \"%s\"\n"
+"%s"
 msgstr ""
 " Не могу да створим одредишну симвезу `%s' \n"
 " %s "
@@ -2417,101 +2572,102 @@ msgstr ""
 msgid "&Abort"
 msgstr "&Прекини"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot overwrite directory \"%s\" \n"
-" %s "
+"Cannot overwrite directory\"%s\"\n"
+"%s"
 msgstr ""
 " Не могу да препишем директоријум `%s' \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot stat source file \"%s\" \n"
-" %s "
+"Cannot stat source file \"%s\"\n"
+"%s"
 msgstr ""
 " Не могу да извршим `stat' на изворној датотеци `%s' \n"
 " %s "
 
 #, fuzzy, c-format
 msgid ""
-" `%s' \n"
-" and \n"
-" `%s' \n"
-" are the same file "
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same file"
 msgstr " `%s' и `%s' су истоветни "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot create special file \"%s\" \n"
-" %s "
+"Cannot create special file \"%s\"\n"
+"%s"
 msgstr ""
 " Не могу да створим посебну датотеку `%s' \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot chown target file \"%s\" \n"
-" %s "
+"Cannot chown target file \"%s\"\n"
+"%s"
 msgstr ""
 " Не могу да променим власника одредишној датотеци `%s' \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot chmod target file \"%s\" \n"
-" %s "
+"Cannot chmod target file \"%s\"\n"
+"%s"
 msgstr ""
 " Не могу да променим дозволе одредишној датотеци `%s' \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot open source file \"%s\" \n"
-" %s "
+"Cannot open source file \"%s\"\n"
+"%s"
 msgstr ""
 " Не могу да отворим датотеку `%s' \n"
 " %s "
 
-msgid " Reget failed, about to overwrite file "
+#, fuzzy
+msgid "Reget failed, about to overwrite file"
 msgstr " Поновно преузимање није успело, преписаћу датотеку "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot fstat source file \"%s\" \n"
-" %s "
+"Cannot fstat source file \"%s\"\n"
+"%s"
 msgstr ""
 " Не могу да извршим `fstat' на изворној датотеци `%s' \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot create target file \"%s\" \n"
-" %s "
+"Cannot create target file \"%s\"\n"
+"%s"
 msgstr ""
 " Не могу да створим одредишну датотеку `%s' \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot fstat target file \"%s\" \n"
-" %s "
+"Cannot fstat target file \"%s\"\n"
+"%s"
 msgstr ""
 " Не могу да извршим fstat на одредишној датотеци `%s' \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot read source file \"%s\" \n"
-" %s "
+"Cannot read source file\"%s\"\n"
+"%s"
 msgstr ""
 " Не могу да читам одредишну датотеку `%s' \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot write target file \"%s\" \n"
-" %s "
+"Cannot write target file \"%s\"\n"
+"%s"
 msgstr ""
 " Не могу да пишем у одредишну датотеку `%s' \n"
 " %s "
@@ -2519,18 +2675,18 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(застој)"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot close source file \"%s\" \n"
-" %s "
+"Cannot close source file \"%s\"\n"
+"%s"
 msgstr ""
 " Не могу да затворим изворну датотеку `%s' \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot close target file \"%s\" \n"
-" %s "
+"Cannot close target file \"%s\"\n"
+"%s"
 msgstr ""
 " Не могу да затворим одредишну датотеку `%s' \n"
 " %s "
@@ -2541,118 +2697,124 @@ msgstr "Датотека није у потпуности преузета. Да
 msgid "&Keep"
 msgstr "&Задржи"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot stat source directory \"%s\" \n"
-" %s "
+"Cannot stat source directory \"%s\"\n"
+"%s"
 msgstr ""
 " Не могу да извршим stat на изворном директоријуму `%s' \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Source \"%s\" is not a directory \n"
-" %s "
+"Source \"%s\" is not a directory\n"
+"%s"
 msgstr ""
 " Изворни директоријум `%s' није директоријум \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot copy cyclic symbolic link \n"
-" `%s' "
+"Cannot copy cyclic symbolic link\n"
+"\"%s\""
 msgstr ""
 " Не могу да копирам цикличну симболичку везу \n"
 " `%s' "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Destination \"%s\" must be a directory \n"
-" %s "
+"Destination \"%s\" must be a directory\n"
+"%s"
 msgstr ""
 " Одредиште `%s' мора да буде директоријум \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot create target directory \"%s\" \n"
-" %s "
+"Cannot create target directory \"%s\"\n"
+"%s"
 msgstr ""
 " Не могу да створим одредишни директоријум `%s' \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot chown target directory \"%s\" \n"
-" %s "
+"Cannot chown target directory \"%s\"\n"
+"%s"
 msgstr ""
 " Не могу да променим власника одредишном директоријуму `%s' \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot stat file \"%s\" \n"
-" %s "
+"Cannot stat file \"%s\"\n"
+"%s"
 msgstr ""
 " Не могу да извршим stat на датотеци `%s' \n"
 " %s "
 
-#, c-format
-msgid " Cannot overwrite directory `%s' "
-msgstr " Не могу да препишем директоријум `%s' "
+#, fuzzy, c-format
+msgid "Cannot overwrite directory \"%s\""
+msgstr " Не могу да препишем директоријум `%s' %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot move file \"%s\" to \"%s\" \n"
-" %s "
+"Cannot move file \"%s\" to \"%s\"\n"
+"%s"
 msgstr ""
 " Не могу да преместим датотеку `%s' у `%s' \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot remove file \"%s\" \n"
-" %s "
+"Cannot remove file \"%s\"\n"
+"%s"
 msgstr ""
 " Не могу да уклоним датотеку `%s' \n"
 " %s "
 
 #, fuzzy, c-format
 msgid ""
-" `%s' \n"
-" and \n"
-" `%s' \n"
-" are the same directory "
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same directory"
 msgstr " `%s' и `%s' су истоветни директоријуми "
 
-#, c-format
-msgid " Cannot overwrite directory \"%s\" %s "
-msgstr " Не могу да препишем директоријум `%s' %s "
+#, fuzzy, c-format
+msgid ""
+"Cannot overwrite directory \"%s\"\n"
+"%s"
+msgstr ""
+" Не могу да препишем директоријум `%s' \n"
+" %s "
 
-#, c-format
-msgid " Cannot overwrite file \"%s\" %s "
+#, fuzzy, c-format
+msgid ""
+"Cannot overwrite file \"%s\"\n"
+"%s"
 msgstr " Не могу да препишем датотеку `%s' %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot move directory \"%s\" to \"%s\" \n"
-" %s "
+"Cannot move directory \"%s\" to \"%s\"\n"
+"%s"
 msgstr ""
 " Не могу да преместим директоријум `%s' у `%s' \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot delete file \"%s\" \n"
-" %s "
+"Cannot delete file \"%s\"\n"
+"%s"
 msgstr ""
 " Не могу да обришем датотеку `%s' \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot remove directory \"%s\" \n"
-" %s "
+"Cannot remove directory \"%s\"\n"
+"%s"
 msgstr ""
 " Не могу да уклоним директоријум `%s' \n"
 " %s "
@@ -2690,45 +2852,51 @@ msgstr "директоријума"
 msgid "files/directories"
 msgstr "датотека/директоријума"
 
+#. TRANSLATORS: keep leading space here to split words in Copy/Move dialog
 msgid " with source mask:"
 msgstr " уз изворну маску:"
 
-msgid " to:"
-msgstr " у:"
+msgid "to:"
+msgstr "у:"
 
 #, c-format
 msgid "%s?"
 msgstr ""
 
-msgid " Cannot operate on \"..\"! "
+#, fuzzy
+msgid "Cannot operate on \"..\"!"
 msgstr " Не могу да радим са `..'! "
 
-msgid " Sorry, I could not put the job in background "
+#, fuzzy
+msgid "Sorry, I could not put the job in background"
 msgstr " Извините, али нисам могао да пошаљем посао у позадину "
 
 msgid "&Retry"
 msgstr "П&робај поново"
 
+#, fuzzy
 msgid ""
 "\n"
-"   Directory not empty.   \n"
-"   Delete it recursively? "
+"Directory not empty.\n"
+"Delete it recursively?"
 msgstr ""
 "\n"
 "   Директоријум није празан.   \n"
 "   Желите ли да га рекурзивно обришем? "
 
+#, fuzzy
 msgid ""
 "\n"
-"   Background process: Directory not empty \n"
-"   Delete it recursively? "
+"Background process: Directory not empty.\n"
+"Delete it recursively?"
 msgstr ""
 "\n"
 "   Позадински процес: Директоријум није празан \n"
 "   Желите ли да га рекурзивно обришем? "
 
-msgid " Delete: "
-msgstr " Обриши: "
+#, fuzzy
+msgid "Delete:"
+msgstr "Обриши"
 
 msgid "Non&e"
 msgstr "&Ништа"
@@ -2764,7 +2932,7 @@ msgid "Time: %s  %s (%s)"
 msgstr "Величина:        %s"
 
 #, c-format
-msgid " Total: %s of %s "
+msgid "Total: %s of %s"
 msgstr ""
 
 msgid "Source"
@@ -2814,10 +2982,12 @@ msgstr "&Надовежи"
 msgid "Overwrite this target?"
 msgstr "Желите ли да препишем ово одредиште?"
 
-msgid " File exists "
+#, fuzzy
+msgid "File exists"
 msgstr " Датотека постоји "
 
-msgid " Background process: File exists "
+#, fuzzy
+msgid "Background process: File exists"
 msgstr " Позадински процес: датотека постоји "
 
 msgid "&Background"
@@ -2827,17 +2997,16 @@ msgid "&Stable Symlinks"
 msgstr "&Стабилне симвезе"
 
 #, fuzzy
-msgid "di&Ve into subdir if exists"
+msgid "Di&ve into subdir if exists"
 msgstr "&Зарони у поддиректоријуме"
 
-msgid "preserve &Attributes"
+#, fuzzy
+msgid "Preserve &attributes"
 msgstr "очувај &Атрибуте"
 
-msgid "follow &Links"
+#, fuzzy
+msgid "Follow &links"
 msgstr "прати &Везе"
-
-msgid "to:"
-msgstr "у:"
 
 #, fuzzy, c-format
 msgid "Invalid source pattern `%s'"
@@ -2871,7 +3040,7 @@ msgid "Found: %ld"
 msgstr ""
 
 #, fuzzy
-msgid " Malformed regular expression "
+msgid "Malformed regular expression"
 msgstr " Неисправни регуларни израз "
 
 #, fuzzy
@@ -2932,14 +3101,16 @@ msgstr "Тражим %s"
 msgid "Searching"
 msgstr "Тражим"
 
-msgid " Help file format error\n"
+#, fuzzy
+msgid "Help file format error\n"
 msgstr " Грешка у формату датотеке помоћи\n"
 
-msgid " Internal bug: Double start of link area "
+#, fuzzy
+msgid "Internal bug: Double start of link area"
 msgstr " Унутрашња грешка: Двоструки почетак области везе "
 
-#, c-format
-msgid " Cannot find node %s in help file "
+#, fuzzy, c-format
+msgid "Cannot find node %s in help file"
 msgstr " Не могу да нађем чвор %s у датотеци помоћи "
 
 msgid "Help"
@@ -2963,10 +3134,12 @@ msgstr "&Надовежи"
 msgid "&Insert"
 msgstr "У&метни"
 
-msgid "New &Entry"
+#, fuzzy
+msgid "New &entry"
 msgstr "Нова &ставка"
 
-msgid "New &Group"
+#, fuzzy
+msgid "New &group"
 msgstr "Нова &група"
 
 msgid "&Up"
@@ -2983,7 +3156,8 @@ msgstr "&Освежи"
 msgid "Fr&ee VFSs now"
 msgstr "&Ослободи ВСД сада"
 
-msgid "Change &To"
+#, fuzzy
+msgid "Change &to"
 msgstr "П&ромени у"
 
 msgid "Subgroup - press ENTER to see list"
@@ -2995,11 +3169,11 @@ msgstr "Активни директоријуми ВСД"
 msgid "Directory hotlist"
 msgstr "Брзи списак директоријума"
 
-msgid " Directory path "
-msgstr " Путања директоријума "
+msgid "Directory path"
+msgstr "Путања директоријума"
 
-msgid " Directory label "
-msgstr " Натпис директоријума "
+msgid "Directory label"
+msgstr "Натпис директоријума"
 
 #, c-format
 msgid "Moving %s"
@@ -3008,63 +3182,74 @@ msgstr "Премештам %s"
 msgid "New hotlist entry"
 msgstr "Нова ставка брзог списка"
 
-msgid "Directory label"
+#, fuzzy
+msgid "Directory label:"
 msgstr "Натпис директоријума"
 
-msgid "Directory path"
+#, fuzzy
+msgid "Directory path:"
 msgstr "Путања директоријума"
 
-msgid " New hotlist group "
+#, fuzzy
+msgid "New hotlist group"
 msgstr " Нова група брзог списка "
 
-msgid "Name of new group"
+#, fuzzy
+msgid "Name of new group:"
 msgstr "Назив нове групе"
 
 #, c-format
 msgid "Label for \"%s\":"
 msgstr "Натпис за `%s':"
 
-msgid " Add to hotlist "
+#, fuzzy
+msgid "Add to hotlist"
 msgstr " Додај у брзи списак "
 
-msgid " Remove: "
+#, fuzzy
+msgid "Remove:"
 msgstr "Уклони: "
 
-msgid ""
-"\n"
-" Are you sure you want to remove this entry?"
+msgid "Are you sure you want to remove this entry?"
 msgstr ""
 
+#, fuzzy
 msgid ""
-"\n"
-" Group not empty.\n"
-" Remove it?"
+"Group not empty.\n"
+"Remove it?"
 msgstr ""
 "\n"
 " Група није празна.\n"
 " Желите ли да је уклоним?"
 
-msgid " Top level group "
+#, fuzzy
+msgid "Top level group"
 msgstr " Врховна група "
 
-msgid " Hotlist Load "
+#, fuzzy
+msgid "Hotlist Load"
 msgstr " Учитај брзи списак "
 
 #, fuzzy, c-format
 msgid ""
-"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+"MC was unable to write ~/%s file,\n"
+"your old hotlist entries were not deleted"
 msgstr ", ваше старе ставке брзог списка нису обрисане"
+
+#, fuzzy
+msgid "Information"
+msgstr " Информације "
 
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Поноћни наредник %s"
 
 #, c-format
-msgid "File:       %s"
-msgstr "Датотека:        %s"
+msgid "File: %s"
+msgstr "Датотека: %s"
 
-#, c-format
-msgid "Free nodes: %d (%d%%) of %d"
+#, fuzzy, c-format
+msgid "Free nodes: %ld (%ld%%) of %ld"
 msgstr "Слоб. чворова:   %d (%d%%) од %d"
 
 msgid "No node information"
@@ -3077,8 +3262,8 @@ msgstr "Слоб. простора:  %s (%d%%) од %s"
 msgid "No space information"
 msgstr "Нема података о простору"
 
-#, c-format
-msgid "Type:      %s "
+#, fuzzy, c-format
+msgid "Type:      %s"
 msgstr "Врста:           %s "
 
 msgid "non-local vfs"
@@ -3141,46 +3326,48 @@ msgstr "&Усправно"
 msgid "&Horizontal"
 msgstr "&Положено"
 
-msgid "show free sp&Ace"
+msgid "Show free sp&ace"
 msgstr ""
 
-msgid "&Xterm window title"
+#, fuzzy
+msgid "&XTerm window title"
 msgstr "наслов прозора и&Кс терминала"
 
-msgid "h&Intbar visible"
+#, fuzzy
+msgid "H&intbar visible"
 msgstr "&Ред са саветима је видљив"
 
 msgid "&Keybar visible"
 msgstr "ред са &Тастерима је видљив"
 
-msgid "command &Prompt"
+#, fuzzy
+msgid "Command &prompt"
 msgstr "наредбени о&Дзивник"
 
-msgid "show &Mini status"
+#, fuzzy
+msgid "Show &mini status"
 msgstr "прикажи &Мини стање"
 
-msgid "menu&Bar visible"
+#, fuzzy
+msgid "Menu&bar visible"
 msgstr "ред мени&Ја је видљив"
 
 msgid "&Equal split"
 msgstr "подједнака по&Дела"
 
-msgid "pe&Rmissions"
-msgstr "до&Зволе"
-
-msgid "&File types"
-msgstr "&Врсте датотека"
-
-msgid " Panel split "
+#, fuzzy
+msgid "Panel split"
 msgstr " Подела окна "
 
-msgid " Highlight... "
-msgstr " Истицање... "
+msgid "Console output"
+msgstr ""
 
-msgid " Other options "
+#, fuzzy
+msgid "Other options"
 msgstr " Други избори "
 
-msgid "output lines"
+#, fuzzy
+msgid "Output lines:"
 msgstr "редови излаза"
 
 msgid "Layout"
@@ -3189,7 +3376,8 @@ msgstr "Распоред"
 msgid "Learn keys"
 msgstr "Научи тастере"
 
-msgid " Teach me a key "
+#, fuzzy
+msgid "Teach me a key"
 msgstr " Научите ме вашим тастерима "
 
 #, c-format
@@ -3212,11 +3400,12 @@ msgstr ""
 "Ако желите да одустанете, притисните једном тастер\n"
 "`Escape' и сачекајте."
 
-msgid " Cannot accept this key "
+#, fuzzy
+msgid "Cannot accept this key"
 msgstr " Не могу да прихватим овај тастер "
 
-#, c-format
-msgid " You have entered \"%s\""
+#, fuzzy, c-format
+msgid "You have entered \"%s\""
 msgstr " Притисли сте `%s'"
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
@@ -3249,14 +3438,17 @@ msgstr "поред којих не стоји ознака `Да'. Притис�
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "недостајућима или прит. мишем за задавање. Креће се преко `Tab'-а."
 
-msgid " The Midnight Commander "
+#, fuzzy
+msgid "The Midnight Commander"
 msgstr " Поноћни наредник "
 
-msgid " Do you really want to quit the Midnight Commander? "
+#, fuzzy
+msgid "Do you really want to quit the Midnight Commander?"
 msgstr " Да ли заисте желите да завршите рад у Поноћном нареднику? "
 
-msgid "&Listing mode..."
-msgstr "&Режим списка..."
+#, fuzzy
+msgid "File listin&g"
+msgstr "&Пун списак датотека"
 
 #, fuzzy
 msgid "&Quick view"
@@ -3265,6 +3457,9 @@ msgstr "Брзо чување "
 #, fuzzy
 msgid "&Info"
 msgstr "&Ичвор"
+
+msgid "&Listing mode..."
+msgstr "&Режим списка..."
 
 msgid "&Sort order..."
 msgstr "&Поредак ређања..."
@@ -3316,8 +3511,12 @@ msgid "&Link"
 msgstr "Ве&зе"
 
 #, fuzzy
-msgid "&SymLink"
+msgid "&Symlink"
 msgstr "Ве&зе"
+
+#, fuzzy
+msgid "Relative symlin&k"
+msgstr "Разрешавам симвезе..."
 
 #, fuzzy
 msgid "Edit s&ymlink"
@@ -3430,6 +3629,10 @@ msgid "&Layout..."
 msgstr "&Изглед..."
 
 #, fuzzy
+msgid "&Panel options..."
+msgstr " Избори окна "
+
+#, fuzzy
 msgid "C&onfirmation..."
 msgstr "п&Отврде..."
 
@@ -3455,20 +3658,6 @@ msgstr " и&Спод "
 msgid "&Right"
 msgstr " &Десно "
 
-msgid " Information "
-msgstr " Информације "
-
-msgid ""
-" Using the fast reload option may not reflect the exact \n"
-" directory contents. In this case you'll need to do a   \n"
-" manual reload of the directory. See the man page for   \n"
-" the details.                                           "
-msgstr ""
-" Са укљученим избором за брзо учитавање можда се неће    \n"
-" приказивати тачан садржај директоријума. Онда ћете можда\n"
-" морати да ручно освежавате приказ. Погледајте упутство  \n"
-" за детаље.                                              "
-
 msgid "ButtonBar|Menu"
 msgstr ""
 
@@ -3488,83 +3677,180 @@ msgstr "Променљива љуске `TERM' није постављена!\n"
 msgid "Cannot create %s directory"
 msgstr "Не могу да променим директоријум"
 
-msgid "safe de&Lete"
-msgstr "безбедно б&Рисање"
-
-msgid "cd follows lin&Ks"
-msgstr "пром.дир. прати &Везе"
-
-msgid "L&ynx-like motion"
-msgstr "L&ynx-олико кретање"
-
-msgid "rotatin&G dash"
-msgstr "ротирајућа &Црта"
-
-msgid "co&Mplete: show all"
-msgstr "до&Пуна: прикажи све"
-
-msgid "&Use internal view"
-msgstr "&Користи уграђени прегледач"
-
-msgid "use internal ed&It"
-msgstr "користи уграђени уређ&Ивач"
-
-msgid "auto m&Enus"
-msgstr "аутоматски &Менији"
-
-msgid "&Auto save setup"
-msgstr "&Аутоматско чување подешавања"
-
-msgid "shell &Patterns"
-msgstr "&Обрасци љуске"
-
-msgid "Compute &Totals"
-msgstr "Рачунај &Укупне збирове"
-
-msgid "&Verbose operation"
-msgstr "&Брбљиви рад"
-
-msgid "Mkdir autoname"
-msgstr ""
-
-msgid "&Fast dir reload"
-msgstr "&Брзо учитавање директоријума"
-
-msgid "mi&X all files"
-msgstr "&Мешани приказ"
-
-msgid "&Drop down menus"
-msgstr "&Падајући менији"
-
-msgid "ma&Rk moves down"
-msgstr "после о&Знаке иди доле"
-
-msgid "show &Hidden files"
-msgstr "прикажи &Сакривене датотеке"
-
-msgid "show &Backup files"
-msgstr "прикажи &Резервне датотеке"
-
-msgid "Use SI si&ze units"
-msgstr ""
-
 msgid "&Never"
 msgstr "&Никад"
 
-msgid "on dumb &Terminals"
+#, fuzzy
+msgid "On dum&b terminals"
 msgstr "на глупим &Терминалима"
 
 msgid "Alwa&ys"
 msgstr "&Увек"
 
-msgid " Panel options "
-msgstr " Избори окна "
+#, fuzzy
+msgid "A&uto save setup"
+msgstr "&Аутоматско чување подешавања"
 
-msgid " Pause after run... "
+#, fuzzy
+msgid "Sa&fe delete"
+msgstr "безбедно б&Рисање"
+
+#, fuzzy
+msgid "Cd follows lin&ks"
+msgstr "пром.дир. прати &Везе"
+
+#, fuzzy
+msgid "Rotating d&ash"
+msgstr "ротирајућа &Црта"
+
+#, fuzzy
+msgid "Co&mplete: show all"
+msgstr "до&Пуна: прикажи све"
+
+#, fuzzy
+msgid "Shell &patterns"
+msgstr "&Обрасци љуске"
+
+msgid "&Drop down menus"
+msgstr "&Падајући менији"
+
+#, fuzzy
+msgid "Auto m&enus"
+msgstr "аутоматски &Менији"
+
+#, fuzzy
+msgid "Use internal vie&w"
+msgstr "&Користи уграђени прегледач"
+
+#, fuzzy
+msgid "Use internal edi&t"
+msgstr "користи уграђени уређ&Ивач"
+
+#, fuzzy
+msgid "Pause after run"
 msgstr " Пауза после покретања... "
+
+#, fuzzy
+msgid "Timeout:"
+msgstr "ДатИзм"
+
+#, fuzzy
+msgid "S&ingle press"
+msgstr "&Врсте датотека"
+
+#, fuzzy
+msgid "Esc key mode"
+msgstr "Сиви /"
+
+msgid "Mkdi&r autoname"
+msgstr ""
+
+msgid "Classic pro&gressbar"
+msgstr ""
+
+#, fuzzy
+msgid "Compute tota&ls"
+msgstr "Рачунај &Укупне збирове"
+
+msgid "&Verbose operation"
+msgstr "&Брбљиви рад"
+
+#, fuzzy
+msgid "File operation options"
+msgstr " Други избори "
 
 msgid "Configure options"
 msgstr "Подеси изборе"
+
+#, fuzzy
+msgid "Case &insensitive"
+msgstr "разлику&ј велика и мала слова"
+
+#, fuzzy
+msgid "Case s&ensitive"
+msgstr "разлику&ј велика и мала слова"
+
+#, fuzzy
+msgid "Use panel sort mo&de"
+msgstr "Користи &пасивни режим"
+
+#, fuzzy
+msgid "Quick search"
+msgstr "Брза пром.дир."
+
+#, fuzzy
+msgid "&Permissions"
+msgstr "Дозволе"
+
+#, fuzzy
+msgid "File &types"
+msgstr "&Врсте датотека"
+
+#, fuzzy
+msgid "File highlight"
+msgstr " Истицање... "
+
+msgid "&Mouse page scrolling"
+msgstr ""
+
+msgid "Pa&ge scrolling"
+msgstr ""
+
+msgid "L&ynx-like motion"
+msgstr "L&ynx-олико кретање"
+
+msgid "Navigation"
+msgstr ""
+
+#, fuzzy
+msgid "A&uto save panels setup"
+msgstr "&Аутоматско чување подешавања"
+
+#, fuzzy
+msgid "Re&verse files only"
+msgstr "&Само величина"
+
+#, fuzzy
+msgid "Ma&rk moves down"
+msgstr "после о&Знаке иди доле"
+
+msgid "&Fast dir reload"
+msgstr "&Брзо учитавање директоријума"
+
+#, fuzzy
+msgid "Show &hidden files"
+msgstr "прикажи &Сакривене датотеке"
+
+#, fuzzy
+msgid "Show &backup files"
+msgstr "прикажи &Резервне датотеке"
+
+#, fuzzy
+msgid "Mi&x all files"
+msgstr "&Мешани приказ"
+
+msgid "Use SI si&ze units"
+msgstr ""
+
+#, fuzzy
+msgid "Main panel options"
+msgstr " Избори окна "
+
+#, fuzzy
+msgid "Panel options"
+msgstr " Избори окна "
+
+#, fuzzy
+msgid ""
+"Using the fast reload option may not reflect the exact\n"
+"directory contents. In this case you'll need to do a\n"
+"manual reload of the directory. See the man page for\n"
+"the details."
+msgstr ""
+" Са укљученим избором за брзо учитавање можда се неће    \n"
+" приказивати тачан садржај директоријума. Онда ћете можда\n"
+" морати да ручно освежавате приказ. Погледајте упутство  \n"
+" за детаље.                                              "
 
 msgid "&Add new"
 msgstr "&Додај ново"
@@ -3578,13 +3864,16 @@ msgstr "Наредба"
 msgid "Other command"
 msgstr "Друга наредба"
 
-msgid " Add to external panelize "
+#, fuzzy
+msgid "Add to external panelize"
 msgstr " Додај у критеријуме попуне "
 
-msgid " Enter command label: "
+#, fuzzy
+msgid "Enter command label:"
 msgstr " Унесите натпис наредбе: "
 
-msgid " Cannot run external panelize in a non-local directory "
+#, fuzzy
+msgid "Cannot run external panelize in a non-local directory"
 msgstr " Не могу да извршим критеријуме попуне у не-локалним дир. "
 
 msgid "Find rejects after patching"
@@ -3682,11 +3971,9 @@ msgstr "Датум &приступа"
 msgid "sort|h"
 msgstr ""
 
-msgid "C&Hange time"
+#, fuzzy
+msgid "C&hange time"
 msgstr "Датум &промене"
-
-msgid "Permission"
-msgstr "Дозволе"
 
 msgid "Perm"
 msgstr "Дозв"
@@ -3730,14 +4017,20 @@ msgid_plural "%s in %d files"
 msgstr[0] "%s бајтова у %d датотеци"
 msgstr[1] "%s бајтова у %d датотеци"
 
-msgid "Unknown tag on display format: "
+#, fuzzy
+msgid "Unknown tag on display format:"
 msgstr "Непозната ознака у формату приказа: "
 
 msgid "User supplied format looks invalid, reverting to default."
 msgstr "Кориснички формат не изгледа исправно, враћам на подраз."
 
-msgid " Do you really want to execute? "
+#, fuzzy
+msgid "Do you really want to execute?"
 msgstr " Да ли заиста желите да извршим? "
+
+#, fuzzy, c-format
+msgid "Cannot chdir to \"%s\""
+msgstr " Не могу да поставим дир. на %s "
 
 #, fuzzy
 msgid "Choose codepage"
@@ -3771,7 +4064,8 @@ msgstr ""
 msgid "Cannot open named pipe %s\n"
 msgstr "Не могу да отворим именовану цев %s\n"
 
-msgid " The shell is still active. Quit anyway? "
+#, fuzzy
+msgid "The shell is still active. Quit anyway?"
 msgstr " Љуска је још активна. Желите ли да ипак завршим рад? "
 
 #, c-format
@@ -3842,16 +4136,16 @@ msgstr "Копирај директоријум `%s' у:"
 msgid "Move \"%s\" directory to:"
 msgstr "Премести директоријум `%s' у:"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot stat the destination \n"
-" %s "
+"Cannot stat the destination\n"
+"%s"
 msgstr ""
 " Не могу да извршим `stat' над одредиштем \n"
 " %s "
 
-#, c-format
-msgid "  Delete %s?  "
+#, fuzzy, c-format
+msgid "Delete %s?"
 msgstr "  Желите ли да обришем `%s'?  "
 
 msgid "ButtonBar|Static"
@@ -3877,30 +4171,36 @@ msgstr ""
 "Не могу да пишем у датотеку %s:\n"
 "%s\n"
 
-msgid " Format error on file Extensions File "
+#, fuzzy
+msgid "Format error on file Extensions File"
 msgstr " Грешка у формату датотеке Датотека врста "
 
-#, c-format
-msgid " The %%var macro has no default "
+#, fuzzy, c-format
+msgid "The %%var macro has no default"
 msgstr " Макро %%var нема подразумевану вредност "
 
-#, c-format
-msgid " The %%var macro has no variable "
+#, fuzzy, c-format
+msgid "The %%var macro has no variable"
 msgstr " Макро %%var нема променљиву "
 
-msgid " Debug "
+#, fuzzy
+msgid "Debug"
 msgstr " Поправљање "
 
-msgid " ERROR: "
+#, fuzzy
+msgid "ERROR:"
 msgstr " ГРЕШКА: "
 
-msgid " True:  "
+#, fuzzy
+msgid "True:"
 msgstr " Тачно:    "
 
-msgid " False: "
+#, fuzzy
+msgid "False:"
 msgstr " Погрешно: "
 
-msgid " Warning -- ignoring file "
+#, fuzzy
+msgid "Warning -- ignoring file"
 msgstr " Упозорење - заобилазим датотеку "
 
 #, c-format
@@ -3911,11 +4211,20 @@ msgstr ""
 "Датотеку %s не поседује ни администратор ни ви, а није ни\n"
 "читљива за свет. Њена употреба може да угрози вашу безбедност"
 
-#, c-format
-msgid " No suitable entries found in %s "
+#, fuzzy, c-format
+msgid ""
+"Cannot open file%s\n"
+"%s"
+msgstr ""
+" Не могу да отворим датотеку `%s' \n"
+" %s "
+
+#, fuzzy, c-format
+msgid "No suitable entries found in %s"
 msgstr " Прикладне ставке нису нађене у %s "
 
-msgid " User menu "
+#, fuzzy
+msgid "User menu"
 msgstr " Кориснички мени "
 
 #, fuzzy
@@ -3923,7 +4232,7 @@ msgid "Invalid value"
 msgstr "неисправна бројевна вредност"
 
 #, fuzzy
-msgid " Cannot spawn child process "
+msgid "Cannot spawn child process"
 msgstr " Не могу да створим дете-програм "
 
 msgid "Empty output from child filter"
@@ -3976,34 +4285,35 @@ msgstr ""
 
 #, c-format
 msgid ""
-" Error while closing the file: \n"
-" %s \n"
-" Data may have been written or not. "
+"Error while closing the file:\n"
+"%s\n"
+"Data may have been written or not"
 msgstr ""
 
 #, fuzzy, c-format
 msgid ""
-" Cannot save file: \n"
-" %s "
+"Cannot save file:\n"
+"%s"
 msgstr " Не могу да сачувам датотеку. "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot open \"%s\"\n"
-" %s "
+"Cannot open \"%s\"\n"
+"%s"
 msgstr ""
 " Не могу да отворим `%s'\n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot stat \"%s\"\n"
-" %s "
+"Cannot stat \"%s\"\n"
+"%s"
 msgstr ""
 " Не могу да извршим `stat' над \"%s\"\n"
 " %s "
 
-msgid " Cannot view: not a regular file "
+#, fuzzy
+msgid "Cannot view: not a regular file"
 msgstr " Не могу да прегледам: датотека није обична "
 
 msgid "Seeking to search result"
@@ -4016,7 +4326,8 @@ msgstr "Тражи"
 msgid "Continue from begining?"
 msgstr ""
 
-msgid " History "
+#, fuzzy
+msgid "History"
 msgstr " Историја "
 
 #. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
@@ -4029,12 +4340,94 @@ msgstr ""
 msgid "Background process:"
 msgstr "Позадински процес:"
 
+#~ msgid " Permission "
+#~ msgstr " Дозвола "
+
+#~ msgid " File "
+#~ msgstr " Датотека "
+
+#~ msgid " Name "
+#~ msgstr " Назив "
+
+#~ msgid " Owner name "
+#~ msgstr " Име власника "
+
+#~ msgid " Group name "
+#~ msgstr " Назив групе "
+
+#~ msgid " Size "
+#~ msgstr " Величина "
+
+#~ msgid " Confirmation "
+#~ msgstr " Потврде "
+
+#~ msgid " Filtered view "
+#~ msgstr " Филтрирани приказ "
+
+#~ msgid " Select "
+#~ msgstr " Изабери "
+
+#~ msgid " Compare directories "
+#~ msgstr " Упореди директоријуме "
+
+#~ msgid " Link "
+#~ msgstr " Повежи "
+
+#~ msgid " Edit symlink "
+#~ msgstr " Уреди симвезу "
+
+#~ msgid "case &Sensitive"
+#~ msgstr "разл. &Вел./мала слова"
+
+#~ msgid " Replace "
+#~ msgstr " Замена "
+
+#, fuzzy
+#~ msgid " Error "
+#~ msgstr "Грешка"
+
+#~ msgid " Insert File "
+#~ msgstr " Уметни датотеку "
+
+#~ msgid " Insert Literal "
+#~ msgstr " Убаци литерал "
+
+#~ msgid " Execute Macro "
+#~ msgstr " Изврши макро "
+
+#~ msgid " Cannot overwrite directory `%s' "
+#~ msgstr " Не могу да препишем директоријум `%s' "
+
+#~ msgid " to:"
+#~ msgstr " у:"
+
+#~ msgid " Delete: "
+#~ msgstr " Обриши: "
+
+#~ msgid " Directory path "
+#~ msgstr " Путања директоријума "
+
+#~ msgid " Directory label "
+#~ msgstr " Натпис директоријума "
+
+#~ msgid "File:       %s"
+#~ msgstr "Датотека:        %s"
+
+#~ msgid "pe&Rmissions"
+#~ msgstr "до&Зволе"
+
+#~ msgid " User menu "
+#~ msgstr " Кориснички мени "
+
+#, fuzzy
+#~ msgid ""
+#~ " Cannot save file: \n"
+#~ " %s "
+#~ msgstr " Не могу да сачувам датотеку. "
+
 #, fuzzy
 #~ msgid "Status:    %s"
 #~ msgstr "Створено:        %s"
-
-#~ msgid "File"
-#~ msgstr "Датотека"
 
 #~ msgid "Count"
 #~ msgstr "Број"
@@ -4073,9 +4466,6 @@ msgstr "Позадински процес:"
 #, fuzzy
 #~ msgid " Invalid address "
 #~ msgstr " Неисправна лозинка "
-
-#~ msgid "File: %s"
-#~ msgstr "Датотека: %s"
 
 #~ msgid "Offset 0x%08lx"
 #~ msgstr "Померај 0x%08lx"
@@ -4240,9 +4630,6 @@ msgstr "Позадински процес:"
 #~ msgid "Replac"
 #~ msgstr "Замени"
 
-#~ msgid "Delete"
-#~ msgstr "Обриши"
-
 #~ msgid "PullDn"
 #~ msgstr "ПадМни"
 
@@ -4375,12 +4762,6 @@ msgstr "Позадински процес:"
 #~ msgid "Extension"
 #~ msgstr "Врста:"
 
-#~ msgid "Size"
-#~ msgstr "Величина"
-
-#~ msgid "MTime"
-#~ msgstr "ДатИзм"
-
 #~ msgid "ATime"
 #~ msgstr "ДатПрс"
 
@@ -4508,9 +4889,6 @@ msgstr "Позадински процес:"
 
 #~ msgid "Edit edi&tor menu file"
 #~ msgstr "Уреди датотеку менија &уређивача"
-
-#~ msgid "Edit &syntax file"
-#~ msgstr "Уреди датотеку &синтаксе"
 
 #~ msgid ""
 #~ "To use this feature select your codepage in\n"

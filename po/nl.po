@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.7.0\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-05-05 22:32+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2010-06-07 21:44+0400\n"
 "PO-Revision-Date: 2010-03-09\n"
 "Last-Translator: Marcel Pol <mpol@gmx.net>\n"
 "Language-Team: \n"
@@ -19,18 +19,20 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
-msgid " Search string not found "
+#, fuzzy
+msgid "Search string not found"
 msgstr " Zoekstring niet gevonden "
 
-msgid " Not implemented yet "
+#, fuzzy
+msgid "Not implemented yet"
 msgstr " Nog niet geimplementeerd "
 
-msgid " Num of replace tokens not equal to num of found tokens "
+msgid "Num of replace tokens not equal to num of found tokens"
 msgstr ""
 
-#, c-format
-msgid " Invalid token number %d "
-msgstr ""
+#, fuzzy, c-format
+msgid "Invalid token number %d"
+msgstr "Ongeldig bronpatroon `%s'"
 
 msgid "Normal"
 msgstr "Normaal"
@@ -346,10 +348,12 @@ msgstr "Druk een toets om verder te gaan..."
 msgid "Warning"
 msgstr "Waarschuwing"
 
-msgid " Pipe failed "
+#, fuzzy
+msgid "Pipe failed"
 msgstr " Pipe mislukt "
 
-msgid " Dup failed "
+#, fuzzy
+msgid "Dup failed"
 msgstr " Dup mislukt"
 
 #, fuzzy
@@ -447,7 +451,8 @@ msgstr "fish: Wachten op initiële lijn..."
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Helaas, wachtwoordbeveiligde verbindingen niet mogelijk."
 
-msgid " fish: Password required for "
+#, fuzzy, c-format
+msgid "fish: Password is required for %s"
 msgstr " fish: Wachtwoord vereist voor "
 
 msgid "fish: Sending password..."
@@ -508,7 +513,8 @@ msgstr "Verbroken transfert zou een success zijn."
 msgid "ftpfs: Disconnecting from %s"
 msgstr "ftpfs: Verbinding verbreken met %s"
 
-msgid " FTP: Password required for "
+#, fuzzy, c-format
+msgid "FTP: Password required for %s"
 msgstr " FTP: Wachtwoord vereist voor "
 
 msgid "ftpfs: sending login name"
@@ -606,23 +612,27 @@ msgstr "ftpfs: mislukt; geen terugvalmogelijkheid "
 msgid "ftpfs: storing file %lu (%lu)"
 msgstr "ftpfs: opslaan bestand %lu (%lu)"
 
+#, fuzzy
 msgid ""
-"~/.netrc file has incorrect mode.\n"
-"Remove password or correct mode."
+"~/.netrc file has incorrect mode\n"
+"Remove password or correct mode"
 msgstr ""
 "~/.netrc heeft een ongeldige bestandsmodus.\n"
 "Verwijder het wachtwoord, of corrigeer de modus."
 
-msgid " MCFS "
+#, fuzzy
+msgid "MCFS"
 msgstr " MCFS "
 
-msgid " The server does not support this version "
+#, fuzzy
+msgid "The server does not support this version"
 msgstr " De server ondersteunt deze versie niet "
 
+#, fuzzy
 msgid ""
-" The remote server is not running on a system port \n"
-" you need a password to log in, but the information may \n"
-" not be safe on the remote side.  Continue? \n"
+"The remote server is not running on a system port\n"
+"you need a password to log in, but the information may\n"
+"not be safe on the remote side.  Continue?\n"
 msgstr ""
 " De remote server luistert niet op een systeempoort \n"
 " u heeft een wachtwoord nodig om in te loggen, maar die informatie \n"
@@ -634,25 +644,28 @@ msgstr "&Ja"
 msgid "&No"
 msgstr "&Nee"
 
-msgid " MCFS Password required "
+#, fuzzy
+msgid "MCFS Password required"
 msgstr " MCFS wachtwoord vereist "
 
-msgid " Invalid password "
+#, fuzzy
+msgid "Invalid password"
 msgstr " Ongeldig wachtwoord "
 
-#, c-format
-msgid " Cannot locate hostname: %s "
+#, fuzzy, c-format
+msgid "Cannot locate hostname: %s"
 msgstr " Kan machinenaam niet vinden: %s "
 
-#, c-format
-msgid " Cannot create socket: %s "
+#, fuzzy, c-format
+msgid "Cannot create socket: %s"
 msgstr " Kan socket niet creëren: %s "
 
-#, c-format
-msgid " Cannot connect to server: %s "
+#, fuzzy, c-format
+msgid "Cannot connect to server: %s"
 msgstr " Kan niet verbinden met server: %s "
 
-msgid " Too many open connections "
+#, fuzzy
+msgid "Too many open connections"
 msgstr " Teveel open verbindingen "
 
 #, c-format
@@ -675,35 +688,34 @@ msgstr ""
 "Waarschuwing: ongeldige vlag %c in %s:\n"
 "%s\n"
 
-#, c-format
-msgid ""
-" reconnect to %s failed\n"
-" "
+#, fuzzy, c-format
+msgid "reconnect to %s failed"
 msgstr ""
 " herverbinden met %s mislukt\n"
 " "
 
-msgid " Authentication failed "
+#, fuzzy
+msgid "Authentication failed"
 msgstr " Authenticatie mislukt "
 
-#, c-format
-msgid " Error %s creating directory %s "
+#, fuzzy, c-format
+msgid "Error %s creating directory %s"
 msgstr " Fout %s bij aanmaken map %s "
 
-#, c-format
-msgid " Error %s removing directory %s "
+#, fuzzy, c-format
+msgid "Error %s removing directory %s"
 msgstr " Fout %s bij verwijderen map %s "
 
-#, c-format
-msgid " %s opening remote file %s "
+#, fuzzy, c-format
+msgid "%s opening remote file %s"
 msgstr " %s bezig bestand %s te openen"
 
-#, c-format
-msgid " %s removing remote file %s "
+#, fuzzy, c-format
+msgid "%s removing remote file %s"
 msgstr " %s bestand %s wordt op afstand verwijderd"
 
-#, c-format
-msgid " %s renaming files\n"
+#, fuzzy, c-format
+msgid "%s renaming files\n"
 msgstr " %s bestanden hernoemen\n"
 
 #, c-format
@@ -720,9 +732,8 @@ msgstr "Inconsistent tar-archief"
 msgid "Unexpected EOF on archive file"
 msgstr "Onverwachte EOF in archiefbestand"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Hmm,...\n"
 "%s\n"
 "doesn't look like a tar archive."
 msgstr ""
@@ -730,52 +741,57 @@ msgstr ""
 "%s\n"
 "dit ziet er niet uit als een tar-archief."
 
-msgid " undelfs: error "
+#, fuzzy
+msgid "undelfs: error"
 msgstr " bestandsfout "
 
-msgid " not enough memory "
+#, fuzzy
+msgid "not enough memory"
 msgstr " onvoldoende geheugen "
 
-msgid " while allocating block buffer "
+#, fuzzy
+msgid "while allocating block buffer"
 msgstr "bij het allokeren van de blokbuffer"
 
-#, c-format
-msgid " open_inode_scan: %d "
+#, fuzzy, c-format
+msgid "open_inode_scan: %d"
 msgstr "open_inode_scan: %d "
 
-#, c-format
-msgid " while starting inode scan %d "
+#, fuzzy, c-format
+msgid "while starting inode scan %d"
 msgstr "bij het staretne van inode scan %d "
 
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
 msgstr "undelfs: aan het laden van gewiste-bestandsinformatie %d inodes"
 
-#, c-format
-msgid " while calling ext2_block_iterate %d "
+#, fuzzy, c-format
+msgid "while calling ext2_block_iterate %d"
 msgstr "bij het aanroepen van ext2_block_iterate %d "
 
-msgid " no more memory while reallocating array "
+#, fuzzy
+msgid "no more memory while reallocating array"
 msgstr " onvoldoende geheugen bij het verplaatsen van array "
 
-#, c-format
-msgid " while doing inode scan %d "
+#, fuzzy, c-format
+msgid "while doing inode scan %d"
 msgstr " bij inode scan %d "
 
-msgid " Ext2lib error "
+#, fuzzy
+msgid "Ext2lib error"
 msgstr " Ext2Lib-fout "
 
-#, c-format
-msgid " Cannot open file %s "
+#, fuzzy, c-format
+msgid "Cannot open file %s"
 msgstr " Openen mislukt van bestand %s "
 
 msgid "undelfs: reading inode bitmap..."
 msgstr "undelfs: aan het lezen inode bitmap..."
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot load inode bitmap from: \n"
-" %s \n"
+"Cannot load inode bitmap from:\n"
+"%s"
 msgstr ""
 " Kon inode-bitmap niet landen van: \n"
 " %s\n"
@@ -783,22 +799,29 @@ msgstr ""
 msgid "undelfs: reading block bitmap..."
 msgstr "undelfs: aan het lezen block-bitmap..."
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot load block bitmap from: \n"
-" %s \n"
+"Cannot load block bitmap from:\n"
+"%s"
 msgstr ""
 "Kon blok-bitmap van:\n"
 "%s niet laden\n"
 
-msgid " vfs_info is not fs! "
+#, fuzzy
+msgid "vfs_info is not fs!"
 msgstr "vfs_info is niet fs! "
 
-msgid " You have to chdir to extract files first "
+#, fuzzy
+msgid "You have to chdir to extract files first"
 msgstr " U moet 'chdir' doen voor dat u bestanden kunt extraheren "
 
-msgid " while iterating over blocks "
+#, fuzzy
+msgid "while iterating over blocks"
 msgstr " bij het itereren over de de blokken "
+
+#, fuzzy, c-format
+msgid "Cannot open file \"%s\""
+msgstr " Openen mislukt van bestand %s "
 
 msgid "Cannot parse:"
 msgstr "Kon niet interpreteren:"
@@ -849,21 +872,22 @@ msgstr "Modus"
 msgid "%6d of %d"
 msgstr "%6d van %d"
 
-msgid " Chown advanced command "
+#, fuzzy
+msgid "Chown advanced command"
 msgstr " Uitgebreide opdracht 'chown' "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot chmod \"%s\" \n"
-" %s "
+"Cannot chmod \"%s\"\n"
+"%s"
 msgstr ""
 " chmod \"%s\" mislukt \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot chown \"%s\" \n"
-" %s "
+"Cannot chown \"%s\"\n"
+"%s"
 msgstr ""
 " chown voor \"%s\" mislukt \n"
 " %s "
@@ -936,7 +960,8 @@ msgid ""
 "{FORE} and {BACK} can be omitted, and the default will be used\n"
 "\n"
 "Keywords:\n"
-"   Global:       errors, reverse, gauge, input, viewunderline\n"
+"   Global:       errors, reverse, gauge, viewunderline\n"
+"                 input, inputmark, inputunchanged, commandlinemark\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
@@ -988,10 +1013,11 @@ msgstr ""
 msgid "Set initial line number for the internal editor"
 msgstr "Regelnummer instellen om de interne editor mee te starten"
 
+#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
+"as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
 "Stuur bugreports (met de uitvoer van 'mc -V')\n"
@@ -1001,31 +1027,42 @@ msgstr ""
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander  %s\n"
 
+msgid "No arguments given to the viewer."
+msgstr ""
+
+msgid "There 2 files are required to diffviewer."
+msgstr ""
+
 msgid "Main options"
 msgstr "Hoofd opties"
 
 msgid "Terminal options"
 msgstr "Terminal opties"
 
-msgid " Background process error "
+#, fuzzy
+msgid "Background process error"
 msgstr " Fout in achtergrondproces "
 
-msgid " Unknown error in child "
+#, fuzzy
+msgid "Unknown error in child"
 msgstr " Onbekende fout in kindproces "
 
-msgid " Child died unexpectedly "
+#, fuzzy
+msgid "Child died unexpectedly"
 msgstr " Kindproces onverwacht afgebroken "
 
-msgid " Background protocol error "
+#, fuzzy
+msgid "Background protocol error"
 msgstr " Fout in achtergrondprotocol "
 
 #, fuzzy
 msgid "Reading failed"
 msgstr "<readlink mislukt>"
 
+#, fuzzy
 msgid ""
-" Background process sent us a request for more arguments \n"
-" than we can handle. \n"
+"Background process sent us a request for more arguments\n"
+"than we can handle."
 msgstr ""
 " Het achtergrondproces vraagt om meer argumenten dan we \n"
 " kunnen leveren \n"
@@ -1045,7 +1082,8 @@ msgstr "Aange&Past:"
 msgid "Listing mode"
 msgstr "Lijstmodus"
 
-msgid "user &Mini status"
+#, fuzzy
+msgid "User &mini status"
 msgstr "Gebruiker &Mini-status"
 
 msgid "&OK"
@@ -1108,7 +1146,8 @@ msgstr "7-bit"
 msgid "F&ull 8 bits input"
 msgstr "&Volledige 8-bit invoer"
 
-msgid " Display bits "
+#, fuzzy
+msgid "Display bits"
 msgstr " Weergave bits "
 
 msgid "Other 8 bit"
@@ -1119,6 +1158,10 @@ msgstr "Invoer / weergave karakterset:"
 
 msgid "&Select"
 msgstr "&Selecteer"
+
+#, fuzzy
+msgid "Directory tree"
+msgstr "&Mappenhiërarchie                 "
 
 msgid "Use passive mode over pro&xy"
 msgstr "Gebruik passieve modus over pro&Xy"
@@ -1144,7 +1187,8 @@ msgstr "Anonieme-ftp wachtwoord:"
 msgid "Timeout for freeing VFSs:"
 msgstr "Timeout bij vrijgegeven VFS'en:"
 
-msgid " Virtual File System Setting "
+#, fuzzy
+msgid "Virtual File System Setting"
 msgstr " Instellingen voor het Virtuele Bestandssysteem (VFS) "
 
 msgid "cd"
@@ -1162,7 +1206,8 @@ msgstr "Bestaand bestand (Symbolische link moet wijzen naar):"
 msgid "Symbolic link"
 msgstr "Symbolische Link"
 
-msgid "Running "
+#, fuzzy
+msgid "Running"
 msgstr "Loopt "
 
 msgid "Stopped"
@@ -1266,14 +1311,14 @@ msgstr "om tussen opties te schakelen"
 msgid "and T or INS to mark"
 msgstr "en T of INS om te markeren"
 
-msgid " Permission "
-msgstr " Rechten "
-
-msgid " File "
-msgstr " Bestand "
-
 msgid "Chmod command"
 msgstr "'chmod'-opdracht"
+
+msgid "File"
+msgstr "Bestand"
+
+msgid "Permission"
+msgstr "Rechten"
 
 msgid "Set &users"
 msgstr "Instellen gebruikers"
@@ -1281,22 +1326,12 @@ msgstr "Instellen gebruikers"
 msgid "Set &groups"
 msgstr "Instellen &Groepen"
 
-msgid " Name "
-msgstr " Naam "
+#, fuzzy
+msgid "Size"
+msgstr "&Grootte"
 
-msgid " Owner name "
-msgstr " Eigenaarsnaam "
-
-msgid " Group name "
-msgstr " Groepsnaam "
-
-msgid " Size "
-msgstr " Grootte "
-
-msgid " User name "
-msgstr " Gebruikersnaam "
-
-msgid " Chown command "
+#, fuzzy
+msgid "Chown command"
 msgstr " 'chown'-opdracht "
 
 msgid "<Unknown user>"
@@ -1305,8 +1340,9 @@ msgstr "<onbekende gebruiker>"
 msgid "<Unknown group>"
 msgstr "<onbekende groep>"
 
-msgid " Confirmation "
-msgstr " Bevestiging "
+#, fuzzy
+msgid "User name"
+msgstr " Gebruikersnaam "
 
 msgid "Files tagged, want to cd?"
 msgstr "Bestanden gemarkeerd, veranderen van map?"
@@ -1314,28 +1350,35 @@ msgstr "Bestanden gemarkeerd, veranderen van map?"
 msgid "Cannot change directory"
 msgstr "Veranderen van map mislukt"
 
-msgid " View file "
+#, fuzzy
+msgid "View file"
 msgstr " Toon bestand "
 
-msgid " Filename:"
+#, fuzzy
+msgid "Filename:"
 msgstr " Bestandsnaam:"
 
-msgid " Filtered view "
-msgstr " Gefilterde weergave "
+#, fuzzy
+msgid "Filtered view"
+msgstr "&Gefilterde weergave"
 
-msgid " Filter command and arguments:"
+#, fuzzy
+msgid "Filter command and arguments:"
 msgstr " Filteropdracht en argumenten:"
 
 msgid "Create a new Directory"
 msgstr "Maak een nieuwe map"
 
-msgid " Enter directory name:"
+#, fuzzy
+msgid "Enter directory name:"
 msgstr " Geef mapnaam:"
 
-msgid " Filter "
+#, fuzzy
+msgid "Filter"
 msgstr " Filter "
 
-msgid " Set expression for filtering filenames"
+#, fuzzy
+msgid "Set expression for filtering filenames"
 msgstr " Zet expressie voor het filteren van bestandsnamen"
 
 msgid "&Using shell patterns"
@@ -1347,16 +1390,19 @@ msgstr "Hoofd-/kleine le&Tters"
 msgid "&Files only"
 msgstr "Alleen &Bestanden"
 
-msgid " Select "
-msgstr " Selectie "
+#, fuzzy
+msgid "Select"
+msgstr "&Selecteer"
 
-msgid " Unselect "
+#, fuzzy
+msgid "Unselect"
 msgstr " Deselecteer "
 
 msgid "Extension file edit"
 msgstr "Bewerken uitbreidingsbestand"
 
-msgid " Which extension file you want to edit? "
+#, fuzzy
+msgid "Which extension file you want to edit?"
 msgstr " Welk uitbreidingsbestand wilt u bewerken? "
 
 msgid "&User"
@@ -1365,10 +1411,12 @@ msgstr "&Gebruiker"
 msgid "&System Wide"
 msgstr "&Systeembreed"
 
-msgid " Menu edit "
+#, fuzzy
+msgid "Menu edit"
 msgstr " Menubestand bewerken "
 
-msgid " Which menu file do you want to edit? "
+#, fuzzy
+msgid "Which menu file do you want to edit?"
 msgstr " Welk menubestand wilt u bewerken? "
 
 msgid "&Local"
@@ -1377,13 +1425,16 @@ msgstr "&Lokaal"
 msgid "Highlighting groups file edit"
 msgstr "Oplichten groups bestand aanpassing"
 
-msgid " Which highlighting file you want to edit? "
+#, fuzzy
+msgid "Which highlighting file you want to edit?"
 msgstr " Welk oplichtings-bestand wilt u bewerken? "
 
-msgid " Compare directories "
-msgstr " Mappen vergelijken"
+#, fuzzy
+msgid "Compare directories"
+msgstr "&Mappen vergelijken"
 
-msgid " Select compare method: "
+#, fuzzy
+msgid "Select compare method:"
 msgstr " Kies vergelijkingsmethode: "
 
 msgid "&Quick"
@@ -1395,14 +1446,18 @@ msgstr "Alleen &Grootte"
 msgid "&Thorough"
 msgstr "&Grondig"
 
-msgid " Both panels should be in the listing mode to use this command "
+#, fuzzy
+msgid ""
+"Both panels should be in the listing mode\n"
+"to use this command"
 msgstr ""
 " Beide vensters moeten zich in lijstweergave-modus bevinden voor deze "
 "opdracht"
 
+#, fuzzy
 msgid ""
-" Not an xterm or Linux console; \n"
-" the panels cannot be toggled. "
+"Not an xterm or Linux console;\n"
+"the panels cannot be toggled."
 msgstr ""
 " Geen xterm en geen Linux console; \n"
 " de vensters kunnen niet geschakeld worden. "
@@ -1411,84 +1466,96 @@ msgstr ""
 msgid "Link %s to:"
 msgstr "%s verbinden met:"
 
-msgid " Link "
-msgstr " Link "
+#, fuzzy
+msgid "Link"
+msgstr "&Link"
 
-#, c-format
-msgid " link: %s "
+#, fuzzy, c-format
+msgid "link: %s"
 msgstr " link: %s "
 
-#, c-format
-msgid " symlink: %s "
+#, fuzzy, c-format
+msgid "symlink: %s"
 msgstr " symbolische link: %s "
 
-#, c-format
-msgid " Symlink `%s' points to: "
+#, fuzzy, c-format
+msgid "Symlink `%s' points to:"
 msgstr " Symlink `%s' wijst naar: "
 
-msgid " Edit symlink "
-msgstr " Symbolische link bewerken "
+#, fuzzy
+msgid "Edit symlink"
+msgstr "S&Ymlink bewerken"
 
-#, c-format
-msgid " edit symlink, unable to remove %s: %s "
+#, fuzzy, c-format
+msgid "edit symlink, unable to remove %s: %s"
 msgstr " bewerken symbolische link, kan niet verwijderen %s: %s"
 
-#, c-format
-msgid " edit symlink: %s "
+#, fuzzy, c-format
+msgid "edit symlink: %s"
 msgstr " symbolische link bewerken: %s"
 
 #, c-format
 msgid "`%s' is not a symbolic link"
 msgstr "'%s' is geen symbolische link"
 
-#, c-format
-msgid " Cannot chdir to %s "
+#, fuzzy, c-format
+msgid "Cannot chdir to %s"
 msgstr " 'chdir' naar %s mislukt "
 
-msgid " Enter machine name (F1 for details): "
+#, fuzzy
+msgid "Enter machine name (F1 for details):"
 msgstr " Geef machinenaam (F1 voor details): "
 
-msgid " Link to a remote machine "
+#, fuzzy
+msgid "Link to a remote machine"
 msgstr " Link naar een andere machine"
 
-msgid " FTP to machine "
+#, fuzzy
+msgid "FTP to machine"
 msgstr " FTP naar machine "
 
-msgid " Shell link to machine "
+#, fuzzy
+msgid "Shell link to machine"
 msgstr " Shell link naar machine "
 
-msgid " SMB link to machine "
+#, fuzzy
+msgid "SMB link to machine"
 msgstr " SMB link naar machine "
 
-msgid " Undelete files on an ext2 file system "
+#, fuzzy
+msgid "Undelete files on an ext2 file system"
 msgstr " Herstellen van gewiste bestanden op een ext2 bestandssysteem "
 
+#, fuzzy
 msgid ""
-" Enter device (without /dev/) to undelete\n"
-"   files on: (F1 for details)"
+"Enter device (without /dev/) to undelete\n"
+"files on: (F1 for details)"
 msgstr ""
 " Geef heet apparaatnaam (zonder /dev/) om gewiste bestanden te herstellen\n"
 "   op: (F1 voor details)"
 
-msgid " Setup "
+#, fuzzy
+msgid "Setup"
 msgstr " Instellingen "
 
-#, c-format
-msgid " Setup saved to ~/%s"
+#, fuzzy, c-format
+msgid "Setup saved to ~/%s"
 msgstr " Instellingen opgeslagen in ~/%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot chdir to \"%s\" \n"
-" %s "
+"Cannot chdir to \"%s\"\n"
+"%s"
 msgstr ""
 " Veranderen naar map \"%s\" mislukt \n"
 " %s "
 
-msgid " Cannot execute commands on non-local filesystems"
+#, fuzzy
+msgid "Cannot execute commands on non-local filesystems"
 msgstr " U kunt geen opdrachten uitvoeren op non-lokale bestandssystemen"
 
-msgid " The shell is already running a command "
+#, fuzzy
+msgid "The shell is already running a command"
 msgstr " De shell voert al een opdracht uit "
 
 msgid "&Dismiss"
@@ -1503,39 +1570,42 @@ msgstr "Hele &Woorden"
 msgid "&Backwards"
 msgstr "&Terug"
 
-msgid "case &Sensitive"
-msgstr "&Hoofd/Kleine-letters"
+#, fuzzy
+msgid "Case &sensitive"
+msgstr "Hoofd-/kleine le&Tters"
 
-msgid " Enter search string:"
+#, fuzzy
+msgid "Enter search string:"
 msgstr " Geef de zoekstring:"
 
 msgid "Search"
 msgstr "Zoeken"
 
-msgid " Search is disabled "
-msgstr ""
+#, fuzzy
+msgid "Search is disabled"
+msgstr "Zoeken"
 
 #, fuzzy, c-format
 msgid ""
-" Cannot create temporary diff file \n"
-" %s "
+"Cannot create temporary diff file\n"
+"%s"
 msgstr ""
 " Kan geen tijdelijk opdrachtenbestand maken \n"
 " %s "
 
 #, fuzzy, c-format
 msgid ""
-" Cannot create backup file \n"
-" %s%s \n"
-" %s "
+"Cannot create backup file\n"
+"%s%s\n"
+"%s"
 msgstr ""
 " Doelbestand \"%s\" kan niet gecreëerd worden \n"
 " %s "
 
 #, fuzzy, c-format
 msgid ""
-" Cannot create temporary merge file \n"
-" %s "
+"Cannot create temporary merge file\n"
+"%s"
 msgstr ""
 " Kan geen tijdelijk opdrachtenbestand maken \n"
 " %s "
@@ -1581,10 +1651,20 @@ msgstr "&Opties"
 msgid "Edit"
 msgstr "Be&Werk"
 
-msgid " Edit is disabled "
-msgstr ""
+#, fuzzy
+msgid "Edit is disabled"
+msgstr "Bewerkt een bestand"
 
-msgid " Enter line: "
+#, fuzzy
+msgid "Goto line (left)"
+msgstr " Ga naar regel "
+
+#, fuzzy
+msgid "Goto line (right)"
+msgstr " Ga naar regel "
+
+#, fuzzy
+msgid "Enter line:"
 msgstr " Geef regelnummer: "
 
 msgid "ButtonBar|Help"
@@ -1613,7 +1693,8 @@ msgstr "Afsltn"
 msgid "Quit"
 msgstr "Afsltn"
 
-msgid " File was modified, Save with exit? "
+#, fuzzy
+msgid "File was modified, Save with exit?"
 msgstr " Bestand is gewijzigd. Opslaan bij afsluiten? "
 
 msgid "Two files are needed to compare"
@@ -1622,7 +1703,8 @@ msgstr ""
 msgid "Cannot read directory contents"
 msgstr "Kan mapinhoud niet lezen"
 
-msgid " Choose syntax highlighting "
+#, fuzzy
+msgid "Choose syntax highlighting"
 msgstr " Kies syntax oplichting "
 
 msgid "< Auto >"
@@ -1631,38 +1713,39 @@ msgstr "< Auto >"
 msgid "< Reload Current Syntax >"
 msgstr "< Herlaadt Huidige Syntax >"
 
-#, c-format
-msgid " Cannot open %s for reading "
+#, fuzzy, c-format
+msgid "Cannot open %s for reading"
 msgstr " Openen van %s voor lezen mislukt "
 
 msgid "Error"
 msgstr "Fout"
 
 #, fuzzy, c-format
-msgid " Error reading %s "
+msgid "Error reading %s"
 msgstr "Fout bij lezen script:"
 
-#, c-format
-msgid " Error reading from pipe: %s "
+#, fuzzy, c-format
+msgid "Error reading from pipe: %s"
 msgstr " Probleem bij het lezen van pijp: %s "
 
-#, c-format
-msgid " Cannot open pipe for reading: %s "
+#, fuzzy, c-format
+msgid "Cannot open pipe for reading: %s"
 msgstr " Openen van pijp voor lezen mislukt: %s "
 
-#, c-format
-msgid " Cannot get size/permissions for %s "
+#, fuzzy, c-format
+msgid "Cannot get size/permissions for %s"
 msgstr " Kan geen grootte-/rechteninformatie verkrijgen voor %s "
 
-#, c-format
-msgid " %s is not a regular file "
+#, fuzzy, c-format
+msgid "\"%s\" is not a regular file"
 msgstr " %s is geen normaal bestand "
 
-#, c-format
-msgid " File %s is too large "
+#, fuzzy, c-format
+msgid "File \"%s\" is too large"
 msgstr " Bestand %s is te groot "
 
-msgid " About "
+#, fuzzy
+msgid "About"
 msgstr " Info "
 
 msgid ""
@@ -1685,20 +1768,23 @@ msgstr ""
 msgid "Macro recursion is too deep"
 msgstr "Macro-recursie gaat te diep"
 
-msgid " File has hard-links. Detach before saving? "
+#, fuzzy
+msgid "File has hard-links. Detach before saving?"
 msgstr " Bestand heeft harde links. Verwijderen voor het opslaan? "
 
 msgid "The file has been modified in the meantime. Save anyway?"
 msgstr "Bestand is in de tussentijd veranderd. Toch opslaan?"
 
-msgid " Error writing to pipe: "
+#, fuzzy, c-format
+msgid "Error writing to pipe: %s"
 msgstr " Fout bij het schrijven naar pijp: "
 
-msgid " Cannot open pipe for writing: "
+#, fuzzy, c-format
+msgid "Cannot open pipe for writing: %s"
 msgstr " Openen van pijp voor lezen mislukt: "
 
-#, c-format
-msgid " Cannot open file for writing: %s "
+#, fuzzy, c-format
+msgid "Cannot open file for writing: %s"
 msgstr " Openen van bestand voor schrijven mislukt: %s "
 
 msgid "&Quick save"
@@ -1713,7 +1799,8 @@ msgstr "&Maak backups met de volgende extensie:"
 msgid "Check &POSIX new line"
 msgstr "Controleer &POSIX nieuwe regel"
 
-msgid " Edit Save Mode "
+#, fuzzy
+msgid "Edit Save Mode"
 msgstr " Editor Bewaarmodus "
 
 msgid "The file you are saving is not finished with a newline"
@@ -1737,57 +1824,76 @@ msgstr "&Macintosh formaat (CR)"
 msgid "Change line breaks to:"
 msgstr "Verander regeleindes naar:"
 
-msgid " Enter file name: "
+#, fuzzy
+msgid "Enter file name:"
 msgstr " Geef bestandsnaam: "
 
-msgid " Save As "
+#, fuzzy
+msgid "Save As"
 msgstr " Opslaan als "
 
-msgid " A file already exists with this name. "
+#, fuzzy
+msgid "A file already exists with this name"
 msgstr " Er bestaat al een bestand met die naam. "
 
 msgid "&Overwrite"
 msgstr "&Overschrijven"
 
-msgid " Cannot save file. "
+#, fuzzy
+msgid "Save as"
+msgstr "&Opslaan als..."
+
+#, fuzzy
+msgid "Cannot save file"
 msgstr " Fout bij opslaan bestand. "
 
-msgid " Delete macro "
+#, fuzzy
+msgid "Delete macro"
 msgstr " Macro verwijderen "
 
-msgid " Cannot open temp file "
+#, fuzzy
+msgid "Cannot open temp file"
 msgstr " Fout bij open van tijdelijk bestand "
 
-msgid " Cannot open macro file "
+#, fuzzy
+msgid "Cannot open macro file"
 msgstr " Fout bij het openen van macrobestand "
 
-msgid " Cannot overwrite macro file "
+#, fuzzy
+msgid "Cannot overwrite macro file"
 msgstr " Fout bij het overschrijven van het macrobestand "
 
-msgid " Save macro "
+#, fuzzy
+msgid "Save macro"
 msgstr " Macro Opslaan "
 
-msgid " Press the macro's new hotkey: "
+#, fuzzy
+msgid "Press the macro's new hotkey:"
 msgstr " Druk op de nieuwe sneltoets voor de macro: "
 
-msgid " Press macro hotkey: "
+#, fuzzy
+msgid "Press macro hotkey:"
 msgstr " Druk op een macro sneltoets "
 
-msgid " Load macro "
+#, fuzzy
+msgid "Load macro"
 msgstr " Macro laden "
 
-msgid " Confirm save file? : "
+#, fuzzy, c-format
+msgid "Confirm save file: \"%s\""
 msgstr " Bevestigt u het opslaan van het bestand? : "
 
-msgid " Save file "
+#, fuzzy
+msgid "Save file"
 msgstr " Bestand opslaan "
 
 msgid "&Save"
 msgstr "Op&Slaan"
 
+#, fuzzy
 msgid ""
-" Current text was modified without a file save. \n"
-" Continue discards these changes. "
+"Current text was modified without a file save.\n"
+"Continue discards these changes"
 msgstr ""
 " Deze tekst is veranderd zonder te zijn opgeslagen. \n"
 " Doorgaan gooit alle wijzigingen weg. "
@@ -1795,74 +1901,90 @@ msgstr ""
 msgid "Syntax file edit"
 msgstr "Uitbreidingsbestand bewerken"
 
-msgid " Which syntax file you want to edit? "
+#, fuzzy
+msgid "Which syntax file you want to edit?"
 msgstr " Welk uitbreidingsbestand wilt u bewerken? "
 
-msgid " Load "
+#, fuzzy
+msgid "Load"
 msgstr " Laden "
 
-msgid " Block is large, you may not be able to undo this action. "
+#, fuzzy
+msgid "Block is large, you may not be able to undo this action"
 msgstr " Groot blok, wellicht kunt u deze actie niet ongedaan maken. "
 
 msgid "Replace"
 msgstr "Vervangen"
 
-msgid " Replace "
-msgstr " Vervangen "
-
-#, c-format
-msgid " %ld replacements made. "
+#, fuzzy, c-format
+msgid "%ld replacements made"
 msgstr " %ld vervangingen doorgevoerd. "
+
+#, fuzzy
+msgid "File was modified, save with exit?"
+msgstr " Bestand is gewijzigd. Opslaan bij afsluiten? "
 
 msgid "&Cancel quit"
 msgstr "&Annuleer afsluiten"
 
-msgid " Error "
-msgstr " Fout "
-
-msgid " This function is not implemented. "
+#, fuzzy
+msgid "This function is not implemented"
 msgstr " Deze functie is niet geïmplementeerd. "
 
-msgid " Copy to clipboard "
+#, fuzzy
+msgid "Copy to clipboard"
 msgstr " Kopiëer naar prikbord "
 
-msgid " Unable to save to file. "
+#, fuzzy
+msgid "Unable to save to file"
 msgstr " Kan niet opslaan naar bestand. "
 
-msgid " Cut to clipboard "
+#, fuzzy
+msgid "Cut to clipboard"
 msgstr " Knippen naar prikbord "
 
-msgid " Goto line "
+#, fuzzy
+msgid "Goto line"
 msgstr " Ga naar regel "
 
-msgid " Save Block "
+#, fuzzy
+msgid "Save block"
 msgstr " Opslaan blok "
 
-msgid " Insert File "
-msgstr " Bestand Invoegen "
+#, fuzzy
+msgid "Insert file"
+msgstr "Bestand &Invoegen..."
 
-msgid " Cannot insert file. "
+#, fuzzy
+msgid "Cannot insert file"
 msgstr " Fout bij invoegen bestand. "
 
-msgid " Sort block "
+#, fuzzy
+msgid "Sort block"
 msgstr " Sorteer blok "
 
-msgid " You must first highlight a block of text. "
+#, fuzzy
+msgid "You must first highlight a block of text"
 msgstr " U moet eerst een blok selecteren. "
 
-msgid " Run Sort "
+#, fuzzy
+msgid "Run sort"
 msgstr " Sorteren "
 
-msgid " Enter sort options (see manpage) separated by whitespace: "
+#, fuzzy
+msgid "Enter sort options (see manpage) separated by whitespace:"
 msgstr " Geef sorteeropties (zie 'man'-pagina) gescheiden door spaties: "
 
-msgid " Sort "
+#, fuzzy
+msgid "Sort"
 msgstr " Sorteren "
 
-msgid " Cannot execute sort command "
+#, fuzzy
+msgid "Cannot execute sort command"
 msgstr " Fout bij sorteren "
 
-msgid " Sort returned non-zero: "
+#, fuzzy, c-format
+msgid "Sort returned non-zero: %s"
 msgstr " Sorteren resulteerde in ongelijk-nul waarde: "
 
 msgid "Paste output of external command"
@@ -1896,34 +2018,51 @@ msgstr "Bewerk blok"
 msgid "Error calling program"
 msgstr "Fout bij sluiten script:"
 
-msgid " Copies to"
+#, fuzzy
+msgid "Copies to"
 msgstr " Kopiëert naar"
 
-msgid " Subject"
+#, fuzzy
+msgid "Subject"
 msgstr " Onderwerp"
 
-msgid " To"
+#, fuzzy
+msgid "To"
 msgstr " Aan"
 
-msgid " mail -s <subject> -c <cc> <to>"
+#, fuzzy
+msgid "mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <onderwerp> -c <cc> <aan>"
 
-msgid " Mail "
+#, fuzzy
+msgid "Mail"
 msgstr " Mail "
 
-msgid " Insert Literal "
-msgstr " Letterlijk invoegen "
+#, fuzzy
+msgid "Insert literal"
+msgstr "&Letterlijk invoegen..."
 
-msgid " Press any key: "
+#, fuzzy
+msgid "Press any key:"
 msgstr " Druk een toets: "
 
-msgid " Execute Macro "
-msgstr " Macro uitvoeren "
+#, fuzzy
+msgid "Execute macro"
+msgstr "&Macro uitvoeren..."
+
+#, fuzzy
+msgid ""
+"Current text was modified without a file save\n"
+"Continue discards these changes"
+msgstr ""
+" Deze tekst is veranderd zonder te zijn opgeslagen. \n"
+" Doorgaan gooit alle wijzigingen weg. "
 
 msgid "In se&lection"
 msgstr "In se&Lectie"
 
-msgid " Enter replacement string:"
+#, fuzzy
+msgid "Enter replacement string:"
 msgstr " Geef de vervangende string:"
 
 msgid "&Find all"
@@ -1931,6 +2070,14 @@ msgstr "&Vind allemaal"
 
 msgid "Cancel"
 msgstr "Annuleren"
+
+#, fuzzy
+msgid ""
+"Current text was modified without a file save.\n"
+"Continue discards these changes."
+msgstr ""
+" Deze tekst is veranderd zonder te zijn opgeslagen. \n"
+" Doorgaan gooit alle wijzigingen weg. "
 
 msgid "&Skip"
 msgstr "Over&Slaan"
@@ -1941,15 +2088,17 @@ msgstr "A&Lle"
 msgid "&Replace"
 msgstr "Ve&Rvangen"
 
-msgid " Replace with: "
+#, fuzzy
+msgid "Replace with:"
 msgstr " Vervangen door: "
 
-msgid " Confirm replace "
+#, fuzzy
+msgid "Confirm replace"
 msgstr " Vervanging bevestigen "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"File \"%s\" is already being edited\n"
+"File \"%s\" is already being edited.\n"
 "User: %s\n"
 "Process ID: %d"
 msgstr ""
@@ -2132,7 +2281,8 @@ msgstr "Plak &Uitvoer van..."
 msgid "&External formatter"
 msgstr "E&Xterne formatteerder"
 
-msgid "&General...  "
+#, fuzzy
+msgid "&General..."
 msgstr "&Algemeen..."
 
 msgid "Save &mode..."
@@ -2180,7 +2330,8 @@ msgstr "Dynamische regeluitvulling"
 msgid "Type writer wrap"
 msgstr "Typemachine-afbreking"
 
-msgid "Word wrap line length: "
+#, fuzzy
+msgid "Word wrap line length:"
 msgstr "Regellengte afbreken: "
 
 msgid "Cursor beyond end of line"
@@ -2207,7 +2358,8 @@ msgstr "Be&Vestigen voor opslaan"
 msgid "&Return does autoindent"
 msgstr "&Return springt automatisch in"
 
-msgid "Tab spacing: "
+#, fuzzy
+msgid "Tab spacing:"
 msgstr "Tabgrootte: "
 
 msgid "Fill tabs with &spaces"
@@ -2222,7 +2374,8 @@ msgstr "Simuleer &Halve tabs"
 msgid "Wrap mode"
 msgstr "Woordafbrekingsmodus"
 
-msgid " Editor options "
+#, fuzzy
+msgid "Editor options"
 msgstr " Editoropties "
 
 msgid "ButtonBar|Mark"
@@ -2243,26 +2396,28 @@ msgstr "Verwder"
 msgid "ButtonBar|PullDn"
 msgstr "Menu"
 
-msgid " Load syntax file "
+#, fuzzy
+msgid "Load syntax file"
 msgstr " Laad syntaxbestand "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot open file %s \n"
-" %s "
+"Cannot open file %s\n"
+"%s"
 msgstr ""
 " Openen van bestand %s mislukt \n"
 " %s "
 
-#, c-format
-msgid " Error in file %s on line %d "
+#, fuzzy, c-format
+msgid "Error in file %s on line %d"
 msgstr " Fout in bestand %s, op regel %d "
 
+#, fuzzy
 msgid ""
-" The Commander can't change to the directory that \n"
-" the subshell claims you are in.  Perhaps you have \n"
-" deleted your working directory, or given yourself \n"
-" extra access permissions with the \"su\" command? "
+"The Commander can't change to the directory that\n"
+"the subshell claims you are in. Perhaps you have\n"
+"deleted your working directory, or given yourself\n"
+"extra access permissions with the \"su\" command?"
 msgstr ""
 " De Commander kan niet zich niet verplaatsen naar de map\n"
 " waarin u zich volgens de subshell bevindt.  Heeft u de werkmap \n"
@@ -2272,41 +2427,42 @@ msgstr ""
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Type 'exit' om terug te keren naar MC"
 
-#, c-format
-msgid " Cannot fetch a local copy of %s "
+#, fuzzy, c-format
+msgid "Cannot fetch a local copy of %s"
 msgstr " Er kan geen lokale kopie van %s worden gemaakt "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot create temporary command file \n"
-" %s "
+"Cannot create temporary command file\n"
+"%s"
 msgstr ""
 " Kan geen tijdelijk opdrachtenbestand maken \n"
 " %s "
 
-msgid " Parameter "
+#, fuzzy
+msgid "Parameter"
 msgstr " Parameter "
 
 #, c-format
 msgid " %s%s file error"
 msgstr " %s%s bestandsfout "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The format of the %smc.ext file has changed with version 3.0.  It seems that "
-"the installation failed.  Please fetch a fresh copy from the Midnight "
+"The format of the %smc.ext file has changed with version 3.0. It seems that "
+"the installation failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
 "Het formaat van het %smc.ext bestand is veranderd met versie 3.0. De "
 "installatie lijkt mislukt. Haal een nieuw Midnight Commander-pakket op."
 
-#, c-format
-msgid " ~/%s file error "
+#, fuzzy, c-format
+msgid "~/%s file error"
 msgstr " ~/%s bestandsfout "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The format of the ~/%s file has changed with version 3.0.  You may either "
+"The format of the ~/%s file has changed with version 3.0. You may either "
 "want to copy it from %smc.ext or use that file as an example of how to write "
 "it."
 msgstr ""
@@ -2323,31 +2479,33 @@ msgstr "Verplaats"
 msgid "DialogTitle|Delete"
 msgstr "Verwijder"
 
-msgid " Cannot make the hardlink "
+#, fuzzy
+msgid "Cannot make the hardlink"
 msgstr " Harde link maken mislukt "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot read source link \"%s\" \n"
-" %s "
+"Cannot read source link \"%s\"\n"
+"%s"
 msgstr ""
 " Bron-link \"%s\" lezen mislukt \n"
 " %s "
 
+#, fuzzy
 msgid ""
-" Cannot make stable symlinks across non-local filesystems: \n"
+"Cannot make stable symlinks acrossnon-local filesystems:\n"
 "\n"
-" Option Stable Symlinks will be disabled "
+"Option Stable Symlinks will be disabled"
 msgstr ""
 " Er kunnen geen stabiele symbolische links over non-lokale bestandssytemen\n"
 "worden gelegd.\n"
 "\n"
 " De optie 'stabiele symbolische links' wordt uitgeschakeld "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot create target symlink \"%s\" \n"
-" %s "
+"Cannot create target symlink \"%s\"\n"
+"%s"
 msgstr ""
 " Maken van doel van symbolische link \"%s\" mislukt \n"
 " %s "
@@ -2355,105 +2513,106 @@ msgstr ""
 msgid "&Abort"
 msgstr "&Afbreken"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot overwrite directory \"%s\" \n"
-" %s "
+"Cannot overwrite directory\"%s\"\n"
+"%s"
 msgstr ""
 " Map \"%s\" kan niet overschreven worden \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot stat source file \"%s\" \n"
-" %s "
+"Cannot stat source file \"%s\"\n"
+"%s"
 msgstr ""
 " Bronbestand \"%s\" kan niet geïnspecteerd worden \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" `%s' \n"
-" and \n"
-" `%s' \n"
-" are the same file "
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same file"
 msgstr ""
 " `%s' \n"
 " en \n"
 " `%s' \n"
 " zijn hetzelfde bestand "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot create special file \"%s\" \n"
-" %s "
+"Cannot create special file \"%s\"\n"
+"%s"
 msgstr ""
 " Maken van speciaal bestand \"%s\" mislukt \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot chown target file \"%s\" \n"
-" %s "
+"Cannot chown target file \"%s\"\n"
+"%s"
 msgstr ""
 " 'chown' van doelbestand \"%s\" mislukt \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot chmod target file \"%s\" \n"
-" %s "
+"Cannot chmod target file \"%s\"\n"
+"%s"
 msgstr ""
 " 'chmod' van doelbestand \"%s\" mislukt \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot open source file \"%s\" \n"
-" %s "
+"Cannot open source file \"%s\"\n"
+"%s"
 msgstr ""
 " Openen van bronbestand \"%s\" mislukt \n"
 " %s "
 
-msgid " Reget failed, about to overwrite file "
+#, fuzzy
+msgid "Reget failed, about to overwrite file"
 msgstr " 'Reget' mislukt, bestand wordt overschreven "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot fstat source file \"%s\" \n"
-" %s "
+"Cannot fstat source file \"%s\"\n"
+"%s"
 msgstr ""
 " Bronbestand \"%s\" kan niet geïnspecteerd worden \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot create target file \"%s\" \n"
-" %s "
+"Cannot create target file \"%s\"\n"
+"%s"
 msgstr ""
 " Doelbestand \"%s\" kan niet gecreëerd worden \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot fstat target file \"%s\" \n"
-" %s "
+"Cannot fstat target file \"%s\"\n"
+"%s"
 msgstr ""
 " Bronbestand \"%s\" kan niet geïnspecteerd worden \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot read source file \"%s\" \n"
-" %s "
+"Cannot read source file\"%s\"\n"
+"%s"
 msgstr ""
 " Bronbestand \"%s\" kan niet gelezen worden \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot write target file \"%s\" \n"
-" %s "
+"Cannot write target file \"%s\"\n"
+"%s"
 msgstr ""
 " Doelbestand \"%s\" kan niet beschreven worden \n"
 " %s "
@@ -2461,18 +2620,18 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(geblokkeerd)"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot close source file \"%s\" \n"
-" %s "
+"Cannot close source file \"%s\"\n"
+"%s"
 msgstr ""
 " Bronbestand \"%s\" kan niet gesloten worden \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot close target file \"%s\" \n"
-" %s "
+"Cannot close target file \"%s\"\n"
+"%s"
 msgstr ""
 " Doelbestand \"%s\" kan niet gesloten worden \n"
 " %s "
@@ -2483,122 +2642,128 @@ msgstr "Onvolledige bestand opgehaald. Wilt u het behouden?"
 msgid "&Keep"
 msgstr "&Behouden"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot stat source directory \"%s\" \n"
-" %s "
+"Cannot stat source directory \"%s\"\n"
+"%s"
 msgstr ""
 " Bronmap \"%s\" kan niet geïnspecteerd worden\n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Source \"%s\" is not a directory \n"
-" %s "
+"Source \"%s\" is not a directory\n"
+"%s"
 msgstr ""
 " Bronmap \"%s\" is geen map\n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot copy cyclic symbolic link \n"
-" `%s' "
+"Cannot copy cyclic symbolic link\n"
+"\"%s\""
 msgstr ""
 " Een cyclische symbolische link kan niet gekopiëerd worden \n"
 " `%s' "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Destination \"%s\" must be a directory \n"
-" %s "
+"Destination \"%s\" must be a directory\n"
+"%s"
 msgstr ""
 " Doel \"%s\" moet een map zijn \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot create target directory \"%s\" \n"
-" %s "
+"Cannot create target directory \"%s\"\n"
+"%s"
 msgstr ""
 " Doelmap \"%s\" kan niet gecreëerd worden \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot chown target directory \"%s\" \n"
-" %s "
+"Cannot chown target directory \"%s\"\n"
+"%s"
 msgstr ""
 " 'chown' van doelmap \"%s\" mislukt \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot stat file \"%s\" \n"
-" %s "
+"Cannot stat file \"%s\"\n"
+"%s"
 msgstr ""
 " Bestand \"%s\" kan niet geïnspecteerd worden \n"
 " %s "
 
-#, c-format
-msgid " Cannot overwrite directory `%s' "
-msgstr " Overschrijven van map `%s' mislukt "
+#, fuzzy, c-format
+msgid "Cannot overwrite directory \"%s\""
+msgstr " Overschrijven van map \"%s\" mislukt %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot move file \"%s\" to \"%s\" \n"
-" %s "
+"Cannot move file \"%s\" to \"%s\"\n"
+"%s"
 msgstr ""
 " Verplaatsen van \"%s\" naar \"%s\" mislukt \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot remove file \"%s\" \n"
-" %s "
+"Cannot remove file \"%s\"\n"
+"%s"
 msgstr ""
 " Verwijderen van bestand \"%s\" mislukt \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" `%s' \n"
-" and \n"
-" `%s' \n"
-" are the same directory "
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same directory"
 msgstr ""
 " `%s' \n"
 " en \n"
 " `%s' \n"
 " zijn dezelfde map "
 
-#, c-format
-msgid " Cannot overwrite directory \"%s\" %s "
-msgstr " Overschrijven van map \"%s\" mislukt %s "
+#, fuzzy, c-format
+msgid ""
+"Cannot overwrite directory \"%s\"\n"
+"%s"
+msgstr ""
+" Map \"%s\" kan niet overschreven worden \n"
+" %s "
 
-#, c-format
-msgid " Cannot overwrite file \"%s\" %s "
+#, fuzzy, c-format
+msgid ""
+"Cannot overwrite file \"%s\"\n"
+"%s"
 msgstr " Overschrijven van bestand \"%s\" mislukt %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot move directory \"%s\" to \"%s\" \n"
-" %s "
+"Cannot move directory \"%s\" to \"%s\"\n"
+"%s"
 msgstr ""
 " Verplaatsen van map  \"%s\" naar \"%s\" mislukt \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot delete file \"%s\" \n"
-" %s "
+"Cannot delete file \"%s\"\n"
+"%s"
 msgstr ""
 " Verwijderen van bestand \"%s\" mislukt \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot remove directory \"%s\" \n"
-" %s "
+"Cannot remove directory \"%s\"\n"
+"%s"
 msgstr ""
 " Verwijderen van map \"%s\" mislukt \n"
 " %s "
@@ -2635,44 +2800,50 @@ msgstr "mappen"
 msgid "files/directories"
 msgstr "bestanden/mappen"
 
+#. TRANSLATORS: keep leading space here to split words in Copy/Move dialog
 msgid " with source mask:"
 msgstr " met bronmasker:"
 
-msgid " to:"
-msgstr " naar:"
+msgid "to:"
+msgstr "naar:"
 
 #, c-format
 msgid "%s?"
 msgstr "%s?"
 
-msgid " Cannot operate on \"..\"! "
+#, fuzzy
+msgid "Cannot operate on \"..\"!"
 msgstr " Opereren op \"..\" is niet mogelijk! "
 
-msgid " Sorry, I could not put the job in background "
+#, fuzzy
+msgid "Sorry, I could not put the job in background"
 msgstr " De job kon niet in de achtergrond geplaatst worden "
 
 msgid "&Retry"
 msgstr "&Nogmaals"
 
+#, fuzzy
 msgid ""
 "\n"
-"   Directory not empty.   \n"
-"   Delete it recursively? "
+"Directory not empty.\n"
+"Delete it recursively?"
 msgstr ""
 "\n"
 "   Map is niet leeg.   \n"
 "   Recursief verwijderen? "
 
+#, fuzzy
 msgid ""
 "\n"
-"   Background process: Directory not empty \n"
-"   Delete it recursively? "
+"Background process: Directory not empty.\n"
+"Delete it recursively?"
 msgstr ""
 "\n"
 "   Achtergrondproces: Map is niet leeg \n"
 "   Recursief verwijderen? "
 
-msgid " Delete: "
+#, fuzzy
+msgid "Delete:"
 msgstr " Verwijderen: "
 
 msgid "Non&e"
@@ -2707,7 +2878,7 @@ msgid "Time: %s  %s (%s)"
 msgstr "Apparaat:     %s"
 
 #, c-format
-msgid " Total: %s of %s "
+msgid "Total: %s of %s"
 msgstr ""
 
 msgid "Source"
@@ -2756,10 +2927,12 @@ msgstr "&Toevoegen"
 msgid "Overwrite this target?"
 msgstr "Dit doel overschrijven?"
 
-msgid " File exists "
+#, fuzzy
+msgid "File exists"
 msgstr " Bestand bestaat reeds "
 
-msgid " Background process: File exists "
+#, fuzzy
+msgid "Background process: File exists"
 msgstr " Achtergrondproces: bestand bestaat reeds "
 
 msgid "&Background"
@@ -2768,17 +2941,17 @@ msgstr "Achter&Grond"
 msgid "&Stable Symlinks"
 msgstr "&Stabiele symbolische links"
 
-msgid "di&Ve into subdir if exists"
+#, fuzzy
+msgid "Di&ve into subdir if exists"
 msgstr "Ga naar sub&Map, als deze bestaat"
 
-msgid "preserve &Attributes"
+#, fuzzy
+msgid "Preserve &attributes"
 msgstr "&Attributen behouden"
 
-msgid "follow &Links"
+#, fuzzy
+msgid "Follow &links"
 msgstr "&Links volgen"
-
-msgid "to:"
-msgstr "naar:"
 
 #, c-format
 msgid "Invalid source pattern `%s'"
@@ -2809,7 +2982,8 @@ msgstr "Bew&Erken -F4"
 msgid "Found: %ld"
 msgstr "Gevonden: %ld"
 
-msgid " Malformed regular expression "
+#, fuzzy
+msgid "Malformed regular expression"
 msgstr " Incorrecte reguliere expressie "
 
 msgid "Cas&e sensitive"
@@ -2865,14 +3039,16 @@ msgstr "Zoeken naar %s"
 msgid "Searching"
 msgstr "Aan het zoeken"
 
-msgid " Help file format error\n"
+#, fuzzy
+msgid "Help file format error\n"
 msgstr " Formaatfout in helpbestand\n"
 
-msgid " Internal bug: Double start of link area "
+#, fuzzy
+msgid "Internal bug: Double start of link area"
 msgstr " Interne fout: dubbele start van linkgebied"
 
-#, c-format
-msgid " Cannot find node %s in help file "
+#, fuzzy, c-format
+msgid "Cannot find node %s in help file"
 msgstr " Node %s is niet gevonden het helpbestand "
 
 msgid "Help"
@@ -2896,10 +3072,12 @@ msgstr "&Toevoegen"
 msgid "&Insert"
 msgstr "&Invoegen"
 
-msgid "New &Entry"
+#, fuzzy
+msgid "New &entry"
 msgstr "Nieuw &Item"
 
-msgid "New &Group"
+#, fuzzy
+msgid "New &group"
 msgstr "Nieuwe &Groep"
 
 msgid "&Up"
@@ -2914,7 +3092,8 @@ msgstr "Ve&Rversen"
 msgid "Fr&ee VFSs now"
 msgstr "&Maak VFS'en nu vrij"
 
-msgid "Change &To"
+#, fuzzy
+msgid "Change &to"
 msgstr "Ver&Ander in"
 
 msgid "Subgroup - press ENTER to see list"
@@ -2926,11 +3105,11 @@ msgstr "Aktieve VFS-directories"
 msgid "Directory hotlist"
 msgstr "Map favolijst"
 
-msgid " Directory path "
-msgstr " Map pad "
+msgid "Directory path"
+msgstr "Map pad"
 
-msgid " Directory label "
-msgstr " Map label "
+msgid "Directory label"
+msgstr "Map label"
 
 #, c-format
 msgid "Moving %s"
@@ -2939,66 +3118,78 @@ msgstr "%s wordt verplaatst"
 msgid "New hotlist entry"
 msgstr "Nieuw favolijst item"
 
-msgid "Directory label"
+#, fuzzy
+msgid "Directory label:"
 msgstr "Map label"
 
-msgid "Directory path"
+#, fuzzy
+msgid "Directory path:"
 msgstr "Map pad"
 
-msgid " New hotlist group "
+#, fuzzy
+msgid "New hotlist group"
 msgstr " Nieuwe favolijst-groep "
 
-msgid "Name of new group"
+#, fuzzy
+msgid "Name of new group:"
 msgstr "Naam van de nieuwe groep"
 
 #, c-format
 msgid "Label for \"%s\":"
 msgstr "Naam voor \"%s\":"
 
-msgid " Add to hotlist "
+#, fuzzy
+msgid "Add to hotlist"
 msgstr " Toevoegen aan favolijst "
 
-msgid " Remove: "
+#, fuzzy
+msgid "Remove:"
 msgstr " Verwijderen "
 
-msgid ""
-"\n"
-" Are you sure you want to remove this entry?"
+#, fuzzy
+msgid "Are you sure you want to remove this entry?"
 msgstr ""
 "\n"
 " Weet je zeker dat je deze ingang wilt verwijderen?"
 
+#, fuzzy
 msgid ""
-"\n"
-" Group not empty.\n"
-" Remove it?"
+"Group not empty.\n"
+"Remove it?"
 msgstr ""
 "\n"
 " Groep is niet leeg.\n"
 " Toch verwijderen?"
 
-msgid " Top level group "
+#, fuzzy
+msgid "Top level group"
 msgstr " Startgroep "
 
-msgid " Hotlist Load "
+#, fuzzy
+msgid "Hotlist Load"
 msgstr " Favolijst laden "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+"MC was unable to write ~/%s file,\n"
+"your old hotlist entries were not deleted"
 msgstr ""
 "MC kon niet schrijven naar ~/%s bestand, uw oude favolijst is niet verwijderd"
+
+#, fuzzy
+msgid "Information"
+msgstr " Informatie "
 
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
 
 #, c-format
-msgid "File:       %s"
-msgstr "Bestand:      %s"
+msgid "File: %s"
+msgstr "Bestand: %s"
 
-#, c-format
-msgid "Free nodes: %d (%d%%) of %d"
+#, fuzzy, c-format
+msgid "Free nodes: %ld (%ld%%) of %ld"
 msgstr "Vrije nodes: %d (%d%%) van %d"
 
 msgid "No node information"
@@ -3011,8 +3202,8 @@ msgstr "Vrije ruimte: %s (%d%%) van %s"
 msgid "No space information"
 msgstr "Geen informatie over schijfruimte"
 
-#, c-format
-msgid "Type:      %s "
+#, fuzzy, c-format
+msgid "Type:      %s"
 msgstr "Type:       %s "
 
 msgid "non-local vfs"
@@ -3075,46 +3266,49 @@ msgstr "&Verticaal"
 msgid "&Horizontal"
 msgstr "&Horizontaal"
 
-msgid "show free sp&Ace"
+#, fuzzy
+msgid "Show free sp&ace"
 msgstr "&Geef vrije ruimte weer"
 
-msgid "&Xterm window title"
+#, fuzzy
+msgid "&XTerm window title"
 msgstr "&Xterm titelbalk"
 
-msgid "h&Intbar visible"
+#, fuzzy
+msgid "H&intbar visible"
 msgstr "&Infobalk zichtbaar"
 
 msgid "&Keybar visible"
 msgstr "&Toetsenbalk zichtbaar"
 
-msgid "command &Prompt"
+#, fuzzy
+msgid "Command &prompt"
 msgstr "Opdracht pro&Mpt"
 
-msgid "show &Mini status"
+#, fuzzy
+msgid "Show &mini status"
 msgstr "&Mini-Status tonen"
 
-msgid "menu&Bar visible"
+#, fuzzy
+msgid "Menu&bar visible"
 msgstr "Menu&Balk zichtbaar"
 
 msgid "&Equal split"
 msgstr "Gelijkmatig verd&Elen"
 
-msgid "pe&Rmissions"
-msgstr "&Rechten"
-
-msgid "&File types"
-msgstr "Bestands&Formaten"
-
-msgid " Panel split "
+#, fuzzy
+msgid "Panel split"
 msgstr " Vensterverdeling "
 
-msgid " Highlight... "
-msgstr " Oplichten... "
+msgid "Console output"
+msgstr ""
 
-msgid " Other options "
+#, fuzzy
+msgid "Other options"
 msgstr " Overige opties "
 
-msgid "output lines"
+#, fuzzy
+msgid "Output lines:"
 msgstr "uitvoerregels"
 
 msgid "Layout"
@@ -3123,7 +3317,8 @@ msgstr "Vormgeving"
 msgid "Learn keys"
 msgstr "Toetsen leren"
 
-msgid " Teach me a key "
+#, fuzzy
+msgid "Teach me a key"
 msgstr " Leer me een toets "
 
 #, c-format
@@ -3146,11 +3341,12 @@ msgstr ""
 "Als u wilt afbreken, druk dan de escape-toets,\n"
 "en wacht enkele ogenblikken"
 
-msgid " Cannot accept this key "
+#, fuzzy
+msgid "Cannot accept this key"
 msgstr " Deze toets kan niet geaccepteerd worden "
 
-#, c-format
-msgid " You have entered \"%s\""
+#, fuzzy, c-format
+msgid "You have entered \"%s\""
 msgstr " U heeft \"%s\" ingevoerd"
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
@@ -3183,20 +3379,26 @@ msgstr "welke toetsen niet met 'OK' gemarkeerd zijn. Geef een spatie "
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "of klik met de muis om ze te definiëren. Navigeer met Tab."
 
-msgid " The Midnight Commander "
+#, fuzzy
+msgid "The Midnight Commander"
 msgstr " De Midnight Commander "
 
-msgid " Do you really want to quit the Midnight Commander? "
+#, fuzzy
+msgid "Do you really want to quit the Midnight Commander?"
 msgstr " Weet u zeker dat u de Midnight Commander wilt afsluiten? "
 
-msgid "&Listing mode..."
-msgstr "&Lijstmodus...          "
+#, fuzzy
+msgid "File listin&g"
+msgstr "&Complete bestandenlijst"
 
 msgid "&Quick view"
 msgstr "&Korte lijst"
 
 msgid "&Info"
 msgstr "&Info"
+
+msgid "&Listing mode..."
+msgstr "&Lijstmodus...          "
 
 msgid "&Sort order..."
 msgstr "&Sorteervolgorde...     "
@@ -3240,8 +3442,13 @@ msgstr "C&Hmod"
 msgid "&Link"
 msgstr "&Link"
 
-msgid "&SymLink"
+#, fuzzy
+msgid "&Symlink"
 msgstr "&Symlink"
+
+#, fuzzy
+msgid "Relative symlin&k"
+msgstr "Volgen van Symlink..."
 
 msgid "Edit s&ymlink"
 msgstr "S&Ymlink bewerken"
@@ -3334,6 +3541,10 @@ msgstr "&Configuratie..."
 msgid "&Layout..."
 msgstr "&Vormgeving..."
 
+#, fuzzy
+msgid "&Panel options..."
+msgstr " Vensteropties "
+
 msgid "C&onfirmation..."
 msgstr "&Bevestiging..."
 
@@ -3355,19 +3566,6 @@ msgstr "&Onder"
 msgid "&Right"
 msgstr "&Rechts"
 
-msgid " Information "
-msgstr " Informatie "
-
-msgid ""
-" Using the fast reload option may not reflect the exact \n"
-" directory contents. In this case you'll need to do a   \n"
-" manual reload of the directory. See the man page for   \n"
-" the details.                                           "
-msgstr ""
-" Bij snel-herladen kan het zijn dat de mapinhoud niet \n"
-" exact klopt. In dat geval moet u de map handmatig    \n"
-" opnieuw inlezen. Zie de 'man'-pagina voor details."
-
 msgid "ButtonBar|Menu"
 msgstr "Menu"
 
@@ -3387,83 +3585,179 @@ msgstr "De TERM omgevingsvariabele is niet gezet!\n"
 msgid "Cannot create %s directory"
 msgstr "Aanmaken van map %s mislukt"
 
-msgid "safe de&Lete"
-msgstr "&Veilig verwijderen"
-
-msgid "cd follows lin&Ks"
-msgstr "&Cd volgt links"
-
-msgid "L&ynx-like motion"
-msgstr "'L&Ynx'-achtige bewegingen"
-
-msgid "rotatin&G dash"
-msgstr "Roterend stree&Pje"
-
-msgid "co&Mplete: show all"
-msgstr "&Volledig: toon alles"
-
-msgid "&Use internal view"
-msgstr "Gebruik in&Terne weergave"
-
-msgid "use internal ed&It"
-msgstr "&Interne editor gebruiken"
-
-msgid "auto m&Enus"
-msgstr "Automen&U's"
-
-msgid "&Auto save setup"
-msgstr "Auto&M. instellingen opslaan"
-
-msgid "shell &Patterns"
-msgstr "S&Hell patronen"
-
-msgid "Compute &Totals"
-msgstr "Bereken tota&Len"
-
-msgid "&Verbose operation"
-msgstr "Uitvoering met &Weergave"
-
-msgid "Mkdir autoname"
-msgstr "Mkdir automatisch noemen"
-
-msgid "&Fast dir reload"
-msgstr "Snel herle&Zen"
-
-msgid "mi&X all files"
-msgstr "Meng alle &Bestanden"
-
-msgid "&Drop down menus"
-msgstr "Neer&Klapmenu's"
-
-msgid "ma&Rk moves down"
-msgstr "Ma&Rkering naar beneden"
-
-msgid "show &Hidden files"
-msgstr "Toon verbor&Gen bestanden"
-
-msgid "show &Backup files"
-msgstr "Toon r&Eservebestanden"
-
-msgid "Use SI si&ze units"
-msgstr "Gebruik SI grootte eenheden"
-
 msgid "&Never"
 msgstr "&Nooit"
 
-msgid "on dumb &Terminals"
+#, fuzzy
+msgid "On dum&b terminals"
 msgstr "op domme &Terminals"
 
 msgid "Alwa&ys"
 msgstr "Al&Tijd"
 
-msgid " Panel options "
-msgstr " Vensteropties "
+#, fuzzy
+msgid "A&uto save setup"
+msgstr "Auto&M. instellingen opslaan"
 
-msgid " Pause after run... "
+#, fuzzy
+msgid "Sa&fe delete"
+msgstr "&Veilig verwijderen"
+
+#, fuzzy
+msgid "Cd follows lin&ks"
+msgstr "&Cd volgt links"
+
+#, fuzzy
+msgid "Rotating d&ash"
+msgstr "Roterend stree&Pje"
+
+#, fuzzy
+msgid "Co&mplete: show all"
+msgstr "&Volledig: toon alles"
+
+#, fuzzy
+msgid "Shell &patterns"
+msgstr "S&Hell patronen"
+
+msgid "&Drop down menus"
+msgstr "Neer&Klapmenu's"
+
+#, fuzzy
+msgid "Auto m&enus"
+msgstr "Automen&U's"
+
+#, fuzzy
+msgid "Use internal vie&w"
+msgstr "Gebruik in&Terne weergave"
+
+#, fuzzy
+msgid "Use internal edi&t"
+msgstr "&Interne editor gebruiken"
+
+#, fuzzy
+msgid "Pause after run"
 msgstr " Pauze na uitvoering... "
+
+msgid "Timeout:"
+msgstr ""
+
+#, fuzzy
+msgid "S&ingle press"
+msgstr "Bestands&Formaten"
+
+#, fuzzy
+msgid "Esc key mode"
+msgstr "Escape"
+
+#, fuzzy
+msgid "Mkdi&r autoname"
+msgstr "Mkdir automatisch noemen"
+
+msgid "Classic pro&gressbar"
+msgstr ""
+
+#, fuzzy
+msgid "Compute tota&ls"
+msgstr "Bereken tota&Len"
+
+msgid "&Verbose operation"
+msgstr "Uitvoering met &Weergave"
+
+#, fuzzy
+msgid "File operation options"
+msgstr "Kopieer"
 
 msgid "Configure options"
 msgstr "Instellingen"
+
+#, fuzzy
+msgid "Case &insensitive"
+msgstr "Hoofd-/kleine le&Tters"
+
+#, fuzzy
+msgid "Case s&ensitive"
+msgstr "Hoofd-/kleine le&Tters"
+
+#, fuzzy
+msgid "Use panel sort mo&de"
+msgstr "&Passieve modus gebruiken"
+
+#, fuzzy
+msgid "Quick search"
+msgstr "Snelle cd"
+
+#, fuzzy
+msgid "&Permissions"
+msgstr "Rechten"
+
+#, fuzzy
+msgid "File &types"
+msgstr "Bestands&Formaten"
+
+#, fuzzy
+msgid "File highlight"
+msgstr " Oplichten... "
+
+msgid "&Mouse page scrolling"
+msgstr ""
+
+msgid "Pa&ge scrolling"
+msgstr ""
+
+msgid "L&ynx-like motion"
+msgstr "'L&Ynx'-achtige bewegingen"
+
+msgid "Navigation"
+msgstr ""
+
+#, fuzzy
+msgid "A&uto save panels setup"
+msgstr "Auto&M. instellingen opslaan"
+
+#, fuzzy
+msgid "Re&verse files only"
+msgstr "Alleen &Bestanden"
+
+#, fuzzy
+msgid "Ma&rk moves down"
+msgstr "Ma&Rkering naar beneden"
+
+msgid "&Fast dir reload"
+msgstr "Snel herle&Zen"
+
+#, fuzzy
+msgid "Show &hidden files"
+msgstr "Toon verbor&Gen bestanden"
+
+#, fuzzy
+msgid "Show &backup files"
+msgstr "Toon r&Eservebestanden"
+
+#, fuzzy
+msgid "Mi&x all files"
+msgstr "Meng alle &Bestanden"
+
+msgid "Use SI si&ze units"
+msgstr "Gebruik SI grootte eenheden"
+
+#, fuzzy
+msgid "Main panel options"
+msgstr "Hoofd opties"
+
+#, fuzzy
+msgid "Panel options"
+msgstr " Vensteropties "
+
+#, fuzzy
+msgid ""
+"Using the fast reload option may not reflect the exact\n"
+"directory contents. In this case you'll need to do a\n"
+"manual reload of the directory. See the man page for\n"
+"the details."
+msgstr ""
+" Bij snel-herladen kan het zijn dat de mapinhoud niet \n"
+" exact klopt. In dat geval moet u de map handmatig    \n"
+" opnieuw inlezen. Zie de 'man'-pagina voor details."
 
 msgid "&Add new"
 msgstr "Nieuw toevoegen"
@@ -3477,13 +3771,16 @@ msgstr "Opdracht"
 msgid "Other command"
 msgstr "Andere opdracht"
 
-msgid " Add to external panelize "
+#, fuzzy
+msgid "Add to external panelize"
 msgstr " Toevoegen aan extern venster "
 
-msgid " Enter command label: "
+#, fuzzy
+msgid "Enter command label:"
 msgstr " Geef opdrachtlabel: "
 
-msgid " Cannot run external panelize in a non-local directory "
+#, fuzzy
+msgid "Cannot run external panelize in a non-local directory"
 msgstr " Plaatsing in extern venster is niet mogelijk in een niet-lokale map"
 
 msgid "Find rejects after patching"
@@ -3579,11 +3876,9 @@ msgstr "Toegang&Stijd"
 msgid "sort|h"
 msgstr "h"
 
-msgid "C&Hange time"
+#, fuzzy
+msgid "C&hange time"
 msgstr "&Veranderingstijd"
-
-msgid "Permission"
-msgstr "Rechten"
 
 msgid "Perm"
 msgstr "Rechten"
@@ -3626,15 +3921,21 @@ msgid_plural "%s in %d files"
 msgstr[0] "%s bytes in %d bestand"
 msgstr[1] "%s bytes in %d bestand(en)"
 
-msgid "Unknown tag on display format: "
+#, fuzzy
+msgid "Unknown tag on display format:"
 msgstr "Onbekend label in weergaveformaat: "
 
 msgid "User supplied format looks invalid, reverting to default."
 msgstr ""
 "Door gebruiker gedefinieerde formaat lijkt onjuist, gebruik de standaard."
 
-msgid " Do you really want to execute? "
+#, fuzzy
+msgid "Do you really want to execute?"
 msgstr " Wilt u die opdracht echt uitvoeren? "
+
+#, fuzzy, c-format
+msgid "Cannot chdir to \"%s\""
+msgstr " 'chdir' naar %s mislukt "
 
 msgid "Choose codepage"
 msgstr "Kies invoerkarakterset"
@@ -3669,7 +3970,8 @@ msgstr ""
 msgid "Cannot open named pipe %s\n"
 msgstr "Openen van 'named pipe' %s mislukt\n"
 
-msgid " The shell is still active. Quit anyway? "
+#, fuzzy
+msgid "The shell is still active. Quit anyway?"
 msgstr " De shell is nog actief. Toch afsluiten? "
 
 #, c-format
@@ -3739,16 +4041,16 @@ msgstr "Kopiëer de map \"%s\" naar:"
 msgid "Move \"%s\" directory to:"
 msgstr "Verplaats  de map \"%s\" naar:"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot stat the destination \n"
-" %s "
+"Cannot stat the destination\n"
+"%s"
 msgstr ""
 " Inspecteren van het doel mislukt \n"
 " %s "
 
-#, c-format
-msgid "  Delete %s?  "
+#, fuzzy, c-format
+msgid "Delete %s?"
 msgstr "  %s verwijderen?  "
 
 msgid "ButtonBar|Static"
@@ -3774,30 +4076,36 @@ msgstr ""
 "Schrijven naar bestand %s mislukt:\n"
 "%s\n"
 
-msgid " Format error on file Extensions File "
+#, fuzzy
+msgid "Format error on file Extensions File"
 msgstr "Formaatfout in bestandsextensies-bestand"
 
-#, c-format
-msgid " The %%var macro has no default "
+#, fuzzy, c-format
+msgid "The %%var macro has no default"
 msgstr "De %%var-macro heeft geen standaard "
 
-#, c-format
-msgid " The %%var macro has no variable "
+#, fuzzy, c-format
+msgid "The %%var macro has no variable"
 msgstr "De %%var macro heeft geen variabele "
 
-msgid " Debug "
+#, fuzzy
+msgid "Debug"
 msgstr " Debug "
 
-msgid " ERROR: "
+#, fuzzy
+msgid "ERROR:"
 msgstr " FOUT: "
 
-msgid " True:  "
+#, fuzzy
+msgid "True:"
 msgstr " Waar:  "
 
-msgid " False: "
+#, fuzzy
+msgid "False:"
 msgstr " Onwaar: "
 
-msgid " Warning -- ignoring file "
+#, fuzzy
+msgid "Warning -- ignoring file"
 msgstr " Waarschuwing -- bestand wordt genegeerd "
 
 #, c-format
@@ -3809,18 +4117,28 @@ msgstr ""
 "beschrijfbaar.\n"
 "Het gebruik kan veiligheidsrisico's betekenen"
 
-#, c-format
-msgid " No suitable entries found in %s "
+#, fuzzy, c-format
+msgid ""
+"Cannot open file%s\n"
+"%s"
+msgstr ""
+" Openen van bestand %s mislukt \n"
+" %s "
+
+#, fuzzy, c-format
+msgid "No suitable entries found in %s"
 msgstr "Geen passende items gevonden in %s "
 
-msgid " User menu "
-msgstr " Gebruikersmenu "
+#, fuzzy
+msgid "User menu"
+msgstr "&Gebruikersmenu"
 
 #, fuzzy
 msgid "Invalid value"
 msgstr " Ongeldig adres "
 
-msgid " Cannot spawn child process "
+#, fuzzy
+msgid "Cannot spawn child process"
 msgstr " Starten kindproces mislukt "
 
 msgid "Empty output from child filter"
@@ -3872,41 +4190,42 @@ msgstr "Ongfrm"
 msgid "ButtonBar|Format"
 msgstr "Format"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Error while closing the file: \n"
-" %s \n"
-" Data may have been written or not. "
+"Error while closing the file:\n"
+"%s\n"
+"Data may have been written or not"
 msgstr ""
 " Probleem met sluiten bestand: \n"
 " %s\n"
 "  Data is mogelijk niet geschreven. "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot save file: \n"
-" %s "
+"Cannot save file:\n"
+"%s"
 msgstr ""
-" Kan bestand niet opslaan: \n"
+" Kan bestand %s niet opslaan: \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot open \"%s\"\n"
-" %s "
+"Cannot open \"%s\"\n"
+"%s"
 msgstr ""
 " Openen van \"%s\" is niet mogelijk\n"
 " %s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot stat \"%s\"\n"
-" %s "
+"Cannot stat \"%s\"\n"
+"%s"
 msgstr ""
 " Inspectie van \"%s\" mislukt \n"
 " %s "
 
-msgid " Cannot view: not a regular file "
+#, fuzzy
+msgid "Cannot view: not a regular file"
 msgstr " Bekijken niet mogelijk: geen normaal bestand "
 
 msgid "Seeking to search result"
@@ -3919,7 +4238,8 @@ msgstr "Zoeken"
 msgid "Continue from begining?"
 msgstr ""
 
-msgid " History "
+#, fuzzy
+msgid "History"
 msgstr " Opdrachthistorie "
 
 #. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
@@ -3933,6 +4253,88 @@ msgstr ""
 msgid "Background process:"
 msgstr "Achtergrondproces:"
 
+#~ msgid " Permission "
+#~ msgstr " Rechten "
+
+#~ msgid " File "
+#~ msgstr " Bestand "
+
+#~ msgid " Name "
+#~ msgstr " Naam "
+
+#~ msgid " Owner name "
+#~ msgstr " Eigenaarsnaam "
+
+#~ msgid " Group name "
+#~ msgstr " Groepsnaam "
+
+#~ msgid " Size "
+#~ msgstr " Grootte "
+
+#~ msgid " Confirmation "
+#~ msgstr " Bevestiging "
+
+#~ msgid " Filtered view "
+#~ msgstr " Gefilterde weergave "
+
+#~ msgid " Select "
+#~ msgstr " Selectie "
+
+#~ msgid " Compare directories "
+#~ msgstr " Mappen vergelijken"
+
+#~ msgid " Link "
+#~ msgstr " Link "
+
+#~ msgid " Edit symlink "
+#~ msgstr " Symbolische link bewerken "
+
+#~ msgid "case &Sensitive"
+#~ msgstr "&Hoofd/Kleine-letters"
+
+#~ msgid " Replace "
+#~ msgstr " Vervangen "
+
+#~ msgid " Error "
+#~ msgstr " Fout "
+
+#~ msgid " Insert File "
+#~ msgstr " Bestand Invoegen "
+
+#~ msgid " Insert Literal "
+#~ msgstr " Letterlijk invoegen "
+
+#~ msgid " Execute Macro "
+#~ msgstr " Macro uitvoeren "
+
+#~ msgid " Cannot overwrite directory `%s' "
+#~ msgstr " Overschrijven van map `%s' mislukt "
+
+#~ msgid " to:"
+#~ msgstr " naar:"
+
+#~ msgid " Directory path "
+#~ msgstr " Map pad "
+
+#~ msgid " Directory label "
+#~ msgstr " Map label "
+
+#~ msgid "File:       %s"
+#~ msgstr "Bestand:      %s"
+
+#~ msgid "pe&Rmissions"
+#~ msgstr "&Rechten"
+
+#~ msgid " User menu "
+#~ msgstr " Gebruikersmenu "
+
+#~ msgid ""
+#~ " Cannot save file: \n"
+#~ " %s "
+#~ msgstr ""
+#~ " Kan bestand niet opslaan: \n"
+#~ " %s "
+
 #~ msgid " confirm &Exit "
 #~ msgstr " B&Evestig afsluiten "
 
@@ -3941,9 +4343,6 @@ msgstr "Achtergrondproces:"
 
 #~ msgid " confirm &Delete "
 #~ msgstr " Bevestig verwij&Deren "
-
-#~ msgid "File"
-#~ msgstr "Bestand"
 
 #~ msgid "Count"
 #~ msgstr "Aantal"
@@ -3970,9 +4369,6 @@ msgstr "Achtergrondproces:"
 
 #~ msgid " Goto Address "
 #~ msgstr " Ga naar adres "
-
-#~ msgid "File: %s"
-#~ msgstr "Bestand: %s"
 
 #~ msgid "Offset 0x%08lx"
 #~ msgstr "Offset 0x%08lx"

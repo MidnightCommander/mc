@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2010-05-05 22:32+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"POT-Creation-Date: 2010-06-07 21:44+0400\n"
 "PO-Revision-Date: 2001-09-26 16:43GMT +0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
@@ -15,17 +15,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.8\n"
 
-msgid " Search string not found "
+#, fuzzy
+msgid "Search string not found"
 msgstr " Axtarılşan kəlimə tapıla bilmədi "
 
-msgid " Not implemented yet "
+msgid "Not implemented yet"
 msgstr ""
 
-msgid " Num of replace tokens not equal to num of found tokens "
+msgid "Num of replace tokens not equal to num of found tokens"
 msgstr ""
 
 #, fuzzy, c-format
-msgid " Invalid token number %d "
+msgid "Invalid token number %d"
 msgstr " Keçərsiz fayl ağı "
 
 #, fuzzy
@@ -359,10 +360,12 @@ msgstr "Davam etmək üçün istədiyiniz bir düyməyə basın..."
 msgid "Warning"
 msgstr "Xəbərdarlıq"
 
-msgid " Pipe failed "
+#, fuzzy
+msgid "Pipe failed"
 msgstr " Borulama Bacarılmadı "
 
-msgid " Dup failed "
+#, fuzzy
+msgid "Dup failed"
 msgstr " Dup Bacarılmadı "
 
 #, fuzzy
@@ -459,7 +462,8 @@ msgstr "balıq: Birinci xətti gözləyirəm..."
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Bağışlayın, indilik parollu tanıtma bağlantıları qura bilmirik."
 
-msgid " fish: Password required for "
+#, fuzzy, c-format
+msgid "fish: Password is required for %s"
 msgstr " balıq: Parol lazımdır "
 
 msgid "fish: Sending password..."
@@ -520,7 +524,8 @@ msgstr "Ləğv edilmiş daşıma əməliyyatı müvəffəqiyyətli olmuş olmaı
 msgid "ftpfs: Disconnecting from %s"
 msgstr "ftpfs : %s ilə bağlantı kəsilir"
 
-msgid " FTP: Password required for "
+#, fuzzy, c-format
+msgid "FTP: Password required for %s"
 msgstr " FTP: Bunu üçün parol lazımdır"
 
 msgid "ftpfs: sending login name"
@@ -621,23 +626,27 @@ msgstr "ftpfs : müvəffəqiyyətsizlık ..; geriyə dönüləcək nöqtə yoxdu
 msgid "ftpfs: storing file %lu (%lu)"
 msgstr "ftpfs : %d faylını uzaqda qeyd edirəm (%d)"
 
+#, fuzzy
 msgid ""
-"~/.netrc file has incorrect mode.\n"
-"Remove password or correct mode."
+"~/.netrc file has incorrect mode\n"
+"Remove password or correct mode"
 msgstr ""
 "~/.netrc faylı doğru modda deyildir .\n"
 "Parolu sil ya da modunu düzəlt."
 
-msgid " MCFS "
+#, fuzzy
+msgid "MCFS"
 msgstr " MCFS "
 
-msgid " The server does not support this version "
+#, fuzzy
+msgid "The server does not support this version"
 msgstr " Verici bu buraxılışı dəstəkləmir "
 
+#, fuzzy
 msgid ""
-" The remote server is not running on a system port \n"
-" you need a password to log in, but the information may \n"
-" not be safe on the remote side.  Continue? \n"
+"The remote server is not running on a system port\n"
+"you need a password to log in, but the information may\n"
+"not be safe on the remote side.  Continue?\n"
 msgstr ""
 " Uzaqdakı verici bir sistem qapısında işləmir ,\n"
 " girmək üçün bir parol lazımdır , fəqət bu mə'lumat\n"
@@ -649,25 +658,28 @@ msgstr "&Bəli"
 msgid "&No"
 msgstr "&Xeyr"
 
-msgid " MCFS Password required "
+#, fuzzy
+msgid "MCFS Password required"
 msgstr " MCFS parolu lazımdır "
 
-msgid " Invalid password "
+#, fuzzy
+msgid "Invalid password"
 msgstr " Səhv verilmiş parol "
 
-#, c-format
-msgid " Cannot locate hostname: %s "
+#, fuzzy, c-format
+msgid "Cannot locate hostname: %s"
 msgstr " Verici adını tapa bilmədim : %s"
 
-#, c-format
-msgid " Cannot create socket: %s "
+#, fuzzy, c-format
+msgid "Cannot create socket: %s"
 msgstr " Soketi yarada bilmədim : %s "
 
-#, c-format
-msgid " Cannot connect to server: %s "
+#, fuzzy, c-format
+msgid "Cannot connect to server: %s"
 msgstr " Vericiyə bağlana bilmədim : %s "
 
-msgid " Too many open connections "
+#, fuzzy
+msgid "Too many open connections"
 msgstr " Çox miqdarda açıq bağlantı var "
 
 #, c-format
@@ -690,35 +702,34 @@ msgstr ""
 "Xəbərdarlıq: %2$s də xətalı %1$c bayrağı:\n"
 "%3$s\n"
 
-#, c-format
-msgid ""
-" reconnect to %s failed\n"
-" "
+#, fuzzy, c-format
+msgid "reconnect to %s failed"
 msgstr ""
 " %s ə bir daha bağlana bilmədi \n"
 " "
 
-msgid " Authentication failed "
+#, fuzzy
+msgid "Authentication failed"
 msgstr " Tanıtma Bacarılmadı "
 
-#, c-format
-msgid " Error %s creating directory %s "
+#, fuzzy, c-format
+msgid "Error %s creating directory %s"
 msgstr " %s %s qovluğunu yaradır "
 
-#, c-format
-msgid " Error %s removing directory %s "
+#, fuzzy, c-format
+msgid "Error %s removing directory %s"
 msgstr " %s %s qovluğunu silir "
 
-#, c-format
-msgid " %s opening remote file %s "
+#, fuzzy, c-format
+msgid "%s opening remote file %s"
 msgstr " %s uzaqdakı %s faylını açır "
 
-#, c-format
-msgid " %s removing remote file %s "
+#, fuzzy, c-format
+msgid "%s removing remote file %s"
 msgstr " %s uzaqdakı %s faylını çıxardır "
 
-#, c-format
-msgid " %s renaming files\n"
+#, fuzzy, c-format
+msgid "%s renaming files\n"
 msgstr " %s faylları təzədən adlandırır \n"
 
 #, c-format
@@ -735,9 +746,8 @@ msgstr "Tar arxivi düzgün deyildir"
 msgid "Unexpected EOF on archive file"
 msgstr "Arxiv faylında gözlənilməz EOF yaxalandı"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Hmm,...\n"
 "%s\n"
 "doesn't look like a tar archive."
 msgstr ""
@@ -745,52 +755,57 @@ msgstr ""
 "%s\n"
 "bu, bir tar arxivinə oxşamır. "
 
-msgid " undelfs: error "
+#, fuzzy
+msgid "undelfs: error"
 msgstr " undelfs: xəta "
 
-msgid " not enough memory "
+#, fuzzy
+msgid "not enough memory"
 msgstr " yaddaş çatmır "
 
-msgid " while allocating block buffer "
+#, fuzzy
+msgid "while allocating block buffer"
 msgstr " blok bufferi axtarıldığı vaxt "
 
-#, c-format
-msgid " open_inode_scan: %d "
+#, fuzzy, c-format
+msgid "open_inode_scan: %d"
 msgstr " open_inode_scan: %d "
 
-#, c-format
-msgid " while starting inode scan %d "
+#, fuzzy, c-format
+msgid "while starting inode scan %d"
 msgstr " inode daraması %d başladıldığı vaxt "
 
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
 msgstr "undelfs: silinmiş fayllar mə'lumatı %d inode"
 
-#, c-format
-msgid " while calling ext2_block_iterate %d "
+#, fuzzy, c-format
+msgid "while calling ext2_block_iterate %d"
 msgstr "ext2_block_iterate %d çağrıldığı vaxt"
 
-msgid " no more memory while reallocating array "
+#, fuzzy
+msgid "no more memory while reallocating array"
 msgstr " təzədən axtarış yaddaş çatmadı "
 
-#, c-format
-msgid " while doing inode scan %d "
+#, fuzzy, c-format
+msgid "while doing inode scan %d"
 msgstr "inode %d daramasını etdiyim vaxt "
 
-msgid " Ext2lib error "
+#, fuzzy
+msgid "Ext2lib error"
 msgstr " Ext2lib xətası "
 
-#, c-format
-msgid " Cannot open file %s "
+#, fuzzy, c-format
+msgid "Cannot open file %s"
 msgstr " Fayl %s'yi aça bilmədim "
 
 msgid "undelfs: reading inode bitmap..."
 msgstr "undelfs: inode bitmapi oxunur..."
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot load inode bitmap from: \n"
-" %s \n"
+"Cannot load inode bitmap from:\n"
+"%s"
 msgstr ""
 " Buradan inode bitmapini yükləyə bilmirəm: \n"
 " %s \n"
@@ -798,22 +813,29 @@ msgstr ""
 msgid "undelfs: reading block bitmap..."
 msgstr "undelfs : blok'u oxuyuram ..."
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot load block bitmap from: \n"
-" %s \n"
+"Cannot load block bitmap from:\n"
+"%s"
 msgstr ""
 " Buradan blok bitmapini yükləyə bilmədim: \n"
 " %s \n"
 
-msgid " vfs_info is not fs! "
+#, fuzzy
+msgid "vfs_info is not fs!"
 msgstr " vfs_info bir fayl sistemi deyildir ! "
 
-msgid " You have to chdir to extract files first "
+#, fuzzy
+msgid "You have to chdir to extract files first"
 msgstr "Faylları açmadan əvvəl qovluğu dəyişdirməlisiniz"
 
-msgid " while iterating over blocks "
+#, fuzzy
+msgid "while iterating over blocks"
 msgstr "while iterating over blocks "
+
+#, fuzzy, c-format
+msgid "Cannot open file \"%s\""
+msgstr " Fayl %s'yi aça bilmədim "
 
 msgid "Cannot parse:"
 msgstr "Daraya bilmədim :"
@@ -864,21 +886,22 @@ msgstr "Mod"
 msgid "%6d of %d"
 msgstr "%d nin %6d sı"
 
-msgid " Chown advanced command "
+#, fuzzy
+msgid "Chown advanced command"
 msgstr " Ətraflı əmrləri aç "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot chmod \"%s\" \n"
-" %s "
+"Cannot chmod \"%s\"\n"
+"%s"
 msgstr ""
 " \"%s\" chmod edilə bilmədi \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot chown \"%s\" \n"
-" %s "
+"Cannot chown \"%s\"\n"
+"%s"
 msgstr ""
 " \"%s\" chown edilə bilmədi \n"
 " %s "
@@ -954,7 +977,8 @@ msgid ""
 "{FORE} and {BACK} can be omitted, and the default will be used\n"
 "\n"
 "Keywords:\n"
-"   Global:       errors, reverse, gauge, input, viewunderline\n"
+"   Global:       errors, reverse, gauge, viewunderline\n"
+"                 input, inputmark, inputunchanged, commandlinemark\n"
 "   File display: normal, selected, marked, markselect\n"
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
@@ -1005,10 +1029,11 @@ msgstr "[flags] [this_dir] [other_panel_dir]\n"
 msgid "Set initial line number for the internal editor"
 msgstr ""
 
+#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc-devel@gnome.org\n"
+"as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
 "Lütfən xəta raportlarını (`mc -V'nin çıxışları daxil olmaq üzərə)\n"
@@ -1018,6 +1043,12 @@ msgstr ""
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
+msgid "No arguments given to the viewer."
+msgstr ""
+
+msgid "There 2 files are required to diffviewer."
+msgstr ""
+
 #, fuzzy
 msgid "Main options"
 msgstr " Panel Seçənəkləri "
@@ -1026,25 +1057,30 @@ msgstr " Panel Seçənəkləri "
 msgid "Terminal options"
 msgstr " O biri seçənəklər"
 
-msgid " Background process error "
+#, fuzzy
+msgid "Background process error"
 msgstr " Arxaplan gedişat xətası "
 
-msgid " Unknown error in child "
+#, fuzzy
+msgid "Unknown error in child"
 msgstr " Törəmədə namə'lum xəta "
 
-msgid " Child died unexpectedly "
+#, fuzzy
+msgid "Child died unexpectedly"
 msgstr " Törəmə gözlənilmədən qurtardı "
 
-msgid " Background protocol error "
+#, fuzzy
+msgid "Background protocol error"
 msgstr " Arxaplan protokolu xətası "
 
 #, fuzzy
 msgid "Reading failed"
 msgstr "<bağ oxuması iflas etdi>"
 
+#, fuzzy
 msgid ""
-" Background process sent us a request for more arguments \n"
-" than we can handle. \n"
+"Background process sent us a request for more arguments\n"
+"than we can handle."
 msgstr ""
 " Arxaplan gedişatı icazə verilandan daha çox arqument üçün \n"
 " sifariş göndərdi. \n"
@@ -1064,7 +1100,8 @@ msgstr "İs&tifadəçiyə xas:"
 msgid "Listing mode"
 msgstr "Sıralama modu"
 
-msgid "user &Mini status"
+#, fuzzy
+msgid "User &mini status"
 msgstr "istifadəçi &Mini statusu"
 
 msgid "&OK"
@@ -1129,7 +1166,8 @@ msgstr "7 bit"
 msgid "F&ull 8 bits input"
 msgstr "Tam 8-bitlik giriş"
 
-msgid " Display bits "
+#, fuzzy
+msgid "Display bits"
 msgstr " Bitləri göstər "
 
 msgid "Other 8 bit"
@@ -1140,6 +1178,10 @@ msgstr "Giriş / ekran kod səhifəsi:"
 
 msgid "&Select"
 msgstr "&Seç"
+
+#, fuzzy
+msgid "Directory tree"
+msgstr "&Qovluqlar ağaçı"
 
 #, fuzzy
 msgid "Use passive mode over pro&xy"
@@ -1167,7 +1209,8 @@ msgstr "ftp anonim parolu:"
 msgid "Timeout for freeing VFSs:"
 msgstr "VFSnin azad edilməsi üçün vaxt dolması:"
 
-msgid " Virtual File System Setting "
+#, fuzzy
+msgid "Virtual File System Setting"
 msgstr " Virtual Fayl Sistemi Qurğuları "
 
 msgid "cd"
@@ -1185,7 +1228,8 @@ msgstr "Varolan fayl (yumşaq bağın hədəfi ) :"
 msgid "Symbolic link"
 msgstr "Simvolik bağ"
 
-msgid "Running "
+#, fuzzy
+msgid "Running"
 msgstr "İşləyir"
 
 msgid "Stopped"
@@ -1289,14 +1333,14 @@ msgstr "seçənəklər arasında gəzmək üçün "
 msgid "and T or INS to mark"
 msgstr "Seçmək üçün T va ya INS"
 
-msgid " Permission "
-msgstr " İcazələr "
-
-msgid " File "
-msgstr " Fayl "
-
 msgid "Chmod command"
 msgstr "Chmod əmri"
+
+msgid "File"
+msgstr "Fayl"
+
+msgid "Permission"
+msgstr "İstifadəhaqları"
 
 msgid "Set &users"
 msgstr "&istifadəçiləri daxil et"
@@ -1304,22 +1348,11 @@ msgstr "&istifadəçiləri daxil et"
 msgid "Set &groups"
 msgstr "&qrupları daxil et"
 
-msgid " Name "
-msgstr " Ad "
+msgid "Size"
+msgstr "Böyüklük"
 
-msgid " Owner name "
-msgstr " Yiyə adı "
-
-msgid " Group name "
-msgstr " Qrup adı "
-
-msgid " Size "
-msgstr " Böyüklük "
-
-msgid " User name "
-msgstr " İstifadəçi adı "
-
-msgid " Chown command "
+#, fuzzy
+msgid "Chown command"
 msgstr " Chown əmri "
 
 msgid "<Unknown user>"
@@ -1328,8 +1361,9 @@ msgstr "<Namə'lum istifadəçi>"
 msgid "<Unknown group>"
 msgstr "<Namə'lum qrup>"
 
-msgid " Confirmation "
-msgstr " İcazə "
+#, fuzzy
+msgid "User name"
+msgstr " İstifadəçi adı "
 
 msgid "Files tagged, want to cd?"
 msgstr " Fayllar nişan alındı, cd istəyirsən mi?"
@@ -1337,28 +1371,35 @@ msgstr " Fayllar nişan alındı, cd istəyirsən mi?"
 msgid "Cannot change directory"
 msgstr "Qovluq dəyişdirilə bilmir"
 
-msgid " View file "
+#, fuzzy
+msgid "View file"
 msgstr " Faylı göstər "
 
-msgid " Filename:"
+#, fuzzy
+msgid "Filename:"
 msgstr " Fayl adı :"
 
-msgid " Filtered view "
+#, fuzzy
+msgid "Filtered view"
 msgstr " Süzülmüş görünüş "
 
-msgid " Filter command and arguments:"
+#, fuzzy
+msgid "Filter command and arguments:"
 msgstr " Süzmə əmri və arqumentləri:"
 
 msgid "Create a new Directory"
 msgstr " Təzə Qovluq yarat"
 
-msgid " Enter directory name:"
+#, fuzzy
+msgid "Enter directory name:"
 msgstr " Qovluq adını ver :"
 
-msgid " Filter "
+#, fuzzy
+msgid "Filter"
 msgstr " Süzgəc "
 
-msgid " Set expression for filtering filenames"
+#, fuzzy
+msgid "Set expression for filtering filenames"
 msgstr " Fayl adları üçün uzantıları ver"
 
 msgid "&Using shell patterns"
@@ -1372,16 +1413,19 @@ msgstr "böyük/kiçik hərf həssas"
 msgid "&Files only"
 msgstr "&Böyüklüyünə görə"
 
-msgid " Select "
-msgstr " Seç "
+#, fuzzy
+msgid "Select"
+msgstr "&Seç"
 
-msgid " Unselect "
+#, fuzzy
+msgid "Unselect"
 msgstr " Seçmə "
 
 msgid "Extension file edit"
 msgstr "Uzantılar faylı düzəldilməsi"
 
-msgid " Which extension file you want to edit? "
+#, fuzzy
+msgid "Which extension file you want to edit?"
 msgstr " Hansı uzantılı faylı düzəltmək istəyirsən?"
 
 msgid "&User"
@@ -1390,10 +1434,12 @@ msgstr "&İstifadəçi"
 msgid "&System Wide"
 msgstr "&Sistem Genişliyi"
 
-msgid " Menu edit "
+#, fuzzy
+msgid "Menu edit"
 msgstr " Menyunu dəyişdir "
 
-msgid " Which menu file do you want to edit? "
+#, fuzzy
+msgid "Which menu file do you want to edit?"
 msgstr " Hansı menyu faylını düzəltmək istəyirsan?"
 
 msgid "&Local"
@@ -1403,13 +1449,15 @@ msgid "Highlighting groups file edit"
 msgstr ""
 
 #, fuzzy
-msgid " Which highlighting file you want to edit? "
+msgid "Which highlighting file you want to edit?"
 msgstr " Hansı uzantılı faylı düzəltmək istəyirsən?"
 
-msgid " Compare directories "
+#, fuzzy
+msgid "Compare directories"
 msgstr " Qovluqları müqayisə et"
 
-msgid " Select compare method: "
+#, fuzzy
+msgid "Select compare method:"
 msgstr " Müqayisə yolunu seç: "
 
 msgid "&Quick"
@@ -1421,13 +1469,17 @@ msgstr "&Böyüklüyünə görə"
 msgid "&Thorough"
 msgstr "&Hamısına görə"
 
-msgid " Both panels should be in the listing mode to use this command "
+#, fuzzy
+msgid ""
+"Both panels should be in the listing mode\n"
+"to use this command"
 msgstr ""
 " Bu amri istifadə etmək üçün hər iki panel də sıralama görünüşündə olmalıdır"
 
+#, fuzzy
 msgid ""
-" Not an xterm or Linux console; \n"
-" the panels cannot be toggled. "
+"Not an xterm or Linux console;\n"
+"the panels cannot be toggled."
 msgstr ""
 " Not an xterm or Linuks console; \n"
 " the panels cannot be toggled. "
@@ -1436,85 +1488,96 @@ msgstr ""
 msgid "Link %s to:"
 msgstr " bağ: %s "
 
-msgid " Link "
-msgstr " Bağla "
+#, fuzzy
+msgid "Link"
+msgstr "&Bağlar"
 
-#, c-format
-msgid " link: %s "
+#, fuzzy, c-format
+msgid "link: %s"
 msgstr " bağ: %s "
 
-#, c-format
-msgid " symlink: %s "
+#, fuzzy, c-format
+msgid "symlink: %s"
 msgstr " yumşaq bağ: %s "
 
-#, c-format
-msgid " Symlink `%s' points to: "
+#, fuzzy, c-format
+msgid "Symlink `%s' points to:"
 msgstr " `%s'  Yumşaq bağı buranı göstərir: "
 
-msgid " Edit symlink "
+#, fuzzy
+msgid "Edit symlink"
 msgstr " Yumşaq bağı düzəlt "
 
-#, c-format
-msgid " edit symlink, unable to remove %s: %s "
+#, fuzzy, c-format
+msgid "edit symlink, unable to remove %s: %s"
 msgstr " yumşaq bağı düzalt, %s silinə bilmir: %s "
 
-#, c-format
-msgid " edit symlink: %s "
+#, fuzzy, c-format
+msgid "edit symlink: %s"
 msgstr " yumşaq bağı düzəlt: %s "
 
 #, c-format
 msgid "`%s' is not a symbolic link"
 msgstr "'%s' simvolik körpü deyildir"
 
-#, c-format
-msgid " Cannot chdir to %s "
+#, fuzzy, c-format
+msgid "Cannot chdir to %s"
 msgstr " %s ə keçə bilmədim "
 
-msgid " Enter machine name (F1 for details): "
+#, fuzzy
+msgid "Enter machine name (F1 for details):"
 msgstr " Bilisayar adını ver (ətraflı mə'lumat üçün F1ə bas) : "
 
-msgid " Link to a remote machine "
+#, fuzzy
+msgid "Link to a remote machine"
 msgstr " Uzaq bilgisayara bağla "
 
-msgid " FTP to machine "
+#, fuzzy
+msgid "FTP to machine"
 msgstr " Bilgisayara FTPyə keç"
 
 #, fuzzy
-msgid " Shell link to machine "
+msgid "Shell link to machine"
 msgstr " Bilgisayara SMB bağı yarat "
 
-msgid " SMB link to machine "
+#, fuzzy
+msgid "SMB link to machine"
 msgstr " Bilgisayara SMB bağı yarat "
 
-msgid " Undelete files on an ext2 file system "
+#, fuzzy
+msgid "Undelete files on an ext2 file system"
 msgstr "ext2 fayl sistemi üstündəki fayllar silinsin "
 
+#, fuzzy
 msgid ""
-" Enter device (without /dev/) to undelete\n"
-"   files on: (F1 for details)"
+"Enter device (without /dev/) to undelete\n"
+"files on: (F1 for details)"
 msgstr ""
 " Qurtarılacaq mə'lumatların olduğu avandalığı (/dev/ siz) girin\n"
 "   üstündəki fayllar: (ətraflı mə'lumat üçün F1i basın)"
 
-msgid " Setup "
+#, fuzzy
+msgid "Setup"
 msgstr " Quruluş "
 
 #, fuzzy, c-format
-msgid " Setup saved to ~/%s"
+msgid "Setup saved to ~/%s"
 msgstr " Quruluş qeyd edildi ~/"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot chdir to \"%s\" \n"
-" %s "
+"Cannot chdir to \"%s\"\n"
+"%s"
 msgstr ""
 " \"%s\" qovluğuna keçə bilmirəm \n"
 " %s "
 
-msgid " Cannot execute commands on non-local filesystems"
+#, fuzzy
+msgid "Cannot execute commands on non-local filesystems"
 msgstr " Yerli olmayan fayl sistemləri üstündə fayl işə sala bilməzsiniz "
 
-msgid " The shell is already running a command "
+#, fuzzy
+msgid "The shell is already running a command"
 msgstr " Shell artıq əmri işə salıb "
 
 msgid "&Dismiss"
@@ -1530,39 +1593,42 @@ msgstr "&Təkcə bütöv sözləri"
 msgid "&Backwards"
 msgstr "&geriyə doğru"
 
-msgid "case &Sensitive"
-msgstr "&Böyük/Kiçik hərflərə diqqət et"
+#, fuzzy
+msgid "Case &sensitive"
+msgstr "böyük/kiçik hərf həssas"
 
-msgid " Enter search string:"
+#, fuzzy
+msgid "Enter search string:"
 msgstr " Axtarılacaq kəliməyi gir:"
 
 msgid "Search"
 msgstr "Axtar"
 
-msgid " Search is disabled "
-msgstr ""
+#, fuzzy
+msgid "Search is disabled"
+msgstr "Axtar"
 
 #, fuzzy, c-format
 msgid ""
-" Cannot create temporary diff file \n"
-" %s "
+"Cannot create temporary diff file\n"
+"%s"
 msgstr ""
 " Müvəqqəti əmr faylı yaradıla bilmir \n"
 " %s "
 
 #, fuzzy, c-format
 msgid ""
-" Cannot create backup file \n"
-" %s%s \n"
-" %s "
+"Cannot create backup file\n"
+"%s%s\n"
+"%s"
 msgstr ""
 " Hədəf faylı \"%s\" yaradıla bilmir \n"
 " %s "
 
 #, fuzzy, c-format
 msgid ""
-" Cannot create temporary merge file \n"
-" %s "
+"Cannot create temporary merge file\n"
+"%s"
 msgstr ""
 " Müvəqqəti əmr faylı yaradıla bilmir \n"
 " %s "
@@ -1607,10 +1673,20 @@ msgstr " Seçənəklər "
 msgid "Edit"
 msgstr "Düzəlt"
 
-msgid " Edit is disabled "
-msgstr ""
+#, fuzzy
+msgid "Edit is disabled"
+msgstr "&Menyunu dəyişdir"
 
-msgid " Enter line: "
+#, fuzzy
+msgid "Goto line (left)"
+msgstr " Sətirə get "
+
+#, fuzzy
+msgid "Goto line (right)"
+msgstr " Sətirə get "
+
+#, fuzzy
+msgid "Enter line:"
 msgstr " Sətiri tap: "
 
 msgid "ButtonBar|Help"
@@ -1637,7 +1713,8 @@ msgstr ""
 msgid "Quit"
 msgstr "Çıx"
 
-msgid " File was modified, Save with exit? "
+#, fuzzy
+msgid "File was modified, Save with exit?"
 msgstr " Fayl dəyişdirilmişdir, Çıxarkən qeyd edim mi? "
 
 msgid "Two files are needed to compare"
@@ -1648,7 +1725,7 @@ msgid "Cannot read directory contents"
 msgstr "Qovluq dəyişdirilə bilmir"
 
 #, fuzzy
-msgid " Choose syntax highlighting "
+msgid "Choose syntax highlighting"
 msgstr "sinta&X seçilməsi"
 
 #, fuzzy
@@ -1659,37 +1736,38 @@ msgid "< Reload Current Syntax >"
 msgstr ""
 
 #, fuzzy, c-format
-msgid " Cannot open %s for reading "
+msgid "Cannot open %s for reading"
 msgstr " Oxumaq əqsədi ilə borunu açarkən xəta oldu : "
 
 msgid "Error"
 msgstr "XƏTA"
 
 #, fuzzy, c-format
-msgid " Error reading %s "
+msgid "Error reading %s"
 msgstr "Scripti oxuduğum vaxt bir xəta oldu :"
 
 #, fuzzy, c-format
-msgid " Error reading from pipe: %s "
+msgid "Error reading from pipe: %s"
 msgstr " Borudan oxuyarkən xəta oldu . "
 
 #, fuzzy, c-format
-msgid " Cannot open pipe for reading: %s "
+msgid "Cannot open pipe for reading: %s"
 msgstr " Oxumaq əqsədi ilə borunu açarkən xəta oldu : "
 
 #, fuzzy, c-format
-msgid " Cannot get size/permissions for %s "
+msgid "Cannot get size/permissions for %s"
 msgstr " Faylın haqqlarını/böyüklüyünü ala bilmədim : "
 
 #, fuzzy, c-format
-msgid " %s is not a regular file "
+msgid "\"%s\" is not a regular file"
 msgstr " Göstərə bilmirəm : vnormal bir fayl deyildir"
 
 #, fuzzy, c-format
-msgid " File %s is too large "
+msgid "File \"%s\" is too large"
 msgstr " Fayl çox böyükdür: "
 
-msgid " About "
+#, fuzzy
+msgid "About"
 msgstr " Haqqında "
 
 msgid ""
@@ -1712,20 +1790,22 @@ msgstr ""
 msgid "Macro recursion is too deep"
 msgstr ""
 
-msgid " File has hard-links. Detach before saving? "
+msgid "File has hard-links. Detach before saving?"
 msgstr ""
 
 msgid "The file has been modified in the meantime. Save anyway?"
 msgstr ""
 
-msgid " Error writing to pipe: "
+#, fuzzy, c-format
+msgid "Error writing to pipe: %s"
 msgstr " Faylı borularkən xəta oldu . "
 
-msgid " Cannot open pipe for writing: "
+#, fuzzy, c-format
+msgid "Cannot open pipe for writing: %s"
 msgstr " Faylı yazmaq məqsədi ilə borularkəbn xəta oldu : "
 
 #, fuzzy, c-format
-msgid " Cannot open file for writing: %s "
+msgid "Cannot open file for writing: %s"
 msgstr " Faylı yazmaq məqsədi ilə borularkəbn xəta oldu : "
 
 #, fuzzy
@@ -1742,7 +1822,8 @@ msgstr ""
 msgid "Check &POSIX new line"
 msgstr ""
 
-msgid " Edit Save Mode "
+#, fuzzy
+msgid "Edit Save Mode"
 msgstr " Qeyd Etmə şəklini dəyişdir "
 
 msgid "The file you are saving is not finished with a newline"
@@ -1768,58 +1849,76 @@ msgid "Change line breaks to:"
 msgstr ""
 
 #, fuzzy
-msgid " Enter file name: "
+msgid "Enter file name:"
 msgstr " Sətiri tap: "
 
-msgid " Save As "
+#, fuzzy
+msgid "Save As"
 msgstr " Fərqli qeyd et "
 
-msgid " A file already exists with this name. "
+#, fuzzy
+msgid "A file already exists with this name"
 msgstr " Bu adla onsuz da bir fayl vardır "
 
 #, fuzzy
 msgid "&Overwrite"
 msgstr "Üstünə yaz"
 
-msgid " Cannot save file. "
+#, fuzzy
+msgid "Save as"
+msgstr "Qurğuları &Qeyd et"
+
+#, fuzzy
+msgid "Cannot save file"
 msgstr " Faylı qeyd edərkən xəta oldu . "
 
-msgid " Delete macro "
+#, fuzzy
+msgid "Delete macro"
 msgstr " Makronu sil "
 
-msgid " Cannot open temp file "
+#, fuzzy
+msgid "Cannot open temp file"
 msgstr " Müvəqqəti faylı açarkən xəta oldu "
 
-msgid " Cannot open macro file "
+#, fuzzy
+msgid "Cannot open macro file"
 msgstr " Makro faylını açarkən xəta oldu "
 
-msgid " Cannot overwrite macro file "
+#, fuzzy
+msgid "Cannot overwrite macro file"
 msgstr " Makro faylının üstünə yazarken xəta oldu "
 
-msgid " Save macro "
+#, fuzzy
+msgid "Save macro"
 msgstr " Makronu qeyd et "
 
-msgid " Press the macro's new hotkey: "
+#, fuzzy
+msgid "Press the macro's new hotkey:"
 msgstr " Makro'nun təzə qısa yol düyməsini tap : "
 
-msgid " Press macro hotkey: "
+#, fuzzy
+msgid "Press macro hotkey:"
 msgstr " Makro düyməsinə bas :"
 
-msgid " Load macro "
+#, fuzzy
+msgid "Load macro"
 msgstr " Makronu yüklə "
 
-msgid " Confirm save file? : "
+#, fuzzy, c-format
+msgid "Confirm save file: \"%s\""
 msgstr " Faylı qeyd edim mi ? :"
 
-msgid " Save file "
+#, fuzzy
+msgid "Save file"
 msgstr " Faylı qeyd et"
 
 msgid "&Save"
 msgstr "&Qeyd Et"
 
+#, fuzzy
 msgid ""
-" Current text was modified without a file save. \n"
-" Continue discards these changes. "
+"Current text was modified without a file save.\n"
+"Continue discards these changes"
 msgstr ""
 "Hazırkı fayl düzəldilmiş amma qeyd edilmamişdir. \n"
 "Bu dəyişiklikləri diqqətə almayım mı? "
@@ -1829,77 +1928,90 @@ msgid "Syntax file edit"
 msgstr "&Menyunu dəyişdir"
 
 #, fuzzy
-msgid " Which syntax file you want to edit? "
+msgid "Which syntax file you want to edit?"
 msgstr " Hansı uzantılı faylı düzəltmək istəyirsən?"
 
-msgid " Load "
+#, fuzzy
+msgid "Load"
 msgstr " Yüklə "
 
-msgid " Block is large, you may not be able to undo this action. "
+#, fuzzy
+msgid "Block is large, you may not be able to undo this action"
 msgstr " Blok çox böyükdür , bu əməliyyatı geri almayı bacarmaya bilərsən. "
 
 #, fuzzy
 msgid "Replace"
 msgstr "&Dəyişdir"
 
-msgid " Replace "
-msgstr " Dəyişdir "
-
-#, c-format
-msgid " %ld replacements made. "
+#, fuzzy, c-format
+msgid "%ld replacements made"
 msgstr " %ld dəyişikliklər edildi. "
+
+#, fuzzy
+msgid "File was modified, save with exit?"
+msgstr " Fayl dəyişdirilmişdir, Çıxarkən qeyd edim mi? "
 
 #, fuzzy
 msgid "&Cancel quit"
 msgstr "Çıxışı dayandır"
 
-#, fuzzy
-msgid " Error "
-msgstr "XƏTA"
-
-msgid " This function is not implemented. "
+msgid "This function is not implemented"
 msgstr ""
 
-msgid " Copy to clipboard "
+#, fuzzy
+msgid "Copy to clipboard"
 msgstr " Ara yaddaşa köçürt "
 
-msgid " Unable to save to file. "
+#, fuzzy
+msgid "Unable to save to file"
 msgstr " Fayla qeyd edə bilmədim. "
 
-msgid " Cut to clipboard "
+#, fuzzy
+msgid "Cut to clipboard"
 msgstr " Ara yaddaşa kəs "
 
-msgid " Goto line "
+#, fuzzy
+msgid "Goto line"
 msgstr " Sətirə get "
 
-msgid " Save Block "
+#, fuzzy
+msgid "Save block"
 msgstr " Bloku qeyd et "
 
-msgid " Insert File "
-msgstr " Faylı daxil et "
+#, fuzzy
+msgid "Insert file"
+msgstr "Faylı &daxil et .. F15"
 
-msgid " Cannot insert file. "
+#, fuzzy
+msgid "Cannot insert file"
 msgstr " Faylı daxil edərkən xəta oldu. "
 
-msgid " Sort block "
+#, fuzzy
+msgid "Sort block"
 msgstr " Bloku süz "
 
-msgid " You must first highlight a block of text. "
+#, fuzzy
+msgid "You must first highlight a block of text"
 msgstr " Birinci mətn blokunu seçməlisiniz. "
 
-msgid " Run Sort "
+#, fuzzy
+msgid "Run sort"
 msgstr " Süzməyi işə sal "
 
-msgid " Enter sort options (see manpage) separated by whitespace: "
+#, fuzzy
+msgid "Enter sort options (see manpage) separated by whitespace:"
 msgstr " Aralıqlarla ayrılmış süzmə seçənəklərini girin: "
 
-msgid " Sort "
+#, fuzzy
+msgid "Sort"
 msgstr " Süz "
 
-msgid " Cannot execute sort command "
+#, fuzzy
+msgid "Cannot execute sort command"
 msgstr " Süzmə əmri işə salınarkən xəta oldu "
 
-msgid " Sort returned non-zero: "
+#, fuzzy, c-format
+msgid "Sort returned non-zero: %s"
 msgstr " Süzmə sıfır xarici nəticə verdi: "
 
 msgid "Paste output of external command"
@@ -1936,35 +2048,52 @@ msgstr "Blok əməliyyatına başla"
 msgid "Error calling program"
 msgstr "Script qapadılarkən xəta oldu:"
 
-msgid " Copies to"
+#, fuzzy
+msgid "Copies to"
 msgstr " Köçürdülür"
 
-msgid " Subject"
+#, fuzzy
+msgid "Subject"
 msgstr " Mövzü"
 
-msgid " To"
+#, fuzzy
+msgid "To"
 msgstr " Göndərilən"
 
-msgid " mail -s <subject> -c <cc> <to>"
+#, fuzzy
+msgid "mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <subject> -c <cc> <to>"
 
-msgid " Mail "
+#, fuzzy
+msgid "Mail"
 msgstr " Məktubla göndər "
 
-msgid " Insert Literal "
-msgstr " Hərfi daxil et"
+#, fuzzy
+msgid "Insert literal"
+msgstr "Insert &literal...       C-q"
 
-msgid " Press any key: "
+#, fuzzy
+msgid "Press any key:"
 msgstr " İstədiyin düyməyə bas :"
 
-msgid " Execute Macro "
-msgstr " Makronu işə sal"
+#, fuzzy
+msgid "Execute macro"
+msgstr "&Makroyu işa sal...\tC-a, Düymə"
+
+#, fuzzy
+msgid ""
+"Current text was modified without a file save\n"
+"Continue discards these changes"
+msgstr ""
+"Hazırkı fayl düzəldilmiş amma qeyd edilmamişdir. \n"
+"Bu dəyişiklikləri diqqətə almayım mı? "
 
 #, fuzzy
 msgid "In se&lection"
 msgstr "Qrupu tə&rsçevir     M-*"
 
-msgid " Enter replacement string:"
+#, fuzzy
+msgid "Enter replacement string:"
 msgstr " Dəyişdiriləcək kəliməyi gir:"
 
 #, fuzzy
@@ -1973,6 +2102,14 @@ msgstr "Faylı tap"
 
 msgid "Cancel"
 msgstr "Ləğv Et"
+
+#, fuzzy
+msgid ""
+"Current text was modified without a file save.\n"
+"Continue discards these changes."
+msgstr ""
+"Hazırkı fayl düzəldilmiş amma qeyd edilmamişdir. \n"
+"Bu dəyişiklikləri diqqətə almayım mı? "
 
 msgid "&Skip"
 msgstr "&Keç"
@@ -1983,15 +2120,17 @@ msgstr "A&ll"
 msgid "&Replace"
 msgstr "&Dəyişdir"
 
-msgid " Replace with: "
+#, fuzzy
+msgid "Replace with:"
 msgstr " Bunla dəyişdir: "
 
-msgid " Confirm replace "
+#, fuzzy
+msgid "Confirm replace"
 msgstr " Dəyişikliyi qəbul et"
 
 #, c-format
 msgid ""
-"File \"%s\" is already being edited\n"
+"File \"%s\" is already being edited.\n"
 "User: %s\n"
 "Process ID: %d"
 msgstr ""
@@ -2193,7 +2332,8 @@ msgstr ""
 msgid "&External formatter"
 msgstr "X&arici  Şakilləndirici\tF19"
 
-msgid "&General...  "
+#, fuzzy
+msgid "&General..."
 msgstr "&Ümumi ..."
 
 #, fuzzy
@@ -2252,7 +2392,8 @@ msgstr "Dinamik paraqraf"
 msgid "Type writer wrap"
 msgstr "Kəlimə qırılması"
 
-msgid "Word wrap line length: "
+#, fuzzy
+msgid "Word wrap line length:"
 msgstr "Qırılacaq sətir uzunluğu : "
 
 msgid "Cursor beyond end of line"
@@ -2281,7 +2422,8 @@ msgstr "Qeyd etmədən əvvəl Soruş"
 msgid "&Return does autoindent"
 msgstr "&Return does autoindent"
 
-msgid "Tab spacing: "
+#, fuzzy
+msgid "Tab spacing:"
 msgstr "Tab aralığı : "
 
 msgid "Fill tabs with &spaces"
@@ -2296,7 +2438,8 @@ msgstr "&Fake half tabs"
 msgid "Wrap mode"
 msgstr "Qırma modu"
 
-msgid " Editor options "
+#, fuzzy
+msgid "Editor options"
 msgstr " Düzəldici seçənəkləri"
 
 msgid "ButtonBar|Mark"
@@ -2317,26 +2460,28 @@ msgstr ""
 msgid "ButtonBar|PullDn"
 msgstr ""
 
-msgid " Load syntax file "
+#, fuzzy
+msgid "Load syntax file"
 msgstr " Sintaks faylı yüklənir "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot open file %s \n"
-" %s "
+"Cannot open file %s\n"
+"%s"
 msgstr ""
 " %s faylı açıla bilmadi \n"
 " %s "
 
-#, c-format
-msgid " Error in file %s on line %d "
+#, fuzzy, c-format
+msgid "Error in file %s on line %d"
 msgstr " %s faylında %d sətirinda xəta oldu "
 
+#, fuzzy
 msgid ""
-" The Commander can't change to the directory that \n"
-" the subshell claims you are in.  Perhaps you have \n"
-" deleted your working directory, or given yourself \n"
-" extra access permissions with the \"su\" command? "
+"The Commander can't change to the directory that\n"
+"the subshell claims you are in. Perhaps you have\n"
+"deleted your working directory, or given yourself\n"
+"extra access permissions with the \"su\" command?"
 msgstr ""
 " Commander subshellin sizin olduğunuzu fikirləşdiyi qovluğa \n"
 " keçə bilmir. Bəlkə siz işlədiyiniz qovluğu sildiniz ya da \n"
@@ -2346,19 +2491,20 @@ msgstr ""
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Midnight Commanderə qayıtmaq üçün `exit' yazın"
 
-#, c-format
-msgid " Cannot fetch a local copy of %s "
+#, fuzzy, c-format
+msgid "Cannot fetch a local copy of %s"
 msgstr " %s in yerli üzünü çıxarda bilmədim"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot create temporary command file \n"
-" %s "
+"Cannot create temporary command file\n"
+"%s"
 msgstr ""
 " Müvəqqəti əmr faylı yaradıla bilmir \n"
 " %s "
 
-msgid " Parameter "
+#, fuzzy
+msgid "Parameter"
 msgstr " Parametr "
 
 #, fuzzy, c-format
@@ -2367,8 +2513,8 @@ msgstr " fayl xətası "
 
 #, fuzzy, c-format
 msgid ""
-"The format of the %smc.ext file has changed with version 3.0.  It seems that "
-"the installation failed.  Please fetch a fresh copy from the Midnight "
+"The format of the %smc.ext file has changed with version 3.0. It seems that "
+"the installation failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
 "mc.ext file has changed\n"
@@ -2377,15 +2523,19 @@ msgstr ""
 "Midnight Commander package."
 
 #, fuzzy, c-format
-msgid " ~/%s file error "
+msgid "~/%s file error"
 msgstr " fayl xətası "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The format of the ~/%s file has changed with version 3.0.  You may either "
+"The format of the ~/%s file has changed with version 3.0. You may either "
 "want to copy it from %smc.ext or use that file as an example of how to write "
 "it."
 msgstr ""
+"mc.ext file has changed\n"
+"with version 3.0. It seems that installation\n"
+"failed. Please fetch a fresh new copy from the\n"
+"Midnight Commander package."
 
 msgid "DialogTitle|Copy"
 msgstr ""
@@ -2396,30 +2546,32 @@ msgstr ""
 msgid "DialogTitle|Delete"
 msgstr ""
 
-msgid " Cannot make the hardlink "
+#, fuzzy
+msgid "Cannot make the hardlink"
 msgstr " Ağır bağ yarada bilmədim "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot read source link \"%s\" \n"
-" %s "
+"Cannot read source link \"%s\"\n"
+"%s"
 msgstr ""
 "\"%s\" qaynaq bağı oxuna bilmir\n"
 " %s "
 
+#, fuzzy
 msgid ""
-" Cannot make stable symlinks across non-local filesystems: \n"
+"Cannot make stable symlinks acrossnon-local filesystems:\n"
 "\n"
-" Option Stable Symlinks will be disabled "
+"Option Stable Symlinks will be disabled"
 msgstr ""
 " Yerli olmayan fayl sistemlərində sabit yumşaq bağlar yaradıla bilmir:\n"
 "\n"
 "Sabit Yumşaq Bağlar seçənəyi ləğv edildi "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot create target symlink \"%s\" \n"
-" %s "
+"Cannot create target symlink \"%s\"\n"
+"%s"
 msgstr ""
 " \"%s\" Hədəf yumşaq bağa yaradıla bilmir\n"
 " %s "
@@ -2427,101 +2579,102 @@ msgstr ""
 msgid "&Abort"
 msgstr "Lə&ğv et"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot overwrite directory \"%s\" \n"
-" %s "
+"Cannot overwrite directory\"%s\"\n"
+"%s"
 msgstr ""
 " \"%s\" qovluğunun üstünə yazıla bilmir\n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot stat source file \"%s\" \n"
-" %s "
+"Cannot stat source file \"%s\"\n"
+"%s"
 msgstr ""
 " \"%s\" qayanq faylı stat edilə bilmir \n"
 " %s "
 
 #, fuzzy, c-format
 msgid ""
-" `%s' \n"
-" and \n"
-" `%s' \n"
-" are the same file "
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same file"
 msgstr " `%s' və `%s' eyni fayldır "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot create special file \"%s\" \n"
-" %s "
+"Cannot create special file \"%s\"\n"
+"%s"
 msgstr ""
 "\"%s\" xüsusi faylı  yaradıla bilmir \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot chown target file \"%s\" \n"
-" %s "
+"Cannot chown target file \"%s\"\n"
+"%s"
 msgstr ""
 " Hədəf faylı \"%s\" chown edilə bilmir \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot chmod target file \"%s\" \n"
-" %s "
+"Cannot chmod target file \"%s\"\n"
+"%s"
 msgstr ""
 " Hədəf faylı \"%s\" chmod edilə bilmir \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot open source file \"%s\" \n"
-" %s "
+"Cannot open source file \"%s\"\n"
+"%s"
 msgstr ""
 " Qaynaq faylı \"%s\" açıla bilmir \n"
 " %s "
 
-msgid " Reget failed, about to overwrite file "
+#, fuzzy
+msgid "Reget failed, about to overwrite file"
 msgstr " Reget iflas etdi "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot fstat source file \"%s\" \n"
-" %s "
+"Cannot fstat source file \"%s\"\n"
+"%s"
 msgstr ""
 " Qaynaq faylı \"%s\" fstat edilə bilmir \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot create target file \"%s\" \n"
-" %s "
+"Cannot create target file \"%s\"\n"
+"%s"
 msgstr ""
 " Hədəf faylı \"%s\" yaradıla bilmir \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot fstat target file \"%s\" \n"
-" %s "
+"Cannot fstat target file \"%s\"\n"
+"%s"
 msgstr ""
 " Hədəf faylı \"%s\" fstat edilə bilmir \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot read source file \"%s\" \n"
-" %s "
+"Cannot read source file\"%s\"\n"
+"%s"
 msgstr ""
 " Hədəf faylı \"%s\" oxuna bilmir \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot write target file \"%s\" \n"
-" %s "
+"Cannot write target file \"%s\"\n"
+"%s"
 msgstr ""
 " Hədəf faylı \"%s\" yazıla bilmir \n"
 " %s "
@@ -2529,18 +2682,18 @@ msgstr ""
 msgid "(stalled)"
 msgstr "(stalled)"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot close source file \"%s\" \n"
-" %s "
+"Cannot close source file \"%s\"\n"
+"%s"
 msgstr ""
 " Qaynaq faylı \"%s\" qapadıla bilmir \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot close target file \"%s\" \n"
-" %s "
+"Cannot close target file \"%s\"\n"
+"%s"
 msgstr ""
 " Hədəf faylı \"%s\" qapadıla bilmir \n"
 " %s "
@@ -2551,118 +2704,124 @@ msgstr "Bütöv fayl alına bilmədi. Saxlayım mı?"
 msgid "&Keep"
 msgstr "&Saxla"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot stat source directory \"%s\" \n"
-" %s "
+"Cannot stat source directory \"%s\"\n"
+"%s"
 msgstr ""
 " Qaynaq qovluq \"%s\" stat edilə bilmədi \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Source \"%s\" is not a directory \n"
-" %s "
+"Source \"%s\" is not a directory\n"
+"%s"
 msgstr ""
 " Qaynaq qovluq \"%s\" qovluq deyildir \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot copy cyclic symbolic link \n"
-" `%s' "
+"Cannot copy cyclic symbolic link\n"
+"\"%s\""
 msgstr ""
 " Siklik simvolik bağ köçürdülə bilmir \n"
 " `%s' "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Destination \"%s\" must be a directory \n"
-" %s "
+"Destination \"%s\" must be a directory\n"
+"%s"
 msgstr ""
 " Hədəf \"%s\" bir qovluq olmalıdır \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot create target directory \"%s\" \n"
-" %s "
+"Cannot create target directory \"%s\"\n"
+"%s"
 msgstr ""
 " Hədəf qovluğu \"%s\" yaradıla bilmir \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot chown target directory \"%s\" \n"
-" %s "
+"Cannot chown target directory \"%s\"\n"
+"%s"
 msgstr ""
 " Hədəf qovluğu \"%s\" chown edilə bilmir \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot stat file \"%s\" \n"
-" %s "
+"Cannot stat file \"%s\"\n"
+"%s"
 msgstr ""
 " \"%s\" faylı stat edila bilmir \n"
 " %s "
 
-#, c-format
-msgid " Cannot overwrite directory `%s' "
-msgstr " `%s' qovluğun üstünü yaza bilmərəm "
+#, fuzzy, c-format
+msgid "Cannot overwrite directory \"%s\""
+msgstr " \"%s\" qovluğunun üstünə yazıla bilmir %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot move file \"%s\" to \"%s\" \n"
-" %s "
+"Cannot move file \"%s\" to \"%s\"\n"
+"%s"
 msgstr ""
 " \"%s\" faylı \"%s\" a(ə) daşına bilmir \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot remove file \"%s\" \n"
-" %s "
+"Cannot remove file \"%s\"\n"
+"%s"
 msgstr ""
 " \"%s\" faylını silə bilmədim \n"
 " %s "
 
 #, fuzzy, c-format
 msgid ""
-" `%s' \n"
-" and \n"
-" `%s' \n"
-" are the same directory "
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same directory"
 msgstr " `%s' və `%s' eyni qovluqdur "
 
-#, c-format
-msgid " Cannot overwrite directory \"%s\" %s "
-msgstr " \"%s\" qovluğunun üstünə yazıla bilmir %s "
+#, fuzzy, c-format
+msgid ""
+"Cannot overwrite directory \"%s\"\n"
+"%s"
+msgstr ""
+" \"%s\" qovluğunun üstünə yazıla bilmir\n"
+" %s "
 
-#, c-format
-msgid " Cannot overwrite file \"%s\" %s "
+#, fuzzy, c-format
+msgid ""
+"Cannot overwrite file \"%s\"\n"
+"%s"
 msgstr " \"%s\" faylının üstünə yazıla bilmir %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot move directory \"%s\" to \"%s\" \n"
-" %s "
+"Cannot move directory \"%s\" to \"%s\"\n"
+"%s"
 msgstr ""
 " \"%s\" qovluğu \"%s\" a(ə) daşına bilmir \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot delete file \"%s\" \n"
-" %s "
+"Cannot delete file \"%s\"\n"
+"%s"
 msgstr ""
 " \"%s\" faylı silinə bilmir \n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot remove directory \"%s\" \n"
-" %s "
+"Cannot remove directory \"%s\"\n"
+"%s"
 msgstr ""
 " \"%s\" qovluğu silinə bilmir \n"
 " %s "
@@ -2700,45 +2859,51 @@ msgstr "qovluqlar"
 msgid "files/directories"
 msgstr "fayllar/qovluqlar"
 
+#. TRANSLATORS: keep leading space here to split words in Copy/Move dialog
 msgid " with source mask:"
 msgstr " qaynaq maskalı: "
 
-msgid " to:"
-msgstr " buraya:"
+msgid "to:"
+msgstr "göndər:"
 
 #, c-format
 msgid "%s?"
 msgstr ""
 
-msgid " Cannot operate on \"..\"! "
+#, fuzzy
+msgid "Cannot operate on \"..\"!"
 msgstr " \"..\" üstündə əməliyyat aparıla bilmir! "
 
-msgid " Sorry, I could not put the job in background "
+#, fuzzy
+msgid "Sorry, I could not put the job in background"
 msgstr " Bağışlayın. Arxaya əməliyyat ala bilmərəm "
 
 msgid "&Retry"
 msgstr "Təzədən &sına"
 
+#, fuzzy
 msgid ""
 "\n"
-"   Directory not empty.   \n"
-"   Delete it recursively? "
+"Directory not empty.\n"
+"Delete it recursively?"
 msgstr ""
 "\n"
 "   Qovluq boş deyildir.   \n"
 "   Qovluğu tamamilə silim mi ? "
 
+#, fuzzy
 msgid ""
 "\n"
-"   Background process: Directory not empty \n"
-"   Delete it recursively? "
+"Background process: Directory not empty.\n"
+"Delete it recursively?"
 msgstr ""
 "\n"
 "\tArxaplanəməliyyatı: Qovluq boş deyildir \n"
 "\tTamamilə silim mi? "
 
-msgid " Delete: "
-msgstr " Sil : "
+#, fuzzy
+msgid "Delete:"
+msgstr "Sil"
 
 msgid "Non&e"
 msgstr "heç&biri"
@@ -2772,7 +2937,7 @@ msgid "Time: %s  %s (%s)"
 msgstr "Böyüklük:    %s"
 
 #, c-format
-msgid " Total: %s of %s "
+msgid "Total: %s of %s"
 msgstr ""
 
 msgid "Source"
@@ -2822,10 +2987,12 @@ msgstr "A&ppend"
 msgid "Overwrite this target?"
 msgstr "Bu hədəfin üstünə yazım mı?"
 
-msgid " File exists "
+#, fuzzy
+msgid "File exists"
 msgstr " Fayl vardır "
 
-msgid " Background process: File exists "
+#, fuzzy
+msgid "Background process: File exists"
 msgstr " Arxaplan aməliyyatı: Fayl vardır "
 
 msgid "&Background"
@@ -2835,17 +3002,16 @@ msgid "&Stable Symlinks"
 msgstr "%Sabit yumşaq bağlar"
 
 #, fuzzy
-msgid "di&Ve into subdir if exists"
+msgid "Di&ve into subdir if exists"
 msgstr "Varsa alt qovluğa &Dal "
 
-msgid "preserve &Attributes"
+#, fuzzy
+msgid "Preserve &attributes"
 msgstr "&Atributlar qorunsun"
 
-msgid "follow &Links"
+#, fuzzy
+msgid "Follow &links"
 msgstr "&Bağlar təqib edilsin"
-
-msgid "to:"
-msgstr "göndər:"
 
 #, fuzzy, c-format
 msgid "Invalid source pattern `%s'"
@@ -2879,7 +3045,7 @@ msgid "Found: %ld"
 msgstr ""
 
 #, fuzzy
-msgid " Malformed regular expression "
+msgid "Malformed regular expression"
 msgstr " Səhv tanıdılmış uzantı"
 
 #, fuzzy
@@ -2940,14 +3106,16 @@ msgstr "%s Axtarılır"
 msgid "Searching"
 msgstr "Axtarılır"
 
-msgid " Help file format error\n"
+#, fuzzy
+msgid "Help file format error\n"
 msgstr " Kömak faylı şakli xətası\n"
 
-msgid " Internal bug: Double start of link area "
+#, fuzzy
+msgid "Internal bug: Double start of link area"
 msgstr " Daxili bug:  Double start of link area "
 
-#, c-format
-msgid " Cannot find node %s in help file "
+#, fuzzy, c-format
+msgid "Cannot find node %s in help file"
 msgstr " %s düyümü kömək faylında tapıla bilmədi"
 
 msgid "Help"
@@ -2971,10 +3139,12 @@ msgstr "&ƏLavə Et"
 msgid "&Insert"
 msgstr "&Daxil Et"
 
-msgid "New &Entry"
+#, fuzzy
+msgid "New &entry"
 msgstr "Təzə &Giriş"
 
-msgid "New &Group"
+#, fuzzy
+msgid "New &group"
 msgstr "Təzə &Qrup"
 
 msgid "&Up"
@@ -2990,7 +3160,8 @@ msgstr "Tə&rs"
 msgid "Fr&ee VFSs now"
 msgstr "VFS'i indi &boşalt"
 
-msgid "Change &To"
+#, fuzzy
+msgid "Change &to"
 msgstr "&Buraya keç"
 
 msgid "Subgroup - press ENTER to see list"
@@ -3002,11 +3173,11 @@ msgstr "Fəal VFS qovluqları"
 msgid "Directory hotlist"
 msgstr "Nişanlarım Qovluqları"
 
-msgid " Directory path "
-msgstr " Qovluq yolu "
+msgid "Directory path"
+msgstr "Qovluq yolu"
 
-msgid " Directory label "
-msgstr " Qovluq etiketi "
+msgid "Directory label"
+msgstr "Qovluq etiketi"
 
 #, c-format
 msgid "Moving %s"
@@ -3015,63 +3186,74 @@ msgstr "%s Daşınır "
 msgid "New hotlist entry"
 msgstr "Təzə nişanlarım girişi"
 
-msgid "Directory label"
+#, fuzzy
+msgid "Directory label:"
 msgstr "Qovluq etiketi"
 
-msgid "Directory path"
+#, fuzzy
+msgid "Directory path:"
 msgstr "Qovluq yolu"
 
-msgid " New hotlist group "
+#, fuzzy
+msgid "New hotlist group"
 msgstr " Təzə Nişanlarım qrupu "
 
-msgid "Name of new group"
+#, fuzzy
+msgid "Name of new group:"
 msgstr "Qrupun adı"
 
 #, c-format
 msgid "Label for \"%s\":"
 msgstr "\"%s\" üçün Etiket:"
 
-msgid " Add to hotlist "
+#, fuzzy
+msgid "Add to hotlist"
 msgstr " Nişanlarıma əlavə et"
 
-msgid " Remove: "
+#, fuzzy
+msgid "Remove:"
 msgstr " Sil: "
 
-msgid ""
-"\n"
-" Are you sure you want to remove this entry?"
+msgid "Are you sure you want to remove this entry?"
 msgstr ""
 
+#, fuzzy
 msgid ""
-"\n"
-" Group not empty.\n"
-" Remove it?"
+"Group not empty.\n"
+"Remove it?"
 msgstr ""
 "\n"
 " Qrup boş deyil.\n"
 " Silim mi?"
 
-msgid " Top level group "
+#, fuzzy
+msgid "Top level group"
 msgstr " Ən üstdəki qrup "
 
-msgid " Hotlist Load "
+#, fuzzy
+msgid "Hotlist Load"
 msgstr " Nişanlarım yüklənir"
 
 #, fuzzy, c-format
 msgid ""
-"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+"MC was unable to write ~/%s file,\n"
+"your old hotlist entries were not deleted"
 msgstr " fayl, sizin köhnə nişanlarım girişləri silinmədi"
+
+#, fuzzy
+msgid "Information"
+msgstr " Mə'lumat       "
 
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
 
 #, c-format
-msgid "File:       %s"
-msgstr "Fayl :     %s"
+msgid "File: %s"
+msgstr "Fayl : %s"
 
-#, c-format
-msgid "Free nodes: %d (%d%%) of %d"
+#, fuzzy, c-format
+msgid "Free nodes: %ld (%ld%%) of %ld"
 msgstr "Boş düyünlər: %d (%d%%) of %d"
 
 msgid "No node information"
@@ -3084,8 +3266,8 @@ msgstr "Boş yer: %s (%d%%) of %s"
 msgid "No space information"
 msgstr "Sahə mə'lumatı yoxdur"
 
-#, c-format
-msgid "Type:      %s "
+#, fuzzy, c-format
+msgid "Type:      %s"
 msgstr "Növ:\t%s"
 
 msgid "non-local vfs"
@@ -3148,47 +3330,48 @@ msgstr "Ş&aquli"
 msgid "&Horizontal"
 msgstr "Ü&füqi"
 
-msgid "show free sp&Ace"
+msgid "Show free sp&ace"
 msgstr ""
 
 #, fuzzy
-msgid "&Xterm window title"
+msgid "&XTerm window title"
 msgstr "&Xterm kömək sətiri"
 
-msgid "h&Intbar visible"
+#, fuzzy
+msgid "H&intbar visible"
 msgstr "i&pucları çubuğu görünən"
 
 msgid "&Keybar visible"
 msgstr "&Düymələr çubuğu görünən"
 
-msgid "command &Prompt"
+#, fuzzy
+msgid "Command &prompt"
 msgstr "əmr &Sətiri"
 
-msgid "show &Mini status"
+#, fuzzy
+msgid "Show &mini status"
 msgstr "&Mini vəziyyəti göstər"
 
-msgid "menu&Bar visible"
+#, fuzzy
+msgid "Menu&bar visible"
 msgstr "menyu&Çubuğu görünən"
 
 msgid "&Equal split"
 msgstr "&Bərabər böl"
 
-msgid "pe&Rmissions"
-msgstr "haqla&r"
-
-msgid "&File types"
-msgstr "&Fayl növləri"
-
-msgid " Panel split "
+#, fuzzy
+msgid "Panel split"
 msgstr " Panel bölümü "
 
-msgid " Highlight... "
-msgstr " İşıqlandır ..."
+msgid "Console output"
+msgstr ""
 
-msgid " Other options "
+#, fuzzy
+msgid "Other options"
 msgstr " O biri seçənəklər"
 
-msgid "output lines"
+#, fuzzy
+msgid "Output lines:"
 msgstr "xarici xəttlər"
 
 msgid "Layout"
@@ -3197,7 +3380,8 @@ msgstr "Düzülüş"
 msgid "Learn keys"
 msgstr "Düymələri öyrən"
 
-msgid " Teach me a key "
+#, fuzzy
+msgid "Teach me a key"
 msgstr " Mənə bir düymə öyrət "
 
 #, c-format
@@ -3220,11 +3404,12 @@ msgstr ""
 "Çıxmaq istəyirsiniz isə Çıx (Escape) düyməsini bir dəfə\n"
 "tıqlayın və gözləyin."
 
-msgid " Cannot accept this key "
+#, fuzzy
+msgid "Cannot accept this key"
 msgstr " Bu düyməni qəbul edə bilmərəm "
 
-#, c-format
-msgid " You have entered \"%s\""
+#, fuzzy, c-format
+msgid "You have entered \"%s\""
 msgstr " Siz \"%s\" girdiniz"
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
@@ -3258,14 +3443,17 @@ msgstr "hansı düymələr OLDU deyə işarətlənməyib. Yox isə Space düymə
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "düymə ya da siçan ilə basaraq seçin. Tab ilə gəzin."
 
-msgid " The Midnight Commander "
+#, fuzzy
+msgid "The Midnight Commander"
 msgstr " The Midnight Commander "
 
-msgid " Do you really want to quit the Midnight Commander? "
+#, fuzzy
+msgid "Do you really want to quit the Midnight Commander?"
 msgstr " Həqiqətən də Midnight Commander'dən çıxmaq istəyirsiniz ? "
 
-msgid "&Listing mode..."
-msgstr "Sıra&lama modu ..."
+#, fuzzy
+msgid "File listin&g"
+msgstr "&Tam fayl sıralaması"
 
 #, fuzzy
 msgid "&Quick view"
@@ -3274,6 +3462,9 @@ msgstr "Sür'ətli qeyd et "
 #, fuzzy
 msgid "&Info"
 msgstr "&Inode"
+
+msgid "&Listing mode..."
+msgstr "Sıra&lama modu ..."
 
 msgid "&Sort order..."
 msgstr "&Sıralama əmri..."
@@ -3326,8 +3517,12 @@ msgid "&Link"
 msgstr "&Bağlar"
 
 #, fuzzy
-msgid "&SymLink"
+msgid "&Symlink"
 msgstr "&Bağlar"
+
+#, fuzzy
+msgid "Relative symlin&k"
+msgstr "Yumşaq bağı öyrənirəm ..."
 
 #, fuzzy
 msgid "Edit s&ymlink"
@@ -3440,6 +3635,10 @@ msgid "&Layout..."
 msgstr "&Düzülüş ..."
 
 #, fuzzy
+msgid "&Panel options..."
+msgstr " Panel Seçənəkləri "
+
+#, fuzzy
 msgid "C&onfirmation..."
 msgstr "&Qəbul etmə..."
 
@@ -3465,19 +3664,6 @@ msgstr " &Alt"
 msgid "&Right"
 msgstr " &Sağ "
 
-msgid " Information "
-msgstr " Mə'lumat       "
-
-msgid ""
-" Using the fast reload option may not reflect the exact \n"
-" directory contents. In this case you'll need to do a   \n"
-" manual reload of the directory. See the man page for   \n"
-" the details.                                           "
-msgstr ""
-" Sür'ətli təzədən qurma funksiyası qovluqlarda düzgün \n"
-" nəticə verməyə bilər. Bu halda siz öz əlinizlə qovluğu təzədən \n"
-" yükləməlisiniz. Ətraflı mə'lumat üçün MAN səhifəsinə baxın.\t"
-
 msgid "ButtonBar|Menu"
 msgstr ""
 
@@ -3497,83 +3683,179 @@ msgstr "TERM dəyişəni bildirilməyib!\n"
 msgid "Cannot create %s directory"
 msgstr "Qovluq dəyişdirilə bilmir"
 
-msgid "safe de&Lete"
-msgstr "e'tibarlı si&Lmə"
-
-msgid "cd follows lin&Ks"
-msgstr "Ba&ğları təqib edən cd"
-
-msgid "L&ynx-like motion"
-msgstr "L&ynx-like motion"
-
-msgid "rotatin&G dash"
-msgstr "rotatin&G dash"
-
-msgid "co&Mplete: show all"
-msgstr "co&Mplete: hamısını göstər"
-
-msgid "&Use internal view"
-msgstr "Daxili nümayişçi istifadə et"
-
-msgid "use internal ed&It"
-msgstr "daxili ed&It istifadə et"
-
-msgid "auto m&Enus"
-msgstr "avtomatik m&Enyular"
-
-msgid "&Auto save setup"
-msgstr "Quraşdırmanın &Avtomatik qeydi"
-
-msgid "shell &Patterns"
-msgstr "shell &Paternləri"
-
-msgid "Compute &Totals"
-msgstr "&Totalları say"
-
-msgid "&Verbose operation"
-msgstr "&Sözlü əməliyyatlar"
-
-msgid "Mkdir autoname"
-msgstr ""
-
-msgid "&Fast dir reload"
-msgstr "&Sür'ətli qovluq yüklənməsi"
-
-msgid "mi&X all files"
-msgstr "bütün faylları qa&Rışdır"
-
-msgid "&Drop down menus"
-msgstr "Menyuları aşağı &Salla"
-
-msgid "ma&Rk moves down"
-msgstr "hərəkətləri aşağı iş&Arətlə"
-
-msgid "show &Hidden files"
-msgstr "gizli faylları də göstər"
-
-msgid "show &Backup files"
-msgstr "yedək fayllarə də &bax"
-
-msgid "Use SI si&ze units"
-msgstr ""
-
 msgid "&Never"
 msgstr "Heç bir vax&t"
 
-msgid "on dumb &Terminals"
+#, fuzzy
+msgid "On dum&b terminals"
 msgstr "axmaq &Terminallarda"
 
 msgid "Alwa&ys"
 msgstr "hə&mişə"
 
-msgid " Panel options "
-msgstr " Panel Seçənəkləri "
+#, fuzzy
+msgid "A&uto save setup"
+msgstr "Quraşdırmanın &Avtomatik qeydi"
 
-msgid " Pause after run... "
+#, fuzzy
+msgid "Sa&fe delete"
+msgstr "e'tibarlı si&Lmə"
+
+#, fuzzy
+msgid "Cd follows lin&ks"
+msgstr "Ba&ğları təqib edən cd"
+
+#, fuzzy
+msgid "Rotating d&ash"
+msgstr "rotatin&G dash"
+
+#, fuzzy
+msgid "Co&mplete: show all"
+msgstr "co&Mplete: hamısını göstər"
+
+#, fuzzy
+msgid "Shell &patterns"
+msgstr "shell &Paternləri"
+
+msgid "&Drop down menus"
+msgstr "Menyuları aşağı &Salla"
+
+#, fuzzy
+msgid "Auto m&enus"
+msgstr "avtomatik m&Enyular"
+
+#, fuzzy
+msgid "Use internal vie&w"
+msgstr "Daxili nümayişçi istifadə et"
+
+#, fuzzy
+msgid "Use internal edi&t"
+msgstr "daxili ed&It istifadə et"
+
+#, fuzzy
+msgid "Pause after run"
 msgstr " İşə salındıqdan sonra fasilə ver... "
+
+#, fuzzy
+msgid "Timeout:"
+msgstr "MTime"
+
+#, fuzzy
+msgid "S&ingle press"
+msgstr "&Fayl növləri"
+
+#, fuzzy
+msgid "Esc key mode"
+msgstr "düymə lövhəsi üstündəki Slash düyməsi"
+
+msgid "Mkdi&r autoname"
+msgstr ""
+
+msgid "Classic pro&gressbar"
+msgstr ""
+
+#, fuzzy
+msgid "Compute tota&ls"
+msgstr "&Totalları say"
+
+msgid "&Verbose operation"
+msgstr "&Sözlü əməliyyatlar"
+
+#, fuzzy
+msgid "File operation options"
+msgstr " O biri seçənəklər"
 
 msgid "Configure options"
 msgstr "Seçənəkləri quraşdır"
+
+#, fuzzy
+msgid "Case &insensitive"
+msgstr "böyük/kiçik hərf həssas"
+
+#, fuzzy
+msgid "Case s&ensitive"
+msgstr "böyük/kiçik hərf həssas"
+
+#, fuzzy
+msgid "Use panel sort mo&de"
+msgstr "Qe&yd etmə modu ..."
+
+#, fuzzy
+msgid "Quick search"
+msgstr "Sür'ətli cd"
+
+#, fuzzy
+msgid "&Permissions"
+msgstr "İstifadəhaqları"
+
+#, fuzzy
+msgid "File &types"
+msgstr "&Fayl növləri"
+
+#, fuzzy
+msgid "File highlight"
+msgstr " İşıqlandır ..."
+
+msgid "&Mouse page scrolling"
+msgstr ""
+
+msgid "Pa&ge scrolling"
+msgstr ""
+
+msgid "L&ynx-like motion"
+msgstr "L&ynx-like motion"
+
+msgid "Navigation"
+msgstr ""
+
+#, fuzzy
+msgid "A&uto save panels setup"
+msgstr "Quraşdırmanın &Avtomatik qeydi"
+
+#, fuzzy
+msgid "Re&verse files only"
+msgstr "&Böyüklüyünə görə"
+
+#, fuzzy
+msgid "Ma&rk moves down"
+msgstr "hərəkətləri aşağı iş&Arətlə"
+
+msgid "&Fast dir reload"
+msgstr "&Sür'ətli qovluq yüklənməsi"
+
+#, fuzzy
+msgid "Show &hidden files"
+msgstr "gizli faylları də göstər"
+
+#, fuzzy
+msgid "Show &backup files"
+msgstr "yedək fayllarə də &bax"
+
+#, fuzzy
+msgid "Mi&x all files"
+msgstr "bütün faylları qa&Rışdır"
+
+msgid "Use SI si&ze units"
+msgstr ""
+
+#, fuzzy
+msgid "Main panel options"
+msgstr " Panel Seçənəkləri "
+
+#, fuzzy
+msgid "Panel options"
+msgstr " Panel Seçənəkləri "
+
+#, fuzzy
+msgid ""
+"Using the fast reload option may not reflect the exact\n"
+"directory contents. In this case you'll need to do a\n"
+"manual reload of the directory. See the man page for\n"
+"the details."
+msgstr ""
+" Sür'ətli təzədən qurma funksiyası qovluqlarda düzgün \n"
+" nəticə verməyə bilər. Bu halda siz öz əlinizlə qovluğu təzədən \n"
+" yükləməlisiniz. Ətraflı mə'lumat üçün MAN səhifəsinə baxın.\t"
 
 msgid "&Add new"
 msgstr "Təzə bir d&ədə əlavə et"
@@ -3587,13 +3869,16 @@ msgstr "Əmr"
 msgid "Other command"
 msgstr "Başqa əmr"
 
-msgid " Add to external panelize "
+#, fuzzy
+msgid "Add to external panelize"
 msgstr " Xarici panelləşdirmə əlavə et"
 
-msgid " Enter command label: "
+#, fuzzy
+msgid "Enter command label:"
 msgstr " Əmr etiketini bildir: "
 
-msgid " Cannot run external panelize in a non-local directory "
+#, fuzzy
+msgid "Cannot run external panelize in a non-local directory"
 msgstr " Yerli olmayan qovluqlarda xarici panelləşdirmə apara bilmərəm"
 
 msgid "Find rejects after patching"
@@ -3691,11 +3976,9 @@ msgstr "&Çatma vaxtı"
 msgid "sort|h"
 msgstr ""
 
-msgid "C&Hange time"
+#, fuzzy
+msgid "C&hange time"
 msgstr "&Dəyişdirilmə vaxtı"
-
-msgid "Permission"
-msgstr "İstifadəhaqları"
 
 msgid "Perm"
 msgstr "Perm"
@@ -3738,15 +4021,21 @@ msgid_plural "%s in %d files"
 msgstr[0] "%s bayt : %d fayl"
 msgstr[1] "%s bayt : %d fayl"
 
-msgid "Unknown tag on display format: "
+#, fuzzy
+msgid "Unknown tag on display format:"
 msgstr "Ekran şəkilləndirməsində namə'lum teq: "
 
 msgid "User supplied format looks invalid, reverting to default."
 msgstr ""
 "İstifadəçi tərəfindən bildirlən şəkillandirmə düzgün deyil, əsasa keçirəm."
 
-msgid " Do you really want to execute? "
+#, fuzzy
+msgid "Do you really want to execute?"
 msgstr " Həqiqətən də işə salmaq istəyirsiniz mi?"
+
+#, fuzzy, c-format
+msgid "Cannot chdir to \"%s\""
+msgstr " %s ə keçə bilmədim "
 
 #, fuzzy
 msgid "Choose codepage"
@@ -3777,7 +4066,8 @@ msgstr ""
 msgid "Cannot open named pipe %s\n"
 msgstr "%s deyə adlandırılmış borunu aça bilmirəm\n"
 
-msgid " The shell is still active. Quit anyway? "
+#, fuzzy
+msgid "The shell is still active. Quit anyway?"
 msgstr " Shell hələ də fəaldır. Çıxım mı? "
 
 #, c-format
@@ -3848,16 +4138,16 @@ msgstr "\"%s\"'yi buraya köçürt :"
 msgid "Move \"%s\" directory to:"
 msgstr "\"%s\"'yi buraya daşı :"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot stat the destination \n"
-" %s "
+"Cannot stat the destination\n"
+"%s"
 msgstr ""
 " Buranı stat edə bilmədim \n"
 " %s "
 
-#, c-format
-msgid "  Delete %s?  "
+#, fuzzy, c-format
+msgid "Delete %s?"
 msgstr "  %s silinsin mi ?  "
 
 msgid "ButtonBar|Static"
@@ -3883,30 +4173,36 @@ msgstr ""
 "%s faylına yaza bilmirəm:\n"
 "%s\n"
 
-msgid " Format error on file Extensions File "
+#, fuzzy
+msgid "Format error on file Extensions File"
 msgstr " Uzantılar faylında şəkilləndirmə xətası oldu "
 
-#, c-format
-msgid " The %%var macro has no default "
+#, fuzzy, c-format
+msgid "The %%var macro has no default"
 msgstr " %%var makrosunun əsas qiyməti yoxdur "
 
-#, c-format
-msgid " The %%var macro has no variable "
+#, fuzzy, c-format
+msgid "The %%var macro has no variable"
 msgstr " %%var makrosunun dəyişəni yoxdur "
 
-msgid " Debug "
+#, fuzzy
+msgid "Debug"
 msgstr " Həll Et "
 
-msgid " ERROR: "
+#, fuzzy
+msgid "ERROR:"
 msgstr " XƏTA : "
 
-msgid " True:  "
+#, fuzzy
+msgid "True:"
 msgstr " Doğru : "
 
-msgid " False: "
+#, fuzzy
+msgid "False:"
 msgstr " Səhv : "
 
-msgid " Warning -- ignoring file "
+#, fuzzy
+msgid "Warning -- ignoring file"
 msgstr " Xəbərdarlıq -- faylı diqqətə almıram "
 
 #, c-format
@@ -3917,11 +4213,20 @@ msgstr ""
 " %s faylının yiyəsi root və ya sən deyilsiniz.\n"
 "Bunu istifadə etmək bir az təhlükəsizliyə xələl gətirə bilər"
 
-#, c-format
-msgid " No suitable entries found in %s "
+#, fuzzy, c-format
+msgid ""
+"Cannot open file%s\n"
+"%s"
+msgstr ""
+" %s faylı açıla bilmadi \n"
+" %s "
+
+#, fuzzy, c-format
+msgid "No suitable entries found in %s"
 msgstr " %s'də işlədiləbiləcək girişlər tapıla bilmədi "
 
-msgid " User menu "
+#, fuzzy
+msgid "User menu"
 msgstr " İstifadəçi menyusu "
 
 #, fuzzy
@@ -3929,7 +4234,7 @@ msgid "Invalid value"
 msgstr " Səhv verilmiş parol "
 
 #, fuzzy
-msgid " Cannot spawn child process "
+msgid "Cannot spawn child process"
 msgstr " Törəmə proqramı başlada bilmədim "
 
 msgid "Empty output from child filter"
@@ -3982,34 +4287,35 @@ msgstr ""
 
 #, c-format
 msgid ""
-" Error while closing the file: \n"
-" %s \n"
-" Data may have been written or not. "
+"Error while closing the file:\n"
+"%s\n"
+"Data may have been written or not"
 msgstr ""
 
 #, fuzzy, c-format
 msgid ""
-" Cannot save file: \n"
-" %s "
+"Cannot save file:\n"
+"%s"
 msgstr " Faylı qeyd edərkən xəta oldu . "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot open \"%s\"\n"
-" %s "
+"Cannot open \"%s\"\n"
+"%s"
 msgstr ""
 " \"%s\"'yi aça bilmirəm\n"
 " %s "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-" Cannot stat \"%s\"\n"
-" %s "
+"Cannot stat \"%s\"\n"
+"%s"
 msgstr ""
 " \"%s\"'yi stat edə bilmədim\n"
 " %s "
 
-msgid " Cannot view: not a regular file "
+#, fuzzy
+msgid "Cannot view: not a regular file"
 msgstr " Göstərə bilmirəm : vnormal bir fayl deyildir"
 
 msgid "Seeking to search result"
@@ -4022,7 +4328,8 @@ msgstr "Axtar"
 msgid "Continue from begining?"
 msgstr ""
 
-msgid " History "
+#, fuzzy
+msgid "History"
 msgstr " Tarix "
 
 #. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
@@ -4035,12 +4342,94 @@ msgstr ""
 msgid "Background process:"
 msgstr "Arxaplan gedişatı:"
 
+#~ msgid " Permission "
+#~ msgstr " İcazələr "
+
+#~ msgid " File "
+#~ msgstr " Fayl "
+
+#~ msgid " Name "
+#~ msgstr " Ad "
+
+#~ msgid " Owner name "
+#~ msgstr " Yiyə adı "
+
+#~ msgid " Group name "
+#~ msgstr " Qrup adı "
+
+#~ msgid " Size "
+#~ msgstr " Böyüklük "
+
+#~ msgid " Confirmation "
+#~ msgstr " İcazə "
+
+#~ msgid " Filtered view "
+#~ msgstr " Süzülmüş görünüş "
+
+#~ msgid " Select "
+#~ msgstr " Seç "
+
+#~ msgid " Compare directories "
+#~ msgstr " Qovluqları müqayisə et"
+
+#~ msgid " Link "
+#~ msgstr " Bağla "
+
+#~ msgid " Edit symlink "
+#~ msgstr " Yumşaq bağı düzəlt "
+
+#~ msgid "case &Sensitive"
+#~ msgstr "&Böyük/Kiçik hərflərə diqqət et"
+
+#~ msgid " Replace "
+#~ msgstr " Dəyişdir "
+
+#, fuzzy
+#~ msgid " Error "
+#~ msgstr "XƏTA"
+
+#~ msgid " Insert File "
+#~ msgstr " Faylı daxil et "
+
+#~ msgid " Insert Literal "
+#~ msgstr " Hərfi daxil et"
+
+#~ msgid " Execute Macro "
+#~ msgstr " Makronu işə sal"
+
+#~ msgid " Cannot overwrite directory `%s' "
+#~ msgstr " `%s' qovluğun üstünü yaza bilmərəm "
+
+#~ msgid " to:"
+#~ msgstr " buraya:"
+
+#~ msgid " Delete: "
+#~ msgstr " Sil : "
+
+#~ msgid " Directory path "
+#~ msgstr " Qovluq yolu "
+
+#~ msgid " Directory label "
+#~ msgstr " Qovluq etiketi "
+
+#~ msgid "File:       %s"
+#~ msgstr "Fayl :     %s"
+
+#~ msgid "pe&Rmissions"
+#~ msgstr "haqla&r"
+
+#~ msgid " User menu "
+#~ msgstr " İstifadəçi menyusu "
+
+#, fuzzy
+#~ msgid ""
+#~ " Cannot save file: \n"
+#~ " %s "
+#~ msgstr " Faylı qeyd edərkən xəta oldu . "
+
 #, fuzzy
 #~ msgid "Status:    %s"
 #~ msgstr "Yaradılıb :   %s"
-
-#~ msgid "File"
-#~ msgstr "Fayl"
 
 #~ msgid "Count"
 #~ msgstr "Rəqəm"
@@ -4075,9 +4464,6 @@ msgstr "Arxaplan gedişatı:"
 
 #~ msgid " Goto Address "
 #~ msgstr " Ünvana Get "
-
-#~ msgid "File: %s"
-#~ msgstr "Fayl : %s"
 
 #~ msgid "Offset 0x%08lx"
 #~ msgstr "Offset 0x%08lx"
@@ -4242,9 +4628,6 @@ msgstr "Arxaplan gedişatı:"
 #~ msgid "Replac"
 #~ msgstr "Dəyişdir"
 
-#~ msgid "Delete"
-#~ msgstr "Sil"
-
 #~ msgid "PullDn"
 #~ msgstr "Aç"
 
@@ -4377,12 +4760,6 @@ msgstr "Arxaplan gedişatı:"
 #~ msgid "Extension"
 #~ msgstr "Uzantı:"
 
-#~ msgid "Size"
-#~ msgstr "Böyüklük"
-
-#~ msgid "MTime"
-#~ msgstr "MTime"
-
 #~ msgid "ATime"
 #~ msgstr "ATime"
 
@@ -4505,10 +4882,6 @@ msgstr "Arxaplan gedişatı:"
 
 #~ msgid "Edit edi&tor menu file"
 #~ msgstr "Menyu edi&toru"
-
-#, fuzzy
-#~ msgid "Edit &syntax file"
-#~ msgstr "&Menyunu dəyişdir"
 
 #~ msgid ""
 #~ "To use this feature select your codepage in\n"
