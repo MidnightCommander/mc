@@ -134,7 +134,7 @@ mc_defines_destroy (gpointer key, gpointer value, gpointer data)
 static void
 destroy_defines (GTree ** defines)
 {
-    g_tree_traverse (*defines, mc_defines_destroy, G_POST_ORDER, NULL);
+    g_tree_foreach (*defines, mc_defines_destroy, NULL);
     g_tree_destroy (*defines);
     *defines = NULL;
 }

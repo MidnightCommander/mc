@@ -535,8 +535,12 @@ ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super, const char 
 
     if (ftpfs_get_reply (me, SUP.sock, reply_string, sizeof (reply_string) - 1) == COMPLETE)
     {
-        g_strup (reply_string);
-        SUP.remote_is_amiga = strstr (reply_string, "AMIGA") != 0;
+        char *reply_up;
+
+        reply_up = g_ascii_strup (reply_string, -1);
+        SUP.remote_is_amiga = strstr (reply_up, "AMIGA") != 0;
+        g_free (reply_up);
+
         if (MEDATA->logfile)
         {
             fprintf (MEDATA->logfile, "MC -- remote_is_amiga =  %d\n", SUP.remote_is_amiga);
@@ -682,7 +686,7 @@ ftpfs_check_proxy (const char *host)
             if (!ld)
                 return 0;
         }
-        else if (!g_strcasecmp (host, domain))
+        else if (g_ascii_strcasecmp (host, domain) == 0)
             return 0;
     }
 
@@ -2153,7 +2157,7 @@ ftpfs_find_machine (const char *host, const char *domain)
         if (ftpfs_netrc_next () == NETRC_NONE)
             break;
 
-        if (g_strcasecmp (host, buffer))
+        if (g_ascii_strcasecmp (host, buffer) != 0)
         {
             /* Try adding our domain to short names in .netrc */
             const char *host_domain = strchr (host, '.');
@@ -2161,11 +2165,11 @@ ftpfs_find_machine (const char *host, const char *domain)
                 continue;
 
             /* Compare domain part */
-            if (g_strcasecmp (host_domain, domain))
+            if (g_ascii_strcasecmp (host_domain, domain) != 0)
                 continue;
 
             /* Compare local part */
-            if (g_strncasecmp (host, buffer, host_domain - host))
+            if (g_ascii_strncasecmp (host, buffer, host_domain - host) != 0)
                 continue;
         }
 

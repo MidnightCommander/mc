@@ -485,7 +485,7 @@ load_keys_from_section (const char *terminal, mc_config_t * cfg)
     while (*profile_keys != NULL)
     {
         /* copy=other causes all keys from [terminal:other] to be loaded. */
-        if (g_strcasecmp (*profile_keys, "copy") == 0)
+        if (g_ascii_strcasecmp (*profile_keys, "copy") == 0)
         {
             valcopy = mc_config_get_string (cfg, section_name, *profile_keys, "");
             load_keys_from_section (valcopy, cfg);
@@ -647,7 +647,7 @@ setup__load_panel_state (const char *section)
     buffer = mc_config_get_string (mc_panels_config, section, "display", "listing");
 
     for (i = 0; panel_types[i].opt_name != NULL; i++)
-        if (g_strcasecmp (panel_types[i].opt_name, buffer) == 0)
+        if (g_ascii_strcasecmp (panel_types[i].opt_name, buffer) == 0)
         {
             mode = panel_types[i].opt_type;
             break;
@@ -1123,7 +1123,7 @@ panel_load_setup (WPanel * panel, const char *section)
     buffer = mc_config_get_string (mc_panels_config, section, "list_mode", "full");
     panel->list_type = list_full;
     for (i = 0; list_types[i].key != NULL; i++)
-        if (g_strcasecmp (list_types[i].key, buffer) == 0)
+        if (g_ascii_strcasecmp (list_types[i].key, buffer) == 0)
         {
             panel->list_type = list_types[i].list_type;
             break;
