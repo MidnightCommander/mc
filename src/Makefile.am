@@ -87,6 +87,7 @@ mc_SOURCES = \
 	boxes.c boxes.h \
 	chmod.c chmod.h \
 	chown.c chown.h \
+	clipboard.c clipboard.h \
 	cmd.c cmd.h \
 	command.c command.h \
 	complete.c \

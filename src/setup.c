@@ -827,6 +827,8 @@ load_setup (void)
     if (buffer != NULL)
         utf8_display = str_isutf8 (buffer);
 #endif /* HAVE_CHARSET */
+    clipbord_store_path = mc_config_get_string (mc_main_config, "Misc", "clipboard_store", "");
+    clipbord_paste_path = mc_config_get_string (mc_main_config, "Misc", "clipboard_paste", "");
 }
 
 gboolean
@@ -858,6 +860,9 @@ save_setup (void)
                           get_codepage_id (default_source_codepage));
     mc_config_set_string (mc_main_config, "Misc", "autodetect_codeset", autodetect_codeset);
 #endif /* HAVE_CHARSET */
+    mc_config_set_string (mc_main_config, "Misc", "clipboard_store", clipbord_store_path);
+    mc_config_set_string (mc_main_config, "Misc", "clipboard_paste", clipbord_paste_path);
+
     tmp_profile = g_build_filename (home_dir, MC_USERCONF_DIR, MC_CONFIG_FILE, NULL);
     ret = mc_config_save_to_file (mc_main_config, tmp_profile, NULL);
 

@@ -62,6 +62,7 @@
 #include "src/charsets.h"
 #include "src/selcodepage.h"
 #include "src/cmddef.h"
+#include "src/clipboard.h"      /* copy_file_to_ext_clip, paste_to_file_from_ext_clip */
 
 #include "src/editor/edit-impl.h"
 #include "src/editor/editlock.h"
@@ -2165,7 +2166,6 @@ edit_save_block_to_clip_file (WEdit * edit, long start, long finish)
     return ret;
 }
 
-
 void
 edit_paste_from_history (WEdit * edit)
 {
@@ -2185,6 +2185,9 @@ edit_copy_to_X_buf_cmd (WEdit * edit)
                            get_sys_error (_("Unable to save to file")));
         return 1;
     }
+    /* try use external clipboard utility */
+    copy_file_to_ext_clip ();
+
     edit_mark_cmd (edit, 1);
     return 0;
 }
@@ -2200,6 +2203,9 @@ edit_cut_to_X_buf_cmd (WEdit * edit)
         edit_error_dialog (_("Cut to clipboard"), _("Unable to save to file"));
         return 1;
     }
+    /* try use external clipboard utility */
+    copy_file_to_ext_clip ();
+
     edit_block_delete_cmd (edit);
     edit_mark_cmd (edit, 1);
     return 0;
@@ -2209,6 +2215,8 @@ void
 edit_paste_from_X_buf_cmd (WEdit * edit)
 {
     gchar *tmp;
+    /* try use external clipboard utility */
+    paste_to_file_from_ext_clip ();
     tmp = concat_dir_and_file (home_dir, EDIT_CLIP_FILE);
     edit_insert_file (edit, tmp);
     g_free (tmp);
