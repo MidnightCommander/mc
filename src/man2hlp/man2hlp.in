@@ -413,7 +413,7 @@ sub handle_alt_font($)
             }
 
             # Skip more spaces
-            shift @p while $p[0] eq ' ';
+            shift @p while @p && $p[0] eq ' ';
 
             next;
         }
