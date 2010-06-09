@@ -318,10 +318,10 @@ msgstr ""
 "Ellenőrizze a TERM környezeti változót.\n"
 
 msgid "%b %e  %Y"
-msgstr ""
+msgstr "%b %e  %Y"
 
 msgid "%b %e %H:%M"
-msgstr ""
+msgstr "%b %e %H:%M"
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -1008,15 +1008,14 @@ msgstr "[aktuális_könyvtár] [másik_könyvtár]"
 msgid "Set initial line number for the internal editor"
 msgstr "A kezdősor számának megadása a belső szerkesztő számára."
 
-#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
 "as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
-"Hibajelentéseket (az \"mc -V\" parancs kimenetét is mellékelve) a következő\n"
-"címre lehet küldeni: mc-devel@gnome.org\n"
+"Hibajelentéseket (az \"mc -V\" parancs kimenetét is mellékelve) küldje\n"
+"ticket-ként a www.midnight-commander.org címre.\n"
 
 #, c-format
 msgid "GNU Midnight Commander %s\n"
@@ -1126,9 +1125,8 @@ msgstr "Beviteli/kijelzési kódlap:"
 msgid "&Select"
 msgstr "&Kiválasztás"
 
-#, fuzzy
 msgid "Directory tree"
-msgstr "Köny&vtárfa"
+msgstr "Könyvtárfa"
 
 msgid "Use passive mode over pro&xy"
 msgstr "Passzív mód használata pro&xy felett"
