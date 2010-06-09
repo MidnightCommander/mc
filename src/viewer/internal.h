@@ -131,10 +131,11 @@ typedef struct mcview_struct
     gboolean text_nroff_mode;   /* Nroff-style highlighting */
     gboolean text_wrap_mode;    /* Wrap text lines to fit them on the screen */
     gboolean magic_mode;        /* Preprocess the file using external programs */
+    gboolean hexedit_lownibble; /* Are we editing the last significant nibble? */
+    gboolean locked;            /* We hold lock on current file */
+
     gboolean utf8;              /* It's multibyte file codeset */
 
-    /* Additional editor state */
-    gboolean hexedit_lownibble; /* Are we editing the last significant nibble? */
     coord_cache_t *coord_cache; /* Cache for mapping offsets to cursor positions */
 
     /* Display information */

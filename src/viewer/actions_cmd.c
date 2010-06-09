@@ -53,6 +53,7 @@
 
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"
+#include "lib/lock.h"           /* lock_file() */
 
 #include "src/dialog.h"         /* cb_ret_t */
 #include "src/panel.h"
@@ -259,19 +260,19 @@ mcview_handle_editkey (mcview_t * view, int key)
 {
     struct hexedit_change_node *node;
     int byte_val;
+
     /* Has there been a change at this position? */
     node = view->change_list;
-    while (node && (node->offset != view->hex_cursor))
+    while ((node != NULL) && (node->offset != view->hex_cursor))
         node = node->next;
 
     if (!view->hexview_in_text)
     {
         /* Hex editing */
         unsigned int hexvalue = 0;
+
         if (key >= '0' && key <= '9')
-        {
             hexvalue = 0 + (key - '0');
-        }
         else if (key >= 'A' && key <= 'F')
             hexvalue = 10 + (key - 'A');
         else if (key >= 'a' && key <= 'f')
@@ -279,19 +280,15 @@ mcview_handle_editkey (mcview_t * view, int key)
         else
             return MSG_NOT_HANDLED;
 
-        if (node)
+        if (node != NULL)
             byte_val = node->value;
         else
             mcview_get_byte (view, view->hex_cursor, &byte_val);
 
         if (view->hexedit_lownibble)
-        {
             byte_val = (byte_val & 0xf0) | (hexvalue);
-        }
         else
-        {
             byte_val = (byte_val & 0x0f) | (hexvalue << 4);
-        }
     }
     else
     {
@@ -301,7 +298,12 @@ mcview_handle_editkey (mcview_t * view, int key)
         else
             return MSG_NOT_HANDLED;
     }
-    if (!node)
+
+    if ((view->filename != NULL) && (view->filename[0] != '\0')
+        && (view->change_list == NULL))
+        view->locked = lock_file (view->filename);
+
+    if (node == NULL)
     {
         node = g_new (struct hexedit_change_node, 1);
         node->offset = view->hex_cursor;
@@ -309,11 +311,11 @@ mcview_handle_editkey (mcview_t * view, int key)
         mcview_enqueue_change (&view->change_list, node);
     }
     else
-    {
         node->value = byte_val;
-    }
+
     view->dirty++;
     mcview_move_right (view, 1);
+
     return MSG_HANDLED;
 }
 

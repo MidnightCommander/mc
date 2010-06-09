@@ -212,6 +212,7 @@ mcview_new (int y, int x, int lines, int cols, gboolean is_panel)
 
     view->hex_mode = FALSE;
     view->hexedit_mode = FALSE;
+    view->locked = FALSE;
     view->hexview_in_text = FALSE;
     view->text_nroff_mode = FALSE;
     view->text_wrap_mode = FALSE;

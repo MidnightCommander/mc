@@ -191,6 +191,7 @@ mcview_init (mcview_t * view)
     /* leave the other growbuf fields uninitialized */
 
     view->hexedit_lownibble = FALSE;
+    view->locked = FALSE;
     view->coord_cache = NULL;
 
     view->dpy_start = 0;
