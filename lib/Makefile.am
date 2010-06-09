@@ -23,6 +23,7 @@ libmc_la_SOURCES = \
 	fs.h \
 	glibcompat.c glibcompat.h \
 	global.h \
+	lock.c lock.h \
 	timefmt.h
 
 if USE_MAINTAINER_MODE

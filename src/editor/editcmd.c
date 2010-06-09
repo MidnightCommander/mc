@@ -51,6 +51,7 @@
 #include "lib/mcconfig.h"
 #include "lib/skin.h"
 #include "lib/strutil.h"        /* utf string functions */
+#include "lib/lock.h"
 #include "lib/vfs/mc-vfs/vfs.h"
 
 #include "src/history.h"
@@ -66,7 +67,6 @@
 #include "src/clipboard.h"      /* copy_file_to_ext_clip, paste_to_file_from_ext_clip */
 
 #include "src/editor/edit-impl.h"
-#include "src/editor/editlock.h"
 #include "src/editor/edit-widget.h"
 #include "src/editor/editcmd_dialogs.h"
 #include "src/editor/etags.h"
@@ -623,13 +623,13 @@ edit_save_as_cmd (WEdit * edit)
                 {
                     edit->stat1.st_mode |= S_IWUSR;
                 }
-                save_lock = edit_lock_file (exp);
+                save_lock = lock_file (exp);
             }
             else
             {
                 /* filenames equal, check if already locked */
                 if (!edit->locked && !edit->delete_file)
-                    save_lock = edit_lock_file (exp);
+                    save_lock = lock_file (exp);
             }
 
             if (different_filename)
@@ -649,14 +649,14 @@ edit_save_as_cmd (WEdit * edit)
                 if (different_filename)
                 {
                     if (save_lock)
-                        edit_unlock_file (exp);
+                        unlock_file (exp);
                     if (edit->locked)
-                        edit->locked = edit_unlock_file (edit->filename);
+                        edit->locked = unlock_file (edit->filename);
                 }
                 else
                 {
                     if (edit->locked || save_lock)
-                        edit->locked = edit_unlock_file (edit->filename);
+                        edit->locked = unlock_file (edit->filename);
                 }
 
                 edit_set_filename (edit, exp);
@@ -675,7 +675,7 @@ edit_save_as_cmd (WEdit * edit)
             case -1:
                 /* Failed, so maintain modify (not save) lock */
                 if (save_lock)
-                    edit_unlock_file (exp);
+                    unlock_file (exp);
                 g_free (exp);
                 edit->force |= REDRAW_COMPLETELY;
                 return 0;
@@ -932,12 +932,12 @@ edit_save_cmd (WEdit * edit)
     int res, save_lock = 0;
 
     if (!edit->locked && !edit->delete_file)
-        save_lock = edit_lock_file (edit->filename);
+        save_lock = lock_file (edit->filename);
     res = edit_save_file (edit, edit->filename);
 
     /* Maintain modify (not save) lock on failure */
     if ((res > 0 && edit->locked) || save_lock)
-        edit->locked = edit_unlock_file (edit->filename);
+        edit->locked = unlock_file (edit->filename);
 
     /* On failure try 'save as', it does locking on its own */
     if (!res)
@@ -988,7 +988,7 @@ edit_load_file_from_filename (WEdit * edit, char *exp)
     }
 
     if (prev_locked)
-        edit_unlock_file (prev_filename);
+        unlock_file (prev_filename);
     g_free (prev_filename);
     return 0;
 }

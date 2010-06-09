@@ -47,6 +47,7 @@
 #include "lib/skin.h"           /* EDITOR_NORMAL_COLOR */
 #include "lib/vfs/mc-vfs/vfs.h"
 #include "lib/strutil.h"        /* utf string functions */
+#include "lib/lock.h"
 
 #include "src/widget.h"
 #include "src/cmd.h"            /* view_other_cmd() */
@@ -61,7 +62,6 @@
 #include "src/keybind.h"
 
 #include "edit-impl.h"
-#include "editlock.h"
 #include "edit-widget.h"
 
 int option_word_wrap_line_length = DEFAULT_WRAP_LINE_LENGTH;
@@ -952,7 +952,7 @@ edit_clean (WEdit * edit)
 
     /* a stale lock, remove it */
     if (edit->locked)
-        edit->locked = edit_unlock_file (edit->filename);
+        edit->locked = unlock_file (edit->filename);
 
     /* save cursor position */
     if (option_save_position)
@@ -1273,7 +1273,7 @@ edit_modification (WEdit * edit)
 
     /* raise lock when file modified */
     if (!edit->modified && !edit->delete_file)
-        edit->locked = edit_lock_file (edit->filename);
+        edit->locked = lock_file (edit->filename);
     edit->modified = 1;
 }
 
