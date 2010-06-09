@@ -204,7 +204,7 @@ expand_format (struct WEdit *edit_widget, char c, gboolean do_quote)
 	fname = panel->dir.list[panel->selected].fname;
     }
 #ifdef USE_INTERNAL_EDIT
-    else
+    else if (mc_run_mode == MC_RUN_EDITOR)
 	fname = str_unconst (edit_get_file_name (edit_widget));
 #endif
 
