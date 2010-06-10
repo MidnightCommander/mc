@@ -193,7 +193,7 @@ expand_format (struct WEdit *edit_widget, char c, gboolean do_quote)
     if (c == '%')
 	return g_strdup ("%");
 
-    if (edit_one_file == NULL) {
+    if ((edit_one_file == NULL) && (view_one_file == NULL)) {
 	if (g_ascii_islower ((gchar) c))
 	    panel = current_panel;
 	else {
@@ -204,7 +204,7 @@ expand_format (struct WEdit *edit_widget, char c, gboolean do_quote)
 	fname = panel->dir.list[panel->selected].fname;
     }
 #ifdef USE_INTERNAL_EDIT
-    else
+    else if (edit_one_file != NULL)
 	fname = str_unconst (edit_get_file_name (edit_widget));
 #endif
 
