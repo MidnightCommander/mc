@@ -91,7 +91,7 @@ left\-top corner
 right\-top corner
 .TP
 .B centertop
-center-top cross
+center\-top cross
 .TP
 .B centerbottom
 center\-bottom cross
@@ -2920,7 +2920,7 @@ indent and ispell.
 Sections:
 .IP
 .\"LINK2"
-Options of editor in ini-file
+Options of editor in ini\-file
 .\"Internal File Editor / options"
 .PP
 The editor is very easy to use and requires no tutoring. To see what
@@ -2981,9 +2981,10 @@ binary files, you should set
 to 7 bits in the options menu to keep the spacing clean.
 
 .\"NODE "Internal File Editor / options"
-.SH "Options of editor in ini-file"
-In this section described some options in ini-file.
-Options placed in '[Midnight Commander]' section
+.SH "Options of editor in ini\-file"
+
+Some editor options of ini\-file are described in this section.
+Options are placed in '[Midnight Commander]' section
 .TP
 .I editor_wordcompletion_collect_entire_file
 Search autocomplete candidates in entire of file or just from
@@ -3636,7 +3637,7 @@ Color of hotkeys in focused element
 Section
 .B [menu]
 describes the elements that are placed in menu. This section describes
-system menu (called by F9) and user-defined menus (called by F2 in panels
+system menu (called by F9) and user\-defined menus (called by F2 in panels
 and by F11 in editor).
 .TP
 .I _default_
@@ -3760,10 +3761,10 @@ Descriptions of parameters
 .BR [Lines] :
 .TP
 .I lefttop
-left-top line fragment.
+left\-top line fragment.
 .TP
 .I righttop
-right-top line fragment.
+right\-top line fragment.
 .TP
 .I centertop
 down branch of horizontal line
@@ -3772,10 +3773,10 @@ down branch of horizontal line
 up branch of horizontal line
 .TP
 .I leftbottom
-left-bottom line fragment
+left\-bottom line fragment
 .TP
 .I rightbottom
-right-bottom line fragment
+right\-bottom line fragment
 .TP
 .I leftmiddle
 right branch of vertical line
@@ -4026,8 +4027,8 @@ Also now you can use
 For example:
 
 .nf
-    ctrl-alt-right=\\e[[1;6C
-    ctrl-alt-left=\\e[[1;6D
+    ctrl\-alt\-right=\\e[[1;6C
+    ctrl\-alt\-left=\\e[[1;6D
 .fi
 
 .PP
