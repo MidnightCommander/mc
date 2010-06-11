@@ -444,7 +444,7 @@ http://gcc.gnu.org/
 AIX
 ---
 Currently you can not use gcc 4.2.4 (and probably other versions) on
-AIX to compiler the S-Lang version. Please use IBM XL C or IBM XL C/C++
+AIX to compile the S-Lang version. Please use IBM XL C or IBM XL C/C++
 instead.
 
 If you compile a ncurses version you need to set TERM=dtterm to get
