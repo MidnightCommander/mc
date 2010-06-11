@@ -797,3 +797,4 @@ regex_command (const char *filename, const char *action, int *move_dir)
         return -1;
     return ret;
 }
+

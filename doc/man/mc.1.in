@@ -1,5 +1,5 @@
 .\"TOPICS "Topics:"
-.TH MC 1 "August 2009" "MC Version 4.7.0\-pre1" "GNU Midnight Commander"
+.TH MC 1 "June 2010" "MC Version 4.7.3" "GNU Midnight Commander"
 .\"SKIP_SECTION"
 .SH "NAME"
 mc \- Visual shell for Unix\-like systems.
@@ -3969,6 +3969,22 @@ contents of the selected directory.
 .I fish_directory_timeout
 This variable holds the lifetime of a directory cache entry in seconds. The
 default value is 900 seconds.
+.TP
+.I clipbord_store
+This variable contains path (with options) to the external clipboard
+utility like 'xclip' to read text into X selection from file.
+For example:
+.PP
+.nf
+clipbord_store=xclip \-i
+.TP
+.I clipbord_paste
+This variable contains path (with options) to the external clipboard
+utility like 'xclip' to print the selection to standard out.
+For example:
+.PP
+.nf
+clipbord_store=xclip \-o
 .TP
 .I autodetect_codeset
 This option allows use the `enca' command to autodetect codeset of text files

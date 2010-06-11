@@ -69,6 +69,9 @@ extern int eight_bit_clean;
 extern int full_eight_bits;
 #endif /* !HAVE_CHARSET */
 
+extern char* clipbord_store_path;
+extern char* clipbord_paste_path;
+
 extern int utf8_display;
 
 extern int fast_refresh;

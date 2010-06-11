@@ -61,6 +61,7 @@
 #include "panel.h"              /* current_panel */
 #include "main.h"               /* confirm_history_cleanup */
 #include "setup.h"              /* num_history_items_recorded */
+#include "clipboard.h"          /* copy_file_to_ext_clip, paste_to_file_from_ext_clip */
 
 static void
 widget_selectcolor (Widget * w, gboolean focused, gboolean hotkey)
@@ -1824,6 +1825,8 @@ copy_region (WInput * in, int x_first, int x_last)
     {
         /* Copy selected files to clipboard */
         panel_save_curent_file_to_clip_file ();
+        /* try use external clipboard utility */
+        copy_file_to_ext_clip ();
         return;
     }
 
@@ -1833,7 +1836,10 @@ copy_region (WInput * in, int x_first, int x_last)
     last = str_offset_to_pos (in->buffer, last);
 
     kill_buffer = g_strndup (in->buffer + first, last - first);
+
     save_text_to_clip_file (kill_buffer);
+    /* try use external clipboard utility */
+    copy_file_to_ext_clip ();
 }
 
 static void
@@ -1921,6 +1927,9 @@ static void
 ins_from_clip (WInput * in)
 {
     char *p = NULL;
+
+    /* try use external clipboard utility */
+    paste_to_file_from_ext_clip ();
 
     if (load_text_from_clip_file (&p))
     {
