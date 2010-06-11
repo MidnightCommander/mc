@@ -41,9 +41,9 @@ Version 4.6.2
 	- Switched from o3totxt to odf2txt as o3totxt is outdated (Closes: #218)
 
 - Locale
-	- Updated german translation (Closes: #167)
+	- Updated German translation (Closes: #167)
 	- New Belarussian translation (Closes: #170)
-	- Updated russian translation (Closes: #159)
+	- Updated Russian translation (Closes: #159)
 
 Version 4.6.2-pre1.
 
@@ -174,7 +174,7 @@ Version 4.6.1-pre3.
 	- Improve support for tcsh.
 
 - Translations.
-	- Updated translations: Spain.
+	- Updated translations: Spanish.
 
 
 Version 4.6.1-pre2.
