@@ -319,7 +319,7 @@ the input lines in the query dialogs.
 
 .\"NODE "  Keys_redefine"
 .SH "  Redefine hotkey bindings"
-Hotkey bindings may be readed from external file (keymap\-file).
+Hotkey bindings may be read from external file (keymap\-file).
 A keymap\-file is searched on the following algorithm (to the first one found):
 .IP
 .br
@@ -2001,7 +2001,7 @@ in a temporary location and then access the uncompressed file as a
 regular tar file.
 .PP
 Now, since we all love to browse files and tar files all over the disk,
-it's common that you will leave a tar file and the re\-enter it later.
+it's common that you will leave a tar file and then re\-enter it later.
 Since decompression is slow, the Midnight Commander will cache the
 information in memory for a limited time.  When the timeout expires, all
 the resources associated with the file system are released.  The default
