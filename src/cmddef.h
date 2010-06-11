@@ -72,6 +72,8 @@
 #define CK_Replace_Again	304
 #define CK_Complete_Word	305
 
+#define CK_Load_Viewer		311
+
 #if 0
 /* debugger commands */
 #define CK_Debug_Start		350

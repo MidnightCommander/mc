@@ -231,6 +231,8 @@ static name_keymap_t command_names[] = {
     { "EditChooseSyntax",                  CK_Choose_Syntax },
     { "EditAbout",                         CK_About },
 
+    { "EditLoadViewer",                    CK_Load_Viewer },
+
 #if 0
     { "EditFocusNext",                   CK_Focus_Next },
     { "EditFocusPrev",                   CK_Focus_Prev },

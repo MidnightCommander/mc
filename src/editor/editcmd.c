@@ -3152,3 +3152,11 @@ edit_move_block_to_left (WEdit * edit)
     while (cur_bol >= start_bol);
     edit->force |= REDRAW_PAGE;
 }
+
+void
+edit_open_viewer (WEdit * edit)
+{
+    char *filename = vfs_canon (edit->filename);
+
+    view_file_at_line (filename, 1, 1, edit->curs_line + 1);
+}

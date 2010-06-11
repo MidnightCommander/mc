@@ -3481,6 +3481,10 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         edit->force |= REDRAW_PAGE;
         break;
 
+    case CK_Load_Viewer:
+        edit_open_viewer (edit);
+        dlg_stop (edit->widget.parent);
+        break;
     case CK_Find:
         edit_search_cmd (edit, 0);
         break;

@@ -291,6 +291,7 @@ void format_paragraph (WEdit * edit, int force);
 
 /* either command or char_for_insertion must be passed as -1 */
 void edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion);
+void edit_open_viewer (WEdit * edit);
 
 #define get_sys_error(s) (s)
 
