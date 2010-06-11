@@ -343,6 +343,7 @@ mcview_execute_cmd (mcview_t * view, unsigned long command)
         break;
     case CK_ViewRunEditor:
         /* Open current file in editor */
+        view->want_to_quit = TRUE;
         mcview_edit (view);
         break;
     case CK_ViewGoto:

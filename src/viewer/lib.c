@@ -48,6 +48,7 @@
 #include "src/main.h"
 #include "src/charsets.h"
 #include "src/selcodepage.h"
+#include "src/cmd.h"
 
 #include "internal.h"
 #include "mcviewer.h"
@@ -268,7 +269,7 @@ mcview_edit (mcview_t * view)
     off_t new_offset;
 
     mcview_offset_to_coord (view, &line, &column, view->dpy_start);
-    do_edit_at_line (view->filename, line + 1);
+    do_edit_at_line (view->filename, (int) line + 1);
     canon_fname = vfs_canon (view->filename);
     load_file_position (canon_fname, &line, &column, &new_offset);
     new_offset = min (new_offset, mcview_get_filesize (view));
