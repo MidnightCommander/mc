@@ -37,7 +37,7 @@
 #include "edit-impl.h"
 #include "src/dialog.h"	/* B_CANCEL */
 #include "src/wtools.h"	/* QuickDialog */
-#include "src/main.h"	/* option_tab_spacing */
+#include "src/setup.h"	/* option_tab_spacing */
 
 #define OPT_DLG_H 16
 #define OPT_DLG_W 74

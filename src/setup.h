@@ -25,6 +25,10 @@ extern int setup_copymove_persistent_attr;
 extern int num_history_items_recorded;
 extern int classic_progressbar;
 
+/* TAB length for editor and viewer */
+#define DEFAULT_TAB_SPACING 8
+extern int option_tab_spacing;
+
 char *setup_init (void);
 void load_setup (void);
 gboolean save_setup (void);

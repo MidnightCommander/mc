@@ -55,6 +55,7 @@
 #include "lib/timefmt.h"        /* time formatting */
 #include "src/charsets.h"       /* get_codepage_id */
 #include "src/main.h"           /* source_codepage */
+#include "src/setup.h"          /* option_tab_spacing */
 #include "src/learn.h"          /* learn_keys */
 #include "src/cmddef.h"
 #include "src/keybind.h"

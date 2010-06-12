@@ -56,10 +56,6 @@ extern int use_internal_view;
 extern int use_internal_edit;
 extern int clear_before_exec;
 
-/* TAB length for editor and viewer */
-#define DEFAULT_TAB_SPACING 8
-extern int option_tab_spacing;
-
 #ifdef HAVE_CHARSET
 extern int source_codepage;
 extern int default_source_codepage;

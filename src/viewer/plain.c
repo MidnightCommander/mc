@@ -38,16 +38,16 @@
 
 #include <config.h>
 
+#include "lib/global.h"
 #include "lib/tty/tty.h"
-
 #include "lib/skin.h"
 
-#include "lib/global.h"
-#include "src/main.h"
+#include "src/main.h"           /* utf8_display */
+#include "src/setup.h"          /* option_tab_spacing */
 #include "src/charsets.h"
-#include "mcviewer.h"           /* mcview_show_eof */
 
 #include "internal.h"
+#include "mcviewer.h"           /* mcview_show_eof */
 
 /*** global variables ****************************************************************************/
 

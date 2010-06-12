@@ -57,6 +57,7 @@
 #include "src/widget.h"         /* listbox_new() */
 #include "src/layout.h"         /* clr_scr() */
 #include "src/main.h"           /* mc_home */
+#include "src/setup.h"          /* option_tab_spacing */
 #include "src/help.h"           /* interactive_display() */
 #include "src/wtools.h"         /* message() */
 #include "src/charsets.h"
