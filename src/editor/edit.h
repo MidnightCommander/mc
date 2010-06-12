@@ -39,6 +39,8 @@
 struct WEdit;
 typedef struct WEdit WEdit;
 
+#define DEFAULT_WRAP_LINE_LENGTH 72
+
 extern int option_word_wrap_line_length;
 extern int option_typewriter_wrap;
 extern int option_auto_para_formatting;
