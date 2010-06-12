@@ -141,14 +141,17 @@ edit_options_dialog (WEdit *edit)
     if (!option_cursor_beyond_eol)
         edit->over_col = 0;
 
-    if (p) {
+    if (p != NULL) {
 	option_word_wrap_line_length = atoi (p);
+	if (option_word_wrap_line_length <= 0)
+	    option_word_wrap_line_length = DEFAULT_WRAP_LINE_LENGTH;
 	g_free (p);
     }
-    if (q) {
+
+    if (q != NULL) {
 	option_tab_spacing = atoi (q);
 	if (option_tab_spacing <= 0)
-	    option_tab_spacing = 8;
+	    option_tab_spacing = DEFAULT_TAB_SPACING;
 	g_free (q);
     }
 

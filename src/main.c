@@ -244,9 +244,6 @@ int update_prompt = 0;
 /* The home directory */
 const char *home_dir = NULL;
 
-/* Tab size */
-int option_tab_spacing = 8;
-
 /* Only used at program boot */
 int boot_current_is_left = 1;
 
