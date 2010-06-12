@@ -42,10 +42,6 @@ extern int clear_before_exec;
 extern char *other_dir;
 extern int mouse_move_pages;
 
-/* TAB length for editor and viewer */
-#define DEFAULT_TAB_SPACING 8
-extern int option_tab_spacing;
-
 #ifdef HAVE_CHARSET
 extern int source_codepage;
 extern int display_codepage;

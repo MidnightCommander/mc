@@ -39,9 +39,10 @@
 
 #include "lib/global.h"
 
+#include "src/setup.h"	/* option_tab_spacing */
+
 #include "edit-impl.h"
 #include "edit-widget.h"
-#include "src/main.h"	/* option_tab_spacing */
 
 #define tab_width option_tab_spacing
 

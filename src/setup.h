@@ -8,6 +8,10 @@
 
 #include "panel.h"
 
+/* TAB length for editor and viewer */
+#define DEFAULT_TAB_SPACING 8
+extern int option_tab_spacing;
+
 char *setup_init (void);
 void save_layout (void);
 void save_configure (void);
