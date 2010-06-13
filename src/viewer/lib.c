@@ -265,13 +265,16 @@ void
 mcview_edit (mcview_t * view)
 {
     off_t line, column;
+    long editline, editcol;
     char *canon_fname;
     off_t new_offset;
 
     mcview_offset_to_coord (view, &line, &column, view->dpy_start);
     do_edit_at_line (view->filename, (int) line + 1);
     canon_fname = vfs_canon (view->filename);
-    load_file_position (canon_fname, &line, &column, &new_offset);
+    editline = (long) line;
+    editcol = (long) column;
+    load_file_position (canon_fname, &editline, &editcol, &new_offset);
     new_offset = min (new_offset, mcview_get_filesize (view));
     view->dpy_start = mcview_bol (view, new_offset);
     g_free (canon_fname);

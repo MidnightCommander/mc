@@ -63,6 +63,7 @@
 #include "src/selcodepage.h"
 #include "src/cmddef.h"
 #include "src/clipboard.h"      /* copy_file_to_ext_clip, paste_to_file_from_ext_clip */
+#include "src/cmd.h"            /* view_file_at_line ()*/
 
 #include "src/editor/edit-impl.h"
 #include "src/editor/editlock.h"
