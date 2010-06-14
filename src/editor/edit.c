@@ -55,6 +55,7 @@
 #include "lib/timefmt.h"        /* time formatting */
 #include "src/charsets.h"       /* get_codepage_id */
 #include "src/main.h"           /* source_codepage */
+#include "src/setup.h"          /* option_tab_spacing */
 #include "src/learn.h"          /* learn_keys */
 #include "src/cmddef.h"
 #include "src/keybind.h"
@@ -63,8 +64,7 @@
 #include "editlock.h"
 #include "edit-widget.h"
 
-
-int option_word_wrap_line_length = 72;
+int option_word_wrap_line_length = DEFAULT_WRAP_LINE_LENGTH;
 int option_typewriter_wrap = 0;
 int option_auto_para_formatting = 0;
 int option_fill_tabs_with_spaces = 0;

@@ -87,6 +87,9 @@ panel_view_mode_t startup_right_mode;
 
 int setup_copymove_persistent_attr = 1;
 
+/* Tab size */
+int option_tab_spacing = DEFAULT_TAB_SPACING;
+
 /* Ugly hack to allow panel_save_setup to work as a place holder for */
 /* default panel values */
 int saving_setup;
@@ -225,9 +228,10 @@ static const struct
     { "fish_directory_timeout", &fish_directory_timeout },
 #endif /* USE_NETCODE */
 #endif /* ENABLE_VFS */
+    /* option_tab_spacing is used in internal viewer */
+    { "editor_tab_spacing", &option_tab_spacing },
 #ifdef USE_INTERNAL_EDIT
     { "editor_word_wrap_line_length", &option_word_wrap_line_length },
-    { "editor_tab_spacing", &option_tab_spacing },
     { "editor_fill_tabs_with_spaces", &option_fill_tabs_with_spaces },
     { "editor_return_does_auto_indent", &option_return_does_auto_indent },
     { "editor_backspace_through_tabs", &option_backspace_through_tabs },
@@ -743,6 +747,14 @@ load_setup (void)
         *int_options[i].opt_addr =
             mc_config_get_int (mc_main_config, CONFIG_APP_SECTION, int_options[i].opt_name,
                                *int_options[i].opt_addr);
+
+    if (option_tab_spacing <= 0)
+        option_tab_spacing = DEFAULT_TAB_SPACING;
+
+#ifdef USE_INTERNAL_EDIT
+    if (option_word_wrap_line_length <= 0)
+        option_word_wrap_line_length = DEFAULT_WRAP_LINE_LENGTH;
+#endif /* USE_INTERNAL_EDIT */
 
     /* overwrite old_esc_mode_timeout */
     kt = getenv ("KEYBOARD_KEY_TIMEOUT_US");

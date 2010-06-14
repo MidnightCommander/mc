@@ -56,21 +56,19 @@ extern int use_internal_view;
 extern int use_internal_edit;
 extern int clear_before_exec;
 
-extern int option_tab_spacing;
-
 #ifdef HAVE_CHARSET
 extern int source_codepage;
 extern int default_source_codepage;
 extern int display_codepage;
-extern char* autodetect_codeset;
+extern char *autodetect_codeset;
 extern gboolean is_autodetect_codeset_enabled;
 #else
 extern int eight_bit_clean;
 extern int full_eight_bits;
 #endif /* !HAVE_CHARSET */
 
-extern char* clipbord_store_path;
-extern char* clipbord_paste_path;
+extern char *clipbord_store_path;
+extern char *clipbord_paste_path;
 
 extern int utf8_display;
 
@@ -78,7 +76,7 @@ extern int fast_refresh;
 extern int drop_menus;
 extern int cd_symlinks;
 extern int show_all_if_ambiguous;
-extern int update_prompt;	/* To comunicate with subshell */
+extern int update_prompt;       /* To comunicate with subshell */
 extern int safe_delete;
 extern int confirm_delete;
 extern int confirm_directory_hotlist_delete;
@@ -96,7 +94,7 @@ extern int midnight_shutdown;
 extern char *shell;
 extern int auto_fill_mkdir_name;
 /* Ugly hack in order to distinguish between left and right panel in menubar */
-extern int is_right;		/* If the selected menu was the right */
+extern int is_right;            /* If the selected menu was the right */
 #define MENU_PANEL (is_right ? right_panel : left_panel)
 #define MENU_PANEL_IDX  (is_right ? 1 : 0)
 #define SELECTED_IS_PANEL (get_display_type (is_right ? 1 : 0) == view_listing)
@@ -106,23 +104,23 @@ void do_update_prompt (void);
 int load_prompt (int fd, void *unused);
 #endif
 
-enum cd_enum {
+enum cd_enum
+{
     cd_parse_command,
     cd_exact
 };
 
-int do_cd           (const char *new_dir, enum cd_enum cd_type); /* For find.c */
+int do_cd (const char *new_dir, enum cd_enum cd_type);  /* For find.c */
 void sort_cmd (void);
-void change_panel   (void);
+void change_panel (void);
 void save_cwds_stat (void);
-void quiet_quit_cmd (void);	/* For cmd.c and command.c */
+void quiet_quit_cmd (void);     /* For cmd.c and command.c */
 
-void touch_bar      (void);
+void touch_bar (void);
 void update_xterm_title_path (void);
-void load_hint      (int force);
+void load_hint (int force);
 
-void print_vfs_message(const char *msg, ...)
-    __attribute__ ((format (__printf__, 1, 2)));
+void print_vfs_message (const char *msg, ...) __attribute__ ((format (__printf__, 1, 2)));
 
 extern const char *mc_prompt;
 extern char *mc_home;
@@ -143,4 +141,4 @@ struct WPanel;
 void directory_history_add (struct WPanel *panel, const char *dir);
 int do_panel_cd (struct WPanel *panel, const char *new_dir, enum cd_enum cd_type);
 
-#endif					/* MC_MAIN_H */
+#endif /* MC_MAIN_H */
