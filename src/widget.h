@@ -165,11 +165,11 @@ struct WListbox {
 typedef struct WButtonBar {
     Widget widget;
     gboolean visible;		/* Is it visible? */
-    int btn_width;		/* width of one button */
     struct {
 	char *text;
 	unsigned long command;
 	Widget *receiver;
+	int end_coord;		/* cumulative width of buttons so far */
     } labels [BUTTONBAR_LABELS_NUM];
 } WButtonBar;
 
