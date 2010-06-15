@@ -1213,16 +1213,16 @@ command shows a tree figure of the directories.
 .PP
 The
 .\"LINK2"
-Find file
+"Find file"
 .\"Find File"
 command allows you to search for a specific file.
 .PP
 The "Swap panels" command swaps the contents of the two directory panels.
 .PP
-The "Panels on/off" command shows the output of the last shell command.
+The "Switch panels on/off" command shows the output of the last shell command.
 This works only on xterm and on Linux and FreeBSD console.
 .PP
-The Compare directories (C\-x d) command compares the directory
+The "Compare directories" command compares the directory
 panels with each other. You can then use the Copy (F5) command to make
 the panels identical. There are three compare methods. The quick method
 compares only file size and file date. The thorough method makes a
@@ -1231,32 +1231,42 @@ machine does not support the mmap(2) system call.  The size\-only
 compare method just compares the file sizes and does not check the
 contents or the date times, it just checks the file size.
 .PP
-The Command history command shows a list of typed commands. The
+The
+.\"LINK2"
+"External panelize"
+.\"External panelize"
+allows you to execute an external program, and make the output of that
+program the contents of the current panel.
+.PP
+The "Command history" command shows a list of typed commands. The
 selected command is copied to the command line. The command history
 can also be accessed by typing Alt\-p or Alt\-n.
 .PP
 The
 .\"LINK2"
-Directory hotlist (C\-\\)
+"Directory hotlist"
 .\"Hotlist"
 command makes changing of the current directory to often used directories
 faster.
 .PP
 The
 .\"LINK2"
-External panelize
-.\"External panelize"
-allows you to execute an external program, and make the output of that
-program the contents of the current panel.
+"Screen list"
+.\"Screen selector"
+command shows a dialog window with the list of currently running
+internal editors, viewers and other MC modules that support this mode.
 .PP
+The
 .\"LINK2"
-Extension file edit
+"Edit extension file"
 .\"Extension File Edit"
 command allows you to specify programs to executed when you try to
 execute, view, edit and do a bunch of other thing on files
-with certain extensions (filename endings). The
+with certain extensions (filename endings).
+.PP
+The
 .\"LINK2"
-Menu file edit
+"Edit menu file"
 .\"Menu File Edit"
 command may be used for editing the user menu (which appears by
 pressing F2).
@@ -2909,11 +2919,9 @@ indent and ispell.
 .PP
 Sections:
 .IP
-
 .\"LINK2"
 Options of editor in ini-file
 .\"Internal File Editor / options"
-
 .PP
 The editor is very easy to use and requires no tutoring. To see what
 keys do what, just consult the appropriate pull\-down menu. Other keys
@@ -2949,13 +2957,11 @@ commands go into the file
 .B .mc/cedit/cooledit.macros
 in your home directory. You can delete a macro by deleting the
 appropriate line in this file.
-
 .PP
 To change charset of displayed text may use M\-e (Alt\-e).
 Recoding is made from selected codepage into system codepage. To
 cancel the recoding you may select "<No translation>" in charset
 selection dialog.
-
 .PP
 .B F19
 will format the currently highlighted block (plain text or
@@ -2976,16 +2982,32 @@ to 7 bits in the options menu to keep the spacing clean.
 
 .\"NODE "Internal File Editor / options"
 .SH "Options of editor in ini-file"
-
 In this section described some options in ini-file.
 Options placed in '[Midnight Commander]' section
-
 .TP
 .I editor_wordcompletion_collect_entire_file
 Search autocomplete candidates in entire of file or just from
 begin of file to cursor position (0)
 
-
+.\"NODE "Screen selector"
+.SH "Screen selector"
+Midnight Commander supports running many internal modules (such as
+editor, viewer and diff viewer) simultaneously and switching between
+them without closing open files. Using several file managers at a time,
+however, is not currently supported.
+.PP
+Let's call each of these modules a screen. There are three ways to
+switch between screens, using one of these global shortcuts:
+.TP
+.B Alt\-}
+switch to the next screen;
+.TP
+.B Alt\-{
+switch to the previous screen;
+.TP
+.B Alt\-`
+open a dialog window with the list of currently open screens (or use the
+"Screen list" menu item).
 .\"NODE "Completion"
 .SH "Completion"
 Let the Midnight Commander type for you.
