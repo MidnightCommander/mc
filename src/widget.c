@@ -3017,12 +3017,72 @@ buttonbar_call (WButtonBar * bb, int i)
     return ret;
 }
 
-/* calculate width of one button, width is never lesser than 7 */
-static int
-buttonbat_get_button_width (void)
+/* calculate positions of buttons; width is never less than 7 */
+static void
+buttonbar_init_button_positions (WButtonBar *bb)
 {
-    int result = COLS / BUTTONBAR_LABELS_NUM;
-    return (result >= 7) ? result : 7;
+    int i;
+    int pos = 0;
+
+    if (COLS < BUTTONBAR_LABELS_NUM * 7)
+    {
+        for (i = 0; i < BUTTONBAR_LABELS_NUM; i++)
+        {
+            if (pos + 7 <= COLS)
+                pos += 7;
+
+            bb->labels[i].end_coord = pos;
+        }
+    }
+    else
+    {
+        /* Distribute the extra width in a way that the middle vertical line
+           (between F5 and F6) aligns with the two panels. The extra width
+           is distributed in this order: F10, F5, F9, F4, ..., F6, F1. */
+        int lc_div, mod;
+
+        lc_div = COLS / BUTTONBAR_LABELS_NUM;
+        mod = COLS % BUTTONBAR_LABELS_NUM;
+
+        for (i = 0; i < BUTTONBAR_LABELS_NUM / 2; i++)
+        {
+            pos += lc_div;
+            if (BUTTONBAR_LABELS_NUM / 2 - 1 - i < mod / 2)
+                pos++;
+
+            bb->labels[i].end_coord = pos;
+        }
+
+        for (; i < BUTTONBAR_LABELS_NUM; i++)
+        {
+            pos += lc_div;
+            if (BUTTONBAR_LABELS_NUM - 1 - i < (mod + 1) / 2)
+                pos++;
+
+            bb->labels[i].end_coord = pos;
+        }
+    }
+}
+
+/* return width of one button */
+static int
+buttonbar_get_button_width (const WButtonBar *bb, int i)
+{
+    if (i == 0)
+        return bb->labels[0].end_coord;
+    return bb->labels[i].end_coord - bb->labels[i - 1].end_coord;
+}
+
+static int
+buttonbar_get_button_by_x_coord (const WButtonBar *bb, int x)
+{
+    int i;
+
+    for (i = 0; i < BUTTONBAR_LABELS_NUM; i++)
+        if (bb->labels[i].end_coord > x)
+            return i;
+
+    return (-1);
 }
 
 static cb_ret_t
@@ -3046,29 +3106,25 @@ buttonbar_callback (Widget * w, widget_msg_t msg, int parm)
     case WIDGET_DRAW:
         if (bb->visible)
         {
-            int offset = 0;
-            int count_free_positions;
-
+            buttonbar_init_button_positions (bb);
             widget_move (&bb->widget, 0, 0);
             tty_setcolor (DEFAULT_COLOR);
-            bb->btn_width = buttonbat_get_button_width ();
             tty_printf ("%-*s", bb->widget.cols, "");
-            count_free_positions = COLS - bb->btn_width * BUTTONBAR_LABELS_NUM;
+            widget_move (&bb->widget, 0, 0);
 
-            for (i = 0; i < COLS / bb->btn_width && i < BUTTONBAR_LABELS_NUM; i++)
+            for (i = 0; i < BUTTONBAR_LABELS_NUM; i++)
             {
-                widget_move (&bb->widget, 0, (i * bb->btn_width) + offset);
+                int width;
+
+                width = buttonbar_get_button_width (bb, i);
+                if (width <= 0)
+                    break;
+
                 tty_setcolor (BUTTONBAR_HOTKEY_COLOR);
                 tty_printf ("%2d", i + 1);
                 tty_setcolor (BUTTONBAR_BUTTON_COLOR);
                 text = (bb->labels[i].text != NULL) ? bb->labels[i].text : "";
-                tty_print_string (str_fit_to_term (text,
-                                                   bb->btn_width - 2 + (int) (offset <
-                                                                              count_free_positions),
-                                                   J_LEFT_FIT));
-
-                if (count_free_positions != 0 && offset < count_free_positions)
-                    offset++;
+                tty_print_string (str_fit_to_term (text, width - 2, J_LEFT_FIT));
             }
         }
         return MSG_HANDLED;
@@ -3093,8 +3149,8 @@ buttonbar_event (Gpm_Event * event, void *data)
         return MOU_NORMAL;
     if (event->y == 2)
         return MOU_NORMAL;
-    button = (event->x - 1) * BUTTONBAR_LABELS_NUM / COLS;
-    if (button < BUTTONBAR_LABELS_NUM)
+    button = buttonbar_get_button_by_x_coord (bb, event->x - 1);
+    if (button >= 0)
         buttonbar_call (bb, button);
     return MOU_NORMAL;
 }
@@ -3111,7 +3167,6 @@ buttonbar_new (gboolean visible)
     bb->visible = visible;
     widget_want_hotkey (bb->widget, 1);
     widget_want_cursor (bb->widget, 0);
-    bb->btn_width = buttonbat_get_button_width ();
 
     return bb;
 }
