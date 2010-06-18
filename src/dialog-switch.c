@@ -129,6 +129,12 @@ dialog_switch_remove (Dlg_head *h)
     }
 }
 
+size_t
+dialog_switch_num (void)
+{
+    return g_list_length (mc_dialogs);
+}
+
 void
 dialog_switch_next (void)
 {

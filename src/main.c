@@ -335,20 +335,29 @@ static int
 quit_cmd_internal (int quiet)
 {
     int q = quit;
+    size_t n = dialog_switch_num () - 1;
 
-    if (quiet || !confirm_exit)
+    if (n != 0)
     {
-        q = 1;
-    }
-    else
-    {
-        if (query_dialog
-            (_("The Midnight Commander"),
-             _("Do you really want to quit the Midnight Commander?"), D_NORMAL,
-             2, _("&Yes"), _("&No")) == 0)
+        char msg[BUF_MEDIUM];
+
+        g_snprintf (msg, sizeof (msg),
+                    ngettext ("You have %zd opened screen. Quit anyway?",
+                              "You have %zd opened screens. Quit anyway?", n),
+                    n);
+
+        if (query_dialog (_("The Midnight Commander"), msg,
+                         D_NORMAL, 2, _("&Yes"), _("&No")) == 0)
             q = 1;
-    }
-    if (q)
+
+    } else if (quiet || !confirm_exit)
+        q = 1;
+    else if (query_dialog (_("The Midnight Commander"),
+                           _("Do you really want to quit the Midnight Commander?"),
+                           D_NORMAL, 2, _("&Yes"), _("&No")) == 0)
+        q = 1;
+
+    if (q != 0)
     {
 #ifdef HAVE_SUBSHELL_SUPPORT
         if (!use_subshell)
@@ -357,7 +366,8 @@ quit_cmd_internal (int quiet)
 #endif
             stop_dialogs ();
     }
-    if (q)
+
+    if (q != 0)
         quit |= 1;
     return quit;
 }
